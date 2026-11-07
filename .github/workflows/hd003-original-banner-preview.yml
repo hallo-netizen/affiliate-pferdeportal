@@ -39,12 +39,18 @@ jobs:
           thumb=dest.with_name('HD003_APPROVED_BANNER_PREVIEW_1200.jpg')
           image.convert('RGB').save(thumb,format='JPEG',quality=83,optimize=True)
           print(f'Preview: {thumb}, {thumb.stat().st_size} bytes')
+          with zipfile.ZipFile(z) as f:
+              candidates=[(x.filename,x.file_size) for x in f.infolist() if any(k in x.filename.lower() for k in ['eigenwerbung','werbebanner','quadratbanner','square-banner','hobby-logo'])]
+          report=dest.with_name('HD003_BANNER_ASSET_INVENTAR.txt')
+          report.write_text('\n'.join(f'{p}\t{size} bytes' for p,size in candidates),encoding='utf8')
+          print('Asset inventory:',*candidates,sep='\n')
+
           PY
       - name: Save actual original asset to preview branch
         run: |
           git config user.name "hobby-asset-readback"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/ASSETS/HD003_ORIGINAL_BANNER_2170x725.png protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/ASSETS/HD003_APPROVED_BANNER_PREVIEW_1200.jpg
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/ASSETS/HD003_ORIGINAL_BANNER_2170x725.png protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/ASSETS/HD003_APPROVED_BANNER_PREVIEW_1200.jpg protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/ASSETS/HD003_BANNER_ASSET_INVENTAR.txt
           if ! git diff --cached --quiet; then
             git commit -m "HD003 approved banner: exact SHA-verified original image for review"
             git push
