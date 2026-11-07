@@ -1,0 +1,27 @@
+name: HD009 next exact source inspection
+on:
+  push:
+    branches: ['hobbyroom/hd009-coverage-variant-20261107']
+    paths: ['.github/workflows/hd009-context-inspect.yml']
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect context routing and existing HD003 slot mounts
+        run: |
+          python3 - <<'PY'
+          import zipfile,pathlib,re
+          base=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          with zipfile.ZipFile(base/'HD-009-AFFILIATE-ZENTRALE'/'CURRENT.zip') as z:
+            s=z.read('affiliate-portal-router/hobby-depot-affiliate-router.php').decode()
+            for k,chars in [('get_content_context',9500),('get_category_archive_context',4500),('render_affiliate_slot',1800),('inject_overview_banner_footer',6500),('auto_inject_category_archive_slots',4500),('provide_hub_grid_affiliate_data',7200),('get_auto_slots',2000),('article_hybrid_enabled',1200),('filter_the_content',850)]:
+              m=re.search(r'(?:public |private |protected )?function '+k+r'\s*\(',s)
+              if m:print('METHOD',k,'\n',s[m.start():m.start()+chars],'\nEND_METHOD')
+          with zipfile.ZipFile(base/'HD-003-DESIGN-TEMPLATE-KIT'/'CURRENT.zip') as z:
+            s=z.read('affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php').decode()
+            for k,chars in [('integrated_affiliate_components',7500),('render_leaf_category_products_v150750',6200),('affiliate_slot',2500),('render_leaf_category',4500),('shortcode_start',3800),('render_hub',4200)]:
+              m=re.search(r'(?:public |private |protected )?static function '+k+r'\s*\(',s)
+              if m:print('HD003_METHOD',k,'\n',s[m.start():m.start()+chars],'\nEND_METHOD')
+          PY
