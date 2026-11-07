@@ -24,6 +24,27 @@ jobs:
           php "$D/test_complete_parkhaus.php" "$I/class-pste-mini-workflow.php"
           php "$D/test_pste_kisten_transfer_v1.php"
           php "$D/test_100_keyword_end_to_end_simulation.php" "$I/class-pste-mini-workflow.php" "$I/class-pste-planning-readiness-gate.php" "$D/MINI_100_ORIGINAL_EXTERNAL_TITLES_20261106.json"
+          for mode in good stale onebad; do
+            php "$D/test_existing_forward_full_chain.php" "$I/class-pste-mini-workflow.php" "$mode" > "/tmp/forward-$mode.txt"
+          done
+          python3 - <<'PY'
+          import json
+          def read(m):
+            line=open('/tmp/forward-'+m+'.txt').read()
+            a=line.find('FORWARD_QA_RESULT ')
+            assert a>=0, line
+            return json.loads(line[a+18:].splitlines()[0])
+          g=read('good');s=read('stale');b=read('onebad')
+          print('FORWARD_GOOD',g)
+          print('FORWARD_STALE',s)
+          print('FORWARD_ONEBAD',b)
+          assert g['forwarded']==1 and g['scheduled']==1 and g['save_keys']==['topic-good']
+          assert 'topic-belegt' not in g['save_keys'] and 'topic-klaerung' not in g['save_keys']
+          assert s['forwarded']==0 and s['scheduled']==0 and s['save_keys']==[]
+          assert b['forwarded']==1 and b['scheduled']==1 and b['save_keys']==['topic-good']
+          assert 'topic-bad' in b['clarification']
+          print('PASS existing complete real forwardToPlan mocked GOOD/STALE/ONE-BAD routes')
+          PY
           find "/tmp/whole/Portal SEO Topic Engine" -name '*.php' -print0 | xargs -0 -n1 php -l >/tmp/lints
           echo "PHP_CHECKED=$(wc -l </tmp/lints)"
           echo "QA_ONLY_100_REAL_QUERIES_NO_LIVE_WP_NO_K0_WRITE"
