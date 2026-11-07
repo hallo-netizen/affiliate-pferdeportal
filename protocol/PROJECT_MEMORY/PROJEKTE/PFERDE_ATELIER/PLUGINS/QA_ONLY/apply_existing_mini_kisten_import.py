@@ -215,8 +215,9 @@ a="""            $state=self::loadState();
 b="""            $state=self::loadState();
             if(($doc['contract']??'')==='PSTE_MINI_SEO_DECISIONS_V1'){
                 $snapshot=self::readParkhausForMini(); // one technical freshness check per entire batch
+                $before=$state;
                 $state=self::acceptSingleOwnerSeoDecisions($state,$doc,$snapshot);
-                self::storeState($state);
+                self::storeSeoDecisionsIfUnchanged($before,$state); // one original WP option, atomic
                 wp_safe_redirect(admin_url('admin.php?page=portal-seo-topic-engine-review&pste_mini_seo_imported=1'));exit;
             }
             $result=self::validateTitleCorrections($state['completed'],$doc);"""
