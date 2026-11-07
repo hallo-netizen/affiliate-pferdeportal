@@ -1,0 +1,100 @@
+name: HD009 and HD007 responsive design and mobile hero tests
+on:
+  push:
+    branches: ['hobbyroom/hd009-021-banner-hd007-hero-stage-20261107']
+    paths:
+      - 'ops/hobby021/build.py'
+      - '.github/workflows/hd021-build.yml'
+permissions:
+  contents: write
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build exact full ZIPs with PHP/CRC/hash guards
+        run: python3 ops/hobby021/build.py
+      - name: Install Chromium
+        run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - name: Browser-check real pages with candidate CSS, without changing live site
+        run: |
+          python3 - <<'PY'
+          from playwright.sync_api import sync_playwright
+          import importlib.util,math,json
+          spec=importlib.util.spec_from_file_location('build','ops/hobby021/build.py')
+          m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+          sites=[
+            'https://hobby-depot.de/hobbyregister/alte-kameras-reparieren/',
+            'https://hobby-depot.de/gestalten/malen-zeichnen/',
+            'https://hobby-depot.de/hobbyregister/'
+          ]
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True,args=['--no-sandbox'])
+              for width in (1440,900,390,360):
+                  page=browser.new_page(viewport={'width':width,'height':900})
+                  for url in sites:
+                      try:
+                          response=page.goto(url,wait_until='domcontentloaded',timeout=30000)
+                          page.wait_for_timeout(750)
+                          if not response or response.status!=200:raise AssertionError('HTTP non-200')
+                          page.add_style_tag(content=m.BANNER_CSS+m.HERO_CSS)
+                          page.evaluate("""() => {
+                            document.querySelectorAll('.hdar-ci-title').forEach(t=>{
+                              const n=[...t.textContent.trim()].length;
+                              t.style.setProperty('--hdar-title-scale',Math.max(.36,Math.min(1.35,23/Math.max(12,n))).toFixed(3));
+                              if(n>29)t.classList.add('hdar-ci-title-long');
+                            });
+                            let hero=document.querySelector('.hdr-hero:not(.is-profile) .hdr-hero-copy p');
+                            if(hero)hero.textContent='Entdecke neue und ungewöhnliche Hobbys.';
+                          }""")
+                          res=page.evaluate("""() => {
+                            const box=(x)=>{let r=x.getBoundingClientRect();return [r.left,r.top,r.width,r.height,r.right,r.bottom]};
+                            const ads=[...document.querySelectorAll('a.hdar-ci-amazon-banner')];
+                            return {
+                              innerWidth, ads:ads.map(a=>{
+                                const t=a.querySelector('.hdar-ci-title'),photo=a.querySelector('.hdar-ci-photo'),image=photo.querySelector('img'),btn=a.querySelector('.hdar-ci-button');
+                                const s=getComputedStyle(t);
+                                return {type:a.className,box:box(a),title:box(t),titleText:t.textContent,whiteSpace:s.whiteSpace,font:s.fontSize,lineHeight:s.lineHeight,photo:box(photo),image:box(image),button:box(btn),gradient:getComputedStyle(photo,'::after').backgroundImage}
+                              }),
+                              hero:(()=>{let h=document.querySelector('.hdr-hero:not(.is-profile)'),t=h?.querySelector('.hdr-hero-copy p');return h&&t?{box:box(h),copy:box(h.querySelector('.hdr-hero-copy')),text:box(t),h1:box(h.querySelector('h1'))}:null})()
+                            };
+                          }""")
+                          print('BROWSER',width,url,'ads',len(res['ads']),'hero',bool(res['hero']))
+                          if '/hobbyregister/' in url and not url.endswith('/hobbyregister/'):
+                            assert len(res['ads'])==2,('Missing banner',url,width,res)
+                          if '/gestalten/' in url:
+                            assert len(res['ads'])>=1,('Missing category ad',url,width)
+                          for ad in res['ads']:
+                            w,h=ad['box'][2:4]
+                            assert w>0 and h>0,('Zero sized',ad)
+                            assert abs(ad['photo'][2]-w)<3 and abs(ad['photo'][3]-h)<3,('Not full bleed',ad)
+                            assert 'gradient' in ad['gradient'].lower(),('No image gradient',ad)
+                            assert ad['button'][5]<=ad['box'][5]-4,('Button at edge',ad)
+                            if 'wide' in ad['type']:
+                              assert abs(w/h-3)<.08,('Bad wide ratio',ad)
+                              assert w <= width+1,('Wide banner horizontally overflows',width,ad)
+                              if width>=900:
+                                lineHeight=float(ad['lineHeight'].replace('px',''))
+                                assert ad['title'][3]<=lineHeight*1.2,('Wide title wraps at desktop',ad)
+                            if 'square' in ad['type']:assert abs(w-h)<3,('Bad square ratio',ad)
+                          if res['hero']:
+                            h=res['hero']
+                            assert h['text'][5] <= h['box'][5]-4,('Hero text clipped',width,h)
+                            assert h['text'][3]>0 and h['copy'][2]>0
+                      except Exception as e:
+                          print('BROWSER_FAILURE',width,url,str(e)[:1800])
+                          raise
+                  page.close()
+              browser.close()
+          print("RESPONSIVE_LIVE_DOM_SIMULATION_PASS")
+          PY
+      - name: Publish verified ZIPs to staging branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip
+          git commit -m "HD009 0.1.21 and HD007 1.2.18: responsive hero banners and concise mobile register hero"
+          git push origin HEAD:hobbyroom/hd009-021-banner-hd007-hero-stage-20261107
