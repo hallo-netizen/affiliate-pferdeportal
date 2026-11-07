@@ -2,6 +2,7 @@
 declare(strict_types=1);
 define('ABSPATH','/qa/');
 define('ARRAY_A','ARRAY_A');
+function get_option(string $key,$default=[]){return $default;}
 require_once $argv[1] ?? throw new RuntimeException('MINI source required');
 function check(bool $ok,string $label):void{if(!$ok)throw new RuntimeException('FAILED '.$label);echo "PASS $label\n";}
 function get_post_types(array $args,string $format='names'): array {
