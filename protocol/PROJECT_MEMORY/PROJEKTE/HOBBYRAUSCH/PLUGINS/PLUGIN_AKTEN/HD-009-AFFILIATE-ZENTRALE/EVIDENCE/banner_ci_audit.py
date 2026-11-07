@@ -58,3 +58,14 @@ with zipfile.ZipFile(regzip) as z:
     for n in z.namelist():
         if n.endswith(".json") and any(t in n for t in ("image","map","portraits")) and z.getinfo(n).file_size<3000000:
             out.write_text(out.read_text(encoding="utf8")+"\n\nHD007 IMAGE JSON "+n+"\n"+z.read(n).decode("utf8","replace")[:1350],encoding="utf8")
+
+
+import json
+with zipfile.ZipFile(regzip) as z:
+    m=json.loads(z.read("hd-hobbyregister-core/data/hobby-image-map-v1.json"))
+    records=json.loads(z.read("hd-hobbyregister-core/data/hobby-register-v1.json")) if "hd-hobbyregister-core/data/hobby-register-v1.json" in z.namelist() else {}
+    sample=[]
+    for id in ("hobby:airbrush-modellbau","hobby:modellbau","hobby:malen","hobby:acrylmalerei","hobby:air-dry-clay"):
+        entry=m.get(id)
+        sample.append((id,entry))
+    out.write_text(out.read_text(encoding="utf8")+"\n\nREAL HD007 IMAGE MAP SAMPLES:\n"+json.dumps(sample,ensure_ascii=False,indent=2),encoding="utf8")
