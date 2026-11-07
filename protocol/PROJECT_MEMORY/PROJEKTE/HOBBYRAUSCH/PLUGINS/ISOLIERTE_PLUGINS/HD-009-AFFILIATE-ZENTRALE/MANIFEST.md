@@ -1,37 +1,40 @@
-# HD-009 – Hobby Depot Affiliate-Zentrale – einzige aktuelle ZIP
+# Hobby Depot HD-009 – Einzige aktuelle Affiliate-Plugin-ZIP
 
 Stand: 07.11.2026
 Plugin: Hobby Depot – Affiliate-Zentrale
-Plugin-ID: HD-009-AFFILIATE-ZENTRALE
-Version: 0.1.10-dev
-Datei: CURRENT.zip
-ZIP-Größe: 607784 Bytes
-ZIP-SHA256: e8613f742a0c3a9e93b3c335b82b6594e95d61c89fd70f5a33981c73871427f4
-Git-Blob-SHA: 8b6732f2b3ec88e390662021ec7e0760da8f6fba
-WordPress-Pluginordner: affiliate-portal-router/
-Plugin-Hauptdatei: affiliate-portal-router/hobby-depot-affiliate-router.php
-Technische Inhaltsprüfung: ZIP CRC PASS; 26 reguläre Dateien; PHP-Syntax 23/23 PASS.
+Version: **0.1.12-dev**
+Datei: **CURRENT.zip**
+ZIP-Größe: **707639 Bytes**
+ZIP-SHA-256: `7ebbea15bb9f1692a949c41cc982489f5be2a2d12695e9342cac7dc8ce1550ae`
+GitHub-Binär-Blob: `ba3b84f2c891ea8bb4ac8a459438e1b46882f5f6`
+Pluginordner: `affiliate-portal-router/`
+Plugin-Hauptdatei: `affiliate-portal-router/hobby-depot-affiliate-router.php`
 
-## Grundlage und Harmonisierung
+## Verifiziert
 
-- Original: aus installiertem Hobby-Depot-WordPress übermittelte Version 0.1.7-dev, original SHA256 34c0a9b42c62f71025212bfba3756e48bf4c6ab21fdd000c9894a1ce2bf12cfa.
-- Frühere lokale Hobby-Korrekturen (0.1.9-dev) erhalten: vorhandene fünf Zusatzmodule aktivieren, Amazon-ASIN-/Tracking-Anbindung ohne Rückstufung bewahren, eBay-Löschungen dürfen bei Fehler kein Erfolgsbeleg sein.
-- Neueste geprüfte fachliche Referenz vom 07.11.2026: Pferdeatelier 6.72.308, nur allgemeine, zur Hobby-Quelle passende Korrekturen übernommen.
-- Übernommen: eBay-Konto-Löschprüfung in begrenzten Chargen, bei Lesefehler vor Löschung abbrechen; eBay-Abdeckung bündelt Quellen/Kreativ-Abfragen; Qualitätsbewertung nicht doppelt prüfen; zweite Suchergebnisseite nur begrenzt bei Fremdmarktplatz-Überhang, EBAY_DE-Sperre unverändert.
-- Nicht blind übernommen: Pferde-spezifische Produktgruppen, Kategorien, Bilder, Zugangsdaten oder bestehende fremde Worker-/Cron-Modelle. Vorhandene Hobby-Konfiguration, HD003/HD004 und aktive Amazon-Brücke bleiben erhalten.
+- Vollständige 0.1.12-dev-Test-ZIP wurde aus dem echten Hobby-Plugin 0.1.10-dev gebaut; Originaleinstellungen/Pluginordner bleiben erhalten.
+- **GitHub-Binärdatei wirklich gespeichert:** Nach dem Schreiben ist sie im offiziellen HD009-Verzeichnis mit 707639 Bytes und dem erwarteten Git-Blob SHA erneut nachgelesen worden.
+- ZIP-CRC PASS; 30 reguläre Dateien; 24 PHP-Dateien mit Syntaxprüfung PASS.
+- Lokale isolierte Tests PASS: getrennte Amazon+idealo-Startausgabe, ASIN-Anzeigen mit exakter Hobby-Zielzuordnung, zweierlei Bannerformat, leere fremde Ziele, gesperrte fremde/alte idealo-Feed-IDs.
+- Altes 0.1.10-eBay-Ursachenfixpaket, HD003/HD004-Hobbyzielbindung und eigene Amazon-ASIN-Brücke bleiben Teil derselben Pluginlinie.
 
-## Was tatsächlich geprüft ist
+## Geändert in 0.1.12-dev
 
-- ZIP-Integrität PASS, Datei direkt in GitHub geöffnet per Verzeichnis-Readback (607784 Bytes und Git-Blob-SHA stimmen überein).
-- PHP-Syntaxprüfung aller 23 PHP-Dateien PASS.
-- Plugin-Hauptdatei: Version 0.1.10-dev; vorhandene fünf Zusatzmodule eingebunden.
-- Wörtliche Fremdprojekt-Marker pferdeatelier/pferdeportal/hab-und-bewahr in Dateien: keine Treffer.
-- Lokale isolierte Funktions-/Regressionsprüfungen der eBay-/Amazon-Korrekturen; keine Produktionsdaten verändert.
+- Neue sichtbare Unterseite `Affiliate-Zentrale → Amazon + idealo` für selbständige Amazon-DataForSEO-Suche (Admin-Klick; API kostenpflichtig), bewusste Freigabe und Eigenbanner.
+- idealo arbeitet parallel mit seinem bestehenden iPN-Feedimport; **keine** feste Adspace-ID 568313 oder Feed-ID 2901 mehr.
+- Der Hobby-Depot-Feed muss im Backend ausdrücklich bestätigt und über die Partner-API getestet sein. Erst der anschließend neu importierte zugehörige Feed kann öffentliche idealo-Karten liefern.
+- Exakte Hobbyseiten- und Produktkennungen; keine pauschale Synchronisierung zwischen Amazon und idealo; übrige Partner werden im Startmodus nicht sichtbar, ihre Daten bleiben erhalten.
+- Zwei selbst entwickelte Modellbau-Motive: Querbanner 1440×240 und Quadrat 700×700; typografischer Fallback bei anderen Hobbys.
+- Amazon-Produktkarten ohne unfreigegebene Amazon-Bilder oder Preise.
 
-**Grenze:** Kein authentifizierter WordPress-Live-Ende-zu-Ende-PASS und kein tatsächlicher Provider-Produktivtest. Installierbare **Upgrade-Testversion**, kein behaupteter Live-PASS. Die offizielle Version am WordPress-Server bleibt bis zur Betreiberinstallation 0.1.7-dev.
+## Noch nicht geprüft
 
-## Einzige Bürostruktur
+Keine tatsächliche WordPress-Installation oder produktive Verbindung zu Amazon PartnerNet, idealo iPN oder DataForSEO durch diesen Build. **Ein technisch getesteter Upgrade-Installer, noch kein Live-PASS.**
 
-Fachliche Current-Autorität: `../../../AFFILIATE/CURRENT_STATE.md`.
-Technische Pluginakte: `../../PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/CURRENT.md`.
-Hier liegt die **einzige aktuelle vollständige Installations-ZIP** des Hobby-Depot-Affiliate-Plugins; keine zweite Pluginlinie, kein drittes Büro.
+## Einziger verbindlicher Standort
+
+Fachliches Affiliate-Büro: `../../../AFFILIATE/` und dessen `CURRENT_STATE.md`.
+Technische einzige Plugin-ZIP: **diese `CURRENT.zip`**.
+Keine zweite Affiliate-Pluginlinie, keine neue Bürostruktur. Ältere HD009-Originale dienen nur als Archiv-/Testquellen.
+
+Einrichtungs- und Prüfbeleg: `../../PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_0.1.12_AMAZON_IDEALO_20261107.md`.
