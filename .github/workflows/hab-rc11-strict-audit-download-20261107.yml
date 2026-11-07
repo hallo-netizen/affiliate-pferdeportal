@@ -1,0 +1,110 @@
+name: HAB RC11 independent strict audit and direct-download artifact
+on:
+  push:
+    branches:
+      - hab-004-rc11-audit-download-20261107
+permissions:
+  contents: read
+jobs:
+  audit-and-download:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Fetch original before Hab RC11 and current Pferdeatelier source
+        run: |
+          git fetch --depth=1 origin be9cf189f1a288f4aeff9062fe2df8c2d4bb0703
+          git fetch --depth=1 origin affiliate-release-current:refs/remotes/origin/affiliate-release-current
+      - name: Hard compare three current plugins, rebuild and run full tests
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          from hashlib import sha256
+          import io,os,re,subprocess,tempfile
+          root=Path('protocol/PROJECT_MEMORY/PROJEKTE')
+          hab=root/'EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          hd=root/'HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip'
+          expect_hab='cf8cf7946aa7605dadecda1f041cfc6fb150c7971f7c9feb9dbb6dd1ac8eabda'
+          expect_hd='cd6cb75f3ef0f393f94f3f93b974f3663ffa1f449c579886ae9520bc3d920cbb'
+          base='be9cf189f1a288f4aeff9062fe2df8c2d4bb0703'
+          remote='origin/affiliate-release-current'
+          def get_rev(rev,path):
+              return subprocess.check_output(['git','show',rev+':'+str(path)])
+          assert sha256(hab.read_bytes()).hexdigest()==expect_hab, "Hab-current source changed"
+          assert sha256(hd.read_bytes()).hexdigest()==expect_hd, "Hobbydepot-current source changed"
+          bhab=get_rev(base,hab)
+          bhd=get_rev(base,hd)
+          assert sha256(bhab).hexdigest()=='f3b6b0ac4fd05310fa32ce68e2715b29d022003ac68f32ceb051443832364ced'
+          assert sha256(bhd).hexdigest()=='53f0feb7bf5e97032f840fd5e1fe2ddee80f24b3440202e0c136cf38a67e6579'
+          def read_zip(b):
+              with ZipFile(io.BytesIO(b)) as z:
+                  assert z.testzip() is None
+                  return {n:z.read(n) for n in z.namelist()}
+          hh=read_zip(hab.read_bytes()); hp=read_zip(bhab)
+          hdh=read_zip(hd.read_bytes()); hdp=read_zip(bhd)
+          assert hh.keys()==hp.keys(),"Hab plugin root or files changed unexpectedly"
+          diff=[n for n in hh if hh[n]!=hp[n]]
+          allowed=['affiliate-portal-router/affiliate-portal-router.php','affiliate-portal-router/readme.txt','affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php','affiliate-portal-router/includes/trait-ppar-hb-amazon.php']
+          assert set(diff)==set(allowed),str(diff)
+          assert hh['affiliate-portal-router/affiliate-portal-router.php'].replace(b'0.1.8-rc11',b'0.1.7-rc10')==hp['affiliate-portal-router/affiliate-portal-router.php'],"Hab original campaign engine was changed"
+          assert hdh.keys()==hdp.keys(),"Hobby plugin files changed"
+          hd_diff=[n for n in hdh if hdh[n]!=hdp[n]]
+          assert len(hd_diff)<=4,("Unexpected Hobby new changes",hd_diff)
+          for n in hd_diff:
+              assert n.endswith(('.css','.php','.txt')),n
+          for n in hdh:
+              if n.endswith('.php') and (n in hdp) and n!='affiliate-portal-router/hobby-depot-affiliate-router.php':
+                  assert hdh[n]==hdp[n],("Hobby business logic modified",n)
+          pferdefile='release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php'
+          pferde=get_rev(remote,pferdefile).decode('utf8')
+          assert 'function provide_leaf_category_affiliate_slot_html(' in pferde
+          assert 'function render_affiliate_slot_for_context(' in pferde
+          assert 'function render_banner(' in pferde
+          assert 'category_product_1' in pferde
+          habmain=hh['affiliate-portal-router/affiliate-portal-router.php'].decode('utf8')
+          assert all(x in habmain for x in ['function provide_leaf_category_affiliate_slot_html(', 'function render_affiliate_slot_for_context(', 'function render_banner('])
+          bridge=hh['affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php'].decode('utf8')
+          assert "($node['type'] ?? '') === 'category'" in bridge
+          assert 'provide_leaf_category_affiliate_slot_html(' in bridge
+          amazon=hh['affiliate-portal-router/includes/trait-ppar-hb-amazon.php'].decode('utf8')
+          assert "render_banner($banner,0,$context" in amazon
+          assert "if (!isset($verified[$index])) { return ''; }" in amazon
+          print("CURRENT_HAB:",len(hab.read_bytes()),expect_hab)
+          print("CURRENT_HOBBY:",len(hd.read_bytes()),expect_hd)
+          print("HAB_RC10_VS_RC11_CHANGED_FILES:",diff)
+          print("HOBBY_0119_VS_0120_CHANGED_FILES:",hd_diff)
+          print("PFERDE_EXISTING_RENDER_AND_LEAF_SLOTS: VERIFIED")
+          print("HAB_EXISTING_RENDER_UNCHANGED: VERIFIED")
+          # Recreate candidate from last RC10 baseline with the verified producer + full original simulations
+          builder=root/'EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_RC11/BUILD_RC11.py'
+          with tempfile.TemporaryDirectory() as t:
+              clone=Path(t)/'audit'
+              (clone/'protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ').mkdir(parents=True,exist_ok=True)
+              target=clone/hab
+              target.parent.mkdir(parents=True,exist_ok=True); target.write_bytes(bhab)
+              for rel in [
+                  'EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip',
+                  'EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_RC10/VOLLSTAENDIGE_SIMULATION_TESTBELEGE.zip',
+                  'EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_RC11/BUILD_RC11.py'
+              ]:
+                  original=root/rel
+                  out=clone/'protocol/PROJECT_MEMORY/PROJEKTE'/rel
+                  out.parent.mkdir(parents=True,exist_ok=True)
+                  out.write_bytes(original.read_bytes())
+              built=Path(t)/'recreated_rc11.zip'
+              p=subprocess.run(['python3',str(clone/builder),'--output',str(built)],cwd=clone,text=True,capture_output=True)
+              print("REBUILD_QA_TAIL:",p.stdout[-1600:])
+              if p.returncode: raise AssertionError(p.stderr[-1500:])
+              assert sha256(built.read_bytes()).hexdigest()==expect_hab,"Released Hab zip differs from hard-tested rebuild"
+              assert built.read_bytes()==hab.read_bytes(),"Byte mismatch between generated and GitHub Current"
+          print("AUDIT: PASSED ALL COMPARISONS; NO CHANGE NEEDED")
+          
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Hab-und-Bewahr-Affiliate-RC11
+          path: protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip
+          retention-days: 3
+          if-no-files-found: error
