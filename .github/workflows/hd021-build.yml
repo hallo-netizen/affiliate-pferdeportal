@@ -12,6 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Restore the signed source ZIPs from the central current branch
+        run: |
+          git fetch --no-tags --depth=1 origin hobbyroom/project-memory-campus-v1-20260905
+          git show FETCH_HEAD:protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip > /tmp/hobby009-source.zip
+          git show FETCH_HEAD:protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip > /tmp/hobby007-source.zip
+          cp /tmp/hobby009-source.zip protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip
+          cp /tmp/hobby007-source.zip protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip
       - name: Build exact full ZIPs with PHP/CRC/hash guards
         run: python3 ops/hobby021/build.py
       - name: Install Chromium

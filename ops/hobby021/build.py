@@ -14,6 +14,7 @@ ORIGINAL={
   HD007: "433a642aac02439c74b85653c49c9c8ac62e6de5ea82be42ce58ce53537e8488",
 }
 AD_MAIN="affiliate-portal-router/hobby-depot-affiliate-router.php"
+AD_START="affiliate-portal-router/includes/class-hdar-amazon-start.php"
 AD_CSS="affiliate-portal-router/assets/hdar-amazon-start.css"
 REG_MAIN="hd-hobbyregister-core/hobby-depot-hobbyregister-core.php"
 REG_FRONT="hd-hobbyregister-core/includes/class-hd-hobbyregister-frontend.php"
@@ -138,6 +139,10 @@ def replace_single(s, before, after, label):
     return s.replace(before,after)
 
 def modify_009(name,raw):
+    if name==AD_START:
+        s=raw.decode("utf8")
+        s=replace_single(s,"'0.1.20'","'0.1.21'","CSS browser cache version")
+        return s.encode()
     if name==AD_CSS:
         s=raw.decode("utf8")
         assert "HD009 0.1.20" in s and "HD009 0.1.21" not in s
@@ -208,7 +213,7 @@ def build(path,expected,transform,expected_mods,expected_entries):
     return sha256(outbytes).hexdigest()
 
 def main():
-    build(HD009,ORIGINAL[HD009],modify_009,{AD_CSS,AD_MAIN},33)
+    build(HD009,ORIGINAL[HD009],modify_009,{AD_CSS,AD_MAIN,AD_START},33)
     build(HD007,ORIGINAL[HD007],modify_007,{REG_MAIN,REG_FRONT},93)
     print("Both source ZIPs verified; two independent existing plugins, no new plugin.")
 if __name__=="__main__":
