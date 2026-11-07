@@ -1,41 +1,36 @@
-# Pferdeatelier / eBay: systemische Ursachenprüfung vom 07.11.2026 (nur Evidence)
+# Pferdeatelier eBay – bereinigter, versionsgetrennter Gesamtbefund 07.11.2026
+**READ-ONLY-EVIDENCE / KEIN PLUGIN-RELEASE / keine Current-Quelländerung.**
  
-## Basis und unveränderte Sperre
-- Direkt gelesen: `release/affiliate-zentrale/current/affiliate-portal-router/` + `assets/ebay-portal-catalog-v2.json` auf `affiliate-release-current`.
-- Current-Governance: Generation 313; 6.72.211 ist gesperrter Kandidat, AFF-ERR-065 offen. 6.72.308 ist nur getrennte lokale Arbeitslinie; das Original-Installations-ZIP ist in diesem GitHub-Sourcebaum nicht autoritativ hinterlegt. Keine Live-Gleichsetzung.
-- Dieser Beleg verändert **keinen** Plugin-Quellcode, keine Freigabe, keine Produktdaten, keine Einstellungen und keine fremden Projektbüros.
+## Wichtig: Nicht mehr den alten Katalog reparieren
+Quellen verbindlich trennen:
+- Formale GitHub-Release-Autorität `affiliate-release-current`: 6.72.211, weiterhin AFF-ERR-065 / release_allowed=false. Dieses ALT-Quellpaket enthält 316 Pflichtfamilien und noch 321 Suchkonzepte. Die sichtbare falsche Einordnung von Haftpflicht/Rechts-/Beratungsthemen ist hier **historisch**.
+- Lokale Pferdeatelier-Arbeit 6.72.296: 324 -> 314, zehn eindeutig nichtwarenförmige Bereiche entfernt; Bericht `EBAY_672296_KISS_PRUEFBERICHT.txt`.
+- Spätere dokumentierte 6.72.306-Test-ZIP: exakt 297 geprüfte physische Pflicht-Warenziele (berichtet in `AFFILIATE_ZENTRALE_6.72.306_PRUEFBERICHT.json`).
+- Aktueller `EBAY_KISS_6.72.308_GESAMTABLAUF_PRUEFBERICHT.json`: **298** `required_product_groups`. Diese Zahl ist das jüngste explizite Versionsbelegfeld; warum 297 -> 298, ist in den bisher geöffneten Belegen **nicht** geklärt. Deshalb NICHT blind auf 307, 297 oder 294 setzen.
+- Bei 6.72.308 betreffen die jüngsten gesicherten vierfachen Quelländerungen eBay-Suche, Lauf/Abdeckung, Löschmeldungen und Router. Keine freigegebene Installation oder neue aktuelle ZIP im Autoritäts-Release-Branch.
+- **Folge:** Die alte 316er-Definition ist NICHT als aktueller eBay-Engpass zu zählen und darf nicht erneut durch einen separaten Kategorien-Fix „korrigiert“ werden. Die Portalstruktur bleibt vollständig bestehen. Bei tatsächlicher Produktabdeckung NUR die im 6.72.308-Katalog nachweislich eBay-tauglichen Pflichtgruppen als Nenner verwenden; den noch unaufgelösten Unterschied 297/298 nicht verschweigen.
 
-## Belegter systemischer Fehler 1: falscher eBay-Bedarf
-- Original-Katalog: 334 Produktseiten, 321 `business_concepts`, Pflichtliste `business_supply_contract.required_count=316`, ausschließlich fünf Grundlagen ausgenommen.
-- In der **316er Pflichtliste** liegen neun eindeutig nicht als physische eBay-Warenfamilie zu bewertende Ziele:
-  1. `concept-futterungsberatung` – Fütterungsberatung
-  2. `concept-haftung-im-stall` – Haftung im Stall
-  3. `concept-haltungsberatung` – Haltungsberatung
-  4. `concept-hufberatung` – Hufberatung
-  5. `concept-pferdehaftpflicht` – Pferdehaftpflicht
-  6. `concept-sattelanpassung-beratung` – Sattelanpassung Beratung
-  7. `concept-stallbau-beratung` – Stallbau Beratung
-  8. `concept-transportrecht-pferde` – Transportrecht Pferde
-  9. `concept-tuv-beim-pferdeanhanger` – TÜV beim Pferdeanhänger
-- Drei zusätzliche **Hub-Suchprofile** sind thematisch Dienstleistung statt Warenfamilie: `hub-concept-wissen-beratung-und-partner`, `hub-concept-wissen-kurse-und-seminare`, `hub-concept-wissen-versicherungen-und-recht`.
-- Konkrete Code-Verknüpfung: `trait-ppar-ebay.php::ebay_business_required_product_concept_ids()` liefert diese unbereinigte Liste an Auswahl, Verteilung und `trait-ppar-ebay-run.php::ebay_run_public_business_coverage()`. Nach Fehlen werden gezielt weitere Suchrunden und Abdeckungsprüfungen ausgelöst. `ebay_business_catalog_profiles()` durchsucht bisher sogar alle 321 Konzepte einschließlich fünf bereits ausdrücklich ausgeschlossener Grundlagen, dazu sämtliche 59 Hub-Konzepte.
-- Sicher belegbares Korrekturziel für **diese neun**: 316 -> 307 reale Waren-Pflichtfamilien, die restlichen 307 genau identisch; 334 Portalziele bleiben bestehen, nur eBay-Versorgungsbewertung wird abgegrenzt. Weitere unklare Beratungs-/Dokumentthemen erst nach Anbieter-/Originalzeilenbeleg ausnehmen. Die drei Dienstleistungs-Hubs aus der eBay-Suche nehmen. Keine Kategorien im Portal löschen.
-- WICHTIG: Die bloße Kürzung der Zahl genügt nicht: dasselbe eine Zulässigkeitsmerkmal muss für eBay-Suche, Lückensuche, Pflichtmenge, Ergebnisprüfung und veröffentlichbare eBay-Produktangebote maßgeblich sein. Keine zweite Parallel-Sperre und keine Sonderregeln je Produkt.
+## Belegter eigentlicher Live-/Historien-Engpass
+Historischer originärer eBay-Bericht 02.11.2026 (in `EBAY_URSACHENANALYSE_20261102_KISS.txt`):
+- 220 Suchprofile, 908 gefundene Treffer, 420 `ebay_marketplace_mismatch`, 285 fachlich zurückgestellt, 5 akzeptiert.
+- Dies waren HISTORISCHE Rohwerte, nicht der 07.11.-Live-Zustand. `deliveryCountry:DE` bedeutet Lieferbarkeit, nicht eBay-DE-Marktplatz. `X-EBAY-C-MARKETPLACE-ID: EBAY_DE` wurde bereits gesendet; die Herkunftssperre nicht blind abschalten.
+- Suchbegriffe in 6.72.296 für vier aus Originaldaten belegte Produktfamilien bereits verbessert; GTIN/idealo-Crosscheck eingeführt. Nicht noch einmal denselben Fix vorschlagen.
+- 6.72.308-Sammelpatch hat für Produktgruppen maximal eine bedingte zweite Suchseite, eine zusammengefasste Quell-/Creative-Abdeckungsprüfung, begrenzte Inbox-Suche und feste Retry-Zeit; lokaler Test ist KEIN Live-Nachweis. Original 6.72.308-Quell-ZIP nicht im autorisierten GitHub-Release-Sourcebaum verfügbar. Keine blinde Änderung an 6.72.211 als „6.72.308“ ausgeben.
+
+## Live-Scheduler: neuer geprüfter Beleg
+- GitHub Actions am 07.11.: `Pferde Atelier eBay heartbeat`, Run 42342325416, Job 128312512929.
+- Statusfolge `busy`/`advanced`, dann um 05:50:42 UTC `status=failed`. Workflow selbst zeigt `conclusion=success` – dies bestätigt nur erfolgreichen HTTP-/Schedulertransport. **Weder erfolgreicher eBay-Abgleich noch neue öffentliche Produktversorgung.**
+- Aus diesem Log ist der genaue WordPress-`error_code` nicht sichtbar. Ohne diesen kein Nachweis, welcher der bekannten Fehler im jüngsten Lauf terminal auftrat.
+
+## Versionsübergreifende Frische/Abschluss-Kollision
+- Der ältere originalverfügbare Quellstand 6.72.211 setzt `fresh_until` bei Quellenabruf auf +6h, Auswahl und öffentliche Abdeckung verlangen später frische Originalquelle. Ein großer `Discovery -> Refresh -> Auswahl -> Nachsuche -> öffentliche Freigabe`-Lauf kann deshalb Kandidaten bis zur endgültigen Freigabe verlieren.
+- Das ist ein **nachgewiesener Ablaufkonflikt im alten Code**, aber NICHT als konkreter Endfehler des 07.11. oder unbesehen als Fehler im 6.72.308-Codesatz auszugeben. Sechs Stunden ohne Providerbeleg nicht verlängern.
+- In 6.72.297 sind Artikelpläne/öffentliche Freigaben und neue Checkpoints bereits lokal harmonisiert worden; nicht erneut als offene unbehobene Ursache listen ohne aktuellen Gegenbeleg.
+
+## Jetzt echte nächste Arbeit, nicht Symptome
+1. **Aktuelle 6.72.308 Quelle und Prüfbericht** als einzige Basis; 298er Manifest und tatsächliche 6.72.308 Suchprofile verifizieren; keine Ausschlüsse aus altem 6.72.211 übertragen.
+2. Aus dem gespeicherten echten, fehlgeschlagenen eBay-WordPress-Lauf den exakten `error_code`, Phase, `run_uuid`, quellseitige Zeitstempel, fachliche Ablehnungszählungen, Auswahl, gespeicherte öffentliche Kampagnen und Checkpoint-Status auslesen. NICHT aus reinem Scheduler-`success` schließen.
+3. Die **gesamte bestehende Strecke** als eine Einheit nachstellen: Suchprofile -> Liefer-/Marktplatzcode -> echte Warenerkennung -> Qualität/Quellenfrische -> Kampagnenspeicherung -> Public Gate -> Kategorie/Artikel-Produktkarten. Den ersten **tatsächlich reproduzierten** systemischen Abbruch im selben vorhandenen Worker korrigieren, keine weitere Architektur.
+4. Gegenbeweise: nicht-eBay-taugliche Kategorien **null** Pflichtgruppen, bekannte gute Produkte nicht irrtümlich verworfen; falscher Marktplatz, fehlende Herkunft, veraltete Daten und unpassende Angebote weiterhin blockiert. Nur nach echtem WordPress/MariaDB-E2E und tatsächlicher öffentlicher Ausgabe Plugin freigeben.
  
-## Belegter systemischer Fehler 2: langlaufende Frische gegen Abschluss
-- `trait-ppar-ebay.php::ebay_upsert_item()`: `fresh_until=now+6h`; `ebay_business_selection_concept_rows()` und `ebay_run_public_business_coverage()` verlangen Frische zum späteren Zeitpunkt. Daten können während `Discovery -> Refresh -> Auswahl -> Gapfill -> Public Verify` veralten. Der Code verhindert zu Recht veraltete öffentliche Angebote; **nicht** willkürlich sechs Stunden verlängern.
-- Ob das beim letzten fehlgeschlagenen Live-Lauf der konkrete finale Fehlercode war, kann aus den gespeicherten GitHub-Heartbeat-Ausgaben **nicht** bewiesen werden.
-
-## Belegter systemischer Fehler 3: Worker-Endzustand wird als GitHub-Erfolg gezeigt
-- GitHub Action `Pferde Atelier eBay heartbeat`, Run 42342325416 / Job 128312512929 am 07.11.2026: 27 Statusantworten, darunter `busy`, `advanced`, danach um 05:50:42 UTC `status=failed`.
-- GitHub Action `conclusion=success` bedeutet hier **nur funktionierenden Heartbeat-Transport**, keine abgeschlossene eBay-Verarbeitung. `failed` ist terminal; der HTTP-Status allein liefert nicht den gespeicherten eBay-`error_code`. Keine unbelegte Behauptung zur letzten Fehlerursache.
-- Im kanonischen Code `trait-ppar-ebay-run.php::handle_ebay_external_tick` stoppt bei gespeichertem `failed` der Folgelauf bis zum erlaubten Wiederanlauf. Richtige Reparatur hängt am konkreten gespeicherten Fehlerzustand, nicht an neuen Neustart-/Umgehungsregeln.
-
-## Verbindlicher KISS-Fixkorridor / vor Live-Freigabe
-1. Einen **gemeinsamen** eBay-tauglichen Katalogvertrag nutzen. Versicherungen, Beratungen und reine rechtliche Leistungen bleiben Portal-Inhalte, niemals eBay-Pflichtversorgung. Alle Suche/Gapfill/Abdeckung/Veröffentlichung lesen denselben Umfang.
-2. Die **eine** bestehende Aktualisierungsstrecke so nachführen, dass echte, rechtzeitig erneuerte Angebote das abschließende Safety-Gate erreichen können; keine Fake-Frische und kein Aufweichen der Source-/End-/Policy-Prüfungen.
-3. Originale Live-Rundaten des fehlgeschlagenen Laufs einschließlich `error_code`, `run_uuid`, Phase, Provider-Freshness, Quellen, Auswahl, Abdeckungsfehlgründen und Public Checkpoint gemeinsam abgleichen; danach nur bewiesene weitere Wurzel im vorhandenen Worker korrigieren.
-4. Gegenprüfungen: 9 Non-Warenfamilien und 3 Dienstleistungs-Hubs verursachen keine eBay-Pflicht-/Discovery-Lücken; die 307 übrigen werden unverändert gesucht; valide frische Angebote in einer echten WordPress/MariaDB-Gesamtsimulation sichtbar; zu alte/manuell gesperrte/nicht verfügbare bleiben gesperrt; GitHub-Transporterfolg kann nie als Produktlauf-PASS gelten.
-5. Erst mit realer gesamter Live-/Testquellen-Bindung, WordPress/MariaDB-E2E, öffentlichem HTML, gültigen Manifest-/Release-Gates kann ein installierbares Plugin freigegeben werden. Kein Sofort-Patch, kein neues Parallelplugin und keine Liveänderung aus diesem Bericht.
-
-**Beweisgrenze:** Alle neun falsch geführten Pflichtfamilien und die fehlende Suchabgrenzung sind am autoritativen 6.72.211-Quellstand sicher reproduziert. Die **konkrete** Ursache des eBay-Live-Fehlcodes am 07.11. ist durch das GitHub-Heartbeat-Log noch nicht identifiziert. Weder eine freigegebene Reparatur noch steigende öffentliche Produktabdeckung wird behauptet.
+**Korrekturhinweis:** Die zunächst hier gesicherte, vom alten 6.72.211 abgeleitete Forderung `316 -> 307` war ein Versionsfehler und wurde ausdrücklich verworfen. Das jüngere 6.72.308-Testprotokoll weist bereits 298 Pflichtgruppen aus. Daher ist kein alter 316er-Katalog-Fix durchzuführen.
