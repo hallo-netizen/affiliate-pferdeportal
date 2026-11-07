@@ -68,6 +68,12 @@
         return $state;
     }
 
+    public static function isMiniTopicAwaitingSeo(string $poolKey): bool {
+        $state=self::loadState();
+        $v=$state['completed'][$poolKey]??null;
+        return is_array($v)&&($v['decision']??'')==='JA';
+    }
+
     /**
      * The only technical proof reader for later WP/PSERC consumers.
      * No SEO evaluation, no new article decision.
