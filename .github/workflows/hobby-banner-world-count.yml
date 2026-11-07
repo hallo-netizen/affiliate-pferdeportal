@@ -1,0 +1,41 @@
+name: Hobby category world fallback coverage exact count
+on:
+  push:
+    branches: ['hobbyroom/hd009-generic-image-concept-audit-20261107']
+    paths: ['.github/workflows/hobby-banner-world-count.yml']
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Count every leaf and category page by existing parent world
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import json,collections
+          base=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          worlds={'gestalten','fertigen','technik','forschen','pflanzen','tiere','bewegen','sammeln'}
+          with ZipFile(base) as z:
+            leaf=json.loads(next(z.read(n) for n in z.namelist() if n.endswith('leaf-category-map-v150750.json')))
+            levels=json.loads(next(z.read(n) for n in z.namelist() if n.endswith('category-level-copy-v150687.json')))
+            leafcnt=collections.Counter()
+            unknown=[]
+            for k,v in leaf.items():
+              chain=v.get('chain') or []
+              root=(chain[0].get('path') or '').split('/')[0] if chain else ''
+              if root not in worlds:unknown.append((k,root,v.get('title')))
+              leafcnt[root]+=1
+            levelcnt=collections.Counter()
+            unknownlevels=[]
+            for k,v in levels.items():
+              root=v.get('world','')
+              if root not in worlds:unknownlevels.append((k,root))
+              levelcnt[root]+=1
+            print('LEAF_TOTAL',len(leaf),'LEAF_PER_WORLD',dict(leafcnt))
+            print('LEAF_UNKNOWN',len(unknown),unknown[:12])
+            print('CATEGORY_TOTAL',len(levels),'CATEGORY_PER_WORLD',dict(levelcnt))
+            print('CATEGORY_UNKNOWN',len(unknownlevels),unknownlevels[:12])
+            print('IMAGE_FALLBACK_COVERAGE',len(leaf)-len(unknown),len(levels)-len(unknownlevels))
+          PY
