@@ -1,41 +1,37 @@
-# HOBBY DEPOT – Affiliate – EINZIGE CURRENT-AUTORITÄT
+# HOBBY DEPOT – AFFILIATE – EINZIGE FACH-CURRENT
 
-**Stand: 07.11.2026** · Einziges fachliches Affiliate-Büro; technische ZIP und Prüfnachweise weiterhin ausschließlich in HD009 unter `PLUGINS`.
+<!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-## Aktuelle Version
+**Stand: 07.11.2026** – genau ein Affiliate-Büro und ein HD009-WordPress-Plugin.
 
-**HD009 Hobby Depot Affiliate-Zentrale 0.1.16-dev**
+## Aktualisierter vollständiger Pluginstand
 
-- `../PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip`
-- 712.675 Bytes, SHA-256 `7f65fae7a3aac98bfb5f9bc7f7673fc726f64f0b3cbf5eb8b5a51c3e4ad40640`.
-- PHP 24/24 PASS, ZIP CRC PASS. WordPress-Liveprüfung **noch nicht erledigt**.
-- Bestehender WordPress-Pluginordner `affiliate-portal-router/`, keine Zweitinstallation.
+**Hobby Depot Affiliate-Zentrale 0.1.17-dev**
+- Technische einzige ZIP: `../PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip`.
+- **1.175.854 Bytes; SHA-256 `067a1b2532c2c2c476763269e80e4ccefacfdb073e55f02c182a2a85a43745ca`.**
+- Unveränderte WordPress-Pluginwurzel `affiliate-portal-router/`, nur einmal installieren.
+- Nachweis und Einzelheiten im benachbarten HD009-`MANIFEST.md`.
 
-## Warum die Korrektur notwendig war
+## Erfüllter CI-/Bannervertrag im einen Plugin
 
-**Tatsächlicher Screenshot:** `https://hobby-depot.de/gestalten/malen-zeichnen/` zeigt das abgeschnittene „Hier könnte Ihre Werbung stehen“ auf dem normalen **Partnerbannerplatz**, zusätzlich drei für eingeloggte Administratoren sichtbare leere Produktpositionen.
+1. **Querbanner** über die gesamte vorhandene Seiten-Contentbreite (responsive 6:1), mit originalem Hobby-Depot-Logo, thematisch richtigem vorhandenen Hobbyfoto, warmem Beige/Petrol, Schrift Montserrat und Kennzeichnung „Anzeige“.
+2. **Quadratische 1:1-Banner** auf Hobbyregister-Detailseiten und Glossar-Einzelbeiträgen (Desktop und Mobil). Auf normalen Beiträgen ggf. breiter Inhaltbanner über bereits vorhandenen Slot.
+3. **Amazon-Ziel:** Getrackter Amazon-Suchlink für das konkrete aktuelle Hobby („Ausrüstung/Zubehör“), keine nicht belegte ASIN, keine erfundenen Produktdaten oder Preise. Individuelle Datenrecherche über vorhandenes DataForSEO separat. idealo-Feed/Automatik unverändert, echte Hobby-PID/Feed-Freigabe weiter erforderlich.
+4. **Automatische fachliche Zuordnung:** Der bestehende kopierte Pferdeatelier-/HD009-Campaign-Picker, vorhandene Kategorie/Elternpfad-, Creative-Format-, Partner-Gates und Vetos bleiben zuständig; nur wenn regulär kein gültiger Werbebanner vorhanden ist, kann ein thematisch passender eigener Amazon-Suchbanner den freien Platz füllen.
+5. **Bilder:** Vorhandenes echtes Original-Logo und passende Hobbybilder aus HD003 unverändert. Hobbyregister-Einträge werden direkt anhand des **verifizierten HD007-`canonical_name`/`registry_id` und HD007-`source`/`path`-Bildregisters** zugeordnet; bekannte falsche/unfertige Bilder ausgeschlossen. Kein passendes Foto = kein eigener Banner, kein fachfremdes Ersatzbild.
+6. **Keine Vermischung:** Das abgenommene Flugzeug-Eigenwerbemotiv mit „Hier könnte Ihre Werbung stehen“ bleibt im HD003-Designplugin auf freien Mietwerbeflächen; nicht im Affiliate-Produktplatz und nicht als Amazon-Werbung.
+7. **Kein neuer Aufbau:** Bestehende HD004-/HD007-Hobbyseiten, Register, Katalog, Amazon-/idealo-Einstellungen, DataForSEO, Design und Textsysteme unverändert. Keine zweite Plugininstallation, kein manueller Creatives-Import.
 
-**Ursache im Quellcode nachgewiesen:** 0.1.15 hatte die freigegebene Werbeflächen-Mietgrafik (2170×725, Verhältnis etwa 3:1) außerhalb der vorhandenen Bannerautomatik als Ersatz für jeden freien schmalen Querbannerplatz eingesetzt. Die bereits vom Pferdeatelier übernommene native Formatregel für solche Kategorieplätze (5:1 bis 12:1), Relevanz und Elternpfad-Zuordnung wurde dabei umgangen. Außerdem führte die Mietwerbung zu den internen Seiten Werbebedingungen/Preise, nicht zu einem passenden Amazon-/idealo-Angebot. **Falsche Werbeart am falschen Platz**, nicht primär ein Bilddateifehler.
+## Beleg und Grenzen
 
-**Minimalfix 0.1.16:** Nur diese in 0.1.15 hinzugefügte Ausnahme wieder entfernt. Die Pferdeatelier-/Hobby-Automatik bleibt **unverändert aktiv**, kein neuer Import, neues Plugin, neue Tabelle oder neues eigenes Verteilungsverfahren. Die freigegebene Original-Mietwerbegrafik mit Hobby-Original-Logo verbleibt ausschließlich im vorhandenen HD003-Designplugin auf dafür vorgesehenen **freien Mietflächen**. HD009 spielt sie nicht mehr als Affiliate-Produkt-/Partnerbanner aus.
+- GitHub-Workflow: PHP 24/24 PASS, ZIP CRC PASS, 11 PHP-Funktionstests PASS.
+- Vergleich der drei Original-HD003-Bilddateien und direkter HD007-Schema-/Bild-Freigabe-Daten PASS.
+- Chromium-Vorschau Querformat und Quadratformat PASS, beide Bilder in HD009-Evidence gespeichert.
+- **WordPress-Live-Bestätigung steht weiterhin aus**. Backend-Credentials nicht neu eingeben, keine zahlungspflichtige DataForSEO-Suche automatisch auslösen.
 
-## Geprüfte vorhandene Funktionen – nicht noch einmal entwickeln
+## Konkret nach einmaligem WP-Update prüfen
 
-- Amazon + idealo als gewählte Startpartner (bei aktivierter Einstellung).
-- DataForSEO-Amazon-Recherche und kostenloser Verbindungstest.
-- idealo-iPN-Feedimport samt Automatik, sobald eine echte Hobbydepot-Freigabe/Feed besteht.
-- HD004-Hobby-Kategorie/Elternpfad und HD007-Register-Zuordnung.
-- Bestehende Kampagnen-/Banner-Auswahl inklusive belegter Bannerformatregel und Themenprüfung.
-- Glossar-Einzelwerbeplätze `glossary_single_desktop_banner` / `glossary_single_mobile_banner` existieren bereits.
-
-## Konkrete öffentliche Testorte
-
-1. **Querformat:** `https://hobby-depot.de/gestalten/malen-zeichnen/` – direkt unter „Weiter in Malen & Zeichnen“ darf kein abgeschnittenes Mietbanner im Affiliate-Partnerplatz stehen. Passende echte Partnerbanner nur bei vorhandener Kampagne.
-2. **Quadrat/hoch:** Nur in einem bereits veröffentlichten **Glossar-Einzelbeitrag** (`uge_term`) an den existierenden Desktop-/Mobil-Slots zu prüfen; noch kein passend freigegebenes Werbemittel im bekannten Bestand, daher ohne Banner kein Fehlerbeweis. **Für das Hobbyregister liegt ein Quadratbanner-Integrationspunkt noch nicht eindeutig nachgewiesen vor.**
-
-## Offene Punkte
-
-- Betreiber hat WordPress-Installation 0.1.16 und öffentliche Darstellung noch **nicht** bestätigt.
-- Live-Ausgabe echter Amazon-/idealo-Werbung setzt real zugeordnete Angebote und zulässige Werbemittel voraus. idealo DE/Feed für Hobby Depot weiterhin offen. DataForSEO-Login ersetzt keine freigegebenen Partnerangebote.
-- Der ehemalige 0.1.15-Versuch, eine mietbare Eigenwerbefläche als allgemeines Affiliate-Banner auszuspielen, ist **aufgehoben**.
-- Keine Freigabe/Anmeldung für ein eigenes Quadratbanner mit Original-Logo nachgewiesen; nichts erfinden.
+- **Quer:** `https://hobby-depot.de/gestalten/malen-zeichnen/` (Bereich unter „Weiter in Malen & Zeichnen“); dort kein abgeschnittener Mietwerbebanner, sondern nur ein thematisch passender Amazon-Banner, falls die Amazon-Startfreigabe wirklich aktiv ist.
+- **Quadrat/Hobbyregister:** `https://hobby-depot.de/hobbyregister/airbrush-modellbau/` ist ein nachgewiesenes HD007-Registerhobby samt final freigegebenem Bild; tatsächliche öffentliche Erreichbarkeit/Banneranzeige in WordPress noch nicht live bestätigt.
+- **Glossar:** Eine tatsächlich veröffentlichte Glossar-Einzelbeitragsseite; der bestehende Desktop-/Mobilplatz verwendet 1:1, jedoch nur bei passendem erlaubten Bild.
+- Keine voreilige Behauptung, dass alle 862 Hobbys eigene geprüfte Werbefotos besitzen.
