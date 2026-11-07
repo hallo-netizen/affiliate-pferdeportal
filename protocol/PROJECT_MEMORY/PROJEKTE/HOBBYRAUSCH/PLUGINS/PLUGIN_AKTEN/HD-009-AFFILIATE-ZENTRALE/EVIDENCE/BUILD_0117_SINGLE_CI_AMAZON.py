@@ -29,7 +29,7 @@ PHP=r"""
         if (!is_array($context)) { return ''; }
         $topic = trim(sanitize_text_field((string)($context['primary_name'] ?? '')));
         if (is_array($register_row)) { $topic = trim(sanitize_text_field((string)($register_row['name'] ?? ''))); }
-        if ($topic === '' || in_array(mb_strtolower($topic), array('hobbyregister','glossar','hobby depot','hobbys'), true)) { return ''; }
+        if ($topic === '' || in_array(strtolower($topic), array('hobbyregister','glossar','hobby depot','hobbys'), true)) { return ''; }
         $amazon = $this->amazon_settings();
         $tag = trim((string)($amazon['tracking_id'] ?? ''));
         if (empty($amazon['enabled']) || !preg_match('/^[A-Za-z0-9-]+-21$/D',$tag)) { return ''; }
