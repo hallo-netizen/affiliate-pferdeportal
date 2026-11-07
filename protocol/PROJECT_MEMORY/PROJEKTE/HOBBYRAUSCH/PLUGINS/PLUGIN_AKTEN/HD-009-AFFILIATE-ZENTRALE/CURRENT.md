@@ -1,15 +1,16 @@
-# HD009 – Hobby Depot Affiliate-Zentrale – aktuelle technische Plugin-Akte
+# Hobby Depot – HD009 Affiliate-Zentrale – CURRENT
 
-**Stand 07.11.2026 · einziges CURRENT-Plugin: 0.1.19-dev.**
+**07.11.2026: 0.1.20-dev, einzige Installationsdatei** `../../ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip`.
 
-- Installierbare Voll-ZIP: `../../ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip`.
-- Größe **1.066.241 Bytes**, SHA-256 `53f0feb7bf5e97032f840fd5e1fe2ddee80f24b3440202e0c136cf38a67e6579`, Git-Blob `93c4eca96659a06fbc9a5b7911fa4c1b70ffac93`.
-- Ein vorhandener Pluginroot `affiliate-portal-router/`, nicht zwei installierbare Module.
-- Neuer **Registerplatz-Vertrag**: Desktop nach `Auf einen Blick`, vor `Hobbygruppe`; ein Querbanner im Text nach `Kosten und Ausrüstung`; Mobil nach gesamtem Haupttext die quadratische Anzeige zuerst, vor `Hobbygruppe`.
-- Umsetzung ausschließlich über vorhandenen HD009-`hdar_ci_register_footer` + vorhandenen `render_affiliate_slot_for_context`/Amazon-Eigenbanner-Fallback. HD007-`profile_sidebar()` und `full_article()` sind unverändert. HD003-Design unverändert.
-- **Vorgänger-Design 0.1.18 Variante 4 vollständig beibehalten:** schmaler Titelverlauf, echtes Hobbyfoto, gelb-oranger Amazon-Originalbutton mit Pfeil, kein eigenes Logo. Keine neue Bannerzuordnung oder Quelle.
-- CSS bleibt die bisherige HD009-`hdar-amazon-start.css` unter demselben Modus und demselben Dateinamen, mit Version 0.1.19 als Browsercache-Schutz.
-- **Nachweise:** `EVIDENCE/HD009_0119_PROFILE_LAYOUT_REPORT.txt`; `EVIDENCE/HD009_0119_WP_REAL_BROWSER_PASS.txt`. Isoliertes **ECHTES WordPress + MariaDB + HD003 + HD007 + HD009**, HTTP und Chromium Desktop+Mobile, alle Anzeigeplatz-/Layout-Assertions PASS; ZIP-CRC und 24 PHP-Syntaxprüfungen PASS.
-- **WordPress-Liveabnahme noch offen:** vorhandener Betreiberstand laut Gespräch vor diesem Update 0.1.17; keine Behauptung, dass 0.1.19 auf dem Live-Server installiert ist.
+- 1.066.589 Bytes, SHA-256: `cd6cb75f3ef0f393f94f3f93b974f3663ffa1f449c579886ae9520bc3d920cbb`.
+- Git-Blob: `9d9ac298c9e32bfc54f81d80e39f1a3560200d8c`.
+- Alte 0.1.19 vom Betreiber auf Desktop sichtbar getestet: Positionen korrekt.
+- **Neu:** Deutlich warmer Verlauf in Kopfzeile von Quadrat- und Querbanner; Button nur 2px abgerundet, kleiner und zurückhaltender; Foto etwas kleiner innerhalb des vorhandenen Bildrahmens. Die original erlaubte Amazon-Grafik bleibt erhalten.
+- Kein Umbau der Seitenpositionen, kein anderes Plugin, keine neue Produkt-/Kampagnenlogik. Nur bestehende CSS, Pluginversion und CSS-Cache angepasst.
+- Quell-ZIP auf Original-Hash geprüft, neue ZIP CRC PASS, 24 PHP-Lint PASS; genau 3 Dateien verändert.
+- DataForSEO-Produktrecherche im aktuellen Plugin vorhanden, **manuell**, nicht als automatischer Feed. Amazon-Zielauswahl derzeit überwiegend Suchlink.
+- **Liveabnahme 0.1.20 offen.** Live-Darstellung erst nach Betreiberinstallation kontrollierbar.
+- Produkt-/Suchlink-Konzept: `../../../AFFILIATE/BANNER_ZIELREGELN_20261107.md`.
 
-**Ältere Versionen 0.1.15–0.1.18 sind nur Git-Historie. Die alleinige aktuelle technische Datei ist das oben genannte CURRENT.zip.** Benutzer muss nur einmal die aktuelle ZIP über vorhandene WordPress-Plugininstallation ersetzen.
+**Historischer Nachweis der realen 0.1.19 WordPress-Labortests**:
+`EVIDENCE/HD009_0119_PROFILE_LAYOUT_REPORT.txt`, `EVIDENCE/HD009_0119_WP_REAL_BROWSER_PASS.txt`.
