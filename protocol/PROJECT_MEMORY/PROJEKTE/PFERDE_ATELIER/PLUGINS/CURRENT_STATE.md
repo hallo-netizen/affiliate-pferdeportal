@@ -948,6 +948,23 @@ Im bestehenden MINI-/Repository-/Reentry-Code sind Titelbeleg-Wiederholung (6 F�
 
 **Geprüft lokal:** 100 echte MINI-Themen (87 JA/9 VIELLEICHT/4 NEIN, 97 Titelideen) und 714 echte PHP-Assertions einschließlich positiver/negativer Relevanz- und Sprachtitelnachweise, drei historischer Titelkonflikte, Wiederverwendung der 87 Eingaben, unzulässiger Quellenänderung; vorhandener Besitzer des gezielten 87er-Reports simuliert (3 SELECTs, keine Historie). Admin-Export liefert gültige JSON mit 87 Ergebnissen. 83/83 PHP-Lints PASS, ZIP-Integrität PASS. **KEIN echter WordPress/MySQL-Endlauf**, keine neue K0- oder LIVE-Freigabe.
 
-## NEXT ACTION – PSTE 0.57.144.16 (MAßGEBLICH)
+## HISTORISCH – v16 (ÜBERHOLT DURCH v18)
 
 Nur **PSTE 0.57.144.16** in WordPress-TEST installieren (0.57.144.15 ersetzt), **SEO Themenengine → Themenprüfung → Bereits übergebene Titel nach Plugin-Update erneut prüfen**. Nach Abschluss im selben Reiter **Nur aktuellen Stapelbericht herunterladen (max. 100)**. Genau diesen Stapelbericht auswerten; **keine** Gesamtdiagnose über sämtliche Protokolle nötig. Echte Dubletten weiterhin zentral prüfen, fehlende Kategoriezuordnung im vorhandenen Redaktionsbüro sammeln. Keine weiteren Pluginzwischenversionen ohne zusammengefasste Ursachenprüfung. K0, PSERC und LIVE unverändert.
+
+
+---
+
+## CURRENT / NEXT ACTION – PSTE 0.57.144.18 (07.11.2026, aktuelle TEST-Arbeitsfassung)
+
+**Einzige aktuelle Test-ZIP:** `INSTALLATIONS_PAKETE/PFERDEATELIER_PSTE_0.57.144.18_KISS_RELEVANZ_OHNE_TITELBEDINGUNG_NUR_TEST.zip`, SHA256 `3b0ce3971326753a44274a4d00b0a329e824df954f35e784db762f5935628abf`, GitHub-BLOB `f530c4b95cd75b7296cf14dde056b4c4726fe6b5`. Versionen v16/v17 historisch, nicht mehr als aktuell anbieten.
+
+**Echter Bericht 0.57.144.17:** 29/87 bearbeitet, 58 noch PENDING, vier echte erneute Relevanzsperren (Horseware, Ponys, Krämer, Shetlandponys); keine Transferfehler. **Nicht** als 87er-Endstand ausgeben.
+
+**Gemeinsame Code-Ursache:** Der bereits vorhandene MINI-JA-Entscheid wurde in der Repository-Fachverarbeitung nur gelesen, wenn ein bestimmter TITEL-Nachweis vorhanden war. Genau diese falsche Abhängigkeit wurde am bestehenden Ort entfernt. Kein weiterer Fix-Überbau, keine separate Relevanzentscheidung. Titel, Kategorie, Artikeltyp, Bestands-/Dublettenprüfung behalten ihre bisherigen unabhängigen Besitzer. Quellbindung von JA bleibt Pflicht.
+
+**Prüfung:** Echte v17-Vergleichsreproduktion: bei fünf verschiedenen Titelzuständen nur **87/435** gültige JA-Übergaben, v18 **435/435**. 65/65 Nein-/Vielleicht-Testfälle bleiben negativ, manipulierte Quellfrage blockiert. **500 echte Repository-Aufrufe** im lokalen WordPress-Mock; zuvor 898 Positiv-/Negativtests weiter PASS; 83 PHP-Dateien ohne Syntaxfehler. Die komplette WordPress-Redaktions-/Kategorieschicht wurde nicht real durchlaufen; deshalb **KEINE** Behauptung, alle 87 Themen seien produktionsbereit. K0/PSERC/LIVE unverändert.
+
+**NEXT ACTION:** Erst nach realer Installation v18 im WordPress-Test den `87/87 COMPLETE`-Stapelbericht mit dem bestehenden kleinen Download auswerten; keine 5.016er-Gesamtdiagnose nötig. Danach die 59 offenen Kategorie/Intent-Fragen und 12 zentralen Planungsprüfungen **als zusammenhängenden Redaktionsworkflow** lösen, ohne echte Dubletten frei zu geben. Zwei fachliche Schutzfälle weiterhin sperren. Keine weitere ZIP wegen Einzelfällen.
+
+**QA-Beleg:** `EVIDENCE/PSTE_05714418_KISS_RELEVANCE_INTEGRATION_20261107.md`. **Übergabe:** `HANDOFF_PSTE_MINI_WORKFLOW_20261107.md`. GitHub-Arbeitsbranch `fix/pste-mini-workflow-kiss-20261107`; PR gegen den bestehenden v17-Testbranch. Release nur nach WordPress-Echtlauf.
