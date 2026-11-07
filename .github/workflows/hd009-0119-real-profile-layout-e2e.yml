@@ -1,0 +1,26 @@
+name: HD009 0.1.19 - real WP Hobbyregister placements
+on:
+  push:
+    branches:
+      - hobbyroom/hd007-profile-ad-placement-20261107
+    paths:
+      - .github/workflows/hd009-0119-real-profile-layout-e2e.yml
+permissions:
+  contents: write
+jobs:
+  build-real-wp-dom:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild only the existing HD009 zip and check HD007 actual layouts
+        run: python3 protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/BUILD_0119_REGISTER_PLACEMENT.py
+      - name: Run real WordPress, MariaDB, HD003, HD007 and HD009 – desktop+mobile Chromium
+        run: bash protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/REAL_WORDPRESS_PROFILE_0119.sh
+      - name: Save only verified ZIP and proof to original HD009 affiliate office
+        run: |
+          git config user.name "hobby-affiliate-qa"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_0119_PROFILE_LAYOUT_REPORT.txt protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_0119_WP_REAL_BROWSER_PASS.txt
+          git commit -m "HD009 0.1.19: register ads after facts, inline after costs, after article on mobile – WP E2E PASS"
+          git push
