@@ -71,7 +71,10 @@ curl -fsSL --max-time 35 -o /tmp/hobby-real-wp/register-actual.html -w "PROFILE 
 python3 - <<'PY'
 from pathlib import Path
 s=Path('/tmp/hobby-real-wp/register-actual.html').read_text()
-for term in ['hdar-ci-register-side-airbrush-modellbau','hdar-ci-register-inline-airbrush-modellbau','hdr-profile-grid','Kosten und Ausrüstung']:
+for element in s.split('<link'):
+ if 'hdar-amazon-start' in element or 'ppar-frontend' in element:
+  print('E2E REGISTER STYLESHEET LINK',element[:450])
+for term in ['hdar-amazon-start.css','hdar-ci-register-side-airbrush-modellbau','hdar-ci-register-inline-airbrush-modellbau','hdr-profile-grid','Kosten und Ausrüstung']:
  print('E2E RAW HTML',term,'count',s.count(term))
 assert 'hdr-profile-grid' in s,'Actual HD007 page not present'
 PY
