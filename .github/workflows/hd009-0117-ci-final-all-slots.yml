@@ -1,0 +1,25 @@
+name: HD009 single final all-slot CI QA
+on:
+  push:
+    branches:
+      - hobbyroom/hd009-banner-ci-audit-20261107
+    paths:
+      - .github/workflows/hd009-0117-ci-final-all-slots.yml
+permissions:
+  contents: write
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Finish existing HD009 banner slots for Glossar mobile and posts
+        run: python3 protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/FINISH_0117_SQUARE_MOBILE_POST.py
+      - name: Check one ZIP, original HD007 mapping, 24 PHP and Amazon tracking
+        run: python3 protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/TEST_0117_CI_FULL.py
+      - name: Save tested single complete ZIP
+        run: |
+          git config user.name "hobby-affiliate-qa"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_0117_CI_SINGLE_RELEASE_REPORT.txt
+          git commit -m "HD009 0.1.17: complete wide/square CI, register, Glossar mobile and posts"
+          git push
