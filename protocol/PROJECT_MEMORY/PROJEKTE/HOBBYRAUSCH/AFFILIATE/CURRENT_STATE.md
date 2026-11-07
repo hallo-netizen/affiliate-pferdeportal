@@ -1,13 +1,15 @@
 # HOBBY DEPOT – AFFILIATE – EINZIGE AKTUELLE FACH-AUTORITÄT
 
+**Neu zur Design- und Produktstrategie 0.1.20:** Siehe `BANNER_ZIELREGELN_20261107.md`. Banner-Design ist in der neuen aktuellen Voll-ZIP, DataForSEO-Recherche weiterhin manuell; kein automatischer Produktlinkwechsel. Sonstige ältere Prüfabschnitte unten beschreiben den 0.1.18/0.1.19-Vorläufer.
+
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-**Stand 07.11.2026 · Affiliate-Zentrale HD009 0.1.19-dev.**
+**Stand 07.11.2026 · Affiliate-Zentrale HD009 0.1.20-dev.**
 
 ## Einziger aktueller Download
 
 - `../PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip`
-- **1.066.241 Bytes · SHA-256 `53f0feb7bf5e97032f840fd5e1fe2ddee80f24b3440202e0c136cf38a67e6579`**.
+- **1.066.589 Bytes · SHA-256 `cd6cb75f3ef0f393f94f3f93b974f3663ffa1f449c579886ae9520bc3d920cbb`**.
 - WordPress-Originalordner `affiliate-portal-router/` bleibt erhalten. **Keine parallele Plugininstallation.**
 - Details und Nachweise im `../PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/MANIFEST.md`.
 
@@ -18,12 +20,12 @@ Die HD007-Hobbyregister-Inhalte und das HD003-Design bleiben unverändert. Nur d
 - **Desktop:** `Auf einen Blick` → quadratischer Amazon-Partnerbanner → `Hobbygruppe` → übrige Seitenleistenblöcke.
 - **Zusätzlich im Haupttext:** ein responsiver Querbanner **unmittelbar nach `Kosten und Ausrüstung`**.
 - **Mobil:** zuerst der Hauptartikel (mit einer Inlineanzeige nach `Kosten und Ausrüstung`), **anschließend** die quadratische Seitenleistenanzeige **als erster Block vor der Hobbygruppe**. Nicht direkt ganz oben.
-- Die bereits in 0.1.18 genehmigte **Variante 4** bleibt visuell unverändert.
+- **In 0.1.20 optisch verfeinert:** wärmerer Verlauf, 2px-Rundungen, kleinerer Amazon-Button, Foto dezent zurückgenommen.
 - Derselbe native Pferdeatelier-/Hobby-Partner-, Kategorie- und Werbemittelweg bleibt zuständig. Keine zusätzliche Quelle, neuer Import oder neues Plugin.
 
 **Nachweis:** Original-Plugins HD003+HD007+HD009 in realem WordPress mit MariaDB und Browser getestet. Öffentliche Test-Registerseite HTTP 200, Desktop- und Mobil-Anzeigenordnung sowie vollständige Gestaltung, eine Sidebar- und eine Inline-Anzeige pro Profil **PASS**. Einzelwerte und Testbericht in der HD009-`EVIDENCE`.
 
-**Grenze:** Das WordPress-Testsystem ist isoliert; 0.1.19 ist noch nicht auf der echten Hobby-Depot-Webseite installiert oder abgenommen.
+**Grenze:** Die 0.1.19-Positionen hat der Betreiber live bestätigt; die neue 0.1.20-Gestaltung ist noch nicht live geprüft.
 
 ## Verbindlicher Amazon-Eigenbanner nach Auswahl Variante 4
 
