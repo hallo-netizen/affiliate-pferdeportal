@@ -1,4 +1,4 @@
-name: HD009 inspect live banner HTML parents before CSS changes
+name: HD009 inspect actual live theme CSS sizes and parent labels
 on:
   push:
     branches:
