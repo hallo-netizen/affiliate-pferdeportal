@@ -1,5 +1,9 @@
 # HOBBY DEPOT – PLUGINBÜRO – AKTUELLER BESTAND
 
+**Aktueller Downloadstand 07.11.2026: HD009 Affiliate-Zentrale 0.1.22 (`HOBBY_DEPOT_AFFILIATE_HD009_0.1.22.zip`) und HD007 Hobbyregister 1.2.20 (`HOBBY_DEPOT_HOBBYREGISTER_HD007_1.2.20.zip`).** Beide vollwertigen Installations-ZIPs liegen zusätzlich byteidentisch als jeweilige `CURRENT.zip` im zugehörigen Büro. 0.1.21 und 1.2.18 sowie alle weiteren früheren Versionen in älteren Abschnitten sind **historisch**. PHP/ZIP-Prüfung bestanden, echte WordPress-Live-Versionen nicht authentifiziert ausgelesen.
+
+
+
 **Aktuelle Hauptstände am 07.11.2026 (einzige CURRENT-ZIPs):** HD009 Affiliate-Zentrale **0.1.21-dev** (1.067.588 Bytes, SHA-256 `f6dd1cb301dbe661b63a9dd6b7890d0363c3317f025ee8617a94348b6001a002`) und HD007 Hobbyregister Core **1.2.18** (14.834.693 Bytes, SHA-256 `1908ff82d348993bb5012fad9357e67a4580170fa40d9710fc03084f26d64935`). Beide vollständig im isolierten Plugin-Büro abgelegt. HD009: neue Hero-Verläufe für Quadrat/Quer, dynamische Titellänge. HD007: kurze mobile Startseiten-Hero-Beschreibung. Beide technisch und im isolierten Browser geprüft. **Liveinstallation beider neuen Versionen offen.**
 
 **Historische Erläuterungen darunter (0.1.20 / 1.2.17 und älter) sind nicht mehr die Download-Wahrheit.**
