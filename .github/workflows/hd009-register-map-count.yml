@@ -1,0 +1,39 @@
+name: Register topic fallback mapping audit
+on:
+  push:
+    branches: ['hobbyroom/hd009-generic-image-concept-audit-20261107']
+    paths: ['.github/workflows/hd009-register-map-count.yml']
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compute genuine register world coverage and existing hero photo fallback
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import json,collections,re
+          root=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          with ZipFile(root/'HD-007-HOBBYREGISTER-CORE'/'CURRENT.zip') as z:
+            d=json.loads(z.read('hd-hobbyregister-core/data/hobby-register.json'))
+            records=d.get('hobbies') or d.get('records') or d.get('items') or [v for v in d.values() if isinstance(v,dict) and 'canonical_name' in v]
+            if not isinstance(records,list): records=list(records.values())
+            print('TOTAL',len(records))
+            world=collections.Counter((r.get('source_identity') or {}).get('natural_world') or 'NONE' for r in records)
+            print('WORLD_COUNTS',world)
+            unknown=[(r.get('canonical_name'),r.get('registry_id')) for r in records if not (r.get('source_identity') or {}).get('natural_world')]
+            print('UNKNOWN_EXAMPLES',unknown[:32])
+            match=[r for r in records if r.get('canonical_name','').lower() in ('münzen','alte kameras reparieren','alabasterschnitzen')]
+            for r in match:
+              print('REGISTER',r['canonical_name'],'source_identity',r.get('source_identity'),'result_profile',str(r.get('result_profile'))[:900])
+            for name in z.namelist():
+              if name.endswith('.php'):
+                src=z.read(name).decode('utf8','replace')
+                if 'function image_entry(' in src or 'function profile_image' in src or "hdg_term" in src:
+                  print('IMG_FILE',name,'image_entry',src.count('function image_entry('),'profile_photo',src.count('profile_image'),'hdg_term',src.count('hdg_term'))
+                  for pat in ['function image_entry(', 'function hero(', 'function profile_image(']:
+                    k=src.find(pat)
+                    if k>=0:print('IMG_FUNC',pat,src[k:k+2600])
+          PY
