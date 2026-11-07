@@ -1,0 +1,45 @@
+name: PSTE temporary complete ONE owner and context no-duplicate QA
+on:
+  push:
+    branches: [fix/pste-kisten-einmalige-pruefung-20261107]
+permissions: {contents: read}
+jobs:
+  existing-plugin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test original PSTE and exactly one semantic worker with context/PSERC isolated
+        run: |
+          set -euo pipefail
+          D=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/QA_ONLY
+          python3 "$D/apply_existing_mini_kisten_import.py" /tmp/pste-final-mini
+          python3 "$D/apply_wp_single_owner_gate.py" /tmp/pste-final-mini/PSTE-KISTEN-GESAMT-QA-NICHT-INSTALLIEREN.zip /tmp/pste-final-qa.zip
+          unzip -q /tmp/pste-final-qa.zip -d /tmp/pste-final
+          I="/tmp/pste-final/Portal SEO Topic Engine/includes"
+          php "$D/test_existing_context_no_second_seo.php" "$I/class-pste-context-evaluator.php"
+          php "$D/test_complete_parkhaus.php" "$I/class-pste-mini-workflow.php"
+          php "$D/test_atomic_existing_mini_option.php" "$I/class-pste-mini-workflow.php"
+          php "$D/test_existing_mini_import.php" "$I/class-pste-mini-workflow.php"
+          php "$D/test_existing_pserc_plan.php" "$I/class-pste-mini-workflow.php"
+          php "$D/test_pste_kisten_transfer_v1.php"
+          php "$D/test_100_keyword_end_to_end_simulation.php" "$I/class-pste-mini-workflow.php" "$I/class-pste-planning-readiness-gate.php" "$D/MINI_100_ORIGINAL_EXTERNAL_TITLES_20261106.json" > /tmp/100.txt
+          grep -E 'SUMMARY|fabricated|ZERO' /tmp/100.txt | tail -10
+          for mode in good stale onebad; do
+            php "$D/test_existing_forward_full_chain.php" "$I/class-pste-mini-workflow.php" "$mode" > /tmp/forward-$mode.txt
+          done
+          python3 - <<'PY'
+          import json
+          def get(m):
+            s=open('/tmp/forward-'+m+'.txt').read()
+            i=s.index('FORWARD_QA_RESULT ')
+            return json.loads(s[i+18:].splitlines()[0])
+          a,b,c=[get(x) for x in ['good','stale','onebad']]
+          assert a['save_keys']==['topic-good'] and a['forwarded']==1
+          assert b['save_keys']==[] and b['forwarded']==0
+          assert c['save_keys']==['topic-good'] and 'topic-bad' in c['clarification']
+          print('PASS existing planning transfer good/stale/isolated error')
+          PY
+          find "/tmp/pste-final/Portal SEO Topic Engine" -name '*.php' -print0 | xargs -0 -n1 php -l >/tmp/checks
+          test "$(wc -l </tmp/checks)" = 83
+          echo "PASS EXACT 83 PHP SYNTAX TESTS; NO K0 / PSERC / ORIGINAL ZIP MODIFIED"
+          echo "QA_ONLY_NOT_LIVE_OR_STAGING_RELEASE"
