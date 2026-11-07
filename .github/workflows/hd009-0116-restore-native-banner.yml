@@ -1,0 +1,103 @@
+name: HD009 restore native banner contracts 0116
+on:
+  push:
+    branches:
+      - hobbyroom/hd009-0116-restore-native-banner-20261107
+    paths:
+      - .github/workflows/hd009-0116-restore-native-banner.yml
+permissions:
+  contents: write
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Restore native banner slot selection, validate full WordPress ZIP
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile, re, hashlib, subprocess, tempfile
+          path=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          main='affiliate-portal-router/hobby-depot-affiliate-router.php'
+          readme='affiliate-portal-router/readme.txt'
+          wrong_asset='affiliate-portal-router/assets/hdar-approved-own-ad-original-2170x725.png'
+          with zipfile.ZipFile(path) as z:
+              assert z.testzip() is None, 'Source ZIP damaged'
+              entries={i.filename:z.read(i.filename) for i in z.infolist() if not i.is_dir()}
+          assert main in entries and readme in entries and wrong_asset in entries
+          old=entries[main].decode('utf-8')
+          assert old.count('Version: 0.1.15-dev')==1
+          s=old.replace('Version: 0.1.15-dev','Version: 0.1.16-dev',1)
+          paused='''            if ($launch && $selection && !$this->hdar_launch_public_campaign_allowed($selection['campaign'] ?? null)) {
+                // Selected campaign belongs to an inactive partner; NEVER display it.
+                return $this->hdar_approved_rental_banner_fallback($slot_type);
+            }'''
+          replacement='''            if ($launch && $selection && !$this->hdar_launch_public_campaign_allowed($selection['campaign'] ?? null)) {
+                // Same native campaign gate as horse: paused partner stays hidden.
+                return '';
+            }'''
+          assert s.count(paused)==1,'Paused partner branch drift'
+          s=s.replace(paused,replacement,1)
+          own_block='''        if ($this->overview_wide_banner_slot($slot_type)) {
+            // Existing real-banner selection already ran; fill only an empty wide spot.
+            $approved_own_ad = $this->hdar_approved_rental_banner_fallback($slot_type);
+            if ($approved_own_ad !== '') { return $approved_own_ad; }
+        }
+'''
+          assert s.count(own_block)==1,'Own rental fallback branch drift'
+          s=s.replace(own_block,'',1)
+          helper='    private function hdar_approved_rental_banner_fallback($slot_type) {'
+          assert s.count(helper)==1,'Helper missing'
+          i=s.index(helper)
+          begin=s.rfind('    /**',0,i)
+          end=s.index('    private function render_placeholder_slot($slot_type) {',i)
+          assert begin>0 and end>i and end-begin<6500
+          s=s[:begin]+s[end:]
+          assert 'hdar_approved_rental_banner_fallback' not in s
+          assert 'overview_wide_banner_campaign_eligible' in s
+          assert "'ratio_min'=>5.00,'ratio_max'=>12.00" in s
+          assert 'category_large_banner_rule' in s
+          assert 'glossary_single_desktop_banner' in s
+          assert 'glossary_single_mobile_banner' in s
+          assert 'hdar_launch_public_campaign_allowed' in s
+          entries[main]=s.encode('utf-8')
+          a=entries[readme].decode('utf-8')
+          assert a.count('Stable tag: 0.1.15-dev')==1
+          a=a.replace('Stable tag: 0.1.15-dev','Stable tag: 0.1.16-dev',1)
+          a+='\n== 0.1.16-dev ==\nKISS: falschen Eigenwerbungs-Fallback aus Affiliate-Bannerplaetzen entfernt. Die Originalgrafik fuer freie Mietwerbung bleibt ausschliesslich beim bestehenden HD003-Designplugin. Der bestehende Pferdeatelier-/Hobby-Themenabgleich, Kategorie-/Elternpfad, Slot-Formatvertrag und Produktplaetze bleiben unveraendert. Auf leerem Partner-Werbeplatz keine fremde Mietwerbung ausgeben.\n'
+          entries[readme]=a.encode('utf-8')
+          del entries[wrong_asset]
+          unchanged=[n for n in entries if n not in (main,readme)]
+          with tempfile.TemporaryDirectory() as tmp:
+              d=Path(tmp)
+              for name,content in entries.items():
+                  if name.endswith('.php'):
+                      f=d/name
+                      f.parent.mkdir(parents=True,exist_ok=True)
+                      f.write_bytes(content)
+                      check=subprocess.run(['php','-l',str(f)],capture_output=True,text=True)
+                      assert check.returncode==0,(name,check.stdout,check.stderr)
+          tmp_path=path.with_suffix('.new.zip')
+          with zipfile.ZipFile(tmp_path,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6) as z:
+              for name,content in sorted(entries.items()):z.writestr(name,content)
+          with zipfile.ZipFile(tmp_path) as z:
+              assert z.testzip() is None
+              assert set(z.namelist())==set(entries)
+              assert z.read(main)==entries[main]
+              assert wrong_asset not in z.namelist()
+          tmp_path.replace(path)
+          sha=hashlib.sha256(path.read_bytes()).hexdigest()
+          evidence=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_0116_SLOT_FIX_PASS.txt')
+          evidence.parent.mkdir(parents=True,exist_ok=True)
+          evidence.write_text('Version: 0.1.16-dev\nZIP bytes: '+str(path.stat().st_size)+'\nZIP SHA-256: '+sha+'\nPHP syntax: '+str(len([n for n in entries if n.endswith('.php')]))+' / '+str(len([n for n in entries if n.endswith('.php')]))+' PASS\nZIP CRC: PASS\nRegression: native campaign eligibility, ratio 5..12, category/parent path and glossary slots unchanged\nRemoved: wrong HD003 rental image fallback from affiliate product banner slots\nKept: full original HD003 rental banner in design plugin, unchanged\nWordPress frontend live: NOT TESTED\n',encoding='utf-8')
+          print('RELEASE CANDIDATE:',str(path),str(path.stat().st_size),sha,'FILES:',len(entries),'UNCHANGED:',len(unchanged))
+          PY
+      - name: Commit tested candidate into existing office
+        run: |
+          git config user.name "hobby-affiliate-qa"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_0116_SLOT_FIX_PASS.txt
+          git commit -m "HD009 0.1.16: restore original format matching; avoid wrong rental-banner fallback"
+          git push
