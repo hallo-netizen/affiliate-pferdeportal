@@ -1,6 +1,6 @@
 Version: 0.1.17-dev
-ZIP bytes: 1175512
-ZIP SHA-256: ffe45301421d6ca2345ade292b472e002d5519ca498c7feb7465eef332999a17
+ZIP bytes: 1175781
+ZIP SHA-256: be07f3c9737a4bf811f0491f884404c265e3c9a43d73046039d19086a70c0b34
 PHP syntax: 24/24 PASS
 ZIP CRC: PASS
 Three original HD003 assets copied unchanged (exact logo, Malen, Modellbau)
@@ -9,3 +9,5 @@ New thematic Amazon discovery banner only for completely empty slots; precise to
 Wide responsive and square responsive CI; native HD007 register profile hookup; unchanged HD003 rental banners.
 PHP behavior tests run independently in follow-up workflow step.
 WordPress frontend live: NOT YET TESTED.
+
+HD007 readback: canonical_name and exact original image source/path used; known FAIL/OPEN image assignments gated out. Core registry plugin remains unchanged.
