@@ -1,0 +1,24 @@
+name: HD009 variant 4 final Chromium 76px slot regression QA
+on:
+  push:
+    branches:
+      - hobbyroom/hd009-0118-variant4-amazon-ci-20261107
+    paths:
+      - .github/workflows/hd009-v4-0118-visual-slot-qa.yml
+permissions:
+  contents: write
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m pip install --quiet Pillow
+      - name: Test actual CSS with fake prior 76px HD003 parent and four breakpoints
+        run: python3 protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/PREVIEW_0118_ACTUAL_SLOT.py
+      - name: Store actual browser screenshot evidence in plugin office
+        run: |
+          git config user.name "hobby-affiliate-qa"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/EVIDENCE/HD009_0118_VARIANT4_*.jpg
+          git commit -m "HD009 0.1.18 screenshot evidence: wide, square, sidebar, mobile CSS"
+          git push
