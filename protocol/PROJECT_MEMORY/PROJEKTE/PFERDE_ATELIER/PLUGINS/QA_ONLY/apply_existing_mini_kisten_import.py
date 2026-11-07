@@ -241,6 +241,51 @@ b="""echo '<input type="hidden" name="action" value="pste_mini_title_repair_impo
 assert patched.count(a)==1
 patched=patched.replace(a,b)
 
+
+# ONE technical source-freshness check before any plan writes. The stored external
+# answer is consumed, NEVER semantically reassessed in WordPress.
+needle="""            $pre=self::planHandoffPreflight($eligible,
+                static fn(string $key): ?array=>$current[$key]??null);"""
+replacement="""            $parkhaus=self::readParkhausForMini();
+            $ready=[];$technicalHeld=[];
+            foreach($eligible as $key=>$topic){
+                $receipt=self::singleOwnerSeoFor((string)$key,(string)($topic['raw_query']??''));
+                if(empty($parkhaus['complete'])||!hash_equals(
+                    (string)($parkhaus['sha256']??''),
+                    (string)($receipt['snapshot_sha256']??''))){
+                    $technicalHeld[]=['pool_key'=>(string)$key,
+                        'reason_code'=>'PSTE_MINI_PARKHAUS_CHANGED_SINCE_ONE_SEO_DECISION'];
+                    $state['clarification'][$key]=[
+                        'pool_key'=>(string)$key,'reason_code'=>'PSTE_MINI_PARKHAUS_CHANGED',
+                        'next_action'=>'SAME_EXTERNAL_SEO_OWNER_NEW_SNAPSHOT'];
+                    continue;
+                }
+                // Existing technical preflight only; failure of one topic
+                // never takes down the whole import batch.
+                try {
+                    $part=self::planHandoffPreflight([$key=>$topic],
+                        static fn(string $id): ?array=>$current[$id]??null);
+                    foreach($part['selected'] as $entry)$ready[]=$entry;
+                }catch(Throwable $e){
+                    $code=substr((string)$e->getMessage(),0,160);
+                    $technicalHeld[]=['pool_key'=>(string)$key,'reason_code'=>$code];
+                    $state['clarification'][$key]=[
+                        'pool_key'=>(string)$key,'reason_code'=>$code,
+                        'next_action'=>'RETRY_EXISTING_TECHNICAL_HANDOFF'];
+                }
+            }
+            $pre=['selected'=>$ready,'additional'=>0,'not_yes'=>0];
+            if(!$ready){
+                $state['last_plan_report']=['forwarded'=>0,'blocked'=>count($technicalHeld),
+                    'held'=>$technicalHeld,'additional'=>0,'not_yes'=>0,
+                    'scheduled'=>0,'recorded_utc'=>gmdate('c'),
+                    'production_approval'=>false];
+                self::storeState($state);
+                wp_safe_redirect(admin_url('admin.php?page=portal-seo-topic-engine-review&pste_mini_to_plan=0'));exit;
+            }"""
+assert patched.count(needle)==1
+patched=patched.replace(needle,replacement)
+
 (OUT/"class-pste-mini-workflow.php").write_text(patched,encoding="utf-8")
 (OUT/"PSTE_KISTEN_EIN_IMPORT_OWNER_QA.diff").write_text(
     ''.join(difflib.unified_diff(original.splitlines(True),patched.splitlines(True),
