@@ -1,0 +1,53 @@
+name: HAB004 isolated source audit
+on:
+  push:
+    branches:
+      - hab-004-existing-slot-repair-20261107
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read three current plugin archives without modification
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import hashlib,re
+          root=Path("protocol/PROJECT_MEMORY/PROJEKTE")
+          files={
+           "HAB":root/"EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip",
+           "HD":root/"HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip",
+           "DESIGN":root/"EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip"
+          }
+          for k,f in files.items():
+           assert f.exists(),str(f)
+           print("ZIP",k,f.stat().st_size,hashlib.sha256(f.read_bytes()).hexdigest(),flush=True)
+           with ZipFile(f) as z:
+            names=z.namelist()
+            print("PHP files",k, [n for n in names if n.endswith(".php")][:60],flush=True)
+            if k=="HAB":
+             suffixes=["class-ppar-hab-bewahr-bridge.php","trait-ppar-hb-amazon.php","affiliate-portal-router.php"]
+            elif k=="HD":
+             suffixes=["affiliate-portal-router.php","trait-ppar-hd-amazon.php","class-ppar-hobby-bridge.php"]
+            else:
+             suffixes=["detail-categories.php","area-design-prototype.php"]
+            for suffix in suffixes:
+             matches=[n for n in names if n.endswith("/"+suffix)]
+             if not matches:continue
+             n=matches[0]; content=z.read(n).decode("utf-8","replace").splitlines()
+             print("### SOURCE",k,n,len(content),flush=True)
+             patterns= ["function area(", "function area_products(", "function provide_leaf_category_affiliate_slot_html(", "function hb_amazon_area_product_fallback(", "function hb_amazon_product_family_markup(", "function render_affiliate_slot_for_context(", "function hbdp_area_product_markup(", "function hbdp_render_detail_category_page(", "function hbdp_area_product_", "hbdp_area_product_cards_html", "category_product_1", "function render_banner("]
+             anchors=[i for i,l in enumerate(content) if any(p in l for p in patterns)]
+             if not anchors:print("NO ANCHOR")
+             spans=[]
+             for a in anchors[:15]:
+              start=max(0,a-8);end=min(len(content),a+47)
+              if spans and start<=spans[-1][1]:spans[-1]=(spans[-1][0],max(end,spans[-1][1]))
+              else:spans.append((start,end))
+             for start,end in spans[:12]:
+              for i in range(start,end):print(f"{i+1:4d} {content[i]}")
+          
+          PY
