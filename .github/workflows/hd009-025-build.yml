@@ -1,0 +1,23 @@
+name: HD009 025 guard rebuild
+on:
+  push:
+    branches: ['hobbyroom/hd009-025-flatter-world-images-20261107']
+    paths:
+      - 'ops/hobby009_025/build.py'
+      - '.github/workflows/hd009-025-build.yml'
+permissions: {contents: write}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check exact old ZIP and build complete versioned package
+        run: python3 ops/hobby009_025/build.py
+      - name: Commit full ZIP and separate named download on stage
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/HOBBY_DEPOT_AFFILIATE_HD009_0.1.25.zip
+          git commit -m 'HD009 0.1.25: category world photographs and slim format; register hero photo fallback'
+          git push origin HEAD:hobbyroom/hd009-025-flatter-world-images-20261107
