@@ -1,0 +1,64 @@
+name: Hobby Depot HD003 1.50.804 tested master image frontend repair
+on:
+  push:
+    branches:
+      - hobbyroom/hd003-150803-frontend-masterfix-20261108
+    paths:
+      - .github/workflows/hobby-hd003-150804-build.yml
+      - scripts/hobby_hd003_150804_patch.py
+      - scripts/hobby_hd003_150804_test.php
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verify-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build ONLY from verified exact HD003 1.50.803
+        run: |
+          python3 scripts/hobby_hd003_150804_patch.py \
+            protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/HOBBY_DEPOT_DESIGN_HD003_1.50.803.zip \
+            HOBBY_DEPOT_DESIGN_HD003_1.50.804_KATEGORIE_BILDER_FRONTEND.zip
+      - name: PHP lint every source file and test real PHP rendering positive/negative
+        run: |
+          python3 - <<'PY'
+          import pathlib,zipfile
+          p=pathlib.Path('HOBBY_DEPOT_DESIGN_HD003_1.50.804_KATEGORIE_BILDER_FRONTEND.zip')
+          with zipfile.ZipFile(p) as z:
+            php=[n for n in z.namelist() if n.endswith('.php')]
+            assert len(php)==13,len(php)
+            for name in php:
+              path=pathlib.Path('/tmp/hd003804')/name
+              path.parent.mkdir(parents=True,exist_ok=True)
+              path.write_bytes(z.read(name))
+          print('13/13 full PHP source files unpacked')
+          PY
+          while IFS= read -r -d '' p; do php -l "$p" || exit 1; done < <(find /tmp/hd003804 -name '*.php' -print0)
+          php scripts/hobby_hd003_150804_test.php /tmp/hd003804/affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php
+          python3 - <<'PY'
+          import zipfile
+          a='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/HOBBY_DEPOT_DESIGN_HD003_1.50.803.zip'
+          b='HOBBY_DEPOT_DESIGN_HD003_1.50.804_KATEGORIE_BILDER_FRONTEND.zip'
+          with zipfile.ZipFile(a) as orig, zipfile.ZipFile(b) as new:
+            assert orig.namelist()==new.namelist() and len(new.namelist())==1290
+            delta={p for p in orig.namelist() if orig.read(p)!=new.read(p)}
+            assert delta=={'affiliate-portal-template-kit/pferde-template-kit.php','affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php'}, delta
+            print('PASS 1288/1290 files BYTE IDENTICAL to current 1.50.803, no assets or data changed')
+          PY
+      - name: Preserve tested full ZIP for download
+        uses: actions/upload-artifact@v4
+        with:
+          name: HOBBY_DEPOT_DESIGN_HD003_1.50.804_KATEGORIE_BILDER_FRONTEND
+          path: HOBBY_DEPOT_DESIGN_HD003_1.50.804_KATEGORIE_BILDER_FRONTEND.zip
+          if-no-files-found: error
+          retention-days: 7
+      - name: Release tested ZIP without modifying WordPress or official Current
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create hobby-depot-hd003-1.50.804-category-frontend \
+            HOBBY_DEPOT_DESIGN_HD003_1.50.804_KATEGORIE_BILDER_FRONTEND.zip \
+            --repo "${{ github.repository }}" --target "${{ github.sha }}" \
+            --title "Hobby Depot Design 1.50.804 - Native WordPress-Kategoriebilder in Hero und Kacheln" \
+            --notes "Aus exakt dem aktuellen 1.50.803 erstellt. PHP 13/13, positive und negative Anzeige-/Fallback-Tests. 1288 von 1290 ZIP-Dateien byteidentisch. Nur die Kachelausgabe und die eigene Kategorie-Hero-Ausgabe ergänzt, Originalbildzuordnungen, Assets, Texte, Affiliate und alle weiteren Plugins unverändert. WordPress Live-Abnahme offen."
