@@ -1,0 +1,43 @@
+name: HD009 0.1.31 Hab-pattern DataForSEO worker build and no-cost regression
+on:
+  push:
+    branches: [hobbyroom/hd009-dfs-hab-worker-20261108]
+    paths:
+      - ops/hobby_dfs_auto_031/build.py
+      - ops/hobby_dfs_auto_031/test.py
+      - .github/workflows/hd009-dfs-auto-031-build.yml
+permissions: {contents: write}
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build SHA-verified original HD009 0.1.29 with version 0.1.31 worker
+        run: python3 ops/hobby_dfs_auto_031/build.py
+      - name: Execute original PHP class with real 862 record Hobby JSON and fake DataForSEO HTTP
+        run: python3 ops/hobby_dfs_auto_031/test.py
+      - name: Check no original providers, theme CSS, or data files changed
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE')
+          with ZipFile(p/'HOBBY_DEPOT_AFFILIATE_HD009_0.1.29.zip') as a, ZipFile(p/'CURRENT.zip') as b:
+            assert len(a.namelist())==len(b.namelist())==41
+            modified=[n for n in a.namelist() if a.read(n)!=b.read(n)]
+            assert set(modified)=={'affiliate-portal-router/hobby-depot-affiliate-router.php','affiliate-portal-router/includes/class-hdar-amazon-start.php'},modified
+            assert a.read('affiliate-portal-router/assets/hdar-amazon-start.css')==b.read('affiliate-portal-router/assets/hdar-amazon-start.css')
+            print('ONLY_EXACT_TWO_HD009_PHP_FILES_CHANGED_PASS',modified)
+          PY
+      - name: Save versioned plugin and byte-identical official-current staging ZIP
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/HOBBY_DEPOT_AFFILIATE_HD009_0.1.31.zip
+          if ! git diff --cached --quiet; then
+            git commit -m 'HD009 0.1.31 staged: opt-in cost-capped DataForSEO Amazon task worker'
+            git push origin HEAD:hobbyroom/hd009-dfs-hab-worker-20261108
+          else
+            echo 'HD009_031_STAGING_VERIFIED'
+          fi
