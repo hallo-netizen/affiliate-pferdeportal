@@ -1,4 +1,4 @@
-name: TEMP verify original PSERC WordPress plugin display name
+name: TEMP inspect stored original PSERC plugin version
 on:
   push:
     branches:
@@ -8,30 +8,24 @@ on:
 permissions:
   contents: read
 jobs:
-  read-original-zip:
+  inspect:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Print the actual Plugin Name header from the stored original PSERC package
+      - name: Inspect stored archive exact WordPress header and runtime
         shell: bash
         run: |
           set -euo pipefail
           python3 - <<'PY'
           import zipfile,re
-          z='control/startmaster0107/runtime_packages/PSERC-FIX.zip'
-          with zipfile.ZipFile(z) as f:
-            assert f.testzip() is None
-            for p in f.namelist():
-              if p.lower().endswith('.php') and p.count('/')<4:
-                s=f.read(p).decode('utf-8','replace')[:8000]
-                m=re.search(r'(?im)^\s*\*?\s*Plugin Name:\s*(.+)\s*$',s)
-                if m:
-                  print('PSERC_ORIGINAL_ARCHIVE_PLUGIN_HEADER_FILE:',p)
-                  print('PSERC_ORIGINAL_WORDPRESS_PLUGIN_NAME:',m.group(1).strip())
-                  for field in ('Version','Description','Text Domain'):
-                    v=re.search(r'(?im)^\s*\*?\s*'+field+r':\s*(.+)\s*$',s)
-                    if v:print('PSERC_ORIGINAL_'+field.replace(' ','_').upper()+':',v.group(1).strip())
-                  break
-            else:
-              raise SystemExit('NO_PLUGIN_HEADER_IN_ARCHIVED_PSERC_ZIP')
+          p='control/startmaster0107/runtime_packages/PSERC-FIX.zip'
+          with zipfile.ZipFile(p) as z:
+            print('ARCHIVE_ENTRY_COUNT',len(z.namelist()))
+            matches=[k for k in z.namelist() if k.endswith('/portal-seo-editorial-plan-compiler.php')]
+            print('WORDPRESS_MAIN_FILES',matches)
+            for k in matches:
+              v=z.read(k).decode('utf-8','replace')
+              print('MAIN_FIRST_30_LINES',repr(v[:1600]))
+              for pat in ('PSERC_VERSION','Plugin Name','Version:'):
+                print(pat,repr(re.findall(r'.{0,60}'+re.escape(pat)+r'.{0,110}',v,re.I)[:4]))
           PY
