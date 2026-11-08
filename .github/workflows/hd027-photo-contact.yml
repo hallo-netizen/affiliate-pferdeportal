@@ -1,0 +1,63 @@
+name: HD027 exact image previews and source headers
+on:
+  push:
+    branches: ['hobbyroom/hd009-027-category-photo-postcards-20261108']
+    paths: ['.github/workflows/hd027-photo-contact.yml']
+permissions: {contents: write}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pillow
+        run: python3 -m pip install --quiet --break-system-packages pillow
+      - name: Audit real image files and source plugin versions
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          from PIL import Image,ImageDraw
+          from io import BytesIO
+          from hashlib import sha256
+          import re
+          base=Path("protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS")
+          picked=[
+            ("Sportdrachen Hobby","affiliate-portal-template-kit/assets/hobby-depot-v150780/hobby-masters/sportdrachen.webp"),
+            ("Wind und Drachen","affiliate-portal-template-kit/assets/hobby-depot-v150617/hero-masters-v150684/wind-drachen.webp"),
+            ("Sportdrachen Testbild","affiliate-portal-template-kit/assets/hobby-depot-v150787/lenkdrachen-testfoto.jpg"),
+            ("Kitebuggy Hobby","affiliate-portal-template-kit/assets/hobby-depot-v150780/hobby-masters/kite-buggy.webp"),
+            ("Welt Bewegen","affiliate-portal-template-kit/assets/hobby-depot-v150617/start-world-v150691/bewegen.webp"),
+            ("Lenkdrachen Unterthema","affiliate-portal-template-kit/assets/hobby-depot-v150617/subcategories/bewegen/wind-drachen-v150623.webp"),
+          ]
+          p=base/"HD-003-DESIGN-TEMPLATE-KIT"/"CURRENT.zip"
+          sheet=Image.new("RGB",(1050,660),"#fff")
+          d=ImageDraw.Draw(sheet)
+          with ZipFile(p) as z:
+            print("HD003_SHA",sha256(p.read_bytes()).hexdigest(),"entries",len(z.namelist()))
+            for i,(name,file) in enumerate(picked):
+              assert file in z.namelist(),file
+              raw=z.read(file)
+              img=Image.open(BytesIO(raw));img.thumbnail((500,285))
+              x=15+(i%2)*522;y=15+(i//2)*220
+              img.thumbnail((495,190))
+              sheet.paste(img,(x,y+20))
+              d.text((x,y),name,fill="black")
+              print("PHOTO",name,file,len(raw),Image.open(BytesIO(raw)).size)
+            for f in z.namelist():
+              if f.endswith(".php") and f.count("/")==1:
+                s=z.read(f).decode("utf8","replace")
+                print("HD003_VERSION_FILE",f,s[:600])
+            for n in z.namelist():
+              if n.endswith('leaf-category-map-v150750.json'):print("LEAF_MAP_PATH",n)
+            s=z.read("affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php").decode()
+            for needle in ["private static function render_leaf_category_posts_v150750(","private static function render_post_previews(","private static function render_category_level_post_previews_v150687("]:
+              print("SOURCE_TOKEN",needle,s.count(needle))
+          out=Path("ops/hobby027/photo-contact-sheet.jpg");out.parent.mkdir(parents=True,exist_ok=True)
+          sheet.save(out,quality=88,optimize=True)
+          print("CONTACT_SHEET",out,out.stat().st_size)
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add ops/hobby027/photo-contact-sheet.jpg
+          git commit -m 'Audit only: kite-specific asset candidates and HD003 version'
+          git push origin HEAD:hobbyroom/hd009-027-category-photo-postcards-20261108
