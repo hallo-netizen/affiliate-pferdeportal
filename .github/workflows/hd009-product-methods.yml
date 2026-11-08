@@ -1,0 +1,52 @@
+name: Hobby Depot product cards exact methods and comparison
+on:
+  push:
+    branches: [hobbyroom/hd009-amazon-dfs-products-audit-20261108]
+    paths: [.github/workflows/hd009-product-methods.yml]
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read exact Amazon settings, search parsing, store, and product hooks from both plugins
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import re
+          b=Path('protocol/PROJECT_MEMORY/PROJEKTE')
+          paths={
+            'HOBBY':(b/'HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip',{
+              'affiliate-portal-router/includes/class-hdar-amazon-start.php':['function search(','function candidates(','function render(','function products(','function save(','function options(','function select(','function api_','function query_','function init(','function menu(','function settings('],
+              'affiliate-portal-router/includes/class-hdar-hobby-depot-source.php':['function ','function provide_','function get_'],
+              'affiliate-portal-router/includes/trait-ppar-provider-registry.php':['ppar_amazon_search_v1','function provider_products','function amazon_'],
+              'affiliate-portal-router/hobby-depot-affiliate-router.php':['function render_affiliate_slot_for_context','function provide_leaf_category_affiliate_slot_html','function provide_leaf_page_affiliate_slot_html','function render_banner(']
+            }),
+            'HAB':(b/'EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip',{
+              'affiliate-portal-router/includes/trait-ppar-hb-amazon.php':['function hb_amazon_','function amazon_'],
+              'affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php':['function ','function area(']
+            })
+          }
+          for brand,(path,desired) in paths.items():
+            with ZipFile(path) as z:
+              for file,needles in desired.items():
+                text=z.read(file).decode()
+                names=[(m.group(1),m.start()) for m in re.finditer(r'(?:public|protected|private)?\s*(?:static\s+)?function\s+([a-zA-Z0-9_]+)\s*\(',text)]
+                print('FILE',brand,file,'length',len(text),'methods',names[:110])
+                if brand=='HOBBY' and file.endswith('class-hdar-amazon-start.php'):
+                  print('COMPLETE_HOBBY_AMAZON_START_BEGIN')
+                  for no,line in enumerate(text.splitlines(),1):
+                    print('HOBBY_AMAZON_SOURCE',no,line[:220])
+                  print('COMPLETE_HOBBY_AMAZON_START_END')
+                else:
+                  for needle in needles:
+                    if needle.startswith('function '):
+                      matching=[(n,pos) for n,pos in names if n.startswith(needle[len('function '):].replace('(','').strip())]
+                      for name,pos in matching[:8]:
+                        body=text[pos:pos+(5400 if brand=='HAB' else 4000)]
+                        print('FUNCTION',brand,file,name,re.sub(r'\s+',' ',body)[:5100])
+                    else:
+                      for m in list(re.finditer(re.escape(needle),text))[:3]:
+                        print('TERM',brand,file,needle,re.sub(r'\s+',' ',text[max(0,m.start()-200):m.start()+850])[:1020])
+          PY
