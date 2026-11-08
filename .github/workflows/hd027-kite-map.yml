@@ -1,0 +1,41 @@
+name: HD027 real kite photo and category mapping
+on:
+  push:
+    branches: ['hobbyroom/hd009-027-category-photo-postcards-20261108']
+    paths: ['.github/workflows/hd027-kite-map.yml']
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect exact existing category map and files for sport kites
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import json,re
+          base=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          with ZipFile(base/'HD-003-DESIGN-TEMPLATE-KIT'/'CURRENT.zip') as z:
+            names=z.namelist()
+            print('SPORT_ASSETS',[(n,z.getinfo(n).file_size) for n in names if n.lower().endswith(('.webp','.jpg','.jpeg','.png')) and any(k in n.lower() for k in ['drachen','wind','kite','outdoor','segel','fliegen','lenk'])][:120])
+            f=next(n for n in names if n.endswith('leaf-category-map-v150750.json'))
+            leaf=json.loads(z.read(f))
+            for k,v in leaf.items():
+              if any(t in k.lower() for t in ['drachen','lenk','sportdrach','wind']):
+                print('LEAF_MAP',k,str(v)[:2100])
+            f=next(n for n in names if n.endswith('category-level-copy-v150687.json'))
+            levels=json.loads(z.read(f))
+            for k,v in levels.items():
+              if any(t in k.lower() for t in ['drachen','lenk','sportdrach','wind']):
+                print('CAT_MAP',k,str(v)[:1800])
+            s=z.read('affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php').decode()
+            for pat in ['function leaf_category_meta_v150750(', 'function render_leaf_category_posts_v150750(', 'function render_post_previews(', 'function render_category_level_post_previews_v150687(']:
+              i=s.find(pat)
+              if i>=0:print('METHOD_SRC',pat,s[i:i+4800].replace('\\n',' ')[:4800])
+          with ZipFile(base/'HD-009-AFFILIATE-ZENTRALE'/'CURRENT.zip') as z:
+            s=z.read('affiliate-portal-router/hobby-depot-affiliate-router.php').decode()
+            a=s.index('private function hdar_ci_banner_world(')
+            b=s.index('private function hdar_ci_amazon_banner(',a)
+            print('HD009_WORLD_FUNC',s[a:b])
+          PY
