@@ -1,0 +1,55 @@
+name: HD028 all-category tier and banner audit
+on:
+  push:
+    branches: [hobbyroom/hd009-028-universal-category-photo-20261108]
+    paths: [.github/workflows/hd028-audit.yml]
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Enumerate actual existing page tiers, theme image assets and source selectors
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import re,json,collections,urllib.request
+          base=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          with ZipFile(base/'HD-009-AFFILIATE-ZENTRALE'/'CURRENT.zip') as z:
+            src=z.read('affiliate-portal-router/hobby-depot-affiliate-router.php').decode()
+            print('AD_PLUGIN_VERSION',src[:440])
+            for mname in ['get_content_context','get_category_archive_context','hdar_ci_banner_world','hdar_ci_leaf_category_photo_meta','hdar_ci_amazon_banner']:
+              m=re.search(r'(?:(?:private|public|protected)\s+)?function\s+'+mname+r'\(',src)
+              if m:
+                end=src.find('\n    private function ',m.start()+50)
+                other=src.find('\n    public function ',m.start()+50)
+                if other>0 and (end<0 or other<end):end=other
+                if end<0:end=m.start()+13000
+                print('SOURCE_METHOD',mname,src[m.start():min(end,m.start()+14500)].replace('\n',' ')[:14500])
+          with ZipFile(base/'HD-003-DESIGN-TEMPLATE-KIT'/'CURRENT.zip') as z:
+            ns=z.namelist()
+            print('ASSET_GROUP_COUNTS',dict(collections.Counter(n.split('/')[-2] for n in ns if n.endswith('.webp') and 'assets/hobby-depot' in n).most_common(20)))
+            print('WORLD_SUBCATEGORY_IMAGE_EXAMPLES',[n for n in ns if 'subcategories/bewegen/' in n and n.endswith('.webp')][:80])
+            categories=json.loads(next(z.read(n) for n in ns if n.endswith('category-level-copy-v150687.json')))
+            print('CATEGORY_LEVEL_COUNT',len(categories))
+            print('CATEGORY_LEVEL_SAMPLE',[(k,{'world':v.get('world'),'parent':v.get('parent'),'title':v.get('title'),'type':v.get('object_type')}) for k,v in list(categories.items())[:22]])
+            for k in ['wind-drachen','sportdrachen','drachen-leinen','architekturmodellbau','technologie','technik','bewegen','wind','sportdrachen-drachen-leinen']:
+              v=categories.get(k)
+              print('CATEGORY_LEVEL_CHECK',k,{'world':v.get('world'),'parent':v.get('parent'),'title':v.get('title'),'type':v.get('object_type')} if v else None)
+            p=z.read('affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php').decode()
+            for token in ['world_slugs','render_category_level_body','render_hub2','render_leaf_category_body','asset_url']:
+              m=re.search(r'(?:private|public)\s+static\s+function\s+'+token+r'\(',p)
+              if m:print('HD003_METHOD',token,p[m.start():m.start()+2400].replace('\n',' ')[:2400])
+          def get(u):
+            try:
+              req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0 Chrome'})
+              with urllib.request.urlopen(req,timeout=15) as r:return r.status,r.read().decode('utf8','replace')
+            except Exception as e:return 0,str(e)
+          for u in ['https://www.hobby-depot.de/bewegen/','https://www.hobby-depot.de/bewegen/wind-drachen/','https://www.hobby-depot.de/bewegen/wind-drachen/sportdrachen/','https://www.hobby-depot.de/category/sportdrachen-drachen-leinen/','https://www.hobby-depot.de/technik/','https://www.hobby-depot.de/gestalten/miniaturen-szenen/architekturmodellbau/']:
+            status,s=get(u)
+            idx=s.find('hdar-ci-amazon-banner-category')
+            section=s[max(0,idx-1600):idx+1800] if idx>=0 else ''
+            image=re.findall(r'<img[^>]*?src=["\x27]([^"\x27]+)',section)
+            print('LIVE_PAGE',u,'status',status,'banner-count',s.count('hdar-ci-amazon-banner-category'),'image',image[:3], 'hero-media',re.findall(r'(?:hero|hd-bp-hero)[^>]{0,240}',s)[:2])
+          PY
