@@ -405,3 +405,140 @@ jobs:
           php cards.php | tee cards.log
           test "$(grep -c '^PASS ' cards.log)" = 13
           grep -F 'EBAY_BUSINESS_CARDS 13/13 PASS' cards.log
+
+      - name: Execute actual PHP last-mile refresh and checkpoint transitions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,shutil
+          root=Path('/tmp/ebay_final_public')
+          shutil.copytree('release/affiliate-zentrale/current/affiliate-portal-router',root/'affiliate-portal-router',dirs_exist_ok=True)
+          src=Path('release/affiliate-zentrale/evidence/EBAY_672308_TO_672311_BUSINESS_ONLY_GESAMTURSACHENPATCH_NUR_TEST.patch').read_text()
+          target='affiliate-portal-router/includes/trait-ppar-ebay-run.php'
+          section=src.split('diff --git a/'+target+' b/'+target,1)[1].split('\ndiff --git ',1)[0]
+          head,*hunks=re.split(r'(?=^@@ )',section,flags=re.M)
+          chosen=[h for h in hunks if h.startswith('@@ -1879,') or h.startswith('@@ -1916,')]
+          assert len(chosen)==2,'Must execute BOTH real final source refresh and checkpoint deferral hunks'
+          (root/'final.patch').write_text(head+''.join(chosen))
+          PY
+          cd /tmp/ebay_final_public
+          git apply --check final.patch
+          git apply final.patch
+          php -l affiliate-portal-router/includes/trait-ppar-ebay-run.php
+          cat > final.php <<'PHP'
+          <?php
+          error_reporting(E_ALL);
+          define('ABSPATH','/'); define('ARRAY_A','ARRAY_A'); define('MINUTE_IN_SECONDS',60);
+          $META=array(); $ROWS=array();
+          function absint($x){return abs((int)$x);}
+          function sanitize_key($x){return strtolower(preg_replace('/[^a-z0-9_-]/','',strtolower((string)$x)));}
+          function sanitize_text_field($x){return trim((string)$x);}
+          function wp_json_encode($x){return json_encode($x);}
+          function get_post_meta($id,$key,$single=true){global $META;return $META[$id][$key]??'';}
+          class WP_Error {public $code;function __construct($c){$this->code=$c;}}
+          function is_wp_error($x){return $x instanceof WP_Error;}
+          class FakeDB {
+              public $last_error='', $hash='', $last_sql='', $missing=false;
+              function prepare($sql,$hash){$this->hash=(string)$hash;$this->last_sql=$sql;return $sql;}
+              function get_row($sql,$mode){global $ROWS;return $this->missing?null:($ROWS[$this->hash]??null);}
+          }
+          require 'affiliate-portal-router/includes/trait-ppar-ebay-run.php';
+          class FinalRun {
+              use PPAR_Ebay_Run_Trait;
+              public $run=array(), $calls=0,$errors=array(),$responses=array(),$safe=true,$checkpoint=array('checkpoint_id'=>'good'),$commits=0,$complete_count=0,$coverage_override=null;
+              public function init($count=1){
+                  global $META,$ROWS,$wpdb;
+                  $META=array();$ROWS=array();$wpdb=new FakeDB();
+                  $ids=array();
+                  for($i=1;$i<=$count;$i++){
+                      $id=100+$i;$hash=str_repeat(dechex($i),64);
+                      $META[$id]=array('_ppar_creative_identity_hash'=>$hash);
+                      $ROWS[$hash]=array('id'=>$id,'seller_account_type'=>'BUSINESS','source_state'=>'available',
+                          'policy_state'=>'allowed','route_state'=>'ready','status'=>'active',
+                          'fresh_until'=>time()+3000,'item_end_at'=>0);
+                      $ids[]=$id;
+                  }
+                  $this->run=array('schema'=>'1.0','status'=>'running','run_uuid'=>'unit-run',
+                    'phase'=>'public_verify','config_snapshot'=>array('seller_routes'=>array('business'=>true,'private'=>true)),
+                    'checkpoint_candidate'=>array('business_campaign_ids'=>$ids,'private_listing_ids'=>array(999)),
+                    'progress_seq'=>0);
+                  return $ids;
+              }
+              public function set_due($ids){global $META,$ROWS;foreach($ids as $id){$ROWS[$META[$id]['_ppar_creative_identity_hash']]['fresh_until']=time()+1;}}
+              public function refresh(){return $this->ebay_run_public_source_refresh_tick($this->run,array('business_enabled'=>true));}
+              public function verify(){return $this->ebay_run_tick_public_verify($this->run,array('business_enabled'=>true,'private_enabled'=>false));}
+              private function ebay_run_load(){return $this->run;}
+              private function ebay_run_save($state){$this->run=$state;return $state;}
+              private function ebay_items_table(){return 'test_ebay_rows';}
+              private function ebay_access_token($settings){return 'fake-token';}
+              private function ebay_run_fail($code,$message,$detail=array()){$this->errors[]=$code;}
+              private function ebay_refresh_process_row(&$task,$row,$settings,$token){
+                  global $META,$ROWS;
+                  $this->calls++;$next=array_shift($this->responses)??'success';
+                  if($next==='timeout'){$task['summary']['errors'][]=array('code'=>'ebay_refresh_transport');$task['summary']['transient_errors']=1;return;}
+                  if($next==='hard'){$task['summary']['errors'][]=array('code'=>'ebay_auth_invalid');$task['summary']['technical_errors']=1;return;}
+                  if($next==='ended'){$next='success';$row['source_state']='ended';}
+                  foreach($ROWS as &$stored){
+                      if($stored['id']===$row['id']){$stored['source_state']=$row['source_state'];$stored['fresh_until']=time()+21600;break;}
+                  }
+                  unset($stored);
+                  $task['summary']['updated']=1;
+              }
+              private function ebay_public_checkpoint_load(){return $this->checkpoint;}
+              private function ebay_public_checkpoint_is_safe($v){return $this->safe;}
+              private function ebay_public_checkpoint_business_ids($v){return (array)($v['business_campaign_ids']??array());}
+              private function ebay_run_complete($manifest=array()){$this->complete_count++;$this->run['status']='completed';}
+              private function ebay_run_public_business_coverage($ids){
+                  global $META,$ROWS;
+                  if($this->coverage_override!==null)return $this->coverage_override;
+                  $ok=0;
+                  foreach($ids as $id){
+                      $row=$ROWS[$META[$id]['_ppar_creative_identity_hash']]??array();
+                      if(($row['source_state']??'')==='available'&&($row['policy_state']??'')==='allowed'
+                          &&($row['fresh_until']??0)>time())$ok++;
+                  }
+                  return array('required'=>count($ids),'covered'=>$ok,'missing'=>$ok===count($ids)?array():array('sattel'));
+              }
+              private function ebay_run_schedule_new_business_gap_revalidation($run,$coverage,$origin_phase){return false;}
+              private function ebay_run_business_safe_supply_gap_contract($run,$coverage){return array('status'=>'failed','error_code'=>'unverified_supply');}
+              private function ebay_run_private_public_revalidation_required($run,$settings){return false;}
+              private function ebay_run_verify_private_public($settings,$ids){return array('status'=>'disabled','invalid'=>array(),'public'=>0);}
+              private function ebay_run_commit_public_checkpoint($run,$business,$private){$this->commits++;$this->checkpoint=array('checkpoint_id'=>'new','business_campaign_ids'=>$run['checkpoint_candidate']['business_campaign_ids']);return $this->checkpoint;}
+          }
+          function ok($v,$s){if(!$v){fwrite(STDERR,"FAIL ".$s."\n");exit(1);}echo "PASS ".$s."\n";}
+          $x=new FinalRun();$ids=$x->init();ok($x->refresh()===true,'Fresh business source passes final gate');ok($x->calls===0,'Fresh source performs zero remote API calls');
+          $x=new FinalRun();$ids=$x->init();$x->set_due($ids);$x->responses=array('timeout','success');
+          ok($x->refresh()===false,'One transient timeout defers rather than aborts');
+          ok($x->calls===1&&$x->run['public_source_refresh']['cursor']===0,'Timeout preserves exact offer and cursor');
+          ok($x->refresh()===true,'Next canonical tick rechecks same offer and succeeds');
+          ok($x->calls===2&&$x->run['public_source_refresh']['complete']===1,'Bounded retry completes without duplicate worker');
+          $x=new FinalRun();$ids=$x->init();$x->set_due($ids);$x->responses=array('timeout','timeout','timeout');$x->checkpoint=array('checkpoint_id'=>'last-good','business_campaign_ids'=>array(101));
+          ok($x->refresh()===false&&$x->refresh()===false&&$x->refresh()===false,'Three temporary outages safely terminate final refresh without new checkpoint');
+          ok($x->complete_count===1&&$x->run['checkpoint_deferred']===1&&$x->commits===0,'Temporary outage retains previous safe public set');
+          ok($x->run['public_source_refresh_warning']===1,'Deferred outage is permanently marked warning, not green');
+          $x=new FinalRun();$ids=$x->init();$x->set_due($ids);$x->safe=false;$x->responses=array('timeout','timeout','timeout');$x->refresh();$x->refresh();$x->refresh();
+          ok($x->errors===array('public_source_refresh_provider_failed'),'No last good set means source outage is a hard failure');
+          $x=new FinalRun();$ids=$x->init();$x->set_due($ids);$x->responses=array('hard');$x->refresh();
+          ok($x->errors===array('public_source_refresh_provider_failed')&&$x->calls===1,'Permanent API error never disguised as transient');
+          $x=new FinalRun();$ids=$x->init(3);$x->set_due($ids);
+          ok($x->refresh()===false&&$x->calls===2,'At most two remote checks in one canonical worker tick');
+          ok($x->run['public_source_refresh']['cursor']===2,'Durable cursor advances only for checked rows');
+          ok($x->refresh()===true&&$x->calls===3,'Next tick completes remaining offer without restart');
+          $x=new FinalRun();$ids=$x->init();global $wpdb;$wpdb->missing=true;$x->refresh();
+          ok($x->errors===array('public_source_refresh_source_unavailable'),'Missing saved source blocks public gate');
+          $x=new FinalRun();$ids=$x->init();global $META;unset($META[101]);$x->refresh();
+          ok($x->errors===array('public_source_refresh_identity_missing'),'Missing source identity blocks public gate');
+          $x=new FinalRun();$ids=$x->init();$x->verify();
+          ok($x->commits===1&&$x->run['phase']==='checkpoint_cleanup_business','Good source+coverage commits BUSINESS checkpoint, never PRIVATE cleanup');
+          $x=new FinalRun();$ids=$x->init();$x->run['discovery_technical_supply_warning']=array('profile_count'=>1);$x->checkpoint=array('checkpoint_id'=>'good','business_campaign_ids'=>array(101,102));$x->verify();
+          ok($x->commits===0&&$x->complete_count===1&&$x->run['checkpoint_deferred_reason']==='unverified_search_would_withdraw_last_good','Unverified search never removes last known good business offer');
+          $x=new FinalRun();$ids=$x->init();$x->coverage_override=array('required'=>1,'covered'=>0,'missing'=>array('sattel'));$x->verify();
+          ok($x->commits===0&&$x->errors===array('unverified_supply'),'Unverified coverage cannot commit an empty business checkpoint');
+          echo "EBAY_FINAL_PUBLIC_FLOW 19/19 PASS ON REAL REFERENCE PHP; NO LIVE E2E\n";
+          PHP
+          php -l final.php
+          php final.php | tee final.log
+          test "$(grep -c '^PASS ' final.log)" = 19
+          grep -F 'EBAY_FINAL_PUBLIC_FLOW 19/19 PASS' final.log
