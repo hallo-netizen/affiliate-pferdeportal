@@ -1,0 +1,29 @@
+name: HD027 exact existing leaf/meta and card API
+on:
+  push:
+    branches: ['hobbyroom/hd009-027-category-photo-postcards-20261108']
+    paths: ['.github/workflows/hd027-meta-details.yml']
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read exact HD003 image and leaf meta helpers
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import re,hashlib
+          base=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          p=base/'HD-003-DESIGN-TEMPLATE-KIT'/'CURRENT.zip'
+          with ZipFile(p) as z:
+            a=z.read('affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php').decode()
+            for method in ['asset_url','leaf_category_meta_v150750','render_leaf_category_posts_v150750','render_post_previews','render_category_level_post_previews_v150687']:
+              m=re.search(r'(?:private|public|protected) static function '+method+r'\(',a)
+              if m:print('EXACT_METHOD',method,a[m.start():m.start()+4500].replace('\n',' ')[:4500])
+            m=z.read('affiliate-portal-template-kit/pferde-template-kit.php').decode()
+            print('CURRENT_DESIGN_VERSION',m[:400])
+            print('VERSION_OCCURRENCES',m.count('1.50.798'),m.count("const VERSION ="))
+            print('ZIP_SIZE',p.stat().st_size)
+          PY
