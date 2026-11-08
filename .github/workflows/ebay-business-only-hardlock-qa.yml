@@ -307,3 +307,101 @@ jobs:
           php legacy.php | tee legacy.log
           test "$(grep -c '^PASS ' legacy.log)" = 8
           grep -F 'EBAY_LEGACY_ACTIVE_RUN 8/8 PASS' legacy.log
+
+      - name: Execute real PHP BUSINESS source-to-public-card visibility contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,shutil
+          root=Path('/tmp/ebay_business_card_qa')
+          shutil.copytree('release/affiliate-zentrale/current/affiliate-portal-router',root/'affiliate-portal-router',dirs_exist_ok=True)
+          src=Path('release/affiliate-zentrale/evidence/EBAY_672308_TO_672311_BUSINESS_ONLY_GESAMTURSACHENPATCH_NUR_TEST.patch').read_text()
+          target='affiliate-portal-router/includes/trait-ppar-ebay.php'
+          section=src.split('diff --git a/'+target+' b/'+target,1)[1].split('\ndiff --git ',1)[0]
+          head,*hunks=re.split(r'(?=^@@ )',section,flags=re.M)
+          required=[
+              'route_state,fresh_until,item_end_at',
+              "absint($row['fresh_until'] ?? 0) <= time()",
+          ]
+          chosen=[h for h in hunks if h.startswith('@@ ') and any(x in h for x in required)]
+          assert len(chosen)==3, f'Expected 3 source+display freshness hunks, got {len(chosen)}'
+          (root/'cards.patch').write_text(head+''.join(chosen))
+          PY
+          cd /tmp/ebay_business_card_qa
+          git apply --check cards.patch
+          git apply cards.patch
+          php -l affiliate-portal-router/includes/trait-ppar-ebay.php
+          cat > cards.php <<'PHP'
+          <?php
+          error_reporting(E_ALL);
+          define('ABSPATH','/'); define('ARRAY_A','ARRAY_A');
+          $META=array(); $DBROW=array();
+          function absint($x){return abs((int)$x);}
+          function sanitize_key($x){return strtolower(preg_replace('/[^a-z0-9_-]/','',strtolower((string)$x)));}
+          function sanitize_text_field($x){return trim((string)$x);}
+          function get_post_meta($id,$key,$single=true){global $META;return $META[$id][$key]??'';}
+          class FakeDB {
+              public $last_sql='';
+              function prepare($sql,$s){return str_replace('%s',"'".addslashes((string)$s)."'",$sql);}
+              function get_row($sql,$mode){global $DBROW;$this->last_sql=$sql;
+                  if(strpos($sql,'fresh_until')===false)return array_diff_key($DBROW,array('fresh_until'=>true));
+                  return $DBROW;
+              }
+          }
+          require 'affiliate-portal-router/includes/trait-ppar-ebay.php';
+          class CardTest {
+              use PPAR_Ebay_Trait;
+              public $checkpoint=true,$content_block='';
+              private function ebay_request_local_read_cache_allowed(){return false;}
+              private function ebay_items_table(){return 'mock_ebay_rows';}
+              private function ebay_public_checkpoint_allows_business_campaign($id){return $this->checkpoint;}
+              private function ebay_public_content_policy_reason_from_source_row($row,$title){return $this->content_block;}
+              public function deliver($c){return $this->ebay_business_campaign_source_allows_delivery($c);}
+          }
+          function ok($v,$s){if(!$v){fwrite(STDERR,"FAIL ".$s."\n");exit(1);}echo "PASS ".$s."\n";}
+          function seed(){
+              global $wpdb,$META,$DBROW;
+              $wpdb=new FakeDB();
+              $hash=str_repeat('a',64);
+              $META=array(101=>array('_ppar_ebay_business_auto'=>1,
+                  '_ppar_creative_identity_hash'=>$hash,
+                  '_ppar_ebay_business_match_contract'=>'concept_v3'));
+              $DBROW=array('id'=>77,'item_id'=>'ebay-101','seller_account_type'=>'BUSINESS',
+                  'creative_identity_hash'=>$hash,'source_state'=>'available','policy_state'=>'allowed',
+                  'route_state'=>'ready','fresh_until'=>time()+3000,
+                  'item_end_at'=>time()+10000,'source_payload'=>'{"raw":{"itemId":"ebay-101"}}');
+              return array('network'=>'ebay','creative_type'=>'product','post_id'=>101,'title'=>'Reitsattel');
+          }
+          $x=new CardTest();$c=seed();global $DBROW,$META,$wpdb;
+          ok($x->deliver($c)===true,'Fresh accepted BUSINESS source renders only through public checkpoint');
+          ok(strpos($wpdb->last_sql,"seller_account_type='BUSINESS'")!==false,'Actual source SQL restricts card source to business items');
+          ok(strpos($wpdb->last_sql,'fresh_until')!==false,'Actual source SQL reads freshness used by display gate');
+          $c=seed();$DBROW['fresh_until']=time()-1;
+          ok($x->deliver($c)===false,'Expired source cannot enter product card');
+          $c=seed();$DBROW['policy_state']='blocked';
+          ok($x->deliver($c)===false,'Hard content policy blocks product card');
+          $c=seed();$DBROW['source_state']='ended';
+          ok($x->deliver($c)===false,'Ended source cannot be published');
+          $c=seed();$DBROW['item_end_at']=time()-1;
+          ok($x->deliver($c)===false,'Ended eBay item cannot be published');
+          $c=seed();$DBROW['route_state']='blocked';
+          ok($x->deliver($c)===false,'Blocked route cannot enter product card');
+          $c=seed();$META[101]['_ppar_ebay_business_auto']=0;
+          ok($x->deliver($c)===false,'Unmarked eBay product cannot bypass business source policy');
+          $c=seed();$META[101]['_ppar_ebay_business_match_contract']='wrong';
+          ok($x->deliver($c)===false,'Incorrect business product match contract is rejected');
+          $c=seed();$x->checkpoint=false;
+          ok($x->deliver($c)===false,'Unapproved business card remains behind public checkpoint');
+          $c=seed();$x->checkpoint=true;$x->content_block='unrelated products';
+          ok($x->deliver($c)===false,'Real source content veto still blocks output');
+          $x->content_block='';$c=seed();
+          ok($x->deliver(array('network'=>'awin','creative_type'=>'product','post_id'=>101))===true,
+              'Independent AWIN provider unaffected by eBay-only delivery gate');
+          echo "EBAY_BUSINESS_CARDS 13/13 PASS; PHP REFERENCE, NOT LIVE WORDPRESS\n";
+          PHP
+          php -l cards.php
+          php cards.php | tee cards.log
+          test "$(grep -c '^PASS ' cards.log)" = 13
+          grep -F 'EBAY_BUSINESS_CARDS 13/13 PASS' cards.log
