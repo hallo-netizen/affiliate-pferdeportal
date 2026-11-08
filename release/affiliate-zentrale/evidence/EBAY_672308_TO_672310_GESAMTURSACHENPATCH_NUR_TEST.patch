@@ -415,7 +415,34 @@ diff --git a/affiliate-portal-router/includes/trait-ppar-ebay.php b/affiliate-po
 index b39f499..e53c439 100644
 --- a/affiliate-portal-router/includes/trait-ppar-ebay.php
 +++ b/affiliate-portal-router/includes/trait-ppar-ebay.php
-@@ -2897,6 +2897,11 @@ trait PPAR_Ebay_Trait {
+@@ -126,7 +126,7 @@ trait PPAR_Ebay_Trait {
+         foreach (array_chunk($hashes, 1000) as $chunk) {
+             $placeholders = implode(',', array_fill(0, count($chunk), '%s'));
+             $sql = $wpdb->prepare(
+-                "SELECT id,item_id,seller_account_type,creative_identity_hash,source_state,policy_state,route_state,item_end_at,source_payload,title,short_description FROM {$table} WHERE seller_account_type='BUSINESS' AND creative_identity_hash IN ({$placeholders}) ORDER BY id DESC",
++                "SELECT id,item_id,seller_account_type,creative_identity_hash,source_state,policy_state,route_state,fresh_until,item_end_at,source_payload,title,short_description FROM {$table} WHERE seller_account_type='BUSINESS' AND creative_identity_hash IN ({$placeholders}) ORDER BY id DESC",
+                 $chunk
+             );
+             $rows = $wpdb->get_results($sql, ARRAY_A);
+@@ -2715,7 +2715,7 @@ trait PPAR_Ebay_Trait {
+         }
+         global $wpdb;
+         $row = $wpdb->get_row($wpdb->prepare(
+-            "SELECT id,item_id,seller_account_type,creative_identity_hash,source_state,policy_state,route_state,item_end_at,source_payload,title,short_description FROM {$this->ebay_items_table()} WHERE creative_identity_hash=%s AND seller_account_type='BUSINESS' ORDER BY id DESC LIMIT 1",
++            "SELECT id,item_id,seller_account_type,creative_identity_hash,source_state,policy_state,route_state,fresh_until,item_end_at,source_payload,title,short_description FROM {$this->ebay_items_table()} WHERE creative_identity_hash=%s AND seller_account_type='BUSINESS' ORDER BY id DESC LIMIT 1",
+             $hash
+         ), ARRAY_A);
+         $result = is_array($row) ? $row : array();
+@@ -2780,7 +2780,8 @@ trait PPAR_Ebay_Trait {
+         if (sanitize_key((string) ($row['policy_state'] ?? 'allowed')) === 'blocked') { return false; }
+         if ($this->ebay_public_content_policy_reason_from_source_row($row, (string)($campaign['title'] ?? '')) !== '') { return false; }
+         $end_at = absint($row['item_end_at'] ?? 0);
++        if (absint($row['fresh_until'] ?? 0) <= time()) { return false; }
+         if ($end_at > 0 && $end_at <= time()) { return false; }
+         $route_state = sanitize_key((string)($row['route_state'] ?? ''));
+         if ($route_state === 'review_last_good') { return true; }
+         if ($route_state !== 'ready') { return false; }
+@@ -2897,6 +2898,11 @@ trait PPAR_Ebay_Trait {
          ));
          if (is_wp_error($response)) { return $response; }
          $code = absint(wp_remote_retrieve_response_code($response));
@@ -427,7 +454,7 @@ index b39f499..e53c439 100644
          $body = json_decode((string) wp_remote_retrieve_body($response), true);
          if ($code < 200 || $code >= 300 || !is_array($body)) {
              return new WP_Error('ebay_search_failed', 'eBay Browse API fehlgeschlagen (HTTP ' . $code . ').');
-@@ -7837,6 +7842,12 @@ trait PPAR_Ebay_Trait {
+@@ -7837,6 +7843,12 @@ trait PPAR_Ebay_Trait {
          }
          if ($partial_reasons) {
              $reasons = array_keys($partial_reasons);
@@ -440,7 +467,7 @@ index b39f499..e53c439 100644
              return array('status'=>'partial','reason'=>count($reasons) === 1 ? $reasons[0] : 'profile_incomplete');
          }
          return array('status'=>'completed','reason'=>'');
-@@ -7883,7 +7894,7 @@ trait PPAR_Ebay_Trait {
+@@ -7883,7 +7895,7 @@ trait PPAR_Ebay_Trait {
          if ($status === 'completed' && sanitize_key((string)($job['scope'] ?? '')) === 'business_recovery') {
              update_option('ppar_ebay_business_restore_build_v1', (string)self::EBAY_RUNTIME_BUILD, false);
          }
@@ -449,7 +476,7 @@ index b39f499..e53c439 100644
          $job['worker_phase'] = 'finished';
          $job['finished_at'] = time();
          $this->ebay_sync_job_save($job);
-@@ -8106,7 +8117,16 @@ trait PPAR_Ebay_Trait {
+@@ -8106,7 +8118,16 @@ trait PPAR_Ebay_Trait {
                          $reschedule = true;
                          return true;
                      }
@@ -467,7 +494,7 @@ index b39f499..e53c439 100644
                  }
                  if (absint($job['requests_in_batch'] ?? 0) >= $max_requests) {
                      // V6.17: 40 requests are a hard background-work-package cap,
-@@ -8150,7 +8170,33 @@ trait PPAR_Ebay_Trait {
+@@ -8150,7 +8171,33 @@ trait PPAR_Ebay_Trait {
                      $summary['profile_stats'][$profile_key]['technical_blocked']++;
                      $this->ebay_summary_reason_add($summary, 'technical', $page_data, (string) $profile['rule']['id'], $profile['seller_type'], $profile_key);
                      $summary['errors'][] = array('rule'=>(string) $profile['rule']['id'],'seller_type'=>$profile['seller_type'],'error'=>$page_data->get_error_message(),'code'=>$page_data->get_error_code());
@@ -502,7 +529,7 @@ index b39f499..e53c439 100644
                      $profile['active'] = false;
                      unset($job['inflight_profile']);
                      $this->ebay_sync_advance_cursor($job, $profile_key);
-@@ -8159,6 +8205,10 @@ trait PPAR_Ebay_Trait {
+@@ -8159,6 +8206,10 @@ trait PPAR_Ebay_Trait {
                      unset($profile);
                      continue;
                  }
@@ -513,7 +540,7 @@ index b39f499..e53c439 100644
  
                  $items = array_values((array) ($page_data['items'] ?? array()));
                  $summary['pages']++;
-@@ -10291,7 +10341,7 @@ trait PPAR_Ebay_Trait {
+@@ -10291,7 +10342,7 @@ trait PPAR_Ebay_Trait {
              </section>
  
              <?php if ((string)($canonical_run['schema'] ?? '') === '1.0') : ?>
@@ -523,7 +550,7 @@ index b39f499..e53c439 100644
 -                <?php $canonical_label=$canonical_status==='running'?'Läuft':($canonical_status==='paused'?'Pausiert':($canonical_status==='failed'?'Fehlgeschlagen':($canonical_status==='completed'?(!empty($canonical_run['completed_with_skips'])?'Fertig (mit übersprungenen Fehlern)':'Fertig'):($canonical_status==='local_checked'?'Lokal geprüft (noch nicht freigegeben)':'Wartet')))); ?>
 +                <?php $canonical_label=$canonical_status==='running'?'Läuft':($canonical_status==='paused'?'Pausiert':($canonical_status==='failed'?'Fehlgeschlagen':($canonical_status==='completed'?(!array_key_exists('completed_with_skips',$canonical_run)||!empty($canonical_run['completed_with_skips'])?'Fertig (mit offenen Prüfungen)':'Fertig'):($canonical_status==='local_checked'?'Lokal geprüft (noch nicht freigegeben)':'Wartet')))); ?>
                  <p><strong>Status:</strong> <strong><?php echo esc_html($canonical_label); ?></strong> · Run <code><?php echo esc_html(substr((string)($canonical_run['run_uuid'] ?? ''),0,12)); ?></code>
-@@ -10323,7 +10373,7 @@ trait PPAR_Ebay_Trait {
+@@ -10323,7 +10374,7 @@ trait PPAR_Ebay_Trait {
                          var tickAge=tick?Math.max(0,now-tick):null;
                          var status=d.status||'';
                          var state;
@@ -532,7 +559,7 @@ index b39f499..e53c439 100644
                          else if(status==='local_checked') state='Lokal geprüft (nicht freigegeben)';
                          else if(status==='failed') state='Fehlgeschlagen';
                          else if(status==='paused') state='Pausiert';
-@@ -10388,7 +10438,14 @@ trait PPAR_Ebay_Trait {
+@@ -10388,7 +10439,14 @@ trait PPAR_Ebay_Trait {
                  <?php if(!empty($canonical_run['checkpoint_safe'])): ?><p><strong>Sicherer Frontend-Stand:</strong> bleibt unverändert aktiv.</p><?php endif; ?>
                  <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="margin-top:10px"><input type="hidden" name="action" value="ppar_ebay_run_restart"><?php wp_nonce_field('ppar_ebay_run_restart','ppar_ebay_nonce'); ?><button class="button button-primary">Lauf neu starten</button></form>
                  </div><?php endif; ?>
