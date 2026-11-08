@@ -1,0 +1,19 @@
+name: TEMP one-time genuine-source preflight proof
+on:
+  push:
+    branches: [fix/pste-kisten-einmalige-pruefung-20261107]
+permissions: {contents: read}
+jobs:
+  only-acceptance-tool:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exercise one existing one-time owner acceptance tool with 100 original MINI terms
+        shell: bash
+        run: |
+          set -euo pipefail
+          D=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/QA_ONLY
+          python3 -m py_compile "$D/test_single_existing_seo_worker_acceptance.py"
+          python3 "$D/test_single_existing_seo_worker_acceptance.py" --selftest "$D/MINI_100_ORIGINAL_EXTERNAL_TITLES_20261106.json"
+          python3 "$D/test_single_existing_seo_worker_acceptance.py" --io-selftest "$D/MINI_100_ORIGINAL_EXTERNAL_TITLES_20261106.json"
+          echo "QA_PASS_NO_REAL_WP_EXPORT_NO_SECOND_WORKER"
