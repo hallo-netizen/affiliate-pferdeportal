@@ -398,8 +398,8 @@ index e5c1169..8e0566b 100644
 +            $this->ebay_run_fail('public_source_refresh_storage_unavailable',
 +                'Die abschliessende Quellenpruefung kann WordPress nicht lesen.');return false;
 +        }
-+        $targets=array();
-+        foreach($business as $id){$targets[]=array('BUSINESS',$id);}
++        // Flat campaign IDs: get_post_meta() and all final-source gates expect one post ID.
++        $targets=$business;
 +        $cursor=absint($state['cursor']??0);$n=count($targets);
 +        $checked=0;$remotes=0;$token=null;$deadline=microtime(true)+18;
 +        while($cursor<$n && $checked<100 && microtime(true)<$deadline){
