@@ -1,0 +1,86 @@
+{
+  "fixture_description": "ACTUAL_PSERC_02855_STORE_OUTPUT_WITH_SYNTHETIC_QA_ARTICLE_DATA",
+  "schema": "PSTE_PSERCPARKHAUS_REAL_ENVELOPE_QA_V1",
+  "header": {
+    "contract": "PSERC_PLAN_SNAPSHOT_V1",
+    "generation": "98d02de4c46036c9d72a",
+    "counts": {
+      "compiled_items": 2
+    },
+    "dependency": {
+      "fixture_scope": "QA_ONLY_NOT_REAL_EDITORIAL_PLAN"
+    },
+    "snapshot_sha256": "b643240842110e580da34c1e737dca3c460603c3308bbb66c5bb3ff324958b24"
+  },
+  "record_count": 2,
+  "record_keys": [
+    "pserc_plan_98d02de4c46036c9d72a_final_item_000000",
+    "pserc_plan_98d02de4c46036c9d72a_final_item_000001",
+    "pserc_plan_active_snapshot_v1"
+  ],
+  "options": {
+    "pserc_plan_98d02de4c46036c9d72a_final_item_000000": {
+      "contract": "PSERC_PLAN_RECORD_V1",
+      "generation": "98d02de4c46036c9d72a",
+      "kind": "final_item",
+      "index": 0,
+      "payload_sha256": "1c7d0983d8476ab840f27bc75d83954c38769af0e932a3c20f2317eb40290020",
+      "payload": {
+        "status": "READY_FOR_METADATA_HANDOFF",
+        "seo_topic_id": "qa-pserc-existing-regendecken-0g",
+        "title": {
+          "production_title": "Regendecken ohne Füllung"
+        },
+        "target_keyword": {
+          "value": "pferd regendecke 0g"
+        },
+        "article_type": "Ratgeber",
+        "category": {
+          "slug": "regendecken"
+        },
+        "canonical_slot": {
+          "canonical_article_id": "existing-article-1001",
+          "plan_slot_sha256": "a00749867b96bb02f1f4ce75c23d85fe0045e57d4a5a0661321a308ab023f549"
+        }
+      },
+      "record_sha256": "ec89f7e99d7cc43d08288d52933e05af0c41c10e5adf57d33ab876364b855385"
+    },
+    "pserc_plan_98d02de4c46036c9d72a_final_item_000001": {
+      "contract": "PSERC_PLAN_RECORD_V1",
+      "generation": "98d02de4c46036c9d72a",
+      "kind": "final_item",
+      "index": 1,
+      "payload_sha256": "01cbad26d1bd57cf7f2a73b9febb3d83861dc17cedddec5a0b04fd93e7b2fbde",
+      "payload": {
+        "status": "HELD",
+        "seo_topic_id": "qa-pserc-held-anhanger-2",
+        "title": {
+          "production_title": "Pferdeanhänger für zwei Pferde"
+        },
+        "target_keyword": {
+          "value": "pferdeanhänger 2 pferde"
+        },
+        "article_type": "Kaufberatung",
+        "category": {
+          "slug": "pferdeanhaenger"
+        },
+        "canonical_slot": {
+          "canonical_article_id": "existing-article-1002",
+          "plan_slot_sha256": "a193b347b0c56688bf9885695fd6ce9dd1fbcafd5956236954bb6be91f3009e0"
+        }
+      },
+      "record_sha256": "b8dd82d25f6663e1655411dbef3f6c59d3241d1acfb6a1cd7041ca25ca3f1deb"
+    },
+    "pserc_plan_active_snapshot_v1": {
+      "contract": "PSERC_PLAN_SNAPSHOT_V1",
+      "generation": "98d02de4c46036c9d72a",
+      "counts": {
+        "compiled_items": 2
+      },
+      "dependency": {
+        "fixture_scope": "QA_ONLY_NOT_REAL_EDITORIAL_PLAN"
+      },
+      "snapshot_sha256": "b643240842110e580da34c1e737dca3c460603c3308bbb66c5bb3ff324958b24"
+    }
+  }
+}
