@@ -48,3 +48,25 @@ jobs:
                     if any(x in json.dumps(row,ensure_ascii=False).lower() for x in ['batik','airbrush-modell','3d-bogen']):
                       print('MAP_MATCH',json.dumps(row,ensure_ascii=False)[:1700])
           PY
+
+      - name: Read exact HD003 category-page image resolver and Airbrush mapping
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile,re
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          with zipfile.ZipFile(p) as z:
+            files=[n for n in z.namelist() if n.endswith('.php') and not any(t in n.lower() for t in ('vendor/','tests/'))]
+            print('HD003_PHP_TOTAL',len(files))
+            for n in files:
+              s=z.read(n).decode('utf8','replace')
+              lines=s.splitlines()
+              hits=[i for i,l in enumerate(lines) if re.search(r'(?i)airbrush|aeroponik|function (?:category_image|hero_image|.*master.*image|.*photo.*url)|hobbyregister_image_override',l)]
+              if len(hits)>220: hits=hits[:220]
+              if not hits: continue
+              print('FILE',n,'HITS',len(hits))
+              for i in hits:
+                print('MATCH',i+1,' '.join(lines[max(0,i-1):min(len(lines),i+2)])[:500])
+            paths=[n for n in z.namelist() if 'airbrush' in n.lower() or 'aeroponik' in n.lower() or 'batik' in n.lower()]
+            for n in paths[:120]:print('ASSET',n)
+          PY
