@@ -81,7 +81,7 @@ index e5c1169..8e0566b 100644
 +            'failed_scope'=>sanitize_key((string)($details['scope']??$discovery['scope']??'')),
 +            'provider_error_code'=>sanitize_key((string)($last_provider['code']??'')),
 +            'completion_warning'=>sanitize_key((string)($run['completion_warning']??'')),
-+            'completed_with_skips'=>!empty($run['completed_with_skips'])?1:0,
++            'completed_with_skips'=>(!array_key_exists('completed_with_skips',$run)||!empty($run['completed_with_skips']))?1:0,
 +            'skipped_item_errors_count'=>absint($run['skipped_item_errors_count']??0),
 +            'technical_gap_count'=>absint($run['technical_gap_count']??0),
 +            'technical_unverified_search_profile_count'=>absint($run['technical_unverified_search_profile_count']??0),
@@ -411,7 +411,8 @@ index b39f499..e53c439 100644
 -            <section class="postbox" style="padding:18px;max-width:1180px;border-left:4px solid <?php echo $canonical_status==='completed'?'#46b450':($canonical_status==='failed'?'#d63638':'#dba617'); ?>">
 +            <section class="postbox" style="padding:18px;max-width:1180px;border-left:4px solid <?php echo $canonical_status==='completed' && array_key_exists('completed_with_skips',$canonical_run) && empty($canonical_run['completed_with_skips'])?'#46b450':($canonical_status==='failed'?'#d63638':'#dba617'); ?>">
                  <h2>Kanonischer Gesamtworkflow</h2>
-                 <?php $canonical_label=$canonical_status==='running'?'Läuft':($canonical_status==='paused'?'Pausiert':($canonical_status==='failed'?'Fehlgeschlagen':($canonical_status==='completed'?(!empty($canonical_run['completed_with_skips'])?'Fertig (mit übersprungenen Fehlern)':'Fertig'):($canonical_status==='local_checked'?'Lokal geprüft (noch nicht freigegeben)':'Wartet')))); ?>
+-                <?php $canonical_label=$canonical_status==='running'?'Läuft':($canonical_status==='paused'?'Pausiert':($canonical_status==='failed'?'Fehlgeschlagen':($canonical_status==='completed'?(!empty($canonical_run['completed_with_skips'])?'Fertig (mit übersprungenen Fehlern)':'Fertig'):($canonical_status==='local_checked'?'Lokal geprüft (noch nicht freigegeben)':'Wartet')))); ?>
++                <?php $canonical_label=$canonical_status==='running'?'Läuft':($canonical_status==='paused'?'Pausiert':($canonical_status==='failed'?'Fehlgeschlagen':($canonical_status==='completed'?(!array_key_exists('completed_with_skips',$canonical_run)||!empty($canonical_run['completed_with_skips'])?'Fertig (mit offenen Prüfungen)':'Fertig'):($canonical_status==='local_checked'?'Lokal geprüft (noch nicht freigegeben)':'Wartet')))); ?>
                  <p><strong>Status:</strong> <strong><?php echo esc_html($canonical_label); ?></strong> · Run <code><?php echo esc_html(substr((string)($canonical_run['run_uuid'] ?? ''),0,12)); ?></code>
 @@ -10323,7 +10373,7 @@ trait PPAR_Ebay_Trait {
                          var tickAge=tick?Math.max(0,now-tick):null;
