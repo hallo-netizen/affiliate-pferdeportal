@@ -1,0 +1,38 @@
+name: HD009 provider image source and exact article slots audit
+on:
+  push:
+    branches: [hobbyroom/hd009-030-provider-images-article-cards-20261108]
+    paths: [.github/workflows/hd009-030-provider-audit.yml]
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit actual current Hobby and Hab provider code read-only
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import re,collections
+          b=Path('protocol/PROJECT_MEMORY/PROJEKTE')
+          p=b/'HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip'
+          with ZipFile(p) as z:
+            candidates=[(n,z.read(n).decode('utf-8','replace')) for n in z.namelist() if n.endswith('.php')]
+            for name,src in candidates:
+              if any(tok in name.lower() for tok in ['ebay','idealo','feed','product','provider','amazon','router']):
+                methods=[(m.group(1),m.start()) for m in re.finditer(r'(?:public|private|protected)\s+(?:static\s+)?function\s+([A-Za-z0-9_]+)\s*\(',src)]
+                counts={key:len(list(re.finditer(key,src,re.I))) for key in ['image_url','image_src','product_image','picture','thumbnail','photo','epid','gtin','idealo','ebay','post_bottom_products','article_product','render_article_cards','image_source','licensed']}
+                print('FILE',name,'chars',len(src),'methods',methods[:105],'tokens',{k:v for k,v in counts.items() if v})
+                if any(x in name for x in ['ebay','idealo','product','amazon']):
+                  for regex in [r'function\s+([a-zA-Z0-9_]*(?:product|card|item|render|image|feed)[a-zA-Z0-9_]*)\s*\(',r'\$image(?:_url|_src)?\s*=',r'item_image',r'post_bottom_products']:
+                    for m in list(re.finditer(regex,src,re.I))[:13]:
+                      print('HIT',name,re.sub(r'\s+',' ',src[max(0,m.start()-180):m.start()+760])[:920])
+            print('STATIC_IMAGE_ASSETS',[n for n in z.namelist() if n.lower().endswith(('.png','.jpg','.jpeg','.webp'))][:35])
+          hab=b/'EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          with ZipFile(hab) as z:
+            for name in z.namelist():
+              if 'idealo' in name.lower() or 'ebay' in name.lower():
+                s=z.read(name).decode('utf-8','replace')
+                print('HAB_FILE',name,'size',len(s),'has_image_url',s.count('image_url'))
+          PY
