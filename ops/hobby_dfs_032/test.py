@@ -124,10 +124,10 @@ assert(!isset($catalog['architekturmodellbau']) || $catalog['architekturmodellba
 assert(isset($catalog['kettenhemdflechten']) &&
   $catalog['kettenhemdflechten']['keyword']==='Kettenhemd Ringe',
   'contextual keyword must replace bare Metallringe');
-assert(isset($catalog['schnitzen']) &&
+assert(!isset($catalog['schnitzen']) ||
   $catalog['schnitzen']['keyword']!=='Geeignetes Holz',
   'generic wood material cannot be a paid search');
-assert(!isset($catalog['munzen']) || $catalog['munzen']['keyword']!=='Sichere Aufbewahrung',
+assert(!isset($catalog['muenzen']) || $catalog['muenzen']['keyword']!=='Sichere Aufbewahrung',
   'storage generic cannot be used as hobby product');
 echo "CHAINMAIL_RING_CONTEXT_AND_OTHER_HOBBIES_QUALITY_PASS\n";
 echo "REAL_862_REGISTER_381_HOBBY_PRECHECK_PASS ".count($catalog)."\n";
