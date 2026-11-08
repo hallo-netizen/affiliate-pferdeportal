@@ -1,0 +1,26 @@
+{
+  "source": "AFFILIATE_ZENTRALE_6.72.308_URSACHENFIX_GESAMTTEST_NUR_TEST.zip",
+  "source_sha256": "b4d8547fd2aa134f7f82f568db3a81df54bb7d2131fd0752e76e3f0ca2251fe0",
+  "test_candidate": "AFFILIATE_ZENTRALE_6.72.309_EBAY_TIMEOUT_KISS_GESAMTTEST_NUR_TEST.zip",
+  "candidate_sha256": "073f97ddc387968e94934f4936f75a3deefdddb12206fe1d721d455d71c53db2",
+  "candidate_bytes": 5346183,
+  "files": 66,
+  "php_files_syntax_ok": 23,
+  "json_files_ok": 3,
+  "unchanged_files": 63,
+  "changed_files": [
+    "includes/trait-ppar-ebay.php",
+    "pferdeportal-affiliate-router.php",
+    "readme.txt"
+  ],
+  "scope": "one original eBay discovery worker; retries transient transport/429/5xx twice; all hard product/coverage/security/old-banner controls untouched",
+  "functional_tests": "26/26 PASS, direct original PHP trait worker and original request parser, synthetic eBay response data",
+  "live_status": "NOT_INSTALLED_NOT_LIVE_TESTED",
+  "release_status": "GITHUB_FORMAL_RELEASE_BLOCKED",
+  "backend_canonical_e2e": "NOT_EXECUTED_WITH_REAL_WORDPRESS_DB",
+  "rest_api_real_ebay": "NOT_CALLED",
+  "observed_error": "2026-11-07 05:49:30 UTC, one profile request_error http_request_failed cURL 28 SSL connection timeout",
+  "security": "never accepts unverified offer; permanent errors fail-closed; repeated transient failures remain partial not false success",
+  "patch_file": "EBAY_672308_TO_672309_KISS_TRANSIENT_RETRY_NUR_TEST.patch",
+  "patch_sha256": "7ebe86691882fd8afb19ee356555725efeea0e2571ea413ac9aae2fd0adf45f2"
+}
