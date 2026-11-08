@@ -1,0 +1,64 @@
+name: HD009 category archive and related articles visual failure audit
+on:
+  push:
+    branches: ['hobbyroom/hd009-027-category-photo-postcards-20261108']
+    paths: ['.github/workflows/hd027-audit.yml']
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect real category DOM, WordPress post thumbnail data and exact plugin code
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import urllib.request, json, re,collections,hashlib
+          base=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          with ZipFile(base/'HD-009-AFFILIATE-ZENTRALE'/'CURRENT.zip') as z:
+            print('HD009_SHA',hashlib.sha256((base/'HD-009-AFFILIATE-ZENTRALE'/'CURRENT.zip').read_bytes()).hexdigest())
+            main=z.read('affiliate-portal-router/hobby-depot-affiliate-router.php').decode()
+            for n in ['get_category_archive_context','hdar_ci_banner_world','hdar_ci_amazon_banner','render_affiliate_slot_for_context','shortcode_affiliate_slot']:
+              m=re.search(r'(?:(?:private|public|protected) )?function '+n+r'\s*\(',main)
+              if m:
+                begin=m.start();size= 12500 if n=='hdar_ci_amazon_banner' else 4400
+                print('SOURCE_HD009',n,main[begin:begin+size].replace('\n',' ')[:size])
+          for zip_path in [base/'HD-003-DESIGN-TEMPLATE-KIT'/'CURRENT.zip',base/'HD-007-HOBBYREGISTER-CORE'/'CURRENT.zip']:
+            with ZipFile(zip_path) as z:
+              print('PLUGIN_FILES',zip_path.parent.name,[(k,z.getinfo(k).file_size) for k in z.namelist() if k.endswith('.php')][:30])
+              for f in z.namelist():
+                if not f.endswith('.php'):continue
+                s=z.read(f).decode('utf8','replace')
+                keys=['Passende Beiträge','Passende Beitr','passende-beitraege','hd-related','related_posts','related-posts','thumbnail','get_the_post_thumbnail']
+                matches={k:s.count(k) for k in keys if k in s}
+                if matches:
+                  print('RELATED_SOURCE',f,'mentions',matches)
+                  if 'Passende Beiträge' in s or 'Passende Beitr' in s:
+                    for m in re.finditer(r'Passende Beitr',s):
+                      print('RELATED_EXCERPT',f,s[max(0,m.start()-3200):m.start()+3900].replace('\n',' ')[:7100])
+          def get(url):
+            try:
+              request=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 Chrome/128.0'})
+              with urllib.request.urlopen(request,timeout=18) as r:return r.status,r.read(1400000).decode('utf8','replace')
+            except Exception as e:return 0,str(e)
+          pages=[
+          'https://hobby-depot.de/category/sportdrachen-drachen-leinen/',
+          'https://hobby-depot.de/category/sportdrachen/',
+          'https://hobby-depot.de/category/architekturmodellbau/',
+          'https://hobby-depot.de/wp-json/wp/v2/categories?slug=sportdrachen-drachen-leinen',
+          'https://hobby-depot.de/wp-json/wp/v2/posts?search=Zweileiner&per_page=5&_fields=id%2Ctitle%2Clink%2Cfeatured_media%2Ccategories%2Cslug',
+          'https://hobby-depot.de/wp-json/wp/v2/posts?per_page=10&_fields=id%2Ctitle%2Clink%2Cfeatured_media%2Ccategories',
+          ]
+          for url in pages:
+            status,html=get(url)
+            print('WEB',url,status,'length',len(html))
+            if '/wp-json/' in url:
+              print('WEB_JSON',html[:6000])
+            else:
+              for pattern in ['hdar-ci-amazon-banner-wide','hdar-ci-amazon-banner-text','hdar-world-','Passende Beiträge','wp-post-image','featured-image','hd-portal','related','wp-block-post-featured-image']:
+                print('PAGE_MARKER',url,pattern,html.count(pattern))
+              for needle in ['Passende Beiträge','hdar-ci-amazon-banner-wide','[DESIGNTEST]']:
+                i=html.find(needle)
+                if i>=0:print('PAGE_EXCERPT',needle,html[max(0,i-1100):i+3200].replace('\n',' ')[:4200])
+          PY
