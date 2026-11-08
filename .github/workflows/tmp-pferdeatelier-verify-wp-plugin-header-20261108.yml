@@ -21,8 +21,18 @@ jobs:
           p='control/startmaster0107/runtime_packages/PSERC-FIX.zip'
           with zipfile.ZipFile(p) as z:
             print('ARCHIVE_ENTRY_COUNT',len(z.namelist()))
+            print('OUTER_ARCHIVE_MEMBERS',[(n,z.getinfo(n).file_size) for n in z.namelist()])
             matches=[k for k in z.namelist() if k.endswith('/portal-seo-editorial-plan-compiler.php')]
             print('WORDPRESS_MAIN_FILES',matches)
+            for name in z.namelist():
+              if not name.lower().endswith('.zip'):continue
+              import io
+              with zipfile.ZipFile(io.BytesIO(z.read(name))) as inner:
+                print('NESTED_ARCHIVE',name,'FILES',len(inner.namelist()))
+                hits=[n for n in inner.namelist() if n.endswith('/portal-seo-editorial-plan-compiler.php')]
+                for n in hits:
+                  t=inner.read(n).decode('utf-8','replace')
+                  print('NESTED_MAIN',n,repr(t[:800]),re.findall(r"PSERC_VERSION[^\\n]{0,80}",t)[:3])
             for k in matches:
               v=z.read(k).decode('utf-8','replace')
               print('MAIN_FIRST_30_LINES',repr(v[:1600]))
