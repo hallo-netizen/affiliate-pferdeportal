@@ -12,7 +12,7 @@ index 8b2a941..972e859 100644
 +        // provider profiles is a partial close, NOT a fully checked success.
 +        // Read only existing run/history options, no additional DB queries.
 +        $is_full_ebay_run = static function ($run) {
-+            return is_array($run) && sanitize_key((string)($run['status'] ?? '')) === 'completed'
++            return is_array($run) && array_key_exists('completed_with_skips', $run) && sanitize_key((string)($run['status'] ?? '')) === 'completed'
 +                && empty($run['completed_with_skips'])
 +                && absint($run['skipped_item_errors_count'] ?? 0) === 0
 +                && absint($run['technical_gap_count'] ?? 0) === 0
@@ -94,7 +94,7 @@ index e5c1169..8e0566b 100644
 +            // A warning-only terminal result is not a verified full success.
 +            // Keep the last truly successful run for the read-only dashboard.
 +            $is_full_success = static function ($entry) {
-+                return is_array($entry) && sanitize_key((string)($entry['status']??''))==='completed'
++                return is_array($entry) && array_key_exists('completed_with_skips', $entry) && sanitize_key((string)($entry['status']??''))==='completed'
 +                    && empty($entry['completed_with_skips'])
 +                    && absint($entry['skipped_item_errors_count']??0)===0
 +                    && absint($entry['technical_gap_count']??0)===0
@@ -434,7 +434,7 @@ index b39f499..e53c439 100644
 +                    Bereits sicher geprüfte Produkte bleiben erhalten; die reguläre nächste eBay-Suche prüft die offenen Bereiche erneut.
 +                    <?php if(!empty($canonical_run['checkpoint_deferred'])): ?><strong>Der neue öffentliche Produktstand wurde NICHT übernommen, weil er ältere Produkte ohne vollständige eBay-Prüfung verdrängt hätte. Der vorherige Freigabestand bleibt maßgeblich; einzelne Angebote müssen weiterhin aktuell gültig sein.</strong><?php endif; ?>
 +                    </p><p class="description"><strong>Offene Warenbereiche:</strong> <code><?php echo esc_html(implode(', ', array_slice((array)($canonical_run['completion_warning_concepts'] ?? array()),0,12))); ?></code><?php if(absint($canonical_run['technical_gap_count'] ?? 0)>12): ?> (weitere vorhanden)<?php endif; ?>.</p></div>
-+                <?php elseif ($canonical_status === 'completed') : ?><div class="notice notice-success inline"><p><strong>Gesamtlauf abgeschlossen:</strong> neue Etage vollständig geprüft und als sicherer Frontend-Checkpoint übernommen.</p></div><?php endif; ?>
++                <?php elseif ($canonical_status === 'completed' && empty($canonical_run['completed_with_skips'])) : ?><div class="notice notice-success inline"><p><strong>Gesamtlauf abgeschlossen:</strong> neue Etage vollständig geprüft und als sicherer Frontend-Checkpoint übernommen.</p></div><?php endif; ?>
                  <?php if ($canonical_status === 'local_checked') : ?><div class="notice notice-warning inline"><p><strong>Lokale Neubewertung abgeschlossen:</strong> Keine neue eBay-Suche, keine neue öffentliche Freigabe. Bisheriger öffentlicher Stand bleibt geschützt; fehlende Produktversorgung ist weiter offen.</p></div><?php endif; ?>
                  <?php if ($canonical_open) : ?><p class="description"><strong>Startaktionen gesperrt:</strong> genau dieser Run ist aktiv. Der externe Taktgeber setzt ihn paketweise fort; die Seite kann geschlossen werden.</p><?php endif; ?>
              </section>
