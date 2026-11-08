@@ -261,12 +261,12 @@ index e5c1169..8e0566b 100644
          }
      }
  
-@@ -1916,6 +2006,40 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1916,6 +2006,42 @@ trait PPAR_Ebay_Run_Trait {
          // The one-row checkpoint write is the public visibility commit. Until
          // this exact point the frontend continues to serve the previous safe set.
          $current=$this->ebay_run_load();
 +        // Root-safety invariant: an unverified eBay search must never be used
-+        // to withdraw a previously SAFE public BUSINESS campaign. All other
++        // to withdraw any previously SAFE BUSINESS campaign or PRIVATE listing. All other
 +        // independent discovery/selection/public checks have already finished.
 +        // Keep the existing checkpoint unchanged if the new selection would
 +        // remove old cards while any transient search remains technically open.
@@ -280,7 +280,9 @@ index e5c1169..8e0566b 100644
 +            if($this->ebay_public_checkpoint_is_safe($previous)){
 +                $old_ids=$this->ebay_public_checkpoint_business_ids($previous);
 +                $new_ids=array_values(array_unique(array_filter(array_map('absint',(array)($candidate['business_campaign_ids']??array())))));
-+                if(array_diff($old_ids,$new_ids)){
++                $old_private_ids=$this->ebay_public_checkpoint_private_ids($previous);
++                $new_private_ids=array_values(array_unique(array_filter(array_map('absint',(array)($candidate['private_listing_ids']??array())))));
++                if(array_diff($old_ids,$new_ids) || array_diff($old_private_ids,$new_private_ids)){
 +                    // This is NOT a successful publication of a reduced catalog.
 +                    // Leave existing safe output and cleanup state untouched;
 +                    // let the next ordinary canonical search recheck the missing
