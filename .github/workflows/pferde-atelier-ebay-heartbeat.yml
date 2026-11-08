@@ -58,6 +58,15 @@ jobs:
           for k,v in checks.items(): print(('PASS ' if v else 'FAIL ')+k)
           if not all(checks.values()): raise SystemExit(1)
           print(f'SCHEDULER_KISS_ASSERTIONS={len(checks)} FAIL=0')
+          # Execute the actual workflow status case (not just static substring rules).
+          import subprocess
+          segment=s.split('case "$status" in',1)[1].split('esac',1)[0]
+          shell='status="$1"; case "$status" in'+segment+'esac'
+          for status,expected in [('failed',1),('completed',0),('idle',0),('disabled',0),('advanced',0),('busy',0)]:
+              observed=subprocess.run(['bash','-c',shell,'probe',status],capture_output=True,text=True)
+              assert observed.returncode==expected,(status,observed.returncode,expected,observed.stderr)
+              print('PASS REAL_CASE_'+status.upper()+'_EXIT_'+str(expected))
+
           PY
 
   heartbeat:
@@ -121,9 +130,13 @@ jobs:
                 consecutive_failures=0
                 echo "heartbeat $n status=$status server_time=$server_time"
                 case "$status" in
-                  idle|completed|failed|disabled)
+                  idle|completed|disabled)
                     echo "terminal heartbeat status=$status; no successor runner required"
                     exit 0
+                    ;;
+                  failed)
+                    echo "::error::WordPress eBay canonical run FAILED; the heartbeat must not report a successful delivery."
+                    exit 1
                     ;;
                   throttled)
                     ;;
