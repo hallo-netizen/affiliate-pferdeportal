@@ -4,6 +4,11 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
 permissions:
   contents: read
+# KISS: only the newest candidate state matters; cancel a stale run when the
+# same PR is updated. Never skip the current PR's immutable security checks.
+concurrency:
+  group: pferde-atelier-immutable-hardlock-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 jobs:
   hardlock-base:
     runs-on: ubuntu-latest
@@ -96,6 +101,21 @@ jobs:
               raise SystemExit(result)
           print('PATH_GUARD_PASS')
           PY
+      - name: Load the one trusted security checker from protected main
+        shell: bash
+        run: |
+          set -euo pipefail
+          # The PR base may be a legitimate older development branch that does
+          # not yet contain this checker. NEVER load it from the PR head.
+          git fetch --no-tags --depth=1 origin refs/heads/main
+          TRUSTED_MAIN="$(git rev-parse FETCH_HEAD)"
+          TRUSTED_PATH="control/paul-scope-gate/paul_scope_gate.py"
+          git cat-file -e "${TRUSTED_MAIN}:${TRUSTED_PATH}"
+          git show "${TRUSTED_MAIN}:${TRUSTED_PATH}" > /tmp/pferde-atelier-trusted-paul-gate.py
+          # Compare against Git's immutable blob identity, not a candidate file.
+          test "$(git hash-object /tmp/pferde-atelier-trusted-paul-gate.py)" = "$(git rev-parse "${TRUSTED_MAIN}:${TRUSTED_PATH}")"
+          test -s /tmp/pferde-atelier-trusted-paul-gate.py
+          echo "TRUSTED_CENTRAL_SECURITY_CHECKER_READY"
       - name: Enforce current Paul assignment and technical write scope
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
@@ -104,7 +124,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 control/paul-scope-gate/paul_scope_gate.py verify-pr "$HEAD_REF" "$HEAD_SHA" "$BASE_SHA"
+          PYTHONDONTWRITEBYTECODE=1 python3 /tmp/pferde-atelier-trusted-paul-gate.py verify-pr "$HEAD_REF" "$HEAD_SHA" "$BASE_SHA"
 
       - name: Enforce PROJECT_MEMORY protocol completion
         env:
