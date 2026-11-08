@@ -1,0 +1,75 @@
+name: HD009 0.1.26 verify register inline spacing
+on:
+  push:
+    branches: [hobbyroom/hd009-026-register-top-gap-20261108]
+    paths:
+      - ops/hobby009_026/build.py
+      - .github/workflows/hd009-026-build.yml
+permissions: {contents: write}
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build exact current Plugin and validate ZIP and all PHP
+        run: python3 ops/hobby009_026/build.py
+      - name: Install browser
+        run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - name: Check real register inline gaps on desktop and mobile
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          from playwright.sync_api import sync_playwright
+          from urllib.parse import urlparse
+          base=Path("protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip")
+          with ZipFile(base) as z:
+            css=z.read("affiliate-portal-router/assets/hdar-amazon-start.css").decode()
+            assert "HD009 0.1.26" in css
+          urls=["https://www.hobby-depot.de/hobbyregister/alte-kameras-reparieren/","https://www.hobby-depot.de/hobbyregister/alabasterschnitzen/"]
+          measure="""() => {
+            let wrap=document.querySelector('.hdar-ci-register-inline:not([hidden])'),
+                banner=wrap?.querySelector('a.hdar-ci-amazon-banner-wide'),prev=wrap?.previousElementSibling,next=wrap?.nextElementSibling;
+            if(!wrap||!banner||!prev||!next)return null;
+            const r=(e)=>e.getBoundingClientRect();
+            return {top:r(banner).top,gap:r(banner).top-r(prev).bottom,after:r(next).top-r(banner).bottom,
+              width:r(banner).width,height:r(banner).height,wrapperTop:r(wrap).top,margin:getComputedStyle(wrap).marginTop,
+              badge:banner.querySelectorAll('.hdar-ci-amazon-official').length,photos:banner.querySelectorAll('.hdar-ci-photo>img:not(.hdar-ci-amazon-official)').length};
+          }"""
+          with sync_playwright() as p:
+            b=p.chromium.launch(headless=True,args=["--no-sandbox"])
+            for width in (1440,900,390,360):
+              page=b.new_page(viewport={"width":width,"height":900})
+              for url in urls:
+                response=page.goto(url,wait_until="domcontentloaded",timeout=34000)
+                assert response and response.status==200,(width,url)
+                page.wait_for_timeout(450)
+                old=page.evaluate(measure)
+                assert old,(width,url,"old missing")
+                page.add_style_tag(content=css)
+                new=page.evaluate(measure)
+                assert new,(width,url,"new missing")
+                diff=old["gap"]-new["gap"]
+                assert diff>=27,(width,url,old,new,diff)
+                assert new["gap"]>=5,(width,url,new,"previous section collision")
+                assert new["gap"]<=25,(width,url,new,"still too much empty space")
+                assert new["after"]>=10,(width,url,new,"following section collision")
+                assert abs(old["height"]-new["height"])<2,(width,url,"banner height modified")
+                assert abs(old["width"]-new["width"])<2,(width,url,"banner width modified")
+                assert new["badge"]==old["badge"] and new["photos"]==old["photos"]
+                print("GAP_PASS",width,urlparse(url).path,"old",round(old["gap"],1),"new",round(new["gap"],1),
+                      "after",round(new["after"],1),"banner_height",round(new["height"],1))
+              page.close()
+            b.close()
+          print("HD009_026_RESPONSIVE_LAYOUT_PASS")
+          PY
+      - name: Store verified complete ZIPs on stage
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/HOBBY_DEPOT_AFFILIATE_HD009_0.1.26.zip
+          git commit -m "HD009 0.1.26: reduce whitespace above register in-text banner only"
+          git push origin HEAD:hobbyroom/hd009-026-register-top-gap-20261108
