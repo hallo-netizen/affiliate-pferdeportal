@@ -1,0 +1,33 @@
+name: Hobby equipment product titles content audit
+on:
+  push:
+    branches: [hobbyroom/hd009-amazon-dfs-products-audit-20261108]
+    paths: [.github/workflows/hd009-equipment-content.yml]
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect complete validated hobby equipment texts without reproducing unrelated personal data
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import json,collections
+          path=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip')
+          with ZipFile(path) as z:
+            r=json.loads(z.read('hd-hobbyregister-core/data/hobby-register.json'))['records']
+          names=['sportdrachen','3d-druck','münzen','architekturmodellbau','alabasterschnitzen','airbrush-modellbau','terrarium']
+          for rec in r:
+            if rec['canonical_name'].lower() in names or (rec['registry_id'] in ['hobby:sportdrachen','hobby:architekturmodellbau']):
+              a=rec['result_profile']['what_do_you_need']
+              print("EQUIP_EXAMPLE",rec['canonical_name'],'type',type(a).__name__,'value',str(a)[:1400],
+                'status',rec['result_profile'].get('status'))
+          field=[r['result_profile']['what_do_you_need'] for r in r]
+          print('NEED_KIND_COUNTS',dict(collections.Counter(type(x).__name__ for x in field)))
+          print('NEED_SUBFIELDS',dict(collections.Counter(k for v in field if isinstance(v,dict) for k in v)))
+          print('EMPTY',sum(not v for v in field))
+          lengths=[len(str(x)) for x in field]
+          print('LENGTHS',{'min':min(lengths),'median':sorted(lengths)[len(lengths)//2],'max':max(lengths)})
+          PY
