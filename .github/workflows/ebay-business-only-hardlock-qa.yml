@@ -115,3 +115,108 @@ jobs:
           php test.php | tee results.log
           test "$(grep -c '^PASS ' results.log)" = 19
           grep -F 'EBAY_BUSINESS_ONLY_REFERENCE 19/19 PASS' results.log
+
+      - name: Execute actual PHP discovery and gap-contract regressions from the cumulative patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,shutil
+          root=Path('/tmp/ebay_business_flow')
+          src=Path('release/affiliate-zentrale/current/affiliate-portal-router')
+          shutil.copytree(src,root/'affiliate-portal-router',dirs_exist_ok=True)
+          patch=Path('release/affiliate-zentrale/evidence/EBAY_672308_TO_672311_BUSINESS_ONLY_GESAMTURSACHENPATCH_NUR_TEST.patch').read_text()
+          chosen={}
+          for piece in re.split(r'(?=^diff --git )',patch,flags=re.M):
+              if not piece.startswith('diff --git '):continue
+              head,*hunks=re.split(r'(?=^@@ )',piece,flags=re.M)
+              path=head.split(' b/',1)[1].splitlines()[0]
+              needles= {
+                'affiliate-portal-router/includes/trait-ppar-ebay.php':[
+                  "if (count($reasons) === 1 && $reasons[0] === 'transient_retry_exhausted')",
+                ],
+                'affiliate-portal-router/includes/trait-ppar-ebay-run.php':[
+                  "private function ebay_run_transient_supply_warning($job)",
+                  "$coverage['contract_status']=$technical?'complete_with_technical_gaps'",
+                ],
+              }.get(path,[])
+              selected=[h for h in hunks if any(n in h for n in needles)]
+              if selected:chosen[path]=head+''.join(selected)
+          assert len(chosen)==2 and sum(len(re.findall(r'^@@ ',x,re.M)) for x in chosen.values())==3, "Expected exact 3 causal hunks"
+          (root/'flow.patch').write_text(''.join(chosen.values()))
+          print('PASS exactly 3 real cumulative source hunks selected; independent of earlier 12 seller-route hardlocks')
+          PY
+          cd /tmp/ebay_business_flow
+          git apply --check flow.patch
+          git apply flow.patch
+          php -l affiliate-portal-router/includes/trait-ppar-ebay.php
+          php -l affiliate-portal-router/includes/trait-ppar-ebay-run.php
+          cat > flow.php <<'PHP'
+          <?php
+          error_reporting(E_ALL);
+          define('ABSPATH','/'); define('ARRAY_A','ARRAY_A');
+          function absint($x){return abs((int)$x);}
+          function sanitize_key($x){return strtolower(preg_replace('/[^a-z0-9_-]/','',strtolower((string)$x)));}
+          function sanitize_text_field($x){return trim((string)$x);}
+          function wp_json_encode($x){return json_encode($x);}
+          require 'affiliate-portal-router/includes/trait-ppar-ebay.php';
+          require 'affiliate-portal-router/includes/trait-ppar-ebay-run.php';
+          class FlowTest {
+              use PPAR_Ebay_Trait, PPAR_Ebay_Run_Trait;
+              private function ebay_business_required_product_concept_ids(){return array('sattel','zaumzeug');}
+              public function completion($stats){return $this->ebay_sync_completion_state(array('summary'=>array('profile_stats'=>$stats)));}
+              public function warning($stats){return $this->ebay_run_transient_supply_warning(array('summary'=>array('profile_stats'=>$stats)));}
+              public function gaps($run,$coverage){return $this->ebay_run_business_safe_supply_gap_contract($run,$coverage);}
+          }
+          function ok($test,$label){if(!$test){fwrite(STDERR,"FAIL ".$label."\n");exit(1);}echo "PASS ".$label."\n";}
+          $x=new FlowTest();
+          $good=array(array('complete'=>true),array('complete'=>true));
+          $transient=array(array('complete'=>false,'stopped_reason'=>'transient_retry_exhausted','expected_business_concept_id'=>'sattel'));
+          $permanent=array(array('complete'=>false,'stopped_reason'=>'request_error','expected_business_concept_id'=>'zaumzeug'));
+          ok($x->completion($good)['status']==='completed','All complete profiles produce normal completion');
+          ok($x->completion($transient)['status']==='completed_with_technical_gaps','Only exhausted transient is a technical-gap completion');
+          ok($x->completion($permanent)['status']==='partial','Permanent request error cannot become technical-gap completion');
+          ok($x->completion(array_merge($transient,$permanent))['status']==='partial','Mixed transient and permanent errors remain blocked');
+          ok($x->completion(array(array('complete'=>false)))['status']==='partial','Unknown incomplete profile cannot become success');
+          $w=$x->warning(array_merge($good,$transient));
+          ok($w['profile_count']===1&&$w['concepts']===array('sattel'),'Transient warning is tied to exact real family');
+          ok($w['unknown_scope_count']===0&&$w['error_code']==='ebay_search_transient_retry_exhausted','Transient diagnostic is durable and scoped');
+          $unknown=$x->warning(array(array('complete'=>false,'stopped_reason'=>'transient_retry_exhausted')));
+          ok($unknown['unknown_scope_count']===1&&$unknown['concepts']===array(),'Unknown transient scope cannot be falsely mapped to one family');
+          $run=array(
+            'run_uuid'=>'test',
+            'gapfill'=>array(
+              'attempts'=>1,'missing'=>array('sattel','zaumzeug'),
+              'selection_proof'=>array(
+                'status'=>'complete','reason'=>'canonical_gapfill',
+                'selection_scope'=>'business','owner'=>'run:test','business_target_mode'=>'gapfill',
+                'business_target_concepts'=>array('sattel','zaumzeug'),'selected_concepts'=>array()
+              )
+            )
+          );
+          $cov=array('required'=>2,'covered'=>0,'missing'=>array('sattel','zaumzeug'));
+          $g=$x->gaps($run,$cov);
+          ok($g['status']==='pass'&&$g['coverage']['contract_status']==='complete_with_safe_supply_gaps','Only fully checked absent supply is an ordinary gap');
+          ok($g['coverage']['exceptions']['sattel']['approved']===0,'Unfilled normal gap does not publish');
+          $run['gapfill']['technical_supply_warning']=$w;
+          $g=$x->gaps($run,$cov);
+          ok($g['status']==='pass'&&$g['coverage']['contract_status']==='complete_with_technical_gaps','Temporary provider failures remain separate from verified empty supply');
+          ok($g['coverage']['exceptions']['sattel']['code']==='technical_supply_unverified','Affected family not falsely reported empty');
+          ok($g['coverage']['exceptions']['zaumzeug']['code']==='safe_supply_gap_open','Independent checked family keeps its real classification');
+          $run['gapfill']['technical_supply_warning']=$unknown;
+          $g=$x->gaps($run,$cov);
+          ok($g['status']==='pass'&&$g['coverage']['technical_gap_count']===2,'Unknown failed profile conservatively marks all gaps unverified');
+          $run['gapfill']['technical_supply_warning']=array('concepts'=>array('not-in-expected-products'));
+          $g=$x->gaps($run,$cov);
+          ok($g['status']==='failed'&&$g['error_code']==='business_safe_gap_technical_scope_mismatch','Mismatched source scope cannot be used as proof');
+          unset($run['gapfill']['technical_supply_warning']);
+          $bad=$cov; $bad['covered']=1;
+          $g=$x->gaps($run,$bad);
+          ok($g['status']==='failed'&&$g['error_code']==='business_coverage_state_inconsistent','Coverage inconsistency fails closed');
+          echo "EBAY_CAUSAL_FLOW_REFERENCE 16/16 PASS; NOT FULL ORIGINAL E2E\n";
+          PHP
+          php -l flow.php
+          php flow.php | tee flow.log
+          test "$(grep -c '^PASS ' flow.log)" = 16
+          grep -F 'EBAY_CAUSAL_FLOW_REFERENCE 16/16 PASS' flow.log
