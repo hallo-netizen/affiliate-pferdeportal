@@ -23,5 +23,16 @@
   },
   "live_status": "TEST ONLY. Prior 6.72.308 original ZIP was physically uploaded and verified, NOT denied; it is not currently byte-readable in the connected GitHub repo tree or accessible Library. GitHub reference source is 6.72.211. Therefore full 58-hunk exact-original apply NOT performed, and no actual WP/MariaDB/eBay Browse/getItem/single/sitemap tests. New legacy draft migration tested only with simulated WP functions.",
   "required_for_release": "Read back original AFFILIATE_ZENTRALE_6.72.308_URSACHENFIX_GESAMTTEST_NUR_TEST.zip with previously recorded SHA256 b4d8547fd2aa134f7f82f568db3a81df54bb7d2131fd0752e76e3f0ca2251fe0 from already-documented binary cabinet, apply ALL 58 source hunks in one transaction and run real PHP+WordPress+MariaDB+eBay API tests including no published eBay-owned legacy listings in front-end URLs AND Yoast sitemap. DO NOT substitute the old 6.72.211 reference nor claim user did not upload original.",
-  "release_allowed": false
+  "release_allowed": false,
+  "exact_original_test": {
+    "source_name": "AFFILIATE_ZENTRALE_6.72.308_URSACHENFIX_GESAMTTEST_NUR_TEST.zip",
+    "source_sha256": "b4d8547fd2aa134f7f82f568db3a81df54bb7d2131fd0752e76e3f0ca2251fe0",
+    "source_bytes": 5345251,
+    "storage_status": "USER_UPLOAD_PHYSICALLY_VERIFIED_IN_PRIOR_CHAT; NOT PERSISTED IN CONNECTED GITHUB, CURRENT CHAT LIBRARY OR ACTIVE CONTAINER",
+    "expected_repo_location": "release/affiliate-zentrale/source-original/AFFILIATE_ZENTRALE_6.72.308_URSACHENFIX_GESAMTTEST_NUR_TEST.zip",
+    "destination_folder": "https://github.com/hallo-netizen/affiliate-pferdeportal/tree/affiliate-release-current/release/affiliate-zentrale/source-original",
+    "workflow_run": "https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/42501022060",
+    "workflow_result": "REFERENCE_TESTS_PASS; EXACT_ORIGINAL_TEST_SKIPPED; TEST_BUILD_SKIPPED",
+    "required_no_guess": "Only SHA256-exact original can trigger exact full 58-hunk plugin apply + PHP lint + test-only ZIP artifact. Reference 6.72.211 is not original. No WordPress/Ebay E2E proof."
+  }
 }
