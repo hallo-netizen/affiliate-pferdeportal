@@ -1,0 +1,30 @@
+name: HAB-001 full original for joint category tile audit
+on:
+  push:
+    branches: [hab-004-rc17-tiles-and-affiliate-20261108]
+permissions:
+  contents: read
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Verify original complete design ZIP before local patch
+        run: |
+          python3 - <<'PY'
+          import hashlib, zipfile
+          p='protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip'
+          b=open(p,'rb').read()
+          print('design bytes',len(b),'sha256',hashlib.sha256(b).hexdigest())
+          with zipfile.ZipFile(p) as z:
+              assert z.testzip() is None
+              print('design entries',len(z.namelist()))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: HAB001-original-full-zip
+          path: protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip
+          retention-days: 2
+          if-no-files-found: error
