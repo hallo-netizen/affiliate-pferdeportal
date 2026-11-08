@@ -145,7 +145,9 @@ echo "DEFAULT_OFF_NO_NETWORK_PASS\n";
 
 $state=invoke('auto_state');$state['enabled']=true;$state['status']='idle';
 $GLOBALS['opts'][$auto]=$state;
+echo 'DEBUG_READY '.(invoke('auto_ready',$state)?'TRUE':'FALSE').' TRACKING='.json_encode(invoke('tracking_id')).' STATE='.json_encode(invoke('auto_state'))."\n";
 HDAR_Amazon_Start::auto_cron();
+echo 'DEBUG_AFTER_TICK '.json_encode(invoke('auto_state')).' REQUESTS='.json_encode($GLOBALS['requests'])."\n";
 assert(count($GLOBALS['requests'])===1 && $GLOBALS['requests'][0]['method']==='POST');
 $state=invoke('auto_state');
 assert($state['count']===1 && $state['status']==='pending' && !empty($state['pending']['id']));
