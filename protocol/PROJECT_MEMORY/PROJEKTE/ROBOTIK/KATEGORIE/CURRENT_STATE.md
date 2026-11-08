@@ -20,3 +20,11 @@ Andere Bürogebäude/Produktivsysteme wurden nicht verändert.
 - **Keine bezahlte API-Anfrage, keine Plugin-Änderung, kein WordPress-Import.**
 
 **Nächster Schritt:** Kandidaten systematisch gegen reale Produkt-/Herstellerquellen und Suchintents prüfen; zuerst drei Pilotprodukte (Servierroboter, AMR, Melkroboter), dann die gesamte Einsatzlandkarte; die geprüften Ergebnisse durch den künftigen neutral angebundenen Research-Workflow verdichten und erst danach die CORE-Haupt- und Zwischenseiten festlegen.
+
+## 08.11.2026 – Designbüro und zweite Research-Runde / Plugin-Kandidat 0.2.0
+- Das eigenständige Designbüro wurde mit Silber, Blau und Kupfer auf dem Campus angelegt und ist als eigener Scope im Autoritätsplan eingetragen.
+- Zweite Recherche: 10 Arbeitsfelder, 68 ausdrücklich NICHT freigegebene Robotertypen/Hypothesen; `RECHERCHE/BRANCHEN_PRODUKTE_V2_20261108.md`, `RECHERCHE/PRODUKTE_V2_20261108.json`.
+- Das originale Robotik-Plugin 0.1.0 wurde direkt aus dem 2589-Byte-ZIP ausgepackt: keine sichtbaren alten Portalnamen/URL-Anbindungen, aber nur einfacher JSON-Prüfer; keine Keyword-Recherche und kein Produktseiten-Gate.
+- **0.2.0 Testkandidat gebaut** mit validierter Produktseiten-/Inhaltskategorien-Grenze, eindeutigen WP-Kategorie-Slugs und 16 lokalen Strukturtests. Installations-ZIP `PLUGIN/INSTALLATIONSKANDIDAT_0.2.0.zip`. Die alte `PLUGIN/CURRENT.zip` 0.1.0 wird ausdrücklich NICHT still ersetzt.
+- **Nicht erledigt:** Kein DataForSEO-Research-Adapter, kein automatischer WordPress-Seiten-/Kategorienimport, kein Live-Test, keine WordPress-Zugangsdaten. Produktkandidaten nur Forschungsbestand, `PLAN/robotik-empty.json` bleibt leer.
+- **Nächster Schritt:** Testinstallation von 0.2.0 auf wirklich neuer WordPress-Testsite mit PHP >=8.1 und WordPress >=6.4. Erst nach WP-Smoke-Test ein bestehendes allgemeines Research-Modul (DataForSEO + Intent-/Lückenprüfung) gegen Robotik-Profile technisch anpassen; kein bezahlter Keyword-Auftrag ohne Freigabe. Keine Produktiv-Synchronisierung.

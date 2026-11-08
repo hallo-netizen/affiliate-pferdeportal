@@ -298,6 +298,12 @@
       "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/ROBOTIK/KATEGORIE/START_HERE.md",
       "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/ROBOTIK/KATEGORIE/CURRENT_STATE.md",
       "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/ROBOTIK/KATEGORIE/HOBBYRAUM.md"
+    },
+    {
+      "id": "ROBOTIK_DESIGN",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/ROBOTIK/DESIGN/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/ROBOTIK/DESIGN/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/ROBOTIK/DESIGN/HOBBYRAUM.md"
     }
   ],
   "active_branch_registry": "protocol/PROJECT_MEMORY/ACTIVE_BRANCHES.json"

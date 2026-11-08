@@ -1,0 +1,976 @@
+{
+  "project": "robotik",
+  "record_type": "RESEARCH_CANDIDATES_NOT_IMPORT",
+  "updated": "2026-11-08",
+  "not_a_wordpress_plan": true,
+  "keyword_calls": 0,
+  "approved_product_pages": 0,
+  "groups": [
+    {
+      "name": "Industrie & Fertigung",
+      "count": 13
+    },
+    {
+      "name": "Transport & Logistik",
+      "count": 8
+    },
+    {
+      "name": "Service, Gastronomie & Hotel",
+      "count": 6
+    },
+    {
+      "name": "Professionelle Reinigung",
+      "count": 6
+    },
+    {
+      "name": "Landwirtschaft & Tierhaltung",
+      "count": 7
+    },
+    {
+      "name": "Medizin & Pflege",
+      "count": 6
+    },
+    {
+      "name": "Bau & Infrastruktur",
+      "count": 6
+    },
+    {
+      "name": "Inspektion, Schutz & Rettung",
+      "count": 7
+    },
+    {
+      "name": "Haushalt & Garten",
+      "count": 6
+    },
+    {
+      "name": "Bildung & Forschung",
+      "count": 3
+    }
+  ],
+  "candidates": [
+    {
+      "id": "rb001",
+      "research_group": "Industrie & Fertigung",
+      "product_candidate": "Schweißroboter für Lichtbogenschweißen",
+      "source_category": [
+        "https://www.abb.com/global/en/areas/robotics/applications",
+        "https://www.abb.com/global/en/areas/robotics/products"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb002",
+      "research_group": "Industrie & Fertigung",
+      "product_candidate": "Punktschweißroboter",
+      "source_category": [
+        "https://www.abb.com/global/en/areas/robotics/applications",
+        "https://www.abb.com/global/en/areas/robotics/products"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb003",
+      "research_group": "Industrie & Fertigung",
+      "product_candidate": "Lackierroboter",
+      "source_category": [
+        "https://www.abb.com/global/en/areas/robotics/applications",
+        "https://www.abb.com/global/en/areas/robotics/products"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb004",
+      "research_group": "Industrie & Fertigung",
+      "product_candidate": "Palettierroboter",
+      "source_category": [
+        "https://www.abb.com/global/en/areas/robotics/applications",
+        "https://www.abb.com/global/en/areas/robotics/products"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb005",
+      "research_group": "Industrie & Fertigung",
+      "product_candidate": "Depalettierroboter",
+      "source_category": [
+        "https://www.abb.com/global/en/areas/robotics/applications",
+        "https://www.abb.com/global/en/areas/robotics/products"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb006",
+      "research_group": "Industrie & Fertigung",
+      "product_candidate": "CNC-Maschinenbeschickungsroboter",
+      "source_category": [
+        "https://www.abb.com/global/en/areas/robotics/applications",
+        "https://www.abb.com/global/en/areas/robotics/products"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb007",
+      "research_group": "Industrie & Fertigung",
+      "product_candidate": "Montageroboter (SCARA)",
+      "source_category": [
+        "https://www.abb.com/global/en/areas/robotics/applications",
+        "https://www.abb.com/global/en/areas/robotics/products"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb008",
+      "research_group": "Industrie & Fertigung",
+      "product_candidate": "Pick-and-Place-Roboter (Delta)",
+      "source_category": [
+        "https://www.abb.com/global/en/areas/robotics/applications",
+        "https://www.abb.com/global/en/areas/robotics/products"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb009",
+      "research_group": "Industrie & Fertigung",
+      "product_candidate": "Schleifroboter",
+      "source_category": [
+        "https://www.abb.com/global/en/areas/robotics/applications",
+        "https://www.abb.com/global/en/areas/robotics/products"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb010",
+      "research_group": "Industrie & Fertigung",
+      "product_candidate": "Entgratungsroboter",
+      "source_category": [
+        "https://www.abb.com/global/en/areas/robotics/applications",
+        "https://www.abb.com/global/en/areas/robotics/products"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb011",
+      "research_group": "Industrie & Fertigung",
+      "product_candidate": "Klebe- und Dosierroboter",
+      "source_category": [
+        "https://www.abb.com/global/en/areas/robotics/applications",
+        "https://www.abb.com/global/en/areas/robotics/products"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb012",
+      "research_group": "Industrie & Fertigung",
+      "product_candidate": "Industrieller Mess- und Prüfroboter",
+      "source_category": [
+        "https://www.abb.com/global/en/areas/robotics/applications",
+        "https://www.abb.com/global/en/areas/robotics/products"
+      ],
+      "review": "ABGRENZUNG_ERFORDERLICH",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb013",
+      "research_group": "Industrie & Fertigung",
+      "product_candidate": "Verpackungsroboter",
+      "source_category": [
+        "https://www.abb.com/global/en/areas/robotics/applications",
+        "https://www.abb.com/global/en/areas/robotics/products"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb014",
+      "research_group": "Transport & Logistik",
+      "product_candidate": "Autonomer mobiler Transportroboter (AMR)",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/",
+        "https://www.intel.com/content/www/us/en/learn/types-of-robots.html"
+      ],
+      "review": "ABGRENZUNG_ERFORDERLICH",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb015",
+      "research_group": "Transport & Logistik",
+      "product_candidate": "Fahrerloses Transportfahrzeug (FTF/AGV)",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/",
+        "https://www.intel.com/content/www/us/en/learn/types-of-robots.html"
+      ],
+      "review": "ABGRENZUNG_ERFORDERLICH",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb016",
+      "research_group": "Transport & Logistik",
+      "product_candidate": "Mobiler Palettentransportroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/",
+        "https://www.intel.com/content/www/us/en/learn/types-of-robots.html"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb017",
+      "research_group": "Transport & Logistik",
+      "product_candidate": "Lager-Kommissionierroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/",
+        "https://www.intel.com/content/www/us/en/learn/types-of-robots.html"
+      ],
+      "review": "ABGRENZUNG_ERFORDERLICH",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb018",
+      "research_group": "Transport & Logistik",
+      "product_candidate": "Inventurroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/",
+        "https://www.intel.com/content/www/us/en/learn/types-of-robots.html"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb019",
+      "research_group": "Transport & Logistik",
+      "product_candidate": "Autonomer Paketlieferroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/",
+        "https://www.intel.com/content/www/us/en/learn/types-of-robots.html"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb020",
+      "research_group": "Transport & Logistik",
+      "product_candidate": "Lager-Regaltransportroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/",
+        "https://www.intel.com/content/www/us/en/learn/types-of-robots.html"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb021",
+      "research_group": "Transport & Logistik",
+      "product_candidate": "Mobiler Greif- und Manipulationsroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/",
+        "https://www.intel.com/content/www/us/en/learn/types-of-robots.html"
+      ],
+      "review": "ABGRENZUNG_ERFORDERLICH",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb022",
+      "research_group": "Service, Gastronomie & Hotel",
+      "product_candidate": "Servierroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb023",
+      "research_group": "Service, Gastronomie & Hotel",
+      "product_candidate": "Hotel-Zimmerservice-Roboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb024",
+      "research_group": "Service, Gastronomie & Hotel",
+      "product_candidate": "Empfangs- und Informationsroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb025",
+      "research_group": "Service, Gastronomie & Hotel",
+      "product_candidate": "Telepräsenzroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb026",
+      "research_group": "Service, Gastronomie & Hotel",
+      "product_candidate": "Kaffeezubereitungsroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb027",
+      "research_group": "Service, Gastronomie & Hotel",
+      "product_candidate": "Ausgaberoboter für Speisen",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb028",
+      "research_group": "Professionelle Reinigung",
+      "product_candidate": "Gewerblicher Scheuersaugroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb029",
+      "research_group": "Professionelle Reinigung",
+      "product_candidate": "Fassaden- und Fensterreinigungsroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb030",
+      "research_group": "Professionelle Reinigung",
+      "product_candidate": "Tankreinigungsroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb031",
+      "research_group": "Professionelle Reinigung",
+      "product_candidate": "Rohrreinigungsroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb032",
+      "research_group": "Professionelle Reinigung",
+      "product_candidate": "Desinfektionsroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb033",
+      "research_group": "Professionelle Reinigung",
+      "product_candidate": "Stallreinigungsroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb034",
+      "research_group": "Landwirtschaft & Tierhaltung",
+      "product_candidate": "Melkroboter",
+      "source_category": [
+        "https://www.landwirtschaft.sachsen.de/benchmark-70448.html",
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb035",
+      "research_group": "Landwirtschaft & Tierhaltung",
+      "product_candidate": "Fütterungsroboter",
+      "source_category": [
+        "https://www.landwirtschaft.sachsen.de/benchmark-70448.html",
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb036",
+      "research_group": "Landwirtschaft & Tierhaltung",
+      "product_candidate": "Unkraut-Jätroboter",
+      "source_category": [
+        "https://www.landwirtschaft.sachsen.de/benchmark-70448.html",
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb037",
+      "research_group": "Landwirtschaft & Tierhaltung",
+      "product_candidate": "Autonomer Sprühroboter",
+      "source_category": [
+        "https://www.landwirtschaft.sachsen.de/benchmark-70448.html",
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb038",
+      "research_group": "Landwirtschaft & Tierhaltung",
+      "product_candidate": "Autonomer Sä- und Pflanzroboter",
+      "source_category": [
+        "https://www.landwirtschaft.sachsen.de/benchmark-70448.html",
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb039",
+      "research_group": "Landwirtschaft & Tierhaltung",
+      "product_candidate": "Obst-Ernteroboter",
+      "source_category": [
+        "https://www.landwirtschaft.sachsen.de/benchmark-70448.html",
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb040",
+      "research_group": "Landwirtschaft & Tierhaltung",
+      "product_candidate": "Weinbau-Bodenbearbeitungsroboter",
+      "source_category": [
+        "https://www.landwirtschaft.sachsen.de/benchmark-70448.html",
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb041",
+      "research_group": "Medizin & Pflege",
+      "product_candidate": "Chirurgieroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/",
+        "https://www.abb.com/global/en/areas/robotics/applications"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb042",
+      "research_group": "Medizin & Pflege",
+      "product_candidate": "Rehabilitationsroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/",
+        "https://www.abb.com/global/en/areas/robotics/applications"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb043",
+      "research_group": "Medizin & Pflege",
+      "product_candidate": "Roboter-Exoskelett",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/",
+        "https://www.abb.com/global/en/areas/robotics/applications"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb044",
+      "research_group": "Medizin & Pflege",
+      "product_candidate": "Krankenhaus-Transportroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/",
+        "https://www.abb.com/global/en/areas/robotics/applications"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb045",
+      "research_group": "Medizin & Pflege",
+      "product_candidate": "Laborpipettierroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/",
+        "https://www.abb.com/global/en/areas/robotics/applications"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb046",
+      "research_group": "Medizin & Pflege",
+      "product_candidate": "Medikamenten-Kommissionierroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/",
+        "https://www.abb.com/global/en/areas/robotics/applications"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb047",
+      "research_group": "Bau & Infrastruktur",
+      "product_candidate": "Abbruchroboter",
+      "source_category": [
+        "https://www.bdcnetwork.com/aec-tech/article/55394058/50-companies-delivering-robotics-in-construction",
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb048",
+      "research_group": "Bau & Infrastruktur",
+      "product_candidate": "Baustellen-Markierungsroboter",
+      "source_category": [
+        "https://www.bdcnetwork.com/aec-tech/article/55394058/50-companies-delivering-robotics-in-construction",
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb049",
+      "research_group": "Bau & Infrastruktur",
+      "product_candidate": "Beton-3D-Druckroboter",
+      "source_category": [
+        "https://www.bdcnetwork.com/aec-tech/article/55394058/50-companies-delivering-robotics-in-construction",
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb050",
+      "research_group": "Bau & Infrastruktur",
+      "product_candidate": "Mauerroboter",
+      "source_category": [
+        "https://www.bdcnetwork.com/aec-tech/article/55394058/50-companies-delivering-robotics-in-construction",
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb051",
+      "research_group": "Bau & Infrastruktur",
+      "product_candidate": "Bewehrungsbindroboter",
+      "source_category": [
+        "https://www.bdcnetwork.com/aec-tech/article/55394058/50-companies-delivering-robotics-in-construction",
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb052",
+      "research_group": "Bau & Infrastruktur",
+      "product_candidate": "Tunnelinspektionsroboter",
+      "source_category": [
+        "https://www.bdcnetwork.com/aec-tech/article/55394058/50-companies-delivering-robotics-in-construction",
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb053",
+      "research_group": "Inspektion, Schutz & Rettung",
+      "product_candidate": "Kanalinspektionsroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb054",
+      "research_group": "Inspektion, Schutz & Rettung",
+      "product_candidate": "Tankinspektionsroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb055",
+      "research_group": "Inspektion, Schutz & Rettung",
+      "product_candidate": "Brückeninspektionsroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb056",
+      "research_group": "Inspektion, Schutz & Rettung",
+      "product_candidate": "Sicherheits-Patrouillenroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb057",
+      "research_group": "Inspektion, Schutz & Rettung",
+      "product_candidate": "Feuerlöschroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb058",
+      "research_group": "Inspektion, Schutz & Rettung",
+      "product_candidate": "Rettungs- und Suchroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb059",
+      "research_group": "Inspektion, Schutz & Rettung",
+      "product_candidate": "Unterwasser-Inspektionsroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb060",
+      "research_group": "Haushalt & Garten",
+      "product_candidate": "Staubsaugroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb061",
+      "research_group": "Haushalt & Garten",
+      "product_candidate": "Wischroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb062",
+      "research_group": "Haushalt & Garten",
+      "product_candidate": "Mähroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb063",
+      "research_group": "Haushalt & Garten",
+      "product_candidate": "Poolreinigungsroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb064",
+      "research_group": "Haushalt & Garten",
+      "product_candidate": "Fensterputzroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb065",
+      "research_group": "Haushalt & Garten",
+      "product_candidate": "Haushalts-Assistenzroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "ABGRENZUNG_ERFORDERLICH",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb066",
+      "research_group": "Bildung & Forschung",
+      "product_candidate": "Programmierbarer Lernroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "BEGRIFF_UND_PRODUKT_BELEGEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb067",
+      "research_group": "Bildung & Forschung",
+      "product_candidate": "Robotik-Lehrbaukasten",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "ABGRENZUNG_ERFORDERLICH",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    },
+    {
+      "id": "rb068",
+      "research_group": "Bildung & Forschung",
+      "product_candidate": "Humanoider Entwicklungsroboter",
+      "source_category": [
+        "https://ifr.org/wr-service-robots/"
+      ],
+      "review": "ABGRENZUNG_ERFORDERLICH",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wordpress_role": "UNENTSCHEIDEN",
+      "wp_content_categories": [],
+      "aliases": []
+    }
+  ]
+}
