@@ -742,7 +742,120 @@ index b39f499..e53c439 100644
  
                  $items = array_values((array) ($page_data['items'] ?? array()));
                  $summary['pages']++;
-@@ -10291,7 +10343,7 @@ trait PPAR_Ebay_Trait {
+@@ -9549,8 +9549,6 @@ EBAY_PRIVATE_ADMIN_REMOVAL
+         $previous = $this->ebay_settings();
+         $input = is_array($_POST['ppar_ebay'] ?? null) ? wp_unslash($_POST['ppar_ebay']) : array();
+         $input['enabled'] = array_key_exists('enabled', $input) ? !empty($input['enabled']) : !empty($previous['enabled']);
+-        $input['private_enabled'] = !empty($input['private_enabled']);
+-        $input['private_auto_publish'] = !empty($input['private_auto_publish']);
+         $input['inventory_refresh_enabled'] = !empty($input['inventory_refresh_enabled']);
+         $input['business_enabled'] = !empty($input['business_enabled']);
+         $input['api_terms_confirmed'] = !empty($input['api_terms_confirmed']);
+@@ -9888,10 +9886,7 @@ EBAY_PRIVATE_ADMIN_REMOVAL
+         // Page-performance invariant: normal rendering reads only bounded status
+         // options. Do not rescan thousands of source rows (the old Reitstiefel
+         // live snapshot alone read up to 5,000 rows on every page view).
+-        $media_cleanup = get_option(self::OPTION_EBAY_MEDIA_CLEANUP_STATE, array());
+-        $media_cleanup = is_array($media_cleanup) ? $media_cleanup : array();
+         $review_candidates = $this->ebay_review_candidates(100);
+-        $review_targets = $this->ebay_private_review_targets($settings);
+         ?>
+         <div class="wrap ppar-ebay">
+             <h1>eBay</h1>
+@@ -9900,26 +9895,17 @@ EBAY_PRIVATE_ADMIN_REMOVAL
+             <p><strong>Automatischer Heartbeat:</strong> Für Pferde Atelier wird die vorhandene GitHub-Infrastruktur als Taktgeber verwendet; kein zusätzlicher externer Account ist erforderlich. Die Heartbeat-URL enthält keinen Geheimschlüssel und akzeptiert ausschließlich begrenzte POST-Ticks. <input type="text" class="large-text code" readonly value="<?php echo esc_attr($external_tick_url); ?>" onclick="this.select();"></p>
+             <p><strong>Hintergrundarbeit:</strong> <?php echo $worker_last_tick_at ? 'letzter Block '.esc_html(wp_date('d.m.Y H:i:s',$worker_last_tick_at)) : 'noch nicht gestartet'; ?> · technische Pakete <?php echo absint($worker_tick_count); ?> · übersprungene Einzelfehler <?php echo absint($canonical_run['skipped_item_errors_count'] ?? 0); ?>. <strong>Browser kann geschlossen werden.</strong></p>
+             <p><strong>Provider-Fachseite.</strong> Zugangsdaten und OAuth-Test liegen zentral unter <a href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-networks')); ?>">Netzwerke &amp; API</a>. <?php echo $this->provider_control_badge('ebay'); ?> <a class="button button-small" href="<?php echo esc_url($this->provider_control_url('ebay')); ?>">Chefsteuerung &amp; Veto</a></p>
+-            <p><strong>Eingangsweiche:</strong> INDIVIDUAL → fachliche HivePress-Unterkategorien direkt unter „Private Anzeigen“ · BUSINESS → Werbemittelbibliothek und ausschließlich providerreine Produktzonen.</p>
++            <p><strong>Ausgabe:</strong> Nur gewerbliche eBay-Angebote (BUSINESS) in passenden Produktzonen. Eigenständige HivePress-Anzeigen bleiben unverändert.</p>
+-            <p><strong>eBay-Bilder:</strong> PRIVATE-Angebote werden ab V6.12 ausschließlich über die verifizierte eBay-Bild-URL dargestellt; es werden keine neuen eBay-PRIVATE-Bilder in die WordPress-Mediathek kopiert. <strong>Legacy-Bereinigung:</strong> <?php echo esc_html((string)($media_cleanup['status'] ?? 'wartet')); ?> · gelöscht <?php echo absint($media_cleanup['deleted'] ?? 0); ?> · übersprungen <?php echo absint($media_cleanup['skipped'] ?? 0); ?> · Fehler <?php echo absint($media_cleanup['failed'] ?? 0); ?>.</p>
++            <p><strong>Prüfung:</strong> Gewerbliche eBay-Produkte werden vor der Ausgabe auf Quelle, Qualität und Aktualität geprüft.</p>
+             <?php if ($notice === 'saved') : ?><div class="notice notice-success inline"><p>Einstellungen gespeichert.</p></div><?php endif; ?>
+             <?php if (in_array($notice, array('error','test_failed','sync_failed','refresh_failed','review_failed'), true)) : ?><div class="notice notice-error inline"><p><?php echo esc_html($message ?: 'Vorgang fehlgeschlagen.'); ?></p></div><?php endif; ?>
+             <?php if (in_array($notice, array('sync_started','refresh_started'), true)) : ?><div class="notice notice-info inline"><p><?php echo esc_html($message ?: 'Hintergrundvorgang gestartet.'); ?></p></div><?php endif; ?>
+             <?php if (in_array($notice, array('categories','catalog_passed','test_passed','sync_passed','review_saved'), true)) : ?><div class="notice notice-success inline"><p><?php echo esc_html($message ?: 'Vorgang abgeschlossen.'); ?></p></div><?php endif; ?>
+ 
+             <section class="postbox" style="padding:18px;max-width:1180px">
+-                <h2>1. HivePress-Bereich einrichten</h2>
+-                <p>Erstellt beziehungsweise prüft <strong>Private Anzeigen</strong> und darunter direkt die acht fachlichen Unterkategorien. Die frühere sichtbare Provider-Ebene „eBay-Privatanzeigen“ wird automatisch und ohne Verlust der Listing-Zuordnungen entfernt.</p>
+-                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+-                    <input type="hidden" name="action" value="ppar_ebay_setup_categories">
+-                    <?php wp_nonce_field('ppar_ebay_setup_categories', 'ppar_ebay_nonce'); ?>
+-                    <button class="button button-secondary">Private-Anzeigen-Kategorien anlegen/prüfen</button>
+-                    <?php if (!empty($settings['private_root_term_id'])) : ?><span style="margin-left:10px">Private-Anzeigen-ID: <?php echo absint($settings['private_root_term_id']); ?></span><?php endif; ?>
+-                </form>
+-            </section>
+ 
+             <section class="postbox" style="padding:18px;max-width:1180px">
+-                <h2>2. Portal- und Themenabgleich prüfen</h2>
++                <h2>1. Portal- und Themenabgleich prüfen</h2>
+                 <p>Prüft den fest mitgelieferten vollständigen Pferde-Atelier-Zielkatalog: 8 Hauptbereiche, 59 Bereichsseiten, 329 Produktseiten und 1.124 WordPress-Kategorien. Ohne positiven Abgleich bleiben Provider-Fachtest und Abruf fail-closed.</p>
+                 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+                     <input type="hidden" name="action" value="ppar_ebay_verify_catalog">
+@@ -9930,17 +9916,13 @@ EBAY_PRIVATE_ADMIN_REMOVAL
+             </section>
+ 
+             <section class="postbox" style="padding:18px;max-width:1180px">
+-                <h2>3. Betriebsprofil und automatische Abrufprofile</h2>
++                <h2>2. Betriebsprofil und automatische Abrufprofile</h2>
+                 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+                     <input type="hidden" name="action" value="ppar_ebay_save_settings">
+                     <?php wp_nonce_field('ppar_ebay_save_settings', 'ppar_ebay_nonce'); ?>
+                     <table class="form-table" role="presentation"><tbody>
+                         <tr><th>Zentraler Zugang</th><td><?php echo !empty($settings['enabled']) ? '<strong>aktiviert</strong>' : '<strong>deaktiviert</strong>'; ?> · Umgebung: <strong><?php echo esc_html((string)$settings['environment']); ?></strong><p class="description">Client-ID, Client-Secret, EPN-Campaign-ID, Aktivierung und OAuth-Test werden ausschließlich unter <a href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-networks')); ?>">Netzwerke &amp; API</a> verwaltet.</p></td></tr>
+                         <tr><th>Liefer-PLZ</th><td><input class="small-text" name="ppar_ebay[delivery_postal_code]" value="<?php echo esc_attr((string) $settings['delivery_postal_code']); ?>"><p class="description">Optional für präzisere Versandinformationen.</p></td></tr>
+-                        <tr><th>Private Verkäufer</th><td><label><input type="checkbox" name="ppar_ebay[private_enabled]" value="1" <?php checked(!empty($settings['private_enabled'])); ?>> INDIVIDUAL abrufen</label><p class="description">Fachlich eindeutige Angebote werden als HivePress-Listings angelegt; weiche Unsicherheiten landen im Prüfbestand statt verworfen zu werden.</p></td></tr>
+-                        <tr><th>Automatische Veröffentlichung</th><td><label><input type="checkbox" name="ppar_ebay[private_auto_publish]" value="1" <?php checked(!empty($settings['private_auto_publish'])); ?>> Fachlich sichere INDIVIDUAL-Angebote direkt veröffentlichen</label><p class="description"><strong>Standard nach Update: aus.</strong> Bereits manuell veröffentlichte eBay-Listings bleiben bei späteren Abrufen veröffentlicht. Prüfbestand wird niemals automatisch veröffentlicht.</p></td></tr>
+-                        <tr><th>PRIVATE-Ausgabe</th><td><span class="description">Fachlich sichere automatisch veröffentlichte eBay-Privatanzeigen erscheinen in ihrer zugewiesenen HivePress-Unterkategorie mit normaler Pagination. Die Parent-Seite „Private Anzeigen“ bleibt fest auf maximal 9 Karten begrenzt.</span></td></tr>
+-                        <tr><th>PRIVATE-Obergrenze</th><td><input class="small-text" type="number" min="50" max="250" name="ppar_ebay[private_active_cap]" value="<?php echo absint($settings['private_active_cap']); ?>"> aktiv gesamt · <input class="small-text" type="number" min="5" max="100" name="ppar_ebay[private_leaf_cap]" value="<?php echo absint($settings['private_leaf_cap']); ?>"> je Leaf<p class="description">Standard: 250 aktiv gesamt. Der Leaf-Wert 30 ist das faire Erstverteilungsziel je unterster Kategorie; bleiben andere Bereiche unterversorgt, wird ausschließlich mit weiteren fachlich sicheren Kandidaten bis zum globalen Cap nachgefüllt. Überschuss bleibt im eBay-Rohbestand und erzeugt keinen unnötigen HivePress-Post; bereits materialisierte Überkapazität wird auf Entwurf gesetzt, nicht gelöscht.</p></td></tr>
+                         <tr><th>Bestandsabgleich</th><td><label><input type="checkbox" name="ppar_ebay[inventory_refresh_enabled]" value="1" <?php checked(!empty($settings['inventory_refresh_enabled'])); ?>> Vor Ablauf der 6-Stunden-Frist vorhandene eBay-Angebote gezielt per Browse <code>getItem</code> nachprüfen</label><p class="description">Unauffindbar/verkauft/beendet → Frontend aus. Temporärer API-Fehler → keine Löschung; der Datensatz bleibt intern erhalten und wird später erneut geprüft.</p></td></tr>
+                         <tr><th>Bestandschecks je Lauf</th><td><input class="small-text" type="number" min="1200" max="2000" name="ppar_ebay[inventory_refresh_max_per_run]" value="<?php echo absint($settings['inventory_refresh_max_per_run']); ?>"><p class="description">Automatisch mindestens 1.200 Checks; der Bestandsabgleich läuft stündlich, Discovery weiterhin alle drei Stunden. Keine Änderung erforderlich.</p></td></tr>
+                         <tr><th>Gewerbliche Verkäufer</th><td><label><input type="checkbox" name="ppar_ebay[business_enabled]" value="1" <?php checked(!empty($settings['business_enabled'])); ?>> BUSINESS als Produkt-Creatives übernehmen</label></td></tr>
+@@ -10043,7 +10025,7 @@ EBAY_PRIVATE_ADMIN_REMOVAL
+             <?php endif; ?>
+ 
+             <section class="postbox" style="padding:18px;max-width:1180px">
+-                <h2>4. Provider-Fachtest und Abruf</h2>
++                <h2>3. Provider-Fachtest und Abruf</h2>
+                 <p>Der reine OAuth-Zugangstest liegt zentral unter „Netzwerke &amp; API“. Dieser Fachtest prüft zusätzlich EBAY_DE, itemAffiliateWebUrl, die Verkäuferkontotypen INDIVIDUAL/BUSINESS und den Portalfilter. Der vollständige Abruf folgt eBays Pagination über <code>next</code> und läuft seit V5.6.0 ausschließlich als fortsetzbarer Hintergrundjob; der Admin-Klick wartet nicht mehr auf den Gesamtlauf.</p>
+                 <div style="display:flex;gap:10px;flex-wrap:wrap">
+                     <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_ebay_test_connection"><?php wp_nonce_field('ppar_ebay_test_connection', 'ppar_ebay_nonce'); ?><button class="button button-secondary">Provider-Fachtest starten</button></form>
+@@ -10106,7 +10088,7 @@ EBAY_PRIVATE_ADMIN_REMOVAL
+             </section>
+ 
+             <section class="postbox" style="padding:18px;max-width:1180px">
+-                <h2>5. eBay-Prüfbestand / Chef-Veto</h2>
++                <h2>4. eBay-Prüfbestand / Chef-Veto</h2>
+                 <p>Nur <strong>weiche fachliche Unsicherheiten</strong> erscheinen hier. Hard-Safety-, Provider-, Affiliate-, Ablauf- und technische Sperren bleiben nicht übersteuerbar. Ein Kandidat muss innerhalb der Sechs-Stunden-Frist entschieden werden.</p>
+                 <?php if (!$review_candidates) : ?>
+                     <p><em>Kein offener Prüfkandidat.</em></p>
+@@ -10118,24 +10100,7 @@ EBAY_PRIVATE_ADMIN_REMOVAL
+                             <td><?php echo esc_html((string)($candidate['seller_account_type'] ?? '')); ?></td>
+                             <td><?php echo esc_html((string)($candidate['rejection_reason'] ?? '')); ?></td>
+                             <td>
+-                            <?php if (strtoupper((string)($candidate['seller_account_type'] ?? '')) === 'INDIVIDUAL') : ?>
+-                                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="display:grid;gap:6px;min-width:320px">
+-                                    <input type="hidden" name="action" value="ppar_ebay_review_decision">
+-                                    <input type="hidden" name="row_id" value="<?php echo absint($candidate['id'] ?? 0); ?>">
+-                                    <?php wp_nonce_field('ppar_ebay_review_decision', 'ppar_ebay_nonce'); ?>
+-                                    <select name="target_term_id" required>
+-                                        <option value="">HivePress-Ziel wählen</option>
+-                                        <?php foreach ($review_targets as $target) : ?><option value="<?php echo absint($target->term_id ?? 0); ?>"><?php echo esc_html((string)($target->name ?? '')); ?></option><?php endforeach; ?>
+-                                    </select>
+-                                    <input type="text" name="reason" required maxlength="240" placeholder="Begründung der Chefentscheidung">
+-                                    <div style="display:flex;gap:6px;flex-wrap:wrap">
+-                                        <button class="button button-primary" name="review_decision" value="approve">Freigeben</button>
+-                                        <button class="button" name="review_decision" value="veto" formnovalidate onclick="this.form.querySelector('select[name=target_term_id]').removeAttribute('required');">Veto</button>
+-                                    </div>
+-                                </form>
+-                            <?php else : ?>
+-                                <em>BUSINESS-Prüfkandidat bleibt fail-closed; Freigabe über die Werbemittel-/Chefsteuerung wird nicht automatisch vorweggenommen.</em>
+-                            <?php endif; ?>
++                                <em>Gewerblicher Prüfkandidat: Freigabe ausschließlich über die bestehende Werbemittel-/Chefsteuerung.</em>
+                             </td>
+                         </tr>
+                     <?php endforeach; ?>
+@@ -10291,7 +10308,7 @@ trait PPAR_Ebay_Trait {
              </section>
  
              <?php if ((string)($canonical_run['schema'] ?? '') === '1.0') : ?>
@@ -752,7 +865,7 @@ index b39f499..e53c439 100644
 -                <?php $canonical_label=$canonical_status==='running'?'Läuft':($canonical_status==='paused'?'Pausiert':($canonical_status==='failed'?'Fehlgeschlagen':($canonical_status==='completed'?(!empty($canonical_run['completed_with_skips'])?'Fertig (mit übersprungenen Fehlern)':'Fertig'):($canonical_status==='local_checked'?'Lokal geprüft (noch nicht freigegeben)':'Wartet')))); ?>
 +                <?php $canonical_label=$canonical_status==='running'?'Läuft':($canonical_status==='paused'?'Pausiert':($canonical_status==='failed'?'Fehlgeschlagen':($canonical_status==='completed'?(!array_key_exists('completed_with_skips',$canonical_run)||!empty($canonical_run['completed_with_skips'])?'Fertig (mit offenen Prüfungen)':'Fertig'):($canonical_status==='local_checked'?'Lokal geprüft (noch nicht freigegeben)':'Wartet')))); ?>
                  <p><strong>Status:</strong> <strong><?php echo esc_html($canonical_label); ?></strong> · Run <code><?php echo esc_html(substr((string)($canonical_run['run_uuid'] ?? ''),0,12)); ?></code>
-@@ -10323,7 +10375,7 @@ trait PPAR_Ebay_Trait {
+@@ -10323,7 +10340,7 @@ trait PPAR_Ebay_Trait {
                          var tickAge=tick?Math.max(0,now-tick):null;
                          var status=d.status||'';
                          var state;
@@ -761,7 +874,7 @@ index b39f499..e53c439 100644
                          else if(status==='local_checked') state='Lokal geprüft (nicht freigegeben)';
                          else if(status==='failed') state='Fehlgeschlagen';
                          else if(status==='paused') state='Pausiert';
-@@ -10388,7 +10440,14 @@ trait PPAR_Ebay_Trait {
+@@ -10388,7 +10405,14 @@ trait PPAR_Ebay_Trait {
                  <?php if(!empty($canonical_run['checkpoint_safe'])): ?><p><strong>Sicherer Frontend-Stand:</strong> bleibt unverändert aktiv.</p><?php endif; ?>
                  <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="margin-top:10px"><input type="hidden" name="action" value="ppar_ebay_run_restart"><?php wp_nonce_field('ppar_ebay_run_restart','ppar_ebay_nonce'); ?><button class="button button-primary">Lauf neu starten</button></form>
                  </div><?php endif; ?>
