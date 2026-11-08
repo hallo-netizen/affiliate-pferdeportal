@@ -1,0 +1,58 @@
+name: Hobbyregister in-text banner spacing diagnosis
+on:
+  push:
+    branches: [hobbyroom/hd009-026-register-top-gap-20261108]
+    paths: ['.github/workflows/hd009-026-inspect.yml']
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect exact current plugin CSS and banner mount
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          with ZipFile(p) as z:
+            for n in z.namelist():
+              if n.endswith((".css",".php")):
+                s=z.read(n).decode("utf8","replace")
+                if 'hdar-ci-register-inline' in s or 'hdar-ci-amazon-slot' in s:
+                  print('SOURCE',n,'length',len(s))
+                  for needle in ['hdar-ci-register-inline','hdar-ci-amazon-slot','hdr-article', '.hdar-ci-amazon-banner-wide','.hdar-ci-amazon-slot-wide','hdar-ci-label']:
+                    for match in list(re.finditer(re.escape(needle),s))[:9]:
+                      frag=s[max(0,match.start()-190):match.start()+460]
+                      print('MATCH',needle,'OFFSET',match.start(),'EXCERPT',frag.replace("\n"," ")[:650])
+          PY
+      - name: Install playwright
+        run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - name: Measure real register banner spacing at desktop and mobile
+        run: |
+          python3 - <<'PY'
+          from playwright.sync_api import sync_playwright
+          import json
+          urls=["https://www.hobby-depot.de/hobbyregister/alte-kameras-reparieren/","https://www.hobby-depot.de/hobbyregister/alabasterschnitzen/"]
+          with sync_playwright() as p:
+            browser=p.chromium.launch(headless=True,args=['--no-sandbox'])
+            for width in [1440,900,390,360]:
+              page=browser.new_page(viewport={'width':width,'height':900})
+              for u in urls:
+                response=page.goto(u,wait_until="domcontentloaded",timeout=35000)
+                page.wait_for_timeout(550)
+                if not response or response.status!=200:print('HTTP_ERROR',width,u,response.status if response else 'none');continue
+                data=page.evaluate("""() => {
+                  let b=document.querySelector('.hdar-ci-register-inline:not([hidden])'), a=b?.querySelector('.hdar-ci-amazon-banner'),article=document.querySelector('.hdr-article');
+                  if(!b)return {bannerFound:false,inlineCount:document.querySelectorAll('.hdar-ci-register-inline').length};
+                  function desc(e){if(!e)return null;let r=e.getBoundingClientRect(),s=getComputedStyle(e);return {tag:e.tagName,cls:e.className,top:r.top,bottom:r.bottom,width:r.width,height:r.height,marginTop:s.marginTop,marginBottom:s.marginBottom,padTop:s.paddingTop,padBottom:s.paddingBottom,display:s.display};}
+                  let prev=b.previousElementSibling,next=b.nextElementSibling;
+                  return {bannerFound:true,b:desc(b),a:desc(a),prev:desc(prev),next:desc(next),parent:desc(b.parentElement),article:desc(article),gap:prev?b.getBoundingClientRect().top-prev.getBoundingClientRect().bottom:null}
+                }""")
+                print('LIVE_SPACING',width,u,json.dumps(data,ensure_ascii=False))
+              page.close()
+            browser.close()
+          PY
