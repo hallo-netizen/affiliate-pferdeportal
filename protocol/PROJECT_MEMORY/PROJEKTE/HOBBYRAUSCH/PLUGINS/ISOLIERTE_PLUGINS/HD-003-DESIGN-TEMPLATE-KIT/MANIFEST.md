@@ -1,5 +1,9 @@
 # HD003 – Hobbydepot Design – gültige Current-Version
 
+**Sichtabnahme des Nutzers, 08.11.2026:** HD003 **1.50.806** für das Hobbydepot-Beitragsdesign **„erst einmal okay, bis auf Kleinigkeiten“**. Dies ist eine **vorläufige Freigabe des erreichten Testartikel-Designs**, keine Detail-Vollabnahme und insbesondere **keine Freigabe einer produktiven Amazon-Artikelbox**. Gesicherter aktueller Vollinstaller `HOBBY_DEPOT_DESIGN_HD003_1.50.806.zip` plus byteidentisches `CURRENT.zip` (Git-Blob `e3496adbc4524da0c6375d198d9010e2cc30d9f4`, SHA-256 `665a71d705ae80891ca43d56aca851c006608fcfcb61185381e3f96033635358`). Nichts am Plugin geändert, **keine Versionsänderung**. Ein Hero, kein wiederholtes Hero-Foto, kein bildloser Amazon-Suchbanner im Artikel, keine zweite Bildkachel rechts. Hab-&-Bewahr-inspirierter Lesestil bleibt zunächst **nur auf dem markierten Testartikel**; Detailkleinigkeiten bleiben offen, aber keine neue Designrunde ohne Anlass. **Nächster Arbeitsbereich ist die echte Amazon-Produktbox auf Artikelebene in der HD009 Affiliate-Zentrale**, einschließlich DataForSEO-Recherche, Freigabe, korrekter Zuordnung und erlaubtem Produktbild. HD003, HD006 (Bildzentrale), HD007 und die bestehende HD009 0.1.28 bleiben durch diese Dokumentation unangetastet.
+
+
+
 **Version 1.50.806 · 08.11.2026**
 
 - Vollständiges WordPress-Plugin: `HOBBY_DEPOT_DESIGN_HD003_1.50.806.zip`, **65.705.901 Bytes**, SHA-256 `665a71d705ae80891ca43d56aca851c006608fcfcb61185381e3f96033635358`, Git-Blob `e3496adbc4524da0c6375d198d9010e2cc30d9f4`. `CURRENT.zip` ist byteidentisch. Installierter WordPress-Pluginordner und Einstieg bleiben `affiliate-portal-template-kit/pferde-template-kit.php`; die getrennte **HD006 Bildzentrale** wird ausdrücklich nicht umbenannt oder verändert.
