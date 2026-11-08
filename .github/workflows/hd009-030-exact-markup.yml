@@ -1,0 +1,37 @@
+name: HD009 exact provider precedence and article markup
+on:
+  push:
+    branches: [hobbyroom/hd009-030-provider-images-article-cards-20261108]
+    paths: [.github/workflows/hd009-030-exact-markup.yml]
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read exact active output and hook priorities read-only
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re
+          file=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          with ZipFile(file) as z:
+            src={x:z.read(x).decode('utf8','replace') for x in ['affiliate-portal-router/hobby-depot-affiliate-router.php','affiliate-portal-router/includes/trait-ppar-article-plans.php','affiliate-portal-router/includes/class-hdar-amazon-start.php']}
+            for name,s in src.items():
+              print('FILE',name,'LEN',len(s))
+              for needle in ['HDAR_Amazon_Start::bootstrap','add_filter(\\'the_content\\'','add_filter("the_content"','filter_the_content','article_plan_render_products(','article_plan_render_product_card_markup(','hdar_launch_public_campaign_allowed(','render_article_cards(']:
+                matches=list(re.finditer(re.escape(needle),s))
+                print('MATCHES',name.split('/')[-1],needle,len(matches))
+                for m in matches[:4]:
+                  snippet=s[max(0,m.start()-420):m.start()+1750]
+                  print('CONTEXT',name.split('/')[-1],needle,re.sub(r'\s+',' ',snippet)[:2120])
+              if name.endswith('trait-ppar-article-plans.php'):
+                start=s.index('private function article_plan_render_products(') if 'private function article_plan_render_products(' in s else -1
+                if start>=0:print('PRODUCTS_OUTPUT',re.sub(r'\s+',' ',s[start:start+7600]))
+                start=s.index('private function article_plan_render_product_card_markup(') if 'private function article_plan_render_product_card_markup(' in s else -1
+                if start>=0:print('PRODUCT_CARD_MARKUP',re.sub(r'\s+',' ',s[start:start+6900]))
+              if name.endswith('hobby-depot-affiliate-router.php'):
+                match=re.search(r'function hdar_launch_public_campaign_allowed\(',s)
+                if match:print('LAUNCH_GATE',re.sub(r'\s+',' ',s[match.start():match.start()+3300]))
+          PY
