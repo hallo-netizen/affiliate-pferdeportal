@@ -1,0 +1,37 @@
+name: HD003 1.50.806 Hobbyfinder targeted audit
+on:
+  push:
+    branches: [hobbyroom/hd003-150807-hobbyfinder-20261108]
+    paths: [.github/workflows/hobby-hd003-150807.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect latest exact source 1.50.806
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import zipfile,hashlib,re
+          p='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip'
+          with zipfile.ZipFile(p) as z:
+            print('ZIP_SIZE',__import__('os').path.getsize(p),'SHA',hashlib.sha256(open(p,'rb').read()).hexdigest(),'FILES',len(z.namelist()))
+            for n in z.namelist():
+              if not n.endswith(('.php','.css','.js')):continue
+              raw=z.read(n)
+              if len(raw)>1600000:continue
+              s=raw.decode('utf8','replace')
+              lines=s.splitlines()
+              hits=[]
+              keys=['hobbyfinder','acht kurze fragen','hier könnte ihre werbung stehen','Werbebedingungen','nur eingeloggte','affiliate-banner','funde, was','finde, was','bildfinder-hero']
+              for i,l in enumerate(lines):
+                if any(k.casefold() in l.casefold() for k in keys):hits.append(i)
+              if hits:
+                print('FILE',n,'LINES',len(lines),'HITS',len(hits))
+                for i in hits[:55]:
+                  print('HIT',i+1,' '.join(lines[max(0,i-2):min(len(lines),i+3)])[:1000])
+            print('ASSETS',[(n,z.getinfo(n).file_size) for n in z.namelist() if any(k in n.lower() for k in ('hobbyfinder','banner-hobby','hobby-finder'))][-50:])
+          PY
