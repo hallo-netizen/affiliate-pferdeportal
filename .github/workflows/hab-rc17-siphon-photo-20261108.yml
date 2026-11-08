@@ -1,0 +1,37 @@
+name: HAB RC17 independently licensed siphon picture
+on:
+  push:
+    branches: [hab-004-rc17-tiles-and-affiliate-20261108]
+permissions:
+  contents: read
+jobs:
+  photo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify exact Unsplash photo and source image (read-only)
+        run: |
+          set -euo pipefail
+          mkdir -p candidate
+          curl -fLsS --retry 2 --max-time 35 'https://unsplash.com/photos/um-cano-e-conectado-a-uma-pia-em-um-banheiro-ZLLm1ej0q-M' -o candidate/source.html
+          python3 - <<'PY'
+          from html import unescape
+          import re
+          s=open('candidate/source.html').read()
+          matches=re.findall(r'https://images\.unsplash\.com/photo-[0-9]+-[0-9a-f]+',unescape(s))
+          print('CANDIDATES',list(dict.fromkeys(matches))[:7])
+          assert matches,'Unsplash photo source image not verifiable'
+          image=list(dict.fromkeys(matches))[0]
+          open('candidate/photo_url.txt','w').write(image)
+          PY
+          url="$(cat candidate/photo_url.txt)?auto=format&fit=crop&w=1600&q=82"
+          curl -fLsS --retry 2 --max-time 35 "$url" -o candidate/siphon-under-sink.jpg
+          file candidate/siphon-under-sink.jpg
+          test "$(stat -c %s candidate/siphon-under-sink.jpg)" -gt 40000
+          rm candidate/source.html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Hab-RC17-verified-siphon-picture
+          path: candidate
+          if-no-files-found: error
+          retention-days: 2
