@@ -1,0 +1,54 @@
+name: HAB-004 RC18 verified plugin binary build
+on:
+  push:
+    branches: [hab-004-rc18-canonical-world-id-fix-20261108]
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Patch RC17 original in its existing single CURRENT.zip
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import subprocess
+          from zipfile import ZipFile
+          from pathlib import Path
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          with ZipFile(p) as z:
+              head=z.read('affiliate-portal-router/affiliate-portal-router.php')
+          if b'Version: 0.1.14-rc17' in head:
+              subprocess.run(['python3','protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/RC18_BUILD_FROM_RC17.py'],check=True)
+          elif b'Version: 0.1.15-rc18' in head:
+              print('Already RC18, no second patch')
+          else:
+              raise RuntimeError('Unexpected version; stop, never overwrite')
+          PY
+          mkdir -p /tmp/hab-rc18-files
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          with ZipFile(p) as z:
+              assert len(z.namelist())==36 and z.testzip() is None
+              z.extractall('/tmp/hab-rc18-files')
+          PY
+          count=0
+          while IFS= read -r -d '' phpfile; do
+            php -l "$phpfile" | grep -q 'No syntax errors'
+            count=$((count+1))
+          done < <(find /tmp/hab-rc18-files -name '*.php' -print0)
+          test "$count" -eq 25
+          echo "25/25 PHP syntax tests PASS"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip
+          if ! git diff --cached --quiet; then
+            git config user.name "Hab release automation"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "HAB-004 RC18: verified complete CURRENT.zip, world ID fix all levels"
+            git push origin HEAD:hab-004-rc18-canonical-world-id-fix-20261108
+          fi
