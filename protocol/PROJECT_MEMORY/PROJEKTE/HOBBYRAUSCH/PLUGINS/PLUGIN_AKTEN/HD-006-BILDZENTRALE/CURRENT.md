@@ -3,7 +3,22 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-11-08
-STATUS: **2.8.12 IST NEUER VOLLSTÄNDIGER LOKALER KANDIDAT; POSITIVE/NEGATIVE PRÜFUNGEN BESTANDEN; WORDPRESS-LIVE UND ECHTES BILDANBIETERERGEBNIS OFFEN.**
+STATUS: **2.8.13 IST DER AKTUELLE VOLLSTÄNDIGE LOKALE INSTALLATIONSKANDIDAT. LOKALE POSITIV-/NEGATIVTESTS PASS; 2.8.13-WORDPRESS-LIVE UND ECHTER HERO-PROMPT OFFEN.**
+
+## Aktuell: Bildzentrale 2.8.13
+
+- Vollständige WordPress-Plugin-ZIP **`Bildzentrale-2.8.13.zip`**, **86.359 Byte**, SHA256 `96979106181f8d488e3cc124c9c46d9834494be08f18828c266331db2ed4045a`.
+- Die **Voll-ZIP, das Zwischenprotokoll und das reproduzierbare Testpaket** sind in der dauerhaften persönlichen Library **`/Hobby Depot/Plugin-Büro/`** gespeichert. Sie liegen **nicht als Binärdatei auf GitHub**.
+- **Systematisches Read-only-Audit aller 862 HD007-Einträge** direkt gegen die HD007- und HD003-CURRENT-Originalarchive: 862 vorhandene und lesbare Bilder, 0 fehlende oder beschädigte Dateien, 265 verschiedene WebP-Dateien, 733 Hobbys teilen sich 136 Fotodateien. Von den bisherigen Zuordnungen sind 24 explizite HD007-Finals und 62 eigene HD003-Master; 776 weitere Fotozuordnungen benötigen weiterhin eine separate Motivprüfung. **Bonsai-Landschaften** ist von diesen als einziges jetzt zusätzlich durch den vorgelegten Screenshot und seinen exakt verifizierten Originalpfad als passend bestätigt; 775 verbleiben im **geschützten** Altbestand, ohne pauschale Freigabe oder Ersetzung.
+- **Neue Hobbyregister-Hero-Komposition:** Kamera weiter weg; Hobby, Hände und Werkzeuge zusammen erkennbar; wichtige Elemente in mittlerer Bildhöhe (35–65 %) und rechts der Mitte (55–80 %) wegen flachem Hero-Zuschnitt und links überlagertem Titel; kein Makro/kein unlesbar kleines Motiv. Gilt sowohl mit als auch ohne eigenen Motivwunsch.
+- Vorhandene passende Bilder **bleiben**. Jede Bewertung hängt an exakter Bildidentität, frühere Ablehnungen des Nutzers haben Vorrang, neue Bildaufträge bleiben bewusst und kostenpflichtig, nur ausdrückliche Übernahme ersetzt das aktuelle Foto. Keine Änderung an HD003/HD007, Bilddateien, Pferdeatelier/K0.
+- **Lokal positiv und negativ geprüft:** **123/123 PHP-Backendtests**, **27/27 WordPress-Menütests**, **39/39 Chromium-Klicktests**, komplett erneut aus frischem Testpaket. 2/2 PHP-Syntax; ZIP-Integrität PASS. Es wurden lokale WordPress-/Bildanbieter-Mocks genutzt, **kein echter WordPress-Livetest von 2.8.13**.
+- Bildübernahme unter 2.8.12 wurde vom Nutzer am Arduino-Hobby live bestätigt; **neue Hero-Prompt-Wirkung in 2.8.13 noch nicht live beurteilt**.
+- [Verbindliches 2.8.13-Auditprotokoll](./BILDZENTRALE_2.8.13_BESTANDSAUDIT_UND_HERO_PROMPT_20261108.md). Ältere 2.8.8–2.8.12 bleiben Archiv.
+
+---
+
+## Historischer Stand (nicht mehr Current)
 
 ## Aktueller Pluginstand: Bildzentrale 2.8.12
 - **Voll-ZIP**: `Bildzentrale-2.8.12.zip`, 85.492 Byte, SHA-256 `75b9b54b5956be86ca8c672c51da2231bba6956bf63eac2d55eb811a348ca73c`. Zwei vollständige PHP-Dateien; PHP-Lint und ZIP-Integrität PASS.
