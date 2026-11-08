@@ -38,6 +38,18 @@
             $id=(string)($row['pool_key']??'');
             if($id!=='')$occurrences[$id]=($occurrences[$id]??0)+1;
         }
+        // Reserved real article/plan slots are immutable input, not another
+        // intent/SEO evaluator. MINI reservations are handled separately below.
+        $occupiedPlanSlots=[];
+        foreach((array)($snapshot['items']??[]) as $existing){
+            if(!is_array($existing)||($existing['source']??'')==='MINI_RESERVED')continue;
+            foreach(['intent_slot','plan_slot'] as $field){
+                $occupied=trim((string)($existing[$field]??''));
+                if($occupied!==''&&preg_match('/^[a-f0-9]{64}$/D',$occupied)){
+                    $occupiedPlanSlots[$occupied]=true;
+                }
+            }
+        }
         $updates=[];$clarification=[];$reserved=[];$seen=[];
         foreach((array)($state['seo_decisions']??[]) as $key=>$old){
             if(!is_array($old)||($old['box']??'')!=='FREI')continue;
@@ -89,6 +101,7 @@
             $match=(string)($item['matched_ref']??'');
             if($box==='FREI'&&($selected===''||($item['approved_title']??'')!==$selected
                 ||trim($intent)===''||!preg_match('/^[a-f0-9]{64}$/D',$slot)
+                ||isset($occupiedPlanSlots[$slot])
                 ||(isset($reserved[$slot])&&$reserved[$slot]!==$key))){
                 $box='KLAERUNG';$item['reason']='FREI_MISSING_OR_CONFLICTING_SOURCE_SLOT';
             }
