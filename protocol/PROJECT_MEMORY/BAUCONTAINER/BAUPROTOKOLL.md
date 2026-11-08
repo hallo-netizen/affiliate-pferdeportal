@@ -471,3 +471,14 @@ PRÜFUNG: Eigenständige Current pro Büro, keine Fremdbüroänderung in Fach-/P
 **Prüfung:** 121/121 ZIP-CRC, 83/83 PHP-Lint, 36/36 lokale Tests mit dem vorhandenen realen 1.179er-Export, getrennten Negativ- und Positivproben. Drei unbekannte WP-Posttitel wurden nur in der positiven Simulationsvariante ausdrücklich synthetisch belegt; die echte negative Prüfung sperrt sie. Keine echte WP-/MySQL-Ausführung dieser .23-Fassung, daher TEST und Draft-PR, keine Produktionsfreigabe.
 
 **Ein-Wahrheit-Prinzip / Quellen:** `PROJEKTE/PFERDE_ATELIER/PLUGINS/CURRENT_STATE.md`, `PROJEKTE/PFERDE_ATELIER/PLUGINS/EVIDENCE/PSTE_05714423_ECHTER_EXPORT_FIX_36_LOKALE_WORKFLOW_TESTS_20261108.md` und `PROJEKTE/PFERDE_ATELIER/PLUGINS/QA_ONLY/PSTE_05714423_EXPORTFIX/`; physische QA-ZIP in privater Library `/pferdeatelier/PLUGINS/`. Keine Veränderung an Startmaster, Haupt-Hardlock, K0 oder Nachbarportalen.
+
+
+## 2026-11-08 – Pferdeatelier PSTE 0.57.144.24 nach echtem WP-Fail aus Version .23
+
+**Bedarf:** Der echte .23-WP-Export brach wegen einer beschädigten alten Editorial-Plan-Zeile nach 1025/1179 Einträgen ab. Der ursprüngliche Positivtest hatte den Fehlerfall nicht tatsächlich simuliert.
+
+**Kleinste Korrektur:** Nur vorhandene PSTE-0.57.144.23-Reader in isolierter .24-QA fortentwickelt, damit alle neun ursprünglich „Array“-Einträge lesbar/als unaufgelöst enthalten bleiben und der aktive PSERC-Plan sowie 144 PPM679-Plätze nachfolgend erfasst werden. Weiterhin keine Freigabe ohne echte Titel und vollständige Belegungsdaten; `complete=false` und leerer Freigabe-Fingerprint. Genau drei bestehende PHP-Dateien (inklusive Versionsheader) geändert, keine Tabellen/Worker/Provider/SEO-Zweitentscheider, K0 und PSERC unverändert.
+
+**Prüfung:** Der lokale PHP-Read-only-Nachbau mit realen 1.179 Quellzeilen, echten neun „Array“-Titeln, drei fehlenden Postzuordnungen und 87 JA-Keywords bestand 46/46 Tests. 83/83 PHP-Syntax, 121/121 ZIP-CRC. Positiver kompletter Simulationsbestand hat 9+3 ausdrücklich synthetische Werte; daher kein echter Vollständigkeitsbeleg für WordPress. Ursprüngliche gespeicherte Option weder überschrieben noch gelöscht, kein WordPress/MySQL-Echtlauf mit .24. Sicherheits-Hardlock und andere Portale unverändert.
+
+**Ablage/Autorität:** `PROJEKTE/PFERDE_ATELIER/PLUGINS/CURRENT_STATE.md` bleibt einzige aktuelle Fachautorität; `QA_ONLY/PSTE_05714424_QUELLFIX/` ist Bau- und Prüfnachweis, Binärpakete privat `/pferdeatelier/PLUGINS/`. Draft-PR #682 nicht mergen.
