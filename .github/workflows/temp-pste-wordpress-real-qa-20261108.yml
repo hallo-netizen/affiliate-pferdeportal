@@ -1,0 +1,48 @@
+name: TEMP Pferdeatelier PSTE genuine WordPress integration QA
+on:
+  push:
+    branches: [fix/pste-kisten-einmalige-pruefung-20261107]
+permissions: {contents: read}
+jobs:
+  genuine-wp:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: qatestroot
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -pqatestroot"
+          --health-interval=10s --health-timeout=5s --health-retries=10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Real disposable WordPress+database and unchanged-original PSTE QA plugin
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq php-mysql default-mysql-client > /tmp/apt.log 2>&1 || { tail -n 80 /tmp/apt.log; exit 1; }
+          php -m | grep -i mysqli || { echo 'FAIL actual MySQL PHP driver missing';exit 1; }
+          curl --retry 3 -fL -sS https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
+          php /tmp/wp --info | head -n 13
+          mysql --protocol=TCP -h127.0.0.1 -P3306 -uroot -pqatestroot -e 'CREATE DATABASE pste_genuine_wp CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;'
+          mkdir -p /tmp/wp-real
+          php /tmp/wp core download --path=/tmp/wp-real --allow-root --quiet
+          php /tmp/wp core config --path=/tmp/wp-real --dbname=pste_genuine_wp --dbuser=root --dbpass=qatestroot --dbhost=127.0.0.1:3306 --skip-check --allow-root
+          php /tmp/wp core install --path=/tmp/wp-real --url=http://localhost --title=PSTE-QA --admin_user=qa --admin_password=onlyQA --admin_email=qa@example.test --allow-root --skip-email
+          echo 'PASS real WordPress core and real MySQL tables installed'
+          D=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/QA_ONLY
+          python3 "$D/apply_existing_mini_kisten_import.py" /tmp/pste-stage
+          python3 "$D/apply_wp_single_owner_gate.py" /tmp/pste-stage/PSTE-KISTEN-GESAMT-QA-NICHT-INSTALLIEREN.zip /tmp/PSTE-ONE-OWNER-NUR-TEST.zip
+          echo 'Attempt actual PSTE plugin activation:'
+          php /tmp/wp plugin install /tmp/PSTE-ONE-OWNER-NUR-TEST.zip --activate --path=/tmp/wp-real --allow-root
+          php /tmp/wp plugin list --path=/tmp/wp-real --allow-root
+          php /tmp/wp eval 'echo "WP_REAL_PSTE_BOOT_OK WordPress=".get_bloginfo("version")." PSTE=".PSTE_VERSION."\\n";' --path=/tmp/wp-real --allow-root
+          echo 'Legacy PSERC artifact inventory in GitHub, do not install unrelated version:'
+          Z=control/startmaster0107/runtime_packages/PSERC-FIX.zip
+          unzip -Z1 "$Z" | grep -E '(portal-seo-editorial-plan-compiler\.php|class-pserc-seo-reader\.php)' | head -n 8
+          KEY=$(unzip -Z1 "$Z" | grep 'portal-seo-editorial-plan-compiler.php$' | head -n1)
+          unzip -p "$Z" "$KEY" | grep -E 'Version:|PSERC_VERSION|PSERC_BUILD' | head -n6 || true
+          echo 'WORDPRESS_REAL_CORE_PLUGIN_SMOKE_PASS; NOT FULL PORTAL OR PSERC INTEGRATION'
