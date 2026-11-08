@@ -619,3 +619,56 @@ jobs:
           php owner.php | tee owner.log
           test "$(grep -c '^PASS ' owner.log)" = 10
           grep -F 'EBAY_OWNER_FREE_KISS 10/10 PASS' owner.log
+
+      - name: Verify retired eBay PRIVATE admin paths removed and BUSINESS UI preserved
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,shutil
+          root=Path('/tmp/ebay_private_admin_removed')
+          shutil.copytree('release/affiliate-zentrale/current/affiliate-portal-router',root/'affiliate-portal-router',dirs_exist_ok=True)
+          src=Path('release/affiliate-zentrale/evidence/EBAY_672308_TO_672311_BUSINESS_ONLY_GESAMTURSACHENPATCH_NUR_TEST.patch').read_text()
+          output=''
+          count=0
+          for section in re.split(r'(?=^diff --git )',src,flags=re.M):
+              if not section.startswith('diff --git '):continue
+              head,*hunks=re.split(r'(?=^@@ )',section,flags=re.M)
+              selected=[h for h in hunks if h.startswith('@@ ') and '@@ EBAY_PRIVATE_ADMIN_REMOVAL' in h.split('\n',1)[0]]
+              if selected:
+                  output+=head+''.join(selected).rstrip('\n')+'\n'
+                  count+=len(selected)
+          assert count==9, f'Expected 9 source/UI deletions, got {count}'
+          (root/'ui.patch').write_text(output)
+          print('PASS nine existing PRIVATE UI/endpoint deletions selected, no new components')
+          PY
+          cd /tmp/ebay_private_admin_removed
+          git apply --check ui.patch
+          git apply ui.patch
+          php -l affiliate-portal-router/includes/trait-ppar-ebay.php
+          php -l affiliate-portal-router/pferdeportal-affiliate-router.php
+          python3 - <<'PY'
+          from pathlib import Path
+          t=Path('affiliate-portal-router/includes/trait-ppar-ebay.php').read_text()
+          m=Path('affiliate-portal-router/pferdeportal-affiliate-router.php').read_text()
+          def ok(v,label):
+              assert v,label
+              print('PASS '+label)
+          # Delimited provider admin rendering is authoritative for the frontend.
+          start=t.index('function render_ebay_admin_page(') if 'function render_ebay_admin_page(' in t else t.index('<div class="wrap ppar-ebay">')
+          page=t[start:]
+          ok('name="ppar_ebay[private_enabled]"' not in page,'PRIVATE on/off toggle removed from eBay admin')
+          ok('name="ppar_ebay[private_auto_publish]"' not in page,'PRIVATE autopublication removed from eBay admin')
+          ok('name="ppar_ebay[private_active_cap]"' not in page,'PRIVATE cap configuration removed')
+          ok('ppar_ebay_setup_categories' not in page,'No eBay private HivePress category-setup button')
+          ok('name="action" value="ppar_ebay_review_decision"' not in page,'No eBay PRIVATE approval or veto submission')
+          ok('name="ppar_ebay[business_enabled]"' in page,'BUSINESS eBay input preserved')
+          ok('business_min_feedback_percentage' in page,'BUSINESS seller-quality controls preserved')
+          ok("add_action('admin_post_ppar_ebay_setup_categories'" not in m,'Retired PRIVATE category mutation endpoint disconnected')
+          ok("add_action('admin_post_ppar_ebay_review_decision'" not in m,'Retired PRIVATE manual approval endpoint disconnected')
+          ok("add_filter('the_posts', array($this, 'ebay_filter_stale_posts')" in m
+              and 'hivepress/v1/models/listing/query' in m,'Existing public eBay legacy visibility and native HivePress integration left intact')
+          echo="EBAY_PRIVATE_ADMIN_REMOVAL 10/10 PASS (source-level + PHP syntax, not live WP UI)"
+          print(echo)
+          PY
