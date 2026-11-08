@@ -175,6 +175,20 @@ index e5c1169..8e0566b 100644
          $checkpoint=$this->ebay_public_checkpoint_load();
          if($this->ebay_public_checkpoint_is_safe($checkpoint)){
              $run['checkpoint_id']=sanitize_text_field((string)($checkpoint['checkpoint_id']??''));
+@@ -1114,6 +1114,11 @@ BUSINESS_ONLY_LEGACY_RUN_GUARD selection
+         if($scope===''){$this->ebay_run_fail('selection_scope_empty','Der beim Runstart gespeicherte Seller-Routen-Snapshot enthält keine aktive Route.');return;}
+         $canonical_phase=sanitize_key((string)($run['phase']??''));
+-        $selection=$this->ebay_selection_state_load();
+-        if(!$this->ebay_selection_state_is_open($selection) && sanitize_key((string)($selection['status']??''))!=='complete')
++        $selection=$this->ebay_selection_state_load();
++        // Existing pre-BUSINESS-only selection may still be open after an upgrade.
++        // NEVER process a persisted ALL/PRIVATE selection or its old publication.
++        if(in_array(sanitize_key((string)($selection['selection_scope']??'')),array('all','private'),true)){
++            $this->ebay_run_fail('business_only_legacy_selection_blocked','Veraltete PRIVATE-Auswahl gestoppt; nur neue BUSINESS-Auswahl zulässig.');return;
++        }
++        if(!$this->ebay_selection_state_is_open($selection) && sanitize_key((string)($selection['status']??''))!=='complete')
+             $selection=$this->ebay_selection_request('canonical_run','run:'.sanitize_text_field((string)$run['run_uuid']),true,$scope);
+             $this->ebay_run_capture_component_state(null,array('selection'));
 @@ -1211,7 +1256,7 @@ trait PPAR_Ebay_Run_Trait {
                      $reason=sanitize_key((string)($job['summary']['budget']['stopped_reason']??'discovery_partial_unresumable'));
                      $this->ebay_run_fail('discovery_partial_unresumable','Discovery endete in einem nicht fortsetzbaren PARTIAL-Zustand.',array('stopped_reason'=>$reason,'scope'=>sanitize_key((string)($job['scope']??''))));return;
@@ -234,6 +248,18 @@ index e5c1169..8e0566b 100644
      private function ebay_run_business_safe_supply_gap_contract($run, $coverage) {
          $run=is_array($run)?$run:array();$coverage=is_array($coverage)?$coverage:array();
          $missing=array_values(array_unique(array_filter(array_map('sanitize_key',(array)($coverage['missing']??array())))));
+@@ -1653,6 +1653,9 @@ BUSINESS_ONLY_LEGACY_RUN_GUARD gapfill_selection
+ 
+     private function ebay_run_tick_gapfill_select($run, $settings) {
+-        $selection=$this->ebay_selection_state_load();
+-        $expected_owner='run:'.sanitize_text_field((string)$run['run_uuid']);
++        $selection=$this->ebay_selection_state_load();
++        if(in_array(sanitize_key((string)($selection['selection_scope']??'')),array('all','private'),true)){
++            $this->ebay_run_fail('business_only_legacy_gapfill_selection_blocked','Veraltete PRIVATE-Gap-Fill-Auswahl gestoppt.');return;
++        }
++        $expected_owner='run:'.sanitize_text_field((string)$run['run_uuid']);
+         $selection_status=sanitize_key((string)($selection['status']??''));
+         $is_expected_terminal=$selection_status==='complete'
 @@ -1665,14 +1735,34 @@ trait PPAR_Ebay_Run_Trait {
              );
          }
@@ -275,6 +301,41 @@ index e5c1169..8e0566b 100644
          $coverage['open_gap_count']=count($missing);
          $coverage['open_gaps']=$missing;
          $coverage['exceptions']=$exceptions;
+@@ -1722,6 +1722,5 @@ BUSINESS_ONLY_LEGACY_RUN_GUARD public_commit
+         $routes=is_array($current['config_snapshot']['seller_routes']??null)?$current['config_snapshot']['seller_routes']:array();
+         if(!empty($routes['business'])){$current['phase']='checkpoint_cleanup_business';$current['resume_reason']='checkpoint_committed';}
+-        elseif(!empty($routes['private'])){$current['phase']='checkpoint_cleanup_private';$current['resume_reason']='checkpoint_committed';}
+-        else{$this->ebay_run_complete($manifest);return;}
++        else{$this->ebay_run_complete($manifest);return;} // No PRIVATE cleanup on legacy snapshots.
+         $current['progress_seq']=absint($current['progress_seq']??0)+1;$current['last_progress_at']=time();$current['no_progress_count']=0;
+         $this->ebay_run_save($current);
+@@ -1759,6 +1759,5 @@ BUSINESS_ONLY_LEGACY_RUN_GUARD business_cleanup
+             if(!empty($plan['checkpoint_business_cleanup_done'])){
+                 $routes=is_array($current['config_snapshot']['seller_routes']??null)?$current['config_snapshot']['seller_routes']:array();
+-                if(!empty($routes['private'])){$this->ebay_run_set_phase('checkpoint_cleanup_private','checkpoint_committed');}
+-                else{$this->ebay_run_complete((array)($current['checkpoint_verified_manifest']??array()));}
++                $this->ebay_run_complete((array)($current['checkpoint_verified_manifest']??array())); // BUSINESS-only.
+             }
+             return;
+@@ -1764,13 +1764,9 @@ BUSINESS_ONLY_LEGACY_RUN_GUARD private_cleanup
+             return;
+         }
+-        if($route==='private'){
+-            if(empty($plan['checkpoint_private_cleanup_initialized'])){$plan['private_post_cursor']=0;$plan['checkpoint_private_cleanup_initialized']=1;unset($plan['checkpoint_private_cleanup_done']);}
+-            if(!method_exists($this,'ebay_selection_apply_private_post_batch')){$this->ebay_run_fail('checkpoint_private_cleanup_missing','PRIVATE-Checkpoint-Bereinigung fehlt.');return;}
+-            $this->ebay_selection_apply_private_post_batch($settings,$plan,50,true,false);
+-            $current=$this->ebay_run_load();$current['checkpoint_cleanup_selection']=$plan;$this->ebay_run_save($current);
+-            if($this->ebay_run_checkpoint_cleanup_fail_if_needed($plan,'private')){return;}
+-            if(!empty($plan['checkpoint_private_cleanup_done'])){$this->ebay_run_complete((array)($current['checkpoint_verified_manifest']??array()));}
+-            return;
+-        }
++        if($route==='private'){
++            // A persisted pre-upgrade PRIVATE cleanup phase is retired, not executed.
++            $this->ebay_run_complete((array)($run['checkpoint_verified_manifest']??array()));
++            return;
++        }
+         $this->ebay_run_fail('checkpoint_cleanup_route_invalid','Ungültige Checkpoint-Bereinigungsphase.');
+     }
 @@ -1818,7 +1908,7 @@ trait PPAR_Ebay_Run_Trait {
          $job=$this->ebay_sync_job_load();
          // A completed full-discovery substate must not suppress the one targeted
