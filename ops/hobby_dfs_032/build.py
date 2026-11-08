@@ -37,59 +37,48 @@ amazon=one(amazon,"'0.1.31'","'0.1.32'","style asset version")
 # and one matching gate checks all returned products. No keyword file copied
 # out of HD007. The first list item is not presumed to be purchasable.
 candidate=r'''
-    /** Search terms must represent an actual specific product, not merely
-     * the first sentence fragment of the reviewed equipment description.
-     * Where generic equipment is inseparable from its use, include the
-     * attested hobby context. Otherwise refuse spending money on a guess.
+    /** Only the first reviewed equipment entry may be a paid-search term.
+     * No blind fallback to a later item (e.g. "Farben" for model aircraft).
      */
     private static function auto_candidate_word($text,$hobby='') {
         $parts=preg_split('/[,;]/u',trim((string)$text));
-        if (!is_array($parts)) { return ''; }
-        foreach ($parts as $part) {
-            $name=trim((string)$part," \t\n\r\0\x0B.");
-            if ($name==='') { continue; }
-            $name=preg_replace('/^(?:optional(?:e[rsnm]?)?|ein(?:e|en|em|er|es)?|einige|geeignet(?:es|en|e|er)?|passend(?:es|en|e|er)?)\s+/iu','',$name);
-            $normalized=self::auto_norm($name);
-            if ($normalized==='' || mb_strlen($name,'UTF-8')<5 ||
-                mb_strlen($name,'UTF-8')>55 ||
-                count(explode(' ',$normalized))>5) { continue; }
-            // Not a concrete merchandise type: environment, generic
-            // materials, qualifications, clothing, workspace or storage.
-            $non_products=array(
-              'karton','holz','papier','material','werkzeug','werkzeuge',
-              'computer','wasser','schere','farbe','modell','schrauben',
-              'leitung','leinen','lupe','kleber','buch','bogen','rute',
-              'behaelter','aufbewahrung','saatgut','platz','zeit','geduld',
-              'licht','luft','erde','werkstatt','grundplatte',
-              'wetterfeste kleidung','outdoor kleidung','sichere aufbewahrung',
-              'trockene aufbewahrung','grundmaterial','modellbausatz',
-              'modellbaumaterial','freie arbeitsflaeche'
-            );
-            if (in_array($normalized,$non_products,true) ||
-                preg_match('/\b(?:und|oder|platz|zeit|frei(?:e|er|es)?|geeignet(?:e|er|es)?|erfahrung|kenntnisse|wind|wetter|flaeche|anleitung|sicherheit|umgebung|arbeitsplatz|haltung)\b/',$normalized)) {
-                continue;
-            }
-            if (preg_match('/^(?:frisch(?:es|en|e)?|trocken(?:es|en|e)?|einfach(?:es|en|e)?)\s+(?:holz|wasser|papier|kleidung)$/',$normalized)) {
-                continue;
-            }
-            // Context for craft materials: "Metallringe" describes dozens
-            // of unrelated products. For an attested "...flechten" hobby
-            // build a search for the actual ring craft, not random rings.
-            if (preg_match('/^(?:metall|stahl|alu|mineral|edelstahl)?ringe$/',$normalized) &&
-                preg_match('/^(.+?)flechten$/u',(string)$hobby,$m)) {
-                $base=trim($m[1]);
-                if (mb_strlen($base,'UTF-8')>=5) {
-                    return $base.' Ringe';
-                }
-            }
-            // Bare rings, pliers, generic raw metals and kits without an
-            // attested product context must not create paid queries.
-            if (preg_match('/^(?:.*ringe|zange|zangen|metall|holz|kleidung|kataloge|material|bausatz)$/',$normalized)) {
-                continue;
-            }
-            return $name;
+        $name=isset($parts[0])?trim((string)$parts[0]," \t\n\r\0\x0B."):'';
+        if ($name==='') { return ''; }
+        $normalized=self::auto_norm($name);
+        if ($normalized==='' || mb_strlen($name,'UTF-8')>55 ||
+            count(explode(' ',$normalized))>5) { return ''; }
+        // The reviewed product name Metallringe is too broad. For any
+        // attested "...flechten" craft, name the literal product's use.
+        if (preg_match('/^(?:metall|stahl|alu|edelstahl)?ringe$/',$normalized) &&
+            preg_match('/^(.+?)flechten$/u',(string)$hobby,$m)) {
+            $base=trim($m[1]);
+            if (mb_strlen($base,'UTF-8')>=5) { return $base.' Ringe'; }
         }
-        return '';
+        $generic=array(
+          'karton','holz','papier','material','werkzeug','werkzeuge',
+          'computer','wasser','schere','farbe','farben','modell','schrauben',
+          'leitung','leinen','lupe','kleber','buch','bogen','rute',
+          'behaelter','aufbewahrung','saatgut','platz','zeit','geduld',
+          'licht','luft','erde','werkstatt','grundplatte','metallringe',
+          'wetterfeste kleidung','outdoor kleidung','sichere aufbewahrung',
+          'trockene aufbewahrung','grundmaterial','modellbausatz',
+          'modellbaumaterial','freie arbeitsflaeche','frisches holz',
+          'geeignetes holz','rohes material','passendes werkzeug',
+          'kamera','rolle','stoff','stoffe','pflanzen','pflanze',
+          'wachs','tinte','pfeile','schuhe','magnet','substrat',
+          'sammelbeutel','sammelbehaelter','arbeitsplatz',
+          'sichere standflaeche','sicheres gelaende','erlaubten fundplatz',
+          'wetterdaten','amateurfunklizenz','bestimmungshilfe'
+        );
+        if (in_array($normalized,$generic,true) ||
+            (mb_strlen($name,'UTF-8')<8 &&
+             !preg_match('/^(?:rc|3d|cb|fpv|cnc|sdr)-/i',$name))) {
+            return '';
+        }
+        if (preg_match('/\b(?:und|oder|platz|zeit|frei(?:e|er|es)?|geeignet(?:e|er|es)?|erlaubt(?:e|er|es|en)?|erfahrung|kenntnisse|wind|wetter|flaeche|anleitung|sicherheit|umgebung|arbeitsplatz|haltung|arbeitsflaeche|optionale?)\b/',$normalized)) {
+            return '';
+        }
+        return $name;
     }
 '''
 start=amazon.index("    private static function auto_candidate_word(")
@@ -99,6 +88,26 @@ amazon=one(amazon,
     "$term=self::auto_candidate_word($equipment);",
     "$term=self::auto_candidate_word($equipment,(string)($row['canonical_name']??''));",
     "catalog must use product and hobby context")
+
+
+original_article_match="""            $topic=self::auto_norm((string)$post->post_title);
+            $needle=self::auto_norm((string)$row['keyword']);
+            $hobby=self::auto_norm((string)$row['hobby']);
+            if (strpos(' '.$topic.' ',' '.$needle.' ')===false &&
+                strpos(' '.$topic.' ',' '.$hobby.' ')===false) { continue; }"""
+safer_article_match="""            $topic=self::auto_norm((string)$post->post_title);
+            $topic_compact=str_replace(' ','',$topic);
+            $needle=self::auto_norm((string)$row['keyword']);
+            // The category alone is insufficient. Every meaningful term
+            // must be in the concrete article title, also in compounds.
+            $supported=true;
+            foreach (explode(' ',$needle) as $part) {
+                if (strlen($part)>=4 && strpos($topic_compact,$part)===false) {
+                    $supported=false;break;
+                }
+            }
+            if (!$supported) { continue; }"""
+amazon=one(amazon,original_article_match,safer_article_match,"exact WP article topic evidence")
 
 # Subject-specific evidence must be part of the review, not just the keyword.
 # Source title matching allows German compounds ("Kettenhemdringe") and
