@@ -41,7 +41,7 @@ jobs:
                 print('MAP_RECORDS',len(records))
                 if isinstance(records,dict):
                   for k,row in records.items():
-                    if any(s in str(k).lower() for s in ['batik','airbrush','3d-bogen','3d_bogen']):
+                    if any(s in str(k).lower() for s in ['aeroponik']):
                       print('MAP_MATCH',k,json.dumps(row,ensure_ascii=False)[:1700])
                 elif isinstance(records,list):
                   for row in records:
