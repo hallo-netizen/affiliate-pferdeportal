@@ -28,7 +28,7 @@ jobs:
           for piece in pieces:
               if not piece.startswith('diff --git '):continue
               head,*hunks=re.split(r'(?=^@@ )',piece,flags=re.M)
-              selected=[h for h in hunks if re.match(r'^@@ -\\d+,\\d+ \\+\\d+,\\d+ @@ BUSINESS_ONLY',h)]
+              selected=[h for h in hunks if h.startswith('@@ ') and '@@ BUSINESS_ONLY' in h.split('\n',1)[0]]
               if selected: diff+=head+''.join(selected);n+=len(selected)
           assert n==12,f'Expected 12 BUSINESS-only hardlock hunks in the SINGLE 6.72.311 cumulative patch, got {n}'
           Path('/tmp/ebay_business_qa/business-only.patch').write_text(diff)
