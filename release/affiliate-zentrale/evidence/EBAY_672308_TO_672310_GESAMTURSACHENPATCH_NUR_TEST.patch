@@ -261,7 +261,7 @@ index e5c1169..8e0566b 100644
          }
      }
  
-@@ -1879,6 +1969,104 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1879,6 +1969,106 @@ trait PPAR_Ebay_Run_Trait {
          }
      }
  
@@ -274,15 +274,16 @@ index e5c1169..8e0566b 100644
 +     */
 +    private function ebay_run_public_source_refresh_tick($run,$settings) {
 +        $candidate=(array)($run['checkpoint_candidate']??array());
-+        $business=array_values(array_unique(array_filter(array_map('absint',(array)($candidate['business_campaign_ids']??array())))));
-+        $private=array_values(array_unique(array_filter(array_map('absint',(array)($candidate['private_listing_ids']??array())))));
++        $business=!empty($settings['business_enabled'])?array_values(array_unique(array_filter(array_map('absint',(array)($candidate['business_campaign_ids']??array()))))):array();
++        $private=!empty($settings['private_enabled'])?array_values(array_unique(array_filter(array_map('absint',(array)($candidate['private_listing_ids']??array()))))):array();
 +        sort($business,SORT_NUMERIC);sort($private,SORT_NUMERIC);
 +        $fingerprint=hash('sha256',wp_json_encode(array($business,$private)));
 +        $state=(array)($run['public_source_refresh']??array());
 +        if((string)($state['fingerprint']??'')!==$fingerprint){
 +            $state=array('fingerprint'=>$fingerprint,'cursor'=>0,'checked'=>0,'refreshed'=>0,'complete'=>0);
 +        }
-+        if(!empty($state['complete'])){return true;}
++        if(!empty($state['complete']) && time()-absint($state['completed_at']??0)<15*MINUTE_IN_SECONDS){return true;}
++        if(!empty($state['complete'])){$state['cursor']=0;$state['complete']=0;}
 +        global $wpdb;
 +        if(!is_object($wpdb)||!method_exists($wpdb,'get_row')||!method_exists($wpdb,'prepare')
 +            ||!function_exists('get_post_meta')){
@@ -355,6 +356,7 @@ index e5c1169..8e0566b 100644
 +        $state['checked']=absint($state['checked']??0)+$checked;
 +        $state['refreshed']=absint($state['refreshed']??0)+$remotes;
 +        $state['complete']=$cursor>=$n?1:0;
++        $state['completed_at']=!empty($state['complete'])?time():0;
 +        $current['public_source_refresh']=$state;
 +        $current['progress_seq']=absint($current['progress_seq']??0)+1;
 +        $current['last_progress_at']=time();
@@ -366,7 +368,7 @@ index e5c1169..8e0566b 100644
          $candidate=is_array($run['checkpoint_candidate']??null)?$run['checkpoint_candidate']:array();
 +        if(!$this->ebay_run_public_source_refresh_tick($run,$settings)){return;}
          $business=empty($settings['business_enabled'])?array('required'=>0,'covered'=>0,'missing'=>array(),'counts'=>array()):$this->ebay_run_public_business_coverage((array)($candidate['business_campaign_ids']??array()));
-@@ -1916,6 +2104,42 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1916,6 +2106,42 @@ trait PPAR_Ebay_Run_Trait {
          // The one-row checkpoint write is the public visibility commit. Until
          // this exact point the frontend continues to serve the previous safe set.
          $current=$this->ebay_run_load();
