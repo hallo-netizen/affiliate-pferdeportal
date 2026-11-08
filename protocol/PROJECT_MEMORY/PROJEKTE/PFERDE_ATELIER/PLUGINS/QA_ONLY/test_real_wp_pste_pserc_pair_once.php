@@ -21,6 +21,23 @@ pstePsercPairCheck(class_exists('PSTE_Mini_Workflow')
 pstePsercPairCheck(defined('PSERC_VERSION')&&PSERC_VERSION==='0.28.55',
     'correct PSERC runtime version');
 require_once ABSPATH.'wp-admin/includes/plugin.php';
+// A loaded PHP class alone is not proof that WordPress activated a complete plugin.
+// Verify PSERC's exact entrypoint plus PSTE's loaded class under an activated plugin.
+$psEntry=plugin_basename(PSERC_DIR.'portal-seo-editorial-plan-compiler.php');
+pstePsercPairCheck(is_plugin_active($psEntry),'complete PSERC WordPress plugin is active');
+$psteFile=(new ReflectionClass('PSTE_Mini_Workflow'))->getFileName();
+$psteFile=is_string($psteFile)?realpath($psteFile):false;
+$psteIsActive=false;
+foreach((array)get_option('active_plugins',[]) as $activeEntry){
+    $pluginRoot=dirname((string)$activeEntry);
+    if($pluginRoot==='.')continue;
+    $realRoot=realpath(WP_PLUGIN_DIR.'/'.$pluginRoot);
+    if($psteFile&&$realRoot&&str_starts_with($psteFile,$realRoot.DIRECTORY_SEPARATOR)){
+        $psteIsActive=true;
+        break;
+    }
+}
+pstePsercPairCheck($psteIsActive,'complete PSTE WordPress plugin is active');
 $meta=get_plugin_data(PSERC_DIR.'portal-seo-editorial-plan-compiler.php',false,false);
 pstePsercPairCheck(($meta['Version']??'')===PSERC_VERSION,
     'WordPress backend plugin version equals PSERC runtime');
