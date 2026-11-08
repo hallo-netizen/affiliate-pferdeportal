@@ -5,7 +5,7 @@ on:
     paths: [.github/workflows/hobby-hd003-150807.yml]
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   inspect:
     runs-on: ubuntu-latest
@@ -71,3 +71,66 @@ jobs:
             if 'function render_rental_for(' in l or 'function render_magazine_hero_v150719' in l:
               for j in range(i,min(i+50,len(lines))):print('FUNCDETAIL',j+1,lines[j][:390])
           PY
+
+      - name: Build exact full 1.50.807 ZIP
+        run: |
+          python3 -m pip install --quiet Pillow
+          python3 scripts/hd003_build_150807.py
+      - name: Verify plugin PHP syntax and negative regressions
+        run: |
+          python3 - <<'PY'
+          import zipfile,subprocess,tempfile,pathlib,hashlib,json,sys
+          old='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/HOBBY_DEPOT_DESIGN_HD003_1.50.806.zip'
+          new='dist/HOBBY_DEPOT_DESIGN_HD003_1.50.807_HOBBYFINDER.zip'
+          with zipfile.ZipFile(old) as o,zipfile.ZipFile(new) as n:
+            php=[x for x in n.namelist() if x.endswith('.php')]
+            assert len(php)==13,('unexpected PHP count',len(php))
+            assert n.testzip() is None
+            with tempfile.TemporaryDirectory() as t:
+              for i,path in enumerate(php):
+                dest=pathlib.Path(t)/f'{i}.php';dest.write_bytes(n.read(path))
+                p=subprocess.run(['php','-l',str(dest)],capture_output=True,text=True)
+                assert p.returncode==0,(path,p.stdout,p.stderr)
+                print('PHP_SYNTAX_PASS',path)
+            differences=[x for x in o.namelist() if o.read(x)!=n.read(x)]
+            expected=['affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php','affiliate-portal-template-kit/pferde-template-kit.php']
+            assert sorted(differences)==sorted(expected),('unintended changed files',differences)
+            print('ORIGINAL_FILES_IDENTICAL',len(o.namelist())-2)
+            profile=n.read(expected[0]).decode()
+            assert 'Das passende Hobby für dich.' in profile
+            assert 'Finde, was zu dir passt.' in profile
+            assert 'hobbyfinder-lupe-approved.webp' in profile
+            assert "if ($slug === 'hobbyfinder' && strpos($rental, 'hd-own-ad-v150791') !== false)" in profile
+            assert 'hd-hf-ad-action-v150807' in profile
+            assert "max-width:640px" in profile
+            assert 'function render_rental_for(' in profile
+            assert "self::render_rental_for('journal')" in profile
+            print('HOBBYFINDER_POSITIVE_PASS')
+            print('PAID_PARTNER_UNCHANGED_GUARD_PASS')
+            print('OTHER_MAGAZINE_PAGES_UNCHANGED_PASS')
+            print('MOBILE_LINKS_VISIBLE_PASS')
+          print('PLUGIN_SHA256',hashlib.sha256(pathlib.Path(new).read_bytes()).hexdigest())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: HD003-1.50.807-Hobbyfinder-FULL-ZIP
+          path: |
+            dist/HOBBY_DEPOT_DESIGN_HD003_1.50.807_HOBBYFINDER.zip
+            dist/HD003_150807_BUILD_REPORT.json
+          if-no-files-found: error
+          retention-days: 30
+      - name: Publish verified full ZIP direct download
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TAG="hobby-depot-hd003-1.50.807-hobbyfinder"
+          ZIP="dist/HOBBY_DEPOT_DESIGN_HD003_1.50.807_HOBBYFINDER.zip"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$ZIP" --clobber
+          else
+            gh release create "$TAG" "$ZIP" --target "$GITHUB_SHA" \
+              --title "Hobby Depot Design 1.50.807 – Hobbyfinder" \
+              --notes "Vollversion auf exakter 1.50.806. Freigegebenes Lupen-Hero, kurzer Untertitel, flaches eigenes Hobbyfinder-Werbebanner mit echten Links; alle anderen Anzeigen, Seiten, Plugins und Dateien unverändert. WordPress-Liveprüfung offen."
+          fi
+          gh release view "$TAG" --json assets,url
