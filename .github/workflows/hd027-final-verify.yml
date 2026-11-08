@@ -1,0 +1,86 @@
+name: HD027 final category and preview browser/coverage test
+on:
+  push:
+    branches: ['hobbyroom/hd009-027-category-photo-postcards-20261108']
+    paths: ['.github/workflows/hd027-final-verify.yml']
+permissions: {contents: read}
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify complete approved world mapping coverage and both newly built ZIPs
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          from hashlib import sha256
+          import json,collections
+          base=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          with ZipFile(base/'HD-003-DESIGN-TEMPLATE-KIT'/'CURRENT.zip') as des,ZipFile(base/'HD-009-AFFILIATE-ZENTRALE'/'CURRENT.zip') as ad:
+            all_map=json.loads(des.read('affiliate-portal-template-kit/assets/hobby-depot-v150750/leaf-category-map-v150750.json'))
+            worlds=set('gestalten fertigen technik forschen pflanzen tiere bewegen sammeln'.split())
+            missing=[(name,row) for name,row in all_map.items() if not row.get('chain') or row['chain'][0].get('path','').split('/')[0] not in worlds]
+            assert not missing,missing[:12]
+            assert ad.testzip() is None and des.testzip() is None
+            for w in worlds:
+              assert 'affiliate-portal-router/assets/hdar-world-'+w+'.webp' in ad.namelist()
+            assert len(all_map)==3376
+            a=all_map['sportdrachen-drachen-leinen']
+            assert a['parent_slug']=='sportdrachen' and a['chain'][1]['path']=='bewegen/wind-drachen'
+            print('ALL_3376_LEAF_CATEGORIES_HAVE_VALID_THEME_PHOTO_FALLBACK_PASS')
+            print('SPORT_KITE_PARENT_MAP_PASS')
+          PY
+      - name: Install browser
+        run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - name: Simulate both candidate images in the exact live category DOM
+        run: |
+          python3 - <<'PY'
+          from playwright.sync_api import sync_playwright
+          from pathlib import Path
+          from zipfile import ZipFile
+          import base64
+          base=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          with ZipFile(base/'HD-003-DESIGN-TEMPLATE-KIT'/'CURRENT.zip') as z:
+            ad_photo='data:image/webp;base64,'+base64.b64encode(z.read('affiliate-portal-template-kit/assets/hobby-depot-v150617/hero-masters-v150684/wind-drachen.webp')).decode()
+            card_photo='data:image/webp;base64,'+base64.b64encode(z.read('affiliate-portal-template-kit/assets/hobby-depot-v150780/hobby-masters/sportdrachen.webp')).decode()
+          with sync_playwright() as p:
+            browser=p.chromium.launch(headless=True,args=['--no-sandbox'])
+            for width in (1440,900,390,360):
+              page=browser.new_page(viewport={'width':width,'height':900})
+              res=page.goto('https://www.hobby-depot.de/category/sportdrachen-drachen-leinen/',wait_until='domcontentloaded',timeout=35000)
+              assert res and res.status==200,(width,res)
+              page.wait_for_timeout(450)
+              result=page.evaluate("""({adPhoto,cardPhoto})=>{
+                const a=document.querySelector('.hdar-ci-amazon-banner-category');
+                const card=document.querySelector('.hd-post-card');
+                if(!a||!card)return null;
+                a.classList.remove('hdar-ci-amazon-banner-text');
+                const photo=a.querySelector('.hdar-ci-photo');
+                let img=photo.querySelector('img:not(.hdar-ci-amazon-official)');
+                if(!img){img=document.createElement('img');img.alt='Wind & Drachen';photo.prepend(img);}
+                img.src=adPhoto;
+                let link=card.querySelector('.hd-post-image');
+                if(!link){link=document.createElement('a');link.className='hd-post-image';link.href=card.querySelector('h3 a').href;card.prepend(link);}
+                let preview=document.createElement('img');preview.src=cardPhoto;preview.alt='Sportdrachen';preview.loading='eager';link.append(preview);
+                const rect=x=>{const r=x.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,right:r.right,bottom:r.bottom}};
+                return {banner:rect(a),title:rect(a.querySelector('.hdar-ci-title')),button:rect(a.querySelector('.hdar-ci-button')),
+                  imageCount:a.querySelectorAll('.hdar-ci-photo>img:not(.hdar-ci-amazon-official)').length,
+                  amazonBadge:a.querySelectorAll('.hdar-ci-amazon-official').length,card:rect(card),
+                  cardImage:rect(preview),cardLink:rect(link),postText:card.textContent};
+              }""",{'adPhoto':ad_photo,'cardPhoto':card_photo})
+              assert result,(width,'missing candidate mounts')
+              assert result['imageCount']==1 and result['amazonBadge']==1,(width,result)
+              assert result['button']['bottom']<=result['banner']['bottom']-2,(width,result)
+              assert result['banner']['right']<=width+5,(width,result)
+              ratio=result['banner']['w']/result['banner']['h']
+              assert abs(ratio-(4.2 if width<=720 else 6))<.12,(width,ratio)
+              assert result['cardImage']['w']>=100 and result['cardImage']['h']>=60,(width,result,'invisible preview')
+              assert result['cardLink']['right']<=width+5,(width,result,'preview overflow')
+              print('REAL_CATEGORY_VISUAL_PASS',width,'ratio',round(ratio,2),'preview',round(result['cardImage']['w']),round(result['cardImage']['h']))
+              page.close()
+            browser.close()
+          print('HD027_RESPONSIVE_DESKTOP_MOBILE_PASS')
+          PY
