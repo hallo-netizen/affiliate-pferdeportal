@@ -17,6 +17,20 @@
 
 ---
 
+## AKTUELLER KORRIGIERTER QA-STAND – PSTE 0.57.144.23 / 08.11.2026
+
+**NEUE MAßGEBLICHE QA-LAGE, ältere .22-Zwischenstände unten sind historisch:** Der Nutzer hat PSTE 0.57.144.22 + PSERC 0.28.55 auf WP TEST installiert und den echten 1.179-Zeilen-Export bereits hochgeladen. **Kein Neuimport, keine Gesamtdiagnose, keine weitere Bedienhandlung vom Nutzer erfolgt.**
+
+**Code-Fix tatsächlich gebaut und lokal getestet:** PSTE **0.57.144.23 EXPORTFIX NUR TEST**, originalbasiert, **121/121 ZIP-CRC**, **83/83 PHP-Lint**, **36 lokale PASS** über echte 1.179 exportierte Bestandseinträge, echte **141** verknüpfbare PPM679-WordPress-Beitragstitel, echte PSERC-0.28.55-Leseroutine. **4 Quelltextdateien** gegenüber geprüfter PSTE .22 geändert, **PSERC unverändert**. Gefixt: Import/Export von verschachtelten Titeln ohne „Array“-Umwandlung, eindeutiger Planstatus, 141 nachgewiesene PPM679-Beitragstitel statt Leerfeldern, gezielte Einzelabfrage von drei weiteren Post-IDs, KISS-Bedienung auf Export → extern prüfen → importieren → Status (alte Sonderaktionen eingeklappt). Kein K0-/WP-/Produktionsschreibzugriff.
+
+**Offene echte Eingangsdatenfehler:** Bereits in der aktuellen 15:03-UTC-Exportdatei **9/9 EDITORIAL_PLAN** nur „Array“, und **3** PPM679-Post-Referenzen nicht im 1.024er-WordPress-Snapshot. Diese sind **nicht** aus der vorliegenden Datei rekonstruierbar. Neuer Code hält hier fail-closed, statt falsch FREI zu erlauben. Die 36 lokalen PASS beinhalten einen klar als **synthetisch** markierten vollständigen Positivtest dieser drei nicht belegten Post-Titel und einen **realen negativen** Test aller drei; keine echte WP-End-to-End-Freigabe und kein realer externer SEO-Owner-Lauf.
+
+**Echte private QA-ZIP-Dateien im Pluginbüro:** `/pferdeatelier/PLUGINS/PSTE-0.57.144.23-EXPORTFIX-NUR-TEST.zip` (634545 Byte, SHA256 `dcf1f181d8b438f057476970237f888782312f60450f215e69713c203d0449b0`); dazu `/pferdeatelier/PLUGINS/PFERDEATELIER-PSTE-05714423-PSERC-02855-QA-PAAR.zip` (875972 Byte, SHA256 `154cbf04dc4a9b99ad1487e0bcd19fa90317b39c350c7b0dae8a965a56c78008`). **GitHub enthält nicht diese ZIP-Bytes, sondern ihre Prüfsummen, den vollständigen 4-Dateien-Diff und den reproduzierbaren Test** unter `QA_ONLY/PSTE_05714423_EXPORTFIX/`. Der ältere .22-Bestand bleibt erhalten. K0, Live, authoritativer CURRENT.zip und PSERC unverändert; isolierter Draft-PR #682 NICHT MERGEN.
+
+**Dokumentation:** [EVIDENCE/PSTE_05714423_ECHTER_EXPORT_FIX_36_LOKALE_WORKFLOW_TESTS_20261108.md](EVIDENCE/PSTE_05714423_ECHTER_EXPORT_FIX_36_LOKALE_WORKFLOW_TESTS_20261108.md). **Nächster technischer Freigabepunkt:** neue Test-ZIP auf isolierter WP-Testseite an den unveränderten Optionen beweisen (9-Editorial-/3-PPM-Reste), danach EIN externer SEO-Owner, dann kontrollierter technischer Rückimport; keine neuen globalen Stichwortdurchläufe. Nur wenn wirklich nachgewiesen notwendig Nutzer zur Installation auffordern. **Keine Behauptung, der echte WP-End-to-End-Test sei schon bestanden.**
+
+---
+
 
 <!-- PFERDEATELIER_PLUGIN_WORKBENCH_LOCK_BEGIN -->
 ```json
