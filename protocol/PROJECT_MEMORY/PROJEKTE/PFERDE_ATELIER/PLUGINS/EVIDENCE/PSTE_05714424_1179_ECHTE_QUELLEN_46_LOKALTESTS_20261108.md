@@ -1,0 +1,34 @@
+# Pferdeatelier: PSTE 0.57.144.24 – Ursachenbehebung des abgebrochenen Parkhaus-Exports
+
+## Grundlage: ausschließlich die vorliegenden echten Nutzerexporte
+
+1. **Echter WordPress-Testexport 08.11.2026, 15:03:46 UTC**, PSERC-Snapshot aktuell, `parkhaus_complete=true` aus PSTE 0.57.144.22, **aber inhaltlich falsch freigegeben**: 1.179 Einträge, 9 optionale Editorial-Plan-Titel wörtlich `Array`, 144 PPM679-Plätze ohne Titel. Dateibezug privat `/pferdeatelier/pferdeatelier-mini-ergebnisse-20261108-150347(1).json` (1.043.468 Byte; SHA256 `f31e68a5de77be965e384e4b7517ec7a48a7cd1ca8ae6631b9fb5637dd93a2ba`).
+2. **Echter WordPress-Testexport 08.11.2026, 16:03:31 UTC** nach Installation der lokal gebauten PSTE 0.57.144.23: `parkhaus_complete=false`, `parkhaus_snapshot.reason=PSTE_EDITORIAL_PLAN_TITLE_UNRESOLVED_0`. Nur WordPress 1.024 und PSTE-Plan 1 enthalten; PSERC, neun Redaktionsplaneinträge, 144 PPM679-Planplätze **nicht mehr erreicht**. Dateibezug privat `/pferdeatelier/pferdeatelier-mini-ergebnisse-20261108-160331(1).json`, SHA256 `b7ad76ea99e6cbf2895de7317ecb4af38ae63a5e6040c5c195b495c3ed805bdd`.
+3. **Wurzelfehler:** .23 hatte bereits den kaputten String-Typ erkannt, warf jedoch in der `PSTE_Snapshot::normalizeEditorialPlanItemsAgainstStructure` eine globale Exception, die im Export `readParkhausForMini` die weitere Abfrage der vorhandenen PSERC-/PPM679-Quellen abbrach. Der Test mit nur EINEM künstlich gültigen Editorial-Plan-Eintrag hatte diesen Fall nicht abgedeckt.
+
+## Eingebaute Korrektur 0.57.144.24 – genau ein lesbarer Normalweg
+
+- `PSTE_Snapshot::editorialPlanForParkhaus()` ist ein **zusätzlicher reiner Leseweg der bereits gespeicherten Editorial-Plan-Option**, aber **keine zusätzliche Tabelle/Worker/Fachautorität**. Er liest jede der neun tatsächlichen Zeilen – auch bei ungültigem Titel. Für unlesbare Einträge gibt er `UNRESOLVED_SOURCE_TITLE`, Original-Quelltitelwerte, Feldnamen, Reihenindex und Zeilenfingerprint zurück; er **schreibt nichts** und erfindet keinen Artikel.
+- Der strenge ältere `PSTE_Snapshot::editorialPlan()` für andere Fachpfade bleibt absichtlich unverändert (ein ungültiger Titel darf dort nicht ungeprüft akzeptiert werden).
+- `PSTE_Mini_Workflow::readParkhausForMini()` überträgt nun **alle** neun problematischen Editorial-Plan-Einträge statt global abzubrechen. Es liest im **gleichen Durchlauf** danach den PSERC-Plan und alle **144** belegten PPM679-Slots. **141** vorhandene WordPress-Beiträge können im echten Bestand eindeutig per gleicher Post-ID benannt werden. Die **3** im Nutzerexport nicht nachweisbaren Post-Referenzen werden als `UNRESOLVED_SOURCE_TITLE` mit der bisherigen Belegungs-ID beibehalten.
+- **Zwingende Sicherheitsregel bleibt:** Solange einer der neun alten Titel oder drei Postbezüge unklar ist, enthält der exportierte Parkhausplan **alle 1.179 Einträge zur Ursachenklärung**, aber `parkhaus_complete=false`, `sha256=""` (kein Owner-Import/FREI möglich), und den getrennten technischen Beleg `diagnostic_sha256`; Gründe `EDITORIAL_PLAN_UNRESOLVED:9;PPM679_RUNTIME_TITLE_UNRESOLVED:3`. Anzahl der Quellfehler ist nicht pauschal eine fehlende Datenquelle, sondern pro Zeile ausgewiesen.
+- Die Importfunktion `acceptSingleOwnerSeoDecisions` verlangt weiterhin `complete=true` **und** den korrekt gebundenen echten Snapshot-Hash. An ihr und am PSERC-Compiler wurde **nichts** geändert. Kein Sicherheitscheck abgeschaltet.
+
+## Tatsächlich durchgeführter lokaler Simulationslauf
+
+- Originale PSTE-.23-Test-ZIP und echter Test-Export .22/.23; die 1.179 echten Bestandszeilen im Nachbau durch die **echten PHP-Leser** `PSTE_Snapshot` und `PSTE_Mini_Workflow`, PSERC-0.28.55-Lesefunktion unverändert.
+- **46/46 lokale PHP-Tests PASS**, unter anderem tatsächliche Problemkonstellation mit **neun Strings `Array` und drei nicht im Inventar auffindbaren Postbezügen**; **1.179/1.179** Zeilen trotz Fehler exportiert; sechs Quellbereiche vollständig aufgelistet; **141** belegte Post-Titel korrekt gelesen; neun alte Titel und drei Postbezüge nicht fälschlich FREI; Quellsummen und Hashs stabil, keine Schreibaktion; Weitergabe einer externen Freigabedatei unter gesperrtem Snapshot technisch zurückgewiesen; Test mit **ausdrücklich synthetischen** neun Titeln und drei fehlenden Posts als Positivkontrolle; externer Owner-Vertrag und ursprünglicher PSERC-Leser positiv/negativ getestet.
+- **83/83 PHP-Syntaxprüfungen**, **121/121 ZIP-Einträge und CRC**, gegenüber .23 **exakt drei Dateien geändert** (`class-pste-snapshot.php`, `class-pste-mini-workflow.php`, Plugin-Hauptversion). PSERC 0.28.55 unverändert, K0 und WP unverändert.
+- **Korrekte Grenze**: Die ursprünglichen Titel der neun alten Planzeilen sind aus den bisherigen Nutzer-JSONs NICHT rekonstruierbar. Die Originaloption im WP-Testsystem kann hingegen Titel-Objekte enthalten; .24 exportiert jetzt deren **vorhandene Rohwerte statt sie zu verlieren**. Ebenfalls nicht belegt, ob drei nicht im 1.024er-Inventar vorkommende Posts auf WordPress noch existieren. Ein echter .24-WordPress-Test und eine externe SEO-Einstufung sind nicht durchgeführt. Kein neuer Artikel/keine Freigabe.
+
+## Archiv- und Sicherheitshinweise
+
+- Private Original-Test-ZIP **PSTE 0.57.144.24**, 635.721 Byte, SHA256 `056f9c6e1e8b273c3ece199b5b3d842b7f5c1ac42810b9ce5531b82525c8bd4e`, Pfad `/pferdeatelier/PLUGINS/PSTE-0.57.144.24-PARKHAUS-QUELLFIX-NUR-TEST.zip`.
+- Gemeinsame Archiv-ZIP (PSTE 0.57.144.24 + unverändertes PSERC 0.28.55), 877.145 Byte, SHA256 `063d427d100ee2a63b5ba223c30144b45d55ef4b18d1d77630fc381b64530143`, Pfad `/pferdeatelier/PLUGINS/PFERDEATELIER-PSTE-05714424-PSERC-02855-QA-PAAR.zip`.
+- GitHub-Diff, Originaltestcode, Bauverfahren, Prüflog und Manifest: `PLUGINS/QA_ONLY/PSTE_05714424_QUELLFIX/`. **Nicht** neue öffentliche ZIP-Binärdateien; diese sind privat im Pluginbüro gespeichert.
+- Einzelne als `Array` gespeicherte Alt-Einträge **nicht** einfach löschen oder pauschal aus der SEO-Dublettenprüfung entfernen. Eine Freigabe aller 87 JA-Themen wird so nicht fälschlich erzwungen. Die vorhandenen 87 Titelvorschläge bleiben erhalten.
+- Branch `fix/pste-kisten-einmalige-pruefung-20261107`, PR #682 Draft, **nicht mergen**. Live und K0 unverändert.
+
+## Zielgerichteter nächster Schritt, nicht erneut global beginnen
+
+Die neue v0.57.144.24 auf isolierter WordPress-Testseite statt .23 ausprobieren und den Parkhaus-Export **genau einmal** durchführen. Die nun sichtbaren Roh-Titel der neun gespeicherten Originaleinträge und ggf. die drei gezielt lesbaren WordPress-Post-IDs zeigen ohne Raten, ob Originaldaten vorhanden und reparabel sind. Erst nach tatsächlichem Nachweis der vollständigen Bedeutung darf genau EIN externer SEO-Owner `FREI/BELEGT/KLÄRUNG` festlegen, kein zweiter SEO-WP-Entscheider, kein neuer 5.016er-Diagnose- oder Keyword-Lauf. Keine automatische K0-Artikelproduktion.
