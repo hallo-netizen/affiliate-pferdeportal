@@ -11,7 +11,7 @@ from hashlib import sha256
 import subprocess
 
 ROOT=Path("protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT")
-SRC=ROOT/"CURRENT.zip"
+SRC=ROOT/"HOBBY_DEPOT_DESIGN_HD003_1.50.803.zip"
 NAME="HOBBY_DEPOT_DESIGN_HD003_1.50.804.zip"
 EXPECTED="06e412f04fd3768477c6e825b39708baed0927be68260fce55fd316dff14d95f"
 MAIN="affiliate-portal-template-kit/pferde-template-kit.php"
@@ -233,7 +233,8 @@ body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 
  body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804>p.has-large-font-size{
   font-size:17px!important;line-height:1.57!important;
  }
- body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 h2{
+ body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 h2,
+ body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 h2.wp-block-heading{
   font-size:21px!important;margin-top:28px!important;padding-top:12px!important;
  }
  body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 h3{
@@ -378,9 +379,9 @@ with ZipFile(BytesIO(payload)) as z:
             file.write_bytes(z.read(n))
             result=subprocess.run(['php','-l',str(file)],capture_output=True,text=True)
             assert result.returncode==0,(n,result.stderr)
-SRC.write_bytes(payload)
+(ROOT/"CURRENT.zip").write_bytes(payload)
 TARGET=ROOT/NAME
 TARGET.write_bytes(payload)
-assert TARGET.read_bytes()==SRC.read_bytes()
+assert TARGET.read_bytes()==(ROOT/"CURRENT.zip").read_bytes()
 print('HD003_HAB_ARTICLE_BUILD_PASS',NAME,'size',len(payload),'sha256',sha256(payload).hexdigest(),
       'php',13,'entries',1290,'modified',changed)
