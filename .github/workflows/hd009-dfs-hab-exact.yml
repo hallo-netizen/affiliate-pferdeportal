@@ -1,0 +1,32 @@
+name: HAB worker complete paid-task and article proof logic audit
+on:
+  push:
+    branches: [hobbyroom/hd009-dfs-hab-worker-20261108]
+    paths: [.github/workflows/hd009-dfs-hab-exact.yml]
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Quote target method bodies and safe new-task contract
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          with ZipFile(p) as z:s=z.read('affiliate-portal-router/includes/trait-ppar-hb-amazon.php').decode()
+          ms=list(re.finditer(r'(?:(?:private|public|protected)\s+)(?:static\s+)?function\s+([A-Za-z0-9_]+)\s*\(',s))
+          for i,m in enumerate(ms):
+            n=m.group(1)
+            if n in ('hb_amazon_normalize_title','hb_amazon_article_topic','hb_amazon_article_candidate','hb_amazon_article_results','hb_amazon_category_results','hb_amazon_dfs_do_tick'):
+              stop=ms[i+1].start() if i+1<len(ms) else len(s)
+              v=s[m.start():stop]
+              print('BEGIN_METHOD',n,'size',len(v))
+              chunk=4000
+              for j in range(0,len(v),chunk):
+                if n=='hb_amazon_dfs_do_tick' and j<6800:continue
+                print('METHOD_PART',n,j,re.sub(r'\s+',' ',v[j:j+chunk]))
+              print('END_METHOD',n)
+          PY
