@@ -4,6 +4,7 @@ on:
     branches: [hobbyroom/hd009-028-universal-category-photo-20261108]
     paths:
       - ops/hobby028/build.py
+      - ops/hobby028/test.py
       - .github/workflows/hd028-build.yml
 permissions: {contents: write}
 jobs:
@@ -13,6 +14,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build updated full ZIP from verified current 0.1.27
         run: python3 ops/hobby028/build.py
+      - name: Verify every category depth with original PHP banner methods
+        run: python3 ops/hobby028/test.py
       - name: Push unique versioned ZIP and single CURRENT into staging
         run: |
           git config user.name "github-actions[bot]"
