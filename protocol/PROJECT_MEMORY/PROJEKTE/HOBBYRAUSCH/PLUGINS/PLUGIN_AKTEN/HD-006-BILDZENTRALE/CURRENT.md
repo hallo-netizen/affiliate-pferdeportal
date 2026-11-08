@@ -3,12 +3,34 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-11-08
-STATUS: **HD-006 2.8.8 MENÜTRENNUNG LOKAL PASS / WORDPRESS-LIVEPRÜFUNG OFFEN. Die unten dokumentierte 2.7.8 ist historisch (Inventar 01.11.), keine aktuelle Installationsfreigabe.**
+STATUS: **HD-006 2.8.10 VOLLSTÄNDIG LOKAL GEPRÜFT; WORDPRESS-LIVEABNAHME OFFEN; ZIP IN CHAT GEPRÜFT, NOCH NICHT IM GITHUB-PLUGINBÜRO GESICHERT.**
 
-Plugin-ID:
-`HD-006-BILDZENTRALE`
+Plugin-ID: `HD-006-BILDZENTRALE`
 
-## AKTUELLE PFLICHTREGEL: MENÜTRENNUNG 2.8.8 (08.11.2026)
+## AKTUELLER LOKALER INSTALLATIONSKANDIDAT: 2.8.10
+
+**Installation:** `HOBBY_DEPOT_BILDZENTRALE_2.8.10_EINFACHE_BEDIENUNG.zip`
+**Größe:** 83.745 Bytes
+**SHA-256:** `09c5fbfd113c1e0fa0d6552c473b5ef5d1b0f1150adddce10090291ce097227f`
+
+- Vollständiges Bildzentrale-Plugin, 2 PHP-Dateien; ZIP/PHP-Syntax PASS.
+- **Die Bilderzeugung heißt „Bildzentrale“** und bleibt unter `admin.php?page=hdbz-bilder-erstellen`.
+- Die getrennte, ältere Bildzuordnungsoberfläche heißt **„Bilder zuordnen“** und bleibt unter `admin.php?page=hobby-depot-bildzentrale`. Beide URLs sind verschieden, unabhängig von der Registrierungsreihenfolge.
+- Für ein Hobby: Bild ansehen, **genau eine** redaktionelle Bewertung (Noch nicht geprüft / Bild passt / Bild passt nicht), optionaler Motivwunsch, **Bild erstellen**.
+- **Ein Klick auf „Bild erstellen“ startet den tatsächlichen Bildauftrag nach ausdrücklicher Kostenbestätigung; keine unsichtbare Warteschlange und kein zweiter Auslöser.**
+- Jeder vorhandene Master bleibt bearbeitbar. Vorhandene Fotos bleiben erhalten, bis ein neuer Entwurf mit **Bild übernehmen** ausdrücklich aktiviert wird.
+- Entwürfe werden als eigene, noch nicht zugeordnete Mediathekdateien für die Vorschau geprüft; Fehler und fehlgeschlagene Downloads sichtbar, kein heimlicher Ersatz. Rücknahme/Verwerfen betrifft ausschließlich nicht übernommene Entwürfe.
+- **Lokale Regression:** 65/65 Backend, 27/27 Menü und 21/21 echte Chromium-Klicktests, gerenderte Oberfläche mit 862 Hobbys.
+- **Grenze:** Test gegen lokale WordPress- und Provider-Simulation; kein echter Live-WordPress-/kostenpflichtiger Provider-PASS. Vollständige ZIP liegt im aktuellen Chat bereit, aber eine byteidentische Kopie im Campus-Pluginbüro ist **noch offen**.
+- **Ausgenommen:** Design-Plugin HD003 und Kacheldarstellung „Drachen & Leinen“ sind ausdrücklich angehalten und unverändert; ebenso HD007-Bestandsdaten, Pferdeatelier und K0.
+
+**Pflicht vor allen künftigen HD-006-Updates:** [Verbindlicher Menüvertrag 2.8.10](./MENUE_VERTRAG_20261108.md) und [Prüfvertrag 2.8.10](./BILDZENTRALE_2.8.10_PRUEFVERTRAG_20261108.md) lesen; Titel, beide URLs, direkter Klick zur Bilderzeugung, drei Bildbewertungen, Schutz der Bestandsbilder und echte Klicktests positiv und negativ wiederholen.
+
+---
+
+## HISTORISCHE STÄNDE – NICHT ALS CURRENT VERWENDEN
+
+## Historische Pflichtregel 2.8.8 (08.11.2026) – durch 2.8.10 im Menü-NAMEN ersetzt
 
 **Vor jedem HD-006-Update zwingend lesen:** [MENUE_VERTRAG_20261108.md](./MENUE_VERTRAG_20261108.md) und die dort abgelegte reproduzierbare [Patch-Datei](./REPRODUKTION_2.8.8_MENU_FIX.py) sowie [Regressionstests](./MENU_REGRESSION_2.8.8.php).
 
