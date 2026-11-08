@@ -30,6 +30,10 @@ jobs:
                   if item.endswith('.webp') and any(t in item for t in ('start-world','world-','topic-62-wassermelder','new-boiler','start-')):
                       dest='originals/hab-design/'+item.split('/')[-1]
                       if not os.path.exists(dest):open(dest,'wb').write(z.read(item))
+          with zipfile.ZipFile(orig) as z:
+              photos=[x for x in z.namelist() if x.endswith('.webp') and '/assets/' in x]
+              txt='\\n'.join(f'{x.split("/")[-1]} | {z.getinfo(x).file_size}' for x in photos)
+              open('originals/hab-design/ALL-PHOTO-FILENAMES.txt','w').write(txt)
           print('Hab photos',len(os.listdir('originals/hab-design')))
           PY
       - uses: actions/upload-artifact@v4
