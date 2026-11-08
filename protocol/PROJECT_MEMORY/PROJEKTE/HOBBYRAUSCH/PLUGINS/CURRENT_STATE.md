@@ -1,5 +1,9 @@
 # HOBBY DEPOT – PLUGINBÜRO – AKTUELLER BESTAND
 
+**Aktueller Stand 08.11.2026: HD009 Affiliate-Zentrale 0.1.26**, Download `HOBBY_DEPOT_AFFILIATE_HD009_0.1.26.zip`, 1.553.271 Bytes, SHA-256 `a627e35a9e8d20f34616c1ead4bc1b7d180e40a8f74abb985c7311b60dcfcd8f`. Einzige Abweichung von 0.1.25: zu großer Abstand **oberhalb des im Hobbyregister-Text eingebauten Querbanners** auf Desktop und Mobil korrigiert (47→17 bzw. 57→11px gerundet). Acht Themenfotos, Kategoriebanner-Höhe, Amazon-Button und alle Ausspielregeln unverändert. Voll-ZIP 41/41, PHP 24/24 und Browser-Test zwei Registerprofile / vier Breiten PASS (Action 42461816837). Live-Installation und optische Abnahme 0.1.26 offen; Beitragsbannerdesign später separat entscheiden. Frühere HD009-Stände unten sind historisch.
+
+
+
 **Zwischenstand 08.11.2026 – Nutzerfreigabe erster Eindruck:** HD009 **0.1.25** („auf den ersten Blick pass“) und HD007 **1.2.21** sind weiterhin die einzigen gültigen Downloadstände in ihren getrennten Plugin-Büros. Beide Installations-ZIPs und die jeweiligen CURRENT.zip-Dateien sind unverändert und byteidentisch; keine zusätzliche Pluginversion erzeugt. **Erledigt:** 8 neutrale Hobbywelt-Fotos (Tiere: Terraristik), eigene Kategoriebannerbilder statt Hero-Wiederholung, flaches Kategorie-Format, bebilderte Hobbyregisterbanner, Claim ohne Schlusspunkt. **Offen:** Beitragsbanner-Design ausdrücklich separat festlegen; Sichtprüfung der Ausspielung auf weiteren Seiten und Mobilgeräten, keine pauschale Abnahme aller Seiten. Die HTML-Ausspielungsregeln für Beiträge in HD009 bleiben bislang unverändert; die Designentscheidung dafür ist noch nicht abgeschlossen.
 
 
