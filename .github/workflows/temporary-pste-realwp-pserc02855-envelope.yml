@@ -1,0 +1,38 @@
+name: TEMP real WP reads genuine PSERC 0.28.55 snapshot envelope
+on:
+  push:
+    branches: [fix/pste-kisten-einmalige-pruefung-20261107]
+permissions: {contents: read}
+jobs:
+  pair-contract:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env: {MYSQL_ROOT_PASSWORD: qaOnlyPassword}
+        ports: ["3306:3306"]
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -pqaOnlyPassword"
+          --health-interval=5s --health-timeout=5s --health-retries=16
+    steps:
+      - uses: actions/checkout@v4
+      - name: Genuine isolated WordPress 7.1.x + MySQL 8 + PSTE original build + genuine PSERC 0.28.55 snapshot record envelope
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -qq -y php-mysql default-mysql-client > /tmp/qa-apt.log 2>&1
+          curl --retry 3 -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
+          mysql --protocol=TCP -h127.0.0.1 -uroot -pqaOnlyPassword -e 'CREATE DATABASE pste_qa CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;'
+          mkdir -p /tmp/pste-wp
+          php /tmp/wp core download --path=/tmp/pste-wp --allow-root --quiet
+          php /tmp/wp core config --path=/tmp/pste-wp --dbname=pste_qa --dbuser=root --dbpass=qaOnlyPassword --dbhost=127.0.0.1:3306 --skip-check --allow-root
+          php /tmp/wp core install --path=/tmp/pste-wp --url=http://localhost --title=QA --admin_user=qa --admin_password=qaOnlyNotLive --admin_email=qa@example.test --allow-root --skip-email
+          D=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/QA_ONLY
+          python3 "$D/apply_existing_mini_kisten_import.py" /tmp/qa-pste
+          python3 "$D/apply_wp_single_owner_gate.py" /tmp/qa-pste/PSTE-KISTEN-GESAMT-QA-NICHT-INSTALLIEREN.zip /tmp/pste-qa.zip
+          php /tmp/wp plugin install /tmp/pste-qa.zip --activate --path=/tmp/pste-wp --allow-root
+          php /tmp/wp post create --post_type=post --post_status=publish --post_title="Regendecke für Pferde" --post_content="<h2>Passform</h2>Testinhalt" --path=/tmp/pste-wp --allow-root
+          php /tmp/wp eval 'global $wpdb;$t=PSTE_Repository::table("topic_pool");if($wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s",$t))!==null)throw new RuntimeException("QA_SCHEMA_ALREADY_PRESENT");PSTE_Repository::createSchema();if($wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s",$t))!==$t)throw new RuntimeException("EXISTING_PSTE_SCHEMA_FAILED");echo "PASS existing PSTE schema installed once in disposable QA database\\n";' --path=/tmp/pste-wp --allow-root
+          php /tmp/wp eval-file "$D/test_pste_parkhaus_real_wp_pserc_02855_envelope.php" "$D/PSERC_02855_REAL_STORE_ENVELOPE_SYNTHETIC_ARTICLES_20261108.json" --path=/tmp/pste-wp --allow-root
+          echo "WP_PSERC_02855_REAL_ORIGINAL_ENVELOPE_QA_COMPLETED; NO ACTUAL PSERC PLUGIN INSTALLED; NO USER PORTAL DATA USED"
