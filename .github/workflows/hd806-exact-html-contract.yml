@@ -1,0 +1,52 @@
+name: HD806 detect real photo duplicate and banner markup
+on:
+  push:
+    branches: [hobbyroom/hd003-150806-hab-article-one-hero-20261108]
+    paths: [.github/workflows/hd806-exact-html-contract.yml]
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Find footer workaround and exact HTML block boundaries
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import re
+          b=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          with ZipFile(b) as z:
+            s=z.read('affiliate-portal-template-kit/includes/hobby-depot-article-hero-v150789.php').decode()
+            x=s.index('function hd003_article_hero_deduplicate_inline_v150789(')
+            y=s.index('function hd003_hab_article_preview_v150804(',x)
+            print('CURRENT_FOOTER_DEDUP',s[x:y])
+            x=s.index('function hd003_hab_article_sidebar_v150804(')
+            print('CURRENT_SIDEBAR_AND_FILTER',s[x:x+8800])
+          PY
+      - name: Install Chromium
+        run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - name: Inspect all inline images and banner owners before patch
+        run: |
+          python3 - <<'PY'
+          from playwright.sync_api import sync_playwright
+          import json
+          with sync_playwright() as p:
+            b=p.chromium.launch(headless=True,args=['--no-sandbox'])
+            page=b.new_page(viewport={'width':1440,'height':950})
+            r=page.goto('https://www.hobby-depot.de/designtest-zweileiner-oder-vierleiner-hobby-depot/',wait_until='domcontentloaded',timeout=32000)
+            page.wait_for_timeout(250)
+            d=page.evaluate("""()=>{
+              const root=document.querySelector('.hd-article-reading-v150804');
+              const hero=document.querySelector('.hd-article-photo-hero-v150789');
+              return {version:[...document.querySelectorAll('link[href*=template-kit]')].map(x=>x.href).slice(-7),
+                hero:hero?.outerHTML.slice(0,1400),
+                reading:root?.outerHTML.slice(0,7100),
+                allPostBanners:[...document.querySelectorAll('[data-ppar-slot="post_inline_banner"]')].map(x=>x.outerHTML.slice(0,800)),
+                footerDedup:document.querySelector('script#hd003-article-hero-deduplicate-v150789')?.outerHTML.slice(0,700)};
+            }""")
+            print('LIVE_DATA',json.dumps(d,ensure_ascii=False))
+            b.close()
+          PY
