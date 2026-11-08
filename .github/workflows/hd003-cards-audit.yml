@@ -1,0 +1,35 @@
+name: HD003 article cards live DOM cause check
+on:
+  push:
+    branches: [hobbyroom/hd003-150805-article-card-fix-20261108]
+    paths: [.github/workflows/hd003-cards-audit.yml]
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - name: Check all cards on the real test page
+        run: |
+          python3 - <<'PY'
+          from playwright.sync_api import sync_playwright
+          import json
+          u='https://www.hobby-depot.de/designtest-zweileiner-oder-vierleiner-hobby-depot/'
+          with sync_playwright() as p:
+            b=p.chromium.launch(headless=True,args=['--no-sandbox'])
+            for width in (1440,960,390):
+              page=b.new_page(viewport={'width':width,'height':900})
+              response=page.goto(u,wait_until='domcontentloaded',timeout=35000)
+              page.wait_for_timeout(400)
+              v=page.evaluate("""()=>{
+                const sels=['body','.hd-article-body-grid-v150804','.hd-article-reading-v150804','.hd-article-sidebar-v150804','.hd-article-sidebar-card-v150804','.hddemo-product-grid','.hddemo-product-grid article','.hddemo-related','.post__text nav','[class*=product]','[class*=affiliate]'];
+                const get=n=>{const s=getComputedStyle(n),r=n.getBoundingClientRect();return {tag:n.tagName,cls:(typeof n.className==='string'?n.className:'').slice(0,120),text:n.textContent?.trim().slice(0,145),imageCount:n.querySelectorAll('img').length,anchorCount:n.querySelectorAll('a').length,display:s.display,columns:s.gridTemplateColumns,overflow:s.overflow,position:s.position,rect:{x:r.x,y:r.y,w:r.width,h:r.height,right:r.right},html:n.outerHTML.slice(0,850)}};
+                return {title:document.title,viewport:innerWidth,totalWidth:document.documentElement.scrollWidth,sheets:[...document.styleSheets].map(x=>x.href).filter(Boolean).filter(x=>/template-kit|single-post/i.test(x)).slice(-12),cards:sels.map(sel=>({sel,nodes:[...document.querySelectorAll(sel)].slice(0,7).map(get)}))};
+              }""")
+              print('LIVE_CARD',width,'http',response.status if response else 0,json.dumps(v,ensure_ascii=False))
+              page.close()
+            b.close()
+          PY
