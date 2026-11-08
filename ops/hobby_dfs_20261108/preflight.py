@@ -36,7 +36,8 @@ for s in sorted(hobbies):
     x=next((r for r in by_slug[s] if slug(r["canonical_name"])==s),by_slug[s][0])
     need=x["result_profile"]["what_do_you_need"].strip()
     first=need.rstrip(".").split(",",1)[0].strip()
-    potential=bool(first and len(first)<55 and len(first.split())<=6 and not skip.search(first) and " oder " not in first.lower() and " und " not in first.lower())
+    generic={"karton","holz","papier","material","werkzeug","computer","wasser","schere","farbe","modell","schrauben","leitung","leinen","lupe","kleber","buch","bogen","rute"}
+    potential=bool(first and len(first)>=8 and len(first)<55 and len(first.split())<=6 and slug(first) not in generic and not skip.search(first) and " oder " not in first.lower() and " und " not in first.lower())
     world=world_by_hobby.get(s) or "unbekannt"
     rows.append((world,s,x["canonical_name"],first,potential,need))
 counts=Counter("Prüfwort" if x[4] else "Unklar" for x in rows)
@@ -49,10 +50,12 @@ for s in ["sportdrachen","3d-druck","architekturmodellbau","munzen","airbrush-mo
     for row in rows:
         if row[1]==s:print("EXAMPLE",row)
 selected=[]
+seen=set()
 for world in sorted(worlds):
     pool=[x for x in rows if x[0]==world]
-    selected.extend(pool[:3])
-    selected.extend([x for x in pool if not x[4]][:2])
+    for x in pool[:3]+[x for x in pool if not x[4]][:2]:
+        if x[1] not in seen:
+            seen.add(x[1]);selected.append(x)
 out=Path("protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/DATAFORSEO_KOSTENFREIE_VORPRUEFUNG_20261108.md")
 lines=[
 "# Hobbydepot: DataForSEO-Produktbefüllung – Quellenprüfung vom 08.11.2026",
