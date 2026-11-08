@@ -47,7 +47,22 @@ replacement=r"""    $cat_url=get_category_link((int)$first->term_id);
     }
 """
 src=src[:start]+replacement+src[end:]
-assert "hd-article-sidebar-photo-v150805" in src, "CSS still present (no new extra image)"
+# Remove two non-working old methods instead of layering another workaround:
+# ListingHive uses .post__text, not Astra .entry-content; its footer JS
+# and first-of-type CSS never stopped the actual duplicated photo.
+old_begin=src.index("function hd003_article_hero_deduplicate_inline_v150789(")
+old_end=src.index("/* HD003 1.50.804 – article only",old_begin)
+assert "add_action('wp_footer', 'hd003_article_hero_deduplicate_inline_v150789', 998);" in src[old_begin:old_end]
+src=src[:old_begin]+src[old_end:]
+old_css='''/* Inline image was re-used as hero. Keep content but avoid its duplicate photograph. */
+html body.pftk-design-profile-hobby-depot.single-post.hd-article-inline-image-v150789 #content article.post .entry-content figure.wp-block-image:first-of-type{display:none!important}
+html body.pftk-design-profile-hobby-depot.single-post.hd-article-inline-image-v150789 #content article.post .entry-content>.wp-block-image:first-of-type{display:none!important}
+'''
+src=once(src,old_css,'/* One Hero, no duplicate in content: enforced on the real post HTML by HD003 1.50.806. */\n',"obsolete Astra CSS")
+photo_start=src.index("/* 1.50.805: photo-led related category card, not unlicensed product tiles.")
+photo_end=src.index("/* Only as a defensive fallback for cached older design-test HTML.",photo_start)
+src=src[:photo_start]+src[photo_end:]
+assert "hd-article-sidebar-photo-v150805" not in src, "Old picture card CSS still active"
 assert "function hd003_hab_article_content_v150804(" in src
 
 # Hab design contract: a banner/product offer only when there is
