@@ -13,49 +13,37 @@ Status: ausschließlich Datenprüfung. Keine kostenpflichtige DataForSEO-Abfrage
 - Eindeutiger Namensabgleich mit Hobbyregister: 381
 - Ohne automatischen Namensabgleich: 0
 - Mehrdeutige Mehrfachkandidaten: 0
-- Erste kompakte Ausrüstungsphrasen als mögliche Recherchewörter: 301
-- Erster Ausrüstungsbegriff für direkte Recherche zu ungenau: 80
+- Erste kompakte Ausrüstungsphrasen als mögliche Recherchewörter: 246
+- Erster Ausrüstungsbegriff für direkte Recherche zu ungenau: 135
 
 Diese Begriffe sind keine fertig geprüften Produktempfehlungen. Keine automatische Übernahme fachlich ungeeigneter Artikel.
 
 ## Beispielhafte Eingaben zur Prüfung
 | Welt | Hobby | Ausrüstungsphrase | Einschätzung |
 |---|---|---|---|
-| bewegen | 3D-Bogenschießen | Bogen | Suchwort-Kandidat |
-| bewegen | Angeln | Rute | Suchwort-Kandidat |
+| bewegen | 3D-Bogenschießen | Bogen | Noch prüfen |
+| bewegen | Angeln | Rute | Noch prüfen |
 | bewegen | Balance Board | Balance Board und eine freie | Noch prüfen |
-| bewegen | Balance Board | Balance Board und eine freie | Noch prüfen |
-| bewegen | Boomerangwerfen | Geeigneten Bumerang | Noch prüfen |
 | fertigen | Automodellbau | Modellbausatz | Suchwort-Kandidat |
 | fertigen | Bean-to-Bar-Schokolade | Kakaobohnen | Suchwort-Kandidat |
 | fertigen | Besenbinden | Reisig oder Fasern | Noch prüfen |
-| fertigen | Besenbinden | Reisig oder Fasern | Noch prüfen |
-| fertigen | Cider herstellen | Saft oder Obst | Noch prüfen |
+| fertigen | Buchbinden | Papier | Noch prüfen |
 | forschen | Amateurastronomie | Freier Himmel; optional Fernglas | Noch prüfen |
-| forschen | Astrofotografie | Kamera | Suchwort-Kandidat |
-| forschen | Bioakustik | Audiorecorder oder Mikrofon | Noch prüfen |
-| forschen | Amateurastronomie | Freier Himmel; optional Fernglas | Noch prüfen |
+| forschen | Astrofotografie | Kamera | Noch prüfen |
 | forschen | Bioakustik | Audiorecorder oder Mikrofon | Noch prüfen |
 | gestalten | Airbrush | Airbrushpistole | Suchwort-Kandidat |
-| gestalten | Architekturmodellbau | Karton | Suchwort-Kandidat |
-| gestalten | Batik | Stoff | Suchwort-Kandidat |
-| gestalten | Book Nooks | Bausatz oder Material | Noch prüfen |
-| gestalten | Fotografie | Kamera oder Smartphone; je nach Anspruch Objektive | Noch prüfen |
+| gestalten | Architekturmodellbau | Karton | Noch prüfen |
+| gestalten | Batik | Stoff | Noch prüfen |
 | pflanzen | Aeroponik | Aeroponik-System | Suchwort-Kandidat |
 | pflanzen | Bonsai | Bonsai oder Jungbaum | Noch prüfen |
 | pflanzen | Bromelien | Bromelie | Suchwort-Kandidat |
-| pflanzen | Bonsai | Bonsai oder Jungbaum | Noch prüfen |
-| pflanzen | Gärtnern | Pflanzen oder Saatgut | Noch prüfen |
+| pflanzen | Chili-Zucht | Saatgut | Noch prüfen |
 | sammeln | alte Computer | Platz | Noch prüfen |
 | sammeln | alte Schlüssel | Aufbewahrung | Suchwort-Kandidat |
 | sammeln | Banknoten | Schutzhüllen oder Album und verlässliche Bestimmungshilfen | Noch prüfen |
-| sammeln | alte Computer | Platz | Noch prüfen |
-| sammeln | Banknoten | Schutzhüllen oder Album und verlässliche Bestimmungshilfen | Noch prüfen |
 | technik | 3D-Druck | 3D-Drucker | Suchwort-Kandidat |
 | technik | 3D-Scanning | Scanner oder Smartphone | Noch prüfen |
-| technik | alte Spielekonsolen restaurieren | Werkzeug | Suchwort-Kandidat |
-| technik | 3D-Scanning | Scanner oder Smartphone | Noch prüfen |
-| technik | Heimautomatisierung | Zentrale oder Server | Noch prüfen |
+| technik | alte Spielekonsolen restaurieren | Werkzeug | Noch prüfen |
 | tiere | Ameisenhaltung | Formicarium | Suchwort-Kandidat |
 | tiere | Artemia-Zucht | Behälter | Suchwort-Kandidat |
 | tiere | Asselhaltung | Behälter | Suchwort-Kandidat |
