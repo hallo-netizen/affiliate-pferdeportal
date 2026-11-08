@@ -7,6 +7,7 @@ declare(strict_types=1);
  */
 define('ABSPATH','/qa/');
 define('ARRAY_A','ARRAY_A');
+define('PSTE_VERSION','0.57.144.22-QA');
 $GLOBALS['options']=[];
 function get_option(string $key,$fallback=[]){return $GLOBALS['options'][$key]??$fallback;}
 function update_option(string $key,$value,bool $autoload=false):bool{$GLOBALS['options'][$key]=$value;return true;}
@@ -108,6 +109,17 @@ foreach(['WORDPRESS','PSERC_ACTIVE_PLAN','PPM679_EXISTING_EDITORIAL_RUNTIME'] as
     chk(count($blockedResult['seo_decisions'])===87,
         'all other received decisions continue despite one occupied slot '.$source);
 }
+// External owner approval is *not* the existing planning handoff.
+$freedata=$completed[$selectedFree];
+$unforwarded=PSTE_Planning_Readiness_Gate::apply([
+    'pool_key'=>$selectedFree,'raw_query'=>$freedata['raw_query'],
+    'production_title'=>$freedata['titles'][0]['title']],$snapshot['items'],[]);
+chk(($unforwarded['planning_readiness_gate']['ok']??null)===false,
+    'unforwarded external FREI cannot bypass the existing WP plan queue');
+$hash=hash('sha256',$freedata['raw_query'].'|'.$freedata['titles'][0]['title']);
+$updated['plan_forwarded'][$selectedFree]=$hash;
+$updated['plan_queued'][$selectedFree]=$hash.'|'.PSTE_VERSION;
+$GLOBALS['options']['pste_mini_keyword_roundtrip_v1']=$updated;
 $verified=['FREI'=>0,'BELEGT'=>0,'KLAERUNG'=>0];
 foreach($completed as $key=>$row){
     if($row['decision']!=='JA')continue;
