@@ -1,3 +1,21 @@
+# HD003 – Hobbydepot Design – CURRENT
+
+**Stand 08.11.2026: vollständiger Installationskandidat 1.50.807 (Hobbyfinder).**  
+**Produktiv zuletzt vom Nutzer gemeldet: 1.50.806; 1.50.807 noch nicht live abgenommen.**
+
+**Voll-ZIP:** `HOBBY_DEPOT_DESIGN_HD003_1.50.807.zip` im isolierten GitHub-Pluginbüro (`ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/`), **65.784.974 Bytes**, SHA256 `494bd514882695f81357f53fe3d9608d3a2d4a4c6fda0a974b8d72a97cf0ce02`.
+Direktdownload: https://github.com/hallo-netizen/affiliate-pferdeportal/releases/download/hobby-depot-hd003-1.50.807-hobbyfinder/HOBBY_DEPOT_DESIGN_HD003_1.50.807_HOBBYFINDER.zip
+
+**Nur Hobbyfinder** (`/magazin/hobbyfinder/`): Betreiber hat Lupen-Hero und kurzen Spruch **„Das passende Hobby für dich.“** ausdrücklich freigegeben; damit wird das alte `suchen-finden.webp` auf dieser einen Seite ersetzt. Das bisherige hohe Eigenwerbebanner wird auf Hobbyfinder durch kompakte, flache Darstellung mit kleineren, mobil lesbaren echten Buttons „Werbebedingungen“ und „Preise“ ersetzt; gebuchte externe Anzeigen werden nicht umgeleitet oder ersetzt. Übrige Hero-Bilder, Kategorie- und Beitragsdesign, Anzeigenplätze, HD006 Bildzentrale und HD007 bleiben unverändert.
+
+**Technische Freigabe:** Quelle ist das SHA-geprüfte Original-Vollplugin 1.50.806, die 1288 unveränderten Dateien sind byteidentisch, nur zwei vorhandene PHP-Dateien + zwei neue freigegebene Bilddateien; ZIP komplett, 13/13 PHP-Lint, 78/78 Browserprüfungen auf 1440, 960, 768, 640, 390, 360px PASS. GitHub Action 42506140904; gebautes Vollplugin und Browser-/Buildtests im isolierten HD003-Büro dokumentiert. **WordPress-Live-Sichtprüfung noch offen.**
+
+**Keine weiteren Änderungen an 1.50.806 durchführen; für neue Arbeiten 1.50.807 als Arbeitsgrundlage und die nachfolgende Historie beachten.**
+
+---
+
+## Historischer Stand 1.50.806 (nicht mehr aktuelle Installationsdatei)
+
 # HD003 – Hobbydepot Design – gültige Current-Version
 
 **Version 1.50.806 · 08.11.2026**
