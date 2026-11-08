@@ -698,8 +698,8 @@ jobs:
               if not section.startswith('diff --git '):continue
               for hunk in re.split(r'(?=^@@ )',section,flags=re.M):
                   if not hunk.startswith('@@ '):continue
-                  header=hunk.split('\\n',1)[0]
-                  m=re.match(r'^@@ -[0-9]+,([0-9]+) \\+[0-9]+,([0-9]+) @@',header)
+                  header=hunk.split('\n',1)[0]
+                  m=re.match(r'^@@ -[0-9]+,([0-9]+) \+[0-9]+,([0-9]+) @@',header)
                   assert m, ('Invalid diff header',header)
                   lines=[x for x in hunk.splitlines()[1:] if x]
                   old_lines=sum(x.startswith((' ','-')) for x in lines)
