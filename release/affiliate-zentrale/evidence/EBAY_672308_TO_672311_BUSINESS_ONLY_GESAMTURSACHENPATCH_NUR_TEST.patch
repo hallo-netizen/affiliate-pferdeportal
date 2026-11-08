@@ -179,14 +179,14 @@ index e5c1169..8e0566b 100644
          if($scope===''){$this->ebay_run_fail('selection_scope_empty','Der beim Runstart gespeicherte Seller-Routen-Snapshot enthält keine aktive Route.');return;}
          $canonical_phase=sanitize_key((string)($run['phase']??''));
 -        $selection=$this->ebay_selection_state_load();
--        if(!$this->ebay_selection_state_is_open($selection) && sanitize_key((string)($selection['status']??''))!=='complete')
+-        if(!$this->ebay_selection_state_is_open($selection) && sanitize_key((string)($selection['status']??''))!=='complete'){
 +        $selection=$this->ebay_selection_state_load();
 +        // Existing pre-BUSINESS-only selection may still be open after an upgrade.
 +        // NEVER process a persisted ALL/PRIVATE selection or its old publication.
 +        if(in_array(sanitize_key((string)($selection['selection_scope']??'')),array('all','private'),true)){
 +            $this->ebay_run_fail('business_only_legacy_selection_blocked','Veraltete PRIVATE-Auswahl gestoppt; nur neue BUSINESS-Auswahl zulässig.');return;
 +        }
-+        if(!$this->ebay_selection_state_is_open($selection) && sanitize_key((string)($selection['status']??''))!=='complete')
++        if(!$this->ebay_selection_state_is_open($selection) && sanitize_key((string)($selection['status']??''))!=='complete'){
              $selection=$this->ebay_selection_request('canonical_run','run:'.sanitize_text_field((string)$run['run_uuid']),true,$scope);
              $this->ebay_run_capture_component_state(null,array('selection'));
 @@ -1211,7 +1256,7 @@ trait PPAR_Ebay_Run_Trait {
