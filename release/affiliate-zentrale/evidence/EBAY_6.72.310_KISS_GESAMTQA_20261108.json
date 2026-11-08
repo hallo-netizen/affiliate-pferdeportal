@@ -1,5 +1,5 @@
 {
-  "status": "WORK-IN-PROGRESS TEST-ONLY 6.72.310: one combined eBay workflow fix; 29 correctly counted patch hunks in 5 files. 47/47 executable reference-PHP checks including full public_verify -> PRIVATE hash-change repair. This has NOT been installed or proven live.",
+  "status": "SUPERSEDED / FACHLICH ÜBERHOLT: 6.72.310 assumed PRIVATE eBay/HivePress eBay listings are still in scope, contrary to user's 2026-11-08 binding decision: exclusively BUSINESS eBay. Do not install.",
   "date": "2026-11-08",
   "version": "6.72.310 (internal work source ONLY, no ZIP issued)",
   "original_zip_file": "AFFILIATE_ZENTRALE_6.72.308_URSACHENFIX_GESAMTTEST_NUR_TEST.zip",
@@ -30,7 +30,7 @@
     "Only with full E2E proof allow release ZIP"
   ],
   "release_allowed": false,
-  "installation_instruction": "NONE: do not deploy 6.72.310 while exact original source and live end-to-end gates are absent",
+  "installation_instruction": "DO NOT INSTALL 6.72.310. PRIVATE eBay route is removed from current project scope. Use only 6.72.311 BUSINESS-only test source after full original+E2E gate.",
   "newly_reproduced_public_checkpoint_root_risk": {
     "original_method": "ebay_run_commit_public_checkpoint updates the old safe checkpoint with the new candidate, even when one verified eBay search profile is still technically open",
     "proof_fixture": "Previous safe BUSINESS ID [42], candidate [], one eBay product family with exhausted cURL28 timeout; original public commit wrote [] and triggered article product rebuild",
@@ -177,5 +177,7 @@
     ],
     "live_e2e": "NOT EXECUTED",
     "installer": "NOT CREATED"
-  }
+  },
+  "superseded_by": "release/affiliate-zentrale/evidence/EBAY_672308_TO_672311_BUSINESS_ONLY_GESAMTURSACHENPATCH_NUR_TEST.patch",
+  "superseded_reason": "PRIVATE seller route eliminated. Old PRIVATE 47/47 checks are irrelevant to current contract; BUSINESS-only 6.72.311 replaces them."
 }
