@@ -1,3 +1,9 @@
+# Historischer Zwischenstand 2.8.9 – durch 2.8.10 abgelöst
+
+**Nicht mehr als aktuelle Menü- oder Installationsregel verwenden.** Der Benutzer hat die Namen ausdrücklich korrigiert. Ab jetzt ist [2.8.10 der verbindliche Vertrag](./BILDZENTRALE_VERTRAG_2.8.10_20261108.md): eigenes Bilderzeugungs-Plugin **Bildzentrale**, anderes Zuordnungs-Plugin **Bilder zuordnen**, zwei verschiedene Klickpfade. Außerdem startet „Bild erstellen“ in 2.8.10 sofort den Anbieterauftrag statt nur eine Warteschlange vorzumerken.
+
+---
+
 # HD-006 – Verbindlicher Hobbyregister-Bewertungsvertrag 2.8.9 (08.11.2026)
 
 ## Zwingende Redaktionslogik
