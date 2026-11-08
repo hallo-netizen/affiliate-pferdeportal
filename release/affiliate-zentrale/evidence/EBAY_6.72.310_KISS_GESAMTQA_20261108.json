@@ -143,5 +143,20 @@
     "what_is_not_proven": "The currently installed website's eBay import, public campaigns, public product cards, and continuation are healthy. No authenticated WP/MariaDB/live eBay integrated pass.",
     "next_work": "Obtain the existing physical 6.72.308 installation ZIP without reconstructing it, apply the single cumulative 6.72.310 patch exactly, rerun full native PHP+JSON+all regression tests against the full plugin, then one authenticated real WP/MariaDB/eBay and frontend E2E, and only then signed installable release. No additional piecemeal repairs before this gate.",
     "release_allowed": false
-  }
+  },
+  "single_source_gate_20261108": {
+    "github_file": "release/affiliate-zentrale/evidence/ebay_672310_sourcegate.py",
+    "commit": "b8fda946b98ca50332d8d6ec859baafc5b617a7a",
+    "type": "fail-closed test-only source gate (no runtime/plugin change)",
+    "validated": "Python syntax PASS; missing original 6.72.308 ZIP -> FAIL ORIGINAL_MISSING; readback of gate source from GitHub PASS",
+    "when_original_available": "Verify exact original SHA256 and 66 files; apply current 6.72.310 patch with git apply --check; verify only specified 5 files changed, 23 PHP lint and 3 JSON syntax, header/constant 6.72.310",
+    "not_yet_proven": "No original ZIP accessible for executing real 66-file gate. No WordPress/MariaDB/eBay/API/actual frontend E2E and no installer released."
+  },
+  "systemic_source_lifecycle_risk_20261108": {
+    "observation": "Source in older canonical GitHub source uses fresh_until=now+6h, selection and public coverage require freshness; if complete discovery/refresh/selection/gapfill exceeds this interval, early accepted products become stale before public commit.",
+    "evidence": "release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-ebay.php source row storage; trait-ppar-ebay-run.php public coverage",
+    "proof_boundary": "Verified in older canonical 6.72.211 source, not yet run-tested on exact installed 6.72.308; must not claim that this caused 07 November SSL timeout or simply extend six-hour limit.",
+    "architecture_decision": "Preserve provider freshness and security gates; do not fabricate safe supply or overwrite last-good, no new worker; do not add speculative additional code without exact installed source and end-to-end tests."
+  },
+  "workflow_repair_objective": "A SINGLE real end-to-end pass must prove discovery + persistence + independent BUSINESS/PRIVATE safe selection + public checkpoint + category/article rendered cards. A passed source gate or GitHub heartbeat alone is never completion."
 }
