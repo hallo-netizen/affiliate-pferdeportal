@@ -1,4 +1,4 @@
-name: Pferdeatelier eBay BUSINESS-only hardlock QA
+name: Pferdeatelier eBay BUSINESS-only reference source QA
 on:
   push:
     branches: [affiliate-release-current]
@@ -9,7 +9,7 @@ on:
 permissions:
   contents: read
 jobs:
-  business-only-verified:
+  business-only-reference-only:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -51,12 +51,19 @@ jobs:
           function sanitize_key($v){return strtolower(preg_replace('/[^a-z0-9_-]/','',strtolower((string)$v)));}
           function sanitize_text_field($v){return trim((string)$v);}
           function wp_json_encode($v){return json_encode($v);}
+          $TEST_META=array();
+          function get_post_meta($id,$key,$single=true){global $TEST_META;return $TEST_META[$id][$key]??'';}
           require 'affiliate-portal-router/includes/trait-ppar-ebay.php';
           require 'affiliate-portal-router/includes/trait-ppar-ebay-run.php';
           class BusinessOnlyTest {
               use PPAR_Ebay_Trait, PPAR_Ebay_Run_Trait;
               public $last_checkpoint=array();public $run=array();
               private function ebay_catalog_rules(){return array();}
+              private function ebay_is_backend_admin_screen_request(){return false;}
+              private function ebay_query_allows_private_ebay($query,$category_term_ids=null){return true;}
+              private function ebay_public_source_rows_by_item_ids($ids,$seller){return array();}
+              private function ebay_private_parent_term(){return null;}
+              public function publicNativeArchive($posts){return $this->ebay_filter_stale_posts($posts,null);}
               private function ebay_public_checkpoint_load(){return array('checkpoint_id'=>'old-safe','private_listing_ids'=>array(12,13),'business_campaign_ids'=>array(99));}
               private function ebay_public_checkpoint_is_safe($c){return !empty($c['checkpoint_id']);}
               private function ebay_public_checkpoint_save($c){$this->last_checkpoint=$c;return $c;}
@@ -91,13 +98,20 @@ jobs:
           check($x->runtimeScope(array('config_snapshot'=>array('seller_routes'=>array('private'=>true,'business'=>true))))==='business','Old active run forced BUSINESS-only');
           check(($x->privateGate($legacy)['status']??'')==='disabled','PRIVATE public gate permanently retired');
           check($x->publicPrivateListing(12)===null,'PRIVATE custom listing rendering blocked');
+          global $TEST_META;
+          $TEST_META=array(12=>array('_ppar_ebay_item_id'=>'legacy-individual'),31=>array());
+          $old=(object)array('ID'=>12,'post_type'=>'hp_listing','post_status'=>'publish');
+          $native=(object)array('ID'=>31,'post_type'=>'hp_listing','post_status'=>'publish');
+          $archive=$x->publicNativeArchive(array($old,$native));
+          check(count($archive)===1&&$archive[0]->ID===31,'Native HivePress archive hides old published eBay listing');
+          check(in_array($native,$archive,true),'Unrelated native HivePress listing remains visible');
           $c=$x->commit(array('run_uuid'=>'hardlock','checkpoint_candidate'=>array('private_listing_ids'=>array(12,13),'business_campaign_ids'=>array(99))));
           check(($c['private_listing_ids']??null)===array(),'No PRIVATE IDs written to next public checkpoint');
           check(($c['business_campaign_ids']??null)===array(99),'Business IDs kept in new public checkpoint');
-          echo "EBAY_BUSINESS_ONLY 17/17 PASS; NO LIVE DEPLOYMENT\n";
+          echo "EBAY_BUSINESS_ONLY_REFERENCE 19/19 PASS; NO ORIGINAL ZIP OR LIVE E2E\n";
           PHP
           cd /tmp/ebay_business_qa
           php -l test.php
           php test.php | tee results.log
-          test "$(grep -c '^PASS ' results.log)" = 17
-          grep -F 'EBAY_BUSINESS_ONLY 17/17 PASS' results.log
+          test "$(grep -c '^PASS ' results.log)" = 19
+          grep -F 'EBAY_BUSINESS_ONLY_REFERENCE 19/19 PASS' results.log
