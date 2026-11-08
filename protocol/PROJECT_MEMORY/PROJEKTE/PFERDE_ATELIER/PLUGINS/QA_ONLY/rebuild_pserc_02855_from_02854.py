@@ -12,7 +12,7 @@ import sys
 import tempfile
 
 SOURCE_SHA='2c31ae1bf89613abf456576039f9bd52ef6ed41c1f84c28fd0c57410846033a1'
-EXPECTED_OUTPUT='5fb82d0b35346d71d1cc0d9a796e5ca19d1ac3ad595ec5aab9643154db8a8578'
+EXPECTED_OUTPUT='042772cd3c8d594e39ff28ea46b3c74e431cd26fe680a7c95c7522d337e44e43'
 ROOT='portal-seo-editorial-plan-compiler/'
 READER=ROOT+'includes/class-pserc-seo-reader.php'
 MAIN=ROOT+'portal-seo-editorial-plan-compiler.php'
@@ -50,7 +50,8 @@ def build(inp: Path, out: Path):
     main=payload[MAIN].decode('utf-8')
     assert main.count("define('PSERC_VERSION', '0.28.54');")==1
     assert main.count("define('PSERC_BUILD','0.28.54-central-owner-kiss');")==1
-    payload[MAIN]=main.replace(
+    assert main.count(' * Version: 0.28.54\n')==1, 'EXPECTED_ORIGINAL_WP_PLUGIN_HEADER_0_28_54'
+    payload[MAIN]=main.replace(' * Version: 0.28.54\n',' * Version: 0.28.55\n').replace(
         "define('PSERC_VERSION', '0.28.54');",
         "define('PSERC_VERSION', '0.28.55');").replace(
         "define('PSERC_BUILD','0.28.54-central-owner-kiss');",
@@ -84,6 +85,8 @@ def build(inp: Path, out: Path):
     with ZipFile(out) as final:
         assert final.testzip() is None and len(final.namelist())==63
     print('REPRODUCIBLE_PSERC_02855_QA_PASS',actual)
+    assert ' * Version: 0.28.55\n' in payload[MAIN].decode('utf-8')
+    print('PASS SAME WORDPRESS-HEADER AND RUNTIME VERSION 0.28.55')
     print('NO SECOND SEMANTIC REVIEW; NO RUNTIME CLASS; NO K0 OR SAVED PLAN EDIT')
 
 if __name__=='__main__':
