@@ -30,24 +30,36 @@
       "final_line": "ALL CANONICAL TESTS PASS"
     },
     "admin_html": {
-      "pass_lines": 12,
+      "pass_lines": 13,
       "final_line": "DASHBOARD TESTS PASS"
+    },
+    "lastgood_public_gate": {
+      "pass_lines": 15,
+      "final_line": "PUBLIC LAST-GOOD GATE TESTS PASS"
     }
   },
-  "tests_total": 66,
+  "tests_total": 82,
   "original_red_reproduction": "PASS (separate original regression)",
   "patch_path": "EBAY_672308_TO_672310_GESAMTURSACHENPATCH_NUR_TEST.patch",
-  "patch_sha256": "6daf1e4075f31571f32139190d5a3f665d25fe1420f9bef33cd01d99436b0f4c",
-  "patch_git_blob_sha": "1e5b3e639987db46ed96cef4157f4d6f20205a65",
+  "patch_sha256": "dc1566a802fa4ec4a3d595934ceb5620efd6d5b84fbb55ace2d7a3cc9d925d1f",
+  "patch_git_blob_sha": "6d507751430d73ac7e5997a89d4b2e9828683a4e",
   "patch_replay": "PASS — 66/66 exact file byte matches against internal source",
   "protected_frontend_and_catalog_source": "ALL 7 checked source files byte-identical to original 6.72.308",
-  "source_tree_deterministic_sha256": "f5d23977c958aef497be25d2f4ea0e84df81c51d1442fd6806ecef05b4c955e7",
+  "source_tree_deterministic_sha256": "73e3626320760c74fb80c4091446870b37dcfa89762066b43dec7835a5172f1a",
   "remaining_gates": [
-    "Actual WordPress+MariaDB installation and persisted checkpoint behavior",
-    "Actual authorized eBay API/provider responses",
-    "Real public category+article product cards",
-    "Formal single-source release guard"
+    "Real authenticated WordPress+MariaDB test of source rows, existing public checkpoint, product-plan refresh and terminal archive",
+    "Real eBay Browse timeout/recovery with authenticated provider and actual saved scope",
+    "Actual public category and article product cards in browser",
+    "Formal release_guard for canonical GitHub release (unchanged)"
   ],
   "release_allowed": false,
-  "installation_instruction": "NONE"
+  "installation_instruction": "NONE",
+  "newly_reproduced_public_checkpoint_root_risk": {
+    "original_method": "ebay_run_commit_public_checkpoint updates the old safe checkpoint with the new candidate, even when one verified eBay search profile is still technically open",
+    "proof_fixture": "Previous safe BUSINESS ID [42], candidate [], one eBay product family with exhausted cURL28 timeout; original public commit wrote [] and triggered article product rebuild",
+    "safety_guard": "In the EXISTING public_verify owner only: if a technical search remains open and publishing candidate would remove a prior safe BUSINESS campaign ID, do not replace the stored checkpoint; complete run with technical warning and checkpoint_deferred flag, archive it; full-success/no-withdrawal path unchanged",
+    "independent_public_updates": "When replacement would drop old safe items, new public checkpoint is deferred until next ordinary safe run; independent discovery and candidate checks still complete; this is a deliberate safety tradeoff, not a claim that every new card was published",
+    "freshness_limitation": "Old SAFE checkpoint remains the allowlist; it does NOT prove every old offer is still currently valid. Existing independent source freshness/content policy output checks must continue to reject stale/invalid offers; not re-approved here.",
+    "no_new_architecture": "No new storage table, worker, external request, cache or second correctness checker."
+  }
 }
