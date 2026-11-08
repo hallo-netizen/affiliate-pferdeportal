@@ -1,0 +1,131 @@
+name: HAB RC18 verify both full originals and promote two exact-content plugin zips
+on:
+  push:
+    branches: [hab-004-rc18-design-affiliate-github-current-20261108]
+permissions:
+  contents: write
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Reconstruct original plugins from exact current sources plus reviewed RC18 overlay; hard-test
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile,ZIP_DEFLATED
+          from pathlib import Path
+          import hashlib, tempfile, shutil, subprocess, os, json
+          root=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ')
+          office=root/'PLUGINS/ISOLIERTE_PLUGINS'
+          originals={
+            'design':office/'HAB-001-DESIGN/CURRENT.zip',
+            'affiliate':office/'HAB-004-AFFILIATE/CURRENT.zip'
+          }
+          expected_original={
+            'design':'947a950273edb6bf47e76ffeef67ff51425db620adc2650c742831e73093134c',
+            'affiliate':'cf8cf7946aa7605dadecda1f041cfc6fb150c7971f7c9feb9dbb6dd1ac8eabda'
+          }
+          expected_content={
+            'design':('6a4537e73900996a509269b69d8e135ee1301055feb2632340cb74a3d6dd1260',432),
+            'affiliate':('c4fdf8520b9b71ef07afafee3f3bf9be64661a70556a2a6d5aaea975af5372f6',36)
+          }
+          def digest(z):
+            h=hashlib.sha256()
+            for n in sorted(z.namelist()):
+              h.update(n.encode()+b'\\0'+hashlib.sha256(z.read(n)).hexdigest().encode()+b'\\n')
+            return h.hexdigest()
+          overlay=root/'AFFILIATE/RC18_BUILD/OVERLAY.zip'
+          assert overlay.exists()
+          with tempfile.TemporaryDirectory() as t:
+            work=Path(t)
+            for label,p in originals.items():
+              original_hash=hashlib.sha256(p.read_bytes()).hexdigest()
+              assert original_hash==expected_original[label],('unexpected base',label,original_hash)
+              with ZipFile(p) as z:
+                assert z.testzip() is None
+                z.extractall(work/label)
+            with ZipFile(overlay) as z:
+              assert z.testzip() is None
+              for name in z.namelist():
+                label,rel=name.split('/',1)
+                assert label in originals and not rel.startswith('/')
+                target=work/label/rel
+                assert target.resolve().is_relative_to((work/label).resolve())
+                target.parent.mkdir(parents=True,exist_ok=True)
+                target.write_bytes(z.read(name))
+            # Reuse only certified, byte-identical original HAB design photos in existing Affiliate asset directory
+            photos={
+              'hb-amazon-kategorie-tresore.webp':'existing-safe-room.webp',
+              'hb-amazon-world-einbruch.webp':'scene-security.webp',
+              'hb-amazon-world-feuer.webp':'area-brandschutz-loeschmittel.webp',
+              'hb-amazon-world-technik.webp':'scene-tech.webp',
+              'hb-amazon-world-vandalismus.webp':'scene-graffiti.webp',
+              'hb-amazon-world-wasser.webp':'focus-keller-rueckstau.webp',
+              'hb-amazon-world-wetter.webp':'scene-weather.webp'
+            }
+            for dst,src in photos.items():
+              source=work/'design/hab-bewahr-design-vorschau/assets'/src
+              target=work/'affiliate/affiliate-portal-router/assets'/dst
+              assert source.is_file(),str(source)
+              target.parent.mkdir(parents=True,exist_ok=True)
+              shutil.copyfile(source,target)
+            sha={}
+            for label,p in originals.items():
+              workdir=work/label
+              with ZipFile(p,'w',ZIP_DEFLATED,compresslevel=6,allowZip64=True) as z:
+                for f in sorted(workdir.rglob('*')):
+                  if f.is_file(): z.write(f,f.relative_to(workdir))
+              with ZipFile(p) as z:
+                assert z.testzip() is None
+                d=digest(z)
+                assert (d,len(z.namelist()))==expected_content[label],('file mismatch',label,d,len(z.namelist()))
+              php_files=list(workdir.rglob('*.php'))
+              for php in php_files:
+                result=subprocess.run(['php','-l',str(php)],capture_output=True,text=True)
+                assert result.returncode==0,(str(php),result.stdout,result.stderr)
+              sha[label]=hashlib.sha256(p.read_bytes()).hexdigest()
+              print('VERIFIED_CURRENT',label,len(php_files),'PHP',expected_content[label][1],'ZIP_FILES',p.stat().st_size,'BYTES',sha[label])
+            assert len(list((work/'design').rglob('*.php')))==35
+            assert len(list((work/'affiliate').rglob('*.php')))==25
+          record='''## 08.11.2026 – HAB RC18 INSTALLATIONSSTAND AUF GITHUB, INHALTSGEPRÜFT
+
+          Vollständige, direkt aus dem bisherigen geprüften Original-CURRENT + dem im GitHub-Büro gespeicherten RC18-Differenzpaket rekonstruierte Plugins. Originaldateinamen und Pluginordner beibehalten. Keine Fremdportal-Dateien geändert.
+
+          - **HAB-001 Design 0.1.191 / RC18**: `PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip`, **{desbytes} Bytes**, SHA256 `{deshash}`, **432 Dateien**, **35 PHP-Dateien**.
+          - **HAB-004 Affiliate 0.1.14-rc17**: `PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip`, **{affbytes} Bytes**, SHA256 `{affhash}`, **36 Dateien**, **25 PHP-Dateien**.
+          - Beide Original-ZIP-Basen hart anhand SHA-256 geprüft; jedes der 468 Dateieninhalte mit dem lokalen RC18-Original abgeglichen (432 Design + 36 Affiliate). ZIP CRC und PHP-Lint bestanden. Relevanter CSS-/Kachel-Raster-Browser-Test mit echten Original-Assets bei 1250px/390px sowie zwölf Originalrasterfälle PASS im lokalen Prüfstand; **keine WordPress-Live-Abnahme**.
+          - **Korrekturen:** Amazon-Kacheln auf allen Kategorien und Kategorieebenen, auch bei vollen Reihen; richtiger Kachelumriss Desktop/Mobil; großer eckiger Amazon-Originalbutton unten; vertikaler Verlauf oben nach unten; Hovereffekt bei Artikelvorschauen; konkrete Amazon-Produktsuche (Wassermelder/Leckageschutz statt Luftbefeuchter). Die früher korrigierten Wasser-Kachelfotos, Tresorbild, Kurztext-Hintergrund und vorhandene Mehranbieter-/Kampagnenlogik bleiben erhalten.
+          - Bereits freigegebene Fotokacheln und vorhandene Hab-Weltenbilder sind unverändert; keine neue Datenbank, eBay-/Idealo-Logik, keinen kostenpflichtigen DataForSEO-Lauf.
+          - **Ausnahme:** Versicherungs-Kategorieziel erfordert Live-Prüfung auf fachliche Passung; keine irreführenden Aussagen über Versicherungsprodukte.
+          - Nächster Schritt: Beide ZIPs in WordPress als Updates installieren, Wasser & Feuchtigkeit, Leckage & Rohrbruch, Vandalismus sowie eine tiefere Unterkategorie und einen Beitrag auf Desktop und mobil abnehmen. Erst danach Live-PASS.
+
+          ---
+          
+          '''.replace('{deshash}',sha['design']).replace('{affhash}',sha['affiliate']).replace('{desbytes}',str(originals['design'].stat().st_size)).replace('{affbytes}',str(originals['affiliate'].stat().st_size))
+          paths=[
+            root/'PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/MANIFEST.md',
+            root/'PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/MANIFEST.md',
+            root/'PLUGINS/PLUGIN_AKTEN/HAB-001-DESIGN/CURRENT.md',
+            root/'PLUGINS/PLUGIN_AKTEN/HAB-004-AFFILIATE/CURRENT.md',
+            root/'PLUGINS/CURRENT_STATE.md',
+            root/'DESIGN/CURRENT_STATE.md',
+            root/'AFFILIATE/CURRENT_STATE.md'
+          ]
+          for p in paths:
+            if not p.parent.exists():p.parent.mkdir(parents=True,exist_ok=True)
+            old=p.read_text() if p.is_file() else ''
+            if 'HAB RC18 INSTALLATIONSSTAND AUF GITHUB' not in old:p.write_text(record+old)
+          PY
+      - name: Commit exactly two current binary plugins and their source of truth
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/CURRENT_STATE.md protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/DESIGN/CURRENT_STATE.md
+          git diff --cached --stat
+          git commit -m "HAB RC18: archive full verified Design 0.1.191 and Affiliate 0.1.14-rc17 zip CURRENT in plugin office"
+          git push origin HEAD:hab-004-rc18-design-affiliate-github-current-20261108
