@@ -43,6 +43,8 @@ jobs:
           echo 'Test actual WordPress database and WP/PSTE source reader (PSERC intentionally not installed):'
           php /tmp/wp post create --post_type=post --post_status=publish --post_title="Horseware Regendecken Test" --post_content="<h2>Passform der Pferdedecken</h2>Guter Artikeltext" --porcelain --path=/tmp/wp-real --allow-root
           php /tmp/wp eval '$s=PSTE_Mini_Workflow::readParkhausForMini(); echo "WP_REAL_PARKHAUS complete=".(!empty($s["complete"])?"YES":"NO")." reason=".($s["reason"]??"")." wp_count=".($s["sources"]["WORDPRESS"]["item_count"]??-1)." pste_count=".($s["sources"]["PSTE_PLAN"]["item_count"]??-1)."\\n"; if((int)($s["sources"]["WORDPRESS"]["item_count"]??0)<1)throw new RuntimeException("ACTUAL_WP_INVENTORY_NOT_READ"); if(!empty($s["complete"]))throw new RuntimeException("MISSING_PSERC_SHOULD_FAIL_CLOSED");' --path=/tmp/wp-real --allow-root
+          echo 'Inspect the exact PSTE plan table and SQL failure inside ACTUAL WordPress:'
+          php /tmp/wp eval 'global $wpdb; $t=PSTE_Repository::table("topic_pool");echo "WP_REAL_PLAN_TABLE=".($t??"NULL")."\\n"; echo "WP_REAL_PSTE_TABLES=".json_encode($wpdb->get_col("SHOW TABLES LIKE \"%pste%\""))."\\n"; $q="SELECT COUNT(*) FROM $t WHERE planning_suitability IN (\"YES\",\"PROVISIONAL\")";$count=$wpdb->get_var($q);echo "WP_REAL_PLAN_COUNT=".json_encode($count)." ERROR=".json_encode($wpdb->last_error)."\\n";' --path=/tmp/wp-real --allow-root
           echo 'Inspect historical PSERC archive without assuming it matches current plugin:'
           Z=control/startmaster0107/runtime_packages/PSERC-FIX.zip
           unzip -Z1 "$Z" | sed -n '1,15p'
