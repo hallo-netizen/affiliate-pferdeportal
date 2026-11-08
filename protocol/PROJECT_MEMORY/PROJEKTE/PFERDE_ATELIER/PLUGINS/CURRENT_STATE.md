@@ -5,6 +5,18 @@
 > **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt.  
 > `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
 
+## AKTUELLER REALSTAND – 08.11.2026 16:05 BERLIN / ECHTER MINI-EXPORT
+
+**Dies ist der aktuelle maßgebliche Stand für PSTE/PSERC MINI; ältere untenstehende Zwischenstände (86 Titel nacharbeiten, Gesamtdiagnose erneut herunterladen, fertige externe Freigabe) dürfen diesen Stand nicht ersetzen.**
+
+- **Iststand aus echten Nutzerdaten:** Betreiber hat PSTE **0.57.144.22** und PSERC **0.28.55** auf der WordPress-TESTseite installiert und nach einmaligem PSERC-Snapshot-Refresh den zweiten echten MINI-Export `pferdeatelier-mini-ergebnisse-20261108-150347.json` hochgeladen. Datei privat gesichert, vollständiges JSON ausgewertet. 100 Rohfragen: **87 JA, 9 VIELLEICHT, 4 NEIN**; 87 `seo_subjects`; **1.179** Parkhauseinträge (WP 1.024, PSTE 1, optionaler Editorial-Plan 9, PSERC 1, PPM679 144, MINI reserviert 0). Technischer Exportstatus `complete=true`, aber fachlicher Status **`PARKHAUS_FOR_SINGLE_EXTERNAL_SEO_OWNER_NOT_APPROVED`**. Noch **KEINE externe FREI/BELEGT/KLÄRUNG-Antwort und KEIN Rückimport**.
+- **Nachgewiesener Blocker:** 9/9 `EDITORIAL_PLAN`-Titel sind wörtlich `Array`, 144/144 `PPM679`-Titel leer, obwohl **141** über `post_id` im selben WordPress-Snapshot vorhandenen Beiträgen zugeordnet werden können (3 ohne Treffer). Semantische SEO-Freigaben erst nach Beseitigung der **Exportqualität**. Der PSERC-`METADATEN-VORSCHAU PASS` auf Screenshot bedeutet nur aktueller Metadaten-Snapshot mit 0 freigegebenen Übergaben, nicht Gesamt-SEO-Freigabe.
+- **Unveränderte Testpakete physisch privat gesichert**: `/pferdeatelier/PLUGINS/PSTE-0.57.144.22-TEST.zip`, `/pferdeatelier/PLUGINS/PSERC-0.28.55-TEST.zip`, `/pferdeatelier/PLUGINS/PFERDEATELIER-BEIDE-TEST-PLUGINS.zip`. Bytezahl/Hashes, Binärpaket-Qualifikation und Grenzen in [INSTALLATIONS_PAKETE/TESTPAAR_20261108_ARCHIV/MANIFEST.md](INSTALLATIONS_PAKETE/TESTPAAR_20261108_ARCHIV/MANIFEST.md). **GitHub speichert Manifeste und Prüfprotokolle, nicht diese aktuellen drei ZIP-Bytes.**
+- **Vollständiger aktueller Beleg:** [EVIDENCE/ISTSTAND_20261108_1605_EXTERNE_SEO_WEG_UXDATEN.md](EVIDENCE/ISTSTAND_20261108_1605_EXTERNE_SEO_WEG_UXDATEN.md) (Original-Export privat). Der ältere Beleg [EVIDENCE/PSTE_ECHTER_MINI_SEO_EXPORT_20261108_150346_NACH_SNAPSHOT_REFRESH.md](EVIDENCE/PSTE_ECHTER_MINI_SEO_EXPORT_20261108_150346_NACH_SNAPSHOT_REFRESH.md) bestätigt denselben Stand.
+- **Jetzt zu tun – durch Pluginentwicklung, NICHT den Betreiber:** Quellenmapping von `EDITORIAL_PLAN` und `PPM679` in **bestehender** PSTE-Parkhaus-Exportfunktion korrigieren, tatsächliche positiven/negativen Testfälle und Vollständigkeitsgrenzen beweisen; erst dann EIN externer SEO-Owner, technischer Rückimport, PSERC-Handoff-Test. Anschließend UI gemäß beschlossenem `Export → extern entscheiden → importieren → Status` verschlanken. **Noch keine UI-Korrektur und keine reparierte ZIP erstellt.** Keine Wiederholung von 5.016er-Diagnosen, Keywordrecherche, unnötigen Screenshots. K0/Live/Original-Redaktionsplan unverändert; PR #682 Draft, nicht mergen.
+
+---
+
 
 <!-- PFERDEATELIER_PLUGIN_WORKBENCH_LOCK_BEGIN -->
 ```json
