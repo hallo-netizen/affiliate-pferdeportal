@@ -98,3 +98,25 @@ jobs:
                 if 'function hobby_image_center_v150769' in l or 'function bundled_hobby_master_v150759' in l:
                   for j in range(i,min(i+125,len(lines))):print('SOURCE',j+1,lines[j][:270])
           PY
+
+      - name: Check Bonsai Landschaften original image and approval exact
+        run: |
+          python3 - <<'PY'
+          import zipfile,json,re
+          base='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/'
+          z=zipfile.ZipFile(base+'HD-007-HOBBYREGISTER-CORE/CURRENT.zip')
+          n=next(n for n in z.namelist() if n.endswith('hobby-image-map-v1.json'))
+          d=json.loads(z.read(n))
+          for k,v in d.items():
+            if 'bonsai' in k.lower(): print('BONSAI_HD007',k,json.dumps(v,ensure_ascii=False))
+          z2=zipfile.ZipFile(base+'HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          for n in z2.namelist():
+            if ('bonsai' in n.lower() or 'saikei' in n.lower()) and n.endswith(('.png','.webp','.jpg')):
+              print('BONSAI_HD003_ASSET',n)
+          for n in z2.namelist():
+            if n.endswith('.php') and ('profile' in n or 'template' in n):
+              txt=z2.read(n).decode('utf8','replace')
+              for line in txt.splitlines():
+                if re.search(r'bonsai-landschaften|bonsai-landscape|saikei',line,re.I) and len(line)<800:
+                  print('BONSAI_HD003_REF',n,line[:500])
+          PY
