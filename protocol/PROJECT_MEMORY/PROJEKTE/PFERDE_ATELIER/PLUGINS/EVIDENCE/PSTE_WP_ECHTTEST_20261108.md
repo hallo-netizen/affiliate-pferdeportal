@@ -27,3 +27,19 @@ WP_REAL_PARKHAUS complete=NO reason=PSTE_PLAN_COUNT_FAILED wp_count=4 pste_count
 Vier echte WordPress-Inhalte wurden vom bestehenden WP/MySQL-Quellenleser korrekt aufgenommen. Danach scheiterte die erste PSTE-Plan-Zählabfrage **vor** dem PSERC-Bestand. `complete=NO` ist **korrekt gesperrt**, es gibt keine fälschliche SEO-FREI-Entscheidung. Die tatsächliche SQL-Ursache ist noch **nicht** nachgewiesen; der nächste Schritt liest die verwendete Tabelle, die tatsächlichen Tabellen und den echten SQL-Fehler im selben isolierten WP-Test, **bevor** ein Code-Fix erwogen wird. Kein zusätzlicher Runtime-Checker, kein SEO-Durchlauf pro Keyword.
 
 **Wichtig:** Das ist ein **realer WordPress-Datenbankbefund**, deutlich aussagekräftiger als die früheren reinen Mocks. Er beweist noch keine mögliche Ursache oder einen WP→PSERC→K0-Real-PASS. Live/K0 und gespeicherter Redaktionsplan wurden nicht berührt.
+
+
+## Checkpoint 3: tatsächliche SQL-Ursache exakt festgestellt
+
+GitHub Actions **[42475021844](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/42475021844) SUCCESS**; im isolierten echten WordPress/MySQL dieselbe PSTE-v22-QA-Fassung gestartet, vier echte WP-Inhalte gelesen. Direkte WordPress-DB-Diagnose (keine Vermutung):
+
+```text
+WP_REAL_PLAN_TABLE=wp_pste_topic_pool
+WP_REAL_PSTE_TABLES=[]
+WP_REAL_PLAN_COUNT=null
+ERROR="Table 'pste_genuine_wp.wp_pste_topic_pool' doesn't exist"
+```
+
+**Root Cause des konkreten Testlaufabbruchs:** Eine **brandneue** WordPress-Wegwerfinstallation hat zwar das PSTE-Plugin aktiviert, aber die **bestehende erwartete** PSTE-Plantabelle nicht eingerichtet. Das ist ein **Setup-/Initialisierungsproblem im frischen Testsystem**, kein Hinweis auf falsche SEO-Auslegung. `readParkhausForMini()` reagiert korrekt mit **`complete=NO`** und darf deshalb keine externe SEO-FREI-Freigabe erzeugen.
+
+**Nächster Schritt:** Die bereits vorhandenen PSTE-Installations-/Schemafunktionen aus dem unveränderten Original-Plugin identifizieren und im Testsystem genau einmal ausführen. Keine neue Produktiv-Tabelle konzipieren, kein ad-hoc-Datenbank-Reparatursystem, keine veränderten K0-Daten, keine semantische Zweitprüfung. Danach den echten Parkhausleser erneut prüfen.
