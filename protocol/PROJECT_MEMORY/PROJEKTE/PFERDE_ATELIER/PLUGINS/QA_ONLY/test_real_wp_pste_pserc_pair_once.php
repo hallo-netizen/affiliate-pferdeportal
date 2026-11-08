@@ -1,10 +1,15 @@
 <?php
 /** QA ONLY. Read-only single check in REAL isolated WordPress+MySQL with BOTH
- * COMPLETE original plugin trees already activated. wp eval-file THIS_FILE.
+ * COMPLETE original plugin trees already activated.
+ * wp eval-file THIS_FILE boot     : verifies both real plugins; the real plan may be absent.
+ * wp eval-file THIS_FILE complete : additionally requires the full saved real plan.
  * No production, no K0 write, no repeated semantic SEO check.
  */
 if(!defined('ABSPATH')||!function_exists('get_option'))
     throw new RuntimeException('ACTUAL_WORDPRESS_REQUIRED');
+$qaMode=(string)($args[0]??'');
+if(!in_array($qaMode,['boot','complete'],true))
+    throw new RuntimeException('EXPLICIT_SINGLE_PAIR_TEST_MODE_REQUIRED');
 function pstePsercPairCheck(bool $ok,string $label):void {
     if(!$ok)throw new RuntimeException('PAIR_CHECK_FAILED_'.$label);
     echo 'PASS '.$label."\n";
@@ -39,8 +44,14 @@ echo 'ACTUAL_WP_PAIR_SINGLE_PARKHAUS '.wp_json_encode([
     ],
     'ppm679_status'=>$s['PPM679_EXISTING_EDITORIAL_RUNTIME']['status']??null,
 ],JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)."\n";
-pstePsercPairCheck(!empty($park['complete'])
-    &&($s['PPM679_EXISTING_EDITORIAL_RUNTIME']['status']??'')==='PRESENT'
-    &&(int)($s['PPM679_EXISTING_EDITORIAL_RUNTIME']['item_count']??0)>0,
-    'single complete original source export; no missing/empty saved PPM679 plan');
-echo "REAL_WP_PAIR_QA_COMPLETE; READ_ONLY; NO ARTICLE OR K0 WRITES\n";
+if($qaMode==='complete'){
+    pstePsercPairCheck(!empty($park['complete'])
+        &&($s['PPM679_EXISTING_EDITORIAL_RUNTIME']['status']??'')==='PRESENT'
+        &&(int)($s['PPM679_EXISTING_EDITORIAL_RUNTIME']['item_count']??0)>0,
+        'single complete original source export; no missing/empty saved PPM679 plan');
+    echo "REAL_WP_PAIR_FULL_SOURCE_QA_PASS; READ_ONLY; NO ARTICLE OR K0 WRITES\n";
+}else{
+    // Two complete plugins can be activated before an actual original PSERC plan exists.
+    // Never misreport this technical success as an approved production source.
+    echo "REAL_WP_PAIR_BOOT_QA_PASS; REAL_EDITORIAL_SOURCE_NOT_ASSERTED; READ_ONLY\n";
+}
