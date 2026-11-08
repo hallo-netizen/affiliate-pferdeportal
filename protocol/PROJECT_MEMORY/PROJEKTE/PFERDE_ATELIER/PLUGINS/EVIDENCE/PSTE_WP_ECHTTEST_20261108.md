@@ -54,3 +54,26 @@ In echtem WP 7.1.4 direkt über PHP-Reflection `PSTE_Plugin::activate()`, `PSTE_
 Die ursprüngliche vorhandene Routine `PSTE_Repository::createSchema()` legt die **bereits im Plugin definierten** PSTE-Tabellen an, darunter `wp_pste_topic_pool` mittels WordPress `dbDelta`. Die echten Portal-Sicherheits-/Migrationsregeln werden nicht durch eine neue Auto-Installation verändert.
 
 **Nächster isolierter Test:** In der **frisch angelegten und nachweislich leeren** MySQL-Testdatenbank die **bestehende** `PSTE_Repository::createSchema()` genau einmal ausführen. **Nur für den disposable CI-Test, niemals als Empfehlung für Produktions-/Staging-Daten mit vorhandenem Bestand**. Dann `readParkhausForMini()` erneut; der WP+PSTE-Teil muss vollständig gelesen werden, der mangels PSERC immer noch fehlende aktive PSERC-Plan muss **sicher blockieren**. `42475393088` war ein reiner Quell-Inspektionslauf und endete aufgrund einer falschen `migrationBootStatus()`-Test-Hilfsabfrage, nicht aufgrund eines PSTE-Produktfehlers.
+
+
+## Checkpoint 5: realer WordPress-/MySQL-/PSTE-Quelltest BESTANDEN
+
+**GitHub Actions [42475624779](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/42475624779): SUCCESS.** WordPress 7.1.4, MySQL 8.0, PHP 8.3, unverändertes ursprüngliches PSTE-v22-ZIP plus vorhandene isolierte QA-Klassenänderungen.
+
+Auf der nachweislich zuvor **leeren** Testdatenbank wurde **genau einmal die im PSTE-Original vorhandene** `PSTE_Repository::createSchema()`-Routine ausgeführt. Die vorgesehene `wp_pste_topic_pool`-Tabelle wurde tatsächlich angelegt; **keine zusätzliche Tabellen-/Schemaimplementierung** im Plugin erstellt. Das ist **nur Test-Einrichtung**, nicht die sichere Live-/Staging-Migration (die bleibt ausdrücklich manuell und unverändert).
+
+Tatsächliches Ergebnis des originalen, vollständigen `PSTE_Mini_Workflow::readParkhausForMini()`-PHP unter WordPress/MySQL:
+
+```text
+WP_REAL_EXISTING_PSTE_SCHEMA_READY table=wp_pste_topic_pool
+WP_REAL_PARKHAUS_AFTER_SCHEMA complete=NO
+reason=PSERC_PLAN_NOT_PROVEN_COMPLETE
+wp_count=4 pste_count=0
+PASS real WP+PSTE source reads, missing PSERC correctly stops entire owner export
+```
+
+**Bedeutung:** Die realen WP-Artikel/Seiten und die vorhandene (hier auf leerem Testsystem noch 0 Themen enthaltende) PSTE-Planquelle wurden vollständig und fehlerfrei aus echten Datenbanktabellen gelesen. Der Datenexport **gibt keinerlei automatische SEO-FREI-Entscheidung**, solange der bereits bestehende PSERC-Plan nicht vollständig vorhanden ist. Keine zweite Semantikprüfung. **Erster echter technischer WP-/PSTE-Lesetest erfolgreich abgeschlossen.**
+
+**Weiter offen:** Das aktuelle originale PSERC-QA-Paket **0.28.55** wurde nicht auf derselben echten WordPress-Testinstanz installiert. Der einzige ältere GitHub-Archivfund `control/startmaster0107/runtime_packages/PSERC-FIX.zip` enthält lediglich ein altes PSERC-**0.28.18**-Paket innerhalb eines Archivordners; deshalb wurde es **absichtlich nicht fälschlich als 0.28.55 installiert**. Das korrekte 0.28.55-QA-Paket liegt separat im gesicherten Arbeitsbestand, bisher in GitHub nur über vorhandenen reproduzierbaren Baucode/Originalverweise beschrieben. Echte PPM679-Plan-Daten und ein echter externer SEO-Owner-Lauf fehlen. **Kein Gesamt-WP→PSERC→K0-PASS, keine Installation auf echtem Portal, kein Merge.**
+
+**Folgeschritt:** Die bereits vorhandenen, korrekten PSTE-/PSERC-Testversionen als **ein Paar** auf einer kontrollierten WordPress-Testseite mit vollständiger Plan- und Artikelkopie einsetzen, einmaligen echten Parkhaus-Export erstellen, nur **ein** externer SEO-Owner und danach die Original-Übergabe prüfen. Keine per-Keyword-Sicherheits- oder SEO-Zweitprüfungen.
