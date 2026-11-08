@@ -1,0 +1,48 @@
+{
+  "status": "QA_ONLY_NOT_WORDPRESS_DEPLOYED",
+  "pste_new": {
+    "filename": "PSTE-0.57.144.23-EXPORTFIX-NUR-TEST.zip",
+    "version": "0.57.144.23",
+    "size_bytes": 634545,
+    "sha256": "dcf1f181d8b438f057476970237f888782312f60450f215e69713c203d0449b0",
+    "zip_entries": 121,
+    "php_files_lint_pass": 83
+  },
+  "pste_original": {
+    "filename": "PSTE-0.57.144.22-TEST.zip",
+    "version": "0.57.144.22",
+    "size_bytes": 634339,
+    "sha256": "384203f4971fc6d98eaa7613835c75f2b1ff976471659afa8dae60ac09a08ad1"
+  },
+  "pserc_unchanged": {
+    "filename": "PSERC-0.28.55-TEST.zip",
+    "version": "0.28.55",
+    "size_bytes": 266498,
+    "sha256": "501959a0ac73a1b81070ed23623935999ed1058385b3ba587e0f8bef9c9816d0"
+  },
+  "combined": {
+    "filename": "PFERDEATELIER-PSTE-05714423-PSERC-02855-QA-PAAR.zip",
+    "size_bytes": 875972,
+    "sha256": "154cbf04dc4a9b99ad1487e0bcd19fa90317b39c350c7b0dae8a965a56c78008"
+  },
+  "diff_changed_files": [
+    "Portal SEO Topic Engine/includes/class-pste-admin.php",
+    "Portal SEO Topic Engine/includes/class-pste-mini-workflow.php",
+    "Portal SEO Topic Engine/includes/class-pste-snapshot.php",
+    "Portal SEO Topic Engine/portal-seo-topic-engine.php"
+  ],
+  "tests": {
+    "pass_count": 36,
+    "log": "PSTE_05714423_QA_LOCAL_TEST_LOG.txt",
+    "real_export": "pferdeatelier-mini-ergebnisse-20261108-150347.json",
+    "real_wordpress_count": 1024,
+    "real_ppm_runtime_count": 144,
+    "real_ppm_linked_titles": 141,
+    "unknown_ppm_post_ids_count": 3,
+    "unknown_imported_editorial_plan_title_count": 9,
+    "positive_full_snapshot_used_synthetic_missing_three_post_titles": true,
+    "live_wordpress_test": false,
+    "seo_decision_produced": false,
+    "k0_changed": false
+  }
+}
