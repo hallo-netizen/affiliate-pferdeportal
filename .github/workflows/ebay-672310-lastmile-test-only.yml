@@ -141,10 +141,25 @@ jobs:
           $r=seed(time()+100,time()+20000);global $wpdb;unset($wpdb->items[1]);
           ok($r->check($both)===false&&$r->fail_code==='public_source_refresh_source_unavailable',
               'missing saved source cannot become a green public result');
-          echo "EBAY_LASTMILE_ISOLATED_GATE 13/13 PASS; FULL ORIGINAL+WP+EBAY E2E NOT CLAIMED\n";
+          $r=seed(time()+100,time()+100);
+          global $wpdb,$METAS;
+          for($i=102;$i<=105;$i++){
+              $hash=str_repeat(dechex($i-100),64);
+              $METAS[$i]=array('_ppar_creative_identity_hash'=>$hash);
+              $wpdb->items[$i]=array('id'=>$i,'item_id'=>'ebay-business-'.$i,
+                  'creative_identity_hash'=>$hash,'seller_account_type'=>'BUSINESS',
+                  'source_state'=>'available','policy_state'=>'allowed',
+                  'status'=>'active','fresh_until'=>time()+100);
+          }
+          $r->run['checkpoint_candidate']['business_campaign_ids']=array(101,102,103,104,105);
+          ok($r->check($both)===false&&$r->remote===2,'six stale candidates do not overload first worker tick');
+          ok($r->run['public_source_refresh']['cursor']===2,'bounded first-tick cursor durable');
+          ok($r->check($both)===false&&$r->remote===4,'second worker tick continues without restart');
+          ok($r->check($both)===true&&$r->remote===6,'third tick completes six same-run refreshes');
+          echo "EBAY_LASTMILE_ISOLATED_GATE 17/17 PASS; FULL ORIGINAL+WP+EBAY E2E NOT CLAIMED\n";
           PHP
           cd /tmp/ebay310_qa
           php -l test.php
           php test.php | tee /tmp/ebay-672310-lastmile.log
-          test "$(grep -c '^PASS ' /tmp/ebay-672310-lastmile.log)" = 13
-          grep -F 'EBAY_LASTMILE_ISOLATED_GATE 13/13 PASS' /tmp/ebay-672310-lastmile.log
+          test "$(grep -c '^PASS ' /tmp/ebay-672310-lastmile.log)" = 17
+          grep -F 'EBAY_LASTMILE_ISOLATED_GATE 17/17 PASS' /tmp/ebay-672310-lastmile.log
