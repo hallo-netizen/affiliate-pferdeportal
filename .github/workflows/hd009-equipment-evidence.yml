@@ -1,0 +1,36 @@
+name: Hobby equipment terms and product candidate evidence audit
+on:
+  push:
+    branches: [hobbyroom/hd009-amazon-dfs-products-audit-20261108]
+    paths: [.github/workflows/hd009-equipment-evidence.yml]
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check approved hobbyregister equipment data for concrete Amazon query inputs
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import json,collections
+          root=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          with ZipFile(root/'HD-007-HOBBYREGISTER-CORE/CURRENT.zip') as z:
+            d=json.loads(z.read('hd-hobbyregister-core/data/hobby-register.json'))
+            print('REGISTER_ROOT_KEYS',list(d)[:45])
+            recs=d.get('hobbies') or d.get('records') or []
+            print('REGISTER_COUNT',len(recs))
+            for i in [0,1,2]:
+              row=recs[i]
+              print('RECORD_KEYS',i,list(row))
+              print('RECORD',i,json.dumps(row,ensure_ascii=False)[:5500])
+            for row in recs:
+              name=(row.get('canonical_name') or '').casefold()
+              if name in ('sportdrachen','architekturmodellbau','münzen','münzen sammeln','alabasterschnitzen','airbrush-modellbau'):
+                print('TARGET_REGISTER',name,json.dumps(row,ensure_ascii=False)[:4400])
+            for field in ['result_profile','source_identity','getting_started','equipment','cost_and_equipment','practicalities','required_materials','gear','source_notes']:
+              obj=[r.get(field) for r in recs]
+              print('FIELD_COVERAGE',field,'nonnull',sum(bool(x) for x in obj),
+                    'subfields',collections.Counter(k for x in obj if isinstance(x,dict) for k in x).most_common(24))
+          PY
