@@ -71,7 +71,7 @@ def main(argv):
             for item in zin.infolist():
                 newbytes=main.encode() if item.filename==MAIN else design.encode() if item.filename==DESIGN else zin.read(item)
                 zout.writestr(item,newbytes)
-        assert all(zin.read(n)==v for n,v in [(MAIN,zin.read(MAIN)),(DESIGN,zin.read(DESIGN))]) # unchanged source read
+        # Original source stays read-only; output integrity is checked after closing the ZIP.
     with zipfile.ZipFile(target) as z:
         assert z.testzip() is None and len(z.namelist())==1290
         assert b"term_master_hero_v150799" in z.read(DESIGN)
