@@ -1,0 +1,145 @@
+{
+  "project": "robotik",
+  "version": 1,
+  "phase": "draft",
+  "fixture_only": true,
+  "notes": "Nur Testbaum. Keine genehmigten Kategorien, keine WordPress-Schreibauftraege.",
+  "nodes": [
+    {
+      "id": "world-log",
+      "pillar": "core",
+      "kind": "page",
+      "role": "group",
+      "title": "Transport & Logistik",
+      "slug": "transport-logistik",
+      "parent": null
+    },
+    {
+      "id": "area-log",
+      "pillar": "core",
+      "kind": "page",
+      "role": "group",
+      "title": "Innerbetrieblicher Transport",
+      "slug": "innerbetrieblicher-transport",
+      "parent": "world-log"
+    },
+    {
+      "id": "product-amr",
+      "pillar": "core",
+      "kind": "page",
+      "role": "product",
+      "title": "Autonomer mobiler Transportroboter",
+      "slug": "autonomer-mobiler-roboter",
+      "parent": "area-log"
+    },
+    {
+      "id": "term-amr-costs",
+      "pillar": "core",
+      "kind": "content_category",
+      "title": "Kosten & Beschaffung",
+      "slug": "amr-kosten",
+      "parent": "product-amr",
+      "topic_directions": [
+        "Investitionskosten",
+        "Miet- und Leasingmodelle",
+        "laufende Betriebskosten"
+      ]
+    },
+    {
+      "id": "world-hotel",
+      "pillar": "core",
+      "kind": "page",
+      "role": "group",
+      "title": "Gastronomie & Hotel",
+      "slug": "gastronomie-hotel",
+      "parent": null
+    },
+    {
+      "id": "area-hotel",
+      "pillar": "core",
+      "kind": "page",
+      "role": "group",
+      "title": "Bedienen & Liefern",
+      "slug": "bedienen-liefern",
+      "parent": "world-hotel"
+    },
+    {
+      "id": "product-serve",
+      "pillar": "core",
+      "kind": "page",
+      "role": "product",
+      "title": "Servierroboter",
+      "slug": "servierroboter",
+      "parent": "area-hotel"
+    },
+    {
+      "id": "term-serve-costs",
+      "pillar": "core",
+      "kind": "content_category",
+      "title": "Kosten & Beschaffung",
+      "slug": "servierroboter-kosten",
+      "parent": "product-serve",
+      "topic_directions": [
+        "Kaufpreise",
+        "Mietmodelle",
+        "Wartungsaufwand"
+      ]
+    },
+    {
+      "id": "world-farm",
+      "pillar": "core",
+      "kind": "page",
+      "role": "group",
+      "title": "Landwirtschaft & Tierhaltung",
+      "slug": "landwirtschaft-tierhaltung",
+      "parent": null
+    },
+    {
+      "id": "area-farm",
+      "pillar": "core",
+      "kind": "page",
+      "role": "group",
+      "title": "Melktechnik",
+      "slug": "melktechnik",
+      "parent": "world-farm"
+    },
+    {
+      "id": "product-milk",
+      "pillar": "core",
+      "kind": "page",
+      "role": "product",
+      "title": "Melkroboter",
+      "slug": "melkroboter",
+      "parent": "area-farm"
+    },
+    {
+      "id": "term-milk-costs",
+      "pillar": "core",
+      "kind": "content_category",
+      "title": "Kosten & Wirtschaftlichkeit",
+      "slug": "melkroboter-kosten",
+      "parent": "product-milk",
+      "topic_directions": [
+        "Anschaffung",
+        "Reinigungskosten",
+        "Wirtschaftlichkeit"
+      ]
+    },
+    {
+      "id": "magazine-intro",
+      "pillar": "editorial",
+      "kind": "magazine_category",
+      "title": "Robotik verstehen",
+      "slug": "robotik-verstehen",
+      "parent": null
+    },
+    {
+      "id": "directory-install",
+      "pillar": "directory",
+      "kind": "listing_category",
+      "title": "Installation & Integration",
+      "slug": "installation-integration",
+      "parent": null
+    }
+  ]
+}
