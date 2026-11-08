@@ -680,53 +680,6 @@ jobs:
           print(echo)
           PY
 
-      - name: Apply the ENTIRE cumulative BUSINESS-only patch together to the one reference source
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          from pathlib import Path
-          import shutil
-          out=Path('/tmp/ebay_full_kiss')
-          src=Path('release/affiliate-zentrale/current/affiliate-portal-router')
-          patch=Path('release/affiliate-zentrale/evidence/EBAY_672308_TO_672311_BUSINESS_ONLY_GESAMTURSACHENPATCH_NUR_TEST.patch')
-          shutil.copytree(src,out/'affiliate-portal-router',dirs_exist_ok=True)
-          content=patch.read_text()
-          assert content.count('diff --git a/')==5, 'No new plugin files, tables or workers'
-          assert len([l for l in content.splitlines() if l.startswith('@@ -')])==58, 'All 58 cumulative source hunks must remain in one patch'
-          import re
-          for section in re.split(r'(?=^diff --git )',content,flags=re.M):
-              if not section.startswith('diff --git '):continue
-              for hunk in re.split(r'(?=^@@ )',section,flags=re.M):
-                  if not hunk.startswith('@@ '):continue
-                  header=hunk.split('\n',1)[0]
-                  m=re.match(r'^@@ -[0-9]+,([0-9]+) \+[0-9]+,([0-9]+) @@',header)
-                  assert m, ('Invalid diff header',header)
-                  lines=[x for x in hunk.splitlines()[1:] if x]
-                  old_lines=sum(x.startswith((' ','-')) for x in lines)
-                  new_lines=sum(x.startswith((' ','+')) for x in lines)
-                  assert (old_lines,new_lines)==(int(m[1]),int(m[2])), (header,old_lines,new_lines)
-          print('PASS 58 cumulative diff hunks structurally consistent')
-          (out/'full.patch').write_text(content)
-          PY
-          cd /tmp/ebay_full_kiss
-          # The checked-in reference is proven 6.72.211, not the real uploaded 6.72.308.
-          # NEVER retrofit a 6.72.308 patch to outdated code or report full-apply PASS.
-          if ! grep -Fq 'Version: 6.72.308' affiliate-portal-router/pferdeportal-affiliate-router.php; then
-            echo 'SOURCE_NOT_ORIGINAL_672308: full 58-hunk replay is NOT RUN; release stays blocked.'
-            exit 0
-          fi
-          git apply --check --verbose full.patch
-          git apply full.patch
-          echo 'PASS full 58-hunk KISS patch applied atomically to exact target source'
-          find affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee lint.log
-          test "$(grep -c '^No syntax errors detected' lint.log)" -ge 23
-          grep -F 'Version: 6.72.311' affiliate-portal-router/pferdeportal-affiliate-router.php
-          ! grep -R -q "add_action('admin_post_ppar_ebay_review_decision'" affiliate-portal-router/pferdeportal-affiliate-router.php
-          ! grep -R -q "add_action('hivepress/v1/models/listing/query'" affiliate-portal-router/pferdeportal-affiliate-router.php
-          ! grep -R -q "add_filter('hivepress/v1/templates/listing_view_block/blocks'" affiliate-portal-router/pferdeportal-affiliate-router.php
-          echo 'FULL_COMBINED_PATCH_PASS; real WP+eBay+HivePress live release gate still required'
-
       - name: Execute single-source marker filter for retired eBay listings without PRIVATE DB/category logic
         shell: bash
         run: |
@@ -886,7 +839,13 @@ jobs:
           test "$(grep -c '^PASS ' retire.log)" = 15
           grep -F 'EBAY_LEGACY_DRAFTS 15/15 PASS' retire.log
 
+      - name: Report verified original ZIP still absent (no false whole-plugin PASS)
+        if: ${{ hashFiles('release/affiliate-zentrale/source-original/AFFILIATE_ZENTRALE_6.72.308_URSACHENFIX_GESAMTTEST_NUR_TEST.zip') == '' }}
+        shell: bash
+        run: |
+          echo "::notice title=Exact source still absent::The verified 6.72.308 was physically uploaded and checked in a previous chat, but the exact ZIP has not been persisted at release/affiliate-zentrale/source-original/AFFILIATE_ZENTRALE_6.72.308_URSACHENFIX_GESAMTTEST_NUR_TEST.zip. No full-patch test, no test build, no installation approval."
       - name: Run the WHOLE 58-hunk patch on the verified 6.72.308 ZIP
+        if: ${{ hashFiles('release/affiliate-zentrale/source-original/AFFILIATE_ZENTRALE_6.72.308_URSACHENFIX_GESAMTTEST_NUR_TEST.zip') != '' }}
         id: original
         shell: bash
         run: |
@@ -894,11 +853,7 @@ jobs:
           ORIGINAL="release/affiliate-zentrale/source-original/AFFILIATE_ZENTRALE_6.72.308_URSACHENFIX_GESAMTTEST_NUR_TEST.zip"
           PATCH="release/affiliate-zentrale/evidence/EBAY_672308_TO_672311_BUSINESS_ONLY_GESAMTURSACHENPATCH_NUR_TEST.patch"
           EXPECTED="b4d8547fd2aa134f7f82f568db3a81df54bb7d2131fd0752e76e3f0ca2251fe0"
-          if [ ! -f "$ORIGINAL" ]; then
-            echo "::notice title=Verified original required::The original 6.72.308 was genuinely uploaded and verified in a prior chat, but is NOT committed at $ORIGINAL in this checkout. No whole-plugin test or installer claim."
-            echo "original_sha_verified=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
+          test -f "$ORIGINAL" || { echo "::error::Original missing; cannot run full 58-hunk test"; exit 1; }
           test "$(sha256sum "$ORIGINAL" | cut -d' ' -f1)" = "$EXPECTED" || { echo "::error::Original ZIP SHA256 MISMATCH. Refusing any patch."; exit 1; }
           unzip -t "$ORIGINAL" > /tmp/ebay-original-integrity.txt
           test "$(unzip -Z1 "$ORIGINAL" | grep -cv '/$')" -eq 66 || { echo "::error::Original ZIP must have 66 files."; exit 1; }
