@@ -1,0 +1,88 @@
+name: Pferdeatelier eBay BUSINESS-only hardlock QA
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - 'release/affiliate-zentrale/evidence/EBAY_BUSINESS_ONLY_HARDLOCK_NUR_TEST_20261108.patch'
+      - '.github/workflows/ebay-business-only-hardlock-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  business-only-verified:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply only the new business-only edits to the available original-reference code
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/ebay_business_qa
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/ebay_business_qa/affiliate-portal-router
+          cd /tmp/ebay_business_qa
+          git apply --check "$GITHUB_WORKSPACE/release/affiliate-zentrale/evidence/EBAY_BUSINESS_ONLY_HARDLOCK_NUR_TEST_20261108.patch"
+          git apply "$GITHUB_WORKSPACE/release/affiliate-zentrale/evidence/EBAY_BUSINESS_ONLY_HARDLOCK_NUR_TEST_20261108.patch"
+          php -l affiliate-portal-router/includes/trait-ppar-ebay.php
+          php -l affiliate-portal-router/includes/trait-ppar-ebay-run.php
+      - name: Exercise real PHP BUSINESS-only source and all legacy-private gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > /tmp/ebay_business_qa/test.php <<'PHP'
+          <?php
+          error_reporting(E_ALL);
+          define('ABSPATH','/');define('ARRAY_A','ARRAY_A');
+          function absint($v){return abs((int)$v);}
+          function sanitize_key($v){return strtolower(preg_replace('/[^a-z0-9_-]/','',strtolower((string)$v)));}
+          function sanitize_text_field($v){return trim((string)$v);}
+          function wp_json_encode($v){return json_encode($v);}
+          require 'affiliate-portal-router/includes/trait-ppar-ebay.php';
+          require 'affiliate-portal-router/includes/trait-ppar-ebay-run.php';
+          class BusinessOnlyTest {
+              use PPAR_Ebay_Trait, PPAR_Ebay_Run_Trait;
+              public $last_checkpoint=array();public $run=array();
+              private function ebay_catalog_rules(){return array();}
+              private function ebay_public_checkpoint_load(){return array('checkpoint_id'=>'old-safe','private_listing_ids'=>array(12,13),'business_campaign_ids'=>array(99));}
+              private function ebay_public_checkpoint_is_safe($c){return !empty($c['checkpoint_id']);}
+              private function ebay_public_checkpoint_save($c){$this->last_checkpoint=$c;return $c;}
+              private function ebay_run_load(){return $this->run;}
+              private function ebay_run_save($r){$this->run=$r;return $r;}
+              public function route($seller,$s){return $this->ebay_route_enabled($seller,$s);}
+              public function scope($scope,$s){return $this->ebay_selection_scope_for_enabled_routes($scope,$s);}
+              public function refreshSql($s){return $this->ebay_refresh_enabled_route_sql($s,'e');}
+              public function oldPrivate(){return $this->ebay_public_checkpoint_private_ids();}
+              public function allowOldPrivate($id){return $this->ebay_public_checkpoint_allows_private_listing($id);}
+              public function runtimeScope($r){return $this->ebay_run_selection_scope($r);}
+              public function privateGate($s){return $this->ebay_run_verify_private_public($s,array(12,13));}
+              public function publicPrivateListing($id){return $this->ebay_public_listing_post($id);}
+              public function commit($r){return $this->ebay_run_commit_public_checkpoint($r,array(),array());}
+          }
+          function check($condition,$label){if(!$condition){fwrite(STDERR,"FAIL ".$label."\n");exit(1);}echo "PASS ".$label."\n";}
+          $x=new BusinessOnlyTest();$legacy=array('private_enabled'=>true,'business_enabled'=>true,'private_auto_publish'=>true);
+          check($x->ebay_settings_defaults()['private_enabled']===false,'Defaults never enable PRIVATE');
+          $norm=$x->ebay_normalize_settings($legacy);
+          check($norm['private_enabled']===false,'Old saved TRUE private route overridden');
+          check($norm['private_auto_publish']===false,'Old automatic PRIVATE publication overridden');
+          check($norm['business_enabled']===true,'BUSINESS remains active');
+          check($x->route('INDIVIDUAL',$legacy)===false,'Even raw old settings cannot admit PRIVATE');
+          check($x->route('BUSINESS',$legacy)===true,'Business accepted unchanged');
+          check($x->scope('all',$legacy)==='business','Old ALL selection narrowed to BUSINESS');
+          check($x->scope('private',$legacy)==='','Explicit PRIVATE selection refused');
+          check($x->scope('business',$legacy)==='business','Explicit BUSINESS selection preserved');
+          $sql=$x->refreshSql($legacy);
+          check(strpos($sql,'INDIVIDUAL')===false&&strpos($sql,'BUSINESS')!==false,'Refresh SQL scans BUSINESS only');
+          check($x->oldPrivate()===array(),'Old checkpoint PRIVATE IDs excluded');
+          check($x->allowOldPrivate(12)===false,'Previously safe PRIVATE checkpoint cannot publish');
+          check($x->runtimeScope(array('config_snapshot'=>array('seller_routes'=>array('private'=>true,'business'=>true))))==='business','Old active run forced BUSINESS-only');
+          check(($x->privateGate($legacy)['status']??'')==='disabled','PRIVATE public gate permanently retired');
+          check($x->publicPrivateListing(12)===null,'PRIVATE custom listing rendering blocked');
+          $c=$x->commit(array('run_uuid'=>'hardlock','checkpoint_candidate'=>array('private_listing_ids'=>array(12,13),'business_campaign_ids'=>array(99))));
+          check(($c['private_listing_ids']??null)===array(),'No PRIVATE IDs written to next public checkpoint');
+          check(($c['business_campaign_ids']??null)===array(99),'Business IDs kept in new public checkpoint');
+          echo "EBAY_BUSINESS_ONLY 17/17 PASS; NO LIVE DEPLOYMENT\n";
+          PHP
+          cd /tmp/ebay_business_qa
+          php -l test.php
+          php test.php | tee results.log
+          test "$(grep -c '^PASS ' results.log)" = 17
+          grep -F 'EBAY_BUSINESS_ONLY 17/17 PASS' results.log
