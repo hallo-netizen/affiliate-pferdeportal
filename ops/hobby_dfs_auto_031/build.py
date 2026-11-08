@@ -73,6 +73,23 @@ worker=r'''
         self::auto_schedule();
         self::back($s['enabled']?'auto_enabled':'auto_disabled');
     }
+    public static function auto_preflight() {
+        self::guard('hdar_amazon_auto_preflight');
+        $s=self::auto_state();
+        $copy=$s;
+        // Never edit the paid scan cursor or call DataForSEO during preflight.
+        $candidate=self::auto_candidate($copy);
+        if (is_wp_error($candidate)) {
+            $s['preflight']=$candidate->get_error_message();
+        } elseif (is_array($candidate)) {
+            $s['preflight']=$candidate['keyword'].' → '.$candidate['key']
+              .' (Artikel: '.$candidate['title'].')';
+        } else {
+            $s['preflight']='Kein noch offener, sicher zugeordneter Artikel in diesem Prüflauf';
+        }
+        self::auto_save_state($s);
+        self::back('auto_status');
+    }
     public static function auto_run_now() {
         self::guard('hdar_amazon_auto_run');
         self::auto_tick('manual',false);
@@ -417,6 +434,7 @@ cls=one(cls,
     "        add_shortcode('hobby_amazon_produkten', array(__CLASS__, 'shortcode_products'));",
     "        add_shortcode('hobby_amazon_produkten', array(__CLASS__, 'shortcode_products'));\n"
     "        add_action('admin_post_hdar_amazon_auto_toggle', array(__CLASS__, 'auto_save'));\n"
+    "        add_action('admin_post_hdar_amazon_auto_preflight', array(__CLASS__, 'auto_preflight'));\n"
     "        add_action('admin_post_hdar_amazon_auto_run', array(__CLASS__, 'auto_run_now'));\n"
     "        add_action('admin_post_hdar_amazon_auto_poll', array(__CLASS__, 'auto_poll_now'));\n"
     "        add_action('init', array(__CLASS__, 'auto_schedule'), 40);\n"
@@ -447,6 +465,15 @@ panel=r'''
           Automatische kostenpflichtige Recherche ausdrücklich aktivieren (höchstens 5 neue Aufträge pro UTC-Tag, wiederkehrend)</label>
           <?php submit_button('Automatik speichern','secondary','',false); ?>
         </form>
+        <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="display:inline-block;margin:6px 8px 6px 0">
+          <input type="hidden" name="action" value="hdar_amazon_auto_preflight">
+          <?php wp_nonce_field('hdar_amazon_auto_preflight'); ?>
+          <?php submit_button('Nächsten Kandidaten kostenlos prüfen','secondary','',false); ?>
+        </form>
+        <?php if (!empty($auto['preflight'])) : ?>
+          <p><strong>Kostenfreier Prüfbericht:</strong>
+            <?php echo esc_html((string)$auto['preflight']); ?></p>
+        <?php endif; ?>
         <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="display:inline-block;margin:6px 8px 6px 0">
           <input type="hidden" name="action" value="hdar_amazon_auto_run">
           <?php wp_nonce_field('hdar_amazon_auto_run'); ?>
