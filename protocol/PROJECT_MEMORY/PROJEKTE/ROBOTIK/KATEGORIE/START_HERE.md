@@ -15,3 +15,8 @@ Stand: 08.11.2026
 Das neue Büro besitzt keine Verknüpfung mit bestehenden Projekt-Daten. Es gibt keine vorgefüllten Kategorien, keine Site-URL, keine WordPress-IDs, keine Zugangsdaten, keine Cronjobs, keine API-Schlüssel und keine Live-Verbindungen.
 
 **Als nächstes:** Hauptthemen der Robotik, Zielgruppen und Monetarisierungswege abgrenzen; danach die drei Säulen fachlich ausarbeiten. Erst nach Freigabe importieren.
+
+## Neue fachliche Arbeitsunterlagen (08.11.2026)
+- [RECHERCHE/ERSTLANDKARTE_20261108.md](RECHERCHE/ERSTLANDKARTE_20261108.md) – Bereiche und Produkte, ausdrücklich nur Forschungsansätze.
+- [RECHERCHE/KATEGORIEPLUGIN_RESEARCH_PLAN.md](RECHERCHE/KATEGORIEPLUGIN_RESEARCH_PLAN.md) – konkrete sinnvolle Plugin-Unterstützung bei der Produktermittlung und Inhaltskategorien.
+- [RECHERCHE/PRODUKTKANDIDATEN_20261108.json](RECHERCHE/PRODUKTKANDIDATEN_20261108.json) – 27 ungeprüfte Produktkandidaten, keine WordPress-Knoten.
