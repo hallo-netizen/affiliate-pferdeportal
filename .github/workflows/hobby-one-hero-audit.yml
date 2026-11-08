@@ -1,0 +1,72 @@
+name: HD006 1 hero exact source and live audit
+on:
+  push:
+    branches: [hobbyroom/hd003-150806-hab-article-one-hero-20261108]
+    paths: [.github/workflows/hobby-one-hero-audit.yml]
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect original plugin methods and Hab article positions
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re
+          root=Path('protocol/PROJECT_MEMORY/PROJEKTE')
+          zips={
+           'HD003':root/'HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip',
+           'HD009':root/'HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip',
+           'HAB001':root/'EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip'}
+          for label,path in zips.items():
+            with ZipFile(path) as z:
+              files=[n for n in z.namelist() if n.endswith('.php')]
+              print('PACKAGE',label,'PHP',len(files),'FILES',len(z.namelist()))
+              if label=='HD003':
+                s=z.read('affiliate-portal-template-kit/includes/hobby-depot-article-hero-v150789.php').decode()
+                for key in ['function hd003_hab_article_sidebar_v150804','function hd003_hab_article_content_v150804','function hd003_article_hero_style_v150789']:
+                  i=s.find(key)
+                  print('METHOD',label,key,s[i:i+7500])
+              if label=='HD009':
+                s=z.read('affiliate-portal-router/hobby-depot-affiliate-router.php').decode()
+                for key in ['private function hdar_ci_amazon_banner(','private function hdar_ci_banner_world(','private function get_content_context(','private function hdar_ci_category_photo_meta(']:
+                  i=s.find(key)
+                  print('METHOD',label,key,s[i:i+10000])
+              if label=='HAB001':
+                s=z.read('hab-bewahr-design-vorschau/includes/article-page.php').decode()
+                for key in ['article_body','the_content','product','single', 'sidebar','grid']:
+                  for match in list(re.finditer(key,s,re.I))[:3]:
+                    print('HAB_CONTEXT',key,s[max(0,match.start()-340):match.start()+700].replace('\n',' '))
+          PY
+      - name: Install browser
+        run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - name: Check original article photos, provider banner and sourced selectors
+        run: |
+          python3 - <<'PY'
+          from playwright.sync_api import sync_playwright
+          import json
+          u='https://www.hobby-depot.de/designtest-zweileiner-oder-vierleiner-hobby-depot/'
+          with sync_playwright() as p:
+            b=p.chromium.launch(headless=True,args=['--no-sandbox'])
+            for w in [1440,390]:
+              page=b.new_page(viewport={'width':w,'height':900})
+              r=page.goto(u,wait_until='domcontentloaded',timeout=32000)
+              page.wait_for_timeout(350)
+              data=page.evaluate("""() => {
+                const root=document.querySelector('#content .post__text');
+                const describe=n=>{let r=n.getBoundingClientRect();return{tag:n.tagName,cls:String(n.className).slice(0,160),alt:n.alt||'',src:n.currentSrc||n.src||'',html:n.outerHTML.slice(0,750),rect:{x:r.x,y:r.y,w:r.width,h:r.height}}};
+                return {url:location.href,title:document.title,
+                  hero:[...document.querySelectorAll('.hd-article-photo-hero-v150789 img')].map(describe),
+                  inlineImages:root?[...root.querySelectorAll('img')].map(describe):[],
+                  banners:[...document.querySelectorAll('.hdar-ci-amazon-banner')].map(describe),
+                  elements:root?[...root.children].map((n,i)=>({i,tag:n.tagName,id:n.id,cls:String(n.className).slice(0,130),text:n.textContent.slice(0,110),img:n.querySelectorAll('img').length})).slice(0,55):[],
+                  globalBannerCount:document.querySelectorAll('.hdar-ci-amazon-banner').length};
+              }""")
+              print('LIVE_ARTICLE',w,'HTTP',r.status if r else 'n/a',json.dumps(data,ensure_ascii=False))
+              page.close()
+            b.close()
+          PY
