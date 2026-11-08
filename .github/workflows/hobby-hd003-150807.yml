@@ -56,3 +56,18 @@ jobs:
                 print('CSS',n,i+1,l[:500])
           print('FILES_WITH_HOBBY',[n for n in z.namelist() if 'suchen-finden.webp' in n or 'ad-v150' in n or 'own-ad' in n])
           PY
+
+
+      - name: Inspect exact scoped banner and hero renderer
+        run: |
+          python3 - <<'PY'
+          import zipfile
+          z=zipfile.ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          n=next(n for n in z.namelist() if n.endswith('class-hobby-depot-profile-v150709.php'))
+          lines=z.read(n).decode('utf8','replace').splitlines()
+          for a,b in ((735,772),(4350,4412),(4585,4618),(7660,7808)):
+            for i in range(a-1,b):print('DETAIL',i+1,lines[i][:420])
+          for i,l in enumerate(lines):
+            if 'function render_rental_for(' in l or 'function render_magazine_hero_v150719' in l:
+              for j in range(i,min(i+50,len(lines))):print('FUNCDETAIL',j+1,lines[j][:390])
+          PY
