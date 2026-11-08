@@ -26,7 +26,8 @@ jobs:
           hunks=re.split(r'(?=^@@ )',chunk,flags=re.M)
           good=[x for x in hunks if x.startswith('@@ ') and 'private function ebay_run_public_source_refresh_tick' in x]
           completed=[x for x in hunks if x.startswith('@@ ') and 'private function ebay_run_complete' in x]
-          assert len(good)==1 and len(completed)==1, 'Source refresh and canonical completion must be tested together'
+          repair=[x for x in hunks if x.startswith('@@ ') and "array('source_stale','source_hash_mismatch')" in x]
+          assert len(good)==1 and len(completed)==1 and len(repair)==1, 'Final refresh, source-hash repair and warning completion must be tested together'
           hunk=good[0]
           assert 'private function ebay_run_tick_public_verify' in hunk
           assert 'if(!$this->ebay_run_public_source_refresh_tick($run,$settings))' in hunk
@@ -41,7 +42,7 @@ jobs:
           dst=root/path
           dst.parent.mkdir(parents=True,exist_ok=True)
           shutil.copy(src,dst)
-          (root/'lastmile.patch').write_text('diff --git a/'+path+' b/'+path+'\n--- a/'+path+'\n+++ b/'+path+'\n'+completed[0]+hunk)
+          (root/'lastmile.patch').write_text('diff --git a/'+path+' b/'+path+'\n--- a/'+path+'\n+++ b/'+path+'\n'+completed[0]+repair[0]+hunk)
           print('PASS: ONE EXISTING PUBLIC GATE, NO SECOND WORKER, NO POLICY BYPASS, PHYSICAL PATCH CHECK')
           PY
           cd /tmp/ebay310_qa
@@ -108,7 +109,7 @@ jobs:
           require 'affiliate-portal-router/includes/trait-ppar-ebay-run.php';
           class TestRun{
               use PPAR_Ebay_Run_Trait;
-              public $run=array();public $remote=0;public $fail_code='';public $provider_error=false;public $last_good_safe=false;
+              public $run=array();public $remote=0;public $fail_code='';public $provider_error=false;public $last_good_safe=false;public $private_repairs=0;
               private function ebay_run_load(){return $this->run;}
               private function ebay_run_save($v){$this->run=$v;return $v;}
               private function ebay_run_fail($c,$m,$d=array()){$this->fail_code=$c;return false;}
@@ -127,6 +128,9 @@ jobs:
                   $wpdb->items[$row['id']]['fresh_until']=time()+6*3600;
                   $job['summary']['updated']++;
               }
+              private function ebay_selection_request($reason,$owner,$force,$scope){$this->private_repairs++;return array('status'=>'running','owner'=>'test-owner');}
+              public function can_repair($invalid){return $this->ebay_run_private_public_freshness_only_failure(array('error_code'=>'private_public_gate_failed','invalid'=>$invalid));}
+              public function repair($invalid){return $this->ebay_run_reopen_private_after_public_freshness_churn($this->run,array('error_code'=>'private_public_gate_failed','invalid'=>$invalid),'public_lastmile_hash_churn');}
               public function check($settings){return $this->ebay_run_public_source_refresh_tick($this->run,$settings);}
           }
           function ok($assert,$label){if(!$assert){fwrite(STDERR,"FAIL ".$label."\n");exit(1);}echo "PASS ".$label."\n";}
@@ -201,10 +205,32 @@ jobs:
           ok($r->run['public_source_refresh']['cursor']===2,'bounded first-tick cursor durable');
           ok($r->check($both)===false&&$r->remote===4,'second worker tick continues without restart');
           ok($r->check($both)===true&&$r->remote===6,'third tick completes six same-run refreshes');
-          echo "EBAY_LASTMILE_ISOLATED_GATE 23/23 PASS; FULL ORIGINAL+WP+EBAY E2E NOT CLAIMED\n";
+          $r=seed(time()+20000,time()+20000);
+          ok($r->can_repair(array(202=>'source_hash_mismatch'))===true,
+             'PRIVATE getItem source-hash change is eligible for existing repair');
+          ok($r->can_repair(array(202=>'source_stale',203=>'source_hash_mismatch'))===true,
+             'mixed stale and hash-changed PRIVATE listings use same bounded repair');
+          ok($r->can_repair(array(202=>'manual_block'))===false,
+             'hard policy/manual blocks must never enter freshness repair');
+          $r->run['schema']='1.0';$r->run['status']='running';$r->run['phase']='public_verify';
+          $r->run['run_uuid']='test-same-run';$r->run['config_snapshot']=array('seller_routes'=>array('private'=>true,'business'=>true));
+          $r->run['checkpoint_candidate']['business_campaign_ids']=array(101);
+          ok($r->repair(array(202=>'source_hash_mismatch'))===true,
+             'actual canonical repair reopens existing PRIVATE selector');
+          ok($r->private_repairs===1&&$r->run['phase']==='selection_prepare',
+             'PRIVATE repair remains in same run and uses existing selection phase');
+          ok(($r->run['checkpoint_candidate']['business_campaign_ids']??array())===array(101),
+             'PRIVATE repair cannot erase business public candidates');
+          $r->run['status']='running';$r->run['phase']='public_verify';
+          ok($r->repair(array(202=>'source_hash_mismatch'))===true&&$r->private_repairs===2,
+             'second source-hash repair allowed but bounded');
+          $r->run['status']='running';$r->run['phase']='public_verify';
+          ok($r->repair(array(202=>'source_hash_mismatch'))===false&&$r->private_repairs===2,
+             'third source-hash retry denied fail-closed');
+          echo "EBAY_LASTMILE_ISOLATED_GATE 31/31 PASS; FULL ORIGINAL+WP+EBAY E2E NOT CLAIMED\n";
           PHP
           cd /tmp/ebay310_qa
           php -l test.php
           php test.php | tee /tmp/ebay-672310-lastmile.log
-          test "$(grep -c '^PASS ' /tmp/ebay-672310-lastmile.log)" = 23
-          grep -F 'EBAY_LASTMILE_ISOLATED_GATE 23/23 PASS' /tmp/ebay-672310-lastmile.log
+          test "$(grep -c '^PASS ' /tmp/ebay-672310-lastmile.log)" = 31
+          grep -F 'EBAY_LASTMILE_ISOLATED_GATE 31/31 PASS' /tmp/ebay-672310-lastmile.log
