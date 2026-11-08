@@ -120,3 +120,53 @@ jobs:
                 if re.search(r'bonsai-landschaften|bonsai-landscape|saikei',line,re.I) and len(line)<800:
                   print('BONSAI_HD003_REF',n,line[:500])
           PY
+
+      - name: Systematic 862 image-evidence inventory for editorial review
+        run: |
+          python3 - <<'PY'
+          import zipfile,json,collections,os,hashlib
+          base='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/'
+          with zipfile.ZipFile(base+'HD-007-HOBBYREGISTER-CORE/CURRENT.zip') as reg, zipfile.ZipFile(base+'HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip') as design:
+            a=json.loads(reg.read(next(n for n in reg.namelist() if n.endswith('hobby-image-map-v1.json'))))
+            d=set(design.namelist())
+            hd7=set(reg.namelist())
+            counts=collections.Counter()
+            legacy_paths=collections.Counter()
+            statuses=collections.Counter()
+            failures=[]
+            rows=[]
+            for id,item in a.items():
+              slug=id[6:] if id.startswith('hobby:') else id
+              source=item.get('source','')
+              path=item.get('path','')
+              status=item.get('status','')
+              prod=item.get('production_status','')
+              explicit=status=='FINAL_MASTER_VERIFIED' or prod=='DONE'
+              special='affiliate-portal-template-kit/assets/hobby-depot-v150759/hobby-masters/'+slug+'.webp'
+              old='affiliate-portal-template-kit/assets/hobby-depot-v150758/hobby-masters/'+slug+'.webp'
+              newer='affiliate-portal-template-kit/assets/hobby-depot-v150753/batik-hero.webp'
+              dedicated=special in d or old in d or (slug=='batik' and newer in d)
+              original_exists=(('affiliate-portal-template-kit/assets/'+path in d) if source=='hd003' else ('hd-hobbyregister-core/assets/'+path in hd7 or 'hd-hobbyregister-core/'+path in hd7) if source=='hd007' else False)
+              if path:legacy_paths[path]+=1
+              statuses[status]+=1
+              if explicit and original_exists:bucket='verified_original'
+              elif dedicated:bucket='own_design_master'
+              elif path and original_exists:bucket='present_visual_review_needed'
+              elif path:bucket='path_not_confirmed_in_archive'
+              else:bucket='missing'
+              counts[bucket]+=1
+              if bucket=='path_not_confirmed_in_archive':failures.append([id,source,path])
+              row={'id':id,'source':source,'path':path,'status':status,'production_status':prod,'legacy_semantic':item.get('core_audit_semantic_fit',''),'legacy_verdict':item.get('core_audit_final_verdict',''),'bucket':bucket,'original_exists':original_exists,'dedicated_master':dedicated}
+              rows.append(row)
+            print('INVENTORY_TOTAL',len(rows))
+            print('INVENTORY_BUCKETS',json.dumps(counts,sort_keys=True))
+            print('ORIGINAL_STATUSES_TOP',json.dumps(statuses.most_common(12)))
+            print('SHARED_PATHS_2PLUS',sum(c>1 for c in legacy_paths.values()),'HOBBIES_SHARING',sum(c for c in legacy_paths.values() if c>1))
+            print('MISSING_FILE_EXAMPLES',json.dumps(failures[:25],ensure_ascii=False))
+            print('BONSAI_LANDSCHAFTEN',json.dumps(next(x for x in rows if x['id']=='hobby:bonsai-landschaften'),ensure_ascii=False))
+            print('ARDUINO',json.dumps(next(x for x in rows if x['id']=='hobby:arduino'),ensure_ascii=False))
+            print('AIRBRUSH',json.dumps(next(x for x in rows if x['id']=='hobby:airbrush'),ensure_ascii=False))
+            print('AEROPONIK',json.dumps(next(x for x in rows if x['id']=='hobby:aeroponik'),ensure_ascii=False))
+            with open('/tmp/hobby-image-inventory.json','w') as f:json.dump(rows,f,ensure_ascii=False,indent=1)
+            print('INVENTORY_SHA256',hashlib.sha256(open('/tmp/hobby-image-inventory.json','rb').read()).hexdigest())
+          PY
