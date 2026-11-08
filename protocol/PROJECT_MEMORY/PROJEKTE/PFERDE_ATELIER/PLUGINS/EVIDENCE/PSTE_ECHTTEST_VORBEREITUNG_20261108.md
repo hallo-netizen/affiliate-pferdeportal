@@ -30,3 +30,20 @@ Nach einmaliger fachlicher Abnahme die Qualität des EINEN bestehenden externen 
 - Checkpoint 4: vollständige Simulations-/Kompatibilitätsprobe mit vorhandenen PSERC-Klassen; dann Endbericht zur Staging-Bereitschaft.
 
 **Freigabegrenze:** Unvollständiger WP-Export, fehlende reale Owner-Antwort oder fehlende echte WP→PSERC-Stagingprobe bedeuten **NICHT FREIGEGEBEN**.
+
+
+## Checkpoint 2 – einmaliger SEO-Owner-Auftrag gesichert
+
+**PASS (Vorbereitung):** `EVIDENCE/PSTE_EIN_SEO_OWNER_ECHTTEST_AUFTRAG_20261108.md` dokumentiert den **einen** ursprünglichen externen SEO-Owner, den tatsächlich erforderlichen kompletten WordPress-Export, korrekte Entscheidungsantwort `PSTE_MINI_SEO_DECISIONS_V1`, eindeutige Quellen und konkrete Problem-Keywords. Die unabhängige MINI-Titelwerkstatt wurde anhand ihrer echten `mini-title-gate/START_HERE.md` **nicht** fälschlich als SEO-Doppelbelegungsprüfer behandelt. Keine zweite redaktionelle Dauerschleife.
+
+## Checkpoint 3 – ausführbare einmalige Original-Daten-Abnahme gesichert
+
+**PASS (nur QA-Selbsttest):** Das **schon vorhandene** Testprogramm `QA_ONLY/test_single_existing_seo_worker_acceptance.py` wurde statt eines zusätzlichen Programm-/Runtime-Workers um zwei Aufrufarten ergänzt:
+
+- `--preflight ORIGINAL_WORDPRESS_EXPORT.json` prüft ausschließlich technische Vollständigkeit und unveränderte Originalquellen: `parkhaus_complete`, alle fünf Pflichtquellen, gespeicherter PPM679-Plan als `PRESENT`, PSERC-Planversion, keine verlorenen JA-Quellschlüssel, keine duplizierten Quellidentitäten, korrekte `pool_key|raw_query`-Bindung, Titel vorhanden. Fehlt ein Quellbestand, bricht es ab statt eine SEO-Bewertung zu erfinden.
+- `--verify ORIGINAL_WORDPRESS_EXPORT.json ECHTE_OWNER_ANTWORT.json [ORIGINAL_MINI100.json]` vergleicht **nur beim einmaligen Test des Owners** dessen Antwort mit dem echten Original: gleiche Bestandsversion, 1:1 vollständige Antworten, keine erfundenen oder doppelten Quellschlüssel/BELEGT-IDs, korrekte vorhandene Titel/Platzkennungen; das **bestehende** feste Fachfall-Abnahmeprogramm wird lediglich für die tatsächlich im Export vorhandenen 87 Original-JA-Quellen einmal verwendet. Die vorhandene Importfunktion bleibt die einzige spätere technische Produktübernahme; **keine zweite Runtime-Semantikprüfung**.
+- `--io-selftest ORIGINAL_MINI100.json` testet die Eingangskontrolle und gezielte Negativfälle nur gegen **synthetische Testquellen**; daraus wird ausdrücklich kein reales SEO-Urteil abgeleitet.
+
+**Tatsächlicher Lauf:** GitHub Actions `42464012917` **SUCCESS** (alte feste Original-Fachfall-Selbsttests + kompletter Quellen-/Antwort-Selbsttest mit 7 gezielten Fehlerfällen); `42464065463` **SUCCESS** zusätzlich gegen die **echten originalen** PSTE-v22-PHP-Klassen `PSTE_Repository::table`, `PSTE_Repository::allCandidates`, `PSTE_Snapshot::editorialPlan`: alle drei tatsächlich **public static** und vom vorhandenen Export verwendbar. Nicht nur angenommene Stub-Methoden. Die provisorische GitHub-Testworkflowdatei wurde **wieder gelöscht**.
+
+**NOCH NICHT PASS:** Es liegt in diesem Arbeitszweig **kein** echter WP-Testexport und **keine** entsprechende reale SEO-Owner-Antwort vor. Der Testcode validiert nur die Bereitschaft des einen einmaligen Qualitätstests, **nicht** die fachliche Leistung des Workers in der Produktion oder einen WP-/K0-Durchlauf.
