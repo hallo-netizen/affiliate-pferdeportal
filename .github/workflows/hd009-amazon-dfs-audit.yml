@@ -1,0 +1,41 @@
+name: HD009 products vs HAB Amazon pipeline audit
+on:
+  push:
+    branches: [hobbyroom/hd009-amazon-dfs-products-audit-20261108]
+    paths: [.github/workflows/hd009-amazon-dfs-audit.yml]
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compare actual full ZIPs, dataforseo provider calls, ASIN store, product slot output
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          from hashlib import sha256
+          import re,collections
+          base=Path('protocol/PROJECT_MEMORY/PROJEKTE')
+          paths={
+            'HOBBY':base/'HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip',
+            'HAB':base/'EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip',
+          }
+          patterns=['dataforseo','dfs_amazon','amazon_search','ppar_amazon_search_v1','amazon_products','amazon_automation','asin','render_product','product_cards','render_banner','product_after_category_tiles','provider_product','product_source','amazon_product','product_box','category_product','product_recommendation','get_product']
+          for id,path in paths.items():
+            with ZipFile(path) as z:
+              names=z.namelist()
+              print('PACKAGE',id,'bytes',path.stat().st_size,'sha256',sha256(path.read_bytes()).hexdigest(),'entries',len(names),'badCRC',z.testzip())
+              for name in names:
+                if name.endswith('.php') or name.endswith('.js'):
+                  s=z.read(name).decode('utf8','replace')
+                  hits={k:len(list(re.finditer(re.escape(k),s,re.I))) for k in patterns}
+                  hits={k:v for k,v in hits.items() if v}
+                  if hits:print('HITS',id,name,'length',len(s),'matches',hits)
+                  if any(k in s.lower() for k in ['dataforseo','dfs_amazon','amazon_search','amazon_automation']):
+                    print('DFS_LINES',id,name)
+                    for no,line in enumerate(s.splitlines(),1):
+                      if any(p in line.lower() for p in ['dataforseo','dfs_amazon','amazon_search','amazon_automation','search_products','products/live/advanced','merchant/amazon']):
+                        print('DFS',id,name,no,line.strip()[:320])
+              print('MAINFILES',id,[n for n in names if n.endswith('.php') and n.count('/')<=2])
+          PY
