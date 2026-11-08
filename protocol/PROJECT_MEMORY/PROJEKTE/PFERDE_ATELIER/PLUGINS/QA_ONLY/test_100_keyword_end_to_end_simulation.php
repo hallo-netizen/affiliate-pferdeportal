@@ -89,6 +89,25 @@ $fakeResult=PSTE_Mini_Workflow::acceptSingleOwnerSeoDecisions($state,$fake,$snap
 $badRefKey=(string)$fake['items'][$belegtAt]['pool_key'];
 chk(($fakeResult['seo_decisions'][$badRefKey]['box']??'')==='KLAERUNG',
     'fabricated BELEGT reference stays in existing clarification, not accepted as proof');
+// Technical identity checks only: simulate the identical 64-char slot already
+// occupied by WP, active PSERC, or the actual PPM679 saved editorial plan.
+// External semantic verdict is not recomputed; existing slot always wins.
+foreach(['WORDPRESS','PSERC_ACTIVE_PLAN','PPM679_EXISTING_EDITORIAL_RUNTIME'] as $source){
+    $blockedSnapshot=$snapshot;
+    $freeEntry=null;
+    foreach($results as $candidate)if($candidate['pool_key']===$selectedFree){$freeEntry=$candidate;break;}
+    chk(is_array($freeEntry),'exact occupied-slot test has the saved free MINI source');
+    $blockedSnapshot['items'][]=['source'=>$source,
+        'plan_slot'=>$freeEntry['intent_slot'],'canonical_article_id'=>'existing-article-slot'];
+    $blockedSnapshot['sha256']=hash('sha256','new-occupancy-snapshot|'.$source);
+    $blockedDoc=$document;
+    $blockedDoc['snapshot_sha256']=$blockedSnapshot['sha256'];
+    $blockedResult=PSTE_Mini_Workflow::acceptSingleOwnerSeoDecisions($state,$blockedDoc,$blockedSnapshot);
+    chk(($blockedResult['seo_decisions'][$selectedFree]['box']??'')==='KLAERUNG',
+        'exact existing occupied slot blocks FREI in '.$source.' without SEO repeat');
+    chk(count($blockedResult['seo_decisions'])===87,
+        'all other received decisions continue despite one occupied slot '.$source);
+}
 $verified=['FREI'=>0,'BELEGT'=>0,'KLAERUNG'=>0];
 foreach($completed as $key=>$row){
     if($row['decision']!=='JA')continue;
