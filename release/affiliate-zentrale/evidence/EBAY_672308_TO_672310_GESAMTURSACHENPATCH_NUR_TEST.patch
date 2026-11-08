@@ -261,6 +261,111 @@ index e5c1169..8e0566b 100644
          }
      }
  
+@@ -1879,6 +1950,104 @@ trait PPAR_Ebay_Run_Trait {
+         }
+     }
+ 
++    /**
++     * One last-mile gate for both public seller routes. A long discovery +
++     * selection must not let its earliest 6-hour source facts expire before
++     * the public commit. Reuse the existing getItem refresh/accept/upsert.
++     * No new worker, storage table, relaxed age limit or frontend HTTP.
++     * Process many fresh rows or at most two remote rows per canonical tick.
++     */
++    private function ebay_run_public_source_refresh_tick($run,$settings) {
++        $candidate=(array)($run['checkpoint_candidate']??array());
++        $business=array_values(array_unique(array_filter(array_map('absint',(array)($candidate['business_campaign_ids']??array())))));
++        $private=array_values(array_unique(array_filter(array_map('absint',(array)($candidate['private_listing_ids']??array())))));
++        sort($business,SORT_NUMERIC);sort($private,SORT_NUMERIC);
++        $fingerprint=hash('sha256',wp_json_encode(array($business,$private)));
++        $state=(array)($run['public_source_refresh']??array());
++        if((string)($state['fingerprint']??'')!==$fingerprint){
++            $state=array('fingerprint'=>$fingerprint,'cursor'=>0,'checked'=>0,'refreshed'=>0,'complete'=>0);
++        }
++        if(!empty($state['complete'])){return true;}
++        global $wpdb;
++        if(!is_object($wpdb)||!method_exists($wpdb,'get_row')||!method_exists($wpdb,'prepare')
++            ||!function_exists('get_post_meta')){
++            $this->ebay_run_fail('public_source_refresh_storage_unavailable',
++                'Die abschliessende Quellenpruefung kann WordPress nicht lesen.');return false;
++        }
++        $targets=array();
++        foreach($business as $id){$targets[]=array('BUSINESS',$id);}
++        foreach($private as $id){$targets[]=array('INDIVIDUAL',$id);}
++        $cursor=absint($state['cursor']??0);$n=count($targets);
++        $checked=0;$remotes=0;$token=null;$deadline=microtime(true)+18;
++        while($cursor<$n && $checked<100 && microtime(true)<$deadline){
++            list($kind,$id)=$targets[$cursor];
++            if($kind==='BUSINESS'){
++                $hash=strtolower(sanitize_text_field((string)get_post_meta($id,'_ppar_creative_identity_hash',true)));
++                if(!preg_match('/^[a-f0-9]{64}$/',$hash)){
++                    $this->ebay_run_fail('public_source_refresh_identity_missing',
++                        'Veroeffentlichungskandidat ohne gueltigen eBay-Quellverweis.',
++                        array('seller_type'=>$kind,'post_id'=>$id));return false;
++                }
++                $sql=$wpdb->prepare("SELECT * FROM {$this->ebay_items_table()} WHERE creative_identity_hash=%s AND seller_account_type='BUSINESS' ORDER BY id DESC LIMIT 1",$hash);
++            }else{
++                $item_id=sanitize_text_field((string)get_post_meta($id,'_ppar_ebay_item_id',true));
++                if($item_id===''){
++                    $this->ebay_run_fail('public_source_refresh_identity_missing',
++                        'PRIVATE-Kandidat ohne eBay-Quellverweis.',
++                        array('seller_type'=>$kind,'post_id'=>$id));return false;
++                }
++                $sql=$wpdb->prepare("SELECT * FROM {$this->ebay_items_table()} WHERE item_id=%s AND seller_account_type='INDIVIDUAL' ORDER BY id DESC LIMIT 1",$item_id);
++            }
++            $wpdb->last_error='';
++            $row=$wpdb->get_row($sql,ARRAY_A);
++            if(trim((string)($wpdb->last_error??''))!==''||!is_array($row)||absint($row['id']??0)<1){
++                $this->ebay_run_fail('public_source_refresh_source_unavailable',
++                    'Oeffentlicher Kandidat ohne sicher lesbare gespeicherte eBay-Quelle.',
++                    array('seller_type'=>$kind,'post_id'=>$id));return false;
++            }
++            $eligible=sanitize_key((string)($row['source_state']??''))==='available'
++                &&sanitize_key((string)($row['policy_state']??''))!=='blocked'
++                &&sanitize_key((string)($row['status']??''))!=='blocked_manual';
++            $due=$eligible && absint($row['fresh_until']??0)<=time()+15*MINUTE_IN_SECONDS;
++            if($due){
++                if($remotes>=2){break;}
++                if($token===null){$token=$this->ebay_access_token($settings);}
++                if(is_wp_error($token)){
++                    $this->ebay_run_fail('public_source_refresh_auth_failed',
++                        'Abschliessende eBay-Quellenpruefung ohne gueltigen Zugang.');return false;
++                }
++                $task=array('last_id'=>0,'summary'=>array(
++                    'checked'=>0,'requests'=>0,'transient_errors'=>0,
++                    'technical_errors'=>0,'excluded'=>0,'available'=>0,
++                    'ended'=>0,'updated'=>0,'revived'=>0,'errors'=>array()));
++                $this->ebay_refresh_process_row($task,$row,$settings,$token);
++                $errors=(array)($task['summary']['errors']??array());
++                if($errors || absint($task['summary']['technical_errors']??0)>0
++                    || absint($task['summary']['transient_errors']??0)>0){
++                    $last=$errors?end($errors):array();
++                    $this->ebay_run_fail('public_source_refresh_provider_failed',
++                        'eBay konnte einen ausgewaehlten Kandidaten vor der Veroeffentlichung nicht bestaetigen.',
++                        array('seller_type'=>$kind,'post_id'=>$id,
++                              'provider_error_code'=>sanitize_key((string)($last['code']??'source_unverified'))));
++                    return false;
++                }
++                $remotes++;
++            }
++            $cursor++;$checked++;
++        }
++        $current=$this->ebay_run_load();
++        $state['cursor']=$cursor;
++        $state['checked']=absint($state['checked']??0)+$checked;
++        $state['refreshed']=absint($state['refreshed']??0)+$remotes;
++        $state['complete']=$cursor>=$n?1:0;
++        $current['public_source_refresh']=$state;
++        $current['progress_seq']=absint($current['progress_seq']??0)+1;
++        $current['last_progress_at']=time();
++        $this->ebay_run_save($current);
++        return !empty($state['complete']);
++    }
++
+     private function ebay_run_tick_public_verify($run, $settings) {
+         $candidate=is_array($run['checkpoint_candidate']??null)?$run['checkpoint_candidate']:array();
++        if(!$this->ebay_run_public_source_refresh_tick($run,$settings)){return;}
+         $business=empty($settings['business_enabled'])?array('required'=>0,'covered'=>0,'missing'=>array(),'counts'=>array()):$this->ebay_run_public_business_coverage((array)($candidate['business_campaign_ids']??array()));
 @@ -1916,6 +2006,42 @@ trait PPAR_Ebay_Run_Trait {
          // The one-row checkpoint write is the public visibility commit. Until
          // this exact point the frontend continues to serve the previous safe set.
