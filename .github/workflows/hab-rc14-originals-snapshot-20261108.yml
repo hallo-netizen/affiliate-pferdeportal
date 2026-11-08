@@ -27,7 +27,7 @@ jobs:
                   if item.endswith('.json') and any(t in item for t in ('area-image-mapping','area-photo-identities')):
                       dest='originals/hab-design/'+item.split('/')[-1]
                       open(dest,'wb').write(z.read(item))
-                  if item.endswith('.webp') and any(t in item for t in ('start-world','world-','topic-62-wassermelder','new-boiler','start-')):
+                  if item.endswith('.webp') and any(t in item for t in ('scene-security','scene-graffiti','scene-flood','focus-feuer-elektrik','scene-weather','scene-tech','insurance-world','start-world','world-','topic-62-wassermelder','new-boiler','start-')):
                       dest='originals/hab-design/'+item.split('/')[-1]
                       if not os.path.exists(dest):open(dest,'wb').write(z.read(item))
           with zipfile.ZipFile(orig) as z:
