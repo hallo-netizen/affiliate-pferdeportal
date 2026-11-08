@@ -10,11 +10,11 @@ Status: ausschließlich Datenprüfung. Keine kostenpflichtige DataForSEO-Abfrage
 
 ## Abgleich Register zu bestehenden Hobbyzielen
 - Distinkte Hobby-Slugs der aktuellen HD003-Kategoriemappe: 381
-- Eindeutiger Namensabgleich mit Hobbyregister: 345
-- Ohne automatischen Namensabgleich: 36
+- Eindeutiger Namensabgleich mit Hobbyregister: 381
+- Ohne automatischen Namensabgleich: 0
 - Mehrdeutige Mehrfachkandidaten: 0
-- Erste kompakte Ausrüstungsphrasen als mögliche Recherchewörter: 277
-- Erster Ausrüstungsbegriff für direkte Recherche zu ungenau: 68
+- Erste kompakte Ausrüstungsphrasen als mögliche Recherchewörter: 301
+- Erster Ausrüstungsbegriff für direkte Recherche zu ungenau: 80
 
 Diese Begriffe sind keine fertig geprüften Produktempfehlungen. Keine automatische Übernahme fachlich ungeeigneter Artikel.
 
@@ -22,13 +22,13 @@ Diese Begriffe sind keine fertig geprüften Produktempfehlungen. Keine automatis
 | Welt | Hobby | Ausrüstungsphrase | Einschätzung |
 |---|---|---|---|
 | bewegen | 3D-Bogenschießen | Bogen | Suchwort-Kandidat |
+| bewegen | Angeln | Rute | Suchwort-Kandidat |
 | bewegen | Balance Board | Balance Board und eine freie | Noch prüfen |
-| bewegen | Baumklettern | Kletterausrüstung | Suchwort-Kandidat |
 | bewegen | Balance Board | Balance Board und eine freie | Noch prüfen |
 | bewegen | Boomerangwerfen | Geeigneten Bumerang | Noch prüfen |
+| fertigen | Automodellbau | Modellbausatz | Suchwort-Kandidat |
 | fertigen | Bean-to-Bar-Schokolade | Kakaobohnen | Suchwort-Kandidat |
 | fertigen | Besenbinden | Reisig oder Fasern | Noch prüfen |
-| fertigen | Betonkunst | Betonmischung | Suchwort-Kandidat |
 | fertigen | Besenbinden | Reisig oder Fasern | Noch prüfen |
 | fertigen | Cider herstellen | Saft oder Obst | Noch prüfen |
 | forschen | Amateurastronomie | Freier Himmel; optional Fernglas | Noch prüfen |
@@ -37,18 +37,18 @@ Diese Begriffe sind keine fertig geprüften Produktempfehlungen. Keine automatis
 | forschen | Amateurastronomie | Freier Himmel; optional Fernglas | Noch prüfen |
 | forschen | Bioakustik | Audiorecorder oder Mikrofon | Noch prüfen |
 | gestalten | Airbrush | Airbrushpistole | Suchwort-Kandidat |
+| gestalten | Architekturmodellbau | Karton | Suchwort-Kandidat |
 | gestalten | Batik | Stoff | Suchwort-Kandidat |
-| gestalten | Collage | Papiermaterial | Suchwort-Kandidat |
-| gestalten | Kalligrafie | Kalligrafiestift oder Feder | Noch prüfen |
-| gestalten | Origami | Quadratisches Papier und eine glatte Arbeitsfläche | Noch prüfen |
+| gestalten | Book Nooks | Bausatz oder Material | Noch prüfen |
+| gestalten | Fotografie | Kamera oder Smartphone; je nach Anspruch Objektive | Noch prüfen |
 | pflanzen | Aeroponik | Aeroponik-System | Suchwort-Kandidat |
 | pflanzen | Bonsai | Bonsai oder Jungbaum | Noch prüfen |
 | pflanzen | Bromelien | Bromelie | Suchwort-Kandidat |
 | pflanzen | Bonsai | Bonsai oder Jungbaum | Noch prüfen |
-| pflanzen | Pflanzenvermehrung | Mutterpflanzen oder Saatgut | Noch prüfen |
+| pflanzen | Gärtnern | Pflanzen oder Saatgut | Noch prüfen |
 | sammeln | alte Computer | Platz | Noch prüfen |
+| sammeln | alte Schlüssel | Aufbewahrung | Suchwort-Kandidat |
 | sammeln | Banknoten | Schutzhüllen oder Album und verlässliche Bestimmungshilfen | Noch prüfen |
-| sammeln | Blechschilder | Wand- oder Lagerfläche | Noch prüfen |
 | sammeln | alte Computer | Platz | Noch prüfen |
 | sammeln | Banknoten | Schutzhüllen oder Album und verlässliche Bestimmungshilfen | Noch prüfen |
 | technik | 3D-Druck | 3D-Drucker | Suchwort-Kandidat |
@@ -59,16 +59,11 @@ Diese Begriffe sind keine fertig geprüften Produktempfehlungen. Keine automatis
 | tiere | Ameisenhaltung | Formicarium | Suchwort-Kandidat |
 | tiere | Artemia-Zucht | Behälter | Suchwort-Kandidat |
 | tiere | Asselhaltung | Behälter | Suchwort-Kandidat |
+| tiere | Käferzucht | Zuchtboxen oder Terrarium | Noch prüfen |
 | tiere | Quallen-Aquarium | Kreisel- oder Quallenaquarium | Noch prüfen |
-| tiere | Wildbienenhotels | Hartholz oder Niströhrchen | Noch prüfen |
-| unbekannt | Angeln | Rute | Suchwort-Kandidat |
-| unbekannt | Architekturmodellbau | Karton | Suchwort-Kandidat |
-| unbekannt | Automodellbau | Modellbausatz | Suchwort-Kandidat |
-| unbekannt | Book Nooks | Bausatz oder Material | Noch prüfen |
-| unbekannt | Briefmarken sammeln | Album oder Steckkarten | Noch prüfen |
 
 ## Fehlende Zuordnungen
-alte-schluessel, cnc-fraesen, fuellfederhalter-sammeln, gaertnern, gemueseanbau, gewaessermikroskopie, gruenholzschnitzen, haekeln, hummelkaesten, kaeferbeobachtung, kaeferzucht, kaese-herstellen, kaffee-selbst-roesten, kloeppeln, knoepfe, kraeuteranbau, lederpraegen, loeffelschnitzen, luftqualitaetsmessung, moebelrestaurierung, muenzen, naehen, obst-im-kuebel, parfuemflakons, phaenologie, puppenhaeuser, raeuchern, riesenkuerbis-zucht, roehrenverstaerker-bauen, schloesser, schmetterlingsgaerten, schraubstoecke, toepfern, vogelzaehlungen, vorhaengeschloesser, wuerfel
+Keine.
 
 ## Bewährte und offene Schritte
 1. Bereits vorhandene DataForSEO-Verbindung und Produktplatzierung in HD009 behalten; keinen zweiten Workflow, keine neue Produktdatenbank und keine weitere Portalverknüpfung.
