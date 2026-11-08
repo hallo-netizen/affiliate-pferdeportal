@@ -1,55 +1,53 @@
 {
-  "status": "INTERN GEPRUEFT — KEIN INSTALLIERBARES RELEASE",
-  "timestamp": "2026-11-08",
-  "original_uploaded": "AFFILIATE_ZENTRALE_6.72.308_URSACHENFIX_GESAMTTEST_NUR_TEST.zip",
-  "original_sha256": "b4d8547fd2aa134f7f82f568db3a81df54bb7d2131fd0752e76e3f0ca2251fe0",
-  "current_internal_work": "6.72.310",
-  "patch": "release/affiliate-zentrale/evidence/EBAY_672308_TO_672310_GESAMTURSACHENPATCH_NUR_TEST.patch",
-  "patch_sha256": "1da677df99d1eed92fec31a3aec3973669e83a3f467405ae98e53f6fedb88c7f",
-  "patch_git_blob_sha": "ec9963e58204bc149b6bebd3b53fbb986dd31fae",
-  "test_source_tree_sha256": "12066ba50dae8662cbde8e4d5488f271815cb43f2aabe30051e18ab61f6f2cd5",
-  "source_inventory": {
-    "all_files": 66,
-    "changed_original_files": [
-      "includes/trait-ppar-ebay.php",
-      "includes/trait-ppar-ebay-run.php",
-      "pferdeportal-affiliate-router.php",
-      "readme.txt"
-    ],
-    "byte_identical_other_files": 62,
-    "php_syntax": "23/23 PASS",
-    "json_parse": "3/3 PASS",
-    "original_zip_crc": "PASS",
-    "patch_apply": "Original 6.72.308 freshly extracted, git apply --check and git apply PASS",
-    "after_replay_vs_current_workcopy": "66/66 identical"
-  },
-  "root_cause_live_20261107": {
-    "primary_code": "gapfill_partial_unresumable",
-    "source_code": "http_request_failed",
-    "transport": "cURL error 28: SSL connection timeout",
-    "evidence": "08.11.2026 user's read-only exact run/report timestamp matched"
-  },
-  "work_done": [
-    "Existing single eBay discovery worker retries transient connection failures and provider HTTP 429/5xx at most twice with same persisted profile and same URL, while independently processing other profiles",
-    "When retries are exhausted for an independent profile, the existing canonical coordinator continues selection and public checking; provider failure remains explicitly technically unverified, not a proven empty eBay market",
-    "Existing complete BUSINESS selection proof, public source validity, marketplace and product policy still required for public checkpoint; selected-but-not-public and malformed scope fail closed",
-    "Public run shows a warning instead of an unqualified full PASS; precise unresolved profile count and affected concepts retained",
-    "Existing bounded 10-record run archive retains short root failure reason, scope, source error code and technical supply warnings instead of losing them after 24h",
-    "No new provider API, worker, queue, database table, frontend HTTP call, K0 change or unrelated project change"
+  "status": "LOCAL ORIGINAL PHP AND EXACT ZIP SOURCE QA PASS; LIVE WORDPRESS-MARIADB-EBAY E2E NOT DONE",
+  "date": "2026-11-08",
+  "version": "6.72.310 (internal work source ONLY, no ZIP issued)",
+  "original_zip_file": "AFFILIATE_ZENTRALE_6.72.308_URSACHENFIX_GESAMTTEST_NUR_TEST.zip",
+  "original_zip_sha256": "b4d8547fd2aa134f7f82f568db3a81df54bb7d2131fd0752e76e3f0ca2251fe0",
+  "original_zip_crc": "PASS",
+  "all_files": 66,
+  "unchanged_files": 61,
+  "changed_files": [
+    "affiliate-portal-router/includes/class-ppar-admin-kiss.php",
+    "affiliate-portal-router/includes/trait-ppar-ebay-run.php",
+    "affiliate-portal-router/includes/trait-ppar-ebay.php",
+    "affiliate-portal-router/pferdeportal-affiliate-router.php",
+    "affiliate-portal-router/readme.txt"
   ],
+  "php_lint": "23/23 PASS",
+  "json_parse": "3/3 PASS",
   "tests": {
-    "original_red": "PASS: real 6.72.308 original PHP reproduces one cURL28 timeout -> partial/request_error despite other profile success",
-    "worker_original_real_trait": "26/26 PASS, including temporary timeout, sustained timeout, cursor preservation, serialization restart, HTTP429/503, permanent401, invalid SSL certificate, foreign pagination URL and malformed JSON",
-    "canonical_original_real_trait": "27/27 PASS, including canonical gapfill->selection, mixed technical vs verified supply exceptions, invariant rejection, public checkpoint via mocked DB layer, fail-closed permanent errors, preserved error details on short archive",
-    "note": "PHP function tests are executed on original plugin traits with mock WordPress options, DB source and simulated eBay HTTP; they are NOT an authenticated WordPress/MariaDB/eBay provider end-to-end pass"
+    "original_red": {
+      "pass_lines": 0,
+      "final_line": "ORIGINAL 6.72.308 REPRODUCED RED: one SSL timeout + other profile successful => discovery partial/request_error PASS"
+    },
+    "worker": {
+      "pass_lines": 26,
+      "final_line": "ALL TESTS PASS\\n"
+    },
+    "canonical": {
+      "pass_lines": 28,
+      "final_line": "ALL CANONICAL TESTS PASS"
+    },
+    "admin_html": {
+      "pass_lines": 12,
+      "final_line": "DASHBOARD TESTS PASS"
+    }
   },
-  "release_gate": {
-    "installable_plugin": false,
-    "live_wordpress_test": "NOT EXECUTED",
-    "real_ebay_provider_test": "NOT EXECUTED",
-    "real_public_product_cards": "NOT EXECUTED",
-    "formal_github_release_guard": "BLOCKED — CURRENT_RELEASE.json still separately controls older 6.72.211",
-    "user_download": "DO NOT OFFER UNTIL APPROVAL GATES PASSED"
-  },
-  "source_scope": "PFERDEATELIER AFFILIATE ONLY, source patch stored for exact 6.72.308, canonical release source and plugins unchanged"
+  "tests_total": 66,
+  "original_red_reproduction": "PASS (separate original regression)",
+  "patch_path": "EBAY_672308_TO_672310_GESAMTURSACHENPATCH_NUR_TEST.patch",
+  "patch_sha256": "6daf1e4075f31571f32139190d5a3f665d25fe1420f9bef33cd01d99436b0f4c",
+  "patch_git_blob_sha": "1e5b3e639987db46ed96cef4157f4d6f20205a65",
+  "patch_replay": "PASS — 66/66 exact file byte matches against internal source",
+  "protected_frontend_and_catalog_source": "ALL 7 checked source files byte-identical to original 6.72.308",
+  "source_tree_deterministic_sha256": "f5d23977c958aef497be25d2f4ea0e84df81c51d1442fd6806ecef05b4c955e7",
+  "remaining_gates": [
+    "Actual WordPress+MariaDB installation and persisted checkpoint behavior",
+    "Actual authorized eBay API/provider responses",
+    "Real public category+article product cards",
+    "Formal single-source release guard"
+  ],
+  "release_allowed": false,
+  "installation_instruction": "NONE"
 }
