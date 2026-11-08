@@ -2042,3 +2042,12 @@ Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wa
 **AUTORITÄT / GRENZE:** Fachlich maßgeblich bleibt einzig `PROJEKTE/PFERDE_ATELIER/PLUGINS/CURRENT_STATE.md`, ein externer SEO-Owner, K0 unverändert. Binär-ZIP für PSTE .23 (SHA256 `dcf1f181d8b438f057476970237f888782312f60450f215e69713c203d0449b0`) und Paar mit unverändertem PSERC .55 in privater Library `/pferdeatelier/PLUGINS/`; GitHub QA-Quellcode-Patch, Testskript, Manifest und Beweise in `PROJEKTE/PFERDE_ATELIER/PLUGINS/QA_ONLY/PSTE_05714423_EXPORTFIX/`. **Kein Live-Deployment, keine echte WordPress-End-to-End-Abnahme, kein Merge.**
 
 **SICHERHEIT:** Unveränderte zentrale Hardlock-Regeln. Die für Änderungen am Gebäude-Einstieg verbindliche Protokollierung ist in `BAUCONTAINER/BAUPROTOKOLL.md` nachgetragen. Draft-PR #682, keine Fremdgebäude verändert.
+
+
+## 08.11.2026 – Pferdeatelier: v0.57.144.24 korrigiert v23-Exportabbruch bei Alt-„Array“-Titeln
+
+**WAS:** 0.57.144.23 hat auf dem echten WP-Testbestand beim ersten der neun alten unlesbaren Plan-Titel den gesamten Parkhaus-Export abgebrochen; dadurch wurden der aktuelle PSERC-Plan und 144 PPM679-Artikelplätze nicht mehr ausgegeben. Neue isolierte Testfassung **PSTE 0.57.144.24** ergänzt einen nur lesenden, fehlerverträglichen Planleser, der alle neun Originalzeilen samt noch gespeicherten Roh-Titelwerten erhält, ohne für die anderen Fachpfade die strenge Prüfung zu lockern. Fehlende Titel und 3 PPM679-Postverweise werden pro Zeile im Export sichtbar, aber `complete=false` verhindert weiter jede Freigabe. PSERC, K0, Live und alte Plugins unverändert.
+
+**WARUM:** Die früheren 36 Tests verwendeten fälschlich nur einen gültigen künstlichen Editorial-Plan-Eintrag. Der neue 46er-Test basiert auf den 1.179 echten exportierten Planzeilen und simuliert ausdrücklich alle neun unbrauchbaren Alt-Titel plus drei nicht im WP-Snapshot enthaltenen Post-IDs; alle sechs Quellen werden exportiert, ohne dass falsche Freigabe möglich ist. Positivfall mit künstlichen neun Titeln/drei Postwerten klar abgegrenzt; keine Produktionsfreigabe.
+
+**ABLAGE:** `PROJEKTE/PFERDE_ATELIER/PLUGINS/CURRENT_STATE.md`, `EVIDENCE/PSTE_05714424_1179_ECHTE_QUELLEN_46_LOKALTESTS_20261108.md`, `QA_ONLY/PSTE_05714424_QUELLFIX/`; echte ZIP-Binärdateien private Library `/pferdeatelier/PLUGINS/`. PR #682 bleibt Draft ohne Merge. Kein neuer Architektur- oder Sicherheitsmechanismus.
