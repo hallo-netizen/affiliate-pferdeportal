@@ -1,5 +1,5 @@
 {
-  "status": "LOCAL ORIGINAL PHP AND EXACT ZIP SOURCE QA PASS; LIVE WORDPRESS-MARIADB-EBAY E2E NOT DONE",
+  "status": "REVIEW CORRECTION APPLIED TO EXISTING TEXT PATCH ONLY; PATCH FORMAT VALID; LOCAL FOCUSED RULE CASES PASS; ORIGINAL ZIP REPLAY AND REAL WORDPRESS/EBAY E2E OPEN",
   "date": "2026-11-08",
   "version": "6.72.310 (internal work source ONLY, no ZIP issued)",
   "original_zip_file": "AFFILIATE_ZENTRALE_6.72.308_URSACHENFIX_GESAMTTEST_NUR_TEST.zip",
@@ -16,7 +16,32 @@
   ],
   "php_lint": "23/23 PASS",
   "json_parse": "3/3 PASS",
-  "tests": {
+  "tests_total": "NOT RERUN FOR THIS PATCH REVISION",
+  "original_red_reproduction": "PASS (separate original regression)",
+  "patch_path": "EBAY_672308_TO_672310_GESAMTURSACHENPATCH_NUR_TEST.patch",
+  "patch_sha256": "244ee098dda6eb4a8816fc889e9c3e93ff1e3f78e6e9798ecb0a3e771aa0f0bb",
+  "patch_git_blob_sha": "69e3c246bda8c7f45cfc0d52448d19973784ba4b",
+  "patch_replay": "PENDING — current conversation has neither physical original 6.72.308 ZIP nor source working tree; old 66/66 PASS applies to previous patch revision only",
+  "protected_frontend_and_catalog_source": "ALL 7 checked source files byte-identical to original 6.72.308",
+  "remaining_gates": [
+    "UPDATED PATCH original 6.72.308 complete ZIP replay + prior 82 full local tests (previous pass now stale for this revision)",
+    "Real authenticated WordPress+MariaDB source-row/checkpoint/plan/terminal archive test",
+    "Real eBay Browse timeout/recovery using authenticated provider and saved scope",
+    "Actual public category and article product cards in browser",
+    "Formal release_guard for canonical GitHub release (unchanged)"
+  ],
+  "release_allowed": false,
+  "installation_instruction": "NONE",
+  "newly_reproduced_public_checkpoint_root_risk": {
+    "original_method": "ebay_run_commit_public_checkpoint updates the old safe checkpoint with the new candidate, even when one verified eBay search profile is still technically open",
+    "proof_fixture": "Previous safe BUSINESS ID [42], candidate [], one eBay product family with exhausted cURL28 timeout; original public commit wrote [] and triggered article product rebuild",
+    "safety_guard": "In the EXISTING public_verify owner only: if a technical search remains open and publishing candidate would remove a prior safe BUSINESS campaign ID, do not replace the stored checkpoint; complete run with technical warning and checkpoint_deferred flag, archive it; full-success/no-withdrawal path unchanged",
+    "independent_public_updates": "When replacement would drop old safe items, new public checkpoint is deferred until next ordinary safe run; independent discovery and candidate checks still complete; this is a deliberate safety tradeoff, not a claim that every new card was published",
+    "freshness_limitation": "Old SAFE checkpoint remains the allowlist; it does NOT prove every old offer is still currently valid. Existing independent source freshness/content policy output checks must continue to reject stale/invalid offers; not re-approved here.",
+    "no_new_architecture": "No new storage table, worker, external request, cache or second correctness checker."
+  },
+  "prior_82_test_patch_sha256": "dc1566a802fa4ec4a3d595934ceb5620efd6d5b84fbb55ace2d7a3cc9d925d1f",
+  "prior_82_test_results": {
     "original_red": {
       "pass_lines": 0,
       "final_line": "ORIGINAL 6.72.308 REPRODUCED RED: one SSL timeout + other profile successful => discovery partial/request_error PASS"
@@ -38,28 +63,30 @@
       "final_line": "PUBLIC LAST-GOOD GATE TESTS PASS"
     }
   },
-  "tests_total": 82,
-  "original_red_reproduction": "PASS (separate original regression)",
-  "patch_path": "EBAY_672308_TO_672310_GESAMTURSACHENPATCH_NUR_TEST.patch",
-  "patch_sha256": "dc1566a802fa4ec4a3d595934ceb5620efd6d5b84fbb55ace2d7a3cc9d925d1f",
-  "patch_git_blob_sha": "6d507751430d73ac7e5997a89d4b2e9828683a4e",
-  "patch_replay": "PASS — 66/66 exact file byte matches against internal source",
-  "protected_frontend_and_catalog_source": "ALL 7 checked source files byte-identical to original 6.72.308",
-  "source_tree_deterministic_sha256": "73e3626320760c74fb80c4091446870b37dcfa89762066b43dec7835a5172f1a",
-  "remaining_gates": [
-    "Real authenticated WordPress+MariaDB test of source rows, existing public checkpoint, product-plan refresh and terminal archive",
-    "Real eBay Browse timeout/recovery with authenticated provider and actual saved scope",
-    "Actual public category and article product cards in browser",
-    "Formal release_guard for canonical GitHub release (unchanged)"
-  ],
-  "release_allowed": false,
-  "installation_instruction": "NONE",
-  "newly_reproduced_public_checkpoint_root_risk": {
-    "original_method": "ebay_run_commit_public_checkpoint updates the old safe checkpoint with the new candidate, even when one verified eBay search profile is still technically open",
-    "proof_fixture": "Previous safe BUSINESS ID [42], candidate [], one eBay product family with exhausted cURL28 timeout; original public commit wrote [] and triggered article product rebuild",
-    "safety_guard": "In the EXISTING public_verify owner only: if a technical search remains open and publishing candidate would remove a prior safe BUSINESS campaign ID, do not replace the stored checkpoint; complete run with technical warning and checkpoint_deferred flag, archive it; full-success/no-withdrawal path unchanged",
-    "independent_public_updates": "When replacement would drop old safe items, new public checkpoint is deferred until next ordinary safe run; independent discovery and candidate checks still complete; this is a deliberate safety tradeoff, not a claim that every new card was published",
-    "freshness_limitation": "Old SAFE checkpoint remains the allowlist; it does NOT prove every old offer is still currently valid. Existing independent source freshness/content policy output checks must continue to reject stale/invalid offers; not re-approved here.",
-    "no_new_architecture": "No new storage table, worker, external request, cache or second correctness checker."
+  "prior_tests_total": 82,
+  "source_tree_deterministic_sha256_pre_review": "73e3626320760c74fb80c4091446870b37dcfa89762066b43dec7835a5172f1a",
+  "post_review_20261108": {
+    "scope": "SINGLE ROOT RULE: missing historical success evidence must NEVER be interpreted as a full verified eBay run",
+    "proven_pre_fix_counterexample": "old archive entry {'status':'completed'} with no completed_with_skips key was incorrectly classified as FULL_SUCCESS",
+    "source_basis": "existing 6.72.310 patch has archived-run full-success predicate and an identical admin predicate; original archive hunk shows completion flags were previously not persisted",
+    "changes": "in-place edits to same text patch only: require completed_with_skips key in admin/history success predicates and green server UI, JS treats absent key as unverified, green completion notice requires explicit key",
+    "code_added_architecture": false,
+    "source_original_changed": false,
+    "new_worker_or_database": false,
+    "targeted_php_cases_pass": 5,
+    "targeted_js_cases_pass": 3,
+    "unified_diff_hunks_valid": 24,
+    "patch_format": "24/24 hunk counts OK; no hunk line count changes",
+    "test_boundary": "Focused predicates checked in isolation, not against physical original 6.72.308 or WordPress DB",
+    "latest_live_heartbeat": {
+      "date": "2026-11-08T05:48:24Z",
+      "github_run_id": 42452186827,
+      "github_job_id": 128643579940,
+      "wordpress_reported_status": "failed",
+      "github_transport_conclusion": "success",
+      "interpretation": "The external runner successfully transmitted a heartbeat, NOT an eBay successful import. It cannot establish live code version."
+    },
+    "exact_source_issue": "Physical original 6.72.308 ZIP not stored in release/affiliate-zentrale current or artifacts; previous GitHub office upload record explicitly states original ZIP is not on GitHub.",
+    "next_gate": "Re-run prior 82 tests and exact 66/66 original ZIP replay, then authenticated WordPress/MariaDB/eBay plus actual frontend product cards, before any release"
   }
 }
