@@ -1,0 +1,87 @@
+name: HD009 0.1.29 real article Amazon photo cards build and test
+on:
+  push:
+    branches: [hobbyroom/hd009-029-article-amazon-card-20261108]
+    paths:
+      - ops/hobby_hd009_029/build.py
+      - ops/hobby_hd009_029/test_php.py
+      - .github/workflows/hd009-029-build.yml
+permissions: {contents: write}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build exact existing plugin and validate every PHP file and ZIP entry
+        run: python3 ops/hobby_hd009_029/build.py
+      - name: Test actual WordPress PHP card methods, image rights and no-duplicate guards
+        run: python3 ops/hobby_hd009_029/test_php.py
+      - name: Install Chromium
+        run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - name: Check real Hobby article DOM with original new card CSS on desktop and mobile
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+          import json,urllib.parse
+          root=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          with ZipFile(root) as z:
+            css=z.read('affiliate-portal-router/assets/hdar-amazon-start.css').decode()
+          fake_cards=[{'id':22,'title':'Lenkdrachen Einsteiger','url':'https://www.hobby-depot.de/wp-content/uploads/2026/11/test-drache.jpg'},
+                      {'id':23,'title':'Drachenleine 25 Meter','url':'https://www.hobby-depot.de/wp-content/uploads/2026/11/test-leine.jpg'}]
+          # Synthetic cards use local SVG media placeholders only for CSS tests;
+          # they are never stored as Amazon product media.
+          svg='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect width="400" height="300" fill="%23e4eee9"/%3E%3C/svg%3E'
+          with sync_playwright() as p:
+            b=p.chromium.launch(headless=True,args=['--no-sandbox'])
+            for width in [1440,960,768,390,360]:
+              page=b.new_page(viewport={'width':width,'height':900})
+              response=page.goto('https://www.hobby-depot.de/designtest-zweileiner-oder-vierleiner-hobby-depot/',wait_until='domcontentloaded',timeout=35000)
+              assert response and response.status==200,(width,response)
+              page.wait_for_timeout(220)
+              page.evaluate("""({src})=>{
+                const target=document.querySelector('.hd-article-sidebar-v150804');
+                if(!target)throw Error('Hab article sidebar is missing');
+                const cards=document.createElement('section');
+                cards.className='hdar-amazon-article-products';
+                cards.setAttribute('aria-label','Passende Amazon-Produkte');
+                cards.innerHTML='<span class="hdar-amazon-label">Anzeige</span><h2>Passende Ausrüstung</h2><div class="hdar-amazon-article-grid">'+
+                  Array.from({length:2},(_,i)=>'<article class="ppar-affiliate-slot hdar-amazon-product hdar-amazon-photo-product"><a class="hdar-amazon-photo-link" href="https://www.amazon.de/dp/B01234567'+i+'?tag=example-21"><img src="'+src+'" alt="Testbild für Layout"></a><h3>Lenkdrachen Zubehör '+i+'</h3><a class="hdar-amazon-button" href="https://www.amazon.de/dp/B01234567'+i+'?tag=example-21">Bei Amazon ansehen</a></article>').join('')+'</div>';
+                target.prepend(cards);
+              }""",{'src':svg})
+              page.add_style_tag(content=css)
+              result=page.evaluate("""()=>{
+                const rect=(sel)=>{const r=document.querySelector(sel).getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height,right:r.right,bottom:r.bottom}};
+                const cards=[...document.querySelectorAll('.hdar-amazon-photo-product')];
+                const imgs=cards.map(n=>n.querySelector('img'));
+                return {viewport:innerWidth,bodyWidth:document.documentElement.scrollWidth,
+                  aside:rect('.hd-article-sidebar-v150804'),section:rect('.hdar-amazon-article-products'),
+                  cards:cards.map(c=>{const r=c.getBoundingClientRect();return{w:r.width,right:r.right,bottom:r.bottom}}),
+                  headings:cards.map(c=>getComputedStyle(c.querySelector('h3')).fontSize),
+                  images:imgs.map(i=>i.complete&&i.naturalWidth>0)};
+              }""")
+              assert result['bodyWidth']<=width+4,(width,result,'overflow')
+              assert all(result['images']),(width,result,'missing image')
+              assert all(x['w']>=100 and x['right']<=width+3 for x in result['cards']),(width,result,'card sizing')
+              assert result['section']['w']<=result['aside']['w']+2,(width,result,'sidebar overflow')
+              print("ARTICLE_AMAZON_CARD_LAYOUT_PASS",width,"cards",len(result['cards']),
+                    "widths",[round(x['w']) for x in result['cards']])
+              page.close()
+            b.close()
+          print('HD009_029_ARTICLE_DESKTOP_MOBILE_PASS')
+          PY
+      - name: Save both plugin ZIPs only after complete test approval
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/HOBBY_DEPOT_AFFILIATE_HD009_0.1.29.zip
+          if ! git diff --cached --quiet; then
+            git commit -m 'HD009 0.1.29: only approved Amazon article cards with owned/licensed photos'
+            git push origin HEAD:hobbyroom/hd009-029-article-amazon-card-20261108
+          else
+            echo 'ZIP_ALREADY_VALIDATED_SAVED'
+          fi
