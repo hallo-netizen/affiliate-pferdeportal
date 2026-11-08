@@ -1,0 +1,37 @@
+name: TEMP verify original PSERC WordPress plugin display name
+on:
+  push:
+    branches:
+      - fix/pste-kisten-einmalige-pruefung-20261107
+    paths:
+      - .github/workflows/tmp-pferdeatelier-verify-wp-plugin-header-20261108.yml
+permissions:
+  contents: read
+jobs:
+  read-original-zip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Print the actual Plugin Name header from the stored original PSERC package
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import zipfile,re
+          z='control/startmaster0107/runtime_packages/PSERC-FIX.zip'
+          with zipfile.ZipFile(z) as f:
+            assert f.testzip() is None
+            for p in f.namelist():
+              if p.lower().endswith('.php') and p.count('/')<4:
+                s=f.read(p).decode('utf-8','replace')[:8000]
+                m=re.search(r'(?im)^\s*\*?\s*Plugin Name:\s*(.+)\s*$',s)
+                if m:
+                  print('PSERC_ORIGINAL_ARCHIVE_PLUGIN_HEADER_FILE:',p)
+                  print('PSERC_ORIGINAL_WORDPRESS_PLUGIN_NAME:',m.group(1).strip())
+                  for field in ('Version','Description','Text Domain'):
+                    v=re.search(r'(?im)^\s*\*?\s*'+field+r':\s*(.+)\s*$',s)
+                    if v:print('PSERC_ORIGINAL_'+field.replace(' ','_').upper()+':',v.group(1).strip())
+                  break
+            else:
+              raise SystemExit('NO_PLUGIN_HEADER_IN_ARCHIVED_PSERC_ZIP')
+          PY
