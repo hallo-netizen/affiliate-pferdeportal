@@ -5,6 +5,7 @@ on:
     paths:
       - 'release/affiliate-zentrale/evidence/EBAY_672308_TO_672311_BUSINESS_ONLY_GESAMTURSACHENPATCH_NUR_TEST.patch'
       - '.github/workflows/ebay-business-only-hardlock-qa.yml'
+      - 'release/affiliate-zentrale/source-original/AFFILIATE_ZENTRALE_6.72.308_URSACHENFIX_GESAMTTEST_NUR_TEST.zip'
   workflow_dispatch:
 permissions:
   contents: read
@@ -884,3 +885,71 @@ jobs:
           php retire.php | tee retire.log
           test "$(grep -c '^PASS ' retire.log)" = 15
           grep -F 'EBAY_LEGACY_DRAFTS 15/15 PASS' retire.log
+
+      - name: Run the WHOLE 58-hunk patch on the verified 6.72.308 ZIP
+        id: original
+        shell: bash
+        run: |
+          set -euo pipefail
+          ORIGINAL="release/affiliate-zentrale/source-original/AFFILIATE_ZENTRALE_6.72.308_URSACHENFIX_GESAMTTEST_NUR_TEST.zip"
+          PATCH="release/affiliate-zentrale/evidence/EBAY_672308_TO_672311_BUSINESS_ONLY_GESAMTURSACHENPATCH_NUR_TEST.patch"
+          EXPECTED="b4d8547fd2aa134f7f82f568db3a81df54bb7d2131fd0752e76e3f0ca2251fe0"
+          if [ ! -f "$ORIGINAL" ]; then
+            echo "::notice title=Verified original required::The original 6.72.308 was genuinely uploaded and verified in a prior chat, but is NOT committed at $ORIGINAL in this checkout. No whole-plugin test or installer claim."
+            echo "original_sha_verified=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          test "$(sha256sum "$ORIGINAL" | cut -d' ' -f1)" = "$EXPECTED" || { echo "::error::Original ZIP SHA256 MISMATCH. Refusing any patch."; exit 1; }
+          unzip -t "$ORIGINAL" > /tmp/ebay-original-integrity.txt
+          test "$(unzip -Z1 "$ORIGINAL" | grep -cv '/$')" -eq 66 || { echo "::error::Original ZIP must have 66 files."; exit 1; }
+          TMP="$(mktemp -d)"
+          unzip -q "$ORIGINAL" -d "$TMP"
+          ROOT="$TMP/affiliate-portal-router"
+          test -f "$ROOT/pferdeportal-affiliate-router.php" || { echo "::error::Original ZIP plugin root mismatch";exit 1; }
+          grep -Eq '^[[:space:]]*\* Version:[[:space:]]*6\.72\.308' "$ROOT/pferdeportal-affiliate-router.php" || { echo "::error::Original plugin is not 6.72.308";exit 1; }
+          test "$(find "$ROOT" -type f -name '*.php' | wc -l)" -eq 23 || { echo "::error::Original must have 23 PHP files";exit 1; }
+          test "$(find "$ROOT" -type f -name '*.json' | wc -l)" -eq 3 || { echo "::error::Original must have 3 JSON files";exit 1; }
+          cp "$PATCH" "$TMP/full.patch"
+          (cd "$TMP" && git apply --check --verbose full.patch) || { echo "::error::Real 6.72.308 source mismatch: review exact failing hunk, no partial patch/no ZIP";exit 1; }
+          (cd "$TMP" && git apply full.patch)
+          test "$(find "$ROOT" -type f -name '*.php' | wc -l)" -eq 23
+          find "$ROOT" -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee "$TMP/php-syntax.log"
+          test "$(grep -c '^No syntax errors detected' "$TMP/php-syntax.log")" -eq 23 || { echo "::error::Whole original plugin PHP syntax failed";exit 1; }
+          grep -Eq '^[[:space:]]*\* Version:[[:space:]]*6\.72\.311' "$ROOT/pferdeportal-affiliate-router.php" || { echo "::error::Patched plugin version incorrect";exit 1; }
+          test "$(grep -c '^@@ -' "$PATCH")" -eq 58 || { echo "::error::Whole patch must contain exactly 58 hunks";exit 1; }
+          python3 - "$ROOT" <<'PY'
+          from pathlib import Path
+          import sys
+          root=Path(sys.argv[1])
+          trait=(root/'includes/trait-ppar-ebay.php').read_text()
+          run=(root/'includes/trait-ppar-ebay-run.php').read_text()
+          main=(root/'pferdeportal-affiliate-router.php').read_text()
+          checks={
+           'BUSINESS-only route enforced': "'private_enabled' => false" in trait and "$out['private_enabled'] = false" in trait,
+           'Private HivePress admin controls removed': 'name="ppar_ebay[private_enabled]"' not in trait,
+           'Private HivePress hooks removed': "add_action('hivepress/v1/models/listing/query'" not in main,
+           'Original native HivePress remains untouched': "add_filter('the_posts', array($this, 'ebay_filter_stale_posts')" in main,
+           'Old eBay listing draft migration inside existing worker': 'function ebay_run_retire_private_legacy_listings_tick' in run,
+           'Final public offer source refreshed by canonical worker': 'function ebay_run_public_source_refresh_tick' in run,
+           'No new PHP source files': len(list(root.rglob('*.php')))==23,
+          }
+          for name,passed in checks.items():
+            print(('PASS ' if passed else 'FAIL ')+name)
+          assert all(checks.values()), 'Whole original plugin invariant failed'
+          PY
+          BUILD="/tmp/AFFILIATE_ZENTRALE_6.72.311_GESAMTPATCH_ORIGINALQUELLE_NUR_TEST.zip"
+          (cd "$TMP" && zip -q -r "$BUILD" affiliate-portal-router)
+          unzip -t "$BUILD" >/tmp/ebay-6.72.311-build-integrity.txt
+          sha256sum "$ORIGINAL" "$BUILD" | tee /tmp/ebay-original-and-test-build-hashes.txt
+          echo "original_sha_verified=true" >> "$GITHUB_OUTPUT"
+          echo "build_path=$BUILD" >> "$GITHUB_OUTPUT"
+          echo "::notice title=Exact original source PASS::6.72.308 original verified, all 58 hunks applied, 23 PHP syntax checks pass, TEST-ONLY ZIP built. Real WordPress/eBay E2E is still required before installation."
+      - uses: actions/upload-artifact@v4
+        if: steps.original.outputs.original_sha_verified == 'true'
+        with:
+          name: EBAY_6.72.311_ORIGINAL_58_HUNKS_NUR_TEST_KEINE_INSTALLATIONSFREIGABE
+          path: |
+            /tmp/AFFILIATE_ZENTRALE_6.72.311_GESAMTPATCH_ORIGINALQUELLE_NUR_TEST.zip
+            /tmp/ebay-original-and-test-build-hashes.txt
+          if-no-files-found: error
+          retention-days: 7
