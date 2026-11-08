@@ -5,26 +5,24 @@
   "candidate": "6.72.311 – BUSINESS ONLY – TEST-ONLY NOT INSTALLED",
   "supersedes": "6.72.310 old PRIVATE-route candidate: obsolete, do not install.",
   "patch_path": "release/affiliate-zentrale/evidence/EBAY_672308_TO_672311_BUSINESS_ONLY_GESAMTURSACHENPATCH_NUR_TEST.patch",
-  "patch_blob_sha": "cc1fef7ee02c5bd6d561d5c22d4b0838d2d4effd",
+  "patch_blob_sha": "0259a400f5d79f8b09f93fee2c797cd00c3d2a34",
   "changed_php_or_readme_files": 5,
-  "combined_source_hunks": 40,
-  "private_hardlock_hunks": 12,
+  "combined_source_hunks": 45,
+  "private_hardlock_hunks": 17,
   "passed_tests": {
-    "tested_in": "GitHub Actions run 42489448439",
-    "url": "https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/42489448439",
-    "result": "17/17 executed PHP checks PASS on older available reference traits, plus 12 hardlock hunks matched to this single 6.72.311 patch",
+    "tested_in": "GitHub Actions run 42496032110",
+    "url": "https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/42496032110",
+    "result": "56/56 executed PHP reference checks PASS (19 business route/native HivePress + 16 discovery/technical gap + 8 legacy active-run phase transitions + 13 BUSINESS product-card delivery); PHP syntax PASS. Selected 22 cumulative patch hunks replayed onto old reference source; NOT an exact 6.72.308 full replay.",
     "verifies": [
-      "PRIVATE cannot be turned back on by stored settings",
-      "PRIVATE cannot be selected even from raw legacy settings",
-      "PRIVATE is absent from inventory refresh SQL",
-      "PRIVATE listing IDs never enter new public checkpoints",
-      "old PRIVATE checkpoint IDs are not publishable",
-      "private HivePress eBay route is blocked at custom public listing gate",
-      "BUSINESS route remains selected, refreshable, publishable",
-      "old in-flight run seller snapshot cannot select private after upgrade"
+      "PRIVATE disabled in defaults, normalized and old raw settings; old private checkpoints never publish",
+      "old active ALL/PRIVATE selection and gapfill rejected before processing; legacy private cleanup skipped, business cleanup stays business-only",
+      "transient timeout, permanent error and mixed incomplete profiles are differentiated; missing products not fabricated as empty supply",
+      "valid business product card allowed only with fresh saved source, matching contract, active route, policy and public checkpoint",
+      "stale, ended, blocked, unsourced/unmarked and unapproved products cannot render",
+      "other independent provider and native HivePress listings remain unaffected"
     ]
   },
-  "live_status": "NOT DEPLOYED: installed WordPress status not changed; no full real eBay Browse/getItem/WordPress E2E proof in this turn.",
-  "required_for_release": "Full patch replay on exact 6.72.308 installed source ZIP, complete test suite, WordPress database and live eBay end-to-end, actual rendered business product cards, no private eBay output. Never substitute older reference source for exact installed plugin.",
+  "live_status": "NOT DEPLOYED. All 56 checks on older reference PHP with selected 6.72.311 hunks, not whole actual 6.72.308 original or WordPress+MariaDB+eBay live E2E.",
+  "required_for_release": "Exact original 6.72.308 upload is historically verified (not to be questioned); obtain current readable bytes from Campus/plugin archive, apply all 45 hunks and run full WP MariaDB eBay browse/getItem and actual HTML product card + retired old native eBay listing checks before release.",
   "release_allowed": false
 }
