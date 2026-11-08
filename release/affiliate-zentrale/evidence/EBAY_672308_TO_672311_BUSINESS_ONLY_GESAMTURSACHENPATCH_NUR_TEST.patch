@@ -154,7 +154,47 @@ index e5c1169..8e0566b 100644
 +        $private = false; // BUSINESS-only, also for prior run snapshots.
          $business = !empty($routes['business']);
          return $private && $business ? 'all' : ($private ? 'private' : ($business ? 'business' : ''));
-@@ -1089,7 +1122,19 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1041,6 +1041,37 @@ EBAY_PRIVATE_LEGACY_RETIRE_ON_CANONICAL_WORKER
+     }
+ 
+-    private function ebay_run_tick_reconcile($run, $settings) {
+-        $stats=$this->run_ebay_maintenance_v2(250,false,8,true);
++    /**
++     * Retire only eBay-owned old PRIVATE posts, never ordinary HivePress listings.
++     * Use the existing canonical worker: small batches, no frontend writes,
++     * no new table/cron/worker, no deletion and no extra publication rules.
++     */
++    private function ebay_run_retire_private_legacy_listings_tick() {
++        if(!function_exists('get_posts')||!function_exists('wp_update_post')||!function_exists('get_post_meta')){
++            $this->ebay_run_fail('private_legacy_retirement_wp_missing','WordPress-Listingfunktionen nicht verfügbar.');return false;
++        }
++        $ids=get_posts(array('post_type'=>'hp_listing','post_status'=>'publish','fields'=>'ids',
++            'posts_per_page'=>25,'suppress_filters'=>true,'no_found_rows'=>true,
++            'meta_query'=>array(array('key'=>'_ppar_ebay_item_id','value'=>'','compare'=>'!='))));
++        if(!is_array($ids)){$this->ebay_run_fail('private_legacy_retirement_query_failed','eBay-Altanzeigen konnten nicht gelesen werden.');return false;}
++        foreach($ids as $raw_id){
++            $id=absint($raw_id);
++            if($id<=0||trim((string)get_post_meta($id,'_ppar_ebay_item_id',true))===''){continue;}
++            $result=wp_update_post(array('ID'=>$id,'post_status'=>'draft'),true);
++            if(is_wp_error($result)||absint($result)!==$id){
++                $this->ebay_run_fail('private_legacy_retirement_write_failed','eBay-Altanzeige konnte nicht sicher auf Entwurf gesetzt werden.',array('post_id'=>$id));return false;
++            }
++        }
++        if($ids){
++            $current=$this->ebay_run_load();
++            $current['progress_seq']=absint($current['progress_seq']??0)+1;
++            $current['last_progress_at']=time();$current['no_progress_count']=0;
++            $this->ebay_run_save($current);
++        }
++        return count($ids)<25;
++    }
++
++    private function ebay_run_tick_reconcile($run, $settings) {
++        if(!$this->ebay_run_retire_private_legacy_listings_tick()){return;}
++        $stats=$this->run_ebay_maintenance_v2(250,false,8,true);
+         if (is_wp_error($stats)) { $this->ebay_run_fail($stats->get_error_code(),$stats->get_error_message()); return; }
+         $this->ebay_run_capture_component_state(null,array('maintenance'));
+@@ -1089,7 +1153,19 @@ trait PPAR_Ebay_Run_Trait {
      private function ebay_run_complete($manifest = array()) {
          $run=$this->ebay_run_load();
          $run['status']='completed';$run['phase']='completed';$run['finished_at']=time();$run['resume_reason']='';$run['resume_at']=0;
@@ -175,7 +215,7 @@ index e5c1169..8e0566b 100644
          $checkpoint=$this->ebay_public_checkpoint_load();
          if($this->ebay_public_checkpoint_is_safe($checkpoint)){
              $run['checkpoint_id']=sanitize_text_field((string)($checkpoint['checkpoint_id']??''));
-@@ -1114,6 +1114,11 @@ LEGACY_RUN_GUARD selection
+@@ -1114,6 +1145,11 @@ LEGACY_RUN_GUARD selection
          if($scope===''){$this->ebay_run_fail('selection_scope_empty','Der beim Runstart gespeicherte Seller-Routen-Snapshot enthält keine aktive Route.');return;}
          $canonical_phase=sanitize_key((string)($run['phase']??''));
 -        $selection=$this->ebay_selection_state_load();
@@ -189,7 +229,7 @@ index e5c1169..8e0566b 100644
 +        if(!$this->ebay_selection_state_is_open($selection) && sanitize_key((string)($selection['status']??''))!=='complete'){
              $selection=$this->ebay_selection_request('canonical_run','run:'.sanitize_text_field((string)$run['run_uuid']),true,$scope);
              $this->ebay_run_capture_component_state(null,array('selection'));
-@@ -1211,7 +1256,7 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1211,7 +1287,7 @@ trait PPAR_Ebay_Run_Trait {
                      $reason=sanitize_key((string)($job['summary']['budget']['stopped_reason']??'discovery_partial_unresumable'));
                      $this->ebay_run_fail('discovery_partial_unresumable','Discovery endete in einem nicht fortsetzbaren PARTIAL-Zustand.',array('stopped_reason'=>$reason,'scope'=>sanitize_key((string)($job['scope']??''))));return;
                  }
@@ -198,7 +238,7 @@ index e5c1169..8e0566b 100644
                  $start=$this->ebay_start_sync_job(false,'all','background');
                  if (is_wp_error($start)) {$this->ebay_run_fail($start->get_error_code(),$start->get_error_message());return;}
              }
-@@ -1225,8 +1270,14 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1225,8 +1301,14 @@ trait PPAR_Ebay_Run_Trait {
                  $msg=sanitize_text_field((string)($last['error']??$job['failure_reason']??'eBay-Discovery ist fehlgeschlagen.'));
                  $this->ebay_run_fail($code!==''?$code:'discovery_failed',$msg);return;
              }
@@ -215,14 +255,14 @@ index e5c1169..8e0566b 100644
              }
              return;
          }
-@@ -1238,5 +1289,5 @@ BUSINESS_ONLY
+@@ -1238,5 +1320,5 @@ BUSINESS_ONLY
  
      private function ebay_run_verify_private_public($settings, $allowed_listing_ids = null) {
 -        if(empty($settings['private_enabled'])){return array('status'=>'disabled','public'=>0,'invalid'=>array());}
 +        return array('status'=>'disabled','public'=>0,'invalid'=>array()); // Private seller route retired.
          global $wpdb;$invalid=array();$public=0;$cap=min(250,max(1,absint($settings['private_active_cap']??250)));
          $allowed_map=is_array($allowed_listing_ids)?array_fill_keys(array_values(array_filter(array_map('absint',$allowed_listing_ids))),true):null;
-@@ -1599,6 +1650,25 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1599,6 +1681,25 @@ trait PPAR_Ebay_Run_Trait {
       * safely selected candidate exists but public coverage is still missing, the
       * state is an invariant/materialization failure and remains fail-closed.
       */
@@ -248,7 +288,7 @@ index e5c1169..8e0566b 100644
      private function ebay_run_business_safe_supply_gap_contract($run, $coverage) {
          $run=is_array($run)?$run:array();$coverage=is_array($coverage)?$coverage:array();
          $missing=array_values(array_unique(array_filter(array_map('sanitize_key',(array)($coverage['missing']??array())))));
-@@ -1653,6 +1653,9 @@ LEGACY_RUN_GUARD gapfill_selection
+@@ -1653,6 +1684,9 @@ LEGACY_RUN_GUARD gapfill_selection
  
      private function ebay_run_tick_gapfill_select($run, $settings) {
 -        $selection=$this->ebay_selection_state_load();
@@ -260,7 +300,7 @@ index e5c1169..8e0566b 100644
 +        $expected_owner='run:'.sanitize_text_field((string)$run['run_uuid']);
          $selection_status=sanitize_key((string)($selection['status']??''));
          $is_expected_terminal=$selection_status==='complete'
-@@ -1665,14 +1735,34 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1665,14 +1766,34 @@ trait PPAR_Ebay_Run_Trait {
              );
          }
  
@@ -301,7 +341,7 @@ index e5c1169..8e0566b 100644
          $coverage['open_gap_count']=count($missing);
          $coverage['open_gaps']=$missing;
          $coverage['exceptions']=$exceptions;
-@@ -1722,6 +1722,5 @@ LEGACY_RUN_GUARD public_commit
+@@ -1722,6 +1753,5 @@ LEGACY_RUN_GUARD public_commit
          $routes=is_array($current['config_snapshot']['seller_routes']??null)?$current['config_snapshot']['seller_routes']:array();
          if(!empty($routes['business'])){$current['phase']='checkpoint_cleanup_business';$current['resume_reason']='checkpoint_committed';}
 -        elseif(!empty($routes['private'])){$current['phase']='checkpoint_cleanup_private';$current['resume_reason']='checkpoint_committed';}
@@ -309,7 +349,7 @@ index e5c1169..8e0566b 100644
 +        else{$this->ebay_run_complete($manifest);return;} // No PRIVATE cleanup on legacy snapshots.
          $current['progress_seq']=absint($current['progress_seq']??0)+1;$current['last_progress_at']=time();$current['no_progress_count']=0;
          $this->ebay_run_save($current);
-@@ -1759,6 +1759,5 @@ LEGACY_RUN_GUARD business_cleanup
+@@ -1759,6 +1790,5 @@ LEGACY_RUN_GUARD business_cleanup
              if(!empty($plan['checkpoint_business_cleanup_done'])){
                  $routes=is_array($current['config_snapshot']['seller_routes']??null)?$current['config_snapshot']['seller_routes']:array();
 -                if(!empty($routes['private'])){$this->ebay_run_set_phase('checkpoint_cleanup_private','checkpoint_committed');}
@@ -317,7 +357,7 @@ index e5c1169..8e0566b 100644
 +                $this->ebay_run_complete((array)($current['checkpoint_verified_manifest']??array())); // BUSINESS-only.
              }
              return;
-@@ -1765,12 +1765,8 @@ LEGACY_RUN_GUARD private_cleanup
+@@ -1765,12 +1796,8 @@ LEGACY_RUN_GUARD private_cleanup
          }
 -        if($route==='private'){
 -            if(empty($plan['checkpoint_private_cleanup_initialized'])){$plan['private_post_cursor']=0;$plan['checkpoint_private_cleanup_initialized']=1;unset($plan['checkpoint_private_cleanup_done']);}
@@ -335,7 +375,7 @@ index e5c1169..8e0566b 100644
 +        }
          $this->ebay_run_fail('checkpoint_cleanup_route_invalid','Ungültige Checkpoint-Bereinigungsphase.');
      }
-@@ -1818,7 +1908,7 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1818,7 +1939,7 @@ trait PPAR_Ebay_Run_Trait {
          $job=$this->ebay_sync_job_load();
          // A completed full-discovery substate must not suppress the one targeted
          // recovery pass. Reset only the nested discovery phase state, never the run.
@@ -344,7 +384,7 @@ index e5c1169..8e0566b 100644
          $status=sanitize_key((string)($job['status']??''));
          if($status==='partial'){
              if($this->ebay_sync_job_is_resumable_partial($job) && sanitize_key((string)($job['scope']??''))==='business_recovery'){
-@@ -1829,16 +1919,20 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1829,16 +1950,20 @@ trait PPAR_Ebay_Run_Trait {
                  $reason=sanitize_key((string)($job['summary']['budget']['stopped_reason']??'gapfill_partial_unresumable'));
                  $this->ebay_run_fail('gapfill_partial_unresumable','BUSINESS-Gap-Fill endete in einem nicht fortsetzbaren PARTIAL-Zustand.',array('stopped_reason'=>$reason,'scope'=>sanitize_key((string)($job['scope']??''))));return;
              }
@@ -370,7 +410,7 @@ index e5c1169..8e0566b 100644
          }
      }
  
-@@ -1879,6 +1973,134 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1879,6 +2004,134 @@ trait PPAR_Ebay_Run_Trait {
          }
      }
  
@@ -505,7 +545,7 @@ index e5c1169..8e0566b 100644
          $candidate=is_array($run['checkpoint_candidate']??null)?$run['checkpoint_candidate']:array();
 +        if(!$this->ebay_run_public_source_refresh_tick($run,$settings)){return;}
          $business=empty($settings['business_enabled'])?array('required'=>0,'covered'=>0,'missing'=>array(),'counts'=>array()):$this->ebay_run_public_business_coverage((array)($candidate['business_campaign_ids']??array()));
-@@ -1916,6 +2138,40 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1916,6 +2169,40 @@ trait PPAR_Ebay_Run_Trait {
          // The one-row checkpoint write is the public visibility commit. Until
          // this exact point the frontend continues to serve the previous safe set.
          $current=$this->ebay_run_load();
