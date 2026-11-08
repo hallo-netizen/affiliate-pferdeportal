@@ -1,0 +1,43 @@
+name: Hobby Depot HD003 1.50.803 read-only category photo trace
+on:
+  push:
+    branches:
+      - hobbyroom/hd003-150803-frontend-masterfix-20261108
+    paths:
+      - .github/workflows/hobby-hd003-150803-audit.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  trace:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read and inspect exact 1.50.803 without changing it
+        run: |
+          python3 - <<'PY'
+          import pathlib,zipfile,hashlib,re
+          base=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT')
+          path=base/'HOBBY_DEPOT_DESIGN_HD003_1.50.803.zip'
+          a=path.read_bytes();print('SOURCE_BYTES',len(a));print('SOURCE_SHA256',hashlib.sha256(a).hexdigest())
+          print('CURRENT_BYTEIDENTICAL',a==(base/'CURRENT.zip').read_bytes())
+          with zipfile.ZipFile(path) as z:
+            print('ZIP_COUNT',len(z.namelist()),'ZIP_TEST',z.testzip())
+            for file in z.namelist():
+              if not file.endswith('.php'): continue
+              code=z.read(file).decode('utf8','replace')
+              print('PHP',file, len(code), 'thumbnail_id=',code.count('thumbnail_id'))
+              if not ('class-hobby-depot-profile' in file or file.endswith('pferde-template-kit.php')):continue
+              lines=code.splitlines()
+              patterns=[r'function render_category_level_term_cards_v150687',r'function (?:render_|.*)categor',r'leaf_category_icon_svg_v150687',r'wp_get_attachment_image',r'get_term_meta',r'get_queried_object',r'is_category\(',r'is_tax\(',r'drache',r'thumbnail_id',r'1.50.803',r'const RELEASE',r'const VERSION']
+              positions=set()
+              for i,l in enumerate(lines):
+                if any(re.search(p,l,re.I) for p in patterns):
+                  if ('class-hobby-depot-profile' in file or re.search('Version|thumbnail_id|image|term',l,re.I)):
+                    positions.update(range(max(0,i-4),min(len(lines),i+10)))
+              prev=-2;shown=0
+              for n in sorted(positions):
+                if shown>500:break
+                if n>prev+1: print('---')
+                print(f'{n+1:4d}: {lines[n][:470]}');prev=n;shown+=1
+          PY
