@@ -3,9 +3,27 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-11-08
-STATUS: **HD-006 2.8.10 VOLLSTÄNDIG LOKAL GEPRÜFT; WORDPRESS-LIVEABNAHME OFFEN; ZIP IN CHAT GEPRÜFT, NOCH NICHT IM GITHUB-PLUGINBÜRO GESICHERT.**
+STATUS: **2.8.11 FERTIG, ZIP- & LOKALE POSITIV-/NEGATIVTESTS BESTANDEN; WORDPRESS-LIVE- UND MAGNIFIC-BILDTEST OFFEN.**
 
-Plugin-ID: `HD-006-BILDZENTRALE`
+## Aktuelle vollständige Installationsdatei – 2.8.11
+
+`Bildzentrale-2.8.11.zip` – **84.425 Bytes**, SHA-256 `e13f79ee28d8996458f452de55973f0f75c05f2b09153b935caa3cee1af1f952`. Zwei vollständige PHP-Dateien, ZIP/PHP-Syntax PASS. **ZIP und Prüfbelege dauerhaft in der persönlichen Library** unter `/Hobby Depot/Plugin-Büro/` gespeichert. Keine Behauptung, dass die binäre ZIP bereits im GitHub-Repository liegt.
+
+**Pflichtvertrag:** [BILDZENTRALE_2.8.11_PRUEFVERTRAG_20261108.md](./BILDZENTRALE_2.8.11_PRUEFVERTRAG_20261108.md)
+
+- Erstellungsplugin = **Bildzentrale**; separates Zuordnungsplugin = **Bilder zuordnen**. Unterschiedliche URLs und Click-Callbacks.
+- Manuell formulierter Motivwunsch hat **Vorrang vor Alttexten/Fotomotiven**; „Freunde beim 3D Bogenschiessen. kein tier!“ wurde mit hartem Tier-/Wildschwein-/Jagd-Ausschluss an den simulierten Magnific-POST geprüft. Jede geänderte Eingabe ergibt eine andere vollständige Prompt-Anfrage.
+- Echte freigegebene `FINAL_MASTER_VERIFIED`/DONE-Originale des **HD-007 1.2.21** werden nur bei identischer Bildquelle als **„Bild passt“** erkannt. Beispiel **Airbrush-Modellbau**. Andere vorhandene Fotos werden NICHT pauschal freigegeben; sie bleiben **„Noch nicht geprüft“**, bis beurteilt.
+- **Batik:** Die eigene Batik-Kategorieseite verwendet einen anderen Hero-Bildpfad als das Hobbyregister. Bildzentrale zeigt das tatsächlich im Hobbyregister verwendete Foto; sie darf die beiden Quellen nicht ohne Bestätigung gleichsetzen. Abgleich mit dem Live-Hero ist noch offen. Designplugin ausdrücklich unverändert.
+- Ausdrückliche Bildübernahme, Erhalt vorhandener Bilder, Foto-für-Foto-Bewertungen und Bearbeitung bereits freigegebener Master weiterhin bindend.
+- **Frisch wiederholt:** 86/86 Backend, 27/27 Menüs, 31/31 Chromium-Klicktests PASS. Die Tests verwenden simulierte WordPress-/Magnific-Aufrufe, **keinen echten kostenpflichtigen Serverlauf**.
+- `2.8.10` sowie ältere Installationshinweise sind **historisch**, nicht mehr Current.
+
+**Exakt nächster Schritt:** 2.8.11 in WordPress installieren, ohne HD003/HD007 zu ersetzen, und EINEN Hobbyregister-Bildauftrag mit abweichendem Motivwunsch einschließlich Ergebnisübernahme auf der echten Site kontrollieren. Erst danach Live-PASS.
+
+---
+
+## Älterer Stand 2.8.10 – nur Archiv / kein aktueller Installer
 
 ## AKTUELLER LOKALER INSTALLATIONSKANDIDAT: 2.8.10
 
