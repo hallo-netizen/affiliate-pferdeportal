@@ -154,10 +154,14 @@ def check_full_export(payload):
         if source in ("WORDPRESS", "PSTE_PLAN", "PSERC_ACTIVE_PLAN", "MINI_RESERVED") and data.get("complete") is not True:
             errors.append("INCOMPLETE_SOURCE_" + source)
         if source == "PPM679_EXISTING_EDITORIAL_RUNTIME":
-            # The user already has a saved runtime editorial plan. A test site
-            # without that source is NOT a faithful test of the real workflow.
+            # The actual saved plan must not silently be treated as absent
+            # OR as an empty newly initialized test plan.
             if data.get("complete") is not True or data.get("status") != "PRESENT":
                 errors.append("SAVED_EDITORIAL_PLAN_NOT_VERIFIED_PRESENT")
+            if not isinstance(data.get("item_count"),int) or data["item_count"] <= 0:
+                errors.append("SAVED_EDITORIAL_PLAN_EMPTY_NOT_THE_EXISTING_PLAN")
+        if source == "WORDPRESS" and (not isinstance(data.get("item_count"),int) or data["item_count"] <= 0):
+            errors.append("WP_EMPTY_ARTICLE_INVENTORY_CANNOT_PROVE_COVERAGE")
         quantity = data.get("item_count")
         actual = sum(1 for item in items if isinstance(item, dict) and item.get("source") == source)
         if not isinstance(quantity, int) or quantity != actual:
@@ -345,6 +349,14 @@ def run_io_selftest(original_100_path):
     missing = dict(export,parkhaus_snapshot=dict(export["parkhaus_snapshot"],
         sources={**sources, "PPM679_EXISTING_EDITORIAL_RUNTIME":dict(complete=True,status="NOT_PRESENT",item_count=1)}))
     failures.append(any("SAVED_EDITORIAL_PLAN_NOT_VERIFIED_PRESENT" in e for e in check_full_export(missing)))
+    empty_saved = json.loads(json.dumps(export))
+    empty_saved["parkhaus_snapshot"]["sources"]["PPM679_EXISTING_EDITORIAL_RUNTIME"]["item_count"] = 0
+    empty_saved["parkhaus_snapshot"]["items"] = [
+        row for row in empty_saved["parkhaus_snapshot"]["items"]
+        if row.get("source") != "PPM679_EXISTING_EDITORIAL_RUNTIME"
+    ]
+    failures.append(any("SAVED_EDITORIAL_PLAN_EMPTY_NOT_THE_EXISTING_PLAN" in e
+                        for e in check_full_export(empty_saved)))
     malformed = dict(reply,items=verdicts[:-1])
     failures.append(any("INCOMPLETE" in e for e in check_real_owner_reply(export,malformed,original)))
     forged = json.loads(json.dumps(reply))
@@ -361,7 +373,7 @@ def run_io_selftest(original_100_path):
     broken_source["items"][0]["source_sha256"] = "0"*64
     failures.append(any("SOURCE_BINDING_CHANGED" in e for e in check_real_owner_reply(export,broken_source,original)))
     assert all(failures), ["negative case not rejected", failures]
-    print("PASS REAL-EXPORT PREFLIGHT SELFTEST: complete existing sources + source keys + 7 targeted negative cases")
+    print("PASS REAL-EXPORT PREFLIGHT SELFTEST: complete existing sources + source keys + 8 targeted negative cases")
     print("MOCK DATA ONLY: no WordPress access, no external SEO verdict, no K0 claim")
 
 if __name__ == "__main__":
