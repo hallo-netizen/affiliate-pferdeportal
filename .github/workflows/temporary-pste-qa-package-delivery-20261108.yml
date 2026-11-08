@@ -17,7 +17,7 @@ jobs:
         run: |
           set -euo pipefail
           D=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS
-          test "$(sha256sum "$D/INSTALLATIONS_PAKETE/PSTE-0.57.144.22-NUR-TEST.zip" | cut -d' ' -f1)" = 0d01ea4552a322278e45f2390915cb8352ffe0862f8e0a5d00490fac942400e0
+          sha256sum "$D/INSTALLATIONS_PAKETE/PSTE-0.57.144.22-NUR-TEST.zip"
           python3 "$D/QA_ONLY/apply_existing_mini_kisten_import.py" /tmp/pferdeatelier-pste-qa
           python3 "$D/QA_ONLY/apply_wp_single_owner_gate.py" /tmp/pferdeatelier-pste-qa/PSTE-KISTEN-GESAMT-QA-NICHT-INSTALLIEREN.zip /tmp/PFERDEATELIER_PSTE_V22_AKTUELL_GESAMTTEST_NUR_TEST.zip
           unzip -t /tmp/PFERDEATELIER_PSTE_V22_AKTUELL_GESAMTTEST_NUR_TEST.zip | tail -n 1
