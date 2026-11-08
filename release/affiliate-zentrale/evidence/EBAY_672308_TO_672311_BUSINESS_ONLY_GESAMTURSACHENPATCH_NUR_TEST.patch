@@ -317,8 +317,7 @@ index e5c1169..8e0566b 100644
 +                $this->ebay_run_complete((array)($current['checkpoint_verified_manifest']??array())); // BUSINESS-only.
              }
              return;
-@@ -1764,13 +1764,9 @@ LEGACY_RUN_GUARD private_cleanup
-             return;
+@@ -1765,12 +1765,8 @@ LEGACY_RUN_GUARD private_cleanup
          }
 -        if($route==='private'){
 -            if(empty($plan['checkpoint_private_cleanup_initialized'])){$plan['private_post_cursor']=0;$plan['checkpoint_private_cleanup_initialized']=1;unset($plan['checkpoint_private_cleanup_done']);}
