@@ -38,6 +38,7 @@ Jede klare natürliche Formulierung wie:
 - „geh auf den Campus“
 - „geh ins Pferde-Atelier“
 - „geh zu Hobby Depot“
+- „geh zu Robotik, Büro Kategorie“
 - „geh zu Hobby Depot PLUGINS“
 - „geh zu Hobby Depot WORDPRESS_TECHNIK“
 - „geh ins Pferde-Atelier TEXT/SEO“
@@ -94,6 +95,7 @@ Projektgebäude:
 - `PROJEKTE/HOBBYRAUSCH/` → Hobby Depot
 - `PROJEKTE/EIGENTUMSSCHUTZ/` → Hab & Bewahr
 - `PROJEKTE/MENSCH/`
+- `PROJEKTE/ROBOTIK/` → Kategorie-Büro
 
 Projektübergreifend:
 - `ALLGEMEINGUELTIGE_BAUSTEINE/`

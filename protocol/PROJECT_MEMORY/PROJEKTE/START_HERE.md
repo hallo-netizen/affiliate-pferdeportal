@@ -18,7 +18,7 @@ ein vorhandenes Projektgebäude auswählen und dessen `START_HERE.md` öffnen.
 auf Flurebene Facharbeit beginnen, Projekte miteinander vermischen oder ein unbekanntes Projekt erfinden.
 
 **ALS NÄCHSTES …**  
-`PFERDE_ATELIER/START_HERE.md`, `HOBBYRAUSCH/START_HERE.md` (Hobby Depot), `EIGENTUMSSCHUTZ/START_HERE.md` (Hab & Bewahr) oder `MENSCH/START_HERE.md`.
+`PFERDE_ATELIER/START_HERE.md`, `HOBBYRAUSCH/START_HERE.md` (Hobby Depot), `EIGENTUMSSCHUTZ/START_HERE.md` (Hab & Bewahr) `MENSCH/START_HERE.md` oder `ROBOTIK/START_HERE.md`.
 
 ## Vorhandene Projektgebäude
 
@@ -26,6 +26,7 @@ auf Flurebene Facharbeit beginnen, Projekte miteinander vermischen oder ein unbe
 - `HOBBYRAUSCH/START_HERE.md` → Hobby Depot (technischer Bestandsname: HOBBYRAUSCH)
 - `EIGENTUMSSCHUTZ/START_HERE.md` → Hab & Bewahr
 - `MENSCH/START_HERE.md`
+- `ROBOTIK/START_HERE.md` → Robotik (Büro Kategorie)
 
 Neue Projekte entstehen ausschließlich nach dem definierten Projektstartweg.
 
