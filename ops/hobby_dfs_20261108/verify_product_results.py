@@ -12,7 +12,8 @@ def concrete_term(phrase):
     reject={"karton","holz","papier","material","werkzeug","computer","wasser",
             "schere","farbe","zeit","geduld","platz","modell","schrauben","leitung",
             "leinen","lupe","kleber","ausrüstung","zubehör","ideen","buch"}
-    return t if t and t not in reject and len(t)>=8 and len(t.split())<=5 else ""
+    environment={"flache","platz","wind","zeit","geduld","interesse","erfahrung","raum","wetter","licht"}
+    return t if t and t not in reject and not (environment & set(t.split())) and len(t)>=8 and len(t.split())<=5 else ""
 def products(answer,term,limit=3):
     if not concrete_term(term):return []
     if not isinstance(answer,dict) or answer.get("status_code")!=20000:return []
@@ -63,7 +64,7 @@ def test():
     expect((response(item("3D Drucker für Filament")),"3D-Drucker"),True,1)
     expect(({"status_code":20000,"tasks":[{"status_code":40000,"result":[]}]},"Lenkdrachen"),False,0)
     expect(({"status_code":40300,"tasks":[{"status_code":20000,"result":[]}]},"Lenkdrachen"),False,0)
-    assert concrete_term("Karton")=="" and concrete_term("freie Fläche")!=""
+    assert concrete_term("Karton")=="" and concrete_term("freie Fläche")==""
     print("PRODUCT_RELEVANCE_GUARDS_PASS",cases,"test cases")
     print("NO_UNLICENSED_IMAGES_OR_PRICES_PERSISTED_PASS")
 if __name__=="__main__":test()
