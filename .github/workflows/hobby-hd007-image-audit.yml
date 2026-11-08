@@ -83,3 +83,18 @@ jobs:
               for i in range(a-1,b):
                 print('EXACT',i+1,lines[i][:330])
           PY
+
+      - name: Inspect current image center actual implementation
+        run: |
+          python3 - <<'PY'
+          import zipfile,re
+          p='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip'
+          with zipfile.ZipFile(p) as z:
+            n=[n for n in z.namelist() if n.endswith('class-hobby-depot-profile-v150709.php')][0]
+            lines=z.read(n).decode('utf8','replace').splitlines()
+            for i,l in enumerate(lines):
+              if ('class ' in l and i<95) or 'function hobby_image_center_v150769' in l or 'function bundled_hobby_master_v150759' in l:
+                print('SYMBOL',i+1,l[:180])
+                if 'function hobby_image_center_v150769' in l or 'function bundled_hobby_master_v150759' in l:
+                  for j in range(i,min(i+125,len(lines))):print('SOURCE',j+1,lines[j][:270])
+          PY
