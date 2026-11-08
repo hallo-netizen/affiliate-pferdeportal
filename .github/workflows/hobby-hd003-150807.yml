@@ -111,12 +111,19 @@ jobs:
             print('MOBILE_LINKS_VISIBLE_PASS')
           print('PLUGIN_SHA256',hashlib.sha256(pathlib.Path(new).read_bytes()).hexdigest())
           PY
+      - name: Browser positive and negative responsive checks
+        run: |
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install chromium
+          python3 scripts/hd003_test_browser_150807.py
       - uses: actions/upload-artifact@v4
         with:
           name: HD003-1.50.807-Hobbyfinder-FULL-ZIP
           path: |
             dist/HOBBY_DEPOT_DESIGN_HD003_1.50.807_HOBBYFINDER.zip
             dist/HD003_150807_BUILD_REPORT.json
+            scripts/hobbyfinder-150807-*.png
+            scripts/hobbyfinder_test_fixture_150807.html
           if-no-files-found: error
           retention-days: 30
       - name: Publish verified full ZIP direct download
@@ -134,3 +141,15 @@ jobs:
               --notes "Vollversion auf exakter 1.50.806. Freigegebenes Lupen-Hero, kurzer Untertitel, flaches eigenes Hobbyfinder-Werbebanner mit echten Links; alle anderen Anzeigen, Seiten, Plugins und Dateien unverändert. WordPress-Liveprüfung offen."
           fi
           gh release view "$TAG" --json assets,url
+
+      - name: Preserve tested full plugin in isolated HD003 plugin office
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          DEST="protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/HOBBY_DEPOT_DESIGN_HD003_1.50.807.zip"
+          cp "dist/HOBBY_DEPOT_DESIGN_HD003_1.50.807_HOBBYFINDER.zip" "$DEST"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$DEST"
+          git commit -m "HD003 plugin office: archive tested complete Design 1.50.807"
+          git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"
