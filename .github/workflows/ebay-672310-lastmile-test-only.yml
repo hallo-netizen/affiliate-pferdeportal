@@ -1,0 +1,148 @@
+name: eBay 6.72.310 last-mile test-only QA
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - 'release/affiliate-zentrale/evidence/EBAY_672308_TO_672310_GESAMTURSACHENPATCH_NUR_TEST.patch'
+      - '.github/workflows/ebay-672310-lastmile-test-only.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  bounded-public-source-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replay only the new final-public-source hunk onto the available older reference trait
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import shutil,re
+          raw=Path('release/affiliate-zentrale/evidence/EBAY_672308_TO_672310_GESAMTURSACHENPATCH_NUR_TEST.patch').read_text()
+          path='affiliate-portal-router/includes/trait-ppar-ebay-run.php'
+          chunk=raw.split('diff --git a/'+path+' b/'+path,1)[1].split('\ndiff --git ',1)[0]
+          hunks=re.split(r'(?=^@@ )',chunk,flags=re.M)
+          good=[x for x in hunks if 'private function ebay_run_public_source_refresh_tick' in x]
+          assert len(good)==1
+          hunk=good[0]
+          assert 'private function ebay_run_tick_public_verify' in hunk
+          assert 'if(!$this->ebay_run_public_source_refresh_tick($run,$settings))' in hunk
+          assert "MINUTE_IN_SECONDS" in hunk and "ebay_refresh_process_row" in hunk
+          assert "$remotes>=2" in hunk and "$checked<100" in hunk
+          checks=0
+          for line in hunk.splitlines()[1:]:
+              if line.startswith('-') and not line.startswith('---'): raise AssertionError('Existing public core removed')
+              checks+=1
+          root=Path('/tmp/ebay310_qa')
+          src=Path('release/affiliate-zentrale/current')/path
+          dst=root/path
+          dst.parent.mkdir(parents=True,exist_ok=True)
+          shutil.copy(src,dst)
+          (root/'lastmile.patch').write_text('diff --git a/'+path+' b/'+path+'\n--- a/'+path+'\n+++ b/'+path+'\n'+hunk)
+          print('PASS: ONE EXISTING PUBLIC GATE, NO SECOND WORKER, NO POLICY BYPASS, PHYSICAL PATCH CHECK')
+          PY
+          cd /tmp/ebay310_qa
+          git apply --check lastmile.patch
+          git apply lastmile.patch
+          php -l affiliate-portal-router/includes/trait-ppar-ebay-run.php
+      - name: Exercise the actual parsed PHP last-mile code against mocked WordPress source rows
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > /tmp/ebay310_qa/test.php <<'PHP'
+          <?php
+          error_reporting(E_ALL);
+          define('MINUTE_IN_SECONDS',60); define('ARRAY_A','ARRAY_A');
+          $METAS=array();
+          function absint($x){return abs((int)$x);}
+          function sanitize_text_field($x){return trim((string)$x);}
+          function sanitize_key($x){return strtolower(preg_replace('/[^a-z0-9_-]/','',strtolower((string)$x)));}
+          function wp_json_encode($x){return json_encode($x);}
+          function get_post_meta($id,$key,$single=true){global $METAS;return $METAS[$id][$key]??'';}
+          function is_wp_error($x){return $x instanceof WP_Error;}
+          class WP_Error{private $c;function __construct($c){$this->c=$c;}function get_error_code(){return $this->c;}}
+          class MockDB{
+              public $last_error='';public $items=array();
+              function prepare($s,$v){return str_replace('%s',"'".addslashes((string)$v)."'",$s);}
+              function get_row($s,$mode){foreach($this->items as $r){
+                  if(strpos($s,"seller_account_type='BUSINESS'")!==false
+                      &&strpos($s,"creative_identity_hash='".($r['creative_identity_hash']??'')."'")!==false
+                      &&($r['seller_account_type']??'')==='BUSINESS')return $r;
+                  if(strpos($s,"seller_account_type='INDIVIDUAL'")!==false
+                      &&strpos($s,"item_id='".($r['item_id']??'')."'")!==false
+                      &&($r['seller_account_type']??'')==='INDIVIDUAL')return $r;
+              }return null;}
+          }
+          require 'affiliate-portal-router/includes/trait-ppar-ebay-run.php';
+          class TestRun{
+              use PPAR_Ebay_Run_Trait;
+              public $run=array();public $remote=0;public $fail_code='';public $provider_error=false;
+              private function ebay_run_load(){return $this->run;}
+              private function ebay_run_save($v){$this->run=$v;return $v;}
+              private function ebay_run_fail($c,$m,$d=array()){$this->fail_code=$c;return false;}
+              private function ebay_access_token($s){return 'TEST_TOKEN';}
+              private function ebay_items_table(){return 'test_items';}
+              private function ebay_refresh_process_row(&$job,$row,$s,$token){
+                  global $wpdb;
+                  $this->remote++;
+                  if($this->provider_error){
+                      $job['summary']['errors'][]=array('code'=>'ebay_refresh_transport');
+                      $job['summary']['transient_errors']++;
+                      return;
+                  }
+                  $wpdb->items[$row['id']]['fresh_until']=time()+6*3600;
+                  $job['summary']['updated']++;
+              }
+              public function check($settings){return $this->ebay_run_public_source_refresh_tick($this->run,$settings);}
+          }
+          function ok($assert,$label){if(!$assert){fwrite(STDERR,"FAIL ".$label."\n");exit(1);}echo "PASS ".$label."\n";}
+          function seed($bfresh,$pfresh){
+              global $wpdb,$METAS;
+              $wpdb=new MockDB();
+              $METAS=array(101=>array('_ppar_creative_identity_hash'=>str_repeat('a',64)),
+                  202=>array('_ppar_ebay_item_id'=>'ebay-private-one'));
+              $wpdb->items[1]=array('id'=>1,'item_id'=>'ebay-business-one','creative_identity_hash'=>str_repeat('a',64),
+                  'seller_account_type'=>'BUSINESS','source_state'=>'available','policy_state'=>'allowed',
+                  'status'=>'active','fresh_until'=>$bfresh);
+              $wpdb->items[2]=array('id'=>2,'item_id'=>'ebay-private-one','creative_identity_hash'=>str_repeat('b',64),
+                  'seller_account_type'=>'INDIVIDUAL','source_state'=>'available','policy_state'=>'allowed',
+                  'status'=>'active','fresh_until'=>$pfresh);
+              $r=new TestRun();
+              $r->run=array('progress_seq'=>0,'checkpoint_candidate'=>array('business_campaign_ids'=>array(101),
+                    'private_listing_ids'=>array(202)));
+              return $r;
+          }
+          $both=array('business_enabled'=>1,'private_enabled'=>1);
+          $r=seed(time()+100,time()+20000);
+          ok($r->check($both)===true,'stale BUSINESS refreshed within same public phase');
+          ok($r->remote===1,'fresh PRIVATE not refetched');
+          ok($r->run['public_source_refresh']['complete']===1,'preflight persisted and complete');
+          ok($r->run['progress_seq']===1,'one durable canonical worker progress step');
+          ok($r->check($both)===true&&$r->remote===1,'same verified preflight not duplicated');
+          $r=seed(time()+20000,time()+100);
+          ok($r->check($both)===true&&$r->remote===1,'stale PRIVATE refreshed, BUSINESS left fresh');
+          $r=seed(time()+20000,time()+20000);
+          ok($r->check($both)===true&&$r->remote===0,'already fresh candidates require zero API calls');
+          $r=seed(time()+100,time()+100);$r->provider_error=true;
+          ok($r->check($both)===false,'provider error prevents public gate');
+          ok($r->fail_code==='public_source_refresh_provider_failed','provider error retains exact fail code');
+          $r=seed(time()+100,time()+100);
+          ok($r->check(array('business_enabled'=>1,'private_enabled'=>0))===true&&$r->remote===1,
+             'disabled PRIVATE route performs no refresh');
+          $r=seed(time()+100,time()+100);
+          ok($r->check(array('business_enabled'=>0,'private_enabled'=>1))===true&&$r->remote===1,
+             'disabled BUSINESS route performs no refresh');
+          $r=seed(time()+100,time()+20000);
+          $r->run['public_source_refresh']=array('fingerprint'=>hash('sha256',json_encode(array(array(101),array(202)))),
+             'cursor'=>2,'complete'=>1,'completed_at'=>time()-30*60);
+          ok($r->check($both)===true&&$r->remote===1,'expired final preflight reopens before publish');
+          $r=seed(time()+100,time()+20000);global $wpdb;unset($wpdb->items[1]);
+          ok($r->check($both)===false&&$r->fail_code==='public_source_refresh_source_unavailable',
+              'missing saved source cannot become a green public result');
+          echo "EBAY_LASTMILE_ISOLATED_GATE 12/12 PASS; FULL ORIGINAL+WP+EBAY E2E NOT CLAIMED\n";
+          PHP
+          cd /tmp/ebay310_qa
+          php -l test.php
+          php test.php
