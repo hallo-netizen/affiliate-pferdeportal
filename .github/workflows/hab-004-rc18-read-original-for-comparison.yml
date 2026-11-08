@@ -1,0 +1,29 @@
+name: HAB-004 RC17 official current snapshot for exact comparison
+on:
+  push:
+    branches: [hab-004-rc18-canonical-world-id-fix-20261108]
+permissions:
+  contents: read
+jobs:
+  read-current:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Print real current ZIP evidence
+        run: |
+          sha256sum protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          import hashlib
+          p='protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          with ZipFile(p) as z:
+              print('COUNT',len(z.namelist()),'TESTZIP',z.testzip())
+              for x in ('affiliate-portal-router/affiliate-portal-router.php','affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php','affiliate-portal-router/includes/trait-ppar-hb-amazon.php','affiliate-portal-router/readme.txt'):
+                  d=z.read(x);print('FILE',x,len(d),hashlib.sha256(d).hexdigest())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Hab-004-exact-official-current-to-inspect
+          path: protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip
+          retention-days: 2
+          if-no-files-found: error
