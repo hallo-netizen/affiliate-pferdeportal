@@ -1,0 +1,22 @@
+name: HD009 free product research preflight
+on:
+  push:
+    branches: [hobbyroom/hd009-amazon-dfs-products-audit-20261108]
+    paths:
+      - ops/hobby_dfs_20261108/preflight.py
+      - .github/workflows/hd009-product-preflight.yml
+permissions: {contents: write}
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cross-check reviewed equipment with real active category identifiers
+        run: python3 ops/hobby_dfs_20261108/preflight.py
+      - name: Save dated audit report in the existing Affiliate project office
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/DATAFORSEO_KOSTENFREIE_VORPRUEFUNG_20261108.md
+          git commit -m 'No-cost HD009+HD007+Hab DataForSEO suitability audit'
+          git push origin HEAD:hobbyroom/hd009-amazon-dfs-products-audit-20261108
