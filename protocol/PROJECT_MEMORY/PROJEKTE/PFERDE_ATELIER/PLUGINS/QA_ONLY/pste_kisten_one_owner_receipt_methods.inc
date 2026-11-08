@@ -29,16 +29,39 @@
                 if($identifier!=='')$existingReferences[$source.':'.$identifier]=true;
             }
         }
+        // One technical uniqueness check for the whole file, BEFORE any
+        // approval is staged. Two rows for one source must never leave the
+        // first FREI alive just because the second was skipped.
+        $occurrences=[];
+        foreach($document['items'] as $row){
+            if(!is_array($row))continue;
+            $id=(string)($row['pool_key']??'');
+            if($id!=='')$occurrences[$id]=($occurrences[$id]??0)+1;
+        }
         $updates=[];$clarification=[];$reserved=[];$seen=[];
         foreach((array)($state['seo_decisions']??[]) as $key=>$old){
             if(!is_array($old)||($old['box']??'')!=='FREI')continue;
             $oldSlot=(string)($old['intent_slot']??'');
             if($oldSlot!=='')$reserved[$oldSlot]=(string)$key;
         }
-        foreach($document['items'] as $item){
-            if(!is_array($item))throw new RuntimeException('PSTE_MINI_SEO_RESULT_SHAPE_INVALID');
+        foreach($document['items'] as $index=>$item){
+            if(!is_array($item)){
+                $clarification['UNKNOWN_ROW_'.$index]=[
+                    'pool_key'=>'','reason_code'=>'SEO_RESULT_SHAPE_INVALID',
+                    'next_action'=>'REVIEW_BY_SAME_EXTERNAL_SEO_OWNER'];
+                continue;
+            }
             $key=(string)($item['pool_key']??'');
-            if($key===''||isset($seen[$key])||!is_array($completed[$key]??null)){
+            if($key!==''&&($occurrences[$key]??0)>1){
+                $clarification[$key]=[
+                    'pool_key'=>$key,'reason_code'=>'SEO_DUPLICATE_SOURCE_ROWS',
+                    'next_action'=>'REVIEW_BY_SAME_EXTERNAL_SEO_OWNER'];
+                // Invalidating a previous receipt is safer than reusing it
+                // after a contradictory new upload. No semantic judgement.
+                unset($state['seo_decisions'][$key]);
+                continue;
+            }
+            if($key===''||!is_array($completed[$key]??null)){
                 // Unknown/malformed row is not an authorized source. Other rows proceed.
                 $clarification[$key!==''?$key:'UNKNOWN_ROW_'.count($seen)]=[
                     'pool_key'=>$key,'reason_code'=>'SEO_UNKNOWN_OR_DUPLICATE_SOURCE',
@@ -93,6 +116,7 @@
         foreach($updates as $key=>$receipt)if($receipt['box']!=='KLAERUNG')unset($state['clarification'][$key]);
         $count=['FREI'=>0,'BELEGT'=>0,'KLAERUNG'=>0];
         foreach($updates as $receipt)$count[$receipt['box']]++;
+        foreach($clarification as $key=>$item)if(!isset($updates[$key]))$count['KLAERUNG']++;
         $state['seo_last_report']=['counts'=>$count,'snapshot_sha256'=>(string)$snapshot['sha256'],
             'received_utc'=>gmdate('c'),'semantic_evaluation_in_wordpress'=>false,
             'eligible_for_article_handoff'=>false];
