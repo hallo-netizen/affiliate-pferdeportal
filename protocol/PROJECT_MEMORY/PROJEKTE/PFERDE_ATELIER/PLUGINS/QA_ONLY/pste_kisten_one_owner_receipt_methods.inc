@@ -176,7 +176,7 @@
      * The only technical proof reader for later WP/PSERC consumers.
      * No SEO evaluation, no new article decision.
      */
-    public static function singleOwnerSeoFor(string $poolKey,string $rawQuery): array {
+    public static function singleOwnerSeoFor(string $poolKey,string $rawQuery,bool $requireForwarded=false): array {
         $state=self::loadState();$data=(array)($state['seo_decisions'][$poolKey]??[]);
         $saved=(array)($state['completed'][$poolKey]??[]);
         if(($data['contract']??'')!=='PSTE_MINI_SEO_DECISIONS_V1'
@@ -186,6 +186,16 @@
             ||!hash_equals(hash('sha256',$poolKey.'|'.$rawQuery),(string)($data['source_sha256']??''))
             ||(($data['box']??'')==='FREI'&&!hash_equals((string)($data['approved_title']??''),(string)($saved['titles'][0]['title']??''))))
             return [];
+        if($requireForwarded&&($data['box']??'')==='FREI'){
+            // Existing MINI forwardToPlan checkpoints, not a new reviewer.
+            // A newly imported external opinion is NOT yet a plan approval.
+            $title=(string)($data['approved_title']??'');
+            $sourceHash=hash('sha256',$rawQuery.'|'.$title);
+            if(!hash_equals($sourceHash,(string)($state['plan_forwarded'][$poolKey]??''))
+                ||!hash_equals($sourceHash.'|'.PSTE_VERSION,
+                    (string)($state['plan_queued'][$poolKey]??'')))
+                return [];
+        }
         return $data;
     }
 
