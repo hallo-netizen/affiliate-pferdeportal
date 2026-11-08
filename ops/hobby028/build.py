@@ -12,7 +12,7 @@ from hashlib import sha256
 import subprocess
 
 ROOT=Path("protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE")
-FILE=ROOT/"CURRENT.zip"
+FILE=ROOT/"HOBBY_DEPOT_AFFILIATE_HD009_0.1.27.zip"
 EXPECTED="bba83f67e48039bf921709823d81fc00b7658b7e9c825a833314f6821ff0a2fd"
 MAIN="affiliate-portal-router/hobby-depot-affiliate-router.php"
 CACHE="affiliate-portal-router/includes/class-hdar-amazon-start.php"
@@ -25,7 +25,22 @@ def once(src,before,after,why):
 
 # The previously leaf-only lookup is replaced with one index that also serves
 # hub group pages and hobby pages, from the same file already shipped in HD003.
-full_method=r'''    // Exactly one source of hierarchy truth across the whole Hobby Depot.
+full_method=r'''    // Existing eight-world resolver is preserved verbatim.
+    private function hdar_ci_banner_world($context, $register_row = null) {
+        $allowed = array('gestalten','fertigen','technik','forschen',
+                         'pflanzen','tiere','bewegen','sammeln');
+        if (is_array($register_row)) {
+            $w = sanitize_key((string)($register_row['source_identity']['natural_world'] ?? ''));
+            if (in_array($w,$allowed,true)) { return $w; }
+        }
+        foreach ((array)($context['slugs'] ?? array()) as $slug) {
+            $slug = sanitize_key((string)$slug);
+            if (in_array($slug,$allowed,true)) { return $slug; }
+        }
+        return '';
+    }
+
+    // Exactly one source of hierarchy truth across the whole Hobby Depot.
     // The official HD003 leaf map contains world, middle group and hobby for
     // every leaf. Build shared indices once per request and use at all tiers.
     private function hdar_ci_category_photo_meta($context) {
@@ -164,7 +179,7 @@ with ZipFile(BytesIO(payload)) as z:
       lint=subprocess.run(["php","-l",str(p)],capture_output=True,text=True)
       assert lint.returncode==0,(n,lint.stderr)
 assert sha256(FILE.read_bytes()).hexdigest()==EXPECTED, "Original source modified"
-FILE.write_bytes(payload)
+(ROOT/'CURRENT.zip').write_bytes(payload)
 target=ROOT/OUT;target.write_bytes(payload)
-assert FILE.read_bytes()==target.read_bytes()
+assert (ROOT/'CURRENT.zip').read_bytes()==target.read_bytes()
 print("HD009_ALL_LEVELS_BUILD_PASS",OUT,"size",len(payload),"sha256",sha256(payload).hexdigest(),"files_changed",changed,"PHP_PASS 24","ZIP_PASS 41")
