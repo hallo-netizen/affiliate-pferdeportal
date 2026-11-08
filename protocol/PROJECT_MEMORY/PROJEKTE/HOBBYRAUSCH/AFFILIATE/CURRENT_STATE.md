@@ -1,5 +1,9 @@
 # HOBBY DEPOT – AFFILIATE – EINZIGE AKTUELLE FACH-AUTORITÄT
 
+**Neuer gültiger Stand 08.11.2026: HD009 0.1.28** (`HOBBY_DEPOT_AFFILIATE_HD009_0.1.28.zip`, SHA-256 `ad4685633516cde1f22af21a2d8ecc92965bab658f7a9411f287c58f85bb39cd`). Die zuvor bei `/bewegen/wind-drachen/` und anderen übergeordneten Seiten auftretende fachfremde Bildauswahl wurde durch den gemeinsamen bestehenden HD003-Kategoriebaum für 8 Welt-, 69 Gruppen-, 381 Hobby- und 3.376 unterste Kategorieziele ersetzt. „Wind & Drachen“ erhält ein anderes vorhandenes Lenkdrachenbild statt Outdoorausrüstung; richtige Welt-/Gruppenbilder auf allen Ebenen. ZIP CRC, PHP und Browser-Tests vier Breiten bestanden. **Liveinstallation und Abnahme offen.** HD003 1.50.803 (Vorschaubilder ohne Featured Image) und HD007 1.2.21 unverändert. Ältere HD009-Versionen in folgenden Abschnitten sind historisch.
+
+
+
 **Aktuell am 08.11.2026: gemeinsamer Bildfix HD009 0.1.27 + HD003 1.50.803.** HD009 nutzt auf echten WordPress-Kategoriearchiven die vorhandene 3.376er-Leaf-Zuordnung aus HD003, selbst wenn WordPress keine Elternkategorie setzt. Der Banner zeigt das thematisch passende genehmigte Foto der Hobbygruppe; Sportdrachen → Wind-&-Drachen-Foto statt bildlosem bzw. fachfremdem Banner. Als Rückfall bleiben die acht Weltbilder. HD003 zeigt in seinen drei vorhandenen Beitragskachel-Varianten bei fehlendem Beitragsbild ein passendes, vorhandenes Hobbyfoto; vorhandene Beitragsbilder haben Vorrang. Sportdrachen-Vorschaubild: separates Delta-Drachen-Foto. **Keine neuen Bilder generiert, keine neuen Bannerplätze, keine Änderung an Partner-/Produktlogik.** Beide vollständigen ZIPs gebaut, ZIP/PHP 24+13 PASS, echte PHP-Funktionstests PASS, Zuordnung 3.376/3.376 PASS, Browser-Simulation bei 1440/900/390/360 PASS. Die beiden neuen ZIPs sind gültige Downloads; **Installation und echte Sichtabnahme noch offen**. Bisherige Angaben zu 0.1.26 bzw. 1.50.798 darunter historisch.
 
 
