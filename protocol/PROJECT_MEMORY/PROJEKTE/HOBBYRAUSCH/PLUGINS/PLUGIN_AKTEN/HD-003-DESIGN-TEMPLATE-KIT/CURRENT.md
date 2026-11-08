@@ -1,33 +1,11 @@
-# HD-003 – Affiliate Portal Template Kit – CURRENT
+# HD003 – Design Template Kit Hobby Depot – gültige Current-Version
 
-Stand: 02.11.2026.
-Status: **Vollständige Version 1.50.798 auf GitHub neu gesichert und unabhängig wieder geöffnet; WordPress-Serverdateien nicht unabhängig ausgelesen.**
+**HD003 1.50.803 · 08.11.2026**
 
-Dies ist die einzige technische Current-Autorität für HD-003 im Projektgebäude Hobby Depot. Frühere Zwischenstände sind in Git-Historie und im vorhandenen Updateprotokoll erhalten, aber nicht mehr Current.
-
-## Aktuelles vollständiges Plugin
-
-- Plugin-ID: HD-003-DESIGN-TEMPLATE-KIT; WordPress-Name: Affiliate Portal Template Kit.
-- **Version: 1.50.798.**
-- Vorhandener Campus-Ablageort: protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip.
-- Unabhängig herunterladbarer Original-Release: https://github.com/hallo-netizen/affiliate-pferdeportal/releases/download/hobby-depot-hd003-1.50.798-macos-zip/HOBBY_DEPOT_HD003_1.50.798_MAC_STANDARD_VOLLPLUGIN.zip
-- SHA-256: 05ea37f040c1189ea9fda29c2dd795740351d83fe8022f8d966a453679fec7a8.
-- Größe: 65.702.034 Bytes; 1.290 ZIP-Einträge; 13 PHP-Dateien.
-- Plugin-Ordner: affiliate-portal-template-kit; Hauptdatei: pferde-template-kit.php.
-- Rückfall: vollständig erhaltene Version 1.50.797: https://github.com/hallo-netizen/affiliate-pferdeportal/releases/download/hobby-depot-hd003-1.50.797/HOBBY_DEPOT_HD003_1.50.797_AGB2_HERO_TEXTKORREKTUR_VOLLPLUGIN.zip
-- Rollback-SHA-256: 6b4220080a551a58b7535b1b4ab79d1f0120d05025f74bdb7c6f313c32f90858.
-
-## Geprüfter Funktionsstand und Grenzen
-
-Anzeigenmarkt auf allen Hierarchieebenen von hp_listing_category mit dem Hobby-Depot-Design. Bestehende HivePress-Anzeigen, Kategorien und Filterdaten bleiben beim nativen System. Kein Zusatzplugin.
-- Positiv: Kategorieebenen Root/Mittel/Unten lokal simuliert; vorhandenes Hero/Suche/Einreichen; 13/13 PHP-Syntax unter PHP 8.5 PASS; ZIP-Integrität, Root, Version, 1.290 Dateien PASS.
-- Negativ: falscher ZIP-Hash abgelehnt; normale WordPress-Seiten und Administratorseiten nicht als Anzeigenkategorie behandelt; keine neuen Datenbankaktionen.
-- Regression: 1.288/1.290 Originaldateien gegenüber 1.50.797 byteidentisch; nur die zwei zentralen PHP-Dateien geändert.
-- Mac-Test: separat 02.11.2026 auf macOS mit ditto entpackt, alle 1.290 Dateien auf identischen Inhalt geprüft: PASS.
-- Dauerablage: GitHub-Branch-Kopie wurde in einer neuen, unabhängigen GitHub-Klonung vollständig geöffnet; ZIP und Rückfallrelease erneut gelesen. GitHub Actions Lauf 41463137429: PASS.
-- Anwender hat die Frontenddarstellung als passend bezeichnet. **Keine Behauptung eines authentifizierten Server-Byte-Readbacks oder eines vollständigen Live-Funktionstests.**
-- **CAMPUS-MERGE PASS:** PR #602 erfolgreich übernommen (Commit 47031716091eb72ffebe8b99524eba3a5ac7e6a7). Der amtliche Campus-Zweig wurde danach in Actions 41467083409 neu geklont: volle Version 1.50.798, exakt 65.702.034 Bytes, SHA-256 und 1.290/1.290 ZIP-Einträge unabhängig PASS. Die Original-Hardlock-Prüfschritte wurden unverändert und vollständig separat in Actions 41466507457 bestanden. Der alte nicht verpflichtende Security-Job weist weiterhin einen Infrastrukturfehler auf, weil eine vorhandene Prüferdatei nur in main liegt; keine Sicherheitsdatei wurde verändert oder deaktiviert.
-
-## Genau eine NEXT ACTION
-
-**Die tatsächlich installierte Plugin-Datei auf WordPress read-only gegen die amtliche Campus-1.50.798-ZIP vergleichen.** Keine Neuinstallation und kein weiterer Umbau auf Verdacht.
+- Installationsdatei: `HOBBY_DEPOT_DESIGN_HD003_1.50.803.zip`, vollständig und byteidentisch zu `CURRENT.zip`.
+- 65.702.560 Bytes, SHA-256 `06e412f04fd3768477c6e825b39708baed0927be68260fce55fd316dff14d95f`, Git-Blob `47f3cf9973196ae373eb56705607b0144e2a9546`. Plugin-Ordner und Einstieg `affiliate-portal-template-kit/pferde-template-kit.php` unverändert.
+- **Passende Beiträge:** Die drei vorhandenen Beitragsvorschau-Darstellungen nutzen weiter das echte Beitragsbild, falls vorhanden. Nur bei fehlendem Beitragsbild verwenden sie ein genehmigtes, fachlich passendes Hobbyfoto aus dem bereits vorhandenen HD003-Fotobestand, anhand der vorhandenen zentralen Leaf-Kategoriezuordnung. Wenn keine exakte Hobbyfotografie vorhanden ist, wird das passende Weltfoto verwendet. Keine erfundenen Bilder/Produkte.
+- Beispiel: `[DESIGNTEST] Zweileiner oder Vierleiner` hat tatsächlich `featured_media=0`; Vorschau verwendet deshalb das vorhandene `hobby-masters/sportdrachen.webp` mit einem Delta-Lenkdrachen, nicht das separate Wind-&-Drachen-Bannerfoto.
+- **Unverändert:** gesamte Kategorie-/Seitenhierarchie, Menü, Startseite, Filter, Hero, Affiliateplätze, Produktlogik, Kacheltexte, alle Assets. Nur zwei PHP-Dateien geändert (Version und eine gemeinsame Bildrückfallregel), keine neue Pluginarchitektur.
+- **Geprüft:** Original 1.50.798 SHA-verifiziert; alle ZIP-Einträge unverändert erhalten, CRC PASS, PHP 13/13 PASS. PHP-Test: tatsächliche vorhandene Methoden für Bild ohne Featured Image und Vorrang eines vorhandenen Fotos PASS; Browser-Simulation der Kachel auf realer Sportdrachen-Kategorieseite bei 1440/900/390/360 PASS. Actions 42463656841/42463793782.
+- **Echte Installation und anschließende WordPress-Abnahme offen.** Die alte Plugin-Akte 1.50.798 ist in Git-Historie erhalten.
