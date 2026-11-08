@@ -175,7 +175,7 @@ index e5c1169..8e0566b 100644
          $checkpoint=$this->ebay_public_checkpoint_load();
          if($this->ebay_public_checkpoint_is_safe($checkpoint)){
              $run['checkpoint_id']=sanitize_text_field((string)($checkpoint['checkpoint_id']??''));
-@@ -1114,6 +1114,11 @@ BUSINESS_ONLY_LEGACY_RUN_GUARD selection
+@@ -1114,6 +1114,11 @@ LEGACY_RUN_GUARD selection
          if($scope===''){$this->ebay_run_fail('selection_scope_empty','Der beim Runstart gespeicherte Seller-Routen-Snapshot enthält keine aktive Route.');return;}
          $canonical_phase=sanitize_key((string)($run['phase']??''));
 -        $selection=$this->ebay_selection_state_load();
@@ -248,7 +248,7 @@ index e5c1169..8e0566b 100644
      private function ebay_run_business_safe_supply_gap_contract($run, $coverage) {
          $run=is_array($run)?$run:array();$coverage=is_array($coverage)?$coverage:array();
          $missing=array_values(array_unique(array_filter(array_map('sanitize_key',(array)($coverage['missing']??array())))));
-@@ -1653,6 +1653,9 @@ BUSINESS_ONLY_LEGACY_RUN_GUARD gapfill_selection
+@@ -1653,6 +1653,9 @@ LEGACY_RUN_GUARD gapfill_selection
  
      private function ebay_run_tick_gapfill_select($run, $settings) {
 -        $selection=$this->ebay_selection_state_load();
@@ -301,7 +301,7 @@ index e5c1169..8e0566b 100644
          $coverage['open_gap_count']=count($missing);
          $coverage['open_gaps']=$missing;
          $coverage['exceptions']=$exceptions;
-@@ -1722,6 +1722,5 @@ BUSINESS_ONLY_LEGACY_RUN_GUARD public_commit
+@@ -1722,6 +1722,5 @@ LEGACY_RUN_GUARD public_commit
          $routes=is_array($current['config_snapshot']['seller_routes']??null)?$current['config_snapshot']['seller_routes']:array();
          if(!empty($routes['business'])){$current['phase']='checkpoint_cleanup_business';$current['resume_reason']='checkpoint_committed';}
 -        elseif(!empty($routes['private'])){$current['phase']='checkpoint_cleanup_private';$current['resume_reason']='checkpoint_committed';}
@@ -309,7 +309,7 @@ index e5c1169..8e0566b 100644
 +        else{$this->ebay_run_complete($manifest);return;} // No PRIVATE cleanup on legacy snapshots.
          $current['progress_seq']=absint($current['progress_seq']??0)+1;$current['last_progress_at']=time();$current['no_progress_count']=0;
          $this->ebay_run_save($current);
-@@ -1759,6 +1759,5 @@ BUSINESS_ONLY_LEGACY_RUN_GUARD business_cleanup
+@@ -1759,6 +1759,5 @@ LEGACY_RUN_GUARD business_cleanup
              if(!empty($plan['checkpoint_business_cleanup_done'])){
                  $routes=is_array($current['config_snapshot']['seller_routes']??null)?$current['config_snapshot']['seller_routes']:array();
 -                if(!empty($routes['private'])){$this->ebay_run_set_phase('checkpoint_cleanup_private','checkpoint_committed');}
@@ -317,7 +317,7 @@ index e5c1169..8e0566b 100644
 +                $this->ebay_run_complete((array)($current['checkpoint_verified_manifest']??array())); // BUSINESS-only.
              }
              return;
-@@ -1764,13 +1764,9 @@ BUSINESS_ONLY_LEGACY_RUN_GUARD private_cleanup
+@@ -1764,13 +1764,9 @@ LEGACY_RUN_GUARD private_cleanup
              return;
          }
 -        if($route==='private'){
