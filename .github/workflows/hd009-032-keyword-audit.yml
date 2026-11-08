@@ -1,0 +1,50 @@
+name: HD009 exact hobby equipment keyword audit
+on:
+  push:
+    branches: [hobbyroom/hd009-032-dfs-keyword-context-20261108]
+    paths: [.github/workflows/hd009-032-keyword-audit.yml]
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read real HD007 equipment data, HD003 map and existing keyword behavior
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import json,re,unicodedata,collections
+          root=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          with ZipFile(root/'HD-007-HOBBYREGISTER-CORE/CURRENT.zip') as z:
+            rs=json.loads(z.read('hd-hobbyregister-core/data/hobby-register.json'))['records']
+          with ZipFile(root/'HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip') as z:
+            lm=json.loads(z.read('affiliate-portal-template-kit/assets/hobby-depot-v150750/leaf-category-map-v150750.json'))
+          active=set(x.get('parent_slug','') for x in lm.values())
+          def slug(s):
+            s=s.lower().replace('ä','ae').replace('ö','oe').replace('ü','ue').replace('ß','ss')
+            return re.sub('[^a-z0-9]+','-',s).strip('-')
+          def norm(s):
+            s=slug(s).replace('-',' ')
+            return s
+          generic={'karton','holz','papier','material','werkzeug','computer','wasser','schere','farbe','modell','schrauben','leitung','leinen','lupe','kleber','buch','bogen','rute','behaelter','aufbewahrung','saatgut','kamera','platz','zeit','geduld','licht','luft','erde'}
+          noise=re.compile(r'\b(und|oder|platz|zeit|freie|geeignete|erfahrung|kenntnisse|wind|wetter|flaeche)\b')
+          examples=[]
+          for x in rs:
+            slug1=slug(x['canonical_name'])
+            if slug1 not in active:continue
+            equipment=str((x.get('result_profile') or {}).get('what_do_you_need') or '')
+            term=equipment.split(',')[0].strip(' \t\n\r.')
+            normalized=norm(term)
+            if not term or len(term)<8 or len(term)>55 or len(normalized.split())>5 or normalized in generic or noise.search(normalized):continue
+            examples.append((x['canonical_name'],term,x.get('registry_id'),equipment))
+          print('ACTIVE',len(active),'ALL',len(rs),'CURRENT_KEYWORDS',len(examples))
+          for v in examples:
+            if any(t in norm(v[0]) or t in norm(v[1]) for t in ['kettenhemd','metallring','lenkdrachen','naeh','modell','holz','kletter','strick','muenzen','drucken']):
+              print('TARGET_EXAMPLE',v)
+          for a in examples[:45]:print('SAMPLE',a[:2])
+          counts=collections.Counter(t.lower() for _,t,_,_ in examples)
+          print('DUPLICATES',counts.most_common(55))
+          print('REGISTRY_CHAINMAIL',[x for x in rs if 'kettenhemd' in norm(x['canonical_name'])][:2])
+          print('CANDIDATES_TITLES_FROM_GIT','(read-only: no live WP content available)')
+          PY
