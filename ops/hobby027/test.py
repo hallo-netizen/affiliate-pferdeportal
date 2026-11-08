@@ -25,7 +25,7 @@ with ZipFile(AD) as ad,ZipFile(DESIGN) as design:
     print("AUTHORITATIVE_SPORTDRACHEN_MAP_PASS",len(json.loads(leaf)),"entries")
     assert a.count('function hdar_ci_leaf_category_photo_meta(')==1
     assert d.count('function post_preview_photo_v150803(')==1
-    assert a.count('hdar_ci_leaf_category_photo_meta($context)')==1
+    assert a.count('hdar_ci_leaf_category_photo_meta($context)')==2
     assert d.count('self::post_preview_photo_v150803($post)')==3
 
 start=a.index("    private function hdar_ci_leaf_category_photo_meta(")
