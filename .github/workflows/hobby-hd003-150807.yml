@@ -35,3 +35,24 @@ jobs:
                   print('HIT',i+1,' '.join(lines[max(0,i-2):min(len(lines),i+3)])[:1000])
             print('ASSETS',[(n,z.getinfo(n).file_size) for n in z.namelist() if any(k in n.lower() for k in ('hobbyfinder','banner-hobby','hobby-finder'))][-50:])
           PY
+
+      - name: Inspect exact hero and existing banner CSS and asset resolution
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import zipfile,re
+          z=zipfile.ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          n=next(n for n in z.namelist() if n.endswith('class-hobby-depot-profile-v150709.php'))
+          lines=z.read(n).decode().splitlines()
+          for a,b in [(770,792),(1876,1935),(4440,4599)]:
+            for i in range(a-1,b):print('PHP',i+1,lines[i][:240])
+          for n in z.namelist():
+            if not n.endswith(('.php','.css')):continue
+            raw=z.read(n)
+            if len(raw)>1800000:continue
+            ls=raw.decode('utf8','replace').splitlines()
+            for i,l in enumerate(ls):
+              if any(k in l for k in ('.hd-own-ad-v150791','.hd-own-ad-title-v150792','.hd-own-ad-hotspot','.hd-hf-banner-v150732','.hd-mag-hero','.hd-magazine-hero','.hd-portal-hero','hd-own-ad-art-v150791')):
+                print('CSS',n,i+1,l[:500])
+          print('FILES_WITH_HOBBY',[n for n in z.namelist() if 'suchen-finden.webp' in n or 'ad-v150' in n or 'own-ad' in n])
+          PY
