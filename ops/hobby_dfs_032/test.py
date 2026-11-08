@@ -138,6 +138,25 @@ assert(is_array($candidate) && $candidate['id']===123 && $candidate['keyword']==
 $GLOBALS['categories'][0]->slug='garten';
 assert(invoke('auto_post_hobby',$GLOBALS['posts'][0],$catalog)===null);
 $GLOBALS['categories'][0]->slug='sportdrachen-drachen-leinen';
+// Under the SAME category, an article about another subject cannot trigger
+// a generic Lenkdrachen purchase, even if it mentions the Hobby name.
+$old_title=$GLOBALS['posts'][0]->post_title;
+$GLOBALS['posts'][0]->post_title='Sportdrachen: Farben und Pflege';
+assert(invoke('auto_post_hobby',$GLOBALS['posts'][0],$catalog)===null,
+  'hobby category and hobby title must not authorize unrelated product');
+$GLOBALS['posts'][0]->post_title='Lenkdrachen: Leinen richtig prüfen';
+assert(invoke('auto_post_hobby',$GLOBALS['posts'][0],$catalog)['keyword']==='Lenkdrachen');
+$GLOBALS['posts'][0]->post_title=$old_title;
+// The formerly incorrect example must resolve to Kettenhemd Ringe only
+// if its own article title and category are both present.
+$GLOBALS['categories'][0]->slug='kettenhemdflechten-ringe';
+$GLOBALS['posts'][0]->post_title='Kettenhemdflechten: Ringe sauber öffnen und schließen';
+$chain=invoke('auto_post_hobby',$GLOBALS['posts'][0],$catalog);
+assert(is_array($chain) && $chain['keyword']==='Kettenhemd Ringe');
+$GLOBALS['posts'][0]->post_title='Kettenhemdflechten: andere Werkzeuge';
+assert(invoke('auto_post_hobby',$GLOBALS['posts'][0],$catalog)===null);
+$GLOBALS['categories'][0]->slug='sportdrachen-drachen-leinen';
+$GLOBALS['posts'][0]->post_title=$old_title;
 echo "EXACT_HOBBY_CATEGORY_AND_TITLE_MATCH_PASS\n";
 
 assert(invoke('auto_match_results','Lenkdrachen',array(
