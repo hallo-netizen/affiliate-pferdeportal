@@ -3,7 +3,22 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-11-08
-STATUS: **2.8.11 FERTIG, ZIP- & LOKALE POSITIV-/NEGATIVTESTS BESTANDEN; WORDPRESS-LIVE- UND MAGNIFIC-BILDTEST OFFEN.**
+STATUS: **2.8.12 IST NEUER VOLLSTÄNDIGER LOKALER KANDIDAT; POSITIVE/NEGATIVE PRÜFUNGEN BESTANDEN; WORDPRESS-LIVE UND ECHTES BILDANBIETERERGEBNIS OFFEN.**
+
+## Aktueller Pluginstand: Bildzentrale 2.8.12
+- **Voll-ZIP**: `Bildzentrale-2.8.12.zip`, 85.492 Byte, SHA-256 `75b9b54b5956be86ca8c672c51da2231bba6956bf63eac2d55eb811a348ca73c`. Zwei vollständige PHP-Dateien; PHP-Lint und ZIP-Integrität PASS.
+- **Dauerhafte Dateien:** vollständige ZIP, lokales Prüfprotokoll und wiederholbares Testpaket in der ChatGPT-Library `/Hobby Depot/Plugin-Büro/`. Die binäre ZIP ist **nicht im GitHub-Repository** gespeichert.
+- **Ursache 1:** HD007 1.2.21 hat für Airbrush, Aeroponik und Batik alte allgemeine Platzhalter. Im unveränderten HD003 1.50.803/804 liegen bereits ausdrückliche Original-Master/Zuordnungen. HD006 2.8.12 fragt die bestehende HD003-Bildzentrale **nur lesend** für denselben exakten Hobby-Slug ab, akzeptiert nur belegte Bildquellen (`bildzentrale`, `hobby-master`, `hd007-master`, `batik-master`) und führt sie über den auf das HD007-Hobbyregister begrenzten Filter in dieselbe Bildausgabe. Bereits verifizierte HD007-Master bleiben unverändert. Keine Vermutungen aus ähnlich benannten Bildern.
+- **Ursache 2:** In 2.8.11 testete die Übernahme nur einen simulierten Frontend-Aufruf ohne echten Bildfilter. Neu 2.8.12: Nach der ausdrücklichen Zustimmung muss die **aktive PHP-Bildauflösung von HD007** genau die neue Master-URL zurückgeben. Nur dann wird der Auftrag als angewendet markiert. Bei absichtlich unterbrochenem Bildfilter ist die Übernahme ein sichtbarer FEHLER, der ursprüngliche Master und der bezahlte Entwurf bleiben erhalten; erneute Übernahme möglich. Auch Undo geprüft.
+- **Bestehende Regeln bleiben:** Bilderzeugungsplugin heißt **Bildzentrale**, separates Plugin **Bilder zuordnen** mit unterschiedlichen URLs. Motivwunsch beim Bildanbieter vorrangig. Drei Bewertungen; alle Master bearbeitbar; altes Bild bis zur bestätigten Übernahme unverändert; keine zweite Starttaste.
+- **Prüfungen:** **103/103** Backendtests; **27/27** WordPress-Menütests; **35/35** echte Chromium-Klicktests. Die Testnachweise wurden zusätzlich frisch in einen **zweiten sauberen Ordner** entpackt und alle drei Testläufe wiederholt – PASS. Backend benutzt die echte 2.8.12-PHP-Datei, aber eine WP-/HD003-/HD007-/Provider-Simulation. Originale HD003-/HD007-Bildzuordnungen separat aus deren aktuellen GitHub-Artefakten hart geprüft.
+- **Freigabegrenze:** **kein WordPress-Live-PASS, kein echter kostenpflichtiger Magnific-Bildtest, kein Nachweis für Browser-/Seiten-Cache auf der Live-Webseite**. Keine Live-Wirkung behaupten. **HD003 Design-Plugin, HD007 Originalplugin und alle Bestandsdateien sind UNVERÄNDERT.**
+
+[**Verbindliche 2.8.12-Prüfakte**](./BILDZENTRALE_2.8.12_PRUEFVERTRAG_20261108.md). Frühere 2.8.8–2.8.11 sind historisch, nicht Current.
+
+---
+
+## Historische frühere Fassung (nicht als aktuelle Installationsanweisung verwenden)
 
 ## Aktuelle vollständige Installationsdatei – 2.8.11
 
