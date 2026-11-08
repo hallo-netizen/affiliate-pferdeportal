@@ -2,11 +2,23 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-20
-STATUS: **2.7.8 LAUT WORDPRESS-LISTE AKTIV / LOKALE QA PASS / LIVE-FUNKTIONSPRÜFUNG OFFEN**
+STAND: 2026-11-08
+STATUS: **HD-006 2.8.8 MENÜTRENNUNG LOKAL PASS / WORDPRESS-LIVEPRÜFUNG OFFEN. Die unten dokumentierte 2.7.8 ist historisch (Inventar 01.11.), keine aktuelle Installationsfreigabe.**
 
 Plugin-ID:
 `HD-006-BILDZENTRALE`
+
+## AKTUELLE PFLICHTREGEL: MENÜTRENNUNG 2.8.8 (08.11.2026)
+
+**Vor jedem HD-006-Update zwingend lesen:** [MENUE_VERTRAG_20261108.md](./MENUE_VERTRAG_20261108.md) und die dort abgelegte reproduzierbare [Patch-Datei](./REPRODUKTION_2.8.8_MENU_FIX.py) sowie [Regressionstests](./MENU_REGRESSION_2.8.8.php).
+
+**Fehlerursache:** Zwei verschiedene WordPress-Bildverwaltungen haben dieselbe Admin-Menüadresse verwendet. Eine reine Titelkorrektur ist verboten.
+
+- **Bilder erstellen** (HD-006) → `/wp-admin/admin.php?page=hdbz-bilder-erstellen`.
+- **Bilder zuordnen** (bestehende Zuordnung) → `/wp-admin/admin.php?page=hobby-depot-bildzentrale`.
+- Beide Klickpfade müssen real verschieden sein; bestehende Zuordnung und API/Webhooks bleiben unverändert.
+
+**Neu erstellter Installationskandidat:** `HOBBY_DEPOT_BILDZENTRALE_2.8.8_GETRENNTE_MENUES_UND_KLICKPFADE.zip` (SHA-256 `dd076c7772c820adcceabea85897a6bcfe79a47dd66430475b988d413541787a`). Lokal 27/27 Menüszenarien bestanden; Hobbyregister-Datei unverändert. ZIP aus Chatlieferung, kein eigener Download im GitHub-Pluginbüro bestätigt; ein WordPress-Livetest ist offen. **Nicht** zu alten 2.7.x-Installationskandidaten zurückkehren.
 
 ## Verifizierte Quelle
 
@@ -22,7 +34,7 @@ Beweis:
 - SHA-256 `984a8d4da6594ffa93e6d4024b57cc6c22c7d1fbfec398177a19b0490c20d89b`;
 - exakte Übereinstimmung mit dokumentiertem Pferdeatelier-Source-Scan.
 
-## Aktueller Kandidat
+## Historischer Kandidat vom 20.10.2026 (nicht zur Neuinstallation)
 
 `HOBBY_DEPOT_BILDZENTRALE_2.7.8_VERBINDLICHER_BILDPROMPT_INSTALLIEREN.zip`
 
@@ -87,6 +99,6 @@ Im verifizierten Original ist kein eindeutiger Code-/UI-Block dieses Namens bele
 
 Die vom Betreiber gelieferte vollständige WordPress-Pluginliste zeigt **Version 2.7.8 als aktiv**. Der zuvor dokumentierte Entwicklungs-/Teststand 2.7.8 ist versionsgleich, aber nicht dadurch funktional live-geprüft. Ein unabhängiger Server-Quellcode-/ZIP-Readback und ein Live-Funktionstest wurden in diesem Abgleich nicht ausgeführt. Keine Plugininstallation oder Campus-CURRENT.zip-Synchronisierung. Beleg: `../../EVIDENCE_WP_PLUGINLISTE_20261101.md`; operative WordPress-Current: `../../../WORDPRESS_TECHNIK/CURRENT_STATE.md`.
 
-## EXAKT EINE NEXT ACTION
+## EXAKT EINE NEXT ACTION (08.11.2026)
 
-**Die bereits aktive 2.7.8 read-only prüfen und ihre Voll-ZIP im Campus bytegenau sichern; kein neues Plugin und kein Massenlauf.**
+**Bei installiertem 2.8.8 im WordPress-Backend die getrennten Menüs „Bilder erstellen“ und „Bilder zuordnen“ mit ihren zwei verschiedenen URLs kontrollieren. Danach das geprüfte 2.8.8-Plugin-ZIP dauerhaft im Pluginbüro hinterlegen.**
