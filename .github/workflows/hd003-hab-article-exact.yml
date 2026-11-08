@@ -1,0 +1,38 @@
+name: Hab article and Hobby article exact DOM and typography audit
+on:
+  push:
+    branches: ['hobbyroom/hd003-article-hab-translation-20261108']
+    paths: ['.github/workflows/hd003-hab-article-exact.yml']
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Show Hab article layout design and Hobby current script/markup
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re
+          b=Path('protocol/PROJECT_MEMORY/PROJEKTE')
+          with ZipFile(b/'EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip') as z:
+            for p in ['hab-bewahr-design-vorschau/includes/article-page.php','hab-bewahr-design-vorschau/assets/article-design.css']:
+              s=z.read(p).decode('utf8','replace')
+              print('SOURCE_BEGIN',p,'LENGTH',len(s))
+              print(s[:18000])
+              print('SOURCE_END',p)
+          with ZipFile(b/'HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip') as z:
+            for p in ['affiliate-portal-template-kit/includes/hobby-depot-article-hero-v150789.php','affiliate-portal-template-kit/includes/hobby-depot-design-test-v150787.php']:
+              s=z.read(p).decode('utf8','replace')
+              print('SOURCE_BEGIN',p,'LENGTH',len(s))
+              print(s[:27000])
+              print('SOURCE_END',p)
+            p='affiliate-portal-template-kit/assets/single-post-locked-v15083.css'
+            s=z.read(p).decode('utf8','replace')
+            print('HD_SINGLE_CSS',s[-14500:])
+            src=z.read('affiliate-portal-template-kit/pferde-template-kit.php').decode('utf8','replace')
+            for needle in ['hobby-depot-article-hero-v150789.php','hobby-depot-design-test-v150787.php','enqueue_single_post_locked_style','function print_universal_content_axis_css']:
+              for m in list(re.finditer(re.escape(needle),src))[:3]:
+                print('ENTRY',needle,src[max(0,m.start()-340):m.start()+1100].replace('\n',' ')[:1400])
+          PY
