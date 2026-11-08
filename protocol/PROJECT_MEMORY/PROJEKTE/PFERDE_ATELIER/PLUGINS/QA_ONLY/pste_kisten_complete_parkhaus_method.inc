@@ -145,10 +145,13 @@
             // only its occupied canonical IDs, never write or create a second plan.
             // PSERC_Slot_Allocator::occupiedCanonicalIds() uses this SAME option.
             $runtimeOriginal=get_option('ppm679_editorial_plan_runtime_state_v1',null);
-            if($runtimeOriginal!==null&&$runtimeOriginal!==false
-                &&(!is_array($runtimeOriginal)||!is_array($runtimeOriginal['items']??null)))
-                throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_INVALID');
-            $runtimeItems=(array)($runtimeOriginal['items']??[]);
+            // Source completeness belongs HERE, once per full parkhouse export.
+            // Missing/empty saved PPM679 plan cannot mean "all article slots free".
+            if(!is_array($runtimeOriginal)||!is_array($runtimeOriginal['items']??null))
+                throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_MISSING_OR_INVALID');
+            $runtimeItems=$runtimeOriginal['items'];
+            if(!$runtimeItems)
+                throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_EMPTY');
             foreach($runtimeItems as $itemId=>$item){
                 if(!is_array($item))throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_ITEM_INVALID');
                 $canonical=trim((string)($item['canonical_article_id']??$itemId));
