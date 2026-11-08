@@ -742,7 +742,65 @@ index b39f499..e53c439 100644
  
                  $items = array_values((array) ($page_data['items'] ?? array()));
                  $summary['pages']++;
-@@ -9549,8 +9549,6 @@ EBAY_PRIVATE_ADMIN_REMOVAL
+@@ -8955,43 +8955,19 @@ EBAY_PRIVATE_PUBLIC_READ_SIMPLIFICATION
+     }
+ 
+-    public function ebay_filter_stale_posts($posts, $query = null) {
+-        if ($this->ebay_is_backend_admin_screen_request() || !$posts) { return $posts; }
+-        $now = time();
+-        $safe = array();
+-        $private_context = $this->ebay_query_allows_private_ebay($query);
+-
+-        // Resolve all source rows once. The public layer then re-checks the same
+-        // central policy used by Discovery/Maintenance.
+-        $post_item_ids = array();
+-        $source_item_ids = array();
+-        foreach ((array)$posts as $post) {
+-            if (!is_object($post) || (string)($post->post_type ?? '') !== 'hp_listing') { continue; }
+-            $post_id = absint($post->ID ?? 0);
+-            $item_id = sanitize_text_field((string)get_post_meta($post_id, '_ppar_ebay_item_id', true));
+-            if ($item_id === '') { continue; }
+-            $post_item_ids[$post_id] = $item_id;
+-            $source_item_ids[] = $item_id;
+-        }
+-        $source_rows = $this->ebay_public_source_rows_by_item_ids($source_item_ids, 'INDIVIDUAL');
+-
+-        foreach ((array)$posts as $post) {
+-            if (!is_object($post) || (string)($post->post_type ?? '') !== 'hp_listing') { $safe[] = $post; continue; }
+-            $post_id = absint($post->ID ?? 0);
+-            $item_id = (string)($post_item_ids[$post_id] ?? '');
+-            $source_row = $item_id !== '' && is_array($source_rows[$item_id] ?? null) ? $source_rows[$item_id] : array();
+-            if ($this->ebay_private_public_post_allowed($post, $source_row, $private_context, $now)) { $safe[] = $post; }
+-        }
+-
+-        $parent = $this->ebay_private_parent_term();
+-        $parent_id = is_object($parent) ? absint($parent->term_id ?? 0) : 0;
+-        if ($parent_id > 0 && $this->ebay_query_targets_private_parent($query, $parent_id)) {
+-            // Store the original result set only for the late refill's exclusion
+-            // list when a real WP_Query exposes it. Then guarantee the final 3x3
+-            // result independent of the SQL window HivePress actually honored.
+-            $safe = $this->ebay_private_parent_refill_posts($safe, $query, $parent_id, $now, 9);
+-        }
+-        return $safe;
+-    }
++    public function ebay_filter_stale_posts($posts, $query = null) {
++        // Retired eBay-owned PRIVATE listings never reach the public frontend.
++        // Native HivePress listings have no eBay source marker and remain unchanged.
++        if ($this->ebay_is_backend_admin_screen_request() || !$posts) { return $posts; }
++        $safe = array();
++        foreach ((array) $posts as $post) {
++            if (is_object($post) && (string)($post->post_type ?? '') === 'hp_listing'
++                && (string)get_post_meta(absint($post->ID ?? 0), '_ppar_ebay_item_id', true) !== '') {
++                continue;
++            }
++            $safe[] = $post;
++        }
++        return $safe;
++    }
+ 
+     /**
+      * HivePress setzt die Taxonomieabfrage selbst. Auf der übergeordneten Kategorie
+@@ -9549,8 +9525,6 @@ EBAY_PRIVATE_ADMIN_REMOVAL
          $previous = $this->ebay_settings();
          $input = is_array($_POST['ppar_ebay'] ?? null) ? wp_unslash($_POST['ppar_ebay']) : array();
          $input['enabled'] = array_key_exists('enabled', $input) ? !empty($input['enabled']) : !empty($previous['enabled']);
@@ -751,7 +809,7 @@ index b39f499..e53c439 100644
          $input['inventory_refresh_enabled'] = !empty($input['inventory_refresh_enabled']);
          $input['business_enabled'] = !empty($input['business_enabled']);
          $input['api_terms_confirmed'] = !empty($input['api_terms_confirmed']);
-@@ -9888,10 +9886,7 @@ EBAY_PRIVATE_ADMIN_REMOVAL
+@@ -9888,10 +9862,7 @@ EBAY_PRIVATE_ADMIN_REMOVAL
          // Page-performance invariant: normal rendering reads only bounded status
          // options. Do not rescan thousands of source rows (the old Reitstiefel
          // live snapshot alone read up to 5,000 rows on every page view).
@@ -762,7 +820,7 @@ index b39f499..e53c439 100644
          ?>
          <div class="wrap ppar-ebay">
              <h1>eBay</h1>
-@@ -9900,26 +9895,17 @@ EBAY_PRIVATE_ADMIN_REMOVAL
+@@ -9900,26 +9871,17 @@ EBAY_PRIVATE_ADMIN_REMOVAL
              <p><strong>Automatischer Heartbeat:</strong> Für Pferde Atelier wird die vorhandene GitHub-Infrastruktur als Taktgeber verwendet; kein zusätzlicher externer Account ist erforderlich. Die Heartbeat-URL enthält keinen Geheimschlüssel und akzeptiert ausschließlich begrenzte POST-Ticks. <input type="text" class="large-text code" readonly value="<?php echo esc_attr($external_tick_url); ?>" onclick="this.select();"></p>
              <p><strong>Hintergrundarbeit:</strong> <?php echo $worker_last_tick_at ? 'letzter Block '.esc_html(wp_date('d.m.Y H:i:s',$worker_last_tick_at)) : 'noch nicht gestartet'; ?> · technische Pakete <?php echo absint($worker_tick_count); ?> · übersprungene Einzelfehler <?php echo absint($canonical_run['skipped_item_errors_count'] ?? 0); ?>. <strong>Browser kann geschlossen werden.</strong></p>
              <p><strong>Provider-Fachseite.</strong> Zugangsdaten und OAuth-Test liegen zentral unter <a href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-networks')); ?>">Netzwerke &amp; API</a>. <?php echo $this->provider_control_badge('ebay'); ?> <a class="button button-small" href="<?php echo esc_url($this->provider_control_url('ebay')); ?>">Chefsteuerung &amp; Veto</a></p>
@@ -792,7 +850,7 @@ index b39f499..e53c439 100644
                  <p>Prüft den fest mitgelieferten vollständigen Pferde-Atelier-Zielkatalog: 8 Hauptbereiche, 59 Bereichsseiten, 329 Produktseiten und 1.124 WordPress-Kategorien. Ohne positiven Abgleich bleiben Provider-Fachtest und Abruf fail-closed.</p>
                  <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
                      <input type="hidden" name="action" value="ppar_ebay_verify_catalog">
-@@ -9930,17 +9916,13 @@ EBAY_PRIVATE_ADMIN_REMOVAL
+@@ -9930,17 +9892,13 @@ EBAY_PRIVATE_ADMIN_REMOVAL
              </section>
  
              <section class="postbox" style="padding:18px;max-width:1180px">
@@ -811,7 +869,7 @@ index b39f499..e53c439 100644
                          <tr><th>Bestandsabgleich</th><td><label><input type="checkbox" name="ppar_ebay[inventory_refresh_enabled]" value="1" <?php checked(!empty($settings['inventory_refresh_enabled'])); ?>> Vor Ablauf der 6-Stunden-Frist vorhandene eBay-Angebote gezielt per Browse <code>getItem</code> nachprüfen</label><p class="description">Unauffindbar/verkauft/beendet → Frontend aus. Temporärer API-Fehler → keine Löschung; der Datensatz bleibt intern erhalten und wird später erneut geprüft.</p></td></tr>
                          <tr><th>Bestandschecks je Lauf</th><td><input class="small-text" type="number" min="1200" max="2000" name="ppar_ebay[inventory_refresh_max_per_run]" value="<?php echo absint($settings['inventory_refresh_max_per_run']); ?>"><p class="description">Automatisch mindestens 1.200 Checks; der Bestandsabgleich läuft stündlich, Discovery weiterhin alle drei Stunden. Keine Änderung erforderlich.</p></td></tr>
                          <tr><th>Gewerbliche Verkäufer</th><td><label><input type="checkbox" name="ppar_ebay[business_enabled]" value="1" <?php checked(!empty($settings['business_enabled'])); ?>> BUSINESS als Produkt-Creatives übernehmen</label></td></tr>
-@@ -10043,7 +10025,7 @@ EBAY_PRIVATE_ADMIN_REMOVAL
+@@ -10043,7 +10001,7 @@ EBAY_PRIVATE_ADMIN_REMOVAL
              <?php endif; ?>
  
              <section class="postbox" style="padding:18px;max-width:1180px">
@@ -820,7 +878,7 @@ index b39f499..e53c439 100644
                  <p>Der reine OAuth-Zugangstest liegt zentral unter „Netzwerke &amp; API“. Dieser Fachtest prüft zusätzlich EBAY_DE, itemAffiliateWebUrl, die Verkäuferkontotypen INDIVIDUAL/BUSINESS und den Portalfilter. Der vollständige Abruf folgt eBays Pagination über <code>next</code> und läuft seit V5.6.0 ausschließlich als fortsetzbarer Hintergrundjob; der Admin-Klick wartet nicht mehr auf den Gesamtlauf.</p>
                  <div style="display:flex;gap:10px;flex-wrap:wrap">
                      <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_ebay_test_connection"><?php wp_nonce_field('ppar_ebay_test_connection', 'ppar_ebay_nonce'); ?><button class="button button-secondary">Provider-Fachtest starten</button></form>
-@@ -10106,7 +10088,7 @@ EBAY_PRIVATE_ADMIN_REMOVAL
+@@ -10106,7 +10064,7 @@ EBAY_PRIVATE_ADMIN_REMOVAL
              </section>
  
              <section class="postbox" style="padding:18px;max-width:1180px">
@@ -829,7 +887,7 @@ index b39f499..e53c439 100644
                  <p>Nur <strong>weiche fachliche Unsicherheiten</strong> erscheinen hier. Hard-Safety-, Provider-, Affiliate-, Ablauf- und technische Sperren bleiben nicht übersteuerbar. Ein Kandidat muss innerhalb der Sechs-Stunden-Frist entschieden werden.</p>
                  <?php if (!$review_candidates) : ?>
                      <p><em>Kein offener Prüfkandidat.</em></p>
-@@ -10118,24 +10100,7 @@ EBAY_PRIVATE_ADMIN_REMOVAL
+@@ -10118,24 +10076,7 @@ EBAY_PRIVATE_ADMIN_REMOVAL
                              <td><?php echo esc_html((string)($candidate['seller_account_type'] ?? '')); ?></td>
                              <td><?php echo esc_html((string)($candidate['rejection_reason'] ?? '')); ?></td>
                              <td>
@@ -855,7 +913,7 @@ index b39f499..e53c439 100644
                              </td>
                          </tr>
                      <?php endforeach; ?>
-@@ -10291,7 +10308,7 @@ trait PPAR_Ebay_Trait {
+@@ -10291,7 +10284,7 @@ trait PPAR_Ebay_Trait {
              </section>
  
              <?php if ((string)($canonical_run['schema'] ?? '') === '1.0') : ?>
@@ -865,7 +923,7 @@ index b39f499..e53c439 100644
 -                <?php $canonical_label=$canonical_status==='running'?'Läuft':($canonical_status==='paused'?'Pausiert':($canonical_status==='failed'?'Fehlgeschlagen':($canonical_status==='completed'?(!empty($canonical_run['completed_with_skips'])?'Fertig (mit übersprungenen Fehlern)':'Fertig'):($canonical_status==='local_checked'?'Lokal geprüft (noch nicht freigegeben)':'Wartet')))); ?>
 +                <?php $canonical_label=$canonical_status==='running'?'Läuft':($canonical_status==='paused'?'Pausiert':($canonical_status==='failed'?'Fehlgeschlagen':($canonical_status==='completed'?(!array_key_exists('completed_with_skips',$canonical_run)||!empty($canonical_run['completed_with_skips'])?'Fertig (mit offenen Prüfungen)':'Fertig'):($canonical_status==='local_checked'?'Lokal geprüft (noch nicht freigegeben)':'Wartet')))); ?>
                  <p><strong>Status:</strong> <strong><?php echo esc_html($canonical_label); ?></strong> · Run <code><?php echo esc_html(substr((string)($canonical_run['run_uuid'] ?? ''),0,12)); ?></code>
-@@ -10323,7 +10340,7 @@ trait PPAR_Ebay_Trait {
+@@ -10323,7 +10316,7 @@ trait PPAR_Ebay_Trait {
                          var tickAge=tick?Math.max(0,now-tick):null;
                          var status=d.status||'';
                          var state;
@@ -874,7 +932,7 @@ index b39f499..e53c439 100644
                          else if(status==='local_checked') state='Lokal geprüft (nicht freigegeben)';
                          else if(status==='failed') state='Fehlgeschlagen';
                          else if(status==='paused') state='Pausiert';
-@@ -10388,7 +10405,14 @@ trait PPAR_Ebay_Trait {
+@@ -10388,7 +10381,14 @@ trait PPAR_Ebay_Trait {
                  <?php if(!empty($canonical_run['checkpoint_safe'])): ?><p><strong>Sicherer Frontend-Stand:</strong> bleibt unverändert aktiv.</p><?php endif; ?>
                  <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="margin-top:10px"><input type="hidden" name="action" value="ppar_ebay_run_restart"><?php wp_nonce_field('ppar_ebay_run_restart','ppar_ebay_nonce'); ?><button class="button button-primary">Lauf neu starten</button></form>
                  </div><?php endif; ?>
