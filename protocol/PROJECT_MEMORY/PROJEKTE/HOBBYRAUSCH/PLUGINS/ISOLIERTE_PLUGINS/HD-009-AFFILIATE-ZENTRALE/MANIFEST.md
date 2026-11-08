@@ -1,13 +1,10 @@
 # HD009 – Affiliate-Zentrale Hobby Depot – einziges CURRENT
 
-**Version 0.1.25 · 07.11.2026**
+**Version 0.1.26 · 08.11.2026**
 
-- **Installationsdatei** `HOBBY_DEPOT_AFFILIATE_HD009_0.1.25.zip`. `CURRENT.zip` ist byteidentisch.
-- Voll-ZIP: 1.553.090 Bytes · SHA-256 `c82b75f9f485eec43f6b8626ff4a6748f3610c0093e61616d4bdd8d4d62204d0` · Git-Blob `bdd7d4a23bad9455e9f6539e8ca72b24d8dbd96a` · 41 Archiv-Einträge inklusive 8 neuer selbstständiger WebP-Motive im bestehenden Plugin-Assetverzeichnis. WordPress-Pluginordner bleibt `affiliate-portal-router/`.
-- **Kategorie-Banner:** 6:1 Desktop (vorher 4,2:1). Mobile unter 720px weiterhin 4,2:1, damit der unveränderte offizielle Amazon-Button lesbar bleibt.
-- **Kein Hero-Foto doppelt:** Acht thematische, neutrale Motive sind als eigenständige Assetkopien aus dem genehmigten HD003-Fotobestand ins HD009 übertragen. Gestalten/Fertigen/Technik/Forschen/Pflanzen/Bewegen/Sammeln: jeweilige `start-world`-Aufnahme. Tiere: bestehendes `terraristik.webp` mit Lebensraumschwerpunkt statt Hunde-/Katzenfoto. Dazu dieselbe cremefarbene Bildüberblendung und unveränderte Button-Farbe/-Grafik; keine Icons, kein eingebrannter Text.
-- Für Kategorien wird nur die bereits in HD009 vorhandene Eltern-/Kategorie-Weltbindung genutzt. Die streng bestätigten 395 Seitenebenen und 3.376 Endkategorien lassen sich sämtlich einer der acht Welten zuordnen; keine freie Textschätzung.
-- **Hobbyregister:** Quadrat zeigt wieder zugelassenes Foto, anders zugeschnitten; wenn kein Register-Werbebild als Datei freigegeben ist, liest der bereits vorhandene Register-Footer nach dem Laden das **wirklich angezeigte** HD007-Hero-Foto als Bildquelle und benutzt dessen alternativen Ausschnitt. Der vorhandene Register-Querbanner bleibt 4,2:1. Das HD007-Plugin wurde nicht verändert.
-- **Unverändert:** bestehende Werbeplätze, native Anbieter-/Kampagnenpriorität, Amazon-Tracking-/Originalwerbegrafik, bestehende Produktauswahl, sämtliche Artikelbannerregeln, eBay/idealo/DataForSEO und alle anderen Plugins.
-- **Prüfungen:** Quellpaket 0.1.24 auf SHA-256 geprüft. ZIP CRC PASS, PHP-Syntax 24/24 PASS. Fünf Originalmethoden-PHP-Prüfungen für Architekturmodellbau/Weltbild vs Hero, Tiere/Terrarium, Kategorie-Term/Sammeln, Register-Quadrat und Register-Quer PASS. Echte Seiten in Chromium bei 1440, 960, 390, 360px simuliert: Architekturmodellbau, Malen & Zeichnen, Buchbinden, Technik und Hobbyregister PASS. Kein Bannerüberlauf, echtes Themafoto, offizieller Amazon-Button unverändert. GitHub Actions 42398832178 und 42399002402.
-- **Noch nicht live installiert:** Echte WordPress-Installationsabnahme und Sichtprüfung nach dem Update ausstehend.
+- **Installationsdatei:** `HOBBY_DEPOT_AFFILIATE_HD009_0.1.26.zip`; byteidentisch zu `CURRENT.zip`.
+- Voll-ZIP 1.553.271 Bytes, SHA-256 `a627e35a9e8d20f34616c1ead4bc1b7d180e40a8f74abb985c7311b60dcfcd8f`, Git-Blob `cede34f313736cdcc14a82124445206273e98e2c`. WordPress-Pluginordner unverändert `affiliate-portal-router/`.
+- **Einzige Designänderung gegenüber 0.1.25:** Im Hobbyregister nur bei Werbebannern **innerhalb des Textes** den zu großen oberen Abstand verkleinert; Desktop gemessen **46,5 → 16,5 px**, Mobil **56,5 → 10,5 px**. CSS nur am bestehenden `hdr-article > hdar-ci-register-inline`-Banner; auf Mobilformat gesonderter Wert. Folgende Absätze, Bannerbilder, Button, Maße, Farbe, Partner und alle anderen Portalbereiche bleiben unverändert.
+- Alle Funktionen und Bilder aus 0.1.25 erhalten: acht neutrale Hobbywelt-Bilder, Tiere = Terraristik, Kategoriebanner 6:1 Desktop / 4,2:1 Mobil, bebildertes Register-Quadrat und automatische Zuordnung.
+- **Prüfung:** Vorversion 0.1.25 SHA-256 bestätigt; 41/41 ZIP-Einträge mit CRC geprüft, 24/24 PHP-Syntax PASS. Browserkontrolle auf echten Hobbyregisterseiten **Alte Kameras reparieren** und **Alabasterschnitzen** bei 1440/900/390/360px PASS. Bannerhöhe und -breite vor/nach Änderung identisch. GitHub Actions 42461816837.
+- **Noch offen:** Die Installation und endgültige Sichtprüfung im produktiven WordPress. Beitragsbanner-Design bleibt weiterhin separat offen.

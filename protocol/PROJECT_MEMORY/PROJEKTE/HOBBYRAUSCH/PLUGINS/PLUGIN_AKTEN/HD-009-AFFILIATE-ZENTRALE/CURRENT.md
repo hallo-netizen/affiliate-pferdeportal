@@ -1,14 +1,10 @@
 # Hobby Depot HD009 – aktuelle Plugin-Akte
 
-**Zwischenabnahme 08.11.2026:** Nutzer meldet zur Version 0.1.25 „auf den ersten Blick pass“. Die angepassten Weltmotive und flacheren Kategoriebanner gelten damit als vorläufig akzeptiert; keine bestätigte Vollabnahme aller Seiten. **Offen:** endgültiges Design und Behandlung von Anzeigen in normalen Artikeln (ausdrücklich erst später entscheiden), gezielte Sichtprüfung von Kategorieebenen und Hobbyregisterprofilen auch mobil. Kein neues Plugin, keine Versionserhöhung; das bestehende CURRENT.zip bleibt unverändert.
+**CURRENT 0.1.26, 08.11.2026.**
 
-
-**CURRENT: 0.1.25, 07.11.2026.**
-
-- Download: `../../ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/HOBBY_DEPOT_AFFILIATE_HD009_0.1.25.zip`
-- Werkbank: `../../ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip` (gleiche Datei).
-- 1.553.090 Bytes; SHA-256 `c82b75f9f485eec43f6b8626ff4a6748f3610c0093e61616d4bdd8d4d62204d0`; Blob `bdd7d4a23bad9455e9f6539e8ca72b24d8dbd96a`.
-- **Kategorie-Banner: allgemeines Foto aus genau einer von 8 Hobbywelten, ohne Hero-Duplikat.** 6:1 Desktop; 4,2:1 mobil.
-- Register-Quadrat: wieder mit Bild (genehmigte Datei oder derselbe reale HD007-Hero mit alternativem Ausschnitt); kein blindes Foto-Mapping für nicht klassifizierte Registerhobbys.
-- Originaler Amazon-„Erhältlich bei Amazon“-Button und bereits genehmigter Verlauf bleiben erhalten. Keine Icons. Gleicher responsive Titel, ein kurzer Untertitel für Kategorien.
-- Geprüft: 41 ZIP-Einträge/CRC, PHP 24/24, fünf echte PHP-Funktionstests, vier Browserbreiten auf realen WordPress-Seiten. Actions 42398832178/42399002402. Live noch offen.
+- Download: `../../ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/HOBBY_DEPOT_AFFILIATE_HD009_0.1.26.zip`.
+- Zentrales `../../ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip` ist byteidentisch.
+- 1.553.271 Bytes; SHA-256 `a627e35a9e8d20f34616c1ead4bc1b7d180e40a8f74abb985c7311b60dcfcd8f`; Git-Blob `cede34f313736cdcc14a82124445206273e98e2c`.
+- Gegenüber 0.1.25 ausschließlich **oben weniger Abstand vor dem inhaltlichen Hobbyregister-Querbanner**. Desktop 46,5 → 16,5px, Mobil 56,5 → 10,5px. Vorlage, Motiv, CTA und Bannerhöhe unverändert.
+- Tests: exakter 0.1.25-Quellhash, ZIP CRC 41/41, PHP 24/24, reale Browser-DOM-Breiten 1440/900/390/360 bei zwei Hobbyregisterprofilen PASS (Action 42461816837).
+- Die Installation und Nutzer-Sichtfreigabe von 0.1.26 sind ausstehend. Andere Plugins, Kategorie-/Artikelbanner und Affiliate-Logik wurden nicht geändert. Artikelbanner-Design weiterhin separat offen.

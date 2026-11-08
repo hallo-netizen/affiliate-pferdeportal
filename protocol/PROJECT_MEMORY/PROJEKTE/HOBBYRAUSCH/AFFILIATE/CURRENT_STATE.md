@@ -1,5 +1,9 @@
 # HOBBY DEPOT – AFFILIATE – EINZIGE AKTUELLE FACH-AUTORITÄT
 
+**Aktueller Stand 08.11.2026: HD009 Affiliate-Zentrale 0.1.26**, Download `HOBBY_DEPOT_AFFILIATE_HD009_0.1.26.zip`, 1.553.271 Bytes, SHA-256 `a627e35a9e8d20f34616c1ead4bc1b7d180e40a8f74abb985c7311b60dcfcd8f`. Einzige Abweichung von 0.1.25: zu großer Abstand **oberhalb des im Hobbyregister-Text eingebauten Querbanners** auf Desktop und Mobil korrigiert (47→17 bzw. 57→11px gerundet). Acht Themenfotos, Kategoriebanner-Höhe, Amazon-Button und alle Ausspielregeln unverändert. Voll-ZIP 41/41, PHP 24/24 und Browser-Test zwei Registerprofile / vier Breiten PASS (Action 42461816837). Live-Installation und optische Abnahme 0.1.26 offen; Beitragsbannerdesign später separat entscheiden. Frühere HD009-Stände unten sind historisch.
+
+
+
 **Aktuell 07.11.2026: HD009 Affiliate-Zentrale Version 0.1.25** (Download `HOBBY_DEPOT_AFFILIATE_HD009_0.1.25.zip`, Größe 1.553.090 Bytes, SHA-256 `c82b75f9f485eec43f6b8626ff4a6748f3610c0093e61616d4bdd8d4d62204d0`). Auf allen Kategorieebenen verwenden eigene Amazon-Kreativs acht feste, textfreie Weltbilder statt des Seiten-Heros; „Tiere“ zeigt Terraristik/Insektenumfeld statt Haustiere. Desktop-Kategorie-Werbebanner 6:1, mobil 4,2:1; Original-Amazon-Button, Verlauf, Titel und vorhandene Ausspielplätze bleiben unverändert. Hobbyregister-Quadrat hat wieder echte Bildquelle (bei Bedarf das HD007-Herobild mit anderem Zuschnitt). Eigene Beiträge und Produkt-/Kampagnenlogik unverändert. Voll-ZIP CRC, PHP 24/24, fünf Original-PHP-Fälle, reale Frontend-Simulationen bei 1440/960/390/360 alle bestanden; Live-Installation/Abnahme noch offen. Angaben zu früheren HD009-Versionen darunter historisch.
 
 
