@@ -630,6 +630,24 @@ index b39f499..e53c439 100644
          $body = json_decode((string) wp_remote_retrieve_body($response), true);
          if ($code < 200 || $code >= 300 || !is_array($body)) {
              return new WP_Error('ebay_search_failed', 'eBay Browse API fehlgeschlagen (HTTP ' . $code . ').');
+@@ -5438,13 +5444,8 @@ BUSINESS_ONLY_SOURCE_OWNER_SIMPLIFICATION
+     }
+ 
+-    private function ebay_persist_listing_author_id(&$settings) {
+-        $author_id = $this->ebay_listing_author_id($settings);
+-        if ($author_id <= 0) { return new WP_Error('ebay_hivepress_owner_missing', 'Für eBay-HivePress-Listings konnte kein gültiger technischer WordPress-Besitzer ermittelt werden.'); }
+-        if (absint($settings['private_listing_author_id'] ?? 0) !== $author_id) {
+-            $settings['private_listing_author_id'] = $author_id;
+-            update_option(self::OPTION_NETWORK_EBAY, $settings, false);
+-        }
+-        return $author_id;
+-    }
++    private function ebay_persist_listing_author_id(&$settings) {
++        // BUSINESS-only eBay creatives have no HivePress owner or user-account dependency.
++        return 0;
++    }
+ 
+     private function ebay_secure_preview_url($post_id) {
 @@ -5494,5 +5500,6 @@ BUSINESS_ONLY
       * freshness schedules verification but never hides Last-Known-Good inventory.
       */
