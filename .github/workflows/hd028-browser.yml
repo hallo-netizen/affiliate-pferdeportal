@@ -1,0 +1,76 @@
+name: HD028 whole hierarchy browser visual regression
+on:
+  push:
+    branches: [hobbyroom/hd009-028-universal-category-photo-20261108]
+    paths: [.github/workflows/hd028-browser.yml]
+permissions: {contents: read}
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Chromium
+        run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - name: Verify current real website DOM with the approved replacement photos
+        run: |
+          python3 - <<'PY'
+          from playwright.sync_api import sync_playwright
+          from zipfile import ZipFile
+          from pathlib import Path
+          import base64
+          b=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          with ZipFile(b/'HD-009-AFFILIATE-ZENTRALE'/'CURRENT.zip') as ad,ZipFile(b/'HD-003-DESIGN-TEMPLATE-KIT'/'CURRENT.zip') as design:
+            def asset(name,zipobj):
+              extension=name.rsplit('.',1)[-1].lower()
+              return ('data:image/jpeg;base64,' if extension in ('jpg','jpeg') else 'data:image/webp;base64,')+base64.b64encode(zipobj.read(name)).decode()
+            cases=[
+              ('world', 'https://www.hobby-depot.de/bewegen/',asset('affiliate-portal-router/assets/hdar-world-bewegen.webp',ad)),
+              ('group', 'https://www.hobby-depot.de/bewegen/wind-drachen/',asset('affiliate-portal-template-kit/assets/hobby-depot-v150787/lenkdrachen-testfoto.jpg',design)),
+              ('hobby', 'https://www.hobby-depot.de/bewegen/wind-drachen/sportdrachen/',asset('affiliate-portal-template-kit/assets/hobby-depot-v150617/hero-masters-v150684/wind-drachen.webp',design)),
+              ('leaf', 'https://www.hobby-depot.de/category/sportdrachen-drachen-leinen/',asset('affiliate-portal-template-kit/assets/hobby-depot-v150617/hero-masters-v150684/wind-drachen.webp',design)),
+              ('other-hobby', 'https://www.hobby-depot.de/gestalten/miniaturen-szenen/architekturmodellbau/',asset('affiliate-portal-template-kit/assets/hobby-depot-v150617/hero-masters-v150684/miniaturen-szenen.webp',design)),
+              ('other-group', 'https://www.hobby-depot.de/gestalten/miniaturen-szenen/',asset('affiliate-portal-template-kit/assets/hobby-depot-v150617/hero-masters-v150684/miniaturen-szenen.webp',design))
+            ]
+          with sync_playwright() as p:
+            browser=p.chromium.launch(headless=True,args=['--no-sandbox'])
+            for width in [1440,900,390,360]:
+              page=browser.new_page(viewport={'width':width,'height':900})
+              for kind,url,img in cases:
+                resp=page.goto(url,wait_until='domcontentloaded',timeout=36000)
+                assert resp and resp.status==200,(kind,width,url)
+                page.wait_for_timeout(370)
+                datum=page.evaluate("""({image})=>{
+                  let banner=document.querySelector('.hdar-ci-amazon-banner-category');
+                  if(!banner)return {error:'No existing category ad'};
+                  let photo=banner.querySelector('.hdar-ci-photo');
+                  if(!photo)return {error:'No image mount'};
+                  let orig=photo.querySelector('img:not(.hdar-ci-amazon-official)');
+                  if(!orig){orig=document.createElement('img');photo.insertBefore(orig,photo.firstChild);}
+                  orig.src=image;
+                  banner.classList.remove('hdar-ci-amazon-banner-text');
+                  const rect=x=>{let r=x.getBoundingClientRect();return {w:r.width,h:r.height,right:r.right,bottom:r.bottom,x:r.x,y:r.y}};
+                  const btn=banner.querySelector('.hdar-ci-button');
+                  return {banner:rect(banner),button:rect(btn),
+                    adImages:photo.querySelectorAll('img:not(.hdar-ci-amazon-official)').length,
+                    badge:photo.querySelectorAll('.hdar-ci-amazon-official').length,
+                    img:orig,photoSrc:orig.src,hero:document.querySelector('.hd-page-hero-world img,.hd-bp-hero img')?.src||''};
+                }""",{'image':img})
+                assert datum and not datum.get('error'),(kind,width,datum)
+                assert datum['adImages']==1 and datum['badge']==1,(kind,width,datum)
+                ratio=datum['banner']['w']/datum['banner']['h']
+                target=4.2 if width<=720 else 6
+                assert abs(ratio-target)<.14,(kind,width,ratio,target)
+                assert datum['banner']['right']<=width+6,(kind,width,datum)
+                assert datum['button']['bottom']<=datum['banner']['bottom']-2,(kind,width,datum)
+                # An actual decoded photograph, not just a replaced URL string.
+                image_state=page.locator('.hdar-ci-amazon-banner-category .hdar-ci-photo img:not(.hdar-ci-amazon-official)').first.evaluate(
+                  "(img)=>new Promise(resolve=>{if(img.complete)resolve({ok:img.naturalWidth>0,width:img.naturalWidth});else {img.addEventListener('load',()=>resolve({ok:img.naturalWidth>0,width:img.naturalWidth}),{once:true});img.addEventListener('error',()=>resolve({ok:false,width:0}),{once:true});}})"
+                )
+                assert image_state['ok'],(kind,width,image_state)
+                print('REAL_LAYOUT_PASS',kind,width,'banner',round(datum['banner']['h']),'image_pixels',image_state['width'],'ratio',round(ratio,2))
+              page.close()
+            browser.close()
+          print('HD028_ALL_TIERS_BROWSER_SIMULATION_PASS')
+          PY
