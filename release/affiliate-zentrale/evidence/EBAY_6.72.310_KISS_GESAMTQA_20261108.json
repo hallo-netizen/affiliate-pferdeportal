@@ -109,5 +109,12 @@
       "limit": "Not proof of rendered browser-visible emptiness; JS, dynamic cards, caching, installed version and authenticated live database state not verified."
     }
   },
-  "patch_bytes": 39907
+  "patch_bytes": 39907,
+  "production_installation_user_confirmed": {
+    "version": "6.72.308",
+    "source": "explicit user statement in current conversation 2026-11-08",
+    "verification": "USER_CONFIRMED_NOT_AUTHENTICATED_WORDPRESS_READBACK",
+    "action": "Treat 6.72.308 as installed baseline for ongoing eBay failure investigation. Do not mislabel central release governance 6.72.211 as installed version; it is a distinct release metadata entry. Do not restart source search or require repeated upload requests."
+  },
+  "working_rule_20261108": "Continue one root-cause remediation only for eBay import -> inventory/source -> selection -> public checkpoint -> cards. Keep 6.72.310 existing internal patch; no new version/feature/worker, and no installation before full acceptance."
 }
