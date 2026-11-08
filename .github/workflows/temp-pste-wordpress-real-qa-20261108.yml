@@ -40,9 +40,12 @@ jobs:
           php /tmp/wp plugin install /tmp/PSTE-ONE-OWNER-NUR-TEST.zip --activate --path=/tmp/wp-real --allow-root
           php /tmp/wp plugin list --path=/tmp/wp-real --allow-root
           php /tmp/wp eval 'echo "WP_REAL_PSTE_BOOT_OK WordPress=".get_bloginfo("version")." PSTE=".PSTE_VERSION."\\n";' --path=/tmp/wp-real --allow-root
-          echo 'Legacy PSERC artifact inventory in GitHub, do not install unrelated version:'
+          echo 'Test actual WordPress database and WP/PSTE source reader (PSERC intentionally not installed):'
+          php /tmp/wp post create --post_type=post --post_status=publish --post_title="Horseware Regendecken Test" --post_content="<h2>Passform der Pferdedecken</h2>Guter Artikeltext" --porcelain --path=/tmp/wp-real --allow-root
+          php /tmp/wp eval '$s=PSTE_Mini_Workflow::readParkhausForMini(); echo "WP_REAL_PARKHAUS complete=".(!empty($s["complete"])?"YES":"NO")." reason=".($s["reason"]??"")." wp_count=".($s["sources"]["WORDPRESS"]["item_count"]??-1)." pste_count=".($s["sources"]["PSTE_PLAN"]["item_count"]??-1)."\\n"; if((int)($s["sources"]["WORDPRESS"]["item_count"]??0)<1)throw new RuntimeException("ACTUAL_WP_INVENTORY_NOT_READ"); if(!empty($s["complete"]))throw new RuntimeException("MISSING_PSERC_SHOULD_FAIL_CLOSED");' --path=/tmp/wp-real --allow-root
+          echo 'Inspect historical PSERC archive without assuming it matches current plugin:'
           Z=control/startmaster0107/runtime_packages/PSERC-FIX.zip
-          unzip -Z1 "$Z" | grep -E '(portal-seo-editorial-plan-compiler\.php|class-pserc-seo-reader\.php)' | head -n 8
-          KEY=$(unzip -Z1 "$Z" | grep 'portal-seo-editorial-plan-compiler.php$' | head -n1)
-          unzip -p "$Z" "$KEY" | grep -E 'Version:|PSERC_VERSION|PSERC_BUILD' | head -n6 || true
-          echo 'WORDPRESS_REAL_CORE_PLUGIN_SMOKE_PASS; NOT FULL PORTAL OR PSERC INTEGRATION'
+          unzip -Z1 "$Z" | sed -n '1,15p'
+          KEY="$(unzip -Z1 "$Z" | grep 'portal-seo-editorial-plan-compiler.php$' || true)"
+          if [ -n "$KEY" ]; then unzip -p "$Z" "$KEY" | grep -E 'Version:|PSERC_VERSION|PSERC_BUILD' || true; else echo 'PSERC-FIX is not the verified complete 0.28.55 QA plugin; do not install'; fi
+          echo 'WORDPRESS_REAL_CORE_PLUGIN_DB_SOURCE_SMOKE_PASS; PSERC_NOT_INSTALLED_SAFE_STOP'
