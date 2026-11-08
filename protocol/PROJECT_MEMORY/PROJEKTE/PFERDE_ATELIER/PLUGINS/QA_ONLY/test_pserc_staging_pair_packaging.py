@@ -10,7 +10,7 @@ import tempfile
 from zipfile import ZipFile
 
 ORIGINAL_HASH='80340faff2323e5ede86ddd095ac3570a53474ae64771df3bec70fb6f6c6f060'
-QA_HASH='5fb82d0b35346d71d1cc0d9a796e5ca19d1ac3ad595ec5aab9643154db8a8578'
+QA_HASH='042772cd3c8d594e39ff28ea46b3c74e431cd26fe680a7c95c7522d337e44e43'
 ROOT='portal-seo-editorial-plan-compiler/'
 MODIFIED={ROOT+name for name in (
     'includes/class-pserc-seo-reader.php',
