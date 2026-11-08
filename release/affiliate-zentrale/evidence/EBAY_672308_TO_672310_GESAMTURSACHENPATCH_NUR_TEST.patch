@@ -409,7 +409,7 @@ index b39f499..e53c439 100644
  
              <?php if ((string)($canonical_run['schema'] ?? '') === '1.0') : ?>
 -            <section class="postbox" style="padding:18px;max-width:1180px;border-left:4px solid <?php echo $canonical_status==='completed'?'#46b450':($canonical_status==='failed'?'#d63638':'#dba617'); ?>">
-+            <section class="postbox" style="padding:18px;max-width:1180px;border-left:4px solid <?php echo $canonical_status==='completed' && empty($canonical_run['completed_with_skips'])?'#46b450':($canonical_status==='failed'?'#d63638':'#dba617'); ?>">
++            <section class="postbox" style="padding:18px;max-width:1180px;border-left:4px solid <?php echo $canonical_status==='completed' && array_key_exists('completed_with_skips',$canonical_run) && empty($canonical_run['completed_with_skips'])?'#46b450':($canonical_status==='failed'?'#d63638':'#dba617'); ?>">
                  <h2>Kanonischer Gesamtworkflow</h2>
                  <?php $canonical_label=$canonical_status==='running'?'Läuft':($canonical_status==='paused'?'Pausiert':($canonical_status==='failed'?'Fehlgeschlagen':($canonical_status==='completed'?(!empty($canonical_run['completed_with_skips'])?'Fertig (mit übersprungenen Fehlern)':'Fertig'):($canonical_status==='local_checked'?'Lokal geprüft (noch nicht freigegeben)':'Wartet')))); ?>
                  <p><strong>Status:</strong> <strong><?php echo esc_html($canonical_label); ?></strong> · Run <code><?php echo esc_html(substr((string)($canonical_run['run_uuid'] ?? ''),0,12)); ?></code>
@@ -418,7 +418,7 @@ index b39f499..e53c439 100644
                          var status=d.status||'';
                          var state;
 -                        if(status==='completed') state='Abgeschlossen';
-+                        if(status==='completed') state=d.completed_with_skips?'Abgeschlossen mit offenen Prüfungen':'Abgeschlossen';
++                        if(status==='completed') state=(!Object.prototype.hasOwnProperty.call(d,'completed_with_skips')||d.completed_with_skips)?'Abgeschlossen mit offenen Prüfungen':'Abgeschlossen';
                          else if(status==='local_checked') state='Lokal geprüft (nicht freigegeben)';
                          else if(status==='failed') state='Fehlgeschlagen';
                          else if(status==='paused') state='Pausiert';
@@ -434,7 +434,7 @@ index b39f499..e53c439 100644
 +                    Bereits sicher geprüfte Produkte bleiben erhalten; die reguläre nächste eBay-Suche prüft die offenen Bereiche erneut.
 +                    <?php if(!empty($canonical_run['checkpoint_deferred'])): ?><strong>Der neue öffentliche Produktstand wurde NICHT übernommen, weil er ältere Produkte ohne vollständige eBay-Prüfung verdrängt hätte. Der vorherige Freigabestand bleibt maßgeblich; einzelne Angebote müssen weiterhin aktuell gültig sein.</strong><?php endif; ?>
 +                    </p><p class="description"><strong>Offene Warenbereiche:</strong> <code><?php echo esc_html(implode(', ', array_slice((array)($canonical_run['completion_warning_concepts'] ?? array()),0,12))); ?></code><?php if(absint($canonical_run['technical_gap_count'] ?? 0)>12): ?> (weitere vorhanden)<?php endif; ?>.</p></div>
-+                <?php elseif ($canonical_status === 'completed' && empty($canonical_run['completed_with_skips'])) : ?><div class="notice notice-success inline"><p><strong>Gesamtlauf abgeschlossen:</strong> neue Etage vollständig geprüft und als sicherer Frontend-Checkpoint übernommen.</p></div><?php endif; ?>
++                <?php elseif ($canonical_status === 'completed' && array_key_exists('completed_with_skips',$canonical_run) && empty($canonical_run['completed_with_skips'])) : ?><div class="notice notice-success inline"><p><strong>Gesamtlauf abgeschlossen:</strong> neue Etage vollständig geprüft und als sicherer Frontend-Checkpoint übernommen.</p></div><?php endif; ?>
                  <?php if ($canonical_status === 'local_checked') : ?><div class="notice notice-warning inline"><p><strong>Lokale Neubewertung abgeschlossen:</strong> Keine neue eBay-Suche, keine neue öffentliche Freigabe. Bisheriger öffentlicher Stand bleibt geschützt; fehlende Produktversorgung ist weiter offen.</p></div><?php endif; ?>
                  <?php if ($canonical_open) : ?><p class="description"><strong>Startaktionen gesperrt:</strong> genau dieser Run ist aktiv. Der externe Taktgeber setzt ihn paketweise fort; die Seite kann geschlossen werden.</p><?php endif; ?>
              </section>
