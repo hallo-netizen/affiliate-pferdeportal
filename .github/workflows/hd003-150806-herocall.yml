@@ -1,0 +1,25 @@
+name: HD003 hero call site audit
+on:
+  push:
+    branches: [hobbyroom/hd003-150806-copy-hab-article-20261108]
+    paths: [.github/workflows/hd003-150806-herocall.yml]
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          with ZipFile(p) as z:
+            for name in z.namelist():
+              if name.endswith('.php'):
+                s=z.read(name).decode('utf8','replace')
+                for q in ['hd003_article_hero_markup_v150789','hd-article-top-v150789']:
+                  for m in re.finditer(re.escape(q),s):
+                    print('HERO_CALLEE',name,q,s[max(0,m.start()-900):m.start()+1150].replace('\n',' ')[:1900])
+          PY
