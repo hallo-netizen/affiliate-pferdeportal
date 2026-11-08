@@ -1,0 +1,23 @@
+name: PSTE temporary original one-owner duplicate-row regression
+on:
+  push:
+    branches: [fix/pste-kisten-einmalige-pruefung-20261107]
+permissions: {contents: read}
+jobs:
+  receipt-safety:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Only changed import and authentic 100-topic regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          D=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/QA_ONLY
+          python3 "$D/apply_existing_mini_kisten_import.py" /tmp/mini-qa
+          python3 "$D/apply_wp_single_owner_gate.py" /tmp/mini-qa/PSTE-KISTEN-GESAMT-QA-NICHT-INSTALLIEREN.zip /tmp/pste-qa.zip
+          unzip -q /tmp/pste-qa.zip -d /tmp/pste
+          I="/tmp/pste/Portal SEO Topic Engine/includes"
+          php -l "$I/class-pste-mini-workflow.php"
+          php "$D/test_100_keyword_end_to_end_simulation.php" "$I/class-pste-mini-workflow.php" "$I/class-pste-planning-readiness-gate.php" "$D/MINI_100_ORIGINAL_EXTERNAL_TITLES_20261106.json" > /tmp/out
+          grep -E "duplicate|malformed|other 86|SUMMARY" /tmp/out
+          echo "PASS SINGLE_IMPORT_NEGATIVE_REGRESSION_NOT_A_SEO_RECHECK"
