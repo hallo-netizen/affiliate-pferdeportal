@@ -80,3 +80,8 @@ Treffer = bekannten Fehlerweg nicht wiederholen.
 Wenn ein Chat tatsächlich ein Plugin entwickelt oder aktualisiert hat, muss vor Abschluss geprüft werden, ob dessen isolierte `CURRENT.zip` + `MANIFEST.md` im zentralen Ausgabeschrank auf den neuen belegten Stand synchronisiert wurden.
 
 Kann der aktuelle Pluginstand nicht vollständig und eindeutig aus der autoritativen Quelle erzeugt/bezogen werden: nicht raten, bisherigen Stand nicht ersetzen, `Plugins: BLOCKED`.
+
+
+## Neueste Teststand-Übergabe 08.11.2026 – PSTE/PSERC (maßgeblich)
+
+**Zuerst [CURRENT_STATE.md](CURRENT_STATE.md), Abschnitt „AKTUELLER REALSTAND – 08.11.2026 16:05 BERLIN“, lesen.** Danach [EVIDENCE/ISTSTAND_20261108_1605_EXTERNE_SEO_WEG_UXDATEN.md](EVIDENCE/ISTSTAND_20261108_1605_EXTERNE_SEO_WEG_UXDATEN.md) und [INSTALLATIONS_PAKETE/TESTPAAR_20261108_ARCHIV/MANIFEST.md](INSTALLATIONS_PAKETE/TESTPAAR_20261108_ARCHIV/MANIFEST.md) lesen. Der Betreiber hat beide Testplugins installiert und zweimal echte MINI-Exportdateien geliefert; die zweite enthält 1.179 technisch vorhandene Einträge, aber noch inhaltlich defekte 9 Editorial-/144 PPM679-Titel. Kein externer SEO-Owner-Lauf und kein Rückimport. **Keine erneute Diagnose, keine erneuten Screenshots/Uploads oder Plugininstallation anfordern.** Die Test-ZIPs liegen als echte Binärdateien in der privaten Dateiablage `/pferdeatelier/PLUGINS/`, in GitHub mit Hash und Status eingetragen. Nicht mit der älteren GitHub-Installations-ZIP oder autoritativen `CURRENT.zip` verwechseln. K0 bleibt unverändert; Draft-PR #682 nicht mergen.
