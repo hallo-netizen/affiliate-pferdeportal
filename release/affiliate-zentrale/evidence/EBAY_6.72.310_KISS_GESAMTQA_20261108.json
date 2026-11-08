@@ -1,5 +1,5 @@
 {
-  "status": "EXISTING TEST-ONLY PATCH CORRECTED AND FOCUSED NATIVE PHP+NODE TESTED; EXACT 6.72.308 SOURCE/ZIP REPLAY + LIVE E2E STILL OPEN",
+  "status": "EXISTING SINGLE TEST-ONLY PATCH UPDATED: LAST-GOOD BUSINESS AND PRIVATE GUARD VERIFIED IN 13 PHP ISOLATED TEST CASES; ORIGINAL SOURCE REPLAY / LIVE WP+EBAY E2E STILL OPEN",
   "date": "2026-11-08",
   "version": "6.72.310 (internal work source ONLY, no ZIP issued)",
   "original_zip_file": "AFFILIATE_ZENTRALE_6.72.308_URSACHENFIX_GESAMTTEST_NUR_TEST.zip",
@@ -19,23 +19,23 @@
   "tests_total": "NOT RERUN FOR CURRENT COMPLETE SOURCE",
   "original_red_reproduction": "PASS (separate original regression)",
   "patch_path": "EBAY_672308_TO_672310_GESAMTURSACHENPATCH_NUR_TEST.patch",
-  "patch_sha256": "69b953215b977c39f9a6fca4b4e4b18652f1a83d14b9a80ac60573f45aaa312d",
-  "patch_git_blob_sha": "af5256644750b77cf24a0f2740b3633b04f12f9b",
+  "patch_sha256": "08b23c995746f97b810250fac5a62909dc49ef812648ea74e1814af5369f04fb",
+  "patch_git_blob_sha": "e015eeb5bea978edad04d572faea7fb5babcbd77",
   "patch_replay": "NOT DONE; original 6.72.308 66-file user ZIP is not available in this conversation nor in GitHub office repository. 82 tests and previous 66/66 pass are not valid proof for current changed patch.",
   "protected_frontend_and_catalog_source": "ALL 7 checked source files byte-identical to original 6.72.308",
   "remaining_gates": [
-    "Exact original 6.72.308 ZIP full 66-file patch replay and 82-case local regression (not currently possible)",
-    "Authenticated WordPress/MariaDB eBay saved-state, source row, checkpoint, plan and archive regression",
-    "Real authenticated eBay Browse timeout and recovery with same cursor",
-    "Actual browser-rendered product cards on categories AND articles",
-    "Existing canonical release_guard release-check PASS and original-source release review"
+    "Patch 6.72.310 apply against exact complete 6.72.308 original 66-file source and rerun all 82 integration regressions (source unavailable in this runtime)",
+    "Real authenticated WordPress/MariaDB source rows + saved public checkpoints + run terminal/archive verification",
+    "Real authenticated eBay Browse timeout/retry for BUSINESS & PRIVATE, and normal provider success",
+    "Browser-rendered public category and article product cards, including previous and new offers",
+    "Formal release governance source and installer gates after complete PASS"
   ],
   "release_allowed": false,
   "installation_instruction": "NONE",
   "newly_reproduced_public_checkpoint_root_risk": {
     "original_method": "ebay_run_commit_public_checkpoint updates the old safe checkpoint with the new candidate, even when one verified eBay search profile is still technically open",
     "proof_fixture": "Previous safe BUSINESS ID [42], candidate [], one eBay product family with exhausted cURL28 timeout; original public commit wrote [] and triggered article product rebuild",
-    "safety_guard": "In the EXISTING public_verify owner only: if a technical search remains open and publishing candidate would remove a prior safe BUSINESS campaign ID, do not replace the stored checkpoint; complete run with technical warning and checkpoint_deferred flag, archive it; full-success/no-withdrawal path unchanged",
+    "safety_guard": "In existing public_verify owner only: when any transient eBay search is unverified, publication may not withdraw previously safe BUSINESS campaign OR PRIVATE listing. Defer whole public checkpoint update, preserve both last-good sets. Freshness/eligibility of each offer remain separately required.",
     "independent_public_updates": "When replacement would drop old safe items, new public checkpoint is deferred until next ordinary safe run; independent discovery and candidate checks still complete; this is a deliberate safety tradeoff, not a claim that every new card was published",
     "freshness_limitation": "Old SAFE checkpoint remains the allowlist; it does NOT prove every old offer is still currently valid. Existing independent source freshness/content policy output checks must continue to reject stale/invalid offers; not re-approved here.",
     "no_new_architecture": "No new storage table, worker, external request, cache or second correctness checker."
@@ -107,9 +107,18 @@
       ],
       "observed": "Product suggestion headings appear, but no concrete product title / clickable eBay or Amazon offering is present in extracted content adjacent to them.",
       "limit": "Not proof of rendered browser-visible emptiness; JS, dynamic cards, caching, installed version and authenticated live database state not verified."
+    },
+    "checkpoint_private_protection": {
+      "root_cause": "Previous 6.72.310 publication deferral compared only old BUSINESS campaign IDs. If a transient eBay search caused a selected PRIVATE listing to disappear but BUSINESS IDs were unchanged, the new checkpoint could withdraw the old PRIVATE listing.",
+      "old_negative_case": "BUSINESS old [10] candidate [10], PRIVATE old [20] candidate [], unverified eBay search = previous guard commits; invariant violated.",
+      "fix": "One existing checkpoint guard now compares old and candidate BUSINESS + PRIVATE IDs, with short-circuit OR; no new worker, verification layer, persistence, database schema or frontend call.",
+      "php_cli_isolated_cases": "13/13 PASS, including old-B drop, old-P drop, both, no drop, new-only, empty previous, duplicate IDs, string IDs, fully verified run and unsafe old checkpoint",
+      "diff_integrity": "24/24 hunks count-correct; patch changed only test evidence",
+      "test_boundary": "13 tests reproduce exact boolean guard and ID normalization as an isolated PHP snippet, NOT full 6.72.308 source or WordPress plugin. Full original replay and real E2E still REQUIRED.",
+      "no_release": true
     }
   },
-  "patch_bytes": 39907,
+  "patch_bytes": 40207,
   "production_installation_user_confirmed": {
     "version": "6.72.308",
     "source": "explicit user statement in current conversation 2026-11-08",
