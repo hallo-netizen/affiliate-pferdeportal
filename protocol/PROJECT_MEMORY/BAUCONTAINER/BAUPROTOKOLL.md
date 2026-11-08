@@ -482,3 +482,10 @@ PRÜFUNG: Eigenständige Current pro Büro, keine Fremdbüroänderung in Fach-/P
 **Prüfung:** Der lokale PHP-Read-only-Nachbau mit realen 1.179 Quellzeilen, echten neun „Array“-Titeln, drei fehlenden Postzuordnungen und 87 JA-Keywords bestand 46/46 Tests. 83/83 PHP-Syntax, 121/121 ZIP-CRC. Positiver kompletter Simulationsbestand hat 9+3 ausdrücklich synthetische Werte; daher kein echter Vollständigkeitsbeleg für WordPress. Ursprüngliche gespeicherte Option weder überschrieben noch gelöscht, kein WordPress/MySQL-Echtlauf mit .24. Sicherheits-Hardlock und andere Portale unverändert.
 
 **Ablage/Autorität:** `PROJEKTE/PFERDE_ATELIER/PLUGINS/CURRENT_STATE.md` bleibt einzige aktuelle Fachautorität; `QA_ONLY/PSTE_05714424_QUELLFIX/` ist Bau- und Prüfnachweis, Binärpakete privat `/pferdeatelier/PLUGINS/`. Draft-PR #682 nicht mergen.
+
+
+## 2026-11-08 – V24 ECHT-WP-Export-Abnahme aus v24 nach Nutzer-Upload
+
+**Bedarf:** Die Testsite-Lesefunktion .24 muss an wirklich vorhandenen WordPress-Daten nachgewiesen werden, nicht nur künstlichem neunfach gültigen Redaktionsplan. **Aktion:** Originalexport 16:29 UTC, alle sechs Quellen und 1.179 Zeilen ausgewertet; strenge Negativprobe der neun identischen `Array`-Platzhalter und drei weiterhin belegten unlesbaren PPM679-Referenzen. 55/55 lokale PHP-Tests mit echter Exportdatei erfolgreich. Vollständiger gespeicherter Wert jeder der neun Editorial-Zeilen anhand SHA256-Beweis rekonstruiert; keinerlei ursprüngliche Namen vorhanden. **Grenze:** Test belegt Export-/Sperrlogik, nicht 87 fachliche SEO-FREI-Entscheidungen; künstliche Titel ausschließlich in expliziter Positivprobe. Herkunft der neun Zeilen (externer Filter oder Importoption) nicht im bisherigen JSON unterscheidbar. Kein produktives Freigabe-Hash, keine Änderung von WordPress-Optionen, WordPress-Artikeln, K0 oder Live.
+
+**Ablage:** `PROJEKTE/PFERDE_ATELIER/PLUGINS/EVIDENCE/PSTE_V24_ECHTER_WP_EXPORT_162920_REPLAY_55PASS_20261108.md` plus `QA_ONLY/PSTE_05714424_QUELLFIX/LIVE_WP_20261108_162920/`; Roh-JSON privat. Keine neuen Plugin-Binaries. Sicherheits-Hardlocks unverändert, Draft PR #682.
