@@ -24,8 +24,9 @@ jobs:
           path='affiliate-portal-router/includes/trait-ppar-ebay-run.php'
           chunk=raw.split('diff --git a/'+path+' b/'+path,1)[1].split('\ndiff --git ',1)[0]
           hunks=re.split(r'(?=^@@ )',chunk,flags=re.M)
-          good=[x for x in hunks if 'private function ebay_run_public_source_refresh_tick' in x]
-          assert len(good)==1
+          good=[x for x in hunks if x.startswith('@@ ') and 'private function ebay_run_public_source_refresh_tick' in x]
+          completed=[x for x in hunks if x.startswith('@@ ') and 'private function ebay_run_complete' in x]
+          assert len(good)==1 and len(completed)==1, 'Source refresh and canonical completion must be tested together'
           hunk=good[0]
           assert 'private function ebay_run_tick_public_verify' in hunk
           assert 'if(!$this->ebay_run_public_source_refresh_tick($run,$settings))' in hunk
@@ -40,7 +41,7 @@ jobs:
           dst=root/path
           dst.parent.mkdir(parents=True,exist_ok=True)
           shutil.copy(src,dst)
-          (root/'lastmile.patch').write_text('diff --git a/'+path+' b/'+path+'\n--- a/'+path+'\n+++ b/'+path+'\n'+hunk)
+          (root/'lastmile.patch').write_text('diff --git a/'+path+' b/'+path+'\n--- a/'+path+'\n+++ b/'+path+'\n'+completed[0]+hunk)
           print('PASS: ONE EXISTING PUBLIC GATE, NO SECOND WORKER, NO POLICY BYPASS, PHYSICAL PATCH CHECK')
           PY
           cd /tmp/ebay310_qa
