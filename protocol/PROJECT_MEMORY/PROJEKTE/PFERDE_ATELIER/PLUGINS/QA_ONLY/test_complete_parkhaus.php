@@ -129,6 +129,16 @@ check($out['items'][2]['source']==='PSTE_PLAN'&&$out['items'][3]['source']==='PS
 check($out['items'][3]['status']==='REVIEW_REQUIRED_SEMANTIC_OVERLAP','held PSERC plan retained');
 check($out['items'][2]['seo_topic_id']===$out['items'][3]['seo_topic_id'],'same PSTE and PSERC topic can be recognized as one, without second intent check');
 check(preg_match('/^[a-f0-9]{64}$/D',$out['sha256'])===1,'single snapshot version fingerprint');
+$realSavedPlan=$GLOBALS['existing_runtime_plan'];
+$GLOBALS['existing_runtime_plan']=null;
+$out=PSTE_Mini_Workflow::readParkhausForMini();
+check($out['complete']===false&&$out['reason']==='EXISTING_RUNTIME_EDITORIAL_PLAN_MISSING_OR_INVALID',
+    'missing saved PPM679 plan cannot falsely make entire parkhouse COMPLETE');
+$GLOBALS['existing_runtime_plan']=['items'=>[]];
+$out=PSTE_Mini_Workflow::readParkhausForMini();
+check($out['complete']===false&&$out['reason']==='EXISTING_RUNTIME_EDITORIAL_PLAN_EMPTY',
+    'empty saved PPM679 plan cannot stand in for real existing article slots');
+$GLOBALS['existing_runtime_plan']=$realSavedPlan;
 $GLOBALS['runtime_plan_reads']=0;
 $GLOBALS['simulate_runtime_plan_change']=true;
 $out=PSTE_Mini_Workflow::readParkhausForMini();
