@@ -50,6 +50,8 @@ jobs:
           SRC=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/INSTALLATIONS_PAKETE/PSTE-0.57.144.22-NUR-TEST.zip
           unzip -Z1 "$SRC" | grep -Ei '(schema|install|migrat|database|repository|portal-seo-topic-engine.php)' || true
           unzip -p "$SRC" "Portal SEO Topic Engine/portal-seo-topic-engine.php" | grep -nEi '(register_activation_hook|dbDelta|createTables|migrat|schema|install)' | sed -n '1,55p' || true
+          echo 'Read the existing protected migration lifecycle source (not changing it):'
+          php /tmp/wp eval 'foreach([["PSTE_Plugin","activate"],["PSTE_Plugin","maybeMigrate"],["PSTE_Plugin","migrationBootStatus"],["PSTE_Repository","createSchema"]] as [$cl,$m]){ $rf=new ReflectionMethod($cl,$m);$ln=file($rf->getFileName());$count=$rf->getEndLine()-$rf->getStartLine()+1;echo "WP_REAL_EXISTING_SOURCE $cl::$m lines=$count\\n";echo implode("",array_slice($ln,$rf->getStartLine()-1,min($count,85)));echo "\\nEND_SOURCE\\n"; }echo "WP_REAL_SCHEMA_OPTION=".json_encode(get_option(PSTE_OPTION_SCHEMA,null))." WP_REAL_MIGRATION=".json_encode(PSTE_Plugin::migrationBootStatus())."\\n";' --path=/tmp/wp-real --allow-root
           echo 'Inspect historical PSERC archive without assuming it matches current plugin:'
           Z=control/startmaster0107/runtime_packages/PSERC-FIX.zip
           unzip -Z1 "$Z" | sed -n '1,15p'
