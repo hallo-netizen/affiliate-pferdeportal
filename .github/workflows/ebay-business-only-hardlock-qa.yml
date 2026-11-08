@@ -3,7 +3,7 @@ on:
   push:
     branches: [affiliate-release-current]
     paths:
-      - 'release/affiliate-zentrale/evidence/EBAY_BUSINESS_ONLY_HARDLOCK_NUR_TEST_20261108.patch'
+      - 'release/affiliate-zentrale/evidence/EBAY_672308_TO_672311_BUSINESS_ONLY_GESAMTURSACHENPATCH_NUR_TEST.patch'
       - '.github/workflows/ebay-business-only-hardlock-qa.yml'
   workflow_dispatch:
 permissions:
@@ -19,9 +19,24 @@ jobs:
           set -euo pipefail
           mkdir -p /tmp/ebay_business_qa
           cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/ebay_business_qa/affiliate-portal-router
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          src=Path('release/affiliate-zentrale/evidence/EBAY_672308_TO_672311_BUSINESS_ONLY_GESAMTURSACHENPATCH_NUR_TEST.patch').read_text()
+          pieces=re.split(r'(?=^diff --git )',src,flags=re.M)
+          diff='';n=0
+          for piece in pieces:
+              if not piece.startswith('diff --git '):continue
+              head,*hunks=re.split(r'(?=^@@ )',piece,flags=re.M)
+              selected=[h for h in hunks if re.match(r'^@@ -\\d+,\\d+ \\+\\d+,\\d+ @@ BUSINESS_ONLY',h)]
+              if selected: diff+=head+''.join(selected);n+=len(selected)
+          assert n==12,f'Expected 12 BUSINESS-only hardlock hunks in the SINGLE 6.72.311 cumulative patch, got {n}'
+          Path('/tmp/ebay_business_qa/business-only.patch').write_text(diff)
+          print('PASS 12 business-only hunks belong to single cumulative eBay 6.72.311 candidate')
+          PY
           cd /tmp/ebay_business_qa
-          git apply --check "$GITHUB_WORKSPACE/release/affiliate-zentrale/evidence/EBAY_BUSINESS_ONLY_HARDLOCK_NUR_TEST_20261108.patch"
-          git apply "$GITHUB_WORKSPACE/release/affiliate-zentrale/evidence/EBAY_BUSINESS_ONLY_HARDLOCK_NUR_TEST_20261108.patch"
+          git apply --check business-only.patch
+          git apply business-only.patch
           php -l affiliate-portal-router/includes/trait-ppar-ebay.php
           php -l affiliate-portal-router/includes/trait-ppar-ebay-run.php
       - name: Exercise real PHP BUSINESS-only source and all legacy-private gates
