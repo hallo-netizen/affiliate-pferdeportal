@@ -26,7 +26,7 @@ replacement="""    public static function apply(array $candidate,array $inventor
         $poolKey=(string)($candidate['pool_key']??'');
         $raw=PSTE_Editorializer::sourceQuery($candidate);
         $receipt=($poolKey!==''&&class_exists('PSTE_Mini_Workflow'))
-            ?PSTE_Mini_Workflow::singleOwnerSeoFor($poolKey,$raw):[];
+            ?PSTE_Mini_Workflow::singleOwnerSeoFor($poolKey,$raw,true):[];
         $miniAwaiting=$poolKey!==''&&class_exists('PSTE_Mini_Workflow')
             &&PSTE_Mini_Workflow::isMiniTopicAwaitingSeo($poolKey);
         if($receipt||$miniAwaiting){
