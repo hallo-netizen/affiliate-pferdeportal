@@ -1,0 +1,88 @@
+--- a/affiliate-portal-router/includes/trait-ppar-ebay.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay.php
+@@ -2897,6 +2897,11 @@
+         ));
+         if (is_wp_error($response)) { return $response; }
+         $code = absint(wp_remote_retrieve_response_code($response));
++        // Only genuine temporary provider failures may use the existing
++        // bounded discovery retry. Never retry invalid credentials or URLs.
++        if ($code === 429 || $code >= 500) {
++            return new WP_Error('ebay_search_transient_http', 'eBay Browse API voruebergehend nicht erreichbar (HTTP ' . $code . ').');
++        }
+         $body = json_decode((string) wp_remote_retrieve_body($response), true);
+         if ($code < 200 || $code >= 300 || !is_array($body)) {
+             return new WP_Error('ebay_search_failed', 'eBay Browse API fehlgeschlagen (HTTP ' . $code . ').');
+@@ -8150,7 +8155,33 @@
+                     $summary['profile_stats'][$profile_key]['technical_blocked']++;
+                     $this->ebay_summary_reason_add($summary, 'technical', $page_data, (string) $profile['rule']['id'], $profile['seller_type'], $profile_key);
+                     $summary['errors'][] = array('rule'=>(string) $profile['rule']['id'],'seller_type'=>$profile['seller_type'],'error'=>$page_data->get_error_message(),'code'=>$page_data->get_error_code());
+-                    $summary['profile_stats'][$profile_key]['stopped_reason'] = 'request_error';
++
++                    // Retry ONLY transient eBay transport/provider failures on
++                    // this same durable profile and unchanged pagination cursor.
++                    // One failed HTTP call must not retire a product family.
++                    // Keep retries bounded to two additional worker packages,
++                    // never block other profiles or turn an unverified result
++                    // into a safe supply gap / a false completed run.
++                    $error_code = sanitize_key((string) $page_data->get_error_code());
++                    $message = (string) $page_data->get_error_message();
++                    $temporary = $error_code === 'ebay_search_transient_http'
++                        || ($error_code === 'http_request_failed'
++                            && preg_match('/(?:curl error (?:6|7|28|35|52|55|56)\b|timed? out|timeout|connection reset|temporarily unavailable)/i', $message));
++                    $attempts = absint($profile['transient_retry_attempts'] ?? 0);
++                    if ($temporary && $attempts < 2) {
++                        $profile['transient_retry_attempts'] = $attempts + 1;
++                        $summary['profile_stats'][$profile_key]['transient_retry_attempts'] = $attempts + 1;
++                        // No 'complete' / 'stopped_reason': this page is still
++                        // outstanding, with its original next URL intact.
++                        unset($job['inflight_profile']);
++                        $this->ebay_sync_advance_cursor($job, $profile_key);
++                        $this->ebay_sync_touch_progress($job, 'transient_retry_queued');
++                        $this->ebay_sync_job_save($job);
++                        unset($profile);
++                        $reschedule = true;
++                        return true; // never run retry inside the timed-out request
++                    }
++                    $summary['profile_stats'][$profile_key]['stopped_reason'] = $temporary ? 'transient_retry_exhausted' : 'request_error';
+                     $profile['active'] = false;
+                     unset($job['inflight_profile']);
+                     $this->ebay_sync_advance_cursor($job, $profile_key);
+@@ -8159,6 +8190,10 @@
+                     unset($profile);
+                     continue;
+                 }
++                // A successful page breaks the retry streak, including when
++                // another page of the same profile follows.
++                $profile['transient_retry_attempts'] = 0;
++                $summary['profile_stats'][$profile_key]['transient_retry_attempts'] = 0;
+ 
+                 $items = array_values((array) ($page_data['items'] ?? array()));
+                 $summary['pages']++;
+--- a/affiliate-portal-router/pferdeportal-affiliate-router.php
++++ b/affiliate-portal-router/pferdeportal-affiliate-router.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
+  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
+- * Version: 6.72.308
++ * Version: 6.72.309
+  * Author: OpenAI
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -120,7 +120,7 @@
+     use PPAR_DFS_Amazon_Trait;
+     use PPAR_Digistore24_Trait;
+     use PPAR_Housekeeping_Trait;
+-    const VERSION = '6.72.308';
++    const VERSION = '6.72.309';
+     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
+     const CONTRACT_VERSION = '1.0';
+     const PROVIDER_CONTRACT_VERSION = '2.0';
+--- a/affiliate-portal-router/readme.txt
++++ b/affiliate-portal-router/readme.txt
+@@ -1,3 +1,5 @@
++V6.72.309 NUR TEST: Ein einzelner zeitweiliger eBay-Suchseiten-Timeout, Provider-HTTP 429 oder 5xx unterbricht nicht mehr sofort die gesamte Discovery. Genau dieselbe Profil/Seitenposition wird im vorhandenen Worker hoechstens zweimal erneut versucht; andere Produktprofile laufen weiter. Dauerhaft unvollstaendige Profile bleiben ein echter Teilfehler, niemals ein falscher Abschluss. Keine neuen Worker, Tabellen, APIs oder Aenderungen an den Sicherheits-/Marktplatz-/Produktkartenregeln. Echte Live-Abnahme noch offen.
++
+ V6.72.308 NUR TEST – Ein gemeinsamer Ursachen-Fix statt Einzelbegriffs-Patches. Die BUSINESS-Auswahl, Produktveröffentlichung und öffentliche Abdeckungsprüfung behandeln Datenbankfehler jetzt durchgehend als Fehler, niemals als "keine Ware" oder als abgeschlossenen erfolgreichen Durchgang. Fehlende gespeicherte Produktquellen werden nicht als normale erfolglose Suche verschluckt. Reale Gründe einer gescheiterten Aktivierung werden im bestehenden Diagnoseweg sichtbar, ohne Werbe-, Fach-, Sicherheits- oder Quellenprüfungen zu lockern. Enthält alle bewahrten Korrekturen bis 6.72.307 (inklusive eBay-Kontolöschungsmeldungen). Keine neuen Tabellen, Cronstrecken, Suchläufe oder Architektur. Echte WordPress-Liveabnahme bleibt erforderlich.
+ 
+ V6.72.307 NUR TEST: Sammelfix gegen die belegten eBay-Fehlwege. SQL-Fehler beim Auslesen des Nachrichtenposteingangs sind kein leerer Posteingang; fehlgeschlagene Löschungen in Partneroptionen oder eigenen WordPress-Anhängen verhindern die Erfolgsmeldung und bleiben wiederholbar. Lesefehler nach einem Worker-Durchgang werden sichtbar und erneut terminiert. Alte Fehlermeldungen werden erst nach sicher geleerter Warteschlange entfernt. Pferde-Katalogkorrektur: Reitplatzplaner als physische Ware erneut zulassen, nun 298 Pflichtwarengruppen. Die Backend-Abdeckung kennzeichnet alte statt aktuelle Sollzahlen. Alle bisherigen Produkt-/Sicherheitsregeln bleiben unverändert. Keine neue Queue/Worker/API/Tabelle und keine Livefreigabe ohne echten WordPress-Nachweis.
