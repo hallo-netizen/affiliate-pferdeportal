@@ -119,6 +119,23 @@ $manipulated=$document;$manipulated['items'][0]['raw_query']='TAMPERED';
 $mix=PSTE_Mini_Workflow::acceptSingleOwnerSeoDecisions($state,$manipulated,$snapshot);
 chk(count($mix['seo_decisions'])===86,'one falsified item held; remaining 86 processed');
 chk(isset($mix['clarification'][$results[0]['pool_key']]),'falsified item in existing clarification box');
+$double=$document;$doubleRow=null;
+foreach($double['items'] as $item)if($item['pool_key']===$selectedFree){$doubleRow=$item;break;}
+chk(is_array($doubleRow)&&$doubleRow['box']==='FREI','duplicate-row test uses one actually free original topic');
+$double['items'][]=$doubleRow;
+$doubleResult=PSTE_Mini_Workflow::acceptSingleOwnerSeoDecisions($updated,$double,$snapshot);
+chk(!isset($doubleResult['seo_decisions'][$selectedFree]),
+    'two rows for same original keyword revoke even a previously approved FREI');
+chk(($doubleResult['clarification'][$selectedFree]['reason_code']??'')==='SEO_DUPLICATE_SOURCE_ROWS',
+    'both contradictory external rows held by existing clarification');
+chk(count($doubleResult['seo_decisions'])===86,
+    'other 86 original externally decided topics unaffected by duplicate');
+$malformed=$document;$malformed['items'][]=null;
+$malformedResult=PSTE_Mini_Workflow::acceptSingleOwnerSeoDecisions($state,$malformed,$snapshot);
+chk(count($malformedResult['seo_decisions'])===87,
+    'one malformed external row cannot stop valid 87-topic batch');
+chk(isset($malformedResult['clarification']['UNKNOWN_ROW_87']),
+    'malformed unidentifiable row isolated and reported, not silently discarded');
 $pending=$updated;$pending['seo_decisions']=[];$GLOBALS['options']['pste_mini_keyword_roundtrip_v1']=$pending;
 $key=$selectedFree;$row=$completed[$key];
 $stale=PSTE_Planning_Readiness_Gate::apply(['pool_key'=>$key,'raw_query'=>$row['raw_query'],
