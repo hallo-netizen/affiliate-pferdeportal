@@ -5,24 +5,24 @@
   "candidate": "6.72.311 – BUSINESS ONLY – TEST-ONLY NOT INSTALLED",
   "supersedes": "6.72.310 old PRIVATE-route candidate: obsolete, do not install.",
   "patch_path": "release/affiliate-zentrale/evidence/EBAY_672308_TO_672311_BUSINESS_ONLY_GESAMTURSACHENPATCH_NUR_TEST.patch",
-  "patch_blob_sha": "0259a400f5d79f8b09f93fee2c797cd00c3d2a34",
+  "patch_blob_sha": "8bdf581de57057af8a5b9b6bf9a6fd76bce376d6",
   "changed_php_or_readme_files": 5,
   "combined_source_hunks": 45,
   "private_hardlock_hunks": 17,
   "passed_tests": {
-    "tested_in": "GitHub Actions run 42496032110",
-    "url": "https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/42496032110",
-    "result": "56/56 executed PHP reference checks PASS (19 business route/native HivePress + 16 discovery/technical gap + 8 legacy active-run phase transitions + 13 BUSINESS product-card delivery); PHP syntax PASS. Selected 22 cumulative patch hunks replayed onto old reference source; NOT an exact 6.72.308 full replay.",
+    "tested_in": "GitHub Actions run 42496689055",
+    "url": "https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/42496689055",
+    "result": "75/75 PASS across five real-PHP reference test stages (19 BUSINESS-only seller/native HivePress + 16 discovery/technical gap + 8 legacy in-flight + 13 BUSINESS card delivery + 19 final refresh/checkpoint transitions); PHP syntax PASS. Full original 6.72.308 + real eBay + WordPress E2E still release-gated.",
     "verifies": [
-      "PRIVATE disabled in defaults, normalized and old raw settings; old private checkpoints never publish",
-      "old active ALL/PRIVATE selection and gapfill rejected before processing; legacy private cleanup skipped, business cleanup stays business-only",
-      "transient timeout, permanent error and mixed incomplete profiles are differentiated; missing products not fabricated as empty supply",
-      "valid business product card allowed only with fresh saved source, matching contract, active route, policy and public checkpoint",
-      "stale, ended, blocked, unsourced/unmarked and unapproved products cannot render",
-      "other independent provider and native HivePress listings remain unaffected"
+      "Known fatal final-source bug found by executing actual code: candidate source check fed ['BUSINESS',post_id] array into get_post_meta(id), causing TypeError; fixed at common target construction to flat BUSINESS post IDs.",
+      "Final source refresh: valid fresh source skips remote, transient timeout resumes exact same offer, only 2 external getItem calls per tick, cursor persists and later completes.",
+      "Third transient timeout with safe last-good checkpoint defers new publication and warns; without safe last-good checkpoint fails closed; permanent source failure always stops unsafe publication.",
+      "Missing saved eBay source or invalid product identity blocks output; fresh accepted BUSINESS candidates commit via business cleanup only; technical gap cannot withdraw last-good card.",
+      "PRIVATE disabled in legacy persisted runs across selection, gapfill, cleanup and previous public checkpoints; other providers and native HivePress listings stay independent.",
+      "Structured consistency: cumulative patch 45 unified hunks across 5 files, all old/new hunk lengths internally consistent."
     ]
   },
-  "live_status": "NOT DEPLOYED. All 56 checks on older reference PHP with selected 6.72.311 hunks, not whole actual 6.72.308 original or WordPress+MariaDB+eBay live E2E.",
-  "required_for_release": "Exact original 6.72.308 upload is historically verified (not to be questioned); obtain current readable bytes from Campus/plugin archive, apply all 45 hunks and run full WP MariaDB eBay browse/getItem and actual HTML product card + retired old native eBay listing checks before release.",
+  "live_status": "TEST ONLY; NOT INSTALLED. Complete original 6.72.308 upload was previously verified and must not be denied. These 75 executed PHP scenarios use old available reference traits plus individually selected patch hunks, not full 45-hunk original source replay nor actual WP DB/eBay Browse/getItem production E2E.",
+  "required_for_release": "Use previously verified original ZIP 6.72.308 with exact SHA256, replay full 45-hunk patch against bytes, lint and run all source tests + real MariaDB/WordPress/eBay product-card and eBay-generated HivePress legacy tests; do not install release until complete.",
   "release_allowed": false
 }
