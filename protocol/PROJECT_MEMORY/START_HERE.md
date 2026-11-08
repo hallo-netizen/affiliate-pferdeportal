@@ -32,6 +32,7 @@ Diese Aussagen sind gleichwertige Routingaufträge:
 - `Geh ins Pferde-Atelier.`
 - `Geh zu Hab & Bewahr.`
 - `Geh zu Hobby Depot.`
+- `Geh zu Robotik, Büro Kategorie.`
 - `Geh zu Hobby Depot, Büro PLUGINS.`
 - `Geh zu Hobby Depot, Büro WORDPRESS_TECHNIK.`
 - `Geh ins Pferde-Atelier, Büro TEXT/SEO.`
