@@ -1,0 +1,27 @@
+# HD009 0.1.32 – kostenpflichtige Amazon-Suchwörter mit Artikelbeleg, 08.11.2026
+
+## Tatsächlicher Ausgangspunkt
+- Letzter offiziell freigegebener GitHub-CURRENT: HD009 **0.1.31**, vollständig unverändert gesichert als `HOBBY_DEPOT_AFFILIATE_HD009_0.1.31.zip`. Der Nutzer drückte im installierten Backend den kostenlosen Prüfknopf. Reales Ergebnis: **Metallringe → post:903183** („Kettenhemdflechten: Ringe sauber öffnen und schließen“); Quelle der falsch allgemeinen Suche ist die erste Position der Hobbyregister-Ausrüstung.
+- Quelltest gegen tatsächliche unveränderte HD007-Registrierung (862 Datensätze) und HD003-Kategorien (381 aktive Hobbyziele): Neben „Metallringe“ gab es viele als Suchwort ungeeignete erste Listenelemente, z. B. „Werkstatt“, „Wetterfeste Kleidung“, „Sichere Aufbewahrung“. Auch eine zuerst geprüfte alternative Schleife, die stillschweigend spätere Elemente wie „Farben“ auswählte, ist **verworfen**, nicht ausgeliefert.
+- Der Benutzer hatte im Screenshot den Haken bei kostenpflichtiger Automatik gesetzt; Anzeige 0/5 Aufträge. Ob er diesen inzwischen abwählte, ist **nicht bekannt**. Deshalb neue Version mit neuer zwingender bewusster Kostenfreigabe.
+
+## Der geprüfte Ursachenfix in 0.1.32
+1. Nur der zuerst im HD007 geprüfte Ausrüstungsbegriff darf Grundlage einer automatischen Produktrecherche werden. Ein unkonkreter/ungeeigneter Erstbegriff wird **nicht** durch eine zufällige spätere Material-/Werkzeugposition ersetzt; sicherer Verzicht statt falscher bezahlter Suche.
+2. Für die allgemeine Kategorie von Metallringen bei einem durch den tatsächlichen Hobbynamensbestand belegten `...flechten`-Handwerk wird die konkrete Verwendung mitgesucht. Aus **Kettenhemdflechten + Metallringe** wird **„Kettenhemd Ringe“**, nicht mehr „Metallringe“. Kein blindes Einfügen von Fantasieprodukten oder vermuteten Marken.
+3. Ein Produkt darf nur recherchiert werden, wenn seine wesentlichen Suchwortbestandteile **auch im Artikeltitel** vorkommen; allein die Zuordnung zur Hobby-Kategorie reicht nicht. Für den echten Beispielartikel `post:903183` wurde mit exaktem Titel und Kategorie positiv getestet, eine andere Beschreibung derselben Kategorie als negativ.
+4. DataForSEO-Treffer müssen weiterhin nachweislich von `amazon.de` stammen, eine gültige ASIN haben und sowohl dem Ausrüstungs- als auch ggf. dem konkreten Verwendungsbegriff im Titel entsprechen. Zusammengesetzte deutsche Produktwörter wie „Kettenhemdringe“ werden korrekt verstanden; bloße allgemeine Schmuckringe bleiben ausgeschlossen.
+5. **Sicherheitsstop beim Upgrade:** eine im alten 0.1.31 erteilte Kostenfreigabe gilt ausdrücklich **nicht** für 0.1.32. Die Automatik startet nach dem Update nicht kostenpflichtig weiter, bis sie nach kostenloser Vorprüfung bewusst neu aktiviert und gespeichert wird. Das bisherige 5-Aufträge-pro-UTC-Tag-Limit, kostenfreies Abholen bereits angelegter Aufgaben und Fehlerstopp bleiben in der einen vorhandenen HD009-Amazon-Klasse erhalten.
+6. Das einzige Plugin bleibt die Affiliate-Zentrale **HD009**. Keine neue WordPress-Erweiterung, keine neue Datenbanktabelle, keine weiteren Filter auf eBay-/Idealo-Produkte, keine Änderung des HD003-Designs, der HD006-Bildzentrale oder des HD007-Hobbyregisters. Nur zwei originale PHP-Dateien im ZIP geändert.
+
+## Harte Prüfergebnisse
+- Vollständiges ZIP `HOBBY_DEPOT_AFFILIATE_HD009_0.1.32.zip` und bytegleiches `CURRENT.zip`, **1.564.075 Bytes**, SHA-256 `d433db74b493407a4c26faef591574e644201846078b7aa7aa3541126f9359b8`, Git-Blob `eddd26ff7211fe7075d2ff91b46b4e88372bc8ad`.
+- GitHub Actions **42500774245**: ZIP-CRC **41/41 PASS**, PHP-Syntax **24/24 PASS**; zwei vorhandene PHP-Dateien geändert. Exakte Original-Hobbyregister- und Kategorien-JSONs in echtem PHP, keine anderen Pluginquellen.
+- **186** vorsichtig gefilterte mögliche erste Produktbegriffe aus 381 aktiven Hobbys (kein Versprechen, dass für jeden schon ein öffentlich passender Artikel oder ein echtes Amazon-Produkt vorhanden ist).
+- Positiv/negativ getestet: „Kettenhemd Ringe“ statt „Metallringe“; dasselbe Hobby mit einem unpassenden Artikeltitel bleibt gesperrt; falscher Anbieter/ASIN/Titel wird verworfen; zusammengesetzte Kettenhemdringe werden gefunden; keine fremden Bilder/Preise gespeichert; alte kostenpflichtige Opt-in-Stufe wird beim Upgrade ungültig. Start AUS, fünf automatische bezahlte Aufträge/Tag, ein offener Auftrag blockiert neue Zahlungen, kostenloser Ergebnisabruf, Fehler stoppt weitere Kosten.
+- **Keine** echten DataForSEO-Kosten, keine produktive WordPress-Installation und keine bestätigte live sichtbare Amazon-Produktkarte aus diesen Tests. Zulässige automatische Amazon-Bildquelle und der gemeinsame eBay-/Idealo-Vorrang bleiben separat offen.
+
+## Nächste konkrete Abnahme
+1. HD009 **0.1.32** installieren, andere Plugins unverändert lassen.
+2. Unter Affiliate-Zentrale → Amazon + idealo **„Nächsten Kandidaten kostenlos prüfen“** drücken und die tatsächliche Zeile ansehen. Wenn wieder der Kettenhemdartikel dran ist, muss **„Kettenhemd Ringe“** statt „Metallringe“ erscheinen. Wenn ein anderer Artikel angezeigt wird, dessen Ausrüstung und Titel kontrollieren.
+3. Die kostenpflichtige Automatik **zunächst AUS lassen**. Ein bezahlter DataForSEO-Test kommt erst nach einem nachweislich sinnvollen kostenlosen Kandidaten und ausdrücklicher Kostenfreigabe.
+4. Danach separat die offizielle berechtigte Amazon-Produktbildquelle und nur echte, anbieterkorrekte eBay-/Idealo-Foto/Link-Kombinationen in der endgültigen Artikel-Produktbox abschließen.

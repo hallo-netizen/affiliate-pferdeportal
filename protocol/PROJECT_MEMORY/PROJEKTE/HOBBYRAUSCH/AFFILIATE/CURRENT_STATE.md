@@ -1,5 +1,9 @@
 # HOBBY DEPOT – AFFILIATE – EINZIGE AKTUELLE FACH-AUTORITÄT
 
+**HD009 0.1.32 – geprüftes CURRENT vom 08.11.2026.** Nach dem echten WordPress-Prüfergebnis „Metallringe → Kettenhemdflechten, post:903183“ den systemweiten fehlerhaften Suchwort-Weg korrigiert: nicht blind erstes allgemeines Material und nicht blind spätere Hilfsbegriffe als kostenpflichtige Amazon-Suche. 186 streng gefilterte Kandidaten, primäre Ausrüstung und im realen Artikeltitel belegte Begriffe; für das Kettenhemdbeispiel „Kettenhemd Ringe“, nicht „Metallringe“. **Alte automatische Kostenfreigabe wird beim Update ungültig – bewusst neu aktivieren erst nach kostenloser Prüfung.** Volles HD009-ZIP `HOBBY_DEPOT_AFFILIATE_HD009_0.1.32.zip` = `CURRENT.zip`; 1.564.075 Bytes, SHA-256 `d433db74b493407a4c26faef591574e644201846078b7aa7aa3541126f9359b8`. PHP 24/24 und ZIP 41/41, echte PHP-Fixturetests gegen Originalregister und DataForSEO-POST/GET, Kostenlimit und Negativfälle PASS (Action 42500774245). **Noch offen:** wirklicher kostenfreier Check im installierten WP, legitime Amazon-Produktbilder, eBay-/Idealo-Vorrang. Keine reale bezahlte Suche ausgelöst, keine anderen Plugins verändert. Bericht `AFFILIATE/DATAFORSEO_SUCHWORTPRUEFUNG_0.1.32_20261108.md`.
+
+
+
 **Verbindliche Übergabe 08.11.2026:** Die separat gesicherte aktuelle Plugin-/Amazon-DataForSEO-Übergabeakte ist `PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/UEBERGABE_AMAZON_DATAFORSEO_0.1.31_20261108.md`. HD009 **0.1.31** bleibt unverändert CURRENT; volle ZIP und `CURRENT.zip` wurden als byteidentisch geprüft. Kein neues Installerpaket nötig. Noch offen: zulässige Amazon-Produktbilder, eBay-/Idealo-Provider-Vorrang, WordPress-Livetest. Kostenpflichtige Auto-Recherche weiterhin standardmäßig **AUS**.
 
 
