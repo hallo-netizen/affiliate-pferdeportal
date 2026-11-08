@@ -635,13 +635,13 @@ jobs:
           for section in re.split(r'(?=^diff --git )',src,flags=re.M):
               if not section.startswith('diff --git '):continue
               head,*hunks=re.split(r'(?=^@@ )',section,flags=re.M)
-              selected=[h for h in hunks if h.startswith('@@ ') and '@@ EBAY_PRIVATE_ADMIN_REMOVAL' in h.split('\n',1)[0]]
+              selected=[h for h in hunks if h.startswith('@@ ') and any(tag in h.split('\n',1)[0] for tag in ('@@ EBAY_PRIVATE_ADMIN_REMOVAL','@@ EBAY_PRIVATE_HIVEPRESS_HOOK_REMOVAL'))]
               if selected:
                   output+=head+''.join(selected).rstrip('\n')+'\n'
                   count+=len(selected)
-          assert count==9, f'Expected 9 source/UI deletions, got {count}'
+          assert count==10, f'Expected 10 source/UI and HivePress hook deletions, got {count}'
           (root/'ui.patch').write_text(output)
-          print('PASS nine existing PRIVATE UI/endpoint deletions selected, no new components')
+          print('PASS ten old PRIVATE UI/endpoints/HivePress intercept deletions selected, no new components')
           PY
           cd /tmp/ebay_private_admin_removed
           git apply --check ui.patch
@@ -667,8 +667,14 @@ jobs:
           ok('business_min_feedback_percentage' in page,'BUSINESS seller-quality controls preserved')
           ok("add_action('admin_post_ppar_ebay_setup_categories'" not in m,'Retired PRIVATE category mutation endpoint disconnected')
           ok("add_action('admin_post_ppar_ebay_review_decision'" not in m,'Retired PRIVATE manual approval endpoint disconnected')
-          ok("add_filter('the_posts', array($this, 'ebay_filter_stale_posts')" in m
-              and 'hivepress/v1/models/listing/query' in m,'Existing public eBay legacy visibility and native HivePress integration left intact')
-          echo="EBAY_PRIVATE_ADMIN_REMOVAL 10/10 PASS (source-level + PHP syntax, not live WP UI)"
+          ok("add_filter('the_posts', array($this, 'ebay_filter_stale_posts')" in m,
+              'Existing public-read filter still hides previously published eBay PRIVATE listings')
+          ok('ebay_expand_private_parent_listing_query' not in m and 'ebay_enforce_private_visibility_ceiling' not in m,
+              'Native HivePress listing category queries no longer expanded or capped by retired eBay PRIVATE code')
+          ok('ebay_remote_image_listing_view_block' not in m and 'ebay_remote_image_container_blocks' not in m,
+              'Native HivePress images no longer pass through retired eBay PRIVATE overrides')
+          ok('ebay_handle_secure_listing_preview' not in m and 'ebay_rescue_published_listing_route' not in m,
+              'Retired eBay PRIVATE preview and rescue routing disconnected')
+          echo="EBAY_PRIVATE_ADMIN_REMOVAL 13/13 PASS (source-level + PHP syntax, not live WP UI)"
           print(echo)
           PY
