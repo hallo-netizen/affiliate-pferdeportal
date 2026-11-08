@@ -1,0 +1,58 @@
+name: Hobby Depot HD003 1.50.799 verified category master frontend fix
+on:
+  push:
+    branches:
+      - hobbyroom/hd003-term-master-frontend-150799-20261108
+    paths:
+      - .github/workflows/hobby-hd003-term-master-150799.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify unmodified current 1.50.798 package and build two-file fix
+        run: |
+          python3 scripts/hobby_hd003_term_master_150799.py \
+            protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip \
+            HOBBY_DEPOT_HD003_1.50.799_KATEGORIE_MASTER_FRONTEND.zip
+          mkdir -p /tmp/hobby_hd003_150799
+          unzip -q HOBBY_DEPOT_HD003_1.50.799_KATEGORIE_MASTER_FRONTEND.zip \
+            'affiliate-portal-template-kit/pferde-template-kit.php' \
+            'affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php' -d /tmp/hobby_hd003_150799
+          php -l /tmp/hobby_hd003_150799/affiliate-portal-template-kit/pferde-template-kit.php
+          php -l /tmp/hobby_hd003_150799/affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php
+          php scripts/hobby_hd003_term_master_test_150799.php /tmp/hobby_hd003_150799/affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php
+      - name: Hard check retained 1288 files and exact two-file delta
+        run: |
+          python3 - <<'PY'
+          import zipfile
+          a="protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip"
+          b="HOBBY_DEPOT_HD003_1.50.799_KATEGORIE_MASTER_FRONTEND.zip"
+          with zipfile.ZipFile(a) as old,zipfile.ZipFile(b) as new:
+              assert old.testzip() is None and new.testzip() is None
+              assert old.namelist()==new.namelist() and len(old.namelist())==1290
+              changed=[p for p in old.namelist() if old.read(p)!=new.read(p)]
+              assert set(changed)=={'affiliate-portal-template-kit/pferde-template-kit.php','affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php'},changed
+              print("PASS: 1,288 of 1,290 original files remain byte-identical")
+          PY
+          sha256sum HOBBY_DEPOT_HD003_1.50.799_KATEGORIE_MASTER_FRONTEND.zip
+      - name: Preserve tested original update as downloadable artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HOBBY_DEPOT_HD003_1.50.799_KATEGORIE_MASTER_FRONTEND
+          path: HOBBY_DEPOT_HD003_1.50.799_KATEGORIE_MASTER_FRONTEND.zip
+          if-no-files-found: error
+          retention-days: 7
+      - name: Publish installable tested update without touching WordPress
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create hobby-depot-hd003-1.50.799-category-master \
+            HOBBY_DEPOT_HD003_1.50.799_KATEGORIE_MASTER_FRONTEND.zip \
+            --repo "${{ github.repository }}" \
+            --target "${{ github.sha }}" \
+            --title "Hobby Depot Design 1.50.799 - Kategorie-Masterbild in Kachel und Hero" \
+            --notes "Exakt aus der gesicherten 1.50.798 abgeleitet. 1.288 von 1.290 Dateien byteidentisch. Kategorie-Kachel und Kategorie-Hero lesen dasselbe thumbnail_id. Keine Änderung an bestehenden Bildzuordnungen, Daten oder Bildzentrale. Lokale positive und negative PHP-Tests im Workflow."
