@@ -1,0 +1,29 @@
+name: HD009 0.1.29 original article plan insertion and CSS details
+on:
+  push:
+    branches: [hobbyroom/hd009-029-article-amazon-card-20261108]
+    paths: [.github/workflows/hd009-029-plan-audit.yml]
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Look at exact article product slot placement and image styling
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import re
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          with ZipFile(p) as z:
+            for name in z.namelist():
+              if not name.endswith(('.php','.css')):continue
+              text=z.read(name).decode('utf8','replace')
+              matches=[(m.group(1),m.start()) for m in re.finditer(r'(?:public|private|protected)\s+(?:static\s+)?function\s+(article_plan_apply_to_content|article_plan_placements|article_plan_build_slot_html|auto_inject_affiliate_slots|article_plan_render|article_plan_products_html)\s*\(',text)]
+              for fn,pos in matches:
+                stop=next((m.start() for m in re.finditer(r'\n    (?:private|public|protected)\s+(?:static\s+)?function\s+',text[pos+10:])),None)
+                print('METHOD',name,fn,'TEXT',re.sub(r'\s+',' ',text[pos:pos+13500])[:13500])
+              if name.endswith('hdar-amazon-start.css'):
+                print('AMAZON_CSS',name, text[:13500])
+          PY
