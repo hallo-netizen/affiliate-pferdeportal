@@ -37,7 +37,7 @@ card_method=d[helper_start:helper_end]
 stubs=r"""<?php
 error_reporting(E_ALL);
 define('ABSPATH','/tmp/');
-define('WP_PLUGIN_DIR', __DIR__);
+define('WP_PLUGIN_DIR', dirname(__DIR__));
 class WP_Term {
  public $slug='sportdrachen-drachen-leinen',$taxonomy='category',$term_id=5112;
 }
@@ -54,7 +54,7 @@ function esc_attr($v){return htmlspecialchars((string)$v,ENT_QUOTES|ENT_SUBSTITU
 function esc_url($v){return (string)$v;}
 function wp_parse_url($x,$component=-1){return parse_url($x,$component);}
 function plugins_url($path,$source=null){return 'https://www.hobby-depot.de/wp-content/plugins/'.ltrim($path,'/');}
-function plugin_dir_path($file){return dirname($file).'/';}
+function plugin_dir_path($file){return dirname(__DIR__).'/';}
 function get_the_post_thumbnail_url($id,$size){return $GLOBALS['thumb']??'';}
 function get_the_category($id){return [new WP_Term];}
 function is_wp_error($v){return false;}
@@ -115,7 +115,7 @@ print("EXISTING_ARTICLE_FEATURED_IMAGE_PRECEDENCE_PASS\\n");
 """
     # The helper includes no dynamic memory; all 3 renderers call it by static name.
     for case in ["all"]:
-        f=root/"test.php";f.write_text(code)
+        f=root/"includes/test.php";f.parent.mkdir(parents=True,exist_ok=True);f.write_text(code)
         p=subprocess.run(["php","-l",str(f)],text=True,capture_output=True)
         assert p.returncode==0,(p.stdout,p.stderr)
         r=subprocess.run(["php","-d","zend.assertions=1","-d","assert.exception=1",str(f)],text=True,capture_output=True)
