@@ -220,3 +220,90 @@ jobs:
           php flow.php | tee flow.log
           test "$(grep -c '^PASS ' flow.log)" = 16
           grep -F 'EBAY_CAUSAL_FLOW_REFERENCE 16/16 PASS' flow.log
+
+      - name: Prove old in-flight PRIVATE selections cannot resume or publish after upgrade
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import shutil,re
+          patch=Path('release/affiliate-zentrale/evidence/EBAY_672308_TO_672311_BUSINESS_ONLY_GESAMTURSACHENPATCH_NUR_TEST.patch').read_text()
+          root=Path('/tmp/ebay_legacy_qa')
+          shutil.copytree('release/affiliate-zentrale/current/affiliate-portal-router',root/'affiliate-portal-router',dirs_exist_ok=True)
+          diff='';count=0;legacy=0;hard=0
+          for part in re.split(r'(?=^diff --git )',patch,flags=re.M):
+              if not part.startswith('diff --git '):continue
+              head,*hunks=re.split(r'(?=^@@ )',part,flags=re.M)
+              selected=[]
+              for h in hunks:
+                  if not h.startswith('@@ '):continue
+                  title=h.split('\n',1)[0]
+                  if '@@ BUSINESS_ONLY' in title or '@@ LEGACY_RUN_GUARD' in title:
+                      selected.append(h)
+                      if '@@ LEGACY_RUN_GUARD' in title:legacy+=1
+                      else:hard+=1
+              if selected:diff+=head+''.join(selected);count+=len(selected)
+          assert count==17 and hard==12 and legacy==5, (count,hard,legacy)
+          (root/'legacy.patch').write_text(diff)
+          print('PASS 12 seller hardlocks and 5 phase transition guards assembled from ONE cumulative 6.72.311 patch')
+          PY
+          cd /tmp/ebay_legacy_qa
+          git apply --check legacy.patch
+          git apply legacy.patch
+          php -l affiliate-portal-router/includes/trait-ppar-ebay.php
+          php -l affiliate-portal-router/includes/trait-ppar-ebay-run.php
+          cat > legacy.php <<'PHP'
+          <?php
+          error_reporting(E_ALL);
+          define('ABSPATH','/'); define('ARRAY_A','ARRAY_A');
+          function absint($x){return abs((int)$x);}
+          function sanitize_key($x){return strtolower(preg_replace('/[^a-z0-9_-]/','',strtolower((string)$x)));}
+          function sanitize_text_field($x){return trim((string)$x);}
+          function wp_json_encode($x){return json_encode($x);}
+          require 'affiliate-portal-router/includes/trait-ppar-ebay.php';
+          require 'affiliate-portal-router/includes/trait-ppar-ebay-run.php';
+          class LegacyTest {
+              use PPAR_Ebay_Trait, PPAR_Ebay_Run_Trait;
+              public $run=array(),$selection=array(),$failure='',$processed=0,$private_mutations=0,$completed=0;
+              private function ebay_run_load(){return $this->run;}
+              private function ebay_run_save($v){$this->run=$v;return $v;}
+              private function ebay_run_fail($c,$m,$details=array()){$this->failure=$c;}
+              private function ebay_run_complete($manifest=array()){$this->completed++;$this->run['status']='completed';}
+              private function ebay_selection_state_load(){return $this->selection;}
+              private function ebay_selection_state_is_open($s){return in_array($s['status']??'',array('pending','running'),true);}
+              private function ebay_selection_process_tick($s,$sel){$this->processed++;return $sel;}
+              private function ebay_selection_prune_business_batch($s,&$p,$limit,$force,$staging){$p['checkpoint_business_cleanup_done']=1;}
+              private function ebay_selection_apply_private_post_batch($s,&$p,$limit,$force,$staging){$this->private_mutations++;}
+              private function ebay_run_checkpoint_cleanup_fail_if_needed($plan,$route){return false;}
+              public function sel($saved){$this->selection=$saved;$this->run=array('run_uuid'=>'u','phase'=>'selection_prepare','config_snapshot'=>array('seller_routes'=>array('private'=>true,'business'=>true)));$this->ebay_run_tick_selection($this->run,array('business_enabled'=>true,'private_enabled'=>false));}
+              public function gapSel($saved){$this->selection=$saved;$this->run=array('run_uuid'=>'u','gapfill'=>array(),'config_snapshot'=>array('seller_routes'=>array('private'=>true,'business'=>true)));$this->ebay_run_tick_gapfill_select($this->run,array('business_enabled'=>true,'private_enabled'=>false));}
+              public function cleanup($kind,$plan){$this->run=array('run_uuid'=>'u','status'=>'running','config_snapshot'=>array('seller_routes'=>array('private'=>true,'business'=>true)),'checkpoint_verified_manifest'=>array('business'=>array('status'=>'pass')));$this->ebay_run_tick_checkpoint_cleanup(array_merge($this->run,array('checkpoint_cleanup_selection'=>$plan)),array('business_enabled'=>true),$kind);}
+          }
+          function ok($v,$s){if(!$v){fwrite(STDERR,"FAIL ".$s."\n");exit(1);}echo "PASS ".$s."\n";}
+          $x=new LegacyTest();
+          $x->sel(array('status'=>'running','selection_scope'=>'all'));
+          ok($x->failure==='business_only_legacy_selection_blocked','Upgraded ALL selection stopped BEFORE private materialisation');
+          ok($x->processed===0,'No old ALL selection worker executed');
+          $x=new LegacyTest();
+          $x->sel(array('status'=>'complete','selection_scope'=>'private'));
+          ok($x->failure==='business_only_legacy_selection_blocked','Completed legacy PRIVATE selection cannot publish its winners');
+          $x=new LegacyTest();
+          $x->gapSel(array('status'=>'running','selection_scope'=>'all'));
+          ok($x->failure==='business_only_legacy_gapfill_selection_blocked','Persisted ALL gapfill stopped before old mutation');
+          ok($x->processed===0,'No retired gapfill selection processed');
+          $x=new LegacyTest();
+          $x->gapSel(array('status'=>'complete','selection_scope'=>'private'));
+          ok($x->failure==='business_only_legacy_gapfill_selection_blocked','Persisted PRIVATE gapfill completion cannot be reused');
+          $x=new LegacyTest();
+          $x->cleanup('private',array('status'=>'running','private_post_cursor'=>1));
+          ok($x->completed===1&&$x->private_mutations===0,'Old PRIVATE cleanup skipped without mutation');
+          $x=new LegacyTest();
+          $x->cleanup('business',array('status'=>'running','phase'=>'business_prune','business_prune_cursor'=>0));
+          ok($x->completed===1&&$x->private_mutations===0,'After BUSINESS cleanup old snapshot cannot restart PRIVATE cleanup');
+          echo "EBAY_LEGACY_ACTIVE_RUN 8/8 PASS; ORIGINAL 6.72.308 STILL NOT LIVE-REPLAYED\n";
+          PHP
+          php -l legacy.php
+          php legacy.php | tee legacy.log
+          test "$(grep -c '^PASS ' legacy.log)" = 8
+          grep -F 'EBAY_LEGACY_ACTIVE_RUN 8/8 PASS' legacy.log
