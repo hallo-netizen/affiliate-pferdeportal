@@ -5,6 +5,8 @@ on:
       - hobbyroom/hd003-term-master-frontend-150799-20261108
     paths:
       - .github/workflows/hobby-hd003-term-master-150799.yml
+      - scripts/hobby_hd003_term_master_150799.py
+      - scripts/hobby_hd003_term_master_test_150799.php
   workflow_dispatch:
 permissions:
   contents: write
