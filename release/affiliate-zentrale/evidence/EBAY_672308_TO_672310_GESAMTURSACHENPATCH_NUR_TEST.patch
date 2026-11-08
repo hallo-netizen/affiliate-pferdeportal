@@ -1,8 +1,8 @@
 diff --git a/affiliate-portal-router/includes/class-ppar-admin-kiss.php b/affiliate-portal-router/includes/class-ppar-admin-kiss.php
-index 8b2a941..ec33705 100644
+index 8b2a941..972e859 100644
 --- a/affiliate-portal-router/includes/class-ppar-admin-kiss.php
 +++ b/affiliate-portal-router/includes/class-ppar-admin-kiss.php
-@@ -83,16 +83,33 @@ final class PPAR_Affiliate_Admin_KISS {
+@@ -83,16 +83,36 @@ final class PPAR_Affiliate_Admin_KISS {
          $ebay_run = is_array($ebay_run) ? $ebay_run : array();
          $ebay_history = get_option('ppar_ebay_run_history_v1', array());
          $ebay_history = is_array($ebay_history) ? $ebay_history : array();
@@ -36,11 +36,14 @@ index 8b2a941..ec33705 100644
 +                . '; offene Warenbereiche: ' . absint($ebay_run['technical_gap_count'] ?? 0)
 +                . '; übersprungene Fehler: ' . absint($ebay_run['skipped_item_errors_count'] ?? 0)
 +                . '. Letzter vollständiger Erfolg wird separat ausgewiesen.';
++            if(!empty($ebay_run['checkpoint_deferred'])){
++                $ebay_note .= ' Neuer Produktstand wegen ungeprüfter eBay-Suche NICHT freigegeben; der vorherige Freigabestand bleibt bestehen (Einzelangebote unterliegen weiterhin der üblichen Gültigkeitsprüfung).';
++            }
 +        }
  
          $idealo = get_option('ppar_network_idealo_v1', array());
          $idealo = is_array($idealo) ? $idealo : array();
-@@ -123,7 +140,7 @@ final class PPAR_Affiliate_Admin_KISS {
+@@ -123,7 +143,7 @@ final class PPAR_Affiliate_Admin_KISS {
          if (!empty($dfs_control['last_api_attempt_at'])) { $dfs_note .= ' – Letzter Versuch: ' . wp_date('d.m.Y H:i',absint($dfs_control['last_api_attempt_at'])); }
          if (!empty($dfs_control['pending_post_id'])) { $dfs_note .= ' – Ergebnisabfrage offen'; }
          return array(
@@ -50,7 +53,7 @@ index 8b2a941..ec33705 100644
              array('provider'=>'Amazon / DataForSEO','status'=>$dfs_status,'last'=>absint($dfs_control['last_match_at']??0),'last_label'=>'Letzte eindeutige Produktzuordnung','note'=>$dfs_note . ' (ASIN-Suche, keine Preis-/Bestandsdaten)','url'=>'affiliate-portal-networks'),
          );
 diff --git a/affiliate-portal-router/includes/trait-ppar-ebay-run.php b/affiliate-portal-router/includes/trait-ppar-ebay-run.php
-index e5c1169..501e097 100644
+index e5c1169..8e0566b 100644
 --- a/affiliate-portal-router/includes/trait-ppar-ebay-run.php
 +++ b/affiliate-portal-router/includes/trait-ppar-ebay-run.php
 @@ -97,6 +97,16 @@ trait PPAR_Ebay_Run_Trait {
@@ -70,7 +73,7 @@ index e5c1169..501e097 100644
          $history = get_option($this->ebay_run_history_option_key(), array());
          $history = is_array($history) ? $history : array();
          $history[] = array(
-@@ -108,17 +118,36 @@ trait PPAR_Ebay_Run_Trait {
+@@ -108,17 +118,37 @@ trait PPAR_Ebay_Run_Trait {
              'finished_at'=>absint($run['finished_at'] ?? 0),
              'build'=>sanitize_text_field((string)($run['build'] ?? '')),
              'checkpoint_id'=>sanitize_text_field((string)($run['checkpoint_id'] ?? $run['checkpoint_base_id'] ?? '')),
@@ -82,6 +85,7 @@ index e5c1169..501e097 100644
 +            'skipped_item_errors_count'=>absint($run['skipped_item_errors_count']??0),
 +            'technical_gap_count'=>absint($run['technical_gap_count']??0),
 +            'technical_unverified_search_profile_count'=>absint($run['technical_unverified_search_profile_count']??0),
++            'checkpoint_deferred'=>!empty($run['checkpoint_deferred'])?1:0,
 +            'completion_warning_concepts'=>array_slice(array_values(array_filter(array_map('sanitize_key',(array)($run['completion_warning_concepts']??array())))),0,12),
          );
          if (count($history) > 10) {
@@ -109,7 +113,7 @@ index e5c1169..501e097 100644
                          $latest[0] = $history[$i];
                          break;
                      }
-@@ -1089,7 +1118,18 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1089,7 +1119,18 @@ trait PPAR_Ebay_Run_Trait {
      private function ebay_run_complete($manifest = array()) {
          $run=$this->ebay_run_load();
          $run['status']='completed';$run['phase']='completed';$run['finished_at']=time();$run['resume_reason']='';$run['resume_at']=0;
@@ -129,7 +133,7 @@ index e5c1169..501e097 100644
          $checkpoint=$this->ebay_public_checkpoint_load();
          if($this->ebay_public_checkpoint_is_safe($checkpoint)){
              $run['checkpoint_id']=sanitize_text_field((string)($checkpoint['checkpoint_id']??''));
-@@ -1211,7 +1251,7 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1211,7 +1252,7 @@ trait PPAR_Ebay_Run_Trait {
                      $reason=sanitize_key((string)($job['summary']['budget']['stopped_reason']??'discovery_partial_unresumable'));
                      $this->ebay_run_fail('discovery_partial_unresumable','Discovery endete in einem nicht fortsetzbaren PARTIAL-Zustand.',array('stopped_reason'=>$reason,'scope'=>sanitize_key((string)($job['scope']??''))));return;
                  }
@@ -138,7 +142,7 @@ index e5c1169..501e097 100644
                  $start=$this->ebay_start_sync_job(false,'all','background');
                  if (is_wp_error($start)) {$this->ebay_run_fail($start->get_error_code(),$start->get_error_message());return;}
              }
-@@ -1225,8 +1265,14 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1225,8 +1266,14 @@ trait PPAR_Ebay_Run_Trait {
                  $msg=sanitize_text_field((string)($last['error']??$job['failure_reason']??'eBay-Discovery ist fehlgeschlagen.'));
                  $this->ebay_run_fail($code!==''?$code:'discovery_failed',$msg);return;
              }
@@ -155,7 +159,7 @@ index e5c1169..501e097 100644
              }
              return;
          }
-@@ -1599,6 +1645,25 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1599,6 +1646,25 @@ trait PPAR_Ebay_Run_Trait {
       * safely selected candidate exists but public coverage is still missing, the
       * state is an invariant/materialization failure and remains fail-closed.
       */
@@ -181,7 +185,7 @@ index e5c1169..501e097 100644
      private function ebay_run_business_safe_supply_gap_contract($run, $coverage) {
          $run=is_array($run)?$run:array();$coverage=is_array($coverage)?$coverage:array();
          $missing=array_values(array_unique(array_filter(array_map('sanitize_key',(array)($coverage['missing']??array())))));
-@@ -1665,14 +1730,34 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1665,14 +1731,34 @@ trait PPAR_Ebay_Run_Trait {
              );
          }
  
@@ -222,7 +226,7 @@ index e5c1169..501e097 100644
          $coverage['open_gap_count']=count($missing);
          $coverage['open_gaps']=$missing;
          $coverage['exceptions']=$exceptions;
-@@ -1818,7 +1903,7 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1818,7 +1904,7 @@ trait PPAR_Ebay_Run_Trait {
          $job=$this->ebay_sync_job_load();
          // A completed full-discovery substate must not suppress the one targeted
          // recovery pass. Reset only the nested discovery phase state, never the run.
@@ -231,7 +235,7 @@ index e5c1169..501e097 100644
          $status=sanitize_key((string)($job['status']??''));
          if($status==='partial'){
              if($this->ebay_sync_job_is_resumable_partial($job) && sanitize_key((string)($job['scope']??''))==='business_recovery'){
-@@ -1829,16 +1914,20 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1829,16 +1915,20 @@ trait PPAR_Ebay_Run_Trait {
                  $reason=sanitize_key((string)($job['summary']['budget']['stopped_reason']??'gapfill_partial_unresumable'));
                  $this->ebay_run_fail('gapfill_partial_unresumable','BUSINESS-Gap-Fill endete in einem nicht fortsetzbaren PARTIAL-Zustand.',array('stopped_reason'=>$reason,'scope'=>sanitize_key((string)($job['scope']??''))));return;
              }
@@ -257,8 +261,49 @@ index e5c1169..501e097 100644
          }
      }
  
+@@ -1916,6 +2006,40 @@ trait PPAR_Ebay_Run_Trait {
+         // The one-row checkpoint write is the public visibility commit. Until
+         // this exact point the frontend continues to serve the previous safe set.
+         $current=$this->ebay_run_load();
++        // Root-safety invariant: an unverified eBay search must never be used
++        // to withdraw a previously SAFE public BUSINESS campaign. All other
++        // independent discovery/selection/public checks have already finished.
++        // Keep the existing checkpoint unchanged if the new selection would
++        // remove old cards while any transient search remains technically open.
++        // Do not duplicate the business/public verification or invent freshness
++        // for old offers. Normal fully verified runs remain unchanged.
++        $full_warning=(array)($current['discovery_technical_supply_warning']??array());
++        $gap_warning=(array)($current['gapfill']['technical_supply_warning']??array());
++        $uncertain=absint($full_warning['profile_count']??0)>0 || absint($gap_warning['profile_count']??0)>0;
++        if($uncertain){
++            $previous=$this->ebay_public_checkpoint_load();
++            if($this->ebay_public_checkpoint_is_safe($previous)){
++                $old_ids=$this->ebay_public_checkpoint_business_ids($previous);
++                $new_ids=array_values(array_unique(array_filter(array_map('absint',(array)($candidate['business_campaign_ids']??array())))));
++                if(array_diff($old_ids,$new_ids)){
++                    // This is NOT a successful publication of a reduced catalog.
++                    // Leave existing safe output and cleanup state untouched;
++                    // let the next ordinary canonical search recheck the missing
++                    // provider response. No extra worker, API, or storage table.
++                    $current['checkpoint_deferred']=1;
++                    $current['checkpoint_deferred_reason']='unverified_search_would_withdraw_last_good';
++                    $current['checkpoint_deferred_previous_business_count']=count($old_ids);
++                    $current['checkpoint_deferred_candidate_business_count']=count($new_ids);
++                    $this->ebay_run_save($current);
++                    $business['checkpoint_status']='deferred_last_good_retained';
++                    $manifest=array('business'=>$business,'private'=>$private,'verified_at'=>time(),
++                        'run_uuid'=>(string)($current['run_uuid']??''),
++                        'checkpoint_id'=>(string)($previous['checkpoint_id']??''));
++                    $this->ebay_run_complete($manifest);
++                    return;
++                }
++            }
++        }
+         $checkpoint=$this->ebay_run_commit_public_checkpoint($current,$business,$private);
+         if($checkpoint===false || is_wp_error($checkpoint)){
+             $this->ebay_run_fail('public_checkpoint_commit_failed','Der vollständig geprüfte neue öffentliche Checkpoint konnte nicht atomar übernommen werden.');return;
 diff --git a/affiliate-portal-router/includes/trait-ppar-ebay.php b/affiliate-portal-router/includes/trait-ppar-ebay.php
-index b39f499..aa5913a 100644
+index b39f499..e53c439 100644
 --- a/affiliate-portal-router/includes/trait-ppar-ebay.php
 +++ b/affiliate-portal-router/includes/trait-ppar-ebay.php
 @@ -2897,6 +2897,11 @@ trait PPAR_Ebay_Trait {
@@ -377,7 +422,7 @@ index b39f499..aa5913a 100644
                          else if(status==='local_checked') state='Lokal geprüft (nicht freigegeben)';
                          else if(status==='failed') state='Fehlgeschlagen';
                          else if(status==='paused') state='Pausiert';
-@@ -10388,7 +10438,13 @@ trait PPAR_Ebay_Trait {
+@@ -10388,7 +10438,14 @@ trait PPAR_Ebay_Trait {
                  <?php if(!empty($canonical_run['checkpoint_safe'])): ?><p><strong>Sicherer Frontend-Stand:</strong> bleibt unverändert aktiv.</p><?php endif; ?>
                  <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="margin-top:10px"><input type="hidden" name="action" value="ppar_ebay_run_restart"><?php wp_nonce_field('ppar_ebay_run_restart','ppar_ebay_nonce'); ?><button class="button button-primary">Lauf neu starten</button></form>
                  </div><?php endif; ?>
@@ -387,6 +432,7 @@ index b39f499..aa5913a 100644
 +                    <?php echo absint($canonical_run['technical_unverified_search_profile_count'] ?? 0); ?> eBay-Suchprofile blieben nach wiederholten Verbindungsfehlern unvollständig; davon sind <?php echo absint($canonical_run['technical_gap_count'] ?? 0); ?> bisher unversorgte Warenbereiche unmittelbar betroffen.
 +                    <strong>Diese Bereiche gelten NICHT als angebotslos und wurden nicht ungeprüft freigegeben.</strong>
 +                    Bereits sicher geprüfte Produkte bleiben erhalten; die reguläre nächste eBay-Suche prüft die offenen Bereiche erneut.
++                    <?php if(!empty($canonical_run['checkpoint_deferred'])): ?><strong>Der neue öffentliche Produktstand wurde NICHT übernommen, weil er ältere Produkte ohne vollständige eBay-Prüfung verdrängt hätte. Der vorherige Freigabestand bleibt maßgeblich; einzelne Angebote müssen weiterhin aktuell gültig sein.</strong><?php endif; ?>
 +                    </p><p class="description"><strong>Offene Warenbereiche:</strong> <code><?php echo esc_html(implode(', ', array_slice((array)($canonical_run['completion_warning_concepts'] ?? array()),0,12))); ?></code><?php if(absint($canonical_run['technical_gap_count'] ?? 0)>12): ?> (weitere vorhanden)<?php endif; ?>.</p></div>
 +                <?php elseif ($canonical_status === 'completed') : ?><div class="notice notice-success inline"><p><strong>Gesamtlauf abgeschlossen:</strong> neue Etage vollständig geprüft und als sicherer Frontend-Checkpoint übernommen.</p></div><?php endif; ?>
                  <?php if ($canonical_status === 'local_checked') : ?><div class="notice notice-warning inline"><p><strong>Lokale Neubewertung abgeschlossen:</strong> Keine neue eBay-Suche, keine neue öffentliche Freigabe. Bisheriger öffentlicher Stand bleibt geschützt; fehlende Produktversorgung ist weiter offen.</p></div><?php endif; ?>
