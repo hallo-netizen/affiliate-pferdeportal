@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""One-time QA original PSERC 0.28.53 vs exact 0.28.54 test copy.
+"""One-time QA original PSERC 0.28.53 vs exact 0.28.55 test copy.
 Run with two ORIGINAL ZIP files; no WordPress, K0, plan or production action.
 """
 import hashlib
@@ -10,7 +10,7 @@ import tempfile
 from zipfile import ZipFile
 
 ORIGINAL_HASH='80340faff2323e5ede86ddd095ac3570a53474ae64771df3bec70fb6f6c6f060'
-QA_HASH='2c31ae1bf89613abf456576039f9bd52ef6ed41c1f84c28fd0c57410846033a1'
+QA_HASH='5fb82d0b35346d71d1cc0d9a796e5ca19d1ac3ad595ec5aab9643154db8a8578'
 ROOT='portal-seo-editorial-plan-compiler/'
 MODIFIED={ROOT+name for name in (
     'includes/class-pserc-seo-reader.php',
@@ -42,5 +42,5 @@ def verify(original: pathlib.Path, qa: pathlib.Path) -> None:
     print('REAL_PSERC_EXACT_QA_PAIR_SCOPE_PASS; NOT WORDPRESS_STAGING_PASS')
 
 if __name__=='__main__':
-    if len(sys.argv)!=3: raise SystemExit('Usage: test_pserc_staging_pair_packaging.py ORIGINAL_0.28.53.zip QA_0.28.54.zip')
+    if len(sys.argv)!=3: raise SystemExit('Usage: test_pserc_staging_pair_packaging.py ORIGINAL_0.28.53.zip QA_0.28.55.zip')
     verify(pathlib.Path(sys.argv[1]),pathlib.Path(sys.argv[2]))
