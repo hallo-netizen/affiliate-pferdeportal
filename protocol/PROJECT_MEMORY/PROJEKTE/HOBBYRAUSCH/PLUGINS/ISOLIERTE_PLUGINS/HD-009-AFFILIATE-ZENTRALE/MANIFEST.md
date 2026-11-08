@@ -1,5 +1,9 @@
 # HD009 – Hobby Depot Affiliate-Zentrale – gültiger CURRENT-Stand
 
+**Verbindliche Übergabe 08.11.2026:** Die separat gesicherte aktuelle Plugin-/Amazon-DataForSEO-Übergabeakte ist `PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/UEBERGABE_AMAZON_DATAFORSEO_0.1.31_20261108.md`. HD009 **0.1.31** bleibt unverändert CURRENT; volle ZIP und `CURRENT.zip` wurden als byteidentisch geprüft. Kein neues Installerpaket nötig. Noch offen: zulässige Amazon-Produktbilder, eBay-/Idealo-Provider-Vorrang, WordPress-Livetest. Kostenpflichtige Auto-Recherche weiterhin standardmäßig **AUS**.
+
+
+
 **Version 0.1.31 · 08.11.2026**
 
 - WordPress-Pluginidentität bleibt **`affiliate-portal-router/`**; vollständiges Installations-ZIP `HOBBY_DEPOT_AFFILIATE_HD009_0.1.31.zip` und byteidentisches `CURRENT.zip`, 1.563.011 Bytes, SHA-256 `3b3d65bd534a249c6ac645a20eac3da9aae68c7e82e52ad7e121639399b46e87` (Git-Blob `1e3a1370d22de5a54717ff960fccacd10366bfc1`).
