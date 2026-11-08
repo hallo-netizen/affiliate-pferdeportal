@@ -2031,3 +2031,14 @@ Der aktive Campus-Ruleset 25817526 verlangt `single-current-lock` für jeden PR 
 
 GRENZE:
 Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wahrheit. Nur die bestehende Pflichtprüfung wird für alle Änderungen erreichbar gemacht. Fehlerquelle: `BAUCONTAINER/ARCHITEKTUR_FEHLERKISTE.md` → BAU-044.
+
+
+## 08.11.2026 – PFERDEATELIER: PSTE 0.57.144.23 EXTERNER SEO-EXPORTFIX / GESCHÜTZTE QA
+
+**WAS:** In exakt einer isolierten Pferdeatelier-Plugin-QA-Fassung wurden vorhandene PSTE-Import-/Exportfehler (verschachtelte Titel als „Array“; 144 PPM679-Planplätze ohne Artikelbezeichnungen) quellseitig korrigiert und die normale Bedienung auf Export → externe Entscheidung → Import → Status reduziert. Aktuellen echten MINI-Export mit 1.179 Einträgen ausgewertet; 141 reale PPM679-Posttitel eindeutig verknüpft; 3 unaufgelöste Postreferenzen und 9 bereits unbrauchbare Titel als offene Sperren ausgewiesen. Vollständige technische Tests mit echtem Datenbestand und drei eindeutig synthetisch gekennzeichneten Positiv-Beiträgen: 36 PASS; 83 PHP-Syntaxchecks; vollständige ZIP-CRC 121/121. Originale/Produktionsdaten nicht verändert.
+
+**WARUM:** Der bisherige Export gab vorhandene Einträge ohne Inhaltstitel aus, konnte gespeicherte „Array“-Planhüllen fälschlich als semantisch belegbar behandeln und zwang den Betreiber zu überflüssigen Diagnoseaktionen. KISS-Umsetzung ohne neue Datenbank, Arbeitsschleife, externen SEO-Zweitprüfer oder neue Kategoriepflicht.
+
+**AUTORITÄT / GRENZE:** Fachlich maßgeblich bleibt einzig `PROJEKTE/PFERDE_ATELIER/PLUGINS/CURRENT_STATE.md`, ein externer SEO-Owner, K0 unverändert. Binär-ZIP für PSTE .23 (SHA256 `dcf1f181d8b438f057476970237f888782312f60450f215e69713c203d0449b0`) und Paar mit unverändertem PSERC .55 in privater Library `/pferdeatelier/PLUGINS/`; GitHub QA-Quellcode-Patch, Testskript, Manifest und Beweise in `PROJEKTE/PFERDE_ATELIER/PLUGINS/QA_ONLY/PSTE_05714423_EXPORTFIX/`. **Kein Live-Deployment, keine echte WordPress-End-to-End-Abnahme, kein Merge.**
+
+**SICHERHEIT:** Unveränderte zentrale Hardlock-Regeln. Die für Änderungen am Gebäude-Einstieg verbindliche Protokollierung ist in `BAUCONTAINER/BAUPROTOKOLL.md` nachgetragen. Draft-PR #682, keine Fremdgebäude verändert.
