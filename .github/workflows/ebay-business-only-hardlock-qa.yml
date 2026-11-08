@@ -542,3 +542,80 @@ jobs:
           php final.php | tee final.log
           test "$(grep -c '^PASS ' final.log)" = 19
           grep -F 'EBAY_FINAL_PUBLIC_FLOW 19/19 PASS' final.log
+
+      - name: Execute BUSINESS-only discovery without HivePress listing owner
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,shutil
+          root=Path('/tmp/ebay_owner_free')
+          shutil.copytree('release/affiliate-zentrale/current/affiliate-portal-router',root/'affiliate-portal-router',dirs_exist_ok=True)
+          src=Path('release/affiliate-zentrale/evidence/EBAY_672308_TO_672311_BUSINESS_ONLY_GESAMTURSACHENPATCH_NUR_TEST.patch').read_text()
+          target='affiliate-portal-router/includes/trait-ppar-ebay.php'
+          section=src.split('diff --git a/'+target+' b/'+target,1)[1].split('\ndiff --git ',1)[0]
+          head,*hunks=re.split(r'(?=^@@ )',section,flags=re.M)
+          selected=[h for h in hunks if h.startswith('@@ ') and '@@ SOURCE_OWNER_SIMPLIFICATION' in h.split('\n',1)[0]]
+          assert len(selected)==1,'Expected one central owner-free hunk, no new architecture'
+          (root/'owner.patch').write_text(head+''.join(selected).rstrip('\n')+'\n')
+          PY
+          cd /tmp/ebay_owner_free
+          git apply --check owner.patch
+          git apply owner.patch
+          php -l affiliate-portal-router/includes/trait-ppar-ebay.php
+          cat > owner.php <<'PHP'
+          <?php
+          error_reporting(E_ALL);
+          define('ABSPATH','/');define('ARRAY_A','ARRAY_A');
+          function absint($n){return abs((int)$n);}
+          function sanitize_key($v){return strtolower(preg_replace('/[^a-z0-9_-]/','',strtolower((string)$v)));}
+          function sanitize_text_field($v){return trim((string)$v);}
+          $GLOBALS['option_writes']=0;
+          function update_option($key,$value,$autoload=false){$GLOBALS['option_writes']++;return true;}
+          class WP_Error {public $code;function __construct($code,$message=''){$this->code=$code;}}
+          function is_wp_error($x){return $x instanceof WP_Error;}
+          require 'affiliate-portal-router/includes/trait-ppar-ebay.php';
+          class BusinessOnlyOwnerQA {
+              use PPAR_Ebay_Trait;
+              const EBAY_RUNTIME_BUILD='qa';
+              public $saved=array(),$dispatch=0,$settings=array('enabled'=>true,'business_enabled'=>true,'private_enabled'=>false);
+              public function owner(&$settings){return $this->ebay_persist_listing_author_id($settings);}
+              public function start(){return $this->ebay_start_sync_job(false,'all','background');}
+              private function ebay_settings(){return $this->settings;}
+              private function ebay_configuration_errors($settings){return array();}
+              public function maybe_install_ebay_schema(){}
+              private function ebay_refresh_job_load(){return array();}
+              private function ebay_refresh_job_is_open($v){return false;}
+              private function ebay_selection_state_load(){return array();}
+              private function ebay_selection_state_is_open($v){return false;}
+              private function ebay_sync_job_load(){return array();}
+              private function ebay_sync_job_is_open($v){return false;}
+              private function ebay_sync_job_is_resumable_partial($v){return false;}
+              private function ebay_sync_profiles($settings,$scope){return array('sattel'=>array('seller_type'=>'BUSINESS','active'=>true));}
+              private function ebay_sync_summary_new($settings,$uuid,$profiles){return array('profile_stats'=>array());}
+              private function ebay_sync_job_save($v){$this->saved=$v;return $v;}
+              private function ebay_dispatch_worker($v){$this->dispatch++;}
+              private function ebay_run_load(){return array();}
+          }
+          function ok($v,$label){if(!$v){fwrite(STDERR,"FAIL ".$label."\n");exit(1);}echo "PASS ".$label."\n";}
+          $x=new BusinessOnlyOwnerQA();
+          $s=array('private_enabled'=>false,'private_listing_author_id'=>123);
+          ok($x->owner($s)===0,'BUSINESS no longer requires a private HivePress owner');
+          ok($s['private_listing_author_id']===123,'Legacy private account owner is not silently overwritten');
+          ok($GLOBALS['option_writes']===0,'No private author setting is written during BUSINESS');
+          $s=array('private_enabled'=>true);
+          ok($x->owner($s)===0,'Old raw PRIVATE setting cannot turn owner provision back on');
+          ok($GLOBALS['option_writes']===0,'No owner persistence regardless of old route setting');
+          $result=$x->start();
+          ok(!is_wp_error($result)&&($result['status']??'')==='queued','Real discovery start queues BUSINESS even when no WordPress author exists');
+          ok(($x->saved['listing_author_id']??-1)===0,'Queued worker records no artificial private author');
+          ok($x->dispatch===1,'Uses the existing one discovery worker, no extra route');
+          ok(count($x->saved['profiles']??array())===1,'BUSINESS source catalog remains bound to one supplied profile');
+          ok($GLOBALS['option_writes']===0,'BUSINESS discovery has no private-owner settings side effect');
+          echo "EBAY_OWNER_FREE_KISS 10/10 PASS; not a live WordPress database test\n";
+          PHP
+          php -l owner.php
+          php owner.php | tee owner.log
+          test "$(grep -c '^PASS ' owner.log)" = 10
+          grep -F 'EBAY_OWNER_FREE_KISS 10/10 PASS' owner.log
