@@ -4,6 +4,7 @@ on:
     branches: [hobbyroom/hd009-amazon-dfs-products-audit-20261108]
     paths:
       - ops/hobby_dfs_20261108/preflight.py
+      - ops/hobby_dfs_20261108/verify_product_results.py
       - .github/workflows/hd009-product-preflight.yml
 permissions: {contents: write}
 jobs:
@@ -13,6 +14,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Cross-check reviewed equipment with real active category identifiers
         run: python3 ops/hobby_dfs_20261108/preflight.py
+      - name: Test ASIN title and Amazon-host relevance gates without network requests
+        run: python3 ops/hobby_dfs_20261108/verify_product_results.py
       - name: Save dated audit report in the existing Affiliate project office
         run: |
           git config user.name 'github-actions[bot]'
