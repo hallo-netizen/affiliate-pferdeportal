@@ -47,6 +47,35 @@ jobs:
           git apply --check lastmile.patch
           git apply lastmile.patch
           php -l affiliate-portal-router/includes/trait-ppar-ebay-run.php
+      - name: Actual BUSINESS frontend output gate (freshness, checkpoint, policy, no new DB calls)
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,shutil
+          patch=Path('release/affiliate-zentrale/evidence/EBAY_672308_TO_672310_GESAMTURSACHENPATCH_NUR_TEST.patch').read_text()
+          target='affiliate-portal-router/includes/trait-ppar-ebay.php'
+          section=patch.split('diff --git a/'+target+' b/'+target,1)[1].split('\ndiff --git ',1)[0]
+          hunks=re.split(r'(?=^@@ )',section,flags=re.M)
+          selected=[h for h in hunks if h.startswith('@@ ') and ('route_state,fresh_until,item_end_at' in h or "absint($row['fresh_until'] ?? 0) <= time()" in h)]
+          assert len(selected)==3, 'Three source-to-card freshness edits required'
+          root=Path('/tmp/ebay310_frontend')
+          dst=root/target
+          dst.parent.mkdir(parents=True,exist_ok=True)
+          shutil.copy(Path('release/affiliate-zentrale/current')/target,dst)
+          (root/'freshness.patch').write_text('diff --git a/'+target+' b/'+target+'\n--- a/'+target+'\n+++ b/'+target+'\n'+''.join(selected))
+          shutil.copy('release/affiliate-zentrale/evidence/ebay_672310_frontend_delivery_test.php',root/'test.php')
+          PY
+          cd /tmp/ebay310_frontend
+          git apply --check freshness.patch
+          git apply freshness.patch
+          php -l affiliate-portal-router/includes/trait-ppar-ebay.php
+          php -l test.php
+          php test.php | tee test.log
+          test "$(grep -c '^PASS ' test.log)" = 12
+          grep -F 'EBAY_FRONTEND_SOURCE_CONTRACT 12/12 PASS' test.log
+
       - name: Exercise the actual parsed PHP last-mile code against mocked WordPress source rows
         shell: bash
         run: |
