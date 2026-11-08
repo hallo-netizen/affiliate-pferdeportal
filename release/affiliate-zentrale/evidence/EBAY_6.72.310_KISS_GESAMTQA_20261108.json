@@ -1,5 +1,5 @@
 {
-  "status": "EXISTING SINGLE TEST-ONLY PATCH UPDATED: LAST-GOOD BUSINESS AND PRIVATE GUARD VERIFIED IN 13 PHP ISOLATED TEST CASES; ORIGINAL SOURCE REPLAY / LIVE WP+EBAY E2E STILL OPEN",
+  "status": "ONE ROOT WORKFLOW FIX AWAITING COMPLETE 6.72.308 SOURCE + REAL LIVE E2E; NO PRODUCTION RELEASE. Earlier focused passes NOT full acceptance.",
   "date": "2026-11-08",
   "version": "6.72.310 (internal work source ONLY, no ZIP issued)",
   "original_zip_file": "AFFILIATE_ZENTRALE_6.72.308_URSACHENFIX_GESAMTTEST_NUR_TEST.zip",
@@ -125,5 +125,23 @@
     "verification": "USER_CONFIRMED_NOT_AUTHENTICATED_WORDPRESS_READBACK",
     "action": "Treat 6.72.308 as installed baseline for ongoing eBay failure investigation. Do not mislabel central release governance 6.72.211 as installed version; it is a distinct release metadata entry. Do not restart source search or require repeated upload requests."
   },
-  "working_rule_20261108": "Continue one root-cause remediation only for eBay import -> inventory/source -> selection -> public checkpoint -> cards. Keep 6.72.310 existing internal patch; no new version/feature/worker, and no installation before full acceptance."
+  "working_rule_20261108": "Continue one root-cause remediation only for eBay import -> inventory/source -> selection -> public checkpoint -> cards. Keep 6.72.310 existing internal patch; no new version/feature/worker, and no installation before full acceptance.",
+  "comprehensive_root_cause_review": {
+    "date": "2026-11-08",
+    "user_confirmed_installed_version": "6.72.308",
+    "authoritative_live_failure": {
+      "at": "2026-11-07T05:49:32Z",
+      "profile": "one eBay search page SSL connection timeout cURL28",
+      "search": "request_error -> unresumable partial",
+      "canonical": "gapfill_partial_unresumable -> failed",
+      "heartbeats": "External GitHub transport succeeded, WordPress explicitly reported failed; NOT proof of plugin workflow success"
+    },
+    "full_workflow": "298 physical required eBay goods families -> Browse response -> safe provider/product/policy -> durable source rows -> refresh -> BUS/private selection -> source+creative+published campaign -> public coverage/gap proof -> checkpoint -> business category/article product cards and private HivePress listings -> terminal/archive correct warning",
+    "work_done_in_test_patch": "existing single 6.72.310 combined test-only patch handles bounded retry and nonfatal independent exhausted technical searches, safe gap proof, last-good checkpoint for BUSINESS and PRIVATE, honest archived warning/full-success status. Source patch only; not installed.",
+    "confirmed_hard_contracts": "6h source freshness must NOT be extended without real provider evidence; 298 physical family list already corrected in 6.72.308; EBAY_DE provenance and seller/product filters remain; no new tables/worker/second gate, K0 untouched.",
+    "current_first_failed_gate": "No physical editable original 6.72.308 66-file installation ZIP available in this session or in authenticated GitHub office; documented SHA and older test passes do not replace source bytes. The 6.72.310 patch cannot be replayed/linted as a full original WordPress plugin and therefore cannot be honestly packaged or deployed.",
+    "what_is_not_proven": "The currently installed website's eBay import, public campaigns, public product cards, and continuation are healthy. No authenticated WP/MariaDB/live eBay integrated pass.",
+    "next_work": "Obtain the existing physical 6.72.308 installation ZIP without reconstructing it, apply the single cumulative 6.72.310 patch exactly, rerun full native PHP+JSON+all regression tests against the full plugin, then one authenticated real WP/MariaDB/eBay and frontend E2E, and only then signed installable release. No additional piecemeal repairs before this gate.",
+    "release_allowed": false
+  }
 }
