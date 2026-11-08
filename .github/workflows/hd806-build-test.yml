@@ -1,0 +1,90 @@
+name: HD003 1.50.806 Hab single-Hero article release regression
+on:
+  push:
+    branches: [hobbyroom/hd003-150806-hab-article-one-hero-20261108]
+    paths:
+      - ops/hobby_article_150806/build.py
+      - ops/hobby_article_150806/test.py
+      - .github/workflows/hd806-build-test.yml
+permissions: {contents: write}
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build complete WordPress plugin using SHA-verified 1.50.805
+        run: python3 ops/hobby_article_150806/build.py
+      - name: Execute real PHP behavior on all posts and separate test sidebar
+        run: python3 ops/hobby_article_150806/test.py
+      - name: Install Chromium
+        run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - name: Verify sourced live post layout at desktop and mobile after exact planned removals
+        run: |
+          python3 - <<'PY'
+          from playwright.sync_api import sync_playwright
+          with sync_playwright() as p:
+            browser=p.chromium.launch(headless=True,args=['--no-sandbox'])
+            for width in [1440,960,768,390,360]:
+              page=browser.new_page(viewport={'width':width,'height':900})
+              res=page.goto('https://www.hobby-depot.de/designtest-zweileiner-oder-vierleiner-hobby-depot/',wait_until='domcontentloaded',timeout=40000)
+              assert res and res.status==200,(width,res)
+              page.wait_for_timeout(300)
+              data=page.evaluate("""()=>{
+                const hero=document.querySelector('.hd-article-photo-hero-v150789');
+                const reader=document.querySelector('.hd-article-reading-v150804');
+                const aside=document.querySelector('.hd-article-sidebar-v150804');
+                if(!hero||!reader||!aside)return {error:'Missing original article template'};
+                const src=hero.getAttribute('data-hd-hero-source');
+                const photo=hero.querySelector('img');
+                const before={
+                  hero:hero.outerHTML,originalImgs:[...reader.querySelectorAll('figure.wp-block-image img')].map(i=>i.src),
+                  bannerCount:reader.querySelectorAll('[data-ppar-slot="post_inline_banner"]').length,
+                  sidebarImages:aside.querySelectorAll('img').length
+                };
+                for(const slot of [...reader.querySelectorAll('[data-ppar-slot="post_inline_banner"]')])slot.remove();
+                for(const fig of [...reader.querySelectorAll('figure.wp-block-image')]){
+                  const image=fig.querySelector('img');if(image && image.src.split(/[?#]/)[0]===src.split(/[?#]/)[0])fig.remove();
+                }
+                for(const imageLink of [...aside.querySelectorAll('.hd-article-sidebar-photo-v150805')])imageLink.remove();
+                const box=aside.getBoundingClientRect(),text=reader.getBoundingClientRect();
+                return {heroImages:hero.querySelectorAll('img').length,
+                  heroUnchanged:hero.outerHTML===before.hero,
+                  duplicateOriginal:before.originalImgs.some(x=>x===src),
+                  originalBanners:before.bannerCount,originalSidebarImgs:before.sidebarImages,
+                  duplicateNow:[...reader.querySelectorAll('figure.wp-block-image img')].some(i=>i.src===src),
+                  emptyInline:reader.querySelectorAll('[data-ppar-slot="post_inline_banner"]').length,
+                  sidebarImages:aside.querySelectorAll('img').length,
+                  contentPreserved:reader.textContent.includes('Auf einen Blick')&&reader.textContent.includes('Wichtig für die Sicherheit'),
+                  categoryLink:!!aside.querySelector('a[href*="sportdrachen-drachen-leinen"]'),
+                  scrollWidth:document.documentElement.scrollWidth,viewport:innerWidth,
+                  text:{x:text.x,y:text.y,right:text.right,bottom:text.bottom},
+                  side:{x:box.x,y:box.y,right:box.right,bottom:box.bottom}
+                };
+              }""")
+              assert 'error' not in data,(width,data)
+              assert data['duplicateOriginal'] and data['originalBanners']>=1 and data['originalSidebarImgs']>=1,(width,data)
+              assert data['heroImages']==1 and data['heroUnchanged'] and not data['duplicateNow'],(width,data)
+              assert data['emptyInline']==0 and data['sidebarImages']==0,(width,data)
+              assert data['categoryLink'] and data['contentPreserved'],(width,data)
+              assert data['scrollWidth']<=width+4,(width,data)
+              if width>=921: assert data['side']['x']>=data['text']['right']-2,(width,data)
+              else:assert data['side']['y']>=data['text']['bottom']-2,(width,data)
+              print('HAB_ONE_HERO_ARTICLE_LAYOUT_PASS',width,'Hero 1','banner 0','sidebar photo 0','content true')
+              page.close()
+            browser.close()
+          print('DESKTOP_MOBILE_5_WIDTHS_PASS')
+          PY
+      - name: Save both complete distinct and current ZIPs in staging
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/HOBBY_DEPOT_DESIGN_HD003_1.50.806.zip
+          if ! git diff --cached --quiet; then
+            git commit -m 'HD003 1.50.806: Hab-style one Hero, no repeated picture or pictureless inline ad'
+            git push origin HEAD:hobbyroom/hd003-150806-hab-article-one-hero-20261108
+          else
+            echo 'HD003_150806_ALREADY_SAVED'
+          fi
