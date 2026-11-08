@@ -1,5 +1,8 @@
 # Hobby Depot HD009 – aktuelle Plugin-Akte
 
+**Zwischenabnahme 08.11.2026:** Nutzer meldet zur Version 0.1.25 „auf den ersten Blick pass“. Die angepassten Weltmotive und flacheren Kategoriebanner gelten damit als vorläufig akzeptiert; keine bestätigte Vollabnahme aller Seiten. **Offen:** endgültiges Design und Behandlung von Anzeigen in normalen Artikeln (ausdrücklich erst später entscheiden), gezielte Sichtprüfung von Kategorieebenen und Hobbyregisterprofilen auch mobil. Kein neues Plugin, keine Versionserhöhung; das bestehende CURRENT.zip bleibt unverändert.
+
+
 **CURRENT: 0.1.25, 07.11.2026.**
 
 - Download: `../../ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/HOBBY_DEPOT_AFFILIATE_HD009_0.1.25.zip`
