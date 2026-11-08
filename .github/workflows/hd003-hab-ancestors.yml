@@ -1,0 +1,42 @@
+name: Actual Hobby post content ancestors and active article typography
+on:
+  push:
+    branches: ['hobbyroom/hd003-article-hab-translation-20261108']
+    paths: ['.github/workflows/hd003-hab-ancestors.yml']
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Chromium
+        run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - name: Show real article title/body hierarchy and style authors
+        run: |
+          python3 - <<'PY'
+          from playwright.sync_api import sync_playwright
+          import json
+          with sync_playwright() as p:
+            browser=p.chromium.launch(headless=True,args=["--no-sandbox"])
+            for width in (1440,390):
+              page=browser.new_page(viewport={'width':width,'height':900})
+              page.goto('https://www.hobby-depot.de/designtest-zweileiner-oder-vierleiner-hobby-depot/',wait_until='domcontentloaded',timeout=35000)
+              page.wait_for_timeout(500)
+              js=page.evaluate("""() => {
+                const intro=document.querySelector('p.has-large-font-size');
+                const h1=[...document.querySelectorAll('h1')].find(x=>x.offsetHeight);
+                const hero=document.querySelector('.hd-article-photo-hero-v150789');
+                const h2=document.querySelector('h2.wp-block-heading');
+                const tree=el=>{let a=[];while(el && a.length<13){let r=el.getBoundingClientRect(),s=getComputedStyle(el);
+                  a.push({tag:el.tagName,id:el.id,cls:typeof el.className==='string'?el.className.slice(0,170):'',font:s.fontSize,width:r.width,height:r.height,pad:s.padding,margin:s.margin,display:s.display});el=el.parentElement}return a};
+                return {introAncestors:tree(intro),h1Ancestors:tree(h1),
+                h2Ancestors:tree(h2),heroAncestors:tree(hero),
+                texts:[...document.querySelectorAll('[class*=kicker],[class*=toc],nav[aria-label*=Inhaltsverzeichnis]')].slice(0,12).map(x=>({name:x.tagName,cls:x.className,text:x.textContent.trim().slice(0,130)})),
+                postCats:[...document.querySelectorAll('.hd-breadcrumb a')].map(x=>({text:x.textContent,href:x.href}))};
+              }""")
+              print('ANCESTORS',width,json.dumps(js,ensure_ascii=False))
+              page.close()
+            browser.close()
+          PY
