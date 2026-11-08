@@ -1,5 +1,23 @@
 # HD003 – Hobbydepot Design – CURRENT
 
+**Aktuelle vollständige lokale Installationsfassung: 1.50.808 (08.11.2026).** Letzter vom Nutzer im Screenshot bestätigter Live-Stand: 1.50.807; 1.50.808-Live-Sichtprüfung offen.
+
+**Warum 1.50.808?** Der Nutzer hat die zu flache, verzerrt wirkende Eigenwerbung in 1.50.807 verworfen und ausdrücklich die Rückkehr zum **alten Originalbanner aus 1.50.806** verlangt. Deshalb wurde das echte Originalbild samt Original-Höhenverhältnis, Original-Overlay und beiden vorhandenen Werbebedingungen-/Preise-Klickflächen **bytegenau aus 1.50.806 übernommen**. Keine künstliche Skalierung, kein abgeschnittener Flachbanner. Lupen-Hero und kurzer Untertitel **„Das passende Hobby für dich.“** bleiben von 1.50.807 erhalten.
+
+**Voll-ZIP:** `HOBBY_DEPOT_DESIGN_HD003_1.50.808.zip` im isolierten HD003-GitHub-Pluginbüro. 65.763.366 Byte, SHA-256 `cbf03e54dd7bf4ae44ea6beac66f1ee53d188732d6da4b6c1c92df1b9b5b8f15`. Direkter Download: https://github.com/hallo-netizen/affiliate-pferdeportal/releases/download/hobby-depot-hd003-1.50.808-original-banner/HOBBY_DEPOT_DESIGN_HD003_1.50.808_HOBBYFINDER_BANNER_ORIGINAL.zip
+
+**Prüfung:** 1.50.806-Ursprungs-ZIP exakt per SHA256 geprüft. Vollständiges 1.50.808-Plugin enthält 1291 Dateien: **1288 Originaldateien byteidentisch**, 2 PHP-Dateien gezielt geändert (Hobbyfinder-Bild-/Text-Zuordnung und Versionskopf), genau 1 neues Lupen-Bild. 13/13 PHP-Dateien Syntax PASS; ZIP CRC 1291/1291 PASS; Originalbanner-Bild/Styles/Klickflächen unverändert; zwei korrekte Zielpfade aus Original unverändert. GitHub Actions `42506740141` erfolgreich. Keine zusätzliche WordPress-Liveabnahme oder neue Seitenmodellierung behauptet.
+
+**Unverändert:** alle anderen Magazine, Kategorien, Beitragsdesign, Anzeigenplätze, HD006 Bildzentrale, HD007, Affiliate, Pferdeatelier/K0. **Alte Eigenwerbe-Banner-Version unverändert**, nicht eine erneute Komprimierung des Bannerbilds.
+
+**Bürovertrag:** [EVIDENCE_1.50.808.md](./EVIDENCE_1.50.808.md). Nur 1.50.808 als aktuelles Download-Plugin weitergeben; 1.50.807 archiviert.
+
+---
+
+## Historischer Zwischenstand 1.50.807 (durch Banner-Rücknahme abgelöst)
+
+# HD003 – Hobbydepot Design – CURRENT
+
 **Stand 08.11.2026: vollständiger Installationskandidat 1.50.807 (Hobbyfinder).**  
 **Produktiv zuletzt vom Nutzer gemeldet: 1.50.806; 1.50.807 noch nicht live abgenommen.**
 
