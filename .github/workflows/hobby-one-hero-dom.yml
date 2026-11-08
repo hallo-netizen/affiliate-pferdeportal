@@ -1,0 +1,36 @@
+name: HD003 article duplicate exact DOM
+on:
+  push:
+    branches: [hobbyroom/hd003-150806-hab-article-one-hero-20261108]
+    paths: [.github/workflows/hobby-one-hero-dom.yml]
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - run: |
+          python3 - <<'PY'
+          from playwright.sync_api import sync_playwright
+          import json
+          with sync_playwright() as p:
+            browser=p.chromium.launch(headless=True,args=["--no-sandbox"])
+            page=browser.new_page(viewport={"width":1280,"height":900})
+            page.goto("https://www.hobby-depot.de/designtest-zweileiner-oder-vierleiner-hobby-depot/",wait_until="domcontentloaded",timeout=38000)
+            result=page.evaluate("""()=>{
+              const root=document.querySelector('#content .post__text');
+              if(!root)return {error:'root missing'};
+              let out=[];
+              const r=n=>{let x=n.getBoundingClientRect();return{x:x.x,y:x.y,w:x.width,h:x.height}};
+              const nodes=[...root.querySelectorAll('figure,img,.hdar-ci-amazon-slot,.hdar-ci-amazon-banner,[class*=hdar-ci],.hd-article-sidebar-card-v150804')];
+              for(const el of nodes.slice(0,35)){
+                out.push({tag:el.tagName,cls:el.className,id:el.id,parent:el.parentElement?.outerHTML.slice(0,800),html:el.outerHTML.slice(0,1250),rect:r(el)});
+              }
+              return {bodyclass:document.body.className,els:out,wrapper:root.outerHTML.slice(0,1600)};
+            }""")
+            print("LIVE_DOCUMENT",json.dumps(result,ensure_ascii=False))
+            browser.close()
+          PY
