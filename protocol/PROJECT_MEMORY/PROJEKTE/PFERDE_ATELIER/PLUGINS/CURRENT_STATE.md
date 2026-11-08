@@ -31,6 +31,20 @@
 
 ---
 
+## AKTUELLER STAND – PSTE 0.57.144.24 QUELLFIX / 08.11.2026 17 UHR
+
+**Dies ist der neueste Stand für das externe PSTE-MINI-SEO-Parkhaus; ältere .22/.23-Abschnitte unten sind Zwischenstände.** Nutzer hat auf Test-WP zuletzt **PSTE .23 + PSERC .55** installiert und den Export von 16:03:31 UTC geliefert. Er zeigt **nur 1.025/1.179** historische Einträge, `complete=false`, `reason=PSTE_EDITORIAL_PLAN_TITLE_UNRESOLVED_0`; .23 stoppte bei neun alten unlesbaren Titeln vor den vorhandenen PSERC-/PPM679-Plänen. Der Test der .23-Fassung hatte die wirkliche neunfach kaputte Quelle durch eine gültige künstliche Zeile ersetzt. **Das war eine reale Testlücke.**
+
+**Fix und realitätsgetreue lokale Simulation tatsächlich abgeschlossen:** Isolierte **PSTE 0.57.144.24 NUR TEST** aus der vorhandenen .23-Original-Test-ZIP gebaut; *nur* `class-pste-snapshot.php`, `class-pste-mini-workflow.php`, Pluginversion geändert. Neun ungültige redaktionelle Bestandstitel werden im einmaligen Lesepfad **quarantänisiert, mit Original-Wert/Form zurückgegeben und NICHT übersprungen**; anschließend werden der vorhandene PSERC-Plan und alle **144** PPM679-Planplätze weiter gelesen. Bei den **1.179** realen Ausgangszeilen wurden **141** echte WP-Titel eindeutig per Post-ID zugeordnet, drei ohne WP-Post-Treffer und neun alten `Array`-Titeln bleiben `UNRESOLVED_SOURCE_TITLE`. Der resultierende **technische Diagnoseexport enthält 1.179/1.179**, aber bewusst `parkhaus_complete=false`, leeren Freigabe-Hash und präzise Quellenfehler, statt heimlich FREI zu ermöglichen. Externer SEO-Rückimport ist technisch noch gesperrt.
+
+**46/46 lokale PHP-Checks PASS** mit echten 1.179 gespeicherten Exportzeilen, vollständigen alten 9-Array-Quellen (NICHT mehr künstlich ersetzt) und drei tatsächlich fehlenden WordPress-IDs; inklusive 87 Original-Suchbegriffen, negativem Inkomplett-Owner-Import, positivem synthetischem Vollständigkeitsfall, unverändertem PSERC-0.28.55-Leser, Quellbindung und doppelter Slot-Sperre; 83 PHP-Dateien Lint PASS, 121 ZIP-Einträge CRC PASS. **Positiver voller Test hat neun und drei künstliche Werte ausdrücklich nur als kontrollierte Testdaten; der tatsächliche Serverbestand ist NOCH NICHT vollständig.** Kein echter WP-MySQL-End-to-End-Test v24, kein fachlicher SEO-Owner-Lauf, kein Rückimport, kein K0-Auftrag.
+
+**Nachweis/Archiv:** [EVIDENCE/PSTE_05714424_1179_ECHTE_QUELLEN_46_LOKALTESTS_20261108.md](EVIDENCE/PSTE_05714424_1179_ECHTE_QUELLEN_46_LOKALTESTS_20261108.md); [vollständige Differenz, Bau- und Testdaten](QA_ONLY/PSTE_05714424_QUELLFIX/MANIFEST.json). Binärdateien **tatsächlich privat gespeichert** in Library `/pferdeatelier/PLUGINS/PSTE-0.57.144.24-PARKHAUS-QUELLFIX-NUR-TEST.zip` (635721 Byte, SHA256 `056f9c6e1e8b273c3ece199b5b3d842b7f5c1ac42810b9ce5531b82525c8bd4e`) und `/pferdeatelier/PLUGINS/PFERDEATELIER-PSTE-05714424-PSERC-02855-QA-PAAR.zip` (877145 Byte, SHA256 `063d427d100ee2a63b5ba223c30144b45d55ef4b18d1d77630fc381b64530143`). GitHub enthält die vollständige Bauquelle/Änderungen/QA, nicht diese ZIP-Bytes. PSERC-Kern unverändert, vorheriger Stand erhalten, K0/Live unberührt, Draft PR #682 NICHT MERGEN.
+
+**Nächster minimaler Realtest:** .24 auf isolierter WordPress-Testseite anstatt .23 ausführen und EINEN echten Export zur Prüfung der **im gespeicherten WordPress-Original ggf. vorhandenen Roh-Titelwerte der neun Einträge** sowie der drei exakten Post-Verweise anfertigen. Erst nach Beweis, dass diese Daten echte Artikelthemen identifizieren, darf das Parkhaus als vollständig gelten. Die bisher gelieferten JSON-Dateien enthalten für neun Fälle nur „Array“ ohne rekonstruierbare Originaltitel. Kein neuer Gesamtdiagnose-/Keyword-Durchlauf, keine willkürliche Datenlöschung, keine zweite SEO-Fachprüfung, keine Artikelproduktion.
+
+---
+
 
 <!-- PFERDEATELIER_PLUGIN_WORKBENCH_LOCK_BEGIN -->
 ```json
