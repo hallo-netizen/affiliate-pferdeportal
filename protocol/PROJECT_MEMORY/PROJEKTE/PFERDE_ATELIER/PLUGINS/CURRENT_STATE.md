@@ -45,6 +45,18 @@
 
 ---
 
+## NEUER ECHT-WP-STAND – PSTE .24 / EXPORT 08.11.2026 16:29:19 UTC
+
+**Jetzt ist .24 auf der TESTseite vom Nutzer ausgeführt und mit dem echten Export belegt (gegenüber älteren .24-lokal-Abschnitten unten):** `pferdeatelier-mini-ergebnisse-20261108-162920.json` unverändert privat gesichert, SHA256 `ddeadf12b0a84e215e534172ee70f6d3f11c5f1289fc9e6e6d00deed7a278125`. 100 Stichwörter (87 JA, 9 VIELLEICHT, 4 NEIN), 87 SEO-Subjekte, **1.179/1.179 Bestandseinträge** aus allen sechs Quellen, PSERC aktuell. **Export-Codefehler „abgebrochene Quellen“ tatsächlich behoben.** Allerdings ist die Datenfreigabe `parkhaus_complete=false`, Grund `EDITORIAL_PLAN_UNRESOLVED:9;PPM679_RUNTIME_TITLE_UNRESOLVED:3` – keine externe SEO-FREI-Entscheidung, kein Import.
+
+**Neue harte Quellenforensik statt Vermutung:** Die 9 `EDITORIAL_PLAN`-Zeilen besitzen ALLE denselben tatsächlich nachgerechneten SHA256-Hash und exakt denselben vollständigen Alt-Wert: `{title:"Array",primary_longtail_query:"Array",category_name:"",intent_cluster_id:"",headings:[],source_reference:""}`. Es sind **neun identische, inhalts-/identitätslose Platzhalter**, keine neun eindeutig belegbaren Artikel. **Aber** Quelle *gespeicherte Importoption vs. WP-Filter* im Export noch nicht unterschieden; nicht blind löschen. PPM679 enthält 144 eindeutig reservierte Artikel-/Slot-IDs: 141 mit echten WP-Titeln; 3 historische Post-IDs **972356 / 972414 / 972560** weder im WP-Inventar noch per `get_post` lesbar; ihre Slots bleiben reserviert, keine falsche FREI-Freigabe.
+
+**Echte .24-Nachsimulation:** Exakt diese vom Nutzer hochgeladene Datei mit dem vorhandenen PHP-Quellcode erneut lokal ausgewertet; **55/55 Einzelchecks PASS** inkl. neun SHA-Rückrechnungen, drei Negativpost-Verweise, 1.179 Bestandseinträge, unverändertem PSERC-Leser und sicheren Rückimport-Sperren. Synthetische Ersatzwerte nur im getrennten Positivtest, nicht in WP. Kein neues ZIP, kein erneuter WP-Klick gefordert. Prüfbericht [EVIDENCE/PSTE_V24_ECHTER_WP_EXPORT_162920_REPLAY_55PASS_20261108.md](EVIDENCE/PSTE_V24_ECHTER_WP_EXPORT_162920_REPLAY_55PASS_20261108.md); reproduzierbarer Code/Audit [QA_ONLY/PSTE_05714424_QUELLFIX/LIVE_WP_20261108_162920/AUDIT.json](QA_ONLY/PSTE_05714424_QUELLFIX/LIVE_WP_20261108_162920/AUDIT.json). Ursprüngliche .24-Test-ZIP in privater Library unverändert; K0/Live unangetastet, Draft-PR #682 nicht mergen.
+
+**Einziger offener Ursachenauftrag:** Ursprung der neun alten identitätslosen Platzhalter (Filter oder Option) identifizieren und die 3 verwaisten PPM679-Belege gegen archivierte Pläne/alte Post-IDs abgleichen. Erst danach konservativ aus aktivem Redaktionsbestand trennen, ohne Reservierungen zu löschen oder Sicherung zu verändern. **Keine Wiederholung der bisherigen 100er-/5.016er-Diagnosen und keine neue .25-Version ohne neue Ursache.** Die echte SEO-Einmalprüfung bleibt bis dahin ohne Freigabe.
+
+---
+
 
 <!-- PFERDEATELIER_PLUGIN_WORKBENCH_LOCK_BEGIN -->
 ```json
