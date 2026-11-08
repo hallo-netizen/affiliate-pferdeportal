@@ -25,7 +25,6 @@ define('HOUR_IN_SECONDS',3600);
 define('WP_PLUGIN_DIR', __DIR__.'/plugins');
 define('HDAR_DATAFORSEO_LOGIN','fake-only-login');
 define('HDAR_DATAFORSEO_PASSWORD','fake-only-password');
-define('PHP_URL_HOST',PHP_URL_HOST);
 class WP_Error {
     private $c,$msg;
     function __construct($code,$msg){$this->c=$code;$this->msg=$msg;}
@@ -93,7 +92,7 @@ function wp_remote_request($url,$args){
              'data_asin'=>'B012345679','url'=>'https://www.amazon.de/dp/B012345679'),
            array('type'=>'amazon_serp','title'=>'Lenkdrachen falscher Anbieter',
              'data_asin'=>'B012345680','url'=>'https://www.ebay.de/itm/123')
-         )))))));
+         ))))))));
 }
 function wp_remote_retrieve_response_code($r){return $r['response_code'];}
 function wp_remote_retrieve_body($r){return $r['body'];}
