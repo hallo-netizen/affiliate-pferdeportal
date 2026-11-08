@@ -1,0 +1,19 @@
+name: PSTE TEMP real-export owner-contract acceptance selftests
+on:
+  push:
+    branches: [fix/pste-kisten-einmalige-pruefung-20261107]
+permissions: {contents: read}
+jobs:
+  one-time:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read-only real export and worker reply contract selftests, no WP/K0
+        shell: bash
+        run: |
+          set -euo pipefail
+          D=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/QA_ONLY
+          python3 -m py_compile "$D/test_single_existing_seo_worker_acceptance.py"
+          python3 "$D/test_single_existing_seo_worker_acceptance.py" --selftest "$D/MINI_100_ORIGINAL_EXTERNAL_TITLES_20261106.json"
+          python3 "$D/test_single_existing_seo_worker_acceptance.py" --io-selftest "$D/MINI_100_ORIGINAL_EXTERNAL_TITLES_20261106.json"
+          echo "PASS ONE TIME OWNER QUALITY INSTRUMENT, NOT REAL OWNER"
