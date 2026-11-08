@@ -1,3 +1,9 @@
+# AKTUALISIERUNG 08.11.2026 – 2.8.10 IST AKTUELLE INSTALLATIONSFASSUNG
+
+**Pflichtdokument:** [BILDZENTRALE_VERTRAG_2.8.10_20261108.md](./BILDZENTRALE_VERTRAG_2.8.10_20261108.md). Die Menünamen aus dem älteren 2.8.8-Menüvertrag sind ÜBERHOLT: Das HD-006-Erstellungsplugin heißt **Bildzentrale**, das andere Zuordnungsplugin heißt **Bilder zuordnen**. Vollständige 2.8.10-ZIP, Prüflog und Testnachweise in der persönlichen Library unter `/Hobby Depot/Plugin-Büro/`. 65 Backend-, 27 Menü- und 21 Browsertests PASS; WordPress-Live offen. Die folgenden älteren Versionsangaben sind historisch, nicht Current.
+
+---
+
 # HD-006 – HOBBY DEPOT BILDZENTRALE – CURRENT
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
