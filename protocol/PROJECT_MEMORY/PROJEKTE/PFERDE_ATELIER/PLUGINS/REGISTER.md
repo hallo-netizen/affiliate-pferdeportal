@@ -229,3 +229,13 @@ Aktueller einzig gültiger PSERC-QA-Stand bleibt **0.28.55** (SHA256 `5fb82d0b35
 **Wichtig: keine falsche Echt-WP-Behauptung.** Die vollständigen PSERC-Plugin-Startproben wurden in PHP mit simulierten WordPress-Hook-Funktionen ausgeführt, nicht im echten WordPress/MySQL. Die letzte echte WordPress/MySQL-Probe `42477636295` bezog PSERC über die authentische gespeicherte Testausgabe ein, nicht als gleichzeitig vollständig installiertes Plugin. QA-Vollzip im lokalen Arbeitscontainer; auf GitHub: **reproduzierbare vollständige Bauquelle, Prüftest und Herkunftsnachweis**, noch **kein** Binärrelease. Vollständig echtes WordPress-Paar, aktuelle echte WP-/PSTE-/PSERC-/PPM679-Bestandskopie, echte einzige externe SEO-Owner-Auswertung und K0-Handoff bleiben offen. **QA ONLY, NICHT INSTALLIEREN, NICHT MERGEN, K0/gespeicherter Original-Redaktionsplan unverändert.**
 
 **Nächster konkreter Arbeitsschritt:** Nur die jetzt korrekt versionierte vollständige PSERC-0.28.55-QA-ZIP zusammen mit der vorhandenen PSTE-v22-QA-Fassung im isolierten echten WordPress-Teststand prüfen; erst danach realen vollständigen Export mit dem bereits gespeicherten echten PPM679-Plan abnehmen. Kein erneuter Sicherheits-, Keyword- oder SEO-Doppelprüfer.
+
+
+## 08.11.2026 – Test-Pluginpaar nach echtem externem MINI-Export (KEIN RELEASE)
+
+Die **vollständigen unveränderten ZIP-Testpakete**, physisch erneut gelesen und nach dem Upload in die private Dateiablage nochmals gelistet, sind:
+- **PSTE 0.57.144.22 TEST**, 634339 Byte, SHA256 `384203f4971fc6d98eaa7613835c75f2b1ff976471659afa8dae60ac09a08ad1`, Library `/pferdeatelier/PLUGINS/PSTE-0.57.144.22-TEST.zip`.
+- **PSERC 0.28.55 TEST**, 266498 Byte, SHA256 `501959a0ac73a1b81070ed23623935999ed1058385b3ba587e0f8bef9c9816d0`, Library `/pferdeatelier/PLUGINS/PSERC-0.28.55-TEST.zip`.
+- **Beide ZIPs im Sammelarchiv**, 901105 Byte, SHA256 `1085ba60a704a24b0688c19afc724ea25feb68ee8def786688ce7fa69164e45c`, Library `/pferdeatelier/PLUGINS/PFERDEATELIER-BEIDE-TEST-PLUGINS.zip`.
+
+[**Manifest der installierten Testversionsreihe**](INSTALLATIONS_PAKETE/TESTPAAR_20261108_ARCHIV/MANIFEST.md), [**aktueller realer Exportbefund**](EVIDENCE/ISTSTAND_20261108_1605_EXTERNE_SEO_WEG_UXDATEN.md). Diese **aktuellen** ZIPs sind in **der privaten Library abgelegt** und auf GitHub **inventarisiert**, nicht als neue ZIP-Git-Blobs hochgeladen; vorhandenes älteres Git-ZIP von PSTE 0.57.144.22 hat abweichende Bytegröße, daher NICHT ersetzen/gleichsetzen. Bereits vom Betreiber installierte Plugin-Versionen im WordPress-Testsystem per Screenshot belegt, aber nicht die Server-Dateihashes. Keine korrigierte Version, keine Releasefreigabe, kein automatischer Import. Original-K0 und Live unverändert.
