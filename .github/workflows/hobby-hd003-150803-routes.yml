@@ -1,0 +1,35 @@
+name: Hobby Depot HD003 1.50.803 ownership and route inspection
+on:
+  push:
+    branches:
+      - hobbyroom/hd003-150803-frontend-masterfix-20261108
+    paths:
+      - .github/workflows/hobby-hd003-150803-routes.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  trace:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect exact 803 real card, hero and term routing
+        run: |
+          python3 - <<'PY'
+          import zipfile,re
+          f='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/HOBBY_DEPOT_DESIGN_HD003_1.50.803.zip'
+          with zipfile.ZipFile(f) as z:
+            for p,ranges in [
+              ('affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php',[(3060,3230),(1100,1140)]),
+              ('affiliate-portal-template-kit/pferde-template-kit.php',[(3870,4000),(17620,17710)])]:
+              a=z.read(p).decode('utf8').splitlines();print('\n','FILE',p)
+              for i,line in enumerate(a,1):
+                m=re.search(r'\bfunction\s+([a-zA-Z_0-9]+)\s*\(',line)
+                if m and re.search(r'(categor|leaf|tile|term|hero|image|render)',m.group(1),re.I):
+                  if 'hobby-depot-profile' in p or ('term' in m.group(1) or 'leaf' in m.group(1) or 'category' in m.group(1) or 'hero' in m.group(1)):
+                    print('METHOD',i,m.group(1))
+              for start,end in ranges:
+                print('SECTION',start,end)
+                for i in range(start-1,end):
+                  print(f'{i+1}: {a[i][:340]}')
+          PY
