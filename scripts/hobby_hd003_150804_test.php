@@ -48,7 +48,7 @@ check(str_contains($hero,'drachen-leinen.webp'),'Hero uses exact URL of uploaded
 check(str_contains($tile,'drachen-leinen.webp'),'Tile uses exact URL of uploaded native image');
 check(str_contains($hero,'data-hd-term-master="801"'),'Hero identifies the correct native attachment');
 check(str_contains($tile,'data-hd-term-master="801"'),'Tile identifies SAME native attachment');
-check(str_contains($hero,'Drachen &amp; Leinen'),'Hero's term name is HTML-escaped');
+check(str_contains($hero,'Drachen &amp; Leinen'),'Hero term name is HTML-escaped');
 check(str_contains($tile,'hd-next-icon'),'Tile keeps the existing icon container layout');
 foreach([$none,$wrongid,$badsize,$other] as $term) {
   check(invoke('term_master_data_v150804',$term)===[],'Invalid/wrong-taxonomy data rejected '.$term->slug);
