@@ -50,7 +50,7 @@ index 8b2a941..ec33705 100644
              array('provider'=>'Amazon / DataForSEO','status'=>$dfs_status,'last'=>absint($dfs_control['last_match_at']??0),'last_label'=>'Letzte eindeutige Produktzuordnung','note'=>$dfs_note . ' (ASIN-Suche, keine Preis-/Bestandsdaten)','url'=>'affiliate-portal-networks'),
          );
 diff --git a/affiliate-portal-router/includes/trait-ppar-ebay-run.php b/affiliate-portal-router/includes/trait-ppar-ebay-run.php
-index e5c1169..f3525fe 100644
+index e5c1169..501e097 100644
 --- a/affiliate-portal-router/includes/trait-ppar-ebay-run.php
 +++ b/affiliate-portal-router/includes/trait-ppar-ebay-run.php
 @@ -97,6 +97,16 @@ trait PPAR_Ebay_Run_Trait {
@@ -70,7 +70,7 @@ index e5c1169..f3525fe 100644
          $history = get_option($this->ebay_run_history_option_key(), array());
          $history = is_array($history) ? $history : array();
          $history[] = array(
-@@ -108,6 +118,15 @@ trait PPAR_Ebay_Run_Trait {
+@@ -108,17 +118,36 @@ trait PPAR_Ebay_Run_Trait {
              'finished_at'=>absint($run['finished_at'] ?? 0),
              'build'=>sanitize_text_field((string)($run['build'] ?? '')),
              'checkpoint_id'=>sanitize_text_field((string)($run['checkpoint_id'] ?? $run['checkpoint_base_id'] ?? '')),
@@ -86,7 +86,30 @@ index e5c1169..f3525fe 100644
          );
          if (count($history) > 10) {
              // Keep the latest real success visible even after repeated failures.
-@@ -1089,7 +1108,18 @@ trait PPAR_Ebay_Run_Trait {
+             $latest = array_slice($history, -10);
++            // A warning-only terminal result is not a verified full success.
++            // Keep the last truly successful run for the read-only dashboard.
++            $is_full_success = static function ($entry) {
++                return is_array($entry) && sanitize_key((string)($entry['status']??''))==='completed'
++                    && empty($entry['completed_with_skips'])
++                    && absint($entry['skipped_item_errors_count']??0)===0
++                    && absint($entry['technical_gap_count']??0)===0
++                    && absint($entry['technical_unverified_search_profile_count']??0)===0
++                    && sanitize_key((string)($entry['completion_warning']??''))==='';
++            };
+             $has_success = false;
+             foreach ($latest as $entry) {
+-                if (($entry['status'] ?? '') === 'completed') { $has_success = true; break; }
++                if ($is_full_success($entry)) { $has_success = true; break; }
+             }
+             if (!$has_success) {
+                 for ($i = count($history) - 11; $i >= 0; $i--) {
+-                    if (($history[$i]['status'] ?? '') === 'completed') {
++                    if ($is_full_success($history[$i])) {
+                         $latest[0] = $history[$i];
+                         break;
+                     }
+@@ -1089,7 +1118,18 @@ trait PPAR_Ebay_Run_Trait {
      private function ebay_run_complete($manifest = array()) {
          $run=$this->ebay_run_load();
          $run['status']='completed';$run['phase']='completed';$run['finished_at']=time();$run['resume_reason']='';$run['resume_at']=0;
@@ -106,7 +129,7 @@ index e5c1169..f3525fe 100644
          $checkpoint=$this->ebay_public_checkpoint_load();
          if($this->ebay_public_checkpoint_is_safe($checkpoint)){
              $run['checkpoint_id']=sanitize_text_field((string)($checkpoint['checkpoint_id']??''));
-@@ -1211,7 +1241,7 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1211,7 +1251,7 @@ trait PPAR_Ebay_Run_Trait {
                      $reason=sanitize_key((string)($job['summary']['budget']['stopped_reason']??'discovery_partial_unresumable'));
                      $this->ebay_run_fail('discovery_partial_unresumable','Discovery endete in einem nicht fortsetzbaren PARTIAL-Zustand.',array('stopped_reason'=>$reason,'scope'=>sanitize_key((string)($job['scope']??''))));return;
                  }
@@ -115,7 +138,7 @@ index e5c1169..f3525fe 100644
                  $start=$this->ebay_start_sync_job(false,'all','background');
                  if (is_wp_error($start)) {$this->ebay_run_fail($start->get_error_code(),$start->get_error_message());return;}
              }
-@@ -1225,8 +1255,14 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1225,8 +1265,14 @@ trait PPAR_Ebay_Run_Trait {
                  $msg=sanitize_text_field((string)($last['error']??$job['failure_reason']??'eBay-Discovery ist fehlgeschlagen.'));
                  $this->ebay_run_fail($code!==''?$code:'discovery_failed',$msg);return;
              }
@@ -132,7 +155,7 @@ index e5c1169..f3525fe 100644
              }
              return;
          }
-@@ -1599,6 +1635,25 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1599,6 +1645,25 @@ trait PPAR_Ebay_Run_Trait {
       * safely selected candidate exists but public coverage is still missing, the
       * state is an invariant/materialization failure and remains fail-closed.
       */
@@ -158,7 +181,7 @@ index e5c1169..f3525fe 100644
      private function ebay_run_business_safe_supply_gap_contract($run, $coverage) {
          $run=is_array($run)?$run:array();$coverage=is_array($coverage)?$coverage:array();
          $missing=array_values(array_unique(array_filter(array_map('sanitize_key',(array)($coverage['missing']??array())))));
-@@ -1665,14 +1720,34 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1665,14 +1730,34 @@ trait PPAR_Ebay_Run_Trait {
              );
          }
  
@@ -199,7 +222,7 @@ index e5c1169..f3525fe 100644
          $coverage['open_gap_count']=count($missing);
          $coverage['open_gaps']=$missing;
          $coverage['exceptions']=$exceptions;
-@@ -1818,7 +1893,7 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1818,7 +1903,7 @@ trait PPAR_Ebay_Run_Trait {
          $job=$this->ebay_sync_job_load();
          // A completed full-discovery substate must not suppress the one targeted
          // recovery pass. Reset only the nested discovery phase state, never the run.
@@ -208,7 +231,7 @@ index e5c1169..f3525fe 100644
          $status=sanitize_key((string)($job['status']??''));
          if($status==='partial'){
              if($this->ebay_sync_job_is_resumable_partial($job) && sanitize_key((string)($job['scope']??''))==='business_recovery'){
-@@ -1829,16 +1904,20 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1829,16 +1914,20 @@ trait PPAR_Ebay_Run_Trait {
                  $reason=sanitize_key((string)($job['summary']['budget']['stopped_reason']??'gapfill_partial_unresumable'));
                  $this->ebay_run_fail('gapfill_partial_unresumable','BUSINESS-Gap-Fill endete in einem nicht fortsetzbaren PARTIAL-Zustand.',array('stopped_reason'=>$reason,'scope'=>sanitize_key((string)($job['scope']??''))));return;
              }
