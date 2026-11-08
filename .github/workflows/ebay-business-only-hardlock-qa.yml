@@ -693,6 +693,19 @@ jobs:
           content=patch.read_text()
           assert content.count('diff --git a/')==5, 'No new plugin files, tables or workers'
           assert len([l for l in content.splitlines() if l.startswith('@@ -')])==58, 'All 58 cumulative source hunks must remain in one patch'
+          import re
+          for section in re.split(r'(?=^diff --git )',content,flags=re.M):
+              if not section.startswith('diff --git '):continue
+              for hunk in re.split(r'(?=^@@ )',section,flags=re.M):
+                  if not hunk.startswith('@@ '):continue
+                  header=hunk.split('\\n',1)[0]
+                  m=re.match(r'^@@ -[0-9]+,([0-9]+) \\+[0-9]+,([0-9]+) @@',header)
+                  assert m, ('Invalid diff header',header)
+                  lines=[x for x in hunk.splitlines()[1:] if x]
+                  old_lines=sum(x.startswith((' ','-')) for x in lines)
+                  new_lines=sum(x.startswith((' ','+')) for x in lines)
+                  assert (old_lines,new_lines)==(int(m[1]),int(m[2])), (header,old_lines,new_lines)
+          print('PASS 58 cumulative diff hunks structurally consistent')
           (out/'full.patch').write_text(content)
           PY
           cd /tmp/ebay_full_kiss
