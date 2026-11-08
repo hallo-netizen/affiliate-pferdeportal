@@ -46,6 +46,18 @@ with ZipFile(ROOT/'HD-003-DESIGN-TEMPLATE-KIT'/'CURRENT.zip') as des, ZipFile(RO
   known_hobbies={slug for slug,obj in page_map.items() if obj.get('object_type')=='page'}
   absent=known_hobbies-set(grouped)
   print('HOBBY_PAGE_MAPPING_GAPS',len(absent),sorted(absent)[:16])
+  direct_categories={slug:row for slug,row in page_map.items() if row.get('object_type')=='category'}
+  print('DIRECT_CATEGORY_DEFINITIONS',len(direct_categories),[(k,v.get('world'),v.get('parent')) for k,v in list(direct_categories.items())[:28]])
+  print('DIRECT_CATEGORY_UNMAPPED',[(slug,entry.get('world'),entry.get('parent')) for slug,entry in direct_categories.items() if slug not in entries])
+  available_master={n.rsplit('/',1)[-1].removesuffix('.webp') for n in allfiles if '/hobby-masters/' in n and n.endswith('.webp')}
+  alt_counts=collections.Counter()
+  missing_alt=[]
+  for group,world in groupworld.items():
+    alternates=[h for h,(w,g) in grouped.items() if g==group and h in available_master]
+    alt_counts[len(alternates)>0]+=1
+    if not alternates:missing_alt.append((world,group))
+  print('GROUP_ALTERNATE_HOBBY_PHOTOS',dict(alt_counts),'WITHOUT',missing_alt[:30])
+
   # The existing category image collection must be complete for group-level photos.
   missing_group_photos=[(w,g) for g,w in groupworld.items()
     if 'affiliate-portal-template-kit/assets/hobby-depot-v150617/hero-masters-v150684/'+g+'.webp' not in allfiles]
