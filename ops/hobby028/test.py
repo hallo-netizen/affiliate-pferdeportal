@@ -16,6 +16,7 @@ with ZipFile(ROOT/'HD-003-DESIGN-TEMPLATE-KIT'/'CURRENT.zip') as des, ZipFile(RO
   entries=json.loads(data)
   page_map=json.loads(des.read('affiliate-portal-template-kit/assets/hobby-depot-v150687/category-level-copy-v150687.json'))
   allfiles=set(des.namelist())
+  print('METHOD_DEBUG',source.find('hdar_ci_banner_world'),source[source.find('hdar_ci_banner_world')-90:source.find('hdar_ci_banner_world')+120])
   begin=source.index('private function hdar_ci_banner_world(')
   end=source.index('    /** HD007 owns the register markup',begin)
   methods=source[begin:end]
