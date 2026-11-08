@@ -13,6 +13,7 @@ with ZipFile(r/'HD-009-AFFILIATE-ZENTRALE/CURRENT.zip') as z:
     code=z.read('affiliate-portal-router/includes/class-hdar-amazon-start.php')
     version=z.read('affiliate-portal-router/hobby-depot-affiliate-router.php').decode()
     assert ' * Version: 0.1.31' in version[:350]
+    print('TRACKING_METHOD_SOURCE',code.decode().split('private static function tracking_id(',1)[1][:600])
 with ZipFile(r/'HD-007-HOBBYREGISTER-CORE/CURRENT.zip') as z:
     registry=z.read('hd-hobbyregister-core/data/hobby-register.json')
 with ZipFile(r/'HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip') as z:
