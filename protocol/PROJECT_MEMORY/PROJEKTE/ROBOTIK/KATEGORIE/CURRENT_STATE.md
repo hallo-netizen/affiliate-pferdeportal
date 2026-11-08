@@ -28,3 +28,8 @@ Andere Bürogebäude/Produktivsysteme wurden nicht verändert.
 - **0.2.0 Testkandidat gebaut** mit validierter Produktseiten-/Inhaltskategorien-Grenze, eindeutigen WP-Kategorie-Slugs und 16 lokalen Strukturtests. Installations-ZIP `PLUGIN/INSTALLATIONSKANDIDAT_0.2.0.zip`. Die alte `PLUGIN/CURRENT.zip` 0.1.0 wird ausdrücklich NICHT still ersetzt.
 - **Nicht erledigt:** Kein DataForSEO-Research-Adapter, kein automatischer WordPress-Seiten-/Kategorienimport, kein Live-Test, keine WordPress-Zugangsdaten. Produktkandidaten nur Forschungsbestand, `PLAN/robotik-empty.json` bleibt leer.
 - **Nächster Schritt:** Testinstallation von 0.2.0 auf wirklich neuer WordPress-Testsite mit PHP >=8.1 und WordPress >=6.4. Erst nach WP-Smoke-Test ein bestehendes allgemeines Research-Modul (DataForSEO + Intent-/Lückenprüfung) gegen Robotik-Profile technisch anpassen; kein bezahlter Keyword-Auftrag ohne Freigabe. Keine Produktiv-Synchronisierung.
+
+## 08.11.2026 – Installationsvorbereitung / ergänzter Test
+- Zusätzlich 3/3 Adminscreen-/Validierungs-/Speichertests mit isolierten WordPress-Funktionsstubs PASS.
+- `PLUGIN/TESTANLEITUNG_0.2.0.md` nennt die exakten Schritte für den ersten WordPress-Smoke-Test; `PLUGIN/TESTDATEN/robotik-testbaum-3-piloten.json` enthält einen rein fiktiven dreifachen Produkttestbaum, 14 Knoten, lokal validiert.
+- Keine echte WordPress-Installation durchgeführt. `CURRENT.zip` unverändert. Testkandidat 0.2.0 bleibt getrennt.
