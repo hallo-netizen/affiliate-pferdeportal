@@ -10,13 +10,21 @@ with ZipFile(ROOT/"HD-007-HOBBYREGISTER-CORE/CURRENT.zip") as z:
 with ZipFile(ROOT/"HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip") as z:
     leaf=json.loads(z.read("affiliate-portal-template-kit/assets/hobby-depot-v150750/leaf-category-map-v150750.json"))
 hobbies=set(x["parent_slug"] for x in leaf.values())
-def slug(text):
-    text=str(text).lower().replace("ä","a").replace("ö","o").replace("ü","u").replace("ß","ss")
+world_by_hobby={x["parent_slug"]:(x["chain"][0]["path"].split("/")[0]) for x in leaf.values()}
+def slug(text, umlaut_mode="short"):
+    text=str(text).lower()
+    if umlaut_mode=="german":
+        text=text.replace("ä","ae").replace("ö","oe").replace("ü","ue")
+    else:
+        text=text.replace("ä","a").replace("ö","o").replace("ü","u")
+    text=text.replace("ß","ss")
     text=unicodedata.normalize("NFKD",text)
     return re.sub("-+","-",re.sub("[^a-z0-9]+","-",text)).strip("-")
 by_slug=defaultdict(list)
 for x in recs:
-    ids=[slug(x["canonical_name"]),slug(x["registry_id"].removeprefix("hobby:"))]
+    ids=[slug(x["canonical_name"]),slug(x["canonical_name"],"german"),slug(x["registry_id"].removeprefix("hobby:")),slug(x["registry_id"].removeprefix("hobby:"),"german")]
+    for alias in x.get("aliases") or []:
+        if isinstance(alias,str):ids.extend([slug(alias),slug(alias,"german")])
     for key in set(ids):by_slug[key].append(x)
 missing=sorted(hobbies-set(by_slug))
 ambiguous=[x for x in hobbies if len({r["registry_id"] for r in by_slug.get(x,[])})>1]
@@ -29,7 +37,7 @@ for s in sorted(hobbies):
     need=x["result_profile"]["what_do_you_need"].strip()
     first=need.rstrip(".").split(",",1)[0].strip()
     potential=bool(first and len(first)<55 and len(first.split())<=6 and not skip.search(first) and " oder " not in first.lower() and " und " not in first.lower())
-    world=x["source_identity"].get("natural_world") or "unbekannt"
+    world=world_by_hobby.get(s) or "unbekannt"
     rows.append((world,s,x["canonical_name"],first,potential,need))
 counts=Counter("Prüfwort" if x[4] else "Unklar" for x in rows)
 worlds=Counter(x[0] for x in rows)
