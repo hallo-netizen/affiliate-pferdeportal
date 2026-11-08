@@ -1,0 +1,57 @@
+name: HD009 Amazon DataForSEO and Hab exact worker contract audit
+on:
+  push:
+    branches: [hobbyroom/hd009-dfs-hab-worker-20261108]
+    paths: [.github/workflows/hd009-dfs-worker-audit.yml]
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect current Hobby and Hab source behavior and exact reusable data records
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import re,json
+          b=Path('protocol/PROJECT_MEMORY/PROJEKTE')
+          h=b/'HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip'
+          hb=b/'EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          hd7=b/'HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip'
+          with ZipFile(h) as z:
+            s=z.read('affiliate-portal-router/includes/class-hdar-amazon-start.php').decode()
+            print('HD009_FILE_BYTES',len(s))
+            methods=list(re.finditer(r'(?:(?:private|public|protected)\s+)(?:static\s+)?function\s+([A-Za-z0-9_]+)\s*\(',s))
+            print('HD009_METHODS',[(m.group(1),m.start()) for m in methods])
+            for i,m in enumerate(methods):
+              if m.group(1) in ['bootstrap','credentials','target','target_from_post','context_target','parse_results','search','approve','products','render_article_cards','product_card','launch_active','screen']:
+                end=methods[i+1].start() if i+1<len(methods) else len(s)
+                part=s[m.start():end]
+                if m.group(1)=='screen':
+                  for line in part.splitlines():
+                    if 'DataForSEO' in line or 'asins' in line or 'amazon_search' in line or 'target' in line or 'hdar_amazon' in line:
+                      print('HD009_SCREEN',line.strip()[:440])
+                else:
+                  print('HD009_BODY',m.group(1),re.sub(r'\s+',' ',part)[:7900])
+          with ZipFile(hb) as z:
+            n='affiliate-portal-router/includes/trait-ppar-hb-amazon.php'
+            s=z.read(n).decode()
+            print('HAB_SOURCE_LEN',len(s))
+            methods=list(re.finditer(r'(?:(?:private|public|protected)\s+)(?:static\s+)?function\s+([A-Za-z0-9_]+)\s*\(',s))
+            print('HAB_DFS_METHODS',[(m.group(1),m.start()) for m in methods if 'amazon' in m.group(1) or 'dfs' in m.group(1)])
+            for i,m in enumerate(methods):
+              n=m.group(1)
+              if any(x in n for x in ['hb_amazon_dfs','hb_amazon_auto','hb_amazon_ensure','hb_amazon_run_now','hb_amazon_settings','hb_amazon_exact_match','hb_amazon_category_candidate']):
+                end=methods[i+1].start() if i+1<len(methods) else len(s)
+                part=s[m.start():end]
+                print('HAB_BODY',n,re.sub(r'\s+',' ',part)[:6500])
+          with ZipFile(hd7) as z:
+            d=json.loads(z.read('hd-hobbyregister-core/data/hobby-register.json'))
+            recs=d['records']
+            print('REGISTER_COUNT',len(recs))
+            for name in ('Sportdrachen','3D-Druck','Architekturmodellbau'):
+              for x in recs:
+                if str(x.get('canonical_name')).lower()==name.lower():
+                  print('REGISTER_EXAMPLE',name,'identity',x.get('registry_id'),'equipment',x.get('result_profile',{}).get('what_do_you_need'))
+          PY
