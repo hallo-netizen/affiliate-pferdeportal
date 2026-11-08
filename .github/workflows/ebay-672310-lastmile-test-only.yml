@@ -107,12 +107,14 @@ jobs:
           require 'affiliate-portal-router/includes/trait-ppar-ebay-run.php';
           class TestRun{
               use PPAR_Ebay_Run_Trait;
-              public $run=array();public $remote=0;public $fail_code='';public $provider_error=false;
+              public $run=array();public $remote=0;public $fail_code='';public $provider_error=false;public $last_good_safe=false;
               private function ebay_run_load(){return $this->run;}
               private function ebay_run_save($v){$this->run=$v;return $v;}
               private function ebay_run_fail($c,$m,$d=array()){$this->fail_code=$c;return false;}
               private function ebay_access_token($s){return 'TEST_TOKEN';}
               private function ebay_items_table(){return 'test_items';}
+              private function ebay_public_checkpoint_load(){return $this->last_good_safe?array('checkpoint_id'=>'last-good'):array();}
+              private function ebay_public_checkpoint_is_safe($c){return !empty($c['checkpoint_id']);}
               private function ebay_refresh_process_row(&$job,$row,$s,$token){
                   global $wpdb;
                   $this->remote++;
@@ -155,8 +157,21 @@ jobs:
           $r=seed(time()+20000,time()+20000);
           ok($r->check($both)===true&&$r->remote===0,'already fresh candidates require zero API calls');
           $r=seed(time()+100,time()+100);$r->provider_error=true;
-          ok($r->check($both)===false,'provider error prevents public gate');
-          ok($r->fail_code==='public_source_refresh_provider_failed','provider error retains exact fail code');
+          ok($r->check($both)===false&&$r->fail_code==='','transient getItem does not fail entire run');
+          ok(($r->run['public_source_refresh']['retry_attempts']??0)===1,'first retry saved on original candidate');
+          ok($r->check($both)===false&&($r->run['public_source_refresh']['retry_attempts']??0)===2,
+             'second retry resumes same durable cursor');
+          ok($r->check($both)===false&&$r->fail_code==='public_source_refresh_provider_failed',
+             'without last-good checkpoint exhausted getItem fails closed');
+          $r=seed(time()+100,time()+100);$r->provider_error=true;$r->last_good_safe=true;
+          ok($r->check($both)===false&&$r->check($both)===false&&$r->check($both)===false,
+             'transient getItem retry exhausted with last-good does not approve new checkpoint');
+          ok(($r->run['status']??'')==='completed'&&($r->run['completed_with_skips']??0)===1,
+             'last-good deferral ends canonical run with explicit incomplete warning');
+          ok(($r->run['checkpoint_deferred']??0)===1&&$r->fail_code==='',
+             'last-good remains effective instead of terminal whole-run failure');
+          ok(($r->run['completion_warning']??'')==='public_source_refresh_unverified',
+             'warning reason recorded and cannot become green success');
           $r=seed(time()+100,time()+100);
           ok($r->check(array('business_enabled'=>1,'private_enabled'=>0))===true&&$r->remote===1,
              'disabled PRIVATE route performs no refresh');
@@ -185,10 +200,10 @@ jobs:
           ok($r->run['public_source_refresh']['cursor']===2,'bounded first-tick cursor durable');
           ok($r->check($both)===false&&$r->remote===4,'second worker tick continues without restart');
           ok($r->check($both)===true&&$r->remote===6,'third tick completes six same-run refreshes');
-          echo "EBAY_LASTMILE_ISOLATED_GATE 17/17 PASS; FULL ORIGINAL+WP+EBAY E2E NOT CLAIMED\n";
+          echo "EBAY_LASTMILE_ISOLATED_GATE 23/23 PASS; FULL ORIGINAL+WP+EBAY E2E NOT CLAIMED\n";
           PHP
           cd /tmp/ebay310_qa
           php -l test.php
           php test.php | tee /tmp/ebay-672310-lastmile.log
-          test "$(grep -c '^PASS ' /tmp/ebay-672310-lastmile.log)" = 17
-          grep -F 'EBAY_LASTMILE_ISOLATED_GATE 17/17 PASS' /tmp/ebay-672310-lastmile.log
+          test "$(grep -c '^PASS ' /tmp/ebay-672310-lastmile.log)" = 23
+          grep -F 'EBAY_LASTMILE_ISOLATED_GATE 23/23 PASS' /tmp/ebay-672310-lastmile.log
