@@ -109,6 +109,16 @@ $restored=PSTE_Mini_Workflow::readParkhausForMini();
 qaPass(!empty($restored['complete']),'restored original unchanged PSERC test envelope is complete');
 delete_option('ppm679_editorial_plan_runtime_state_v1');
 $missing=PSTE_Mini_Workflow::readParkhausForMini();
-echo "WP_REAL_PPM679_MISSING_PLAN_SAFETY complete=".(!empty($missing['complete'])?'YES':'NO').
-    " status=".($missing['sources']['PPM679_EXISTING_EDITORIAL_RUNTIME']['status']??'UNKNOWN')."\n";
-echo "PSTE_PSERC_02855_ENVELOPE_WP_QA_DONE; USER_REAL_EDITORIAL_PLAN_NOT_USED\n";
+qaPass(empty($missing['complete'])&&$missing['sha256']===''
+    &&($missing['reason']??'')==='EXISTING_RUNTIME_EDITORIAL_PLAN_MISSING_OR_INVALID',
+    'missing saved PPM679 plan blocks COMPLETE at its original central owner source');
+update_option('ppm679_editorial_plan_runtime_state_v1',['items'=>[]],false);
+$empty=PSTE_Mini_Workflow::readParkhausForMini();
+qaPass(empty($empty['complete'])&&$empty['sha256']===''
+    &&($empty['reason']??'')==='EXISTING_RUNTIME_EDITORIAL_PLAN_EMPTY',
+    'empty saved PPM679 plan cannot imply available article slots');
+update_option('ppm679_editorial_plan_runtime_state_v1',$runtime,false);
+$restoredAgain=PSTE_Mini_Workflow::readParkhausForMini();
+qaPass(!empty($restoredAgain['complete']),
+    'restoring original source set permits exactly one complete export again');
+echo "PSTE_PSERC_02855_ENVELOPE_WP_QA_PASS; USER_REAL_EDITORIAL_PLAN_NOT_USED\n";
