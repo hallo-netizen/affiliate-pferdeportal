@@ -1,5 +1,5 @@
 {
-  "status": "EXISTING 6.72.310 TEST-ONLY COMPLETE EBAY FLOW PATCH: TRANSIENT DISCOVERY RETRIES + LAST-GOOD BUSINESS/PRIVATE CHECKPOINT + END-OF-RUN SOURCE REVALIDATION VERIFIED BY CI; NOT INSTALLED, ORIGINAL ZIP REPLAY AND LIVE E2E NOT COMPLETE",
+  "status": "One combined eBay 6.72.310 TEST-ONLY root-cause patch; 28 structurally valid hunks in 5 files; 35/35 executable reference-PHP scenarios passed; installed version still user-confirmed 6.72.308. NO approved install.",
   "date": "2026-11-08",
   "version": "6.72.310 (internal work source ONLY, no ZIP issued)",
   "original_zip_file": "AFFILIATE_ZENTRALE_6.72.308_URSACHENFIX_GESAMTTEST_NUR_TEST.zip",
@@ -14,21 +14,20 @@
     "affiliate-portal-router/pferdeportal-affiliate-router.php",
     "affiliate-portal-router/readme.txt"
   ],
-  "php_lint": "PASS on exact new last-mile method replay into older reference trait (GitHub Actions 42482178989); original 6.72.308 23 PHP files NOT linted against current patch",
+  "php_lint": "PASS on patched older reference eBay traits; exact original 6.72.308 not available in this runtime",
   "json_parse": "3/3 PASS",
-  "tests_total": "17/17 PHP last-mile scenarios EXECUTED PASS in GitHub Actions 42482178989; previous isolated tests separate; full original 308 regression suite not rerun",
+  "tests_total": "35/35 PASS executable PHP reference-scope (not the complete original 308), GitHub Actions 42483787575",
   "original_red_reproduction": "PASS (separate original regression)",
   "patch_path": "EBAY_672308_TO_672310_GESAMTURSACHENPATCH_NUR_TEST.patch",
-  "patch_sha256": "74c5acc73a4a0864dde73afcea53b8ca9e19aba5dc70d169f714cad75ada4c73",
-  "patch_git_blob_sha": "07de8479a859d7c2b374bf68ea8283c04e01949a",
+  "patch_sha256": "0b887a9f44c8c2562838ffc4e413c5bd1f219ae444531d3e1f4a88d50818b184",
+  "patch_git_blob_sha": "e13e4e19dc66c6e69ed1e302caf6dd6215f2bc5f",
   "patch_replay": "NOT DONE; original 6.72.308 66-file user ZIP is not available in this conversation nor in GitHub office repository. 82 tests and previous 66/66 pass are not valid proof for current changed patch.",
   "protected_frontend_and_catalog_source": "ALL 7 checked source files byte-identical to original 6.72.308",
   "remaining_gates": [
-    "Obtain exact original 6.72.308 66-file plugin ZIP and independently replay complete 25-hunk patch against that source; rerun full original regression/lint suite, no substitute source",
-    "Run full canonical WordPress/MariaDB staging E2E: discovery -> getItem freshness -> selection -> gapfill -> public verification -> checkpoint cleanup -> persisted completion",
-    "Validate actual eBay Browse and getItem responses including timeout, 429, 5xx, invalid token, ended offers, and provider outage",
-    "Check public business product boxes and private HivePress listings via rendered frontend and category/article pages",
-    "Release governance must separately authorize install after all E2E gates pass"
+    "Exact complete original 6.72.308 ZIP (66 files, expected SHA256 b4d8547fd2aa134f7f82f568db3a81df54bb7d2131fd0752e76e3f0ca2251fe0) for complete 28-hunk source replay",
+    "WordPress and MariaDB complete real staging workflow",
+    "Real eBay Browse/getItem requests plus server history and rendered category/article products",
+    "Only with full E2E proof allow release ZIP"
   ],
   "release_allowed": false,
   "installation_instruction": "NONE: do not deploy 6.72.310 while exact original source and live end-to-end gates are absent",
@@ -118,7 +117,7 @@
       "no_release": true
     }
   },
-  "patch_bytes": 47263,
+  "patch_bytes": 52775,
   "production_installation_user_confirmed": {
     "version": "6.72.308",
     "source": "explicit user statement in current conversation 2026-11-08",
@@ -159,30 +158,25 @@
     "architecture_decision": "Preserve provider freshness and security gates; do not fabricate safe supply or overwrite last-good, no new worker; do not add speculative additional code without exact installed source and end-to-end tests."
   },
   "workflow_repair_objective": "A SINGLE real end-to-end pass must prove discovery + persistence + independent BUSINESS/PRIVATE safe selection + public checkpoint + category/article rendered cards. A passed source gate or GitHub heartbeat alone is never completion.",
-  "patch_hunks": 25,
+  "patch_hunks": 28,
   "lastmile_actual_ci": {
     "workflow": "eBay 6.72.310 last-mile test-only QA",
-    "workflow_run_id": 42482178989,
-    "workflow_url": "https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/42482178989",
+    "workflow_run_id": 42483787575,
+    "workflow_url": "https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/42483787575",
     "workflow_conclusion": "success",
-    "actual_test_output": "EBAY_LASTMILE_ISOLATED_GATE 17/17 PASS",
-    "actual_php_syntax": "PASS",
-    "source_basis": "New patch hunk applied to full older reference trait 6.72.211, not to unavailable exact installed 6.72.308 ZIP",
-    "scenario_coverage": [
-      "BUSINESS stale candidate revalidated via existing getItem workflow",
-      "PRIVATE stale candidate revalidated",
-      "already-fresh sources do not trigger extra external requests",
-      "a single source failure blocks public checkpoint",
-      "WordPress source row missing cannot turn into an empty marketplace",
-      "disabled seller route left untouched",
-      "old final preflight evidence automatically expires",
-      "six stale candidates continue across three bounded canonical worker packages with saved cursor",
-      "maximum two provider calls per package",
-      "public verification remains the existing single owner"
+    "actual_php_execution": "35/35 PASS: 23 canonical last-mile tests and 12 public BUSINESS card tests",
+    "source_basis": "Full available older 6.72.211 reference trait with new 6.72.310 hunks replayed, NOT exact unavailable 6.72.308",
+    "proven_cases": [
+      "Selected BUSINESS and PRIVATE offers freshly revalidated at public gate",
+      "Two remote getItem calls per canonical tick, persistent cursor over many offers",
+      "Temporary getItem errors retry in same run, then defer unverified checkpoint to last good with warning",
+      "Permanent error and missing last good never bypass safe gate",
+      "Single and prefetched BUSINESS public card source queries both carry fresh_until, block old/ended/unsafe products",
+      "No extra frontend SQL calls beyond existing source query"
     ],
-    "architecture": "One bounded helper within existing canonical public_verify; 0 new DB tables, frontend HTTP calls, workers or schedulers",
-    "actual_full_wordpress_mariadb_live_test": "NOT RUN",
-    "actual_ebay_live_provider_test": "NOT RUN",
-    "actual_frontend_rendered_product_cards": "NOT VERIFIED"
+    "original_308_full_replay": "NOT DONE",
+    "live_wordpress_mariadb_e2e": "NOT DONE",
+    "live_ebay_getitem_and_browse": "NOT DONE",
+    "rendered_public_cards": "NOT VERIFIED"
   }
 }
