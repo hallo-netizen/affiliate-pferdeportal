@@ -32,3 +32,8 @@
 ## Der einzige nächste echte Freigabeschritt
 
 Der TEST enthält den Fix. Noch offen sind die **neun nicht rekonstruierbaren alten Editorial-Planzeilen** und die **drei auf dem Server unbekannten Post-IDs**. Vor einer echten externen SEO-FREI-Entscheidung muss die neue Version auf isolierter Testseite an den vorhandenen Originaloptionen ohne Löschen/Neuanlegen nachweisen, ob die neuen Leser die Quellwerte auflösen können; andernfalls bleibt die Sicherheitsfreigabe gesperrt. **Keine neue 5.016er-Gesamtdiagnose, kein Keyword-Neuimport, kein K0-Schreibzugriff.**
+
+
+### Zentraler GitHub-Protokollabschluss (nach lokalem QA-Test)
+
+Änderungstext in `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md` und Baunachweis in `protocol/PROJECT_MEMORY/BAUCONTAINER/BAUPROTOKOLL.md` ergänzt, da der veränderte Büro-Einstieg sonst korrekt am zentralen PROJECT_MEMORY-Protokollcheck stoppt. PR #682 enthält den vollständig ausgefüllten `PROTOKOLLCHECK` mit `PROTOKOLL: PASS` und `WARUM: PASS`. Dies ist keine Änderung der geschützten GitHub-Sicherheitsregeln; sie bleiben unverändert. Lokale technische QA 36 PASS, echte WordPress-Produktionsabnahme weiterhin offen.
