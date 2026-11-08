@@ -421,7 +421,7 @@ jobs:
           head,*hunks=re.split(r'(?=^@@ )',section,flags=re.M)
           chosen=[h for h in hunks if h.startswith('@@ -1879,') or h.startswith('@@ -1916,')]
           assert len(chosen)==2,'Must execute BOTH real final source refresh and checkpoint deferral hunks'
-          (root/'final.patch').write_text(head+''.join(chosen))
+          (root/'final.patch').write_text(head+''.join(chosen).rstrip('\n')+'\n')
           PY
           cd /tmp/ebay_final_public
           git apply --check final.patch
