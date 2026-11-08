@@ -1,0 +1,24 @@
+name: HAB RC17 verify licensed bathtub image at build time
+on:
+  push:
+    branches: [hab-004-rc17-tiles-and-affiliate-20261108]
+permissions:
+  contents: read
+jobs:
+  photo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read-only source photo candidate with explicit license origin
+        run: |
+          set -e
+          mkdir -p candidate
+          curl -fLsS --retry 2 --max-time 25 'https://images.unsplash.com/photo-1669605485189-827f6908c915?auto=format&fit=crop&w=1600&q=82' -o candidate/bathtub-unsplash.jpg
+          file candidate/bathtub-unsplash.jpg
+          ls -lh candidate
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Hab-RC17-bathtub-photo-candidate
+          path: candidate
+          retention-days: 2
+          if-no-files-found: error
