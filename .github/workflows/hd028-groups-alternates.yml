@@ -1,0 +1,50 @@
+name: HD028 check alternate photos for middle groups
+on:
+  push:
+    branches: [hobbyroom/hd009-028-universal-category-photo-20261108]
+    paths: [.github/workflows/hd028-groups-alternates.yml]
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pillow
+        run: python3 -m pip install --quiet --break-system-packages pillow
+      - name: Measure whether subgroup card photos are actually distinct from group hero photo
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          from PIL import Image,ImageOps
+          import json,collections
+          from io import BytesIO
+          from math import sqrt
+          path=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          with ZipFile(path) as z:
+            m=json.loads(z.read('affiliate-portal-template-kit/assets/hobby-depot-v150750/leaf-category-map-v150750.json'))
+            pairs=set()
+            for item in m.values():
+              chain=item['chain']
+              w=chain[0]['path'].split('/')[0]
+              g=chain[1]['path'].split('/')[-1]
+              pairs.add((w,g))
+            stats=collections.Counter()
+            output=[]
+            for world,group in sorted(pairs):
+              hero='affiliate-portal-template-kit/assets/hobby-depot-v150617/hero-masters-v150684/'+group+'.webp'
+              sub='affiliate-portal-template-kit/assets/hobby-depot-v150617/subcategories/'+world+'/'+group+'-v150623.webp'
+              if sub not in z.namelist():
+                stats['missing_sub']+=1;continue
+              def pixel(path):
+                img=Image.open(BytesIO(z.read(path))).convert('RGB')
+                return list(ImageOps.fit(img,(48,32),method=Image.Resampling.LANCZOS).getdata())
+              a,b=pixel(hero),pixel(sub)
+              rms=sqrt(sum(sum((x-y)**2 for x,y in zip(p,q)) for p,q in zip(a,b))/(len(a)*3))/255
+              output.append((world,group,round(rms,3),len(z.read(sub))))
+              stats['clearly_distinct' if rms>.21 else 'similar' if rms>.1 else 'almost_identical']+=1
+            print('GROUP_PHOTO_DIFFERENCE',dict(stats))
+            print('MOST_DISTINCT',sorted(output,key=lambda x:-x[2])[:18])
+            print('MOST_SIMILAR',sorted(output,key=lambda x:x[2])[:18])
+            print('WIND_DACHEN',next((x for x in output if x[1]=='wind-drachen'),None))
+          PY
