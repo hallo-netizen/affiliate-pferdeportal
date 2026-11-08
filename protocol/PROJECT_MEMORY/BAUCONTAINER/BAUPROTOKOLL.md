@@ -460,3 +460,14 @@ KLEINSTE ÄNDERUNG: Drei projektlokale PINTEREST-Büros (je START_HERE, CURRENT_
 BEZUG: BAU-001 Ein-Wahrheit-Prinzip; BAU-003: keine Zugangsdaten im öffentlichen Campus.
 
 PRÜFUNG: Eigenständige Current pro Büro, keine Fremdbüroänderung in Fach-/Plugin-Systemen, keine Online-Veröffentlichung und keine aktive Linkprüfung.
+
+
+## 2026-11-08 – Pferdeatelier-Pluginbüro: Testplugin 0.57.144.23 nach echtem MINI-Export abgelegt
+
+**Bedarf:** Für die vereinbarte einmalige externe SEO-Entscheidung muss der vorhandene WordPress-/PSTE-/PSERC-/PPM679-Bestand verlässlich exportiert werden. Der reale Export enthielt neun als „Array“ bezeichnete und 144 ohne Titel dargestellte Planplätze. Der Betreiber will keinen weiteren Gesamtdiagnose-/Rohkeyword-Durchlauf und keine komplexen Pflichtseiten.
+
+**Kleinste Bauänderung:** Vorhandene PSTE-0.57.144.22-Originaltest-ZIP isoliert als PSTE-0.57.144.23-QA-Fassung korrigiert: vier bestehende PHP-Dateien geändert, bestehende Titel-/Planlesung verbessert, 141 von 144 gespeicherten PPM679-Postbezügen korrekt zugeordnet, drei nicht verifizierbare Posts und neun nicht rekonstruierbare Alt-Titel bleiben gesperrt. Alte Diagnosefunktionen nur einklappbar statt neu aufgebaut. PSERC 0.28.55, alle K0-Dateien, Live-System und bestehende gespeicherte Pläne bleiben unverändert. Keine zusätzliche Tabelle, neue Fachautorität, neue Website oder neue Baucontainer-Logik.
+
+**Prüfung:** 121/121 ZIP-CRC, 83/83 PHP-Lint, 36/36 lokale Tests mit dem vorhandenen realen 1.179er-Export, getrennten Negativ- und Positivproben. Drei unbekannte WP-Posttitel wurden nur in der positiven Simulationsvariante ausdrücklich synthetisch belegt; die echte negative Prüfung sperrt sie. Keine echte WP-/MySQL-Ausführung dieser .23-Fassung, daher TEST und Draft-PR, keine Produktionsfreigabe.
+
+**Ein-Wahrheit-Prinzip / Quellen:** `PROJEKTE/PFERDE_ATELIER/PLUGINS/CURRENT_STATE.md`, `PROJEKTE/PFERDE_ATELIER/PLUGINS/EVIDENCE/PSTE_05714423_ECHTER_EXPORT_FIX_36_LOKALE_WORKFLOW_TESTS_20261108.md` und `PROJEKTE/PFERDE_ATELIER/PLUGINS/QA_ONLY/PSTE_05714423_EXPORTFIX/`; physische QA-ZIP in privater Library `/pferdeatelier/PLUGINS/`. Keine Veränderung an Startmaster, Haupt-Hardlock, K0 oder Nachbarportalen.
