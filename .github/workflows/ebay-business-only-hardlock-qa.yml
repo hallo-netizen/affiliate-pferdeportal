@@ -678,3 +678,31 @@ jobs:
           echo="EBAY_PRIVATE_ADMIN_REMOVAL 13/13 PASS (source-level + PHP syntax, not live WP UI)"
           print(echo)
           PY
+
+      - name: Apply the ENTIRE cumulative BUSINESS-only patch together to the one reference source
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import shutil
+          out=Path('/tmp/ebay_full_kiss')
+          src=Path('release/affiliate-zentrale/current/affiliate-portal-router')
+          patch=Path('release/affiliate-zentrale/evidence/EBAY_672308_TO_672311_BUSINESS_ONLY_GESAMTURSACHENPATCH_NUR_TEST.patch')
+          shutil.copytree(src,out/'affiliate-portal-router',dirs_exist_ok=True)
+          content=patch.read_text()
+          assert content.count('diff --git a/')==5, 'No new plugin files, tables or workers'
+          assert len([l for l in content.splitlines() if l.startswith('@@ -')])==56, 'All 56 cumulative source hunks must remain in one patch'
+          (out/'full.patch').write_text(content)
+          PY
+          cd /tmp/ebay_full_kiss
+          git apply --check --verbose full.patch
+          git apply full.patch
+          echo 'PASS entire 56-hunk KISS patch applied atomically to reference source'
+          find affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee lint.log
+          test "$(grep -c '^No syntax errors detected' lint.log)" -ge 23
+          grep -F 'Version: 6.72.311' affiliate-portal-router/pferdeportal-affiliate-router.php
+          ! grep -R -q "add_action('admin_post_ppar_ebay_review_decision'" affiliate-portal-router/pferdeportal-affiliate-router.php
+          ! grep -R -q "add_action('hivepress/v1/models/listing/query'" affiliate-portal-router/pferdeportal-affiliate-router.php
+          ! grep -R -q "add_filter('hivepress/v1/templates/listing_view_block/blocks'" affiliate-portal-router/pferdeportal-affiliate-router.php
+          echo 'FULL_COMBINED_PATCH_PASS; REFERENCE ONLY; ORIGINAL 6.72.308 BINARY / LIVE WORDPRESS RELEASE STILL GATED'
