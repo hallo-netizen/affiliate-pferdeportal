@@ -2,7 +2,7 @@
 
 **Datum:** 08.11.2026
 **Status:** ZIP vollständig erstellt, lokale WordPress-/Provider-Simulation PASS, Live-Prüfung offen.
-**Plugin-ZIP**: `HOBBY_DEPOT_BILDZENTRALE_2.8.10_EINFACHE_BEDIENUNG.zip` – 83.740 Bytes, SHA256 `63ef78f009aa17d130f3c34b58500de3c7c72205016085af49f28e9a59bc3dc9`.
+**Plugin-ZIP**: `HOBBY_DEPOT_BILDZENTRALE_2.8.10_EINFACHE_BEDIENUNG.zip` – 83.745 Bytes, SHA256 `09c5fbfd113c1e0fa0d6552c473b5ef5d1b0f1150adddce10090291ce097227f`.
 **Dauerhafte echte Voll-ZIP liegt in der persönlichen Library:** `/Hobby Depot/Plugin-Büro/HOBBY_DEPOT_BILDZENTRALE_2.8.10_EINFACHE_BEDIENUNG.zip`.
 Auch Prüfprotokoll und Testnachweise dort. Eine separate GitHub-ZIP-Ablage ist nicht behauptet.
 
