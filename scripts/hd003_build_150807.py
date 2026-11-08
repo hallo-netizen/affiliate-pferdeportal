@@ -82,7 +82,7 @@ def patch_profile(data):
           .hd-mag-target-v150719[data-hd-magazine-target="hobbyfinder"] .hd-hf-own-ad-v150807{min-height:0;display:flex;align-items:center;justify-content:flex-start;gap:8px;flex-wrap:wrap;padding:12px!important;box-sizing:border-box;line-height:1.3}
           .hd-mag-target-v150719[data-hd-magazine-target="hobbyfinder"] .hd-hf-own-ad-v150807>img{display:none!important}
           .hd-mag-target-v150719[data-hd-magazine-target="hobbyfinder"] .hd-hf-ad-mobile-title-v150807{display:block;flex:1 0 100%;font-size:16px;line-height:1.2;color:#102f39;font-weight:750}
-          .hd-mag-target-v150719[data-hd-magazine-target="hobbyfinder"] .hd-hf-ad-action-v150807{display:inline-flex;position:static;height:auto;min-height:39px;padding:9px 12px;align-items:center;justify-content:center;border-radius:6px;line-height:1.1}
+          .hd-mag-target-v150719[data-hd-magazine-target="hobbyfinder"] .hd-hf-ad-action-v150807{display:inline-flex;position:static;width:auto!important;left:auto!important;top:auto!important;max-width:100%;height:auto;min-height:39px;padding:9px 12px;align-items:center;justify-content:center;border-radius:6px;line-height:1.1}
           .hd-mag-target-v150719[data-hd-magazine-target="hobbyfinder"] .hd-hf-ad-action-v150807 span{position:static;clip-path:none;display:inline;color:inherit;width:auto;height:auto;white-space:normal;font-size:12px;font-weight:700}
           .hd-mag-target-v150719[data-hd-magazine-target="hobbyfinder"] .hd-hf-ad-action-v150807.is-terms{background:#279ca1!important;color:#fff!important}
           .hd-mag-target-v150719[data-hd-magazine-target="hobbyfinder"] .hd-hf-ad-action-v150807.is-prices{background:#fff!important;color:#102f39!important;border:1px solid #d3dce0!important}
