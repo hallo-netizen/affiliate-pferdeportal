@@ -1,0 +1,43 @@
+name: Hobby Depot article vs Hab & Bewahr verified design audit
+on:
+  push:
+    branches: ['hobbyroom/hd003-article-hab-translation-20261108']
+    paths: ['.github/workflows/hd003-hab-article-inspect.yml']
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compare actual Hab and Hobby full ZIP article renderers and CSS
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re,collections,hashlib
+          base=Path('protocol/PROJECT_MEMORY/PROJEKTE')
+          specs=[
+          ('HAB',base/'EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip'),
+          ('HD',base/'HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          ]
+          for label,path in specs:
+            with ZipFile(path) as z:
+              print('ZIP',label,'size',path.stat().st_size,'sha256',hashlib.sha256(path.read_bytes()).hexdigest(),'total',len(z.namelist()),'php',sum(n.endswith('.php') for n in z.namelist()))
+              css=[n for n in z.namelist() if n.endswith('.css')]
+              print('CSS_FILES',label,[(n,z.getinfo(n).file_size) for n in css])
+              for name in z.namelist():
+                if not (name.endswith('.php') or name.endswith('.css')):continue
+                s=z.read(name).decode('utf8','replace')
+                keys=['the_content','single_post','is_singular','single.php','is_single','post-content','article-body','article-shell','article-grid','hbdp-article','hd-article','post-template','Auf einen Blick','Inhaltsverzeichnis']
+                hits={k:s.count(k) for k in keys if k in s}
+                if hits:print('ARTICLE_FILE',label,name,'size',len(s),'hits',hits)
+                if name.endswith('.php') and any(s.count(x) for x in ['the_content','single_post','is_singular','is_single']):
+                  for m in list(re.finditer(r'add_(?:action|filter)\([^;\n]*(?:the_content|template_include|template_redirect|wp_head|wp_footer)',s))[:12]:
+                    print('HOOK',label,name,s[max(m.start()-160,0):m.start()+300].replace('\n',' ')[:460])
+              # Relevant style excerpts only if consistent article classes
+              for n in css:
+                s=z.read(n).decode('utf8','replace')
+                match=list(re.finditer(r'\.(?:hbdp-article|hbdp-reading|hbdp-post|hd-article|hd-post|single-post|hbdp-single|post__text)[A-Za-z0-9_-]*',s))
+                if match:
+                  print('ARTICLE_CSS',label,n,'class_count',len(match),'sample',sorted(set(m.group() for m in match))[:70])
+          PY
