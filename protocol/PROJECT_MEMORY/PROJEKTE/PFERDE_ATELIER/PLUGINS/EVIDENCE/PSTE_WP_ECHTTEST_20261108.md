@@ -12,3 +12,18 @@
 **Noch nicht bewiesen:** Das echte `readParkhausForMini` mit tatsächlichen WordPress-Seiten und PSERC-Komplettbestand, der echte unveränderte PPM679-Redaktionsplan, die tatsächliche externe SEO-Entscheidung und ein echter WP→PSERC→K0-Test. Die Authentifizierungs-/MySQL-Daten im GitHub-Lauf sind nur lokale Testwerte, kein Portalzugang.
 
 **Nächster Schritt:** Im **gleichen Wegwerf-WordPress-Testverfahren** einen echten WordPress-Beitrag und den vorhandenen PSTE-Bestand technisch auslesen; statt des nicht vorhandenen `PSERC-FIX.zip`-Dateinamens keine Partner-Version behaupten. Das Testsystem muss fehlende PSERC-Planquellen **sicher sperren**, nicht fälschlich `FREI` melden. Der reguläre GitHub-Sicherheits-Hardlock ist bereits separat **PASS**; kein neuer Prüfworker.
+
+
+## Checkpoint 2: echter WP-Quellenleser – erstmals überprüft, ERSTER REPRODUZIERBARER FEHLER
+
+GitHub-Actions-Gesamtlauf **[42474876008](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/42474876008) SUCCESS** in Wegwerf-WordPress **7.1.4** mit **MySQL 8.0**; Original-PSTE-0.57.144.22 mit den vorhandenen QA-Änderungen erfolgreich installiert und aktiviert. Ein eigener echter veröffentlichter WordPress-Beitrag wurde erzeugt.
+
+**Direkt im echten WordPress ausgeführtes `PSTE_Mini_Workflow::readParkhausForMini()`:**
+
+```text
+WP_REAL_PARKHAUS complete=NO reason=PSTE_PLAN_COUNT_FAILED wp_count=4 pste_count=-1
+```
+
+Vier echte WordPress-Inhalte wurden vom bestehenden WP/MySQL-Quellenleser korrekt aufgenommen. Danach scheiterte die erste PSTE-Plan-Zählabfrage **vor** dem PSERC-Bestand. `complete=NO` ist **korrekt gesperrt**, es gibt keine fälschliche SEO-FREI-Entscheidung. Die tatsächliche SQL-Ursache ist noch **nicht** nachgewiesen; der nächste Schritt liest die verwendete Tabelle, die tatsächlichen Tabellen und den echten SQL-Fehler im selben isolierten WP-Test, **bevor** ein Code-Fix erwogen wird. Kein zusätzlicher Runtime-Checker, kein SEO-Durchlauf pro Keyword.
+
+**Wichtig:** Das ist ein **realer WordPress-Datenbankbefund**, deutlich aussagekräftiger als die früheren reinen Mocks. Er beweist noch keine mögliche Ursache oder einen WP→PSERC→K0-Real-PASS. Live/K0 und gespeicherter Redaktionsplan wurden nicht berührt.
