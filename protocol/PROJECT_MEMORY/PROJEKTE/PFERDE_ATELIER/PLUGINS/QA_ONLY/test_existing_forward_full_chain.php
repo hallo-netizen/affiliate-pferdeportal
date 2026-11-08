@@ -8,7 +8,11 @@ declare(strict_types=1);
 define('ABSPATH','/qa/');
 define('ARRAY_A','ARRAY_A');
 define('PSTE_VERSION','0.57.144.22-QA');
-$GLOBALS['opts']=[];
+$GLOBALS['opts']=['ppm679_editorial_plan_runtime_state_v1'=>['items'=>[
+    'existing-qa-plan'=>['canonical_article_id'=>'existing-qa-plan',
+        'plan_slot_sha256'=>hash('sha256','original-existing-qa-plan'),
+        'title'=>'Already planned independent topic','status'=>'PLANNED']
+]]];
 function get_option(string $name,$default=[]){return $GLOBALS['opts'][$name]??$default;}
 function update_option(string $name,$value,$autoload=false):bool{$GLOBALS['opts'][$name]=$value;return true;}
 function wp_json_encode($value,int $flags=0):string{return json_encode($value,$flags|JSON_UNESCAPED_UNICODE);}
