@@ -1,0 +1,33 @@
+name: HAB RC17 existing original photo samples read-only
+on:
+  push:
+    branches: [hab-004-rc17-tiles-and-affiliate-20261108]
+permissions:
+  contents: read
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract exact photo candidates from original HAB-001, no modification
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          src=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip')
+          dest=Path('hab-rc17-original-photos');dest.mkdir(exist_ok=True)
+          terms=('hbfix-','new-wet.webp','new-utility.webp','topic-62-waschbecken','topic-62-kuchenspule','new-boiler.webp','new-glass.webp','new-workshop.webp','curated-20261019-','focus-leckage-')
+          with ZipFile(src) as z:
+              for item in z.namelist():
+                  name=Path(item).name
+                  if item.endswith('.webp') and item.find('/assets/')!=-1 and name.startswith(terms):
+                      data=z.read(item)
+                      (dest/name).write_bytes(data)
+                      print('SAMPLE',name,len(data))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Hab-RC17-existing-candidate-photos
+          path: hab-rc17-original-photos
+          retention-days: 2
+          if-no-files-found: error
