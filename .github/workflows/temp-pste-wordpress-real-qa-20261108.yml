@@ -26,7 +26,7 @@ jobs:
           sudo apt-get install -y -qq php-mysql default-mysql-client > /tmp/apt.log 2>&1 || { tail -n 80 /tmp/apt.log; exit 1; }
           php -m | grep -i mysqli || { echo 'FAIL actual MySQL PHP driver missing';exit 1; }
           curl --retry 3 -fL -sS https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
-          php /tmp/wp --info | head -n 13
+          php /tmp/wp --info
           mysql --protocol=TCP -h127.0.0.1 -P3306 -uroot -pqatestroot -e 'CREATE DATABASE pste_genuine_wp CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;'
           mkdir -p /tmp/wp-real
           php /tmp/wp core download --path=/tmp/wp-real --allow-root --quiet
