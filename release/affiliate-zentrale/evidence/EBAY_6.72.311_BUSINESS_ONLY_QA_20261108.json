@@ -5,27 +5,23 @@
   "candidate": "6.72.311 – BUSINESS ONLY – TEST-ONLY NOT INSTALLED",
   "supersedes": "6.72.310 old PRIVATE-route candidate: obsolete, do not install.",
   "patch_path": "release/affiliate-zentrale/evidence/EBAY_672308_TO_672311_BUSINESS_ONLY_GESAMTURSACHENPATCH_NUR_TEST.patch",
-  "patch_blob_sha": "cae9b7a775bf08561259e7d3338676b413f80007",
+  "patch_blob_sha": "7bbef7c55db539a7ae4e430a4edebfd6f474d0c1",
   "changed_php_or_readme_files": 5,
-  "combined_source_hunks": 57,
+  "combined_source_hunks": 58,
   "private_hardlock_hunks": 17,
   "passed_tests": {
-    "tested_in": "GitHub Actions run 42499338184",
-    "url": "https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/42499338184",
-    "result": "93/93 reference PHP cases + 13/13 source & lint controls PASS. 57 cumulative source hunks across 5 files. Full unified patch application on 6.72.308 NOT RUN because GitHub reference tree is 6.72.211; deliberately not backported.",
+    "tested_in": "GitHub Actions 42500178769",
+    "url": "https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/42500178769",
+    "result": "108/108 executed PHP reference cases + 13/13 source/hook syntax controls PASS; all 58 source diff hunks structurally consistent. This is NOT the full original 6.72.308/WordPress/eBay live replay.",
     "verification": [
-      "19 BUSINESS-only seller and native-HivePress cases",
-      "16 discovery transient/permanent and technical safe-supply-gap cases",
-      "8 legacy in-flight selection/gapfill/cleanup cases",
-      "13 BUSINESS product delivery and other-provider independence cases",
-      "19 final getItem refresh, bounded retries, cursor and checkpoint retention cases",
-      "10 BUSINESS discovery without retired private HivePress owner cases",
-      "8 retired eBay private public filter cases: native listing and standard posts unaffected, eBay-owned listing excluded, no category SQL/refill",
-      "13 removal checks for retired private eBay admin/HivePress hooks and source syntax checks",
-      "All 57 cumulative unified source hunks have matching old/new line counts. The exact source 6.72.308 must still be obtained from the previously verified archive before whole-patch replay."
+      "Existing canonical eBay worker retires ONLY old eBay-owned published hp_listing posts by their nonempty _ppar_ebay_item_id in bounded batches of 25, setting draft without deleting.",
+      "Native HivePress listings, ordinary posts and records without the eBay marker remain untouched. Idempotent rerun and simulated write failure tested; failure stops further publication.",
+      "Old public eBay-private list filter simplified to one central post marker; zero private category refill, no PRIVATE image/render interception.",
+      "BUSINESS discovery no longer depends on HivePress private owner, maintains one original worker; all source freshness, final checkpoint, transient retries and gapfill positive/negative tests remain green.",
+      "58 patch hunks/5 existing files with consistent old/new line counts; no new table, worker, frontend HTTP, plugin architecture or K0 changes."
     ]
   },
-  "live_status": "TEST ONLY. GitHub QA reference PHP is 6.72.211, not the verified previously uploaded 6.72.308 source. A direct full-patch replay on 6.72.211 was correctly shown incompatible and is now explicitly NOT attempted (SOURCE_NOT_ORIGINAL_672308). This avoids falsely claiming full end-to-end PASS; NO WordPress or real eBay API production proof, NO installable ZIP.",
-  "required_for_release": "Retrieve the previously uploaded and verified original AFFILIATE_ZENTRALE_6.72.308_URSACHENFIX_GESAMTTEST_NUR_TEST.zip from physical Campus binary cabinet (original SHA256 b4d8547fd2aa134f7f82f568db3a81df54bb7d2131fd0752e76e3f0ca2251fe0); never deny the historic upload. Apply full 57-hunk patch to exact original; PHP-lint full 23+ files and exercise real WordPress, MariaDB, eBay browse/getItem, public cards/native HivePress and real sitemap/single visibility; then build a ZIP. Do NOT retrofit against 6.72.211.",
+  "live_status": "TEST ONLY. Prior 6.72.308 original ZIP was physically uploaded and verified, NOT denied; it is not currently byte-readable in the connected GitHub repo tree or accessible Library. GitHub reference source is 6.72.211. Therefore full 58-hunk exact-original apply NOT performed, and no actual WP/MariaDB/eBay Browse/getItem/single/sitemap tests. New legacy draft migration tested only with simulated WP functions.",
+  "required_for_release": "Read back original AFFILIATE_ZENTRALE_6.72.308_URSACHENFIX_GESAMTTEST_NUR_TEST.zip with previously recorded SHA256 b4d8547fd2aa134f7f82f568db3a81df54bb7d2131fd0752e76e3f0ca2251fe0 from already-documented binary cabinet, apply ALL 58 source hunks in one transaction and run real PHP+WordPress+MariaDB+eBay API tests including no published eBay-owned legacy listings in front-end URLs AND Yoast sitemap. DO NOT substitute the old 6.72.211 reference nor claim user did not upload original.",
   "release_allowed": false
 }
