@@ -20,8 +20,8 @@ jobs:
           f='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/HOBBY_DEPOT_DESIGN_HD003_1.50.803.zip'
           with zipfile.ZipFile(f) as z:
             for p,ranges in [
-              ('affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php',[(3640,3660),(3790,3810),(3835,3896),(4740,4768),(4852,4907),(4905,4935),(4310,4329)]),
-              ('affiliate-portal-template-kit/pferde-template-kit.php',[(18094,18130),(18395,18468),(12572,12614)])]:
+              ('affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php',[(3138,3192),(4934,5061),(4746,4785)]),
+              ('affiliate-portal-template-kit/pferde-template-kit.php',[(17736,17762),(18445,18472)])]:
               a=z.read(p).decode('utf8').splitlines();print('\n','FILE',p)
               for i,line in enumerate(a,1):
                 m=re.search(r'\bfunction\s+([a-zA-Z_0-9]+)\s*\(',line)
