@@ -170,3 +170,47 @@ jobs:
             with open('/tmp/hobby-image-inventory.json','w') as f:json.dump(rows,f,ensure_ascii=False,indent=1)
             print('INVENTORY_SHA256',hashlib.sha256(open('/tmp/hobby-image-inventory.json','rb').read()).hexdigest())
           PY
+
+      - name: Verify every image file readable and source resolution against hero requirement
+        run: |
+          python3 -m pip -q install Pillow
+          python3 - <<'PY'
+          from PIL import Image,UnidentifiedImageError
+          from io import BytesIO
+          import json,zipfile,collections
+          root='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/'
+          with zipfile.ZipFile(root+'HD-007-HOBBYREGISTER-CORE/CURRENT.zip') as reg,zipfile.ZipFile(root+'HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip') as design:
+            data=json.loads(reg.read(next(n for n in reg.namelist() if n.endswith('hobby-image-map-v1.json'))))
+            dz=set(design.namelist());rz=set(reg.namelist())
+            image_results={};counts=collections.Counter();bad=[];unique=set();reused=collections.Counter()
+            for id,item in data.items():
+              p=item.get('path','');src=item.get('source','')
+              if src=='hd003':z=design;f='affiliate-portal-template-kit/assets/'+p
+              elif src=='hd007':
+                z=reg;f=next((x for x in ('hd-hobbyregister-core/assets/'+p,'hd-hobbyregister-core/'+p) if x in rz),'')
+              else:z=None;f=''
+              k=(src,f)
+              if k not in image_results:
+                try:
+                  if not z or not f:raise ValueError('missing file')
+                  raw=z.read(f)
+                  im=Image.open(BytesIO(raw))
+                  im.verify()
+                  im=Image.open(BytesIO(raw));dim=im.size;fmt=im.format
+                  image_results[k]=(dim[0],dim[1],fmt,None)
+                except Exception as exc:image_results[k]=(0,0,'',str(exc))
+              w,h,fmt,err=image_results[k]
+              counts['verified_records']+=1
+              if err:counts['invalid_records']+=1;bad.append((id,str(err)))
+              else:
+                counts['valid_records']+=1
+                if w>=1500 and h>=1000:counts['resolution_master_1500_1000_or_more']+=1
+                elif w>=900 and h>=300:counts['resolution_display_900_300']+=1
+                else:counts['resolution_small']+=1
+                counts['format_'+fmt.lower()]+=1
+              reused[f]+=1
+            print('IMAGE_FILE_INTEGRITY',json.dumps(counts,sort_keys=True))
+            print('UNIQUE_FILE_COUNT',len(image_results))
+            print('INVALID_SAMPLE',json.dumps(bad[:20]))
+            print('UNIQUE_REUSED_2PLUS',sum(v>1 for v in reused.values()))
+          PY
