@@ -255,3 +255,10 @@ Die **vollständigen unveränderten ZIP-Testpakete**, physisch erneut gelesen un
 - **Paar mit unverändertem PSERC 0.28.55** in privater Library `/pferdeatelier/PLUGINS/PFERDEATELIER-PSTE-05714424-PSERC-02855-QA-PAAR.zip`, **877145 Bytes**, SHA256 `063d427d100ee2a63b5ba223c30144b45d55ef4b18d1d77630fc381b64530143`.
 - GitHub: `QA_ONLY/PSTE_05714424_QUELLFIX/` enthält vollständigen Patch gegenüber v23, Bau-/Testskripte, echten Testlog und Manifest, **nicht** die ZIP-Binary. [46 lokale PASS und Grenzen](EVIDENCE/PSTE_05714424_1179_ECHTE_QUELLEN_46_LOKALTESTS_20261108.md). 121 ZIP-Pfade + CRC PASS, 83 PHP-Lints PASS.
 - **Echte .23-WordPress-Testdatei 16:03 UTC** belegt die vorherige globale Unterbrechung nach 1.025 Einträgen bei `PSTE_EDITORIAL_PLAN_TITLE_UNRESOLVED_0`. **Neue .24-Read-only-Simulation umfasst 1.179** Einträge trotz 9 alten „Array“-Titeln und 3 nicht nachweisbaren Postbezügen. `complete=false` bis zur echten Aufklärung, kein Schein-FREI, kein Rückimport. **.24 noch NICHT in WordPress installiert**. K0 und Live unverändert.
+
+
+## 08.11.2026 16:29 UTC: bestätigte installierte PSTE v0.57.144.24 (echter WP-Export)
+
+- Bestehendes unverändertes Testplugin v0.57.144.24, physisch privat `/pferdeatelier/PLUGINS/PSTE-0.57.144.24-PARKHAUS-QUELLFIX-NUR-TEST.zip`. **KEIN .25 und KEINE neue ZIP erstellt.** Tatsächliche Benutzerinstallation ist nun anhand echten v24-Quellformats `diagnostic_sha256`/Quarantäne belegt.
+- Ursprünglicher v24-WordPress-Export `/pferdeatelier/pferdeatelier-mini-ergebnisse-20261108-162920(1).json`, SHA256 `ddeadf12b0a84e215e534172ee70f6d3f11c5f1289fc9e6e6d00deed7a278125`, 1.179 Einträge, incomplete nur wegen 9+3 echten Altfällen. 9 redaktionelle Platzhalter **identisch und ohne Inhalt** (vollständiger Hashvergleich). Drei PPM679-Slots mit Post-IDs **972356/972414/972560** weiterhin belegt.
+- [Echte v24-Regression mit 55 PASS, aktueller Ursachenstatus](EVIDENCE/PSTE_V24_ECHTER_WP_EXPORT_162920_REPLAY_55PASS_20261108.md), archivierte PHP-Testquelle/Prüflog/JSON-Audit in `QA_ONLY/PSTE_05714424_QUELLFIX/LIVE_WP_20261108_162920/`. Original-K0 und PSERC .55 unverändert; PR #682 bleibt Draft.
