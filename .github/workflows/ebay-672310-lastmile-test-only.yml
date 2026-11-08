@@ -54,7 +54,7 @@ jobs:
           cat > /tmp/ebay310_qa/test.php <<'PHP'
           <?php
           error_reporting(E_ALL);
-          define('MINUTE_IN_SECONDS',60); define('ARRAY_A','ARRAY_A');
+          define('ABSPATH','/'); define('MINUTE_IN_SECONDS',60); define('ARRAY_A','ARRAY_A');
           $METAS=array();
           function absint($x){return abs((int)$x);}
           function sanitize_text_field($x){return trim((string)$x);}
@@ -141,8 +141,10 @@ jobs:
           $r=seed(time()+100,time()+20000);global $wpdb;unset($wpdb->items[1]);
           ok($r->check($both)===false&&$r->fail_code==='public_source_refresh_source_unavailable',
               'missing saved source cannot become a green public result');
-          echo "EBAY_LASTMILE_ISOLATED_GATE 12/12 PASS; FULL ORIGINAL+WP+EBAY E2E NOT CLAIMED\n";
+          echo "EBAY_LASTMILE_ISOLATED_GATE 13/13 PASS; FULL ORIGINAL+WP+EBAY E2E NOT CLAIMED\n";
           PHP
           cd /tmp/ebay310_qa
           php -l test.php
-          php test.php
+          php test.php | tee /tmp/ebay-672310-lastmile.log
+          test "$(grep -c '^PASS ' /tmp/ebay-672310-lastmile.log)" = 13
+          grep -F 'EBAY_LASTMILE_ISOLATED_GATE 13/13 PASS' /tmp/ebay-672310-lastmile.log
