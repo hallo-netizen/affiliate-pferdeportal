@@ -68,14 +68,16 @@ candidate=r'''
           'wachs','tinte','pfeile','schuhe','magnet','substrat',
           'sammelbeutel','sammelbehaelter','arbeitsplatz',
           'sichere standflaeche','sicheres gelaende','erlaubten fundplatz',
-          'wetterdaten','amateurfunklizenz','bestimmungshilfe'
+          'wetterdaten','amateurfunklizenz','bestimmungshilfe',
+          'stauraum','glasobjekt','brennerplatz','glasstudio mit ofen',
+          'saubere gefaesse','je nach technik perlen'
         );
         if (in_array($normalized,$generic,true) ||
             (mb_strlen($name,'UTF-8')<8 &&
              !preg_match('/^(?:rc|3d|cb|fpv|cnc|sdr)-/i',$name))) {
             return '';
         }
-        if (preg_match('/\b(?:und|oder|platz|zeit|frei(?:e|er|es)?|geeignet(?:e|er|es)?|erlaubt(?:e|er|es|en)?|erfahrung|kenntnisse|wind|wetter|flaeche|anleitung|sicherheit|umgebung|arbeitsplatz|haltung|arbeitsflaeche|optionale?)\b/',$normalized)) {
+        if (preg_match('/\b(?:und|oder|platz|zeit|frei(?:e|er|es)?|geeignet(?:e|er|es)?|erlaubt(?:e|er|es|en)?|erfahrung|kenntnisse|wind|wetter|flaeche|anleitung|sicherheit|umgebung|arbeitsplatz|haltung|arbeitsflaeche|optionale?|passend(?:e|er|es|en)?|sauber(?:e|er|es|en)?|zuverlaessig(?:e|er|es|en)?|staubgeschuetzt(?:e|er|es|en)?|je|nach)\b/',$normalized)) {
             return '';
         }
         return $name;
