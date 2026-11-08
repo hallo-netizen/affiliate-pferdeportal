@@ -2051,3 +2051,12 @@ Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wa
 **WARUM:** Die früheren 36 Tests verwendeten fälschlich nur einen gültigen künstlichen Editorial-Plan-Eintrag. Der neue 46er-Test basiert auf den 1.179 echten exportierten Planzeilen und simuliert ausdrücklich alle neun unbrauchbaren Alt-Titel plus drei nicht im WP-Snapshot enthaltenen Post-IDs; alle sechs Quellen werden exportiert, ohne dass falsche Freigabe möglich ist. Positivfall mit künstlichen neun Titeln/drei Postwerten klar abgegrenzt; keine Produktionsfreigabe.
 
 **ABLAGE:** `PROJEKTE/PFERDE_ATELIER/PLUGINS/CURRENT_STATE.md`, `EVIDENCE/PSTE_05714424_1179_ECHTE_QUELLEN_46_LOKALTESTS_20261108.md`, `QA_ONLY/PSTE_05714424_QUELLFIX/`; echte ZIP-Binärdateien private Library `/pferdeatelier/PLUGINS/`. PR #682 bleibt Draft ohne Merge. Kein neuer Architektur- oder Sicherheitsmechanismus.
+
+
+## 08.11.2026 – PSTE v24 ECHTER Betreiber-Export geprüft (kein neuer Code)
+
+**WAS:** Nach dem echten Betreiber-Test des bestehenden PSTE-v0.57.144.24-Plugins die private WordPress-JSON von 16:29 UTC vollständig geprüft, 1.179/1.179 Datensätze aus allen sechs Quellen bestätigt und den PHP-Replay auf genau dieser neuesten Datei mit **55 lokalen PASS** erneut ausgeführt. Alle neun Alt-Editorial-Zeilen byte-inhaltlich vollständig mit SHA256 rekonstruiert: identisch, nur `title=Array`/`primary_longtail_query=Array`, keinerlei Referenz, Kategorie, Slot oder echtes Thema. Drei PPM679-Post-IDs ohne aktuellen Post-/Titelbeleg bleiben mit ihren belegten Canonical-Slots erhalten.
+
+**WARUM:** Vorheriges .23 brach bei Alt-Array ab, .24 arbeitet nun real korrekt; der verbleibende Sperrstatus ist alte Datenqualität, keine noch offene Exportprogrammierung. Nicht mit erneuten Plugin-ZIPs oder frei erfundenen Titeln nachbessern; Ursprung Filter-vs-Option und Archivbelege der drei alten Posts untersuchen. Nutzer muss keine bestehende Aktion wiederholen.
+
+**ABLAGE:** `PROJEKTE/PFERDE_ATELIER/PLUGINS/CURRENT_STATE.md`, `EVIDENCE/PSTE_V24_ECHTER_WP_EXPORT_162920_REPLAY_55PASS_20261108.md`, `QA_ONLY/PSTE_05714424_QUELLFIX/LIVE_WP_20261108_162920/`. WordPress-Original-JSON bleibt privat. Keine Plugin-Codeänderung, kein WP-Schreibzugriff, K0/Live/PSERC unverändert. Draft-PR #682.
