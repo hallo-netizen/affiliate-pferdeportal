@@ -3,7 +3,25 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-11-08
-STATUS: **2.8.13 IST DER AKTUELLE VOLLSTÄNDIGE LOKALE INSTALLATIONSKANDIDAT. LOKALE POSITIV-/NEGATIVTESTS PASS; 2.8.13-WORDPRESS-LIVE UND ECHTER HERO-PROMPT OFFEN.**
+STATUS: **2.8.14 IST AKTUELLE VOLLSTÄNDIGE LOKALE INSTALLATIONSFASSUNG. ALLE POSITIVEN/NEGATIVEN SIMULATIONEN PASS; ERSTER WORDPRESS-LIVETEST MIT NEUEM HERO-PROMPT OFFEN.**
+
+## Aktuell: Bildzentrale 2.8.14
+
+**Vollständige WordPress-ZIP:** `Bildzentrale-2.8.14.zip`, **86.568 Bytes**, SHA256 `06ffeac81f37d5d20a424e1d93dd74c597b0bf1cb7d472da391337d5c49c529e`.
+
+**Dauerhafte Ablage:** Installations-ZIP, Zwischenprotokoll, reproduzierbares Testarchiv und CURRENT in ChatGPT-Library `/Hobby Depot/Plugin-Büro/`. Die dort abgelegte ZIP wurde **bytegenau zurückgelesen und mit Original-SHA256 verglichen**. Diese GitHub-PR beinhaltet **nur Dokumentation, nicht die Plugin-Binärdatei**.
+
+**Ursachenfix:** 2.8.13 gab nur eine mittlere Weitaufnahme vor und übernahm gleichzeitig den allgemeinen Fotostil, der ausdrücklich natürliche Hand-/Oberkörper-Nahaufnahmen empfahl. In 2.8.14 enthält **nur der Hobbyregister-Prompt** einen widerspruchsfreien redaktionellen Stil und eine **wesentlich weiter zurückgenommene Kamera** (zwei- bis dreimal weiter). Das fertige Motiv muss in der flachen **4:1 bis 5:1 Hero-Beschneidung** erkennbar bleiben: Werkzeuge/Handlung/Werkstück im mittleren 35–65 % Bildhöhe und 55–80 % Breite, links ruhiger Titelbereich. Keine Makro-, Detail- oder Halbporträts als Motiv. Auch ein bis 400 Zeichen langer individueller Motivwunsch bleibt mit allen negativen Vorgaben vollständig erhalten; kein Trunkieren von Schlussregeln.
+
+**Minimaländerung:** Haupt-Plugin-Datei nur Versionsbump 2.8.13→2.8.14, Hobbyregister-Datei **genau zwei Codezeilen** (lokaler Bildstil und umfassende Hero-Komposition), sonst nichts. **HD003-Designplugin und HD007-Daten/Bilder unverändert; auch alle Fotozuordnungen, Masterbilder, Bewertungen und Bildübernahme-Logik unverändert.** Die freiwillige manuelle Bestandszuordnung des Betreibers bleibt bestehen.
+
+**Lokale Beweise:** **149/149 Backend**, **27/27 Menü**, **39/39 Chromium-Browser-Klicktests**, alle drei aus einem frisch entpackten eigenständigen Testpaket wiederholt (PASS). 2/2 PHP-Syntax, Installations-ZIP-Integrität PASS. Prüfungen mit echten HD006-Quellmethoden und simulierten WordPress-/Magnific-Aufrufen, **kein echter kostenpflichtiger Magnific- oder neuer 2.8.14-WordPress-Hero-Test.** Ein konkretes generiertes Foto ist nach bewusstem Live-Auftrag visuell zu prüfen.
+
+[**Dauerhafte Prüfakte 2.8.14**](./BILDZENTRALE_2.8.14_HERO_PROMPT_UND_FREIGABE_20261108.md). 2.8.13 und älter sind Archivstände.
+
+---
+
+## Vorheriger Stand 2.8.13 (nur Archiv, nicht Current)
 
 ## Aktuell: Bildzentrale 2.8.13
 
