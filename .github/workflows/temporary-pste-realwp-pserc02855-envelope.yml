@@ -32,12 +32,13 @@ jobs:
           python3 "$D/apply_existing_mini_kisten_import.py" /tmp/qa-pste
           python3 "$D/apply_wp_single_owner_gate.py" /tmp/qa-pste/PSTE-KISTEN-GESAMT-QA-NICHT-INSTALLIEREN.zip /tmp/pste-qa.zip
           unzip -p /tmp/pste-qa.zip 'Portal SEO Topic Engine/includes/class-pste-mini-workflow.php' > /tmp/pste-final-mini.php
+          unzip -p /tmp/pste-qa.zip 'Portal SEO Topic Engine/includes/class-pste-planning-readiness-gate.php' > /tmp/pste-final-plan.php
           php "$D/test_complete_parkhaus.php" /tmp/pste-final-mini.php
           for mode in good stale onebad; do
             php "$D/test_existing_forward_full_chain.php" /tmp/pste-final-mini.php "$mode"
           done
           php "$D/test_100_keyword_end_to_end_simulation.php" /tmp/pste-final-mini.php \
-            /tmp/qa-pste/PSTE-KISTEN-GESAMT-QA-NICHT-INSTALLIEREN.zip "$D/MINI_100_ORIGINAL_EXTERNAL_TITLES_20261106.json" > /tmp/full100.log || { tail -n 50 /tmp/full100.log; exit 1; }
+            /tmp/pste-final-plan.php "$D/MINI_100_ORIGINAL_EXTERNAL_TITLES_20261106.json" > /tmp/full100.log || { tail -n 50 /tmp/full100.log; exit 1; }
           echo 'PASS existing complete-parkhouse, actual handoff mock good/stale/onebad, and 100-keyword source comparison'
           php /tmp/wp plugin install /tmp/pste-qa.zip --activate --path=/tmp/pste-wp --allow-root
           php /tmp/wp post create --post_type=post --post_status=publish --post_title="Regendecke für Pferde" --post_content="<h2>Passform</h2>Testinhalt" --path=/tmp/pste-wp --allow-root
