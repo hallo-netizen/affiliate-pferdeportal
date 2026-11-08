@@ -1,0 +1,50 @@
+name: TEMP Pferdeatelier PSTE vollständiges QA-ZIP (nur Test)
+on:
+  push:
+    branches:
+      - fix/pste-kisten-einmalige-pruefung-20261107
+    paths:
+      - .github/workflows/temporary-pste-qa-package-delivery-20261108.yml
+permissions:
+  contents: read
+jobs:
+  build-qa-only:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild exact current full PSTE QA plugin from stored original v22
+        shell: bash
+        run: |
+          set -euo pipefail
+          D=protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS
+          test "$(sha256sum "$D/INSTALLATIONS_PAKETE/PSTE-0.57.144.22-NUR-TEST.zip" | cut -d' ' -f1)" = 0d01ea4552a322278e45f2390915cb8352ffe0862f8e0a5d00490fac942400e0
+          python3 "$D/QA_ONLY/apply_existing_mini_kisten_import.py" /tmp/pferdeatelier-pste-qa
+          python3 "$D/QA_ONLY/apply_wp_single_owner_gate.py" /tmp/pferdeatelier-pste-qa/PSTE-KISTEN-GESAMT-QA-NICHT-INSTALLIEREN.zip /tmp/PFERDEATELIER_PSTE_V22_AKTUELL_GESAMTTEST_NUR_TEST.zip
+          unzip -t /tmp/PFERDEATELIER_PSTE_V22_AKTUELL_GESAMTTEST_NUR_TEST.zip | tail -n 1
+          python3 - <<'PY'
+          import zipfile,subprocess,tempfile,pathlib,hashlib
+          z=pathlib.Path('/tmp/PFERDEATELIER_PSTE_V22_AKTUELL_GESAMTTEST_NUR_TEST.zip')
+          with zipfile.ZipFile(z) as f:
+              assert f.testzip() is None
+              names=f.namelist()
+              assert len(names)==121, ('UNEXPECTED_PATHS',len(names))
+              with tempfile.TemporaryDirectory() as d:
+                  f.extractall(d)
+                  phps=list(pathlib.Path(d).rglob('*.php'))
+                  assert len(phps)==83, ('PHP_COUNT',len(phps))
+                  for php in phps:
+                      subprocess.run(['php','-l',str(php)],check=True,stdout=subprocess.DEVNULL)
+          print('PSTE_CURRENT_FULL_ZIP_QA_PASS; SHA256',hashlib.sha256(z.read_bytes()).hexdigest())
+          PY
+          unzip -p /tmp/PFERDEATELIER_PSTE_V22_AKTUELL_GESAMTTEST_NUR_TEST.zip 'Portal SEO Topic Engine/includes/class-pste-mini-workflow.php' > /tmp/pste-mini-current.php
+          php "$D/QA_ONLY/test_complete_parkhaus.php" /tmp/pste-mini-current.php
+          php "$D/QA_ONLY/test_existing_forward_full_chain.php" /tmp/pste-mini-current.php good
+          sha256sum /tmp/PFERDEATELIER_PSTE_V22_AKTUELL_GESAMTTEST_NUR_TEST.zip > /tmp/PSTE_TEST_ZIP_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PFERDEATELIER_PSTE_V22_AKTUELL_GESAMTTEST_NUR_TEST
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            /tmp/PFERDEATELIER_PSTE_V22_AKTUELL_GESAMTTEST_NUR_TEST.zip
+            /tmp/PSTE_TEST_ZIP_SHA256.txt
