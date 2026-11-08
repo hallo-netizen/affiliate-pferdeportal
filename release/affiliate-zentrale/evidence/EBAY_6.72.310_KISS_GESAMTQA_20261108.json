@@ -1,5 +1,5 @@
 {
-  "status": "REVIEW CORRECTION APPLIED TO EXISTING TEXT PATCH ONLY; PATCH FORMAT VALID; LOCAL FOCUSED RULE CASES PASS; ORIGINAL ZIP REPLAY AND REAL WORDPRESS/EBAY E2E OPEN",
+  "status": "EXISTING TEST-ONLY PATCH CORRECTED AND FOCUSED NATIVE PHP+NODE TESTED; EXACT 6.72.308 SOURCE/ZIP REPLAY + LIVE E2E STILL OPEN",
   "date": "2026-11-08",
   "version": "6.72.310 (internal work source ONLY, no ZIP issued)",
   "original_zip_file": "AFFILIATE_ZENTRALE_6.72.308_URSACHENFIX_GESAMTTEST_NUR_TEST.zip",
@@ -16,19 +16,19 @@
   ],
   "php_lint": "23/23 PASS",
   "json_parse": "3/3 PASS",
-  "tests_total": "NOT RERUN FOR THIS PATCH REVISION",
+  "tests_total": "NOT RERUN FOR CURRENT COMPLETE SOURCE",
   "original_red_reproduction": "PASS (separate original regression)",
   "patch_path": "EBAY_672308_TO_672310_GESAMTURSACHENPATCH_NUR_TEST.patch",
-  "patch_sha256": "244ee098dda6eb4a8816fc889e9c3e93ff1e3f78e6e9798ecb0a3e771aa0f0bb",
-  "patch_git_blob_sha": "69e3c246bda8c7f45cfc0d52448d19973784ba4b",
-  "patch_replay": "PENDING — current conversation has neither physical original 6.72.308 ZIP nor source working tree; old 66/66 PASS applies to previous patch revision only",
+  "patch_sha256": "69b953215b977c39f9a6fca4b4e4b18652f1a83d14b9a80ac60573f45aaa312d",
+  "patch_git_blob_sha": "af5256644750b77cf24a0f2740b3633b04f12f9b",
+  "patch_replay": "NOT DONE; original 6.72.308 66-file user ZIP is not available in this conversation nor in GitHub office repository. 82 tests and previous 66/66 pass are not valid proof for current changed patch.",
   "protected_frontend_and_catalog_source": "ALL 7 checked source files byte-identical to original 6.72.308",
   "remaining_gates": [
-    "UPDATED PATCH original 6.72.308 complete ZIP replay + prior 82 full local tests (previous pass now stale for this revision)",
-    "Real authenticated WordPress+MariaDB source-row/checkpoint/plan/terminal archive test",
-    "Real eBay Browse timeout/recovery using authenticated provider and saved scope",
-    "Actual public category and article product cards in browser",
-    "Formal release_guard for canonical GitHub release (unchanged)"
+    "Exact original 6.72.308 ZIP full 66-file patch replay and 82-case local regression (not currently possible)",
+    "Authenticated WordPress/MariaDB eBay saved-state, source row, checkpoint, plan and archive regression",
+    "Real authenticated eBay Browse timeout and recovery with same cursor",
+    "Actual browser-rendered product cards on categories AND articles",
+    "Existing canonical release_guard release-check PASS and original-source release review"
   ],
   "release_allowed": false,
   "installation_instruction": "NONE",
@@ -76,7 +76,7 @@
     "targeted_php_cases_pass": 5,
     "targeted_js_cases_pass": 3,
     "unified_diff_hunks_valid": 24,
-    "patch_format": "24/24 hunk counts OK; no hunk line count changes",
+    "patch_format": "24/24 unified diff hunks structurally valid; original source not replayed",
     "test_boundary": "Focused predicates checked in isolation, not against physical original 6.72.308 or WordPress DB",
     "latest_live_heartbeat": {
       "date": "2026-11-08T05:48:24Z",
@@ -87,6 +87,27 @@
       "interpretation": "The external runner successfully transmitted a heartbeat, NOT an eBay successful import. It cannot establish live code version."
     },
     "exact_source_issue": "Physical original 6.72.308 ZIP not stored in release/affiliate-zentrale current or artifacts; previous GitHub office upload record explicitly states original ZIP is not on GitHub.",
-    "next_gate": "Re-run prior 82 tests and exact 66/66 original ZIP replay, then authenticated WordPress/MariaDB/eBay plus actual frontend product cards, before any release"
-  }
+    "next_gate": "Re-run prior 82 tests and exact 66/66 original ZIP replay, then authenticated WordPress/MariaDB/eBay plus actual frontend product cards, before any release",
+    "additional_issue": "Historical archive serialized missing completed_with_skips as zero; this reintroduced the false-success state even after the previous predicate fix.",
+    "correction": "In existing archive field, missing confirmation now converts to 1/open, not 0/clean. Server-side completed label shows 'Fertig (mit offenen Prüfungen)' when proof missing or incomplete. No new class/worker/DB/storage.",
+    "completed_native_isolated_tests": {
+      "php_cases_passed": 12,
+      "js_cases_passed": 4,
+      "php_lint": "PASS",
+      "runtime": "PHP CLI 8.4.24 and Node 22.16.0",
+      "scope": "Exact PHP predicate and archive-flag expressions reproduced and executed independently; not whole WordPress plugin or original ZIP."
+    },
+    "public_frontend_observation": {
+      "checked_date": "2026-11-08",
+      "mode": "public HTML text extraction (no authenticated admin/database access)",
+      "sample_urls": [
+        "https://pferde-atelier.de/ausruestung/ausruestung-sattel/schabracken/",
+        "https://pferde-atelier.de/ausruestung/ausruestung-reiterbedarf/reithelme/",
+        "https://pferde-atelier.de/ausruestung/ausruestung-sattel/sattelgurte/"
+      ],
+      "observed": "Product suggestion headings appear, but no concrete product title / clickable eBay or Amazon offering is present in extracted content adjacent to them.",
+      "limit": "Not proof of rendered browser-visible emptiness; JS, dynamic cards, caching, installed version and authenticated live database state not verified."
+    }
+  },
+  "patch_bytes": 39907
 }
