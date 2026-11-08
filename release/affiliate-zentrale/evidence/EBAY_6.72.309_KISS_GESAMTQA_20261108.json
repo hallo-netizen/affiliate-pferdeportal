@@ -32,5 +32,8 @@
     "original_mariadb_wordpress_end_to_end": "NOT EXECUTED"
   },
   "release_allowed": false,
-  "user_visible_link_policy": "No further download or install instruction until the full acceptance criterion is met; 6.72.309 remains test-only"
+  "user_visible_link_policy": "No further download or install instruction until the full acceptance criterion is met; 6.72.309 remains test-only",
+  "patch_replay_original_complete_zip": "PASS: standalone unified patch applied cleanly to fresh extracted original 6.72.308; recursive diff versus entire 6.72.309 test source: 66/66 identical",
+  "local_test_rerun": "PASS: all 26 PHP tests rerun on local original trait; PHP lint 23/23; ZIP integrity 66/66",
+  "blocker_confirmation": "FAIL: existing canonical gapfill still terminates if isolated profile exhausts bounded retries; cannot assert all-run uninterrupted after sustained external outage"
 }
