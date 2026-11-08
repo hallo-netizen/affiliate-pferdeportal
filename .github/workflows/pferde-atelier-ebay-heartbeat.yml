@@ -60,8 +60,121 @@ jobs:
           print(f'SCHEDULER_KISS_ASSERTIONS={len(checks)} FAIL=0')
           # Execute the actual workflow status case (not just static substring rules).
           import subprocess
-          segment=s.split('case "$status" in',1)[1].split('esac',1)[0]
-          shell='status="$1"; case "$status" in'+segment+'esac'
+          match=re.search(r'(?ms)^                case "\$status" in\n(?P<body>.*?)^                esac\s*
+          for status,expected in [('failed',1),('completed',0),('idle',0),('disabled',0),('advanced',0),('busy',0)]:
+              observed=subprocess.run(['bash','-c',shell,'probe',status],capture_output=True,text=True)
+              assert observed.returncode==expected,(status,observed.returncode,expected,observed.stderr)
+              print('PASS REAL_CASE_'+status.upper()+'_EXIT_'+str(expected))
+
+          PY
+
+  heartbeat:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Keep the active canonical eBay run moving
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -u
+          URL='https://pferde-atelier.de/wp-json/affiliate-zentrale/v1/ebay/tick'
+          MAX_TICKS=30
+          MAX_CONSECUTIVE_FAILURES=5
+          consecutive_failures=0
+          active_seen=0
+          last_server_time=0
+
+          for n in $(seq 1 "$MAX_TICKS"); do
+            body="heartbeat-$n.json"
+            err="heartbeat-$n.err"
+            tick_url="$URL?heartbeat=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${n}-$(date +%s)"
+            code=$(curl --silent --show-error --output "$body" --write-out '%{http_code}' --request POST --max-time 45 --header 'Cache-Control: no-store' "$tick_url" 2>"$err" || true)
+
+            if [ "$code" != '200' ]; then
+              consecutive_failures=$((consecutive_failures + 1))
+              echo "heartbeat $n transport failure http=${code:-none} consecutive=$consecutive_failures"
+              cat "$err" || true
+            else
+              parsed=$(python3 - "$body" <<'PY' || true
+          import json,sys
+          try:
+              raw=open(sys.argv[1],'rb').read().decode('utf-8-sig').strip()
+              d=json.loads(raw)
+              s=d.get('status') if isinstance(d,dict) else None
+              c=d.get('contract') if isinstance(d,dict) else None
+              t=d.get('server_time') if isinstance(d,dict) else None
+              allowed={'advanced','busy','retryable_error','completed','failed','disabled','idle','throttled'}
+              if s not in allowed or c!='external_tick_v2' or not isinstance(t,int) or t<=0:
+                  raise ValueError('invalid external_tick_v2 response')
+              print(f"{s} {t}")
+          except Exception:
+              pass
+          PY
+              )
+
+              status=${parsed%% *}
+              server_time=${parsed##* }
+              if [ -z "$parsed" ] || [ "$status" = "$server_time" ]; then
+                consecutive_failures=$((consecutive_failures + 1))
+                echo "heartbeat $n invalid v2 response consecutive=$consecutive_failures"
+                head -c 800 "$body" || true
+                echo
+              elif [ "$status" != 'throttled' ] && [ "$server_time" -le "$last_server_time" ]; then
+                consecutive_failures=$((consecutive_failures + 1))
+                echo "heartbeat $n stale heartbeat response server_time=$server_time previous=$last_server_time consecutive=$consecutive_failures"
+              else
+                if [ "$status" != 'throttled' ]; then last_server_time=$server_time; fi
+                consecutive_failures=0
+                echo "heartbeat $n status=$status server_time=$server_time"
+                case "$status" in
+                  idle|completed|disabled)
+                    echo "terminal heartbeat status=$status; no successor runner required"
+                    exit 0
+                    ;;
+                  failed)
+                    echo "::error::WordPress eBay canonical run FAILED; the heartbeat must not report a successful delivery."
+                    exit 1
+                    ;;
+                  throttled)
+                    ;;
+                  advanced|busy|retryable_error)
+                    active_seen=1
+                    ;;
+                esac
+              fi
+            fi
+
+            if [ "$consecutive_failures" -ge "$MAX_CONSECUTIVE_FAILURES" ]; then
+              echo 'five consecutive heartbeat failures; stop this runner and let the safety schedule retry later'
+              exit 1
+            fi
+            if [ "$n" -lt "$MAX_TICKS" ]; then sleep 60; fi
+          done
+
+          if [ "$active_seen" -eq 1 ]; then
+            dispatch_url="https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/pferde-atelier-ebay-heartbeat.yml/dispatches"
+            for attempt in 1 2 3; do
+              dispatch_code=$(curl --silent --show-error --output "dispatch-$attempt.json" --write-out '%{http_code}' --request POST --max-time 30 \
+                --header 'Accept: application/vnd.github+json' \
+                --header "Authorization: Bearer ${GH_TOKEN}" \
+                --header 'X-GitHub-Api-Version: 2022-11-28' \
+                --data '{"ref":"main"}' \
+                "$dispatch_url" || true)
+              if [ "$dispatch_code" = '204' ]; then
+                echo 'successor heartbeat runner dispatched'
+                exit 0
+              fi
+              echo "successor dispatch attempt $attempt failed http=${dispatch_code:-none}"
+              sleep 10
+            done
+            echo 'successor dispatch failed after three attempts; safety schedule remains available'
+            exit 1
+          fi
+,s)
+          assert match,'Real heartbeat status case not found'
+          shell='status="$1"; case "$status" in\n'+match.group('body')+'esac'
           for status,expected in [('failed',1),('completed',0),('idle',0),('disabled',0),('advanced',0),('busy',0)]:
               observed=subprocess.run(['bash','-c',shell,'probe',status],capture_output=True,text=True)
               assert observed.returncode==expected,(status,observed.returncode,expected,observed.stderr)
