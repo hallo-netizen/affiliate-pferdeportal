@@ -912,13 +912,58 @@ index ad035f1..5f4d784 100644
      const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
      const CONTRACT_VERSION = '1.0';
      const PROVIDER_CONTRACT_VERSION = '2.0';
-@@ -480,5 +480,4 @@ EBAY_PRIVATE_ADMIN_REMOVAL
+@@ -396,40 +396,8 @@ EBAY_PRIVATE_HIVEPRESS_HOOK_REMOVAL
+         add_action(self::EBAY_MEDIA_CLEANUP_HOOK, array($this, 'run_ebay_media_cleanup_worker'));
+         add_filter('cron_schedules', array($this, 'ebay_cron_schedules'));
+-        // eBay-Drafts bekommen eine eigene, nonce-geschützte Admin-Vorschau.
+-        // HivePress stellt für Draft-Listings keine native öffentliche Preview-Route
+-        // bereit; deshalb wird das reale listing_view_page-Template direkt gerendert.
+-        add_filter('preview_post_link', array($this, 'ebay_filter_preview_post_link'), 20, 2);
+-        // Remote-only eBay images: replace only the two HivePress image blocks
+-        // for listings carrying the private eBay marker. Native HivePress listings
+-        // continue to use their regular WordPress attachments unchanged.
+-        add_filter('hivepress/v1/templates/listing_view_block/blocks', array($this, 'ebay_remote_image_listing_view_block'), 1000, 2);
+-        add_filter('hivepress/v1/templates/listing_view_page/blocks', array($this, 'ebay_remote_image_listing_view_page'), 1000, 2);
+-        // V6.15: Runtime fallback at the actual HivePress Container boundary.
+-        // This path is also reached when HivePress renders a saved hp_template
+-        // instead of instantiating the default Listing_View_* template class.
+-        add_filter('hivepress/v1/blocks/container', array($this, 'ebay_remote_image_container_blocks'), 1000, 2);
+-        // Native WordPress-Preview-Queries can already be a 404 before template_redirect.
+-        // Run the same eBay-only preview gate once after the main query and again at
+-        // template_redirect; a successful render exits, so there is no double output.
+-        if (!$is_ajax_request) {
+-            add_action('wp', array($this, 'ebay_handle_secure_listing_preview'), -100);
+-            add_action('template_redirect', array($this, 'ebay_handle_secure_listing_preview'), -100);
+-        }
+-        // Published eBay singles are rendered from their exact canonical path only.
+-        // This eBay-only route does not depend on the current rewrite cache or on
+-        // HivePress recognising the single query first; ordinary listings are untouched.
+-        if (!$is_ajax_request) {
+-            add_action('template_redirect', array($this, 'ebay_rescue_published_listing_route'), -90);
+-            add_action('template_redirect', array($this, 'ebay_redirect_legacy_private_category'), -85);
+-        }
+-        add_filter('the_posts', array($this, 'ebay_filter_stale_posts'), 999, 2);
+-        // HivePress baut Listing-Kategorieabfragen selbst. Private Anzeigen muss alle
+-        // direkten fachlichen Unterkategorien mitaggregieren; Provider-Ebenen bleiben unsichtbar.
+-        add_action('hivepress/v1/models/listing/query', array($this, 'ebay_expand_private_parent_listing_query'), PHP_INT_MAX);
+-        add_action('hivepress/v1/models/listing/query', array($this, 'ebay_enforce_private_visibility_ceiling'), PHP_INT_MAX);
+-        // Fallback nach allen normalen pre_get_posts-Manipulationen, falls ein anderes
+-        // HivePress-Zusatzplugin die Taxonomie-Klausel später wieder verengt.
+-        add_action('pre_get_posts', array($this, 'ebay_expand_private_parent_listing_query'), PHP_INT_MAX);
+-        add_action('pre_get_posts', array($this, 'ebay_enforce_private_visibility_ceiling'), PHP_INT_MAX);
++        // BUSINESS-only: do not register retired PRIVATE image, preview, rescue,
++        // category expansion or query-limit hooks. HivePress owns its own lists.
++        // Keep just the normal public-read filter for old eBay-origin listings.
++        add_filter('the_posts', array($this, 'ebay_filter_stale_posts'), 999, 2);
+         // V5.14: Kein schreibender eBay-Lifecycle mehr auf normalen Frontend-Aufrufen.
+         // Frische wird weiterhin fail-closed gefiltert; Statusmutationen erfolgen nur
+@@ -480,5 +448,4 @@ EBAY_PRIVATE_ADMIN_REMOVAL
              add_action('admin_post_ppar_control_save_decision', array($this, 'handle_control_save_decision'));
              add_action('admin_post_ppar_ebay_save_settings', array($this, 'handle_ebay_save_settings'));
 -            add_action('admin_post_ppar_ebay_setup_categories', array($this, 'handle_ebay_setup_categories'));
              add_action('admin_post_ppar_ebay_verify_catalog', array($this, 'handle_ebay_verify_catalog'));
              add_action('admin_post_ppar_ebay_test_connection', array($this, 'handle_ebay_test_connection'));
-@@ -486,5 +485,4 @@ EBAY_PRIVATE_ADMIN_REMOVAL
+@@ -486,5 +453,4 @@ EBAY_PRIVATE_ADMIN_REMOVAL
              add_action('admin_post_ppar_ebay_run_refresh', array($this, 'handle_ebay_run_refresh'));
              add_action('admin_post_ppar_ebay_run_restart', array($this, 'handle_ebay_run_restart'));
 -            add_action('admin_post_ppar_ebay_review_decision', array($this, 'handle_ebay_review_decision'));
