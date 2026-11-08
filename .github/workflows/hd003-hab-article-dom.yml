@@ -1,0 +1,64 @@
+name: HD003 article hero CSS and live DOM detailed checks
+on:
+  push:
+    branches: ['hobbyroom/hd003-article-hab-translation-20261108']
+    paths: ['.github/workflows/hd003-hab-article-dom.yml']
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect existing post hero exact source and Hab mobile rules
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import re
+          b=Path('protocol/PROJECT_MEMORY/PROJEKTE')
+          with ZipFile(b/'HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip') as z:
+            for f in ['affiliate-portal-template-kit/includes/hobby-depot-article-hero-v150789.php']:
+              s=z.read(f).decode()
+              for i,line in enumerate(s.splitlines(),1):
+                print('HD_HERO',i,line)
+            f='affiliate-portal-template-kit/assets/single-post-locked-v15083.css'
+            s=z.read(f).decode()
+            for i,line in enumerate(s.splitlines(),1):
+              if any(k in line for k in ['hddemo','entry-title','.entry-content','single-post','h1','h2','has-large-font-size','ol','sidebar']):
+                print('HD_CSS',i,line[:650])
+            f='affiliate-portal-template-kit/includes/hobby-depot-design-test-v150787.php'
+            s=z.read(f).decode()
+            for i,line in enumerate(s.splitlines(),1):
+              if any(k in line for k in ['add_action','add_filter','Fachartikel','design_test','get_post','post_content','hddemo','function pftk_hd003_demo']) and i<340:
+                print('HD_DEMO',i,line[:650])
+          with ZipFile(b/'EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip') as z:
+            s=z.read('hab-bewahr-design-vorschau/assets/article-design.css').decode()
+            for i,line in enumerate(s.splitlines(),1):
+              if i>70: print('HAB_CSS_MOBILE',i,line[:1100])
+          PY
+      - name: Browser
+        run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - name: Read actual hobby article DOM and computed typography without edits
+        run: |
+          python3 - <<'PY'
+          from playwright.sync_api import sync_playwright
+          import json
+          url='https://hobby-depot.de/designtest-zweileiner-oder-vierleiner-hobby-depot/'
+          with sync_playwright() as p:
+            browser=p.chromium.launch(headless=True,args=['--no-sandbox'])
+            for width in (1440,960,390):
+              page=browser.new_page(viewport={'width':width,'height':900})
+              response=page.goto(url,wait_until='domcontentloaded',timeout=35000)
+              page.wait_for_timeout(400)
+              data=page.evaluate("""() => {
+                const sel=['body','.site-content','.ast-container','.site-main','article.post','.entry-header','.entry-title','.entry-content','.hd-article-hero','.hd-article-hero-title','.wp-block-image','.wp-block-group','.has-large-font-size','h2','h3','nav','aside'];
+                const details=x=>{let r=x.getBoundingClientRect(),s=getComputedStyle(x);return {tag:x.tagName,cls:typeof x.className==='string'?x.className.substring(0,130):'',text:x.textContent?.trim().substring(0,95),font:s.fontSize,line:s.lineHeight,weight:s.fontWeight,marginTop:s.marginTop,marginBottom:s.marginBottom,maxWidth:s.maxWidth,display:s.display,rect:{x:r.x,y:r.y,w:r.width,h:r.height}}};
+                return {title:document.title,url:location.href,elements:sel.map(k=>({sel:k,list:[...document.querySelectorAll(k)].slice(0,3).map(details)})),
+                img:[...document.querySelectorAll('article img')].slice(0,7).map(x=>({src:x.currentSrc,alt:x.alt}))};
+              }""")
+              print('LIVE_DOM',width,'http',response.status if response else '?',json.dumps(data,ensure_ascii=False))
+              page.close()
+            browser.close()
+          PY
