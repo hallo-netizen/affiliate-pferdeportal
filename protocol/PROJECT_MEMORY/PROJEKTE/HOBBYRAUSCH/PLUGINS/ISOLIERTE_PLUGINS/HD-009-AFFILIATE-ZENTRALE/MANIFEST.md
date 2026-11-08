@@ -1,10 +1,12 @@
-# HD009 – Affiliate-Zentrale Hobby Depot – einziges CURRENT
+# HD009 – Affiliate-Zentrale Hobby Depot – gültige Current-Version
 
-**Version 0.1.26 · 08.11.2026**
+**HD009 0.1.27 · 08.11.2026**
 
-- **Installationsdatei:** `HOBBY_DEPOT_AFFILIATE_HD009_0.1.26.zip`; byteidentisch zu `CURRENT.zip`.
-- Voll-ZIP 1.553.271 Bytes, SHA-256 `a627e35a9e8d20f34616c1ead4bc1b7d180e40a8f74abb985c7311b60dcfcd8f`, Git-Blob `cede34f313736cdcc14a82124445206273e98e2c`. WordPress-Pluginordner unverändert `affiliate-portal-router/`.
-- **Einzige Designänderung gegenüber 0.1.25:** Im Hobbyregister nur bei Werbebannern **innerhalb des Textes** den zu großen oberen Abstand verkleinert; Desktop gemessen **46,5 → 16,5 px**, Mobil **56,5 → 10,5 px**. CSS nur am bestehenden `hdr-article > hdar-ci-register-inline`-Banner; auf Mobilformat gesonderter Wert. Folgende Absätze, Bannerbilder, Button, Maße, Farbe, Partner und alle anderen Portalbereiche bleiben unverändert.
-- Alle Funktionen und Bilder aus 0.1.25 erhalten: acht neutrale Hobbywelt-Bilder, Tiere = Terraristik, Kategoriebanner 6:1 Desktop / 4,2:1 Mobil, bebildertes Register-Quadrat und automatische Zuordnung.
-- **Prüfung:** Vorversion 0.1.25 SHA-256 bestätigt; 41/41 ZIP-Einträge mit CRC geprüft, 24/24 PHP-Syntax PASS. Browserkontrolle auf echten Hobbyregisterseiten **Alte Kameras reparieren** und **Alabasterschnitzen** bei 1440/900/390/360px PASS. Bannerhöhe und -breite vor/nach Änderung identisch. GitHub Actions 42461816837.
-- **Noch offen:** Die Installation und endgültige Sichtprüfung im produktiven WordPress. Beitragsbanner-Design bleibt weiterhin separat offen.
+- Installationsdatei: `HOBBY_DEPOT_AFFILIATE_HD009_0.1.27.zip`, vollständig und byteidentisch zu `CURRENT.zip`.
+- 1.554.012 Bytes, SHA-256 `bba83f67e48039bf921709823d81fc00b7658b7e9c825a833314f6821ff0a2fd`, Git-Blob `68ae6a59b6b1a945eaa24e787fae27178ed55f82`.
+- Bisheriger Fehler: Echte WordPress-Leaf-Kategorien wie `sportdrachen-drachen-leinen` haben `parent=0`; die Bannerwelt war aus deren Kategoriepfad nicht erkennbar, obwohl sie in HD003 exakt mit `Bewegen > Wind & Drachen > Sportdrachen` hinterlegt ist. Deshalb wurde ohne Foto ausgegeben.
+- **KISS-Korrektur:** Vorhandene Kategorieautorität `HD003/assets/hobby-depot-v150750/leaf-category-map-v150750.json` lesen; passende Welt und Untergruppe übernehmen. Wenn ein passendes genehmigtes Gruppenfoto verfügbar ist, dieses statt des unpassenden Outdoor- oder Textmotivs anzeigen. Sonst die bereits integrierten acht allgemeinen Weltfotos.
+- Für `Drachen & Leinen`: vorhandenes `wind-drachen.webp` (Luftdrachen), ausdrücklich keine unpassende Outdoor-Ausrüstung. Keine Doppelung mit dem separaten Sportdrachen-Foto der Beitragsvorschau.
+- Alle bestehenden Bannerplätze, Amazon-Button, Farbverlauf, Größe (Kategorie 6:1 / mobil 4,2:1), Tracking, Provider-Prioritäten, Registerbanner und Artikelbanner unverändert. CSS-Versionskennung auf 0.1.27 erhöht.
+- **Geprüft:** Quellpaket 0.1.26 SHA-verifiziert; ZIP-CRC PASS, PHP 24/24 PASS, reale PHP-Funktionstests „Sportdrachen-Banner mit Foto“ PASS. Alle 3.376 Leaf-Kategorien lassen sich einer der acht Welten zuordnen. Browser-Simulation auf echter Sportdrachen-Kategorieseite bei 1440, 900, 390 und 360px PASS; originales Amazon-Badge erhalten. Actions 42463656841/42463793782.
+- **Echte Installation und anschließende WordPress-Abnahme offen.**

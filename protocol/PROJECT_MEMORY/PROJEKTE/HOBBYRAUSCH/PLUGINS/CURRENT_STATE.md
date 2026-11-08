@@ -1,5 +1,9 @@
 # HOBBY DEPOT – PLUGINBÜRO – AKTUELLER BESTAND
 
+**Aktuell am 08.11.2026: gemeinsamer Bildfix HD009 0.1.27 + HD003 1.50.803.** HD009 nutzt auf echten WordPress-Kategoriearchiven die vorhandene 3.376er-Leaf-Zuordnung aus HD003, selbst wenn WordPress keine Elternkategorie setzt. Der Banner zeigt das thematisch passende genehmigte Foto der Hobbygruppe; Sportdrachen → Wind-&-Drachen-Foto statt bildlosem bzw. fachfremdem Banner. Als Rückfall bleiben die acht Weltbilder. HD003 zeigt in seinen drei vorhandenen Beitragskachel-Varianten bei fehlendem Beitragsbild ein passendes, vorhandenes Hobbyfoto; vorhandene Beitragsbilder haben Vorrang. Sportdrachen-Vorschaubild: separates Delta-Drachen-Foto. **Keine neuen Bilder generiert, keine neuen Bannerplätze, keine Änderung an Partner-/Produktlogik.** Beide vollständigen ZIPs gebaut, ZIP/PHP 24+13 PASS, echte PHP-Funktionstests PASS, Zuordnung 3.376/3.376 PASS, Browser-Simulation bei 1440/900/390/360 PASS. Die beiden neuen ZIPs sind gültige Downloads; **Installation und echte Sichtabnahme noch offen**. Bisherige Angaben zu 0.1.26 bzw. 1.50.798 darunter historisch.
+
+
+
 **Aktueller Stand 08.11.2026: HD009 Affiliate-Zentrale 0.1.26**, Download `HOBBY_DEPOT_AFFILIATE_HD009_0.1.26.zip`, 1.553.271 Bytes, SHA-256 `a627e35a9e8d20f34616c1ead4bc1b7d180e40a8f74abb985c7311b60dcfcd8f`. Einzige Abweichung von 0.1.25: zu großer Abstand **oberhalb des im Hobbyregister-Text eingebauten Querbanners** auf Desktop und Mobil korrigiert (47→17 bzw. 57→11px gerundet). Acht Themenfotos, Kategoriebanner-Höhe, Amazon-Button und alle Ausspielregeln unverändert. Voll-ZIP 41/41, PHP 24/24 und Browser-Test zwei Registerprofile / vier Breiten PASS (Action 42461816837). Live-Installation und optische Abnahme 0.1.26 offen; Beitragsbannerdesign später separat entscheiden. Frühere HD009-Stände unten sind historisch.
 
 
