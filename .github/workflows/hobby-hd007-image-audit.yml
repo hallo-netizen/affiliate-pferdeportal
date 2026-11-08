@@ -1,0 +1,216 @@
+name: HD007 1.2.21 image frontend source audit
+on:
+  push:
+    branches:
+      - hobbyroom/hd006-2810-current-documentation-20261108
+    paths:
+      - .github/workflows/hobby-hd007-image-audit.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect exact latest HD007 image map, resolver and sample names
+        run: |
+          python3 - <<'PY'
+          import pathlib,zipfile,json,re,hashlib
+          p=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip')
+          print('SOURCE_SHA',hashlib.sha256(p.read_bytes()).hexdigest(),'SIZE',p.stat().st_size)
+          with zipfile.ZipFile(p) as z:
+            print('ZIP_ENTRIES',len(z.namelist()))
+            names=z.namelist()
+            print('SOURCE_PATHS',[n for n in names if 'class-hd-hobbyregister-' in n or 'hobby-image-map' in n])
+            for n in names:
+              if not n.endswith('.php') or not ('class-hd-hobbyregister-frontend' in n or 'class-hd-hobbyregister-core' in n):continue
+              s=z.read(n).decode('utf-8','replace')
+              print('CODE',n,len(s))
+              lines=s.splitlines()
+              for i,line in enumerate(lines):
+                if re.search(r'function (?:record_image|image_entry|render_|article|records|find_|hero)',line):
+                  print('FUNC',i+1,line[:180])
+                  if 'function record_image' in line or 'function image_entry' in line:
+                    for j in range(max(0,i-5),min(len(lines),i+110)):print(f'RESOLVER {j+1:04d} {lines[j][:340]}')
+            for n in names:
+              if n.endswith('hobby-image-map-v1.json'):
+                v=json.loads(z.read(n))
+                print('MAP_TYPE',type(v).__name__,'TOP_KEYS',list(v)[:12])
+                records=v.get('entries',v.get('items',v)) if isinstance(v,dict) else v
+                print('MAP_RECORDS',len(records))
+                if isinstance(records,dict):
+                  for k,row in records.items():
+                    if any(s in str(k).lower() for s in ['aeroponik']):
+                      print('MAP_MATCH',k,json.dumps(row,ensure_ascii=False)[:1700])
+                elif isinstance(records,list):
+                  for row in records:
+                    if any(x in json.dumps(row,ensure_ascii=False).lower() for x in ['batik','airbrush-modell','3d-bogen']):
+                      print('MAP_MATCH',json.dumps(row,ensure_ascii=False)[:1700])
+          PY
+
+      - name: Read exact HD003 category-page image resolver and Airbrush mapping
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile,re
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          with zipfile.ZipFile(p) as z:
+            files=[n for n in z.namelist() if n.endswith('.php') and not any(t in n.lower() for t in ('vendor/','tests/'))]
+            print('HD003_PHP_TOTAL',len(files))
+            for n in files:
+              s=z.read(n).decode('utf8','replace')
+              lines=s.splitlines()
+              hits=[i for i,l in enumerate(lines) if re.search(r'(?i)airbrush|aeroponik|function (?:category_image|hero_image|.*master.*image|.*photo.*url)|hobbyregister_image_override',l)]
+              if len(hits)>220: hits=hits[:220]
+              if not hits: continue
+              print('FILE',n,'HITS',len(hits))
+              for i in hits:
+                print('MATCH',i+1,' '.join(lines[max(0,i-1):min(len(lines),i+2)])[:500])
+            paths=[n for n in z.namelist() if 'airbrush' in n.lower() or 'aeroponik' in n.lower() or 'batik' in n.lower()]
+            for n in paths[:120]:print('ASSET',n)
+          PY
+
+      - name: Read image-master selection exact code near resolver
+        run: |
+          python3 - <<'PY'
+          import zipfile
+          p='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip'
+          with zipfile.ZipFile(p) as z:
+            n=[n for n in z.namelist() if n.endswith('class-hobby-depot-profile-v150709.php')][0]
+            lines=z.read(n).decode('utf8','replace').splitlines()
+            for a,b in ((3925,4060),(4710,4850)):
+              for i in range(a-1,b):
+                print('EXACT',i+1,lines[i][:330])
+          PY
+
+      - name: Inspect current image center actual implementation
+        run: |
+          python3 - <<'PY'
+          import zipfile,re
+          p='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip'
+          with zipfile.ZipFile(p) as z:
+            n=[n for n in z.namelist() if n.endswith('class-hobby-depot-profile-v150709.php')][0]
+            lines=z.read(n).decode('utf8','replace').splitlines()
+            for i,l in enumerate(lines):
+              if ('class ' in l and i<95) or 'function hobby_image_center_v150769' in l or 'function bundled_hobby_master_v150759' in l:
+                print('SYMBOL',i+1,l[:180])
+                if 'function hobby_image_center_v150769' in l or 'function bundled_hobby_master_v150759' in l:
+                  for j in range(i,min(i+125,len(lines))):print('SOURCE',j+1,lines[j][:270])
+          PY
+
+      - name: Check Bonsai Landschaften original image and approval exact
+        run: |
+          python3 - <<'PY'
+          import zipfile,json,re
+          base='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/'
+          z=zipfile.ZipFile(base+'HD-007-HOBBYREGISTER-CORE/CURRENT.zip')
+          n=next(n for n in z.namelist() if n.endswith('hobby-image-map-v1.json'))
+          d=json.loads(z.read(n))
+          for k,v in d.items():
+            if 'bonsai' in k.lower(): print('BONSAI_HD007',k,json.dumps(v,ensure_ascii=False))
+          z2=zipfile.ZipFile(base+'HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          for n in z2.namelist():
+            if ('bonsai' in n.lower() or 'saikei' in n.lower()) and n.endswith(('.png','.webp','.jpg')):
+              print('BONSAI_HD003_ASSET',n)
+          for n in z2.namelist():
+            if n.endswith('.php') and ('profile' in n or 'template' in n):
+              txt=z2.read(n).decode('utf8','replace')
+              for line in txt.splitlines():
+                if re.search(r'bonsai-landschaften|bonsai-landscape|saikei',line,re.I) and len(line)<800:
+                  print('BONSAI_HD003_REF',n,line[:500])
+          PY
+
+      - name: Systematic 862 image-evidence inventory for editorial review
+        run: |
+          python3 - <<'PY'
+          import zipfile,json,collections,os,hashlib
+          base='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/'
+          with zipfile.ZipFile(base+'HD-007-HOBBYREGISTER-CORE/CURRENT.zip') as reg, zipfile.ZipFile(base+'HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip') as design:
+            a=json.loads(reg.read(next(n for n in reg.namelist() if n.endswith('hobby-image-map-v1.json'))))
+            d=set(design.namelist())
+            hd7=set(reg.namelist())
+            counts=collections.Counter()
+            legacy_paths=collections.Counter()
+            statuses=collections.Counter()
+            failures=[]
+            rows=[]
+            for id,item in a.items():
+              slug=id[6:] if id.startswith('hobby:') else id
+              source=item.get('source','')
+              path=item.get('path','')
+              status=item.get('status','')
+              prod=item.get('production_status','')
+              explicit=status=='FINAL_MASTER_VERIFIED' or prod=='DONE'
+              special='affiliate-portal-template-kit/assets/hobby-depot-v150759/hobby-masters/'+slug+'.webp'
+              old='affiliate-portal-template-kit/assets/hobby-depot-v150758/hobby-masters/'+slug+'.webp'
+              newer='affiliate-portal-template-kit/assets/hobby-depot-v150753/batik-hero.webp'
+              dedicated=special in d or old in d or (slug=='batik' and newer in d)
+              original_exists=(('affiliate-portal-template-kit/assets/'+path in d) if source=='hd003' else ('hd-hobbyregister-core/assets/'+path in hd7 or 'hd-hobbyregister-core/'+path in hd7) if source=='hd007' else False)
+              if path:legacy_paths[path]+=1
+              statuses[status]+=1
+              if explicit and original_exists:bucket='verified_original'
+              elif dedicated:bucket='own_design_master'
+              elif path and original_exists:bucket='present_visual_review_needed'
+              elif path:bucket='path_not_confirmed_in_archive'
+              else:bucket='missing'
+              counts[bucket]+=1
+              if bucket=='path_not_confirmed_in_archive':failures.append([id,source,path])
+              row={'id':id,'source':source,'path':path,'status':status,'production_status':prod,'legacy_semantic':item.get('core_audit_semantic_fit',''),'legacy_verdict':item.get('core_audit_final_verdict',''),'bucket':bucket,'original_exists':original_exists,'dedicated_master':dedicated}
+              rows.append(row)
+            print('INVENTORY_TOTAL',len(rows))
+            print('INVENTORY_BUCKETS',json.dumps(counts,sort_keys=True))
+            print('ORIGINAL_STATUSES_TOP',json.dumps(statuses.most_common(12)))
+            print('SHARED_PATHS_2PLUS',sum(c>1 for c in legacy_paths.values()),'HOBBIES_SHARING',sum(c for c in legacy_paths.values() if c>1))
+            print('MISSING_FILE_EXAMPLES',json.dumps(failures[:25],ensure_ascii=False))
+            print('BONSAI_LANDSCHAFTEN',json.dumps(next(x for x in rows if x['id']=='hobby:bonsai-landschaften'),ensure_ascii=False))
+            print('ARDUINO',json.dumps(next(x for x in rows if x['id']=='hobby:arduino'),ensure_ascii=False))
+            print('AIRBRUSH',json.dumps(next(x for x in rows if x['id']=='hobby:airbrush'),ensure_ascii=False))
+            print('AEROPONIK',json.dumps(next(x for x in rows if x['id']=='hobby:aeroponik'),ensure_ascii=False))
+            with open('/tmp/hobby-image-inventory.json','w') as f:json.dump(rows,f,ensure_ascii=False,indent=1)
+            print('INVENTORY_SHA256',hashlib.sha256(open('/tmp/hobby-image-inventory.json','rb').read()).hexdigest())
+          PY
+
+      - name: Verify every image file readable and source resolution against hero requirement
+        run: |
+          python3 -m pip -q install Pillow
+          python3 - <<'PY'
+          from PIL import Image,UnidentifiedImageError
+          from io import BytesIO
+          import json,zipfile,collections
+          root='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/'
+          with zipfile.ZipFile(root+'HD-007-HOBBYREGISTER-CORE/CURRENT.zip') as reg,zipfile.ZipFile(root+'HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip') as design:
+            data=json.loads(reg.read(next(n for n in reg.namelist() if n.endswith('hobby-image-map-v1.json'))))
+            dz=set(design.namelist());rz=set(reg.namelist())
+            image_results={};counts=collections.Counter();bad=[];unique=set();reused=collections.Counter()
+            for id,item in data.items():
+              p=item.get('path','');src=item.get('source','')
+              if src=='hd003':z=design;f='affiliate-portal-template-kit/assets/'+p
+              elif src=='hd007':
+                z=reg;f=next((x for x in ('hd-hobbyregister-core/assets/'+p,'hd-hobbyregister-core/'+p) if x in rz),'')
+              else:z=None;f=''
+              k=(src,f)
+              if k not in image_results:
+                try:
+                  if not z or not f:raise ValueError('missing file')
+                  raw=z.read(f)
+                  im=Image.open(BytesIO(raw))
+                  im.verify()
+                  im=Image.open(BytesIO(raw));dim=im.size;fmt=im.format
+                  image_results[k]=(dim[0],dim[1],fmt,None)
+                except Exception as exc:image_results[k]=(0,0,'',str(exc))
+              w,h,fmt,err=image_results[k]
+              counts['verified_records']+=1
+              if err:counts['invalid_records']+=1;bad.append((id,str(err)))
+              else:
+                counts['valid_records']+=1
+                if w>=1500 and h>=1000:counts['resolution_master_1500_1000_or_more']+=1
+                elif w>=900 and h>=300:counts['resolution_display_900_300']+=1
+                else:counts['resolution_small']+=1
+                counts['format_'+fmt.lower()]+=1
+              reused[f]+=1
+            print('IMAGE_FILE_INTEGRITY',json.dumps(counts,sort_keys=True))
+            print('UNIQUE_FILE_COUNT',len(image_results))
+            print('INVALID_SAMPLE',json.dumps(bad[:20]))
+            print('UNIQUE_REUSED_2PLUS',sum(v>1 for v in reused.values()))
+          PY
