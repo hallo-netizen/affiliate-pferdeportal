@@ -1,0 +1,15 @@
+name: HD028 exact PHP all-tier category image tests
+on:
+  push:
+    branches: [hobbyroom/hd009-028-universal-category-photo-20261108]
+    paths:
+      - ops/hobby028/test.py
+      - .github/workflows/hd028-test.yml
+permissions: {contents: read}
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assert 8 worlds, all group photos, 395 hobby pages and 3376 leaves, execute original PHP
+        run: python3 ops/hobby028/test.py
