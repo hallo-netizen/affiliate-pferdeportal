@@ -1,0 +1,38 @@
+name: HD009 article-product slot and idealo image source
+on:
+  push:
+    branches: [hobbyroom/hd009-029-article-amazon-card-20261108]
+    paths: [.github/workflows/hd009-029-article-slots.yml]
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read exact article hybrid render, existing image product sources, table schema
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import re
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          with ZipFile(p) as z:
+            main=z.read('affiliate-portal-router/hobby-depot-affiliate-router.php').decode()
+            methods=[(m.group(1),m.start()) for m in re.finditer(r'(?:private|public|protected)\s+(?:static\s+)?function\s+([a-z_0-9]+)\s*\(',main)]
+            names=['filter_the_content','auto_inject_article_hybrid','article_hybrid_enabled','render_affiliate_slot_for_context','render_affiliate_slot','get_content_context','article_hybrid_settings','article_hybrid_defaults','select_campaign_for_slot','render_product_slot','slot_required_creative_type']
+            for name in names:
+              matches=[(x,pos) for x,pos in methods if x==name]
+              for i,(n,start) in enumerate(matches):
+                nexts=[pos for _,pos in methods if pos>start]
+                stop=min(nexts) if nexts else len(main)
+                print('METHOD',name,'POS',start,'SIZE',stop-start,'TEXT',re.sub(r'\s+',' ',main[start:min(stop,start+8000)])[:8000])
+            for name in z.namelist():
+              if name.endswith('trait-ppar-idealo.php'):
+                s=z.read(name).decode('utf8','replace')
+                print('IDEALO_FILE',name,'len',len(s))
+                for needle in ['image_url','product_image','image','gtin','asin','article','post_bottom_products']:
+                  matches=list(re.finditer(re.escape(needle),s,re.I))
+                  print('IDEALO_KEYWORD',needle,'count',len(matches))
+                  for m in matches[:4]:
+                    print('IDEALO_HIT',needle,re.sub(r'\s+',' ',s[max(0,m.start()-240):m.start()+460])[:690])
+          PY
