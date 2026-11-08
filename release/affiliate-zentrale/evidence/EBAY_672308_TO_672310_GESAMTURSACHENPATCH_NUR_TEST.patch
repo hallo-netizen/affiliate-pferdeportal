@@ -163,6 +163,11 @@ index e5c1169..8e0566b 100644
              }
              return;
          }
+@@ -1460,3 +1508,3 @@ trait PPAR_Ebay_Run_Trait {
+         foreach($invalid as $reason){
+-            if(sanitize_key((string)$reason)!=='source_stale'){return false;}
++            if(!in_array(sanitize_key((string)$reason),array('source_stale','source_hash_mismatch'),true)){return false;}
+         }
 @@ -1599,6 +1647,25 @@ trait PPAR_Ebay_Run_Trait {
       * safely selected candidate exists but public coverage is still missing, the
       * state is an invariant/materialization failure and remains fail-closed.
