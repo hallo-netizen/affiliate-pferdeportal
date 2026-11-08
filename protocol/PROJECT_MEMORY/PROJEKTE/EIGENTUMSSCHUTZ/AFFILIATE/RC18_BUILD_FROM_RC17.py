@@ -9,7 +9,8 @@ path=root/'PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
 source=path.read_bytes()
 digest=lambda b:hashlib.sha256(b).hexdigest()
 old_zip_sha='c1b7be31270c9b670787e70bc005812c69bfa9431580b45d86e05feac1251b90'
-assert digest(source)==old_zip_sha,'Source changed: refuse to overwrite unknown plugin'
+official_zip_sha='b22e4d49a56b25e3fc2e46c9bdd0ccbd7c6c16eb7c1f6bb48ae005db0ba50a03'
+assert digest(source) in (old_zip_sha,official_zip_sha),'Source changed: refuse to overwrite unknown plugin'
 def rep(s,old,new,count=1):
     assert s.count(old)==count,('Mismatch',old[:110],s.count(old))
     return s.replace(old,new)
