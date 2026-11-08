@@ -1,0 +1,100 @@
+diff --git a/affiliate-portal-router/includes/trait-ppar-ebay.php b/affiliate-portal-router/includes/trait-ppar-ebay.php
+--- a/affiliate-portal-router/includes/trait-ppar-ebay.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay.php
+@@ -1341,5 +1341,5 @@ BUSINESS_ONLY
+             'delivery_country' => 'DE',
+             'delivery_postal_code' => '',
+-            'private_enabled' => true,
++            'private_enabled' => false,
+             'business_enabled' => true,
+             'private_parent_term_id' => 0,
+@@ -1434,10 +1434,10 @@ BUSINESS_ONLY
+         $out['delivery_country'] = 'DE';
+         $out['delivery_postal_code'] = substr(preg_replace('/[^0-9A-Za-z -]/', '', (string) ($settings['delivery_postal_code'] ?? '')), 0, 12);
+-        $out['private_enabled'] = !empty($settings['private_enabled']);
++        $out['private_enabled'] = false; // BUSINESS-only: old settings never reactivate PRIVATE.
+         $out['business_enabled'] = !empty($settings['business_enabled']);
+         $out['private_parent_term_id'] = absint($settings['private_parent_term_id'] ?? 0);
+         $out['private_root_term_id'] = absint($settings['private_root_term_id'] ?? 0);
+         $out['private_post_status'] = 'draft';
+-        $out['private_auto_publish'] = !empty($settings['private_auto_publish']);
++        $out['private_auto_publish'] = false;
+         $out['private_listing_author_id'] = absint($settings['private_listing_author_id'] ?? 0);
+         $out['api_terms_confirmed'] = !empty($settings['api_terms_confirmed']);
+@@ -1516,5 +1516,5 @@ BUSINESS_ONLY
+         $private_enabled = array_key_exists('private_enabled',$settings) ? !empty($settings['private_enabled']) : true;
+         $business_enabled = array_key_exists('business_enabled',$settings) ? !empty($settings['business_enabled']) : true;
+-        if ($seller_type === 'INDIVIDUAL') { return $private_enabled; }
++        if ($seller_type === 'INDIVIDUAL') { return false; }
+         if ($seller_type === 'BUSINESS') { return $business_enabled; }
+         return false;
+@@ -1525,5 +1525,5 @@ BUSINESS_ONLY
+         $scope = sanitize_key((string)$scope);
+         if (!in_array($scope, array('all','private','business'), true)) { return ''; }
+-        $private = array_key_exists('private_enabled',$settings) ? !empty($settings['private_enabled']) : true;
++        $private = false;
+         $business = array_key_exists('business_enabled',$settings) ? !empty($settings['business_enabled']) : true;
+         if ($scope === 'private') { return $private ? 'private' : ''; }
+@@ -1540,5 +1540,5 @@ BUSINESS_ONLY
+         $column = $alias === '' ? 'seller_account_type' : $alias . '.seller_account_type';
+         $parts = array();
+-        $private_enabled = array_key_exists('private_enabled',$settings) ? !empty($settings['private_enabled']) : true;
++        $private_enabled = false;
+         $business_enabled = array_key_exists('business_enabled',$settings) ? !empty($settings['business_enabled']) : true;
+         if ($private_enabled) { $parts[] = "{$column}='INDIVIDUAL'"; }
+@@ -5494,5 +5494,6 @@ BUSINESS_ONLY
+      * freshness schedules verification but never hides Last-Known-Good inventory.
+      */
+-    private function ebay_public_listing_post($post_id) {
++    private function ebay_public_listing_post($post_id) {
++        return null; // Private eBay route retired.
+         $post = $this->ebay_admin_preview_listing_post($post_id);
+         if (!$post || (string) ($post->post_status ?? '') !== 'publish') { return null; }
+diff --git a/affiliate-portal-router/includes/trait-ppar-ebay-run.php b/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+--- a/affiliate-portal-router/includes/trait-ppar-ebay-run.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+@@ -66,5 +66,6 @@ BUSINESS_ONLY
+     }
+ 
+-    private function ebay_public_checkpoint_private_ids($checkpoint = null) {
++    private function ebay_public_checkpoint_private_ids($checkpoint = null) {
++        return array(); // Legacy PRIVATE ids cannot be delivered.
+         if (!is_array($checkpoint)) { $checkpoint = $this->ebay_public_checkpoint_load(); }
+         if (!$this->ebay_public_checkpoint_is_safe($checkpoint)) { return array(); }
+@@ -80,5 +81,6 @@ BUSINESS_ONLY
+     }
+ 
+-    private function ebay_public_checkpoint_allows_private_listing($listing_id) {
++    private function ebay_public_checkpoint_allows_private_listing($listing_id) {
++        return false;
+         $checkpoint = $this->ebay_public_checkpoint_load();
+         if (!$this->ebay_public_checkpoint_is_safe($checkpoint)) { return true; }
+@@ -333,5 +335,6 @@ BUSINESS_ONLY
+         if (!$this->ebay_run_is_open($run)) { return false; }
+         $mode = sanitize_key((string)$mode);
+-        $candidate = is_array($run['checkpoint_candidate'] ?? null) ? $run['checkpoint_candidate'] : array('business_campaign_ids'=>array(),'private_listing_ids'=>array());
++        $candidate = is_array($run['checkpoint_candidate'] ?? null) ? $run['checkpoint_candidate'] : array('business_campaign_ids'=>array(),'private_listing_ids'=>array());
++        $candidate['private_listing_ids']=array();
+         $scope = sanitize_key((string)($selection['selection_scope'] ?? $this->ebay_run_selection_scope($run)));
+         if ($scope !== 'private') {
+@@ -397,5 +400,5 @@ BUSINESS_ONLY
+             'run_uuid'=>sanitize_text_field((string)($run['run_uuid'] ?? '')),
+             'business_campaign_ids'=>(array)($candidate['business_campaign_ids'] ?? array()),
+-            'private_listing_ids'=>(array)($candidate['private_listing_ids'] ?? array()),
++            'private_listing_ids'=>array(),
+             'verification'=>array('business'=>$business,'private'=>$private),
+         );
+@@ -860,5 +863,5 @@ BUSINESS_ONLY
+     private function ebay_run_selection_scope($run) {
+         $routes = is_array($run['config_snapshot']['seller_routes'] ?? null) ? $run['config_snapshot']['seller_routes'] : array();
+-        $private = !empty($routes['private']);
++        $private = false; // BUSINESS-only, also for prior run snapshots.
+         $business = !empty($routes['business']);
+         return $private && $business ? 'all' : ($private ? 'private' : ($business ? 'business' : ''));
+@@ -1238,5 +1241,5 @@ BUSINESS_ONLY
+ 
+     private function ebay_run_verify_private_public($settings, $allowed_listing_ids = null) {
+-        if(empty($settings['private_enabled'])){return array('status'=>'disabled','public'=>0,'invalid'=>array());}
++        return array('status'=>'disabled','public'=>0,'invalid'=>array()); // Private seller route retired.
+         global $wpdb;$invalid=array();$public=0;$cap=min(250,max(1,absint($settings['private_active_cap']??250)));
+         $allowed_map=is_array($allowed_listing_ids)?array_fill_keys(array_values(array_filter(array_map('absint',$allowed_listing_ids))),true):null;
