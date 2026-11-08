@@ -70,3 +70,16 @@ jobs:
             paths=[n for n in z.namelist() if 'airbrush' in n.lower() or 'aeroponik' in n.lower() or 'batik' in n.lower()]
             for n in paths[:120]:print('ASSET',n)
           PY
+
+      - name: Read image-master selection exact code near resolver
+        run: |
+          python3 - <<'PY'
+          import zipfile
+          p='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip'
+          with zipfile.ZipFile(p) as z:
+            n=[n for n in z.namelist() if n.endswith('class-hobby-depot-profile-v150709.php')][0]
+            lines=z.read(n).decode('utf8','replace').splitlines()
+            for a,b in ((3925,4060),(4710,4850)):
+              for i in range(a-1,b):
+                print('EXACT',i+1,lines[i][:330])
+          PY
