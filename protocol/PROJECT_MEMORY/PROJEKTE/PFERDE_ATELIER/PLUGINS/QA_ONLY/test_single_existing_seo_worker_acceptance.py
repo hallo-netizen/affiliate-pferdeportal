@@ -367,13 +367,6 @@ def run_io_selftest(original_100_path):
 if __name__ == "__main__":
     if len(sys.argv) == 3 and sys.argv[1] == "--selftest":
         selftest(sys.argv[2])
-    elif len(sys.argv) == 3:
-        original = load_original(sys.argv[1])
-        result = assess(original, json.loads(Path(sys.argv[2]).read_text(encoding="utf-8")))
-        for issue in result:
-            print("FAIL", issue)
-        print("REAL_EXTERNAL_WORKER_QUALITY", "PASS" if not result else "NOT_APPROVED")
-        raise SystemExit(1 if result else 0)
     elif len(sys.argv) == 3 and sys.argv[1] == "--io-selftest":
         run_io_selftest(sys.argv[2])
     elif len(sys.argv) == 3 and sys.argv[1] == "--preflight":
@@ -390,5 +383,11 @@ if __name__ == "__main__":
         print("ONE_TIME_SEO_OWNER_ACCEPTANCE", "TECHNICAL_AND_FIXED_CASES_PASS" if not issues else "NOT_APPROVED")
         print("REAL_STAGING_END_TO_END", "NOT_TESTED_BY_THIS_SCRIPT")
         raise SystemExit(bool(issues))
+    elif len(sys.argv) == 3 and not sys.argv[1].startswith("--"):
+        original = load_original(sys.argv[1])
+        result = assess(original, json.loads(Path(sys.argv[2]).read_text(encoding="utf-8")))
+        for issue in result: print("FAIL",issue)
+        print("REAL_EXTERNAL_WORKER_QUALITY", "FIXED_TEST_CASES_PASS" if not result else "NOT_APPROVED")
+        raise SystemExit(bool(result))
     else:
         raise SystemExit(__doc__)
