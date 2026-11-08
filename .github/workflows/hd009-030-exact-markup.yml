@@ -20,7 +20,7 @@ jobs:
             src={x:z.read(x).decode('utf8','replace') for x in ['affiliate-portal-router/hobby-depot-affiliate-router.php','affiliate-portal-router/includes/trait-ppar-article-plans.php','affiliate-portal-router/includes/class-hdar-amazon-start.php']}
             for name,s in src.items():
               print('FILE',name,'LEN',len(s))
-              for needle in ['HDAR_Amazon_Start::bootstrap','add_filter(\\'the_content\\'','add_filter("the_content"','filter_the_content','article_plan_render_products(','article_plan_render_product_card_markup(','hdar_launch_public_campaign_allowed(','render_article_cards(']:
+              for needle in ['HDAR_Amazon_Start::bootstrap','add_filter(','add_filter("the_content"','filter_the_content','article_plan_render_products(','article_plan_render_product_card_markup(','hdar_launch_public_campaign_allowed(','render_article_cards(']:
                 matches=list(re.finditer(re.escape(needle),s))
                 print('MATCHES',name.split('/')[-1],needle,len(matches))
                 for m in matches[:4]:
