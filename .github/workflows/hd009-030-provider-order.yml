@@ -1,0 +1,85 @@
+name: HD009 actual provider cards versus Amazon fallback ordering
+on:
+  push:
+    branches: [hobbyroom/hd009-030-provider-images-article-cards-20261108]
+    paths: [.github/workflows/hd009-030-provider-order.yml]
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect existing eBay/idealo picture validation and article rendering contract
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import re
+          path=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          with ZipFile(path) as z:
+            names=['affiliate-portal-router/hobby-depot-affiliate-router.php',
+              'affiliate-portal-router/includes/trait-ppar-article-plans.php',
+              'affiliate-portal-router/includes/trait-ppar-idealo.php',
+              'affiliate-portal-router/includes/trait-ppar-ebay.php',
+              'affiliate-portal-router/includes/class-hdar-amazon-start.php']
+            for name in names:
+              s=z.read(name).decode('utf8','replace')
+              funcs=[(m.group(1),m.start()) for m in re.finditer(r'(?:public|private|protected)\s+(?:static\s+)?function\s+([A-Za-z0-9_]+)\s*\(',s)]
+              focus={
+                'trait-ppar-article-plans.php':['article_plan_apply_to_content','article_plan_build_slot_html','article_plan_placements','article_plan_campaign_publicly_usable','article_plan_product_dedupe_key','article_product_quality_report'],
+                'trait-ppar-idealo.php':['multiprovider_runtime_image_url','idealo_direct_image_url','idealo_campaigns_should_be_active','idealo_provider_status'],
+                'trait-ppar-ebay.php':['ebay_business_image_url','ebay_render','ebay_campaign_image_url','ebay_verified_business_product'],
+                'class-hdar-amazon-start.php':['render_article_cards','render_slot','product_card','verified_image'],
+                'hobby-depot-affiliate-router.php':['filter_the_content','article_hybrid_defaults','auto_inject_article_hybrid','render_affiliate_slot_for_context']
+              }
+              selected=focus.get(name.split('/')[-1],[])
+              for method in selected:
+                match=next((pos for f,pos in funcs if f==method),None)
+                if match is None:continue
+                ends=[pos for _,pos in funcs if pos>match];stop=min(ends) if ends else len(s)
+                print('METHOD',name.split('/')[-1],method,re.sub(r'\s+',' ',s[match:min(stop,match+7000)])[:7000])
+              if name.endswith('hobby-depot-affiliate-router.php') or name.endswith('trait-ppar-article-plans.php'):
+                for term in ['article_plan_apply_to_content', "post_bottom_products", "HDAR_Amazon_Start::render_article_cards"]:
+                  matches=list(re.finditer(re.escape(term),s))
+                  for m in matches[:7]:
+                    print('HOOK_OR_SLOT',name.split('/')[-1],term,re.sub(r'\s+',' ',s[max(0,m.start()-330):m.start()+610])[:940])
+              if name.endswith('trait-ppar-ebay.php'):
+                for needle in ['image_url','imageUrl','image', 'approved', 'BUSINESS']:
+                  matches=list(re.finditer(re.escape(needle),s,re.I))
+                  print('EBAY_COUNT',needle,len(matches))
+                  if needle == 'image_url':
+                    for m in matches[:6]:print('EBAY_IMAGE',re.sub(r'\s+',' ',s[max(0,m.start()-230):m.start()+440])[:670])
+          PY
+      - name: Install Chromium
+        run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - name: Read-only live product card status on three public pages
+        run: |
+          python3 - <<'PY'
+          from playwright.sync_api import sync_playwright
+          import json
+          pages=['https://www.hobby-depot.de/designtest-zweileiner-oder-vierleiner-hobby-depot/','https://www.hobby-depot.de/category/sportdrachen-drachen-leinen/','https://www.hobby-depot.de/bewegen/wind-drachen/sportdrachen/']
+          with sync_playwright() as p:
+            browser=p.chromium.launch(headless=True,args=['--no-sandbox'])
+            for url in pages:
+              page=browser.new_page(viewport={'width':1440,'height':950})
+              response=page.goto(url,wait_until='domcontentloaded',timeout=36000)
+              page.wait_for_timeout(450)
+              d=page.evaluate("""()=>{
+                const d={title:document.title,empty:[],products:[],scripts:[]};
+                const sels=['.hdar-amazon-article-products','.hdar-amazon-photo-product',
+                  '.ppar-article-products','.ppar-article-product-card',
+                  '[data-ppar-slot="post_bottom_products"]',
+                  '[class*="product"] img',
+                  '[data-ppar-slot="post_inline_banner"]'];
+                for(const sel of sels){
+                  const nodes=[...document.querySelectorAll(sel)];
+                  d.products.push({sel,count:nodes.length,items:nodes.slice(0,3).map(x=>({html:x.outerHTML.slice(0,420),href:x.href||'',img:x.querySelector('img')?.src||''}))});
+                }
+                return d;
+              }""")
+              print('PUBLIC_CHECK',response.status if response else 0,url,json.dumps(d,ensure_ascii=False))
+              page.close()
+            browser.close()
+          PY
