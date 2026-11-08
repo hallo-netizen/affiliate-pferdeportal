@@ -23,14 +23,14 @@ STYLE=r"""
 /* HD003 1.50.804 – Hab & Bewahr article reading pattern, translated to
    Hobby Depot. Intentionally confined to the already-published design test.
    No global cascade to categories, register or unrelated single posts. */
-body.hd-article-hab-preview-v150804 .hd-article-kicker-v150789{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 .hd-article-kicker-v150789{
  display:none!important;
 }
-body.hd-article-hab-preview-v150804 .hd-article-heading-v150789{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 .hd-article-heading-v150789{
  padding:9px 0 17px!important;
  background:transparent!important;
 }
-body.hd-article-hab-preview-v150804 .hd-article-heading-v150789 h1{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 .hd-article-heading-v150789 h1{
  font-family:Montserrat,"Segoe UI",Arial,sans-serif!important;
  font-size:clamp(30px,2.55vw,36px)!important;
  font-weight:800!important;
@@ -38,24 +38,24 @@ body.hd-article-hab-preview-v150804 .hd-article-heading-v150789 h1{
  letter-spacing:-.025em!important;
  max-width:930px!important;
 }
-body.hd-article-hab-preview-v150804 .hd-article-photo-hero-v150789{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 .hd-article-photo-hero-v150789{
  height:clamp(240px,25vw,345px)!important;
 }
-body.hd-article-hab-preview-v150804 #content.site-content{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content.site-content{
  padding-top:20px!important;
 }
-body.hd-article-hab-preview-v150804 #content .row > main.col-sm-8.col-sm-offset-2{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .row > main.col-sm-8.col-sm-offset-2{
  float:none!important;
  flex:0 0 100%!important;
  width:100%!important;
  max-width:100%!important;
  margin-left:0!important;
 }
-body.hd-article-hab-preview-v150804 #content .post--single{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .post--single{
  width:100%!important;
  max-width:none!important;
 }
-body.hd-article-hab-preview-v150804 #content .post__text{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .post__text{
  width:100%!important;
  max-width:none!important;
  color:#27434a!important;
@@ -65,33 +65,33 @@ body.hd-article-hab-preview-v150804 #content .post__text{
  font-size:16px!important;
  line-height:1.7!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-body-grid-v150804{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-body-grid-v150804{
  display:grid!important;
  grid-template-columns:minmax(0,1fr) minmax(265px,292px)!important;
  gap:32px!important;
  align-items:start!important;
  width:100%!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804{min-width:0!important}
-body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804>p.hddemo-kicker{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804{min-width:0!important}
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804>p.hddemo-kicker{
  display:none!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 p{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 p{
  font-family:inherit!important;
  font-size:16px!important;
  line-height:1.72!important;
  margin:0 0 1.13em!important;
  letter-spacing:0!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804>p.has-large-font-size{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804>p.has-large-font-size{
  font-size:18px!important;
  font-weight:500!important;
  line-height:1.6!important;
  margin:0 0 21px!important;
  color:#345056!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 h2,
-body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 h2.wp-block-heading{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 h2,
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 h2.wp-block-heading{
  font-family:Montserrat,"Segoe UI",Arial,sans-serif!important;
  position:relative!important;
  font-size:23px!important;
@@ -102,7 +102,7 @@ body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 h2.wp-b
  padding:13px 0 0!important;
  margin:32px 0 13px!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 h2::before{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 h2::before{
  content:""!important;
  position:absolute!important;
  top:0!important;
@@ -112,7 +112,7 @@ body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 h2::bef
  border-radius:2px!important;
  background:#2f9a9a!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 h3{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 h3{
  font-family:Montserrat,"Segoe UI",Arial,sans-serif!important;
  font-size:19px!important;
  line-height:1.35!important;
@@ -121,60 +121,60 @@ body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 h3{
  padding:0!important;
  color:#1c4148!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 .wp-block-group h3{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 .wp-block-group h3{
  margin:0 0 12px!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 ul,
-body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 ol{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 ul,
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 ol{
  margin:12px 0 22px!important;
  padding-left:25px!important;
  font-size:16px!important;
  line-height:1.65!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 li{margin-bottom:8px!important}
-body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 .wp-block-quote{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 li{margin-bottom:8px!important}
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 .wp-block-quote{
  margin:23px 0!important;
  padding:17px 20px!important;
  background:#edf5f3!important;
  border-left:4px solid #479e93!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 .wp-block-image,
-body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 .wp-block-table{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 .wp-block-image,
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 .wp-block-table{
  max-width:100%!important;
  margin:22px 0!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 table{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 table{
  width:100%!important;
  border-collapse:collapse!important;
  font-size:14px!important;
  line-height:1.45!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 th{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 th{
  background:#214d54!important;
  color:#fff!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 th,
-body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 td{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 th,
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 td{
  padding:10px 12px!important;
  border:1px solid #d7e2de!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 .wp-block-table{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 .wp-block-table{
  overflow-x:auto!important;
  -webkit-overflow-scrolling:touch!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-sidebar-v150804{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-sidebar-v150804{
  min-width:0!important;
  display:flex!important;
  flex-direction:column!important;
  gap:18px!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-sidebar-card-v150804{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-sidebar-card-v150804{
  border:1px solid #dce8e5!important;
  background:#f4f8f6!important;
  border-radius:5px!important;
  padding:20px 20px 22px!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-sidebar-card-v150804 h2{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-sidebar-card-v150804 h2{
  margin:0 0 12px!important;
  padding:0!important;
  color:#1d4146!important;
@@ -183,66 +183,66 @@ body.hd-article-hab-preview-v150804 #content .hd-article-sidebar-card-v150804 h2
  font-weight:750!important;
  line-height:1.3!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-sidebar-card-v150804 a{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-sidebar-card-v150804 a{
  color:#166b77!important;
  font-size:14px!important;
  line-height:1.48!important;
  font-weight:650!important;
  text-decoration:none!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-sidebar-card-v150804 a:hover{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-sidebar-card-v150804 a:hover{
  text-decoration:underline!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-sidebar-card-v150804 ul{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-sidebar-card-v150804 ul{
  list-style:none!important;
  margin:0!important;
  padding:0!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-sidebar-card-v150804 li{
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-sidebar-card-v150804 li{
  margin:0!important;
  border-top:1px solid #e0e9e5!important;
  padding:10px 0!important;
 }
-body.hd-article-hab-preview-v150804 #content .hd-article-sidebar-card-v150804 li:first-child{border-top:0!important;padding-top:0!important}
-body.hd-article-hab-preview-v150804 #content .hd-article-sidebar-card-v150804 li:last-child{padding-bottom:0!important}
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-sidebar-card-v150804 li:first-child{border-top:0!important;padding-top:0!important}
+body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-sidebar-card-v150804 li:last-child{padding-bottom:0!important}
 @media(max-width:920px){
- body.hd-article-hab-preview-v150804 #content .hd-article-body-grid-v150804{
+ body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-body-grid-v150804{
   grid-template-columns:minmax(0,1fr)!important;
   gap:20px!important;
  }
- body.hd-article-hab-preview-v150804 #content .hd-article-sidebar-v150804{
+ body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-sidebar-v150804{
   display:grid!important;
   grid-template-columns:repeat(auto-fit,minmax(230px,1fr))!important;
   gap:14px!important;
  }
 }
 @media(max-width:760px){
- body.hd-article-hab-preview-v150804 .hd-article-heading-v150789 h1{
+ body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 .hd-article-heading-v150789 h1{
   font-size:clamp(24px,6.2vw,29px)!important;
   line-height:1.25!important;
  }
- body.hd-article-hab-preview-v150804 .hd-article-photo-hero-v150789{
+ body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 .hd-article-photo-hero-v150789{
   height:275px!important;
  }
- body.hd-article-hab-preview-v150804 #content.site-content{
+ body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content.site-content{
   padding-top:12px!important;
  }
- body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 p{
+ body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 p{
   font-size:16px!important;line-height:1.65!important;
  }
- body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804>p.has-large-font-size{
+ body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804>p.has-large-font-size{
   font-size:17px!important;line-height:1.57!important;
  }
- body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 h2{
+ body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 h2{
   font-size:21px!important;margin-top:28px!important;padding-top:12px!important;
  }
- body.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 h3{
+ body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-reading-v150804 h3{
   font-size:18px!important;
  }
- body.hd-article-hab-preview-v150804 #content .hd-article-sidebar-v150804{
+ body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-sidebar-v150804{
   display:flex!important;flex-direction:column!important;
  }
- body.hd-article-hab-preview-v150804 #content .hd-article-sidebar-card-v150804{
+ body.pftk-design-profile-hobby-depot.single-post.hd-article-hab-preview-v150804 #content .hd-article-sidebar-card-v150804{
   padding:18px!important;
  }
 }
