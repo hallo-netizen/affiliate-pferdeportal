@@ -1,0 +1,279 @@
+{
+  "project": "robotik",
+  "stage": "CANDIDATES_ONLY_NOT_WORDPRESS_PLAN",
+  "as_of": "2026-11-08",
+  "keyword_research_executed": false,
+  "wordpress_written": false,
+  "candidates": [
+    {
+      "candidate_id": "rk_cand_001",
+      "research_cluster": "Transport & Logistik",
+      "product_hypothesis": "Autonomer mobiler Transportroboter (AMR)",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_002",
+      "research_cluster": "Transport & Logistik",
+      "product_hypothesis": "Fahrerloses Transportfahrzeug (FTF)",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_003",
+      "research_cluster": "Transport & Logistik",
+      "product_hypothesis": "Palettentransportroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_004",
+      "research_cluster": "Transport & Logistik",
+      "product_hypothesis": "Kommissionierroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_005",
+      "research_cluster": "Industrie & Fertigung",
+      "product_hypothesis": "Schweißroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_006",
+      "research_cluster": "Industrie & Fertigung",
+      "product_hypothesis": "Palettierroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_007",
+      "research_cluster": "Industrie & Fertigung",
+      "product_hypothesis": "Lackierroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_008",
+      "research_cluster": "Industrie & Fertigung",
+      "product_hypothesis": "Maschinenbeschickungsroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_009",
+      "research_cluster": "Gastronomie & Besucherservice",
+      "product_hypothesis": "Servierroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_010",
+      "research_cluster": "Gastronomie & Besucherservice",
+      "product_hypothesis": "Hotel-Lieferroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_011",
+      "research_cluster": "Gastronomie & Besucherservice",
+      "product_hypothesis": "Empfangsroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_012",
+      "research_cluster": "Gastronomie & Besucherservice",
+      "product_hypothesis": "Telepräsenzroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_013",
+      "research_cluster": "Reinigung & Gebäude",
+      "product_hypothesis": "Gewerblicher Scheuersaugroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_014",
+      "research_cluster": "Reinigung & Gebäude",
+      "product_hypothesis": "Fensterreinigungsroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_015",
+      "research_cluster": "Reinigung & Gebäude",
+      "product_hypothesis": "Desinfektionsroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_016",
+      "research_cluster": "Landwirtschaft & Tierhaltung",
+      "product_hypothesis": "Melkroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_017",
+      "research_cluster": "Landwirtschaft & Tierhaltung",
+      "product_hypothesis": "Fütterungsroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_018",
+      "research_cluster": "Landwirtschaft & Tierhaltung",
+      "product_hypothesis": "Autonomer Unkrautroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_019",
+      "research_cluster": "Medizin & Pflege",
+      "product_hypothesis": "Operationsroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_020",
+      "research_cluster": "Medizin & Pflege",
+      "product_hypothesis": "Rehabilitationsroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_021",
+      "research_cluster": "Bau & Infrastruktur",
+      "product_hypothesis": "Mauerroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_022",
+      "research_cluster": "Bau & Infrastruktur",
+      "product_hypothesis": "Abbruchroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_023",
+      "research_cluster": "Inspektion & Sicherheit",
+      "product_hypothesis": "Kanalinspektionsroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_024",
+      "research_cluster": "Inspektion & Sicherheit",
+      "product_hypothesis": "Sicherheits-Patrouillenroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_025",
+      "research_cluster": "Haushalt & Garten",
+      "product_hypothesis": "Staubsaugroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_026",
+      "research_cluster": "Haushalt & Garten",
+      "product_hypothesis": "Mähroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    },
+    {
+      "candidate_id": "rk_cand_027",
+      "research_cluster": "Haushalt & Garten",
+      "product_hypothesis": "Poolreinigungsroboter",
+      "status": "UNCHECKED",
+      "verified_keyword_demand": false,
+      "confirmed_product_leaf": false,
+      "content_categories": [],
+      "article_intents": []
+    }
+  ]
+}

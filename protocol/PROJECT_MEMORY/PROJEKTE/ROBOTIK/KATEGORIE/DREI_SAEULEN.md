@@ -20,3 +20,8 @@ Nur **bewusste Links** zwischen Säulen, keine gemeinsame Importliste, keine get
 
 ## Leerstand
 CORE = 0 | EDITORIAL = 0 | DIRECTORY = 0. Die Fachentscheidung über konkrete Robotikbereiche steht noch aus.
+
+## Festlegung zu CORE (08.11.2026)
+Die oberste Ebene und Zwischenebenen sind WordPress-Seiten. Die letzte WordPress-Seite benennt einen konkreten Robotertyp als Produkt. Nur unter dieser Seite liegen *flache* WordPress-Inhaltskategorien (etwa Kosten, Fragen, Wartung, Auswahl), und unter ihnen einzelne Beiträge zu exakt diesem Robotertyp. Kein Artikel direkt in einer übergeordneten Sammelkategorie; keine automatische Standardliste von Leafs. Eine Rolle als Magazin-/Anzeigenrubrik verändert die Produkt-Hierarchie nicht.
+
+Die erste Marktfeldrecherche samt Produktkandidaten steht in `RECHERCHE/ERSTLANDKARTE_20261108.md`; diese Kandidaten sind KEIN freigegebener Zielbaum und werden noch nicht in WordPress synchronisiert.

@@ -17,3 +17,12 @@ Eigenständiges Robotik-Portal auf neuer WordPress-Seite vorbereiten. Alle drei 
 
 ## Statusgrenzen
 Konzept offen → Konzept geprüft → Umsetzung vorbereitet → lokale Tests → echte WordPress-Prüfung → ausdrücklich freigegeben. Vorher keine Behauptung eines Live-PASS.
+
+## Verbindliche Produkthierarchie (08.11.2026 – ausdrücklich bestätigt)
+Die CORE-Struktur folgt zwingend: **WordPress-Seite (Hauptwelt) → WordPress-Seite (Bereich) → ggf. weitere WordPress-Seiten → letzte WordPress-Seite = EIN konkret abgrenzbarer Robotertyp / ein spezifisches Produkt → darunter flache WordPress-`category`-Kategorien für dessen Informationsbedürfnisse → darunter einzelne WordPress-Beiträge**.
+
+Eine letzte Seite ist **keine allgemeine Produktfamilie**, sondern ein funktional eindeutig abgrenzbares Produkt/Robotertyp. Das ist keine Forderung nach einzelner Marke oder Modellnummer. Beispiel: „Roboter“ und „Logistikroboter“ sind zu breit; ein konkret funktional abgegrenzter Servierroboter oder Melkroboter kann ein Zielseitenkandidat sein. Ob AMR, FTS, Paletten- oder andere Transportroboter zu einem oder getrennten Zielseitenkandidaten gehören, entscheidet der dokumentierte Fach-/Suchabgleich.
+
+**Kategorien behandeln ausschließlich den Robotertyp der letzten Elternseite** und dürfen nicht untereinander verschachtelt werden. „Kosten“, „Vergleich“, „FAQ“, „Pflege“, „Zubehör“ etc. sind **nur Prüfideen**, niemals automatisch zu erzeugende Standardkategorien. Eine Kategorie wird nur angelegt, wenn dort mindestens drei sachlich unterschiedliche, realistische Beitragsabsichten existieren; kein „drei Synonyme = drei Beiträge“. Die Beiträge werden erst später geplant und geschrieben.
+
+**Doppelte Suchthemen vermeiden:** Jedes Produkt gehört zu genau einer letzten CORE-Seite; Einsatzorte können über Verlinkung auf dieselbe Seite führen. Magazin und Anzeigenmarkt haben eigene Rollen und werden nicht mechanisch gespiegelt.
