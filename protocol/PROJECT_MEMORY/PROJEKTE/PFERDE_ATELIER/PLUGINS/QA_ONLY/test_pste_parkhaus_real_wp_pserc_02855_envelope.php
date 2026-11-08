@@ -5,7 +5,7 @@
  * This is NOT PSERC installation or real user plan. No runtime classes shipped.
  * wp eval-file THIS_FILE FIXTURE_JSON
  */
-declare(strict_types=1);
+// WP-CLI eval-file uses eval() after WordPress load; no declare(strict_types) here.
 if(!defined('ABSPATH')||!class_exists('PSTE_Mini_Workflow'))
     throw new RuntimeException('REAL_WORDPRESS_WITH_PSTE_REQUIRED');
 $fixture=json_decode(file_get_contents((string)($args[0]??'')),true,512,JSON_THROW_ON_ERROR);
