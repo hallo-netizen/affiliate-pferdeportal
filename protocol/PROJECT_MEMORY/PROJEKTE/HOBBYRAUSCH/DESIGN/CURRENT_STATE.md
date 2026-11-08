@@ -1,5 +1,9 @@
 # HOBBYRAUSCH – DESIGN – CURRENT_STATE
 
+**08.11.2026 – HAB-&-BEWAHR-BEITRAGSDESIGN INS HOBBYDEPOT ÜBERTRAGEN, TESTSTUFE.** Das neue HD003 **1.50.804** (Download `HOBBY_DEPOT_DESIGN_HD003_1.50.804.zip`, SHA-256 `ea85bde0f9bc48d679112df2dac5a6b9d53f63379f9a4633979b7be126b04a52`) verändert absichtlich ausschließlich den bestehenden Zweileiner/Vierleiner-**Design-Testbeitrag**: Hab-Leseraster übersetzt auf Hobbydepot-Farben/Montserrat, kleinere H1/H2/H3, Einleitung 36→18px Desktop bzw. 17px Mobil, rechts nur reale Kategorie-/Artikelverweise, mobil eine Spalte. „Fachartikel“ und unnötige fünfteilige Inhaltsliste verschwinden, „Auf einen Blick“ sowie Hero erhalten. Für normale Beiträge läuft weiterhin das vorherige Design – erst nach Test-PASS ausrollen. Affiliate-Produktboxen bis zu geprüftem DataForSEO-/Amazon-Produktbetrieb nicht vortäuschen. **Technische Tests PHP 13/13, ZIP 1290/1290, realer Browser sechs Breiten PASS; echte Installation offen.** HD009 0.1.28 und HD007 1.2.21 bleiben unverändert.
+
+
+
 Stand: 02.11.2026. Dies ist die einzelne Fach-Current-Autorität für das Portaldesign. Der genaue Pluginstand und seine ZIP-Abrufwege stehen ausschließlich unter ../PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md.
 
 ## Belastbarer Stand
