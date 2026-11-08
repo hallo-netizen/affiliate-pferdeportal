@@ -130,6 +130,7 @@ assert(!isset($catalog['schnitzen']) ||
 assert(!isset($catalog['muenzen']) || $catalog['muenzen']['keyword']!=='Sichere Aufbewahrung',
   'storage generic cannot be used as hobby product');
 echo "CHAINMAIL_RING_CONTEXT_AND_OTHER_HOBBIES_QUALITY_PASS\n";
+foreach($catalog as $slug=>$row) { echo 'SEARCH_WORD_REVIEW '.$slug.'|'.$row['keyword']."\n"; }
 echo "REAL_862_REGISTER_381_HOBBY_PRECHECK_PASS ".count($catalog)."\n";
 
 $candidate=invoke('auto_post_hobby',$GLOBALS['posts'][0],$catalog);
