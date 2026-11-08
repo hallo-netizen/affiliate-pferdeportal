@@ -239,3 +239,11 @@ Die **vollständigen unveränderten ZIP-Testpakete**, physisch erneut gelesen un
 - **Beide ZIPs im Sammelarchiv**, 901105 Byte, SHA256 `1085ba60a704a24b0688c19afc724ea25feb68ee8def786688ce7fa69164e45c`, Library `/pferdeatelier/PLUGINS/PFERDEATELIER-BEIDE-TEST-PLUGINS.zip`.
 
 [**Manifest der installierten Testversionsreihe**](INSTALLATIONS_PAKETE/TESTPAAR_20261108_ARCHIV/MANIFEST.md), [**aktueller realer Exportbefund**](EVIDENCE/ISTSTAND_20261108_1605_EXTERNE_SEO_WEG_UXDATEN.md). Diese **aktuellen** ZIPs sind in **der privaten Library abgelegt** und auf GitHub **inventarisiert**, nicht als neue ZIP-Git-Blobs hochgeladen; vorhandenes älteres Git-ZIP von PSTE 0.57.144.22 hat abweichende Bytegröße, daher NICHT ersetzen/gleichsetzen. Bereits vom Betreiber installierte Plugin-Versionen im WordPress-Testsystem per Screenshot belegt, aber nicht die Server-Dateihashes. Keine korrigierte Version, keine Releasefreigabe, kein automatischer Import. Original-K0 und Live unverändert.
+
+
+## 08.11.2026 – NEUESTES lokales QA-Plugin PSTE 0.57.144.23 (kein Release)
+
+- **PSTE 0.57.144.23 EXPORTFIX NUR TEST:** echte Library-ZIP `/pferdeatelier/PLUGINS/PSTE-0.57.144.23-EXPORTFIX-NUR-TEST.zip` (634545 Byte, SHA256 `dcf1f181d8b438f057476970237f888782312f60450f215e69713c203d0449b0`).
+- **Unveränderter PSERC 0.28.55 TEST:** `/pferdeatelier/PLUGINS/PSERC-0.28.55-TEST.zip` (266498 Byte, SHA256 `501959a0ac73a1b81070ed23623935999ed1058385b3ba587e0f8bef9c9816d0`).
+- **Paar** `/pferdeatelier/PLUGINS/PFERDEATELIER-PSTE-05714423-PSERC-02855-QA-PAAR.zip` (875972 Byte, SHA256 `154cbf04dc4a9b99ad1487e0bcd19fa90317b39c350c7b0dae8a965a56c78008`). Beide ZIPs im Sammelarchiv unverändert. **GitHub hält nur Manifest/Diff/Testquelle; Binary-ZIP in persistenter Library.**
+- [**Realer Fehlerbericht und Grenzen**](EVIDENCE/PSTE_05714423_ECHTER_EXPORT_FIX_36_LOKALE_WORKFLOW_TESTS_20261108.md); [**exakter geänderter Code, Bauquelle, 36 lokale PASS**](QA_ONLY/PSTE_05714423_EXPORTFIX/MANIFEST.json). 121 ZIP-Einträge bestanden, 83 PHP-Dateien PHP-Lint, 36 PHP-QA-Tokens PASS. 9 alte redaktionelle `Array`-Titel und 3 nicht nachgewiesene Post-Verweise bleiben **gesperrt**, keine WP-Testinstallation .23, keine SEO-FREI-Entscheidung. Ursprüngliches Plugin .22 und K0 unberührt. Draft-PR #682, nicht mergen.
