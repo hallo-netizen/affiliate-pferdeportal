@@ -1,0 +1,33 @@
+name: HAB RC16 verify existing safe photo (read-only)
+on:
+  push:
+    branches: [hab-004-rc16-design-seven-fixes-20261108]
+permissions:
+  contents: read
+jobs:
+  original-safe-photo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract verified original safe images without any modifications
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import hashlib
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip')
+          d=Path('hab-verified-existing-safes');d.mkdir(exist_ok=True)
+          with ZipFile(p) as z:
+              for f in ('existing-safe-room.webp','focus-wertsachen.webp','home-focus-wertsachen.webp'):
+                  m=[n for n in z.namelist() if n.endswith('/assets/'+f)]
+                  assert len(m)==1,(f,m)
+                  b=z.read(m[0]);assert b[:4]==b'RIFF' and b[8:12]==b'WEBP'
+                  (d/f).write_bytes(b)
+                  print(f,'BYTES',len(b),'SHA256',hashlib.sha256(b).hexdigest())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Hab-RC16-approved-safes-from-HAB001
+          path: hab-verified-existing-safes
+          retention-days: 2
+          if-no-files-found: error
