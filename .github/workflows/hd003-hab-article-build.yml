@@ -1,0 +1,110 @@
+name: HD003 1.50.804 Hab article test release
+on:
+  push:
+    branches: ['hobbyroom/hd003-article-hab-translation-20261108']
+    paths:
+      - 'ops/hobby_article_hab_150804/build.py'
+      - '.github/workflows/hd003-hab-article-build.yml'
+permissions: {contents: write}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build exact full original ZIP with scoped preview design
+        run: python3 ops/hobby_article_hab_150804/build.py
+      - name: Install Chromium
+        run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - name: Verify actual post markup, alternate article layout and responsive typography
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+          import re
+          source=Path("protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip")
+          with ZipFile(source) as z:
+            s=z.read("affiliate-portal-template-kit/includes/hobby-depot-article-hero-v150789.php").decode()
+            css=s.split("/* HD003 1.50.804 –",1)[1].split("</style>",1)[0]
+            css="/* HD003 1.50.804 –"+css
+          url="https://www.hobby-depot.de/designtest-zweileiner-oder-vierleiner-hobby-depot/"
+          with sync_playwright() as p:
+            b=p.chromium.launch(headless=True,args=["--no-sandbox"])
+            for width in [1440,1160,960,768,390,360]:
+              page=b.new_page(viewport={"width":width,"height":900})
+              resp=page.goto(url,wait_until="domcontentloaded",timeout=35000)
+              assert resp and resp.status==200,(width,resp)
+              page.wait_for_timeout(280)
+              before=page.evaluate("""() => {
+                const intro=document.querySelector('p.has-large-font-size');
+                const h2=document.querySelector('h2.wp-block-heading');
+                const h1=document.querySelector('.hd-article-heading-v150789 h1');
+                const hero=document.querySelector('.hd-article-photo-hero-v150789');
+                return {intro:parseFloat(getComputedStyle(intro).fontSize),h2:parseFloat(getComputedStyle(h2).fontSize),h1:parseFloat(getComputedStyle(h1).fontSize),
+                heroSrc:hero.querySelector('img')?.src,heroCount:document.querySelectorAll('.hd-article-photo-hero-v150789').length};
+              }""")
+              # This replaces no live PHP. It clones precisely the markup emitted
+              # by the new the_content server-side wrapper into the browser.
+              page.evaluate("""() => {
+                document.body.classList.add('hd-article-hab-preview-v150804');
+                const content=document.querySelector('#content .post__text');
+                if(!content)throw Error('not the actual hobby post content');
+                const contents=content.innerHTML;
+                const wrap=document.createElement('div');
+                wrap.className='hd-article-body-grid-v150804';
+                const reader=document.createElement('div');
+                reader.className='hd-article-reading-v150804';
+                reader.innerHTML=contents;
+                const toc=reader.querySelector('nav[aria-label="Inhaltsverzeichnis des Testartikels"]');
+                if(toc)toc.remove();
+                wrap.append(reader);
+                const side=document.createElement('aside');
+                side.className='hd-article-sidebar-v150804';
+                side.setAttribute('aria-label','Weiterführende Themen');
+                side.innerHTML='<nav class="hd-article-sidebar-card-v150804" aria-label="Passende Kategorie"><h2>Mehr zum Thema</h2><a href="/category/sportdrachen-drachen-leinen/">Drachen & Leinen ansehen</a></nav>';
+                wrap.append(side);
+                content.replaceChildren(wrap);
+              }""")
+              page.add_style_tag(content=css)
+              after=page.evaluate("""() => {
+                const el=x=>document.querySelector(x);
+                const rect=x=>{const r=x.getBoundingClientRect();return {x:r.x,w:r.width,h:r.height,right:r.right}};
+                const reader=el('.hd-article-reading-v150804'),side=el('.hd-article-sidebar-v150804'),
+                    h1=el('.hd-article-heading-v150789 h1'),intro=el('.has-large-font-size'),
+                    h2=el('.hd-article-reading-v150804 h2'),hero=el('.hd-article-photo-hero-v150789');
+                return {reader:rect(reader),aside:rect(side),h1:parseFloat(getComputedStyle(h1).fontSize),
+                  intro:parseFloat(getComputedStyle(intro).fontSize),h2:parseFloat(getComputedStyle(h2).fontSize),
+                  hasTOC:!!el('nav[aria-label="Inhaltsverzeichnis des Testartikels"]'),
+                  kicker:getComputedStyle(el('.hd-article-kicker-v150789')).display,
+                  heroSrc:hero.querySelector('img')?.src,heroCount:document.querySelectorAll('.hd-article-photo-hero-v150789').length,
+                  allWidth:document.documentElement.scrollWidth,viewport:innerWidth,
+                  columns:getComputedStyle(el('.hd-article-body-grid-v150804')).gridTemplateColumns};
+              }""")
+              assert before["intro"]>=35 and before["h2"]>=29,(width,before)
+              assert after["intro"]<=18.1 and after["intro"]>=16.8,(width,after)
+              assert after["h2"]<=23.1 and after["h2"]>=20.8,(width,after)
+              assert after["h1"]<before["h1"],(width,before,after)
+              assert after["kicker"]=="none" and not after["hasTOC"]
+              assert before["heroSrc"]==after["heroSrc"] and after["heroCount"]==1
+              assert after["allWidth"]<=width+4,(width,after)
+              if width>=921:
+                assert after["aside"]["x"]>=after["reader"]["right"]-2,(width,after)
+                assert after["aside"]["w"]>250,(width,after)
+              else:
+                assert after["aside"]["x"]<after["reader"]["right"]+2,(width,after)
+              print("HAB_TRANSLATION_LAYOUT_PASS",width,"h1",round(after["h1"],1),"intro",round(after["intro"],1),
+                "h2",round(after["h2"],1),"reader",round(after["reader"]["w"]),"sidebar",round(after["aside"]["w"]),"scroll",after["allWidth"])
+              page.close()
+            b.close()
+          print("HOBBY_ARTICLE_RESPONSIVE_PASS")
+          PY
+      - name: Commit full verified distinct ZIP file and CURRENT
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/HOBBY_DEPOT_DESIGN_HD003_1.50.804.zip
+          git commit -m "HD003 v1.50.804: Hab-inspired compact responsive Hobby article test only"
+          git push origin HEAD:hobbyroom/hd003-article-hab-translation-20261108
