@@ -1,0 +1,101 @@
+name: HD003 1.50.805 real photo cards and version release
+on:
+  push:
+    branches: [hobbyroom/hd003-150805-article-card-fix-20261108]
+    paths:
+      - ops/hobby_article_150805/build.py
+      - ops/hobby_article_150805/test_php.py
+      - .github/workflows/hd003-cards-build.yml
+permissions: {contents: write}
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild complete 1.50.805 ZIP with unique version and only two original PHP files
+        run: python3 ops/hobby_article_150805/build.py
+      - name: Test the exact modified WordPress PHP article renderer
+        run: python3 ops/hobby_article_150805/test_php.py
+      - name: Install Chromium
+        run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - name: Verify actual responsive layout and real image on existing live article DOM
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import base64
+          from playwright.sync_api import sync_playwright
+          root=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT')
+          with ZipFile(root/'CURRENT.zip') as z:
+            source=z.read('affiliate-portal-template-kit/includes/hobby-depot-article-hero-v150789.php').decode()
+            css=source.split('/* HD003 1.50.804 –',1)[1].split('</style>',1)[0]
+            css='/* HD003 1.50.804 –'+css
+            photo=base64.b64encode(z.read('affiliate-portal-template-kit/assets/hobby-depot-v150780/hobby-masters/sportdrachen.webp')).decode()
+          with sync_playwright() as p:
+            b=p.chromium.launch(headless=True,args=['--no-sandbox'])
+            for width in [1440,960,768,390,360]:
+              page=b.new_page(viewport={'width':width,'height':900})
+              r=page.goto('https://www.hobby-depot.de/designtest-zweileiner-oder-vierleiner-hobby-depot/',wait_until='domcontentloaded',timeout=34000)
+              assert r and r.status==200,(width,r)
+              page.wait_for_timeout(290)
+              page.evaluate("""({img})=>{
+                document.body.classList.add('hd-article-hab-preview-v150804');
+                const content=document.querySelector('#content .post__text');
+                if(!content)throw Error('Missing real test article');
+                const reader=document.createElement('div');reader.className='hd-article-reading-v150804';
+                reader.innerHTML=content.innerHTML;
+                // Mirror the known Gutenberg demonstration-only regions removed by server PHP.
+                const toc=reader.querySelector('nav[aria-label="Inhaltsverzeichnis des Testartikels"]');
+                if(toc)toc.remove();
+                function removeBetween(start,end){
+                  const from=reader.querySelector(start),to=reader.querySelector(end);
+                  if(!from || !to)return;
+                  let node=from;
+                  while(node&&node!==to){const next=node.nextSibling;node.remove();node=next}
+                }
+                removeBetween('#hddemo-produkte','h2#hddemo-faq');
+                const fake=reader.querySelector('aside[aria-label="Bannerplatz Testartikel"]');
+                if(fake)fake.remove();
+                const inline=reader.querySelector('p.hddemo-kicker');if(inline)inline.remove();
+                const grid=document.createElement('div');grid.className='hd-article-body-grid-v150804';
+                const sidebar=document.createElement('aside');sidebar.className='hd-article-sidebar-v150804';
+                sidebar.innerHTML='<nav class="hd-article-sidebar-card-v150804" aria-label="Passende Kategorie"><h2>Mehr zum Thema</h2><a class="hd-article-sidebar-photo-v150805" href="/category/sportdrachen-drachen-leinen/"><img src="data:image/webp;base64,'+img+'" alt="Lenkdrachen im Flug"></a><a href="/category/sportdrachen-drachen-leinen/">Drachen & Leinen ansehen</a></nav>';
+                grid.append(reader,sidebar);content.replaceChildren(grid);
+              }""",{'img':photo})
+              page.add_style_tag(content=css)
+              result=page.evaluate("""()=>{
+                const q=s=>document.querySelector(s),calc=s=>{const el=q(s),r=el.getBoundingClientRect();return{x:r.x,y:r.y,w:r.width,h:r.height,right:r.right,bottom:r.bottom}};
+                const img=q('.hd-article-sidebar-photo-v150805 img');
+                return {viewport:innerWidth,allWidth:document.documentElement.scrollWidth,
+                  article:calc('.hd-article-reading-v150804'),aside:calc('.hd-article-sidebar-v150804'),
+                  card:calc('.hd-article-sidebar-photo-v150805'),h2:+parseFloat(getComputedStyle(q('.hd-article-reading-v150804 h2')).fontSize),
+                  intro:+parseFloat(getComputedStyle(q('.hd-article-reading-v150804 p.has-large-font-size')).fontSize),
+                  photoOk:img.complete&&img.naturalWidth>100,oldGrid:q('.hddemo-product-grid')!==null,
+                  oldTOC:q('nav[aria-label="Inhaltsverzeichnis des Testartikels"]')!==null,
+                  heroCount:document.querySelectorAll('.hd-article-photo-hero-v150789').length};
+              }""")
+              assert result['allWidth']<=width+3,(width,result)
+              assert result['photoOk'] and result['card']['h']>80,(width,result)
+              assert not result['oldGrid'] and not result['oldTOC'],(width,result)
+              assert result['heroCount']==1 and result['intro']<=18,(width,result)
+              if width>920:assert result['aside']['x']>=result['article']['right']-1,(width,result)
+              else:assert result['aside']['y']>=result['article']['bottom']-2,(width,result)
+              print('PHOTO_CARD_LAYOUT_PASS',width,'article',round(result['article']['w']),'card',round(result['card']['w']),round(result['card']['h']),'intro',result['intro'])
+              page.close()
+            b.close()
+          print('HD003_150805_DESKTOP_MOBILE_CARD_PASS')
+          PY
+      - name: Save full unique HD003 1.50.805 and current ZIP to staging
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/HOBBY_DEPOT_DESIGN_HD003_1.50.805.zip
+          if ! git diff --cached --quiet; then
+            git commit -m 'HD003 1.50.805: replace false demo product tiles with photographic category card'
+            git push origin HEAD:hobbyroom/hd003-150805-article-card-fix-20261108
+          else
+            echo FULL_ZIP_ALREADY_SAVED
+          fi
