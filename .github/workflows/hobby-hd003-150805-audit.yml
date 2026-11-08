@@ -1,0 +1,37 @@
+name: Hobby Depot 1.50.804 photo tile format read-only audit
+on:
+  push:
+    branches:
+      - hobbyroom/hd003-photo-tile-format-150805-20261108
+    paths:
+      - .github/workflows/hobby-hd003-150805-audit.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild verified 804 and show EXACT photo card patterns and size CSS
+        run: |
+          python3 scripts/hobby_hd003_150804_patch.py \
+            protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/HOBBY_DEPOT_DESIGN_HD003_1.50.803.zip \
+            /tmp/current804.zip
+          python3 - <<'PY'
+          import zipfile,re
+          with zipfile.ZipFile('/tmp/current804.zip') as z:
+            for n in [p for p in z.namelist() if p.endswith(('.css','.php')) and any(x in p for x in ('hobby','pferde-template-kit','profile'))]:
+              text=z.read(n).decode('utf8','replace')
+              lines=text.splitlines()
+              print('FILE',n)
+              hits=[i for i,l in enumerate(lines) if 'hd-next-photo' in l or 'hd-next-card.has-photo' in l or 'hd-catlevel-card' in l or 'term_master_tile_v150804' in l]
+              print('HITS',len(hits))
+              # Limit text to meaningful smaller original code sections
+              k=set()
+              for i in hits[:55]: k.update(range(max(0,i-2),min(len(lines),i+4)))
+              prev=-2
+              for i in sorted(k):
+                if prev<i-1:print('----')
+                print(f'{i+1:6d}: {lines[i][:550]}');prev=i
+          PY
