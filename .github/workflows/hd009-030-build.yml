@@ -1,0 +1,91 @@
+name: HD009 0.1.30 provider first article cards full plugin release tests
+on:
+  push:
+    branches: [hobbyroom/hd009-030-provider-images-article-cards-20261108]
+    paths:
+      - ops/hobby_hd009_030/build.py
+      - ops/hobby_hd009_030/test.py
+      - .github/workflows/hd009-030-build.yml
+permissions: {contents: write}
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build full versioned WordPress ZIP from verified 0.1.29
+        run: python3 ops/hobby_hd009_030/build.py
+      - name: Execute true provider and Amazon fallback PHP methods
+        run: python3 ops/hobby_hd009_030/test.py
+      - name: Install Chromium
+        run: |
+          python3 -m pip install --quiet --break-system-packages playwright
+          python3 -m playwright install chromium
+      - name: Verify existing Hab-style sidebar and provider card at five sizes
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          from playwright.sync_api import sync_playwright
+          import base64
+          zipfile=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          with ZipFile(zipfile) as z:
+            css=z.read('affiliate-portal-router/assets/hdar-amazon-start.css').decode()
+          img='data:image/svg+xml;base64,'+base64.b64encode(b'<svg xmlns="http://www.w3.org/2000/svg" width="320" height="240"><rect width="320" height="240" fill="#dcece6"/></svg>').decode()
+          with sync_playwright() as p:
+            b=p.chromium.launch(headless=True,args=['--no-sandbox'])
+            for width in [1440,960,768,390,360]:
+              page=b.new_page(viewport={'width':width,'height':900})
+              res=page.goto('https://www.hobby-depot.de/designtest-zweileiner-oder-vierleiner-hobby-depot/',wait_until='domcontentloaded',timeout=42000)
+              assert res and res.status==200,(width,res)
+              page.wait_for_timeout(250)
+              page.evaluate("""({photo})=>{
+                const aside=document.querySelector('.hd-article-sidebar-v150804');
+                if(!aside)throw Error('No existing Hab-derived article sidebar');
+                const root=document.createElement('section');
+                root.className='ppar-article-product-block';
+                root.setAttribute('data-ppar-product-count','2');
+                root.innerHTML='<div class="ppar-article-section-label">Produktvorschläge</div>'+
+                 '<div class="ppar-article-product-grid">'+
+                 Array.from({length:2},(_,n)=>'<div class="ppar-article-product-card">'+
+                  '<a class="ppar-article-product-link" href="https://www.idealo.de/test'+n+'" rel="sponsored nofollow">'+
+                  '<span class="ppar-article-product-media"><img class="ppar-article-product-image" src="'+photo+'" alt="Testfoto"></span>'+
+                  '<span class="ppar-article-product-body"><strong class="ppar-article-product-title">Lenkdrachen Zubehör '+n+'</strong>'+
+                  '<span class="ppar-article-product-cta">Bei idealo vergleichen</span></span></a></div>').join('')+'</div>';
+                aside.prepend(root);
+              }""",{"photo":img})
+              page.add_style_tag(content=css)
+              result=page.evaluate("""()=>{
+                const r=el=>{const b=el.getBoundingClientRect();return {x:b.x,y:b.y,w:b.width,h:b.height,right:b.right,bottom:b.bottom}};
+                const aside=document.querySelector('.hd-article-sidebar-v150804');
+                const reader=document.querySelector('.hd-article-reading-v150804');
+                const section=document.querySelector('.ppar-article-product-block');
+                const cards=[...section.querySelectorAll('.ppar-article-product-card')];
+                return {outerWidth:document.documentElement.scrollWidth,viewport:innerWidth,
+                  reader:r(reader),aside:r(aside),block:r(section),
+                  cards:cards.map(c=>r(c)),images:[...section.querySelectorAll('img')].map(x=>x.complete&&x.naturalWidth>100),
+                  links:[...section.querySelectorAll('a')].map(x=>x.href)};
+              }""")
+              assert result['outerWidth']<=width+3,(width,result,'page overflow')
+              assert result['block']['w']<=result['aside']['w']+2,(width,result,'product area wider than sidebar')
+              assert len(result['cards'])==2 and all(x['w']>=120 and x['right']<=width+3 for x in result['cards']),(width,result,'card overflow')
+              assert all(result['images']),(width,result,'missing provider photo')
+              assert all('idealo.de' in x for x in result['links']),(width,result,'wrong provider offer')
+              if width>=921: assert result['aside']['x']>=result['reader']['right']-2,(width,result)
+              else:assert result['aside']['y']>=result['reader']['bottom']-2,(width,result)
+              print('ARTICLE_PROVIDER_PHOTO_LAYOUT_PASS',width,'aside',round(result['aside']['w']),'cards',[round(x['w']) for x in result['cards']])
+              page.close()
+            b.close()
+          print('HD009_030_RESPONSIVE_PROVIDER_FIRST_PASS')
+          PY
+      - name: Commit two identical full HD009 ZIPs into test branch after all tests
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/HOBBY_DEPOT_AFFILIATE_HD009_0.1.30.zip
+          if ! git diff --cached --quiet; then
+            git commit -m 'HD009 0.1.30: provider product photos first, Amazon manual media only if no provider'
+            git push origin HEAD:hobbyroom/hd009-030-provider-images-article-cards-20261108
+          else
+            echo 'TESTED_ZIP_ALREADY_PRESENT'
+          fi
