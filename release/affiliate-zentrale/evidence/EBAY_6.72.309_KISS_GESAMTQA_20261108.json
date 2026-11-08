@@ -22,5 +22,15 @@
   "observed_error": "2026-11-07 05:49:30 UTC, one profile request_error http_request_failed cURL 28 SSL connection timeout",
   "security": "never accepts unverified offer; permanent errors fail-closed; repeated transient failures remain partial not false success",
   "patch_file": "EBAY_672308_TO_672309_KISS_TRANSIENT_RETRY_NUR_TEST.patch",
-  "patch_sha256": "7ebe86691882fd8afb19ee356555725efeea0e2571ea413ac9aae2fd0adf45f2"
+  "patch_sha256": "7ebe86691882fd8afb19ee356555725efeea0e2571ea413ac9aae2fd0adf45f2",
+  "additional_real_original_tests": {
+    "red_308": "PASS: actual 6.72.308 PHP worker: one http_request_failed/cURL28 + second profile successful => discovery partial/request_error",
+    "green_309": "PASS: patched original PHP worker: one cURL28 + successful bounded reattempt => discovery completed, cursor retained",
+    "persistent_309": "PASS: three cURL28 timeouts same profile => discovery partial/transient_retry_exhausted; other profile completed",
+    "canonical_309": "PASS (BLOCKER): actual existing original canonical gapfill method turns partial/transient_retry_exhausted into canonical failed/gapfill_partial_unresumable",
+    "release_acceptance": "FAIL: repeat timeouts on a single product profile still cause terminal failure of the overall run",
+    "original_mariadb_wordpress_end_to_end": "NOT EXECUTED"
+  },
+  "release_allowed": false,
+  "user_visible_link_policy": "No further download or install instruction until the full acceptance criterion is met; 6.72.309 remains test-only"
 }
