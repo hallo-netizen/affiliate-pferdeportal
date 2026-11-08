@@ -109,7 +109,7 @@ jobs:
           require 'affiliate-portal-router/includes/trait-ppar-ebay-run.php';
           class TestRun{
               use PPAR_Ebay_Run_Trait;
-              public $run=array();public $remote=0;public $fail_code='';public $provider_error=false;public $last_good_safe=false;public $private_repairs=0;
+              public $run=array();public $remote=0;public $fail_code='';public $provider_error=false;public $last_good_safe=false;public $private_repairs=0;public $checkpoint_writes=0;public $private_gate_result=array('status'=>'pass','public'=>1,'invalid'=>array());
               private function ebay_run_load(){return $this->run;}
               private function ebay_run_save($v){$this->run=$v;return $v;}
               private function ebay_run_fail($c,$m,$d=array()){$this->fail_code=$c;return false;}
@@ -129,6 +129,10 @@ jobs:
                   $job['summary']['updated']++;
               }
               private function ebay_selection_request($reason,$owner,$force,$scope){$this->private_repairs++;return array('status'=>'running','owner'=>'test-owner');}
+              private function ebay_run_public_business_coverage($ids=null){return array('required'=>1,'covered'=>1,'missing'=>array(),'counts'=>array('sattel'=>1),'invalid'=>array());}
+              private function ebay_run_verify_private_public($s,$ids=null){return $this->private_gate_result;}
+              private function ebay_run_commit_public_checkpoint($r,$b,$p){$this->checkpoint_writes++;return array('checkpoint_id'=>'new');}
+              public function public_verify($settings){return $this->ebay_run_tick_public_verify($this->run,$settings);}
               public function can_repair($invalid){return $this->ebay_run_private_public_freshness_only_failure(array('error_code'=>'private_public_gate_failed','invalid'=>$invalid));}
               public function repair($invalid){return $this->ebay_run_reopen_private_after_public_freshness_churn($this->run,array('error_code'=>'private_public_gate_failed','invalid'=>$invalid),'public_lastmile_hash_churn');}
               public function check($settings){return $this->ebay_run_public_source_refresh_tick($this->run,$settings);}
@@ -227,10 +231,29 @@ jobs:
           $r->run['status']='running';$r->run['phase']='public_verify';
           ok($r->repair(array(202=>'source_hash_mismatch'))===false&&$r->private_repairs===2,
              'third source-hash retry denied fail-closed');
-          echo "EBAY_LASTMILE_ISOLATED_GATE 31/31 PASS; FULL ORIGINAL+WP+EBAY E2E NOT CLAIMED\n";
+          $r=seed(time()+20000,time()+20000);
+          $r->run['schema']='1.0';$r->run['status']='running';$r->run['phase']='public_verify';
+          $r->run['run_uuid']='integration-same-run';$r->run['config_snapshot']=array('seller_routes'=>array('private'=>true,'business'=>true));
+          $r->private_gate_result=array('status'=>'failed','error_code'=>'private_public_gate_failed',
+             'invalid'=>array(202=>'source_hash_mismatch'),'public'=>1);
+          $r->public_verify($both);
+          ok($r->run['phase']==='selection_prepare'&&$r->private_repairs===1,
+             'actual PUBLIC VERIFY resumes PRIVATE selection after getItem hash churn');
+          ok($r->checkpoint_writes===0,'no new checkpoint committed before hash repair');
+          ok($r->run['checkpoint_candidate']['business_campaign_ids']===array(101),
+             'public verify hash repair retains selected BUSINESS candidates');
+          $r=seed(time()+20000,time()+20000);
+          $r->run['schema']='1.0';$r->run['status']='running';$r->run['phase']='public_verify';
+          $r->run['run_uuid']='integration-veto';$r->run['config_snapshot']=array('seller_routes'=>array('private'=>true,'business'=>true));
+          $r->private_gate_result=array('status'=>'failed','error_code'=>'private_public_gate_failed',
+             'invalid'=>array(202=>'manual_block'),'public'=>1);
+          $r->public_verify($both);
+          ok($r->fail_code==='private_public_gate_failed'&&$r->private_repairs===0&&$r->checkpoint_writes===0,
+             'actual PUBLIC VERIFY rejects hard private veto without revalidation bypass');
+          echo "EBAY_LASTMILE_ISOLATED_GATE 35/35 PASS; FULL ORIGINAL+WP+EBAY E2E NOT CLAIMED\n";
           PHP
           cd /tmp/ebay310_qa
           php -l test.php
           php test.php | tee /tmp/ebay-672310-lastmile.log
-          test "$(grep -c '^PASS ' /tmp/ebay-672310-lastmile.log)" = 31
-          grep -F 'EBAY_LASTMILE_ISOLATED_GATE 31/31 PASS' /tmp/ebay-672310-lastmile.log
+          test "$(grep -c '^PASS ' /tmp/ebay-672310-lastmile.log)" = 35
+          grep -F 'EBAY_LASTMILE_ISOLATED_GATE 35/35 PASS' /tmp/ebay-672310-lastmile.log
