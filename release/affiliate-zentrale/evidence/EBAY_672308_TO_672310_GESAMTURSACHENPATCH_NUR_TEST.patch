@@ -261,7 +261,7 @@ index e5c1169..8e0566b 100644
          }
      }
  
-@@ -1879,6 +1950,104 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1879,6 +1969,104 @@ trait PPAR_Ebay_Run_Trait {
          }
      }
  
@@ -366,7 +366,7 @@ index e5c1169..8e0566b 100644
          $candidate=is_array($run['checkpoint_candidate']??null)?$run['checkpoint_candidate']:array();
 +        if(!$this->ebay_run_public_source_refresh_tick($run,$settings)){return;}
          $business=empty($settings['business_enabled'])?array('required'=>0,'covered'=>0,'missing'=>array(),'counts'=>array()):$this->ebay_run_public_business_coverage((array)($candidate['business_campaign_ids']??array()));
-@@ -1916,6 +2006,42 @@ trait PPAR_Ebay_Run_Trait {
+@@ -1916,6 +2104,42 @@ trait PPAR_Ebay_Run_Trait {
          // The one-row checkpoint write is the public visibility commit. Until
          // this exact point the frontend continues to serve the previous safe set.
          $current=$this->ebay_run_load();
