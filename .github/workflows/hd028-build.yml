@@ -1,0 +1,23 @@
+name: HD009 0.1.28 complete category levels build
+on:
+  push:
+    branches: [hobbyroom/hd009-028-universal-category-photo-20261108]
+    paths:
+      - ops/hobby028/build.py
+      - .github/workflows/hd028-build.yml
+permissions: {contents: write}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build updated full ZIP from verified current 0.1.27
+        run: python3 ops/hobby028/build.py
+      - name: Push unique versioned ZIP and single CURRENT into staging
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/HOBBY_DEPOT_AFFILIATE_HD009_0.1.28.zip
+          git commit -m 'HD009 0.1.28: use existing theme/photo hierarchy at every page and term level'
+          git push origin HEAD:hobbyroom/hd009-028-universal-category-photo-20261108
