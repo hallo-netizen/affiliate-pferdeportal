@@ -1,0 +1,28 @@
+name: HD003 Hobbyfinder photo data check 150809
+on:
+  push:
+    branches: [hobbyroom/hd003-150809-mobile-font-hobbyfinder-20261109]
+    paths: [.github/workflows/hd003-150809-photo-data.yml]
+permissions:
+  contents: read
+jobs:
+  data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          python3 - <<'PY'
+          import zipfile,re
+          path='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip'
+          with zipfile.ZipFile(path) as z:
+            s=z.read('affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php').decode()
+            a=s.splitlines()
+            for i in range(4130,4263): print('DATA',i+1,a[i][:1900])
+            for token in ['.hd-hf-visual','.hd-hf-card','.hd-hf-grid','.hd-hf-visual img','hd-hf-visual{']:
+              print('====CSS TOKEN====',token)
+              for m in list(re.finditer(re.escape(token)+r'[^{}]*\{[^{}]*\}',s)):
+                print('MATCH',s[max(0,m.start()-170):m.end()+50].replace(chr(10),' ')[:1250])
+            for token in ['@media(max-width:720px)','@media(max-width:620px)','@media(max-width:480px)']:
+              print('MEDIA',token,'COUNT',s.count(token))
+            print('PHOTO CHECK DONE')
+          PY
