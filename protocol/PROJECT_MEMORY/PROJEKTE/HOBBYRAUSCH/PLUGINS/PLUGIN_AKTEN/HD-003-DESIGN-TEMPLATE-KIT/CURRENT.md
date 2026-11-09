@@ -1,3 +1,14 @@
+# HD003 – Hobbydepot Design – CURRENT 1.50.810 (09.11.2026)
+
+**Aktuelle geprüfte Vollversion 1.50.810:** Mobile Weiter-Navigation im Hobbyfinder wird jetzt nach jedem Schritt sichtbar an die neue Frage und die erste Auswahlmöglichkeit gescrollt; nach Schritt 8 zur Ergebnisüberschrift. Gilt ausschließlich für Bildschirmbreiten bis 720 px. Desktop, Hobbyregister-Kern HD007, Foto-/Affiliate-Funktionen und die 14-px-Kategorie-Korrektur aus 1.50.809 unverändert.
+
+**Geprüft:** Original-1.50.809-SHA als Ausgangspunkt, 13/13 PHP syntax, ZIP-CRC 1291/1291, nur 2 veränderte PHP-Dateien (Versionskopf + Hobbyfinder-Weiter). Aus dem neuen Plugin extrahiertes echtes Hobbyfinder-JavaScript: acht Weiter-Schritte einschließlich Ergebnisübergang in Browser-Simulation mit 360, 390 und 700 px PASS; Desktop 1024 px ohne automatische Positionsänderung PASS. GitHub Test-Workflow [42592986004](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/42592986004).
+
+**Installationsdatei:** https://github.com/hallo-netizen/affiliate-pferdeportal/releases/download/hobby-depot-hd003-1.50.810-mobile-weiter-scroll/HOBBY_DEPOT_DESIGN_HD003_1.50.810_MOBILE_WEITER_SCROLL.zip
+Vollversion im isolierten Pluginbüro: `HOBBY_DEPOT_DESIGN_HD003_1.50.810.zip` und identische `CURRENT.zip`. 65.763.742 Byte, SHA-256 `d63c2c7413f1f3d8ac635abffd3ec7ea69ea0fddff5b4fc6dd4e676ac9c7b1c6`. Vorversion 1.50.809 unverändert im Archiv. **WordPress-Liveinstallation und Liveabnahme offen.**
+
+---
+
 # HD003 – Hobbydepot Design – CURRENT 1.50.809 (09.11.2026)
 
 **Aktuelle geprüfte Vollversion: 1.50.809.** Original 1.50.808 bytegenau als Ausgangspunkt geprüft; nur die vorhandenen Design-PHP-Dateien gezielt verändert (Versionswechsel und mobile Kategorietexte).
