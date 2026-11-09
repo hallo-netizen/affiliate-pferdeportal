@@ -1,0 +1,103 @@
+{
+  "status": "PASS",
+  "plugin_version": "0.57.144.31",
+  "zip": "PSTE-0.57.144.31-KISS-KATEGORIE-SPEICHERUNG-NUR-TEST.zip",
+  "zip_bytes": 645069,
+  "zip_sha256": "0552539fc7eb4e6bfa32d3dea2b8c7e9949f69fc4c3259e2930fb12713e30d3c",
+  "previous_zip_sha256": "3f32f511c39d77bd9a26d15222a46511ce81ef8180052caacbd3ca4405067d68",
+  "archive_files": 121,
+  "all_php_syntax_passed": 83,
+  "changed_files": [
+    "Portal SEO Topic Engine/includes/class-pste-admin.php",
+    "Portal SEO Topic Engine/includes/class-pste-repository.php",
+    "Portal SEO Topic Engine/portal-seo-topic-engine.php"
+  ],
+  "fresh_extracted_files_checked_against_zip_sha256": 121,
+  "old_regression_checks": 2564,
+  "new_and_v30_ui_checks": 4082,
+  "combined_local_checks": 6646,
+  "fresh_replay": {
+    "room_ui": {
+      "contract": "PSTE_V30_REAL61_ADMIN_ROOM_QA",
+      "status": "PASS",
+      "checks": 338,
+      "total": 338,
+      "real_original_topics": 61,
+      "category_room": 52,
+      "page_counts": 3,
+      "allowed": "review-only, K0 category still mandatory",
+      "full_workflow_passed": false
+    },
+    "room_sql": {
+      "contract": "PSTE_V30_SHARED_REPOSITORY_SQL_QA",
+      "status": "PASS",
+      "checks": 116,
+      "actual_sql_selects": 6,
+      "original_topics": 61,
+      "room_matches": 52,
+      "fake_mentions_filtered_by_ui": 1,
+      "extra_tables": 0,
+      "extra_writers": 0
+    },
+    "room_html": {
+      "contract": "PSTE_V30_ACTUAL_ADMIN_HTML_QA",
+      "status": "PASS",
+      "checks": 15,
+      "actual_rendered_rows": 29,
+      "has_category_form": true,
+      "duplicate_approval_menu": false,
+      "k0_not_called": true
+    },
+    "choices": {
+      "contract": "PSTE_V31_REAL_WORDPRESS_CATEGORY_PICKER_QA",
+      "passed": 3524,
+      "fach": 1165,
+      "magazin": 9,
+      "unique_choices": 1174,
+      "exact_path_duplicate_ids": [
+        291,
+        381
+      ],
+      "all_choices_id_bound": true
+    },
+    "admin_post": {
+      "contract": "PSTE_V31_REAL_WP_ADMIN_POST_FAKE_DB",
+      "status": "PASS",
+      "checks": 40,
+      "cases": [
+        "fach",
+        "magazin",
+        "fach_same_name",
+        "duplicate_fullpath",
+        "open",
+        "no_category",
+        "forged",
+        "wrongarea",
+        "legacy_ambiguous",
+        "legacy_unique",
+        "hard"
+      ],
+      "real_admin_post_php": true,
+      "real_wp_mysql": false,
+      "k0_called": false
+    },
+    "save": {
+      "contract": "PSTE_V31_ACTUAL_REPOSITORY_SAVE_IN_MEMORY_DB",
+      "tests": 49,
+      "status": "PASS",
+      "sql_transaction": true,
+      "real_repository_code": true,
+      "real_wp_mysql": false,
+      "production_handoff": false,
+      "mini_decision_changed": false
+    }
+  },
+  "whole_live_workflow_passed": false,
+  "real_wordpress_mysql_tested": false,
+  "real_pserc_ppm_k0_tested": false,
+  "production_or_taxonomy_write_attempted": false,
+  "mini_workers_changed": false,
+  "new_worker_or_table": false,
+  "old_draft_pr_merged": false,
+  "scope": "Original admin category picker and existing topic assignment store only. No live production permission."
+}
