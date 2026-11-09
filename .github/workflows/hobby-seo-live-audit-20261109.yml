@@ -1,0 +1,30 @@
+name: Hobbydepot Yoast live SEO full audit 2026-11-09
+on:
+  push:
+    branches: [hobbyroom/seo-yoast-coverage-20261109]
+    paths: [.github/workflows/hobby-seo-live-audit-20261109.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  seo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install read-only inspection dependencies
+        run: pip3 install --quiet requests beautifulsoup4
+      - name: Inspect public homepage, Yoast sitemap index, WP REST pages and Hobbyfinder
+        run: python3 -u scripts/hobby_seo_live_audit_20261109.py
+      - name: Commit findings to isolated SEO office
+        if: always()
+        run: |
+          set -e
+          FILE="protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/SEO/EVIDENCE/HOBBYDEPOT_YOAST_LIVE_AUDIT_20261109.json"
+          if test -f "$FILE"; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add "$FILE"
+            git commit -m "Record read-only Yoast live sitemap and page coverage evidence" || true
+            git push origin HEAD:refs/heads/hobbyroom/seo-yoast-coverage-20261109
+          fi
