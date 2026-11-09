@@ -1,3 +1,9 @@
+## 09.11.2026 – WORDPRESS-LIVEABNAHME: DESIGN RC19 + AFFILIATE RC18 (DARSTELLUNG) – PASS
+
+Der Nutzer bestätigt im Chat ausdrücklich: „alles pass. ebenso das affiliate plugin bzgl amazon kacheldarstellung. (rc18)“. **HAB-001 Design RC19 (0.1.192):** korrigiertes Vandalismus-Kachelmotiv, mobile Hero-Fotos und einheitliche mobile Ausklappschrift sind **LIVE-PASS**. **HAB-004 Affiliate RC18 (0.1.15-rc18):** Amazon-Kacheldarstellung ist **LIVE-PASS**. Das ist eine Nutzer-Sichtabnahme, kein neuer technischer Full-Service-Test. Die beiden vorhandenen vollständigen `CURRENT.zip` bleiben unverändert. Verbindliches Abnahmeprotokoll: `ABNAHMEN/2026-11-09_WORDPRESS_DESIGN_RC19_AFFILIATE_RC18.md`. Ältere „Live offen“-Hinweise darunter sind für diese abgeprüften Darstellungsbereiche historisch überholt; nicht gesondert geprüfte Funktionen bleiben davon unberührt.
+
+---
+
 ## 09.11.2026 – HAB-001 Design RC19 (0.1.192): Mobile Hero, Schriftgleichheit und doppelte Vandalismus-Kacheln
 
 **Physisch vollständige aktuelle Design-ZIP im eigenen Pluginbüro:** `PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip`, **84.538.795 Bytes, 432 Dateien**, Git-Blob `5b228d917bf8744826f359b71523c5a11c3c5c10`, vom unabhängigen GitHub-Build SHA256 `d8f08ca73da4c56be61d55fdde02dac5ed5a1ecadcbc986221e2c93357ec8302`. **WordPress-Pluginversion 0.1.192**; neu gebaute vollständige ZIP, kein Zusatzplugin. **HAB-004 Affiliate RC18 (0.1.15-rc18) bleibt unverändert.** Keine fremden Portale, Inhalte oder Kategorie-IDs geändert.

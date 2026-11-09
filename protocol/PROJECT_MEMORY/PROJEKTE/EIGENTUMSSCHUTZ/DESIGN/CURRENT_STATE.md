@@ -1,3 +1,9 @@
+## 09.11.2026 – LIVE-ABNAHME DESIGN RC19 PASS; AFFILIATE AMAZON-DARSTELLUNG RC18 PASS
+
+Nutzer bestätigt nach WordPress-Sichtprüfung „alles pass“, ebenso die Amazon-Kacheldarstellung im Affiliate RC18. **Design RC19 (0.1.192):** Vandalismus-Kachelbilder, mobile Hero-Fotos und Ausklappschrift abgenommen. **Affiliate RC18 (0.1.15-rc18):** Amazon-Kacheldarstellung abgenommen (nur visueller Bereich). Die ZIPs bleiben unverändert im eigenen Hab-Pluginbüro. Gemeinsames Abnahmeprotokoll: `../PLUGINS/ABNAHMEN/2026-11-09_WORDPRESS_DESIGN_RC19_AFFILIATE_RC18.md`. Frühere Live-offen-Vermerke zu diesen Punkten sind historisch überholt.
+
+---
+
 ## 09.11.2026 – HAB-001 Design RC19 (0.1.192): Mobile Hero, Schriftgleichheit und doppelte Vandalismus-Kacheln
 
 **Physisch vollständige aktuelle Design-ZIP im eigenen Pluginbüro:** `PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip`, **84.538.795 Bytes, 432 Dateien**, Git-Blob `5b228d917bf8744826f359b71523c5a11c3c5c10`, vom unabhängigen GitHub-Build SHA256 `d8f08ca73da4c56be61d55fdde02dac5ed5a1ecadcbc986221e2c93357ec8302`. **WordPress-Pluginversion 0.1.192**; neu gebaute vollständige ZIP, kein Zusatzplugin. **HAB-004 Affiliate RC18 (0.1.15-rc18) bleibt unverändert.** Keine fremden Portale, Inhalte oder Kategorie-IDs geändert.
