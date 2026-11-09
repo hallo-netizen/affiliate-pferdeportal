@@ -1,0 +1,34 @@
+--- a/includes/class-pste-snapshot.php
++++ b/includes/class-pste-snapshot.php
+@@ -411,7 +411,7 @@
+ 
+     private static function normalizeEditorialPlanItemsAgainstStructure(array $items,array $structure): array {
+         $byId=[];$bySlug=[];$byName=[];
+-        foreach((array)($structure['items']??[]) as $row){if(!is_array($row))continue;$id=(int)($row['term_id']??0);$slug=trim((string)($row['slug']??''));$name=trim((string)($row['name']??''));if($id>0)$byId[$id]=$row;if($slug!=='')$bySlug[$slug]=$row;if($name!=='')$byName[$name]=$row;}
++        foreach((array)($structure['items']??[]) as $row){if(!is_array($row))continue;$id=(int)($row['term_id']??0);$slug=trim((string)($row['slug']??''));$name=trim((string)($row['name']??''));if($id>0)$byId[$id]=$row;if($slug!=='')$bySlug[$slug]=$row;if($name!=='')$byName[$name][]=$row;}
+         $out=[];
+         foreach($items as $sourceIndex=>$item){
+             if(!is_array($item))throw new RuntimeException('PSTE_EDITORIAL_PLAN_ROW_INVALID');
+@@ -427,7 +427,21 @@
+             $categoryId=is_numeric($idValue)?(int)$idValue:0;
+             $categorySlug=self::editorialSafeText($item['category_slug']??$item['target_category_slug']??$item['category']??null);
+             $categoryName=self::editorialSafeText($item['category_name']??$item['target_category_name']??null);
+-            $matched=$categoryId>0&&isset($byId[$categoryId])?$byId[$categoryId]:($categorySlug!==''&&isset($bySlug[$categorySlug])?$bySlug[$categorySlug]:($categoryName!==''&&isset($byName[$categoryName])?$byName[$categoryName]:[]));
++            // Two concrete identities must never silently point at different branches.
++            if($categoryId>0&&$categorySlug!==''&&isset($byId[$categoryId],$bySlug[$categorySlug])
++                &&(int)$byId[$categoryId]['term_id']!==(int)$bySlug[$categorySlug]['term_id'])
++                throw new RuntimeException('PSTE_EDITORIAL_PLAN_CATEGORY_IDENTITY_CONFLICT_'.(int)$sourceIndex);
++            // Category names are display labels, NOT globally unique identities.
++            // Name-only imports must fail closed on ambiguity instead of silently
++            // selecting the last WordPress category from an unrelated portal branch.
++            $matched=[];
++            if($categoryId>0&&isset($byId[$categoryId]))$matched=$byId[$categoryId];
++            elseif($categorySlug!==''&&isset($bySlug[$categorySlug]))$matched=$bySlug[$categorySlug];
++            elseif($categoryName!==''&&isset($byName[$categoryName])){
++                $choices=$byName[$categoryName];
++                if(count($choices)!==1)throw new RuntimeException('PSTE_EDITORIAL_PLAN_CATEGORY_NAME_AMBIGUOUS_'.(int)$sourceIndex);
++                $matched=$choices[0];
++            }
+             if($matched){$categoryId=(int)($matched['term_id']??$categoryId);$categorySlug=(string)($matched['slug']??$categorySlug);$categoryName=(string)($matched['name']??$categoryName);}elseif($categoryName===''&&$categorySlug!==''){$categoryName=$categorySlug;}
+             $articleType=self::editorialSafeText($item['article_type']??($matched['article_type']??null));
+             $familyName=self::editorialSafeText($item['topic_family_name']??($matched['topic_family_name']??null));
