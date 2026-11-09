@@ -2,6 +2,19 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## NEUSTER ISTSTAND – 09.11.2026 / PSTE 0.57.144.27 QA-Testpaket, KEIN Gesamtfreigabe-PASS
+
+**Anlass:** echter WordPress-61er-Stapelbericht beweist 60x `PSTE_RETAINED_EDITORIAL_PLAN_SNAPSHOT_CHANGED` plus 1x manuelle Sperre. Alte PSTE .26 klassifizierte 60 globale technischen Vorbedingungsabbrüche fälschlich als endgültig verarbeitet. Der originale Export enthält den aktuellen WP-Baseline-/Plankontext und die Artikeltypen-Registry nicht; ein vollständiger echter Kategorie-/PSERC-/K0-Replay war damit logisch unmöglich. Eine lokale Attrappe mit leerer Registry gab zuvor `PSTE_ARTICLE_TYPE_REGISTRY_EMPTY`, was **nicht** bedeutet, dass die echten WP-Kategorien fehlen.
+
+**Neue getestete QA-Pluginversion:** `PSTE-0.57.144.27-PLANBINDUNG-PRUEFSTAND-NUR-TEST.zip` (641769 Bytes; SHA256 `664a735f761bc508d71015b9fda2485bac73ecfdd6d8ab7144b769d6aadd1f28`). **Nur 3 PHP-Dateien geändert** gegenüber installierter .26: Version, PSTE-Admin und Mini-Workflow. Global veralteter Planhash pausiert Warteschlange mit 61 unbearbeiteten Titeln ohne Endurteil/Retry-Sturm, echter Sperrcheck unverändert. Bereits auf .26 historisch fehlgezählte `COMPLETE`-Jobs werden **nicht** unbemerkt geändert. MINI-Bericht gibt echte Roh-Suchfrage statt leeren Strings aus. Nonce-geschützter, einmaliger, read-only WP-Kontext-Export liefert aktuell gespeicherte Kategorie-/Artikeltyp-Baseline, aktuelle WordPress-Struktur und Inventar, realen Editorial-Plan samt Altquellen, gespeicherte Indexstages, gebundene Hashes, Job-/Queue-Zustände. Vorherige alte technische Sperre führt zu direkt sichtbarem Exportknopf in `SEO Themenengine → Themenprüfung → Externe SEO-Prüfung` (auch in Sonderwerkzeugen), ohne neue SEO-Prüfung, Keyword-Recherche, Plan-Wiederholung oder Datenbank-/K0-Eingriff.
+
+**Unabhängig lokal wiederholt:** 32/32 Prüfungen mit originalem 1.179er-Export, 87er SEO-JSON, 61er WP-Stapelbericht, Original-PHP-Methoden und isoliert korrigierter Queue; 83/83 PHP-Syntax, 121/121 ZIP-CRC, 118 unveränderte Quelldateien, frische Archiv-Entpackung und Checksum-Prüfung PASS. Die Datenbank des Tests ist **lokal nachgebildet**. **FULL_WORKFLOW_PASSED=false**; echter WP-/MySQL-Recheck nach dem aktuellen Plan und tatsächliche Kategorieentscheidung sowie PSERC-/K0-Übergabe ausdrücklich NICHT bestanden / NICHT durchgeführt. Kein Produktionsrelease und keine falsche Freigabe.
+
+**Private QA-Ablage:** `/pferdeatelier/PLUGINS/QA/PSTE-0.57.144.27-PLANBINDUNG-PRUEFSTAND-NUR-TEST.zip` plus `PSTE-0.57.144.27-LOKALTEST-UND-BEWEIS-NUR-QA.zip`, `PSTE_05714427_QA_REPORT.md`, `PSTE_05714426_to_05714427_PLANBINDUNG.patch`. GitHub als [QA-only Diff+Report](QA_ONLY/PSTE_05714427_PLANBINDUNG_PRUEFSTAND/). **Nächster einziger menschlicher Testschritt:** Testseite .27 über .26 installieren und **einmal** den sichtbaren Button `Einmaligen Plan- und Kategorien-Prüfstand herunterladen` nutzen; Datei bereitstellen. Dann kann die echte Quelle exakt gegengeprüft werden. Keine weitere Pluginversion / Artikelproduktion vor diesem Nachweis. PR #682 DRAFT, nicht mergen. K0/Live und PSERC .55 unverändert.
+
+---
+
+
 > **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt.  
 > `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
 
