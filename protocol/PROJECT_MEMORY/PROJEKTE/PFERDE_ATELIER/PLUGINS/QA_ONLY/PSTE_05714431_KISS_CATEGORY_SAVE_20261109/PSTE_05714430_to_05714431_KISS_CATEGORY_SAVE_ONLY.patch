@@ -1,0 +1,134 @@
+--- a/includes/class-pste-admin.php
++++ b/includes/class-pste-admin.php
+@@ -1497,7 +1497,20 @@
+ 
+     public static function reviewCandidate(): void {
+         PSTE_Auth::assertAdmin('pste_review_candidate',(string)($_POST['_wpnonce']??''));
+-        try{$poolKey=sanitize_text_field((string)($_POST['pool_key']??''));$status=sanitize_key((string)($_POST['review_status']??''));$status=strtoupper($status);$categoryId=(int)($_POST['target_category_id']??0);$categoryName=sanitize_text_field((string)($_POST['target_category_name']??''));if($categoryId<=0&&$categoryName!=='')$categoryId=PSTE_Repository::categoryIdFromName($categoryName);$articleType=sanitize_text_field((string)($_POST['target_article_type']??''));$note=sanitize_text_field((string)($_POST['review_note']??''));
++        try{$poolKey=sanitize_text_field((string)($_POST['pool_key']??''));$status=sanitize_key((string)($_POST['review_status']??''));$status=strtoupper($status);$categoryId=(int)($_POST['target_category_id']??0);$categoryName=sanitize_text_field((string)($_POST['target_category_name']??''));
++            // One WP category identity instead of matching a display name twice.
++            // Backward-compatible for ordinary unique Fach names on other admin views.
++            if($categoryId<=0&&$categoryName!==''){
++                if(preg_match('/\[#([1-9][0-9]{0,9})\]$/D',$categoryName,$selected)){
++                    $categoryId=(int)$selected[1];
++                    $choices=self::categoryReviewChoices();
++                    if(!isset($choices[$categoryId])||!hash_equals((string)$choices[$categoryId]['label'],$categoryName))
++                        throw new RuntimeException('PSTE_REVIEW_CATEGORY_SELECTION_NOT_CURRENT');
++                }else $categoryId=PSTE_Repository::categoryIdFromName($categoryName);
++            }
++            if(in_array($status,['ROUTE_FACH','ROUTE_MAGAZIN'],true)&&$categoryName!==''&&$categoryId<=0)
++                throw new RuntimeException('PSTE_REVIEW_CATEGORY_SELECTION_NOT_UNIQUE');
++            $articleType=sanitize_text_field((string)($_POST['target_article_type']??''));$note=sanitize_text_field((string)($_POST['review_note']??''));
+             // Reuse the existing manual decision / category reentry, never invent a new routing authority.
+             if(in_array($status,['ROUTE_FACH','ROUTE_MAGAZIN','ROUTE_REVIEW'],true)){
+                 // Same context safety as the existing review UI; fail closed on forged/stale forms.
+@@ -1520,6 +1533,11 @@
+                         foreach((array)($spec['runtime_slugs']??[]) as $journalSlug)$journalSlugs[(string)$journalSlug]=true;
+                     }
+                     $journal=isset($journalSlugs[$slug]);
++                    if($categoryName!==''&&preg_match('/\[#([1-9][0-9]{0,9})\]$/D',$categoryName)){
++                        $choices=$choices??self::categoryReviewChoices();
++                        if(!isset($choices[$categoryId])||$choices[$categoryId]['area']!==$area)
++                            throw new RuntimeException('PSTE_REVIEW_CATEGORY_AREA_SELECTION_MISMATCH');
++                    }
+                     if($area==='MAGAZIN'){
+                         if(!$journal)throw new RuntimeException('PSTE_MANUAL_AREA_CATEGORY_NOT_MAGAZIN');
+                         $articleType='Journal';
+@@ -2656,8 +2674,47 @@
+         return true;
+     }
+ 
++    /** Existing Fach leaves + registered Magazin categories, uniquely identified by WP term ID. */
++    private static function categoryReviewChoices(): array {
++        $choices=[];
++        $baseline=get_option(PSTE_OPTION_SITE_BASELINE,[]);
++        foreach((is_array($baseline)?(array)($baseline['leaf_categories']??[]):[]) as $cat){
++            if(!is_array($cat))continue;
++            $id=(int)($cat['term_id']??0);
++            $name=trim((string)($cat['name']??''));
++            if($id<=0||$name==='')continue;
++            $path=trim((string)($cat['full_path']??''));
++            $label=$name.($path!==''&&$path!==$name?' — '.$path:'').' [#'.$id.']';
++            if(isset($choices[$id]))throw new RuntimeException('PSTE_REVIEW_DUPLICATE_CATEGORY_ID');
++            $choices[$id]=['label'=>$label,'area'=>'FACH'];
++        }
++        // The Magazin is equal to Fach, but its terms are not in the Fach leaf baseline.
++        // Read only the already registered category slugs from the CURRENT WordPress taxonomy.
++        if(function_exists('get_terms')&&class_exists('PSTE_Journal_Article_Type')){
++            $slugs=[];
++            foreach((array)(PSTE_Journal_Article_Type::definition()['journal_categories']['categories']??[]) as $spec)
++                foreach((array)($spec['runtime_slugs']??[]) as $slug){$slug=trim((string)$slug);if($slug!=='')$slugs[$slug]=true;}
++            if($slugs){
++                $terms=get_terms(['taxonomy'=>'category','hide_empty'=>false,'slug'=>array_keys($slugs)]);
++                if(function_exists('is_wp_error')&&is_wp_error($terms))throw new RuntimeException('PSTE_REVIEW_MAGAZIN_TERMS_UNAVAILABLE');
++                if(!is_array($terms))throw new RuntimeException('PSTE_REVIEW_MAGAZIN_TERMS_INVALID');
++                foreach($terms as $term){
++                    $id=(int)($term->term_id??0);$slug=(string)($term->slug??'');
++                    $name=trim((string)($term->name??''));
++                    if($id<=0||$name===''||!isset($slugs[$slug]))continue;
++                    if(isset($choices[$id]))throw new RuntimeException('PSTE_REVIEW_CATEGORY_AREA_COLLISION');
++                    $choices[$id]=['label'=>$name.' — Magazin [#'.$id.']','area'=>'MAGAZIN'];
++                }
++            }
++        }
++        return $choices;
++    }
++
+     private static function globalCategoryDatalist(): void {
+-        $baseline=get_option(PSTE_OPTION_SITE_BASELINE,[]);echo '<datalist id="pste-global-category-list">';foreach((is_array($baseline)?($baseline['leaf_categories']??[]):[]) as $cat)echo '<option value="'.esc_attr((string)($cat['name']??'')).'"></option>';echo '</datalist>';
++        echo '<datalist id="pste-global-category-list">';
++        foreach(self::categoryReviewChoices() as $choice)
++            echo '<option value="'.esc_attr((string)$choice['label']).'"></option>';
++        echo '</datalist>';
+     }
+ 
+ 
+--- a/includes/class-pste-repository.php
++++ b/includes/class-pste-repository.php
+@@ -1155,6 +1155,15 @@
+         if($categoryId<=0)return '';
+         $baseline=get_option(PSTE_OPTION_SITE_BASELINE,[]);
+         foreach((is_array($baseline)?($baseline['leaf_categories']??[]):[]) as $cat)if((int)($cat['term_id']??0)===$categoryId)return (string)($cat['name']??'');
++        // Magazin terms are intentionally separate from the Fach-leaf baseline.
++        // Resolve the name from the SAME current WP term already authenticated by admin.
++        if(!function_exists('get_term')||!class_exists('PSTE_Journal_Article_Type'))return '';
++        $term=get_term($categoryId,'category');
++        if(!$term||(function_exists('is_wp_error')&&is_wp_error($term))
++            ||(string)($term->taxonomy??'')!=='category'||(int)($term->term_id??0)!==$categoryId)return '';
++        $slug=(string)($term->slug??'');
++        foreach((array)(PSTE_Journal_Article_Type::definition()['journal_categories']['categories']??[]) as $spec)
++            if(in_array($slug,(array)($spec['runtime_slugs']??[]),true))return trim((string)($term->name??''));
+         return '';
+     }
+ 
+@@ -1911,7 +1920,11 @@
+             self::checkedUpdate($table,$update,['pool_key'=>$poolKey],$formats,['%s'],
+                 'PSTE_MANUAL_DECISION_UPDATE_FAILED');
+             $to=$manual!==''?$manual:(string)$row['automatic_pool_status'];self::recordTopicHistory($poolKey,'MANUAL_DECISION',$from,$to,['category_id'=>$categoryId,'article_type'=>$articleType,'note'=>$note,'hard_codes'=>$hard,'hard_override_confirmed'=>$hardOverrideConfirmed],$userId);
+-            if($status==='REASSIGNED')self::upsertTopicAssignment($poolKey,$categoryId,self::categoryNameById($categoryId),$articleType,'MANUAL_REASSIGNMENT','CONFIRMED',1.0,['MANUAL_DECISION'],['note'=>$note,'user_id'=>$userId]);
++            if($status==='REASSIGNED'){
++                $categoryName=self::categoryNameById($categoryId);
++                if($categoryName==='')throw new RuntimeException('PSTE_MANUAL_CATEGORY_ID_NOT_IN_CURRENT_PORTAL');
++                self::upsertTopicAssignment($poolKey,$categoryId,$categoryName,$articleType,'MANUAL_REASSIGNMENT','CONFIRMED',1.0,['MANUAL_DECISION'],['note'=>$note,'user_id'=>$userId]);
++            }
+             self::commitTransaction();
+         }catch(Throwable $e){self::rollbackTransaction();throw $e;}
+     }
+--- a/portal-seo-topic-engine.php
++++ b/portal-seo-topic-engine.php
+@@ -2,13 +2,13 @@
+ /**
+  * Plugin Name: Portal SEO Themenengine
+  * Description: Einfacher Longtail-Workflow: recherchiert Suchphrasen, übernimmt Sprachtitel und ordnet ausschließlich vorhandene Portalkategorien zu und prüft gegen den eigenen Bestand. Verändert keine Beiträge, Inhalte, Gestaltung oder Textproduktionsregeln.
+- * Version: 0.57.144.30
++ * Version: 0.57.144.31
+  * Requires PHP: 8.0
+  * Author: Workflow Automation
+  */
+ if (!defined('ABSPATH')) { return; }
+ 
+-define('PSTE_VERSION', '0.57.144.30');
++define('PSTE_VERSION', '0.57.144.31');
+ define('PSTE_DIR', __DIR__ . '/');
+ define('PSTE_OPTION_SETTINGS', 'pste_settings_v1');
+ define('PSTE_OPTION_SCHEMA', 'pste_schema_version');
