@@ -1,5 +1,12 @@
 # PFERDE-ATELIER – PLUGINS – UPDATEPROTOKOLL
 
+## 09.11.2026 – KISS-CHATÜBERGABE/PSTE .31 REAL WP, .32 NUR ENTWICKLUNGSSTAND
+
+**Stand gesichert:** Betreiberversion im WordPress-TEST: PSTE **0.57.144.31**. Kategorie für Kolik-Beispiel wurde beim Benutzer auf WordPress gespeichert und in der Kategorie-Spalte wiedergefunden. Die zuvor bestätigten Büro-Listen sind funktionsfähig, Bedienung weiterhin zu kompliziert (ca. 1500 unsortierte Vorschläge, unnötige Begründung, Rücksprung). In QA-Quelle .32 werden nur existierende UI-Teile vereinfacht; **weder neue installierbare Version noch Abschluss- / E2E-PASS**. Noch offene Produktanforderung: **automatische, gesammelte Kategorienachbearbeitung** der 52 Redaktionsthemen durch EINEN vorhandenen Fach-/Magazin-Owner; Kolik-Magazin-Lücke am Originalcode beweisen; überlanger Doppel-Fragetitel im externen MINI-Workflow korrigieren, keine zweite WordPress-Prüfung. **Volle Übergabe:** [09.11.2026 Chat-/Pluginbüro-Handoff](QA_ONLY/PSTE_KISS_HANDOFF_20261109/PFERDEATELIER_PSTE_HANDOFF_20261109.md); **nur Current-State ist operativer nächster Auftrag**. QA-Binary und WIP-Diff im privaten Pluginbüro. Keine MINI-/PSERC-/PPM-/K0-/Live-Änderungen, PR #682 bleibt DRAFT.
+
+---
+
+
 STAND: 2026-09-16
 ROLLE: ZENTRALES PLUGIN-ÄNDERUNGS-/SYNC-PROTOKOLL
 
