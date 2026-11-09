@@ -1,3 +1,16 @@
+# HD003 – Hobbydepot Design – CURRENT 1.50.809 (09.11.2026)
+
+**Aktuelle geprüfte Vollversion: 1.50.809.** Original 1.50.808 bytegenau als Ausgangspunkt geprüft; nur die vorhandenen Design-PHP-Dateien gezielt verändert (Versionswechsel und mobile Kategorietexte).
+
+- **Mobil bis 760 px:** sichtbarer und ausgeklappter Kategorietext einheitlich **14 px**, einschließlich mittlerer Ebene und Sonderfall **Schuhmacherei/Kettenhemd-FAQ**. Überschriften, Desktop, Layout und Fremdplugins unverändert.
+- **Hobbyfinder Ergebnisfotos:** die Originalfunktion gibt Bilder nur bei vorhandener, genau zugeordneter Bild-URL aus; das mobile Raster blendet Fotos nicht aus. Mobile Rendering-Test 360/390/620/760 px mit vorhandenem Testbild erfolgreich. **Kein Live-PASS** für echte Hobbyfinder-Ergebnisbilder, da `/magazin/hobbyfinder/` und `/hobbyfinder/` bei der aktuellen Liveprüfung 404 lieferten; keine Bildzuordnungen geändert.
+- **Prüfung:** ZIP 1291/1291, PHP 13/13, Quellvergleich genau 2 betroffene PHP-Dateien, Browser-Regressionen 360/390/620/760/1024 px bestanden; GitHub Action [42586622583](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/42586622583).
+- **Volles Installations-ZIP:** https://github.com/hallo-netizen/affiliate-pferdeportal/releases/download/hobby-depot-hd003-1.50.809-mobile-14px/HOBBY_DEPOT_DESIGN_HD003_1.50.809_MOBILE_14PX.zip
+- Archivierte Vollversion `HOBBY_DEPOT_DESIGN_HD003_1.50.809.zip` und gleiches `CURRENT.zip` im isolierten HD003-Pluginbüro. 65.763.496 Bytes, SHA-256 `3814889dd2178d1af3674a119284cab8d7317c7a70679ed835fb616fe0bbe79b`.
+- **WordPress-Installation/Sichtkontrolle noch offen.** Alte 1.50.808 bleibt unverändert als Rückfallversion, Pferdeatelier/K0, Affiliate HD009, Bildzentrale und Hobbyregister unangetastet.
+
+---
+
 # HD003 – Hobbydepot Design – CURRENT
 
 **Aktuelle vollständige lokale Installationsfassung: 1.50.808 (08.11.2026).** Letzter vom Nutzer im Screenshot bestätigter Live-Stand: 1.50.807; 1.50.808-Live-Sichtprüfung offen.
