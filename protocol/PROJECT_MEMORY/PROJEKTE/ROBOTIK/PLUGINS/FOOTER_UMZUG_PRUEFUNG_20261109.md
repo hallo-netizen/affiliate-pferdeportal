@@ -28,3 +28,6 @@ Original: `PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/TOOL-FOOTER-UMZUG/CURR
 - echter Nachprüfung im WordPress und Frontend.
 
 **Kein neues Plugin hier erzeugt.** Original im anderen Gebäude bleibt unangetastet. Nach tatsächlichem Robotik-Build jedes neue ZIP **im Robotik-Pluginbüro** archivieren und sofort das gemeinsame Versions-/Übergabeprotokoll aktualisieren. Der Benutzer muss dafür jetzt nichts installieren, exportieren oder hochladen.
+
+## Nutzerpräzisierung 09.11.2026
+**Ziel ist ausschließlich die Übertragung benötigter Footer-Seiten samt Inhalt und Menüs – niemals Design.** Genaue Regeln im [Footer-Umzug-Zielvertrag](FOOTER_UMZUG_ZIELVERTRAG_20261109.md). Noch keine freigegebene Robotik-Plugin-Datei.

@@ -16,3 +16,6 @@ Das [Eigenschaftsschema](EIGENSCHAFTEN_SCHEMA_V1.md) beschreibt alle Felder und 
 - Einheitliches Schema: **angelegt**. Tatsächliche Klassifizierung der Eigenschaften, Modelle/Preis/Finder-Eignung: **OFFEN**.
 - Der Produkt-/Kategorien-Status wird **nur** in `../../KATEGORIE/CURRENT_STATE.md` geführt; kein zweiter CURRENT hier.
 - Nächster sinnvoller Schritt: bei der ohnehin stattfindenden fachlichen Produktrecherche **zugleich** die passenden Merkmale und Belege erfassen, zuerst Konfliktfälle AMR/FTF/Palettentransport, SCARA/Delta, professionelle/private Fensterreinigung. Kein Nutzer-Upload nötig.
+
+## Klare Rolle zum Magazinbüro
+Dieses bestehende WISSENSDATENBANK-Büro definiert nur das Robotertypen-Eigenschaftsschema (eine `rb...`-Quelle). Die **öffentliche Registerfunktion** gehört zu [MAGAZIN/ROBOTERREGISTER](../../MAGAZIN/ROBOTERREGISTER/START_HERE.md) und untersucht **konkrete Hersteller-Modelle** als andere Datensatzart. Keine zweite Robotertypen-Datenwahrheit.
