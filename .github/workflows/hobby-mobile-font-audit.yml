@@ -1,0 +1,66 @@
+name: Hobby Depot mobile category intro font audit
+on:
+  push:
+    branches:
+      - audit/hobby-mobile-expanded-font-20261109
+    paths:
+      - .github/workflows/hobby-mobile-font-audit.yml
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect exact CURRENT 1.50.808 templates and mobile CSS
+        run: |
+          python3 - <<'PY'
+          import zipfile,hashlib,re,os
+          root='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/'
+          p=root+'CURRENT.zip'
+          with zipfile.ZipFile(p) as z:
+            print('SOURCE_BYTES',os.path.getsize(p),'SHA256',hashlib.sha256(open(p,'rb').read()).hexdigest())
+            print('ARCHIVE_FILES',len(z.namelist()))
+            keys=('pa390-intro','intro-more','Mehr erfahren','intro-lead','read-more','show-more')
+            files=[]
+            for n in z.namelist():
+              if not n.endswith(('.php','.css','.js','.html')): continue
+              b=z.read(n)
+              if len(b)>12000000: continue
+              s=b.decode('utf-8','replace')
+              matches=[x for x in keys if x.lower() in s.lower()]
+              if matches:
+                files.append((n,s,matches))
+            print('INTRO_RELATED_FILES',len(files))
+            for n,s,hits in files:
+              print('===FILE===',n,'BYTES',len(s),'MATCHES',hits)
+              lines=s.splitlines()
+              selected=[(i,l) for i,l in enumerate(lines,1) if any(k.lower() in l.lower() for k in keys)]
+              print('MATCHED_LINES',len(selected))
+              for i,l in selected[:110]:
+                if len(l)>2200:
+                  for k in keys:
+                    start=l.lower().find(k.lower())
+                    if start>=0: print('L',i,'...',l[max(0,start-250):start+600])
+                else: print('L',i,l[:1700])
+            print('===CSS_DIRECT_FONT_RULES===')
+            for n in z.namelist():
+              if not n.endswith(('.php','.css')): continue
+              b=z.read(n)
+              if len(b)>12000000:continue
+              s=b.decode('utf-8','replace')
+              patterns=[
+                r'[^{}]{0,180}(?:pa390-intro-lead|pa390-intro-more-text|pa390-intro-more|pa390-intro-copy)[^{}]{0,180}\{[^{}]{0,900}\}',
+                r'[^{}]{0,180}(?:pa255-intro|pa266-intro|pa272-intro|pa273-intro)[^{}]{0,180}\{[^{}]{0,500}\}',
+              ]
+              groups=[]
+              for pat in patterns:
+                for m in re.finditer(pat,s,re.I):
+                  rule=m.group()
+                  if 'font' in rule.lower() or 'line-height' in rule.lower():
+                    groups.append(rule[:850].replace(chr(10),' '))
+              if groups:
+                print('FONT_RULE_FILE',n,'RULE_COUNT',len(groups))
+                for rule in groups[:90]: print('FONT_RULE',rule)
+            print('===END AUDIT===')
+          PY
