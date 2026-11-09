@@ -1,0 +1,33 @@
+name: HD homepage Yoast live title quick check
+on:
+  push:
+    branches: [hobbyroom/seo-yoast-coverage-20261109]
+    paths: [.github/workflows/hd-home-yoast-current.yml]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read actual title, description and Yoast REST homepage output
+        run: |
+          python3 - <<'PY'
+          import urllib.request,urllib.parse,re,json,html
+          urls=['https://www.hobby-depot.de/','https://www.hobby-depot.de/wp-json/yoast/v1/get_head?url='+urllib.parse.quote('https://www.hobby-depot.de/',safe='')]
+          for u in urls:
+            print('CHECKING',u,flush=True)
+            try:
+              req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0','Cache-Control':'no-cache'})
+              with urllib.request.urlopen(req,timeout=15) as r:
+                text=r.read(1000000).decode('utf-8','replace')
+                print('STATUS',r.status,'FINAL',r.url,'CACHE',r.headers.get('Cache-Control'),flush=True)
+                if '/wp-json/' in u:
+                  j=json.loads(text)
+                  print('YOAST_JSON',json.dumps({'status':j.get('status'),'json_title':(j.get('json') or {}).get('title'),'json_description':(j.get('json') or {}).get('description')},ensure_ascii=False),flush=True)
+                else:
+                  for pattern in [r'<title[^>]*>(.*?)</title>',r'<meta[^>]*name=["\\\x27]description["\\\x27][^>]*>']:
+                    matches=re.findall(pattern,text,re.I|re.S)
+                    print('HTML_MATCHES',pattern,[html.unescape(x.strip())[:700] for x in matches[:3]],flush=True)
+                  print('YOAST_COMMENT',re.findall(r'<!-- This site is optimized with the Yoast SEO plugin [^>]+-->',text)[:1],flush=True)
+            except Exception as e:print('ERROR',type(e).__name__,str(e),flush=True)
+          PY
