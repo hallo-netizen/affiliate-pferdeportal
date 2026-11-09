@@ -1,0 +1,42 @@
+name: HD009 idealo setup controls and readiness audit
+on:
+  push:
+    branches: [hobbyroom/hd009-idealo-activation-20261109]
+    paths: [.github/workflows/hd009-idealo-setup-controls.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Print current provider UI and validation facts only
+        run: |
+          python3 - <<'PY'
+          import zipfile,re,pathlib
+          p=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          with zipfile.ZipFile(p) as z:
+            files=['affiliate-portal-router/includes/trait-ppar-idealo.php','affiliate-portal-router/includes/class-hdar-amazon-start.php','affiliate-portal-router/includes/trait-ppar-provider-registry.php','affiliate-portal-router/includes/class-ppar-admin-kiss.php']
+            for file in files:
+              a=z.read(file).decode('utf8').splitlines()
+              print('===FILE===',file,'LINES',len(a))
+              if 'trait-ppar-idealo' in file:
+                wanted=[(55,155),(640,760),(900,990),(1450,1660)]
+                for x,y in wanted:
+                  for i in range(x-1,min(y,len(a))):
+                    if i<x+104 or any(k in a[i] for k in ['Idealo','idealo','Feed','API','Adspace','test','Test','Import','Aktiv','modus','Modus','freig','Freig','netzwerk','Netzwerk','Form','form','checkbox','checkbox']):
+                      print('SRC',i+1,a[i][:1000])
+                for i,l in enumerate(a):
+                  if re.search(r'function (idealo_provider_access_save|idealo_provider_access_test|idealo_render_access_card|idealo_render_specialist_content|idealo_render_sync_card|idealo_settings_defaults)',l):
+                    print('FUNC',i+1,l[:1000])
+                    for j in range(i,min(i+65,len(a))):print('F',j+1,a[j][:1050])
+              elif 'class-hdar-amazon' in file:
+                for i,l in enumerate(a):
+                  if any(k in l for k in ['launch_active','hdar_launch','Affiliate-Zentrale → idealo','amazon_idealo']):
+                    print('SRC',i+1,l[:900])
+              elif 'provider-registry' in file:
+                for i in range(64,85):print('SRC',i+1,a[i][:1050])
+              else:
+                for i,l in enumerate(a):
+                  if "button('idealo'" in l or "idealo-Standardfeed" in l:print('SRC',i+1,l[:1200])
+          PY
