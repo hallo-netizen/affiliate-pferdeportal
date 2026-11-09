@@ -1,0 +1,587 @@
+{
+  "source": "HOBBYDEPOT_YOAST_LIVE_AUDIT_20261109.json",
+  "live_verified": true,
+  "findings": {
+    "total_yoast_urls": 818,
+    "sitemap_types": {
+      "https://www.hobby-depot.de/post-sitemap.xml": 12,
+      "https://www.hobby-depot.de/page-sitemap.xml": 487,
+      "https://www.hobby-depot.de/hdg_term-sitemap.xml": 308,
+      "https://www.hobby-depot.de/category-sitemap.xml": 11,
+      "https://www.hobby-depot.de/author-sitemap.xml": 1
+    },
+    "rest_missing_count": {
+      "pages": 0,
+      "posts": 0,
+      "categories": 3509
+    },
+    "rest_total_count": {
+      "pages": 484,
+      "posts": 6,
+      "categories": 3520
+    },
+    "sampled_total": 61,
+    "sampled_404": [
+      "https://www.hobby-depot.de/hobbyfinder/",
+      "https://www.hobby-depot.de/magazin/hobbyfinder/",
+      "https://www.hobby-depot.de/hobby-register/",
+      "https://www.hobby-depot.de/glossar/",
+      "https://www.hobby-depot.de/hobbys/",
+      "https://www.hobby-depot.de/hobbyfinder",
+      "https://www.hobby-depot.de/magazin/hobby-finder/",
+      "https://www.hobby-depot.de/hobby-finder/",
+      "https://www.hobby-depot.de/magazin/hobbyregister/",
+      "https://www.hobby-depot.de/magazin/ungewoehnliche-skurrile-hobbys/",
+      "https://www.hobby-depot.de/magazin/neue-hobbys-trends/",
+      "https://www.hobby-depot.de/magazin/hobby-ideen-inspiration/",
+      "https://www.hobby-depot.de/magazin/hobby-portraets/",
+      "https://www.hobby-depot.de/magazin/vergleiche-alternativen/"
+    ],
+    "sampled_no_description": [
+      "https://www.hobby-depot.de/",
+      "https://www.hobby-depot.de/hobbyregister/",
+      "https://www.hobby-depot.de/magazin/",
+      "https://www.hobby-depot.de/kontakt/",
+      "https://www.hobby-depot.de/anzeigen/",
+      "https://www.hobby-depot.de/anzeigenmarkt/",
+      "https://www.hobby-depot.de/forschen/messen-analysieren/elektrochemie-als-hobby/",
+      "https://www.hobby-depot.de/forschen/mikroskopie/hobby-mikroskopie/",
+      "https://www.hobby-depot.de/technik/digitale-fertigung/cad-als-hobby/",
+      "https://www.hobby-depot.de/hobbywelten/",
+      "https://www.hobby-depot.de/test/",
+      "https://www.hobby-depot.de/kettenhemd-ringe-richtig-schliessen/",
+      "https://www.hobby-depot.de/fertigen/buch-papier/buchbinden/",
+      "https://www.hobby-depot.de/gestalten/druck-foto/fotografie/",
+      "https://www.hobby-depot.de/category/ausruestung/",
+      "https://www.hobby-depot.de/category/buchbinden-online/",
+      "https://www.hobby-depot.de/category/sportdrachen-drachen-leinen/",
+      "https://www.hobby-depot.de/author/admin/",
+      "https://www.hobby-depot.de/category/cad-als-hobby-3d-modellierung/",
+      "https://www.hobby-depot.de/category/bier-brauen-abfuellen-fehler/",
+      "https://www.hobby-depot.de/category/cider-herstellen-abfuellen-fehler/",
+      "https://www.hobby-depot.de/category/flechtenbestimmung-verwechslungen-und-grenzen/",
+      "https://www.hobby-depot.de/category/moosbestimmung-verwechslungen-und-grenzen/",
+      "https://www.hobby-depot.de/category/marmorpapier-abheben-finish/",
+      "https://www.hobby-depot.de/category/kloeppeln-abschluss-fehler/",
+      "https://www.hobby-depot.de/category/ship-spotting-ais-und-tracking/",
+      "https://www.hobby-depot.de/category/schildermalerei-alphabete-schrift/",
+      "https://www.hobby-depot.de/category/moebelrestaurierung-alte-beschichtungen-finish/",
+      "https://www.hobby-depot.de/category/teqball-angriff-rueckspiel/",
+      "https://www.hobby-depot.de/category/3d-bogenschiessen-ausruestung-kosten/",
+      "https://www.hobby-depot.de/category/3d-scanning-ausruestung-kosten/",
+      "https://www.hobby-depot.de/category/aeroponik-ausruestung-kosten/",
+      "https://www.hobby-depot.de/category/airbrush-ausruestung/",
+      "https://www.hobby-depot.de/category/alte-computer-ausruestung-kosten/",
+      "https://www.hobby-depot.de/category/alte-schluessel-ausruestung-kosten/",
+      "https://www.hobby-depot.de/category/alte-spielekonsolen-restaurieren-ausruestung-kosten/",
+      "https://www.hobby-depot.de/category/ameisenhaltung-ausruestung-kosten/",
+      "https://www.hobby-depot.de/category/architekturmodellbau-ausruestung-kosten/",
+      "https://www.hobby-depot.de/category/arduino-ausruestung-kosten/",
+      "https://www.hobby-depot.de/category/artemia-zucht-ausruestung-kosten/",
+      "https://www.hobby-depot.de/category/asselhaltung-ausruestung-kosten/",
+      "https://www.hobby-depot.de/category/astrofotografie-ausruestung-kosten/",
+      "https://www.hobby-depot.de/category/automodellbau-ausruestung-kosten/"
+    ],
+    "sampled_no_canonical": [
+      "https://www.hobby-depot.de/hobbyregister/"
+    ],
+    "sampled_noindex": []
+  },
+  "rest_summary": {
+    "pages": {
+      "total": 484,
+      "in_sitemap": 484,
+      "missing_sitemap": 0,
+      "declared_noindex": 0,
+      "empty_yoast_description": 484,
+      "empty_yoast_canonical": 0,
+      "missing_sitemap_examples": [],
+      "missing_desc_examples": [
+        {
+          "id": 903223,
+          "slug": "anzeigenmarkt",
+          "link": "https://www.hobby-depot.de/anzeigenmarkt/"
+        },
+        {
+          "id": 903222,
+          "slug": "werb-anzeigebedingungen",
+          "link": "https://www.hobby-depot.de/werb-anzeigebedingungen/"
+        },
+        {
+          "id": 903220,
+          "slug": "disclaimer-2",
+          "link": "https://www.hobby-depot.de/disclaimer-2/"
+        },
+        {
+          "id": 903219,
+          "slug": "agb-2",
+          "link": "https://www.hobby-depot.de/agb-2/"
+        },
+        {
+          "id": 903217,
+          "slug": "faq-2",
+          "link": "https://www.hobby-depot.de/faq-2/"
+        },
+        {
+          "id": 903213,
+          "slug": "journal",
+          "link": "https://www.hobby-depot.de/journal/"
+        },
+        {
+          "id": 903162,
+          "slug": "wolkenbeobachtung",
+          "link": "https://www.hobby-depot.de/forschen/wetter-umwelt/wolkenbeobachtung/"
+        },
+        {
+          "id": 903161,
+          "slug": "wildtiermonitoring",
+          "link": "https://www.hobby-depot.de/forschen/citizen-science/wildtiermonitoring/"
+        },
+        {
+          "id": 903160,
+          "slug": "vogelzaehlungen",
+          "link": "https://www.hobby-depot.de/forschen/citizen-science/vogelzaehlungen/"
+        },
+        {
+          "id": 903159,
+          "slug": "trainspotting",
+          "link": "https://www.hobby-depot.de/forschen/spotting-verkehr/trainspotting/"
+        }
+      ]
+    },
+    "posts": {
+      "total": 6,
+      "in_sitemap": 6,
+      "missing_sitemap": 0,
+      "declared_noindex": 0,
+      "empty_yoast_description": 6,
+      "empty_yoast_canonical": 0,
+      "missing_sitemap_examples": [],
+      "missing_desc_examples": [
+        {
+          "id": 904015,
+          "slug": "designtest-zweileiner-oder-vierleiner-hobby-depot",
+          "link": "https://www.hobby-depot.de/designtest-zweileiner-oder-vierleiner-hobby-depot/"
+        },
+        {
+          "id": 903190,
+          "slug": "kettenhemd-kanten-abschluesse",
+          "link": "https://www.hobby-depot.de/kettenhemd-kanten-abschluesse/"
+        },
+        {
+          "id": 903187,
+          "slug": "kettenhemd-ringe-zangen-auswahl",
+          "link": "https://www.hobby-depot.de/kettenhemd-ringe-zangen-auswahl/"
+        },
+        {
+          "id": 903185,
+          "slug": "kettenhemd-european-4-in-1",
+          "link": "https://www.hobby-depot.de/kettenhemd-european-4-in-1/"
+        },
+        {
+          "id": 903183,
+          "slug": "kettenhemd-ringe-richtig-schliessen",
+          "link": "https://www.hobby-depot.de/kettenhemd-ringe-richtig-schliessen/"
+        },
+        {
+          "id": 900051,
+          "slug": "test",
+          "link": "https://www.hobby-depot.de/test/"
+        }
+      ]
+    },
+    "categories": {
+      "total": 3520,
+      "in_sitemap": 11,
+      "missing_sitemap": 3509,
+      "declared_noindex": 0,
+      "empty_yoast_description": 3520,
+      "empty_yoast_canonical": 0,
+      "missing_sitemap_examples": [
+        {
+          "id": 3654,
+          "slug": "cad-als-hobby-3d-modellierung",
+          "link": "https://www.hobby-depot.de/category/cad-als-hobby-3d-modellierung/",
+          "robots": {
+            "index": "index",
+            "follow": "follow",
+            "max-snippet": "max-snippet:-1",
+            "max-image-preview": "max-image-preview:large",
+            "max-video-preview": "max-video-preview:-1"
+          },
+          "canonical": "https://www.hobby-depot.de/category/cad-als-hobby-3d-modellierung/"
+        },
+        {
+          "id": 4135,
+          "slug": "bier-brauen-abfuellen-fehler",
+          "link": "https://www.hobby-depot.de/category/bier-brauen-abfuellen-fehler/",
+          "robots": {
+            "index": "index",
+            "follow": "follow",
+            "max-snippet": "max-snippet:-1",
+            "max-image-preview": "max-image-preview:large",
+            "max-video-preview": "max-video-preview:-1"
+          },
+          "canonical": "https://www.hobby-depot.de/category/bier-brauen-abfuellen-fehler/"
+        },
+        {
+          "id": 4107,
+          "slug": "cider-herstellen-abfuellen-fehler",
+          "link": "https://www.hobby-depot.de/category/cider-herstellen-abfuellen-fehler/",
+          "robots": {
+            "index": "index",
+            "follow": "follow",
+            "max-snippet": "max-snippet:-1",
+            "max-image-preview": "max-image-preview:large",
+            "max-video-preview": "max-video-preview:-1"
+          },
+          "canonical": "https://www.hobby-depot.de/category/cider-herstellen-abfuellen-fehler/"
+        },
+        {
+          "id": 5908,
+          "slug": "flechtenbestimmung-verwechslungen-und-grenzen",
+          "link": "https://www.hobby-depot.de/category/flechtenbestimmung-verwechslungen-und-grenzen/",
+          "robots": {
+            "index": "index",
+            "follow": "follow",
+            "max-snippet": "max-snippet:-1",
+            "max-image-preview": "max-image-preview:large",
+            "max-video-preview": "max-video-preview:-1"
+          },
+          "canonical": "https://www.hobby-depot.de/category/flechtenbestimmung-verwechslungen-und-grenzen/"
+        },
+        {
+          "id": 6039,
+          "slug": "moosbestimmung-verwechslungen-und-grenzen",
+          "link": "https://www.hobby-depot.de/category/moosbestimmung-verwechslungen-und-grenzen/",
+          "robots": {
+            "index": "index",
+            "follow": "follow",
+            "max-snippet": "max-snippet:-1",
+            "max-image-preview": "max-image-preview:large",
+            "max-video-preview": "max-video-preview:-1"
+          },
+          "canonical": "https://www.hobby-depot.de/category/moosbestimmung-verwechslungen-und-grenzen/"
+        },
+        {
+          "id": 3411,
+          "slug": "marmorpapier-abheben-finish",
+          "link": "https://www.hobby-depot.de/category/marmorpapier-abheben-finish/",
+          "robots": {
+            "index": "index",
+            "follow": "follow",
+            "max-snippet": "max-snippet:-1",
+            "max-image-preview": "max-image-preview:large",
+            "max-video-preview": "max-video-preview:-1"
+          },
+          "canonical": "https://www.hobby-depot.de/category/marmorpapier-abheben-finish/"
+        },
+        {
+          "id": 3754,
+          "slug": "kloeppeln-abschluss-fehler",
+          "link": "https://www.hobby-depot.de/category/kloeppeln-abschluss-fehler/",
+          "robots": {
+            "index": "index",
+            "follow": "follow",
+            "max-snippet": "max-snippet:-1",
+            "max-image-preview": "max-image-preview:large",
+            "max-video-preview": "max-video-preview:-1"
+          },
+          "canonical": "https://www.hobby-depot.de/category/kloeppeln-abschluss-fehler/"
+        },
+        {
+          "id": 6164,
+          "slug": "ship-spotting-ais-und-tracking",
+          "link": "https://www.hobby-depot.de/category/ship-spotting-ais-und-tracking/",
+          "robots": {
+            "index": "index",
+            "follow": "follow",
+            "max-snippet": "max-snippet:-1",
+            "max-image-preview": "max-image-preview:large",
+            "max-video-preview": "max-video-preview:-1"
+          },
+          "canonical": "https://www.hobby-depot.de/category/ship-spotting-ais-und-tracking/"
+        },
+        {
+          "id": 4421,
+          "slug": "schildermalerei-alphabete-schrift",
+          "link": "https://www.hobby-depot.de/category/schildermalerei-alphabete-schrift/",
+          "robots": {
+            "index": "index",
+            "follow": "follow",
+            "max-snippet": "max-snippet:-1",
+            "max-image-preview": "max-image-preview:large",
+            "max-video-preview": "max-video-preview:-1"
+          },
+          "canonical": "https://www.hobby-depot.de/category/schildermalerei-alphabete-schrift/"
+        },
+        {
+          "id": 4196,
+          "slug": "moebelrestaurierung-alte-beschichtungen-finish",
+          "link": "https://www.hobby-depot.de/category/moebelrestaurierung-alte-beschichtungen-finish/",
+          "robots": {
+            "index": "index",
+            "follow": "follow",
+            "max-snippet": "max-snippet:-1",
+            "max-image-preview": "max-image-preview:large",
+            "max-video-preview": "max-video-preview:-1"
+          },
+          "canonical": "https://www.hobby-depot.de/category/moebelrestaurierung-alte-beschichtungen-finish/"
+        },
+        {
+          "id": 3759,
+          "slug": "teqball-angriff-rueckspiel",
+          "link": "https://www.hobby-depot.de/category/teqball-angriff-rueckspiel/",
+          "robots": {
+            "index": "index",
+            "follow": "follow",
+            "max-snippet": "max-snippet:-1",
+            "max-image-preview": "max-image-preview:large",
+            "max-video-preview": "max-video-preview:-1"
+          },
+          "canonical": "https://www.hobby-depot.de/category/teqball-angriff-rueckspiel/"
+        },
+        {
+          "id": 5815,
+          "slug": "3d-bogenschiessen-ausruestung-kosten",
+          "link": "https://www.hobby-depot.de/category/3d-bogenschiessen-ausruestung-kosten/",
+          "robots": {
+            "index": "index",
+            "follow": "follow",
+            "max-snippet": "max-snippet:-1",
+            "max-image-preview": "max-image-preview:large",
+            "max-video-preview": "max-video-preview:-1"
+          },
+          "canonical": "https://www.hobby-depot.de/category/3d-bogenschiessen-ausruestung-kosten/"
+        }
+      ],
+      "missing_desc_examples": [
+        {
+          "id": 3654,
+          "slug": "cad-als-hobby-3d-modellierung",
+          "link": "https://www.hobby-depot.de/category/cad-als-hobby-3d-modellierung/"
+        },
+        {
+          "id": 4135,
+          "slug": "bier-brauen-abfuellen-fehler",
+          "link": "https://www.hobby-depot.de/category/bier-brauen-abfuellen-fehler/"
+        },
+        {
+          "id": 4107,
+          "slug": "cider-herstellen-abfuellen-fehler",
+          "link": "https://www.hobby-depot.de/category/cider-herstellen-abfuellen-fehler/"
+        },
+        {
+          "id": 5908,
+          "slug": "flechtenbestimmung-verwechslungen-und-grenzen",
+          "link": "https://www.hobby-depot.de/category/flechtenbestimmung-verwechslungen-und-grenzen/"
+        },
+        {
+          "id": 6039,
+          "slug": "moosbestimmung-verwechslungen-und-grenzen",
+          "link": "https://www.hobby-depot.de/category/moosbestimmung-verwechslungen-und-grenzen/"
+        },
+        {
+          "id": 3411,
+          "slug": "marmorpapier-abheben-finish",
+          "link": "https://www.hobby-depot.de/category/marmorpapier-abheben-finish/"
+        },
+        {
+          "id": 3754,
+          "slug": "kloeppeln-abschluss-fehler",
+          "link": "https://www.hobby-depot.de/category/kloeppeln-abschluss-fehler/"
+        },
+        {
+          "id": 6164,
+          "slug": "ship-spotting-ais-und-tracking",
+          "link": "https://www.hobby-depot.de/category/ship-spotting-ais-und-tracking/"
+        },
+        {
+          "id": 4421,
+          "slug": "schildermalerei-alphabete-schrift",
+          "link": "https://www.hobby-depot.de/category/schildermalerei-alphabete-schrift/"
+        },
+        {
+          "id": 4196,
+          "slug": "moebelrestaurierung-alte-beschichtungen-finish",
+          "link": "https://www.hobby-depot.de/category/moebelrestaurierung-alte-beschichtungen-finish/"
+        }
+      ]
+    }
+  },
+  "home": {
+    "https://hobby-depot.de/": {
+      "status": 200,
+      "final": "https://www.hobby-depot.de/",
+      "title": "Hobby Depot -",
+      "description": "",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "canonical": "https://www.hobby-depot.de/",
+      "body_class": [
+        "home",
+        "blog",
+        "wp-embed-responsive",
+        "wp-theme-listinghive",
+        "hd-owned-front-template-v150709",
+        "hp-theme--listinghive",
+        "pftk-design-profile-hobby-depot",
+        "hd-listinghive-v150616",
+        "hd-home-v150616"
+      ],
+      "h1": "Entdecke dein nächstes Hobby."
+    },
+    "https://www.hobby-depot.de/": {
+      "status": 200,
+      "final": "https://www.hobby-depot.de/",
+      "title": "Hobby Depot -",
+      "description": "",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "canonical": "https://www.hobby-depot.de/",
+      "body_class": [
+        "home",
+        "blog",
+        "wp-embed-responsive",
+        "wp-theme-listinghive",
+        "hd-owned-front-template-v150709",
+        "hp-theme--listinghive",
+        "pftk-design-profile-hobby-depot",
+        "hd-listinghive-v150616",
+        "hd-home-v150616"
+      ],
+      "h1": "Entdecke dein nächstes Hobby."
+    }
+  },
+  "special_pages": [
+    {
+      "id": 903223,
+      "link": "https://www.hobby-depot.de/anzeigenmarkt/",
+      "status": "publish",
+      "type": "page",
+      "slug": "anzeigenmarkt",
+      "parent": 0,
+      "robots": {
+        "index": "index",
+        "follow": "follow",
+        "max-snippet": "max-snippet:-1",
+        "max-image-preview": "max-image-preview:large",
+        "max-video-preview": "max-video-preview:-1"
+      },
+      "canonical": "https://www.hobby-depot.de/anzeigenmarkt/",
+      "title": "Anzeigenmarkt - Dein Hobby Depot",
+      "description": "",
+      "in_xml": true
+    },
+    {
+      "id": 903005,
+      "link": "https://www.hobby-depot.de/magazin/wissen-glossar/",
+      "status": "publish",
+      "type": "page",
+      "slug": "wissen-glossar",
+      "parent": 900004,
+      "robots": {
+        "index": "index",
+        "follow": "follow",
+        "max-snippet": "max-snippet:-1",
+        "max-image-preview": "max-image-preview:large",
+        "max-video-preview": "max-video-preview:-1"
+      },
+      "canonical": "https://www.hobby-depot.de/magazin/wissen-glossar/",
+      "title": "Wissen & Glossar - Dein Hobby Depot",
+      "description": "",
+      "in_xml": true
+    },
+    {
+      "id": 902588,
+      "link": "https://www.hobby-depot.de/technik/smart-home/",
+      "status": "publish",
+      "type": "page",
+      "slug": "smart-home",
+      "parent": 900067,
+      "robots": {
+        "index": "index",
+        "follow": "follow",
+        "max-snippet": "max-snippet:-1",
+        "max-image-preview": "max-image-preview:large",
+        "max-video-preview": "max-video-preview:-1"
+      },
+      "canonical": "https://www.hobby-depot.de/technik/smart-home/",
+      "title": "Smart Home - Dein Hobby Depot",
+      "description": "",
+      "in_xml": true
+    },
+    {
+      "id": 900190,
+      "link": "https://www.hobby-depot.de/magazin/hobbyfinder/",
+      "status": "publish",
+      "type": "page",
+      "slug": "hobbyfinder",
+      "parent": 900004,
+      "robots": {
+        "index": "index",
+        "follow": "follow",
+        "max-snippet": "max-snippet:-1",
+        "max-image-preview": "max-image-preview:large",
+        "max-video-preview": "max-video-preview:-1"
+      },
+      "canonical": "https://www.hobby-depot.de/magazin/hobbyfinder/",
+      "title": "Hobbyfinder - Dein Hobby Depot",
+      "description": "",
+      "in_xml": true
+    },
+    {
+      "id": 900004,
+      "link": "https://www.hobby-depot.de/magazin/",
+      "status": "publish",
+      "type": "page",
+      "slug": "magazin",
+      "parent": 0,
+      "robots": {
+        "index": "index",
+        "follow": "follow",
+        "max-snippet": "max-snippet:-1",
+        "max-image-preview": "max-image-preview:large",
+        "max-video-preview": "max-video-preview:-1"
+      },
+      "canonical": "https://www.hobby-depot.de/magazin/",
+      "title": "Magazin - Dein Hobby Depot",
+      "description": "",
+      "in_xml": true
+    },
+    {
+      "id": 900003,
+      "link": "https://www.hobby-depot.de/kontakt/",
+      "status": "publish",
+      "type": "page",
+      "slug": "kontakt",
+      "parent": 0,
+      "robots": {
+        "index": "index",
+        "follow": "follow",
+        "max-snippet": "max-snippet:-1",
+        "max-image-preview": "max-image-preview:large",
+        "max-video-preview": "max-video-preview:-1"
+      },
+      "canonical": "https://www.hobby-depot.de/kontakt/",
+      "title": "Kontakt - Dein Hobby Depot",
+      "description": "",
+      "in_xml": true
+    }
+  ],
+  "sampled_404": [
+    "https://www.hobby-depot.de/hobbyfinder/",
+    "https://www.hobby-depot.de/magazin/hobbyfinder/",
+    "https://www.hobby-depot.de/hobby-register/",
+    "https://www.hobby-depot.de/glossar/",
+    "https://www.hobby-depot.de/hobbys/",
+    "https://www.hobby-depot.de/hobbyfinder",
+    "https://www.hobby-depot.de/magazin/hobby-finder/",
+    "https://www.hobby-depot.de/hobby-finder/",
+    "https://www.hobby-depot.de/magazin/hobbyregister/",
+    "https://www.hobby-depot.de/magazin/ungewoehnliche-skurrile-hobbys/",
+    "https://www.hobby-depot.de/magazin/neue-hobbys-trends/",
+    "https://www.hobby-depot.de/magazin/hobby-ideen-inspiration/",
+    "https://www.hobby-depot.de/magazin/hobby-portraets/",
+    "https://www.hobby-depot.de/magazin/vergleiche-alternativen/"
+  ],
+  "sampled_noindex": []
+}
