@@ -1,0 +1,100 @@
+name: Hobby Depot category mobile computed font sizes
+on:
+  push:
+    branches:
+      - audit/hobby-mobile-expanded-font-20261109
+    paths:
+      - .github/workflows/hobby-mobile-rendered-font.yml
+permissions:
+  contents: read
+jobs:
+  mobile-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install headless browser
+        run: |
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install chromium
+      - name: Read live categories and compare visible/expanded mobile text
+        run: |
+          python3 - <<'PY'
+          from urllib.request import Request,urlopen
+          from urllib.parse import urlparse
+          from concurrent.futures import ThreadPoolExecutor,as_completed
+          from collections import defaultdict
+          import random,xml.etree.ElementTree as ET,re
+          from playwright.sync_api import sync_playwright
+          HEAD={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/130.0 Safari/537.36'}
+          def get(u,timeout=13):
+            with urlopen(Request(u,headers=HEAD),timeout=timeout) as r: return r.read().decode('utf-8','replace')
+          sitemap=get('https://www.hobby-depot.de/page-sitemap.xml')
+          root=ET.fromstring(sitemap)
+          urls=[el.text for el in root.iter() if el.tag.endswith('loc') and el.text and el.text.startswith('https://www.hobby-depot.de/')]
+          groups=defaultdict(list)
+          for u in urls:
+            depth=len([x for x in urlparse(u).path.split('/') if x])
+            if depth>=1:groups[depth].append(u)
+          print('TOTAL_PAGES',len(urls),'DEPTH_COUNTS',{d:len(v) for d,v in groups.items()})
+          random.seed(20261109)
+          candidates=[]
+          for depth,items in sorted(groups.items()):
+            sample=items[:10]+items[-8:]+random.sample(items,min(25,len(items)))
+            uniq=list(dict.fromkeys(sample))
+            candidates.extend((depth,u) for u in uniq[:45])
+          print('HTML_SCANNED',len(candidates))
+          def classify(item):
+            depth,url=item
+            try:
+              html=get(url)
+              intro='pa390-intro-copy' in html
+              t=re.search(r'<section[^>]+class="([^"]*(?:pa255-intro|pa266-intro|pa272-intro|pa273-intro)[^"]*)"',html,re.I)
+              return depth,url,intro,(t.group(1) if t else ''),len(html),'Mehr erfahren' in html,''
+            except Exception as e:return depth,url,False,'',0,False,type(e).__name__+':'+str(e)[:110]
+          data=[]
+          with ThreadPoolExecutor(max_workers=6) as pool:
+            futures={pool.submit(classify,x):x for x in candidates}
+            for f in as_completed(futures):data.append(f.result())
+          selection={}
+          for depth,url,intro,kind,n,more,error in data:
+            if intro and more:
+              kind=kind or 'unknown'
+              selection.setdefault(kind,[]).append((depth,url))
+          print('INTRO_FOUND',sum(v[2] for v in data),'EXACT_KIND_COUNTS',{k:len(v) for k,v in selection.items()})
+          print('SCAN_ERRORS',[(d,u,e) for d,u,_,_,_,_,e in data if e][:6])
+          tests=[]
+          for kind,items in sorted(selection.items()):
+            for depth,url in sorted(items)[:min(5,len(items))]:
+              tests.append((kind,depth,url))
+          print('SELECTED_TESTS',len(tests))
+          with sync_playwright() as p:
+            browser=p.chromium.launch(headless=True)
+            for width in (390,360):
+              page=browser.new_page(viewport={'width':width,'height':844},device_scale_factor=1,is_mobile=True,has_touch=True)
+              for kind,depth,url in tests:
+                try:
+                  page.goto(url,wait_until='domcontentloaded',timeout=27000)
+                  page.evaluate('document.fonts.ready')
+                  metrics=page.evaluate('''() => {
+                    const lead=document.querySelector('.pa390-intro-copy>.pa390-intro-lead');
+                    const desc=document.querySelector('.pa390-intro-more-text>p');
+                    const btn=document.querySelector('.pa390-intro-more>summary');
+                    const sec=lead?.closest('section');
+                    if (!lead || !desc) return {missing:true,details:document.querySelectorAll('details').length};
+                    const details=document.querySelector('details.pa390-intro-more');
+                    if(details)details.open=true;
+                    function style(el){const s=getComputedStyle(el);return {size:s.fontSize,family:s.fontFamily,line:s.lineHeight,weight:s.fontWeight,visible:el.getBoundingClientRect().width>0}}
+                    return {lead:style(lead),expanded:style(desc),button:style(btn),section:sec?.className,body:document.body.className.slice(0,220)};
+                  }''')
+                  if metrics.get('missing'):
+                    print('MISSING',width,kind,depth,url,metrics)
+                  else:
+                    a=float(metrics['lead']['size'].replace('px',''))
+                    b=float(metrics['expanded']['size'].replace('px',''))
+                    print('MEASURE',width,'DEPTH',depth,'KIND',kind,'LEAD',metrics['lead'],'EXPANDED',metrics['expanded'],'BUTTON',metrics['button'],'DIFF_PX',round(b-a,3),'URL',url)
+                    if abs(a-b)>0.1: print('FONT_MISMATCH',width,kind,depth,url,b-a)
+                except Exception as e:print('RENDER_ERROR',width,kind,depth,url,str(e)[:200])
+              page.close()
+            browser.close()
+          print('===LIVE_FONT_CHECK_END===')
+          PY
