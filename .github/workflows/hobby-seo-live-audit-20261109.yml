@@ -26,5 +26,7 @@ jobs:
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add "$FILE"
             git commit -m "Record read-only Yoast live sitemap and page coverage evidence" || true
+            git fetch origin hobbyroom/seo-yoast-coverage-20261109
+            git -c rebase.autoStash=true rebase origin/hobbyroom/seo-yoast-coverage-20261109
             git push origin HEAD:refs/heads/hobbyroom/seo-yoast-coverage-20261109
           fi
