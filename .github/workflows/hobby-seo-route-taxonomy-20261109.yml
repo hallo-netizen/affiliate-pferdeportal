@@ -1,0 +1,39 @@
+name: Hobbydepot SEO missing routes and category count exact diagnosis
+on:
+  push:
+    branches: [hobbyroom/seo-yoast-coverage-20261109]
+    paths: [.github/workflows/hobby-seo-route-taxonomy-20261109.yml]
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify missing 404 pages, category post counts, exact metadata
+        run: |
+          python3 - <<'PY'
+          import json,urllib.request,urllib.error,re
+          base='https://www.hobby-depot.de/wp-json/wp/v2/'
+          paths=['pages?slug=hobbyfinder','pages?slug=magazin','pages?slug=hobbyregister','pages?slug=startseite','pages?slug=home',
+            'categories/3654','categories/4135','categories/4107','categories?per_page=3&orderby=count&order=desc',
+            'types','https://www.hobby-depot.de/wp-json/yoast/v1/get_head?url=https%3A%2F%2Fwww.hobby-depot.de%2F']
+          for path in paths:
+            u=path if path.startswith('http') else base+path
+            try:
+              req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0'})
+              with urllib.request.urlopen(req,timeout=16) as r:
+                text=r.read(700000).decode('utf8','replace')
+                j=json.loads(text)
+                if isinstance(j,list):
+                  info=[{'id':q.get('id'),'slug':q.get('slug'),'link':q.get('link'),'count':q.get('count'),'status':q.get('status'),'parent':q.get('parent'),
+                    'yoast_desc':(q.get('yoast_head_json') or {}).get('description'),
+                    'yoast_robots':(q.get('yoast_head_json') or {}).get('robots')} for q in j[:15]]
+                elif path=='types':info=list(j.keys())
+                elif 'get_head' in path:info={'status':j.get('status'),'title':(j.get('json') or {}).get('title'),'description':(j.get('json') or {}).get('description')}
+                else:info={'id':j.get('id'),'slug':j.get('slug'),'link':j.get('link'),'count':j.get('count'),'status':j.get('status'),'description':str(j.get('description',''))[:200],
+                   'yoast_desc':(j.get('yoast_head_json') or {}).get('description'),'robots':(j.get('yoast_head_json') or {}).get('robots')}
+                print('CHECK',path,'HTTP',r.status,'DETAIL',json.dumps(info,ensure_ascii=False)[:5000])
+            except Exception as e:print('CHECK_ERROR',path,str(e)[:350])
+          PY
