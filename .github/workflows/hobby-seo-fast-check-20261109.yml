@@ -1,0 +1,36 @@
+name: Hobbydepot SEO immediate homepage and Hobbyfinder readback
+on:
+  push:
+    branches: [hobbyroom/seo-yoast-coverage-20261109]
+    paths: [.github/workflows/hobby-seo-fast-check-20261109.yml]
+permissions:
+  contents: read
+jobs:
+  quick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read only quick live inspection
+        run: |
+          python3 - <<'PY'
+          import re, urllib.request,urllib.error,json,zipfile,pathlib
+          p=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          with zipfile.ZipFile(p) as z:
+            s=z.read('affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php').decode()
+            for pat in ['hobbyfinder','hobby-finder','hobbyregister','yoast','wpseo','wp_head','add_shortcode','add_rewrite_rule']:
+              print('CODE_FIND',pat,len(list(re.finditer(re.escape(pat),s,re.I))))
+            for i,line in enumerate(s.splitlines()):
+              if re.search('hobbyfinder|hobby-finder|wpseo_|yoast|add_shortcode|add_rewrite_rule|is_front_page|is_home',line,re.I):
+                if i<6000:print('CODE',i+1,line[:450])
+          for u in ['https://www.hobby-depot.de/','https://www.hobby-depot.de/sitemap_index.xml','https://www.hobby-depot.de/hobbyfinder/','https://www.hobby-depot.de/magazin/hobbyfinder/','https://www.hobby-depot.de/wp-json/wp/v2/pages?per_page=1']:
+            try:
+              q=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0'})
+              with urllib.request.urlopen(q,timeout=10) as r:
+                b=r.read(500000).decode('utf8','replace')
+                print('LIVE',u,r.status,r.url,'LEN',len(b))
+                for m in re.findall(r'<title[^>]*>.*?</title>|<meta[^>]*name=["\\x27](?:description|robots)["\\x27][^>]*>|<link[^>]*rel=["\\x27]canonical["\\x27][^>]*>',b,re.I|re.S):print('META',m[:600])
+                if 'sitemap_index' in u:print('XML',b[:3000])
+                if 'wp-json' in u:print('WP',b[:1700])
+            except Exception as e:print('LIVE_ERROR',u,type(e).__name__,str(e)[:200])
+          PY
