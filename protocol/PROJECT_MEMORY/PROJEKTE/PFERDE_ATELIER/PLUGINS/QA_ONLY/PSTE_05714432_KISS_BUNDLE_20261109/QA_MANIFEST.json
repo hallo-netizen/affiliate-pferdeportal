@@ -1,0 +1,46 @@
+{
+  "version": "0.57.144.32",
+  "basis_version": "0.57.144.31",
+  "scope": "WORDPRESS_TEST_ONLY",
+  "status": "QA_ZIP_BUILT_NOT_INSTALLED",
+  "zip_name": "PSTE-0.57.144.32-KISS-REDAKTIONSBUERO-AUTOMATIK-TITEL-NUR-TEST.zip",
+  "zip_sha256": "ab0231850a9b79b3c5f8b103b2700bc7f6b2a87d3adac38009f43c1bbe2f653f",
+  "zip_size_bytes": 651291,
+  "original_zip_sha256": "0552539fc7eb4e6bfa32d3dea2b8c7e9949f69fc4c3259e2930fb12713e30d3c",
+  "private_qa_location": "/pferdeatelier/PLUGINS/QA/",
+  "total_entries": 121,
+  "unchanged_entries": 116,
+  "modified_entries": 5,
+  "php_lint_files_passed": 83,
+  "smoke_checks_passed": 17,
+  "mini_import_checks_passed": 7,
+  "crc": "PASS",
+  "source_readback": "PASS",
+  "full_wp_staging_run": "NOT_TESTED",
+  "full_workflow_passed": false,
+  "safe_boundaries": [
+    "NO_K0_CHANGE",
+    "NO_LIVE_CHANGE",
+    "NO_NEW_DB_TABLE",
+    "NO_NEW_WORKER",
+    "NO_AUTO_TAXONOMY_CREATION",
+    "PR_682_STILL_DRAFT"
+  ],
+  "features": [
+    "AREA_FILTERED_ALPHABETIC_CATEGORY_SEARCH",
+    "NO_ORDINARY_REASON_FIELD",
+    "RETURN_TO_CATEGORY_ROOM",
+    "READ_ONLY_GROUPED_CATEGORY_ANALYSIS",
+    "ONE_CLICK_CONFIRM_SAFE_EXISTING_CATEGORY_MATCHES",
+    "SUGGEST_MISSING_CATEGORIES_WITHOUT_CREATING",
+    "MEDICAL_HORSE_TOPICS_MAGAZIN_PROPOSAL",
+    "MINI_SINGLE_MAIN_QUESTION_RULE",
+    "OLD_MINI_BATCH_GOVERNANCE_COMPATIBLE"
+  ],
+  "limitations": [
+    "Bulk assignment requires one admin confirmation click",
+    "Automated proposals use only existing category evidence, not an external new research agent",
+    "Previously stored titles are not silently edited",
+    "Real TEST-WordPress installation and PSERC/PPM/K0 E2E not yet performed"
+  ]
+}
