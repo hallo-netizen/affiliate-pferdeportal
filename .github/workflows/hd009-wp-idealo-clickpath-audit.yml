@@ -1,0 +1,30 @@
+name: HD009 exact WordPress click path
+on:
+  push:
+    branches: [hobbyroom/hd009-idealo-activation-20261109]
+    paths: [.github/workflows/hd009-wp-idealo-clickpath-audit.yml]
+permissions:
+  contents: read
+jobs:
+  menu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect original 0.1.32 menu registration and link targets
+        run: |
+          python3 - <<'PY'
+          import zipfile,pathlib,re
+          p=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          with zipfile.ZipFile(p) as z:
+            for file in z.namelist():
+              if not file.endswith('.php'):continue
+              a=z.read(file).decode('utf8','replace').splitlines()
+              found=[]
+              for i,s in enumerate(a):
+                if 'add_menu_page(' in s or 'add_submenu_page(' in s or 'affiliate-portal-provider-idealo' in s or 'Netzwerke & API' in s or 'Netzwerke &amp; API' in s or ('idealo' in s and 'button(' in s):
+                  found.append(i)
+              if found:
+                print('FILE',file,'FOUND',len(found))
+                for i in found[:60]:
+                  for j in range(max(0,i-2),min(len(a),i+4)):print('MENULINE',j+1,a[j][:1100])
+          PY
