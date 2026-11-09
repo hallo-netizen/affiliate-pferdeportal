@@ -17,4 +17,10 @@ Die Kategorie-Content-Recherche hat inzwischen für alle **68 Robotertypen** ind
 
 ## Aktuelle A–Z- und Nischenprüfung 09.11.2026
 Aktuell 558 begrifflich eindeutige **Kandidaten** in 16 Fachbereichen von A bis Z (ursprünglich 35). 4 einfache Kurzdefinitionsentwürfe, **0 publizierte Glossarseiten**. Viele neue Begriffe sind **nicht** definitionswürdige Glossar-Landingpages, sondern künftig Software-/Ersatzteil-/Roboterprodukt- oder Magazin-/Anbieterthemen. Die V2 im `ROBOTERGLOSSAR/BEGRIFFSPOOL_V2.json` gilt; V1 im gleichen Büro ist nur Archiv. QA: `ROBOTERGLOSSAR/A_Z_QUALITAETSCHECK_20261109.md`.
-Kategorie-Master Revision 6: 68 Ausgangstypen plus 128 Forschungs-Randfelder, 108 davon neu nach Software/Teilen/Nischen/Service/Journal geordnet. Glossar hat **keine eigene Robotertypen-Masterliste**; gegen denselben KATEGORIE-Owner prüfen.
+Kategorie-Master Revision 8 (aktuell): 68 Ausgangstypen plus 139 Forschungs-Randfelder, 108 davon neu nach Software/Teilen/Nischen/Service/Journal geordnet. Glossar hat **keine eigene Robotertypen-Masterliste**; gegen denselben KATEGORIE-Owner prüfen.
+
+## Nischenabgrenzung, 09.11.2026 (Version 3)
+- Belegte, klar abgrenzbare Produktarten dürfen ausschließlich **einen** CORE-Produkttyp-Owner besitzen, zu dem das Magazin nur die **Branchenentwicklung/Grundlagen** erläutert, z. B. Bestäubungsrobotik und Golfball-Sammelrobotik.
+- Forschung/noch nicht angekündigt lieferbare Angebote bleiben hier als Zukunfts-/Entwicklungsthemen: Apfelblüten-Ausdünnungsrobotik (OSKAR), Pilzernterobotik (Studie), Bienenstockinspektion (TRL2), Golfbunker-Pflege und Tennisballsammeln (Hersteller: Coming Soon).
+- Aerones Rotorblattreparatur ist zunächst eine **HIVEPRESS-Dienstleister-/Leistungskategorie**, kein zusätzliches Hersteller-Geräte-Owner; im Magazin bei Bedarf technische Entwicklung erläutern.
+- Detailkonzept und klare Beispiele ohne SEO-Recherche: [NISCHEN_KONZEPT_V3_20261109.md](../KATEGORIE/RECHERCHE/NISCHEN_KONZEPT_V3_20261109.md). Masterdaten ausschließlich im Kategorie-Fachmaster, keine eigene Liste der 139 Forschungsidentitäten hier.
