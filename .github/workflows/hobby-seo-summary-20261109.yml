@@ -1,0 +1,68 @@
+name: Hobbydepot Yoast detailed audit summary
+on:
+  push:
+    branches: [hobbyroom/seo-yoast-coverage-20261109]
+    paths: [.github/workflows/hobby-seo-summary-20261109.yml]
+permissions:
+  contents: write
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Analyze every URL in previously verified live snapshot
+        run: |
+          python3 - <<'PY'
+          import pathlib,json,csv,collections
+          base=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/SEO/EVIDENCE')
+          j=json.loads((base/'HOBBYDEPOT_YOAST_LIVE_AUDIT_20261109.json').read_text())
+          rest=j['rest']
+          sm=j['sampled_pages']
+          sums={}
+          for kind in ('pages','posts','categories'):
+            entries=rest[kind]['entries']
+            indexed=[x for x in entries if x.get('in_xml')]
+            notindexed=[x for x in entries if not x.get('in_xml')]
+            noindex=[x for x in entries if 'noindex' in str(x.get('robots',''))]
+            missing_desc=[x for x in entries if not x.get('description')]
+            missing_canonical=[x for x in entries if not x.get('canonical')]
+            sums[kind]={'total':len(entries),'in_sitemap':len(indexed),'missing_sitemap':len(notindexed),
+              'declared_noindex':len(noindex),'empty_yoast_description':len(missing_desc),'empty_yoast_canonical':len(missing_canonical),
+              'missing_sitemap_examples':[{'id':x['id'],'slug':x['slug'],'link':x['link'],
+                'robots':x.get('robots'),'canonical':x.get('canonical')} for x in notindexed[:12]],
+              'missing_desc_examples':[{'id':x['id'],'slug':x['slug'],'link':x['link']} for x in missing_desc[:10]]}
+            print('TOTAL',kind,json.dumps(sums[kind],ensure_ascii=False))
+          print('HOME_CLASS',json.dumps(j['home'],ensure_ascii=False)[:6000])
+          pages=rest['pages']['entries']
+          special=[x for x in pages if any(t in str(x.get('slug','')) for t in ('hobbyfinder','hobbyregister','magazin','startseite','home','glossar','kontakt','anzeigen'))]
+          print('SPECIAL_PAGES',json.dumps(special,ensure_ascii=False)[:20000])
+          print('ALL_404_SAMPLED',json.dumps(j['findings']['sampled_404'],ensure_ascii=False))
+          print('ALL_NOINDEX_SAMPLED',json.dumps(j['findings']['sampled_noindex'],ensure_ascii=False))
+          print('ALL_NO_DESC_SAMPLED',json.dumps(j['findings']['sampled_no_description'],ensure_ascii=False)[:8000])
+          print('ALL_NO_CANONICAL_SAMPLED',json.dumps(j['findings']['sampled_no_canonical'],ensure_ascii=False)[:8000])
+          print('SOURCE_FILES',[{'file':k,'matched':v['total_matches']} for k,v in j['source'].items()])
+          summary={'source':'HOBBYDEPOT_YOAST_LIVE_AUDIT_20261109.json',
+                   'live_verified':True,'findings':j['findings'],
+                   'rest_summary':sums,'home':{k:{u:v.get(u) for u in ('status','final','title','description','robots','canonical','body_class','h1')} for k,v in j['home'].items()},
+                   'special_pages':special,
+                   'sampled_404':j['findings']['sampled_404'],
+                   'sampled_noindex':j['findings']['sampled_noindex']}
+          (base/'HOBBYDEPOT_YOAST_AUDIT_SUMMARY_20261109.json').write_text(json.dumps(summary,indent=2,ensure_ascii=False)+'\n')
+          csvfile=base/'HOBBYDEPOT_YOAST_MISSING_CATEGORIES_20261109.csv'
+          with csvfile.open('w',newline='',encoding='utf-8-sig') as f:
+            w=csv.writer(f);w.writerow(['WordPress-ID','Kategorie','URL','Yoast-Robots','Canonical','Yoast-Description'])
+            for x in rest['categories']['entries']:
+              if x.get('in_xml'):continue
+              w.writerow([x.get('id'),x.get('slug'),x.get('link'),x.get('robots'),x.get('canonical'),x.get('description')])
+          print('CREATED',str(csvfile),csvfile.stat().st_size,'summary bytes',(base/'HOBBYDEPOT_YOAST_AUDIT_SUMMARY_20261109.json').stat().st_size)
+          PY
+      - name: Save summary and complete 3509-row missing categories list
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/SEO/EVIDENCE/HOBBYDEPOT_YOAST_AUDIT_SUMMARY_20261109.json protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/SEO/EVIDENCE/HOBBYDEPOT_YOAST_MISSING_CATEGORIES_20261109.csv
+          git commit -m "Archive exact sitemap/REST comparison summary and all 3509 missing term URLs"
+          git fetch origin hobbyroom/seo-yoast-coverage-20261109
+          git rebase origin/hobbyroom/seo-yoast-coverage-20261109
+          git push origin HEAD:refs/heads/hobbyroom/seo-yoast-coverage-20261109
