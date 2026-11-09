@@ -1,0 +1,59 @@
+--- a/affiliate-portal-template-kit/pferde-template-kit.php
++++ b/affiliate-portal-template-kit/pferde-template-kit.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate Portal Template Kit (Pferde-kompatibel)
+  * Description: Allgemeines Template-/Design-Plugin für Affiliateportale. Pferde-Shortcodes bleiben als Kompatibilitätsalias erhalten.
+- * Version: 1.50.613
++ * Version: 1.50.614
+  * Author: OpenAI
+  * License: GPL-2.0-or-later
+  */
+@@ -10,7 +10,7 @@
+ if (!defined('ABSPATH')) { exit; }
+ 
+ final class Pferde_Template_Kit {
+-    const VERSION = '1.50.613';
++    const VERSION = '1.50.614';
+     const OPTION_BRAND_MENU_CACHE_GENERATION_V150574 = 'pftk_brand_menu_core_generation_v150574';
+     const OPTION_BRAND_MENU_CACHE_PREFIX_V150574 = 'pftk_brand_menu_core_v150574_';
+     const OPTION_MENU_STRUCTURE_CACHE_V150576 = 'pftk_menu_structure_v150576';
+@@ -11278,16 +11278,18 @@
+ 
+         global $wp_scripts, $wp_styles;
+         $script_handles = [
+-            'hivepress-authentication', 'hivepress-reviews-frontend', 'raty',
+-            'hivepress-core-frontend', 'hivepress-core', 'flatpickr-de', 'select2-de',
++            // V1.50.614: Modal-/Login-Basis (hivepress-core[-frontend],
++            // hivepress-authentication, fancybox) darf nicht entfernt werden:
++            // HivePress rendert die drei Konto-Dialoge auch auf normalen Seiten.
++            'hivepress-reviews-frontend', 'raty', 'flatpickr-de', 'select2-de',
+             'slick', 'sticky-sidebar', 'flatpickr', 'php-date-formatter', 'select2-full',
+-            'jquery-ui-touch-punch', 'fileupload', 'fancybox', 'intl-tel-input'
++            'jquery-ui-touch-punch', 'fileupload', 'intl-tel-input'
+         ];
+         $style_handles = [
+             'hivepress-paid-listings-frontend', 'hivepress-reviews-frontend',
+-            'hivepress-core-frontend', 'hivepress-core-common', 'hivepress-grid',
++            // Kern-/Dialog-Stile und Fancybox bleiben registriert und geladen.
+             'fontawesome-solid', 'fontawesome', 'jquery-ui', 'intl-tel-input',
+-            'select2', 'flatpickr', 'slick', 'fancybox'
++            'select2', 'flatpickr', 'slick'
+         ];
+         $owned_paths = [
+             '/plugins/hivepress/', '/plugins/hivepress-authentication/',
+@@ -11377,6 +11379,14 @@
+         wp_register_style('pferde-template-kit', false, [], self::VERSION);
+         wp_enqueue_style('pferde-template-kit');
+         wp_add_inline_style('pferde-template-kit', self::css());
++        // V1.50.614: Mobile Absicherung ausschliesslich fuer geschlossene
++        // HivePress-Authentifizierungsdialoge. Fancybox fuegt beim Oeffnen
++        // .fancybox-content am Dialog hinzu; die Anmeldung bleibt bedienbar.
++        wp_add_inline_style('pferde-template-kit', '@media (max-width:767px){'
++            . 'html body #user_login_modal.hp-modal:not(.fancybox-content),'
++            . 'html body #user_register_modal.hp-modal:not(.fancybox-content),'
++            . 'html body #user_password_request_modal.hp-modal:not(.fancybox-content)'
++            . '{display:none!important}}');
+     }
+ 
+     public static function render($type, $atts = []) {
