@@ -5,6 +5,16 @@
 > **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt.  
 > `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
 
+## NEUSTER ECHTER WP-STATUS – 09.11.2026 ca. 09:40 BERLIN / 61 MINI-THEMEN VOM NORMALWEG ZURÜCKGESTELLT
+
+**Betreiber-Screenshots auf isolierter TESTseite v0.57.144.26**: Externe SEO-Ergebnisdatei gespeichert, Anzeige 61 FREI / 20 BELEGT / 6 KLÄRUNG. Nach Klick auf `3. Freigegebene Themen an bestehende Planung übergeben`: In `SEO Themenengine → Themenprüfung` unter Titelwerkstatt `Gezielte Weitergabe nach Titelimport: 61 von 61 Themen bearbeitet; 61 zurückgestellt`. Auf derselben Seite: `Letzte Planübergabe: 0 übernommen, 0 zurückgestellt`. SEO-Redaktionsplan-Schreiber zeigt separat `0 Metadaten-Handoff bereit`; diese Seite ist nicht derselbe MINI-Checkpoint.
+
+**Nach Codeprüfung am tatsächlich installierten Paket .26:** `PSTE_Mini_Workflow::forwardToPlan` validiert 61 FREI-Themen, schreibt ggf. nur die Titel-Korrektur, merkt `plan_forwarded`/`plan_queued` separat vor und ruft `PSTE_Admin::processTitleDeskReentry` auf. Die Rückstellungszahl zählt im `PSTE_Admin::recordTitleDeskReentry` alle Ergebnisse ungleich PASS. Die reguläre Eigentümerprüfung `reanalyzeRetainedBacklogBatch` verlangt weiter eine vollständige Normal-Metadaten-/Kategorie-/Titelprüfung und `planning_suitability=YES`. Der große Rückstellungscount beweist **NICHT**, dass die 61 FREI-SEO-Entscheidungen verloren sind; aber er beweist, dass der End-to-End-Handoff **nicht erfolgreich ist**. `last_plan_report.forwarded` zählt nur neue Titelweitergaben pro letzter Aktion und kann deshalb 0 anzeigen, ohne die 61 gespeicherten Rückstellungen abzubilden. Keine komplette WP-Workflow-Simulation bisher; die bisherigen lokalen 159 Checks betrafen nur SEO-Import und 11 Checks die atomare Speicherung. Dies war eine unzureichende End-to-End-Abnahme; keine weitere Installation und keine Artikelproduktion.
+
+**Fehlende notwendige Laufzeit-Evidenz:** Die genaue Verteilung der 61 Rückstellungsgründe liegt ausschließlich im WordPress-TESTseitenbestand. PSTE .26 rendert **bereits ohne weitere Aktion** unmittelbar unter dem Text `Gezielte Weitergabe` einen Block `Dokumentierte Rückstellungsgründe` mit bis zu fünf Codes und Häufigkeiten (`PSTE_Admin::titleDeskReentryDiagnostics()`). **Nächster minimaler Handgriff:** Nur etwas nach unten scrollen, diesen Block fotografieren. KEIN weiterer Export/Keyword-Recherche/SEO-Import, kein neuer Plan-Klick. Erst danach einen einzelnen systemischen Fix auf Grundlage der tatsächlichen Gründe planen und gegen kompletten Weg samt bestehender Kategorie- und PSERC-Schnittstelle prüfen. K0/Live unverändert, PR #682 DRAFT.
+
+---
+
 ## NEUSTER ISTSTAND – 09.11.2026 / ECHTER WORDPRESS-SEO-IMPORTFEHLER / PSTE .26 QA ONLY
 
 **Echter Betreiberbefund nach dem Importversuch auf isolierter WP-TESTseite mit PSTE .25:** `Mini-Workflow: PSTE_MINI_ATOMIC_OPTION_CONFLICT_RELOAD_AND_RETRY`. Die 87 fachlichen Entscheidungen wurden vom Plugin vor dem atomaren Speichern validiert; das Speichern bzw. dessen Rücklesebestätigung ist **NICHT** erfolgreich belegt. **NICHT** erneut mit .25 importieren und noch keine Übergabe an Redaktionsplan/PSERC/K0.
