@@ -28,3 +28,7 @@ Das neue Büro besitzt keine Verknüpfung mit bestehenden Projekt-Daten. Es gibt
 
 ## Workflow-Abgleich 09.11.2026
 - [RECHERCHE/MASTER_ABGLEICH_20261109.md](RECHERCHE/MASTER_ABGLEICH_20261109.md) – nachgewiesener gemeinsamer Ablauf aus Hobbydepot/Hab & Bewahr; eine Masterquelle, ein abgeleitetes Zielprofil.
+
+## Aktueller Pluginstand 09.11.2026
+- [PLUGIN/CURRENT.zip](PLUGIN/CURRENT.zip) – **0.3.0 aktuell**, Nutzer meldet Installation.
+- [PLUGIN/RELEASE_PROTOKOLL.md](PLUGIN/RELEASE_PROTOKOLL.md) – Versionen, Tests, offene WordPress-Abnahme. Kein anderes Current verwenden.
