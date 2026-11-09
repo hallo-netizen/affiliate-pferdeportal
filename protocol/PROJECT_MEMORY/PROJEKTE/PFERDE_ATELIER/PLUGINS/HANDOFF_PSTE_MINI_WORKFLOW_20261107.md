@@ -1,5 +1,12 @@
 # Pferdeatelier – PSTE MINI – verbindliche Übergabe 07.11.2026
 
+## WICHTIGER NEUERER STAND 09.11.2026 – VOR ALLE ALTEN V16-V25-ANWEISUNGEN
+
+Die alten Workflowschritte weiter unten sind **historisch**. Neuester **verbindlicher** PSTE-Stand: **.31 vom Nutzer auf WordPress-TEST installiert, einzelne Kolik-Kategorie gespeichert und in Kategorie-Spalte nachgesehen**. **.32 nur unfertige Admin-UX-Arbeitskopie, keine TEST-ZIP.** Siehe **[vollständige Übergabe aus diesem Chat](QA_ONLY/PSTE_KISS_HANDOFF_20261109/PFERDEATELIER_PSTE_HANDOFF_20261109.md)** und [CURRENT_STATE.md](CURRENT_STATE.md). Keine alte Import- oder Planbindingsanweisung aus den nachfolgenden alten Datumsabschnitten wiederholen; externer MINI-SEO-/Titel-Owner bleibt einmalig, keine zweite Entscheidung in WordPress.
+
+---
+
+
 **Arbeitsstand:** PSTE-Testplugin **0.57.144.16** (NICHT K0 ändern, NICHT LIVE-K0 ausführen); aktuelles GitHub-Test-PR **#656**; Campus-Basis `hobbyroom/project-memory-campus-v1-20260905`.
 
 **Originaldiagnose:** `pste-stapelbericht-2026-11-07.json` (vom 07.11., Version 0.57.144.16), Batch **87/87 COMPLETE**, **7 PASS**, **78 HELD**, **2 BLOCKED**, Übertragungsfehler 0. 100er-MINI: **87 JA, 9 VIELLEICHT, 4 NEIN**, insgesamt 97 Titelideen.
