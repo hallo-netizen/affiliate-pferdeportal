@@ -1,3 +1,11 @@
+# Hobbydepot DESIGN – Ergänzung 09.11.2026
+
+**Designplugin HD003 1.50.809 ist aktueller geprüfter Installationskandidat.** Mobile Kategorieeinleitungen und Ausklapptexte auf 14 px vereinheitlicht; geprüft an Typen Hub2, Leaf, Sonderfall Schuhmacherei und Kettenhemd-FAQ, Desktop unverändert. Echte Live-Kategorie-Vorprüfung hatte 15 px sichtbar vs. 14 px ausgeklappt bestätigt. Neue mobile Playwright-Simulation bestanden; Live-Installation 1.50.809 noch nicht nachgewiesen.
+
+Hobbyfinder-Resultatfotos: ursprüngliche Bildzuordnung und Bildausgabe unverändert, mobil nicht per CSS versteckt; Testfoto im 360/390/620/760-px-Rendering sichtbar. Keine Live-Resultatprüfung möglich: bekannte Hobbyfinder-URLs geben zur Prüfzeit 404. Kein generisches Fremdbild, keine Änderung am Register. Siehe Pluginakte `PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md`.
+
+---
+
 # HOBBYRAUSCH – DESIGN – CURRENT_STATE
 
 **Sichtabnahme des Nutzers, 08.11.2026:** HD003 **1.50.806** für das Hobbydepot-Beitragsdesign **„erst einmal okay, bis auf Kleinigkeiten“**. Dies ist eine **vorläufige Freigabe des erreichten Testartikel-Designs**, keine Detail-Vollabnahme und insbesondere **keine Freigabe einer produktiven Amazon-Artikelbox**. Gesicherter aktueller Vollinstaller `HOBBY_DEPOT_DESIGN_HD003_1.50.806.zip` plus byteidentisches `CURRENT.zip` (Git-Blob `e3496adbc4524da0c6375d198d9010e2cc30d9f4`, SHA-256 `665a71d705ae80891ca43d56aca851c006608fcfcb61185381e3f96033635358`). Nichts am Plugin geändert, **keine Versionsänderung**. Ein Hero, kein wiederholtes Hero-Foto, kein bildloser Amazon-Suchbanner im Artikel, keine zweite Bildkachel rechts. Hab-&-Bewahr-inspirierter Lesestil bleibt zunächst **nur auf dem markierten Testartikel**; Detailkleinigkeiten bleiben offen, aber keine neue Designrunde ohne Anlass. **Nächster Arbeitsbereich ist die echte Amazon-Produktbox auf Artikelebene in der HD009 Affiliate-Zentrale**, einschließlich DataForSEO-Recherche, Freigabe, korrekter Zuordnung und erlaubtem Produktbild. HD003, HD006 (Bildzentrale), HD007 und die bestehende HD009 0.1.28 bleiben durch diese Dokumentation unangetastet.
