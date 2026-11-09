@@ -6,7 +6,7 @@ Stand: 08.11.2026
 ## Was hier liegt
 - [ZIELVERTRAG.md](ZIELVERTRAG.md) – verbindliche Arbeitsgrenzen.
 - [DREI_SAEULEN.md](DREI_SAEULEN.md) – gemeinsame Struktur und saubere Trennung.
-- [ARBEITSABLAUF.md](ARBEITSABLAUF.md) – Reihenfolge von Idee bis WordPress.
+- [ARBEITSABLAUF.md](ARBEITSABLAUF.md) – **einziger KISS-Ablauf:** ein Fachmaster, automatische Bestandsaufnahme statt Datei-Uploads, ein Gesamtbericht über alle drei Säulen, kontrollierte Freigabe.
 - [PRUEFREGELN.md](PRUEFREGELN.md) – Qualitäts- und Sicherheitskontrolle.
 - [PLAN/robotik-empty.json](PLAN/robotik-empty.json) – wirklich leeres Projektprofil.
 - [PLAN/SCHEMA.md](PLAN/SCHEMA.md) – Eingabeformat für die Konzeptentwicklung.
