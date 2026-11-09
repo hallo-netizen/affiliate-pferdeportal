@@ -5,6 +5,16 @@
 > **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt.  
 > `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
 
+## ECHTER WP-BEFUND 09.11.2026 ca. 10:12 BERLIN – 61/61 EINZELRÜCKSTELLUNGEN GEZÄHLT
+
+**Screenshot, installierte PSTE 0.57.144.26 (TEST):** `Gezielte Weitergabe nach Titelimport: 61 von 61 Themen bearbeitet; 61 zurückgestellt`. Gespeicherte Rückstellungsgründe: `PSTE_TITLE_READY_CATEGORY_DECISION_OPEN` **48**, `EXISTING_SAME_FAMILY_SEO_INTENT_NOT_PROVEN` **7**, `PSTE_INTENT_PRIMARY_TYPE_CANDIDATE_MISSING` **4**, `NON_EDITORIAL_TRANSACTIONAL_QUERY` **1**, `PSTE_PORTAL_RELEVANCE_PROVEN_FAMILY_STRUCTURE_GAP` **1**. Summe exakt 61. `Letzte Rückstellung: PSTE_RETAINED_EDITORIAL_PLAN_SNAPSHOT_CHANGED` als eigenständiges reales Sicherungs-/Kontextproblem sichtbar. **0 tatsächliche Produktions-/Planfreigaben nachgewiesen.**
+
+**Wichtige Codeverifikation gegen reale .26-ZIP:** Der Code `PSTE_TITLE_READY_CATEGORY_DECISION_OPEN` wird an zwei Stellen von `PSTE_Normal_Metadata_Path` vergeben: (a) wenn ein bereits gelieferter Titel in `title_pipeline` nicht hart durchgeprüft wurde, **und** (b) wenn zwar der Titel erfolgreich geprüft, die Familie+Artikeltyp-WP-Zielkategorie aber nicht eindeutig gefunden ist. Deshalb wäre `48 Kategorien fehlen` **unbewiesen/falsch verkürzt**. `PSTE_Mini_Workflow::forwardToPlan` schreibt die 61 Titel und ruft die *bestehende* Normal-Klassifizierung/Planung auf; es ist keine automatische finale Artikel-/K0-Freigabe. Der gespeicherte MINI-SEO-Status `61 FREI` ist nur Einmalentscheid gegen SEO-Kannibalisierung, nicht vollständige Redaktionstauglichkeit.
+
+**EINZIGE sofort sinnvolle neue Evidenz:** Auf der bereits geöffneten `Themenprüfung → Weitere Werkzeuge (nur für Sonderfälle)` **`Nur aktuellen Stapelbericht herunterladen`** anklicken, JSON im Chat bereitstellen. Das ist nach expliziter PHP-Codeprüfung nur der read-only `PSTE_MINI_CURRENT_BATCH_REPORT_V1` mit `title_desk_reentry`: pro Thema Titel/Keyword, Titelpfad, Gebiet, Kategoriebedarf, vorhandene Belege, Status, nächste Aktion, Fehlercode. **Kein neues Keyword/SEO-Review, kein erneuter Import, keine Gesamtdiagnose (5.016er-Bestand), keine Planwiederholung.** Erst die 48 Fälle anhand dieser schon gespeicherten Einzelbelege zwischen Titel- und Kategorieursache trennen, die 7 Intentüberschneidungen eigenständig prüfen, die 4 fehlenden Typen verantwortungsgerecht zuordnen und die separate Snapshot-Kollision berücksichtigen. Für *jede* Richtung unveränderte harten Slot-/K0-Grenzen; keine erfundenen Kategorien, Freigaben oder Voll-E2E-PASS. PR #682 DRAFT.
+
+---
+
 ## NEUSTER ECHTER WP-STATUS – 09.11.2026 ca. 09:40 BERLIN / 61 MINI-THEMEN VOM NORMALWEG ZURÜCKGESTELLT
 
 **Betreiber-Screenshots auf isolierter TESTseite v0.57.144.26**: Externe SEO-Ergebnisdatei gespeichert, Anzeige 61 FREI / 20 BELEGT / 6 KLÄRUNG. Nach Klick auf `3. Freigegebene Themen an bestehende Planung übergeben`: In `SEO Themenengine → Themenprüfung` unter Titelwerkstatt `Gezielte Weitergabe nach Titelimport: 61 von 61 Themen bearbeitet; 61 zurückgestellt`. Auf derselben Seite: `Letzte Planübergabe: 0 übernommen, 0 zurückgestellt`. SEO-Redaktionsplan-Schreiber zeigt separat `0 Metadaten-Handoff bereit`; diese Seite ist nicht derselbe MINI-Checkpoint.
