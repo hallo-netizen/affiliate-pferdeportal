@@ -1,0 +1,45 @@
+name: HD003 1.50.810 mobile Weiter step auto-scroll
+on:
+  push:
+    branches: [hobbyroom/hd003-150810-mobile-step-scroll-20261109]
+    paths: [.github/workflows/hd003-150810-build.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build exact full plugin from verified 1.50.809
+        run: |
+          python3 scripts/hd003_build_150810.py
+      - name: Run actual 8-step browser test on mobile and desktop
+        run: |
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install chromium
+          python3 scripts/hd003_test_mobile_step_scroll_150810.py
+      - name: Publish verified full plugin download
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TAG="hobby-depot-hd003-1.50.810-mobile-weiter-scroll"
+          ZIP="dist/HOBBY_DEPOT_DESIGN_HD003_1.50.810_MOBILE_WEITER_SCROLL.zip"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$ZIP" --clobber
+          else
+            gh release create "$TAG" "$ZIP" --target "$GITHUB_SHA" --title "Hobby Depot Design 1.50.810 – Mobil Weiter springt zur nächsten Auswahl" --notes "Nur mobile Hobbyfinder-Weiter-Navigation: nach jeder Antwort springt die Ansicht zur nächsten Frage und den Auswahlmöglichkeiten, nach dem achten Weiter zur Ergebnisliste. Desktop unverändert, 14px-Korrektur aus 1.50.809 erhalten. PHP/ZIP und mobile/browser regression geprüft; Liveinstallation offen."
+          fi
+          gh release view "$TAG" --json url,assets
+      - name: Preserve new full version and CURRENT in isolated plugin office
+        run: |
+          set -euo pipefail
+          OFFICE="protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT"
+          cp "dist/HOBBY_DEPOT_DESIGN_HD003_1.50.810_MOBILE_WEITER_SCROLL.zip" "$OFFICE/HOBBY_DEPOT_DESIGN_HD003_1.50.810.zip"
+          cp "dist/HOBBY_DEPOT_DESIGN_HD003_1.50.810_MOBILE_WEITER_SCROLL.zip" "$OFFICE/CURRENT.zip"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$OFFICE/HOBBY_DEPOT_DESIGN_HD003_1.50.810.zip" "$OFFICE/CURRENT.zip"
+          git commit -m "HD003 plugin office: tested full 1.50.810, mobile next-step scroll"
+          git push origin HEAD:refs/heads/hobbyroom/hd003-150810-mobile-step-scroll-20261109
