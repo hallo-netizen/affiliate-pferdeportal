@@ -1,0 +1,38 @@
+name: Hobby Depot exact current mobile intro CSS rules
+on:
+  push:
+    branches: [audit/hobby-mobile-expanded-font-20261109]
+    paths: [.github/workflows/hobby-exact-current-css.yml]
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          python3 - <<'PY'
+          import zipfile,re
+          path='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip'
+          keys=['hd-hub2-longcopy-lead','hd-hub2-more','hd-catlevel-lead','hd-catlevel-more','hd-hub2-longcopy']
+          with zipfile.ZipFile(path) as z:
+            for n in z.namelist():
+              if not n.endswith(('.php','.css')):continue
+              b=z.read(n)
+              if len(b)>10000000:continue
+              s=b.decode('utf-8','replace')
+              if not any(k in s for k in keys):continue
+              print('====CURRENT_CSS_FILE====',n,'BYTES',len(s))
+              ls=s.splitlines()
+              for i,line in enumerate(ls):
+                if any(k in line for k in keys):
+                  print('LINE',i+1,'SIZE',len(line),'TEXT',line[:1000])
+                  if len(line)>1000:
+                    for k in keys:
+                      start=line.find(k)
+                      if start>=0: print('TRUNCATED_MATCH',k,line[max(0,start-160):start+460])
+              for m in re.finditer(r'[^{}]{0,250}(?:hd-hub2-longcopy-lead|hd-hub2-more|hd-catlevel-lead|hd-catlevel-more)[^{}]{0,250}\{[^{}]{0,600}\}',s,re.I):
+                text=m.group()
+                if 'font' in text or 'line-height' in text: print('EXACT_CSS',text[:840].replace(chr(10),' '))
+          print('CSS_SOURCE_AUDIT_COMPLETE')
+          PY
