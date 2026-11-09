@@ -1,3 +1,9 @@
+## 09.11.2026 – PSTE v0.57.144.32: 3 KISS-Korrekturen als TEST-ZIP gebaut
+
+Bestätigte .31-Kategorie-Speicherung bleibt unverändert. UX: Bereichsfilter, alphabetische Suchliste, begründungsfreie normale Kategoriezuordnung, Rücksprung ins Redaktionsbüro. Automatik: aus vorhandenen Kategorie-Worker-Daten gebündelte Vorschläge + 1 Sammelübernahmeknopf, medizinische Pferdethemen im vorhandenen Magazin-Owner berücksichtigt, keine Kategorie-Neuanlage. Titel: ursprüngliche MINI-Governance eine Hauptfrage je Titel; zweifache Fragetitel am bestehenden MINI-Import einzeln zurückgestellt, ältere aktive Exportregeln bleiben gültig. Verifiziert: 121 ZIP-Dateipfade, 116 bytegleich, 83 Syntaxprüfungen, 24 gezielte Positiv/Negativ-Checks, ZIP-CRC. ZIP-SHA256: `ab0231850a9b79b3c5f8b103b2700bc7f6b2a87d3adac38009f43c1bbe2f653f`; privates QA-Büro `/pferdeatelier/PLUGINS/QA/`. [Volles QA-Protokoll](QA_ONLY/PSTE_05714432_KISS_BUNDLE_20261109/README.md). Nicht installiert, E2E offen, keine produktive Freigabe, PR #682 Draft.
+
+---
+
 # PFERDE-ATELIER – PLUGINS – UPDATEPROTOKOLL
 
 ## 09.11.2026 – KISS-CHATÜBERGABE/PSTE .31 REAL WP, .32 NUR ENTWICKLUNGSSTAND
