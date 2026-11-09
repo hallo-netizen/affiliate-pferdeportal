@@ -275,5 +275,8 @@
       "content_categories": [],
       "article_intents": []
     }
-  ]
+  ],
+  "archive_only": true,
+  "canonical_source": false,
+  "replaced_by": "RECHERCHE/PRODUKTE_V2_20261108.json"
 }
