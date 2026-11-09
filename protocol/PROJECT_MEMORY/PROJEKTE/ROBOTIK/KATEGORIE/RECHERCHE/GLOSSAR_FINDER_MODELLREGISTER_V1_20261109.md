@@ -83,3 +83,13 @@ Stand 09.11.2026 · ENTWURF. Kein Plugin, keine neuen WP-URLs, keine Datenbank.
 **Glossar: JA. Finder: JA. Modellregister: bedingt JA, nach 10–15-Modell-Pilot. Zweites Robotertypen-Register mit eigenen umfassenden Seiten: NEIN.**
 
 **Ist-Stand:** Untersuchung und Konzept, keine Plugins, kein WordPress-Import, keine Glossar-/Finder-/Register-Livefunktionen. Zeitaufwendige Einzeldatei-Uploads werden ausdrücklich vermieden.
+
+## Ergänzung 09.11.2026 – Finderergebnisse mit späteren Affiliate-Produkten
+**Nutzerwunsch und Reihenfolge verbindlich dokumentiert:**
+1. Finder filtert nach Nutzeraufgabe und tatsächlich recherchierten `finder_traits_v1`-Eigenschaften des **einen `rb...`-Robotertyp-Masters**. Nicht ausreichend belegte Eigenschaften werden **NICHT_RECHERCHIERT** angezeigt und dürfen den Treffer nicht falsch auf-/abwerten.
+2. Auf Ergebnisseite zunächst passende Robotertypen mit Begründung und Link zur **einzigen** CORE-Produktseite.
+3. **Später zusätzlich** konkrete Affiliate-Produkte/Angebote für den bereits fachlich passenden Robotertyp über das zentrale Affiliate-Plugin (nur wenn echte passende und aktuelle Partnerdaten vorliegen). Produktempfehlung zuerst, mögliche Provision niemals das Auswahlkriterium. Werbeangebote klar **„Anzeige“** kennzeichnen. Keine erfundenen Preise, kein fiktives Lager/Verfügbarkeitsversprechen.
+4. Nach Bedarfswunsch zusätzlich Link zu **konkreten HivePress-Listings**, wenn ein Dienstleister/Mietangebot statt eines eigenen Gerätes benötigt wird. Ein Inserat ist **nicht dasselbe** wie ein Affiliate-Banner oder eine Produkt-Knowledge-Seite.
+5. Kein zweites Produktdatenregister, kein eigenständiger Anzeigen-Writer, keine unbelegten Affiliate-API-Schnittstellen behaupten. Derzeit **Konzept für später, keine installierte Finder-/Affiliate-Funktion**.
+
+**Gleiches Datenmodell wie Hobbyregister:** `../WISSENSDATENBANK/ROBOTERREGISTER/EIGENSCHAFTEN_SCHEMA_V1.md` (relativ zum ROBOTIK-Gebäude), konkret: `PROJEKTE/ROBOTIK/WISSENSDATENBANK/ROBOTERREGISTER/`. Stand 09.11.2026: 68/68 **Schema-Skelette**, aber noch **keine** 68 fachlich befüllten/abgenommenen Eigenschaftsprofile.

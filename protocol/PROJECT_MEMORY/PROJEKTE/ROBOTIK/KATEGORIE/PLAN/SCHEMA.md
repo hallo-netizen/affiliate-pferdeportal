@@ -27,3 +27,9 @@ Die Plugin-Vorschau prüft die Rollen, Eltern, Zyklen, Dubletten im gleichen Zwe
 - Die beiden übrigen Säulen bleiben getrennt; es gibt keine WordPress-Importfunktion.
 
 **Wichtig:** `robotik-empty.json` mit `nodes:[]` bleibt der autoritative, unberührte Startplan; die Forschungsdaten in `RECHERCHE` werden NICHT automatisch eingefügt.
+
+## Mindestpotenzial neuer Inhaltskategorien (09.11.2026)
+- Kategorie gehört **fachlich direkt zu genau einer letzten Produkt-WP-Seite**, ist eine **flache WordPress-Inhaltskategorie**; WordPress-`category` ist technisch keine Seite und wird nicht als WP-Unterseite mit `post_parent` angelegt.
+- Für `phase=final` sind **mindestens drei voneinander sachlich verschiedene realistische spätere Beitragsabsichten** erforderlich; das Plugin prüft in 0.3.0 nur die **formale Anzahl/Verschiedenheit**, nicht automatisch den fachlichen Gehalt.
+- **3–5** sind eine sinnvolle Mindest-/Orientierungsgröße, **keine Obergrenze**. Bei nur **ein bis zwei** eigenständigen Beitragsthemen keine neue Kategorie, sondern die Information auf der Produktseite oder unter einer thematisch passenden schon vorhandenen Kategorie **desselben Robotertyps** behandeln.
+- Namen wie Fragen, Kosten, Vergleich, Betrieb, Fehler sind **individuell zu prüfen**, nicht als identische Standardpalette überall anzulegen.
