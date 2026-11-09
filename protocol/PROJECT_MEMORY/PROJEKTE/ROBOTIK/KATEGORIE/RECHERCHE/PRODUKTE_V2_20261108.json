@@ -1,7 +1,7 @@
 {
   "project": "robotik",
   "record_type": "RESEARCH_CANDIDATES_NOT_IMPORT",
-  "updated": "2026-11-08",
+  "updated": "2026-11-09",
   "not_a_wordpress_plan": true,
   "keyword_calls": 0,
   "approved_product_pages": 0,
@@ -61,7 +61,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Industrie & Fertigung",
+        "proposed_intermediate_page": "Schweißen & Verbinden",
+        "proposed_core_path": [
+          "Industrie & Fertigung",
+          "Schweißen & Verbinden"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Schweißverfahren gegen Punktschweißen und allgemeines Schweißen abgrenzen",
+        "manufacturer_example_url": "https://www.abb.com/global/en/areas/robotics/applications",
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb002",
@@ -76,7 +91,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Industrie & Fertigung",
+        "proposed_intermediate_page": "Schweißen & Verbinden",
+        "proposed_core_path": [
+          "Industrie & Fertigung",
+          "Schweißen & Verbinden"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Verfahren gegen allgemeine Schweißroboter-Intentionsgruppe abgrenzen",
+        "manufacturer_example_url": "https://www.abb.com/global/en/areas/robotics/applications",
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb003",
@@ -91,7 +121,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Industrie & Fertigung",
+        "proposed_intermediate_page": "Oberflächen bearbeiten",
+        "proposed_core_path": [
+          "Industrie & Fertigung",
+          "Oberflächen bearbeiten"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": "https://www.abb.com/global/en/areas/robotics/applications",
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb004",
@@ -106,7 +151,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Industrie & Fertigung",
+        "proposed_intermediate_page": "Verpacken & Palettieren",
+        "proposed_core_path": [
+          "Industrie & Fertigung",
+          "Verpacken & Palettieren"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": "https://www.abb.com/global/en/areas/robotics/applications",
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb005",
@@ -121,7 +181,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Industrie & Fertigung",
+        "proposed_intermediate_page": "Verpacken & Palettieren",
+        "proposed_core_path": [
+          "Industrie & Fertigung",
+          "Verpacken & Palettieren"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb006",
@@ -136,7 +211,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Industrie & Fertigung",
+        "proposed_intermediate_page": "Montage, Handling & Prüfen",
+        "proposed_core_path": [
+          "Industrie & Fertigung",
+          "Montage, Handling & Prüfen"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": "https://www.abb.com/global/en/areas/robotics/applications",
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb007",
@@ -151,7 +241,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Industrie & Fertigung",
+        "proposed_intermediate_page": "Montage, Handling & Prüfen",
+        "proposed_core_path": [
+          "Industrie & Fertigung",
+          "Montage, Handling & Prüfen"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "SCARA bezeichnet Bauart; als Produkt nur über Montagefunktion begründen",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb008",
@@ -166,7 +271,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Industrie & Fertigung",
+        "proposed_intermediate_page": "Montage, Handling & Prüfen",
+        "proposed_core_path": [
+          "Industrie & Fertigung",
+          "Montage, Handling & Prüfen"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Delta bezeichnet Bauart; Pick-and-Place-Funktion gegen Industriehandling abgrenzen",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb009",
@@ -181,7 +301,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Industrie & Fertigung",
+        "proposed_intermediate_page": "Oberflächen bearbeiten",
+        "proposed_core_path": [
+          "Industrie & Fertigung",
+          "Oberflächen bearbeiten"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb010",
@@ -196,7 +331,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Industrie & Fertigung",
+        "proposed_intermediate_page": "Oberflächen bearbeiten",
+        "proposed_core_path": [
+          "Industrie & Fertigung",
+          "Oberflächen bearbeiten"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb011",
@@ -211,7 +361,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Industrie & Fertigung",
+        "proposed_intermediate_page": "Schweißen & Verbinden",
+        "proposed_core_path": [
+          "Industrie & Fertigung",
+          "Schweißen & Verbinden"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb012",
@@ -226,7 +391,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Industrie & Fertigung",
+        "proposed_intermediate_page": "Montage, Handling & Prüfen",
+        "proposed_core_path": [
+          "Industrie & Fertigung",
+          "Montage, Handling & Prüfen"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Messroboter vs reine Kamera oder Messtechnik prüfen",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb013",
@@ -241,7 +421,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Industrie & Fertigung",
+        "proposed_intermediate_page": "Verpacken & Palettieren",
+        "proposed_core_path": [
+          "Industrie & Fertigung",
+          "Verpacken & Palettieren"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb014",
@@ -256,7 +451,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Lager & Transport",
+        "proposed_intermediate_page": "Materialfluss & Transport",
+        "proposed_core_path": [
+          "Lager & Transport",
+          "Materialfluss & Transport"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "AMR ist Mobilitäts-/Technikklasse; FTF/AGV und Paletten-Transport separat prüfen",
+        "manufacturer_example_url": "https://mobile-industrial-robots.com/de/produkte",
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb015",
@@ -271,7 +481,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Lager & Transport",
+        "proposed_intermediate_page": "Materialfluss & Transport",
+        "proposed_core_path": [
+          "Lager & Transport",
+          "Materialfluss & Transport"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "AGV/FTF überschneidet sich mit AMR; keine Doppelanlage wegen Abkürzung",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb016",
@@ -286,7 +511,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Lager & Transport",
+        "proposed_intermediate_page": "Materialfluss & Transport",
+        "proposed_core_path": [
+          "Lager & Transport",
+          "Materialfluss & Transport"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Mobiler Palettenroboter evtl. Anwendung derselben AMR-Plattform",
+        "manufacturer_example_url": "https://mobile-industrial-robots.com/de/produkte/roboter",
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb017",
@@ -301,7 +541,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Lager & Transport",
+        "proposed_intermediate_page": "Kommissionieren & Lagerbetrieb",
+        "proposed_core_path": [
+          "Lager & Transport",
+          "Kommissionieren & Lagerbetrieb"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Kommissionieren vs Roboter, der bloß Ware zur Kommissionierperson bringt",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb018",
@@ -316,7 +571,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Lager & Transport",
+        "proposed_intermediate_page": "Kommissionieren & Lagerbetrieb",
+        "proposed_core_path": [
+          "Lager & Transport",
+          "Kommissionieren & Lagerbetrieb"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb019",
@@ -331,7 +601,21 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Lager & Transport",
+        "proposed_intermediate_page": null,
+        "proposed_core_path": [
+          "Lager & Transport"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb020",
@@ -346,7 +630,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Lager & Transport",
+        "proposed_intermediate_page": "Materialfluss & Transport",
+        "proposed_core_path": [
+          "Lager & Transport",
+          "Materialfluss & Transport"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Regaltransport evtl. AMR-Anwendung",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb021",
@@ -361,7 +660,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Lager & Transport",
+        "proposed_intermediate_page": "Kommissionieren & Lagerbetrieb",
+        "proposed_core_path": [
+          "Lager & Transport",
+          "Kommissionieren & Lagerbetrieb"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Mobiler Greifarm ist Funktionskombination, Abgrenzung nötig",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb022",
@@ -375,7 +689,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Gastronomie, Handel & Hotel",
+        "proposed_intermediate_page": "Bedienen & Liefern",
+        "proposed_core_path": [
+          "Gastronomie, Handel & Hotel",
+          "Bedienen & Liefern"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Servieren vs Hotel-Zustellung: gleiche Plattform, aber unterschiedliche Aufgaben?",
+        "manufacturer_example_url": "https://www.pudurobotics.com/de/products/bellabotpro",
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb023",
@@ -389,7 +718,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Gastronomie, Handel & Hotel",
+        "proposed_intermediate_page": "Bedienen & Liefern",
+        "proposed_core_path": [
+          "Gastronomie, Handel & Hotel",
+          "Bedienen & Liefern"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Hotel-Lieferrobotik gegen Servierrobotik und medizinische Zustellung prüfen",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb024",
@@ -403,7 +747,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Gastronomie, Handel & Hotel",
+        "proposed_intermediate_page": "Empfang & Kommunikation",
+        "proposed_core_path": [
+          "Gastronomie, Handel & Hotel",
+          "Empfang & Kommunikation"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb025",
@@ -417,7 +776,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Gastronomie, Handel & Hotel",
+        "proposed_intermediate_page": "Empfang & Kommunikation",
+        "proposed_core_path": [
+          "Gastronomie, Handel & Hotel",
+          "Empfang & Kommunikation"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb026",
@@ -431,7 +805,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Gastronomie, Handel & Hotel",
+        "proposed_intermediate_page": "Speisen & Getränke",
+        "proposed_core_path": [
+          "Gastronomie, Handel & Hotel",
+          "Speisen & Getränke"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Kaffeevollautomat ohne Roboterarm ist kein Produkt-Owner",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb027",
@@ -445,7 +834,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Gastronomie, Handel & Hotel",
+        "proposed_intermediate_page": "Speisen & Getränke",
+        "proposed_core_path": [
+          "Gastronomie, Handel & Hotel",
+          "Speisen & Getränke"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Automatische Ausgabe vs Roboterfunktion bestätigen",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb028",
@@ -459,7 +863,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Reinigung & Gebäude",
+        "proposed_intermediate_page": "Gebäude reinigen",
+        "proposed_core_path": [
+          "Reinigung & Gebäude",
+          "Gebäude reinigen"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb029",
@@ -473,7 +892,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Reinigung & Gebäude",
+        "proposed_intermediate_page": "Gebäude reinigen",
+        "proposed_core_path": [
+          "Reinigung & Gebäude",
+          "Gebäude reinigen"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Professionelle Glas-/Fassadenreinigung vs Haushalts-Fensterputzroboter unterscheiden",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb030",
@@ -487,7 +921,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Reinigung & Gebäude",
+        "proposed_intermediate_page": "Sonder- & Anlagenreinigung",
+        "proposed_core_path": [
+          "Reinigung & Gebäude",
+          "Sonder- & Anlagenreinigung"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Tankreinigung = Reinigungsabsicht, nicht Tankinspektion",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb031",
@@ -501,7 +950,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Reinigung & Gebäude",
+        "proposed_intermediate_page": "Sonder- & Anlagenreinigung",
+        "proposed_core_path": [
+          "Reinigung & Gebäude",
+          "Sonder- & Anlagenreinigung"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Rohrreinigung = Reinigung, nicht Kanalinspektion",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb032",
@@ -515,7 +979,21 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Reinigung & Gebäude",
+        "proposed_intermediate_page": null,
+        "proposed_core_path": [
+          "Reinigung & Gebäude"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Autonomer Desinfektionsroboter vs bloße UV-Lampe",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb033",
@@ -529,7 +1007,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Reinigung & Gebäude",
+        "proposed_intermediate_page": "Sonder- & Anlagenreinigung",
+        "proposed_core_path": [
+          "Reinigung & Gebäude",
+          "Sonder- & Anlagenreinigung"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb034",
@@ -544,7 +1037,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Landwirtschaft & Tierhaltung",
+        "proposed_intermediate_page": "Stall & Nutztiere",
+        "proposed_core_path": [
+          "Landwirtschaft & Tierhaltung",
+          "Stall & Nutztiere"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": "https://www.lely.com/de/loesungen/melken/astronaut/",
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb035",
@@ -559,7 +1067,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Landwirtschaft & Tierhaltung",
+        "proposed_intermediate_page": "Stall & Nutztiere",
+        "proposed_core_path": [
+          "Landwirtschaft & Tierhaltung",
+          "Stall & Nutztiere"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb036",
@@ -574,7 +1097,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Landwirtschaft & Tierhaltung",
+        "proposed_intermediate_page": "Feld, Weinbau & Gewächshaus",
+        "proposed_core_path": [
+          "Landwirtschaft & Tierhaltung",
+          "Feld, Weinbau & Gewächshaus"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": "https://www.naio-technologies.com/en/news/oz-from-planting-to-harvest/",
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb037",
@@ -589,7 +1127,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Landwirtschaft & Tierhaltung",
+        "proposed_intermediate_page": "Feld, Weinbau & Gewächshaus",
+        "proposed_core_path": [
+          "Landwirtschaft & Tierhaltung",
+          "Feld, Weinbau & Gewächshaus"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb038",
@@ -604,7 +1157,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Landwirtschaft & Tierhaltung",
+        "proposed_intermediate_page": "Feld, Weinbau & Gewächshaus",
+        "proposed_core_path": [
+          "Landwirtschaft & Tierhaltung",
+          "Feld, Weinbau & Gewächshaus"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Mehrzweck-Feldplattform kann säen, jäten und transportieren: keine Mehrfach-Owner je Modell",
+        "manufacturer_example_url": "https://www.naio-technologies.com/en/news/oz-from-planting-to-harvest/",
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb039",
@@ -619,7 +1187,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Landwirtschaft & Tierhaltung",
+        "proposed_intermediate_page": "Feld, Weinbau & Gewächshaus",
+        "proposed_core_path": [
+          "Landwirtschaft & Tierhaltung",
+          "Feld, Weinbau & Gewächshaus"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": "https://www.organifarms.de/product?lang=de",
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb040",
@@ -634,7 +1217,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Landwirtschaft & Tierhaltung",
+        "proposed_intermediate_page": "Feld, Weinbau & Gewächshaus",
+        "proposed_core_path": [
+          "Landwirtschaft & Tierhaltung",
+          "Feld, Weinbau & Gewächshaus"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Weinbauplattform kann identisch mit Jätroboter sein; Funktion statt Weinbaunische prüfen",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb041",
@@ -649,7 +1247,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Medizin, Pflege & Labor",
+        "proposed_intermediate_page": "Behandlung & Rehabilitation",
+        "proposed_core_path": [
+          "Medizin, Pflege & Labor",
+          "Behandlung & Rehabilitation"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Medizinprodukte/Hochrisiko: strenge Quellen- und Freigabekontrolle",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb042",
@@ -664,7 +1277,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Medizin, Pflege & Labor",
+        "proposed_intermediate_page": "Behandlung & Rehabilitation",
+        "proposed_core_path": [
+          "Medizin, Pflege & Labor",
+          "Behandlung & Rehabilitation"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Therapieroboter vs medizinisches Exoskelett prüfen",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb043",
@@ -679,7 +1307,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Medizin, Pflege & Labor",
+        "proposed_intermediate_page": "Behandlung & Rehabilitation",
+        "proposed_core_path": [
+          "Medizin, Pflege & Labor",
+          "Behandlung & Rehabilitation"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Therapeutisches vs industrielles Exoskelett sind verschiedene Nutzungen",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb044",
@@ -694,7 +1337,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Medizin, Pflege & Labor",
+        "proposed_intermediate_page": "Versorgung & Labor",
+        "proposed_core_path": [
+          "Medizin, Pflege & Labor",
+          "Versorgung & Labor"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Kliniktransport kann AMR-Spezialisierung sein; Einsatzort allein erzeugt keine neue Produktseite",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb045",
@@ -709,7 +1367,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Medizin, Pflege & Labor",
+        "proposed_intermediate_page": "Versorgung & Labor",
+        "proposed_core_path": [
+          "Medizin, Pflege & Labor",
+          "Versorgung & Labor"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb046",
@@ -724,7 +1397,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Medizin, Pflege & Labor",
+        "proposed_intermediate_page": "Versorgung & Labor",
+        "proposed_core_path": [
+          "Medizin, Pflege & Labor",
+          "Versorgung & Labor"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Automatische Medikamentenlogistik gegen gewöhnlichen Kommissionierautomaten prüfen",
+        "manufacturer_example_url": "https://www.bd.com/de-de/products-and-solutions/products/product-brands/rowa",
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb047",
@@ -739,7 +1427,21 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Bau & Infrastruktur",
+        "proposed_intermediate_page": null,
+        "proposed_core_path": [
+          "Bau & Infrastruktur"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb048",
@@ -754,7 +1456,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Bau & Infrastruktur",
+        "proposed_intermediate_page": "Bauen & Fertigen",
+        "proposed_core_path": [
+          "Bau & Infrastruktur",
+          "Bauen & Fertigen"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb049",
@@ -769,7 +1486,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Bau & Infrastruktur",
+        "proposed_intermediate_page": "Bauen & Fertigen",
+        "proposed_core_path": [
+          "Bau & Infrastruktur",
+          "Bauen & Fertigen"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Robotischer Beton-3D-Druck vs statischer 3D-Drucker prüfen",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb050",
@@ -784,7 +1516,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Bau & Infrastruktur",
+        "proposed_intermediate_page": "Bauen & Fertigen",
+        "proposed_core_path": [
+          "Bau & Infrastruktur",
+          "Bauen & Fertigen"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb051",
@@ -799,7 +1546,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Bau & Infrastruktur",
+        "proposed_intermediate_page": "Bauen & Fertigen",
+        "proposed_core_path": [
+          "Bau & Infrastruktur",
+          "Bauen & Fertigen"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb052",
@@ -814,7 +1576,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Inspektion, Sicherheit & Rettung",
+        "proposed_intermediate_page": "Anlagen & Infrastruktur prüfen",
+        "proposed_core_path": [
+          "Inspektion, Sicherheit & Rettung",
+          "Anlagen & Infrastruktur prüfen"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Tunnelinspektion als Inspektionsprodukt primär hier, Bau-Seite verlinkt",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb053",
@@ -828,7 +1605,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Inspektion, Sicherheit & Rettung",
+        "proposed_intermediate_page": "Anlagen & Infrastruktur prüfen",
+        "proposed_core_path": [
+          "Inspektion, Sicherheit & Rettung",
+          "Anlagen & Infrastruktur prüfen"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb054",
@@ -842,7 +1634,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Inspektion, Sicherheit & Rettung",
+        "proposed_intermediate_page": "Anlagen & Infrastruktur prüfen",
+        "proposed_core_path": [
+          "Inspektion, Sicherheit & Rettung",
+          "Anlagen & Infrastruktur prüfen"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Tankinspektion vs Tankreinigung bewusst getrennt",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb055",
@@ -856,7 +1663,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Inspektion, Sicherheit & Rettung",
+        "proposed_intermediate_page": "Anlagen & Infrastruktur prüfen",
+        "proposed_core_path": [
+          "Inspektion, Sicherheit & Rettung",
+          "Anlagen & Infrastruktur prüfen"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb056",
@@ -870,7 +1692,21 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Inspektion, Sicherheit & Rettung",
+        "proposed_intermediate_page": null,
+        "proposed_core_path": [
+          "Inspektion, Sicherheit & Rettung"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Sicherheitsberatung gehört Hab & Bewahr; hier nur Roboter-Produkttyp",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb057",
@@ -884,7 +1720,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Inspektion, Sicherheit & Rettung",
+        "proposed_intermediate_page": "Gefahrenabwehr & Rettung",
+        "proposed_core_path": [
+          "Inspektion, Sicherheit & Rettung",
+          "Gefahrenabwehr & Rettung"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Fernsteuerbare Feuerwehrfahrzeuge nur als Roboter, wenn Funktion belegt",
+        "manufacturer_example_url": "https://www.rosenbauer.com/de/produkte/loeschsysteme-und-aufbaukomponenten/rte-robot",
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb058",
@@ -898,7 +1749,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Inspektion, Sicherheit & Rettung",
+        "proposed_intermediate_page": "Gefahrenabwehr & Rettung",
+        "proposed_core_path": [
+          "Inspektion, Sicherheit & Rettung",
+          "Gefahrenabwehr & Rettung"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Such- und Rettungsroboter vs multifunktionaler Löschroboter",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb059",
@@ -912,7 +1778,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Inspektion, Sicherheit & Rettung",
+        "proposed_intermediate_page": "Anlagen & Infrastruktur prüfen",
+        "proposed_core_path": [
+          "Inspektion, Sicherheit & Rettung",
+          "Anlagen & Infrastruktur prüfen"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Unterwasser-Inspektionsroboter vs ROV/ferngesteuertes Werkzeug korrekt benennen",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb060",
@@ -926,7 +1807,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Haushalt & Garten",
+        "proposed_intermediate_page": "Wohnung & Haushalt",
+        "proposed_core_path": [
+          "Haushalt & Garten",
+          "Wohnung & Haushalt"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb061",
@@ -940,7 +1836,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Haushalt & Garten",
+        "proposed_intermediate_page": "Wohnung & Haushalt",
+        "proposed_core_path": [
+          "Haushalt & Garten",
+          "Wohnung & Haushalt"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb062",
@@ -954,7 +1865,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Haushalt & Garten",
+        "proposed_intermediate_page": "Garten & Freizeit",
+        "proposed_core_path": [
+          "Haushalt & Garten",
+          "Garten & Freizeit"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb063",
@@ -968,7 +1894,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Haushalt & Garten",
+        "proposed_intermediate_page": "Garten & Freizeit",
+        "proposed_core_path": [
+          "Haushalt & Garten",
+          "Garten & Freizeit"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb064",
@@ -982,7 +1923,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Haushalt & Garten",
+        "proposed_intermediate_page": "Wohnung & Haushalt",
+        "proposed_core_path": [
+          "Haushalt & Garten",
+          "Wohnung & Haushalt"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Privater Fensterputzroboter vs professioneller Fensterreinigungsroboter",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb065",
@@ -996,7 +1952,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Haushalt & Garten",
+        "proposed_intermediate_page": "Wohnung & Haushalt",
+        "proposed_core_path": [
+          "Haushalt & Garten",
+          "Wohnung & Haushalt"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Haushaltsassistenz als Sammelbegriff möglicherweise keine Produktendseite",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb066",
@@ -1010,7 +1981,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Bildung & Forschung",
+        "proposed_intermediate_page": "Lernen & Experimentieren",
+        "proposed_core_path": [
+          "Bildung & Forschung",
+          "Lernen & Experimentieren"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": false,
+        "identity_question": null,
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb067",
@@ -1024,7 +2010,22 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Bildung & Forschung",
+        "proposed_intermediate_page": "Lernen & Experimentieren",
+        "proposed_core_path": [
+          "Bildung & Forschung",
+          "Lernen & Experimentieren"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Baukasten ggf. Unterrichtsmaterial statt betriebsfertiger Robotertyp; Portalrolle prüfen",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     },
     {
       "id": "rb068",
@@ -1038,11 +2039,25 @@
       "wordpress_role": "UNENTSCHEIDEN",
       "wp_content_categories": [],
       "aliases": [],
-      "release_status": "UNAPPROVED_RESEARCH"
+      "release_status": "UNAPPROVED_RESEARCH",
+      "concept_v1": {
+        "proposed_main_world": "Bildung & Forschung",
+        "proposed_intermediate_page": null,
+        "proposed_core_path": [
+          "Bildung & Forschung"
+        ],
+        "leaf_role": "VORSCHLAG_PRODUKTSEITE_UNGEPRUEFT",
+        "needs_identity_review": true,
+        "identity_question": "Humanoide Bauform ≠ eindeutige Funktion; Forschungsplattform anders als allgemeiner humanoider Roboter",
+        "manufacturer_example_url": null,
+        "search_demand": "NICHT_ERHOBEN",
+        "content_categories": "NOCH_NICHT_PRODUKTWEISE_ABGENOMMEN",
+        "other_pillars": "SACHLICH_VERLINKEN_NICHT_DUPLIZIEREN"
+      }
     }
   ],
   "canonical_source": true,
-  "revision": 3,
+  "revision": 4,
   "research_state": "UNAPPROVED",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
@@ -1265,5 +2280,504 @@
       ],
       "status": "EXACT"
     }
-  ]
+  ],
+  "worlds_v1": [
+    {
+      "code": "I",
+      "title": "Industrie & Fertigung",
+      "slug": "industrie-fertigung",
+      "areas": [
+        {
+          "name": "Schweißen & Verbinden",
+          "ids": [
+            "rb001",
+            "rb002",
+            "rb011"
+          ]
+        },
+        {
+          "name": "Oberflächen bearbeiten",
+          "ids": [
+            "rb003",
+            "rb009",
+            "rb010"
+          ]
+        },
+        {
+          "name": "Verpacken & Palettieren",
+          "ids": [
+            "rb004",
+            "rb005",
+            "rb013"
+          ]
+        },
+        {
+          "name": "Montage, Handling & Prüfen",
+          "ids": [
+            "rb006",
+            "rb007",
+            "rb008",
+            "rb012"
+          ]
+        }
+      ],
+      "approval": "DRAFT_NOT_A_WP_PLAN"
+    },
+    {
+      "code": "L",
+      "title": "Lager & Transport",
+      "slug": "lager-transport",
+      "areas": [
+        {
+          "name": "Materialfluss & Transport",
+          "ids": [
+            "rb014",
+            "rb015",
+            "rb016",
+            "rb020"
+          ]
+        },
+        {
+          "name": "Kommissionieren & Lagerbetrieb",
+          "ids": [
+            "rb017",
+            "rb018",
+            "rb021"
+          ]
+        },
+        {
+          "name": null,
+          "ids": [
+            "rb019"
+          ]
+        }
+      ],
+      "approval": "DRAFT_NOT_A_WP_PLAN"
+    },
+    {
+      "code": "S",
+      "title": "Gastronomie, Handel & Hotel",
+      "slug": "gastronomie-handel-hotel",
+      "areas": [
+        {
+          "name": "Bedienen & Liefern",
+          "ids": [
+            "rb022",
+            "rb023"
+          ]
+        },
+        {
+          "name": "Empfang & Kommunikation",
+          "ids": [
+            "rb024",
+            "rb025"
+          ]
+        },
+        {
+          "name": "Speisen & Getränke",
+          "ids": [
+            "rb026",
+            "rb027"
+          ]
+        }
+      ],
+      "approval": "DRAFT_NOT_A_WP_PLAN"
+    },
+    {
+      "code": "R",
+      "title": "Reinigung & Gebäude",
+      "slug": "reinigung-gebaeude",
+      "areas": [
+        {
+          "name": "Gebäude reinigen",
+          "ids": [
+            "rb028",
+            "rb029"
+          ]
+        },
+        {
+          "name": "Sonder- & Anlagenreinigung",
+          "ids": [
+            "rb030",
+            "rb031",
+            "rb033"
+          ]
+        },
+        {
+          "name": null,
+          "ids": [
+            "rb032"
+          ]
+        }
+      ],
+      "approval": "DRAFT_NOT_A_WP_PLAN"
+    },
+    {
+      "code": "A",
+      "title": "Landwirtschaft & Tierhaltung",
+      "slug": "landwirtschaft-tierhaltung",
+      "areas": [
+        {
+          "name": "Stall & Nutztiere",
+          "ids": [
+            "rb034",
+            "rb035"
+          ]
+        },
+        {
+          "name": "Feld, Weinbau & Gewächshaus",
+          "ids": [
+            "rb036",
+            "rb037",
+            "rb038",
+            "rb039",
+            "rb040"
+          ]
+        }
+      ],
+      "approval": "DRAFT_NOT_A_WP_PLAN"
+    },
+    {
+      "code": "M",
+      "title": "Medizin, Pflege & Labor",
+      "slug": "medizin-pflege-labor",
+      "areas": [
+        {
+          "name": "Behandlung & Rehabilitation",
+          "ids": [
+            "rb041",
+            "rb042",
+            "rb043"
+          ]
+        },
+        {
+          "name": "Versorgung & Labor",
+          "ids": [
+            "rb044",
+            "rb045",
+            "rb046"
+          ]
+        }
+      ],
+      "approval": "DRAFT_NOT_A_WP_PLAN"
+    },
+    {
+      "code": "B",
+      "title": "Bau & Infrastruktur",
+      "slug": "bau-infrastruktur",
+      "areas": [
+        {
+          "name": "Bauen & Fertigen",
+          "ids": [
+            "rb048",
+            "rb049",
+            "rb050",
+            "rb051"
+          ]
+        },
+        {
+          "name": null,
+          "ids": [
+            "rb047"
+          ]
+        }
+      ],
+      "approval": "DRAFT_NOT_A_WP_PLAN"
+    },
+    {
+      "code": "P",
+      "title": "Inspektion, Sicherheit & Rettung",
+      "slug": "inspektion-sicherheit-rettung",
+      "areas": [
+        {
+          "name": "Anlagen & Infrastruktur prüfen",
+          "ids": [
+            "rb052",
+            "rb053",
+            "rb054",
+            "rb055",
+            "rb059"
+          ]
+        },
+        {
+          "name": "Gefahrenabwehr & Rettung",
+          "ids": [
+            "rb057",
+            "rb058"
+          ]
+        },
+        {
+          "name": null,
+          "ids": [
+            "rb056"
+          ]
+        }
+      ],
+      "approval": "DRAFT_NOT_A_WP_PLAN"
+    },
+    {
+      "code": "H",
+      "title": "Haushalt & Garten",
+      "slug": "haushalt-garten",
+      "areas": [
+        {
+          "name": "Wohnung & Haushalt",
+          "ids": [
+            "rb060",
+            "rb061",
+            "rb064",
+            "rb065"
+          ]
+        },
+        {
+          "name": "Garten & Freizeit",
+          "ids": [
+            "rb062",
+            "rb063"
+          ]
+        }
+      ],
+      "approval": "DRAFT_NOT_A_WP_PLAN"
+    },
+    {
+      "code": "E",
+      "title": "Bildung & Forschung",
+      "slug": "bildung-forschung",
+      "areas": [
+        {
+          "name": "Lernen & Experimentieren",
+          "ids": [
+            "rb066",
+            "rb067"
+          ]
+        },
+        {
+          "name": null,
+          "ids": [
+            "rb068"
+          ]
+        }
+      ],
+      "approval": "DRAFT_NOT_A_WP_PLAN"
+    }
+  ],
+  "research_frontier_v1": [
+    {
+      "id": "rf001",
+      "name": "Photovoltaik-Reinigungsroboter",
+      "proposed_world": "Reinigung & Gebäude",
+      "evidence_url": "https://www.ecoppia.com/technology",
+      "review_state": "HERSTELLERPRODUKT_BELEGT",
+      "keyword_status": "NICHT_ERHOBEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "relation_to_existing": "ZU_PRUEFEN"
+    },
+    {
+      "id": "rf002",
+      "name": "Schiffsrumpf-Reinigungsroboter",
+      "proposed_world": "Reinigung & Gebäude",
+      "evidence_url": "https://www.scrubmarine.com/",
+      "review_state": "HERSTELLERANGEBOT_BELEGT",
+      "keyword_status": "NICHT_ERHOBEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "relation_to_existing": "ZU_PRUEFEN"
+    },
+    {
+      "id": "rf003",
+      "name": "Laufender Industrieinspektionsroboter",
+      "proposed_world": "Inspektion, Sicherheit & Rettung",
+      "evidence_url": "https://www.anybotics.com/robotics/anymal/",
+      "review_state": "HERSTELLERPRODUKT_BELEGT",
+      "keyword_status": "NICHT_ERHOBEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "relation_to_existing": "ZU_PRUEFEN"
+    },
+    {
+      "id": "rf004",
+      "name": "Apotheken-Kommissionierautomat mit Robotertechnik",
+      "proposed_world": "Medizin, Pflege & Labor",
+      "evidence_url": "https://www.bd.com/de-de/products-and-solutions/products/product-brands/rowa",
+      "review_state": "PRODUKT_BELEGT_ROBOTERROLLE_PRUEFEN",
+      "keyword_status": "NICHT_ERHOBEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "relation_to_existing": "ZU_PRUEFEN"
+    },
+    {
+      "id": "rf005",
+      "name": "Robotischer Abfallsortierer",
+      "proposed_world": "Industrie & Fertigung",
+      "evidence_url": "https://www.terex.com/zenrobotics/robots",
+      "review_state": "HERSTELLERPRODUKT_BELEGT",
+      "keyword_status": "NICHT_ERHOBEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "relation_to_existing": "ZU_PRUEFEN"
+    },
+    {
+      "id": "rf006",
+      "name": "Erdbeer-Ernteroboter im Gewächshaus",
+      "proposed_world": "Landwirtschaft & Tierhaltung",
+      "evidence_url": "https://www.organifarms.de/product?lang=de",
+      "review_state": "HERSTELLERPRODUKT_BELEGT_UNTERFALL_RB039",
+      "keyword_status": "NICHT_ERHOBEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "relation_to_existing": "ZU_PRUEFEN"
+    },
+    {
+      "id": "rf007",
+      "name": "Autonome Multifunktions-Feldplattform",
+      "proposed_world": "Landwirtschaft & Tierhaltung",
+      "evidence_url": "https://www.naio-technologies.com/en/news/oz-from-planting-to-harvest/",
+      "review_state": "HERSTELLERPRODUKT_BELEGT_KEINE_MEHRFACH_LEAFS",
+      "keyword_status": "NICHT_ERHOBEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "relation_to_existing": "ZU_PRUEFEN"
+    },
+    {
+      "id": "rf008",
+      "name": "Mobiler Industrieprüfroboter mit Thermografie/Gasprüfung",
+      "proposed_world": "Inspektion, Sicherheit & Rettung",
+      "evidence_url": "https://www.anybotics.com/robotics/anymal/",
+      "review_state": "HERSTELLERPRODUKT_BELEGT_UNTERFALL_RF003",
+      "keyword_status": "NICHT_ERHOBEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "relation_to_existing": "ZU_PRUEFEN"
+    },
+    {
+      "id": "rf009",
+      "name": "Industrieller Abhol- und Sortierroboter für Pakete",
+      "proposed_world": "Lager & Transport",
+      "evidence_url": null,
+      "review_state": "PRODUKTBELEG_NOCH_OFFEN",
+      "keyword_status": "NICHT_ERHOBEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "relation_to_existing": "ZU_PRUEFEN"
+    },
+    {
+      "id": "rf010",
+      "name": "Autonomer Fassadeninspektionsroboter",
+      "proposed_world": "Inspektion, Sicherheit & Rettung",
+      "evidence_url": null,
+      "review_state": "PRODUKTBELEG_NOCH_OFFEN",
+      "keyword_status": "NICHT_ERHOBEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "relation_to_existing": "ZU_PRUEFEN"
+    },
+    {
+      "id": "rf011",
+      "name": "Reinigungsroboter für großflächige Verkehrsflächen",
+      "proposed_world": "Reinigung & Gebäude",
+      "evidence_url": null,
+      "review_state": "PRODUKTBELEG_NOCH_OFFEN",
+      "keyword_status": "NICHT_ERHOBEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "relation_to_existing": "ZU_PRUEFEN"
+    },
+    {
+      "id": "rf012",
+      "name": "Roboter für Baumbestands-/Forstpflege",
+      "proposed_world": "Landwirtschaft & Tierhaltung",
+      "evidence_url": null,
+      "review_state": "PRODUKTBELEG_NOCH_OFFEN",
+      "keyword_status": "NICHT_ERHOBEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "relation_to_existing": "ZU_PRUEFEN"
+    },
+    {
+      "id": "rf013",
+      "name": "Assistenzroboter für Altenpflege im Alltag",
+      "proposed_world": "Medizin, Pflege & Labor",
+      "evidence_url": null,
+      "review_state": "ROBOTERROLLE_UND_MARKT_NOCH_OFFEN",
+      "keyword_status": "NICHT_ERHOBEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "relation_to_existing": "ZU_PRUEFEN"
+    },
+    {
+      "id": "rf014",
+      "name": "Autonomer Müllsammelroboter im öffentlichen Raum",
+      "proposed_world": "Reinigung & Gebäude",
+      "evidence_url": null,
+      "review_state": "PRODUKTBELEG_NOCH_OFFEN",
+      "keyword_status": "NICHT_ERHOBEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "relation_to_existing": "ZU_PRUEFEN"
+    },
+    {
+      "id": "rf015",
+      "name": "Roboter für Schienen-/Gleisinspektion",
+      "proposed_world": "Inspektion, Sicherheit & Rettung",
+      "evidence_url": null,
+      "review_state": "PRODUKTBELEG_NOCH_OFFEN",
+      "keyword_status": "NICHT_ERHOBEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "relation_to_existing": "ZU_PRUEFEN"
+    },
+    {
+      "id": "rf016",
+      "name": "Robotische Gewächshaus-Pflanzpflege",
+      "proposed_world": "Landwirtschaft & Tierhaltung",
+      "evidence_url": null,
+      "review_state": "ABGRENZUNG_ZU_RB038_NOCH_OFFEN",
+      "keyword_status": "NICHT_ERHOBEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "relation_to_existing": "ZU_PRUEFEN"
+    },
+    {
+      "id": "rf017",
+      "name": "Autonomer Industriedrohnen-Inspektionsroboter",
+      "proposed_world": "Inspektion, Sicherheit & Rettung",
+      "evidence_url": null,
+      "review_state": "DROHNE_VS_ROBOTERROLLE_NOCH_OFFEN",
+      "keyword_status": "NICHT_ERHOBEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "relation_to_existing": "ZU_PRUEFEN"
+    },
+    {
+      "id": "rf018",
+      "name": "Roboter für Kunststoff-/Metall-Recycling-Sortierung",
+      "proposed_world": "Industrie & Fertigung",
+      "evidence_url": "https://www.terex.com/zenrobotics/robots",
+      "review_state": "WAHRSCHEINLICH_UNTERFALL_RF005",
+      "keyword_status": "NICHT_ERHOBEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "relation_to_existing": "ZU_PRUEFEN"
+    },
+    {
+      "id": "rf019",
+      "name": "Roboter für robotergestützte Fensterfassaden-Montage",
+      "proposed_world": "Bau & Infrastruktur",
+      "evidence_url": null,
+      "review_state": "PRODUKTBELEG_NOCH_OFFEN",
+      "keyword_status": "NICHT_ERHOBEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "relation_to_existing": "ZU_PRUEFEN"
+    },
+    {
+      "id": "rf020",
+      "name": "Roboter zur autonom unterstützten Lebensmittelzubereitung",
+      "proposed_world": "Gastronomie, Handel & Hotel",
+      "evidence_url": "https://www.pudurobotics.com/de/products/bellabotpro",
+      "review_state": "NUR_SERVICE_BELEGT_NICHT_PRODUKT",
+      "keyword_status": "NICHT_ERHOBEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "relation_to_existing": "ZU_PRUEFEN"
+    }
+  ],
+  "research_expansion": {
+    "date": "2026-11-09",
+    "original_candidates": 68,
+    "original_candidates_unchanged": true,
+    "frontier_count": 20,
+    "wp_plan_unchanged": true,
+    "evidence_grade_note": "Herstellerbeleg bestaetigt Existenz einzelner Loesungen, nicht Marktgroesse/DE-Keyword oder Kategoriefreigabe."
+  },
+  "concept_status": "RESEARCH_CLASSIFICATION_DRAFT_NOT_APPROVED",
+  "knowledge_views_v1": {
+    "status": "PROPOSAL_ONLY",
+    "concept_document": "RECHERCHE/GLOSSAR_FINDER_MODELLREGISTER_V1_20261109.md",
+    "glossary": "A-Z der echten Definitionsbegriffe, Alias bei Produkt-Owner, keine zweite Taxonomie",
+    "finder": "Filteransicht anhand derselben freigegebenen Produkt-IDs, keine eigene Produktliste",
+    "model_registry": "Optionales Register von Hersteller-Modellen, erst nach 10-15 belegten Pilotmodellen; keine zweite Produkt-Owner-URL",
+    "wordpress_changes": 0
+  }
 }
