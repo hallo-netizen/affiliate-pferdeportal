@@ -1,3 +1,9 @@
+## NEUESTER EINSTIEG 09.11.2026 – v32 QA-PLUGIN GEBAUT, .31 IM TEST INSTALLIERT
+
+**Zuerst [CURRENT_STATE.md](CURRENT_STATE.md)**, dann [v32-QA-Beweis](QA_ONLY/PSTE_05714432_KISS_BUNDLE_20261109/README.md). Die 3 vereinbarten Änderungen sind in v32 als **TEST-ZIP** gebündelt, die Binärdatei und der Quellpatch sind gesichert. .31 bleibt letzter real installierter WP-Test. Kein v32 WordPress-LIVE-/K0- oder E2E-PASS. PR #682 bleibt Draft. Keine Kolik-Kategorie neu eingeben; keine alten Workflows wiederholen.
+
+---
+
 # PFERDE-ATELIER – BÜRO PLUGINS
 
 ## FRISCHER EINSTIEG 09.11.2026 – .31 INSTALLIERT, .32 UNFERTIG
