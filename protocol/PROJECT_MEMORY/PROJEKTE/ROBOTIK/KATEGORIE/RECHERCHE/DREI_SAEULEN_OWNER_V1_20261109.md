@@ -104,3 +104,14 @@ Verbindliche **Filter** für Listings: Tätigkeit/Robotertyp-Bezug, Branche, Ort
 7. **Keine Werbe- oder Partnerzusage ohne echten Anbieterbeleg**.
 
 **Fachliche Freigabe und WordPress-Sync bleiben offen.**
+
+## Neue Nischen – konkret abgegrenzte Säulen (09.11.2026, V3)
+- **Bestäubungsroboter (CORE)** erklärt Auswahl/Betrieb eines Gerättyps; **Magazin** erklärt Robotik in Bestäubung/Landwirtschaft; **Directory** bietet konkrete Gewächshausintegratoren. Gewächshaus-Pflanzenabsenkroboter hat eine **andere** Aufgabe und ggf. eigene CORE-Seite.
+- **Golfball-Sammelroboter (CORE)** erklärt Produkt und Betrieb. **Hobbydepot** beschreibt Golf als Hobby, nicht dieselbe Geräteberatung. Noch angekündigte Bunker-/Tennis-Geräte nur Forschung/Marktbeobachtung, kein fiktives Kaufangebot.
+- **Flughafen-Startbahninspektionsroboter (CORE)** hat ein System für FOD, Leuchten, Oberfläche, Tiere – **nicht vier gleichartige Produktseiten**. Flughafen-Service-Betreiber/Händler im Directory, Luftfahrtrobotik-Grundlagen ins Magazin.
+- **Windkraftturm-Reinigungsroboter (CORE-Kandidat)** ≠ **BAM Rotorblatt-Innenprüfer (Forschung, Magazin)** ≠ **Aerones Rotorblattreparatur (Dienstleistung, Directory)**.
+- **Apotheken-Zubereitungsroboter (CORE-Kandidat)** bearbeitet sterile Zubereitung, während Kommissionierungsroboter Lager- und Ausgabeaufgaben erfüllen; Medizin-Behauptungen müssen später fachlich validiert werden.
+- **Software**: konkrete Simulations-/Offline-Programmierung (zunächst ein CORE-Produkttyp) ≠ allgemeines ROS-2-Glossar ≠ Einrichtungsdienstleistung bei HivePress.
+- **Kategorienzahl nicht begrenzen.** Für jedes konkrete Produkt genau die Vertiefungsbereiche, für die 3–5 sachlich unterschiedliche Beiträge plausibel sind. Keine Pflichtpalette Fragen/Kosten/Vorteile auf jedem Produkttyp; keine bezahlten SEO-Abfragen in dieser Fachrunde.
+
+**Die einzige aktuelle datenbasierte Ausarbeitung liegt direkt in der Masterdatei Revision 8 und im lesbaren [Nischen-Konzept V3](NISCHEN_KONZEPT_V3_20261109.md).**

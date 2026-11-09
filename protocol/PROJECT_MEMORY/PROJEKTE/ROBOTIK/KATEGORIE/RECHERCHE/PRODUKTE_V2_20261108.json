@@ -2941,7 +2941,7 @@
     }
   ],
   "canonical_source": true,
-  "revision": 7,
+  "revision": 8,
   "research_state": "UNAPPROVED",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
@@ -3465,6 +3465,73 @@
         "checked_at": "2026-11-09",
         "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
         "wp_approved": false
+      },
+      "niche_content_v3": {
+        "primary_product_leaf": " → Reinigung & Gebäude → Photovoltaik-Reinigungsroboter",
+        "proposed_page_path": [
+          "Reinigung & Gebäude",
+          "Photovoltaik-Reinigungsroboter"
+        ],
+        "page_role": "KONKRETE_PRODUKTART_AUF_LETZTER_WP_SEITE_NICHT_FREIGEGEBEN",
+        "content_categories": [
+          {
+            "name": "Anlagen und Einsatzgrenzen",
+            "article_ideas": [
+              "Reinigung auf starren Modulreihen",
+              "Anlagen mit nachgeführten Modultischen",
+              "Trockene gegenüber wasserführenden Verfahren",
+              "Einsatz bei starker Neigung und Hindernissen"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Auswahl und technische Ausstattung",
+            "article_ideas": [
+              "Bürsten- und Mikrofasersysteme beurteilen",
+              "Robotersysteme mit und ohne Wasserversorgung",
+              "Ladung und Anlagenkommunikation",
+              "Roboterbewegung über Modulreihen planen"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Betrieb und Wartung",
+            "article_ideas": [
+              "Reinigungsintervalle nach Verschmutzung bestimmen",
+              "Überwachung von Laufwegen und Blockaden",
+              "Verschleiß von Reinigungswerkzeugen",
+              "Betrieb bei Wind und Witterung"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Kosten, Nutzen und Alternativen",
+            "article_ideas": [
+              "Kauf gegenüber Reinigungsdienstleistung",
+              "Wasserverbrauch und Betriebskosten vergleichen",
+              "Anlagenflächen und Investitionsbedarf",
+              "Grenzen der Ertragseinschätzung ohne Messdaten"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          }
+        ],
+        "free_category_count": true,
+        "no_category_limit": true,
+        "keyword_status": "ABSICHTLICH_NICHT_DURCHGEFUEHRT",
+        "one_product_owner": true,
+        "magazine_role": "GRUNDLAGEN_BRANCHE_ZUKUNFT_NICHT_DIESELBE_PRODUKTBERATUNG",
+        "directory_role": "ANBIETER_MITE_SERVICE_STATT_PRODUKTWISSEN",
+        "approved_for_wp": false
+      },
+      "evidence_upgrade_v3": {
+        "url": "https://www.ecoppia.com/technology",
+        "kind": "HERSTELLER_REINIGUNGSSYSTEM",
+        "checked_at": "2026-11-09",
+        "note": "Existenz/Produktfunktion belegt, keine SEO-Zahlen, keine Marktverfügbarkeit in Deutschland abgenommen"
       }
     },
     {
@@ -3475,7 +3542,74 @@
       "review_state": "HERSTELLERANGEBOT_BELEGT",
       "keyword_status": "NICHT_ERHOBEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "relation_to_existing": "ZU_PRUEFEN"
+      "relation_to_existing": "ZU_PRUEFEN",
+      "niche_content_v3": {
+        "primary_product_leaf": " → Reinigung & Gebäude → Spezialreinigung → Schiffsrumpf-Reinigungsroboter",
+        "proposed_page_path": [
+          "Reinigung & Gebäude",
+          "Spezialreinigung",
+          "Schiffsrumpf-Reinigungsroboter"
+        ],
+        "page_role": "KONKRETE_PRODUKTART_AUF_LETZTER_WP_SEITE_NICHT_FREIGEGEBEN",
+        "content_categories": [
+          {
+            "name": "Rumpfarten und Einsatzgrenzen",
+            "article_ideas": [
+              "Stahlrumpf und unterschiedliche Haftsysteme",
+              "Beschichtungen und empfindliche Oberflächen",
+              "Große Handelsschiffe gegenüber kleinen Booten",
+              "Reinigung im Hafen oder außerhalb"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Reinigungstechnik und Funktionen",
+            "article_ideas": [
+              "Leichtes Biofouling gegenüber starken Ablagerungen",
+              "Bürsten- und Saugsysteme",
+              "Unterwasserkameras zur Kontrolle",
+              "Schlamm- und Rückstandsaufnahme"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Betrieb und Wartung",
+            "article_ideas": [
+              "Einsatz während Liegezeit",
+              "Fernbedienung und Roboternavigation",
+              "Inspektion und Wartung nach Salzwasserbetrieb"
+            ],
+            "article_idea_count": 3,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Umweltauflagen und Kosten",
+            "article_ideas": [
+              "Lokale Vorgaben zur Unterwasserreinigung",
+              "Umgang mit abgefangenem Bewuchs",
+              "Servicevertrag gegenüber Gerätekauf",
+              "Betriebskosten und mögliche Reinigungsintervalle"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          }
+        ],
+        "free_category_count": true,
+        "no_category_limit": true,
+        "keyword_status": "ABSICHTLICH_NICHT_DURCHGEFUEHRT",
+        "one_product_owner": true,
+        "magazine_role": "GRUNDLAGEN_BRANCHE_ZUKUNFT_NICHT_DIESELBE_PRODUKTBERATUNG",
+        "directory_role": "ANBIETER_MITE_SERVICE_STATT_PRODUKTWISSEN",
+        "approved_for_wp": false
+      },
+      "evidence_upgrade_v3": {
+        "url": "https://nakairobotics.com/",
+        "kind": "HERSTELLER_PRODUKT_BZW_SERVICE_BELEGT",
+        "checked_at": "2026-11-09",
+        "note": "Existenz/Produktfunktion belegt, keine SEO-Zahlen, keine Marktverfügbarkeit in Deutschland abgenommen"
+      }
     },
     {
       "id": "rf003",
@@ -3516,6 +3650,55 @@
         "checked_at": "2026-11-09",
         "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
         "wp_approved": false
+      },
+      "niche_content_v3": {
+        "primary_product_leaf": " → Industrie & Fertigung → Abfallsortierroboter",
+        "proposed_page_path": [
+          "Industrie & Fertigung",
+          "Abfallsortierroboter"
+        ],
+        "page_role": "KONKRETE_PRODUKTART_AUF_LETZTER_WP_SEITE_NICHT_FREIGEGEBEN",
+        "content_categories": [
+          {
+            "name": "Abfallarten und Trennung",
+            "article_ideas": [
+              "Leichte Wertstofffraktionen sortieren",
+              "Gemischte Bau- und Gewerbeabfälle greifen",
+              "Störstoffe und Fehlgriffe erkennen",
+              "Materialerkennung an wechselnden Abfällen"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Anlage und Greiftechnik",
+            "article_ideas": [
+              "Greifer für flexible und harte Materialien",
+              "Kamera und Förderband abstimmen",
+              "Nachrüstung in bestehender Sortieranlage"
+            ],
+            "article_idea_count": 3,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Betrieb und Wirtschaftlichkeit",
+            "article_ideas": [
+              "Sortierleistung abhängig vom Materialmix",
+              "Verschleiß an Greifern prüfen",
+              "Kosten einer zusätzlichen Sortierstation",
+              "Reinigung und Störfallbehandlung"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          }
+        ],
+        "free_category_count": true,
+        "no_category_limit": true,
+        "keyword_status": "ABSICHTLICH_NICHT_DURCHGEFUEHRT",
+        "one_product_owner": true,
+        "magazine_role": "GRUNDLAGEN_BRANCHE_ZUKUNFT_NICHT_DIESELBE_PRODUKTBERATUNG",
+        "directory_role": "ANBIETER_MITE_SERVICE_STATT_PRODUKTWISSEN",
+        "approved_for_wp": false
       }
     },
     {
@@ -3693,6 +3876,56 @@
         "checked_at": "2026-11-09",
         "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
         "wp_approved": false
+      },
+      "niche_content_v3": {
+        "primary_product_leaf": " → Reinigung & Gebäude → Spezialreinigung → Aquakultur-Netzreinigungsroboter",
+        "proposed_page_path": [
+          "Reinigung & Gebäude",
+          "Spezialreinigung",
+          "Aquakultur-Netzreinigungsroboter"
+        ],
+        "page_role": "KONKRETE_PRODUKTART_AUF_LETZTER_WP_SEITE_NICHT_FREIGEGEBEN",
+        "content_categories": [
+          {
+            "name": "Netze und geeignete Fischzuchtanlagen",
+            "article_ideas": [
+              "Maschengrößen und Netzmaterialien",
+              "Reinigung am Seiten- und Bodennetz",
+              "Bewuchsarten und Reinigungsbedarf",
+              "Käfiggeometrie und Erreichbarkeit"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Technik und Bedienung",
+            "article_ideas": [
+              "Unterwasserlenkung und Kamerakontrolle",
+              "Hochdrucksystem und Schlauchführung",
+              "Kabellängen und erreichbare Tiefe"
+            ],
+            "article_idea_count": 3,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Betrieb, Tierumgebung und Kosten",
+            "article_ideas": [
+              "Reinigungszeiten und Personalbedarf",
+              "Wartung nach Meerwassereinsatz",
+              "Bergung bei Unterwasserstörung",
+              "Einfluss von Reinigung auf Fischhaltung sachlich prüfen"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          }
+        ],
+        "free_category_count": true,
+        "no_category_limit": true,
+        "keyword_status": "ABSICHTLICH_NICHT_DURCHGEFUEHRT",
+        "one_product_owner": true,
+        "magazine_role": "GRUNDLAGEN_BRANCHE_ZUKUNFT_NICHT_DIESELBE_PRODUKTBERATUNG",
+        "directory_role": "ANBIETER_MITE_SERVICE_STATT_PRODUKTWISSEN",
+        "approved_for_wp": false
       }
     },
     {
@@ -3720,6 +3953,12 @@
         "checked_at": "2026-11-09",
         "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
         "wp_approved": false
+      },
+      "evidence_upgrade_v3": {
+        "url": "https://bam.de/en/topics/projects/translate-to-english-ininspekt",
+        "kind": "FORSCHUNG_KLAR_GETRENNT",
+        "checked_at": "2026-11-09",
+        "note": "Existenz/Produktfunktion belegt, keine SEO-Zahlen, keine Marktverfügbarkeit in Deutschland abgenommen"
       }
     },
     {
@@ -3763,6 +4002,61 @@
         "checked_at": "2026-11-09",
         "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
         "wp_approved": false
+      },
+      "niche_content_v3": {
+        "primary_product_leaf": " → Bau & Infrastruktur → Kanalsanierungsroboter",
+        "proposed_page_path": [
+          "Bau & Infrastruktur",
+          "Kanalsanierungsroboter"
+        ],
+        "page_role": "KONKRETE_PRODUKTART_AUF_LETZTER_WP_SEITE_NICHT_FREIGEGEBEN",
+        "content_categories": [
+          {
+            "name": "Sanierungsarbeiten und Werkzeuge",
+            "article_ideas": [
+              "Fräsroboter für Anschlüsse nach Linereinbau",
+              "Wurzel- und Hindernisbeseitigung",
+              "Werkzeugwahl je Rohrdurchmesser",
+              "Unterschied Reinigung, Inspektion und Sanierung"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Kanalzugang und Anlagentechnik",
+            "article_ideas": [
+              "Schachteinstieg und Robotermontage",
+              "Kabel-/Schlauchführung und Reichweite",
+              "Steuerstand und Kamerasysteme"
+            ],
+            "article_idea_count": 3,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Beschaffung, Bedienung und Wartung",
+            "article_ideas": [
+              "Fachbetrieb beauftragen gegenüber Geräteanschaffung",
+              "Bedienerqualifikation und Einarbeitung",
+              "Wartung der Fräswerkzeuge",
+              "Störungen und Bergen des Roboters"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          }
+        ],
+        "free_category_count": true,
+        "no_category_limit": true,
+        "keyword_status": "ABSICHTLICH_NICHT_DURCHGEFUEHRT",
+        "one_product_owner": true,
+        "magazine_role": "GRUNDLAGEN_BRANCHE_ZUKUNFT_NICHT_DIESELBE_PRODUKTBERATUNG",
+        "directory_role": "ANBIETER_MITE_SERVICE_STATT_PRODUKTWISSEN",
+        "approved_for_wp": false
+      },
+      "evidence_upgrade_v3": {
+        "url": "https://www.sewerrobotics.com/",
+        "kind": "HERSTELLER_MODULARE_ANWENDUNG",
+        "checked_at": "2026-11-09",
+        "note": "Existenz/Produktfunktion belegt, keine SEO-Zahlen, keine Marktverfügbarkeit in Deutschland abgenommen"
       }
     },
     {
@@ -3790,6 +4084,14 @@
         "checked_at": "2026-11-09",
         "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
         "wp_approved": false
+      },
+      "owner_boundary_v3": {
+        "decision": "ALIAS_UNTERTHEMA",
+        "primary_related_owner_id": "rf005",
+        "reason": "Mischabfall-Sortierroboter ist bisher Anwendung Abfallsortierroboter, kein zweiter Robotertypen-Owner",
+        "checked_on": "2026-11-09",
+        "keyword_evaluation": "NICHT_DURCHGEFÜHRT",
+        "wordpress_release": false
       }
     },
     {
@@ -3806,7 +4108,15 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf026",
       "research_status": "NUR_FACHLICHE_HYPOTHESE",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "owner_boundary_v3": {
+        "decision": "SPEZIALANWENDUNG",
+        "primary_related_owner_id": "rf005",
+        "reason": "Elektroschrott-Sortierung zunächst Thema innerhalb Abfallsortierrobotik, kein eigener Produkt-Typ ohne Funktionsevidenz",
+        "checked_on": "2026-11-09",
+        "keyword_evaluation": "NICHT_DURCHGEFÜHRT",
+        "wordpress_release": false
+      }
     },
     {
       "name": "Unterwasser-Inspektion von Aquakulturanlagen",
@@ -3822,7 +4132,15 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf027",
       "research_status": "BEISPIEL_RECHERCHIERT_KEINE_SEO_FREIGABE",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "owner_boundary_v3": {
+        "decision": "BEREITS_INSPEKTIONSFUNKTION",
+        "primary_related_owner_id": "rb059",
+        "reason": "Aquakultur-Inspektion nicht mit Netzreinigung verwechseln; technische Eigenart erst nach Gerätebeleg",
+        "checked_on": "2026-11-09",
+        "keyword_evaluation": "NICHT_DURCHGEFÜHRT",
+        "wordpress_release": false
+      }
     },
     {
       "name": "Schweißroboter für Schiffsbau",
@@ -3860,7 +4178,7 @@
       "name": "Roboter zur Reinigung von Windkraft-Türmen",
       "topic_kind": "ROBOTER_NISCHE",
       "proposed_owner": "CORE_NICHE_REVIEW",
-      "source_url": null,
+      "source_url": "https://www.akarobotics.com/products/wallhiker-wp-05-wind-turbine-tower-cleaning-robot/",
       "evidence_kind": "KEINE_BELEGPFLICHT_ERFUELLT_BEISPIEL_QUELLE_OFFEN",
       "boundary": "nicht mit Rotorblattinspektion gleichsetzen",
       "related_existing_id": "rb029",
@@ -3869,8 +4187,63 @@
       "wp_release": "NICHT_FREIGEGEBEN",
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf030",
-      "research_status": "NUR_FACHLICHE_HYPOTHESE",
-      "checked_on": "2026-11-09"
+      "research_status": "HERSTELLERFUNKTIONS_BELEG_KEINE_SEO_FREIGABE",
+      "checked_on": "2026-11-09",
+      "niche_content_v3": {
+        "primary_product_leaf": " → Reinigung & Gebäude → Windkraftturm-Reinigungsroboter",
+        "proposed_page_path": [
+          "Reinigung & Gebäude",
+          "Windkraftturm-Reinigungsroboter"
+        ],
+        "page_role": "KONKRETE_PRODUKTART_AUF_LETZTER_WP_SEITE_NICHT_FREIGEGEBEN",
+        "content_categories": [
+          {
+            "name": "Turmoberflächen und Einsatzbedingungen",
+            "article_ideas": [
+              "Magnetische Haftung an Stahltürmen",
+              "Turmdurchmesser und Krümmung",
+              "Ölverschmutzung gegenüber Staubablagerungen",
+              "Einsatzgrenzen durch Wind und Höhe"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Technische Ausstattung und Betrieb",
+            "article_ideas": [
+              "Seilführung und Absturzsicherung",
+              "Fernsteuerung vom Boden",
+              "Bürsten und Reinigungsmittel wählen"
+            ],
+            "article_idea_count": 3,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Wartung, Anbieter und Kosten",
+            "article_ideas": [
+              "Verschleiß von Bürsten und Haftsystem",
+              "Dienstleister gegenüber Robotersystem beurteilen",
+              "Reinigung im Wartungsplan der Windanlage",
+              "Betriebsunterbrechung und Einsatzvorbereitung"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          }
+        ],
+        "free_category_count": true,
+        "no_category_limit": true,
+        "keyword_status": "ABSICHTLICH_NICHT_DURCHGEFUEHRT",
+        "one_product_owner": true,
+        "magazine_role": "GRUNDLAGEN_BRANCHE_ZUKUNFT_NICHT_DIESELBE_PRODUKTBERATUNG",
+        "directory_role": "ANBIETER_MITE_SERVICE_STATT_PRODUKTWISSEN",
+        "approved_for_wp": false
+      },
+      "evidence_upgrade_v3": {
+        "url": "https://www.akarobotics.com/products/wallhiker-wp-05-wind-turbine-tower-cleaning-robot/",
+        "kind": "HERSTELLER_GERAET_BELEGT",
+        "checked_at": "2026-11-09",
+        "note": "Existenz/Produktfunktion belegt, keine SEO-Zahlen, keine Marktverfügbarkeit in Deutschland abgenommen"
+      }
     },
     {
       "name": "Autonomer Hallen-Schneeräumroboter",
@@ -4078,7 +4451,15 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf043",
       "research_status": "BEISPIEL_RECHERCHIERT_KEINE_SEO_FREIGABE",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "owner_boundary_v3": {
+        "decision": "UNTERTHEMA_INSPEKTION",
+        "primary_related_owner_id": "rb053",
+        "reason": "Kommunale Rohrnetzprüfung ist derzeit Kanal-/Rohrinspektion statt eigene Robotergattung",
+        "checked_on": "2026-11-09",
+        "keyword_evaluation": "NICHT_DURCHGEFÜHRT",
+        "wordpress_release": false
+      }
     },
     {
       "name": "Roboter für Hochspannungs-Isolatorenreinigung",
@@ -4164,7 +4545,7 @@
       "name": "Roboter für Gewächshaus-Bestäubung",
       "topic_kind": "ROBOTER_NISCHE",
       "proposed_owner": "CORE_NICHE_REVIEW",
-      "source_url": null,
+      "source_url": "https://www.biobest.com/en-US/news/meet-polly-the-answer-to-your-pollination-challenges",
       "evidence_kind": "KEINE_BELEGPFLICHT_ERFUELLT_BEISPIEL_QUELLE_OFFEN",
       "boundary": "Nische getrennt von Ernterobotern belegen",
       "related_existing_id": "rb039",
@@ -4173,8 +4554,75 @@
       "wp_release": "NICHT_FREIGEGEBEN",
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf049",
-      "research_status": "NUR_FACHLICHE_HYPOTHESE",
-      "checked_on": "2026-11-09"
+      "research_status": "HERSTELLERFUNKTIONS_BELEG_KEINE_SEO_FREIGABE",
+      "checked_on": "2026-11-09",
+      "niche_content_v3": {
+        "primary_product_leaf": " → Landwirtschaft & Tierhaltung → Gewächshaus → Gewächshaus-Bestäubungsroboter",
+        "proposed_page_path": [
+          "Landwirtschaft & Tierhaltung",
+          "Gewächshaus",
+          "Gewächshaus-Bestäubungsroboter"
+        ],
+        "page_role": "KONKRETE_PRODUKTART_AUF_LETZTER_WP_SEITE_NICHT_FREIGEGEBEN",
+        "content_categories": [
+          {
+            "name": "Pflanzen, Blüten und Eignung",
+            "article_ideas": [
+              "Bestäubung an Tomatenblüten",
+              "Erkennung bestäubungsbereiter Blüten",
+              "Gewächshausreihen und Pflanzenhöhe",
+              "Grenzen bei anderen Kulturarten"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Bestäubungsverfahren und Technik",
+            "article_ideas": [
+              "Luftimpuls gegenüber mechanischem Kontakt",
+              "Kamerasysteme zur Blütenerkennung",
+              "Bewegung zwischen den Pflanzenreihen"
+            ],
+            "article_idea_count": 3,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Betrieb und Pflanzenpflege",
+            "article_ideas": [
+              "Einsatzzeiten bei LED-Beleuchtung",
+              "Störfälle während des Reihenwechsels",
+              "Wartung von Sensoren und Drucklufttechnik",
+              "Kontrolle tatsächlicher Blütenabdeckung"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Wirtschaftlichkeit und Alternativen",
+            "article_ideas": [
+              "Hummeln und robotische Bestäubung abgrenzen",
+              "Kosten von Gerät und Flotte",
+              "Personalaufwand im Gewächshaus",
+              "Erfolg messen ohne Herstellerwerte ungeprüft zu übernehmen"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          }
+        ],
+        "free_category_count": true,
+        "no_category_limit": true,
+        "keyword_status": "ABSICHTLICH_NICHT_DURCHGEFUEHRT",
+        "one_product_owner": true,
+        "magazine_role": "GRUNDLAGEN_BRANCHE_ZUKUNFT_NICHT_DIESELBE_PRODUKTBERATUNG",
+        "directory_role": "ANBIETER_MITE_SERVICE_STATT_PRODUKTWISSEN",
+        "approved_for_wp": false
+      },
+      "evidence_upgrade_v3": {
+        "url": "https://www.biobest.com/en-US/news/meet-polly-the-answer-to-your-pollination-challenges",
+        "kind": "HERSTELLER_EINFUEHRUNG_OKT_2026",
+        "checked_at": "2026-11-09",
+        "note": "Existenz/Produktfunktion belegt, keine SEO-Zahlen, keine Marktverfügbarkeit in Deutschland abgenommen"
+      }
     },
     {
       "name": "Roboter für Krankenhauswäschetransport",
@@ -4281,6 +4729,55 @@
         "checked_at": "2026-11-09",
         "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
         "wp_approved": false
+      },
+      "niche_content_v3": {
+        "primary_product_leaf": " → Robotiksoftware → Robotersimulation und Offline-Programmiersoftware",
+        "proposed_page_path": [
+          "Robotiksoftware",
+          "Robotersimulation und Offline-Programmiersoftware"
+        ],
+        "page_role": "KONKRETE_PRODUKTART_AUF_LETZTER_WP_SEITE_NICHT_FREIGEGEBEN",
+        "content_categories": [
+          {
+            "name": "Softwarefunktionen und Einsatz",
+            "article_ideas": [
+              "Roboterbahnen virtuell testen",
+              "Kollisionen in Fertigungszellen erkennen",
+              "Programme ohne Produktionsstillstand vorbereiten",
+              "Simulation mehrerer Roboter in einer Zelle"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Schnittstellen und Kompatibilität",
+            "article_ideas": [
+              "Robotermarken und Steuerungen abgleichen",
+              "CAD-Daten aus Konstruktionssystemen einlesen",
+              "Programme auf reale Steuerungen übertragen"
+            ],
+            "article_idea_count": 3,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Lizenzierung und Betrieb",
+            "article_ideas": [
+              "Einzelplatz- gegen Teamlizenzen prüfen",
+              "Trainingsaufwand für Bediener",
+              "Softwareupdates und Versionskompatibilität",
+              "Grenzen von Simulationsmodellen im Praxiseinsatz"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          }
+        ],
+        "free_category_count": true,
+        "no_category_limit": true,
+        "keyword_status": "ABSICHTLICH_NICHT_DURCHGEFUEHRT",
+        "one_product_owner": true,
+        "magazine_role": "GRUNDLAGEN_BRANCHE_ZUKUNFT_NICHT_DIESELBE_PRODUKTBERATUNG",
+        "directory_role": "ANBIETER_MITE_SERVICE_STATT_PRODUKTWISSEN",
+        "approved_for_wp": false
       }
     },
     {
@@ -4308,6 +4805,14 @@
         "checked_at": "2026-11-09",
         "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
         "wp_approved": false
+      },
+      "owner_boundary_v3": {
+        "decision": "GEMEINSAMER_PRODUKTTYP_VORLÄUFIG",
+        "primary_related_owner_id": "rf055",
+        "reason": "Simulation und Offline-Programmierung können dieselbe Software betreffen; zunächst eine kombinierte Produktseite, spätere fachliche Aufteilung nur bei deutlich anderer Funktion",
+        "checked_on": "2026-11-09",
+        "keyword_evaluation": "NICHT_DURCHGEFÜHRT",
+        "wordpress_release": false
       }
     },
     {
@@ -4335,6 +4840,54 @@
         "checked_at": "2026-11-09",
         "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
         "wp_approved": false
+      },
+      "niche_content_v3": {
+        "primary_product_leaf": " → Robotiksoftware → Flottenmanagementsoftware für mobile Roboter",
+        "proposed_page_path": [
+          "Robotiksoftware",
+          "Flottenmanagementsoftware für mobile Roboter"
+        ],
+        "page_role": "KONKRETE_PRODUKTART_AUF_LETZTER_WP_SEITE_NICHT_FREIGEGEBEN",
+        "content_categories": [
+          {
+            "name": "Auftragssteuerung und Verkehr",
+            "article_ideas": [
+              "Fahrzeugaufträge priorisieren",
+              "Engstellen in Lagerflotten koordinieren",
+              "Ladeplanung und Batteriestatus",
+              "Störungen zentral bearbeiten"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Integration und Herstellerkompatibilität",
+            "article_ideas": [
+              "Schnittstellen zu Lagerverwaltungssystemen",
+              "Einhersteller- und Mischflotten unterscheiden",
+              "VDA-5050-Anbindung prüfen"
+            ],
+            "article_idea_count": 3,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Betrieb, Rechte und Kosten",
+            "article_ideas": [
+              "Benutzerrechte und Fernzugriffe verwalten",
+              "Ausfälle und Notbetrieb organisieren",
+              "Lizenz- und Wartungsmodelle beurteilen"
+            ],
+            "article_idea_count": 3,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          }
+        ],
+        "free_category_count": true,
+        "no_category_limit": true,
+        "keyword_status": "ABSICHTLICH_NICHT_DURCHGEFUEHRT",
+        "one_product_owner": true,
+        "magazine_role": "GRUNDLAGEN_BRANCHE_ZUKUNFT_NICHT_DIESELBE_PRODUKTBERATUNG",
+        "directory_role": "ANBIETER_MITE_SERVICE_STATT_PRODUKTWISSEN",
+        "approved_for_wp": false
       }
     },
     {
@@ -4565,6 +5118,55 @@
         "checked_at": "2026-11-09",
         "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
         "wp_approved": false
+      },
+      "niche_content_v3": {
+        "primary_product_leaf": " → Robotik-Komponenten → Industrieller Robotergreifer",
+        "proposed_page_path": [
+          "Robotik-Komponenten",
+          "Industrieller Robotergreifer"
+        ],
+        "page_role": "KONKRETE_PRODUKTART_AUF_LETZTER_WP_SEITE_NICHT_FREIGEGEBEN",
+        "content_categories": [
+          {
+            "name": "Greifprinzip und Werkstück",
+            "article_ideas": [
+              "Pneumatische und elektrische Greifer",
+              "Greifer für schwere oder fragile Teile",
+              "Parallel- und Winkelgreifer unterscheiden",
+              "Vakuumgreifer sachlich abgrenzen"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Montage und Steuerung",
+            "article_ideas": [
+              "Flansch und Schnittstellen prüfen",
+              "Greifkraft und Sensorrückmeldung",
+              "Greifer in Maschinenzelle integrieren"
+            ],
+            "article_idea_count": 3,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Pflege, Verschleiß und Kosten",
+            "article_ideas": [
+              "Greiferfinger und Backen tauschen",
+              "Wartung beweglicher Greiferteile",
+              "Erstausrüstung versus Umrüstung",
+              "Ausfall und Fehlgriff diagnostizieren"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          }
+        ],
+        "free_category_count": true,
+        "no_category_limit": true,
+        "keyword_status": "ABSICHTLICH_NICHT_DURCHGEFUEHRT",
+        "one_product_owner": true,
+        "magazine_role": "GRUNDLAGEN_BRANCHE_ZUKUNFT_NICHT_DIESELBE_PRODUKTBERATUNG",
+        "directory_role": "ANBIETER_MITE_SERVICE_STATT_PRODUKTWISSEN",
+        "approved_for_wp": false
       }
     },
     {
@@ -4592,6 +5194,54 @@
         "checked_at": "2026-11-09",
         "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
         "wp_approved": false
+      },
+      "niche_content_v3": {
+        "primary_product_leaf": " → Robotik-Komponenten → Roboter-Werkzeugwechsler",
+        "proposed_page_path": [
+          "Robotik-Komponenten",
+          "Roboter-Werkzeugwechsler"
+        ],
+        "page_role": "KONKRETE_PRODUKTART_AUF_LETZTER_WP_SEITE_NICHT_FREIGEGEBEN",
+        "content_categories": [
+          {
+            "name": "Bauarten und Kompatibilität",
+            "article_ideas": [
+              "Manuellen gegenüber automatischem Werkzeugwechsel",
+              "Lasten und Werkzeuggewichte beurteilen",
+              "Roboterflansch und Werkzeugadapter",
+              "Signale, Strom und Pneumatik übertragen"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Einbau und Prozessablauf",
+            "article_ideas": [
+              "Wechselstationen planen",
+              "Verriegelung und Erkennung kontrollieren",
+              "Automatischen Werkzeugwechsel programmieren"
+            ],
+            "article_idea_count": 3,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Wartung und Wirtschaftlichkeit",
+            "article_ideas": [
+              "Dichtungen und Verriegelung prüfen",
+              "Kontaktverschleiß erkennen",
+              "Rüstzeit gegenüber zusätzlichen Robotern bewerten"
+            ],
+            "article_idea_count": 3,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          }
+        ],
+        "free_category_count": true,
+        "no_category_limit": true,
+        "keyword_status": "ABSICHTLICH_NICHT_DURCHGEFUEHRT",
+        "one_product_owner": true,
+        "magazine_role": "GRUNDLAGEN_BRANCHE_ZUKUNFT_NICHT_DIESELBE_PRODUKTBERATUNG",
+        "directory_role": "ANBIETER_MITE_SERVICE_STATT_PRODUKTWISSEN",
+        "approved_for_wp": false
       }
     },
     {
@@ -5527,6 +6177,434 @@
       "id": "rf128",
       "research_status": "EINZELPRODUKT_BELEG_OFFEN",
       "checked_on": "2026-11-09"
+    },
+    {
+      "id": "rf129",
+      "name": "Pflanzenabsenkroboter für Gewächshäuser",
+      "topic_kind": "NEW_NICHE_TRIAGE",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Landwirtschaft & Tierhaltung → Gewächshaus → Pflanzenabsenkroboter",
+      "evidence_grade": "HERSTELLER_FUNKTION_BELEGT",
+      "source_url": "https://www.arugga.com/technology",
+      "related_existing_id": "rf049",
+      "non_duplication_rule": "Andere Funktion als Bestäubung, obwohl Anbieter mehrere Geräte anführt. Reife/Verkauf prüfen",
+      "checked_at": "2026-11-09",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "niche_content_v3": {
+        "primary_product_leaf": " → Landwirtschaft & Tierhaltung → Gewächshaus → Pflanzenabsenkroboter",
+        "proposed_page_path": [
+          "Landwirtschaft & Tierhaltung",
+          "Gewächshaus",
+          "Pflanzenabsenkroboter"
+        ],
+        "page_role": "KONKRETE_PRODUKTART_AUF_LETZTER_WP_SEITE_NICHT_FREIGEGEBEN",
+        "content_categories": [
+          {
+            "name": "Pflanzenarten und Voraussetzungen",
+            "article_ideas": [
+              "Tomatenranken beim Absenken führen",
+              "Gurkenpflanzen absenken",
+              "Pflanzengewicht und Trägerkonstruktion",
+              "Reihenabstand und Zugang"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Absenktechnik und Bedienung",
+            "article_ideas": [
+              "Haken-/Schnurführung und Haltepunkte",
+              "Roboterbewegung entlang Gewächshausreihen",
+              "Wiederholgenauigkeit und Pflanzenschonung"
+            ],
+            "article_idea_count": 3,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Wartung und betrieblicher Nutzen",
+            "article_ideas": [
+              "Schichtplanung und Akkubetrieb",
+              "Bedien- und Prüfaufwand",
+              "Störfälle bei verwickelten Ranken",
+              "Wartung der Antriebe und Sensoren"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          }
+        ],
+        "free_category_count": true,
+        "no_category_limit": true,
+        "keyword_status": "ABSICHTLICH_NICHT_DURCHGEFUEHRT",
+        "one_product_owner": true,
+        "magazine_role": "GRUNDLAGEN_BRANCHE_ZUKUNFT_NICHT_DIESELBE_PRODUKTBERATUNG",
+        "directory_role": "ANBIETER_MITE_SERVICE_STATT_PRODUKTWISSEN",
+        "approved_for_wp": false
+      }
+    },
+    {
+      "id": "rf130",
+      "name": "Golfball-Sammelroboter für Golfübungsanlagen",
+      "topic_kind": "NEW_NICHE_TRIAGE",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Sportanlagen & Freizeitbetriebe [Weltkandidat] → Golfball-Sammelroboter",
+      "evidence_grade": "HERSTELLER_PRODUKT_BELEGT",
+      "source_url": "https://www.wayrobo.com/",
+      "related_existing_id": null,
+      "non_duplication_rule": "Unterschied Golfplatz-Mähroboter und Bunkerpflege",
+      "checked_at": "2026-11-09",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "niche_content_v3": {
+        "primary_product_leaf": " → Sportanlagen & Freizeitbetriebe [Weltkandidat] → Golfball-Sammelroboter",
+        "proposed_page_path": [
+          "Sportanlagen & Freizeitbetriebe [Weltkandidat]",
+          "Golfball-Sammelroboter"
+        ],
+        "page_role": "KONKRETE_PRODUKTART_AUF_LETZTER_WP_SEITE_NICHT_FREIGEGEBEN",
+        "content_categories": [
+          {
+            "name": "Driving-Range und Geländeeignung",
+            "article_ideas": [
+              "Sammelstrecken zwischen Abschlagflächen",
+              "Golfbälle bei nassem oder hohem Gras",
+              "Geländegefälle und Hindernisse",
+              "Sicherheit bei laufendem Übungsbetrieb"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Ballaufnahme und Kapazität",
+            "article_ideas": [
+              "Bälle sammeln ohne Rasenbeschädigung",
+              "Selbstständiges Entleeren der Behälter",
+              "Sammelgeschwindigkeit und Fahrwege"
+            ],
+            "article_idea_count": 3,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Betrieb und Kosten",
+            "article_ideas": [
+              "Ladestation und Entleerung planen",
+              "Reinigung und Verschleiß der Aufnahme",
+              "Kauf, Miete und Personalersparnis",
+              "Störfälle und Notabbruch im Publikumsbereich"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          }
+        ],
+        "free_category_count": true,
+        "no_category_limit": true,
+        "keyword_status": "ABSICHTLICH_NICHT_DURCHGEFUEHRT",
+        "one_product_owner": true,
+        "magazine_role": "GRUNDLAGEN_BRANCHE_ZUKUNFT_NICHT_DIESELBE_PRODUKTBERATUNG",
+        "directory_role": "ANBIETER_MITE_SERVICE_STATT_PRODUKTWISSEN",
+        "approved_for_wp": false
+      }
+    },
+    {
+      "id": "rf131",
+      "name": "Golfbunker-Pflegeroboter",
+      "topic_kind": "NEW_NICHE_TRIAGE",
+      "proposed_owner": "MAGAZIN_FORSCHUNG_NOCH_NICHT_CORE",
+      "proposed_location": "Sportanlagen & Freizeitbetriebe [Weltkandidat] → Bunker-Pflegeroboter",
+      "evidence_grade": "HERSTELLER_COMING_SOON",
+      "source_url": "https://www.wayrobo.com/",
+      "related_existing_id": null,
+      "non_duplication_rule": "Noch keine aktuelle Lieferbarkeit nachgewiesen",
+      "checked_at": "2026-11-09",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "owner_boundary_v3": {
+        "decision": "ANDERE_FUNKTION_ABER_ANGEKUENDIGT",
+        "primary_related_owner_id": "rf130",
+        "reason": "Golfbunkerpflege unterscheidet sich von Golfballsammeln, aber Wayrobo nennt Coming Soon, nicht live",
+        "checked_on": "2026-11-09",
+        "keyword_evaluation": "NICHT_DURCHGEFÜHRT",
+        "wordpress_release": false
+      }
+    },
+    {
+      "id": "rf132",
+      "name": "Flughafen-Startbahninspektionsroboter",
+      "topic_kind": "NEW_NICHE_TRIAGE",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Inspektion, Sicherheit & Rettung → Flughafen-Startbahninspektionsroboter",
+      "evidence_grade": "HERSTELLER_MULTIFUNKTIONSSYSTEM",
+      "source_url": "https://www.roboxi.com/",
+      "related_existing_id": "rb055",
+      "non_duplication_rule": "Ein Modell deckt FOD, Leuchten, Wildtiere und Oberflächenkontrolle; keine vier Produkt-Owner",
+      "checked_at": "2026-11-09",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "niche_content_v3": {
+        "primary_product_leaf": " → Inspektion, Sicherheit & Rettung → Flughafen-Startbahninspektionsroboter",
+        "proposed_page_path": [
+          "Inspektion, Sicherheit & Rettung",
+          "Flughafen-Startbahninspektionsroboter"
+        ],
+        "page_role": "KONKRETE_PRODUKTART_AUF_LETZTER_WP_SEITE_NICHT_FREIGEGEBEN",
+        "content_categories": [
+          {
+            "name": "Fremdkörper und Sichtprüfung",
+            "article_ideas": [
+              "Fremdkörper auf Startbahnen erkennen",
+              "Beschädigungen des Belags erfassen",
+              "Überprüfung von Markierungen und Leuchten",
+              "Dokumentation der Fundorte"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Robotersystem und Sensoren",
+            "article_ideas": [
+              "Kameras und Hinderniserkennung",
+              "Einsatz auf Start- und Rollwegen",
+              "Zentrale Überwachung und Datenübertragung"
+            ],
+            "article_idea_count": 3,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Betrieb und Flugsicherung",
+            "article_ideas": [
+              "Abstimmung von Fahrwegen mit Flughafenbetrieb",
+              "Einsatzfenster und Freigaben",
+              "Sicherheitsstopps und Rückholbetrieb",
+              "Umgang mit schlechter Sicht"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Wartung und Wirtschaftlichkeit",
+            "article_ideas": [
+              "Sensor- und Kamerakalibrierung",
+              "Wartung der Fahrplattform",
+              "Kosten für Integration in bestehende Abläufe"
+            ],
+            "article_idea_count": 3,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          }
+        ],
+        "free_category_count": true,
+        "no_category_limit": true,
+        "keyword_status": "ABSICHTLICH_NICHT_DURCHGEFUEHRT",
+        "one_product_owner": true,
+        "magazine_role": "GRUNDLAGEN_BRANCHE_ZUKUNFT_NICHT_DIESELBE_PRODUKTBERATUNG",
+        "directory_role": "ANBIETER_MITE_SERVICE_STATT_PRODUKTWISSEN",
+        "approved_for_wp": false
+      }
+    },
+    {
+      "id": "rf133",
+      "name": "Roboter zur Apfelblüten- und Fruchtausdünnung",
+      "topic_kind": "NEW_NICHE_TRIAGE",
+      "proposed_owner": "MAGAZIN_FORSCHUNG_NOCH_NICHT_CORE",
+      "proposed_location": "Landwirtschaft & Tierhaltung → Obstbau (Forschung)",
+      "evidence_grade": "FORSCHUNGSPROJEKT_2025_2027",
+      "source_url": "https://oskar-projekt.de/",
+      "related_existing_id": "rb039",
+      "non_duplication_rule": "OSKAR noch Forschung, keine Serienproduktbehauptung",
+      "checked_at": "2026-11-09",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "owner_boundary_v3": {
+        "decision": "ANDERE_FUNKTION_FORSCHUNG",
+        "primary_related_owner_id": "rb039",
+        "reason": "Ausdünnung ist nicht Ernten, Projekt OSKAR derzeit Forschung, daher keine CORE-Veröffentlichung",
+        "checked_on": "2026-11-09",
+        "keyword_evaluation": "NICHT_DURCHGEFÜHRT",
+        "wordpress_release": false
+      }
+    },
+    {
+      "id": "rf134",
+      "name": "Roboter zur sterilen Arzneimittelzubereitung",
+      "topic_kind": "NEW_NICHE_TRIAGE",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE_WITH_MEDICAL_REVIEW",
+      "proposed_location": "Medizin, Pflege & Labor → Roboter zur sterilen Arzneimittelzubereitung",
+      "evidence_grade": "FACHSTUDIE_ZUR_BESTEHENDEN_PRODUKTKLASSE",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12388994/",
+      "related_existing_id": "rb046",
+      "non_duplication_rule": "Medizinisches Mischen/Zubereiten ist nicht Medikamente lagern oder kommissionieren",
+      "checked_at": "2026-11-09",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "niche_content_v3": {
+        "primary_product_leaf": " → Medizin, Pflege & Labor → Roboter zur sterilen Arzneimittelzubereitung",
+        "proposed_page_path": [
+          "Medizin, Pflege & Labor",
+          "Roboter zur sterilen Arzneimittelzubereitung"
+        ],
+        "page_role": "KONKRETE_PRODUKTART_AUF_LETZTER_WP_SEITE_NICHT_FREIGEGEBEN",
+        "content_categories": [
+          {
+            "name": "Funktionen und Abgrenzung",
+            "article_ideas": [
+              "Zubereitungsroboter vs Medikamentenlagerautomat",
+              "Automatisches Aufziehen und Umfüllen von Flüssigkeiten",
+              "Unterschiede zwischen Einzel- und Serienfertigung",
+              "Anschluss an Apothekenlogistik"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Betriebsumgebung und Qualität",
+            "article_ideas": [
+              "Reinraum- und Hygieneanforderungen fachlich prüfen",
+              "Chargendokumentation und Rückverfolgbarkeit",
+              "Menschliche Kontrolle und Fehlerbehandlung",
+              "Zulassungs-/Validierungsstatus der Systeme"
+            ],
+            "article_idea_count": 4,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          },
+          {
+            "name": "Organisation und Kosten",
+            "article_ideas": [
+              "Platzbedarf und Arbeitsabläufe in Klinikapotheken",
+              "Schulung qualifizierter Fachkräfte",
+              "Beschaffungs- und Wartungskosten beurteilen"
+            ],
+            "article_idea_count": 3,
+            "status": "REDAKTIONELLE_PLAUSIBILITAET_NICHT_SEO_GEPRUEFT"
+          }
+        ],
+        "free_category_count": true,
+        "no_category_limit": true,
+        "keyword_status": "ABSICHTLICH_NICHT_DURCHGEFUEHRT",
+        "one_product_owner": true,
+        "magazine_role": "GRUNDLAGEN_BRANCHE_ZUKUNFT_NICHT_DIESELBE_PRODUKTBERATUNG",
+        "directory_role": "ANBIETER_MITE_SERVICE_STATT_PRODUKTWISSEN",
+        "approved_for_wp": false
+      }
+    },
+    {
+      "id": "rf135",
+      "name": "Pilzernteroboter für Zuchtbetriebe",
+      "topic_kind": "NEW_NICHE_TRIAGE",
+      "proposed_owner": "MAGAZIN_FORSCHUNG_NOCH_NICHT_CORE",
+      "proposed_location": "Landwirtschaft & Tierhaltung → Pilzernte (Forschung)",
+      "evidence_grade": "FORSCHUNGSARBEIT_2026",
+      "source_url": "https://www.sciencedirect.com/science/article/pii/S0168169925015005",
+      "related_existing_id": "rb039",
+      "non_duplication_rule": "Forschung zu Champignonernte, keine nachgewiesene Serienproduktverfügbarkeit",
+      "checked_at": "2026-11-09",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "owner_boundary_v3": {
+        "decision": "ANDERE_KULTUR_FORSCHUNG",
+        "primary_related_owner_id": "rb039",
+        "reason": "Pilzerntetechnik hat andere Kulturbedingungen als Obsternte; Studie reicht nicht als Produktkaufnachweis",
+        "checked_on": "2026-11-09",
+        "keyword_evaluation": "NICHT_DURCHGEFÜHRT",
+        "wordpress_release": false
+      }
+    },
+    {
+      "id": "rf136",
+      "name": "Bienenstock-Inspektionsroboter",
+      "topic_kind": "NEW_NICHE_TRIAGE",
+      "proposed_owner": "MAGAZIN_FORSCHUNG_NOCH_NICHT_CORE",
+      "proposed_location": "Landwirtschaft & Tierhaltung → Imkerei (Forschung)",
+      "evidence_grade": "KONZEPTPHASE_TRL2",
+      "source_url": "https://gratheon.com/products/robotic_beehive/",
+      "related_existing_id": null,
+      "non_duplication_rule": "Mechanische Rahmeninspektion nur Konzept, Sensoren im Bienenstock nicht gleich Roboter",
+      "checked_at": "2026-11-09",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "owner_boundary_v3": {
+        "decision": "KONZEPTPHASE",
+        "primary_related_owner_id": null,
+        "reason": "Robotischer Bienenstock nennt TRL2; keine Serienprodukt-Seite",
+        "checked_on": "2026-11-09",
+        "keyword_evaluation": "NICHT_DURCHGEFÜHRT",
+        "wordpress_release": false
+      }
+    },
+    {
+      "id": "rf137",
+      "name": "Tennisball-Sammelroboter für Sportanlagen",
+      "topic_kind": "NEW_NICHE_TRIAGE",
+      "proposed_owner": "MAGAZIN_MARKTBEOBACHTUNG",
+      "proposed_location": "Sportanlagen & Freizeitbetriebe → Tennisball-Sammelroboter",
+      "evidence_grade": "HERSTELLER_COMING_SOON",
+      "source_url": "https://www.reemanrobot.com/news/reeman-tennis-ball-collector-85690551.html",
+      "related_existing_id": null,
+      "non_duplication_rule": "Nur angekündigt, nicht als lieferbar behaupten",
+      "checked_at": "2026-11-09",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "owner_boundary_v3": {
+        "decision": "ANDERE_SPORTART_ANGEKUENDIGT",
+        "primary_related_owner_id": "rf130",
+        "reason": "Tennisball- vs Golfball-Sammeln sind unterschiedliche Arbeitsbedingungen; Tennisprodukt noch angekündigt",
+        "checked_on": "2026-11-09",
+        "keyword_evaluation": "NICHT_DURCHGEFÜHRT",
+        "wordpress_release": false
+      }
+    },
+    {
+      "id": "rf138",
+      "name": "Robotergestützte Rotorblattreparatur",
+      "topic_kind": "NEW_NICHE_TRIAGE",
+      "proposed_owner": "HIVEPRESS_DIENSTLEISTUNG_PRIMAER",
+      "proposed_location": "Anzeigenmarkt → Windkraftwartung und Rotorblattreparatur",
+      "evidence_grade": "ANBIETER_DIENSTLEISTUNG",
+      "source_url": "https://aerones.com/de/",
+      "related_existing_id": "rf022",
+      "non_duplication_rule": "Beleg beschreibt Dienstleistung; kein einzelnes käufliches Robotermodell voraussetzen",
+      "checked_at": "2026-11-09",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "owner_boundary_v3": {
+        "decision": "DIENSTLEISTUNG_PRIMAER",
+        "primary_related_owner_id": "rf022",
+        "reason": "Rotorblattreparatur von Aerones ist nach Quellenlage konkrete Dienstleistung, keine frei kaufbare Roboterart nachgewiesen",
+        "checked_on": "2026-11-09",
+        "keyword_evaluation": "NICHT_DURCHGEFÜHRT",
+        "wordpress_release": false
+      }
+    },
+    {
+      "id": "rf139",
+      "name": "Roboter-Golfcaddie mit Folgemodus",
+      "topic_kind": "NEW_NICHE_TRIAGE",
+      "proposed_owner": "MAGAZIN_MARKTBEOBACHTUNG",
+      "proposed_location": "Sportanlagen & Freizeitbetriebe → Roboter-Golfcaddie",
+      "evidence_grade": "HERSTELLER_VORANKUENDIGUNG",
+      "source_url": "https://robologicgolf.com/",
+      "related_existing_id": null,
+      "non_duplication_rule": "Interessentenliste, keine aktuelle Verfügbarkeit behaupten",
+      "checked_at": "2026-11-09",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "owner_boundary_v3": {
+        "decision": "VORANKUENDIGT",
+        "primary_related_owner_id": null,
+        "reason": "Golfcaddie-Roboter nur Interessentenliste nach Herstellerseite",
+        "checked_on": "2026-11-09",
+        "keyword_evaluation": "NICHT_DURCHGEFÜHRT",
+        "wordpress_release": false
+      }
     }
   ],
   "research_expansion": {
@@ -5663,5 +6741,49 @@
     "source_credibility": "PRODUKTBELEG_VS_DE_SUCHE_TRENNEN",
     "wp_plan_changed": false,
     "review_file": "RECHERCHE/PRODUKTROLLEN_PRIORITAETEN_20261109.md"
+  },
+  "niche_concept_v3": {
+    "checked_at": "2026-11-09",
+    "previous_frontier_count": 128,
+    "new_ids": [
+      "rf129",
+      "rf130",
+      "rf131",
+      "rf132",
+      "rf133",
+      "rf134",
+      "rf135",
+      "rf136",
+      "rf137",
+      "rf138",
+      "rf139"
+    ],
+    "updated_frontier_count": 139,
+    "content_key": "niche_content_v3",
+    "wordpress_plan_changed": false,
+    "keyword_research_performed": false,
+    "content_ids": [
+      "rf001",
+      "rf002",
+      "rf005",
+      "rf021",
+      "rf024",
+      "rf030",
+      "rf049",
+      "rf055",
+      "rf057",
+      "rf070",
+      "rf071",
+      "rf129",
+      "rf130",
+      "rf132",
+      "rf134"
+    ],
+    "content_leaf_count": 15,
+    "content_category_count": 49,
+    "possible_article_ideas": 179,
+    "missing_keyword_check": true,
+    "duplicate_or_hold_decisions": 12,
+    "updated_evidence_count": 6
   }
 }

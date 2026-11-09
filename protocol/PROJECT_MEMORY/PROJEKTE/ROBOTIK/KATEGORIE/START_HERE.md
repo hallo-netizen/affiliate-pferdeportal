@@ -1,7 +1,7 @@
 # ROBOTIK → KATEGORIE
-Stand: 08.11.2026
+Stand: 09.11.2026
 
-**Einziger operativer Status:** [CURRENT_STATE.md](CURRENT_STATE.md).
+**Einziger operativer Status:** [CURRENT_STATE.md](CURRENT_STATE.md). **EINZIGER Forschungsmaster Revision 8**; frühere Versionen in älteren Prüfprotokollen sind historische Zwischenstände.
 
 ## Was hier liegt
 - [ZIELVERTRAG.md](ZIELVERTRAG.md) – verbindliche Arbeitsgrenzen.
@@ -56,3 +56,7 @@ Das neue Büro besitzt keine Verknüpfung mit bestehenden Projekt-Daten. Es gibt
 
 ## Vertiefte Quellen-/Kategorieprüfung
 - [RECHERCHE/PRODUKTROLLEN_PRIORITAETEN_20261109.md](RECHERCHE/PRODUKTROLLEN_PRIORITAETEN_20261109.md) – 14 nachgeprüfte Forschungsfälle aus EINEM Master, mögliche Produktseiten und 3–5 verschiedene Inhaltsabsichten je Kategorie; kein WP-Import.
+
+## Neuester Nischen-/Kategorieentwurf V3 (09.11.2026)
+- [RECHERCHE/NISCHEN_KONZEPT_V3_20261109.md](RECHERCHE/NISCHEN_KONZEPT_V3_20261109.md) – 11 neue Nischennachweise, 15 konkrete Produkttyp-Piloten, 49 individuelle mögliche WP-Kategorien und 179 Beitragsthemen. Ohne SEO-Recherche, ohne neue WP-Seiten.
+- Die einzige maschinenlesbare Detailfassung liegt im bestehenden [Produkt-Fachmaster](RECHERCHE/PRODUKTE_V2_20261108.json) **Revision 8**; kein neuer Import-Fachstamm.
