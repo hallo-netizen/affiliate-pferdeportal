@@ -1,0 +1,38 @@
+name: Hobby Depot mobile live category probe
+on:
+  push:
+    branches:
+      - audit/hobby-mobile-expanded-font-20261109
+    paths:
+      - .github/workflows/hobby-mobile-live-probe.yml
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check real Hobby Depot mobile page and sitemap accessibility
+        run: |
+          python3 - <<'PY'
+          import urllib.request,urllib.error,xml.etree.ElementTree as ET,re
+          urls=['https://hobby-depot.de/','https://hobby-depot.de/sitemap_index.xml','https://hobby-depot.de/page-sitemap.xml','https://www.hobby-depot.de/']
+          for url in urls:
+            try:
+              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (compatible; HobbyDepotDesignAudit/1.0)'})
+              with urllib.request.urlopen(req,timeout=12) as r:
+                b=r.read(130000)
+                print('LIVE_PROBE',url,'STATUS',r.status,'URL',r.url,'BYTES',len(b),'TYPE',r.headers.get('Content-Type'))
+                txt=b.decode('utf-8','replace')
+                print('PA390',txt.count('pa390-intro'),'DETAILS',txt.count('Mehr erfahren'))
+                print('HEAD',re.sub(r'\s+',' ',txt[:420]))
+                if url.endswith('.xml'):
+                  try:
+                    root=ET.fromstring(b)
+                    locs=[x.text for x in root.iter() if x.tag.endswith('loc') and x.text]
+                    print('SITEMAP_LOC_COUNT',len(locs))
+                    print('SITEMAP_LOC_FIRST_12',locs[:12])
+                  except Exception as e:print('SITEMAP_XML_ERR',type(e).__name__,str(e)[:250])
+            except Exception as e:
+              print('LIVE_PROBE_ERROR',url,type(e).__name__,str(e)[:450])
+          PY
