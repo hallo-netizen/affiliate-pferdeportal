@@ -1,0 +1,32 @@
+name: HD003 150809 Hobbyfinder result photo source audit
+on:
+  push:
+    branches: [hobbyroom/hd003-150809-mobile-font-hobbyfinder-20261109]
+    paths: [.github/workflows/hd003-150809-photo-source.yml]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect exact card generation and mobile visibility
+        run: |
+          python3 - <<'PY'
+          import zipfile,re
+          p='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip'
+          with zipfile.ZipFile(p) as z:
+            n='affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php'
+            ls=z.read(n).decode().splitlines()
+            print('--- HOBBYFINDER PHP RENDER ---')
+            for i in range(4262,4335):
+              if i<len(ls):print(f'PROFILE:{i+1}',ls[i][:2000])
+            print('--- RELEVANT CSS/JS RESULT RULES ---')
+            for i,l in enumerate(ls):
+              if any(k in l for k in ['hd-hf-result','hd-hf-card','hd-hf-photo','hd-hf-result-image','hd-hf-result-img','hd-hf-thumb','hd-hf-results','hd-hf-quiz']):
+                print(f'RULE:{i+1}',l[:1400])
+            print('--- FIND ALL IMG GENERATION IN RELEVANT REGION ---')
+            for i in range(4220,4360):
+              if i<len(ls) and ('<img' in ls[i] or 'image' in ls[i] or 'photo' in ls[i] or 'thumb' in ls[i]):
+                print(f'IMAGE:{i+1}',ls[i][:1700])
+          PY
