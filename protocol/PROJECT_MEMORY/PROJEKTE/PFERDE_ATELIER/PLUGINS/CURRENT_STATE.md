@@ -1,5 +1,12 @@
 # PFERDE-ATELIER – PLUGINS – CURRENT_STATE
 
+## AKTUELLER CHAT-ÜBERGABESTAND 09.11.2026, NACH ECHTEM .31-KATEGORIE-SPEICHERTEST
+
+**DIES IST DIE AKTUELLE NÄCHSTE HANDLUNG.** Vollständige, überprüfte Übergabe: [PSTE-KISS-Chatübergabe](QA_ONLY/PSTE_KISS_HANDOFF_20261109/PFERDEATELIER_PSTE_HANDOFF_20261109.md). Installiert auf der TEST-WordPress-Seite: **PSTE 0.57.144.31** (ZIP im privaten Pluginbüro `/pferdeatelier/PLUGINS/QA/PSTE-0.57.144.31-KISS-KATEGORIE-SPEICHERUNG-NUR-TEST.zip`; SHA256 `0552539fc7eb4e6bfa32d3dea2b8c7e9949f69fc4c3259e2930fb12713e30d3c`). **Benutzer bestätigte, dass die Kolik-Kategorie nach Speichern in der Kategorie-Spalte steht; diesen Test nicht wiederholen.** 52 Redaktionsbüro-Fälle aus letztem WP-Export, 7 PASS, 1 DISCOVERY_ONLY und 1 manuell gesperrt. **PSTE 0.57.144.32 ist nur eine lokale unfertige Arbeitskopie, NICHT installiert, NICHT als ZIP freigegeben**; ihr exakt 2-Datei-Entwicklungs-Diff ist unter [WIP-Patch](QA_ONLY/PSTE_KISS_HANDOFF_20261109/PSTE_05714431_TO_05714432_UNFERTIG_NUR_QA.patch) und privat im Pluginbüro gesichert. Unfertige UX-KISS: alphabetische/gezielte Kategorieauswahl, keine Pflichtbegründung, nach Speichern im Büro bleiben. **Inhaltlich noch offen:** automatische gesammelte Kategoriezuordnung im bestehenden Worker, exakter Kolik-Automatismus und zweifacher Kolik-Fragetitel im externen MINI-Owner; **keine** neuen WordPress-SEO-/Titelprüfer. Kein voller WP→PSERC→PPM→K0-Endtest. Kein erneuter Planbindungs-/Keyword-Import, keine manuelle 52er-Einzelabarbeitung, K0 unberührt, PR #682 DRAFT.
+
+---
+
+
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 ## 09.11.2026 – KISS-KATEGORIE-SPEICHERUNG 0.57.144.31 (INSTALLIERBAR NUR TEST)
