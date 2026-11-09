@@ -42,6 +42,11 @@
 - Separater Quell-Audit: `release/affiliate-zentrale/evidence/EBAY_672314_SOLLKATALOG_298_FACHPRUEFUNG_20261109.md`; vollständige 324er-Soll-/Ausschluss-/Prüfliste als CSV/Markdown lokal aus der eingebetteten JSON-Datei erzeugt.
 - Es gab **kein Pluginupdate**, keinen zweiten Live-Lauf, keine Änderung bei Hobbydepot oder Hab & Bewahr. Das Register dokumentiert hier einen **festgestellten Qualitätsmangel des Sollkatalogs**, keinen weiteren Mini-Fix.
 
+### 2026-11-09 – Pferdeatelier 6.72.314 → 6.72.315 NUR TEST (keine Live-Änderung)
+- Nachgewiesener **irreführender 0/298-Auswahlzähler** beim gezielten `canonical_gapfill`-Folgelauf: Er misst neue Treffer im neuen Teilplan, nicht den gespeicherten letzten Gesamtstand (letzter Nutzernachweis 111/298). Grünes `complete` bezeichnet nur Selection-Teilphase. Anzeige jetzt deutlich getrennt; der Lauf selbst wird NICHT verändert.
+- Vorhandene `missing_concepts` / `coverage.missing` werden rein lesend in der eBay-Fachseite mit Namen, Teil-Abrufstatus und CSV im Browser angeboten. Kein zusätzlicher API-Aufruf, kein externer Endpunkt, keine neue DB/Worker. **Keiner der 187 Fehlbereiche ist damit als auf eBay nicht erhältlich nachgewiesen.**
+- ZIP `/pferdeatelier/PLUGINS/QA/Pferdeatelier_Affiliate_6.72.315_Ebay_Fehlende_Familien_NUR_TEST.zip` (persistierte Library), SHA256 `d79bfd216afc97eb1cbf3697dda7c07444a0b0372660b20a1684d91e62feac35`, 66 CRC, 23 PHP-Lint, 17 Diagnosefälle, bisherige Workflow-Regressionen PASS, Library-Readback bytegleich. 3 vorhandene Dateien geändert gegen 314; keine Installation und keine Releasefreigabe. Audit: `release/affiliate-zentrale/evidence/EBAY_672315_EINZELLISTE_UND_GAPFILL_ANZEIGE_QA_20261109.md`.
+
 ## E. Überwachungsquellen für weitere Einträge
 
 - **Pferdeatelier (Quell-/QA-Änderungen):** `affiliate-release-current` und `release/affiliate-zentrale/evidence/`, GitHub-HEAD zum Zeitpunkt dieser Anlage: `5f6da83d30ff38ee299355a35f8e93b08c12f7f0`.
