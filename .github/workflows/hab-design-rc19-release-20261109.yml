@@ -1,0 +1,56 @@
+name: HAB Design RC19 build single CURRENT ZIP
+on:
+  push:
+    branches: [hab-design-rc19-mobile-consistency-20261109]
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build only the existing HAB-001 Design ZIP and independently verify
+        shell: bash
+        run: |
+          set -euo pipefail
+          ZIP='protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip'
+          if unzip -p "$ZIP" hab-bewahr-design-vorschau/hab-bewahr-design-vorschau.php | grep -q 'Version: 0.1.191'; then
+            python3 protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/DESIGN/RC19_BUILD_FROM_RC18.py
+          elif unzip -p "$ZIP" hab-bewahr-design-vorschau/hab-bewahr-design-vorschau.php | grep -q 'Version: 0.1.192'; then
+            echo 'RC19 already built, no repeat.'
+          else
+            echo 'Unknown Hab design version: fail closed' >&2; exit 1
+          fi
+          mkdir -p /tmp/hab-design-rc19
+          unzip -oq "$ZIP" -d /tmp/hab-design-rc19
+          COUNT=0
+          while IFS= read -r -d '' PHPFILE; do
+            php -l "$PHPFILE" | grep -q 'No syntax errors'
+            COUNT=$((COUNT+1))
+          done < <(find /tmp/hab-design-rc19 -type f -name '*.php' -print0)
+          test "$COUNT" -eq 35
+          python3 - <<'PY'
+          import json,zipfile
+          p='protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip'
+          with zipfile.ZipFile(p) as z:
+              assert z.testzip() is None and len(z.namelist()) == 432
+              root='hab-bewahr-design-vorschau/'
+              css=z.read(root+'assets/detail-categories.css').decode()
+              world=z.read(root+'assets/style.css').decode()
+              area=z.read(root+'assets/area-prototype.css').decode()
+              mapping=z.read(root+'includes/world-layout.php').decode()
+              ids=json.loads(z.read(root+'data/area-photo-identities.json'))
+              assert "'Gebäude & Ausstattung'=>'topic-62-innenwand-vandalismus.webp'" in mapping
+              assert ids['curated-20261019-16.webp']=='fix-130-vandal-fassade.webp'
+              assert 'font-size:16px!important' in css
+              assert 'linear-gradient(180deg' in world and 'linear-gradient(180deg' in area
+              assert root+'assets/topic-62-innenwand-vandalismus.webp' in z.namelist()
+          print("RC19 432 ZIP CRC, 35 PHP lint, image ID, mobile font and fade QA PASS")
+          PY
+          git add "$ZIP"
+          if ! git diff --cached --quiet; then
+            git config user.name 'Hab design build automation'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'HAB-001 Design 0.1.192: full RC19 CURRENT.zip with mobile photo and text fixes'
+            git push origin HEAD:hab-design-rc19-mobile-consistency-20261109
+          fi
