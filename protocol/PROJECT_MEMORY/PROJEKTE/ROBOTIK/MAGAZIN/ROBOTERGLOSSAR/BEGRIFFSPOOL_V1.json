@@ -22,11 +22,14 @@
       "owner_candidate": "rb015",
       "intent_precheck": "ALIAS_CORE",
       "synonyms": [],
-      "summary_definition": null,
-      "source_urls": [],
-      "verified_at": null,
-      "status": "KANDIDAT_UNGEPRUEFT",
-      "wp_slug": null
+      "summary_definition": "Ein AGV ist ein fahrerloses Transportfahrzeug, das Güter entlang vorgegebener Wege oder mithilfe externer Führung transportiert; der Begriff wird in der Praxis unterschiedlich verwendet.",
+      "source_urls": [
+        "https://ifr.org/pages/"
+      ],
+      "verified_at": "2026-11-09",
+      "status": "ENTWURF_QUELLENRECHERCHE_KEINE_SEO_FREIGABE",
+      "wp_slug": null,
+      "distinction": "Mit AMR und FTF abgleichen; diese Kurzdefinition ist keine starre Marktgrenze"
     },
     {
       "term_id": "term-ftf",
@@ -166,11 +169,14 @@
       "owner_candidate": "robotik-technik",
       "intent_precheck": "DEFINITIONSPRUEFUNG",
       "synonyms": [],
-      "summary_definition": null,
-      "source_urls": [],
-      "verified_at": null,
-      "status": "KANDIDAT_UNGEPRUEFT",
-      "wp_slug": null
+      "summary_definition": "Bei einem Roboterarm beschreibt Reichweite, wie weit der Arm von seinem Bezugspunkt aus eine Position erreichen kann. Das hängt vom Modell und seiner Bewegung ab.",
+      "source_urls": [
+        "https://www.universal-robots.com/de/produkte/"
+      ],
+      "verified_at": "2026-11-09",
+      "status": "ENTWURF_QUELLENRECHERCHE_KEINE_SEO_FREIGABE",
+      "wp_slug": null,
+      "distinction": "Nicht gleich allgemeiner Fahrreichweite mobiler Roboter setzen"
     },
     {
       "term_id": "term-traglast",
@@ -178,11 +184,15 @@
       "owner_candidate": "robotik-technik",
       "intent_precheck": "DEFINITIONSPRUEFUNG",
       "synonyms": [],
-      "summary_definition": null,
-      "source_urls": [],
-      "verified_at": null,
-      "status": "KANDIDAT_UNGEPRUEFT",
-      "wp_slug": null
+      "summary_definition": "Traglast bezeichnet das Gewicht, das ein bestimmter Roboter nach Herstellerangabe als Last bewegen darf. Sie ist nicht das Eigengewicht des Roboters.",
+      "source_urls": [
+        "https://mobile-industrial-robots.com/de/produkte/roboter/mir250",
+        "https://www.universal-robots.com/de/produkte/"
+      ],
+      "verified_at": "2026-11-09",
+      "status": "ENTWURF_QUELLENRECHERCHE_KEINE_SEO_FREIGABE",
+      "wp_slug": null,
+      "distinction": "Angabe immer dem konkreten Modell, Aufbau und Betriebsfall zuordnen"
     },
     {
       "term_id": "term-wiederholgenauigkeit",
@@ -406,11 +416,15 @@
       "owner_candidate": "robotik-technik",
       "intent_precheck": "DEFINITIONSPRUEFUNG",
       "synonyms": [],
-      "summary_definition": null,
-      "source_urls": [],
-      "verified_at": null,
-      "status": "KANDIDAT_UNGEPRUEFT",
-      "wp_slug": null
+      "summary_definition": "Robotik ist das Fachgebiet, das sich mit Aufbau, Steuerung und Anwendung von Robotern beschäftigt.",
+      "source_urls": [
+        "https://ifr.org/industrial-robots",
+        "https://ifr.org/pages/"
+      ],
+      "verified_at": "2026-11-09",
+      "status": "ENTWURF_QUELLENRECHERCHE_KEINE_SEO_FREIGABE",
+      "wp_slug": null,
+      "distinction": "Keine Kaufberatung; übergeordnetes Fachgebiet"
     },
     {
       "term_id": "term-serviceroboter",
@@ -424,5 +438,8 @@
       "status": "KANDIDAT_UNGEPRUEFT",
       "wp_slug": null
     }
-  ]
+  ],
+  "updated": "2026-11-09",
+  "definition_drafts": 4,
+  "publication_allowed": false
 }

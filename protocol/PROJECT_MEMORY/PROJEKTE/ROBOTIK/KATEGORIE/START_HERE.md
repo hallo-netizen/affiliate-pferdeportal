@@ -44,3 +44,8 @@ Das neue Büro besitzt keine Verknüpfung mit bestehenden Projekt-Daten. Es gibt
 ## Verbindliche Ergänzung
 - [Robotik-Wissensdatenbank](../WISSENSDATENBANK/ROBOTERREGISTER/START_HERE.md) – **dieselben 68 IDs, gemeinsames Eigenschaftsschema**; keine zweite Produktliste.
 - [Footer-Tool-Prüfung](../PLUGINS/FOOTER_UMZUG_PRUEFUNG_20261109.md) – bestehende Footer-Übertragung 1.1.1 noch nicht für Robotik freigegeben.
+
+## Inhaltsrecherche – Ergänzung 09.11.2026
+- [RECHERCHE/INHALTSPOTENZIAL_53_20261109.json](RECHERCHE/INHALTSPOTENZIAL_53_20261109.json) – 53 bisher offene Produktklassen, 106 redaktionelle Rubriken, 318 Themenrichtungen als noch nicht keywordgeprüfte Forschungsideen.
+- [RECHERCHE/PRUEFSTAND_V2_20261109.md](RECHERCHE/PRUEFSTAND_V2_20261109.md) – konsolidierter gegenwärtiger Forschungsstand; V1 als älterer Prüfbeleg erhalten.
+- [RECHERCHE/KOLLISIONS_AUDIT_V2_20261109.md](RECHERCHE/KOLLISIONS_AUDIT_V2_20261109.md) – Herstellerbelege und offengelegte Typen-/SEO-Grenzfälle.
