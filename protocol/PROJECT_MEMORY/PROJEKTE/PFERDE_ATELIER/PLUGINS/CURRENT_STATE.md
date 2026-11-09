@@ -2,6 +2,16 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 09.11.2026 – KISS VORAB-VERTRAG: KATEGORIEWEICHE ≠ NEUE SEO-/TITELENTSCHEIDUNG
+
+Vom Betreiber am 09.11.2026 bindend bestätigt, nach Original-Quellenabgleich `PSTE_FOUR_WORKERS_UNIFIED_EXISTING_PLUGIN_20261017.patch`, `PSTE_KISS_CENTRAL_CATEGORY_ROUTING_20261019.patch` und aktuelle PSTE-0.57.144.28-KISS-QA: **Externer MINI-Worker 1 (Suchintention + bei Abdeckung Alternative) und Worker 2 (Titel) bleiben unverändert; keine Wiederholung in WordPress.** Vor PSERC/K0 muss der vorhandene Kategorie-Worker einmalig Fachbereich **oder** gleichberechtigtes Magazin plus konkrete WP-Term-ID/Slug entscheiden. Wer keinen sicheren Term hat, bleibt **mit eindeutigem Bearbeitungsweg im bestehenden Redaktionsbüro**, nicht „abgelehnt“; **kein PSERC-/K0-Übergabeversuch** vor gültiger Kategorie. Trennung von Titel-/SEO-Freigabe (einmalig), Kategorie-Arbeitsstatus und Produktionsübergabe. Echte Suchintent-Dubletten, manuelle Sperren, signierte Provenienz und Produktionsschutz erhalten. **Kein neues Plugin, keine K0- oder PSERC-Änderungen, kein Umgehen der vorhandenen K0-Fünf-Felder-Regel.**
+
+**Bestandsbefund:** echter 0.57.144.28-61er-Bericht: 52 `CATEGORY_ROOM_TOPIC_POOL` (bereits bearbeitungsseitig geroutet, Zielkategorie OFFEN), 8 `NORMAL_PATH` (davon 7 Dubletten-/Intent-Abklärung, 1 Transaktion), 1 manuell `NOT_STORED`. Der Bericht setzt `result=BLOCKED` für alle 61 aufgrund 60 alter Planprüfsummen und 1 manueller Sperre; technische Transportstufe und Bearbeitungszustand werden vermischt. **Nicht** behaupten, dass 52 automatisch produktionsbereit sind. K0 bindet weiterhin fünf Felder `article_type,category,plan_slot,target_keyword,title`, unter anderem dokumentiert in `quarantine/k0_sources/engine/production_entry.py.source`, aber diese Quelle ist QUARANTÄNE, kein lebender Stand.
+
+**Arbeitsauftrag im isolierten QA:** vorhandene Übergabe- und Anzeigewege präzise prüfen, nur bewiesene doppelte/unlogische Sperren korrigieren, alle 61 realen positiven/negativen Grenzfälle simulieren, Wiederanlauf und eindeutige Kategorieidentität prüfen, und **`FULL_WORKFLOW_PASSED=false`** bis echte isolierte WordPress-/PPM-/K0-Produktion mit Original-Pluginversionen tatsächlich belegt ist.
+
+---
+
 ## 09.11.2026 – VERBINDLICHE KORREKTUR ZUORDNUNGSKONZEPT 61er-STAPEL (ORIGINALCODE + WP)
 
 **Konzept ist nachgeprüft, nicht geschätzt:** Bestehender Vier-Worker-Vertrag, besonders `PSTE_FOUR_WORKERS_UNIFIED_EXISTING_PLUGIN_20261017.patch`, `PSTE_KISS_CENTRAL_CATEGORY_ROUTING_20261019.patch`, `PSTE_WORKER4_NO_FALSE_CATEGORY_GAP_20261017.patch`, sowie **Originalcode** `PSTE_Normal_Metadata_Path::attachWorkerFlow()`. Ein relevantes Thema mit Titel hat einen zuständigen BEARBEITUNGSWEG: 1) belegbare Fachkategorie, 2) Magazin nach einmaliger Fach-/Magazin-Weiche, 3) Redaktionsbüro/Kategoriebedarf für offene Fach-/Magazin-/Kategorieentscheidung. Ein offener Kategorieentscheid ist **kein unzugeordnetes oder verlorenes Thema**. Redaktionsbüro ist KEINE automatische Produktionsfreigabe. Unklare Titel/Relevanz verbleiben vorab in vorhandener Sandbox; nicht neue Fachentscheidungsinstanzen anlegen.
