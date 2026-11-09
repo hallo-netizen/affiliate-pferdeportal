@@ -1,0 +1,1287 @@
+{
+  "schema": "ROBOTIK_REDAKTIONSPOTENZIAL_ERGAENZUNG_V1",
+  "date": "2026-11-09",
+  "non_authoritative_research_only": true,
+  "product_master": "PRODUKTE_V2_20261108.json",
+  "pilot_reference": "INHALTSPOTENZIAL_V1_20261109.md",
+  "pilots_preexisting": 15,
+  "additional_products": 53,
+  "suggested_categories": 106,
+  "suggested_article_directions": 318,
+  "keyword_demand": "NICHT_GEMESSEN",
+  "publication_allowed": false,
+  "rows": [
+    {
+      "id": "rb002",
+      "product_name": "Punktschweißroboter",
+      "possible_categories": [
+        {
+          "category": "Schweißaufgabe & Eignung",
+          "topic_directions": [
+            "Schweißpunktgeometrie bei Blechen",
+            "Materialstärke und Elektrodenzugang",
+            "Taktzeiten gegenüber manueller Punktschweißung"
+          ]
+        },
+        {
+          "category": "Anlage & Qualität",
+          "topic_directions": [
+            "Punktpositionen programmieren",
+            "Elektrodenkappen und Kühlung warten",
+            "Schweißqualität und Prozessüberwachung prüfen"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb003",
+      "product_name": "Lackierroboter",
+      "possible_categories": [
+        {
+          "category": "Lackierkabine & Bauteile",
+          "topic_directions": [
+            "Bauteilgröße und Bewegungsraum",
+            "Lackierbahnen bei komplexen Formen",
+            "Pulver- gegenüber Nasslackprozess abgrenzen"
+          ]
+        },
+        {
+          "category": "Betrieb & Arbeitsschutz",
+          "topic_directions": [
+            "Overspray und Materialverbrauch reduzieren",
+            "Reinigung von Applikatoren",
+            "Lüftung und Ex-Schutz im Anlagenkonzept"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb004",
+      "product_name": "Palettierroboter",
+      "possible_categories": [
+        {
+          "category": "Paletten & Beladung",
+          "topic_directions": [
+            "Muster für Kartons und Säcke planen",
+            "Wechselnde Palettenhöhen handhaben",
+            "Greifer nach Verpackungsart auswählen"
+          ]
+        },
+        {
+          "category": "Zelle & Wirtschaftlichkeit",
+          "topic_directions": [
+            "Sicherheitsabstände und Fördertechnik integrieren",
+            "Leistung bei Produktwechsel bewerten",
+            "Wartung von Greifer und Palettenförderung"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb005",
+      "product_name": "Depalettierroboter",
+      "possible_categories": [
+        {
+          "category": "Entstapeln & Zuführung",
+          "topic_directions": [
+            "Einzelstücke aus gemischten Paletten greifen",
+            "Lagen- gegenüber Einzelentnahme",
+            "Erkennung verschobener Kartons"
+          ]
+        },
+        {
+          "category": "Anlagenintegration",
+          "topic_directions": [
+            "Entnahmehöhe und Greifweg bestimmen",
+            "Übergabe an Sortierung oder Förderband",
+            "Fehlerfälle bei beschädigter Verpackung"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb006",
+      "product_name": "CNC-Maschinenbeschickungsroboter",
+      "possible_categories": [
+        {
+          "category": "Maschinenbeladung",
+          "topic_directions": [
+            "Rohteilzuführung bei Dreh- und Fräsmaschinen",
+            "Greifer für Werkstücke und Spannmittel",
+            "Werkstückwechsel zwischen Fertigungsschritten"
+          ]
+        },
+        {
+          "category": "Einrichtung & Ausfall",
+          "topic_directions": [
+            "Signale mit CNC-Steuerung abstimmen",
+            "Roboterarm und Sicherheitstür koordinieren",
+            "Werkstückfehler und Notbetrieb abfangen"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb007",
+      "product_name": "Montageroboter (SCARA)",
+      "possible_categories": [
+        {
+          "category": "Montageaufgaben",
+          "topic_directions": [
+            "SCARA-Bewegung für Einsetzen und Fügen",
+            "Teilebereitstellung für Kleinteilmontage",
+            "Grenzen bei schrägen oder schweren Bauteilen"
+          ]
+        },
+        {
+          "category": "Präzision & Zubehör",
+          "topic_directions": [
+            "Greiferwechsel und Schraubwerkzeuge",
+            "Positioniergenauigkeit im Montagezyklus",
+            "Nacharbeit und Prüfstation einbinden"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb008",
+      "product_name": "Pick-and-Place-Roboter (Delta)",
+      "possible_categories": [
+        {
+          "category": "Schnelles Greifen",
+          "topic_directions": [
+            "Objektabstände auf bewegten Bändern",
+            "Pick-and-Place von Lebensmitteln",
+            "Spezialgreifer für empfindliche Produkte"
+          ]
+        },
+        {
+          "category": "Taktrate & Steuerung",
+          "topic_directions": [
+            "Kameraerkennung mit Fördergeschwindigkeit",
+            "Grenzen durch Greifgewicht und Reichweite",
+            "Reinigung und Wartung bei Serienbetrieb"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb009",
+      "product_name": "Schleifroboter",
+      "possible_categories": [
+        {
+          "category": "Schleifanwendungen",
+          "topic_directions": [
+            "Schleifen komplexer Geometrien",
+            "Werkstückfixierung gegenüber geführtem Werkzeug",
+            "Oberflächengüte als Zielkriterium"
+          ]
+        },
+        {
+          "category": "Werkzeug & Schutz",
+          "topic_directions": [
+            "Werkzeugverschleiß überwachen",
+            "Schleifstaub absaugen",
+            "Anpresskraft und Bahnwiederholung abstimmen"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb010",
+      "product_name": "Entgratungsroboter",
+      "possible_categories": [
+        {
+          "category": "Entgraten",
+          "topic_directions": [
+            "Unterschied Gußgrat und Fräsgrat",
+            "Kantenverrundung nach Bauteilfunktion",
+            "Entgraten wechselnder Werkstücke"
+          ]
+        },
+        {
+          "category": "Qualität & Werkzeug",
+          "topic_directions": [
+            "Werkzeugnachführung und Kraftregelung",
+            "Kantenprüfung nach der Bearbeitung",
+            "Werkzeugwechsel und Schutz gegen Späne"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb011",
+      "product_name": "Klebe- und Dosierroboter",
+      "possible_categories": [
+        {
+          "category": "Dosieren & Kleben",
+          "topic_directions": [
+            "Dosierraupe bei Dichtungen",
+            "Klebstoffmenge und Materialviskosität",
+            "Zweikomponenten-Klebstoffe verarbeiten"
+          ]
+        },
+        {
+          "category": "Prozesssicherheit",
+          "topic_directions": [
+            "Temperatur und Topfzeit beachten",
+            "Dosierdüse reinigen",
+            "Qualitätskontrolle unvollständiger Raupen"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb012",
+      "product_name": "Industrieller Mess- und Prüfroboter",
+      "possible_categories": [
+        {
+          "category": "Messaufgaben",
+          "topic_directions": [
+            "Oberflächen und Maße kontaktlos messen",
+            "Taktintegrierte Prüfung versus Messraum",
+            "Kalibrierung verschiedener Sensoren"
+          ]
+        },
+        {
+          "category": "Dokumentation & Grenzen",
+          "topic_directions": [
+            "Messwerte an Qualitätssicherung übergeben",
+            "Bauteilpositionierung und Wiederholbarkeit",
+            "Abgrenzung zu bloßen stationären Kameras"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb013",
+      "product_name": "Verpackungsroboter",
+      "possible_categories": [
+        {
+          "category": "Verpackungsabläufe",
+          "topic_directions": [
+            "Zuführung unterschiedlicher Produktgrößen",
+            "Beutel- und Kartonhandhabung",
+            "Verpackung empfindlicher Lebensmittel"
+          ]
+        },
+        {
+          "category": "Umrüstung & Wartung",
+          "topic_directions": [
+            "Formatwechsel ohne lange Stillstände",
+            "Siegel- und Verschlusskontrolle",
+            "Greiferhygiene und Verbrauchsmaterial"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb015",
+      "product_name": "Fahrerloses Transportfahrzeug (FTF/AGV)",
+      "possible_categories": [
+        {
+          "category": "Transportnavigation",
+          "topic_directions": [
+            "Leitliniengeführte Fahrzeuge vs frei navigierende Systeme",
+            "Kreuzungen und Personenverkehr",
+            "Fahrwegplanung in vorhandenen Hallen"
+          ]
+        },
+        {
+          "category": "Lasten & Betrieb",
+          "topic_directions": [
+            "Anhängerkupplung und Unterfahrtransport",
+            "Ladepunkte und Flottensteuerung",
+            "Sicherheitsfreigaben bei Streckenänderung"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb016",
+      "product_name": "Mobiler Palettentransportroboter",
+      "possible_categories": [
+        {
+          "category": "Palettenaufnahme",
+          "topic_directions": [
+            "Euro- und Sonderpaletten aufnehmen",
+            "Unterfahrhöhe und Hubbühnen",
+            "Übergabe an Regal oder Förderstrecke"
+          ]
+        },
+        {
+          "category": "Lastweg & Sicherheit",
+          "topic_directions": [
+            "Traglast je Palettentyp prüfen",
+            "Engstellen und Übergabezonen",
+            "Abgrenzung zur AMR-Basisplattform"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb017",
+      "product_name": "Lager-Kommissionierroboter",
+      "possible_categories": [
+        {
+          "category": "Kommissionierung",
+          "topic_directions": [
+            "Ware-zum-Mann gegenüber automatischem Greifen",
+            "Einzelartikel und gemischte Behälter",
+            "Auftragspriorität und Sequenzierung"
+          ]
+        },
+        {
+          "category": "Lageranbindung",
+          "topic_directions": [
+            "Lagerverwaltung verbinden",
+            "Pickfehler erfassen",
+            "Ergonomie der menschlichen Übergabestation"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb018",
+      "product_name": "Inventurroboter",
+      "possible_categories": [
+        {
+          "category": "Bestandskontrolle",
+          "topic_directions": [
+            "Barcode- oder RFID-Inventur",
+            "Prüfung hoher Regalfächer",
+            "Inventur während des laufenden Betriebs"
+          ]
+        },
+        {
+          "category": "Datenqualität",
+          "topic_directions": [
+            "Zählabweichungen und Dubletten erkennen",
+            "WMS-Übertragung und Zeitstempel",
+            "Datenschutz bei Kamerainventur"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb019",
+      "product_name": "Autonomer Paketlieferroboter",
+      "possible_categories": [
+        {
+          "category": "Letzte Meile",
+          "topic_directions": [
+            "Liefergebiet und Gehwegnutzung",
+            "Bordsteine und schlechte Oberflächen",
+            "Zustellung an verschlossene Übergabepunkte"
+          ]
+        },
+        {
+          "category": "Betrieb & Zulassung",
+          "topic_directions": [
+            "Fernüberwachung und Hilfe bei Blockaden",
+            "Ladungssicherung gegen Witterung",
+            "Lokale Verkehrsregeln vor Einsatz prüfen"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb020",
+      "product_name": "Lager-Regaltransportroboter",
+      "possible_categories": [
+        {
+          "category": "Regaltransport",
+          "topic_directions": [
+            "Transport ganzer Lagerregale",
+            "Regalgewichte und Unterfahrhöhen",
+            "Übergabe am Kommissionierplatz"
+          ]
+        },
+        {
+          "category": "Flottensteuerung",
+          "topic_directions": [
+            "Regalplätze verwalten",
+            "Lade-/Parkzonen planen",
+            "Abgrenzung zum allgemeinen AMR-Transport"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb021",
+      "product_name": "Mobiler Greif- und Manipulationsroboter",
+      "possible_categories": [
+        {
+          "category": "Mobiles Greifen",
+          "topic_directions": [
+            "Aufnahme variierender Kleinteile",
+            "Mobile Basis mit Roboterarm kombinieren",
+            "Greifen in unterschiedlich hohen Regalen"
+          ]
+        },
+        {
+          "category": "Koordination & Sicherheit",
+          "topic_directions": [
+            "Stabilität beim ausgefahrenen Arm",
+            "Positionsgenauigkeit nach Navigation",
+            "Zusammenarbeit mit Menschen im Lager"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb023",
+      "product_name": "Hotel-Zimmerservice-Roboter",
+      "possible_categories": [
+        {
+          "category": "Hotellogistik",
+          "topic_directions": [
+            "Lieferung in Gästezimmer und Flure",
+            "Aufzug und Türintegration",
+            "Kontaktlose Übergabe an Gäste"
+          ]
+        },
+        {
+          "category": "Betrieb & Service",
+          "topic_directions": [
+            "Fahrwege bei Gästen und Gepäck",
+            "Befüllung und Hygiene der Transportfächer",
+            "Störung und Übergabe an Personal"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb024",
+      "product_name": "Empfangs- und Informationsroboter",
+      "possible_categories": [
+        {
+          "category": "Empfangsaufgaben",
+          "topic_directions": [
+            "Besucher begrüßen und Wegbeschreibungen",
+            "Mehrsprachige Auskünfte",
+            "Navigation in Foyerbereichen"
+          ]
+        },
+        {
+          "category": "Inhalte & Datenschutz",
+          "topic_directions": [
+            "Informationen aktuell halten",
+            "Gesprächs-/Kameradaten schützen",
+            "Grenzen bei nicht verstandenen Fragen"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb025",
+      "product_name": "Telepräsenzroboter",
+      "possible_categories": [
+        {
+          "category": "Telepräsenz",
+          "topic_directions": [
+            "Rundgang durch Räume aus der Ferne",
+            "Anwesenheit bei Besprechungen",
+            "Kontakt mit Personen ohne Bildschirmstation"
+          ]
+        },
+        {
+          "category": "Technik & Privatsphäre",
+          "topic_directions": [
+            "Funknetz und Verbindungsabbrüche",
+            "Fernsteuerbarkeit und Sicherheitsstopp",
+            "Kamera-/Mikrofonregeln im Betrieb"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb026",
+      "product_name": "Kaffeezubereitungsroboter",
+      "possible_categories": [
+        {
+          "category": "Robotische Getränkeausgabe",
+          "topic_directions": [
+            "Kaffeezubereitung durch Arm und Dosiersystem",
+            "Milch- und Getränkerezepturen automatisieren",
+            "Abgrenzung zum klassischen Kaffeevollautomaten"
+          ]
+        },
+        {
+          "category": "Betrieb & Hygiene",
+          "topic_directions": [
+            "Reinigung von Milchleitungen und Greifern",
+            "Nachfüllen von Bohnen und Verbrauchsstoffen",
+            "Störungen im Bechermanagement"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb027",
+      "product_name": "Ausgaberoboter für Speisen",
+      "possible_categories": [
+        {
+          "category": "Speisenausgabe",
+          "topic_directions": [
+            "Portionieren oder nur Weiterreichen unterscheiden",
+            "Mehrere Essensvarianten bereitstellen",
+            "Tablett- und Geschirrhandhabung"
+          ]
+        },
+        {
+          "category": "Hygiene & Leistung",
+          "topic_directions": [
+            "Temperatur-/Hygieneanforderungen prüfen",
+            "Ausgabe bei Andrang planen",
+            "Lebensmittelreste und Reinigungsabläufe"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb029",
+      "product_name": "Fassaden- und Fensterreinigungsroboter",
+      "possible_categories": [
+        {
+          "category": "Fassade & Glas",
+          "topic_directions": [
+            "Vertikale Fassaden und Fensterflächen",
+            "Haftung am Untergrund bei Wind",
+            "Rahmen und Hindernisse erkennen"
+          ]
+        },
+        {
+          "category": "Sicherung & Reinigung",
+          "topic_directions": [
+            "Absturzsicherung und Seilführung",
+            "Reinigungsmittel/Wasserführung",
+            "Unterschied zu privaten Fensterputzrobotern"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb030",
+      "product_name": "Tankreinigungsroboter",
+      "possible_categories": [
+        {
+          "category": "Behälterreinigung",
+          "topic_directions": [
+            "Tankgeometrien und Zugänge",
+            "Reinigungsmedien und Rückstände",
+            "Reinigungsroboter gegenüber Inspektionsroboter abgrenzen"
+          ]
+        },
+        {
+          "category": "Arbeitsschutz",
+          "topic_directions": [
+            "Gefährliche Atmosphäre erkennen",
+            "Reinigung ohne Personeneinstieg",
+            "Dokumentation der Reinigungsleistung"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb031",
+      "product_name": "Rohrreinigungsroboter",
+      "possible_categories": [
+        {
+          "category": "Rohrreinigung",
+          "topic_directions": [
+            "Ablagerungen und Verstopfungen entfernen",
+            "Rohrdurchmesser und Rohrbögen",
+            "Werkzeuge für Fett, Kalk oder Wurzeln"
+          ]
+        },
+        {
+          "category": "Zugang & Kontrolle",
+          "topic_directions": [
+            "Schachtzugang und Schlauch-/Kabelzug",
+            "Bergung bei festgefahrenem Gerät",
+            "Endkontrolle gegenüber Kanalinspektion"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb032",
+      "product_name": "Desinfektionsroboter",
+      "possible_categories": [
+        {
+          "category": "Desinfektionsverfahren",
+          "topic_directions": [
+            "UV-C- und chemische Verfahren trennen",
+            "Geeignete Raumoberflächen auswählen",
+            "Unterschied reinigen versus desinfizieren"
+          ]
+        },
+        {
+          "category": "Sicherheitsbetrieb",
+          "topic_directions": [
+            "Personenschutz bei UV-Strahlung",
+            "Dokumentation von Behandlungszyklen",
+            "Wirksamkeitsbehauptungen nur bei Belegen"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb033",
+      "product_name": "Stallreinigungsroboter",
+      "possible_categories": [
+        {
+          "category": "Stallbodenreinigung",
+          "topic_directions": [
+            "Mist aus Laufgängen entfernen",
+            "Spaltenboden gegenüber geschlossenem Boden",
+            "Fahrwege bei Tieren"
+          ]
+        },
+        {
+          "category": "Betrieb & Wartung",
+          "topic_directions": [
+            "Reinigungsintervalle",
+            "Umgang mit Hindernissen und Futterresten",
+            "Verschleiß bei aggressiver Stallumgebung"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb035",
+      "product_name": "Fütterungsroboter",
+      "possible_categories": [
+        {
+          "category": "Futterversorgung",
+          "topic_directions": [
+            "Futter anschieben versus Futter mischen",
+            "Fressbereiche und Wegeführung",
+            "Tiergruppen und Fütterungszeiten"
+          ]
+        },
+        {
+          "category": "Wirtschaft & Hygiene",
+          "topic_directions": [
+            "Futterverluste und Restmengen messen",
+            "Reinigung von Futterkontaktflächen",
+            "Betrieb bei unterschiedlichen Stallgrundrissen"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb037",
+      "product_name": "Autonomer Sprühroboter",
+      "possible_categories": [
+        {
+          "category": "Ausbringung",
+          "topic_directions": [
+            "Pflanzenschutz versus Nährstoffausbringung trennen",
+            "Feld-/Reihenführung",
+            "Zielgenauigkeit und Sprühdrift"
+          ]
+        },
+        {
+          "category": "Sicherheit & Betrieb",
+          "topic_directions": [
+            "Befüllung und Gerätereinigung",
+            "Rechtliche Vorgaben für Pflanzenschutz prüfen",
+            "Abgrenzung zum Saat-/Jätroboter"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb038",
+      "product_name": "Autonomer Sä- und Pflanzroboter",
+      "possible_categories": [
+        {
+          "category": "Pflanzarbeit",
+          "topic_directions": [
+            "Saatabstand und Saatgutgröße",
+            "Setzlinge automatisch einsetzen",
+            "Fahrspuren und Reihenplanung"
+          ]
+        },
+        {
+          "category": "Aufsätze & Saison",
+          "topic_directions": [
+            "Werkzeugwechsel zur Bodenbearbeitung",
+            "Mehrzweckplattform gegen eigenständigen Säroboter",
+            "Wartung zwischen Kulturen"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb039",
+      "product_name": "Obst-Ernteroboter",
+      "possible_categories": [
+        {
+          "category": "Erntebetrieb",
+          "topic_directions": [
+            "Fruchtreife erkennen",
+            "Schonende Greif- und Ablageverfahren",
+            "Ernte bei unterschiedlicher Pflanzenhöhe"
+          ]
+        },
+        {
+          "category": "Einsatzgrenzen",
+          "topic_directions": [
+            "Ernteleistung in Gewächshaus und Freiland",
+            "Ausfall bei Wetter und Beleuchtung",
+            "Kultur- und Sortenverträglichkeit prüfen"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb040",
+      "product_name": "Weinbau-Bodenbearbeitungsroboter",
+      "possible_categories": [
+        {
+          "category": "Weinbau",
+          "topic_directions": [
+            "Arbeiten unter Rebstöcken",
+            "Hang- und Reihenbefahrbarkeit",
+            "Mechanische Unkrautbekämpfung im Weinbau"
+          ]
+        },
+        {
+          "category": "Gerätewahl",
+          "topic_directions": [
+            "Werkzeuge für Bodenlockerung",
+            "Mehrzweckplattform statt Spezialgerät",
+            "Wurzel-/Stockschutz beim Einsatz"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb042",
+      "product_name": "Rehabilitationsroboter",
+      "possible_categories": [
+        {
+          "category": "Therapiesystem",
+          "topic_directions": [
+            "Gehtraining und Bewegungstherapie",
+            "Aktive Unterstützung vs passives Führen",
+            "Einsatz unter fachlicher Aufsicht"
+          ]
+        },
+        {
+          "category": "Einrichtung & Grenzen",
+          "topic_directions": [
+            "Patientenanpassung und Trainingspläne",
+            "Nachweis und Zulassung spezieller Anwendungen",
+            "Wartung/Desinfektion von Kontaktteilen"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb043",
+      "product_name": "Roboter-Exoskelett",
+      "possible_categories": [
+        {
+          "category": "Exoskelett",
+          "topic_directions": [
+            "Unterschied medizinisches und industrielles Exoskelett",
+            "Assistierte Bewegungen der Beine oder Arme",
+            "Anpassung an Körpermaße"
+          ]
+        },
+        {
+          "category": "Sicherheit & Bedienung",
+          "topic_directions": [
+            "Sturzschutz und Training",
+            "Batterie und Wartungsaufwand",
+            "Belastungs- und Wirksamkeitsgrenzen"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb044",
+      "product_name": "Krankenhaus-Transportroboter",
+      "possible_categories": [
+        {
+          "category": "Kliniktransport",
+          "topic_directions": [
+            "Medikamente und Proben sicher transportieren",
+            "Aufzugs-/Türintegration auf Station",
+            "Sterile und nicht sterile Transporte trennen"
+          ]
+        },
+        {
+          "category": "Organisation & Betrieb",
+          "topic_directions": [
+            "Lieferprioritäten und Nachverfolgung",
+            "Hygieneroutinen und Fachpersonal",
+            "Abgrenzung zum normalen Lager-AMR"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb045",
+      "product_name": "Laborpipettierroboter",
+      "possible_categories": [
+        {
+          "category": "Automatische Pipettierung",
+          "topic_directions": [
+            "Probenvolumina und Spitzenwechsel",
+            "Mikrotiterplatten transportieren",
+            "Fehlerquellen und Kontaminationsschutz"
+          ]
+        },
+        {
+          "category": "Validierung & Workflow",
+          "topic_directions": [
+            "Kalibrierung und Qualitätskontrollen",
+            "Integration in Laborsoftware",
+            "Hygiene und Wartung im Labor"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb048",
+      "product_name": "Baustellen-Markierungsroboter",
+      "possible_categories": [
+        {
+          "category": "Baustellenmarkierung",
+          "topic_directions": [
+            "Grundrisse auf Rohböden übertragen",
+            "Markierung langer Achsen und Gebäudepunkte",
+            "Arbeit mit digitalen Bauplänen"
+          ]
+        },
+        {
+          "category": "Fehler & Voraussetzungen",
+          "topic_directions": [
+            "Genauigkeit bei unebenem Untergrund",
+            "Einmessung und Referenzpunkte",
+            "Datenänderungen auf der Baustelle handhaben"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb049",
+      "product_name": "Beton-3D-Druckroboter",
+      "possible_categories": [
+        {
+          "category": "Beton-3D-Druck",
+          "topic_directions": [
+            "Druck von Wänden gegenüber Bauteilen",
+            "Materialmischung und Schichtaufbau",
+            "Bewehrung und Anschlussdetails"
+          ]
+        },
+        {
+          "category": "Planung & Grenzen",
+          "topic_directions": [
+            "Robotische Druckbahn planen",
+            "Witterungs-/Aushärtebedingungen",
+            "Normen/Prüfung der fertigen Bauteile"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb050",
+      "product_name": "Mauerroboter",
+      "possible_categories": [
+        {
+          "category": "Mauerwerk",
+          "topic_directions": [
+            "Steinarten und Mörtelzuführung",
+            "Positionieren schwerer Mauersteine",
+            "Wandöffnungen und Eckausbildung"
+          ]
+        },
+        {
+          "category": "Baustellenintegration",
+          "topic_directions": [
+            "Materiallogistik auf Rohbau",
+            "Maßtoleranz und Kontrolle",
+            "Sicherheitszonen bei Baustellenpersonal"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb051",
+      "product_name": "Bewehrungsbindroboter",
+      "possible_categories": [
+        {
+          "category": "Bewehrungsbindung",
+          "topic_directions": [
+            "Bindungen an Matten und Stäben",
+            "Abstände und Knotentypen",
+            "Untergründe bei Bodenplatten"
+          ]
+        },
+        {
+          "category": "Effizienz & Sicherheit",
+          "topic_directions": [
+            "Vergleich handgeführtes Bindegerät vs autonomer Roboter",
+            "Betrieb neben anderen Gewerken",
+            "Verbrauchsmaterial und Verschleiß"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb052",
+      "product_name": "Tunnelinspektionsroboter",
+      "possible_categories": [
+        {
+          "category": "Tunnelprüfung",
+          "topic_directions": [
+            "Risse und Verformungen erfassen",
+            "Fahrbetrieb und Zugang im Tunnel",
+            "Sensoren bei Staub und Dunkelheit"
+          ]
+        },
+        {
+          "category": "Dokumentation",
+          "topic_directions": [
+            "Lokalisierung von Schadstellen",
+            "Abgrenzung Kanal-/Brückeninspektion",
+            "Wiederholbare Prüfstrecken organisieren"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb054",
+      "product_name": "Tankinspektionsroboter",
+      "possible_categories": [
+        {
+          "category": "Tankprüfung",
+          "topic_directions": [
+            "Innenwand und Korrosion inspizieren",
+            "Bewegung in beengten Behältern",
+            "Kameras und Ultraschall unterscheiden"
+          ]
+        },
+        {
+          "category": "Schutz & Nachweise",
+          "topic_directions": [
+            "Explosionsschutz und sichere Einführung",
+            "Prüfstellen dokumentieren",
+            "Abgrenzung zur eigentlichen Tankreinigung"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb055",
+      "product_name": "Brückeninspektionsroboter",
+      "possible_categories": [
+        {
+          "category": "Brückenprüfung",
+          "topic_directions": [
+            "Unterseiten und Pfeiler erreichen",
+            "Beton- gegenüber Stahlbau prüfen",
+            "Positionierung an schwer zugänglichen Stellen"
+          ]
+        },
+        {
+          "category": "Prüfdaten",
+          "topic_directions": [
+            "Fotogrammetrie und Risskarten",
+            "Abgleich mit früheren Prüfungen",
+            "Verkehrssicherung und Einsatzgrenzen"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb058",
+      "product_name": "Rettungs- und Suchroboter",
+      "possible_categories": [
+        {
+          "category": "Suchen und Retten",
+          "topic_directions": [
+            "Vermisstensuche in Trümmern",
+            "Sensoren bei Rauch und Dunkelheit",
+            "Bewegung in engen Hohlräumen"
+          ]
+        },
+        {
+          "category": "Einsatzführung",
+          "topic_directions": [
+            "Funk- und Kamerareichweite",
+            "Trennung Rettungs- vs Löschfunktion",
+            "Bergung und Desinfektion nach dem Einsatz"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb059",
+      "product_name": "Unterwasser-Inspektionsroboter",
+      "possible_categories": [
+        {
+          "category": "Unterwasserprüfung",
+          "topic_directions": [
+            "Rohrleitungen und Fundamente im Wasser",
+            "Kamera/Sonar bei trüber Sicht",
+            "Tiefgang und Strömung"
+          ]
+        },
+        {
+          "category": "Betrieb & Daten",
+          "topic_directions": [
+            "Fernsteuerung über Kabel oder autonom?",
+            "Korrosionsschutz und Wartung",
+            "Inspektionsnachweise und Standortangaben"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb061",
+      "product_name": "Wischroboter",
+      "possible_categories": [
+        {
+          "category": "Wischfunktion",
+          "topic_directions": [
+            "Hartbodenmaterialien und Feuchteeignung",
+            "Wischpad-/Walzen-Mechanismen",
+            "Hindernisse und Teppichvermeidung"
+          ]
+        },
+        {
+          "category": "Alltag & Zubehör",
+          "topic_directions": [
+            "Wasserwechsel und Schmutzwassertank",
+            "Pflege der Station und Pads",
+            "Abgrenzung zur Kombifunktion Saugen/Wischen"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb063",
+      "product_name": "Poolreinigungsroboter",
+      "possible_categories": [
+        {
+          "category": "Poolpflege",
+          "topic_directions": [
+            "Poolform und Bodengefälle",
+            "Wand- versus Bodenreinigung",
+            "Kabelgebunden gegenüber Akkubetrieb"
+          ]
+        },
+        {
+          "category": "Wartung & Betrieb",
+          "topic_directions": [
+            "Filtertypen und Schmutzfang",
+            "Beckenpflege und Wasserchemie getrennt halten",
+            "Saisonlagerung und Gerätereinigung"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb064",
+      "product_name": "Fensterputzroboter",
+      "possible_categories": [
+        {
+          "category": "Fenster zuhause",
+          "topic_directions": [
+            "Glasflächen und Scheibenmaße",
+            "Rahmen/Haltekraft und Absturzsicherung",
+            "Einfach- und Mehrfachverglasung"
+          ]
+        },
+        {
+          "category": "Anwendung & Reinigung",
+          "topic_directions": [
+            "Wasserauftrag und Tuchpflege",
+            "Fensterkanten und Ecken",
+            "Abgrenzung zur gewerblichen Fassadenreinigung"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb065",
+      "product_name": "Haushalts-Assistenzroboter",
+      "possible_categories": [
+        {
+          "category": "Haushaltsassistenz",
+          "topic_directions": [
+            "Welche alltagspraktischen Aufgaben sind wirklich verfügbar",
+            "Sprachsteuerung vs körperliche Manipulation",
+            "Grenze zwischen Smart-Home-Automat und Roboter"
+          ]
+        },
+        {
+          "category": "Grenzen & Sicherheit",
+          "topic_directions": [
+            "Datenschutz bei Kameras/Mikrofonen",
+            "Einsatz in kleinen Wohnungen",
+            "Entwicklungsprototyp gegenüber kaufbarem Gerät"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb067",
+      "product_name": "Robotik-Lehrbaukasten",
+      "possible_categories": [
+        {
+          "category": "Robotikbaukasten",
+          "topic_directions": [
+            "Sensor-/Motorbausteine und Steuerung",
+            "Baupläne und eigene Erweiterungen",
+            "Lernziele nach Alter und Unterricht"
+          ]
+        },
+        {
+          "category": "Ausstattung & Vergleich",
+          "topic_directions": [
+            "Baukasten gegen fertigen Lernroboter",
+            "Programmierumgebung und Kompatibilität",
+            "Ersatzteile und Erweiterungssets"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    },
+    {
+      "id": "rb068",
+      "product_name": "Humanoider Entwicklungsroboter",
+      "possible_categories": [
+        {
+          "category": "Humanoid in Forschung",
+          "topic_directions": [
+            "Zweibeinige Fortbewegung und Gleichgewicht",
+            "Handhabung mit menschlicher Armform",
+            "Aufgabenbezogene Eignung gegenüber Spezialroboter"
+          ]
+        },
+        {
+          "category": "Erprobung & Grenzen",
+          "topic_directions": [
+            "Forschungsplattform gegen Serienprodukt",
+            "Reichweite/Traglast in echten Demonstrationen",
+            "Sicherheitsgrenzen im Menschkontakt"
+          ]
+        }
+      ],
+      "source_tag": "REDAKTIONELLE_HYPOTHESE_OHNE_GEMESSENE_SEO_KEYWORDS",
+      "approved": false
+    }
+  ]
+}
