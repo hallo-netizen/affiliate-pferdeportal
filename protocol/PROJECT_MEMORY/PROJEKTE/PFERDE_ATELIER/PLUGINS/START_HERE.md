@@ -1,5 +1,12 @@
 # PFERDE-ATELIER – BÜRO PLUGINS
 
+## FRISCHER EINSTIEG 09.11.2026 – .31 INSTALLIERT, .32 UNFERTIG
+
+**Erst [CURRENT_STATE.md](CURRENT_STATE.md), dann [vollständige Chatübergabe](QA_ONLY/PSTE_KISS_HANDOFF_20261109/PFERDEATELIER_PSTE_HANDOFF_20261109.md) lesen.** WordPress-Testinstallation .31, Kolik-Zielkategorie vom Benutzer gespeichert und in Spalte wiedergefunden. **.32 WIP ist kein Installationspaket.** Nächste Arbeit: Bedienung im vorhandenen Kategorie-Büro vereinfachen und die bereits vorhandene Fach/Magazin-Entscheidung/automatische Sammelzuordnung prüfen; separate MINI-Titel-Fehlerursache ohne doppelte WP-Regel. Keine weiteren Import-/Prüftasten für Nutzer. K0 unverändert, E2E weiterhin offen.
+
+---
+
+
 <!-- CAMPUS_SINGLE_TRUTH_ENTRY_V1 -->
 
 ## ERSTER SCHRITT BEI JEDEM CHATWECHSEL: ORIGINAL TATSÄCHLICH LESEN
