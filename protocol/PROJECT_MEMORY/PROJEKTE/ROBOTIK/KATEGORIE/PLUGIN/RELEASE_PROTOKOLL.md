@@ -19,8 +19,13 @@ Stand 09.11.2026. **Protokoll nach jedem neuen Plugin im selben Commit mit Insta
 ## Übergabe an den nächsten Chat
 1. `PROJEKTE/ROBOTIK/KATEGORIE/CURRENT_STATE.md` zuerst lesen, danach diese Datei und `RECHERCHE/MASTER_ABGLEICH_20261109.md`.
 2. **Keine Plugin-Neuerstellung, keine zweite Masterliste.** Nur `robotik-kategorie-workflow` weiterentwickeln.
-3. Nächste Live-Prüfung: „Robotik Kategorie → Bestand prüfen“ und ggf. einmaligen JSON-Gesamtbericht prüfen.
+3. **Erledigt 09.11.2026:** Nutzer hat einmaligen JSON-Gesamtbericht übermittelt. NICHT erneut anfordern; die WordPress-Site ist praktisch leer. Bestandsscan technisch nachgewiesen, fachliche/SEO-Prüfung bleibt offen.
 4. Anschließend **nur lesenden** GitHub-Master-Abgleich und Research-Gap-Funktionen aus geprüfter allgemeiner Kategorie-Pluginlinie adaptieren. Nicht HAB-spezifische Altlasten/Writer übernehmen.
 5. Nach jeder späteren Plugin-Version: ZIP + Changelog + `CURRENT.zip` + `CURRENT_STATE.md` atomar auf GitHub im Robotik-Pluginbüro.
 
 **Keine WordPress-Kategorien/Seiten wurden durch das GitHub-Ablegen verändert.**
+
+## 0.3.0 – reale Bericht-Abnahme 09.11.2026
+- **WordPress-Leseprüfung erfolgreich:** JSON-Bericht mit Versionskennung 0.3.0, 2 WP-Seiten, 1 Beispielbeitrag und 1 Standardkategorie; formal 0 Issues.
+- **Bewusst nicht als PASS werten:** HivePress fehlt, Magazin/Anzeigen/Master/Keyword nicht angebunden, Frontend ungeprüft.
+- **Kein erneuter Bericht nötig**, bis echte Robotik-Inhalte hinzugekommen sind. Nächster Code-Schritt: revisionssicherer read-only Import der einzigen GitHub-Fachmaster-Quelle, ohne neue Dateien vom Nutzer.

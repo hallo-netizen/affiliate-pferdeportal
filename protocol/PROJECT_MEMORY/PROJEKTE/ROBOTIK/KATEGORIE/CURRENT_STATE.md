@@ -23,3 +23,13 @@ Stand: 09.11.2026
 4. Für jeden weiteren Plugin-Release zuerst Version/Prüfung in `PLUGIN/RELEASE_PROTOKOLL.md` dokumentieren und ZIP in `PLUGIN/VERSIONEN/` archivieren; `PLUGIN/CURRENT.zip` **nur bewusst** auf die neueste als installiert gemeldete oder explizit freigegebene Version ändern. Keine zweite Current-/Protokollwahrheit.
 
 **Andere Portalgebäude und bestehende Kategorien/Beiträge werden bei dieser Archivierung nicht geändert.**
+
+## 09.11.2026 – echter WordPress-Bestandsscan mit 0.3.0
+Nutzer hat den tatsächlichen **Gesamtbericht der installierten 0.3.0** hochgeladen (09.11.2026, 15:29 UTC). Verifiziert gegen den JSON-Bericht:
+- WordPress-Seiten: 2 (Beispielseite veröffentlicht; Datenschutzerklärung Entwurf).
+- Beiträge: 1 („Hallo Welt!“); WordPress-Kategorien: 1 („Allgemein“).
+- HivePress-Listingkategorien und Inserate: **NOT_CONFIGURED** – kein Fehler, aber auch kein fachlicher PASS.
+- Magazin-Taxonomie: **NOT_MAPPED**. Affiliate/Anzeigen: **NOT_CONNECTED**. Forschungs-Master: **NOT_CONNECTED**. Keywordrecherche: **NOT_CONNECTED**. Frontend-Navigation: **NOT_CHECKED**.
+- Bericht meldet 0 formale Issues; nur WordPress-Inventar gelesen, **keine semantische/inhaltsbezogene Prüfung**.
+
+**ENTSCHEIDUNG:** Nutzer nicht erneut um denselben Bericht bitten. Die Bestandsaufnahme auf einer praktisch leeren WordPress-Site war für die Kategorienermittlung kein sinnvoller Hauptschritt; sie hat nur die Funktion der 0.3.0-Inventarisierung nachgewiesen. Es sind noch **0 echte Robotik-Kategorien und -Produktseiten** vorhanden. Nächster Arbeitsschritt ohne Benutzeraufwand: den einen GitHub-Produktmaster (68 Kandidaten, Revision 3) in derselben Robotik-Pluginidentität **read-only und revisionsgeprüft** anbinden, danach Fach-/Keyword- und Drei-Säulen-Prüfung. Kein neuer Ist-Bericht nötig, bevor WordPress tatsächliche Robotik-Inhalte hat.
