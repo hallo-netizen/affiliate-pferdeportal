@@ -1,19 +1,25 @@
 # ROBOTIK / KATEGORIE – EINZIGER AKTUELLER STATUS
-Stand 09.11.2026
+Stand: 09.11.2026
 
-**Fachstand:** Genau EINE aktive Produkt-Bestandsliste: `RECHERCHE/PRODUKTE_V2_20261108.json` (68 noch nicht freigegebene Kandidaten, Revision 3). Die alte 27er-Datei ist Archiv; alle 27 Begriffe wurden abgeglichen: 17 identische Namen, 10 fachlich offene Begriffspaare, keines automatisch zusammengeführt. `PLAN/robotik-empty.json` ist die **separate, daraus abzuleitende WordPress-Zielansicht**, aktuell 0 Knoten; kein konkurrierender Recherchebestand.
+## Verbindlicher Fachstand
+- **Eine Forschungsquelle**: `RECHERCHE/PRODUKTE_V2_20261108.json` (68 noch ungeprüfte Produktkandidaten, Revision 3). Die alte 27er-Liste nur Archiv; 17 identische Namen und 10 offene Begriffskonflikte sind nachverfolgt.
+- **Ein WordPress-Zielplan**: `PLAN/robotik-empty.json`; noch 0 freigegebene Knoten.
+- CORE: WP-Seite → weitere Seiten → letzte Seite = konkreter Robotertyp → dessen flache WP-Kategorien → Beiträge. Daneben getrennte Säulen Magazin und HivePress. Keine doppelten Such-Owner.
+- Vorgehen gemäß `ARBEITSABLAUF.md`: automatische Bestandsaufnahme statt tausender Dateien, ein Gesamtbericht, fachliche Forschung/Keywords, kontrollierter späterer Dry-run, Freigabe und echter Frontend-Readback.
 
-**Strukturvertrag:** WordPress-Seiten (ggf. mehrere Ebenen) → letzte Seite = konkreter Robotertyp → flache WordPress-Kategorien exklusiv zu diesem Robotertyp → Beiträge. Dazu getrennte Magazin- und HivePress-Säulen. Primärer Suchintent mit genau einem Owner.
+## Einzige aktuelle Plugin-Datei
+- **Kategorieplugin 0.3.0**: `PLUGIN/CURRENT.zip` (identisch zu `PLUGIN/VERSIONEN/0.3.0.zip`). Unveränderte WordPress-Pluginidentität `robotik-kategorie-workflow`.
+- **Installationsstatus:** Nutzer hat am 09.11.2026 ausdrücklich **„installiert“** zurückgemeldet. Damit ist die Installation berichtet, aber **nicht unabhängig im WordPress-Backend ausgelesen oder live abgenommen**.
+- Lokaler Dateinachweis vom 09.11.: ZIP-CRC PASS; PHP-Lint für beide PHP-Dateien PASS; exakt 5 ZIP-Einträge (zwei Verzeichnisse, zwei PHP-Dateien, README), 7.926 Byte; SHA256 `3c31aaaf86379a054034a80c8aeb3eaebdf616baa953ac079793f6495f1ecd30`.
+- GitHub-ZIP ist **byteidentisch** zum geprüften bereitgestellten 0.3.0-Installer (Git-Blob `3f7240d09c07a650083ed6d603c290aa06171e4d`).
+- 0.3.0 **kann**: JSON-Entwurf formal prüfen, einen WordPress-Bestandscheck auf Admin-Klick auslösen (Seiten, Beiträge, WP-Kategorien; HivePress nur wenn installiert) und **einen** Gesamtbericht exportieren. Keine eigentliche Import-/Änderungsroutine für Seiten, Beiträge und Kategorien.
+- **Nicht angebunden:** GitHub-Fachmaster-Revision, DataForSEO, semantische Vollprüfung/Contentqualität, echte Werbe-/Affiliate-Slots und bestätigte Magazin-Zuordnung. Fehlende Schnittstelle darf nicht als geprüfter PASS erscheinen.
+- **Abnahmegrad:** ZIP und PHP **LOKAL PASS**; WordPress-Version **INSTALLIERT LAUT NUTZER**; tatsächlicher Backend-Bestandsscan und Export sowie Frontend-/HivePress-Wirkung **LIVE OFFEN**.
 
-**Belegter historischer Ablauf:** central master → Fach-/Rollenprüfung → 3-Säulen-Zielbaum → DataForSEO als Evidenz → Intent-/Dublettenabgleich → WP-Dry-run/Delta → Freigabe → Write → echter Readback. Nachweise: `RECHERCHE/MASTER_ABGLEICH_20261109.md`.
+## Nächste konkrete Handlung (ohne Einzeldateien)
+1. **WordPress → Robotik Kategorie → Bestand prüfen.** Dort Bericht und ggf. Anzeige `NICHT ANGEBUNDEN` prüfen.
+2. Wenn der Bericht erscheint: **EINEN Gesamtbericht (JSON) herunterladen**; bei Bedarf genau diese EINE Datei für den fachlichen Abgleich bereitstellen.
+3. Vor der nächsten Plugin-Version den echten WordPress-Befund dokumentieren; anschließend GitHub-Master-Revisionsabgleich als read-only Funktion in **dieselbe Pluginidentität** einbauen. Keine fremden Profile, keine automatische Paid-API, keine WordPress-Schreibvorgänge.
+4. Für jeden weiteren Plugin-Release zuerst Version/Prüfung in `PLUGIN/RELEASE_PROTOKOLL.md` dokumentieren und ZIP in `PLUGIN/VERSIONEN/` archivieren; `PLUGIN/CURRENT.zip` **nur bewusst** auf die neueste als installiert gemeldete oder explizit freigegebene Version ändern. Keine zweite Current-/Protokollwahrheit.
 
-**Pluginstand:** Robotik 0.2.0 ist nach Nutzer-Screenshot auf WordPress installiert. Die grüne **formale JSON-Prüfung** wurde sichtbar bestanden. Nicht belegt: das Abspeichern eines Entwurfs, ein vollständiger WordPress-Test oder ein Import. Version 0.2.0 hat **KEINE** Verbindung zum GitHub-Master, **KEINE** DataForSEO-Keyword- oder Lückenrecherche und **KEINEN** Live-Writer. `PLUGIN/CURRENT.zip` 0.1.0 bleibt bestehen; Testversion 0.2.0 bleibt gesondert abgelegt.
-
-**Nächster Schritt:** Für Robotik denselben bestehenden allgemeinen Kategorie-Workflow mit seinem einen Master-Owner und read-only Research-Evidenz passend machen. Bevor WP-Pläne übernommen werden, Herkunft/Revision der Masterquelle verbindlich prüfen. Derzeit ist eine technische Synchronisation NICHT vorhanden. Keine autonomen Plugin-Änderungen des Masters, keine Bezahlrecherche, keine WP-Kategorie- oder Seitenschreibungen.
-
-## 09.11.2026 – Benutzeraufwand minimieren / KISS beschlossen
-Der verbindliche einzige Ablauf wurde im bestehenden `ARBEITSABLAUF.md` konkretisiert: **WordPress-Bestand inklusive WP-Seiten/Content/Magazin/HivePress beim Admin-Klick aus der Site lesen → denselben einen GitHub-Fachmaster mit Revision einlesen → Read-only-Gesamtprüfung und Randthemen-Evidenz → ein Ausnahmenbericht → Freigabe → ein Writer → echter WordPress-/Frontend-Readback**.
-
-**Wichtig:** Die bereits installierte 0.2.0 kann derzeit weder den Master noch WP-/HivePress-Bestand übergreifend prüfen. Die für diesen Minimalaufwand nötigen Funktionen müssen erst in der bestehenden Pluginidentität entstehen und an echter WordPress-Testsite verifiziert werden. Quellen ohne reale Schnittstelle als NICHT ANGEBUNDEN melden; kein falsches PASS. Kein notwendiger Einzeldatei-Upload als Regelweg. Bis automatische Chat-Rückmeldung existiert, ggf. EIN Gesamtbericht für Chat-Prüfung.
-
-**Nächster praktischer Software-Schritt:** read-only Gesamtbestandsprüfung im vorhandenen Robotik-Kategorieplugin (zuerst WordPress-Seiten/Kategorien/Beiträge; HivePress/Anzeigen nur nach realem Schema-/Plugin-Nachweis). Vorher Produktiv-Writes und kostenpflichtige Research-Calls gesperrt.
+**Andere Portalgebäude und bestehende Kategorien/Beiträge werden bei dieser Archivierung nicht geändert.**

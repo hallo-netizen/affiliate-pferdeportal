@@ -16,3 +16,6 @@ Nächster fachlicher Auftrag: Idee, Abgrenzung und vollständigen Robotik-Katego
 
 ## Designbüro
 - [DESIGN/START_HERE.md](DESIGN/START_HERE.md) – Silber / Technikblau / Kupfer, Logo- und Layoutentwicklung.
+
+## Pluginbüro
+- [PLUGINS/START_HERE.md](PLUGINS/START_HERE.md) – alle Robotik-Plugins, einzige Kategorieplugin-Quelle und Versionsprotokoll.

@@ -1,27 +1,32 @@
-# PLUGIN – ROBOTIK KATEGORIE (NEUTRALSTART 0.1.0)
+# Robotik – Pluginbüro / Kategorie-Workflow
 
-**Datei:** `CURRENT.zip` – installierbares WordPress-Plugin mit eigenem Verzeichnis `robotik-kategorie-workflow`.
+**Einziger aktiver Installer:** [CURRENT.zip](CURRENT.zip) – Version **0.3.0**.
 
-**Funktion heute:** Admin-Menü „Robotik Kategorie“, getrennte Darstellung der drei Säulen, JSON-Strukturprüfung, Entwurf speichern. 0 vorgefüllte Knoten. Keine automatische Verbindung zu Fremdseiten, APIs oder Datenbanken außerhalb des neuen WordPress.
+**Versionsarchiv:** [VERSIONEN/0.1.0.zip](VERSIONEN/0.1.0.zip) · [VERSIONEN/0.2.0.zip](VERSIONEN/0.2.0.zip) · [VERSIONEN/0.3.0.zip](VERSIONEN/0.3.0.zip). Alte Versionen ausschließlich Archiv, nicht parallel installieren.
 
-**Absichtlich noch NICHT enthalten:** Kategorie-/Seiten-/HivePress-Live-Importer, Bearbeiten oder Löschen bestehender WP-Objekte, automatisches Keyword-Rechercheprogramm, Frontend-Navigation. Die bewährte kontrollierte Importstrecke wird erst nach dem beschlossenen Robotik-Fachbaum mit frischem Portalprofil eingebunden und separat getestet. Dies ist kein Ersatz für einen vollständig getesteten Produktions-Workflow.
+**Verbindliches Versions-/Prüfprotokoll:** [RELEASE_PROTOKOLL.md](RELEASE_PROTOKOLL.md).
+**Einziger operativer Status für Übergaben:** [../CURRENT_STATE.md](../CURRENT_STATE.md).
+**Allgemeine Plugin-Altlastenprüfung:** [ORIGINAL_AUDIT_20261109.md](ORIGINAL_AUDIT_20261109.md).
 
-**Installation:** WordPress → Plugins → Plugin hinzufügen → Plugin hochladen → `CURRENT.zip` → aktivieren → Menü „Robotik Kategorie“.
+## Version 0.3.0 – tatsächliche Fähigkeiten
+- WordPress-Adminmenü „Robotik Kategorie“.
+- Bisherige Prüfung von JSON-Plänen und Speichern des eigenen Entwurfs.
+- Manuell ausgelöste **nur lesende** WordPress-Bestandsaufnahme von Seiten, Beiträgen, WordPress-Kategorien und – sofern vorhanden – HivePress-Inseraten/-Kategorien.
+- Ein zusammengefasster JSON-Bericht statt Einzeldateien.
+- Keine Erstellung/Änderung/Löschung von WordPress-Seiten, WordPress-Kategorien oder Beiträgen; WordPress-Entwurfsoption kann gespeichert werden.
 
-**Prüfung am 08.11.2026:** ZIP 2.589 Bytes, SHA-256 `9aea1cae303f432205489efd8cb43f6edbfc56d59fca4173bfd55895276669a0`; PHP-Lint PASS; ZIP-CRC PASS; keine Namen alter Portale im PHP; kein Live-Test.
+**Noch nicht enthalten:** vollwertige Keyword-Recherche/DataForSEO, GitHub-Master-Abgleich, fachlich vollständige Drei-Säulen-/Anzeigeprüfung, WordPress-Kategorie-/Seitenimport. Der Bericht ist Bestandsinventar, keine vollständige fachliche Abnahme.
 
-**Kein zweites Kategorie-Plugin parallel auf der neuen Site installieren.** Vor spätem Import entscheiden, welcher eine Writer verbindlich ist.
+**Dateiprüfung:** 7.926 Byte, SHA256 `3c31aaaf86379a054034a80c8aeb3eaebdf616baa953ac079793f6495f1ecd30`; ZIP-CRC und PHP-Lint PASS. 20 historische lokale Prüffälle sind im vorherigen Erstellungsstand dokumentiert, aber **ein WordPress-Live-Test ist NICHT durch den ZIP-Nachweis ersetzt**.
 
-## Testkandidat 0.2.0 – 08.11.2026
-**Datei:** `INSTALLATIONSKANDIDAT_0.2.0.zip`, 4038 Bytes, SHA256 `ee09b6b88342cd1d77594d4490d4d468f3bcfbf43c15c8e0ba6882910dbeee9d`.
+**Installation:** Nutzer meldet 0.3.0 am 09.11.2026 als installiert. Echte Backend-/Frontend-Abnahme noch offen.
 
-**Original 0.1.0 bleibt als CURRENT.zip unangetastet**, da noch keine reale WordPress-Freigabe. Die 0.2.0 baut auf derselben Plugin-Identität/Ordnerstruktur auf und ist für die erste **Testinstallation** geeignet; NICHT für das Anlegen eines WordPress-Kategoriebaums.
+## KISS-Regel für jede Folgeversion
+1. ZIP in `VERSIONEN/<version>.zip` ablegen, erst nach Dateiintegrität/Version-/Pfadkontrolle.
+2. `CURRENT.zip` auf denselben geprüften ZIP-Inhalt aktualisieren; nur ein aktiver Installer.
+3. `RELEASE_PROTOKOLL.md` und `../CURRENT_STATE.md` im **selben Campus-Commit** aktualisieren.
+4. In `ROBOTIK/PLUGINS` lediglich auf diesen echten Ablageort verweisen (nicht nochmal kopieren).
+5. Lokale Prüfungen, Nutzer-Installationsmeldung und echten WordPress-Live-Test **getrennt** berichten. Neue Chats beginnen über `START_HERE.md` und `CURRENT_STATE.md`.
+6. K0/Pferdeatelier, Hobbydepot und Hab & Bewahr strikt unangetastet lassen.
 
-Verbessert: `role=group` für Sammelseiten, `role=product` für letzte konkrete Produktseite, ausschließlich darunter `content_category`; global eindeutige Kategorie-Slugs; Unterscheidung `phase=draft` / `phase=final`, im finalen Stand 3 unterschiedliche grobe Themenrichtungen (`topic_directions`) je Inhaltskategorie. Keine echten Artikeltitel erforderlich.
-
-Lokale Prüfung: PHP-Lint PASS, ZIP-CRC PASS (2 Dateien), 16 positive/negative Strukturtests PASS. PHP ohne alte Portalbegriffe/URLs und ohne API-, Import-, Cron- oder DB-Schreibfunktionen außer normaler WordPress-Entwurfsoption. Ein echter WordPress- und HivePress-Test steht aus.
-
-**Grenze:** DataForSEO-, Keyword-Recherche-, semantische Entdopplungs- und WP-Importfunktionen der historischen Kategorie-Engine sind NOCH NICHT portiert. Keine Verwechslung von syntaktischer Validierung mit fachlicher Recherche. Die Testinstallation darf ausschließlich einen leeren/Probe-Entwurf prüfen; keine alten Zielprofile importieren.
-
-## Pflicht-Audit vor Übernahme alter Funktionen
-[ORIGINAL_AUDIT_20261109.md](ORIGINAL_AUDIT_20261109.md): vollständiges HAB-ZIP nicht neutral; alte Importprofile/-Wellen dürfen nicht übernommen werden. Der allgemeine 14-Stufen-Read-only-Prozess ist die fachliche Referenz. Keine Behauptung einer fertigen Robotik-Research-Integration.
+Die alte Datei `INSTALLATIONSKANDIDAT_0.2.0.zip` bleibt aus Gründen der Rückverfolgung erhalten, ist aber **historisch** und nicht der aktive Download.
