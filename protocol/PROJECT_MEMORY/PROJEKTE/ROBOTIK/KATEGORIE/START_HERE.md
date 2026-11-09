@@ -53,3 +53,6 @@ Das neue Büro besitzt keine Verknüpfung mit bestehenden Projekt-Daten. Es gibt
 ## Aktuelle Erweiterungen
 - [RECHERCHE/ERWEITERUNG_SOFTWARE_ERSATZTEILE_NISCHEN_20261109.md](RECHERCHE/ERWEITERUNG_SOFTWARE_ERSATZTEILE_NISCHEN_20261109.md) – 108 zusätzliche, nach Quelle und Rolle getrennte Randthemen. Alle in EINEM Fachmaster Revision 6.
 - [Roboterglossar A–Z](../MAGAZIN/ROBOTERGLOSSAR/START_HERE.md) – 558 Begriffskandidaten, nicht 558 freigegebene Seiten.
+
+## Vertiefte Quellen-/Kategorieprüfung
+- [RECHERCHE/PRODUKTROLLEN_PRIORITAETEN_20261109.md](RECHERCHE/PRODUKTROLLEN_PRIORITAETEN_20261109.md) – 14 nachgeprüfte Forschungsfälle aus EINEM Master, mögliche Produktseiten und 3–5 verschiedene Inhaltsabsichten je Kategorie; kein WP-Import.

@@ -1,5 +1,5 @@
 # Robotik – Prüfung Footer-Umzug 1.1.1
-09.11.2026 · QUELLCODE DES ORIGINAL-ZIP GEPRÜFT · NOCH NICHT FÜR ROBOTIK INSTALLIEREN
+09.11.2026 · QUELLCODE DES ORIGINAL-ZIP GEPRÜFT · AUF NUTZERWUNSCH ORIGINAL 1.1.1 WIEDER AKTUELL, RISIKEN DOKUMENTIERT
 
 ## Woher?
 Original: `PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/TOOL-FOOTER-UMZUG/CURRENT.zip` (Version **1.1.1**, 9.083 Byte). Das Original-ZIP hat 2 Einträge; PHP `footer-umzug/footer-umzug.php` wurde aus dem ZIP dekomprimiert und untersucht. Andere Portalplugins wurden nicht verändert.
@@ -31,3 +31,6 @@ Original: `PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/TOOL-FOOTER-UMZUG/CURR
 
 ## Nutzerpräzisierung 09.11.2026
 **Ziel ist ausschließlich die Übertragung benötigter Footer-Seiten samt Inhalt und Menüs – niemals Design.** Genaue Regeln im [Footer-Umzug-Zielvertrag](FOOTER_UMZUG_ZIELVERTRAG_20261109.md). Noch keine freigegebene Robotik-Plugin-Datei.
+
+## Letzte Entscheidung, 09.11.2026
+Der Nutzer verlangt ausdrücklich die **byteunveränderte bekannte Originalversion 1.1.1** zurück; 1.2.1 hatte Funktionen gekürzt. GitHub-Robotik-CURRENT ist jetzt 1.1.1 und 1.2.1 bleibt Archiv. Diese Entscheidung ersetzt den vorherigen Rat zur isolierten Neuentwicklung. **Die bekannten Risiken aus der Quellcodeprüfung bleiben bestehen**: vorhandene Zielseiten können verändert werden und alte Portalwörter werden unter Umständen umgeschrieben; deshalb Seiten-/Inhaltskontrolle vor dem Import, Rechtstexte prüfen. Keine Änderungen am Original-Plugin.

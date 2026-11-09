@@ -2941,7 +2941,7 @@
     }
   ],
   "canonical_source": true,
-  "revision": 6,
+  "revision": 7,
   "research_state": "UNAPPROVED",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
@@ -3454,7 +3454,18 @@
       "review_state": "HERSTELLERPRODUKT_BELEGT",
       "keyword_status": "NICHT_ERHOBEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "relation_to_existing": "ZU_PRUEFEN"
+      "relation_to_existing": "ZU_PRUEFEN",
+      "evidence_review_20261109": {
+        "evidence": "HERSTELLERPRODUKT",
+        "source": "https://www.ecoppia.com/technology",
+        "owner": "CORE_PRODUCT_CANDIDATE",
+        "section": "Reinigung & Gebäude → Photovoltaik-Reinigungsroboter",
+        "point": "Solarpark/PV-Anlagenreinigung ist spezifische Aufgabe; private Dachfenster-/Fassadenreinigung bleibt getrennt",
+        "next": "SOFTWARE_UND_SERP_PRUEFEN",
+        "checked_at": "2026-11-09",
+        "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
+        "wp_approved": false
+      }
     },
     {
       "id": "rf002",
@@ -3494,7 +3505,18 @@
       "review_state": "HERSTELLERPRODUKT_BELEGT",
       "keyword_status": "NICHT_ERHOBEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "relation_to_existing": "ZU_PRUEFEN"
+      "relation_to_existing": "ZU_PRUEFEN",
+      "evidence_review_20261109": {
+        "evidence": "HERSTELLERPRODUKT",
+        "source": "https://www.terex.com/zenrobotics/robots",
+        "owner": "CORE_PRODUCT_CANDIDATE",
+        "section": "Industrie & Fertigung → Recycling & Sortierung → Abfallsortierroboter",
+        "point": "Heavy Picker und Fast Picker sind unterschiedliche konkrete Hersteller-Modelle derselben grundlegenden Sortieraufgabe",
+        "next": "PRODUKTWEG_SOFTWARE_ERSATZTEILE_KEYWORDS_PRUEFEN",
+        "checked_at": "2026-11-09",
+        "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
+        "wp_approved": false
+      }
     },
     {
       "id": "rf006",
@@ -3660,7 +3682,18 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf021",
       "research_status": "BEISPIEL_RECHERCHIERT_KEINE_SEO_FREIGABE",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "evidence_review_20261109": {
+        "evidence": "HERSTELLERPRODUKT",
+        "source": "https://www.yanmar.com/global/recreationalmarine/products/marineequipment/net_cleaning_robot/",
+        "owner": "CORE_PRODUCT_CANDIDATE",
+        "section": "Reinigung & Gebäude → Spezialreinigung → Aquakultur-Netzreinigungsroboter",
+        "point": "Fischzucht-Netzreinigung ist nicht Schiffsrumpfreinigung; Yanmar zeigt spezifizierte Anwendung",
+        "next": "DEUTSCHER_MARKT_UND_SERP_PRUEFEN",
+        "checked_at": "2026-11-09",
+        "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
+        "wp_approved": false
+      }
     },
     {
       "name": "Windkraft-Rotorblattinspektionsroboter",
@@ -3676,7 +3709,18 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf022",
       "research_status": "BEISPIEL_RECHERCHIERT_KEINE_SEO_FREIGABE",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "evidence_review_20261109": {
+        "evidence": "FORSCHUNGSPROJEKT_NOCH_KEIN_SERIENPRODUKTNACHWEIS",
+        "source": "https://www.iff.fraunhofer.de/de/geschaeftsbereiche/robotersysteme/riwea.html",
+        "owner": "MAGAZIN_VORLÄUFIG",
+        "section": "Magazin → Forschung & Zukunft",
+        "point": "Windrotorblattinspektion real erforscht, aber diese Quelle belegt nicht allgemeine Lieferbarkeit",
+        "next": "PRODUKT_BELEGEN_BEFORE_CORE",
+        "checked_at": "2026-11-09",
+        "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
+        "wp_approved": false
+      }
     },
     {
       "name": "Offshore-Anlageninspektionsroboter",
@@ -3708,7 +3752,18 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf024",
       "research_status": "BEISPIEL_RECHERCHIERT_KEINE_SEO_FREIGABE",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "evidence_review_20261109": {
+        "evidence": "HERSTELLERPRODUKT",
+        "source": "https://www.sewerrobotics.com/",
+        "owner": "CORE_PRODUCT_CANDIDATE",
+        "section": "Bau & Infrastruktur ODER Reinigung/Anlagen (Owner offen) → Kanalsanierungsroboter",
+        "point": "Schneiden, Reinigen, Inspektion können dasselbe modulare Gerät nutzen, nicht dreimal Modell führen",
+        "next": "OWNER_ENTSCHEIDEN_NACH_SERP",
+        "checked_at": "2026-11-09",
+        "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
+        "wp_approved": false
+      }
     },
     {
       "name": "Robotischer Abfallsortierer für Mischabfall",
@@ -3724,7 +3779,18 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf025",
       "research_status": "BEISPIEL_RECHERCHIERT_KEINE_SEO_FREIGABE",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "evidence_review_20261109": {
+        "evidence": "GLEICHE_PRODUKTFAMILIE",
+        "source": "https://www.terex.com/zenrobotics/robots/fast-picker",
+        "owner": "CORE_ALIAS_OR_SUBTOPIC",
+        "section": "rf005 Abfallsortierroboter",
+        "point": "Mischabfall ist Materialausprägung, nicht automatisch zweite Produktseite; Modell Fast Picker = einmal",
+        "next": "NUR_NACH_SERP_SEPARAT",
+        "checked_at": "2026-11-09",
+        "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
+        "wp_approved": false
+      }
     },
     {
       "name": "Robotischer Müllsortierer für Elektroschrott",
@@ -4204,7 +4270,18 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf055",
       "research_status": "BEISPIEL_RECHERCHIERT_KEINE_SEO_FREIGABE",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "evidence_review_20261109": {
+        "evidence": "HERSTELLERSOFTWARE",
+        "source": "https://robodk.com/de/simulation",
+        "owner": "CORE_SOFTWARE_CANDIDATE",
+        "section": "Robotiksoftware → Simulation & Offline-Programmierung",
+        "point": "RoboDK deckt Simulation UND Offline-Programmierung ab; nicht automatisch zwei identische Softwareseiten",
+        "next": "RF056_ZUSAMMEN_ODER_TRENNEN_SERP",
+        "checked_at": "2026-11-09",
+        "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
+        "wp_approved": false
+      }
     },
     {
       "name": "Offline-Programmiersoftware für Roboter",
@@ -4220,7 +4297,18 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf056",
       "research_status": "BEISPIEL_RECHERCHIERT_KEINE_SEO_FREIGABE",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "evidence_review_20261109": {
+        "evidence": "HERSTELLERSOFTWARE",
+        "source": "https://www.visualcomponents.com/de/produkte/roboter-offline-programmierung/",
+        "owner": "CORE_SOFTWARE_CANDIDATE_LINKED",
+        "section": "Robotiksoftware → Simulation & Offline-Programmierung",
+        "point": "Visual Components und RoboDK haben beide OLP + Simulation; funktionsbezogene getrennte URLs nur bei eigenständiger Absicht",
+        "next": "DOPPELINTENT_KLÄREN_RF055",
+        "checked_at": "2026-11-09",
+        "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
+        "wp_approved": false
+      }
     },
     {
       "name": "Flottenmanagementsoftware für mobile Roboter",
@@ -4236,7 +4324,18 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf057",
       "research_status": "BEISPIEL_RECHERCHIERT_KEINE_SEO_FREIGABE",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "evidence_review_20261109": {
+        "evidence": "HERSTELLERSOFTWARE",
+        "source": "https://mobile-industrial-robots.com/de/produkte/software/mir-fleet",
+        "owner": "CORE_SOFTWARE_CANDIDATE",
+        "section": "Robotiksoftware → Flottenmanagement für mobile Roboter",
+        "point": "MiR Fleet separate Flottensteuerung, anders als Offline-Programmier-Suite",
+        "next": "KOMPATIBILITÄT_PREISMODELLE_KEYWORDS_PRÜFEN",
+        "checked_at": "2026-11-09",
+        "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
+        "wp_approved": false
+      }
     },
     {
       "name": "Roboternavigationssoftware",
@@ -4396,7 +4495,18 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf067",
       "research_status": "EINZELPRODUKT_BELEG_OFFEN",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "evidence_review_20261109": {
+        "evidence": "FACHFRAMEWORK_KEIN_EIGENSTÄNDIGER_VERKAUF",
+        "source": "https://index.ros.org/",
+        "owner": "MAGAZIN_GLOSSAR",
+        "section": "Magazin → Robotiksoftware verstehen / Glossar",
+        "point": "ROS2 ist Software-Ökosystem/Framework, nicht kaufbare Softwaregattung mit automatisch Affiliate-Angeboten",
+        "next": "DEFINITION_OWNÉR_PRUEFEN",
+        "checked_at": "2026-11-09",
+        "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
+        "wp_approved": false
+      }
     },
     {
       "name": "Software zur Roboter-Sicherheitsüberwachung",
@@ -4444,7 +4554,18 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf070",
       "research_status": "BEISPIEL_RECHERCHIERT_KEINE_SEO_FREIGABE",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "evidence_review_20261109": {
+        "evidence": "HERSTELLER_HARDWARE",
+        "source": "https://schunk.com/de/de/services/konfigurationstools",
+        "owner": "CORE_KOMPONENTEN_CANDIDATE",
+        "section": "Robotik-Komponenten → Robotergreifer",
+        "point": "Greifer ist eigene Zubehör-/Komponenten-Produktart, nicht komplette Roboterfunktion",
+        "next": "KOMPATIBILITÄT_UND_SERP",
+        "checked_at": "2026-11-09",
+        "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
+        "wp_approved": false
+      }
     },
     {
       "name": "Roboter-Werkzeugwechsler",
@@ -4460,7 +4581,18 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf071",
       "research_status": "BEISPIEL_RECHERCHIERT_KEINE_SEO_FREIGABE",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "evidence_review_20261109": {
+        "evidence": "HERSTELLER_HARDWARE",
+        "source": "https://schunk.com/de/de/produkte/aktuelle-highlights/robot-plus",
+        "owner": "CORE_KOMPONENTEN_CANDIDATE",
+        "section": "Robotik-Komponenten → Roboter-Werkzeugwechsler",
+        "point": "Werkzeugwechsler hat eigene Aufgabe, nicht bloß Greifer-Ersatzteil",
+        "next": "TECHNIKARTEN_UND_SERP",
+        "checked_at": "2026-11-09",
+        "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
+        "wp_approved": false
+      }
     },
     {
       "name": "Vakuumgreifer für Roboter",
@@ -4780,7 +4912,18 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf091",
       "research_status": "EINZELPRODUKT_BELEG_OFFEN",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "evidence_review_20261109": {
+        "evidence": "HERSTELLER_ERSATZTEIL",
+        "source": "https://www.husqvarna.com/de/ersatzteile-und-zubehoer-fuer-maehroboter/klingen-fur-mahroboter/",
+        "owner": "CORE_PARENT_ACCESSORY_SUBTOPIC",
+        "section": "rb062 Mähroboter → WP-Inhaltskategorie Ersatzteile/Wartung",
+        "point": "Modellkompatible Klingen; kein eigener Robotertyp, eigene Ersatzteil-Produktseite vorläufig nicht nötig",
+        "next": "3_BIS_5_ARTIKEL_UNTER_BESTEHENDER_WP_KATEGORIE",
+        "checked_at": "2026-11-09",
+        "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
+        "wp_approved": false
+      }
     },
     {
       "name": "Ersatzakku für Mähroboter",
@@ -4812,7 +4955,18 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf093",
       "research_status": "NUR_FACHLICHE_HYPOTHESE",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "evidence_review_20261109": {
+        "evidence": "HERSTELLER_ERSATZTEIL",
+        "source": "https://www.irobot.com/en_US/de/roomba-parts-and-accessories",
+        "owner": "CORE_PARENT_ACCESSORY_SUBTOPIC",
+        "section": "rb060 Staubsaugroboter → WP-Inhaltskategorie Ersatzteile/Wartung",
+        "point": "Filter je Modellserie, kein eigener Robotertyp; identisches Zubehör nicht in fünf CORE-Bereichen publizieren",
+        "next": "KOMPATIBILITÄTS_ARTIKEL_PRÜFEN",
+        "checked_at": "2026-11-09",
+        "source_status": "HERSTELLER_ODER_FACHQUELLE_KEINE_SEO_VOLUME",
+        "wp_approved": false
+      }
     },
     {
       "name": "Ersatzbürsten für Staubsaugroboter",
@@ -5484,5 +5638,30 @@
     ],
     "notes": "Some items are components/accessories, service offers, journal themes or prototype niches; NOT all robots and NOT WordPress leaf pages. Canonical candidates stay 68.",
     "evidence_review": "108 subjects reviewed: every entry has explicit evidence grade, most manufacturer/technology links are CONTEXT, not proof of product availability; draft only"
+  },
+  "product_niche_triage_v2": {
+    "date": "2026-11-09",
+    "reviewed_candidate_ids": [
+      "rf001",
+      "rf005",
+      "rf021",
+      "rf024",
+      "rf025",
+      "rf055",
+      "rf056",
+      "rf057",
+      "rf067",
+      "rf070",
+      "rf071",
+      "rf091",
+      "rf093",
+      "rf022"
+    ],
+    "count": 14,
+    "master_entries_unchanged": 68,
+    "frontier_entries_unchanged": 128,
+    "source_credibility": "PRODUKTBELEG_VS_DE_SUCHE_TRENNEN",
+    "wp_plan_changed": false,
+    "review_file": "RECHERCHE/PRODUKTROLLEN_PRIORITAETEN_20261109.md"
   }
 }
