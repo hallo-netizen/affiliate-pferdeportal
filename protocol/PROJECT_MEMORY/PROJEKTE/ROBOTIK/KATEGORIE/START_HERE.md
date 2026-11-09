@@ -32,3 +32,11 @@ Das neue Büro besitzt keine Verknüpfung mit bestehenden Projekt-Daten. Es gibt
 ## Aktueller Pluginstand 09.11.2026
 - [PLUGIN/CURRENT.zip](PLUGIN/CURRENT.zip) – **0.3.0 aktuell**, Nutzer meldet Installation.
 - [PLUGIN/RELEASE_PROTOKOLL.md](PLUGIN/RELEASE_PROTOKOLL.md) – Versionen, Tests, offene WordPress-Abnahme. Kein anderes Current verwenden.
+
+## Fachrecherche Robotik – 09.11.2026
+- [RECHERCHE/KATEGORIEKONZEPT_V1_20261109.md](RECHERCHE/KATEGORIEKONZEPT_V1_20261109.md) – zehn recherchierte Einsatzwelten, 68 Produktkandidaten einem einzigen vorläufigen CORE-Pfad zugeordnet, Konfliktstellen.
+- [RECHERCHE/DREI_SAEULEN_OWNER_V1_20261109.md](RECHERCHE/DREI_SAEULEN_OWNER_V1_20261109.md) – getrennte CORE-/Magazin-/HivePress-Aufgaben und Suchintent-Owner.
+- [RECHERCHE/INHALTSPOTENZIAL_V1_20261109.md](RECHERCHE/INHALTSPOTENZIAL_V1_20261109.md) – 15 Produkt-Piloten mit 45 möglichen Inhaltsrubriken, 135 groben Beitragsthemen als fachliche Hypothesen.
+- [RECHERCHE/GLOSSAR_FINDER_MODELLREGISTER_V1_20261109.md](RECHERCHE/GLOSSAR_FINDER_MODELLREGISTER_V1_20261109.md) – geprüfte Vorbilder Pferdeatelier/Hobbydepot/Hab & Bewahr; Robotik-Glossar, Roboterfinder und bedingtes Modellregister.
+- [RECHERCHE/PRUEFSTAND_V1_20261109.md](RECHERCHE/PRUEFSTAND_V1_20261109.md) – was belegt, offen oder noch gar nicht technisch angebunden ist.
+- [RECHERCHE/PRODUKTE_V2_20261108.json](RECHERCHE/PRODUKTE_V2_20261108.json) – **EINZIGER Fachmaster, Revision 4**, 68 Ausgangs-IDs und 20 ausdrücklich nur recherchierte Randthemen.
