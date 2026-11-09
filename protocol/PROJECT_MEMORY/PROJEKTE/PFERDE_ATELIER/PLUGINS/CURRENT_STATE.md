@@ -5,6 +5,20 @@
 > **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt.  
 > `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
 
+## NEUSTER ISTSTAND – 09.11.2026 / ECHTER WORDPRESS-SEO-IMPORTFEHLER / PSTE .26 QA ONLY
+
+**Echter Betreiberbefund nach dem Importversuch auf isolierter WP-TESTseite mit PSTE .25:** `Mini-Workflow: PSTE_MINI_ATOMIC_OPTION_CONFLICT_RELOAD_AND_RETRY`. Die 87 fachlichen Entscheidungen wurden vom Plugin vor dem atomaren Speichern validiert; das Speichern bzw. dessen Rücklesebestätigung ist **NICHT** erfolgreich belegt. **NICHT** erneut mit .25 importieren und noch keine Übergabe an Redaktionsplan/PSERC/K0.
+
+**Code-Ursacheklasse hart geprüft:** In .25 vergleicht die atomare Speicherfunktion die echte Options-Datenbankzeile gegen eine aus `get_option()` rekonstruierte, möglicherweise durch Legacy-Standardfelder ergänzte Serialisierung. Der konkrete Fehlercode vereinigt außerdem `0 geänderte Zeilen` (z. B. Byteabweichung oder echte Konkurrenz) und SQL-Fehler. Ein lokaler Gegenbeweis reproduziert genau den gemeldeten Fehler **ohne Parallelzugriff**, sobald ein alter Optionsdatensatz noch nicht alle Standardfelder enthält. **Ob exakt diese Legacy-Abweichung auf dem echten WP-Server vorliegt, ist mangels Roh-DB-Zeile NICHT nachgewiesen.** Die eigentliche Fehlerklasse wird unabhängig davon robust behandelt.
+
+**Isolierter KISS-Fix gebaut:** PSTE **0.57.144.26 ATOMIC-IMPORTFIX NUR TEST** liest den exakt gespeicherten Rohoptionswert, vergleicht den fachlichen Vorzustand und schreibt nur mit unverändertem exaktem Ausgangswert; echte Änderungen bleiben gesperrt. Fehler für Lesen/Schreiben/Konkurrenz getrennt. **Nur 2 PHP-Dateien gegenüber originaler .25 geändert** (inkl. Versionsheader), sonstiges Plugin bytegleich. Kein zweiter SEO-Entscheider, keine Tabelle, kein K0-/PSERC-/Liveeingriff. **QA 83/83 PHP-Syntax, 121/121 ZIP-CRC, 11/11 lokale Vorher/Nachher-Tests PASS**. Der echte MySQL-/WordPress-Import mit .26 ist **NOCH OFFEN**, daher keine falsche Freigabe.
+
+**ZIP unverändert im privaten Pluginbüro:** `/pferdeatelier/PLUGINS/QA/PSTE-0.57.144.26-ATOMIC-IMPORTFIX-NUR-TEST.zip`, 639962 Byte, SHA256 `1a16cc8495412d526ce4c8ccd8497811182cb7effdedf3d2c071b0885329c22e`. Patch und QA-Bericht im selben Library-Ordner; GitHub-Codepatch und Bericht unter [QA_ONLY/PSTE_05714426_ATOMIC_IMPORTFIX/](QA_ONLY/PSTE_05714426_ATOMIC_IMPORTFIX/). Die unveränderte 87er Import-JSON ist weiterhin in `/pferdeatelier/SEO-PRUEFUNG/pferdeatelier-seo-einmalentscheidung-20261109.json` (SHA `e50ae4eb934eddf7ec2d47feeaba5b6f30d0803756c1301d5ad545fec8dfb34c`).
+
+**EINZIGER NÄCHSTER SCHRITT:** Nur auf isolierter WordPress-TESTseite .26 statt .25 installieren, unveränderte 87er SEO-JSON **einmal** importieren, dort echte gespeicherte Statuszahlen **61 FREI / 20 BELEGT / 6 KLÄRUNG** nachlesen. Bei Fehler Stop, Originaloption nicht manuell bearbeiten. PR #682 DRAFT / NICHT MERGEN. K0/Live unverändert.
+
+---
+
 ## AKTUELLER REALSTAND – 08.11.2026 16:05 BERLIN / ECHTER MINI-EXPORT
 
 **Dies ist der aktuelle maßgebliche Stand für PSTE/PSERC MINI; ältere untenstehende Zwischenstände (86 Titel nacharbeiten, Gesamtdiagnose erneut herunterladen, fertige externe Freigabe) dürfen diesen Stand nicht ersetzen.**
