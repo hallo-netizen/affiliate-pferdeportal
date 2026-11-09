@@ -1,0 +1,22 @@
+name: HD003 mobile CSS context
+on:
+  push:
+    branches: [hobbyroom/hd003-150809-mobile-font-hobbyfinder-20261109]
+    paths: [.github/workflows/hd003-150809-css-context.yml]
+permissions:
+  contents: read
+jobs:
+  context:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          python3 - <<'PY'
+          import zipfile
+          p='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip'
+          with zipfile.ZipFile(p) as z:
+            a=z.read('affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php').decode().splitlines()
+          for start,end in [(6995,7007),(7446,7466),(7615,7629),(4274,4279)]:
+            print('=== SECTION ===',start,end)
+            for i in range(start-1,end):print('L',i+1,a[i][:1100])
+          PY
