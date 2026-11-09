@@ -29,6 +29,17 @@ jobs:
               article=z.read(root+'includes/article-page.php').decode('utf-8','replace')
               print('SOURCE_HAS_FEATURED_IMAGE:',bool(re.search(r'get_the_post_thumbnail|has_post_thumbnail',article)))
               print('SOURCE_INCLUDES_POST_CONTENT:',bool(re.search(r'the_content|post_content',article)))
+              print('PLUGIN_REFERENCES_TO_INLINE_IMAGE_MARKERS')
+              found=0
+              for name in z.namelist():
+                  if not name.startswith(root) or not name.endswith(('.php','.js','.json','.css')):continue
+                  code=z.read(name).decode('utf8','replace')
+                  for lineno,line in enumerate(code.splitlines(),1):
+                      if ('hb-beitragsfoto' in line or 'scene-graffiti.webp' in line) and (not name.endswith('.css')):
+                          found+=1
+                          print('MARKER',name.replace(root,''),lineno,line.strip()[:360])
+              print('PLUGIN_MARKER_OCCURRENCES',found)
+
           base='https://hab-und-bewahr.de'
           slug='graffiti-schaden-dokumentieren-richtig-handeln'
           urls=[base+'/'+slug+'/',base+'/wp-json/wp/v2/posts?slug='+slug,base+'/?rest_route=/wp/v2/posts&slug='+slug]
