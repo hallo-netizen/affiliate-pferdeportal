@@ -1,0 +1,40 @@
+name: Idealo prior feed blocker historical evidence
+on:
+  push:
+    branches: [hobbyroom/hd009-idealo-activation-20261109]
+    paths: [.github/workflows/idealo-historical-feed-blocker.yml]
+permissions:
+  contents: read
+jobs:
+  historical:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Search existing original Hobbydepot portal records, not assumptions
+        run: |
+          python3 - <<'PY'
+          import pathlib,re
+          roots=[pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH'),pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/PFERDEATELIER')]
+          tokens=re.compile(r'(idealo|ingenious|\biPN\b)',re.I)
+          target=re.compile(r'(feed|freischalt|zugang|block|einricht|anmeld|status|schalt|api|publishe|werbemittel|advertis|genehm)',re.I)
+          for root in roots:
+            if not root.exists():continue
+            print('ROOT',root)
+            allhits=[]
+            for p in root.rglob('*'):
+              if not p.is_file() or p.suffix.lower() not in ('.md','.txt','.json','.yaml','.yml'):continue
+              if p.stat().st_size>2000000:continue
+              try:s=p.read_text(encoding='utf8')
+              except:continue
+              ls=s.splitlines()
+              has=sum(bool(tokens.search(l)) for l in ls)
+              if not has:continue
+              same=[(i+1,l) for i,l in enumerate(ls) if tokens.search(l) and target.search(l)]
+              name=str(p)
+              allhits.append((len(same),has,name,same))
+            print('MATCHING_FILES',len(allhits))
+            for n,m,p,hits in sorted(allhits,key=lambda x:(-x[0],x[2]))[:75]:
+              print('HIST_FILE',p,'idealo_count',m,'specific',n)
+              for i,l in hits[:14]:
+                print('EVIDENCE',p,i,l.strip()[:1000])
+          PY
