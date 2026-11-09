@@ -1,5 +1,12 @@
 # PFERDE-ATELIER – PLUGINREGISTER
 
+## AKTUELLER PSTE-TESTARTEFAKTSTAND – 09.11.2026 (NICHT LIVE-AUTORITÄT)
+
+PPA-005 / Portal SEO Themenengine **auf Betreiber-TEST-WordPress installiert: v0.57.144.31**. Physisch geprüfte persistente QA-Plugin-Büro-Datei: `/pferdeatelier/PLUGINS/QA/PSTE-0.57.144.31-KISS-KATEGORIE-SPEICHERUNG-NUR-TEST.zip`, 645069 Byte, SHA256 `0552539fc7eb4e6bfa32d3dea2b8c7e9949f69fc4c3259e2930fb12713e30d3c`. Echte WP-Bedienungsrückmeldung: gespeicherte Kolik-Kategorie unter Kategorie sichtbar. **v0.57.144.32: nur unfertiger lokaler Admin-UI-Entwicklungsstand, nicht installiert und nicht veröffentlicht.** QUELLEN-/STATUSNACHWEIS: [verbindliche neue Übergabe](QA_ONLY/PSTE_KISS_HANDOFF_20261109/PFERDEATELIER_PSTE_HANDOFF_20261109.md); Arbeitsstatus in [CURRENT_STATE.md](CURRENT_STATE.md). Dieser Eintrag ist **nur TEST/QA**, ersetzt ausdrücklich **nicht** die im älteren Register notierte isolierte PPA-005-CURRENT.zip als physische LIVE-Autorität; deren aktuellen Inhalt gab es hier nicht zum Readback.
+
+---
+
+
 STAND: 2026-09-16
 ROLLE: ZENTRALES INVENTAR-/ARTEFAKTREGISTER, KEINE FACH-/LIVE-WAHRHEIT
 
