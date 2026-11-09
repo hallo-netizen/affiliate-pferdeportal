@@ -1,0 +1,158 @@
+{
+  "source": "HOBBYDEPOT_YOAST_LIVE_AUDIT_20261109.json",
+  "category_counts": {
+    "all": 3520,
+    "empty": 3509,
+    "nonempty": 11,
+    "missing_from_sitemap": 3509,
+    "missing_but_nonempty": 0,
+    "missing_nonempty": [],
+    "errors": []
+  },
+  "wordpress_pages_posts_checked": 490,
+  "http_status_distribution": {
+    "200": 479,
+    "404": 11
+  },
+  "non_200_pages": [
+    {
+      "type": "pages",
+      "id": 903006,
+      "url": "https://www.hobby-depot.de/magazin/zeit-budget-platz/",
+      "status": 404,
+      "final": "https://www.hobby-depot.de/magazin/zeit-budget-platz/",
+      "robots_header": ""
+    },
+    {
+      "type": "pages",
+      "id": 903004,
+      "url": "https://www.hobby-depot.de/magazin/vergleiche-alternativen/",
+      "status": 404,
+      "final": "https://www.hobby-depot.de/magazin/vergleiche-alternativen/",
+      "robots_header": ""
+    },
+    {
+      "type": "pages",
+      "id": 903003,
+      "url": "https://www.hobby-depot.de/magazin/ungewoehnliche-skurrile-hobbys/",
+      "status": 404,
+      "final": "https://www.hobby-depot.de/magazin/ungewoehnliche-skurrile-hobbys/",
+      "robots_header": ""
+    },
+    {
+      "type": "pages",
+      "id": 903002,
+      "url": "https://www.hobby-depot.de/magazin/saison-drinnen-draussen/",
+      "status": 404,
+      "final": "https://www.hobby-depot.de/magazin/saison-drinnen-draussen/",
+      "robots_header": ""
+    },
+    {
+      "type": "pages",
+      "id": 903001,
+      "url": "https://www.hobby-depot.de/magazin/neue-hobbys-trends/",
+      "status": 404,
+      "final": "https://www.hobby-depot.de/magazin/neue-hobbys-trends/",
+      "robots_header": ""
+    },
+    {
+      "type": "pages",
+      "id": 903000,
+      "url": "https://www.hobby-depot.de/magazin/menschen-geschichten/",
+      "status": 404,
+      "final": "https://www.hobby-depot.de/magazin/menschen-geschichten/",
+      "robots_header": ""
+    },
+    {
+      "type": "pages",
+      "id": 902999,
+      "url": "https://www.hobby-depot.de/magazin/hobby-ideen-inspiration/",
+      "status": 404,
+      "final": "https://www.hobby-depot.de/magazin/hobby-ideen-inspiration/",
+      "robots_header": ""
+    },
+    {
+      "type": "pages",
+      "id": 902998,
+      "url": "https://www.hobby-depot.de/magazin/hobby-portraets/",
+      "status": 404,
+      "final": "https://www.hobby-depot.de/magazin/hobby-portraets/",
+      "robots_header": ""
+    },
+    {
+      "type": "pages",
+      "id": 902997,
+      "url": "https://www.hobby-depot.de/magazin/geschichte-herkunft/",
+      "status": 404,
+      "final": "https://www.hobby-depot.de/magazin/geschichte-herkunft/",
+      "robots_header": ""
+    },
+    {
+      "type": "pages",
+      "id": 902996,
+      "url": "https://www.hobby-depot.de/magazin/alter-lebensphasen/",
+      "status": 404,
+      "final": "https://www.hobby-depot.de/magazin/alter-lebensphasen/",
+      "robots_header": ""
+    },
+    {
+      "type": "pages",
+      "id": 900190,
+      "url": "https://www.hobby-depot.de/magazin/hobbyfinder/",
+      "status": 404,
+      "final": "https://www.hobby-depot.de/magazin/hobbyfinder/",
+      "robots_header": ""
+    }
+  ],
+  "redirects": [],
+  "hobbyfinder_alternate_routes": {
+    "/?page_id=900190": {
+      "type": "diagnostic",
+      "id": 0,
+      "url": "https://www.hobby-depot.de/?page_id=900190",
+      "status": 404,
+      "final": "https://www.hobby-depot.de/magazin/hobbyfinder/",
+      "robots_header": ""
+    },
+    "/?p=900190": {
+      "type": "diagnostic",
+      "id": 0,
+      "url": "https://www.hobby-depot.de/?p=900190",
+      "status": 404,
+      "final": "https://www.hobby-depot.de/magazin/hobbyfinder/",
+      "robots_header": ""
+    },
+    "/index.php?page_id=900190": {
+      "type": "diagnostic",
+      "id": 0,
+      "url": "https://www.hobby-depot.de/index.php?page_id=900190",
+      "status": 404,
+      "final": "https://www.hobby-depot.de/magazin/hobbyfinder/",
+      "robots_header": ""
+    },
+    "/magazin/hobbyfinder/": {
+      "type": "diagnostic",
+      "id": 0,
+      "url": "https://www.hobby-depot.de/magazin/hobbyfinder/",
+      "status": 404,
+      "final": "https://www.hobby-depot.de/magazin/hobbyfinder/",
+      "robots_header": ""
+    },
+    "/magazin/": {
+      "type": "diagnostic",
+      "id": 0,
+      "url": "https://www.hobby-depot.de/magazin/",
+      "status": 200,
+      "final": "https://www.hobby-depot.de/magazin/",
+      "robots_header": ""
+    },
+    "/magazin/wissen-glossar/": {
+      "type": "diagnostic",
+      "id": 0,
+      "url": "https://www.hobby-depot.de/magazin/wissen-glossar/",
+      "status": 200,
+      "final": "https://www.hobby-depot.de/magazin/wissen-glossar/",
+      "robots_header": ""
+    }
+  }
+}
