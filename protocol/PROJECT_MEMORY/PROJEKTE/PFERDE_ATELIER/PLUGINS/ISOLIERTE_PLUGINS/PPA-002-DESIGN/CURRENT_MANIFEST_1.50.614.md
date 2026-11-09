@@ -21,7 +21,9 @@ PHP-Syntax: PASS
 PHP-Quellverhaltensvergleich: notwendige HivePress-Modal-CSS/JS verbleiben, optionales Reviews-Pruning bleibt: PASS
 Chromium-Mobiltest 360/390/767px: Ausblenden geschlossen, Anmeldung/Registrieren/Passwort-Fenster aufklappbar: PASS
 Desktop-Breiten 768/1200px: mobile Fallback-Regel greift nicht: PASS
-Produktivinstallations- und Live-Sichttest: OFFEN
+Produktiv-Live-Abnahme: PASS laut ausdruecklicher Nutzerbestaetigung am 2026-11-09 ("ok pass"). Einzelne Testschritte wurden vom Nutzer nicht gesondert dokumentiert.
 
-## Benutzeraktion
-Bestehendes Plugin mit Version 1.50.614 durch die ZIP-Datei aus der Projekt-Dateibibliothek in WordPress aktualisieren; anschliessend mobile Ansicht und Anmeldebutton kurz live pruefen.
+## Abschluss / NEXT ACTION
+Stand 2026-11-09: Nutzer hat Version 1.50.614 als PASS abgenommen. Mobiler Footer-/Anmeldemaskenfehler gilt damit fuer diesen Stand als geschlossen.
+Keine weitere Reparatur im aktuellen Auftrag offen. Bei einem neuen Fehler erst 1.50.614 und die Originaldatei 1.50.613 aus der Projekt-Dateibibliothek vergleichen; den vorhandenen Code nicht durch eine historische Pluginversion ueberschreiben.
+Die ZIP-Dateien bleiben in der Bibliothek, GitHub enthaelt Manifest und Patch; keine Behauptung eines binaeren ZIP-Uploads nach GitHub.
