@@ -22,3 +22,6 @@ Nächster fachlicher Auftrag: Idee, Abgrenzung und vollständigen Robotik-Katego
 
 ## Wissensdatenbank / Roboterregister
 - [WISSENSDATENBANK/ROBOTERREGISTER/START_HERE.md](WISSENSDATENBANK/ROBOTERREGISTER/START_HERE.md) – gemeinsames Eigenschaftsschema für Roboterfinder und Kategorien; 68 einheitliche, noch nicht klassifizierte Datensätze im einzigen Fachmaster.
+
+## Magazin/Journal – drei Büros
+- [MAGAZIN/START_HERE.md](MAGAZIN/START_HERE.md) – Roboterregister, Roboterglossar, Roboterfinder, einheitlicher Faktenstand.

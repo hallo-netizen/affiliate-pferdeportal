@@ -1,0 +1,155 @@
+{
+  "schema": "ROBOTIK_FINDER_FILTER_IDEA_V1",
+  "status": "KONZEPT_NOT_LIVE",
+  "source_of_truth": "../../KATEGORIE/RECHERCHE/PRODUKTE_V2_20261108.json",
+  "date": "2026-11-09",
+  "task_groups": [
+    {
+      "task": "Transportieren",
+      "owner_candidates": [
+        "rb014",
+        "rb015",
+        "rb016",
+        "rb017",
+        "rb019",
+        "rb020",
+        "rb021",
+        "rb023",
+        "rb044"
+      ]
+    },
+    {
+      "task": "Reinigen",
+      "owner_candidates": [
+        "rb028",
+        "rb029",
+        "rb030",
+        "rb031",
+        "rb032",
+        "rb033",
+        "rb060",
+        "rb061",
+        "rb063",
+        "rb064"
+      ]
+    },
+    {
+      "task": "Produzieren",
+      "owner_candidates": [
+        "rb001",
+        "rb002",
+        "rb003",
+        "rb006",
+        "rb007",
+        "rb008",
+        "rb009",
+        "rb010",
+        "rb011",
+        "rb012",
+        "rb013"
+      ]
+    },
+    {
+      "task": "Verpacken und Palettieren",
+      "owner_candidates": [
+        "rb004",
+        "rb005",
+        "rb013",
+        "rb017"
+      ]
+    },
+    {
+      "task": "Bedienen",
+      "owner_candidates": [
+        "rb022",
+        "rb023",
+        "rb024",
+        "rb025",
+        "rb026",
+        "rb027"
+      ]
+    },
+    {
+      "task": "Landwirtschaft",
+      "owner_candidates": [
+        "rb034",
+        "rb035",
+        "rb036",
+        "rb037",
+        "rb038",
+        "rb039",
+        "rb040"
+      ]
+    },
+    {
+      "task": "Untersuchen und Prüfen",
+      "owner_candidates": [
+        "rb012",
+        "rb018",
+        "rb052",
+        "rb053",
+        "rb054",
+        "rb055",
+        "rb059"
+      ]
+    },
+    {
+      "task": "Bauen",
+      "owner_candidates": [
+        "rb047",
+        "rb048",
+        "rb049",
+        "rb050",
+        "rb051"
+      ]
+    },
+    {
+      "task": "Gesundheit und Rehabilitation",
+      "owner_candidates": [
+        "rb041",
+        "rb042",
+        "rb043",
+        "rb044",
+        "rb045",
+        "rb046"
+      ]
+    },
+    {
+      "task": "Sichern und Retten",
+      "owner_candidates": [
+        "rb056",
+        "rb057",
+        "rb058"
+      ]
+    },
+    {
+      "task": "Haushalt und Garten",
+      "owner_candidates": [
+        "rb060",
+        "rb061",
+        "rb062",
+        "rb063",
+        "rb064",
+        "rb065"
+      ]
+    },
+    {
+      "task": "Lernen und Forschen",
+      "owner_candidates": [
+        "rb066",
+        "rb067",
+        "rb068"
+      ]
+    }
+  ],
+  "rules": [
+    "Aufgabe vor Provision",
+    "Kein Treffer allein wegen passendem Aufgabenlabel; erst quellenbelegte Traits bestätigen",
+    "Mehrzweckmodell kann mehreren Aufgabenkandidaten zugeordnet sein, hat jedoch nur eine Modellidentität",
+    "Preis/Affiliate nur auf Nachfrage und bei belegtem passendem Angebot, Anzeige",
+    "Keine eigenen indexierbaren Finder-Filter-URLs"
+  ],
+  "wp_publish": false,
+  "affiliate_connected": false,
+  "trait_coverage_checked": 0
+}

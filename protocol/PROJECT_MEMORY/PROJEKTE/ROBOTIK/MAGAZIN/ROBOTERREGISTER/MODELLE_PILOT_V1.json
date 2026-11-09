@@ -1,0 +1,133 @@
+{
+  "schema": "ROBOTIK_MANUFACTURER_MODEL_PILOT_V1",
+  "count": 4,
+  "date": "2026-11-09",
+  "models": [
+    {
+      "model_id": "model-mir-mir250",
+      "manufacturer": "Mobile Industrial Robots",
+      "model": "MiR250",
+      "variant": "MiR250",
+      "related_rb_ids": [
+        "rb014",
+        "rb016"
+      ],
+      "primary_rb_id": "rb014",
+      "manufacturer_url": "https://mobile-industrial-robots.com/de/produkte/roboter/mir250",
+      "specs": [
+        {
+          "name": "traglast_kg",
+          "value": 250,
+          "context": "Herstellerangabe, Transportlast"
+        },
+        {
+          "name": "breite_mm",
+          "value": 580,
+          "context": "Grundfläche, eine Seite"
+        },
+        {
+          "name": "laenge_mm",
+          "value": 800,
+          "context": "Grundfläche, andere Seite"
+        }
+      ],
+      "source_type": "HERSTELLERANGABE_NICHT_UNABHAENGIG_GETESTET",
+      "last_checked": "2026-11-09",
+      "model_data_status": "QUELLENBELEGT_FUER_GENANNTE_FELDER_NO_WP_APPROVAL",
+      "wp_published": false
+    },
+    {
+      "model_id": "model-pudu-bellabotpro",
+      "manufacturer": "PUDU Robotics",
+      "model": "BellaBot Pro",
+      "variant": "BellaBot Pro",
+      "related_rb_ids": [
+        "rb022"
+      ],
+      "primary_rb_id": "rb022",
+      "manufacturer_url": "https://www.pudurobotics.com/de/products/bellabotpro",
+      "specs": [
+        {
+          "name": "max_transportlast_kg",
+          "value": 40,
+          "context": "Maximale Gesamtlast laut Hersteller"
+        },
+        {
+          "name": "max_last_je_tablett_kg",
+          "value": 10,
+          "context": "Pro Tablett laut Hersteller"
+        },
+        {
+          "name": "durchfahrt_breite_cm",
+          "value": 65,
+          "context": "Herstellerangabe"
+        }
+      ],
+      "source_type": "HERSTELLERANGABE_NICHT_UNABHAENGIG_GETESTET",
+      "last_checked": "2026-11-09",
+      "model_data_status": "QUELLENBELEGT_FUER_GENANNTE_FELDER_NO_WP_APPROVAL",
+      "wp_published": false
+    },
+    {
+      "model_id": "model-lely-a5-next",
+      "manufacturer": "Lely",
+      "model": "Astronaut A5 Next",
+      "variant": "A5 Next",
+      "related_rb_ids": [
+        "rb034"
+      ],
+      "primary_rb_id": "rb034",
+      "manufacturer_url": "https://www.lely.com/de/loesungen/melken/astronaut/",
+      "specs": [
+        {
+          "name": "hybridarm",
+          "value": true,
+          "context": "Hersteller nennt Kombination elektrische Bewegung und Pneumatik"
+        },
+        {
+          "name": "geradliniger_zugang",
+          "value": true,
+          "context": "I-Flow-Konzept laut Hersteller"
+        },
+        {
+          "name": "zitzenerkennung",
+          "value": true,
+          "context": "Herstellerbeschreibung"
+        }
+      ],
+      "source_type": "HERSTELLERANGABE_NICHT_UNABHAENGIG_GETESTET",
+      "last_checked": "2026-11-09",
+      "model_data_status": "QUELLENBELEGT_FUER_GENANNTE_FELDER_NO_WP_APPROVAL",
+      "wp_published": false
+    },
+    {
+      "model_id": "model-ur-ur20-1750",
+      "manufacturer": "Universal Robots",
+      "model": "UR20-1750",
+      "variant": "UR20-1750 (früher UR20)",
+      "related_rb_ids": [
+        "rb001",
+        "rb004",
+        "rb006"
+      ],
+      "primary_rb_id": null,
+      "manufacturer_url": "https://www.universal-robots.com/de/produkte/",
+      "specs": [
+        {
+          "name": "nutzlast_kg",
+          "value": 20,
+          "context": "Reguläre Nutzlast; Hersteller nennt erweiterte Nutzlast 25 kg unter passenden Bedingungen"
+        },
+        {
+          "name": "reichweite_mm",
+          "value": 1750,
+          "context": "Herstellerangabe"
+        }
+      ],
+      "source_type": "HERSTELLERANGABE_NICHT_UNABHAENGIG_GETESTET",
+      "last_checked": "2026-11-09",
+      "model_data_status": "QUELLENBELEGT_FUER_GENANNTE_FELDER_NO_WP_APPROVAL",
+      "wp_published": false
+    }
+  ]
+}
