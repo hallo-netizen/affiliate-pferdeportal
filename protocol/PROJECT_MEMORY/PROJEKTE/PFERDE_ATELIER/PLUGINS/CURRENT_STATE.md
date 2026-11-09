@@ -2,6 +2,14 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## NEUSTER BETREIBER-READBACK 09.11.2026 13:53 BERLIN – PSTE .28 61er STAPEL WEITER UNVERÄNDERT
+
+Reales neues WordPress-TEST-JSON `pste-stapelbericht-2026-11-09(1).json`, generiert 09.11.2026 12:53:08 UTC, installierte PSTE **0.57.144.28**. Echter Vergleich mit dem vorherigen `.26`-Bericht: exakt **dieselben 61 pool_keys in derselben Reihenfolge**; `status=COMPLETE, total=61, processed=61, held=61, pending_count=0` **unverändert**; 60x `PSTE_RETAINED_EDITORIAL_PLAN_SNAPSHOT_CHANGED`, 1x `PSTE_TITLE_DESK_REENTRY_MANUAL_REVIEW_UNCHANGED` **unverändert**; identische fünf Begründungszähler und identische 52 Kategorie-Büro-Routen. **Einzige Änderung je Eintrag: `keyword` ist jetzt korrekt ausgefüllt**, statt 61x leeren Strings. Keine neue Planübergabe oder erfolgreiche Reparatur nachgewiesen.
+
+**WICHTIGE NICHT-BEWEISGRENZE:** Dieser Stapelbericht verrät **nicht**, ob der Betreiber den separaten Rebind-Knopf aus .28 tatsächlich betätigt hat oder ob ein Vorbedingungsfehler entstand. Ohne Rebind-Ergebnis-/WP-Laufzeitbeleg ist die Aussage „.28-Reparatur gescheitert“ genauso unbewiesen wie „.28-Reparatur erfolgreich“. Weder automatisch neu versuchen noch K0, die alten Planoptionen oder die Schutzprüfungen ändern. Vollständiger Workflow weiterhin `FULL_WORKFLOW_PASSED=false`. Kein neues Plugin herausgeben allein aufgrund des noch unveränderten Berichts.
+
+---
+
 ## NEUSTER ISTSTAND – 09.11.2026 / PSTE 0.57.144.28: ECHTER WP-PLANKONTEXT, GESCHÜTZTE 61er NEUANBINDUNG (QA ONLY)
 
 **Letzter echter Betreiberbeleg:** Original WordPress-TEST-JSON `pste-plan-kategorien-pruefstand-2026-11-09.json`, 11.925.212 Bytes, 09.11.2026 12:22:45 UTC, PSTE .27. 163 echte WP-Posts, 1.176 Kategorien mit 1.165 gültigen Produktionsblättern, 267 Kategorienfamilien, 11 Artikeltypen; echte Inventar-/Taxonomiehashes unverändert zur gespeicherten Baseline 26.10.2026. Der Original-Editorplanreader findet in der WP-Option **9 alte identitätslose `Array`-Platzhalter**, sonst keinerlei echte belegte Planartikel, und meldet aktuellen Plan zu Recht als `NOT_AVAILABLE`. Alte Baseline/gebundener Kontext besitzen noch einen Hash dieser Altoption: **Plan-einziger Drift**, nicht fehlende WP-Artikeltypen. 1 weitere unklare WP-Kategorie bleibt geschützt ausgeschlossen, 144/144 PPM-Planplätze bleiben reserviert.
