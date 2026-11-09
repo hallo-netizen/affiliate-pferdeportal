@@ -75,6 +75,22 @@
 
 ---
 
+## NEUSTER ECHTSTAND – 09.11.2026 / PSTE 0.57.144.25 / EINMALIGE SEO-OWNER-ENTSCHEIDUNG
+
+**Belegt aus tatsächlichem Betreiber-Export 09.11.2026 07:48:16 UTC:** Installierte WordPress-TESTseite hat mit **PSTE 0.57.144.25** den originalen vollständigen 1.179er Parkhausbestand nachgeliefert: `parkhaus_complete=true`, `sha256=b9755a7aacb86657bfa2b64804e47eb1e4994eccb5d12a3eabd971fc3b8f9ff9`. **Die SHA wurde aus allen unveränderten exportierten Quellfeldern unabhängig in Python UND PHP bytegetreu neu berechnet.** 100 Rohfragen = 87 JA, 9 VIELLEICHT, 4 NEIN; 87 eindeutige SEO-Quell-IDs; 97 Titelideen inklusive 10 zweite Ideen.
+
+**Die Ursachenklasse der früheren 12 Sperren ist im echten neuen WP-Lauf belegt:** 9 alte leere `Array`-Importplatzhalter kommen tatsächlich aus `EDITORIAL_PLAN.source_origin=OPTION` mit 9 gespeicherten Zeilen und 0 Filterzeilen. Es gibt keinen Filterkonflikt. 3 historische fehlende WP-Post-IDs 972356/972414/972560 bleiben in `PPM679` unverändert technisch reservierte Plätze; alle **144/144 Slots** weiterhin geschützt, 141 mit lesbaren Artikeltiteln. 1 echte WP-Canonical-ID-Kollision (Post 16029 vs. 972638) ist sichtbar, wird anhand des eindeutigen PPM-Plan-Slots korrekt abgegrenzt, Original-Metadaten **noch nicht verändert**. **Neu erfasster Export ist technisch vollständig; kein neues Plugin notwendig.**
+
+**Die von Betreiber gewünschten EINMALIGEN externen SEO-Entscheidungen sind jetzt tatsächlich für ALLE 87 JA-Quellen im testseitenunveränderten Originalbestand getroffen und als echte importfähige `PSTE_MINI_SEO_DECISIONS_V1`-JSON gespeichert:** **61 FREI, 20 BELEGT mit exakten vorhandenen WP/PSTE-Referenzen, 6 KLÄRUNG**. Die 6 sind: `regendecken`, `pferd`, `strahlfäule pferd`, `pferd decken`, `regendecke pferd ungefüttert`, `pferde regendecken günstig`. Die zehn übrigen zweiten Titelideen bleiben vollständig in der separaten Prüfdokumentation (bestehender WP-Importer verarbeitet nur ersten Titel je Rohfrage). Entscheidungen basieren nachweislich auf vorhandenen Titeln, Überschriften und Plan-/Slotbelegungen, **nicht** vollständigen Artikeltexten; deshalb sichere KLÄRUNG für Grenzfälle.
+
+**Originale, Ergebnisse, lokaler 159-PASS-Test privat im Pferdeatelier-Büro**: `/pferdeatelier/SEO-PRUEFUNG/pferdeatelier-mini-ergebnisse-20261109-074817.json` SHA256 `a02cb27a74bbba1365b88c7d8de1252cf916c1120132a88264336bd6d188c5d6`; `/pferdeatelier/SEO-PRUEFUNG/pferdeatelier-seo-einmalentscheidung-20261109.json` SHA256 `e50ae4eb934eddf7ec2d47feeaba5b6f30d0803756c1301d5ad545fec8dfb34c`; `/pferdeatelier/SEO-PRUEFUNG/pferdeatelier-seo-einmalentscheidung-pruefbericht-20261109.json` SHA256 `13578d7ae8c206e5efd01b61bd76fa141b46d2877e3bcb18078c69c82d87bc87`. **Die echten privaten JSON-Binärdaten NICHT im GitHub-Git-Baum.**
+
+**Der genuine PHP-Code** `PSTE_Mini_Workflow::acceptSingleOwnerSeoDecisions` von PSTE .25 nahm den realen 87-Zeilen-Import gegen echte 1.179 Zeilen an: **159/159 lokale PASS**, einschließlich Kollisionen, falsch gefälschter Belege/Owner, doppelter Quellen, belegter Slots, Snapshot-Frische. **Keine WP-Optionsspeicherung durchgeführt, kein Artikelplan-Forward, keine echte K0-Artikelproduktion.** [Ausführlicher QA-/Semantiknachweis](EVIDENCE/PSTE_20261109_074816_EINMALIGE_SEO_ENTSCHEIDUNG_87.md).
+
+**KONKRETER nächster Bedienungsschritt ausschließlich auf isolierter WordPress-TESTseite:** Die **bereits fertige** `pferdeatelier-seo-einmalentscheidung-20261109.json` unter `SEO Themenengine → Themenprüfung → Externe SEO-Prüfung → 2. Extern geprüfte SEO-Ergebnisdatei → Ergebnis importieren` einmalig einlesen. **Nicht vorher erneut exportieren** (Fingerprint muss passen), keine alte 5.016er Keyword-/PSERC-Gesamtdiagnose. **Erwartete Anzeigen 61 FREI / 20 BELEGT / 6 KLÄRUNG**. Erst **nach** echtem WordPress-Import-Readback weiter an bestehende Titelplanung, K0 unverändert. Bis dahin kein Merge, keine Livewirkung, Draft PR #682 bleibt QA. Ein falsch gespeicherter WP-Canonical-Metawert bleibt gesondert belegte spätere Korrektur, keine heimliche Metadatenänderung.
+
+---
+
 
 <!-- PFERDEATELIER_PLUGIN_WORKBENCH_LOCK_BEGIN -->
 ```json
