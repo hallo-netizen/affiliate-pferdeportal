@@ -34,6 +34,14 @@
 - Für die 66-Dateien-ZIPs: **308 → 312** genau 5 Dateien verändert (`class-ppar-admin-kiss.php`, `trait-ppar-ebay-run.php`, `trait-ppar-ebay.php`, Hauptplugin, `readme.txt`); **312 → 313** genau 2 (`trait-ppar-automation-suite.php`, Hauptplugin); **313 → 314** genau 3 (`trait-ppar-automation-suite.php`, Hauptplugin, `readme.txt`). **Unverändert:** Alle anderen Dateiinhalte der jeweiligen Vergleiche.
 - Nur Dokumentation angelegt; **kein Plugin geändert / kein Live-Deployment / keine Freigabe**.
 
+### 2026-11-09, 14:01–14:10 Uhr – tatsächlichen eBay-Pflichtkatalog geprüft (KEINE Pluginänderung)
+- Die 314-ZIP physisch gelesen (SHA-256 `2a4dc2954bf76b560583667d81c91c827fb6835754bcd58439bce1fda5f95f18`), ihr Katalog enthält 329 BUSINESS-Konzepte, davon 324 vertraglich vorgesehene, **26 Nicht-Waren explizit ausgeschlossen**; tatsächliche Pflichtliste = **298**.
+- **Versicherungen sind nachweislich nicht unter den 298**: Pferde-OP-Versicherung, Pferdekrankenversicherung und Pferdehaftpflicht gehören zu den ausgeschlossenen 26.
+- **28 von 298 Sammelbegriffen/Bau-/Planungsthemen** mit konkretem fachlichem Prüfbedarf markiert, nicht pauschal gelöscht. Der Nenner 298 ist mathematisch korrekt, **als eBay-Warenpflicht noch nicht fachlich legitimiert**.
+- Nutzerscreenshot 14:01 Uhr: Lauf weiterhin aktiv, 366 Arbeitspakete, 271 materialisiert, **110/298** Zwischenabdeckung; vollständige öffentliche Ausgabe nicht bestätigt.
+- Separater Quell-Audit: `release/affiliate-zentrale/evidence/EBAY_672314_SOLLKATALOG_298_FACHPRUEFUNG_20261109.md`; vollständige 324er-Soll-/Ausschluss-/Prüfliste als CSV/Markdown lokal aus der eingebetteten JSON-Datei erzeugt.
+- Es gab **kein Pluginupdate**, keinen zweiten Live-Lauf, keine Änderung bei Hobbydepot oder Hab & Bewahr. Das Register dokumentiert hier einen **festgestellten Qualitätsmangel des Sollkatalogs**, keinen weiteren Mini-Fix.
+
 ## E. Überwachungsquellen für weitere Einträge
 
 - **Pferdeatelier (Quell-/QA-Änderungen):** `affiliate-release-current` und `release/affiliate-zentrale/evidence/`, GitHub-HEAD zum Zeitpunkt dieser Anlage: `5f6da83d30ff38ee299355a35f8e93b08c12f7f0`.
