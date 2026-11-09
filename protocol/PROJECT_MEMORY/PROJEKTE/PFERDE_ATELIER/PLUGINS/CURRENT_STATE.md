@@ -2,6 +2,14 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 09.11.2026 – DIREKTER SQL-INTEGRATIONSTEST, QA-NACHWEIS KEIN LIVE-FREIGABEPASS
+
+Zusätzlich zur bisherigen 5-Datei-PSTE-KISS-QA wurde ein **neuer direkter PHP+SQLite-SQL-Persistenzlauf** mit dem unveränderten isolierten PSTE-QA-Stand und echtem 11,9-MB-WordPress-Export ausgeführt: **51/51 neue positive/negative SQL-Prüfungen PASS** (12 echte Rebind- und 61er-Queue-Schreibprüfungen, 16 separate Prozess-Neustart-/Outcome-/Doppelungsprüfungen, 8 echte Read-only-Index-Guards, 12 echte PSERC-PHP-Grenzprüfungen mit **synthetischen** PPM-/Compiler-Planbelegen, 3 konkurrierende Worker-Sperrprüfungen). Vollständige vorherige PHP-QA erneut grün. ZIP **unabhängig frisch entpackt und wiederholt**; 355 ZIP-Einzeldateien per SHA256 und ZIP-Integrität geprüft. Private Library: `/pferdeatelier/PLUGINS/QA/PFERDEATELIER_SQL_INTEGRATION_QA_NACHWEIS_20261109.zip` (SHA256 `34fc3b6a611d17bd9a33c86ab25d0e36321608ab3a5cc184cb63c647de7dc8a0`), Begleitbericht `SQL_INTEGRATION_QA_PRUEFBERICHT_20261109.md`.
+
+**VERBINDLICH:** `FULL_WORKFLOW_PASSED=false`. SQLite-WP-Optionsemulation ist **kein echtes WordPress/MySQL**; tatsächliche PPM-Produktionsdaten fehlen; aktive K0-Quelle und reale Text-/Entwurfsproduktion nicht ausgeführt, K0-Quarantäne nie als aktive Quelle verwenden. Echtes automatisches fachliches Reentry der 61 und endgültige PSERC→PPM→K0-Erfolgskette sind **nicht bewiesen**. **Keine neue installierbare Plugin-ZIP, keine Live-/TEST-WP-/K0-/PPM-/PSERC-Schreibung, PR #682 DRAFT NICHT MERGEN**. Nächster HARDSCHRITT nur mit aktiver isolierter WP/MySQL-Testkopie + echten versionsgebundenen PPM/K0-Laufwegen, positive und negative Ende-zu-Ende-Protokolle vor Freigabe. Kein neuer Fix-Überbau.
+
+---
+
 ## LETZTER ZENTRALISIERUNGS-URSACHENSTAND – QA-ONLY, 09.11.2026
 
 **Abnahmeentscheidung:** Eine zentrale fachliche Planhoheit ist sinnvoll, **aber nicht eine einzige physische Tabelle für WordPress-Beiträge, PSERC-Compilerbeleg, PPM-Laufzeitreservierungen, einmalige MINI-SEO-Entscheidungen und technische Workerfortschritte**. Diese Daten sind unabhängige Eigentümer verschiedener Stadien. Der echte WP-Export belegt neun identitätslose plan-importierte Altzeilen, aktuelle semantische Planquelle `NOT_AVAILABLE`, 60 alte technische Hash-Abbrüche + 1 manuelle Sperre. Der echte .28-Bericht beweist KEINE erfolgreiche Reparatur oder neue fachliche Übergabe. Die eine zentrale Lesesicht muss ohne weitere eigene Planentscheidung arbeiten.
