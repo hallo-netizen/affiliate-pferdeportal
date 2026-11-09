@@ -1,0 +1,41 @@
+name: Hobby Depot mobile exceptional category audit
+on:
+  push:
+    branches: [audit/hobby-mobile-expanded-font-20261109]
+    paths: [.github/workflows/hobby-special-mobile-font.yml]
+permissions:
+  contents: read
+jobs:
+  special:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install chromium
+      - run: |
+          python3 - <<'PY'
+          import urllib.request,xml.etree.ElementTree as ET,re
+          from playwright.sync_api import sync_playwright
+          xml=urllib.request.urlopen('https://www.hobby-depot.de/page-sitemap.xml').read()
+          urls=[n.text for n in ET.fromstring(xml).iter() if n.tag.endswith('loc') and n.text]
+          special=[u for u in urls if any(x in u.lower() for x in ['schuh','ketten','metal'])]
+          print('SPECIAL_URLS',special)
+          with sync_playwright() as p:
+            b=p.chromium.launch(headless=True)
+            page=b.new_page(viewport={'width':390,'height':844},is_mobile=True,has_touch=True)
+            for u in special[:16]:
+              try:
+                r=page.goto(u,wait_until='domcontentloaded',timeout=24000)
+                result=page.evaluate('''() => {
+                  const lead=document.querySelector('.hd-catlevel-lead');
+                  const details=document.querySelector('details.hd-catlevel-more');
+                  const more=details?.querySelector('div>p');
+                  const fmt=e=>{if(!e)return null;let s=getComputedStyle(e);return {text:e.textContent.trim().slice(0,80),font:s.fontSize,cls:e.className}};
+                  if(details)details.open=true;
+                  return {lead:fmt(lead),more:fmt(more),parent:lead?.parentElement?.className,outer:details?.outerHTML.slice(0,220)};
+                }''')
+                print('SPECIAL_FONT',u,r.status if r else '?',result)
+              except Exception as e:print('SPECIAL_ERR',u,str(e)[:160])
+            b.close()
+          PY
