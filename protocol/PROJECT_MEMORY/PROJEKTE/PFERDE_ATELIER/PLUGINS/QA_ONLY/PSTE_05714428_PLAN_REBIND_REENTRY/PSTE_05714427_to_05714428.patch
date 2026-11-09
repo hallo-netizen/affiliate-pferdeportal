@@ -1,0 +1,247 @@
+--- a/Portal SEO Topic Engine/includes/class-pste-context-index-store.php
++++ b/Portal SEO Topic Engine/includes/class-pste-context-index-store.php
+@@ -185,7 +185,17 @@
+     }
+     private static function assertBaseline(array $baseline,string $jobUuid): void {if(($baseline['contract']??'')!=='PSTE_SITE_BASELINE_V1')throw new RuntimeException('PSTE_CONTEXT_INDEX_BASELINE_REQUIRED');if(trim($jobUuid)==='')throw new RuntimeException('PSTE_CONTEXT_INDEX_JOB_UUID_REQUIRED');}
+     private static function assertBoundSnapshot(array $snapshot,string $contract,string $expectedSha,string $prefix): void {
+-        if(($snapshot['contract']??'')!==$contract)throw new RuntimeException($prefix.'_CONTRACT_INVALID');$declared=(string)($snapshot['sha256']??'');if(!preg_match('/^[a-f0-9]{64}$/',$declared))throw new RuntimeException($prefix.'_HASH_MISSING');$copy=$snapshot;unset($copy['sha256']);if(!hash_equals($declared,self::stableHash($copy)))throw new RuntimeException($prefix.'_PAYLOAD_HASH_MISMATCH');if($expectedSha!==''&&!hash_equals($expectedSha,$declared))throw new RuntimeException($prefix.'_BASELINE_HASH_MISMATCH');
++        if(($snapshot['contract']??'')!==$contract)throw new RuntimeException($prefix.'_CONTRACT_INVALID');$declared=(string)($snapshot['sha256']??'');        // A truly absent editorial plan has no SHA-256 by contract. It is not a damaged
++        // hash and not an occupied article slot. Accept ONLY the exact empty typed sentinel;
++        // real / ambiguous plans continue through the original cryptographic hash gate.
++        if($contract==='PSTE_EDITORIAL_PLAN_SNAPSHOT_V1' && $expectedSha==='NOT_AVAILABLE'){
++            if($declared==='NOT_AVAILABLE' && ($snapshot['status']??'')==='NOT_AVAILABLE'
++                && array_key_exists('items',$snapshot) && is_array($snapshot['items'])
++                && $snapshot['items']===[] && count($snapshot)===4)
++                return;
++            throw new RuntimeException($prefix.'_EMPTY_PLAN_SENTINEL_INVALID');
++        }
++        if(!preg_match('/^[a-f0-9]{64}$/',$declared))throw new RuntimeException($prefix.'_HASH_MISSING');$copy=$snapshot;unset($copy['sha256']);if(!hash_equals($declared,self::stableHash($copy)))throw new RuntimeException($prefix.'_PAYLOAD_HASH_MISMATCH');if($expectedSha!==''&&!hash_equals($expectedSha,$declared))throw new RuntimeException($prefix.'_BASELINE_HASH_MISMATCH');
+     }
+     private static function writeStage(string $key,array $value,int $maxBytes,string $jobUuid,string $baselineSha,string $kind): array {
+         $raw=self::json($value);$bytes=strlen($raw);if($bytes>$maxBytes)throw new RuntimeException('PSTE_CONTEXT_STAGE_'.$kind.'_SIZE_LIMIT_EXCEEDED');$hash=hash('sha256',$raw);update_option($key,$raw,false);$read=get_option($key,null);if(!is_string($read)||strlen($read)!==$bytes||!hash_equals($hash,hash('sha256',$read)))throw new RuntimeException('PSTE_CONTEXT_STAGE_'.$kind.'_READBACK_MISMATCH');return ['contract'=>'PSTE_CONTEXT_STAGE_META_V1','kind'=>$kind,'job_uuid'=>$jobUuid,'baseline_sha256'=>$baselineSha,'raw_sha256'=>$hash,'bytes'=>$bytes];
+--- a/Portal SEO Topic Engine/includes/class-pste-mini-workflow.php
++++ b/Portal SEO Topic Engine/includes/class-pste-mini-workflow.php
+@@ -19,6 +19,7 @@
+         add_action('admin_post_pste_mini_forward_to_plan', [self::class, 'forwardToPlan']);
+         add_action('admin_post_pste_mini_batch_report', [self::class, 'exportBatchReport']);
+         add_action('admin_post_pste_mini_context_evidence', [self::class, 'exportContextEvidence']);
++        add_action('admin_post_pste_mini_legacy_plan_rebind', [self::class, 'legacyEmptyPlanRebind']);
+     }
+ 
+     /** The unchanged existing PSTE governance is the sole source for both title desks. */
+@@ -115,12 +116,21 @@
+             if(is_array($previousReport))foreach((array)($previousReport['blocked']??[]) as $blockedRow){
+                 if((string)($blockedRow['error_code']??'')==='PSTE_RETAINED_EDITORIAL_PLAN_SNAPSHOT_CHANGED'){$priorStale=true;break;}
+             }
++            if(!$priorStale&&is_array($queue))foreach((array)($queue['outcomes']??[]) as $oldOutcome){
++                if((string)($oldOutcome['error_code']??'')==='PSTE_RETAINED_EDITORIAL_PLAN_SNAPSHOT_CHANGED'){
++                    $priorStale=true;break;
++                }
++            }
+             if((is_array($queue)&&($queue['status']??'')==='PAUSED_CONTEXT_STALE')||$priorStale){
+                 echo '<p><strong>Planprüfung technisch angehalten bzw. im alten Lauf falsch als abgeschlossen gezählt.</strong> Keine weitere Übergabe starten.</p>';
+                 echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:8px">';
+                 wp_nonce_field('pste_mini_context_evidence');
+                 echo '<input type="hidden" name="action" value="pste_mini_context_evidence">'
+                     .'<button class="button button-primary" type="submit">Einmaligen Plan- und Kategorien-Prüfstand herunterladen</button></form>';
++                echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:10px">';
++                wp_nonce_field('pste_mini_legacy_plan_rebind');
++                echo '<input type="hidden" name="action" value="pste_mini_legacy_plan_rebind">'.
++                    '<button class="button" type="submit">Nur nach geprüftem Bericht: alte Planbindung erneuern und MINI-Themen sicher erneut prüfen</button></form>';
+             }
+         }elseif($active){
+             echo '<p><strong>Stichwortstapel noch offen.</strong> Zuerst die extern geprüften Relevanz-/Titelideen übernehmen.</p>';
+@@ -1350,6 +1360,175 @@
+         return $data;
+     }
+ 
++
++    /**
++     * Pure preflight: a former plan containing ONLY identity-less legacy debris must
++     * not remain the owner of a stale baseline forever. Never infer semantic emptiness
++     * from a generic missing hash; require the raw source audit and the COMPLETE queue.
++     * No writes, no source rename, no SEO owner rerun.
++     */
++    public static function legacyEmptyPlanRebindPreflight(
++        array $baseline,array $inventory,array $structure,array $plan,array $origin,
++        array $job,array $manifest,array $queue,array $state,array $parkhaus
++    ): array {
++        if(($baseline['contract']??'')!=='PSTE_SITE_BASELINE_V1'
++            ||($baseline['taxonomy_contract']??'')!=='PSTE_PORTAL_TAXONOMY_SNAPSHOT_V3'
++            ||($baseline['status']??'')!=='CURRENT')
++            throw new RuntimeException('PSTE_MINI_REBIND_BASELINE_INVALID');
++        if(($plan['contract']??'')!=='PSTE_EDITORIAL_PLAN_SNAPSHOT_V1'
++            ||($plan['status']??'')!=='NOT_AVAILABLE'
++            ||($plan['sha256']??'')!=='NOT_AVAILABLE'
++            ||(array)($plan['items']??[])!==[])
++            throw new RuntimeException('PSTE_MINI_REBIND_LIVE_PLAN_NOT_EMPTY');
++        if(($origin['contract']??'')!=='PSTE_EDITORIAL_PLAN_SNAPSHOT_V1'
++            ||($origin['source_origin']??'')!=='OPTION'||!empty($origin['source_conflict'])
++            ||(int)($origin['unresolved_count']??-1)!==0)
++            throw new RuntimeException('PSTE_MINI_REBIND_PLAN_SOURCE_UNPROVEN');
++        $rows=(array)($origin['items']??[]);
++        if(!$rows||(int)($origin['legacy_empty_count']??0)!==count($rows))
++            throw new RuntimeException('PSTE_MINI_REBIND_PLAN_NOT_LEGACY_ONLY');
++        foreach($rows as $row)if(!is_array($row)
++            ||($row['status']??'')!=='LEGACY_EMPTY_PLACEHOLDER'
++            ||($row['semantic_occupancy']??'')!=='NONE'
++            ||trim((string)($row['title']??''))!=='')
++            throw new RuntimeException('PSTE_MINI_REBIND_PLAN_HAS_SEMANTIC_SOURCE');
++        if(($inventory['contract']??'')!=='PSTE_INVENTORY_SNAPSHOT_V2'
++            ||!hash_equals((string)($baseline['inventory_sha256']??''),(string)($inventory['sha256']??'')))
++            throw new RuntimeException('PSTE_MINI_REBIND_INVENTORY_CHANGED');
++        if(($structure['contract']??'')!=='PSTE_PORTAL_TAXONOMY_SNAPSHOT_V3'
++            ||empty($structure['validation']['ok'])
++            ||!hash_equals((string)($baseline['structure_sha256']??''),(string)($structure['sha256']??''))
++            ||(int)($baseline['leaf_category_count']??-1)!==count((array)($structure['items']??[])))
++            throw new RuntimeException('PSTE_MINI_REBIND_PRODUCTION_STRUCTURE_CHANGED');
++        if(($job['status']??'')!=='COMPLETE'||($job['contract']??'')!==
++            'PSTE_CONTEXT_REFRESH_JOB_V9_EQUIVALENT_STRUCTURE_RESUME')
++            throw new RuntimeException('PSTE_MINI_REBIND_CONTEXT_NOT_COMPLETE');
++        if(($manifest['contract']??'')!==PSTE_Context_Index_Store::CONTRACT
++            ||!hash_equals((string)($manifest['job_uuid']??''),(string)($job['job_uuid']??''))
++            ||!hash_equals((string)($manifest['structure_sha256']??''),(string)($baseline['structure_sha256']??''))
++            ||!hash_equals((string)($manifest['inventory_sha256']??''),(string)($baseline['inventory_sha256']??''))
++            ||!hash_equals((string)($manifest['editorial_plan_sha256']??''),(string)($baseline['editorial_plan_sha256']??''))
++            ||!hash_equals((string)($manifest['baseline_sha256']??''),(string)($baseline['baseline_sha256']??'')))
++            throw new RuntimeException('PSTE_MINI_REBIND_CONTEXT_MANIFEST_MISMATCH');
++        if((string)($baseline['editorial_plan_sha256']??'')==='' 
++            ||(string)$baseline['editorial_plan_sha256']==='NOT_AVAILABLE')
++            throw new RuntimeException('PSTE_MINI_REBIND_ALREADY_REBOUND_OR_MISSING');
++        if(!preg_match('/^[a-f0-9]{64}$/D',(string)$baseline['editorial_plan_sha256']))
++            throw new RuntimeException('PSTE_MINI_REBIND_PRIOR_PLAN_HASH_INVALID');
++        if(($queue['status']??'')!=='COMPLETE'
++            ||!is_array($queue['done']??null)||!is_array($queue['outcomes']??null)
++            ||(array)($queue['pending']??[])!==[])
++            throw new RuntimeException('PSTE_MINI_REBIND_OLD_QUEUE_NOT_PROVEN');
++        if(!is_array($state['completed']??null)||!is_array($state['seo_decisions']??null)
++            ||!is_array($state['plan_forwarded']??null)||!is_array($state['plan_queued']??null))
++            throw new RuntimeException('PSTE_MINI_REBIND_MINI_STATE_INVALID');
++        // A prior SEO opinion may be replayed only against its identical original
++        // six-source parkhouse. MINI reservations are excluded by the existing reader.
++        $parkhausSha=(string)($parkhaus['sha256']??'');
++        if(empty($parkhaus['complete'])||($parkhaus['contract']??'')!=='PSTE_MINI_PARKHAUS_SNAPSHOT_V1'
++            ||!preg_match('/^[a-f0-9]{64}$/D',$parkhausSha))
++            throw new RuntimeException('PSTE_MINI_REBIND_ORIGINAL_PARKHAUS_NOT_AVAILABLE');
++        $eligible=[];$slots=[];
++        foreach($state['completed'] as $key=>$topic){
++            if(!is_array($topic)||($topic['decision']??'')!=='JA')continue;
++            $raw=(string)($topic['raw_query']??'');
++            $seo=(array)($state['seo_decisions'][$key]??[]);
++            if(($seo['box']??'')!=='FREI')continue;
++            $title=(string)($topic['titles'][0]['title']??'');
++            $slot=(string)($seo['intent_slot']??'');
++            $hash=hash('sha256',$raw.'|'.$title);
++            if(!hash_equals($parkhausSha,(string)($seo['snapshot_sha256']??'')))
++                throw new RuntimeException('PSTE_MINI_REBIND_SEO_SNAPSHOT_CHANGED');
++            if(($seo['contract']??'')!=='PSTE_MINI_SEO_DECISIONS_V1'
++                ||!hash_equals((string)($seo['raw_query']??''),$raw)
++                ||!hash_equals((string)($seo['source_sha256']??''),hash('sha256',$key.'|'.$raw))
++                ||!hash_equals((string)($seo['approved_title']??''),$title)
++                ||!preg_match('/^[a-f0-9]{64}$/D',$slot)||isset($slots[$slot])
++                ||!hash_equals($hash,(string)($state['plan_forwarded'][$key]??''))
++                ||!str_starts_with((string)($state['plan_queued'][$key]??''),$hash.'|'))
++                throw new RuntimeException('PSTE_MINI_REBIND_ORIGINAL_SEO_OR_TITLE_CHANGED');
++            $slots[$slot]=true;$eligible[]=(string)$key;
++        }
++        if(!$eligible||count($eligible)>100)
++            throw new RuntimeException('PSTE_MINI_REBIND_ELIGIBLE_COUNT_INVALID');
++        $done=array_values(array_map('strval',(array)$queue['done']));
++        $outcomes=array_keys((array)$queue['outcomes']);
++        sort($eligible,SORT_STRING);sort($done,SORT_STRING);sort($outcomes,SORT_STRING);
++        if($eligible!==$done||$eligible!==$outcomes||count($done)!==(int)($queue['total']??-1))
++            throw new RuntimeException('PSTE_MINI_REBIND_REENTRY_KEYS_CHANGED');
++        $technical=0;$manual=0;
++        foreach($eligible as $key){
++            $code=(string)($queue['outcomes'][$key]['error_code']??'');
++            if($code==='PSTE_RETAINED_EDITORIAL_PLAN_SNAPSHOT_CHANGED')$technical++;
++            elseif($code==='PSTE_TITLE_DESK_REENTRY_MANUAL_REVIEW_UNCHANGED')$manual++;
++            else throw new RuntimeException('PSTE_MINI_REBIND_PRIOR_OUTCOME_NOT_TECHNICAL');
++        }
++        if($technical<1)
++            throw new RuntimeException('PSTE_MINI_REBIND_NO_STALE_PLAN_OUTCOME');
++        return ['contract'=>'PSTE_MINI_LEGACY_EMPTY_PLAN_REBIND_PREFLIGHT_V1',
++            'status'=>'PASS','eligible_keys'=>$eligible,'technical_stale'=>$technical,
++            'preexisting_manual_review'=>$manual,'old_baseline_plan_sha256'=>(string)$baseline['editorial_plan_sha256'],
++            'new_plan_sha256'=>'NOT_AVAILABLE','read_only'=>true,'article_or_taxonomy_write_attempted'=>false,
++            'seo_owner_rerun'=>false,'production_approval'=>false];
++    }
++
++    /** Commit only the exact preflight already read from the real live source options. */
++    private static function commitLegacyEmptyPlanRebind(array $pre,array $baseline,array $job,array $inventory,array $structure): void {
++        if(($pre['contract']??'')!=='PSTE_MINI_LEGACY_EMPTY_PLAN_REBIND_PREFLIGHT_V1'
++            ||($pre['status']??'')!=='PASS'||empty($pre['eligible_keys'])
++            ||!hash_equals((string)($pre['old_baseline_plan_sha256']??''),(string)($baseline['editorial_plan_sha256']??'')))
++            throw new RuntimeException('PSTE_MINI_REBIND_COMMIT_PREFLIGHT_INVALID');
++        // Verify the old immutable context and the 11-type registry BEFORE writing the baseline.
++        $oldBinding=PSTE_Context_Index_Store::runtimeBinding($job,$baseline);
++        $oldRegistry=PSTE_Context_Index_Store::registrySnapshot($oldBinding);
++        if(empty($oldRegistry['types'])||empty($oldRegistry['families']))
++            throw new RuntimeException('PSTE_MINI_REBIND_REGISTRY_NOT_PROVEN');
++        $rebased=PSTE_Snapshot::rebaseResearchBaselineIfSafe($baseline);
++        if(empty($rebased['ok'])||empty($rebased['changed'])
++            ||($rebased['mode']??'')!=='SAFE_DYNAMIC_CONTEXT_REBASE')
++            throw new RuntimeException('PSTE_MINI_REBIND_BASELINE_CHANGE_NOT_VERIFIED');
++        $fresh=(array)($rebased['baseline']??[]);
++        if((string)($fresh['editorial_plan_sha256']??'')!=='NOT_AVAILABLE'
++            ||!hash_equals((string)($fresh['inventory_sha256']??''),(string)($inventory['sha256']??''))
++            ||!hash_equals((string)($fresh['structure_sha256']??''),(string)($structure['sha256']??'')))
++            throw new RuntimeException('PSTE_MINI_REBIND_BASELINE_READBACK_FAILED');
++        // The normal existing runtime index is rehydrated from current source snapshots.
++        // Never make up an old plan hash or rewrite the nine raw legacy rows.
++        $binding=PSTE_Context_Index_Store::runtimeBinding($job,$fresh);
++        if(($binding['editorial_plan_sha256']??'')!=='NOT_AVAILABLE')
++            throw new RuntimeException('PSTE_MINI_REBIND_CONTEXT_READBACK_FAILED');
++        $registry=PSTE_Context_Index_Store::registrySnapshot($binding);
++        if(empty($registry['types'])||empty($registry['families']))
++            throw new RuntimeException('PSTE_MINI_REBIND_REBUILT_REGISTRY_INVALID');
++        $n=PSTE_Admin::scheduleTitleDeskReentry((array)$pre['eligible_keys'],true);
++        if($n!==count((array)$pre['eligible_keys']))
++            throw new RuntimeException('PSTE_MINI_REBIND_REENTRY_QUEUE_READBACK_FAILED');
++        PSTE_Admin::processTitleDeskReentry();
++    }
++
++    /** The operator explicitly requests an internal TEST recheck; never run on activation. */
++    public static function legacyEmptyPlanRebind(): void {
++        try {
++            PSTE_Auth::assertAdmin('pste_mini_legacy_plan_rebind',(string)($_POST['_wpnonce']??''));
++            if(!PSTE_Plugin::isReady())throw new RuntimeException('PSTE_MINI_REBIND_PLUGIN_NOT_READY');
++            $baseline=get_option(PSTE_OPTION_SITE_BASELINE,[]);
++            $job=PSTE_Context_Refresh::status();
++            $manifest=get_option(PSTE_OPTION_CONTEXT_INDEX_MANIFEST,[]);
++            $queue=get_option('pste_title_desk_reentry_state_v1',[]);
++            $mini=self::loadState();
++            $inventory=PSTE_Snapshot::inventory();
++            $structure=PSTE_Snapshot::structure();
++            $plan=PSTE_Snapshot::editorialPlan();
++            $origin=PSTE_Snapshot::editorialPlanForParkhaus();
++            $parkhaus=self::readParkhausForMini();
++            $pre=self::legacyEmptyPlanRebindPreflight(
++                $baseline,$inventory,$structure,$plan,$origin,$job,$manifest,$queue,$mini,$parkhaus);
++            self::commitLegacyEmptyPlanRebind($pre,$baseline,$job,$inventory,$structure);
++            wp_safe_redirect(admin_url('admin.php?page=portal-seo-topic-engine-review&pste_mini_rebound=1'));
++            exit;
++        }catch(Throwable $e){self::fail($e);}
++    }
++
+     public static function renderManualBrief(): void {
+         echo '<section class="pste-box"><h3>NEU · Manueller Schreibauftrag (Übergang, ohne K0)</h3>';
+         echo '<p>Ein einzelnes Thema für die externe Artikelerstellung ausgeben – mit einer Bestandsübersicht für den redaktionellen Abgleich. Noch keine automatische Planfreigabe und kein WordPress-Beitrag.</p>';
+--- a/Portal SEO Topic Engine/portal-seo-topic-engine.php
++++ b/Portal SEO Topic Engine/portal-seo-topic-engine.php
+@@ -2,13 +2,13 @@
+ /**
+  * Plugin Name: Portal SEO Themenengine
+  * Description: Einfacher Longtail-Workflow: recherchiert Suchphrasen, übernimmt Sprachtitel und ordnet ausschließlich vorhandene Portalkategorien zu und prüft gegen den eigenen Bestand. Verändert keine Beiträge, Inhalte, Gestaltung oder Textproduktionsregeln.
+- * Version: 0.57.144.27
++ * Version: 0.57.144.28
+  * Requires PHP: 8.0
+  * Author: Workflow Automation
+  */
+ if (!defined('ABSPATH')) { return; }
+ 
+-define('PSTE_VERSION', '0.57.144.27');
++define('PSTE_VERSION', '0.57.144.28');
+ define('PSTE_DIR', __DIR__ . '/');
+ define('PSTE_OPTION_SETTINGS', 'pste_settings_v1');
+ define('PSTE_OPTION_SCHEMA', 'pste_schema_version');
