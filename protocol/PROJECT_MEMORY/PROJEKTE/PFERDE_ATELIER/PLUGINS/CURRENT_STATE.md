@@ -2,6 +2,15 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 09.11.2026 – KISS ECHTER REDAKTIONSBÜRO-BEDIENFEHLER IN .29 BESTÄTIGT
+
+Echter v29-WP-Rückbericht 'pste-stapelbericht-2026-11-09(2).json': 52x CATEGORY_ROOM_TOPIC_POOL, zugleich 52x DISCOVERY_ONLY, 52x planning_suitability=NO, 7x NORMAL_PATH PASS, 1x NORMAL_PATH DISCOVERY_ONLY HELD, 1x manuell blockiert.
+
+**Quellcode-Ursache:** class-pste-admin.php renderReview(): der einzige vorhandene manuelle Fach/Magazin/Kategorieentscheid (ROUTE_FACH, ROUTE_MAGAZIN, ROUTE_REVIEW via saveManualDecision) wird nach `elseif($light['code']==='GREEN' ...)` vollständig versteckt, obwohl das vorliegende `PSTE_Topic_Policy::trafficLight('DISCOVERY_ONLY')` ausdrücklich GREEN zurückgibt. Gleichzeitig filtert die voreingestellte Ansicht `attention` alle grünen Fälle aus. Die 52 existieren als Kategorien-Zwischenstand, sind aber nicht zur Bearbeitung sichtbar. Kein anderer fachlicher Worker nötig.
+
+**KISS-Fix in Arbeit:** In bestehender Themenprüfung den gespeicherten `worker_flow.storage==CATEGORY_ROOM_TOPIC_POOL` als einzigen Bearbeitungsnachweis lesen, vorhandene ROUTE-Entscheidung auch bei grünem technischen Status anzeigen, gezielte Read-only-Filterung nur über bereits gespeichertes Payload auf der existierenden Datenbankseite. Vor K0 weiterhin konkrete Kategorie Pflicht; kein neues Plugin-Modul, keine neue Datenbanktabelle, keine neue SEO- oder Titelprüfung. Synthetische und originale 61er Positiv-/Negativfälle prüfen; separate Test-ZIP nur nach Syntax-/Regressions-/Archivtest; K0/PSERC/MINI unverändert.
+
+---
 ## 09.11.2026 – ECHTER WORDPRESS-RÜCKBERICHT 0.57.144.29, 16:47
 
 Quelle: Benutzer-Screenshot 'Bildschirmfoto 2026-11-09 um 16.47.30.png' und echter WordPress-TEST-Export 'pste-stapelbericht-2026-11-09(2).json', generated_utc=2026-11-09T15:47:48Z, PSTE 0.57.144.29. Gegen Vorversion (1) direkt per identischen pool_key verglichen: **61/61 pool_keys, Keywords und Titel unverändert.** Reentry-Status COMPLETE, 61 verarbeitet, 0 pending, **7 PASS, 53 HELD, 1 BLOCKED** (Summary held=54 zählt HELD+BLOCKED). Vorher 61/61 BLOCKED, davon 60 Plan-Drift und ein manuell gesperrtes Thema. Jetzt **0 Plan-Drift-Sperren**.
