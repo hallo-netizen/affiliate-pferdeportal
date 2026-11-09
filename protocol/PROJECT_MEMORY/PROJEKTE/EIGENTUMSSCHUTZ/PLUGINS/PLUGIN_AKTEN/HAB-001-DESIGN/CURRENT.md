@@ -1,3 +1,9 @@
+## 09.11.2026 – LIVE-PASS: HAB-001 DESIGN RC19 (0.1.192)
+
+Nutzer hat die Installation/Sichtprüfung mit „alles pass“ bestätigt. **Abgenommen:** unterschiedliche Vandalismus-Kachelfotos, klarere mobile Hero-Bilder und einheitliche Größe sichtbarer/aufgeklappter Texte. **CURRENT.zip bleibt die bereits im Pluginbüro vorhandene RC19-Datei** (432 Einträge; Git-Blob `5b228d917bf8744826f359b71523c5a11c3c5c10`); keine erneute Erstellung oder Änderung. Gemeinsames Live-Abnahmeprotokoll: `../../ABNAHMEN/2026-11-09_WORDPRESS_DESIGN_RC19_AFFILIATE_RC18.md`. Ältere „Live offen“-Vermerke sind für die hier abgenommenen Darstellungsbereiche historisch.
+
+---
+
 ## 09.11.2026 – HAB-001 Design RC19 (0.1.192): Mobile Hero, Schriftgleichheit und doppelte Vandalismus-Kacheln
 
 **Physisch vollständige aktuelle Design-ZIP im eigenen Pluginbüro:** `PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip`, **84.538.795 Bytes, 432 Dateien**, Git-Blob `5b228d917bf8744826f359b71523c5a11c3c5c10`, vom unabhängigen GitHub-Build SHA256 `d8f08ca73da4c56be61d55fdde02dac5ed5a1ecadcbc986221e2c93357ec8302`. **WordPress-Pluginversion 0.1.192**; neu gebaute vollständige ZIP, kein Zusatzplugin. **HAB-004 Affiliate RC18 (0.1.15-rc18) bleibt unverändert.** Keine fremden Portale, Inhalte oder Kategorie-IDs geändert.
