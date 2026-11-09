@@ -22,3 +22,6 @@ Verbessert: `role=group` für Sammelseiten, `role=product` für letzte konkrete 
 Lokale Prüfung: PHP-Lint PASS, ZIP-CRC PASS (2 Dateien), 16 positive/negative Strukturtests PASS. PHP ohne alte Portalbegriffe/URLs und ohne API-, Import-, Cron- oder DB-Schreibfunktionen außer normaler WordPress-Entwurfsoption. Ein echter WordPress- und HivePress-Test steht aus.
 
 **Grenze:** DataForSEO-, Keyword-Recherche-, semantische Entdopplungs- und WP-Importfunktionen der historischen Kategorie-Engine sind NOCH NICHT portiert. Keine Verwechslung von syntaktischer Validierung mit fachlicher Recherche. Die Testinstallation darf ausschließlich einen leeren/Probe-Entwurf prüfen; keine alten Zielprofile importieren.
+
+## Pflicht-Audit vor Übernahme alter Funktionen
+[ORIGINAL_AUDIT_20261109.md](ORIGINAL_AUDIT_20261109.md): vollständiges HAB-ZIP nicht neutral; alte Importprofile/-Wellen dürfen nicht übernommen werden. Der allgemeine 14-Stufen-Read-only-Prozess ist die fachliche Referenz. Keine Behauptung einer fertigen Robotik-Research-Integration.
