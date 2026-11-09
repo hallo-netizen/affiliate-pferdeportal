@@ -1,0 +1,65 @@
+name: Hobby Depot actual live intro mobile font comparison
+on:
+  push:
+    branches:
+      - audit/hobby-mobile-expanded-font-20261109
+    paths:
+      - .github/workflows/hobby-mobile-final-metrics.yml
+permissions:
+  contents: read
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install chromium
+      - name: Compare real visible and expanded paragraph styles across levels
+        run: |
+          python3 - <<'PY'
+          import urllib.request,xml.etree.ElementTree as ET,re
+          from urllib.parse import urlparse
+          from playwright.sync_api import sync_playwright
+          sitemap=urllib.request.urlopen('https://www.hobby-depot.de/page-sitemap.xml',timeout=12).read()
+          urls=[x.text for x in ET.fromstring(sitemap).iter() if x.tag.endswith('loc') and x.text]
+          levels={}
+          for depth in (1,2,3):
+            current=[u for u in urls if u.startswith('https://www.hobby-depot.de/') and len([t for t in urlparse(u).path.split('/') if t])==depth and '/magazin/' not in u]
+            levels[depth]=list(dict.fromkeys(current))[:10]
+          print('CATEGORY_LEVEL_URLS', {k:len(v) for k,v in levels.items()})
+          print('SAMPLE',levels)
+          with sync_playwright() as p:
+            browser=p.chromium.launch(headless=True)
+            for width in (360,390,620):
+              page=browser.new_page(viewport={'width':width,'height':844},device_scale_factor=1,is_mobile=True,has_touch=True)
+              for depth,ul in levels.items():
+                for u in ul:
+                  try:
+                    r=page.goto(u,wait_until='domcontentloaded',timeout=25000)
+                    page.wait_for_timeout(150)
+                    d=page.evaluate('''() => {
+                      const style=e=>{let s=getComputedStyle(e);return {size:s.fontSize,family:s.fontFamily,line:s.lineHeight,weight:s.fontWeight}};
+                      const short=e=>({class:e.className,tag:e.tagName,text:e.textContent.trim().slice(0,120),style:style(e)});
+                      let det=document.querySelector('details.hd-hub2-more,details.hd-catlevel-more,details.pa390-intro-more');
+                      if (!det) return {type:'no-details',intro:document.querySelector('.hd-page-intro,.hd-catlevel-intro')?.className||''};
+                      det.open=true;
+                      let paragraphs=[...det.querySelectorAll('p')].map(short);
+                      let inParent=[...det.parentElement.querySelectorAll('p')].filter(e=>!det.contains(e)).map(short).slice(0,8);
+                      let around=[det.previousElementSibling,det.parentElement,det.parentElement.parentElement].filter(Boolean).map(short);
+                      return {type:det.className,detail:short(det),expandedParagraphs:paragraphs,visibleParagraphs:inParent,around:around,markup:det.outerHTML.slice(0,450)};
+                    }''')
+                    if d['type']=='no-details': print('NO_EXPANDER',width,depth,u,d['intro']);continue
+                    vis=d.get('visibleParagraphs',[]);exp=d.get('expandedParagraphs',[])
+                    print('STYLE_PAGE',width,depth,u,'TYPE',d['type'],'EXP',exp[:3],'VISIBLE',vis[:6],'AROUND',d['around'][:3],'HTML',d['markup'][:180])
+                    if vis and exp:
+                      for e in exp[:2]:
+                        fs=float(e['style']['size'].rstrip('px'))
+                        for v in vis[:3]:
+                          fv=float(v['style']['size'].rstrip('px'))
+                          if abs(fs-fv)>.1: print('FONT_DIFFERENCE',width,depth,u,'VISIBLE',fv,v['text'][:65],'EXPANDED',fs,e['text'][:65])
+                  except Exception as e:print('ERROR_PAGE',width,depth,u,type(e).__name__,str(e)[:180])
+              page.close()
+            browser.close()
+          print('===MOBILE_REAL_METRICS_END===')
+          PY
