@@ -1,0 +1,32 @@
+name: HD007 + HD003 Weiter Flow Audit
+on:
+  push:
+    branches: [hobbyroom/hd003-150810-mobile-step-scroll-20261109]
+    paths: [.github/workflows/hobby-step-scroll-audit.yml]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect actual mobile Weiter and survey implementation in both plugins
+        run: |
+          python3 - <<'PY'
+          import zipfile,re,pathlib
+          root=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          for folder in ['HD-003-DESIGN-TEMPLATE-KIT','HD-007-HOBBYREGISTER-CORE']:
+            p=root/folder/'CURRENT.zip'
+            with zipfile.ZipFile(p) as z:
+              print('===== PLUGIN =====',folder,'FILES',len(z.namelist()),'SIZE',p.stat().st_size)
+              for f in z.namelist():
+                if not f.endswith(('.php','.js','.html','.css')) or z.getinfo(f).file_size>5000000:continue
+                content=z.read(f).decode('utf8','replace')
+                keys=['data-action="next"','data-action=next','function next()','>Weiter','Weiter →','weiter →','hd-hf-choices','hd-hf-panel','step++','scrollintoview']
+                if not any(k.casefold() in content.casefold() for k in keys):continue
+                print('FILE',f,'SIZE',len(content),'MATCHES',{k:content.casefold().count(k.casefold()) for k in keys if k.casefold() in content.casefold()})
+                lines=content.splitlines()
+                for i,line in enumerate(lines):
+                  if any(k.casefold() in line.casefold() for k in keys):
+                    print('MATCH',i+1,line[:1150])
+          PY
