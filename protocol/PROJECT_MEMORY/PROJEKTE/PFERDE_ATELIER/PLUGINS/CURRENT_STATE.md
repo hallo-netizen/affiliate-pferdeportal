@@ -1,3 +1,13 @@
+## VERBINDLICHER NEUER QA-STAND – 09.11.2026, PSTE 0.57.144.32 GEBAUT, NICHT INSTALLIERT
+
+**WordPress-TEST tatsächlich installiert bleibt 0.57.144.31; Kategorie beim Kolik-Beispiel ist bereits erfolgreich gespeichert.** Neues v32-Test-ZIP wurde aus exakt dieser .31-Original-ZIP gebaut, SHA256 `ab0231850a9b79b3c5f8b103b2700bc7f6b2a87d3adac38009f43c1bbe2f653f`, 651291 Bytes, physisch im privaten `/pferdeatelier/PLUGINS/QA/` gespeichert; 121 identische Dateipfade, 116 Dateien unverändert, 5 bestehende Dateien geändert, 83 PHP-Lints, ZIP-CRC und Quell-Readback PASS, 17 gezielte plus 7 MINI-Import-Prüfungen PASS. **Kein v32-WP-Test und kein E2E-PASS.** Technischer QA-Nachweis mit vollständigem Code-Diff: [v32-Paket](QA_ONLY/PSTE_05714432_KISS_BUNDLE_20261109/README.md).
+
+**Drei Teilaufträge im neuen TEST-Paket:** (1) Vorfilter Fach/Magazin, alphabetisch suchbare Kategorien, kein gewöhnliches Begründungsfeld, Verbleib im Redaktionsbüro nach Speichern; (2) vorhandene offene Themen automatisch **bei Aufruf des Redaktionsbüros** gesammelt auswerten, bestehende eindeutig gebundene Kategorien vorschlagen, fehlende Kategoriegruppen zeigen, **ein** bewusster Sammelübernahme-Klick für sichere Vorschläge; die neue Magazin-Erkennung für medizinische Pferdethemen korrigiert die nachgewiesene fehlende redaktionelle Scope-Erkennung. Keine automatischen WP-Kategorieanlagen, kein Hintergrund-Recherchedienst, kein zusätzlicher Worker; (3) **an der ursprünglichen MINI-Quelle** eine Hauptsuchfrage/Titel; offensichtliche Doppelfragen pro Importzeile zurückstellen und alte eingefrorene Stapel kompatibel halten. Gespeicherten Kolik-Titel nicht still ändern.
+
+**NÄCHSTE EINZIGE PRAXISAKTION:** Neues v32-ZIP ausschließlich auf TEST installieren, die gebündelte Kategorieansicht und sichere Vorschläge prüfen. Keine erneut manuelle Kolik-Kategorie speichern, keine 52 Einzelklicks, keine alten Imports. K0/PSERC/PPM/WordPress-LIVE unverändert; PR #682 DRAFT/unmerged. `FULL_WORKFLOW_PASSED=false`.
+
+---
+
 # PFERDE-ATELIER – PLUGINS – CURRENT_STATE
 
 ## AKTUELLER CHAT-ÜBERGABESTAND 09.11.2026, NACH ECHTEM .31-KATEGORIE-SPEICHERTEST
