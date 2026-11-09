@@ -5,6 +5,12 @@
 > **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt.  
 > `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
 
+## NEUER NACHWEIS – 09.11.2026 / SELBSTSTÄNDIG WIEDERHOLBARER WORKFLOW-REPLAY, GESAMTFREIGABE FALSCH
+
+Unveränderte PSTE .26 ZIP, echte MINI-1179er-Datei, echte 87er-SEO-Entscheidung, echter 61er-Stapelbericht in einem selbstständigen lokalen Prüfpaket zusammengeführt; archiviert in privater Library `/pferdeatelier/PLUGINS/QA/PFERDEATELIER_NACHWEIS_WORKFLOW_20261109.zip` (SHA256 `757ca630423fa8df5ba470aba11e984b68dd1becdd2f2e03c917a16c096edfa6`). Neuer Test entfernt die unbedingte Placebo-Prüfung und zählt nur messbare Invarianten: **19/19 Original- und 21/21 isolierte QA-Prüfungen PASS**. ZIP **in frischem Ordner entpackt und unabhängig erneut ausgeführt**, gleiche Zahlen. Gesicherte Endaussage: **`FULL_WORKFLOW_PASSED=false`**. Reproduzierter WP-Befund: 60 Plan-Kontext-Abbrüche plus 1 manueller Halt; nach synthetisch übereinstimmendem Planhash scheitert echter PHP-Pfad an `PSTE_ARTICLE_TYPE_REGISTRY_EMPTY`. Aktuelle WP-Kontext-Baseline, gesamte WP-Kategorietaxonomie, reale MySQL-Schreib-/Rücklesekette, PSERC-Planabschluss und K0-Handoff fehlen und sind **nicht** erfolgreich end-to-end getestet. Kein Release, kein Installer, keine K0- oder WordPressänderung. Vorhandener QA-Patch ist rein explorativ; PR #682 DRAFT.
+
+---
+
 ## AKTUELLER PRÜFSTAND 09.11.2026 – REALER 61er GESAMTKETTEN-REPLAY, KEIN E2E-FREIGABEPASS
 
 Die echte PSTE **0.57.144.26** mit dem echten WordPress-Export (1.179 Bestandseinträge), der originalen SEO-Ergebnisdatei (61 FREI/20 BELEGT/6 KLÄRUNG), dem echten 61er Stapelbericht und dem realen Titel- und Reentry-PHP wurde in einer **lokalen isolierten WordPress-Datenbankattrappe** end-to-end bis zum vorhandenen harten Plan-Gate ausgeführt. **18/18 Original-QA PASS** inklusive `acceptSingleOwnerSeoDecisions`, `planHandoffPreflight`, 61 echten `saveManualTitleOverride`-Aufrufen mit transaktionalem In-Memory-Readback, 61 idempotenten Titel-Replays, Original-Reentry-Queue und exakt reproduzierten 60 globalen `PSTE_RETAINED_EDITORIAL_PLAN_SNAPSHOT_CHANGED` plus 1 echtem manuellen Hold. **Dies beweist ein reales FAIL, nicht einen erfolgreichen End-to-End-Workflow.** 144/144 bestehende Plan-Slots disjunkt zu 61 freien Intent-Slots; keine Originaldaten/K0/PSERC/WP-Produktion geschrieben.
