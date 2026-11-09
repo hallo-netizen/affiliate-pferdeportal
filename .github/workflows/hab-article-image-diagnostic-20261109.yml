@@ -1,0 +1,70 @@
+name: HAB single article image origin diagnostic
+on:
+  push:
+    branches: [hab-design-rc20-single-article-image-20261109]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read HAB design RC19 source and public article output
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import zipfile, urllib.request, urllib.error, json, re
+          from html.parser import HTMLParser
+          zpath='protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip'
+          root='hab-bewahr-design-vorschau/'
+          with zipfile.ZipFile(zpath) as z:
+              print('ZIP_ENTRIES:',len(z.namelist()))
+              for file in ['includes/article-page.php','hab-bewahr-design-vorschau.php']:
+                  txt=z.read(root+file).decode('utf-8','replace')
+                  print('SOURCE_FILE',file,'LENGTH',len(txt))
+                  for i,line in enumerate(txt.splitlines(),1):
+                      if re.search(r'get_the_post_thumbnail|has_post_thumbnail|the_content|post_content|article.photo|image|img|banner|article.clean_content',line,re.I):
+                          if file.endswith('.php') and (file=='includes/article-page.php' or re.search(r'article|thumbnail',line,re.I)):
+                              print('CODE_LINE',file,i,line[:270].strip())
+              article=z.read(root+'includes/article-page.php').decode('utf-8','replace')
+              print('SOURCE_HAS_FEATURED_IMAGE:',bool(re.search(r'get_the_post_thumbnail|has_post_thumbnail',article)))
+              print('SOURCE_INCLUDES_POST_CONTENT:',bool(re.search(r'the_content|post_content',article)))
+          base='https://hab-und-bewahr.de'
+          slug='graffiti-schaden-dokumentieren-richtig-handeln'
+          urls=[base+'/'+slug+'/',base+'/wp-json/wp/v2/posts?slug='+slug,base+'/?rest_route=/wp/v2/posts&slug='+slug]
+          class ImgParser(HTMLParser):
+              def __init__(self):
+                  super().__init__();self.stack=[];self.images=[]
+              def handle_starttag(self,tag,attrs):
+                  d=dict(attrs); self.stack.append((tag,d.get('class',''),d.get('id','')))
+                  if tag=='img':
+                      self.images.append((d.get('src','')[:220],d.get('alt','')[:120],self.stack[-6:]))
+              def handle_endtag(self,tag):
+                  for idx in range(len(self.stack)-1,-1,-1):
+                      if self.stack[idx][0]==tag:
+                          del self.stack[idx:];break
+          for url in urls:
+              try:
+                  req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (compatible; ArticleImageOriginCheck/1.0)','Accept':'application/json,text/html;q=0.9'})
+                  with urllib.request.urlopen(req,timeout=24) as response:
+                      data=response.read(1500000);status=response.status;ctype=response.headers.get('Content-Type','')
+                  print('PUBLIC_FETCH',url,'status',status,'len',len(data),'type',ctype)
+                  if 'json' in ctype:
+                      body=json.loads(data)
+                      if isinstance(body,list):
+                          print('PUBLIC_POST_COUNT',len(body))
+                          for p in body[:2]:
+                              raw=p.get('content',{}).get('rendered','')
+                              print('PUBLIC_POST',p.get('id'),p.get('slug'),'featured_media',p.get('featured_media'),'html_len',len(raw),'IMG_TAGS',len(re.findall(r'<img\\b',raw,re.I)),'WP_IMAGE_MARKERS',len(re.findall(r'wp-image-|wp-block-image',raw,re.I)))
+                              parser=ImgParser();parser.feed(raw)
+                              for item in parser.images[:12]:print('POST_CONTENT_IMG',item)
+                      else: print('REST_JSON_NOT_LIST',str(body)[:250])
+                  else:
+                      parser=ImgParser();parser.feed(data.decode('utf8','replace'))
+                      print('LIVE_IMAGE_TOTAL',len(parser.images))
+                      for item in parser.images[:30]:
+                          if any('article' in str(t).lower() or 'beitrag' in str(t).lower() for t in item[2]) or 'graffiti' in str(item).lower():
+                              print('LIVE_ARTICLE_IMG',item)
+              except Exception as ex:
+                  print('PUBLIC_FETCH_ERROR',url,repr(ex)[:260])
+          PY
