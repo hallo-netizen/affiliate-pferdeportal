@@ -5,6 +5,16 @@
 > **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt.  
 > `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
 
+## AKTUELLER PRÜFSTAND 09.11.2026 – REALER 61er GESAMTKETTEN-REPLAY, KEIN E2E-FREIGABEPASS
+
+Die echte PSTE **0.57.144.26** mit dem echten WordPress-Export (1.179 Bestandseinträge), der originalen SEO-Ergebnisdatei (61 FREI/20 BELEGT/6 KLÄRUNG), dem echten 61er Stapelbericht und dem realen Titel- und Reentry-PHP wurde in einer **lokalen isolierten WordPress-Datenbankattrappe** end-to-end bis zum vorhandenen harten Plan-Gate ausgeführt. **18/18 Original-QA PASS** inklusive `acceptSingleOwnerSeoDecisions`, `planHandoffPreflight`, 61 echten `saveManualTitleOverride`-Aufrufen mit transaktionalem In-Memory-Readback, 61 idempotenten Titel-Replays, Original-Reentry-Queue und exakt reproduzierten 60 globalen `PSTE_RETAINED_EDITORIAL_PLAN_SNAPSHOT_CHANGED` plus 1 echtem manuellen Hold. **Dies beweist ein reales FAIL, nicht einen erfolgreichen End-to-End-Workflow.** 144/144 bestehende Plan-Slots disjunkt zu 61 freien Intent-Slots; keine Originaldaten/K0/PSERC/WP-Produktion geschrieben.
+
+**Isolierter nicht installierbarer QA-Korrekturversuch:** nur PSTE-Admin-Routine: globales Snapshotproblem als **technischen Blocker mit `PAUSED_CONTEXT_STALE` und unveränderten 61 noch ausstehenden Schlüsseln** behandeln, kein falsches `61 verarbeitet`, kein automatischer Retry-Sturm; bei explizitem Re-Schedule identische 61 ohne Duplikate, und der Bericht zeigt wieder echte Suchbegriffs-Fallbacks. **20/20 Replay-QA PASS; keine neue Pluginversion installiert oder freigegeben.** Diese Korrektur löst **nicht** den unbekannten tatsächlichen WP-Planhash-Bindungswert oder weitere echte Kategorien/Artikeltpyen/Planentscheidungen. Aktueller WP-Baseline-/Kontext-Speicher und echte vollständige Taxonomie/PSERC-End-to-End sind **nicht** in den Exporten; nach dem sicheren Hardstop darf keine fachliche/grüne PASS-Behauptung erfolgen.
+
+**Belege:** [lokaler Gesamtprüfbericht und Grenzen](QA_ONLY/PSTE_05714426_FULL_CHAIN_REPLAY_20261109/QA_GESAMTWORKFLOW_PRUEFBERICHT_20261109.md), [ausschließlich QA-Patch, nicht installieren](QA_ONLY/PSTE_05714426_FULL_CHAIN_REPLAY_20261109/QA_ONLY_stale_plan_queue_handling.patch). Das private reine Prüfarchiv samt PHP-Testskript liegt unter `/pferdeatelier/PLUGINS/QA/PFERDEATELIER_WORKFLOW_LOKALPRUEFUNG_20261109_QA_NICHT_INSTALLIEREN.zip`. **Erster offener Blocker:** tatsächliche WP-Planhash-/Kontext-Freshness auf der Testseite ohne Blindreset, dann validierte echte fachliche Reentry-/Kategoriezuordnung, dann PSERC Handoff, erst nach echter WP/MySQL-Abnahme installieren. Keine weiteren WordPress-Klicks verlangen. PR #682 DRAFT / NICHT MERGEN, K0 und Originaldaten bleiben unberührt.
+
+---
+
 ## NEUSTER ECHTER WP-DATENBELEG – 09.11.2026 10:22 BERLIN / VOLLSTÄNDIGER 61er STAPELBERICHT
 
 **Betreiber lieferte echtes WordPress-TEST-JSON** `pste-stapelbericht-2026-11-09.json` (`PSTE_MINI_CURRENT_BATCH_REPORT_V1`, generiert 2026-11-09 09:22:35 UTC). Originaldatei ist privater Conversation-Upload und **nicht** als GitHub-Rohdatei hinterlegt. Auswertung gegen die tatsächlich archivierte, unveränderte PSTE-.26-ZIP:
