@@ -1,0 +1,77 @@
+--- a/Portal SEO Topic Engine/includes/class-pste-admin.php
++++ b/Portal SEO Topic Engine/includes/class-pste-admin.php
+@@ -501,11 +501,12 @@
+             if($manualCandidateType!=='')echo '<br><small>Manuelle Kandidatenart: <strong>'.esc_html($manualCandidateType).'</strong></small>';
+             if(!$categoryRoomOpen){
+             echo '<details style="margin-top:6px"><summary style="cursor:pointer">Beitragsart korrigieren</summary><form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:6px">';wp_nonce_field('pste_set_candidate_type');echo '<input type="hidden" name="action" value="pste_set_candidate_type"><input type="hidden" name="pool_key" value="'.esc_attr((string)$c['pool_key']).'"><select name="candidate_article_type"><option value="">Automatik</option><option value="Produktwahl"'.selected($manualCandidateType,'Produktwahl',false).'>Produktwahl</option>';foreach(self::availableArticleTypes() as $candidateType)echo '<option value="'.esc_attr($candidateType).'"'.selected($manualCandidateType,$candidateType,false).'>'.esc_html($candidateType).'</option>';echo '</select><br><input type="text" name="review_note" class="regular-text" placeholder="Optionaler Hinweis">';submit_button('Korrektur speichern','secondary','submit',false);echo '</form></details>'; } echo '</td><td><strong>'.esc_html(PSTE_Topic_Policy::planningLabel($planning)).'</strong><br><small>Systemprüfung: '.esc_html((string)$system['label']).'</small></td><td>'.esc_html($reason).'</td><td>';
+-            if(!in_array((string)($c['context_state']??'PENDING'),['CURRENT','NOT_REQUIRED'],true)){echo '<em>Keine manuelle Entscheidung möglich. Zuerst Portalabgleich abschließen.</em>';}elseif(!$categoryRoomOpen&&(string)$light['code']==='GREEN'&&(string)($c['manual_status']??'')!=='REASSIGNED'&&empty($c['manual_editorial_resolution'])){echo '<em>Keine Aktion nötig.</em>';}else{echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';wp_nonce_field('pste_review_candidate');echo '<input type="hidden" name="action" value="pste_review_candidate"><input type="hidden" name="pool_key" value="'.esc_attr((string)$c['pool_key']).'"><select name="review_status"';if($categoryRoomOpen)echo ' required><option value="" selected disabled>Bitte Zielbereich wählen</option><option value="ROUTE_FACH">Hauptnavigation – Kategorie auswählen</option><option value="ROUTE_MAGAZIN">Magazin – Kategorie auswählen</option><option value="ROUTE_REVIEW">Im Redaktionsbüro belassen</option>';else{echo '><option value="AUTO">Keine Änderung – Automatik beibehalten</option>';
+-                if(!$nonOver)echo '<option value="APPROVED">Als Thema freigeben</option>';echo '<option value="REVIEW_REQUIRED">Weiter offen lassen</option><option value="BLOCKED_FOR_CATEGORY">Als bereits abgedeckt/blockiert markieren</option><option value="DISCOVERY_ONLY">Nur als Recherchebegriff behalten</option><option value="REASSIGNED">Anderer Kategorie zuordnen (bisherig)</option><option value="ROUTE_FACH">Grenzfall: Hauptnavigation wählen</option><option value="ROUTE_MAGAZIN">Grenzfall: Magazin wählen</option><option value="ROUTE_REVIEW">Grenzfall: im Redaktionsbüro lassen</option><option value="REJECTED">Endgültig verwerfen</option>'; } echo '</select><br><input list="pste-global-category-list" name="target_category_name" class="regular-text" placeholder="Zielkategorie (nur Umordnung)"><br>';if(!$categoryRoomOpen){echo '<select name="target_article_type"><option value="">Artikeltyp aus Zielkategorie</option>';foreach(self::availableArticleTypes() as $type)echo '<option value="'.esc_attr($type).'">'.esc_html($type).'</option>';echo '</select>'; } echo '<br><small>'.($categoryRoomOpen?'Nur Zielbereich und vorhandene Kategorie zuordnen. Ohne Kategorie bleibt das Thema im Redaktionsbüro – keine K0-Freigabe.':'Grenzfall: Bereich auswählen und, falls vorhanden, eine bestehende Zielkategorie eintragen. Ohne passende Kategorie bleibt das Thema im Redaktionsbüro. Keine automatische Produktionsfreigabe.').'</small><br><input type="text" name="review_note" class="regular-text" placeholder="Begründung">';if($hard&&!$nonOver)echo '<p class="pste-hard-warning"><label><input type="checkbox" name="confirm_hard_override" value="1"> Harte Sperre bewusst übersteuern</label><br><small>Nur mit Begründung. Betroffene Regeln: '.esc_html(implode(', ',$hard)).'</small></p>';if($nonOver)echo '<p class="pste-hard-warning"><strong>Nicht übersteuerbare technische Sperre:</strong> '.esc_html(implode(', ',$nonOver)).'</p>';submit_button('Entscheidung speichern','secondary','submit',false);echo '</form>';}
++            if(!in_array((string)($c['context_state']??'PENDING'),['CURRENT','NOT_REQUIRED'],true)){echo '<em>Keine manuelle Entscheidung möglich. Zuerst Portalabgleich abschließen.</em>';}elseif(!$categoryRoomOpen&&(string)$light['code']==='GREEN'&&(string)($c['manual_status']??'')!=='REASSIGNED'&&empty($c['manual_editorial_resolution'])){echo '<em>Keine Aktion nötig.</em>';}else{echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';wp_nonce_field('pste_review_candidate');echo '<input type="hidden" name="action" value="pste_review_candidate"><input type="hidden" name="pool_key" value="'.esc_attr((string)$c['pool_key']).'">';if($categoryRoomOpen)echo '<input type="hidden" name="pste_review_return_room" value="1">';echo '<select name="review_status"';if($categoryRoomOpen)echo ' required data-pste-room-area="1"><option value="" selected disabled>Bitte Zielbereich wählen</option><option value="ROUTE_FACH">Hauptnavigation – Kategorie auswählen</option><option value="ROUTE_MAGAZIN">Magazin – Kategorie auswählen</option><option value="ROUTE_REVIEW">Im Redaktionsbüro belassen</option>';else{echo '><option value="AUTO">Keine Änderung – Automatik beibehalten</option>';
++                if(!$nonOver)echo '<option value="APPROVED">Als Thema freigeben</option>';echo '<option value="REVIEW_REQUIRED">Weiter offen lassen</option><option value="BLOCKED_FOR_CATEGORY">Als bereits abgedeckt/blockiert markieren</option><option value="DISCOVERY_ONLY">Nur als Recherchebegriff behalten</option><option value="REASSIGNED">Anderer Kategorie zuordnen (bisherig)</option><option value="ROUTE_FACH">Grenzfall: Hauptnavigation wählen</option><option value="ROUTE_MAGAZIN">Grenzfall: Magazin wählen</option><option value="ROUTE_REVIEW">Grenzfall: im Redaktionsbüro lassen</option><option value="REJECTED">Endgültig verwerfen</option>'; } echo '</select><br><input list="'.($categoryRoomOpen?'pste-empty-category-list':'pste-global-category-list').'" name="target_category_name" class="regular-text" placeholder="Kategorie suchen – Namen eintippen"'.($categoryRoomOpen?' disabled':'').'><br>';if(!$categoryRoomOpen){echo '<select name="target_article_type"><option value="">Artikeltyp aus Zielkategorie</option>';foreach(self::availableArticleTypes() as $type)echo '<option value="'.esc_attr($type).'">'.esc_html($type).'</option>';echo '</select>'; } echo '<br><small>'.($categoryRoomOpen?'Kategorie: Anfang des Namens eintippen, z. B. Kolik. Die Vorschläge sind alphabetisch und nach Bereich getrennt. Ohne Kategorie bleibt das Thema im Redaktionsbüro – keine K0-Freigabe.':'Grenzfall: Bereich auswählen und, falls vorhanden, eine bestehende Zielkategorie eintragen. Ohne passende Kategorie bleibt das Thema im Redaktionsbüro. Keine automatische Produktionsfreigabe.').'</small><br>';if(!$categoryRoomOpen)echo '<input type="text" name="review_note" class="regular-text" placeholder="Begründung (optional, außer bei harter Freigabe)">';if($hard&&!$nonOver)echo '<p class="pste-hard-warning"><label><input type="checkbox" name="confirm_hard_override" value="1"> Harte Sperre bewusst übersteuern</label><br><small>Nur mit Begründung. Betroffene Regeln: '.esc_html(implode(', ',$hard)).'</small></p>';if($nonOver)echo '<p class="pste-hard-warning"><strong>Nicht übersteuerbare technische Sperre:</strong> '.esc_html(implode(', ',$nonOver)).'</p>';submit_button('Entscheidung speichern','secondary','submit',false);echo '</form>';}
+             echo '</td></tr>';
+         }
+         if(!$rows)self::emptyRow(8,'In diesem Abschnitt keine passenden Themen. Weitere Themen gegebenenfalls auf der nächsten Seite.');echo '</tbody></table>';if($page['next_token']!==''){ $url=add_query_arg(['page'=>self::TABS['review']['slug'],'pool_filter'=>$filter,'pool_area'=>$areaFilter,'pool_search'=>$search,'pool_cursor'=>$page['next_token']],admin_url('admin.php'));echo '<p><a class="button" href="'.esc_url($url).'">Weitere Themen anzeigen</a></p>'; }self::globalCategoryDatalist();
++        echo '<script>(function(){document.addEventListener("change",function(e){var s=e.target;if(!s||!s.matches||!s.matches("select[data-pste-room-area]"))return;var f=s.closest("form"),i=f&&f.querySelector("input[name=target_category_name]");if(!i)return;var a=s.value;i.value="";i.disabled=(a!=="ROUTE_FACH"&&a!=="ROUTE_MAGAZIN");i.setAttribute("list",a==="ROUTE_FACH"?"pste-fach-category-list":a==="ROUTE_MAGAZIN"?"pste-magazin-category-list":"pste-empty-category-list");i.placeholder=a==="ROUTE_FACH"?"Fachkategorie suchen…":a==="ROUTE_MAGAZIN"?"Magazinkategorie suchen…":"Zuerst Bereich wählen";});})();</script>';
+     
+         $showSandbox=((string)($_GET['sandbox_view']??''))==='1';
+         echo '<hr style="margin:28px 0"><h2>Offene Rest- und Sandboxfälle</h2>';
+@@ -1576,7 +1577,7 @@
+                     // Saved review remains provisional; no automatic production release.
+                 }
+             }
+-            self::redirect('review','review_saved=1');}catch(Throwable $e){self::blocked('review',$e);}
++            self::redirect('review','review_saved=1'.((string)($_POST['pste_review_return_room']??'')==='1'?'&pool_filter=category_room':''));}catch(Throwable $e){self::blocked('review',$e);}
+     }
+ 
+ 
+@@ -2711,10 +2712,19 @@
+     }
+ 
+     private static function globalCategoryDatalist(): void {
+-        echo '<datalist id="pste-global-category-list">';
+-        foreach(self::categoryReviewChoices() as $choice)
+-            echo '<option value="'.esc_attr((string)$choice['label']).'"></option>';
+-        echo '</datalist>';
++        $all=self::categoryReviewChoices();
++        uasort($all,static function(array $a,array $b): int {
++            return strnatcasecmp((string)$a['label'],(string)$b['label']);
++        });
++        foreach(['pste-global-category-list'=>'','pste-fach-category-list'=>'FACH','pste-magazin-category-list'=>'MAGAZIN'] as $id=>$area){
++            echo '<datalist id="'.esc_attr($id).'">';
++            foreach($all as $choice){
++                if($area!==''&&(string)$choice['area']!==$area)continue;
++                echo '<option value="'.esc_attr((string)$choice['label']).'"></option>';
++            }
++            echo '</datalist>';
++        }
++        echo '<datalist id="pste-empty-category-list"></datalist>';
+     }
+ 
+ 
+@@ -2750,7 +2760,7 @@
+         $details=[];
+         if(method_exists($e,'safeDetails'))$details=(array)$e->safeDetails();
+         set_transient('pste_last_error',['status'=>'BLOCKED','error'=>$e->getMessage(),'details'=>self::safeDiagnosticDetails($details)],300);
+-        self::redirect($tab,'blocked=1');
++        self::redirect($tab,'blocked=1'.($tab==='review'&&(string)($_POST['pste_review_return_room']??'')==='1'?'&pool_filter=category_room':''));
+     }
+     /** @param array<string,mixed> $details @return array<string,mixed> */
+     private static function safeDiagnosticDetails(array $details): array {
+--- a/Portal SEO Topic Engine/portal-seo-topic-engine.php
++++ b/Portal SEO Topic Engine/portal-seo-topic-engine.php
+@@ -2,13 +2,13 @@
+ /**
+  * Plugin Name: Portal SEO Themenengine
+  * Description: Einfacher Longtail-Workflow: recherchiert Suchphrasen, übernimmt Sprachtitel und ordnet ausschließlich vorhandene Portalkategorien zu und prüft gegen den eigenen Bestand. Verändert keine Beiträge, Inhalte, Gestaltung oder Textproduktionsregeln.
+- * Version: 0.57.144.31
++ * Version: 0.57.144.32
+  * Requires PHP: 8.0
+  * Author: Workflow Automation
+  */
+ if (!defined('ABSPATH')) { return; }
+ 
+-define('PSTE_VERSION', '0.57.144.31');
++define('PSTE_VERSION', '0.57.144.32');
+ define('PSTE_DIR', __DIR__ . '/');
+ define('PSTE_OPTION_SETTINGS', 'pste_settings_v1');
+ define('PSTE_OPTION_SCHEMA', 'pste_schema_version');
