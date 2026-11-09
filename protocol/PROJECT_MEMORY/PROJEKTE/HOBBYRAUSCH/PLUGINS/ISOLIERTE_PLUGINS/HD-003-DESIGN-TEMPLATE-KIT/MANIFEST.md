@@ -1,3 +1,13 @@
+# HD003 Pluginbüro – CURRENT 1.50.810 (09.11.2026)
+
+**Aktuelle geprüfte Vollversion:** `CURRENT.zip` = `HOBBY_DEPOT_DESIGN_HD003_1.50.810.zip`, jeweils 65.763.742 Byte, SHA-256 `d63c2c7413f1f3d8ac635abffd3ec7ea69ea0fddff5b4fc6dd4e676ac9c7b1c6`.
+
+**Neuer Fix:** nur mobile Hobbyfinder-Weiter-Navigation (bis 720 px). Nach jeder Antwort landet die Sichtposition auf der nächsten Frage mit Auswahlmöglichkeiten; nach der achten Frage auf der Ergebnisliste. Desktop unverändert. 1.50.809 mobile Kategorieintro-Schrift 14px bleibt erhalten; HD007 Hobbyregister Core und andere Plugins unverändert.
+
+**Prüfung:** ZIP 1291/1291, PHP 13/13, Test aller 8 Schritte auf 360/390/700 px plus Desktop-Gegenprobe 1024 px PASS. [Testlauf](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/42592986004), [Download](https://github.com/hallo-netizen/affiliate-pferdeportal/releases/download/hobby-depot-hd003-1.50.810-mobile-weiter-scroll/HOBBY_DEPOT_DESIGN_HD003_1.50.810_MOBILE_WEITER_SCROLL.zip). Liveinstallation offen. Original 1.50.809 im Archiv.
+
+---
+
 # HD003 Pluginbüro – Stand 09.11.2026
 
 **CURRENT: 1.50.809** – vollständiger getesteter Installer und `CURRENT.zip` byteidentisch (65.763.496 Bytes, SHA-256 `3814889dd2178d1af3674a119284cab8d7317c7a70679ed835fb616fe0bbe79b`).
