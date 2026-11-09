@@ -1,0 +1,35 @@
+name: Hobby Depot quick mobile visible-expanded font compare
+on:
+  push:
+    branches: [audit/hobby-mobile-expanded-font-20261109]
+    paths: [.github/workflows/hobby-mobile-quick-font.yml]
+permissions:
+  contents: read
+jobs:
+  quick:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install chromium
+      - run: |
+          python3 - <<'PY'
+          from playwright.sync_api import sync_playwright
+          for url in ['https://www.hobby-depot.de/sammeln/technik-medien/','https://www.hobby-depot.de/sammeln/technik-medien/minidiscs/']:
+            with sync_playwright() as p:
+              b=p.chromium.launch(headless=True)
+              page=b.new_page(viewport={'width':390,'height':844},is_mobile=True,has_touch=True)
+              r=page.goto(url,wait_until='domcontentloaded',timeout=30000)
+              print('PAGE',url,'STATUS',r.status if r else '?')
+              data=page.evaluate('''() => {
+                 const d=document.querySelector('details.hd-hub2-more,details.hd-catlevel-more');
+                 if(!d)return {error:'NO_DETAILS'};
+                 d.open=true;
+                 const sty=e=>{const s=getComputedStyle(e);return [s.fontSize,s.lineHeight,s.fontFamily]};
+                 const it=e=>({text:e.textContent.trim().slice(0,125),tag:e.tagName,cls:e.className,font:sty(e)});
+                 return {detail:it(d),expanded:[...d.querySelectorAll('p')].map(it),visible:[...d.parentElement.querySelectorAll('p')].filter(e=>!d.contains(e)).slice(0,7).map(it),previous:d.previousElementSibling?it(d.previousElementSibling):null,parent:d.parentElement.outerHTML.slice(0,1700)};
+              }''')
+              print('RESULT',str(data)[:4900])
+              b.close()
+          PY
