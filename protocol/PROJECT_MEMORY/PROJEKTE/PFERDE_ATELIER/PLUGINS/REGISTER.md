@@ -1,3 +1,9 @@
+## PSTE TEST-ARTEFAKT – 09.11.2026 v0.57.144.32 (NEU GEBAUT, NICHT INSTALLIERT)
+
+**Letzter nachgewiesener WordPress-TEST-Installationsstand bleibt v0.57.144.31.** Neues QA-ZIP im privaten Pluginbüro: `/pferdeatelier/PLUGINS/QA/PSTE-0.57.144.32-KISS-REDAKTIONSBUERO-AUTOMATIK-TITEL-NUR-TEST.zip`, 651291 Bytes, SHA256 `ab0231850a9b79b3c5f8b103b2700bc7f6b2a87d3adac38009f43c1bbe2f653f`. 5 Bestandsdateien geändert; vollständiges Diff und Prüfbefund im [v32-QA-Büro](QA_ONLY/PSTE_05714432_KISS_BUNDLE_20261109/README.md). Nicht mit PPA-005/CURRENT.zip oder LIVE gleichsetzen; PR #682 Draft; K0 und alle anderen Portale unverändert.
+
+---
+
 # PFERDE-ATELIER – PLUGINREGISTER
 
 ## AKTUELLER PSTE-TESTARTEFAKTSTAND – 09.11.2026 (NICHT LIVE-AUTORITÄT)
