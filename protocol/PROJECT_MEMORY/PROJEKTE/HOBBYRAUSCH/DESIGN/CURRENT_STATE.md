@@ -1,3 +1,9 @@
+# Hobbydepot DESIGN – Update 09.11.2026
+
+**Aktuelles HD003 1.50.810**: Mobil springt der Hobbyfinder nach jedem „Weiter“ zur neuen Frage samt Auswahlmöglichkeiten; nach Frage acht zur Ergebnisliste (bis 720 px). Ursache: Im bisherigen JavaScript fehlte die Anpassung der Scrollposition nach dem Neuaufbau des Fragenblocks. Die Behebung liegt im Designplugin HD003, nicht im Register-Kern HD007. Alle 8 Schritte in mobilen Browser-Tests bestanden, Desktop unverändert. Aktuelle 14-px-Kategorie-Typografie erhalten. Volle [Installationsdatei](https://github.com/hallo-netizen/affiliate-pferdeportal/releases/download/hobby-depot-hd003-1.50.810-mobile-weiter-scroll/HOBBY_DEPOT_DESIGN_HD003_1.50.810_MOBILE_WEITER_SCROLL.zip), [Prüflauf](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/42592986004). Liveinstallation offen.
+
+---
+
 # Hobbydepot DESIGN – Ergänzung 09.11.2026
 
 **Designplugin HD003 1.50.809 ist aktueller geprüfter Installationskandidat.** Mobile Kategorieeinleitungen und Ausklapptexte auf 14 px vereinheitlicht; geprüft an Typen Hub2, Leaf, Sonderfall Schuhmacherei und Kettenhemd-FAQ, Desktop unverändert. Echte Live-Kategorie-Vorprüfung hatte 15 px sichtbar vs. 14 px ausgeklappt bestätigt. Neue mobile Playwright-Simulation bestanden; Live-Installation 1.50.809 noch nicht nachgewiesen.
