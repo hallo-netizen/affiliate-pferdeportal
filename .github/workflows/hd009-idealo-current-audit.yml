@@ -1,0 +1,35 @@
+name: HD009 idealo existing integration audit
+on:
+  push:
+    branches: [hobbyroom/hd009-idealo-activation-20261109]
+    paths: [.github/workflows/hd009-idealo-current-audit.yml]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect existing idealo support in exact current full ZIP
+        run: |
+          python3 - <<'PY'
+          import zipfile,re,hashlib,pathlib
+          p=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          with zipfile.ZipFile(p) as z:
+            print('PLUGIN',p.stat().st_size,hashlib.sha256(p.read_bytes()).hexdigest(),'FILES',len(z.namelist()))
+            for f in z.namelist():
+              if not f.endswith(('.php','.js','.css','.json','.md','.txt')):continue
+              if z.getinfo(f).file_size>4000000:continue
+              s=z.read(f).decode('utf8','replace')
+              n=len(re.findall('idealo',s,re.I))
+              if not n: continue
+              print('FILE',f,'IDEALO_HITS',n,'BYTES',len(s))
+              lines=s.splitlines()
+              total=0
+              for i,line in enumerate(lines):
+                if re.search('idealo',line,re.I):
+                  print('MATCH',i+1,line[:800])
+                  total+=1
+                  if total>=70:break
+            print('TOPLEVELS',z.namelist()[:20])
+          PY
