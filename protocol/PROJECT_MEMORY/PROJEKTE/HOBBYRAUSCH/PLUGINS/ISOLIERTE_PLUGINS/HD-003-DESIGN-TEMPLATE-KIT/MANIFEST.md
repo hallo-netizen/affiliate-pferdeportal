@@ -1,3 +1,11 @@
+# HD003 Pluginbüro – Stand 09.11.2026
+
+**CURRENT: 1.50.809** – vollständiger getesteter Installer und `CURRENT.zip` byteidentisch (65.763.496 Bytes, SHA-256 `3814889dd2178d1af3674a119284cab8d7317c7a70679ed835fb616fe0bbe79b`).
+
+Änderung nur im mobilen Kategorietext: sichtbarer und ausgeklappter Teil exakt 14 px (bis 760 px), Sonderregeln einbezogen. Hobbyfinder-Code/Fotos und Banner aus 1.50.808 unverändert. Browser-Mobiltest mit gültigem Testbild PASS; Live-Hobbyfinder unter bekannten Adressen aktuell 404 und daher nicht live geprüft. Vollversion im [GitHub Release](https://github.com/hallo-netizen/affiliate-pferdeportal/releases/tag/hobby-depot-hd003-1.50.809-mobile-14px), Prüfworkflow [42586622583](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/42586622583). Live-Installation noch offen. 1.50.808 archiviert.
+
+---
+
 # HD003 DESIGN-PLUGIN – PLUGINBÜRO / CURRENT
 
 **Stand 08.11.2026: 1.50.808 ist der aktuell archivierte Installationskandidat.**  
