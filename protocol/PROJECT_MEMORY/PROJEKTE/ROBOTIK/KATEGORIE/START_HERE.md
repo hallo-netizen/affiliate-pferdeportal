@@ -39,4 +39,8 @@ Das neue Büro besitzt keine Verknüpfung mit bestehenden Projekt-Daten. Es gibt
 - [RECHERCHE/INHALTSPOTENZIAL_V1_20261109.md](RECHERCHE/INHALTSPOTENZIAL_V1_20261109.md) – 15 Produkt-Piloten mit 45 möglichen Inhaltsrubriken, 135 groben Beitragsthemen als fachliche Hypothesen.
 - [RECHERCHE/GLOSSAR_FINDER_MODELLREGISTER_V1_20261109.md](RECHERCHE/GLOSSAR_FINDER_MODELLREGISTER_V1_20261109.md) – geprüfte Vorbilder Pferdeatelier/Hobbydepot/Hab & Bewahr; Robotik-Glossar, Roboterfinder und bedingtes Modellregister.
 - [RECHERCHE/PRUEFSTAND_V1_20261109.md](RECHERCHE/PRUEFSTAND_V1_20261109.md) – was belegt, offen oder noch gar nicht technisch angebunden ist.
-- [RECHERCHE/PRODUKTE_V2_20261108.json](RECHERCHE/PRODUKTE_V2_20261108.json) – **EINZIGER Fachmaster, Revision 4**, 68 Ausgangs-IDs und 20 ausdrücklich nur recherchierte Randthemen.
+- [RECHERCHE/PRODUKTE_V2_20261108.json](RECHERCHE/PRODUKTE_V2_20261108.json) – **EINZIGER Fachmaster, Revision 5**, 68 Ausgangs-IDs und 20 ausdrücklich nur recherchierte Randthemen.
+
+## Verbindliche Ergänzung
+- [Robotik-Wissensdatenbank](../WISSENSDATENBANK/ROBOTERREGISTER/START_HERE.md) – **dieselben 68 IDs, gemeinsames Eigenschaftsschema**; keine zweite Produktliste.
+- [Footer-Tool-Prüfung](../PLUGINS/FOOTER_UMZUG_PRUEFUNG_20261109.md) – bestehende Footer-Übertragung 1.1.1 noch nicht für Robotik freigegeben.

@@ -9,3 +9,6 @@ Stand: 09.11.2026
 - [Verbindlicher Kategorie-Status](../KATEGORIE/CURRENT_STATE.md)
 
 Weitere Robotik-Plugins später hier verlinken, aber niemals ohne eigenen Archiv-/Prüfeintrag. Keine Parallel-CURRENTs.
+
+## Bereits vorhandenes gemeinsames Werkzeug: Footer-Umzug
+- [FOOTER_UMZUG_PRUEFUNG_20261109.md](FOOTER_UMZUG_PRUEFUNG_20261109.md) – Original 1.1.1 technisch brauchbare Basis, aber alte Portal-Umwandlungen und Aktualisierung bestehender Seiten. **Noch keine Robotik-Ausgabe, nicht installieren oder importieren.**
