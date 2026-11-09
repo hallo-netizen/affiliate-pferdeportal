@@ -2,6 +2,14 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 09.11.2026 – INSTALLIERBARE WORDPRESS-TEST-ZIP PSTE 0.57.144.29
+
+Auf ausdrücklichen Benutzerwunsch wurden die exakt isolierten KISS-Kategorie-Korrekturen (ursprünglich QA-only, `.28` plus sechs bestehende PHP-Änderungen) als **installierbare WordPress-TEST-ZIP** verpackt, mit **einziger weiterer Änderung Versionskopf/PSTE_VERSION von 0.57.144.28 auf 0.57.144.29**. ZIP-Root exakt `Portal SEO Topic Engine/` mit Hauptdatei `portal-seo-topic-engine.php` (WP Plugin Header, Version 0.57.144.29), gleiche 121 Originaldateipfade, 83/83 PHP lint, ZIP CRC 121/121, nach Versionserhöhung alle **2564/2564 lokalen positiven/negativen QA-Prüfungen erneut PASS**. K0/PSERC/PPM nicht verändert. ZIP 643400 Bytes, SHA256 `28504ba294f928ccd70ded6deab2815c9a7b19b823db93e3587739bff583a969`. Persistiert unter `/pferdeatelier/PLUGINS/QA/PSTE-0.57.144.29-KISS-KATEGORIE-NUR-TEST.zip` mit `PSTE_05714429_INSTALLATION_PRUEFPROTOKOLL.json` und `PSTE_05714429_REPLAY.log`. **Nur Test-WordPress installieren, nicht Produktion.**
+
+Testfolge laut Plugin-Originaloberfläche: `SEO Themenengine → Themenprüfung → Externe SEO-Prüfung`, expliziter Knopf `Nur nach geprüftem Bericht: alte Planbindung erneuern und MINI-Themen sicher erneut prüfen` **nur nach Prüfung des angezeigten Vorberichts und falls nicht bereits erfolgreich erledigt**, danach `Weitere Werkzeuge (nur für Sonderfälle) → Nur aktuellen Stapelbericht herunterladen`. **Original .28-Stapelbericht beweist Rebind-Ausführung weder positiv noch negativ. Keine Aktion auf Verdacht wiederholen.** Der echte WordPress/MySQL → PSERC → PPM → K0 Gesamtdurchlauf bleibt **`FULL_WORKFLOW_PASSED=false`**, K0 unverändert. PR #682 DRAFT, nicht mergen, keine Produktionsfreigabe.
+
+---
+
 ## 09.11.2026 – ABGESCHLOSSENER KISS-KATEGORIE-QA-TEST, NICHT FREIGEGEBEN
 
 Bindender Operatorvertrag (unverändert): Externer MINI-Worker 1 = Suchintention/Alternative, Worker 2 = exakter Titel; **kein zweiter SEO-/Titelentscheider in WP**. In PSTE vorhandener Kategorie-Worker findet **oben Fach** oder **unten Magazin** eine konkrete Kategorie; sonst **Redaktionsbüro als Arbeitsstatus, keine K0-Freigabe**. Vor PSERC/K0 weiterhin exakt `article_type,category,plan_slot,target_keyword,title`, tatsächliche Kategorie ist Pflicht. K0, PSERC, PPM, aktive WordPress-Installation und alle ersten zwei MINI-Worker **nicht verändert**.
