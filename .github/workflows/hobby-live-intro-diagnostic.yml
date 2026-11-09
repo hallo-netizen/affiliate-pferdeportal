@@ -1,0 +1,54 @@
+name: Hobby Depot live category markup diagnostic
+on:
+  push:
+    branches:
+      - audit/hobby-mobile-expanded-font-20261109
+    paths:
+      - .github/workflows/hobby-live-intro-diagnostic.yml
+permissions:
+  contents: read
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install chromium
+      - name: Inspect currently rendered category intro and expander
+        run: |
+          python3 - <<'PY'
+          from playwright.sync_api import sync_playwright
+          urls=[
+            'https://www.hobby-depot.de/sammeln/',
+            'https://www.hobby-depot.de/sammeln/technik-medien/',
+            'https://www.hobby-depot.de/sammeln/technik-medien/minidiscs/',
+            'https://www.hobby-depot.de/bewegen/wind-drachen/drachenbau/',
+            'https://www.hobby-depot.de/gestalten/druck-foto/fotografie/',
+          ]
+          with sync_playwright() as p:
+            browser=p.chromium.launch(headless=True)
+            page=browser.new_page(viewport={'width':390,'height':844},device_scale_factor=1,is_mobile=True,has_touch=True)
+            for u in urls:
+              try:
+                res=page.goto(u,wait_until='domcontentloaded',timeout=27000)
+                page.wait_for_timeout(1100)
+                out=page.evaluate('''() => {
+                  const norm=x=>String(x||'').replace(/\\s+/g,' ').trim();
+                  const st=el=>{let s=getComputedStyle(el);return {font:s.fontSize,family:s.fontFamily,line:s.lineHeight}};
+                  const tag=el=>({tag:el.tagName,cls:el.className?.toString().slice(0,160),text:norm(el.innerText).slice(0,220),style:st(el)});
+                  const all=[...document.querySelectorAll('*')];
+                  const exp=all.filter(el=>['BUTTON','SUMMARY'].includes(el.tagName)&&/mehr|ausklapp|anzeigen|weiterlesen|lesen|öffnen/i.test(norm(el.innerText))).slice(0,30).map(el=>({button:tag(el),parent:tag(el.parentElement),html:el.parentElement?.outerHTML.slice(0,900)}));
+                  const intros=[...document.querySelectorAll('[class*=intro],[class*=descri],[class*=fold],[class*=expand],[class*=more]')].filter(el=>el.textContent?.trim()&&el.getBoundingClientRect().width>0).slice(0,40).map(el=>tag(el));
+                  return {title:document.title,body:document.body.className,h1:[...document.querySelectorAll('h1')].map(x=>tag(x)),main:norm(document.querySelector('main')?.innerText).slice(0,900),summary:[...document.querySelectorAll('summary')].map(x=>tag(x)),expanders:exp,intros};
+                }''')
+                print('===== PAGE =====',u,'STATUS',res.status if res else '?','URL',page.url)
+                print('TITLE',out['title'],'BODY',out['body'][:250])
+                print('H1',out['h1'][:4])
+                print('MAIN',out['main'][:1000])
+                print('SUMMARY',out['summary'][:7])
+                print('EXPANDERS',out['expanders'][:7])
+                print('INTRO_CLASSES',out['intros'][:22])
+              except Exception as e:print('ERROR',u,type(e).__name__,str(e)[:270])
+            browser.close()
+          PY
