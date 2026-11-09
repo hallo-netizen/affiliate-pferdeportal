@@ -1,0 +1,48 @@
+name: HD003 mobile category and Hobbyfinder inspection 150809
+on:
+  push:
+    branches: [hobbyroom/hd003-150809-mobile-font-hobbyfinder-20261109]
+    paths: [.github/workflows/hd003-150809-inspect.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exact source check and Hobbyfinder image markup
+        run: |
+          python3 - <<'PY'
+          import zipfile,re,hashlib,pathlib,urllib.request,xml.etree.ElementTree as ET
+          p=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          print('ORIGINAL',p.stat().st_size,hashlib.sha256(p.read_bytes()).hexdigest())
+          with zipfile.ZipFile(p) as z:
+            for n in z.namelist():
+              if not n.endswith(('.php','.css','.js')):continue
+              if z.getinfo(n).file_size>4000000:continue
+              txt=z.read(n).decode('utf8','replace')
+              if not any(k in txt.lower() for k in ['hobbyfinder','hd-hub2-longcopy-lead','hd-catlevel-more']):continue
+              print('SOURCE_FILE',n,'BYTES',len(txt))
+              lines=txt.splitlines()
+              for i,l in enumerate(lines):
+                lo=l.lower()
+                if ('hobbyfinder' in lo and any(k in lo for k in ['image','img','photo','result','render','card','asset','thumb','foto','bild','query','slug','url'])) or any(k in lo for k in ['hd-hub2-longcopy-lead','hd-hub2-more p','hd-catlevel-more p','hd-catlevel-lead','hd-ketten-faq-pilot']):
+                  print('SOURCE',i+1,l[:1100])
+              for marker in ['hobbyfinder','hd-hf-results','hobbyfinder-results']:
+                print('MARKER',n,marker,txt.lower().count(marker))
+          site='https://www.hobby-depot.de/page-sitemap.xml'
+          try:
+            req=urllib.request.Request(site,headers={'User-Agent':'Mozilla/5.0'})
+            data=urllib.request.urlopen(req,timeout=20).read()
+            tree=ET.fromstring(data)
+            locs=[a.text for a in tree.iter() if a.tag.endswith('loc') and a.text]
+            print('LIVE_HOBBYFINDER_SITEMAP',[u for u in locs if 'hobbyfinder' in u.lower()])
+          except Exception as e:print('LIVE_SITEMAP_ERROR',str(e))
+          for url in ['https://www.hobby-depot.de/magazin/hobbyfinder/','https://www.hobby-depot.de/hobbyfinder/','https://www.hobby-depot.de/']:
+            try:
+              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'})
+              with urllib.request.urlopen(req,timeout=15) as r:
+                s=r.read(200000).decode('utf8','replace')
+                print('LIVE_URL',url,r.status,r.url,'HOBBYFINDER_LINKS',re.findall(r'href=[\x27\x22]([^\x27\x22]*hobbyfinder[^\x27\x22]*)',s,re.I)[:5],'TITLE',re.findall(r'<title>([^<]+)',s)[:2])
+            except Exception as e:print('LIVE_ERROR',url,str(e)[:200])
+          PY
