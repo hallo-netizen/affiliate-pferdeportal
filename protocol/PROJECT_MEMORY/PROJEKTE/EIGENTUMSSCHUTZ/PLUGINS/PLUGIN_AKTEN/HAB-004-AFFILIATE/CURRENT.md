@@ -1,3 +1,9 @@
+## 09.11.2026 – LIVE-PASS: HAB-004 AFFILIATE RC18 (0.1.15-rc18), AMAZON-KACHELDARSTELLUNG
+
+Nutzer bestätigt ausdrücklich die Amazon-Kacheldarstellung unter RC18 als bestanden. **Scope: visuelle Live-Abnahme**, nicht automatisch Tracking/Provider- oder Bestellfunktionsprüfung. **CURRENT.zip bleibt die bereits im Pluginbüro vorhandene RC18-Datei** (36 Einträge; Git-Blob `9d415e7dcae70ec1ff23a466ed6b1186134564ec`); keine erneute Erstellung oder Änderung. Gemeinsames Live-Abnahmeprotokoll: `../../ABNAHMEN/2026-11-09_WORDPRESS_DESIGN_RC19_AFFILIATE_RC18.md`. Ältere „Live offen“-Vermerke für die Amazon-Kacheldarstellung sind historisch.
+
+---
+
 ## 08.11.2026 – HAB-004 Affiliate RC18 0.1.15-rc18 – weltweite Amazon-Kachel-Ursache behoben (geprüfte Current-ZIP)
 
 **Physisch im eigenen Pluginbüro:** `PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip`, 2.332.375 Bytes, 36 Dateien, Git-Blob `9d415e7dcae70ec1ff23a466ed6b1186134564ec`; GitHub-Runner-SHA256 `a98063820d1564bf7cc7312c4c232369ac198bbaa49fbb6b173f76cd5096da89`. **Partnerplugin HAB-001 Design bleibt RC18 0.1.191 unverändert** (84.538.023 Bytes). Vorheriges HAB-004 RC17 ist historischer Stand, nicht länger Current.
