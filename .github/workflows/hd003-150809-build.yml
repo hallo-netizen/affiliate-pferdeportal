@@ -1,0 +1,110 @@
+name: HD003 1.50.809 mobile 14px and Hobbyfinder photo QA
+on:
+  push:
+    branches: [hobbyroom/hd003-150809-mobile-font-hobbyfinder-20261109]
+    paths:
+      - .github/workflows/hd003-150809-build.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build version 1.50.809 from exact 1.50.808
+        run: |
+          python3 scripts/hd003_build_150809.py
+      - name: Mobile DOM font regression and Hobbyfinder visual image rendering
+        run: |
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install chromium
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile,re,html
+          from playwright.sync_api import sync_playwright
+          zip_path='dist/HOBBY_DEPOT_DESIGN_HD003_1.50.809_MOBILE_14PX.zip'
+          with zipfile.ZipFile(zip_path) as z:
+            s=z.read('affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php').decode()
+          # Test actual mobile rule, including exceptional shoe and FAQ selectors against known desktop rules.
+          anchor='/* 1.50.809: mobile only; align visible category intro and expanded intro at exactly 14px across hub2/leaf/special pages. */'
+          start=s.index(anchor)
+          new=s[start:s.index('{font-size:14px!important}',start)+len('{font-size:14px!important}')]
+          assert '.hd-hub2-longcopy-lead>p' in new and '.hd-catlevel-more>div>p' in new
+          assert s.count(anchor)==1
+          # The exact original Hobbyfinder result CSS block is reused; test its real source with representative valid image.
+          hf_start=s.index('<style id="hd-hf-style-v150705">')
+          hf_end=s.index('</style>',hf_start)
+          hf_css=s[hf_start+len('<style id="hd-hf-style-v150705">'):hf_end]
+          assert '.hd-hf-visual img{display:block' in hf_css
+          assert '.hd-hf-choices,.hd-hf-grid{grid-template-columns:1fr}' in hf_css
+          assert 'resultVisual(h){return h.image?' in s
+          png='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
+          baseline="""
+          .hd-content-v150616 .hd-hub2-longcopy-benchmark-v150698 .hd-hub2-longcopy-lead{font-size:15px!important}
+          .hd-content-v150616 .hd-hub2-longcopy-benchmark-v150698 .hd-hub2-more>div>p{font-size:15px!important}
+          .hd-content-v150616 .hd-catlevel-intro .hd-catlevel-lead{font-size:15px!important}
+          .hd-content-v150616 .hd-catlevel-intro .hd-catlevel-more>div>p{font-size:15px!important}
+          .hd-content-v150616 .hd-catlevel-intro-schuhmacherei-v150695 .hd-catlevel-lead{font-size:15px!important}
+          .hd-content-v150616 .hd-ketten-faq-pilot-v150746 .hd-catlevel-lead{font-size:14.5px!important}
+          """ 
+          merged=baseline+'@media(max-width:760px){'+new+'}'
+          page_html=f'''<!doctype html><html><meta name="viewport" content="width=device-width,initial-scale=1">
+          <style>{merged}</style>
+          <div class="hd-content-v150616">
+            <section class="hd-hub2-longcopy-benchmark-v150698"><div class="hd-hub2-longcopy-lead"><p id="hub-visible">Visible</p></div><details class="hd-hub2-more" open><div><p id="hub-expanded">More</p></div></details></section>
+            <section class="hd-catlevel-intro"><p class="hd-catlevel-lead" id="leaf-visible">Visible</p><details class="hd-catlevel-more" open><div><p id="leaf-expanded">More</p></div></details></section>
+            <section class="hd-catlevel-intro hd-catlevel-intro-schuhmacherei-v150695"><p class="hd-catlevel-lead" id="shoe-visible">Visible</p><details class="hd-catlevel-more" open><div><p id="shoe-expanded">More</p></div></details></section>
+            <section class="hd-catlevel-intro hd-ketten-faq-pilot-v150746"><p class="hd-catlevel-lead" id="faq-visible">Visible</p><details class="hd-catlevel-more" open><div><p id="faq-expanded">More</p></div></details></section>
+          </div>
+          <style>{hf_css}</style><section class="hd-hf"><div class="hd-hf-inner"><div class="hd-hf-grid"><article class="hd-hf-card"><div class="hd-hf-visual"><img id="result-photo" src="{png}" alt="Example" /></div><div class="hd-hf-body">Example</div></article></div></div></section>
+          '''
+          with sync_playwright() as p:
+            browser=p.chromium.launch(headless=True)
+            for width in [360,390,620,760,1024]:
+              page=browser.new_page(viewport={'width':width,'height':844},is_mobile=True,has_touch=True)
+              page.set_content(page_html)
+              m=page.evaluate("""() => {
+                const fs=(id)=>parseFloat(getComputedStyle(document.getElementById(id)).fontSize);
+                const img=document.getElementById('result-photo');
+                const rect=img.getBoundingClientRect();
+                return {hub:[fs('hub-visible'),fs('hub-expanded')],leaf:[fs('leaf-visible'),fs('leaf-expanded')],shoe:[fs('shoe-visible'),fs('shoe-expanded')],faq:[fs('faq-visible'),fs('faq-expanded')],photo:{display:getComputedStyle(img).display,width:rect.width,height:rect.height,naturalWidth:img.naturalWidth},columns:getComputedStyle(document.querySelector('.hd-hf-grid')).gridTemplateColumns};
+              }""")
+              if width<=760:
+                for typ in ('hub','leaf','shoe','faq'):
+                  assert m[typ]==[14,14],(width,typ,m)
+              else:
+                assert m['hub'][0]==15 and m['leaf'][0]==15,(width,m)
+              assert m['photo']['display']!='none' and m['photo']['width']>0 and m['photo']['height']>0 and m['photo']['naturalWidth']>0,(width,m)
+              cols=[x for x in m['columns'].split() if x.endswith('px')]
+              if width<=720: assert len(cols)==1,(width,m)
+              print('RESPONSIVE_PASS',width,m)
+              page.close()
+            browser.close()
+          print('MOBILE_14PX_ALL_TEST_TYPES_PASS')
+          print('HOBBYFINDER_PHOTO_GRID_MOBILE_PASS (test fixture, not live WP)')
+          PY
+      - name: Publish exact plugin release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TAG=hobby-depot-hd003-1.50.809-mobile-14px
+          ZIP=dist/HOBBY_DEPOT_DESIGN_HD003_1.50.809_MOBILE_14PX.zip
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$ZIP" --clobber
+          else
+            gh release create "$TAG" "$ZIP" --target "$GITHUB_SHA" --title "Hobby Depot Design 1.50.809 - mobile category intro 14px" --notes "Scope: only category intro visible/expanded font sizes on widths <=760px, including Schuhmacherei and special FAQ. All photos, Hobbyfinder, banners, desktop and other plugins unchanged. 13 PHP files, ZIP CRC and responsive DOM tests. Live WordPress installation remains to be verified."
+          fi
+          gh release view "$TAG" --json url,assets
+      - name: Archive complete ZIP as new office current (do not touch old version)
+        run: |
+          set -euo pipefail
+          DIR=protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT
+          cp dist/HOBBY_DEPOT_DESIGN_HD003_1.50.809_MOBILE_14PX.zip "$DIR/HOBBY_DEPOT_DESIGN_HD003_1.50.809.zip"
+          cp dist/HOBBY_DEPOT_DESIGN_HD003_1.50.809_MOBILE_14PX.zip "$DIR/CURRENT.zip"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$DIR/HOBBY_DEPOT_DESIGN_HD003_1.50.809.zip" "$DIR/CURRENT.zip"
+          git commit -m "HD003 plugin office: tested full 1.50.809 and new CURRENT"
+          git push origin HEAD:refs/heads/hobbyroom/hd003-150809-mobile-font-hobbyfinder-20261109
