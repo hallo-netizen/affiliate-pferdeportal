@@ -1,0 +1,88 @@
+name: Hobbydepot full page-status and category occupancy diagnosis
+on:
+  push:
+    branches: [hobbyroom/seo-yoast-coverage-20261109]
+    paths: [.github/workflows/hobby-seo-routing-occupancy-20261109.yml]
+permissions:
+  contents: write
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install public-request tooling
+        run: pip3 install --quiet requests
+      - name: Read-only status of every published WP page and posts, and category counts
+        run: |
+          python3 -u - <<'PY'
+          import pathlib,json,requests,collections,concurrent.futures,threading,time
+          base=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/SEO/EVIDENCE')
+          j=json.loads((base/'HOBBYDEPOT_YOAST_LIVE_AUDIT_20261109.json').read_text())
+          root='https://www.hobby-depot.de'
+          allcats=[];errors=[]
+          for page in range(1,45):
+            u=f'{root}/wp-json/wp/v2/categories?per_page=100&page={page}&_fields=id,count,slug,link,parent,description'
+            try:
+              r=requests.get(u,timeout=20,headers={'User-Agent':'Mozilla/5.0 (compatible; PublicReadOnlySEOAudit)'})
+              if r.status_code!=200:
+                errors.append({'url':u,'http':r.status_code});break
+              a=r.json()
+              if not isinstance(a,list) or not a:break
+              allcats.extend(a)
+              if len(a)<100:break
+            except Exception as e:errors.append({'url':u,'error':str(e)[:200]});break
+          original={x['id']:x for x in j['rest']['categories']['entries']}
+          missing=[c for c in allcats if c.get('id') in original and not original[c['id']]['in_xml']]
+          occupied=[c for c in allcats if c.get('count',0)>0]
+          missing_occupied=[c for c in missing if c.get('count',0)>0]
+          print('CATEGORY_COUNTS',json.dumps({'rest_total':len(allcats),'rest_empty_count':sum(c.get('count',0)==0 for c in allcats),
+            'occupied':len(occupied),'missing_from_sitemap':len(missing),'missing_but_nonempty':len(missing_occupied),
+            'sample_missing_with_count':[{k:x.get(k) for k in ('id','slug','count','link')} for x in missing[:12]],
+            'sample_nonempty':[{k:x.get(k) for k in ('id','slug','count','link')} for x in occupied[:20]]},ensure_ascii=False))
+          targets=[]
+          for t in ('pages','posts'):
+            targets += [{'type':t, 'id':x['id'],'url':x['link']} for x in j['rest'][t]['entries']]
+          def check(target):
+            u=target['url']
+            try:
+              with requests.get(u,timeout=17,stream=True,allow_redirects=True,
+                  headers={'User-Agent':'Mozilla/5.0 (compatible; PublicReadOnlySEOAudit)'}) as r:
+                return {**target,'status':r.status_code,'final':r.url,'robots_header':r.headers.get('X-Robots-Tag','')}
+            except Exception as e:return {**target,'status':None,'error':str(e)[:160]}
+          pages=[]
+          with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
+            for i,x in enumerate(pool.map(check,targets),1):
+              pages.append(x)
+              if i%100==0:print('PROGRESS_PAGES',i,'/',len(targets),flush=True)
+          counts=collections.Counter(str(x.get('status')) for x in pages)
+          failing=[x for x in pages if x.get('status') not in (200,301,302)]
+          redirects=[x for x in pages if x.get('status')==200 and x.get('final','').rstrip('/')!=x.get('url','').rstrip('/')]
+          print('LIVE_PAGE_STATUS_COUNTS',dict(counts),'failing',len(failing),'redirects',len(redirects))
+          print('LIVE_NON200',json.dumps(failing[:120],ensure_ascii=False))
+          print('LIVE_REDIRECT_EXAMPLES',json.dumps(redirects[:20],ensure_ascii=False))
+          specials={}
+          for path in ['/?page_id=900190','/?p=900190','/index.php?page_id=900190','/magazin/hobbyfinder/','/magazin/','/magazin/wissen-glossar/']:
+            specials[path]=check({'type':'diagnostic','id':0,'url':root+path})
+          print('HOBBYFINDER_ALTERNATE_ROUTES',json.dumps(specials,ensure_ascii=False))
+          rpt={'source':'HOBBYDEPOT_YOAST_LIVE_AUDIT_20261109.json','category_counts':{
+              'all':len(allcats),'empty':sum(c.get('count',0)==0 for c in allcats),'nonempty':len(occupied),
+              'missing_from_sitemap':len(missing),'missing_but_nonempty':len(missing_occupied),
+              'missing_nonempty':missing_occupied[:100],'errors':errors},
+              'wordpress_pages_posts_checked':len(pages),'http_status_distribution':dict(counts),
+              'non_200_pages':failing,'redirects':redirects,
+              'hobbyfinder_alternate_routes':specials}
+          file=base/'HOBBYDEPOT_SEO_ROUTING_AND_EMPTY_CATEGORY_20261109.json'
+          file.write_text(json.dumps(rpt,ensure_ascii=False,indent=2)+'\n')
+          print('SAVED',file,'bytes',file.stat().st_size)
+          PY
+      - name: Archive verified full page-status and category counts
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/SEO/EVIDENCE/HOBBYDEPOT_SEO_ROUTING_AND_EMPTY_CATEGORY_20261109.json
+          git commit -m "Record full public page HTTP checks and 3520 category occupancy classification"
+          git fetch origin hobbyroom/seo-yoast-coverage-20261109
+          git rebase origin/hobbyroom/seo-yoast-coverage-20261109
+          git push origin HEAD:refs/heads/hobbyroom/seo-yoast-coverage-20261109
