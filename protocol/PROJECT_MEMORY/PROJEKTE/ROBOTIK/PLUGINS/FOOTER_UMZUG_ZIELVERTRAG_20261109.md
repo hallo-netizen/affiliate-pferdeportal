@@ -12,4 +12,4 @@ Original aus Hobbydepot `TOOL-FOOTER-UMZUG/CURRENT.zip` kann tatsächlich Footer
 5. Design, Farben, Spalten, Template- und WordPress-Core-Einstellungen **nicht** übernehmen; Widgetbereiche auf existierendem Robotik-Theme prüfen.
 6. Nach einmaliger Freigabe Import durchführen und exakt diese Seiten, Menüs/Links im WP-Backend + Frontend rücklesen. Keine erneuten Vollimporte.
 
-**Heute: Konzept festgelegt, die bestehende ZIP 1.1.1 ist für Robotik NICHT freigegeben, keine neue ZIP gebaut oder installiert.** Alte Portale unverändert.
+**Stand 09.11.2026:** Robotik-Testvariante **1.2.1** wurde erstellt und als getrenntes ZIP im Robotik-Pluginbüro archiviert (lokale Prüfungen PASS, WordPress-Live-PASS offen; **noch nicht installiert**). Die bestehende 1.1.1 auf Quellseiten braucht nicht ersetzt zu werden. Nur der **sichere** 1.2.1-Importer darf die alte 1.1.1-Exportdatei in Robotik übernehmen – zunächst als **Entwürfe**. Layout/Widgets bleiben Designaufgabe. Andere Portale unverändert.
