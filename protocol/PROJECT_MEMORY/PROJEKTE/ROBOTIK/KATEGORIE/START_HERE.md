@@ -39,7 +39,7 @@ Das neue Büro besitzt keine Verknüpfung mit bestehenden Projekt-Daten. Es gibt
 - [RECHERCHE/INHALTSPOTENZIAL_V1_20261109.md](RECHERCHE/INHALTSPOTENZIAL_V1_20261109.md) – 15 Produkt-Piloten mit 45 möglichen Inhaltsrubriken, 135 groben Beitragsthemen als fachliche Hypothesen.
 - [RECHERCHE/GLOSSAR_FINDER_MODELLREGISTER_V1_20261109.md](RECHERCHE/GLOSSAR_FINDER_MODELLREGISTER_V1_20261109.md) – geprüfte Vorbilder Pferdeatelier/Hobbydepot/Hab & Bewahr; Robotik-Glossar, Roboterfinder und bedingtes Modellregister.
 - [RECHERCHE/PRUEFSTAND_V1_20261109.md](RECHERCHE/PRUEFSTAND_V1_20261109.md) – was belegt, offen oder noch gar nicht technisch angebunden ist.
-- [RECHERCHE/PRODUKTE_V2_20261108.json](RECHERCHE/PRODUKTE_V2_20261108.json) – **EINZIGER Fachmaster, Revision 5**, 68 Ausgangs-IDs und 20 ausdrücklich nur recherchierte Randthemen.
+- [RECHERCHE/PRODUKTE_V2_20261108.json](RECHERCHE/PRODUKTE_V2_20261108.json) – **EINZIGER Fachmaster, Revision 6**, 68 Ausgangs-IDs und 20 ausdrücklich nur recherchierte Randthemen.
 
 ## Verbindliche Ergänzung
 - [Robotik-Wissensdatenbank](../WISSENSDATENBANK/ROBOTERREGISTER/START_HERE.md) – **dieselben 68 IDs, gemeinsames Eigenschaftsschema**; keine zweite Produktliste.
@@ -49,3 +49,7 @@ Das neue Büro besitzt keine Verknüpfung mit bestehenden Projekt-Daten. Es gibt
 - [RECHERCHE/INHALTSPOTENZIAL_53_20261109.json](RECHERCHE/INHALTSPOTENZIAL_53_20261109.json) – 53 bisher offene Produktklassen, 106 redaktionelle Rubriken, 318 Themenrichtungen als noch nicht keywordgeprüfte Forschungsideen.
 - [RECHERCHE/PRUEFSTAND_V2_20261109.md](RECHERCHE/PRUEFSTAND_V2_20261109.md) – konsolidierter gegenwärtiger Forschungsstand; V1 als älterer Prüfbeleg erhalten.
 - [RECHERCHE/KOLLISIONS_AUDIT_V2_20261109.md](RECHERCHE/KOLLISIONS_AUDIT_V2_20261109.md) – Herstellerbelege und offengelegte Typen-/SEO-Grenzfälle.
+
+## Aktuelle Erweiterungen
+- [RECHERCHE/ERWEITERUNG_SOFTWARE_ERSATZTEILE_NISCHEN_20261109.md](RECHERCHE/ERWEITERUNG_SOFTWARE_ERSATZTEILE_NISCHEN_20261109.md) – 108 zusätzliche, nach Quelle und Rolle getrennte Randthemen. Alle in EINEM Fachmaster Revision 6.
+- [Roboterglossar A–Z](../MAGAZIN/ROBOTERGLOSSAR/START_HERE.md) – 558 Begriffskandidaten, nicht 558 freigegebene Seiten.
