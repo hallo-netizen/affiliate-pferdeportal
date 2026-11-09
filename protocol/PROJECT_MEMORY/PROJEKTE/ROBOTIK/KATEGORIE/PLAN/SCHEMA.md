@@ -1,6 +1,6 @@
 # PROFILFORMAT – LEERSTART
 
-Die aktive Vorlage ist `robotik-empty.json`. Solange das Konzept offen ist, bleibt `nodes` leer.
+Die aktuelle **WP-ZIELVORLAGE** ist `robotik-empty.json` und bleibt bis zur Freigabe bei `nodes:[]`. Dies ist **KEINE zweite Produktliste**. Die einzige aktive Produktrecherchequelle ist `../RECHERCHE/PRODUKTE_V2_20261108.json`. Produktseiten werden später nur als freigegebener, zurückverfolgbarer Auszug daraus erzeugt.
 
 Erst nach der Fachentscheidung erhält jeder Knoten:
 - `id`: eindeutige, bleibende Robotik-ID (klein, z. B. `rk_...`);
