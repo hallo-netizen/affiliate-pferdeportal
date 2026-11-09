@@ -2,6 +2,19 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+## 09.11.2026 – INSTALLIERBARE KISS-TESTVERSION 0.57.144.30: REDAKTIONSBÜRO-AKTION SICHTBAR
+
+**KISS-Rootfix abgeschlossen und physisch als WordPress-TEST-ZIP gebaut.** Ausgangsstand `.29` original verifiziert. Echter `.29`-WP-Bericht: 52 `CATEGORY_ROOM_TOPIC_POOL` und zugleich `DISCOVERY_ONLY`/GREEN; die vorhandene Themenprüfung zeigte deswegen „Keine Aktion nötig“ und versteckte `ROUTE_FACH/MAGAZIN/REVIEW`; Standardansicht Rot/Gelb verschwieg alle 52. Ursache im Originalcode nachgewiesen, **kein Category-AI- oder fehlender SEO-Owner**.
+
+`.30` ändert **nur drei Bestanddateien**: Adminansicht liest den einzigen gespeicherten Category-Worker-Status, bietet einen direkten Filter für Bürothemen, zeigt für GREEN/Büro dennoch Aktionen, im Büro nur FACH/MAGAZIN/WEITER OFFEN und keine zweite Freigabe, kein separates Artikeltypformular. Repository verwendet denselben bestehenden gebundenen Topic-Seitenleser mit optionalem **Read-only**-SQL-Vorfilter (LIKE maskiert, PHP verifiziert tatsächlichen originalen Speicherstatus), normale Abfragen unverändert. Hauptplugin Version `0.57.144.30`. Keine neue Tabelle, kein Worker, keine weitere MINI-, PSERC-, PPM-, K0-Logik.
+
+**Unabhängige QA aus frisch entpacktem ZIP:** 2564/2564 bestehende Regressionen + 338/338 echte v29-61er-Daten mit Original-PHP-Adminfilter (52 Büro + Negativfälle, 3 paginierte Seiten) + 116/116 Original-PHP-Repository-SQL-Leseprüfungen (eine absichtlich falsche Textnennung geprüft, keine DB-Schreibabfrage) + 15/15 tatsächliche HTML-Bildschirmrenderprüfungen (29 erste Bürozeilen, ausschließlich 3 Fach/Magazin/offen-Aktionen, keine doppelte Freigabe); **3033/3033 lokal PASS**, PHP Syntax 83/83, ZIP-CRC und 121 Originaldateien geprüft. ZIP `PSTE-0.57.144.30-KISS-REDAKTIONSBUERO-NUR-TEST.zip`, SHA256 `3f32f511c39d77bd9a26d15222a46511ce81ef8180052caacbd3ca4405067d68`, 643832 Bytes. Physisch persistiert im privaten Büro `/pferdeatelier/PLUGINS/QA/`, daneben Prüfbericht, exakt drei-Datei-Quellcode-Diff und maschinelles Testmanifest; GitHub unter `QA_ONLY/PSTE_05714430_KISS_REDROOM_20261109/`.
+
+**WICHTIGE GRENZE:** Die 52 erhalten eine *bedienbare* bestehende Entscheidung, **nicht automatische oder fachlich belegte Kategoriezuordnung**. Die 7 bereits PASS bleiben unverändert; ein Discovery-Only-Sonderfall `regendecken sale` und eine manuelle Sperre bleiben unverändert; keine neuen Kategorien werden angelegt und kein offenes Thema geht an K0. **FULL_WORKFLOW_PASSED=false**, echter v30 WordPress-MySQL/UI- und PSERC/PPM/K0-Endtest noch offen. **Test-WordPress only**, keine Produktion, PR #682 DRAFT/unmerged. Der alte Plan-Rebind ist seit `.29` 0x veraltet; nicht wiederholt starten.
+
+**Nächster Schritt für Betreiber:** auf ausschließlich der WordPress-TEST-Seite `.30` ZIP über `.29` installieren; `SEO Themenengine > Themenprüfung > Redaktionsbüro: offene Kategorien bearbeiten` kontrollieren. Nur falls wirklich eine sichere existierende Fach- oder Magazinkategorie in WP auswählbar ist, *ein einziges* unkritisches Thema zuordnen und danach den aktuellen Workflowstatus prüfen. Keine mehrfachen Wiederholungs-/Titelimporte.
+
+---
 ## 09.11.2026 – KISS ECHTER REDAKTIONSBÜRO-BEDIENFEHLER IN .29 BESTÄTIGT
 
 Echter v29-WP-Rückbericht 'pste-stapelbericht-2026-11-09(2).json': 52x CATEGORY_ROOM_TOPIC_POOL, zugleich 52x DISCOVERY_ONLY, 52x planning_suitability=NO, 7x NORMAL_PATH PASS, 1x NORMAL_PATH DISCOVERY_ONLY HELD, 1x manuell blockiert.
