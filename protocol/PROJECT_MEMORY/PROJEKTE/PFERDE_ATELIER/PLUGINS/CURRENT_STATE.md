@@ -1,3 +1,13 @@
+## 10.11.2026 – PSERC 0.28.60 nur TEST: zweite alte Portalprüfung für echten externen SEO-Owner entfernt
+- WordPress-Test-Screenshot .59: gültiger Plan, **8 geeignet / 0 READY / 8 BLOCKED_PORTAL_TOPIC_EVIDENCE**. Ursache im vorhandenen Originalcode: alte Portalbeleg-Komplettprüfung ignoriert bereits geprüften externen SEO-Owner.
+- In bestehender Gate-Klasse (kein neues System) wird nur für einen original aus PSTE gebundenen, **nachweislich an den Plan weitergegebenen** FREI-Receipt die alte fachliche Zweitprüfung nicht nochmals ausgeführt. Technische Bindungen, Frühstopp, Kategorie-/Artikeltyp-Schutz und 5-Feld-Dateivertrag bleiben; **kompletter Legacy-Code unverändert**.
+- Gegen **7 echte ursprüngliche FREI-Datensätze**: originaler PSERC-Reader und neues Gate PASS; negative Fälle PASS; fünf Legacy-Altweg-Vergleiche unverändert; originaler Compiler-Finalizer mit **synthetischen** Artikelplatz-IDs 7 READY und Original-K0-Feldvertrag PASS. Nur **lokale Quellsimulation**, kein echter WP-READY-Endtest.
+- Bestehendes eingeklapptes Admin-Detail zeigt jetzt die genauen, gespeicherten Einzel-Sperrgründe (max. 25, rein lesend). Keine neue Menüseite.
+- Aus echter .59 neu gebautes QA-ZIP `PSERC-0.28.60-KISS-EXTERNER-SEO-OWNER-NUR-TEST.zip` im privaten `/pferdeatelier/PLUGINS/QA/`; SHA256 `c9c7e90b265e650739d2568a7cb807238db7f081ddcf7d8698fe64961b84f22a`. 63 gleiche Dateipfade, **59 bytegleich**, nur 4 bestehende Dateien geändert, 43 PHP-Lint, 61 Paketintegrität, CRC PASS. Keine Daten/Recherche/K0/LIVE verändert.
+- **Nächste einzelne Praxisprüfung:** ausschließlich auf TEST .59 sichern → .60 als Testupdate installieren → *einmal* bestehenden Snapshot aktualisieren. Wenn READY>=1, alte K0-JSON herunterladen und prüfen; wenn READY=0, im vorhandenen „Technische Bindungen anzeigen“ die genaue Einzelsperre ohne Neuaufbau lesen. Bis dahin keine echte E2E-Freigabe und kein Löschen alter Funktionen. [Vollständiger Prüfbericht](QA_ONLY/PSERC_02860_KISS_EIN_OWNER_K0_SIMULATION_20261110.md).
+
+---
+
 ## 10.11.2026 – echter UI-Fehler .58 nach Anwender-Screenshot; .59 erst simuliert, nicht installiert
 
 - Original .58 `PSERC_Admin::page` zeigt bei früherem BLOCKED **kein** `pserc-plan-text`, obwohl das vorhandene AJAX-Skript dort neue Fortschrittswerte ausgeben möchte; außerdem blieb der einzige Knopf nach Netzwerk-/BLOCKED-Fehler deaktiviert. **Sichtbarkeitsfehler im vorhandenen Admin, keine nachgewiesene Datenlöschung.**
