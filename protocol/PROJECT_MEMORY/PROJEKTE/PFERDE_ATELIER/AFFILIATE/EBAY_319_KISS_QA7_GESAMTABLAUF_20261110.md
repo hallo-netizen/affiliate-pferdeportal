@@ -8,7 +8,7 @@ Start → ein zentraler gespeicherter Lauf → vorhandene und neue eBay-Angebote
 
 ## Zwei nachweislich überflüssige Bestandteile entfernt
 
-1. **Zweite Datenlesung nach erfolgreichem Speichern:** `ebay_run_save` vergleicht den **gesamten** geschriebenen Zustand mit dem aus WordPress zurückgelesenen Zustand und meldet einen echten Speicherfehler. `ebay_run_phase_state_save` las danach denselben gespeicherten Zustand nochmals ausschließlich für den Vergleich eines Teilabschnitts. Jetzt wird derselbe Teilabschnitt aus dem *bereits erfolgreich vollständig verifizierten* Zustand verglichen – **kein erneuter Datenbank-/Optionslesevorgang**, gleiche Rückgabe. Die entscheidende Kontrolle gegen fehlgeschlagene Schreibvorgänge wurde **nicht** entfernt.
+1. **Zweiter Options-Leseaufruf nach erfolgreichem Speichern:** `ebay_run_save` vergleicht den **gesamten** geschriebenen Zustand mit dem aus WordPress zurückgelesenen Zustand und meldet einen echten Speicherfehler. `ebay_run_phase_state_save` las danach denselben gespeicherten Zustand nochmals ausschließlich für den Vergleich eines Teilabschnitts. Jetzt wird derselbe Teilabschnitt aus dem *bereits erfolgreich vollständig verifizierten* Zustand verglichen – **kein erneuter `get_option`-Aufruf**, gleiche Rückgabe. Die entscheidende Kontrolle gegen fehlgeschlagene Schreibvorgänge wurde **nicht** entfernt.
 2. **Nicht erreichter privater Wrapper:** `ebay_private_public_post_allowed` war im gesamten Plugin nur einmal vorhanden: als eigene `private`-Definition. Die tatsächlich verwendete private Prüfregel `ebay_private_public_post_allowed_base` bleibt unverändert, inklusive aller bestehenden öffentlichen Sicherheitsfilter. Keine Schnittstelle und keine öffentliche Funktion entfernt.
 
 ## Physische Kontrollen und reproduzierbare Tests
@@ -16,7 +16,7 @@ Start → ein zentraler gespeicherter Lauf → vorhandene und neue eBay-Angebote
 - QA6 → QA7: **66/66 ZIP-Dateien** vorhanden und CRC-PASS; nur zwei bekannte eBay-Trait-Dateien geändert, **64/66 Dateien bytegleich**. PHP-Syntax **23/23 PASS**. Kein Anbieterwechsel, keine Änderung an Katalogen, Bildern, historischen Sicherungen, Zugangsdatenpfaden oder WordPress-Core.
 - Die **fünf bereits bestehenden Fachtestprogramme** an der aus der **fertigen QA7-ZIP** entpackten Originalquelle ausgeführt: **61/61 PASS** (16 zentrale Auswahl, 13 Fehlerisolation, 11 direkte Materialisierung, 10 zusammenhängender Testablauf, 11 dauerhaftes Speichern).
 - **13/13 direkte QA6/QA7-Vergleiche identisch:** vier öffentliche Nachweisfälle sowie neun Nachsuch- und Auswahlfälle; Status, gespeicherte Ergebnisse und Aktionen identisch.
-- **8/8 zusätzliche Speicher-Rückgabevergleiche identisch**, einschließlich fehlgeschlagener Speicherung, altem Schema, ungültigem Schlüssel und ungewöhnlichen Eingabewerten. Bei fünf erfolgreichen Speichervorgängen wurde genau **eine zusätzliche Optionslesung entfernt**; bei Fehlerwegen gab es keine Änderung.
+- **8/8 zusätzliche Speicher-Rückgabevergleiche identisch**, einschließlich fehlgeschlagener Speicherung, altem Schema, ungültigem Schlüssel und ungewöhnlichen Eingabewerten. Bei fünf erfolgreichen Speichervorgängen wurde genau **ein zusätzlicher `get_option`-Aufruf entfernt**; bei Fehlerwegen gab es keine Änderung.
 - Alle Tests in der isolierten PHP-Umgebung mit nachgestellten WordPress-Funktionen; **kein realer WordPress-/MariaDB-/eBay-End-to-End-PASS** daraus abgeleitet.
 
 ## Dateien / Ablage
