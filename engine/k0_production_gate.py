@@ -42,44 +42,26 @@ INFORMATIONAL_DECISION_TERMS=(
     'vorgesehenen einsatz',
 )
 
-def _expected_intent(article_type,title):
-    typ=str(article_type or '').strip()
-    t=_plain(title).casefold()
-    if typ==PROPERTY_WINNER_TYPE:
-        return PROPERTY_WINNER_INTENT
-    if typ=='Beratung':
-        return 'DECISION_SUPPORT'
-    if typ=='Vergleich':
-        return 'COMPARISON_DECISION'
-    if typ=='Pflege':
-        return 'PROCEDURAL_GUIDANCE'
-    if typ=='FAQ':
-        if re.search(r'\b(welche|welcher|welches)\b.*\b(besser|geeignet|wählen|auswählen|kaufen)\b',t):
-            return 'DECISION_SUPPORT'
-        if re.match(r'^(wie (lege|legt|mache|macht|reinige|pflegt|pflege|verwende|nutze|benutze)\b)',t):
-            return 'PROCEDURAL_INFORMATIONAL'
-        return 'INFORMATIONAL_DIRECT_QUESTION'
-    return 'INFORMATIONAL'
-
 def _verify_semantic_intent(package,ident,body):
     profile=package.get('content_profile')
     if not isinstance(profile,dict):
         raise Blocked('K0_CONTENT_PROFILE_MISSING')
-    expected=_expected_intent(ident.get('article_type'),ident.get('title'))
     actual=str(profile.get('search_intent') or '').strip()
-    if actual!=expected:
-        raise Blocked('K0_SEARCH_INTENT_MISMATCH:'+actual+':EXPECTED:'+expected)
+    if not actual:
+        raise Blocked('K0_CONTENT_PROFILE_INTENT_MISSING')
+    # The external editorial SEO owner decides intent. K0 checks its presence,
+    # never re-derives or vetoes that decision from the article type or title.
 
     plain=_plain(body).casefold()
     fingerprints=[p for p in FORBIDDEN_BOILERPLATE if p in plain]
     if fingerprints:
         raise Blocked('K0_TEMPLATE_BOILERPLATE_CONTAMINATION:'+','.join(fingerprints))
 
-    if expected=='INFORMATIONAL_DIRECT_QUESTION':
+    if actual=='INFORMATIONAL_DIRECT_QUESTION':
         hits=sorted({term for term in INFORMATIONAL_DECISION_TERMS if term in plain})
         if len(hits)>=3:
             raise Blocked('K0_INFORMATIONAL_FAQ_DECISION_CONTAMINATION:'+','.join(hits))
-    return expected
+    return actual
 
 def _load(path):
     x=json.loads(Path(path).read_text(encoding='utf-8'))
