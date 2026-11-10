@@ -13,7 +13,7 @@ from engine.ppm_parity_guard import verify as ppm_verify
 from engine.k0_production_gate import _verify_semantic_intent, Blocked
 from engine.checkers import run_article_checks
 from engine.core import hard_rules, load_values
-from tests.test_k10 import make_base
+from test_k10 import make_base
 
 ROOT=Path(__file__).resolve().parents[1]
 REMOVED={
