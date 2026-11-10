@@ -29,3 +29,25 @@ Pfad: `/mnt/data/ebay_kiss_integrated_stage/affiliate-portal-router/`, aus bitgl
 6. Erst gesamter WP-Test einschließlich fehlgeschlagener Einzelfälle, Fortsetzung, Doppelartikel, Multi-Zuordnung, öffentlichem Produkt auf korrekter Seite; eine einzige gebündelte Test-/Freigabeversion.
 
 **Grenze:** Bisher ist die Backend-Navigation in der isolierten Arbeitskopie tatsächlich geändert und geprüft. Die zentrale eBay-Engine ist **noch nicht zusammengeführt**. Keine Behauptung, dass diese Änderungen bereits live sind.
+
+
+## Folgearbeit 10.11.2026 – isolierte Umsetzung und harter Referenzvergleich
+
+**Staging, NICHT installiert, NICHT freigegeben.** Vollständige 66-Dateien-Arbeitskopie in der persönlichen Library:
+`/pferdeatelier/PLUGINS/QA/EBAY_319_KISS_GESAMTUMBAU_STAGING_NICHT_INSTALLIEREN_20261110.zip`
+(SHA-256 `8de2872b6dbec09db0bbbaa2d5667c31ffc070ac8a12bff9512d273f8f70aa07`).
+Diff/Prüfakte am selben Ort:
+`EBAY_319_KISS_STAGING_20261110.patch` (SHA-256 `52d1ba538b42200c41c7a1c71000b48e0728a2c770acd4ce5d270097a22ed82c`),
+`EBAY_319_KISS_GESAMTUMBAU_QA_20261110.md`.
+
+**Implementiert:**
+- In `includes/trait-ppar-ebay.php` prüft der bestehende kanonische BUSINESS-Gapfill-Plan bei fehlenden Gewinnern **begrenzt die bereits gespeicherten Angebote**, mit derselben strengen Quell-/Klassifizierungs-/Qualitätsregel; der reguläre Auswahl-/Materialisierungsweg entscheidet weiter. Kein neuer API-Aufruf, Worker, Datenbankschema oder eigener Laufzustand.
+- Die bisherige 319-Zusatzauswahl verwendet nun **dieselbe** Kandidatenprüfung, damit zumindest keine zweite fachliche Kandidatenentscheidung mehr besteht. **Ihre eigene UI und Start-/Tick-Steuerung sind als Übergang noch vorhanden** und müssen VOR endgültiger Freigabe funktional ersetzt werden. Keine Funktionslöschung/Deaktivierung.
+- Exakt **43 unerreichbare Zeilen** nach der unbedingten `return disabled` in `ebay_run_verify_private_public` entfernt. Gleiches Funktionsverhalten, Signatur erhalten.
+- Die schon dokumentierte, nur optische Verringerung um drei doppelte Menüpunkte erhalten.
+
+**Gesamtvergleich zum 319-Original:** **66/66 Dateien vorhanden**, **1.561/1.561 ursprüngliche PHP-Funktionen erhalten**, genau eine gemeinsame Hilfsfunktion zusätzlich, alle registrierten Hooks unverändert. **41 Assets/1 Recovery-JSON byteidentisch**, übrige 62 Originaldateien unverändert; nur vier PHP-Dateien geändert. Keine Migration, `delete_option`, Credential-Änderung oder Veränderung von WordPress-Daten.
+
+**QA:** 23 PHP-Lints PASS; 16/16 neue isolierte Tests (kanonische Auswahl, fachliche Ablehnung, Datenbanklesefehler einzelner Kategorie ohne globalen Abbruch, Drei-Angebote-Limit, Normalweg ohne weitere Suche) PASS; historische 49/49 PHP-Tests, 14 HTTP-Szenarien, kanonische Orchestrator-Simulation, Bootstrap (342 Methoden/143 Hooks) und Frontend-Quellgate PASS. **Keine echte WordPress-Datenbank-End-to-End-Abnahme**. Der Nutzer hat ausdrücklich 100% Funktionserhalt und keinen Daten-/Credentials-Verlust gefordert: bei ungesichertem Altcode bleibt dieser unverändert. Nicht als installierbares neues Release bezeichnen.
+
+**Offen:** 319-Zusatzsteuerung vollständig in den einen kanonischen Checkpoint überführen, alte Option behalten; Speicherung mit tatsächlichem WP-Readback sowie reales Frontend auf der richtigen Produktseite abnehmen. Erst danach über die nächsten kleinen, nachweislich redundanten Bestandteile entscheiden.
