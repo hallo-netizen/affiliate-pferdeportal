@@ -27,3 +27,27 @@ Eine pausierte, gescheiterte oder noch laufende eBay-Recherche darf den bereits 
 - Vollständiger Patch gegen 6.72.320, maschinenlesbare Datei-für-Datei-Prüfung und die ausführbaren Tests liegen in `PLUGINS/EVIDENCE` im QA-Branch.
 
 **Abnahmeschritt vor Live:** dieselbe Test-ZIP auf getrennter WordPress-Instanz mit vorhandener Recherchehistorie einspielen. Nachweisen: erste schon geprüfte eBay-Kachel trotz pausierter Recherche, aktualisierte Quelle innerhalb zwei Stunden, beendet ausgeblendete Ware, erhaltene Historie, keine falsche Kategoriezuordnung oder doppelte Kampagne. Ohne diesen Nachweis keine Current-/Produktivfreigabe.
+
+## Reale Screenshots 17:35–17:40 Uhr – Fortschritt ja, Backend langsam
+
+**Neue Beobachtung aus vom Nutzer bereitgestellten Screenshots (10.11.2026, Browser pferde-atelier.de):**
+- 17:35 Uhr: kanonischer Lauf **running** in `gapfill_discovery`, rund **340 Pakete / 345 echte Schritte**.
+- 17:40 Uhr: derselbe Lauf **running**, rund **360 Pakete / 365 echte Schritte**. Damit innerhalb dieser fünf Minuten **20 zusätzliche Pakete und 20 Fortschrittsschritte**; kein bestätigter Stillstand. Der Bildschirmausschnitt zeigt keine Abschaltung und keine Datenlöschung.
+- Gespeicherte öffentliche BUSINESS-Kategorieabdeckung **154/298**, offene Familien **144**; separat **232 gespeicherte eBay-Freigaben** (nicht gleich tatsächlich sichtbare Produktkacheln). Auswahl-Teilstatus **complete**, **310 Quellen geprüft, 299 aktiv/materialisiert**; dies ist nicht der öffentliche Gesamtabschluss.
+- Das Frontend zeigte zwischenzeitlich mindestens **eine sichtbare eBay-Produktkachel** auf der Schabracken-Kategorieseite; ein vollständig repariertes Frontend ist dadurch nicht bewiesen.
+- Weiterhin **„Produktverfügbarkeit noch nicht geprüft“**: Es gibt in den Screenshots **keinen Nachweis** eines erfolgreichen Durchlaufs der neuen zweistündlichen QA9-Verfügbarkeitskontrolle.
+- Nutzer meldet **„Backend ist unfassbar langsam“**. Ein genauer Seitenzeit-/SQL-/Serverlast-Messwert fehlt. Darum **die neue Verfügbarkeitskontrolle nicht als bewiesene Ursache bezeichnen**.
+
+**Direkt aus QA9-Quelltext überprüfte Belastungspfade:**
+1. Die bestehende Selbstfortsetzung `ebay_run_handle_self_drive_request` führt das jeweilige Arbeitspaket aus und löst bei `advanced` oder `retryable_error` die nächste gleichnamige Fortsetzung aus; der kanonische Arbeitslauf läuft daher unabhängig davon weiter, ob die Backend-Seite geöffnet ist.
+2. Die auf der eBay-Adminseite eingebundene **45-Sekunden-AJAX-Statusabfrage** `ppar_ebay_canonical_tick` nennt sich lesend, kann aber in `run_ebay_admin_ajax_tick` nach **180 Sekunden nachweislichem Stillstand** selbst **einen echten Arbeitsschritt** ausführen und wieder fortsetzen. Dies ist ein **belegter zusätzlicher Last-/Seiteneffekt** des Statuspfads, aber keine Erklärung des normalen laufenden Fortschritts.
+3. QA9 legt neu eine Verfügbarkeitsaufgabe `ensure_ebay_refresh_schedule` mit Ersttermin **60 Sekunden nach geplantem Cron-Anlauf** an; höchstens **5 eBay-Angebote je Paket**, bei voll besetztem Paket ein Fortsetzungstermin nach **90 Sekunden**. Die Backend-Anzeige „noch nicht geprüft“ legt aber nahe, dass zumindest **noch kein Prüf-Batch erfolgreich protokolliert** wurde. Ein Cron-Rückruf könnte vorher mit `disabled`, `compliance_pending`, `storage_unavailable` etc. enden, ohne `last_batch_at` zu setzen; **exakten Runtime-Grund nicht raten**.
+4. Die Adminseite `render_ebay_page` lädt bei jedem Aufruf mehrere gespeicherte Statusoptionen, eine begrenzte Review-Liste und baut den vollständigen **fehlende-Familien-CSV-Datensatz bereits während des Seitenaufbaus**, selbst bei zugeklapptem Detailbereich; das ist ein belegter, unabhängig zu optimierender Leseweg, sein Zeitanteil aber noch unbekannt.
+
+**Verbindlicher KISS-Auftrag für die nächste Plugin-Version (noch nicht als erledigt ausgeben):**
+- **Kein aktuelles Plugin deaktivieren / keinen Lauf zurücksetzen, solange Nutzer dies nicht will.**
+- Backend-Status strikt **nur lesen**; keinerlei synchroner Worker-/Selbstfortsetzungsversuch durch normales Öffnen/Status-Pollen. Den bestehenden Hintergrund-Taktgeber weiterverwenden; Fehlerbehandlung nicht schwächen.
+- Bei zugeklapptem Report keine teuren Vorbereitungen, unnötige Options-, Katalog- oder DB-Lesewege zurückbauen und Quellen nur einmal einlesen. Keine neue Backend-Seite.
+- Separate Verfügbarkeit auf **begrenzte Serverlast** prüfen; Pakete/Weiterleitung nicht mit Recherche konkurrieren lassen, ohne wieder von der Recherche abhängig zu werden. Sechs-Stunden-Frische und 2h-Prüfziel beibehalten.
+- **Vorher/nachher in echtem WordPress messen** (Backend-Ladezeit, AJAX, Cron-Job, Abdeckung, aktuelle Freigaben); ohne Messung keine Aussage „Backend-Langsamkeit behoben“.
+- Alle recherchierten Produkte, Zuordnungen, Laufcursor, öffentliche Checkpoints und historischen Daten erhalten; andere Portale unangetastet.
