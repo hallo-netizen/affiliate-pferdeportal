@@ -1,0 +1,191 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "Beratung",
+    "category": "pferdedecken-regendecken-beratung",
+    "plan_slot": "799e033a481cdcf36bfb098e90bd2f1e043919301c980c09afb1b5fdc205b52e",
+    "target_keyword": "Horseware regendecken",
+    "title": "Horseware-Regendecken und ihre Unterschiede bei Schnitt und Ausstattung"
+  },
+  "content_profile": {
+    "search_intent": "COMMERCIAL_INVESTIGATION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Horseware – FAQ zu Weidedecken",
+          "source_url": "https://www.horseware.com/de-de/faqs"
+        },
+        {
+          "source_title": "Horseware – Aufbau und Material von Pferdedecken",
+          "source_url": "https://www.horseware.com/blog/breaking-down-the-rug"
+        },
+        {
+          "source_title": "Horseware – Amigo Bravo 12 Wug",
+          "source_url": "https://www.horseware.com/de-de/amigo-bravo-12-wug-turnout-400g-heavy"
+        },
+        {
+          "source_title": "British Horse Society – Pferdedecken auswählen",
+          "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/seasonal-care/types-of-rugs-and-rugging-a-horse/"
+        }
+      ],
+      "claims": [
+        "Horseware unterscheidet Rambo-, Rhino- und Amigo-Weidedecken vor allem über die Außenmaterialien: ballistisches Nylon, Polypropylen und Polyester.",
+        "Der Denierwert allein erlaubt keinen verlässlichen direkten Festigkeitsvergleich zwischen unterschiedlichen Materialarten.",
+        "Die Amigo Bravo 12 Wug kombiniert einen hohen Halsausschnitt mit V-Brustverschluss, Beinausschnitten und drei Kreuzgurten; diese Eigenschaften sind modellabhängig.",
+        "Bei der Deckenwahl müssen Passform an Schulter, Brust und Widerrist sowie Wetter, Schur, Körperzustand und tägliche Kontrollen berücksichtigt werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "Horseware regendecken",
+      "topic": "Horseware-Regendecken und ihre Unterschiede bei Schnitt und Ausstattung",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdedecken-regendecken-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Horseware-Regendecken nach Material, Passform, Verschlüssen und tatsächlichem Wetterschutz auswählen",
+      "decision_criteria": [
+        "Rambo, Rhino und Amigo nach dem Oberstoff unterscheiden",
+        "Passform am Widerrist und Schulterfreiheit prüfen",
+        "Frontverschluss und Bauchgurte nach Einsatzzweck wählen"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Horseware – FAQ zu Weidedecken",
+        "source_url": "https://www.horseware.com/de-de/faqs",
+        "statement": "Horseware unterscheidet Rambo-, Rhino- und Amigo-Weidedecken vor allem über die Außenmaterialien: ballistisches Nylon, Polypropylen und Polyester.",
+        "evidence_text": "Horseware unterscheidet Rambo-, Rhino- und Amigo-Weidedecken vor allem über die Außenmaterialien: ballistisches Nylon, Polypropylen und Polyester.",
+        "evidence_text_sha256": "c26029c39c74d8ec333190fc839ef76b7e9ee8a41c3043f1d3263c8ed4673cb1",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "Horseware – Aufbau und Material von Pferdedecken",
+        "source_url": "https://www.horseware.com/blog/breaking-down-the-rug",
+        "statement": "Der Denierwert allein erlaubt keinen verlässlichen direkten Festigkeitsvergleich zwischen unterschiedlichen Materialarten.",
+        "evidence_text": "Der Denierwert allein erlaubt keinen verlässlichen direkten Festigkeitsvergleich zwischen unterschiedlichen Materialarten.",
+        "evidence_text_sha256": "dcb157efa762e9d6d1f637e669cb67e243fc2579b0a1d5305de1760c1a01bb03",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "Horseware – Amigo Bravo 12 Wug",
+        "source_url": "https://www.horseware.com/de-de/amigo-bravo-12-wug-turnout-400g-heavy",
+        "statement": "Die Amigo Bravo 12 Wug kombiniert einen hohen Halsausschnitt mit V-Brustverschluss, Beinausschnitten und drei Kreuzgurten; diese Eigenschaften sind modellabhängig.",
+        "evidence_text": "Die Amigo Bravo 12 Wug kombiniert einen hohen Halsausschnitt mit V-Brustverschluss, Beinausschnitten und drei Kreuzgurten; diese Eigenschaften sind modellabhängig.",
+        "evidence_text_sha256": "ae976e104af5049bf0ad0d7e16640cf7bee7a7bbc580699b2c9f12e2ca347986",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_title": "British Horse Society – Pferdedecken auswählen",
+        "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/seasonal-care/types-of-rugs-and-rugging-a-horse/",
+        "statement": "Bei der Deckenwahl müssen Passform an Schulter, Brust und Widerrist sowie Wetter, Schur, Körperzustand und tägliche Kontrollen berücksichtigt werden.",
+        "evidence_text": "Bei der Deckenwahl müssen Passform an Schulter, Brust und Widerrist sowie Wetter, Schur, Körperzustand und tägliche Kontrollen berücksichtigt werden.",
+        "evidence_text_sha256": "245441884963aed7957184baba762f834248e0ce71bfa5d59858691db8c48b55",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+        "anchor": "Regendecken für Pferde im Überblick",
+        "block": "criteria"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/pferdedecken-regendecken-faq/",
+        "anchor": "Häufige Fragen zu Regendecken",
+        "block": "decision"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "anchor": "Regendecken pflegen und reparieren",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-regendecken-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdedecken-regendecken-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Horseware",
+      "Amigo",
+      "Rhino",
+      "Rambo",
+      "Material",
+      "Passform",
+      "Brustverschluss",
+      "Widerrist",
+      "Weidedecke",
+      "Schnitt"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Ein Vergleich der drei Horseware-Reihen nach Oberstoff, typischer Ausstattung und praktischer Verwendung hilft, eine passende Decke ohne pauschalen Produktsieger zu finden."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "criteria"
+  },
+  "publish_allowed": false
+}
