@@ -70,6 +70,30 @@ class K0ApprovedSeoOwnerQA(unittest.TestCase):
         pkg['content_profile']['search_intent']='DECISION_SUPPORT'
         self.assertEqual(_verify_semantic_intent(pkg,ident,'<article>Eine gute fachliche Erklärung</article>'),'DECISION_SUPPORT')
 
+    def test_real_three_item_metadata_handoff_is_still_valid(self):
+        from engine.k0_portal_resolver import validate_intake
+        path=ROOT/'real_runs/k0/batch-20261110-42619ca7/BATCH_INTAKE.json'
+        batch=json.loads(path.read_text(encoding='utf-8'))
+        items=validate_intake(batch)
+        self.assertEqual(len(items),3)
+        self.assertEqual([x['target_keyword'] for x in items],[
+            'Horseware regendecken','Fliegen regendecke pferd','Regendecke pferd 0g'
+        ])
+        self.assertEqual(len({x['plan_slot'] for x in items}),3)
+
+    def test_keyword_staccato_still_blocks_repetitive_h2s(self):
+        article=make_base()
+        article['target_keyword']='Longierpeitsche'
+        article['html']=article['html'].replace(
+            '<h2>Stimme und Longe im Zusammenspiel</h2>',
+            '<h2>Stimme und Longierpeitsche im Zusammenspiel</h2>'
+        ).replace(
+            '<h2>Sicherer Einsatz beim Longieren</h2>',
+            '<h2>Longierpeitsche sicher beim Longieren verwenden</h2>'
+        )
+        results={r['rule_id']:r['status'] for r in run_article_checks(article)}
+        self.assertEqual(results['heading.keyword_staccato_forbidden'],'FAIL')
+
     def test_real_boilerplate_and_missing_intent_still_block(self):
         ident={'article_type':'Beratung','title':'Ein sachlicher Titel'}
         with self.assertRaises(Blocked):
