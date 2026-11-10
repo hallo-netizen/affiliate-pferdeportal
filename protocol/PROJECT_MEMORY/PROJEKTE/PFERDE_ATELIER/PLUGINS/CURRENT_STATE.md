@@ -1,3 +1,11 @@
+## 10.11.2026 – KISS-BEREINIGT PSTE .33 QA-Paket gebaut und archiviert
+- **Neues isoliertes Testpaket PSTE 0.57.144.33** aus geprüfter .32; **PSERC 0.28.60 bleibt unverändert**. Die neue ZIP ist mit exaktem SHA256 `cd62e7c58dce4bfe9c75026bb604e0182f45a12f5d26075d9b1a85a859472ae2` und der zugehörige Diff/QA-Bericht im privaten `/pferdeatelier/PLUGINS/QA/` gespeichert. Alle 121 Paketdateien vorhanden, 116 bytegleich; ungepackt 4.815 Bytes kleiner.
+- **Beweisbar entfernt:** doppelte In-Page-Tabnavigation; ein bei WordPress-Priorität 999 wirkungsloser PSERC-Menüentfernungsaufruf; zehn ungenutzte **private** Funktionen (inklusive `tabs`; neun weitere). Funktion `cleanAlias` bleibt ausdrücklich, weil per Callback verwendet. Keine öffentlichen Funktionen, Hooks, Exportpfade oder Datenfelder gelöscht.
+- **QA-Prüfungen:** 216 weiter vorhandene Methoden in 3 bearbeiteten Klassen original-bytegleich bis auf exakt drei dokumentierte UI-Stellen; 66/66 registrierte Hooks bei READY und 13/13 bei PENDING identisch; alle fünf WP-Menüziele identisch; 83/83 PHP-Lints auf finaler ZIP PASS, 121/121 Datei-Replay; echte 3-READY-Datei aus WordPress-Test ist beim unveränderten PSERC-Eingangsprüfer weiter gültig, Manipulations-/Duplikattests sperren.
+- **LIVE weiterhin NEIN**: 0.57.120/.28.43 Original-Livequellen und reale Datenmigration noch nicht belegt. Erste Installation nur auf WP-TEST, nachdem alter .32-Stand und Datenbank gesichert sind; danach ein gezielter Menü-/K0-Handoff-Test. Kein K0-Produktions- oder Datenumbau.
+- [QA-Nachweis und exakter Versionsstand](QA_ONLY/PSTE_05714433_KISS_BEREINIGUNG_NACHWEIS_20261110.md).
+
+---
 ## 10.11.2026 – KISS-Verschlankung: echter Codevergleich, noch kein neues Installationspaket
 - **Ist:** PSTE 0.57.144.32 und PSERC 0.28.60 auf TEST, echte K0-V2-Übergabe 3/3 PASS; LIVE .120/.43 noch unberührt.
 - **Nachgewiesene UI-Dopplung:** dieselben vier PSTE-Unterseiten erscheinen als WordPress-Menü **und** zweite In-Page-Tab-Leiste; nur privater Tab-Aufrufer, kein eigener Arbeitsweg. **Wirkungsloser Code:** PSTE-PSERC-Menüentfernung bei admin_menu-Priorität 999, obwohl PSERC erst bei 1000 anlegt. Nicht einfach die Priorität erhöhen, sonst notwendiges Menü weg.
