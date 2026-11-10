@@ -1,0 +1,29 @@
+# Pferdeatelier eBay 6.72.321 QA9 – KISS: Suchen, Anzeigen und Verfügbarkeit trennen
+
+Datum: 10.11.2026. **NUR ISOLIERTE TESTFASSUNG, KEIN LIVE-/CURRENT-RELEASE.** Grundlage ist das vollständig geprüfte QA7-Plugin 6.72.320 mit dem QA8-Pausen-Fix. Produktionsdaten und WordPress wurden nicht angefasst.
+
+## Ziel
+Eine pausierte, gescheiterte oder noch laufende eBay-Recherche darf den bereits geprüften, veröffentlichten Produktbestand **nicht** an seiner Anzeige oder Aktualisierung hindern. Neue recherchierte Produkte sollen nach fachlich sicherer Materialisierung **auch vor dem Abschluss der Gesamt-Recherche** sichtbar werden. Bestätigt beendete/ausverkaufte Angebote müssen verschwinden. Die eBay-Frischegrenze von sechs Stunden bleibt bestehen.
+
+## Konkrete Änderungen
+1. **Frühere Veröffentlichung im bisherigen sicheren Ausgabepfad:** Nach jeder passenden ursprünglichen BUSINESS-Materialisierung, auch in `gapfill_select`, werden nur bereits wirklich **veröffentlichte** und durch die bestehende Quellen-/Sicherheitsprüfung freigegebene Produktkampagnen an den **einen** bisherigen sicheren öffentlichen Checkpoint angehängt. Der frühere gültige Bestand bleibt. Auch ohne zuvor vorhandenen Checkpoint kann das erste qualifizierte Produkt einen neuen sicheren Grundstock begründen. Ein vorhandener ungültiger Checkpoint wird **nie** überschrieben. Keine zusätzlichen Checkout-/Klassifizierungswege.
+2. **Bestehende Produktangebote automatisch aktualisieren:** Der bereits vorhandene getItem-/Refresh-Mechanismus verarbeitet in einer eigenen, begrenzten WordPress-Aufgabe ausschließlich *bereits veröffentlichte BUSINESS-Angebote*: im Normalfall alle zwei Stunden; höchstens fünf Angebote je Arbeitsschritt, bei vorhandenem externen Herzschlag zwei. Bei vielen Produkten läuft dieselbe Aufgabe in kleinen Fortsetzungen. Keine eigenständige Recherche, keine neue Worker-Engine und keine neue Tabelle. Verfügbarkeitsergebnis bleibt getrennt vom gespeicherten Gesamt-Recherche-Cursor. Anhalten/Fortsetzen oder Fehler der Recherche blockieren diese Aufgabe nicht.
+3. **Sichere Aktualität:** Bestätigte Nichtverfügbarkeit durch Enddatum, OUT_OF_STOCK oder getItem-Endsignal geht durch den bestehenden Beendigungs-/Ersatzpfad. Temporäre eBay-Fehler beenden ein Angebot nicht künstlich und machen es auch nicht künstlich länger frisch. Vorhandene `fresh_until`-Grenze (sechs Stunden) bleibt unverändert, statt die verbindliche eBay-Frischepflicht auszusetzen.
+4. **Pausen-/Fehlstatus:** Bereits in QA8 korrigiert; ein manueller Halt der Recherche wird nicht mehr vom externen Herzschlag als neuer Recherchefehler behandelt. Die Aktualisierung bestehender Produkte darf dennoch arbeiten.
+5. **Backend und KISS:** Die in QA5–7 bereits aus dem sichtbaren Backend entfernten redundanten Untermenüs und der beseitigte zweite 319-Controller bleiben entfernt. Statt zusätzlicher Backendseite nur eine kurze, lesende Anzeige des Aktualisierungsstands und des getrennten Recherchestatus. Keine zusätzliche Fachprüfung oder zweite Benutzersteuerung.
+
+## Unverlierbarkeit und Grenzen
+- **Kein Löschen, Zurücksetzen oder Neuanlegen** der bestehenden Rechercheoptionen, Quellhistorie, vorhandenen Artikel, Angebote, Zuordnungen, Laufcursor oder bisheriger Checkpoints durch den neuen Weg. Nur eine kleine neue WordPress-Option speichert den Cursor der **Verfügbarkeitsaktualisierung**, niemals Produktdaten.
+- Bereits gefundene Produkte bleiben physisch in den bestehenden Speichern. Die bestehende `ebay_refresh_mark_ended`-/Tombstone-Funktion behandelt nur nachweislich abgelaufene Angebote und bewahrt die historische Quelle.
+- Sicherheitshalber wird bei fehlender sicherer Produktverifikation nichts als neu verfügbar behauptet. Ein alter, defekter Checkpoint wird nicht überschrieben. „Freigegeben“ bedeutet weiterhin nicht „jedes Produkt auf jeder Kategorie garantiert“.
+- WordPress-Cron ist nur dann zuverlässig zweistündlich, wenn WordPress/Serveraufgaben wirklich ausgeführt werden. Externer Herzschlag kann bei pausiertem/fehlerhaftem Recherchelauf einen begrenzten Teil der Verfügbarkeitskontrolle übernehmen.
+- Die tatsächlich gespeicherten 109 Produkte, eBay-Antworten, die Datenbank und die öffentlichen Kategorien wurden hier **nicht** in einer realen WordPress-Testinstallation validiert. Darum **nur Test-Plugin**, keine Behauptung eines fertigen Live-Fixes.
+
+## Artefakt und Prüfungen
+- ZIP `Pferdeatelier_Affiliate_6.72.321_QA9_KISS_NUR_STAGING_TEST.zip`; 66 Dateien, **62 davon byteidentisch** zu QA7 6.72.320, nur vier bearbeitet: zwei eBay-Traits, Plugin-Hauptdatei und Readme.
+- Version `6.72.321` im WordPress-Header, Plugin-Konstante und Readme konsistent.
+- ZIP-Dateiprüfung 66/66; **23/23** PHP-Syntaxprüfungen bestanden; **61/61** bestehende PHP-Fachtests gegen **QA9-Quelldateien** bestanden, zusätzlich **19/19** gezielte PHP-Tests (mocked WP-/DB), darunter leerer Grundstock, Bestandsschutz, manuell pausierter Lauf, Fortsetzungen, Nicht-Überschreiben defekten Checkpoints und Auth-Ausfall.
+- ZIP SHA256: `4a84696bdd10d5c32f3ab5d4e4583fc9029ef673403f43eebfe2217ffd72e47a`, Größe 5.370.718 Bytes.
+- Vollständiger Patch gegen 6.72.320, maschinenlesbare Datei-für-Datei-Prüfung und die ausführbaren Tests liegen in `PLUGINS/EVIDENCE` im QA-Branch.
+
+**Abnahmeschritt vor Live:** dieselbe Test-ZIP auf getrennter WordPress-Instanz mit vorhandener Recherchehistorie einspielen. Nachweisen: erste schon geprüfte eBay-Kachel trotz pausierter Recherche, aktualisierte Quelle innerhalb zwei Stunden, beendet ausgeblendete Ware, erhaltene Historie, keine falsche Kategoriezuordnung oder doppelte Kampagne. Ohne diesen Nachweis keine Current-/Produktivfreigabe.
