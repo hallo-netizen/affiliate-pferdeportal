@@ -6,7 +6,9 @@ any fresh SEO logic. Accepted source: unmodified PSERC compiler manifest.
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
+import math
 import re
 import sys
 from pathlib import Path
@@ -16,6 +18,46 @@ from .k0_portal_resolver import validate_intake
 
 MANIFEST_MODE = 'READ_ONLY_METADATA_ONLY_EXACT_FIVE_FIELDS'
 OWNER_PROFILE = 'PSTE_INTENT_PROFILE_V2_SEO_FIRST_EVIDENCE_BOUND_MULTI_BRANCH'
+
+def _php_canonical_json(value):
+    """Match PSERC_Stable_Json/PSTE profile JSON semantics, including floats.
+
+    Python's JSON encoder differs from PHP for small/exponent-form floats:
+    1e-05 versus 1.0e-5. Source-manifest proof must not fail on genuine SEO
+    probabilities for that formatting reason. This is ONLY for upstream hashes,
+    never the K0 article hashes.
+    """
+    if value is None:
+        return 'null'
+    if value is True:
+        return 'true'
+    if value is False:
+        return 'false'
+    if isinstance(value, str):
+        return json.dumps(value,ensure_ascii=False).replace('\u2028',r'\u2028').replace('\u2029',r'\u2029')
+    if isinstance(value, int):
+        return str(value)
+    if isinstance(value,float):
+        if not math.isfinite(value):
+            raise Blocked('K0_OWNER_NONFINITE_SEO_NUMBER')
+        s=repr(value)
+        if 'e' in s:
+            mantissa,exp=s.split('e',1)
+            if '.' not in mantissa:
+                mantissa+='.0'
+            number=int(exp)
+            return mantissa+'e'+('+' if number>=0 else '-')+str(abs(number))
+        return s
+    if isinstance(value,list):
+        return '['+','.join(_php_canonical_json(x) for x in value)+']'
+    if isinstance(value,dict):
+        if any(not isinstance(k,str) for k in value):
+            raise Blocked('K0_OWNER_PHP_CANONICAL_KEY_INVALID')
+        return '{'+','.join(_php_canonical_json(k)+':'+_php_canonical_json(value[k]) for k in sorted(value))+'}'
+    raise Blocked('K0_OWNER_PHP_CANONICAL_TYPE_INVALID')
+
+def php_stable(value):
+    return hashlib.sha256(_php_canonical_json(value).encode('utf-8')).hexdigest()
 
 class Blocked(RuntimeError):
     pass
@@ -32,7 +74,7 @@ def inspect(manifest):
         raise Blocked('K0_OWNER_MANIFEST_OR_MODE_INVALID')
     claimed=manifest.get('manifest_sha256')
     content={k:v for k,v in manifest.items() if k!='manifest_sha256'}
-    if not _hex64(claimed) or stable(content)!=claimed:
+    if not _hex64(claimed) or php_stable(content)!=claimed:
         raise Blocked('K0_OWNER_MANIFEST_HASH_MISMATCH')
     batch=manifest.get('next_textmachine_metadata_batch')
     try:
@@ -67,7 +109,7 @@ def inspect(manifest):
         if not _hex64(profile.get('profile_sha256')):
             raise Blocked('K0_OWNER_PROFILE_HASH_MISSING')
         profile_core={k:v for k,v in profile.items() if k not in ('profile_sha256','analysis_sha256')}
-        if stable(profile_core)!=profile['profile_sha256']:
+        if php_stable(profile_core)!=profile['profile_sha256']:
             raise Blocked('K0_OWNER_ORIGINAL_PSTE_PROFILE_HASH_MISMATCH')
         records[slot]={'search_intent':intent,'profile_sha256':profile['profile_sha256']}
     if set(records)!=set(expected):
