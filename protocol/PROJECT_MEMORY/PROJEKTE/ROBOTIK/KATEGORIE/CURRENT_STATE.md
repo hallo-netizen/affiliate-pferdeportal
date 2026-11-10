@@ -1,9 +1,9 @@
 # ROBOTIK / KATEGORIE – EINZIGER AKTUELLER STATUS
-Stand: 09.11.2026
+Stand: 10.11.2026
 
 ## Verbindlicher Fachstand
-**Hinweis für neue Chats: Maßgeblich ist die letzte unten datierte Standfortschreibung (V3/Revision 8). Ältere Status- und Verweiseinträge sind historische Zwischenstände, keine zweite gültige Masterversion.**
-- **Eine Forschungsquelle**: `RECHERCHE/PRODUKTE_V2_20261108.json` (68 weiterhin ungeprüfte Ausgangs-Produktkandidaten, **Revision 8**; 139 offene Randforschungsfälle). Die alte 27er-Liste nur Archiv; 17 identische Namen und 10 offene Begriffskonflikte sind nachverfolgt.
+**Hinweis für neue Chats: Maßgeblich ist die letzte unten datierte Standfortschreibung (V4/Revision 10). Ältere Status- und Verweiseinträge sind historische Zwischenstände, keine zweite gültige Masterversion.**
+- **Eine Forschungsquelle**: `RECHERCHE/PRODUKTE_V2_20261108.json` (68 weiterhin ungeprüfte Ausgangs-Produktkandidaten, **Revision 10**; 139 offene Randforschungsfälle). Die alte 27er-Liste nur Archiv; 17 identische Namen und 10 offene Begriffskonflikte sind nachverfolgt.
 - **Ein WordPress-Zielplan**: `PLAN/robotik-empty.json`; noch 0 freigegebene Knoten.
 - CORE: WP-Seite → weitere Seiten → letzte Seite = konkreter Robotertyp → dessen flache WP-Kategorien → Beiträge. Daneben getrennte Säulen Magazin und HivePress. Keine doppelten Such-Owner.
 - Vorgehen gemäß `ARBEITSABLAUF.md`: automatische Bestandsaufnahme statt tausender Dateien, ein Gesamtbericht, fachliche Forschung/Keywords, kontrollierter späterer Dry-run, Freigabe und echter Frontend-Readback.
@@ -82,3 +82,13 @@ Drei neue **Magazin-/Journal-Büros** unter `../MAGAZIN/`: [Roboterregister](../
 - **Drei-Säulen-Kontrolle:** Robotertyp/Produktberatung CORE; übergreifende Robotiktechnik/Entwicklung Magazin (mit Glossar, Register, Finder); reale Anbieter/Integration/Miete/Wartung HivePress; Hersteller-Serviceroboter ≠ käufliches Gerät. Trennung nach Nutzeraufgabe, auch ohne SEO-Analyse.
 - **Expliziter Nutzerauftrag: KEINE SEO-Recherche jetzt.** Produktfunktionen/Herstellerbelege geprüft, **0 Suchvolumen-/Keyword-Abfragen**. SEO-Validierung kommt später mit anderem Plugin. **Kein WordPress-Import, keine Kategorie-/Footer-Pluginänderung**, insbesondere Footer-Original 1.1.1 bleibt byteunverändert.
 - Nächste Arbeit: die übrigen offenen Forschungsfälle nach Produktart versus Unterthema/Servicedienstleistung/Forschung durchsehen, zuerst mit nachvollziehbarem Hersteller-/Fachbeleg; bei echten Produktarten möglichst individuellen Kategorie-/Beitragspotenzialcheck fortführen, keine SEO-Anfragen.
+
+## 10.11.2026 – AKTUELL: 8 Hauptwelten, kurze Labels, Inhaltsnamen V4
+- **Verbindliche einzige Fachmaster-Datei** bleibt `RECHERCHE/PRODUKTE_V2_20261108.json`, **Revision 10**. Das Dateinamensdatum ist historisch; die `revision` ist maßgeblich.
+- Die frühere **6–8-Platz-Vermutung ist nachgelesen**: `HOBBYRAUSCH/KONZEPT/KONZEPT_ZWISCHENSTAND_KATEGORIEN_UND_INTERNE_SUCHE_20260930.md` nennt **ungefähr 6–8 Slots**; Hobbydepot setzte später **acht** Welten um. **Das ist keine technisch bestätigte Robotik-WP-Obergrenze**, sondern der fachlich gewählte Entwurfsrahmen.
+- Neuer **EINZIGER aktueller CORE-Navigationsentwurf** ist `navigation_v1.worlds` mit **8** Namen: **Technik, Logistik, Gastro & Handel, Reinigung, Landwirtschaft, Medizin, Bau & Sicherheit, Haushalt & Freizeit**. Die alten zehn `worlds_v1` sind nur Forschungs-/ID-Bezug, **kein zweites aktives Menü**. **68/68** ursprüngliche Produkttyp-IDs genau einem neuen Hauptwelt-Owner zugeordnet, keine Löschung.
+- Ebenfalls **68** kurze konkrete Produkt-Endseitenlabels, **15** kurze Nischen-Produktseitenlabels, **151** gekürzte produktbezogene Inhaltskategorien der 68 Typen und **49** gekürzte Inhaltskategorien der 15 Nischen: **200** kurze Inhaltslabel-Vorschläge. Nicht 200 bereits angelegte Kategorien und nicht 200 endgültig abgenommene SEO-Ziele.
+- **Namensvertrag:** sichtbare Navigation mit **1–2 aussagekräftigen Wörtern**, keine Füllwörter/ganzen Fragen; vollständige H1/Meta/Beschreibung dürfen ausführlicher sein; frühere Detailtitel und **453 + 179** redaktionelle grobe Beitragsideen bleiben in ihren Belegen erhalten; pro späterer Kategorie mindestens **3** echte Beitragsansätze, beliebig viele Kategorien unter konkreter letzter Produktseite.
+- **KISS:** ein Master mit den neuen Label-Ansichten `nav_short_v1` und `content_nav_short_v1`. Kein neues WordPress-Plugin, keine neuen WP-Seiten, keine neue Dateisammlung und ausdrücklich **KEINE SEO-Recherche**; diese kommt später aus dem separat vorgesehenen Plugin.
+- [Kurz-Navigationskonzept V4](RECHERCHE/KURZNAMEN_HAUPTNAVIGATION_V4_20261110.md) dokumentiert Quellen, alle acht Welten, Qualitätsregeln und beispielhafte 3-Säulen-Abgrenzungen.
+- **Nächster konkreter Schritt:** weitere der 139 Randideen nach realem Produkttyp vs Unterfunktion vs Forschungs-/Anbieter- oder Magazinintents auswählen, je sinnvoller neuer Produkttypseite nur kurze Navigationslabels und Inhaltskategorien mit min. drei unterschiedlichen möglichen Beiträgen vergeben; **keine** voreilige SEO-/WP-Freigabe.
