@@ -1,3 +1,5 @@
+> **NEUERER QA-STAND (10.11.2026):** Diese frühe Prüfung ist überholt: A/B lieferte generische Artikeltyp-Absicht statt ursprünglicher SEO-Suchabsicht; die ursprüngliche Audit-Reparatur validierte nur das Nachweisformat. Der korrigierte, dreifach wiederholte Gesamttest (**5.562/5.562 PASS**) samt hartem QA-Quellpatch liegt in [PSTE_PSERC_GESAMTQA_ECHTQUELLEN_INTENT_WIEDERANLAUF_20261110.md](PSTE_PSERC_GESAMTQA_ECHTQUELLEN_INTENT_WIEDERANLAUF_20261110.md). **Keine Plugin-Installation oder Livefreigabe aus diesem historischen Protokoll ableiten.**
+
 # PSTE 0.57.144.34 – Suchintent endgültig vor K0 binden; realer Drei-Artikel-Replay
 
 **Stand 2026-11-10. Isolierte QA, nicht Live, keine Änderung an K0-Produktion.**
