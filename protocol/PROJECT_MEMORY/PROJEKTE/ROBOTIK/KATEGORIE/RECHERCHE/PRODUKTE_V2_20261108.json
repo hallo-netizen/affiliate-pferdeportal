@@ -3183,6 +3183,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Tankarten",
+            "article_directions": [
+              "Lagertanks und Prozessbehälter unterscheiden",
+              "Einstiegsöffnungen und Zugang",
+              "Ablagerungen nach Inhalt beurteilen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Reinigung",
+            "article_directions": [
+              "Bürsten gegenüber Hochdruckverfahren",
+              "Schlamm und Flüssigkeitsreste aufnehmen",
+              "Schlecht erreichbare Bereiche kontrollieren"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Sicherheit",
+            "article_directions": [
+              "Gefahrstoffe und Freigaben beachten",
+              "Personeneinstieg vermeiden",
+              "Gerät nach dem Einsatz dekontaminieren"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -3252,6 +3294,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Rohrarten",
+            "article_directions": [
+              "Hausanschluss und Hauptleitung",
+              "Rohrdurchmesser und Krümmungen",
+              "Material und Alter von Rohren"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Werkzeuge",
+            "article_directions": [
+              "Bürst- und Fräsköpfe wählen",
+              "Spülung und Roboter kombinieren",
+              "Ablagerungen und Wurzeleinwuchs"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Einsatz",
+            "article_directions": [
+              "Start und Rückholung organisieren",
+              "Kamera zur Zustandsprüfung nutzen",
+              "Gerät nach Einsatz reinigen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -3320,6 +3404,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Verfahren",
+            "article_directions": [
+              "UV-C und Sprühverfahren abgrenzen",
+              "Schattenbereiche beurteilen",
+              "Reinigung gegenüber Desinfektion"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Raumbetrieb",
+            "article_directions": [
+              "Wege und Aufstellorte bestimmen",
+              "Zutritt bei Betrieb sperren",
+              "Umgang mit belegten Räumen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Nachweise",
+            "article_directions": [
+              "Wirksamkeit nach Verfahren prüfen",
+              "Sensoren und Leuchten warten",
+              "Einsatz dokumentieren"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -3389,6 +3515,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Stallflächen",
+            "article_directions": [
+              "Laufgänge und Bodentypen",
+              "Mistbereiche bei unterschiedlichen Tieren",
+              "Tierbereiche und Engstellen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Aufnahme",
+            "article_directions": [
+              "Mistschieben gegen Sammelbehälter",
+              "Gülle und Festmist unterscheiden",
+              "Abwurf und Entleerung einrichten"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Tierbetrieb",
+            "article_directions": [
+              "Verhalten von Tieren berücksichtigen",
+              "Lade- und Rückwege organisieren",
+              "Wartung bei Staub und Feuchte"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -3836,6 +4004,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Kulturflächen",
+            "article_directions": [
+              "Reihenabstand und Wuchs prüfen",
+              "Feld gegenüber Gewächshaus",
+              "Sprühhöhe einstellen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Dosierung",
+            "article_directions": [
+              "Düsen und Tropfengröße",
+              "Tank und Pumpe warten",
+              "Teilflächen gezielt behandeln"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Einsatzgrenzen",
+            "article_directions": [
+              "Wetter und Abdrift berücksichtigen",
+              "Vorschriften und Anwenderpflichten prüfen",
+              "Reinigung nach Mittelwechsel"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -4520,6 +4730,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Laborgefäße",
+            "article_directions": [
+              "Platten und Probenröhrchen",
+              "Spitzen und unterschiedliche Volumina",
+              "Probenverwechslung vermeiden"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Pipettierung",
+            "article_directions": [
+              "Ansaug- und Abgabegeschwindigkeit",
+              "Kreuzkontamination verhindern",
+              "Misch- und Verdünnungsschritte"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Qualität",
+            "article_directions": [
+              "Volumenkalibrierung",
+              "Probenabläufe dokumentieren",
+              "Wartung und Dekontamination"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -4596,6 +4848,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Arzneimittellager",
+            "article_directions": [
+              "Packungsgrößen unterbringen",
+              "Kühlpflichtige Arzneimittel",
+              "Chargen und Verfallsdaten"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Ausgabe",
+            "article_directions": [
+              "Packungen erkennen und entnehmen",
+              "Rezeptauftrag zum Roboter leiten",
+              "Fehlausgaben zurückführen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Apothekenbetrieb",
+            "article_directions": [
+              "Raumplanung und Fachzugriff",
+              "Notbetrieb und Wartung",
+              "Warenwirtschaft anbinden"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -4787,6 +5081,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Markieraufgaben",
+            "article_directions": [
+              "Bodenraster und Raumachsen",
+              "Einbaupositionen im Rohbau",
+              "Aktuelle Baupläne übertragen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Vermessung",
+            "article_directions": [
+              "Planpunkt und Roboterposition",
+              "Kontrollpunkte auf der Fläche",
+              "Maßabweichungen nachprüfen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Baualltag",
+            "article_directions": [
+              "Neben anderen Gewerken fahren",
+              "Markieren auf rauem Boden",
+              "Transport und Akku planen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -4857,6 +5193,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Bauformen",
+            "article_directions": [
+              "Wandprofile und Hohlräume",
+              "Betonmischung und Schichtaufbau",
+              "Aussparungen für Fenster und Türen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Druckprozess",
+            "article_directions": [
+              "Pumpe und Druckkopf abstimmen",
+              "Schichthöhe und Geschwindigkeit",
+              "Temperatur während des Drucks"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Bauablauf",
+            "article_directions": [
+              "Bewehrung und Einbauteile",
+              "Untergrund und Maschinenstandort",
+              "Zulassung und Qualitätssicherung prüfen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -4927,6 +5305,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Mauerwerk",
+            "article_directions": [
+              "Steinarten und Formate",
+              "Mörtel und Fugen",
+              "Öffnungen und Versatz"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Roboteraufbau",
+            "article_directions": [
+              "Steinzufuhr und Greifer",
+              "Position an der Wand bestimmen",
+              "Stützen und Gerätetransport"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Baustelle",
+            "article_directions": [
+              "Geeignete Aufstellfläche",
+              "Arbeit mit Maurern abstimmen",
+              "Wirtschaftlichkeit kleiner Baustellen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -4997,6 +5417,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Bewehrung",
+            "article_directions": [
+              "Bindepunkte erkennen",
+              "Bewehrungsmatten und Draht",
+              "Stabdurchmesser beachten"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Fahrbetrieb",
+            "article_directions": [
+              "Auf Matten sicher bewegen",
+              "Hindernisse überfahren oder auslassen",
+              "Akku- und Drahtwechsel"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Qualität",
+            "article_directions": [
+              "Bindefestigkeit prüfen",
+              "Fehlbindungen erkennen",
+              "Schutz von Personal auf der Baustelle"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -5937,6 +6399,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Bodenbeläge",
+            "article_directions": [
+              "Parkett und Fliesen unterschiedlich wischen",
+              "Wasserempfindliche Böden",
+              "Teppichzonen vermeiden"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Wischtechnik",
+            "article_directions": [
+              "Pads und Walzen vergleichen",
+              "Wassermenge je Fläche",
+              "Schmutzwasser im Dock behandeln"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Pflege",
+            "article_directions": [
+              "Pads und Walzen säubern",
+              "Wassertank und Reinigungsmittel",
+              "Gerüche durch Restfeuchte vermeiden"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -13631,9 +14135,9 @@
     "no_wordpress_writes": true,
     "policy": "Ein Produkt-Owner nach eigener konkreter Funktion; keine Pflicht-Unterkategorien, mindestens 3 sachlich verschiedene Beitragsabsichten für jede geplante flache Vertiefungskategorie; gemeinsam Magazin, Glossar, Register, Finder und Anzeigenmarkt.",
     "depth_profiles": {
-      "profiles": 12,
-      "categories": 37,
-      "topics": 113
+      "profiles": 24,
+      "categories": 73,
+      "topics": 221
     },
     "depth_ids": [
       "rb002",
@@ -13647,7 +14151,19 @@
       "rb020",
       "rb023",
       "rb024",
-      "rb026"
+      "rb026",
+      "rb030",
+      "rb031",
+      "rb032",
+      "rb033",
+      "rb037",
+      "rb045",
+      "rb046",
+      "rb048",
+      "rb049",
+      "rb050",
+      "rb051",
+      "rb061"
     ]
   }
 }
