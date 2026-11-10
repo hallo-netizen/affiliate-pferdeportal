@@ -1,0 +1,11 @@
+2026-11-10 Pferdeatelier eBay QA6 (isolierte QA5-Basis)
+PASS ZIP komplett: 66/66 Einträge; CRC
+PASS alle anderen Dateien bytegleich; genau 2 PHP Dateien geändert
+PASS alle PHP Syntaxprüfungen: 23/23
+PASS entfernte private Methoden: 9/9 ohne zweite Verwendung in sämtlichen Plugin-Dateien
+PASS alle übrigen Methoden und Zugriffsrechte unverändert
+PASS Test gegen echten Trait via Reflection: 7 Schema-/Status-Szenarien alte QA5 gegen neue QA6 -> identische JSON-Resultate
+PASS rein logische Vereinfachung: is_open(run) impliziert schema === '1.0'
+NOT TESTED: echtes WordPress/MariaDB, eBay-Live-API und öffentliche Produktkarte
+NOT INSTALL: QA6 bleibt isolierter Teststand, kein CURRENT-Override
+ZIP SHA256 a383d9cf7b8428ace8f94577b28d839a9e8d51f3efe5589520e888f077cc35ea
