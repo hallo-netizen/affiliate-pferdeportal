@@ -1,0 +1,20 @@
+--- /mnt/data/ebay_current_inspect/affiliate-portal-router/includes/trait-ppar-ebay-run.php	2026-11-10 10:50:42.000000000 +0000
++++ affiliate-portal-router/includes/trait-ppar-ebay-run.php	2026-11-10 15:27:44.731976105 +0000
+@@ -1035,7 +1035,16 @@
+         }
+         $fresh = $this->ebay_run_load();
+         $tick_result=sanitize_key((string)($result['tick_result']??'retryable_error'));
+-        if(!in_array($tick_result,array('advanced','busy','retryable_error','completed','local_checked','failed'),true)){$tick_result='retryable_error';}
++        // Manual stop is not a provider failure. The canonical worker correctly
++        // returns "paused"; tell the external watchdog "idle" so it does not
++        // start another useless self-drive loop. Keep run_status="paused" and
++        // the stored cursor unchanged until an explicit operator resume.
++        if ($tick_result==='paused'
++            && sanitize_key((string)($fresh['status']??''))==='paused'
++            && sanitize_key((string)($fresh['resume_reason']??''))==='operator_stop') {
++            $tick_result='idle';
++        }
++        if(!in_array($tick_result,array('advanced','busy','retryable_error','completed','local_checked','failed','idle'),true)){$tick_result='retryable_error';}
+         $self_drive_handoff=false;
+         if($this->ebay_run_is_active($fresh) && in_array($tick_result,array('advanced','retryable_error'),true)){
+             $self_drive_handoff=$this->ebay_run_dispatch_self_drive((string)($fresh['run_uuid']??''),'external_watchdog');
