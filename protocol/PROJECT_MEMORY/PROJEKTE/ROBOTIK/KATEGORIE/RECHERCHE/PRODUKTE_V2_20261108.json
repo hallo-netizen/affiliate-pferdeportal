@@ -13606,7 +13606,7 @@
       "id": "rf183",
       "name": "Motorische Handprothesen",
       "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
-      "proposed_location": "Haushalt & Garten",
+      "proposed_location": "OFFEN: Privat – Alltag & Assistenz (eigene Käufer-Landingpage zu prüfen)",
       "proposed_owner": "CORE_PERSONAL_ASSISTIVE_MEDICAL_REVIEW",
       "source_url": "https://openbionics.com/de/hero-arm-overview/",
       "evidence_grade": "DE_HERSTELLER_BESTAETIGT_MEDIZINPRODUKT",
@@ -13656,13 +13656,20 @@
         "medical_cases_require_specialist": true,
         "wp_release": false,
         "affiliate_not_verified": true
+      },
+      "original_proposed_location_v10": "Haushalt & Garten",
+      "navigation_gap_audit_v10": {
+        "status": "STRUCTURAL_GAP_NO_FORCED_MAIN_MENU",
+        "reason": "Bionische Handprothese ist nicht Haushalt/Garten; auch kein Industrie-only",
+        "remedy": "Fachliche Produkt-Landingpage oder geeigneten Käufer-Zugang definieren; vorläufiges siebenfaches Hauptmenü nicht ungeprüft erweitern; medizinische Verwendung bei kleiner Praxis ist Käuferbereich, nicht automatisch ausschließlich Industrie",
+        "date": "2026-11-10"
       }
     },
     {
       "id": "rf184",
       "name": "Motorisierte Knieprothesen",
       "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
-      "proposed_location": "Haushalt & Garten",
+      "proposed_location": "OFFEN: Privat – Alltag & Assistenz (eigene Käufer-Landingpage zu prüfen)",
       "proposed_owner": "CORE_PERSONAL_ASSISTIVE_MEDICAL_REVIEW",
       "source_url": "https://www.wjt-ortho.com/produkte/intuy-familie/",
       "evidence_grade": "DE_HERSTELLER_BESTAETIGT_SPEZIALVERSORGUNG",
@@ -13712,13 +13719,20 @@
         "medical_cases_require_specialist": true,
         "wp_release": false,
         "affiliate_not_verified": true
+      },
+      "original_proposed_location_v10": "Haushalt & Garten",
+      "navigation_gap_audit_v10": {
+        "status": "STRUCTURAL_GAP_NO_FORCED_MAIN_MENU",
+        "reason": "Aktive Knieprothese nicht Haushalt/Garten; medizinische Fachversorgung und Kaufweg",
+        "remedy": "Fachliche Produkt-Landingpage oder geeigneten Käufer-Zugang definieren; vorläufiges siebenfaches Hauptmenü nicht ungeprüft erweitern; medizinische Verwendung bei kleiner Praxis ist Käuferbereich, nicht automatisch ausschließlich Industrie",
+        "date": "2026-11-10"
       }
     },
     {
       "id": "rf185",
       "name": "Roboterhandschuhe für Handrehabilitation",
       "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
-      "proposed_location": "Haushalt & Garten",
+      "proposed_location": "OFFEN: Privat – Alltag & Assistenz (eigene Käufer-Landingpage zu prüfen)",
       "proposed_owner": "CORE_REHABILITATION_DEVICE_REVIEW",
       "source_url": "https://www.ks-inzeniring.com/de/robotske-rokavice-rehabilitacija-na-domu/sy-hre12",
       "evidence_grade": "EU_HAENDLER_HEIMANWENDUNG_MEDIZINSTATUS_OFFEN",
@@ -13768,6 +13782,13 @@
         "medical_cases_require_specialist": true,
         "wp_release": false,
         "affiliate_not_verified": true
+      },
+      "original_proposed_location_v10": "Haushalt & Garten",
+      "navigation_gap_audit_v10": {
+        "status": "STRUCTURAL_GAP_NO_FORCED_MAIN_MENU",
+        "reason": "Roboterhandschuh für häusliche Rehabilitation ist nicht Garten/Haushaltsgerät",
+        "remedy": "Fachliche Produkt-Landingpage oder geeigneten Käufer-Zugang definieren; vorläufiges siebenfaches Hauptmenü nicht ungeprüft erweitern; medizinische Verwendung bei kleiner Praxis ist Käuferbereich, nicht automatisch ausschließlich Industrie",
+        "date": "2026-11-10"
       }
     },
     {
@@ -14002,7 +14023,7 @@
       "id": "rf193",
       "name": "Zahnimplantat-Navigationsroboter",
       "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
-      "proposed_location": "Gastro & Handel",
+      "proposed_location": "OFFEN: kleine Praxen – Medizin & Pflege (Käufer-Zugang prüfen)",
       "proposed_owner": "CORE_DENTAL_MEDICAL_B2B_REVIEW",
       "source_url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K261321",
       "evidence_grade": "FDA_US_ZULASSUNGSNACHWEIS_2026_EU_OFFEN",
@@ -14011,7 +14032,14 @@
       "wp_release": "NICHT_FREIGEGEBEN",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "checked_at": "2026-11-10"
+      "checked_at": "2026-11-10",
+      "original_proposed_location_v10": "Gastro & Handel",
+      "navigation_gap_audit_v10": {
+        "status": "STRUCTURAL_GAP_NO_FORCED_MAIN_MENU",
+        "reason": "Zahnärztliche Robotik ist weder Gastronomie noch Großindustrie",
+        "remedy": "Fachliche Produkt-Landingpage oder geeigneten Käufer-Zugang definieren; vorläufiges siebenfaches Hauptmenü nicht ungeprüft erweitern; medizinische Verwendung bei kleiner Praxis ist Käuferbereich, nicht automatisch ausschließlich Industrie",
+        "date": "2026-11-10"
+      }
     },
     {
       "id": "rf194",
@@ -14218,7 +14246,7 @@
       "proposed_location": "Landwirtschaft",
       "proposed_owner": "MAGAZIN_FORSCHUNG_KEIN_KAUFANGEBOT",
       "source_url": "https://dil-ev.de/en/projekte/poultryrob/",
-      "evidence_grade": "DE_FORSCHUNGSPROJEKT_KEINE_KAELUFBARKEIT",
+      "evidence_grade": "DE_FORSCHUNGSPROJEKT_KEINE_KAUFBARKEIT",
       "related_existing_id": "rb033",
       "non_duplication_rule": "Fährt Stallboden ab und findet verlegte Eier; vorhandene Patente/Forschungsprojekte kein lieferbares Gerät; weder Eierförderband noch Stallreinigung",
       "wp_release": "NICHT_FREIGEGEBEN",
@@ -14759,6 +14787,15 @@
       "source_count": 7,
       "new_niche": "rf140",
       "evidence_scope": "7 Hersteller-Einsatzbeispiele für 7 bestehende Typ-IDs; 1 neuer, noch ungeprüfter Schneeräum-Nischenkandidat; keine 68-fache Vollabnahme."
+    },
+    "buyer_gap_review_v10": {
+      "status": "OPEN_REAL_GAP",
+      "observation": "Sieben aktuelle Hauptwelten bilden Assistenz, Alltagshilfen, persönliche medizinische Robotik und Robotik für kleine Zahnarztpraxen sachlich NICHT ausreichend ab.",
+      "do_not_do": "Keine medizinische Robotik unter Gastro & Handel oder Haushalts/Gartenpflege verstecken; nicht automatisch Industrie-only, wenn eine kleine Praxis oder Privatperson die Leistung nutzt.",
+      "candidate_entry": "Pflege & Assistenz / Gesundheit als Käufer-Landingpage, fachlich in der CORE-Navigation erreichbar; konkrete Menülösung erst nach Kategoriebündelung/Designprüfung, NICHT auf Verdacht als neunten Topslot vornehmen.",
+      "linked_existing": "rb041 rb042 rb043 rb065 rf175 rf176 rf183 rf184 rf185 rf193",
+      "other_modules": "Magazin, Glossar, Register, Finder und Anzeigenmarkt bleiben GEMEINSAM fuer alle.",
+      "no_wordpress_change": true
     }
   },
   "research_round_v7": {
@@ -15004,6 +15041,12 @@
       "rf194",
       "rf195",
       "rf196"
+    ],
+    "navigation_gap_ids": [
+      "rf183",
+      "rf184",
+      "rf185",
+      "rf193"
     ]
   }
 }
