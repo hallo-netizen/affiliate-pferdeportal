@@ -1,3 +1,5 @@
+> **Stand zur WordPress-TEST-Installation:** Das selbstintegritätsgeprüfte Paket liegt zusätzlich **byteidentisch** als `/pferdeatelier/PLUGINS/QA/PSERC-0.28.61-K0-SEO-HERKUNFT-NUR-WORDPRESS-TEST.zip` vor (SHA256 `2365a251bb799a2d6d6b2a5c9fd178ec04e874bf3a2a43ab86d21cb2c3b7e20c`). Ausschließlich in der getrennten WordPress-TEST-Installation verwenden, **nicht** auf Produktion. Der neue Download heißt `K0-Übergabe mit bestätigter Suchintention herunterladen`. Nach dem Plugin-Wechsel kann der bisherige Plan-Snapshot wegen aktualisierter Paketprüfsumme eine erneute PSERC-Planprüfung benötigen. Echte PSTE-/PSERC-Live-Daten oder Providerzugang wurden bisher nicht geprüft.
+
 # K0 – einmalige SEO-Entscheidung aus bestehendem PSERC-Plan übernehmen (QA)
 
 **Stand 10.11.2026. Nur isolierte Testkopien. K0 aktiv `konzept0-portal-neutral-20261002` und WordPress NICHT verändert.**
