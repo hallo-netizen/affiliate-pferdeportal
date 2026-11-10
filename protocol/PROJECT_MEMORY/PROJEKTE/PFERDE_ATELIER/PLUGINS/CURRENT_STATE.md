@@ -1,3 +1,11 @@
+## 10.11.2026 – K0: zwei formal gültige Handoff-Einträge erst nach Texterstellung an Titel/Keyword-Hardrule gesperrt
+- Faktischer K0-Branch `konzept0-portal-neutral-20261002`: echte 3er-Datei `real_runs/k0/batch-20261110-42619ca7/BATCH_INTAKE.json` PSERC-V2/Hash **PASS**; Artikel 1 WordPress-Verify **PASS**, Artikel 2+3 scheitern bei `engine/checkers.py::title.keyword_required` (exakte Keyword-Tokens in Reihenfolge). Artikel 2 Singular/Plural (`regendecke`/`regendecken`, `pferd`/`pferde`), Artikel 3 gleicher Formenwechsel + `0g` nicht explizit im Titel.
+- **Ursache des späten Stops:** `engine/k0_portal_resolver.py::validate_intake` prüft 5 Felder und Hash, jedoch NICHT die Titelwortregel; diese läuft bei `verify_pre_lt68` nach der Texterstellung. Alle Problemwerte lagen schon beim Export vor.
+- **KISS-Fix-Vorschlag, noch NICHT umgesetzt:** vorhandene Originalregel **vor** Writer/Recherche im bestehenden K0-Intake anwenden, keine neue Architektur, kein zweiter Titelowner. Zwei Titel nur durch bestehende externe Titelentscheidung korrigieren; ursprüngliche Daten nicht still umschreiben; K0-Hardrules unangetastet.
+- [Quellprüfung/Prüfprotokoll](QA_ONLY/K0_DREIER_HANDOFF_ZWEI_SPAETE_TITELBLOCKER_20261110.md). **Kein neues Plugin, kein K0-Code-Änderungsstand, keine Live-Auswirkung.**
+
+---
+
 ## 10.11.2026 – KISS-BEREINIGT PSTE .33 QA-Paket gebaut und archiviert
 - **Neues isoliertes Testpaket PSTE 0.57.144.33** aus geprüfter .32; **PSERC 0.28.60 bleibt unverändert**. Die neue ZIP ist mit exaktem SHA256 `cd62e7c58dce4bfe9c75026bb604e0182f45a12f5d26075d9b1a85a859472ae2` und der zugehörige Diff/QA-Bericht im privaten `/pferdeatelier/PLUGINS/QA/` gespeichert. Alle 121 Paketdateien vorhanden, 116 bytegleich; ungepackt 4.815 Bytes kleiner.
 - **Beweisbar entfernt:** doppelte In-Page-Tabnavigation; ein bei WordPress-Priorität 999 wirkungsloser PSERC-Menüentfernungsaufruf; zehn ungenutzte **private** Funktionen (inklusive `tabs`; neun weitere). Funktion `cleanAlias` bleibt ausdrücklich, weil per Callback verwendet. Keine öffentlichen Funktionen, Hooks, Exportpfade oder Datenfelder gelöscht.
