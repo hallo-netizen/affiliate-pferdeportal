@@ -1,0 +1,31 @@
+# eBay-Pferdeatelier: bestehende Nicht-Waren- und Nachsuch-Sperren wirklich geprüft
+
+**10.11.2026 · Quelle: originale QA9-Test-ZIP 6.72.321, direkte PHP-Ausführung der Methoden, reale hochgeladene 138-Zeilen-CSV. Keine Live-Änderungen.**
+
+## Geprüfter Stand – erledigt, nicht neu entwickeln
+
+1. **Versicherungen, Rechts- und Beratungsthemen werden nicht nach eBay-Ware durchsucht:** Der unveränderte verbindliche Produktkatalog hat 324 zunächst deklarierte Produktkonzepte, die bestehende `ebay_business_required_product_concept_ids()` nimmt 26 konkrete Nicht-Waren heraus. In `ebay_business_catalog_profiles()` fallen zusätzlich fünf reine Wissen-/Dienstleistungs-Hubs weg. **Ergebnis: genau 298 Warengruppen** als eigene Portal-Produktziele; keine 298 eBay-Marktplatzkategorien. Ausgeschlossen z. B. Pferde-OP-Versicherung, Pferdekrankenversicherung, Pferdehaftpflicht, Rechts-/Haftungsinformationen, Haltungsberatung, Verträge, Checklisten. **Keine der 26 ausgeschlossenen Familien steht im aktuellen CSV mit 138 offenen Familien.** Die 26/5-Ausschlussregeln sind bereits spätestens seit 6.72.303 vorhanden.
+2. **Kein endloser Wiederholungszyklus im selben gespeicherten Gesamtlauf:** Tatsächliche private Methode `ebay_run_schedule_new_business_gap_revalidation()` direkt mit vorhandenen Produktfamilien ausgeführt: eine schon im Zielkreis geprüfte Familie erzeugt **keine** weitere Anfrage. Nur neu hinzugekommene fehlende Familie erweitert den Zielkreis, und beim zweiten Aufruf desselben Zustands entsteht kein weiteres Nachsuchen. Der Zielkreis wächst nur monoton, höchstens auf die vorhandenen 298 Familien. Der bestehende `ebay_run_business_safe_supply_gap_contract()` kennzeichnet sichere Angebotslücken als `safe_supply_gap_open` und verlegt erneute Prüfung auf `next_scheduled_canonical_run`. **Wichtig:** Das heißt nicht „niemals wieder suchen“; beim nächsten ordentlichen neuen Gesamtlauf darf erneut geprüft werden. Dagegen keine neue Endlosschleife / kein neuer Controller erforderlich.
+3. **Deutschland-Filter bleibt bewusst strikt:** `listingMarketplaceId` muss EBAY_DE bleiben. Diese Regel nicht wegen Abdeckungszahlen auf Lieferbarkeit nach Deutschland abändern.
+4. **Anhängerkamera/Rückfahrkamera ist nicht die Ursache der konkreten aktuell dokumentierten Anhängerkamera-Ablehnung:** Unveränderte QA9-Klassifikation erkennt `Anhängerkameras Pferd`, lässt den Titel `Rückfahrkamera für Pferdeanhänger` aber mit `ebay_business_concept_missing` durchfallen. Das ist ein reproduzierbarer **Wortschatz-Mangel**. Die **tatsächliche CSV-Zeile** hat jedoch **3 Treffer, 2× `ebay_portal_topic_negative`, 1× `ebay_marketplace_mismatch`, **0× `ebay_business_concept_missing`**. Eine nochmalige Synonym-Korrektur würde **keinen dieser drei gespeicherten Fälle** ändern. Daher nicht wieder das Synonymprogramm als angebliche Lösung der aktuellen Abdeckung neu aufbauen. Für den realen Titelbestand müssten die schon gespeicherten konkreten Negativmarker nachvollzogen werden; CSV enthält nur aggregierte Ursachen.
+5. **Bereits vorhandene Synonymarbeit nicht doppeln:** Die Versionshistorie der tatsächlichen ZIP dokumentiert seit **6.72.298** eine Hauptwort-/Synonymprüfung, zusätzlich 6.72.316 den zweiten wortgetreuen Suchbegriff und 6.72.317 Mehrfachzuordnung. Diese wurden im QA9-Code bestätigt, kein neuer Synonymcontroller erforderlich.
+
+## Aktueller CSV-Stand (nicht mit Screenshot 144 offen vermischen)
+
+- Export `Pferdeatelier_eBay_fehlende_Produktfamilien_3e9e9207-d82.csv`: **138** offene Familien. **94** mit Trefferangeboten, aber ohne Annahme; **43** ohne Treffer im begrenzten Suchausschnitt; **1** technischer HTTP-Fehler (diese 44 besitzen jeweils im Export eine Trefferzahl 0). Der Fehler ist **kein Nachweis fehlenden Marktwarenbestands**.
+- 56 unterschiedliche vorhandene fachliche Negativmarker, u. a. `motorrad` und Spielzeuge. Dass negative Marker auch Beschreibungstexte blockieren, ist am aktuellen Code bestätigt. Der Export nennt aber **keine einzelnen Angebotsnamen und keine je-Angebot-Marker**; die 234 aggregierten `ebay_portal_topic_negative`-Ereignisse sind deshalb nicht pauschal als Fehlentscheidungen bewiesen. Dies ist die offene Präzisionsgrenze, nicht ein fehlender Synonym-Workflow.
+- Im neueren Backend-Screenshot waren **154/298 abgedeckt, 144 offen**; anderer Speicherzeitpunkt, keine 138 daraus ableiten.
+
+## Reproduzierbare Originalcode-Tests
+
+`qa9_non_goods_no_loop_real_php_test.php`: lädt die unveränderten QA9-Traits und das unveränderte Originalkatalog-JSON, führt die echten privaten Methoden mit isolierten, nachgestellten WordPress-Hilfen aus. **13 PASS** (Manifest 298, fünf Nicht-Waren-Beispiele, Warengut-Kamera enthalten, identische Nachsuche 0 Extra-Arbeit, nur neue Familie einmalig, keine zweite Wiederholung, Scope erhalten, kein Fehler). Das ist ein lokaler Original-PHP-Test, **kein echter WordPress-/MariaDB-Livetest**.
+
+`qa9_camera_synonym_existing_test.php`: vier Titelvarianten der Kamera direkt am Originalklassifikator: `Rückfahrkamera Pferdeanhänger` ❌, `Rückfahrkamera für Pferdeanhänger` ❌, `Anhängerkamera Rückfahrkamera Funk Pferd` ✅, `Funk Rückfahrkamera Pferdeanhänger 12V` ❌, `Anhängerkameras Pferd` ✅. Belegt Grenzen des vorhandenen Klassifikators, aber **keine dieser abgeänderten Muster ist aus dem echten CSV als tatsächlicher Angebotstitel nachgewiesen**.
+
+## KISS-Beschluss / Status
+
+**Nicht erneut entwickeln:** Nicht-Waren-Ausschluss, begrenzte Nachsuche pro Familie im selben Lauf, vorliegende Quellwiederverwendung, zweite Suchbegriff-Variante, bestehende Mehrfachzuordnung, fremde Marktplatzsperre. Keine neuen PHP-/Katalogänderungen oder Plugin-ZIP allein aufgrund dieses Audits.
+
+**Offen und getrennt:** Zuordnung der realen abgelehnten Angebotstitel und Negativmarker, End-to-End-Veröffentlichung der bereits sicher angenommenen Angebote sowie gemessene Backend-Last. Kein Angebot entsperrt, kein Freigabe-/Current-Status geändert und keine Recherchehistory gelöscht.
+
+**Übertragungsregel:** Nur als Referenz für HD-009 und HAB-004, keine fremden Produkttaxonomien oder eBay-Zugangsdaten übertragen.
