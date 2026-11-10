@@ -73,6 +73,13 @@ class SeoOwnerSourceBindingTests(unittest.TestCase):
         self.resign(bad)
         with self.assertRaisesRegex(Blocked,"UPSTREAM_INTENT_NOT_APPROVED"):inspect(bad)
 
+    def test_rehashed_manifest_cannot_hide_changed_original_pste_intent(self):
+        bad=copy.deepcopy(self.m)
+        bad["items"][0]["intent_profile"]["search_intent"]="FABRICATED_SEO_REDECISION"
+        self.resign(bad)
+        with self.assertRaisesRegex(Blocked,"ORIGINAL_PSTE_PROFILE_HASH_MISMATCH"):
+            inspect(bad)
+
     def test_tampered_single_article_plan_slot_blocks(self):
         intake,context=self.source(1)
         intake["items"][0]["plan_slot"]=self.batch["items"][1]["plan_slot"]
