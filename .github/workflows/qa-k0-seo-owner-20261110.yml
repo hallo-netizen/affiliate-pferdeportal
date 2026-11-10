@@ -47,4 +47,4 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m tests.qa_k0_full_replay_20261110 --jar /tmp/k0-qa-lt68/LanguageTool-6.8/languagetool-commandline.jar
+          PYTHONPATH=. python3 tests/qa_k0_full_replay_20261110.py --jar /tmp/k0-qa-lt68/LanguageTool-6.8/languagetool-commandline.jar
