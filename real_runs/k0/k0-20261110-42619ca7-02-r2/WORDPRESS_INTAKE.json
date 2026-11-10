@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "Beratung",
+      "category": "pferdedecken-regendecken-beratung",
+      "plan_slot": "d9cb138606a3734410a6ba398311d64ef18532634a0ed363e0373d02bd7e537f",
+      "target_keyword": "Fliegen regendecke pferd",
+      "title": "Kombinierte Fliegen- und Regendecken für Pferde sinnvoll nutzen"
+    }
+  ],
+  "batch_sha256": "67f8814a78b2171a8cd34e3ea740d228fba957d92db0bd8475bde29bc212e8f6"
+}
