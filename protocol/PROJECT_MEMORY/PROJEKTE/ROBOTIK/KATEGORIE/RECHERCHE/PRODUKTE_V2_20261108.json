@@ -8906,9 +8906,9 @@
       },
       "functional_resolution_v12": [
         {
-          "resolution": "SAME_FUNCTION_RESEARCH_ALIAS_NO_SECOND_CORE_LEAF",
+          "resolution": "IDENTITY_BOUNDARY_UNDECIDED_MUST_VERIFY",
           "canonical_target": "rf036",
-          "review_note": "Prototypische Fassadenfugenarbeit nicht noch einmal unter Reparaturroboter anlegen",
+          "review_note": "Ein bestehender Owner für Privat und Gewerbe bzw. Pilotstatus; keine zweite ID oder Alias auf dieselbe ID.",
           "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
         }
       ]
@@ -12597,9 +12597,9 @@
       },
       "functional_resolution_v12": [
         {
-          "resolution": "SAME_FUNCTION_RESEARCH_ALIAS_NO_SECOND_CORE_LEAF",
+          "resolution": "IDENTITY_BOUNDARY_UNDECIDED_MUST_VERIFY",
           "canonical_target": "rf157",
-          "review_note": "Privater und gewerblicher Einsatz von Wäschefaltrobotern begründen allein keine zwei Produkt-Owner",
+          "review_note": "Ein bestehender Owner für Privat und Gewerbe bzw. Pilotstatus; keine zweite ID oder Alias auf dieselbe ID.",
           "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
         }
       ]
@@ -15379,6 +15379,36 @@
           "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
         }
       ]
+    },
+    {
+      "id": "rf216",
+      "name": "Robotische Textil-Nähzellen",
+      "source_url": "https://www.abb.com/global/en/areas/robotics/solutions/application-cells/omnivance-sewing-cell",
+      "evidence_grade": "HERSTELLER_2026_INDUSTIERIELLE_NAEHZELLE",
+      "related_existing_id": "rb007",
+      "proposed_location": "Industrie → Fertigung",
+      "proposed_owner": "CORE_PRODUCT_FUNCTION_INDUSTRY_ONLY_CANDIDATE",
+      "non_duplication_rule": "Roboter greift, führt, prüft und näht flexible Stoffe/Leder mit Nähmaschine; nicht allgemeiner SCARA-Montagearm. ABB-Angebot auf Automotive-Interieur ausgelegt; Eignung kleiner Schneiderateliers NICHT nachgewiesen.",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "topic_kind": "UNDERREPRESENTED_SECTOR_RESEARCH_V12",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "source_checked": "2026-11-10"
+    },
+    {
+      "id": "rf217",
+      "name": "Robotische Schnittblumen-Ernte",
+      "source_url": "https://research.wur.nl/en/publications/design-and-evaluation-of-a-robotic-prototype-for-gerbera-harvesti/",
+      "evidence_grade": "WUR_GERBERA_FELDVERSUCH_2025_PROTOTYP_KEIN_GERAETESHOP",
+      "related_existing_id": "rb039",
+      "proposed_location": "Landwirtschaft → Blumenbau (Forschung)",
+      "proposed_owner": "MAGAZIN_FORSCHUNG_NOCH_KEIN_SERIENPRODUKT",
+      "non_duplication_rule": "Gerbera-Stiel schneiden und Blüte greifschonend ernten, nicht Obsternte und nicht Blumen verpacken; Herstellerprodukt/Verfügbarkeit bislang nicht belegt.",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "topic_kind": "UNDERREPRESENTED_SECTOR_RESEARCH_V12",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "source_checked": "2026-11-10"
     }
   ],
   "research_expansion": {
@@ -16256,16 +16286,6 @@
           "id": "rf163",
           "target": "rb062",
           "reason": "Yarbo-Laubbläser als Modul derselben Mehrzweck-Gartenplattform; keine weitere vollständige identische Robotersystemseite"
-        },
-        {
-          "id": "rf157",
-          "target": "rf157",
-          "reason": "Privater und gewerblicher Einsatz von Wäschefaltrobotern begründen allein keine zwei Produkt-Owner"
-        },
-        {
-          "id": "rf036",
-          "target": "rf036",
-          "reason": "Prototypische Fassadenfugenarbeit nicht noch einmal unter Reparaturroboter anlegen"
         }
       ]
     },
@@ -16485,29 +16505,53 @@
           "id": "rf049",
           "target": "rf049",
           "reason": "Gewächshaus-Bestäubungsroboter bereits vorhanden; Marktstart Polly im Oktober 2026 ist Evidenz-Upgrade, keine zweite Produktart"
+        },
+        {
+          "id": "rf157",
+          "target": "rf157",
+          "reason": "Privater und gewerblicher Einsatz von Wäschefaltrobotern begründen allein keine zwei Produkt-Owner – bereits selbst kanonischer Kandidat; keine Alias-Zuordnung auf sich selbst."
+        },
+        {
+          "id": "rf036",
+          "target": "rf036",
+          "reason": "Prototypische Fassadenfugenarbeit nicht noch einmal unter Reparaturroboter anlegen – bereits selbst kanonischer Kandidat; keine Alias-Zuordnung auf sich selbst."
         }
       ]
-    }
+    },
+    "additional_underrepresented": [
+      {
+        "id": "rf216",
+        "sector": "Textil",
+        "gate": "INDUSTRIE_BISHER_KLEINBETRIEB_NICHT_BELEGT"
+      },
+      {
+        "id": "rf217",
+        "sector": "Blumenbau",
+        "gate": "FORSCHUNG_KEIN_KAUFPRODUKT"
+      }
+    ]
   },
   "research_round_v12": {
     "previous_revision": 17,
     "revision": 18,
     "base_types": 68,
     "research_before": 210,
-    "research_after": 215,
+    "research_after": 217,
     "new_functional_candidate_ids": [
       "rf211",
       "rf212",
       "rf213",
       "rf214",
-      "rf215"
+      "rf215",
+      "rf216",
+      "rf217"
     ],
     "functional_audit_counts": {
-      "duplicates": 11,
+      "duplicates": 9,
       "keep": 13,
       "broad": 11,
       "service": 8,
-      "review": 7
+      "review": 9
     },
     "no_keyword_research": true,
     "no_wp_writes": true,
