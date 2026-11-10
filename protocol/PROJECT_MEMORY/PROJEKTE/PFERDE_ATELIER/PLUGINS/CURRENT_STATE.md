@@ -1,3 +1,12 @@
+## 10.11.2026 – KISS-Verschlankung: echter Codevergleich, noch kein neues Installationspaket
+- **Ist:** PSTE 0.57.144.32 und PSERC 0.28.60 auf TEST, echte K0-V2-Übergabe 3/3 PASS; LIVE .120/.43 noch unberührt.
+- **Nachgewiesene UI-Dopplung:** dieselben vier PSTE-Unterseiten erscheinen als WordPress-Menü **und** zweite In-Page-Tab-Leiste; nur privater Tab-Aufrufer, kein eigener Arbeitsweg. **Wirkungsloser Code:** PSTE-PSERC-Menüentfernung bei admin_menu-Priorität 999, obwohl PSERC erst bei 1000 anlegt. Nicht einfach die Priorität erhöhen, sonst notwendiges Menü weg.
+- **Isolierte erste QA-Bereinigung** nur PSTE-Admin und Präsentationsvertrag, 119/121 Dateien bytegleich, 83 PHP-Lints PASS, fünf Menüziele vor/nach exakt identisch, 34 Admin-POST-Mappings/23 AJAX /29 Action-Registrierungen/1 Filter/57 Berechtigungschecks identisch; PSERC/K0 nie geändert. Test-Fahrplan und Details: [KISS Verschlankung Hardaudit](QA_ONLY/KISS_VERSCHLANKUNG_HARTAUDIT_KONZEPT_20261110.md).
+- **NICHT löschen:** No-op-public-Kompatibilitätsmethoden ohne verifizierten Außenreferenz-Ausschluss; MINI-Legacy, GSC, Recherche, gespeichertem Archiv, PSERC Fallback/Retention, Produktions- und WP-Rückimport, Schutzgates. Manuelle PSTE-Migration kann sechs alte Optionsschlüssel nach Archivprüfung löschen: LIVE erst nach eigener 1:1-Kopie und vollständiger Datenverlustprüfung.
+- **NEXT:** Erst Testpaket mit ausschließlich geprüfter Navigation erstellen, genau einmal auf WordPress-TEST samt K0-Datei prüfen; danach weiterer echter toter Code nach WordPress-Hook/Referenz-Audit. LIVE nur mit originalem .120/.43 und Datenbankbackup + sauberem Rückfall.
+
+---
+
 ## 10.11.2026 – LIVE-VORBEREITUNG: Migrationsprüfung vor Versionssprung
 - LIVE Betreiberstand PSTE 0.57.120 / PSERC 0.28.43; TEST-Stand mit bewiesenem K0-JSON PSTE 0.57.144.32 / PSERC 0.28.60. Echte LIVE-Original-ZIPs und Datenbank fehlen für verlustfreie 1:1-Abnahme.
 - Original-PSTE .32 hat bei Aktivierung mit altem Schema 11 unter echter PHP-Mockprobe nur Bootstatus PENDING geschrieben; keine Daten gelöscht (1 PASS). ABER ausdrückliche manuelle Safe Migration archiviert sechs alte Recherche-Optionswerte und löscht danach deren Originalschlüssel. Ohne Live-Optionen/Leser-Abgleich keine Freigabe für diesen Schritt.
