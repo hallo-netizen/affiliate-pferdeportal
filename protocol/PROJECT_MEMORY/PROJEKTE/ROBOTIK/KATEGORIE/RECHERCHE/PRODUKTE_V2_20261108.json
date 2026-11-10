@@ -4528,6 +4528,66 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v8": {
+        "status": "FACHLICHE_PLAUSIBILITAET_UNGEPRUEFTE_SEO_ABSICHT",
+        "wp_leaf_role": "EXACT_FUNCTIONAL_PRODUCT_PAGE_DRAFT_NOT_WP_APPROVED",
+        "category_basis": "INDIVIDUALLY_DETERMINED_NOT_STANDARD_TEMPLATE",
+        "categories": [
+          {
+            "name": "Flächeneignung",
+            "article_directions": [
+              "Gartengröße und notwendige Mähzeiten",
+              "Steigungen und unebene Rasenflächen",
+              "Enge Durchgänge und getrennte Rasenbereiche",
+              "Hindernisse, Beete und Rasenkanten"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Einrichtung",
+            "article_directions": [
+              "Grenzdraht gegenüber drahtloser Navigation",
+              "Standort von Lade- und Referenzstationen",
+              "Rasenkarte und Sperrzonen anlegen",
+              "Wiederaufnahme der Arbeit nach Umgestaltung"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Pflege",
+            "article_directions": [
+              "Messerwechsel und Verschleiß",
+              "Räder und Gehäuse reinigen",
+              "Akku lagern und Winterpause vorbereiten",
+              "Sensoren und Ladekontakte sauber halten"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Störungen",
+            "article_directions": [
+              "Festfahren an Wurzeln oder Kanten",
+              "Andockfehler und Ladestörungen",
+              "Ausgelassene Mähflächen erkennen",
+              "Verbindungs- und Positionsprobleme klären"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          }
+        ],
+        "parent_rule": "Each flat WP category assigned to this one product page, no categories below categories. No forced categories, no maximum. Topics with 1-2 angles should merge or remain on product page.",
+        "shared_other_pillars": "Magazin/Glossar/Register/Finder/HivePress shared across all target groups; no duplicate advice",
+        "generated_from": "2026-11-10 manufacturer function/market evidence and editorial review, not keyword data",
+        "keyword_research_done": false,
+        "approved_for_wordpress": false
       }
     },
     {
@@ -8975,7 +9035,53 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v8": {
+        "status": "FACHLICHE_PLAUSIBILITAET_UNGEPRUEFTE_SEO_ABSICHT",
+        "wp_leaf_role": "EXACT_FUNCTIONAL_PRODUCT_PAGE_DRAFT_NOT_WP_APPROVED",
+        "category_basis": "INDIVIDUALLY_DETERMINED_NOT_STANDARD_TEMPLATE",
+        "categories": [
+          {
+            "name": "Eignung",
+            "article_directions": [
+              "Blätter und Pollen von der Wasseroberfläche entfernen",
+              "Beckenform und Schwimmhindernisse beachten",
+              "Poolabdeckung und Einbauskimmer berücksichtigen"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Betrieb",
+            "article_directions": [
+              "Solarladen bei Schatten und Schlechtwetter",
+              "Abdriften durch Wind und Strömung",
+              "Skimmer und Bodenreinigungsroboter kombinieren",
+              "Reinigungszeiten bei häufiger Poolnutzung"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Wartung",
+            "article_directions": [
+              "Auffangkorb und Sieb reinigen",
+              "Antrieb und Schaufelrad kontrollieren",
+              "Akkupflege und Winterlagerung"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          }
+        ],
+        "parent_rule": "Each flat WP category assigned to this one product page, no categories below categories. No forced categories, no maximum. Topics with 1-2 angles should merge or remain on product page.",
+        "shared_other_pillars": "Magazin/Glossar/Register/Finder/HivePress shared across all target groups; no duplicate advice",
+        "generated_from": "2026-11-10 manufacturer function/market evidence and editorial review, not keyword data",
+        "keyword_research_done": false,
+        "approved_for_wordpress": false
+      }
     },
     {
       "id": "rf142",
@@ -8997,7 +9103,12 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_no_wp_categories_v8": {
+        "decision": "NO_CATEGORY_TREE_YET",
+        "reason": "Automatische Katzentoilette benötigt erst fachliche Abgrenzung: reine Automatik oder tatsächlich Robotik",
+        "no_forced_wp_categories": true
+      }
     },
     {
       "id": "rf143",
@@ -9085,7 +9196,66 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v8": {
+        "status": "FACHLICHE_PLAUSIBILITAET_UNGEPRUEFTE_SEO_ABSICHT",
+        "wp_leaf_role": "EXACT_FUNCTIONAL_PRODUCT_PAGE_DRAFT_NOT_WP_APPROVED",
+        "category_basis": "INDIVIDUALLY_DETERMINED_NOT_STANDARD_TEMPLATE",
+        "categories": [
+          {
+            "name": "Spielfelder",
+            "article_directions": [
+              "Fußball- und Mehrzweckfelder einrichten",
+              "Naturrasen und Kunstrasen unterscheiden",
+              "Wechselnde Platzgrößen und Jugendspielfelder abbilden"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Vermessung",
+            "article_directions": [
+              "GPS-Referenz und Startpunkte setzen",
+              "Neue Linienpläne anlegen",
+              "Bestehende Markierungen wiederholen",
+              "Platzveränderungen und Verschiebungen korrigieren"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Farbauftrag",
+            "article_directions": [
+              "Farbarten und Verträglichkeit prüfen",
+              "Verbrauch und Linienbreite planen",
+              "Düsen und Leitungen spülen",
+              "Regen und Platzfeuchtigkeit berücksichtigen"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Wirtschaft",
+            "article_directions": [
+              "Kauf und Dienstleisterauftrag vergleichen",
+              "Platzanzahl und saisonale Auslastung",
+              "Kosten für Farbe und Verschleiß",
+              "Transport zwischen mehreren Sportanlagen"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          }
+        ],
+        "parent_rule": "Each flat WP category assigned to this one product page, no categories below categories. No forced categories, no maximum. Topics with 1-2 angles should merge or remain on product page.",
+        "shared_other_pillars": "Magazin/Glossar/Register/Finder/HivePress shared across all target groups; no duplicate advice",
+        "generated_from": "2026-11-10 manufacturer function/market evidence and editorial review, not keyword data",
+        "keyword_research_done": false,
+        "approved_for_wordpress": false
+      }
     },
     {
       "id": "rf147",
@@ -9107,7 +9277,55 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v8": {
+        "status": "FACHLICHE_PLAUSIBILITAET_UNGEPRUEFTE_SEO_ABSICHT",
+        "wp_leaf_role": "EXACT_FUNCTIONAL_PRODUCT_PAGE_DRAFT_NOT_WP_APPROVED",
+        "category_basis": "INDIVIDUALLY_DETERMINED_NOT_STANDARD_TEMPLATE",
+        "categories": [
+          {
+            "name": "Training",
+            "article_directions": [
+              "Unterschnitt- und Topspin-Zuspiel einstellen",
+              "Ballfrequenz und Geschwindigkeitswechsel",
+              "Übungssequenzen für Aufschlagannahme",
+              "Trainingsprogramme für unterschiedliche Leistungsniveaus"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Aufstellung",
+            "article_directions": [
+              "Positionierung am Tisch",
+              "Ballfangnetz und Ballrückführung",
+              "Stromversorgung und freie Stellfläche",
+              "Transport zwischen Hobbyraum und Vereinsheim"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Pflege",
+            "article_directions": [
+              "Ballzufuhr bei verklemmten Bällen",
+              "Auswurfrollen säubern",
+              "Programmsteuerung und Updates",
+              "Ersatzteile und Lagerung"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          }
+        ],
+        "parent_rule": "Each flat WP category assigned to this one product page, no categories below categories. No forced categories, no maximum. Topics with 1-2 angles should merge or remain on product page.",
+        "shared_other_pillars": "Magazin/Glossar/Register/Finder/HivePress shared across all target groups; no duplicate advice",
+        "generated_from": "2026-11-10 manufacturer function/market evidence and editorial review, not keyword data",
+        "keyword_research_done": false,
+        "approved_for_wordpress": false
+      }
     },
     {
       "id": "rf148",
@@ -9173,7 +9391,63 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v8": {
+        "status": "FACHLICHE_PLAUSIBILITAET_UNGEPRUEFTE_SEO_ABSICHT",
+        "wp_leaf_role": "EXACT_FUNCTIONAL_PRODUCT_PAGE_DRAFT_NOT_WP_APPROVED",
+        "category_basis": "INDIVIDUALLY_DETERMINED_NOT_STANDARD_TEMPLATE",
+        "categories": [
+          {
+            "name": "Beetplanung",
+            "article_directions": [
+              "Geeignete Beetgrößen und Rahmensysteme",
+              "Aussaatflächen digital festlegen",
+              "Pflanzenabstände und Mischkulturen planen"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Werkzeuge",
+            "article_directions": [
+              "Saatwerkzeug und Saatgutbehälter wechseln",
+              "Unkrautwerkzeug und Bodentiefe einstellen",
+              "Werkzeugaufnahmen und Verschleißteile"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Bewässerung",
+            "article_directions": [
+              "Tropfbewässerung an Roboterbetrieb koppeln",
+              "Bodenfeuchte bei einzelnen Beetreihen messen",
+              "Gießintervalle bei unterschiedlichen Kulturen"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Betrieb",
+            "article_directions": [
+              "Strom- und Netzanbindung im Garten",
+              "Witterungsschutz von Antrieb und Steuerung",
+              "Kalibrierung nach Pflanzen- und Beetumbau"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          }
+        ],
+        "parent_rule": "Each flat WP category assigned to this one product page, no categories below categories. No forced categories, no maximum. Topics with 1-2 angles should merge or remain on product page.",
+        "shared_other_pillars": "Magazin/Glossar/Register/Finder/HivePress shared across all target groups; no duplicate advice",
+        "generated_from": "2026-11-10 manufacturer function/market evidence and editorial review, not keyword data",
+        "keyword_research_done": false,
+        "approved_for_wordpress": false
+      }
     },
     {
       "id": "rf151",
@@ -9261,7 +9535,66 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v8": {
+        "status": "FACHLICHE_PLAUSIBILITAET_UNGEPRUEFTE_SEO_ABSICHT",
+        "wp_leaf_role": "EXACT_FUNCTIONAL_PRODUCT_PAGE_DRAFT_NOT_WP_APPROVED",
+        "category_basis": "INDIVIDUALLY_DETERMINED_NOT_STANDARD_TEMPLATE",
+        "categories": [
+          {
+            "name": "Wandflächen",
+            "article_directions": [
+              "Unterschiedliche Putz- und Spachteloberflächen",
+              "Decken- und Wandkanten als Arbeitsgrenzen",
+              "Bestandswände gegenüber Rohbau beurteilen"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Arbeitsgänge",
+            "article_directions": [
+              "Schleifen als Vorbereitung",
+              "Grundierung auftragen",
+              "Wand- und Deckenanstrich",
+              "Wechsel zwischen mehreren Arbeitsschritten"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Einrichtung",
+            "article_directions": [
+              "Anlieferung und Zugang zur Baustelle",
+              "Flächen digital erfassen und abgrenzen",
+              "Werkzeuge und Materialien wechseln",
+              "Zusammenarbeit mit Handwerkern organisieren"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Wirtschaft",
+            "article_directions": [
+              "Leistungsumfang je Raum bestimmen",
+              "Rüstzeiten und Auslastung abschätzen",
+              "Reinigung und Materialverbrauch",
+              "Kauf, Leasing oder Dienstleister vergleichen"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          }
+        ],
+        "parent_rule": "Each flat WP category assigned to this one product page, no categories below categories. No forced categories, no maximum. Topics with 1-2 angles should merge or remain on product page.",
+        "shared_other_pillars": "Magazin/Glossar/Register/Finder/HivePress shared across all target groups; no duplicate advice",
+        "generated_from": "2026-11-10 manufacturer function/market evidence and editorial review, not keyword data",
+        "keyword_research_done": false,
+        "approved_for_wordpress": false
+      }
     },
     {
       "id": "rf155",
@@ -9393,7 +9726,64 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v8": {
+        "status": "FACHLICHE_PLAUSIBILITAET_UNGEPRUEFTE_SEO_ABSICHT",
+        "wp_leaf_role": "EXACT_FUNCTIONAL_PRODUCT_PAGE_DRAFT_NOT_WP_APPROVED",
+        "category_basis": "INDIVIDUALLY_DETERMINED_NOT_STANDARD_TEMPLATE",
+        "categories": [
+          {
+            "name": "Einsatzfelder",
+            "article_directions": [
+              "Roboterhund als Hobbygerät einsetzen",
+              "Lernplattform gegenüber Patrouillenaufgaben",
+              "Innenräume, Garten und Außenflächen abgrenzen"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Bewegung",
+            "article_directions": [
+              "Treppen und unebene Wege prüfen",
+              "Hinderniserkennung und Sturzverhalten",
+              "Fernsteuerung und autonome Modi unterscheiden",
+              "Grenzen bei Regen und Untergrund"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Entwicklung",
+            "article_directions": [
+              "Programmier-Schnittstellen unterscheiden",
+              "Zusatzsensoren und Kameras anbringen",
+              "Eigene Aufgabenabläufe auf der Plattform testen"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Betrieb",
+            "article_directions": [
+              "Akkuwechsel und Ladezyklen",
+              "Software und Datensicherheit",
+              "Ersatzteile und Reparaturservice"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          }
+        ],
+        "parent_rule": "Each flat WP category assigned to this one product page, no categories below categories. No forced categories, no maximum. Topics with 1-2 angles should merge or remain on product page.",
+        "shared_other_pillars": "Magazin/Glossar/Register/Finder/HivePress shared across all target groups; no duplicate advice",
+        "generated_from": "2026-11-10 manufacturer function/market evidence and editorial review, not keyword data",
+        "keyword_research_done": false,
+        "approved_for_wordpress": false
+      }
     },
     {
       "id": "rf161",
@@ -9415,7 +9805,64 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v8": {
+        "status": "FACHLICHE_PLAUSIBILITAET_UNGEPRUEFTE_SEO_ABSICHT",
+        "wp_leaf_role": "EXACT_FUNCTIONAL_PRODUCT_PAGE_DRAFT_NOT_WP_APPROVED",
+        "category_basis": "INDIVIDUALLY_DETERMINED_NOT_STANDARD_TEMPLATE",
+        "categories": [
+          {
+            "name": "Anwendungen",
+            "article_directions": [
+              "Greifen und Positionieren kleiner Werkstücke",
+              "Kleine Montage- und Sortieraufgaben",
+              "Schulversuche und Laboraufbauten",
+              "Belastungsgrenzen bei verschiedenen Werkzeugen"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Greifer",
+            "article_directions": [
+              "Parallelgreifer und Vakuumwerkzeuge vergleichen",
+              "Werkzeugwechsel und Aufnahmeflansche",
+              "Greifkraft und Werkstückschutz"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Programmierung",
+            "article_directions": [
+              "Teach-Modus gegenüber grafischer Ablaufsteuerung",
+              "Wiederholpunkte und Bewegungsbahnen einrichten",
+              "Anbindung von Kamera oder Sensoren"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Sicherheit",
+            "article_directions": [
+              "Arbeit mit ungeschützten Klemmstellen",
+              "Sicherheitsabstand am Tisch",
+              "Wartung und Not-Halt im Übungsbetrieb"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          }
+        ],
+        "parent_rule": "Each flat WP category assigned to this one product page, no categories below categories. No forced categories, no maximum. Topics with 1-2 angles should merge or remain on product page.",
+        "shared_other_pillars": "Magazin/Glossar/Register/Finder/HivePress shared across all target groups; no duplicate advice",
+        "generated_from": "2026-11-10 manufacturer function/market evidence and editorial review, not keyword data",
+        "keyword_research_done": false,
+        "approved_for_wordpress": false
+      }
     },
     {
       "id": "rf162",
@@ -9475,7 +9922,66 @@
       "checked_at": "2026-11-10",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "wp_release": "NICHT_FREIGEGEBEN"
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "content_depth_v8": {
+        "status": "FACHLICHE_PLAUSIBILITAET_UNGEPRUEFTE_SEO_ABSICHT",
+        "wp_leaf_role": "EXACT_FUNCTIONAL_PRODUCT_PAGE_DRAFT_NOT_WP_APPROVED",
+        "category_basis": "INDIVIDUALLY_DETERMINED_NOT_STANDARD_TEMPLATE",
+        "categories": [
+          {
+            "name": "Untergründe",
+            "article_directions": [
+              "Geeignete verputzte und glatte Wände",
+              "Unebene Flächen und Wandfugen berücksichtigen",
+              "Druck auf gestrichenen und beschichteten Flächen"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Druckvorbereitung",
+            "article_directions": [
+              "Auflösung und Größe der Motivdatei",
+              "Farbprofil und Weißdruck vorbereiten",
+              "Motivposition und Wandbegrenzung festlegen",
+              "Bildrechte bei Kundenvorlagen prüfen"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Gerätebetrieb",
+            "article_directions": [
+              "Transport und Aufbau vor Ort",
+              "Fahrweg und Ausrichtung an der Wand",
+              "Testdruck und Düsenkontrolle",
+              "Reinigung und Pflege des Drucksystems"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Aufträge",
+            "article_directions": [
+              "Materialeinsatz je Quadratmeter",
+              "Rüst- und Fahrzeiten im Angebot",
+              "Kundenwünsche und Motivfreigabe",
+              "Miete, Kauf und Auslastung beurteilen"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          }
+        ],
+        "parent_rule": "Each flat WP category assigned to this one product page, no categories below categories. No forced categories, no maximum. Topics with 1-2 angles should merge or remain on product page.",
+        "shared_other_pillars": "Magazin/Glossar/Register/Finder/HivePress shared across all target groups; no duplicate advice",
+        "generated_from": "2026-11-10 manufacturer function/market evidence and editorial review, not keyword data",
+        "keyword_research_done": false,
+        "approved_for_wordpress": false
+      }
     },
     {
       "id": "rf165",
@@ -9491,7 +9997,54 @@
       "checked_at": "2026-11-10",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "wp_release": "NICHT_FREIGEGEBEN"
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "content_depth_v8": {
+        "status": "FACHLICHE_PLAUSIBILITAET_UNGEPRUEFTE_SEO_ABSICHT",
+        "wp_leaf_role": "EXACT_FUNCTIONAL_PRODUCT_PAGE_DRAFT_NOT_WP_APPROVED",
+        "category_basis": "INDIVIDUALLY_DETERMINED_NOT_STANDARD_TEMPLATE",
+        "categories": [
+          {
+            "name": "Navigation",
+            "article_directions": [
+              "GPS-Zielpunkte und gespeicherte Angelstellen",
+              "Autopilot und manuelles Steuern unterscheiden",
+              "Automatische Rückfahrt bei Funkverlust",
+              "Routen bei Wind und Strömung"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Angelpraxis",
+            "article_directions": [
+              "Futtermenge und Futterkammern",
+              "Echolot und Gewässerkarten nutzen",
+              "Nutzung vom Ufer und bei Nacht"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Pflege",
+            "article_directions": [
+              "Motor und Propellerschutz reinigen",
+              "Boot und Akkus transportieren",
+              "Dichtungen und Wassereintritt kontrollieren",
+              "Zulässige Nutzung am jeweiligen Angelgewässer prüfen"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          }
+        ],
+        "parent_rule": "Each flat WP category assigned to this one product page, no categories below categories. No forced categories, no maximum. Topics with 1-2 angles should merge or remain on product page.",
+        "shared_other_pillars": "Magazin/Glossar/Register/Finder/HivePress shared across all target groups; no duplicate advice",
+        "generated_from": "2026-11-10 manufacturer function/market evidence and editorial review, not keyword data",
+        "keyword_research_done": false,
+        "approved_for_wordpress": false
+      }
     },
     {
       "id": "rf166",
@@ -9507,7 +10060,64 @@
       "checked_at": "2026-11-10",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "wp_release": "NICHT_FREIGEGEBEN"
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "content_depth_v8": {
+        "status": "FACHLICHE_PLAUSIBILITAET_UNGEPRUEFTE_SEO_ABSICHT",
+        "wp_leaf_role": "EXACT_FUNCTIONAL_PRODUCT_PAGE_DRAFT_NOT_WP_APPROVED",
+        "category_basis": "INDIVIDUALLY_DETERMINED_NOT_STANDARD_TEMPLATE",
+        "categories": [
+          {
+            "name": "Getränke",
+            "article_directions": [
+              "Cocktails mit unterschiedlichen Zutaten",
+              "Alkoholfreie Rezeptabläufe",
+              "Eis, Dekoration und Dosierung"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Gastbetrieb",
+            "article_directions": [
+              "Bestellung per Tablet in den Ablauf integrieren",
+              "Gläserausgabe und Gästeabstand",
+              "Ausgabe während hoher Nachfrage",
+              "Menschen und Roboter im Barbereich koordinieren"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Hygiene",
+            "article_directions": [
+              "Flaschen- und Leitungssystem reinigen",
+              "Zutatenwechsel ohne Vermischung",
+              "Reinigung der Greif- und Ausgabebereiche"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Wirtschaft",
+            "article_directions": [
+              "Platzbedarf und bauliche Anpassung",
+              "Anfragepreis und Betriebskosten",
+              "Einweisung und technischer Support"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          }
+        ],
+        "parent_rule": "Each flat WP category assigned to this one product page, no categories below categories. No forced categories, no maximum. Topics with 1-2 angles should merge or remain on product page.",
+        "shared_other_pillars": "Magazin/Glossar/Register/Finder/HivePress shared across all target groups; no duplicate advice",
+        "generated_from": "2026-11-10 manufacturer function/market evidence and editorial review, not keyword data",
+        "keyword_research_done": false,
+        "approved_for_wordpress": false
+      }
     },
     {
       "id": "rf167",
@@ -9523,7 +10133,54 @@
       "checked_at": "2026-11-10",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "wp_release": "NICHT_FREIGEGEBEN"
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "content_depth_v8": {
+        "status": "FACHLICHE_PLAUSIBILITAET_UNGEPRUEFTE_SEO_ABSICHT",
+        "wp_leaf_role": "EXACT_FUNCTIONAL_PRODUCT_PAGE_DRAFT_NOT_WP_APPROVED",
+        "category_basis": "INDIVIDUALLY_DETERMINED_NOT_STANDARD_TEMPLATE",
+        "categories": [
+          {
+            "name": "Raumeignung",
+            "article_directions": [
+              "Toilettenraum-Größe und Türdurchgänge",
+              "Öffentliche Sanitärbereiche vs kleine Betriebe",
+              "Menschenverkehr und zeitliche Sperrungen"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Reinigungsablauf",
+            "article_directions": [
+              "Sanitärgegenstände und Fußboden im gleichen Zyklus",
+              "Nachfüllen von Wasser und Reinigungsmitteln",
+              "Abfallaufnahme und Hygienegrenzen",
+              "Reinigungsergebnis bei verschiedenen Oberflächen"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Servicebetrieb",
+            "article_directions": [
+              "Einrichtung und Anlernen des Sanitärraums",
+              "Fernüberwachung und Störmeldungen",
+              "Monatsmiete gegen Reinigungsdienst vergleichen",
+              "Arbeitsschutz und Desinfektionsnachweise prüfen"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          }
+        ],
+        "parent_rule": "Each flat WP category assigned to this one product page, no categories below categories. No forced categories, no maximum. Topics with 1-2 angles should merge or remain on product page.",
+        "shared_other_pillars": "Magazin/Glossar/Register/Finder/HivePress shared across all target groups; no duplicate advice",
+        "generated_from": "2026-11-10 manufacturer function/market evidence and editorial review, not keyword data",
+        "keyword_research_done": false,
+        "approved_for_wordpress": false
+      }
     },
     {
       "id": "rf168",
@@ -9539,7 +10196,63 @@
       "checked_at": "2026-11-10",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "wp_release": "NICHT_FREIGEGEBEN"
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "content_depth_v8": {
+        "status": "FACHLICHE_PLAUSIBILITAET_UNGEPRUEFTE_SEO_ABSICHT",
+        "wp_leaf_role": "EXACT_FUNCTIONAL_PRODUCT_PAGE_DRAFT_NOT_WP_APPROVED",
+        "category_basis": "INDIVIDUALLY_DETERMINED_NOT_STANDARD_TEMPLATE",
+        "categories": [
+          {
+            "name": "Gerichte",
+            "article_directions": [
+              "Rühren gegenüber Braten und Schmoren",
+              "Portionsgrößen und Rezeptwiederholbarkeit",
+              "Wechsel zwischen Speisen und Gewürzmengen"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Kücheneinbau",
+            "article_directions": [
+              "Strom, Abzug und Stellfläche planen",
+              "Menschliche Vorbereitung und automatisches Garen",
+              "Übergabe von fertigen Speisen organisieren"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Hygiene",
+            "article_directions": [
+              "Reinigung von Wok und Zulaufwegen",
+              "Allergene und Produktwechsel berücksichtigen",
+              "Lebensmitteltemperatur und Kontrollen"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Wirtschaft",
+            "article_directions": [
+              "Einsatz bei kleinem Restaurant gegen Kettenlösung",
+              "Schulung und Bedienzeit",
+              "Preis-, Service- und Wartungsanfragen bewerten"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          }
+        ],
+        "parent_rule": "Each flat WP category assigned to this one product page, no categories below categories. No forced categories, no maximum. Topics with 1-2 angles should merge or remain on product page.",
+        "shared_other_pillars": "Magazin/Glossar/Register/Finder/HivePress shared across all target groups; no duplicate advice",
+        "generated_from": "2026-11-10 manufacturer function/market evidence and editorial review, not keyword data",
+        "keyword_research_done": false,
+        "approved_for_wordpress": false
+      }
     },
     {
       "id": "rf169",
@@ -9555,7 +10268,64 @@
       "checked_at": "2026-11-10",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "wp_release": "NICHT_FREIGEGEBEN"
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "content_depth_v8": {
+        "status": "FACHLICHE_PLAUSIBILITAET_UNGEPRUEFTE_SEO_ABSICHT",
+        "wp_leaf_role": "EXACT_FUNCTIONAL_PRODUCT_PAGE_DRAFT_NOT_WP_APPROVED",
+        "category_basis": "INDIVIDUALLY_DETERMINED_NOT_STANDARD_TEMPLATE",
+        "categories": [
+          {
+            "name": "Belagsteuerung",
+            "article_directions": [
+              "Sauce und Käse gleichmäßig dosieren",
+              "Verschiedene Pizzaformate einstellen",
+              "Zutatenwechsel und Portionsvorgaben"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Küchenablauf",
+            "article_directions": [
+              "Übergabe von Teigrohlingen",
+              "Personalaufgaben an der Belagstation",
+              "Kombination mit vorhandenen Backöfen",
+              "Spitzenzeiten und Auftragsreihenfolge"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Hygiene",
+            "article_directions": [
+              "Reinigung der Zutatenbehälter",
+              "Kühlkette und Haltbarkeit",
+              "Allergenwechsel und Kreuzkontakt vermeiden"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Kosten",
+            "article_directions": [
+              "Stellfläche und laufende Auslastung",
+              "Personaleinsatz gegenüber Maschine",
+              "Service, Verbrauch und Reinigungszeit"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          }
+        ],
+        "parent_rule": "Each flat WP category assigned to this one product page, no categories below categories. No forced categories, no maximum. Topics with 1-2 angles should merge or remain on product page.",
+        "shared_other_pillars": "Magazin/Glossar/Register/Finder/HivePress shared across all target groups; no duplicate advice",
+        "generated_from": "2026-11-10 manufacturer function/market evidence and editorial review, not keyword data",
+        "keyword_research_done": false,
+        "approved_for_wordpress": false
+      }
     },
     {
       "id": "rf170",
@@ -9571,7 +10341,12 @@
       "checked_at": "2026-11-10",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "wp_release": "NICHT_FREIGEGEBEN"
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "content_no_wp_categories_v8": {
+        "decision": "NO_CATEGORY_TREE_YET",
+        "reason": "Bisher institutioneller autonomer Fahrdienst; kein unabhängiger Privat-/Kleinbetrieb-Gerätevertrieb belegt, Produkttyp/Service klären",
+        "no_forced_wp_categories": true
+      }
     },
     {
       "id": "rf171",
@@ -9587,7 +10362,12 @@
       "checked_at": "2026-11-10",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "wp_release": "NICHT_FREIGEGEBEN"
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "content_no_wp_categories_v8": {
+        "decision": "NO_CATEGORY_TREE_YET",
+        "reason": "Hersteller kennzeichnet Eisaufbereitungsroboter als Vorserie; keine Produktseiten allein auf Ankündigung",
+        "no_forced_wp_categories": true
+      }
     },
     {
       "id": "rf172",
@@ -9619,7 +10399,12 @@
       "checked_at": "2026-11-10",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "wp_release": "NICHT_FREIGEGEBEN"
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "content_no_wp_categories_v8": {
+        "decision": "NO_CATEGORY_TREE_YET",
+        "reason": "Anbieter zeigt Tätowier-Franchise bzw. eigene Dienstleistung, keinen Geräteverkauf an unabhängige Studios",
+        "no_forced_wp_categories": true
+      }
     },
     {
       "id": "rf174",
@@ -9635,7 +10420,64 @@
       "checked_at": "2026-11-10",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "wp_release": "NICHT_FREIGEGEBEN"
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "content_depth_v8": {
+        "status": "FACHLICHE_PLAUSIBILITAET_UNGEPRUEFTE_SEO_ABSICHT",
+        "wp_leaf_role": "EXACT_FUNCTIONAL_PRODUCT_PAGE_DRAFT_NOT_WP_APPROVED",
+        "category_basis": "INDIVIDUALLY_DETERMINED_NOT_STANDARD_TEMPLATE",
+        "categories": [
+          {
+            "name": "Solaranlagen",
+            "article_directions": [
+              "Gestelltypen auf Freiflächen prüfen",
+              "Module und Formate unterscheiden",
+              "Untergrund und Baustellenneigung berücksichtigen"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Montageablauf",
+            "article_directions": [
+              "Modulaufnahme und Ausrichtung",
+              "Absetzen auf der Unterkonstruktion",
+              "Materialtransport und Versorgung organisieren",
+              "Zusammenarbeit mit Montageteams"
+            ],
+            "idea_count": 4,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Sicherheit",
+            "article_directions": [
+              "Arbeiten mit schweren Modulen",
+              "Sperrflächen und Bewegungsbereiche",
+              "Wartung und Stillstand an der Baustelle"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          },
+          {
+            "name": "Wirtschaft",
+            "article_directions": [
+              "Leistungsfähigkeit bei Großanlagen beurteilen",
+              "Personal- und Geräteeinsatz gegenüberstellen",
+              "Miet-, Hersteller- und Servicebedingungen prüfen"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_category_created": false
+          }
+        ],
+        "parent_rule": "Each flat WP category assigned to this one product page, no categories below categories. No forced categories, no maximum. Topics with 1-2 angles should merge or remain on product page.",
+        "shared_other_pillars": "Magazin/Glossar/Register/Finder/HivePress shared across all target groups; no duplicate advice",
+        "generated_from": "2026-11-10 manufacturer function/market evidence and editorial review, not keyword data",
+        "keyword_research_done": false,
+        "approved_for_wordpress": false
+      }
     }
   ],
   "research_expansion": {
@@ -10251,6 +11093,28 @@
     "shared_services": "EIN Magazin/Glossar/Modellregister/Finder/Anzeigenmarkt privat und industriell gemeinsam",
     "buyer_gate": "Private ODER kleine betriebliche Verwendung -> käufernah unabhängig von Industrieherkunft; nur ausschließlich großindustrielle Fälle über Industrie; offene Fälle bleiben offen",
     "practical_categories": "Je funktional eindeutige Produktseite keine Pflichtkategorien, jede vorgeschlagene Vertiefung nur bei mindestens 3 verschiedenen artikeltragfähigen Themen, 3–5 typisch; 1–2 auf Produktseite oder sachlich bündeln, keine Obergrenze",
-    "status": "FACHENTWURF_OHNE_WP_FREIGABE"
+    "status": "FACHENTWURF_OHNE_WP_FREIGABE",
+    "content_depth_examples": {
+      "categories": 56,
+      "articleIdeas": 194,
+      "examples": 15
+    },
+    "profile_ids": [
+      "rb062",
+      "rf141",
+      "rf146",
+      "rf147",
+      "rf150",
+      "rf154",
+      "rf160",
+      "rf161",
+      "rf164",
+      "rf165",
+      "rf166",
+      "rf167",
+      "rf168",
+      "rf169",
+      "rf174"
+    ]
   }
 }
