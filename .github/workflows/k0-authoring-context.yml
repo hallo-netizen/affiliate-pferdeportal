@@ -83,6 +83,15 @@ jobs:
           pathlib.Path('/tmp/K0_AUTHORING_CONTEXT_BOUND.json').write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
           print(x['run_instance_id'])
           PY
+          # Authoritative SEO/keyword decision is already fixed in the PSERC plan.
+          # Reuse that exact value; no new K0 SEO interpretation or sixth metadata field.
+          test -f "$RUN_DIR/PSERC_SOURCE_MANIFEST.json" || { echo "K0_UPSTREAM_SEO_SOURCE_MANIFEST_MISSING" >&2; exit 2; }
+          python3 -m engine.k0_seo_owner_binding bind \
+            "$RUN_DIR/PSERC_SOURCE_MANIFEST.json" \
+            "$RUN_DIR/WORDPRESS_INTAKE.json" \
+            /tmp/K0_AUTHORING_CONTEXT_BOUND.json \
+            /tmp/K0_AUTHORING_CONTEXT_OWNER_BOUND.json
+          mv /tmp/K0_AUTHORING_CONTEXT_OWNER_BOUND.json /tmp/K0_AUTHORING_CONTEXT_BOUND.json
           python3 -m engine.k0_product_property_research bind /tmp/K0_AUTHORING_CONTEXT_BOUND.json K0_PRODUCT_PROPERTY_STORE.json /tmp/K0_PRODUCT_PROPERTY_STORE_NEXT.json > /tmp/k0-property-research.json
           python3 - <<'PY'
           import json
