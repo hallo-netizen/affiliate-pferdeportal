@@ -1,0 +1,134 @@
+--- a/pste/includes/class-pste-intent-profile.php
++++ b/pste/includes/class-pste-intent-profile.php
+@@ -57,22 +57,39 @@
+         return $out;
+     }
+ 
++    /** Only a real, unchanged PRE_TYPE decision for this raw query is reusable. */
++    public static function verifiedPreTypeForRaw(array $analysis,string $raw): bool {
++        $originalHash=(string)($analysis['analysis_sha256']??'');
++        return ($analysis['contract']??'')===self::CONTRACT
++            &&($analysis['phase']??'')==='PRE_TYPE'
++            &&($analysis['status']??'')==='PASS'&&($analysis['ok']??false)===true
++            &&($analysis['intent_first']??false)===true
++            &&self::clean((string)($analysis['raw_query']??''))===self::clean($raw)
++            &&preg_match('/^[a-f0-9]{64}$/D',$originalHash)===1
++            &&hash_equals($originalHash,self::hash($analysis));
++    }
++
+     /** @return array<string,mixed> */
+     public static function bindArticleType(array $analysis,array $semantic,array $registry,string $familyKey): array {
+         $type=trim((string)($semantic['resolved_article_type']??''));
+         $canon=PSTE_Article_Type_Registry::canonicalType($type);
+         $intentA=trim((string)($semantic['strand_a']['search_intent']??''));
+         $intentB=trim((string)($semantic['strand_b']['search_intent']??''));
++        // The A/B retrievers own article-type agreement, not the SEO search goal.
++        // Their intent strings are derived FROM type (a Beratung becomes the
++        // generic EDITORIAL_INFORMATION) and must never replace the SEO-first goal.
+         $intentConsensus=!empty($semantic['intent_consensus'])&&$intentA!==''&&hash_equals($intentA,$intentB);
+-        $searchIntent=$intentConsensus?$intentA:'';
++        $analysisValid=self::verifiedPreTypeForRaw($analysis,(string)($analysis['raw_query']??''));
++        $searchIntent=$analysisValid?trim((string)($analysis['primary_user_goal']??'')):'';
+         $expectedCanon=PSTE_Article_Type_Registry::canonicalType((string)($analysis['primary_article_type_candidate']??''));
+         $typeCompatible=$expectedCanon===''||$canon===$expectedCanon||self::compatibleFallback($expectedCanon,$canon);
+         $available=PSTE_Article_Type_Registry::availableTypes($registry,$familyKey);
+         $typeAvailable=$type!==''&&in_array($type,$available,true);
+         $reasons=[];
+-        if(($analysis['status']??'')!=='PASS')$reasons[]='PSTE_INTENT_PRE_TYPE_ANALYSIS_NOT_PASS';
++        if(!$analysisValid)$reasons[]='PSTE_INTENT_ORIGINAL_ANALYSIS_HASH_OR_STATUS_INVALID';
+         if($type==='')$reasons[]='PSTE_INTENT_ARTICLE_TYPE_MISSING';
+-        if($searchIntent==='')$reasons[]='PSTE_INTENT_SEARCH_INTENT_NOT_CONSENSUS_PROVEN';
++        if($searchIntent==='')$reasons[]='PSTE_INTENT_PRE_TYPE_GOAL_MISSING';
++        if(!$intentConsensus)$reasons[]='PSTE_INTENT_CLASSIFIER_A_B_CONSENSUS_MISSING';
+         if(!$typeCompatible)$reasons[]='PSTE_INTENT_CLASSIFIER_TYPE_CONFLICT';
+         if(!$typeAvailable)$reasons[]='PSTE_INTENT_ARTICLE_TYPE_NOT_AVAILABLE_IN_FAMILY';
+         if(!$reasons)$reasons[]='PSTE_INTENT_PRIMARY_ROUTE_PROVEN';
+@@ -85,7 +102,9 @@
+         ]);
+         $out=$analysis;
+         $out['phase']='BOUND_TYPE';$out['status']=$status;$out['ok']=$status==='PASS';$out['article_type']=$type;$out['search_intent']=$searchIntent;
+-        $out['semantic_intent_consensus']=$intentConsensus;$out['classifier_type_compatible_with_pre_type_intent']=$typeCompatible;$out['article_type_available']=$typeAvailable;
++        $out['semantic_intent_consensus']=$intentConsensus;
++        $out['search_intent_origin']='SIGNED_PRE_TYPE_PRIMARY_USER_GOAL';
++        $out['classifier_type_compatible_with_pre_type_intent']=$typeCompatible;$out['article_type_available']=$typeAvailable;
+         $out['intent_key']=hash('sha256',$identity);$out['reason_codes']=$reasons;
+         $out['secondary_branches']=array_values(array_map(static function($b)use($available){$b=is_array($b)?$b:[];$t=(string)($b['article_type']??'');$b['article_type_available']=in_array($t,$available,true);$b['production_eligible']=false;$b['auto_fanout']=false;$b['five_field_handoff_allowed']=false;return $b;},(array)($analysis['secondary_branches']??[])));
+         unset($out['analysis_sha256']);$out['profile_sha256']=self::hash($out);
+--- a/pste/includes/class-pste-normal-metadata-path.php
++++ b/pste/includes/class-pste-normal-metadata-path.php
+@@ -220,6 +220,9 @@
+         $manualFachType=($human&&$human['area']==='FACH')?(string)$human['article_type']:'';
+         $base=self::candidateTitleBeforeCategory($base,$analysisRaw,$registry,$persistedTitle,
+             (string)($seoEvidence['target_keyword']??''),$seoEvidence,$manualFachType);
++        // Do not disguise invalid historical SEO proof as missing title/category work.
++        if(str_starts_with((string)($base['reason_codes'][0]??''),'PSTE_RETAINED_SEO_'))
++            return $base;
+ 
+         // Central KISS decision: relevance and title quality are already decided.
+         // A missing research family, article-type category or Magazin leaf is never a title veto.
+@@ -398,7 +401,29 @@
+         // Reuse the EXISTING SEO-intent worker before title creation. The earlier
+         // hard-coded EDITORIAL_INFORMATION discarded proven search intent on every
+         // new keyword; a category must never dictate the title's meaning.
+-        $intent=PSTE_Intent_Profile::analyzeBeforeType($raw,$normalized,'',$seoEvidence);
++        // An unchanged, hash-verified first SEO analysis is already saved on
++        // this topic. Reuse it on the EXISTING-ONLY replay; do not replace the
++        // original query-level search goal with a generic type-derived guess.
++        $saved=(array)($seoEvidence['intent_analysis']??[]);
++        if(!$saved){
++            $prior=(array)($seoEvidence['intent_profile']??[]);
++            if(($prior['phase']??'')==='PRE_TYPE')$saved=$prior;
++        }
++        if($saved){
++            if(!PSTE_Intent_Profile::verifiedPreTypeForRaw($saved,$raw))
++                return self::withReasons($base,'REVIEW_REQUIRED',['PSTE_RETAINED_SEO_ANALYSIS_INTEGRITY_OR_RAW_MISMATCH']);
++            $tuple=(array)($seoEvidence['intent_tuple']??[]);
++            if($tuple && $tuple!==(array)($saved['intent_tuple']??[]))
++                return self::withReasons($base,'REVIEW_REQUIRED',['PSTE_RETAINED_SEO_TUPLE_SOURCE_CONFLICT']);
++            $newProvider=(string)($seoEvidence['metrics']['search_intent']??$seoEvidence['search_intent']??'');
++            if($newProvider!=='' && $newProvider!==(string)($saved['provider_search_intent']??''))
++                return self::withReasons($base,'REVIEW_REQUIRED',['PSTE_RETAINED_SEO_PROVIDER_SOURCE_CONFLICT']);
++            $intent=$saved;
++        }else{
++            // Only truly new topics (no prior SEO owner) enter the existing
++            // provider/query analysis step. No hidden overwrite of old evidence.
++            $intent=PSTE_Intent_Profile::analyzeBeforeType($raw,$normalized,'',$seoEvidence);
++        }
+         $base['intent_analysis']=$intent;
+         $base['intent_profile']=$intent;
+         // The single SEO-intent result owns the type used for title validation.
+--- a/pserc/includes/class-pserc-plan-dependency-fingerprint.php
++++ b/pserc/includes/class-pserc-plan-dependency-fingerprint.php
+@@ -75,7 +75,32 @@
+         if(empty($seoBinding['ok']))throw new RuntimeException((string)($seoBinding['status']??'PSERC_PLAN_DEPENDENCY_PSTE_CAPABILITY_INVALID'));
+         $capabilitySha=(string)($seoBinding['capability_sha256']??'');
+         if(!preg_match('/^[a-f0-9]{64}$/',$capabilitySha))throw new RuntimeException('PSERC_PLAN_DEPENDENCY_PSTE_CAPABILITY_HASH_INVALID');
++        // Read the existing completed PSTE audit identity once. The old MAX(id)
++        // watermarks do not change when an existing topic row is revalidated.
++        // Fail closed on a corrupted receipt; PSTE remains owner of audit freshness.
++        $audit=get_option(defined('PSTE_OPTION_RETAINED_BACKLOG_AUDIT')
++            ?PSTE_OPTION_RETAINED_BACKLOG_AUDIT:'pste_retained_backlog_audit_v1',[]);
++        if(!is_array($audit))throw new RuntimeException('PSERC_PLAN_PSTE_AUDIT_RECEIPT_INVALID');
++        $auditSha='NOT_AVAILABLE';
++        if($audit){
++            $auditSha=(string)($audit['sha256']??'');
++            if(($audit['contract']??'')!=='PSTE_RETAINED_BACKLOG_AUDIT_RECEIPT_V1'
++                ||preg_match('/^[a-f0-9]{64}$/D',$auditSha)!==1
++                ||(int)($audit['backlog_row_count']??0)<1
++                ||trim((string)($audit['completed_at_utc']??''))==='')
++                throw new RuntimeException('PSERC_PLAN_PSTE_AUDIT_RECEIPT_INVALID');
++            // Exact original PSTE_Breadth_Research_Queue::backlogAuditReceiptHash
++            // ordering. Do not accept arbitrary 64-character replacement values.
++            $auditParts=[(string)$audit['contract'],(string)($audit['audit_logic_sha256']??''),
++                (string)($audit['baseline_sha256']??''),(string)($audit['inventory_sha256']??''),
++                (string)($audit['structure_sha256']??''),(string)($audit['editorial_plan_sha256']??''),
++                (string)($audit['backlog_sha256']??''),(string)$audit['backlog_row_count'],
++                (string)$audit['completed_at_utc']];
++            if(!hash_equals($auditSha,hash('sha256',implode("\n",$auditParts))))
++                throw new RuntimeException('PSERC_PLAN_PSTE_AUDIT_RECEIPT_SIGNATURE_INVALID');
++        }
+         $topicComponent=[
++            'pste_completed_backlog_audit_sha256'=>$auditSha,
+             // Deliberately do not bind plan validity to the raw PSTE plugin version. Pure UI/orchestrator
+             // releases must not invalidate a still-identical compiler read capability and topic dataset.
+             'pste_capability_sha256'=>$capabilitySha,
