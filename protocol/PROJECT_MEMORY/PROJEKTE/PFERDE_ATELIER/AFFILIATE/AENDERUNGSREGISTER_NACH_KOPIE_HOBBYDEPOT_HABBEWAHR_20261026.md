@@ -31,3 +31,11 @@
 - Dieses Register beschreibt den bekannten Änderungsstand; es behauptet **nicht**, dass jede historische Arbeitskopie auf der realen WordPress-Testseite bestanden hat.
 
 **Status:** Protokoll vollständig als Dokumentation der hier greifbaren Arbeitsstände; Übernahme in HD-009 oder HAB-004 **nicht durchgeführt**, weiterhin getrennte Plugins.
+
+### Ergänzung: reale Backend-Bilder 17:35–17:40 Uhr
+
+- Suchlauf **läuft weiter**: 340 → 360 Pakete, 345 → 365 echte Fortschrittsschritte in fünf Minuten. **154/298** gespeicherte öffentliche Kategorieabdeckung, **144 offen**; **232 gespeicherte Freigaben**, keineswegs 232 garantiert sichtbare Kacheln. Bereits mindestens eine eBay-Kachel ist auf der gezeigten Kategorie sichtbar.
+- **Verfügbarkeitsstatus lautet weiterhin „noch nicht geprüft“**: Ein erfolgreicher Arbeitsdurchlauf der neuen QA9-2h-Prüfung ist **nicht belegt**. Sie als nachgewiesene Ursache der enormen Backend-Langsamkeit zu bezeichnen, wäre falsch.
+- QA9-Quellbefund: Das Backend pollt den Status alle **45 Sekunden**; nach 180 Sekunden Stillstand kann die Statusfunktion **synchron einen echten kanonischen eBay-Arbeitsschritt** ausführen. Dieser Nebenweg muss beim nächsten KISS-Leistungsumbau getrennt werden. Laufende Selbstfortsetzung der Recherche und 90-Sekunden-Fortsetzungen der neuen Verfügbarkeit dürfen nicht denselben kleinen Server überlasten.
+- **Status:** Prüfbefund / geplanter nächster Umbau, **noch keine gelieferte Reparatur, keine reale Antwortzeitmessung**. Andere Portale vor jeder Übernahme getrennt vergleichen, nicht die eBay-Such- oder Shopdaten des Pferdeateliers kopieren.
+- Ausführliche Quellstellen und Bildbefunde im Bericht `EBAY_QA9_KISS_GETRENNT_20261110.md` im [eBay-QA-PR #748](https://github.com/hallo-netizen/affiliate-pferdeportal/pull/748).
