@@ -258,6 +258,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Fügestellen",
+            "article_directions": [
+              "Punktabstände an Blechen planen",
+              "Materialpaarungen und Blechlagen beurteilen",
+              "Schweißzangen-Zugang am Werkstück prüfen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Schweißzange",
+            "article_directions": [
+              "Elektrodenformen und Verschleiß",
+              "Anpresskraft an Bauteile anpassen",
+              "Kühlung und Stromversorgung sicherstellen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Prüfung",
+            "article_directions": [
+              "Punktfestigkeit prüfen",
+              "Fehlpunkte und Spritzer erkennen",
+              "Nacharbeit und Werkstücklage dokumentieren"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -328,6 +370,49 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Beschichtungen",
+            "article_directions": [
+              "Lackarten und Schichtaufbau",
+              "Komplexe Oberflächen gleichmäßig lackieren",
+              "Grundierung und Decklack abstimmen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Spritztechnik",
+            "article_directions": [
+              "Sprühabstand und Roboterbahnen",
+              "Farbwechsel und Leitungsreinigung",
+              "Düsen und Zerstäuber auswählen",
+              "Materialverlust durch Sprühnebel mindern"
+            ],
+            "idea_count": 4,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Arbeitsschutz",
+            "article_directions": [
+              "Abluft und Filtersysteme",
+              "Explosionsschutz in Lackierkabinen",
+              "Schutz bei Wartung und Reinigung"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -523,6 +608,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Paletten",
+            "article_directions": [
+              "Ungleich beladene Paletten erkennen",
+              "Kartons und Säcke unterscheiden",
+              "Beschädigte Packstücke behandeln"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Entnahme",
+            "article_directions": [
+              "Lagenweise Packstücke greifen",
+              "Zwischenlagen automatisch entfernen",
+              "Übergabe auf Förderband einrichten"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Einführung",
+            "article_directions": [
+              "Platzbedarf an der Palette",
+              "Zugriff des Personals absichern",
+              "Produktwechsel und Greifer umrüsten"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -788,6 +915,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Werkstücke",
+            "article_directions": [
+              "Kleine Teile schnell versetzen",
+              "Lebensmittel schonend aufnehmen",
+              "Falsch orientierte Teile erkennen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Zuführung",
+            "article_directions": [
+              "Kameraerkennung am Förderband",
+              "Laufendes Band mit Greifer synchronisieren",
+              "Taktzeit bei schwankender Zuführung"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Greiftechnik",
+            "article_directions": [
+              "Vakuum bei porösen Verpackungen",
+              "Greifer bei Produktwechsel tauschen",
+              "Lebensmittelgeeignete Reinigung"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -858,6 +1027,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Werkstoffe",
+            "article_directions": [
+              "Holz gegenüber Metall bearbeiten",
+              "Unregelmäßige Formen schleifen",
+              "Gleichmäßigen Materialabtrag erreichen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Schleifwerkzeuge",
+            "article_directions": [
+              "Bänder und Scheiben auswählen",
+              "Kontaktkraft nachgiebig regeln",
+              "Schleifmittelverschleiß erkennen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Staubschutz",
+            "article_directions": [
+              "Absaugung nach Schleifgut planen",
+              "Funken bei Metallarbeiten beachten",
+              "Werkstückspannung und Bedienerschutz"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -928,6 +1139,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Gratarten",
+            "article_directions": [
+              "Scharfe Blechkanten bearbeiten",
+              "Bohrungsgrate entfernen",
+              "Kunststoff- und Gussteile unterscheiden"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Werkzeugführung",
+            "article_directions": [
+              "Fräs- und Bürstwerkzeuge",
+              "Konturen mit Sensoren verfolgen",
+              "Kontaktkraft an Toleranzen anpassen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Qualitätskontrolle",
+            "article_directions": [
+              "Kantenradius messen",
+              "Wiederholbarkeit bei kleinen Serien",
+              "Nacharbeit und Werkzeugzustand"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -998,6 +1251,49 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Materialien",
+            "article_directions": [
+              "Ein- und Zweikomponenten-Klebstoffe",
+              "Viskosität und Topfzeit beachten",
+              "Dichtmittel gegenüber Kleber"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Dosierung",
+            "article_directions": [
+              "Kleberaupe an Ecken steuern",
+              "Dosiermenge und Bahngeschwindigkeit",
+              "Werkstücklage vor Auftrag prüfen",
+              "Unterbrechungen sauber fortsetzen"
+            ],
+            "idea_count": 4,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Wartung",
+            "article_directions": [
+              "Mischdüsen und Leitungen tauschen",
+              "Aushärten in der Anlage vermeiden",
+              "Reinigung und Reststoffentsorgung"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -1482,6 +1778,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Kommissionierung",
+            "article_directions": [
+              "Einzelartikel aus Behältern entnehmen",
+              "Mischaufträge mit mehreren Positionen",
+              "Empfindliche Ware aufnehmen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Greifer",
+            "article_directions": [
+              "Vakuum gegen mechanische Greifer",
+              "Artikel per Kamera erkennen",
+              "Wechselnde Produktabmessungen handhaben"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Lageranschluss",
+            "article_directions": [
+              "Auftragsdaten übernehmen",
+              "Behälter an Packstation übergeben",
+              "Fehlgriffe und Störungen beheben"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -1787,6 +2125,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Regale",
+            "article_directions": [
+              "Regalmodule und Nutzlasten",
+              "Gassenbreite und Fahrwege",
+              "Unterschied zum Palettentransport"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Flottenbetrieb",
+            "article_directions": [
+              "Gegenverkehr koordinieren",
+              "Regale an Packstationen übergeben",
+              "Roboter laden und parken"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Umbau",
+            "article_directions": [
+              "Regale für Transport vorbereiten",
+              "Bodenlast und Ebenheit prüfen",
+              "Sicherheitszonen für Umstellung"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -2066,6 +2446,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Zimmerlieferung",
+            "article_directions": [
+              "Speisen und Hygieneartikel transportieren",
+              "Lieferfach sicher am Zimmer öffnen",
+              "Übergabe und Rücknahme organisieren"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Hotelwege",
+            "article_directions": [
+              "Aufzüge und Türen verbinden",
+              "Etagenkarten anlegen",
+              "Kontaktfreie Gästeübergabe"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Betrieb",
+            "article_directions": [
+              "Reinigungs- und Ladezeiten",
+              "Blockierte Fahrwege melden",
+              "Empfang und Gästekommunikation anbinden"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -2135,6 +2557,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Besucherführung",
+            "article_directions": [
+              "Besucher zum Zielort begleiten",
+              "Eingangs- und Wartebereiche",
+              "Barrierefreie Routen planen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Informationen",
+            "article_directions": [
+              "Sprache und Dialoge pflegen",
+              "Öffnungszeiten aktualisieren",
+              "An Mitarbeitende weiterleiten"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Einrichtung",
+            "article_directions": [
+              "Ladestation und Standort",
+              "Kamera und Mikrofon datensparsam nutzen",
+              "Störungen und Updates behandeln"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -2318,6 +2782,59 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Getränke",
+            "article_directions": [
+              "Espresso und Milchgetränke anbieten",
+              "Milchschaum und Zutatenzufuhr",
+              "Portionsmengen wiederholen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Bestellung",
+            "article_directions": [
+              "Bezahlterminal anbinden",
+              "Becherplatz und Ausgabefenster",
+              "Bestellspitzen organisieren"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Hygiene",
+            "article_directions": [
+              "Milchwege täglich reinigen",
+              "Bohnen und Wasser nachfüllen",
+              "Temperatur und Wartung prüfen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Wirtschaft",
+            "article_directions": [
+              "Tagesabsatz abschätzen",
+              "Kauf und Betrieb gegenüber Miete",
+              "Service- und Verbrauchskosten"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -2666,6 +3183,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Tankarten",
+            "article_directions": [
+              "Lagertanks und Prozessbehälter unterscheiden",
+              "Einstiegsöffnungen und Zugang",
+              "Ablagerungen nach Inhalt beurteilen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Reinigung",
+            "article_directions": [
+              "Bürsten gegenüber Hochdruckverfahren",
+              "Schlamm und Flüssigkeitsreste aufnehmen",
+              "Schlecht erreichbare Bereiche kontrollieren"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Sicherheit",
+            "article_directions": [
+              "Gefahrstoffe und Freigaben beachten",
+              "Personeneinstieg vermeiden",
+              "Gerät nach dem Einsatz dekontaminieren"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -2735,6 +3294,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Rohrarten",
+            "article_directions": [
+              "Hausanschluss und Hauptleitung",
+              "Rohrdurchmesser und Krümmungen",
+              "Material und Alter von Rohren"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Werkzeuge",
+            "article_directions": [
+              "Bürst- und Fräsköpfe wählen",
+              "Spülung und Roboter kombinieren",
+              "Ablagerungen und Wurzeleinwuchs"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Einsatz",
+            "article_directions": [
+              "Start und Rückholung organisieren",
+              "Kamera zur Zustandsprüfung nutzen",
+              "Gerät nach Einsatz reinigen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -2803,6 +3404,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Verfahren",
+            "article_directions": [
+              "UV-C und Sprühverfahren abgrenzen",
+              "Schattenbereiche beurteilen",
+              "Reinigung gegenüber Desinfektion"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Raumbetrieb",
+            "article_directions": [
+              "Wege und Aufstellorte bestimmen",
+              "Zutritt bei Betrieb sperren",
+              "Umgang mit belegten Räumen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Nachweise",
+            "article_directions": [
+              "Wirksamkeit nach Verfahren prüfen",
+              "Sensoren und Leuchten warten",
+              "Einsatz dokumentieren"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -2872,6 +3515,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Stallflächen",
+            "article_directions": [
+              "Laufgänge und Bodentypen",
+              "Mistbereiche bei unterschiedlichen Tieren",
+              "Tierbereiche und Engstellen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Aufnahme",
+            "article_directions": [
+              "Mistschieben gegen Sammelbehälter",
+              "Gülle und Festmist unterscheiden",
+              "Abwurf und Entleerung einrichten"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Tierbetrieb",
+            "article_directions": [
+              "Verhalten von Tieren berücksichtigen",
+              "Lade- und Rückwege organisieren",
+              "Wartung bei Staub und Feuchte"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -3319,6 +4004,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Kulturflächen",
+            "article_directions": [
+              "Reihenabstand und Wuchs prüfen",
+              "Feld gegenüber Gewächshaus",
+              "Sprühhöhe einstellen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Dosierung",
+            "article_directions": [
+              "Düsen und Tropfengröße",
+              "Tank und Pumpe warten",
+              "Teilflächen gezielt behandeln"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Einsatzgrenzen",
+            "article_directions": [
+              "Wetter und Abdrift berücksichtigen",
+              "Vorschriften und Anwenderpflichten prüfen",
+              "Reinigung nach Mittelwechsel"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -4003,6 +4730,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Laborgefäße",
+            "article_directions": [
+              "Platten und Probenröhrchen",
+              "Spitzen und unterschiedliche Volumina",
+              "Probenverwechslung vermeiden"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Pipettierung",
+            "article_directions": [
+              "Ansaug- und Abgabegeschwindigkeit",
+              "Kreuzkontamination verhindern",
+              "Misch- und Verdünnungsschritte"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Qualität",
+            "article_directions": [
+              "Volumenkalibrierung",
+              "Probenabläufe dokumentieren",
+              "Wartung und Dekontamination"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -4079,6 +4848,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Arzneimittellager",
+            "article_directions": [
+              "Packungsgrößen unterbringen",
+              "Kühlpflichtige Arzneimittel",
+              "Chargen und Verfallsdaten"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Ausgabe",
+            "article_directions": [
+              "Packungen erkennen und entnehmen",
+              "Rezeptauftrag zum Roboter leiten",
+              "Fehlausgaben zurückführen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Apothekenbetrieb",
+            "article_directions": [
+              "Raumplanung und Fachzugriff",
+              "Notbetrieb und Wartung",
+              "Warenwirtschaft anbinden"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -4270,6 +5081,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Markieraufgaben",
+            "article_directions": [
+              "Bodenraster und Raumachsen",
+              "Einbaupositionen im Rohbau",
+              "Aktuelle Baupläne übertragen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Vermessung",
+            "article_directions": [
+              "Planpunkt und Roboterposition",
+              "Kontrollpunkte auf der Fläche",
+              "Maßabweichungen nachprüfen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Baualltag",
+            "article_directions": [
+              "Neben anderen Gewerken fahren",
+              "Markieren auf rauem Boden",
+              "Transport und Akku planen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -4340,6 +5193,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Bauformen",
+            "article_directions": [
+              "Wandprofile und Hohlräume",
+              "Betonmischung und Schichtaufbau",
+              "Aussparungen für Fenster und Türen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Druckprozess",
+            "article_directions": [
+              "Pumpe und Druckkopf abstimmen",
+              "Schichthöhe und Geschwindigkeit",
+              "Temperatur während des Drucks"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Bauablauf",
+            "article_directions": [
+              "Bewehrung und Einbauteile",
+              "Untergrund und Maschinenstandort",
+              "Zulassung und Qualitätssicherung prüfen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -4410,6 +5305,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Mauerwerk",
+            "article_directions": [
+              "Steinarten und Formate",
+              "Mörtel und Fugen",
+              "Öffnungen und Versatz"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Roboteraufbau",
+            "article_directions": [
+              "Steinzufuhr und Greifer",
+              "Position an der Wand bestimmen",
+              "Stützen und Gerätetransport"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Baustelle",
+            "article_directions": [
+              "Geeignete Aufstellfläche",
+              "Arbeit mit Maurern abstimmen",
+              "Wirtschaftlichkeit kleiner Baustellen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -4480,6 +5417,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Bewehrung",
+            "article_directions": [
+              "Bindepunkte erkennen",
+              "Bewehrungsmatten und Draht",
+              "Stabdurchmesser beachten"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Fahrbetrieb",
+            "article_directions": [
+              "Auf Matten sicher bewegen",
+              "Hindernisse überfahren oder auslassen",
+              "Akku- und Drahtwechsel"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Qualität",
+            "article_directions": [
+              "Bindefestigkeit prüfen",
+              "Fehlbindungen erkennen",
+              "Schutz von Personal auf der Baustelle"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -5420,6 +6399,48 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "last_wp_page": "EINE_KONKRETE_PRODUKTART",
+        "categories": [
+          {
+            "name": "Bodenbeläge",
+            "article_directions": [
+              "Parkett und Fliesen unterschiedlich wischen",
+              "Wasserempfindliche Böden",
+              "Teppichzonen vermeiden"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Wischtechnik",
+            "article_directions": [
+              "Pads und Walzen vergleichen",
+              "Wassermenge je Fläche",
+              "Schmutzwasser im Dock behandeln"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Pflege",
+            "article_directions": [
+              "Pads und Walzen säubern",
+              "Wassertank und Reinigungsmittel",
+              "Gerüche durch Restfeuchte vermeiden"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "seo_researched": false,
+        "wp_import_allowed": false,
+        "overlap_review_needed": true
       }
     },
     {
@@ -6183,7 +7204,7 @@
     }
   ],
   "canonical_source": true,
-  "revision": 15,
+  "revision": 16,
   "research_state": "UNAPPROVED",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
@@ -10049,7 +11070,7 @@
       "id": "rf135",
       "name": "Pilzernteroboter für Zuchtbetriebe",
       "topic_kind": "NEW_NICHE_TRIAGE",
-      "proposed_owner": "MAGAZIN_FORSCHUNG_NOCH_NICHT_CORE",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE_COMMERCIAL_USE_EU_REVIEW",
       "proposed_location": "Landwirtschaft & Tierhaltung → Pilzernte (Forschung)",
       "evidence_grade": "FORSCHUNGSARBEIT_2026",
       "source_url": "https://www.sciencedirect.com/science/article/pii/S0168169925015005",
@@ -10066,6 +11087,54 @@
         "checked_on": "2026-11-09",
         "keyword_evaluation": "NICHT_DURCHGEFÜHRT",
         "wordpress_release": false
+      },
+      "owner_before_v10": "MAGAZIN_FORSCHUNG_NOCH_NICHT_CORE",
+      "commercial_evidence_v10": {
+        "manufacturer": "https://4ag.ai/",
+        "independent": "https://www.automate.org/robotics/industry-insights/automation-is-redrawing-europes-mushroom-industry/aph",
+        "finding": "Kommerzielle Installationen in Irland, Kanada, Australien und geplante Niederlande-Einsätze nach Fachbericht vom Juli 2026; ältere reine Forschungsklassifikation überholt. Kauf-/Affiliate-/Kleinbetriebs-Eignung weiterhin separat.",
+        "checked_at": "2026-11-10"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_PRODUKTFUNKTION_UND_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Pilzkulturen",
+            "article_directions": [
+              "Unterschiedliche Pilzarten ernten",
+              "Reifegrad erkennen",
+              "Regalebenen und Substrat berücksichtigen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Erntegreifer",
+            "article_directions": [
+              "Pilz ohne Beschädigung aufnehmen",
+              "Ernteroboter kalibrieren",
+              "Stiele schneiden und Verpackung koppeln"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Betrieb",
+            "article_directions": [
+              "Kühlraum und Feuchtigkeit bewerten",
+              "Leistung bei Erntewellen",
+              "Hygiene und Wartungsbedarf"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "category_not_mandatory": true,
+        "no_wp_release": true,
+        "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
       }
     },
     {
@@ -10128,6 +11197,47 @@
         "product_scope": "Tennis-/Padel-/Pickleball-Bälle einsammeln, NICHT Ballzuspiel (rf148)",
         "eu_availability": "NICHT_GEPRUEFT",
         "affiliate_status": "NICHT_GEPRUEFT"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_PRODUKTFUNKTION_UND_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Sammelflächen",
+            "article_directions": [
+              "Tennisplätze gegenüber Padelplätzen",
+              "Bälle unter Netzen erkennen",
+              "Zaun- und Randbereiche abfahren"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Sammeltechnik",
+            "article_directions": [
+              "Ballaufnahme und Behälterkapazität",
+              "Routenplanung bei Trainingsbetrieb",
+              "Sammelzeit nach Ballzahl"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Pflege",
+            "article_directions": [
+              "Bürsten und Rollen reinigen",
+              "Transport zwischen Plätzen",
+              "Akku und Ladezyklen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "category_not_mandatory": true,
+        "no_wp_release": true,
+        "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
       }
     },
     {
@@ -10189,7 +11299,48 @@
       "seo_verified": false,
       "wp_release": "UNAPPROVED_RESEARCH",
       "buyer_relevance_v3": "Hersteller beschreibt automatisierte Räumung privater Einfahrten und Wege; Kauf-/Lieferstatus und deutsche Einsatzvorschriften vor einer Affiliate-Einbindung gesondert prüfen.",
-      "source_checked": "2026-11-10"
+      "source_checked": "2026-11-10",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_PRODUKTFUNKTION_UND_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Räumflächen",
+            "article_directions": [
+              "Einfahrten und Gartenwege unterscheiden",
+              "Neigung und Bodenbeläge",
+              "Enge Kanten und Hindernisse"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Schneeverhältnisse",
+            "article_directions": [
+              "Nassschnee und Pulverschnee",
+              "Schneehöhe und Räumbreite",
+              "Auswurf und Ablagebereich"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Winterbetrieb",
+            "article_directions": [
+              "Routen vor Frost einrichten",
+              "Akkulaufzeit bei Kälte",
+              "Schneefräse und Antrieb warten"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "category_not_mandatory": true,
+        "no_wp_release": true,
+        "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
+      }
     },
     {
       "id": "rf141",
@@ -10306,7 +11457,48 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_PRODUKTFUNKTION_UND_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Haustierbeobachtung",
+            "article_directions": [
+              "Mobile Kamerafahrten im Wohnraum",
+              "Rückkehr zur Ladestation",
+              "Tierbewegungen erkennen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Kommunikation",
+            "article_directions": [
+              "Tonübertragung und Haustieransprache",
+              "Benachrichtigungen bei Bewegung",
+              "Nutzung während Abwesenheit"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Privatsphäre",
+            "article_directions": [
+              "Kamerazugriff auf Bewohner",
+              "Cloudspeicherung und Appberechtigungen",
+              "Gerätezugriff im Familienhaushalt"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "category_not_mandatory": true,
+        "no_wp_release": true,
+        "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
+      }
     },
     {
       "id": "rf144",
@@ -10328,7 +11520,48 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_PRODUKTFUNKTION_UND_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Interaktion",
+            "article_directions": [
+              "Spielverhalten und Reaktionen",
+              "Sprach- und Gestensteuerung",
+              "Interaktion mit Kindern und Haustieren"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Bewegung",
+            "article_directions": [
+              "Fahren auf verschiedenen Zimmerböden",
+              "Hindernisse beim Spielen",
+              "Rückkehr zur Ladestation"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Langzeitnutzung",
+            "article_directions": [
+              "Spiele und Inhalte aktualisieren",
+              "Akku und Wartung",
+              "Offlinefunktion und Datenschutz"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "category_not_mandatory": true,
+        "no_wp_release": true,
+        "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
+      }
     },
     {
       "id": "rf145",
@@ -10350,7 +11583,48 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_PRODUKTFUNKTION_UND_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Grillroste",
+            "article_directions": [
+              "Geeignete Rostmaterialien prüfen",
+              "Abstand der Grillstäbe",
+              "Reinigung ohne Kratzer"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Reinigung",
+            "article_directions": [
+              "Startbedingungen nach Abkühlen",
+              "Fett und Eingebranntes entfernen",
+              "Reinigungsdauer und Flächendeckung"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Bürstenpflege",
+            "article_directions": [
+              "Bürstenmaterial und Verschleiß",
+              "Gerät nach Reinigung säubern",
+              "Ersatzbürsten und Akkupflege"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "category_not_mandatory": true,
+        "no_wp_release": true,
+        "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
+      }
     },
     {
       "id": "rf146",
@@ -10523,7 +11797,48 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_PRODUKTFUNKTION_UND_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Trainingsabläufe",
+            "article_directions": [
+              "Ballgeschwindigkeit und Spin",
+              "Links-Rechts-Bewegung",
+              "Trainingsprogramme für Partnerersatz"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Platzbetrieb",
+            "article_directions": [
+              "Aufstellung und Ausrichtung",
+              "Einsatz bei Tennis und Padel",
+              "Sichere Position neben Spielenden"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Bedienung",
+            "article_directions": [
+              "Übungssequenzen speichern",
+              "Ballbehälter und Zuführung",
+              "Transport und Ladezeiten"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "category_not_mandatory": true,
+        "no_wp_release": true,
+        "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
+      }
     },
     {
       "id": "rf149",
@@ -10545,7 +11860,48 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_PRODUKTFUNKTION_UND_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Zeichnungen",
+            "article_directions": [
+              "Stifte und Tinten kombinieren",
+              "Papier- und Kartonformate",
+              "Kalligrafie und Illustrationen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Programmierung",
+            "article_directions": [
+              "Vektordateien vorbereiten",
+              "Zeichenbahnen und Stiftwechsel",
+              "Wiederholbare Kleinserien"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Betrieb",
+            "article_directions": [
+              "Stiftaufnahme einstellen",
+              "Kalibrierung von Zeichenfläche",
+              "Wartung und Reinigung"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "category_not_mandatory": true,
+        "no_wp_release": true,
+        "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
+      }
     },
     {
       "id": "rf150",
@@ -10645,7 +12001,48 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_PRODUKTFUNKTION_UND_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Kamerafahrten",
+            "article_directions": [
+              "Wiederholbare Laufwege planen",
+              "Kurvenfahrten mit Kamera",
+              "Bewegung bei Zeitrafferaufnahmen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Aufbauten",
+            "article_directions": [
+              "Kameragewicht und Schwerpunkt",
+              "Gimbal und Schwenkkopf koppeln",
+              "Sicherheit am Filmset"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Steuerung",
+            "article_directions": [
+              "Fernsteuerung und Bewegungsabläufe",
+              "Akku und Ladeoptionen",
+              "Transport für kleine Produktionen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "category_not_mandatory": true,
+        "no_wp_release": true,
+        "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
+      }
     },
     {
       "id": "rf152",
@@ -10667,7 +12064,48 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_PRODUKTFUNKTION_UND_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Spielmechanik",
+            "article_directions": [
+              "Echte Figuren automatisch bewegen",
+              "Unterschied zu LED-Schachbrettern",
+              "Fehlplatzierungen von Figuren behandeln"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Spielmodi",
+            "article_directions": [
+              "Computergegner und Trainingslevel",
+              "Onlinegegner am echten Brett",
+              "Zugkontrolle und Regelvarianten"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Pflege",
+            "article_directions": [
+              "Figuren und Felder reinigen",
+              "Bewegungsmechanik vor Staub schützen",
+              "Updates und Verbindungssicherheit"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "category_not_mandatory": true,
+        "no_wp_release": true,
+        "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
+      }
     },
     {
       "id": "rf153",
@@ -10814,7 +12252,48 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Gewässer",
+            "article_directions": [
+              "Yachthäfen und kleine Binnenhäfen",
+              "Teiche mit Pflanzenbewuchs",
+              "Wassertiefe und Hindernisse"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Müllaufnahme",
+            "article_directions": [
+              "Schwimmende Kunststoffe aufnehmen",
+              "Laub und organische Stoffe",
+              "Behälter leeren und Abfall sortieren"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Betrieb",
+            "article_directions": [
+              "Fahrweg und Absperrung",
+              "Akkureichweite und Ladeplatz",
+              "Wartung nach Schmutzwasserbetrieb"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "medical_cases_require_specialist": false,
+        "wp_release": false,
+        "affiliate_not_verified": true
+      }
     },
     {
       "id": "rf157",
@@ -10836,7 +12315,13 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "commercial_crosscheck_v10": {
+        "source": "https://www.dyna.co/news/monster-laundry",
+        "finding": "Sophy Swiftfold tatsächlich bei kleinem Wäschereibetrieb im Einsatz. Dieselbe Grundfunktion Wäschefalten wie bisherige Haushaltsideen: vor eventueller Produkt-Owner-Trennung nach Funktions- und Bauartunterschieden prüfen, nicht zwei Seiten allein nach Zielgruppe.",
+        "checked_at": "2026-11-10",
+        "separate_new_id": false
+      }
     },
     {
       "id": "rf158",
@@ -12116,6 +13601,658 @@
         "reason": "Feste Fahrradwaschanlage ist nach aktuellem Beleg vor allem automatisierte Waschanlage; Roboterstatus unbewiesen. Keine CORE-Kategorien allein wegen Marketingname.",
         "keyword_research": false
       }
+    },
+    {
+      "id": "rf183",
+      "name": "Motorische Handprothesen",
+      "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
+      "proposed_location": "OFFEN: Privat – Alltag & Assistenz (eigene Käufer-Landingpage zu prüfen)",
+      "proposed_owner": "CORE_PERSONAL_ASSISTIVE_MEDICAL_REVIEW",
+      "source_url": "https://openbionics.com/de/hero-arm-overview/",
+      "evidence_grade": "DE_HERSTELLER_BESTAETIGT_MEDIZINPRODUKT",
+      "related_existing_id": "rf176",
+      "non_duplication_rule": "Myoelektrisch gesteuerte Hand-/Armprothese ist kein am Rollstuhl montierter Greifarm und kein allgemeiner Exoskelettroboter; individuelle orthopädietechnische Versorgung, niemals normales Versandprodukt behaupten",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "checked_at": "2026-11-10",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Greifaufgaben",
+            "article_directions": [
+              "Verschiedene Alltagsgriffe wählen",
+              "Feinmotorische Aufgaben",
+              "Unterschied zu externem Rollstuhlgreifarm"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Versorgung",
+            "article_directions": [
+              "Schaft und Passform fachgerecht anpassen",
+              "Steuerung über Muskelsignale einlernen",
+              "Fachbetrieb und Erprobung"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Alltagspflege",
+            "article_directions": [
+              "Akku und Laden",
+              "Reinigung und Verschleiß",
+              "Sicherheitswarnungen und Wartung prüfen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "medical_cases_require_specialist": true,
+        "wp_release": false,
+        "affiliate_not_verified": true
+      },
+      "original_proposed_location_v10": "Haushalt & Garten",
+      "navigation_gap_audit_v10": {
+        "status": "STRUCTURAL_GAP_NO_FORCED_MAIN_MENU",
+        "reason": "Bionische Handprothese ist nicht Haushalt/Garten; auch kein Industrie-only",
+        "remedy": "Fachliche Produkt-Landingpage oder geeigneten Käufer-Zugang definieren; vorläufiges siebenfaches Hauptmenü nicht ungeprüft erweitern; medizinische Verwendung bei kleiner Praxis ist Käuferbereich, nicht automatisch ausschließlich Industrie",
+        "date": "2026-11-10"
+      }
+    },
+    {
+      "id": "rf184",
+      "name": "Motorisierte Knieprothesen",
+      "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
+      "proposed_location": "OFFEN: Privat – Alltag & Assistenz (eigene Käufer-Landingpage zu prüfen)",
+      "proposed_owner": "CORE_PERSONAL_ASSISTIVE_MEDICAL_REVIEW",
+      "source_url": "https://www.wjt-ortho.com/produkte/intuy-familie/",
+      "evidence_grade": "DE_HERSTELLER_BESTAETIGT_SPEZIALVERSORGUNG",
+      "related_existing_id": "rb043",
+      "non_duplication_rule": "Aktiv motorisch unterstütztes Prothesenknie für die Person, nicht externer Anzug/Exoskelett oder bloßer motorloser Kniegelenksersatz; Fachversorgung und Sicherheitsinformationen gesondert prüfen",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "checked_at": "2026-11-10",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Bewegung",
+            "article_directions": [
+              "Treppen und Rampen bewältigen",
+              "Aufstehen und Gehen unterstützen",
+              "Unterschied zu passivem Prothesengelenk"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Anpassung",
+            "article_directions": [
+              "Versorgung durch Fachbetrieb",
+              "Körpergewicht und Aktivitätsgrad beachten",
+              "Sensor- und Bewegungsmodi einstellen lassen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Sicherheit",
+            "article_directions": [
+              "Aktuelle Sicherheitsmitteilungen prüfen",
+              "Akku und Ladeintervalle",
+              "Wartung und Ersatzversorgung"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "medical_cases_require_specialist": true,
+        "wp_release": false,
+        "affiliate_not_verified": true
+      },
+      "original_proposed_location_v10": "Haushalt & Garten",
+      "navigation_gap_audit_v10": {
+        "status": "STRUCTURAL_GAP_NO_FORCED_MAIN_MENU",
+        "reason": "Aktive Knieprothese nicht Haushalt/Garten; medizinische Fachversorgung und Kaufweg",
+        "remedy": "Fachliche Produkt-Landingpage oder geeigneten Käufer-Zugang definieren; vorläufiges siebenfaches Hauptmenü nicht ungeprüft erweitern; medizinische Verwendung bei kleiner Praxis ist Käuferbereich, nicht automatisch ausschließlich Industrie",
+        "date": "2026-11-10"
+      }
+    },
+    {
+      "id": "rf185",
+      "name": "Roboterhandschuhe für Handrehabilitation",
+      "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
+      "proposed_location": "OFFEN: Privat – Alltag & Assistenz (eigene Käufer-Landingpage zu prüfen)",
+      "proposed_owner": "CORE_REHABILITATION_DEVICE_REVIEW",
+      "source_url": "https://www.ks-inzeniring.com/de/robotske-rokavice-rehabilitacija-na-domu/sy-hre12",
+      "evidence_grade": "EU_HAENDLER_HEIMANWENDUNG_MEDIZINSTATUS_OFFEN",
+      "related_existing_id": "rb042",
+      "non_duplication_rule": "Externe Fingerübungs-Handschuhe sind nicht bionische Ersatzhand/Prothese; fachliche Eignung und Medizinprodukteklassifikation vor Kaufberatung",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "checked_at": "2026-11-10",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Übungsarten",
+            "article_directions": [
+              "Passive Fingerbewegungen",
+              "Aktive Übungen und Spiegelmodus",
+              "Griffübungen mit Fachanleitung"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Anpassung",
+            "article_directions": [
+              "Geeignete Handschuhgröße",
+              "Bewegungsunterstützung einstellen",
+              "Einsatzgrenzen durch Fachpersonal klären"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Pflege",
+            "article_directions": [
+              "Handschuh und Luftleitungen reinigen",
+              "Akkus und Steuergerät prüfen",
+              "Verschleißteile und Hygiene"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "medical_cases_require_specialist": true,
+        "wp_release": false,
+        "affiliate_not_verified": true
+      },
+      "original_proposed_location_v10": "Haushalt & Garten",
+      "navigation_gap_audit_v10": {
+        "status": "STRUCTURAL_GAP_NO_FORCED_MAIN_MENU",
+        "reason": "Roboterhandschuh für häusliche Rehabilitation ist nicht Garten/Haushaltsgerät",
+        "remedy": "Fachliche Produkt-Landingpage oder geeigneten Käufer-Zugang definieren; vorläufiges siebenfaches Hauptmenü nicht ungeprüft erweitern; medizinische Verwendung bei kleiner Praxis ist Käuferbereich, nicht automatisch ausschließlich Industrie",
+        "date": "2026-11-10"
+      }
+    },
+    {
+      "id": "rf186",
+      "name": "Roboter für Tortendekoration",
+      "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
+      "proposed_location": "Gastro & Handel",
+      "proposed_owner": "CORE_SMALL_BAKERY_PRODUCT_CANDIDATE",
+      "source_url": "https://www.gorreri.com/de/products-and-solutions/single-machines/writing-printing-and-decorating-systems/wrobot.aspx",
+      "evidence_grade": "HERSTELLER_ROBOTERARM_DEKORATION_B2B_ANFRAGE",
+      "related_existing_id": "rf166",
+      "non_duplication_rule": "Robotisch geführte Sahne-/Schoko-/Schriftdekorierung für Backwaren; nicht mit Kuchen-3D-Druck oder Roboter-Pralinenverkauf gleichsetzen",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "checked_at": "2026-11-10",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Dekorarten",
+            "article_directions": [
+              "Schokolade und Zuckerguss auftragen",
+              "Schriftzüge und Bilder gestalten",
+              "Dekoration auf unterschiedliche Tortenformen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Einrichtung",
+            "article_directions": [
+              "Vorlagen und Designs importieren",
+              "Düsen und Auftragsköpfe wählen",
+              "Kuchenposition und Transportband"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Backstube",
+            "article_directions": [
+              "Reinigung mit Lebensmittelkontakt",
+              "Kleinserie gegenüber Großproduktion",
+              "Bedienzeit und Wartungsaufwand"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "medical_cases_require_specialist": false,
+        "wp_release": false,
+        "affiliate_not_verified": true
+      }
+    },
+    {
+      "id": "rf187",
+      "name": "Robotische Greifvogel-Vogelabwehr",
+      "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
+      "proposed_location": "Haushalt & Garten",
+      "proposed_owner": "ROBOTIC_AUTOMATION_BOUNDARY_REVIEW",
+      "source_url": "https://www.robop.com/bird-control-products/",
+      "evidence_grade": "HERSTELLER_AUFTRAGSFERTIGUNG_STATIONAERE_ROBOTIK",
+      "related_existing_id": "rb056",
+      "non_duplication_rule": "Stationärer robotischer Greifvogel mit bewegter Abschreckung für Dächer/Felder; keine autonome mobile Patrouille, fachliche Grenze zu einfacher Vogelscheuche oder Lautsprecher beachten",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "checked_at": "2026-11-10"
+    },
+    {
+      "id": "rf188",
+      "name": "Reitplatz-Pflegeroboter",
+      "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
+      "proposed_location": "Landwirtschaft",
+      "proposed_owner": "CORE_SMALL_EQUESTRIAN_PRODUCT_REVIEW",
+      "source_url": "https://www.bluecher-deutschland.de/de/bluecher-pro",
+      "evidence_grade": "DE_HERSTELLER_MULTI_TOOL_B2B_ANFRAGE",
+      "related_existing_id": "rb033",
+      "non_duplication_rule": "Reitplatz planieren/harken und Außenflächen bearbeiten; eine modulare Plattform, nicht je Gerät eine zweite identische Paddock-/Kehren-/Transportseite",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "checked_at": "2026-11-10",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Reitflächen",
+            "article_directions": [
+              "Sand und Vliesgemisch planieren",
+              "Spurrillen und Unebenheiten",
+              "Reitplatz gegenüber Paddock abgrenzen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Werkzeuge",
+            "article_directions": [
+              "Egge und Planieraufsatz wechseln",
+              "Bürsten- und Kehrfunktion kombinieren",
+              "Werkzeuge je Untergrund einstellen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Hofbetrieb",
+            "article_directions": [
+              "Fahrwege zwischen Gebäuden",
+              "Hindernisse und Tierkontakt",
+              "Akkus und Maschinenpflege"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "medical_cases_require_specialist": false,
+        "wp_release": false,
+        "affiliate_not_verified": true
+      }
+    },
+    {
+      "id": "rf189",
+      "name": "Autonome Hundekot-Sammelroboter",
+      "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
+      "proposed_location": "Haushalt & Garten",
+      "proposed_owner": "MAGAZIN_MARKTBEOBACHTUNG_PRELAUNCH",
+      "source_url": "https://petbotics.net/",
+      "evidence_grade": "HERSTELLER_PRE_LAUNCH_WARTELISTE_KEIN_SERIENSHOP",
+      "related_existing_id": "rf142",
+      "non_duplication_rule": "Mobile Kotaufnahme im Privatgarten unterscheidet sich von selbstreinigender Katzentoilette; kein lieferbares Produkt, Hersteller nennt Prelaunch/Waitlist",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "checked_at": "2026-11-10"
+    },
+    {
+      "id": "rf190",
+      "name": "Roboter-Frittierstationen",
+      "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
+      "proposed_location": "Gastro & Handel",
+      "proposed_owner": "CORE_FOOD_ROBOT_B2B_CANDIDATE",
+      "source_url": "https://www.misorobotics.com/about-miso",
+      "evidence_grade": "HERSTELLER_US_RESTAURANT_EINSAETZE_DE_KAUF_OFFEN",
+      "related_existing_id": "rf168",
+      "non_duplication_rule": "Roboter führt Frittierkorb-/Frittiervorgang aus; nicht generischer Küchenautomat oder Wok-Kochroboter. Kleine Betreiber und EU-Vertrieb gesondert prüfen",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "checked_at": "2026-11-10"
+    },
+    {
+      "id": "rf191",
+      "name": "Robotische Crêpe-Stationen",
+      "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
+      "proposed_location": "Gastro & Handel",
+      "proposed_owner": "HIVEPRESS_BETREIBERMODELL_UND_MAGAZIN",
+      "source_url": "https://www.mausrobotics.com/de",
+      "evidence_grade": "SCHWEIZ_HERSTELLER_BETREIBT_STATION_KEIN_GERAETEVERKAUF",
+      "related_existing_id": "rf168",
+      "non_duplication_rule": "Automatisches Crêpe-Backen vor Ort; Anbieter entwickelt/betreibt Stationen, nicht gleich frei kaufbare Produktart für fremde Betriebe",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "checked_at": "2026-11-10"
+    },
+    {
+      "id": "rf192",
+      "name": "Selbstfahrende Palettenwickelroboter",
+      "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
+      "proposed_location": "Logistik",
+      "proposed_owner": "CORE_SMALL_WAREHOUSE_PRODUCT_CANDIDATE",
+      "source_url": "https://www.robopac.com/de/robot-s7-p299",
+      "evidence_grade": "HERSTELLER_DE_PRODUKT_HAENDLER_ANFRAGE",
+      "related_existing_id": "rb013",
+      "non_duplication_rule": "Fährt um stationäre Palette und umwickelt Ladung mit Stretchfolie; unterscheidet sich vom Palettierroboter, der Kartons auf die Palette legt",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "checked_at": "2026-11-10",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Paletten",
+            "article_directions": [
+              "Verschiedene Palettenformen einwickeln",
+              "Überstehende Ladungen sichern",
+              "Folienlänge und Wickelhöhe"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Wickelprogramm",
+            "article_directions": [
+              "Folienvorspannung wählen",
+              "Überlappung und Wickellagen",
+              "Automatisches Abschneiden und Starten"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Lageralltag",
+            "article_directions": [
+              "Platz zum Umfahren einer Palette",
+              "Sicherheit bei Personenverkehr",
+              "Akkuladen und Folienrollenwechsel"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "medical_cases_require_specialist": false,
+        "wp_release": false,
+        "affiliate_not_verified": true
+      }
+    },
+    {
+      "id": "rf193",
+      "name": "Zahnimplantat-Navigationsroboter",
+      "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
+      "proposed_location": "OFFEN: kleine Praxen – Medizin & Pflege (Käufer-Zugang prüfen)",
+      "proposed_owner": "CORE_DENTAL_MEDICAL_B2B_REVIEW",
+      "source_url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K261321",
+      "evidence_grade": "FDA_US_ZULASSUNGSNACHWEIS_2026_EU_OFFEN",
+      "related_existing_id": "rb041",
+      "non_duplication_rule": "Robotergeführte Implantatnavigation in Zahnarztpraxis; kein eigenständiger allgemeiner Chirurgieroboter-Klon, EU-Zulassung/Berufsrecht unabhängig prüfen. Käuferweg Kleinpraxis grundsätzlich relevant",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "checked_at": "2026-11-10",
+      "original_proposed_location_v10": "Gastro & Handel",
+      "navigation_gap_audit_v10": {
+        "status": "STRUCTURAL_GAP_NO_FORCED_MAIN_MENU",
+        "reason": "Zahnärztliche Robotik ist weder Gastronomie noch Großindustrie",
+        "remedy": "Fachliche Produkt-Landingpage oder geeigneten Käufer-Zugang definieren; vorläufiges siebenfaches Hauptmenü nicht ungeprüft erweitern; medizinische Verwendung bei kleiner Praxis ist Käuferbereich, nicht automatisch ausschließlich Industrie",
+        "date": "2026-11-10"
+      }
+    },
+    {
+      "id": "rf194",
+      "name": "Bodenfliesenlege-Roboter",
+      "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
+      "proposed_location": "Handwerk",
+      "proposed_owner": "CORE_CONSTRUCTION_PRODUCT_CANDIDATE",
+      "source_url": "https://novigen-robotics.com/de/products/p900-pro/",
+      "evidence_grade": "HERSTELLER_DE_PRODUKT_ANFRAGE",
+      "related_existing_id": "rf154",
+      "non_duplication_rule": "Mobiler Arm trägt Fliesenkleber auf und setzt Bodenfliesen; nicht allgemeiner Mauer-/Innenausbauroboter und nicht bloß Fliesenkleberautomat",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "checked_at": "2026-11-10",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Fliesentypen",
+            "article_directions": [
+              "Quadratische und rechteckige Fliesen",
+              "Großformat und Werkstückgewicht",
+              "Dünnbettverfahren und Untergrund"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Verlegeprozess",
+            "article_directions": [
+              "Kleberauftrag koordinieren",
+              "Vakuumgreifer und Positionierung",
+              "Fugenbreite und Ebenheit prüfen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Baustelle",
+            "article_directions": [
+              "Raumplanung und Hindernisse",
+              "Wartung und Materialnachschub",
+              "Kosten bei kleinen und großen Projekten"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "medical_cases_require_specialist": false,
+        "wp_release": false,
+        "affiliate_not_verified": true
+      }
+    },
+    {
+      "id": "rf195",
+      "name": "Fliesenfugen-Roboter",
+      "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
+      "proposed_location": "Handwerk",
+      "proposed_owner": "CORE_CONSTRUCTION_PRODUCT_CANDIDATE",
+      "source_url": "https://www.fabrica.ai/",
+      "evidence_grade": "HERSTELLER_BERichtet_SG_AU_VERKAEUFE_EU_PILOT",
+      "related_existing_id": "rf154",
+      "non_duplication_rule": "Nach dem Verlegen Fugen füllen und Überstand entfernen; andere eigenständige Funktion als Fliesenlegen. EU-Einsatz zunächst Pilot, Verkauf gesondert",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "checked_at": "2026-11-10",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Fugenarten",
+            "article_directions": [
+              "Unterschiedliche Fugenbreiten",
+              "Fliesenmaterial und Verschmutzung",
+              "Schmale Rand- und Eckbereiche"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Roboterlauf",
+            "article_directions": [
+              "Raum automatisch erfassen",
+              "Fugenmaterial gezielt einbringen",
+              "Überschuss ohne Fliesenschaden entfernen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Einsatz",
+            "article_directions": [
+              "Fugenmasse und Wasser nachfüllen",
+              "Transport zwischen Räumen",
+              "Reinigung und Verschleißteile"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "medical_cases_require_specialist": false,
+        "wp_release": false,
+        "affiliate_not_verified": true
+      }
+    },
+    {
+      "id": "rf196",
+      "name": "Aquakultur-Fütterungsroboter",
+      "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
+      "proposed_location": "Landwirtschaft",
+      "proposed_owner": "CORE_SMALL_AQUACULTURE_B2B_REVIEW",
+      "source_url": "https://imencoaqua.com/product/exact-feeding-robot/",
+      "evidence_grade": "HERSTELLER_KLEINE_UND_GROSSE_ANLAGEN",
+      "related_existing_id": "rb035",
+      "non_duplication_rule": "Schienengeführte automatische Futterverteilung über Fischbecken, nicht Tierstall-Fütterung oder reine Zeitautomat-Fütterung; nicht mit Aquakultur-Netzreinigung doppeln",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "checked_at": "2026-11-10",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Fischbecken",
+            "article_directions": [
+              "Kleine und große Beckenanlagen",
+              "Schienenführung über Becken",
+              "Mehrere Futterplätze bedienen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Futtersteuerung",
+            "article_directions": [
+              "Futterrationen nach Tierbestand",
+              "Verschiedene Pellets und Mischungen",
+              "Verteilung über Wasserflächen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Betrieb",
+            "article_directions": [
+              "Nachfüllstationen und Akku",
+              "Feuchtigkeit und Reinigung",
+              "Störungen und Dokumentation der Fütterung"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "medical_cases_require_specialist": false,
+        "wp_release": false,
+        "affiliate_not_verified": true
+      }
+    },
+    {
+      "id": "rf197",
+      "name": "Robotische Pralinen-Verkaufsstationen",
+      "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
+      "proposed_location": "Gastro & Handel",
+      "proposed_owner": "CORE_ROBOTIC_RETAIL_VENDING_REVIEW",
+      "source_url": "https://www.igus.de/automation/einsatzgebiete/lebensmittelroboter/lebensmittel-roboter-pralinenpicker",
+      "evidence_grade": "DE_HERSTELLER_ANWENDUNGSFALL_ROBOTERARM",
+      "related_existing_id": "rb027",
+      "non_duplication_rule": "Greifarm wählt/präsentiert/verpackt Pralinen nach Kundenwahl; keine pure Süßwaren-Automatik und keine robotische Eiscreme-Zubereitung",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "checked_at": "2026-11-10"
+    },
+    {
+      "id": "rf198",
+      "name": "Automatische Regaleinräumroboter",
+      "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
+      "proposed_location": "Gastro & Handel",
+      "proposed_owner": "CORE_RETAIL_REPLENISHMENT_CANDIDATE",
+      "source_url": "https://tx-inc.com/en/blog/2021/11/02/11451/",
+      "evidence_grade": "HERSTELLER_JAPAN_RETAIL_INSTALLATION_DE_EIGNUNG_OFFEN",
+      "related_existing_id": "rb018",
+      "non_duplication_rule": "Greifroboter füllt Regale/Bestand aktiv auf, anders als reine Inventurzählung oder automatisierte Lagerkommissionierung; kleine Shops wirtschaftlich noch offen",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "checked_at": "2026-11-10"
+    },
+    {
+      "id": "rf199",
+      "name": "Autonome Stallboden-Eiersammelroboter",
+      "topic_kind": "NEW_FUNCTIONAL_NICHE_OR_BOUNDARY_V10",
+      "proposed_location": "Landwirtschaft",
+      "proposed_owner": "MAGAZIN_FORSCHUNG_KEIN_KAUFANGEBOT",
+      "source_url": "https://dil-ev.de/en/projekte/poultryrob/",
+      "evidence_grade": "DE_FORSCHUNGSPROJEKT_KEINE_KAUFBARKEIT",
+      "related_existing_id": "rb033",
+      "non_duplication_rule": "Fährt Stallboden ab und findet verlegte Eier; vorhandene Patente/Forschungsprojekte kein lieferbares Gerät; weder Eierförderband noch Stallreinigung",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "checked_at": "2026-11-10"
     }
   ],
   "research_expansion": {
@@ -12650,6 +14787,15 @@
       "source_count": 7,
       "new_niche": "rf140",
       "evidence_scope": "7 Hersteller-Einsatzbeispiele für 7 bestehende Typ-IDs; 1 neuer, noch ungeprüfter Schneeräum-Nischenkandidat; keine 68-fache Vollabnahme."
+    },
+    "buyer_gap_review_v10": {
+      "status": "OPEN_REAL_GAP",
+      "observation": "Sieben aktuelle Hauptwelten bilden Assistenz, Alltagshilfen, persönliche medizinische Robotik und Robotik für kleine Zahnarztpraxen sachlich NICHT ausreichend ab.",
+      "do_not_do": "Keine medizinische Robotik unter Gastro & Handel oder Haushalts/Gartenpflege verstecken; nicht automatisch Industrie-only, wenn eine kleine Praxis oder Privatperson die Leistung nutzt.",
+      "candidate_entry": "Pflege & Assistenz / Gesundheit als Käufer-Landingpage, fachlich in der CORE-Navigation erreichbar; konkrete Menülösung erst nach Kategoriebündelung/Designprüfung, NICHT auf Verdacht als neunten Topslot vornehmen.",
+      "linked_existing": "rb041 rb042 rb043 rb065 rf175 rf176 rf183 rf184 rf185 rf193",
+      "other_modules": "Magazin, Glossar, Register, Finder und Anzeigenmarkt bleiben GEMEINSAM fuer alle.",
+      "no_wordpress_change": true
     }
   },
   "research_round_v7": {
@@ -12809,6 +14955,98 @@
     "no_category_outliers": [
       "rb065",
       "rf182"
+    ]
+  },
+  "research_round_v10": {
+    "date": "2026-11-10",
+    "base_revision": 15,
+    "original_types": 68,
+    "former_research_count": 182,
+    "added_count": 17,
+    "current_research_count": 199,
+    "added_ids": [
+      "rf183",
+      "rf184",
+      "rf185",
+      "rf186",
+      "rf187",
+      "rf188",
+      "rf189",
+      "rf190",
+      "rf191",
+      "rf192",
+      "rf193",
+      "rf194",
+      "rf195",
+      "rf196",
+      "rf197",
+      "rf198",
+      "rf199"
+    ],
+    "rechecks": [
+      "rf135",
+      "rf157"
+    ],
+    "status": "EVIDENCE_BASED_RESEARCH_NOT_WP_APPROVED",
+    "no_keyword_research": true,
+    "no_wordpress_writes": true,
+    "policy": "Ein Produkt-Owner nach eigener konkreter Funktion; keine Pflicht-Unterkategorien, mindestens 3 sachlich verschiedene Beitragsabsichten für jede geplante flache Vertiefungskategorie; gemeinsam Magazin, Glossar, Register, Finder und Anzeigenmarkt.",
+    "depth_profiles": {
+      "profiles": 44,
+      "categories": 133,
+      "topics": 401
+    },
+    "depth_ids": [
+      "rb002",
+      "rb003",
+      "rb005",
+      "rb008",
+      "rb009",
+      "rb010",
+      "rb011",
+      "rb017",
+      "rb020",
+      "rb023",
+      "rb024",
+      "rb026",
+      "rb030",
+      "rb031",
+      "rb032",
+      "rb033",
+      "rb037",
+      "rb045",
+      "rb046",
+      "rb048",
+      "rb049",
+      "rb050",
+      "rb051",
+      "rb061",
+      "rf135",
+      "rf137",
+      "rf140",
+      "rf143",
+      "rf144",
+      "rf145",
+      "rf148",
+      "rf149",
+      "rf151",
+      "rf152",
+      "rf156",
+      "rf183",
+      "rf184",
+      "rf185",
+      "rf186",
+      "rf188",
+      "rf192",
+      "rf194",
+      "rf195",
+      "rf196"
+    ],
+    "navigation_gap_ids": [
+      "rf183",
+      "rf184",
+      "rf185",
+      "rf193"
     ]
   }
 }
