@@ -1,0 +1,26 @@
+--- a/includes/class-pserc-plan-dependency-fingerprint.php
++++ b/includes/class-pserc-plan-dependency-fingerprint.php
+@@ -75,7 +75,23 @@
+         if(empty($seoBinding['ok']))throw new RuntimeException((string)($seoBinding['status']??'PSERC_PLAN_DEPENDENCY_PSTE_CAPABILITY_INVALID'));
+         $capabilitySha=(string)($seoBinding['capability_sha256']??'');
+         if(!preg_match('/^[a-f0-9]{64}$/',$capabilitySha))throw new RuntimeException('PSERC_PLAN_DEPENDENCY_PSTE_CAPABILITY_HASH_INVALID');
++        // A completed existing-only audit can rewrite ALREADY-EXISTING topic rows.
++        // MAX(id) watermarks alone never notice those changes. Reuse the ONE
++        // signed PSTE audit receipt (one get_option, no new table/worker/query).
++        // PSTE remains the ONLY audit-validity authority: its existing
++        // existingOnlyAuditCurrent() gate validates this receipt against data.
++        $audit=get_option(defined('PSTE_OPTION_RETAINED_BACKLOG_AUDIT')
++            ?PSTE_OPTION_RETAINED_BACKLOG_AUDIT:'pste_retained_backlog_audit_v1',[]);
++        if(!is_array($audit))throw new RuntimeException('PSERC_PLAN_PSTE_AUDIT_RECEIPT_INVALID');
++        $auditSha='NOT_AVAILABLE';
++        if($audit){
++            $auditSha=(string)($audit['sha256']??'');
++            if(($audit['contract']??'')!=='PSTE_RETAINED_BACKLOG_AUDIT_RECEIPT_V1'
++                ||!preg_match('/^[a-f0-9]{64}$/',$auditSha))
++                throw new RuntimeException('PSERC_PLAN_PSTE_AUDIT_RECEIPT_INVALID');
++        }
+         $topicComponent=[
++            'pste_completed_backlog_audit_sha256'=>$auditSha,
+             // Deliberately do not bind plan validity to the raw PSTE plugin version. Pure UI/orchestrator
+             // releases must not invalidate a still-identical compiler read capability and topic dataset.
+             'pste_capability_sha256'=>$capabilitySha,
