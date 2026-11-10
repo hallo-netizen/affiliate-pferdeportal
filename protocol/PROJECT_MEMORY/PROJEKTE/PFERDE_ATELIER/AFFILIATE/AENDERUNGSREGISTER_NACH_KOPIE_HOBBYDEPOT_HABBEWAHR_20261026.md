@@ -39,3 +39,9 @@
 - QA9-Quellbefund: Das Backend pollt den Status alle **45 Sekunden**; nach 180 Sekunden Stillstand kann die Statusfunktion **synchron einen echten kanonischen eBay-Arbeitsschritt** ausführen. Dieser Nebenweg muss beim nächsten KISS-Leistungsumbau getrennt werden. Laufende Selbstfortsetzung der Recherche und 90-Sekunden-Fortsetzungen der neuen Verfügbarkeit dürfen nicht denselben kleinen Server überlasten.
 - **Status:** Prüfbefund / geplanter nächster Umbau, **noch keine gelieferte Reparatur, keine reale Antwortzeitmessung**. Andere Portale vor jeder Übernahme getrennt vergleichen, nicht die eBay-Such- oder Shopdaten des Pferdeateliers kopieren.
 - Ausführliche Quellstellen und Bildbefunde im Bericht `EBAY_QA9_KISS_GETRENNT_20261110.md` im [eBay-QA-PR #748](https://github.com/hallo-netizen/affiliate-pferdeportal/pull/748).
+
+### Ergänzung: reales Backend-Folgefoto 17:48 Uhr
+
+Weiterer Nutzerscreenshot, 10.11.2026: Kanonischer eBay-Gesamtlauf bleibt `running / gapfill_discovery`. Seit dem letzten Screenshot **360 → 399 Pakete** und **365 → 404 echte Fortschrittsschritte**. Die **gespeicherte öffentliche Abdeckung bleibt 154/298**, **144 Familien offen**; **232 gespeicherte Freigaben** unverändert. Die Verfügbarkeitsprüfung zeigt weiterhin **„noch nicht geprüft“**. Der aktuelle Screenshot enthält keinen Nachweis einer erfolgreicher Prüfung oder einen gemessenen Performancewert.
+
+**Übernahmewarnung HD-009 und HAB-004:** Die neue separate Verfügbarkeitsarbeit ist nicht als real WordPress-erprobt anzusehen. Vor Portierung Serverlast, lesende Statusabfrage, tatsächliche Anzeige und Produktaktualität gegen die jeweils eigene Installation prüfen. Keine fremden Produktergebnisse, APIs, Bestände oder Versionen übernehmen. Als Beobachtung protokolliert, **noch keine Fehlerreparatur**.
