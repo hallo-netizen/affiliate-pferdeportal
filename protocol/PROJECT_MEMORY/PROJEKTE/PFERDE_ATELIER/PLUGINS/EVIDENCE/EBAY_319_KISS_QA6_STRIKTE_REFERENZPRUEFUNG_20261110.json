@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-10",
+  "source": "QA5",
+  "status": "nur Staging, nicht installieren",
+  "removed_private_methods": [
+    "ebay_private_query_variants",
+    "ebay_admin_preview_url",
+    "ebay_private_bucket_definitions",
+    "ebay_recover_private_target_term_id",
+    "ebay_persist_recovered_private_target",
+    "ebay_private_review_targets",
+    "ebay_private_parent_refill_posts",
+    "ebay_business_local_recovery_state_save",
+    "ebay_business_local_recovery_state_current"
+  ],
+  "removed_methods_references_per_entire_zip": {
+    "ebay_private_query_variants": 1,
+    "ebay_admin_preview_url": 1,
+    "ebay_private_bucket_definitions": 1,
+    "ebay_recover_private_target_term_id": 1,
+    "ebay_persist_recovered_private_target": 1,
+    "ebay_private_review_targets": 1,
+    "ebay_private_parent_refill_posts": 1,
+    "ebay_business_local_recovery_state_save": 1,
+    "ebay_business_local_recovery_state_current": 1
+  },
+  "method_removed_source_lines": {
+    "ebay_private_query_variants": 2645,
+    "ebay_admin_preview_url": 6359,
+    "ebay_private_bucket_definitions": 7290,
+    "ebay_recover_private_target_term_id": 7308,
+    "ebay_persist_recovered_private_target": 7349,
+    "ebay_private_review_targets": 7462,
+    "ebay_private_parent_refill_posts": 10040,
+    "ebay_business_local_recovery_state_save": 10863,
+    "ebay_business_local_recovery_state_current": 10870
+  },
+  "removed_bytes_including_method_docblocks": 14990,
+  "removed_functions_have_no_calls_in_plugin": true,
+  "redundant_schema_gate_removed": true,
+  "redundant_schema_gate_proof": "ebay_run_is_open(run) requires schema 1.0; A or schema 1.0 is exactly schema 1.0",
+  "changed_files": [
+    "affiliate-portal-router/includes/trait-ppar-ebay-run.php",
+    "affiliate-portal-router/includes/trait-ppar-ebay.php"
+  ],
+  "all_other_files_byte_identical": true,
+  "php_lint_pass": 23,
+  "php_file_count": 23,
+  "zip_entry_count": 66,
+  "zip_crc_pass": true,
+  "source_sha256": "561e5a4ef7148b351579aec8f67073bbf0805c5d1e1bc79d2d7b8c9444c26dc3",
+  "qa6_zip_sha256": "a383d9cf7b8428ace8f94577b28d839a9e8d51f3efe5589520e888f077cc35ea",
+  "qa6_zip_bytes": 5367391,
+  "patch_sha256": "d9d59b0a7481eaea625bad41289cf219975356bf0cb8f69864ff7ce6e09a8165",
+  "all_remaining_method_names_and_visibility_unchanged": true,
+  "live_test": false
+}
