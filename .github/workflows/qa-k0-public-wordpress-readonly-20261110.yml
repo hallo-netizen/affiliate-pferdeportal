@@ -1,0 +1,42 @@
+name: K0 current WordPress category/links public read-only QA
+
+on:
+  push:
+    branches: [qa/k0-editorial-owner-only-20261110]
+    paths:
+      - '.github/workflows/qa-k0-public-wordpress-readonly-20261110.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-read-only:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Check current live-public WordPress category and existing three article links
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,urllib.parse,urllib.request
+          from pathlib import Path
+          from engine.k0_full_rules import verify_live_link_targets
+          context=json.loads(Path("real_runs/k0/k0-20261110-42619ca7-01-r2/AUTHORING_CONTEXT.json").read_text())
+          slug=context["identity"]["category"]
+          url="https://pferde-atelier.de/wp-json/wp/v2/categories?slug="+urllib.parse.quote(slug)
+          req=urllib.request.Request(url,headers={"User-Agent":"K0-QA-ReadOnly/1.0"})
+          with urllib.request.urlopen(req,timeout=20) as r:
+              categories=json.loads(r.read().decode("utf-8"))
+          hits=[x for x in categories if x.get("slug")==slug and int(x.get("id") or 0)>0]
+          if len(hits)!=1:
+              raise SystemExit("WP_LIVE_CATEGORY_NOT_UNIQUE_OR_MISSING")
+          print("PASS WP_LIVE_CATEGORY id="+str(hits[0]["id"])+" slug="+slug)
+          targets=verify_live_link_targets(context["rule_context"],"https://pferde-atelier.de")
+          assert targets["status"]=="PASS" and targets["checked"]==3,targets
+          print("PASS THREE_LIVE_PUBLIC_TARGETS "+str(targets["checked"]))
+          print("NOT_CHECKED: actual WordPress plugin activation or real provider credentials")
+          PY
