@@ -109,10 +109,6 @@ jobs:
               allowed={'advanced','busy','retryable_error','completed','failed','disabled','idle','throttled'}
               if s not in allowed or c!='external_tick_v2' or not isinstance(t,int) or t<=0:
                   raise ValueError('invalid external_tick_v2 response')
-              if s in {'retryable_error','failed'}:
-                  fields=('phase','reason','progress_seq','progress_before','progress_after','no_progress_count','error_code')
-                  info={k:d.get(k) for k in fields}
-                  print('heartbeat_details '+json.dumps(info,sort_keys=True,ensure_ascii=True),file=sys.stderr)
               print(f"{s} {t}")
           except Exception:
               pass
