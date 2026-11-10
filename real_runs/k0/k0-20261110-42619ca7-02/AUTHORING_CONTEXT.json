@@ -1,0 +1,191 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "Beratung",
+    "category": "pferdedecken-regendecken-beratung",
+    "plan_slot": "d9cb138606a3734410a6ba398311d64ef18532634a0ed363e0373d02bd7e537f",
+    "target_keyword": "Fliegen regendecke pferd",
+    "title": "Kombinierte Fliegen- und Regendecken für Pferde sinnvoll nutzen"
+  },
+  "content_profile": {
+    "search_intent": "COMMERCIAL_INVESTIGATION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Horseware – Rambo Summer Series",
+          "source_url": "https://www.horseware.com/en-eu/rambo-summer-series-turnout-0g"
+        },
+        {
+          "source_title": "Horseware – Leitfaden für Liner",
+          "source_url": "https://www.horseware.com/de-de/blog/horseware-liner-anleitung"
+        },
+        {
+          "source_title": "British Horse Society – Umgang mit Pferdedecken",
+          "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/seasonal-care/types-of-rugs-and-rugging-a-horse/"
+        },
+        {
+          "source_title": "British Horse Society – Pferde bei heißem Wetter",
+          "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/seasonal-care/horse-care-in-hot-weather/"
+        }
+      ],
+      "claims": [
+        "Die Rambo Summer Series Turnout 0g besitzt einen wasserdichten Softshell-Rücken und luftdurchlässige Netzeinsätze an den Seiten; die wasserfeste Fläche bedeckt nicht den gesamten Körper.",
+        "Ein wasserdichter Fly Sheet Liner ergänzt passende Fliegendecken um einen leichten Nässeschutz; der kurze Schnitt und die Atmungsaktivität sollen Hitzestau vermindern.",
+        "Fliegendecken dienen zum Schutz vor stechenden Insekten; Weideregengedecken dienen dem Wetterschutz und müssen passend gewählt sowie täglich auf Scheuern geprüft werden.",
+        "Bei großer Hitze kann auch eine Fliegendecke das Abkühlen erschweren; leichte atmungsaktive Materialien sowie verfügbarer Schatten sind wichtig."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "Fliegen regendecke pferd",
+      "topic": "Kombinierte Fliegen- und Regendecken für Pferde sinnvoll nutzen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdedecken-regendecken-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Kombinierten Insekten- und Regenschutz nach Regenstärke, Hitze, Material und Deckenschnitt auswählen",
+      "decision_criteria": [
+        "Wasserdichten Rücken und luftdurchlässige Seitenteile unterscheiden",
+        "Passende Fliegendecke und kompatiblen Regeneinsatz prüfen",
+        "Hitze, Scheuern und tägliche Deckenabnahme berücksichtigen"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Horseware – Rambo Summer Series",
+        "source_url": "https://www.horseware.com/en-eu/rambo-summer-series-turnout-0g",
+        "statement": "Die Rambo Summer Series Turnout 0g besitzt einen wasserdichten Softshell-Rücken und luftdurchlässige Netzeinsätze an den Seiten; die wasserfeste Fläche bedeckt nicht den gesamten Körper.",
+        "evidence_text": "Die Rambo Summer Series Turnout 0g besitzt einen wasserdichten Softshell-Rücken und luftdurchlässige Netzeinsätze an den Seiten; die wasserfeste Fläche bedeckt nicht den gesamten Körper.",
+        "evidence_text_sha256": "1130cddebffdafcc80d1c5444ef606f8c1c16ccae87abc0342921a858b7855b1",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "Horseware – Leitfaden für Liner",
+        "source_url": "https://www.horseware.com/de-de/blog/horseware-liner-anleitung",
+        "statement": "Ein wasserdichter Fly Sheet Liner ergänzt passende Fliegendecken um einen leichten Nässeschutz; der kurze Schnitt und die Atmungsaktivität sollen Hitzestau vermindern.",
+        "evidence_text": "Ein wasserdichter Fly Sheet Liner ergänzt passende Fliegendecken um einen leichten Nässeschutz; der kurze Schnitt und die Atmungsaktivität sollen Hitzestau vermindern.",
+        "evidence_text_sha256": "e4fa408db38e104004bba6a4cb20a0c321f6abe55dd4c52b78a5ed7a43ceccca",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "British Horse Society – Umgang mit Pferdedecken",
+        "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/seasonal-care/types-of-rugs-and-rugging-a-horse/",
+        "statement": "Fliegendecken dienen zum Schutz vor stechenden Insekten; Weideregengedecken dienen dem Wetterschutz und müssen passend gewählt sowie täglich auf Scheuern geprüft werden.",
+        "evidence_text": "Fliegendecken dienen zum Schutz vor stechenden Insekten; Weideregengedecken dienen dem Wetterschutz und müssen passend gewählt sowie täglich auf Scheuern geprüft werden.",
+        "evidence_text_sha256": "bdb6b3b30dabe1fb3e180777ce1462c65597f18c83c941df90c3d947612f2fc9",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_title": "British Horse Society – Pferde bei heißem Wetter",
+        "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/seasonal-care/horse-care-in-hot-weather/",
+        "statement": "Bei großer Hitze kann auch eine Fliegendecke das Abkühlen erschweren; leichte atmungsaktive Materialien sowie verfügbarer Schatten sind wichtig.",
+        "evidence_text": "Bei großer Hitze kann auch eine Fliegendecke das Abkühlen erschweren; leichte atmungsaktive Materialien sowie verfügbarer Schatten sind wichtig.",
+        "evidence_text_sha256": "c108c369a2edc4296a5a3441357842f9316d89e1100436da58ab9487689ecbf4",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+        "anchor": "Regendecken für Pferde im Überblick",
+        "block": "criteria"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/pferdedecken-regendecken-faq/",
+        "anchor": "Häufige Fragen zu Regendecken",
+        "block": "decision"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "anchor": "Regendecken pflegen und reparieren",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-regendecken-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdedecken-regendecken-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Fliegendecke",
+      "Regendecke",
+      "Insektenschutz",
+      "Nässeschutz",
+      "Sommer",
+      "Mesh",
+      "Rücken",
+      "Liner",
+      "Hitze",
+      "Kontrolle"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Eine Tabelle für Schauer, länger andauernden Regen, Hitze und hohe Insektenbelastung grenzt den kombinierten Schutz und seine Grenzen verständlich ab."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "criteria"
+  },
+  "publish_allowed": false
+}
