@@ -2,8 +2,8 @@
 Stand: 10.11.2026
 
 ## Verbindlicher Fachstand
-**Hinweis für neue Chats: Maßgeblich ist die letzte unten datierte Standfortschreibung (V4/Revision 10). Ältere Status- und Verweiseinträge sind historische Zwischenstände, keine zweite gültige Masterversion.**
-- **Eine Forschungsquelle**: `RECHERCHE/PRODUKTE_V2_20261108.json` (68 weiterhin ungeprüfte Ausgangs-Produktkandidaten, **Revision 10**; 139 offene Randforschungsfälle). Die alte 27er-Liste nur Archiv; 17 identische Namen und 10 offene Begriffskonflikte sind nachverfolgt.
+**Hinweis für neue Chats: Maßgeblich ist die letzte unten datierte Standfortschreibung (V5/Revision 11). Ältere Status- und Verweiseinträge sind historische Zwischenstände, keine zweite gültige Masterversion.**
+- **Eine Forschungsquelle**: `RECHERCHE/PRODUKTE_V2_20261108.json` (68 weiterhin ungeprüfte Ausgangs-Produktkandidaten, **Revision 11**; 139 offene Randforschungsfälle). Die alte 27er-Liste nur Archiv; 17 identische Namen und 10 offene Begriffskonflikte sind nachverfolgt.
 - **Ein WordPress-Zielplan**: `PLAN/robotik-empty.json`; noch 0 freigegebene Knoten.
 - CORE: WP-Seite → weitere Seiten → letzte Seite = konkreter Robotertyp → dessen flache WP-Kategorien → Beiträge. Daneben getrennte Säulen Magazin und HivePress. Keine doppelten Such-Owner.
 - Vorgehen gemäß `ARBEITSABLAUF.md`: automatische Bestandsaufnahme statt tausender Dateien, ein Gesamtbericht, fachliche Forschung/Keywords, kontrollierter späterer Dry-run, Freigabe und echter Frontend-Readback.
@@ -92,3 +92,10 @@ Drei neue **Magazin-/Journal-Büros** unter `../MAGAZIN/`: [Roboterregister](../
 - **KISS:** ein Master mit den neuen Label-Ansichten `nav_short_v1` und `content_nav_short_v1`. Kein neues WordPress-Plugin, keine neuen WP-Seiten, keine neue Dateisammlung und ausdrücklich **KEINE SEO-Recherche**; diese kommt später aus dem separat vorgesehenen Plugin.
 - [Kurz-Navigationskonzept V4](RECHERCHE/KURZNAMEN_HAUPTNAVIGATION_V4_20261110.md) dokumentiert Quellen, alle acht Welten, Qualitätsregeln und beispielhafte 3-Säulen-Abgrenzungen.
 - **Nächster konkreter Schritt:** weitere der 139 Randideen nach realem Produkttyp vs Unterfunktion vs Forschungs-/Anbieter- oder Magazinintents auswählen, je sinnvoller neuer Produkttypseite nur kurze Navigationslabels und Inhaltskategorien mit min. drei unterschiedlichen möglichen Beiträgen vergeben; **keine** voreilige SEO-/WP-Freigabe.
+
+## 10.11.2026 – AKTUELL V5: Käufernavigation + gemeinsame Wissenswelt
+- Verbindliche Zielgruppenstrategie: Startseite und sieben geplante Hauptmenüthemen **für Privatkunden und kleinere Betriebe**; zusätzlich ein regulärer Punkt **Industrie** mit eigener CORE-Landingpage und **zunächst drei** thematisch tragfähigen Unterseiten **Fertigung, Anlagen, Medizin & Labor**. Forschung vorläufig Verweis ins gemeinsame Magazin; vierte Industrie-Kategorieseite nur bei echten konkreten Produktkindern.
+- **Magazin, Roboterregister, Roboterglossar, Roboterfinder und Anzeigenmarkt JEWEILS EINMAL GEMEINSAM** für alle Zielgruppen; keine Parallelstränge Privat/Industrie. Fachrubriken/Filter innerhalb dieser Dienste erlaubt, aber **eine** Datenhaltung und **ein** Publikations-Owner je konkretem Suchintent.
+- **Produktkaufberatung bleibt stets CORE**, auch bei industriellen Robotern. Industrie-Landingpages verlinken echte CORE-Produktseiten; sie lagern diese **nicht** unter Magazin um. Für Käufer relevant gewordene Industrietypen können von mehreren Einstiegen auf **dieselbe URL** verlinkt werden.
+- **EINZIGER Master Revision 11** im bisherigen `RECHERCHE/PRODUKTE_V2_20261108.json`, neues aktuelles **`audience_navigation_v2`**; altes gleichrangiges Acht-Welten-Menü `navigation_v1` ist nun nur Historie, **kein zweiter Current**. 68 Robotertypen, 139 Randfälle, Kurzlabels und Inhaltsvorschläge unverändert. `RECHERCHE/ZIELGRUPPEN_NAVIGATION_V5_20261110.md` erläutert Menü, Industrie-Landingpages, gemeinsamen Wissensbereich und Nachweise.
+- **Keine SEO-Recherche**, keine Affiliate- oder WordPress-Freigabe/Import und **keine Plugin-/Footer-Änderung**. Nächste Fachentscheidung: jeden Produkttyp auf Käuferzielgruppe, Industrie-Querverweis, Hersteller-/Affiliate-/Dienstleistungseignung prüfen; sieben vorgeschlagene Käuferlabels ggf. danach fachlich schärfen.

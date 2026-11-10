@@ -4867,7 +4867,7 @@
     }
   ],
   "canonical_source": true,
-  "revision": 10,
+  "revision": 11,
   "research_state": "UNAPPROVED",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
@@ -9001,7 +9001,7 @@
   "navigation_v1": {
     "date": "2026-11-10",
     "basis": "HOBBYRAUSCH/KONZEPT/KONZEPT_ZWISCHENSTAND_KATEGORIEN_UND_INTERNE_SUCHE_20260930.md (6-8 slots), later Hobbydepot 8 worlds; not a Robotik hard physical limit",
-    "status": "DRAFT_NAMING_REVIEW_ALL_68_PRODUCT_OWNERS_AND_15_NICHE_OWNERS",
+    "status": "HISTORICAL_CONCEPT_ONLY_SUPERSEDED_BY_AUDIENCE_NAVIGATION_V2",
     "top_world_count": 8,
     "worlds": [
       {
@@ -9250,9 +9250,92 @@
       "old_research_titles_preserved": true,
       "wp_release": false
     },
-    "authority_note": "Current preliminary navigation: navigation_v1.worlds (8); worlds_v1 (10) is historical research taxonomy only, not a second active menu",
+    "authority_note": "HISTORICAL DRAFT V4 (eight peer worlds), superseded for visible PORTAL ENTRY ONLY by audience_navigation_v2; this is not a second product/URL owner.",
     "all_68_category_descriptive_titles_preserved": true,
     "is_only_proposed_navigation": true,
     "no_automatic_import": true
+  },
+  "audience_navigation_v2": {
+    "date": "2026-11-10",
+    "status": "APPROVED_CONCEPT_DIRECTION_NOT_WORDPRESS_READY",
+    "goal": "Visible start page focuses potential buyers: private households and small businesses. Industry content remains navigable and indexable through a single clear hub, never hidden solely in footer or magazine.",
+    "primary_nav_draft": [
+      "Haushalt & Garten",
+      "Freizeit & Lernen",
+      "Gastro & Handel",
+      "Reinigung",
+      "Handwerk",
+      "Logistik",
+      "Landwirtschaft"
+    ],
+    "primary_nav_research_caveat": "SEVEN BUYER TOPICS ARE PROPOSED DISPLAY LABELS, NOT COMMERCIALLY VERIFIED SEO CATEGORIES OR CURRENT WP PARENTS. Software, components and niche products must remain reachable through relevant buyer entry, search, finder or product crosslinks; not forcibly assigned to Handwerk or Industrie.",
+    "industry_nav": {
+      "label": "Industrie",
+      "landing_page": "Industrie",
+      "sublanding_draft": [
+        "Fertigung",
+        "Anlagen",
+        "Medizin & Labor"
+      ],
+      "conditional_fourth_landing": "Forschung only if enough independently useful concrete product types; otherwise editorial crosslink to Magazin research",
+      "requirement": "Real static crawlable links from Industrie hub to each sublanding and concrete CORE product pages; indexable pages each with own useful navigation and short intro; avoid duplicate product URLs."
+    },
+    "shared_platform": {
+      "editorial": {
+        "label": "Magazin",
+        "target_audience": "ALL",
+        "single_parent": true,
+        "allow_subject_rubrics": true,
+        "no_parallel_private_industry_magazine": true
+      },
+      "glossary": {
+        "label": "Roboterglossar",
+        "target_audience": "ALL",
+        "single_register": true,
+        "allow_filters": true,
+        "no_duplicate_definitions": true
+      },
+      "model_register": {
+        "label": "Roboterregister",
+        "target_audience": "ALL",
+        "single_register": true,
+        "model_ids_one_per_manufacturer_model": true,
+        "allow_filters": true
+      },
+      "finder": {
+        "label": "Roboterfinder",
+        "target_audience": "ALL",
+        "single_finder": true,
+        "start": "TASK_FIRST",
+        "optional_context": "HOME_SMALL_BUSINESS_INDUSTRIAL",
+        "require_verified_traits": true,
+        "no_split_search_databases": true,
+        "affiliate_ads_labeled": true
+      },
+      "directory": {
+        "label": "Anzeigenmarkt",
+        "target_audience": "ALL",
+        "single_market": true,
+        "allow_provider_service_location_filters": true,
+        "no_parallel_markets": true
+      }
+    },
+    "ownership_rules": [
+      "Product catalog is one CORE system, two visual paths: buyer-first navigation and Industrie hub. Same robot type has exactly one CORE owner/product page even when linked twice.",
+      "Magazin is editorial; industry product pages live in CORE rather than duplicated in magazine.",
+      "Industry landing sections are navigation hubs with genuine unique intros/child lists, not competing product advice copies.",
+      "Research prototypes and general technology news in Magazin; concrete supplier offers in Anzeigenmarkt; product selection/application in CORE.",
+      "All essential product pages reachable by actual HTML links, not only search/filter/JS or footer.",
+      "Finder shares canonical rb/rf master and never treats unverified traits as eligible recommendations."
+    ],
+    "naming_rules": {
+      "nav_label_max_words": 2,
+      "avoid_filler_words": true,
+      "full_h1_meta_separate": true
+    },
+    "disclaimer": "NO SEO research or affiliate partner validation; buyer-oriented categories and industrial boundary require later audience/product monetization review. Do not auto-migrate WordPress parent IDs, page slugs, plugins or design.",
+    "wordpress_writes": false,
+    "seo_research_performed": false,
+    "full_existing_products_retained": true
   }
 }
