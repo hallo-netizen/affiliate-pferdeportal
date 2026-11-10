@@ -25,3 +25,11 @@
 - Hab & Bewahr besitzt einen eigenen Pluginstand. **Nichts automatisch übernehmen, kein Current und keine Zugangsdaten überschreiben.**
 
 **KISS-Übernahmeregel ab 07.11.2026:** Jede neue bestätigte Pferdeatelier-Änderung mit Basisversion, Ursprungshash, fachlichem Grund, betroffenen Dateien, Regressionstest und Live-Grenze **in diesem Affiliate-Büro** dokumentieren. Gemeinsame Logik nur nach Diff gegen die eigenständige Pluginquelle übernehmen. Bei gleicher Logik nicht erneut portieren; keine zweite Engine.
+
+## Nachtrag vom 10.11.2026 – vollständige Änderungen seit der Kopie bis QA9
+
+Das **zentrale [Affiliate-Änderungsregister seit dem Kopierstand](https://github.com/hallo-netizen/affiliate-pferdeportal/blob/audit/affiliate-crossportal-changelog-20261110/protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/AFFILIATE/AENDERUNGSREGISTER_NACH_KOPIE_HOBBYDEPOT_HABBEWAHR_20261026.md)** ergänzt diese Referenz chronologisch um die belegten Pferdeatelier-Stände **311–315, 319/QA1–QA7, QA8 und QA9 6.72.321**. Es nennt Zweck, Ursache, KISS-Rückbau, Prüfungen, Live-Grenze und mögliche Relevanz für Hobbydepot und Hab & Bewahr.
+
+**Kernänderung QA9:** Recherche, bereits sichere Veröffentlichung und zweistündliche Verfügbarkeitskontrolle werden getrennt; gespeicherte Angebote und Zuordnungen bleiben erhalten, nicht mehr pauschal bis zum Gesamtabschluss blockieren. **Warnung:** Nach QA9 meldete der Nutzer ein erheblich langsames Backend. Der neue Zeitplan startet nach 60 Sekunden und kann weitere Fünferpakete im 90-Sekunden-Abstand ausführen; die genaue Lastursache ist noch nicht mit realen WordPress-Messungen belegt. Deshalb **keine Übernahme dieses Codes oder Zeitplans ohne vollständigen Portaltest**.
+
+Quellen und Tests sind im separaten [Pferdeatelier-QA-PR #748](https://github.com/hallo-netizen/affiliate-pferdeportal/pull/748) unter `protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/AFFILIATE/` und `.../PLUGINS/EVIDENCE/` gespeichert. Die installierbare ZIP liegt ausschließlich in der persönlichen Plugin-Library. **Keine Änderung der Hab & Bewahr-Plugin-Version, Daten, Kampagnen, Providerzugänge oder Current durch diesen Nachtrag.**
