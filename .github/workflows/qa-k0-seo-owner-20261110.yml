@@ -33,6 +33,8 @@ jobs:
       - name: New K0 editorial-owner regression suite
         run: python3 -m unittest discover -s tests -p test_k0_seo_owner_qa.py -v
 
+      - name: Verify existing source intent across exact-five handoff (nine positive/negative regressions)
+        run: python3 -m unittest discover -s tests -p test_k0_seo_owner_binding.py -v
       - name: Prepare QA read-only portal registry and exact LanguageTool
         shell: bash
         run: |
