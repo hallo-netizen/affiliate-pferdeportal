@@ -18,6 +18,7 @@ from engine.k0_full_rules import verify_pre_lt68, verify_final
 from engine.lt68_external import run as run_lt
 from engine.k0_wordpress_export import build as build_wordpress, verify_export
 from engine.core import stable
+from engine.k0_seo_owner_binding import bind_context
 
 ROOT = Path(__file__).resolve().parents[1]
 RUN_PREFIX = "k0-20261110-42619ca7-"
@@ -42,6 +43,8 @@ def main(jar):
     assert len(rows) == 3
     check(len(rows) == 3, "PSERC_ORIGINAL_THREE_ITEM_BATCH")
     registry = load(ROOT / "K0_PORTAL_REGISTRY.json")
+    # Synthetic upstream snapshot: isolated QA only, never claim live PSERC provenance.
+    source_manifest = load(ROOT / "tests/fixtures/k0_seo_owner_manifest_SYNTHETIC_QA_20261110.json")
 
     jobs = []
     intakes = []
@@ -55,6 +58,8 @@ def main(jar):
         check(portal["status"] == "PASS" and portal["items"][0]["portal_id"] == "pferdeatelier",
               f"AUTO_PORTAL_ASSIGNMENT_{i}")
         ctx = load(rd / "AUTHORING_CONTEXT.json")
+        ctx = bind_context(source_manifest, intake, ctx)
+        check(ctx["content_profile"]["seo_owner_manifest_sha256"]==source_manifest["manifest_sha256"], f"ORIGINAL_SEO_OWNER_SOURCE_BOUND_{i}")
         ctx["run_instance_id"] = "run:" + hashlib.sha256(("qa-replay|" + str(rd)).encode()).hexdigest()[:24]
         job = prepare(intake, portal, ctx)
         check(job["writer_rule_binding"]["article_hard_rule_count"] == 81, f"K0_81_RULE_BUNDLE_BEFORE_WRITER_{i}")
