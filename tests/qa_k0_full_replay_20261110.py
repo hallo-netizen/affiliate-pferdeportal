@@ -160,7 +160,7 @@ def main(jar):
         "dataforseo_live": False,
         "wordpress_live_write": False,
         "fresh_new_research": False,
-        "keyword_intent_source_e2e_binding": "NOT_PROVEN_FROM_FIVE_FIELD_HANDOFF",
+        "keyword_intent_source_e2e_binding": "SYNTHETIC_EXISTING_PSERC_MANIFEST_BINDING_PASS_NOT_LIVE",
         "new_rule_count": 81,
         "pre_lt_rule_count": 80,
         "real_lt": True,
