@@ -1345,6 +1345,12 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "library_extension_v9": {
+        "source_url": "https://www.metralabs.com/en/press-release/autonomous-library-inventory-management-with-the-nex-robot-inventory/",
+        "decision": "USECASE_CROSSLINK_NO_NEW_PRODUCT_OWNER",
+        "observation": "Bibliotheksregale per RFID erfassen; gleicher Hauptzweck automatische Bestandsinventur, keine neue Produktseite allein aufgrund Bibliotheksbranche.",
+        "checked_at": "2026-11-10"
       }
     },
     {
@@ -5019,7 +5025,7 @@
     }
   ],
   "canonical_source": true,
-  "revision": 14,
+  "revision": 15,
   "research_state": "UNAPPROVED",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
@@ -6509,7 +6515,13 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf034",
       "research_status": "NUR_FACHLICHE_HYPOTHESE",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "floor_grinding_variant_v9": {
+        "source_url": "https://www.legendrobot.com/products/floor-grinding-robot/",
+        "decision": "CHECK_PRODUCT_IDENTITY_WITH_EXISTING_RF034",
+        "observation": "Autonomer Bodenfräs-/Schleifroboter für Beton- und Epoxyflächen; bereits rf034 'Betonoberflächen-Fräser', daher nicht einfach neue Roboterproduktart generieren.",
+        "checked_at": "2026-11-10"
+      }
     },
     {
       "name": "Roboter für Brücken-Unterseitenbeschichtung",
@@ -8666,6 +8678,12 @@
         "checked_on": "2026-11-09",
         "keyword_evaluation": "NICHT_DURCHGEFÜHRT",
         "wordpress_release": false
+      },
+      "bunker_product_recheck_v9": {
+        "source_url": "https://www.wayrobo.com/",
+        "status": "EU_PREORDER_NO_GENERAL_DELIVERY_CLAIM",
+        "observation": "Hersteller Wayrobo wirbt für WayRake 9 mit Vorbestellung Europa/Australien/Asien, korrigiert ältere pauschale Coming-Soon-Klassifikation; keine reguläre Lieferbarkeit belegt.",
+        "checked_at": "2026-11-10"
       }
     },
     {
@@ -9704,7 +9722,13 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "cosmetics_recheck_v9": {
+        "source_url": "https://www.dailyherald.com/20260707/technology/you-can-now-get-a-manicure-from-a-robot-at-this-naperville-store/",
+        "status": "STUDIO_SERVICES_US_NO_DE_PRODUCT_SALE",
+        "observation": "10Beauty-Roboter in US-Läden als kommerzieller Maniküreservice, nicht belegtes deutsches Heimgerät; vorhandene Nagellackier-Kategorie funktional gemeinsam prüfen.",
+        "checked_at": "2026-11-10"
+      }
     },
     {
       "id": "rf160",
@@ -10478,6 +10502,142 @@
         "keyword_research_done": false,
         "approved_for_wordpress": false
       }
+    },
+    {
+      "id": "rf175",
+      "name": "Essroboter für selbstständige Nahrungsaufnahme",
+      "source_url": "https://meetobi.com/de/",
+      "evidence_grade": "HERSTELLER_MEDIZINISCHES_HILFSMITTEL_EU_VERWEIS",
+      "proposed_location": "Haushalt & Garten",
+      "proposed_owner": "CORE_ASSISTIVE_PRODUCT_REVIEW",
+      "related_existing_id": "rb065",
+      "boundary": "Tisch-/Arm-Esshilfe reicht portionierte Speisen zum Mund; nicht mit Küchen-Kochroboter, automatischem Tierfutterspender oder allgemeinem Haushaltsassistenten doppeln. Hilfsmittelberatung ist speziell und keine medizinische Empfehlung.",
+      "topic_kind": "ADDITIONAL_PRODUCT_OR_BOUNDARY_RESEARCH_V9",
+      "research_status": "HERSTELLER_PRIMAER_FUNKTION_KLAR_VERTRIEB_NICHT_FINAL",
+      "article_depth_status": "NICHT_GLEICH_WP_FREIGABE",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "wp_release": "NICHT_FREIGEGEBEN"
+    },
+    {
+      "id": "rf176",
+      "name": "Rollstuhlmontierte Assistenz-Roboterarme",
+      "source_url": "https://assistive.kinovarobotics.com/product/jaco-robotic-arm",
+      "evidence_grade": "HERSTELLER_UND_REHADAT_DE_FDA_RUECKRUF_BEACHTEN",
+      "proposed_location": "Haushalt & Garten",
+      "proposed_owner": "CORE_ASSISTIVE_PRODUCT_SAFETY_REVIEW",
+      "related_existing_id": "rb021",
+      "boundary": "Persönlicher Greifarm am Elektrorollstuhl unterscheidet sich von kleinen Industrierobotern und reinem Rollstuhltransport. Sicherheit: FDA-Datensatz zu Jaco betroffenen Modellen und offener Rückruf; vor jeglicher Empfehlung/Partnernutzung unabhängige aktuelle Sicherheits- und Rückrufprüfung.",
+      "topic_kind": "ADDITIONAL_PRODUCT_OR_BOUNDARY_RESEARCH_V9",
+      "research_status": "HERSTELLER_PRIMAER_FUNKTION_KLAR_VERTRIEB_NICHT_FINAL",
+      "article_depth_status": "NICHT_GLEICH_WP_FREIGABE",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "wp_release": "NICHT_FREIGEGEBEN"
+    },
+    {
+      "id": "rf177",
+      "name": "Lüftungskanal-Reinigungsroboter",
+      "source_url": "https://www.danduct.com/",
+      "evidence_grade": "HERSTELLER_DE_HAENDLER_BELEG",
+      "proposed_location": "Reinigung",
+      "proposed_owner": "CORE_SMALL_SERVICE_B2B_REVIEW",
+      "related_existing_id": "rb031",
+      "boundary": "Luftführende Lüftungskanäle mit Bürsten/Kameras statt Abwasserleitungen mit Wasser-/Rohrreinigung. Für Gebäudereiniger und Lüftungsbetriebe, Gerätekauf über Fachhandel prüfen.",
+      "topic_kind": "ADDITIONAL_PRODUCT_OR_BOUNDARY_RESEARCH_V9",
+      "research_status": "HERSTELLER_PRIMAER_FUNKTION_KLAR_VERTRIEB_NICHT_FINAL",
+      "article_depth_status": "NICHT_GLEICH_WP_FREIGABE",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "wp_release": "NICHT_FREIGEGEBEN"
+    },
+    {
+      "id": "rf178",
+      "name": "Robotische Eiscreme-Verkaufsstationen",
+      "source_url": "https://www.aixbot.com/",
+      "evidence_grade": "HERSTELLER_PRODUKT_SPEISEAUTOMAT_KATEGORIE_PRUEFEN",
+      "proposed_location": "Gastro & Handel",
+      "proposed_owner": "CORE_B2B_ROBOTIC_STATION_REVIEW",
+      "related_existing_id": "rb027",
+      "boundary": "Robotischer Arm bereitet Eisportionen am Verkaufsstand zu; eindeutig von reinem Selbstbedienungsautomaten und allgemeiner Speisenausgabe abgrenzen. Kleine Betreiber, Anschaffung und EU-Betrieb noch offen.",
+      "topic_kind": "ADDITIONAL_PRODUCT_OR_BOUNDARY_RESEARCH_V9",
+      "research_status": "HERSTELLER_PRIMAER_FUNKTION_KLAR_VERTRIEB_NICHT_FINAL",
+      "article_depth_status": "NICHT_GLEICH_WP_FREIGABE",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "wp_release": "NICHT_FREIGEGEBEN"
+    },
+    {
+      "id": "rf179",
+      "name": "Roboterarm-Keramikdrucksysteme",
+      "source_url": "https://www.3dwasp.com/en/ceramic-3d-printing-wasp-clay/",
+      "evidence_grade": "HERSTELLER_PRODUKTLINIE_ARM_UND_DELTA_GETRENNT",
+      "proposed_location": "Handwerk",
+      "proposed_owner": "CORE_SMALL_CRAFT_PRODUCT_REVIEW",
+      "related_existing_id": "rb049",
+      "boundary": "Robotischer Sechsachsenarm verarbeitet Ton/Keramik für Ateliers; reine Delta-/Kartesisch-3D-Drucker sind keine separaten Roboterarme. Betonbau-3D-Druck (rb049) andere Materialien/Dimensionen.",
+      "topic_kind": "ADDITIONAL_PRODUCT_OR_BOUNDARY_RESEARCH_V9",
+      "research_status": "HERSTELLER_PRIMAER_FUNKTION_KLAR_VERTRIEB_NICHT_FINAL",
+      "article_depth_status": "NICHT_GLEICH_WP_FREIGABE",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "wp_release": "NICHT_FREIGEGEBEN"
+    },
+    {
+      "id": "rf180",
+      "name": "Roboterarm-Autowaschanlagen",
+      "source_url": "https://intelligentwash.com/en/products/intelligent-wash-360/",
+      "evidence_grade": "HERSTELLER_ARM_WASCHSYSTEM_B2B",
+      "proposed_location": "Reinigung",
+      "proposed_owner": "CORE_SMALL_BUSINESS_B2B_REVIEW",
+      "related_existing_id": "rb029",
+      "boundary": "Arm fährt ums Auto und passt Waschpfade an; normale Portal-/Tunnel-Waschanlagen ohne robotische Armführung ausdrücklich NICHT als Roboterseite.",
+      "topic_kind": "ADDITIONAL_PRODUCT_OR_BOUNDARY_RESEARCH_V9",
+      "research_status": "HERSTELLER_PRIMAER_FUNKTION_KLAR_VERTRIEB_NICHT_FINAL",
+      "article_depth_status": "NICHT_GLEICH_WP_FREIGABE",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "wp_release": "NICHT_FREIGEGEBEN"
+    },
+    {
+      "id": "rf181",
+      "name": "Selbstfolgende Lastenwagen",
+      "source_url": "https://fomee.eu/",
+      "evidence_grade": "HERSTELLER_PARTNERNETZ_PILOT_KEIN_DE_SHOP_PASS",
+      "proposed_location": "Logistik",
+      "proposed_owner": "CORE_SMALL_BUSINESS_PRIVATE_PRODUCT_REVIEW",
+      "related_existing_id": "rf155",
+      "boundary": "Folgender Lastenwagen für Einkauf, kleine Lieferungen und Werkzeuge; nicht mit persönlichem automatischem Reisekoffer (rf155) oder selbstständig routendem Industrie-AMR (rb014) vermengen; Verkauf/Verfügbarkeit derzeit nicht freigegeben.",
+      "topic_kind": "ADDITIONAL_PRODUCT_OR_BOUNDARY_RESEARCH_V9",
+      "research_status": "HERSTELLER_PRIMAER_FUNKTION_KLAR_VERTRIEB_NICHT_FINAL",
+      "article_depth_status": "NICHT_GLEICH_WP_FREIGABE",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "wp_release": "NICHT_FREIGEGEBEN"
+    },
+    {
+      "id": "rf182",
+      "name": "Vollautomatische Fahrradwaschanlagen",
+      "source_url": "https://cyclewash.com/pages/pro",
+      "evidence_grade": "HERSTELLER_PRODUKT_AUTOMATIK_NICHT_ROBOTER_NACHGEWIESEN",
+      "proposed_location": "Handwerk",
+      "proposed_owner": "AUTOMATION_EDGE_NOT_ROBOT_CORE",
+      "related_existing_id": "rf177",
+      "boundary": "Feste Fahrräder-Waschmaschine für Verleiher und Werkstätten; autonome Roboterbewegung/Freiheitsgrade nicht hinreichend belegt. Bis zur Klassifikation NICHT als vollwertigen Roboter führen.",
+      "topic_kind": "ADDITIONAL_PRODUCT_OR_BOUNDARY_RESEARCH_V9",
+      "research_status": "HERSTELLER_PRIMAER_FUNKTION_KLAR_VERTRIEB_NICHT_FINAL",
+      "article_depth_status": "NICHT_GLEICH_WP_FREIGABE",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "wp_release": "NICHT_FREIGEGEBEN"
     }
   ],
   "research_expansion": {
@@ -10488,7 +10648,7 @@
     "wp_plan_unchanged": true,
     "evidence_grade_note": "Herstellerbeleg bestaetigt Existenz einzelner Loesungen, nicht Marktgroesse/DE-Keyword oder Kategoriefreigabe."
   },
-  "concept_status": "RESEARCH_REV13_PRELIMINARY_NOT_WP_APPROVED",
+  "concept_status": "RESEARCH_REV15_DEPTH_REVIEW_NOT_WORDPRESS_APPROVED",
   "knowledge_views_v1": {
     "status": "PROPOSAL_ONLY",
     "concept_document": "RECHERCHE/GLOSSAR_FINDER_MODELLREGISTER_V1_20261109.md",
@@ -11116,5 +11276,20 @@
       "rf169",
       "rf174"
     ]
+  },
+  "research_round_v9": {
+    "previous_revision": 14,
+    "original_products": 68,
+    "previous_frontier": 174,
+    "added_frontier": 8,
+    "current_frontier": 182,
+    "new_id_range": "rf175-rf182",
+    "scope": "Weitere neue Herstellerprodukte und streng produktbezogene individuelle Kategorievertiefungen für bisher nicht im neuen Tiefenlauf geprüfte Typen",
+    "corrections": "rf131 europäische Vorbestellung statt allgemeiner Ankündigung; rf159 US-Maniküregeschäft statt behauptetem DE-Heimroboter; rb018 Bibliothek-Inventur nur Usecase; rf034 Bodenfräsroboter als bestehende Variante",
+    "canonical": "68 rb Produktkandidaten als Ausgangsbestand, 182 rf Randfälle (auch Dienste, Software, Zubehör, reine Automatik); keine automatische Umwandlung in 250 Produktseiten",
+    "rules": "Eine letzte WP-Produktseite je trennbarer Funktion. Kategorie nach individueller Vertiefung und > =3 eigenständigen Beitragsabsichten, typischerweise 3-5, keine Pflicht oder Obergrenze. Kleinbetrieb/Privat kaufnah; Industrie nur exklusiv großindustriell. Wissen/Glossar/Finder/Register/Markt stets gemeinsam.",
+    "seo_calls": 0,
+    "wordpress_write": false,
+    "affiliate_not_checked": true
   }
 }
