@@ -1,3 +1,13 @@
+## 10.11.2026 – aktueller KISS-Teststand: PSERC 0.28.58, K0-Ausgabe unverändert
+- Original-PSTE und Original-PSERC abgeglichen. **Nachgewiesene Quelllogik-Differenz:** PSTE-Compiler kann nach validiertem Runtime-Index-Rebind den **aktuellen** Baseline-Editorial-Plan akzeptieren, während PSERC .55 beim ACTIVATE den historischen Context-Plan vergleicht. Dies ist eine **belegte mögliche Ursache**, nicht bereits als tatsächlicher Datensatzdrift auf oliver-beil.de ausgelesen.
+- **Neue alleinige PSERC-TEST-Arbeitskopie 0.28.58** aus originaler .55 (ohne Abhängigkeit zur alten QA-.56/.57): Baseline-Planfrische an denselben bestehenden Besitzer gebunden, alte ACTIVATE-Sperre bleibt, gleicher Check zusätzlich zu BEGINN, WordPress-Entwurfsimport im bestehenden Admin nur eingeklappt. Keine alten Funktionen/Daten gelöscht; neue Datenbankmigrationen 0; K0/WordPress-LIVE unverändert.
+- Physische ZIP im privaten Pluginbüro: `/pferdeatelier/PLUGINS/QA/PSERC-0.28.58-KISS-PLANBINDUNG-NUR-TEST.zip`; SHA256 `799488f1b42788b207a26ea9e5d115d3406f065b2c8a82041f673869f298c1f0`. 63/63 ZIP-Pfade gleich, 58 bytegleich, 43 PHP-Syntax PASS, 61 Original-Paketintegrität PASS, 9 direkte Originalklasse-Gegenprüfungen PASS.
+- Bestehende K0-V2-Dateiausgabe `PSERC_Admin::exportLivePreview` und bestehende PSTE-K0-Ausgabe **nicht geändert**. **Kein echter TEST-WP-1-READY-Export und kein K0-E2E-PASS**.
+- **Nächste einzige Praxisprüfung**: TEST-Datenbank und .55 sichern, nur PSERC .58 auf **TEST** installieren, vorhandenen Planlauf ein einziges Mal durchlaufen lassen, bei mindestens einem READY bestehende JSON-Datei herunterladen und gegen K0 prüfen. Falls 0 READY, konkrete bereits bestehende Sperrgründe aus derselben Ansicht prüfen – keine Keyword-Wiederholung und kein blinder Kontextneubau. Vollständiger Nachweis: [QA PSERC 0.28.58](QA_ONLY/PSERC_02858_KISS_PLANBINDUNG_20261110.md). GitHub PR #682 bleibt DRAFT/unmerged.
+- Verschlankung erst nach echtem K0-Dateitest weiterführen; Backend-Sonderfunktion bleibt erreichbar (einklappbar), keine Funktionen/Recherche/gespeicherten Inhalte löschen.
+
+---
+
 ## 10.11.2026 – KISS: PSERC-K0-Ausgabe dieselbe Bestandsfunktion, früher Planstopp QA
 - Zwei bestehende WordPress-Ausgabeorte (PSTE Produktion und PSERC Metadatenvorschau) verwenden **dieselbe** `PSERC_Plan_Snapshot_Store::materializeReadyBatch`-Funktion. Neuer Exporter **nicht nötig**; keine der bestehenden Funktionen entfernen.
 - Echter TEST-Screenshot: PSERC `BLOCKED / ACTIVATE / PSERC_PLAN_LIVE_EDITORIAL_PLAN_CHANGED_BEFORE_ACTIVATE`. Der bestehende Sicherheitsvergleich muss bleiben; genaue WP-Planabweichung **noch nicht belegt**.
