@@ -30,3 +30,9 @@ Die **acht** kurzen Hauptwelten des CORE-Portals stehen in der einen aktuellen `
 
 ## Gemeinsame Dienste für alle – 10.11.2026 V5 (AKTUELL)
 Magazin, Glossar, Modellregister und Finder **nur je einmal** für alle Zielgruppen, keine separate Privat-/Industrie-Version. Ein Anzeigenmarkt mit optionalen Anbieter-/Branchen-/Leistungsfiltern, aber keine zwei Inseratesysteme. **Filter und Themenrubriken sind keine zweite Produktdatenquelle und erzeugen nicht automatisch SEO-Seiten.** Produktberatung bleibt ausschließlich beim einen CORE-Robotertyp-Owner; Industrie-Fachlandingpages sind Übersichten im CORE. Strategie und einzige Navigation Revision 11: [Zielgruppen-/Industrie-Konzept V5](../KATEGORIE/RECHERCHE/ZIELGRUPPEN_NAVIGATION_V5_20261110.md). Keine WordPress- oder Pluginänderung.
+
+## 10.11.2026 – Aktuelle Nutzerentscheidung: EIN gemeinsamer Bereich für alle
+- **Privatpersonen, kleine Betriebe und Industrie werden gemeinsam behandelt**: EIN Magazin/Journal, EIN Roboterglossar, EIN Hersteller-Modellregister und EIN aufgabenorientierter Roboterfinder. Der ebenfalls gemeinsame HivePress-Anzeigenmarkt bleibt die dritte Säule. Branchenrubriken und Filter sind erlaubt; KEINE getrennten Privat-/Industrie-Kopien, doppelte Modellprofile oder zweite Datenhaltung.
+- Nur die kaufnahe CORE-Navigation ist nach potentiellen Käufern gewichtet. Industrieller Ursprung eines Roboters ist kein automatisches Kriterium für Industrie-only.
+- Einziger Kategorie-Fachmaster jetzt Revision **12**, 68 Grundtypen, **140** Randfälle einschließlich privater Schneeräumroboter rf140. 7 belegte Kleinbetriebs-Grenzfälle; daraus keine automatische Finder-Eignung, WordPress- oder Affiliate-Freigabe ableiten.
+- Details und Belege im KATEGORIE/RECHERCHE/ZIELGRUPPEN_NAVIGATION_V5_20261110.md. Keine WP-, Plugin- oder Keywordarbeit.
