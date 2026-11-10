@@ -7291,7 +7291,7 @@
     }
   ],
   "canonical_source": true,
-  "revision": 18,
+  "revision": 19,
   "research_state": "UNAPPROVED",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
@@ -15409,6 +15409,198 @@
       "keyword_status": "NICHT_GEMESSEN",
       "affiliate_status": "NICHT_GEPRUEFT",
       "source_checked": "2026-11-10"
+    },
+    {
+      "id": "rf218",
+      "name": "Futteranschieberoboter für Rinderställe",
+      "topic_kind": "NEW_UNDERREPRESENTED_MARKET_FUNCTION_V13",
+      "proposed_owner": "CORE_DISTINCT_SMALL_FARM_BUYER",
+      "proposed_location": "Landwirtschaft",
+      "source_url": "https://www.lely.com/solutions/feeding/juno/",
+      "evidence_grade": "HERSTELLER_ETABLIERT_ANFRAGE_DE",
+      "related_existing_id": "rb035",
+      "non_duplication_rule": "Schiebt bereits ausgelegtes Futter zum Fressgitter, mischt/portioniert/verteilt keine Futtermittel. Deshalb andere Funktion als vollständiger Fütterungsroboter.",
+      "availability_review": "Hersteller/regionale Fachberatung; kein eigener Onlinecheckout belegt",
+      "wp_release": "UNAPPROVED_RESEARCH",
+      "affiliate_status": "NOT_VERIFIED",
+      "keyword_status": "NOT_MEASURED",
+      "source_checked": "2026-11-10"
+    },
+    {
+      "id": "rf219",
+      "name": "Robotische Gelenk-Ultraschalluntersuchung",
+      "topic_kind": "NEW_UNDERREPRESENTED_MARKET_FUNCTION_V13",
+      "proposed_owner": "CORE_DISTINCT_MEDICAL_B2B_CLINIC",
+      "proposed_location": "Pflege & Assistenz / Medizinische Praxen",
+      "source_url": "https://ropca.com/arthur/",
+      "evidence_grade": "HERSTELLER_CE_GEZEIGT_KLINISCHE_REFERENZEN",
+      "related_existing_id": "rb041",
+      "non_duplication_rule": "Automatische Gelenk-Ultraschallbildaufnahme ist Diagnostik und kein chirurgischer Eingriff. Hersteller ROPCA ARTHUR; klinische Anwendung und Beratung statt freier Privatkauf.",
+      "availability_review": "B2B Demo/Anfrage; CE laut Hersteller, fachlich/regulatorisch prüfen",
+      "wp_release": "UNAPPROVED_RESEARCH",
+      "affiliate_status": "NOT_VERIFIED",
+      "keyword_status": "NOT_MEASURED",
+      "source_checked": "2026-11-10"
+    },
+    {
+      "id": "rf220",
+      "name": "Robotische Haartransplantationssysteme",
+      "topic_kind": "NEW_UNDERREPRESENTED_MARKET_FUNCTION_V13",
+      "proposed_owner": "CORE_DISTINCT_MEDICAL_B2B_CLINIC",
+      "proposed_location": "Pflege & Assistenz / Medizinische Praxen",
+      "source_url": "https://www.venus.ai/de/artas-ixi",
+      "evidence_grade": "HERSTELLER_DE_PROFESSIONAL_DEVICE_B2B",
+      "related_existing_id": "rb041",
+      "non_duplication_rule": "Robotergestützte Entnahme/Transplantation von Haarfollikeln, eigenständiger medizinischer Eingriff; keine allgemeine Chirurgie-Kopieseite und nicht Beauty-Heimgerät.",
+      "availability_review": "Klinik-/Herstelleranfrage; lokale Zulassung und Fachpersonalkonzept prüfen",
+      "wp_release": "UNAPPROVED_RESEARCH",
+      "affiliate_status": "NOT_VERIFIED",
+      "keyword_status": "NOT_MEASURED",
+      "source_checked": "2026-11-10"
+    },
+    {
+      "id": "rf221",
+      "name": "Stationäre soziale Begleitroboter für Senioren",
+      "topic_kind": "NEW_UNDERREPRESENTED_MARKET_FUNCTION_V13",
+      "proposed_owner": "CORE_OR_MAGAZIN_ROBOT_DEFINITION_REVIEW",
+      "proposed_location": "Pflege & Assistenz",
+      "source_url": "https://elliq.com/pages/faqs",
+      "evidence_grade": "HERSTELLER_US_LEASING_ABO_DE_VERFUEGBARKEIT_OFFEN",
+      "related_existing_id": "rf013",
+      "non_duplication_rule": "Sprach- und Interaktionsbegleiter statt Esshilfe, Greifarm oder medizinischem Hilfsmittel. ElliQ ist überwiegend stationär; tatsächlicher Robotikbegriff, DE-Bezug und Leistungsversprechen kritisch prüfen.",
+      "availability_review": "US-Mietmitgliedschaft laut Hersteller; kein deutscher Direktkauf nachgewiesen",
+      "wp_release": "UNAPPROVED_RESEARCH",
+      "affiliate_status": "NOT_VERIFIED",
+      "keyword_status": "NOT_MEASURED",
+      "source_checked": "2026-11-10"
+    },
+    {
+      "id": "rf222",
+      "name": "Automatische Medikamentenabgabe für häusliche Pflege",
+      "topic_kind": "NEW_UNDERREPRESENTED_MARKET_FUNCTION_V13",
+      "proposed_owner": "AUTOMATION_OR_ASSISTIVE_DEVICE_BOUNDARY_NOT_CORE_YET",
+      "proposed_location": "Pflege & Assistenz",
+      "source_url": "https://www.evondos.com/evondos-mira",
+      "evidence_grade": "HERSTELLER_EU_HEIMPFLEGE_EINGESETZTES_DOSIERGERAET",
+      "related_existing_id": "rf013",
+      "non_duplication_rule": "Dosiert vorportionierte Medikamente zeitgesteuert, kein mobiler/greifender Roboter nachgewiesen. Nicht mit Apotheke-Kommissionierrobotern rb046 vermengen.",
+      "availability_review": "Pflegedienst-/Versorgungsmodell; Medikamentenhinweise keine Selbstmedikation",
+      "wp_release": "UNAPPROVED_RESEARCH",
+      "affiliate_status": "NOT_VERIFIED",
+      "keyword_status": "NOT_MEASURED",
+      "source_checked": "2026-11-10"
+    },
+    {
+      "id": "rf223",
+      "name": "Robotische Wimpernverlängerung im Salon",
+      "topic_kind": "NEW_UNDERREPRESENTED_MARKET_FUNCTION_V13",
+      "proposed_owner": "HIVEPRESS_SERVICE_MAGAZIN_NOT_DEVICE_SHOP",
+      "proposed_location": "Gastro & Handel / Beauty (Landingpage prüfen)",
+      "source_url": "https://www.luumlash.com/",
+      "evidence_grade": "HERSTELLER_US_BETREIBT_SALON_DIENSTLEISTUNG",
+      "related_existing_id": "rf159",
+      "non_duplication_rule": "LUUM-Roboter appliziert Wimpernextensions durch Salondienst; vom Nagellackiersystem technisch anders. Kein unabhängiger Geräteverkauf für deutsche Kosmetikstudios belegt.",
+      "availability_review": "US-Dienstleistung/Buchung, kein Roboterversand",
+      "wp_release": "UNAPPROVED_RESEARCH",
+      "affiliate_status": "NOT_VERIFIED",
+      "keyword_status": "NOT_MEASURED",
+      "source_checked": "2026-11-10"
+    },
+    {
+      "id": "rf224",
+      "name": "Autonome Gehweg-Hochdruckreinigungsroboter",
+      "topic_kind": "NEW_UNDERREPRESENTED_MARKET_FUNCTION_V13",
+      "proposed_owner": "MAGAZIN_PREORDER_TECHNOLOGY_NOT_EU_CATALOGUE",
+      "proposed_location": "Reinigung / Außenanlagen",
+      "source_url": "https://trac.technology/orbit",
+      "evidence_grade": "HERSTELLER_PROTOTYP_PREORDER_ANZAHLUNG",
+      "related_existing_id": "rf033",
+      "non_duplication_rule": "Hochdruckreinigung befestigter Wege statt allgemeiner Straßensaug-/Kehrreinigung. ORBIT bezeichnet sich als Prototyp; keine Serienauslieferung belegt.",
+      "availability_review": "Reservierung/Prototyp, kein bestätigter DE-Serienmarkt",
+      "wp_release": "UNAPPROVED_RESEARCH",
+      "affiliate_status": "NOT_VERIFIED",
+      "keyword_status": "NOT_MEASURED",
+      "source_checked": "2026-11-10"
+    },
+    {
+      "id": "rf225",
+      "name": "Roboter zur Verlegung von Dachschindeln",
+      "topic_kind": "NEW_UNDERREPRESENTED_MARKET_FUNCTION_V13",
+      "proposed_owner": "HIVEPRESS_B2B_SERVICE_OR_MAGAZIN_NOT_SHOP",
+      "proposed_location": "Handwerk / Dachbau",
+      "source_url": "https://renovaterobotics.com/",
+      "evidence_grade": "HERSTELLER_US_INVITE_ONLY_VORSCHAU_SERVICE",
+      "related_existing_id": "rb050",
+      "non_duplication_rule": "Befestigt Schindeln an geneigten Dächern, keine Mauerarbeit oder Solarmontage. Rufus wird im begrenzten Vorschau-/Dienstleistungsmodell gezeigt; kein regulärer Gerätekauf.",
+      "availability_review": "Herstellerkontakt/Preview; nicht freiverkäuflich",
+      "wp_release": "UNAPPROVED_RESEARCH",
+      "affiliate_status": "NOT_VERIFIED",
+      "keyword_status": "NOT_MEASURED",
+      "source_checked": "2026-11-10"
+    },
+    {
+      "id": "rf226",
+      "name": "Robotische Sortierung lebender Krebstiere",
+      "topic_kind": "NEW_UNDERREPRESENTED_MARKET_FUNCTION_V13",
+      "proposed_owner": "MAGAZIN_AQUAKULTUR_ROBOTIK_FORSCHUNG",
+      "proposed_location": "Landwirtschaft / Aquakultur",
+      "source_url": "https://www.sciencedirect.com/science/article/pii/S2772375525004009",
+      "evidence_grade": "PEER_REVIEWED_FORSCHUNG_FARM_TEST_KEIN_SHOP",
+      "related_existing_id": "rf196",
+      "non_duplication_rule": "Unterwasser-Greifarm sortiert lebende Krebstiere nach Größe; nicht Fütterung von Fischbecken und kein reiner Trockensortierer. Forschungsaufbau, nicht lieferbares Gerät.",
+      "availability_review": "Wissenschaftliche Versuchsanlage",
+      "wp_release": "UNAPPROVED_RESEARCH",
+      "affiliate_status": "NOT_VERIFIED",
+      "keyword_status": "NOT_MEASURED",
+      "source_checked": "2026-11-10"
+    },
+    {
+      "id": "rf227",
+      "name": "Selektive Weinreben-Schnittroboter",
+      "topic_kind": "NEW_UNDERREPRESENTED_MARKET_FUNCTION_V13",
+      "proposed_owner": "MAGAZIN_WEINBAU_FORSCHUNG_NOT_CORE",
+      "proposed_location": "Landwirtschaft / Weinbau",
+      "source_url": "https://www.sciencedirect.com/science/article/pii/S2772375526001905",
+      "evidence_grade": "PEER_REVIEWED_FELDTEST_2026_NO_MARKET_PROOF",
+      "related_existing_id": "rb040",
+      "non_duplication_rule": "Entscheidet triebspezifisch den Schnitt, im Gegensatz zum bodenbearbeitenden Weinbauroboter und mechanischen Vorschnitt. Feldforschung noch kein allgemein käufliches Roboterprodukt.",
+      "availability_review": "Studie ohne Serienverkauf",
+      "wp_release": "UNAPPROVED_RESEARCH",
+      "affiliate_status": "NOT_VERIFIED",
+      "keyword_status": "NOT_MEASURED",
+      "source_checked": "2026-11-10"
+    },
+    {
+      "id": "rf228",
+      "name": "Austernfarm-Wartungs- und Erntefahrzeuge",
+      "topic_kind": "NEW_UNDERREPRESENTED_MARKET_FUNCTION_V13",
+      "proposed_owner": "MAGAZIN_EIGENBETRIEB_NOT_CORE_SHOP",
+      "proposed_location": "Landwirtschaft / Aquakultur",
+      "source_url": "https://seascapetech.ai/about/",
+      "evidence_grade": "BETREIBER_EIGENTECHNIK_KEIN_GERAETEVERKAUF",
+      "related_existing_id": "rf021",
+      "non_duplication_rule": "Bewegt, wendet und erntet Austernkörbe, nicht Netzreinigung; Betreiber sagt ausdrücklich, dass sein System nicht verkauft wird.",
+      "availability_review": "Eigener Farmbetrieb, keine Geräteangebote",
+      "wp_release": "UNAPPROVED_RESEARCH",
+      "affiliate_status": "NOT_VERIFIED",
+      "keyword_status": "NOT_MEASURED",
+      "source_checked": "2026-11-10"
+    },
+    {
+      "id": "rf229",
+      "name": "Roboter zur Graffiti-Entfernung",
+      "topic_kind": "NEW_UNDERREPRESENTED_MARKET_FUNCTION_V13",
+      "proposed_owner": "MAGAZIN_REINIGUNGSFORSCHUNG_NOT_CORE",
+      "proposed_location": "Reinigung / Bauwerksoberflächen",
+      "source_url": "https://patents.google.com/patent/DE102025153657A1/en",
+      "evidence_grade": "PATENTSCHRIFT_2026_KEIN_GERAET_KAUFBELEG",
+      "related_existing_id": "rb029",
+      "non_duplication_rule": "Gezieltes Entfernen von Graffiti statt normaler Fenster-/Fassadenwäsche; Patent belegt Konzept, nicht lieferbares Seriengerät.",
+      "availability_review": "Patent, keine Produktverfügbarkeit",
+      "wp_release": "UNAPPROVED_RESEARCH",
+      "affiliate_status": "NOT_VERIFIED",
+      "keyword_status": "NOT_MEASURED",
+      "source_checked": "2026-11-10"
     }
   ],
   "research_expansion": {
@@ -15419,7 +15611,7 @@
     "wp_plan_unchanged": true,
     "evidence_grade_note": "Herstellerbeleg bestaetigt Existenz einzelner Loesungen, nicht Marktgroesse/DE-Keyword oder Kategoriefreigabe."
   },
-  "concept_status": "FUNCTIONAL_RECONCILIATION_V12_RESEARCH_UNAPPROVED",
+  "concept_status": "FUNCTIONAL_AUDIT_V13_EVIDENCE_AND_NAVIGATION_NOT_WORDPRESS_APPROVED",
   "knowledge_views_v1": {
     "status": "PROPOSAL_ONLY",
     "concept_document": "RECHERCHE/GLOSSAR_FINDER_MODELLREGISTER_V1_20261109.md",
@@ -15952,6 +16144,78 @@
       "linked_existing": "rb041 rb042 rb043 rb065 rf175 rf176 rf183 rf184 rf185 rf193",
       "other_modules": "Magazin, Glossar, Register, Finder und Anzeigenmarkt bleiben GEMEINSAM fuer alle.",
       "no_wordpress_change": true
+    },
+    "buyer_navigation_audit_v13": {
+      "date": "2026-11-10",
+      "status": "PROPOSED_EIGHTH_BUYER_ENTRY_NOT_WORDPRESS_CHANGED",
+      "existing_seven_kept": true,
+      "new_strongly_recommended_landing": "Pflege & Assistenz",
+      "standalone_research_reasons": [
+        "rf175",
+        "rf176",
+        "rf183",
+        "rf184",
+        "rf185",
+        "rf193",
+        "rf219",
+        "rf220",
+        "rf221",
+        "rf222",
+        "rb042",
+        "rb043"
+      ],
+      "menu_implementation": "Own visible buyer entry or clearly visible homepage buyer tile; choose location after IA check, no hidden-only footer link.",
+      "note": "Personal assistive devices, home support, therapy devices and small medical practices are buyers, not industry-only; medical use and safe availability separately.",
+      "other_sublandings_proposed": [
+        {
+          "name": "Gärtnerei & Grünpflege",
+          "under": "Landwirtschaft",
+          "refs": [
+            "rf049",
+            "rf200",
+            "rf202",
+            "rf211",
+            "rf212",
+            "rf213",
+            "rf217"
+          ],
+          "crosslinks": [
+            "Handwerk"
+          ]
+        },
+        {
+          "name": "Sportanlagen",
+          "under": "Freizeit & Lernen",
+          "refs": [
+            "rf130",
+            "rf137",
+            "rf139",
+            "rf146",
+            "rf148",
+            "rf203"
+          ],
+          "crosslinks": [
+            "Reinigung"
+          ]
+        },
+        {
+          "name": "Außenanlagen",
+          "under": "Reinigung",
+          "refs": [
+            "rf032",
+            "rf033",
+            "rf200",
+            "rf204",
+            "rf224"
+          ],
+          "crosslinks": [
+            "Handwerk"
+          ]
+        }
+      ],
+      "industry": "Keep one visible Industrie hub and its 3 broad landing pages. Buyer-valid products with industrial origin always linked in main buyer path if evidenced.",
+      "common_platform": "One magazine, one glossary, one manufacturer-model register, one finder, one HivePress marketplace shared with industrial and private topics.",
+      "no_wordpress_changes": true
     }
   },
   "research_round_v7": {
@@ -16556,5 +16820,146 @@
     "no_keyword_research": true,
     "no_wp_writes": true,
     "no_plugin_changes": true
+  },
+  "functional_reconciliation_v13": {
+    "date": "2026-11-10",
+    "hard_rule": "Identical end-user function -> one canonical CORE product type page. A model may have multiple functions and be referenced by multiple type pages, but the complete model profile exists once in shared register; no duplicate product review.",
+    "provisional_aliases_to_canonical": [
+      {
+        "research_id": "rf004",
+        "canonical_id": "rb046",
+        "decision": "NO_SECOND_CORE_LEAF_UNLESS_NEW_EVIDENCE_OF_DISTINCT_BUYER_FUNCTION",
+        "retain_source_record": true
+      },
+      {
+        "research_id": "rf028",
+        "canonical_id": "rb001",
+        "decision": "NO_SECOND_CORE_LEAF_UNLESS_NEW_EVIDENCE_OF_DISTINCT_BUYER_FUNCTION",
+        "retain_source_record": true
+      },
+      {
+        "research_id": "rf025",
+        "canonical_id": "rf005",
+        "decision": "NO_SECOND_CORE_LEAF_UNLESS_NEW_EVIDENCE_OF_DISTINCT_BUYER_FUNCTION",
+        "retain_source_record": true
+      },
+      {
+        "research_id": "rf045",
+        "canonical_id": "rf018",
+        "decision": "NO_SECOND_CORE_LEAF_UNLESS_NEW_EVIDENCE_OF_DISTINCT_BUYER_FUNCTION",
+        "retain_source_record": true
+      },
+      {
+        "research_id": "rf050",
+        "canonical_id": "rb044",
+        "decision": "NO_SECOND_CORE_LEAF_UNLESS_NEW_EVIDENCE_OF_DISTINCT_BUYER_FUNCTION",
+        "retain_source_record": true
+      },
+      {
+        "research_id": "rf052",
+        "canonical_id": "rb010",
+        "decision": "NO_SECOND_CORE_LEAF_UNLESS_NEW_EVIDENCE_OF_DISTINCT_BUYER_FUNCTION",
+        "retain_source_record": true
+      },
+      {
+        "research_id": "rf054",
+        "canonical_id": "rf001",
+        "decision": "NO_SECOND_CORE_LEAF_UNLESS_NEW_EVIDENCE_OF_DISTINCT_BUYER_FUNCTION",
+        "retain_source_record": true
+      },
+      {
+        "research_id": "rf043",
+        "canonical_id": "rb053",
+        "decision": "NO_SECOND_CORE_LEAF_UNLESS_NEW_EVIDENCE_OF_DISTINCT_BUYER_FUNCTION",
+        "retain_source_record": true
+      }
+    ],
+    "modular_platform_exception": {
+      "research_id": "rf163",
+      "needs": "A single Yarbo hardware-model profile; lawn mower and snow-removal are separate tasks while trimmer/blower are attachments. Do not duplicate a full Yarbo product review on each function page.",
+      "market_status": "US module sales cited; EU configuration separately checked",
+      "canonical_model_register_once": true
+    },
+    "not_yet_final": [
+      "rb014/rb015",
+      "rb016/rb014",
+      "rb060/rb061",
+      "rf002 yacht/freighter",
+      "rf205/rf146"
+    ],
+    "missing_base_leaves_research_gate": {
+      "current_base_ids": 68,
+      "unprofiled_from_v8_v12": 20,
+      "of_them_overviews_or_problem_cases": [
+        "rb012",
+        "rb013",
+        "rb021",
+        "rb027",
+        "rb029",
+        "rb038",
+        "rb039",
+        "rb042",
+        "rb058",
+        "rb065"
+      ],
+      "function_specific_review_needed": [
+        "rb007",
+        "rb015",
+        "rb016",
+        "rb040",
+        "rb044",
+        "rb052",
+        "rb054",
+        "rb055",
+        "rb057",
+        "rb067"
+      ],
+      "meaning": "Numbers refer to product-candidate research IDs, NOT committed WP leaf pages. Reconcile with all preexisting content depth profiles."
+    },
+    "new_candidates_added": [
+      "rf218",
+      "rf219",
+      "rf220",
+      "rf221",
+      "rf222",
+      "rf223",
+      "rf224",
+      "rf225",
+      "rf226",
+      "rf227",
+      "rf228",
+      "rf229"
+    ],
+    "no_deletions": true,
+    "no_wp_commit": true,
+    "no_keyword_research": true,
+    "no_affiliate_assumptions": true
+  },
+  "research_round_v13": {
+    "date": "2026-11-10",
+    "previous_revision": 18,
+    "base_ids_retained": 68,
+    "old_frontier_count": 217,
+    "added_frontier": 12,
+    "new_frontier_count": 229,
+    "new_ids": [
+      "rf218",
+      "rf219",
+      "rf220",
+      "rf221",
+      "rf222",
+      "rf223",
+      "rf224",
+      "rf225",
+      "rf226",
+      "rf227",
+      "rf228",
+      "rf229"
+    ],
+    "source_count": 12,
+    "categories_to_be_added_separately": true,
+    "research_scope": "Underrepresented care/medical, food processing, roofing, personal services, animal farms, home exterior. Include real devices, lease, service, automation boundary, research and patents distinctly.",
+    "no_wordpress_writes": true,
+    "no_seo_calls": true
   }
 }
