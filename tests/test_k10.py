@@ -352,9 +352,9 @@ class K10Tests(unittest.TestCase):
         self.assertIn('HARD_RULE_NOT_PASS:intro.orientation_sentence',result['findings'])
 
     def test_missing_receipt_blocks_without_content_recheck(self):
-        a=make_base(); receipts=run_article_checks(a); receipts=[r for r in receipts if r['rule_id']!='title.colon_forbidden']
+        a=make_base(); receipts=run_article_checks(a); receipts=[r for r in receipts if r['rule_id']!='structure.required_blocks']
         result=verify_article(a['article_id'],article_hash(a),receipts)
-        self.assertIn('MISSING_HARD_RULE_RECEIPT:title.colon_forbidden',result['findings'])
+        self.assertIn('MISSING_HARD_RULE_RECEIPT:structure.required_blocks',result['findings'])
 
     def test_modified_html_after_pass_invalidates_receipts(self):
         a=make_base(); receipts=run_article_checks(a); changed=copy.deepcopy(a); changed['html']=a['html']+'<!--changed-->'
