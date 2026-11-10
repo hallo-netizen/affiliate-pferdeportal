@@ -4379,6 +4379,11 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "roboterarm_feature_v8": {
+        "source": "https://de.roborock.com/products/roborock-saros-z70",
+        "scope": "Saugroboter mit kleinem Greifarm; Roboterarm ist hier Modellfunktion, nicht getrennte neue Robotertypseite.",
+        "checked_at": "2026-11-10"
       }
     },
     {
@@ -4954,7 +4959,7 @@
     }
   ],
   "canonical_source": true,
-  "revision": 13,
+  "revision": 14,
   "research_state": "UNAPPROVED",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
@@ -8572,6 +8577,12 @@
           "scope_name": "Golfball-Sammelroboter für Golfübungsanlagen",
           "status": "DRAFT_NOT_WP_APPROVED"
         }
+      },
+      "additional_de_market_evidence_v8": {
+        "source": "https://www.husqvarna.com/de/lernen-und-entdecken/relox-ball-picker/",
+        "context": "Husqvarna DE führt Relox Range Picker als echten Golfball-Sammelroboter, nicht automatisch Golfcaddie/Bunker-Rake",
+        "same_owner": "rf130",
+        "checked_at": "2026-11-10"
       }
     },
     {
@@ -9449,6 +9460,182 @@
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
       "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf164",
+      "name": "Wanddruckroboter für Innenräume",
+      "topic_kind": "RESEARCH_PRODUCT_OR_BORDER_CANDIDATE_V8",
+      "proposed_location": "Handwerk",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "related_existing_id": "rf149",
+      "source_url": "https://shop.wallpen.com/",
+      "evidence_grade": "HERSTELLER_DE_RESERVIERUNG_PREIS_GENANNT",
+      "non_duplication_rule": "Automatischer Vertikaldruck auf Wandflächen für kleine Werbe-/Malerbetriebe. Nicht mit Schreibplottern (rf149) oder Malerrobotern (rf154) doppeln; selbstfahrend entlang Wand, Tinte statt Anstrich.",
+      "category_precheck": "INHALTSBEITRAEGE_ABSCHAETZEN_OHNE_SEO_KEYWORDS",
+      "checked_at": "2026-11-10",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN"
+    },
+    {
+      "id": "rf165",
+      "name": "GPS-Futterboote mit Autopilot",
+      "topic_kind": "RESEARCH_PRODUCT_OR_BORDER_CANDIDATE_V8",
+      "proposed_location": "Freizeit & Lernen",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "related_existing_id": "rb059",
+      "source_url": "https://deepersonar.com/de-de/products/quest",
+      "evidence_grade": "HERSTELLER_DE_PRODUKT_SHOP_BESTAND_VARIANTEN_ABHAENGIG",
+      "non_duplication_rule": "Autonom zum Angelplatz fahrendes Futterboot mit GPS und Echolot; kein Unterwasser-ROV, kein motorloses RC-Boot; Rückkehr und Routenmodus gesondert prüfen.",
+      "category_precheck": "INHALTSBEITRAEGE_ABSCHAETZEN_OHNE_SEO_KEYWORDS",
+      "checked_at": "2026-11-10",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN"
+    },
+    {
+      "id": "rf166",
+      "name": "Robotische Cocktail-Mixsysteme",
+      "topic_kind": "RESEARCH_PRODUCT_OR_BORDER_CANDIDATE_V8",
+      "proposed_location": "Gastro & Handel",
+      "proposed_owner": "CORE_B2B_PRODUCT_CANDIDATE",
+      "related_existing_id": "rb026",
+      "source_url": "https://www.makrshakr.com/toni",
+      "evidence_grade": "HERSTELLER_B2B_ANFRAGE",
+      "non_duplication_rule": "Bewegliche Roboterarme mischen und servieren Cocktails/Mocktails, getrennt von Kaffeezubereitungs- und reinen Getränkespendern.",
+      "category_precheck": "INHALTSBEITRAEGE_ABSCHAETZEN_OHNE_SEO_KEYWORDS",
+      "checked_at": "2026-11-10",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN"
+    },
+    {
+      "id": "rf167",
+      "name": "Sanitärraum-Reinigungsroboter",
+      "topic_kind": "RESEARCH_PRODUCT_OR_BORDER_CANDIDATE_V8",
+      "proposed_location": "Reinigung",
+      "proposed_owner": "CORE_B2B_PRODUCT_CANDIDATE_WITH_ECONOMIC_GATE",
+      "related_existing_id": "rb028",
+      "source_url": "https://getsomatic.com/",
+      "evidence_grade": "HERSTELLER_ROBOT_AS_SERVICE_US_AUFRUF_VERFUEGBARKEIT",
+      "non_duplication_rule": "Autonomes Reinigen von Waschbecken, Toiletten und Fußboden in Sanitäranlagen; nicht identisch mit reinem Scheuersaugroboter für Böden. Mietservice statt belegter Gerätehandel; Wirtschaftlichkeit kleiner Betriebe offen.",
+      "category_precheck": "INHALTSBEITRAEGE_ABSCHAETZEN_OHNE_SEO_KEYWORDS",
+      "checked_at": "2026-11-10",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN"
+    },
+    {
+      "id": "rf168",
+      "name": "Robotische Wok- und Pfannenköche",
+      "topic_kind": "RESEARCH_PRODUCT_OR_BORDER_CANDIDATE_V8",
+      "proposed_location": "Gastro & Handel",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE_WITH_IDENTITY_GATE",
+      "related_existing_id": "rf020",
+      "source_url": "https://www.botinkit.ai/product/cooking-robot/",
+      "evidence_grade": "HERSTELLER_PRODUKTDARSTELLUNG_B2B_BEZUG_OFFEN",
+      "non_duplication_rule": "Konkreter Kochvorgang mit beheizter, automatisch rührender Pfanne; nicht beliebige Essensausgabe oder allgemeiner Küchenautomat; Hersteller bewirbt Ketten, kleiner Betrieb wirtschaftlich zu prüfen.",
+      "category_precheck": "INHALTSBEITRAEGE_ABSCHAETZEN_OHNE_SEO_KEYWORDS",
+      "checked_at": "2026-11-10",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN"
+    },
+    {
+      "id": "rf169",
+      "name": "Pizza-Belegroboter und Belagstationen",
+      "topic_kind": "RESEARCH_PRODUCT_OR_BORDER_CANDIDATE_V8",
+      "proposed_location": "Gastro & Handel",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE_WITH_IDENTITY_GATE",
+      "related_existing_id": "rf020",
+      "source_url": "https://www.picnicworks.com/",
+      "evidence_grade": "HERSTELLER_REALER_KUNDENFALL_B2B",
+      "non_duplication_rule": "Modulare automatische Pizza-Belagstation für Soße/Käse/Toppings; keine vollständige Pizzeria-/Backofenautomation; vom Wok- und Speisenausgabesystem funktional getrennt.",
+      "category_precheck": "INHALTSBEITRAEGE_ABSCHAETZEN_OHNE_SEO_KEYWORDS",
+      "checked_at": "2026-11-10",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN"
+    },
+    {
+      "id": "rf170",
+      "name": "Autonome Rollstuhl-Mobilitätsdienste",
+      "topic_kind": "RESEARCH_PRODUCT_OR_BORDER_CANDIDATE_V8",
+      "proposed_location": "Freizeit & Lernen",
+      "proposed_owner": "CORE_OR_DIRECTORY_SERVICE_REVIEW",
+      "related_existing_id": "rb043",
+      "source_url": "https://whill.inc/de/news/changi-airport-worlds-best-selects-whills-autonomous-mobility-service-following-a-track-record-of-one-million-rides",
+      "evidence_grade": "HERSTELLER_INSTITUTIONELLER_BETRIEB",
+      "non_duplication_rule": "Autonomer Passagiertransport in Flughäfen/Einrichtungen; nicht mit gewöhnlichem privat gesteuertem Elektrorollstuhl oder Exoskelett gleichsetzen. Kleinbetriebs-Einsatz/Kaufbarkeit offen, kein privater Geräteverkauf belegt.",
+      "category_precheck": "INHALTSBEITRAEGE_ABSCHAETZEN_OHNE_SEO_KEYWORDS",
+      "checked_at": "2026-11-10",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN"
+    },
+    {
+      "id": "rf171",
+      "name": "Autonome Eisflächen-Aufbereitungsroboter",
+      "topic_kind": "RESEARCH_PRODUCT_OR_BORDER_CANDIDATE_V8",
+      "proposed_location": "Freizeit & Lernen",
+      "proposed_owner": "MAGAZIN_FORSCHUNG_BIS_MARKTREIFE",
+      "related_existing_id": "rf130",
+      "source_url": "https://rayzorice.com/",
+      "evidence_grade": "HERSTELLER_PREPRODUCTION_Q4_2026",
+      "non_duplication_rule": "Autonomes Eisaufbereitungssystem für Eissportanlagen, nicht Rasen-/Golfplatzpflege; Vorserienstatus, keine Bestellung für Vereine behaupten.",
+      "category_precheck": "INHALTSBEITRAEGE_ABSCHAETZEN_OHNE_SEO_KEYWORDS",
+      "checked_at": "2026-11-10",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN"
+    },
+    {
+      "id": "rf172",
+      "name": "Autonome Parkplatz-Rangierroboter",
+      "topic_kind": "RESEARCH_PRODUCT_OR_BORDER_CANDIDATE_V8",
+      "proposed_location": "Logistik",
+      "proposed_owner": "CORE_OR_DIRECTORY_INFRASTRUCTURE_REVIEW",
+      "related_existing_id": "rb014",
+      "source_url": "https://www.stanley-robotics.com/autonomous-valet-parking/",
+      "evidence_grade": "HERSTELLER_BETRIEB_LYON_AIRPORT_B2B_SERVICE",
+      "non_duplication_rule": "Parkt ganze Pkw durch Unterfahren und Anheben auf großen Parkanlagen; nicht persönlicher Roboterkoffer oder Lager-AMR. Kleine Parkbetreiber und direkter Gerätevertrieb offen.",
+      "category_precheck": "INHALTSBEITRAEGE_ABSCHAETZEN_OHNE_SEO_KEYWORDS",
+      "checked_at": "2026-11-10",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN"
+    },
+    {
+      "id": "rf173",
+      "name": "Robotergestütztes Tätowieren",
+      "topic_kind": "RESEARCH_PRODUCT_OR_BORDER_CANDIDATE_V8",
+      "proposed_location": "Gastro & Handel",
+      "proposed_owner": "HIVEPRESS_DIENSTLEISTUNG_ODER_MAGAZIN",
+      "related_existing_id": "rf149",
+      "source_url": "https://blackdot.tattoo/pages/franchise",
+      "evidence_grade": "ANBIETER_FRANCHISE_SERVICE_NICHT_GERAETESHOP",
+      "non_duplication_rule": "Tattoo-Robotik derzeit Studio-/Franchise-Modell, kein belegter Verkauf des Gerätes an unabhängige kleine Studios; keine eigenständige käufliche CORE-Geräteseite freigeben.",
+      "category_precheck": "INHALTSBEITRAEGE_ABSCHAETZEN_OHNE_SEO_KEYWORDS",
+      "checked_at": "2026-11-10",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN"
+    },
+    {
+      "id": "rf174",
+      "name": "PV-Modulmontageroboter für Solarparks",
+      "topic_kind": "RESEARCH_PRODUCT_OR_BORDER_CANDIDATE_V8",
+      "proposed_location": "Industrie",
+      "proposed_owner": "CORE_INDUSTRY_ONLY_CANDIDATE_VERIFY",
+      "related_existing_id": "rf001",
+      "source_url": "https://www.trinasolar.com/eu/TrinaTracker-launches-BUILDEX-and-AURORA-robots-for-automated-PV-construction-and-OM/",
+      "evidence_grade": "HERSTELLER_2026_EU_UTILITY_SCALE_ANGEBOT",
+      "non_duplication_rule": "BUILDEX für modulare Groß-PV-Anlagen; keine Übertragung auf private Hausdächer ohne Beleg. Montagegeräte getrennt von PV-Reinigern (rf001). Allein dieser konkrete Typ ist derzeit auf große PV-Parks ausgerichtet.",
+      "category_precheck": "INHALTSBEITRAEGE_ABSCHAETZEN_OHNE_SEO_KEYWORDS",
+      "checked_at": "2026-11-10",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN"
     }
   ],
   "research_expansion": {
@@ -10030,5 +10217,40 @@
     "no_affiliate_partner_validation": true,
     "core_logic": "Entwurf/Randforschung, keine automatische Freigabe oder 1:1-WP-Seitenerstellung, einzelne Module/Funktionen können Zubehör/Crosslink statt neues Produkt sein.",
     "audience_rule": "Privat und Kleinbetrieb kaufnah; Industrie nur bei ausschließlich industrieller Nutzbarkeit. Magazin/Glossar/Modellregister/Finder/HivePress für alle gemeinsam."
+  },
+  "research_round_v8": {
+    "date": "2026-11-10",
+    "scope": "Kategorienkonzept konkret -> letzte WP-Seite für eine funktional abgegrenzte Produktart, frei ermittelte flache individuelle Vertiefungskategorien; weitere belegorientierte Randprodukte",
+    "base_master_revision": 13,
+    "base_types": 68,
+    "previous_frontier": 163,
+    "new_research_candidates": 11,
+    "total_frontier": 174,
+    "new_ids": [
+      "rf164",
+      "rf165",
+      "rf166",
+      "rf167",
+      "rf168",
+      "rf169",
+      "rf170",
+      "rf171",
+      "rf172",
+      "rf173",
+      "rf174"
+    ],
+    "existing_rechecks": [
+      "rf130",
+      "rb060"
+    ],
+    "content_depth_owner": "content_depth_v8 in derselben Masterdatei",
+    "no_keywords": true,
+    "no_seo": true,
+    "no_wp_write": true,
+    "no_plugin_changes": true,
+    "shared_services": "EIN Magazin/Glossar/Modellregister/Finder/Anzeigenmarkt privat und industriell gemeinsam",
+    "buyer_gate": "Private ODER kleine betriebliche Verwendung -> käufernah unabhängig von Industrieherkunft; nur ausschließlich großindustrielle Fälle über Industrie; offene Fälle bleiben offen",
+    "practical_categories": "Je funktional eindeutige Produktseite keine Pflichtkategorien, jede vorgeschlagene Vertiefung nur bei mindestens 3 verschiedenen artikeltragfähigen Themen, 3–5 typisch; 1–2 auf Produktseite oder sachlich bündeln, keine Obergrenze",
+    "status": "FACHENTWURF_OHNE_WP_FREIGABE"
   }
 }
