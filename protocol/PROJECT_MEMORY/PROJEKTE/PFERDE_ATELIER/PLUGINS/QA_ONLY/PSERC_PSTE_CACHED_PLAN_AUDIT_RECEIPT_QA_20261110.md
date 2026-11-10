@@ -1,3 +1,5 @@
+> **NEUERER QA-STAND (10.11.2026):** Diese frühe Prüfung ist überholt: A/B lieferte generische Artikeltyp-Absicht statt ursprünglicher SEO-Suchabsicht; die ursprüngliche Audit-Reparatur validierte nur das Nachweisformat. Der korrigierte, dreifach wiederholte Gesamttest (**5.562/5.562 PASS**) samt hartem QA-Quellpatch liegt in [PSTE_PSERC_GESAMTQA_ECHTQUELLEN_INTENT_WIEDERANLAUF_20261110.md](PSTE_PSERC_GESAMTQA_ECHTQUELLEN_INTENT_WIEDERANLAUF_20261110.md). **Keine Plugin-Installation oder Livefreigabe aus diesem historischen Protokoll ableiten.**
+
 # PSERC/PSTE – echter alter Redaktionsplan wird trotz neuem PSTE-Urteil wiederverwendet (QA 10.11.2026)
 
 **Status: QA-Quellfix und lokale Wiederholungstests. NICHT installierbar, keine WordPress- oder K0-Liveänderungen. Kein neuer Plugin-Release.**
