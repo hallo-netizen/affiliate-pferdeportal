@@ -1,5 +1,5 @@
 # Robotik-Magazin – einziger redaktioneller CURRENT
-Stand 09.11.2026 | **Konzept + Forschung gespeichert; nicht auf WordPress veröffentlicht.**
+Stand 10.11.2026 | **Konzept + Forschung gespeichert; nicht auf WordPress veröffentlicht.**
 
 ## Drei Unterbüros
 - ROBOTERREGISTER: [vier Pilotmodelle](ROBOTERREGISTER/MODELLE_PILOT_V1.json) mit Herstellerquellen und individuell passenden Eigenschaften. Herstellerangaben ≠ unabhängiger Test; keine Shopangebote belegt.
@@ -24,3 +24,6 @@ Kategorie-Master Revision 8 (aktuell): 68 Ausgangstypen plus 139 Forschungs-Rand
 - Forschung/noch nicht angekündigt lieferbare Angebote bleiben hier als Zukunfts-/Entwicklungsthemen: Apfelblüten-Ausdünnungsrobotik (OSKAR), Pilzernterobotik (Studie), Bienenstockinspektion (TRL2), Golfbunker-Pflege und Tennisballsammeln (Hersteller: Coming Soon).
 - Aerones Rotorblattreparatur ist zunächst eine **HIVEPRESS-Dienstleister-/Leistungskategorie**, kein zusätzliches Hersteller-Geräte-Owner; im Magazin bei Bedarf technische Entwicklung erläutern.
 - Detailkonzept und klare Beispiele ohne SEO-Recherche: [NISCHEN_KONZEPT_V3_20261109.md](../KATEGORIE/RECHERCHE/NISCHEN_KONZEPT_V3_20261109.md). Masterdaten ausschließlich im Kategorie-Fachmaster, keine eigene Liste der 139 Forschungsidentitäten hier.
+
+## Trennung von kurzer CORE-Navigation – 10.11.2026
+Die **acht** kurzen Hauptwelten des CORE-Portals stehen in der einen aktuellen `../KATEGORIE/RECHERCHE/PRODUKTE_V2_20261108.json`, Revision **10**, Feld `navigation_v1`. Magazin/Journal bleibt eigenständige **zweite Säule** mit Register, Glossar, Finder und übergreifenden Fachinhalten. Keine zweite Robotertyp-Produkttaxonomie im Magazin, kein automatisches Spiegeln der acht Produktwelten als Magazinrubriken. Anzeigenmarkt/HivePress ist die **dritte Säule** mit echten Anbieter-/Dienstleistungs-Intents. Kurze Labels werden durch H1/Meta erläutert. Hier keine SEO-Arbeit oder WordPress-Änderung.
