@@ -1,0 +1,25 @@
+{
+  "audit_date": "2026-11-10",
+  "plugin_source": "6.72.321 QA9",
+  "original_unchanged": true,
+  "catalog_declared": 324,
+  "non_goods_product_concept_ids_count": 26,
+  "non_goods_hub_concept_ids_count": 5,
+  "required_goods_count": 298,
+  "non_goods_ids_in_csv": [],
+  "csv_rows": 138,
+  "csv_zero_result_rows_including_technical": 44,
+  "csv_technical_error_rows": 1,
+  "csv_camera": {
+    "id": "concept-anhangerkameras",
+    "offers_in_subset": 3,
+    "rejection_reasons": "ebay_portal_topic_negative: 2 | ebay_marketplace_mismatch: 1",
+    "concept_missing_in_this_row": false
+  },
+  "php_test": "EBAY_QA9_KEINE_TOTSUCHEN_PHP_20261110.log",
+  "php_tests_all_pass": true,
+  "same_run_behavior": "already-targeted families do not start a new discovery; only newly missing ids can expand scope once",
+  "future_behavior": "uncovered safe supply gaps may be rechecked in the next scheduled canonical run, not permanently blacklisted",
+  "live_wp_db_test": false,
+  "no_releases_or_live_changes": true
+}
