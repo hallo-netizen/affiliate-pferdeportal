@@ -3147,6 +3147,14 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "audience_fit_research_v7": {
+        "source_url": "https://eu.hypershell.tech/en-de/",
+        "observation": "Hypershell Exoskelette für Wandern und Reisen direkt in Deutschland angeboten; nicht nur klinische oder Industrieanwendung",
+        "proposed_buyer_entry": "Freizeit & Lernen",
+        "decision": "BUYER_MAIN_REVIEW_NOT_INDUSTRY_ONLY",
+        "limits": "Hersteller-/Händlerbeleg für Anwendung, keine deutsche SEO-Nachfrage, sichere Nutzung oder Affiliate-Partnerschaft",
+        "checked_at": "2026-11-10"
       }
     },
     {
@@ -4288,6 +4296,14 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "audience_fit_research_v7": {
+        "source_url": "https://www.chasing.com/de/underwater-drones.html",
+        "observation": "CHASING unterscheidet Verbraucher-Unterwasserdrohnen von Industrie-ROV; auch Hobby, Boote und kleine Anbieter können Zielgruppe sein",
+        "proposed_buyer_entry": "Freizeit & Lernen",
+        "decision": "BUYER_MAIN_REVIEW_NOT_INDUSTRY_ONLY",
+        "limits": "Hersteller-/Händlerbeleg für Anwendung, keine deutsche SEO-Nachfrage, sichere Nutzung oder Affiliate-Partnerschaft",
+        "checked_at": "2026-11-10"
       }
     },
     {
@@ -4926,11 +4942,19 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "audience_fit_research_v7": {
+        "source_url": "https://eu.robotshop.com/de/pages/unitree-robotics",
+        "observation": "Unitree G1 und ähnliche Entwicklungsplattformen bei EU-Händlern; Hobby-/Entwicklungsangebote nicht automatisch nur Forschung/Industrie",
+        "proposed_buyer_entry": "Freizeit & Lernen",
+        "decision": "BUYER_MAIN_REVIEW_NOT_INDUSTRY_ONLY",
+        "limits": "Hersteller-/Händlerbeleg für Anwendung, keine deutsche SEO-Nachfrage, sichere Nutzung oder Affiliate-Partnerschaft",
+        "checked_at": "2026-11-10"
       }
     }
   ],
   "canonical_source": true,
-  "revision": 12,
+  "revision": 13,
   "research_state": "UNAPPROVED",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
@@ -5642,6 +5666,14 @@
         "kind": "HERSTELLER_PRODUKT_BZW_SERVICE_BELEGT",
         "checked_at": "2026-11-09",
         "note": "Existenz/Produktfunktion belegt, keine SEO-Zahlen, keine Marktverfügbarkeit in Deutschland abgenommen"
+      },
+      "audience_recheck_v7": {
+        "source_url": "https://keelcrab.com/en/boats-underwater-mechatronics/",
+        "context": "Keelcrab für private Yachten und Boote bis 65 Fuß, Pro-Variante für kleine Dienstleister",
+        "decision": "PRIVATE_AND_SMALL_BUSINESS_ENTRY",
+        "no_new_duplicate_id": true,
+        "checked_at": "2026-11-10",
+        "limits": "EU-Händler-/Partnerkonditionen offen"
       }
     },
     {
@@ -8810,6 +8842,13 @@
         "checked_on": "2026-11-09",
         "keyword_evaluation": "NICHT_DURCHGEFÜHRT",
         "wordpress_release": false
+      },
+      "related_market_observation_v7": {
+        "source_url": "https://beewise.ag/robi",
+        "observation": "Beewise zeigt ROBI als autonome Bienenstock-Betreuungsplattform; von bisherigem Gratheon-Konzept getrennt nach Hersteller/Produktstand prüfen.",
+        "status": "HERSTELLER_PRODUKTDARSTELLUNG_BEZUG_UNGEKLART",
+        "no_new_duplicate_id": true,
+        "checked_at": "2026-11-10"
       }
     },
     {
@@ -8833,6 +8872,15 @@
         "checked_on": "2026-11-09",
         "keyword_evaluation": "NICHT_DURCHGEFÜHRT",
         "wordpress_release": false
+      },
+      "evidence_recheck_v7": {
+        "checked_at": "2026-11-10",
+        "source_url": "https://www.tennibot.com/tennis/players/",
+        "observation": "Tennibot Rover als autonomer Tennisball-Sammelroboter vom Hersteller mit Buy-now angeboten. Frühere Reeman-Quelle zu anderen Tennisballrobotern war nur angekündigt; die Produktgruppe ist daher nicht mehr pauschal nur Coming Soon.",
+        "proposed_owner": "CORE_PRODUCT_CANDIDATE_WITH_REGION_CHECK",
+        "product_scope": "Tennis-/Padel-/Pickleball-Bälle einsammeln, NICHT Ballzuspiel (rf148)",
+        "eu_availability": "NICHT_GEPRUEFT",
+        "affiliate_status": "NICHT_GEPRUEFT"
       }
     },
     {
@@ -8895,6 +8943,512 @@
       "wp_release": "UNAPPROVED_RESEARCH",
       "buyer_relevance_v3": "Hersteller beschreibt automatisierte Räumung privater Einfahrten und Wege; Kauf-/Lieferstatus und deutsche Einsatzvorschriften vor einer Affiliate-Einbindung gesondert prüfen.",
       "source_checked": "2026-11-10"
+    },
+    {
+      "id": "rf141",
+      "name": "Solar-Pooloberflächen-Skimmerroboter",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Haushalt & Garten",
+      "source_url": "https://bettabot.com/",
+      "evidence_grade": "HERSTELLER_SHOP",
+      "related_existing_id": "rb063",
+      "non_duplication_rule": "Fängt schwimmende Blätter/Insekten; eine andere Hauptfunktion als der bestehende Poolbodenreiniger",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Oberflächenreinigung bei Laub und Pollen",
+        "Sonnen-/Akkubetrieb und Schattenzeiten",
+        "Kombination mit Bodenreinigungsrobotern"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf142",
+      "name": "Automatische Katzentoiletten-Reinigungsgeräte",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "AUTOMATISIERUNGS_RANDBEREICH",
+      "proposed_location": "Haushalt & Garten",
+      "source_url": "https://www.litter-robot.com/eu/comparison-chart/",
+      "evidence_grade": "HERSTELLER_EU_SHOP",
+      "related_existing_id": "rb065",
+      "non_duplication_rule": "Selbsttätig rotierende Reinigungsanlage; fragliche Robotik-Abgrenzung, nicht automatisch vollwertige autonome Roboterart",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Unterschied zu rein automatischem Katzenklo",
+        "Sensoren und Katzensicherheit",
+        "Beutel, Geruchsfilter und Reinigung"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf143",
+      "name": "Mobile Haustier-Überwachungsroboter",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Haushalt & Garten",
+      "source_url": "https://de.store.enabot.com/",
+      "evidence_grade": "HERSTELLER_DE_SHOP",
+      "related_existing_id": "rb025",
+      "non_duplication_rule": "Mobile Kamera-/Patrouillenfunktion; nicht doppelt als allgemeiner Telepräsenzroboter anlegen",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Selbstständige Patrouille und Dockingstation",
+        "Haustierbeobachtung vs. Sicherheitsmonitoring",
+        "Privatsphäre, App-Zugang und Nutzung ohne Cloud"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf144",
+      "name": "Interaktive Roboterhaustiere",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE_WITH_OVERLAP_REVIEW",
+      "proposed_location": "Freizeit & Lernen",
+      "source_url": "https://www.mindtecstore.com/Keyi-Loona-Robot-Premium-Set-Petbot-KI-Roboter-mit-Ladestation",
+      "evidence_grade": "HAENDLER_DE_LISTING",
+      "related_existing_id": "rb066",
+      "non_duplication_rule": "Spiel-/Interaktionsfunktion wichtiger als mobile Kamerapatrouille; klare Abgrenzung zu rf143 und Roboterhund-Plattformen",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Bewegung und Interaktion im Wohnzimmer",
+        "Lernspiele gegenüber reinen Kamerarobotern",
+        "Akkubetrieb und Ersatzteile"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf145",
+      "name": "Grillreinigungsroboter",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Haushalt & Garten",
+      "source_url": "https://grillbots.com/",
+      "evidence_grade": "HERSTELLER_SHOP",
+      "related_existing_id": "rb060",
+      "non_duplication_rule": "Spezielle Grillrost-Reinigung, nicht mit Boden- oder Fensterrobotern verwechseln",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Geeignete Rostoberflächen und Bürsten",
+        "Sicherer Einsatz bei ausgeschaltetem Grill",
+        "Reinigungszyklen und Verschleiß"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf146",
+      "name": "Sportplatz-Linienmarkierungsroboter",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Freizeit & Lernen",
+      "source_url": "https://turftank.com/de/",
+      "evidence_grade": "HERSTELLER_B2B_ANFRAGE",
+      "related_existing_id": "rb048",
+      "non_duplication_rule": "Sportflächen statt Baustellenmarkierung; Vereine und Sportstätten als kleine Betreiber",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Markierung unterschiedlicher Spielfelder",
+        "Vermessung und Nachmarkierung",
+        "Miete, Kauf und Farben für Vereine"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf147",
+      "name": "Tischtennis-Trainingsroboter",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Freizeit & Lernen",
+      "source_url": "https://de.butterfly.tt/b-amicus-prime.html",
+      "evidence_grade": "HERSTELLER_DE_SHOP",
+      "related_existing_id": "rb066",
+      "non_duplication_rule": "Automatische variable Ballzuspielung; eigenständige Sportgeräte-Klasse, nicht Lernroboter",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Ballrotation und Trainingsprogramme",
+        "Aufstellung in Vereins- und Hobbyräumen",
+        "Verschleißteile und Ballfangnetze"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf148",
+      "name": "Mobile Tennis- und Padel-Trainingsroboter",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Freizeit & Lernen",
+      "source_url": "https://www.tennibot.com/",
+      "evidence_grade": "HERSTELLER_SHOP_US",
+      "related_existing_id": "rf137",
+      "non_duplication_rule": "Beweglicher Zuspielroboter; Sammelrobot ist anderer Zweck und bleibt unter rf137",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Positionswechsel und variable Schlagwinkel",
+        "Tennis vs. Padel vs. Pickleball",
+        "Aufladbare Trainingssysteme und Training ohne Partner"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf149",
+      "name": "Zeichen- und Schreibroboter",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Freizeit & Lernen",
+      "source_url": "https://bantamtools.com/collections/art-machine-store",
+      "evidence_grade": "HERSTELLER_SHOP_US",
+      "related_existing_id": "rb066",
+      "non_duplication_rule": "Plotterartige Roboter für Stiftzeichnung, Kalligrafie und kreative Kleinserien; nicht mit industriellen CNC-Fräsern gleichsetzen",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Schrift-/Kalligrafieanwendungen",
+        "Papiergrößen und geeignete Stifte",
+        "Kleinserien bei Kreativen und Papeterien"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf150",
+      "name": "Beetpflege- und Pflanzroboter für Kleingärten",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE_WITH_OVERLAP_REVIEW",
+      "proposed_location": "Haushalt & Garten",
+      "source_url": "https://farm.bot/pages/genesis",
+      "evidence_grade": "HERSTELLER_PRODUKT",
+      "related_existing_id": "rb038",
+      "non_duplication_rule": "FarmBot als mehrteilige Beetpflegeplattform für kleine Anbauflächen; nicht vier gleiche Produkte aus Säen, Gießen, Fräsen erzeugen",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Automatisches Säen und Werkzeugwechsel",
+        "Bewässerung und Bodenmessung",
+        "Aufbau von Hochbeeten und Stromversorgung"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf151",
+      "name": "Roboterkamerawagen für Videoproduktion",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Freizeit & Lernen",
+      "source_url": "https://edelkrone.com/products/krone-x-compact",
+      "evidence_grade": "HERSTELLER_KONFIGURIERBARER_SHOP",
+      "related_existing_id": "rb014",
+      "non_duplication_rule": "Programmierte Kamerafahrten für Creator und kleine Studios; nicht normale mobile Transportroboter oder statische Gimbals",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Wiederholbare Fahrbewegungen am Filmset",
+        "Kombination mit Kameraarm und Schwenkkopf",
+        "Transport und Aufbau in kleinen Studios"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf152",
+      "name": "Robotische Schachbretter",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Freizeit & Lernen",
+      "source_url": "https://support.particula-tech.com/article/what-type-of-gochess-versions-are-there-and-what-are-the-differences-between-the?product=gochess",
+      "evidence_grade": "HERSTELLER_PRODUKT_NICHT_STOCK_BESTAETIGT",
+      "related_existing_id": "rb066",
+      "non_duplication_rule": "Nur GoChess XR bewegt Figuren selbst; LED-Schachbretter ohne Motor sind kein Schachroboter",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Selbstbewegende Figuren vs. LED-Hinweise",
+        "Training gegen Computer oder Onlinegegner",
+        "Spielmodi, Figurenpflege und Transport"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf153",
+      "name": "Aquarium-Scheibenreinigungsroboter",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "CORE_RESEARCH_AVAILABILITY_OPEN",
+      "proposed_location": "Haushalt & Garten",
+      "source_url": "https://www.moaidevices.com/de",
+      "evidence_grade": "HERSTELLER_SEITE_KEIN_VERFUEGBARKEITSNACHWEIS",
+      "related_existing_id": "rb063",
+      "non_duplication_rule": "Aquariumscheiben statt Poolglas und Aquakultur-Netz; Robotikprodukt sichtbar, Bezugsweg nicht belegt",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Magnetische Scheibenführung und Glasstärken",
+        "Algenentfernung bei Aquarienbewohnern",
+        "Reinigungsplan und Fernüberwachung"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf154",
+      "name": "Mehrzweck-Innenausbauroboter",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Handwerk",
+      "source_url": "https://okibo.com/applications/",
+      "evidence_grade": "HERSTELLER_B2B_PRODUKT",
+      "related_existing_id": "rb009",
+      "non_duplication_rule": "Okibo EG7 kombiniert Schleifen, Grundieren und Streichen; ein Mehrzwecksystem, keine künstlichen Farb-/Schleif-/Spachtel-Duplikate",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Wände schleifen, streichen und spachteln",
+        "Wechselwerkzeuge und Einsatz in Wohnbauten",
+        "Transport, Baustelleneignung und Wirtschaftlichkeit"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf155",
+      "name": "Selbstfolgende Roboterkoffer",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Freizeit & Lernen",
+      "source_url": "https://www.airwheel.net/de/product/sr5",
+      "evidence_grade": "HERSTELLER_PRODUKT_STOCK_OFFEN",
+      "related_existing_id": "rb014",
+      "non_duplication_rule": "Persönliches autonomes Reisegepäck statt gewerblicher Transportroboter",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Folgemodus und Hinderniserkennung",
+        "Handgepäck und Akkuregeln",
+        "Nutzung im Bahnhof und auf Reisen"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf156",
+      "name": "Wasseroberflächen-Müllsammelroboter",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Reinigung",
+      "source_url": "https://www.ranmarine.io/",
+      "evidence_grade": "HERSTELLER_B2B_PRODUKT",
+      "related_existing_id": "rf014",
+      "non_duplication_rule": "Für Yachthäfen, kleine Wasserbetriebe, Städte; nicht mit Poolskimmern oder Straßensammlern gleichsetzen",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Schwimmender Müll auf Hafen- und Teichflächen",
+        "Manuell gesteuerte vs. autonome Systeme",
+        "Wartung, Wasserqualität und Einsatzgebiete"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf157",
+      "name": "Wäschefaltroboter für Haushalte",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "MAGAZIN_MARKTBEOBACHTUNG",
+      "proposed_location": "Haushalt & Garten",
+      "source_url": "https://www.weaverobotics.com/isaac-0",
+      "evidence_grade": "REGIONAL_BEGRENZTE_PILOTAUSLIEFERUNG_US",
+      "related_existing_id": "rb065",
+      "non_duplication_rule": "Isaac 0 liefert nach Hersteller in Kalifornien begrenzt, teils fernassistiert; noch keine DE-Kaufseiten-Behauptung",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Technikstand von Haushalt-Faltrobotern",
+        "Fernassistenz und Privatsphäre",
+        "Regionale Verfügbarkeit und Anschlussbedingungen"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf158",
+      "name": "Massageroboter für Wellnessbetriebe",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "CORE_PRODUCT_B2B_CANDIDATE",
+      "proposed_location": "Gastro & Handel",
+      "source_url": "https://www.capsix.com/de/startseite/",
+      "evidence_grade": "HERSTELLER_B2B_ANFRAGE",
+      "related_existing_id": "rb042",
+      "non_duplication_rule": "Professionelle robotische Massage für Hotels/Spas; kein automatisch frei kaufbares Privatgerät und keine medizinische Wirksamkeit behaupten",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Unterschied zwischen Wellness und Therapie",
+        "Einführung in kleinen Spas und Hotels",
+        "Sicherheitsnachweise, Schulung und Wartung"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf159",
+      "name": "Nagellackierroboter für zuhause",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "MAGAZIN_TREND_NICHT_CORE_FREIGEGEBEN",
+      "proposed_location": "Haushalt & Garten",
+      "source_url": "https://www.nimblebeauty.com/",
+      "evidence_grade": "KONZERNUEBERNAHME_VERFUEGBARKEIT_UNGEKLART",
+      "related_existing_id": "rb065",
+      "non_duplication_rule": "Nimble wurde laut Hersteller von 10Beauty übernommen; US-only Versand aus älterer FAQ, heutige Lieferbarkeit unbewiesen",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Automatische Nagelerkennung und Lackierung",
+        "Kapselsystem und wiederkehrender Verbrauch",
+        "Regionale Marktlage und Bedienung"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf160",
+      "name": "Vierbeinige Roboterplattformen für Hobby und Betriebe",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Freizeit & Lernen",
+      "source_url": "https://eu.robotshop.com/de/pages/unitree-robotics",
+      "evidence_grade": "HAENDLER_EU_LISTINGS_STOCK_WECHSELT",
+      "related_existing_id": "rb068",
+      "non_duplication_rule": "Unitree Go2 AIR/PRO und EDU als Hobby-/Entwicklungsplattform; von Mini-Spielzeug-Loona und festem Industrieinspektionsroboter abgrenzen",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Unterhaltung vs. Entwicklung mit Robotersoftware",
+        "Treppen, Akku und Sicherheitsumgebung",
+        "EU-Vertrieb und Preisunterschiede der Modelle"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf161",
+      "name": "Kompakte Tisch-Roboterarme",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Freizeit & Lernen",
+      "source_url": "https://de.dobot-robots.com/products/education/magician.html",
+      "evidence_grade": "HERSTELLER_PRODUKT_PREIS_ANFRAGE",
+      "related_existing_id": "rb007",
+      "non_duplication_rule": "Dobot Magician für Hobby/Lehre und kleine Arbeitsplätze; nicht ohne Funktionsprüfung mit industrieller SCARA-Montage zusammenführen",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Greifwerkzeuge und kleine Werkstücke",
+        "Grafische Programmierung und Schulungsnutzung",
+        "Sichere Einrichtung und kleine Tischflächen"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf162",
+      "name": "Mobile E-Auto-Laderoboter",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "MAGAZIN_PILOT_PLUS_B2B_RESEARCH",
+      "proposed_location": "Logistik",
+      "source_url": "https://evsafecharge.com/ZiGGY/",
+      "evidence_grade": "PILOT_KONTAKT_KEIN_SERIENSHOP",
+      "related_existing_id": "rb014",
+      "non_duplication_rule": "ZiGGY als mobile Ladeplattform im Pilot; als Service für Hotels/Parkplätze denkbar, nicht als kaufbares Haushaltsgerät ausgeben",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Laden auf mehreren Parkplätzen ohne feste Säule",
+        "Geschäftsmodell bei Hotels und Parkbetreibern",
+        "Unterschied Pilot zu Lieferprodukt"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+    },
+    {
+      "id": "rf163",
+      "name": "Modulare Gartenpflege-Plattformen mit Laubbläser",
+      "topic_kind": "NEW_EDGE_PRODUCT_GROUP_REVIEW",
+      "proposed_owner": "CORE_CROSSLINK_ACCESSORY_REVIEW",
+      "proposed_location": "Haushalt & Garten",
+      "source_url": "https://eu.yarbo.com/collections/modules",
+      "evidence_grade": "HERSTELLER_MODULSYSTEM_EU",
+      "related_existing_id": "rb062",
+      "non_duplication_rule": "Ein Yarbo Core plus Mäh-/Schnee-/Laub-/Trimmer-Modul; prüfen, ob Laubblasen eigenständige Produktseite oder Zubehör/Querverweis ist, keine vier Roboterkopien",
+      "usecase_evidence_v7": "Produkt-/Hersteller-/Händlerdarstellung; keine unabhängige Leistungs- oder Affiliate-Verifizierung",
+      "article_directions_v7": [
+        "Einsatz von Laub- und Schneemodulen",
+        "Umrüstvorgang und Moduleinkauf",
+        "Akkus und Routenplanung im Garten"
+      ],
+      "buyer_scope": "PRIVATE_OR_SMALL_BUSINESS_EXCEPT_SPECIAL_REVIEW",
+      "checked_at": "2026-11-10",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
     }
   ],
   "research_expansion": {
@@ -8905,7 +9459,7 @@
     "wp_plan_unchanged": true,
     "evidence_grade_note": "Herstellerbeleg bestaetigt Existenz einzelner Loesungen, nicht Marktgroesse/DE-Keyword oder Kategoriefreigabe."
   },
-  "concept_status": "BUYER_FIRST_SHARED_NONCORE_AUDIENCE_GATE_RESEARCH_V3_NOT_WP_APPROVED",
+  "concept_status": "RESEARCH_REV13_PRELIMINARY_NOT_WP_APPROVED",
   "knowledge_views_v1": {
     "status": "PROPOSAL_ONLY",
     "concept_document": "RECHERCHE/GLOSSAR_FINDER_MODELLREGISTER_V1_20261109.md",
@@ -9430,5 +9984,51 @@
       "new_niche": "rf140",
       "evidence_scope": "7 Hersteller-Einsatzbeispiele für 7 bestehende Typ-IDs; 1 neuer, noch ungeprüfter Schneeräum-Nischenkandidat; keine 68-fache Vollabnahme."
     }
+  },
+  "research_round_v7": {
+    "focus": "Weitere Robotik-Produktgruppen sowie Nischen/Randbereiche für Privatpersonen und kleine Betriebe ohne industrielle Herkunftsgrenze",
+    "baseline_revision": 12,
+    "base_candidate_ids_retained": 68,
+    "previous_frontier_count": 140,
+    "new_frontier_count": 23,
+    "frontier_count": 163,
+    "new_product_and_border_types": [
+      "rf141",
+      "rf142",
+      "rf143",
+      "rf144",
+      "rf145",
+      "rf146",
+      "rf147",
+      "rf148",
+      "rf149",
+      "rf150",
+      "rf151",
+      "rf152",
+      "rf153",
+      "rf154",
+      "rf155",
+      "rf156",
+      "rf157",
+      "rf158",
+      "rf159",
+      "rf160",
+      "rf161",
+      "rf162",
+      "rf163"
+    ],
+    "rechecked_existing": [
+      "rf137",
+      "rf002",
+      "rf136",
+      "rb043",
+      "rb059",
+      "rb068"
+    ],
+    "no_wp_changes": true,
+    "no_seo_keyword_calls": true,
+    "no_affiliate_partner_validation": true,
+    "core_logic": "Entwurf/Randforschung, keine automatische Freigabe oder 1:1-WP-Seitenerstellung, einzelne Module/Funktionen können Zubehör/Crosslink statt neues Produkt sein.",
+    "audience_rule": "Privat und Kleinbetrieb kaufnah; Industrie nur bei ausschließlich industrieller Nutzbarkeit. Magazin/Glossar/Modellregister/Finder/HivePress für alle gemeinsam."
   }
 }

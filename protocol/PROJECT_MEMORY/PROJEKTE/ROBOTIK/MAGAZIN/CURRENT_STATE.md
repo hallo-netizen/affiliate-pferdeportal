@@ -36,3 +36,9 @@ Magazin, Glossar, Modellregister und Finder **nur je einmal** für alle Zielgrup
 - Nur die kaufnahe CORE-Navigation ist nach potentiellen Käufern gewichtet. Industrieller Ursprung eines Roboters ist kein automatisches Kriterium für Industrie-only.
 - Einziger Kategorie-Fachmaster jetzt Revision **12**, 68 Grundtypen, **140** Randfälle einschließlich privater Schneeräumroboter rf140. 7 belegte Kleinbetriebs-Grenzfälle; daraus keine automatische Finder-Eignung, WordPress- oder Affiliate-Freigabe ableiten.
 - Details und Belege im KATEGORIE/RECHERCHE/ZIELGRUPPEN_NAVIGATION_V5_20261110.md. Keine WP-, Plugin- oder Keywordarbeit.
+
+## 10.11.2026 – Neue Randgruppenrecherche, Fachmaster Revision 13
+- Magazin, Glossar, Modellregister und Finder bleiben **gemeinsam** für Privatpersonen, kleinere Betriebe, Industrie und Forschung. Ebenso EIN gemeinsamer HivePress-Anzeigenmarkt. Keine doppelte Datenhaltung; nur eine klare Produkt-/Inhaltsrolle.
+- Einziger `KATEGORIE/RECHERCHE/PRODUKTE_V2_20261108.json` Master jetzt **Revision 13**, **68 Grundtypen + 163 Randforschungsfälle**. 23 neue belegorientierte Fälle seit Revision 12, davon einzelne nur Automatisierung, Zubehör/Modulsystem, regional begrenztes Pilotprodukt oder B2B-Anfrage. Keine 23 automatisch freigegebenen Magazin- oder WP-Seiten. Details: [Nischen- und Randgruppen-Audit](../KATEGORIE/RECHERCHE/RANDGRUPPEN_NISCHEN_AUDIT_V7_20261110.md).
+- Magazin übernimmt nur übergreifende Grundlagen, Forschung und Entwicklung, **keine Kopie** der kaufnahen CORE-Produkttypseite. Verfügbarkeit/Kaufberatung bleibt im CORE, Angebote/Dienstleistungen im Anzeigenmarkt. Der Finder darf keine ungesicherten Herstellerbehauptungen als überprüfte Eignung zeigen.
+- Keine WordPress-, Plugin-, Affiliate- oder SEO-Abfrage vorgenommen.
