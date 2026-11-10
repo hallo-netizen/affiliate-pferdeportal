@@ -1,0 +1,34 @@
+name: K0 editorial-owner-only QA (isolated)
+on:
+  push:
+    branches:
+      - qa/k0-editorial-owner-only-20261110
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Confirm no changes to authoring, LanguageTool or WordPress export
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code origin/konzept0-portal-neutral-20261002 -- \
+            engine/k0_writer_station.py \
+            engine/writer_contract_guard.py \
+            engine/k0_wordpress_export.py \
+            engine/lt68_external.py \
+            .github/workflows/k0-writer-accept.yml \
+            .github/workflows/k0-authoring-context.yml
+      - name: Python syntax
+        run: python3 -m compileall -q engine tests
+      - name: Existing full K10 regression suite
+        run: python3 -m unittest discover -s tests -p test_k10.py -v
+      - name: New K0 editorial-owner regression suite
+        run: python3 -m unittest discover -s tests -p test_k0_seo_owner_qa.py -v
