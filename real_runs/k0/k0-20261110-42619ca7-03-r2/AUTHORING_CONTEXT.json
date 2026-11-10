@@ -1,0 +1,183 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "Beratung",
+    "category": "pferdedecken-regendecken-beratung",
+    "plan_slot": "62ae8f6cb8b87e82067770c71fc3233a56709333cc499feac9a7df8fefc9bcd3",
+    "target_keyword": "Regendecke pferd 0g",
+    "title": "Regendecken ohne Füllung für Pferde richtig einsetzen"
+  },
+  "content_profile": {
+    "search_intent": "DECISION_SUPPORT"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "British Horse Society – Umgang mit Pferdedecken",
+          "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/seasonal-care/types-of-rugs-and-rugging-a-horse/"
+        },
+        {
+          "source_title": "Penn State Extension – When to Blanket a Horse",
+          "source_url": "https://extension.psu.edu/when-to-blanket-a-horse"
+        }
+      ],
+      "claims": [
+        "Eine ungefütterte Regendecke mit null Gramm Füllung kann bei leichtem Regen nützlich sein; bei starkem, anhaltendem Regen ist Feuchtigkeit unter der Decke möglich.",
+        "Eine Decke kann das Winterfell flachdrücken und die natürliche Luftpolsterung verringern; mehr Füllung ist deshalb nicht in jeder Situation die beste Entscheidung.",
+        "Pferdefell isoliert durch eingeschlossene Luft; Regen und durchnässtes Fell vermindern diese Wirkung, während Unterstand und ein intaktes Fell schützen können.",
+        "Ob das Pferd eine Decke benötigt, hängt unter anderem von Schur, Alter, Körperzustand, Gewöhnung, Wind, Niederschlag und Unterstand ab; Wärme und Trockenheit sollen kontrolliert werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "Regendecke pferd 0g",
+      "topic": "Regendecken ohne Füllung für Pferde richtig einsetzen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdedecken-regendecken-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Eine ungefütterte 0-g-Regendecke nur einsetzen, wenn Schutzbedarf, Witterung und Pferd zusammenpassen",
+      "decision_criteria": [
+        "Nässeschutz von zusätzlicher Wärmedämmung unterscheiden",
+        "Winterfell, Schur und Unterstand individuell einbeziehen",
+        "Sitz, trockene Innenseite und Überhitzung kontrollieren"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "British Horse Society – Umgang mit Pferdedecken",
+        "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/seasonal-care/types-of-rugs-and-rugging-a-horse/",
+        "statement": "Eine ungefütterte Regendecke mit null Gramm Füllung kann bei leichtem Regen nützlich sein; bei starkem, anhaltendem Regen ist Feuchtigkeit unter der Decke möglich.",
+        "evidence_text": "Eine ungefütterte Regendecke mit null Gramm Füllung kann bei leichtem Regen nützlich sein; bei starkem, anhaltendem Regen ist Feuchtigkeit unter der Decke möglich.",
+        "evidence_text_sha256": "095c4c173f532437035c201225e8613c1dc944c62ee4f470feac5ecb346b4d56",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "British Horse Society – Umgang mit Pferdedecken",
+        "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/seasonal-care/types-of-rugs-and-rugging-a-horse/",
+        "statement": "Eine Decke kann das Winterfell flachdrücken und die natürliche Luftpolsterung verringern; mehr Füllung ist deshalb nicht in jeder Situation die beste Entscheidung.",
+        "evidence_text": "Eine Decke kann das Winterfell flachdrücken und die natürliche Luftpolsterung verringern; mehr Füllung ist deshalb nicht in jeder Situation die beste Entscheidung.",
+        "evidence_text_sha256": "39db3d98cb48c697e982242971e1b7a0af8b1c726de8eba2842df53f5c275079",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "Penn State Extension – When to Blanket a Horse",
+        "source_url": "https://extension.psu.edu/when-to-blanket-a-horse",
+        "statement": "Pferdefell isoliert durch eingeschlossene Luft; Regen und durchnässtes Fell vermindern diese Wirkung, während Unterstand und ein intaktes Fell schützen können.",
+        "evidence_text": "Pferdefell isoliert durch eingeschlossene Luft; Regen und durchnässtes Fell vermindern diese Wirkung, während Unterstand und ein intaktes Fell schützen können.",
+        "evidence_text_sha256": "e0bab11cfc64b5dbf8a800d18fc6ffdd12f2a7e0617517d4a8e801d8a0d81fec",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_title": "British Horse Society – Umgang mit Pferdedecken",
+        "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/seasonal-care/types-of-rugs-and-rugging-a-horse/",
+        "statement": "Ob das Pferd eine Decke benötigt, hängt unter anderem von Schur, Alter, Körperzustand, Gewöhnung, Wind, Niederschlag und Unterstand ab; Wärme und Trockenheit sollen kontrolliert werden.",
+        "evidence_text": "Ob das Pferd eine Decke benötigt, hängt unter anderem von Schur, Alter, Körperzustand, Gewöhnung, Wind, Niederschlag und Unterstand ab; Wärme und Trockenheit sollen kontrolliert werden.",
+        "evidence_text_sha256": "3c2b54e0669a8a9d34ab9c61af1511e69721925f1220b00fd5f146e278865990",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+        "anchor": "Regendecken für Pferde im Überblick",
+        "block": "criteria"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/pferdedecken-regendecken-faq/",
+        "anchor": "Häufige Fragen zu Regendecken",
+        "block": "decision"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "anchor": "Regendecken pflegen und reparieren",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-regendecken-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdedecken-regendecken-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Regendecke",
+      "0 g",
+      "Füllung",
+      "ungefüttert",
+      "Regen",
+      "Wind",
+      "Winterfell",
+      "Schur",
+      "Unterstand",
+      "Passform"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die vier Fälle leichter Regen, Dauerregen, milde Wärme und nasskalter Wind unterscheiden sich beim Bedarf nach Nässeschutz und Wärme; die Tabelle bietet eine praktische Entscheidungshilfe."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "criteria"
+  },
+  "publish_allowed": false
+}
