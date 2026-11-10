@@ -11094,6 +11094,47 @@
         "independent": "https://www.automate.org/robotics/industry-insights/automation-is-redrawing-europes-mushroom-industry/aph",
         "finding": "Kommerzielle Installationen in Irland, Kanada, Australien und geplante Niederlande-Einsätze nach Fachbericht vom Juli 2026; ältere reine Forschungsklassifikation überholt. Kauf-/Affiliate-/Kleinbetriebs-Eignung weiterhin separat.",
         "checked_at": "2026-11-10"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_PRODUKTFUNKTION_UND_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Pilzkulturen",
+            "article_directions": [
+              "Unterschiedliche Pilzarten ernten",
+              "Reifegrad erkennen",
+              "Regalebenen und Substrat berücksichtigen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Erntegreifer",
+            "article_directions": [
+              "Pilz ohne Beschädigung aufnehmen",
+              "Ernteroboter kalibrieren",
+              "Stiele schneiden und Verpackung koppeln"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Betrieb",
+            "article_directions": [
+              "Kühlraum und Feuchtigkeit bewerten",
+              "Leistung bei Erntewellen",
+              "Hygiene und Wartungsbedarf"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "category_not_mandatory": true,
+        "no_wp_release": true,
+        "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
       }
     },
     {
@@ -11156,6 +11197,47 @@
         "product_scope": "Tennis-/Padel-/Pickleball-Bälle einsammeln, NICHT Ballzuspiel (rf148)",
         "eu_availability": "NICHT_GEPRUEFT",
         "affiliate_status": "NICHT_GEPRUEFT"
+      },
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_PRODUKTFUNKTION_UND_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Sammelflächen",
+            "article_directions": [
+              "Tennisplätze gegenüber Padelplätzen",
+              "Bälle unter Netzen erkennen",
+              "Zaun- und Randbereiche abfahren"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Sammeltechnik",
+            "article_directions": [
+              "Ballaufnahme und Behälterkapazität",
+              "Routenplanung bei Trainingsbetrieb",
+              "Sammelzeit nach Ballzahl"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Pflege",
+            "article_directions": [
+              "Bürsten und Rollen reinigen",
+              "Transport zwischen Plätzen",
+              "Akku und Ladezyklen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "category_not_mandatory": true,
+        "no_wp_release": true,
+        "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
       }
     },
     {
@@ -11217,7 +11299,48 @@
       "seo_verified": false,
       "wp_release": "UNAPPROVED_RESEARCH",
       "buyer_relevance_v3": "Hersteller beschreibt automatisierte Räumung privater Einfahrten und Wege; Kauf-/Lieferstatus und deutsche Einsatzvorschriften vor einer Affiliate-Einbindung gesondert prüfen.",
-      "source_checked": "2026-11-10"
+      "source_checked": "2026-11-10",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_PRODUKTFUNKTION_UND_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Räumflächen",
+            "article_directions": [
+              "Einfahrten und Gartenwege unterscheiden",
+              "Neigung und Bodenbeläge",
+              "Enge Kanten und Hindernisse"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Schneeverhältnisse",
+            "article_directions": [
+              "Nassschnee und Pulverschnee",
+              "Schneehöhe und Räumbreite",
+              "Auswurf und Ablagebereich"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Winterbetrieb",
+            "article_directions": [
+              "Routen vor Frost einrichten",
+              "Akkulaufzeit bei Kälte",
+              "Schneefräse und Antrieb warten"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "category_not_mandatory": true,
+        "no_wp_release": true,
+        "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
+      }
     },
     {
       "id": "rf141",
@@ -11334,7 +11457,48 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_PRODUKTFUNKTION_UND_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Haustierbeobachtung",
+            "article_directions": [
+              "Mobile Kamerafahrten im Wohnraum",
+              "Rückkehr zur Ladestation",
+              "Tierbewegungen erkennen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Kommunikation",
+            "article_directions": [
+              "Tonübertragung und Haustieransprache",
+              "Benachrichtigungen bei Bewegung",
+              "Nutzung während Abwesenheit"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Privatsphäre",
+            "article_directions": [
+              "Kamerazugriff auf Bewohner",
+              "Cloudspeicherung und Appberechtigungen",
+              "Gerätezugriff im Familienhaushalt"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "category_not_mandatory": true,
+        "no_wp_release": true,
+        "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
+      }
     },
     {
       "id": "rf144",
@@ -11356,7 +11520,48 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_PRODUKTFUNKTION_UND_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Interaktion",
+            "article_directions": [
+              "Spielverhalten und Reaktionen",
+              "Sprach- und Gestensteuerung",
+              "Interaktion mit Kindern und Haustieren"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Bewegung",
+            "article_directions": [
+              "Fahren auf verschiedenen Zimmerböden",
+              "Hindernisse beim Spielen",
+              "Rückkehr zur Ladestation"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Langzeitnutzung",
+            "article_directions": [
+              "Spiele und Inhalte aktualisieren",
+              "Akku und Wartung",
+              "Offlinefunktion und Datenschutz"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "category_not_mandatory": true,
+        "no_wp_release": true,
+        "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
+      }
     },
     {
       "id": "rf145",
@@ -11378,7 +11583,48 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_PRODUKTFUNKTION_UND_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Grillroste",
+            "article_directions": [
+              "Geeignete Rostmaterialien prüfen",
+              "Abstand der Grillstäbe",
+              "Reinigung ohne Kratzer"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Reinigung",
+            "article_directions": [
+              "Startbedingungen nach Abkühlen",
+              "Fett und Eingebranntes entfernen",
+              "Reinigungsdauer und Flächendeckung"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Bürstenpflege",
+            "article_directions": [
+              "Bürstenmaterial und Verschleiß",
+              "Gerät nach Reinigung säubern",
+              "Ersatzbürsten und Akkupflege"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "category_not_mandatory": true,
+        "no_wp_release": true,
+        "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
+      }
     },
     {
       "id": "rf146",
@@ -11551,7 +11797,48 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_PRODUKTFUNKTION_UND_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Trainingsabläufe",
+            "article_directions": [
+              "Ballgeschwindigkeit und Spin",
+              "Links-Rechts-Bewegung",
+              "Trainingsprogramme für Partnerersatz"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Platzbetrieb",
+            "article_directions": [
+              "Aufstellung und Ausrichtung",
+              "Einsatz bei Tennis und Padel",
+              "Sichere Position neben Spielenden"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Bedienung",
+            "article_directions": [
+              "Übungssequenzen speichern",
+              "Ballbehälter und Zuführung",
+              "Transport und Ladezeiten"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "category_not_mandatory": true,
+        "no_wp_release": true,
+        "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
+      }
     },
     {
       "id": "rf149",
@@ -11573,7 +11860,48 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_PRODUKTFUNKTION_UND_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Zeichnungen",
+            "article_directions": [
+              "Stifte und Tinten kombinieren",
+              "Papier- und Kartonformate",
+              "Kalligrafie und Illustrationen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Programmierung",
+            "article_directions": [
+              "Vektordateien vorbereiten",
+              "Zeichenbahnen und Stiftwechsel",
+              "Wiederholbare Kleinserien"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Betrieb",
+            "article_directions": [
+              "Stiftaufnahme einstellen",
+              "Kalibrierung von Zeichenfläche",
+              "Wartung und Reinigung"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "category_not_mandatory": true,
+        "no_wp_release": true,
+        "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
+      }
     },
     {
       "id": "rf150",
@@ -11673,7 +12001,48 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_PRODUKTFUNKTION_UND_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Kamerafahrten",
+            "article_directions": [
+              "Wiederholbare Laufwege planen",
+              "Kurvenfahrten mit Kamera",
+              "Bewegung bei Zeitrafferaufnahmen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Aufbauten",
+            "article_directions": [
+              "Kameragewicht und Schwerpunkt",
+              "Gimbal und Schwenkkopf koppeln",
+              "Sicherheit am Filmset"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Steuerung",
+            "article_directions": [
+              "Fernsteuerung und Bewegungsabläufe",
+              "Akku und Ladeoptionen",
+              "Transport für kleine Produktionen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "category_not_mandatory": true,
+        "no_wp_release": true,
+        "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
+      }
     },
     {
       "id": "rf152",
@@ -11695,7 +12064,48 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_PRODUKTFUNKTION_UND_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Spielmechanik",
+            "article_directions": [
+              "Echte Figuren automatisch bewegen",
+              "Unterschied zu LED-Schachbrettern",
+              "Fehlplatzierungen von Figuren behandeln"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Spielmodi",
+            "article_directions": [
+              "Computergegner und Trainingslevel",
+              "Onlinegegner am echten Brett",
+              "Zugkontrolle und Regelvarianten"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Pflege",
+            "article_directions": [
+              "Figuren und Felder reinigen",
+              "Bewegungsmechanik vor Staub schützen",
+              "Updates und Verbindungssicherheit"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "category_not_mandatory": true,
+        "no_wp_release": true,
+        "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
+      }
     },
     {
       "id": "rf153",
@@ -14135,9 +14545,9 @@
     "no_wordpress_writes": true,
     "policy": "Ein Produkt-Owner nach eigener konkreter Funktion; keine Pflicht-Unterkategorien, mindestens 3 sachlich verschiedene Beitragsabsichten für jede geplante flache Vertiefungskategorie; gemeinsam Magazin, Glossar, Register, Finder und Anzeigenmarkt.",
     "depth_profiles": {
-      "profiles": 24,
-      "categories": 73,
-      "topics": 221
+      "profiles": 34,
+      "categories": 103,
+      "topics": 311
     },
     "depth_ids": [
       "rb002",
@@ -14163,7 +14573,17 @@
       "rb049",
       "rb050",
       "rb051",
-      "rb061"
+      "rb061",
+      "rf135",
+      "rf137",
+      "rf140",
+      "rf143",
+      "rf144",
+      "rf145",
+      "rf148",
+      "rf149",
+      "rf151",
+      "rf152"
     ]
   }
 }
