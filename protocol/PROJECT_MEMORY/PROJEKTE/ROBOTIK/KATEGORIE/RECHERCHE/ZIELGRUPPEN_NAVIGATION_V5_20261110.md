@@ -59,8 +59,29 @@ Alle Landingpages enthalten einzigartige kurze Einführung und eine **real verli
 - SEO-Erfolg durch eine bestimmte Zahl Landingpages ist **nicht belegt**. Die drei Industrie-Unterseiten sind ein **fachlicher Versuch**; eine vierte nur bei eindeutig eigener Unterstruktur. Kein SEO-Volumen oder Konkurrenzcheck jetzt – anderes Plugin später.
 
 ## KISS / Status und Übergabe
-**Einzige robotikweite Forschungs-/Produktdatenquelle**: `KATEGORIE/RECHERCHE/PRODUKTE_V2_20261108.json`, **Revision 11**. Die neue **`audience_navigation_v2`** steuert den *aktuellen sichtbaren Fachentwurf*; `navigation_v1` (acht gleichrangige Produktwelten) und `worlds_v1` (alte zehn Welten) sind **historische Entwurfsstände**, kein gleichzeitiges alternatives aktuelles Menü. Die produktbezogenen Kurzbezeichnungen und Themenpotenziale bleiben dabei erhalten. **68 Ausgangstypen + 139 Randforschungsfälle nicht verändert.**
+**Einzige robotikweite Forschungs-/Produktdatenquelle**: `KATEGORIE/RECHERCHE/PRODUKTE_V2_20261108.json`, **Revision 12**. Die neue **`audience_navigation_v2`** steuert den *aktuellen sichtbaren Fachentwurf*; `navigation_v1` (acht gleichrangige Produktwelten) und `worlds_v1` (alte zehn Welten) sind **historische Entwurfsstände**, kein gleichzeitiges alternatives aktuelles Menü. Die produktbezogenen Kurzbezeichnungen und Themenpotenziale bleiben dabei erhalten. **V5-Ausgangsstand: 68 Grundtypen + 139 Randforschungsfälle. Fortschreibung unten: 68 + 140.**
 
 **Nicht umgesetzt:** WordPress-Menüs, tatsächliche Seiten/URLs, Design/Frontend, Finder-Plugin, Keyword-Recherche, Affiliate-Abschlüsse. Kein Footer-Plugin verändert.
 
 **Nächster fachlicher Schritt:** Bei jedem echten Produkttyp den Zielgruppen-/Einstiegsweg prüfen (direkt kaufnah, Industrie-Landingpage, beide per Link), Hersteller-/Kaufbarkeitsstatus und ggf. Betreiber-Service-Intent unterscheiden. Erst damit die sieben sichtbaren Käufergruppen und drei Industrie-Landingpages endgültig festlegen – keine Produkt-IDs, Inhalte oder Struktur doppeln.
+
+## Fortschreibung 10.11.2026 – Einsatzgrenze statt Industrieherkunft (Nutzerentscheidung, Revision 12)
+
+**Maßgebliche Grenze:** Eine Roboterart, die aus der Industrie stammt oder „Industrieroboter“ heißt, ist deswegen NICHT automatisch dem Industrie-Menü vorbehalten. Sobald eine sinnvolle Nutzung für **Privatpersonen ODER kleinere Betriebe** nachgewiesen oder fachlich plausibel ist, gehört sie zur Prüfung für den kaufnahen Hauptbereich. „Industrie-only“ erst nach belegter Prüfung der tatsächlich ausschließlich großindustriellen/hochspezialisierten Nutzung und fehlender Kleinbetriebs-/Privatvariante. Fehlende Belege => **OFFEN**, nicht automatisch Industrie. Auch kleine Handwerks- und Fertigungsbetriebe sind Käufer-Zielgruppe.
+
+**Navigation:** Sieben Hauptkäufer-Kategorien plus Industrie-Landingpage mit drei Unter-Landingpages bleiben vorläufiger Entwurf. Ein Roboterprodukt hat genau eine kanonische CORE-Produktseite, auch wenn mehrere Menüs oder Industrie-Landingpages darauf verlinken. Die Einordnung nach Nutzung ist unabhängig von der erstmaligen industriellen Entwicklung. Verkauf/Miete, rechtlicher Einsatz, passende Anbieter und Affiliate-Programme müssen **separat** geprüft werden.
+
+**Sämtliche übrigen Bereiche gemeinsam für Privat UND Industrie:** EIN Magazin/Journal, EIN Roboterglossar A–Z, EIN Hersteller-Modellregister, EIN aufgabenorientierter Roboterfinder und EIN Anzeigenmarkt/HivePress. Branchenrubriken, Suche und optionale Filter ja; getrennte Daten, Doppelbeiträge, Glossar-/Modellkopien oder zweiter Marktplatz nein.
+
+**Erste Herstellerbelege (Einsatzbeispiel, kein SEO-/Affiliate- oder Rechtsfreigabe-Beweis):**
+- **Schweißroboter (rb001):** kleine Schweißwerkstatt. https://www.universal-robots.com/case-stories/vattholma-mekano/
+- **Palettierroboter (rb004):** Weinbetrieb mit 10–25 Beschäftigten. https://www.universal-robots.com/case-stories/raumland-gmbh/
+- **CNC-Beschickungsroboter (rb006):** kleine CNC-Werkstatt. https://www.universal-robots.com/case-stories/toolcraft-inc/
+- **Servierroboter (rb022):** kompakte Restaurants und Cafés. https://www.pudurobotics.com/en/news/restaurant-delivery-robots-complete-guide
+- **Gewerbliche Scheuersaugroboter (rb028):** kleine Läden/Hotels, 100–800 m² laut Anbieter. https://www.pudurobotics.com/en/news/pudu-et1-ai-native-compact-scrubber-dryer-robot
+- **Jät- und Säroboter (rb036/rb038):** landwirtschaftliche Betriebe, auch kleinere Flächen; gleiches Mehrzweckmodell nicht als doppelter Produkttyp. https://farmdroid.com/de/products/farmdroid-fd20/
+- **Schneeräumroboter (rf140):** private Einfahrten/Grundstücke; neue Nische mit ungeprüfter Verfügbarkeit. https://de.yarbo.com/products/yarbo-snow-blower
+
+**Master-Fortschreibung:** 68 unveränderte Grundtyp-IDs, 140 statt zuvor 139 Forschungs-Randfälle (neu rf140: Schneeräumroboter für private Einfahrten/Grundstücke; auf Doppelung mit rf031 prüfen). Sieben Grundtypen mit positiv belegtem Einsatz im Kleinbetrieb, übrige **61 Grundtypen bzgl. dieser neuen Prüfung offen**; keine pauschale Umklassifizierung und keine Partnerannahme. Einziger Master Revision 12. **Keine** WordPress-, Plugin-, Keyword-/SEO- oder Import-Aktion.
+
+**Nächster Schritt:** Die übrigen 61 Roboterarten und die 140 Randfälle anhand echter Einsatzbelege, privater/kleinbetrieblicher Eignung, Varianten, Bezugswegen und wirtschaftlichem Affiliate-Potenzial weiter untersuchen. Nur wirklich ausschließlich spezialisierte Anwendungen landen im Industrie-Zweig.
