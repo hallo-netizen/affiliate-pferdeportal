@@ -68,37 +68,37 @@
       "parity_action": "PRESERVE"
     },
     {
-      "canonical_owner": "structural_checker",
-      "canonical_rule_id": "type.question_mark_policy",
-      "canonical_scope": "ARTICLE",
+      "canonical_owner": "external_editorial_title_owner",
+      "canonical_rule_id": "upstream.blocked_content_faq_title_question_mark",
+      "canonical_scope": "UPSTREAM_EDITORIAL",
       "error_code": "BLOCKED_CONTENT_FAQ_TITLE_QUESTION_MARK",
       "failed_rule": "FAQ_TITLE_MUST_END_WITH_QUESTION_MARK",
       "legacy_classification": "REPAIRABLE_CONTENT",
       "legacy_group": "content_validator",
       "legacy_rule_id": "portal-production-machine/includes/content-validator.php:BLOCKED_CONTENT_FAQ_TITLE_QUESTION_MARK:FAQ_TITLE_MUST_END_WITH_QUESTION_MARK",
-      "parity_action": "PRESERVE"
+      "parity_action": "DELEGATED_TO_EXISTING_EDITORIAL_TITLE_OWNER"
     },
     {
-      "canonical_owner": "structural_checker",
-      "canonical_rule_id": "title.colon_forbidden",
-      "canonical_scope": "ARTICLE",
+      "canonical_owner": "external_editorial_title_owner",
+      "canonical_rule_id": "upstream.blocked_content_title_colon",
+      "canonical_scope": "UPSTREAM_EDITORIAL",
       "error_code": "BLOCKED_CONTENT_TITLE_COLON",
       "failed_rule": "ARTICLE_TITLE_MUST_NOT_CONTAIN_COLON",
       "legacy_classification": "REPAIRABLE_CONTENT",
       "legacy_group": "content_validator",
       "legacy_rule_id": "portal-production-machine/includes/content-validator.php:BLOCKED_CONTENT_TITLE_COLON:ARTICLE_TITLE_MUST_NOT_CONTAIN_COLON",
-      "parity_action": "PRESERVE"
+      "parity_action": "DELEGATED_TO_EXISTING_EDITORIAL_TITLE_OWNER"
     },
     {
-      "canonical_owner": "structural_checker",
-      "canonical_rule_id": "title.keyword_required",
-      "canonical_scope": "ARTICLE",
+      "canonical_owner": "external_editorial_title_owner",
+      "canonical_rule_id": "upstream.blocked_content_target_keyword_title",
+      "canonical_scope": "UPSTREAM_EDITORIAL",
       "error_code": "BLOCKED_CONTENT_TARGET_KEYWORD_TITLE",
       "failed_rule": "TITLE_MUST_CONTAIN_TARGET_KEYWORD",
       "legacy_classification": "REPAIRABLE_CONTENT",
       "legacy_group": "content_validator",
       "legacy_rule_id": "portal-production-machine/includes/content-validator.php:BLOCKED_CONTENT_TARGET_KEYWORD_TITLE:TITLE_MUST_CONTAIN_TARGET_KEYWORD",
-      "parity_action": "PRESERVE"
+      "parity_action": "DELEGATED_TO_EXISTING_EDITORIAL_TITLE_OWNER"
     },
     {
       "canonical_owner": "structural_checker",
