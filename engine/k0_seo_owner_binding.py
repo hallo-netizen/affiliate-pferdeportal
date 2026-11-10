@@ -66,6 +66,9 @@ def inspect(manifest):
             raise Blocked('K0_OWNER_UPSTREAM_INTENT_IDENTITY_INVALID')
         if not _hex64(profile.get('profile_sha256')):
             raise Blocked('K0_OWNER_PROFILE_HASH_MISSING')
+        profile_core={k:v for k,v in profile.items() if k not in ('profile_sha256','analysis_sha256')}
+        if stable(profile_core)!=profile['profile_sha256']:
+            raise Blocked('K0_OWNER_ORIGINAL_PSTE_PROFILE_HASH_MISMATCH')
         records[slot]={'search_intent':intent,'profile_sha256':profile['profile_sha256']}
     if set(records)!=set(expected):
         raise Blocked('K0_OWNER_MISSING_DECISION')
