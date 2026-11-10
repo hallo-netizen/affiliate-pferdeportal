@@ -1,3 +1,11 @@
+## 10.11.2026 – KISS: PSERC-K0-Ausgabe dieselbe Bestandsfunktion, früher Planstopp QA
+- Zwei bestehende WordPress-Ausgabeorte (PSTE Produktion und PSERC Metadatenvorschau) verwenden **dieselbe** `PSERC_Plan_Snapshot_Store::materializeReadyBatch`-Funktion. Neuer Exporter **nicht nötig**; keine der bestehenden Funktionen entfernen.
+- Echter TEST-Screenshot: PSERC `BLOCKED / ACTIVATE / PSERC_PLAN_LIVE_EDITORIAL_PLAN_CHANGED_BEFORE_ACTIVATE`. Der bestehende Sicherheitsvergleich muss bleiben; genaue WP-Planabweichung **noch nicht belegt**.
+- Isolierte QA-Kopie PSERC 0.28.57 aus echter .55 mit **nur vorhandene Planfrischeprüfung schon am Start** (und unverändert am Ende), vermeidet den unnötigen vollen Compilerlauf bei bereits veraltetem Plan. **NICHT zur Installation freigegeben**. 43 PHP-Lints, 61 Paketintegrität-Bindungen, drei Original-Startvarianten PASS, alle 63 Dateipfade gleich, keine Datenänderung. Privates QA-Paket im Pluginbüro. .56 nicht benötigt.
+- **Weiterhin offen:** echter lesender Vergleich der Test-WP-Planhashes, danach echte PSERC READY-Datei für >=1 Thema und K0-Schnittstellenprüfung. Ohne diese Belege kein E2E-PASS, kein technischer Codeabbau. Prüfbericht: [QA KISS Handoff](QA_ONLY/PSERC_K0_KISS_EARLY_GUARD_QA_20261110.md).
+
+---
+
 ## 10.11.2026 – neuer echter TEST-Befund: PSERC-ACTIVATE-Sperre, K0-Dateigrenze geprüft
 
 - Nutzer-Screenshot auf WordPress-TEST: PSERC **0.28.55-one-owner-no-fallback**, letzter aktiver Snapshot **5.016 Themen/0 READY** (veraltet); neuer Lauf **BLOCKED**, `phase=ACTIVATE`, `PSERC_PLAN_LIVE_EDITORIAL_PLAN_CHANGED_BEFORE_ACTIVATE`; im bisherigen Arbeitsstand 1 geeignet/1 geprüft/0 READY. **Nicht** als erfolgreicher K0-Test.
