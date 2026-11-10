@@ -1,3 +1,11 @@
+## 10.11.2026 – LIVE-VORBEREITUNG: Migrationsprüfung vor Versionssprung
+- LIVE Betreiberstand PSTE 0.57.120 / PSERC 0.28.43; TEST-Stand mit bewiesenem K0-JSON PSTE 0.57.144.32 / PSERC 0.28.60. Echte LIVE-Original-ZIPs und Datenbank fehlen für verlustfreie 1:1-Abnahme.
+- Original-PSTE .32 hat bei Aktivierung mit altem Schema 11 unter echter PHP-Mockprobe nur Bootstatus PENDING geschrieben; keine Daten gelöscht (1 PASS). ABER ausdrückliche manuelle Safe Migration archiviert sechs alte Recherche-Optionswerte und löscht danach deren Originalschlüssel. Ohne Live-Optionen/Leser-Abgleich keine Freigabe für diesen Schritt.
+- Original-PSTE blendet PSERC-Menü per hideInternalCompilerMenus aus; vorhandene K0-Dateifunktion muss im vereinfachten Backend erreichbar bleiben. PSERC-Altwege und PSERC/PSTE-Speicher-/Hook-Funktionen dürfen nur nach Referenzabgleich entfernt werden.
+- BINDEND: Vor Update aktuelle LIVE-Plugin-Verzeichnisse und Datenbank schreibfrei sichern, exakte Live-Kopie isoliert migrieren, 0 Datenverluste und K0-5-Feld-Datei prüfen, erst dann Live aktualisieren. Keine neue Architektur/K0-Änderung.
+- [Live-Vorbereitung und KISS-Abbau](QA_ONLY/PSTE_PSERC_LIVE_VORBEREITUNG_KISS_20261110.md). LIVE_UPDATE_APPROVED=false.
+
+---
 ## 10.11.2026 – echte WordPress-Test-K0-METADATEN-DATEI empfangen und abgenommen
 
 - **Jüngster und verbindlicher Beweis:** Echte Betreiberdatei aus WordPress-TEST `seo-redaktionsplan-produktionshandoff-42619ca7b6e36a625e0c8ae4e562534a9ff1b115ac7772f598435a064d06f546.json`. PSERC 0.28.60 Original-`Metadata_Boundary` / Exportvalidierung **PASS** mit **3 READY**, unveränderter JSON-Eingang `PSERC_TEXTMACHINE_METADATA_BATCH_V2`, exakt 5 Felder je Thema, 3 einzigartige Artikelplätze, Hash **exakt** gleich dem K0-Original-Eingangsalgorithmus. Kategorie-Slug in von K0 referenziertem `affiliate-release-current`-Register unter term_id 10 bestätigt. Negative Manipulations- und Duplikatprüfungen BLOCKED. **Bestehende Dateiausgabe funktioniert bewiesen; KEIN neuer Exporter.**
