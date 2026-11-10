@@ -15386,8 +15386,8 @@
       "source_url": "https://www.abb.com/global/en/areas/robotics/solutions/application-cells/omnivance-sewing-cell",
       "evidence_grade": "HERSTELLER_2026_INDUSTIERIELLE_NAEHZELLE",
       "related_existing_id": "rb007",
-      "proposed_location": "Industrie → Fertigung",
-      "proposed_owner": "CORE_PRODUCT_FUNCTION_INDUSTRY_ONLY_CANDIDATE",
+      "proposed_location": "Industrie → Fertigung (Kleinbetriebseignung offen)",
+      "proposed_owner": "CORE_INDUSTRY_FOCUSED_KLEINBETRIEBSEIGNUNG_OFFEN",
       "non_duplication_rule": "Roboter greift, führt, prüft und näht flexible Stoffe/Leder mit Nähmaschine; nicht allgemeiner SCARA-Montagearm. ABB-Angebot auf Automotive-Interieur ausgelegt; Eignung kleiner Schneiderateliers NICHT nachgewiesen.",
       "wp_release": "NICHT_FREIGEGEBEN",
       "topic_kind": "UNDERREPRESENTED_SECTOR_RESEARCH_V12",
@@ -16522,7 +16522,7 @@
       {
         "id": "rf216",
         "sector": "Textil",
-        "gate": "INDUSTRIE_BISHER_KLEINBETRIEB_NICHT_BELEGT"
+        "gate": "INDUSTRIEFOKUS_KLEINBETRIEB_EIGNUNG_OFFEN_NICHT_EXKLUSIV_BEWIESEN"
       },
       {
         "id": "rf217",
