@@ -24,8 +24,13 @@ jobs:
             engine/writer_contract_guard.py \
             engine/k0_wordpress_export.py \
             engine/lt68_external.py \
-            .github/workflows/k0-writer-accept.yml \
-            .github/workflows/k0-authoring-context.yml
+            .github/workflows/k0-writer-accept.yml
+      - name: Confirm the existing K0 authoring step now binds only the original SEO decision
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'engine.k0_seo_owner_binding bind' .github/workflows/k0-authoring-context.yml
+          grep -q 'K0_UPSTREAM_SEO_SOURCE_MANIFEST_MISSING' .github/workflows/k0-authoring-context.yml
       - name: Python syntax
         run: python3 -m compileall -q engine tests
       - name: Existing full K10 regression suite
