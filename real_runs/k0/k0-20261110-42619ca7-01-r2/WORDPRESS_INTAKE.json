@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "Beratung",
+      "category": "pferdedecken-regendecken-beratung",
+      "plan_slot": "799e033a481cdcf36bfb098e90bd2f1e043919301c980c09afb1b5fdc205b52e",
+      "target_keyword": "Horseware regendecken",
+      "title": "Horseware-Regendecken und ihre Unterschiede bei Schnitt und Ausstattung"
+    }
+  ],
+  "batch_sha256": "83640d81324e48a52b4ce923f5ce1d0ce5d88d6d039e8564a0d2522f43d5780d"
+}
