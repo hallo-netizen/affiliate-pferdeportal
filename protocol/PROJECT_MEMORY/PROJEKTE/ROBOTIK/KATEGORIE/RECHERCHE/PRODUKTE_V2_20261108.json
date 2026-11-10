@@ -845,6 +845,12 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "unprofiled_base_role_review_v13": {
+        "status": "BAUART_STATT_UNIQUE_PRODUCT_LEAF",
+        "reason": "SCARA ist Robotergelenkbauart; Montage kann eine Funktion sein, deshalb keine bloße Bauartseite unter der letzten Produktebene.",
+        "stage": "RESEARCH_ONLY_NOT_WP",
+        "no_forced_categories": true
       }
     },
     {
@@ -1364,6 +1370,12 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "unprofiled_base_role_review_v13": {
+        "status": "OVERVIEW_TOO_BROAD",
+        "reason": "Messen und Prüfen sind verwandte, aber nicht immer identische Arbeitsaufgaben: Produktsystem und Vergleich abgrenzen.",
+        "stage": "RESEARCH_ONLY_NOT_WP",
+        "no_forced_categories": true
       }
     },
     {
@@ -1442,7 +1454,13 @@
           "review_note": "Verpackungsroboter umfasst Einpacken, Kartonieren, Wickeln; letzte Seite konkrete Verpackungsaufgabe, z.B. Palettenwickler rf192",
           "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
         }
-      ]
+      ],
+      "unprofiled_base_role_review_v13": {
+        "status": "OVERVIEW_TOO_BROAD",
+        "reason": "Verpacken umfasst Kartonieren, Wickeln und Einpacken; Palettenwickler rf192 als konkretes Beispiel.",
+        "stage": "RESEARCH_ONLY_NOT_WP",
+        "no_forced_categories": true
+      }
     },
     {
       "id": "rb014",
@@ -1654,6 +1672,12 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "unprofiled_base_role_review_v13": {
+        "status": "NAVIGATION_VARIANT_CHECK",
+        "reason": "AGV/FTF ist Fahrsystem/Navigationstechnik, Mobiltransport-Funktion mit rb014 vergleichen, keine zweite Seite allein nach Navigationsprinzip.",
+        "stage": "RESEARCH_ONLY_NOT_WP",
+        "no_forced_categories": true
       }
     },
     {
@@ -1732,7 +1756,56 @@
           "review_note": "Palettentransport ist spezielle Lastaufgabe; getrennte Produktseite nur bei eigenständigem System und Bedarf",
           "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
         }
-      ]
+      ],
+      "unprofiled_base_role_review_v13": {
+        "status": "SPECIFIC_LOAD_FUNCTION_CANDIDATE",
+        "reason": "Mobiler Transport ganzer Paletten kann eigenständiger Käuferbedarf sein; nicht dieselbe generische AMR-Seite kopieren.",
+        "stage": "RESEARCH_ONLY_NOT_WP",
+        "no_forced_categories": true
+      },
+      "content_depth_v13": {
+        "status": "FUNCTION_SPECIFIC_EDITORIAL_POTENTIAL_ONLY",
+        "categories": [
+          {
+            "name": "Palettenarten",
+            "article_directions": [
+              "Europaletten und Industriepaletten unterscheiden",
+              "Lastschwerpunkt und Traglast berücksichtigen",
+              "Beladenen Zustand vor Anheben prüfen"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          },
+          {
+            "name": "Lagerwege",
+            "article_directions": [
+              "Wende- und Durchfahrbreiten",
+              "Übergaben an Packstation oder Stapler",
+              "Personenverkehr und Kreuzungen berücksichtigen"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          },
+          {
+            "name": "Betrieb",
+            "article_directions": [
+              "Docking und Ladeplanung",
+              "Wartung der Hub-/Aufnahmevorrichtung",
+              "Kleine und große Lagerflächen vergleichen"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          }
+        ],
+        "category_count": 3,
+        "last_wp_page": "SINGLE_CONCRETE_PRODUCT_TASK",
+        "no_keyword_data": true,
+        "no_forced_categories": true,
+        "no_wordpress_release": true
+      }
     },
     {
       "id": "rb017",
@@ -2269,7 +2342,13 @@
           "review_note": "Mobiler Greif-/Manipulationsroboter: spezifische Aufgaben und Autonomie belegen, erst dann Produktfunktion definieren",
           "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
         }
-      ]
+      ],
+      "unprofiled_base_role_review_v13": {
+        "status": "OVERVIEW_TOO_BROAD",
+        "reason": "Mobiler Greifarm ist Bautechnik, nur konkrete Greif-/Handhabungsaufgabe bildet eine Endseite.",
+        "stage": "RESEARCH_ONLY_NOT_WP",
+        "no_forced_categories": true
+      }
     },
     {
       "id": "rb022",
@@ -2936,6 +3015,12 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "unprofiled_base_role_review_v13": {
+        "status": "OVERVIEW_TOO_BROAD",
+        "reason": "Speisenausgabe umfasst Automat, Kiosk und Roboterarm-Verkaufsstation. Abgrenzbare Funktion zuerst ermitteln.",
+        "stage": "RESEARCH_ONLY_NOT_WP",
+        "no_forced_categories": true
       }
     },
     {
@@ -3161,7 +3246,13 @@
           "review_note": "Fassaden- und Fensterreinigungsroboter vermischt eigenständige Fassaden- und Glasreinigungsfunktionen; Privatfensterputzer rb064 bereits da",
           "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
         }
-      ]
+      ],
+      "unprofiled_base_role_review_v13": {
+        "status": "OVERVIEW_TOO_BROAD",
+        "reason": "Fassaden- und Fensterreinigung sind bautechnisch unterschiedliche Systeme; rb064 Haushalts-Fenstergerät existiert bereits.",
+        "stage": "RESEARCH_ONLY_NOT_WP",
+        "no_forced_categories": true
+      }
     },
     {
       "id": "rb030",
@@ -4172,6 +4263,12 @@
         "source_url": "https://farmdroid.com/de/products/farmdroid-fd20/",
         "observation": "FarmDroid FD20 sät und jätet; ein Mehrzweckmodell, unterschiedliche Produkttypseiten nur bei fachlich bestätigter Trennung.",
         "limits": "Einsatzbeispiel belegt Zielgruppenbezug, nicht pauschale Privat-Eignung, Rechtsfreigabe, Händler-/Affiliate-Verfügbarkeit oder fertige WP-Seite."
+      },
+      "unprofiled_base_role_review_v13": {
+        "status": "MULTIFUNCTION_PLATFORM_REVIEW",
+        "reason": "Säen und Pflanzen können verschiedene Aufgaben oder ein FarmDroid-Mehrzweckmodell sein; Einzel-Owner nach Funktion und Bauart prüfen.",
+        "stage": "RESEARCH_ONLY_NOT_WP",
+        "no_forced_categories": true
       }
     },
     {
@@ -4250,7 +4347,13 @@
           "review_note": "Obst-Ernteroboter fasst verschiedene Ernteprinzipien zusammen; konkrete Frucht/Bauart prüfen, Pilz rf135 oder Erdbeer rf006 nicht zusätzlich kopieren",
           "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
         }
-      ]
+      ],
+      "unprofiled_base_role_review_v13": {
+        "status": "OVERVIEW_TOO_BROAD",
+        "reason": "Obsternte ist sehr vielfältig; Erdbeeren, Pilze und Sonderkulturen nicht pauschal auf dieselbe letzte Seite.",
+        "stage": "RESEARCH_ONLY_NOT_WP",
+        "no_forced_categories": true
+      }
     },
     {
       "id": "rb040",
@@ -4320,6 +4423,55 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "unprofiled_base_role_review_v13": {
+        "status": "SPECIFIC_FUNCTION_CANDIDATE",
+        "reason": "Autonome Weinberg-Bodenpflege ist unterscheidbar von Entlaubung und selektivem Rebschnitt.",
+        "stage": "RESEARCH_ONLY_NOT_WP",
+        "no_forced_categories": true
+      },
+      "content_depth_v13": {
+        "status": "FUNCTION_SPECIFIC_EDITORIAL_POTENTIAL_ONLY",
+        "categories": [
+          {
+            "name": "Weinbergsflächen",
+            "article_directions": [
+              "Hanglagen und Reihenabstände",
+              "Unterstockpflege bei verschiedenen Bodenarten",
+              "Rebstöcke und Pfähle erkennen"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          },
+          {
+            "name": "Werkzeuge",
+            "article_directions": [
+              "Mechanische Bodenbearbeitung wählen",
+              "Werkzeugwechsel bei wechselnder Vegetation",
+              "Arbeitsbreite und Tiefe beurteilen"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          },
+          {
+            "name": "Saisonbetrieb",
+            "article_directions": [
+              "Zeitpunkt der Pflegearbeiten",
+              "Wetter und Bodenzustand",
+              "Wartung und Flächenleistung"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          }
+        ],
+        "category_count": 3,
+        "last_wp_page": "SINGLE_CONCRETE_PRODUCT_TASK",
+        "no_keyword_data": true,
+        "no_forced_categories": true,
+        "no_wordpress_release": true
       }
     },
     {
@@ -4519,6 +4671,12 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "unprofiled_base_role_review_v13": {
+        "status": "OVERVIEW_TOO_BROAD",
+        "reason": "Rehabilitationsroboter umfasst Gangtraining, Handtherapie, robotische Arm-/Fingerrehabilitation; konkretisieren.",
+        "stage": "RESEARCH_ONLY_NOT_WP",
+        "no_forced_categories": true
       }
     },
     {
@@ -4731,6 +4889,12 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "unprofiled_base_role_review_v13": {
+        "status": "SPECIFIC_USECASE_IDENTITY_REVIEW",
+        "reason": "Interner Krankenhaus-Materialtransport gegenüber generischem AMR: Hygiene/Stationsintegration und Gerätemodell prüfen, kein Doppeltext.",
+        "stage": "RESEARCH_ONLY_NOT_WP",
+        "no_forced_categories": true
       }
     },
     {
@@ -5600,6 +5764,44 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "unprofiled_base_role_review_v13": {
+        "status": "SPECIFIC_FUNCTION_CANDIDATE",
+        "reason": "Tunnelbauwerke mit eigenen Inspektionsanforderungen; Gerätetechnik und Erfassungsaufgabe abgrenzen.",
+        "stage": "RESEARCH_ONLY_NOT_WP",
+        "no_forced_categories": true
+      },
+      "content_depth_v13": {
+        "status": "FUNCTION_SPECIFIC_EDITORIAL_POTENTIAL_ONLY",
+        "categories": [
+          {
+            "name": "Tunnelbauwerke",
+            "article_directions": [
+              "Straßen- und Bahntunnel unterscheiden",
+              "Wand- und Deckenbereiche erreichen",
+              "Fahrweg und Zugangssperrung organisieren"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          },
+          {
+            "name": "Inspektion",
+            "article_directions": [
+              "Sichtbilder und Rissbeurteilung",
+              "Vermessung und Bauwerksverortung",
+              "Inspektionsprotokolle fachlich aufbereiten"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          }
+        ],
+        "category_count": 2,
+        "last_wp_page": "SINGLE_CONCRETE_PRODUCT_TASK",
+        "no_keyword_data": true,
+        "no_forced_categories": true,
+        "no_wordpress_release": true
       }
     },
     {
@@ -5789,6 +5991,55 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "unprofiled_base_role_review_v13": {
+        "status": "SPECIFIC_FUNCTION_CANDIDATE",
+        "reason": "Innere Tankzustandsprüfung statt Tankreinigung, separate Arbeitsaufgabe.",
+        "stage": "RESEARCH_ONLY_NOT_WP",
+        "no_forced_categories": true
+      },
+      "content_depth_v13": {
+        "status": "FUNCTION_SPECIFIC_EDITORIAL_POTENTIAL_ONLY",
+        "categories": [
+          {
+            "name": "Tankzugänge",
+            "article_directions": [
+              "Einsteigöffnungen und Durchlässe",
+              "Flüssigkeitsreste und Innenraumumgebung",
+              "Wandbereiche und Engstellen erreichen"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          },
+          {
+            "name": "Messverfahren",
+            "article_directions": [
+              "Kamera- und Ultraschallprüfung unterscheiden",
+              "Korrosion und Materialzustand erkennen",
+              "Messpositionen dokumentieren"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          },
+          {
+            "name": "Einsatzsicherheit",
+            "article_directions": [
+              "Gefahrstofffreigabe und Umgebungsbedingungen",
+              "Rückholung nach Störung",
+              "Reinigung und Dekontamination"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          }
+        ],
+        "category_count": 3,
+        "last_wp_page": "SINGLE_CONCRETE_PRODUCT_TASK",
+        "no_keyword_data": true,
+        "no_forced_categories": true,
+        "no_wordpress_release": true
       }
     },
     {
@@ -5858,6 +6109,12 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "unprofiled_base_role_review_v13": {
+        "status": "SPECIFIC_FUNCTION_CANDIDATE",
+        "reason": "Inspektion von Brückenkonstruktionen; Unterseite und schwer zugängliche Bauteile als mögliche eigene Geräteklasse.",
+        "stage": "RESEARCH_ONLY_NOT_WP",
+        "no_forced_categories": true
       }
     },
     {
@@ -6063,6 +6320,55 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "unprofiled_base_role_review_v13": {
+        "status": "SPECIFIC_FUNCTION_CANDIDATE",
+        "reason": "Ferngesteuerte/robotische Brandbekämpfung ist andere Aufgabe als Such- und Rettungsinspektion.",
+        "stage": "RESEARCH_ONLY_NOT_WP",
+        "no_forced_categories": true
+      },
+      "content_depth_v13": {
+        "status": "FUNCTION_SPECIFIC_EDITORIAL_POTENTIAL_ONLY",
+        "categories": [
+          {
+            "name": "Brandumgebungen",
+            "article_directions": [
+              "Innenraum- und Außenbrandlagen unterscheiden",
+              "Zugang durch schmale Öffnungen",
+              "Wärme, Rauch und Sichtverhältnisse"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          },
+          {
+            "name": "Geräteeinsatz",
+            "article_directions": [
+              "Fernsteuerung und Überwachung",
+              "Wasser- und Löschmittelversorgung",
+              "Abstand und Kommunikation zur Einsatzleitung"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          },
+          {
+            "name": "Wartung",
+            "article_directions": [
+              "Hitzeschutz und Dichtungen",
+              "Raupen-/Radfahrwerk reinigen",
+              "Funktionsprüfung nach Einsätzen"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          }
+        ],
+        "category_count": 3,
+        "last_wp_page": "SINGLE_CONCRETE_PRODUCT_TASK",
+        "no_keyword_data": true,
+        "no_forced_categories": true,
+        "no_wordpress_release": true
       }
     },
     {
@@ -6132,6 +6438,12 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "unprofiled_base_role_review_v13": {
+        "status": "OVERVIEW_NEEDS_TWO_FUNCTIONS_REVIEW",
+        "reason": "Suchen/Orten und physische Bergung/Transport können unterschiedliche Robotersysteme erfordern.",
+        "stage": "RESEARCH_ONLY_NOT_WP",
+        "no_forced_categories": true
       }
     },
     {
@@ -6966,7 +7278,13 @@
           "review_note": "Haushalts-Assistenzroboter ist Sammelbegriff; Essroboter rf175 und Rollstuhlarm rf176 bereits funktional getrennt",
           "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
         }
-      ]
+      ],
+      "unprofiled_base_role_review_v13": {
+        "status": "OVERVIEW_TOO_BROAD",
+        "reason": "Haushaltsassistenz ist zu allgemein; eigentliche konkrete Produktarten Essen, Greifen, Begleiten getrennt prüfen.",
+        "stage": "RESEARCH_ONLY_NOT_WP",
+        "no_forced_categories": true
+      }
     },
     {
       "id": "rb066",
@@ -7155,6 +7473,66 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
+      },
+      "unprofiled_base_role_review_v13": {
+        "status": "SPECIFIC_PRODUCT_LEARNING_CANDIDATE",
+        "reason": "Modulare Robotik-Lehrbaukästen sind eine eigenständige Produktart gegenüber fertig montierten Lernrobotern rb066.",
+        "stage": "RESEARCH_ONLY_NOT_WP",
+        "no_forced_categories": true
+      },
+      "content_depth_v13": {
+        "status": "FUNCTION_SPECIFIC_EDITORIAL_POTENTIAL_ONLY",
+        "categories": [
+          {
+            "name": "Altersgruppen",
+            "article_directions": [
+              "Baukasten für Kinder und Jugendliche",
+              "Fortgeschrittene Lernprojekte",
+              "Einsatz zu Hause und in Schulklassen"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          },
+          {
+            "name": "Bauelemente",
+            "article_directions": [
+              "Motoren und Getriebe kombinieren",
+              "Sensoren und Controller erweitern",
+              "Gehäuse- und Fahrwerksvarianten"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          },
+          {
+            "name": "Programmierung",
+            "article_directions": [
+              "Blockbasierte Steuerung lernen",
+              "Textbasierte Roboterprogramme entwickeln",
+              "Messdaten und einfache Regelkreise verstehen"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          },
+          {
+            "name": "Erweiterbarkeit",
+            "article_directions": [
+              "Ersatzteile nachkaufen",
+              "Kompatible Zusatzmodule prüfen",
+              "Aufbewahrung und Wiederverwendung im Unterricht"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          }
+        ],
+        "category_count": 4,
+        "last_wp_page": "SINGLE_CONCRETE_PRODUCT_TASK",
+        "no_keyword_data": true,
+        "no_forced_categories": true,
+        "no_wordpress_release": true
       }
     },
     {
@@ -15424,7 +15802,50 @@
       "wp_release": "UNAPPROVED_RESEARCH",
       "affiliate_status": "NOT_VERIFIED",
       "keyword_status": "NOT_MEASURED",
-      "source_checked": "2026-11-10"
+      "source_checked": "2026-11-10",
+      "content_depth_v13": {
+        "status": "FUNCTION_SPECIFIC_EDITORIAL_POTENTIAL_ONLY",
+        "categories": [
+          {
+            "name": "Futtertisch",
+            "article_directions": [
+              "Futteranschieben gegenüber Neufütterung unterscheiden",
+              "Breite und Führung am Fressgitter",
+              "Herdengröße und Anschiebeintervalle"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          },
+          {
+            "name": "Fahrwege",
+            "article_directions": [
+              "Routen an Stalleinrichtung anpassen",
+              "Hindernisse und Tierkontakt",
+              "Dockingstation und Stromanschluss"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          },
+          {
+            "name": "Betrieb",
+            "article_directions": [
+              "Reinigung der Anschiebtrommel",
+              "Verschleiß und Laufzeit",
+              "Hersteller-Service und Wirtschaftlichkeit"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          }
+        ],
+        "category_count": 3,
+        "last_wp_page": "SINGLE_CONCRETE_PRODUCT_TASK",
+        "no_keyword_data": true,
+        "no_forced_categories": true,
+        "no_wordpress_release": true
+      }
     },
     {
       "id": "rf219",
@@ -15440,7 +15861,50 @@
       "wp_release": "UNAPPROVED_RESEARCH",
       "affiliate_status": "NOT_VERIFIED",
       "keyword_status": "NOT_MEASURED",
-      "source_checked": "2026-11-10"
+      "source_checked": "2026-11-10",
+      "content_depth_v13": {
+        "status": "FUNCTION_SPECIFIC_EDITORIAL_POTENTIAL_ONLY",
+        "categories": [
+          {
+            "name": "Untersuchungsumfang",
+            "article_directions": [
+              "Finger- und Handgelenke als Scanbereich",
+              "Ultraschall-Aufnahme gegenüber Befundung",
+              "Untersuchungsgrenzen beim Hersteller prüfen"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          },
+          {
+            "name": "Praxiseinbau",
+            "article_directions": [
+              "Raumbedarf und Patientenführung",
+              "Personalaufgaben während der Untersuchung",
+              "Anbindung von Befunden an Praxisabläufe"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          },
+          {
+            "name": "Geräteprüfung",
+            "article_directions": [
+              "CE-Status und Zweckbestimmung prüfen",
+              "Wartung und Hygiene",
+              "Anschaffung und Demo gegen Praxisvolumen bewerten"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          }
+        ],
+        "category_count": 3,
+        "last_wp_page": "SINGLE_CONCRETE_PRODUCT_TASK",
+        "no_keyword_data": true,
+        "no_forced_categories": true,
+        "no_wordpress_release": true
+      }
     },
     {
       "id": "rf220",
@@ -15456,7 +15920,61 @@
       "wp_release": "UNAPPROVED_RESEARCH",
       "affiliate_status": "NOT_VERIFIED",
       "keyword_status": "NOT_MEASURED",
-      "source_checked": "2026-11-10"
+      "source_checked": "2026-11-10",
+      "content_depth_v13": {
+        "status": "FUNCTION_SPECIFIC_EDITORIAL_POTENTIAL_ONLY",
+        "categories": [
+          {
+            "name": "Gerätefunktionen",
+            "article_directions": [
+              "Robotergeführte Follikelentnahme",
+              "Planung von Entnahme- und Zielarealen",
+              "Abgrenzung zu manuellem Verfahren"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          },
+          {
+            "name": "Praxisablauf",
+            "article_directions": [
+              "Platzbedarf im Behandlungsraum",
+              "Aufgaben des medizinischen Personals",
+              "Einweisung und Schulung"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          },
+          {
+            "name": "Sicherheit",
+            "article_directions": [
+              "Zulassung und Einsatzgrenzen",
+              "Reinigung und Instrumentenwechsel",
+              "Fehler- und Störungsmanagement"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          },
+          {
+            "name": "Beschaffung",
+            "article_directions": [
+              "Herstellerberatung und Geräteausstattung",
+              "Wartungsvertrag und Zubehör",
+              "Auslastung einer kleinen Fachklinik"
+            ],
+            "idea_count": 3,
+            "seo_verified": false,
+            "wp_created": false
+          }
+        ],
+        "category_count": 4,
+        "last_wp_page": "SINGLE_CONCRETE_PRODUCT_TASK",
+        "no_keyword_data": true,
+        "no_forced_categories": true,
+        "no_wordpress_release": true
+      }
     },
     {
       "id": "rf221",
@@ -16960,6 +17478,108 @@
     "categories_to_be_added_separately": true,
     "research_scope": "Underrepresented care/medical, food processing, roofing, personal services, animal farms, home exterior. Include real devices, lease, service, automation boundary, research and patents distinctly.",
     "no_wordpress_writes": true,
-    "no_seo_calls": true
+    "no_seo_calls": true,
+    "depth_review": {
+      "profiles": 9,
+      "categories": 28,
+      "articleDirections": 84,
+      "baseProfiles": 6,
+      "fringeProfiles": 3,
+      "profile_ids": [
+        "rb016",
+        "rb040",
+        "rb052",
+        "rb054",
+        "rb057",
+        "rb067",
+        "rf218",
+        "rf219",
+        "rf220"
+      ],
+      "reviewed_missing_base_ids": 20,
+      "nonprofiled_remaining": 14,
+      "unprofiled_base_statuses": [
+        {
+          "id": "rb007",
+          "status": "BAUART_STATT_UNIQUE_PRODUCT_LEAF"
+        },
+        {
+          "id": "rb012",
+          "status": "OVERVIEW_TOO_BROAD"
+        },
+        {
+          "id": "rb013",
+          "status": "OVERVIEW_TOO_BROAD"
+        },
+        {
+          "id": "rb015",
+          "status": "NAVIGATION_VARIANT_CHECK"
+        },
+        {
+          "id": "rb016",
+          "status": "SPECIFIC_LOAD_FUNCTION_CANDIDATE"
+        },
+        {
+          "id": "rb021",
+          "status": "OVERVIEW_TOO_BROAD"
+        },
+        {
+          "id": "rb027",
+          "status": "OVERVIEW_TOO_BROAD"
+        },
+        {
+          "id": "rb029",
+          "status": "OVERVIEW_TOO_BROAD"
+        },
+        {
+          "id": "rb038",
+          "status": "MULTIFUNCTION_PLATFORM_REVIEW"
+        },
+        {
+          "id": "rb039",
+          "status": "OVERVIEW_TOO_BROAD"
+        },
+        {
+          "id": "rb040",
+          "status": "SPECIFIC_FUNCTION_CANDIDATE"
+        },
+        {
+          "id": "rb042",
+          "status": "OVERVIEW_TOO_BROAD"
+        },
+        {
+          "id": "rb044",
+          "status": "SPECIFIC_USECASE_IDENTITY_REVIEW"
+        },
+        {
+          "id": "rb052",
+          "status": "SPECIFIC_FUNCTION_CANDIDATE"
+        },
+        {
+          "id": "rb054",
+          "status": "SPECIFIC_FUNCTION_CANDIDATE"
+        },
+        {
+          "id": "rb055",
+          "status": "SPECIFIC_FUNCTION_CANDIDATE"
+        },
+        {
+          "id": "rb057",
+          "status": "SPECIFIC_FUNCTION_CANDIDATE"
+        },
+        {
+          "id": "rb058",
+          "status": "OVERVIEW_NEEDS_TWO_FUNCTIONS_REVIEW"
+        },
+        {
+          "id": "rb065",
+          "status": "OVERVIEW_TOO_BROAD"
+        },
+        {
+          "id": "rb067",
+          "status": "SPECIFIC_PRODUCT_LEARNING_CANDIDATE"
+        }
+      ]
+    }
   }
 }
