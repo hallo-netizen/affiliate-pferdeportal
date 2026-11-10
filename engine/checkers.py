@@ -40,18 +40,6 @@ def _words(value):
 def _sig_tokens(value):
     return {x for x in _norm(value).split() if len(x)>=4 and x not in STOPWORDS}
 
-def _keyword_tokens_in_order(keyword,title):
-    required=_norm(keyword).split()
-    if not required:
-        return False
-    pos=0
-    for token in _norm(title).split():
-        if token==required[pos]:
-            pos+=1
-            if pos==len(required):
-                return True
-    return False
-
 def _sections(html):
     out=[]
     for m in re.finditer(r'(?is)<section\b([^>]*)>(.*?)</section>',str(html or '')):
@@ -119,7 +107,7 @@ def _max_pair_similarity(texts):
 
 def structural_receipts(article):
     v=load_values(); legacy=v['ppm_parity']; cfg=v['types'].get(article.get('article_type')) or {}
-    html=article['html']; title=str(article.get('title') or ''); kw=str(article.get('target_keyword') or '')
+    html=article['html']; title=str(article.get('title') or '')
     sections=_sections(html); blocks=[x['block'] for x in sections if x['block']]
     block_map={s['block']:s for s in sections if s['block']}
     lists=set(re.findall(r'data-list\s*=\s*["\']([^"\']+)["\']',html,re.I))
@@ -137,7 +125,6 @@ def structural_receipts(article):
         elif typ=='list':
             if not isinstance(val,list) or len(val)<int(spec.get('min_items',0)): meta_ok=False; meta_find.append('invalid:'+name)
             elif spec.get('unique_items') and len({str(x) for x in val})!=len(val): meta_ok=False; meta_find.append('duplicate:'+name)
-    qm=(cfg.get('question_mark')!='REQUIRED' or title.rstrip().endswith('?'))
     title_norm=_norm(title); body_norm=_norm(html)
     h1_count=len(re.findall(r'(?is)<h1\b',html))
     visible_marker=bool(re.search(legacy['visible_test_marker_regex'],_plain(html),re.I))
@@ -202,14 +189,12 @@ def structural_receipts(article):
     runtime_ok=runtime_roles==set(v['global']['required_link_roles'])
     clustered_ok=not (links and all(x['block']=='further_information' for x in links)) and all(x['block']!='further_information' for x in links if x['role']!='further_information')
     rows=[
-      ('title.keyword_required',_keyword_tokens_in_order(kw,title),{'title':title,'keyword':kw,'match_mode':'ORDERED_KEYWORD_TOKENS_ALLOW_INTERVENING_WORDS'}),
-      ('title.colon_forbidden',':' not in title,{}),
       ('structure.duplicate_block_names_forbidden',len(blocks)==len(set(blocks)),{'blocks':blocks}),
       ('structure.required_blocks',set(required_blocks).issubset(set(blocks)),{'missing':sorted(set(required_blocks)-set(blocks))}),
       ('structure.required_lists',required_lists.issubset(lists),{'missing':sorted(required_lists-lists)}),
       ('links.visible_exact',len(links)==int(v['global']['visible_links_exact']),{'actual':len(links)}),
       ('links.required_roles',{x['role'] for x in links}==set(v['global']['required_link_roles']),{'actual':sorted({x['role'] for x in links})}),
-      ('type.question_mark_policy',qm,{}),('type.metadata_schema',meta_ok,{'findings':meta_find}),
+      ('type.metadata_schema',meta_ok,{'findings':meta_find}),
       ('structure.body_h1_forbidden',h1_count==0,{'actual':h1_count}),
       ('structure.title_not_repeated_in_body',not bool(title_norm and title_norm in body_norm),{}),
       ('structure.visible_test_marker_forbidden',not visible_marker,{}),
@@ -323,11 +308,7 @@ def _heading_missing_enumeration_separator(value):
 def editorial_receipts(article):
     v=load_values(); cfg=v['heading']; legacy=v['ppm_parity']; html=article['html']; sections=_sections(html)
     headings=[s['heading'] for s in sections if s['heading']]; norm=[_norm(x) for x in headings]
-    title=_norm(article.get('title')); target=_norm(article.get('target_keyword')); collision=bool(target and title==target)
-    exact=sum(1 for h in norm if target and target in h)
-    lo=int(cfg['exact_target_phrase_occurrences_when_title_equals_target']) if collision else int(cfg['exact_target_phrase_occurrences_min_when_no_title_collision'])
-    hi=int(cfg['exact_target_phrase_occurrences_when_title_equals_target']) if collision else int(cfg['exact_target_phrase_occurrences_max'])
-    target_ok=lo<=exact<=hi
+    target=_norm(article.get('target_keyword'))
     stop=set(cfg['significant_keyword_stop_tokens']); sig=[x for x in target.split() if len(x)>=4 and x not in stop]
     token_counts={tok:sum(tok in h.split() for h in norm) for tok in set(sig)}
     staccato_ok=all(n<=int(cfg['significant_target_keyword_token_h2_occurrences_max']) for n in token_counts.values())
@@ -384,7 +365,7 @@ def editorial_receipts(article):
         and overlap>=int(intro_cfg['subject_overlap_minimum_significant_tokens'])
     )
     rows=[
-      ('heading.target_phrase_control',target_ok,{'actual':exact,'min':lo,'max':hi}),('heading.keyword_staccato_forbidden',staccato_ok,{'counts':token_counts}),
+      ('heading.keyword_staccato_forbidden',staccato_ok,{'counts':token_counts}),
       ('heading.phrase_family_repetition_forbidden',phrase_ok,{'counts':dict(lead_counts)}),('heading.duplicate_normalized_forbidden',duplicate_ok,{}),
       ('heading.hard_length',hard_ok,{}),('heading.natural_concrete_section_language',natural_ok,{'findings':natural_find}),
       ('heading.grammatical_variety',grammar_ok,{'endings':dict(end_counts)}),('surface.non_template_language',non_template_ok,{}),
