@@ -9,7 +9,7 @@ import unittest
 from pathlib import Path
 from engine.core import stable
 from engine.k0_portal_resolver import validate_intake
-from engine.k0_seo_owner_binding import inspect,bind_context,verify_context,Blocked
+from engine.k0_seo_owner_binding import inspect,bind_context,verify_context,php_stable,Blocked
 
 ROOT=Path(__file__).resolve().parents[1]
 MANIFEST=ROOT/"tests/fixtures/k0_seo_owner_manifest_SYNTHETIC_QA_20261110.json"
@@ -79,6 +79,12 @@ class SeoOwnerSourceBindingTests(unittest.TestCase):
         self.resign(bad)
         with self.assertRaisesRegex(Blocked,"ORIGINAL_PSTE_PROFILE_HASH_MISMATCH"):
             inspect(bad)
+
+    def test_genuine_php_hash_formats_for_seo_probabilities(self):
+        # Known hashes from the original PSERC_Stable_Json implementation.
+        self.assertEqual(php_stable({"v":1e-5}),"f32d38a5e40c0a0a6fca0425a6764b7edab87ccefaec35ed85165b9033d664ba")
+        self.assertEqual(php_stable({"v":1e20}),"e2f957556683366624e5e003e8fe15765bd75f85eca7819707c5fc0c8e437142")
+        self.assertEqual(php_stable({"v":0.3}),"8d3104ead3049f23ce96b16520ba7db77fb39748e92e9c6020869803c8eb3fab")
 
     def test_tampered_single_article_plan_slot_blocks(self):
         intake,context=self.source(1)
