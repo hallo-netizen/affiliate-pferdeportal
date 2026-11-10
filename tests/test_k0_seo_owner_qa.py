@@ -75,7 +75,7 @@ class K0ApprovedSeoOwnerQA(unittest.TestCase):
         with self.assertRaises(Blocked):
             _verify_semantic_intent({'content_profile':{'search_intent':''}},ident,'<article>Neutraler Text</article>')
         with self.assertRaises(Blocked):
-            _verify_semantic_intent({'content_profile':{'search_intent':'DECISION_SUPPORT'}},ident,'<article>Für die Praxis heißt das: betrachte die Aspekte</article>')
+            _verify_semantic_intent({'content_profile':{'search_intent':'DECISION_SUPPORT'}},ident,'<article>Ein guter Vergleich beginnt mit einer klaren Reihenfolge der Auswahl</article>')
 
 if __name__=='__main__':
     unittest.main()
