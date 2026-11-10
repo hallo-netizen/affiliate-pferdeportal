@@ -1434,7 +1434,15 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "TOO_BROAD_FOR_LAST_PRODUCT_PAGE_NEEDS_REDEFINITION",
+          "canonical_target": null,
+          "review_note": "Verpackungsroboter umfasst Einpacken, Kartonieren, Wickeln; letzte Seite konkrete Verpackungsaufgabe, z.B. Palettenwickler rf192",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rb014",
@@ -1568,7 +1576,15 @@
         "no_wordpress_write": true,
         "evidence": "HERSTELLER_FUNKTIONSBASIERTE_FACHABSCHAETZUNG_KEINE_KEYWORDMESSUNG",
         "shared_magazin_glossar_finder_market": true
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "IDENTITY_BOUNDARY_UNDECIDED_MUST_VERIFY",
+          "canonical_target": "rb015",
+          "review_note": "AMR und AGV unterscheiden Navigation und Infrastruktur; separate Seiten nur bei unterschiedlichen Funktions-/Kaufintents",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rb015",
@@ -1708,7 +1724,15 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "IDENTITY_BOUNDARY_UNDECIDED_MUST_VERIFY",
+          "canonical_target": "rb014",
+          "review_note": "Palettentransport ist spezielle Lastaufgabe; getrennte Produktseite nur bei eigenständigem System und Bedarf",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rb017",
@@ -2237,7 +2261,15 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "TOO_BROAD_FOR_LAST_PRODUCT_PAGE_NEEDS_REDEFINITION",
+          "canonical_target": null,
+          "review_note": "Mobiler Greif-/Manipulationsroboter: spezifische Aufgaben und Autonomie belegen, erst dann Produktfunktion definieren",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rb022",
@@ -3121,7 +3153,15 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "TOO_BROAD_FOR_LAST_PRODUCT_PAGE_NEEDS_REDEFINITION",
+          "canonical_target": null,
+          "review_note": "Fassaden- und Fensterreinigungsroboter vermischt eigenständige Fassaden- und Glasreinigungsfunktionen; Privatfensterputzer rb064 bereits da",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rb030",
@@ -4202,7 +4242,15 @@
         ],
         "wording_status": "DISPLAY_ONLY_DRAFT",
         "quality_note": "3 individual article possibilities per category in archived editorial research, never claim SEO or published articles"
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "TOO_BROAD_FOR_LAST_PRODUCT_PAGE_NEEDS_REDEFINITION",
+          "canonical_target": null,
+          "review_note": "Obst-Ernteroboter fasst verschiedene Ernteprinzipien zusammen; konkrete Frucht/Bauart prüfen, Pilz rf135 oder Erdbeer rf006 nicht zusätzlich kopieren",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rb040",
@@ -4393,7 +4441,15 @@
         "no_wordpress_write": true,
         "evidence": "HERSTELLER_FUNKTIONSBASIERTE_FACHABSCHAETZUNG_KEINE_KEYWORDMESSUNG",
         "shared_magazin_glossar_finder_market": true
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "TOO_BROAD_FOR_LAST_PRODUCT_PAGE_NEEDS_REDEFINITION",
+          "canonical_target": null,
+          "review_note": "Chirurgieroboter ist zu breit für eine einzelne konkrete Produktart; Eingriffsfunktion und Produkttyp abgrenzen",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rb042",
@@ -4597,7 +4653,15 @@
         "no_wordpress_write": true,
         "evidence": "HERSTELLER_FUNKTIONSBASIERTE_FACHABSCHAETZUNG_KEINE_KEYWORDMESSUNG",
         "shared_magazin_glossar_finder_market": true
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "TOO_BROAD_FOR_LAST_PRODUCT_PAGE_NEEDS_REDEFINITION",
+          "canonical_target": null,
+          "review_note": "Roboter-Exoskelett vermischt Freizeit-Gehhilfe, Arbeitsplatz-Hebehilfe und Rehabilitation; Technik/Funktion vor letzter Seite unterscheiden",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rb044",
@@ -6337,7 +6401,15 @@
         "no_wordpress_write": true,
         "evidence": "HERSTELLER_FUNKTIONSBASIERTE_FACHABSCHAETZUNG_KEINE_KEYWORDMESSUNG",
         "shared_magazin_glossar_finder_market": true
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "IDENTITY_BOUNDARY_UNDECIDED_MUST_VERIFY",
+          "canonical_target": "rb061",
+          "review_note": "Saug- und Wischfunktion oft in einem Gerät; keine doppelte identische Modellberatung",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rb061",
@@ -6886,7 +6958,15 @@
         "decision": "NOT_A_CONFIRMED_CONCRETE_ROBOT_PRODUCT_LEAF",
         "reason": "Zu breite Sammelbezeichnung Haushalts-Assistenzroboter: konkrete eigenständige Funktionen wie Essroboter, Greifarm oder andere Haushaltsaufgaben zuerst abgrenzen; keine pauschale tiefe Kategorie erzeugen.",
         "keyword_research": false
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "TOO_BROAD_FOR_LAST_PRODUCT_PAGE_NEEDS_REDEFINITION",
+          "canonical_target": null,
+          "review_note": "Haushalts-Assistenzroboter ist Sammelbegriff; Essroboter rf175 und Rollstuhlarm rf176 bereits funktional getrennt",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rb066",
@@ -7211,7 +7291,7 @@
     }
   ],
   "canonical_source": true,
-  "revision": 17,
+  "revision": 18,
   "research_state": "UNAPPROVED",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
@@ -7931,7 +8011,21 @@
         "no_new_duplicate_id": true,
         "checked_at": "2026-11-10",
         "limits": "EU-Händler-/Partnerkonditionen offen"
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "SEPARATE_FUNCTION_RETAIN_DISTINCT_RESEARCH_CANDIDATES",
+          "canonical_target": "rb059",
+          "review_note": "Rumpf reinigen gegenüber nur unter Wasser inspizieren; Spezialbauart/Autonomie getrennt nachweisen",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        },
+        {
+          "resolution": "IDENTITY_BOUNDARY_UNDECIDED_MUST_VERIFY",
+          "canonical_target": "rf002",
+          "review_note": "Yacht im Hafen versus Großschiff während der Fahrt: gleiche Reinigungszielsetzung, starke technische Unterschiede; eine oder zwei Produktfunktionen nur nach Produktsystemvergleich",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf003",
@@ -7951,7 +8045,15 @@
       "review_state": "PRODUKT_BELEGT_ROBOTERROLLE_PRUEFEN",
       "keyword_status": "NICHT_ERHOBEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "relation_to_existing": "ZU_PRUEFEN"
+      "relation_to_existing": "ZU_PRUEFEN",
+      "functional_resolution_v12": [
+        {
+          "resolution": "SAME_FUNCTION_RESEARCH_ALIAS_NO_SECOND_CORE_LEAF",
+          "canonical_target": "rb046",
+          "review_note": "Apotheken-Packungskommissionierung bereits als Medikamenten-Kommissionierung enthalten; nur bei belegtem anderen Mechanismus trennen",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf005",
@@ -8059,7 +8161,15 @@
       "review_state": "HERSTELLERPRODUKT_BELEGT_KEINE_MEHRFACH_LEAFS",
       "keyword_status": "NICHT_ERHOBEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "relation_to_existing": "ZU_PRUEFEN"
+      "relation_to_existing": "ZU_PRUEFEN",
+      "functional_resolution_v12": [
+        {
+          "resolution": "TOO_BROAD_FOR_LAST_PRODUCT_PAGE_NEEDS_REDEFINITION",
+          "canonical_target": null,
+          "review_note": "Multifunktions-Feldplattform kann übergeordnete Übersicht sein; nicht pro angebautem Werkzeug identische Systeme duplizieren",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf008",
@@ -8119,7 +8229,15 @@
       "review_state": "ROBOTERROLLE_UND_MARKT_NOCH_OFFEN",
       "keyword_status": "NICHT_ERHOBEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "relation_to_existing": "ZU_PRUEFEN"
+      "relation_to_existing": "ZU_PRUEFEN",
+      "functional_resolution_v12": [
+        {
+          "resolution": "TOO_BROAD_FOR_LAST_PRODUCT_PAGE_NEEDS_REDEFINITION",
+          "canonical_target": null,
+          "review_note": "Allgemeiner Altenpflege-Assistenzroboter ist ohne konkrete Aufgabe zu breit, noch keine letzte Seite",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf014",
@@ -8149,7 +8267,15 @@
       "review_state": "ABGRENZUNG_ZU_RB038_NOCH_OFFEN",
       "keyword_status": "NICHT_ERHOBEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "relation_to_existing": "ZU_PRUEFEN"
+      "relation_to_existing": "ZU_PRUEFEN",
+      "functional_resolution_v12": [
+        {
+          "resolution": "TOO_BROAD_FOR_LAST_PRODUCT_PAGE_NEEDS_REDEFINITION",
+          "canonical_target": null,
+          "review_note": "Allgemeine Gewächshaus-Pflanzpflege ist Sammelbegriff; konkrete Entlaubung, Kontrolle, Bestäubung separat",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf017",
@@ -8189,7 +8315,15 @@
       "review_state": "NUR_SERVICE_BELEGT_NICHT_PRODUKT",
       "keyword_status": "NICHT_ERHOBEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "relation_to_existing": "ZU_PRUEFEN"
+      "relation_to_existing": "ZU_PRUEFEN",
+      "functional_resolution_v12": [
+        {
+          "resolution": "TOO_BROAD_FOR_LAST_PRODUCT_PAGE_NEEDS_REDEFINITION",
+          "canonical_target": null,
+          "review_note": "Allgemeine automatisierte Lebensmittelzubereitung ist zu breit; Wok, Pizza, Speisen-Kochzelle funktional trennen",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "name": "Aquakultur-Netzreinigungsroboter",
@@ -8468,7 +8602,15 @@
         "checked_on": "2026-11-09",
         "keyword_evaluation": "NICHT_DURCHGEFÜHRT",
         "wordpress_release": false
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "SAME_FUNCTION_RESEARCH_ALIAS_NO_SECOND_CORE_LEAF",
+          "canonical_target": "rf005",
+          "review_note": "Mischabfall-Sortieren ist Einsatzgut desselben Abfallsortierroboters",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "name": "Robotischer Müllsortierer für Elektroschrott",
@@ -8532,7 +8674,15 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf028",
       "research_status": "NUR_FACHLICHE_HYPOTHESE",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "functional_resolution_v12": [
+        {
+          "resolution": "SAME_FUNCTION_RESEARCH_ALIAS_NO_SECOND_CORE_LEAF",
+          "canonical_target": "rb001",
+          "review_note": "Schiffbau ist Schweißanwendung, keine neue Lichtbogenschweiß-Funktion",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "name": "Roboter für Gleisinstandhaltung",
@@ -8753,7 +8903,15 @@
         "observation": "Fassadenfugen-Sanierung wird bei Useful Machines als Entwicklung eines autonomen Renovierungsroboters beschrieben; bestehendes rf036 behalten, Pilot/Marktstatus prüfen.",
         "no_new_id": true,
         "affiliate_not_validated": true
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "IDENTITY_BOUNDARY_UNDECIDED_MUST_VERIFY",
+          "canonical_target": "rf036",
+          "review_note": "Ein bestehender Owner für Privat und Gewerbe bzw. Pilotstatus; keine zweite ID oder Alias auf dieselbe ID.",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "name": "Roboter zur Rohr- und Behälterinnenbeschichtung",
@@ -8873,7 +9031,15 @@
         "checked_on": "2026-11-09",
         "keyword_evaluation": "NICHT_DURCHGEFÜHRT",
         "wordpress_release": false
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "SAME_FUNCTION_RESEARCH_ALIAS_NO_SECOND_CORE_LEAF",
+          "canonical_target": "rb053",
+          "review_note": "Kommunale Rohrnetzinnenprüfung ist Teil der bestehenden Kanal-/Rohrleitungsinspektion, sofern Inspektionsfunktion identisch",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "name": "Roboter für Hochspannungs-Isolatorenreinigung",
@@ -8905,7 +9071,15 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf045",
       "research_status": "BEISPIEL_RECHERCHIERT_KEINE_SEO_FREIGABE",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "functional_resolution_v12": [
+        {
+          "resolution": "SAME_FUNCTION_RESEARCH_ALIAS_NO_SECOND_CORE_LEAF",
+          "canonical_target": "rf018",
+          "review_note": "Recycling-Kunststofftrennung überschneidet sich funktional mit vorhandener Kunststoff-/Metallsortierung; Materialvariante",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "name": "Roboter für Batteriesortierung beim Recycling",
@@ -9058,6 +9232,21 @@
         "kind": "HERSTELLER_EINFUEHRUNG_OKT_2026",
         "checked_at": "2026-11-09",
         "note": "Existenz/Produktfunktion belegt, keine SEO-Zahlen, keine Marktverfügbarkeit in Deutschland abgenommen"
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "IDENTITY_BOUNDARY_UNDECIDED_MUST_VERIFY",
+          "canonical_target": "rf049",
+          "review_note": "Gewächshaus-Bestäubungsroboter bereits vorhanden; Marktstart Polly im Oktober 2026 ist Evidenz-Upgrade, keine zweite Produktart",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ],
+      "market_check_v12": {
+        "date": "2026-11-10",
+        "manufacturer_url": "https://www.biobest.com/de/polly-pollination-robot",
+        "news_url": "https://www.biobest.com/en-US/news/meet-polly-the-answer-to-your-pollination-challenges",
+        "evidence": "Biobest announced market introduction of Polly on 2026-10-27; already existing functional product class, not new candidate",
+        "eu_sales_and_affiliate": "NOT_VERIFIED"
       }
     },
     {
@@ -9074,7 +9263,15 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf050",
       "research_status": "EINZELPRODUKT_BELEG_OFFEN",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "functional_resolution_v12": [
+        {
+          "resolution": "SAME_FUNCTION_RESEARCH_ALIAS_NO_SECOND_CORE_LEAF",
+          "canonical_target": "rb044",
+          "review_note": "Wäschetransport im Krankenhaus ist Unterfall interner Krankenhaus-Transportroboter",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "name": "Roboter für Fertigteilmontage auf Baustellen",
@@ -9106,7 +9303,15 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf052",
       "research_status": "EINZELPRODUKT_BELEG_OFFEN",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "functional_resolution_v12": [
+        {
+          "resolution": "SAME_FUNCTION_RESEARCH_ALIAS_NO_SECOND_CORE_LEAF",
+          "canonical_target": "rb010",
+          "review_note": "Gussformen-Entgraten ist werkstoff-/branchenbezogene Anwendung des Entgratungsroboters",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "name": "Kleinflächen-Unkrautroboter für Privatgärten",
@@ -9138,7 +9343,15 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf054",
       "research_status": "EINZELPRODUKT_BELEG_OFFEN",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "functional_resolution_v12": [
+        {
+          "resolution": "SAME_FUNCTION_RESEARCH_ALIAS_NO_SECOND_CORE_LEAF",
+          "canonical_target": "rf001",
+          "review_note": "PV-Dachreinigung gleiche Hauptfunktion wie Photovoltaik-Reinigungsroboter; Dachneigung/Eignung als Kategorie",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "name": "Roboter-Simulationssoftware",
@@ -11259,7 +11472,15 @@
         "category_not_mandatory": true,
         "no_wp_release": true,
         "source_qualification": "Bestehende Hersteller-/Fachbelege, bei Pilzernte Neucheck 2026; kein Affiliate-Nachweis"
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "SEPARATE_FUNCTION_RETAIN_DISTINCT_RESEARCH_CANDIDATES",
+          "canonical_target": "rf148",
+          "review_note": "Tennisbälle aufsammeln versus Trainingsbälle zuspielen",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf138",
@@ -11282,7 +11503,15 @@
         "checked_on": "2026-11-09",
         "keyword_evaluation": "NICHT_DURCHGEFÜHRT",
         "wordpress_release": false
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "NOT_A_CORE_PURCHASABLE_PRODUCT_PAGE_AS_CURRENTLY_EVIDENCED",
+          "canonical_target": null,
+          "review_note": "Rotorblattreparatur als Anbieter-Dienstleistung; in gemeinsamem Anzeigenmarkt statt behauptetem Gerätekauf",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf139",
@@ -11429,7 +11658,15 @@
         "generated_from": "2026-11-10 manufacturer function/market evidence and editorial review, not keyword data",
         "keyword_research_done": false,
         "approved_for_wordpress": false
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "SEPARATE_FUNCTION_RETAIN_DISTINCT_RESEARCH_CANDIDATES",
+          "canonical_target": "rb063",
+          "review_note": "Pooloberfläche absammeln ist anderes Hauptreinigungsgebiet als Boden/Wände",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf142",
@@ -12321,7 +12558,15 @@
         "medical_cases_require_specialist": false,
         "wp_release": false,
         "affiliate_not_verified": true
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "SEPARATE_FUNCTION_RETAIN_DISTINCT_RESEARCH_CANDIDATES",
+          "canonical_target": "rf014",
+          "review_note": "Wasseroberflächenmüll aufnehmen versus terrestrische Straßen-/Parkflächen",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf157",
@@ -12349,7 +12594,15 @@
         "finding": "Sophy Swiftfold tatsächlich bei kleinem Wäschereibetrieb im Einsatz. Dieselbe Grundfunktion Wäschefalten wie bisherige Haushaltsideen: vor eventueller Produkt-Owner-Trennung nach Funktions- und Bauartunterschieden prüfen, nicht zwei Seiten allein nach Zielgruppe.",
         "checked_at": "2026-11-10",
         "separate_new_id": false
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "IDENTITY_BOUNDARY_UNDECIDED_MUST_VERIFY",
+          "canonical_target": "rf157",
+          "review_note": "Ein bestehender Owner für Privat und Gewerbe bzw. Pilotstatus; keine zweite ID oder Alias auf dieselbe ID.",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf158",
@@ -12601,7 +12854,21 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "functional_resolution_v12": [
+        {
+          "resolution": "SAME_FUNCTION_RESEARCH_ALIAS_NO_SECOND_CORE_LEAF",
+          "canonical_target": "rb062",
+          "review_note": "Yarbo-Laubbläser als Modul derselben Mehrzweck-Gartenplattform; keine weitere vollständige identische Robotersystemseite",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        },
+        {
+          "resolution": "IDENTITY_BOUNDARY_UNDECIDED_MUST_VERIFY",
+          "canonical_target": "rf140",
+          "review_note": "Modulare Gartenplattform: Schneefräse und Mähen sind Aufgaben, aber dasselbe Basissystem; keine duplizierten Komplettgeräteseiten",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf164",
@@ -13099,7 +13366,15 @@
         "decision": "NO_CATEGORY_TREE_YET",
         "reason": "Anbieter zeigt Tätowier-Franchise bzw. eigene Dienstleistung, keinen Geräteverkauf an unabhängige Studios",
         "no_forced_wp_categories": true
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "NOT_A_CORE_PURCHASABLE_PRODUCT_PAGE_AS_CURRENTLY_EVIDENCED",
+          "canonical_target": null,
+          "review_note": "Tattoo-Robotik als Franchise/Studioangebot, kein unabhängig frei kaufbares Gerät nachgewiesen",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf174",
@@ -13959,7 +14234,15 @@
       "wp_release": "NICHT_FREIGEGEBEN",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "checked_at": "2026-11-10"
+      "checked_at": "2026-11-10",
+      "functional_resolution_v12": [
+        {
+          "resolution": "NOT_A_CORE_PURCHASABLE_PRODUCT_PAGE_AS_CURRENTLY_EVIDENCED",
+          "canonical_target": null,
+          "review_note": "Hundekot-Sammelroboter nur Vorbestellung/Warteliste, kein sicher lieferbares Produkt",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf190",
@@ -13989,7 +14272,15 @@
       "wp_release": "NICHT_FREIGEGEBEN",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "checked_at": "2026-11-10"
+      "checked_at": "2026-11-10",
+      "functional_resolution_v12": [
+        {
+          "resolution": "NOT_A_CORE_PURCHASABLE_PRODUCT_PAGE_AS_CURRENTLY_EVIDENCED",
+          "canonical_target": null,
+          "review_note": "Crêpe-Robotik als Betreiberangebot, nicht als allgemeiner Gerätekauf",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf192",
@@ -14123,7 +14414,15 @@
         "medical_cases_require_specialist": false,
         "wp_release": false,
         "affiliate_not_verified": true
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "SEPARATE_FUNCTION_RETAIN_DISTINCT_RESEARCH_CANDIDATES",
+          "canonical_target": "rf195",
+          "review_note": "Bodenfliesen verlegen versus verfugen",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf195",
@@ -14280,7 +14579,15 @@
       "wp_release": "NICHT_FREIGEGEBEN",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "checked_at": "2026-11-10"
+      "checked_at": "2026-11-10",
+      "functional_resolution_v12": [
+        {
+          "resolution": "NOT_A_CORE_PURCHASABLE_PRODUCT_PAGE_AS_CURRENTLY_EVIDENCED",
+          "canonical_target": null,
+          "review_note": "Stallboden-Eiersammeln als Forschung, ohne belegte Serienkaufbarkeit",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf200",
@@ -14347,7 +14654,15 @@
         "allow_category_count_flexible": true,
         "requires_owner_identity_review": true,
         "no_keyword_lookup": true
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "SEPARATE_FUNCTION_RETAIN_DISTINCT_RESEARCH_CANDIDATES",
+          "canonical_target": "rf150",
+          "review_note": "Mobile Grab-Gießroute versus feste Beetpflegeplattform",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf201",
@@ -14403,7 +14718,15 @@
         "allow_category_count_flexible": true,
         "requires_owner_identity_review": true,
         "no_keyword_lookup": true
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "SEPARATE_FUNCTION_RETAIN_DISTINCT_RESEARCH_CANDIDATES",
+          "canonical_target": "rb033",
+          "review_note": "Geflügel-Einstreu lockern/Herden stimulieren versus Stallmist/Bodenreinigung",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf202",
@@ -14627,7 +14950,21 @@
         "allow_category_count_flexible": true,
         "requires_owner_identity_review": true,
         "no_keyword_lookup": true
-      }
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "SEPARATE_FUNCTION_RETAIN_DISTINCT_RESEARCH_CANDIDATES",
+          "canonical_target": "rb048",
+          "review_note": "Parkplatz-Farbmarkierung ist anders als Baustellen-Planraster; endgültige Geräteidentität gesondert beweisen",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        },
+        {
+          "resolution": "IDENTITY_BOUNDARY_UNDECIDED_MUST_VERIFY",
+          "canonical_target": "rf146",
+          "review_note": "Parkplatzmarkierung versus Sportplatzmarkierung: verschiedene Farbe/Untergrund; Kanonisierung nach Gerätetyp statt allein Einsatzort",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf206",
@@ -14672,7 +15009,15 @@
       "wp_release": "NICHT_FREIGEGEBEN",
       "keyword_status": "NICHT_GEMESSEN",
       "affiliate_status": "NICHT_GEPRUEFT",
-      "source_checked": "2026-11-10"
+      "source_checked": "2026-11-10",
+      "functional_resolution_v12": [
+        {
+          "resolution": "NOT_A_CORE_PURCHASABLE_PRODUCT_PAGE_AS_CURRENTLY_EVIDENCED",
+          "canonical_target": null,
+          "review_note": "iRobot Looj ausgelaufen, keine aktuelle Serienerhältlichkeit belegt",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf209",
@@ -14687,7 +15032,15 @@
       "wp_release": "NICHT_FREIGEGEBEN",
       "keyword_status": "NICHT_GEMESSEN",
       "affiliate_status": "NICHT_GEPRUEFT",
-      "source_checked": "2026-11-10"
+      "source_checked": "2026-11-10",
+      "functional_resolution_v12": [
+        {
+          "resolution": "NOT_A_CORE_PURCHASABLE_PRODUCT_PAGE_AS_CURRENTLY_EVIDENCED",
+          "canonical_target": null,
+          "review_note": "Treppensteiger-Lizenztechnik, kein verkaufter Treppensaugroboter beim genannten Anbieter",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
     },
     {
       "id": "rf210",
@@ -14702,6 +15055,359 @@
       "wp_release": "NICHT_FREIGEGEBEN",
       "keyword_status": "NICHT_GEMESSEN",
       "affiliate_status": "NICHT_GEPRUEFT",
+      "source_checked": "2026-11-10",
+      "functional_resolution_v12": [
+        {
+          "resolution": "NOT_A_CORE_PURCHASABLE_PRODUCT_PAGE_AS_CURRENTLY_EVIDENCED",
+          "canonical_target": null,
+          "review_note": "Geführte Rolltreppen-Reinigungsmaschine ohne belegte Roboterautonomie",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
+    },
+    {
+      "id": "rf211",
+      "name": "Gewächshaus-Entlaubungsroboter",
+      "topic_kind": "FUNCTIONAL_RECONCILIATION_NEW_NICHE_V12",
+      "proposed_owner": "CORE_SEPARATE_FUNCTION_CANDIDATE",
+      "proposed_location": "Landwirtschaft → Gewächshaus",
+      "source_url": "https://www.greentech.nl/products-and-services/aisprid",
+      "evidence_grade": "HERSTELLER_AISPRID_D01_PRODUKT_FACHMESSE_EU",
+      "related_existing_id": "rf039",
+      "non_duplication_rule": "Selbstständiges Entfernen unterer Blätter bei hochwachsenden Tomaten/Gurken im Gewächshaus; keine Weingarten-Entlaubung, keine Fruchternte, keine Bestäubung.",
+      "wordpress_release": "NICHT_FREIGEGEBEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "source_checked": "2026-11-10",
+      "content_depth_v12": {
+        "status": "INDIVIDUAL_CONCRETE_PRODUCT_FUNCTION_DRAFT",
+        "categories": [
+          {
+            "name": "Kulturpflege",
+            "article_directions": [
+              "Entlaubung bei Tomaten und Gurken",
+              "Zeitpunkt und Blattposition bestimmen",
+              "Abgrenzung zur Ernte und Ausdünnung"
+            ],
+            "idea_count": 3,
+            "wordpress_created": false,
+            "keyword_researched": false
+          },
+          {
+            "name": "Robotereinsatz",
+            "article_directions": [
+              "Reihenabstände und Schienensysteme",
+              "Schnitterkennung und sichere Schnittführung",
+              "Arbeit mit unterschiedlichen Pflanzenhöhen"
+            ],
+            "idea_count": 3,
+            "wordpress_created": false,
+            "keyword_researched": false
+          },
+          {
+            "name": "Betrieb",
+            "article_directions": [
+              "Werkzeuge reinigen und warten",
+              "Auslastung und Flächenleistung einordnen",
+              "Personal- und Wartungsaufwand abschätzen"
+            ],
+            "idea_count": 3,
+            "wordpress_created": false,
+            "keyword_researched": false
+          }
+        ],
+        "no_forced_categories": true,
+        "no_wordpress_release": true
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "SEPARATE_FUNCTION_RETAIN_DISTINCT_RESEARCH_CANDIDATES",
+          "canonical_target": "rf039",
+          "review_note": "Gewächshaus-Tomatenentlaubung versus Weinreben-Entlaubung mit anderer Produktmechanik",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
+    },
+    {
+      "id": "rf212",
+      "name": "Sämlings-Umpflanzroboter für Gärtnereien",
+      "topic_kind": "FUNCTIONAL_RECONCILIATION_NEW_NICHE_V12",
+      "proposed_owner": "CORE_SEPARATE_FUNCTION_CANDIDATE",
+      "proposed_location": "Landwirtschaft → Gärtnerei",
+      "source_url": "https://tta-iso.com/equipment/packplanter-s",
+      "evidence_grade": "HERSTELLER_TTA_ISO_SERIEN_PRODUKTLINIE_EU",
+      "related_existing_id": "rb038",
+      "non_duplication_rule": "Stecklinge/Jungpflanzen mechanisch von Trays in Töpfe/andere Trays umsetzen; stationäre Gärtnerei-Zelle statt autonomer Feldsäroboter oder Topf-Abstandsfahrzeug.",
+      "wordpress_release": "NICHT_FREIGEGEBEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "source_checked": "2026-11-10",
+      "content_depth_v12": {
+        "status": "INDIVIDUAL_CONCRETE_PRODUCT_FUNCTION_DRAFT",
+        "categories": [
+          {
+            "name": "Jungpflanzen",
+            "article_directions": [
+              "Stecklingsgrößen und Wurzelballen",
+              "Pflanztrays mit unterschiedlichen Zellgrößen",
+              "Umsetzen empfindlicher Jungpflanzen"
+            ],
+            "idea_count": 3,
+            "wordpress_created": false,
+            "keyword_researched": false
+          },
+          {
+            "name": "Anlagenanbindung",
+            "article_directions": [
+              "Trays und Töpfe zuführen",
+              "Greifer auf Pflanzmaterial abstimmen",
+              "Lücken in Trays erkennen und ausgleichen"
+            ],
+            "idea_count": 3,
+            "wordpress_created": false,
+            "keyword_researched": false
+          },
+          {
+            "name": "Wirtschaftlichkeit",
+            "article_directions": [
+              "Arbeitsmenge je Saison",
+              "Rüstzeiten beim Sortenwechsel",
+              "Kauf/Leasing und Wartung im Betrieb"
+            ],
+            "idea_count": 3,
+            "wordpress_created": false,
+            "keyword_researched": false
+          }
+        ],
+        "no_forced_categories": true,
+        "no_wordpress_release": true
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "SEPARATE_FUNCTION_RETAIN_DISTINCT_RESEARCH_CANDIDATES",
+          "canonical_target": "rb038",
+          "review_note": "Jungpflanzen in Gärtnerei-Trays verpflanzen versus Feldsaat-/Pflanzplattform",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
+    },
+    {
+      "id": "rf213",
+      "name": "Gewächshaus-Pflanzenkontrollroboter",
+      "topic_kind": "FUNCTIONAL_RECONCILIATION_NEW_NICHE_V12",
+      "proposed_owner": "CORE_SEPARATE_FUNCTION_CANDIDATE",
+      "proposed_location": "Landwirtschaft → Gewächshaus",
+      "source_url": "https://www.fravebot.com/",
+      "evidence_grade": "HERSTELLER_FRAVEBOT_SCOUT_EU_DEMO_KUNDENREFERENZEN",
+      "related_existing_id": "rf016",
+      "non_duplication_rule": "Mobile Pflanzenbestandsaufnahme zu Reife, Krankheiten, Schädlingsdruck; keine Ernte, Pflege-/Sprüharbeit oder stationärer Sensor.",
+      "wordpress_release": "NICHT_FREIGEGEBEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "source_checked": "2026-11-10",
+      "content_depth_v12": {
+        "status": "INDIVIDUAL_CONCRETE_PRODUCT_FUNCTION_DRAFT",
+        "categories": [
+          {
+            "name": "Pflanzenkontrolle",
+            "article_directions": [
+              "Fruchtzustand und Reife erfassen",
+              "Pflanzenkrankheiten erkennen und dokumentieren",
+              "Schädlinge im Bestand beobachten"
+            ],
+            "idea_count": 3,
+            "wordpress_created": false,
+            "keyword_researched": false
+          },
+          {
+            "name": "Daten",
+            "article_directions": [
+              "Bilder und Pflanzenreihen zuordnen",
+              "Ernteprognose von Handzählung abgrenzen",
+              "Berichte für kleine Gärtnereien nutzen"
+            ],
+            "idea_count": 3,
+            "wordpress_created": false,
+            "keyword_researched": false
+          },
+          {
+            "name": "Betrieb",
+            "article_directions": [
+              "Reihenabstände und Fahrwege",
+              "Sensoren und Kameras pflegen",
+              "Kosten eines mobilen Monitorings beurteilen"
+            ],
+            "idea_count": 3,
+            "wordpress_created": false,
+            "keyword_researched": false
+          }
+        ],
+        "no_forced_categories": true,
+        "no_wordpress_release": true
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "SEPARATE_FUNCTION_RETAIN_DISTINCT_RESEARCH_CANDIDATES",
+          "canonical_target": "rf016",
+          "review_note": "Autonomes Beobachten und Auswerten statt allgemeiner Pflanzenpflege; breiter Sammelbegriff nicht selbst Endseite",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
+    },
+    {
+      "id": "rf214",
+      "name": "Spülgut-Handhabungsroboter für Gastronomie",
+      "topic_kind": "FUNCTIONAL_RECONCILIATION_NEW_NICHE_V12",
+      "proposed_owner": "CORE_FUNCTION_B2B_SERVICE_GATING",
+      "proposed_location": "Gastro & Handel",
+      "source_url": "https://armstrong.ai/home-1",
+      "evidence_grade": "HERSTELLER_ARMSTRONG_US_RESTAURANT_KETTEN_ABO",
+      "related_existing_id": "rf020",
+      "non_duplication_rule": "Roboterarm räumt Geschirr ein, vorreinigt und sortiert es vor/nach vorhandener Spülmaschine; keine bloße Standardspülmaschine, keine Servier- oder Kochrobotik. Verfügbarkeit DE und Rentabilität kleiner Betriebe offen.",
+      "wordpress_release": "NICHT_FREIGEGEBEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "source_checked": "2026-11-10",
+      "content_depth_v12": {
+        "status": "INDIVIDUAL_CONCRETE_PRODUCT_FUNCTION_DRAFT",
+        "categories": [
+          {
+            "name": "Geschirrarten",
+            "article_directions": [
+              "Teller, Gläser und Besteck erkennen",
+              "Schmutz und Restanhaftungen behandeln",
+              "Beschädigte oder ungeeignete Gegenstände aussortieren"
+            ],
+            "idea_count": 3,
+            "wordpress_created": false,
+            "keyword_researched": false
+          },
+          {
+            "name": "Spülstrecke",
+            "article_directions": [
+              "In bestehende Spülmaschine einräumen",
+              "Sauberes Geschirr wieder ausräumen",
+              "Verschiedene Arbeitsabläufe am Band"
+            ],
+            "idea_count": 3,
+            "wordpress_created": false,
+            "keyword_researched": false
+          },
+          {
+            "name": "Betrieb",
+            "article_directions": [
+              "Reinigungs- und Hygienestandards",
+              "Stellfläche und Wartung",
+              "Aboangebot und Auslastung im Restaurant"
+            ],
+            "idea_count": 3,
+            "wordpress_created": false,
+            "keyword_researched": false
+          }
+        ],
+        "no_forced_categories": true,
+        "no_wordpress_release": true
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "SEPARATE_FUNCTION_RETAIN_DISTINCT_RESEARCH_CANDIDATES",
+          "canonical_target": "rb022",
+          "review_note": "Geschirr in Spülmaschine räumen gegenüber Servierwagen zum Gast",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
+    },
+    {
+      "id": "rf215",
+      "name": "Vollautomatische Küchen-Kochzellen",
+      "topic_kind": "FUNCTIONAL_RECONCILIATION_NEW_NICHE_V12",
+      "proposed_owner": "CORE_MULTIDISH_FUNCTION_B2B_GATING",
+      "proposed_location": "Gastro & Handel",
+      "source_url": "https://www.goodbytz.com/press/goodbytz-presents-new-product-emma.",
+      "evidence_grade": "HERSTELLER_GOODBYTZ_DE_KOMMERZIELLE_SYSTEME_2026",
+      "related_existing_id": "rf020",
+      "non_duplication_rule": "Mehrgericht-Küchenzelle bereitet ganze Speisen aus Zutaten selbstständig zu; nicht nur Wokschwenken rf168, Pizzabelag rf169 oder Speisenausgabe rb027. Vor Produktseite eine funktionale Abgrenzung der gesamten Kochzelle festhalten.",
+      "wordpress_release": "NICHT_FREIGEGEBEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "source_checked": "2026-11-10",
+      "content_depth_v12": {
+        "status": "INDIVIDUAL_CONCRETE_PRODUCT_FUNCTION_DRAFT",
+        "categories": [
+          {
+            "name": "Gerichte",
+            "article_directions": [
+              "Mehrere Menüs aus wechselnden Zutaten",
+              "Portionen und Bestellreihenfolge",
+              "Ernährungsvarianten und Rezeptwechsel"
+            ],
+            "idea_count": 3,
+            "wordpress_created": false,
+            "keyword_researched": false
+          },
+          {
+            "name": "Küchenbetrieb",
+            "article_directions": [
+              "Zutatenzufuhr und Nachfüllen",
+              "Anbindung an Bestellsysteme",
+              "Rüstzeiten und Stellfläche"
+            ],
+            "idea_count": 3,
+            "wordpress_created": false,
+            "keyword_researched": false
+          },
+          {
+            "name": "Hygiene",
+            "article_directions": [
+              "Lebensmittelkontaktstellen reinigen",
+              "Allergenwechsel und Kontamination",
+              "Wartung und laufende Kosten"
+            ],
+            "idea_count": 3,
+            "wordpress_created": false,
+            "keyword_researched": false
+          }
+        ],
+        "no_forced_categories": true,
+        "no_wordpress_release": true
+      },
+      "functional_resolution_v12": [
+        {
+          "resolution": "SEPARATE_FUNCTION_RETAIN_DISTINCT_RESEARCH_CANDIDATES",
+          "canonical_target": "rf168",
+          "review_note": "Komplette Mehrgericht-Kochzelle versus Wok-/Pfannengerichte",
+          "scope": "PROVISIONAL_FUNCTIONAL_RESEARCH_NOT_WORDPRESS_COMMIT"
+        }
+      ]
+    },
+    {
+      "id": "rf216",
+      "name": "Robotische Textil-Nähzellen",
+      "source_url": "https://www.abb.com/global/en/areas/robotics/solutions/application-cells/omnivance-sewing-cell",
+      "evidence_grade": "HERSTELLER_2026_INDUSTIERIELLE_NAEHZELLE",
+      "related_existing_id": "rb007",
+      "proposed_location": "Industrie → Fertigung (Kleinbetriebseignung offen)",
+      "proposed_owner": "CORE_INDUSTRY_FOCUSED_KLEINBETRIEBSEIGNUNG_OFFEN",
+      "non_duplication_rule": "Roboter greift, führt, prüft und näht flexible Stoffe/Leder mit Nähmaschine; nicht allgemeiner SCARA-Montagearm. ABB-Angebot auf Automotive-Interieur ausgelegt; Eignung kleiner Schneiderateliers NICHT nachgewiesen.",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "topic_kind": "UNDERREPRESENTED_SECTOR_RESEARCH_V12",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "source_checked": "2026-11-10"
+    },
+    {
+      "id": "rf217",
+      "name": "Robotische Schnittblumen-Ernte",
+      "source_url": "https://research.wur.nl/en/publications/design-and-evaluation-of-a-robotic-prototype-for-gerbera-harvesti/",
+      "evidence_grade": "WUR_GERBERA_FELDVERSUCH_2025_PROTOTYP_KEIN_GERAETESHOP",
+      "related_existing_id": "rb039",
+      "proposed_location": "Landwirtschaft → Blumenbau (Forschung)",
+      "proposed_owner": "MAGAZIN_FORSCHUNG_NOCH_KEIN_SERIENPRODUKT",
+      "non_duplication_rule": "Gerbera-Stiel schneiden und Blüte greifschonend ernten, nicht Obsternte und nicht Blumen verpacken; Herstellerprodukt/Verfügbarkeit bislang nicht belegt.",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "topic_kind": "UNDERREPRESENTED_SECTOR_RESEARCH_V12",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
       "source_checked": "2026-11-10"
     }
   ],
@@ -14713,7 +15419,7 @@
     "wp_plan_unchanged": true,
     "evidence_grade_note": "Herstellerbeleg bestaetigt Existenz einzelner Loesungen, nicht Marktgroesse/DE-Keyword oder Kategoriefreigabe."
   },
-  "concept_status": "RESEARCH_REV17_NOT_WORDPRESS_APPROVED",
+  "concept_status": "FUNCTIONAL_RECONCILIATION_V12_RESEARCH_UNAPPROVED",
   "knowledge_views_v1": {
     "status": "PROPOSAL_ONLY",
     "concept_document": "RECHERCHE/GLOSSAR_FINDER_MODELLREGISTER_V1_20261109.md",
@@ -15528,5 +16234,327 @@
     "no_wordpress_write": true,
     "no_keywords": true,
     "decision": "Concrete product/functional difference; prototype, automation-only, licence-only and discontinued devices remain research rather than CORE."
+  },
+  "functional_reconciliation_v12": {
+    "date": "2026-11-10",
+    "policy": "Nur eigentliche Roboterfunktion der letzten WordPress-Seite. Keine Pflicht-Vertiefungskategorien, pro neue Kategorie >=3 klar verschiedene Beitragsrichtungen; oft 3–5. Magazin, Glossar, Register, Finder, Anzeigenmarkt einheitlich für Privat und Industrie.",
+    "duplicates": {
+      "status": "SAME_FUNCTION_RESEARCH_ALIAS_NO_SECOND_CORE_LEAF",
+      "rule": "Keine Daten löschen. Diese IDs bleiben als Recherche-/Verweisdatensätze. Erst bei späterem Produktbaum nur die kanonische Seite schreiben.",
+      "records": [
+        {
+          "id": "rf004",
+          "target": "rb046",
+          "reason": "Apotheken-Packungskommissionierung bereits als Medikamenten-Kommissionierung enthalten; nur bei belegtem anderen Mechanismus trennen"
+        },
+        {
+          "id": "rf028",
+          "target": "rb001",
+          "reason": "Schiffbau ist Schweißanwendung, keine neue Lichtbogenschweiß-Funktion"
+        },
+        {
+          "id": "rf025",
+          "target": "rf005",
+          "reason": "Mischabfall-Sortieren ist Einsatzgut desselben Abfallsortierroboters"
+        },
+        {
+          "id": "rf045",
+          "target": "rf018",
+          "reason": "Recycling-Kunststofftrennung überschneidet sich funktional mit vorhandener Kunststoff-/Metallsortierung; Materialvariante"
+        },
+        {
+          "id": "rf050",
+          "target": "rb044",
+          "reason": "Wäschetransport im Krankenhaus ist Unterfall interner Krankenhaus-Transportroboter"
+        },
+        {
+          "id": "rf052",
+          "target": "rb010",
+          "reason": "Gussformen-Entgraten ist werkstoff-/branchenbezogene Anwendung des Entgratungsroboters"
+        },
+        {
+          "id": "rf054",
+          "target": "rf001",
+          "reason": "PV-Dachreinigung gleiche Hauptfunktion wie Photovoltaik-Reinigungsroboter; Dachneigung/Eignung als Kategorie"
+        },
+        {
+          "id": "rf043",
+          "target": "rb053",
+          "reason": "Kommunale Rohrnetzinnenprüfung ist Teil der bestehenden Kanal-/Rohrleitungsinspektion, sofern Inspektionsfunktion identisch"
+        },
+        {
+          "id": "rf163",
+          "target": "rb062",
+          "reason": "Yarbo-Laubbläser als Modul derselben Mehrzweck-Gartenplattform; keine weitere vollständige identische Robotersystemseite"
+        }
+      ]
+    },
+    "keep": {
+      "status": "SEPARATE_FUNCTION_RETAIN_DISTINCT_RESEARCH_CANDIDATES",
+      "rule": "Unterschiedliche Hauptaufgabe belegt oder plausibel; Eigenseite bleibt nur Kandidat bis Produkt-, Kauf- und Inhaltspotenzial-Abgleich.",
+      "records": [
+        {
+          "id": "rf141",
+          "target": "rb063",
+          "reason": "Pooloberfläche absammeln ist anderes Hauptreinigungsgebiet als Boden/Wände"
+        },
+        {
+          "id": "rf137",
+          "target": "rf148",
+          "reason": "Tennisbälle aufsammeln versus Trainingsbälle zuspielen"
+        },
+        {
+          "id": "rf194",
+          "target": "rf195",
+          "reason": "Bodenfliesen verlegen versus verfugen"
+        },
+        {
+          "id": "rf200",
+          "target": "rf150",
+          "reason": "Mobile Grab-Gießroute versus feste Beetpflegeplattform"
+        },
+        {
+          "id": "rf156",
+          "target": "rf014",
+          "reason": "Wasseroberflächenmüll aufnehmen versus terrestrische Straßen-/Parkflächen"
+        },
+        {
+          "id": "rf201",
+          "target": "rb033",
+          "reason": "Geflügel-Einstreu lockern/Herden stimulieren versus Stallmist/Bodenreinigung"
+        },
+        {
+          "id": "rf211",
+          "target": "rf039",
+          "reason": "Gewächshaus-Tomatenentlaubung versus Weinreben-Entlaubung mit anderer Produktmechanik"
+        },
+        {
+          "id": "rf212",
+          "target": "rb038",
+          "reason": "Jungpflanzen in Gärtnerei-Trays verpflanzen versus Feldsaat-/Pflanzplattform"
+        },
+        {
+          "id": "rf213",
+          "target": "rf016",
+          "reason": "Autonomes Beobachten und Auswerten statt allgemeiner Pflanzenpflege; breiter Sammelbegriff nicht selbst Endseite"
+        },
+        {
+          "id": "rf214",
+          "target": "rb022",
+          "reason": "Geschirr in Spülmaschine räumen gegenüber Servierwagen zum Gast"
+        },
+        {
+          "id": "rf215",
+          "target": "rf168",
+          "reason": "Komplette Mehrgericht-Kochzelle versus Wok-/Pfannengerichte"
+        },
+        {
+          "id": "rf205",
+          "target": "rb048",
+          "reason": "Parkplatz-Farbmarkierung ist anders als Baustellen-Planraster; endgültige Geräteidentität gesondert beweisen"
+        },
+        {
+          "id": "rf002",
+          "target": "rb059",
+          "reason": "Rumpf reinigen gegenüber nur unter Wasser inspizieren; Spezialbauart/Autonomie getrennt nachweisen"
+        }
+      ]
+    },
+    "broad": {
+      "status": "TOO_BROAD_FOR_LAST_PRODUCT_PAGE_NEEDS_REDEFINITION",
+      "rule": "Übersicht bleibt erreichbar und indexierbar, aber nicht als letzte produktkonkrete WP-Seite und nicht mit pauschalen FAQ/Pflege-Kategorien füllen.",
+      "records": [
+        {
+          "id": "rb013",
+          "target": null,
+          "reason": "Verpackungsroboter umfasst Einpacken, Kartonieren, Wickeln; letzte Seite konkrete Verpackungsaufgabe, z.B. Palettenwickler rf192"
+        },
+        {
+          "id": "rb029",
+          "target": null,
+          "reason": "Fassaden- und Fensterreinigungsroboter vermischt eigenständige Fassaden- und Glasreinigungsfunktionen; Privatfensterputzer rb064 bereits da"
+        },
+        {
+          "id": "rb039",
+          "target": null,
+          "reason": "Obst-Ernteroboter fasst verschiedene Ernteprinzipien zusammen; konkrete Frucht/Bauart prüfen, Pilz rf135 oder Erdbeer rf006 nicht zusätzlich kopieren"
+        },
+        {
+          "id": "rb041",
+          "target": null,
+          "reason": "Chirurgieroboter ist zu breit für eine einzelne konkrete Produktart; Eingriffsfunktion und Produkttyp abgrenzen"
+        },
+        {
+          "id": "rb043",
+          "target": null,
+          "reason": "Roboter-Exoskelett vermischt Freizeit-Gehhilfe, Arbeitsplatz-Hebehilfe und Rehabilitation; Technik/Funktion vor letzter Seite unterscheiden"
+        },
+        {
+          "id": "rb065",
+          "target": null,
+          "reason": "Haushalts-Assistenzroboter ist Sammelbegriff; Essroboter rf175 und Rollstuhlarm rf176 bereits funktional getrennt"
+        },
+        {
+          "id": "rf007",
+          "target": null,
+          "reason": "Multifunktions-Feldplattform kann übergeordnete Übersicht sein; nicht pro angebautem Werkzeug identische Systeme duplizieren"
+        },
+        {
+          "id": "rf013",
+          "target": null,
+          "reason": "Allgemeiner Altenpflege-Assistenzroboter ist ohne konkrete Aufgabe zu breit, noch keine letzte Seite"
+        },
+        {
+          "id": "rf016",
+          "target": null,
+          "reason": "Allgemeine Gewächshaus-Pflanzpflege ist Sammelbegriff; konkrete Entlaubung, Kontrolle, Bestäubung separat"
+        },
+        {
+          "id": "rf020",
+          "target": null,
+          "reason": "Allgemeine automatisierte Lebensmittelzubereitung ist zu breit; Wok, Pizza, Speisen-Kochzelle funktional trennen"
+        },
+        {
+          "id": "rb021",
+          "target": null,
+          "reason": "Mobiler Greif-/Manipulationsroboter: spezifische Aufgaben und Autonomie belegen, erst dann Produktfunktion definieren"
+        }
+      ]
+    },
+    "service": {
+      "status": "NOT_A_CORE_PURCHASABLE_PRODUCT_PAGE_AS_CURRENTLY_EVIDENCED",
+      "rule": "Magazin/Marktbeobachtung oder HivePress-Dienstleistungsrubrik; keine künstlichen CORE-Produktkategorien.",
+      "records": [
+        {
+          "id": "rf138",
+          "target": null,
+          "reason": "Rotorblattreparatur als Anbieter-Dienstleistung; in gemeinsamem Anzeigenmarkt statt behauptetem Gerätekauf"
+        },
+        {
+          "id": "rf173",
+          "target": null,
+          "reason": "Tattoo-Robotik als Franchise/Studioangebot, kein unabhängig frei kaufbares Gerät nachgewiesen"
+        },
+        {
+          "id": "rf191",
+          "target": null,
+          "reason": "Crêpe-Robotik als Betreiberangebot, nicht als allgemeiner Gerätekauf"
+        },
+        {
+          "id": "rf208",
+          "target": null,
+          "reason": "iRobot Looj ausgelaufen, keine aktuelle Serienerhältlichkeit belegt"
+        },
+        {
+          "id": "rf209",
+          "target": null,
+          "reason": "Treppensteiger-Lizenztechnik, kein verkaufter Treppensaugroboter beim genannten Anbieter"
+        },
+        {
+          "id": "rf210",
+          "target": null,
+          "reason": "Geführte Rolltreppen-Reinigungsmaschine ohne belegte Roboterautonomie"
+        },
+        {
+          "id": "rf189",
+          "target": null,
+          "reason": "Hundekot-Sammelroboter nur Vorbestellung/Warteliste, kein sicher lieferbares Produkt"
+        },
+        {
+          "id": "rf199",
+          "target": null,
+          "reason": "Stallboden-Eiersammeln als Forschung, ohne belegte Serienkaufbarkeit"
+        }
+      ]
+    },
+    "review": {
+      "status": "IDENTITY_BOUNDARY_UNDECIDED_MUST_VERIFY",
+      "rule": "Keine endgültige Verschmelzung vor konkreter Funktions-, Geräte- und Suchintentprüfung; ein Modell darf nicht versehentlich auf mehreren identischen Kaufseiten erscheinen.",
+      "records": [
+        {
+          "id": "rb014",
+          "target": "rb015",
+          "reason": "AMR und AGV unterscheiden Navigation und Infrastruktur; separate Seiten nur bei unterschiedlichen Funktions-/Kaufintents"
+        },
+        {
+          "id": "rb016",
+          "target": "rb014",
+          "reason": "Palettentransport ist spezielle Lastaufgabe; getrennte Produktseite nur bei eigenständigem System und Bedarf"
+        },
+        {
+          "id": "rb060",
+          "target": "rb061",
+          "reason": "Saug- und Wischfunktion oft in einem Gerät; keine doppelte identische Modellberatung"
+        },
+        {
+          "id": "rf002",
+          "target": "rf002",
+          "reason": "Yacht im Hafen versus Großschiff während der Fahrt: gleiche Reinigungszielsetzung, starke technische Unterschiede; eine oder zwei Produktfunktionen nur nach Produktsystemvergleich"
+        },
+        {
+          "id": "rf205",
+          "target": "rf146",
+          "reason": "Parkplatzmarkierung versus Sportplatzmarkierung: verschiedene Farbe/Untergrund; Kanonisierung nach Gerätetyp statt allein Einsatzort"
+        },
+        {
+          "id": "rf163",
+          "target": "rf140",
+          "reason": "Modulare Gartenplattform: Schneefräse und Mähen sind Aufgaben, aber dasselbe Basissystem; keine duplizierten Komplettgeräteseiten"
+        },
+        {
+          "id": "rf049",
+          "target": "rf049",
+          "reason": "Gewächshaus-Bestäubungsroboter bereits vorhanden; Marktstart Polly im Oktober 2026 ist Evidenz-Upgrade, keine zweite Produktart"
+        },
+        {
+          "id": "rf157",
+          "target": "rf157",
+          "reason": "Privater und gewerblicher Einsatz von Wäschefaltrobotern begründen allein keine zwei Produkt-Owner – bereits selbst kanonischer Kandidat; keine Alias-Zuordnung auf sich selbst."
+        },
+        {
+          "id": "rf036",
+          "target": "rf036",
+          "reason": "Prototypische Fassadenfugenarbeit nicht noch einmal unter Reparaturroboter anlegen – bereits selbst kanonischer Kandidat; keine Alias-Zuordnung auf sich selbst."
+        }
+      ]
+    },
+    "additional_underrepresented": [
+      {
+        "id": "rf216",
+        "sector": "Textil",
+        "gate": "INDUSTRIEFOKUS_KLEINBETRIEB_EIGNUNG_OFFEN_NICHT_EXKLUSIV_BEWIESEN"
+      },
+      {
+        "id": "rf217",
+        "sector": "Blumenbau",
+        "gate": "FORSCHUNG_KEIN_KAUFPRODUKT"
+      }
+    ]
+  },
+  "research_round_v12": {
+    "previous_revision": 17,
+    "revision": 18,
+    "base_types": 68,
+    "research_before": 210,
+    "research_after": 217,
+    "new_functional_candidate_ids": [
+      "rf211",
+      "rf212",
+      "rf213",
+      "rf214",
+      "rf215",
+      "rf216",
+      "rf217"
+    ],
+    "functional_audit_counts": {
+      "duplicates": 9,
+      "keep": 13,
+      "broad": 11,
+      "service": 8,
+      "review": 9
+    },
+    "no_keyword_research": true,
+    "no_wp_writes": true,
+    "no_plugin_changes": true
   }
 }
