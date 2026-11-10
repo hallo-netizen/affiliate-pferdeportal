@@ -1,7 +1,7 @@
 # ROBOTIK → KATEGORIE
 Stand: 10.11.2026
 
-**Einziger operativer Status:** [CURRENT_STATE.md](CURRENT_STATE.md). **EINZIGER Forschungsmaster Revision 10**; frühere Versionen in älteren Prüfprotokollen sind historische Zwischenstände.
+**Einziger operativer Status:** [CURRENT_STATE.md](CURRENT_STATE.md). **EINZIGER Forschungsmaster Revision 11**; frühere Versionen in älteren Prüfprotokollen sind historische Zwischenstände.
 
 ## Was hier liegt
 - [ZIELVERTRAG.md](ZIELVERTRAG.md) – verbindliche Arbeitsgrenzen.
@@ -64,3 +64,7 @@ Das neue Büro besitzt keine Verknüpfung mit bestehenden Projekt-Daten. Es gibt
 ## AKTUELL – 8 kurze Hauptwelten (10.11.2026)
 - [RECHERCHE/KURZNAMEN_HAUPTNAVIGATION_V4_20261110.md](RECHERCHE/KURZNAMEN_HAUPTNAVIGATION_V4_20261110.md) – acht kurze Hauptwelten, 68 kurze Produkt-Labels und 200 vorläufige kurze Inhaltskategorien, alte Titel erhalten; keine SEO-/WordPress-Freigabe.
 - [Aktuelle Daten im EINEN Fachmaster Revision 10](RECHERCHE/PRODUKTE_V2_20261108.json) – `navigation_v1` ist die eine aktuelle **Entwurfsnavigation**; `worlds_v1` mit zehn Welten ist nur historische Recherche, kein zweites aktives Menü.
+
+## AKTUELL: Zielgruppen-/Industrie-Navigation V5 (10.11.2026)
+- [RECHERCHE/ZIELGRUPPEN_NAVIGATION_V5_20261110.md](RECHERCHE/ZIELGRUPPEN_NAVIGATION_V5_20261110.md) – Käufer im Hauptmenü, Industrie mit drei sinnvollen Landingpages, **Magazin/Glossar/Register/Finder/Anzeigenmarkt gemeinsam** für alle Nutzer.
+- [Aktueller Produktforschungs-Master Revision 11](RECHERCHE/PRODUKTE_V2_20261108.json), `audience_navigation_v2` ist der **eine aktuelle sichtbare Navigationsentwurf**. V4 `navigation_v1` nur historische Alternative, kein paralleler Menu-Current.
