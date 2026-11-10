@@ -1,3 +1,11 @@
+## 10.11.2026 – echte WordPress-Test-K0-METADATEN-DATEI empfangen und abgenommen
+
+- **Jüngster und verbindlicher Beweis:** Echte Betreiberdatei aus WordPress-TEST `seo-redaktionsplan-produktionshandoff-42619ca7b6e36a625e0c8ae4e562534a9ff1b115ac7772f598435a064d06f546.json`. PSERC 0.28.60 Original-`Metadata_Boundary` / Exportvalidierung **PASS** mit **3 READY**, unveränderter JSON-Eingang `PSERC_TEXTMACHINE_METADATA_BATCH_V2`, exakt 5 Felder je Thema, 3 einzigartige Artikelplätze, Hash **exakt** gleich dem K0-Original-Eingangsalgorithmus. Kategorie-Slug in von K0 referenziertem `affiliate-release-current`-Register unter term_id 10 bestätigt. Negative Manipulations- und Duplikatprüfungen BLOCKED. **Bestehende Dateiausgabe funktioniert bewiesen; KEIN neuer Exporter.**
+- Nur `WordPress-TEST → PSERC → K0-Metadaten-Eingangsdatei` ist **abgenommen**. K0-Recherche/Texterstellung/WordPress-ARTIKELDATEI wurden **nicht** gestartet und bleiben zurückgestellt. Originaldatei privat, GitHub nur nicht-sensitive Prüfnachweise: [QA Abnahme 10.11.](QA_ONLY/PSERC_K0_ECHTE_DATEI_ABNAHME_20261110.md).
+- **NEXT ACTION:** Verlustfreie technische PSERC/PSTE-Backend-Verschlankung auf isolierter Kopie mit tatsächlicher Hook-/Options-/Datei- und Funktionserreichbarkeitsprüfung, ohne neue Architektur, Datenlöschung oder K0-Änderung; identische gültige Dateiübergabe als Regression festhalten.
+
+---
+
 ## 10.11.2026 – PSERC 0.28.60 nur TEST: zweite alte Portalprüfung für echten externen SEO-Owner entfernt
 - WordPress-Test-Screenshot .59: gültiger Plan, **8 geeignet / 0 READY / 8 BLOCKED_PORTAL_TOPIC_EVIDENCE**. Ursache im vorhandenen Originalcode: alte Portalbeleg-Komplettprüfung ignoriert bereits geprüften externen SEO-Owner.
 - In bestehender Gate-Klasse (kein neues System) wird nur für einen original aus PSTE gebundenen, **nachweislich an den Plan weitergegebenen** FREI-Receipt die alte fachliche Zweitprüfung nicht nochmals ausgeführt. Technische Bindungen, Frühstopp, Kategorie-/Artikeltyp-Schutz und 5-Feld-Dateivertrag bleiben; **kompletter Legacy-Code unverändert**.
