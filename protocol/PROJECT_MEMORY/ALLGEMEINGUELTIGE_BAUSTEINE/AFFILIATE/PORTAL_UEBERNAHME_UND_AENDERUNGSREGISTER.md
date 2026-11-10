@@ -78,3 +78,10 @@
 - **Nicht automatisch zwischen den Portalen kopieren.** Gemeinsam nutzbare Verbesserungen erst einzeln gegen die jeweils eigene Quelle vergleichen, dann unabhängig testen/freigeben.
 
 **Aktualisierungssystem:** Auf bestätigte Änderungen prüfen, neue Einträge nur bei Befund anhängen; keine Änderungen = kein künstlicher Eintrag. Dieser Eintrag ist die Anfangsmessung für die fortlaufende Kontrolle.
+
+### 2026-11-10 – Pferdeatelier QA5: KISS-Gesamtworkflow, gezielte Bereinigung (nur Staging)
+- **Basis:** Gesicherte 6.72.319-KISS-QA4-Arbeitskopie, nicht GitHub-CURRENT und nicht WordPress-Live.
+- **Tatsächlich geändert:** Nur die BUSINESS-Bereinigung im bestehenden kanonischen Ablauf: gezielte Lückenprüfung liest nur die betroffenen Familien; normale Vollbereinigung und ihre Entscheidungen bleiben erhalten. **Ein Programmweg**, keine zusätzliche Tabelle, Funktion oder Steuerung.
+- **Abgleich:** 66/66 Dateien, 65/66 byteidentisch zu QA4; acht ältere Regressionsskripte und 23 PHP-Lints bestanden. Neun QA4/QA5-Vergleiche gleicher Produktaktionen und Abschlüsse; Beispiel 2.000 Testzeilen: 41 auf 1 Datenbankabfrage. Kein WordPress-Live-Test.
+- **Originalpaket und Tests** als separate, ausdrücklich **NICHT INSTALLIEREN** bezeichnete Arbeitskopie im persönlichen Pferdeatelier-Pluginbüro: `/pferdeatelier/PLUGINS/QA/EBAY_319_KISS_EIN_WORKFLOW_QA5_PRUNE_NICHT_INSTALLIEREN_20261110.zip` (SHA256 `561e5a4ef7148b351579aec8f67073bbf0805c5d1e1bc79d2d7b8c9444c26dc3`), Testparität, Protokoll und Patch. Derselbe **vollständige neue Quellpatch** liegt reproduzierbar auf GitHub unter `release/affiliate-zentrale/evidence/EBAY_672319_KISS_QA5_AUFRAEUMEN_NUR_ZIELFAMILIEN_20261110.patch`.
+- **GitHub-Zwischenbericht:** `release/affiliate-zentrale/evidence/EBAY_672319_KISS_QA5_ZWISCHENSTAND_20261110.md`. Keine Änderung an Zugangsdaten, Recherchebestand, K0, Hobby oder Hab. Der laufende WordPress-Job bleibt pausiert. **Weiterhin keine Freigabe bis zur echten WordPress-/Produktseitenprüfung.**
