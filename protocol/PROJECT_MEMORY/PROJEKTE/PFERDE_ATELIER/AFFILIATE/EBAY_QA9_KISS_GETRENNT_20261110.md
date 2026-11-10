@@ -51,3 +51,14 @@ Eine pausierte, gescheiterte oder noch laufende eBay-Recherche darf den bereits 
 - Separate Verfügbarkeit auf **begrenzte Serverlast** prüfen; Pakete/Weiterleitung nicht mit Recherche konkurrieren lassen, ohne wieder von der Recherche abhängig zu werden. Sechs-Stunden-Frische und 2h-Prüfziel beibehalten.
 - **Vorher/nachher in echtem WordPress messen** (Backend-Ladezeit, AJAX, Cron-Job, Abdeckung, aktuelle Freigaben); ohne Messung keine Aussage „Backend-Langsamkeit behoben“.
 - Alle recherchierten Produkte, Zuordnungen, Laufcursor, öffentliche Checkpoints und historischen Daten erhalten; andere Portale unangetastet.
+
+### Reales Backend-Folgefoto 17:48 Uhr
+
+Quelle: weiterer Nutzerscreenshot vom 10.11.2026 um 17:48 Uhr (WordPress `pferde-atelier.de/wp-admin/admin.php?page=affiliate-portal-ebay`).
+
+- Derselbe laufende kanonische eBay-Gesamtlauf, Phase `gapfill_discovery`, weiterhin **running**.
+- **Pakete 360 → 399, reale Fortschrittsschritte 365 → 404** seit Screenshot ca. 17:40 Uhr. Das sind 39 Pakete und 39 Schritte in acht Minuten; **kein Laufstillstand nachgewiesen**.
+- **Öffentliche Familienabdeckung 154/298 (144 offen) unverändert**, **232 gespeicherte Freigaben unverändert**. Aus laufender Nachsuche allein folgt kein veröffentlichter Gewinn; daraus kann weder Markt-Nichtverfügbarkeit noch ein Veröffentlichungsfehler für jede einzelne Familie geschlossen werden.
+- **Verfügbarkeitsstatus weiterhin „noch nicht geprüft“**. Kein dokumentierter erfolgreicher Durchlauf der neuen QA9-Verfügbarkeitsaufgabe.
+- **Lease: frei**, **Selbstfortsetzung: aktiv**. Benutzer hatte zuvor sehr langsames WordPress-Backend gemeldet, in diesem Folgefoto keine Antwortzeitmessung.
+- **Nächste Version, nicht als erledigt ausgeben:** Status-Polling wirklich lesend, teure Berichte nur auf Anforderung, Hintergrund-Taktung/Last sauber begrenzen. Bestehende Recherche, Angebote, 232 gespeicherte Freigaben, Checkpoint und Cursor nicht zurücksetzen. Kein weiterer Plugin-/Daten-Eingriff aus dieser Beobachtung.
