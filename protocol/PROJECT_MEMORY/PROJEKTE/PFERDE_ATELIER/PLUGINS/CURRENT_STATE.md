@@ -1,3 +1,15 @@
+## 10.11.2026 – neuer echter TEST-Befund: PSERC-ACTIVATE-Sperre, K0-Dateigrenze geprüft
+
+- Nutzer-Screenshot auf WordPress-TEST: PSERC **0.28.55-one-owner-no-fallback**, letzter aktiver Snapshot **5.016 Themen/0 READY** (veraltet); neuer Lauf **BLOCKED**, `phase=ACTIVATE`, `PSERC_PLAN_LIVE_EDITORIAL_PLAN_CHANGED_BEFORE_ACTIVATE`; im bisherigen Arbeitsstand 1 geeignet/1 geprüft/0 READY. **Nicht** als erfolgreicher K0-Test.
+- In Originalcode geprüft: `PSERC_Plan_Compile_Job::tickActivate` vergleicht den realen Editorial-Plan gegen den zu Laufbeginn gebundenen Hash. Diese Schutzprüfung darf **nicht** entfernt/übergangen werden. Der genaue Inhalt des geänderten WP-Plans ist ohne aktuelle read-only WP-Werte nicht belegt.
+- Wichtige Richtigstellung: PSERC **zählt** 5.016 Gesamtthemen, `PSTE_Repository::compilerPlanningTopicCount/Page` **filtert** die tatsächlichen Planungsleser aber auf `planning_suitability=YES`, aktuellen Kontext und K0-Route. Kein belegter pauschaler 5.016er SEO-Neulauf.
+- Echte v29-WP-Reportdatei gelesen: **7 PASS im NORMAL_PATH**, aber damit noch keine PSERC-`READY_FOR_METADATA_HANDOFF`-Freigabe. Original-`PSERC_SEO_Reader` verlangt zusätzlich alle gebundenen Handoff-Eigenschaften.
+- Bestehende PSERC-`0.28.55`-Ausgabe mit Original-`PSERC_Metadata_Boundary` offline erneut getestet: 7 positive/negative Fälle PASS, K0-V2-Vertrag mit fünf Feldern stimmt. **Kein echter TEST-WordPress-Handoff >=1 READY**.
+- Keine neue Plugininstallation, keine Code-/Options-/WP-Datenänderung. Der .56-QA-Entwurf ist **kein** Fix dieser Ursache und wird **nicht** zur Installation freigegeben.
+- Verlustfreie Verschlankung erst mit Schutz der gespeicherten Daten, aller dynamischen Aufrufe und echten K0-Testfreigabe. Verbindlicher Befund und Maßnahmen: [10.11. QA K0-Handoff / Verschlankung](QA_ONLY/PSERC_K0_HANDOFF_SCHLANKHEIT_20261110.md).
+
+---
+
 ## VERBINDLICHER NEUER QA-STAND – 09.11.2026, PSTE 0.57.144.32 GEBAUT, NICHT INSTALLIERT
 
 **WordPress-TEST tatsächlich installiert bleibt 0.57.144.31; Kategorie beim Kolik-Beispiel ist bereits erfolgreich gespeichert.** Neues v32-Test-ZIP wurde aus exakt dieser .31-Original-ZIP gebaut, SHA256 `ab0231850a9b79b3c5f8b103b2700bc7f6b2a87d3adac38009f43c1bbe2f653f`, 651291 Bytes, physisch im privaten `/pferdeatelier/PLUGINS/QA/` gespeichert; 121 identische Dateipfade, 116 Dateien unverändert, 5 bestehende Dateien geändert, 83 PHP-Lints, ZIP-CRC und Quell-Readback PASS, 17 gezielte plus 7 MINI-Import-Prüfungen PASS. **Kein v32-WP-Test und kein E2E-PASS.** Technischer QA-Nachweis mit vollständigem Code-Diff: [v32-Paket](QA_ONLY/PSTE_05714432_KISS_BUNDLE_20261109/README.md).
