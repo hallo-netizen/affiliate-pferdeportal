@@ -3045,6 +3045,13 @@
         "no_wordpress_write": true,
         "evidence": "HERSTELLER_FUNKTIONSBASIERTE_FACHABSCHAETZUNG_KEINE_KEYWORDMESSUNG",
         "shared_magazin_glossar_finder_market": true
+      },
+      "additional_source_check_v11": {
+        "checked_at": "2026-11-10",
+        "source_url": "https://www.robotic-conceptz.com/",
+        "observation": "Deutschland bietet tatsächlich kauf-/leasingfähige kompakte Gewerbereinigungsroboter auch für Praxen, Studios und kleine Läden; kein Industrie-only.",
+        "no_new_id": true,
+        "affiliate_not_validated": true
       }
     },
     {
@@ -7204,7 +7211,7 @@
     }
   ],
   "canonical_source": true,
-  "revision": 16,
+  "revision": 17,
   "research_state": "UNAPPROVED",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
@@ -8662,7 +8669,14 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf032",
       "research_status": "NUR_FACHLICHE_HYPOTHESE",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "additional_source_check_v11": {
+        "checked_at": "2026-11-10",
+        "source_url": "https://www.clean-shores.org/aboutproject-1",
+        "observation": "BeBot ist laut Umwelteinsatzstelle fernbedient und nicht vollautonom; werbliche Autonomieangaben kontrollieren. Bestehende Strandreinigungs-Produktart bleibt, nicht neu erfassen.",
+        "no_new_id": true,
+        "affiliate_not_validated": true
+      }
     },
     {
       "name": "Autonomer Gehwegreinigungsroboter",
@@ -8732,7 +8746,14 @@
       "affiliate_status": "KEIN_PARTNERPRODUKT_NACHGEWIESEN",
       "id": "rf036",
       "research_status": "NUR_FACHLICHE_HYPOTHESE",
-      "checked_on": "2026-11-09"
+      "checked_on": "2026-11-09",
+      "additional_source_check_v11": {
+        "checked_at": "2026-11-10",
+        "source_url": "https://useful-machines.com/",
+        "observation": "Fassadenfugen-Sanierung wird bei Useful Machines als Entwicklung eines autonomen Renovierungsroboters beschrieben; bestehendes rf036 behalten, Pilot/Marktstatus prüfen.",
+        "no_new_id": true,
+        "affiliate_not_validated": true
+      }
     },
     {
       "name": "Roboter zur Rohr- und Behälterinnenbeschichtung",
@@ -11705,6 +11726,13 @@
         "generated_from": "2026-11-10 manufacturer function/market evidence and editorial review, not keyword data",
         "keyword_research_done": false,
         "approved_for_wordpress": false
+      },
+      "additional_source_check_v11": {
+        "checked_at": "2026-11-10",
+        "source_url": "https://tinymobilerobots.de/",
+        "observation": "TinyMobileRobots verkauft/führt autonome Sportplatzmarkierer auch für kleine Clubs; schon bestehender Produkt-Owner, nicht erneut erfassen.",
+        "no_new_id": true,
+        "affiliate_not_validated": true
       }
     },
     {
@@ -14253,6 +14281,428 @@
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
       "checked_at": "2026-11-10"
+    },
+    {
+      "id": "rf200",
+      "name": "Friedhofs-Bewässerungsroboter",
+      "topic_kind": "NEW_NICHE_RESEARCH_V11",
+      "proposed_location": "Handwerk / Grünpflege (Käufer-Landingpage prüfen)",
+      "proposed_owner": "CORE_FUNKTION_EIGENSTAENDIG_BELEG",
+      "source_url": "https://www.innok-robotics.de/produkte/rainos",
+      "evidence_grade": "HERSTELLER_DE_PRAKTISCH_IM_EINSATZ_VERKAUF_ODER_MONATLICH",
+      "related_existing_id": "rf150",
+      "non_duplication_rule": "Autonomes Gießen einzelner Gräber mit Nachfüllstation; weder Beetpflege/FarmBot noch landwirtschaftlicher Sprühroboter. Gärtnerei/Gemeinde als Käufer, nicht automatisch reines Industrieprodukt.",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "source_checked": "2026-11-10",
+      "content_depth_v11": {
+        "type": "INHALTSPOTENZIAL_ENTWURF_NOT_WORDPRESS",
+        "categories": [
+          {
+            "name": "Gräber",
+            "article_directions": [
+              "Unterschiedliche Grabgrößen bewässern",
+              "Urnengräber und Pflanzschalen unterscheiden",
+              "Gießmuster je Grabpflegeauftrag"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Fahrwege",
+            "article_directions": [
+              "Friedhofskarte und Wege planen",
+              "Engstellen zwischen Grabreihen",
+              "Rückkehr bei Hindernissen"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Wasserbetrieb",
+            "article_directions": [
+              "Tankstationen und Leitungsanschluss",
+              "Nachfüllen und Ladezyklen",
+              "Wassermenge nach Pflanzenart steuern"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Gärtnereibetrieb",
+            "article_directions": [
+              "Einführung durch Friedhofsverwaltung",
+              "Servicevertrag oder Einmalzahlung",
+              "Saisonplanung und Personalentlastung"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "allow_category_count_flexible": true,
+        "requires_owner_identity_review": true,
+        "no_keyword_lookup": true
+      }
+    },
+    {
+      "id": "rf201",
+      "name": "Geflügelstall-Einstreu-Pflegeroboter",
+      "topic_kind": "NEW_NICHE_RESEARCH_V11",
+      "proposed_location": "Landwirtschaft",
+      "proposed_owner": "CORE_FUNKTION_ABGRENZUNG_PRUEFEN",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11125414/",
+      "evidence_grade": "FACHSTUDIE_BENENNT_BEREITS_MARKTGERAETE_SPoutnic_NAV",
+      "related_existing_id": "rb033",
+      "non_duplication_rule": "Stimuliert Hühnerbewegung und lockert Einstreu, ggf. detektiert Tierzustand; nicht dieselbe Funktion wie Stallmistschieber oder vollautomatischer Eiersammler. Hersteller-/EU-Bezug nachprüfen.",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "source_checked": "2026-11-10",
+      "content_depth_v11": {
+        "type": "INHALTSPOTENZIAL_ENTWURF_NOT_WORDPRESS",
+        "categories": [
+          {
+            "name": "Stallumgebung",
+            "article_directions": [
+              "Unterschiedliche Einstreuarten",
+              "Laufwege bei Geflügelherden",
+              "Geringe Höhen unter Tränkelinien"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Einstreupflege",
+            "article_directions": [
+              "Lockerung gegen Verdichtung",
+              "Unterschied zur reinen Kotaufnahme",
+              "Geeignete Bewegungsprogramme"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Tierbetreuung",
+            "article_directions": [
+              "Herde ohne Stress bewegen",
+              "Hindernisse und Tierkontakt",
+              "Reinigung und Wartung nach Stallgang"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "allow_category_count_flexible": true,
+        "requires_owner_identity_review": true,
+        "no_keyword_lookup": true
+      }
+    },
+    {
+      "id": "rf202",
+      "name": "Gärtnerei-Topftransportroboter",
+      "topic_kind": "NEW_NICHE_RESEARCH_V11",
+      "proposed_location": "Landwirtschaft / Gartenbaubetriebe",
+      "proposed_owner": "CORE_FUNKTION_EIGENSTAENDIG_BELEG",
+      "source_url": "https://harvestautomation.com/",
+      "evidence_grade": "HERSTELLER_IM_EU_MARKT_PRAKTISCH_IM_EINSATZ",
+      "related_existing_id": "rf016",
+      "non_duplication_rule": "Autonomes Aufnehmen/Umstellen/Abstandsregeln von Topfpflanzen, nicht Pflanzenabsenkung, Saat oder Ernteroboter; eine Produktart für verschiedene Pflanzenabstände.",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "source_checked": "2026-11-10",
+      "content_depth_v11": {
+        "type": "INHALTSPOTENZIAL_ENTWURF_NOT_WORDPRESS",
+        "categories": [
+          {
+            "name": "Topfgrößen",
+            "article_directions": [
+              "Kleine und schwere Topfpflanzen",
+              "Unterschiedliche Containerdurchmesser",
+              "Pflanzen für Wachstum auf Abstand stellen"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Aufstellmuster",
+            "article_directions": [
+              "Abstände saisonal anpassen",
+              "Töpfe sammeln und zusammenstellen",
+              "Transportwege im Freiland"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Betrieb",
+            "article_directions": [
+              "Akkuwechsel und Ladebetrieb",
+              "Schmutz und Witterungsschutz",
+              "Einlernen bei kleineren Gärtnereien"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "allow_category_count_flexible": true,
+        "requires_owner_identity_review": true,
+        "no_keyword_lookup": true
+      }
+    },
+    {
+      "id": "rf203",
+      "name": "Tennisplatz-Pflegeroboter",
+      "topic_kind": "NEW_NICHE_RESEARCH_V11",
+      "proposed_location": "Freizeit & Lernen / Sportanlagen",
+      "proposed_owner": "CORE_FUNKTIONSKANDIDAT_EU_ANFRAGE",
+      "source_url": "https://www.roboten.eu/en/",
+      "evidence_grade": "HERSTELLER_MEHRZWECK_PLATZPFLEGE_VERTRIEBSSTATUS_OFFEN",
+      "related_existing_id": "rf146",
+      "non_duplication_rule": "Platz abziehen, bewässern, Abdeckplane bewegen, teils Linien reinigen: EIN Roboter-Mehrzweckprodukt, keine vier doppelte CORE-Seiten. Anders als Sportplatz-Linienmarkierung/Trainingsballroboter.",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "source_checked": "2026-11-10",
+      "content_depth_v11": {
+        "type": "INHALTSPOTENZIAL_ENTWURF_NOT_WORDPRESS",
+        "categories": [
+          {
+            "name": "Platzbeläge",
+            "article_directions": [
+              "Sandplatz gegenüber Hartplatz",
+              "Platzrand und Netzbereiche",
+              "Unterschiede bei Niederschlag"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Pflegearbeiten",
+            "article_directions": [
+              "Abziehen und Egalisieren",
+              "Beregnung nach Bedarf",
+              "Linien reinigen und Material schonen"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Abdeckung",
+            "article_directions": [
+              "Abdeckplane bei Wetterwechsel",
+              "Sichere Platzfreigabe",
+              "Planmäßige Bedienung außerhalb Spielzeiten"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "allow_category_count_flexible": true,
+        "requires_owner_identity_review": true,
+        "no_keyword_lookup": true
+      }
+    },
+    {
+      "id": "rf204",
+      "name": "Lebensmittelanlagen-Hygieneroboter",
+      "topic_kind": "NEW_NICHE_RESEARCH_V11",
+      "proposed_location": "Reinigung / Kleinbetriebe prüfen",
+      "proposed_owner": "CORE_FUNKTION_B2B_PRUEFEN",
+      "source_url": "https://www.clean-botix.com/",
+      "evidence_grade": "HERSTELLER_PILOT_UND_LEASING_US_KLEINBETRIEBS_EIGNUNG_OFFEN",
+      "related_existing_id": "rf167",
+      "non_duplication_rule": "Mobiler Roboterarm mit Spül-/Schaum-/Desinfektionsfolge für Produktionsmaschinen; nicht Sanitärraum- und nicht Boden-Scheuersaugrobotik. Kühl-/Lebensmittelbetriebe als Einsatzumgebung, Vertriebsgebiet offen.",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "source_checked": "2026-11-10",
+      "content_depth_v11": {
+        "type": "INHALTSPOTENZIAL_ENTWURF_NOT_WORDPRESS",
+        "categories": [
+          {
+            "name": "Anlagenflächen",
+            "article_directions": [
+              "Maschinenoberflächen vor Reinigung",
+              "Lebensmittelkontaktflächen definieren",
+              "Engstellen und Laufwege"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Hygieneablauf",
+            "article_directions": [
+              "Spülen, Einschäumen und Nachspülen",
+              "Mittelwechsel und Dosierung",
+              "Reinigungserfolg dokumentieren"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Betrieb",
+            "article_directions": [
+              "Einsatz nach Produktionsschicht",
+              "Personalzutritt und Sicherheit",
+              "Leasing und technische Betreuung"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "allow_category_count_flexible": true,
+        "requires_owner_identity_review": true,
+        "no_keyword_lookup": true
+      }
+    },
+    {
+      "id": "rf205",
+      "name": "Parkplatz-Linienmarkierungsroboter",
+      "topic_kind": "NEW_NICHE_RESEARCH_V11",
+      "proposed_location": "Handwerk / Außenanlagen",
+      "proposed_owner": "CORE_ODER_CROSSLINK_IDENTITAETSPRUEFUNG",
+      "source_url": "https://10linesrobots.com/striping-robots",
+      "evidence_grade": "HERSTELLER_EU_US_GEWERBLICHER_EINSATZ",
+      "related_existing_id": "rb048",
+      "non_duplication_rule": "Permanente Markierung auf Parkplätzen und Asphalt mit Strichplan; nicht Sportfeldfarbe und nicht bloße Baustellen-Vormarkierung. Funktionsüberdeckung mit bestehenden Markierungstypen fachlich vor neuer Produktseite prüfen.",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "source_checked": "2026-11-10",
+      "content_depth_v11": {
+        "type": "INHALTSPOTENZIAL_ENTWURF_NOT_WORDPRESS",
+        "categories": [
+          {
+            "name": "Markierungen",
+            "article_directions": [
+              "Parkbuchten unterschiedlicher Größe",
+              "Pfeile und Sperrflächen",
+              "Bestehende Markierung nachzeichnen"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Einrichtung",
+            "article_directions": [
+              "Digitale Pläne importieren",
+              "Asphalt- und Betonflächen",
+              "Positionierung ohne Vormarkierung"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Betrieb",
+            "article_directions": [
+              "Farbnachfüllung und Reinigung",
+              "Arbeiten bei Kundenverkehr",
+              "Einsatz bei kleinen Parkplätzen wirtschaftlich prüfen"
+            ],
+            "idea_count": 3,
+            "seo_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "allow_category_count_flexible": true,
+        "requires_owner_identity_review": true,
+        "no_keyword_lookup": true
+      }
+    },
+    {
+      "id": "rf206",
+      "name": "Textilrecycling-Sortierroboter",
+      "topic_kind": "NEW_NICHE_RESEARCH_V11",
+      "proposed_location": "Industrie / Forschungsstand",
+      "proposed_owner": "MAGAZIN_FORSCHUNG_BIS_PRODUKTREIFE",
+      "source_url": "https://www.iwks.fraunhofer.de/en/projects/current-projects/robotex.html",
+      "evidence_grade": "FRAUNHOFER_PROJEKT_2025_2027_KEIN_GERAETEVERKAUF",
+      "related_existing_id": "rf018",
+      "non_duplication_rule": "Greift und breitet flexible Alttextilien aus, analysiert Faserstoff und sortiert; nicht Plastik-/Metallsortierer. Forschungsprojekt keine serienreife käufliche Produktart behaupten.",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "source_checked": "2026-11-10"
+    },
+    {
+      "id": "rf207",
+      "name": "Friedhofs-Unkrautbekämpfungsroboter",
+      "topic_kind": "NEW_NICHE_RESEARCH_V11",
+      "proposed_location": "Handwerk / Grünpflege (Forschung)",
+      "proposed_owner": "MAGAZIN_PILOT_LAUFENDE_MARKTEINFUEHRUNG_OFFEN",
+      "source_url": "https://business.esa.int/projects/heibjerg-apw-robot",
+      "evidence_grade": "ESA_PROTOTYP_NACH_FELDTEST_NOCH_KEIN_KAUFPRODUKT",
+      "related_existing_id": "rb036",
+      "non_duplication_rule": "Heißwasser-/mechanische Unkrautentfernung auf Kieswegen und Grabwegen; andere Umgebung als Reihenkultur-Jäten. Status: Prototyp 2025, Hersteller weiter bei Kommerzialisierung.",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "source_checked": "2026-11-10"
+    },
+    {
+      "id": "rf208",
+      "name": "Dachrinnen-Reinigungsroboter",
+      "topic_kind": "NEW_NICHE_RESEARCH_V11",
+      "proposed_location": "Haushalt & Garten (Marktlücke)",
+      "proposed_owner": "MAGAZIN_MARKTLUECKE_KEINE_KAUFBERATUNG",
+      "source_url": "https://robotsforthat.com/guides/robot-that-cleans-gutters/",
+      "evidence_grade": "MARKTUEBERBLICK_ALTES_IROBOT_LOOJ_EINGESTELLT_KEINE_SERIENVERFUEGBARKEIT_BELEGT",
+      "related_existing_id": "rb064",
+      "non_duplication_rule": "Früherer fernsteuerbarer iRobot Looj für Dachrinnen eingestellt; aktuelle Laubbläser-Aufsätze sind keine Roboter. Keine lieferbare neue Roboterart behaupten.",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "source_checked": "2026-11-10"
+    },
+    {
+      "id": "rf209",
+      "name": "Treppensteigende Saugroboter-Technologie",
+      "topic_kind": "NEW_NICHE_RESEARCH_V11",
+      "proposed_location": "Haushalt & Garten / Entwicklung",
+      "proposed_owner": "MAGAZIN_TECHNOLOGIE_KEIN_CORE_PRODUKT",
+      "source_url": "https://www.stairrobotics.com/",
+      "evidence_grade": "PATENT_LIZENZ_TECHNOLOGIE_KEIN_SAUGROBOTER_VERKAUF",
+      "related_existing_id": "rb060",
+      "non_duplication_rule": "Anbieter betont ausdrücklich, selbst keine Staubsaugroboter herzustellen/zu verkaufen: EU-Patent und Lizenzangebot. Keine vollwertige kaufbare Produkttypseite aus Technologie ableiten.",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "source_checked": "2026-11-10"
+    },
+    {
+      "id": "rf210",
+      "name": "Rolltreppen-Reinigungsautomaten",
+      "topic_kind": "NEW_NICHE_RESEARCH_V11",
+      "proposed_location": "Reinigung / reine Automatisierung",
+      "proposed_owner": "AUTOMATION_BOUNDARY_NOT_AUTONOMOUS_ROBOT",
+      "source_url": "https://www.i-teamdeutschland.de/produkte/scheuersaugmaschinen/i-escalate/",
+      "evidence_grade": "HERSTELLER_DE_GEFUEHRTE_MASCHINE_NICHT_AUTONOM",
+      "related_existing_id": "rb028",
+      "non_duplication_rule": "i-escalate als geführte Bürstenreinigungsmaschine, keine selbstnavigierende Roboterplattform belegt. Kein CORE-Robotertyp allein wegen Motorantrieb.",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "keyword_status": "NICHT_GEMESSEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "source_checked": "2026-11-10"
     }
   ],
   "research_expansion": {
@@ -14263,7 +14713,7 @@
     "wp_plan_unchanged": true,
     "evidence_grade_note": "Herstellerbeleg bestaetigt Existenz einzelner Loesungen, nicht Marktgroesse/DE-Keyword oder Kategoriefreigabe."
   },
-  "concept_status": "RESEARCH_REV15_DEPTH_REVIEW_NOT_WORDPRESS_APPROVED",
+  "concept_status": "RESEARCH_REV17_NOT_WORDPRESS_APPROVED",
   "knowledge_views_v1": {
     "status": "PROPOSAL_ONLY",
     "concept_document": "RECHERCHE/GLOSSAR_FINDER_MODELLREGISTER_V1_20261109.md",
@@ -15048,5 +15498,35 @@
       "rf185",
       "rf193"
     ]
+  },
+  "research_round_v11": {
+    "start_revision": 16,
+    "end_revision": 17,
+    "old_frontier": 199,
+    "new_frontier": 210,
+    "new_topics": 11,
+    "original_base_ids": 68,
+    "depth_sample": {
+      "profiles": 6,
+      "categories": 19,
+      "ideas": 57
+    },
+    "depth_sample_ids": [
+      "rf200",
+      "rf201",
+      "rf202",
+      "rf203",
+      "rf204",
+      "rf205"
+    ],
+    "existing_cases_updated": [
+      "rf032",
+      "rb028",
+      "rf146",
+      "rf036"
+    ],
+    "no_wordpress_write": true,
+    "no_keywords": true,
+    "decision": "Concrete product/functional difference; prototype, automation-only, licence-only and discontinued devices remain research rather than CORE."
   }
 }
