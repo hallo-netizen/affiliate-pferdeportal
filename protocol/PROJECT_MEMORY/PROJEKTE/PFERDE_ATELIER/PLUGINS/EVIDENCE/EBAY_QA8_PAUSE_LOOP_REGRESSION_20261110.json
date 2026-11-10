@@ -1,0 +1,118 @@
+{
+  "status": "ISOLATED_SOURCE_PATCH_ONLY_NOT_LIVE",
+  "plugin_baseline": "6.72.320 QA7",
+  "source_zip_sha256": "e54018da41f23d3cbeba462e60c0abfdb540bb4e294f8bf43a02418e80b4a637",
+  "plugin_files_unchanged": 65,
+  "one_changed_file": [
+    "affiliate-portal-router/includes/trait-ppar-ebay-run.php"
+  ],
+  "php_lint_pass": 23,
+  "real_handler_before": {
+    "paused_manual": {
+      "status": "retryable_error",
+      "run_status": "paused",
+      "reason": "operator_paused",
+      "phase": "gapfill_select",
+      "self_drive_handoff": 1,
+      "actual_dispatches": 1,
+      "progress_seq": 774,
+      "contract": "external_tick_v2"
+    },
+    "running_advanced": {
+      "status": "advanced",
+      "run_status": "running",
+      "reason": "progress",
+      "phase": "gapfill_select",
+      "self_drive_handoff": 1,
+      "actual_dispatches": 1,
+      "progress_seq": 774,
+      "contract": "external_tick_v2"
+    },
+    "running_retryable_error": {
+      "status": "retryable_error",
+      "run_status": "running",
+      "reason": "progress",
+      "phase": "gapfill_select",
+      "self_drive_handoff": 1,
+      "actual_dispatches": 1,
+      "progress_seq": 774,
+      "contract": "external_tick_v2"
+    },
+    "running_busy": {
+      "status": "busy",
+      "run_status": "running",
+      "reason": "progress",
+      "phase": "gapfill_select",
+      "self_drive_handoff": 0,
+      "actual_dispatches": 0,
+      "progress_seq": 774,
+      "contract": "external_tick_v2"
+    },
+    "running_local_checked": {
+      "status": "local_checked",
+      "run_status": "running",
+      "reason": "progress",
+      "phase": "gapfill_select",
+      "self_drive_handoff": 0,
+      "actual_dispatches": 0,
+      "progress_seq": 774,
+      "contract": "external_tick_v2"
+    }
+  },
+  "real_handler_after": {
+    "paused_manual": {
+      "status": "idle",
+      "run_status": "paused",
+      "reason": "operator_paused",
+      "phase": "gapfill_select",
+      "self_drive_handoff": 0,
+      "actual_dispatches": 0,
+      "progress_seq": 774,
+      "contract": "external_tick_v2"
+    },
+    "running_advanced": {
+      "status": "advanced",
+      "run_status": "running",
+      "reason": "progress",
+      "phase": "gapfill_select",
+      "self_drive_handoff": 1,
+      "actual_dispatches": 1,
+      "progress_seq": 774,
+      "contract": "external_tick_v2"
+    },
+    "running_retryable_error": {
+      "status": "retryable_error",
+      "run_status": "running",
+      "reason": "progress",
+      "phase": "gapfill_select",
+      "self_drive_handoff": 1,
+      "actual_dispatches": 1,
+      "progress_seq": 774,
+      "contract": "external_tick_v2"
+    },
+    "running_busy": {
+      "status": "busy",
+      "run_status": "running",
+      "reason": "progress",
+      "phase": "gapfill_select",
+      "self_drive_handoff": 0,
+      "actual_dispatches": 0,
+      "progress_seq": 774,
+      "contract": "external_tick_v2"
+    },
+    "running_local_checked": {
+      "status": "local_checked",
+      "run_status": "running",
+      "reason": "progress",
+      "phase": "gapfill_select",
+      "self_drive_handoff": 0,
+      "actual_dispatches": 0,
+      "progress_seq": 774,
+      "contract": "external_tick_v2"
+    }
+  },
+  "pause_loop_repro_pass": true,
+  "other_heartbeat_cases_unchanged": true,
+  "wordpress_database_or_frontend_proven": false,
+  "visible_ebay_cards_fixed": false
+}
