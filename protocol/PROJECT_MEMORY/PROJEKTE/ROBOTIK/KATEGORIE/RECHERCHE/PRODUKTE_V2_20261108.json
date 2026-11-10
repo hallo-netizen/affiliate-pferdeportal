@@ -12252,7 +12252,48 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Gewässer",
+            "article_directions": [
+              "Yachthäfen und kleine Binnenhäfen",
+              "Teiche mit Pflanzenbewuchs",
+              "Wassertiefe und Hindernisse"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Müllaufnahme",
+            "article_directions": [
+              "Schwimmende Kunststoffe aufnehmen",
+              "Laub und organische Stoffe",
+              "Behälter leeren und Abfall sortieren"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Betrieb",
+            "article_directions": [
+              "Fahrweg und Absperrung",
+              "Akkureichweite und Ladeplatz",
+              "Wartung nach Schmutzwasserbetrieb"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "medical_cases_require_specialist": false,
+        "wp_release": false,
+        "affiliate_not_verified": true
+      }
     },
     {
       "id": "rf157",
@@ -13574,7 +13615,48 @@
       "wp_release": "NICHT_FREIGEGEBEN",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "checked_at": "2026-11-10"
+      "checked_at": "2026-11-10",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Greifaufgaben",
+            "article_directions": [
+              "Verschiedene Alltagsgriffe wählen",
+              "Feinmotorische Aufgaben",
+              "Unterschied zu externem Rollstuhlgreifarm"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Versorgung",
+            "article_directions": [
+              "Schaft und Passform fachgerecht anpassen",
+              "Steuerung über Muskelsignale einlernen",
+              "Fachbetrieb und Erprobung"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Alltagspflege",
+            "article_directions": [
+              "Akku und Laden",
+              "Reinigung und Verschleiß",
+              "Sicherheitswarnungen und Wartung prüfen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "medical_cases_require_specialist": true,
+        "wp_release": false,
+        "affiliate_not_verified": true
+      }
     },
     {
       "id": "rf184",
@@ -13589,7 +13671,48 @@
       "wp_release": "NICHT_FREIGEGEBEN",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "checked_at": "2026-11-10"
+      "checked_at": "2026-11-10",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Bewegung",
+            "article_directions": [
+              "Treppen und Rampen bewältigen",
+              "Aufstehen und Gehen unterstützen",
+              "Unterschied zu passivem Prothesengelenk"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Anpassung",
+            "article_directions": [
+              "Versorgung durch Fachbetrieb",
+              "Körpergewicht und Aktivitätsgrad beachten",
+              "Sensor- und Bewegungsmodi einstellen lassen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Sicherheit",
+            "article_directions": [
+              "Aktuelle Sicherheitsmitteilungen prüfen",
+              "Akku und Ladeintervalle",
+              "Wartung und Ersatzversorgung"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "medical_cases_require_specialist": true,
+        "wp_release": false,
+        "affiliate_not_verified": true
+      }
     },
     {
       "id": "rf185",
@@ -13604,7 +13727,48 @@
       "wp_release": "NICHT_FREIGEGEBEN",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "checked_at": "2026-11-10"
+      "checked_at": "2026-11-10",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Übungsarten",
+            "article_directions": [
+              "Passive Fingerbewegungen",
+              "Aktive Übungen und Spiegelmodus",
+              "Griffübungen mit Fachanleitung"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Anpassung",
+            "article_directions": [
+              "Geeignete Handschuhgröße",
+              "Bewegungsunterstützung einstellen",
+              "Einsatzgrenzen durch Fachpersonal klären"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Pflege",
+            "article_directions": [
+              "Handschuh und Luftleitungen reinigen",
+              "Akkus und Steuergerät prüfen",
+              "Verschleißteile und Hygiene"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "medical_cases_require_specialist": true,
+        "wp_release": false,
+        "affiliate_not_verified": true
+      }
     },
     {
       "id": "rf186",
@@ -13619,7 +13783,48 @@
       "wp_release": "NICHT_FREIGEGEBEN",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "checked_at": "2026-11-10"
+      "checked_at": "2026-11-10",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Dekorarten",
+            "article_directions": [
+              "Schokolade und Zuckerguss auftragen",
+              "Schriftzüge und Bilder gestalten",
+              "Dekoration auf unterschiedliche Tortenformen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Einrichtung",
+            "article_directions": [
+              "Vorlagen und Designs importieren",
+              "Düsen und Auftragsköpfe wählen",
+              "Kuchenposition und Transportband"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Backstube",
+            "article_directions": [
+              "Reinigung mit Lebensmittelkontakt",
+              "Kleinserie gegenüber Großproduktion",
+              "Bedienzeit und Wartungsaufwand"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "medical_cases_require_specialist": false,
+        "wp_release": false,
+        "affiliate_not_verified": true
+      }
     },
     {
       "id": "rf187",
@@ -13649,7 +13854,48 @@
       "wp_release": "NICHT_FREIGEGEBEN",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "checked_at": "2026-11-10"
+      "checked_at": "2026-11-10",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Reitflächen",
+            "article_directions": [
+              "Sand und Vliesgemisch planieren",
+              "Spurrillen und Unebenheiten",
+              "Reitplatz gegenüber Paddock abgrenzen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Werkzeuge",
+            "article_directions": [
+              "Egge und Planieraufsatz wechseln",
+              "Bürsten- und Kehrfunktion kombinieren",
+              "Werkzeuge je Untergrund einstellen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Hofbetrieb",
+            "article_directions": [
+              "Fahrwege zwischen Gebäuden",
+              "Hindernisse und Tierkontakt",
+              "Akkus und Maschinenpflege"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "medical_cases_require_specialist": false,
+        "wp_release": false,
+        "affiliate_not_verified": true
+      }
     },
     {
       "id": "rf189",
@@ -13709,7 +13955,48 @@
       "wp_release": "NICHT_FREIGEGEBEN",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "checked_at": "2026-11-10"
+      "checked_at": "2026-11-10",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Paletten",
+            "article_directions": [
+              "Verschiedene Palettenformen einwickeln",
+              "Überstehende Ladungen sichern",
+              "Folienlänge und Wickelhöhe"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Wickelprogramm",
+            "article_directions": [
+              "Folienvorspannung wählen",
+              "Überlappung und Wickellagen",
+              "Automatisches Abschneiden und Starten"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Lageralltag",
+            "article_directions": [
+              "Platz zum Umfahren einer Palette",
+              "Sicherheit bei Personenverkehr",
+              "Akkuladen und Folienrollenwechsel"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "medical_cases_require_specialist": false,
+        "wp_release": false,
+        "affiliate_not_verified": true
+      }
     },
     {
       "id": "rf193",
@@ -13739,7 +14026,48 @@
       "wp_release": "NICHT_FREIGEGEBEN",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "checked_at": "2026-11-10"
+      "checked_at": "2026-11-10",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Fliesentypen",
+            "article_directions": [
+              "Quadratische und rechteckige Fliesen",
+              "Großformat und Werkstückgewicht",
+              "Dünnbettverfahren und Untergrund"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Verlegeprozess",
+            "article_directions": [
+              "Kleberauftrag koordinieren",
+              "Vakuumgreifer und Positionierung",
+              "Fugenbreite und Ebenheit prüfen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Baustelle",
+            "article_directions": [
+              "Raumplanung und Hindernisse",
+              "Wartung und Materialnachschub",
+              "Kosten bei kleinen und großen Projekten"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "medical_cases_require_specialist": false,
+        "wp_release": false,
+        "affiliate_not_verified": true
+      }
     },
     {
       "id": "rf195",
@@ -13754,7 +14082,48 @@
       "wp_release": "NICHT_FREIGEGEBEN",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "checked_at": "2026-11-10"
+      "checked_at": "2026-11-10",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Fugenarten",
+            "article_directions": [
+              "Unterschiedliche Fugenbreiten",
+              "Fliesenmaterial und Verschmutzung",
+              "Schmale Rand- und Eckbereiche"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Roboterlauf",
+            "article_directions": [
+              "Raum automatisch erfassen",
+              "Fugenmaterial gezielt einbringen",
+              "Überschuss ohne Fliesenschaden entfernen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Einsatz",
+            "article_directions": [
+              "Fugenmasse und Wasser nachfüllen",
+              "Transport zwischen Räumen",
+              "Reinigung und Verschleißteile"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "medical_cases_require_specialist": false,
+        "wp_release": false,
+        "affiliate_not_verified": true
+      }
     },
     {
       "id": "rf196",
@@ -13769,7 +14138,48 @@
       "wp_release": "NICHT_FREIGEGEBEN",
       "affiliate_status": "NICHT_GEPRUEFT",
       "keyword_status": "NICHT_GEMESSEN",
-      "checked_at": "2026-11-10"
+      "checked_at": "2026-11-10",
+      "content_depth_v10": {
+        "status": "VORLAEUFIGE_INDIVIDUELLE_VERTIEFUNG",
+        "categories": [
+          {
+            "name": "Fischbecken",
+            "article_directions": [
+              "Kleine und große Beckenanlagen",
+              "Schienenführung über Becken",
+              "Mehrere Futterplätze bedienen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Futtersteuerung",
+            "article_directions": [
+              "Futterrationen nach Tierbestand",
+              "Verschiedene Pellets und Mischungen",
+              "Verteilung über Wasserflächen"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          },
+          {
+            "name": "Betrieb",
+            "article_directions": [
+              "Nachfüllstationen und Akku",
+              "Feuchtigkeit und Reinigung",
+              "Störungen und Dokumentation der Fütterung"
+            ],
+            "idea_count": 3,
+            "keyword_validated": false,
+            "wordpress_created": false
+          }
+        ],
+        "medical_cases_require_specialist": false,
+        "wp_release": false,
+        "affiliate_not_verified": true
+      }
     },
     {
       "id": "rf197",
@@ -14545,9 +14955,9 @@
     "no_wordpress_writes": true,
     "policy": "Ein Produkt-Owner nach eigener konkreter Funktion; keine Pflicht-Unterkategorien, mindestens 3 sachlich verschiedene Beitragsabsichten für jede geplante flache Vertiefungskategorie; gemeinsam Magazin, Glossar, Register, Finder und Anzeigenmarkt.",
     "depth_profiles": {
-      "profiles": 34,
-      "categories": 103,
-      "topics": 311
+      "profiles": 44,
+      "categories": 133,
+      "topics": 401
     },
     "depth_ids": [
       "rb002",
@@ -14583,7 +14993,17 @@
       "rf148",
       "rf149",
       "rf151",
-      "rf152"
+      "rf152",
+      "rf156",
+      "rf183",
+      "rf184",
+      "rf185",
+      "rf186",
+      "rf188",
+      "rf192",
+      "rf194",
+      "rf195",
+      "rf196"
     ]
   }
 }
