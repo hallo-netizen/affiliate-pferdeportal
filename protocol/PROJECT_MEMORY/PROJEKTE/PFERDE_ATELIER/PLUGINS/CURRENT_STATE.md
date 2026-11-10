@@ -1,3 +1,13 @@
+## 10.11.2026 – echter UI-Fehler .58 nach Anwender-Screenshot; .59 erst simuliert, nicht installiert
+
+- Original .58 `PSERC_Admin::page` zeigt bei früherem BLOCKED **kein** `pserc-plan-text`, obwohl das vorhandene AJAX-Skript dort neue Fortschrittswerte ausgeben möchte; außerdem blieb der einzige Knopf nach Netzwerk-/BLOCKED-Fehler deaktiviert. **Sichtbarkeitsfehler im vorhandenen Admin, keine nachgewiesene Datenlöschung.**
+- **Neue isolierte TEST-ZIP .59** direkt aus tatsächlich auf WP-Test sichtbarer .58; nur Admin-PHP, Versionskopf, Paketintegritätsmanifest neu gebunden. Alte Meldung und letzte Zähler sichtbar; neuer Start/Lauf/Fehler/Erfolg sichtbar; Knopf nach Stop/Netzwerkfehler wieder benutzbar. Keine Änderung an altem PSERC-Compiler, Snapshot-Daten, AJAX, Reader, Export oder K0.
+- Vor Installation **tatsächlich getestet**: echte PHP-Admin-Ausgabe BLOCKED + RUNNING; Browser mit simulierten AJAX-Sequenzen `RUNNING→BLOCKED`, `START→BLOCKED`, `HTTP500`, `RUNNING→COMPLETE` **4/4 PASS**; ursprüngliche .58 Planbindungs-Schutztests gegen .59 **9/9 PASS**; Original-Paketintegrität **61/61**, Syntax **43/43**, 63 ZIP-Dateipfade, CRC PASS.
+- Private QA-ZIP `/pferdeatelier/PLUGINS/QA/PSERC-0.28.59-KISS-FORTSCHRITT-NUR-TEST.zip`, SHA256 `3882380893597aff22f95acfa0e692bc05c97417e227863bfcfa3f77e969e42c`. Verbindliches [detailliertes Prüfprotokoll](QA_ONLY/PSERC_02859_SICHTBARER_FORTSCHRITT_20261110.md).
+- **Noch kein echter WordPress-.59-Test und kein K0-End-to-End-READY-Dateibeweis**. Alter ACTIVATE-Planstopp ist durch die UI-Korrektur allein nicht als behoben zu bezeichnen. Keine Datenlöschungen, keine Live-Änderung, keine K0-Produktion.
+
+---
+
 ## 10.11.2026 – aktueller KISS-Teststand: PSERC 0.28.58, K0-Ausgabe unverändert
 - Original-PSTE und Original-PSERC abgeglichen. **Nachgewiesene Quelllogik-Differenz:** PSTE-Compiler kann nach validiertem Runtime-Index-Rebind den **aktuellen** Baseline-Editorial-Plan akzeptieren, während PSERC .55 beim ACTIVATE den historischen Context-Plan vergleicht. Dies ist eine **belegte mögliche Ursache**, nicht bereits als tatsächlicher Datensatzdrift auf oliver-beil.de ausgelesen.
 - **Neue alleinige PSERC-TEST-Arbeitskopie 0.28.58** aus originaler .55 (ohne Abhängigkeit zur alten QA-.56/.57): Baseline-Planfrische an denselben bestehenden Besitzer gebunden, alte ACTIVATE-Sperre bleibt, gleicher Check zusätzlich zu BEGINN, WordPress-Entwurfsimport im bestehenden Admin nur eingeklappt. Keine alten Funktionen/Daten gelöscht; neue Datenbankmigrationen 0; K0/WordPress-LIVE unverändert.
