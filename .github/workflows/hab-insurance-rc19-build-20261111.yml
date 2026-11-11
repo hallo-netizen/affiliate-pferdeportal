@@ -1,0 +1,49 @@
+name: HAB-004 RC19 insurance-only full plugin build and test
+on:
+  push:
+    branches: [hab-insurance-affiliate-rc19-guard-20261111]
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build RC19 only from verified RC18 or verify already-built RC19
+        shell: bash
+        run: |
+          set -euo pipefail
+          ZIP="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip"
+          if unzip -p "$ZIP" affiliate-portal-router/affiliate-portal-router.php | grep -Fq 'Version: 0.1.15-rc18'; then
+            python3 protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_RC19_INSURANCE/build_rc19_insurance.py
+          elif unzip -p "$ZIP" affiliate-portal-router/affiliate-portal-router.php | grep -Fq 'Version: 0.1.16-rc19'; then
+            echo 'Insurance RC19 already built, verifying unchanged.'
+          else
+            echo 'Unknown affiliate version - fail closed' >&2; exit 1
+          fi
+          mkdir -p /tmp/ppar-hab-insurance-rc19
+          unzip -qo "$ZIP" -d /tmp/ppar-hab-insurance-rc19
+          TOTAL=0
+          while IFS= read -r -d '' F; do
+            php -l "$F" | grep -Fq "No syntax errors"
+            TOTAL=$((TOTAL+1))
+          done < <(find /tmp/ppar-hab-insurance-rc19 -type f -name '*.php' -print0)
+          test "$TOTAL" -eq 25
+          python3 protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_RC19_INSURANCE/qa_rc19.py
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          import hashlib
+          p="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip"
+          data=open(p,'rb').read()
+          with ZipFile(p) as z:
+            assert z.testzip() is None and len(z.namelist())==36
+            assert z.read('affiliate-portal-router/readme.txt').count(b'0.1.16-rc19')>=1
+          print("RC19_FINAL",len(data),hashlib.sha256(data).hexdigest(), "ZIP CRC PASS, 25 PHP lint")
+          PY
+          git add "$ZIP"
+          if ! git diff --cached --quiet; then
+            git config user.name 'Hab insurance build automation'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'HAB-004 Affiliate RC19: insurance-only central guard, full tested CURRENT.zip'
+            git push origin HEAD:hab-insurance-affiliate-rc19-guard-20261111
+          fi
