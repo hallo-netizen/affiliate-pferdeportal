@@ -1,5 +1,13 @@
 # Robotik – Pluginbüro / Kategorie-Workflow
 
+## AKTUELLER ERGÄNZUNGSSTAND 11.11.2026 – 0.4.1 FERTIG, NOCH NICHT LIVE
+- Das unterhalb dieser Ergänzung beschriebene GitHub-`CURRENT.zip` 0.3.0 ist **historischer GitHub-Bestand**; es ist nicht mit dem inzwischen bereitgestellten 0.4.0 zu verwechseln.
+- Nutzer meldete den vorherigen 0.4.0-Schritt als erledigt. Echte 193/193-WordPress-Live-Prüfung wurde nicht erneut bereitgestellt.
+- **0.4.1 Kategorie-Workflow** erweitert dieselbe Pluginidentität ausschließlich um sichere Sammelveröffentlichung bereits importierter 104 Robotik-Seiten. Lokal geprüft; Library-ZIP `/robotik/Konzeptbüro/ROBOTIK_KATEGORIE_WORKFLOW_0.4.1_PUBLIKATION_TEST.zip`; diese Datei wurde **noch nicht** als `PLUGIN/CURRENT.zip` in GitHub synchronisiert.
+- **Getrenntes Designplugin**: `/robotik/Designbüro/ROBOTIK_STRUKTURDESIGN_0.1.0_TEST.zip` für Mega-Menü und Footer, lokal geprüft, ohne WordPress-Schreibzugriff.
+- **Details und Nachweise:** `PUBLIKATION_041_20261111.md`.
+
+
 **Einziger aktiver Installer:** [CURRENT.zip](CURRENT.zip) – Version **0.3.0**.
 
 **Versionsarchiv:** [VERSIONEN/0.1.0.zip](VERSIONEN/0.1.0.zip) · [VERSIONEN/0.2.0.zip](VERSIONEN/0.2.0.zip) · [VERSIONEN/0.3.0.zip](VERSIONEN/0.3.0.zip). Alte Versionen ausschließlich Archiv, nicht parallel installieren.
