@@ -66,3 +66,13 @@ Zwischen Anfang und Ende: fehlgeschlagene Datenbankspeicherung an genau einem Pu
 **Nächste reale Abnahme statt weiterer Mini-ZIPs:** Ein gesicherter WordPress-Test mit repräsentativen Daten und einem beobachteten Gesamtlauf einschließlich eBay-API, öffentlichem SAFE-Checkpoint, Kategorien-/Beitragskacheln, CSV-Historie, Pause/Fortsetzen und unabhängiger Verfügbarkeit. Ein fehlgeschlagener realer Test wird zuerst im selben Fehlerpfad korrigiert. Erst danach Serverlast/Backend-Verschlankung, wie ausdrücklich vereinbart.
 
 Keine Installation in Hobbydepot oder Hab & Bewahr. Transferregister bleibt eine Referenz, kein automatischer Patch.
+
+## Aktueller Stand erneut geprüft – 11.11.2026, nach QA15
+
+Bei erneuter Sichtung der gespeicherten Bibliothek und des physisch vorhandenen Testpakets ist **QA15 6.72.326 weiterhin die neueste identifizierte Pferdeatelier-eBay-Testfassung**. Datei `/mnt/data/Pferdeatelier_Affiliate_6.72.326_QA15_KISS_GESAMTABLAUF_NUR_TEST.zip` ist vorhanden, SHA-256 **c453831225c0c7d005c66140622abb8e636b9884aa796b363a0e2456ce525b1a** stimmt mit `QA15_PACKAGE_EVIDENCE.json` überein. ZIP-Integrität frisch durch `unzip -t` bestätigt: **keine Fehler**. Die alte `QA15_FULL_REGRESSION_LOG.txt` wurde erneut gesichtet; positive Testnachweise für einzelne Providerfehler/401–403, Schlussprüfungs-Wiederaufnahme, read-only Backend sowie verfügbare/beendete/störende Angebote bei pausierter Recherche sind dort enthalten.
+
+**Präzise Begrenzung:** Keine erneute Ausführung aller 17 Tests im Live-WordPress, keine Anmeldung an WordPress/MariaDB und kein realer eBay-API-End-to-End. Der vorliegende Testharness ersetzt WordPress/DB und externe eBay-Antworten. Ein bestehender früherer Fehler `QA14` der Audit-Protokollierung wurde in QA15 im PHP-Code korrigiert, aber auf dem produktiven Datenbankzustand weder live bestätigt noch rückwirkend vollständig rekonstruiert.
+
+**Nicht mit eBay verwechseln:** Zuletzt gespeicherte `PSTE-...` und `PSERC-...` ZIP-Dateien gehören zum **K0/Texterstellungssystem**, nicht zum eBay-Affiliate-Plugin; sie haben keine Aussagekraft für die eBay-Live-Reparatur.
+
+**Verbindlicher Status:** **QA15 TEST / NICHT ABGENOMMEN**. Nächster beweisender Schritt bleibt der echte, gesicherte WordPress-Abnahmetest des Gesamtablaufes (public SAFE-Produkte, Kategorien-/Beitragskacheln, gleicher Cursor bei Pause/Fortsetzung, Verfügbarkeit getrennt, Daten/Logs). Performance-Nacharbeit erst anschließend, wie vom Nutzer festgelegt. Kein neues Plugin im Zuge dieser Statusprüfung erstellt oder installiert.
