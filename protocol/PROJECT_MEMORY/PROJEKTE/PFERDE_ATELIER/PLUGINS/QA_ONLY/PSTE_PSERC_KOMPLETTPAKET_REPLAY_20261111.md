@@ -21,6 +21,6 @@ Realer Nutzerexport (2).json mit drei historischen READY-Artikeln, alle PRE_TYPE
 - Maschinenlesbarer Test: /pferdeatelier/PLUGINS/QA/PSTE_PSERC_QA_GESAMTPAKET_LOKAL_20261111.json.
 
 ## Offene echte Freigabe
-WordPress/MySQL-Realtest wurde NICHT ausgeführt. Er muss den einmaligen vorhandenen PSTE-Bestandswiederanlauf, Aktualisierung der Auditquittung, neuen PSERC-3-READY-Snapshot, echte persistierte BOUND_TYPE-Personenprofile und die tatsächliche Datei mit-suchintent-nachweis sowie isolierten K0-Quellenwächter nachweisen. Kein Live-GO, kein K0-Produktionsstart vor dieser Abnahme. Der lokale Test verwendet simulierte WP-Optionen/IDs, bestätigt nicht die WordPress-Speicherung.
+WordPress/MySQL-Realtest wurde NICHT ausgeführt. Er muss den einmaligen vorhandenen PSTE-Bestandswiederanlauf, Aktualisierung der Auditquittung, neuen PSERC-3-READY-Snapshot, echte persistierte BOUND_TYPE-Suchintent-Profile und die tatsächliche Datei mit-suchintent-nachweis sowie isolierten K0-Quellenwächter nachweisen. Kein Live-GO, kein K0-Produktionsstart vor dieser Abnahme. Der lokale Test verwendet simulierte WP-Optionen/IDs, bestätigt nicht die WordPress-Speicherung.
 
 Status: LOCAL_QA_PASS; REAL_WORDPRESS_QA_OPEN; NO_INSTALLATION_REQUESTED; NO_RELEASE; K0_UNTOUCHED.
