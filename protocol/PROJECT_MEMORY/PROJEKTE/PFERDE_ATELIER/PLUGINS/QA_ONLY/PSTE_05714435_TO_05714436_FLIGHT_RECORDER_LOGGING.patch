@@ -1,0 +1,191 @@
+--- a/portal-seo-topic-engine.php
++++ b/portal-seo-topic-engine.php
+@@ -2,13 +2,13 @@
+ /**
+  * Plugin Name: Portal SEO Themenengine
+  * Description: Einfacher Longtail-Workflow: recherchiert Suchphrasen, übernimmt Sprachtitel und ordnet ausschließlich vorhandene Portalkategorien zu und prüft gegen den eigenen Bestand. Verändert keine Beiträge, Inhalte, Gestaltung oder Textproduktionsregeln.
+- * Version: 0.57.144.35
++ * Version: 0.57.144.36
+  * Requires PHP: 8.0
+  * Author: Workflow Automation
+  */
+ if (!defined('ABSPATH')) { return; }
+ 
+-define('PSTE_VERSION', '0.57.144.35');
++define('PSTE_VERSION', '0.57.144.36');
+ define('PSTE_DIR', __DIR__ . '/');
+ define('PSTE_OPTION_SETTINGS', 'pste_settings_v1');
+ define('PSTE_OPTION_SCHEMA', 'pste_schema_version');
+--- a/includes/class-pste-admin.php
++++ b/includes/class-pste-admin.php
+@@ -404,7 +404,11 @@
+         if((string)$auto['queue_error']!=='')echo '<p>Warteschlangenfehler: <code>'.esc_html((string)$auto['queue_error']).'</code></p>';
+         if((string)$auto['driver_error']!=='')echo '<p>Automatikfehler: <code>'.esc_html((string)$auto['driver_error']).'</code></p>';
+         echo '<p>Dieses Protokoll zeigt die aktuelle Bestands-/Automatikprüfung, nicht den älteren kurzen Dienstweg.</p>';
+-        echo '<p>Alle gespeicherten Details stehen in der einzigen <strong>Gesamtdiagnose</strong> direkt darunter.</p></details>';
++        echo '<p>Alle gespeicherten Details stehen in der einzigen <strong>Gesamtdiagnose</strong> direkt darunter.</p>';
++        echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:8px">';
++        wp_nonce_field('pste_export_flight_protocol');
++        echo '<input type="hidden" name="action" value="pste_export_flight_protocol">';
++        echo '<button class="button button-secondary" type="submit">Fehlerprotokoll herunterladen (nur lesen)</button></form></details>';
+         self::renderEvidenceAuditControl();
+         self::renderShortPathDiagnostics($manualRun);
+         if($manualRun!==''){
+@@ -946,7 +950,20 @@
+         self::ajaxSuccess($state,$level);
+     }
+     private static function automaticProtocolError(Throwable $error,int $level): void {
+-        self::recordAutomaticProtocol(['stage'=>'ERROR','status'=>'BLOCKED','terminal'=>'BLOCKED'],'AUTOMATIK_ERROR',self::safeErrorCode($error));
++        $code=self::safeErrorCode($error);
++        // Original Flight Recorder: one durable event even if the queue never reached save().
++        try {
++            $queue=PSTE_Breadth_Research_Queue::peek();
++            PSTE_Flight_Recorder::event('PRODUCTION_AUTOMATION','BLOCKED',[
++                'error_code'=>$code,
++                'queue_status'=>is_array($queue)?(string)($queue['status']??''):'UNAVAILABLE',
++                'processed'=>is_array($queue)?(int)($queue['local_backlog_processed']??0):0,
++                'total'=>is_array($queue)?(int)($queue['local_backlog_total']??0):0,
++                'provider_calls_by_diagnostic'=>0,
++                'no_queue_mutation'=>true,
++            ]);
++        } catch(Throwable $ignored){PSTE_Flight_Recorder::event('PRODUCTION_AUTOMATION','BLOCKED',['error_code'=>$code,'snapshot'=>'UNAVAILABLE']);}
++        self::recordAutomaticProtocol(['stage'=>'ERROR','status'=>'BLOCKED','terminal'=>'BLOCKED'],'AUTOMATIK_ERROR',$code);
+         self::ajaxError($error,$level,400);
+     }
+ 
+@@ -986,7 +1003,7 @@
+     /** All stages since this version, including compiler and persisted topic decisions. */
+     public static function exportFlightProtocol(): void {
+         PSTE_Auth::assertAdmin('pste_export_flight_protocol',(string)($_POST['_wpnonce']??''));
+-        self::jsonDownload(PSTE_Flight_Recorder::report(35),'pste-workflow-flugschreiber-'.gmdate('Ymd-His').'-utc.json');
++        self::jsonDownload(PSTE_Flight_Recorder::report(150),'pste-workflow-flugschreiber-'.gmdate('Ymd-His').'-utc.json');
+     }
+ 
+ 
+--- a/includes/class-pste-breadth-research-queue.php
++++ b/includes/class-pste-breadth-research-queue.php
+@@ -682,6 +682,25 @@
+         self::save($queue);return self::summary($queue,null);
+     }
+ 
++    /** Capture the exact audit proof mismatch BEFORE the existing fail-closed throw.
++     * Hashes are non-secret proof fingerprints, never raw topic text, URLs or credentials.
++     * Reporting cannot decide, resume or change any stored topic/queue data. */
++    private static function logAuditProofStop(string $code,string $field,string $old,string $checkpoint,string $current,int $oldCount=0,int $newCount=0): void {
++        try {
++            if(!class_exists('PSTE_Flight_Recorder',false))return;
++            PSTE_Flight_Recorder::event('EXISTING_ONLY_AUDIT','PROOF_MISMATCH_BLOCKED',[
++                'error_code'=>$code,
++                'proof_field'=>strtoupper((string)preg_replace('/[^a-z0-9_]/i','',$field)),
++                'receipt_proof_sha256'=>preg_match('/^[a-f0-9]{64}$/',$old)?$old:'NOT_PRESENT_OR_INVALID',
++                'checkpoint_proof_sha256'=>preg_match('/^[a-f0-9]{64}$/',$checkpoint)?$checkpoint:'NOT_PRESENT_OR_INVALID',
++                'current_proof_sha256'=>preg_match('/^[a-f0-9]{64}$/',$current)?$current:'NOT_PRESENT_OR_INVALID',
++                'previous_rows'=>$oldCount,'current_rows'=>$newCount,
++                'effect'=>'NO_REENTRY_STARTED_PREVIOUS_PROGRESS_PRESERVED',
++                'provider_calls_by_diagnostic'=>0,
++            ]);
++        } catch(Throwable $ignored) { /* telemetry must never change the fail-closed gate */ }
++    }
++
+     /** Reuse only a completed audit receipt whose data/context/audit semantics are still identical. */
+     private static function canReuseBacklogAudit(array $binding): bool {
+         if(($binding['contract']??'')!=='PSTE_CONTEXT_INDEX_RUNTIME_BINDING_V2')return false;
+@@ -751,6 +770,7 @@
+            (int)($oldCheckpoint['cursor']??-1)!==$oldCursor||
+            (int)($oldCheckpoint['processed_total']??-1)!==$oldProcessed||
+            (int)($oldCheckpoint['backlog_row_count']??-1)!==$oldProcessed){
++            self::logAuditProofStop('PSTE_COMPLETE_RECHECK_PREFIX_PROOF_INVALID_PROGRESS_PRESERVED','OLD_CHECKPOINT',(string)($oldCheckpoint['backlog_sha256']??''),(string)($oldCheckpoint['sha256']??''),(string)($current['backlog_sha256']??''),$oldProcessed,$total);
+             throw new RuntimeException('PSTE_COMPLETE_RECHECK_PREFIX_PROOF_INVALID_PROGRESS_PRESERVED');
+         }
+         $next['local_backlog_complete']=false;$next['local_backlog_reused']=false;$next['local_backlog_resumed']=true;
+@@ -790,8 +810,10 @@
+         // A strictly appended tail is allowed only after the old prefix is verified.
+         foreach(['baseline_sha256','inventory_sha256','structure_sha256'] as $field){
+             $before=(string)($receipt[$field]??'');$checkpoint=(string)($oldCheckpoint[$field]??'');$now=(string)($current[$field]??'');
+-            if($before===''||$checkpoint===''||$now===''||!hash_equals($before,$checkpoint)||!hash_equals($before,$now))
++            if($before===''||$checkpoint===''||$now===''||!hash_equals($before,$checkpoint)||!hash_equals($before,$now)){
++                self::logAuditProofStop('PSTE_EXISTING_ONLY_LOGIC_RECHECK_SOURCE_CHANGED_PROGRESS_PRESERVED',$field,$before,$checkpoint,$now,(int)($prior['local_backlog_processed']??0),(int)($current['backlog_row_count']??0));
+                 throw new RuntimeException('PSTE_EXISTING_ONLY_LOGIC_RECHECK_SOURCE_CHANGED_PROGRESS_PRESERVED');
++            }
+         }
+         // The existing plan-only rebinder deliberately updates the completed receipt
+         // without editing the signed old queue/checkpoint. Its *old* plan SHA may
+@@ -799,8 +821,10 @@
+         $receiptPlan=(string)($receipt['editorial_plan_sha256']??'');
+         $currentPlan=(string)($current['editorial_plan_sha256']??'');
+         $checkpointPlan=(string)($oldCheckpoint['editorial_plan_sha256']??'');
+-        if($receiptPlan===''||$currentPlan===''||$checkpointPlan===''||!hash_equals($receiptPlan,$currentPlan))
++        if($receiptPlan===''||$currentPlan===''||$checkpointPlan===''||!hash_equals($receiptPlan,$currentPlan)){
++            self::logAuditProofStop('PSTE_EXISTING_ONLY_LOGIC_RECHECK_PLAN_CHANGED_PROGRESS_PRESERVED','EDITORIAL_PLAN_SHA256',$receiptPlan,$checkpointPlan,$currentPlan,(int)($prior['local_backlog_processed']??0),(int)($current['backlog_row_count']??0));
+             throw new RuntimeException('PSTE_EXISTING_ONLY_LOGIC_RECHECK_PLAN_CHANGED_PROGRESS_PRESERVED');
++        }
+         $total=(int)($current['backlog_row_count']??0);
+         $oldCount=(int)($receipt['backlog_row_count']??0);
+         $oldHash=(string)($receipt['backlog_sha256']??'');
+@@ -810,19 +834,25 @@
+             ||$oldCount!==(int)($prior['local_backlog_total']??-1)
+             ||$oldCount!==(int)($prior['local_backlog_processed']??-1)
+             ||$oldCount!==(int)($oldCheckpoint['processed_total']??-1)
+-            ||(int)($oldCheckpoint['cursor']??0)!==(int)($prior['local_backlog_cursor']??-1))
++            ||(int)($oldCheckpoint['cursor']??0)!==(int)($prior['local_backlog_cursor']??-1)){
++            self::logAuditProofStop('PSTE_EXISTING_ONLY_LOGIC_RECHECK_COMPLETED_COUNTERS_INVALID','BACKLOG_ROW_COUNT','', '', '',$oldCount,$total);
+             throw new RuntimeException('PSTE_EXISTING_ONLY_LOGIC_RECHECK_COMPLETED_COUNTERS_INVALID');
++        }
+         if($total===$oldCount){
+-            if(!hash_equals($oldHash,(string)($current['backlog_sha256']??'')))
++            if(!hash_equals($oldHash,(string)($current['backlog_sha256']??''))){
++                self::logAuditProofStop('PSTE_EXISTING_ONLY_LOGIC_RECHECK_SOURCE_CHANGED_PROGRESS_PRESERVED','BACKLOG_SHA256',$oldHash,(string)($oldCheckpoint['backlog_sha256']??''),(string)($current['backlog_sha256']??''),$oldCount,$total);
+                 throw new RuntimeException('PSTE_EXISTING_ONLY_LOGIC_RECHECK_SOURCE_CHANGED_PROGRESS_PRESERVED');
++            }
+         }else{
+             // Exact append-only continuation with changed logic: prove that every old
+             // source row is byte-identical before starting a full LOCAL revalidation.
+             // The existing SQL prefix reader is read-only and uses the same tuple hash.
+             $prefix=self::retainedBacklogPrefixFingerprint((int)$oldCheckpoint['cursor']);
+             if((int)($prefix['row_count']??-1)!==$oldCount||
+-               !hash_equals($oldHash,(string)($prefix['sha256']??'')))
++               !hash_equals($oldHash,(string)($prefix['sha256']??''))){
++                self::logAuditProofStop('PSTE_EXISTING_ONLY_LOGIC_RECHECK_PREFIX_CHANGED_PROGRESS_PRESERVED','BACKLOG_PREFIX_SHA256',$oldHash,(string)($oldCheckpoint['backlog_sha256']??''),(string)($prefix['sha256']??''),$oldCount,(int)($prefix['row_count']??0));
+                 throw new RuntimeException('PSTE_EXISTING_ONLY_LOGIC_RECHECK_PREFIX_CHANGED_PROGRESS_PRESERVED');
++            }
+         }
+         if((string)($prior['status']??'')!=='COMPLETE'||empty($prior['local_backlog_complete'])
+             ||!array_key_exists('provider_fallback_allowed',$prior)||!empty($prior['provider_fallback_allowed']))
+@@ -850,6 +880,7 @@
+            (int)($oldCheckpoint['cursor']??-1)!==$oldCursor||
+            (int)($oldCheckpoint['processed_total']??-1)!==$oldProcessed||
+            (int)($oldCheckpoint['backlog_row_count']??-1)!==$oldProcessed){
++            self::logAuditProofStop('PSTE_COMPLETE_RECHECK_PREFIX_PROOF_INVALID_PROGRESS_PRESERVED','OLD_CHECKPOINT',(string)($oldCheckpoint['backlog_sha256']??''),(string)($oldCheckpoint['sha256']??''),(string)($current['backlog_sha256']??''),$oldProcessed,$total);
+             throw new RuntimeException('PSTE_COMPLETE_RECHECK_PREFIX_PROOF_INVALID_PROGRESS_PRESERVED');
+         }
+         $next['local_backlog_complete']=false;$next['local_backlog_reused']=false;$next['local_backlog_resumed']=true;
+--- a/includes/class-pste-flight-recorder.php
++++ b/includes/class-pste-flight-recorder.php
+@@ -321,6 +321,27 @@
+         foreach($events as $e){$s=(string)($e['stage']??'');$ev=(string)($e['event']??'');$k=$s.' / '.$ev;$summary[$k]=($summary[$k]??0)+1;}
+         arsort($summary);
+         $snapshot=['read_only'=>true];
++        // Use the already-persisted automation protocol to expose an earlier stop.
++        // This is a read-only projection of PRE-EXISTING data, not fabricated history.
++        try {
++            $auto=get_option('pste_automatic_protocol_v1',[]);
++            $oldEvents=is_array($auto)?(array)($auto['events']??[]):[];
++            for($idx=count($oldEvents)-1;$idx>=0;$idx--){
++                $last=is_array($oldEvents[$idx]??null)?$oldEvents[$idx]:[];
++                if((string)($last['error_code']??'')==='')continue;
++                $snapshot['last_automatic_block']=[
++                    'at_utc'=>substr((string)($last['at_utc']??''),0,40),
++                    'error_code'=>self::code($last['error_code']),
++                    'audit_status'=>self::code($last['audit_status']??''),
++                    'audit_processed'=>(int)($last['audit_processed']??0),
++                    'audit_total'=>(int)($last['audit_total']??0),
++                    'context_status'=>self::code($last['context_status']??''),
++                    'compiler_status'=>self::code($last['compiler_status']??''),
++                    'origin'=>'EXISTING_AUTOMATION_PROTOCOL_NO_REPLAY',
++                ];
++                break;
++            }
++        } catch(Throwable $ignored){$snapshot['automatic_history_read_error']='UNAVAILABLE';}
+         try{$snapshot['forensic_evidence']=PSTE_Forensic_Diagnostics::current();}
+         catch(Throwable $e){$snapshot['forensic_error_code']='PSTE_FORENSIC_READ_FAILED';}
+         try{$snapshot['topic_status_groups']=PSTE_Repository::automaticProtocolStatusMatrix();$snapshot['topic_counts']=PSTE_Repository::productionCandidateStats();}
