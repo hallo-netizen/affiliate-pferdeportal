@@ -202,8 +202,7 @@ with ZipFile(BytesIO(original)) as src:
     # Format validation still runs for every campaign. In the insurance world
     # alone it may accept genuine 728x90 or 468x60 originals at wide slots.
     anchor="                if (!$this->campaign_slot_allowed($runtime_campaign, $slot_type)) { continue; }"
-    fixed="                if (!$this->campaign_slot_allowed($runtime_campaign, $slot_type)\n                    && !$this->hb_insurance_original_wide_allowed($runtime_campaign,$slot_type,$rank_context)
-                    && !$this->hb_insurance_original_inline_allowed($runtime_campaign,$slot_type,$rank_context)) { continue; }"
+    fixed="                if (!$this->campaign_slot_allowed($runtime_campaign, $slot_type)\n                    && !$this->hb_insurance_original_wide_allowed($runtime_campaign,$slot_type,$rank_context)\n                    && !$this->hb_insurance_original_inline_allowed($runtime_campaign,$slot_type,$rank_context)) { continue; }"
     s=replace_one(s,anchor,fixed)
     # Candidate ranking is filtered BEFORE choosing the first campaign, so
     # one unrelated brand never displaces an eligible lower-ranked insurer.
