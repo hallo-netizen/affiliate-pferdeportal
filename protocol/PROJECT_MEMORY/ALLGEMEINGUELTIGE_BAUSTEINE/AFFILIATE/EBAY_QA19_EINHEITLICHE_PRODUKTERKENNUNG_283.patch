@@ -1,0 +1,179 @@
+--- a/affiliate-portal-router/includes/trait-ppar-ebay.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay.php
+@@ -1329,22 +1329,107 @@
+         $primary = $this->ebay_business_primary_title_section($title);
+         if ($primary === '') { return false; }
+         return $this->ebay_business_strict_token_present($primary, $needle);
+     }
+ 
+-    /** Catalog-defined, exact names for the SAME sold product, never free-text guessing. */
+-    private function ebay_business_product_alias_in_primary($concept, $primary) {
++    /**
++     * One catalog-derived vocabulary rule for EVERY exact BUSINESS product.
++     * A different German compound may name the same sold object (e.g.
++     * Rueckfahrkamera fuer Pferdeanhaenger vs. Anhaengerkameras). Match the
++     * actual main product noun AND an independently present catalogue qualifier.
++     * Never infer synonyms from descriptions or the search query alone.
++     */
++    private function ebay_business_product_alias_in_primary($concept, $primary, $full_title = '') {
+         $primary = $this->ebay_topic_text((string)$primary);
++        $full_title = $this->ebay_topic_text((string)$full_title);
+         if ($primary === '' || !is_array($concept)) { return false; }
+-        // When a catalog explicitly names an exact eBay search product phrase,
+-        // that very phrase in the actual sold product's primary title is proof.
++        // Every declared catalogue spelling and eBay search phrase passes the
++        // same verifier; no second classifier or alias controller.
+         $curated_query = $this->ebay_topic_text((string)($concept['ebay_search_term'] ?? ''));
+         if ($curated_query !== '' && strpos(' ' . $primary . ' ', ' ' . $curated_query . ' ') !== false) { return true; }
+         foreach ((array)($concept['ebay_product_aliases'] ?? array()) as $alias) {
+             $alias = $this->ebay_topic_text((string)$alias);
+             if ($alias !== '' && (strpos(' ' . $primary . ' ', ' ' . $alias . ' ') !== false
+                 || $this->ebay_business_strict_token_present($primary, $alias))) { return true; }
++        }
++        if ($full_title === '') { return false; }
++        $sold_words = $this->ebay_topic_tokens($primary);
++        $offer_words = $this->ebay_topic_tokens($full_title);
++        $identity = $this->ebay_business_distinctive_tokens((string)($concept['title'] ?? ''));
++        if (!$sold_words || !$identity) { return false; }
++        // A product mentioned BEFORE the actual sold noun is only a reference:
++        // "Kamera Abdeckung" sells an Abdeckung, not a camera. This guard is
++        // shared by every compound/relational variant, not one camera exception.
++        $is_main_product = function ($position, $scope_words) use ($sold_words) {
++            for ($next = $position + 1; $next < count($sold_words); $next++) {
++                $word = $sold_words[$next];
++                if (preg_match('/^[0-9]+[a-z0-9]*$/', $word) || in_array($word,
++                    array('pferd','pferde','pony','ponys','fohlen','horse','horses','equine'), true)) { continue; }
++                $scope_match = false;
++                foreach ((array)$scope_words as $scope) {
++                    if ($this->ebay_business_noun_matches($word, $scope)) { $scope_match = true; break; }
++                }
++                if (!$scope_match) { return false; }
++            }
++            return true;
++        };
++
++        // Form A: one compound catalogue noun with a contextual left part,
++        // e.g. Anhaenger-kameras. Split only if BOTH parts are actual words in
++        // the offer: camera is the sold object, trailer is its use context.
++        if (count($identity) === 1) {
++            $word = $this->ebay_topic_stem($identity[0]);
++            $length = strlen($word);
++            for ($cut = 6; $cut <= $length - 5; $cut++) {
++                $context = substr($word, 0, $cut);
++                $object = substr($word, $cut);
++                $sold_match_word = '';
++                foreach ($sold_words as $position => $sold) {
++                    if ($this->ebay_business_noun_matches($sold, $object)
++                        && $is_main_product($position, array($context))) { $sold_match_word = $sold; break; }
++                }
++                if ($sold_match_word === '') { continue; }
++                foreach ($offer_words as $other) {
++                    // A different word must prove the actual offer's scope;
++                    // matching a substring inside the sold noun is insufficient.
++                    if ($other !== $sold_match_word
++                        && $this->ebay_business_noun_matches($other, $context)) { return true; }
++                }
++            }
++        }
++
++        // Form B: a catalogue noun followed by a genuine usage relation:
++        // "Kameras im Stall" vs. "Stallkamera". The object must be in the
++        // primary title AND every distinct qualifier in the real offer text.
++        $concept_title = $this->ebay_topic_text((string)($concept['title'] ?? ''));
++        if (preg_match('/\b(?:im|in|fur|fuer|am|an|zum|zur)\b/', $concept_title)) {
++            $product = $this->ebay_business_distinctive_tokens(
++                $this->ebay_business_primary_title_section($concept_title));
++            $qualifiers = array_values(array_diff($identity, $product));
++            if (count($product) === 1 && $qualifiers) {
++                $object = $this->ebay_topic_stem($product[0]);
++                $sold_matches = false;
++                foreach ($sold_words as $position => $sold) {
++                    if ($this->ebay_business_noun_matches($sold, $object)
++                        && $is_main_product($position, $qualifiers)) { $sold_matches = true; break; }
++                }
++                if ($sold_matches) {
++                    $qualifiers_ok = true;
++                    foreach ($qualifiers as $qualifier) {
++                        $found = false;
++                        foreach ($offer_words as $other) {
++                            if ($this->ebay_business_noun_matches($other, $qualifier)
++                                || (strlen($qualifier) >= 5 && strpos($other, $qualifier) === 0
++                                    && $this->ebay_business_noun_matches($other, $object))) {
++                                $found = true; break;
++                            }
++                        }
++                        if (!$found) { $qualifiers_ok = false; break; }
++                    }
++                    if ($qualifiers_ok) { return true; }
++                }
++            }
+         }
+         return false;
+     }
+ 
+     /** Resolve the exact catalog concept carried by a V6.17+ BUSINESS profile. */
+@@ -1424,11 +1509,32 @@
+                     $accessory_primary = true;
+                     break 2;
+                 }
+             }
+         }
+-        $alias_primary = !$accessory_primary && $this->ebay_business_product_alias_in_primary($concept, $primary);
++        $alias_primary = !$accessory_primary && $this->ebay_business_product_alias_in_primary($concept, $primary, (string)($sections['title'] ?? ''));
++        // A sold item named "X mit Y" is the *specific* variant Y, not any X.
++        // Preserve this product-identity condition for ALL catalogue concepts.
++        $named_feature_ok = true;
++        $normalized_concept = $this->ebay_topic_text($concept_title);
++        if (preg_match('/\bmit\s+(.+)$/', $normalized_concept, $feature_match)) {
++            foreach ($this->ebay_business_distinctive_tokens($feature_match[1]) as $feature) {
++                // "ohne Sattelkammer" does not prove the "mit Sattelkammer"
++                // product, even though the feature word appears in the title.
++                $real_title = $this->ebay_topic_text((string)($sections['title'] ?? ''));
++                if (preg_match('/\bohne\s+' . preg_quote($feature, '/') . '\b/', $real_title)) {
++                    $named_feature_ok = false;
++                    break;
++                }
++                if (!$this->ebay_business_strict_token_present($sections['title'], $feature)
++                    && !$this->ebay_business_strict_token_present($aspects, $feature)
++                    && !$this->ebay_business_strict_token_present($product_type, $feature)) {
++                    $named_feature_ok = false;
++                    break;
++                }
++            }
++        }
+         $ok = false;
+         if ($primary_hits >= $required || $alias_primary) {
+             $ok = true;
+         } elseif (!$accessory_primary && $product_type_hits >= $required) {
+             // Exact eBay Productart is a direct structured product identity. The
+@@ -1437,12 +1543,14 @@
+             // authorize a BUSINESS route.
+             $ok = true;
+         } elseif (!$accessory_primary && $aspect_hits >= $required && $category_hits >= 1) {
+             $ok = true;
+         }
++        if (!$named_feature_ok) { $ok = false; }
+         return array(
+-            'ok'=>$ok,'tokens'=>$tokens,'required'=>$required,'primary_hits'=>$primary_hits,
++            'ok'=>$ok, 'named_feature_ok'=>$named_feature_ok,
++            'tokens'=>$tokens,'required'=>$required,'primary_hits'=>$primary_hits,
+             'aspect_hits'=>$aspect_hits,'product_type_hits'=>$product_type_hits,'category_hits'=>$category_hits,'direct_count'=>$direct_count,
+             'accessory_primary'=>$accessory_primary,'alias_primary'=>$alias_primary,
+         );
+     }
+ 
+@@ -1551,10 +1659,14 @@
+                 }
+             }
+             $is_expected_candidate = $expected_concept
+                 && sanitize_key((string)($concept['id'] ?? '')) === sanitize_key((string)($expected_concept['id'] ?? ''))
+                 && $exact_profile_scope;
++            // Reuse the SAME feature evidence at the later ranking gate: the
++            // ordinary token scorer must not bypass a contradicted "mit Y".
++            if ($is_expected_candidate && isset($expected_evidence['named_feature_ok'])
++                && !$expected_evidence['named_feature_ok']) { continue; }
+             $expected_direct_verified = $is_expected_candidate && !empty($expected_evidence['ok']);
+             if ($expected_direct_verified && !empty($expected_evidence['alias_primary'])) {
+                 // The same verified catalog alias must count as the product noun
+                 // for scoring; otherwise confidence wrongly remains below 80.
+                 $title_hits = max(1, $title_hits);
