@@ -9,6 +9,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: inspect exact selector methods
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          import re
+          z=ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          n='affiliate-portal-router/affiliate-portal-router.php'
+          s=z.read(n).decode().splitlines()
+          pats=['select_campaign_for_slot','campaign_match_rank','campaign_from_post','render_banner','get_category_archive_context','campaign_control_allows_delivery','campaign_is_complete','campaign_to_group_banner']
+          for pat in pats:
+            for i,line in enumerate(s):
+              if re.search(r'function\s+'+pat+r'\s*\(',line):
+                print('BEGIN',pat,i+1)
+                for j in range(i,min(i+145,len(s))):
+                  print('BODY',pat,j+1,s[j][:350])
+                break
+          PY
       - name: inspect campaign selection and insurance scope seams
         run: |
           python3 - <<'PY'
