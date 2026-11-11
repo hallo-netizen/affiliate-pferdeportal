@@ -1,3 +1,9 @@
+## 11.11.2026 – TARIFCHECK HAUSRAT: KONKRETE WERBEMITTEL UND SEITENPOSITIONEN (KONZEPT)
+
+Drei Nutzer-Screenshots aus dem eingeloggten Tarifcheck-Partnerkonto bestätigen für **Hausrat** die vorhandenen Bereiche **Tarifrechner/Formulare**, **Direktlinks** und **Banner**. Tatsächlich sichtbar sind acht Maße: 120×60, 120×600, 125×125, 160×600, 234×60, 300×250, 468×60, 728×90. Der Tarifrechner bietet einen Mobilrechner; konkrete Einbettungs- und Partnerlinks sind im Screenshot **nicht** sichtbar. **Website-Platzierungsvertrag** in `VERSICHERUNGEN_TARIFCHECK_KONZEPT_20261111.md`, Abschnitt 8 ergänzt: Querbanner nur auf passend bestätigtem Hausrat-R3, 300×250 rechteckig im Fachartikel (mobil nach Text), echter Rechner einmal zentral bei der bestehenden Vergleichs-Endkategorie, Direktlink als Fach-CTA, kleines 125×125 nur unverzerrt; die Hauptwelt Versicherungen erhält nicht blind ein einzelnes Hausratbanner. Kein Amazon-/Produkt-Fallback im gesamten Versicherungszweig. Vor Installation zwingend Code/Format-/Tracking-/Datenschutzprüfung. **Dies ist eine dokumentierte Konzeptentscheidung, kein Pluginupdate.** RC18 und RC19 bleiben unverändert.
+
+---
+
 ## 11.11.2026 – VERSICHERUNGSWERBUNG EXKLUSIV: TARIFCHECK ZUERST (KONZEPT, NOCH KEIN PLUGINUPDATE)
 
 **Nutzerentscheidung:** Im vollständigen Versicherungszweig (Hauptseite, R2/R3, Endkategorien, eindeutig zugeordnete Beiträge/Glossare) nur nachweislich passende Versicherungs-Partnerwerbung; **kein Amazon, eBay/idealo oder Kredit-Fallback**. Quer- und quadratische Banner an bereits vorhandenen Slots. **Strategie:** Tarifcheck zunächst als bestehender Direktpartner, Awin und ADCELL erst für nachgewiesene Versicherungslücken, ohne Duplikate; Tarifcheck-„Finanzen“ bleibt außerhalb des Versicherungszweigs.
