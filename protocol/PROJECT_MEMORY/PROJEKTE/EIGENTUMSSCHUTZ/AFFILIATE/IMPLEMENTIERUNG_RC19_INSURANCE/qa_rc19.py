@@ -33,6 +33,7 @@ def extract(name):
 methods="\n\n".join(extract(x) for x in [
     'hb_insurance_scope','hb_insurance_campaign_allowed','hb_insurance_original_wide_allowed'
 ])
+methods=methods.replace("        if ($source === 'fallback' || $w < 468 || $h < 60 || $h > 180) { return false; }", "        fwrite(STDERR,'INTERNAL_WIDE '.json_encode(array('w'=>$w,'h'=>$h,'source'=>$source,'ratio'=>$w/$h)).PHP_EOL); if ($source === 'fallback' || $w < 468 || $h < 60 || $h > 180) { return false; }")
 # Synthetic complete intended hierarchy: 1 R1, 5 R2, 46 R3, 323 WordPress categories.
 nodes={}
 root='core:world:insurance'
