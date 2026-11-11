@@ -170,6 +170,22 @@ with ZipFile(BytesIO(original)) as src:
     anchor="        // When no real campaign exists, show only a tracked Amazon search link\n        // for an explicitly known Hab product-family category."
     new="        // RC19: no Amazon, physical-product, placeholder, or unapproved\n        // partner fallback anywhere inside insurance; no fabricated ads.\n        if ($hb_insurance_scope === 'insurance') { return ''; }\n        // When no real campaign exists, show only a tracked Amazon search link\n        // for an explicitly known Hab product-family category."
     s=replace_one(s,anchor,new)
+    # The original generic banner-selection gate excludes ALL manually entered
+    # direct campaigns from automatic selection, allowing Creative Library only.
+    # For the specifically scoped insurer world, allow a verified approved
+    # direct/Awin/ADCELL campaign through the existing ranker. Everywhere else
+    # the original Creative Library-only rule remains unchanged.
+    anchor="""            if ($required_type === 'banner' && $forced_campaign_id_norm === ''
+                && (string)($runtime_campaign['source'] ?? '') !== 'output_object_v4') { continue; }"""
+    fixed="""            if ($required_type === 'banner' && $forced_campaign_id_norm === ''
+                && (string)($runtime_campaign['source'] ?? '') !== 'output_object_v4'
+                && !$this->hb_insurance_campaign_allowed($runtime_campaign,$rank_context,$slot_type)) { continue; }"""
+    s=replace_one(s,anchor,fixed)
+    # Format validation still runs for every campaign. In the insurance world
+    # alone it may accept genuine 728x90 or 468x60 originals at wide slots.
+    anchor="                if (!$this->campaign_slot_allowed($runtime_campaign, $slot_type)) { continue; }"
+    fixed="                if (!$this->campaign_slot_allowed($runtime_campaign, $slot_type)\n                    && !$this->hb_insurance_original_wide_allowed($runtime_campaign,$slot_type,$rank_context)) { continue; }"
+    s=replace_one(s,anchor,fixed)
     # Candidate ranking is filtered BEFORE choosing the first campaign, so
     # one unrelated brand never displaces an eligible lower-ranked insurer.
     anchor="    private function campaign_match_rank($campaign, $context) {\n        $mode ="
@@ -191,7 +207,7 @@ with ZipFile(BytesIO(original)) as src:
     original_map[main]=s.encode('utf-8')
     original_map[amazon]=t.encode('utf-8')
     original_map[readme]=replace_one(original_map[readme].decode('utf-8'),"Stable tag: 0.1.15-rc18","Stable tag: 0.1.16-rc19").encode('utf-8')
-    assert s.count("hb_insurance_campaign_allowed(")==3
+    assert s.count("hb_insurance_campaign_allowed(")==4
     assert "core:world:insurance'=>'hb-amazon-kategorie-tresore.webp'" not in t
     assert "Feuerfeste Dokumententasche Versicherungsunterlagen" not in t
     changed={main,amazon,readme}
