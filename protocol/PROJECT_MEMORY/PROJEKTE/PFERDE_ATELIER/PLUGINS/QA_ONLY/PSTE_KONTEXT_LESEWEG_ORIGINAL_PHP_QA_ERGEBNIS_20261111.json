@@ -1,0 +1,21 @@
+{
+    "status": "PASS",
+    "real_plugin_class": "PSTE_Context_Index_Store::runtimeBinding",
+    "checks": 381,
+    "positive_repeats": 120,
+    "negative_cases": [
+        "missing manifest",
+        "corrupt manifest hash",
+        "plan identity drift",
+        "inventory identity drift",
+        "job identity drift",
+        "family count drift",
+        "shard count drift",
+        "invalid contract",
+        "structure identity drift",
+        "invalid declared signature"
+    ],
+    "writes": 0,
+    "fixture": "synthetic options with authentic 2026-11-09 context hash values",
+    "live_wp_test": false
+}
