@@ -37,3 +37,8 @@ Ein **frisch recherchiertes** Keyword aus realen Daten → genau eine gültige S
 - [Checkpoint B, 11.11.](20261111_KISS_CHECKPOINT_B_AUTOMATIK_NEUER_EINZELWORKER_EXPORT_QA.md)
 - [Hauptursachen und Verantwortlichkeiten](20261111_KISS_GRUNDURSACHE_WORKER_AGENT_KONZEPTPRUEFUNG.md)
 - [Drei alte Original-READY sind nur Metadaten](PSTE_PSERC_3_READY_LETZTER_GUELTIGER_ORIGINALSTAND_20261111.md)
+
+## Nachtrag aus echtem GitHub-Abgleich 11.11.2026
+- Die 170 geänderten Dateien in PR #682 enthalten für PSTE .41 ausschließlich den QA-Bericht; **die ausführbare .41-Test-ZIP ist in der privaten Projektablage**, nicht als vollständiger Pluginstand in diesem PR. GitHub-Prüferfolge sind deshalb keine ausführbare WordPress-Endabnahme.
+- Vorheriger GitHub-Hardlock scheiterte am PR-Protokollfeld `FEHLER: NICHT_BETROFFEN`, obwohl sich im PR mindestens eine geänderte Datei mit FEHLER im Namen befindet. Dieses eine Feld wurde im bestehenden PR-Bericht auf `PASS` korrigiert. **Keine Sicherheitsprüfung abgeschaltet.** Ein erneuter Lauf des alten Ereignisses las noch dessen alte PR-Beschreibung; eine neue PR-Synchronisation muss den aktuellen Text auswerten. Die Sicherheit bleibt so lange **nicht grün**, bis ein neuer Lauf PASS zeigt.
+- Der operative Blocker bleibt: **kein echter neuer Einzel-Keyword→PSERC→K0→WordPress-Entwurf-Endtest**. Die Protokollkorrektur ist keine WordPress-Reparatur und wird ausdrücklich nicht so verkauft.
