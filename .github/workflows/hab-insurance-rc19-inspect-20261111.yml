@@ -38,6 +38,25 @@ jobs:
                 for j in range(i,min(i+165,len(a))):print('FILTER',name,j+1,a[j][:340])
                 break
           PY
+      - name: Inspect actual WordPress creative import form and tariff calculator options
+        run: |
+          python3 - <<'PY'
+          import zipfile,re
+          p='protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          with zipfile.ZipFile(p) as z:
+            for n in z.namelist():
+              if not n.endswith('.php'):continue
+              lines=z.read(n).decode('utf8','replace').splitlines()
+              picks=[i for i,s in enumerate(lines) if re.search(r'function\s+(?:creative_library_render|creative_library_.*import|render_.*creative|render_.*tariff|tariff_.*|tarifcheck_.*|render_import_form|handle_import_form|creative_library_.*parse|creative_library_.*validate)|Tarifrechner|Tarifcheck|Werbemittel importieren|Banner-Code|Banner & Werbemittel|Werbemittel-Bibliothek|Creative-Library',s,re.I)]
+              if picks:print('FOUND',n,len(picks),[(i+1,lines[i].strip()[:120]) for i in picks[:35]])
+              if re.search(r'trait-ppar-(creative-library|tariff-tools)|class-ppar-admin-kiss',n):
+                seen=set()
+                for i in picks[:24]:
+                  begin=max(0,i-6);end=min(len(lines),i+23)
+                  for j in range(begin,end):
+                    if j not in seen:
+                      seen.add(j);print('DETAIL',n,j+1,lines[j][:430])
+          PY
       - name: locate selection and banner geometry calls
         run: |
           python3 - <<'PY'
