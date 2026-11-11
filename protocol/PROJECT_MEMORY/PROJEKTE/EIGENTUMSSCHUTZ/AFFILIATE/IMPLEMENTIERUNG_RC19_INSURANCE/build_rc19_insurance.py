@@ -132,6 +132,77 @@ helper=r'''
      * the existing insurer wide slots. All six old worlds retain old geometry. */
     /** Actual 300x250 rectangle and 125x125 small square in insurance
      * article/glossary slots, preserving their original dimensions. */
+    /**
+     * Guaranteed in-house topic card for an empty existing insurance banner
+     * slot. Not an affiliate creative: only current verified WordPress pages.
+     */
+    private function hb_insurance_house_banner($context, $slot_type) {
+        if ($this->hb_insurance_scope($context) !== 'insurance'
+            || !class_exists('PPAR_HB_Integration')) { return ''; }
+        $slot=sanitize_key((string)$slot_type);
+        $slots=array('hub_after_cards','product_after_category_tiles',
+            'category_recommendation','post_inline_banner',
+            'glossary_single_banner','glossary_single_desktop_banner',
+            'glossary_single_mobile_banner');
+        if (!in_array($slot,$slots,true)) { return ''; }
+        $nodes=PPAR_HB_Integration::verified_nodes();
+        $root='core:world:insurance';
+        if (!is_array($nodes) || empty($nodes[$root]['wp_id'])) {return '';}
+        $current=array();
+        $post_id=absint($context['post_id'] ?? 0);
+        $verified=(string)($context['hb_verified_node_id'] ?? '');
+        if ($verified!=='' && !empty($nodes[$verified])) { $current=$nodes[$verified]; }
+        if (!$current && $post_id > 0 && sanitize_key((string)($context['post_type'] ?? ''))==='page') {
+            foreach ($nodes as $node) {
+                if (($node['type']??'')==='page' && absint($node['wp_id']??0)===$post_id) {
+                    $current=$node;break;
+                }
+            }
+        }
+        if (!$current) {
+            $terms=array_map('absint',(array)($context['term_ids']??array()));
+            foreach ($nodes as $node) {
+                if (($node['type']??'')==='category'
+                    && in_array(absint($node['wp_id']??0),$terms,true)) {
+                    $current=$node;break;
+                }
+            }
+        }
+        $target=$nodes[$root];
+        $current_id=(string)($current['id']??'');
+        if ($current_id===$root) {
+            foreach ($nodes as $node) {
+                if (($node['type']??'')==='page' && ($node['parent']??'')===$root) {
+                    $target=$node;break;
+                }
+            }
+        } elseif ($current_id!=='') {
+            $cursor=$current;$seen=array();
+            for ($i=0;$i<18 && !empty($cursor['id']);$i++) {
+                $key=(string)$cursor['id'];
+                if (isset($seen[$key])) {break;}
+                $seen[$key]=true;
+                if (($cursor['parent']??'')===$root && ($cursor['type']??'')==='page') {
+                    $target=$cursor;break;
+                }
+                $cursor=$nodes[(string)($cursor['parent']??'')]??array();
+            }
+            if (absint($target['wp_id']??0)===$post_id) { $target=$nodes[$root]; }
+        }
+        $link=function_exists('get_permalink') ? get_permalink(absint($target['wp_id'])) : '';
+        if (!is_string($link) || $link==='') {return '';}
+        $topic=sanitize_text_field((string)($target['name']??'Versicherungen'));
+        $wide=in_array($slot,array('hub_after_cards','product_after_category_tiles','category_recommendation'),true);
+        $class=$wide?'ppar-hb-insurance-own-wide':'ppar-hb-insurance-own-compact';
+        return '<div class="ppar-affiliate-slot ppar-hb-insurance-own '.$class.'" data-ppar-slot="'.esc_attr($slot).'">'
+            .'<span class="ppar-hb-insurance-own-label">Eigener Themenhinweis</span>'
+            .'<a class="ppar-hb-insurance-own-link" href="'.esc_url($link).'">'
+            .'<strong>Versicherungsschutz passend auswählen</strong>'
+            .'<span>Informationen und Vergleiche zum Themenbereich '.esc_html($topic).'</span>'
+            .'<span class="ppar-hb-insurance-own-cta">Zum Themenbereich</span>'
+            .'</a></div>';
+    }
+
     private function hb_insurance_original_inline_allowed($banner, $slot_type, $context) {
         $slot=sanitize_key((string)$slot_type);
         if ($this->hb_insurance_scope($context)!=='insurance'
@@ -171,11 +242,11 @@ with ZipFile(BytesIO(original)) as src:
     # The insurance article uses the existing banner selector, not a stale
     # hybrid plan that may contain an Amazon/physical-product campaign.
     anchor="        if (get_post_type($post_id)!=='post' || get_post_status($post_id)!=='publish') { return ''; }\n        // The live Hab template owns placement"
-    new="        if (get_post_type($post_id)!=='post' || get_post_status($post_id)!=='publish') { return ''; }\n        $insurance_scope=$this->hb_insurance_scope($this->get_content_context($post_id));\n        if ($insurance_scope !== 'other') {\n            return $insurance_scope === 'insurance' && $kind === 'banner'\n                ? $this->render_affiliate_slot($post_id,'post_inline_banner','primary_product','') : '';\n        }\n        // The live Hab template owns placement"
+    new="        if (get_post_type($post_id)!=='post' || get_post_status($post_id)!=='publish') { return ''; }\n        $insurance_scope=$this->hb_insurance_scope($this->get_content_context($post_id));\n        if ($insurance_scope !== 'other') {\n            return $insurance_scope === 'insurance' && $kind === 'banner'\n                ? $this->render_affiliate_slot($post_id,'post_inline_banner','primary_product','')\n                : ($kind === 'products' ? '<!-- HAB insurance: no product cards or demo products -->' : '');\n        }\n        // The live Hab template owns placement"
     s=replace_one(s,anchor,new)
     # Existing Hab area slots must not run post-selection Amazon product fallback.
     anchor="        if ($type==='') { return ''; }\n        if ($kind==='banner'"
-    new="        if ($type==='') { return ''; }\n        if ($kind==='products' && $this->hb_insurance_scope($context)!=='other') { return ''; }\n        if ($kind==='banner'"
+    new="        if ($type==='') { return ''; }\n        if ($kind==='products' && $this->hb_insurance_scope($context)!=='other') { return '<!-- HAB insurance: no physical product cards -->'; }\n        if ($kind==='banner'"
     s=replace_one(s,anchor,new)
     # Guard all assigned and automatically selected campaigns and all their
     # no-campaign fallbacks, without altering unrelated portal ranking.
@@ -186,7 +257,7 @@ with ZipFile(BytesIO(original)) as src:
     new="            if ($selection && !empty($selection['campaign'])\n                && !$this->hb_insurance_campaign_allowed($selection['campaign'],$context,$slot_type)) { $selection=null; }\n            if ($selection && !empty($selection['campaign'])) {\n                list($group, $banner) = $this->campaign_to_group_banner($selection['campaign']);"
     s=replace_one(s,anchor,new)
     anchor="        // When no real campaign exists, show only a tracked Amazon search link\n        // for an explicitly known Hab product-family category."
-    new="        // RC19: no Amazon, physical-product, placeholder, or unapproved\n        // partner fallback anywhere inside insurance; no fabricated ads.\n        if ($hb_insurance_scope === 'insurance') { return ''; }\n        // When no real campaign exists, show only a tracked Amazon search link\n        // for an explicitly known Hab product-family category."
+    new="        // RC19: no Amazon, physical-product, placeholder, or unapproved\n        // partner fallback anywhere inside insurance; no fabricated ads.\n        if ($hb_insurance_scope === 'insurance') { return $this->hb_insurance_house_banner($context,$slot_type); }\n        // When no real campaign exists, show only a tracked Amazon search link\n        // for an explicitly known Hab product-family category."
     s=replace_one(s,anchor,new)
     # The original generic banner-selection gate excludes ALL manually entered
     # direct campaigns from automatic selection, allowing Creative Library only.
@@ -237,6 +308,22 @@ with ZipFile(BytesIO(original)) as src:
     max-width:100%!important;max-height:250px!important;
     object-fit:contain!important;margin:0 auto!important;
 }
+
+/* Empty insurer ad slots: internal non-commercial thematic banner. */
+.ppar-hb-insurance-own{display:block;box-sizing:border-box;background:#edf2ed;
+border:1px solid #cbd9cd;border-radius:9px;padding:12px 16px;color:#203d31;max-width:100%;overflow:hidden}
+.ppar-hb-insurance-own-label{display:block;font-size:11px;letter-spacing:.02em;color:#496354;margin-bottom:6px}
+.ppar-hb-insurance-own-link{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;
+text-decoration:none!important;color:inherit!important}
+.ppar-hb-insurance-own-link strong{font-size:17px;font-weight:700}
+.ppar-hb-insurance-own-link span{font-size:14px}
+.ppar-hb-insurance-own-cta{margin-left:auto;border:1px solid #8ea993;padding:6px 12px;
+border-radius:5px;font-weight:600;white-space:nowrap}
+.ppar-hb-insurance-own-link:hover .ppar-hb-insurance-own-cta{background:#d9e7db}
+.ppar-hb-insurance-own-compact .ppar-hb-insurance-own-link{display:flex;flex-direction:column;align-items:flex-start}
+.ppar-hb-insurance-own-compact .ppar-hb-insurance-own-cta{margin-left:0}
+@media(max-width:600px){.ppar-hb-insurance-own-link{flex-direction:column;align-items:flex-start}
+.ppar-hb-insurance-own-cta{margin-left:0}}
 """
     original_map[main]=s.encode('utf-8')
     original_map[amazon]=t.encode('utf-8')
