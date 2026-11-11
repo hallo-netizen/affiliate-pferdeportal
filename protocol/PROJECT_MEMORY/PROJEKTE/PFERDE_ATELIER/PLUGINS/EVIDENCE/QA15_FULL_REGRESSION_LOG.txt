@@ -1,0 +1,408 @@
+=== EBAY_KISS_TEST_END_TO_END_MOCK_20261110.php | returncode=0 | command=php -d display_errors=1 /mnt/data/qa15_integrated/regression/EBAY_KISS_TEST_END_TO_END_MOCK_20261110.php ===
+PASS Legacy paused prune reroutes to canonical materialisation
+PASS Existing stored-source check processes both families once
+PASS No alternate publication during reuse pass
+PASS Previous selected product remains
+PASS Verified additional product enters existing plan
+PASS Exactly one canonical materialisation step
+PASS Existing canonical final cleanup completes
+PASS No repeated stored-source screening
+PASS No discovery API job invoked
+PASS State persisted after each phase through one save method
+KISS_SINGLE_FLOW 10/10 PASS
+
+
+=== EBAY_319_KISS_QA3_TEST_EFFIZIENZ_20261110.php | returncode=0 | command=php -d display_errors=1 /mnt/data/qa15_integrated/regression/EBAY_319_KISS_QA3_TEST_EFFIZIENZ_20261110.php ===
+PASS two winners selected out of two thousand BUSINESS source rows
+PASS one bounded database query, not 40 full-catalog pages
+PASS SQL filters only already chosen item IDs
+PASS only intended products materialised in ascending source ID order
+PASS original materialiser completion and statistics unchanged
+PASS resume from original database-ID cursor does not revisit previous winner
+PASS resumed work retains previous count and completes
+PASS bad product does not stop the other candidate
+PASS individual failure excluded without failing entire run
+PASS empty selection causes zero database reads and no false storage failure
+PASS empty selection may continue to coverage without forcing products
+SELECTED_ONLY_MATERIALIZE 11/11 PASS
+
+
+=== EBAY_319_KISS_16_KANONISCHE_TESTS_20261110.php | returncode=0 | command=php -d display_errors=1 /mnt/data/qa15_integrated/regression/EBAY_319_KISS_16_KANONISCHE_TESTS_20261110.php ===
+PASS Canonical gapfill preparation completes
+PASS Stored eligible product enters existing canonical selection
+PASS Unverified family remains empty
+PASS Only missing families considered for stored reuse
+PASS No global error for merely empty products
+PASS Single family lookup error does not abort batch
+PASS Individual lookup problem recorded by family
+PASS Next family processed despite earlier error
+PASS Ordinary full selection remains intact
+PASS No unplanned extra stored scan in ordinary full selection
+PASS Already verified families do not trigger new scans
+PASS Expired offer is not examined
+PASS Only independently verified stored offers accepted
+PASS Unrelated offer is not attached
+PASS Database read problem remains explicit error, not false market absence
+PASS Reuse stops after three accepted offers, not unbounded
+KISS_CENTRAL_BUSINESS_QA 16/16 PASS
+
+
+=== EBAY_319_KISS_QA2_TEST_EINZELFEHLER_20261110.php | returncode=0 | command=php -d display_errors=1 /mnt/data/qa15_integrated/regression/EBAY_319_KISS_QA2_TEST_EINZELFEHLER_20261110.php ===
+PASS selection preparation completes across one family error
+PASS single error does not fail entire selection and cursor reaches third family
+PASS other two families remain available
+PASS b remains technically unverified not empty
+PASS secondary family included in final gapfill proof
+PASS single failed family included in persistent proof
+PASS gapfill selection checkpoint saved
+PASS final public protection receives selection read failure
+PASS no-result classification cannot conceal read error
+PASS read back full secondary-family proof
+PASS family gap state passes with explicit technical exception
+PASS technical read error never becomes proven marketplace absence
+PASS safe-vs-technical gap separated
+CANONICAL_FAILURE_ISOLATION 13/13 PASS
+
+
+=== EBAY_KISS_CURRENT_138_FAMILIEN_REPLAY_TEST_20261111.php | returncode=0 | command=php -d display_errors=1 /mnt/data/qa15_integrated/regression/EBAY_KISS_CURRENT_138_FAMILIEN_REPLAY_TEST_20261111.php ===
+PASS 138 source families progress in exactly 35 bounded batches
+PASS All 138 families reached exactly once
+PASS Two individual faults isolated instead of blocking the run
+PASS Specific storage failure recorded
+PASS Specific selection failure recorded
+PASS Three new verified entries plus one already preselected family included
+PASS New results handed to the original materializer
+PASS Original publish/prune cursor restarts only after new verified results
+PASS Old published selection not discarded
+PASS All newly qualified families retained
+PASS No duplicate stored-source lookups, with plan-error and preselected excluded
+PASS No eBay API or secondary publisher invoked
+PASS Old published statistics retained
+DATASET_RUN=138 FAMILIES; BATCHES=35; LOCAL_CHECKS=136
+
+
+=== EBAY_KISS_TEST_PERSISTENZ_20261110.php | returncode=0 | command=php -d display_errors=1 /mnt/data/qa15_integrated/regression/EBAY_KISS_TEST_PERSISTENZ_20261110.php ===
+PASS Saved run returns success after actual readback
+PASS Paused run still stored
+PASS Rejected write is never reported as success
+PASS Rejected write preserves full previous run unchanged
+PASS Rejected save flags worker for safe non-acknowledgement
+PASS Failed phase checkpoint cannot report success
+PASS No selection mutation leaked on rejected update
+PASS Phase checkpoint persisted and read back
+PASS Phase cursor persisted exactly
+PASS WordPress unchanged-update false is not mistaken for storage failure
+PASS Unknown previous run fields preserved during checkpoint update
+KISS_DURABLE_SAVE 11/11 PASS
+
+
+=== QA5_PRUNE_PARITY | returncode=0 | command=php -d display_errors=1 /mnt/data/qa15_integrated/regression/EBAY_319_KISS_QA5_TEST_PRUNE_PARITAET_20261110.php /mnt/data/qa15_integrated/affiliate-portal-router/includes/trait-ppar-ebay.php ===
+{
+    "state": {
+        "phase": "complete",
+        "status": "complete",
+        "selection_scope": "business",
+        "business_target_mode": "gapfill",
+        "business_target_concepts": [
+            "heunetze",
+            "sattel"
+        ],
+        "business_prune_cursor": 2000,
+        "business_active": {
+            "item100": {
+                "rank": 1
+            }
+        },
+        "business_reserve": {
+            "item200": {
+                "rank": 2,
+                "quality": {
+                    "a": 1
+                }
+            }
+        },
+        "stats": {
+            "business": {
+                "materialized": 1,
+                "deactivated": 12,
+                "candidate": 27
+            }
+        },
+        "completed_at": 1794401241
+    },
+    "actions": [
+        [
+            "pause",
+            175,
+            "candidate"
+        ],
+        [
+            "quality",
+            200,
+            "reserve",
+            2
+        ],
+        [
+            "pause",
+            200,
+            "reserve"
+        ],
+        [
+            "pause",
+            350,
+            "candidate"
+        ],
+        [
+            "pause",
+            525,
+            "candidate"
+        ],
+        [
+            "pause",
+            700,
+            "candidate"
+        ],
+        [
+            "pause",
+            875,
+            "candidate"
+        ],
+        [
+            "pause",
+            1050,
+            "candidate"
+        ],
+        [
+            "pause",
+            1225,
+            "candidate"
+        ],
+        [
+            "pause",
+            1400,
+            "candidate"
+        ],
+        [
+            "pause",
+            1575,
+            "candidate"
+        ],
+        [
+            "pause",
+            1750,
+            "candidate"
+        ],
+        [
+            "pause",
+            1925,
+            "candidate"
+        ]
+    ],
+    "rows": 2000,
+    "queries": 1,
+    "read_rows": 29,
+    "steps": 1
+}
+
+=== QA4_STATE_PARITY | returncode=0 | command=php -d display_errors=1 /mnt/data/qa15_integrated/regression/EBAY_KISS_QA4_TEST_PARITAET_20261110.php /mnt/data/qa15_integrated/affiliate-portal-router/includes/trait-ppar-ebay-run.php ===
+{"coverage":{"required":2,"covered":2,"missing":[],"counts":{"sattel":164,"heunetze":55},"invalid":{"4":"creative_source_mismatch","166":"creative_identity_missing","167":"source_missing","168":"creative_missing"},"over_capacity":{"sattel":164,"heunetze":55},"error_code":"business_family_cap_exceeded"},"reads":7,"source_reads":3,"creative_reads":3}
+
+
+=== QA12_AUDIT_REAL_METHOD_TEST.php | returncode=0 | command=php -d display_errors=1 /mnt/data/qa15_integrated/QA12_AUDIT_REAL_METHOD_TEST.php ===
+PASS first run initial event logged
+PASS initial detail chunk
+PASS identical save does not duplicate audit
+PASS every progress transition recorded
+PASS 100-event chunks preserve all progress, no overwrite
+PASS terminal error recorded
+PASS real provider error code and affected post preserved
+PASS old run supersession separately recorded
+PASS new run starts without destroying preceding run audit
+PASS old and new run are available for export
+PASS current run preserved after audit
+PASS audit storage problem explicitly flagged
+PASS audit failure does not destroy actual eBay progress
+PASS audit never stores API secrets/settings
+ALL QA12 REAL PHP AUDIT TESTS PASS
+
+
+=== QA13_PUBLIC_APPEND_REAL_TRAIT_TEST.php | returncode=0 | command=php -d display_errors=1 /mnt/data/qa15_integrated/QA13_PUBLIC_APPEND_REAL_TRAIT_TEST.php ===
+PASS isolated item fails, next independent item still checked
+PASS one item failure ends with WARN, not global FAIL
+PASS unsafe final publication deferred
+PASS single item cause recorded in durable state
+PASS last-good kept and only successful 102 added; failed 101 not approved
+PASS two-remote cap enforced including errors
+PASS first transient retries same source without losing cursor
+PASS second transient preserves source and cursor
+PASS after two retries the next unrelated item is checked
+PASS exhausted item retries create WARN, no global failure
+PASS two failed remote requests do not bypass two-request cap
+PASS third independent item processed in next bounded tick
+PASS 401 global authorization still hard-fails (never forged as product miss)
+PASS global auth fault does not continue unauthorized requests
+PASS all-success source refresh follows original successful commit path
+PASS normal verified source replaces last-good checkpoint
+PASS without old checkpoint error still does not forge a new public checkpoint
+PASS without prior checkpoint only proven campaign 102 seeds public set
+PASS token creation failure remains a global fail-closed error
+ALL QA11 REAL TRAIT CONTRACT CASES PASS
+PASS exact old failed final-source error is resumable
+PASS resume reuses UUID and final-source cursor exactly
+PASS resumes ONLY final verification; no new discovery or gapfill
+PASS preserves verified source and previous 571 progress steps
+PASS source candidates and last-good checkpoint unchanged
+PASS all gap-search state preserved, exactly one existing background worker scheduled
+PASS old terminal cause kept in audit but not shown as current failure
+PASS cannot resume an already running run twice
+PASS global auth failure is never auto-qualified for same-run resume
+PASS wrong failure status kept intact, no new worker scheduled
+PASS first-item failure safely resumable even without initial refresh fingerprint
+PASS first-item resume recomputes source plan, not discovery
+PASS local-only operation can never use remote public resume
+PASS backend shows genuine stall without triggering a worker
+PASS admin status read is side-effect-free and did not schedule a job
+ALL QA11 PUBLIC SOURCE, SAFE RESUME & READ-ONLY UI TESTS PASS
+PASS 16 individually failed sources never hard-stop a 17-item public verification
+PASS existing diagnostic limit remains 12 display examples
+PASS all 16 failed identities are tracked, not merely the 12 display samples
+PASS safe published set includes old last-good and verified 17, excludes every failed campaign
+PASS successful partial append count is persisted on the same canonical run
+PASS partial release never invokes unsafe full replacement commit
+ALL QA13 17-SOURCE REAL-TRAIT PARTIAL-PUBLISH TESTS PASS
+PASS pre-QA13 failures without complete IDs never trigger guessed public approval
+PASS old safe checkpoint retained when a legacy run has unmapped failures
+ALL QA13 LEGACY-STATE SAFETY TESTS PASS
+
+
+=== QA14_POST_ARTICLE_REFRESH_REAL_TRAIT_TEST.php | returncode=0 | command=php -d display_errors=1 /mnt/data/qa15_integrated/QA14_POST_ARTICLE_REFRESH_REAL_TRAIT_TEST.php ===
+PASS first page advances to post 25
+PASS seven eBay append signals neither reset cursor nor add seven passes
+PASS after reaching post 60 exactly one second pass starts
+PASS both complete 60-post passes finish, no starvation
+PASS all 60 original articles reached
+PASS pending flag cleared at finish
+PASS ordinary full rebuild still restarts as before
+PASS eBay append cannot reset an ordinary full rebuild
+PASS lost WP-Cron event requeued without resetting the same cursor
+PASS post-full eBay-only pass scheduled
+PASS pending article-only pass also finishes
+PASS revision supersession resets to new revision and resumes first batch
+ALL QA14 ARTICLE REFRESH CASES PASS
+
+
+=== QA14_ENDED_REPLACEMENT_REAL_TRAIT_TEST.php | returncode=0 | command=php -d display_errors=1 /mnt/data/qa15_integrated/QA14_ENDED_REPLACEMENT_REAL_TRAIT_TEST.php ===
+PASS verified replacement actually entered public checkpoint
+PASS uses the EXISTING single append gate
+PASS ended old article campaign triggers existing article-plan refresh
+PASS old ended campaign still removed
+PASS non-error soft review is NOT a successful replacement
+PASS materialized but unproven publication not reported as promoted
+PASS failed public append not declared as public replacement
+PASS database read failure cannot become fake replacement
+PASS unpublished candidate does not start article refresh
+PASS published product revoked once and same worker refresh requested
+PASS a soft-review reserve is skipped in favor of a truly published reserve
+PASS no duplicate public append worker when second reserve succeeds
+ALL QA14 ENDED-REPLACEMENT ORIGINAL-TRAIT TESTS PASS
+
+
+=== qa15_audit_matrix.php | returncode=0 | command=php -d display_errors=1 /mnt/data/qa15_integrated/qa15_audit_matrix.php ===
+PASS initial complete run state stored
+PASS initial audit metadata stored
+PASS identical WP option update is still a verified success
+PASS one transient audit CHUNK failure never aborts verified run
+PASS one retry repairs transient audit CHUNK failure in same canonical save
+PASS fully recovered one-off failure does not produce false warning
+PASS transient METADATA write failure still keeps durable worker state
+PASS orphan event detected and metadata repaired immediately
+PASS event numbering preserved without duplicates
+PASS PERSISTENT metadata outage never invalidates primary run state
+PASS durable orphan kept without overwrite
+PASS unrecovered failure visibly flagged
+PASS run works after recovery
+PASS orphan from earlier failed write repaired before appending new event
+PASS all 5 events retained once
+PASS crossed immutable 100-event chunk boundary
+PASS second chunk boundary also repairs metadata on retry
+PASS affected product and original error remain in audit
+PASS old failed run remains in journal after new run
+PASS new run starts separate journal
+PASS archive index retains old failure
+QA15_AUDIT_STORAGE_MATRIX_PASSED
+
+
+=== full_workflow_sim.php | returncode=0 | command=php -d display_errors=1 /mnt/data/qa15_integrated/full_workflow_sim.php ===
+PASS: one real canonical run created
+PASS: starts at reconcile_local
+PASS: real worker ticks early phase 1
+PASS: real worker ticks early phase 2
+PASS: real worker ticks early phase 3
+PASS: DB state write fails closed without losing cursor
+PASS: operator stop requests same run
+PASS: stop acknowledged at package edge
+PASS: same UUID and cursor at pause
+PASS: same run resumed
+PASS: no restart or cursor reset after resume
+PASS: real worker dispatcher reaches terminal complete without second run
+PASS: only verified simulated offer visible
+PASS: full sequence in permanent per-run journal
+PASS: new run after completed possible
+PASS: new run ID differs
+PASS: old run journal survives a new run
+PASS: only existing dispatch call used
+INTEGRATED_SCENARIO_PASSED with simulated external WordPress/eBay phases; real canonical dispatcher, save, lease, stop, resume, journal executed.\n
+
+=== QA15_LAST_MILE_REAL_METHOD_TEST.php | returncode=0 | command=php -d display_errors=1 /mnt/data/qa15_integrated/QA15_LAST_MILE_REAL_METHOD_TEST.php ===
+PASS isolated item fails, next independent item still checked
+PASS one item failure ends with WARN, not global FAIL
+PASS unsafe final publication deferred
+PASS single item cause recorded in durable state
+PASS old safe checkpoint preserved, unverified item never approved
+PASS two-remote cap enforced including errors
+PASS first transient retries same source without losing cursor
+PASS second transient preserves source and cursor
+PASS after two retries the next unrelated item is checked
+PASS exhausted item retries create WARN, no global failure
+PASS two failed remote requests do not bypass two-request cap
+PASS third independent item processed in next bounded tick
+PASS 401 global authorization still hard-fails (never forged as product miss)
+PASS global auth fault does not continue unauthorized requests
+PASS 403 global authorization still hard-fails
+PASS 403 hard failure never continues other unauthorized requests
+PASS all-success source refresh follows original successful commit path
+PASS normal verified source replaces last-good checkpoint
+PASS without old checkpoint error still does not forge a new public checkpoint
+PASS without old checkpoint no fake safe public set is created
+PASS token creation failure remains a global fail-closed error
+ALL QA11 REAL TRAIT CONTRACT CASES PASS
+PASS exact old failed final-source error is resumable
+PASS resume reuses UUID and final-source cursor exactly
+PASS resumes ONLY final verification; no new discovery or gapfill
+PASS preserves verified source and previous 571 progress steps
+PASS source candidates and last-good checkpoint unchanged
+PASS all gap-search state preserved, exactly one existing background worker scheduled
+PASS old terminal cause kept in audit but not shown as current failure
+PASS cannot resume an already running run twice
+PASS global auth failure is never auto-qualified for same-run resume
+PASS wrong failure status kept intact, no new worker scheduled
+PASS first-item failure safely resumable even without initial refresh fingerprint
+PASS first-item resume recomputes source plan, not discovery
+PASS local-only operation can never use remote public resume
+PASS backend shows genuine stall without triggering a worker
+PASS admin status read is side-effect-free and did not schedule a job
+ALL QA11 PUBLIC SOURCE, SAFE RESUME & READ-ONLY UI TESTS PASS
+
+
+=== qa15_availability_while_paused.php | returncode=0 | command=php -d display_errors=1 /mnt/data/qa15_integrated/qa15_availability_while_paused.php ===
+PASS original independent availability tick processes 3 records
+PASS one ended and one provider failed offer do not stop third item
+PASS only confirmed available campaign appended to SAFE checkpoint
+PASS paused discovery UUID/cursor/checkpoint untouched
+PASS availability counts distinguish available / ended / error
+PASS next verification due about 2h independent of search
+PASS no immediate duplicate availability check
+QA15_INDEPENDENT_AVAILABILITY_TEST_PASSED\n
+
+=== QA15_ADMIN_CSV_EXPORT | returncode=0 | rows=106 | expected=106 ===
+PASS
