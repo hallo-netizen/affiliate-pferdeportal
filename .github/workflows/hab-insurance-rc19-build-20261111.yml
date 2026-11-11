@@ -17,7 +17,11 @@ jobs:
           if unzip -p "$ZIP" affiliate-portal-router/affiliate-portal-router.php | grep -Fq 'Version: 0.1.15-rc18'; then
             python3 protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_RC19_INSURANCE/build_rc19_insurance.py
           elif unzip -p "$ZIP" affiliate-portal-router/affiliate-portal-router.php | grep -Fq 'Version: 0.1.16-rc19'; then
-            echo 'Insurance RC19 already built, verifying unchanged.'
+            echo 'Rebuilding pre-release RC19 deterministically from official RC18 for final gate verification.'
+            git fetch --no-tags --depth=1 origin hobbyroom/project-memory-campus-v1-20260905
+            git show FETCH_HEAD:"$ZIP" > /tmp/hab-rc18-approved-base.zip
+            mv /tmp/hab-rc18-approved-base.zip "$ZIP"
+            python3 protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_RC19_INSURANCE/build_rc19_insurance.py
           else
             echo 'Unknown affiliate version - fail closed' >&2; exit 1
           fi
