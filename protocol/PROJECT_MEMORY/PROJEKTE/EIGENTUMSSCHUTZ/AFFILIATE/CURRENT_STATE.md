@@ -10,6 +10,14 @@
 
 ---
 
+## 11.11.2026 – Versicherungswerbung: ALLE Slots fachlich belegen, Tarifcheck-Backend tatsächlich geprüft
+
+Nutzerziel **100 % Belegung mit echter Versicherungs-Partnerwerbung** für R1/R2/R3, Blätter, passende Artikel. **Priorität:** exakter Banner → belegte ähnliche/übergeordnete Versicherung → fehlendes Angebot bei Awin/ADCELL suchen → nachgewiesener allgemeiner Versicherungsvergleichsbanner (Tarifcheck oder gleichwertig) → konkrete Lücke protokollieren, kein Amazon oder Fantasieangebot. Jedes Haupt-/Bereichsthema mindestens ein fachlich passender Originalbanner nach Verfügbarkeit. Details: `VERSICHERUNGEN_TARIFCHECK_KONZEPT_20261111.md`, Abschnitt 9.
+
+**HAB-004 RC18-CURRENT.zip am Quellcode geprüft:** „Banner & Werbemittel“ = Tarifcheck-Direktpartner, mehrere vollständige `a/img`-Bannercodes oder Bild-URL+Tracking-Link einzeln, CSV/JSON/TXT. „Rechner & Textlinks“ = eigener Tarifrechner mit Name+Original-HTML und separat Textlink mit Partner/Name und Code oder Text+Tracking-Link. Speichern allein erzwingt keine fachlich korrekte WordPress-Ausspielung; Rechner-/Textlink-Platzierung braucht noch den bestätigten zentralen Anschluss. Deshalb Nutzer darf **jetzt echte Banner erfassen**, aber RC19-Entwicklungsstand nicht als live ausgeben. Offizielles RC18-ZIP bleibt unverändert.
+
+---
+
 ## 11.11.2026 – TARIFCHECK HAUSRAT: KONKRETE WERBEMITTEL UND SEITENPOSITIONEN (KONZEPT)
 
 Drei Nutzer-Screenshots aus dem eingeloggten Tarifcheck-Partnerkonto bestätigen für **Hausrat** die vorhandenen Bereiche **Tarifrechner/Formulare**, **Direktlinks** und **Banner**. Tatsächlich sichtbar sind acht Maße: 120×60, 120×600, 125×125, 160×600, 234×60, 300×250, 468×60, 728×90. Der Tarifrechner bietet einen Mobilrechner; konkrete Einbettungs- und Partnerlinks sind im Screenshot **nicht** sichtbar. **Website-Platzierungsvertrag** in `VERSICHERUNGEN_TARIFCHECK_KONZEPT_20261111.md`, Abschnitt 8 ergänzt: Querbanner nur auf passend bestätigtem Hausrat-R3, 300×250 rechteckig im Fachartikel (mobil nach Text), echter Rechner einmal zentral bei der bestehenden Vergleichs-Endkategorie, Direktlink als Fach-CTA, kleines 125×125 nur unverzerrt; die Hauptwelt Versicherungen erhält nicht blind ein einzelnes Hausratbanner. Kein Amazon-/Produkt-Fallback im gesamten Versicherungszweig. Vor Installation zwingend Code/Format-/Tracking-/Datenschutzprüfung. **Dies ist eine dokumentierte Konzeptentscheidung, kein Pluginupdate.** RC18 und RC19 bleiben unverändert.

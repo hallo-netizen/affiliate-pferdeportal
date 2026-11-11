@@ -5,7 +5,7 @@ Stand 11.11.2026 · **Konzept und geprüfter Änderungsbedarf, KEIN bereits eing
 
 In **der gesamten siebten Hauptwelt „Versicherungen“** – deren R1-Hauptseite, allen fünf R2-Seiten, sämtlichen 46 R3-Versicherungsseiten, allen WP-Blattkategorien, eindeutig zugeordneten Beiträgen und fachlich eindeutig verknüpften Glossareinträgen – darf **nur Werbung für nachweislich passende Versicherungs-Partnerprogramme** erscheinen.
 
-**Ausdrücklich auszuschließen:** Amazon (auch Bücher, Tresore und Dokumententaschen), eBay, idealo, allgemeine Produktanbieter, fachfremde Direktbanner, Kredit-/Girokonto-Werbung. Gilt für breite Banner, quadratische Banner, Produktkarten, interne Fallbacks, freie Werbeplätze und Artikelhybrid-Ausgaben. Versicherungswerbung muss außerdem zur **konkreten** Versicherungsart passen. Fehlt ein echtes und freigegebenes Partnerangebot, übernimmt ein eigener, passender Hab-&-Bewahr-Versicherungs-Themenbanner mit internem Link; niemals eine falsche Versicherung.
+**Ausdrücklich auszuschließen:** Amazon (auch Bücher, Tresore und Dokumententaschen), eBay, idealo, allgemeine Produktanbieter, fachfremde Direktbanner, Kredit-/Girokonto-Werbung. Gilt für breite Banner, quadratische Banner, Produktkarten, interne Fallbacks, freie Werbeplätze und Artikelhybrid-Ausgaben. Versicherungswerbung muss außerdem zur **konkreten** Versicherungsart passen. Ohne passendes freigegebenes Angebot bleibt der Platz öffentlich leer; keine thematisch falsche Ersatzwerbung.
 
 Die sechs bisherigen Schutzwelten sind funktional und optisch **unverändert** zu lassen. Keine Änderung der Kategoriehierarchie, Artikelinhalte, WordPress-IDs, Affiliate-Tracking-Kennungen oder anderer Portale.
 
@@ -50,7 +50,7 @@ Die **fünf HAB-R2-Bereiche bleiben bestehen**, die Tarifcheck-Menügruppen erse
 2. **Nur Versicherungs-Partnerkampagnen zulassen:** nicht allein nach Netzwerk `direct`/`awin`/`adcell`, sondern nach bestätigtem **Programm + Versicherungsprodukt + echtem Ziel**. Jede Anbieterwerbung außerhalb dieser Fachklasse wird im Versicherungsbaum blockiert. Das bestehende Bannermatching/Zielkatalog benutzen, nicht ersetzen.
 3. **Amazon vollständig ausschalten**, inklusive `hb_amazon_house_banner`, `hb_amazon_article_fallback`, `hb_amazon_area_product_fallback`, `render_affiliate_slot`-Fallbacks und Karten/Artikel-Hybrid; die Amazon-Suche für Versicherungsknoten nicht mehr beauftragen. Kein bloßes CSS-Verstecken, kein globales Amazon-AUS für die sechs anderen Welten.
 4. **Vorhandene Werbeplätze nutzen:** breite Banner auf R1/R2/R3/Kategorie und in geeigneten Artikelpositionen; Quadrate in Artikel-Sidebar/Glossar und der vorgesehenen Mobilansicht. Nicht zusätzlich an allen möglichen Stellen duplizieren. Ein auf Mobil umgestellter Slot rendert keine zweite sichtbare Kampagne.
-5. **Originalformat wahren:** Querbanner und 1:1-Quadrat getrennt auswählen. Herstellerbilder weder stauchen noch ungeprüft zuschneiden. Ein 300×250-Original ist kein 1:1-Quadrat. Fehlt das passende quadratische Original-Werbemittel, übernimmt der interne Themenhinweis; bei Tarifcheck kann zusätzlich ein passendes Motiv angefragt werden. Eindeutiges Label „Anzeige“, freigegebener Affiliate-Link, rel=sponsored/nofollow, gesetzliche Werbe-/Datenschutzregeln einhalten.
+5. **Originalformat wahren:** Querbanner und 1:1-Quadrat getrennt auswählen. Herstellerbilder weder stauchen noch ungeprüft zuschneiden. Ein 300×250-Original ist kein 1:1-Quadrat. Wenn kein zulässiges quadratisches Werbemittel vorhanden, bleibt der Quadratplatz leer oder Tarifcheck wird um ein passendes Motiv gebeten. Eindeutiges Label „Anzeige“, freigegebener Affiliate-Link, rel=sponsored/nofollow, gesetzliche Werbe-/Datenschutzregeln einhalten.
 6. **KISS:** Keine neue Tabelle, keine neue Pluginidentität, keine zusätzlichen Frontend-HTTP-Aufrufe, keine Neuanlage einer Werbeengine, keine zweite Sonderarchitektur für Tarifcheck. Bestehende Import-/Freigabe-/Ausspielungslogik und den bestehenden 14-Tage-Prüfzyklus wiederverwenden. Ablehnungsgrund im vorhandenen Protokoll vermerken; keine vollgepackte Backend-Seite.
 
 **Backend – nur notwendige Anzeigen:** Unter bestehenden Werbemitteln/Zuordnungen künftig klarer Filter „Versicherungen“ und Übersicht „PASS / kein passendes Banner / gesperrt“. Tarifcheck als freigegebener Direktpartner. Für Awin/ADCELL später Partner-ID + Vertrags-/Freigabestatus und korrektes Versicherungsangebot. Keine 46 Einzelzuordnungen per Hand im WordPress-Editor, zentraler Match aus dem bestehenden Baumsnapshot.
@@ -142,7 +142,7 @@ Tarifcheck bestätigt zusätzlich öffentlich, dass White-Label-Tarifrechner mob
 - **Affiliate-Zentrale HAB-004** übernimmt alle drei Werbearten über die vorhandene Direktpartner-, Creative-, Slot-, Zuordnungs- und Tarifrechner-/Textlink-Steuerung. Die vorhandene Tarifrechner-Verwaltung ist code-seitig nachgewiesen; **ob** Tarifchecks konkreter Embed-Code ohne weitere Kompatibilitätsanpassung funktioniert, bleibt ein expliziter Pflicht-Test. Kein neues Plugin, keine zusätzliche Tabelle, keine neuen Frontend-HTTP-Aufrufe durch eigene Bannerprüfung.
 - **Design HAB-001** stellt vorhandene breite/seitliche/mobil verlegte Werbeslots bereit; nur wenn die **bestehende** Vorlage auf dem Vergleichs-Kategorien-Slot technisch keinen Tarifrechner einsetzen kann, einen kleinen zentralen Anschluss im bestehenden Designplugin ergänzen, ohne am WordPress-Artikelinhalt oder den Kategorien manuell zu arbeiten.
 - Original-Rechner **nicht auf jeder Beitragsseite** automatisch laden: große Eingabeoberfläche, hohe Wartezeit und mögliche Drittanbieter-Cookies/Datenerhebung. Wenn externes Script/iframe nötig, erst nach dokumentierter Datenschutzprüfung und geeigneter, ggf. nutzerinitiierter Freigabe laden. Anbieterangaben bei Formulareingaben werden im Original-Tarifcheck-Rechner erfasst, nicht durch selbst erzeugte Formulare.
-- **Nur eine Auslieferung pro Werbeplatz**, keine Doppelung durch Desktop- und Mobil-Variante. Vor jeder Ausgabe die im vorherigen Kapitel definierte Versicherungs-Exklusivsperre prüfen. Priorität: exakter Hausrat-Anbieter und passendes Format → geprüfter allgemeiner Versicherungs-Fachlink nur wenn sachlich passend → sonst interner Versicherungs-Themenbanner. **Nicht** Amazon/eBay/idealo/Finanzen.
+- **Nur eine Auslieferung pro Werbeplatz**, keine Doppelung durch Desktop- und Mobil-Variante. Vor jeder Ausgabe die im vorherigen Kapitel definierte Versicherungs-Exklusivsperre prüfen. Priorität: exakter Hausrat-Anbieter und passendes Format → geprüfter allgemeiner Versicherungs-Fachlink nur wenn sachlich passend → sonst leer. **Nicht** Amazon/eBay/idealo/Finanzen.
 - Backend-Verwaltung KISS: drei Werbemittelarten „Tarifrechner“, „Direktlink“, „Banner“ (mit Originalmaßen, Ziel, Freigabestatus), zugeordnet zum bestätigten Hausrat-R3/-Vergleichs-Endkategorie-Baum; Anzeige eines Tests „Desktop/Mobil, Ziel, Tracking, Sponsor-Label“. Partnerkennung geheim halten.
 
 ### Offene Umsetzung und Kontrolllauf
@@ -154,8 +154,47 @@ Tarifcheck bestätigt zusätzlich öffentlich, dass White-Label-Tarifrechner mob
 
 **Explizit weiterhin ausgeschlossen:** manuelle Änderung von WP-Artikeltexten, pauschale Display-Werbung auf jedem Versicherungs-R3, neue Vergleichsseiten/Kategorien ohne Prüfung, selbst erfundene Tarifcheck-Werbemittel oder ein zweites Affiliate-System.
 
+## 9. Verbindliche Ergänzung 11.11.2026 – ALLE Versicherungs-Werbeplätze fachlich belegen; genaue Backend-Prüfung
 
-## 9. VERBINDLICHE REGEL 11.11.2026 – Alle Versicherungs-Bannerplätze belegt
+**Nutzerentscheidung:** Möglichst alle vorhandenen Bannerplätze im gesamten Versicherungsbaum (R1, alle fünf R2, alle R3, Blattkategorien und passende Artikel) mit **echter Versicherungs-Partnerwerbung** belegen. Keine Amazon-/Produktwerbung. Fachlich passende Ersatzbanner sind ausdrücklich erwünscht, aber keine unrichtige Versicherungsaussage. Fehlende Positionen werden systematisch dokumentiert, Anbieter gesucht und abgearbeitet. Nicht aus Fantasie behaupten, 100 % seien belegt.
+
+### 9.1 Tatsächlich vorhandene Bedienung im HAB-004 RC18 (Quellprüfung, keine Vermutung)
+
+**Backend Affiliate-Zentrale → Banner & Werbemittel** (`affiliate-portal-creative-library`):
+- Dropdown **„Aufgenommener Partner“ → „Direktpartner · Tarifcheck“** existiert bereits. Provider/Partner werden zentral gespeichert.
+- **Mehrere Banner-Codes gesammelt einfügen:** akzeptiert vollständige Bildlink-Banner-Codes in der Form `<a ...><img ...></a>` (nicht iframe, JavaScript-Tarifrechner oder bloße Textlinks), oder CSV/JSON/TXT.
+- **Banner händisch einfügen:** einzelne Bild-URL und Tracking-Link **beide Pflicht**; optional Banner-ID, Titel, reale Ziel-URL, Beschreibung, Tags/Kategorie, Breite, Höhe. Button „Banner händisch speichern“.
+- Ergebnis ist **Import/Speicherung und technische Freigabeprüfung**, keine automatische Veröffentlichung. Die existierende Zuordnung aus Ziel-URL ist bereits vorhanden, zielt jedoch bei Tarifcheck bislang auf einen abweichenden „Wissen > Versicherungen & Recht“-Pfad. Das neue Versicherungs-Welt-Mapping und vollständige Sperre sind Teil der laufenden HAB-004-Entwicklung; **vor dem fertigen Update keine Garantie für die richtige Ausspielung**. Acht Originalgrößen je Angebot können getrennt eingefügt werden; doppelte identische Codes nicht mehrfach importieren.
+- **Tarifcheck „Finanzen“ nicht unter dem Versicherungsbereich einsetzen.**
+
+**Backend Affiliate-Zentrale → Rechner & Textlinks** (`affiliate-portal-tariff-tools`):
+- **Tarifrechner anlegen:** Felder „Rechnername / Typ“, „HTML-Code“, Checkbox „aktiv“. Beim Speichern entsteht ein stabiler Platzhalter; die bestehende Technik rendert ihn nur, wenn er im vorgesehenen Inhalt/Template aufgerufen wird. **Wichtig: Speichern allein platziert keinen Rechner automatisch in jeder passenden Versicherungsseite.** Für die zentral gesteuerten Vergleichs-Kategorieseiten ist eine gezielte, geprüfte Übergabe an den bestehenden Designslot nötig; kein manuelles Einsetzen in WP-Artikel.
+- **Affiliate-Textlinks:** Felder „Partner / Programm“, „Bezeichnung“, kompletter Partnercode optional ODER sichtbarer Linktext + Tracking-Link, reale Ziel-URL optional, Status. Auch hier speichert das Plugin einen stabilen Platzhalter, die automatische fachliche Ausspielung ist **nicht** durch das bloße Speichern gewährleistet.
+- Externe Rechner/iframes nur mit echten Partnercodes und Datenschutz-/Mobilprüfung aktivieren.
+
+### 9.2 Verbindliche Ausspielungsrangfolge (100-%-Abdeckungsziel)
+
+1. **Passender Originalbanner der exakten Versicherung** (Priorität 1, jeweils zum Platzformat passend).
+2. **Nachweislich passende verwandte bzw. übergeordnete Versicherung** (Priorität 2). Nur wenn tatsächlich dieselbe Produkt-/Risikoart, Zielgruppe und Leistung umfasst ist. Beispiel: Motorrad-Kfz nur wenn das Ziel Motorrad wirklich einschließt. Sonst keine suggerierte spezifische Deckung.
+3. **Konkreten fehlenden Versicherungsanbieter bei Awin und ADCELL recherchieren** (Priorität 3). Nur tatsächlich freigegebene, provisionsfähige Programme ergänzen, keine zweite technische Partnerengine bauen.
+4. **Originaler allgemeiner Versicherungs-/Vergleichsbanner von Tarifcheck (oder einem belegten Versicherungsvergleichspartner)** (Priorität 4), **nur wenn ein solches Werbemittel samt richtiger allgemeiner Versicherungszielseite und Partnerlink wirklich existiert** und auf der konkreten Seite keine falsche Spezialdeckung suggeriert. Der vorhandene Tarifcheck-Auftritt bewirbt Versicherungen UND Finanzen; nicht jeden Shop-/Startseitenbanner blind für Versicherungen freigeben. Für R1 kann alternativ eine fachlich ausgewogene Rotation mehrerer zugelassener Einzelversicherungsbanner verwendet werden, wenn es keinen belegten allgemeinen Versicherungsbanner gibt.
+5. **Soll weiterhin ein Platz unbelegt bleiben**, wird der echte fehlende Banner im Prüfbericht/Export ausgewiesen und gezielt ein neuer Partner gesucht. Keine erfundenen Werbemittel, kein beliebiger „Versicherungen“-Kreativtext als nicht provisionsfähiges Fantasiebanner, kein Rückfall auf Amazon/Produkt-/Finanzwerbung. Das Abdeckungsziel ist **100 %**, aber ohne echte Partnerassets ist eine bereits erreichte 100-%-Belegung nicht nachweisbar.
+
+**Wichtig:** Rangfolge gilt für **alle** R1/R2/R3/Blatt-/Artikelplätze; ein großer R1-Bereich bekommt mindestens eine echte Versicherungswerbung, eine R2-Seite mindestens ein Produkt ihrer Gruppe, eine fachlich spezifische R3-Seite bevorzugt exakt diese Versicherung. Bei Artikeln breite oder rechteckige/square Slots formatgerecht; nicht dasselbe Motiv mehrfach pro Seite durch Desktop- und Mobilcontainer. Rechnermodul einmal in passender Vergleichsumgebung, keine pauschale Formularüberflutung.
+
+### 9.3 Benutzer-Workflow vor der Plugin-Freigabe
+
+1. **Jetzt darf der Nutzer alle vorhandenen echten Bildbanner aus Tarifcheck zentral eintragen.** Ideal: pro Versicherung sämtliche geeigneten Formate in einem Import mit vollständigen `<a><img>`-Codes; zuordnungsrelevanten Produkttitel/Tags nennen. Einzelbanner optional über Bild-URL+Tracking-Link. Möglichst **auch** das jeweils vorhandene große Querbanner und 300×250; 125×125 nur für kleine Quadratslots.
+2. **Tarifrechner separat** unter „Rechner & Textlinks → Tarifrechner anlegen“ sammeln. **Direktlinks separat** unter „Rechner & Textlinks → Affiliate-Textlinks“. Nicht alle drei Werbearten in dieselbe Banner-Importmaske kopieren.
+3. **Im Weiteren übernimmt das Plugin** nach fachlicher Kontrolle: belegte Originalziel-URL → tatsächliche Versicherungsart → sicherer Zweig im aktuellen Kategorie-Snapshot → Freigabe/Format → beste passende Platzierung; globaler Versicherungsschutz gegen Amazon und andere Nichtversicherungs-Provider. Bei unklaren Versicherungsarten genaue Lückenliste und Partnerrecherche statt Spekulation.
+4. **Neue Version vor Livebetrieb umfangreich testen:** Import aller Tarifcheck-Rubriken, echte R1/R2/R3/Blatt-/Artikelkontexte, andere Hauptwelten, alte manuelle Fremdbanner, fehlender Aktionslink, offene Datenschutzprüfung für Rechner, unpassende Versicherung, Platzhalter und Desktop-/Mobilformate. Kein automatisch veröffentlichter Banner ohne echte Partnerlinks.
+
+**Quellnachweis Backend:** aktuelles HAB-004 RC18/CURRENT.zip, `includes/trait-ppar-creative-library.php` und `includes/trait-ppar-tariff-tools.php`, Menü in `affiliate-portal-router.php`; isoliert am 11.11.2026 erneut geprüft. Tarifcheck bietet öffentlich Banner, Direktlinks, Rechner an, aber der **konkrete allgemeine Versicherungsbanner** ist mit den Nutzer-Screenshots noch nicht belegt.
+
+**Status:** Diese Eintrags-/Fallback-Regel ist Konzept und Anweisung. Der Stand **RC19 wird separat entwickelt und geprüft**. Bestehendes offiziell abgelegtes HAB-004 RC18 bleibt bis zur Freigabe unverändert.
+
+
+## 10. RC19-IMPLEMENTIERUNG (überschreibt ältere Leerstand-Regeln) 11.11.2026 – Alle Versicherungs-Bannerplätze belegt
 
 Dieser Abschnitt ersetzt ältere widersprechende Leerstelle-/Fallback-Hinweise der Abschnitte 1–8.
 
