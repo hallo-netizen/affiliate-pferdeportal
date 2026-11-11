@@ -34,6 +34,7 @@ methods="\n\n".join(extract(x) for x in [
     'hb_insurance_scope','hb_insurance_campaign_allowed','hb_insurance_original_wide_allowed'
 ])
 methods=methods.replace("        if ($source === 'fallback' || $w < 468 || $h < 60 || $h > 180) { return false; }", "        fwrite(STDERR,'INTERNAL_WIDE '.json_encode(array('w'=>$w,'h'=>$h,'source'=>$source,'ratio'=>$w/$h)).PHP_EOL); if ($source === 'fallback' || $w < 468 || $h < 60 || $h > 180) { return false; }")
+methods=methods.replace('public function hb_insurance_original_wide_allowed($banner, $slot_type, $context) {', '''public function hb_insurance_original_wide_allowed($banner, $slot_type, $context) { fwrite(STDERR,'ENTRY_WIDE '.json_encode(array('scope'=>$this->hb_insurance_scope($context),'slot'=>$this->overview_wide_banner_slot($slot_type),'array'=>is_array($banner),'empty'=>empty($banner['image_url']),'creative'=>sanitize_key((string)($banner['creative_type']??'')),'mode'=>sanitize_key((string)($banner['mode']??'image_link')))).PHP_EOL);''')
 # Synthetic complete intended hierarchy: 1 R1, 5 R2, 46 R3, 323 WordPress categories.
 nodes={}
 root='core:world:insurance'
