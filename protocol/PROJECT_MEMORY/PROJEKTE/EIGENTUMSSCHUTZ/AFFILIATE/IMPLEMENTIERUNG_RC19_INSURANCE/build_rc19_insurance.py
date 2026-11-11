@@ -179,7 +179,7 @@ with ZipFile(BytesIO(original)) as src:
                 && (string)($runtime_campaign['source'] ?? '') !== 'output_object_v4') { continue; }"""
     fixed="""            if ($required_type === 'banner' && $forced_campaign_id_norm === ''
                 && (string)($runtime_campaign['source'] ?? '') !== 'output_object_v4'
-                && !$this->hb_insurance_campaign_allowed($runtime_campaign,$rank_context,$slot_type)) { continue; }"""
+                && !($this->hb_insurance_scope($rank_context)==='insurance'\n                     && $this->hb_insurance_campaign_allowed($runtime_campaign,$rank_context,$slot_type))) { continue; }"""
     s=replace_one(s,anchor,fixed)
     # Format validation still runs for every campaign. In the insurance world
     # alone it may accept genuine 728x90 or 468x60 originals at wide slots.
