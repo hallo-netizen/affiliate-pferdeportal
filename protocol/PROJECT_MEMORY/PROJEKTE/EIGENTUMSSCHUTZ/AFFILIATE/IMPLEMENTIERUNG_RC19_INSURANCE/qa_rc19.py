@@ -104,6 +104,11 @@ $product=$yes;$product['creative_type']='product';
 expect(!$a->hb_insurance_campaign_allowed($product,$insurance,'hub_after_cards'),'product blocked');$checks++;
 $wrong=$yes;$wrong['page_id']=2050;
 expect(!$a->hb_insurance_campaign_allowed($wrong,$insurance,'hub_after_cards'),'wrong R3');$checks++;
+$generic=array('network'=>'direct','creative_type'=>'banner','name'=>'Tarifcheck Versicherungsvergleich',
+'page_id'=>1000,'assignment_mode'=>'page_tree','match_descendants'=>true);
+expect($a->hb_insurance_campaign_allowed($generic,$insurance,'hub_after_cards'),'approved universal insurance');$checks++;
+$no_generic=$generic;$no_generic['name']='Tarifcheck Hausrat Versicherungsvergleich';
+expect(!$a->hb_insurance_campaign_allowed($no_generic,$insurance,'hub_after_cards'),'specific household cannot pass as generic');$checks++;
 $fallback=$yes;$fallback['assignment_mode']='fallback';
 expect(!$a->hb_insurance_campaign_allowed($fallback,$insurance,'hub_after_cards'),'generic fallback blocked');$checks++;
 expect(!$a->hb_insurance_campaign_allowed($yes,$mixed,'hub_after_cards'),'mixed blocked');$checks++;
