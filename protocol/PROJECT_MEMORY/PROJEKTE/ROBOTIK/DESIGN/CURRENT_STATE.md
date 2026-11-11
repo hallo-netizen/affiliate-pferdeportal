@@ -1,4 +1,12 @@
 # ROBOTIK – DESIGN – CURRENT
+
+## NEUESTER STAND 11.11.2026 – einfaches Testdesign lokal fertig, NOCH NICHT LIVE
+- **Designplugin `Robotik Strukturdesign 0.1.0 (Test)` erstellt:** monochrom, keine Bilder/Farben, Mega-Menü aus den tatsächlich importierten 7 CORE-Wurzelseiten, Industrie als abgesetzter Teil von Gewerbe, Footer mit denselben 7 Bereichen und echten Unterseiten; responsive mobile Navigation.
+- Keine erfundenen Seiten/Links; noch nicht angelegte Magazin-/Finder-/Anzeigenmarktseiten nur als nicht anklickbare Beschriftung.
+- ZIP-Test, PHP-Lint, JavaScript-Syntax und lokaler Render-Test BESTANDEN. Kein WordPress-Live-/Mobil-PASS behauptet.
+- **Installierbares ZIP:** Library `/robotik/Designbüro/ROBOTIK_STRUKTURDESIGN_0.1.0_TEST.zip`. Design ist ein **eigenes Plugin**, Kategorie-Import bleibt getrennt.
+- **Bericht:** `TESTDESIGN_MEGA_FOOTER_20261111.md`; ältere V4-/V5-Hauptnavigationseinträge nachfolgend sind historisch, die aktuell geplante Navigation ist Haushalt · Garten · Freizeit · Sport · Bildung · Pflege · Gewerbe.
+
 Stand: 10.11.2026
 
 **Farbentscheidung getroffen:** Silber + Technikblau + Kupfer. KISS, hochwertig, hell, industriell-präzise, warm akzentuiert.
