@@ -1,0 +1,38 @@
+name: Hab insurance RC19 source inspection
+on:
+  push:
+    branches: [hab-insurance-affiliate-rc19-guard-20261111]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: inspect current affiliate and design sources read-only
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          path='protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/'
+          z=ZipFile(path+'HAB-004-AFFILIATE/CURRENT.zip')
+          dz=ZipFile(path+'HAB-001-DESIGN/CURRENT.zip')
+          specs={
+            'affiliate-portal-router/affiliate-portal-router.php':[(725,825),(1080,1240),(1370,1530),(1680,1800),(1950,2140)],
+            'affiliate-portal-router/includes/trait-ppar-hb-amazon.php':[(1,153),(300,425)],
+            'affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php':[(1,112),(155,300),(325,460)],
+            'affiliate-portal-router/includes/trait-ppar-creative-library.php':[(1,180)],
+            'affiliate-portal-router/includes/trait-ppar-output-objects.php':[(1315,1435)],
+            'hab-bewahr-design-vorschau/includes/article-page.php':[(1,195)],
+            'hab-bewahr-design-vorschau/includes/area-design-prototype.php':[(1,110)],
+          }
+          for file,ranges in specs.items():
+            archive=dz if file.startswith('hab-bewahr') else z
+            if file not in archive.namelist():
+              print('MISSING',file);continue
+            a=archive.read(file).decode('utf8','replace').splitlines()
+            for start,end in ranges:
+              print('BEGIN_SECTION',file,start,end)
+              for i in range(start-1,min(len(a),end)):
+                print('SOURCE',file,i+1,a[i][:450])
+              print('END_SECTION',file,start,end)
+          PY
