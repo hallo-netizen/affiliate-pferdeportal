@@ -9,6 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Verify campaign format filters for original 728 banners
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          import re
+          z=ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          a=z.read('affiliate-portal-router/affiliate-portal-router.php').decode().splitlines()
+          needles=['campaign_matches_contract_slot_rule','campaign_slot_allowed','ranked_campaigns_for_slot_uncached','category_large_banner_campaign_eligible']
+          for name in needles:
+            for i,l in enumerate(a):
+              if re.search(r'function\s+'+name+r'\(',l):
+                print('BEGIN_FILTER',name,i+1)
+                for j in range(i,min(i+165,len(a))):print('FILTER',name,j+1,a[j][:340])
+                break
+          PY
       - name: locate selection and banner geometry calls
         run: |
           python3 - <<'PY'
