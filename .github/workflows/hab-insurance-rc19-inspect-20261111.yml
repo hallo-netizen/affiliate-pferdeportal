@@ -9,6 +9,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: inspect campaign selection and insurance scope seams
+        run: |
+          python3 - <<'PY'
+          import zipfile,re
+          path='protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          with zipfile.ZipFile(path) as z:
+            for n in z.namelist():
+              if not n.endswith('.php'): continue
+              lines=z.read(n).decode('utf8','replace').splitlines()
+              starts=[i for i,l in enumerate(lines) if re.search(r'(?:function\s+(?:render_affiliate_slot|render_affiliate_slot_for_context|render_banner|ranked_campaigns|campaigns_for|load_campaign|get_content_context|get_category_archive_context|hb_amazon_article_fallback|hb_amazon_area_product_fallback|hb_amazon_category_search_fallback)|function\s+(?:campaign_.*|article_plan_render_banner_campaign))\s*\(',l)]
+              for ix in starts[:23]:
+                print('BEGIN_METHOD',n,ix+1,lines[ix].strip()[:200])
+                if re.search(r'get_content_context|get_category_archive_context|render_affiliate_slot|ranked_campaign|hb_amazon_article_fallback|hb_amazon_area_product_fallback|hb_amazon_category_search_fallback|render_banner\(',lines[ix]):
+                  for j in range(ix,min(len(lines),ix+95)):
+                    print('METHOD',n,j+1,lines[j][:420])
+          PY
       - name: inspect current affiliate and design sources read-only
         run: |
           python3 - <<'PY'
