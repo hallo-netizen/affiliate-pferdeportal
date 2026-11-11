@@ -98,6 +98,7 @@ expect(!$a->hb_insurance_campaign_allowed($fallback,$insurance,'hub_after_cards'
 expect(!$a->hb_insurance_campaign_allowed($yes,$mixed,'hub_after_cards'),'mixed blocked');$checks++;
 expect($a->hb_insurance_campaign_allowed($yes,$outside,'hub_after_cards'),'outside unchanged');$checks++;
 $wide=array('creative_type'=>'banner','mode'=>'image_link','image_url'=>'https://approved.example/banner.png','width'=>728,'height'=>90);
+echo 'WIDE_DIAG '.json_encode(array('scope'=>$a->hb_insurance_scope($insurance),'wide'=>$a->hb_insurance_original_wide_allowed($wide,$insurance,'hub_after_cards'),'image'=>$wide['image_url'],'mode'=>$wide['mode'],'w'=>$wide['width'],'h'=>$wide['height']))."\n";
 expect($a->hb_insurance_original_wide_allowed($wide,$insurance,'hub_after_cards'),'728x90 accepted in insurance');$checks++;
 expect(!$a->hb_insurance_original_wide_allowed($wide,$outside,'hub_after_cards'),'other world unchanged');$checks++;
 $wide['width']=468;$wide['height']=60;
