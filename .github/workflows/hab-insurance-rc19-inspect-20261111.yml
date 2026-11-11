@@ -9,6 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: insurance article and glossary original dimensions
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          root="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip"
+          z=ZipFile(root)
+          f="affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php"
+          s=z.read(f).decode().splitlines()
+          for i in range(298,343):print("SLOT",i+1,s[i][:370])
+          p="affiliate-portal-router/affiliate-portal-router.php"
+          s=z.read(p).decode().splitlines()
+          for i,l in enumerate(s):
+            if "post_inline_banner" in l and any(x in l for x in ["ratio_", "min_", "creative_type"]):print("INLINE_RULE",i+1,l[:280])
+          PY
       - name: Verify campaign format filters for original 728 banners
         run: |
           python3 - <<'PY'
