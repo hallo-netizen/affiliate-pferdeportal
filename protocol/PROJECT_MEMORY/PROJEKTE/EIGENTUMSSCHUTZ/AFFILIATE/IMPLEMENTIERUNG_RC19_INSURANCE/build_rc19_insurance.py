@@ -100,6 +100,17 @@ helper=r'''
         $type = sanitize_key((string)($context['post_type'] ?? ''));
         $page_id = absint($campaign['page_id'] ?? 0);
         if ($page_id > 0 && $type === 'page' && $page_id === $post_id) { return true; }
+        // An actually approved, general insurance comparison may cover all
+        // descendants, but never general finance or one named sub-insurance
+        // masquerading as a universal insurance advertisement.
+        if ($page_id > 0 && !empty($campaign['match_descendants'])
+            && class_exists('PPAR_HB_Integration')) {
+            $verified_nodes=PPAR_HB_Integration::verified_nodes();
+            $root_id=absint($verified_nodes['core:world:insurance']['wp_id']??0);
+            $general=(bool)preg_match('/(?:versicherungsvergleich|versicherungen vergleichen|versicherungsarten|versicherungsschutz vergleichen)/',$identity);
+            $special=(bool)preg_match('/(?:hausrat|wohngebaude|motorrad|kfz|haftpflicht|rechtsschutz|pflegezusatz|berufsunfahigkeit|kranken|pkv|renten|risikoleben|tierhalter|gewerbe|firmenversicherung)/',$identity);
+            if ($page_id===$root_id && $general && !$special) { return true; }
+        }
         $slugs = array_map('sanitize_key', (array)($context['slugs'] ?? array()));
         if (array_intersect((array)($campaign['match_slugs'] ?? array()), $slugs)) { return true; }
         $term_ids = array_map('absint', (array)($context['term_ids'] ?? array()));
@@ -280,6 +291,11 @@ with ZipFile(BytesIO(original)) as src:
     anchor="    private function campaign_match_rank($campaign, $context) {\n        $mode ="
     new="    private function campaign_match_rank($campaign, $context) {\n        if (!$this->hb_insurance_campaign_allowed($campaign,$context,(string)($context['slot_type'] ?? ''))) { return null; }\n        $mode ="
     s=replace_one(s,anchor,new)
+    # Extra ranking tier for a documented and approved "all insurances"
+    # programme on the root; never make a generic partner beat an exact match.
+    anchor="        $mode = isset($campaign['_ppar_norm_assignment_mode'])"
+    pre_rank="        // General approved insurance umbrella campaign only as a lower-ranked\\n        // genuine partner alternative; exact topic campaigns always beat it.\\n        if ($this->hb_insurance_scope($context)==='insurance') {\\n            $name=strtolower(remove_accents((string)($campaign['name']??'').' '.(string)($campaign['title']??'')));\\n            $nodes=class_exists('PPAR_HB_Integration')?PPAR_HB_Integration::verified_nodes():array();\\n            $root_page=absint($nodes['core:world:insurance']['wp_id']??0);\\n            if ($root_page>0 && absint($campaign['page_id']??0)===$root_page\\n                && !empty($campaign['match_descendants'])\\n                && preg_match('/(?:versicherungsvergleich|versicherungen vergleichen|versicherungsarten|versicherungsschutz vergleichen)/',$name)\\n                && !preg_match('/(?:hausrat|wohngebaude|motorrad|kfz|haftpflicht|rechtsschutz|pflegezusatz|berufsunfahigkeit|pkv|tierhalter|firmenversicherung)/',$name)) {\\n                return array('specificity'=>125,'matches'=>1,'reason'=>'Allgemeiner bestätigter Versicherungsvergleich, nach konkreten Angeboten.');\\n            }\\n        }\\n"
+    s=replace_one(s,anchor,pre_rank+anchor)
     # Existing overview banners required original >=800 px; genuine 728x90
     # and 468x60 partner banners become eligible ONLY within insurance root.
     anchor="if ($image_url === '' || !$this->overview_wide_banner_campaign_eligible($banner, $slot_type)) { return ''; }"
