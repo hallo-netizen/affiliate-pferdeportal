@@ -38,6 +38,27 @@ jobs:
                 for j in range(i,min(i+165,len(a))):print('FILTER',name,j+1,a[j][:340])
                 break
           PY
+      - name: Verify tariff and textlink admin UX exact fields and frontend linkage
+        run: |
+          python3 - <<'PY'
+          import zipfile
+          p='protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          with zipfile.ZipFile(p) as z:
+            n='affiliate-portal-router/includes/trait-ppar-tariff-tools.php'
+            arr=z.read(n).decode('utf8','replace').splitlines()
+            for a,b in [(23,120),(120,330),(362,485),(480,720)]:
+              print('RANGE',n,a,b)
+              for i in range(a-1,min(len(arr),b)):
+                s=arr[i]
+                if a==120 and b==330 and not any(x in s for x in ['function','placeholder','content','sanitize','html','code','script','iframe','return','url','shortcode','render','id','provider','action','position','post','wp_kses']):continue
+                if a==480 and b==720 and not any(x in s for x in ['function','textarea','input','submit','shortcode','render','text','page','link','editor','strong','placeholder','label']):continue
+                print('TARIFF',i+1,s[:360])
+            n='affiliate-portal-router/affiliate-portal-router.php'
+            arr=z.read(n).decode('utf8','replace').splitlines()
+            for i,s in enumerate(arr):
+              if any(x in s for x in ['render_tariff_tools_page', 'render_text_links_page','affiliate-portal-tariff-tools','affiliate-portal-text-links','ppar_affiliate_tariff','ppar_affiliate_textlink']):
+                print('MENU',i+1,s[:360])
+          PY
       - name: Inspect actual WordPress creative import form and tariff calculator options
         run: |
           python3 - <<'PY'
