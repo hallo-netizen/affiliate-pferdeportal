@@ -1,3 +1,5 @@
+> **ABNAHME-UPDATE 11.11.2026:** Dieses gepackte PSERC .28.64 QA-Artefakt ist **NICHT freigegeben**. Der anschließende Original-PHP-Routentest fand einen weiteren fehlenden PSTE-Bestandsaktualitätswächter an Anzeige, Export, Compilerstart und Aktivierung. Lokaler Zusatzfix: [aktuelles Schutzprotokoll](PSERC_PSTE_WORDPRESS_AUDIT_FRESHNESS_GATES_QA_20261111.md), **1.280/1.280 Tests PASS**. Dieser Zusatzfix liegt **nur als QA-Quellpatch** vor, nicht in der hier erwähnten .28.64 ZIP. Keine Installation/Live-Freigabe aus diesem älteren Protokoll ableiten.
+
 # Pferde Atelier – PSTE/PSERC komplette Paketprüfung, 11.11.2026
 
 Status: LOKALE PAKETPRÜFUNG BESTANDEN; ECHTER WORDPRESS-TEST NOCH OFFEN; KEINE LIVE-FREIGABE.
