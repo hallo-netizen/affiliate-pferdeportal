@@ -1,0 +1,18 @@
+{
+  "version": "6.72.324",
+  "kind": "QA13 TEST ONLY",
+  "zip_path": "/mnt/data/Pferdeatelier_Affiliate_6.72.324_QA13_KISS_TEILFREIGABE_NUR_TEST.zip",
+  "zip_bytes": 5379206,
+  "sha256": "69c5a2b9e837a5968b376761cc96b763e22f8d5dd2e95f635b4fa86ea3bb3425",
+  "archive_files": 66,
+  "php_lint_pass": 23,
+  "changed_files_vs_QA12": [
+    "includes/trait-ppar-ebay-run.php",
+    "pferdeportal-affiliate-router.php",
+    "readme.txt"
+  ],
+  "unchanged_files": 63,
+  "path": "public_verify final source failure -> existing safe append",
+  "real_site_test": "NOT DONE",
+  "old_product_data_mutated": false
+}
