@@ -1,0 +1,158 @@
+--- PSTE-0.57.144.36/includes/class-pste-admin.php
++++ PSTE-0.57.144.37/includes/class-pste-admin.php
+@@ -1037,9 +1037,18 @@
+     }
+     private static function renderEvidenceAuditControl(): void {
+         $config=wp_json_encode(['ajax'=>admin_url('admin-ajax.php'),'nonce'=>wp_create_nonce('pste_evidence_audit')],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+-        echo '<section class="pste-box" style="margin-top:12px"><h3>Gesamtdiagnose</h3><p>Ein einziger Bericht: Workflow-Zustand, Automatik- und Kurzwegfehler, gespeicherte Entscheidungen und vollständige vorhandene Protokollhistorie. Nur lesen – keine neue Prüfung, keine Freigabe, keine Anbieteraufrufe.</p>';
+-        echo '<button type="button" class="button button-secondary" id="pste-evidence-start">Gesamtdiagnose herunterladen (nur lesen)</button> <span id="pste-evidence-progress" aria-live="polite"></span>';
+-        echo '<p id="pste-evidence-summary"></p><p id="pste-evidence-download-wrap" style="display:none"><a class="button button-secondary" id="pste-evidence-download-link" download>Diagnose-Datei direkt herunterladen</a></p></section>';
++        echo '<section class="pste-box" style="margin-top:12px"><h3>Gesamtdiagnose</h3><p>Fehler und vorhandene Protokolle sofort herunterladen. Keine erneute Themenprüfung, keine Anbieteraufrufe.</p>';
++        // Fast default: the EXISTING flight-recorder POST reads the stored report.
++        // Never call pste_evidence_read_batch or scanTopics for this button.
++        echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin:8px 0">';
++        wp_nonce_field('pste_export_flight_protocol');
++        echo '<input type="hidden" name="action" value="pste_export_flight_protocol">';
++        echo '<button type="submit" class="button button-primary">Gespeicherte Diagnose sofort herunterladen</button></form>';
++        // The old 5k-topic report remains available only by EXPLICIT choice.
++        echo '<details style="margin-top:10px"><summary>Ausführliche Themenanalyse (liest alle gespeicherten Themen erneut)</summary>';
++        echo '<p>Nur bei Bedarf: Dieser Bericht liest den gesamten Themenbestand in mehreren Schritten. Er startet keine SEO-Recherche.</p>';
++        echo '<button type="button" class="button button-secondary" id="pste-evidence-start">Ausführliche Themenanalyse starten</button> <span id="pste-evidence-progress" aria-live="polite"></span>';
++        echo '<p id="pste-evidence-summary"></p><p id="pste-evidence-download-wrap" style="display:none"><a class="button button-secondary" id="pste-evidence-download-link" download>Ausführliche Diagnose herunterladen</a></p></details></section>';
+         $javascript=<<<'PSTE_EVIDENCE_JS'
+ (function () {
+   'use strict';
+--- PSTE-0.57.144.36/includes/class-pste-breadth-research-queue.php
++++ PSTE-0.57.144.37/includes/class-pste-breadth-research-queue.php
+@@ -243,8 +243,17 @@
+                             return self::summary($recheck,null);
+                         }
+                     }
++                    // A smaller current backlog cannot reuse the old 5k-row prefix.
++                    // Verify the signed predecessor above, preserve it and the original
++                    // receipt, then use the EXISTING 40-row provider-free local worker
++                    // exactly once from cursor zero. The new receipt is issued only
++                    // after the entire new current cohort has been processed.
++                    if($oldRowCount>0 && $newRowCount>0 && $newRowCount<$oldRowCount){
++                        $recheck=self::beginEvidenceRevalidation($existing,$contextBinding,$baselineUsable,'PSTE_AUDIT_BACKLOG_SHRUNK_FULL_LOCAL_RECHECK');
++                        return self::summary($recheck,null);
++                    }
+                     // Unchanged source and changed semantic rules: existing dedicated
+-                    // logic recheck. Appended/deleted rows retain their own strict checks.
++                    // logic recheck. An appended tail retains its strict prefix checks.
+                     $newLogic=self::beginLogicChangedLocalRevalidation($existing,$oldReceipt,$contextBinding,$baselineUsable);
+                     if(is_array($newLogic))return self::summary($newLogic,null);
+                     return self::continueVerifiedAppendedBacklog($existing,$oldReceipt,$contextBinding);
+@@ -371,7 +380,11 @@
+             // A RUNNING queue is never modified here.
+             $zeroRestartRepaired=false;
+             $prior=$queue['previous_completed_queue']??null;
+-            if($same&&is_array($prior)&&
++            $intentionalShrunkFullRecheck=(string)($queue['logic_recheck_source']??'')==='AUDIT_EVIDENCE_RECHECK'
++                && (string)($queue['audit_recheck_reason']??'')==='PSTE_AUDIT_BACKLOG_SHRUNK_FULL_LOCAL_RECHECK'
++                && is_array($prior)
++                && $currentBacklogTotal<(int)($prior['local_backlog_processed']??0);
++            if($same&&is_array($prior)&&!$intentionalShrunkFullRecheck&&
+                in_array((string)($queue['logic_recheck_source']??''),['AUDIT_EVIDENCE_RECHECK','SEMANTIC_LOGIC_CHANGED'],true)&&
+                (string)($prior['status']??'')==='COMPLETE'&&
+                (int)($queue['local_backlog_processed']??0)<(int)($prior['local_backlog_processed']??0)){
+@@ -674,7 +687,25 @@
+         // that local scan early; only provider-backed production waves may stop at the target.
+         if(self::targetReached($queue)&&!empty($queue['provider_fallback_allowed'])){ $queue['local_backlog_complete']=true;return self::complete($queue,'TARGET_REACHED_FROM_RETAINED_BACKLOG'); }
+         if(!empty($batch['complete'])){
+-            if((int)($queue['local_backlog_processed']??0)!==PSTE_Repository::retainedBacklogRowCount())return self::pause($queue,'PSTE_BACKLOG_FINAL_COUNT_CHANGED_PROGRESS_PRESERVED');
++            $processed=(int)($queue['local_backlog_processed']??0);
++            if($processed!==(int)($queue['local_backlog_total']??-1)
++                ||$processed!==PSTE_Repository::retainedBacklogRowCount())
++                return self::pause($queue,'PSTE_BACKLOG_FINAL_COUNT_CHANGED_PROGRESS_PRESERVED');
++            // No silent release if the WordPress context changed during the local pass.
++            try{
++                $nowBaseline=get_option(PSTE_OPTION_SITE_BASELINE,[]);
++                if(!is_array($nowBaseline)||($nowBaseline['contract']??'')!=='PSTE_SITE_BASELINE_V1')
++                    throw new RuntimeException('PSTE_BACKLOG_CONTEXT_CHANGED_PROGRESS_PRESERVED');
++                $nowContext=PSTE_Context_Refresh::status();
++                if((string)($nowContext['status']??'')!=='COMPLETE')
++                    throw new RuntimeException('PSTE_BACKLOG_CONTEXT_CHANGED_PROGRESS_PRESERVED');
++                $nowBinding=PSTE_Context_Index_Store::runtimeBinding($nowContext,$nowBaseline);
++                foreach(['baseline_sha256','inventory_sha256','structure_sha256','editorial_plan_sha256'] as $field){
++                    $old=(string)($queue['context_binding'][$field]??'');$new=(string)($nowBinding[$field]??'');
++                    if($old===''||$new===''||!hash_equals($old,$new))
++                        throw new RuntimeException('PSTE_BACKLOG_CONTEXT_CHANGED_PROGRESS_PRESERVED');
++                }
++            }catch(Throwable $e){return self::pause($queue,'PSTE_BACKLOG_CONTEXT_CHANGED_PROGRESS_PRESERVED');}
+             $queue['local_backlog_complete']=true;$queue['local_backlog_reused']=false;self::storeBacklogAuditReceipt((array)($queue['context_binding']??[]));
+             if(empty($queue['provider_fallback_allowed']))return self::complete($queue,(int)($queue['local_backlog_title_candidates']??0)>0?'EXISTING_TITLE_CANDIDATES_GENERATED_NO_PROVIDER_CALL':'EXISTING_POTENTIAL_EXHAUSTED_NO_PROVIDER_CALL');
+             if((int)($queue['item_count']??0)===0){$baseline=get_option(PSTE_OPTION_SITE_BASELINE,[]);$open=self::openFamilies(is_array($baseline)?$baseline:[]);if(!$open)return self::complete($queue,'NO_OPEN_FAMILIES_AFTER_RETAINED_BACKLOG');$next=self::spread($open,1);$queue['items']=[self::queueItem((array)$next[0])];$queue['item_count']=1;}
+@@ -763,10 +794,11 @@
+         $oldCheckpoint=(array)($prior['local_backlog_checkpoint']??[]);
+         $oldProcessed=(int)($prior['local_backlog_processed']??0);
+         $oldCursor=(int)($prior['local_backlog_cursor']??0);
++        $fullRecheck=$total<$oldProcessed;
+         if((string)($prior['status']??'')!=='COMPLETE'||empty($prior['local_backlog_complete'])||
+            !array_key_exists('provider_fallback_allowed',$prior)||!empty($prior['provider_fallback_allowed'])||
+            $oldProcessed<1||$oldCursor<1||$oldProcessed!==(int)($prior['local_backlog_total']??-1)||
+-           $total<$oldProcessed||!self::validBacklogCheckpoint($oldCheckpoint)||
++           !self::validBacklogCheckpoint($oldCheckpoint)||
+            (int)($oldCheckpoint['cursor']??-1)!==$oldCursor||
+            (int)($oldCheckpoint['processed_total']??-1)!==$oldProcessed||
+            (int)($oldCheckpoint['backlog_row_count']??-1)!==$oldProcessed){
+@@ -774,19 +806,35 @@
+             throw new RuntimeException('PSTE_COMPLETE_RECHECK_PREFIX_PROOF_INVALID_PROGRESS_PRESERVED');
+         }
+         $next['local_backlog_complete']=false;$next['local_backlog_reused']=false;$next['local_backlog_resumed']=true;
+-        $next['local_backlog_total']=$total;$next['local_backlog_cursor']=$oldCursor;$next['local_backlog_processed']=$oldProcessed;
+-        // Preserve the old counts and preview until a new fully verified receipt exists.
++        $next['local_backlog_total']=$total;
++        // A reduced cohort is a DIFFERENT source; the old prefix cursor is no longer
++        // valid. Keep the prior signed queue/receipt separately, never carry the old
++        // processed counter or signed checkpoint into the new cohort.
++        $next['local_backlog_cursor']=$fullRecheck?0:$oldCursor;
++        $next['local_backlog_processed']=$fullRecheck?0:$oldProcessed;
+         $next['local_backlog_provider_calls']=0;
+-        // Keep the preceding signed checkpoint for the entire recheck. Its new
+-        // fingerprint is signed only after every existing row has been examined.
+-        $next['local_backlog_checkpoint']=$oldCheckpoint;
+-        $next['resume_recheck_until']=$oldCursor;$next['resume_recheck_cursor']=0;$next['resume_recheck_fingerprint']='';$next['resume_recheck_checked']=0;
++        $next['local_backlog_checkpoint']=$fullRecheck?[]:$oldCheckpoint;
++        $next['resume_recheck_until']=$fullRecheck?0:$oldCursor;
++        $next['resume_recheck_cursor']=0;$next['resume_recheck_fingerprint']='';$next['resume_recheck_checked']=0;
++        if($fullRecheck){
++            foreach(['local_backlog_promoted','local_backlog_title_candidates',
++                     'local_backlog_title_candidates_revalidated','local_backlog_structure_gaps',
++                     'local_backlog_reviews','local_backlog_retained_non_producing'] as $field)$next[$field]=0;
++            $next['local_backlog_title_preview']=[];
++        }
+         $next['baseline_usable_topic_keys']=array_values(array_unique(array_map('strval',$usable)));
+         $next['usable_topic_keys']=(array)($prior['usable_topic_keys']??[]);
+         $next['usable_candidate_count']=(int)($prior['usable_candidate_count']??0);
+         $next['items']=[];$next['item_count']=0;$next['current_index']=0;$next['completed_count']=0;$next['blocked_count']=0;
+         $next['created_at_utc']=gmdate('c');$next['updated_at_utc']=gmdate('c');
+         self::clearCancelRequest();self::save($next);
++        if($fullRecheck&&class_exists('PSTE_Flight_Recorder',false)){
++            try{PSTE_Flight_Recorder::event('EXISTING_ONLY_AUDIT','LOCAL_RECHECK_STARTED',[
++                'reason_code'=>'PSTE_AUDIT_BACKLOG_SHRUNK_FULL_LOCAL_RECHECK',
++                'previous_rows'=>$oldProcessed,'current_rows'=>$total,
++                'old_signed_predecessor'=>'PRESERVED','provider_calls'=>0,
++            ]);}catch(Throwable $ignored){}
++        }
+         return $next;
+     }
+ 
+--- PSTE-0.57.144.36/portal-seo-topic-engine.php
++++ PSTE-0.57.144.37/portal-seo-topic-engine.php
+@@ -2,13 +2,13 @@
+ /**
+  * Plugin Name: Portal SEO Themenengine
+  * Description: Einfacher Longtail-Workflow: recherchiert Suchphrasen, übernimmt Sprachtitel und ordnet ausschließlich vorhandene Portalkategorien zu und prüft gegen den eigenen Bestand. Verändert keine Beiträge, Inhalte, Gestaltung oder Textproduktionsregeln.
+- * Version: 0.57.144.36
++ * Version: 0.57.144.37
+  * Requires PHP: 8.0
+  * Author: Workflow Automation
+  */
+ if (!defined('ABSPATH')) { return; }
+ 
+-define('PSTE_VERSION', '0.57.144.36');
++define('PSTE_VERSION', '0.57.144.37');
+ define('PSTE_DIR', __DIR__ . '/');
+ define('PSTE_OPTION_SETTINGS', 'pste_settings_v1');
+ define('PSTE_OPTION_SCHEMA', 'pste_schema_version');
