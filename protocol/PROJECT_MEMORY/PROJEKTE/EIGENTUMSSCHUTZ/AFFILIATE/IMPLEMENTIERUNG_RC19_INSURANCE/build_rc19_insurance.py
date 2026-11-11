@@ -14,6 +14,7 @@ assert hash_sha(original)=='a98063820d1564bf7cc7312c4c232369ac198bbaa49fbb6b173f
 prefix='affiliate-portal-router/'
 main=prefix+'affiliate-portal-router.php'
 amazon=prefix+'includes/trait-ppar-hb-amazon.php'
+css=prefix+'assets/frontend.css'
 readme=prefix+'readme.txt'
 def replace_one(s,old,new):
     count=s.count(old)
@@ -129,6 +130,23 @@ helper=r'''
 
     /** RC19 narrowly permits the real 728x90 / 468x60 Tarifcheck originals in
      * the existing insurer wide slots. All six old worlds retain old geometry. */
+    /** Actual 300x250 rectangle and 125x125 small square in insurance
+     * article/glossary slots, preserving their original dimensions. */
+    private function hb_insurance_original_inline_allowed($banner, $slot_type, $context) {
+        $slot=sanitize_key((string)$slot_type);
+        if ($this->hb_insurance_scope($context)!=='insurance'
+            || !in_array($slot,array('post_inline_banner','glossary_single_desktop_banner',
+                                     'glossary_single_mobile_banner','glossary_single_banner'),true)
+            || !is_array($banner) || empty($banner['image_url'])
+            || sanitize_key((string)($banner['creative_type']??''))!=='banner'
+            || sanitize_key((string)($banner['render_mode']??'image_link'))==='html') { return false; }
+        list($width,$height,$source)=$this->article_banner_dimensions($banner);
+        $w=absint($width);$h=absint($height);
+        if ($source==='fallback' || $w<125 || $h<125) {return false;}
+        return ($w>=300 && $h>=250 && $w/$h>=1.0 && $w/$h<=1.4)
+            || ($w===125 && $h===125);
+    }
+
     private function hb_insurance_original_wide_allowed($banner, $slot_type, $context) {
         if ($this->hb_insurance_scope($context) !== 'insurance'
             || !$this->overview_wide_banner_slot($slot_type)
@@ -184,7 +202,8 @@ with ZipFile(BytesIO(original)) as src:
     # Format validation still runs for every campaign. In the insurance world
     # alone it may accept genuine 728x90 or 468x60 originals at wide slots.
     anchor="                if (!$this->campaign_slot_allowed($runtime_campaign, $slot_type)) { continue; }"
-    fixed="                if (!$this->campaign_slot_allowed($runtime_campaign, $slot_type)\n                    && !$this->hb_insurance_original_wide_allowed($runtime_campaign,$slot_type,$rank_context)) { continue; }"
+    fixed="                if (!$this->campaign_slot_allowed($runtime_campaign, $slot_type)\n                    && !$this->hb_insurance_original_wide_allowed($runtime_campaign,$slot_type,$rank_context)
+                    && !$this->hb_insurance_original_inline_allowed($runtime_campaign,$slot_type,$rank_context)) { continue; }"
     s=replace_one(s,anchor,fixed)
     # Candidate ranking is filtered BEFORE choosing the first campaign, so
     # one unrelated brand never displaces an eligible lower-ranked insurer.
@@ -196,6 +215,11 @@ with ZipFile(BytesIO(original)) as src:
     anchor="if ($image_url === '' || !$this->overview_wide_banner_campaign_eligible($banner, $slot_type)) { return ''; }"
     new="if ($image_url === '' || !($this->hb_insurance_original_wide_allowed($banner, $slot_type, $context) || $this->overview_wide_banner_campaign_eligible($banner, $slot_type))) { return ''; }"
     s=replace_one(s,anchor,new)
+    # Add a class only for insurance output, so existing six-world CSS stays
+    # identical. No additional stylesheet or front-end network call.
+    anchor="                        if ($is_overview_wide_banner_slot) { $classes[] = 'ppar-overview-wide-banner-slot'; }"
+    fixed="                        if ($hb_insurance_scope==='insurance') { $classes[]='ppar-hb-insurance-slot'; }\n"+anchor
+    s=replace_one(s,anchor,fixed)
     # Eliminate the historical insurance-document-bag disguised as an Amazon
     # insurance recommendation. Other six worlds and their image identities
     # remain identical.
@@ -204,13 +228,24 @@ with ZipFile(BytesIO(original)) as src:
     t=replace_one(t,"            'core:world:insurance'=>'Feuerfeste Dokumententasche Versicherungsunterlagen',\n","")
     t=replace_one(t,"            'core:world:insurance'=>'hb-amazon-kategorie-tresore.webp',\n","")
     # The original HB house generator can only produce six physical-protection worlds.
+    # Keep original house banners; only insurer article/glossary creatives are
+    # constrained to intrinsic aspect and no upscaling.
+    original_map[css] += b"""
+/* HAB RC19: native insurer rectangles and small squares; no stretched banners. */
+.ppar-hb-insurance-slot[data-ppar-slot="post_inline_banner"] .ppar-banner-image,
+.ppar-hb-insurance-slot[data-ppar-slot^="glossary_single"] .ppar-banner-image{
+    display:block!important;width:auto!important;height:auto!important;
+    max-width:100%!important;max-height:250px!important;
+    object-fit:contain!important;margin:0 auto!important;
+}
+"""
     original_map[main]=s.encode('utf-8')
     original_map[amazon]=t.encode('utf-8')
     original_map[readme]=replace_one(original_map[readme].decode('utf-8'),"Stable tag: 0.1.15-rc18","Stable tag: 0.1.16-rc19").encode('utf-8')
     assert s.count("hb_insurance_campaign_allowed(")==4
     assert "core:world:insurance'=>'hb-amazon-kategorie-tresore.webp'" not in t
     assert "Feuerfeste Dokumententasche Versicherungsunterlagen" not in t
-    changed={main,amazon,readme}
+    changed={main,amazon,css,readme}
     for n in src.namelist():
         if n not in changed:assert original_map[n]==src.read(n)
     out=BytesIO()
