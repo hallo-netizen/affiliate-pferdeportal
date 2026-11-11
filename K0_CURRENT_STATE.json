@@ -87,9 +87,9 @@
       "FIELD_POLICY.json",
       "TEXTMACHINE_SCOPE_REFERENCE.json"
     ],
-    "article_hard_rule_count": 85,
-    "pre_lt68_hard_rule_count": 84,
-    "final_hard_rule_count": 85,
+    "article_hard_rule_count": 81,
+    "pre_lt68_hard_rule_count": 80,
+    "final_hard_rule_count": 81,
     "complete_rules_bound_before_writer": true,
     "writer_job_contains_complete_rule_bundle": true,
     "writer_job_contains_complete_article_rule_context": true,
@@ -100,7 +100,8 @@
       "missing_required_list": "BLOCK",
       "missing_post_table_summary": "BLOCK",
       "valid_complete_article": "PASS"
-    }
+    },
+    "owner_single_decision_20261110": "SEARCH_INTENT_TITLE_KEYWORD_ARTICLE_TYPE_CATEGORY_DECIDED_UPSTREAM_ONCE; K0_VERIFIES_UNCHANGED_BINDING_AND_WRITTEN_ARTICLE_ONLY"
   },
   "link_distribution": {
     "rule": "EXACTLY_3_INTERNAL_LINKS; parent_category + semantic_related in two distinct main-text blocks; further_information only in further_information; intro/conclusion/table are not main-text blocks"
