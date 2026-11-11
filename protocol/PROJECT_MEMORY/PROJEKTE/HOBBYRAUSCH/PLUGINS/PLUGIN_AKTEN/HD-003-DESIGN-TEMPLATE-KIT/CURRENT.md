@@ -1,3 +1,39 @@
+# HD003 – Hobbydepot Design – CURRENT
+
+**Aktuelle vollständige lokale Installationsfassung: 1.50.808 (08.11.2026).** Letzter vom Nutzer im Screenshot bestätigter Live-Stand: 1.50.807; 1.50.808-Live-Sichtprüfung offen.
+
+**Warum 1.50.808?** Der Nutzer hat die zu flache, verzerrt wirkende Eigenwerbung in 1.50.807 verworfen und ausdrücklich die Rückkehr zum **alten Originalbanner aus 1.50.806** verlangt. Deshalb wurde das echte Originalbild samt Original-Höhenverhältnis, Original-Overlay und beiden vorhandenen Werbebedingungen-/Preise-Klickflächen **bytegenau aus 1.50.806 übernommen**. Keine künstliche Skalierung, kein abgeschnittener Flachbanner. Lupen-Hero und kurzer Untertitel **„Das passende Hobby für dich.“** bleiben von 1.50.807 erhalten.
+
+**Voll-ZIP:** `HOBBY_DEPOT_DESIGN_HD003_1.50.808.zip` **und byteidentische `CURRENT.zip`** im isolierten HD003-GitHub-Pluginbüro auf Branch `hobbyroom/hd003-150807-hobbyfinder-20261108` (Git-Blob `3403ec7ad32a2fcec5a5bff0f21186d86d0d1909`). 65.763.366 Byte, SHA-256 `cbf03e54dd7bf4ae44ea6beac66f1ee53d188732d6da4b6c1c92df1b9b5b8f15`. GitHub-PR [#724](https://github.com/hallo-netizen/affiliate-pferdeportal/pull/724) noch offen, Campus-Hauptbranch nicht überschrieben. Direkter Download: https://github.com/hallo-netizen/affiliate-pferdeportal/releases/download/hobby-depot-hd003-1.50.808-original-banner/HOBBY_DEPOT_DESIGN_HD003_1.50.808_HOBBYFINDER_BANNER_ORIGINAL.zip
+
+**Prüfung:** 1.50.806-Ursprungs-ZIP exakt per SHA256 geprüft. Vollständiges 1.50.808-Plugin enthält 1291 Dateien: **1288 Originaldateien byteidentisch**, 2 PHP-Dateien gezielt geändert (Hobbyfinder-Bild-/Text-Zuordnung und Versionskopf), genau 1 neues Lupen-Bild. 13/13 PHP-Dateien Syntax PASS; ZIP CRC 1291/1291 PASS; Originalbanner-Bild/Styles/Klickflächen unverändert; zwei korrekte Zielpfade aus Original unverändert. GitHub Actions `42506740141` erfolgreich. Keine zusätzliche WordPress-Liveabnahme oder neue Seitenmodellierung behauptet.
+
+**Unverändert:** alle anderen Magazine, Kategorien, Beitragsdesign, Anzeigenplätze, HD006 Bildzentrale, HD007, Affiliate, Pferdeatelier/K0. **Alte Eigenwerbe-Banner-Version unverändert**, nicht eine erneute Komprimierung des Bannerbilds.
+
+**Bürovertrag:** [EVIDENCE_1.50.808.md](./EVIDENCE_1.50.808.md). Nur 1.50.808 als aktuelles Download-Plugin weitergeben; 1.50.807 archiviert.
+
+---
+
+## Historischer Zwischenstand 1.50.807 (durch Banner-Rücknahme abgelöst)
+
+# HD003 – Hobbydepot Design – CURRENT
+
+**Stand 08.11.2026: vollständiger Installationskandidat 1.50.807 (Hobbyfinder).**  
+**Produktiv zuletzt vom Nutzer gemeldet: 1.50.806; 1.50.807 noch nicht live abgenommen.**
+
+**Voll-ZIP:** `HOBBY_DEPOT_DESIGN_HD003_1.50.807.zip` im isolierten GitHub-Pluginbüro (`ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/`), **65.784.974 Bytes**, SHA256 `494bd514882695f81357f53fe3d9608d3a2d4a4c6fda0a974b8d72a97cf0ce02`.
+Direktdownload: https://github.com/hallo-netizen/affiliate-pferdeportal/releases/download/hobby-depot-hd003-1.50.807-hobbyfinder/HOBBY_DEPOT_DESIGN_HD003_1.50.807_HOBBYFINDER.zip
+
+**Nur Hobbyfinder** (`/magazin/hobbyfinder/`): Betreiber hat Lupen-Hero und kurzen Spruch **„Das passende Hobby für dich.“** ausdrücklich freigegeben; damit wird das alte `suchen-finden.webp` auf dieser einen Seite ersetzt. Das bisherige hohe Eigenwerbebanner wird auf Hobbyfinder durch kompakte, flache Darstellung mit kleineren, mobil lesbaren echten Buttons „Werbebedingungen“ und „Preise“ ersetzt; gebuchte externe Anzeigen werden nicht umgeleitet oder ersetzt. Übrige Hero-Bilder, Kategorie- und Beitragsdesign, Anzeigenplätze, HD006 Bildzentrale und HD007 bleiben unverändert.
+
+**Technische Freigabe:** Quelle ist das SHA-geprüfte Original-Vollplugin 1.50.806, die 1288 unveränderten Dateien sind byteidentisch, nur zwei vorhandene PHP-Dateien + zwei neue freigegebene Bilddateien; ZIP komplett, 13/13 PHP-Lint, 78/78 Browserprüfungen auf 1440, 960, 768, 640, 390, 360px PASS. GitHub Action 42506140904; gebautes Vollplugin und Browser-/Buildtests im isolierten HD003-Büro dokumentiert. **WordPress-Live-Sichtprüfung noch offen.**
+
+**Keine weiteren Änderungen an 1.50.806 durchführen; für neue Arbeiten 1.50.807 als Arbeitsgrundlage und die nachfolgende Historie beachten.**
+
+---
+
+## Historischer Stand 1.50.806 (nicht mehr aktuelle Installationsdatei)
+
 # HD003 – Hobbydepot Design – gültige Current-Version
 
 **Version 1.50.806 · 08.11.2026**

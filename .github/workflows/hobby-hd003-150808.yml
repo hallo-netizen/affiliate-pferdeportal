@@ -1,0 +1,74 @@
+name: HD003 1.50.808 Original Hobbyfinder Banner
+on:
+  push:
+    branches:
+      - hobbyroom/hd003-150807-hobbyfinder-20261108
+    paths:
+      - .github/workflows/hobby-hd003-150808.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  complete-plugin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build full plugin from verified 1.50.806 and original advertising banner
+        run: |
+          python3 scripts/hd003_build_150808.py
+      - name: Assert old banner is exactly reused and ad links remain original
+        run: |
+          python3 - <<'PY'
+          import json,zipfile,re,pathlib,hashlib
+          b=pathlib.Path('dist/HD003_150808_TESTREPORT.json')
+          j=json.loads(b.read_text())
+          with zipfile.ZipFile(j['file']) as z:
+            src=z.read('affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php').decode()
+            assert 'private static function rental_own_banner_v150791()' in src
+            assert 'banner-freigabe-originalbild-2170x725.png' in src
+            assert src.count("self::rental_hotspot_v150791('Werbebedingungen', $terms, 'is-terms')")==1
+            assert src.count("self::rental_hotspot_v150791('Preise', $prices, 'is-prices')")==1
+            assert 'hobbyfinder_flat_own_ad_v150807' not in src
+            assert 'hobbyfinder-banner-flat.webp' not in src
+            assert "'hero' => 'Das passende Hobby für dich.'" in src
+            assert 'hobbyfinder-lupe-approved.webp' in src
+            banner='affiliate-portal-template-kit/assets/hobby-depot-v150617/eigenwerbung-v150791/banner-freigabe-originalbild-2170x725.png'
+            assert banner in z.namelist()
+            assert z.getinfo(banner).file_size > 10000
+            print('ORIGINAL_BANNER_PICTURE_AND_2_HOTSPOTS_PASS')
+            print('NO_COMPACT_AD_OVERRIDE_PASS')
+            print('MOBILE_ORIGINAL_BANNER_RULES_PRESERVED_PASS')
+            print('COMPLETE_PACKAGE',j)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: HD003-1.50.808-ORIGINAL-BANNER-FULL-ZIP
+          path: |
+            dist/HOBBY_DEPOT_DESIGN_HD003_1.50.808_HOBBYFINDER_BANNER_ORIGINAL.zip
+            dist/HD003_150808_TESTREPORT.json
+          retention-days: 30
+      - name: Publish direct verified GitHub download
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TAG="hobby-depot-hd003-1.50.808-original-banner"
+          ZIP="dist/HOBBY_DEPOT_DESIGN_HD003_1.50.808_HOBBYFINDER_BANNER_ORIGINAL.zip"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$ZIP" --clobber
+          else
+            gh release create "$TAG" "$ZIP" --target "$GITHUB_SHA" --title "Hobby Depot Design 1.50.808 – Original-Werbebanner wiederhergestellt" --notes "Nur Hobbyfinder: altes unverändertes Eigenwerbebanner aus 1.50.806 wiederhergestellt, neues freigegebenes Lupen-Hero und kurzer Spruch bleiben. Alle anderen Dateien und Plugins unangetastet. PHP/ZIP und originaler Bild-/Hotspotcode geprüft. WordPress-Liveabnahme offen."
+          fi
+          gh release view "$TAG" --json assets,url
+      - name: Save full tested ZIP to isolated plugin office
+        env:
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          DEST="protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/HOBBY_DEPOT_DESIGN_HD003_1.50.808.zip"
+          cp "dist/HOBBY_DEPOT_DESIGN_HD003_1.50.808_HOBBYFINDER_BANNER_ORIGINAL.zip" "$DEST"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$DEST"
+          git commit -m "HD003 plugin office: archive full 1.50.808 with unchanged original banner"
+          git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"
