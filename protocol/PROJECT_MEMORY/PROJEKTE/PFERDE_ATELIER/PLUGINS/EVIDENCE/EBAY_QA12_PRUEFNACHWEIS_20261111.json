@@ -1,0 +1,32 @@
+{
+  "status": "ISOLIERTE TESTFASSUNG; WordPress/MariaDB/echtes eBay NICHT end-to-end verifiziert",
+  "date": "2026-11-11",
+  "version": "6.72.323",
+  "base_version": "6.72.322",
+  "archive_name": "Pferdeatelier_Affiliate_6.72.323_QA12_KISS_BACKEND_PROTOKOLL_NUR_TEST.zip",
+  "archive_bytes": 5378589,
+  "archive_sha256": "bf7e94ad920200efb1746a693cce3b544ddf8b77d8740374d0c2de748d71f9e3",
+  "zip_files": 66,
+  "zip_crc": "PASS",
+  "php_lint": "23/23 PASS",
+  "changed_files": [
+    "affiliate-portal-router/includes/trait-ppar-ebay-run.php",
+    "affiliate-portal-router/includes/trait-ppar-ebay.php",
+    "affiliate-portal-router/pferdeportal-affiliate-router.php",
+    "affiliate-portal-router/readme.txt"
+  ],
+  "unchanged_files": 62,
+  "tests": {
+    "EBAY_319_KISS_16_KANONISCHE_TESTS_20261110.php": "KISS_CENTRAL_BUSINESS_QA 16/16 PASS",
+    "EBAY_319_KISS_QA2_TEST_EINZELFEHLER_20261110.php": "CANONICAL_FAILURE_ISOLATION 13/13 PASS",
+    "EBAY_319_KISS_QA3_TEST_EFFIZIENZ_20261110.php": "SELECTED_ONLY_MATERIALIZE 11/11 PASS",
+    "EBAY_KISS_TEST_END_TO_END_MOCK_20261110.php": "KISS_SINGLE_FLOW 10/10 PASS",
+    "EBAY_KISS_TEST_PERSISTENZ_20261110.php": "KISS_DURABLE_SAVE 11/11 PASS",
+    "QA12_AUDIT_REAL_METHOD_TEST.php": "ALL QA12 REAL PHP AUDIT TESTS PASS",
+    "QA12_PUBLIC_SOURCE_REAL_RUN_TEST.php": "ALL QA11 PUBLIC SOURCE, SAFE RESUME & READ-ONLY UI TESTS PASS",
+    "QA12_AUDIT_EXPORT_REAL_METHOD_TEST.php": "PASS 106 CSV lines, 100-entry rollover, old run retained, no warnings"
+  },
+  "audit_recording": "WordPress-Optionen ohne neue Tabelle, pro Lauf in nicht automatisch geladenen 100-Eintrags-Blöcken, alte Runs bleiben, nur Administrator-Download",
+  "data_policy": "Keine bestehenden Optionen, Kampagnen, eBay-Quellen, Run-UUID, Produktdaten oder Checkpoints werden bei der Installation gelöscht oder zurückgesetzt",
+  "limits": "Kein echter WordPress-DB/Front-End/Nginx/Server-Performance-Test; DB-Platzbedarf neuer Protokolle ist künftig zu beobachten; keine rückwirkende vollständige Historie vor QA12"
+}
