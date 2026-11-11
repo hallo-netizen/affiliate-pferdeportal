@@ -1,0 +1,28 @@
+# Pferdeatelier eBay – QA18: fachlich falsche Ablehnungen und eBay-Pflichtziele
+
+Stand: 11. November 2026. Ausgangspunkt: unverändertes QA17-TEST-Paket 6.72.327, SHA256 2359961076ebf6ed67894f9fbe08e636c7c0b247417aec5252362cc03dc9a88d. Ausschließlich getrennte TEST-Arbeitskopie; kein Live-Release, WordPress nicht verändert.
+
+## Tatsächlicher Codebefund
+
+1. Das Original erzwingt BUSINESS-Händler mit mindestens **99,0 Prozent positivem Feedback und 100 Bewertungen**. Es prüft dieselben Schwellen in zwei verschiedenen Funktionen: bei eBay-Eingang und erneut bei der Produktauswahl. Das ist eine eigenständige Portal-Geschäftsregel, keine Voraussetzung des eBay-BUSINESS-Marktplatzfilters. Zusätzlich gewichtet das Ranking die Händlerbewertung mit 25 Prozent. Die Regeln sperren auch fachlich passende Angebote kleiner gewerblicher Anbieter.
+2. Ein exakter, nachweislich passender Produkttyp im Titel wurde nochmals wegen des Wortes „Motorrad“ in der Kurzbeschreibung verworfen (Testfall „LED Rückleuchte Pferdeanhänger – auch für Motorrad“). Sicherheitsrelevante Produktform-Sperren für Spielzeug/Poster/Modelle bleiben notwendig.
+3. Die bestehende Klassifikation und nachgelagerte Eignungsprüfung erkannten den tatsächlich **im eigenen Katalog als Suchbegriff hinterlegten** „Dressursattel Pferd“ nicht zuverlässig als „Pferdesättel“; „Reitplatzplaner“ wurde nicht als „Reitplatzschleppe“ anerkannt.
+4. 15 eher thematische Sammel-/Bauvorhaben sind im ursprünglichen 298er Pflichtwarenkatalog als separater erwarteter eBay-Artikel enthalten. Sie bleiben als Portalseiten und Konzeptdaten bestehen, sind aber **keine separaten eBay-Pflichtangebote**. Einzelne konkrete Unterprodukte bleiben suchbar.
+
+## Tatsächlich umgesetzt im QA18-Testpaket 6.72.328
+
+- Beide Händlerbewertungssperren vollständig entfernt; Ranking verwendet stattdessen 70% belegte Produktrelevanz, 20% Angebotsmerkmale und 10% Preisplausibilität. Bewertungs-Mindestfelder und Backend-Einstellzeile entfernt. Händlername und BUSINESS-Kontotyp, bestehende ausdrückliche manuelle Verkäufer-/Marken-/Artikel-Vetos bleiben unverändert. Feedbackwerte können als reine Information mit gespeichert bleiben, beeinflussen aber **weder Annahme noch Ranking**.
+- Eine vorhandene Produkterkennung statt weiterer unabhängiger Doppelregeln: eigens gepflegter eBay-Katalogsuchbegriff oder wenige klar definierte **gleichbedeutende Produktnamen** im tatsächlichen Produkttitel gelten als derselbe physische Produkttyp, konsistent bei Klassifikation und Eignungsprüfung. Verwendete Synonyme: Dressursattel, Reitsattel, Westernsattel, Western Sattel, Reitplatzplaner, Reitbahnplaner. Keine freie Zufallssynonymisierung.
+- Wird der tatsächliche Produkttyp durch Primärtitel und exaktes eBay-Warenprofil unabhängig bestätigt, führen **nur fremde Verwendungswörter in der Kurzbeschreibung** (z. B. Motorrad/Hund/Fahrrad) nicht zum Veto. Fremdproduktangaben im Titel, echter eBay-Kategorie oder Produktmerkmalen bleiben harte Ausschlüsse. Spielzeug, Poster, Modelle, falsche Produktart und alle übrigen Sicherheitsmarkierungen auch im Beschreibungstext bleiben gesperrt.
+- Die 15 eigenständigen eBay-Pflichtziele entfernt, ohne die 324 Ursprungskonzepte/Portal-Seiten zu löschen: Beregnung & Bewässerung, Hallenklima & Belüftung, Heulagerung, Mistlagerung, Offenstallbau, Paddockbau, Reithallenbau, Reitplatzbau, Satteltransport, Waschplatz für Pferde, Jungpferde-Ausrüstung, Stressarme Ausrüstung, Trainingszubehör, Weidepflegegeräte, Gewöhnungssachen. 324 ursprüngliche eBay-Katalogziel-IDs unverändert, 26 + 15 Ausnahmen, **283 erwartete konkret veräußerbare eBay-Produktfamilien**. Kein Produkt automatisch neu freigegeben; keine vorhandenen Datensätze gelöscht.
+
+## Nachweise und Grenzen
+
+- **35/35** direkte Tests mit echten PHP-Trait-Methoden: korrekte Alias-Zuordnung, falsche Fremd- und Spielzeugartikel weiterhin gesperrt, Beschreibungskontext, Akzeptanz eines BUSINESS-Händlers mit 95%/3 Bewertungen und fehlendem Bewertungswert, anschließende unabhängige Eignungsprüfung, EBAY_DE- und PRIVATE-Sperre, eBay-Pflichtliste.
+- **7/7** bestehende QA16-Heartbeat-/Trennungsfälle mit unverändertem eBay-Run-Trait: PASS.
+- **23/23** PHP-Syntaxprüfungen PASS, **66/66** ZIP-Einträge CRC PASS. Nur **4 der 66 Plugin-Dateien** gegenüber QA17 verändert: `includes/trait-ppar-ebay.php`, `assets/ebay-portal-catalog-v2.json`, Version im Haupteinstieg und README. Patch passt ohne Konflikt auf unverändertes QA17.
+- Quellkatalog enthält weiterhin korrekten Hash der unveränderten Portalstruktur. Geschützte eBay-Marktkennung EBAY_DE, BUSINESS-Status, Preis, Bild, Affiliate-Kauflink, Enddatum, Sicherheitsfilter, SAFE-Freigabe und Speicherung/Laufsteuerung in allen wesentlichen Bestandteilen unverändert.
+- **Keine aktuelle Live-Änderung**, kein echt abgenommener WordPress/MariaDB/eBay-Gesamtdurchlauf, keine Live-Produktkacheln nachgewiesen. Die bereits vorhandene Live-Run-UUID wird nicht zurückgesetzt. 283 ist eine **bewusste redaktionelle eBay-Warenzielauswahl, kein Nachweis, dass eBay 283 Produkte verfügbar hat**.
+- Ziel: einmal auf *getrennter* WordPress-Testinstallation mit Kopie der gespeicherten Daten testen. Keinen produktiv laufenden 298er Gesamtlauf per ungetestetem Pluginwechsel unterbrechen.
+
+Prüfsumme des TEST-ZIP: SHA256 62eb50f6e8c9470874955dacdee6d5064fda6c6a3a63b93556dbdfa8055e288b; 5.381.731 Bytes. Patchdatei: `EBAY_QA18_KISS_GRENZEN_UND_FACHFILTER.patch`.
