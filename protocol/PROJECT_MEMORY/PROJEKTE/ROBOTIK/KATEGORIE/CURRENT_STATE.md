@@ -1,4 +1,14 @@
 # ROBOTIK / KATEGORIE – EINZIGER AKTUELLER STATUS
+
+## NEUESTER STAND 11.11.2026 – Kategorie-Import 0.4.0, Veröffentlichung 0.4.1
+- Nach dem vom Nutzer gemeldeten „erledigt“ wird der vorherige Plugin-/Import-Arbeitsschritt **als gemeldet**, nicht als unabhängiger Live-Readback geführt.
+- **Kategorie-Workflow 0.4.0**: Originalcode belegt ersten Import mit 104 WP-Entwurfsseiten und 89 flachen WP-Beitragskategorien. Eingebetteter 7-Welten-Baum; WordPress-Live-Status der tatsächlichen Installation nicht unabhängig erhoben.
+- Nutzer erlaubt wegen gesperrter Website ausdrücklich die **Veröffentlichung aller 104 importierten Seiten**.
+- **0.4.1** als Update **derselben Pluginidentität** erstellt: unter „Robotik Kategorie → Veröffentlichung“ 104 markierte Seiten prüfen und bei wirklichem Importstatus COMPLETE/193 und ausdrücklicher Freigabe in Sammelpaketen veröffentlichen. Kein zweiter Import und keine Berührung fremder Inhalte.
+- Lokale PHP-/Mockprüfung 104/104 Publish, 104/104 Readback, Wiederholung ohne Änderung, fremde Seite geschützt; noch kein Live-PASS. **Download:** Library `/robotik/Konzeptbüro/ROBOTIK_KATEGORIE_WORKFLOW_0.4.1_PUBLIKATION_TEST.zip`.
+- Eigenes Designplugin 0.1.0 (Mega-Menü + Footer) liegt im `/robotik/Designbüro/`; beide ZIPs sind lokal geprüft, Installation/Live-Abnahme bleibt beim Betreiber.
+- Verbindliches Protokoll: `PLUGIN/PUBLIKATION_041_20261111.md`. Nachfolgende 0.3.0-/ältere Forschungsabschnitte sind historische Einträge.
+
 Stand: 10.11.2026
 
 ## Verbindlicher Fachstand
