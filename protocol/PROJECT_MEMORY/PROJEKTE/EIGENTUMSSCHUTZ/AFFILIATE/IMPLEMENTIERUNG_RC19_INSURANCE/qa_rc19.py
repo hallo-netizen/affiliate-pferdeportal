@@ -14,7 +14,7 @@ with ZipFile(p) as z:
     assert 'core:world:insurance' not in amazon
     assert 'Feuerfeste Dokumententasche Versicherungsunterlagen' not in amazon
     assert 'function hb_insurance_campaign_allowed' in source
-    assert 'if ($hb_insurance_scope === \'insurance\') { return \'\'; }' in source
+    assert 'if ($hb_insurance_scope === \'insurance\') { return $this->hb_insurance_house_banner' in source
     assert source.count('hb_insurance_original_wide_allowed(')>=2
     assert 'hb_insurance_campaign_allowed($campaign,$context' in source
 def extract(name):
@@ -31,7 +31,7 @@ def extract(name):
                 return source[start:i+1].replace('private function','public function',1)
     raise AssertionError(name)
 methods="\n\n".join(extract(x) for x in [
-    'hb_insurance_scope','hb_insurance_campaign_allowed','hb_insurance_original_wide_allowed'
+    'hb_insurance_scope','hb_insurance_campaign_allowed','hb_insurance_original_wide_allowed','hb_insurance_original_inline_allowed','hb_insurance_house_banner'
 ])
 # Synthetic complete intended hierarchy: 1 R1, 5 R2, 46 R3, 323 WordPress categories.
 nodes={}
@@ -54,6 +54,12 @@ harness=r'''<?php
 function absint($v){return max(0,(int)$v);}
 function sanitize_key($v){return strtolower(preg_replace('/[^a-z0-9_\-]/','',(string)$v));}
 function remove_accents($v){return strtr((string)$v,array('ä'=>'a','ö'=>'o','ü'=>'u','Ä'=>'A','Ö'=>'O','Ü'=>'U','ß'=>'ss'));}
+
+function sanitize_text_field($v){return trim((string)$v);}
+function get_permalink($v){return 'https://hab-und-bewahr.de/verified-page-'.(int)$v.'/';}
+function esc_html($v){return htmlspecialchars((string)$v,ENT_QUOTES,'UTF-8');}
+function esc_attr($v){return esc_html($v);}
+function esc_url($v){return esc_html($v);}
 class PPAR_HB_Integration {
   public static $nodes=array();
   public static function verified_nodes(){return self::$nodes;}
@@ -71,15 +77,20 @@ foreach(PPAR_HB_Integration::$nodes as $k=>$n){
   $type=$n['type']==='category'?'category_archive':'page';
   $ctx=array('post_type'=>$type,'post_id'=>$type==='page'?$n['wp_id']:0,'term_ids'=>$type==='category_archive'?array($n['wp_id']):array(),'hb_verified_node_id'=>$type==='page'?$k:'');
   expect($a->hb_insurance_scope($ctx)==='insurance','scope '.$k);$checks++;
+  $placement=$type==='page'?'hub_after_cards':'product_after_category_tiles';
+  expect(strpos($a->hb_insurance_house_banner($ctx,$placement),'ppar-hb-insurance-own')!==false,'house card '.$k);$checks++;
   if($type==='category_archive'){
     $ctx['post_type']='post';$ctx['post_id']=88000+$n['wp_id'];
     expect($a->hb_insurance_scope($ctx)==='insurance','post scope '.$k);$checks++;
+    expect(strpos($a->hb_insurance_house_banner($ctx,'post_inline_banner'),'ppar-hb-insurance-own')!==false,'post house '.$k);$checks++;
   }
 }
 $outside=array('post_type'=>'category_archive','term_ids'=>array(7001));
 expect($a->hb_insurance_scope($outside)==='other','outside scope');$checks++;
+expect($a->hb_insurance_house_banner($outside,'hub_after_cards')==='','outside no house');$checks++;
 $mixed=array('post_type'=>'post','post_id'=>88000,'term_ids'=>array(3000,7001));
 expect($a->hb_insurance_scope($mixed)==='mixed','mixed scope');$checks++;
+expect($a->hb_insurance_house_banner($mixed,'post_inline_banner')==='','mixed no house');$checks++;
 $insurance=array('post_type'=>'page','post_id'=>2000,'hb_verified_node_id'=>'ins:r3:0','slugs'=>array('hausratversicherung'));
 $yes=array('network'=>'direct','creative_type'=>'banner','name'=>'Tarifcheck Hausratversicherung','page_id'=>2000,'assignment_mode'=>'page_tree');
 expect($a->hb_insurance_campaign_allowed($yes,$insurance,'hub_after_cards'),'valid house insured');$checks++;
@@ -104,6 +115,13 @@ $wide['width']=468;$wide['height']=60;
 expect($a->hb_insurance_original_wide_allowed($wide,'hub_after_cards',$insurance),'468x60 accepted');$checks++;
 $wide['width']=300;$wide['height']=250;
 expect(!$a->hb_insurance_original_wide_allowed($wide,'hub_after_cards',$insurance),'300x250 not wide');$checks++;
+
+$small=array('creative_type'=>'banner','render_mode'=>'image_link','image_url'=>'https://approved.example/ad.png','width'=>300,'height'=>250);
+expect($a->hb_insurance_original_inline_allowed($small,'post_inline_banner',$insurance),'300x250 article');$checks++;
+expect(!$a->hb_insurance_original_inline_allowed($small,'post_inline_banner',$outside),'300x250 not other world');$checks++;
+$small['width']=125;$small['height']=125;
+expect($a->hb_insurance_original_inline_allowed($small,'post_inline_banner',$insurance),'125x125 article');$checks++;
+expect(!$a->hb_insurance_original_inline_allowed($small,'hub_after_cards',$insurance),'125x125 not full width');$checks++;
 echo "HAB_INSURANCE_RC19_TESTS_PASS ".$checks." / 1 R1 + 5 R2 + 46 R3 + 323 leaves + article + countercases\n";
 '''.replace('METHODS_HERE',methods).replace('JSON_HERE',fixture.replace("\\","\\\\").replace("'","\\'"))
 with tempfile.NamedTemporaryFile('w',suffix='.php',encoding='utf8') as tmp:
