@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-11",
+  "artifact": "source patch only, no new plugin installation",
+  "qa15_zip_sha256": "c453831225c0c7d005c66140622abb8e636b9884aa796b363a0e2456ce525b1a",
+  "changed_file": "includes/trait-ppar-ebay-run.php",
+  "before": "running=0, paused=1, failed=1, idle=0; availability tick calls under external heartbeat",
+  "after": "running=1, paused=1, failed=1, idle=1; stale recovery/disabled=0",
+  "before_failed": 3,
+  "before_total": 7,
+  "after_failed": 0,
+  "after_total": 7,
+  "existing_regressions_pass": 17,
+  "existing_regressions_total": 17,
+  "real_wp": false,
+  "live_ebay_api": false,
+  "front_end_cards_real_time_verified": false,
+  "not_modified": [
+    "existing WordPress database",
+    "QA15 zip",
+    "current/live",
+    "other portals"
+  ]
+}
