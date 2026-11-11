@@ -192,3 +192,35 @@ Tarifcheck bestätigt zusätzlich öffentlich, dass White-Label-Tarifrechner mob
 **Quellnachweis Backend:** aktuelles HAB-004 RC18/CURRENT.zip, `includes/trait-ppar-creative-library.php` und `includes/trait-ppar-tariff-tools.php`, Menü in `affiliate-portal-router.php`; isoliert am 11.11.2026 erneut geprüft. Tarifcheck bietet öffentlich Banner, Direktlinks, Rechner an, aber der **konkrete allgemeine Versicherungsbanner** ist mit den Nutzer-Screenshots noch nicht belegt.
 
 **Status:** Diese Eintrags-/Fallback-Regel ist Konzept und Anweisung. Der Stand **RC19 wird separat entwickelt und geprüft**. Bestehendes offiziell abgelegtes HAB-004 RC18 bleibt bis zur Freigabe unverändert.
+
+
+## 10. RC19-IMPLEMENTIERUNG (überschreibt ältere Leerstand-Regeln) 11.11.2026 – Alle Versicherungs-Bannerplätze belegt
+
+Dieser Abschnitt ersetzt ältere widersprechende Leerstelle-/Fallback-Hinweise der Abschnitte 1–8.
+
+**Umfang:** Hauptseite Versicherungen (R1), fünf R2-Hauptbereiche, alle vorgesehenen 46 R3-Themenseiten, alle 323 vorgesehenen WP-Endkategorien, eindeutig zugeordnete Fachbeiträge sowie sicher erkennbare Versicherungs-Glossareinträge. Keine Änderung des bestehenden Kategoriebaums.
+
+**Belegungsreihenfolge pro Werbeplatz:**
+1. Fachlich EXAKT passendes, freigegebenes Tarifcheck-Versicherungsangebot inklusive Original-Werbemittel und Ziel.
+2. Fachlich EXAKT passendes Angebot von Awin bzw. ADCELL, sofern zugelassen und geprüft.
+3. Tatsächlich zum konkreten Themenkreis PASSENDER Versicherungsvergleich eines übergeordneten Bereichs; niemals Kfz als Ersatz für Boot oder PKV als Ersatz für Pflege.
+4. ECHTER allgemeiner Versicherungsvergleich von Tarifcheck, nur wenn hierfür eine freigegebene Original-Versicherungszielseite, Banner und Partnerlink verfügbar sind. Nicht die pauschale Tarifcheck-Startseite mit Kredit, Strom und Girokonto.
+5. Als letzter verlässlicher Fallback ein **eigener Hab-&-Bewahr-Versicherungs-Themenbanner mit geprüftem internen R1-/R2-Link**. Dieser enthält keine erfundenen Leistungs- oder Provisionsversprechen und ist als „Eigener Themenhinweis“ erkennbar.
+
+**Achtung:** „alle Plätze belegt“ bedeutet die auf den Seiten VORGESEHENEN Bannerpositionen – nicht, dass ehemalige Produktkarten oder doppelte Desktop-/Mobilwerbung zwanghaft mit Reklame vollgestopft werden. Keine Fake-Tarifcheck-Anzeige. Im Versicherungszweig keinerlei Amazon-/eBay-/Idealo-Produkte, Dokumententaschen, Produkt-Demos oder Kreditbanner.
+
+| Webseite | Belegung |
+| --- | --- |
+| R1-Versicherungen | mindestens ein breiter Fachbanner; bei Partnerlücke interner R2-Themenbanner |
+| Fünf R2-Bereiche | mindestens ein breiter Banner passend zum Bereich; bei Lücke interner Bereichshinweis |
+| 46 R3-Themenseiten | jeweilige Versicherung, sonst sachlich passende allgemeine Versicherung, sonst eigener interner Banner |
+| 323 WP-Endkategorien | passende Versicherung im vorhandenen Querplatz, sonst interner Themenbanner |
+| Fachbeiträge | vorhandener Seitenleistenbanner: Original 300×250 oder kleines 125×125 oder interner Themenhinweis, keine zweite automatische Bild-/Produktkarte |
+| Vergleichen | nur auf fachlich richtiger Vergleichsseite vollständiger Original-Tarifrechner nach Datenschutzfreigabe; Direktlink an passenden Ratgebern |
+| Glossar | nur bei sicherer Versicherungs-Zuordnung, dann echter geeigneter Partnerbanner oder interner Themenhinweis; keine thematisch erratene Werbung |
+
+**RC19-Umsetzung:** Das vorhandene Affiliateplugin HAB-004 wird als vollständige Folgeversion 0.1.16-rc19 gebaut. Die zentrale Kategorie-Abstammung wird aus dem bereits aktiven WordPress-Snapshot gelesen; Auswahl, Freigabe, Bannerplatz, erlaubtes Format und das Verbot von Amazon-Fallbacks liegen im bestehenden Plugin. Alle sechs anderen Schutzwelten und das Design RC19 bleiben unangetastet. Keine neuen Tabellen, keine neuen Frontend-HTTP-Suchen. Die geprüften Originalgrößen von Tarifcheck (728×90, 468×60, 300×250, 125×125) behalten ihre Originalproportionen; das 300×250 ist KEIN Quadrat.
+
+**Prüfung:** ausgeführter PHP-Test der tatsächlich gebauten ZIP mit 1 R1, 5 R2, 46 R3, 323 Endkategorien und Fachartikeln, negative Fälle, fremde Welten, Formatregeln und interne Fallback-Banner. Erst nach grünem Test und GitHub-Merge ist die vollständige ZIP offiziell im HAB-Pluginbüro. Echte WordPress-Liveabnahme ist separat erforderlich.
+
+**Offen bis Originaldaten verfügbar:** Die echten Tarifcheck-Banner-Einbettungscodes und Direktlinks (Partnerkonto) sind noch nicht übergeben. Deshalb können hier keine echten Tarifcheck-Provisionen oder 100 % bezahlte Werbeflächen zugesichert werden. Das Plugin sorgt zunächst für sichtbare, interne Themenbanner in jedem unbesetzten Versicherungs-Bannerplatz. Awin und ADCELL bleiben für nachgewiesene Lücken integrierbar. Keine manuellen Änderungen an WP-Beiträgen.
