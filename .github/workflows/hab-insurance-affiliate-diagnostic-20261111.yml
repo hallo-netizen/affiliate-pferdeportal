@@ -36,4 +36,20 @@ jobs:
                           print('MATCH_FILE',label,n,'COUNT',len(matches))
                           for lineno,line in matches[:28]:
                               print('MATCH',label,n,lineno,line[:270])
+              for n,start,end in [
+                  ('includes/trait-ppar-hb-amazon.php',153,320),
+                  ('includes/class-ppar-hab-bewahr-bridge.php',100,260),
+                  ('affiliate-portal-router.php',1098,1205),
+                  ('includes/trait-ppar-output-objects.php',880,955),
+                  ('includes/trait-ppar-output-objects.php',1230,1335),
+                  ('includes/trait-ppar-provider-registry.php',1,155),
+                  ('includes/trait-ppar-tariff-tools.php',1,80),
+                  ('includes/class-ppar-admin-kiss.php',105,180),
+              ]:
+                  full='affiliate-portal-router/'+n
+                  if full not in names:continue
+                  arr=z.read(full).decode('utf8','replace').splitlines()
+                  print('SOURCE_SECTION',n,start,end)
+                  for i in range(start-1,min(len(arr),end)):
+                      print('SOURCE',n,i+1,arr[i][:400])
           PY
