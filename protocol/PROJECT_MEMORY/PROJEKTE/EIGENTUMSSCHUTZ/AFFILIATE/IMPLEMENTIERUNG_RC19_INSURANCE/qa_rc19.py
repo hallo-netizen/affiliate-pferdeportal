@@ -33,8 +33,6 @@ def extract(name):
 methods="\n\n".join(extract(x) for x in [
     'hb_insurance_scope','hb_insurance_campaign_allowed','hb_insurance_original_wide_allowed'
 ])
-methods=methods.replace("        if ($source === 'fallback' || $w < 468 || $h < 60 || $h > 180) { return false; }", "        fwrite(STDERR,'INTERNAL_WIDE '.json_encode(array('w'=>$w,'h'=>$h,'source'=>$source,'ratio'=>$w/$h)).PHP_EOL); if ($source === 'fallback' || $w < 468 || $h < 60 || $h > 180) { return false; }")
-methods=methods.replace('public function hb_insurance_original_wide_allowed($banner, $slot_type, $context) {', '''public function hb_insurance_original_wide_allowed($banner, $slot_type, $context) { fwrite(STDERR,'ENTRY_WIDE '.json_encode(array('scope'=>$this->hb_insurance_scope($context),'slot'=>$this->overview_wide_banner_slot($slot_type),'array'=>is_array($banner),'empty'=>empty($banner['image_url']),'creative'=>sanitize_key((string)($banner['creative_type']??'')),'mode'=>sanitize_key((string)($banner['mode']??'image_link')))).PHP_EOL);''')
 # Synthetic complete intended hierarchy: 1 R1, 5 R2, 46 R3, 323 WordPress categories.
 nodes={}
 root='core:world:insurance'
@@ -100,13 +98,12 @@ expect(!$a->hb_insurance_campaign_allowed($fallback,$insurance,'hub_after_cards'
 expect(!$a->hb_insurance_campaign_allowed($yes,$mixed,'hub_after_cards'),'mixed blocked');$checks++;
 expect($a->hb_insurance_campaign_allowed($yes,$outside,'hub_after_cards'),'outside unchanged');$checks++;
 $wide=array('creative_type'=>'banner','mode'=>'image_link','image_url'=>'https://approved.example/banner.png','width'=>728,'height'=>90);
-echo 'WIDE_DIAG '.json_encode(array('scope'=>$a->hb_insurance_scope($insurance),'wide'=>$a->hb_insurance_original_wide_allowed($wide,$insurance,'hub_after_cards'),'slot'=>$a->overview_wide_banner_slot('hub_after_cards'),'image'=>!empty($wide['image_url']),'creative'=>sanitize_key($wide['creative_type']),'mode'=>sanitize_key($wide['mode']),'dims'=>$a->article_banner_dimensions($wide),'ratio'=>($wide['width']/$wide['height'])))."\n";
-expect($a->hb_insurance_original_wide_allowed($wide,$insurance,'hub_after_cards'),'728x90 accepted in insurance');$checks++;
-expect(!$a->hb_insurance_original_wide_allowed($wide,$outside,'hub_after_cards'),'other world unchanged');$checks++;
+expect($a->hb_insurance_original_wide_allowed($wide,'hub_after_cards',$insurance),'728x90 accepted in insurance');$checks++;
+expect(!$a->hb_insurance_original_wide_allowed($wide,'hub_after_cards',$outside),'other world unchanged');$checks++;
 $wide['width']=468;$wide['height']=60;
-expect($a->hb_insurance_original_wide_allowed($wide,$insurance,'hub_after_cards'),'468x60 accepted');$checks++;
+expect($a->hb_insurance_original_wide_allowed($wide,'hub_after_cards',$insurance),'468x60 accepted');$checks++;
 $wide['width']=300;$wide['height']=250;
-expect(!$a->hb_insurance_original_wide_allowed($wide,$insurance,'hub_after_cards'),'300x250 not wide');$checks++;
+expect(!$a->hb_insurance_original_wide_allowed($wide,'hub_after_cards',$insurance),'300x250 not wide');$checks++;
 echo "HAB_INSURANCE_RC19_TESTS_PASS ".$checks." / 1 R1 + 5 R2 + 46 R3 + 323 leaves + article + countercases\n";
 '''.replace('METHODS_HERE',methods).replace('JSON_HERE',fixture.replace("\\","\\\\").replace("'","\\'"))
 with tempfile.NamedTemporaryFile('w',suffix='.php',encoding='utf8') as tmp:
