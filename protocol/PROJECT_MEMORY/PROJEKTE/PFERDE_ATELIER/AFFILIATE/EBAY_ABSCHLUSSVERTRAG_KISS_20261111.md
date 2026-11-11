@@ -29,3 +29,15 @@ Ein kanonischer eBay-Worker, gespeicherte Recherche und Kandidaten-Reuse, Mehrfa
 
 ## Nicht mehr tun
 Keine erneute Synonym-/Versicherungs-/Deutschland-Filter-Grundsatzdebatte, keine doppelten Suchcontroller oder Feedbackauswertungen, kein erneuter Start zur Diagnose, keine neue Tabelle, kein Wechsel/Backup-Löschen, kein automatisches Portieren in Hobbydepot oder Hab & Bewahr. Fortschreibung ausschließlich in bestehendem QA-PR #748 und im zentralen Transferregister PR #751. Dieses Dokument ist eine Priorisierung und kein bereits implementierter Leistungsfix.
+
+## Änderung der Priorität am 11.11.2026: FUNKTION ZUERST, SERVERLAST ZULETZT
+
+**Verbindliche Nutzerentscheidung:** Serverlast-/Worker-Taktungs- und Audit-Performance-Umbau wird **ans Ende** verschoben. Bis die Ausspielung wirklich funktioniert, **keine weiteren Performance-Refactorings** und **kein weiterer neuer Such-/Recherchesystem-Umbau**.
+
+1. **Sichtbare Produktausspielung mit vorhandenem Bestand beweisen und wo nötig reparieren.** Bestehende eBay-Quellen, 489 gespeicherte Freigaben aus Screenshot 11:41 und den öffentlich SAFE-Checkpoint nicht verwechseln. Das ursprüngliche Publikations-Gate inkl. Quelle/Creative/Kampagne, Zielseite, sechs Stunden Frische, Aktivstatus und öffentlicher Checkpoint ist die maßgebliche Kette. Die erste echte Prüfung auf WordPress muss **konkret die Verteilung „gespeichert → öffentlich sicher → passende Seite → sichtbar“** liefern. Kein blindes Lockerlassen, kein Löschen, kein Neustart.
+2. **Unabhängige Verfügbarkeit:** Bereits veröffentlichte Angebote regelmäßig anhand desselben getItem-Pfads prüfen. Verkäufer/Marktplatz-/Frische-Regeln unverändert; nachweislich beendete Angebote öffentlich ausblenden, temporäre Abfragefehler nicht als Verkäufe klassifizieren. Pausierte Recherche darf die Prüfung nicht stilllegen.
+3. **Versorgungslücken beenden:** Vorhandene Kandidaten, CSV-Gründe und bewusste Nicht-Waren-/EBAY_DE-Ausschlüsse nutzen; nur tatsächlich unversorgte Warenfamilien begrenzt nachsuchen. Keine 298/298-Pflicht; sachlich offene Lücken mit belastbarem Grund akzeptieren.
+4. **Einmal echter WordPress-Abnahmelauf:** Gleicher Run/Cursor bei Pause/Fortsetzung, echte eBay-Links und eBay-Kacheln auf Kategorie + Beitrag, verifizierte Anzeige und Verfügbarkeitsprüfung; gespeicherte Daten unverändert; PDF/CSV-Audit nachfolgender Laufhistorie abrufbar. Lokale PHP-/Mock-Tests gelten nur als Vortests, nicht als Realnachweis.
+5. **Erst danach:** Backend/Frontend-Ladezeiten, lückenloser Self-Drive und zu aufwendige QA12-Audit-Schreibvorgänge messen und mit einem einzigen KISS-Leistungsfix verschlanken. Leistungsarbeit darf die nachgewiesene Produktausspielung nicht destabilisieren.
+
+**Noch nicht als abgeschlossen ausgeben:** Erstes Ziel sind auf der realen WordPress-Testinstanz nachweislich sichtbare Produkte aus vorhandenen Freigaben. Bei Status 0/298 eines neuen, unvollständigen Laufs niemals Produktverlust behaupten. Kein weiterer Plugin-Download nur aufgrund dieses Plans.
