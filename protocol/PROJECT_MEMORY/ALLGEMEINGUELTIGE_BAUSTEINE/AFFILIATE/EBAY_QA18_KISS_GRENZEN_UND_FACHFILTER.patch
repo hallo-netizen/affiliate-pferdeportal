@@ -1,0 +1,299 @@
+--- a/affiliate-portal-router/assets/ebay-portal-catalog-v2.json
++++ b/affiliate-portal-router/assets/ebay-portal-catalog-v2.json
+@@ -24122,7 +24122,13 @@
+         "ausruestung"
+       ],
+       "private_bucket_slug": "sattel-zaumzeug",
+-      "ebay_search_term": "Dressursattel Pferd"
++      "ebay_search_term": "Dressursattel Pferd",
++      "ebay_product_aliases": [
++        "Dressursattel",
++        "Reitsattel",
++        "Westernsattel",
++        "Western Sattel"
++      ]
+     },
+     {
+       "id": "concept-putzboxen-furs-turnier",
+@@ -24704,7 +24710,11 @@
+       "main_slugs": [
+         "weide"
+       ],
+-      "private_bucket_slug": "stall-weide-haltung"
++      "private_bucket_slug": "stall-weide-haltung",
++      "ebay_product_aliases": [
++        "Reitplatzplaner",
++        "Reitbahnplaner"
++      ]
+     },
+     {
+       "id": "concept-reitplatzspiegel",
+@@ -29534,7 +29544,22 @@
+     "concept-trainingsplane-problempferde",
+     "concept-turniercheckliste",
+     "concept-weidecheckliste",
+-    "concept-turnierplaner"
++    "concept-turnierplaner",
++    "concept-beregnung-bewasserung",
++    "concept-hallenklima-beluftung",
++    "concept-heulagerung",
++    "concept-mistlagerung",
++    "concept-offenstallbau",
++    "concept-paddockbau",
++    "concept-reithallenbau",
++    "concept-reitplatzbau",
++    "concept-satteltransport",
++    "concept-waschplatz-fur-pferde",
++    "concept-jungpferde-ausrustung",
++    "concept-stressarme-ausrustung",
++    "concept-trainingszubehor",
++    "concept-weidepflegegerate",
++    "concept-gewohnungssachen"
+   ],
+   "ebay_non_goods_hub_concept_ids": [
+     "hub-concept-wissen-apps-und-software",
+--- a/affiliate-portal-router/includes/trait-ppar-ebay.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay.php
+@@ -365,12 +365,18 @@
+         return $found;
+     }
+ 
+-    private function ebay_business_hard_negative_present($sections, $marker) {
++    private function ebay_business_hard_negative_present($sections, $marker, $verified_primary_product = false) {
+         $sections = is_array($sections) ? $sections : array();
+         $direct = trim((string)($sections['title']??'').' '.(string)($sections['category']??'').' '.(string)($sections['aspects']??''));
+         if ($this->ebay_topic_negative_present($direct,$marker)) { return true; }
+         $description = (string)($sections['description']??'');
+         if (!$this->ebay_topic_negative_present($description,$marker)) { return false; }
++        // Independent real product identity wins over unrelated compatibility
++        // keywords found only in free-text descriptions. Toy/decorative/product-
++        // form exclusions and every title/category/aspect negative remain hard.
++        if ($verified_primary_product && in_array($this->ebay_topic_text($marker), array(
++            'hund','hunde','katze','katzen','kaninchen','nager','vogel','aquarium',
++            'motorrad','motocross','fahrrad'), true)) { return false; }
+         return !$this->ebay_business_negative_description_is_negated($description,$marker);
+     }
+ 
+@@ -1325,6 +1331,22 @@
+         return $this->ebay_business_strict_token_present($primary, $needle);
+     }
+ 
++    /** Catalog-defined, exact names for the SAME sold product, never free-text guessing. */
++    private function ebay_business_product_alias_in_primary($concept, $primary) {
++        $primary = $this->ebay_topic_text((string)$primary);
++        if ($primary === '' || !is_array($concept)) { return false; }
++        // When a catalog explicitly names an exact eBay search product phrase,
++        // that very phrase in the actual sold product's primary title is proof.
++        $curated_query = $this->ebay_topic_text((string)($concept['ebay_search_term'] ?? ''));
++        if ($curated_query !== '' && strpos(' ' . $primary . ' ', ' ' . $curated_query . ' ') !== false) { return true; }
++        foreach ((array)($concept['ebay_product_aliases'] ?? array()) as $alias) {
++            $alias = $this->ebay_topic_text((string)$alias);
++            if ($alias !== '' && (strpos(' ' . $primary . ' ', ' ' . $alias . ' ') !== false
++                || $this->ebay_business_strict_token_present($primary, $alias))) { return true; }
++        }
++        return false;
++    }
++
+     /** Resolve the exact catalog concept carried by a V6.17+ BUSINESS profile. */
+     private function ebay_business_expected_concept_from_rule($catalog, $rule) {
+         $rule = is_array($rule) ? $rule : array();
+@@ -1404,8 +1426,9 @@
+                 }
+             }
+         }
++        $alias_primary = !$accessory_primary && $this->ebay_business_product_alias_in_primary($concept, $primary);
+         $ok = false;
+-        if ($primary_hits >= $required) {
++        if ($primary_hits >= $required || $alias_primary) {
+             $ok = true;
+         } elseif (!$accessory_primary && $product_type_hits >= $required) {
+             // Exact eBay Productart is a direct structured product identity. The
+@@ -1419,7 +1442,7 @@
+         return array(
+             'ok'=>$ok,'tokens'=>$tokens,'required'=>$required,'primary_hits'=>$primary_hits,
+             'aspect_hits'=>$aspect_hits,'product_type_hits'=>$product_type_hits,'category_hits'=>$category_hits,'direct_count'=>$direct_count,
+-            'accessory_primary'=>$accessory_primary,
++            'accessory_primary'=>$accessory_primary,'alias_primary'=>$alias_primary,
+         );
+     }
+ 
+@@ -1441,19 +1464,21 @@
+         if ($normalized === '') { return new WP_Error('ebay_topic_evidence_missing', 'eBay-Angebot enthaelt keine verwertbare Fachinformation.'); }
+         $sections = $this->ebay_business_evidence_sections($item);
+         if ($sections['title'] === '') { return new WP_Error('ebay_business_title_missing', 'BUSINESS-Angebot besitzt keinen verwertbaren Produkttitel.'); }
+-        // Hard negatives are evaluated before any exact-profile recovery. A
+-        // Pferd-scoped search must never whitelist toy/book/foreign-domain items.
+-        foreach ((array) ($catalog['hard_negative_markers'] ?? array()) as $marker) {
+-            if ($this->ebay_business_hard_negative_present($sections, $marker)) {
+-                return new WP_Error('ebay_portal_topic_negative', 'Fachfremdes Ausschlusssignal im eBay-Angebot: ' . sanitize_text_field((string) $marker));
+-            }
+-        }
+-
+         $expected = $this->ebay_business_expected_concept_from_rule($catalog, $rule);
+         $expected_concept = is_array($expected['concept'] ?? null) ? $expected['concept'] : array();
+         $expected_kind = sanitize_key((string)($expected['kind'] ?? ''));
+         $expected_evidence = $expected_concept ? $this->ebay_business_expected_concept_evidence($expected_concept, $sections) : array('ok'=>false);
+         $exact_profile_scope = $expected_concept && $this->ebay_business_exact_profile_horse_scope($rule);
++        // Descriptions describe other uses, they do not redefine a product whose
++        // real sold type is independently proved by the primary title.
++        $verified_primary_product = $exact_profile_scope && !empty($expected_evidence['ok'])
++            && empty($expected_evidence['accessory_primary'])
++            && (!empty($expected_evidence['primary_hits']) || !empty($expected_evidence['alias_primary']));
++        foreach ((array) ($catalog['hard_negative_markers'] ?? array()) as $marker) {
++            if ($this->ebay_business_hard_negative_present($sections, $marker, $verified_primary_product)) {
++                return new WP_Error('ebay_portal_topic_negative', 'Fachfremdes Ausschlusssignal im eBay-Angebot: ' . sanitize_text_field((string) $marker));
++            }
++        }
+ 
+         $strong_horse_hits = array();
+         foreach ((array) ($catalog['strong_horse_markers'] ?? array()) as $marker) {
+@@ -1529,6 +1554,13 @@
+                 && sanitize_key((string)($concept['id'] ?? '')) === sanitize_key((string)($expected_concept['id'] ?? ''))
+                 && $exact_profile_scope;
+             $expected_direct_verified = $is_expected_candidate && !empty($expected_evidence['ok']);
++            if ($expected_direct_verified && !empty($expected_evidence['alias_primary'])) {
++                // The same verified catalog alias must count as the product noun
++                // for scoring; otherwise confidence wrongly remains below 80.
++                $title_hits = max(1, $title_hits);
++                $primary_title_hits = max(1, $primary_title_hits);
++                $covered[$tokens[0]] = true;
++            }
+             // Generic/fallback profiles retain full-concept coverage. An exact
+             // profile may use the independently verified product-core evidence
+             // above (e.g. "Heunetze fuer Anhaenger" -> real title "Heunetze").
+@@ -1646,10 +1678,6 @@
+             'business_candidate_pool_per_concept' => 10,
+             'business_reserve_per_concept' => 2,
+             'business_visible_per_target' => 3,
+-            'business_min_feedback_percentage' => 99.0,
+-            'business_min_feedback_score' => 100,
+-            'business_preferred_feedback_percentage' => 99.5,
+-            'business_preferred_feedback_score' => 500,
+             'business_max_same_seller_per_block' => 1,
+             'rules' => $this->ebay_catalog_rules(),
+             'catalog_verified_sha256' => '',
+@@ -1737,12 +1765,6 @@
+         $out['business_candidate_pool_per_concept'] = max(5, min(20, absint($settings['business_candidate_pool_per_concept'] ?? 10)));
+         $out['business_reserve_per_concept'] = max(0, min(5, absint($settings['business_reserve_per_concept'] ?? 2)));
+         $out['business_visible_per_target'] = 3;
+-        $min_feedback_pct = is_numeric($settings['business_min_feedback_percentage'] ?? null) ? (float) $settings['business_min_feedback_percentage'] : 99.0;
+-        $preferred_feedback_pct = is_numeric($settings['business_preferred_feedback_percentage'] ?? null) ? (float) $settings['business_preferred_feedback_percentage'] : 99.5;
+-        $out['business_min_feedback_percentage'] = max(95.0, min(100.0, round($min_feedback_pct, 2)));
+-        $out['business_min_feedback_score'] = max(1, min(10000000, absint($settings['business_min_feedback_score'] ?? 100)));
+-        $out['business_preferred_feedback_percentage'] = max($out['business_min_feedback_percentage'], min(100.0, round($preferred_feedback_pct, 2)));
+-        $out['business_preferred_feedback_score'] = max($out['business_min_feedback_score'], min(10000000, absint($settings['business_preferred_feedback_score'] ?? 500)));
+         $out['business_max_same_seller_per_block'] = 1;
+         $out['rules'] = $this->ebay_catalog_rules();
+         $verified_hash = strtolower(sanitize_text_field((string) ($settings['catalog_verified_sha256'] ?? '')));
+@@ -3367,19 +3389,6 @@
+         if ($seller_username === '') { return new WP_Error('ebay_seller_username_missing', 'eBay-Verkäufername fehlt.'); }
+         $seller_feedback_percentage = is_numeric($item['seller']['feedbackPercentage'] ?? null) ? (float) $item['seller']['feedbackPercentage'] : -1.0;
+         $seller_feedback_score = is_numeric($item['seller']['feedbackScore'] ?? null) ? absint($item['seller']['feedbackScore']) : -1;
+-        if ($seller_type === 'BUSINESS') {
+-            $min_pct = (float) ($settings['business_min_feedback_percentage'] ?? 99.0);
+-            $min_score = absint($settings['business_min_feedback_score'] ?? 100);
+-            if ($seller_feedback_percentage < 0 || $seller_feedback_score < 0) {
+-                return new WP_Error('ebay_business_seller_quality_missing', 'BUSINESS-Verkäuferbewertung fehlt; automatische Ausgabe bleibt fail-closed.');
+-            }
+-            if ($seller_feedback_percentage + 0.0001 < $min_pct) {
+-                return new WP_Error('ebay_business_seller_feedback_low', 'BUSINESS-Verkäufer liegt unter der Mindestquote von ' . number_format($min_pct, 2, ',', '.') . ' % positiven Bewertungen.');
+-            }
+-            if ($seller_feedback_score < $min_score) {
+-                return new WP_Error('ebay_business_seller_feedback_count_low', 'BUSINESS-Verkäufer hat weniger als ' . absint($min_score) . ' Bewertungen.');
+-            }
+-        }
+         $shipping_value = '';
+         if (!empty($item['shippingOptions'][0]['shippingCost']['value'])) {
+             $shipping_value = sanitize_text_field((string) $item['shippingOptions'][0]['shippingCost']['value']);
+@@ -3598,6 +3607,12 @@
+                 || $this->ebay_business_strict_token_present($sections['aspects'], $token)
+                 || $this->ebay_business_strict_token_present($sections['product_type'], $token)) { $structured_hits++; }
+         }
++        // The same catalog alias approved by the classifier is valid evidence
++        // here as well; do not reject it in a second contradictory check.
++        if ($this->ebay_business_product_alias_in_primary($concept, $first_text)) {
++            $head_hits = max(1, $head_hits);
++            $all_title_hits = max(1, $all_title_hits);
++        }
+         // One distinctive product token in the title head is sufficient after
+         // the strict concept classifier has already passed. Structured eBay facts
+         // are the independent corroboration when the concept is mentioned only
+@@ -3620,19 +3635,6 @@
+             'head_hits'=>$head_hits,'structured_hits'=>$structured_hits,'title_hits'=>$all_title_hits,'required'=>$required,
+             'concept_id'=>$concept_id,
+         );
+-    }
+-
+-    private function ebay_business_seller_quality_score($item, $settings) {
+-        $pct = (float) ($item['seller_feedback_percentage'] ?? -1);
+-        $count = (int) ($item['seller_feedback_score'] ?? -1);
+-        $min_pct = (float) ($settings['business_min_feedback_percentage'] ?? 99.0);
+-        $min_count = absint($settings['business_min_feedback_score'] ?? 100);
+-        if ($pct < $min_pct || $count < $min_count) { return 0; }
+-        $preferred_pct = (float) ($settings['business_preferred_feedback_percentage'] ?? 99.5);
+-        $preferred_count = absint($settings['business_preferred_feedback_score'] ?? 500);
+-        $pct_score = $pct >= 99.9 ? 100 : ($pct >= $preferred_pct ? 90 : 72 + (int) round((($pct - $min_pct) / max(0.01, $preferred_pct - $min_pct)) * 18));
+-        $volume_score = $count >= 5000 ? 100 : ($count >= 1000 ? 94 : ($count >= $preferred_count ? 88 : 70 + (int) round((($count - $min_count) / max(1, $preferred_count - $min_count)) * 18)));
+-        return max(0, min(100, (int) round(($pct_score * 0.65) + ($volume_score * 0.35))));
+     }
+ 
+     private function ebay_business_offer_quality_score($item) {
+@@ -3674,20 +3676,18 @@
+         if (!empty($curation['learned_block'])) { return new WP_Error('ebay_business_learned_pattern_block', $curation['learned_reason'] !== '' ? $curation['learned_reason'] : 'Gelernte Fehlproduktklasse wurde erkannt.'); }
+         $relevance = $this->ebay_business_relevance_report($item, $classification, $rule);
+         if (is_wp_error($relevance)) { return $relevance; }
+-        $seller_score = $this->ebay_business_seller_quality_score($item, $settings);
+-        if ($seller_score <= 0) { return new WP_Error('ebay_business_seller_quality_failed', 'Verkäuferqualität erfüllt die automatische Mindestfreigabe nicht.'); }
+         $offer_score = $this->ebay_business_offer_quality_score($item);
+         $price_score = $this->ebay_business_price_plausibility_score((float) ($item['price_value'] ?? 0), (float) $median_price);
+         $brand_bonus = !empty($curation['brand_preferred']) ? 5 : 0;
+-        $overall = (int) round(($relevance['score'] * 0.50) + ($seller_score * 0.25) + ($offer_score * 0.15) + ($price_score * 0.10));
++        $overall = (int) round(($relevance['score'] * 0.70) + ($offer_score * 0.20) + ($price_score * 0.10));
+         $overall = max(0, min(100, $overall + $brand_bonus));
+         return array(
+-            'overall'=>$overall,'relevance'=>absint($relevance['score']),'seller'=>$seller_score,'offer'=>$offer_score,'price'=>$price_score,
++            'overall'=>$overall,'relevance'=>absint($relevance['score']),'seller'=>0,'offer'=>$offer_score,'price'=>$price_score,
+             'brand_bonus'=>$brand_bonus,'pinned'=>!empty($curation['pinned']),'brand_preferred'=>!empty($curation['brand_preferred']),
+             'seller_feedback_percentage'=>(float) ($item['seller_feedback_percentage'] ?? 0),'seller_feedback_score'=>absint($item['seller_feedback_score'] ?? 0),
+             'seller_username'=>sanitize_text_field((string) ($item['seller_username'] ?? '')),'brand'=>sanitize_text_field((string) ($item['brand'] ?? '')),
+             'concept_id'=>sanitize_key((string) ($classification['product_concept_id'] ?? '')),
+-            'reason'=>'Relevanz ' . absint($relevance['score']) . ' · Verkäufer ' . absint($seller_score) . ' · Angebot ' . absint($offer_score) . ' · Preis ' . absint($price_score) . (!empty($curation['pinned']) ? ' · angepinnt' : '') . (!empty($curation['brand_preferred']) ? ' · bevorzugte Marke' : ''),
++            'reason'=>'Relevanz ' . absint($relevance['score']) . ' · Angebot ' . absint($offer_score) . ' · Preis ' . absint($price_score) . (!empty($curation['pinned']) ? ' · angepinnt' : '') . (!empty($curation['brand_preferred']) ? ' · bevorzugte Marke' : ''),
+         );
+     }
+ 
+@@ -10925,7 +10925,6 @@
+                         <tr><th>Bestandschecks je Lauf</th><td><input class="small-text" type="number" min="1200" max="2000" name="ppar_ebay[inventory_refresh_max_per_run]" value="<?php echo absint($settings['inventory_refresh_max_per_run']); ?>"><p class="description">Automatisch mindestens 1.200 Checks; der Bestandsabgleich läuft stündlich, Discovery weiterhin alle drei Stunden. Keine Änderung erforderlich.</p></td></tr>
+                         <tr><th>Gewerbliche Verkäufer</th><td><label><input type="checkbox" name="ppar_ebay[business_enabled]" value="1" <?php checked(!empty($settings['business_enabled'])); ?>> BUSINESS als Produkt-Creatives übernehmen</label></td></tr>
+                         <tr><th>BUSINESS-Auswahl</th><td><input class="small-text" type="number" min="30" max="1000" name="ppar_ebay[business_active_cap]" value="<?php echo absint($settings['business_active_cap']); ?>"> aktiv gesamt · <strong>max. 3 je passender Seite</strong><br><input class="small-text" type="number" min="5" max="20" name="ppar_ebay[business_candidate_pool_per_concept]" value="<?php echo absint($settings['business_candidate_pool_per_concept']); ?>"> Kandidaten je Produktkonzept · <input class="small-text" type="number" min="0" max="5" name="ppar_ebay[business_reserve_per_concept]" value="<?php echo absint($settings['business_reserve_per_concept']); ?>"> Reserven<p class="description">Harte Sicherheitsgrenze: 1000 aktive BUSINESS-Produkte portalweit; durch max. 3 je Produktkonzept liegt der aktuelle Katalog rechnerisch bei höchstens 933. Top 10 je Produktkonzept, 2 interne Nachrücker. Verkäuferdiversität wird bevorzugt; freie Plätze dürfen mit weiteren unterschiedlichen qualifizierten Angeboten desselben Verkäufers gefüllt werden.</p></td></tr>
+-                        <tr><th>Verkäuferqualität</th><td>Minimum <input class="small-text" type="number" step="0.1" min="95" max="100" name="ppar_ebay[business_min_feedback_percentage]" value="<?php echo esc_attr((string)$settings['business_min_feedback_percentage']); ?>"> % positiv und <input class="small-text" type="number" min="1" name="ppar_ebay[business_min_feedback_score]" value="<?php echo absint($settings['business_min_feedback_score']); ?>"> Bewertungen. Bevorzugt ab <input class="small-text" type="number" step="0.1" min="95" max="100" name="ppar_ebay[business_preferred_feedback_percentage]" value="<?php echo esc_attr((string)$settings['business_preferred_feedback_percentage']); ?>"> % / <input class="small-text" type="number" min="1" name="ppar_ebay[business_preferred_feedback_score]" value="<?php echo absint($settings['business_preferred_feedback_score']); ?>"> Bewertungen.</td></tr>
+                         <tr><th>Vertragsbestätigung</th><td><label><input type="checkbox" name="ppar_ebay[api_terms_confirmed]" value="1" <?php checked(!empty($settings['api_terms_confirmed'])); ?>> Aktuelle eBay-API-, Buy-API- und EPN-Verträge sind akzeptiert und das Portal ist als Anwendung/Media Property angegeben.</label></td></tr>
+                         <tr><th>Datenschutz und Kennzeichnung</th><td><label><input type="checkbox" name="ppar_ebay[privacy_policy_confirmed]" value="1" <?php checked(!empty($settings['privacy_policy_confirmed'])); ?>> Datenschutzerklärung, Affiliate-Kennzeichnung und Löschpflichten sind umgesetzt.</label></td></tr>
+                         <tr><th>Aktualitätsgrenze</th><td><strong>6 Stunden</strong><input type="hidden" name="ppar_ebay[stale_hours]" value="6"><p class="description">Fest erzwungen: öffentlich angezeigte eBay-Angebotsdaten dürfen höchstens sechs Stunden alt sein. Danach wird nur die öffentliche Ausgabe fail-closed ausgeblendet; der HivePress-Status bleibt unverändert. Erst ein bestätigtes eBay-Endsignal deaktiviert das Listing.</p></td></tr>
+--- a/affiliate-portal-router/pferdeportal-affiliate-router.php
++++ b/affiliate-portal-router/pferdeportal-affiliate-router.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
+  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
+- * Version: 6.72.327
++ * Version: 6.72.328
+  * Author: OpenAI
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -8543,7 +8543,7 @@
+                     $brand=sanitize_text_field((string)($raw['brand']??'')); if($brand===''){foreach((array)($raw['localizedAspects']??array()) as $asp){if(!is_array($asp))continue;$n=strtolower((string)($asp['name']??''));if(in_array($n,array('marke','brand','hersteller','manufacturer'),true)){$brand=sanitize_text_field((string)($asp['value']??''));break;}}}
+                 ?><tr>
+                     <td style="min-width:260px"><?php if(!empty($candidate['image_url'])):?><img src="<?php echo esc_url($candidate['image_url']); ?>" alt="" style="width:64px;height:64px;object-fit:contain;background:#fff;border:1px solid #ddd;float:left;margin-right:9px"><?php endif; ?><strong><?php echo esc_html($candidate['title']); ?></strong><br><small><?php echo esc_html($candidate['item_id']); ?> · <?php echo esc_html($candidate['price_value'].' '.$candidate['currency']); ?></small></td>
+-                    <td><strong><?php echo absint($q['overall']??0); ?>/100</strong><br><small>Rel <?php echo absint($q['relevance']??0); ?> · Verk <?php echo absint($q['seller']??0); ?> · Ang <?php echo absint($q['offer']??0); ?> · Preis <?php echo absint($q['price']??0); ?></small><br><small><?php echo esc_html((string)($q['reason']??'')); ?></small></td>
++                    <td><strong><?php echo absint($q['overall']??0); ?>/100</strong><br><small>Rel <?php echo absint($q['relevance']??0); ?> · Ang <?php echo absint($q['offer']??0); ?> · Preis <?php echo absint($q['price']??0); ?></small><br><small><?php echo esc_html((string)($q['reason']??'')); ?></small></td>
+                     <td><?php echo esc_html($seller); ?><br><small><?php echo esc_html(number_format((float)($q['seller_feedback_percentage']??0),1,',','.')); ?> % · <?php echo absint($q['seller_feedback_score']??0); ?> Bewertungen</small></td>
+                     <td><?php echo $brand!==''?esc_html($brand):'—'; ?></td>
+                     <td><strong><?php echo esc_html((string)($sel['role']??'candidate')); ?></strong><?php if(!empty($sel['rank'])):?><br>Rang <?php echo absint($sel['rank']); ?><?php endif; ?></td>
+--- a/affiliate-portal-router/readme.txt
++++ b/affiliate-portal-router/readme.txt
+@@ -1,3 +1,4 @@
++V6.72.328 NUR TEST: 15 generische Themen/Bauvorhaben bleiben Portalseiten, sind aber keine separaten eBay-Warenpflichtgruppen (283 statt 298). Seller-Feedback-Grenzwerte und Feedback-Ranking entfernt; BUSINESS-Verkäuferkennung und manuelle Blocklisten bleiben. Exakte fachliche Produktnamen (Dressur-/Reit-/Westernsattel; Reitplatz-/Reitbahnplaner) werden einheitlich bei Klassifikation UND Eignung anerkannt. Bei nachgewiesener verkaufter Produktart führen fremde Verwendungswörter ausschließlich im Beschreibungstext nicht mehr zur Ablehnung; Spielzeug, Dekor, falscher Produkttyp in Titel/Kategorie, EBAY_DE, Preis/Bild/Link, Aktualität und SAFE-Checkpoint bleiben geschützt. Nicht im Live-WordPress getestet, keine Produktionsfreigabe.
+ V6.72.327 KISS GESAMTTRENNUNG NUR TEST (11.11.2026): Recherche/kanonischer Worker und öffentliche Verfügbarkeitsprüfung verwenden unveränderte getrennte Speicherstände. Ein angenommener externer Heartbeat führt höchstens EIN aktives Remote-Arbeitspaket aus: Wenn Availability echte Produkte bearbeitet oder schon läuft, startet er in diesem Aufruf KEIN Recherche-/Refresh-Paket. Ist Availability nicht fällig oder ohne Arbeit, kann der bestehende kanonische Lauf normal weitergehen. Verfügbarkeit läuft auch bei pausierter, fehlgeschlagener oder abgeschlossener Recherche; keine neue Queue, Tabelle, eBay-Suche, Cron-Engine oder Publikationsregel. Alle QA15-Korrekturen erhalten. Kein WordPress-/MariaDB-/eBay-Livetest, NICHT INSTALLIEREN ohne isolierte Abnahme.
+ V6.72.326 QA14 KISS - Gebündelte Ausspielungsreparatur: sichere Teilfreigabe, fortsetzbare Beitrags-Produktaktualisierung, korrekt bestätigte Nachrücker nach Ausverkauf. Früher: nur sicher bestätigte Angebote werden zum bestehenden Checkpoint ergänzt; keine neue Suche, keine Datenlöschung, eBay Deutschland und 6-Stunden-Regel unverändert. QA12 Admin und Protokoll bleiben enthalten. NUR TEST, noch kein echter WordPress-Endtest.
+ V6.72.322 QA11 NUR TEST (11.11.2026): QA10 Berichts-/Backend-Verschlankung plus korrigierte Schlusspruefung: Einzelne nicht bestaetigbare eBay-Quellen stoppen den gesamten Lauf nicht; die anderen Kandidaten werden weiter kontrolliert, keine unbelegte Veroeffentlichung, letzter guter Checkpoint bleibt geschuetzt. Bei exakt diesem alten Abbruch denselben Lauf mit unveraendertem Cursor fortsetzen statt erneut alle Produkte zu recherchieren. Backend-AJAX ist nur lesend und startet keinen Worker. Kein Live-End-to-End-Beweis.
