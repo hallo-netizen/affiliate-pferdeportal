@@ -76,3 +76,80 @@ Offizielle Anbieterquellen:
 - Awin-Tarifcheck-Programm (separate Vermittlungsstrecke): https://ui.awin.com/merchant-profile/11202
 
 **Verbindlicher nächster Arbeitsschritt nach diesem Konzept:** HAB-004-Update mit vollständig durchgesetztem Versicherungs-Ausschluss und sauberen Versicherungsziel-Filtern bauen und offline testen; danach erst Tarifcheck-Werbemittel zentral aktivieren. Diese Konzeptdatei verändert die CURRENT.zip ausdrücklich nicht.
+
+
+## 8. Ergänzung 11.11.2026 – Hausrat: Werbemittel und konkrete Darstellung (Nutzer-Screenshots 11:43–11:44)
+
+### Nachgewiesene Tarifcheck-Werbemittel im angemeldeten Nutzerkonto
+
+Im Anbieter-Menü **Sachversicherungen → Hausrat** sind drei **unterschiedliche Werbearten** zugänglich:
+
+1. **Tarifrechner / Formulare:** vollständiger Hausrat-Rechner mit Eingaben für persönlichen Versicherungsbedarf und Vergleich; Screenshot zeigt Backend-Optionen „Verhalten auf Mobilgeräten: Mobilrechner einbinden“, „Scrolling-Verhalten: Kein Scrolling“ sowie Vorschau mit mehrstufigen personenbezogenen Formfeldern. Die konkrete originale Einbettungsdatei, Datenschutzbedingungen und Erfolgstracking werden vor Verwendung geprüft; kein aus dem Screenshot erfundener HTML-/JavaScript-Code.
+2. **Direktlinks:** separater Menüpunkt mit zum Vergleich führenden Partnerlinks. Exakte registrierte Ziel-URL/Tracking-ID im bestehenden WordPress-Backend speichern, **keine Partner-ID oder persönlichen URLs in GitHub protokollieren**. Zielseite und provisionsfähige Weiterleitung real testen.
+3. **Banner:** tatsächlich angebotene Maße **120×60, 120×600, 125×125, 160×600, 234×60, 300×250, 468×60 und 728×90 px**. Nur vorhandene Originalgrafiken verwenden; keine selbst angenommene Variante 300×300. Ein 300×250-Banner ist **kein Quadrat**. Nicht verzerren oder 125×125 auf 300×300 hochziehen.
+
+Tarifcheck bestätigt zusätzlich öffentlich, dass White-Label-Tarifrechner mobilgeeignet und ggf. gestaltbar sind, als eigene Landingbereiche eingebunden werden können und es auch Kurzrechner für Content gibt: https://www.tarifcheck-partnerprogramm.de/werbemoeglichkeiten/ . **Aus dem Nutzer-Screenshot folgt nicht, dass für Hausrat ein eigener Kurzrechner bereitsteht.**
+
+### Darstellung auf der Website – verbindliche erste Belegung für Hausrat
+
+| Hab-&-Bewahr-Ort | Werbeart | Platzierung und Verhalten | Warum |
+| --- | --- | --- | --- |
+| Versicherungen (R1, Hauptwelt) | **Keine isolierte Hausratkampagne** | Übersicht der fünf Versicherungsbereiche mit neutralen, echten Fachlinks; kein aufgedrängtes Hausratbanner | Sonst werden andere Versicherungssparten thematisch falsch beworben |
+| Hausrat & Gebäude (R2) | Fachliche Links/Teaser **Hausrat vergleichen** und **Wohngebäude vergleichen** | Als getrennte Ziele an den passenden thematischen Kacheln, nicht ein einheitlicher Hausratbanner über allen | Bereich enthält mehrere Versicherungsarten |
+| Hausratversicherung (konkretes R3) | **Breites Originalbanner** (Desktop 728×90, alternativ 468×60; mobil 234×60), kombiniert mit schlankem **Direktlink** | Ein Banner in bestehendem Quer-Slot unter fachlicher Einführung oder den vorhandenen Kacheln; Textlink „Hausrat-Tarife vergleichen“ als klare Handlung. Nicht gleichzeitig zwei inhaltlich identische Banner | Gute Sichtbarkeit, Fachtext bleibt dominant |
+| Bestehende Endkategorie „Hausratversicherung vergleichen“ | **Eingebetteter Tarifrechner** | Auf der bestehenden Vergleichs-Kategorieansicht an einem einzigen, klar bezeichneten Rechner-Slot; möglich nach kurzer fachlicher Erklärung und Werbekennzeichnung. Auf Mobil die vom Anbieter vorgesehene Mobilvariante. Wenn es keinen sicher nutzbaren Einbau-/Datenschutzweg gibt: **Direktlink zum echten externen Rechner** statt unzulässiger Einbettung | Rechner nur dort, wo die Besuchenden tatsächlich vergleichen wollen |
+| Hausrat-Beratung, FAQ und thematisch passende Ratgeberbeiträge | **Kontextbezogener Direktlink** + maximal **ein** passendes Banner | In Fachtext nach einem sachlich geeigneten Abschnitt Textlink/Button, nicht vor den notwendigen Hinweisen; Desktop in bestehender Artikel-Seitenleiste bevorzugt Originalbanner 300×250; mobil dasselbe Banner unter geeignetem Textabschnitt (nicht eine zweite Kopie) | Informationen bleiben vorrangig, kein Werbeübergewicht |
+| Kleine Glossar-Slots mit sicher nachgewiesenem Hausratbezug | **Echtes Quadrat 125×125** *nur wenn ausreichend groß lesbar*; sonst eindeutiger Direktlink oder leer | Nicht auf 300×300 strecken; wenn vorhandener Sidebar-Slot zwingend ein großes Quadrat erwartet, keine Grafikzwangsanpassung | Vorhandenes Tarifcheck-Quadrat ist klein |
+| Fremde Versicherungsarten oder sechs Nicht-Versicherungswelten | **Keine Hausrat-Werbung** | Kein Hausrat- oder Versicherungsfallback; bestehende fremde Ausgaben bleiben unverändert | Fachliche Trennung |
+
+**Formatregeln:** 120×600 und 160×600 (lange Hochkantbanner) zunächst NICHT benutzen; 120×60 zu klein für die großen Portalplätze. 468×60/728×90 als responsive Querbanner proportional verkleinern (keine horizontale Überlappung); 234×60 mobil möglich. 300×250 als **Rechteck** in Sidebar, bei schmalen Handys proportional max. containerbreit. 125×125 als kleines echtes Quadrat, wenn optisch lesbar; sonst Direktlink. Originalgröße, Einbaucode, Gewicht und Verfügbarkeit erst nach Öffnen des jeweiligen Angebots im Partnerkonto final abnehmen. Keine ungetesteten Bild-URLs, keine erfundenen Direktlinks.
+
+### UX-Skizzen (konzeptionell, keine schon umgesetzte Frontend-Ansicht)
+
+**Hausratversicherung R3 – Desktop**
+
+```text
+[Überschrift Hausratversicherung]
+[Fachliche Einführung / Themenübersicht]
+                 Anzeige
+[  ORIGINAL TARIFCHECK-QUERBANNER 728×90  ]
+[Hausrat-Tarife vergleichen → geprüfter Direktlink]
+[Weitere Themenkacheln, Beratung, FAQ und Artikel]
+```
+
+**Passender Fachartikel – Desktop**
+
+```text
+[Artikelüberschrift]                 [Anzeige]
+[Ein redaktionelles Beitragsfoto]    [Hausrat 300×250]
+[Fachlicher Text]                     [kein zweites Werbebild]
+[Tarife vergleichen → Direktlink]
+[Weiterer Fachtext]
+```
+
+**Hausratversicherung vergleichen – eigene bestehende Kategorieansicht**
+
+```text
+[Hausratversicherung vergleichen]
+[Kurze fachliche Erklärung]
+[Anzeige / Tarifvergleich von Tarifcheck]
+[Nach explizitem Aufruf: ORIGINAL-TARIFRECHNER, Mobilversion für Smartphones]
+[Weiterführende Fachinhalte, Bedingungen, FAQ]
+```
+
+### Einbau über die vorhandenen Plugins – minimal
+
+- **Affiliate-Zentrale HAB-004** übernimmt alle drei Werbearten über die vorhandene Direktpartner-, Creative-, Slot-, Zuordnungs- und Tarifrechner-/Textlink-Steuerung. Die vorhandene Tarifrechner-Verwaltung ist code-seitig nachgewiesen; **ob** Tarifchecks konkreter Embed-Code ohne weitere Kompatibilitätsanpassung funktioniert, bleibt ein expliziter Pflicht-Test. Kein neues Plugin, keine zusätzliche Tabelle, keine neuen Frontend-HTTP-Aufrufe durch eigene Bannerprüfung.
+- **Design HAB-001** stellt vorhandene breite/seitliche/mobil verlegte Werbeslots bereit; nur wenn die **bestehende** Vorlage auf dem Vergleichs-Kategorien-Slot technisch keinen Tarifrechner einsetzen kann, einen kleinen zentralen Anschluss im bestehenden Designplugin ergänzen, ohne am WordPress-Artikelinhalt oder den Kategorien manuell zu arbeiten.
+- Original-Rechner **nicht auf jeder Beitragsseite** automatisch laden: große Eingabeoberfläche, hohe Wartezeit und mögliche Drittanbieter-Cookies/Datenerhebung. Wenn externes Script/iframe nötig, erst nach dokumentierter Datenschutzprüfung und geeigneter, ggf. nutzerinitiierter Freigabe laden. Anbieterangaben bei Formulareingaben werden im Original-Tarifcheck-Rechner erfasst, nicht durch selbst erzeugte Formulare.
+- **Nur eine Auslieferung pro Werbeplatz**, keine Doppelung durch Desktop- und Mobil-Variante. Vor jeder Ausgabe die im vorherigen Kapitel definierte Versicherungs-Exklusivsperre prüfen. Priorität: exakter Hausrat-Anbieter und passendes Format → geprüfter allgemeiner Versicherungs-Fachlink nur wenn sachlich passend → sonst leer. **Nicht** Amazon/eBay/idealo/Finanzen.
+- Backend-Verwaltung KISS: drei Werbemittelarten „Tarifrechner“, „Direktlink“, „Banner“ (mit Originalmaßen, Ziel, Freigabestatus), zugeordnet zum bestätigten Hausrat-R3/-Vergleichs-Endkategorie-Baum; Anzeige eines Tests „Desktop/Mobil, Ziel, Tracking, Sponsor-Label“. Partnerkennung geheim halten.
+
+### Offene Umsetzung und Kontrolllauf
+
+1. Partnerkonto: tatsächlichen **Originalcode für Hausrat-Tarifrechner** und originale **Direktlink-URL** sowie Code/Bild-URL für **728×90**, **234×60**, **300×250**, optional **125×125** getrennt einsehen. Diese Angaben sind auf Screenshots nicht sichtbar und dürfen nicht erraten werden.
+2. Zunächst die fachlich zwingende **Amazon-/Nichtversicherungs-Sperre im Versicherungszweig** in HAB-004 implementieren, dann testbare Versicherungs-Creatives erlauben. Das Konzept ist **keine** Behauptung, dass die Sperre bereits live ist.
+3. Offline testen: echte R3-Hausratseite, echte Vergleichs-Endkategorie, echter Artikel und mobiles Rendering (360–390px), fehlender Banner, gemischte Kategorien, Datenschutz-/iframe-Fallback; Gegenproben R2 „Hausrat & Gebäude“, andere Versicherungs-R3 und sechs andere Welten.
+4. Nur nach bestandener Prüfung der echten Werbemittel und Einbindung eine installierbare Folgeversion der vorhandenen Plugins als vollständige ZIP bereitstellen und **danach** WordPress-Abnahme.
+
+**Explizit weiterhin ausgeschlossen:** manuelle Änderung von WP-Artikeltexten, pauschale Display-Werbung auf jedem Versicherungs-R3, neue Vergleichsseiten/Kategorien ohne Prüfung, selbst erfundene Tarifcheck-Werbemittel oder ein zweites Affiliate-System.
