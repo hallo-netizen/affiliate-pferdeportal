@@ -1,0 +1,39 @@
+name: HAB insurer partner banner existing-plugin inspection
+on:
+  push:
+    branches: [hab-insurance-affiliate-concept-20261111]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect existing HAB-004 affiliate plugin read-only
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          import re
+          p='protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          with ZipFile(p) as z:
+              names=z.namelist()
+              print('ZIP_ENTRIES',len(names),'CRC',z.testzip())
+              for n in names:
+                  print('FILE',n)
+              for n in names:
+                  if not n.endswith('.php'):continue
+                  content=z.read(n).decode('utf8','replace')
+                  lines=content.splitlines()
+                  patterns=[
+                      ('INSURANCE',r'core:world:insurance|versicher|insurance'),
+                      ('PROVIDER',r'tarifcheck|awin|adcell|leadalliance|partner.*network|provider.*(list|supported)|network.*registry'),
+                      ('BANNER',r'function .*(banner|campaign|creative|slot|target|provider)|banner.*(width|square|format|size)|partner.*(banner|creative)')
+                  ]
+                  for label,pat in patterns:
+                      matches=[(i+1,t.strip()) for i,t in enumerate(lines) if re.search(pat,t,re.I)]
+                      if matches:
+                          print('MATCH_FILE',label,n,'COUNT',len(matches))
+                          for lineno,line in matches[:28]:
+                              print('MATCH',label,n,lineno,line[:270])
+          PY
