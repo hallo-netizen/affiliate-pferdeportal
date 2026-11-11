@@ -9,6 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: locate selection and banner geometry calls
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          import re
+          z=ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          p='affiliate-portal-router/affiliate-portal-router.php'
+          a=z.read(p).decode().splitlines()
+          for i,l in enumerate(a):
+            if any(s in l for s in ['overview_wide_banner_campaign_eligible(','category_large_banner_campaign_eligible(','campaign_match_rank(','select_campaign_for_slot(','ranked_campaigns_for_slot(']):
+              print('CALL',i+1,l.strip()[:320])
+          for i,l in enumerate(a):
+            if re.search(r'function\s+ranked_campaigns_for_slot\(',l):
+              for j in range(i,min(len(a),i+145)):print('RANKED',j+1,a[j][:350])
+          PY
       - name: inspect exact selector methods
         run: |
           python3 - <<'PY'
