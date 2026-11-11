@@ -1,0 +1,11 @@
+# Arbeitsstand A – belegte Blocker, vor Codekorrektur (11.11.2026)
+
+Codebasis: PSTE 0.57.144.40 (in der Testinstallation durch Nutzer installiert, als lokale Originaldateien gegenprüfbar), PSERC 0.28.67. Nicht produktiv abgenommen. Nur Code gelesen, keine WP-/DB-Aktion.
+
+**Befund 1 (unmittelbar):** `PSTE_Admin::productionAutoStepAjax()`, `includes/class-pste-admin.php` Z. 1291–1314, verlangt vor PSERC zwingend den vorhandenen 5.013-Zeilen-Bestand-Audit. Ist der veraltete Beleg nicht vorhanden, endet der Automatikknopf mit `PSTE_AUTOMATIK_NO_FULL_BACKLOG_REPLAY_USE_SHORTPATH`. PSERC `PSERC_Plan_Compile_Job::start()` hat **bereits** unabhängige Live-Quellen-/Plan-/Freigabeprüfungen; `PSTE_Compiler_Read_Capability::planningTopicCount()` validiert aktuelle Quellen und eine nichtleere planbare Themenmenge. Die weitere Bestands-Audit-Pflicht im Automatikknopf ist nicht für den ausschließlich neuen Keyword→Plan-Weg erforderlich. Die Statusanzeige `productionAutoState()` (Z. 1503–1515) sperrt denselben bereits gültigen PSERC-Plan wegen des Alt-Audits erneut.
+
+**Befund 2 (im vorherigen Protokoll übersehen):** Der ältere „5.000er-Autoreplay-Stop“ in `PSTE_Research_Driver::executeOneStep()` (Z. 139) und `maybeKickExisting()` (Z. 50) prüft lediglich das Flag `existing_only`, **nicht** den Queue-Status. Er blockiert damit selbst einen **neuen** `PSTE_Research_Job`, wenn nur ein alter abgeschlossener/cancelled existing-only-Datensatz gespeichert ist. Der vorherige Simulationstest mockte `PSTE_Research_Driver::kick()` und konnte diesen Defekt deshalb nicht entdecken. In `PSTE_Research_Job::start()` sperrt die echte Logik eine **wirklich laufende** Breitenqueue; diese Konfliktsperre muss erhalten bleiben.
+
+**Ziel der minimalen Codeänderung (noch nicht umgesetzt):** Stoppen eines laufenden alten 5k-Bestandsjobs unverändert; alte **abgeschlossene/abgebrochene** Bestandsjob-Datensätze dürfen dagegen frische Einzelrecherche/Planfreigabe nicht blockieren. Statt altem Audit nur die bereits existierenden PSERC-Quellenprüfer für die neue Planfreigabe; keine neuen Prüfungen/Worker/Tabellen. `ready=0` darf aktiven gültigen Plan nicht verdrängen.
+
+**Status:** SOURCE_PROOF_DONE; IMPLEMENTATION_PENDING; NO_WORDPRESS_OR_DB_TOUCH.
