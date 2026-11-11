@@ -1,0 +1,68 @@
+name: HAB RC19 reconcile concurrent insurance planning records
+on:
+  push:
+    branches: [hab-insurance-affiliate-rc19-guard-20261111]
+permissions:
+  contents: write
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 80
+      - name: merge latest office notes without losing original RC19 release
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Hab RC19 plan reconciliation"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch --no-tags --depth=80 origin +refs/heads/hobbyroom/project-memory-campus-v1-20260905:refs/remotes/origin/hobbyroom/project-memory-campus-v1-20260905
+          BASE=origin/hobbyroom/project-memory-campus-v1-20260905
+          if git merge-base --is-ancestor "$BASE" HEAD; then
+            echo "Latest office already present"; exit 0
+          fi
+          AFF="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE"
+          STATE="$AFF/CURRENT_STATE.md"
+          PLAN="$AFF/VERSICHERUNGEN_TARIFCHECK_KONZEPT_20261111.md"
+          git show HEAD:"$STATE" > /tmp/hab-rc19-current-ours.md
+          git show HEAD:"$PLAN" > /tmp/hab-rc19-plan-ours.md
+          set +e
+          git merge --no-commit --no-ff "$BASE"
+          MERGE_RC=$?
+          set -e
+          if [ "$MERGE_RC" -ne 0 ]; then
+            git diff --name-only --diff-filter=U | sort > /tmp/hab-conflicts.txt
+            if [ "$(wc -l < /tmp/hab-conflicts.txt)" -ne 2 ]; then
+              cat /tmp/hab-conflicts.txt; echo "Unexpected merge conflicts" >&2; exit 1
+            fi
+            grep -Fqx "$STATE" /tmp/hab-conflicts.txt
+            grep -Fqx "$PLAN" /tmp/hab-conflicts.txt
+            git checkout --theirs -- "$STATE" "$PLAN"
+            python3 - <<'PY'
+          from pathlib import Path
+          root=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE')
+          state=root/'CURRENT_STATE.md'
+          plan=root/'VERSICHERUNGEN_TARIFCHECK_KONZEPT_20261111.md'
+          ours_state=Path('/tmp/hab-rc19-current-ours.md').read_text()
+          ours_plan=Path('/tmp/hab-rc19-plan-ours.md').read_text()
+          new_state=state.read_text()
+          marker='## 11.11.2026 – HAB-004 AFFILIATE RC19'
+          if not new_state.startswith(marker):
+              prefix=ours_state.split('\n---\n',1)[0]+'\n---\n\n'
+              state.write_text(prefix+new_state)
+          marker='## 9. VERBINDLICHE REGEL'
+          assert marker in ours_plan,'Our verified insurance fallback section missing'
+          section=ours_plan[ours_plan.index(marker):].replace(marker,'## 10. RC19-IMPLEMENTIERUNG (überschreibt ältere Leerstand-Regeln)',1)
+          new_plan=plan.read_text()
+          if '## 10. RC19-IMPLEMENTIERUNG' not in new_plan:
+              plan.write_text(new_plan+'\n\n'+section)
+          print('Retained newer office notes; preserved RC19 release and comprehensive own-topic-banner fallback')
+          PY
+            git add "$STATE" "$PLAN"
+          fi
+          if [ -n "$(git diff --name-only --diff-filter=U)" ]; then
+            echo "Unresolved merge conflicts" >&2; exit 1
+          fi
+          git commit -m "Merge new Hab insurance notes with tested RC19 plugin release"
+          git push origin HEAD:hab-insurance-affiliate-rc19-guard-20261111
