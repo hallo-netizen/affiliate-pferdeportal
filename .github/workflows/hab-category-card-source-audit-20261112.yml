@@ -9,6 +9,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Inspect category recommendations wrapper and multi-provider identity
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import zipfile,re
+          root="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/"
+          d=zipfile.ZipFile(root+"HAB-001-DESIGN/CURRENT.zip")
+          z=zipfile.ZipFile(root+"HAB-004-AFFILIATE/CURRENT.zip")
+          for archive,file,ranges in [
+            (d,"hab-bewahr-design-vorschau/includes/detail-categories.php",[(205,238)]),
+            (d,"hab-bewahr-design-vorschau/includes/area-design-prototype.php",[(330,410)]),
+            (z,"affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php",[(270,340)]),
+            (z,"affiliate-portal-router/affiliate-portal-router.php",[(2440,2520)])
+          ]:
+            a=archive.read(file).decode("utf8","replace").splitlines()
+            print('INSPECT_FILE',file)
+            for low,high in ranges:
+              for i in range(low-1,min(high,len(a))):
+                print("EXACT",file,i+1,a[i][:500])
+          for name in z.namelist():
+            if not name.endswith(".php"):continue
+            a=z.read(name).decode("utf8","replace").splitlines()
+            for i,line in enumerate(a):
+              if re.search(r"function\s+(multiprovider_render_offer_buttons|multiprovider_runtime_product_offers|multiprovider_.*offer.*|hab_bw_area_slot)\s*\(",line):
+                print("OFFERS_METHOD",name,i+1,line[:300])
+                for j in range(i,min(len(a),i+32)):
+                  print("OFFERS",name,j+1,a[j][:430])
+          PY
       - name: Read exact design hook and category bridge implementation
         shell: bash
         run: |
