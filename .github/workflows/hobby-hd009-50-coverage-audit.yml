@@ -1,0 +1,59 @@
+name: Hobby Depot 50-rule coverage exact code audit
+on:
+  push:
+    branches: [audit/hobby-hd009-coverage-50-check-20261112]
+    paths: [.github/workflows/hobby-hd009-50-coverage-audit.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read the real current Hobby Depot HD009 archive and compare 50-rule cap
+        run: |
+          python3 - <<'PY'
+          import zipfile,pathlib,re,collections
+          p=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          print('PLUGIN',p,'bytes',p.stat().st_size)
+          with zipfile.ZipFile(p) as z:
+            print('ZIP',len(z.namelist()),'crc',z.testzip())
+            files={name:z.read(name).decode('utf-8','replace') for name in z.namelist() if name.endswith('.php')}
+          print('PHP_FILES',len(files))
+          for name,s in files.items():
+            lines=s.splitlines()
+            patterns={
+              'HARD_50':r'(?<!\d)50(?!\d)',
+              'HARD_311':r'(?<!\d)311(?!\d)',
+              'HARD_186':r'(?<!\d)186(?!\d)',
+              'HARD_381':r'(?<!\d)381(?!\d)',
+              'ARRAY_SLICE':r'array_slice\s*\(',
+              'SQL_LIMIT':r'\bLIMIT\b',
+              'CONCEPT_FILTER':r'(?:concept.*limit|limit.*concept|produkt.*limit|limit.*produkt|rules.*limit|limit.*rules|suchregeln|suchregel|search.*rules|maximum.*rule)',
+              'COVERAGE_LABEL':r'(?:abdeckung|coverage|geprüfte.*themen|themen.*gesamt|familien|Produktkonzept|produktkonzept|Hobby-Produktkonzept)',
+            }
+            matches=[]
+            for i,l in enumerate(lines):
+              tags=[k for k,r in patterns.items() if re.search(r,l,re.I)]
+              if tags:
+                if tags==['COVERAGE_LABEL'] and len(matches)>110:continue
+                matches.append((i,tags,l))
+            meaningful=[m for m in matches if any(k in m[1] for k in ('HARD_50','HARD_311','HARD_186','HARD_381','ARRAY_SLICE','SQL_LIMIT','CONCEPT_FILTER'))]
+            if meaningful:
+              print('FILE',name,'lines',len(lines),'hard_limit_related',len(meaningful),'coverage_related',sum('COVERAGE_LABEL' in m[1] for m in matches))
+              for i,tags,l in meaningful[:100]:
+                print('HIT',name, i+1,','.join(tags),l[:420])
+                if 'HARD_50' in tags or 'HARD_311' in tags or 'ARRAY_SLICE' in tags:
+                  for j in range(max(0,i-3),min(len(lines),i+4)):
+                    print('CTX',j+1,lines[j][:360])
+          # Original idealo catalog and row-to-concept matching boundaries
+          name='affiliate-portal-router/includes/trait-ppar-idealo.php'
+          lines=files[name].splitlines()
+          for needle in ['idealo_portal_supply_catalog(', 'idealo_match_index(', 'idealo_match_feed_row_to_concept(', 'idealo_import_feed_file(', 'idealo_materialize_campaigns(', 'idealo_render_specialist_content(']:
+            starts=[i for i,l in enumerate(lines) if 'function '+needle in l]
+            for i in starts:
+              print('===SOURCE_METHOD',needle,'LINE',i+1,'===')
+              for j in range(i,min(len(lines),i+66)):
+                print('SOURCE',j+1,lines[j][:800])
+          PY
