@@ -8,6 +8,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Confirm eBay cohort call contexts and selected slot boundaries
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          import re
+          z=ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          for p in ['affiliate-portal-router/includes/trait-ppar-ebay.php','affiliate-portal-router/affiliate-portal-router.php']:
+            a=z.read(p).decode('utf8','replace').splitlines()
+            for i,l in enumerate(a):
+              if 'function ebay_filter_ranked_product_candidates_provider_cohort(' in l or 'ebay_filter_ranked_product_candidates_provider_cohort(' in l:
+                print('BIND',p,i+1,l[:400])
+                for j in range(max(0,i-8),min(len(a),i+28)):
+                  print('BODY',p,j+1,a[j][:400])
+          PY
       - name: Read surrounding actual selection context for all three candidate filters
         run: |
           python3 - <<'PY'
