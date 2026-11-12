@@ -8,6 +8,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Inspect trigger schedule and provider card UI conditions
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          z=ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          file='affiliate-portal-router/includes/trait-ppar-idealo.php'
+          a=z.read(file).decode().splitlines()
+          for first,last in [(66,100),(865,976),(1275,1307),(1030,1082)]:
+            print('SECTION',first,last)
+            for i in range(first-1,min(last,len(a))):print('TRIGGER',i+1,a[i][:650])
+          for file in ['affiliate-portal-router/affiliate-portal-router.php','affiliate-portal-router/includes/trait-ppar-idealo.php']:
+            a=z.read(file).decode().splitlines()
+            for i,l in enumerate(a):
+              if any(s in l for s in ['idealo_standalone_campaign_allowed(', 'idealo_campaign_publicly_allowed(', 'idealo_sync_campaign_activation(', 'idealo_auto_refresh', "['feed_url']", "['auto_refresh']"]):
+                print('CALL',file,i+1,l[:440])
+          PY
       - name: Inspect category priorities and product concept matching
         shell: bash
         run: |
