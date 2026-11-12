@@ -36,7 +36,7 @@ with ZipFile(p) as z:
  extracted="\n".join(extract(n) for n in [
   "idealo_credentials_present","idealo_partner_api_base","idealo_validate_feed_url",
   "hb_idealo_feed_source_ready","hb_idealo_feed_download_url",
-  "idealo_standalone_campaign_allowed"
+  "idealo_standalone_campaign_allowed","multiprovider_filter_candidates_by_strategy"
  ])
  fixture=r'''<?php
 class WP_Error {private $code;private $message;public function __construct($code,$msg){$this->code=$code;$this->message=$msg;} public function get_error_code(){return $this->code;} public function get_error_message(){return $this->message;}}
@@ -78,7 +78,17 @@ expect($c->idealo_standalone_campaign_allowed($offer,'category_product_2'),'imag
 expect(!$c->idealo_standalone_campaign_allowed($offer,'post_bottom_products'),'hybrid outside categories unchanged');
 expect(!$c->idealo_standalone_campaign_allowed(array('network'=>'idealo','kind'=>'comparison'),'category_product_1'),'generic comparison cannot replace concrete category product');
 expect($c->idealo_standalone_campaign_allowed(array('network'=>'idealo','kind'=>'comparison'),'post_bottom_products'),'normal comparison unaffected');
-echo "HAB_FULL_CARD_SOURCE_TESTS_PASS 13 tests".PHP_EOL;
+$set=array(
+ array('campaign'=>array('network'=>'idealo','kind'=>'product')),
+ array('campaign'=>array('network'=>'idealo','kind'=>'comparison')),
+ array('campaign'=>array('network'=>'ebay','kind'=>'product'))
+);
+$good=$c->multiprovider_filter_candidates_by_strategy($set,'category_product_1');
+expect(count($good)===2 && ($good[0]['campaign']['kind']??'')==='product' && ($good[1]['campaign']['network']??'')==='ebay','actual category provider selector keeps image-backed idealo + ebay');
+$other=$c->multiprovider_filter_candidates_by_strategy($set,'post_bottom_products');
+expect(count($other)===2 && ($other[0]['campaign']['kind']??'')==='comparison','ordinary non-category provider strategy preserved');
+
+echo "HAB_FULL_CARD_SOURCE_TESTS_PASS 15 tests".PHP_EOL;
 '''.replace("METHODS",extracted)
  with TemporaryDirectory() as tmp:
    file=Path(tmp)/"check.php";file.write_text(fixture)
