@@ -1,5 +1,13 @@
 # ROBOTIK / KATEGORIE – EINZIGER AKTUELLER STATUS
 
+## AKTUELL 12.11.2026 – V39: ENTWICKLUNG UND KONZEPTE SIND AUCH CORE-INFORMATIONSTHEMEN
+- **Verbindlicher Nutzerentscheid:** Robotik ist kein Shop. Auch Robotertypen im Ideen-, Konzept-, Forschungs-, Prototyp-, Entwicklungs- oder Vorbestellstadium dürfen eigene konkrete Informationsseiten haben, **wenn** Funktion/Owner und Inhaltsrubriken sinnvoll abgegrenzt sind. **Fehlende Kaufbarkeit, Affiliate-Links oder SEO-Zahlen sind keine Ausschlussgründe.** Früheres generelles Pilot-/Kaufbarkeitsgate ist aufgehoben; siehe ganz oben in `ZIELVERTRAG.md`.
+- **Erneute Quellenrecherche:** u. a. Universität Hamburg (mobiler WC-Reinigungs-Prototyp), Stanford (TidyBot-Aufräumroboter), Posha (Kochassistenz), Weave (Wäschefaltrobotik mit regionaler US-Auslieferung), Figure/1X (universelle Haushaltsassistenz), Gratheon (Bienenstock-Konzept TRL2), Ankleidehilfe, Blindenführroboter, Hecken-/Hundekotroboter. **Unterschiedliche Entwicklungsstände immer kenntlich; Konzept nicht als funktionierendes Kaufprodukt ausgeben.**
+- **Einziger Forschungs-Master in der Library** `/robotik/Recherchebüro/CURRENT.json` **V39, 561 Fundnennungen**, erfolgreich von V36 mit 557 auf V39 fortgeschrieben: **vier neue Fund-IDs** `ROB-0558..0561` (Haushalts-WC, Aufräumen, privater Kochassistent, Fußball-Torwart) und **21 ältere IDs neu bewertet**. Bei allen 557 alten Datensätzen ursprüngliche Felder unverändert, nur zusätzliche Prüfvermerke. Keine Gleichsetzung mit 561 WordPress-Seiten.
+- Neue abgeleitete Auswertung `RECHERCHE/ENTWICKLUNG_PROTOTYP_KONZEPT_ERWEITERUNG_V39_20261112.md`. V37/V38-Balanceberechnungen sind historische **kaufnähere** Teilrechnung und **keine ausreichende Entscheidungsgrundlage** für Umgruppierung. Erst nach umfassender Reife-/Owner-/Thementiefen-Zählung alternative Navigation final bewerten.
+- **Null WordPress-Schreibvorgänge, null Pluginänderungen, null kostenpflichtige Suchaufrufe**. Ursprüngliche 104 WP-Seiten/72 Produkttypen und 89 Inhaltskategorien unberührt.
+
+
 ## AKTUELL 12.11.2026 – V38: PRIMÄRRECHERCHE VERTIEFT, ALTERNATIVEN A–D GEGEN 72 BESTANDSSEITEN GEPRÜFT
 - Nutzerziel unverändert: **halbwegs ausgewogener Hauptkategoriebaum**. Zuerst unterbesetzte Kategorien über echte Marktbelege ergänzen, erst danach Hauptbereiche umsortieren. Keine Fantasiefüllung, keine doppelte Roboteridentität.
 - Original: **72 individuelle Produktseiten** (Haushalt 3, Garten 7, Freizeit 9, Sport 8, Bildung 3, Pflege 8, Gewerbe 34). V38 hat nochmals Hersteller-/Händlerangebote geprüft und alle Ideen gegen die bereits 72 vorhandenen Typen und V36/V37 abgeglichen.
