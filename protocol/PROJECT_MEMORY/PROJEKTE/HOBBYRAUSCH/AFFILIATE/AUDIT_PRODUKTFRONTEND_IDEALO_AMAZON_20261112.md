@@ -1,3 +1,15 @@
+## Korrektur 12.11.2026 18:40 – belegte Import-Ursache, KEIN MANUELLER DOWNLOAD
+
+**Falscher Vorschlag zurückgezogen:** Der Benutzer soll NICHT `Creatives → Product data feeds → Herunterladen` und keine CSV auf den Rechner laden. Die bestätigte Verbindung des HD009 bei Hobbydepot hat `Feed 2747` gefunden, ~545.444 Feedprodukte. Die Backend-Kacheln zeigen jedoch `Staged 0 / PASS 0 / Materialisiert 0 / Modus ebay_only / Auto-Refresh wartet auf Feed-URL` (Betreiberscreenshot 12.11.).
+
+**Quellbeweis:** Im tatsächlichen CURRENT HD009 0.1.32 (`includes/trait-ppar-idealo.php`) blockiert `idealo_queue_manual_refresh()` bei leerem `feed_url` den Hintergrundimport mit `idealo_feed_url_missing`. Auch der Button `Feed jetzt aktualisieren` wird nur angezeigt, wenn eine URL gespeichert ist. Dagegen liegen dem getesteten iPN-Zugang bereits `api_key`, `feed_id` und `adspace_id` vor. Es ist ein **überflüssiger manueller Zwischenzwang**, nicht ein benötigter zusätzlicher Feed. Nachweise: GitHub Actions [43270408391](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43270408391), [43270642249](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43270642249).
+
+**Offiziell vorhandener direkter Weg:** Ingenious iPN-Produktdatenexport `/creatives/productdata/export` mit `apiKey`, `feedId`, `adspaceId`, `format=CSV`, `csvSeparator=COMMA`, `compression=GZIP`; dokumentiert in https://ingenioustechnologies.atlassian.net/wiki/spaces/KB/pages/3310846106/Deprecations%2B2022 . Keine Geheimnisse, individuellen URLs oder Produkte in Github ausgeben. Im **separaten Hab-RC23-Kandidaten** `AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py` existiert ein **nur offline getestetes** Muster: export-URL serverseitig beim vorhandenen Import aus diesen Zugangsdaten zusammensetzen. **RC23 NICHT live abgenommen und NICHT kopieren.**
+
+**KISS-Folgerung:** Nicht Daten manuell exportieren oder einen neuen Importer bauen. Den HD009-CURRENT gegen den dokumentierten API-Export prüfen und nur den nachgewiesenen URL-Zwang im bestehenden Hintergrundimport entfernen; dabei denselben bestehenden Feedparser, Zuordnungs- und Freigabeweg benutzen. Vor einem Pluginupdate echte Quellpfad-/Syntax-/Format-/404-/Feedfehler-/Freigabetests, kein Live-PASS ohne privaten WordPress-Lauf. Nutzer muss jetzt nichts herunterladen oder Einstellungen verändern. **Keine Pluginänderung durchgeführt.**
+
+---
+
 # Hobby Depot HD009 – Produktfrontend Vergleich, geprüfter Iststand 12.11.2026
 
 **Nur lesende Prüfung, keine Produktiv-/Pluginänderung.** Original-HD009 aus `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip` SHA256 `d433db74b493407a4c26faef591574e644201846078b7aa7aa3541126f9359b8`, 41/41 ZIP. [Code-/Frontendaudit](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43270408391), [Original-Backend-/Freigaberegeln](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43270642249).
