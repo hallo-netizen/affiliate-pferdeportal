@@ -1,0 +1,93 @@
+name: HAB RC24 category coverage and design full QA
+on:
+  push:
+    branches: [hab-affiliate-coverage-cards-20261112]
+    paths:
+      - '.github/workflows/hab-rc24-full-qa-20261112.yml'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/RC24_COVERAGE_DESIGN/**'
+permissions: {contents: read}
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build full Hab RC23 base and RC24 with unchanged other portals
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ"
+          python3 "$ROOT/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py"
+          python3 "$ROOT/AFFILIATE/RC24_COVERAGE_DESIGN/build_rc24.py"
+          python3 "$ROOT/AFFILIATE/RC24_COVERAGE_DESIGN/qa_rc24.py"
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess,tempfile
+          base=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112')
+          with tempfile.TemporaryDirectory() as td:
+            source=(base/'qa_candidate.py').read_text()
+            assert '0.1.20-rc23' in source
+            path=Path(td)/'qa_candidate_compat.py'
+            path.write_text(source.replace('0.1.20-rc23','0.1.21-rc24'))
+            for cmd in [['python3',str(path)],['python3',str(base/'qa_feed_pipeline.py')],['python3',str(base/'qa_buttons.py')]]:
+              r=subprocess.run(cmd,capture_output=True,text=True)
+              print(r.stdout,r.stderr)
+              assert r.returncode==0,(cmd,r.stderr)
+          PY
+      - name: Actual Chrome – load real Hab card markup and test new styles before install
+        shell: bash
+        run: |
+          python3 -m pip install --quiet selenium
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          import json
+          p='protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          with ZipFile(p) as z:
+            full=z.read('affiliate-portal-router/assets/frontend.css').decode('utf8')
+          new=full[full.index('/* HAB RC24 – only category product cards'):].strip()
+          opts=Options()
+          for a in ['--headless=new','--no-sandbox','--disable-dev-shm-usage','--disable-gpu','--window-size=1440,980']:
+            opts.add_argument(a)
+          drv=webdriver.Chrome(options=opts)
+          try:
+            url='https://hab-und-bewahr.de/einbruch-und-diebstahl/einbruch-und-diebstahl-haus-und-wohnung/c22-haustuerschloesser-dd9773fd40/'
+            for width in [1440,780,390]:
+              drv.set_window_size(width,980)
+              drv.get(url)
+              drv.execute_script("""const s=document.createElement('style');s.textContent=arguments[0];document.head.append(s);
+                   document.querySelector('.ppar-hb-category-products-grid').scrollIntoView({block:'center'});""",new)
+              import time;time.sleep(1)
+              val=drv.execute_script(r'''
+                const grid=document.querySelector('.ppar-hb-category-products-grid');
+                if(!grid)return {error:'no cards'};
+                const cards=Array.from(grid.children);
+                return {width:innerWidth,count:cards.length,cards:cards.map(c=>{
+                  const links=Array.from(c.querySelectorAll('.ppar-banner-offer-button,.ppar-banner-button'));
+                  const a=links[links.length-1];const r=a?a.getBoundingClientRect():null;
+                  const cr=c.getBoundingClientRect();
+                  return {frame:getComputedStyle(c).borderTopWidth,cardHeight:Math.round(cr.height),x:Math.round(cr.x),
+                    buttonBottom:r?Math.round(r.bottom):null,buttonCount:links.length,innerFrame:getComputedStyle(c.querySelector('.ppar-banner-link')).borderTopWidth};
+                })};
+              ''')
+              print('HAB_RC24_BROWSER_CTA',json.dumps(val,ensure_ascii=False))
+              assert val['count']==3
+              assert all(x['frame']=='1px' and x['innerFrame']=='0px' for x in val['cards'])
+              assert len({x['x'] for x in val['cards']})== (3 if width==1440 else 2 if width==780 else 1)
+              bottoms=[x['buttonBottom'] for x in val['cards']]
+              if width==1440:assert max(bottoms)-min(bottoms)<=3,('CTAs must bottom align',bottoms)
+            print('HAB_RC24_REAL_BROWSER_STYLE_PASS')
+            drv.get('https://pferde-atelier.de/category/schabracken-beratung/')
+            benchmark=drv.execute_script(r'''
+             return Array.from(document.querySelectorAll('.ppar-affiliate-slot')).slice(0,3).map(x=>({
+               title:x.querySelector('.ppar-banner-title')?.textContent||'',
+               properties:x.querySelector('.ppar-banner-description')?.textContent||'',
+               meta:x.querySelector('.ppar-banner-meta')?.textContent||'',
+               offers:x.querySelectorAll('.ppar-banner-offer-button,.ppar-banner-button').length
+             }));
+            ''')
+            print('HORSE_VISUAL_REFERENCE_READ_ONLY',json.dumps(benchmark,ensure_ascii=False))
+          finally:
+            drv.quit()
+          PY
