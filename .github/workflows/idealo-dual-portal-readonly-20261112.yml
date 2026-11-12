@@ -1,0 +1,45 @@
+name: Idealo current plugins two-portal readiness (read-only)
+on:
+  push:
+    branches: [idealo-two-portals-setup-20261112]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect exact current ZIPs, Idealo controls, defaults and gates
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import zipfile,re,hashlib
+          from pathlib import Path
+          root=Path('protocol/PROJECT_MEMORY/PROJEKTE')
+          targets={
+            'HOBBY':root/'HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip',
+            'HAB':root/'EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          }
+          for portal,filename in targets.items():
+            data=filename.read_bytes()
+            print('PORTAL',portal,'SHA256',hashlib.sha256(data).hexdigest(),'SIZE',len(data))
+            with zipfile.ZipFile(filename) as z:
+              assert z.testzip() is None
+              print('ENTRIES',len(z.namelist()))
+              t=z.read('affiliate-portal-router/includes/trait-ppar-idealo.php').decode('utf8','replace')
+              lines=t.splitlines()
+              print('IDEALO_LINES',len(lines))
+              for i,s in enumerate(lines,1):
+                if re.search(r'^\s*(?:public|private|protected)?\s*function\s+(?:idealo_[\w]+)\s*\(',s):
+                  print('IDEALO_FUNC',i,s.strip())
+              for i,s in enumerate(lines,1):
+                if re.search(r'\b(?:adspace_id|feed_id|hobby_feed_verified|hab_feed_verified|feed_verified|findFeeds|ebay_only|api_key|feed_url|productdata/download|idealo_provider_access_save)\b',s,re.I):
+                  if i<300 or 'feed_verified' in s or 'adspace_id' in s or 'feed_id' in s or 'findFeeds' in s:
+                    print('LINE',i,s[:300].strip())
+              for file in ['affiliate-portal-router/affiliate-portal-router.php',
+                           'affiliate-portal-router/includes/trait-ppar-idealo.php',
+                           'affiliate-portal-router/includes/class-ppar-admin-kiss.php']:
+                if file not in z.namelist():continue
+                a=z.read(file).decode('utf8','replace')
+                print('FILE',file,'HARDCODED_PFERD',len(re.findall('568313',a)),'PFERD_FEED',len(re.findall(r"['\\\"]2901['\\\"]",a)))
+          PY
