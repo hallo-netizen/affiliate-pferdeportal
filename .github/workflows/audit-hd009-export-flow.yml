@@ -1,0 +1,28 @@
+name: HD009 precise direct feed import path read only
+on:
+  push:
+    branches: [audit/hobby-hd009-product-frontend-20261112]
+    paths: [.github/workflows/audit-hd009-export-flow.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Show exact original export and refresh methods
+        run: |
+          python3 - <<'PY'
+          import zipfile,pathlib,re
+          p=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          with zipfile.ZipFile(p) as z:
+            name='affiliate-portal-router/includes/trait-ppar-idealo.php'
+            a=z.read(name).decode('utf8','replace').splitlines()
+            for i,s in enumerate(a):
+              if re.search(r'(idealo_(?:validate_feed_url|download_feed_stream|queue_manual_refresh|refresh_worker|auto_refresh|process_refresh|settings|dispatch_manual_worker)|feed_url|creatives/productdata/export)',s,re.I):
+                if 'function' in s or 'feed_url' in s and i>900 or 'export' in s:
+                  print('MATCH',i+1,s[:470])
+            for x,y in [(50,135),(290,415),(790,990),(995,1120)]:
+              print('BLOCK',x,y)
+              for i in range(x-1,min(y,len(a))):print('L',i+1,a[i][:1000])
+          PY
