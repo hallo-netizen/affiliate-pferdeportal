@@ -1,0 +1,25 @@
+name: Inspect actual Hab RC23 Idealo click path
+on:
+  push:
+    branches: [hab-rc23-installable-test-20261112]
+    paths: ['.github/workflows/hab-rc23-admin-clickpath-audit.yml']
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exact WP admin links and labels from installed RC23 package
+        run: |
+          python3 - <<'PY'
+          import zipfile,re
+          z=zipfile.ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/HAB_AFFILIATE_RC23_0.1.20-rc23_TEST.zip')
+          for p in z.namelist():
+            if not p.endswith(".php"):continue
+            src=z.read(p).decode('utf8','replace').splitlines()
+            for i,line in enumerate(src):
+              if any(n in line for n in ['function idealo_render_sync_card(', 'function idealo_render_specialist_content(', 'function idealo_render_access_card(', "'affiliate-portal-provider-idealo'",'page=affiliate-portal-provider-idealo','Feed jetzt aktualisieren','Feed aktualisieren','Vollfeed importieren','Anbieter & APIs',"register_submenu_page"]):
+                print('MATCH',p,i+1,line[:2200])
+                if 'function idealo_render_sync_card(' in line or 'function idealo_render_specialist_content(' in line:
+                   for j in range(i,min(len(src),i+20)):print('DETAIL',p,j+1,src[j][:2200])
+          PY
