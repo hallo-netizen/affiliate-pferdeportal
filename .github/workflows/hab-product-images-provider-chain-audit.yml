@@ -9,6 +9,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Inspect feed streaming, URL validation and image exact-match topology
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          z=ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          items=[
+            ('affiliate-portal-router/includes/trait-ppar-idealo.php',[(430,520),(640,685),(1019,1057),(1205,1250),(1265,1340)]),
+            ('affiliate-portal-router/includes/trait-ppar-hb-amazon.php',[(501,594),(762,890)]),
+            ('affiliate-portal-router/affiliate-portal-router.php',[(2810,2900),(2973,3088),(4400,4510),(5350,5450),(7900,7970)]),
+          ]
+          for file,ranges in items:
+            lines=z.read(file).decode('utf8','replace').splitlines()
+            for a,b in ranges:
+              print('PART',file,a,b)
+              for i in range(a-1,min(b,len(lines))):
+                print('SOURCE',file,i+1,lines[i][:440])
+          PY
       - name: Check complete product image and provider chain seams
         shell: bash
         run: |
