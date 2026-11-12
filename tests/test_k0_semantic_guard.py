@@ -37,7 +37,7 @@ def package(identity, body, intent, table_exception='NUANCE_LOSS'):
 def verify_semantic(pkg, port):
     with patch('engine.k0_production_gate.verify_writer_contract', return_value={'policy_sha256':'writer-policy','total_words':800,'conclusion_ratio':0.11}), \
          patch('engine.k0_production_gate.verify_ppm', return_value={'status':'PASS','legacy_rule_count':104}), \
-         patch('engine.k0_production_gate.verify_full_rules_pre_lt68', return_value={'status':'READY_FOR_LT68','required_receipt_count':84,'catalog_sha256':'c','rule_values_sha256':'v'}):
+         patch('engine.k0_production_gate.verify_full_rules_pre_lt68', return_value={'status':'READY_FOR_LT68','required_receipt_count':80,'catalog_sha256':'c','rule_values_sha256':'v'}):
         return g.verify(pkg,port,[{'id':1,'slug':pkg['identity']['category']}])
 
 GOOD_SCHABRACKE = """<article data-article-type="FAQ">
@@ -84,9 +84,12 @@ class TestK0SemanticGuard(unittest.TestCase):
         with self.assertRaisesRegex(g.Blocked,'K0_TEMPLATE_BOILERPLATE_CONTAMINATION'):
             verify_semantic(package(self.identity,BAD_TEMPLATE_SCHABRACKE,'INFORMATIONAL_DIRECT_QUESTION'), portal(self.identity))
 
-    def test_faq_cannot_be_misbound_as_commercial_advice(self):
-        with self.assertRaisesRegex(g.Blocked,'K0_SEARCH_INTENT_MISMATCH'):
-            verify_semantic(package(self.identity,GOOD_SCHABRACKE,'DECISION_SUPPORT'), portal(self.identity))
+    def test_k0_does_not_overrule_an_upstream_approved_intent(self):
+        # Since 10 Nov the editorial office decides intent once, before K0.
+        # K0 checks the article content, not a second title/FAQ SEO rule.
+        r=verify_semantic(package(self.identity,GOOD_SCHABRACKE,'DECISION_SUPPORT'), portal(self.identity))
+        self.assertEqual(r['status'],'PASS')
+        self.assertEqual(r['semantic_intent_status'],'PASS')
 
     def test_informational_faq_decision_contamination_blocks_even_without_exact_fingerprint(self):
         body="""<article>
