@@ -29,6 +29,30 @@ jobs:
                  print('LIVE_BODY_PREFIX',re.sub(r'\s+',' ',html[:900])[:850])
               except Exception as e:print('LIVE_ERROR',repr(e))
           PY
+      - name: Compare actual delivered public CSS old and cache-busted to RC21 package
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request,urllib.error,hashlib,re,zipfile
+          from pathlib import Path
+          root=Path("protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip")
+          with zipfile.ZipFile(root) as z:
+             expected=z.read('affiliate-portal-router/assets/frontend.css')
+             main=z.read('affiliate-portal-router/affiliate-portal-router.php').decode()
+          print('PACKAGED_CSS',len(expected),hashlib.sha256(expected).hexdigest(),'HAS_RC21_GRID',b'.ppar-hb-category-products-grid' in expected)
+          l=main.splitlines()
+          for i,s in enumerate(l):
+            if 'function enqueue_frontend_assets' in s:
+              for k in range(i,min(i+70,len(l))):print('ENQUEUE',k+1,l[k][:600])
+          base='https://hab-und-bewahr.de/wp-content/plugins/affiliate-portal-router/assets/frontend.css'
+          for query in ['?ver=6.72.211-hb-rc16-20261108','?ver=0.1.18-rc21-fresh-css-audit-20261112']:
+             try:
+                req=urllib.request.Request(base+query,headers={'User-Agent':'Mozilla/5.0 Chrome/128.0.0.0 Safari/537.36','Cache-Control':'no-cache'})
+                with urllib.request.urlopen(req,timeout=20) as response:
+                   content=response.read()
+                   print('PUBLIC_CSS',query,'status',response.status,'bytes',len(content),'sha256',hashlib.sha256(content).hexdigest(),'EQUALS_CURRENT_PACKAGE',content==expected,'HAS_RC21_GRID',b'.ppar-hb-category-products-grid' in content,'headers',{k:response.headers.get(k) for k in ['cache-control','age','etag','last-modified','cf-cache-status','x-cache']})
+             except Exception as e:print('PUBLIC_CSS_ERROR',query,repr(e))
+          PY
       - name: Read exact actual HAB RC21 plugin bootstrap, styles, markup, WP design CSS
         shell: bash
         run: |
