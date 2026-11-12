@@ -1,0 +1,31 @@
+name: Hab Affiliate RC20 shared Idealo feed ID 2901 hotfix
+on:
+  push:
+    branches: [hab-idealo-reused-feed-2901-rc20-20261112]
+    paths:
+      - '.github/workflows/hab-idealo-rc20-hotfix-20261112.yml'
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_RC20_IDEALO_2901/**'
+permissions:
+  contents: write
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build from exact RC19 and run PHP regression tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ"
+          ZIP="$BASE/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip"
+          BUILD="$BASE/AFFILIATE/IMPLEMENTIERUNG_RC20_IDEALO_2901/build_rc20.py"
+          QA="$BASE/AFFILIATE/IMPLEMENTIERUNG_RC20_IDEALO_2901/qa_rc20.py"
+          python3 "$BUILD"
+          python3 "$QA"
+          cp "$ZIP" "$BASE/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/HAB_AFFILIATE_RC20_0.1.17-rc20.zip"
+          sha256sum "$ZIP"
+          git config user.name 'Hab Affiliate validated build'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$ZIP" "$BASE/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/HAB_AFFILIATE_RC20_0.1.17-rc20.zip"
+          git commit -m 'Hab Affiliate RC20 full release: permit legitimate iPN feed 2901 on Hab adspace'
+          git push origin HEAD:hab-idealo-reused-feed-2901-rc20-20261112
