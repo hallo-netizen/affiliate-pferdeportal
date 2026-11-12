@@ -53,6 +53,55 @@ jobs:
                    print('PUBLIC_CSS',query,'status',response.status,'bytes',len(content),'sha256',hashlib.sha256(content).hexdigest(),'EQUALS_CURRENT_PACKAGE',content==expected,'HAS_RC21_GRID',b'.ppar-hb-category-products-grid' in content,'headers',{k:response.headers.get(k) for k in ['cache-control','age','etag','last-modified','cf-cache-status','x-cache']})
              except Exception as e:print('PUBLIC_CSS_ERROR',query,repr(e))
           PY
+      - name: Measure real browser grid and card rectangles desktop and mobile
+        shell: bash
+        run: |
+          python3 -m pip install --quiet selenium
+          python3 - <<'PY'
+          import shutil,time,json,traceback
+          print('BROWSER_BIN',shutil.which('google-chrome'),shutil.which('chromedriver'),shutil.which('chromium'))
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          options=Options()
+          options.add_argument('--headless=new')
+          options.add_argument('--no-sandbox')
+          options.add_argument('--disable-dev-shm-usage')
+          options.add_argument('--disable-gpu')
+          options.add_argument('--ignore-certificate-errors')
+          options.add_argument('--window-size=1440,900')
+          driver=None
+          try:
+            driver=webdriver.Chrome(options=options)
+            driver.set_page_load_timeout(35)
+            url='https://hab-und-bewahr.de/einbruch-und-diebstahl/einbruch-und-diebstahl-haus-und-wohnung/c22-haustuerschloesser-dd9773fd40/'
+            for width,height in [(1440,1000),(1050,950),(750,950),(390,900)]:
+              driver.set_window_size(width,height)
+              driver.get(url)
+              time.sleep(2)
+              info=driver.execute_script('''
+                const select=(s)=>document.querySelector(s);
+                const e=select('.ppar-hb-category-products-grid');
+                const w=select('.hbdp-detail-products-feed');
+                const panel=select('.hbdp-detail-products');
+                const box=(x)=>{if(!x)return null;const r=x.getBoundingClientRect(); const c=getComputedStyle(x);
+                  return {x:+r.x.toFixed(1),y:+r.y.toFixed(1),width:+r.width.toFixed(1),height:+r.height.toFixed(1),display:c.display,gridColumns:c.gridTemplateColumns,cssWidth:c.width,visibility:c.visibility}
+                };
+                const kids=e?Array.from(e.children):[];
+                return {viewport:{width:innerWidth,height:innerHeight},title:document.title,
+                  grid:box(e),parent:box(w),panel:box(panel),count:kids.length,children:kids.map(box),
+                  imageCount:e?e.querySelectorAll('img').length:0,buttonCount:e?e.querySelectorAll('a').length:0,
+                  cssSource:(select('#ppar-frontend-css')||{}).href,
+                  hasLoadedGridCSS:Array.from(document.styleSheets).some(x=>x.href&&x.href.includes('/affiliate-portal-router/assets/frontend.css')),
+                  firstHTML:e?e.outerHTML.slice(0,750):''};
+              ''')
+              print('BROWSER_RESULT',json.dumps(info,ensure_ascii=False))
+          except Exception as e:
+            print('BROWSER_ERROR',repr(e))
+            traceback.print_exc()
+            raise
+          finally:
+            if driver:driver.quit()
+          PY
       - name: Read exact actual HAB RC21 plugin bootstrap, styles, markup, WP design CSS
         shell: bash
         run: |
