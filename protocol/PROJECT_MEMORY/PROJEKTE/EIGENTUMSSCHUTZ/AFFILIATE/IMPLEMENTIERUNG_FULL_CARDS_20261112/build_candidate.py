@@ -130,6 +130,12 @@ with ZipFile(BytesIO(old)) as z:
  t=replace_one(t,
     "if (is_wp_error($response)) { @unlink($tmp); return $response; }",
     "if (is_wp_error($response)) { @unlink($tmp); return new WP_Error('hab_idealo_export_transport_failed','Der offizielle iPN-Produktdatenexport konnte nicht abgerufen werden.'); }")
+ # The old exact-GTIN combination lost the OWN base provider whenever a
+ # second merchant was found. Preserve idealo as a real CTA beside matching eBay
+ # and verified Amazon; do not invent any provider URL or change identity gates.
+ t=replace_one(t,
+    "if (!$offers && $current_url!=='') { $offers[$base['network']]=$base; }",
+    "if ($current_url!=='' && !isset($offers[$base['network']])) { $offers[$base['network']]=$base; }")
  # Every provider filter must preserve the actual category slot when
  # deciding whether image-backed idealo products are acceptable.
  t=replace_one(t,
