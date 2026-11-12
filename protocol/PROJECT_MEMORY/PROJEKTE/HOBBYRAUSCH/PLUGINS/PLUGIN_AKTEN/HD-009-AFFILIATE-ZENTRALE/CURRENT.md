@@ -1,3 +1,13 @@
+# HD009 AKTUELL: 0.1.33 – direkter iPN-Export
+
+Vollständiges geprüftes CURRENT.zip und HOBBY_DEPOT_AFFILIATE_HD009_0.1.33.zip. SHA256: b6482b5d880e941c97ac726dffa85fbc46ba8514587e23700951d176ebcb63db. Unverändertes 0.1.32 als Sicherung.
+Nur unnötigen URL-Zwang des bestehenden Imports beseitigt. Keine ungeprüfte Freigabe am öffentlichen Frontend.
+Vollbeleg: AFFILIATE/HD009_DIRECT_IDEALO_EXPORT_0.1.33_20261112.md; Run 43275891846.
+
+---
+
+## ARCHIV: bisheriges 0.1.32
+
 # HD009 – Hobby Depot Affiliate-Zentrale – gültiger CURRENT-Stand
 
 **Version 0.1.32 · 08.11.2026**
