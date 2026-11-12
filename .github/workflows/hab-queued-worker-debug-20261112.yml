@@ -1,0 +1,40 @@
+name: Hab Idealo queued refresh source audit
+on:
+  push:
+    branches: [hab-idealo-queued-worker-diagnose-20261112]
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect original queued-worker workflow and public live state
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          import re,urllib.request
+          p='protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/HAB_AFFILIATE_RC23_0.1.20-rc23_TEST.zip'
+          with ZipFile(p) as z:
+           files={x:z.read(x).decode('utf8','replace').splitlines() for x in z.namelist() if x.endswith('.php')}
+          phrases=['idealo_queue_manual_refresh(', 'idealo_refresh_worker(', 'idealo_refresh_remote_feed(', 'idealo_refresh_run', 'idealo_refresh_dispatch', 'idealo_refresh_state', 'idealo_run_network_sync', 'function handle_run_network_sync(', 'function idealo_', 'refresh_state', 'refresh_last_message', 'direct_worker', 'worker_start', 'spawn_cron', 'wp_remote_post', 'wp_schedule_single_event', 'wp_schedule_event']
+          for file,lines in files.items():
+           if not any(('idealo' in s.lower() or 'network_sync' in s) for s in lines):continue
+           hits=[]
+           for i,line in enumerate(lines):
+            if any(x in line for x in phrases[:7]) or (('wp_remote_post' in line or 'spawn_cron' in line or 'wp_schedule_single_event' in line) and ('idealo' in file or any('idealo' in t for t in lines[max(0,i-5):i+3]))) or ('ppar_run_network_sync' in line and ('add_action' in line or 'function' in line)):
+             hits.append((i,line))
+           for i,l in hits[:75]:
+            print('HIT',file,i+1,l[:650])
+            for j in range(max(0,i-7),min(len(lines),i+27)):
+             print('CODE',file,j+1,lines[j][:500])
+          for url in ['https://hab-und-bewahr.de/einbruch-und-diebstahl/einbruch-und-diebstahl-haus-und-wohnung/c22-haustuerschloesser-dd9773fd40/']:
+           try:
+            q=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'})
+            with urllib.request.urlopen(q,timeout=15) as r:
+             data=r.read(2000000).decode('utf8','replace')
+             for k in ['cdn.idealo.com','i.ebayimg.com','ppar-banner-offer-button','MANICAE','GERCAR','ppar-hb-category-products-grid']:
+              print('PUBLIC_LIVE',k,data.count(k))
+           except Exception as e:print('PUBLIC_ERROR',repr(e))
+          PY
