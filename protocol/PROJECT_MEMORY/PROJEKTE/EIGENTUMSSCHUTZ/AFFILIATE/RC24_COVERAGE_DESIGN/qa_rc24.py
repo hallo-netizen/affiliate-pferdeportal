@@ -26,6 +26,7 @@ with ZipFile(p) as z:
  assert "contract_concepts'=>count($concept_map)" in idealo
  assert 'Verfügbar' in main
  assert "margin-top:auto!important" in css
+ assert "border:1px solid #d2dbd5!important;overflow:hidden!important" in main
  assert "border:1px solid #d2dbd5!important" in css
  assert "idealo_hab_card_properties($payload,$title)" in idealo
  assert "idealo_hab_coverage_report()" in idealo
