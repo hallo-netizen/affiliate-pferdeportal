@@ -1,3 +1,5 @@
+> **KORREKTUR ZUR ORIGINALQUELLEN-VERFUEGBARKEIT:** **Die verbindlich festgelegten Original-Plugins PSTE 0.57.144.45 und PSERC 0.28.69 sind im Pferdeatelier-Pluginbüro des Campus vollständig vorhanden und wurden tatsächlich geöffnet und SHA-geprüft.** Die nachfolgenden Angaben über schwer auslesbare **PPM-6.7.9-Binärdateien** dürfen **nicht** auf diese vorhandenen Original-Plugins übertragen werden. [Prüfnachweis und Pfad](CAMPUS_AUSGANGSPLUGINS_TATSAECHLICH_GELESEN_20261112.md).
+
 # PPM 6.7.9 – historisches Originalpaket gefunden; Vor-MINI-Reservierung noch nicht beweisbar
 
 Stand 12.11.2026; **keine Pluginänderung, keine neue KISTE, kein neuer Worker, keine neuen Schreibwege.**
