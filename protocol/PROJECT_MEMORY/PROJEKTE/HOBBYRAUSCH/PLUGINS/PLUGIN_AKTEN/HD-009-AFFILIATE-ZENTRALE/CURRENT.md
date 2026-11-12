@@ -1,3 +1,9 @@
+## 12.11.2026 – IDEALO HOBBY DEPOT: FREIGABE GEMELDET, KONFIGURATION NUTZT HD-009 0.1.32
+
+Betreiber meldet neu freigegebenen iPN-Produktdatenfeed für **Hobby Depot, Werbefläche 568912**. Tatsächliches HD-009 `CURRENT.zip` erneut geprüft: **0.1.32 unverändert** (41 Einträge, SHA256 `d433db74b493407a4c26faef591574e644201846078b7aa7aa3541126f9359b8`), vorbereiteter iPN-Adapter vollständig vorhanden. **Kein neues Plugin nötig**. Die korrekte fremde Feed-ID und der private iPN-API-Key sind noch nicht im WordPress-Backend geprüft; kein Live-Import oder öffentliches PASS behaupten. Vor Aktivierung eigenes Feedpaar unter `Affiliate-Zentrale → idealo` eintragen, Hobby-Feed-Checkbox und `Speichern & API prüfen`; danach private Feed-URL und kontrollierten Import, erst anschließend Modus `separate` und Auto-Refresh. `CURRENT.zip` bleibt unverändert. Gemeinsame verbindliche Anleitung: `../../../AFFILIATE/IDEALO_FREIGABE_EINRICHTUNG_20261112.md`. GitHub-Action-Checks 43233587036 / 43233830615.
+
+---
+
 # HD009 – Hobby Depot Affiliate-Zentrale – gültiger CURRENT-Stand
 
 **Version 0.1.32 · 08.11.2026**
