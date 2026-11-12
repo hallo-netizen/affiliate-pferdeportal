@@ -1,0 +1,41 @@
+name: HAB full card source review (read-only)
+on:
+  push:
+    branches: [hab-affiliate-full-cards-20261112]
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect product source, exact selectors and feed API code
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          import re
+          path='protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          z=ZipFile(path)
+          specs={
+            'affiliate-portal-router/includes/trait-ppar-idealo.php': [
+              'idealo_settings','idealo_find_feed_metadata','idealo_provider_access_test','idealo_render_sync_card','idealo_refresh_remote_feed','idealo_download_feed_to_temp','idealo_import_feed_file','idealo_campaign_publicly_allowed','idealo_standalone_campaign_allowed','multiprovider_matching_offers_for_banner','idealo_materialize_campaigns','idealo_add_matching_categories','idealo_render_specialist_content','idealo_sync_dispatch',
+            ],
+            'affiliate-portal-router/includes/trait-ppar-hb-amazon.php':[
+              'hb_amazon_product_family_markup','hb_amazon_category_results','hb_amazon_category_candidate','hb_amazon_category_search_fallback','hb_amazon_dfs_do_tick','hb_amazon_dfs_candidate',
+            ],
+            'affiliate-portal-router/affiliate-portal-router.php':[
+              'render_affiliate_slot_for_context','campaign_match_rank','campaign_to_group_banner','render_banner','render_affiliate_slot','category_product_public_image_ready','multiprovider_matching_offers_for_banner','provide_leaf_category_affiliate_slot_html','hb_insurance_scope',
+            ],
+            'affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php':['area','area_products','area_banner'],
+          }
+          for file,funcs in specs.items():
+            lines=z.read(file).decode('utf8','replace').splitlines()
+            for name in funcs:
+              index=next((i for i,t in enumerate(lines) if re.search(r'function\s+'+re.escape(name)+r'\s*\(',t)),None)
+              if index is None:print('MISSING_METHOD',file,name);continue
+              lim=125 if name in ('idealo_download_feed_to_temp','idealo_import_feed_file','idealo_materialize_campaigns','render_affiliate_slot_for_context','hb_amazon_product_family_markup','idealo_render_sync_card') else 70
+              print('BEGIN',file,name,index+1)
+              for j in range(index,min(len(lines),index+lim)):
+                print('CODE',name,j+1,lines[j][:450])
+              print('END',name)
+          PY
