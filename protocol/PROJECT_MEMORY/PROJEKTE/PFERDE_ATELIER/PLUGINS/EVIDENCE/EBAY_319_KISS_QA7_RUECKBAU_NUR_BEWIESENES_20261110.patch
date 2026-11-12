@@ -1,0 +1,34 @@
+--- QA6/affiliate-portal-router/includes/trait-ppar-ebay-run.php
++++ QA7/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+@@ -763,8 +763,9 @@
+         $run['phase_state'][$key] = is_array($state) ? $state : array();
+         $saved=$this->ebay_run_save($run);
+         if (!is_array($saved)) { return false; }
+-        $read=$this->ebay_run_phase_state_load($key);
+-        return serialize($read)===serialize((array)$state);
++        // ebay_run_save already read back and compared the entire stored run.
++        // Checking the verified phase_state needs no second get_option().
++        return serialize($saved['phase_state'][$key] ?? array())===serialize((array)$state);
+     }
+ 
+     /** V6.63.8 canonical driver.
+--- QA6/affiliate-portal-router/includes/trait-ppar-ebay.php
++++ QA7/affiliate-portal-router/includes/trait-ppar-ebay.php
+@@ -9848,17 +9848,6 @@
+      * `private-anzeigen` erscheinen. Der allgemeine Anzeigenmarkt und alle
+      * anderen HivePress-Kategorien bleiben frei von diesen eBay-Privatanzeigen.
+      */
+-    /** One final-boundary decision for a public HivePress listing. */
+-    private function ebay_private_public_post_allowed($post, $source_row, $private_context, $now) {
+-        if (!is_object($post) || (string)($post->post_type ?? '') !== 'hp_listing') { return true; }
+-        $post_id=absint($post->ID ?? 0);
+-        $item_id=function_exists('get_post_meta')?sanitize_text_field((string)get_post_meta($post_id,'_ppar_ebay_item_id',true)):'';
+-        if($item_id===''){return true;}
+-        if (empty($this->ebay_settings()['private_enabled'])) { return false; }
+-        if(!$this->ebay_public_checkpoint_allows_private_listing($post_id)){return false;}
+-        return $this->ebay_private_public_post_allowed_base($post,$source_row,$private_context,$now);
+-    }
+-
+     /** Existing fach/public safety contract without checkpoint visibility. */
+     private function ebay_private_public_post_allowed_base($post, $source_row, $private_context, $now) {
+         if (!is_object($post) || (string)($post->post_type ?? '') !== 'hp_listing') { return true; }

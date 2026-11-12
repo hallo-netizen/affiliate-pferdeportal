@@ -1,0 +1,37 @@
+{
+  "version": "6.72.325",
+  "status": "STAGING TEST ONLY",
+  "sha256": "54cb268274849b830131a89dc73e1f93059479b343df88855b5fe0ff13ae77f0",
+  "zip_bytes": 5380468,
+  "entries": 66,
+  "php_lint": 23,
+  "changed_files_vs_QA13": [
+    "includes/trait-ppar-article-plans.php",
+    "includes/trait-ppar-ebay.php",
+    "pferdeportal-affiliate-router.php",
+    "readme.txt"
+  ],
+  "unchanged_files": 62,
+  "baseline_qa13_regressions_reproduced": [
+    "article-rebuild resets cursor to zero on each approved eBay campaign",
+    "ended reserve reports success without public checkpoint update"
+  ],
+  "new_test_cases": {
+    "article_refresh": 12,
+    "ended_replacement": 12
+  },
+  "previous_legacy_suites": {
+    "canonical": 16,
+    "failure_isolation": 13,
+    "efficiency": 11,
+    "single_flow_mock": 10,
+    "durable_save": 11
+  },
+  "qa12_audit": "PASS",
+  "qa13_safe_partial": "PASS",
+  "real_WordPress_MariaDB_eBay_test": "NOT DONE",
+  "product_data_modified": false,
+  "new_worker": false,
+  "new_database_table": false,
+  "performance_scope": "deferred by user"
+}

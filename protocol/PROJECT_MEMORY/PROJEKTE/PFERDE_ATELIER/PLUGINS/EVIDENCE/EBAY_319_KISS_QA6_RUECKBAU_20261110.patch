@@ -1,0 +1,338 @@
+--- a/affiliate-portal-router/includes/trait-ppar-ebay.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay.php
+@@ -2636,34 +2636,6 @@
+         return substr(implode('-', array_filter($parts)), 0, 240);
+     }
+ 
+-    /**
+-     * V5.4.0: Die acht privaten Bereiche werden nicht mehr nur über je eine
+-     * Sammelphrase abgefragt. Kleine, fachlich kontrollierte Varianten erhöhen
+-     * die reale Abdeckung, während die nachgelagerte Fachklassifikation weiter
+-     * allein über die tatsächlichen Angebotsdaten entscheidet.
+-     */
+-    private function ebay_private_query_variants($rule) {
+-        $rule = is_array($rule) ? $rule : array();
+-        $id = sanitize_key((string) ($rule['id'] ?? ''));
+-        $map = array(
+-            'pferde-ponys'=>array('Pferd','Pony'),
+-            'sattel-zaumzeug'=>array('Pferdesattel','Zaumzeug Pferd','Trense Pferd'),
+-            'decken-schutz'=>array('Pferdedecke','Gamaschen Pferd','Fliegendecke Pferd'),
+-            'stall-weide-haltung'=>array('Pferdestall','Weidezaun Pferd','Heunetz Pferd'),
+-            'fuetterung-pflege'=>array('Pferdefutter','Pferdepflege','Putzzeug Pferd'),
+-            'anhaenger-transport'=>array('Pferdeanhänger','Pferdetransport','Transportgamaschen Pferd'),
+-            'reitbekleidung-zubehoer'=>array('Reitbekleidung','Reithelm','Reitstiefel','Lederreitstiefel','Dressurstiefel','Reitgummistiefel','Reithose','Reithandschuhe','Reitweste'),
+-            'sonstiges'=>array('Pferdezubehör','Reitsport Zubehör'),
+-        );
+-        $queries = isset($map[$id]) ? $map[$id] : array((string) ($rule['query'] ?? ''));
+-        $safe = array();
+-        foreach ($queries as $query) {
+-            $query = substr(sanitize_text_field((string) $query), 0, 100);
+-            if ($query !== '') { $safe[$query] = $query; }
+-        }
+-        if (!$safe && !empty($rule['query'])) { $safe[(string) $rule['query']] = substr(sanitize_text_field((string) $rule['query']), 0, 100); }
+-        return array_values($safe);
+-    }
+ 
+     /**
+      * Generic BUSINESS fallback query for a coarse rule. V6.17 no longer uses
+@@ -6356,9 +6328,6 @@
+         return wp_nonce_url($url, 'ppar_ebay_listing_preview_' . $post_id, '_ppar_ebay_preview_nonce');
+     }
+ 
+-    private function ebay_admin_preview_url($post_id, $base_preview_link = '') {
+-        return $this->ebay_secure_preview_url($post_id);
+-    }
+ 
+     /**
+      * WordPress' standard draft preview is not a supported HivePress listing route.
+@@ -7287,80 +7256,8 @@
+         return $this->control_get_decision($portal_key, 'output', $this->ebay_candidate_scope_key($item_id));
+     }
+ 
+-    private function ebay_private_bucket_definitions() {
+-        return array(
+-            'pferde-ponys'=>'Pferde & Ponys',
+-            'sattel-zaumzeug'=>'Sattel & Zaumzeug',
+-            'decken-schutz'=>'Decken & Schutz',
+-            'stall-weide-haltung'=>'Stall, Weide & Haltung',
+-            'fuetterung-pflege'=>'Fütterung & Pflege',
+-            'anhaenger-transport'=>'Anhänger & Transport',
+-            'reitbekleidung-zubehoer'=>'Reitbekleidung & Zubehör',
+-            'sonstiges'=>'Sonstiges',
+-        );
+-    }
+-
+-    /**
+-     * Recover a missing private target from durable evidence. This is used by the
+-     * stündlichen getItem refresh so older rows with target_term_id=0 are repaired
+-     * instead of failing their HivePress round-trip.
+-     */
+-    private function ebay_recover_private_target_term_id($row, $settings) {
+-        $row = is_array($row) ? $row : array();
+-        $settings = is_array($settings) ? $settings : $this->ebay_settings();
+-        $candidates = array();
+-        $row_target = absint($row['target_term_id'] ?? 0);
+-        if ($row_target > 0) { $candidates[] = $row_target; }
+-
+-        $listing_id = absint($row['listing_post_id'] ?? 0);
+-        if ($listing_id > 0 && function_exists('get_post_meta')) {
+-            $meta_target = absint(get_post_meta($listing_id, '_ppar_ebay_target_term_id', true));
+-            if ($meta_target > 0) { $candidates[] = $meta_target; }
+-        }
+-        if ($listing_id > 0 && function_exists('wp_get_post_terms')) {
+-            $term_ids = wp_get_post_terms($listing_id, 'hp_listing_category', array('fields'=>'ids'));
+-            if (!is_wp_error($term_ids)) {
+-                foreach ((array) $term_ids as $term_id) { $candidates[] = absint($term_id); }
+-            }
+-        }
+-
+-        $payload = json_decode((string) ($row['source_payload'] ?? ''), true);
+-        $classification = is_array($payload) && is_array($payload['portal_classification'] ?? null) ? $payload['portal_classification'] : array();
+-        $bucket_slug = sanitize_title((string) ($classification['private_bucket_slug'] ?? ''));
+-        if ($bucket_slug !== '' && function_exists('get_term_by')) {
+-            $term = get_term_by('slug', $bucket_slug, 'hp_listing_category');
+-            if (is_object($term)) { $candidates[] = absint($term->term_id ?? 0); }
+-        }
+-
+-        $rule = $this->ebay_rule_by_id((string) ($row['rule_id'] ?? ''), $settings);
+-        $rule_slug = sanitize_title((string) ($rule['target_term_slug'] ?? ''));
+-        if ($rule_slug !== '' && function_exists('get_term_by')) {
+-            $term = get_term_by('slug', $rule_slug, 'hp_listing_category');
+-            if (is_object($term)) { $candidates[] = absint($term->term_id ?? 0); }
+-        }
+-
+-        foreach (array_values(array_unique(array_filter(array_map('absint', $candidates)))) as $candidate) {
+-            $valid = $this->ebay_validate_private_target_term_id($candidate, $settings);
+-            if (!is_wp_error($valid)) { return absint($valid->term_id ?? 0); }
+-        }
+-        return 0;
+-    }
+-
+-    private function ebay_persist_recovered_private_target($row, $term_id) {
+-        $row = is_array($row) ? $row : array();
+-        $term_id = absint($term_id);
+-        if ($term_id <= 0) { return false; }
+-        global $wpdb;
+-        $row_id = absint($row['id'] ?? 0);
+-        if ($row_id > 0 && is_object($wpdb)) {
+-            $wpdb->update($this->ebay_items_table(), array('target_term_id'=>$term_id,'updated_at'=>time()), array('id'=>$row_id), array('%d','%d'), array('%d'));
+-        }
+-        $listing_id = absint($row['listing_post_id'] ?? 0);
+-        if ($listing_id > 0 && function_exists('update_post_meta')) {
+-            update_post_meta($listing_id, '_ppar_ebay_target_term_id', $term_id);
+-        }
+-        return true;
+-    }
++
++
+ 
+     private function ebay_validate_private_target_term_id($term_id, $settings) {
+         $term_id = absint($term_id);
+@@ -7459,19 +7356,6 @@
+         ), ARRAY_A);
+     }
+ 
+-    private function ebay_private_review_targets($settings = null) {
+-        $settings = is_array($settings) ? $settings : $this->ebay_settings();
+-        $root_id = absint($settings['private_root_term_id'] ?? 0);
+-        if ($root_id <= 0 || !function_exists('get_terms')) { return array(); }
+-        $terms = get_terms(array(
+-            'taxonomy'=>'hp_listing_category',
+-            'parent'=>$root_id,
+-            'hide_empty'=>false,
+-            'orderby'=>'name',
+-            'order'=>'ASC',
+-        ));
+-        return is_wp_error($terms) ? array() : array_values(array_filter((array) $terms, 'is_object'));
+-    }
+ 
+     /**
+      * Resolve one persisted rule id without widening the BUSINESS contract.
+@@ -10026,156 +9910,6 @@
+      * same taxonomy subtree, run the exact same policy/lifecycle/control gate,
+      * and append only unique valid rows until the 3x3 contract is satisfied.
+      */
+-    /**
+-     * Final parent 3x3 selection with category breadth.
+-     *
+-     * V6.34: the parent page must not simply show the nine newest listings.
+-     * A targeted enrichment (for example Reitstiefel) can create many fresh
+-     * posts at once and would otherwise monopolise the whole 3x3 overview even
+-     * though the underlying 250-item PRIVATE inventory is balanced. We therefore
+-     * build a small, policy-checked candidate pool per direct PRIVATE child and
+-     * select breadth-first across those children. The durable 250-item selection
+-     * itself is not changed here.
+-     */
+-    private function ebay_private_parent_refill_posts($safe, $query, $parent_id, $now, $limit = 9) {
+-        $safe = array_values((array)$safe);
+-        $limit = max(1, min(9, absint($limit)));
+-        if (!function_exists('get_posts')) { return array_slice($safe, 0, $limit); }
+-
+-        static $refilling = false;
+-        if ($refilling) { return array_slice($safe, 0, $limit); }
+-        $refilling = true;
+-        try {
+-            $parent_id = absint($parent_id);
+-            $child_ids = array();
+-            if (function_exists('get_terms')) {
+-                $direct = get_terms(array(
+-                    'taxonomy'=>'hp_listing_category','hide_empty'=>false,
+-                    'parent'=>$parent_id,'fields'=>'ids','orderby'=>'term_id','order'=>'ASC',
+-                ));
+-                if (!is_wp_error($direct)) {
+-                    foreach ((array)$direct as $id) { $id=absint($id); if($id>0){$child_ids[$id]=$id;} }
+-                }
+-            }
+-            // Compatibility fallback for installations where get_terms is filtered
+-            // unusually. Keep only direct children when term objects are available.
+-            if (!$child_ids && function_exists('get_term_children')) {
+-                $desc = get_term_children($parent_id, 'hp_listing_category');
+-                if (!is_wp_error($desc)) {
+-                    foreach ((array)$desc as $id) {
+-                        $id=absint($id); if($id<=0){continue;}
+-                        if(function_exists('get_term')){
+-                            $term=get_term($id,'hp_listing_category');
+-                            if(is_object($term) && absint($term->parent??0)!==$parent_id){continue;}
+-                        }
+-                        $child_ids[$id]=$id;
+-                    }
+-                }
+-            }
+-            if (!$child_ids) { return array_slice($safe, 0, $limit); }
+-
+-            $seen = array();
+-            $pool = array();
+-            foreach ($safe as $post) {
+-                $id=is_object($post)?absint($post->ID??0):0;
+-                if($id>0 && !isset($seen[$id])){$seen[$id]=true;$pool[]=$post;}
+-            }
+-            if (is_object($query) && isset($query->posts) && is_array($query->posts)) {
+-                foreach ($query->posts as $post) {
+-                    $id=is_object($post)?absint($post->ID??0):0;
+-                    if($id>0){$seen[$id]=true;}
+-                }
+-            }
+-
+-            // Fetch a bounded window independently per direct child. This is the
+-            // critical difference from the old global "latest 45" refill: even if
+-            // all 45 newest posts are boots, the other PRIVATE areas remain eligible
+-            // for the overview.
+-            foreach ($child_ids as $child_id) {
+-                $candidates = get_posts(array(
+-                    'post_type'=>'hp_listing','post_status'=>'publish',
+-                    'posts_per_page'=>6,'numberposts'=>6,
+-                    'tax_query'=>array(array(
+-                        'taxonomy'=>'hp_listing_category','field'=>'term_id','terms'=>array($child_id),
+-                        'operator'=>'IN','include_children'=>false,
+-                    )),
+-                    'orderby'=>'date','order'=>'DESC','ignore_sticky_posts'=>true,
+-                    'no_found_rows'=>true,'suppress_filters'=>true,
+-                ));
+-                if(!$candidates){continue;}
+-                $item_ids=array();$post_item_ids=array();
+-                foreach((array)$candidates as $post){
+-                    if(!is_object($post)||(string)($post->post_type??'')!=='hp_listing'){continue;}
+-                    $post_id=absint($post->ID??0);if($post_id<=0||isset($seen[$post_id])){continue;}
+-                    $item_id=sanitize_text_field((string)get_post_meta($post_id,'_ppar_ebay_item_id',true));
+-                    if($item_id!==''){$post_item_ids[$post_id]=$item_id;$item_ids[]=$item_id;}
+-                }
+-                $source_rows=$this->ebay_public_source_rows_by_item_ids($item_ids,'INDIVIDUAL');
+-                foreach((array)$candidates as $post){
+-                    if(!is_object($post)){continue;}
+-                    $post_id=absint($post->ID??0);if($post_id<=0||isset($seen[$post_id])){continue;}
+-                    $item_id=(string)($post_item_ids[$post_id]??'');
+-                    $source_row=$item_id!==''&&is_array($source_rows[$item_id]??null)?$source_rows[$item_id]:array();
+-                    if(!$this->ebay_private_public_post_allowed($post,$source_row,true,$now)){continue;}
+-                    $pool[]=$post;$seen[$post_id]=true;
+-                }
+-            }
+-
+-            // Bucket candidates by their canonical direct PRIVATE target. Native
+-            // HivePress listings without the plugin target marker fall back to their
+-            // assigned taxonomy terms and remain eligible.
+-            $buckets=array();$unbucketed=array();
+-            foreach($pool as $post){
+-                if(!is_object($post)){continue;}
+-                $post_id=absint($post->ID??0);if($post_id<=0){continue;}
+-                $bucket=absint(get_post_meta($post_id,'_ppar_ebay_target_term_id',true));
+-                if(!isset($child_ids[$bucket])){
+-                    $bucket=0;
+-                    if(function_exists('wp_get_post_terms')){
+-                        $terms=wp_get_post_terms($post_id,'hp_listing_category',array('fields'=>'ids'));
+-                        if(!is_wp_error($terms)){
+-                            foreach((array)$terms as $term_id){$term_id=absint($term_id);if(isset($child_ids[$term_id])){$bucket=$term_id;break;}}
+-                        }
+-                    }
+-                }
+-                if($bucket>0){$buckets[$bucket][]=$post;}else{$unbucketed[]=$post;}
+-            }
+-
+-            // Preserve the order in which categories first appeared in the public
+-            // candidate set, then append any missing direct children deterministically.
+-            $order=array();
+-            foreach($pool as $post){
+-                $post_id=is_object($post)?absint($post->ID??0):0;if($post_id<=0){continue;}
+-                $bucket=absint(get_post_meta($post_id,'_ppar_ebay_target_term_id',true));
+-                if(isset($child_ids[$bucket])&&!isset($order[$bucket])){$order[$bucket]=$bucket;}
+-            }
+-            foreach($child_ids as $child_id){if(!isset($order[$child_id])){$order[$child_id]=$child_id;}}
+-
+-            $balanced=array();$used=array();$depth=0;
+-            while(count($balanced)<$limit){
+-                $added=0;
+-                foreach($order as $child_id){
+-                    if(count($balanced)>=$limit){break;}
+-                    if(!isset($buckets[$child_id][$depth])){continue;}
+-                    $post=$buckets[$child_id][$depth];$id=absint($post->ID??0);
+-                    if($id<=0||isset($used[$id])){continue;}
+-                    $balanced[]=$post;$used[$id]=true;$added++;
+-                }
+-                if($added===0){break;}
+-                $depth++;
+-            }
+-            // Only if the direct-child pool cannot fill nine cards, preserve valid
+-            // unbucketed/native rows as a final fallback.
+-            foreach($unbucketed as $post){
+-                if(count($balanced)>=$limit){break;}
+-                $id=is_object($post)?absint($post->ID??0):0;
+-                if($id>0&&!isset($used[$id])){$balanced[]=$post;$used[$id]=true;}
+-            }
+-            return array_slice($balanced,0,$limit);
+-        } finally {
+-            $refilling = false;
+-        }
+-    }
+ 
+     public function ebay_filter_stale_posts($posts, $query = null) {
+         // Retired eBay-owned PRIVATE listings never reach the public frontend.
+@@ -10860,18 +10594,7 @@
+         return is_array($state) ? $state : array();
+     }
+ 
+-    private function ebay_business_local_recovery_state_save($state) {
+-        $state = is_array($state) ? $state : array();
+-        $state['updated_at'] = time();
+-        update_option('ppar_ebay_business_local_recovery_state_v1', $state, false);
+-        return $state;
+-    }
+-
+-    private function ebay_business_local_recovery_state_current($state) {
+-        return is_array($state)
+-            && hash_equals((string) self::EBAY_RUNTIME_BUILD, (string) ($state['build'] ?? ''))
+-            && in_array(sanitize_key((string) ($state['status'] ?? '')), array('running','complete','failed'), true);
+-    }
++
+ 
+ 
+     /** V6.27 one-time BUSINESS restoration after the V6.26 scope leak. */
+--- a/affiliate-portal-router/includes/trait-ppar-ebay-run.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+@@ -746,7 +746,7 @@
+         $key = sanitize_key((string)$key);
+         if ($key === '') { return array(); }
+         $run = $this->ebay_run_load();
+-        if ($this->ebay_run_is_open($run) || (string)($run['schema'] ?? '') === '1.0') {
++        if ((string)($run['schema'] ?? '') === '1.0') {
+             $phase_state = is_array($run['phase_state'] ?? null) ? $run['phase_state'] : array();
+             $state = $phase_state[$key] ?? array();
+             return is_array($state) ? $state : array();

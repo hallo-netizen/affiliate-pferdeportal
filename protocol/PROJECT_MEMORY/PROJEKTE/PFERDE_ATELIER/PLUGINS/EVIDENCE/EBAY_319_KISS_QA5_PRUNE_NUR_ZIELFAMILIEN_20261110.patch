@@ -1,0 +1,31 @@
+--- QA4/includes/trait-ppar-ebay.php
++++ QA5/includes/trait-ppar-ebay.php
+@@ -5009,10 +5009,24 @@
+         }
+         $limit=max(1,min(50,absint($limit)));
+         $table=$this->ebay_items_table();$cursor=absint($state['business_prune_cursor']??0);
+-        $rows=$wpdb->get_results($wpdb->prepare(
+-            "SELECT * FROM {$table} WHERE id>%d AND seller_account_type='BUSINESS' ORDER BY id ASC LIMIT %d",
+-            $cursor,$limit
+-        ),ARRAY_A);
++        // The gap-fill cleanup only ever acts on its targeted product families.
++        // Filter at the database instead of reading every unrelated BUSINESS
++        // source row. Keep the original ID cursor and full-prune path intact.
++        $gapfill=sanitize_key((string)($state['business_target_mode']??''))==='gapfill';
++        $target_ids=array();
++        if($gapfill){
++            $target_ids=array_values(array_unique(array_filter(array_map('sanitize_key',(array)($state['business_target_concepts']??array())))));
++        }
++        if($gapfill && $target_ids){
++            $marks=implode(',',array_fill(0,count($target_ids),'%s'));
++            $sql="SELECT * FROM {$table} WHERE id>%d AND seller_account_type='BUSINESS' AND rule_id IN ({$marks}) ORDER BY id ASC LIMIT %d";
++            $rows=$wpdb->get_results($wpdb->prepare($sql,...array_merge(array($cursor),$target_ids,array($limit))),ARRAY_A);
++        }else{
++            $rows=$wpdb->get_results($wpdb->prepare(
++                "SELECT * FROM {$table} WHERE id>%d AND seller_account_type='BUSINESS' ORDER BY id ASC LIMIT %d",
++                $cursor,$limit
++            ),ARRAY_A);
++        }
+         if (!is_array($rows) || (string)($wpdb->last_error ?? '') !== '') {
+             $state['phase']='failed';$state['status']='failed';$state['failed_at']=time();
+             $state['failure_reason']='ebay_business_selection_storage_read_failed';

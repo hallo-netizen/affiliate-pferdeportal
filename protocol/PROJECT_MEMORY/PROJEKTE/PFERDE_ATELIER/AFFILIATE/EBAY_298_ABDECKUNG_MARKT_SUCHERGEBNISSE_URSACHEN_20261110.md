@@ -1,0 +1,43 @@
+# Pferdeatelier eBay – 298er Abdeckung: Quellen-/Markt-/Reihenfolge-Audit
+
+**10.11.2026 | Prüfbefund; KEIN Release, keine Datenmutation.** Prüfung der tatsächlich ausgelieferten isolierten Plugin-ZIP `6.72.321 QA9`, der Screenshots und des bereits vom Nutzer am 09.11.2026 gelieferten 187-Familien-Exports. Ergänzende unabhängige eBay-Marktplatz-Stichproben. Wo ein produktiver aktueller Datenbankbeleg fehlt, wird das klar getrennt.
+
+## A. Ausgangszahlen statt neuer Suchschleife
+
+- **Aktueller Screenshot 17:48:** `running / gapfill_discovery`, **399 Arbeitspakete / 404 echte Schritte**, letzte echte Bewegung 17:47:38, **154/298** öffentlicher Abdeckungsstand, **144** noch ohne nachgewiesene öffentliche Familienabdeckung; **232 gespeicherte eBay-Freigaben**. Die Zahlen sind verschiedene Kriterien, nicht dasselbe. Die Auswahl-Teilphase der vorangehenden Runde hatte **310 Quellen geprüft und 299 aktiv/materialisiert**.
+- **Früherer echter Bericht/CSV vom 09.11.**: **187 damals fehlende** Produktfamilien. Davon **86 ohne Treffer im Suchausschnitt**, **98 mit Treffern, jedoch alle abgelehnt**, **3 mit angenommenem Treffer, trotzdem ohne öffentliche Abdeckung**. Insgesamt wurden in diesem damaligen Ausschnitt **930 Treffer** gemeldet, davon **611 blockiert**. Diese Zahlen **nicht** auf die heutigen 144 Familien umetikettieren.
+- Bei **81 von 86** damals null Treffer liefernden Suchanfragen wurde dem Produktnamen automatisch „Pferd“ angehängt. QA9 enthält inzwischen bereits die gezielte zweite Suche mit dem unveränderten wörtlichen Katalogtitel (`ebay_business_gap_query_variants`, `ebay_sync_profiles`), **also ist diese Korrektur nicht neu zu bauen**. Im aktuellen Screenshot ist der Lauf noch in der Suche; deren Ergebnis ist nicht veröffentlicht.
+- Die bereits bekannte Dublettenursache (dasselbe eBay-Item früher nur einmal für eine einzige Produktfamilie erfasst) ist in QA9 **bereits** durch `business_processed_by_concept` sowie `ebay_business_add_verified_secondary` adressiert. **Nicht wieder als neuen Fix anbieten**; dessen echte Wirksamkeit gegenüber Live-Daten nicht ungeprüft behaupten.
+
+## B. Was „298 Kategorien“ im Code wirklich bedeutet
+
+In `assets/ebay-portal-catalog-v2.json` stehen **329** BUSINESS-Produktkonzepte, davon **324** im ursprünglich deklarierten Liefermanifest; **26 explizite Nicht-Waren-/Beratungs-/Versicherungs-/Dokumentfamilien** werden nach `ebay_business_required_product_concept_ids()` abgezogen. Resultat exakt **298** – **eigene Pferdeatelier-Produktseiten/Familien, nicht 298 bestätigte eBay-Warengruppen oder eBay-Kategorien**. Alle 298 IDs sind im Katalog vorhanden. Dieser Sollstand ist eine interne redaktionelle Zielgröße, kein Beleg, dass jede Familie auf eBay gewerblich verfügbar ist.
+
+`ebay_business_catalog_profiles` erzeugt für diese eigenen Familien Suchwörter, **keine 1:1 eBay-Kategorie-ID-Zuordnung**. `ebay_build_search_request` beschränkt die Ergebnisse derzeit auf **Gewerbliche Verkäufer (`sellerAccountTypes=BUSINESS`)**, **Lieferbarkeit nach Deutschland** und **eine Ergebnisseite mit bis zu 30 Angeboten** je Profil. `page_limit=1`, `route_limit=5` in der Konzeptsuche. eBay unterstützt die Filter nach offiziellen Vorgaben. **Null Treffer unter diesen Filtern bedeutet nicht „eBay führt das Produkt nicht“.**
+
+## C. Marketplace-Stichproben – reale Angebotsnachweise, keine Behauptung für alle 144
+
+- eBay.de-Produktbereich [Reitplatzplaner](https://www.ebay.de/b/Reitplatzplaner/bn_7005726853) listete bei externer Recherche **56 Ergebnisse**, darunter reale gewerbliche Reitplatzplaner; die Pferdeatelier-Familie `concept-reitplatzplaner` ist ausdrücklich eine Ware, keine redaktionelle Dienstleistung.
+- eBay.de zeigt [LED-Rückleuchten für Pferdeanhänger](https://www.ebay.de/itm/166851846902) mit gewerblichem Verkäufer und angezeigter Menge. Die Pferdeatelier-Familie `concept-anhangerbeleuchtung` besitzt hierfür sogar den genaueren Katalog-Suchbegriff **„LED Rückleuchte Pferdeanhänger“**.
+- eBay-Suche [Pferdeanhänger Cheval](https://www.ebay.de/shop/pferdeanhaenger-cheval?_nkw=pferdeanh%C3%A4nger+cheval) listet tatsächlich 1,5er Pferdeanhänger, in der beobachteten Trefferauswahl **vorwiegend von privaten Verkäufern**. Damit kann die ausschließlich gewerbliche Plugin-Suche sichtbar weniger passende Treffer liefern als die eBay-Website.
+- **Grenze:** Ohne die **aktuelle vollständige Liste der 144 IDs samt Live-Profilständen** kann nicht bewiesen werden, welche dieser Beispiele derzeit fehlen. Webangebot und tatsächliche Browse-API-Antwort mit diesen Filtern sind nicht identisch. Keine pauschale Marktabdeckungs-Prozentzahl daraus ableiten.
+
+## D. Harte Ursachen im Plugin-Ablauf – mit exaktem Codeweg
+
+1. `ebay_run_tick_coverage` betrachtet ausschließlich **öffentlich belegte Produktkampagnen**. Bei Lücken und erstem Nachsuchversuch setzt es **sofort `phase=gapfill_discovery`** und speichert alle fehlenden Familien als Suchziel.
+2. `ebay_run_tick_gapfill` startet bzw. führt danach **die erneute eBay-Discovery** für diese Familien aus. Sie speichert passende Quellen **nur als Kandidaten** (`ebay_sync_process_item`), veröffentlicht nicht jede Antwort.
+3. **Erst nachdem die gesamte Nachsuche abgeschlossen ist**, wechselt der Lauf in `gapfill_select`, wo `ebay_selection_prepare_business_batch` und `ebay_selection_reuse_checkpoint_batch` die **bereits gespeicherten** geeigneten Angebote erneut klassifizieren / auswählen und materialisieren; QA9 kann danach individuell qualifizierte Produkte früh freigeben.
+4. **Die Reihenfolge ist sachlich ungünstig:** Bei zuvor gefundenen und lediglich nicht zugeordneten/nicht veröffentlichten Angeboten wird eine neue Marktsuche **vor** dem Abschöpfen des bekannten Bestands gestartet. Die 98 früheren „Treffer da, abgelehnt“ darf man trotzdem **nicht** ungeprüft als gültigen Vorrat behandeln. Sie brauchen den bereits gespeicherten konkreten Ablehnungsgrund, nicht pauschales Lockerlassen.
+5. **Daher steigt bei Phase `gapfill_discovery` der öffentliche 154er-Wert nicht automatisch mit den 399 Paketen.** Das ist keine Beweislage für 144 völlig fehlende eBay-Produkte und kein Beweis eines Worker-Stillstands.
+6. Das öffentliche Gate `ebay_run_public_business_coverage` verlangt zusätzlich gültige Quelle, nicht abgelaufene Sechs-Stunden-Frische, Creative, korrekt klassifizierte Familie, tatsächlich veröffentlichte Kampagne und passenden Produktseitenschlüssel. **299 materialisiert / 232 gespeichert sind daher nicht 299 bzw. 232 öffentlich versorgte Familien.**
+7. Bestehender `ebay_run_business_safe_supply_gap_contract` kann nach begrenztem und vollständig belegtem Lauf **sichere offene Versorgungslücken akzeptieren**, ohne 298/298 zu erzwingen. Eine Wiederholung aller Familien bis 100 % ist weder nötig noch korrekt.
+
+## E. KISS-Entscheidung, noch NICHT als umgesetzt melden
+
+**Nicht nochmal den gesamten Katalog suchen, nicht 144 Seiten einzeln kontrollieren, keine Ablehnungsgründe erneut sammeln und keine eBay-Qualitätsregeln blind entfernen.**
+
+Für den **nächsten** echten Ursachenfix zuerst im **vorhandenen einen kanonischen Auswahl- und Freigabeweg** die **gespeicherten geeigneten Treffer** der offenen Familien prüfen, zuordnen und gegebenenfalls mit gültiger Verfügbarkeitsprüfung veröffentlichen; **erst danach** ausschließlich für wirklich weiterhin unversorgte Familien neue eBay-Suchprofile fahren. Fälle getrennt halten: (a) keine Treffer in begrenzter Suche, (b) irrelevante oder unzulässige Treffer, (c) technische Fehler, (d) geeignete Treffer, aber falsche Zuordnung / fehlende Veröffentlichung. Nur (a) und berechtigt reparierbare Fälle (b) bekommen neue Suchvarianten; (c) retry im bestehenden Fehlertakt; (d) repariert man im vorhandenen Zuordnungs-/Publikationsweg statt durch mehr Suche.
+
+**Implementierungsrisiko:** Den vorhandenen `gapfill_select` nicht einfach vor `gapfill_discovery` umschalten: Er enthält auch Bereinigung/Prune und könnte bei vorläufig unversorgten Familien den letzten gültigen Bestand zurücknehmen. Zuerst eine **fail-closed und nur auf gültige Einzelprodukte begrenzte** wiederverwendete Bestandsprüfung sichern, dann Discovery-Notwendigkeit neu feststellen; Run-UUID, Cursor, Recherchedaten, Checkpoints, Zielseiten, alte Freigaben und 6h-Regel unverändert. Den bereits laufenden Run nicht durch einen Versionswechsel mitten in der Suche zurücksetzen.
+
+**Technische Grenze:** Die bereits vorhandenen 144 aktuellen Familien und individuellen Live-Ablehnungscodes konnten nicht direkt aus WordPress/MariaDB gelesen werden; nur der ältere CSV-Auszug und die laufenden Screenshots liegen vor. Deshalb keine Behauptung einer behobenen realen Abdeckung und **keine neue ZIP-Freigabe** aus diesem Audit.

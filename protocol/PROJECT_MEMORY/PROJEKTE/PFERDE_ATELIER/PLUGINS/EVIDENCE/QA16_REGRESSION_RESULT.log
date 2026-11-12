@@ -1,0 +1,18 @@
+EBAY_KISS_TEST_END_TO_END_MOCK_20261110.php PASS PASS State persisted after each phase through one save method / KISS_SINGLE_FLOW 10/10 PASS / 
+EBAY_319_KISS_QA3_TEST_EFFIZIENZ_20261110.php PASS PASS empty selection may continue to coverage without forcing products / SELECTED_ONLY_MATERIALIZE 11/11 PASS / 
+EBAY_319_KISS_16_KANONISCHE_TESTS_20261110.php PASS PASS Reuse stops after three accepted offers, not unbounded / KISS_CENTRAL_BUSINESS_QA 16/16 PASS / 
+EBAY_319_KISS_QA2_TEST_EINZELFEHLER_20261110.php PASS PASS safe-vs-technical gap separated / CANONICAL_FAILURE_ISOLATION 13/13 PASS / 
+EBAY_KISS_CURRENT_138_FAMILIEN_REPLAY_TEST_20261111.php PASS PASS Old published statistics retained / DATASET_RUN=138 FAMILIES; BATCHES=35; LOCAL_CHECKS=136 / 
+EBAY_KISS_TEST_PERSISTENZ_20261110.php PASS PASS Unknown previous run fields preserved during checkpoint update / KISS_DURABLE_SAVE 11/11 PASS / 
+QA5_PRUNE_PARITY PASS     "read_rows": 29, /     "steps": 1 / }
+QA4_STATE_PARITY PASS {"coverage":{"required":2,"covered":2,"missing":[],"counts":{"sattel":164,"heunetze":55},"invalid":{"4":"creative_source_mismatch","166":"creative_identity_missing","167":"source_m
+QA12_AUDIT_REAL_METHOD_TEST.php PASS PASS audit never stores API secrets/settings / ALL QA12 REAL PHP AUDIT TESTS PASS / 
+QA13_PUBLIC_APPEND_REAL_TRAIT_TEST.php PASS PASS old safe checkpoint retained when a legacy run has unmapped failures / ALL QA13 LEGACY-STATE SAFETY TESTS PASS / 
+QA14_POST_ARTICLE_REFRESH_REAL_TRAIT_TEST.php PASS PASS revision supersession resets to new revision and resumes first batch / ALL QA14 ARTICLE REFRESH CASES PASS / 
+QA14_ENDED_REPLACEMENT_REAL_TRAIT_TEST.php PASS PASS no duplicate public append worker when second reserve succeeds / ALL QA14 ENDED-REPLACEMENT ORIGINAL-TRAIT TESTS PASS / 
+qa15_audit_matrix.php PASS PASS archive index retains old failure / QA15_AUDIT_STORAGE_MATRIX_PASSED / 
+full_workflow_sim.php PASS PASS: old run journal survives a new run / PASS: only existing dispatch call used / INTEGRATED_SCENARIO_PASSED with simulated external WordPress/eBay phases; real canonical dispatc
+QA15_LAST_MILE_REAL_METHOD_TEST.php PASS PASS admin status read is side-effect-free and did not schedule a job / ALL QA11 PUBLIC SOURCE, SAFE RESUME & READ-ONLY UI TESTS PASS / 
+qa15_availability_while_paused.php PASS PASS next verification due about 2h independent of search / PASS no immediate duplicate availability check / QA15_INDEPENDENT_AVAILABILITY_TEST_PASSED\n
+QA15_ADMIN_CSV_EXPORT PASS 106 rows; 104 prior-run events, 1 new-run, 1 marked legacy summary
+TOTAL= 17 FAILED= 0 []

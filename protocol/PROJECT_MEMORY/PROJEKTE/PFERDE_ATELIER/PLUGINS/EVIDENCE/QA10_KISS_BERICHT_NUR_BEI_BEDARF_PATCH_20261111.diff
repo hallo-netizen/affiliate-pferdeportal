@@ -1,0 +1,78 @@
+--- /mnt/data/qa10_analysis/affiliate-portal-router/includes/trait-ppar-ebay.php	2026-11-10 16:11:22.000000000 +0000
++++ /mnt/data/qa10_stage/affiliate-portal-router/includes/trait-ppar-ebay.php	2026-11-11 08:34:05.615572787 +0000
+@@ -4407,6 +4407,7 @@
+             $concept = (array)($lookup[$id] ?? array());
+             $stats = (array)($by_concept[$id] ?? array());
+             $requests = 0; $found = 0; $accepted = 0; $blocked = 0;
++            $duplicates = 0; $review_pending = 0; $capacity_skipped = 0;
+             $unfinished = false; $technical = false; $queries = array(); $reasons = array();
+             foreach ($stats as $stat) {
+                 foreach (array('hard_reasons','technical_reasons','review_reasons') as $reason_field) {
+@@ -4419,6 +4420,9 @@
+                 $found += absint($stat['received'] ?? 0);
+                 $accepted += absint($stat['accepted'] ?? 0);
+                 $blocked += absint($stat['hard_blocked'] ?? 0) + absint($stat['technical_blocked'] ?? 0);
++                $duplicates += absint($stat['duplicates_skipped'] ?? 0);
++                $review_pending += absint($stat['review_pending'] ?? 0);
++                $capacity_skipped += absint($stat['capacity_skipped'] ?? 0);
+                 if (empty($stat['complete'])) { $unfinished = true; }
+                 if (absint($stat['technical_blocked'] ?? 0) > 0 || in_array(sanitize_key((string)($stat['stopped_reason'] ?? '')), array('request_error','transient_retry_exhausted'), true)) { $technical = true; }
+                 $q = sanitize_text_field((string)($stat['query'] ?? ''));
+@@ -4434,6 +4438,10 @@
+                 'id'=>$id,'title'=>sanitize_text_field((string)($concept['title'] ?? $id)),
+                 'query'=>implode(' | ',array_keys($queries)),
+                 'requests'=>$requests,'found'=>$found,'accepted'=>$accepted,'blocked'=>$blocked,
++                // Expose the EXISTING per-profile accounting. The counters may
++                // overlap; do not subtract them as if every listing were unique.
++                'duplicates_skipped'=>$duplicates,'review_pending'=>$review_pending,
++                'capacity_skipped'=>$capacity_skipped,'search_incomplete'=>$unfinished,
+                 'assessment'=>$assessment, 'rejection_reasons'=>$reasons,
+             );
+         }
+@@ -10977,11 +10985,23 @@
+                 <?php
+                     // One-click report of the EXISTING canonical missing-ID list.
+                     // No provider call, no write, no worker and no extra admin endpoint.
+-                    $ppar_missing_report = $this->ebay_missing_family_diagnostic_rows($canonical_run, $selection_state, $job_summary);
++                    // A closed report must never perform its full catalog
++                    // aggregation on every slow admin-page request.
++                    // Same admin page, same read-only report; no new AJAX/worker.
++                    $ppar_missing_requested = isset($_GET['ppar_ebay_report'])
++                        && is_scalar($_GET['ppar_ebay_report'])
++                        && (string) $_GET['ppar_ebay_report'] === '1';
++                    $ppar_missing_report = $ppar_missing_requested
++                        ? $this->ebay_missing_family_diagnostic_rows($canonical_run, $selection_state, $job_summary)
++                        : array();
+                     $ppar_missing_rows = (array)($ppar_missing_report['rows'] ?? array());
+                 ?>
+-                <details id="ppar-ebay-missing-report" style="margin:12px 0">
++                <details id="ppar-ebay-missing-report" style="margin:12px 0" <?php if ($ppar_missing_requested) { echo 'open'; } ?>>
+                     <summary><strong>Fehlende Produktfamilien einzeln anzeigen und CSV herunterladen</strong> (gespeicherter Stand – kein neuer Abruf)</summary>
++                    <?php if (!$ppar_missing_requested) : ?>
++                        <p><a class="button" href="<?php echo esc_url(add_query_arg('ppar_ebay_report', '1', admin_url('admin.php?page=affiliate-portal-ebay'))); ?>">Gespeicherten Bericht bei Bedarf laden</a></p>
++                        <p class="description">Keine eBay-Abfrage; nur vorhandene Suchdaten.</p>
++                    <?php else : ?>
+                     <p><strong>Quelle:</strong> <?php echo esc_html((string)($ppar_missing_report['origin'] ?? '')); ?> · <strong>Stand:</strong> <?php echo absint(count($ppar_missing_rows)); ?> fehlende von <?php echo absint($ppar_missing_report['required'] ?? 0); ?> Produktfamilien.</p>
+                     <p class="description"><?php echo esc_html((string)($ppar_missing_report['message'] ?? '')); ?> Keine Kategorie wird aufgrund fehlender Suchtreffer als auf eBay nicht erhältlich bezeichnet.</p>
+                     <?php if (empty($ppar_missing_report['valid'])) : ?>
+@@ -11002,10 +11022,10 @@
+                             if(!btn||!data) return;
+                             btn.addEventListener('click',function(){
+                                 var payload;try{payload=JSON.parse(data.textContent);}catch(e){document.getElementById('ppar-ebay-missing-download-result').textContent='Gespeicherte Liste konnte nicht gelesen werden.';return;}
+-                                var headers=['run_uuid','quelle','familien_id','produktfamilie','suche','anfragen','angebote_im_teilabschnitt','davon_angenommen','blockiert','bewertung','ablehnungsgruende'];
++                                var headers=['run_uuid','quelle','familien_id','produktfamilie','suche','anfragen','angebote_im_teilabschnitt','davon_angenommen','blockiert','bewertung','ablehnungsgruende','duplikate_uebersprungen','zur_pruefung','kapazitaet_uebersprungen','suchprofil_unvollstaendig'];
+                                 function csv(v){v=String(v==null?'':v);if(/^[=+@\-\t\r]/.test(v))v="'"+v;return '"'+v.replace(/"/g,'""')+'"';}
+                                 var rows=[headers];
+-                                (payload.rows||[]).forEach(function(r){rows.push([payload.run_uuid||'',payload.origin||'',r.id||'',r.title||'',r.query||'',r.requests||0,r.found||0,r.accepted||0,r.blocked||0,r.assessment||'',Object.entries(r.rejection_reasons||{}).sort(function(a,b){return b[1]-a[1];}).map(function(e){return e[0]+': '+e[1];}).join(' | ')]);});
++                                (payload.rows||[]).forEach(function(r){rows.push([payload.run_uuid||'',payload.origin||'',r.id||'',r.title||'',r.query||'',r.requests||0,r.found||0,r.accepted||0,r.blocked||0,r.assessment||'',Object.entries(r.rejection_reasons||{}).sort(function(a,b){return b[1]-a[1];}).map(function(e){return e[0]+': '+e[1];}).join(' | '),r.duplicates_skipped||0,r.review_pending||0,r.capacity_skipped||0,r.search_incomplete?'ja':'nein']);});
+                                 var contents='\ufeff'+rows.map(function(a){return a.map(csv).join(';');}).join('\r\n');
+                                 var blob=new Blob([contents],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+                                 a.href=url;a.download='Pferdeatelier_eBay_fehlende_Produktfamilien_'+(payload.run_uuid||'stand').slice(0,12)+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);
+@@ -11014,6 +11034,7 @@
+                         })();
+                         </script>
+                     <?php endif; ?>
++                    <?php endif; // requested report only ?>
+                 </details>
+ 
+                 <?php if ($canonical_status === 'failed') : ?><div class="notice notice-error inline"><p><strong>Gesamtlauf FEHLER:</strong> <code><?php echo esc_html($canonical_error_code ?: 'error_code_missing'); ?></code> · <?php echo esc_html($canonical_error_message ?: 'Fehlertext fehlt im persistenten Run-State.'); ?></p>

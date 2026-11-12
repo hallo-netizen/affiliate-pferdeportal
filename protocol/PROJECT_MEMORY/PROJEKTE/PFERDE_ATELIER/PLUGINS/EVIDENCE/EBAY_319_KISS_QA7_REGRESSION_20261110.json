@@ -1,0 +1,161 @@
+{
+  "qa7_php_tests": [
+    {
+      "case": "EBAY_319_KISS_16_KANONISCHE_TESTS_20261110.php",
+      "pass": true,
+      "individual_checks": 16,
+      "last_line": "KISS_CENTRAL_BUSINESS_QA 16/16 PASS"
+    },
+    {
+      "case": "EBAY_319_KISS_QA2_TEST_EINZELFEHLER_20261110.php",
+      "pass": true,
+      "individual_checks": 13,
+      "last_line": "CANONICAL_FAILURE_ISOLATION 13/13 PASS"
+    },
+    {
+      "case": "EBAY_319_KISS_QA3_TEST_EFFIZIENZ_20261110.php",
+      "pass": true,
+      "individual_checks": 11,
+      "last_line": "SELECTED_ONLY_MATERIALIZE 11/11 PASS"
+    },
+    {
+      "case": "EBAY_KISS_TEST_END_TO_END_MOCK_20261110.php",
+      "pass": true,
+      "individual_checks": 10,
+      "last_line": "KISS_SINGLE_FLOW 10/10 PASS"
+    },
+    {
+      "case": "EBAY_KISS_TEST_PERSISTENZ_20261110.php",
+      "pass": true,
+      "individual_checks": 11,
+      "last_line": "KISS_DURABLE_SAVE 11/11 PASS"
+    }
+  ],
+  "qa6_qa7_existing_tests_parity": [
+    {
+      "scenario": "normal",
+      "source": "trait-ppar-ebay-run.php",
+      "identical": true
+    },
+    {
+      "scenario": "allow",
+      "source": "trait-ppar-ebay-run.php",
+      "identical": true
+    },
+    {
+      "scenario": "source-error",
+      "source": "trait-ppar-ebay-run.php",
+      "identical": true
+    },
+    {
+      "scenario": "creative-error",
+      "source": "trait-ppar-ebay-run.php",
+      "identical": true
+    },
+    {
+      "scenario": "gapfill",
+      "source": "trait-ppar-ebay.php",
+      "identical": true
+    },
+    {
+      "scenario": "gapfill_empty",
+      "source": "trait-ppar-ebay.php",
+      "identical": true
+    },
+    {
+      "scenario": "gapfill_resume",
+      "source": "trait-ppar-ebay.php",
+      "identical": true
+    },
+    {
+      "scenario": "gapfill_single",
+      "source": "trait-ppar-ebay.php",
+      "identical": true
+    },
+    {
+      "scenario": "gapfill_sparse_tail",
+      "source": "trait-ppar-ebay.php",
+      "identical": true
+    },
+    {
+      "scenario": "checkpoint_gapfill",
+      "source": "trait-ppar-ebay.php",
+      "identical": true
+    },
+    {
+      "scenario": "full",
+      "source": "trait-ppar-ebay.php",
+      "identical": true
+    },
+    {
+      "scenario": "checkpoint",
+      "source": "trait-ppar-ebay.php",
+      "identical": true
+    },
+    {
+      "scenario": "error",
+      "source": "trait-ppar-ebay.php",
+      "identical": true
+    }
+  ],
+  "qa6_qa7_persistence_cases": [
+    {
+      "case": "valid",
+      "q6_reads": 3,
+      "q7_reads": 2,
+      "return_same": true,
+      "state_same": true
+    },
+    {
+      "case": "empty",
+      "q6_reads": 3,
+      "q7_reads": 2,
+      "return_same": true,
+      "state_same": true
+    },
+    {
+      "case": "null",
+      "q6_reads": 3,
+      "q7_reads": 2,
+      "return_same": true,
+      "state_same": true
+    },
+    {
+      "case": "scalar",
+      "q6_reads": 3,
+      "q7_reads": 2,
+      "return_same": true,
+      "state_same": true
+    },
+    {
+      "case": "badobject",
+      "q6_reads": 3,
+      "q7_reads": 2,
+      "return_same": true,
+      "state_same": true
+    },
+    {
+      "case": "refused",
+      "q6_reads": 2,
+      "q7_reads": 2,
+      "return_same": true,
+      "state_same": true
+    },
+    {
+      "case": "missing-schema",
+      "q6_reads": 1,
+      "q7_reads": 1,
+      "return_same": true,
+      "state_same": true
+    },
+    {
+      "case": "bad-key",
+      "q6_reads": 0,
+      "q7_reads": 0,
+      "return_same": true,
+      "state_same": true
+    }
+  ],
+  "all_pass": true,
+  "wordpress_real_test": false
+}

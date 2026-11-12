@@ -1,0 +1,24 @@
+{
+  "version": "6.72.326",
+  "zip": "/mnt/data/Pferdeatelier_Affiliate_6.72.326_QA15_KISS_GESAMTABLAUF_NUR_TEST.zip",
+  "files": 66,
+  "php_lint_pass": 23,
+  "crc_pass": true,
+  "unchanged_files": 62,
+  "changed_files": [
+    "affiliate-portal-router/includes/trait-ppar-ebay-run.php",
+    "affiliate-portal-router/includes/trait-ppar-ebay.php",
+    "affiliate-portal-router/pferdeportal-affiliate-router.php",
+    "affiliate-portal-router/readme.txt"
+  ],
+  "sha256": "c453831225c0c7d005c66140622abb8e636b9884aa796b363a0e2456ce525b1a",
+  "bytes": 5376701,
+  "integrated_scenarios": 17,
+  "integrated_failures": 0,
+  "test_limitations": [
+    "WordPress and MariaDB were substituted in test harness",
+    "eBay provider responses were mocked",
+    "no live authenticated WP e2e",
+    "frontend visibility not externally proven"
+  ]
+}
