@@ -9,6 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Identify all hybrid campaign and provider filter call sites plus actual import button
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          import re
+          z=ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          for f in z.namelist():
+            if not f.endswith('.php'):continue
+            a=z.read(f).decode('utf8','replace').splitlines()
+            for i,line in enumerate(a):
+              if any(t in line for t in ['multiprovider_filter_candidates_by_strategy(', 'idealo_standalone_campaign_allowed(', 'idealo_queue_manual_refresh(', 'idealo_render_sync_card(', 'idealo_download_feed_to_temp(']):
+                print('CALL',f,i+1,line[:650])
+                for j in range(max(0,i-3),min(len(a),i+5)):
+                  print('NEAR',f,j+1,a[j][:480])
+          PY
       - name: Inspect feed streaming, URL validation and image exact-match topology
         shell: bash
         run: |
