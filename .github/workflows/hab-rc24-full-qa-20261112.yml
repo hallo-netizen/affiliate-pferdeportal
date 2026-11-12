@@ -57,7 +57,14 @@ jobs:
               drv.set_window_size(width,980)
               drv.get(url)
               drv.execute_script("""const s=document.createElement('style');s.textContent=arguments[0];document.head.append(s);
-                   document.querySelector('.ppar-hb-category-products-grid').scrollIntoView({block:'center'});""",new)
+                   const grid=document.querySelector('.ppar-hb-category-products-grid');
+                   // Simulate verified RC24 PHP inline frame fix on RC23 public markup,
+                   // without touching the actual website.
+                   Array.from(grid.children).forEach(c=>{
+                     c.style.setProperty('border','1px solid #d2dbd5','important');
+                     c.style.setProperty('overflow','hidden','important');
+                   });
+                   grid.scrollIntoView({block:'center'});""",new)
               import time;time.sleep(1)
               val=drv.execute_script(r'''
                 const grid=document.querySelector('.ppar-hb-category-products-grid');
