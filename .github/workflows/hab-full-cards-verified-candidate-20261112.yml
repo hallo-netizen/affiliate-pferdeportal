@@ -21,4 +21,5 @@ jobs:
           python3 "$ROOT/build_candidate.py"
           python3 "$ROOT/qa_candidate.py"
           python3 "$ROOT/qa_feed_pipeline.py"
+          python3 "$ROOT/qa_buttons.py"
           echo "CANDIDATE ONLY - no live plugin release or public PASS"
