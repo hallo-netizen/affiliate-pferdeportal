@@ -105,6 +105,7 @@ PPAR_HB_Integration::$fake_nodes=$tree;
 $out=PPAR_HB_Integration::catalog();
 expect(is_array($out),'original category catalog builds from active WP-style tree');
 expect(count($out['business_concepts'])===80,'50-rule cap removed: all 80 unique material product concepts available');
+expect(count($out['search_rules'])===50,'existing eBay query budget remains capped at 50 while idealo gets full eligible set');
 expect(($out['hab_product_coverage_audit']['insurance_excluded']??0)===20,'20 insurance categories explicitly excluded');
 expect(($out['hab_product_coverage_audit']['information_excluded']??0)===5,'five FAQ categories excluded');
 expect(($out['hab_product_coverage_audit']['unclassified_review']??0)===4,'unknown product family kept for review, not falsely marked unavailable');
