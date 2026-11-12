@@ -1,3 +1,9 @@
+## 12.11.2026 – HAB-004 Affiliate RC22 0.1.19-rc22: CSS-Version automatisch an Pluginversion gebunden
+
+Vollständiges geprüftes HAB-004-`CURRENT.zip` und `HAB_AFFILIATE_RC22_0.1.19-rc22.zip` in `ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/`, 2.337.621 Bytes, SHA256 `c9d501396d5500e699eb6dd8d867318c41e8ea8efc43c8fe00ad9ee4ab4e32d1`. Grundfehler: RC21 liefert neue 3/2/1-Kategorie-Karten, altes CSS durch unveränderte URL-Versionskennung weiter aus Browsercache möglich. Echter Chrome-Gegentest reproduziert Vorher/Nachher exakt. Nur zwei PHP-Header-/Readme-Änderungen im ZIP; selbst das CSS bleibt identisch mit RC21. Keine HAB-001-, fremden Portal-, Artikel- oder Versicherungsänderung. GitHub-Run 43247959556 Regression-PASS. **WP-Liveabnahme RC22 offen**; Fotos und Idealo-Mehrfachanbieter an Produktdatennachweise gebunden. Beleg: `../AFFILIATE/RC22_CSS_CACHE_LIVE_20261112.md`.
+
+---
+
 ## 12.11.2026 – HAB-004 AFFILIATE RC21 (0.1.18-rc21) KATEGORIE-PRODUKTRASTER – OFFLINE PASS
 
 Neue vollständige ZIP: `ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip` sowie `HAB_AFFILIATE_RC21_0.1.18-rc21.zip`, SHA256 `0f40eddb4526434c03acdd370d2763ac5a01eaea862a40cb9ae25bb8754363bf`, 36 Dateien. R3-/Endkategorien zeigen vorhandene 3 Produktkarten jetzt responsive 3/2/1 statt untereinander; mehrere Anbieterbuttons über existierenden exakten GTIN-Match (keine ungesicherten Doppelangebote). HAB-001 Design RC19 unverändert. Keine Änderung an Artikeln, Versicherungs-Gate, anderen Portalen oder WP-Core. Offline-Integrationstests PASS (GitHub Run 43244276656); WordPress-Live-Sichtabnahme offen. Einzelprotokoll: `../AFFILIATE/RC21_KATEGORIE_PRODUKTKACHELN_20261112.md`.
