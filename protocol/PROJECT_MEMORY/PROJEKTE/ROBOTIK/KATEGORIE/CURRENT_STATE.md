@@ -1,5 +1,13 @@
 # ROBOTIK / KATEGORIE – EINZIGER AKTUELLER STATUS
 
+## **NEUSTER STAND 12.11.2026 – harte Gesamtprüfung: ALTABSCHLUSS NICHT GÜLTIG**
+- Original-Kategorie-Plugin 0.4.2 und Fachmaster v34 abgeglichen: 7 Hauptbereiche, 72 konkrete Produktseiten, 89 WP-Beitragskategorien, 104 WordPress-Seiten.
+- Exakte Verteilung: Haushalt 3, Garten 7, Freizeit 9, Sport 8, Bildung 3, Pflege 8, Gewerbe 34. **Haushalt und Bildung fachlich unzureichend.** Industrie-4-Landingpages ohne untergeordneten Typ; 63/89 Kaufberatung-Kurzlabels. Frühere Aussage „vollständig erledigt“ zurückgenommen.
+- 548 Registereinträge sind Fundnennungen, nicht automatisch 548 kaufbare Roboter. 21 konkrete Erweiterungs-/Abgrenzungs-/Ausschlussfälle gegen Quellen geprüft; keine unbewiesene 1:1-Übernahme, keine Dubletten.
+- **Operativer Prüfstand:** `RECHERCHE/GESAMTKATEGORIE_AUDIT_20261112.md`, vollständige JSON und Markdown in der Library `/robotik/Konzeptbüro/ROBOTIK_GESAMTKATEGORIE_AUDIT_20261112.*`. Noch **kein** freigegebenes neues WP-Profil.
+- KISS: alten 0.4.2-Erstimport wegen publizierter Seiten nicht erneut starten (Originalcode blockiert). Erst Ziel-Delta+SEO, dann additive Aktualisierung in EINEM bestehenden Plugin. 7 Hauptpunkte nicht ohne ausdrückliche Entscheidung umstellen. Keine bezahlte API-Abfrage, keine WordPress- oder Pluginänderungen in dieser Audit-Runde.
+
+
 ## NEUESTER STAND 12.11.2026 – DataForSEO 0.4.2 TEST, noch nicht Live
 - Der Betreiber zeigte im Frontend ein fehlerhaft zerlegtes 0.1.0-Design und beauftragte zuerst die DataForSEO-Anbindung, danach die Designkorrektur.
 - **0.4.2** derselben Robotik-Kategorie-Pluginidentität fertig, fünf PHP-Dateien lint PASS, 17+ isolierte Tests PASS. Neues DataForSEO-Adminmodul, kostenloser Test und Preflight für 161 SEO-Kandidaten, explizit einzelne Paid-Calls; **Live-Verbindung ungeprüft**.
