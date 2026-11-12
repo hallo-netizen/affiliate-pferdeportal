@@ -1,3 +1,9 @@
+## 12.11.2026 – HAB-004 AFFILIATE RC21 (0.1.18-rc21) KATEGORIE-PRODUKTRASTER – OFFLINE PASS
+
+Neue vollständige ZIP: `ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip` sowie `HAB_AFFILIATE_RC21_0.1.18-rc21.zip`, SHA256 `0f40eddb4526434c03acdd370d2763ac5a01eaea862a40cb9ae25bb8754363bf`, 36 Dateien. R3-/Endkategorien zeigen vorhandene 3 Produktkarten jetzt responsive 3/2/1 statt untereinander; mehrere Anbieterbuttons über existierenden exakten GTIN-Match (keine ungesicherten Doppelangebote). HAB-001 Design RC19 unverändert. Keine Änderung an Artikeln, Versicherungs-Gate, anderen Portalen oder WP-Core. Offline-Integrationstests PASS (GitHub Run 43244276656); WordPress-Live-Sichtabnahme offen. Einzelprotokoll: `../AFFILIATE/RC21_KATEGORIE_PRODUKTKACHELN_20261112.md`.
+
+---
+
 ## 11.11.2026 – HAB-004 AFFILIATE RC19 (0.1.16-rc19) – VERSICHERUNGSBEREICH EXKLUSIV, LÜCKENLOS EIGENBANNER
 
 **Vollständige CURRENT.zip als RC19-Kandidat im HAB-Pluginbüro gebaut:** 2.336.726 Bytes, 36 Dateien, SHA256 6d72fcd41a8b365e84815770014098946774bab7f2425c3546e48da66cd262f0 (nach bestandenem GitHub-Merge gültiger offizieller Current). Direkter, reproduzierbarer Build ausschließlich aus HAB-004 RC18 (0.1.15-rc18, verifizierte SHA256 a98063820d1564bf7cc7312c4c232369ac198bbaa49fbb6b173f76cd5096da89). **Nur vier bestehende Dateien im vollständigen Plugin verändert**: affiliate-portal-router.php, includes/trait-ppar-hb-amazon.php, assets/frontend.css, readme.txt. Keine neue Plugin-Identität, keine neue Tabelle, keine Änderung der sechs anderen Themenwelten oder des Designplugins HAB-001 RC19.
