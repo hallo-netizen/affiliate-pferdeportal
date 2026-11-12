@@ -15,6 +15,7 @@ assert sha(old)=="c9d501396d5500e699eb6dd8d867318c41e8ea8efc43c8fe00ad9ee4ab4e32
 base="affiliate-portal-router/"
 trait=base+"includes/trait-ppar-idealo.php"
 main=base+"affiliate-portal-router.php"
+ebay=base+"includes/trait-ppar-ebay.php"
 readme=base+"readme.txt"
 def replace_one(s,a,b):
  count=s.count(a)
@@ -129,8 +130,46 @@ with ZipFile(BytesIO(old)) as z:
  t=replace_one(t,
     "if (is_wp_error($response)) { @unlink($tmp); return $response; }",
     "if (is_wp_error($response)) { @unlink($tmp); return new WP_Error('hab_idealo_export_transport_failed','Der offizielle iPN-Produktdatenexport konnte nicht abgerufen werden.'); }")
+ # Every provider filter must preserve the actual category slot when
+ # deciding whether image-backed idealo products are acceptable.
+ t=replace_one(t,
+    "public function multiprovider_filter_candidates_by_strategy($candidates) {",
+    "public function multiprovider_filter_candidates_by_strategy($candidates, $slot_type='') {")
+ t=replace_one(t,
+    "array_values((array)$candidates),function($candidate){",
+    "array_values((array)$candidates),function($candidate)use($slot_type){")
+ t=replace_one(t,
+    "$this->idealo_standalone_campaign_allowed($campaign);",
+    "$this->idealo_standalone_campaign_allowed($campaign,$slot_type);")
+ t=replace_one(t,
+    "public function multiprovider_reorder_candidates($candidates,$mode='separate') {",
+    "public function multiprovider_reorder_candidates($candidates,$mode='separate',$slot_type='') {")
+ t=replace_one(t,
+    "$candidates=$this->multiprovider_filter_candidates_by_strategy($candidates);",
+    "$candidates=$this->multiprovider_filter_candidates_by_strategy($candidates,$slot_type);")
  files[trait]=t.encode()
+ e=files[ebay].decode()
+ e=replace_one(e,
+    "private function ebay_filter_ranked_product_candidates_provider_cohort($candidates) {",
+    "private function ebay_filter_ranked_product_candidates_provider_cohort($candidates, $slot_type='') {")
+ # One request-local cache entry per slot because hybrid strategy differs on
+ # category products versus all other placements.
+ e=replace_one(e,
+    "$cohort_cache_key = hash('sha256', serialize($fingerprint));",
+    "$cohort_cache_key = hash('sha256', sanitize_key((string)$slot_type).'|'.serialize($fingerprint));")
+ e=replace_one(e,
+    "$out = $this->multiprovider_reorder_candidates($out, $mode);",
+    "$out = $this->multiprovider_reorder_candidates($out, $mode, $slot_type);")
+ files[ebay]=e.encode()
  m=files[main].decode()
+ # Propagate the real slot through all three central selection paths, not just
+ # through the final renderer after candidates have been removed.
+ assert m.count("ebay_filter_ranked_product_candidates_provider_cohort($candidates);")==3
+ m=m.replace("ebay_filter_ranked_product_candidates_provider_cohort($candidates);",
+             "ebay_filter_ranked_product_candidates_provider_cohort($candidates,$slot_type);")
+ assert m.count("multiprovider_filter_candidates_by_strategy($candidates);")==3
+ m=m.replace("multiprovider_filter_candidates_by_strategy($candidates);",
+             "multiprovider_filter_candidates_by_strategy($candidates,$slot_type);")
  m=replace_one(m,"Version: 0.1.19-rc22","Version: 0.1.20-rc23")
  files[main]=m.encode()
  d=files[readme].decode()
@@ -140,7 +179,7 @@ with ZipFile(BytesIO(old)) as z:
  assert "hb_amazon_category_search_fallback" in m
  assert "multiprovider_matching_offers_for_banner" in m
  for key in names:
-    if key not in (trait,main,readme):assert files[key]==z.read(key),key
+    if key not in (trait,main,ebay,readme):assert files[key]==z.read(key),key
  buf=BytesIO()
  with ZipFile(buf,'w') as out:
     for member in z.infolist():out.writestr(member,files[member.filename])
