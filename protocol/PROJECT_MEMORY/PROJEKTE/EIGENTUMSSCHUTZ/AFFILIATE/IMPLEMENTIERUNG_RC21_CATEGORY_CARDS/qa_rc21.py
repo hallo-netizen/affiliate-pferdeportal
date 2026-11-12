@@ -75,9 +75,9 @@ class PPAR_HB_Integration {
  public static function verified_nodes(){
    return array(
     "leaf"=>array("id"=>"leaf","wp_id"=>120,"type"=>"category","pillar"=>"core"),
-    "area"=>array("id"=>"core:c22:area:test","wp_id"=>220,"type"=>"page","pillar"=>"core"),
-    "world"=>array("id"=>"core:world:einbruch","wp_id"=>320,"type"=>"page","pillar"=>"core"),
-    "editorial"=>array("id"=>"editorial:test","wp_id"=>420,"type"=>"page","pillar"=>"editorial"),
+    "core:c22:area:test"=>array("id"=>"core:c22:area:test","wp_id"=>220,"type"=>"page","pillar"=>"core"),
+    "core:world:einbruch"=>array("id"=>"core:world:einbruch","wp_id"=>320,"type"=>"page","pillar"=>"core"),
+    "editorial:test"=>array("id"=>"editorial:test","wp_id"=>420,"type"=>"page","pillar"=>"editorial"),
     "insurance"=>array("id"=>"ins:leaf","wp_id"=>520,"type"=>"category","pillar"=>"core")
    );
  }
