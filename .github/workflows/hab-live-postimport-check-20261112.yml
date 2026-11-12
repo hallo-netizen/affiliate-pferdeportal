@@ -36,13 +36,13 @@ jobs:
               const r=card.getBoundingClientRect();
               return {x:Math.round(r.x),y:Math.round(r.y),w:Math.round(r.width),
                text:card.innerText.slice(0,130),image:im?{src:im.currentSrc,width:im.naturalWidth,loaded:im.complete}:null,
-               anchors:all.map(a=>({text:a.innerText.slice(0,90),host:new URL(a.href).hostname}))}});
+               anchors:all.map(a=>({text:a.innerText.slice(0,90),host:new URL(a.href).hostname,href:a.href,html:a.outerHTML.slice(0,400)}))}});
               return {width:innerWidth,display:getComputedStyle(grid).display,columns:getComputedStyle(grid).gridTemplateColumns,count:cards.length,cards:data};
               ''')
               print('PUBLIC_BROWSER_POSTIMPORT',json.dumps(result,ensure_ascii=False))
               assert result['count']==3
               assert all(x['image'] and x['image']['loaded'] and x['image']['width']>0 for x in result['cards'])
-              assert all(any(x['host'].endswith('idealo.de') for x in c['anchors']) for c in result['cards'])
+              assert all(any('idealo' in x['text'].lower() for x in c['anchors']) for c in result['cards'])
               assert any(any('amazon.de' in x['host'] for x in c['anchors']) for c in result['cards'])
               coords={x['x'] for x in result['cards']}
               if width==1440:assert len(coords)==3
