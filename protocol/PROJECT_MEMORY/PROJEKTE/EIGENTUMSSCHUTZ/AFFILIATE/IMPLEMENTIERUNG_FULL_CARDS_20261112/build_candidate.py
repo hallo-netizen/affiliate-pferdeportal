@@ -196,4 +196,4 @@ with ZipFile(BytesIO(payload)) as z:
  assert b'creatives/productdata/export' in z.read(trait)
  assert b'ppar-hb-category-products-grid' in z.read(base+"assets/frontend.css")
 p.write_bytes(payload)
-print('HAB_RC23_CANDIDATE',len(payload),sha(payload),'36 ZIP CRC PASS, 3 files changed, user-facing release withheld until real data end-to-end proof')
+print('HAB_RC23_CANDIDATE',len(payload),sha(payload),'36 ZIP CRC PASS, 4 files changed, user-facing release withheld until real data end-to-end proof')
