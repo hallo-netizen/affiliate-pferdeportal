@@ -1,5 +1,14 @@
 # ROBOTIK / KATEGORIE – EINZIGER AKTUELLER STATUS
 
+## AKTUELL 12.11.2026 – V36: LÜCKENRECHERCHE MIT SIEBEN HAUPTBEREICHEN
+- Die früher vorgeschlagene neue Acht-Hauptbereiche-Navigation ist fachlich VERWORFEN. Die 7 vom Nutzer bestätigten Hauptpunkte bleiben erhalten: Haushalt, Garten, Freizeit, Sport, Bildung, Pflege, Gewerbe.
+- Der Original-0.4.2-Importplan mit 72 Produktseiten/104 WP-Seiten/89 Inhaltskategorien und der Forschungsbestand v35 mit 548 Fundnennungen wurden geprüft. **V36 identifiziert 11 zusätzliche belegte Produktfunktionskandidaten** (Haushalt 5, Bildung 3, Freizeit 2, Sport 1) samt drei unterschiedlichen Grobartikelrichtungen und Originalquellen.
+- Zielentwurf **83 statt 72** konkrete Produktseiten, darunter Haushalt **8 statt 3** und Bildung **6 statt 3**. **Kein Import-PASS:** Katzentoiletten-/Vorhangrobotik sind Grenzfälle; Überwachung/Haustier und Lehrarm/Tischarm mögliche Intent-Dubletten. DE-SEO-Nachfrage und Live-Kaufbarkeit teils offen. Keine künstlich einheitlichen Produktzahlen.
+- Alle 72 alten Import-WP-IDs bleiben im Entwurf geschützt, 89 bisherigen WP-Inhaltskategorien unverändert. Keine neue Hauptwelt, keine neuen aktiven WP-Parents, keine Änderung existierender URLs.
+- **Aktuelles Forschungsregister Library** `/robotik/Recherchebüro/CURRENT.json` ist nun v36 mit 557 Records, 548 alte vollständig unverändert, 9 neue IDs; 2 vorhandene Forschungs-IDs wiederverwendet. Verbindlicher Bericht/technische Daten in `RECHERCHE/KATEGORIEBALANCE_V36_20261112.md` und Library `/robotik/Konzeptbüro/ROBOTIK_KATEGORIEBALANCE_V36_PRUEFBERICHT.md` plus V36-JSON/CSV/Validierung.
+- Keine DataForSEO Paid-Calls, keine WordPress-Schreibung, keine Pluginänderung in diesem Schritt. Erst fachliche Grenzfall-/Owner-Prüfung, gebündelte SEO-Prüfung, danach EIN Add-only-Sync im vorhandenen Kategorieplugin; alten Erstimport niemals wiederholen.
+
+
 ## NEUESTER VERBINDLICHER PRÜFSTAND 12.11.2026 – V35 KATEGORIEBALANCE
 - Nutzer kritisiert fachlich unzureichende Abdeckung von Haushalt (3) und Bildung (3) vs Gewerbe (34) und verlangt erneute Gesamtprüfung oder alternative Kategorisierung. **Vorherige Fertigmeldungen gelten ausdrücklich als falsch.**
 - Verbindlichen `ZIELVERTRAG.md`, `ARBEITSABLAUF.md`, `PRUEFREGELN.md`, Original-Importplan aus Robotik-Plugin 0.4.2 und vollständige Forschungs-Library v34 gelesen; 72/72 vorhandene Produktseiten exakt gegen vorhandene ROB-IDs gebunden; 548/548 Forschungs-IDs in CSV inventarisiert (476 nicht importiert, nicht automatisch neue Produkttypen). 89/89 Beitragskategorien haben vier Textideen, aber 63 generische `Kaufberatung`-Kurzlabels und keine SEO-Abnahme.
