@@ -1,0 +1,57 @@
+name: HD009 read-only frontend product gates Nov 12
+on:
+  push:
+    branches: [audit/hobby-hd009-product-frontend-20261112]
+    paths: [.github/workflows/audit-hobby-product-gates-20261112.yml]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Current HD009 0.1.32 exact code audit and public HTML
+        run: |
+          python3 - <<'PY'
+          import zipfile,pathlib,re,hashlib,urllib.request,urllib.error,json
+          root=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE')
+          p=root/'CURRENT.zip'
+          print('ZIP_SHA',hashlib.sha256(p.read_bytes()).hexdigest(),'SIZE',p.stat().st_size)
+          with zipfile.ZipFile(p) as z:
+            print('ZIP_FILES',len(z.namelist()),'ZIP_TEST',z.testzip())
+            for file in z.namelist():
+              if not file.endswith('.php') or z.getinfo(file).file_size>5000000:continue
+              body=z.read(file).decode('utf8','replace')
+              lines=body.splitlines()
+              patterns={
+              'idealo_backend':['idealo_render_access_card','idealo_render_specialist_content','idealo_provider_access_test','idealo_campaigns_should_be_active','idealo_queue_manual_refresh','idealo_sync_dispatch'],
+              'amazon_admin':['amazon_start','dataforseo','preview','kostenfrei','Kostenfrei','kostenpflichtig','search_for_product'],
+              'frontend_slots':['provide_leaf_category_affiliate_slot_html','category_product_','provide_article','product_card','render_banner','provide_hub_grid_affiliate_data'],
+              'launch':['launch_active','enabled','output_mode','amazon_idealo','start_mode'],
+              }
+              matching=[]
+              for section,terms in patterns.items():
+                for i,line in enumerate(lines):
+                  if any(t.lower() in line.lower() for t in terms) and (('function ' in line) or ('->' in line and any(t in line for t in ['add_action','add_filter'])) or ('<button' in line) or ('name=' in line) or ('<select ' in line) or ('<option ' in line)):
+                    matching.append((section,i,line))
+              if matching:
+                print('PLUGIN',file,'TOTAL',len(lines),'MATCHES',len(matching))
+                for section,i,line in matching[:80]:
+                  print('DETAIL',section,'LINE',i+1,line[:750])
+              if file.endswith('trait-ppar-idealo.php'):
+                for i,line in enumerate(lines):
+                  if any(t in line for t in ['idealo_campaigns_should_be_active','idealo_provider_access_test','private function idealo_credentials_present','idealo_queue_manual_refresh','idealo_link_strategy','idealo_provider_access_save']):
+                    print('IDEALO_CONTEXT',i+1,' '.join(lines[max(0,i-1):min(len(lines),i+17)])[:1600])
+          for u in ['https://www.hobby-depot.de/kettenhemd-ringe-richtig-schliessen/','https://www.hobby-depot.de/category/kettenhemdflechten-ausruestung-kosten/','https://www.hobby-depot.de/fertigen/buch-papier/buchbinden/']:
+            try:
+              req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0','Cache-Control':'no-cache'})
+              with urllib.request.urlopen(req,timeout=15) as r:
+                s=r.read(2000000).decode('utf8','replace')
+                print('LIVE',u,r.status,r.url,'length',len(s))
+                for word in ['Bei idealo vergleichen','idealo','amazon.de','Amazon','data-hdar','category_product','Werbung','Produkt']:
+                  print('LIVE_KEY',word,'count',s.lower().count(word.lower()))
+                for match in re.finditer(r'https?://[^\s"<>]+(?:ipn\.idealo\.de|amzn\.to|amazon\.de)[^\s"<>]*',s,re.I):
+                  print('LIVE_PARTNER_LINK',match.group(0)[:170])
+            except Exception as e:print('LIVE_ERROR',u,type(e).__name__,str(e)[:300])
+          PY
