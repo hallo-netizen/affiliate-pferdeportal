@@ -255,6 +255,9 @@ with ZipFile(BytesIO(OLD)) as z:
  m=files[main].decode("utf8")
  m=once(m,"Version: 0.1.20-rc23","Version: 0.1.21-rc24")
  m=once(m,
+  "display:flex!important;flex-direction:column!important;grid-template-rows:none!important;width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;overflow:visible!important",
+  "display:flex!important;flex-direction:column!important;grid-template-rows:none!important;width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;margin:0!important;padding:0!important;border:1px solid #d2dbd5!important;overflow:hidden!important")
+ m=once(m,
  """        $availability = isset($banner['availability']) ? trim(strtr((string)$banner['availability'], $replacements)) : '';""",
  """        $availability = isset($banner['availability']) ? trim(strtr((string)$banner['availability'], $replacements)) : '';
         if (preg_match('/^category_product_[123]$/D', sanitize_key((string)$slot_type))) {
