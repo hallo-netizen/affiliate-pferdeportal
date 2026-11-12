@@ -1,0 +1,69 @@
+name: HAB RC21 actual live category read only and plugin enqueue audit
+on:
+  push:
+    branches: [audit/hab-live-rc21-no-visible-change-20261112]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch live category read-only and report exact frontend markers
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request,urllib.error,re
+          site='https://hab-und-bewahr.de/einbruch-und-diebstahl/einbruch-und-diebstahl-haus-und-wohnung/c22-haustuerschloesser-dd9773fd40/'
+          for url in [site,'https://hab-und-bewahr.de/wp-json/']:
+              print('LIVE_URL',url)
+              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/128.0.0.0 Safari/537.36'})
+              try:
+                 r=urllib.request.urlopen(req,timeout=18)
+                 html=r.read(1500000).decode('utf8','replace')
+                 print('LIVE_HTTP_STATUS',r.status,'FINAL_URL',r.url,'BODY_BYTES',len(html))
+                 print('LIVE_PAGE_TITLE',re.findall(r'<title[^>]*>(.*?)</title>',html,re.S|re.I)[:2])
+                 print('LIVE_MARKERS',{k:html.count(k) for k in ['ppar-hb-category-products-grid','hbdp-detail-products-feed','ppar-affiliate-slot','WordPress','Maintenance','maintenance','Wartungsmodus','MANICAE','GERCAR','affiliate-portal-router','0.1.18-rc21']})
+                 print('LIVE_STYLE_LINKS',re.findall(r'<link[^>]*(?:affiliate|ppar|frontend\.css|detail-categories)[^>]*>',html,re.I)[:15])
+                 print('LIVE_BODY_PREFIX',re.sub(r'\s+',' ',html[:900])[:850])
+              except Exception as e:print('LIVE_ERROR',repr(e))
+          PY
+      - name: Read exact actual HAB RC21 plugin bootstrap, styles, markup, WP design CSS
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import zipfile,re,hashlib
+          base='protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/'
+          z=zipfile.ZipFile(base+'HAB-004-AFFILIATE/CURRENT.zip')
+          d=zipfile.ZipFile(base+'HAB-001-DESIGN/CURRENT.zip')
+          for name,archive in [('HAB-AFF',z),('HAB-DESIGN',d)]:
+              print('ZIP_CHECK',name,len(archive.namelist()),archive.testzip())
+          files=[
+           (z,'affiliate-portal-router/affiliate-portal-router.php'),
+           (z,'affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php'),
+           (z,'affiliate-portal-router/assets/frontend.css'),
+           (z,'affiliate-portal-router/assets/frontend.js'),
+           (d,'hab-bewahr-design-vorschau/assets/detail-categories.css'),
+           (d,'hab-bewahr-design-vorschau/assets/area-prototype.css'),
+          ]
+          needles=[
+           'wp_enqueue_style','wp_enqueue_scripts','enqueue_assets','frontend.css','frontend.js',
+           'add_action(','ppar-hb-category-products-grid','ppar-hb-category-product-group',
+           'hbdp-detail-products-feed','hbdp-detail-products','hbdp_area_product_cards_html',
+           'category_product_grid_markup','admin_enqueue','is_admin','category_product_','ppar-affiliate-content']
+          for a,path in files:
+              src=a.read(path).decode('utf8','replace'); lines=src.splitlines()
+              print('SOURCE_FILE',path,'LINES',len(lines))
+              matches=[(i+1,l) for i,l in enumerate(lines) if any(n in l for n in needles)]
+              for i,l in matches[:150]:print('MATCH',path,i,l[:700])
+              if path.endswith('affiliate-portal-router.php'):
+                for k in ['function enqueue_assets','function frontend_enqueue','function register_hooks','function __construct']:
+                   for match in re.finditer(re.escape(k),src):
+                     i=src[:match.start()].count('\n')
+                     for j in range(max(0,i-3),min(len(lines),i+45)):print('CTX',path,j+1,lines[j][:650])
+              if path.endswith('detail-categories.css'):
+                for i,l in enumerate(lines):
+                  if 'hbdp-detail-products-feed' in l:
+                    for j in range(max(0,i-5),min(len(lines),i+35)):print('DETAIL_CSS',j+1,lines[j][:400])
+          PY
