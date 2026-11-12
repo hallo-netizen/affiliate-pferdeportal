@@ -22,4 +22,12 @@ jobs:
                 print('MATCH',p,i+1,line[:2200])
                 if 'function idealo_render_sync_card(' in line or 'function idealo_render_specialist_content(' in line:
                    for j in range(i,min(len(src),i+20)):print('DETAIL',p,j+1,src[j][:2200])
+          for p in z.namelist():
+            if not p.endswith(".php"):continue
+            lines=z.read(p).decode('utf8','replace').splitlines()
+            for i,line in enumerate(lines):
+              if any(v in line for v in ['idealo_render_sync_card(', 'render_sync_card(', 'affiliate-portal-kiss-providers','affiliate-portal-provider-idealo','Produktabgleich','Produkte &', 'Datenabgleich','Provider-Fachseite öffnen']):
+                print('ROUTING',p,i+1,line[:1300])
+                if 'render_sync_card(' in line or 'idealo_render_sync_card(' in line:
+                  for j in range(max(0,i-4),min(len(lines),i+7)):print('NEAR',p,j+1,lines[j][:1200])
           PY
