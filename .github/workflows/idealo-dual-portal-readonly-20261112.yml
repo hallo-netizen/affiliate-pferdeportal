@@ -9,6 +9,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Validate exact setup and delivery controls in both existing plugins
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          root='protocol/PROJECT_MEMORY/PROJEKTE/'
+          paths={'HOBBY':root+'HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip',
+                 'HAB':root+'EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'}
+          ranges={'idealo_settings_defaults':(1,72),'idealo_settings':(1,45),'idealo_credentials_present':(1,17),
+                  'idealo_find_feed_metadata':(1,51),'idealo_provider_access_save':(1,63),
+                  'idealo_provider_access_test':(1,27),'idealo_campaigns_should_be_active':(1,32),
+                  'idealo_campaign_publicly_allowed':(1,38),'idealo_render_access_card':(1,42),
+                  'idealo_render_specialist_content':(1,24),'idealo_render_sync_card':(1,28),
+                  'idealo_sync_dispatch':(1,74),'idealo_refresh_remote_feed':(1,25)}
+          import re
+          for label,p in paths.items():
+            with ZipFile(p) as z:
+              a=z.read('affiliate-portal-router/includes/trait-ppar-idealo.php').decode().splitlines()
+              print('PORTAL_SECTION',label)
+              for name,(dstart,dend) in ranges.items():
+                hit=next((i for i,line in enumerate(a) if re.search(r'(?:private|public) function '+name+r'\(',line)),None)
+                if hit is None:continue
+                print('START',label,name,hit+1)
+                for j in range(hit+dstart-1,min(hit+dend,len(a))):
+                  print('DETAIL',label,name,j+1,a[j][:650])
+                print('END',label,name)
+          PY
       - name: Inspect exact current ZIPs, Idealo controls, defaults and gates
         shell: bash
         run: |
