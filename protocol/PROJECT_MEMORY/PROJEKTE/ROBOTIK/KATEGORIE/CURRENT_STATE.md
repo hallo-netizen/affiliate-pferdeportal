@@ -1,5 +1,15 @@
 # ROBOTIK / KATEGORIE – EINZIGER AKTUELLER STATUS
 
+## NEUESTER VERBINDLICHER PRÜFSTAND 12.11.2026 – V35 KATEGORIEBALANCE
+- Nutzer kritisiert fachlich unzureichende Abdeckung von Haushalt (3) und Bildung (3) vs Gewerbe (34) und verlangt erneute Gesamtprüfung oder alternative Kategorisierung. **Vorherige Fertigmeldungen gelten ausdrücklich als falsch.**
+- Verbindlichen `ZIELVERTRAG.md`, `ARBEITSABLAUF.md`, `PRUEFREGELN.md`, Original-Importplan aus Robotik-Plugin 0.4.2 und vollständige Forschungs-Library v34 gelesen; 72/72 vorhandene Produktseiten exakt gegen vorhandene ROB-IDs gebunden; 548/548 Forschungs-IDs in CSV inventarisiert (476 nicht importiert, nicht automatisch neue Produkttypen). 89/89 Beitragskategorien haben vier Textideen, aber 63 generische `Kaufberatung`-Kurzlabels und keine SEO-Abnahme.
+- **Empfohlene Alternative bei Ziel „ausgewogen“: acht sichtbare Hauptbereiche**: Haushalt 4, Garten 7, Freizeit & Lernen 14, Sport 8, Pflege 8, Landwirtschaft 9, Service & Handel 13, Handwerk & Industrie 12. Diese Zahlen sind konservativer StrukturENTWURF, nicht Live-Import: 72 alte Funktionen + Katzentoilettenroboter (EU-Ware, Robotikgrenzfall) + Roboterbausätze + mobile ROS-Lernplattformen = 75. Weitere 2 Haushaltstypen markt-/Einsatzstatus offen, weitere 9 Nischen als Fachkandidaten geprüft. Vergleich alt 34:3 => Alternative 14:4; Haushalts-Lücke nicht schöngerechnet.
+- **Alternative sieben Hauptpunkte:** `Haus & Garten`, `Freizeit & Lernen`, Sport, Pflege, Landwirtschaft, Service & Handel, Handwerk & Industrie (noch gleichmäßigere Mengen, aber Haushalt verliert Hauptnavigation). Nicht einfach umsetzen.
+- **Freigabe fehlt:** Diese Alternative verändert die bereits freigegebene Navigation (`Industrie` unter `Gewerbe`, getrennte `Freizeit` / `Bildung`) und potenziell WP-Permalinks. KEINE WP-Änderung, KEIN neuer Plugininstaller, KEIN DataForSEO Paid-Call. Erst Entscheidung zum Baum, dann SEO-Gate, geschütztes einmaliges Delta mit Readback/Redirectplan, kein Erstimport.
+- **Die einzige Research-Fundliste liegt aktuell in der Library `/robotik/Recherchebüro/CURRENT.json` v35**, mit 548 alten Records unverändert und V35-Fortschreibung. Das bisherige GitHub-Produkt-Fachmaster-V14 ist davon gesondert und wurde in dieser Prüfung NICHT still überschrieben.
+- **Nachweise/Prüftabellen:** `RECHERCHE/KATEGORIEBALANCE_V35_20261112.md`; vollständiger Prüfbericht + 8er JSON + 548-Zeilen-CSV + 72-Alt-ID-Kreuztabelle + Validierung in der Library `/robotik/Konzeptbüro/ROBOTIK_*V35*`.
+
+
 ## **NEUSTER STAND 12.11.2026 – harte Gesamtprüfung: ALTABSCHLUSS NICHT GÜLTIG**
 - Original-Kategorie-Plugin 0.4.2 und Fachmaster v34 abgeglichen: 7 Hauptbereiche, 72 konkrete Produktseiten, 89 WP-Beitragskategorien, 104 WordPress-Seiten.
 - Exakte Verteilung: Haushalt 3, Garten 7, Freizeit 9, Sport 8, Bildung 3, Pflege 8, Gewerbe 34. **Haushalt und Bildung fachlich unzureichend.** Industrie-4-Landingpages ohne untergeordneten Typ; 63/89 Kaufberatung-Kurzlabels. Frühere Aussage „vollständig erledigt“ zurückgenommen.
