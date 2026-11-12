@@ -9,6 +9,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Read exact source for category coverage, parser, card and established exclusion contract
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          z=ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          ranges={
+           'affiliate-portal-router/includes/trait-ppar-idealo.php':[(245,278),(329,440),(579,642),(747,813),(1340,1363)],
+           'affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php':[(145,245),(270,303)],
+           'affiliate-portal-router/affiliate-portal-router.php':[(1113,1167),(2973,3110),(6880,6965)],
+           'affiliate-portal-router/assets/frontend.css':[(2250,2335)]
+          }
+          for file,chunks in ranges.items():
+            a=z.read(file).decode('utf8','replace').splitlines()
+            for lo,hi in chunks:
+              print('SECTION',file,lo,hi)
+              for i in range(lo-1,min(hi,len(a))):
+                print('SOURCE',file,i+1,a[i][:750])
+          PY
       - name: Build actual installed Hab RC23 and print only relevant core source
         run: |
           set -euo pipefail
