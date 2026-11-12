@@ -1,0 +1,56 @@
+name: HD009 exact existing backend and product card settings
+on:
+  push:
+    branches: [audit/hobby-hd009-product-frontend-20261112]
+    paths: [.github/workflows/audit-hobby-product-actions-20261112.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect real menu labels, current gates, the exact product rendering controls
+        run: |
+          python3 - <<'PY'
+          import zipfile,pathlib,re,urllib.request
+          from html.parser import HTMLParser
+          p=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          with zipfile.ZipFile(p) as z:
+            specs=[
+              ('affiliate-portal-router/includes/class-hdar-amazon-start.php',[(35,75),(140,205),(840,925)]),
+              ('affiliate-portal-router/includes/trait-ppar-idealo.php',[(677,706),(1290,1325)]),
+              ('affiliate-portal-router/hobby-depot-affiliate-router.php',[(670,770),(4370,4400),(7980,8020),(9330,9347),(10375,10410)]),
+              ('affiliate-portal-router/includes/trait-ppar-provider-registry.php',[(65,95),(267,302)])
+            ]
+            for file,ranges in specs:
+              a=z.read(file).decode('utf8','replace').splitlines()
+              print('===FILE',file,'===')
+              for start,end in ranges:
+                for k in range(start-1,min(len(a),end)):
+                  print('CODE',k+1,a[k][:750])
+            for file in z.namelist():
+              if file.endswith('.php'):
+                txt=z.read(file).decode('utf8','replace')
+                for k,ln in enumerate(txt.splitlines()):
+                  if ('add_submenu_page' in ln or 'add_menu_page' in ln) and ('amazon' in ln.lower() or 'anbieter' in ln.lower() or 'network' in ln.lower() or 'affiliate' in ln.lower()):
+                    print('WP_MENU',file,k+1,ln[:450])
+          class H(HTMLParser):
+            def __init__(self):super().__init__();self.links=[];self.images=[];self.tags={}
+            def handle_starttag(self,tag,attrs):
+              d=dict(attrs);self.tags[tag]=self.tags.get(tag,0)+1
+              if tag=='a':
+                href=d.get('href','')
+                if any(x in href.lower() for x in ['amazon.de','ipn.idealo.de','ebay.de','amzn.to']):self.links.append(href[:300])
+              if tag=='img':
+                src=d.get('src','')
+                if any(x in src.lower() for x in ['idealo','amazon','ebay','product']):self.images.append(src[:200])
+          for u in ['https://www.hobby-depot.de/kettenhemd-ringe-richtig-schliessen/','https://www.hobby-depot.de/category/kettenhemdflechten-ausruestung-kosten/','https://www.hobby-depot.de/fertigen/buch-papier/buchbinden/']:
+            try:
+              with urllib.request.urlopen(urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0'}),timeout=15) as r:
+                s=r.read(1700000).decode('utf8','replace')
+                h=H();h.feed(s)
+                print('FRONTEND',u,'HTTP',r.status,'partner_links',h.links[:30],'product_images',h.images[:20])
+            except Exception as e:print('FRONTEND_FAIL',u,str(e)[:250])
+          PY
