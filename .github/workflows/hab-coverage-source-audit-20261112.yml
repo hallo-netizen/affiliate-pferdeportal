@@ -9,6 +9,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Read actual published WP category names for concrete missing physical product families
+        run: |
+          python3 - <<'PY'
+          import urllib.request,json,html
+          base='https://hab-und-bewahr.de/wp-json/wp/v2/categories?per_page=100&hide_empty=false&page='
+          all=[]
+          for page in range(1,16):
+            try:
+              req=urllib.request.Request(base+str(page),headers={'User-Agent':'Mozilla/5.0'})
+              with urllib.request.urlopen(req,timeout=16) as r:
+                part=json.load(r)
+              if not isinstance(part,list) or not part:break
+              all+=part
+            except Exception as e:
+              print('REST_EXCEPTION',page,str(e)[:180]);break
+          print('PUBLIC_CATEGORY_COUNT',len(all))
+          for x in all[:350]:
+             print('CAT',x.get('id'),x.get('parent'),html.unescape(x.get('name',''))[:150],x.get('slug','')[:120])
+          PY
       - name: Read exact source for category coverage, parser, card and established exclusion contract
         shell: bash
         run: |
