@@ -1,0 +1,28 @@
+name: HD009 original direct export block inspect
+on:
+  push:
+    branches: [audit/hobby-hd009-product-frontend-20261112]
+    paths: [.github/workflows/hd009-export-block-audit.yml]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read actual URL and importer implementation
+        run: |
+          python3 - <<'PY'
+          import zipfile,pathlib
+          p=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          with zipfile.ZipFile(p) as z:
+            a=z.read('affiliate-portal-router/includes/trait-ppar-idealo.php').decode().splitlines()
+            for x,y in [(495,540),(450,490),(785,805),(595,615)]:
+              for i in range(x-1,y):print('HD009',i+1,a[i][:500])
+            m=z.read('affiliate-portal-router/hobby-depot-affiliate-router.php').decode().splitlines()
+            for i,s in enumerate(m[:150]):
+              if 'Version' in s or 'VERSION' in s:print('VERSION',i+1,s[:500])
+            d=z.read('affiliate-portal-router/readme.txt').decode().splitlines()
+            for i,s in enumerate(d[:25]):
+              if 'Stable' in s or 'Version' in s:print('README',i+1,s)
+          PY
