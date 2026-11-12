@@ -1,0 +1,21 @@
+--- ORIGINAL_PSTE/includes/class-pste-runner.php
++++ NUR_ARBEITSSTAND/includes/class-pste-runner.php
+@@ -483,6 +483,18 @@
+             $candidates[$index]['decision']='BLOCKED';$candidates[$index]['discovery_only']=true;$candidates[$index]['candidate_role']='DISCOVERY_PROBE';$candidates[$index]['human_review_required']=true;
+             $codes=['DUPLICATE_WITHIN_RESEARCH_RUN'];if($crossType)$codes[]='CROSS_TYPE_ANSWER_EQUIVALENCE';
+             $candidates[$index]['reason_codes']=array_values(array_unique(array_merge((array)($candidates[$index]['reason_codes']??[]),$codes)));
++            // This is the FINAL decision of the SAME central research batch.
++            // Never hand a candidate down with decision=BLOCKED but an earlier
++            // planning-readiness PASS still claiming that it is approved.
++            $gate=(array)($candidates[$index]['planning_readiness_gate']??[]);
++            if(($gate['contract']??'')==='PSTE_PLANNING_READINESS_GATE_V1_PRETITLE_PARITY'){
++                $gate['status']='BLOCKED';
++                $gate['decision']='BLOCKED';
++                $gate['ok']=false;
++                $gate['reason_codes']=array_values(array_unique(array_merge(
++                    (array)($gate['reason_codes']??[]),$codes)));
++                $candidates[$index]['planning_readiness_gate']=$gate;
++            }
+             $candidates[$index]['duplicate_of_candidate_id']=(string)($candidates[$duplicateOf]['candidate_id']??'');
+             $candidates[$index]['duplicate_of_title']=(string)$signatures[$duplicateOf]['title'];
+         }
