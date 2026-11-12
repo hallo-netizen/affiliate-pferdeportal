@@ -8,6 +8,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Inspect exact Amazon provider auto-match on idealo GTIN cards
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          import re
+          z=ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          for fn in ['affiliate-portal-router/includes/trait-ppar-hb-amazon.php','affiliate-portal-router/includes/trait-ppar-idealo.php']:
+            src=z.read(fn).decode('utf8','replace').splitlines()
+            for i,line in enumerate(src):
+              if any(x in line for x in ['function hb_amazon_add_offer(', 'function hb_amazon_direct_url(', 'function multiprovider_offer_label(']):
+                print('METHOD',fn,i+1,line[:300])
+                for j in range(i,min(i+125,len(src))):print('DETAIL',fn,j+1,src[j][:440])
+          PY
       - name: Confirm eBay cohort call contexts and selected slot boundaries
         run: |
           python3 - <<'PY'
