@@ -26,6 +26,8 @@ jobs:
             for width in [1440,780,390]:
               drv.set_window_size(width,980)
               drv.get(url)
+              drv.execute_script("document.querySelector('.ppar-hb-category-products-grid').scrollIntoView({block:'center'})")
+              import time; time.sleep(3)
               result=drv.execute_script(r'''
               const grid=document.querySelector('.ppar-hb-category-products-grid');
               if(!grid)return {error:'GRID MISSING'};
