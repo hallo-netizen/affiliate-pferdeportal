@@ -1,3 +1,9 @@
+## 12.11.2026 – IDEALO HAB & BEWAHR: FREIGABE GEMELDET, KONFIGURATION NUTZT RC19
+
+Betreiber meldet neu freigegebenen iPN-Produktdatenfeed für **Hab & Bewahr, Werbefläche 568944**. Tatsächliches HAB-004 `CURRENT.zip` erneut geprüft: **RC19 0.1.16-rc19 unverändert** (36 Einträge, SHA256 `6d72fcd41a8b365e84815770014098946774bab7f2425c3546e48da66cd262f0`), integrierter iPN-Adapter und Versicherungs-Sperre vorhanden. **Kein neues Plugin nötig**. Exakte eigenständige Feed-ID, privater iPN-API-Key und Download-URL sind im WordPress-Backend noch nicht verifiziert; kein Live-Import oder öffentliches PASS behaupten. Ablauf: `Affiliate-Zentrale → idealo`, Hab-Adspace und reale Feed-ID eingeben, `Speichern & API prüfen`, nach echtem API-PASS privater Feed-Import, abschließender Ausgabetest. **Keine Idealo-, Amazon- oder eBay-Produktwerbung im Versicherungsbereich.** `CURRENT.zip` unverändert. Gemeinsame verbindliche Anleitung: `../../../AFFILIATE/IDEALO_FREIGABE_EINRICHTUNG_20261112.md`. GitHub-Action-Checks 43233587036 / 43233830615.
+
+---
+
 ## 11.11.2026 – HAB-004 AFFILIATE RC19 (0.1.16-rc19) – VERSICHERUNGSBEREICH EXKLUSIV, LÜCKENLOS EIGENBANNER
 
 **Vollständige CURRENT.zip als RC19-Kandidat im HAB-Pluginbüro gebaut:** 2.336.726 Bytes, 36 Dateien, SHA256 6d72fcd41a8b365e84815770014098946774bab7f2425c3546e48da66cd262f0 (nach bestandenem GitHub-Merge gültiger offizieller Current). Direkter, reproduzierbarer Build ausschließlich aus HAB-004 RC18 (0.1.15-rc18, verifizierte SHA256 a98063820d1564bf7cc7312c4c232369ac198bbaa49fbb6b173f76cd5096da89). **Nur vier bestehende Dateien im vollständigen Plugin verändert**: affiliate-portal-router.php, includes/trait-ppar-hb-amazon.php, assets/frontend.css, readme.txt. Keine neue Plugin-Identität, keine neue Tabelle, keine Änderung der sechs anderen Themenwelten oder des Designplugins HAB-001 RC19.
