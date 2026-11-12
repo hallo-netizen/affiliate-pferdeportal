@@ -1,0 +1,32 @@
+name: HD009 exact hobby product catalogue boundaries
+on:
+  push:
+    branches: [audit/hobby-hd009-coverage-50-check-20261112]
+    paths: [.github/workflows/hobby-hd009-coverage-catalogue-source.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Decode current business concepts and explain counts vs caps
+        run: |
+          python3 - <<'PY'
+          import pathlib,zipfile,re,json
+          p=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          with zipfile.ZipFile(p) as z:
+            name='affiliate-portal-router/includes/class-hdar-hobby-depot-source.php'
+            lines=z.read(name).decode().splitlines()
+            for i,line in enumerate(lines):
+              if i<250:print('ADAPTER',i+1,line[:450])
+            name='affiliate-portal-router/includes/trait-ppar-idealo.php'
+            a=z.read(name).decode().splitlines()
+            for start,stop in [(320,355),(390,420),(590,680),(748,830),(1335,1370)]:
+              print('BOUNDARY_BLOCK',start,stop)
+              for i in range(start-1,min(stop,len(a))):
+                print('IDEALO',i+1,a[i][:650])
+            all_data=[n for n in z.namelist() if re.search(r'(hobby|catalog|register|source|dataforseo)',n,re.I)]
+            print('DATA_FILES',[(n,z.getinfo(n).file_size) for n in all_data[:80]])
+          PY
