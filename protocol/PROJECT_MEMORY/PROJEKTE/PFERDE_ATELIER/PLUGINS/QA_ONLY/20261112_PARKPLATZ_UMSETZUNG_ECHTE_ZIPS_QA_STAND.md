@@ -1,3 +1,5 @@
+> **QA-SPERRE / KORREKTUR VOM 12.11.2026:** Die damalige Aussage „alle Gegenproben bestanden, Änderungen sicher“ ist **nicht** richtig. Ein zusätzlicher **vergleichender** Test der Original-ZIPs .69 und .70 hat zwei Gefahren in .70 nachgewiesen: (1) ein zuvor geprüfter, doppelt vorbereiteter Artikel gelangt bei `upstream_central_coverage_decided` durch den PSERC-Prüfschritt, obwohl das unveränderte Dublettentor ihn als `BLOCKED_DUPLICATE` erkennt; (2) geänderte inhaltliche Kontext-Plan-/Strukturquellen können unsichtbar bleiben, solange die alte Baseline gespeichert ist. **PSERC .70 keinesfalls installieren oder als Fertigmeldung verwenden. PSTE .46 ebenfalls nicht freigeben**, weil weitere MINI-Sicherheitsfälle noch nicht mit dem echten WP-Bestand abgenommen sind. Unabhängige Originalcode-/ZIP-Gegenproben: [20261112_UNABHAENGIGE_AENDERUNGSPRUEFUNG_45_46_69_70.md](20261112_UNABHAENGIGE_AENDERUNGSPRUEFUNG_45_46_69_70.md). Dieser Hinweis ersetzt ausdrücklich alle pauschalen früheren Freigabeformulierungen in diesem Bericht. Kein neues Paket erstellt.
+
 # Pferdeatelier Parkplatzkonzept – tatsächliche QA-Umsetzung (12.11.2026)
 
 ## Verbindliche Ausgangslage
