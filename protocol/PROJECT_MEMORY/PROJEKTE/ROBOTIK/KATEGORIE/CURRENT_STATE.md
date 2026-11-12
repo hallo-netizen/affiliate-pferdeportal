@@ -1,5 +1,12 @@
 # ROBOTIK / KATEGORIE – EINZIGER AKTUELLER STATUS
 
+## NEUESTER STAND 12.11.2026 – DataForSEO 0.4.2 TEST, noch nicht Live
+- Der Betreiber zeigte im Frontend ein fehlerhaft zerlegtes 0.1.0-Design und beauftragte zuerst die DataForSEO-Anbindung, danach die Designkorrektur.
+- **0.4.2** derselben Robotik-Kategorie-Pluginidentität fertig, fünf PHP-Dateien lint PASS, 17+ isolierte Tests PASS. Neues DataForSEO-Adminmodul, kostenloser Test und Preflight für 161 SEO-Kandidaten, explizit einzelne Paid-Calls; **Live-Verbindung ungeprüft**.
+- Vorherige 0.4.1-Import- und Publikationsklassen byteidentisch erhalten. Installierbares ZIP in der Library `/robotik/Konzeptbüro/ROBOTIK_KATEGORIE_WORKFLOW_0.4.2_DATAFORSEO_TEST.zip`.
+- Designplugin 0.2.0 für zusammenhängenden Header und sichtbaren Footer separat fertig; Library `/robotik/Designbüro/ROBOTIK_STRUKTURDESIGN_0.2.0_TEST.zip`. Kein WordPress-Live-PASS. Details: `PLUGIN/DATAFORSEO_042_DESIGN_020_20261112.md`.
+
+
 ## NEUESTER STAND 11.11.2026 – Kategorie-Import 0.4.0, Veröffentlichung 0.4.1
 - Nach dem vom Nutzer gemeldeten „erledigt“ wird der vorherige Plugin-/Import-Arbeitsschritt **als gemeldet**, nicht als unabhängiger Live-Readback geführt.
 - **Kategorie-Workflow 0.4.0**: Originalcode belegt ersten Import mit 104 WP-Entwurfsseiten und 89 flachen WP-Beitragskategorien. Eingebetteter 7-Welten-Baum; WordPress-Live-Status der tatsächlichen Installation nicht unabhängig erhoben.
