@@ -54,6 +54,7 @@ class ExistingHabProductPipeline {
     return array('products'=>count($parsed['rows']),'pass'=>count($parsed['rows']),'warn'=>0);
   }
   public function idealo_settings(){return get_option(self::OPTION_NETWORK_IDEALO,array());}
+  public function idealo_campaigns_should_be_active(){return !empty($this->idealo_settings()['enabled']) && in_array(($this->idealo_settings()['output_mode']??''),array('automatic','combined','separate','idealo_only'),true);}
   public function idealo_materialize_campaigns() {
     $this->lastMaterialized=$this->synced[count($this->synced)-1]['rows']??array();
     return array('campaigns'=>count($this->lastMaterialized),'targets'=>1);
