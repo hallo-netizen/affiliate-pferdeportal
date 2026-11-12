@@ -30,4 +30,14 @@ jobs:
                 print('ROUTING',p,i+1,line[:1300])
                 if 'render_sync_card(' in line or 'idealo_render_sync_card(' in line:
                   for j in range(max(0,i-4),min(len(lines),i+7)):print('NEAR',p,j+1,lines[j][:1200])
+          for p in ['affiliate-portal-router/includes/class-ppar-admin-kiss.php','affiliate-portal-router/includes/trait-ppar-provider-registry.php']:
+             lines=z.read(p).decode('utf8','replace').splitlines()
+             for start,end in ([(30,78),(109,150)] if 'admin-kiss' in p else [(1,116)]):
+               for i in range(start-1,min(len(lines),end)): print('MENU',p,i+1,lines[i][:700])
+          for p in z.namelist():
+            if p.endswith('.php'):
+               lines=z.read(p).decode('utf8','replace').splitlines()
+               for i,line in enumerate(lines):
+                 if 'sync_card' in line or 'render_network_sync' in line or 'network_sync_screen' in line:
+                    print('SYNCCALL',p,i+1,line[:1300])
           PY
