@@ -1,0 +1,61 @@
+name: HAB category cards original source audit
+on:
+  push:
+    branches: [hab-category-compact-product-cards-rc21-20261112]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read actual Hab category design and affiliate adapter source
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile,re,hashlib
+          root=Path("protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS")
+          z=zipfile.ZipFile(root/"HAB-004-AFFILIATE/CURRENT.zip")
+          d=zipfile.ZipFile(root/"HAB-001-DESIGN/CURRENT.zip")
+          for label,x in [('AFF',z),('DESIGN',d)]:
+            print('ZIP',label,'FILES',len(x.namelist()),'PASS',x.testzip())
+            print('ZIP_NAMES',label,','.join(x.namelist())[:7000])
+          q=[
+           (z,'affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php',['area_products','area','render_category','render_category_products','category_product','available_product']),
+           (z,'affiliate-portal-router/includes/trait-ppar-hb-amazon.php',['hb_amazon_area_product_fallback','hb_amazon_product_family_markup','hb_amazon_category_product','hb_amazon_product','house_banner']),
+           (z,'affiliate-portal-router/affiliate-portal-router.php',['render_affiliate_slot_for_context','render_banner','render_affiliate_slot','campaign_to_group_banner','ranked_campaigns_for_slot','render_category','multiprovider']),
+           (d,'hab-bewahr-design-vorschau/includes/area-design-prototype.php',['hbdp_area_product_markup','hbdp_area_product_cards_html','render']),
+           (d,'hab-bewahr-design-vorschau/includes/detail-categories.php',['hbdp_render_detail_category_page','hbdp_area_product_markup']),
+          ]
+          for archive,file,needles in q:
+            if file not in archive.namelist():print('MISSING',file);continue
+            src=archive.read(file).decode('utf-8','replace').splitlines()
+            print('FILE',file,'LINES',len(src))
+            for i,line in enumerate(src):
+              if re.search(r'function\s+(?:[A-Za-z_][\w]*)\s*\(',line):
+                if any(n in line for n in needles):
+                  print('METHOD',file,i+1,line.strip()[:220])
+            if 'class-ppar-hab-bewahr' in file:
+              for i in range(min(len(src),380)): print('BRIDGE',i+1,src[i][:440])
+            elif 'trait-ppar-hb-amazon' in file:
+              for i,line in enumerate(src):
+                if any(k in line for k in ['function hb_amazon_area_product_fallback','function hb_amazon_product_family_markup','function hb_amazon_category_product']):
+                  for j in range(i,min(len(src),i+125)):print('AMAZON',j+1,src[j][:410])
+            elif file.endswith('affiliate-portal-router.php'):
+              for i,line in enumerate(src):
+                if 'function render_affiliate_slot_for_context(' in line:
+                  for j in range(i,min(len(src),i+105)):print('SLOT',j+1,src[j][:430])
+                if 'function render_banner(' in line:
+                  for j in range(i,min(len(src),i+105)):print('RENDER',j+1,src[j][:430])
+            else:
+              for i,line in enumerate(src):
+                if 'function hbdp_area_product_markup(' in line or 'function hbdp_render_detail_category_page(' in line:
+                  for j in range(i,min(len(src),i+110)):print('DESIGN_METHOD',file,j+1,src[j][:430])
+          for file in ['affiliate-portal-router/assets/frontend.css']:
+            a=z.read(file).decode().splitlines()
+            print('CSS_SIZE',len(a))
+            for i,line in enumerate(a):
+              if any(k in line for k in ['hb-amazon','ppar-affiliate-card','ppar-product','ppar-banner-text','hb-affiliate','ppar-category-product','ppar-affiliate-slot']):
+                print('CSS',i+1,line[:300])
+          PY
