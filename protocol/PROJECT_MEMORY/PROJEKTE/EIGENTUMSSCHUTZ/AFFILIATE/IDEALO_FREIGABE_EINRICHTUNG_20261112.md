@@ -37,3 +37,33 @@ Jeweils im WordPress-Backend **Affiliate-Zentrale → Anbieter & APIs → idealo
 - Keine WordPress-Artikel, Kategoriehierarchien, Bilder, Templates oder anderen Portale manuell ändern; kein WordPress-Core-Eingriff. **CURRENT.zip bleibt unverändert.**
 
 **Nächste Betreiberaktion:** Bei beiden Portalen `Affiliate-Zentrale → idealo` öffnen und die konkreten Werbeflächen-/Feedpaare mit dem jeweiligen iPN-Zugang **Speichern & API prüfen**. Danach kann anhand der Statusmeldungen die Import-/Ausgabefreigabe gezielt abgenommen werden.
+
+## 12.11.2026 – Nachtrag: EXAKTE Backend-Klickpfade und API-Key-Mehrfachverwendung
+
+**Aus echten vollständigen Plugin-ZIPs verifiziert** (GitHub-Actions 43235153451, HD009 0.1.32 und HAB004 RC19): WordPress-Menü **Affiliate-Zentrale → Anbieter & APIs → Schaltfläche „idealo“**. Der Menüpunkt „Anbieter & APIs“ gehört zum Hauptmenü `affiliate-portal-zentrale`; der idealo-Button verweist auf die bereits vorhandene Fachseite `admin.php?page=affiliate-portal-provider-idealo`. `idealo` ist dabei **kein eigener sichtbarer Haupt-/Untermenüeintrag** der linken WP-Navigation.
+
+**Formular – wörtliche Originalbezeichnungen:**
+- „idealo-Verbindung verwenden“
+- „iPN API-Key“
+- „Adspace-ID“
+- Hobby: „Hobby-Depot-Feed-ID“ und Checkbox „Adspace- und Feed-ID gehören nachweislich zur freigegebenen Hobby-Depot-Website.“
+- Hab: „Eigene Hab-&-Bewahr-Feed-ID“
+- Hobby: „Offizielle iPN-Download-URL für den Hobby-Depot-Feed“
+- Hab: „Offizielle iPN-Download-URL für den eigenen Feed“
+- „Portalweite Affiliate-Ausgabe“ mit der Option „Nur bestehende eBay-/Bestandslogik“
+- „idealo-Linkstrategie“ mit „Hybrid (empfohlen): Preisvergleich allein, konkrete idealo-Angebote nur als GTIN-Zusatzbutton“
+- „Feed automatisch alle zwölf Stunden auf Änderungen prüfen (nur bei gespeicherter Download-URL)“
+- Schaltfläche „Speichern & API prüfen“
+
+**API-Key-Frage – offizielle Ingenious-Quellen:** Laut Ingenious wird pro Benutzer standardmäßig ein API-Key bereitgestellt, der für Benutzer-Exports inklusive Produktdaten verwendet wird. Die offizielle iPN-Export-API akzeptiert **`apiKey` + `feedId` + `adspaceId`** getrennt. Damit ist **kein gesonderter Key pro URL oder pro Feed vorgeschrieben**, **sofern alle Adspaces im selben iPN-Konto mit dem Key autorisiert sind**. Die Portale haben getrennte Adspaces: Pferde Atelier `568313` (bekannte Feeds `2901`, `2747`), Hobby Depot `568912` (neue eigene Feed-ID), Hab & Bewahr `568944` (neue eigene Feed-ID). **Kein Beweis**, dass die drei Freigaben alle auf denselben iPN-Benutzer laufen; dies lässt sich nur über die beiden echten `Speichern & API prüfen`-Ergebnisse nachweisen. `findFeeds?adspaceId=...` muss für **jede** Feed-ID unter derselben Key-Berechtigung den passenden Eintrag zurückgeben. Falls ein Adspace/Feed nicht im selben Konto freigegeben ist, sind andere berechtigte Zugangsdaten oder Idealo-Support erforderlich. **Nie blind den Pferde-Atelier-Feed 2901 für andere Portale eingeben.**
+
+Quellen:
+- https://ingenioustechnologies.atlassian.net/wiki/spaces/KB/pages/3131015180/ (Benutzer/default API key und `Access → Credentials`)
+- https://ingenioustechnologies.atlassian.net/wiki/spaces/KB/pages/3310846106/ (Exportparameter `apiKey`, `feedId`, `adspaceId`)
+- https://ingenioustechnologies.atlassian.net/wiki/spaces/KB/pages/1440841946/ (mehrere Adspaces pro Partner)
+- Codeprüfung GitHub Actions 43235153451.
+
+**Die komplette Pluginkonfiguration und öffentliche Ausgabe bleiben unangetastet, bis beide persönlichen iPN-API-Tests PASS melden.** Schlüssel und geheime Download-URLs ausschließlich in jeweiligen WordPress-Backends, niemals im GitHub-Protokoll.
+
+---
+
