@@ -8,6 +8,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Trace provider-card selector slot propagation
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          z=ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          for p in z.namelist():
+            if not p.endswith('.php'):continue
+            lines=z.read(p).decode('utf8','replace').splitlines()
+            for i,l in enumerate(lines):
+              if any(n in l for n in ['multiprovider_reorder_candidates(', 'multiprovider_filter_candidates_by_strategy(', 'idealo_standalone_campaign_allowed(']):
+                print('CALL',p,i+1,l[:480])
+                for k in range(max(0,i-4),min(len(lines),i+6)):print('NEAR',p,k+1,lines[k][:420])
+          PY
       - name: Inspect trigger schedule and provider card UI conditions
         run: |
           python3 - <<'PY'
