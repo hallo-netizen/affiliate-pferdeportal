@@ -70,6 +70,11 @@ with ZipFile(BytesIO(OLD)) as z:
  b=once(b,
  """                if (!isset($seen_concepts[$unique]) && count($rules) < 50) {""",
  """                if (!isset($seen_concepts[$unique])) {""")
+ b=once(b,"                    $rules[] = array(",
+   "                    if (count($rules)<50) { $rules[] = array(")
+ b=once(b,
+    "                        'private'=>true, 'business'=>true, 'active'=>true,\n                    );",
+    "                        'private'=>true, 'business'=>true, 'active'=>true,\n                    ); }")
  b=once(b,
  """            // ALL existing article categories remain reachable, whether or""",
  """            if ($family!=='' && $target_slug==='') { $coverage_audit['unpublished_review']++; }
