@@ -47,15 +47,11 @@ with ZipFile(BytesIO(raw)) as orig:
         }
         if (($node['type'] ?? '') !== 'page') { return ''; }""")
     # Keep banners, world hubs, posts, editorial and special contexts unchanged.
-    b=once(b,"""        return Portal_Affiliate_Router::instance()->hab_bw_area_slot($id,$kind,(string)$node['id']);
-    }
-    public static function world_banner""",
+    b=once(b,"        return Portal_Affiliate_Router::instance()->hab_bw_area_slot($id,$kind,(string)$node['id']);",
     """        $result=Portal_Affiliate_Router::instance()->hab_bw_area_slot($id,$kind,(string)$node['id']);
         if ($kind!=='products' || (string)($node['pillar'] ?? '')!=='core'
             || strpos((string)($node['id'] ?? ''),'core:world:')===0) { return $result; }
-        return self::category_product_grid_markup($result);
-    }
-    public static function world_banner""")
+        return self::category_product_grid_markup($result);""")
     files[bridge]=b.encode("utf8")
     s=files[main].decode("utf8")
     s=once(s,"Version: 0.1.17-rc20","Version: 0.1.18-rc21")
@@ -68,8 +64,8 @@ with ZipFile(BytesIO(raw)) as orig:
       "display:grid!important;grid-template-rows:150px minmax(210px,1fr)!important;align-items:stretch!important;width:100%!important;height:auto!important;min-height:360px!important;",
       "display:grid!important;grid-template-rows:150px auto!important;align-items:stretch!important;width:100%!important;height:auto!important;min-height:0!important;")
     s=once(s,
-      "width:100%!important;min-height:152px!important\"')",
-      "width:100%!important;min-height:0!important\"')")
+      "min-height:152px!important",
+      "min-height:0!important")
     files[main]=s.encode("utf8")
     style=files[css].decode("utf8")
     assert "ppar-hb-category-products-grid" not in style
