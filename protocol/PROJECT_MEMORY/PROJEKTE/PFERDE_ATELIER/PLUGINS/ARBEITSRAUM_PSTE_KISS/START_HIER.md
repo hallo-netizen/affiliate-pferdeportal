@@ -1,3 +1,5 @@
+**Aktuelle belegte Fehlerliste (12.11.2026):** [Vorhandene Fehler, Korrekturen und allein noch fehlender zentraler Beleg](BELEGTE_FEHLERLISTE_UND_NAECHSTER_FIX_20261112.md). Der zentrale Vergleich *innerhalb* neuer Recherchepakete ist im PSTE bereits programmiert und darf nicht dupliziert werden; offen bleibt dessen gebundene Übernahme im normalen PSERC-Weg. Die neue Nachweisprobe liegt privat im selben Arbeitsraum, **kein Plugin-Code geändert**.
+
 # EIN Arbeitsraum – Pferdeatelier Textworkflow (Stand 12.11.2026)
 
 **Autorität für alle weiteren QA-Änderungen: dieser Arbeitszweig + genau EIN privater Stand unter `/pferdeatelier/PLUGINS/ARBEITSRAUM_PSTE_KISS`.** Ausgangspunkt ist der bestehende, verbindliche [Kisten-Zielvertrag](../EVIDENCE/PSTE_KISTENPRINZIP_VERBINDLICHER_ZIELVERTRAG_20261107.md). Das Ziel umfasst **beide vorhandenen Teile PSTE und PSERC**, weil der fachliche MINI/Keyword-Teil und der Redaktionsplan zusammenarbeiten müssen. Keine neuen Plugins, Schatten-Tabellen oder zusätzlichen Prüfstellen.
