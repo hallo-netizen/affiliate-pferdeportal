@@ -17,9 +17,9 @@ jobs:
           from zipfile import ZipFile
           z=ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
           ranges={
-           'affiliate-portal-router/includes/trait-ppar-idealo.php':[(245,280),(329,420),(579,690),(745,870),(1365,1425)],
-           'affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php':[(145,245),(265,310)],
-           'affiliate-portal-router/affiliate-portal-router.php':[(1113,1167),(2973,3110),(6880,6965)],
+           'affiliate-portal-router/includes/trait-ppar-idealo.php':[(245,278),(329,355),(590,608),(752,770),(790,802),(1340,1410)],
+           'affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php':[(1,145),(185,300)],
+           'affiliate-portal-router/affiliate-portal-router.php':[(1113,1167),(3090,3132),(6886,6975),(7120,7150)],
            'affiliate-portal-router/assets/frontend.css':[(2250,2335)]
           }
           for file,chunks in ranges.items():
