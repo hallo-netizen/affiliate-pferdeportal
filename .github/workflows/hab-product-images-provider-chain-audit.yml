@@ -1,0 +1,52 @@
+name: HAB real product image source and multi-provider full-chain audit
+on:
+  push:
+    branches: [hab-actual-product-data-endtoend-audit-20261112]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect exact current full affiliate ZIP and upstream horse source
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re
+          hab='protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          with ZipFile(hab) as z:
+             for f in z.namelist():
+                if not f.endswith('.php'): continue
+                txt=z.read(f).decode('utf8','replace'); lines=txt.splitlines()
+                defs=[]
+                for i,l in enumerate(lines):
+                   m=re.search(r'(?:private|protected|public)?\s*function\s+([\w]+)\s*\(',l)
+                   if m and any(w in m.group(1).lower() for w in ['amazon','idealo','dfs','product','gtin','offer','image','banner','source','search','feed','creative','campaign']):
+                      defs.append((i+1,m.group(1)))
+                print('FUNCTIONS',f,defs[:360])
+                for i,l in enumerate(lines):
+                   if re.search('dataforseo|df[s_]|pa.?api|amazon.*image|asins_product|product_asins|image_url|image_link|image_src|img_url|imageUrl|images_product|url_image|picture',l,re.I):
+                      if f.endswith('affiliate-portal-router.php') and i>3800:continue
+                      print('FIELD',f,i+1,l.strip()[:330])
+             for f in ['affiliate-portal-router/includes/trait-ppar-hb-amazon.php','affiliate-portal-router/includes/trait-ppar-idealo.php','affiliate-portal-router/affiliate-portal-router.php','affiliate-portal-router/includes/trait-ppar-creative-library.php']:
+                src=z.read(f).decode('utf8','replace').splitlines()
+                if 'hb-amazon' in f:
+                   for a,b in [(1,215),(216,420)]:
+                     print('BEGIN',f,a,b)
+                     for n in range(a,min(b+1,len(src)+1)): print('SRC',f,n,src[n-1][:520])
+                elif 'idealo' in f:
+                   for i,l in enumerate(src):
+                     if re.search(r'function\s+(?:idealo_.*(?:parse|import|campaign|image|product|sync|feed|find)|multiprovider_.*)\s*\(',l):
+                       print('IDEALO_METH',i+1,l[:220])
+                elif 'creative-library' in f:
+                   for i,l in enumerate(src):
+                     if re.search(r'function\s+(?:creative_|campaign_|multiprovider_).*\(',l):
+                       print('CREATIVE_METH',i+1,l[:220])
+                else:
+                   for i,l in enumerate(src):
+                     if re.search(r'function\s+(?:render_banner|campaign_to_group_banner|campaign_from_post|campaign_match_rank|multiprovider_\w+|hb_\w+|category_product_\w+)\s*\(',l):
+                       print('ROUTER_METH',i+1,l[:300])
+          PY
