@@ -67,7 +67,7 @@ jobs:
                   const links=Array.from(c.querySelectorAll('.ppar-banner-offer-button,.ppar-banner-button'));
                   const a=links[links.length-1];const r=a?a.getBoundingClientRect():null;
                   const cr=c.getBoundingClientRect();
-                  return {className:c.className,html:c.outerHTML.slice(0,380),frame:getComputedStyle(c).borderTopWidth,frameBottom:getComputedStyle(c).borderBottomWidth,outline:getComputedStyle(c).outlineWidth,shadow:getComputedStyle(c).boxShadow,cardHeight:Math.round(cr.height),x:Math.round(cr.x),
+                  return {className:c.className,inlineStyle:c.getAttribute('style'),frame:getComputedStyle(c).borderTopWidth,frameStyle:getComputedStyle(c).borderTopStyle,outline:getComputedStyle(c).outlineWidth,outlineStyle:getComputedStyle(c).outlineStyle,shadow:getComputedStyle(c).boxShadow,cardHeight:Math.round(cr.height),x:Math.round(cr.x),
                     buttonBottom:r?Math.round(r.bottom):null,buttonCount:links.length,innerFrame:getComputedStyle(c.querySelector('.ppar-banner-link')).borderTopWidth};
                 })};
               ''')
