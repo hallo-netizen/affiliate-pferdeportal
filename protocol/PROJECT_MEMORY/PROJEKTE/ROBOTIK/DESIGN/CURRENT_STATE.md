@@ -1,5 +1,13 @@
 # ROBOTIK – DESIGN – CURRENT
 
+## AKTUELL 12.11.2026 – Strukturdesign 0.2.3, LOCAL PASS / LIVE OFFEN
+- Vorversion 0.2.2 scheitert im **Originalcode-Test** bei öffentlicher Root `/` und internem `home_url=/wordpress/`; **0.2.3** besteht denselben Fall. Der tatsächliche Root-Pfad auf Robotik-Live ist nicht bestätigt – nicht als bewiesene Live-Ursache ausgeben.
+- **Die 7 Hauptkategorien existieren nur oben im Mega-Menü.** Die Kategorie-Dublette unten ist beseitigt; dort nur eigener kompakter Footer. Industrie unter Gewerbe.
+- Mit 104 Seiten aus dem originalen 0.4.2-Importprofil PHP-/Browser-geprüft: 9/9 Routentests, 2/2 HTML-Startseitenwege, 1440/1024/390px, Mega/Industrie/Mobil/Footer PASS. PHP/JS/ZIP PASS; WordPress-Live- und Cachezustand OFFEN.
+- **Einziger aktueller Testinstaller:** Library `/robotik/Designbüro/ROBOTIK_STRUKTURDESIGN_0.2.3_ROOT_FIX_GEPRUEFT.zip`; Protokoll `TESTDESIGN_023_20261112.md`. Bei fehlender Versionsmarke `Strukturansicht 0.2.3` keine weitere Pluginrunde: aktive Version und Cache prüfen.
+- Kategorie-Workflow/DataForSEO 0.4.2 unverändert.
+
+
 ## NEUESTER STAND 12.11.2026 – V0.2.2 ROOT-FIX (lokal PASS, live OFFEN)
 - Voriges 0.2.1 trotz Installation laut Nutzer im echten Screenshot ohne Wirkung; die aktive Serverversion ist unabhängig nicht bestätigt. Nicht behaupten, dass ein Browsermock ein WordPress-Live-PASS ist.
 - Bewährte Hobbydepot-/Hab-&-Bewahr-Kopf-/Fußstruktur geprüft. **Einziges Robotik-Designplugin** `robotik-strukturdesign` v0.2.2: exakte Site-Root über WordPress `template_redirect` vollständig als schlichte Testansicht ausgeben; keine Theme-Blogansicht oder Seitenleiste; auf Unterseiten Theme unverändert.
