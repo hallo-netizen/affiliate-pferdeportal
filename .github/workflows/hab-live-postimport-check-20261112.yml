@@ -1,0 +1,29 @@
+name: Hab idealo live actual category post-import read-only check
+on:
+  push:
+    branches: [hab-idealo-live-postimport-check-20261112]
+permissions: {contents: read}
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify actual public product photos and buttons
+        run: |
+          python3 - <<'PY'
+          import urllib.request,re,json
+          paths=[
+            'https://hab-und-bewahr.de/einbruch-und-diebstahl/einbruch-und-diebstahl-haus-und-wohnung/c22-haustuerschloesser-dd9773fd40/',
+            'https://hab-und-bewahr.de/'
+          ]
+          for url in paths:
+            try:
+              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) Chrome/131.0.0.0 Safari/537.36','Cache-Control':'no-cache'})
+              with urllib.request.urlopen(req,timeout=20) as r:
+                html=r.read(2200000).decode('utf8','replace')
+              tag=re.findall(r'<(?:a|img)[^>]+>',html,re.I|re.S)
+              imgs=[v for v in tag if v.lower().startswith('<img') and any(p in v.lower() for p in ['idealo','ebayimg','product'])]
+              offers=[v for v in tag if v.lower().startswith('<a') and any(p in v.lower() for p in ['idealo','ebay','amazon'])]
+              print('LIVE_CHECK',json.dumps(dict(url=url,html_bytes=len(html),idealo_photo_links=html.count('cdn.idealo.com'),ebay_photo_links=html.count('i.ebayimg.com'),provider_buttons=html.count('ppar-banner-offer-button'),grid_count=html.count('ppar-hb-category-products-grid'),amazon_links=html.count('amazon.de'),idealo_links=html.count('idealo'),ebay_links=html.count('ebay.de'),photos_sample=imgs[:3],offers_sample=offers[:5]),ensure_ascii=False))
+            except Exception as e:print('LIVE_ERROR',url,repr(e))
+          PY
