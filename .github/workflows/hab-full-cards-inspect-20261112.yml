@@ -8,6 +8,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Inspect category priorities and product concept matching
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          z=ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          data=[
+           ('affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php',[(379,450),(90,160)]),
+           ('affiliate-portal-router/includes/trait-ppar-idealo.php',[(268,385),(391,440),(742,756),(817,915),(1070,1142),(1160,1183),(1263,1305)]),
+           ('affiliate-portal-router/includes/trait-ppar-hb-amazon.php',[(257,390),(399,490)]),
+           ('affiliate-portal-router/affiliate-portal-router.php',[(2780,2831),(4205,4300),(4860,4940)])
+          ]
+          for f,ranges in data:
+            src=z.read(f).decode().splitlines()
+            for start,stop in ranges:
+              print('REGION',f,start,stop)
+              for i in range(start-1,min(stop,len(src))):print('CODE_REGION',f,i+1,src[i][:520])
+          PY
       - name: Inspect product source, exact selectors and feed API code
         shell: bash
         run: |
