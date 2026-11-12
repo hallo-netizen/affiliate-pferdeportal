@@ -100,6 +100,9 @@ jobs:
               allowed={'advanced','busy','retryable_error','completed','failed','disabled','idle','throttled'}
               if s not in allowed or c!='external_tick_v2' or not isinstance(t,int) or t<=0:
                   raise ValueError('invalid external_tick_v2 response')
+              # Availability may yield "idle" even while the canonical research run stays active.
+              if s=='idle' and d.get('reason')=='availability_tick' and d.get('run_status') in ('running','paused'):
+                  s='active_idle'
               print(f"{s} {t}")
           except Exception:
               pass
@@ -128,6 +131,9 @@ jobs:
                   throttled)
                     ;;
                   advanced|busy|retryable_error)
+                    active_seen=1
+                    ;;
+                  active_idle)
                     active_seen=1
                     ;;
                 esac
