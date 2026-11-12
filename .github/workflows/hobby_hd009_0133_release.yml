@@ -1,0 +1,97 @@
+name: Hobby Depot HD009 0.1.33 direct idealo verified release
+on:
+  push:
+    branches: [hobbyroom/hd009-033-direct-idealo-export-20261112]
+    paths: [.github/workflows/hobby_hd009_0133_release.yml]
+permissions:
+  contents: write
+jobs:
+  build_qa_release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build from verified original 0.1.32 ZIP, no other files
+        run: |
+          python3 scripts/hobby_hd009_direct_idealo_0133.py /tmp/HOBBY_DEPOT_AFFILIATE_HD009_0.1.33_DIRECT_IDEALO.zip
+      - name: Lint every original plugin PHP file in new archive
+        run: |
+          python3 - <<'PY'
+          import pathlib,zipfile
+          with zipfile.ZipFile('/tmp/HOBBY_DEPOT_AFFILIATE_HD009_0.1.33_DIRECT_IDEALO.zip') as z:
+            for n in z.namelist():
+              if n.endswith('.php'):
+                p=pathlib.Path('/tmp/hd009_source')/n
+                p.parent.mkdir(parents=True,exist_ok=True)
+                p.write_bytes(z.read(n))
+          print('PHP_LINT_FILE_COUNT',len(list(pathlib.Path('/tmp/hd009_source').rglob('*.php'))))
+          PY
+          find /tmp/hd009_source -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Exercise actual PHP direct export, GZIP, rejected adspaces and worker
+        run: |
+          python3 scripts/hobby_hd009_direct_idealo_0133_qa.py /tmp/HOBBY_DEPOT_AFFILIATE_HD009_0.1.33_DIRECT_IDEALO.zip /tmp/hd009_php_qa.php
+          php -l /tmp/hd009_php_qa.php
+          php /tmp/hd009_php_qa.php
+      - name: Prove unchanged original product importer, Amazon, eBay and public gates
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile,hashlib,re
+          base=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          new=Path('/tmp/HOBBY_DEPOT_AFFILIATE_HD009_0.1.33_DIRECT_IDEALO.zip')
+          with zipfile.ZipFile(base) as a,zipfile.ZipFile(new) as b:
+            assert a.namelist()==b.namelist() and len(a.namelist())==41
+            assert a.testzip() is None and b.testzip() is None
+            modified=[n for n in a.namelist() if a.read(n)!=b.read(n)]
+            main='affiliate-portal-router/hobby-depot-affiliate-router.php'
+            idealo='affiliate-portal-router/includes/trait-ppar-idealo.php'
+            assert set(modified)=={main,idealo},modified
+            old=a.read(idealo).decode();curr=b.read(idealo).decode()
+            begin=re.compile(r'^    (?:private|public|protected) function [a-zA-Z_]+\(',re.M)
+            def extract(s,key):
+              start=s.index(key)
+              match=begin.search(s,start+len(key))
+              return s[start:match.start()] if match else s[start:]
+            methods=[
+              'private function idealo_import_feed_file(',
+              'private function idealo_materialize_campaigns(',
+              'public function idealo_campaign_publicly_allowed(',
+              'private function idealo_campaigns_should_be_active(',
+              'private function idealo_refresh_remote_feed(',
+              'private function idealo_dispatch_manual_worker(',
+              'private function idealo_find_feed_metadata(',
+              'public function idealo_provider_access_test(',
+              'private function idealo_open_feed_stream(',
+            ]
+            for m in methods:
+              assert extract(old,m)==extract(curr,m), 'Unapproved original method edit: '+m
+            print('ORIGINAL_METHODS_VERIFIED_BYTE_IDENTICAL',len(methods))
+            print('CHANGED_ONLY',modified)
+            print('ORIGINAL_PHP_FILES_UNCHANGED_EXCEPT_2','PASS')
+            print('ZIP_CRC_41_PASS')
+          PY
+      - name: Save complete tested ZIP and proof in isolated Hobby Depot plugin office
+        run: |
+          python3 scripts/hobby_hd009_direct_idealo_0133_archive.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/HOBBY_DEPOT_AFFILIATE_HD009_0.1.33.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/MANIFEST.md
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/CURRENT.md
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/HD009_DIRECT_IDEALO_EXPORT_0.1.33_20261112.md
+          git commit -m "HD009 0.1.33 tested full ZIP and direct API export proof"
+          git fetch origin hobbyroom/hd009-033-direct-idealo-export-20261112
+          git rebase origin/hobbyroom/hd009-033-direct-idealo-export-20261112
+          git push origin HEAD:refs/heads/hobbyroom/hd009-033-direct-idealo-export-20261112
+      - name: Publish exact tested installable plugin as versioned release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          TAG="hobby-hd009-0.1.33-idealo-direct-20261112"
+          ASSET="/tmp/HOBBY_DEPOT_AFFILIATE_HD009_0.1.33_DIRECT_IDEALO.zip"
+          SHA=$(sha256sum "$ASSET" | cut -d' ' -f1)
+          printf 'Vollständiges WordPress-Plugin HD009 0.1.33, geprüft gegen originales HD009 CURRENT 0.1.32.\nSHA-256: %s\n41/41 ZIP-CRC, PHP-Syntax aller Dateien und echte PHP-Mocktests der Originalmethoden PASS.\nNoch keine authentifizierte Liveinstallation in WordPress behauptet.\nIm Hobbydepot nach Installation: Affiliate-Zentrale → Anbieter & APIs → idealo → Feed jetzt aktualisieren.\n' "$SHA" > /tmp/hd009-release-notes.txt
+          gh release create "$TAG" "$ASSET#HOBBY_DEPOT_AFFILIATE_HD009_0.1.33_DIRECT_IDEALO.zip" --repo "$GITHUB_REPOSITORY" --target hobbyroom/hd009-033-direct-idealo-export-20261112 --title "Hobby Depot HD009 0.1.33 – idealo Direktexport" --notes-file /tmp/hd009-release-notes.txt
+          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json assets,name,tagName,url
