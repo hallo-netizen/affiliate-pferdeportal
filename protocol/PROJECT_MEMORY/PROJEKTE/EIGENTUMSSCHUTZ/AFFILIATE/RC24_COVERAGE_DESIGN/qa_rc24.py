@@ -128,7 +128,7 @@ expect(($report['tree']['insurance_excluded']??0)===20,'insurance never enters d
 expect(($report['reasons']['missing_gtin']??0)===100,'feed rejection counts preserved in report');
 expect(!isset($report['api_key']),'report contains no API secrets');
 echo 'HAB_RC24_CATALOG_AUDIT_FEATURES_13_CASES_PASS'.PHP_EOL;
-'''.replace("METHODS",funcs).replace("OTHER_METHODS",method)
+'''.replace("OTHER_METHODS",method).replace("METHODS",funcs)
  with TemporaryDirectory() as td:
   f=Path(td)/"qa.php";f.write_text(source)
   lint=run(["php","-l",str(f)],capture_output=True,text=True)
