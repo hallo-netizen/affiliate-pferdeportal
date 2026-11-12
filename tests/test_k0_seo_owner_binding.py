@@ -62,6 +62,39 @@ class SeoOwnerSourceBindingTests(unittest.TestCase):
         self.assertEqual(bound["identity"],context["identity"])
         self.assertEqual(context["content_profile"]["search_intent"],"DECISION_SUPPORT")
 
+    def test_three_original_k0_writer_jobs_preserve_single_real_world_intent(self):
+        # QA simulation only: source profiles are signed using real PSTE .43's
+        # observed EDITORIAL_INFORMATION verdict, but not a live WP manifest.
+        import hashlib
+        from engine.k0_portal_resolver import resolve
+        from engine.k0_writer_station import prepare
+        manifest=copy.deepcopy(self.m)
+        for item in manifest["items"]:
+            profile=item["intent_profile"]
+            profile["search_intent"]="EDITORIAL_INFORMATION"
+            profile["profile_sha256"]=php_stable({k:v for k,v in profile.items()
+                if k not in ("profile_sha256","analysis_sha256")})
+        manifest["manifest_sha256"]=php_stable({k:v for k,v in manifest.items()
+            if k!="manifest_sha256"})
+        registry=json.loads((ROOT/"K0_PORTAL_REGISTRY.json").read_text(encoding="utf-8"))
+        for i in (1,2,3):
+            intake,context=self.source(i)
+            context=bind_context(manifest,intake,context)
+            context["run_instance_id"]="run:"+hashlib.sha256(
+                ("qa-source-bound-"+str(i)).encode()).hexdigest()[:24]
+            self.assertEqual(context["content_profile"]["search_intent"],
+                "EDITORIAL_INFORMATION")
+            portal=resolve(intake,registry)
+            self.assertEqual(portal["status"],"PASS")
+            job=prepare(intake,portal,context)
+            self.assertEqual(job["writer_rule_binding"]["article_hard_rule_count"],81)
+            self.assertEqual(job["identity"],context["identity"])
+            self.assertEqual(job["content_profile"]["search_intent"],
+                "EDITORIAL_INFORMATION")
+            self.assertEqual(job["content_profile"]["seo_owner_manifest_sha256"],
+                manifest["manifest_sha256"])
+            self.assertFalse(job["publish_allowed"])
+
     def test_already_bound_intent_conflict_blocks(self):
         intake,context=self.source(2)
         already_bound=bind_context(self.m,intake,context)
