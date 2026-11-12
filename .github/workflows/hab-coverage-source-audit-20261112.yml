@@ -1,0 +1,38 @@
+name: HAB actual product coverage and cards source audit
+on:
+  push:
+    branches: [hab-affiliate-coverage-cards-20261112]
+    paths: [.github/workflows/hab-coverage-source-audit-20261112.yml]
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build actual installed Hab RC23 and print only relevant core source
+        run: |
+          set -euo pipefail
+          python3 protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          import re
+          path='protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          z=ZipFile(path)
+          for p in z.namelist():
+             if not p.endswith('.php'):continue
+             src=z.read(p).decode('utf8','replace').splitlines()
+             for i,line in enumerate(src):
+               m=re.search(r'function\s+([A-Za-z0-9_]+)\s*\(',line)
+               if m and any(s in m.group(1).lower() for s in ['idealo_match','idealo_import','idealo_materialize','idealo_stream','idealo_feed','idealo_concept','idealo_normalize','idealo_scope','idealo_coverage','idealo_render','render_banner','ebay_campaign','product_attribute','product_feature','product_spec','insurance','property']):
+                 print('METHOD',p,i+1,m.group(1),line.strip()[:240])
+             for i,line in enumerate(src):
+               if any(w in line for w in ['131/', 'concepts', 'matching_rows', 'matched_concepts', 'matched_rows', 'coverage', 'materialized_targets','image_url_1','available','ppar-banner-actions','ppar-banner-title','ppar-banner-offer-button','product_attributes','product_features','product_specs','features']):
+                 if ('includes/trait-ppar-idealo.php' in p or 'affiliate-portal-router.php' in p or 'class-ppar-hab-bewahr-bridge.php' in p) and (not 'error' in line.lower()):
+                   if len(line)<2000:print('FIELD',p,i+1,line[:800])
+          for p in ['affiliate-portal-router/assets/frontend.css']:
+             a=z.read(p).decode().splitlines()
+             print('CSS_LINES',len(a))
+             for i,line in enumerate(a):
+               if any(x in line for x in ['ppar-hb-category-products-grid','ppar-banner-title','ppar-banner-text','ppar-banner-offer-button','ppar-banner-actions']):
+                 print('CSS',i+1,line[:400])
+          PY
