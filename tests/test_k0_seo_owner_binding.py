@@ -44,11 +44,30 @@ class SeoOwnerSourceBindingTests(unittest.TestCase):
             self.assertEqual(set(intake["items"][0]),{"title","target_keyword","category","article_type","plan_slot"})
             self.assertEqual(context["identity"],intake["items"][0])
 
-    def test_wrong_editorial_intent_blocks(self):
+    def test_original_unbound_context_uses_only_signed_upstream_intent(self):
+        # The original three authoring jobs already contain an unproven
+        # DECISION_SUPPORT value. Real PSTE .42 can approve EDITORIAL_INFORMATION.
+        # K0 is not allowed to make a second decision or reject the first one.
         intake,context=self.source(2)
-        context["content_profile"]["search_intent"]="SOME_OTHER_OWNER_DECISION"
-        with self.assertRaisesRegex(Blocked,"INTENT_CONFLICT"):
-            bind_context(self.m,intake,context)
+        self.assertEqual(context["content_profile"]["search_intent"],"DECISION_SUPPORT")
+        m=copy.deepcopy(self.m)
+        profile=m["items"][1]["intent_profile"]
+        profile["search_intent"]="EDITORIAL_INFORMATION"
+        from engine.k0_seo_owner_binding import php_stable
+        profile["profile_sha256"]=php_stable({k:v for k,v in profile.items() if k not in ("profile_sha256","analysis_sha256")})
+        m["manifest_sha256"]=php_stable({k:v for k,v in m.items() if k!="manifest_sha256"})
+        bound=bind_context(m,intake,context)
+        self.assertEqual(bound["content_profile"]["search_intent"],"EDITORIAL_INFORMATION")
+        self.assertEqual(verify_context(m,intake,bound)["status"],"PASS")
+        self.assertEqual(bound["identity"],context["identity"])
+        self.assertEqual(context["content_profile"]["search_intent"],"DECISION_SUPPORT")
+
+    def test_already_bound_intent_conflict_blocks(self):
+        intake,context=self.source(2)
+        already_bound=bind_context(self.m,intake,context)
+        already_bound["content_profile"]["search_intent"]="UNAPPROVED_CHANGE"
+        with self.assertRaisesRegex(Blocked,"BOUND_INTENT_CONFLICT"):
+            bind_context(self.m,intake,already_bound)
 
     def test_intent_change_after_binding_blocks(self):
         intake,context=self.source(1)
