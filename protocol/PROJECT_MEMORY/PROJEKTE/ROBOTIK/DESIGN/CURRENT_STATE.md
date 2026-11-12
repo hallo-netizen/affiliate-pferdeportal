@@ -1,5 +1,12 @@
 # ROBOTIK – DESIGN – CURRENT
 
+## NEUESTER STAND 12.11.2026 – Mini-Design 0.2.0 TEST, noch nicht Live
+- Korrigierte monochrome Darstellung mit einem gemeinsamen Header, sieben Hauptmenüs, Industrie unter Gewerbe und sichtbarem Footer, rein aus echten Robotik-Seiten.
+- Alte 0.1.0-Versteckung des Theme-Footers konnte den eigenen Footer verdecken; neues JS versetzt beide Blöcke nach `body`, erst danach wird der Theme-Rahmen ausgeblendet.
+- Lokale Chromium-Proben Desktop/Mobil inkl. fehlendem `wp_body_open` PASS; echter WordPress-Theme-Test noch ausstehend.
+- **Installer:** `/robotik/Designbüro/ROBOTIK_STRUKTURDESIGN_0.2.0_TEST.zip`. DataForSEO-Plugin 0.4.2 separat im Kategorie-Konzeptbüro. Details: `TESTDESIGN_020_20261112.md`.
+
+
 ## NEUESTER STAND 11.11.2026 – einfaches Testdesign lokal fertig, NOCH NICHT LIVE
 - **Designplugin `Robotik Strukturdesign 0.1.0 (Test)` erstellt:** monochrom, keine Bilder/Farben, Mega-Menü aus den tatsächlich importierten 7 CORE-Wurzelseiten, Industrie als abgesetzter Teil von Gewerbe, Footer mit denselben 7 Bereichen und echten Unterseiten; responsive mobile Navigation.
 - Keine erfundenen Seiten/Links; noch nicht angelegte Magazin-/Finder-/Anzeigenmarktseiten nur als nicht anklickbare Beschriftung.
