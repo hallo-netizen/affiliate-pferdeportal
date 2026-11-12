@@ -1,3 +1,9 @@
+## 12.11.2026 – HAB AFFILIATE RC21: PRODUKTKARTEN KATEGORIE KOMPAKT (OFFLINE-PASS)
+
+Aktuelles HAB-004: **RC21 0.1.18-rc21**, vollständiges `CURRENT.zip` und `HAB_AFFILIATE_RC21_0.1.18-rc21.zip` (2.337.596 Bytes, 36 Dateien, SHA256 `0f40eddb4526434c03acdd370d2763ac5a01eaea862a40cb9ae25bb8754363bf`). Nutzer beanstandet in der Kategorie `c22-haustuerschloesser-dd9773fd40` drei riesige Amazon-Textkarten untereinander. Vorhandenes Pferde-Atelier-Slotprinzip geprüft, bestehende Hab-Kategorie-Bridge und erzwungene Alt-Mindesthöhen ursächlich. **Rootfix:** Drei existierende Affiliate-Slots im 3/2/1-Grid, reduzierte Höhen, kein neues System; weiterhin Original-ASIN/Titel/Links, echte Mehrfachanbieter-Schaltflächen nur bei exakter GTIN und aktivem Idealo-Feed. Versicherungen bleiben produktwerbefrei, andere Portale unverändert, Design RC19 unverändert. Runner 43244276656: 11 PHP-Funktions-/Integrationsprüfungen inklusive Original-Design-RC19, 25 PHP-Lints, beide ZIP-CRC PASS. **Noch nicht live installiert/abgenommen.** Release-Vertrag: `RC21_KATEGORIE_PRODUKTKACHELN_20261112.md`.
+
+---
+
 ## 12.11.2026 – HAB IDEALO RC20 FIX; LIVEINSTALLATION AUSSTEHEND
 
 HAB-004 RC19 enthielt die nachgewiesen falsche Sperre `feed_id === 2901` und deaktivierte dadurch beim Laden den Idealo-Haken trotz richtiger Hab-Adspace `568944`. Der Partner bietet denselben Feed für mehrere Adspaces an. Der minimale RC20-Fix bewahrt nur die fremde Adspace-Sperre `568313`; eigene Hab-Paarung `568944/2901` bleibt erlaubt. Neue vollständige RC20-`CURRENT.zip` auf GitHub, SHA256 `532d3ef2552c44cc9652881e1ff943ad7bcd8ddd93fb779f5dab1d55a08b8d97`. Fünf PHP-Testfälle, 25 PHP-Lints, 36 ZIP-CRC PASS; GitHub-Actions 43240486920. **Nicht live installiert oder live auf API geprüft.** Öffentliche Produktausgabe und automatische Aktualisierung bleiben bis zur Abnahme aus; Versicherungsbereich bleibt produktwerbefrei. Anderes Portal Hobby Depot HD-009 bleibt unverändert.
