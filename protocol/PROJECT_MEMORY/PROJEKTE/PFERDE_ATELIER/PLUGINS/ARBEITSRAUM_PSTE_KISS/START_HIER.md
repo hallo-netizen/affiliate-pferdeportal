@@ -1,0 +1,32 @@
+# EIN Arbeitsraum – Pferdeatelier Textworkflow (Stand 12.11.2026)
+
+**Autorität für alle weiteren QA-Änderungen: dieser Arbeitszweig + genau EIN privater Stand unter `/pferdeatelier/PLUGINS/ARBEITSRAUM_PSTE_KISS`.** Ausgangspunkt ist der bestehende, verbindliche [Kisten-Zielvertrag](../EVIDENCE/PSTE_KISTENPRINZIP_VERBINDLICHER_ZIELVERTRAG_20261107.md). Das Ziel umfasst **beide vorhandenen Teile PSTE und PSERC**, weil der fachliche MINI/Keyword-Teil und der Redaktionsplan zusammenarbeiten müssen. Keine neuen Plugins, Schatten-Tabellen oder zusätzlichen Prüfstellen.
+
+## Private Datei – tatsächlich identischer geprüfter Stand
+- **Arbeitsdatei:** `/pferdeatelier/PLUGINS/ARBEITSRAUM_PSTE_KISS/AKTUELLER_ARBEITSSTAND_TESTIDENTISCH_NICHT_INSTALLIEREN.zip`.
+- **SHA-256:** `8fc55bca1fc7e4fe019203b2c56d169a734f0c3c941b08606fa9bed6b9183e33` / **1.831.122 Bytes** / 196 Dateien im Archiv.
+- Beweis: Nach den Tests wurde **genau der getestete Quellstand** gemeinsam mit den Originalen und Tests verpackt, erneut entpackt und komplett nachgeprüft. Anschließend wurde die gespeicherte Bibliotheksdatei wieder heruntergelesen und **byteidentisch** zur geprüften Archivdatei verglichen.
+- Im Archiv: `originale/` = unverändert; `arbeit/` = aktuell geprüfter Quellstand; `pruefung/` = auswertbares Protokoll, zwei genaue Diffs und eigenständige PHP-Proben. Außerdem in derselben privaten Ablage: `START_HIER.md` und `ARBEITSSTAND_BEWEIS.json`.
+- PSTE Original-ZIP `0.57.144.45`: SHA-256 `d3057946defc035af7abe5522c4845625c98ebd3f2cf621e1b3c5ce019f230a4`, 121 Dateien, 83 PHP-Dateien.
+- PSERC Original-ZIP `0.28.69`: SHA-256 `576e58b51db3f348210dc3d47a894d6551558acc0c6900505be5e11257d2e41b`, 63 Dateien, 43 PHP-Dateien.
+- **Nur zwei veränderte Quell-Dateien gegenüber den Originalen:** PSTE `includes/class-pste-repository.php` (bewährtes Freigabe-Lesen, nicht erneut beurteilen) und PSERC `includes/class-pserc-plan-dependency-fingerprint.php` (Jobfortschritt vom echten Quellwechsel trennen). Die beiden Original-ZIPs sind unverändert.
+- Die zurückgewiesenen QA-Versuche PSTE .46 / PSERC .70 werden **NICHT** als Ganzes übernommen: belegte Probleme mit ungesicherter Bestandsfrische und gleichzeitig neu geplanten Doppelthemen.
+
+## Beweiskette, **keine** Live-Behauptung
+1. Vorher/Nachher am tatsächlichen unveränderten Originalcode: PSTE .45 bewertet eine bereits gültige MINI-FREI-Freigabe beim Lesen nochmals und blockiert; Arbeitsstand reicht eine unveränderte gebundene FREI-Freigabe weiter, während fehlender/beschädigter Beleg weiter BLOCKED ergibt. **2/2 Testfälle PASS.**
+2. Vorher/Nachher am tatsächlichen unveränderten Originalcode: PSERC .69 entwertet den Plan wegen einer bloßen Jobstatus-Änderung; Arbeitsstand verändert für Status/Generation/Jobkennung den Fingerabdruck **nicht**, für echte Struktur-/Plan-/Bestands-/Themenänderungen **weiterhin doch**. **8/8 Testfälle PASS.**
+3. Ein MINI-Einzellinienfehler wird nach Original-Methoden getrennt zurückgestellt und lässt die andere gültige Antwort passieren; komplett falsche Paketkennung stoppt beide. **2/2 PASS.** Dieser Punkt ist **bereits erledigt** und darf nicht nochmals gebaut werden.
+4. Zwei synonym neue Kandidaten innerhalb eines Redaktionsplan-Stapels werden weiterhin abgefangen; geänderte tatsächliche Struktur- und Planquellen bleiben erkennbar. **Originalmethoden-Proben PASS.**
+5. **126/126 PHP-Syntax-PASS.** Der nach dem Test erstellte Arbeitssnapshot wurde getrennt entpackt und sämtliche Tests erneut ausgeführt, **PASS**. Vollprotokoll: privat `ARBEITSSTAND_BEWEIS.json` im gleichen Arbeitsraum.
+6. **Wichtige Grenze:** WordPress-Daten in diesen Proben nachgebildet, kein echter TEST-/Live-Datenbankzugriff, keine echte DataForSEO-/MINI-Arbeit, keine echte K0-Artikelproduktion, **keine Paketintegritäts- oder Live-Freigabe**. Original-Plugin-ZIP und die *geänderte* Quellkopie nicht verwechseln.
+
+## Bewiesene offene Punkte – nur noch diese bearbeiten
+1. **Noch doppelte Fachentscheidung beim normalen PSERC-Weg.** In `PSERC_Compiler::compile` und `PSERC_Plan_Compile_Job::tickCandidate` wird beim normalen Kandidaten ohne signierten externen SEO-Beleg in PSERC nochmals fachlich auf Doppelungen geprüft. Entfernung **ohne** belegten stapelweiten Originalentscheid wäre gefährlich (genau das scheiterte in QA .70). Erforderlich: EIN verbindlicher, originalgebundener Fachbeleg für normalen und MINI-Weg samt gleichzeitigen neuen Themen. Technische Slot- und Quellenkontrollen **behalten**.
+2. **Echter Bestand, Plan und reservierte Artikelplätze.** PSTE `readParkhausForMini` liest WordPress/PPM/PSERC-Bestand; wann ein älterer PSERC-Plan lediglich veraltet oder wirklich unvollständig ist, muss anhand des realen WP-Zustands und vorhandener Originalreservierungen gezeigt werden. Keine Überspringung des ganzen Planchecks. Die anfängliche „fehlende Kategorie-/Typübergabe“-Behauptung ist für den **Gesamtweg** widerlegt; erster Rohkeyword-Export und spätere vollständige Bestandsübergabe sind zwei verschiedene Schritte.
+3. **Echter Fehler `READY=0`.** Ursache in der aktuellen TEST-WordPress-Datenbank *noch nicht nachgewiesen*. Keine 5.016 Themen neu laufen lassen, keine drei historischen 5-Felder-READY-Metadaten als fertig entstandene Artikel verkaufen.
+4. **Ein vollständiger echter Artikel.** Original-Keyword → externer MINI-/SEO-Bescheid → PSERC gültiger Artikelplatz + 5 Felder → bestehender K0 Writer/LT/Fakten/Links → WP-TEST-Entwurf. Danach drei weitere echte Einzelaufträge. Aktiver K0-Branch (PR #757) ist angepasst, nicht nochmals umbauen.
+5. **Fertiges Pluginpaket beweisen.** Nur nach diesen Schritten Version/Manifest der existierenden zwei Pluginteile konsistent zu **einem** getesteten festen QA-Arbeitsstand aktualisieren; Plugin-Integrität am **fertigen** ZIP, negatives Verhalten und WordPress-TEST prüfen; **dieselbe Datei** für Freigabe benutzen. Keine neuen ZIPs pro Teilsymptom.
+
+**Nächste Handlung:** Punkt 1 gegen exakt diesen eingefrorenen Arbeitsstand und gegen Originalbelege verifizieren und minimal an bestehenden Funktionen lösen, danach Punkt 2 mit tatsächlichen WordPress-Daten. Kein Umweg zu Affiliate, Design oder K0-Neuaufbau.
+
+Weitere bereits bewiesene [Quellenkorrekturen](../QA_ONLY/20261112_QUELLEN_AUDIT_FALSCHE_ANNAHMEN_SICHERE_RUECKNAHME.md) und [K0-Endtest-Ziel](../QA_ONLY/20261111_VERBINDLICHER_ZIELFAHRPLAN_ERSTER_ECHTER_ARTIKEL.md).
