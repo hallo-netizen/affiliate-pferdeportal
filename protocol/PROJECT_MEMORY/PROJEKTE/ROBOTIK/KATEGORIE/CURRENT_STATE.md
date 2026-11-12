@@ -1,5 +1,15 @@
 # ROBOTIK / KATEGORIE – EINZIGER AKTUELLER STATUS
 
+## AKTUELL 12.11.2026 – V37 UNTERDECKUNG: 72 ORIGINALSEITEN PLUS MARKTQUELLEN ABGEGLICHEN
+- **Ziel bleibt ein einigermaßen ausgeglichener Kategorienbaum.** Recherche hat Vorrang vor Umgruppierung; keine künstlichen Füllprodukte und keine Doppel-Owner.
+- Die originalen 72 Produktseiten aus `/robotik/Konzeptbüro/BESTAND_72_UNVERAENDERT_V36.csv` maschinell erneut gezählt: 72 eindeutige IDs; Haushalt 3, Garten 7, Freizeit 9, Sport 8, Bildung 3, Pflege 8, Gewerbe 34. Gartenschneeroboter, Poolskimmer, Golf-Folgetrolleys, Basketballroboter u. a. sind **bereits vorhanden**.
+- V36 enthält 11 **Vorschläge**, aber fünf im eng abgrenzbaren Kern (separater Wischroboter, mobiler Luftreinigungsroboter, Robotikbausatz, ROS-Lernplattform, Badminton-Zuspielmaschine); mehrere übrige sind Motorautomatik, Dubletten oder funktionale Grenzfälle. Rechnerisch ergäben diese fünf 77 statt 72 Seiten; die Verteilung bliebe 5/7/9/9/5/8/34 und damit **unbalanciert**. Auch alle 11 V36-Vorschläge genügen für echte Balance nicht.
+- Zusätzliche Marktquellen geprüft: Aquarienglasroboter (Vorbestell-/DE-Marktzugang offen), autonome Haustier-Spielgeräte (Robotikgrenzfall), Golfbunker-Rechenroboter (NL-Einsatz; EU-Vorbestellung), Grillrostroboter (nur US), humanoide Lernroboter (Owner-/DE-Markt offen), Handtherapieroboter (Kollision zur generischen Therapie). Professionelle WC-Reinigung zählt nicht für Haushalt; Basketballmaschine, Follow-Golftrolley, Poolskimmer und Yarbo-Aufgaben sind bereits abgedeckt.
+- **Bedingte Rückfall-Konzepte** durchgerechnet und gegen 72 Original-IDs geprüft: 7 zusammengefasste Hauptwelten mit 10/12/8/8/9/13/12 (deutlich gleichmäßiger, aber starke URL-/Navigationsänderung); 8 Hauptwelten mit Haushalt separat, aber Restunterdeckung; 7 unveränderte Hauptwelten mit nur besserer Gewerbe-Navigation, jedoch ohne Erfüllung der numerischen Balance. Keine alternative Umordnung beschlossen.
+- **Einzige neue Arbeitsnotiz:** `RECHERCHE/UNTERDECKUNG_MARKTRECHERCHE_V37_20261112.md` mit Hersteller-/Händlerbelegen, kompletter Dublettenbewertung und den drei Alternativen. Es wurde **kein zweiter Forschungs-Master** erzeugt, `/robotik/Recherchebüro/CURRENT.json` verbleibt v36.
+- **Nächste fachliche Aufgabe:** letzte Grenz-/Ownerfälle und Suchintentionen als ein Paket abgleichen; danach echte Balanceentscheidung anhand Quellen. Keine bezahlten DataForSEO-Calls, keine WordPress-/Plugin-Änderung, keinen Erstimport wiederholen.
+
+
 ## AKTUELL 12.11.2026 – V36: LÜCKENRECHERCHE MIT SIEBEN HAUPTBEREICHEN
 - Die früher vorgeschlagene neue Acht-Hauptbereiche-Navigation ist fachlich VERWORFEN. Die 7 vom Nutzer bestätigten Hauptpunkte bleiben erhalten: Haushalt, Garten, Freizeit, Sport, Bildung, Pflege, Gewerbe.
 - Der Original-0.4.2-Importplan mit 72 Produktseiten/104 WP-Seiten/89 Inhaltskategorien und der Forschungsbestand v35 mit 548 Fundnennungen wurden geprüft. **V36 identifiziert 11 zusätzliche belegte Produktfunktionskandidaten** (Haushalt 5, Bildung 3, Freizeit 2, Sport 1) samt drei unterschiedlichen Grobartikelrichtungen und Originalquellen.
