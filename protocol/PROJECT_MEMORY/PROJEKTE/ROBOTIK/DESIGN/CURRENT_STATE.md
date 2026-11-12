@@ -1,5 +1,13 @@
 # ROBOTIK – DESIGN – CURRENT
 
+## NEUESTER STAND 12.11.2026 – Design 0.2.3 optisch vom Nutzer als OK bestätigt
+- Keine weitere Design-ZIP: Nutzer sieht Header/Footer als okay. Unterschiedliche Menü-Tiefe fachlich korrekt.
+- Original-ZIP-PHP und eingebetteter Kategorieplan 0.4.2: **104/104 WordPress-Seiten im lokalen Mega-Menü verlinkt** (7 Hauptseiten, 25 Zwischenbereiche, 72 Produkte).
+- Die **89 finalen WordPress-Beitragskategorien** fehlen bewusst im Kopfmenü; sie sollen später auf 72 passenden Produktseiten erscheinen, nicht als vierte globale Menüebene. Der aktuelle Produktseitentyp gibt sie noch nicht aus. 63/89 tragen Kurzlabel „Kaufberatung“, SEO-Validierung über DataForSEO ist ausstehend.
+- Nächster konzentrierter Backendschritt: **DataForSEO in unverändertem Kategorieplugin 0.4.2 kostenlos verbinden und Keyword-Preflight ausführen**, keine Paid-Calls ohne Freigabe. Danach Produktseiten-/Kategorienansicht in einer einzigen späteren Designrunde.
+- Beleg: `NAVIGATION_EBENEN_AUDIT_20261112.md`; maschinelles Prüfergebnis in Robotik-Library.
+
+
 ## AKTUELL 12.11.2026 – Strukturdesign 0.2.3, LOCAL PASS / LIVE OFFEN
 - Vorversion 0.2.2 scheitert im **Originalcode-Test** bei öffentlicher Root `/` und internem `home_url=/wordpress/`; **0.2.3** besteht denselben Fall. Der tatsächliche Root-Pfad auf Robotik-Live ist nicht bestätigt – nicht als bewiesene Live-Ursache ausgeben.
 - **Die 7 Hauptkategorien existieren nur oben im Mega-Menü.** Die Kategorie-Dublette unten ist beseitigt; dort nur eigener kompakter Footer. Industrie unter Gewerbe.
