@@ -1,0 +1,421 @@
+--- a/includes/class-pste-admin.php
++++ b/includes/class-pste-admin.php
+@@ -156,11 +156,51 @@
+      * retry, repair, promote or classify any topic. The owner has already run.
+      * Only the current job's keys are read, capped by the original 100-key import.
+      */
++    /**
++     * One owner for progress: the durable queue option. Older 0.57.141 runs
++     * without an outcomes map may still read their legacy transient, read-only.
++     * New runs never write that duplicate transient again.
++     */
++    public static function titleDeskReentrySummary(): array {
++        $state=get_option(self::TITLE_DESK_REENTRY_STATE,[]);
++        $state=is_array($state)?$state:[];
++        if(!is_array($state['outcomes']??null)){
++            $legacy=get_transient('pste_title_desk_reentry_report');
++            if(is_array($legacy))return $legacy;
++            // Unknown historical outcomes must never be displayed as successes.
++            $unknown=[];
++            foreach((array)($state['done']??[]) as $key)
++                $unknown[]=['pool_key'=>(string)$key,'error_code'=>'PSTE_REENTRY_LEGACY_OUTCOME_UNKNOWN'];
++            return ['scheduled'=>(int)($state['total']??0),
++                'processed'=>count((array)($state['done']??[])),
++                'held'=>count($unknown),'blocked'=>$unknown];
++        }
++        $done=array_values(array_map('strval',(array)($state['done']??[])));
++        $pending=array_values(array_map('strval',(array)($state['pending']??[])));
++        if(count(array_unique(array_merge($done,$pending)))!==count($done)+count($pending))
++            throw new RuntimeException('PSTE_REENTRY_QUEUE_DUPLICATE_KEY');
++        $outcomes=(array)$state['outcomes'];
++        $blocked=[];
++        foreach($done as $key){
++            $outcome=$outcomes[$key]??null;
++            if(!is_array($outcome)){
++                $blocked[]=['pool_key'=>$key,'error_code'=>'PSTE_REENTRY_OUTCOME_MISSING'];
++                continue;
++            }
++            if((string)($outcome['status']??'')!=='PASS')
++                $blocked[]=['pool_key'=>$key,
++                    'error_code'=>(string)($outcome['error_code']??'PSTE_REENTRY_OWNER_NOT_READY')];
++        }
++        foreach(array_keys($outcomes) as $key)
++            if(!in_array((string)$key,$done,true))throw new RuntimeException('PSTE_REENTRY_OUTCOME_WITHOUT_DONE_KEY');
++        return ['scheduled'=>count($done)+count($pending),
++            'processed'=>count($done),'held'=>count($blocked),'blocked'=>$blocked];
++    }
++
+     public static function titleDeskReentryDiagnostics(): array {
+         $state=get_option(self::TITLE_DESK_REENTRY_STATE,[]);
+-        $report=get_transient('pste_title_desk_reentry_report');
+         $state=is_array($state)?$state:[];
+-        $report=is_array($report)?$report:[];
++        $report=self::titleDeskReentrySummary();
+         $done=array_values(array_unique(array_filter(array_map('strval',(array)($state['done']??[])))));
+         $pending=array_values(array_unique(array_filter(array_map('strval',(array)($state['pending']??[])))));
+         $blocked=[];
+@@ -175,9 +215,9 @@
+         $keys=array_values(array_unique(array_merge($done,$pending,array_keys($blocked))));
+         $keys=array_slice($keys,0,100);
+         $out=['status'=>(string)($state['status']??'NOT_AVAILABLE'),
+-            'total'=>(int)($report['scheduled']??$state['total']??0),
+-            'processed' => (int)($report['processed']??count($done)),
+-            'held'=>(int)($report['held']??count($blocked)),
++            'total'=>(int)($report['scheduled']??0),
++            'processed'=>(int)($report['processed']??0),
++            'held'=>(int)($report['held']??0),
+             'pending_count'=>count($pending),
+             'last_transport_error'=>(string)($state['last_error']??''),
+             'read_only'=>true,'topic_owner_rerun'=>false,'items'=>[],
+@@ -228,7 +268,8 @@
+                 if($reason!==''&&preg_match('/^[A-Z0-9_:-]{3,160}$/',$reason))$reasons[]=$reason;
+             }
+             $reasons=array_values(array_unique($reasons));
+-            $first=$reasons[0]??($error?:'NO_STORED_REASON_AVAILABLE');
++            // The CURRENT transport/owner outcome is not the prior stored topic reason.
++            $first=$error!==''?$error:($reasons[0]??'NO_STORED_REASON_AVAILABLE');
+             if($status==='HELD'||$status==='BLOCKED'){
+                 $out['hold_reason_counts'][$first]=(int)($out['hold_reason_counts'][$first]??0)+1;
+             }
+@@ -413,14 +454,14 @@
+                 .esc_html((string)(int)($titleImport['needs_language_correction']??0))
+                 .' zur Korrektur in derselben Sprachwerkstatt. Bereits gespeicherte Titel bleiben erhalten.</p>';
+         }
+-        $titleResume=get_transient('pste_title_desk_reentry_report');
++        $titleResume=self::titleDeskReentrySummary();
+         if(is_array($titleResume)&&(int)($titleResume['scheduled']??0)>0){
+             echo '<p><small>Gezielte Weitergabe nach Titelimport: '.esc_html((string)(int)($titleResume['processed']??0))
+                 .' von '.esc_html((string)(int)$titleResume['scheduled']).' Themen bearbeitet; '
+                 .esc_html((string)(int)($titleResume['held']??0)).' zurückgestellt. Keine neue Keywordrecherche.</small></p>';
+             $jobState=get_option(self::TITLE_DESK_REENTRY_STATE,[]);
+             if(is_array($jobState)&&($jobState['status']??'')==='PAUSED_CONTEXT_STALE')
+-                echo '<p><strong>Technisch pausiert:</strong> Der Redaktionsplanstand stimmt nicht mit dem gespeicherten Kontext überein. '
++                echo '<p><strong>Technisch pausiert:</strong> Der gemeinsame Prüfstand ist veraltet oder nicht lesbar. '
+                     .'Noch offen: '.esc_html((string)count((array)($jobState['pending']??[]))).' Themen. '
+                     .'Keine Artikel oder Kategorien automatisch freigegeben.</p>';
+             elseif(is_array($jobState)&&($jobState['status']??'')==='RUNNING'&&($jobState['last_error']??'')!=='')
+@@ -1951,13 +1992,6 @@
+                 return PSTE_Repository::saveManualTitleOverride($poolKey,$title,get_current_user_id());
+             });
+             $scheduled=self::scheduleTitleDeskReentry($applied['reentry']);
+-            $previous=get_transient('pste_title_desk_reentry_report');
+-            $oldProcessed=is_array($previous)?(int)($previous['processed']??0):0;
+-            // Repeated or overlapping imports keep progress, never erase other titles' results.
+-            $report=['scheduled'=>$scheduled,'processed'=>$oldProcessed,'held'=>is_array($previous)?(int)($previous['held']??0):0,
+-                'blocked'=>is_array($previous)?(array)($previous['blocked']??[]):[]];
+-            if($oldProcessed===0 || $scheduled===$applied['saved'])$report=['scheduled'=>$scheduled,'processed'=>0,'held'=>0,'blocked'=>[]];
+-            set_transient('pste_title_desk_reentry_report',$report,86400);
+             set_transient('pste_title_desk_last_import',['reviewed'=>$applied['reviewed'],'saved'=>$applied['saved'],
+                 'needs_language_correction'=>count($applied['correction_batch']['items']),'reentry_scheduled'=>$scheduled],300);
+             self::kickTitleDeskReentry();
+@@ -2046,7 +2080,7 @@
+ 
+     private static function newTitleDeskReentryState(array $poolKeys): array {
+         return ['status'=>'RUNNING','token'=>bin2hex(random_bytes(32)),
+-            'pending'=>array_values($poolKeys),'done'=>[],'total'=>count($poolKeys),
++            'pending'=>array_values($poolKeys),'done'=>[],'outcomes'=>[],'total'=>count($poolKeys),
+             'updated_at'=>time()];
+     }
+ 
+@@ -2150,7 +2184,6 @@
+                     $paused=true;
+                     break;
+                 }
+-                self::recordTitleDeskReentry($result);
+                 array_shift($state['pending']);
+                 $state['done'][]=$key;
+                 if(!isset($state['outcomes'])||!is_array($state['outcomes']))$state['outcomes']=[];
+@@ -2165,7 +2198,7 @@
+             }else{
+                 // A stale plan hash is a global transport precondition, not a verdict
+                 // about any individual topic. Preserve every pending key and stop cron.
+-                if($paused&&($state['last_error']??'')==='PSTE_RETAINED_EDITORIAL_PLAN_SNAPSHOT_CHANGED'){
++                if($paused&&self::contextBlockedTitleDeskReentryCode((string)($state['last_error']??''))){
+                     $state['status']='PAUSED_CONTEXT_STALE';
+                     self::storeTitleDeskReentryState($state);
+                     if(function_exists('wp_clear_scheduled_hook'))
+@@ -2179,10 +2212,20 @@
+         if($continue)self::kickTitleDeskReentry();
+     }
+ 
++    /** A broken derived context is a job-level STOP, never a topic verdict. */
++    private static function contextBlockedTitleDeskReentryCode(string $code): bool {
++        if($code==='PSTE_RETAINED_EDITORIAL_PLAN_SNAPSHOT_CHANGED')return true;
++        foreach(['PSTE_CONTEXT_INDEX_','PSTE_CONTEXT_STAGE_',
++            'PSTE_CONTEXT_REFRESH_','PSTE_SITE_BASELINE_'] as $prefix)
++            if(str_starts_with($code,$prefix))return true;
++        return false;
++    }
++
+     /** Only global infrastructure faults are retryable; ordinary fachliche holds stay final. */
+     private static function retryableTitleDeskReentryFault(array $result): bool {
+         if(($result['status']??'')!=='BLOCKED')return false;
+         $code=(string)($result['error_code']??'');
++        if(self::contextBlockedTitleDeskReentryCode($code))return true;
+         foreach(['PSTE_TITLE_DESK_REENTRY_PLUGIN_NOT_READY','PSTE_TITLE_DESK_REENTRY_BASELINE_REQUIRED',
+             'PSTE_TITLE_DESK_REENTRY_CONTEXT_NOT_COMPLETE','PSTE_TITLE_DESK_REENTRY_BINDING_INVALID',
+             'PSTE_TITLE_DESK_REENTRY_BOUNDARY_VIOLATION',
+@@ -2226,21 +2269,6 @@
+         return $resultRecord;
+     }
+ 
+-    /** A failed topic remains visible even when later topics pass. */
+-    private static function recordTitleDeskReentry(array $result): void {
+-        set_transient('pste_title_desk_last_reentry',$result,3600);
+-        $report=get_transient('pste_title_desk_reentry_report');
+-        if(!is_array($report))$report=['scheduled'=>0,'processed'=>0,'held'=>0,'blocked'=>[]];
+-        $report['processed']=(int)($report['processed']??0)+1;
+-        if(($result['status']??'')!=='PASS'){
+-            $report['held']=(int)($report['held']??0)+1;
+-            $blocked=(array)($report['blocked']??[]);
+-            $blocked[]=['pool_key'=>(string)($result['pool_key']??''),'error_code'=>(string)($result['error_code']??'UNKNOWN')];
+-            $report['blocked']=array_slice($blocked,-100);
+-        }
+-        set_transient('pste_title_desk_reentry_report',$report,86400);
+-    }
+-
+     public static function exportPlanningTopics(): void {
+         PSTE_Auth::assertAdmin('pste_export_planning_topics',(string)($_POST['_wpnonce']??''));
+         try{
+--- a/includes/class-pste-context-index-store.php
++++ b/includes/class-pste-context-index-store.php
+@@ -117,13 +117,9 @@
+             'structure_sha256'=>$complete?(string)($baseline['structure_sha256']??''):(string)($job['structure_sha256']??''),
+             'editorial_plan_sha256'=>$complete?(string)($baseline['editorial_plan_sha256']??'NOT_AVAILABLE'):(string)($job['editorial_plan_sha256']??'NOT_AVAILABLE'),
+         ];
+-        try{$manifest=self::loadManifest($expected);}catch(Throwable $e){
+-            $code=self::errorCode($e);
+-            if(!$complete||!self::runtimeIndexRecoverableCode($code))throw $e;
+-            $manifest=self::rehydrateCompletedRuntimeIndex($job,$baseline);
+-            $expected['manifest_sha256']=(string)($manifest['manifest_sha256']??'');
+-            $manifest=self::loadManifest($expected);
+-        }
++        // Read-only contract: no rebuilding, staging or WordPress option writes in a reader.
++        // Only the explicit context owner may refresh the derived runtime index.
++        $manifest=self::loadManifest($expected);
+         return ['contract'=>'PSTE_CONTEXT_INDEX_RUNTIME_BINDING_V2','job_uuid'=>$expected['job_uuid'],'manifest_sha256'=>(string)$manifest['manifest_sha256'],'baseline_sha256'=>$expected['baseline_sha256'],'inventory_sha256'=>$expected['inventory_sha256'],'structure_sha256'=>$expected['structure_sha256'],'editorial_plan_sha256'=>$expected['editorial_plan_sha256'],'inventory_meta'=>['contract'=>'PSTE_INVENTORY_SNAPSHOT_V2','sha256'=>$expected['inventory_sha256'],'items'=>[]],'editorial_plan_meta'=>['contract'=>'PSTE_EDITORIAL_PLAN_SNAPSHOT_V1','status'=>(string)($manifest['editorial_plan_status']??'AVAILABLE'),'sha256'=>$expected['editorial_plan_sha256'],'items'=>[]]];
+     }
+ 
+@@ -157,6 +153,26 @@
+         // and registry stage. Only transient build/plan/legacy artifacts are removed.
+         self::cleanupPendingBuild();delete_option(PSTE_OPTION_CONTEXT_STAGE_PLAN);delete_option(PSTE_OPTION_CONTEXT_SNAPSHOT_BUNDLE);
+         self::$manifestCache=[];self::$shardCache=[];self::$stageCache=[];
++    }
++
++    /**
++     * Explicit owner-only repair of DERIVED technical data, never a second
++     * redaction-plan decision. A normal reader must not call this method.
++     * The existing nonce-checked MINI action calls it only after its complete
++     * unchanged-source preflight. No article, term or production writes.
++     */
++    public static function rebuildCompletedRuntimeIndexForExplicitOwner(array $job,array $baseline): array {
++        $manifest=self::rehydrateCompletedRuntimeIndex($job,$baseline);
++        $expected=[
++            'job_uuid'=>(string)($job['job_uuid']??''),
++            'manifest_sha256'=>(string)($manifest['manifest_sha256']??''),
++            'baseline_sha256'=>(string)($baseline['baseline_sha256']??''),
++            'inventory_sha256'=>(string)($baseline['inventory_sha256']??''),
++            'structure_sha256'=>(string)($baseline['structure_sha256']??''),
++            'editorial_plan_sha256'=>(string)($baseline['editorial_plan_sha256']??'NOT_AVAILABLE'),
++        ];
++        self::loadManifest($expected);
++        return self::runtimeBinding($job,$baseline);
+     }
+ 
+     private static function rehydrateCompletedRuntimeIndex(array $job,array $baseline): array {
+@@ -173,12 +189,6 @@
+         $rehydrated['registry_stage_meta']=self::stageRegistry($baseline,$jobUuid);
+         return self::buildFromStages($baseline,$rehydrated);
+     }
+-    private static function runtimeIndexRecoverableCode(string $code): bool {
+-        if($code==='PSTE_CONTEXT_INDEX_MANIFEST_MISSING'||$code==='PSTE_CONTEXT_INDEX_JOB_MANIFEST_MISMATCH')return true;
+-        return str_starts_with($code,'PSTE_CONTEXT_INDEX_MANIFEST_BINDING_MISMATCH_');
+-    }
+-    private static function errorCode(Throwable $e): string {$m=trim((string)$e->getMessage());return $m!==''?preg_replace('/\s+.*/s','',$m):'PSTE_CONTEXT_INDEX_RUNTIME_ERROR';}
+-
+     private static function manifestForBinding(array $binding): array {
+         if(($binding['contract']??'')!=='PSTE_CONTEXT_INDEX_RUNTIME_BINDING_V2')throw new RuntimeException('PSTE_CONTEXT_INDEX_RUNTIME_BINDING_INVALID');
+         return self::loadManifest(['job_uuid'=>(string)($binding['job_uuid']??''),'manifest_sha256'=>(string)($binding['manifest_sha256']??''),'baseline_sha256'=>(string)($binding['baseline_sha256']??''),'inventory_sha256'=>(string)($binding['inventory_sha256']??''),'structure_sha256'=>(string)($binding['structure_sha256']??''),'editorial_plan_sha256'=>(string)($binding['editorial_plan_sha256']??'NOT_AVAILABLE')]);
+--- a/includes/class-pste-mini-workflow.php
++++ b/includes/class-pste-mini-workflow.php
+@@ -111,7 +111,7 @@
+             }
+             echo '<p><small>Bei unvollständiger Bestandsdatei keine FREI-Entscheidung importieren. K0/Beiträge bleiben unberührt.</small></p>';
+             $queue=get_option('pste_title_desk_reentry_state_v1',[]);
+-            $previousReport=get_transient('pste_title_desk_reentry_report');
++            $previousReport=PSTE_Admin::titleDeskReentrySummary();
+             $priorStale=false;
+             if(is_array($previousReport))foreach((array)($previousReport['blocked']??[]) as $blockedRow){
+                 if((string)($blockedRow['error_code']??'')==='PSTE_RETAINED_EDITORIAL_PLAN_SNAPSHOT_CHANGED'){$priorStale=true;break;}
+@@ -597,6 +597,17 @@
+         return ['selected'=>$selected,'additional'=>$additional,'not_yes'=>$nonYes];
+     }
+ 
++    /**
++     * A plugin version change does NOT change an already approved SEO/title
++     * decision. This is a transport checkpoint, not a second opinion.
++     * Accept the older source-hash|plugin-version checkpoint without replaying.
++     */
++    private static function titleAlreadyQueued(array $queued,string $key,string $sourceHash): bool {
++        $stamp=(string)($queued[$key]??'');
++        if(!preg_match('/^[a-f0-9]{64}(?:\|[0-9.]+)?$/D',$stamp))return false;
++        return hash_equals(substr($stamp,0,64),$sourceHash);
++    }
++
+     /** Hand-off to EXISTING PSTE title-storage and its ONE category/SEO owner. */
+     public static function forwardToPlan(): void {
+         try {
+@@ -682,8 +693,11 @@
+                         self::storeState($state); // checkpoint BEFORE queuing; retry resumes
+                         $forwarded++;
+                     }
+-                    // Recheck unchanged titles once after a code update, without rewriting the titles.
+-                    if(($queued[$key]??'')!==$item['source_hash'].'|'.PSTE_VERSION)$toQueue[$key]=$item['source_hash'];
++                    // No hidden re-evaluation merely because the plugin was updated.
++                    // A fresh owner run requires a new title hash or the explicit,
++                    // preflight-proven context-rebind worker, never PSTE_VERSION.
++                    if(!self::titleAlreadyQueued($queued,$key,$item['source_hash']))
++                        $toQueue[$key]=$item['source_hash'];
+                 }catch(Throwable $e){$blocked[]=['pool_key'=>$key,
+                     'reason_code'=>substr((string)preg_replace('/[^A-Z0-9_:\-]/i','_',strtoupper($e->getMessage())),0,140)];}
+             }
+@@ -691,17 +705,9 @@
+             if($toQueue){
+                 $scheduled=PSTE_Admin::scheduleTitleDeskReentry(array_keys($toQueue),true);
+                 if($scheduled<=0)throw new RuntimeException('PSTE_MINI_PLAN_REENTRY_NOT_QUEUED');
+-                foreach($toQueue as $key=>$hash)$queued[$key]=$hash.'|'.PSTE_VERSION;
++                foreach($toQueue as $key=>$hash)$queued[$key]=$hash;
+                 $state['plan_queued']=$queued;
+                 self::storeState($state);
+-            }
+-            if($scheduled&&function_exists('set_transient')&&function_exists('get_transient')){
+-                $oldReport=get_transient('pste_title_desk_reentry_report');
+-                $existing=is_array($oldReport)?$oldReport:[];
+-                if(!$existing||$scheduled===count($toQueue))
+-                    $existing=['scheduled'=>$scheduled,'processed'=>0,'held'=>0,'blocked'=>[]];
+-                else $existing['scheduled']=max((int)($existing['scheduled']??0),$scheduled);
+-                set_transient('pste_title_desk_reentry_report',$existing,86400);
+             }
+             $state['last_plan_report']=['forwarded'=>$forwarded,'blocked'=>count($blocked),
+                 'held'=>$blocked,'additional'=>$pre['additional'],
+@@ -1353,8 +1359,7 @@
+             $title=(string)($data['approved_title']??'');
+             $sourceHash=hash('sha256',$rawQuery.'|'.$title);
+             if(!hash_equals($sourceHash,(string)($state['plan_forwarded'][$poolKey]??''))
+-                ||!hash_equals($sourceHash.'|'.PSTE_VERSION,
+-                    (string)($state['plan_queued'][$poolKey]??'')))
++                ||!self::titleAlreadyQueued((array)($state['plan_queued']??[]),$poolKey,$sourceHash))
+                 return [];
+         }
+         return $data;
+@@ -1445,7 +1450,7 @@
+                 ||!hash_equals((string)($seo['approved_title']??''),$title)
+                 ||!preg_match('/^[a-f0-9]{64}$/D',$slot)||isset($slots[$slot])
+                 ||!hash_equals($hash,(string)($state['plan_forwarded'][$key]??''))
+-                ||!str_starts_with((string)($state['plan_queued'][$key]??''),$hash.'|'))
++                ||!self::titleAlreadyQueued((array)$state['plan_queued'],(string)$key,$hash))
+                 throw new RuntimeException('PSTE_MINI_REBIND_ORIGINAL_SEO_OR_TITLE_CHANGED');
+             $slots[$slot]=true;$eligible[]=(string)$key;
+         }
+@@ -1494,7 +1499,7 @@
+             throw new RuntimeException('PSTE_MINI_REBIND_BASELINE_READBACK_FAILED');
+         // The normal existing runtime index is rehydrated from current source snapshots.
+         // Never make up an old plan hash or rewrite the nine raw legacy rows.
+-        $binding=PSTE_Context_Index_Store::runtimeBinding($job,$fresh);
++        $binding=PSTE_Context_Index_Store::rebuildCompletedRuntimeIndexForExplicitOwner($job,$fresh);
+         if(($binding['editorial_plan_sha256']??'')!=='NOT_AVAILABLE')
+             throw new RuntimeException('PSTE_MINI_REBIND_CONTEXT_READBACK_FAILED');
+         $registry=PSTE_Context_Index_Store::registrySnapshot($binding);
+--- a/includes/class-pste-planning-readiness-gate.php
++++ b/includes/class-pste-planning-readiness-gate.php
+@@ -76,8 +76,21 @@
+         if($receipt||$miniAwaiting){
+             $box=(string)($receipt['box']??'KLAERUNG');
+             $sourceTitle=(string)($receipt['approved_title']??'');
+-            $candidateTitle=(string)($candidate['production_title']??'');
+-            if($box==='FREI'&&($sourceTitle===''||!hash_equals($sourceTitle,$candidateTitle)))
++            // One MINI owner. The normal category office has NO production title
++            // until placement is resolved. Compare its existing editorial title,
++            // without reopening the MINI judgment or allowing production admission.
++            $productionTitle=(string)($candidate['production_title']??'');
++            $editorialTitle=(string)($candidate['editorial_title']??'');
++            $path=(array)($candidate['normal_metadata_path']??[]);
++            $categoryWaiting=$productionTitle===''
++                &&(string)($path['status']??'')==='STRUCTURE_GAP'
++                &&!empty($path['category_backlog_required'])
++                &&(string)($path['worker_flow']['storage']??'')==='CATEGORY_ROOM_TOPIC_POOL'
++                &&(int)($candidate['target_category_id']??0)===0
++                &&(string)($candidate['target_category_slug']??'')==='';
++            $boundTitle=$categoryWaiting?$editorialTitle:$productionTitle;
++            if($box==='FREI'&&($sourceTitle===''||!hash_equals($sourceTitle,$boundTitle)
++                ||($editorialTitle!==''&&!hash_equals($sourceTitle,$editorialTitle))))
+                 $box='KLAERUNG';
+             $ok=$box==='FREI';
+             $status=$ok?'PASS':($box==='BELEGT'?'BLOCKED':'REVIEW_REQUIRED');
+--- a/includes/class-pste-runner.php
++++ b/includes/class-pste-runner.php
+@@ -65,7 +65,7 @@
+      * Production-only compact baseline preflight.
+      *
+      * A real structural change may be accepted here only when a previously COMPLETE context job
+-     * exists. In that case the immutable compact context index is rehydrated from current snapshots;
++     * exists. In that case the immutable compact context index is rebuilt by the explicit production worker from current snapshots;
+      * the 4k+ topic pool is NOT traversed here. The normal Existing-Only pass remains responsible
+      * for bounded 40-row topic revalidation before PSERC can consume the result.
+      *
+@@ -82,7 +82,11 @@
+         $rebase=PSTE_Snapshot::rebaseResearchBaselineIfSafe($baseline);
+         if(!empty($rebase['ok'])){
+             $bound=(array)$rebase['baseline'];$context=PSTE_Context_Refresh::status();$binding=[];
+-            if((string)($context['status']??'')==='COMPLETE')$binding=PSTE_Context_Index_Store::runtimeBinding($context,$bound);
++            if((string)($context['status']??'')==='COMPLETE'){
++                $binding=!empty($rebase['changed'])
++                    ? PSTE_Context_Index_Store::rebuildCompletedRuntimeIndexForExplicitOwner($context,$bound)
++                    : PSTE_Context_Index_Store::runtimeBinding($context,$bound);
++            }
+             return ['status'=>!empty($rebase['changed'])?'SAFE_REBOUND':'CURRENT','mode'=>(string)($rebase['mode']??'EXACT'),'changed'=>!empty($rebase['changed']),'baseline'=>$bound,'context_binding'=>$binding,'full_context_refresh_required'=>false,'provider_calls'=>0,'topic_pool_rows_scanned'=>0];
+         }
+         $code=(string)($rebase['error_code']??'PSTE_SITE_BASELINE_STALE');
+@@ -103,7 +107,7 @@
+         if(!is_array($stored)||!hash_equals((string)($fresh['baseline_sha256']??''),(string)($stored['baseline_sha256']??'')))throw new RuntimeException('PSTE_PRODUCTION_BASELINE_REBIND_READBACK_MISMATCH');
+         $registry=PSTE_Article_Type_Registry::build($stored);
+         update_option(PSTE_OPTION_EDITORIAL_RULESET,['contract'=>'PSTE_SEMANTIC_TITLE_CONTRACT_V2','article_type_registry_sha256'=>$registry['registry_sha256'],'captured_at_utc'=>gmdate('c'),'legacy_reclassification_executed'=>false],false);
+-        $binding=PSTE_Context_Index_Store::runtimeBinding($context,$stored);
++        $binding=PSTE_Context_Index_Store::rebuildCompletedRuntimeIndexForExplicitOwner($context,$stored);
+         foreach(['baseline_sha256','inventory_sha256','structure_sha256','editorial_plan_sha256'] as $field){
+             $want=(string)($stored[$field]??'');$got=(string)($binding[$field]??'');
+             if($want===''||!hash_equals($want,$got))throw new RuntimeException('PSTE_PRODUCTION_COMPACT_CONTEXT_REBIND_MISMATCH_'.$field);
+--- a/includes/class-pste-snapshot.php
++++ b/includes/class-pste-snapshot.php
+@@ -411,7 +411,7 @@
+ 
+     private static function normalizeEditorialPlanItemsAgainstStructure(array $items,array $structure): array {
+         $byId=[];$bySlug=[];$byName=[];
+-        foreach((array)($structure['items']??[]) as $row){if(!is_array($row))continue;$id=(int)($row['term_id']??0);$slug=trim((string)($row['slug']??''));$name=trim((string)($row['name']??''));if($id>0)$byId[$id]=$row;if($slug!=='')$bySlug[$slug]=$row;if($name!=='')$byName[$name]=$row;}
++        foreach((array)($structure['items']??[]) as $row){if(!is_array($row))continue;$id=(int)($row['term_id']??0);$slug=trim((string)($row['slug']??''));$name=trim((string)($row['name']??''));if($id>0)$byId[$id]=$row;if($slug!=='')$bySlug[$slug]=$row;if($name!=='')$byName[$name][]=$row;}
+         $out=[];
+         foreach($items as $sourceIndex=>$item){
+             if(!is_array($item))throw new RuntimeException('PSTE_EDITORIAL_PLAN_ROW_INVALID');
+@@ -427,7 +427,21 @@
+             $categoryId=is_numeric($idValue)?(int)$idValue:0;
+             $categorySlug=self::editorialSafeText($item['category_slug']??$item['target_category_slug']??$item['category']??null);
+             $categoryName=self::editorialSafeText($item['category_name']??$item['target_category_name']??null);
+-            $matched=$categoryId>0&&isset($byId[$categoryId])?$byId[$categoryId]:($categorySlug!==''&&isset($bySlug[$categorySlug])?$bySlug[$categorySlug]:($categoryName!==''&&isset($byName[$categoryName])?$byName[$categoryName]:[]));
++            // Two concrete identities must never silently point at different branches.
++            if($categoryId>0&&$categorySlug!==''&&isset($byId[$categoryId],$bySlug[$categorySlug])
++                &&(int)$byId[$categoryId]['term_id']!==(int)$bySlug[$categorySlug]['term_id'])
++                throw new RuntimeException('PSTE_EDITORIAL_PLAN_CATEGORY_IDENTITY_CONFLICT_'.(int)$sourceIndex);
++            // Category names are display labels, NOT globally unique identities.
++            // Name-only imports must fail closed on ambiguity instead of silently
++            // selecting the last WordPress category from an unrelated portal branch.
++            $matched=[];
++            if($categoryId>0&&isset($byId[$categoryId]))$matched=$byId[$categoryId];
++            elseif($categorySlug!==''&&isset($bySlug[$categorySlug]))$matched=$bySlug[$categorySlug];
++            elseif($categoryName!==''&&isset($byName[$categoryName])){
++                $choices=$byName[$categoryName];
++                if(count($choices)!==1)throw new RuntimeException('PSTE_EDITORIAL_PLAN_CATEGORY_NAME_AMBIGUOUS_'.(int)$sourceIndex);
++                $matched=$choices[0];
++            }
+             if($matched){$categoryId=(int)($matched['term_id']??$categoryId);$categorySlug=(string)($matched['slug']??$categorySlug);$categoryName=(string)($matched['name']??$categoryName);}elseif($categoryName===''&&$categorySlug!==''){$categoryName=$categorySlug;}
+             $articleType=self::editorialSafeText($item['article_type']??($matched['article_type']??null));
+             $familyName=self::editorialSafeText($item['topic_family_name']??($matched['topic_family_name']??null));

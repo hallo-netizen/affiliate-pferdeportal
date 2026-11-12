@@ -1,0 +1,25 @@
+--- a/includes/class-pserc-plan-dependency-fingerprint.php
++++ b/includes/class-pserc-plan-dependency-fingerprint.php
+@@ -64,8 +64,8 @@
+         $runtimePlan=$validPlanReceipt?$baselinePlan:(string)($context['final_plan_sha256']??'');
+         $structureComponent=[
+             'schema'=>$schema,
+-            'context_status'=>(string)($context['status']??''),
+-            'context_generation'=>(int)($context['generation']??0),
++            // Job progress is not a semantic or source change. The real
++            // structure/plan hashes immediately below remain bound.
+             'final_structure_sha256'=>(string)($context['final_structure_sha256']??''),
+             'final_plan_sha256'=>(string)($context['final_plan_sha256']??''),
+             'runtime_editorial_plan_sha256'=>$runtimePlan,
+@@ -128,9 +128,8 @@
+             'contract'=>self::CONTRACT,
+             'production_category_ids'=>$ids,
+             'context'=>[
+-                'status'=>(string)($context['status']??''),
+-                'generation'=>(int)($context['generation']??0),
+-                'job_uuid'=>(string)($context['job_uuid']??''),
++                // Do not globally invalidate unchanged editorial inputs
++                // when only the progress of a background context job changes.
+                 'final_structure_sha256'=>(string)($context['final_structure_sha256']??''),
+                 'final_plan_sha256'=>(string)($context['final_plan_sha256']??''),
+                 'runtime_editorial_plan_sha256'=>$runtimePlan,

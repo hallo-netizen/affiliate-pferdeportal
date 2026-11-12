@@ -1,0 +1,67 @@
+--- "/mnt/data/workflow_audit_20261109/Portal SEO Topic Engine/includes/class-pste-admin.php"	2026-11-08 15:34:12.000000000 +0000
++++ "/mnt/data/workflow_audit_20261109/qa_patch_v27/Portal SEO Topic Engine/includes/class-pste-admin.php"	2026-11-09 09:39:59.637767858 +0000
+@@ -233,7 +233,14 @@
+                 $out['hold_reason_counts'][$first]=(int)($out['hold_reason_counts'][$first]??0)+1;
+             }
+             if($status==='UNKNOWN_LEGACY_RESULT')$out['unavailable_historical_results']++;
+-            $query=(string)($payload['raw_user_question']??$payload['primary_longtail_query']??$payload['canonical_query']??$payload['query_record']['raw_query']??'');
++            $query='';
++            foreach([(string)($payload['raw_user_question']??''),
++                (string)($payload['primary_longtail_query']??''),
++                (string)($payload['canonical_query']??''),
++                (string)($payload['query_record']['raw_query']??'')] as $candidateQuery){
++                $candidateQuery=trim($candidateQuery);
++                if($candidateQuery!==''){$query=$candidateQuery;break;}
++            }
+             $flow=is_array($path['worker_flow']??null)?(array)$path['worker_flow']:[];
+             if(isset($doneIndex[$key])&&!empty($path['category_backlog_required'])
+                 &&(string)($flow['storage']??'')==='CATEGORY_ROOM_TOPIC_POOL')
+@@ -2006,9 +2013,15 @@
+             if($key===''||strlen($key)>120||preg_match('/[^a-zA-Z0-9_:\-]/',$key))throw new RuntimeException('PSTE_TITLE_DESK_REENTRY_KEY_INVALID');
+         }
+         $state=get_option(self::TITLE_DESK_REENTRY_STATE,[]);
+-        if(!is_array($state)||($state['status']??'')!=='RUNNING'){
++        if(!is_array($state)||!in_array((string)($state['status']??''),['RUNNING','PAUSED_CONTEXT_STALE'],true)){
+             $state=self::newTitleDeskReentryState($poolKeys);
+         }else{
++            // Resume the exact retained queue only through an explicit new scheduled handoff.
++            // Never mark stale-context retries as completed or silently drop pending keys.
++            if(($state['status']??'')==='PAUSED_CONTEXT_STALE'){
++                $state['status']='RUNNING';
++                $state['last_error']='';
++            }
+             $pending=(array)($state['pending']??[]);
+             // A version-specific MINI replay may revisit completed keys; ordinary
+             // imports preserve their existing done set. Never lose unrelated work.
+@@ -2146,9 +2159,18 @@
+                 self::storeTitleDeskReentryState($state);
+                 if(function_exists('wp_clear_scheduled_hook'))wp_clear_scheduled_hook(self::TITLE_DESK_REENTRY_HOOK,[[]]);
+             }else{
+-                // Do not start an immediate retry storm when a shared prerequisite is absent.
+-                $continue=!$paused;
+-                self::armTitleDeskReentryWatchdog();
++                // An obsolete global plan snapshot is not a topic verdict. Pause the
++                // whole queue, retain EVERY pending key, and wait for a genuinely
++                // refreshed bound context. Never schedule an endless retry loop.
++                if($paused&&($state['last_error']??'')==='PSTE_RETAINED_EDITORIAL_PLAN_SNAPSHOT_CHANGED'){
++                    $state['status']='PAUSED_CONTEXT_STALE';
++                    self::storeTitleDeskReentryState($state);
++                    if(function_exists('wp_clear_scheduled_hook'))
++                        wp_clear_scheduled_hook(self::TITLE_DESK_REENTRY_HOOK,[[]]);
++                }else{
++                    $continue=!$paused;
++                    self::armTitleDeskReentryWatchdog();
++                }
+             }
+         }finally{self::releaseTitleDeskReentryLock($lock);}
+         if($continue)self::kickTitleDeskReentry();
+@@ -2162,7 +2184,8 @@
+             'PSTE_TITLE_DESK_REENTRY_CONTEXT_NOT_COMPLETE','PSTE_TITLE_DESK_REENTRY_BINDING_INVALID',
+             'PSTE_TITLE_DESK_REENTRY_BOUNDARY_VIOLATION',
+             'PSTE_RETAINED_BACKLOG_READ_FAILED','PSTE_RETAINED_BACKLOG_CONTEXT_BINDING_REQUIRED',
+-            'PSTE_RETAINED_BACKLOG_INVENTORY_BINDING_MISMATCH'] as $prefix){
++            'PSTE_RETAINED_BACKLOG_INVENTORY_BINDING_MISMATCH',
++            'PSTE_RETAINED_EDITORIAL_PLAN_SNAPSHOT_CHANGED'] as $prefix){
+             if(str_starts_with($code,$prefix))return true;
+         }
+         return false;

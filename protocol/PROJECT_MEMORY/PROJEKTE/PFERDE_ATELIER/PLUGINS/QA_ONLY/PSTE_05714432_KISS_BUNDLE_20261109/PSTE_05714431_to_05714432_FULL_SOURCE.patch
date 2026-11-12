@@ -1,0 +1,356 @@
+--- a/Portal SEO Topic Engine/contracts/intent-first-title-governance-v1.json
++++ b/Portal SEO Topic Engine/contracts/intent-first-title-governance-v1.json
+@@ -1,10 +1,11 @@
+ {
+   "contract": "PSTE_INTENT_FIRST_TITLE_GOVERNANCE_V1",
+-  "version": "1.5.0",
++  "version": "1.5.1",
+   "principles": [
+     "SEO_INTENT_FIRST_BEFORE_ARTICLE_TYPE_TITLE_AND_SLOT",
+     "SEO_EVIDENCE_AND_RAW_SEARCH_QUERY_DEFINE_WHAT_THE_ARTICLE_MUST_ANSWER",
+     "ARTICLE_TYPE_TITLE_AND_PLAN_SLOT_DERIVE_FROM_ONE_BOUND_INTENT",
++    "ONE_APPROVED_SEARCH_INTENT_AND_ONE_PRIMARY_QUESTION_PER_TITLE_NO_TWO_QUESTION_FUSION",
+     "QUALIFIERS_ARE_SEMANTIC_FOCUS_AND_MUST_NOT_BE_DILUTED",
+     "ONE_SEED_MAY_PRODUCE_MULTIPLE_RESEARCH_BRANCHES_ONLY_WITH_DISTINCT_SEO_EVIDENCE",
+     "SECONDARY_BRANCHES_ARE_RESEARCH_ONLY_NO_AUTO_FANOUT_NO_DIRECT_HANDOFF",
+@@ -22,7 +23,9 @@
+     "artificial_generator_filler": "HARD_FORBIDDEN",
+     "article_type_intent_visibility": "WRITING_GUIDANCE_NO_SEPARATE_TITLE_RELEASE_GATE",
+     "beratung_repeated_generic_schema": "WRITING_GUIDANCE_NO_SEPARATE_TITLE_RELEASE_GATE",
+-    "journal_question_mark": "OPTIONAL_QUESTION_OR_STATEMENT"
++    "journal_question_mark": "OPTIONAL_QUESTION_OR_STATEMENT",
++    "multi_question_fusion": "FORBIDDEN_AT_ORIGINAL_EXTERNAL_TITLE_WORKER",
++    "secondary_question": "SUBHEADING_ONLY_OR_SEPARATE_ARTICLE_ONLY_WITH_SEPARATELY_PROVEN_DISTINCT_SEARCH_INTENT"
+   },
+   "compatibility": {
+     "textmachine": "READ_ONLY_IMMUTABLE_AUTHORITY",
+--- a/Portal SEO Topic Engine/includes/class-pste-admin.php
++++ b/Portal SEO Topic Engine/includes/class-pste-admin.php
+@@ -44,7 +44,7 @@
+                 'pste_import_gsc'=>'importGsc','pste_save_gsc_client'=>'saveGscClient','pste_gsc_connect'=>'gscConnect',
+                 'pste_gsc_oauth_callback'=>'gscOauthCallback','pste_gsc_test'=>'gscTest','pste_gsc_save_property'=>'gscSaveProperty','pste_gsc_sync'=>'gscSync',
+                 'pste_gsc_disconnect'=>'gscDisconnect','pste_save_category_weights'=>'saveCategoryWeights','pste_import_editorial_plan'=>'importEditorialPlan',
+-                'pste_review_candidate'=>'reviewCandidate','pste_set_candidate_type'=>'setCandidateType','pste_title_desk_export'=>'exportTitleDesk','pste_title_desk_import'=>'importTitleDesk','pste_process_context_batch'=>'processContextBatch','pste_repair_price_intents'=>'repairPriceIntents',
++                'pste_review_candidate'=>'reviewCandidate','pste_room_suggestions_apply'=>'applyRoomSuggestions','pste_set_candidate_type'=>'setCandidateType','pste_title_desk_export'=>'exportTitleDesk','pste_title_desk_import'=>'importTitleDesk','pste_process_context_batch'=>'processContextBatch','pste_repair_price_intents'=>'repairPriceIntents',
+                 'pste_import_existing_evidence_reentry'=>'importExistingEvidenceReentry',
+                 'pste_sandbox_export'=>'sandboxExport','pste_sandbox_review_relevance'=>'sandboxReviewRelevance','pste_sandbox_confirm_internal'=>'sandboxConfirmInternal',
+             ]);
+@@ -489,6 +489,17 @@
+         echo '<div class="pste-grid">';self::metric('Globale Themen',$stats['TOTAL']??0);self::metric('Fundstellen',$stats['OCCURRENCES']??0);self::metric('Rot',$stats['RED']??0);self::metric('Gelb',$stats['YELLOW']??0);self::metric('Merge-Kandidaten',$stats['MERGE_CANDIDATES']??0);echo '</div>';
+         echo '<p><a class="button button-primary" href="'.esc_url(admin_url('admin.php?page='.self::TABS['review']['slug'].'&pool_filter=category_room')).'">Redaktionsbüro: offene Kategorien bearbeiten</a> <small>Vorhandene Entscheidungen nutzen; keine zusätzliche SEO-Prüfung.</small></p>';
+         echo '<form method="get" class="pste-box"><input type="hidden" name="page" value="'.esc_attr(self::TABS['review']['slug']).'"><label>Ansicht <select name="pool_filter">';$labels=['category_room'=>'Redaktionsbüro: Kategorie offen','attention'=>'Rot und Gelb','traffic_red'=>'Nur Rot','traffic_yellow'=>'Nur Gelb','traffic_green'=>'Nur Grün','all'=>'Alle globalen Themen','PASS'=>'Automatisch eingeordnete Artikelthemen','AUTO_RESOLVED'=>'Historisch automatisch eingeordnete Themen','DISCOVERY_ONLY'=>'Recherchebegriffe/Oberbegriffe','BLOCKED_FOR_CATEGORY'=>'Zwischengespeichert, blockiert oder bereits abgedeckt','APPROVED'=>'Manuell freigegeben','REASSIGNED'=>'Manuell zugeordnet','REJECTED'=>'Verworfen'];foreach($labels as $value=>$label)echo '<option value="'.esc_attr($value).'" '.selected($filter,$value,false).'>'.esc_html($label).'</option>';echo '</select></label> <label>Bereich <select name="pool_area">';foreach([''=>'Alle Bereiche','FACH'=>'Hauptnavigation','MAGAZIN'=>'Magazin','UNDECIDED'=>'Noch ungeklärt'] as $v=>$label)echo '<option value="'.esc_attr($v).'" '.selected($areaFilter,$v,false).'>'.esc_html($label).'</option>';echo '</select></label> <label>Suche <input type="search" name="pool_search" value="'.esc_attr($search).'" placeholder="Thema oder Kategorie"></label> ';submit_button('Ansicht filtern','secondary','submit',false);echo '</form>';
++        if($filter==='category_room'){
++            $room=self::roomSuggestions();$ready=(array)$room['ready'];$missing=(array)$room['missing'];
++            echo '<section class="pste-box"><h3>Sammelanalyse der offenen Kategorien</h3>';
++            echo '<p>'.(int)$room['total'].' offene Themen geprüft · '.count($ready).' eindeutig vorhandene Kategorien · '.count($missing).' ohne vorhandene eindeutige Kategorie · '.(int)$room['unresolved'].' fachlich ungeklärt.</p>';
++            if($missing){echo '<p><strong>Fehlende Kategorien – Vorschläge, keine Anlage in WordPress:</strong></p><ul>';
++                foreach($missing as $name=>$n)echo '<li>'.esc_html($name).' ('.(int)$n.' Themen)</li>';echo '</ul>';}
++            if($ready){echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';wp_nonce_field('pste_room_suggestions_apply');echo '<input type="hidden" name="action" value="pste_room_suggestions_apply">';submit_button('Alle eindeutigen Vorschläge gesammelt zuordnen','secondary','submit',false);echo ' <small>Nur bestehende, eindeutig geprüfte Kategorien; unklare Themen bleiben offen. Keine K0-Freigabe.</small></form>';}
++            if(empty($room['complete']))echo '<p><strong>Hinweis:</strong> Mehr als 200 offene Themen; weitere Fälle bleiben unverändert.</p>';
++            if(isset($_GET['room_saved']))echo '<p>'.(int)$_GET['room_saved'].' vorhandene Kategorien gespeichert. Übergabeprüfung läuft getrennt.</p>';
++            echo '</section>';
++        }
+         echo '<table class="widefat striped pste-table pste-review-table"><thead><tr><th>Ampel</th><th>Globales Thema</th><th>Rolle</th><th>Zielkategorie</th><th>Artikeltyp</th><th>Planung</th><th>Prüfgrund</th><th>Aktion</th></tr></thead><tbody>';
+         foreach($rows as $c){$light=(array)($c['traffic_light']??PSTE_Repository::trafficLightForStatus((string)($c['pool_status']??'REVIEW_REQUIRED'),(string)($c['context_state']??'PENDING')));$role=(string)($c['topic_role']??'RESEARCH_KEYWORD');$planning=(string)($c['planning_suitability']??'BLOCKED');$assign=self::primaryAssignment($c);$editorialArea=self::currentEditorialArea($c);$manualEditorialArea=self::manualReviewArea($c);$hard=PSTE_Topic_Policy::presentHardCodes($c);$nonOver=PSTE_Topic_Policy::presentNonOverridableCodes($c);$reason=self::humanReviewReason($c);$categoryRoomOpen=self::categoryRoomPending($c);
+             echo '<tr><td><span class="pste-light pste-light-'.esc_attr(strtolower((string)$light['code'])).'">'.esc_html((string)$light['label']).'</span><br><small>'.esc_html((string)$light['meaning']).'</small></td>';
+@@ -497,15 +508,19 @@
+             $system=PSTE_Topic_Policy::systemState((string)($c['context_state']??'PENDING'));
+             $displayType=(string)($assign['article_type']??($c['proposed_article_type']??'—'));$manualCandidateType=(string)($c['manual_candidate_article_type']??'');
+             echo '<td>'.esc_html(PSTE_Topic_Policy::roleLabel($role)).'</td><td>'.esc_html((string)($assign['category_name']??'—')).'<br><small>Automatischer Bereich: '.esc_html(self::editorialAreaLabel($editorialArea)).'</small>';if($manualEditorialArea!=='')echo '<br><small>Manuell vorgemerkt: <strong>'.esc_html(self::editorialAreaLabel($manualEditorialArea)).'</strong> (keine Produktionsfreigabe)</small>';if(strpos((string)($c['manual_note']??''),'Bereichsvormerkung:')===0||strpos((string)($c['manual_note']??''),'Bereich händisch geprüft:')===0)echo '<br><small><strong>'.esc_html((string)($c['manual_note']??'')).'</strong></small>';echo '</td><td>'.esc_html($displayType);
+-            if($categoryRoomOpen)echo '<br><small><strong>Redaktionsbüro – Kategorie offen</strong> (noch keine K0-Freigabe)</small>';
++            if($categoryRoomOpen){echo '<br><small><strong>Redaktionsbüro – Kategorie offen</strong> (noch keine K0-Freigabe)</small>';
++                $suggestion=(array)($room['ready'][(string)($c['pool_key']??'')]??[]);
++                if($suggestion)echo '<br><small>Automatischer Vorschlag: '.esc_html((string)$suggestion['name']).' ('.esc_html((string)$suggestion['area']).')</small>';
++            }
+             if($manualCandidateType!=='')echo '<br><small>Manuelle Kandidatenart: <strong>'.esc_html($manualCandidateType).'</strong></small>';
+             if(!$categoryRoomOpen){
+             echo '<details style="margin-top:6px"><summary style="cursor:pointer">Beitragsart korrigieren</summary><form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:6px">';wp_nonce_field('pste_set_candidate_type');echo '<input type="hidden" name="action" value="pste_set_candidate_type"><input type="hidden" name="pool_key" value="'.esc_attr((string)$c['pool_key']).'"><select name="candidate_article_type"><option value="">Automatik</option><option value="Produktwahl"'.selected($manualCandidateType,'Produktwahl',false).'>Produktwahl</option>';foreach(self::availableArticleTypes() as $candidateType)echo '<option value="'.esc_attr($candidateType).'"'.selected($manualCandidateType,$candidateType,false).'>'.esc_html($candidateType).'</option>';echo '</select><br><input type="text" name="review_note" class="regular-text" placeholder="Optionaler Hinweis">';submit_button('Korrektur speichern','secondary','submit',false);echo '</form></details>'; } echo '</td><td><strong>'.esc_html(PSTE_Topic_Policy::planningLabel($planning)).'</strong><br><small>Systemprüfung: '.esc_html((string)$system['label']).'</small></td><td>'.esc_html($reason).'</td><td>';
+-            if(!in_array((string)($c['context_state']??'PENDING'),['CURRENT','NOT_REQUIRED'],true)){echo '<em>Keine manuelle Entscheidung möglich. Zuerst Portalabgleich abschließen.</em>';}elseif(!$categoryRoomOpen&&(string)$light['code']==='GREEN'&&(string)($c['manual_status']??'')!=='REASSIGNED'&&empty($c['manual_editorial_resolution'])){echo '<em>Keine Aktion nötig.</em>';}else{echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';wp_nonce_field('pste_review_candidate');echo '<input type="hidden" name="action" value="pste_review_candidate"><input type="hidden" name="pool_key" value="'.esc_attr((string)$c['pool_key']).'"><select name="review_status"';if($categoryRoomOpen)echo ' required><option value="" selected disabled>Bitte Zielbereich wählen</option><option value="ROUTE_FACH">Hauptnavigation – Kategorie auswählen</option><option value="ROUTE_MAGAZIN">Magazin – Kategorie auswählen</option><option value="ROUTE_REVIEW">Im Redaktionsbüro belassen</option>';else{echo '><option value="AUTO">Keine Änderung – Automatik beibehalten</option>';
+-                if(!$nonOver)echo '<option value="APPROVED">Als Thema freigeben</option>';echo '<option value="REVIEW_REQUIRED">Weiter offen lassen</option><option value="BLOCKED_FOR_CATEGORY">Als bereits abgedeckt/blockiert markieren</option><option value="DISCOVERY_ONLY">Nur als Recherchebegriff behalten</option><option value="REASSIGNED">Anderer Kategorie zuordnen (bisherig)</option><option value="ROUTE_FACH">Grenzfall: Hauptnavigation wählen</option><option value="ROUTE_MAGAZIN">Grenzfall: Magazin wählen</option><option value="ROUTE_REVIEW">Grenzfall: im Redaktionsbüro lassen</option><option value="REJECTED">Endgültig verwerfen</option>'; } echo '</select><br><input list="pste-global-category-list" name="target_category_name" class="regular-text" placeholder="Zielkategorie (nur Umordnung)"><br>';if(!$categoryRoomOpen){echo '<select name="target_article_type"><option value="">Artikeltyp aus Zielkategorie</option>';foreach(self::availableArticleTypes() as $type)echo '<option value="'.esc_attr($type).'">'.esc_html($type).'</option>';echo '</select>'; } echo '<br><small>'.($categoryRoomOpen?'Nur Zielbereich und vorhandene Kategorie zuordnen. Ohne Kategorie bleibt das Thema im Redaktionsbüro – keine K0-Freigabe.':'Grenzfall: Bereich auswählen und, falls vorhanden, eine bestehende Zielkategorie eintragen. Ohne passende Kategorie bleibt das Thema im Redaktionsbüro. Keine automatische Produktionsfreigabe.').'</small><br><input type="text" name="review_note" class="regular-text" placeholder="Begründung">';if($hard&&!$nonOver)echo '<p class="pste-hard-warning"><label><input type="checkbox" name="confirm_hard_override" value="1"> Harte Sperre bewusst übersteuern</label><br><small>Nur mit Begründung. Betroffene Regeln: '.esc_html(implode(', ',$hard)).'</small></p>';if($nonOver)echo '<p class="pste-hard-warning"><strong>Nicht übersteuerbare technische Sperre:</strong> '.esc_html(implode(', ',$nonOver)).'</p>';submit_button('Entscheidung speichern','secondary','submit',false);echo '</form>';}
++            if(!in_array((string)($c['context_state']??'PENDING'),['CURRENT','NOT_REQUIRED'],true)){echo '<em>Keine manuelle Entscheidung möglich. Zuerst Portalabgleich abschließen.</em>';}elseif(!$categoryRoomOpen&&(string)$light['code']==='GREEN'&&(string)($c['manual_status']??'')!=='REASSIGNED'&&empty($c['manual_editorial_resolution'])){echo '<em>Keine Aktion nötig.</em>';}else{echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';wp_nonce_field('pste_review_candidate');echo '<input type="hidden" name="action" value="pste_review_candidate"><input type="hidden" name="pool_key" value="'.esc_attr((string)$c['pool_key']).'">';if($categoryRoomOpen)echo '<input type="hidden" name="pste_review_return_room" value="1">';echo '<select name="review_status"';if($categoryRoomOpen)echo ' required data-pste-room-area="1"><option value="" selected disabled>Bitte Zielbereich wählen</option><option value="ROUTE_FACH">Hauptnavigation – Kategorie auswählen</option><option value="ROUTE_MAGAZIN">Magazin – Kategorie auswählen</option><option value="ROUTE_REVIEW">Im Redaktionsbüro belassen</option>';else{echo '><option value="AUTO">Keine Änderung – Automatik beibehalten</option>';
++                if(!$nonOver)echo '<option value="APPROVED">Als Thema freigeben</option>';echo '<option value="REVIEW_REQUIRED">Weiter offen lassen</option><option value="BLOCKED_FOR_CATEGORY">Als bereits abgedeckt/blockiert markieren</option><option value="DISCOVERY_ONLY">Nur als Recherchebegriff behalten</option><option value="REASSIGNED">Anderer Kategorie zuordnen (bisherig)</option><option value="ROUTE_FACH">Grenzfall: Hauptnavigation wählen</option><option value="ROUTE_MAGAZIN">Grenzfall: Magazin wählen</option><option value="ROUTE_REVIEW">Grenzfall: im Redaktionsbüro lassen</option><option value="REJECTED">Endgültig verwerfen</option>'; } echo '</select><br><input list="'.($categoryRoomOpen?'pste-empty-category-list':'pste-global-category-list').'" name="target_category_name" class="regular-text" placeholder="Kategorie suchen – Namen eintippen"'.($categoryRoomOpen?' disabled':'').'><br>';if(!$categoryRoomOpen){echo '<select name="target_article_type"><option value="">Artikeltyp aus Zielkategorie</option>';foreach(self::availableArticleTypes() as $type)echo '<option value="'.esc_attr($type).'">'.esc_html($type).'</option>';echo '</select>'; } echo '<br><small>'.($categoryRoomOpen?'Kategorie: Anfang des Namens eintippen, z. B. Kolik. Die Vorschläge sind alphabetisch und nach Bereich getrennt. Ohne Kategorie bleibt das Thema im Redaktionsbüro – keine K0-Freigabe.':'Grenzfall: Bereich auswählen und, falls vorhanden, eine bestehende Zielkategorie eintragen. Ohne passende Kategorie bleibt das Thema im Redaktionsbüro. Keine automatische Produktionsfreigabe.').'</small><br>';if(!$categoryRoomOpen)echo '<input type="text" name="review_note" class="regular-text" placeholder="Begründung (optional, außer bei harter Freigabe)">';if($hard&&!$nonOver)echo '<p class="pste-hard-warning"><label><input type="checkbox" name="confirm_hard_override" value="1"> Harte Sperre bewusst übersteuern</label><br><small>Nur mit Begründung. Betroffene Regeln: '.esc_html(implode(', ',$hard)).'</small></p>';if($nonOver)echo '<p class="pste-hard-warning"><strong>Nicht übersteuerbare technische Sperre:</strong> '.esc_html(implode(', ',$nonOver)).'</p>';submit_button('Entscheidung speichern','secondary','submit',false);echo '</form>';}
+             echo '</td></tr>';
+         }
+         if(!$rows)self::emptyRow(8,'In diesem Abschnitt keine passenden Themen. Weitere Themen gegebenenfalls auf der nächsten Seite.');echo '</tbody></table>';if($page['next_token']!==''){ $url=add_query_arg(['page'=>self::TABS['review']['slug'],'pool_filter'=>$filter,'pool_area'=>$areaFilter,'pool_search'=>$search,'pool_cursor'=>$page['next_token']],admin_url('admin.php'));echo '<p><a class="button" href="'.esc_url($url).'">Weitere Themen anzeigen</a></p>'; }self::globalCategoryDatalist();
++        echo '<script>(function(){document.addEventListener("change",function(e){var s=e.target;if(!s||!s.matches||!s.matches("select[data-pste-room-area]"))return;var f=s.closest("form"),i=f&&f.querySelector("input[name=target_category_name]");if(!i)return;var a=s.value;i.value="";i.disabled=(a!=="ROUTE_FACH"&&a!=="ROUTE_MAGAZIN");i.setAttribute("list",a==="ROUTE_FACH"?"pste-fach-category-list":a==="ROUTE_MAGAZIN"?"pste-magazin-category-list":"pste-empty-category-list");i.placeholder=a==="ROUTE_FACH"?"Fachkategorie suchen…":a==="ROUTE_MAGAZIN"?"Magazinkategorie suchen…":"Zuerst Bereich wählen";});})();</script>';
+     
+         $showSandbox=((string)($_GET['sandbox_view']??''))==='1';
+         echo '<hr style="margin:28px 0"><h2>Offene Rest- und Sandboxfälle</h2>';
+@@ -621,6 +636,103 @@
+             &&($path['status']??'')==='STRUCTURE_GAP'
+             &&!empty($path['category_backlog_required'])
+             &&(string)($path['worker_flow']['storage']??'')==='CATEGORY_ROOM_TOPIC_POOL';
++    }
++
++    /** Read-only, bounded group analysis of the EXISTING category room. */
++    private static function roomSuggestions(): array {
++        $choices=self::categoryReviewChoices();$baseline=get_option(PSTE_OPTION_SITE_BASELINE,[]);
++        $registry=is_array($baseline)&&($baseline['contract']??'')==='PSTE_SITE_BASELINE_V1'
++            ?PSTE_Article_Type_Registry::build($baseline):[];
++        $ready=[];$missing=[];$unresolved=0;$total=0;$cursor=null;$complete=false;
++        for($pageNo=0;$pageNo<2;$pageNo++){
++            $page=PSTE_Repository::adminTopicPoolPage($cursor,100,'',true);
++            foreach((array)($page['items']??[]) as $c){
++                if(!self::categoryRoomPending($c)||(string)($c['manual_status']??'')!=='')continue;
++                $total++;$proposal=self::existingRoomCategoryProposal($c,$choices,$registry);
++                if(($proposal['status']??'')==='READY')$ready[(string)$c['pool_key']]=$proposal;
++                elseif(($proposal['status']??'')==='MISSING'){
++                    $name=(string)($proposal['name']??'');if($name!=='')$missing[$name]=(int)($missing[$name]??0)+1;
++                    else $unresolved++;
++                }else $unresolved++;
++            }
++            $complete=!empty($page['complete']);$cursor=$page['next_cursor']??null;
++            if($complete||!is_array($cursor))break;
++        }
++        ksort($missing,SORT_NATURAL|SORT_FLAG_CASE);
++        return compact('ready','missing','unresolved','total','complete');
++    }
++
++    /** The original Fach/Journal owner provides the finding; only existing WP terms are offered. */
++    private static function existingRoomCategoryProposal(array $c,array $choices,array $registry): array {
++        if(!self::categoryRoomPending($c)||!in_array((string)($c['context_state']??''),['CURRENT','NOT_REQUIRED'],true)
++            ||(string)($c['manual_status']??'')!==''
++            ||PSTE_Topic_Policy::presentHardCodes($c)||PSTE_Topic_Policy::presentNonOverridableCodes($c))
++            return ['status'=>'UNRESOLVED'];
++        $path=(array)($c['normal_metadata_path']??[]);
++        if(!PSTE_Normal_Metadata_Path::payloadMatchesNormalPath($c,$path))return ['status'=>'UNRESOLVED'];
++        $raw=PSTE_Editorializer::sourceQuery($c);
++        // Reuse the existing Journal semantic owner; never infer a category just
++        // because a string appears somewhere in an unrelated Fach category name.
++        $journal=PSTE_Journal_Semantic_Router::classifyQuestion($raw);
++        if(!empty($journal['ok'])&&!empty($journal['editorial_intent_proven'])){
++            $key=(string)($journal['category_key']??'');$matches=[];$name=(string)($journal['category_name']??'');
++            foreach((array)(PSTE_Journal_Article_Type::definition()['journal_categories']['categories']??[]) as $spec){
++                if((string)($spec['key']??'')!==$key)continue;
++                foreach((array)($spec['runtime_slugs']??[]) as $slug){
++                    $term=function_exists('get_term_by')?get_term_by('slug',(string)$slug,'category'):false;
++                    $id=(int)($term->term_id??0);
++                    if($id>0&&(string)($term->taxonomy??'category')==='category'
++                        &&(string)($term->slug??'')===(string)$slug
++                        &&($choices[$id]['area']??'')==='MAGAZIN')
++                        $matches[$id]=['status'=>'READY','id'=>$id,'slug'=>(string)$slug,'name'=>(string)$term->name,'area'=>'MAGAZIN','type'=>'Journal'];
++                }
++            }
++            return count($matches)===1?array_values($matches)[0]:['status'=>count($matches)>1?'UNRESOLVED':'MISSING','name'=>$name];
++        }
++        // Fach only when the previously bound original family+article-type
++        // relation resolves uniquely to a real current WP term.
++        if(self::currentEditorialArea($c)!=='FACH'||!$registry)return ['status'=>'UNRESOLVED'];
++        $family=(string)($path['family_key']??'');$type=(string)($path['article_type']??'');
++        if($family===''||$type===''||strcasecmp($type,'Journal')===0)return ['status'=>'UNRESOLVED'];
++        $target=PSTE_Article_Type_Registry::resolve($registry,$family,$type);
++        $id=(int)($target['term_id']??0);$slug=(string)($target['slug']??'');
++        $term=$id>0&&function_exists('get_term')?get_term($id,'category'):false;
++        if(!empty($target['ok'])&&$slug!==''&&($choices[$id]['area']??'')==='FACH'
++            &&(string)($term->taxonomy??'')==='category'&&(string)($term->slug??'')===$slug)
++            return ['status'=>'READY','id'=>$id,'slug'=>$slug,'name'=>(string)$term->name,'area'=>'FACH','type'=>$type];
++        $gap=(array)($path['category_gap_proposal']??[]);
++        $label=(string)($gap['status']??'')==='CATEGORY_GAP_PROPOSED' ? trim((string)($gap['proposed_name']??'')) : '';
++        return $label!==''?['status'=>'MISSING','name'=>$label]:['status'=>'UNRESOLVED'];
++    }
++
++    /** One operator confirmation for many existing safe proposals; never creates categories or articles. */
++    public static function applyRoomSuggestions(): void {
++        try {
++            PSTE_Auth::assertAdmin('pste_room_suggestions_apply',(string)($_POST['_wpnonce']??''));
++            $room=self::roomSuggestions();$ready=(array)$room['ready'];$saved=0;$keys=[];
++            global $wpdb;$table=PSTE_Repository::table('topic_pool');
++            $choices=self::categoryReviewChoices();$baseline=get_option(PSTE_OPTION_SITE_BASELINE,[]);
++            $registry=is_array($baseline)&&($baseline['contract']??'')==='PSTE_SITE_BASELINE_V1'
++                ?PSTE_Article_Type_Registry::build($baseline):[];
++            foreach($ready as $key=>$proposal){
++                $row=$wpdb->get_row($wpdb->prepare("SELECT * FROM $table WHERE pool_key=%s",$key),ARRAY_A);
++                if(!is_array($row)||(string)($row['manual_status']??'')!=='')continue;
++                $candidate=json_decode((string)($row['payload_json']??''),true);
++                if(!is_array($candidate))continue;
++                $candidate['pool_key']=$key;$candidate['manual_status']=(string)($row['manual_status']??'');
++                $candidate['context_state']=(string)($row['context_state']??'PENDING');
++                $fresh=self::existingRoomCategoryProposal($candidate,$choices,$registry);
++                if(($fresh['status']??'')!=='READY'||$fresh!==$proposal)continue;
++                $term=function_exists('get_term')?get_term((int)$fresh['id'],'category'):false;
++                if(!$term||(string)($term->slug??'')!==(string)$fresh['slug'])continue;
++                $area=(string)$fresh['area'];$note='Bereich händisch geprüft: '.($area==='FACH'?'Hauptnavigation':'Magazin').'. Sammelvorschlag bestätigt.';
++                PSTE_Repository::saveManualDecision($key,'REASSIGNED',(int)$fresh['id'],(string)$fresh['type'],$note,get_current_user_id());
++                $saved++;$keys[]=$key;
++            }
++            // Existing targeted continuation, not a second semantic owner or a new worker.
++            if($keys)self::scheduleTitleDeskReentry($keys,true);
++            self::redirect('review','pool_filter=category_room&room_saved='.$saved);
++        } catch(Throwable $e){self::blocked('review',$e);}
+     }
+ 
+     private static function humanReviewReason(array $candidate): string {
+@@ -1576,7 +1688,7 @@
+                     // Saved review remains provisional; no automatic production release.
+                 }
+             }
+-            self::redirect('review','review_saved=1');}catch(Throwable $e){self::blocked('review',$e);}
++            self::redirect('review','review_saved=1'.((string)($_POST['pste_review_return_room']??'')==='1'?'&pool_filter=category_room':''));}catch(Throwable $e){self::blocked('review',$e);}
+     }
+ 
+ 
+@@ -2711,10 +2823,19 @@
+     }
+ 
+     private static function globalCategoryDatalist(): void {
+-        echo '<datalist id="pste-global-category-list">';
+-        foreach(self::categoryReviewChoices() as $choice)
+-            echo '<option value="'.esc_attr((string)$choice['label']).'"></option>';
+-        echo '</datalist>';
++        $all=self::categoryReviewChoices();
++        uasort($all,static function(array $a,array $b): int {
++            return strnatcasecmp((string)$a['label'],(string)$b['label']);
++        });
++        foreach(['pste-global-category-list'=>'','pste-fach-category-list'=>'FACH','pste-magazin-category-list'=>'MAGAZIN'] as $id=>$area){
++            echo '<datalist id="'.esc_attr($id).'">';
++            foreach($all as $choice){
++                if($area!==''&&(string)$choice['area']!==$area)continue;
++                echo '<option value="'.esc_attr((string)$choice['label']).'"></option>';
++            }
++            echo '</datalist>';
++        }
++        echo '<datalist id="pste-empty-category-list"></datalist>';
+     }
+ 
+ 
+@@ -2750,7 +2871,7 @@
+         $details=[];
+         if(method_exists($e,'safeDetails'))$details=(array)$e->safeDetails();
+         set_transient('pste_last_error',['status'=>'BLOCKED','error'=>$e->getMessage(),'details'=>self::safeDiagnosticDetails($details)],300);
+-        self::redirect($tab,'blocked=1');
++        self::redirect($tab,'blocked=1'.($tab==='review'&&(string)($_POST['pste_review_return_room']??'')==='1'?'&pool_filter=category_room':''));
+     }
+     /** @param array<string,mixed> $details @return array<string,mixed> */
+     private static function safeDiagnosticDetails(array $details): array {
+--- a/Portal SEO Topic Engine/includes/class-pste-journal-semantic-router.php
++++ b/Portal SEO Topic Engine/includes/class-pste-journal-semantic-router.php
+@@ -30,15 +30,27 @@
+         $raw=self::clean($raw);
+         $base=['contract'=>self::CONTRACT,'ok'=>false,'status'=>'NOT_APPLICABLE','category_key'=>'','category_name'=>'','reason_codes'=>[],'raw_query'=>$raw,'write_attempted'=>false];
+         if($raw===''||!class_exists('PSTE_Normalizer'))return self::fail($base,'PSTE_JOURNAL_AUTO_EMPTY_INPUT');
+-        $isQuestion=PSTE_Normalizer::isQuestion($raw);
++        $isQuestion=PSTE_Normalizer::isQuestion($raw)||(bool)preg_match('/^(?:woran|wodurch)\b/iu',$raw);
+         // The existing Journal classifier owns its editorial-intent finding ONCE.
+         // The upstream one-time FACH/MAGAZIN switch reads this same evidence;
+         // it must not run an additional lexical admission rule.
+-        $base['editorial_intent_proven']=self::hasExplicitEditorialIntent($raw);
++        $q=self::lower(PSTE_Normalizer::exactTopicIdentityText($raw));
++        if($q==='')return self::fail($base,'PSTE_JOURNAL_AUTO_EMPTY_NORMALIZED_QUESTION');
++        // The existing Journal owner formerly recognised the medical DOMAIN but
++        // treated symptom/urgent-care questions as non-editorial. A specific
++        // medical question is informative Journal intent, not a product FAQ.
++        // This is one scope decision, never an invented category or release.
++        $medicalEditorialQuestion=$isQuestion
++            &&(bool)preg_match('/\b(?:kolik|koliken|lahmheit|husten|fieber|entzündung|entzuendung|verletzung|schmerzen|wunde|parasiten|krankheit|krankheiten)\b/u',$q)
++            &&(bool)preg_match('/\b(?:erkenn\w*|anzeichen|symptom\w*|ursach\w*|behandel\w*|vorbeug\w*|vermeid\w*|heil\w*|helfen|hilfe|tun|reagier\w*|handeln)\b/u',$q);
++        // A disease topic with explicit horse context belongs to health editorial
++        // consideration even when DataForSEO supplied a short keyword rather than
++        // a grammatical question. Risk and duplicate release remain unchanged.
++        $medicalHorseTopic=(bool)preg_match('/\b(?:kolik|koliken|lahmheit|husten|fieber|entzündung|entzuendung|verletzung|krankheit|krankheiten)\b/u',$q)
++            &&(bool)preg_match('/\b(?:pferd|pferde|pferdes|pferden|pony|ponys)\b/u',$q);
++        $base['editorial_intent_proven']=self::hasExplicitEditorialIntent($raw)||$medicalEditorialQuestion||$medicalHorseTopic;
+         if(!$isQuestion&&!$base['editorial_intent_proven'])
+             return self::fail($base,'PSTE_JOURNAL_AUTO_STATEMENT_INTENT_NOT_PROVEN');
+-        $q=self::lower(PSTE_Normalizer::exactTopicIdentityText($raw));
+-        if($q==='')return self::fail($base,'PSTE_JOURNAL_AUTO_EMPTY_NORMALIZED_QUESTION');
+ 
+         // Existing Journal categories are equal contenders; old question-complexity
+         // and DataForSEO-family admission requirements do not decide the type.
+@@ -49,7 +61,7 @@
+         // Retain the original Fach responsibility for direct factual quantities.
+         if(preg_match('/^wie\s+(?:viel|viele|oft|hoch|schwer|breit|schnell)\b/u',$q))
+             return self::fail($base,'PSTE_JOURNAL_AUTO_DIRECT_FACT_QUESTION');
+-        if($isQuestion && !preg_match('/^(?:warum|wieso|weshalb|wie\b|was\b|wann\b|welche\b|welcher\b|welches\b|wo\b|wer\b|sind\b|ist\b|kann\b|können\b|koennen\b|soll\b|sollte\b|muss\b|gibt\b|braucht\b|benötigt\b|benoetigt\b)/u',$q))
++        if($isQuestion && !preg_match('/^(?:warum|wieso|weshalb|woran\b|wodurch\b|wie\b|was\b|wann\b|welche\b|welcher\b|welches\b|wo\b|wer\b|sind\b|ist\b|kann\b|können\b|koennen\b|soll\b|sollte\b|muss\b|gibt\b|braucht\b|benötigt\b|benoetigt\b)/u',$q))
+             return self::fail($base,'PSTE_JOURNAL_AUTO_NOT_A_READABLE_QUESTION');
+ 
+         $domains=[];
+--- a/Portal SEO Topic Engine/includes/class-pste-mini-workflow.php
++++ b/Portal SEO Topic Engine/includes/class-pste-mini-workflow.php
+@@ -34,6 +34,7 @@
+ 
+     /** Only objective hard title checks here; linguistic naturalness belongs to the external language desk. */
+     public static function validateTitleText(string $title): void {
++        self::assertOneMainQuestion($title);
+         $title=trim($title);
+         $length=function_exists('mb_strlen')?mb_strlen($title,'UTF-8'):strlen($title);
+         if($length<8||$length>110)throw new RuntimeException('PSTE_MINI_TITLE_LENGTH_INVALID');
+@@ -49,6 +50,13 @@
+             PSTE_Title_Validator::hasForbiddenTitlePhraseFamily($title)||
+             PSTE_Title_Validator::isRepeatedGenericBeratungSchema($title))
+             throw new RuntimeException('PSTE_MINI_TITLE_ARTIFICIAL_STYLE_FORBIDDEN');
++    }
++
++    /** One objective shape check at the ORIGINAL MINI intake, never a second SEO or WP title owner. */
++    private static function assertOneMainQuestion(string $title): void {
++        $q=trim($title);
++        if(substr_count($q,'?')>1 || (bool)preg_match('/\b(?:woran|wie|was|warum|wieso|weshalb|wann|welch(?:e|er|es)|wer|kann|soll|muss)\b.*\b(?:und|oder)\s+(?:woran|wie|was|warum|wieso|weshalb|wann|welch(?:e|er|es)|wer|kann|soll|muss)\b/iu',$q))
++            throw new RuntimeException('PSTE_MINI_TITLE_TWO_MAIN_QUESTIONS');
+     }
+ 
+     private static function loadState(): array {
+@@ -352,7 +360,7 @@
+         if(!is_array($selected['items']??null)||!$selected['items'])throw new RuntimeException('PSTE_MINI_NO_OPEN_KEYWORDS');
+         if(!preg_match('/^[a-zA-Z0-9_-]{6,100}$/',$batchId))throw new RuntimeException('PSTE_MINI_BATCH_ID_INVALID');
+         return ['contract'=>self::CONTRACT,'batch_id'=>$batchId,'created_utc'=>gmdate('c'),
+-            'instruction'=>'Worker 1 entscheidet JA/NEIN/VIELLEICHT. Nur JA geht an Worker 2. Worker 2 kann mehrere sachlich verschiedene Suchabsichten mit je einem Titel vorschlagen. TITELREGELN BINDEND: natuerliche deutsche Formulierungen, niemals Doppelpunkte, keine Aufzaehlungs-/Keyword-Schablonen, keine kuenstlichen Floskeln; Fragezeichen nur am Ende eines Fragetitels; Suchintention erhalten. Die bestehende title_governance beachten. Keine Kannibalisierungs- oder Produktionsfreigabe durch Worker. Nur decision und titles bearbeiten; alle anderen Felder unveraendert lassen. Bei NEIN/VIELLEICHT titles leer.',
++            'instruction'=>'Worker 1 entscheidet JA/NEIN/VIELLEICHT. Nur JA geht an Worker 2. Worker 2 kann mehrere sachlich verschiedene Suchabsichten mit je einem Titel vorschlagen. TITELREGELN BINDEND: natuerliche deutsche Formulierungen, niemals Doppelpunkte, keine Aufzaehlungs-/Keyword-Schablonen, keine kuenstlichen Floskeln; Fragezeichen nur am Ende eines Fragetitels; PRO TITEL GENAU EINE HAUPTSUCHFRAGE: niemals zwei eigenstaendige Fragen mit und/was/wie/woran in einem Titel verschmelzen. Zweite Frage nur als Zwischenueberschrift oder als eigener Titel, wenn der einmalige SEO-Owner eine andere Suchabsicht belegt. Suchintention erhalten. Die bestehende title_governance beachten. Keine Kannibalisierungs- oder Produktionsfreigabe durch Worker. Nur decision und titles bearbeiten; alle anderen Felder unveraendert lassen. Bei NEIN/VIELLEICHT titles leer.',
+             'title_governance'=>self::titleGovernance(),
+             'skipped_invalid_source_count'=>(int)($selected['skipped_invalid']??0),
+             'items'=>$selected['items']];
+@@ -386,7 +394,10 @@
+     public static function validateResult(array $original,array $received,callable $loadCurrent): array {
+         if(($original['contract']??'')!==self::CONTRACT||($received['contract']??'')!==self::CONTRACT||
+             ($original['batch_id']??'')!==($received['batch_id']??''))throw new RuntimeException('PSTE_MINI_WRONG_BATCH');
+-        if(array_key_exists('title_governance',$received)&&$received['title_governance']!==self::titleGovernance())
++        // Compare to the rules actually exported with THIS frozen batch. New
++        // governance must not retrospectively invalidate an older active batch.
++        if(array_key_exists('title_governance',$received)
++            &&$received['title_governance']!==($original['title_governance']??self::titleGovernance()))
+             throw new RuntimeException('PSTE_MINI_TITLE_RULES_CHANGED');
+         $before=$original['items']??null;$after=$received['items']??null;
+         if(!is_array($before)||!is_array($after)||count($before)!==count($after)||!array_is_list($after))
+@@ -431,6 +442,7 @@
+                     if($intent===''||$text===''||strlen($intent)>240||strlen($text)>300||
+                         preg_match('/[<>\x00-\x1f\x7f]/u',$intent.$text))
+                         throw new RuntimeException('PSTE_MINI_TITLE_TEXT_INVALID');
++                    self::assertOneMainQuestion($text);
+                     $clean[]=['intent'=>$intent,'title'=>$text];
+                 }
+                 $finished[(string)$frozen['pool_key']]=['raw_query'=>$frozen['raw_query'],
+@@ -445,7 +457,8 @@
+                     'PSTE_MINI_SOURCE_CHANGED_','PSTE_MINI_DATABASE_SOURCE_CHANGED',
+                     'PSTE_MINI_DECISION_REQUIRED','PSTE_MINI_TITLES_INVALID',
+                     'PSTE_MINI_NON_JA_HAS_TITLES','PSTE_MINI_JA_WITHOUT_TITLE',
+-                    'PSTE_MINI_TITLE_SHAPE_INVALID','PSTE_MINI_TITLE_TEXT_INVALID'];
++                    'PSTE_MINI_TITLE_SHAPE_INVALID','PSTE_MINI_TITLE_TEXT_INVALID',
++                    'PSTE_MINI_TITLE_TWO_MAIN_QUESTIONS'];
+                 $known=false;
+                 foreach($itemErrors as $prefix)if(str_starts_with($code,$prefix)){$known=true;break;}
+                 if(!$known)throw $e;
+@@ -483,6 +496,7 @@
+                 $title=trim($piece['title']);
+                 if($title===''||strlen($title)>300||preg_match('/[<>\x00-\x1f\x7f]/u',$title))
+                     throw new RuntimeException('PSTE_MINI_TITLE_REPAIR_TRANSPORT_INVALID');
++                self::assertOneMainQuestion($title);
+                 if($title!==$saved['titles'][$j]['title'])$updated++;
+                 $repaired[]=['intent'=>$piece['intent'],'title'=>$title];
+             }
+--- a/Portal SEO Topic Engine/portal-seo-topic-engine.php
++++ b/Portal SEO Topic Engine/portal-seo-topic-engine.php
+@@ -2,13 +2,13 @@
+ /**
+  * Plugin Name: Portal SEO Themenengine
+  * Description: Einfacher Longtail-Workflow: recherchiert Suchphrasen, übernimmt Sprachtitel und ordnet ausschließlich vorhandene Portalkategorien zu und prüft gegen den eigenen Bestand. Verändert keine Beiträge, Inhalte, Gestaltung oder Textproduktionsregeln.
+- * Version: 0.57.144.31
++ * Version: 0.57.144.32
+  * Requires PHP: 8.0
+  * Author: Workflow Automation
+  */
+ if (!defined('ABSPATH')) { return; }
+ 
+-define('PSTE_VERSION', '0.57.144.31');
++define('PSTE_VERSION', '0.57.144.32');
+ define('PSTE_DIR', __DIR__ . '/');
+ define('PSTE_OPTION_SETTINGS', 'pste_settings_v1');
+ define('PSTE_OPTION_SCHEMA', 'pste_schema_version');

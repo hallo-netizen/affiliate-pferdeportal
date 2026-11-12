@@ -1,0 +1,84 @@
+{
+  "scope": "READ_ONLY_FORENSIC_AUDIT_FROM_ACTUAL_WORDPRESS_V24_EXPORT",
+  "input_file": "pferdeatelier-mini-ergebnisse-20261108-162920.json",
+  "input_sha256": "ddeadf12b0a84e215e534172ee70f6d3f11c5f1289fc9e6e6d00deed7a278125",
+  "size_bytes": 1094709,
+  "generated_from": "2026-11-08T16:29:19+00:00",
+  "contract": "PSTE_MINI_RESULTS_FOR_EDITORIAL_V1",
+  "keywords": {
+    "JA": 87,
+    "VIELLEICHT": 9,
+    "NEIN": 4
+  },
+  "seo_subjects": 87,
+  "parkhaus_items": 1179,
+  "sources_item_count": {
+    "WORDPRESS": 1024,
+    "PSTE_PLAN": 1,
+    "EDITORIAL_PLAN": 9,
+    "PSERC_ACTIVE_PLAN": 1,
+    "PPM679_EXISTING_EDITORIAL_RUNTIME": 144,
+    "MINI_RESERVED": 0
+  },
+  "parkhaus_complete": false,
+  "approval_sha256": "",
+  "diagnostic_sha256": "fd4324557dcab2d609590de1ed9d4efec20c7391f57a1b6ddbd87ce01c385fab",
+  "reason": "EDITORIAL_PLAN_UNRESOLVED:9;PPM679_RUNTIME_TITLE_UNRESOLVED:3",
+  "source_editorial_legacy_ghosts": {
+    "count": 9,
+    "all_identical": true,
+    "reconstructed_exact_source_row": {
+      "title": "Array",
+      "primary_longtail_query": "Array",
+      "category_name": "",
+      "intent_cluster_id": "",
+      "headings": [],
+      "source_reference": ""
+    },
+    "reconstructed_source_sha256": "6a7d9b77e6d0cf54455eb98d76c6b11b3c1258ae369724b995744f41df3dffe9",
+    "has_real_article_title": false,
+    "has_article_id": false,
+    "has_plan_slot": false,
+    "has_source_reference": false
+  },
+  "source_ppm679": {
+    "count": 144,
+    "resolved_article_titles": 141,
+    "unresolved_references": [
+      {
+        "canonical_article_id": "article:b8d4fba69c8aa211c51d9e0e",
+        "plan_slot": "a554b0f86f23cda760d2a03f839934cbc4dda269d961ff891e763a684283352b",
+        "post_id": 972356,
+        "status": "DRAFT_CREATED_READBACK_PASS",
+        "post_status": "",
+        "title_status": "UNRESOLVED_SOURCE_TITLE"
+      },
+      {
+        "canonical_article_id": "article:082fd1a8a0d77b1e36cebb00",
+        "plan_slot": "0707c44014730437d91e342bcbd7c289aa11a085482c9df7f77d1e79415ca4f1",
+        "post_id": 972414,
+        "status": "DRAFT_CREATED_READBACK_PASS",
+        "post_status": "",
+        "title_status": "UNRESOLVED_SOURCE_TITLE"
+      },
+      {
+        "canonical_article_id": "article:f82f0d5e9c6a3a454d5ced35",
+        "plan_slot": "20720b5afc6b05f8467edf9e77640d9f4afeedbb2c2482331db3df5335f2a427",
+        "post_id": 972560,
+        "status": "DRAFT_CREATED_READBACK_PASS",
+        "post_status": "",
+        "title_status": "UNRESOLVED_SOURCE_TITLE"
+      }
+    ],
+    "canonical_ids_unique": true,
+    "slots_unique": true
+  },
+  "safety": {
+    "eligible_for_external_free_approval": false,
+    "current_snapshot_reference_is_diagnostic_only": true,
+    "do_not_use_diagnostic_hash_for_import": true,
+    "do_not_delete_orphan_slot_reservations": true,
+    "no_live_database_access_in_this_audit": true
+  },
+  "provenance_limit": "The exported editorial rows do not identify whether they came from the stored PSTE option or a third-party WordPress filter. No original title data can be reconstructed from nine literally identical rows. PPM679 unresolved posts were not returned by the live v24 reader; no proof of past deletion beyond absent current lookup."
+}

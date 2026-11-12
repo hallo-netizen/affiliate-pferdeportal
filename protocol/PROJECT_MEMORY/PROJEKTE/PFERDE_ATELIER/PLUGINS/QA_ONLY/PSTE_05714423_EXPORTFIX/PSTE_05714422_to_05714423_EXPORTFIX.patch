@@ -1,0 +1,309 @@
+--- a/Portal SEO Topic Engine/includes/class-pste-admin.php
++++ b/Portal SEO Topic Engine/includes/class-pste-admin.php
+@@ -1390,8 +1390,37 @@
+ 
+             $items=[];if(isset($decoded['items'])&&is_array($decoded['items']))$items=$decoded['items'];elseif(isset($decoded['articles'])&&is_array($decoded['articles']))$items=$decoded['articles'];elseif(isset($decoded['next_textmachine_metadata_batch']['items'])&&is_array($decoded['next_textmachine_metadata_batch']['items']))$items=$decoded['next_textmachine_metadata_batch']['items'];elseif(self::isList($decoded))$items=$decoded;
+             if(!$items)throw new RuntimeException('PSTE_EDITORIAL_PLAN_ITEMS_MISSING');
+-            $clean=[];foreach($items as $item){if(!is_array($item))continue;$title=trim((string)($item['title']??$item['primary_longtail_query']??$item['article_title']??''));if($title==='')continue;$planSlot=trim((string)($item['plan_slot']??$item['plan_slot_sha256']??''));$clean[]=['title'=>$title,'primary_longtail_query'=>(string)($item['primary_longtail_query']??$title),'target_keyword'=>(string)($item['target_keyword']??''),'category_id'=>(int)($item['category_id']??$item['target_category_id']??0),'category_name'=>(string)($item['category_name']??$item['target_category_name']??''),'category_slug'=>(string)($item['category_slug']??$item['target_category_slug']??$item['category']??''),'article_type'=>(string)($item['article_type']??''),'topic_family_name'=>(string)($item['topic_family_name']??''),'topic_family_key'=>(string)($item['topic_family_key']??''),'intent_cluster_id'=>(string)($item['intent_cluster_id']??''),'headings'=>is_array($item['headings']??null)?array_values($item['headings']):[],'canonical_article_id'=>(string)($item['canonical_article_id']??''),'plan_slot'=>$planSlot,'plan_slot_sha256'=>$planSlot,'source_reference'=>(string)($item['canonical_article_id']??($planSlot!==''?$planSlot:'')),'status'=>(string)($item['status']??'PLANNED')];}
+-            if(!$clean)throw new RuntimeException('PSTE_EDITORIAL_PLAN_VALID_ITEMS_MISSING');
++            // Reject malformed imported titles BEFORE storage; previously a title array
++            // was converted to the literal string 'Array' and lost its meaning.
++            $clean=[];
++            foreach($items as $item){
++                if(!is_array($item))throw new RuntimeException('PSTE_EDITORIAL_PLAN_ROW_INVALID');
++                $title='';
++                foreach(['title','production_title','article_title','primary_longtail_query'] as $field){
++                    $title=PSTE_Snapshot::editorialSafeText($item[$field]??null);
++                    if($title!==''&&$title!=='Array')break;
++                }
++                if($title===''||$title==='Array')throw new RuntimeException('PSTE_EDITORIAL_PLAN_TITLE_UNRESOLVED');
++                $planSlot=PSTE_Snapshot::editorialSafeText($item['plan_slot']??$item['plan_slot_sha256']??null);
++                $primary=PSTE_Snapshot::editorialSafeText($item['primary_longtail_query']??null);
++                $canonical=PSTE_Snapshot::editorialSafeText($item['canonical_article_id']??null);
++                $clean[]=['title'=>$title,
++                    'primary_longtail_query'=>$primary!==''?$primary:$title,
++                    'target_keyword'=>PSTE_Snapshot::editorialSafeText($item['target_keyword']??null),
++                    'category_id'=>(int)($item['category_id']??$item['target_category_id']??0),
++                    'category_name'=>PSTE_Snapshot::editorialSafeText($item['category_name']??$item['target_category_name']??null),
++                    'category_slug'=>PSTE_Snapshot::editorialSafeText($item['category_slug']??$item['target_category_slug']??$item['category']??null),
++                    'article_type'=>PSTE_Snapshot::editorialSafeText($item['article_type']??null),
++                    'topic_family_name'=>PSTE_Snapshot::editorialSafeText($item['topic_family_name']??null),
++                    'topic_family_key'=>PSTE_Snapshot::editorialSafeText($item['topic_family_key']??null),
++                    'intent_cluster_id'=>PSTE_Snapshot::editorialSafeText($item['intent_cluster_id']??null),
++                    'headings'=>is_array($item['headings']??null)?array_values($item['headings']):[],
++                    'canonical_article_id'=>$canonical,'plan_slot'=>$planSlot,
++                    'plan_slot_sha256'=>$planSlot,
++                    'source_reference'=>$canonical!==''?$canonical:$planSlot,
++                    'status'=>PSTE_Snapshot::editorialSafeText($item['status']??null)?:'PLANNED'];
++            }
++            if(count($clean)!==count($items))throw new RuntimeException('PSTE_EDITORIAL_PLAN_ITEMS_INCOMPLETE');
+             update_option(PSTE_OPTION_EDITORIAL_PLAN_IMPORT,['contract'=>'PSTE_IMPORTED_EDITORIAL_PLAN_V1','imported_at_utc'=>gmdate('c'),'items'=>$clean],false);
+             self::redirect('sources','editorial_plan_imported=1');
+         }catch(Throwable $e){self::blocked('sources',$e);}
+--- a/Portal SEO Topic Engine/includes/class-pste-mini-workflow.php
++++ b/Portal SEO Topic Engine/includes/class-pste-mini-workflow.php
+@@ -73,39 +73,83 @@
+     }
+     private static function fail(Throwable $e): void {wp_die('Mini-Workflow: '.esc_html($e->getMessage()));}
+ 
++    /** Compact operator surface; existing expert actions remain, but never lead the normal path. */
+     public static function renderKeywords(): void {
+-        $state=self::loadState();$active=$state['active'];$last=(array)$state['last_report'];
+-        echo '<section class="pste-box"><h3>NEU · Rohkeywords extern prüfen (Testweg)</h3>';
+-        echo '<p>Alle bisher nicht in diesem Mini-Workflow abgeschlossenen Keywords – ohne inhaltliche Vorauswahl. Ein Stapel zurzeit. Erst Rückimport beendet ihn. Alte Titelwerkstatt bleibt unverändert.</p>';
+-        echo '<p><strong>Klärfälle:</strong> '.esc_html((string)count((array)($state['clarification']??[]))).'</p>';
+-        echo '<p><strong>Erledigte Keywords:</strong> '.esc_html((string)count($state['completed'])).' · <strong>Offener Stapel:</strong> '.esc_html((string)(is_array($active)?count((array)($active['items']??[])):0)).'</p>';
++        $state=self::loadState();$active=$state['active'];
++        $completed=(array)$state['completed'];$receipts=(array)($state['seo_decisions']??[]);
++        $counts=['FREI'=>0,'BELEGT'=>0,'KLAERUNG'=>0];
++        foreach($receipts as $receipt){
++            $box=is_array($receipt)?(string)($receipt['box']??''):'';
++            if(isset($counts[$box]))$counts[$box]++;
++        }
++        $unresolved=count((array)($state['clarification']??[]));
++        echo '<section class="pste-box"><h3>Externe SEO-Prüfung</h3>';
++        echo '<p>Bestehende Daten exportieren → extern EINMAL prüfen → Ergebnis importieren → Status.</p>';
++        echo '<p><strong>Gespeicherte Stichwörter:</strong> '.esc_html((string)count($completed)).
++            ' · <strong>Offener Stapel:</strong> '.esc_html((string)(is_array($active)?count((array)($active['items']??[])):0)).'</p>';
++        echo '<p><strong>FREI:</strong> '.esc_html((string)$counts['FREI']).
++            ' · <strong>BELEGT:</strong> '.esc_html((string)$counts['BELEGT']).
++            ' · <strong>KLÄRUNG:</strong> '.esc_html((string)max($unresolved,$counts['KLAERUNG'])).'</p>';
++        if($completed){
++            echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';
++            wp_nonce_field('pste_mini_results_export');
++            echo '<input type="hidden" name="action" value="pste_mini_results_export">'.
++                '<input type="hidden" name="include_parkhaus" value="1">'.
++                '<button class="button button-primary" type="submit">1. Redaktionsstand für externe SEO-Prüfung exportieren</button></form>';
++            echo '<form method="post" enctype="multipart/form-data" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:10px">';
++            wp_nonce_field('pste_mini_title_repair_import');
++            echo '<input type="hidden" name="action" value="pste_mini_title_repair_import">'.
++                '<label>2. Extern geprüfte SEO-Ergebnisdatei <input type="file" name="mini_corrected_titles_json" accept=".json,application/json" required></label> '.
++                '<button class="button" type="submit">Ergebnis importieren</button></form>';
++            if($counts['FREI']>0){
++                echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:10px">';
++                wp_nonce_field('pste_mini_forward_to_plan');
++                echo '<input type="hidden" name="action" value="pste_mini_forward_to_plan">'.
++                    '<button class="button" type="submit">3. Freigegebene Themen an bestehende Planung übergeben</button></form>';
++            }
++            echo '<p><small>Bei unvollständiger Bestandsdatei keine FREI-Entscheidung importieren. K0/Beiträge bleiben unberührt.</small></p>';
++        }elseif($active){
++            echo '<p><strong>Stichwortstapel noch offen.</strong> Zuerst die extern geprüften Relevanz-/Titelideen übernehmen.</p>';
++            echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';
++            wp_nonce_field('pste_mini_keyword_export');
++            echo '<input type="hidden" name="action" value="pste_mini_keyword_export">'.
++                '<button class="button" type="submit">Offenen Stichwortstapel erneut herunterladen</button></form>';
++            echo '<form method="post" enctype="multipart/form-data" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:10px">';
++            wp_nonce_field('pste_mini_keyword_import');
++            echo '<input type="hidden" name="action" value="pste_mini_keyword_import">'.
++                '<label>Extern geprüfte Stichwortdatei <input type="file" name="mini_result_json" accept=".json,application/json" required></label> '.
++                '<button class="button" type="submit">Stichwörter übernehmen</button></form>';
++        }else{
++            echo '<p>Für neue Themen zuerst einen Stichwortstapel exportieren. Bereits abgeschlossene Stichwörter werden nicht erneut eingelesen.</p>';
++            echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';
++            wp_nonce_field('pste_mini_keyword_export');
++            echo '<input type="hidden" name="action" value="pste_mini_keyword_export">'.
++                '<input type="hidden" name="mini_limit" value="100">'.
++                '<button class="button button-primary" type="submit">100 noch offene Stichwörter exportieren</button></form>';
++        }
++        echo '</section>';
++        echo '<details class="pste-box"><summary>Weitere Werkzeuge (nur für Sonderfälle)</summary>';
++        echo '<p>Diese Funktionen gehören nicht zum normalen externen SEO-Ablauf.</p>';
+         echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';wp_nonce_field('pste_mini_keyword_export');
+-        echo '<input type="hidden" name="action" value="pste_mini_keyword_export"><label>Keywords pro Stapel <select name="mini_limit">';
++        echo '<input type="hidden" name="action" value="pste_mini_keyword_export"><label>Stichwörter pro Stapel <select name="mini_limit">';
+         foreach(self::LIMITS as $limit)echo '<option value="'.(int)$limit.'"'.($limit===100?' selected':'').'>'.(int)$limit.'</option>';
+-        echo '</select></label> <button class="button button-primary" type="submit">'.($active?'Offenen Stapel erneut herunterladen':'Rohkeywords exportieren').'</button></form>';
++        echo '</select></label> <button class="button" type="submit">'.($active?'Offenen Stapel erneut herunterladen':'Weitere Stichwörter exportieren').'</button></form>';
+         if($active){
+             echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:9px">';wp_nonce_field('pste_mini_keyword_cancel');
+-            echo '<input type="hidden" name="action" value="pste_mini_keyword_cancel"><button class="button" type="submit" onclick="return confirm(\'Offenen Stapel verwerfen? Seine Keywords werden erneut exportierbar.\')">Stapel abbrechen (Keywords wieder offen)</button></form>';
+-        }
+-        echo '<form method="post" enctype="multipart/form-data" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:10px">';wp_nonce_field('pste_mini_keyword_import');
+-        echo '<input type="hidden" name="action" value="pste_mini_keyword_import"><label>Ergebnisdatei <input type="file" name="mini_result_json" accept=".json,application/json" required></label> <button class="button" type="submit">Ergebnisse übernehmen</button></form>';
+-        if($state['completed']){
+-            echo '<form method="post" enctype="multipart/form-data" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:9px">';wp_nonce_field('pste_mini_title_repair_import');
+-            echo '<input type="hidden" name="action" value="pste_mini_title_repair_import"><label>Korrigierte Titel oder externes SEO-Ergebnis <input type="file" name="mini_corrected_titles_json" accept=".json,application/json" required></label> <button class="button" type="submit">Titelkorrekturen übernehmen</button></form>';
+-            echo '<p><small>Nur Titel dürfen geändert werden. Relevanz, Keywords, Suchabsichten und Kennungen bleiben erhalten. Die Titelqualität wurde extern geprüft.</small></p>';
+-            echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:9px">';wp_nonce_field('pste_mini_forward_to_plan');
+-            echo '<input type="hidden" name="action" value="pste_mini_forward_to_plan"><button class="button button-primary" type="submit">'.(!empty($state['plan_queued'])?'Bereits übergebene Titel nach Plugin-Update erneut prüfen':'Geprüfte Titel an bestehende Themenplanung übergeben').'</button></form>';
+-            if(is_array($state['last_plan_report']??null))echo '<p><small>Letzte Übergabe: '.esc_html((string)($state['last_plan_report']['forwarded']??0)).' Titel neu übernommen, '.esc_html((string)($state['last_plan_report']['scheduled']??0)).' zur Prüfung eingeplant, '.esc_html((string)($state['last_plan_report']['blocked']??0)).' zurückgestellt, '.esc_html((string)($state['last_plan_report']['additional']??0)).' weitere Ideen im Zwischenspeicher.</small></p>';
++            echo '<input type="hidden" name="action" value="pste_mini_keyword_cancel"><button class="button" type="submit" onclick="return confirm(\'Offenen Stapel verwerfen? Seine Keywords werden erneut exportierbar.\')">Stapel abbrechen</button></form>';
++        }
++        if($completed){
+             echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:9px">';wp_nonce_field('pste_mini_results_export');
+-            echo '<input type="hidden" name="action" value="pste_mini_results_export"><button class="button" type="submit">Gespeicherte Entscheidungen und Titelideen exportieren</button></form>';
+-            echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:9px">';wp_nonce_field('pste_mini_results_export');
+-            echo '<input type="hidden" name="action" value="pste_mini_results_export"><input type="hidden" name="include_parkhaus" value="1">';
+-            echo '<button class="button" type="submit">Redaktionsstand für einmalige SEO-Prüfung exportieren</button></form>';
++            echo '<input type="hidden" name="action" value="pste_mini_results_export"><button class="button" type="submit">Nur gespeicherte Titelideen exportieren</button></form>';
+             echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:9px">';wp_nonce_field('pste_mini_batch_report');
+-            echo '<input type="hidden" name="action" value="pste_mini_batch_report"><button class="button" type="submit">Nur aktuellen Stapelbericht herunterladen (max. 100)</button></form>';
+-        }
+-        if($last)echo '<p><small>Letzter Import: '.esc_html((string)($last['keywords']??0)).' Keywords, '.esc_html((string)($last['titles']??0)).' Titelideen gespeichert. Keine Produktionsfreigabe.</small></p>';
+-        echo '</section>';
++            echo '<input type="hidden" name="action" value="pste_mini_batch_report"><button class="button" type="submit">Nur aktuellen Stapelbericht herunterladen</button></form>';
++            if(is_array($state['last_plan_report']??null)){
++                $report=$state['last_plan_report'];
++                echo '<p><small>Letzte Planübergabe: '.esc_html((string)($report['forwarded']??0)).
++                    ' übernommen, '.esc_html((string)($report['blocked']??0)).' zurückgestellt.</small></p>';
++            }
++        }
++        echo '</details>';
+     }
+ 
+     /** One MINI source of truth for an already imported JA. No copied relevance receipt. */
+@@ -706,6 +750,9 @@
+                 throw new RuntimeException('WP_INVENTORY_CHANGED_DURING_SCAN');
+             $result['sources']['WORDPRESS']=['complete'=>true,'item_count'=>count($items),
+                 'post_types'=>$types,'statuses'=>$states];
++            // Reuse this already-read inventory for the existing PPM679 slot linkage.
++            $wordpressById=[];
++            foreach($items as $wpRow)$wordpressById[(int)$wpRow['id']]=$wpRow;
+             $result['items']=$items;
+ 
+             $pool=PSTE_Repository::table('topic_pool');
+@@ -748,9 +795,12 @@
+             $result['sources']['EDITORIAL_PLAN']=['status'=>(string)($editorial['status']??'NOT_AVAILABLE'),
+                 'sha256'=>(string)($editorial['sha256']??'NOT_AVAILABLE'),
+                 'item_count'=>count((array)($editorial['items']??[]))];
+-            foreach((array)($editorial['items']??[]) as $row){if(!is_array($row))continue;
++            foreach((array)($editorial['items']??[]) as $row){
++                if(!is_array($row)||!is_string($row['title']??null)
++                    ||trim($row['title'])===''||trim($row['title'])==='Array')
++                    throw new RuntimeException('EDITORIAL_PLAN_UNRESOLVED_ARTICLE_TITLE');
+                 $result['items'][]=['source'=>'EDITORIAL_PLAN','status'=>(string)($row['status']??'PLANNED'),
+-                    'title'=>(string)($row['title']??''),'target_keyword'=>(string)($row['target_keyword']??''),
++                    'title'=>$row['title'],'target_keyword'=>(string)($row['target_keyword']??''),
+                     'plan_slot'=>(string)($row['plan_slot']??''),'article_type'=>(string)($row['article_type']??''),
+                     'category'=>(string)($row['category_name']??'')];}
+ 
+@@ -779,15 +829,37 @@
+                 if(!is_array($item))throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_ITEM_INVALID');
+                 $canonical=trim((string)($item['canonical_article_id']??$itemId));
+                 if($canonical==='')throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_SLOT_ID_MISSING');
++                $postId=(int)($item['post_id']??0);
++                $wpRow=$wordpressById[$postId]??null;
++                // Some stored draft references point to a post outside the public
++                // snapshot (e.g. trash/private custom type). Read that exact post
++                // only; never invent a title or repeat a full-site scan.
++                if($postId>0&&!is_array($wpRow)&&function_exists('get_post')){
++                    $post=get_post($postId);
++                    if(is_object($post)&&isset($post->ID))
++                        $wpRow=['id'=>(int)$post->ID,'title'=>(string)($post->post_title??''),
++                            'status'=>(string)($post->post_status??''),'target_keyword'=>'','categories'=>[]];
++                }
++                $runtimeTitle=is_string($item['title']??null)?trim($item['title']):'';
++                $title=$runtimeTitle!==''&&$runtimeTitle!=='Array'?$runtimeTitle:
++                    (is_array($wpRow)?trim((string)($wpRow['title']??'')):'');
++                if($title===''||$title==='Array')
++                    throw new RuntimeException('PPM679_RUNTIME_ARTICLE_TITLE_UNRESOLVED_POST_'.$postId);
++                $targetKeyword=is_string($item['target_keyword']??null)?trim($item['target_keyword']):'';
++                if($targetKeyword===''&&is_array($wpRow))$targetKeyword=(string)($wpRow['target_keyword']??'');
++                $category=trim((string)($item['category_slug']??''));
++                $wpCategories=is_array($wpRow)?(array)($wpRow['categories']??[]):[];
+                 $result['items'][]=['source'=>'PPM679_EXISTING_EDITORIAL_RUNTIME',
+                     'canonical_article_id'=>$canonical,
+                     'plan_slot'=>(string)($item['plan_slot_sha256']??$item['plan_slot']??''),
+-                    'post_id'=>(int)($item['post_id']??0),
++                    'post_id'=>$postId,
++                    'post_status'=>is_array($wpRow)?(string)($wpRow['status']??''):'',
+                     'status'=>(string)($item['status']??'PLANNED'),
+-                    'category'=>(string)($item['category_slug']??''),
++                    'category'=>$category,
++                    'categories'=>$wpCategories,
+                     'article_type'=>(string)($item['article_type']??''),
+-                    'target_keyword'=>(string)($item['target_keyword']??''),
+-                    'title'=>is_string($item['title']??null)?$item['title']:''];
++                    'target_keyword'=>$targetKeyword,
++                    'title'=>$title];
+             }
+             $runtimeAfter=get_option('ppm679_editorial_plan_runtime_state_v1',null);
+             $beforeRuntime=wp_json_encode($runtimeOriginal,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+--- a/Portal SEO Topic Engine/includes/class-pste-snapshot.php
++++ b/Portal SEO Topic Engine/includes/class-pste-snapshot.php
+@@ -245,7 +245,12 @@
+         if(!is_array($external))return ['contract'=>'PSTE_EDITORIAL_PLAN_SNAPSHOT_V1','status'=>'NOT_AVAILABLE','sha256'=>'NOT_AVAILABLE','items'=>[]];
+         $items=self::extractEditorialPlanItems($external);
+         if(!$items)return ['contract'=>'PSTE_EDITORIAL_PLAN_SNAPSHOT_V1','status'=>'NOT_AVAILABLE','sha256'=>'NOT_AVAILABLE','items'=>[]];
+-        return self::bind('PSTE_EDITORIAL_PLAN_SNAPSHOT_V1',self::normalizeEditorialPlanItems($items));
++        $normalized=self::normalizeEditorialPlanItems($items);
++        // Existing imported rows must never silently disappear or become 'Array'.
++        if(count($normalized)!==count($items))throw new RuntimeException('PSTE_EDITORIAL_PLAN_ITEM_UNRESOLVED');
++        $snapshot=self::bind('PSTE_EDITORIAL_PLAN_SNAPSHOT_V1',$normalized);
++        $snapshot['status']='AVAILABLE';
++        return $snapshot;
+     }
+ 
+     private static function extractEditorialPlanItems(array $external): array {
+@@ -260,17 +265,48 @@
+         return self::normalizeEditorialPlanItemsAgainstStructure($items,self::structure());
+     }
+ 
++    /** Unwrap supported named title formats; ambiguous arrays remain untrusted. */
++    public static function editorialSafeText($value,int $depth=0): string {
++        if(is_string($value))return trim($value);
++        if(!is_array($value)||$depth>=4)return '';
++        foreach(['production_title','rendered','value','text','title','article_title','primary_longtail_query','slug','name'] as $field){
++            if(!array_key_exists($field,$value))continue;
++            $child=$value[$field];
++            if(is_string($child)&&trim($child)!=='')return trim($child);
++            if(is_array($child)){
++                $nested=self::editorialSafeText($child,$depth+1);
++                if($nested!=='')return $nested;
++            }
++        }
++        return '';
++    }
++
+     private static function normalizeEditorialPlanItemsAgainstStructure(array $items,array $structure): array {
+         $byId=[];$bySlug=[];$byName=[];
+         foreach((array)($structure['items']??[]) as $row){if(!is_array($row))continue;$id=(int)($row['term_id']??0);$slug=trim((string)($row['slug']??''));$name=trim((string)($row['name']??''));if($id>0)$byId[$id]=$row;if($slug!=='')$bySlug[$slug]=$row;if($name!=='')$byName[$name]=$row;}
+         $out=[];
+-        foreach($items as $item){
+-            if(!is_array($item))continue;$title=trim((string)($item['title']??$item['primary_longtail_query']??$item['article_title']??''));if($title==='')continue;
+-            $categoryId=(int)($item['category_id']??$item['target_category_id']??0);$categorySlug=trim((string)($item['category_slug']??$item['target_category_slug']??$item['category']??''));$categoryName=trim((string)($item['category_name']??$item['target_category_name']??''));
++        foreach($items as $sourceIndex=>$item){
++            if(!is_array($item))throw new RuntimeException('PSTE_EDITORIAL_PLAN_ROW_INVALID');
++            // Imported title objects can be nested. Never cast an array to the literal 'Array'.
++            $title='';
++            foreach(['title','production_title','article_title','primary_longtail_query'] as $field){
++                $title=self::editorialSafeText($item[$field]??null);
++                if($title!==''&&$title!=='Array')break;
++            }
++            if($title===''||$title==='Array')
++                throw new RuntimeException('PSTE_EDITORIAL_PLAN_TITLE_UNRESOLVED_'.(int)$sourceIndex);
++            $idValue=$item['category_id']??$item['target_category_id']??0;
++            $categoryId=is_numeric($idValue)?(int)$idValue:0;
++            $categorySlug=self::editorialSafeText($item['category_slug']??$item['target_category_slug']??$item['category']??null);
++            $categoryName=self::editorialSafeText($item['category_name']??$item['target_category_name']??null);
+             $matched=$categoryId>0&&isset($byId[$categoryId])?$byId[$categoryId]:($categorySlug!==''&&isset($bySlug[$categorySlug])?$bySlug[$categorySlug]:($categoryName!==''&&isset($byName[$categoryName])?$byName[$categoryName]:[]));
+             if($matched){$categoryId=(int)($matched['term_id']??$categoryId);$categorySlug=(string)($matched['slug']??$categorySlug);$categoryName=(string)($matched['name']??$categoryName);}elseif($categoryName===''&&$categorySlug!==''){$categoryName=$categorySlug;}
+-            $articleType=trim((string)($item['article_type']??($matched['article_type']??'')));$familyName=trim((string)($item['topic_family_name']??($matched['topic_family_name']??'')));$familyKey=trim((string)($item['topic_family_key']??($matched['topic_family_key']??'')));$planSlot=trim((string)($item['plan_slot']??$item['plan_slot_sha256']??''));$canonicalId=trim((string)($item['canonical_article_id']??''));
+-            $out[]=['title'=>$title,'primary_longtail_query'=>(string)($item['primary_longtail_query']??$title),'target_keyword'=>(string)($item['target_keyword']??''),'category_id'=>$categoryId,'category_name'=>$categoryName,'category_slug'=>$categorySlug,'article_type'=>$articleType,'topic_family_name'=>$familyName,'topic_family_key'=>$familyKey,'intent_cluster_id'=>(string)($item['intent_cluster_id']??''),'headings'=>is_array($item['headings']??null)?array_values($item['headings']):[],'canonical_article_id'=>$canonicalId,'plan_slot'=>$planSlot,'plan_slot_sha256'=>$planSlot,'source_reference'=>$canonicalId!==''?$canonicalId:$planSlot,'status'=>(string)($item['status']??'PLANNED')];
++            $articleType=self::editorialSafeText($item['article_type']??($matched['article_type']??null));
++            $familyName=self::editorialSafeText($item['topic_family_name']??($matched['topic_family_name']??null));
++            $familyKey=self::editorialSafeText($item['topic_family_key']??($matched['topic_family_key']??null));
++            $planSlot=self::editorialSafeText($item['plan_slot']??$item['plan_slot_sha256']??null);
++            $canonicalId=self::editorialSafeText($item['canonical_article_id']??null);
++            $out[]=['title'=>$title,'primary_longtail_query'=>self::editorialSafeText($item['primary_longtail_query']??null)?:$title,'target_keyword'=>self::editorialSafeText($item['target_keyword']??null),'category_id'=>$categoryId,'category_name'=>$categoryName,'category_slug'=>$categorySlug,'article_type'=>$articleType,'topic_family_name'=>$familyName,'topic_family_key'=>$familyKey,'intent_cluster_id'=>self::editorialSafeText($item['intent_cluster_id']??null),'headings'=>is_array($item['headings']??null)?array_values($item['headings']):[],'canonical_article_id'=>$canonicalId,'plan_slot'=>$planSlot,'plan_slot_sha256'=>$planSlot,'source_reference'=>$canonicalId!==''?$canonicalId:$planSlot,'status'=>self::editorialSafeText($item['status']??null)?:'PLANNED'];
+         }
+         return $out;
+     }
+--- a/Portal SEO Topic Engine/portal-seo-topic-engine.php
++++ b/Portal SEO Topic Engine/portal-seo-topic-engine.php
+@@ -2,13 +2,13 @@
+ /**
+  * Plugin Name: Portal SEO Themenengine
+  * Description: Einfacher Longtail-Workflow: recherchiert Suchphrasen, übernimmt Sprachtitel und ordnet ausschließlich vorhandene Portalkategorien zu und prüft gegen den eigenen Bestand. Verändert keine Beiträge, Inhalte, Gestaltung oder Textproduktionsregeln.
+- * Version: 0.57.144.22
++ * Version: 0.57.144.23
+  * Requires PHP: 8.0
+  * Author: Workflow Automation
+  */
+ if (!defined('ABSPATH')) { return; }
+ 
+-define('PSTE_VERSION', '0.57.144.22');
++define('PSTE_VERSION', '0.57.144.23');
+ define('PSTE_DIR', __DIR__ . '/');
+ define('PSTE_OPTION_SETTINGS', 'pste_settings_v1');
+ define('PSTE_OPTION_SCHEMA', 'pste_schema_version');

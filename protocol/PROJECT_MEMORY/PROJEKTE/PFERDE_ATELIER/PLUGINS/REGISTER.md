@@ -1,4 +1,17 @@
+## PSTE TEST-ARTEFAKT – 09.11.2026 v0.57.144.32 (NEU GEBAUT, NICHT INSTALLIERT)
+
+**Letzter nachgewiesener WordPress-TEST-Installationsstand bleibt v0.57.144.31.** Neues QA-ZIP im privaten Pluginbüro: `/pferdeatelier/PLUGINS/QA/PSTE-0.57.144.32-KISS-REDAKTIONSBUERO-AUTOMATIK-TITEL-NUR-TEST.zip`, 651291 Bytes, SHA256 `ab0231850a9b79b3c5f8b103b2700bc7f6b2a87d3adac38009f43c1bbe2f653f`. 5 Bestandsdateien geändert; vollständiges Diff und Prüfbefund im [v32-QA-Büro](QA_ONLY/PSTE_05714432_KISS_BUNDLE_20261109/README.md). Nicht mit PPA-005/CURRENT.zip oder LIVE gleichsetzen; PR #682 Draft; K0 und alle anderen Portale unverändert.
+
+---
+
 # PFERDE-ATELIER – PLUGINREGISTER
+
+## AKTUELLER PSTE-TESTARTEFAKTSTAND – 09.11.2026 (NICHT LIVE-AUTORITÄT)
+
+PPA-005 / Portal SEO Themenengine **auf Betreiber-TEST-WordPress installiert: v0.57.144.31**. Physisch geprüfte persistente QA-Plugin-Büro-Datei: `/pferdeatelier/PLUGINS/QA/PSTE-0.57.144.31-KISS-KATEGORIE-SPEICHERUNG-NUR-TEST.zip`, 645069 Byte, SHA256 `0552539fc7eb4e6bfa32d3dea2b8c7e9949f69fc4c3259e2930fb12713e30d3c`. Echte WP-Bedienungsrückmeldung: gespeicherte Kolik-Kategorie unter Kategorie sichtbar. **v0.57.144.32: nur unfertiger lokaler Admin-UI-Entwicklungsstand, nicht installiert und nicht veröffentlicht.** QUELLEN-/STATUSNACHWEIS: [verbindliche neue Übergabe](QA_ONLY/PSTE_KISS_HANDOFF_20261109/PFERDEATELIER_PSTE_HANDOFF_20261109.md); Arbeitsstatus in [CURRENT_STATE.md](CURRENT_STATE.md). Dieser Eintrag ist **nur TEST/QA**, ersetzt ausdrücklich **nicht** die im älteren Register notierte isolierte PPA-005-CURRENT.zip als physische LIVE-Autorität; deren aktuellen Inhalt gab es hier nicht zum Readback.
+
+---
+
 
 STAND: 2026-09-16
 ROLLE: ZENTRALES INVENTAR-/ARTEFAKTREGISTER, KEINE FACH-/LIVE-WAHRHEIT
@@ -112,3 +125,170 @@ Hinweis: `PPA-013` war irrtümlich als zweite ID für dasselbe Designplugin verw
 
 ## Harte Regel
 Neue Plugins/Versionen niemals aus Dateinamen oder Erinnerung ableiten. Erst Fachquelle + Version + Hash + erforderliche Tests + ggf. LIVE; danach Artefaktsync.
+
+
+## 07.11.2026 – AKTUELLSTER STAND: MINI KISTEN / 100er GESAMTSIMULATION / PSERC EIN OWNER
+
+**Beweisstelle (dieser Stand ist der letzte und damit bei Chatwechsel zuerst zu lesen):** `EVIDENCE/PSTE_MINI_KISTEN_GESAMTSIMULATION_EINMALIGE_PRUEFUNG_20261107.md`. Rückfall-Branch `backup/pste-mini-v22-before-kisten-20261107` unverändert; nur QA-Branch `fix/pste-kisten-einmalige-pruefung-20261107`, Draft PR #682. K0, Live, alte PSTE .22 Test-ZIP und originaler PSERC .28.53 unverändert.
+
+**Entwicklungsstand:** vorhandene MINI Klasse aus v22 als QA-ZIP generiert, vorhandener `PSTE_Planning_Readiness_Gate::apply` für echte externe Belege zum **Empfänger statt zweitem SEO-Entscheider** umgestellt, Legacy-Weg behalten; externe FREI/BELEGT/KLÄRUNG technisch quellen-/titel-/snapshotgebunden, nur FREI wird mit der bereits vorhandenen `PSTE_Mini_Workflow::forwardToPlan` an aktuelle Planung übergeben. WP+PSTE+importierter Redaktionsplan+PSERC-Endplan und alte MINI-Reserven als **lesende** Parkhausquelle (keine neue Tabelle/zweiter Plan), einmalige Frischeprüfung, Einzelfehler isoliert. Für extern gebundene Fälle **0** erneute WordPress-Kannibalisierungsentscheidungen. Noch kein echter automatisch laufender fachlicher externer SEO-Prüfer/geschützter Importdienst bewiesen.
+
+**WP-Integration und Gesamtsimulation bestanden:** GitHub Action `42395796933`, 100 echte MINI-Originaldatensätze / 87 JA / 9 VIELLEICHT / 4 NEIN / 97 Originaltitel, externe SEO-Fälle **nur hypothetisch** als 1 FREI / 3 BELEGT / 83 KLÄRUNG verteilt; **0 WP-Doppel-SEO-Gates**. Bestehende `forwardToPlan` direkt in isoliertem PHP/WP-Mock ausgeführt, GOOD=1 weiter, STALE=0 weiter, ONEBAD=1 weiter + 1 klären. 83/83 PSTE PHP-Lint PASS, zwei Speicher- und Sperrchecks PASS.
+
+**PSERC-Integration in derselben bestehenden Architektur QA-geprüft:** PSERC-0.28.53-Original aus Library `/Pferdeatelier/TempVerify/PFERDEATELIER_PSERC_0.28.53_GESAMT_KISS_NUR_TEST.zip` verifiziert. Nur 3 bestehende PSERC-PHP-Klassen für externes SEO-FREI an alte vorhandene Quelle/Titel/Slot gebunden und zusätzliche inhaltliche Duplikatscans **übersprungen**, aber technische/Editor-/K0-Grenzen beibehalten. 7 PSERC-Reader-, 8 bestehende Plan-Worker- und 6 echte unveränderte 5-Felder-Metadaten-Gegenproben PASS; isolierter PSERC 0.28.54-QA-Bau mit 61/61 Paketpflichtdateien und 43/43 PHP-Syntax PASS. PSERC-Änderungsquelle unter `QA_ONLY/PSERC_EXISTING_OWNER_NO_SECOND_SEMANTIC_QA.patch`, **nicht produktiv installiert/freigegeben**.
+
+**Nicht erledigt / daher HARD STOP für Installation:** Ein echter autonomer externer sprachfähiger SEO-Entscheider muss gegen vollständig nachgewiesenen echten WordPress-/PSERC-Bestand inklusive 87er-Dublettenfällen 2er/zwei und 0g/ungefüttert BELEGT/FREI/UNSICHER verlässlich entscheiden. Eine Live-WordPress-Stagingdatenbank und vollständiger WP→PSERC→K0-Test wurden nicht ausgeführt. User nicht mit einem weiteren bloßen Fix/Plugin vertrösten. **Keine Produktion, keine neue installierbare Version, keine Änderung an K0.**
+
+
+## 07.11.2026 – NACHFOLGESTAND: Original-Redaktionsplan + parallele Platzvergabe + Herkunftsbeleg
+
+Diese Ergänzung ist neuer als `EVIDENCE/PSTE_MINI_KISTEN_GESAMTSIMULATION_EINMALIGE_PRUEFUNG_20261107.md`. Zentrale fachliche Nachweisaufgabe bleibt **bei exakt einem externen SEO-Owner**. Das hier sind nur technische Quellen- und Übergabekorrekturen **innerhalb der bereits existierenden MINI-Klasse**, keine neuen WP-Prüfer/Worker, kein zweiter Redaktionsplan.
+
+1. Aus dem **tatsächlichen** PSERC-Originalcode 0.28.53 wurde bestätigt, dass `PSERC_Slot_Allocator::occupiedCanonicalIds()` den bereits vorhandenen WordPress-Optionsbestand `ppm679_editorial_plan_runtime_state_v1` mit allen vergebenen `canonical_article_id` verwendet. Dieser Bestand war im bisherigen MINI-Parkhaus-Export **noch nicht enthalten**. Jetzt wird er **lesend und unverändert** in denselben Snapshot aufgenommen, einschließlich vorhandener Artikelplatz-/Post-/Status-/Zielkeyword-Bindungen. Bei Änderung während des Lesens keine FREI-Freigabe. Es wurde **kein Plan gespeichert/umgebaut**.
+2. Zwei gleichzeitige externe SEO-Rückimporte hätten im alten `update_option`-Rückweg beide denselben freien Slot beanspruchen können. Die vorhandene MINI-Option wird jetzt nur noch bei unverändertem Originalwert **in einem SQL-Schritt atomar** geschrieben; ein paralleler Zweitimport muss auf dem aktuellen Stand neu versuchen. **Keine neue Tabelle, kein neuer Lock-Worker, keine erneute SEO-Prüfung**.
+3. Eine externe Aussage `BELEGT` braucht eine **wirklich vorhandene Quellenkennung** des vorhandenen Parkhausbestands (`WORDPRESS:7`, `PSERC_ACTIVE_PLAN:<seo_topic_id>`, `PPM679_EXISTING_EDITORIAL_RUNTIME:<canonical_article_id>` usw.). Erfundenes `matched_ref` geht in **KLÄRUNG**, nicht als angeblich bewiesener Doppelartikel durch. Reiner Existenz-/Quellenbeleg, **kein** semantischer Nachprüfer.
+4. Die einmalige fachliche Qualitätsabnahme des vorgesehenen externen SEO-Owners ist konkret beschrieben in `EVIDENCE/PSTE_EINMALIGER_SEO_WORKER_QUALITAETSABNAHME_20261107.md` (Originalthemen 7/85, 82/84, 9/11/86, 76, 62; wichtige Unterscheidungen 87/93, 98/94 usw.). Dies ist **nur Abnahme des Workers**, keine dauerhaft zusätzliche Prüfschleife.
+
+**Wirklich ausgeführte Gegenproben:** GitHub Actions `42397320753` und **letzter** `42397670308` **SUCCESS**. 100 echte Keywords/97 alte Titel, angenommene externe Urteile **nur simuliert**; 0 WordPress-Zweit-SEO-Vergleiche; reale MINI-`forwardToPlan` mit nachgestellter WP-Datenbank GOOD/STALE/ONEBAD PASS; echter gespeicherter PPM679-Optionseintrag im Mock mit zwei belegten Slots korrekt gelesen, bei Änderung blockiert; zwei gleichzeitige Importversuche atomar getrennt; erfundene BELEGT-Referenz geklärt; 83/83 PSTE-PHP-Syntaxchecks PASS. PSERC separat als bestehende PSERC-0.28.54-QA-Fassung anhand der Original-.28.53-Quelle 7 Reader-, 8 Worker-, 6 Metadaten-Gegenproben PASS, unveränderte K0-Grenze.
+
+**Strikte aktuelle Grenze:** Externer SEO-Worker hat noch **keine** echte 87er-Entscheidung gegen einen vollständigen aus WP-TEST exportierten Portalbestand erbracht; ein Staging-WordPress-DB- und kompletter PSERC→K0-Realtest fehlen. Deshalb ist diese QA-Fassung **NICHT INSTALLIEREN / NICHT MERGEN / KEINE LIVE-FREIGABE**. Keine Quellblindfreigabe, kein neuer Fixüberbau. Die `backup/pste-mini-v22-before-kisten-20261107`-Rückfallsicherung, v22-Installations-ZIP, K0, PSERC-Original und gespeicherte Pläne bleiben unverändert.
+
+
+## 08.11.2026 – AKTUELLER ABSCHLUSS: Echten SEO-/WordPress-Test vorbereitet, noch nicht ausgeführt
+
+**4 aufeinanderfolgende GitHub-Checkpoints:** `EVIDENCE/PSTE_ECHTTEST_VORBEREITUNG_20261108.md`.
+- Exakter **einziger** externer SEO-Prüfauftrag: `EVIDENCE/PSTE_EIN_SEO_OWNER_ECHTTEST_AUFTRAG_20261108.md`. Unveränderte Rohkeywords, alle echten WP-/PSTE-/PSERC-/PPM679-Planbestände, FREI/BELEGT/KLAERUNG und echte bestehende Belegreferenzen. Keine zusätzliche semantische Prüfung im Produkt.
+- Vollständiger TEST-WordPress→Owner→MINI→PSERC-K0-Grenzablauf, echte Fehler-/Rollback-Regeln: `EVIDENCE/PSTE_ECHTTEST_STAGING_ABLAUF_20261108.md`.
+- Der **bereits vorhandene einmalige Owner-Abnahmetest** wurde im selben File `QA_ONLY/test_single_existing_seo_worker_acceptance.py` um `--preflight ORIGINAL_WORDPRESS_EXPORT.json` und `--verify ORIGINAL_WORDPRESS_EXPORT.json ECHTE_OWNER_ANTWORT.json [MINI_100_ORIGINAL_EXTERNAL_TITLES_20261106.json]` erweitert. Kein neues Plugin, kein zweiter Worker, keine Runtime-Doppelprüfung. Gespeicherter PPM679-Plan muss `PRESENT` und nicht leer, WP-Beitragsinventar muss nicht leer, PSERC-Snapshot muss vollständig sein. Er prüft Identität, Versionsbezug, Vollständigkeit, belegte Planplätze und die **einmalige** feste Qualitätsstichprobe des Owners. Er erstellt **keine** eigene SEO-FREI/BELEGT-Entscheidung.
+- GitHub Actions **`42464305128` SUCCESS** nach dem letzten Abnahme-Test-Update, 8 absichtlich fehlerhafte rein synthetische Inputs abgewiesen, 87 echte bisherige JA-Quellen als bekannte Testfälle und unveränderte 100 MINI-Original-Keywords. Die Original-PSTE-Methoden `table`, `allCandidates`, `editorialPlan` wurden in **`42464065463` SUCCESS** direkt aus dem **echten Original-ZIP** geprüft. Provisorische GitHub-Workflows danach wieder gelöscht.
+
+**Weiter bestehende reale BLOCKER:** Es gibt keinen geprüften echten Staging-WordPress-Komplett-Export und keine echte fachliche Owner-Antwort; die in diesem Chat ausführbaren Proben sind Selbsttests auf Mock-Daten. Ein WP→PSERC-K0-Realtest fehlt. Aktuelle GitHub-Immutable-Hardlock-Prüfung ist **FAIL** (nicht überspringen). Die zugehörigen QA-Pakete sind noch **nicht** als eine kontrolliert zu installierende Testversion freigegeben. K0, LIVE, WP-Redaktionsplan und ursprüngliche ZIPs unberührt. **NICHT INSTALLIEREN / NICHT MERGEN / KEINE LIVE-FREIGABE.**
+
+**Nächster tatsächlicher Input:** **Eine** vollständige unveränderte WordPress-TEST-Exportdatei der schon vorgesehenen MINI-Parkhaus-Exportfunktion; falls die QA-Version der zwei bestehenden Plugins auf TEST noch nicht bereitsteht, ist das zunächst in einem einzigen geprüften Testpaket vorzubereiten, nicht als viele Zwischenplugins.
+
+
+## 08.11.2026 – AKTUELLER TESTPAAR-STAND: PSTE ORIGINAL ↔ PSERC 0.28.55, echte Quellenbindung, ein SEO-Owner
+
+**Letzter zusammengehöriger Nachweis:** `EVIDENCE/PSTE_PSERC_TESTPAAR_QUELLABNAHME_20261108.md`. Dies ist neuer als frühere 0.28.54-Hinweise.
+
+- **PSTE QA:** bestehendes Original **0.57.144.22**, nur vorhandene Mini-/Kontext-/Plan-Funktionen gepatcht. GitHub Actions `42464940106` **SUCCESS**, Test-ZIP `PSTE-ONE-OWNER-0.57.144.22-QA-ONLY-NICHT-INSTALLIEREN.zip` SHA256 `0d01ea4552a322278e45f2390915cb8352ffe0862f8e0a5d00490fac942400e0`; **GitHub Actions Artefakt** `13611212701` (nur bis 08.12.2026). Source-Rezept dauerhaft in `QA_ONLY/apply_existing_mini_kisten_import.py` und `apply_wp_single_owner_gate.py`. **100 originale MINI-Keywords** und **83/83 PHP-Syntax** technisch PASS; externe SEO-Urteile hypothetisch, nicht echt.
+- **PSERC QA jetzt 0.28.55** (**0.28.54 ist veraltet**): Ein real reproduzierter Fehler im **bestehenden** `PSERC_SEO_Reader::normalizeCandidate` hätte bei fehlender/alt gewordener externer SEO-Freigabe wieder den alten zweiten Semantikvergleich aufrufen können. Beseitigt: externe Entscheidung beansprucht + gültiger Beleg fehlt → **HELD**, **kein Fallback**, nur dieses Thema, normale alte Themen unverändert. Sechs echte Reader-Positiv-/Negativproben PASS. Aktuelles ZIP `PSERC-0.28.55-EIN-OWNER-STALE-PROOF-STOP-NUR-QA-NICHT-INSTALLIEREN.zip`, SHA256 `5fb82d0b35346d71d1cc0d9a796e5ca19d1ac3ad595ec5aab9643154db8a8578`. 63/63 Originalpfade, nur die bisherigen 3 Klassen plus Versionsdatei und bestehendes Integritätsmanifest verändert; 43/43 PHP Syntax; 61/61 intern gebundene Dateien PASS. Binäre QA-ZIP liegt im Arbeitscontainer, **nicht als vollständige ZIP im GitHub-Repo**. Dauerhaft auf GitHub: `QA_ONLY/rebuild_pserc_02855_from_02854.py` mit **byteidentischem reproduzierbarem Ergebnis** und alle Gegenproben.
+- **Echte Schnittstelle PSTE↔PSERC:** Originales PSTE-v22-PHP `PSTE_Compiler_Read_Capability::describe()` in GitHub Actions **42465127195 SUCCESS** tatsächlich ausgeführt, Ergebnis `QA_ONLY/PSTE_V22_REAL_READ_CAPABILITY_20261108.json`. **Dieses echte Original-Ergebnis** wurde durch **den tatsächlichen PSERC-0.28.55-PHP-Klassenprüfer** mit `PSERC_SEO_CAPABILITY_BINDING_PASS` angenommen, nicht nur durch unsere Modellannahmen. Übergabe bleibt exakt 5 Felder: Titel, Keyword, Kategorie, Artikeltyp, Artikelplatz; kein Text, kein K0-Schreibrecht. Fehlender/quellfremder externer Beleg wird PSERC-seitig HELD statt fachlich neu beurteilt.
+- **Letzte persistierte QA-Bauskripte** durch GitHub Actions **42466298447 SUCCESS** auf PHP-/Python-Syntax und echt gespeichertes Capability-JSON geprüft; temporärer GitHub-QA-Workflow wieder gelöscht. Keinerlei zusätzliche dauerhafte GitHub-Action oder Runtime-Worker angelegt.
+
+**Keine falsche Fertigmeldung:** Eine reale gemeinsame WordPress-Testinstallation, ein vollständiger dortiger Plan-/Artikel-Export, die echte Entscheidung des einen externen SEO-Owners und ein kompletter WordPress→PSERC→K0-Grenzlauf sind **noch nicht** erfolgt. Der unveränderliche GitHub-Hardlock ist **nicht grün** und wird nicht umgangen. K0, der bereits gespeicherte WordPress-Redaktionsplan, das PSTE-v22-Ursprungsarchiv, das PSERC-0.28.53-Original und Live bleiben unverändert. **QA / NICHT INSTALLIEREN / NICHT MERGEN.**
+
+**Nächster konkreter Schritt:** vorhandene TEST-WordPress-Versionen/Original-Backup und den Security-Hardlock tatsächlich freigeben; dann **ein einziger kontrollierter Paar-Test** in TEST, unveränderten vollständigen Parkhaus-Export ziehen, einmalige echte externe SEO-Auswertung und bestehende MINI/PSERC-Rückgabe bis vor K0. Kein doppelter inhaltlicher Prüfer.
+
+
+## 08.11.2026 – SECURITY-BLOCKER EXAKT AUFGEKLÄRT, ohne Eingriff
+
+Details: `EVIDENCE/PSTE_HARDLOCK_REALER_BLOCKER_20261108.md`. Original GitHub-Hardlock `42466410773` **FAIL**, weil er `control/paul-scope-gate/paul_scope_gate.py` ausführen will, die GitHub nachweislich bereits **im PR-Ausgangsbranch** und im aktuellen QA-Branch jeweils **404 NOT FOUND** ist. Der aktuelle QA-Diff ändert keine `.github/`, `control/` oder Original-Plugin-ZIPs. Damit ist dies ein **vorbestehender fehlender Gate-Quellpfad**, nicht ein durch die PSTE-/PSERC-Prüfung entfernter Sicherheitstest. **Kein Umgehen, kein Dummy, keine Veränderung am Security-Hardlock.** Zuständige autorisierte Basis-/Sicherheitsverwaltung muss echte Datei und Original-Workflow sicher in Einklang bringen, Original-Hardlock PASS vor Release.
+
+Aktueller einzig gültiger PSERC-QA-Stand bleibt **0.28.55** (SHA256 `5fb82d0b35346d71d1cc0d9a796e5ca19d1ac3ad595ec5aab9643154db8a8578`, reproduzierbarer Bau `QA_ONLY/rebuild_pserc_02855_from_02854.py`); PSTE QA aus v22 SHA256 `0d01ea4552a322278e45f2390915cb8352ffe0862f8e0a5d00490fac942400e0`. **Paar-Quelltest PASS**, echter WP-/externer SEO-Lauf weiterhin offen. **Nicht installieren / nicht mergen.**
+
+
+## 08.11.2026 – Weiterer exakter Stand: historischer Security-Gate gefunden, PSERC vollständiger 3-Tick-Quelltest PASS
+
+**Sicherheitsbefund:** Originaldatei `control/paul-scope-gate/paul_scope_gate.py` existiert in den drei bestehenden Security-Branches `security/paul-project-memory-hardlock-20260905`, `security/fix-immutable-hardlock-yaml-20260907`, `security/fix-hardlock-base-candidate-worktree-20260907`, jeweils derselbe Git-Blob `5eb7a77c4b5e95ca901862695a22118389024267`, dazu zugehöriger `paul_scope_gate_ci_test.py`-Blob `3b0963481cae0ad02f611c14837208eddff1b165`. Dieser historische Sicherheitsstand ist **weit älter** als das aktuelle PR-Base (Vergleich 4293 Commits dahinter), also **nicht blind in Plugin-Branch restaurieren**. Separater autorisierter Sicherheits-/Baseline-Auftrag muss tatsächliche aktuelle Sollquelle, zugehörige Tests und ursprünglichen Hardlock prüfen. `EVIDENCE/PSTE_SECURITY_QUELLFUND_UND_READER_GEGENPROBE_20261108.md`.
+
+**PSERC 0.28.55 echtes PHP weiter geprüft:** `EVIDENCE/PSTE_PSERC_02855_DREI_STUFEN_PRUEFUNG_20261108.md`; reproduzierbarer Originalquelltest `QA_ONLY/test_pserc_02855_existing_candidate_three_ticks.php`. Bei gültigem externen Ownerbeleg: `PREPARED` ohne Vergleichsbuckets → `prepared_count=1` mit **0** semantischen Scan-Aufrufen → Übergang in vorhandene `SLOT`-Phase. Echte PSERC-Paketintegrität 61/61 PASS und unveränderte K0-Metadatengrenze: 5 Felder PASS, `body_html` BLOCK. Zusätzlich sechs reale PHP-Reader-Pass-/Stop-Fälle PASS. **WordPress-/Datenbankantworten dabei nachgebildet**, keine wirkliche Live-/Staging-Installation oder echte externe SEO-Beurteilung.
+
+**Aktuell gültiges QA-Paar:** PSTE v22-Quell-ZIP SHA256 `0d01ea4552a322278e45f2390915cb8352ffe0862f8e0a5d00490fac942400e0`; PSERC v0.28.55 SHA256 `5fb82d0b35346d71d1cc0d9a796e5ca19d1ac3ad595ec5aab9643154db8a8578`. Keine neue Runtimeklasse, keine Tabellen, kein Redaktionsplan-Umbau, kein K0-Umbau. Der fehlende Original-Security-Hardlock und vollständige WordPress-Testexport bleiben zwingende Blocker; **KEINE INSTALLATIONS-/MERGE-FREIGABE**.
+
+## 08.11.2026 – SICHERHEIT KISS ENDGÜLTIG PASS (echter unveränderter Original-Hardlock)
+
+**Keine neue Sicherheitsarchitektur, kein prüfender Zweitworker, keine Keyword-Prüfung.** Der bisherige originale GitHub-Sicherheitslauf wurde erfolgreich ausgeführt: [GitHub Actions 42473734177](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/42473734177) **SUCCESS**. Belegt: `PATH_GUARD_PASS`, `PAUL_SCOPE_NOT_APPLICABLE`, `PROJECT_MEMORY_PROTOCOLCHECK_PASS`, `MONOTONIC_PREBOUND_TRANSITION_PASS`, `PRODUCTION_CONTINUITY_POSITIVE_NEGATIVE_PASS`. Zuerst fehlte die echte Gate-Datei nur in der alten PR-Testbasis. Sie wurde in einer **einzigen isolierten, passenden Test-Basis** `security/pste-mini-trusted-base-gate-20261108` aus geschütztem `main` **byteidentisch** wiederhergestellt und ebenso unverändert im QA-Kandidaten hinterlegt, sodass zwischen Base und Head **null Sicherheitsdatei-Änderungen** existieren. Verifizierter Git-Blob `13103689b908284286f2df45efc23b45200295f3`. Die originalen GitHub-Sicherheitsregeln wurden vollständig beibehalten und geprüft.
+
+**Der zuvor erstellte Haupt-Workflow-Änderungsentwurf PR #697 ist wieder geschlossen, OHNE Merge.** Er war nicht nötig: kein Haupt-Workflow geändert, keine geschützte Prüfung umgangen, keine weiteren Prüfschichten. Original-K0, PSERC-/PSTE-Original-ZIPs und der gespeicherte PPM679-Redaktionsplan bleiben unverändert.
+
+**WICHTIGE Grenze:** Die Sicherheitsfreigabe ist jetzt **PASS** für PR #682, aber die **echte WordPress-Staging-Installation**, der vollständige tatsächliche Artikel-/Planexport und **einmalige echte SEO-Prüfung** sind weiterhin offen. Das gesamte Plugin ist deshalb **QA_ONLY – NICHT installieren / nicht mergen**. Nächster Arbeitsschritt nur am vorhandenen PSTE-/PSERC-Testpaar, nicht noch einmal am Sicherheitssystem.
+
+
+## 08.11.2026 – NEUESTE ORIGINAL-WORDPRESS-PRÜFUNG BESTANDEN
+
+**Neuester tatsächlicher Test [GitHub Actions 42475624779](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/42475624779): SUCCESS.** WordPress **7.1.4** + echter MySQL **8.0** + echtes aus Original `PSTE-0.57.144.22-NUR-TEST.zip` mit bereits dokumentierten QA-Klassenänderungen gebautes Plugin. PSTE wirklich unter WordPress installiert und aktiviert. Originaler `PSTE_Mini_Workflow::readParkhausForMini()` liest **4 wirkliche WordPress-Inhalte**, darunter einen neu veröffentlichten Testbeitrag.
+
+**Ursachenklärung:** Original-PSTE-Aktivierung ist **bewusst passiv** (`PSTE_Plugin::activate()` legt keine Tabellen an, wartet auf ausdrücklich gestartete sichere Migration). Daher fehlt in einer brandneuen Wegwerf-WordPress-Installation die bestehende `wp_pste_topic_pool`-Tabelle. Das ist **kein** Export-/SEO-Produktfehler. **Nur auf der zuvor nachweislich leeren CI-Testdatenbank** wurde einmal `PSTE_Repository::createSchema()` (bereits vorhandener Originalcode) ausgeführt; kein neuer Tabellenentwurf, keine Anpassung der Produktionsmigration.
+
+**Ergebnis danach:** `WP_REAL_EXISTING_PSTE_SCHEMA_READY table=wp_pste_topic_pool`; `WP_REAL_PARKHAUS_AFTER_SCHEMA complete=NO reason=PSERC_PLAN_NOT_PROVEN_COMPLETE wp_count=4 pste_count=0`. Bestehende WP+PSTE-Quellen wirklich lesbar, bei fehlendem echten PSERC-Plan erwartungsgemäß **kein SEO-FREI**. **Kein** zweiter semantischer Prüfer. Der temporäre GitHub-WordPress-Workflow wurde nach SUCCESS **wieder gelöscht**, keine zusätzliche dauerhafte Prüfung.
+
+**Verbindlicher Befund:** Das ist der **erste echte WP/MySQL-Integrationstest**, aber **noch kein** realer kompletter WordPress→PSERC→K0-Lauf. PSERC QA 0.28.55 wurde separat direkt in PHP quellgeprüft, **nicht** in derselben frischen WordPress-Installation mit dessen aktivem Plan getestet. Der alte GitHub-Bestand `control/startmaster0107/runtime_packages/PSERC-FIX.zip` enthält nur eine ältere archivierte **PSERC 0.28.18**, kein tauglicher 0.28.55-Ersatz. Echter vollständiger WordPress-Testexport, gespeicherter PPM679-Plan in der Testumgebung und einmalige reale externe SEO-Owner-Entscheidung fehlen. **Nicht mergen/installieren, K0 und Live unangetastet.**
+
+**Alle Belege und Einzeltests:** `EVIDENCE/PSTE_WP_ECHTTEST_20261108.md`; unveränderter Original-Hardlock weiterhin Grundlage. Als nächstes die vorhandenen zwei QA-Plugins mit echtem gespeicherten Plan in der kontrollierten WordPress-Testumgebung zusammenlaufen lassen, danach vollständiger einmaliger Export und SEO-Owner-Abnahme. Keine neuen Gate-/Runtimeklassen oder Keyword-Einzelprüfungen.
+
+
+## 08.11.2026 – NEUSTER FACHLICHER STAND: ECHTER WP-/PSERC-QUELLENVERBUND PASS, PPM679-VOLLSTÄNDIGKEIT ROOTFIX
+
+**Beweis:** `EVIDENCE/PSTE_WP_PSERC_02855_ECHTQUELLTEST_20261108.md`, [GitHub Actions 42477636295](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/42477636295) **SUCCESS**. In einem echten isolierten **WordPress 7.1.4 + MySQL 8.0** wurde das tatsächliche PSTE-0.57.144.22-Plugin mit den bestehenden QA-Funktionen installiert; Original-PSTE-Tabellenanlage genau einmal nur auf leerer Wegwerf-Testdatenbank. Der echte PSTE-Parkhausleser hat **4 WP-Inhalte, 2 authentische vom Original-PSERC-0.28.55-Speicher-PHP erzeugte hashgebundene Test-Records (READY und HELD), 1 gespeicherten PPM679-Test-Artikelplatz** in einer vollständigen gemeinsamen Exportquelle aufgenommen. PSERC war in diesem WP-Lauf über seine **authentische gespeicherte Ausgabenhülle mit Testadapter** vertreten, **nicht** als vollständiges installiertes Plugin; echter Nutzer-Redaktionsplan wurde dabei nicht verwendet.
+
+**Tatsächlicher Rootfehler gefunden und zentral behoben:** `readParkhausForMini()` meldete zuvor `complete=true`, obwohl der bestehende PPM679-Redaktionsplan **fehlte**. Jetzt lässt **dieselbe bereits bestehende einmalige Parkhaus-Exportfunktion** einen **fehlenden, ungültigen oder leeren** PPM679-Plan **niemals** als vollständig durch. Korrektur liegt nur in `QA_ONLY/pste_kisten_complete_parkhaus_method.inc`; keine zweite fachliche SEO-Prüfung, kein neuer Worker, keine neue Tabelle, kein einzeln wiederholter Keywordcheck. Der echte WP-Test hat **fehlend, leer, manipulierte PSERC-Records und veraltete PSERC-Version** korrekt gesperrt, den wiederhergestellten Gesamtsnapshot wieder freigegeben.
+
+**Gleichzeitig einmalig als Gesamtworkflow getestet:** Ursprüngliche 100-Keyword-Relevanzdatei, vorhandene Gesamtparkhaus-/WP-/PSERC-/PPM679-Quelle, bisherige `forwardToPlan`-Übergabe in den Modi **good/stale/onebad**, gesperrte Planplätze, keine doppelte SEO-Bewertung: **PASS**. Die SEO-FREI/BELEGT/KLÄRUNG-Urteile in diesen Tests sind **fiktiv**, nicht das Urteil des echten externen Owners.
+
+**Nicht verwechselt werden:** GitHub-Original-Hardlock schützt weiterhin den PR; temporärer WordPress-Testworkflow wurde nach Erfolg **gelöscht**. Keine Änderung an K0, produktivem WordPress, original gespeicherten Redaktionsplan, Original-Plugin-ZIPs, .github-Dauerworkflows oder Securityregeln. **Noch NICHT geprüft:** vollständiges echtes PSERC-0.28.55-Plugin zusammen mit PSTE in *einer* WordPress-Installation, vollständige echte WP-/Plan-Kopie, einmalige fachliche Entscheidung durch den bestehenden externen SEO-Owner, echte Übergabe an K0. **Kein Merge, keine Live-/Staging-Installation freigegeben.**
+
+**Nächster konkrete Schritt:** Vollständiges aktuelles PSERC-QA-ZIP `0.28.55` für den *einen* gemeinsamen WordPress-Teststand verfügbar machen (der Quell- und Package-Nachweis ist im Büro, GitHub enthält aber keine aktuelle PSERC-Binär-ZIP); danach Original-Plan-/Artikelkopie nur lesend aus kontrollierter TEST-WordPress-Umgebung exportieren, **einmal** dem externen SEO-Owner vorlegen, die vorhandene technische PSTE→PSERC→K0-Grenze kontrolliert durchlaufen. Keine neue Sicherheitsschleife.
+
+
+## 08.11.2026 – NEUESTER PSERC-VOLLPAKET-STAND: WORDPRESS-VERSIONSKOPF-KORRIGIERT, ABGENOMMEN
+
+**Gesichert:** `EVIDENCE/PSERC_02855_WP_VERSIONSKOPF_VOLLPAKET_PRUEFUNG_20261108.md`.
+
+**Tatsächlich gefundener Grundfehler beim vollständigen realen 0.28.55-Paket:** WordPress-Plugin-Kopf meldete noch **`Version: 0.28.54`**, obwohl die PHP-Programmversion **0.28.55** war. Dies wurde im bereits bestehenden reproduzierbaren PSERC-Bauweg **`QA_ONLY/rebuild_pserc_02855_from_02854.py`** an der Ursache korrigiert, nicht mit einem weiteren Plugin oder Workaround. Das vorhandene Paketmanifest wurde entsprechend korrekt neu gebunden.
+
+**Aktuell einzig gültiges PSERC-0.28.55-QA-Vollpaket:** `PSERC-0.28.55-EIN-OWNER-VERSIONSKOPF-KORRIGIERT-NUR-QA-NICHT-INSTALLIEREN.zip` SHA256 **`042772cd3c8d594e39ff28ea46b3c74e431cd26fe680a7c95c7522d337e44e43`**. Der vorherige 0.28.55-Testpaket-SHA `5fb82d...` ist **veraltet und darf nicht mehr für nächste Tests verwendet werden**. Das neue vollständige Paket wurde tatsächlich **zweimal** gebaut, auch erneut **direkt aus dem originalen unveränderten 0.28.54-QA-ZIP**, mit identischer ZIP-SHA. Alle 63 Originalpfade unverändert, gegenüber 0.28.54 nur bestehender PSERC-SEO-Reader, WordPress-Plugin-Hauptdatei und bestehendes Integritätsmanifest verändert. **43/43 PHP-Dateien Syntax PASS; 61/61 Paketintegritätsbindungen PASS; vollständiges Plugin mit sämtlichen 43 Klassen in Frontend- und Admin-WP-Hook-Testumgebung erfolgreich geladen; 15 Frontend- und 25 Admin-Hooks PASS.** Vorhandene sechs SEO-Reader-Fälle, vorhandene drei PSERC-Slot-Verarbeitungsschritte (0 semantische Zweitprüfungen) und die exakt fünf K0-Metadatenfelder bestanden erneut.
+
+**Wichtig: keine falsche Echt-WP-Behauptung.** Die vollständigen PSERC-Plugin-Startproben wurden in PHP mit simulierten WordPress-Hook-Funktionen ausgeführt, nicht im echten WordPress/MySQL. Die letzte echte WordPress/MySQL-Probe `42477636295` bezog PSERC über die authentische gespeicherte Testausgabe ein, nicht als gleichzeitig vollständig installiertes Plugin. QA-Vollzip im lokalen Arbeitscontainer; auf GitHub: **reproduzierbare vollständige Bauquelle, Prüftest und Herkunftsnachweis**, noch **kein** Binärrelease. Vollständig echtes WordPress-Paar, aktuelle echte WP-/PSTE-/PSERC-/PPM679-Bestandskopie, echte einzige externe SEO-Owner-Auswertung und K0-Handoff bleiben offen. **QA ONLY, NICHT INSTALLIEREN, NICHT MERGEN, K0/gespeicherter Original-Redaktionsplan unverändert.**
+
+**Nächster konkreter Arbeitsschritt:** Nur die jetzt korrekt versionierte vollständige PSERC-0.28.55-QA-ZIP zusammen mit der vorhandenen PSTE-v22-QA-Fassung im isolierten echten WordPress-Teststand prüfen; erst danach realen vollständigen Export mit dem bereits gespeicherten echten PPM679-Plan abnehmen. Kein erneuter Sicherheits-, Keyword- oder SEO-Doppelprüfer.
+
+
+## 08.11.2026 – Test-Pluginpaar nach echtem externem MINI-Export (KEIN RELEASE)
+
+Die **vollständigen unveränderten ZIP-Testpakete**, physisch erneut gelesen und nach dem Upload in die private Dateiablage nochmals gelistet, sind:
+- **PSTE 0.57.144.22 TEST**, 634339 Byte, SHA256 `384203f4971fc6d98eaa7613835c75f2b1ff976471659afa8dae60ac09a08ad1`, Library `/pferdeatelier/PLUGINS/PSTE-0.57.144.22-TEST.zip`.
+- **PSERC 0.28.55 TEST**, 266498 Byte, SHA256 `501959a0ac73a1b81070ed23623935999ed1058385b3ba587e0f8bef9c9816d0`, Library `/pferdeatelier/PLUGINS/PSERC-0.28.55-TEST.zip`.
+- **Beide ZIPs im Sammelarchiv**, 901105 Byte, SHA256 `1085ba60a704a24b0688c19afc724ea25feb68ee8def786688ce7fa69164e45c`, Library `/pferdeatelier/PLUGINS/PFERDEATELIER-BEIDE-TEST-PLUGINS.zip`.
+
+[**Manifest der installierten Testversionsreihe**](INSTALLATIONS_PAKETE/TESTPAAR_20261108_ARCHIV/MANIFEST.md), [**aktueller realer Exportbefund**](EVIDENCE/ISTSTAND_20261108_1605_EXTERNE_SEO_WEG_UXDATEN.md). Diese **aktuellen** ZIPs sind in **der privaten Library abgelegt** und auf GitHub **inventarisiert**, nicht als neue ZIP-Git-Blobs hochgeladen; vorhandenes älteres Git-ZIP von PSTE 0.57.144.22 hat abweichende Bytegröße, daher NICHT ersetzen/gleichsetzen. Bereits vom Betreiber installierte Plugin-Versionen im WordPress-Testsystem per Screenshot belegt, aber nicht die Server-Dateihashes. Keine korrigierte Version, keine Releasefreigabe, kein automatischer Import. Original-K0 und Live unverändert.
+
+
+## 08.11.2026 – NEUESTES lokales QA-Plugin PSTE 0.57.144.23 (kein Release)
+
+- **PSTE 0.57.144.23 EXPORTFIX NUR TEST:** echte Library-ZIP `/pferdeatelier/PLUGINS/PSTE-0.57.144.23-EXPORTFIX-NUR-TEST.zip` (634545 Byte, SHA256 `dcf1f181d8b438f057476970237f888782312f60450f215e69713c203d0449b0`).
+- **Unveränderter PSERC 0.28.55 TEST:** `/pferdeatelier/PLUGINS/PSERC-0.28.55-TEST.zip` (266498 Byte, SHA256 `501959a0ac73a1b81070ed23623935999ed1058385b3ba587e0f8bef9c9816d0`).
+- **Paar** `/pferdeatelier/PLUGINS/PFERDEATELIER-PSTE-05714423-PSERC-02855-QA-PAAR.zip` (875972 Byte, SHA256 `154cbf04dc4a9b99ad1487e0bcd19fa90317b39c350c7b0dae8a965a56c78008`). Beide ZIPs im Sammelarchiv unverändert. **GitHub hält nur Manifest/Diff/Testquelle; Binary-ZIP in persistenter Library.**
+- [**Realer Fehlerbericht und Grenzen**](EVIDENCE/PSTE_05714423_ECHTER_EXPORT_FIX_36_LOKALE_WORKFLOW_TESTS_20261108.md); [**exakter geänderter Code, Bauquelle, 36 lokale PASS**](QA_ONLY/PSTE_05714423_EXPORTFIX/MANIFEST.json). 121 ZIP-Einträge bestanden, 83 PHP-Dateien PHP-Lint, 36 PHP-QA-Tokens PASS. 9 alte redaktionelle `Array`-Titel und 3 nicht nachgewiesene Post-Verweise bleiben **gesperrt**, keine WP-Testinstallation .23, keine SEO-FREI-Entscheidung. Ursprüngliches Plugin .22 und K0 unberührt. Draft-PR #682, nicht mergen.
+
+
+## 08.11.2026 – NEUER REALDATENFIX PSTE 0.57.144.24 (QUELLEN INVENTARISIERT; QA ONLY)
+
+- **PSTE v0.57.144.24 Test-ZIP** tatsächlich in privater Library `/pferdeatelier/PLUGINS/PSTE-0.57.144.24-PARKHAUS-QUELLFIX-NUR-TEST.zip`, **635721 Bytes**, SHA256 `056f9c6e1e8b273c3ece199b5b3d842b7f5c1ac42810b9ce5531b82525c8bd4e`.
+- **Paar mit unverändertem PSERC 0.28.55** in privater Library `/pferdeatelier/PLUGINS/PFERDEATELIER-PSTE-05714424-PSERC-02855-QA-PAAR.zip`, **877145 Bytes**, SHA256 `063d427d100ee2a63b5ba223c30144b45d55ef4b18d1d77630fc381b64530143`.
+- GitHub: `QA_ONLY/PSTE_05714424_QUELLFIX/` enthält vollständigen Patch gegenüber v23, Bau-/Testskripte, echten Testlog und Manifest, **nicht** die ZIP-Binary. [46 lokale PASS und Grenzen](EVIDENCE/PSTE_05714424_1179_ECHTE_QUELLEN_46_LOKALTESTS_20261108.md). 121 ZIP-Pfade + CRC PASS, 83 PHP-Lints PASS.
+- **Echte .23-WordPress-Testdatei 16:03 UTC** belegt die vorherige globale Unterbrechung nach 1.025 Einträgen bei `PSTE_EDITORIAL_PLAN_TITLE_UNRESOLVED_0`. **Neue .24-Read-only-Simulation umfasst 1.179** Einträge trotz 9 alten „Array“-Titeln und 3 nicht nachweisbaren Postbezügen. `complete=false` bis zur echten Aufklärung, kein Schein-FREI, kein Rückimport. **.24 noch NICHT in WordPress installiert**. K0 und Live unverändert.
+
+
+## 08.11.2026 16:29 UTC: bestätigte installierte PSTE v0.57.144.24 (echter WP-Export)
+
+- Bestehendes unverändertes Testplugin v0.57.144.24, physisch privat `/pferdeatelier/PLUGINS/PSTE-0.57.144.24-PARKHAUS-QUELLFIX-NUR-TEST.zip`. **KEIN .25 und KEINE neue ZIP erstellt.** Tatsächliche Benutzerinstallation ist nun anhand echten v24-Quellformats `diagnostic_sha256`/Quarantäne belegt.
+- Ursprünglicher v24-WordPress-Export `/pferdeatelier/pferdeatelier-mini-ergebnisse-20261108-162920(1).json`, SHA256 `ddeadf12b0a84e215e534172ee70f6d3f11c5f1289fc9e6e6d00deed7a278125`, 1.179 Einträge, incomplete nur wegen 9+3 echten Altfällen. 9 redaktionelle Platzhalter **identisch und ohne Inhalt** (vollständiger Hashvergleich). Drei PPM679-Slots mit Post-IDs **972356/972414/972560** weiterhin belegt.
+- [Echte v24-Regression mit 55 PASS, aktueller Ursachenstatus](EVIDENCE/PSTE_V24_ECHTER_WP_EXPORT_162920_REPLAY_55PASS_20261108.md), archivierte PHP-Testquelle/Prüflog/JSON-Audit in `QA_ONLY/PSTE_05714424_QUELLFIX/LIVE_WP_20261108_162920/`. Original-K0 und PSERC .55 unverändert; PR #682 bleibt Draft.
+
+
+## 08.11.2026 – Neues Root-Cause-TESTPAAR PSTE 0.57.144.25 + unverändertes PSERC 0.28.55
+
+- **NEUES QA-Binary:** PSTE 0.57.144.25 `/pferdeatelier/PLUGINS/PSTE-0.57.144.25-QUELLEN-IDENTITAET-KISS-NUR-TEST.zip` (639575 Byte; SHA256 `27bfc3d3f8394bfe8f51fb32b3552a0da99b8dc08bfce3954acafa867b182580`), physisch in der privaten Plugin-Dateibibliothek gesichert und nachträglich überschrieben mit dem **deterministisch reproduzierbaren finalen ZIP**.
+- **Gemeinsames Testarchiv:** `/pferdeatelier/PLUGINS/PFERDEATELIER-PSTE-05714425-PSERC-02855-QA-PAAR.zip` (880957 Byte, SHA256 `fd4e8c64bfb9612a6f658085d6b416a9f2b2b7418977e43c0b1f4dfa82138c11`). PSERC 0.28.55 Binary unverändert, SHA256 `501959a0ac73a1b81070ed23623935999ed1058385b3ba587e0f8bef9c9816d0`.
+- **Beweis:** [PSTE v25 85 lokale QA-PASS + Grenzen](EVIDENCE/PSTE_05714425_URSACHENFIX_85_ECHTDATEN_LOKALTESTS_20261108.md), Quellpatch mit 3 geänderten Dateien, Testskript, originalbasierter Wiederaufbau, ZIP-Paketbau, Manifest und Prüfprotokoll im GitHub-Git-Baum [QA_ONLY/PSTE_05714425_ROOT_CAUSE_RECONCILIATION](QA_ONLY/PSTE_05714425_ROOT_CAUSE_RECONCILIATION/MANIFEST.json). **Die ZIP-Binärdateien selbst sind aktuell NUR in der privaten Library, nicht in GitHub als ZIP-Blobs.** Alte v24/v23/v22 Originale bleiben unverändert.
+- **Root-Fix:** 9 identitätslose Importplatzhalter bleiben archiviert/lesbar, aber zählen nicht als aktiver Artikel; 3 historische PPM679-Planplätze bleiben **technisch reserviert**; doppelter WP-Canonical-Wert (WP-IDs 16029 + 972638) wird für jede Kollision gemeldet, PPM-Eigentümer nur über Canonical UND Plan-Slot bestimmt. Filter/Option-Herkunftsabweichungen, inhaltlich unsichere Alteinträge und echte doppelte Planplätze bleiben Sperren. **v25 bisher nicht auf WP installiert; keine echte SEO-Freigabe, kein Import oder K0-Handoff.** PR #682 Draft, nicht mergen.
+
+
+## 09.11.2026 – Aktuelle PSTE-0.57.144.25-SEO-Prüfdatei und echter WP-TESTSTATUS
+
+**Kein neues Plugin nötig.** Installierte Testseite PSTE 0.57.144.25 / PSERC 0.28.55 produzierte erstmals vollständige und unabhängig hash-verifizierte **1.179er** Parkhausdatei `pferdeatelier-mini-ergebnisse-20261109-074817.json`, privat in `/pferdeatelier/SEO-PRUEFUNG/` (SHA256 `a02cb27a74bbba1365b88c7d8de1252cf916c1120132a88264336bd6d188c5d6`). Technisch `complete=true`, Snapshot-SHA256 `b9755a7aacb86657bfa2b64804e47eb1e4994eccb5d12a3eabd971fc3b8f9ff9`. 144 reservierte PPM-Slots bleiben belegt, 9 ALT-Arrays bestätigt aus WP-OPTION.
+
+**EXTERN EINMALIG geprüft:** 87 JA-Quellen → **61 FREI, 20 BELEGT, 6 KLÄRUNG**. FERTIGE `PSTE_MINI_SEO_DECISIONS_V1`-Importdatei `/pferdeatelier/SEO-PRUEFUNG/pferdeatelier-seo-einmalentscheidung-20261109.json` (SHA256 `e50ae4eb934eddf7ec2d47feeaba5b6f30d0803756c1301d5ad545fec8dfb34c`), ausführlicher Einzelfallbericht `pferdeatelier-seo-einmalentscheidung-pruefbericht-20261109.json` (SHA256 `13578d7ae8c206e5efd01b61bd76fa141b46d2877e3bcb18078c69c82d87bc87`), QA-Log `QA/pste25_owner_local_accept_159_PASS.log`. PHP-originale Importmethode akzeptiert alle 87 + 159/159 lokale Prüfungen. **Noch nicht auf WordPress rückimportiert, keine K0-Übergabe.** [Details](EVIDENCE/PSTE_20261109_074816_EINMALIGE_SEO_ENTSCHEIDUNG_87.md).
+
+Die aktuellen Plugin-Binärpakete bleiben weiterhin PSTE `/pferdeatelier/PLUGINS/PSTE-0.57.144.25-QUELLEN-IDENTITAET-KISS-NUR-TEST.zip` (639575 Bytes, SHA256 `27bfc3d3f8394bfe8f51fb32b3552a0da99b8dc08bfce3954acafa867b182580`) und unverändertes PSERC 0.28.55. Dieses Register dokumentiert die sichere fertige Datei, keine Veröffentlichung der privaten JSONs auf GitHub. Draft-PR #682 nicht mergen.

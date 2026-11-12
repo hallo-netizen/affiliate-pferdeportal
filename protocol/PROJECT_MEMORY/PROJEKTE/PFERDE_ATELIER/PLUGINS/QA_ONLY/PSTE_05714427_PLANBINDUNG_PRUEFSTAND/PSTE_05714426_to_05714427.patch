@@ -1,0 +1,225 @@
+--- a/Portal SEO Topic Engine/includes/class-pste-admin.php
++++ b/Portal SEO Topic Engine/includes/class-pste-admin.php
+@@ -233,7 +233,14 @@
+                 $out['hold_reason_counts'][$first]=(int)($out['hold_reason_counts'][$first]??0)+1;
+             }
+             if($status==='UNKNOWN_LEGACY_RESULT')$out['unavailable_historical_results']++;
+-            $query=(string)($payload['raw_user_question']??$payload['primary_longtail_query']??$payload['canonical_query']??$payload['query_record']['raw_query']??'');
++            $query='';
++            foreach([(string)($payload['raw_user_question']??''),
++                (string)($payload['primary_longtail_query']??''),
++                (string)($payload['canonical_query']??''),
++                (string)($payload['query_record']['raw_query']??'')] as $candidateQuery){
++                $candidateQuery=trim($candidateQuery);
++                if($candidateQuery!==''){$query=$candidateQuery;break;}
++            }
+             $flow=is_array($path['worker_flow']??null)?(array)$path['worker_flow']:[];
+             if(isset($doneIndex[$key])&&!empty($path['category_backlog_required'])
+                 &&(string)($flow['storage']??'')==='CATEGORY_ROOM_TOPIC_POOL')
+@@ -412,7 +419,11 @@
+                 .' von '.esc_html((string)(int)$titleResume['scheduled']).' Themen bearbeitet; '
+                 .esc_html((string)(int)($titleResume['held']??0)).' zurückgestellt. Keine neue Keywordrecherche.</small></p>';
+             $jobState=get_option(self::TITLE_DESK_REENTRY_STATE,[]);
+-            if(is_array($jobState)&&($jobState['status']??'')==='RUNNING'&&($jobState['last_error']??'')!=='')
++            if(is_array($jobState)&&($jobState['status']??'')==='PAUSED_CONTEXT_STALE')
++                echo '<p><strong>Technisch pausiert:</strong> Der Redaktionsplanstand stimmt nicht mit dem gespeicherten Kontext überein. '
++                    .'Noch offen: '.esc_html((string)count((array)($jobState['pending']??[]))).' Themen. '
++                    .'Keine Artikel oder Kategorien automatisch freigegeben.</p>';
++            elseif(is_array($jobState)&&($jobState['status']??'')==='RUNNING'&&($jobState['last_error']??'')!=='')
+                 echo '<p><small><strong>Automatische Fortsetzung wartet:</strong> '.esc_html((string)$jobState['last_error']).'. Der Auftrag bleibt erhalten.</small></p>';
+             if(!empty($titleResume['blocked'])){
+                 $last=end($titleResume['blocked']);
+@@ -2006,9 +2017,15 @@
+             if($key===''||strlen($key)>120||preg_match('/[^a-zA-Z0-9_:\-]/',$key))throw new RuntimeException('PSTE_TITLE_DESK_REENTRY_KEY_INVALID');
+         }
+         $state=get_option(self::TITLE_DESK_REENTRY_STATE,[]);
+-        if(!is_array($state)||($state['status']??'')!=='RUNNING'){
++        if(!is_array($state)||!in_array((string)($state['status']??''),['RUNNING','PAUSED_CONTEXT_STALE'],true)){
+             $state=self::newTitleDeskReentryState($poolKeys);
+         }else{
++            // Only an explicit new scheduling request resumes a context-stale queue.
++            // Its unprocessed keys are never dropped or marked as owner verdicts.
++            if(($state['status']??'')==='PAUSED_CONTEXT_STALE'){
++                $state['status']='RUNNING';
++                $state['last_error']='';
++            }
+             $pending=(array)($state['pending']??[]);
+             // A version-specific MINI replay may revisit completed keys; ordinary
+             // imports preserve their existing done set. Never lose unrelated work.
+@@ -2146,9 +2163,17 @@
+                 self::storeTitleDeskReentryState($state);
+                 if(function_exists('wp_clear_scheduled_hook'))wp_clear_scheduled_hook(self::TITLE_DESK_REENTRY_HOOK,[[]]);
+             }else{
+-                // Do not start an immediate retry storm when a shared prerequisite is absent.
+-                $continue=!$paused;
+-                self::armTitleDeskReentryWatchdog();
++                // A stale plan hash is a global transport precondition, not a verdict
++                // about any individual topic. Preserve every pending key and stop cron.
++                if($paused&&($state['last_error']??'')==='PSTE_RETAINED_EDITORIAL_PLAN_SNAPSHOT_CHANGED'){
++                    $state['status']='PAUSED_CONTEXT_STALE';
++                    self::storeTitleDeskReentryState($state);
++                    if(function_exists('wp_clear_scheduled_hook'))
++                        wp_clear_scheduled_hook(self::TITLE_DESK_REENTRY_HOOK,[[]]);
++                }else{
++                    $continue=!$paused;
++                    self::armTitleDeskReentryWatchdog();
++                }
+             }
+         }finally{self::releaseTitleDeskReentryLock($lock);}
+         if($continue)self::kickTitleDeskReentry();
+@@ -2162,7 +2187,8 @@
+             'PSTE_TITLE_DESK_REENTRY_CONTEXT_NOT_COMPLETE','PSTE_TITLE_DESK_REENTRY_BINDING_INVALID',
+             'PSTE_TITLE_DESK_REENTRY_BOUNDARY_VIOLATION',
+             'PSTE_RETAINED_BACKLOG_READ_FAILED','PSTE_RETAINED_BACKLOG_CONTEXT_BINDING_REQUIRED',
+-            'PSTE_RETAINED_BACKLOG_INVENTORY_BINDING_MISMATCH'] as $prefix){
++            'PSTE_RETAINED_BACKLOG_INVENTORY_BINDING_MISMATCH',
++            'PSTE_RETAINED_EDITORIAL_PLAN_SNAPSHOT_CHANGED'] as $prefix){
+             if(str_starts_with($code,$prefix))return true;
+         }
+         return false;
+--- a/Portal SEO Topic Engine/includes/class-pste-mini-workflow.php
++++ b/Portal SEO Topic Engine/includes/class-pste-mini-workflow.php
+@@ -18,6 +18,7 @@
+         add_action('admin_post_pste_mini_manual_brief', [self::class, 'manualArticleBrief']);
+         add_action('admin_post_pste_mini_forward_to_plan', [self::class, 'forwardToPlan']);
+         add_action('admin_post_pste_mini_batch_report', [self::class, 'exportBatchReport']);
++        add_action('admin_post_pste_mini_context_evidence', [self::class, 'exportContextEvidence']);
+     }
+ 
+     /** The unchanged existing PSTE governance is the sole source for both title desks. */
+@@ -108,6 +109,19 @@
+                     '<button class="button" type="submit">3. Freigegebene Themen an bestehende Planung übergeben</button></form>';
+             }
+             echo '<p><small>Bei unvollständiger Bestandsdatei keine FREI-Entscheidung importieren. K0/Beiträge bleiben unberührt.</small></p>';
++            $queue=get_option('pste_title_desk_reentry_state_v1',[]);
++            $previousReport=get_transient('pste_title_desk_reentry_report');
++            $priorStale=false;
++            if(is_array($previousReport))foreach((array)($previousReport['blocked']??[]) as $blockedRow){
++                if((string)($blockedRow['error_code']??'')==='PSTE_RETAINED_EDITORIAL_PLAN_SNAPSHOT_CHANGED'){$priorStale=true;break;}
++            }
++            if((is_array($queue)&&($queue['status']??'')==='PAUSED_CONTEXT_STALE')||$priorStale){
++                echo '<p><strong>Planprüfung technisch angehalten bzw. im alten Lauf falsch als abgeschlossen gezählt.</strong> Keine weitere Übergabe starten.</p>';
++                echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:8px">';
++                wp_nonce_field('pste_mini_context_evidence');
++                echo '<input type="hidden" name="action" value="pste_mini_context_evidence">'
++                    .'<button class="button button-primary" type="submit">Einmaligen Plan- und Kategorien-Prüfstand herunterladen</button></form>';
++            }
+         }elseif($active){
+             echo '<p><strong>Stichwortstapel noch offen.</strong> Zuerst die extern geprüften Relevanz-/Titelideen übernehmen.</p>';
+             echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';
+@@ -143,6 +157,9 @@
+             echo '<input type="hidden" name="action" value="pste_mini_results_export"><button class="button" type="submit">Nur gespeicherte Titelideen exportieren</button></form>';
+             echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:9px">';wp_nonce_field('pste_mini_batch_report');
+             echo '<input type="hidden" name="action" value="pste_mini_batch_report"><button class="button" type="submit">Nur aktuellen Stapelbericht herunterladen</button></form>';
++            echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:9px">';
++            wp_nonce_field('pste_mini_context_evidence');
++            echo '<input type="hidden" name="action" value="pste_mini_context_evidence"><button class="button" type="submit">Einmaligen Plan- und Kategorien-Prüfstand herunterladen</button></form>';
+             if(is_array($state['last_plan_report']??null)){
+                 $report=$state['last_plan_report'];
+                 echo '<p><small>Letzte Planübergabe: '.esc_html((string)($report['forwarded']??0)).
+@@ -165,6 +182,87 @@
+             'contract'=>'PSTE_MINI_RESULTS_FOR_EDITORIAL_V1',
+             'status'=>'RELEVANT_FOR_PORTAL','decision_source'=>'PSTE_MINI_ADMIN_IMPORT',
+             'batch_id'=>(string)($decision['batch_id']??'')],$source);
++    }
++
++    /**
++     * One bounded, nonce-protected, read-only snapshot of the real WP context
++     * needed for a complete offline replay. No rebuild, no SQL update, no auto-retry.
++     * Every stage is isolated: a damaged/stale source is reported as an error,
++     * never replaced by invented data or allowed to authorize production.
++     */
++    public static function contextEvidenceDocument(): array {
++        $baseline=get_option(PSTE_OPTION_SITE_BASELINE,[]);
++        $job=get_option(PSTE_OPTION_CONTEXT_JOB,[]);
++        $manifest=get_option(PSTE_OPTION_CONTEXT_INDEX_MANIFEST,[]);
++        $queue=get_option('pste_title_desk_reentry_state_v1',[]);
++        $result=[
++            'contract'=>'PSTE_MINI_READ_ONLY_CONTEXT_EVIDENCE_V1',
++            'generated_utc'=>gmdate('c'),
++            'pste_version'=>PSTE_VERSION,
++            'read_only'=>true,
++            'production_approval'=>false,
++            'wp_posts_write_attempted'=>false,
++            'wordpress_taxonomy_write_attempted'=>false,
++            'baseline'=>is_array($baseline)?$baseline:[],
++            'context_job'=>is_array($job)?array_intersect_key($job,array_flip([
++                'contract','status','job_uuid','phase','inventory_sha256','structure_sha256',
++                'editorial_plan_sha256','context_index_manifest_sha256','error_code',
++                'baseline_sha256','total','processed'])):[],
++            'context_manifest'=>is_array($manifest)?array_intersect_key($manifest,array_flip([
++                'contract','job_uuid','baseline_sha256','inventory_sha256','structure_sha256',
++                'editorial_plan_sha256','manifest_sha256','registry_stage_meta',
++                'inventory_stage_meta','family_count','shard_count'])):[],
++            'title_reentry'=>is_array($queue)?[
++                'status'=>(string)($queue['status']??'NOT_STARTED'),
++                'total'=>(int)($queue['total']??0),
++                'done_count'=>count((array)($queue['done']??[])),
++                'pending_keys'=>array_values(array_map('strval',(array)($queue['pending']??[]))),
++                'last_error'=>(string)($queue['last_error']??'')]:[],
++            'sources'=>[],
++        ];
++        $reads=[
++            'current_editorial_plan'=>static fn()=>PSTE_Snapshot::editorialPlan(),
++            'current_editorial_plan_provenance'=>static fn()=>PSTE_Snapshot::editorialPlanForParkhaus(),
++            'current_category_structure'=>static fn()=>PSTE_Snapshot::structure(),
++            'current_wp_inventory'=>static fn()=>PSTE_Snapshot::inventory(),
++        ];
++        foreach($reads as $name=>$read){
++            try{
++                $value=$read();
++                if(!is_array($value))throw new RuntimeException('SOURCE_NOT_ARRAY');
++                $result['sources'][$name]=['status'=>'PASS','value'=>$value];
++            }catch(Throwable $e){
++                $result['sources'][$name]=['status'=>'ERROR',
++                    'error_code'=>substr((string)preg_replace('/[^A-Z0-9_:\-]/i','_',strtoupper($e->getMessage())),0,160)];
++            }
++        }
++        foreach(['registry_stage'=>PSTE_OPTION_CONTEXT_STAGE_REGISTRY,
++                  'inventory_stage'=>PSTE_OPTION_CONTEXT_STAGE_INVENTORY] as $name=>$key){
++            $raw=get_option($key,null);
++            if(!is_string($raw)||$raw===''){$result['sources'][$name]=['status'=>'NOT_AVAILABLE'];continue;}
++            if(strlen($raw)>4000000){$result['sources'][$name]=['status'=>'TOO_LARGE','bytes'=>strlen($raw)];continue;}
++            $decoded=json_decode($raw,true);
++            $result['sources'][$name]=is_array($decoded)
++                ? ['status'=>'PASS','raw_sha256'=>hash('sha256',$raw),'bytes'=>strlen($raw),'value'=>$decoded]
++                : ['status'=>'ERROR','error_code'=>'STAGE_JSON_INVALID'];
++        }
++        $result['comparison']=[
++            'baseline_plan_sha256'=>(string)($baseline['editorial_plan_sha256']??''),
++            'bound_plan_sha256'=>(string)($manifest['editorial_plan_sha256']??''),
++            'live_plan_sha256'=>(string)($result['sources']['current_editorial_plan']['value']['sha256']??''),
++            'baseline_category_count'=>(int)($baseline['leaf_category_count']??0),
++            'live_production_category_count'=>count((array)($result['sources']['current_category_structure']['value']['items']??[])),
++        ];
++        $result['comparison']['bound_plan_matches_live']=$result['comparison']['bound_plan_sha256']!==''
++            &&hash_equals($result['comparison']['bound_plan_sha256'],$result['comparison']['live_plan_sha256']);
++        return $result;
++    }
++
++    public static function exportContextEvidence(): void {
++        try{
++            PSTE_Auth::assertAdmin('pste_mini_context_evidence',(string)($_POST['_wpnonce']??''));
++            self::sendJson(self::contextEvidenceDocument(),'pste-plan-kategorien-pruefstand-'.gmdate('Y-m-d').'.json');
++        }catch(Throwable $e){self::fail($e);}
+     }
+ 
+     /** Existing read-only result owner; no 5,000-topic or 20,000-event scan. */
+--- a/Portal SEO Topic Engine/portal-seo-topic-engine.php
++++ b/Portal SEO Topic Engine/portal-seo-topic-engine.php
+@@ -2,13 +2,13 @@
+ /**
+  * Plugin Name: Portal SEO Themenengine
+  * Description: Einfacher Longtail-Workflow: recherchiert Suchphrasen, übernimmt Sprachtitel und ordnet ausschließlich vorhandene Portalkategorien zu und prüft gegen den eigenen Bestand. Verändert keine Beiträge, Inhalte, Gestaltung oder Textproduktionsregeln.
+- * Version: 0.57.144.26
++ * Version: 0.57.144.27
+  * Requires PHP: 8.0
+  * Author: Workflow Automation
+  */
+ if (!defined('ABSPATH')) { return; }
+ 
+-define('PSTE_VERSION', '0.57.144.26');
++define('PSTE_VERSION', '0.57.144.27');
+ define('PSTE_DIR', __DIR__ . '/');
+ define('PSTE_OPTION_SETTINGS', 'pste_settings_v1');
+ define('PSTE_OPTION_SCHEMA', 'pste_schema_version');

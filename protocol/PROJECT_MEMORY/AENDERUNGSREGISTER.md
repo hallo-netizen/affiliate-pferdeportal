@@ -2031,3 +2031,50 @@ Der aktive Campus-Ruleset 25817526 verlangt `single-current-lock` für jeden PR 
 
 GRENZE:
 Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wahrheit. Nur die bestehende Pflichtprüfung wird für alle Änderungen erreichbar gemacht. Fehlerquelle: `BAUCONTAINER/ARCHITEKTUR_FEHLERKISTE.md` → BAU-044.
+
+
+## 08.11.2026 – PFERDEATELIER: PSTE 0.57.144.23 EXTERNER SEO-EXPORTFIX / GESCHÜTZTE QA
+
+**WAS:** In exakt einer isolierten Pferdeatelier-Plugin-QA-Fassung wurden vorhandene PSTE-Import-/Exportfehler (verschachtelte Titel als „Array“; 144 PPM679-Planplätze ohne Artikelbezeichnungen) quellseitig korrigiert und die normale Bedienung auf Export → externe Entscheidung → Import → Status reduziert. Aktuellen echten MINI-Export mit 1.179 Einträgen ausgewertet; 141 reale PPM679-Posttitel eindeutig verknüpft; 3 unaufgelöste Postreferenzen und 9 bereits unbrauchbare Titel als offene Sperren ausgewiesen. Vollständige technische Tests mit echtem Datenbestand und drei eindeutig synthetisch gekennzeichneten Positiv-Beiträgen: 36 PASS; 83 PHP-Syntaxchecks; vollständige ZIP-CRC 121/121. Originale/Produktionsdaten nicht verändert.
+
+**WARUM:** Der bisherige Export gab vorhandene Einträge ohne Inhaltstitel aus, konnte gespeicherte „Array“-Planhüllen fälschlich als semantisch belegbar behandeln und zwang den Betreiber zu überflüssigen Diagnoseaktionen. KISS-Umsetzung ohne neue Datenbank, Arbeitsschleife, externen SEO-Zweitprüfer oder neue Kategoriepflicht.
+
+**AUTORITÄT / GRENZE:** Fachlich maßgeblich bleibt einzig `PROJEKTE/PFERDE_ATELIER/PLUGINS/CURRENT_STATE.md`, ein externer SEO-Owner, K0 unverändert. Binär-ZIP für PSTE .23 (SHA256 `dcf1f181d8b438f057476970237f888782312f60450f215e69713c203d0449b0`) und Paar mit unverändertem PSERC .55 in privater Library `/pferdeatelier/PLUGINS/`; GitHub QA-Quellcode-Patch, Testskript, Manifest und Beweise in `PROJEKTE/PFERDE_ATELIER/PLUGINS/QA_ONLY/PSTE_05714423_EXPORTFIX/`. **Kein Live-Deployment, keine echte WordPress-End-to-End-Abnahme, kein Merge.**
+
+**SICHERHEIT:** Unveränderte zentrale Hardlock-Regeln. Die für Änderungen am Gebäude-Einstieg verbindliche Protokollierung ist in `BAUCONTAINER/BAUPROTOKOLL.md` nachgetragen. Draft-PR #682, keine Fremdgebäude verändert.
+
+
+## 08.11.2026 – Pferdeatelier: v0.57.144.24 korrigiert v23-Exportabbruch bei Alt-„Array“-Titeln
+
+**WAS:** 0.57.144.23 hat auf dem echten WP-Testbestand beim ersten der neun alten unlesbaren Plan-Titel den gesamten Parkhaus-Export abgebrochen; dadurch wurden der aktuelle PSERC-Plan und 144 PPM679-Artikelplätze nicht mehr ausgegeben. Neue isolierte Testfassung **PSTE 0.57.144.24** ergänzt einen nur lesenden, fehlerverträglichen Planleser, der alle neun Originalzeilen samt noch gespeicherten Roh-Titelwerten erhält, ohne für die anderen Fachpfade die strenge Prüfung zu lockern. Fehlende Titel und 3 PPM679-Postverweise werden pro Zeile im Export sichtbar, aber `complete=false` verhindert weiter jede Freigabe. PSERC, K0, Live und alte Plugins unverändert.
+
+**WARUM:** Die früheren 36 Tests verwendeten fälschlich nur einen gültigen künstlichen Editorial-Plan-Eintrag. Der neue 46er-Test basiert auf den 1.179 echten exportierten Planzeilen und simuliert ausdrücklich alle neun unbrauchbaren Alt-Titel plus drei nicht im WP-Snapshot enthaltenen Post-IDs; alle sechs Quellen werden exportiert, ohne dass falsche Freigabe möglich ist. Positivfall mit künstlichen neun Titeln/drei Postwerten klar abgegrenzt; keine Produktionsfreigabe.
+
+**ABLAGE:** `PROJEKTE/PFERDE_ATELIER/PLUGINS/CURRENT_STATE.md`, `EVIDENCE/PSTE_05714424_1179_ECHTE_QUELLEN_46_LOKALTESTS_20261108.md`, `QA_ONLY/PSTE_05714424_QUELLFIX/`; echte ZIP-Binärdateien private Library `/pferdeatelier/PLUGINS/`. PR #682 bleibt Draft ohne Merge. Kein neuer Architektur- oder Sicherheitsmechanismus.
+
+
+## 08.11.2026 – PSTE v24 ECHTER Betreiber-Export geprüft (kein neuer Code)
+
+**WAS:** Nach dem echten Betreiber-Test des bestehenden PSTE-v0.57.144.24-Plugins die private WordPress-JSON von 16:29 UTC vollständig geprüft, 1.179/1.179 Datensätze aus allen sechs Quellen bestätigt und den PHP-Replay auf genau dieser neuesten Datei mit **55 lokalen PASS** erneut ausgeführt. Alle neun Alt-Editorial-Zeilen byte-inhaltlich vollständig mit SHA256 rekonstruiert: identisch, nur `title=Array`/`primary_longtail_query=Array`, keinerlei Referenz, Kategorie, Slot oder echtes Thema. Drei PPM679-Post-IDs ohne aktuellen Post-/Titelbeleg bleiben mit ihren belegten Canonical-Slots erhalten.
+
+**WARUM:** Vorheriges .23 brach bei Alt-Array ab, .24 arbeitet nun real korrekt; der verbleibende Sperrstatus ist alte Datenqualität, keine noch offene Exportprogrammierung. Nicht mit erneuten Plugin-ZIPs oder frei erfundenen Titeln nachbessern; Ursprung Filter-vs-Option und Archivbelege der drei alten Posts untersuchen. Nutzer muss keine bestehende Aktion wiederholen.
+
+**ABLAGE:** `PROJEKTE/PFERDE_ATELIER/PLUGINS/CURRENT_STATE.md`, `EVIDENCE/PSTE_V24_ECHTER_WP_EXPORT_162920_REPLAY_55PASS_20261108.md`, `QA_ONLY/PSTE_05714424_QUELLFIX/LIVE_WP_20261108_162920/`. WordPress-Original-JSON bleibt privat. Keine Plugin-Codeänderung, kein WP-Schreibzugriff, K0/Live/PSERC unverändert. Draft-PR #682.
+
+
+## 08.11.2026 – Pferdeatelier PSTE 0.57.144.25: systemische Ursachenbereinigung, keine Einzel-ID-Sonderregeln
+
+**WAS:** Vierstufiger, unveränderter vorhandener Workflow (realer WordPress/PPM/PSTE/PSERC-Bestand → EIN externer SEO-Owner → technischer Import → PSERC/K0) wurde in bestehender PSTE-Quellen-/Import-Lesung korrigiert. Erstens aus alter Array-String-Konvertierung entstandene völlig identitätslose importierte Artefakte anhand *inhaltlicher Invarianten* erkannt und für aktive SEO-Artikelbelegung ausgeschlossen, ohne die Originalsätze zu löschen; unklare oder inhaltsreiche Altzeilen bleiben Sperren. Zweitens semantisch aktive Artikel getrennt von historisch belegten aber nachweislich nicht mehr vorhandenen WP-Posts: **sämtliche 144 PPM-Slots bleiben technisch reserviert**. Drittens gesamtes WP-Inventar auf doppelte Canonical-IDs geprüft; eine reale doppelte Kennung in WP-Posts 16029/972638 mit zwei verschiedenen Titeln entdeckt und einzig der mit **genau passendem PPM-Plan-Slot** verknüpfte Besitzer verwendet. Kein automatisches Überschreiben der zweifelhaften WordPress-Metadaten. Viertens Filter vs. Optionsquelle mit Fingerprint-Vergleich statt stiller Priorisierung; unbekannte Formate/Skalarzeilen bleiben als Quellenfehler sichtbar.
+
+**WARUM:** Die bisherige Schnittstelle kannte nur einen globalen Vollständigkeitsstatus und behandelte identitätslose Altreste, echte reservierte Slots und aktuelle Inhalte gleich. Dies verursachte wiederholte Stops bzw. riskierte falsche SEO-Dublettenentscheidungen. KISS: Nur zwei bestehende PHP-Leser geändert und die Hauptversionskennung, keine neue Tabelle, kein zweiter Owner, kein weiterer Pflichtlauf.
+
+**PRÜFUNG/GRENZE:** 85/85 lokale PHP-Tests am echten 1.179er-Export, 83/83 PHP-Lints, 121/121 ZIP-CRC, bytegenauer 121-Dateien-Rebuild v24+Patch, deterministische ZIP-SHAs. Der WP-Quellursprung Filter-vs-Option und der ursprüngliche Schreibweg der doppelten WP-Metadaten sind **noch nicht live nachgewiesen**. Die v25 ist QA, bisher nicht auf WP installiert. Keine externe semantische Entscheidung, kein Rückimport, keine K0-/Live-Schreibaktion. PSERC 0.28.55 unverändert, Draft-PR #682 nicht mergen. Aktuelle Autorität `PROJEKTE/PFERDE_ATELIER/PLUGINS/CURRENT_STATE.md`; exakte Dateien und Belege `PLUGINS/EVIDENCE/PSTE_05714425_URSACHENFIX_85_ECHTDATEN_LOKALTESTS_20261108.md` und `PLUGINS/QA_ONLY/PSTE_05714425_ROOT_CAUSE_RECONCILIATION/`; ZIP privat `/pferdeatelier/PLUGINS/`.
+
+
+## 09.11.2026 – Pferdeatelier: Original-v25-Export vollständig, einmaliger externer SEO-Owner fertig
+
+**WAS:** Echten Testseitenexport 09.11.2026 07:48 UTC aus PSTE 0.57.144.25 gelesen, alle 1.179 bestehenden WordPress-/PSTE-/PSERC-/PPM679-Datenzeilen auf Vorhandensein und Konsistenz geprüft, Snapshot-SHA unabhängig in PHP/Python reproduziert. Alte inhaltslose neun Editorial-Importartefakte stammen aus echter gespeicherter WP-OPTION, kein Filter und kein Quellkonflikt. Drei verwaiste Postverweise bleiben technisch reserviert; eine doppelte WP-Canonical-Kennung sicher registriert. **EIN externes SEO-Fachurteil für 87 JA-Themen** aus der vorhandenen Artikel-/Planstruktur abgeschlossen: 61 FREI, 20 BELEGT anhand überprüfbarer Quell-IDs, sechs sichere KLÄRUNG. Echte `PSTE_MINI_SEO_DECISIONS_V1`-JSON in privatem Büro erstellt; lokale Original-PHP-Importmethode mit 159/159 Prüfungen erfolgreich (einschließlich falschem Owner, fremder SHA, doppelten Pool- und Plan-Slots). Keine Code-/Pluginänderung.
+
+**WARUM:** Nach vorheriger .25-Quellenkorrektur nicht erneut am Plugin bauen oder ältere 5.016er-Diagnose starten, sondern den vereinbarten **einmaligen** externen SEO-Owner tatsächlich umsetzen und exakt am bestehenden technischen Importvertrag absichern. Die 10 zusätzlichen Titelideen bleiben als nicht freigegebene Ideen nachweisbar, statt stillschweigend verloren zu gehen.
+
+**BEWEIS/GRENZE:** `PROJEKTE/PFERDE_ATELIER/PLUGINS/EVIDENCE/PSTE_20261109_074816_EINMALIGE_SEO_ENTSCHEIDUNG_87.md`; Original-, Ergebnis- und Prüfdokumente privat unter `/pferdeatelier/SEO-PRUEFUNG/`; K0/Main/Live, PSERC, GitHub-Source des Plugins und WordPress-Testdaten **nicht** verändert. Echter WordPress-Import/atomarer Datenbank-Readback noch offen, daher kein End-to-End-WP-Produktions-PASS behauptet. PR #682 Draft.

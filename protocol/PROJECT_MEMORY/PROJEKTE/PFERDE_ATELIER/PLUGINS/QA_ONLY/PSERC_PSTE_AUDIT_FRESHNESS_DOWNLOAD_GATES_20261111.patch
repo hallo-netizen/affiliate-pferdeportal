@@ -1,0 +1,60 @@
+--- a/includes/class-pserc-plan-dependency-fingerprint.php
++++ b/includes/class-pserc-plan-dependency-fingerprint.php
+@@ -15,6 +15,14 @@
+     public const CONTRACT='PSERC_PLAN_DEPENDENCY_FINGERPRINT_V5_PSTE_CAPABILITY_BOUND';
+     public const INVENTORY_REV_OPTION='pserc_plan_inventory_revision_v1';
+     public const STRUCTURE_REV_OPTION='pserc_plan_structure_revision_v1';
++
++    /** Existing PSTE queue is the sole owner of backlog freshness. No second audit. */
++    public static function existingPsteAuditCurrent(): bool {
++        if(!class_exists('PSTE_Breadth_Research_Queue')
++            ||!method_exists('PSTE_Breadth_Research_Queue','existingOnlyAuditCurrent'))return false;
++        try { return PSTE_Breadth_Research_Queue::existingOnlyAuditCurrent()===true; }
++        catch(Throwable $e) { return false; }
++    }
+ 
+     public static function initInvalidationHooks(): void {
+         if(!function_exists('add_action'))return;
+--- a/includes/class-pserc-plan-compile-job.php
++++ b/includes/class-pserc-plan-compile-job.php
+@@ -20,6 +20,9 @@
+         $dep=PSERC_Plan_Dependency_Fingerprint::current();
+         $context=(array)($dep['context']??[]);
+         if((string)($context['status']??'')!=='COMPLETE')return self::blockedView('PSERC_PLAN_PSTE_CONTEXT_NOT_COMPLETE');
++        // An unchanged PSERC dependency fingerprint does not prove PSTE audit freshness.
++        if(!PSERC_Plan_Dependency_Fingerprint::existingPsteAuditCurrent())
++            return self::blockedView('PSERC_PLAN_PSTE_AUDIT_NOT_CURRENT');
+         // The same existing source-freshness guard runs at START and ACTIVATE.
+         // This prevents unnecessary compile work when the current plan is stale.
+         if(!PSERC_Plan_Dependency_Fingerprint::liveEditorialPlanMatches($dep))return self::blockedView('PSERC_PLAN_LIVE_EDITORIAL_PLAN_CHANGED_BEFORE_START');
+@@ -223,6 +226,9 @@
+     private static function tickActivate(array $job): array {
+         $gen=(string)$job['generation'];$current=PSERC_Plan_Dependency_Fingerprint::current((array)($job['dependency']['production_category_ids']??[]));if(!hash_equals((string)($job['dependency']['fingerprint_sha256']??''),(string)($current['fingerprint_sha256']??'')))throw new RuntimeException('PSERC_PLAN_DEPENDENCY_CHANGED_DURING_BUILD');
+         if(!PSERC_Plan_Dependency_Fingerprint::liveEditorialPlanMatches((array)$job['dependency']))throw new RuntimeException('PSERC_PLAN_LIVE_EDITORIAL_PLAN_CHANGED_BEFORE_ACTIVATE');
++        // The audit may have changed while this bounded plan job was running.
++        if(!PSERC_Plan_Dependency_Fingerprint::existingPsteAuditCurrent())
++            throw new RuntimeException('PSERC_PLAN_PSTE_AUDIT_NOT_CURRENT_BEFORE_ACTIVATE');
+         $readyCount=PSERC_Plan_Snapshot_Store::readyCount($gen);if($readyCount!==(int)$job['ready_count'])throw new RuntimeException('PSERC_PLAN_READY_INDEX_COUNT_MISMATCH');
+         $descriptor=['contract'=>'PSERC_READY_BATCH_DESCRIPTOR_V1','status'=>$readyCount>0?'READY_FOR_TEXTMACHINE_METADATA_INTAKE':'NO_READY_ITEMS','item_count'=>$readyCount,'maximum_articles'=>0,'maximum_articles_per_type'=>0,'publish_allowed'=>false,'content_or_format_payload_present'=>false,'ready_chain_sha256'=>(string)$job['ready_chain_sha256'],'items_json_bytes'=>(int)$job['ready_items_json_bytes']];
+         $boot=self::bootstrap($gen);$seoAll=max((int)($job['seo_total_count']??0),(int)$job['eligible_count']);$counts=array_merge(['seo_all'=>$seoAll,'seo_eligible'=>(int)$job['eligible_count'],'seo_held'=>max(0,$seoAll-(int)$job['eligible_count']),'compiled_items'=>(int)$job['final_count'],'next_metadata_batch_items'=>$readyCount],(array)$job['counts']);
+--- a/includes/class-pserc-admin.php
++++ b/includes/class-pserc-admin.php
+@@ -21,7 +21,7 @@
+         echo '<details style="margin:16px 0"><summary><strong>Nach K0: fertige Artikel als WordPress-Entwürfe importieren</strong></summary>';
+         PSERC_System4_Import::renderPanel();
+         echo '</details>';
+-        $active=PSERC_Plan_Snapshot_Store::getActive();$activeValid=PSERC_Plan_Snapshot_Store::verifyHeader($active);$current=$activeValid&&PSERC_Plan_Dependency_Fingerprint::isCurrent((array)($active['dependency']??[]));
++        $active=PSERC_Plan_Snapshot_Store::getActive();$activeValid=PSERC_Plan_Snapshot_Store::verifyHeader($active);$current=$activeValid&&PSERC_Plan_Dependency_Fingerprint::isCurrent((array)($active['dependency']??[]))&&PSERC_Plan_Dependency_Fingerprint::existingPsteAuditCurrent();
+         if($current){self::renderActive($active);echo '</div>';return;}
+         $job=PSERC_Plan_Snapshot_Store::getJob();$view=(($job['contract']??'')===PSERC_Plan_Compile_Job::CONTRACT)?$job:[];
+         if($activeValid){
+@@ -115,6 +115,9 @@
+     private static function exportSingleHandoff(): void {
+         $header=PSERC_Plan_Snapshot_Store::getActive();
+         if(!PSERC_Plan_Snapshot_Store::verifyHeader($header)||!PSERC_Plan_Dependency_Fingerprint::isCurrent((array)($header['dependency']??[])))wp_die('Der Redaktionsplan ist nicht aktuell. Bitte den Plan aktualisieren.');
++        // A technically current but topically stale snapshot is never downloadable.
++        if(!PSERC_Plan_Dependency_Fingerprint::existingPsteAuditCurrent())
++            wp_die('Die gespeicherte Themenprüfung ist nicht mehr aktuell. Bitte zuerst die bestehende Themenautomatik abschließen.');
+         try {
+             $batch=PSERC_Plan_Snapshot_Store::materializeReadyBatch($header);
+             $boundary=PSERC_Metadata_Boundary::validateBatch($batch);

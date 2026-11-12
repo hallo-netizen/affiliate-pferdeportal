@@ -1,0 +1,54 @@
+{
+  "scope": "PFERDEATELIER_ISOLATED_QA",
+  "status": "QA_ONLY_NOT_INSTALLED",
+  "original_pste": {
+    "file": "PSTE-0.57.144.24-PARKHAUS-QUELLFIX-NUR-TEST.zip",
+    "bytes": 635721,
+    "sha256": "056f9c6e1e8b273c3ece199b5b3d842b7f5c1ac42810b9ce5531b82525c8bd4e"
+  },
+  "new_pste": {
+    "file": "PSTE-0.57.144.25-QUELLEN-IDENTITAET-KISS-NUR-TEST.zip",
+    "bytes": 639575,
+    "sha256": "27bfc3d3f8394bfe8f51fb32b3552a0da99b8dc08bfce3954acafa867b182580"
+  },
+  "unchanged_pserc": {
+    "file": "PSERC-0.28.55-TEST.zip",
+    "bytes": 266498,
+    "sha256": "501959a0ac73a1b81070ed23623935999ed1058385b3ba587e0f8bef9c9816d0"
+  },
+  "paired_archive": {
+    "file": "PFERDEATELIER-PSTE-05714425-PSERC-02855-QA-PAAR.zip",
+    "bytes": 880957,
+    "sha256": "fd4e8c64bfb9612a6f658085d6b416a9f2b2b7418977e43c0b1f4dfa82138c11"
+  },
+  "new_pste_version": "0.57.144.25",
+  "zip_entries_pass": 121,
+  "php_lint_pass": 83,
+  "changed_files": [
+    "Portal SEO Topic Engine/includes/class-pste-mini-workflow.php",
+    "Portal SEO Topic Engine/includes/class-pste-snapshot.php",
+    "Portal SEO Topic Engine/portal-seo-topic-engine.php"
+  ],
+  "original_user_export": "pferdeatelier-mini-ergebnisse-20261108-162920.json",
+  "original_count": 1179,
+  "retained_after_reconciliation": 1179,
+  "legacy_identityless_editorial_rows": 9,
+  "historical_orphan_reserved_slots": 3,
+  "real_wp_title_joins": 141,
+  "canonical_id_duplicate_wp_article_groups": 1,
+  "canonical_collision_wp_post_ids": [
+    16029,
+    972638
+  ],
+  "tests_pass": 85,
+  "single_external_seo_owner_completed": false,
+  "reimport_done": false,
+  "wordpress_real_install_done": false,
+  "k0_changed": false,
+  "production_write_attempted": false,
+  "positive_test_synthetic_values_present": true,
+  "source_provenance_on_real_wp_pending": true,
+  "wrong_wp_canonical_meta_cleanup_pending": true,
+  "all_144_slots_retained": true,
+  "source_qa_note": "Real 1179-row source recreated with PHP mocks; three missing posts simulated as absent; synthetic content only in explicitly labelled positive fixtures. Reconcile legacy empty placeholders and orphaned reservations without declaring them active articles. No WordPress DB writes."
+}

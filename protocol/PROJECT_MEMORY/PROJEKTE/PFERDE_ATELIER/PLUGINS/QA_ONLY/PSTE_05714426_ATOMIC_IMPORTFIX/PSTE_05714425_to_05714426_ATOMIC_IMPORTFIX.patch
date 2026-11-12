@@ -1,0 +1,73 @@
+--- a/Portal SEO Topic Engine/includes/class-pste-mini-workflow.php
++++ b/Portal SEO Topic Engine/includes/class-pste-mini-workflow.php
+@@ -1174,19 +1174,43 @@
+     private static function storeSeoDecisionsIfUnchanged(array $before,array $after): void {
+         global $wpdb;
+         if(!is_object($wpdb)||empty($wpdb->options)
+-            ||!method_exists($wpdb,'prepare')||!method_exists($wpdb,'query')
+-            ||!function_exists('maybe_serialize'))
++            ||!method_exists($wpdb,'prepare')||!method_exists($wpdb,'get_row')
++            ||!method_exists($wpdb,'query')||!function_exists('maybe_serialize')
++            ||!function_exists('maybe_unserialize'))
+             throw new RuntimeException('PSTE_MINI_ATOMIC_OPTION_STORAGE_UNAVAILABLE');
+-        $old=maybe_serialize($before);
++
++        // Compare to the *actual serialized database value*, not a newly
++        // serialized get_option() result. WordPress state normalization, e.g.
++        // missing legacy default keys, need not recreate the original bytes.
++        // A genuine concurrent change must still block the entire import.
++        $row=$wpdb->get_row($wpdb->prepare(
++            "SELECT option_value FROM {$wpdb->options} WHERE option_name=%s",
++            self::STORE),ARRAY_A);
++        if(!is_array($row)||!isset($row['option_value'])
++            ||((string)($wpdb->last_error??''))!=='')
++            throw new RuntimeException('PSTE_MINI_ATOMIC_OPTION_SOURCE_READ_FAILED');
++        $old=(string)$row['option_value'];
++        $source=maybe_unserialize($old);
++        if(!is_array($source))
++            throw new RuntimeException('PSTE_MINI_ATOMIC_OPTION_SOURCE_INVALID');
++        $source+=['completed'=>[], 'active'=>null, 'last_report'=>[], 'clarification'=>[]];
++        if($source!==$before)
++            throw new RuntimeException('PSTE_MINI_ATOMIC_OPTION_CHANGED_RELOAD_REQUIRED');
+         $next=maybe_serialize($after);
+-        if(!is_string($old)||!is_string($next))
++        if(!is_string($next))
+             throw new RuntimeException('PSTE_MINI_ATOMIC_OPTION_SERIALIZATION_FAILED');
+-        $sql=$wpdb->prepare(
++        if(hash_equals($old,$next))
++            throw new RuntimeException('PSTE_MINI_ATOMIC_OPTION_NO_CHANGE');
++
++        // Exact compare-and-swap. A second write between SELECT and UPDATE
++        // causes 0 affected rows, so no external SEO verdict is overwritten.
++        $changed=$wpdb->query($wpdb->prepare(
+             "UPDATE {$wpdb->options} SET option_value=%s WHERE option_name=%s AND BINARY option_value=BINARY %s",
+-            $next,self::STORE,$old);
+-        $changed=$wpdb->query($sql);
+-        if($changed!==1||((string)($wpdb->last_error??''))!=='')
+-            throw new RuntimeException('PSTE_MINI_ATOMIC_OPTION_CONFLICT_RELOAD_AND_RETRY');
++            $next,self::STORE,$old));
++        if($changed===false||((string)($wpdb->last_error??''))!=='')
++            throw new RuntimeException('PSTE_MINI_ATOMIC_OPTION_DATABASE_WRITE_FAILED');
++        if($changed!==1)
++            throw new RuntimeException('PSTE_MINI_ATOMIC_OPTION_CHANGED_RELOAD_REQUIRED');
+         if(function_exists('wp_cache_delete')){
+             wp_cache_delete(self::STORE,'options');
+             wp_cache_delete('alloptions','options');
+--- a/Portal SEO Topic Engine/portal-seo-topic-engine.php
++++ b/Portal SEO Topic Engine/portal-seo-topic-engine.php
+@@ -2,13 +2,13 @@
+ /**
+  * Plugin Name: Portal SEO Themenengine
+  * Description: Einfacher Longtail-Workflow: recherchiert Suchphrasen, übernimmt Sprachtitel und ordnet ausschließlich vorhandene Portalkategorien zu und prüft gegen den eigenen Bestand. Verändert keine Beiträge, Inhalte, Gestaltung oder Textproduktionsregeln.
+- * Version: 0.57.144.25
++ * Version: 0.57.144.26
+  * Requires PHP: 8.0
+  * Author: Workflow Automation
+  */
+ if (!defined('ABSPATH')) { return; }
+ 
+-define('PSTE_VERSION', '0.57.144.25');
++define('PSTE_VERSION', '0.57.144.26');
+ define('PSTE_DIR', __DIR__ . '/');
+ define('PSTE_OPTION_SETTINGS', 'pste_settings_v1');
+ define('PSTE_OPTION_SCHEMA', 'pste_schema_version');

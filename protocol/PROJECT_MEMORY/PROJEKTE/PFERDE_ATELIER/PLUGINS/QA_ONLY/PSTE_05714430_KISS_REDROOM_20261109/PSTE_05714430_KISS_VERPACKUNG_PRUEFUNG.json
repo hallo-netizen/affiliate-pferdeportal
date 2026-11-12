@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "plugin_version": "0.57.144.30",
+  "zip": "PSTE-0.57.144.30-KISS-REDAKTIONSBUERO-NUR-TEST.zip",
+  "bytes": 643832,
+  "sha256": "3f32f511c39d77bd9a26d15222a46511ce81ef8180052caacbd3ca4405067d68",
+  "source_archive_sha256": "28504ba294f928ccd70ded6deab2815c9a7b19b823db93e3587739bff583a969",
+  "total_file_paths": 121,
+  "php_files": 83,
+  "changed_files": [
+    "Portal SEO Topic Engine/includes/class-pste-admin.php",
+    "Portal SEO Topic Engine/includes/class-pste-repository.php",
+    "Portal SEO Topic Engine/portal-seo-topic-engine.php"
+  ],
+  "fresh_extraction_sha256_files_verified": 121,
+  "fresh_replay": {
+    "real61_room": {
+      "contract": "PSTE_V30_REAL61_ADMIN_ROOM_QA",
+      "status": "PASS",
+      "checks": 338,
+      "total": 338,
+      "real_original_topics": 61,
+      "category_room": 52,
+      "page_counts": 3,
+      "allowed": "review-only, K0 category still mandatory",
+      "full_workflow_passed": false
+    },
+    "shared_sql": {
+      "contract": "PSTE_V30_SHARED_REPOSITORY_SQL_QA",
+      "status": "PASS",
+      "checks": 116,
+      "actual_sql_selects": 6,
+      "original_topics": 61,
+      "room_matches": 52,
+      "fake_mentions_filtered_by_ui": 1,
+      "extra_tables": 0,
+      "extra_writers": 0
+    },
+    "real_html": {
+      "contract": "PSTE_V30_ACTUAL_ADMIN_HTML_QA",
+      "status": "PASS",
+      "checks": 15,
+      "actual_rendered_rows": 29,
+      "has_category_form": true,
+      "duplicate_approval_menu": false,
+      "k0_not_called": true
+    }
+  },
+  "previous_qa_checks": 2564,
+  "new_qa_checks": 469,
+  "combined_local_checks": 3033,
+  "full_workflow_passed": false,
+  "wp_mysql_end_to_end_tested": false,
+  "k0_pserc_ppm_live_changed": false,
+  "new_database_table": false,
+  "new_worker": false,
+  "quality_scope": "Existing WordPress editorial office review UI only; no automatic new taxonomy or production approval"
+}

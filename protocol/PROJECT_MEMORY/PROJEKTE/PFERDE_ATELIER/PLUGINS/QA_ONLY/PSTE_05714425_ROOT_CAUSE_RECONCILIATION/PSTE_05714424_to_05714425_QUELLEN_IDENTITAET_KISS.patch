@@ -1,0 +1,409 @@
+--- a/Portal SEO Topic Engine/includes/class-pste-mini-workflow.php
++++ b/Portal SEO Topic Engine/includes/class-pste-mini-workflow.php
+@@ -752,7 +752,24 @@
+                 'post_types'=>$types,'statuses'=>$states];
+             // Reuse this already-read inventory for the existing PPM679 slot linkage.
+             $wordpressById=[];
+-            foreach($items as $wpRow)$wordpressById[(int)$wpRow['id']]=$wpRow;
++            $wordpressByCanonical=[];
++            foreach($items as $wpRow){
++                $wordpressById[(int)$wpRow['id']]=$wpRow;
++                $id=trim((string)($wpRow['canonical_article_id']??''));
++                if($id!=='')$wordpressByCanonical[$id][]=$wpRow;
++            }
++            // Record every duplicate WP metadata identity. A legacy stray
++            // canonical tag is not a second existing editorial plan slot, but
++            // it must be visible for a one-time source-side metadata repair.
++            $canonicalCollisions=[];
++            foreach($wordpressByCanonical as $identity=>$matches){
++                if(count($matches)<2)continue;
++                $canonicalCollisions[]=['canonical_article_id'=>$identity,
++                    'post_ids'=>array_values(array_map(static fn($x)=>(int)$x['id'],$matches)),
++                    'plan_slots'=>array_values(array_map(static fn($x)=>(string)($x['plan_slot']??''),$matches))];
++            }
++            $result['sources']['WORDPRESS']['canonical_collision_count']=count($canonicalCollisions);
++            $result['sources']['WORDPRESS']['canonical_collisions']=$canonicalCollisions;
+             $result['items']=$items;
+ 
+             $pool=PSTE_Repository::table('topic_pool');
+@@ -795,16 +812,25 @@
+             $sourceProblems=[];
+             $editorial=PSTE_Snapshot::editorialPlanForParkhaus();
+             $editorialUnknown=(int)($editorial['unresolved_count']??0);
++            $editorialConflict=!empty($editorial['source_conflict']);
+             $result['sources']['EDITORIAL_PLAN']=[
+-                'complete'=>$editorialUnknown===0,
++                'complete'=>$editorialUnknown===0&&!$editorialConflict,
+                 'status'=>(string)($editorial['status']??'NOT_AVAILABLE'),
+                 'sha256'=>(string)($editorial['sha256']??'NOT_AVAILABLE'),
+                 'item_count'=>count((array)($editorial['items']??[])),
+                 'unresolved_count'=>$editorialUnknown,
+-                'unresolved_indices'=>(array)($editorial['unresolved_indices']??[])];
++                'unresolved_indices'=>(array)($editorial['unresolved_indices']??[]),
++                'legacy_empty_count'=>(int)($editorial['legacy_empty_count']??0),
++                'legacy_empty_indices'=>(array)($editorial['legacy_empty_indices']??[]),
++                'source_origin'=>(string)($editorial['source_origin']??'NONE'),
++                'source_conflict'=>$editorialConflict,
++                'filter_sha256'=>(string)($editorial['filter_sha256']??''),
++                'option_sha256'=>(string)($editorial['option_sha256']??''),
++                'filter_item_count'=>(int)($editorial['filter_item_count']??0),
++                'option_item_count'=>(int)($editorial['option_item_count']??0)];
+             foreach((array)($editorial['items']??[]) as $row){
+                 if(!is_array($row))throw new RuntimeException('EDITORIAL_PLAN_ROW_NOT_ARRAY');
+-                if(($row['status']??'')==='UNRESOLVED_SOURCE_TITLE'){
++                if(in_array(($row['status']??''),['UNRESOLVED_SOURCE_TITLE','LEGACY_EMPTY_PLACEHOLDER'],true)){
+                     $result['items'][]=array_merge(['source'=>'EDITORIAL_PLAN'], $row);
+                     continue;
+                 }
+@@ -817,6 +843,7 @@
+                     'category'=>(string)($row['category_name']??'')];
+             }
+             if($editorialUnknown>0)$sourceProblems[]='EDITORIAL_PLAN_UNRESOLVED:'.$editorialUnknown;
++            if($editorialConflict)$sourceProblems[]='EDITORIAL_PLAN_SOURCE_CONFLICT';
+ 
+             $pserc=self::readExistingPsercPlanForParkhaus();
+             $result['sources']['PSERC_ACTIVE_PLAN']=[
+@@ -839,37 +866,88 @@
+             $runtimeItems=$runtimeOriginal['items'];
+             if(!$runtimeItems)
+                 throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_EMPTY');
+-            $runtimeMissingTitles=[];
++            $runtimeMissingTitles=[];$historicalOrphans=[];$migratedPostIds=[];
++            $seenCanonicals=[];$seenSlots=[];
+             foreach($runtimeItems as $itemId=>$item){
+                 if(!is_array($item))throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_ITEM_INVALID');
+                 $canonical=trim((string)($item['canonical_article_id']??$itemId));
+                 if($canonical==='')throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_SLOT_ID_MISSING');
++                $slot=trim((string)($item['plan_slot_sha256']??$item['plan_slot']??''));
++                if(isset($seenCanonicals[$canonical]))throw new RuntimeException('EXISTING_RUNTIME_DUPLICATE_CANONICAL');
++                $seenCanonicals[$canonical]=true;
++                if(!preg_match('/^[a-f0-9]{64}$/D',$slot))
++                    throw new RuntimeException('EXISTING_RUNTIME_INVALID_PLAN_SLOT');
++                if(isset($seenSlots[$slot]))throw new RuntimeException('EXISTING_RUNTIME_DUPLICATE_PLAN_SLOT');
++                $seenSlots[$slot]=true;
+                 $postId=(int)($item['post_id']??0);
+                 $wpRow=$wordpressById[$postId]??null;
+-                // Some stored draft references point to a post outside the public
+-                // snapshot (e.g. trash/private custom type). Read that exact post
+-                // only; never invent a title or repeat a full-site scan.
+-                if($postId>0&&!is_array($wpRow)&&function_exists('get_post')){
+-                    $post=get_post($postId);
++                $matchingCanonical=(array)($wordpressByCanonical[$canonical]??[]);
++                $matchingIdentityAndSlot=array_values(array_filter($matchingCanonical,
++                    static fn($x)=>(string)($x['plan_slot']??'')===$slot));
++                // A reused post ID with a DIFFERENT recorded identity must not
++                // lend its unrelated title to an older reservation.
++                $directIdentityMismatch=is_array($wpRow)
++                    &&trim((string)($wpRow['canonical_article_id']??''))!==''
++                    &&trim((string)$wpRow['canonical_article_id'])!==$canonical;
++                if($directIdentityMismatch)$wpRow=null;
++                // Canonical alias pollution exists in the ACTUAL user's WP
++                // metadata: two unrelated posts share one canonical, but only
++                // one possesses the matching plan slot. That exact slot owns
++                // the plan identity; the other post remains a separate WP
++                // article and is reported as an alias collision.
++                $directSlotConflict=is_array($wpRow)
++                    &&trim((string)($wpRow['plan_slot']??''))!==''
++                    &&(string)$wpRow['plan_slot']!==$slot;
++                $migrationSlotConflict=!is_array($wpRow)&&count($matchingCanonical)>0
++                    &&count($matchingIdentityAndSlot)!==1;
++                $identityConflict=$directIdentityMismatch||$directSlotConflict
++                    ||count($matchingIdentityAndSlot)>1||$migrationSlotConflict;
++                $relinkedPostId=0;
++                // Search the already-scanned WP inventory by BOTH immutable
++                // identity and slot; never match by title or canonical alone.
++                if(!is_array($wpRow)&&!$identityConflict&&count($matchingIdentityAndSlot)===1){
++                    $wpRow=$matchingIdentityAndSlot[0];
++                    $relinkedPostId=(int)($wpRow['id']??0);
++                    $migratedPostIds[]=$postId;
++                }
++                $postLookupAttempted=false;$postConfirmedMissing=false;
++                if($postId>0&&!is_array($wpRow)&&!$identityConflict&&function_exists('get_post')){
++                    $postLookupAttempted=true;$post=get_post($postId);
++                    $postConfirmedMissing=!is_object($post);
+                     if(is_object($post)&&isset($post->ID))
+                         $wpRow=['id'=>(int)$post->ID,'title'=>(string)($post->post_title??''),
+                             'status'=>(string)($post->post_status??''),'target_keyword'=>'','categories'=>[]];
+                 }
+-                $runtimeTitle=is_string($item['title']??null)?trim($item['title']):'';
++                $storedTitleValue=$item['title']??null;
++                $ambiguousStoredTitle=is_array($storedTitleValue)&&$storedTitleValue!==[]
++                    &&PSTE_Snapshot::editorialSafeText($storedTitleValue)==='';
++                $runtimeTitle=PSTE_Snapshot::editorialSafeText($storedTitleValue);
+                 $title=$runtimeTitle!==''&&$runtimeTitle!=='Array'?$runtimeTitle:
+                     (is_array($wpRow)?trim((string)($wpRow['title']??'')):'');
+-                // Keep all occupied article identities, including unresolvable
+-                // post references, visible in the export, but never declare FREI.
+-                $titleUnresolved=$title===''||$title==='Array';
+-                if($titleUnresolved){$title='';$runtimeMissingTitles[]=$postId;}
++                $titleUnresolved=$identityConflict||$title===''||$title==='Array';
++                $historicalOrphan=$titleUnresolved&&!$ambiguousStoredTitle&&$postId>0&&$postLookupAttempted
++                    &&$postConfirmedMissing&&!$identityConflict&&count($matchingCanonical)===0
++                    &&$slot!==''&&(string)($item['status']??'')==='DRAFT_CREATED_READBACK_PASS'
++                    &&trim((string)($item['target_keyword']??''))===''
++                    &&trim((string)($item['category_slug']??''))===''
++                    &&trim((string)($item['article_type']??''))==='';
++                if($titleUnresolved){
++                    $title='';
++                    if($historicalOrphan)$historicalOrphans[]=$postId;
++                    else $runtimeMissingTitles[]=$postId;
++                }
+                 $targetKeyword=is_string($item['target_keyword']??null)?trim($item['target_keyword']):'';
+                 if($targetKeyword===''&&is_array($wpRow))$targetKeyword=(string)($wpRow['target_keyword']??'');
+                 $category=trim((string)($item['category_slug']??''));
+                 $wpCategories=is_array($wpRow)?(array)($wpRow['categories']??[]):[];
+                 $result['items'][]=['source'=>'PPM679_EXISTING_EDITORIAL_RUNTIME',
+                     'canonical_article_id'=>$canonical,
+-                    'plan_slot'=>(string)($item['plan_slot_sha256']??$item['plan_slot']??''),
++                    'plan_slot'=>$slot,
+                     'post_id'=>$postId,
++                    'resolved_post_id'=>$relinkedPostId>0?$relinkedPostId:$postId,
++                    'post_link_status'=>$historicalOrphan?'HISTORICAL_POST_MISSING_SLOT_STILL_RESERVED':($relinkedPostId>0?'RELINKED_BY_EXACT_CANONICAL_AND_SLOT':(count($matchingCanonical)>1?'EXACT_SLOT_OWNER_WITH_DUPLICATE_CANONICAL_ALIAS':'UNCHANGED')),
++                    'technical_reservation'=>true,
++                    'semantic_occupancy'=>$historicalOrphan?'NONE':($titleUnresolved?'UNKNOWN':'PRESENT'),
+                     'post_status'=>is_array($wpRow)?(string)($wpRow['status']??''):'',
+                     'status'=>(string)($item['status']??'PLANNED'),
+                     'category'=>$category,
+@@ -877,7 +955,7 @@
+                     'article_type'=>(string)($item['article_type']??''),
+                     'target_keyword'=>$targetKeyword,
+                     'title'=>$title,
+-                    'title_status'=>$titleUnresolved?'UNRESOLVED_SOURCE_TITLE':'RESOLVED'];
++                    'title_status'=>$historicalOrphan?'HISTORICAL_ORPHAN_RESERVATION':($titleUnresolved?'UNRESOLVED_SOURCE_TITLE':'RESOLVED')];
+             }
+             $runtimeAfter=get_option('ppm679_editorial_plan_runtime_state_v1',null);
+             $beforeRuntime=wp_json_encode($runtimeOriginal,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+@@ -891,6 +969,10 @@
+                 'item_count'=>count($runtimeItems),
+                 'unresolved_count'=>count($runtimeMissingTitles),
+                 'unresolved_post_ids'=>$runtimeMissingTitles,
++                'historical_orphan_count'=>count($historicalOrphans),
++                'historical_orphan_post_ids'=>$historicalOrphans,
++                'migrated_post_count'=>count($migratedPostIds),
++                'migrated_original_post_ids'=>$migratedPostIds,
+                 'sha256'=>hash('sha256',$beforeRuntime)];
+             if($runtimeMissingTitles)
+                 $sourceProblems[]='PPM679_RUNTIME_TITLE_UNRESOLVED:'.count($runtimeMissingTitles);
+@@ -963,6 +1045,10 @@
+         $existingReferences=[];
+         foreach((array)($snapshot['items']??[]) as $existing){
+             if(!is_array($existing))continue;
++            // Proven legacy debris and old no-longer-existing drafts have no
++            // semantic article to cite as BELEGT; their slots stay reserved.
++            if(($existing['status']??'')==='LEGACY_EMPTY_PLACEHOLDER'
++                ||($existing['title_status']??'')==='HISTORICAL_ORPHAN_RESERVATION')continue;
+             $source=(string)($existing['source']??'');
+             if($source==='')continue;
+             foreach(['id','post_id','pool_key','seo_topic_id','canonical_article_id',
+--- a/Portal SEO Topic Engine/includes/class-pste-snapshot.php
++++ b/Portal SEO Topic Engine/includes/class-pste-snapshot.php
+@@ -240,43 +240,111 @@
+     }
+ 
+     /** @return array<string,mixed> */
++    /**
++     * Legacy editorial import is optional: content-less, identity-less damaged
++     * import stubs cannot be treated as real article plans. The parkhouse reader
++     * preserves these rows without giving them semantic occupancy. All other
++     * damaged/ambiguous real records still fail closed for every consumer.
++     */
+     public static function editorialPlan(): array {
+-        $external=apply_filters('pste_read_only_editorial_plan_snapshot',null);if(!is_array($external))$external=get_option(PSTE_OPTION_EDITORIAL_PLAN_IMPORT,null);
+-        if(!is_array($external))return ['contract'=>'PSTE_EDITORIAL_PLAN_SNAPSHOT_V1','status'=>'NOT_AVAILABLE','sha256'=>'NOT_AVAILABLE','items'=>[]];
+-        $items=self::extractEditorialPlanItems($external);
+-        if(!$items)return ['contract'=>'PSTE_EDITORIAL_PLAN_SNAPSHOT_V1','status'=>'NOT_AVAILABLE','sha256'=>'NOT_AVAILABLE','items'=>[]];
+-        $normalized=self::normalizeEditorialPlanItems($items);
+-        // Existing imported rows must never silently disappear or become 'Array'.
+-        if(count($normalized)!==count($items))throw new RuntimeException('PSTE_EDITORIAL_PLAN_ITEM_UNRESOLVED');
+-        $snapshot=self::bind('PSTE_EDITORIAL_PLAN_SNAPSHOT_V1',$normalized);
++        $source=self::editorialPlanForParkhaus();
++        if(!empty($source['source_conflict']))throw new RuntimeException('PSTE_EDITORIAL_PLAN_SOURCE_CONFLICT');
++        if((int)($source['unresolved_count']??0)>0)
++            throw new RuntimeException('PSTE_EDITORIAL_PLAN_ITEM_UNRESOLVED');
++        $active=array_values(array_filter((array)($source['items']??[]),
++            static fn($row)=>is_array($row)&&($row['status']??'')!=='LEGACY_EMPTY_PLACEHOLDER'));
++        if(!$active)return ['contract'=>'PSTE_EDITORIAL_PLAN_SNAPSHOT_V1',
++            'status'=>'NOT_AVAILABLE','sha256'=>'NOT_AVAILABLE','items'=>[]];
++        $snapshot=self::bind('PSTE_EDITORIAL_PLAN_SNAPSHOT_V1',$active);
+         $snapshot['status']='AVAILABLE';
+         return $snapshot;
+     }
+ 
+     /**
+-     * Read-only MINI parkhouse inventory. Keep every old planning row even when
+-     * its title has already become unreadable. Unresolved records are exported
+-     * for source repair, NEVER treated as confirmed complete or automatically free.
+-     * The strict editorialPlan() used by other PSTE workflows stays unchanged.
++     * Explain which source actually owns the imported plan. The external WP
++     * filter must never silently replace a DIFFERENT persisted plan. Read both
++     * sources once; a disagreement blocks clearance without changing either.
++     */
++    private static function editorialPlanInputs(): array {
++        $filtered=apply_filters('pste_read_only_editorial_plan_snapshot',null);
++        $stored=get_option(PSTE_OPTION_EDITORIAL_PLAN_IMPORT,null);
++        $filterPresent=is_array($filtered);$optionPresent=is_array($stored);
++        $encode=static function($rows): string {
++            if(!is_array($rows))return '';
++            $json=wp_json_encode($rows,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
++            if(!is_string($json))throw new RuntimeException('PSTE_EDITORIAL_SOURCE_ENCODING_FAILED');
++            return hash('sha256',$json);
++        };
++        $filterHash=$encode($filtered);$optionHash=$encode($stored);
++        $conflict=$filterPresent&&$optionPresent&&!hash_equals($filterHash,$optionHash);
++        $origin=$filterPresent?($optionPresent?($conflict?'FILTER_CONFLICTS_WITH_OPTION':'FILTER_AND_OPTION_IDENTICAL'):'FILTER'):
++            ($optionPresent?'OPTION':'NONE');
++        return ['data'=>$filterPresent?$filtered:($optionPresent?$stored:null),
++            'source_origin'=>$origin,'source_conflict'=>$conflict,
++            'filter_sha256'=>$filterHash,'option_sha256'=>$optionHash,
++            'filter_item_count'=>$filterPresent?count(self::extractEditorialPlanItems($filtered)):0,
++            'option_item_count'=>$optionPresent?count(self::extractEditorialPlanItems($stored)):0];
++    }
++
++    /**
++     * Only a proven empty legacy conversion artifact may be ignored as a topic.
++     * Any identity, keyword, category, slot, heading, unknown field, or genuine
++     * title retains its full blocking authority. Never hard-code a row count.
++     */
++    private static function editorialEmptyLegacyArtifact(array $row): bool {
++        if(!isset($row['title'])||$row['title']!=='Array')return false;
++        $allowed=['title','primary_longtail_query','category_name','intent_cluster_id',
++            'headings','source_reference','production_title','article_title',
++            'target_keyword','category_slug','category_id','plan_slot',
++            'plan_slot_sha256','canonical_article_id','article_type',
++            'topic_family_name','topic_family_key','status'];
++        foreach($row as $key=>$value){
++            if(!in_array($key,$allowed,true))return false;
++            if(in_array($key,['title','primary_longtail_query'],true)&&$value==='Array')continue;
++            if($key==='status'&&$value==='PLANNED')continue;
++            if($value===null||$value===''||$value===[]||$value===0||$value==='0')continue;
++            return false;
++        }
++        return true;
++    }
++
++    /**
++     * Read every row once without destroying the original WordPress option.
++     * Distinguish true damaged article identities from identity-less import
++     * debris, and expose filter/option provenance instead of guessing.
+      */
+     public static function editorialPlanForParkhaus(): array {
+-        $external=apply_filters('pste_read_only_editorial_plan_snapshot',null);
+-        if(!is_array($external))$external=get_option(PSTE_OPTION_EDITORIAL_PLAN_IMPORT,null);
+-        if(!is_array($external))return ['contract'=>'PSTE_EDITORIAL_PLAN_SNAPSHOT_V1',
++        $inputSource=self::editorialPlanInputs();
++        $external=$inputSource['data'];
++        $info=['source_origin'=>$inputSource['source_origin'],
++            'source_conflict'=>$inputSource['source_conflict'],
++            'filter_sha256'=>$inputSource['filter_sha256'],
++            'option_sha256'=>$inputSource['option_sha256'],
++            'filter_item_count'=>$inputSource['filter_item_count'],
++            'option_item_count'=>$inputSource['option_item_count']];
++        if(!is_array($external))return array_merge(['contract'=>'PSTE_EDITORIAL_PLAN_SNAPSHOT_V1',
+             'status'=>'NOT_AVAILABLE','sha256'=>'NOT_AVAILABLE','items'=>[],
+-            'unresolved_count'=>0,'unresolved_indices'=>[]];
+-        $input=null;
+-        if(isset($external['items'])&&is_array($external['items']))$input=$external['items'];
+-        elseif(isset($external['articles'])&&is_array($external['articles']))$input=$external['articles'];
+-        elseif(isset($external['next_textmachine_metadata_batch']['items'])
+-            &&is_array($external['next_textmachine_metadata_batch']['items']))
+-            $input=$external['next_textmachine_metadata_batch']['items'];
+-        elseif(array_is_list($external))$input=$external;
+-        if($input===null||$input===[])return ['contract'=>'PSTE_EDITORIAL_PLAN_SNAPSHOT_V1',
+-            'status'=>'NOT_AVAILABLE','sha256'=>'NOT_AVAILABLE','items'=>[],
+-            'unresolved_count'=>0,'unresolved_indices'=>[]];
+-        $structure=self::structure();$clean=[];$unresolved=[];
+-        foreach(array_values($input) as $index=>$row){
++            'unresolved_count'=>0,'unresolved_indices'=>[],
++            'legacy_empty_count'=>0,'legacy_empty_indices'=>[]],$info);
++        $input=self::extractEditorialPlanItems($external);
++        if(!$input){
++            // An explicit empty list is absent; an unknown nonempty object is
++            // NOT silently equivalent to an empty plan.
++            $explicitEmpty=$external===[]
++                ||(isset($external['items'])&&is_array($external['items'])&&$external['items']===[])
++                ||(isset($external['articles'])&&is_array($external['articles'])&&$external['articles']===[])
++                ||(isset($external['next_textmachine_metadata_batch']['items'])
++                    &&is_array($external['next_textmachine_metadata_batch']['items'])
++                    &&$external['next_textmachine_metadata_batch']['items']===[]);
++            return array_merge(['contract'=>'PSTE_EDITORIAL_PLAN_SNAPSHOT_V1',
++                'status'=>$explicitEmpty?'NOT_AVAILABLE':'UNRECOGNIZED_FORMAT',
++                'sha256'=>'NOT_AVAILABLE','items'=>[],
++                'unresolved_count'=>$explicitEmpty?0:1,
++                'unresolved_indices'=>$explicitEmpty?[]:[0],
++                'legacy_empty_count'=>0,'legacy_empty_indices'=>[]],$info);
++        }
++        $structure=self::structure();$clean=[];$unresolved=[];$legacy=[];
++        foreach($input as $index=>$row){
+             try {
+                 if(!is_array($row))throw new RuntimeException('PSTE_EDITORIAL_PLAN_ROW_INVALID');
+                 $normalized=self::normalizeEditorialPlanItemsAgainstStructure([$row],$structure);
+@@ -285,9 +353,8 @@
+                     throw new RuntimeException('PSTE_EDITORIAL_PLAN_ROW_UNRESOLVED');
+                 $clean[]=$normalized[0];
+             }catch(Throwable $e){
+-                $unresolved[]=$index;
+-                // Preserve the actual persisted nested title value (rather than
+-                // invented titles) and field names, without mutating the WP option.
++                $empty=is_array($row)&&self::editorialEmptyLegacyArtifact($row);
++                if($empty)$legacy[]=$index;else $unresolved[]=$index;
+                 $sourceFields=[];
+                 if(is_array($row))foreach(['title','production_title','article_title',
+                     'primary_longtail_query','seo_title','headline'] as $field){
+@@ -295,25 +362,30 @@
+                 }
+                 $rawJson=wp_json_encode($row,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+                 if(!is_string($rawJson))throw new RuntimeException('PSTE_EDITORIAL_PLAN_ROW_ENCODING_FAILED');
+-                $clean[]=['status'=>'UNRESOLVED_SOURCE_TITLE','title'=>'',
+-                    'source_index'=>$index,'source_reference'=>'EDITORIAL_PLAN:'.$index,
++                $clean[]=['status'=>$empty?'LEGACY_EMPTY_PLACEHOLDER':'UNRESOLVED_SOURCE_TITLE',
++                    'title'=>'','source_index'=>$index,'source_reference'=>'EDITORIAL_PLAN:'.$index,
+                     'raw_record_sha256'=>hash('sha256',$rawJson),
+                     'raw_field_names'=>is_array($row)?array_keys($row):[],
+-                    'raw_title_fields'=>$sourceFields,'diagnostic_reason'=>'EDITORIAL_PLAN_ORIGINAL_TITLE_NOT_READABLE'];
++                    'raw_title_fields'=>$sourceFields,
++                    'diagnostic_reason'=>$empty?'LEGACY_IMPORT_NO_SEMANTIC_IDENTITY':'EDITORIAL_PLAN_ORIGINAL_TITLE_NOT_READABLE',
++                    'semantic_occupancy'=>$empty?'NONE':'UNKNOWN'];
+             }
+         }
+         $snapshot=self::bind('PSTE_EDITORIAL_PLAN_SNAPSHOT_V1',$clean);
+-        $snapshot['status']=$unresolved?'QUARANTINED':'AVAILABLE';
++        $snapshot['status']=$inputSource['source_conflict']?'SOURCE_CONFLICT':
++            ($unresolved?'QUARANTINED':($legacy?'AVAILABLE_WITH_LEGACY_PLACEHOLDERS':'AVAILABLE'));
+         $snapshot['unresolved_count']=count($unresolved);
+         $snapshot['unresolved_indices']=$unresolved;
+-        return $snapshot;
++        $snapshot['legacy_empty_count']=count($legacy);
++        $snapshot['legacy_empty_indices']=$legacy;
++        return array_merge($snapshot,$info);
+     }
+ 
+     private static function extractEditorialPlanItems(array $external): array {
+-        if(isset($external['items'])&&is_array($external['items']))return array_values(array_filter($external['items'],'is_array'));
+-        if(isset($external['articles'])&&is_array($external['articles']))return array_values(array_filter($external['articles'],'is_array'));
+-        if(isset($external['next_textmachine_metadata_batch']['items'])&&is_array($external['next_textmachine_metadata_batch']['items']))return array_values(array_filter($external['next_textmachine_metadata_batch']['items'],'is_array'));
+-        if(array_keys($external)===range(0,count($external)-1))return array_values(array_filter($external,'is_array'));
++        if(isset($external['items'])&&is_array($external['items']))return array_values($external['items']);
++        if(isset($external['articles'])&&is_array($external['articles']))return array_values($external['articles']);
++        if(isset($external['next_textmachine_metadata_batch']['items'])&&is_array($external['next_textmachine_metadata_batch']['items']))return array_values($external['next_textmachine_metadata_batch']['items']);
++        if(array_keys($external)===range(0,count($external)-1))return array_values($external);
+         return [];
+     }
+ 
+--- a/Portal SEO Topic Engine/portal-seo-topic-engine.php
++++ b/Portal SEO Topic Engine/portal-seo-topic-engine.php
+@@ -2,13 +2,13 @@
+ /**
+  * Plugin Name: Portal SEO Themenengine
+  * Description: Einfacher Longtail-Workflow: recherchiert Suchphrasen, übernimmt Sprachtitel und ordnet ausschließlich vorhandene Portalkategorien zu und prüft gegen den eigenen Bestand. Verändert keine Beiträge, Inhalte, Gestaltung oder Textproduktionsregeln.
+- * Version: 0.57.144.24
++ * Version: 0.57.144.25
+  * Requires PHP: 8.0
+  * Author: Workflow Automation
+  */
+ if (!defined('ABSPATH')) { return; }
+ 
+-define('PSTE_VERSION', '0.57.144.24');
++define('PSTE_VERSION', '0.57.144.25');
+ define('PSTE_DIR', __DIR__ . '/');
+ define('PSTE_OPTION_SETTINGS', 'pste_settings_v1');
+ define('PSTE_OPTION_SCHEMA', 'pste_schema_version');
