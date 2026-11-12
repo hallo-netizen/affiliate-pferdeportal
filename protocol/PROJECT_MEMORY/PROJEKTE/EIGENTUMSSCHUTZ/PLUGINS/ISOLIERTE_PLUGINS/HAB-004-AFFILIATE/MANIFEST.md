@@ -1,3 +1,11 @@
+## 12.11.2026 – OFFIZIELLE RC21 (0.1.18-rc21): KATEGORIE-PRODUKTKACHELN KOMPAKT, 3/2/1
+
+**Vollständige Installations-ZIP und CURRENT:** `HAB_AFFILIATE_RC21_0.1.18-rc21.zip` bzw. `CURRENT.zip`, beide 2.337.596 Bytes, 36 Dateien, SHA256 `0f40eddb4526434c03acdd370d2763ac5a01eaea862a40cb9ae25bb8754363bf`. Aus dem echten RC20-CURRENT exakt und ohne Datenbank-/Frontend-Änderung gebaut. 4 Dateien im ZIP berührt: Hauptdatei (Version und Kartenhöhen), bestehende Hab-Bridge (Kategorie-Grid), bestehende CSS (responsive) und Readme (Version). Alle übrigen 32 unverändert.
+
+**Ursache behoben:** Die drei bestehenden Produktkarten auf Kategorieebene wurden zuvor nur aneinandergehängt; zusätzlich hohe starre Mindesthöhen. Neues einziges Grid **Desktop 3 / Tablet 2 / Mobil 1**, keine doppelten Karten-Engines, kein Designplugin-Update. Vorhandene Multi-Provider-Ausgabe unverändert: zusätzliche Amazon/eBay/Idealo-Buttons nur bei GTIN-Exaktmatch und aktivem Feed, kein erfundenes Foto für Amazon-ASIN. Eigene Versicherungs-Sperre und andere Portalwelten unverändert. **RC21 Offline-PASS**: GitHub-Actions 43244276656, 11 echte PHP-Bridge-/Design-Tests, alle 25 PHP-Dateien lintfrei, 36/36 Affiliate-CRC und 432/432 Design-CRC. **WordPress-Installation/Liveabnahme OFFEN**. Verbindlicher Nachweis: `../../../../AFFILIATE/RC21_KATEGORIE_PRODUKTKACHELN_20261112.md`.
+
+---
+
 ## 12.11.2026 – RC20 (0.1.17-rc20): IDEALO-FEED 2901 AUCH FÜR HAB FREIGEBEN
 
 **Ursache eindeutig im echten HAB-004 RC19 nachgewiesen:** `idealo_settings()` hat `enabled=false` gesetzt, sobald **feed_id=2901** gespeichert war, auch bei korrekter Hab-&-Bewahr-Werbefläche `568944`. Der Idealo-Publisher zeigt Feed 2901 jedoch für 568944 an. Diese zusätzliche Sperre gegen vermeintlich fremde Pferde-Atelier-Werte war sachlich falsch.
