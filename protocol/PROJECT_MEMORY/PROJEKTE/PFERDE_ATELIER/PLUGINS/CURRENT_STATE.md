@@ -1,3 +1,12 @@
+## 12.11.2026 – AKTUELLER QUELLENBEWEIS: QA .46/.70 NICHT FREIGEBEN (kein neuer Installer)
+- Vier echte Library-ZIPs PSTE .45/.46 und PSERC .69/.70 byteweise verglichen: genau 3 PSTE + 6 PSERC geänderte Dateien. .46 überspringt notwendige Bestandsfrische, .70 lässt im nachgebildeten ORIGINAL-Compiler-Pfad zwei synonyme neue Kandidaten durch und übersieht geänderte reale Struktur-/Planquellen. Bisherige Annahme, MINI verliere Kategorie/Typ generell, ist durch vorhandenen zweiten MINI-Export widerlegt. **MINI bleibt.**
+- **QA-Entscheidung:** .46 und .70 dürfen nicht installiert/als Behebung ausgegeben werden. Exakte Rücknahme auf unveränderte .45/.69 nur in isolierter Arbeitskopie bestanden: 121/121 und 63/63 gleiche Dateien, **83 + 43** PHP-Syntax-PASS. Ältere QA-Versionen sind dadurch NICHT live abgenommen.
+- **Bewiesene kleine Korrektur:** Nur Jobstatus, Generation und Jobkennung aus PSERC-Plan-Fingerabdruck herauslassen, aber sämtliche echten Struktur-/Plan-/Inventar-/Themenquellen weiter binden. Lokaler Patch auf .69: **8/8** Originalklassen-Gegenproben bestanden; nicht zu einem Installationspaket freigegeben.
+- **Nächste gebundene Arbeit:** nur diesen abgesicherten Minimalfix in bestehenden Quellen weiter qualifizieren, notwendige MINI-Bestandsprüfung vollständig erhalten, gleichbedeutende neue Themen **nicht** freigeben; danach ein echter TEST-WP-Gesamtlauf. READY=0 im echten WordPress ist weiter ohne belastbare DB-Ursache; keine neue Massenrecherche, keine alten drei Artikel vortäuschen, kein Merge, kein LIVE.
+- **Beweisdokument:** [Quellen-Audit und sichere Rücknahme](QA_ONLY/20261112_QUELLEN_AUDIT_FALSCHE_ANNAHMEN_SICHERE_RUECKNAHME.md). Verbindlicher Zielvertrag [Kistenprinzip](EVIDENCE/PSTE_KISTENPRINZIP_VERBINDLICHER_ZIELVERTRAG_20261107.md).
+
+---
+
 ## 10.11.2026 – PSERC 0.28.62: nur ein Download, 0.28.61-Quellenprofil-Blocker simuliert und bereinigt
 - **QA aus echter 0.28.61 ZIP:** Zweiter Download enthielt die neu eingeführte harte Forderung nach `intent_profile.status=PASS`, `ok`, `search_intent`, `profile_sha256` und Typbindung für **alle** READY-Artikel. Der gemeldete `PSERC_K0_OWNER_INTENT_PROOF_NOT_PASS` ist mit einem alten dreiteiligen Snapshot **wortgleich reproduziert**. Ohne tatsächlichen WP-Snapshot ist die konkret fehlende Einzelangabe unbekannt.
 - **PSERC 0.28.62-KISS-EINE-UEBERGABE-NUR-WORDPRESS-TEST.zip** geprüft, gespeichert unter persönlichem Pluginbüro `/pferdeatelier/PLUGINS/QA/`, SHA256 `3b4ae411d85cbeeeaab6945ddc702cb302f2d2c148c5c82eefb9256dbb410c25`. Nur WordPress-TEST, **NICHT LIVE**.
