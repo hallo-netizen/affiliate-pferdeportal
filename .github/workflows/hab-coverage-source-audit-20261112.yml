@@ -12,12 +12,13 @@ jobs:
       - name: Read exact source for category coverage, parser, card and established exclusion contract
         shell: bash
         run: |
+          python3 protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py
           python3 - <<'PY'
           from zipfile import ZipFile
           z=ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
           ranges={
-           'affiliate-portal-router/includes/trait-ppar-idealo.php':[(245,278),(329,440),(579,642),(747,813),(1340,1363)],
-           'affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php':[(145,245),(270,303)],
+           'affiliate-portal-router/includes/trait-ppar-idealo.php':[(245,280),(329,420),(579,690),(745,870),(1365,1425)],
+           'affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php':[(145,245),(265,310)],
            'affiliate-portal-router/affiliate-portal-router.php':[(1113,1167),(2973,3110),(6880,6965)],
            'affiliate-portal-router/assets/frontend.css':[(2250,2335)]
           }
@@ -31,7 +32,6 @@ jobs:
       - name: Build actual installed Hab RC23 and print only relevant core source
         run: |
           set -euo pipefail
-          python3 protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py
           python3 - <<'PY'
           from zipfile import ZipFile
           import re
