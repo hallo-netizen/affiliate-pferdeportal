@@ -47,11 +47,15 @@ with ZipFile(BytesIO(raw)) as orig:
         }
         if (($node['type'] ?? '') !== 'page') { return ''; }""")
     # Keep banners, world hubs, posts, editorial and special contexts unchanged.
-    b=once(b,"        return Portal_Affiliate_Router::instance()->hab_bw_area_slot($id,$kind,(string)$node['id']);",
+    area_start=b.index("    private static function area($html, $node_id, $kind) {")
+    before,after=b[:area_start],b[area_start:]
+    after=after.replace("        return Portal_Affiliate_Router::instance()->hab_bw_area_slot($id,$kind,(string)$node['id']);",
     """        $result=Portal_Affiliate_Router::instance()->hab_bw_area_slot($id,$kind,(string)$node['id']);
         if ($kind!=='products' || (string)($node['pillar'] ?? '')!=='core'
             || strpos((string)($node['id'] ?? ''),'core:world:')===0) { return $result; }
-        return self::category_product_grid_markup($result);""")
+        return self::category_product_grid_markup($result);""",1)
+    assert after.count("return self::category_product_grid_markup($result);")==1
+    b=before+after
     files[bridge]=b.encode("utf8")
     s=files[main].decode("utf8")
     s=once(s,"Version: 0.1.17-rc20","Version: 0.1.18-rc21")
