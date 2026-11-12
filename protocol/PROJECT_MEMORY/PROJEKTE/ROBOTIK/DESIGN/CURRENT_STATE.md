@@ -1,5 +1,13 @@
 # ROBOTIK – DESIGN – CURRENT
 
+## AKTUELL 12.11.2026 – TESTDESIGN 0.2.1 nach WordPress-Screenshot
+- **Einziger aktuelle Testinstaller:** Library `/robotik/Designbüro/ROBOTIK_STRUKTURDESIGN_0.2.1_GEPRUEFT.zip` (Update derselben Pluginidentität, 0.2.0 ist abgelöst; die ältere GitHub-Binärablage bitte nicht als aktuellen Installer ausgeben).
+- Ursache nach Screenshot: Die WordPress-Blog-Startseite mitsamt Sidebar wurde vom bisherigen Designplugin nicht ersetzt. Die Kategorieübersicht war an das alte Theme angehängt. **0.2.1** gibt nur für die Startseite eine eigene minimale WordPress-konforme Darstellung aus: oben 7 Hauptkategorien / aufklappbares Mega-Menü, unten klarer Footer. Andere WP-Seiten bleiben im Theme.
+- Lokal PHP-/JS-/ZIP-Prüfungen PASS; Browser 1440 / 1024 / 390 PASS; eingebetteter Importplan 104 Seiten, 7 Hauptbereiche und Industrie unter Gewerbe PASS. Echte WordPress-Live-Prüfung bleibt offen.
+- Kategorie-Workflow/DataForSEO **0.4.2 unverändert**. Kein neuer Kategorieimport.
+- Vollständiger Beleg: `TESTDESIGN_021_20261112.md`. Nächster Schritt nur Designplugin 0.2.1 als Update installieren, Frontend prüfen.
+
+
 ## NEUESTER STAND 12.11.2026 – Mini-Design 0.2.0 TEST, noch nicht Live
 - Korrigierte monochrome Darstellung mit einem gemeinsamen Header, sieben Hauptmenüs, Industrie unter Gewerbe und sichtbarem Footer, rein aus echten Robotik-Seiten.
 - Alte 0.1.0-Versteckung des Theme-Footers konnte den eigenen Footer verdecken; neues JS versetzt beide Blöcke nach `body`, erst danach wird der Theme-Rahmen ausgeblendet.
