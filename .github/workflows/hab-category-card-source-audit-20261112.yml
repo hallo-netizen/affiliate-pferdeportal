@@ -9,6 +9,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Read exact design hook and category bridge implementation
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile
+          root=Path("protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS")
+          z=zipfile.ZipFile(root/"HAB-004-AFFILIATE/CURRENT.zip")
+          d=zipfile.ZipFile(root/"HAB-001-DESIGN/CURRENT.zip")
+          requests=[
+           (z,'affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php',[(110,220),(379,443)]),
+           (z,'affiliate-portal-router/affiliate-portal-router.php',[(3075,3220)]),
+           (z,'affiliate-portal-router/assets/frontend.css',[(1,130),(1950,2040)]),
+           (d,'hab-bewahr-design-vorschau/includes/area-design-prototype.php',[(217,285)]),
+           (d,'hab-bewahr-design-vorschau/includes/detail-categories.php',[(128,208)]),
+           (d,'hab-bewahr-design-vorschau/assets/area-prototype.css',[(1,145)]),
+           (d,'hab-bewahr-design-vorschau/assets/detail-categories.css',[(1,140)])
+          ]
+          for z,file,ranges in requests:
+            if file not in z.namelist():continue
+            lines=z.read(file).decode('utf8','replace').splitlines()
+            for start,end in ranges:
+              print('SECTION',file,start,end)
+              for i in range(start-1,min(len(lines),end)):
+                print('SRC',file,i+1,lines[i][:950])
+          PY
       - name: Read actual Hab category design and affiliate adapter source
         shell: bash
         run: |
