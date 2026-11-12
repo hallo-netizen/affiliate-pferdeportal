@@ -73,7 +73,7 @@ jobs:
               ''')
               print('HAB_RC24_BROWSER_CTA',json.dumps(val,ensure_ascii=False))
               assert val['count']==3
-              assert all(x['innerFrame']=='0px' for x in val['cards'])
+              assert all(x['frame']=='1px' and x['innerFrame']=='0px' for x in val['cards'])
               assert len({x['x'] for x in val['cards']})== (3 if width==1440 else 2 if width==780 else 1)
               bottoms=[x['buttonBottom'] for x in val['cards']]
               if width==1440:assert max(bottoms)-min(bottoms)<=3,('CTAs must bottom align',bottoms)
