@@ -1,3 +1,13 @@
+## 12.11.2026 – RC20 (0.1.17-rc20): IDEALO-FEED 2901 AUCH FÜR HAB FREIGEBEN
+
+**Ursache eindeutig im echten HAB-004 RC19 nachgewiesen:** `idealo_settings()` hat `enabled=false` gesetzt, sobald **feed_id=2901** gespeichert war, auch bei korrekter Hab-&-Bewahr-Werbefläche `568944`. Der Idealo-Publisher zeigt Feed 2901 jedoch für 568944 an. Diese zusätzliche Sperre gegen vermeintlich fremde Pferde-Atelier-Werte war sachlich falsch.
+
+**Korrektur im bestehenden HAB-004:** Sperre gilt jetzt nur für die wirklich fremde **Adspace 568313**, nicht für Feed 2901. Vollständige neue `CURRENT.zip` und benannte `HAB_AFFILIATE_RC20_0.1.17-rc20.zip`, 2.336.717 Bytes, 36 Einträge, SHA256 `532d3ef2552c44cc9652881e1ff943ad7bcd8ddd93fb779f5dab1d55a08b8d97`. Nur 3 Dateien geändert: Hauptdatei/Readme für Versionsnummer und `includes/trait-ppar-idealo.php` für Ursache. Alle 25 PHP-Dateien lintfrei, 36 ZIP-CRC OK; 5 echte PHP-Testfälle PASS, darunter Hab 568944/2901 erlaubt und fremde Adspace 568313 weiter gesperrt (GitHub-Actions 43240486920). Bestehende RC19-Versicherungsregeln bleiben unverändert.
+
+**Noch offen:** WordPress-Installation und Live-API-Test. Nach Einbau den Haken „idealo-Verbindung verwenden“ bei Hab 568944/2901 setzen, „Speichern & API prüfen“. Öffentliche Idealo-Ausgabe zunächst aus; Auto-Refresh aus. Kein neuer API-Key erforderlich.
+
+---
+
 ## 11.11.2026 – HAB-004 AFFILIATE RC19 (0.1.16-rc19) – VERSICHERUNGSBEREICH EXKLUSIV, LÜCKENLOS EIGENBANNER
 
 **Vollständige CURRENT.zip als RC19-Kandidat im HAB-Pluginbüro gebaut:** 2.336.726 Bytes, 36 Dateien, SHA256 6d72fcd41a8b365e84815770014098946774bab7f2425c3546e48da66cd262f0 (nach bestandenem GitHub-Merge gültiger offizieller Current). Direkter, reproduzierbarer Build ausschließlich aus HAB-004 RC18 (0.1.15-rc18, verifizierte SHA256 a98063820d1564bf7cc7312c4c232369ac198bbaa49fbb6b173f76cd5096da89). **Nur vier bestehende Dateien im vollständigen Plugin verändert**: affiliate-portal-router.php, includes/trait-ppar-hb-amazon.php, assets/frontend.css, readme.txt. Keine neue Plugin-Identität, keine neue Tabelle, keine Änderung der sechs anderen Themenwelten oder des Designplugins HAB-001 RC19.

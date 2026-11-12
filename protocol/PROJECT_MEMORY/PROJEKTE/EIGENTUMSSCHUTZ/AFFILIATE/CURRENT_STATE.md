@@ -1,3 +1,9 @@
+## 12.11.2026 – HAB IDEALO RC20 FIX; LIVEINSTALLATION AUSSTEHEND
+
+HAB-004 RC19 enthielt die nachgewiesen falsche Sperre `feed_id === 2901` und deaktivierte dadurch beim Laden den Idealo-Haken trotz richtiger Hab-Adspace `568944`. Der Partner bietet denselben Feed für mehrere Adspaces an. Der minimale RC20-Fix bewahrt nur die fremde Adspace-Sperre `568313`; eigene Hab-Paarung `568944/2901` bleibt erlaubt. Neue vollständige RC20-`CURRENT.zip` auf GitHub, SHA256 `532d3ef2552c44cc9652881e1ff943ad7bcd8ddd93fb779f5dab1d55a08b8d97`. Fünf PHP-Testfälle, 25 PHP-Lints, 36 ZIP-CRC PASS; GitHub-Actions 43240486920. **Nicht live installiert oder live auf API geprüft.** Öffentliche Produktausgabe und automatische Aktualisierung bleiben bis zur Abnahme aus; Versicherungsbereich bleibt produktwerbefrei. Anderes Portal Hobby Depot HD-009 bleibt unverändert.
+
+---
+
 ## 11.11.2026 – HAB-004 AFFILIATE RC19 (0.1.16-rc19) – VERSICHERUNGSBEREICH EXKLUSIV, LÜCKENLOS EIGENBANNER
 
 **Vollständige CURRENT.zip als RC19-Kandidat im HAB-Pluginbüro gebaut:** 2.336.726 Bytes, 36 Dateien, SHA256 6d72fcd41a8b365e84815770014098946774bab7f2425c3546e48da66cd262f0 (nach bestandenem GitHub-Merge gültiger offizieller Current). Direkter, reproduzierbarer Build ausschließlich aus HAB-004 RC18 (0.1.15-rc18, verifizierte SHA256 a98063820d1564bf7cc7312c4c232369ac198bbaa49fbb6b173f76cd5096da89). **Nur vier bestehende Dateien im vollständigen Plugin verändert**: affiliate-portal-router.php, includes/trait-ppar-hb-amazon.php, assets/frontend.css, readme.txt. Keine neue Plugin-Identität, keine neue Tabelle, keine Änderung der sechs anderen Themenwelten oder des Designplugins HAB-001 RC19.
