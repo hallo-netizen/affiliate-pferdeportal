@@ -49,8 +49,6 @@
         "data-source-title"
       ]
     },
-    "title_colon_forbidden": true,
-    "title_keyword_required": true,
     "visible_links_exact": 3
   },
   "heading": {
@@ -60,9 +58,6 @@
       "einordnen"
     ],
     "content_overlap_min_significant_tokens": 1,
-    "exact_target_phrase_occurrences_max": 2,
-    "exact_target_phrase_occurrences_min_when_no_title_collision": 1,
-    "exact_target_phrase_occurrences_when_title_equals_target": 0,
     "hard_h2_chars_max": 65,
     "hard_h2_words_max": 9,
     "repeated_heading_end_word_max": 2,
@@ -370,7 +365,6 @@
         "conclusion",
         "table"
       ],
-      "question_mark": "OPTIONAL",
       "required_blocks": [
         "intro",
         "criteria",
@@ -407,7 +401,6 @@
         "conclusion",
         "table"
       ],
-      "question_mark": "REQUIRED",
       "required_blocks": [
         "intro",
         "answer",
@@ -440,7 +433,6 @@
         "conclusion",
         "table"
       ],
-      "question_mark": "OPTIONAL",
       "required_blocks": [
         "intro",
         "steps",
@@ -485,7 +477,6 @@
         "conclusion",
         "table"
       ],
-      "question_mark": "OPTIONAL",
       "required_blocks": [
         "intro",
         "options",

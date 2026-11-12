@@ -26,6 +26,26 @@
       "pattern": "^global\\.table_count_exact$",
       "replaced_by": "table.conditional_value_policy",
       "reason": "K10_USER_APPROVED_TABLE_POLICY_2026-10-01"
+    },
+    {
+      "pattern": "^global\\.title_keyword_required$",
+      "replaced_by": "NONE_EDITORIAL_MEANING_FIRST_NO_EXACT_KEYWORD_ORDER",
+      "reason": "User 2026-11-10: Exact-title-token order is not a supported SEO release criterion"
+    },
+    {
+      "pattern": "^global\\.title_colon_forbidden$",
+      "replaced_by": "PSERC_TITLE_GATE_EXISTING_UPSTREAM_PUNCTUATION_CHECK",
+      "reason": "User 2026-11-10: title punctuation checked once before K0"
+    },
+    {
+      "pattern": "^types\\.\\*\\.question_mark$",
+      "replaced_by": "PSERC_TITLE_GATE_EXISTING_UPSTREAM_FAQ_QUESTION_CHECK",
+      "reason": "User 2026-11-10: FAQ punctuation checked once before K0"
+    },
+    {
+      "pattern": "^editorial_additive\\.heading_policy\\.(target_keyword_exact_phrase_mode|exact_target_phrase_occurrences_.*)$",
+      "replaced_by": "NONE_NO_EXACT_H2_KEYWORD_PHRASE_PRESERVE_STACCATO_RULE",
+      "reason": "User 2026-11-10: no exact H2 phrase; retain heading.keyword_staccato_forbidden"
     }
   ],
   "hard_bindings": [
@@ -50,16 +70,6 @@
       "owner": "isolation_guard"
     },
     {
-      "pattern": "^global\\.title_keyword_required$",
-      "rule_id": "title.keyword_required",
-      "owner": "structural_checker"
-    },
-    {
-      "pattern": "^global\\.title_colon_forbidden$",
-      "rule_id": "title.colon_forbidden",
-      "owner": "structural_checker"
-    },
-    {
       "pattern": "^global\\.duplicate_block_names_forbidden$",
       "rule_id": "structure.duplicate_block_names_forbidden",
       "owner": "structural_checker"
@@ -77,11 +87,6 @@
     {
       "pattern": "^global\\.required_link_roles$",
       "rule_id": "links.required_roles",
-      "owner": "structural_checker"
-    },
-    {
-      "pattern": "^types\\.\\*\\.question_mark$",
-      "rule_id": "type.question_mark_policy",
       "owner": "structural_checker"
     },
     {
@@ -118,11 +123,6 @@
       "pattern": "^global\\.conclusion_no_new_untraced_facts$",
       "rule_id": "facts.conclusion_no_new_untraced_facts",
       "owner": "fact_trace_checker"
-    },
-    {
-      "pattern": "^editorial_additive\\.heading_policy\\.(target_keyword_exact_phrase_mode|exact_target_phrase_occurrences_.*)$",
-      "rule_id": "heading.target_phrase_control",
-      "owner": "editorial_checker"
     },
     {
       "pattern": "^editorial_additive\\.heading_policy\\.(significant_target_keyword_token_h2_occurrences_max|keyword_staccato_forbidden|significant_keyword_stop_tokens)$",

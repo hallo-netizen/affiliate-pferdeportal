@@ -1,0 +1,57 @@
+name: K0 editorial-owner-only QA (isolated)
+on:
+  push:
+    branches:
+      - qa/k0-editorial-owner-only-20261110
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Confirm no changes to authoring, LanguageTool or WordPress export
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code origin/konzept0-portal-neutral-20261002 -- \
+            engine/k0_writer_station.py \
+            engine/writer_contract_guard.py \
+            engine/k0_wordpress_export.py \
+            engine/lt68_external.py \
+            .github/workflows/k0-writer-accept.yml
+      - name: Confirm the existing K0 authoring step now binds only the original SEO decision
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'engine.k0_seo_owner_binding bind' .github/workflows/k0-authoring-context.yml
+          grep -q 'K0_UPSTREAM_SEO_SOURCE_MANIFEST_MISSING' .github/workflows/k0-authoring-context.yml
+      - name: Python syntax
+        run: python3 -m compileall -q engine tests
+      - name: Existing full K10 regression suite
+        run: python3 -m unittest discover -s tests -p test_k10.py -v
+      - name: New K0 editorial-owner regression suite
+        run: python3 -m unittest discover -s tests -p test_k0_seo_owner_qa.py -v
+
+      - name: Verify existing source intent across exact-five handoff (nine positive/negative regressions)
+        run: python3 -m unittest discover -s tests -p test_k0_seo_owner_binding.py -v
+      - name: Prepare QA read-only portal registry and exact LanguageTool
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin affiliate-release-current:refs/remotes/origin/affiliate-release-current
+          mkdir -p /tmp/k0-qa-lt68
+          curl --fail --location --retry 3 --silent --show-error https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip -o /tmp/k0-qa-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/k0-qa-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/k0-qa-lt68/LanguageTool-6.8.zip -d /tmp/k0-qa-lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/k0-qa-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+      - name: Full K0 replay on actual 3-piece PSERC handoff, with real LT68 and verified WordPress output
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python3 tests/qa_k0_full_replay_20261110.py --jar /tmp/k0-qa-lt68/LanguageTool-6.8/languagetool-commandline.jar

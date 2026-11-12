@@ -183,21 +183,6 @@
     {
       "check_stage": "WRITE_PREFLIGHT",
       "classification": "HARD",
-      "id": "heading.target_phrase_control",
-      "implementation_status": "IMPLEMENTED",
-      "owner": "editorial_checker",
-      "scope": "ARTICLE",
-      "source": "K9_RULE_FIELD_INVENTORY",
-      "source_fields": [
-        "editorial_additive.heading_policy.exact_target_phrase_occurrences_max",
-        "editorial_additive.heading_policy.exact_target_phrase_occurrences_min_when_no_title_collision",
-        "editorial_additive.heading_policy.exact_target_phrase_occurrences_when_title_equals_target",
-        "editorial_additive.heading_policy.target_keyword_exact_phrase_mode"
-      ]
-    },
-    {
-      "check_stage": "WRITE_PREFLIGHT",
-      "classification": "HARD",
       "id": "links.required_roles",
       "implementation_status": "IMPLEMENTED",
       "owner": "structural_checker",
@@ -366,30 +351,6 @@
     {
       "check_stage": "WRITE_PREFLIGHT",
       "classification": "HARD",
-      "id": "title.colon_forbidden",
-      "implementation_status": "IMPLEMENTED",
-      "owner": "structural_checker",
-      "scope": "ARTICLE",
-      "source": "K9_RULE_FIELD_INVENTORY",
-      "source_fields": [
-        "global.title_colon_forbidden"
-      ]
-    },
-    {
-      "check_stage": "WRITE_PREFLIGHT",
-      "classification": "HARD",
-      "id": "title.keyword_required",
-      "implementation_status": "IMPLEMENTED",
-      "owner": "structural_checker",
-      "scope": "ARTICLE",
-      "source": "K9_RULE_FIELD_INVENTORY",
-      "source_fields": [
-        "global.title_keyword_required"
-      ]
-    },
-    {
-      "check_stage": "WRITE_PREFLIGHT",
-      "classification": "HARD",
       "id": "type.metadata_schema",
       "implementation_status": "IMPLEMENTED",
       "owner": "structural_checker",
@@ -418,18 +379,6 @@
         "types.*.type_meta_schema.fields.risk_controls.type",
         "types.*.type_meta_schema.fields.risk_controls.unique_items",
         "types.*.type_meta_schema.required"
-      ]
-    },
-    {
-      "check_stage": "WRITE_PREFLIGHT",
-      "classification": "HARD",
-      "id": "type.question_mark_policy",
-      "implementation_status": "IMPLEMENTED",
-      "owner": "structural_checker",
-      "scope": "ARTICLE",
-      "source": "K9_RULE_FIELD_INVENTORY",
-      "source_fields": [
-        "types.*.question_mark"
       ]
     },
     {

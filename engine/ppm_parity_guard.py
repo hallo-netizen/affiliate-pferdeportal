@@ -6,11 +6,16 @@ from .core import ROOT, load_catalog
 MAP_PATH=ROOT/'PPM_PARITY_MAP.json'
 INV_PATH=ROOT/'evidence/PPM679_EXACT_104_RULE_INVENTORY.json'
 EXPECTED_PPM_SHA='acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1'
-ALLOWED_ACTIONS={'PRESERVE','SUPERSEDED_BY_USER_APPROVED_K10_TABLE_POLICY'}
+ALLOWED_ACTIONS={'PRESERVE','SUPERSEDED_BY_USER_APPROVED_K10_TABLE_POLICY','DELEGATED_TO_EXISTING_EDITORIAL_TITLE_OWNER'}
 EXPECTED_SUPERSEDED={
     'BLOCKED_CONTENT_TABLE_COUNT',
     'BLOCKED_CONTENT_REQUIRED_TABLE_MISSING',
     'BLOCKED_CONTENT_FORBIDDEN_TABLE_PRESENT',
+}
+EXPECTED_EDITORIAL_DELEGATED={
+    'BLOCKED_CONTENT_FAQ_TITLE_QUESTION_MARK',
+    'BLOCKED_CONTENT_TITLE_COLON',
+    'BLOCKED_CONTENT_TARGET_KEYWORD_TITLE',
 }
 
 def verify():
@@ -48,8 +53,15 @@ def verify():
     if superseded!=EXPECTED_SUPERSEDED:
         findings.append('PPM_PARITY_APPROVED_TABLE_CHANGE_SET_INVALID:'+repr(sorted(superseded)))
 
+    delegated={str(x.get('error_code') or '') for x in entries if x.get('parity_action')=='DELEGATED_TO_EXISTING_EDITORIAL_TITLE_OWNER'}
+    if delegated!=EXPECTED_EDITORIAL_DELEGATED:
+        findings.append('PPM_PARITY_EDITORIAL_DELEGATION_SET_INVALID:'+repr(sorted(delegated)))
     catalog_rows={r.get('id'):r for r in catalog.get('rules',[]) if isinstance(r,dict)}
     for x in entries:
+        if x.get('parity_action')=='DELEGATED_TO_EXISTING_EDITORIAL_TITLE_OWNER':
+            if x.get('error_code') not in EXPECTED_EDITORIAL_DELEGATED or x.get('canonical_owner')!='external_editorial_title_owner' or x.get('canonical_scope')!='UPSTREAM_EDITORIAL' or x.get('canonical_rule_id')!='upstream.'+str(x.get('error_code') or '').lower():
+                findings.append('PPM_PARITY_EDITORIAL_DELEGATION_INVALID:'+str(x.get('error_code')))
+            continue
         rid=str(x.get('canonical_rule_id') or '')
         row=catalog_rows.get(rid)
         if not row:
@@ -67,4 +79,5 @@ def verify():
         'repairable_content_count':classes.get('REPAIRABLE_CONTENT',0),
         'hard_integrity_count':classes.get('HARD_INTEGRITY',0),
         'approved_table_policy_changes':len(superseded),
+        'externally_owned_title_rules':len(delegated),
     }

@@ -1,0 +1,107 @@
+{
+    "mode": "READ_ONLY_METADATA_ONLY_EXACT_FIVE_FIELDS",
+    "publish_allowed": false,
+    "system_boundary": {
+        "production_started": false,
+        "wordpress_database_write_attempted": false
+    },
+    "items": [
+        {
+            "status": "READY_FOR_METADATA_HANDOFF",
+            "metadata_binding": {
+                "article_type": "Beratung",
+                "category": "pferdedecken-regendecken-beratung",
+                "plan_slot": "799e033a481cdcf36bfb098e90bd2f1e043919301c980c09afb1b5fdc205b52e",
+                "target_keyword": "Horseware regendecken",
+                "title": "Horseware-Regendecken und ihre Unterschiede bei Schnitt und Ausstattung"
+            },
+            "article_type": "Beratung",
+            "intent_profile": {
+                "contract": "PSTE_INTENT_PROFILE_V2_SEO_FIRST_EVIDENCE_BOUND_MULTI_BRANCH",
+                "status": "PASS",
+                "ok": true,
+                "search_intent": "DECISION_SUPPORT",
+                "article_type": "Beratung",
+                "intent_key": "41a2b9e24cbbfdf7e4f78a775cd74d62063050dc9624d4fac643f846b77f05a9",
+                "profile_sha256": "0acc2bd2cce52a8129fb20c0851a2ba49624f893d5627ff9372c07266ff34479"
+            }
+        },
+        {
+            "status": "READY_FOR_METADATA_HANDOFF",
+            "metadata_binding": {
+                "article_type": "Beratung",
+                "category": "pferdedecken-regendecken-beratung",
+                "plan_slot": "d9cb138606a3734410a6ba398311d64ef18532634a0ed363e0373d02bd7e537f",
+                "target_keyword": "Fliegen regendecke pferd",
+                "title": "Kombinierte Fliegen- und Regendecken für Pferde sinnvoll nutzen"
+            },
+            "article_type": "Beratung",
+            "intent_profile": {
+                "contract": "PSTE_INTENT_PROFILE_V2_SEO_FIRST_EVIDENCE_BOUND_MULTI_BRANCH",
+                "status": "PASS",
+                "ok": true,
+                "search_intent": "DECISION_SUPPORT",
+                "article_type": "Beratung",
+                "intent_key": "cafecb3e8fac851105323bbafee539cfbc51b0b598fe58d16c15ed24d554a8f8",
+                "profile_sha256": "1611e4a996ee382e46abd827781b88ac0e0055e1fb012c7b9de6ce983fdfbb96"
+            }
+        },
+        {
+            "status": "READY_FOR_METADATA_HANDOFF",
+            "metadata_binding": {
+                "article_type": "Beratung",
+                "category": "pferdedecken-regendecken-beratung",
+                "plan_slot": "62ae8f6cb8b87e82067770c71fc3233a56709333cc499feac9a7df8fefc9bcd3",
+                "target_keyword": "Regendecke pferd 0g",
+                "title": "Regendecken ohne Füllung für Pferde richtig einsetzen"
+            },
+            "article_type": "Beratung",
+            "intent_profile": {
+                "contract": "PSTE_INTENT_PROFILE_V2_SEO_FIRST_EVIDENCE_BOUND_MULTI_BRANCH",
+                "status": "PASS",
+                "ok": true,
+                "search_intent": "DECISION_SUPPORT",
+                "article_type": "Beratung",
+                "intent_key": "43bab6478016888228b7cda87e9b7dd5affd501783ce985374f5cc15d186f8be",
+                "profile_sha256": "a835dca167b4be0528a9edbb122c7e896b0e6bf1a7c2d47f22b062f6f479095d"
+            }
+        }
+    ],
+    "next_textmachine_metadata_batch": {
+        "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+        "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+        "item_count": 3,
+        "publish_allowed": false,
+        "content_or_format_payload_present": false,
+        "items": [
+            {
+                "article_type": "Beratung",
+                "category": "pferdedecken-regendecken-beratung",
+                "plan_slot": "799e033a481cdcf36bfb098e90bd2f1e043919301c980c09afb1b5fdc205b52e",
+                "target_keyword": "Horseware regendecken",
+                "title": "Horseware-Regendecken und ihre Unterschiede bei Schnitt und Ausstattung"
+            },
+            {
+                "article_type": "Beratung",
+                "category": "pferdedecken-regendecken-beratung",
+                "plan_slot": "d9cb138606a3734410a6ba398311d64ef18532634a0ed363e0373d02bd7e537f",
+                "target_keyword": "Fliegen regendecke pferd",
+                "title": "Kombinierte Fliegen- und Regendecken für Pferde sinnvoll nutzen"
+            },
+            {
+                "article_type": "Beratung",
+                "category": "pferdedecken-regendecken-beratung",
+                "plan_slot": "62ae8f6cb8b87e82067770c71fc3233a56709333cc499feac9a7df8fefc9bcd3",
+                "target_keyword": "Regendecke pferd 0g",
+                "title": "Regendecken ohne Füllung für Pferde richtig einsetzen"
+            }
+        ],
+        "batch_sha256": "42619ca7b6e36a625e0c8ae4e562534a9ff1b115ac7772f598435a064d06f546"
+    },
+    "metadata_boundary": {
+        "ok": true,
+        "status": "PSERC_METADATA_BOUNDARY_PASS",
+        "message": "Der Handoff enthält je Position exakt fünf skalare Planungsfelder."
+    },
+    "manifest_sha256": "91d200e8a637c0bfd644e934503c4a7a67f28087a47eea79789eff763407b25d"
+}
