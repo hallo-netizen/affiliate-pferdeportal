@@ -136,8 +136,13 @@ def bind_context(manifest, single_intake, context):
         raise Blocked('K0_OWNER_CONTENT_PROFILE_MISSING')
     source=records[ident['plan_slot']]
     existing=cp.get('search_intent')
-    if existing not in (None,'',source['search_intent']):
-        raise Blocked('K0_OWNER_INTENT_CONFLICT_WITH_EDITORIAL_APPROVAL')
+    # An old, unproven authoring hint is NOT a second editorial authority.
+    # Replace it with the signed upstream decision. Once a source is bound,
+    # changing the approved intent must continue to block.
+    owner_keys=('seo_owner_manifest_sha256','seo_owner_profile_sha256','seo_owner_original_batch_sha256')
+    previously_bound=any(cp.get(k) not in (None,'') for k in owner_keys)
+    if previously_bound and existing!=source['search_intent']:
+        raise Blocked('K0_OWNER_BOUND_INTENT_CONFLICT_WITH_EDITORIAL_APPROVAL')
     # Rebinding is deterministic and adds provenance only inside the existing
     # K0 authoring context (never to PSERC's five-field metadata handoff).
     result=copy.deepcopy(context)
