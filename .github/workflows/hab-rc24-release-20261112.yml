@@ -1,0 +1,41 @@
+name: Hab RC24 one-click full plugin ZIP release after QA
+on:
+  push:
+    branches: [hab-affiliate-coverage-cards-20261112]
+    paths: [.github/workflows/hab-rc24-release-20261112.yml]
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build exact verified RC24 and publish ONE full installable ZIP
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          ROOT="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ"
+          PLUG="$ROOT/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE"
+          python3 "$ROOT/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py"
+          python3 "$ROOT/AFFILIATE/RC24_COVERAGE_DESIGN/build_rc24.py"
+          python3 "$ROOT/AFFILIATE/RC24_COVERAGE_DESIGN/qa_rc24.py"
+          FILE="/tmp/HAB_Bewahr_Affiliate_RC24_TEST.zip"
+          cp "$PLUG/CURRENT.zip" "$FILE"
+          echo "888f6325cc011c3a380d2aae03054b8870db088c11ae6057e2fc1e4ce422f6a2  $FILE" | sha256sum --check -
+          python3 - "$FILE" <<'PY'
+          from zipfile import ZipFile
+          import sys
+          with ZipFile(sys.argv[1]) as z:
+            assert z.testzip() is None and len(z.namelist())==36
+            assert b'Version: 0.1.21-rc24' in z.read('affiliate-portal-router/affiliate-portal-router.php')
+            print('RC24_RELEASE_ZIP_VERIFIED',len(z.namelist()))
+          PY
+          TAG="hab-affiliate-rc24-coverage-design-test-20261112"
+          gh release create "$TAG" "$FILE#HAB_Bewahr_Affiliate_RC24_TEST.zip" \
+            --target "$GITHUB_SHA" --title "Hab & Bewahr RC24 – Idealo-Abdeckung und deutsche Produktkacheln (Test)" \
+            --notes "Vollständige Hab-&-Bewahr-Affiliate-Plugin-ZIP. Technische Tests bestanden: 50er Konzept-Limit beseitigt (eBay bleibt begrenzt), Versicherungen aus Produktabdeckung ausgeschlossen, Diagnose mit Ablehnungsgründen, echte Eigenschaften, deutsche Verfügbarkeit, unten bündige Anbieterbuttons und 1px-Rahmen. Vorherigen RC23-Paket ersetzen, keine zusätzliche Installation. Echte zusätzliche Feed-Abdeckung erst nach neuem Idealo-Import und Liveprüfung bestimmbar. Pferde Atelier und Hobby Depot unverändert." \
+            --prerelease
+          gh release view "$TAG" --json assets,url --jq '{url,assets:[.assets[]|{name,size,url}]}'
