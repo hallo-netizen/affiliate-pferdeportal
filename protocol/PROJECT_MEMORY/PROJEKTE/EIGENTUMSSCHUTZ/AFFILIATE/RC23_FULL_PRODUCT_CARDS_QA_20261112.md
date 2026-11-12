@@ -1,0 +1,35 @@
+# Hab & Bewahr – vollständige Produktkarten, durchgehende technische Prüfung
+**Datum:** 12.11.2026 · **Portal:** NUR Hab & Bewahr · **Status:** INTERNER RC23-KANDIDAT, NICHT veröffentlicht, KEIN Live-PASS
+
+## Verbindlicher Auftrag
+Auf Kategorie- und zugehörigen Themenebenen **echte Produktbilder**, echte zur Kategorie passende Artikel und nachweislich richtige Schaltflächen zu Amazon, Idealo und eBay in **einer** Produktkachel anzeigen. **Pferde Atelier wird nicht kopiert**, sein sichtbares Funktionsprinzip dient nur zur Orientierung. Keine manuellen WordPress-Artikel, keine zusätzlichen Plugins oder Tabellen. Versicherungsbereiche bleiben von physischer Amazon-/Idealo-/eBay-Produktwerbung ausgeschlossen. Keine weitere „fertige“ ZIP bei fehlender realer Abnahme.
+
+## Tatsächlich nachgewiesene Ursachen
+1. HAB-004 RC22 zeigte nur den Amazon-Fallback: DataForSEO liefert ASIN und Titel, die bestehende Amazon-Methode enthält ausdrücklich `image_url=''`. Hieraus dürfen **keine** erfundenen Produktfotos entstehen.
+2. Der bestehende offizielle iPN API-Zugang von Hab (Adspace `568944`, Feed `2901`) war schon mit `findFeeds` geprüft, aber die Affiliate-Zentrale verlangte für den eigentlichen Bild-/Produktimport **zusätzlich eine manuell gespeicherte Download-URL**. Der bereits berechtigte API-Key reichte dadurch nicht zum Import.
+3. Selbst nach Import wurden Bildkarten im Hybridmodus **in der späten Kandidaten-Auswahl** erneut ausgefiltert, weil die Kategorie-Slot-ID nicht durch die vorhandenen Filter weitergereicht wurde.
+4. Bei passender eBay-GTIN verschwand in der vorhandenen Mehrfachanbieterfunktion der Idealo-Button der ursprünglichen Kachel (`if (!$offers...)` statt immer den Originalanbieter zu erhalten). Dies ist mit dem Test nachgewiesen, reproduziert und im ausschließlich für Hab geschriebenen Quellkandidaten korrigiert.
+
+## Implementiert (nur in separatem reproduzierbarem Kandidaten-Quellaufbau)
+- `AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py`: erstellt ausschließlich aus dem zuvor geprüften HAB-004 **RC22** ein internes vollständiges **RC23 0.1.20-rc23**, ohne die offiziellen produktiven GitHub-ZIPs zu ändern. Nur **vier** bestehende Originaldateien in der Kandidaten-ZIP werden geändert: `affiliate-portal-router.php` (Version/Slotweitergabe), `includes/trait-ppar-idealo.php` (direkter berechtigter iPN-GZIP-Export, Import- und Ausgabezuordnung, Anbieterbindung), `includes/trait-ppar-ebay.php` (Kategorie-Slotweitergabe und korrekter Request-Cache), `readme.txt` (Version). **Keine Datei aus Pferde Atelier kopiert.**
+- iPN-Export-URL wird nur **serverseitig im bereits existierenden Importablauf** aus gespeichertem und bestätigtem API-Key/Adspace/Feed gebildet, nicht als Geheimnis in WordPress/GitHub protokolliert. Offizielle Ingenious-Dokumentation bestätigt `/creatives/productdata/export` mit `apiKey`, `feedId`, `adspaceId`, `format=CSV`, `csvSeparator=COMMA`, `compression=GZIP`: https://ingenioustechnologies.atlassian.net/wiki/spaces/KB/pages/3310846106/Deprecations%2B2022
+- Nutzt weiter **bestehenden** Hintergrundimport, CSV.GZ-Parser, 311er Portal-Konzeptzuordnung, Bildquelle `cdn.idealo.com`, GTIN und ASIN. Keine HTTP-Abfragen im Frontend.
+- Real importierte, sicher zugeordnete, bebilderte Kampagnen können anschließend in der vorhandenen Produktausgabe aktiviert werden. Nicht die bloße API-Prüfung, sondern nur ein tatsächlich erfolgreicher Import mit Kampagnen und Zielen löst die bestehende Test-Ausgabesperre. Das bestehende Hybrid-Verhalten außerhalb der drei Kategorie-Produktslots bleibt unangetastet.
+- Alle drei zentralen Produkt-Kandidatenfilter bekommen den tatsächlichen `category_product_1/2/3`-Slot weitergereicht; eBay-Kohortenfilter und seine lokale Anfrage-Zwischenspeicherung berücksichtigen denselben Kontext. Eine passende idealo-Bildkarte wird nicht wieder als allgemeiner Suchlink verworfen.
+- Nachgewiesen korrekt zugehörige Idealo, eBay und Amazon-Angebote werden als **getrennte Anbieter-Schaltflächen auf derselben Karte** dargestellt; der ursprüngliche Idealo-Button wird auch dann erhalten, wenn zusätzlich eBay existiert. Keine Anbieterduplikate und kein Produktmatch ohne exakt gleiche GTIN beziehungsweise verifizierte ASIN.
+
+## Durchgeführte Tests (GitHub Actions – synthetische Produktsätze, echter PHP-Quellcode)
+**GitHub-Actions Run 43260584857, Job 131330441995: PASS.**
+- **15** PHP-Funktionsprüfungen mit tatsächlich extrahierten Originalmethoden: API-Key + eigene Werbefläche + Feed, sicheres serverseitiges Exportformat, fehlende/fremde Berechtigung blockiert, korrekte Kategorie- und Nichtkategorie-Auswahl.
+- **11** bestehende echte Design-/Affiliate-Bridge-Tests: Ausgabeplätze, 3/2/1-Raster, keine Änderungen an Banner-, Magazin-, Themen- und Leerstandswegen.
+- **10** Tests mit tatsächlicher vorhandener PHP-CSV.GZ-Importmethode (simulierte Feedzeilen): richtige Bilder und ASIN werden übernommen, fachfremde Produkte und unsichere Bilder ausgeschlossen, vollständiger Import aktiviert die Kampagnen, nicht bereits das Speichern eines API-Schlüssels.
+- **6** Tests mit tatsächlich vorhandener originaler Mehrfachanbieter-PHP-Methode: drei echte Händler-Schaltflächen aus passender GTIN/ASIN, kein erfundener eBay-/Amazon-Button bei abweichender Kennung.
+- Insgesamt 42 Funktionstests, **25 PHP-Dateien** Syntax-PASS, **36/36 Affiliate-ZIP-CRC**, **432/432 Design-ZIP-CRC**. Intern testweise gebauter Kandidat ca. 2,34 MB, SHA256 `c51f6517637a1db5fc4bf7e96613a697e79f8d70031ac48228d47659e86351f4` (nur aus dem belegten Testlauf; noch kein offizieller ZIP-Download).
+
+## Ohne Livezugang noch NICHT abgeschlossen – kein scheinbarer PASS
+Das echte Hab-WordPress-Backend speichert den privaten iPN-API-Key. Auf GitHub ist er richtigerweise NICHT gespeichert. Die Tests benutzen daher nur **künstliche Feedzeilen**, keinen echten freigegebenen Feed; der Kandidat wurde noch NICHT auf Hab WordPress installiert. Somit ist **nicht nachgewiesen**, wie viele echte passende Haustürschloss-Produkte, Bilder und Anbieterlinks der reale Feed 2901 tatsächlich liefern wird. **Es wird jetzt ausdrücklich keine weitere halbfertige WordPress-Installations-ZIP verteilt und das offizielle CURRENT.zip bleibt RC22.**
+
+**Freigabevertrag:** Erst nach Installation des vollständig geprüften Kandidaten in einer kontrollierten Hab-WordPress-Umgebung, Echtdaten-Import mit nachvollziehbaren PASS-/Materialisierungszählern und sichtbarer, wirklich bebilderter, fachlich passender Kategorie mit tatsächlich funktionierenden Originalanbieterlinks darf der Release als „fertig“ übergeben werden. Ein realer privater Import lässt sich hier ohne die im WordPress-System hinterlegte Berechtigung nicht stellvertretend ausführen; keine Zugangsdaten in GitHub/Chat anfordern.
+
+## Verankerung
+Dieser technische Kandidat ist separat und reproduzierbar im Hab-Affiliate-Büro abgelegt, nicht in Pferde Atelier. Die getesteten Build- und QA-Skripte liegen im selben Verzeichnis. Produktionsstand bis zur echten Freigabe **HAB-004 RC22 0.1.19-rc22**; Versicherungsregeln und Design RC19 unverändert.
