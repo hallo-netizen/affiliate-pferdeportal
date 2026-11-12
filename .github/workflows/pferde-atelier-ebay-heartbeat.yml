@@ -38,8 +38,8 @@ jobs:
           endpoint_ok=bool(endpoint and endpoint.group(1)=='https://pferde-atelier.de/wp-json/affiliate-zentrale/v1/ebay/tick')
           checks={
               'single_schedule_5m': "cron: '*/5 * * * *'" in s,
-              'timeout_safe_window': 'MAX_TICKS=30' in s and 'timeout-minutes: 60' in s,
-              'minute_ticks': 'sleep 60' in s,
+              'timeout_safe_window': 'MAX_TICKS=4' in s and 'timeout-minutes: 10' in s,
+              'minute_ticks': 'sleep 30' in s,
               'post_only': '--request POST' in s,
               'bounded_http': '--max-time 45' in s,
               'fixed_keyless_endpoint': endpoint_ok,
@@ -61,14 +61,14 @@ jobs:
   heartbeat:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 10
     steps:
       - name: Keep the active canonical eBay run moving
         shell: bash
         run: |
           set -u
           URL='https://pferde-atelier.de/wp-json/affiliate-zentrale/v1/ebay/tick'
-          MAX_TICKS=30
+          MAX_TICKS=4
           MAX_CONSECUTIVE_FAILURES=5
           consecutive_failures=0
           last_server_time=0
@@ -135,7 +135,7 @@ jobs:
               echo 'five consecutive heartbeat failures; stop this runner and let the safety schedule retry later'
               exit 1
             fi
-            if [ "$n" -lt "$MAX_TICKS" ]; then sleep 60; fi
+            if [ "$n" -lt "$MAX_TICKS" ]; then sleep 30; fi
           done
 
           echo 'heartbeat work window complete; next scheduled run continues the same stored eBay cursor'
