@@ -153,13 +153,32 @@ class K0LinkRegressionTests(unittest.TestCase):
         from engine.wordpress_batch_export import combine
         base=Path('real_runs/k0/k0-20261026-9544ba8b-01')
         load=lambda name: json.loads((base/name).read_text(encoding='utf-8'))
-        job=load('WRITER_JOB.json')
-        product=load('SEALED_WRITER_PRODUCT.json')
+        # Rebind the genuine archived article to the CURRENT approved rule bundle.
+        # An old 85-rule seal must never be silently treated as an 81-rule seal.
+        from engine.k0_writer_station import prepare, seal
+        archived_job=load('WRITER_JOB.json')
+        archived_product=load('SEALED_WRITER_PRODUCT.json')
         intake=load('WORDPRESS_INTAKE.json')
         original=load('WORDPRESS_SINGLE.json')
-        ident=product['identity']
+        ident=archived_product['identity']
         cat=[original['articles'][0]['production_context']['production_plan_item']['quality_binding']['wordpress_category']]
         portal={'contract':'K0_PORTAL_ASSIGNMENT_V1','status':'PASS','items':[{'portal_id':'pferdeatelier','status':'AUTO_DETECTED','job_identity':ident}]}
+        context=load('AUTHORING_CONTEXT.json')
+        context['run_instance_id']=archived_job['run_instance_id']
+        job=prepare(intake,portal,context)
+        draft={
+            'contract':'K0_WRITER_DRAFT_V1',
+            'job_id':job['job_id'],
+            'title':ident['title'],
+            'content_html':archived_product['html'],
+            'table_decision':copy.deepcopy(job['rule_context']['table_decision']),
+            'lt_authoritative_terms':copy.deepcopy(archived_product['lt_authoritative_terms']),
+            'revision_count':archived_product['revision_count'],
+            'publish_allowed':False,
+        }
+        product=seal(job,draft)
+        self.assertEqual(job['writer_rule_binding']['article_hard_rule_count'],81)
+        self.assertEqual(product['html'],archived_product['html'])
         self.assertEqual(verify_writer(job,product)['status'],'PASS')
         self.assertEqual(verify_pre_lt68(product,cat)['status'],'READY_FOR_LT68')
         gate=production_verify(product,portal,cat)
@@ -185,7 +204,7 @@ class K0FullRuleChainTests(unittest.TestCase):
     def test_writer_bundle_contains_all_article_hard_rules(self):
         b=writer_rule_bundle('FAQ')
         self.assertEqual(b['contract'],'K0_FULL_RULE_BUNDLE_V1')
-        self.assertEqual(b['article_hard_rule_count'],85)
+        self.assertEqual(b['article_hard_rule_count'],81)
         self.assertIn('links.visible_exact',b['article_hard_rule_ids'])
         self.assertIn('structure.required_lists',b['article_hard_rule_ids'])
         self.assertIn('table.post_summary_policy',b['article_hard_rule_ids'])
@@ -196,25 +215,25 @@ class K0FullRuleChainTests(unittest.TestCase):
         self.assertEqual(pre['status'],'READY_FOR_LT68',pre)
         final=verify_final(p,cat,{'status':'PASS','finding_count':0})
         self.assertEqual(final['status'],'PASS',final)
-        self.assertEqual(final['article_hard_rule_count'],85)
+        self.assertEqual(final['article_hard_rule_count'],81)
 
-    def test_title_keyword_allows_intervening_grammar_words(self):
-        a=make_base()
-        a['target_keyword']='Kappzaum über Trense'
-        a['title']='Kann man einen Kappzaum über einer Trense tragen?'
-        row=next(r for r in structural_receipts(a) if r['rule_id']=='title.keyword_required')
-        self.assertEqual(row['status'],'PASS',row)
-
-    def test_title_keyword_still_requires_all_keyword_words_in_order(self):
+    def test_title_is_not_rejudged_by_k0_after_upstream_approval(self):
+        # Editorial keyword/title judgment was delegated upstream on 10 Nov.
         for title in (
-            'Kann man einen Kappzaum über einem Gebiss tragen?',
+            'Kann man einen Kappzaum über einer Trense tragen?',
             'Kann man eine Trense über einem Kappzaum tragen?',
         ):
             a=make_base()
             a['target_keyword']='Kappzaum über Trense'
             a['title']=title
-            row=next(r for r in structural_receipts(a) if r['rule_id']=='title.keyword_required')
-            self.assertEqual(row['status'],'FAIL',row)
+            ids={r['rule_id'] for r in structural_receipts(a)}
+            self.assertFalse({'title.keyword_required','title.colon_forbidden','type.question_mark_policy'} & ids)
+
+    def test_h2_keyword_phrase_gate_is_delegated_but_repetition_protection_remains(self):
+        from engine.checkers import run_article_checks
+        ids={r['rule_id'] for r in run_article_checks(make_base())}
+        self.assertNotIn('heading.target_phrase_control',ids)
+        self.assertIn('heading.keyword_staccato_forbidden',ids)
 
     def test_missing_internal_links_blocks(self):
         a=make_base()
