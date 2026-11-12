@@ -1,0 +1,74 @@
+--- VORHER_ARBEITSSTAND/class-pste-runner.php
++++ NACHHER_ARBEITSSTAND/class-pste-runner.php
+@@ -472,24 +472,28 @@
+         $accepted=[];
+         foreach($order as $index){
+             if(($candidates[$index]['decision']??'')!=='PASS')continue;
+-            $duplicateOf=null;
++            $duplicateOf=null;$titleOnly=false;
+             foreach($accepted as $owner){
+                 $a=$signatures[$index];$b=$signatures[$owner];
+-                $same=($a['category']===''||$b['category']==='')?self::sameAnswerIntent((array)$candidates[$index],(array)$candidates[$owner]):self::sameAnswerIntentSignature($a,$b);
+-                if($same){$duplicateOf=$owner;break;}
++                $match=($a['category']===''||$b['category']==='')?self::sameAnswerIntent((array)$candidates[$index],(array)$candidates[$owner]):self::sameAnswerIntentSignature($a,$b);
++                if($match!==''){$duplicateOf=$owner;$titleOnly=$match==='TITLE_ONLY';break;}
+             }
+             if($duplicateOf===null){$accepted[]=$index;continue;}
+             $crossType=(string)$signatures[$index]['type']!==(string)$signatures[$duplicateOf]['type'];
+-            $candidates[$index]['decision']='BLOCKED';$candidates[$index]['discovery_only']=true;$candidates[$index]['candidate_role']='DISCOVERY_PROBE';$candidates[$index]['human_review_required']=true;
+-            $codes=['DUPLICATE_WITHIN_RESEARCH_RUN'];if($crossType)$codes[]='CROSS_TYPE_ANSWER_EQUIVALENCE';
++            // A matching working title alone is NOT proof of the same reader question.
++            // Keep the case in the existing clarification lane: never auto-release it.
++            $status=$titleOnly?'REVIEW_REQUIRED':'BLOCKED';
++            $candidates[$index]['decision']=$status;$candidates[$index]['discovery_only']=true;$candidates[$index]['candidate_role']='DISCOVERY_PROBE';$candidates[$index]['human_review_required']=true;
++            $codes=[$titleOnly?'TITLE_ONLY_OVERLAP_REQUIRES_SAME_OWNER_CLARIFICATION':'DUPLICATE_WITHIN_RESEARCH_RUN'];
++            if($crossType&&!$titleOnly)$codes[]='CROSS_TYPE_ANSWER_EQUIVALENCE';
+             $candidates[$index]['reason_codes']=array_values(array_unique(array_merge((array)($candidates[$index]['reason_codes']??[]),$codes)));
+             // This is the FINAL decision of the SAME central research batch.
+             // Never hand a candidate down with decision=BLOCKED but an earlier
+             // planning-readiness PASS still claiming that it is approved.
+             $gate=(array)($candidates[$index]['planning_readiness_gate']??[]);
+             if(($gate['contract']??'')==='PSTE_PLANNING_READINESS_GATE_V1_PRETITLE_PARITY'){
+-                $gate['status']='BLOCKED';
+-                $gate['decision']='BLOCKED';
++                $gate['status']=$status;
++                $gate['decision']=$status;
+                 $gate['ok']=false;
+                 $gate['reason_codes']=array_values(array_unique(array_merge(
+                     (array)($gate['reason_codes']??[]),$codes)));
+@@ -512,11 +516,11 @@
+                 'query_tuple'=>$queryTuple,'query_tokens'=>PSTE_Normalizer::tokens($query),'query_context_tokens'=>$queryTuple?PSTE_Normalizer::tokens((string)($queryTuple['context']??'')):[],
+                 'title_tuple'=>$titleTuple,'title_tokens'=>PSTE_Normalizer::tokens($title),'title_context_tokens'=>$titleTuple?PSTE_Normalizer::tokens((string)($titleTuple['context']??'')):[]];
+         }
+-    private static function sameAnswerIntentSignature(array $a,array $b): bool {
+-            $familyA=(string)($a['family']??'');$familyB=(string)($b['family']??'');if($familyA===''||$familyB===''||!hash_equals($familyA,$familyB))return false;
+-            $clusterA=(string)($a['cluster']??'');$clusterB=(string)($b['cluster']??'');if($clusterA!==''&&$clusterB!==''&&hash_equals($clusterA,$clusterB))return true;
+-            if(self::answerEquivalentSignature((array)$a['query_tuple'],(array)$b['query_tuple'],(array)$a['query_tokens'],(array)$b['query_tokens'],(array)$a['query_context_tokens'],(array)$b['query_context_tokens']))return true;
+-            return self::answerEquivalentSignature((array)$a['title_tuple'],(array)$b['title_tuple'],(array)$a['title_tokens'],(array)$b['title_tokens'],(array)$a['title_context_tokens'],(array)$b['title_context_tokens']);
++    private static function sameAnswerIntentSignature(array $a,array $b): string {
++            $familyA=(string)($a['family']??'');$familyB=(string)($b['family']??'');if($familyA===''||$familyB===''||!hash_equals($familyA,$familyB))return '';
++            $clusterA=(string)($a['cluster']??'');$clusterB=(string)($b['cluster']??'');if($clusterA!==''&&$clusterB!==''&&hash_equals($clusterA,$clusterB))return 'SOURCE';
++            if(self::answerEquivalentSignature((array)$a['query_tuple'],(array)$b['query_tuple'],(array)$a['query_tokens'],(array)$b['query_tokens'],(array)$a['query_context_tokens'],(array)$b['query_context_tokens']))return 'SOURCE';
++            return self::answerEquivalentSignature((array)$a['title_tuple'],(array)$b['title_tuple'],(array)$a['title_tokens'],(array)$b['title_tokens'],(array)$a['title_context_tokens'],(array)$b['title_context_tokens'])?'TITLE_ONLY':'';
+         }
+     private static function answerEquivalentSignature(array $aTuple,array $bTuple,array $aTokens,array $bTokens,array $aContextTokens,array $bContextTokens): bool {
+             if((string)($aTuple['entity']??'')!==''&&(string)($bTuple['entity']??'')!==''&&(string)$aTuple['entity']!==(string)$bTuple['entity'])return false;
+@@ -527,13 +531,13 @@
+             return self::similarityTokens($aTokens,$bTokens)>=0.78;
+         }
+     private static function similarityTokens(array $a,array $b): float {if(!$a||!$b)return 0.0;$intersection=count(array_intersect($a,$b));$union=count(array_unique(array_merge($a,$b)));return $union>0?round($intersection/$union,6):0.0;}
+-    private static function sameAnswerIntent(array $a,array $b): bool {
+-            $familyA=(string)($a['topic_family_key']??'');$familyB=(string)($b['topic_family_key']??'');if($familyA===''||$familyB===''||!hash_equals($familyA,$familyB))return false;
+-            $clusterA=(string)($a['intent_cluster_id']??'');$clusterB=(string)($b['intent_cluster_id']??'');if($clusterA!==''&&$clusterB!==''&&hash_equals($clusterA,$clusterB))return true;
++    private static function sameAnswerIntent(array $a,array $b): string {
++            $familyA=(string)($a['topic_family_key']??'');$familyB=(string)($b['topic_family_key']??'');if($familyA===''||$familyB===''||!hash_equals($familyA,$familyB))return '';
++            $clusterA=(string)($a['intent_cluster_id']??'');$clusterB=(string)($b['intent_cluster_id']??'');if($clusterA!==''&&$clusterB!==''&&hash_equals($clusterA,$clusterB))return 'SOURCE';
+             $queryA=(string)($a['primary_longtail_query']??$a['canonical_query']??'');$queryB=(string)($b['primary_longtail_query']??$b['canonical_query']??'');
+             $categoryA=(string)($a['target_category_name']??'');$categoryB=(string)($b['target_category_name']??'');
+-            if(PSTE_Normalizer::answerEquivalent($queryA,$queryB,$categoryA,$categoryB))return true;
+-            return PSTE_Normalizer::answerEquivalent(PSTE_Editorializer::displayTitle($a),PSTE_Editorializer::displayTitle($b),$categoryA,$categoryB);
++            if(PSTE_Normalizer::answerEquivalent($queryA,$queryB,$categoryA,$categoryB))return 'SOURCE';
++            return PSTE_Normalizer::answerEquivalent(PSTE_Editorializer::displayTitle($a),PSTE_Editorializer::displayTitle($b),$categoryA,$categoryB)?'TITLE_ONLY':'';
+         }
+ 
+     /** @return array<int,array<string,mixed>> */
