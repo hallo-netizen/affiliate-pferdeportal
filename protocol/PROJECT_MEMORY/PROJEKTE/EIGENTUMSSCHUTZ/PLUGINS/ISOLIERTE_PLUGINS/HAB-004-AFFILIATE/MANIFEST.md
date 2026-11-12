@@ -1,3 +1,9 @@
+## 12.11.2026 – RC22 0.1.19-rc22: BROWSER-CSS-CACHE-ROOTFIX (ECHTER LIVE-CHROME-GEGENTEST)
+
+**Offizielle Voll-ZIPs:** `CURRENT.zip` + `HAB_AFFILIATE_RC22_0.1.19-rc22.zip`, 2.337.621 Bytes, 36 Dateien, SHA256 `c9d501396d5500e699eb6dd8d867318c41e8ea8efc43c8fe00ad9ee4ab4e32d1`. Gegenüber RC21 **nur Hauptdatei/Readme** geändert; RC21-Karten, CSS, Idealo, Amazon, Versicherungen, GTIN, Designplugin bytegleich. Ursache: Browser erhielt weiterhin unveränderte CSS-Version `6.72.211-hb-rc16-20261108`, sodass vor RC21 gespeicherte CSS-Fassung die neuen 3 Kacheln weiter untereinander anzeigen konnte. Neue CSS-Version wird über nativen WordPress-Plugin-Header abgeleitet: `6.72.211-hb-plugin-0.1.19-rc22`, künftig mit Pluginversion aktualisiert. **Live-Ursachenreproduktion im echten Chrome PASS:** Live-RC21-CSS 3 Karten nebeneinander, testweise altes RC20-CSS → exakt 3 große Karten untereinander, RC21-CSS zurück → wieder 3 nebeneinander (GitHub-Run 43247959556). 25 PHP Lints, 11 ursprüngliche Bridge/Design-Funktionstests, 36+432 ZIP-CRC PASS. **RC22 WordPress-Liveinstallation/Abnahme OFFEN**, keine echten Produktbilder (0), noch keine Idealo-Zusatzbuttons (3 Amazon-Links). Gesamtbeleg: `../../../AFFILIATE/RC22_CSS_CACHE_LIVE_20261112.md`.
+
+---
+
 ## 12.11.2026 – OFFIZIELLE RC21 (0.1.18-rc21): KATEGORIE-PRODUKTKACHELN KOMPAKT, 3/2/1
 
 **Vollständige Installations-ZIP und CURRENT:** `HAB_AFFILIATE_RC21_0.1.18-rc21.zip` bzw. `CURRENT.zip`, beide 2.337.596 Bytes, 36 Dateien, SHA256 `0f40eddb4526434c03acdd370d2763ac5a01eaea862a40cb9ae25bb8754363bf`. Aus dem echten RC20-CURRENT exakt und ohne Datenbank-/Frontend-Änderung gebaut. 4 Dateien im ZIP berührt: Hauptdatei (Version und Kartenhöhen), bestehende Hab-Bridge (Kategorie-Grid), bestehende CSS (responsive) und Readme (Version). Alle übrigen 32 unverändert.
