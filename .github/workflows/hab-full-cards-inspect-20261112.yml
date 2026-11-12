@@ -8,6 +8,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Read surrounding actual selection context for all three candidate filters
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          z=ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          requests=[('affiliate-portal-router/affiliate-portal-router.php',[(4698,4728),(5130,5162),(5270,5310)]),('affiliate-portal-router/includes/trait-ppar-ebay.php',[(2775,2806)])]
+          for f,rr in requests:
+            s=z.read(f).decode().splitlines()
+            for lo,hi in rr:
+              print('RANGE',f,lo,hi)
+              for i in range(lo-1,min(hi,len(s))):print('SOURCE',f,i+1,s[i][:440])
+          PY
       - name: Trace provider-card selector slot propagation
         run: |
           python3 - <<'PY'
