@@ -5,15 +5,15 @@
 
 Der Nutzer bestätigt die Idee, „Humanoide“ als achte, prominent sichtbare Hauptkategorie zu führen. Begründung: aktuelles und zunehmend wahrgenommenes Robotikthema, eigene Nachfrage rund um Bauform, Fähigkeiten, Modelle und Zukunftsperspektiven; das Portal ist **ein Informationsportal mit Monetarisierungsabsicht**, kein Onlineshop.
 
-**Fachlicher Soll-Hauptbaum (acht Hauptpunkte):**
+**Fachlicher Soll-Hauptbaum (acht Hauptpunkte; Nutzer hat ausdrücklich Gewerbe ans Ende gesetzt):**
 1. **Haushalt**
 2. **Garten**
 3. **Freizeit**
 4. **Sport**
 5. **Bildung**
 6. **Pflege**
-7. **Gewerbe**
-8. **Humanoide**
+7. **Humanoide**
+8. **Gewerbe**
 
 - **Gewerbe bleibt Hauptbereich** für kleine Betriebe einschließlich Handwerk, Gastronomie, Handel, Landwirtschaft. Unter **Gewerbe > Industrie** weiterhin ein **eigener nachgeordneter Landingpage-Komplex** mit groben Teilzugängen (Fertigung, Anlagen, Medizin & Labor), keine Zusammenlegung „Handwerk & Industrie“.
 - **Humanoide sind Bauform, die anderen sechs privaten/beruflichen Bereiche Einsatzwelten.** Diese bewusst andere Schnittachse ist akzeptiert, wenn Seite/Absicht sinnvoll getrennt werden.
@@ -58,3 +58,6 @@ Nutzerwunsch ausdrücklich **keine vorgezogene technische Festlegung**: Innerhal
 4. Erst nach separater konkreter Umsetzungsfreigabe geschütztes Delta über bestehendes Kategorie-Plugin planen. Keine WordPress-, URL-, Plugin- oder Parent-Änderung aus diesem V48-Konzeptentscheid ableiten.
 
 **Quelle der dokumentierten V47-Vorprüfung:** `RECHERCHE/HUMANOIDE_HAUPTKATEGORIE_UND_16_SEO_GRENZEN_V47_20261113.md`.
+
+### Nachtrag 13.11.2026 – Nutzer präzisiert Reihenfolge und Zukunftsthemen
+**Humanoide sind Nr. 7, Gewerbe bleibt Nr. 8 und damit der letzte Hauptmenüpunkt.** Planungs- und Konzeptideen gehören ausdrücklich in ALLE Kategorien, nicht nur in Humanoide. Kaufbarkeit/Marktreife sind keine Auswahlhürde für das Informationsportal. Ideen ohne existierende Hardware eindeutig als Zukunftsüberlegung kennzeichnen; kein erfundenes Serienprodukt. Der systematische erneute Acht-Bereiche-Abgleich steht in `ENTWICKLUNGSIDEEN_ACHT_BEREICHE_V48_20261113.md`.
