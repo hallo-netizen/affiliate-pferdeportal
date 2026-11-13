@@ -1,0 +1,66 @@
+name: HAB read-only existing insurance banners and product coverage audit
+on:
+  push:
+    branches: [hab-coverage-tarifcheck-verified-audit-20261113]
+    paths: [.github/workflows/hab-readonly-portal-coverage-tarifcheck-audit-20261113.yml]
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect public real pages and selected existing GitHub source only; zero changes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request,urllib.parse,json,re,time,collections,html
+          root='https://hab-und-bewahr.de'
+          def get(path,limit=2500000):
+            req=urllib.request.Request(root+path,headers={'User-Agent':'Mozilla/5.0 (compatible; HAB-ReadOnlyQualityAudit/1.0)','Accept':'application/json,text/html'})
+            with urllib.request.urlopen(req,timeout=15) as r:
+              b=r.read(limit+1)
+              if len(b)>limit:raise ValueError('Response too big')
+              return r.status,r.headers,b.decode('utf8','replace')
+          ids={};results=[]
+          for q in ['versicherung','hausrat','gebäude','haftpflicht','rechtsschutz','tresor','wassermelder','feuerlöscher']:
+            path='/wp-json/wp/v2/pages?per_page=35&search='+urllib.parse.quote(q)+'&_fields=id,slug,link,title'
+            try:
+              _,hdr,s=get(path)
+              arr=json.loads(s)
+              if not isinstance(arr,list):raise ValueError('Not array')
+              print('PUBLIC_SEARCH',q,'pages',len(arr),'WP-total',hdr.get('X-WP-Total'))
+              for row in arr[:25]:
+                url=row.get('link','')
+                if url.startswith(root):
+                  ids[url]={'q':q,'id':row.get('id'),'slug':row.get('slug'),'title':html.unescape(re.sub('<[^>]+>','',str(row.get('title',{}).get('rendered',''))))}
+              print('PUBLIC_PAGES',q,json.dumps([{'slug':x.get('slug'),'title':html.unescape(re.sub('<[^>]+>','',str(x.get('title',{}).get('rendered',''))))} for x in arr[:12]],ensure_ascii=False))
+            except Exception as e:print('PUBLIC_SEARCH_UNAVAILABLE',q,type(e).__name__,str(e)[:150])
+          insurance=[(u,m) for u,m in ids.items() if m['q'] in ('versicherung','hausrat','gebäude','haftpflicht','rechtsschutz')]
+          product=[(u,m) for u,m in ids.items() if m['q'] in ('tresor','wassermelder','feuerlöscher')]
+          sampled=insurance[:20]+product[:12]
+          total=collections.Counter()
+          for url,meta in sampled:
+            try:
+              path=url[len(root):]
+              _,_,content=get(path)
+              # Avoid publishing affiliate tracking URLs or codes: only counts.
+              product_groups=len(re.findall(r'class="ppar-hb-category-product-group',content))
+              product_cards=len(re.findall(r'data-ppar-category-product-card=',content))
+              tariff_mentions=len(re.findall(r'tarifcheck',content,re.I))
+              affiliate_slots=len(re.findall(r'class="ppar-affiliate-slot',content))
+              insurance_fallback=len(re.findall(r'ppar-hb-insurance-own',content))
+              banner_images=len(re.findall(r'class="(?:ppar-overview-wide-banner-image|ppar-category-large-banner-image|ppar-banner-image)',content))
+              metric=dict(title=meta['title'][:72],search=meta['q'],slug=meta['slug'],
+                 visible_tarifcheck_mentions=tariff_mentions,affiliate_slots=affiliate_slots,
+                 insurance_own_fallback=insurance_fallback,product_groups=product_groups,
+                 product_cards=product_cards,banner_images=banner_images)
+              print('LIVE_PAGE_METRICS',json.dumps(metric,ensure_ascii=False))
+              total['checked']+=1
+              if tariff_mentions>0:total['has_tarifcheck']+=1
+              if insurance_fallback>0:total['has_fallback']+=1
+              if product_cards>0:total['has_product_cards']+=1
+            except Exception as e:print('PUBLIC_PAGE_UNAVAILABLE',meta['slug'],type(e).__name__,str(e)[:130])
+          print('AUDIT_SAMPLED',json.dumps(dict(total),ensure_ascii=False))
+          print('HAB_AUDIT_READ_ONLY_COMPLETE')
+          PY
