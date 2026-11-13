@@ -1,0 +1,53 @@
+name: HAB RC28 verified product-catalog source audit (read only)
+on:
+  push:
+    branches: [hab-affiliate-rc28-catalog-evidence-20261113]
+    paths: [.github/workflows/hab-rc28-readonly-catalog-source-audit-20261113.yml]
+permissions: {contents: read}
+jobs:
+  catalog-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Recreate exact RC27 and read only real product-family mapper and portal categories
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          python3 "$R/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/build_rc24.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/build_rc25.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/build_rc26.py"
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/build_rc27.py"
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import re,urllib.request,json
+          z=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          with ZipFile(z) as archive:
+            p='affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php'
+            src=archive.read(p).decode()
+            print('HAB_BRIDGE_REAL_SIZE',len(src))
+            for method in ['verified_nodes','product_family','catalog','ancestors','nearest_page']:
+              m=re.search(r'(?:public|private|protected)(?:\s+static)?\s+function\s+'+method+r'\s*\(',src)
+              if not m:
+                print('HAB_METHOD_NOT_FOUND',method);continue
+              start=src.rfind('\n',0,m.start())+1
+              end=src.find('\n    }',m.end())
+              block=src[start:end+6] if end>=0 else src[start:start+3000]
+              print('===HAB_METHOD_BEGIN',method,'CHARS',len(block),'===')
+              print(block[:26000])
+              print('===HAB_METHOD_END',method,'===')
+          for name,url in [('taxonomy','https://hab-und-bewahr.de/wp-json/wp/v2/categories?per_page=100&page=1'),('taxonomy_2','https://hab-und-bewahr.de/wp-json/wp/v2/categories?per_page=100&page=2')]:
+            try:
+              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (compatible; HAB_readonly_audit/1.0)','Accept':'application/json'})
+              with urllib.request.urlopen(req,timeout=17) as resp:
+                body=resp.read(500000)
+                data=json.loads(body)
+                print('PUBLIC_WORDPRESS_REST',name,'status',resp.status,'total',resp.headers.get('X-WP-Total'),'totalPages',resp.headers.get('X-WP-TotalPages'),'count',len(data) if isinstance(data,list) else None)
+                if isinstance(data,list): print('PUBLIC_CATEGORY_SAMPLES',json.dumps([{'name':x.get('name'),'slug':x.get('slug'),'parent':x.get('parent')} for x in data[:38]],ensure_ascii=False))
+            except Exception as e:
+              print('PUBLIC_WORDPRESS_REST_UNAVAILABLE',name,type(e).__name__,str(e)[:220])
+          print('HAB_RC28_READ_ONLY_SOURCE_AUDIT_COMPLETE')
+          PY
