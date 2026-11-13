@@ -7,7 +7,7 @@ jobs:
   export:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - name: Verify exact existing package
@@ -19,37 +19,6 @@ jobs:
           GOT="$(sha256sum "$P" | awk '{print $1}')"
           test "$GOT" = "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
           printf '%s\n' "$GOT"
-      - name: Extract PPM native booking code evidence (read-only to package)
-        shell: bash
-        run: |
-          python3 - <<'PY'
-          import zipfile, re, hashlib, os
-          path = 'control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip'
-          out = 'control/startmaster0107/diagnostics/PPM_679_NATIVE_BOOKING_SOURCE_20261113.md'
-          lines = ['# PPM 6.7.9 – read-only source inspection', '', 'Source: ' + path, 'SHA256: ' + hashlib.sha256(open(path,'rb').read()).hexdigest(), '']
-          pat = re.compile(r'function\\s+.*(book|reserv|record_readback|find_slot|assign|commit)|class\\s+PPM679_Editorial_Plan_|ppm679_editorial_plan_runtime_state_v1|update_option\\s*\\(|add_option\\s*\\(|\\->query\\s*\\(', re.I)
-          with zipfile.ZipFile(path) as z:
-              names = [n for n in z.namelist() if n.endswith('.php') and ('editorial-plan' in n or 'slot' in n or 'plan-' in n or n.endswith('portal-production-machine.php'))]
-              lines.append('Candidate PHP files: ' + str(len(names)))
-              for name in names:
-                  src = z.read(name).decode('utf-8', 'replace').splitlines()
-                  found = [i for i,s in enumerate(src) if pat.search(s)]
-                  if not found: continue
-                  lines += ['', '## ' + name]
-                  indexes = set()
-                  for i in found:
-                      indexes.update(range(max(0,i-2),min(len(src),i+4)))
-                  for i in sorted(indexes):
-                      lines.append(str(i+1) + ': ' + src[i][:350])
-          os.makedirs(os.path.dirname(out), exist_ok=True)
-          with open(out,'w',encoding='utf-8') as f: f.write('\\n'.join(lines) + '\\n')
-          print('PPM source evidence written:', out, 'lines:', len(lines))
-          PY
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git config user.name "github-actions[bot]"
-          git add control/startmaster0107/diagnostics/PPM_679_NATIVE_BOOKING_SOURCE_20261113.md
-          git commit -m "qa: inspect existing PPM source [skip ci]" || true
-          git push origin HEAD:temp/dev-export-existing-ppm679-20260926
       - uses: actions/upload-artifact@v4
         with:
           name: temp-existing-concept-agent-workspace
