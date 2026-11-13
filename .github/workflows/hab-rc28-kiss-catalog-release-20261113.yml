@@ -1,4 +1,4 @@
-name: HAB RC28 exact category-source KISS tests and release
+name: HAB RC28 proven real category spellings and parent source release
 on:
   push:
     branches: [hab-affiliate-rc28-catalog-evidence-20261113]
