@@ -72,7 +72,7 @@ jobs:
                   border:getComputedStyle(c).borderTopWidth,
                   buttons:Array.from(c.querySelectorAll('.ppar-banner-offer-button,.ppar-banner-button')).map(b=>{
                     const s=getComputedStyle(b);
-                    return {radius:s.borderTopLeftRadius,color:s.color,bg:s.backgroundColor};
+                    return {radius:s.borderTopLeftRadius,color:s.color,bg:s.backgroundColor,inline:b.getAttribute('style'),element:b.outerHTML.slice(0,550),priority:b.style.getPropertyPriority('background')};
                   })
                 }));
                 return {width:innerWidth,cards:d,margin:getComputedStyle(grid).marginBottom,
