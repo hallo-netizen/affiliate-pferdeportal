@@ -1,0 +1,36 @@
+name: Archive HD009 0.1.39 test candidate with factual 381 coverage
+on:
+  push:
+    branches: [hobbyroom/hd009-039-validated-equipment-forms-20261113]
+    paths: [.github/workflows/hd009_0139_archive_test.yml]
+permissions:
+  contents: write
+jobs:
+  archived:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify source PHP test run and source checksum
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          test "$(gh api repos/"$GITHUB_REPOSITORY"/actions/runs/43443268758 --jq .conclusion)" = success
+          test "$(gh api repos/"$GITHUB_REPOSITORY"/actions/runs/43443431922 --jq .conclusion)" = success
+          python3 scripts/hd009_0138_equipment_match_candidate.py /tmp/HD009_0138_BASE.zip
+          python3 scripts/hd009_0139_safe_compound_equipment_build.py /tmp/HD009_0138_BASE.zip /tmp/HOBBY_DEPOT_HD009_0.1.39_VALIDATED_EQUIPMENT_CANDIDATE.zip
+          echo '94528a6c572c77891c1b5faa8824018d5fd389a731b029607dbad2cc4dc45c7c  /tmp/HOBBY_DEPOT_HD009_0.1.39_VALIDATED_EQUIPMENT_CANDIDATE.zip' | sha256sum -c
+          python3 scripts/hd009_0139_original_php_equipment_qa.py /tmp/HOBBY_DEPOT_HD009_0.1.39_VALIDATED_EQUIPMENT_CANDIDATE.zip /tmp/hd009_0139_final_qa.php protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip
+          php /tmp/hd009_0139_final_qa.php
+      - name: Archive complete ZIP without altering stable CURRENT
+        run: |
+          python3 scripts/hd009_0139_archive_test_only.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CANDIDATES/HOBBY_DEPOT_HD009_0.1.39_VERIFIZIERTE_AUSRUESTUNG_NUR_TEST.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CANDIDATES/CANDIDATE_0.1.39_STATUS.md
+          git commit -m "HD009 0.1.39 tested equipment candidate; current untouched, 34 PHP regressions"
+          git fetch origin hobbyroom/hd009-039-validated-equipment-forms-20261113
+          git rebase origin/hobbyroom/hd009-039-validated-equipment-forms-20261113
+          git push origin HEAD:refs/heads/hobbyroom/hd009-039-validated-equipment-forms-20261113
