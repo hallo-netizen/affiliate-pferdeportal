@@ -96,3 +96,15 @@ Für jede relevante Funktion eine knappe, belegte Entscheidung: `BEHALTEN`, `UNV
 **Zuerst** Rollen-/Funktionskarte und Quellnutzungsinventur erstellen; dann vorhandene stabile Funktionen in einem neuen Portal-neutralen Pilot **gezielt übernehmen**, PPM-Abhängigkeiten nur nach konkretem Nachweis entfernen; anschließend 3 reale Altaufträge, 20er-Charge und Portalprofile testen. Keine Liveänderung; keine neue Fachprüfung. **Nicht** nochmals eine Grundsatzarchitektur ausdenken.
 
 **Status:** Drei Ergänzungen beschlossen/dokumentiert. Noch kein fertiger Code, kein universeller Test und keine WP-Liveabnahme.
+
+### 19. Sofortartikel / freier Artikelauftrag mit synchronisierter Planung
+**Neu verbindlich (13.11.2026, Nutzerkorrektur):** Neben dem normalen Keyword-/Regalweg muss der bestehende **Kurzweg für frei initiierte Artikel** erhalten bleiben.
+
+- Ein Nutzer darf einen Artikel **direkt und kurzfristig anstoßen**, ohne zuerst den vollständigen Keyword-Recherchevorrat abzuarbeiten. Der bereits vorhandene Kurzweg ist zu inventarisieren und möglichst unverändert zu übernehmen; kein neuer Spezial-Worker.
+- **Eine zentrale Themen-/Kategorieübersicht:** Ein Sofortartikel erhält vor der Übergabe eine feste Auftragskennung und eine Zuordnung zu der bestehenden Kategorie, Artikelart und dem tatsächlich zugewiesenen Keyword/Suchthema. Damit zählt er als bereits geplant bzw. beauftragt, auch für die Abdeckung der Kategorien und spätere Duplicate-Vermeidung.
+- **Keine Parallelwelt:** Sofortartikel dürfen nicht nur im K0-Export erscheinen, während die Themenengine sie weiter als unbesetzt ansieht. Die Eintragung geschieht im selben vorhandenen Auftragsspeicher wie beim normalen Regalweg.
+- **Keine doppelte SEO-/K0-Qualitätsentscheidung:** Der freie Start ist keine Erlaubnis zu widersprüchlichen oder fehlenden Pflichtangaben. Nur der zuständige redaktionelle Schritt bindet die notwendige Suchabsicht/Kategorie/Artikelart einmal. Bei völlig fehlenden Angaben wird der konkrete Auftrag zur Klärung gehalten; keine verdeckte automatische neue Recherche in nachgelagerten Workern.
+- **Externe Grenzen unverändert:** Externer Titelprozess, unveränderter K0-Fünf-Felder-Vertrag und der WordPress-Entwurfsimport bleiben intakt.
+- **Pflicht-Gegenprobe vor Pilotfreigabe:** Sofortauftrag anlegen → erscheint in der einen Themen-/Kategorieübersicht → wird nicht erneut als freies Thema ausgewählt → eindeutiger Export → K0-Rückgabe → genau ein Entwurf; Abbruch und Wiederaufnahme ohne erneute fachliche Entscheidung.
+
+Der Begriff „Redaktionsplan synchronisieren“ bezeichnet im neuen KISS-Zielbild **die eine zentrale Themen-/Kategorie- und Auftragsübersicht** – nicht die unbewiesene Pflicht, einen gesonderten PPM-Produktionsplan wieder einzuführen. Vorhandene Altschnittstellen müssen bis zur tatsächlich bestandenen Migration kompatibel bleiben.
