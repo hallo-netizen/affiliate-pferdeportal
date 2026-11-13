@@ -84,7 +84,10 @@ main=exact(main,
             }
             $runtime_campaign = $campaign;""",
 "fast shared category product path")
-main=exact(main,
+main_start=main.index("    private function ranked_campaigns_for_slot_uncached(")
+main_end=main.index("    private function category_product_strict_relevance_tier_v672104(",main_start)
+main_part=main[main_start:main_end]
+main_part=exact(main_part,
 """            $runtime_campaign = $campaign;
             $runtime_campaign['_ppar_runtime_normalized_slot_type'] = 1;
             if (empty($runtime_campaign['_ppar_runtime_normalized'])) {""",
@@ -95,6 +98,7 @@ main=exact(main,
             $runtime_campaign['_ppar_runtime_normalized_slot_type'] = 1;
             if (empty($runtime_campaign['_ppar_runtime_normalized'])) {""",
 "uncached fallback category path")
+main=main[:main_start]+main_part+main[main_end:]
 
 assert main.count("0.1.34")>=1
 main=main.replace("0.1.34","0.1.35")
