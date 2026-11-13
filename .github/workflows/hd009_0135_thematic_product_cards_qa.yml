@@ -1,0 +1,101 @@
+name: HD009 0.1.35 topical exact card rules hard QA
+on:
+  push:
+    branches: [hobbyroom/hd009-035-exact-product-context-20261113]
+    paths: [.github/workflows/hd009_0135_thematic_product_cards_qa.yml]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build from full tested HD009 0.1.34
+        run: python3 scripts/hd009_0135_thematic_product_cards_build.py /tmp/HOBBY_DEPOT_HD009_0.1.35_THEMATIC_PRODUCT_CARDS.zip
+      - name: Verify 41/41, 24/24 PHP and unchanged other product/feeds
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile,re
+          src=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CANDIDATES/HOBBY_DEPOT_HD009_0.1.34_FEEDVERGLEICH.zip')
+          dst=Path('/tmp/HOBBY_DEPOT_HD009_0.1.35_THEMATIC_PRODUCT_CARDS.zip')
+          with zipfile.ZipFile(src) as a,zipfile.ZipFile(dst) as b:
+            assert a.testzip() is None and b.testzip() is None and len(a.namelist())==len(b.namelist())==41
+            assert a.namelist()==b.namelist()
+            d=[n for n in a.namelist() if a.read(n)!=b.read(n)]
+            m='affiliate-portal-router/hobby-depot-affiliate-router.php'
+            t='affiliate-portal-router/includes/trait-ppar-idealo.php'
+            assert set(d)=={m,t},d
+            old=a.read(m).decode();new=b.read(m).decode()
+            trait0=a.read(t).decode();trait1=b.read(t).decode()
+            begin=re.compile(r'^    (?:private|public|protected) function [a-zA-Z_]+\(',re.M)
+            def method(s,name):
+              start=s.index(name);end=begin.search(s,start+len(name))
+              return s[start:end.start()] if end else s[start:]
+            for q in [
+              'private function idealo_import_feed_file(',
+              'private function hd_idealo_preview_csv(',
+              'private function hd_idealo_standard_feed_compare_work(',
+              'private function idealo_materialize_campaigns(',
+              'private function idealo_target_keys_for_concept(',
+              'private function idealo_campaigns_should_be_active(',
+              'public function idealo_campaign_publicly_allowed(']:
+              assert method(trait0,q)==method(trait1,q),'Changed idealo protected method '+q
+            for name in b.namelist():
+              if name.endswith('.php'):
+                p=Path('/tmp/hd009_135_php')/name;p.parent.mkdir(exist_ok=True,parents=True);p.write_bytes(b.read(name))
+            assert new.count('hd_idealo_product_targets_exact_hobby_page($campaign, $rank_context, $slot_type)')==2
+            print('DIFF_ONLY',d)
+            print('UNMODIFIED_IMPORT_AND_PREVIEW_METHODS_PASS')
+            print('ALL_41_ZIP_CRC_PASS')
+          PY
+          find /tmp/hd009_135_php -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Execute actual exact-page relevance guard and original stemmer in PHP
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,zipfile
+          src=Path('/tmp/HOBBY_DEPOT_HD009_0.1.35_THEMATIC_PRODUCT_CARDS.zip')
+          with zipfile.ZipFile(src) as z:
+            a=z.read('affiliate-portal-router/hobby-depot-affiliate-router.php').decode()
+            t=z.read('affiliate-portal-router/includes/trait-ppar-idealo.php').decode()
+          def meth(s,name):
+            m=re.search(r'^    (?:private|public|protected) function '+name+r'\(',s,re.M)
+            assert m,name
+            x=s[m.start():];n=re.search(r'^    (?:private|public|protected) function ',x[m.end()-m.start():],re.M)
+            return x[:m.end()-m.start()+n.start()] if n else x
+          php='''<?php
+          error_reporting(E_ALL);
+          function sanitize_key($x){return preg_replace('/[^a-z0-9_\\-]/','',strtolower((string)$x));}
+          function sanitize_title($x){return preg_replace('/[^a-z0-9\\-]/','',strtolower((string)$x));}
+          class QA {
+          '''+meth(a,'hd_idealo_product_targets_exact_hobby_page')+meth(t,'idealo_match_stem')+'''
+          public function allow($x,$c,$s){return $this->hd_idealo_product_targets_exact_hobby_page($x,$c,$s);}
+          public function stem($x){return $this->idealo_match_stem($x);}
+          }
+          function check($p,$note){static $i=0;$i++;if(!$p){fwrite(STDERR,"FAIL ".$i." ".$note."\\n");exit(1);}echo "PASS ".$i." ".$note."\\n";}
+          $qa=new QA();
+          $page=array('post_type'=>'page','primary_slug'=>'airbrush');
+          $base=array('network'=>'idealo','source'=>'idealo_product_feed_v1','automation_target_keys'=>array('page:gestalten','page:malen-zeichnen'));
+          check(!$qa->allow($base,$page,'category_product_1'),'Parent Gestalten/Malen products excluded from Airbrush page');
+          check(!$qa->allow($base,$page,'category_product_2'),'All three product slots use same condition');
+          check(!$qa->allow($base,$page,'category_product_3'),'Slot 3 may remain empty');
+          $exact=$base;$exact['automation_target_keys'][]='page:airbrush';
+          check($qa->allow($exact,$page,'category_product_1'),'Exact airbrush offer allowed');
+          $other=$base;$other['network']='amazon';
+          check($qa->allow($other,$page,'category_product_1'),'Amazon remains unchanged');
+          $other['network']='ebay';
+          check($qa->allow($other,$page,'category_product_1'),'eBay remains unchanged');
+          check($qa->allow($base,$page,'product_after_category_tiles'),'Unrelated banner/article slots unaffected');
+          check($qa->allow($base,array('post_type'=>'post','primary_slug'=>'airbrush'),'category_product_1'),'Articles unchanged');
+          check($qa->stem('malene')==='malene','Malene does not become Malen');
+          check($qa->stem('malen')==='malen','Malen keeps its own exact word');
+          check($qa->stem('teleskope')==='teleskop','Correct common E-plural Teleskope remains');
+          check($qa->stem('airbrush')==='airbrush','Airbrush token unchanged');
+          echo "ALL_HD009_135_REAL_PHP_TESTS_PASS\\n";
+          '''
+          Path('/tmp/hd009_135_guard.php').write_text(php)
+          PY
+          php -l /tmp/hd009_135_guard.php
+          php /tmp/hd009_135_guard.php
