@@ -159,7 +159,11 @@ with ZipFile(BytesIO(old)) as z:
 '''
     t=replace_method(t,"    public function idealo_provider_access_test($handled, $provider, $contract_version) {",
                       "    private function idealo_validate_feed_url($url) {",test_method)
-    t=once(t,"        $settings['feed_id'] = '2901';",r'''        // Only a previously verified NON-mock production feed can be selected.
+    a_save=t.index("    public function idealo_provider_access_save(")
+    a_id=t.index("        $settings['feed_id']",a_save)
+    b_id=t.index("\n",a_id)
+    print('HAB_RC25_ORIGINAL_FEED_SAVE',t[a_id:b_id].strip())
+    t=t[:a_id]+r'''        // Only a previously verified NON-mock production feed can be selected.
         $requested=preg_replace('/\D+/', '',(string)($raw['feed_id']??''));
         $verified=array();
         foreach ((array)($old['api_feed_inventory']??array()) as $entry) {
@@ -171,7 +175,7 @@ with ZipFile(BytesIO(old)) as z:
             $settings['feed_id']=$requested;
             $settings['feed_url']='';
             $settings['api_last_checked_at']=0;
-        }''')
+        }'''+t[b_id:]
     t=once(t,
         '<p><strong>Feed-ID:</strong> <code>2901</code><input type="hidden" name="ppar_provider[idealo][feed_id]" value="2901"> <span class="description">Gebundener Standardfeed; portalweiter Superset-Feed.</span></p>',
         r'''<p><label>Produktfeed aus geprüftem iPN-Konto<br><select name="ppar_provider[idealo][feed_id]">
