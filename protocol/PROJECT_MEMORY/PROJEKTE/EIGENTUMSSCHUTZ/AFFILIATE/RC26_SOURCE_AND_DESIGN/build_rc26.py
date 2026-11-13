@@ -191,7 +191,20 @@ with ZipFile(BytesIO(old)) as z:
     # the OTHER feed after a source switch.
     t=once(t,
         "        $manual=trim((string)($settings['feed_url'] ?? ''));\n        if ($manual!=='') { return $this->idealo_validate_feed_url($manual); }",
-        "        // Hab always downloads the exact approved feedId through the existing iPN export.\n        // An older manually saved URL must not silently import a different feed.")
+        r'''        // Preserve an original provider URL ONLY when it identifies the currently
+        // approved feed. An old URL for the other feed is ignored, never mixed.
+        $manual=trim((string)($settings['feed_url'] ?? ''));
+        if ($manual!=='') {
+            $parts=wp_parse_url($manual); $query=array();
+            if (is_array($parts)) parse_str((string)($parts['query']??''),$query);
+            $feed_id=(string)($query['feedId']??$query['feedid']??'');
+            $adspace_id=(string)($query['adspaceId']??$query['adspaceid']??'');
+            if ($feed_id===(string)($settings['feed_id']??'') &&
+                ($adspace_id==='' || $adspace_id==='568944')) {
+                return $this->idealo_validate_feed_url($manual);
+            }
+        }
+        // Otherwise use the existing official direct iPN export for the verified feed.''')
     if 'Offizielle iPN-Download-URL für Feed 2901 <span' in t:
         t=once(t,
         'Offizielle iPN-Download-URL für Feed 2901 <span',
