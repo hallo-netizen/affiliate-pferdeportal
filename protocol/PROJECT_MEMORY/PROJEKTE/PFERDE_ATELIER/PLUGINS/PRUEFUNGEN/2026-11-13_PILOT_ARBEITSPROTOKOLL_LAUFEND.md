@@ -10,3 +10,13 @@
 - GitHub-Protokoll dokumentiert nur Arbeitsstand, keine offizielle neue Current-Autorität. Nach jedem relevanten Arbeitsschritt ergänzen.
 
 **Status:** Quellenzuordnung und Pilotentwicklung laufen; keine Installation, keine WordPress-Live-Änderung, noch kein durchgängiger Echtlauf.
+
+
+## Schritt 2 – Sofortartikel-Quellweg nachgewiesen und Zielvertrag ergänzt
+- Tatsächlicher bestehender Einstieg in PSTE `includes/class-pste-admin.php`: `shortPathCreateExport` ab Zeile 1815; manueller Themenimport über `PSTE_Repository::importManualTopics`, ohne neuen DataForSEO-Aufruf, anschließend gezielter PSERC-Compiler nur für ausgewählte Themen. Originalcode: Kurzweg darf nicht den globalen 5.020er-Lauf starten.
+- Alte Blockade: `shortPathCompileExactManualSelection` hängt im letzten Schritt ebenfalls an PSERC-/PPM-Artikelplätzen. Der bestehende Kurzweg muss beim Pilot **denselben** zentralen Themenstatus verwenden.
+- Zielvertrag **Regel 19** auf GitHub ergänzt: Kurzweg erhalten, keine zweite Themenliste, sofort mit Kategorie-Abdeckung synchronisieren, Titel/K0/Rückgabeformat unverändert.
+- Echte Altfreigabe-Datei hat 61 `FREI`-Fälle mit vorhandenen Titeln, aber ohne verbindliche Kategorie/Beitragsart und Planplatz. Diese Werte nicht nachträglich raten. **Sicherer Import hält unvollständige Altaufträge an**, statt sie als READY auszugeben.
+- Bestehende Exportvorlage: `PSERC_TEXTMACHINE_METADATA_BATCH_V2` mit genau fünf Feldern; der aktuelle Import `PFERDE_ATELIER_WORDPRESS_IMPORT_V1` hängt über `PPM679_Editorial_Plan_Runtime_Gate::record_readback` am PPM-Plan. Neuer Pilot darf ihn nicht stillschweigend als unverändert PPM-frei behaupten.
+
+**Stand:** GitHub-Zielvertrag und Arbeitsprotokoll fortgeschrieben. Nächster Schritt: ausschließlich neue Pilotdateien im eigenen Ordner, keine Änderungen an alten Pluginquellen.
