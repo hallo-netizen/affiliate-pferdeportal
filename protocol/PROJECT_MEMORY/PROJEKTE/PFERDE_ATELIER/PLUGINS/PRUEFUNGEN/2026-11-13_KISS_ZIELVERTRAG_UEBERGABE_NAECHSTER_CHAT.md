@@ -120,3 +120,13 @@ Der Begriff „Redaktionsplan synchronisieren“ bezeichnet im neuen KISS-Zielbi
 - **Beweisregel:** Bei Problemen zuerst den real heruntergeladenen Bericht lesen, Ursache einem einzigen verantwortlichen Schritt zuordnen und nur dort reparieren. Ein fehlender Bericht begründet keine Vermutung. Ein neuer Reparatur-/Diagnose-Worker ist verboten.
 - **Ist-Stand:** `Texterstellung_0.3.0_TEST_INSTALLIEREN.zip` lokal mit **119** Gegenproben geprüft, aber noch **nicht** auf echter WordPress-Testseite installiert/abgenommen. Keine Livefreigabe. Offene automatische PSTE-Semantik und PPM-/K0-Kompatibilität bleiben ausdrücklich offen.
 - **Chatübergabe:** `2026-11-13_TEXTERSTELLUNG_0.3.0_DIAGNOSE_ABNAHME.md` im gleichen PR lesen; TEST-Installer verlustfrei als ZIP-Base64 unter `../PILOT_TEXTERSTELLUNG/Texterstellung_0.3.0_TEST_INSTALLIEREN.zip.base64.txt`; Ziel-Testseite und Live unverändert, bis der Nutzer selbst installiert und echte Daten ausliest.
+
+
+### 21. Vollständige Testoberfläche im linken WordPress-Menü
+**Nutzerentscheidung (13.11.2026):** Kein Mini-Pilot unter `Werkzeuge`. **Ein** WordPress-Plugin namens `Texterstellung`, im WordPress-Backend als **eigenständiger linker Hauptmenüpunkt**, mit allen Produktionsstationen als Untermenüs: Übersicht, Recherche, Redaktionsplan, Sofortartikel, Titelerstellung, K0-Export, Rückimport, Entwicklerdiagnose.
+
+Die Installationsdatei darf erst zum Test angeboten werden, wenn jede genannte Station tatsächlich eine aufrufbare und lokal geprüfte Funktion hat, das Plugin ohne aktive PSTE-/PSERC-/PPM-Klassen startet und der gleiche Auftragsbestand über alle Schritte geführt wird. Keine zusätzlichen Plugins und keine Änderung an K0, externen Titel- oder Rückgabedateien.
+
+**Umsetzung:** `Texterstellung_0.4.0_TEST_INSTALLIEREN.zip`, SHA256 `8a5c2faf39081e05d5610bb4757e9d4f6d8eaaa8f52ca0771007be0ab6c8c3c5`, 34.346 Bytes; neuer `add_menu_page`-Hauptmenüpunkt und acht `add_submenu_page`-Stationen. Externe redaktionelle Freigabe zusätzlich als eingefrorene SEO-Dateirunde mit WP-/Auftragsbestand; dadurch ein durchgehender Testlauf. Passwortspeicherung für DataForSEO separat im Testplugin.
+
+**Harter Statusvorbehalt:** Der vollständige **Workflow ist lokal simuliert**, nicht WordPress/K0-echt abgenommen. Die alte automatische semantische PSTE-Entscheidung wurde **nicht** 1:1 übernommen; die eine Freigabe läuft aktuell manuell oder über den externen einmaligen SEO-Redakteur. Nur TEST, kein Liveersatz. Ausführlicher Nachweis `2026-11-13_TEXTERSTELLUNG_0.4.0_ABNAHME_UND_CHATUEBERGABE.md` im gleichen PR.
