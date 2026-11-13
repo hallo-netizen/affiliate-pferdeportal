@@ -1,5 +1,14 @@
 # ROBOTIK / KATEGORIE – EINZIGER AKTUELLER STATUS
 
+## AKTUELL 13.11.2026 – V43: PRIVAT UND GEWERBE GETRENNTE ZIELSEITEN (V42-EINZIGER-OWNER-REGEL ÜBERSTEUERT)
+- **Explizite fachliche Korrektur des Nutzers:** Eine Roboterfunktion kann im **Haushalt**, **Gewerbe**, **Pflege** usw. je eine **eigene CORE-Zielseite** haben, wenn die **Suchintention und redaktionelle Aufgabe** voneinander abweichen. Beispielsweise `Haushalt > Servierroboter für Zuhause` und `Gewerbe > Gastronomie > Restaurant-Servierroboter`. **Keine gemeinsame Pflicht-Zielseite, keine bloßen Querverweise als Ersatz für eine eigene Privatseite.**
+- **SEO:** unterschiedliche Seitentitel alleine sind unzureichend; die Inhalte, geeignete Modelle, Anforderungen, Fragen, Einsatzbedingungen und individuellen Artikelrubriken müssen substanziell anders sein. Kein automatischer Google-Indexierungspass und keine künstliche Textdoppelung; jede Seite eigenständig.
+- **Zentrale Forschungs-Dublettenbereinigung bleibt:** 573 Funde, 19 sichere zusammengeführte Recherchefamilien/21 doppelte Forschungsreferenzen (V41). Eine Funktion/ein Modell bleibt einmal im Register, kann aber mehrere redaktionelle **Zielgruppenkontexte** bekommen. Die alte Schlussfolgerung `ein Forschungsowner => höchstens eine CORE-Produktseite weltweit` ist **falsch und verworfen**.
+- **Zielvertrag aktualisiert:** sieben Hauptbereiche **Haushalt · Garten · Freizeit · Sport · Bildung · Pflege · Gewerbe**. Gewerbe bleibt erhalten, Industrie nachgeordnet, keine Neuordnung V41 A/B. Fehlende Kaufbarkeit kein Ausschluss für Ideen/Prototypen.
+- **Balance neu berechnen erst nach Zuordnung je Zielgruppenseite**, nicht allein nach 72 historischen Funktionsseiten oder 573 Funden. Kein willkürliches doppeltes Zählen; nur real unterscheidbare Zielgruppen-Informationsseiten.
+- Beleg/Entscheidungsprotokoll: `RECHERCHE/ZIELGRUPPEN_GETRENNTE_ZIELSEITEN_V43_20261113.md`. **WP/Plugin/URLs und 72 alte Produktseiten unverändert**. Die frühere ein-Owner-Regel gilt nur noch für das **Forschungs-/Modellregister**, nicht für alle Publikationsseiten.
+
+
 ## AKTUELL 13.11.2026 – V42: V41-NEUORDNUNG VERWORFEN / ZIELVERTRAG WIEDERHERGESTELLT
 - **KORREKTUR:** Die in V41 als „Favorit A“ und „Alternative B“ empfohlenen Hauptkategorien-Entwürfe waren **zielvertragswidrig**. Ihre Empfehlungen gelten **NICHT MEHR**. Die Zahlenmodelle sind nur historisch dokumentiert. Sie dürfen nicht als aktueller Hauptmenü-/Importplan verwendet werden.
 - **Grund:** Nur zur rechnerischen Gleichverteilung hatte V41 **Gewerbe gestrichen** und in **Landwirtschaft**, **Service & Handel**, **Handwerk & Industrie** zerlegt. Dadurch wurden Landwirte/Handel aus ihrer Gewerbe-Hauptwelt gezogen und Handwerk unzulässig mit Industrie zusammengelegt. Das widerspricht ausdrücklich dem Käufervertrag (Privatpersonen und **kleine Betriebe einschließlich** Handwerk, Handel, Gastronomie, Landwirtschaft), dem getrennten Industriekomplex und dem V36-Baum.
