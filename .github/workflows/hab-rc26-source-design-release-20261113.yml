@@ -1,4 +1,4 @@
-name: Hab RC26 source integrity, mock exclusion and approved design release
+name: Hab RC26 source integrity, mock exclusion and design release verified RC25
 on:
   push:
     branches: [hab-affiliate-rc26-source-design-20261113]
