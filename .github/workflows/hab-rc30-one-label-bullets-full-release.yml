@@ -1,0 +1,81 @@
+name: HAB RC30 one Anzeige and real bullet facts full acceptance
+on:
+  push:
+    branches: [hab-affiliate-rc30-one-label-bullets-20261113]
+    paths: [.github/workflows/hab-rc30-one-label-bullets-full-release.yml]
+permissions: {contents: write}
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild RC23 through RC30 and test actual PHP generated markup
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          python3 "$R/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/build_rc24.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/qa_rc24.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/build_rc25.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/qa_rc25.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/build_rc26.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/qa_rc26.py"
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/build_rc27.py"
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/qa_rc27.py"
+          python3 "$R/AFFILIATE/RC28_CATALOG_KISS/build_rc28.py"
+          python3 "$R/AFFILIATE/RC28_CATALOG_KISS/qa_rc28.py"
+          python3 "$R/AFFILIATE/RC29_PRODUCT_NAMES_LEAF_CONTRACT/build_rc29.py"
+          python3 "$R/AFFILIATE/RC29_PRODUCT_NAMES_LEAF_CONTRACT/qa_rc29.py"
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" /tmp/RC29_IDENTICAL.zip
+          python3 "$R/AFFILIATE/RC30_ONE_LABEL_BULLETS/build_rc30.py"
+          python3 "$R/AFFILIATE/RC30_ONE_LABEL_BULLETS/qa_rc30.py"
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import hashlib
+          R=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ')
+          p=R/'PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          with ZipFile('/tmp/RC29_IDENTICAL.zip') as old,ZipFile(p) as new:
+            touched={n for n in old.namelist() if old.read(n)!=new.read(n)}
+            allowed={'affiliate-portal-router/affiliate-portal-router.php','affiliate-portal-router/assets/frontend.css','affiliate-portal-router/readme.txt'}
+            assert touched==allowed,touched
+            assert old.read('affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php')==new.read('affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php')
+            assert old.read('affiliate-portal-router/includes/trait-ppar-idealo.php')==new.read('affiliate-portal-router/includes/trait-ppar-idealo.php')
+            assert new.testzip() is None and len(new.namelist())==36
+          print('HAB_RC30_ONLY_3_EXISTING_FILES_NO_MAPPER_OR_PROVIDER_CHANGE_PASS',p.stat().st_size,hashlib.sha256(p.read_bytes()).hexdigest())
+          PY
+      - name: Verify original multi-provider buttons, feed pipeline and legacy cards remain intact
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess,tempfile
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112')
+          with tempfile.TemporaryDirectory() as td:
+            s=(p/'qa_candidate.py').read_text()
+            assert '0.1.20-rc23' in s
+            q=Path(td)/'qa_rc30_compat.py'
+            q.write_text(s.replace('0.1.20-rc23','0.1.27-rc30'))
+            for cmd in [['python3',str(q)],['python3',str(p/'qa_feed_pipeline.py')],['python3',str(p/'qa_buttons.py')]]:
+              r=subprocess.run(cmd,capture_output=True,text=True)
+              print(r.stdout,r.stderr)
+              assert r.returncode==0,(cmd,r.stderr)
+          print('HAB_RC30_ORIGINAL_FEED_AND_MERCHANT_FEATURES_PASS')
+          PY
+      - name: Release complete HAB-004 ZIP only after PASS
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          FILE=/tmp/HAB_Bewahr_Affiliate_RC30_TEST.zip
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" "$FILE"
+          TAG=hab-affiliate-rc30-one-ad-label-real-bullets-20261113
+          gh release create "$TAG" "$FILE#HAB_Bewahr_Affiliate_RC30_TEST.zip" --target "$GITHUB_SHA" \
+            --title "Hab & Bewahr RC30 – Anzeige einmal, echte Produktmerkmale als Stichpunkte (Test)" \
+            --notes "Auf der echten Haustürschlösser-Seite lagen zwei PHP-Ausgaben vor: Gruppenkennzeichnung Anzeige plus Produktkarten-Disclosure Anzeige. RC30 entfernt die wiederholte Karten-Kennzeichnung direkt im bestehenden Renderer; der eine Hinweis oberhalb der drei Empfehlungen bleibt. Produktfakten aus dem bereits vorhandenen Originalfeed werden in je maximal 3 kurze Stichpunkte umgewandelt (Marke, Maße, Artikelnummer). Keine erfundenen Angaben. Alle 25 PHP-Dateien, realer 3-Karten-HTML-Renderer, bestehender Feed, Versicherungs-Sperre und Händlerfunktionen getestet. Nur bestehende Hauptdatei + CSS + Readme geändert; keine Provider-, Kategorie- oder Frontend-Pluginänderung an anderen Portalen. Liveabnahme nach Installation bleibt erforderlich." \
+            --prerelease
+          gh release view "$TAG" --json assets,url --jq '{url,assets:[.assets[]|{name,size,url}]}'
