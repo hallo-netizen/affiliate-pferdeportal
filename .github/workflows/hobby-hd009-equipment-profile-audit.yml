@@ -1,0 +1,55 @@
+name: Hobby Depot Original Matcher and HD007 Equipment Profile Evidence
+on:
+  push:
+    branches: [audit/hobby-hd009-equipment-coverage-20261113]
+    paths: [.github/workflows/hobby-hd009-equipment-profile-audit.yml]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify registered equipment profile and matching safety
+        run: |
+          python3 - <<'PY'
+          import zipfile,pathlib,re,json,collections,unicodedata
+          root=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          with zipfile.ZipFile(root/'HD-007-HOBBYREGISTER-CORE/CURRENT.zip') as z:
+            r=json.loads(z.read('hd-hobbyregister-core/data/hobby-register.json'))
+          records=r['records']
+          print('RECORD_TYPE',type(records).__name__,'RECORD_COUNT',len(records))
+          print('REGISTRY_SAMPLE',json.dumps(records[0] if isinstance(records,list) else list(records.items())[0],ensure_ascii=False)[:6000])
+          interesting=['hobby:kettenhemdflechten','hobby:buchbinden','hobby:muenzensammeln','hobby:alte-computer','hobby:3d-bogenschieen','hobby:3d-druck','hobby:airbrush','hobby:modellbau','hobby:bogenbau']
+          selected=[]
+          vals=list(records.values()) if isinstance(records,dict) else records
+          for v in vals:
+            if not isinstance(v,dict):continue
+            eq=v.get('result_profile',{}).get('what_do_you_need','')
+            name=v.get('canonical_name') or v.get('name') or ''
+            if eq: selected.append((name,eq,v))
+            if any(k in str(name).lower() for k in ['kettenhemd','buchbind','modellbau','münze','3d-bogen','3d-druck','airbrush','metallring','alte computer']):
+              print('REAL_PROFILE',json.dumps({'name':name,'need':eq,'id':v.get('canonical_id'),'flags':{k:v.get(k) for k in v if any(x in k for x in ['status','core','id','canon','path'])}},ensure_ascii=False)[:2200])
+          print('PROFILE_COUNT_NONEMPTY',len(selected),'of',len(vals))
+          print('PROFILE_EXAMPLES',json.dumps([{'name':n,'need':q} for n,q,v in selected[:25]],ensure_ascii=False)[:9000])
+          parts=collections.Counter()
+          for _,eq,_ in selected:
+            for p in re.split(r'[,;|•\n]',str(eq)):
+              p=p.strip().lower()
+              if p: parts[p]+=1
+          print('EQUIPMENT_TOP',parts.most_common(50))
+          with zipfile.ZipFile(root/'HD-009-AFFILIATE-ZENTRALE/CURRENT.zip') as z:
+            maps={
+              'affiliate-portal-router/includes/class-hdar-amazon-start.php':[(470,565)],
+              'affiliate-portal-router/includes/class-hdar-hobby-depot-source.php':[(120,165),(190,245)],
+              'affiliate-portal-router/includes/trait-ppar-idealo.php':[(275,430),(700,760),(805,845)]
+            }
+            for name,ranges in maps.items():
+              a=z.read(name).decode().splitlines()
+              print('FILE',name)
+              for start,end in ranges:
+                print('BLOCK',start,end)
+                for i in range(start-1,min(end,len(a))):
+                  print('SOURCE',i+1,a[i][:630])
+          PY
