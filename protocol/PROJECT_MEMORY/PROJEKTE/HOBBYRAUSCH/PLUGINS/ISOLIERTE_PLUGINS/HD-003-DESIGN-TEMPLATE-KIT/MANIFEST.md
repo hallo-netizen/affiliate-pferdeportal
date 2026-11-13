@@ -1,3 +1,8 @@
+# HD003 CURRENT 1.50.812 – richtige Produktkarten
+
+Full plugin 1a5cad59bf033780abcc08f3ae70f7e7fbaf6a8c209d4cd97371e5828287dafc. 1.50.811 unverändert archiviert. Beleg: DESIGN/HD003_1.50.812_PRODUKTKARTEN_20261113.md
+
+---
 # HD003 CURRENT 1.50.811 – ein Anzeige-Hinweis / Produktkarten 3-2-1
 
 Vollständiges ZIP SHA256: 3cc8118ed5d9d22acadfd2e9aa9184068f71cbe9ccb2574bcffacdd16d8ac6df. Sicherung 1.50.810 erhalten. Beweis: DESIGN/HD003_PRODUKTKARTEN_ANZEIGE_EINMAL_1.50.811_20261113.md.
