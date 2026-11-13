@@ -1,0 +1,94 @@
+name: HD009 0.1.39 exact 381 active hobby alias coverage, honest evidence
+on:
+  push:
+    branches: [hobbyroom/hd009-039-validated-equipment-forms-20261113]
+    paths: [.github/workflows/hd009_0139_actual_381_coverage.yml]
+permissions:
+  contents: write
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run only approved HD007 terms through original PHP function for all 381 hobbies
+        run: |
+          set -e
+          python3 scripts/hd009_0138_equipment_match_candidate.py /tmp/HD009_0138_BASE.zip
+          python3 scripts/hd009_0139_safe_compound_equipment_build.py /tmp/HD009_0138_BASE.zip /tmp/HD009_0139_CANDIDATE.zip
+          python3 scripts/hd009_0139_original_php_equipment_qa.py /tmp/HD009_0139_CANDIDATE.zip /tmp/hd009_0139_qa.php protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip
+          php /tmp/hd009_0139_qa.php >/tmp/hd009_0139_checks.txt
+          git fetch --quiet origin audit/hobby-hd009-equipment-coverage-20261113
+          git show origin/audit/hobby-hd009-equipment-coverage-20261113:protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/EVIDENCE/HD009_HOBBYREGISTER_AUSRUESTUNGSINVENTUR_381_20261113.csv >/tmp/hd009_381.csv
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import json,csv,re
+          src=Path('/tmp/hd009_0139_qa.php').read_text()
+          with ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip') as z:
+            data=json.loads(z.read('hd-hobbyregister-core/data/hobby-register.json'))
+          by_name={}
+          for x in data['records']:
+            if isinstance(x,dict) and x.get('canonical_name'):
+              by_name[x['canonical_name']]={'result_profile':{'what_do_you_need':(x.get('result_profile') or {}).get('what_do_you_need','')}}
+          names=list(dict.fromkeys(row['Hobby'].strip() for row in csv.DictReader(Path('/tmp/hd009_381.csv').open(encoding='utf-8-sig')) if row.get('Hobby')))
+          assert len(names)==381,len(names)
+          first=src.index("$GLOBALS['real_hobby_records']=json_decode(")
+          last=src.index('function hd_hobbyregister_get_by_name',first)
+          encoded=json.dumps(by_name,ensure_ascii=False).replace('\\','\\\\').replace("'","\\'")
+          src=src[:first]+"$GLOBALS['real_hobby_records']=json_decode('"+encoded+"',true,512,JSON_THROW_ON_ERROR);\n"+src[last:]
+          phrase="echo \"REAL_HD007_EQUIPMENT_ORIGINAL_MATCHER_TESTS_PASS\\n\";"
+          assert phrase in src
+          namelist=json.dumps(names,ensure_ascii=False).replace('\\','\\\\').replace("'","\\'")
+          extra="""$actual=json_decode('"""+namelist+"""',true);
+          $pass=array();$missing=array();
+          foreach($actual as $name) {
+            $aliases=$q->equipped($name);
+            if ($aliases) {$pass[$name]=$aliases;} else {$missing[]=$name;}
+          }
+          echo "FULL_381_ALIASES_JSON ".json_encode(array('hobbies'=>count($actual),'available_profiles'=>count($GLOBALS['real_hobby_records']),'safe_aliases'=>$pass,'excluded_count'=>count($missing),'excluded_examples'=>array_slice($missing,0,50)),JSON_UNESCAPED_UNICODE)."\\n";
+          """
+          src=src.replace(phrase,extra+phrase,1)
+          Path('/tmp/hd009_381_runtime.php').write_text(src)
+          PY
+          php -l /tmp/hd009_381_runtime.php
+          php /tmp/hd009_381_runtime.php >/tmp/hd009_381_result.txt
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          log=Path('/tmp/hd009_381_result.txt').read_text().splitlines()
+          match=next(line.split('FULL_381_ALIASES_JSON ',1)[1] for line in log if line.startswith('FULL_381_ALIASES_JSON '))
+          x=json.loads(match)
+          assert x['hobbies']==381
+          assert x['available_profiles']==862
+          lines=[
+            '# HD009 0.1.39 – echte 381-Hobby-Abdeckung der sicheren Ausrüstungs-Aliasse',
+            '',
+            'Status: geprüfter **Kandidat**, nicht live installiert. Vollständiges Original-HD007 (862 Datensätze) und 381 aktive Hobbyziele aus der veröffentlichten CORE-Struktur.',
+            '',
+            'Technischer Treffer: **'+str(len(x['safe_aliases']))+' von 381 aktiven Hobbys** erhalten mit strengem Begriffsnachweis mindestens einen zusätzlichen konkreten Ausrüstungs-Alias. Für die restlichen '+str(x['excluded_count'])+' erzeugt diese Regel keine neue Freigabe; bestehender Hobbynamen-Matcher bleibt erhalten.',
+            '',
+            'Das ist **KEINE** Quote lieferbarer Produkte! Es wurden keine privaten iPN-Feedzeilen und keine WordPress-Datenbank ausgelesen.',
+            '',
+            '## Im echten PHP-Matcher freigegebene, quellbelegte Beispiele',
+          ]
+          for name,toks in x['safe_aliases'].items():
+            lines.append('- '+name+': '+', '.join(toks))
+          lines+=['','## Prüfung','- Originalfunktionen und echtes HD007-Hobbyregister statt frei erfundener Themen.',
+                  '- Der ursprüngliche Feed-Import, die WordPress-Kampagnentabelle, Amazon, eBay und das Design bleiben unverändert.',
+                  '- Negative Tests: falsche Malene-Kleidung, Cotton-Batik, generischer Kompressor und generische Farben werden nicht zu Airbrush zugeordnet.',
+                  '- Ein tatsächlicher Fehlbestand des Feed 2747 kann damit nicht ausgeschlossen werden.',
+                  '- [Quell-PHP-Funktionstests](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43441462383)','']
+          path=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/HD009_0139_REAL_381_COVERAGE_20261113.md')
+          path.write_text('\n'.join(lines))
+          print('REAL_PHP_381_ALIASES',len(x['safe_aliases']),'EXCLUDED',x['excluded_count'])
+          PY
+      - name: Commit actual coverage without modifying CURRENT
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/HD009_0139_REAL_381_COVERAGE_20261113.md
+          git commit -m "Evidence: original PHP confirms specific equipment aliases over all 381 real active hobbies"
+          git fetch origin hobbyroom/hd009-039-validated-equipment-forms-20261113
+          git rebase origin/hobbyroom/hd009-039-validated-equipment-forms-20261113
+          git push origin HEAD:refs/heads/hobbyroom/hd009-039-validated-equipment-forms-20261113
