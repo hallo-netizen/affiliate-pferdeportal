@@ -65,7 +65,12 @@ s=s[:start]+r'''    /**
         // The legacy Idealo tokenizer intentionally skips two-character
         // terms. Preserve literal technical qualifiers (e.g. 3D-Drucker)
         // only inside this verified equipment phrase.
-        if (preg_match('/(?:^|\\s)3d(?:\\s|$)/',$item_norm)) { array_unshift($terms,'3d'); }
+        $short_root=(string)(preg_split('/\\s+/',$name_norm)[0]??'');
+        $short_item=(string)(preg_split('/\\s+/',$item_norm)[0]??'');
+        if (strlen($short_root)===2 && $short_root===$short_item
+            && preg_match('/^(?:[a-z]{2}|[0-9][a-z])$/',$short_root)) {
+            array_unshift($terms,$short_root);
+        }
         if (!$terms || count($terms)>3) { return array(); }
         $stems=array();
         foreach ($terms as $t) {
@@ -149,12 +154,22 @@ once(
         foreach ($this->idealo_match_tokens($title_n) as $token) { $title_stems[$this->idealo_match_stem($token)] = true; }""",
 """        $title_stems = array();
         foreach ($this->idealo_match_tokens($title_n) as $token) { $title_stems[$this->idealo_match_stem($token)] = true; }
-        if (preg_match('/(?:^|\\s)3d(?:\\s|$)/',$title_n)) { $title_stems['3d']=true; }""",
+        foreach ((array)($concept['equipment_terms']??array()) as $short) {
+            if (strlen((string)$short)===2
+                && preg_match('/(?:^|\\s)'.preg_quote((string)$short,'/').'(?:\\s|$)/',$title_n)) {
+                $title_stems[(string)$short]=true;
+            }
+        }""",
 "Require literal 3d qualifier in context product title")
 once(
 """        $product_stems = array(); foreach ($primary as $token) { $product_stems[$this->idealo_match_stem($token)] = true; }""",
 """        $product_stems = array(); foreach ($primary as $token) { $product_stems[$this->idealo_match_stem($token)] = true; }
-        if (preg_match('/(?:^|\\s)3d(?:\\s|$)/',$this->idealo_match_normalize($title))) { $product_stems['3d']=true; }""",
+        foreach (preg_split('/\\s+/',$this->idealo_match_normalize($title)) as $short) {
+            if (strlen((string)$short)===2
+                && preg_match('/^(?:[a-z]{2}|[0-9][a-z])$/',(string)$short)) {
+                $product_stems[(string)$short]=true;
+            }
+        }""",
 "Require literal 3d qualifier in original feed matcher")
 data[trait]=s.encode()
 m=data[main].decode()
@@ -200,7 +215,12 @@ found_old="""        foreach ($this->idealo_match_tokens($title) as $word) {
             $found[$this->idealo_match_stem($word)]=true;
         }"""
 found_new=found_old+"""
-        if (preg_match('/(?:^|\\s)3d(?:\\s|$)/',$this->idealo_match_normalize($title))) { $found['3d']=true; }"""
+        foreach (preg_split('/\\s+/',$this->idealo_match_normalize($title)) as $short) {
+            if (strlen((string)$short)===2
+                && preg_match('/^(?:[a-z]{2}|[0-9][a-z])$/',(string)$short)) {
+                $found[(string)$short]=true;
+            }
+        }"""
 assert a.count(found_old)==1,'original final product title token location'
 a=a.replace(found_old,found_new,1)
 assert a.count(old)==1
