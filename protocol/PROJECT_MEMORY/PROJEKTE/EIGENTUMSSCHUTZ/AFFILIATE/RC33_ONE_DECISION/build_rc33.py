@@ -123,23 +123,25 @@ with ZipFile(BytesIO(raw)) as z:
     }
 '''
     m=replace_method(m,"hb_insurance_campaign_allowed",authority)
-    # One real stored mapping, no second per-page title/topic selection.
-    # Some historical upgrade steps rewrote the initial legacy guard, so
-    # accept only the two EXACT known source forms; never guess an anchor.
-    before_guard="""    private function campaign_match_rank($campaign, $context) {
-        if (!$this->hb_insurance_campaign_allowed($campaign,$context,(string)($context['slot_type'] ?? ''))) { return null; }
-        $mode ="""
-    without_guard="""    private function campaign_match_rank($campaign, $context) {
-        $mode ="""
-    new_rank_head="""    private function campaign_match_rank($campaign, $context) {
+    # One real stored mapping, no second per-page topic inference.
+    # Different prior updates inserted a legacy scope guard in different
+    # formatting. Strip ONLY the guard preceding the first $mode assignment;
+    # protect against unexpectedly unrelated code.
+    begin=m.index("    private function campaign_match_rank($campaign, $context) {")
+    mode_at=m.index("        $mode =",begin)
+    old_prefix=m[begin:mode_at]
+    print("RC33_RANK_LEGACY_PREFIX",repr(old_prefix[:600]))
+    assert len(old_prefix)<1250,("Unknown extra preconditions",old_prefix)
+    assert "function campaign_match_rank(" in old_prefix
+    assert old_prefix.count("hb_insurance_campaign_allowed")<=1
+    if "return" in old_prefix:
+        assert "hb_insurance_campaign_allowed" in old_prefix,("Unrelated guard must be preserved",old_prefix)
+    new_prefix="""    private function campaign_match_rank($campaign, $context) {
         $hb_scope=$this->hb_insurance_scope($context);
         if($hb_scope==='mixed')return null;
         if($hb_scope==='insurance')return $this->hb_insurance_banner_rank($campaign,$context,(string)($context['slot_type']??''));
-        $mode ="""
-    if m.count(before_guard)==1:
-        m=once(m,before_guard,new_rank_head)
-    else:
-        m=once(m,without_guard,new_rank_head)
+"""
+    m=m[:begin]+new_prefix+m[mode_at:]
     # Remove a historical exception that allowed banners outside the
     # one central Creative Library. Some later source versions already
     # carry the correct strict rule.
