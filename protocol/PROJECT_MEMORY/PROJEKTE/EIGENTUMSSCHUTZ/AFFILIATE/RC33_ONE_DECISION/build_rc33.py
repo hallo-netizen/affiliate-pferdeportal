@@ -123,17 +123,23 @@ with ZipFile(BytesIO(raw)) as z:
     }
 '''
     m=replace_method(m,"hb_insurance_campaign_allowed",authority)
-    # Reuse the one decision already made at import. No separate fallback
-    # rankings or label scans inside insurance.
-    m=once(m,
-        """    private function campaign_match_rank($campaign, $context) {
+    # One real stored mapping, no second per-page title/topic selection.
+    # Some historical upgrade steps rewrote the initial legacy guard, so
+    # accept only the two EXACT known source forms; never guess an anchor.
+    before_guard="""    private function campaign_match_rank($campaign, $context) {
         if (!$this->hb_insurance_campaign_allowed($campaign,$context,(string)($context['slot_type'] ?? ''))) { return null; }
-        $mode =""",
-        """    private function campaign_match_rank($campaign, $context) {
+        $mode ="""
+    without_guard="""    private function campaign_match_rank($campaign, $context) {
+        $mode ="""
+    new_rank_head="""    private function campaign_match_rank($campaign, $context) {
         $hb_scope=$this->hb_insurance_scope($context);
         if($hb_scope==='mixed')return null;
         if($hb_scope==='insurance')return $this->hb_insurance_banner_rank($campaign,$context,(string)($context['slot_type']??''));
-        $mode =""")
+        $mode ="""
+    if m.count(before_guard)==1:
+        m=once(m,before_guard,new_rank_head)
+    else:
+        m=once(m,without_guard,new_rank_head)
     # The historic override was a duplicate owner for non-central banners.
     # Preserve the existing strictly centralized output_object_v4 condition.
     m=once(m,
