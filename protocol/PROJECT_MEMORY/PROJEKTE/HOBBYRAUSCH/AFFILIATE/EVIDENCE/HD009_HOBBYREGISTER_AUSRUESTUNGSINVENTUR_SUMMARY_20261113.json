@@ -1,0 +1,244 @@
+{
+  "run_date": "2026-11-13",
+  "exact_plugin_source_sha256": {
+    "HD007": "ba838946d5b04a5f31f92bc993aba69a924250cbd78bd6beb6a52ed32144ec4f",
+    "HD009": "b6482b5d880e941c97ac726dffa85fbc46ba8514587e23700951d176ebcb63db"
+  },
+  "registry_all_entries": 862,
+  "terminal_hobby_entries": 381,
+  "terminal_with_equipment": 381,
+  "first_equipment_descriptive_precheck": {
+    "concrete_needs_product_review": 337,
+    "generic_needs_product_review": 44,
+    "note": "These are only literal wording observations, NOT a purchaseability/exclusion decision"
+  },
+  "by_natural_world": {
+    "bewegen": 48,
+    "fertigen": 63,
+    "forschen": 32,
+    "gestalten": 22,
+    "ohne Weltangabe": 76,
+    "pflanzen": 27,
+    "sammeln": 39,
+    "technik": 46,
+    "tiere": 28
+  },
+  "most_common_first_terms": [
+    [
+      "terrarium",
+      5
+    ],
+    [
+      "kamera",
+      4
+    ],
+    [
+      "wetterfeste kleidung",
+      4
+    ],
+    [
+      "geeignete pflanzen",
+      4
+    ],
+    [
+      "mikroskop",
+      4
+    ],
+    [
+      "aufbewahrung",
+      3
+    ],
+    [
+      "behälter",
+      3
+    ],
+    [
+      "modellbausatz",
+      3
+    ],
+    [
+      "aquarium",
+      3
+    ],
+    [
+      "fernglas",
+      3
+    ],
+    [
+      "papier",
+      3
+    ],
+    [
+      "lupe",
+      3
+    ],
+    [
+      "pflanzen",
+      3
+    ],
+    [
+      "powerkite",
+      3
+    ],
+    [
+      "bogen",
+      2
+    ],
+    [
+      "stoff",
+      2
+    ],
+    [
+      "kletterschuhe",
+      2
+    ],
+    [
+      "smartphone oder kamera",
+      2
+    ],
+    [
+      "saatgut",
+      2
+    ],
+    [
+      "grundplatte",
+      2
+    ],
+    [
+      "glasobjekt",
+      2
+    ],
+    [
+      "frisches holz",
+      2
+    ],
+    [
+      "trainingswaffe",
+      2
+    ],
+    [
+      "trockene aufbewahrung",
+      2
+    ],
+    [
+      "bestimmungshilfe",
+      2
+    ]
+  ],
+  "concrete_first_ambiguous_frequency": [
+    [
+      "terrarium",
+      5
+    ],
+    [
+      "wetterfeste kleidung",
+      4
+    ],
+    [
+      "geeignete pflanzen",
+      4
+    ],
+    [
+      "mikroskop",
+      4
+    ],
+    [
+      "behälter",
+      3
+    ],
+    [
+      "modellbausatz",
+      3
+    ],
+    [
+      "aquarium",
+      3
+    ],
+    [
+      "fernglas",
+      3
+    ],
+    [
+      "powerkite",
+      3
+    ],
+    [
+      "kletterschuhe",
+      2
+    ],
+    [
+      "smartphone oder kamera",
+      2
+    ],
+    [
+      "grundplatte",
+      2
+    ],
+    [
+      "glasobjekt",
+      2
+    ],
+    [
+      "frisches holz",
+      2
+    ],
+    [
+      "trainingswaffe",
+      2
+    ],
+    [
+      "trockene aufbewahrung",
+      2
+    ],
+    [
+      "bestimmungshilfe",
+      2
+    ],
+    [
+      "bausatz oder teile",
+      2
+    ],
+    [
+      "filzwolle",
+      2
+    ],
+    [
+      "pilzkultur",
+      2
+    ],
+    [
+      "fernglas oder kamera",
+      2
+    ],
+    [
+      "teleskop",
+      2
+    ],
+    [
+      "passendes fahrrad",
+      2
+    ],
+    [
+      "retrocomputer",
+      2
+    ],
+    [
+      "sammelbeutel",
+      2
+    ]
+  ],
+  "live_wp_evidence_20261112": {
+    "idealo_feed": 2747,
+    "feed_description": "Fashion, Sport, Outdoor, shown in publisher iPN portal",
+    "api_feed_products_at_last_check": 543676,
+    "staged_products": 2530,
+    "pass_products": 2530,
+    "warn": 0,
+    "materialized_cards": 429,
+    "mapped_targets": 52,
+    "total_terminal_hobbies": 381,
+    "interpretation": "Neither per-hobby matched list nor broad feed 2901 is available to this offline code audit; do not infer which of the 329 remaining hobbies are unsuitable vs absent from 2747 vs unmatched by keywords"
+  },
+  "prohibited_inference": "No per-hobby coverage computed from the 52 aggregate. No universal product suitability claim. No automatic choice of generic later gear.",
+  "next_evidence": "Compare existing provider feed 2747 and a permitted standard feed 2901 using the same existing import checks and same HD009 matcher before raising keyword matching breadth; protect feed/adspace provenance."
+}
