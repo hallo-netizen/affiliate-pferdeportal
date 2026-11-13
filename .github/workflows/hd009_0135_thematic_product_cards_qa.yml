@@ -2,7 +2,7 @@ name: HD009 0.1.35 topical exact card rules hard QA
 on:
   push:
     branches: [hobbyroom/hd009-035-exact-product-context-20261113]
-    paths: [.github/workflows/hd009_0135_thematic_product_cards_qa.yml]
+    paths: [.github/workflows/hd009_0135_thematic_product_cards_qa.yml, scripts/hd009_0135_thematic_product_cards_build.py]
 permissions:
   contents: read
 jobs:
