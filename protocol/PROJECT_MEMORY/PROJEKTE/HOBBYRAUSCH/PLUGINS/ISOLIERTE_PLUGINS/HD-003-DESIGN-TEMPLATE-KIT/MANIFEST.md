@@ -1,3 +1,9 @@
+# HD003 CURRENT 1.50.811 – ein Anzeige-Hinweis / Produktkarten 3-2-1
+
+Vollständiges ZIP SHA256: 3cc8118ed5d9d22acadfd2e9aa9184068f71cbe9ccb2574bcffacdd16d8ac6df. Sicherung 1.50.810 erhalten. Beweis: DESIGN/HD003_PRODUKTKARTEN_ANZEIGE_EINMAL_1.50.811_20261113.md.
+
+---
+
 # HD003 Pluginbüro – CURRENT 1.50.810 (09.11.2026)
 
 **Aktuelle geprüfte Vollversion:** `CURRENT.zip` = `HOBBY_DEPOT_DESIGN_HD003_1.50.810.zip`, jeweils 65.763.742 Byte, SHA-256 `d63c2c7413f1f3d8ac635abffd3ec7ea69ea0fddff5b4fc6dd4e676ac9c7b1c6`.
