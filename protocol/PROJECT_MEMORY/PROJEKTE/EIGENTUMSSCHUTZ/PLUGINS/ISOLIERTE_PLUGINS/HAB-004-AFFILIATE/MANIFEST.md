@@ -1,3 +1,11 @@
+## 13.11.2026 – RC34 NEUESTE GRÜNE VOLLSTÄNDIGE TESTZIP, LIVEABNAHME OFFEN
+
+`HAB_Bewahr_Affiliate_RC34_TEST.zip` (Plugin `0.1.31-rc34`), 2.351.032 Bytes, SHA256 `bdd7ba78da62995768ee3c476f60fa7c18352161c7d6f9b5bade35978853cb62`. GitHub Release `hab-affiliate-rc34-single-partner-gate-diagnosis-20261113`. Actions **43454290216 SUCCESS**, einschließlich kompletter RC23–RC34-Regression, tatsächlichem PHP-Admin-Diagnosebericht und E2E-Kampagnenaktivierung.
+
+KISS: eine vorhandene Tarifcheck-Partner-Identität für Import/aktuelle Nachbearbeitung; sekundäre Überschreibungen der bereits geprüften Banner-Themenkarte ausgeschlossen; maximal 60 unveränderte Originalbanner je vorhandenen Admin-Aufruf; kein Neuimport. Live-Fehlerursachen im bereits bestehenden WordPress-Backend Werbemittel & Ausspielung unter Seitenüberschrift, nur vorliegende echte DB-Zustände, keine Trackingcodes oder Web-Zugriffe. Andere Portale, Design, Idealo/eBay/OTTO und HTML unberührt. **Nie als live wirksam behaupten, bevor Nutzer neues Backend-Protokoll geprüft hat.** Vollbeleg `../../../AFFILIATE/RC34_KISS_DIAG/ABNAHME_RC34_20261113.md`. Lokales historisches `CURRENT.zip` ist NICHT diese releasefähige RC34-ZIP.
+
+---
+
 ## 13.11.2026 – HAB-004 RC33 NEUESTE VOLLSTÄNDIG GETESTETE ZIP, NOCH NICHT LIVE
 
 `HAB_Bewahr_Affiliate_RC33_TEST.zip` / `0.1.30-rc33`, GitHub-Release `hab-affiliate-rc33-one-authoritative-banner-decision-20261113`; SHA256 `b07f9dbde9267bbfa9764e36ed92787d52c96881e306e0409784e5a1ca83f51a`. **QA 43447823048 und 43448625395 SUCCESS** mit realer PHP-Kampagnenaktivierung `published` bei nachweislich geprüfter 728×90 Original-Datei, fail-closed bei ungeprüftem Bild. Ein fachlicher Import-Entscheider, unveränderliche Versicherungs-Unterzweigkarte, keine zweite Themenentscheidung bei Speicherung/Frontend. Veraltete Mehrfachkarten kontrolliert neu berechnen; keine Originalbanner löschen oder erneut importieren.
