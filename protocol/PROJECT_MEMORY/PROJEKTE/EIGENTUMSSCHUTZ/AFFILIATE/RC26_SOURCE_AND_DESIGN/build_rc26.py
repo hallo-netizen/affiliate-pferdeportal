@@ -249,7 +249,9 @@ with ZipFile(BytesIO(old)) as z:
   box-shadow:none!important;
 }
 .ppar-hb-category-products-grid .ppar-banner-button,
-.ppar-hb-category-products-grid .ppar-banner-offer-button {
+.ppar-hb-category-products-grid .ppar-banner-offer-button,
+.ppar-hb-category-products-grid .ppar-affiliate-slot .ppar-banner-text .ppar-banner-button,
+.ppar-hb-category-products-grid .ppar-affiliate-slot .ppar-banner-actions .ppar-banner-offer-button {
   border:1px solid #B35C40!important;
   border-radius:1px!important;
   background:#FAF8F4!important;
