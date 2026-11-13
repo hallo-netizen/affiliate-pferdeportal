@@ -1,0 +1,44 @@
+name: HD009 source catalog exact Hobby targets evidence
+on:
+  push:
+    branches: [hobbyroom/hd009-036-relevance-provider-cards-20261113]
+    paths: [.github/workflows/hd009_036_catalog_research.yml]
+permissions:
+  contents: write
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect source catalog and real source data structure without modifying
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import re,subprocess
+          z=ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          files=z.namelist()
+          out=[]
+          for n in files:
+            if not n.endswith(('.php','.json','.csv','.txt')) or z.getinfo(n).file_size>1500000:continue
+            b=z.read(n).decode('utf8','replace')
+            if 'HDAR_Hobby_Depot_Source' in b or 'airbrush' in b.lower():
+              hits=[(i+1,l[:500]) for i,l in enumerate(b.splitlines()) if re.search('HDAR_Hobby_Depot_Source|airbrush|business_concepts|target_pages|product_slug|idealo_match_',l,re.I)]
+              out.append('FILE '+n+' bytes '+str(len(b))+' lines '+str(len(b.splitlines())))
+              out.extend(str(i)+' '+l for i,l in hits[:100])
+              if 'class HDAR_Hobby_Depot_Source' in b:
+                out.append('SOURCEFILE_ALL_START')
+                out.extend(str(i+1)+' '+l for i,l in list(enumerate(b.splitlines()))[:1200])
+                out.append('SOURCEFILE_ALL_END')
+          path=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/HD009_036_CATALOG_SOURCE_AUDIT.txt')
+          path.write_text('\n'.join(out))
+          print('FILES',len(files),'OUTPUT',path.stat().st_size)
+          PY
+      - name: Commit only catalog analysis
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/HD009_036_CATALOG_SOURCE_AUDIT.txt
+          git commit -m "Read only study real hobby product source and exact mapping"
+          git push origin HEAD:hobbyroom/hd009-036-relevance-provider-cards-20261113
