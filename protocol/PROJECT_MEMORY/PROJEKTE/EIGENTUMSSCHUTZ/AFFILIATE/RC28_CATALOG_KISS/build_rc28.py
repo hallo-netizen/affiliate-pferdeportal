@@ -32,7 +32,7 @@ with ZipFile(BytesIO(old)) as z:
     # product labels. Preserve old aliases to avoid unrelated changes.
     for before,after in [
         ("'feuerloscher'=>'Feuerlöscher'","'feuerloescher'=>'Feuerlöscher','feuerloscher'=>'Feuerlöscher'"),
-        ("'videotursprechanlage'=>'Video-Türsprechanlage'","'videotuersprechanlage'=>'Video-Türsprechanlage','videotursprechanlage'=>'Video-Türsprechanlage'"),
+        ("'videotursprechanlage'=>'Video-Türsprechanlage'","'video-tuersprechanlage'=>'Video-Türsprechanlage','videotuersprechanlage'=>'Video-Türsprechanlage','videotursprechanlage'=>'Video-Türsprechanlage'"),
         ("'turschloss'=>'Türschloss'","'tuerschloss'=>'Türschloss','turschloss'=>'Türschloss'"),
         ("'frostwachter'=>'Frostwächter'","'frostwaechter'=>'Frostwächter','frostwachter'=>'Frostwächter'"),
         ("'akkuladegeraet'=>'Akkuladegerät'","'akku-ladegeraet'=>'Akkuladegerät','akkuladegeraet'=>'Akkuladegerät'"),
