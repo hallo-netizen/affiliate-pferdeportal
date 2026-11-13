@@ -1,0 +1,72 @@
+name: HD009 recover existing real equipment profiles - evidence only
+on:
+  push:
+    branches: [hobbyroom/hd009-fix-empty-product-slots-20261113]
+    paths: [.github/workflows/hd009_equipment_data_path_qa.yml]
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Map exact original equipment source, target catalog, Idealo product matching and public gating
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import json,re,collections
+          root=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          files={
+              'HD007':root/'HD-007-HOBBYREGISTER-CORE/CURRENT.zip',
+              'HD009':root/'HD-009-AFFILIATE-ZENTRALE/CURRENT.zip',
+              'HD004':root/'HD-004-KATEGORIE-KERN/CURRENT.zip'
+          }
+          out=[]
+          for label,p in files.items():
+            if not p.exists():out.append('NO_ZIP '+label+' '+str(p));continue
+            with ZipFile(p) as z:
+              out.append('ARCHIVE '+label+' files='+str(len(z.namelist()))+' CRC='+str(z.testzip()))
+              for name in z.namelist():
+                if not name.endswith('.php'):continue
+                if z.getinfo(name).file_size>3000000:continue
+                lines=z.read(name).decode('utf8','replace').splitlines()
+                for i,l in enumerate(lines):
+                  if re.search(r'(?i)(what_do_you_need|hobby-register\.json|function.*(catalog|registry|register|get_record|hobby|equipment|need)|idealo_match_feed_row_to_concept|idealo_match_index|idealo_match_context_score)',l):
+                    if label=='HD007' and re.search(r'what_do_you_need|hobby-register\.json|function.*(catalog|registry|register|get_record|hobby)',l,re.I):
+                      out.append(f'HIT {label} {name}:{i+1} {l[:900]}')
+                    elif label=='HD009' and re.search(r'what_do_you_need|hobby-register\.json|idealo_match_feed_row_to_concept|idealo_match_index|idealo_match_context_score',l,re.I):
+                      out.append(f'HIT {label} {name}:{i+1} {l[:900]}')
+                    elif label=='HD004' and re.search(r'what_do_you_need|result_profile|hd_category_registry_snapshot',l,re.I):
+                      out.append(f'HIT {label} {name}:{i+1} {l[:900]}')
+              if label=='HD007':
+                try:
+                  data=json.loads(z.read('hd-hobbyregister-core/data/hobby-register.json'))
+                  records=data['records']
+                  vals=records.values() if isinstance(records,dict) else records
+                  examples=[]
+                  for x in vals:
+                    if not isinstance(x,dict):continue
+                    n=x.get('canonical_name') or x.get('name') or ''
+                    if re.search('Airbrush|3D-Druck|Münzen|Schuhmacher',n,re.I):
+                      examples.append({k:x.get(k) for k in ('canonical_id','canonical_name','name','slug','status')})
+                      examples[-1]['what_do_you_need']=x.get('result_profile',{}).get('what_do_you_need')
+                  out.append('ACTUAL_HOBBY_REGISTRY '+json.dumps(examples,ensure_ascii=False))
+                except Exception as exc:out.append('READ_HD007_ERROR '+repr(exc))
+          path=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/EVIDENCE/HD009_EQUIPMENT_DATA_PATH_20261113.txt')
+          path.parent.mkdir(parents=True,exist_ok=True)
+          path.write_text('\n'.join(out))
+          print('AUDIT_RECORDS',len(out),'BYTES',path.stat().st_size)
+          for row in out:
+            if 'ACTUAL_HOBBY_REGISTRY' in row:print(row[:2600])
+          PY
+      - name: Commit evidence without changing WordPress plugins
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/EVIDENCE/HD009_EQUIPMENT_DATA_PATH_20261113.txt
+          git commit -m "Fact-check HD007 equipment data and actual HD009 matcher without guessing"
+          git fetch origin hobbyroom/hd009-fix-empty-product-slots-20261113
+          git rebase origin/hobbyroom/hd009-fix-empty-product-slots-20261113
+          git push origin HEAD:refs/heads/hobbyroom/hd009-fix-empty-product-slots-20261113
