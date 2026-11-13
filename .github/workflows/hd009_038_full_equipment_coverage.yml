@@ -11,7 +11,7 @@ jobs:
     timeout-minutes: 7
     steps:
       - uses: actions/checkout@v4
-      - name: Read only: actual hobbies and equipment opportunities
+      - name: Read only actual hobbies and equipment opportunities
         run: |
           python3 - <<'PY'
           from pathlib import Path
