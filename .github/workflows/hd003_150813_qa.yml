@@ -1,0 +1,105 @@
+name: HD003 1.50.813 visible beige and teal button design QA
+on:
+  push:
+    branches: [hobbyroom/hd003-150813-visible-colors-20261113]
+    paths: [.github/workflows/hd003_150813_qa.yml]
+permissions:
+  contents: read
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exact 1.50.812 baseline, 1291 zip CRC, all PHP lint and scoped 3-color diff
+        run: |
+          python3 scripts/hd003_150813_visible_button_colors.py /tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.813_SICHTBARE_FARBEN.zip
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re
+          src='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip'
+          dst='/tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.813_SICHTBARE_FARBEN.zip'
+          with ZipFile(src) as a,ZipFile(dst) as b:
+            assert a.testzip() is None and b.testzip() is None
+            assert a.namelist()==b.namelist() and len(a.namelist())==1291
+            main='affiliate-portal-template-kit/pferde-template-kit.php'
+            profile='affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php'
+            diff=[n for n in a.namelist() if a.read(n)!=b.read(n)]
+            assert set(diff)=={main,profile},diff
+            old=a.read(profile).decode();new=b.read(profile).decode()
+            start='/* HD003 1.50.812: genuine product cards'
+            stop='/* End HD003 1.50.812 category card design. */'
+            startnew='/* HD003 1.50.813: genuine product cards'
+            stopnew='/* End HD003 1.50.813 category card design. */'
+            assert old.count(start)==1 and new.count(startnew)==1
+            oldblock=old[old.index(start):old.index(stop)+len(stop)]
+            newblock=new[new.index(startnew):new.index(stopnew)+len(stopnew)]
+            expected=oldblock.replace(start,startnew).replace(stop,stopnew).replace(
+                'background:#FAF8F4!important;','background:#EFDECA!important;').replace(
+                'color:#0f8f95!important;','color:#00777D!important;').replace(
+                'border:1px solid #b7d7d4!important;','border:1px solid #81AAA8!important;')
+            assert newblock==expected,'Only 3 colors may change'
+            assert new.replace(newblock,oldblock,1)==old,'No other profile changes'
+            Path('/tmp/hd003_813_css.css').write_text(newblock)
+            for n in b.namelist():
+              if n.endswith('.php'):
+                p=Path('/tmp/hd003_813_php')/n;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(b.read(n))
+            print('1291_CRC_PASS_ORIGINAL_PROFILE_ONLY_THREE_COLORS_CHANGED')
+          PY
+          find /tmp/hd003_813_php -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Browser test visible warm beige / turquoise, bullets and responsive cards
+        run: |
+          python3 -m pip -q install playwright
+          cat >/tmp/hd003_813_fixture.py <<'PY'
+          from playwright.sync_api import sync_playwright
+          from pathlib import Path
+          import json
+          css=Path('/tmp/hd003_813_css.css').read_text()
+          def card(name):
+            return f'''<div class="hd-next-partner-product"><div class="hd-next-partner-content"><div class="ppar-affiliate-slot">
+              <div class="ppar-affiliate-content"><a class="ppar-banner-link" data-ppar-category-product-card="1"
+              style="box-sizing:border-box!important;display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:188px minmax(190px,1fr)!important;align-items:stretch!important;width:100%!important;height:100%!important;min-height:390px!important;max-height:none!important;overflow:hidden!important">
+              <span class="ppar-banner-image-wrap" data-ppar-category-product-image-frame="150"><img class="ppar-banner-image"
+              data-ppar-category-product-image-fit="contain" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Crect width='150' height='150' fill='%23898f94'/%3E%3C/svg%3E"></span>
+              <span class="ppar-banner-text" data-ppar-category-product-text="1"><strong class="ppar-banner-title">{name}</strong>
+              <span class="ppar-product-facts"><strong class="ppar-product-facts-heading">Auf einen Blick</strong>
+              <span class="ppar-product-fact">• Produktart: Airbrushpistole</span><span class="ppar-product-fact">• Angabe: 0,3 mm</span></span>
+              <span class="ppar-banner-meta"><strong class="ppar-banner-price">39.90 EUR</strong></span>
+              <span class="ppar-banner-button">Bei idealo vergleichen</span></span></a></div></div></div>'''
+          body='<main class="hd-content-v150616"><section class="hd-portal-section hd-catlevel-products"><header><span>Anzeige</span><h2>Empfehlungen</h2></header><div class="hd-catlevel-product-grid">'+''.join(card('Airbrush Pistole 0,3 mm') for _ in range(3))+'</div></section></main>'
+          for width,cols in [(1440,3),(850,2),(390,1),(360,1)]:
+            with sync_playwright() as p:
+              b=p.chromium.launch(headless=True,executable_path='/usr/bin/google-chrome',args=['--no-sandbox'])
+              pg=b.new_page(viewport={'width':width,'height':1000})
+              pg.set_content('<html><head><style>'+css+'</style></head><body>'+body+'</body></html>')
+              out=pg.evaluate("""() => {
+                const x=document.querySelector('.hd-catlevel-product-grid');
+                const card=x.querySelector('.hd-next-partner-product');
+                const t=card.querySelector('.ppar-banner-title');
+                const img=card.querySelector('.ppar-banner-image');
+                const b=card.querySelector('.ppar-banner-button');
+                const facts=card.querySelector('.ppar-product-facts');
+                const r=e=>e.getBoundingClientRect();
+                return {cols:getComputedStyle(x).gridTemplateColumns.split(' ').length,
+                bg:getComputedStyle(b).backgroundColor,color:getComputedStyle(b).color,
+                radius:getComputedStyle(b).borderRadius,
+                imageAbove:r(img).top<r(t).top,buttonAtBottom:r(card).bottom-r(b).bottom,
+                factCount:facts.querySelectorAll('.ppar-product-fact').length,
+                factDisplay:getComputedStyle(facts).display,
+                buttonWidth:r(b).width,cardHeight:r(card).height,header:document.querySelector('header>span').textContent}
+              }""")
+              print('BROWSER_WIDTH',width,json.dumps(out),flush=True)
+              assert out['cols']==cols,(width,out)
+              assert out['bg']=='rgb(239, 222, 202)',(width,out)
+              assert out['color']=='rgb(0, 119, 125)',(width,out)
+              assert out['radius']=='1px',(width,out)
+              assert out['imageAbove'],(width,out)
+              assert out['factCount']==2 and out['factDisplay']=='flex',(width,out)
+              assert 0<=out['buttonAtBottom']<45,(width,out)
+              assert out['buttonWidth']>160,(width,out)
+              assert out['header']=='Anzeige',(width,out)
+              b.close()
+          print('ALL_FOUR_RESPONSIVE_CARD_COLOR_AND_BULLET_TESTS_PASS')
+          PY
+          python3 /tmp/hd003_813_fixture.py
