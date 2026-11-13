@@ -2,7 +2,10 @@ name: HAB RC33 root fix after historical guard analysis, full PHP QA
 on:
   push:
     branches: [hab-affiliate-rc33-one-decision-20261113]
-    paths: [.github/workflows/hab-rc33-one-decision-rootfix-verified-release.yml]
+    paths:
+      - .github/workflows/hab-rc33-one-decision-rootfix-verified-release.yml
+      - protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/RC33_ONE_DECISION/build_rc33.py
+      - protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/RC33_ONE_DECISION/qa_rc33.py
 permissions: {contents: write}
 jobs:
   full-legacy-and-real-php-tests:
