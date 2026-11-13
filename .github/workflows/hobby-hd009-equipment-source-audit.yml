@@ -1,0 +1,55 @@
+name: Hobby Depot Equipment and Idealo Coverage Source Audit
+on:
+  push:
+    branches: [audit/hobby-hd009-equipment-coverage-20261113]
+    paths: [.github/workflows/hobby-hd009-equipment-source-audit.yml]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect complete exact original HD007 and HD009 data paths
+        run: |
+          python3 - <<'PY'
+          import zipfile,pathlib,re,collections,json,hashlib
+          root=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          paths={k:root/k/'CURRENT.zip' for k in ['HD-007-HOBBYREGISTER-CORE','HD-009-AFFILIATE-ZENTRALE','HD-004-KATEGORIE-KERN']}
+          for k,p in paths.items():
+            with zipfile.ZipFile(p) as z:
+              print('ARCHIVE',k,'bytes',p.stat().st_size,'files',len(z.namelist()),'crc',z.testzip(),'sha',hashlib.sha256(p.read_bytes()).hexdigest())
+              for item in z.infolist():
+                n=item.filename
+                if k=='HD-007-HOBBYREGISTER-CORE':
+                  if any(n.endswith(x) for x in ('.json','.csv','.php','.txt')):print('HD007_FILE',n,item.file_size)
+                elif k=='HD-004-KATEGORIE-KERN':print('HD004_FILE',n,item.file_size)
+          with zipfile.ZipFile(paths['HD-007-HOBBYREGISTER-CORE']) as z:
+            for n in z.namelist():
+              if not n.endswith(('.json','.csv','.php')):continue
+              if z.getinfo(n).file_size>1600000:
+                data=z.read(n)
+                print('BIG_FILE',n,'type',n.rsplit('.',1)[-1],'first_text',data[:750].decode('utf8','replace'))
+                if n.endswith('.json'):
+                  try:
+                    obj=json.loads(data)
+                    print('BIG_JSON_KEYS',list(obj)[:12] if isinstance(obj,dict) else 'LIST',len(obj))
+                    d=next(iter(obj.values())) if isinstance(obj,dict) else obj[0]
+                    if isinstance(d,list):d=d[0] if d else d
+                    print('BIG_JSON_SAMPLE',json.dumps(d,ensure_ascii=False)[:2800])
+                  except Exception as e:print('BIG_PARSE_ERROR',str(e))
+                continue
+              s=z.read(n).decode('utf-8','replace').splitlines()
+              for i,l in enumerate(s):
+                if re.search(r'(?i)(materials|material|equipment|ausrüstung|ausruestung|bedarf|werkzeug|zubehör|was_braucht|tools|hobby_data|hobbyfinder|register_snapshot|function .*data)',l):
+                  print('HD007_HIT',n,i+1,l[:500])
+                  if i>300 and n.endswith('.php'):break
+          with zipfile.ZipFile(paths['HD-009-AFFILIATE-ZENTRALE']) as z:
+            for n in ['affiliate-portal-router/includes/class-hdar-amazon-start.php',
+                      'affiliate-portal-router/includes/class-hdar-hobby-depot-source.php']:
+              lines=z.read(n).decode().splitlines()
+              for i,l in enumerate(lines):
+                if re.search(r'(?i)(materials|material|equipment|ausrüstung|ausruestung|bedarf|werkzeug|zubehör|what_you_need|what.*need|primär|primary|kostenfrei|hobbyfinder|register)',l):
+                  print('HD009_HIT',n,i+1,l[:700])
+          PY
