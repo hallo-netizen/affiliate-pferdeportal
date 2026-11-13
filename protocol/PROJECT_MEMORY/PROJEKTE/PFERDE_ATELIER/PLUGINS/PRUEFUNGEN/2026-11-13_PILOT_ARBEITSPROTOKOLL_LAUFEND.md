@@ -46,3 +46,11 @@
 **Nicht neu beginnen:** Originale + Pilot-ZIP aus der genannten Library lesen. Dann die echten PSTE-Aufrufe für Recherche, redaktionelle Freigabe, Kurzweg und Titel-Anbindung **nur dort** aufnehmen, wo sie im aktuellen Workflow wirklich gebraucht werden. Danach mit echter Test-WordPress-Datenbank anhand ursprünglicher Quellen und des unveränderten K0-Vertrags testen. Keine Live-Änderung. Kein zusätzlicher SEO-/Qualitäts-Worker.
 
 **Status nach Schritt 3:** Testpilot gebaut und lokal geprüft; GitHub-Dokumentation aktualisiert. WordPress-Installation weiterhin nicht vorgenommen.
+
+## Schritt 4 – Bezeichnung und alleinstehende Installation festgelegt
+- **Neuer eindeutiger Backend-Name:** `Artikelwerkstatt – KISS (Test)`.
+- Neuer, isolierter Pluginordner und neuer eigener WordPress-Datenspeicher. Keine Änderung, Deaktivierung, Verschiebung oder Überschreibung der vorhandenen PSTE-, PSERC-, PPM- oder Guard-Plugins durch dieses Paket.
+- **Benutzerbedingung:** Keine unvollständige Plugin-ZIP zum Herunterladen anbieten. Eine Test-ZIP erst ausgeben, wenn der Stand tatsächlich für die ausdrücklich getrennte Testinstallation installierbar ist und die vollständige im Paket behauptete Funktionsstrecke lokale Regressionen besteht.
+- **Alleinarbeit in Test-WP:** Nach gesichertem Backup kann der Nutzer alte Plugins dort selbst deaktivieren. Neue Werkstatt darf keine Klassen oder Methoden dieser deaktivierten Plugins voraussetzen. Bestehende Originaldaten bleiben unangetastet und können nur lesend übernommen werden.
+- Offene Integration aus Pilot 0.1.0: echte Keyword-Datenquelle, vorherige Einmalentscheidung, Vollformat Titelrunde, kurzer Dienstweg, Teilimport ohne Gesamtabbruch, Kategorien-Abdeckungsübersicht.
+- **Status:** Integrierter Test-Build in eigenem Arbeitsverzeichnis in Bearbeitung, keine Installer-Freigabe zu diesem Zeitpunkt.
