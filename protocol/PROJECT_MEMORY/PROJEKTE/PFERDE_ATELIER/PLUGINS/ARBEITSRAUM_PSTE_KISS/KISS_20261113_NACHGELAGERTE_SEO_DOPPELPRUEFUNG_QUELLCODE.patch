@@ -1,0 +1,156 @@
+--- vorher/arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-compiler.php
++++ nachher/arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-compiler.php
+@@ -61,34 +61,19 @@
+                 $review[]=self::review($topic,'BLOCKED_EDITORIAL_STRAND',(array)($editorial['reason_codes']??['EDITORIAL_STRAND_BLOCKED']));continue;
+             }
+ 
+-            // The external SEO owner already decided this search intent once.
+-            // Keep the normal legacy check ONLY for themes without an authentic receipt.
++            // KISS: never make a second SEO/cannibalization decision here.
++            // Without a final PSTE verdict retain the topic as HELD, not approved.
+             $oneOwner=!empty($topic['single_external_seo_owner_receipt'])
+                 ||!empty($topic['upstream_central_coverage_receipt']);
+-            if($oneOwner){
+-                $topic['semantic_duplicate_gate']=['decision'=>'PASS','reason_codes'=>[
+-                    !empty($topic['single_external_seo_owner_receipt'])
+-                        ?'EXTERNAL_SEO_OWNER_ALREADY_DECIDED_NO_SECOND_SEMANTIC_SCAN'
+-                        :'PSTE_CENTRAL_OWNER_ALREADY_DECIDED_NO_SECOND_SEMANTIC_SCAN']];
+-            }else{
+-            $existingSemantic=PSERC_Semantic_Duplicate_Gate::againstExisting($topic,$existing);
+-            $topic['semantic_duplicate_gate']=$existingSemantic;
+-            if(($existingSemantic['decision']??'PASS')==='BLOCKED_DUPLICATE'){
+-                $review[]=self::review($topic,'BLOCKED_EXISTING_CONTENT_DUPLICATE',(array)($existingSemantic['reason_codes']??['EXISTING_CONTENT_DUPLICATE']),$existingSemantic);continue;
+-            }
+-            if(($existingSemantic['decision']??'PASS')==='REVIEW_REQUIRED'){
+-                $review[]=self::review($topic,'REVIEW_REQUIRED_SEMANTIC_OVERLAP',(array)($existingSemantic['reason_codes']??['SEMANTIC_OVERLAP_REVIEW_REQUIRED']),$existingSemantic);continue;
+-            }
+-            $candidateSemantic=PSERC_Semantic_Duplicate_Gate::againstPreparedCandidates($topic,$prepared);
+-            $topic['semantic_duplicate_gate']=$candidateSemantic;
+-            if(($candidateSemantic['decision']??'PASS')==='BLOCKED_DUPLICATE'){
+-                $review[]=self::review($topic,'BLOCKED_DUPLICATE_METADATA_CANDIDATE',(array)($candidateSemantic['reason_codes']??['DUPLICATE_WITHIN_METADATA_CANDIDATES']),$candidateSemantic);continue;
+-            }
+-            if(($candidateSemantic['decision']??'PASS')==='REVIEW_REQUIRED'){
+-                $review[]=self::review($topic,'REVIEW_REQUIRED_SEMANTIC_OVERLAP',(array)($candidateSemantic['reason_codes']??['SEMANTIC_OVERLAP_REVIEW_REQUIRED']),$candidateSemantic);continue;
+-            }
+-
+-            } // no external receipt: legacy semantic review completed
++            if(!$oneOwner){
++                $review[]=self::review($topic,'HELD_UPSTREAM_SEO_DECISION_MISSING',
++                    ['UPSTREAM_FINAL_SEO_DECISION_REQUIRED']);
++                continue;
++            }
++            $topic['semantic_duplicate_gate']=['decision'=>'PASS','reason_codes'=>[
++                !empty($topic['single_external_seo_owner_receipt'])
++                    ?'EXTERNAL_SEO_OWNER_ALREADY_DECIDED_NO_SECOND_SEMANTIC_SCAN'
++                    :'PSTE_CENTRAL_OWNER_ALREADY_DECIDED_NO_SECOND_SEMANTIC_SCAN']];
+             $keyword=(array)($topic['technical_strand_report']['target_keyword_gate']??[]);$topic['preallocation_keyword']=$keyword;
+             if(($keyword['status']??'')!=='PASS'){$review[]=self::review($topic,'REVIEW_REQUIRED_TARGET_KEYWORD',(array)($keyword['errors']??['TARGET_KEYWORD_BLOCKED']));continue;}
+             $portalEvidence=PSERC_Portal_Topic_Evidence_Gate::evaluate(self::upstreamEvidenceView($topic),$structure);$topic['portal_topic_evidence_gate']=$portalEvidence;
+@@ -264,7 +249,7 @@
+ 
+     private static function emptyCounts(): array{return array_fill_keys([
+         'READY_FOR_METADATA_HANDOFF','HELD_NO_ACTIVE_NORMAL_DRAFT_RELEASE','HELD_JOURNAL_CATEGORY_NOT_IN_SIGNED_CANONICAL_PLAN','HELD_UNSUPPORTED_ARTICLE_TYPE','HELD_SLOT_NOT_PRODUCTION_ENABLED','BLOCKED_NO_FREE_CANONICAL_SLOT','BLOCKED_NO_SEMANTICALLY_COMPATIBLE_CANONICAL_SLOT',
+-        'REVIEW_REQUIRED_TITLE_COMPATIBILITY','REVIEW_REQUIRED_TARGET_KEYWORD','HELD_NO_TITLE_CONTRACT','BLOCKED_QUESTION_TITLE_NOT_FAQ','BLOCKED_CATEGORY_ARTICLE_TYPE_MISMATCH',
++        'REVIEW_REQUIRED_TITLE_COMPATIBILITY','REVIEW_REQUIRED_TARGET_KEYWORD','HELD_UPSTREAM_SEO_DECISION_MISSING','HELD_NO_TITLE_CONTRACT','BLOCKED_QUESTION_TITLE_NOT_FAQ','BLOCKED_CATEGORY_ARTICLE_TYPE_MISMATCH',
+         'BLOCKED_EXISTING_CONTENT_DUPLICATE','BLOCKED_DUPLICATE_METADATA_CANDIDATE','REVIEW_REQUIRED_SEMANTIC_OVERLAP','REVIEW_REQUIRED_TITLE_PHRASE_REPETITION','BLOCKED_ASSIGNMENT_CONSISTENCY','BLOCKED_EDITORIAL_STRAND','BLOCKED_DUAL_STRAND_RELEASE','BLOCKED_LANGUAGE_GATE','BLOCKED_PORTAL_TOPIC_EVIDENCE'
+     ],0);}
+     private static function upstreamEvidenceView(array $topic): array {
+@@ -276,7 +261,7 @@
+     }
+ 
+     private static function norm(string $value): string {$value=strtr(trim($value),['Ä'=>'Ae','Ö'=>'Oe','Ü'=>'Ue','ä'=>'ae','ö'=>'oe','ü'=>'ue','ß'=>'ss']);$value=function_exists('mb_strtolower')?mb_strtolower($value,'UTF-8'):strtolower($value);return trim((string)preg_replace('/[^a-z0-9]+/u',' ',$value));}
+-    private static function statusOrder(string $status): int{$order=['READY_FOR_METADATA_HANDOFF'=>0,'BLOCKED_ASSIGNMENT_CONSISTENCY'=>4,'BLOCKED_EDITORIAL_STRAND'=>5,'BLOCKED_DUAL_STRAND_RELEASE'=>6,'BLOCKED_LANGUAGE_GATE'=>7,'BLOCKED_PORTAL_TOPIC_EVIDENCE'=>8,'BLOCKED_QUESTION_TITLE_NOT_FAQ'=>7,'BLOCKED_CATEGORY_ARTICLE_TYPE_MISMATCH'=>8,'BLOCKED_EXISTING_CONTENT_DUPLICATE'=>9,'BLOCKED_DUPLICATE_METADATA_CANDIDATE'=>10,'REVIEW_REQUIRED_SEMANTIC_OVERLAP'=>11,'REVIEW_REQUIRED_TITLE_PHRASE_REPETITION'=>12,'REVIEW_REQUIRED_TARGET_KEYWORD'=>13,'REVIEW_REQUIRED_TITLE_COMPATIBILITY'=>13,'HELD_NO_ACTIVE_NORMAL_DRAFT_RELEASE'=>20,'HELD_JOURNAL_CATEGORY_NOT_IN_SIGNED_CANONICAL_PLAN'=>21,'HELD_SLOT_NOT_PRODUCTION_ENABLED'=>22,'HELD_UNSUPPORTED_ARTICLE_TYPE'=>23,'HELD_NO_TITLE_CONTRACT'=>24,'BLOCKED_NO_SEMANTICALLY_COMPATIBLE_CANONICAL_SLOT'=>29,'BLOCKED_NO_FREE_CANONICAL_SLOT'=>30];return $order[$status]??99;}
++    private static function statusOrder(string $status): int{$order=['READY_FOR_METADATA_HANDOFF'=>0,'BLOCKED_ASSIGNMENT_CONSISTENCY'=>4,'BLOCKED_EDITORIAL_STRAND'=>5,'BLOCKED_DUAL_STRAND_RELEASE'=>6,'BLOCKED_LANGUAGE_GATE'=>7,'BLOCKED_PORTAL_TOPIC_EVIDENCE'=>8,'BLOCKED_QUESTION_TITLE_NOT_FAQ'=>7,'BLOCKED_CATEGORY_ARTICLE_TYPE_MISMATCH'=>8,'BLOCKED_EXISTING_CONTENT_DUPLICATE'=>9,'BLOCKED_DUPLICATE_METADATA_CANDIDATE'=>10,'REVIEW_REQUIRED_SEMANTIC_OVERLAP'=>11,'REVIEW_REQUIRED_TITLE_PHRASE_REPETITION'=>12,'REVIEW_REQUIRED_TARGET_KEYWORD'=>13,'REVIEW_REQUIRED_TITLE_COMPATIBILITY'=>13,'HELD_NO_ACTIVE_NORMAL_DRAFT_RELEASE'=>20,'HELD_JOURNAL_CATEGORY_NOT_IN_SIGNED_CANONICAL_PLAN'=>21,'HELD_SLOT_NOT_PRODUCTION_ENABLED'=>22,'HELD_UNSUPPORTED_ARTICLE_TYPE'=>23,'HELD_NO_TITLE_CONTRACT'=>24,'HELD_UPSTREAM_SEO_DECISION_MISSING'=>25,'BLOCKED_NO_SEMANTICALLY_COMPATIBLE_CANONICAL_SLOT'=>29,'BLOCKED_NO_FREE_CANONICAL_SLOT'=>30];return $order[$status]??99;}
+     private static function contains(string $haystack,string $needle): bool{$h=function_exists('mb_strtolower')?mb_strtolower($haystack,'UTF-8'):strtolower($haystack);$n=function_exists('mb_strtolower')?mb_strtolower($needle,'UTF-8'):strtolower($needle);return $n!==''&&str_contains($h,$n);}
+     private static function blocked(string $status,string $message,array $extra=[]): array{return array_merge(['ok'=>false,'status'=>$status,'message'=>$message,'write_attempted'=>false],$extra);}
+ }
+
+--- vorher/arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-plan-compile-job.php
++++ nachher/arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-plan-compile-job.php
+@@ -161,12 +161,22 @@
+                 PSERC_Plan_Snapshot_Store::putRecord($gen,'candidate_work',0,$work);
+                 return [$job,2,1,0];
+             }
+-            $exact=self::lookupExistingExact($gen,$topic);
+-            if($exact!==null){$agg=PSERC_Semantic_Duplicate_Gate::exactExistingResult($exact);$topic['semantic_duplicate_gate']=$agg;return self::finishReview($job,$topic,'BLOCKED_EXISTING_CONTENT_DUPLICATE',['EXISTING_CONTENT_EXACT_OR_IDENTITY_DUPLICATE'],$agg,$sortCursor);}
+-            $work=['topic'=>$topic,'baseline'=>(array)$env['baseline'],'structure'=>(array)$env['structure'],'sort_cursor'=>$sortCursor,'projection'=>$projection,'stage'=>'EXISTING','buckets'=>self::compatibleBuckets($projection,(array)($job['existing_families']??[])),'bucket_pos'=>0,'cursor'=>0,'aggregate'=>PSERC_Semantic_Duplicate_Gate::newAggregateState('EXISTING_CONTENT')];
+-            PSERC_Plan_Snapshot_Store::putRecord($gen,'candidate_work',0,$work);return [$job,2,1,0];
++            // No final PSTE approval: this is the existing review lane,
++            // not a request to repeat the upstream semantic scan.
++            return self::finishReview($job,$topic,'HELD_UPSTREAM_SEO_DECISION_MISSING',
++                ['UPSTREAM_FINAL_SEO_DECISION_REQUIRED'],[],$sortCursor);
+         }
+         $topic=(array)$work['topic'];$projection=(array)$work['projection'];$stage=(string)$work['stage'];$buckets=(array)($work['buckets']??[]);$pos=(int)($work['bucket_pos']??0);$cursor=(int)($work['cursor']??0);
++        // A saved unfinished legacy comparison (EXISTING or PREPARED) must
++        // not resume as a second SEO opinion after the owner's finality rule.
++        // An approved PREPARED checkpoint is still allowed to continue.
++        if(($stage==='EXISTING'||$stage==='PREPARED')
++            &&empty($topic['single_external_seo_owner_receipt'])
++            &&empty($topic['upstream_central_coverage_receipt'])){
++            PSERC_Plan_Snapshot_Store::deleteRecord($gen,'candidate_work',0);
++            return self::finishReview($job,$topic,'HELD_UPSTREAM_SEO_DECISION_MISSING',
++                ['UPSTREAM_FINAL_SEO_DECISION_REQUIRED'],[],(array)($work['sort_cursor']??[]));
++        }
+         if($stage==='EXISTING'||$stage==='PREPARED'){
+             $families=$stage==='EXISTING'?(array)($job['existing_families']??[]):(array)($job['prepared_families']??[]);$kindPrefix=$stage==='EXISTING'?'existing_family_':'prepared_family_';$scope=$stage==='EXISTING'?'EXISTING_CONTENT':'METADATA_CANDIDATES';$reads=0;
+             if($pos<count($buckets)){
+
+--- vorher/arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-seo-reader.php
++++ nachher/arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-seo-reader.php
+@@ -176,6 +176,13 @@
+             &&($ownerGate['decision']??'')==='PASS'
+             &&!empty($ownerGate['pre_title_duplicate_gate']['ok'])
+             &&($ownerGate['cannibalization']['decision']??'')==='PASS';
++        // KISS: one final upstream content decision. A missing receipt is NOT
++        // an invitation for the downstream compiler to become a second SEO owner.
++        // Keep the topic in the existing HELD lane; never discard it.
++        if($eligible&&!$single&&!$centralApproved){
++            $eligible=false;
++            $reasons[]='SEO_FINAL_UPSTREAM_COVERAGE_NOT_AVAILABLE';
++        }
+         $normalized=[
+             'upstream_central_coverage_receipt'=>$centralApproved?$ownerGate:[],
+             'single_external_seo_owner_receipt'=>$single,
+
+--- vorher/arbeit/portal-seo-editorial-plan-compiler/contracts/compiler-package-binding-v1.json
++++ nachher/arbeit/portal-seo-editorial-plan-compiler/contracts/compiler-package-binding-v1.json
+@@ -93,8 +93,8 @@
+             "bytes": 13770
+         },
+         "includes/class-pserc-compiler.php": {
+-            "sha256": "cf2ca8db9bcac32a7b287ebc2eb9cc4c5261b8e5024610429183c4bdadeedc1c",
+-            "bytes": 29981
++            "sha256": "b983358db6a308120da7b37a757a442a7fa3740b00637d1316954903a607d23f",
++            "bytes": 28655
+         },
+         "includes/class-pserc-editorial-outcome-gate.php": {
+             "sha256": "4307038b6b36180ae2abff9699109d6797fec524caa23626f6899dd880df4e08",
+@@ -133,8 +133,8 @@
+             "bytes": 3660
+         },
+         "includes/class-pserc-plan-compile-job.php": {
+-            "sha256": "6508dbdde36ce50babf2ef6db3dc1cacbd96e100bcc91f1463197bd4a5274e8e",
+-            "bytes": 43108
++            "sha256": "486f82ac7d59d95be102f350e6a925bd39e1c7e4bda05844f55b689a06f6c3d2",
++            "bytes": 43278
+         },
+         "includes/class-pserc-plan-dependency-fingerprint.php": {
+             "sha256": "cdaf38a9f3593a2e92d2a4ba20ea2fa4ce241a79312b78fed0bc96bd70dca737",
+@@ -197,8 +197,8 @@
+             "bytes": 29519
+         },
+         "includes/class-pserc-seo-reader.php": {
+-            "sha256": "3ac1bbd2bb0b99cd0388c956c901d0072a777891cfb24aa4957cc3fdec5bbe73",
+-            "bytes": 20638
++            "sha256": "dca9f98fb1aec54c5a350016713f29b39e5a3a65f49cdc304812085f7e3f11af",
++            "bytes": 21030
+         },
+         "includes/class-pserc-seo-source-binding.php": {
+             "sha256": "b33a8499b0cd3223ad849ec24c585f57290bdacc5cd6748fc1b9352b374180e8",
+@@ -249,5 +249,5 @@
+             "bytes": 2914
+         }
+     },
+-    "binding_sha256": "66babdbdb1c996cdcf33a6c2bf093748033ec0f9cc20ab88d70e0f0bca8c3a0a"
++    "binding_sha256": "cae9e343b322bb753de2d6c439378cc9837dfde526b53ba919157df135a118e9"
+ }
