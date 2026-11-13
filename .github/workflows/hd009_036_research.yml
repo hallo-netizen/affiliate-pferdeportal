@@ -1,0 +1,73 @@
+name: HD009 036 evidence real HTML and campaign mapping
+on:
+  push:
+    branches: [hobbyroom/hd009-036-relevance-provider-cards-20261113]
+    paths: [.github/workflows/hd009_036_research.yml]
+permissions:
+  contents: write
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract relevant original methods, feed mapping and real published markup
+        run: |
+          python3 -m pip -q install beautifulsoup4
+          python3 - <<'PY'
+          import zipfile,re,urllib.request,pathlib,html
+          from bs4 import BeautifulSoup
+          p=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          z=zipfile.ZipFile(p)
+          main=z.read('affiliate-portal-router/hobby-depot-affiliate-router.php').decode().splitlines()
+          trait=z.read('affiliate-portal-router/includes/trait-ppar-idealo.php').decode().splitlines()
+          match=re.compile(r'^    (?:private|public|protected) function ')
+          reports=[]
+          for tag,lines,funcs in [
+             ('HD009MAIN',main,['category_product_shared_rank_base','campaign_match_rank','get_content_context','hd_idealo_product_targets_exact_hobby_page','render_banner','build_campaign_output']),
+             ('IDEALOTRAIT',trait,['idealo_materialize_campaigns','idealo_target_keys_for_concept','idealo_match_feed_row_to_concept','idealo_match_stem','idealo_match_index'])
+          ]:
+             for f in funcs:
+               indexes=[i for i,l in enumerate(lines) if re.search(r'^\s+(?:public|private|protected) function '+f+r'\(',l)]
+               if not indexes:
+                 reports.append('MISSING_METHOD '+tag+' '+f)
+                 continue
+               start=indexes[0]
+               end=next((i for i in range(start+1,len(lines)) if match.match(lines[i])),len(lines))
+               reports.append('=== '+tag+' '+f+':'+str(start+1)+'-'+str(end)+' ===')
+               reports.extend(f'{i+1} {lines[i]}' for i in range(start,min(end,start+215)))
+          for name,url,sel in [
+            ('HOBBY','https://www.hobby-depot.de/gestalten/malen-zeichnen/airbrush/','.hd-catlevel-product-grid'),
+            ('PFERDE','https://pferde-atelier.de/category/schabracken-beratung/','.pa273-product-grid')]:
+            try:
+              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0','Cache-Control':'no-cache'})
+              with urllib.request.urlopen(req,timeout=20) as r:
+                h=r.read(1500000).decode('utf8','replace')
+                reports.append('SITE '+name+' http '+str(r.status)+' '+str(len(h)))
+              soup=BeautifulSoup(h,'html.parser')
+              node=soup.select_one(sel)
+              if not node:
+                reports.append('NOT_FOUND '+name+' '+sel)
+                continue
+              reports.append('SITEHTML '+name+' GRID '+str(node.attrs))
+              for idx,c in enumerate(list(node.children)):
+                if getattr(c,'name',None) is None:continue
+                if idx>10:break
+                reports.append('SITEHTML '+name+' ITEM '+str(idx)+' CLASSES '+str(c.get('class')))
+                reports.append('SITEHTML '+name+' TEXT '+c.get_text(' ',strip=True)[:1000])
+                reports.append('SITEHTML '+name+' DOM '+str(c)[:9500])
+              versions=re.findall(r'(?:(?:hdar-amazon-start|ppar-frontend|pferde-template-kit)-css[^\\n]{0,250})',h)[:5]
+              reports.append('CSS_VERSION '+name+' '+str(versions))
+            except Exception as e:reports.append('ERROR '+name+' '+repr(e))
+          path=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/RESEARCH_HD009_036_PRODUCT_CARDS_SOURCE.txt')
+          path.parent.mkdir(exist_ok=True,parents=True)
+          path.write_text('\n'.join(reports))
+          print('AUDIT_WRITTEN',len(reports),'lines',path.stat().st_size,'bytes')
+          PY
+      - name: Commit source excerpts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/RESEARCH_HD009_036_PRODUCT_CARDS_SOURCE.txt
+          git commit -m "HD009 evidence: live Hobby/Pferde product cards and original source methods"
+          git push origin HEAD:hobbyroom/hd009-036-relevance-provider-cards-20261113
