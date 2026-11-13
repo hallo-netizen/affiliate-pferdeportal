@@ -172,7 +172,7 @@ ok($p['status']==='blocked','Unknown creative gets NO automatic guess');
 $fin=banner('kreditvergleich/','Kreditvergleich');
 ok($o->hb_rc31_insurance_banner_plan($fin,$portal,$GLOBALS['targets'],array('page','category'))===null,
    'Finance type is outside insurance automatic routing; previous path unchanged');
-$other=$motor;$other['partner_name']='idealo';
+$other=$motor;$other['partner_name']='idealo';$other['destination_url']='https://www.idealo.de/preisvergleich/tresor';
 ok($o->hb_rc31_insurance_banner_plan($other,$portal,$GLOBALS['targets'],array('page','category'))===null,
    'Physical product provider unaffected');
 $badportal=$portal;$badportal['local']=false;
