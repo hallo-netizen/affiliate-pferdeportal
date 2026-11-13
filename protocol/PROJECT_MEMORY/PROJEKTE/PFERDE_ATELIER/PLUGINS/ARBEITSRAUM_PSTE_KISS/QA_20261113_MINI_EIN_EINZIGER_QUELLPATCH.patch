@@ -1,0 +1,395 @@
+--- VORHER/arbeit/Portal SEO Topic Engine/includes/class-pste-mini-workflow.php
++++ NACHHER/arbeit/Portal SEO Topic Engine/includes/class-pste-mini-workflow.php
+@@ -100,91 +100,47 @@
+         echo '<p><strong>FREI:</strong> '.esc_html((string)$counts['FREI']).
+             ' · <strong>BELEGT:</strong> '.esc_html((string)$counts['BELEGT']).
+             ' · <strong>KLÄRUNG:</strong> '.esc_html((string)max($unresolved,$counts['KLAERUNG'])).'</p>';
+-        if($completed){
+-            echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';
+-            wp_nonce_field('pste_mini_results_export');
+-            echo '<input type="hidden" name="action" value="pste_mini_results_export">'.
+-                '<input type="hidden" name="include_parkhaus" value="1">'.
+-                '<button class="button button-primary" type="submit">1. Redaktionsstand für externe SEO-Prüfung exportieren</button></form>';
+-            echo '<form method="post" enctype="multipart/form-data" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:10px">';
+-            wp_nonce_field('pste_mini_title_repair_import');
+-            echo '<input type="hidden" name="action" value="pste_mini_title_repair_import">'.
+-                '<label>2. Extern geprüfte SEO-Ergebnisdatei <input type="file" name="mini_corrected_titles_json" accept=".json,application/json" required></label> '.
+-                '<button class="button" type="submit">Ergebnis importieren</button></form>';
+-            if($counts['FREI']>0){
+-                echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:10px">';
+-                wp_nonce_field('pste_mini_forward_to_plan');
+-                echo '<input type="hidden" name="action" value="pste_mini_forward_to_plan">'.
+-                    '<button class="button" type="submit">3. Freigegebene Themen an bestehende Planung übergeben</button></form>';
+-            }
+-            echo '<p><small>Bei unvollständiger Bestandsdatei keine FREI-Entscheidung importieren. K0/Beiträge bleiben unberührt.</small></p>';
+-            $queue=get_option('pste_title_desk_reentry_state_v1',[]);
+-            $previousReport=PSTE_Admin::titleDeskReentrySummary();
+-            $priorStale=false;
+-            if(is_array($previousReport))foreach((array)($previousReport['blocked']??[]) as $blockedRow){
+-                if((string)($blockedRow['error_code']??'')==='PSTE_RETAINED_EDITORIAL_PLAN_SNAPSHOT_CHANGED'){$priorStale=true;break;}
+-            }
+-            if(!$priorStale&&is_array($queue))foreach((array)($queue['outcomes']??[]) as $oldOutcome){
+-                if((string)($oldOutcome['error_code']??'')==='PSTE_RETAINED_EDITORIAL_PLAN_SNAPSHOT_CHANGED'){
+-                    $priorStale=true;break;
+-                }
+-            }
+-            if((is_array($queue)&&($queue['status']??'')==='PAUSED_CONTEXT_STALE')||$priorStale){
+-                echo '<p><strong>Planprüfung technisch angehalten bzw. im alten Lauf falsch als abgeschlossen gezählt.</strong> Keine weitere Übergabe starten.</p>';
+-                echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:8px">';
+-                wp_nonce_field('pste_mini_context_evidence');
+-                echo '<input type="hidden" name="action" value="pste_mini_context_evidence">'
+-                    .'<button class="button button-primary" type="submit">Einmaligen Plan- und Kategorien-Prüfstand herunterladen</button></form>';
+-                echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:10px">';
+-                wp_nonce_field('pste_mini_legacy_plan_rebind');
+-                echo '<input type="hidden" name="action" value="pste_mini_legacy_plan_rebind">'.
+-                    '<button class="button" type="submit">Nur nach geprüftem Bericht: alte Planbindung erneuern und MINI-Themen sicher erneut prüfen</button></form>';
+-            }
+-        }elseif($active){
+-            echo '<p><strong>Stichwortstapel noch offen.</strong> Zuerst die extern geprüften Relevanz-/Titelideen übernehmen.</p>';
++        // The ONE normal route: external SEO decision first, title-only MINI second.
++        echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';
++        wp_nonce_field('pste_mini_results_export');
++        echo '<input type="hidden" name="action" value="pste_mini_results_export">'
++            .'<input type="hidden" name="include_parkhaus" value="1">'
++            .'<button class="button button-primary" type="submit">1. Offene Themen für einmalige SEO-Entscheidung exportieren</button></form>';
++        echo '<form method="post" enctype="multipart/form-data" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:10px">';
++        wp_nonce_field('pste_mini_title_repair_import');
++        echo '<input type="hidden" name="action" value="pste_mini_title_repair_import">'
++            .'<label>2. Geprüfte SEO-Entscheidungen <input type="file" name="mini_corrected_titles_json" accept=".json,application/json" required></label> '
++            .'<button class="button" type="submit">Einmalige Entscheidung übernehmen</button></form>';
++        $ready=0;
++        foreach($receipts as $key=>$receipt)if(is_array($receipt)
++            &&($receipt['box']??'')==='FREI'&&!isset($completed[$key]))$ready++;
++        if($ready||$active){
++            echo '<p><small>Freigegebene Themen ohne Titel: '.(int)$ready.'</small></p>';
+             echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';
+             wp_nonce_field('pste_mini_keyword_export');
+-            echo '<input type="hidden" name="action" value="pste_mini_keyword_export">'.
+-                '<button class="button" type="submit">Offenen Stichwortstapel erneut herunterladen</button></form>';
++            echo '<input type="hidden" name="action" value="pste_mini_keyword_export">'
++                .'<input type="hidden" name="mini_limit" value="100">'
++                .'<button class="button" type="submit">3. Nur Titelauftrag für freigegebene Themen exportieren</button></form>';
+             echo '<form method="post" enctype="multipart/form-data" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:10px">';
+             wp_nonce_field('pste_mini_keyword_import');
+-            echo '<input type="hidden" name="action" value="pste_mini_keyword_import">'.
+-                '<label>Extern geprüfte Stichwortdatei <input type="file" name="mini_result_json" accept=".json,application/json" required></label> '.
+-                '<button class="button" type="submit">Stichwörter übernehmen</button></form>';
+-        }else{
+-            echo '<p>Für neue Themen zuerst einen Stichwortstapel exportieren. Bereits abgeschlossene Stichwörter werden nicht erneut eingelesen.</p>';
+-            echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';
+-            wp_nonce_field('pste_mini_keyword_export');
+-            echo '<input type="hidden" name="action" value="pste_mini_keyword_export">'.
+-                '<input type="hidden" name="mini_limit" value="100">'.
+-                '<button class="button button-primary" type="submit">100 noch offene Stichwörter exportieren</button></form>';
+-        }
++            echo '<input type="hidden" name="action" value="pste_mini_keyword_import">'
++                .'<label>MINI-Titelergebnis <input type="file" name="mini_result_json" accept=".json,application/json" required></label> '
++                .'<button class="button" type="submit">Titelformulierung übernehmen</button></form>';
++        }
++        if($active){
++            echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:10px">';
++            wp_nonce_field('pste_mini_keyword_cancel');
++            echo '<input type="hidden" name="action" value="pste_mini_keyword_cancel">'
++                .'<button class="button" type="submit">Offenen alten Stapel abbrechen</button></form>';
++        }
++        if($completed){
++            echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:10px">';
++            wp_nonce_field('pste_mini_forward_to_plan');
++            echo '<input type="hidden" name="action" value="pste_mini_forward_to_plan">'
++                .'<button class="button" type="submit">4. Fertige Titel an bestehenden Redaktionsplan übergeben</button></form>';
++        }
++        echo '<p><small>Keine zweite fachliche Entscheidung in MINI oder im Redaktionsplan. Fehlende Freigabe bleibt angehalten.</small></p>';
+         echo '</section>';
+-        echo '<details class="pste-box"><summary>Weitere Werkzeuge (nur für Sonderfälle)</summary>';
+-        echo '<p>Diese Funktionen gehören nicht zum normalen externen SEO-Ablauf.</p>';
+-        echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';wp_nonce_field('pste_mini_keyword_export');
+-        echo '<input type="hidden" name="action" value="pste_mini_keyword_export"><label>Stichwörter pro Stapel <select name="mini_limit">';
+-        foreach(self::LIMITS as $limit)echo '<option value="'.(int)$limit.'"'.($limit===100?' selected':'').'>'.(int)$limit.'</option>';
+-        echo '</select></label> <button class="button" type="submit">'.($active?'Offenen Stapel erneut herunterladen':'Weitere Stichwörter exportieren').'</button></form>';
+-        if($active){
+-            echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:9px">';wp_nonce_field('pste_mini_keyword_cancel');
+-            echo '<input type="hidden" name="action" value="pste_mini_keyword_cancel"><button class="button" type="submit" onclick="return confirm(\'Offenen Stapel verwerfen? Seine Keywords werden erneut exportierbar.\')">Stapel abbrechen</button></form>';
+-        }
+-        if($completed){
+-            echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:9px">';wp_nonce_field('pste_mini_results_export');
+-            echo '<input type="hidden" name="action" value="pste_mini_results_export"><button class="button" type="submit">Nur gespeicherte Titelideen exportieren</button></form>';
+-            echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:9px">';wp_nonce_field('pste_mini_batch_report');
+-            echo '<input type="hidden" name="action" value="pste_mini_batch_report"><button class="button" type="submit">Nur aktuellen Stapelbericht herunterladen</button></form>';
+-            echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" style="margin-top:9px">';
+-            wp_nonce_field('pste_mini_context_evidence');
+-            echo '<input type="hidden" name="action" value="pste_mini_context_evidence"><button class="button" type="submit">Einmaligen Plan- und Kategorien-Prüfstand herunterladen</button></form>';
+-            if(is_array($state['last_plan_report']??null)){
+-                $report=$state['last_plan_report'];
+-                echo '<p><small>Letzte Planübergabe: '.esc_html((string)($report['forwarded']??0)).
+-                    ' übernommen, '.esc_html((string)($report['blocked']??0)).' zurückgestellt.</small></p>';
+-            }
+-        }
+-        echo '</details>';
+     }
+ 
+     /** One MINI source of truth for an already imported JA. No copied relevance receipt. */
+@@ -305,12 +261,15 @@
+                 'clarification'=>array_values((array)($state['clarification']??[])),
+                 'note'=>'External relevance/title ideas only; NO final SEO/slot clearance.'];
+             if(!empty($_POST['include_parkhaus'])){
++                // Only NEW topics that have not been decided. Source frozen at original raw query.
++                $excluded=(array)$state['completed'];
++                foreach((array)($state['seo_decisions']??[]) as $key=>$receipt)$excluded[$key]=true;
++                $selected=self::selectNewRows(static fn(int $cursor,int $size): array=>self::readRawRows($cursor,$size),$excluded,100);
+                 $out['seo_subjects']=[];
+-                foreach($state['completed'] as $key=>$row){
+-                    if(!is_array($row)||($row['decision']??'')!=='JA')continue;
+-                    $raw=(string)($row['raw_query']??'');
+-                    $out['seo_subjects'][]=['pool_key'=>(string)$key,'raw_query'=>$raw,
+-                        'source_sha256'=>hash('sha256',(string)$key.'|'.$raw)];
++                foreach($selected['items'] as $row){
++                    $raw=(string)$row['raw_query'];$key=(string)$row['pool_key'];
++                    $out['seo_subjects'][]=['pool_key'=>$key,'raw_query'=>$raw,
++                        'source_sha256'=>hash('sha256',$key.'|'.$raw)];
+                 }
+                 $out['parkhaus_snapshot']=self::readParkhausForMini();
+                 $out['parkhaus_complete']=!empty($out['parkhaus_snapshot']['complete']);
+@@ -328,7 +287,7 @@
+         }catch(Throwable $e){self::fail($e);}
+     }
+ 
+-    /** Only source ID and original query are transported. No relevance filter. */
++    /** Raw source inventory for the ONE upstream SEO decision, never a MINI title batch. */
+     public static function selectNewRows(callable $readPage, array $completed, int $limit): array {
+         if(!in_array($limit,self::LIMITS,true))throw new RuntimeException('PSTE_MINI_LIMIT_INVALID');
+         $items=[];$cursor=0;$invalid=0;$seen=[];$pages=0;
+@@ -356,11 +315,52 @@
+         return ['items'=>$items,'skipped_invalid'=>$invalid,'last_scanned_id'=>$cursor];
+     }
+ 
++    /** Already approved source+intent only; MINI must never receive unapproved raw questions. */
++    public static function selectApprovedTitleRows(array $rows,array $completed,array $receipts,int $limit): array {
++        if(!in_array($limit,self::LIMITS,true))throw new RuntimeException('PSTE_MINI_LIMIT_INVALID');
++        $items=[];$seen=[];
++        foreach($rows as $row){
++            if(!is_array($row))throw new RuntimeException('PSTE_MINI_SOURCE_READ_FAILED');
++            $key=(string)($row['pool_key']??'');
++            if($key===''||isset($seen[$key]))throw new RuntimeException('PSTE_MINI_TITLE_SOURCE_DUPLICATE');
++            $seen[$key]=true;
++            if(isset($completed[$key]))continue;
++            $proof=(array)($receipts[$key]??[]);
++            if(($proof['contract']??'')!=='PSTE_MINI_SEO_DECISIONS_V1'||($proof['box']??'')!=='FREI')continue;
++            $data=json_decode((string)($row['payload_json']??''),true);
++            $raw=is_array($data)?PSTE_Editorializer::sourceQuery($data):'';
++            $slot=(string)($proof['intent_slot']??'');
++            $snapshot=(string)($proof['snapshot_sha256']??'');
++            $intent=trim((string)($proof['intent_summary']??''));
++            if($raw===''||!hash_equals($raw,(string)($proof['raw_query']??''))
++                ||!hash_equals(hash('sha256',$key.'|'.$raw),(string)($proof['source_sha256']??''))
++                ||!preg_match('/^[a-f0-9]{64}$/D',$slot)
++                ||!preg_match('/^[a-f0-9]{64}$/D',$snapshot)||$intent===''
++                ||trim((string)($proof['approved_title']??''))!=='')
++                throw new RuntimeException('PSTE_MINI_PRETITLE_APPROVAL_INVALID');
++            $id=(int)($row['id']??0);
++            if($id<=0)throw new RuntimeException('PSTE_MINI_TITLE_SOURCE_ID_INVALID');
++            $items[]=['id'=>$id,'pool_key'=>$key,'raw_query'=>$raw,
++                'source_sha256'=>hash('sha256',$id.'|'.$key.'|'.$raw),
++                'decision'=>'JA','titles'=>[['intent'=>$intent,'title'=>'']],
++                'intent_slot'=>$slot,'seo_snapshot_sha256'=>$snapshot];
++            if(count($items)>=$limit)break;
++        }
++        return ['items'=>$items,'skipped_invalid'=>0,'title_only'=>true];
++    }
++
+     public static function createBatch(array $selected, string $batchId): array {
+         if(!is_array($selected['items']??null)||!$selected['items'])throw new RuntimeException('PSTE_MINI_NO_OPEN_KEYWORDS');
+         if(!preg_match('/^[a-zA-Z0-9_-]{6,100}$/',$batchId))throw new RuntimeException('PSTE_MINI_BATCH_ID_INVALID');
++        if(empty($selected['title_only']))throw new RuntimeException('PSTE_MINI_FINAL_SEO_DECISION_REQUIRED_BEFORE_TITLE');
++        foreach($selected['items'] as $item)if(($item['decision']??'')!=='JA'
++            ||count((array)($item['titles']??[]))!==1
++            ||trim((string)($item['titles'][0]['intent']??''))===''
++            ||(string)($item['titles'][0]['title']??'')!=='')
++            throw new RuntimeException('PSTE_MINI_TITLE_ONLY_SOURCE_INVALID');
+         return ['contract'=>self::CONTRACT,'batch_id'=>$batchId,'created_utc'=>gmdate('c'),
+-            'instruction'=>'Worker 1 entscheidet JA/NEIN/VIELLEICHT. Nur JA geht an Worker 2. Worker 2 kann mehrere sachlich verschiedene Suchabsichten mit je einem Titel vorschlagen. TITELREGELN BINDEND: natuerliche deutsche Formulierungen, niemals Doppelpunkte, keine Aufzaehlungs-/Keyword-Schablonen, keine kuenstlichen Floskeln; Fragezeichen nur am Ende eines Fragetitels; PRO TITEL GENAU EINE HAUPTSUCHFRAGE: niemals zwei eigenstaendige Fragen mit und/was/wie/woran in einem Titel verschmelzen. Zweite Frage nur als Zwischenueberschrift oder als eigener Titel, wenn der einmalige SEO-Owner eine andere Suchabsicht belegt. Suchintention erhalten. Die bestehende title_governance beachten. Keine Kannibalisierungs- oder Produktionsfreigabe durch Worker. Nur decision und titles bearbeiten; alle anderen Felder unveraendert lassen. Bei NEIN/VIELLEICHT titles leer.',
++            'title_only'=>true,
++            'instruction'=>'Nur einen natuerlichen deutschen Titel fuer die fest freigegebene Suchabsicht schreiben. AUSSCHLIESSLICH items[*].titles[0].title aendern. Fachentscheid, Suchintention, Kategorie, Beitragsart und Reservierung sind bereits entschieden und du darfst sie NICHT aendern. Titel ohne Doppelpunkte oder Keyword-Schablonen, genau eine Hauptfrage. Keine neue SEO- oder Doppelungsentscheidung.',
+             'title_governance'=>self::titleGovernance(),
+             'skipped_invalid_source_count'=>(int)($selected['skipped_invalid']??0),
+             'items'=>$selected['items']];
+@@ -379,12 +379,29 @@
+             $limit=(int)($_POST['mini_limit']??0);
+             if(!in_array($limit,self::LIMITS,true))throw new RuntimeException('PSTE_MINI_LIMIT_INVALID');
+             $state=self::loadState();
+-            if(is_array($state['active']))$batch=$state['active'];
++            if(is_array($state['active'])){
++                if(empty($state['active']['title_only']))throw new RuntimeException('PSTE_MINI_OLD_RELEVANCE_BATCH_MUST_BE_CANCELLED');
++                $batch=$state['active'];
++            }
+             else {
+-                $selected=self::selectNewRows(static fn(int $cursor,int $size): array=>self::readRawRows($cursor,$size),$state['completed'],$limit);
++                // Existing SEO decisions are the only source for a new MINI title batch.
++                // Read approved pool keys, not the first arbitrary N raw keywords.
++                global $wpdb;$table=PSTE_Repository::table('topic_pool');$rows=[];
++                $keys=[];
++                foreach((array)($state['seo_decisions']??[]) as $key=>$proof){
++                    if(is_array($proof)&&($proof['box']??'')==='FREI'&&!isset($state['completed'][$key]))$keys[]=(string)$key;
++                }
++                foreach(array_chunk($keys,100) as $chunk){
++                    $marks=implode(',',array_fill(0,count($chunk),'%s'));
++                    $found=$wpdb->get_results($wpdb->prepare("SELECT id,pool_key,payload_json FROM $table WHERE pool_key IN ($marks)",...$chunk),ARRAY_A);
++                    if(!is_array($found)||(string)($wpdb->last_error??'')!=='')throw new RuntimeException('PSTE_MINI_TITLE_DB_READ_FAILED');
++                    foreach($found as $row)$rows[]=$row;
++                }
++                if(count($rows)!==count($keys))throw new RuntimeException('PSTE_MINI_PREAPPROVED_SOURCE_MISSING');
++                usort($rows,static fn($a,$b)=>(int)$a['id']<=>(int)$b['id']);
++                $selected=self::selectApprovedTitleRows($rows,(array)$state['completed'],(array)($state['seo_decisions']??[]),$limit);
+                 $batch=self::createBatch($selected,'mini-'.gmdate('YmdHis').'-'.substr(bin2hex(random_bytes(6)),0,12));
+-                // The relevance worker receives only raw source queries; no giant plan here.
+-                $state['active']=$batch;self::storeState($state); // A lost download is retryable.
++                $state['active']=$batch;self::storeState($state); // Retry the identical batch.
+             }
+             self::sendJson($batch,'pferdeatelier-rohkeywords-'.$batch['batch_id'].'.json');
+         } catch(Throwable $e){self::fail($e);}
+@@ -399,6 +416,8 @@
+         if(array_key_exists('title_governance',$received)
+             &&$received['title_governance']!==($original['title_governance']??self::titleGovernance()))
+             throw new RuntimeException('PSTE_MINI_TITLE_RULES_CHANGED');
++        if(!empty($original['title_only'])&&($received['title_only']??null)!==true)
++            throw new RuntimeException('PSTE_MINI_TITLE_ONLY_CONTRACT_CHANGED');
+         $before=$original['items']??null;$after=$received['items']??null;
+         if(!is_array($before)||!is_array($after)||count($before)!==count($after)||!array_is_list($after))
+             throw new RuntimeException('PSTE_MINI_ITEM_COUNT_CHANGED');
+@@ -426,6 +445,21 @@
+                 $actual=hash('sha256',(int)($current['id']??0).'|'.(string)($current['pool_key']??'').'|'.$raw);
+                 if(!is_array($current)||!hash_equals((string)$frozen['source_sha256'],$actual))
+                     throw new RuntimeException('PSTE_MINI_DATABASE_SOURCE_CHANGED');
++                if(!empty($original['title_only'])){
++                    // Compare every frozen field, not only key names. MINI may
++                    // change exactly one title string and nothing else.
++                    $frozenBrief=$frozen;$incomingBrief=$item;
++                    unset($frozenBrief['titles'][0]['title'],$incomingBrief['titles'][0]['title']);
++                    if($frozenBrief!==$incomingBrief)
++                        throw new RuntimeException('PSTE_MINI_TITLE_ONLY_FROZEN_FIELDS_CHANGED');
++                    if(($item['decision']??null)!=='JA'
++                        ||$item['titles']===null||!is_array($item['titles'])||count($item['titles'])!==1
++                        ||(string)($item['titles'][0]['intent']??'')!==(string)($frozen['titles'][0]['intent']??'')
++                        ||(string)($frozen['titles'][0]['title']??'')!=='')
++                        throw new RuntimeException('PSTE_MINI_TITLE_ONLY_DECISION_OR_INTENT_CHANGED');
++                    // Pure title format and hard quality; never an additional SEO judgement.
++                    self::validateTitleText((string)($item['titles'][0]['title']??''));
++                }
+                 $decision=$item['decision']??null;
+                 if(!is_string($decision)||!in_array($decision,['JA','NEIN','VIELLEICHT'],true))
+                     throw new RuntimeException('PSTE_MINI_DECISION_REQUIRED');
+@@ -518,7 +552,28 @@
+             if(($doc['contract']??'')==='PSTE_MINI_SEO_DECISIONS_V1'){
+                 $snapshot=self::readParkhausForMini(); // one technical freshness check per entire batch
+                 $before=$state;
+-                $state=self::acceptSingleOwnerSeoDecisions($state,$doc,$snapshot);
++                // An external SEO owner can decide raw source topics BEFORE MINI.
++                // Current identity comes from the existing topic_pool, not user-uploaded fields.
++                $sourceRows=[];$keys=[];
++                foreach((array)$doc['items'] as $entry){
++                    if(!is_array($entry))continue;
++                    $key=(string)($entry['pool_key']??'');
++                    if($key!==''&&!isset($state['completed'][$key]))$keys[$key]=true;
++                }
++                if($keys){
++                    global $wpdb;$table=PSTE_Repository::table('topic_pool');
++                    foreach(array_chunk(array_keys($keys),100) as $chunk){
++                        $marks=implode(',',array_fill(0,count($chunk),'%s'));
++                        $found=$wpdb->get_results($wpdb->prepare("SELECT id,pool_key,payload_json FROM $table WHERE pool_key IN ($marks)",...$chunk),ARRAY_A);
++                        if(!is_array($found)||(string)($wpdb->last_error??'')!=='')throw new RuntimeException('PSTE_MINI_SEO_SOURCE_DB_READ_FAILED');
++                        foreach($found as $row){
++                            $key=(string)($row['pool_key']??'');
++                            if(isset($sourceRows[$key]))throw new RuntimeException('PSTE_MINI_SEO_SOURCE_DB_DUPLICATE');
++                            $sourceRows[$key]=$row;
++                        }
++                    }
++                }
++                $state=self::acceptSingleOwnerSeoDecisions($state,$doc,$snapshot,$sourceRows);
+                 self::storeSeoDecisionsIfUnchanged($before,$state); // one original WP option, atomic
+                 wp_safe_redirect(admin_url('admin.php?page=portal-seo-topic-engine-review&pste_mini_seo_imported=1'));exit;
+             }
+@@ -556,7 +611,22 @@
+                     $currentRows[$key]=$row;
+                 }
+             }
++            $beforeState=$state;
+             $checked=self::validateResult($batch,$result,static fn(string $key): ?array=>$currentRows[$key]??null);
++            if(!empty($batch['title_only']))foreach($checked['completed'] as $key=>$value){
++                $proof=(array)($state['seo_decisions'][$key]??[]);
++                $originalItem=null;
++                foreach((array)$batch['items'] as $frozen)if(($frozen['pool_key']??'')===$key){$originalItem=$frozen;break;}
++                if(!is_array($originalItem)||($proof['box']??'')!=='FREI'
++                    ||(string)($proof['approved_title']??'')!==''
++                    ||!hash_equals((string)($proof['intent_slot']??''),(string)($originalItem['intent_slot']??''))
++                    ||!hash_equals((string)($proof['snapshot_sha256']??''),(string)($originalItem['seo_snapshot_sha256']??''))
++                    ||!hash_equals((string)($proof['intent_summary']??''),(string)($originalItem['titles'][0]['intent']??''))
++                    ||(string)($proof['raw_query']??'')!==(string)($value['raw_query']??''))
++                    throw new RuntimeException('PSTE_MINI_TITLE_OWNER_RECEIPT_CHANGED');
++                // Fill only the title on the same already approved receipt, never decide SEO again.
++                $state['seo_decisions'][$key]['approved_title']=(string)$value['titles'][0]['title'];
++            }
+             foreach($checked['completed'] as $key=>$value){
+                 if(isset($state['completed'][$key]))throw new RuntimeException('PSTE_MINI_KEY_ALREADY_COMPLETED');
+                 $state['completed'][$key]=$value;
+@@ -571,7 +641,9 @@
+                 'clarification'=>count($checked['clarification']),
+                 'titles'=>(int)$checked['stats']['titles'],
+                 'breakdown'=>$checked['stats'],'recorded_utc'=>gmdate('c')];
+-            self::storeState($state); // Titles staged only. Existing plan owner not invoked.
++            if(!empty($batch['title_only']))self::storeSeoDecisionsIfUnchanged($beforeState,$state);
++            else self::storeState($state); // Historical active batch; no new decision owner.
++            // Titles staged only. Existing plan owner not invoked.
+             wp_safe_redirect(admin_url('admin.php?page=portal-seo-topic-engine-review&pste_mini_imported=1'));exit;
+         } catch(Throwable $e){self::fail($e);}
+     }
+@@ -1157,7 +1229,7 @@
+      * completeness, and that no two writes reserve the same slot.
+      * No similarity calculation or title quality judgement.
+      */
+-    public static function acceptSingleOwnerSeoDecisions(array $state,array $document,array $snapshot): array {
++    public static function acceptSingleOwnerSeoDecisions(array $state,array $document,array $snapshot,array $sourceRows=[]): array {
+         if(($document['contract']??'')!=='PSTE_MINI_SEO_DECISIONS_V1'
+             ||!is_array($document['items']??null)||!array_is_list($document['items']))
+             throw new RuntimeException('PSTE_MINI_SEO_WRONG_DOCUMENT');
+@@ -1230,16 +1302,21 @@
+                 unset($state['seo_decisions'][$key]);
+                 continue;
+             }
+-            if($key===''||!is_array($completed[$key]??null)){
+-                // Unknown/malformed row is not an authorized source. Other rows proceed.
+-                $clarification[$key!==''?$key:'UNKNOWN_ROW_'.count($seen)]=[
+-                    'pool_key'=>$key,'reason_code'=>'SEO_UNKNOWN_OR_DUPLICATE_SOURCE',
++            if($key===''){
++                $clarification['UNKNOWN_ROW_'.count($seen)]=[
++                    'pool_key'=>'','reason_code'=>'SEO_UNKNOWN_SOURCE',
+                     'next_action'=>'REVIEW_BY_SAME_EXTERNAL_SEO_OWNER'];
+                 continue;
+             }
+             $seen[$key]=true;
+-            $saved=$completed[$key];$raw=(string)($saved['raw_query']??'');
+-            if($raw===''||($saved['decision']??'')!=='JA'
++            $hasTitle=is_array($completed[$key]??null);
++            $saved=$hasTitle?$completed[$key]:null;
++            $source=(array)($sourceRows[$key]??[]);
++            $sourcePayload=json_decode((string)($source['payload_json']??''),true);
++            $raw=$hasTitle?(string)($saved['raw_query']??''):
++                (is_array($sourcePayload)?PSTE_Editorializer::sourceQuery($sourcePayload):'');
++            if($raw===''||($hasTitle&&($saved['decision']??'')!=='JA')
++                ||(!$hasTitle&&((string)($source['pool_key']??'')!==$key||(int)($source['id']??0)<=0))
+                 ||!hash_equals($raw,(string)($item['raw_query']??''))
+                 ||!hash_equals(hash('sha256',$key.'|'.$raw),(string)($item['source_sha256']??''))){
+                 $clarification[$key]=['pool_key'=>$key,
+@@ -1252,11 +1329,12 @@
+             if(!in_array($box,['FREI','BELEGT','KLAERUNG'],true)){
+                 $box='KLAERUNG';$item['reason']='EDITORIAL_OUTCOME_MISSING';
+             }
+-            $selected=(string)($saved['titles'][0]['title']??'');
++            $selected=$hasTitle?(string)($saved['titles'][0]['title']??''):'';
+             $intent=(string)($item['intent_summary']??'');
+             $slot=(string)($item['intent_slot']??'');
+             $match=(string)($item['matched_ref']??'');
+-            if($box==='FREI'&&($selected===''||($item['approved_title']??'')!==$selected
++            if($box==='FREI'&&(($hasTitle&&($selected===''||($item['approved_title']??'')!==$selected))
++                ||(!$hasTitle&&trim((string)($item['approved_title']??''))!=='')
+                 ||trim($intent)===''||!preg_match('/^[a-f0-9]{64}$/D',$slot)
+                 ||isset($occupiedPlanSlots[$slot])
+                 ||(isset($reserved[$slot])&&$reserved[$slot]!==$key))){
