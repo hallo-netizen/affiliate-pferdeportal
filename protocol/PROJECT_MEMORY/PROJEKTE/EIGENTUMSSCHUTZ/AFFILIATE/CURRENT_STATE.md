@@ -1,3 +1,16 @@
+## 13.11.2026 – RC37 geprüft und veröffentlicht: GENAUEN ABLEHNUNGSGRUND DER ECHTEN 80 BANNER LESEN
+
+- **Realer Ausgangsstand nach RC36:** 160 Tarifcheck-Banner; 40 veröffentlicht, 40 mit gespeichertem Ausgabeblocker (vorwiegend Designslot/Format), 80 ohne gespeicherte fachliche Zielkarte. Screenshot vom Nutzer.
+- **Nachgewiesener Fehler der Diagnose:** `hab_rc34_tarifcheck_report()` unterscheidet bei `ziel_fehlt` nur `topic_targets` (kein mapped-Eintrag). Die Fachentscheidung `hb_rc31_insurance_banner_plan()` liefert aber selbst einen konkreten Ablehnungsgrund, der zuvor nicht gespeichert/angezeigt wurde. Daher kann „Ziel fehlt“ nicht als „Quelle liefert keine Zielinformation“ ausgelegt werden.
+- **RC37 (0.1.34-rc37)** schreibt im bestehenden **einen** Import-Zuordnungsweg bei Tarifcheck/Hab die ursprüngliche Begründung in das **bestehende** Datensatz-`payload`; dieselbe bisherige DB-Aktualisierung, kein neuer Worker, keine neue Tabelle, keine zusätzliche Klassifizierung. Alle übrigen Regeln aus RC36 einschließlich Ziel-/Format-/Sicherheitsblockern bleiben vollständig unverändert.
+- Der bestehende WordPress-Bericht liest ausschließlich gespeicherte Gründe und zeigt **aggregiert** (a) alle echten Gründe der 80 fehlenden Zuordnungen, (b) Typ der gesicherten Linkquelle, (c) Bildmaße der 40 blockierten Ausgaben. Partnerlinks, Affiliate-IDs und Original-HTML werden nicht ausgegeben. Keine zusätzliche Zielentscheidung im Bericht.
+- **Lokaler Beweis:** Original-PHP aus vollständiger ZIP wurde mit simulierten Daten getestet: unmapped banner liefert genau den im einzigen Importpfad bestimmten Grund; keine erfundene Kategorie, Original-URL unverändert, 65 Originals im 60er-Batch; alle 25 PHP-Dateien, RC23–RC36, Idealo/eBay/Amazon und Format-/Frontendregressionen bestanden.
+- GitHub Actions **SUCCESS**: https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43482859713.
+- Release: https://github.com/hallo-netizen/affiliate-pferdeportal/releases/tag/hab-affiliate-rc37-original-rejection-reasons-20261113 ; ZIP `HAB_Bewahr_Affiliate_RC37_BEWEIS.zip`, 2.353.312 Bytes, SHA256 `1270b6a5c384c701f0c7f3487fc0770e1283aba8a04db787b76377f186fa099e`.
+- **Nächster einziger Website-Schritt:** RC37 als vorhandene HAB-004 Affiliate-Zentrale aktualisieren; WordPress → Affiliate-Zentrale → „Werbemittel & Ausspielung“ **dreimal** öffnen, sodass alle 160 vorhandenen Originale einmal den Grund speichern. Dann Screenshot mit neuer gruppierter Ursachenliste. Erst daraus Ursache je Gruppe beweisen, nicht aus 40/40/80 allein. Nicht erneut importieren, keine Live-Format-/Freigabeänderung, kein weiteres Plugin bis echte Gründe ausgewertet.
+
+---
+
 ## 13.11.2026, 18:11 MEZ – RC36 ECHTE WEBSITE-ABNAHME: TEILWEISE ERFOLG, KEINE VOLLSTAENDIGE AUSGABE
 
 Nutzer-Screenshot aus Hab & Bewahr → Affiliate-Zentrale → Werbemittel & Ausspielung, Stand Anzeige 13.11.2026 17:11 (internes WP-Anzeige-Uhrzeitfeld):
