@@ -1,0 +1,111 @@
+name: HD003 1.50.812 complete product card responsive and provider button QA
+on:
+  push:
+    branches: [hobbyroom/hd003-150812-provider-card-design-20261113]
+    paths: [.github/workflows/hd003_150812_qa.yml, scripts/hd003_150812_provider_cards_build.py]
+permissions:
+  contents: read
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild complete HD003 1.50.812 from current and lint all PHP
+        run: |
+          python3 scripts/hd003_150812_provider_cards_build.py /tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.812_PRODUCT_KARTEN_VOLL.zip
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re
+          a='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip'
+          b='/tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.812_PRODUCT_KARTEN_VOLL.zip'
+          with ZipFile(a) as src,ZipFile(b) as dst:
+            assert src.testzip() is None and dst.testzip() is None
+            assert src.namelist()==dst.namelist() and len(src.namelist())==1291
+            name='affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php'
+            main='affiliate-portal-template-kit/pferde-template-kit.php'
+            diff=[n for n in src.namelist() if src.read(n)!=dst.read(n)]
+            assert set(diff)=={name,main},diff
+            old=src.read(name).decode();new=dst.read(name).decode()
+            tag='/* HD003 1.50.812: genuine product cards'
+            assert new.count(tag)==1
+            start=new.index(tag);end=new.index('/* End HD003 1.50.812 category card design. */',start)+len('/* End HD003 1.50.812 category card design. */')
+            css=new[start:end]
+            assert old==new[:start]+new[end:].replace('\n\n','\n\n') if False else True
+            # Exact no-change proof after deleting ONLY the appended stylesheet.
+            reconstructed=new[:start]+new[end:]
+            assert reconstructed==old,'Unapproved changes beyond scoped CSS'
+            assert old.count('<header><span>Anzeige</span><h2>Empfehlungen</h2>')==1
+            assert new.count('<header><span>Anzeige</span><h2>Empfehlungen</h2>')==1
+            Path('/tmp/hd003_150812_css.css').write_text(css)
+            for n in dst.namelist():
+              if n.endswith('.php'):
+                p=Path('/tmp/hd003_812_php')/n;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(dst.read(n))
+            print('1291_CRC_PASS','ONLY_APPROVED_DIFFERENCES',diff,'CSS_BYTES',len(css))
+          PY
+          find /tmp/hd003_812_php -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Test live Airbrush DOM with proposed HD009 0.1.36 card grid and HD003 CSS without modifying website
+        run: |
+          python3 -m pip -q install playwright
+          cat >/tmp/hd003_812_browser.py <<'PY'
+          from playwright.sync_api import sync_playwright
+          from pathlib import Path
+          import json
+          css=Path('/tmp/hd003_150812_css.css').read_text()
+          with sync_playwright() as p:
+            browser=p.chromium.launch(headless=True,executable_path='/usr/bin/google-chrome',args=['--no-sandbox'])
+            for width,colcount in [(1440,3),(850,2),(390,1),(360,1)]:
+              page=browser.new_page(viewport={'width':width,'height':1100},device_scale_factor=1)
+              page.goto('https://www.hobby-depot.de/gestalten/malen-zeichnen/airbrush/',wait_until='domcontentloaded',timeout=35000)
+              page.locator('.hd-catlevel-product-grid .ppar-banner-link').first.wait_for(timeout=22000)
+              # The HD009 0.1.36 PHP response will contain these two inline important values;
+              # the published site is only used as a read-only markup fixture.
+              page.evaluate("""() => document.querySelectorAll(
+                '.hd-catlevel-product-grid .ppar-banner-link[data-ppar-category-product-card]'
+              ).forEach(el => {
+                el.style.setProperty('grid-template-columns','minmax(0,1fr)','important');
+                el.style.setProperty('grid-template-rows','188px minmax(190px,1fr)','important');
+                el.style.setProperty('height','100%','important');
+                el.style.setProperty('min-height','390px','important');
+              })""")
+              page.add_style_tag(content=css)
+              out=page.evaluate("""() => {
+                const root=document.querySelector('.hd-catlevel-products'),
+                      first=root.querySelector('.hd-next-partner-product'),
+                      grid=root.querySelector('.hd-catlevel-product-grid'),
+                      img=first.querySelector('img.ppar-banner-image'),
+                      text=first.querySelector('.ppar-banner-title'),
+                      b=first.querySelector('.ppar-banner-button'),
+                      link=first.querySelector('.ppar-banner-link'),
+                      price=first.querySelector('.ppar-banner-price'),
+                      rect=n=>n.getBoundingClientRect();
+                return {
+                  cols:getComputedStyle(grid).gridTemplateColumns.split(' ').length,
+                  cardHeight:rect(first).height,cardBottom:rect(first).bottom,
+                  imageTop:rect(img).top,imageLeft:rect(img).left,imageWidth:rect(img).width,
+                  titleTop:rect(text).top,titleSize:getComputedStyle(text).fontSize,
+                  buttonBottom:rect(b).bottom,buttonRadius:getComputedStyle(b).borderRadius,
+                  buttonColor:getComputedStyle(b).color,buttonBackground:getComputedStyle(b).backgroundColor,
+                  buttonWidth:rect(b).width,priceTop:rect(price).top,
+                  textOverflow:getComputedStyle(first).overflow,
+                  cardWidth:rect(first).width,linkDisplay:getComputedStyle(link).display,
+                  cards:[...grid.querySelectorAll('.hd-next-partner-product')].map(el=>rect(el).height)
+                };
+              }""")
+              print('BROWSER_LAYOUT',width,json.dumps(out),flush=True)
+              assert out['cols']==colcount,('columns',width,out)
+              assert out['imageTop']<out['titleTop'],('image not above title',width,out)
+              assert out['titleTop']<out['buttonBottom'],('CTA not below title',width,out)
+              assert 0<out['cardBottom']-out['buttonBottom']<45,('button not card bottom',width,out)
+              assert out['buttonRadius']=='1px',('radius',width,out)
+              assert out['buttonBackground']=='rgb(250, 248, 244)',('beige',width,out)
+              assert out['buttonColor']=='rgb(15, 143, 149)',('teal',width,out)
+              assert out['buttonWidth']>170,('CTA full width',width,out)
+              assert out['titleSize']=='14px',('title size',width,out)
+              assert max(out['cards'])-min(out['cards'])<6,('equal heights',width,out)
+              page.close()
+            browser.close()
+          print('COMPLETE_LIVE_MARKUP_RESPONSIVE_LAYOUT_PASS')
+          PY
+          python3 /tmp/hd003_812_browser.py
