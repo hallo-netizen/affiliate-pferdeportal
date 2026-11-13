@@ -1,3 +1,17 @@
+## 13.11.2026 – RC33 SINGLE-AUTHORITY ROOTFIX / NEUESTE GEPRÜFTE VERSION
+
+**HAB-004 0.1.30-rc33**: vollständiges installierbares `HAB_Bewahr_Affiliate_RC33_TEST.zip`, 2.348.400 Bytes, SHA256 `b07f9dbde9267bbfa9764e36ed92787d52c96881e306e0409784e5a1ca83f51a`. GitHub Release `hab-affiliate-rc33-one-authoritative-banner-decision-20261113`; **Actions 43447823048 + zusätzliche tatsächliche PHP-Aktivierungsprüfung 43448625395 beide SUCCESS**. Die gesamte Historie RC23–RC33, alle 25 PHP-Dateien, komplette PHP-Kampagnenerzeugung, echte Zielkartenweitergabe und vorhandene eBay-/Idealo-Tests bestanden.
+
+**Ursache, nicht nur Symptom:** Unter den bisherigen Tarifcheck-Regeln gab es bei ein und demselben Versicherungsbanner mehrere fachliche Besitzer: eine Klassifikation beim Import, einen **zweiten, Pfadunterziele wegschreibenden** Werbemittel-Speicher, eine weitere Partner-/Namensprüfung zur Anzeige und eine zusätzliche Namensrangregel für allgemeine Versicherungen. Jetzt entscheidet die vorhandene Klassifikation **genau EINMAL**; alle weiteren Schritte verwenden nur ihren gespeicherten Beleg und die exakten R3-/Endkategorie-Ziele. Die zweite und dritte fachliche Entscheidung entfernt, der zweite Schreiber für diese Versicherungsbanner abgeschaltet; Schutzprüfung auf verifizierte Bilder/Trackinglinks/Format/Veto bleibt. Alte breite Versicherungszuordnungen gesperrt, sichere Re-Zuordnung vorhandener Originale beim Aufruf des bestehenden Affiliate-Backends in 60er-Gruppen; **kein Reimport**.
+
+**Livebeleg:** Versicherungsseiten Hausrat und Motorrad zeigen vor RC33 nur bereits gerenderten internen Ersatzhinweis, keine externe Tarifcheck-Ausgabe (Design-Rahmen funktioniert); Wassermelder drei Produkte. Erst nach RC33-Installation kann die echte gespeicherte Tarifcheck-Ausgabe überprüft werden. **RC33 noch NICHT installiert / Live-Abnahme offen.** Nutzer darf **keine** Banner neu eingeben. Zwei Besuche der Affiliate-Zentrale, dann Hausrat-/Motorrad-Frontendkontrolle.
+
+**Unternehmensübergreifender Audit:** Dieselben zwei `topic_targets`-Schreiber auch im Quellstand Pferde Atelier und Hobby Depot nachgewiesen (einer mit, anderer ohne `path_target_keys`). Ein tatsächlich sichtbarer Fehler auf diesen Portalen ist damit **nicht bewiesen**; beide bleiben bewusst unangetastet, weil funktionierende Portale nicht blind geändert werden. Dieser strukturelle generische Doppel-Schreibweg ist noch **separat und regressiongesichert zu vereinheitlichen**, kein falscher Abschlussanspruch. RC32-Zwischenentwurf bleibt unreleased und ist durch RC33-Wurzelfix ersetzt.
+
+Vollständiger Testbericht und Unternehmensprüfung: `AFFILIATE/RC33_ONE_DECISION/ABNAHME_RC33_20261113.md`.
+
+---
+
 ## 13.11.2026 – RC31: TARIFCHECK INSURANCE NUR IM VERIFIZIERTEN ZWEIG, ALLE UNTEREBENEN
 
 **Neueste vollständig getestete HAB-004-Test-ZIP:** `HAB_Bewahr_Affiliate_RC31_TEST.zip`, Version **0.1.28-rc31**. Release `hab-affiliate-rc31-insurance-branch-cascade-20261113`. GitHub Actions **43439019366 SUCCESS**, vollständige RC23–RC31-Kette, 25 PHP-Lints, produktive Zuordnungsmethoden mit Hausrat/Motorrad/generischer Versicherung und tatsächlicher Endkategorie erfolgreich simuliert; bestehende Produktkarten / Händlerfunktionen bleiben unverändert.
