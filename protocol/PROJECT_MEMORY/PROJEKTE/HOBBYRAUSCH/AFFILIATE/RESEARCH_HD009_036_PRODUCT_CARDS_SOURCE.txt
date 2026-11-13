@@ -1,0 +1,851 @@
+=== HD009MAIN category_product_shared_rank_base:4586-4693 ===
+4586     private function category_product_shared_rank_base($context) {
+4587         if (!$this->ranked_campaigns_request_cache_allowed()) { return null; }
+4588         $context = is_array($context) ? $context : array();
+4589         if (!empty($context['exact_product_identifiers'])) { return null; }
+4590 
+4591         $cache_context = $context;
+4592         unset($cache_context['slot_type'], $cache_context['banner_distribution_position']);
+4593         $cache_key = hash('sha256', serialize($cache_context));
+4594         if (array_key_exists($cache_key, $this->category_product_shared_rank_base_request_cache)) {
+4595             return $this->category_product_shared_rank_base_request_cache[$cache_key];
+4596         }
+4597         $this->category_product_shared_rank_base_build_count++;
+4598 
+4599         $slot_type = 'category_product_1';
+4600         $rank_context = $context;
+4601         $rank_context['slot_type'] = $slot_type;
+4602         $rank_context['_ppar_norm_primary_slug'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($context['primary_slug'] ?? ''));
+4603         $rank_context['_ppar_norm_post_type'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($context['post_type'] ?? ''));
+4604         $rank_context['_ppar_norm_ancestor_ids'] = isset($context['ancestor_ids']) && is_array($context['ancestor_ids']) ? array_map('intval', $context['ancestor_ids']) : array();
+4605         $rank_context['_ppar_norm_slugs'] = isset($context['slugs']) && is_array($context['slugs']) ? array_map(array($this, 'ranked_campaign_sanitize_key_request_cached'), $context['slugs']) : array();
+4606         $rank_context['_ppar_norm_term_ids'] = isset($context['term_ids']) && is_array($context['term_ids']) ? array_map('intval', $context['term_ids']) : array();
+4607         $rank_context['_ppar_norm_direct_term_slugs'] = isset($context['direct_term_slugs']) && is_array($context['direct_term_slugs']) ? array_values(array_filter(array_map(array($this, 'ranked_campaign_sanitize_key_request_cached'), $context['direct_term_slugs']))) : array();
+4608         $rank_context['_ppar_norm_semantic_primary_target_key'] = method_exists($this, 'automation_normalize_target_key') ? $this->automation_normalize_target_key((string) ($context['semantic_primary_target_key'] ?? '')) : '';
+4609         $rank_context['_ppar_norm_semantic_ancestor_target_keys'] = method_exists($this, 'automation_normalize_target_key') ? array_values(array_filter(array_map(array($this, 'automation_normalize_target_key'), (array) ($context['semantic_ancestor_target_keys'] ?? array())))) : array();
+4610         $rank_context['_ppar_norm_product_family_slug'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($context['product_family_slug'] ?? ''));
+4611 
+4612         $posts = $this->ranked_campaign_posts_snapshot();
+4613         $index = $this->ranked_campaign_candidate_index('placement');
+4614         $positions = array();
+4615         foreach (array('category_product_1','category_product_2','category_product_3','category_product','*') as $placement) {
+4616             foreach ((array) ($index['product_by_placement'][$placement] ?? array()) as $position => $_true) {
+4617                 $positions[(int) $position] = true;
+4618             }
+4619         }
+4620         if (!$positions) {
+4621             return $this->category_product_shared_rank_base_request_cache[$cache_key] = array();
+4622         }
+4623         ksort($positions, SORT_NUMERIC);
+4624 
+4625         $raw_records = $this->ranked_campaign_raw_records_snapshot();
+4626         $candidates = array();
+4627         foreach (array_keys($positions) as $position) {
+4628             $position = (int) $position;
+4629             if (!isset($posts[$position]) || !is_object($posts[$position])) { continue; }
+4630 
+4631             $record = isset($raw_records[$position]) && is_array($raw_records[$position]) ? $raw_records[$position] : array();
+4632             $stored = isset($record['stored']) && is_array($record['stored']) ? $record['stored'] : array();
+4633             $raw_targets = $this->ranked_campaign_raw_target_keys($position, $stored);
+4634             if ($raw_targets) {
+4635                 $target_probe = array('automation_target_keys'=>$raw_targets);
+4636                 $automation_rank = method_exists($this, 'automation_campaign_exact_target_rank')
+4637                     ? $this->automation_campaign_exact_target_rank($target_probe, $rank_context)
+4638                     : null;
+4639                 $fill_post_type = (string) $rank_context['_ppar_norm_post_type'];
+4640                 if (!$automation_rank && !in_array($fill_post_type, array('uge_term','post','uge_group_archive'), true)) {
+4641                     continue;
+4642                 }
+4643             }
+4644 
+4645             $campaign = $this->ranked_campaign_from_post_cached($posts[$position]);
+4646             if (!is_array($campaign)) { continue; }
+4647             if (!$this->hd_idealo_product_targets_exact_hobby_page($campaign, $rank_context, $slot_type)) {
+4648                 continue;
+4649             }
+4650             $runtime_campaign = $campaign;
+4651             $runtime_campaign['_ppar_runtime_normalized_slot_type'] = 1;
+4652             if (empty($runtime_campaign['_ppar_runtime_normalized'])) {
+4653                 $runtime_campaign['_ppar_runtime_normalized'] = 1;
+4654                 $runtime_campaign['_ppar_norm_id'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['id'] ?? ''));
+4655                 $runtime_campaign['_ppar_norm_network'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['network'] ?? 'manual'));
+4656                 $runtime_campaign['_ppar_norm_creative_type'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['creative_type'] ?? 'banner'));
+4657                 $runtime_campaign['_ppar_norm_render_mode'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['render_mode'] ?? 'image_link'));
+4658                 $runtime_campaign['_ppar_norm_programme_status'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['programme_status'] ?? 'unknown'));
+4659                 $runtime_campaign['_ppar_norm_assignment_mode'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['assignment_mode'] ?? 'page_tree'));
+4660             }
+4661 
+4662             $active_allowed = !empty($runtime_campaign['active']) || $this->category_product_incident_inactive_auto_allowed($runtime_campaign, $slot_type);
+4663             if (!$active_allowed
+4664                 || !$this->campaign_is_complete($runtime_campaign)
+4665                 || !$this->rule_is_current($runtime_campaign)
+4666                 || !$this->campaign_program_allows_delivery($runtime_campaign)
+4667                 || !$this->otto_awin_product_campaign_seller_ready($runtime_campaign)
+4668                 || (string) $runtime_campaign['_ppar_norm_creative_type'] !== 'product') {
+4669                 continue;
+4670             }
+4671 
+4672             $rank = $this->campaign_match_rank($runtime_campaign, $rank_context);
+4673             if (!$rank) { continue; }
+4674 
+4675             $candidates[] = array(
+4676                 'campaign' => $campaign,
+4677                 'specificity' => (int) $rank['specificity'],
+4678                 'matches' => (int) $rank['matches'],
+4679                 'priority' => (int) ($campaign['priority'] ?? 0),
+4680                 'reason' => (string) $rank['reason'],
+4681             );
+4682         }
+4683 
+4684         usort($candidates, function($a, $b) {
+4685             foreach (array('specificity','matches') as $key) {
+4686                 if ($a[$key] !== $b[$key]) { return ($a[$key] > $b[$key]) ? -1 : 1; }
+4687             }
+4688             if ($a['priority'] !== $b['priority']) { return ($a['priority'] > $b['priority']) ? -1 : 1; }
+4689             return strcmp((string) ($a['campaign']['id'] ?? ''), (string) ($b['campaign']['id'] ?? ''));
+4690         });
+4691         return $this->category_product_shared_rank_base_request_cache[$cache_key] = array_values($candidates);
+4692     }
+4693 
+=== HD009MAIN campaign_match_rank:4185-4354 ===
+4185     private function campaign_match_rank($campaign, $context) {
+4186         $mode = isset($campaign['_ppar_norm_assignment_mode']) ? (string) $campaign['_ppar_norm_assignment_mode'] : sanitize_key((string) ($campaign['assignment_mode'] ?? 'page_tree'));
+4187         $post_id = isset($context['post_id']) ? (int) $context['post_id'] : 0;
+4188         $ancestors = isset($context['_ppar_norm_ancestor_ids']) && is_array($context['_ppar_norm_ancestor_ids']) ? $context['_ppar_norm_ancestor_ids'] : (isset($context['ancestor_ids']) && is_array($context['ancestor_ids']) ? array_map('intval', $context['ancestor_ids']) : array());
+4189         $slugs = isset($context['_ppar_norm_slugs']) && is_array($context['_ppar_norm_slugs']) ? $context['_ppar_norm_slugs'] : (isset($context['slugs']) && is_array($context['slugs']) ? array_map('sanitize_key', $context['slugs']) : array());
+4190         $term_ids = isset($context['_ppar_norm_term_ids']) && is_array($context['_ppar_norm_term_ids']) ? $context['_ppar_norm_term_ids'] : (isset($context['term_ids']) && is_array($context['term_ids']) ? array_map('intval', $context['term_ids']) : array());
+4191         $haystack = strtolower((string) ($context['haystack'] ?? ''));
+4192         $page_id = isset($campaign['page_id']) ? (int) $campaign['page_id'] : 0;
+4193         $slot_type = sanitize_key((string) ($context['slot_type'] ?? ''));
+4194         $required_creative_type = $this->slot_required_creative_type($slot_type);
+4195         $context_post_type = isset($context['_ppar_norm_post_type'])
+4196             ? (string) $context['_ppar_norm_post_type']
+4197             : sanitize_key((string) ($context['post_type'] ?? ''));
+4198         $glossary_single_banner = $required_creative_type === 'banner'
+4199             && $context_post_type === 'uge_term'
+4200             && in_array($slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
+4201 
+4202         // Eine gespeicherte exakte Zielkante ist auf jeder Ebene bindend.
+4203         $automation_rank = null;
+4204         if (!empty($campaign['automation_target_keys']) && method_exists($this, 'automation_campaign_exact_target_rank')) {
+4205             $automation_rank = $this->automation_campaign_exact_target_rank($campaign, $context);
+4206             if ($required_creative_type === 'banner' && is_array($automation_rank)
+4207                 && (int) ($automation_rank['specificity'] ?? 0) >= 500) {
+4208                 return $automation_rank;
+4209             }
+4210         }
+4211 
+4212         // KISS: Ein spezifisch zugeordneter Creative-Library-Banner bleibt
+4213         // strikt in seiner gespeicherten Ziel-/Pfadkarte. Der ausdrücklich
+4214         // allgemeine Bestand ist dagegen der vertragliche Fallback-Pool.
+4215         $library_banner = $required_creative_type === 'banner'
+4216             && sanitize_key((string)($campaign['source']??'')) === 'output_object_v4';
+4217         if ($library_banner) {
+4218             if (is_array($automation_rank)) { return $automation_rank; }
+4219             if ($mode === 'fallback') {
+4220                 return array('specificity'=>5,'matches'=>0,'reason'=>'Allgemeiner aktiver Bannerbestand nach fehlendem spezifischem Treffer.');
+4221             }
+4222             // KISS 6.72.207 Glossar: dieselbe Bannerregel wie ueberall.
+4223             // Kein exakter gespeicherter Treffer bedeutet NICHT "kein Banner".
+4224             // Glossar darf weiter durch die normale Themenrangfolge laufen und
+4225             // endet ohne Themenbezug im bereits vorhandenen globalen freien
+4226             // technischen Banner-Fallback (specificity 5).
+4227             if (!$glossary_single_banner) {
+4228                 return null;
+4229             }
+4230         }
+4231 
+4232 
+4233         $destination_rank = $this->banner_destination_semantic_rank($campaign, $context);
+4234         if (is_array($destination_rank) && (int) ($destination_rank['specificity'] ?? 0) >= 500) { return $destination_rank; }
+4235         $runtime_page_topic_rank = $this->banner_runtime_page_topic_rank($campaign, $context);
+4236         if (is_array($runtime_page_topic_rank) && (int) ($runtime_page_topic_rank['specificity'] ?? 0) >= 500) { return $runtime_page_topic_rank; }
+4237 
+4238         if (!empty($campaign['automation_target_keys']) && method_exists($this, 'automation_campaign_exact_target_rank')) {
+4239             // automation_rank wurde oben bereits genau einmal bestimmt. Kein
+4240             // zweiter Cache-/Resolver-Aufruf bei einem echten Nichttreffer.
+4241             // Banner duerfen nach einer fehlenden exakten Zielkante immer
+4242             // in die naechste Stufe (Themenkreis/allgemeiner/technischer Fallback)
+4243             // weiterlaufen. Produkt-Creatives bleiben dagegen fail-closed.
+4244             $fill_post_type = isset($context['_ppar_norm_post_type']) ? (string)$context['_ppar_norm_post_type'] : sanitize_key((string) ($context['post_type'] ?? ''));
+4245             if ($required_creative_type !== 'banner'
+4246                 && !$automation_rank
+4247                 && !in_array($fill_post_type, array('uge_term','post','uge_group_archive'), true)) { return null; }
+4248         }
+4249 
+4250         $runtime_semantic_rank = $this->glossary_campaign_runtime_semantic_rank($campaign, $context);
+4251         if (is_array($runtime_semantic_rank) && (int) ($runtime_semantic_rank['specificity'] ?? 0) >= 500) { return $runtime_semantic_rank; }
+4252         $partner_exact_rank = $this->glossary_partner_inherited_exact_rank($campaign, $context);
+4253         if (is_array($partner_exact_rank) && (int) ($partner_exact_rank['specificity'] ?? 0) >= 500) { return $partner_exact_rank; }
+4254 
+4255         // Explizit direkt gebundene Seite ist ebenfalls exakte Stufe.
+4256         if ($mode === 'exact_page') {
+4257             return ($page_id > 0 && $post_id === $page_id)
+4258                 ? array('specificity' => 500, 'matches' => 1, 'reason' => 'Direkt ausgewählte Seite.')
+4259                 : null;
+4260         }
+4261         if ($mode === 'page_tree' && $page_id > 0 && $post_id === $page_id) {
+4262             return array('specificity' => 500, 'matches' => 1, 'reason' => 'Direkt ausgewählter Hub/Bereich.');
+4263         }
+4264 
+4265         // Kein exakter Treffer: vorhandene breitere Themenbeweise duerfen
+4266         // weiterhin gewinnen. Danach folgen unveraendert allgemeiner und
+4267         // technisch gueltiger Pflicht-Fallback.
+4268         if ($destination_rank) { return $destination_rank; }
+4269         if ($runtime_page_topic_rank) { return $runtime_page_topic_rank; }
+4270         if ($automation_rank) { return $automation_rank; }
+4271         if ($runtime_semantic_rank) { return $runtime_semantic_rank; }
+4272         if ($partner_exact_rank) { return $partner_exact_rank; }
+4273 
+4274         if ($mode === 'fallback') {
+4275             // V6.72.69: globale Banner-Hierarchie. Ein ausdrücklich allgemeiner
+4276             // Shop-/Portal-Fallback kommt nach exakten/breiten Themen-Treffern,
+4277             // aber vor dem letzten rein technischen Pflicht-Fallback.
+4278             return array('specificity' => 100, 'matches' => 1, 'reason' => 'Allgemeiner Shop-/Portal-Fallback.');
+4279         }
+4280         if ($mode === 'page_tree' || $mode === 'auto_topic') {
+4281             $auto_label = sanitize_text_field((string)($campaign['auto_topic_label'] ?? ''));
+4282             if ($page_id > 0 && $post_id === $page_id) {
+4283                 return array('specificity' => $mode === 'auto_topic' ? 480 : 500, 'matches' => 1, 'reason' => $mode === 'auto_topic' ? 'Automatisch erkannter Themenbereich „' . $auto_label . '“.' : 'Direkt ausgewählter Hub/Bereich.');
+4284             }
+4285             if ($page_id > 0 && !empty($campaign['match_descendants']) && in_array($page_id, $ancestors, true)) {
+4286                 if ($this->category_large_banner_slot((string) ($context['slot_type'] ?? ''))) {
+4287                     $distance_index = array_search($page_id, $ancestors, true);
+4288                     $distance = $distance_index === false ? count($ancestors) : ((int) $distance_index + 1);
+4289                     $specificity = max(401, 470 - (($distance - 1) * 20));
+4290                     return array('specificity'=>$specificity, 'matches'=>1, 'reason'=>'Passender uebergeordneter Themenbereich, Distanz ' . $distance . '.');
+4291                 }
+4292                 return array('specificity' => $mode === 'auto_topic' ? 430 : 450, 'matches' => 1, 'reason' => $mode === 'auto_topic' ? 'Unterseite des automatisch erkannten Themenbereichs „' . $auto_label . '“.' : 'Unterseite des ausgewählten Hubs/Bereichs.');
+4293             }
+4294         }
+4295 
+4296         $wanted_terms = isset($campaign['match_term_ids']) && is_array($campaign['match_term_ids']) ? array_map('intval', $campaign['match_term_ids']) : array();
+4297         $term_matches = count(array_intersect($wanted_terms, $term_ids));
+4298         if ($term_matches > 0) {
+4299             return array('specificity' => 400, 'matches' => $term_matches, 'reason' => 'Passende Kategorie oder Taxonomie.');
+4300         }
+4301 
+4302         // campaign_from_post() already normalizes match_slugs once when the immutable request snapshot is built.
+4303         $wanted_slugs = isset($campaign['match_slugs']) && is_array($campaign['match_slugs']) ? $campaign['match_slugs'] : array();
+4304         $slug_matches = count(array_intersect($wanted_slugs, $slugs));
+4305         if ($slug_matches > 0) {
+4306             return array('specificity' => 350, 'matches' => $slug_matches, 'reason' => 'Passender Seiten- oder Bereichs-Slug.');
+4307         }
+4308 
+4309         if ($mode === 'keywords') {
+4310             $keyword_matches = 0;
+4311             foreach ((array) ($campaign['match_keywords'] ?? array()) as $keyword) {
+4312                 $keyword = strtolower(trim((string) $keyword));
+4313                 if ($keyword !== '' && strpos($haystack, $keyword) !== false) {
+4314                     $keyword_matches++;
+4315                 }
+4316             }
+4317             if ($keyword_matches > 0) {
+4318                 return array('specificity' => 200, 'matches' => $keyword_matches, 'reason' => 'Passender definierter Themenbegriff.');
+4319             }
+4320         }
+4321 
+4322         // V6.72.69: eine globale Zuordnungsregel fuer alle Bannerplaetze:
+4323         // 1 fachlich exakt, 2 erweiterter Themenkreis, 3 allgemeiner Shop/Portal-
+4324         // Fallback (oben specificity 100), 4 letzter technisch gueltiger Banner.
+4325         // Die reale Slotmatrix bleibt dabei zwingend; ein ungeeignetes Format wird
+4326         // niemals durch die Pflichtstufe erzwungen.
+4327         if ($this->slot_required_creative_type((string)($context['slot_type'] ?? '')) === 'banner') {
+4328             return array('specificity'=>5,'matches'=>0,'reason'=>'Letzter globaler Banner-Fallback: technisch freigegeben, ohne Themenzwang.');
+4329         }
+4330 
+4331         // Bestehender Artikel-Produktweg: nur zuletzt, nach allen vorhandenen
+4332         // Themenstufen, automatisch verifizierte Angebote als generische
+4333         // Produktvorschlaege zulassen. Provider-Quelle, Veto, Health, Frische und
+4334         // Produktqualitaet werden weiterhin in den bestehenden Gates geprueft.
+4335         // Niemals fuer Kategorieslots, Exact-Productwissen oder manuelle Quelle.
+4336         if ($required_creative_type === 'product'
+4337             && $slot_type === 'post_bottom_products'
+4338             && $context_post_type === 'post'
+4339             && !empty($campaign['automation_target_keys'])
+4340             && sanitize_key((string)($campaign['quality_manual_status'] ?? '')) === 'auto_verified') {
+4341             $provider = sanitize_key((string)($campaign['network'] ?? ''));
+4342             $source = sanitize_key((string)($campaign['source'] ?? ''));
+4343             $verified_ebay = $provider === 'ebay' && $source === 'output_object_v4';
+4344             $verified_idealo = $provider === 'idealo'
+4345                 && $source === 'idealo_product_feed_v1'
+4346                 && sanitize_key((string)($campaign['product_identity_source'] ?? '')) === 'gtin'
+4347                 && !empty($campaign['product_gtins']);
+4348             if ($verified_ebay || $verified_idealo) {
+4349                 return array('specificity'=>200,'matches'=>0,
+4350                     'reason'=>'Letzte Artikelstufe: automatisch verifiziertes Produkt; öffentliche Freigabegates bleiben bindend.');
+4351             }
+4352         }
+4353         return null;
+4354     }
+=== HD009MAIN get_content_context:3166-3349 ===
+3166     private function get_content_context($post_id) {
+3167         $context_cache_allowed = $this->ranked_campaigns_request_cache_allowed();
+3168         $context_cache_key = (int) $post_id;
+3169         if ($context_cache_allowed && array_key_exists($context_cache_key, $this->content_context_request_cache)) {
+3170             return $this->content_context_request_cache[$context_cache_key];
+3171         }
+3172         $post_type = get_post_type($post_id);
+3173         $slugs = array();
+3174         $names = array();
+3175         $ancestor_ids = array();
+3176         $term_ids = array();
+3177         $direct_term_slugs = array();
+3178         $primary_slug = '';
+3179         $primary_name = '';
+3180         $semantic_primary_target_key = '';
+3181         $semantic_ancestor_target_keys = array();
+3182 
+3183         $title = (string) get_the_title($post_id);
+3184         $post_slug = (string) get_post_field('post_name', $post_id);
+3185         if ($post_slug !== '') {
+3186             $slugs[] = $post_slug;
+3187             $primary_slug = $post_slug;
+3188         }
+3189         if ($title !== '') {
+3190             $names[] = $title;
+3191             $primary_name = $title;
+3192         }
+3193 
+3194         if ($post_type === 'post') {
+3195             $terms = get_the_terms($post_id, 'category');
+3196             if (!is_wp_error($terms) && is_array($terms)) {
+3197                 foreach ($terms as $term) {
+3198                     $term_ids[] = (int) $term->term_id;
+3199                     $direct_term_slugs[] = (string) $term->slug;
+3200                     if ($primary_slug === '' || $primary_slug === $post_slug) {
+3201                         $primary_slug = (string) $term->slug;
+3202                         $primary_name = (string) $term->name;
+3203                     }
+3204                     $slugs[] = (string) $term->slug;
+3205                     $names[] = (string) $term->name;
+3206 
+3207                     $ancestors = get_ancestors($term->term_id, 'category');
+3208                     foreach ($ancestors as $ancestor_id) {
+3209                         $term_ids[] = (int) $ancestor_id;
+3210                         $ancestor = get_term($ancestor_id, 'category');
+3211                         if ($ancestor && !is_wp_error($ancestor)) {
+3212                             $slugs[] = (string) $ancestor->slug;
+3213                             $names[] = (string) $ancestor->name;
+3214                         }
+3215                     }
+3216                 }
+3217             }
+3218         }
+3219 
+3220         if ($post_type === 'hp_listing' && taxonomy_exists('hp_listing_category')) {
+3221             $terms = get_the_terms($post_id, 'hp_listing_category');
+3222             if (!is_wp_error($terms) && is_array($terms)) {
+3223                 foreach ($terms as $term) {
+3224                     $term_ids[] = (int) $term->term_id;
+3225                     $direct_term_slugs[] = (string) $term->slug;
+3226                     $slugs[] = (string) $term->slug;
+3227                     $names[] = (string) $term->name;
+3228                     if ($primary_slug === '' || $primary_slug === $post_slug) {
+3229                         $primary_slug = (string) $term->slug;
+3230                         $primary_name = (string) $term->name;
+3231                     }
+3232                     foreach ((array) get_ancestors($term->term_id, 'hp_listing_category') as $ancestor_id) {
+3233                         $term_ids[] = (int) $ancestor_id;
+3234                         $ancestor = get_term($ancestor_id, 'hp_listing_category');
+3235                         if ($ancestor && !is_wp_error($ancestor)) {
+3236                             $slugs[] = (string) $ancestor->slug;
+3237                             $names[] = (string) $ancestor->name;
+3238                         }
+3239                     }
+3240                 }
+3241             }
+3242         }
+3243 
+3244         if ($post_type === 'uge_term') {
+3245             // Glossar-Bedeutungshierarchie aus dem autoritativen UGE-Bestand:
+3246             // Themenwelt/Oberthema -> verwandte Begriffe -> passende Hauptseite.
+3247             // Die Hauptseite ist die staerkste bereits gepflegte Monetarisierungsachse;
+3248             // Themenwelt/Related erweitern nur den semantischen Kontext.
+3249             if (taxonomy_exists('uge_group')) {
+3250                 $terms = get_the_terms($post_id, 'uge_group');
+3251                 if (!is_wp_error($terms) && is_array($terms)) {
+3252                     foreach ($terms as $term) {
+3253                         $term_ids[] = (int) $term->term_id;
+3254                         $direct_term_slugs[] = (string) $term->slug;
+3255                         $slugs[] = (string) $term->slug;
+3256                         $names[] = (string) $term->name;
+3257                     }
+3258                 }
+3259             }
+3260             $related_raw = (string) get_post_meta($post_id, '_uge_related_slugs', true);
+3261             foreach (preg_split('/[\s,;]+/', $related_raw) as $related_slug) {
+3262                 $related_slug = sanitize_key((string) $related_slug);
+3263                 if ($related_slug !== '') { $slugs[] = $related_slug; }
+3264             }
+3265             $target_type = sanitize_key((string) get_post_meta($post_id, '_uge_primary_category_type', true));
+3266             $target_id = absint(get_post_meta($post_id, '_uge_primary_category_id', true));
+3267             if ($target_type === 'page' && $target_id > 0) {
+3268                 $target_slug = sanitize_key((string) get_post_field('post_name', $target_id));
+3269                 $target_name = (string) get_the_title($target_id);
+3270                 if ($target_slug !== '') {
+3271                     $semantic_primary_target_key = 'page:' . $target_slug;
+3272                     $slugs[] = $target_slug;
+3273                 }
+3274                 if ($target_name !== '') { $names[] = $target_name; }
+3275                 foreach ((array) get_post_ancestors($target_id) as $ancestor_id) {
+3276                     $ancestor_slug = sanitize_key((string) get_post_field('post_name', $ancestor_id));
+3277                     $ancestor_name = (string) get_the_title($ancestor_id);
+3278                     if ($ancestor_slug !== '') {
+3279                         $semantic_ancestor_target_keys[] = 'page:' . $ancestor_slug;
+3280                         $slugs[] = $ancestor_slug;
+3281                     }
+3282                     if ($ancestor_name !== '') { $names[] = $ancestor_name; }
+3283                 }
+3284             } elseif ($target_type === 'category' && $target_id > 0) {
+3285                 $target_term = get_term($target_id, 'category');
+3286                 if ($target_term && !is_wp_error($target_term)) {
+3287                     $target_slug = sanitize_key((string) $target_term->slug);
+3288                     if ($target_slug !== '') {
+3289                         $semantic_primary_target_key = 'category:' . $target_slug;
+3290                         $slugs[] = $target_slug;
+3291                     }
+3292                     $names[] = (string) $target_term->name;
+3293                     $term_ids[] = (int) $target_term->term_id;
+3294                     foreach ((array) get_ancestors($target_id, 'category') as $ancestor_id) {
+3295                         $ancestor = get_term($ancestor_id, 'category');
+3296                         if (!$ancestor || is_wp_error($ancestor)) { continue; }
+3297                         $ancestor_slug = sanitize_key((string) $ancestor->slug);
+3298                         if ($ancestor_slug !== '') {
+3299                             $semantic_ancestor_target_keys[] = 'category:' . $ancestor_slug;
+3300                             $slugs[] = $ancestor_slug;
+3301                         }
+3302                         $names[] = (string) $ancestor->name;
+3303                         $term_ids[] = (int) $ancestor->term_id;
+3304                     }
+3305                 }
+3306             }
+3307         }
+3308 
+3309 
+3310         if ($post_type === 'page') {
+3311             $ancestors = get_post_ancestors($post_id);
+3312             if (is_array($ancestors)) {
+3313                 $ancestor_ids = array_values(array_unique(array_map('intval', $ancestors)));
+3314                 foreach ($ancestors as $ancestor_id) {
+3315                     $ancestor_slug = (string) get_post_field('post_name', $ancestor_id);
+3316                     $ancestor_title = (string) get_the_title($ancestor_id);
+3317                     if ($ancestor_slug !== '') {
+3318                         $slugs[] = $ancestor_slug;
+3319                     }
+3320                     if ($ancestor_title !== '') {
+3321                         $names[] = $ancestor_title;
+3322                     }
+3323                 }
+3324             }
+3325         }
+3326 
+3327         $content = get_post_field('post_content', $post_id);
+3328         $haystack = strtolower(wp_strip_all_tags($title . ' ' . implode(' ', $slugs) . ' ' . implode(' ', $names) . ' ' . $content));
+3329 
+3330         $result = array(
+3331             'slugs' => array_values(array_unique(array_map('sanitize_key', $slugs))),
+3332             'names' => array_values(array_unique($names)),
+3333             'primary_slug' => sanitize_key($primary_slug),
+3334             'primary_name' => $primary_name,
+3335             'post_type' => $post_type,
+3336             'haystack' => $haystack,
+3337             'post_id' => (int) $post_id,
+3338             'ancestor_ids' => $ancestor_ids,
+3339             'term_ids' => array_values(array_unique(array_map('intval', $term_ids))),
+3340             'direct_term_slugs' => array_values(array_unique(array_map('sanitize_key', $direct_term_slugs))),
+3341             'semantic_primary_target_key' => sanitize_text_field($semantic_primary_target_key),
+3342             'semantic_ancestor_target_keys' => array_values(array_unique(array_filter(array_map('sanitize_text_field', $semantic_ancestor_target_keys)))),
+3343         );
+3344         if ($context_cache_allowed) {
+3345             $this->content_context_request_cache[$context_cache_key] = $result;
+3346         }
+3347         return $result;
+3348     }
+3349 
+=== HD009MAIN hd_idealo_product_targets_exact_hobby_page:4566-4585 ===
+4566     private function hd_idealo_product_targets_exact_hobby_page($campaign, $context, $slot_type) {
+4567         if (!preg_match('/^category_product_[123]$/', sanitize_key((string)$slot_type))) {
+4568             return true;
+4569         }
+4570         if (sanitize_key((string)($campaign['network']??'')) !== 'idealo'
+4571             || sanitize_key((string)($campaign['source']??'')) !== 'idealo_product_feed_v1') {
+4572             return true;
+4573         }
+4574         if (sanitize_key((string)($context['post_type']??'')) !== 'page') {
+4575             return true;
+4576         }
+4577         $slug=sanitize_title((string)($context['primary_slug']??''));
+4578         if ($slug==='') { return false; }
+4579         $target='page:'.$slug;
+4580         foreach ((array)($campaign['automation_target_keys']??array()) as $raw_key) {
+4581             if ((string)$raw_key===$target) { return true; }
+4582         }
+4583         return false;
+4584     }
+4585 
+=== HD009MAIN render_banner:2945-3090 ===
+2945     private function render_banner($banner, $post_id, $context, $group, $slot_type) {
+2946         // One public launch policy, including legacy/indirect rendering routes.
+2947         if (HDAR_Amazon_Start::launch_active() && !$this->hdar_launch_public_campaign_allowed($banner)) { return ''; }
+2948         $mode = isset($banner['mode']) ? sanitize_key($banner['mode']) : 'image_link';
+2949         $subid = $this->build_subid($post_id, $context, $group, $slot_type);
+2950         $replacements = array(
+2951             '{post_id}' => (string) $post_id,
+2952             '{category_slug}' => $context['primary_slug'],
+2953             '{category_name}' => $context['primary_name'],
+2954             '{group_id}' => $group['id'] ?? '',
+2955             '{slot}' => $slot_type,
+2956             '{subid}' => $subid,
+2957         );
+2958 
+2959         if ($mode === 'html') {
+2960             $raw = isset($banner['html']) ? (string) $banner['html'] : '';
+2961             $raw = strtr($raw, $replacements);
+2962             return $this->filter_allowed_banner_html($raw);
+2963         }
+2964 
+2965         $url = isset($banner['url']) ? strtr((string) $banner['url'], $replacements) : '';
+2966         $url = $this->apply_subid_to_url($url, $subid, $banner['subid_param'] ?? '');
+2967         if (method_exists($this, 'multiprovider_runtime_tracking_url')) { $url = $this->multiprovider_runtime_tracking_url($url, (string)($banner['network'] ?? '')); }
+2968         $image_url = isset($banner['image_url']) ? strtr((string) $banner['image_url'], $replacements) : '';
+2969         if (method_exists($this, 'multiprovider_runtime_image_url')) { $image_url = $this->multiprovider_runtime_image_url($image_url, (string)($banner['network'] ?? ''), absint($banner['campaign_post_id'] ?? 0)); }
+2970         $title = isset($banner['title']) ? strtr((string) $banner['title'], $replacements) : '';
+2971         $button = isset($banner['button_text']) ? strtr((string) $banner['button_text'], $replacements) : '';
+2972         $description = isset($banner['description']) ? strtr((string) $banner['description'], $replacements) : '';
+2973         $price = isset($banner['price']) ? trim(strtr((string)$banner['price'], $replacements)) : '';
+2974         $currency = isset($banner['currency']) ? strtoupper(substr(sanitize_text_field((string)$banner['currency']), 0, 3)) : 'EUR';
+2975         $availability = isset($banner['availability']) ? trim(strtr((string)$banner['availability'], $replacements)) : '';
+2976         $seller_name = isset($banner['seller_name']) ? trim(strtr((string)$banner['seller_name'], $replacements)) : '';
+2977         $creative_type = sanitize_key((string)($banner['creative_type'] ?? 'banner'));
+2978         $network = sanitize_key((string)($banner['network'] ?? ''));
+2979         $normalized_slot_type = sanitize_key((string)$slot_type);
+2980         // V6.72.176: Das Portal-Design baut eBay-BUSINESS-Produktkarten auf
+2981         // Hub-/Kategorie-Rastern nach DOMContentLoaded aus Bild, Titel, Preis und
+2982         // CTA neu auf. Der Beschreibungstext bleibt dabei absichtlich unsichtbar.
+2983         // Er bleibt vollstaendig im Kampagnen-/Quelldatensatz erhalten, wird aber
+2984         // nicht mehr als spaeter verworfener DOM-Text ausgeliefert.
+2985         if ($network === 'ebay'
+2986             && $creative_type === 'product'
+2987             && preg_match('/^(?:category|hub)_product_[123]$/', $normalized_slot_type)) {
+2988             $description = '';
+2989         }
+2990         $is_glossary_single_slot = in_array($normalized_slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
+2991         $is_classic_post_slot = sanitize_key((string)$slot_type) === 'post_inline_banner';
+2992         $uses_editorial_single_chrome = $is_glossary_single_slot || $is_classic_post_slot;
+2993         if ($uses_editorial_single_chrome) {
+2994             // Redaktionelle Einzeltypen verwenden denselben reduzierten Werbeblock:
+2995             // nur Creative + portaltypischer CTA; kein Bannername, Partner-/Gueltigkeits-
+2996             // oder sonstiger Creative-Text. Der Pflicht-Werbehinweis sitzt ausserhalb.
+2997             $title = '';
+2998             $description = '';
+2999             $button = 'Mehr erfahren';
+3000         }
+3001         $category_product_slot = (bool) preg_match('/^category_product_[123]$/', sanitize_key((string)$slot_type));
+3002         $category_product_wrap_attr = $category_product_slot
+3003             ? ' data-ppar-category-product-image-frame="150" style="box-sizing:border-box!important;display:flex!important;flex:0 0 150px!important;align-items:center!important;justify-content:center!important;width:150px!important;height:150px!important;min-width:150px!important;min-height:150px!important;max-width:150px!important;max-height:150px!important;margin:0 auto!important;padding:0!important;overflow:hidden!important;background:#fff!important;line-height:0!important"'
+3004             : '';
+3005         $category_product_image_attr = $category_product_slot
+3006             ? ' data-ppar-category-product-image-fit="contain" style="box-sizing:border-box!important;display:block!important;width:150px!important;height:150px!important;min-width:150px!important;min-height:150px!important;max-width:150px!important;max-height:150px!important;margin:0!important;padding:0!important;border-radius:0!important;object-fit:contain!important;object-position:center center!important"'
+3007             : '';
+3008 
+3009         if ($url === '') {
+3010             return '';
+3011         }
+3012 
+3013         $target = (($banner['target'] ?? '_blank') === '_self') ? '_self' : '_blank';
+3014         $rel = $target === '_blank' ? 'sponsored nofollow noopener noreferrer' : 'sponsored nofollow';
+3015         if ($this->overview_wide_banner_slot($slot_type)) {
+3016             if ($image_url === '' || !$this->overview_wide_banner_campaign_eligible($banner, $slot_type)) { return ''; }
+3017             list($overview_width, $overview_height) = $this->article_banner_dimensions($banner);
+3018             $overview_width = max(1, absint($overview_width));
+3019             $overview_height = max(1, absint($overview_height));
+3020             return '<a class="ppar-overview-wide-banner-link" href="' . esc_url($url) . '" target="' . esc_attr($target) . '" rel="' . esc_attr($rel) . '">' .
+3021                 '<img class="ppar-overview-wide-banner-image" src="' . esc_url($image_url) . '" alt="Werbebanner" width="' . $overview_width . '" height="' . $overview_height . '" loading="lazy" decoding="async">' .
+3022                 '</a>' .
+3023                 '<!--ppar-overview-cta-v67280-->' .
+3024                 '<div class="ppar-overview-wide-banner-cta-wrap"><a class="ppar-overview-wide-banner-cta" href="' . esc_url($url) . '" target="' . esc_attr($target) . '" rel="' . esc_attr($rel) . '">Mehr erfahren</a></div>';
+3025         }
+3026         if ($this->category_large_banner_slot($slot_type)) {
+3027             if (!$this->category_large_banner_campaign_eligible($banner, $slot_type) || $image_url === '') { return ''; }
+3028             list($banner_width, $banner_height) = $this->article_banner_dimensions($banner);
+3029             $banner_width = absint($banner_width);
+3030             $banner_height = absint($banner_height);
+3031             $large_rule = $this->category_large_banner_rule($slot_type);
+3032             $min_fill = isset($large_rule['min_fill']) ? (float)$large_rule['min_fill'] : 0.60;
+3033             $upscale_max = isset($large_rule['upscale_max']) ? (float)$large_rule['upscale_max'] : 1.00;
+3034             return '<a class="ppar-category-large-banner-link" data-ppar-large-banner="1" data-ppar-min-fill="' . esc_attr(number_format($min_fill, 2, '.', '')) . '" data-ppar-upscale-max="' . esc_attr(number_format($upscale_max, 2, '.', '')) . '" href="' . esc_url($url) . '" target="' . esc_attr($target) . '" rel="' . esc_attr($rel) . '">' .
+3035                 '<img class="ppar-category-large-banner-image" src="' . esc_url($image_url) . '" alt="' . esc_attr($title !== '' ? $title : 'Anzeige') . '" width="' . $banner_width . '" height="' . $banner_height . '" loading="lazy" decoding="async">' .
+3036                 '</a>';
+3037         }
+3038 
+3039         if ($uses_editorial_single_chrome) {
+3040             if ($image_url === '') { return ''; }
+3041             list($editorial_width, $editorial_height) = $this->article_banner_dimensions($banner);
+3042             $editorial_width = max(1, absint($editorial_width));
+3043             $editorial_height = max(1, absint($editorial_height));
+3044             $media = '<a class="ppar-glossary-banner-media-v67251" href="' . esc_url($url) . '" target="' . esc_attr($target) . '" rel="' . esc_attr($rel) . '">'
+3045                 . '<span class="ppar-banner-image-wrap"><img class="ppar-banner-image" src="' . esc_url($image_url) . '" alt="Anzeige" width="' . $editorial_width . '" height="' . $editorial_height . '" loading="lazy" decoding="async"></span></a>';
+3046             $cta = '<a class="ppar-glossary-banner-cta-v67251" href="' . esc_url($url) . '" target="' . esc_attr($target) . '" rel="' . esc_attr($rel) . '"><span class="ppar-banner-button">Mehr erfahren</span></a>';
+3047             return $media . '<!--ppar-glossary-cta-v67251-->' . $cta;
+3048         }
+3049 
+3050         $offers = array();
+3051         if ($creative_type === 'product' && $category_product_slot && method_exists($this, 'multiprovider_matching_offers_for_banner')) {
+3052             $offers = $this->multiprovider_matching_offers_for_banner($banner, $context, $slot_type);
+3053         }
+3054         $multi = count($offers) > 1;
+3055         $category_product_link_attr = $category_product_slot
+3056             ? ' data-ppar-category-product-card="1" style="box-sizing:border-box!important;display:grid!important;grid-template-rows:150px minmax(210px,1fr)!important;align-items:stretch!important;width:100%!important;height:auto!important;min-height:360px!important;max-height:none!important;overflow:hidden!important"'
+3057             : '';
+3058         $out = $multi
+3059             ? '<span class="ppar-banner-link ppar-banner-link--multi"' . $category_product_link_attr . '>'
+3060             : '<a class="ppar-banner-link"' . $category_product_link_attr . ' href="' . esc_url($url) . '" target="' . esc_attr($target) . '" rel="' . esc_attr($rel) . '">';
+3061         if ($image_url !== '') {
+3062             $out .= '<span class="ppar-banner-image-wrap"' . $category_product_wrap_attr . '><img class="ppar-banner-image"' . $category_product_image_attr . ' src="' . esc_url($image_url) . '" alt="' . esc_attr($title !== '' ? $title : $button) . '" width="150" height="150" loading="lazy" decoding="async"></span>';
+3063         }
+3064         if ($title !== '' || $description !== '' || $button !== '') {
+3065             $category_product_text_attr = $category_product_slot
+3066                 ? ' data-ppar-category-product-text="1" style="box-sizing:border-box!important;display:flex!important;flex:1 1 auto!important;flex-direction:column!important;align-items:stretch!important;width:100%!important;min-height:152px!important"'
+3067                 : '';
+3068             $out .= '<span class="ppar-banner-text"' . $category_product_text_attr . '>';
+3069             if ($title !== '') { $out .= '<strong class="ppar-banner-title">' . esc_html($title) . '</strong>'; }
+3070             if ($description !== '') { $out .= '<span class="ppar-banner-description">' . esc_html($description) . '</span>'; }
+3071             if ($creative_type === 'product' && ($price !== '' || $availability !== '')) {
+3072                 $out .= '<span class="ppar-banner-meta">';
+3073                 if ($price !== '') { $out .= '<strong class="ppar-banner-price">' . esc_html($price . ($currency !== '' ? ' ' . $currency : '')) . '</strong>'; }
+3074                 if ($availability !== '') { $out .= '<span class="ppar-banner-availability">' . esc_html($availability) . '</span>'; }
+3075                 $out .= '</span>';
+3076             }
+3077             if ($creative_type === 'product' && $seller_name !== '') {
+3078                 $out .= '<span class="ppar-banner-seller">Verkauf durch ' . esc_html($seller_name) . '</span>';
+3079             }
+3080             if ($multi && method_exists($this, 'multiprovider_render_offer_buttons')) {
+3081                 $out .= $this->multiprovider_render_offer_buttons($offers, 'banner');
+3082             } elseif ($button !== '') {
+3083                 $out .= '<span class="ppar-banner-button">' . esc_html($button) . '</span>';
+3084             }
+3085             $out .= '</span>';
+3086         }
+3087         $out .= $multi ? '</span>' : '</a>';
+3088         return $out;
+3089     }
+3090 
+=== HD009MAIN build_campaign_output:1365-1415 ===
+1365     private function build_campaign_output($campaign, $post_id, $context, $slot, $track_click = true) {
+1366         list($group, $banner) = $this->campaign_to_group_banner($campaign);
+1367         if (!$group || !$banner) {
+1368             return false;
+1369         }
+1370         $subid = $this->build_subid($post_id, $context, $group, $slot);
+1371         $replacements = array(
+1372             '{post_id}' => (string) $post_id,
+1373             '{category_slug}' => (string) ($context['primary_slug'] ?? ''),
+1374             '{category_name}' => (string) ($context['primary_name'] ?? ''),
+1375             '{group_id}' => (string) ($group['id'] ?? ''),
+1376             '{slot}' => $slot,
+1377             '{subid}' => $subid,
+1378         );
+1379         $destination = strtr((string) ($banner['url'] ?? ''), $replacements);
+1380         $destination = $this->apply_subid_to_url($destination, $subid, $banner['subid_param'] ?? '');
+1381         if (method_exists($this, 'multiprovider_runtime_tracking_url')) { $destination = $this->multiprovider_runtime_tracking_url($destination, (string)($campaign['network'] ?? '')); }
+1382         $image = strtr((string) ($banner['image_url'] ?? ''), $replacements);
+1383         if (method_exists($this, 'multiprovider_runtime_image_url')) { $image = $this->multiprovider_runtime_image_url($image, (string)($campaign['network'] ?? ''), absint($campaign['post_id'] ?? 0)); }
+1384         $title = strtr((string) ($banner['title'] ?? ''), $replacements);
+1385         $text = strtr((string) ($banner['description'] ?? ''), $replacements);
+1386         $button = strtr((string) ($banner['button_text'] ?? ''), $replacements);
+1387         $label = trim((string) ($banner['label'] ?? '')) ?: 'Anzeige';
+1388         // V2.2.4: Kachel-Slots sind verbindlich bildbasiert. Eine Kampagne ohne
+1389         // Bild darf dort nicht als Textkachel erscheinen. Sie gilt fuer diesen Slot
+1390         // als unvollstaendig; der Provider liefert anschliessend den zentralen
+1391         // bild-only Platzhalter. Andere Banner-/Content-Slots bleiben unveraendert.
+1392         $grid_slot = in_array((string) $slot, array('hub_grid_card', 'product_after_category_tiles'), true);
+1393         $creative_complete = $grid_slot ? trim($image) !== '' : (trim($title) !== '' || trim($image) !== '');
+1394         $valid = trim($destination) !== '' && $creative_complete;
+1395         if (!$valid) {
+1396             return false;
+1397         }
+1398         $url = $destination;
+1399         $campaign_post_id = (int) ($campaign['post_id'] ?? 0);
+1400         if ($track_click && $campaign_post_id > 0) {
+1401             $url = $this->build_click_tracking_url($campaign_post_id, (int) $post_id, $slot);
+1402         }
+1403         return array(
+1404             'valid' => true,
+1405             'label' => $label,
+1406             'title' => $title,
+1407             'text' => $text,
+1408             'button' => trim($button) !== '' ? $button : 'mehr erfahren',
+1409             'image' => $image,
+1410             'url' => $url,
+1411             'destination' => $destination,
+1412             'target' => (($banner['target'] ?? '_blank') === '_self') ? '_self' : '_blank',
+1413         );
+1414     }
+1415 
+=== IDEALOTRAIT idealo_materialize_campaigns:767-824 ===
+767     private function idealo_materialize_campaigns($limit_per_target=12) {
+768         if (!function_exists('get_posts')) { return new WP_Error('idealo_campaign_runtime_missing','WordPress-Kampagnenruntime fehlt.'); }
+769         $mi=$this->idealo_match_index(); if (is_wp_error($mi)) { return $mi; }
+770         $concept_map=$mi['concepts']; global $wpdb; $table=$this->network_sync_table('products'); $settings=$this->idealo_settings(); $snapshot_started=absint($settings['last_import_started_at']??0);
+771         $sql="SELECT * FROM {$table} WHERE network='idealo' AND quality_status='pass'"; $args=array(); if ($snapshot_started>0) { $sql.=' AND last_seen >= %d'; $args[]=$snapshot_started; } $sql.=' ORDER BY category ASC, id ASC';
+772         $prepared=$args?call_user_func_array(array($wpdb,'prepare'),array_merge(array($sql),$args)):$sql; $rows=(array)$wpdb->get_results($prepared,ARRAY_A); $groups=array();
+773         foreach ($rows as $row) { $concept_id=sanitize_key((string)($row['category']??'')); if (!isset($concept_map[$concept_id])) { continue; } $payload=json_decode((string)($row['payload']??''),true); $payload=is_array($payload)?$payload:array(); if (sanitize_key((string)($payload['__idealo_concept_id']??''))!==$concept_id) { continue; } $row['_payload']=$payload; $row['_rank']=$this->idealo_payload_rank_tuple($payload,(string)($row['external_key']??'')); $groups[$concept_id][]=$row; }
+774         $selected_keys=array(); $saved_count=0; $targets=0; $should_active=$this->idealo_campaigns_should_be_active();
+775         foreach ($groups as $concept_id=>$items) {
+776             $concept=$concept_map[$concept_id]; usort($items,static function($a,$b){ return $a['_rank']<=>$b['_rank']; }); if (!$items) { continue; }
+777             $target_keys=$this->idealo_target_keys_for_concept($concept); if (!$target_keys) { continue; } $targets++;
+778             // One family/search comparison campaign per safe concept. It uses a
+779             // real iPN click URL from the same concept and only overrides trg,
+780             // exactly as the documented deeplink mechanism permits.
+781             $family_row=array();
+782             foreach ($items as $family_candidate) {
+783                 $candidate_image=esc_url_raw((string)($family_candidate['image_url']??''));
+784                 $candidate_tracking=esc_url_raw((string)($family_candidate['tracking_url']??''));
+785                 if ($candidate_image!=='' && stripos($candidate_image,'https://')===0 && $candidate_tracking!=='') { $family_row=(array)$family_candidate; break; }
+786             }
+787             if (!$family_row) { continue; }
+788             $family_payload=(array)($family_row['_payload']??array());
+789             $family_image=esc_url_raw((string)($family_row['image_url']??''));
+790             $family_url=$this->idealo_comparison_deeplink_from_product_url((string)($family_row['tracking_url']??''),$concept);
+791             if ($family_url!=='' && $family_image!=='') {
+792                 $family_key='family:'.$concept_id; $ids=get_posts(array('post_type'=>self::CAMPAIGN_POST_TYPE,'post_status'=>array('publish','draft','private'),'meta_key'=>'_ppar_idealo_external_key','meta_value'=>$family_key,'posts_per_page'=>1,'fields'=>'ids')); $family_post_id=$ids?absint($ids[0]):0;
+793                 $family=$this->central_blank_campaign(); $family['id']=sanitize_key('idealo-family-'.substr(hash('sha256',$concept_id),0,20)); $family['name']='idealo Vergleich – '.(string)$concept['title']; $family['partner']='idealo'; $family['creative_type']='product'; $family['network']='idealo';
+794                 $family['advertiser_id']='84749'; $family['programme_name']='idealo DE'; $family['programme_status']='active'; $family['programme_status_source']='idealo_ipn_feed'; $family['programme_status_checked_at']=time(); $family['quality_manual_status']='auto_verified'; $family['quality_note']='Familien-/Kategorievergleich aus sicher gemapptem Standardfeed-Konzept; repräsentatives Bild aus derselben Produktfamilie, kein konkretes Produktversprechen.'; $family['render_mode']='image_link';
+795                 $family['active']=$should_active; $family['assignment_mode']='page_tree'; $family['match_descendants']=false; $family['automation_target_keys']=$target_keys; $family['placements']=array('hub_product_1','hub_product_2','hub_product_3','category_product_1','category_product_2','category_product_3','post_bottom_products');
+796                 $family['priority']=97; $family['label']='idealo · Affiliate'; $family['title']=(string)$concept['title']; $family['description']='Preise und Angebote bei idealo vergleichen'; $family['button_text']='Bei idealo vergleichen'; $family['image_url']=$family_image; $family['url']=$family_url; $family['target']='_blank'; $family['price']=''; $family['currency']='EUR'; $family['availability']=''; $family['health_check_enabled']=false; $family['source']='idealo_family_deeplink_v1'; $family['last_synced']=absint($family_row['last_seen']??time()); $family['external_id']=$family_key; $family['product_gtins']=array(); $family['product_asins']=array(); $family['product_identity_source']='family'; $family['product_provider']='idealo'; $family['idealo_surface_kind']='comparison';
+797                 $saved=$this->save_campaign_record($family,$family_post_id); if (!is_wp_error($saved)&&$saved) { $family_post_id=absint($saved); update_post_meta($family_post_id,'_ppar_idealo_auto',1); update_post_meta($family_post_id,'_ppar_idealo_external_key',$family_key); update_post_meta($family_post_id,'_ppar_idealo_concept_id',$concept_id); $selected_keys[$family_key]=true; $saved_count++; }
+798             }
+799             $target_limit=max(1,min(25,absint($limit_per_target))); $target_saved=0; $seen_target_gtins=array();
+800             foreach ($items as $row) {
+801                 if ($target_saved >= $target_limit) { break; }
+802                 $payload=(array)$row['_payload']; $external_key=substr(sanitize_text_field((string)($row['external_key']??'')),0,191); if ($external_key==='') { continue; }
+803                 $tracking=esc_url_raw((string)($row['tracking_url']??'')); $title=sanitize_text_field((string)($row['title']??'')); $image=esc_url_raw((string)($row['image_url']??'')); if ($tracking===''||$title===''||$image==='') { continue; }
+804                 $gtins=$this->idealo_normalize_gtins_from_values(array($payload['ean']??'',$payload['gtins_product']??'')); $asins=$this->idealo_normalize_asins_from_values(array($payload['asins_product']??'')); if (!$gtins) { continue; }
+805                 if (array_intersect($gtins,array_keys($seen_target_gtins))) { continue; }
+806                 $ids=get_posts(array('post_type'=>self::CAMPAIGN_POST_TYPE,'post_status'=>array('publish','draft','private'),'meta_key'=>'_ppar_idealo_external_key','meta_value'=>$external_key,'posts_per_page'=>1,'fields'=>'ids')); $post_id=$ids?absint($ids[0]):0;
+807                 $campaign=$this->central_blank_campaign(); $campaign['id']=sanitize_key('idealo-'.substr(hash('sha256',$external_key),0,20)); $campaign['name']='idealo – '.$title; $campaign['partner']='idealo'; $campaign['creative_type']='product'; $campaign['network']='idealo';
+808                 $campaign['advertiser_id']=sanitize_text_field((string)($settings['api_last_advertiser_id']??'')); $campaign['programme_name']='idealo DE'; $campaign['programme_status']='active'; $campaign['programme_status_source']='idealo_ipn_feed'; $campaign['programme_status_checked_at']=time(); $campaign['quality_manual_status']='auto_verified'; $campaign['quality_note']='Hobby-Depot-Ziele + konservatives Kontextmatching + GTIN.'; $campaign['render_mode']='image_link';
+809                 $campaign['active']=$should_active; $campaign['assignment_mode']='page_tree'; $campaign['match_descendants']=false; $campaign['automation_target_keys']=$target_keys; $campaign['placements']=array('hub_product_1','hub_product_2','hub_product_3','category_product_1','category_product_2','category_product_3','post_bottom_products');
+810                 $rank=$row['_rank']; $match_score=isset($payload['__idealo_match_score'])?(int)$payload['__idealo_match_score']:0; $campaign['priority']=max(40,min(95,55+(int)min(40,floor($match_score/10)))); $campaign['label']='idealo · Affiliate'; $campaign['title']=$title; $campaign['description']=''; $campaign['button_text']='Bei idealo vergleichen';
+811                 $campaign['image_url']=$image; $campaign['url']=$tracking; $campaign['target']='_blank'; $campaign['price']=sanitize_text_field((string)($row['price']??'')); $campaign['currency']='EUR'; $campaign['availability']='available'; $campaign['health_check_enabled']=false; $campaign['source']='idealo_product_feed_v1'; $campaign['last_synced']=absint($row['last_seen']??time()); $campaign['external_id']=$external_key; $campaign['product_gtins']=$gtins; $campaign['product_asins']=$asins; $campaign['product_identity_source']='gtin'; $campaign['product_provider']='idealo'; $campaign['idealo_surface_kind']='product';
+812                 $saved=$this->save_campaign_record($campaign,$post_id); if (is_wp_error($saved)||!$saved) { continue; }
+813                 $post_id=absint($saved); update_post_meta($post_id,'_ppar_idealo_auto',1); update_post_meta($post_id,'_ppar_idealo_external_key',$external_key); update_post_meta($post_id,'_ppar_idealo_concept_id',$concept_id); update_post_meta($post_id,'_ppar_idealo_target_slugs',wp_json_encode(array_values(array_unique(array_filter(array_map(static function($p){return is_array($p)?sanitize_title((string)($p['slug']??'')):'';},(array)($concept['target_pages']??array())))))));
+814                 delete_post_meta($post_id,'_ppar_product_gtin'); foreach ($gtins as $gtin) { add_post_meta($post_id,'_ppar_product_gtin',$gtin,false); } delete_post_meta($post_id,'_ppar_product_asin'); foreach ($asins as $asin) { add_post_meta($post_id,'_ppar_product_asin',$asin,false); }
+815                 foreach ($gtins as $gtin) { $seen_target_gtins[$gtin]=true; } $selected_keys[$external_key]=true; $saved_count++; $target_saved++;
+816             }
+817         }
+818         $existing=get_posts(array('post_type'=>self::CAMPAIGN_POST_TYPE,'post_status'=>array('publish','draft','private'),'meta_key'=>'_ppar_idealo_auto','meta_value'=>'1','posts_per_page'=>-1,'fields'=>'ids')); $retired=0;
+819         foreach ((array)$existing as $id) { $id=absint($id); $key=(string)get_post_meta($id,'_ppar_idealo_external_key',true); $campaign=$this->campaign_from_post(get_post($id)); if (!$campaign) { continue; } $desired=!empty($selected_keys[$key])&&$should_active; if ((bool)$campaign['active']!==$desired) { $campaign['active']=$desired; $this->save_campaign_record($campaign,$id); if (!$desired) { $retired++; } } }
+820         $this->idealo_sync_campaign_activation();
+821         if ($saved_count>0 && method_exists($this,'article_plan_bump_campaign_revision')) { $this->article_plan_bump_campaign_revision('idealo_materialized'); }
+822         return array('campaigns'=>$saved_count,'targets'=>$targets,'retired'=>$retired,'contract_concepts'=>count((array)$concept_map),'strategy'=>$this->idealo_link_strategy());
+823     }
+824 
+=== IDEALOTRAIT idealo_target_keys_for_concept:673-683 ===
+673     private function idealo_target_keys_for_concept($concept) {
+674         $keys=array();
+675         foreach ((array)($concept['target_pages']??array()) as $page) {
+676             if (!is_array($page)) { continue; }
+677             $slug=sanitize_title((string)($page['slug']??'')); if ($slug==='') { continue; }
+678             $keys=array_merge($keys,$this->idealo_target_keys_for_product_slug($slug));
+679             foreach (array('hub_slug','main_slug') as $field) { $v=sanitize_title((string)($page[$field]??'')); if ($v!=='') { $keys[]='page:'.$v; } }
+680         }
+681         return array_values(array_unique($keys));
+682     }
+683 
+=== IDEALOTRAIT idealo_match_feed_row_to_concept:403-431 ===
+403     private function idealo_match_feed_row_to_concept($row) {
+404         $mi = $this->idealo_match_index(); if (is_wp_error($mi)) { return $mi; }
+405         $title = (string) ($row['product_title'] ?? '');
+406         $primary = $this->idealo_match_primary_tokens($title); if (!$primary) { return array('status'=>'none'); }
+407         $product_stems = array(); foreach ($primary as $token) { $product_stems[$this->idealo_match_stem($token)] = true; }
+408         $candidate_ids = array(); foreach (array_keys($product_stems) as $stem) { foreach ((array)($mi['index'][$stem]??array()) as $id=>$true) { $candidate_ids[$id]=true; } }
+409         if (!$candidate_ids) { return array('status'=>'none'); }
+410         $title_n=$this->idealo_match_normalize($title); $main_n=$this->idealo_match_normalize((string)($row['main_category']??'')); $sub_n=$this->idealo_match_normalize((string)($row['sub_category']??''));
+411         $category_stems=array(); foreach ($this->idealo_match_tokens($main_n.' '.$sub_n) as $token) { $category_stems[]=$this->idealo_match_stem($token); }
+412         $full_title_stems=array(); foreach ($this->idealo_match_tokens($title) as $token) { $full_title_stems[]=$this->idealo_match_stem($token); }
+413         $scored=array(); $context_rejected=false;
+414         foreach (array_keys($candidate_ids) as $id) {
+415             $concept=$mi['concepts'][$id]??null; if (!is_array($concept)) { continue; }
+416             $all=true; foreach ((array)$concept['stems'] as $stem) { if (!isset($product_stems[$stem])) { $all=false; break; } } if (!$all) { continue; }
+417             $context=$this->idealo_match_context_score($concept,$title_n,$main_n,$sub_n,$mi['catalog']); if ($context<=0) { $context_rejected=true; continue; }
+418             $phrase=$this->idealo_match_normalize(implode(' ',$this->idealo_match_primary_tokens((string)$concept['title']))); $pt=$this->idealo_match_normalize(implode(' ',$primary));
+419             $phrase_title=$phrase!=='' && strpos(' '.$pt.' ',' '.$phrase.' ')!==false;
+420             $hubhits=0; foreach ((array)$concept['hub_stems'] as $stem) { if (in_array($stem,$category_stems,true)) { $hubhits++; } }
+421             $mainhits=0; foreach ((array)$concept['main_stems'] as $stem) { if (in_array($stem,$category_stems,true)) { $mainhits++; } }
+422             $relhits=0; foreach ((array)$concept['rel_stems'] as $stem) { if (in_array($stem,$full_title_stems,true)||in_array($stem,$category_stems,true)) { $relhits++; } }
+423             $score=($phrase_title?160:0)+(count((array)$concept['stems'])*55)+min(24,$hubhits*8)+min(12,$mainhits*4)+($relhits*20)+($context*35);
+424             $scored[]=array('score'=>$score,'context'=>$context,'specificity'=>count((array)$concept['stems']),'concept'=>$concept);
+425         }
+426         if (!$scored) { return array('status'=>$context_rejected?'context_rejected':'none'); }
+427         usort($scored,static function($a,$b){ return ($b['score']<=>$a['score']) ?: ($b['specificity']<=>$a['specificity']) ?: ($b['context']<=>$a['context']) ?: strcmp((string)$a['concept']['id'],(string)$b['concept']['id']); });
+428         if (count($scored)>1 && ((int)$scored[0]['score']-(int)$scored[1]['score'])<30 && (int)$scored[0]['specificity']===(int)$scored[1]['specificity']) { return array('status'=>'ambiguous'); }
+429         return array('status'=>'matched','concept'=>$scored[0]['concept'],'score'=>(int)$scored[0]['score'],'context'=>(int)$scored[0]['context']);
+430     }
+431 
+=== IDEALOTRAIT idealo_match_stem:293-307 ===
+293     private function idealo_match_stem($token) {
+294         $token = (string) $token;
+295         if (strlen($token) < 6) { return $token; }
+296         foreach (array('ern','em','en','er','es','e','n','s') as $suffix) {
+297             if ($suffix === 's' && substr($token, -2) === 'ss') { continue; }
+298             // "Malene" is not an inflection of "Malen".
+299             // Do not turn arbitrary "-ene" tokens into a German infinitive.
+300             if ($suffix === 'e' && substr($token, -3) === 'ene') { continue; }
+301             if (substr($token, -strlen($suffix)) === $suffix && strlen($token) - strlen($suffix) >= 5) {
+302                 return substr($token, 0, -strlen($suffix));
+303             }
+304         }
+305         return $token;
+306     }
+307 
+=== IDEALOTRAIT idealo_match_index:342-365 ===
+342     private function idealo_match_index() {
+343         static $cache = null;
+344         if (is_array($cache) || is_wp_error($cache)) { return $cache; }
+345         $catalog = $this->idealo_portal_supply_catalog();
+346         if (is_wp_error($catalog)) { return $cache = $catalog; }
+347         $concepts = array(); $index = array();
+348         foreach ((array) $catalog['_idealo_required_concepts'] as $id => $concept) {
+349             $core = $this->idealo_match_distinct_tokens((string) ($concept['title'] ?? ''), true);
+350             if (!$core) { $core = $this->idealo_match_distinct_tokens((string) ($concept['title'] ?? ''), false); }
+351             $stems = array(); foreach ($core as $token) { $stems[$this->idealo_match_stem($token)] = true; }
+352             $stems = array_keys($stems); if (!$stems) { continue; }
+353             $first_page = is_array(($concept['target_pages'] ?? null)) && !empty($concept['target_pages']) && is_array($concept['target_pages'][0]) ? $concept['target_pages'][0] : array();
+354             $hub = array(); foreach ($this->idealo_match_distinct_tokens((string) ($first_page['hub'] ?? '')) as $token) { $hub[$this->idealo_match_stem($token)] = true; }
+355             $main = array(); foreach ($this->idealo_match_distinct_tokens((string) ($first_page['main_hub'] ?? '')) as $token) { $main[$this->idealo_match_stem($token)] = true; }
+356             $all = array(); foreach ($this->idealo_match_distinct_tokens((string) ($concept['title'] ?? '')) as $token) { $all[$this->idealo_match_stem($token)] = true; }
+357             $rel = array_values(array_diff(array_keys($all), $stems));
+358             $entry = array('id'=>$id,'title'=>(string)($concept['title']??''),'stems'=>$stems,'hub_stems'=>array_keys($hub),'main_stems'=>array_keys($main),'rel_stems'=>$rel,'main_hub'=>(string)($first_page['main_hub']??''),'hub'=>(string)($first_page['hub']??''),'target_pages'=>(array)($concept['target_pages']??array()));
+359             $concepts[$id] = $entry;
+360             foreach ($stems as $stem) { if (!isset($index[$stem])) { $index[$stem] = array(); } $index[$stem][$id] = true; }
+361         }
+362         if (!$concepts || count($concepts) !== count((array)$catalog['_idealo_required_concepts'])) { return $cache = new WP_Error('idealo_match_index_incomplete', 'Matcher konnte nicht alle Hobby-Depot-Recherchekonzepte binden.'); }
+363         return $cache = array('concepts'=>$concepts,'index'=>$index,'catalog'=>$catalog);
+364     }
+365 
+SITE HOBBY http 200 397730
+SITEHTML HOBBY GRID {'class': ['hd-catlevel-product-grid']}
+SITEHTML HOBBY ITEM 0 CLASSES ['hd-next-partner-product']
+SITEHTML HOBBY TEXT Werbelink: Bei Kauf erhalten wir ggf. eine Provision. Kari Traa Damen Malene Cape thyme 139.95 EUR available Bei idealo vergleichen
+SITEHTML HOBBY DOM <div class="hd-next-partner-product"><div class="hd-next-partner-content"><div class="ppar-affiliate-slot ppar-slot-category_product_1 ppar-group-idealo-9798bcf34fe7edfa782b ppar-context-page" data-ppar-group="idealo-9798bcf34fe7edfa782b" data-ppar-slot="category_product_1" style="box-sizing:border-box!important;display:grid!important;grid-template-rows:56px minmax(360px,1fr)!important;width:100%!important;height:auto!important;min-height:416px!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;overflow:visible!important"><div class="ppar-affiliate-disclosure">Werbelink: Bei Kauf erhalten wir ggf. eine Provision.</div><div class="ppar-affiliate-content"><a class="ppar-banner-link" data-ppar-category-product-card="1" href="https://ipn.idealo.de/ts/i5541067/tsc?tst=1794562693&amp;amc=con.idealo.545025.568912.14194705&amp;pid=208069321&amp;rmd=3&amp;trg=https%3A%2F%2Fwww.idealo.de%2Fpreisvergleich%2FOffersOfProduct%2F208069321.html" rel="sponsored nofollow noopener noreferrer" style="box-sizing:border-box!important;display:grid!important;grid-template-rows:150px minmax(210px,1fr)!important;align-items:stretch!important;width:100%!important;height:auto!important;min-height:360px!important;max-height:none!important;overflow:hidden!important" target="_blank"><span class="ppar-banner-image-wrap" data-ppar-category-product-image-frame="150" style="box-sizing:border-box!important;display:flex!important;flex:0 0 150px!important;align-items:center!important;justify-content:center!important;width:150px!important;height:150px!important;min-width:150px!important;min-height:150px!important;max-width:150px!important;max-height:150px!important;margin:0 auto!important;padding:0!important;overflow:hidden!important;background:#fff!important;line-height:0!important"><img alt="Kari Traa Damen Malene Cape thyme" class="ppar-banner-image" data-ppar-category-product-image-fit="contain" decoding="async" height="150" loading="lazy" src="https://cdn.idealo.com/folder/Product/208069/3/208069321/s1_produktbild_max/kari-traa-women-s-malene-cape-thyme.jpg" style="box-sizing:border-box!important;display:block!important;width:150px!important;height:150px!important;min-width:150px!important;min-height:150px!important;max-width:150px!important;max-height:150px!important;margin:0!important;padding:0!important;border-radius:0!important;object-fit:contain!important;object-position:center center!important" width="150"/></span><span class="ppar-banner-text" data-ppar-category-product-text="1" style="box-sizing:border-box!important;display:flex!important;flex:1 1 auto!important;flex-direction:column!important;align-items:stretch!important;width:100%!important;min-height:152px!important"><strong class="ppar-banner-title">Kari Traa Damen Malene Cape thyme</strong><span class="ppar-banner-meta"><strong class="ppar-banner-price">139.95 EUR</strong><span class="ppar-banner-availability">available</span></span><span class="ppar-banner-button">Bei idealo vergleichen</span></span></a></div></div></div></div>
+SITEHTML HOBBY ITEM 1 CLASSES ['hd-next-partner-product']
+SITEHTML HOBBY TEXT Bogner Schurwoll-Pullover Malene für Damen - Hazel (264-8191-2930-850) 495.00 EUR available Bei idealo vergleichen
+SITEHTML HOBBY DOM <div class="hd-next-partner-product"><div class="hd-next-partner-content"><div class="ppar-affiliate-slot ppar-slot-category_product_2 ppar-group-idealo-b19eefa906dba6f1eb5d ppar-context-page" data-ppar-group="idealo-b19eefa906dba6f1eb5d" data-ppar-slot="category_product_2" style="box-sizing:border-box!important;display:grid!important;grid-template-rows:56px minmax(360px,1fr)!important;width:100%!important;height:auto!important;min-height:416px!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;overflow:visible!important"><div aria-hidden="true" class="ppar-affiliate-disclosure ppar-affiliate-disclosure--reserve"> </div><div class="ppar-affiliate-content"><a class="ppar-banner-link" data-ppar-category-product-card="1" href="https://ipn.idealo.de/ts/i5541067/tsc?tst=1794562693&amp;amc=con.idealo.545025.568912.14194705&amp;pid=214089041&amp;rmd=3&amp;trg=https%3A%2F%2Fwww.idealo.de%2Fpreisvergleich%2FOffersOfProduct%2F214089041.html" rel="sponsored nofollow noopener noreferrer" style="box-sizing:border-box!important;display:grid!important;grid-template-rows:150px minmax(210px,1fr)!important;align-items:stretch!important;width:100%!important;height:auto!important;min-height:360px!important;max-height:none!important;overflow:hidden!important" target="_blank"><span class="ppar-banner-image-wrap" data-ppar-category-product-image-frame="150" style="box-sizing:border-box!important;display:flex!important;flex:0 0 150px!important;align-items:center!important;justify-content:center!important;width:150px!important;height:150px!important;min-width:150px!important;min-height:150px!important;max-width:150px!important;max-height:150px!important;margin:0 auto!important;padding:0!important;overflow:hidden!important;background:#fff!important;line-height:0!important"><img alt="Bogner Schurwoll-Pullover Malene für Damen - Hazel (264-8191-2930-850)" class="ppar-banner-image" data-ppar-category-product-image-fit="contain" decoding="async" height="150" loading="lazy" src="https://cdn.idealo.com/images/product/214089041/de_DE/0/max.jpg" style="box-sizing:border-box!important;display:block!important;width:150px!important;height:150px!important;min-width:150px!important;min-height:150px!important;max-width:150px!important;max-height:150px!important;margin:0!important;padding:0!important;border-radius:0!important;object-fit:contain!important;object-position:center center!important" width="150"/></span><span class="ppar-banner-text" data-ppar-category-product-text="1" style="box-sizing:border-box!important;display:flex!important;flex:1 1 auto!important;flex-direction:column!important;align-items:stretch!important;width:100%!important;min-height:152px!important"><strong class="ppar-banner-title">Bogner Schurwoll-Pullover Malene für Damen - Hazel (264-8191-2930-850)</strong><span class="ppar-banner-meta"><strong class="ppar-banner-price">495.00 EUR</strong><span class="ppar-banner-availability">available</span></span><span class="ppar-banner-button">Bei idealo vergleichen</span></span></a></div></div></div></div>
+SITEHTML HOBBY ITEM 2 CLASSES ['hd-next-partner-product']
+SITEHTML HOBBY TEXT Gründl Cotton Quick Batik natur-braun-beige (4921-08) 4.70 EUR available Bei idealo vergleichen
+SITEHTML HOBBY DOM <div class="hd-next-partner-product"><div class="hd-next-partner-content"><div class="ppar-affiliate-slot ppar-slot-category_product_3 ppar-group-idealo-05f8eb28870f4d57b679 ppar-context-page" data-ppar-group="idealo-05f8eb28870f4d57b679" data-ppar-slot="category_product_3" style="box-sizing:border-box!important;display:grid!important;grid-template-rows:56px minmax(360px,1fr)!important;width:100%!important;height:auto!important;min-height:416px!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;overflow:visible!important"><div aria-hidden="true" class="ppar-affiliate-disclosure ppar-affiliate-disclosure--reserve"> </div><div class="ppar-affiliate-content"><a class="ppar-banner-link" data-ppar-category-product-card="1" href="https://ipn.idealo.de/ts/i5541067/tsc?tst=1794562693&amp;amc=con.idealo.545025.568912.14194705&amp;pid=203397974&amp;rmd=3&amp;trg=https%3A%2F%2Fwww.idealo.de%2Fpreisvergleich%2FOffersOfProduct%2F203397974.html" rel="sponsored nofollow noopener noreferrer" style="box-sizing:border-box!important;display:grid!important;grid-template-rows:150px minmax(210px,1fr)!important;align-items:stretch!important;width:100%!important;height:auto!important;min-height:360px!important;max-height:none!important;overflow:hidden!important" target="_blank"><span class="ppar-banner-image-wrap" data-ppar-category-product-image-frame="150" style="box-sizing:border-box!important;display:flex!important;flex:0 0 150px!important;align-items:center!important;justify-content:center!important;width:150px!important;height:150px!important;min-width:150px!important;min-height:150px!important;max-width:150px!important;max-height:150px!important;margin:0 auto!important;padding:0!important;overflow:hidden!important;background:#fff!important;line-height:0!important"><img alt="Gründl Cotton Quick Batik natur-braun-beige (4921-08)" class="ppar-banner-image" data-ppar-category-product-image-fit="contain" decoding="async" height="150" loading="lazy" src="https://cdn.idealo.com/folder/Product/203397/9/203397974/s1_produktbild_max/gruendl-cotton-quick-batik-natur-braun-beige-4921-08.jpg" style="box-sizing:border-box!important;display:block!important;width:150px!important;height:150px!important;min-width:150px!important;min-height:150px!important;max-width:150px!important;max-height:150px!important;margin:0!important;padding:0!important;border-radius:0!important;object-fit:contain!important;object-position:center center!important" width="150"/></span><span class="ppar-banner-text" data-ppar-category-product-text="1" style="box-sizing:border-box!important;display:flex!important;flex:1 1 auto!important;flex-direction:column!important;align-items:stretch!important;width:100%!important;min-height:152px!important"><strong class="ppar-banner-title">Gründl Cotton Quick Batik natur-braun-beige (4921-08)</strong><span class="ppar-banner-meta"><strong class="ppar-banner-price">4.70 EUR</strong><span class="ppar-banner-availability">available</span></span><span class="ppar-banner-button">Bei idealo vergleichen</span></span></a></div></div></div></div>
+CSS_VERSION HOBBY ["ppar-frontend-css' href='https://www.hobby-depot.de/wp-co", "hdar-amazon-start-css' href='https://www.hobby-depot.de/wp-co"]
+SITE PFERDE http 200 1192113
+SITEHTML PFERDE GRID {'class': ['pa273-product-grid', 'count-3'], 'data-pa335-product-count': '3'}
+SITEHTML PFERDE ITEM 0 CLASSES ['pa266-product', 'is-real']
+SITEHTML PFERDE TEXT Waldhausen Startnummern Klett für Schabracken kavalio für mich und mein Pferd Auf einen Blick Befestigung: Klett Verwendung: für Schabracken Bei idealo vergleichen Bei Amazon ansehen
+SITEHTML PFERDE DOM <div class="pa266-product is-real" data-pa266-slot="category_product_1"><div class="ppar-affiliate-slot ppar-slot-category_product_1 ppar-group-idealo-7ade13d8df05f63de236 ppar-context-category_archive" data-ppar-group="idealo-7ade13d8df05f63de236" data-ppar-slot="category_product_1" style="box-sizing:border-box!important;display:grid!important;grid-template-rows:56px minmax(360px,1fr)!important;width:100%!important;height:auto!important;min-height:416px!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;overflow:visible!important"><div aria-hidden="true" class="ppar-affiliate-disclosure ppar-affiliate-disclosure--reserve"> </div><div class="ppar-affiliate-content"><span class="ppar-banner-link ppar-banner-link--multi" data-ppar-category-product-card="1" style="box-sizing:border-box!important;display:grid!important;grid-template-rows:150px minmax(210px,1fr)!important;align-items:stretch!important;width:100%!important;height:auto!important;min-height:360px!important;max-height:none!important;overflow:hidden!important"><span class="ppar-banner-image-wrap" data-ppar-category-product-image-frame="150" style="box-sizing:border-box!important;display:flex!important;flex:0 0 150px!important;align-items:center!important;justify-content:center!important;width:150px!important;height:150px!important;min-width:150px!important;min-height:150px!important;max-width:150px!important;max-height:150px!important;margin:0 auto!important;padding:0!important;overflow:hidden!important;background:#fff!important;line-height:0!important"><img alt="Waldhausen Startnummern Klett für Schabracken kavalio für mich und mein Pferd" class="ppar-banner-image" data-ppar-category-product-image-fit="contain" decoding="async" height="150" loading="lazy" src="https://cdn.idealo.com/folder/Product/210015/0/210015091/s1_produktbild_max/waldhausen-startnummern-klett-fuer-schabracken-kavalio-fuer-mich-und-mein-pferd.jpg" style="box-sizing:border-box!important;display:block!important;width:150px!important;height:150px!important;min-width:150px!important;min-height:150px!important;max-width:150px!important;max-height:150px!important;margin:0!important;padding:0!important;border-radius:0!important;object-fit:contain!important;object-position:center center!important" width="150"/></span><span class="ppar-banner-text" data-ppar-category-product-text="1" style="box-sizing:border-box!important;display:flex!important;flex:1 1 auto!important;flex-direction:column!important;align-items:stretch!important;width:100%!important;min-height:152px!important"><strong class="ppar-banner-title">Waldhausen Startnummern Klett für Schabracken kavalio für mich und mein Pferd</strong><span class="ppar-product-facts"><strong class="ppar-product-facts-heading">Auf einen Blick</strong><span class="ppar-product-fact">Befestigung: Klett</span><span class="ppar-product-fact">Verwendung: für Schabracken</span></span><span class="ppar-banner-actions"><a class="ppar-banner-offer-button" href="https://ipn.idealo.de/ts/i5541067/tsc?tst=1794562697&amp;amc=con.idealo.545025.568313.14439322&amp;pid=210015091&amp;rmd=3&amp;trg=https%3A%2F%2Fwww.idealo.de%2Fpreisvergleich%2FOffersOfProduct%2F210015091.html" rel="sponsored nofollow noopener noreferrer" target="_blank">Bei idealo vergleichen</a><a class="ppar-banner-offer-button" href="https://www.amazon.de/dp/B007US75PS?tag=pferdeatelier-21" rel="sponsored nofollow noopener noreferrer" target="_blank">Bei Amazon ansehen</a></span></span></span></div></div></div>
+SITEHTML PFERDE ITEM 1 CLASSES ['pa266-product', 'is-real']
+SITEHTML PFERDE TEXT Back on Track Schabracke Welltex schwarz VB Auf einen Blick Farbe: schwarz Bei idealo vergleichen Bei Amazon ansehen
+SITEHTML PFERDE DOM <div class="pa266-product is-real" data-pa266-slot="category_product_2"><div class="ppar-affiliate-slot ppar-slot-category_product_2 ppar-group-idealo-1a843e3a74bf0e6e48e7 ppar-context-category_archive" data-ppar-group="idealo-1a843e3a74bf0e6e48e7" data-ppar-slot="category_product_2" style="box-sizing:border-box!important;display:grid!important;grid-template-rows:56px minmax(360px,1fr)!important;width:100%!important;height:auto!important;min-height:416px!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;overflow:visible!important"><div aria-hidden="true" class="ppar-affiliate-disclosure ppar-affiliate-disclosure--reserve"> </div><div class="ppar-affiliate-content"><span class="ppar-banner-link ppar-banner-link--multi" data-ppar-category-product-card="1" style="box-sizing:border-box!important;display:grid!important;grid-template-rows:150px minmax(210px,1fr)!important;align-items:stretch!important;width:100%!important;height:auto!important;min-height:360px!important;max-height:none!important;overflow:hidden!important"><span class="ppar-banner-image-wrap" data-ppar-category-product-image-frame="150" style="box-sizing:border-box!important;display:flex!important;flex:0 0 150px!important;align-items:center!important;justify-content:center!important;width:150px!important;height:150px!important;min-width:150px!important;min-height:150px!important;max-width:150px!important;max-height:150px!important;margin:0 auto!important;padding:0!important;overflow:hidden!important;background:#fff!important;line-height:0!important"><img alt="Back on Track Schabracke Welltex schwarz VB" class="ppar-banner-image" data-ppar-category-product-image-fit="contain" decoding="async" height="150" loading="lazy" src="https://cdn.idealo.com/folder/Product/200133/2/200133262/s1_produktbild_max/back-on-track-schabracke-welltex-schwarz-vb.jpg" style="box-sizing:border-box!important;display:block!important;width:150px!important;height:150px!important;min-width:150px!important;min-height:150px!important;max-width:150px!important;max-height:150px!important;margin:0!important;padding:0!important;border-radius:0!important;object-fit:contain!important;object-position:center center!important" width="150"/></span><span class="ppar-banner-text" data-ppar-category-product-text="1" style="box-sizing:border-box!important;display:flex!important;flex:1 1 auto!important;flex-direction:column!important;align-items:stretch!important;width:100%!important;min-height:152px!important"><strong class="ppar-banner-title">Back on Track Schabracke Welltex schwarz VB</strong><span class="ppar-product-facts"><strong class="ppar-product-facts-heading">Auf einen Blick</strong><span class="ppar-product-fact">Farbe: schwarz</span></span><span class="ppar-banner-actions"><a class="ppar-banner-offer-button" href="https://ipn.idealo.de/ts/i5541067/tsc?tst=1794562697&amp;amc=con.idealo.545025.568313.14439322&amp;pid=200133262&amp;rmd=3&amp;trg=https%3A%2F%2Fwww.idealo.de%2Fpreisvergleich%2FOffersOfProduct%2F200133262.html" rel="sponsored nofollow noopener noreferrer" target="_blank">Bei idealo vergleichen</a><a class="ppar-banner-offer-button" href="https://www.amazon.de/dp/B01N4WODZ7?tag=pferdeatelier-21" rel="sponsored nofollow noopener noreferrer" target="_blank">Bei Amazon ansehen</a></span></span></span></div></div></div>
+SITEHTML PFERDE ITEM 2 CLASSES ['pa266-product', 'is-real']
+SITEHTML PFERDE TEXT Eskadron Schabracke Dressur marine mit Kordel Auf einen Blick Ausführung: Dressur Bei idealo vergleichen Bei Amazon ansehen
+SITEHTML PFERDE DOM <div class="pa266-product is-real" data-pa266-slot="category_product_3"><div class="ppar-affiliate-slot ppar-slot-category_product_3 ppar-group-idealo-20cf829298f758745b0c ppar-context-category_archive" data-ppar-group="idealo-20cf829298f758745b0c" data-ppar-slot="category_product_3" style="box-sizing:border-box!important;display:grid!important;grid-template-rows:56px minmax(360px,1fr)!important;width:100%!important;height:auto!important;min-height:416px!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;overflow:visible!important"><div aria-hidden="true" class="ppar-affiliate-disclosure ppar-affiliate-disclosure--reserve"> </div><div class="ppar-affiliate-content"><span class="ppar-banner-link ppar-banner-link--multi" data-ppar-category-product-card="1" style="box-sizing:border-box!important;display:grid!important;grid-template-rows:150px minmax(210px,1fr)!important;align-items:stretch!important;width:100%!important;height:auto!important;min-height:360px!important;max-height:none!important;overflow:hidden!important"><span class="ppar-banner-image-wrap" data-ppar-category-product-image-frame="150" style="box-sizing:border-box!important;display:flex!important;flex:0 0 150px!important;align-items:center!important;justify-content:center!important;width:150px!important;height:150px!important;min-width:150px!important;min-height:150px!important;max-width:150px!important;max-height:150px!important;margin:0 auto!important;padding:0!important;overflow:hidden!important;background:#fff!important;line-height:0!important"><img alt="Eskadron Schabracke Dressur marine mit Kordel" class="ppar-banner-image" data-ppar-category-product-image-fit="contain" decoding="async" height="150" loading="lazy" src="https://cdn.idealo.com/folder/Product/5640/5/5640549/s1_produktbild_max/eskadron-schabracke-dressur-marine-mit-kordel.jpg" style="box-sizing:border-box!important;display:block!important;width:150px!important;height:150px!important;min-width:150px!important;min-height:150px!important;max-width:150px!important;max-height:150px!important;margin:0!important;padding:0!important;border-radius:0!important;object-fit:contain!important;object-position:center center!important" width="150"/></span><span class="ppar-banner-text" data-ppar-category-product-text="1" style="box-sizing:border-box!important;display:flex!important;flex:1 1 auto!important;flex-direction:column!important;align-items:stretch!important;width:100%!important;min-height:152px!important"><strong class="ppar-banner-title">Eskadron Schabracke Dressur marine mit Kordel</strong><span class="ppar-product-facts"><strong class="ppar-product-facts-heading">Auf einen Blick</strong><span class="ppar-product-fact">Ausführung: Dressur</span></span><span class="ppar-banner-actions"><a class="ppar-banner-offer-button" href="https://ipn.idealo.de/ts/i5541067/tsc?tst=1794562697&amp;amc=con.idealo.545025.568313.14439322&amp;pid=5640549&amp;rmd=3&amp;trg=https%3A%2F%2Fwww.idealo.de%2Fpreisvergleich%2FOffersOfProduct%2F5640549.html" rel="sponsored nofollow noopener noreferrer" target="_blank">Bei idealo vergleichen</a><a class="ppar-banner-offer-button" href="https://www.amazon.de/dp/B001QG9382?tag=pferdeatelier-21" rel="sponsored nofollow noopener noreferrer" target="_blank">Bei Amazon ansehen</a></span></span></span></div></div></div>
+CSS_VERSION PFERDE ["ppar-frontend-css' href='https://pferde-atelier.de/wp-co"]
