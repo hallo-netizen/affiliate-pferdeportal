@@ -1,4 +1,4 @@
-name: Hab RC26 source feed-list and mobile design full verified release
+name: Hab RC26 verified production feed and mobile styling release
 on:
   push:
     branches: [hab-affiliate-rc26-source-design-20261113]
