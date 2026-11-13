@@ -1,3 +1,17 @@
+## 13.11.2026 – RC34: KISS, EINE PARTNERERKENNUNG + ECHTES BANNER-FEHLERPROTOKOLL
+
+**NEUESTE GRÜN GEPRÜFTE HAB-004 TESTVERSION:** `0.1.31-rc34` – `HAB_Bewahr_Affiliate_RC34_TEST.zip`, 2.351.032 Bytes, SHA256 `bdd7ba78da62995768ee3c476f60fa7c18352161c7d6f9b5bade35978853cb62`, GitHub Release `hab-affiliate-rc34-single-partner-gate-diagnosis-20261113`; **Actions 43454290216 SUCCESS**, alle Altversionen RC23–RC34 komplett neu gebaut, 25 PHP-Lints, PHP-E2E und altbewährte Idealo-/eBay-/Mehrhändlertests bestanden.
+
+**Quellnachweis doppelter Zuständigkeiten:** Der einzige fachliche Partner-Entscheider erkannte Tarifcheck anhand Anzeigename/Zieladresse, aber die bereits vorhandene 60er-Nachbearbeitung suchte nur **exakt** nach Partnername/ID `tarifcheck`. Dadurch konnten tatsächlich importierte Banner „Tarifcheck Deutschland“ oder mit abweichender Beschriftung vollständig übersehen werden; Einmallauf wurde trotzdem geschlossen. **RC34 verwendet dieselbe Partner-Erkennung in beiden Wegen** und startet nur denselben bisherigen Einmallauf kontrolliert neu. Zudem kein zweites Überschreiben bereits gespeicherter Banner-Zielpfade bei anderer normaler Creative-Library-Materialisierung. Ursprünglich in RC33 gelöste doppelte Versicherungsthema-Namensprüfungen bleiben abgebaut.
+
+**Echtes Fehlerprotokoll:** vorhandene Seite WordPress → **Affiliate-Zentrale → Werbemittel & Ausspielung**, direkt unter Titel „Tarifcheck: Warum wird kein Banner angezeigt?“; zählt tatsächlich gespeicherte Bilder/offene Prüfungen/thematische Ziele/fehlende Ausgaben/gesperrte Kampagnen/Entwürfe/veröffentlichte Banner; nennt max. 15 wirkliche Ursachen. Keine URL-/Partnergeheimnisse im Bericht. Letzter Zählstand als WordPress-Option, **keine neue DB/Tabelle/worker**. Alles getestet auch mit echtem PHP-Kampagnenveröffentlichungsweg.
+
+**Wichtig:** Die Ursache im Quellcode ist bewiesen, aber ohne die bisher nicht einsehbaren konkreten Tarifcheck-Liveoriginale bleibt offen, ob sie auch noch andere Blocker haben (Bild nicht geprüft, fehlender Eintrag usw.). **RC34 noch nicht WordPress-live installiert, tatsächliche Anzeige noch nicht abgenommen.** Nutzer braucht **keine Banner neu zu importieren**. RC34 installieren; **einen** Screenshot des bestehenden Werbemittelberichts senden; weitere Korrektur nur nach echten Werten. Kein weiterer blind erzeugter ZIP.
+
+Querschnitt Pferde Atelier/Hobby Depot: derselbe strukturelle doppelte Creative-Zielkarten-Schreibweg im Quelltext belegt, auf beiden keine Änderung wegen bisher funktionierendem Livebetrieb; im zentralen Fehlerregister offen. Details `AFFILIATE/RC34_KISS_DIAG/ABNAHME_RC34_20261113.md`.
+
+---
+
 ## 13.11.2026 – RC33 SINGLE-AUTHORITY ROOTFIX / NEUESTE GEPRÜFTE VERSION
 
 **HAB-004 0.1.30-rc33**: vollständiges installierbares `HAB_Bewahr_Affiliate_RC33_TEST.zip`, 2.348.400 Bytes, SHA256 `b07f9dbde9267bbfa9764e36ed92787d52c96881e306e0409784e5a1ca83f51a`. GitHub Release `hab-affiliate-rc33-one-authoritative-banner-decision-20261113`; **Actions 43447823048 + zusätzliche tatsächliche PHP-Aktivierungsprüfung 43448625395 beide SUCCESS**. Die gesamte Historie RC23–RC33, alle 25 PHP-Dateien, komplette PHP-Kampagnenerzeugung, echte Zielkartenweitergabe und vorhandene eBay-/Idealo-Tests bestanden.
