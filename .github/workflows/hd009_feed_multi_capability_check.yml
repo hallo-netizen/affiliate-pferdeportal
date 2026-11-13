@@ -1,0 +1,33 @@
+name: Hobby HD009 inspect single-vs-multiple idealo feed support
+on:
+  push:
+    branches: [audit/hobby-hd009-equipment-coverage-20261113]
+    paths: [.github/workflows/hd009_feed_multi_capability_check.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify feed selection, worker, staging and multi-feed guards in installed release source
+        run: |
+          python3 - <<'PY'
+          import zipfile,re,pathlib
+          f=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          with zipfile.ZipFile(f) as z:
+            p='affiliate-portal-router/includes/trait-ppar-idealo.php'
+            a=z.read(p).decode('utf8','replace').splitlines()
+            for i,x in enumerate(a):
+              if re.search(r"feed_id|feed_url|idealo_refresh_remote_feed|idealo_import_feed_file|idealo_materialize_campaigns|last_import_started_at|last_seen|purge|delete.*idealo|stale|idealo_feed_download_url|feed.*id|multiple.*feed|array.*feed",x,re.I):
+                if any(k in x for k in ('function ','feed_id','feed_url','last_import_started_at','last_seen','DELETE','delete_','feedId','materialize_campaigns','update_option')):
+                  print('CHECK',i+1,x[:900])
+            for i,x in enumerate(a):
+              if re.search(r'^    private function (idealo_refresh_remote_feed|idealo_import_feed_file|idealo_materialize_campaigns|idealo_queue_manual_refresh)',x):
+                print('METHOD',i+1,x[:250])
+                for j in range(i+1,min(i+24,len(a))):print('METHOD_BODY',j+1,a[j][:750])
+            main=z.read('affiliate-portal-router/hobby-depot-affiliate-router.php').decode('utf8','replace').splitlines()
+            for i,x in enumerate(main):
+              if "'feed_id'" in x and any(k in x for k in ("['feed_id']", "=>", "sanitize")):
+                print('MAIN_FEED_FIELD',i+1,x[:600])
+          PY
