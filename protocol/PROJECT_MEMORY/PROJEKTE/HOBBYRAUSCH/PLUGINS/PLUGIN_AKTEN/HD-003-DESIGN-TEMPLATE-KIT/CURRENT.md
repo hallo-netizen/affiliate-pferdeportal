@@ -1,3 +1,9 @@
+# HD003 CURRENT 1.50.813 – sichtbares Beige und Türkis
+
+Vollständiges CURRENT.zip SHA256: 5fb7053f31d705b9c2001fbcdfecf518c05d8c1fe52283f058943ca48f6eba73. Vorversion als versioniertes ZIP archiviert. Details: DESIGN/HD003_SICHTBARE_PRODUKTBUTTONS_1.50.813_20261113.md.
+
+---
+
 # HD003 CURRENT 1.50.812 – richtige Produktkarten
 
 Full plugin 1a5cad59bf033780abcc08f3ae70f7e7fbaf6a8c209d4cd97371e5828287dafc. 1.50.811 unverändert archiviert. Beleg: DESIGN/HD003_1.50.812_PRODUKTKARTEN_20261113.md
