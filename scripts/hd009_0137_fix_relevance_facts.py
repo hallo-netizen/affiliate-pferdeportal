@@ -65,7 +65,16 @@ topical=r'''    /** Public-safe text evidence, no API/DB access and no fuzzy sub
             $found[$this->idealo_match_stem($word)]=true;
         }
         foreach ($need as $word) {
-            if (!isset($found[$this->idealo_match_stem($word)])) { return false; }
+            $stem=$this->idealo_match_stem($word);
+            if (isset($found[$stem])) { continue; }
+            // A literal compound such as Airbrushpistole is relevant.
+            // One-letter Malene/Malen substrings remain rejected.
+            $compound=false;
+            foreach (array_keys($found) as $term) {
+                if (strlen($stem)>=5 && strpos($term,$stem)===0
+                    && strlen($term)-strlen($stem)>=4) { $compound=true; break; }
+            }
+            if (!$compound) { return false; }
         }
         return true;
     }
