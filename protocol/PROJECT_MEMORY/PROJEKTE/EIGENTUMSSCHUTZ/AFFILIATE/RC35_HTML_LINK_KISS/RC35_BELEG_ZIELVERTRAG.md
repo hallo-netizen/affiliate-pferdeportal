@@ -1,11 +1,11 @@
 # Hab & Bewahr RC35 – One-owner original HTML href evidence (13.11.2026)
 
 ## Actual bug evidenced from the installed RC34 source chain
-- The original HTML \`<a href=...>\` is preserved as tracking_url; its entire HTML string is stored in payload.html.
+- The original HTML \`<a href=...>\` is preserved as tracking_url; the importer's sanitized original anchor text is stored in payload.html (markup attributes are not retained there).
 - Existing \`output_destination_semantic_text()\` returned empty for stored \`tracking_checked\` and \`tracking_fallback\` links without inspecting meaningful source URL tokens.
 - A published public Tarifcheck partner link explicitly shows \`deep=kfz-versicherung\` inside an a.partner-versicherung.de tracking URL. The importer's \`creative_library_destination_from_tracking()\` only looks for URL-valued redirect parameter names, not this product-specific deep= token.
 - A separate link resolver discarded *successful same-domain redirects* even when the final page path changed.
-- HTML anchor visible text was preserved in original payload.html but never considered by the insurance matching rule.
+- Visible original anchor text was preserved in sanitized payload.html but never considered by the insurance matching rule.
 - This establishes a concrete **code defect**, but it does **not** prove that every one of the 160 private banner codes contains these exact clues.
 
 ## Single-path implementation
