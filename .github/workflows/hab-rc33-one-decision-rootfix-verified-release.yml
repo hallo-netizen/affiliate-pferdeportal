@@ -1,4 +1,4 @@
-name: HAB RC33 one owner no duplicated insurance banner decisions full QA
+name: HAB RC33 root fix after historical guard analysis, full PHP QA
 on:
   push:
     branches: [hab-affiliate-rc33-one-decision-20261113]
