@@ -1,0 +1,78 @@
+name: HAB RC29 product names and actual deepest-category routing QA
+on:
+  push:
+    branches: [hab-affiliate-rc29-product-names-leaf-contract-20261113]
+    paths: [.github/workflows/hab-rc29-verified-deep-category-products-release.yml]
+permissions: {contents: write}
+jobs:
+  build-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild verified RC23-RC29 chain and real PHP product-path tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          python3 "$R/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/build_rc24.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/qa_rc24.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/build_rc25.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/qa_rc25.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/build_rc26.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/qa_rc26.py"
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/build_rc27.py"
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/qa_rc27.py"
+          python3 "$R/AFFILIATE/RC28_CATALOG_KISS/build_rc28.py"
+          python3 "$R/AFFILIATE/RC28_CATALOG_KISS/qa_rc28.py"
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" /tmp/RC28_IDENTICAL.zip
+          python3 "$R/AFFILIATE/RC29_PRODUCT_NAMES_LEAF_CONTRACT/build_rc29.py"
+          python3 "$R/AFFILIATE/RC29_PRODUCT_NAMES_LEAF_CONTRACT/qa_rc29.py"
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import hashlib
+          R=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ')
+          p=R/'PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          with ZipFile('/tmp/RC28_IDENTICAL.zip') as a,ZipFile(p) as b:
+            diff={n for n in a.namelist() if a.read(n)!=b.read(n)}
+            expected={'affiliate-portal-router/includes/trait-ppar-idealo.php','affiliate-portal-router/affiliate-portal-router.php','affiliate-portal-router/readme.txt'}
+            assert diff==expected,diff
+            assert a.read('affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php')==b.read('affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php')
+            assert a.read('affiliate-portal-router/assets/frontend.css')==b.read('affiliate-portal-router/assets/frontend.css')
+            print('HAB_RC29_ONLY_EXISTING_MATCHER_CSS_AND_CATEGORY_TREE_IDENTICAL_PASS',p.stat().st_size,hashlib.sha256(p.read_bytes()).hexdigest())
+          PY
+      - name: Retest existing product importer + multi-merchant buttons
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess,tempfile
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112')
+          with tempfile.TemporaryDirectory() as td:
+            s=(p/'qa_candidate.py').read_text()
+            assert '0.1.20-rc23' in s
+            q=Path(td)/'qa_rc29_compat.py'
+            q.write_text(s.replace('0.1.20-rc23','0.1.26-rc29'))
+            for x in [['python3',str(q)],['python3',str(p/'qa_feed_pipeline.py')],['python3',str(p/'qa_buttons.py')]]:
+              r=subprocess.run(x,capture_output=True,text=True)
+              print(r.stdout,r.stderr)
+              assert r.returncode==0,(x,r.stderr)
+          print('HAB_RC29_EXISTING_IMPORTER_AND_MULTIPROVIDER_PASS')
+          PY
+      - name: Publish only after full QA and original ZIP no unrelated changes
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          FILE=/tmp/HAB_Bewahr_Affiliate_RC29_TEST.zip
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" "$FILE"
+          TAG=hab-affiliate-rc29-product-names-leaf-contract-20261113
+          gh release create "$TAG" "$FILE#HAB_Bewahr_Affiliate_RC29_TEST.zip" --target "$GITHUB_SHA" \
+            --title "Hab & Bewahr RC29 – passende Produkte vom Thema bis zur Endkategorie (Test)" \
+            --notes "KISS-Korrektur des vorhandenen Idealo-Matchers: Produktnamen wie Möbeltresor, Pulverfeuerlöscher und Wassersensor werden in den bestehenden Warengruppen erkannt. Keine neuen Warengruppen, keine geschätzten GTIN, keine Erfindung von Bildern/Anbietern. Die echten vorhandenen Zielkanten wurden für passende R3-Themenseite UND zugeordnete tiefste Kategorie mit den echten PHP-Routinen getestet. Negativtests für Zubehör/fremde Produkte sowie alle vorherigen Importer-/Mehrfachanbieter-Sicherheitsprüfungen bestanden. Nur Idealo-Quellfunktion plus Versionsheader/Readme geändert; CSS, WordPress-Baum und andere Portale identisch. Live-Abdeckung nach echtem Feedneulauf ist noch unbekannt und wird nicht behauptet." \
+            --prerelease
+          gh release view "$TAG" --json assets,url --jq '{url,assets:[.assets[]|{name,size,url}]}'
