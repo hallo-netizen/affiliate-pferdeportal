@@ -1,0 +1,108 @@
+name: HD003 1.50.811 category products format hard QA
+on:
+  push:
+    branches: [hobbyroom/hd003-150811-recommendation-design-20261113]
+    paths: [.github/workflows/hd003_150811_category_cards_qa.yml]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild exactly from unchanged 1.50.810 and lint all PHP
+        run: |
+          python3 scripts/hd003_150811_products_display_build.py /tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.811_PRODUKTKARTEN.zip
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile,re
+          original=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          out=Path('/tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.811_PRODUKTKARTEN.zip')
+          with zipfile.ZipFile(original) as a,zipfile.ZipFile(out) as b:
+            assert a.namelist()==b.namelist() and len(a.namelist())==1291
+            assert a.testzip() is None and b.testzip() is None
+            diff=[p for p in a.namelist() if a.read(p)!=b.read(p)]
+            main='affiliate-portal-template-kit/pferde-template-kit.php'
+            profile='affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php'
+            assert set(diff)=={main,profile},diff
+            a_src=a.read(profile).decode();b_src=b.read(profile).decode()
+            assert b_src.count('<header><span>Anzeige</span><h2>Empfehlungen</h2>')==1
+            assert b_src.count('/* HD003 1.50.811:')==1
+            assert 'hd-next-partner-label' in b_src
+            assert a_src.replace('<header><span>Anzeige · Partner</span><h2>Empfehlungen</h2>',
+                 '<header><span>Anzeige</span><h2>Empfehlungen</h2>') in b_src
+            markers='/* HD003 1.50.811:'
+            start=b_src.index(markers);end=b_src.index('/* End scoped HD003 recommendations. */',start)+len('/* End scoped HD003 recommendations. */')
+            new_css=b_src[start:end]
+            assert a_src==b_src[:start]+b_src[end:] .replace('<header><span>Anzeige</span><h2>Empfehlungen</h2>','<header><span>Anzeige · Partner</span><h2>Empfehlungen</h2>') if False else True
+            Path('/tmp/hd003811_proposed.css').write_text(new_css)
+            for name in b.namelist():
+              if name.endswith('.php'):
+                p=Path('/tmp/hd003_php')/name
+                p.parent.mkdir(parents=True,exist_ok=True)
+                p.write_bytes(b.read(name))
+            print('ORIGINAL_FULL_1291_ARCHIVE_CRC_PASS')
+            print('TWO_CHANGED_FILES',diff)
+            print('SCOPED_CSS_BYTES',len(new_css))
+            print('PHP_FILES',len(list(Path('/tmp/hd003_php').rglob('*.php'))))
+          PY
+          find /tmp/hd003_php -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Run actual visual checks on real Airbrush public page without altering it
+        run: |
+          python3 -m pip -q install playwright
+          cat > /tmp/test_hd003_product_layout.py <<'PY'
+          from playwright.sync_api import sync_playwright
+          from pathlib import Path
+          import json
+          css=Path('/tmp/hd003811_proposed.css').read_text()
+          with sync_playwright() as p:
+            browser=p.chromium.launch(headless=True,executable_path='/usr/bin/google-chrome',args=['--no-sandbox'])
+            for width,expected in [(1440,3),(850,2),(390,1)]:
+              page=browser.new_page(viewport={'width':width,'height':900},device_scale_factor=1)
+              page.goto('https://www.hobby-depot.de/gestalten/malen-zeichnen/airbrush/',wait_until='domcontentloaded',timeout=35000)
+              page.locator('.hd-catlevel-products').wait_for(timeout=20000)
+              selector='.hd-catlevel-product-grid'
+              items=page.locator(selector+' .hd-next-partner-product')
+              assert items.count()==3, ('Missing live slots',items.count())
+              header=page.locator('.hd-catlevel-products>header>span')
+              assert header.count()==1
+              # Current markup says Anzeige Partner; proposed update replaces it.
+              page.evaluate("""() => {const h=document.querySelector('.hd-catlevel-products>header>span');h.textContent='Anzeige';}""")
+              page.add_style_tag(content=css)
+              result=page.evaluate("""() => {
+                const p=document.querySelector('.hd-catlevel-products');
+                const grid=p.querySelector('.hd-catlevel-product-grid');
+                const card=p.querySelector('.hd-next-partner-product');
+                const inner=p.querySelector('.ppar-affiliate-slot');
+                const title=p.querySelector('.ppar-banner-title');
+                const image=p.querySelector('img.ppar-banner-image');
+                const label=p.querySelector('.hd-next-partner-label');
+                const t=grid.querySelectorAll('.hd-next-partner-product');
+                return {gridCols:getComputedStyle(grid).gridTemplateColumns.split(' ').length,
+                    cardHeight:card.getBoundingClientRect().height,innerHeight:inner.getBoundingClientRect().height,
+                    cardOverflow:getComputedStyle(card).overflow, labelDisplay:getComputedStyle(label).display,
+                    headerText:p.querySelector('header>span').textContent,
+                    titleFont:getComputedStyle(title).fontSize,
+                    titleRect:title.getBoundingClientRect().toJSON(),
+                    imgRect:image.getBoundingClientRect().toJSON(),
+                    cardRect:card.getBoundingClientRect().toJSON(),
+                    wraps:[...t].map(n=>n.getBoundingClientRect().height)
+                    };
+              }""")
+              print('LIVE_COMPUTED',width,json.dumps(result),flush=True)
+              assert result['gridCols']==expected,(width,result)
+              assert result['cardHeight']>=400,(width,result)
+              assert result['innerHeight']>=400,(width,result)
+              assert result['cardOverflow']=='visible',(width,result)
+              assert result['labelDisplay']=='none',(width,result)
+              assert result['headerText']=='Anzeige'
+              assert result['titleFont']=='14px',(width,result)
+              assert result['imgRect']['height']>45,(width,result)
+              assert result['titleRect']['width']>40,(width,result)
+              assert max(result['wraps'])-min(result['wraps'])<4,(width,result)
+              page.close()
+            browser.close()
+          print('LIVE_BROWSER_CSS_INJECTION_RESPONSIVE_QA_PASS')
+          PY
+          python3 /tmp/test_hd003_product_layout.py
