@@ -176,8 +176,11 @@ with ZipFile(BytesIO(old)) as z:
             $settings['feed_url']='';
             $settings['api_last_checked_at']=0;
         }'''+t[b_id:]
-    t=once(t,
-        '<p><strong>Feed-ID:</strong> <code>2901</code><input type="hidden" name="ppar_provider[idealo][feed_id]" value="2901"> <span class="description">Gebundener Standardfeed; portalweiter Superset-Feed.</span></p>',
+    field_anchor='<p><strong>Feed-ID:</strong> <code>2901</code><input type="hidden" name="ppar_provider[idealo][feed_id]" value="2901"> <span class="description">Gebundener Standardfeed; portalweiter Superset-Feed.</span></p>'
+    i_field=t.find('name="ppar_provider[idealo][feed_id]"')
+    print('HAB_RC25_ACTUAL_FEED_FIELD',t[max(0,i_field-260):i_field+310] if i_field>=0 else 'not in plugin')
+    if field_anchor in t:
+        t=once(t,field_anchor,
         r'''<p><label>Produktfeed aus geprüftem iPN-Konto<br><select name="ppar_provider[idealo][feed_id]">
             <?php $has_feed=false; foreach ((array)($s['api_feed_inventory']??array()) as $entry): if (!is_array($entry)||!empty($entry['mock'])) continue; $has_feed=true; ?>
             <option value="<?php echo esc_attr((string)$entry['feed_id']); ?>" <?php selected((string)$s['feed_id'],(string)$entry['feed_id']); ?>><?php echo esc_html((string)$entry['name'].' · Feed '.(string)$entry['feed_id'].' · '.absint($entry['number_of_products']).' Produkte'); ?></option>
@@ -189,7 +192,8 @@ with ZipFile(BytesIO(old)) as z:
     t=once(t,
         "        $manual=trim((string)($settings['feed_url'] ?? ''));\n        if ($manual!=='') { return $this->idealo_validate_feed_url($manual); }",
         "        // Hab always downloads the exact approved feedId through the existing iPN export.\n        // An older manually saved URL must not silently import a different feed.")
-    t=once(t,
+    if 'Offizielle iPN-Download-URL für Feed 2901 <span' in t:
+        t=once(t,
         'Offizielle iPN-Download-URL für Feed 2901 <span',
         'Optionale frühere Download-URL (wird nicht mehr zum Import verwendet) <span')
     t=once(t,
