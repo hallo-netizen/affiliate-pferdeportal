@@ -1,3 +1,11 @@
+## 13.11.2026 – HAB-004 RC33 NEUESTE VOLLSTÄNDIG GETESTETE ZIP, NOCH NICHT LIVE
+
+`HAB_Bewahr_Affiliate_RC33_TEST.zip` / `0.1.30-rc33`, GitHub-Release `hab-affiliate-rc33-one-authoritative-banner-decision-20261113`; SHA256 `b07f9dbde9267bbfa9764e36ed92787d52c96881e306e0409784e5a1ca83f51a`. **QA 43447823048 und 43448625395 SUCCESS** mit realer PHP-Kampagnenaktivierung `published` bei nachweislich geprüfter 728×90 Original-Datei, fail-closed bei ungeprüftem Bild. Ein fachlicher Import-Entscheider, unveränderliche Versicherungs-Unterzweigkarte, keine zweite Themenentscheidung bei Speicherung/Frontend. Veraltete Mehrfachkarten kontrolliert neu berechnen; keine Originalbanner löschen oder erneut importieren.
+
+Exakte Arbeitsakte: `../../../AFFILIATE/RC33_ONE_DECISION/ABNAHME_RC33_20261113.md`. Historische `CURRENT.zip` bleibt Basis (älter), die aktuelle installierbare ZIP ist das GitHub-Release. Andere Portale wurden nur auf mögliche strukturelle Doppel-Schreiber geprüft und **nicht** geändert. Live-Installation und tatsächliche Ausspielung noch ausstehend.
+
+---
+
 ## 13.11.2026 – RC31 NEUESTE GEPRÜFTE TESTVERSION, NOCH NICHT LIVE
 
 `HAB_Bewahr_Affiliate_RC31_TEST.zip` (2.349.072 Bytes, SHA256 `fa72cf9519ccaf92c672581eff35a8e4908a3f15511a1ef5f272448a36c99d56`), Plugin **0.1.28-rc31**, GitHub-Release `hab-affiliate-rc31-insurance-branch-cascade-20261113`, QA GitHub Actions **43439019366 SUCCESS**. Spezialversicherungsbanner ausschließlich in eigenem nachgewiesenen Versicherungszweig mit echter Verteilung zu den Unterkategorien; echte allgemeine Versicherungen innerhalb des gesamten Versicherungsbaums, andere Welten und Kredit sauber ausgeschlossen. Automatisches Neu-Zuordnen der schon gespeicherten Tarifcheck-Originale im Affiliate-Backend, max. 60 pro Aufruf; kein Reimport. Idealo-Bericht nennt jetzt ausdrücklich nur *Idealo*-Feedabdeckung, andere Anbieter weiter wie bisher. Testvollbeleg `../../../AFFILIATE/RC31_INSURANCE_CASCADE/ABNAHME_RC31_20261113.md`.
