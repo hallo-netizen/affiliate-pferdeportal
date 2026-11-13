@@ -1,0 +1,46 @@
+{
+  "stand": "QA_ONLY_NOT_INSTALLABLE",
+  "created": "2026-11-13",
+  "prior_zip": "PFERDEATELIER_KISS_MINI_NUR_TITEL_VORAB_FREIGABE_QA_20261113.zip",
+  "prior_sha256": "489ca173ea7be9e5c88cdbfc8ef9f8182575ad04a0c6e893aa754a5432111439",
+  "new_zip": "PFERDEATELIER_KISS_PLANPLATZ_VOR_MINI_NUR_QA_20261113.zip",
+  "new_sha256": "690543b7e9ecab60c2fcda6e0bee1f0c7db61320b2dd1b8a306cd5e5cdded8fd",
+  "bytes": 1870184,
+  "entries": 216,
+  "changed_entries": [
+    "arbeit/Portal SEO Topic Engine/includes/class-pste-mini-workflow.php",
+    "arbeit/portal-seo-editorial-plan-compiler/contracts/compiler-package-binding-v1.json",
+    "arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-plan-compile-job.php",
+    "arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-seo-reader.php",
+    "arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-slot-allocator.php"
+  ],
+  "source_php_files_changed": 4,
+  "existing_binding_manifest_changed": 1,
+  "originale_verbatim": true,
+  "zip_integrity": "PASS",
+  "wordpress_live": false,
+  "claims": [
+    "One semantic SEO approval before MINI",
+    "One canonical plan-place via existing PSERC allocator before MINI",
+    "Existing PSTE atomic option holds booking, not PPM runtime write",
+    "PSERC allocator recognizes reserved canonical and reuses only for owner",
+    "MINI title-only and no second PSERC SEO decision"
+  ],
+  "limitations": [
+    "PPM original runtime not executed against real WP",
+    "K0/WordPress actual import not executed",
+    "Cross-plugin external writers not demonstrated to see soft reservations"
+  ],
+  "qa_counts": {
+    "PSTE_Mini_preTitle": 30,
+    "PSERC_Slot_Allocator": 11,
+    "PSERC_Reader_prebooked": 32,
+    "real87historical": 159,
+    "PSERC_existing_reader": 27,
+    "PSERC_existing_compile_job": 15,
+    "PSERC_existing_compiler": 11,
+    "offline_e2e_mock": 18,
+    "php_lint": 126,
+    "PSERC_integrity_required_files": 61
+  }
+}
