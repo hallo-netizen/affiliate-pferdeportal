@@ -6,6 +6,7 @@ on:
       - .github/workflows/hab-rc33-one-decision-rootfix-verified-release.yml
       - protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/RC33_ONE_DECISION/build_rc33.py
       - protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/RC33_ONE_DECISION/qa_rc33.py
+      - protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/RC33_ONE_DECISION/qa_materialize_rc33.py
 permissions: {contents: write}
 jobs:
   full-legacy-and-real-php-tests:
@@ -38,6 +39,7 @@ jobs:
           cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" /tmp/RC31_BASE.zip
           python3 "$R/AFFILIATE/RC33_ONE_DECISION/build_rc33.py"
           python3 "$R/AFFILIATE/RC33_ONE_DECISION/qa_rc33.py"
+          python3 "$R/AFFILIATE/RC33_ONE_DECISION/qa_materialize_rc33.py"
           python3 - <<'PY'
           from pathlib import Path
           from zipfile import ZipFile
@@ -83,8 +85,12 @@ jobs:
           FILE=/tmp/HAB_Bewahr_Affiliate_RC33_TEST.zip
           cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" "$FILE"
           TAG=hab-affiliate-rc33-one-authoritative-banner-decision-20261113
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
           gh release create "$TAG" "$FILE#HAB_Bewahr_Affiliate_RC33_TEST.zip" --target "$GITHUB_SHA" \
             --title "Hab & Bewahr RC33 – eine zentrale Entscheidung für Versicherungsbanner (Test)" \
             --notes "KISS-Ursache statt Symptome: Nur beim Bannerimport wird das passende Versicherungsthema samt echten Unterzielen entschieden und gespeichert. Der spätere Planer darf die Zielkarte nicht überschreiben. Bei der Ausgabe wird ausschließlich diese einmal gespeicherte Karte verwendet; die alten zweiten Titel-/Familien-/Partner-Regeln entfallen. Alte globale Bannerzuordnungen werden zunächst nicht ausgespielt und beim nächsten Öffnen der Affiliate-Zentrale automatisch in Gruppen korrigiert. Keine Sicherheitsprüfungen für Links, Bilder, Formate oder manuelle Vetos entfernt. Bestehendes Design, Produktbanner, Idealo/eBay/OTTO, Tarifrechner und andere Portale unverändert. Realer Original-PHP-Test: Hausrat + seine Unterkategorie PASS, Motorrad/Wassermelder/alte falsche Zuordnung BLOCK; überprüfte Originalbanner bleiben erhalten. Alle historischen Tests und 25 PHP-Lints bestanden. Live-Abnahme nach Installation bleibt offen." \
             --prerelease
+          else
+            echo "Existing RC33 binary kept unchanged after additional source-level acceptance."
+          fi
           gh release view "$TAG" --json assets,url --jq '{url,assets:[.assets[]|{name,size,url}]}'
