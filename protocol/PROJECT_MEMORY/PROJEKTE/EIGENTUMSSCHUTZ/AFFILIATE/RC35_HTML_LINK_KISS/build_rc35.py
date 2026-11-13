@@ -85,6 +85,20 @@ with ZipFile(BytesIO(raw)) as original:
         """                (string)($payload['name'] ?? ''),
                 wp_strip_all_tags((string)($payload['html']??'')),
             ))),""")
+    # Revisit old verified originals ONCE with this fixed import evidence.
+    # RC34 has already marked its old pass complete; do not reuse that option.
+    o=one(o,
+        "$option='ppar_hab_rc34_tarifcheck_reconcile_v1';",
+        "$option='ppar_hab_rc35_tarifcheck_reconcile_v1';")
+    # When real original deep/path evidence exists, do not fetch the same
+    # tracking URL again just to repeat a decision already available locally.
+    o=one(o,
+        """if(in_array($source,array('tracking_checked','tracking_fallback'),true)
+            && method_exists($this,'creative_library_resolve_tracking_destination_import')){""",
+        """if(in_array($source,array('tracking_checked','tracking_fallback'),true)
+            && $this->output_destination_semantic_text($row)===''
+            && method_exists($this,'creative_library_resolve_tracking_destination_import')){""")
+
     data[out]=o.encode()
     c=data[creative].decode()
     # A completed safe 3xx redirect on SAME domain is still a real redirect.

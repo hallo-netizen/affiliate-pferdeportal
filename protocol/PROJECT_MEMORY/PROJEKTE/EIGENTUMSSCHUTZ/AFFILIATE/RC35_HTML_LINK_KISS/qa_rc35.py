@@ -17,13 +17,14 @@ with ZipFile(Z) as z:
     main=z.read("affiliate-portal-router/affiliate-portal-router.php").decode()
     assert "Version: 0.1.32-rc35" in main
     assert "original_anchor_text" in out
+    assert "ppar_hab_rc35_tarifcheck_reconcile_v1" in out
     assert "$host==='a.partner-versicherung.de'" in out
     assert "$final_host !== $initial_host" not in cr
 source=(R/"AFFILIATE/RC31_INSURANCE_CASCADE/qa_rc31.py").read_text()
 assert source.count("0.1.28-rc31")>=1
 source=source.replace("0.1.28-rc31","0.1.32-rc35")
 # The inherited, one-time migration already has its RC34 checkpoint key.
-source=source.replace("ppar_hab_rc31_tarifcheck_reconcile_v1","ppar_hab_rc34_tarifcheck_reconcile_v1")
+source=source.replace("ppar_hab_rc31_tarifcheck_reconcile_v1","ppar_hab_rc35_tarifcheck_reconcile_v1")
 anchor="$motor=banner('motorradversicherung/','Motorradversicherung vergleichen');"
 assert source.count(anchor)==1
 checks=r'''
