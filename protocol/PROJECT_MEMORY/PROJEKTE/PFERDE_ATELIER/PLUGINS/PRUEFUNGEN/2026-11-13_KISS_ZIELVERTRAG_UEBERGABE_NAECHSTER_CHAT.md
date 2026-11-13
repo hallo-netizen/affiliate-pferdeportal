@@ -108,3 +108,15 @@ Für jede relevante Funktion eine knappe, belegte Entscheidung: `BEHALTEN`, `UNV
 - **Pflicht-Gegenprobe vor Pilotfreigabe:** Sofortauftrag anlegen → erscheint in der einen Themen-/Kategorieübersicht → wird nicht erneut als freies Thema ausgewählt → eindeutiger Export → K0-Rückgabe → genau ein Entwurf; Abbruch und Wiederaufnahme ohne erneute fachliche Entscheidung.
 
 Der Begriff „Redaktionsplan synchronisieren“ bezeichnet im neuen KISS-Zielbild **die eine zentrale Themen-/Kategorie- und Auftragsübersicht** – nicht die unbewiesene Pflicht, einen gesonderten PPM-Produktionsplan wieder einzuführen. Vorhandene Altschnittstellen müssen bis zur tatsächlich bestandenen Migration kompatibel bleiben.
+
+
+### 20. Integrierte Diagnose als Beweisquelle – nicht als zweiter Prüfer
+**Nutzerentscheid vom 13.11.2026: Pluginname im WordPress-Backend ausschließlich `Texterstellung`.** Der frühere Name „Artikelwerkstatt – KISS“ ist nur historisch. **Ein einziges Plugin.** Kein zusätzliches Diagnoseplugin und keine neue fachliche Qualitätsinstanz.
+
+- Die Diagnose gehört in die bestehende **Texterstellung**. Ihr Zweck ist die **Entwickler-/Assistenten-Fehlersuche anhand tatsächlicher Daten**, nicht die tägliche Bedienung. Ein Admin kann einen maschinenlesbaren JSON-Bericht im Backend herunterladen und im Chat bereitstellen.
+- Beim bestehenden Produktionsweg werden nur tatsächliche **Verarbeitungsschritte, Statusänderungen, Fehlercodes, Zuordnungen, Einzelrücklaufprobleme und Speichernachweise** protokolliert; ein begrenzter Verlauf genügt. Keine neue Bewertung von Suchintention, Keyword, Titel, Textqualität, Kategoriebedarf oder K0.
+- **Tatsachenkennzeichnung:** Belegte Originaldaten, lokal erzeugte IDs/Artikelplätze und offene/fehlende Felder müssen unterscheidbar bleiben. Kein erfundener PPM-Status und keine Scheinerfolge.
+- **Datenschutz/Sicherheit:** Diagnoseabruf nur für Administratoren mit Bestätigung; keine API-Schlüssel, Passwörter, Nonces, vollständigen Artikeltexte oder unsicheren Anbieterfehlermeldungen. Site-Keywords/Titel und echte Fehlerkennungen dürfen für die begrenzte Fehlersuche enthalten sein. Keine automatische Übertragung.
+- **Beweisregel:** Bei Problemen zuerst den real heruntergeladenen Bericht lesen, Ursache einem einzigen verantwortlichen Schritt zuordnen und nur dort reparieren. Ein fehlender Bericht begründet keine Vermutung. Ein neuer Reparatur-/Diagnose-Worker ist verboten.
+- **Ist-Stand:** `Texterstellung_0.3.0_TEST_INSTALLIEREN.zip` lokal mit **119** Gegenproben geprüft, aber noch **nicht** auf echter WordPress-Testseite installiert/abgenommen. Keine Livefreigabe. Offene automatische PSTE-Semantik und PPM-/K0-Kompatibilität bleiben ausdrücklich offen.
+- **Chatübergabe:** `2026-11-13_TEXTERSTELLUNG_0.3.0_DIAGNOSE_ABNAHME.md` im gleichen PR lesen; TEST-Installer verlustfrei als ZIP-Base64 unter `../PILOT_TEXTERSTELLUNG/Texterstellung_0.3.0_TEST_INSTALLIEREN.zip.base64.txt`; Ziel-Testseite und Live unverändert, bis der Nutzer selbst installiert und echte Daten ausliest.
