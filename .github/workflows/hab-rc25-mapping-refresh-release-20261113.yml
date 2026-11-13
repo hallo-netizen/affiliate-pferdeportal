@@ -1,0 +1,63 @@
+name: HAB RC25 minimal same-feed rematch build and release
+on:
+  push:
+    branches: [hab-affiliate-rc25-mapping-refresh-20261113]
+    paths: [.github/workflows/hab-rc25-mapping-refresh-release-20261113.yml]
+permissions:
+  contents: write
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild exact RC24 then apply isolated RC25 root-cause correction
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          ROOT=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          BASE=$ROOT/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112
+          RC24=$ROOT/AFFILIATE/RC24_COVERAGE_DESIGN
+          RC25=$ROOT/AFFILIATE/RC25_MAPPING_REFRESH
+          PLUG=$ROOT/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE
+          python3 "$BASE/build_candidate.py"
+          python3 "$RC24/build_rc24.py"
+          python3 "$RC24/qa_rc24.py"
+          python3 "$RC25/build_rc25.py"
+          python3 "$RC25/qa_rc25.py"
+          python3 - "$BASE" <<'PY'
+          import subprocess,tempfile,sys
+          from pathlib import Path
+          base=Path(sys.argv[1])
+          with tempfile.TemporaryDirectory() as td:
+            qa=(base/'qa_candidate.py').read_text()
+            assert '0.1.20-rc23' in qa
+            compat=Path(td)/'qa_candidate_rc25.py'
+            compat.write_text(qa.replace('0.1.20-rc23','0.1.22-rc25'))
+            for cmd in [['python3',str(compat)],['python3',str(base/'qa_feed_pipeline.py')],['python3',str(base/'qa_buttons.py')]]:
+              r=subprocess.run(cmd,capture_output=True,text=True)
+              print(r.stdout, r.stderr)
+              assert r.returncode==0,(cmd,r.stderr)
+          print('HAB_RC25_LEGACY_REGRESSION_PASS')
+          PY
+          FILE=/tmp/HAB_Bewahr_Affiliate_RC25_TEST.zip
+          cp "$PLUG/CURRENT.zip" "$FILE"
+          python3 - "$FILE" <<'PY'
+          from zipfile import ZipFile
+          from hashlib import sha256
+          from pathlib import Path
+          import sys
+          p=Path(sys.argv[1])
+          with ZipFile(p) as z:
+            assert z.testzip() is None and len(z.namelist())==36
+            assert b'Version: 0.1.22-rc25' in z.read('affiliate-portal-router/affiliate-portal-router.php')
+          print('HAB_RC25_FINAL_ZIP',p.stat().st_size,sha256(p.read_bytes()).hexdigest())
+          PY
+          TAG=hab-affiliate-rc25-mapping-refresh-test-20261113
+          gh release create "$TAG" "$FILE#HAB_Bewahr_Affiliate_RC25_TEST.zip" --target "$GITHUB_SHA" \
+            --title "Hab & Bewahr RC25 – Idealo-Produktzuordnung bei unverändertem Feed aktualisieren (Test)" \
+            --notes "KISS: Die bestehende Idealo-Synchronisierung prüft nun zusätzlich, ob sich die tatsächlich erkannte Produktzuordnung geändert hat. Bei neuer Zuordnung wird auch eine unveränderte Feeddatei einmalig neu eingelesen. Bei unveränderter Zuordnung bleibt der bisherige Download-Schutz. Nur HAB-004 geändert (Idealo + Version + Readme), keine zusätzlichen Tabellen, Worker oder Installationen. Quelle: geprüfte RC24. Testrelease; WordPress-Live-Abnahme nach Installation noch erforderlich." \
+            --prerelease
+          gh release view "$TAG" --json assets,url --jq '{url,assets:[.assets[]|{name,size,url}]}'
