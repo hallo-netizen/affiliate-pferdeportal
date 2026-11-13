@@ -1,0 +1,170 @@
+--- vorher/arbeit/portal-seo-editorial-plan-compiler/contracts/compiler-package-binding-v1.json
++++ nachher/arbeit/portal-seo-editorial-plan-compiler/contracts/compiler-package-binding-v1.json
+@@ -93,8 +93,8 @@
+             "bytes": 13770
+         },
+         "includes/class-pserc-compiler.php": {
+-            "sha256": "8682c9523c8336e3b0e32c970d4b1037ee213219734e5d49400d18597e08da62",
+-            "bytes": 29748
++            "sha256": "cf2ca8db9bcac32a7b287ebc2eb9cc4c5261b8e5024610429183c4bdadeedc1c",
++            "bytes": 29981
+         },
+         "includes/class-pserc-editorial-outcome-gate.php": {
+             "sha256": "4307038b6b36180ae2abff9699109d6797fec524caa23626f6899dd880df4e08",
+@@ -133,12 +133,12 @@
+             "bytes": 3660
+         },
+         "includes/class-pserc-plan-compile-job.php": {
+-            "sha256": "44d4347b627a9610f09a16c3821a71983475a8787622989fd438124c3f6d1e44",
+-            "bytes": 42875
++            "sha256": "6508dbdde36ce50babf2ef6db3dc1cacbd96e100bcc91f1463197bd4a5274e8e",
++            "bytes": 43108
+         },
+         "includes/class-pserc-plan-dependency-fingerprint.php": {
+-            "sha256": "b6bf97c26cce6a5ce20178e2a02edbcd3973cf84b519b49d57f06caabc71851a",
+-            "bytes": 16513
++            "sha256": "cdaf38a9f3593a2e92d2a4ba20ea2fa4ce241a79312b78fed0bc96bd70dca737",
++            "bytes": 16487
+         },
+         "includes/class-pserc-plan-metrics.php": {
+             "sha256": "54aa8370a09d425f331fd888f6bec46c0e6b342188585885cf9363e191f0e8ef",
+@@ -161,8 +161,8 @@
+             "bytes": 10172
+         },
+         "includes/class-pserc-portal-topic-evidence-gate.php": {
+-            "sha256": "c35049cc361a8f876d2b94076822964143af093f44c7db2e964bf5b603379797",
+-            "bytes": 16881
++            "sha256": "bf924a9f04697310016d9cfd00fe6cd7e23d6c7be91299fd1885900f850ee9fd",
++            "bytes": 19219
+         },
+         "includes/class-pserc-ppm-bypass-guard.php": {
+             "sha256": "71c9eeec4ce375e044274ff4e53325e9bad93e521778c358ea7427ef2769cb73",
+@@ -197,8 +197,8 @@
+             "bytes": 29519
+         },
+         "includes/class-pserc-seo-reader.php": {
+-            "sha256": "6c0e532d7faf90ff5553f3880197b4b648047d5e6918a9686840b0adfbb4131e",
+-            "bytes": 19425
++            "sha256": "3ac1bbd2bb0b99cd0388c956c901d0072a777891cfb24aa4957cc3fdec5bbe73",
++            "bytes": 20638
+         },
+         "includes/class-pserc-seo-source-binding.php": {
+             "sha256": "b33a8499b0cd3223ad849ec24c585f57290bdacc5cd6748fc1b9352b374180e8",
+@@ -249,5 +249,5 @@
+             "bytes": 2914
+         }
+     },
+-    "binding_sha256": "6d886be3bdc8fdf4ad6f190dcfc2661c82c0614eb79db38094519964c60d21d5"
++    "binding_sha256": "66babdbdb1c996cdcf33a6c2bf093748033ec0f9cc20ab88d70e0f0bca8c3a0a"
+ }
+
+--- vorher/arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-compiler.php
++++ nachher/arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-compiler.php
+@@ -63,10 +63,13 @@
+ 
+             // The external SEO owner already decided this search intent once.
+             // Keep the normal legacy check ONLY for themes without an authentic receipt.
+-            $oneOwner=!empty($topic['single_external_seo_owner_receipt']);
++            $oneOwner=!empty($topic['single_external_seo_owner_receipt'])
++                ||!empty($topic['upstream_central_coverage_receipt']);
+             if($oneOwner){
+                 $topic['semantic_duplicate_gate']=['decision'=>'PASS','reason_codes'=>[
+-                    'EXTERNAL_SEO_OWNER_ALREADY_DECIDED_NO_SECOND_SEMANTIC_SCAN']];
++                    !empty($topic['single_external_seo_owner_receipt'])
++                        ?'EXTERNAL_SEO_OWNER_ALREADY_DECIDED_NO_SECOND_SEMANTIC_SCAN'
++                        :'PSTE_CENTRAL_OWNER_ALREADY_DECIDED_NO_SECOND_SEMANTIC_SCAN']];
+             }else{
+             $existingSemantic=PSERC_Semantic_Duplicate_Gate::againstExisting($topic,$existing);
+             $topic['semantic_duplicate_gate']=$existingSemantic;
+
+--- vorher/arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-plan-compile-job.php
++++ nachher/arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-plan-compile-job.php
+@@ -145,11 +145,14 @@
+             if(empty($technical['ok']))return self::finishReview($job,$topic,(string)($technical['primary_status']??'BLOCKED_TECHNICAL_STRAND'),(array)($technical['reason_codes']??['TECHNICAL_STRAND_BLOCKED']),[],$sortCursor);
+             if(empty($editorial['ok']))return self::finishReview($job,$topic,'BLOCKED_EDITORIAL_STRAND',(array)($editorial['reason_codes']??['EDITORIAL_STRAND_BLOCKED']),[],$sortCursor);
+             $projection=PSERC_Semantic_Duplicate_Gate::projectTopic($topic);
+-            if(!empty($topic['single_external_seo_owner_receipt'])){
++            if(!empty($topic['single_external_seo_owner_receipt'])
++                ||!empty($topic['upstream_central_coverage_receipt'])){
+                 // Existing candidate work stage and existing preparation writer.
+                 // Empty semantic comparison buckets: no duplicate evaluation AGAIN.
+                 $topic['semantic_duplicate_gate']=['decision'=>'PASS','reason_codes'=>[
+-                    'EXTERNAL_SEO_OWNER_ALREADY_DECIDED_NO_SECOND_SEMANTIC_SCAN']];
++                    !empty($topic['single_external_seo_owner_receipt'])
++                        ?'EXTERNAL_SEO_OWNER_ALREADY_DECIDED_NO_SECOND_SEMANTIC_SCAN'
++                        :'PSTE_CENTRAL_OWNER_ALREADY_DECIDED_NO_SECOND_SEMANTIC_SCAN']];
+                 $work=['topic'=>$topic,'baseline'=>(array)$env['baseline'],
+                     'structure'=>(array)$env['structure'],'sort_cursor'=>$sortCursor,
+                     'projection'=>$projection,'stage'=>'PREPARED','buckets'=>[],
+
+--- vorher/arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-portal-topic-evidence-gate.php
++++ nachher/arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-portal-topic-evidence-gate.php
+@@ -24,6 +24,40 @@
+         // external SEO owner. Do not run the retired LONGTAIL/consensus/duplicate
+         // reviewer a second time for this *source-proven* route. Legacy path below
+         // is byte-for-byte unchanged.
++        if(!empty($topic['upstream_central_coverage_receipt'])){
++            // Consume PSTE's already final pre-title coverage verdict. All
++            // category/type/title/capacity checks are owned by the existing
++            // PSERC technical and editorial strands before this function.
++            $owner=(array)$topic['upstream_central_coverage_receipt'];
++            $context=strtoupper(trim((string)($topic['context_state']??'')));
++            $codes=(array)($topic['reason_codes']??[]);
++            if(($owner['contract']??'')!=='PSTE_PLANNING_READINESS_GATE_V1_PRETITLE_PARITY'
++                ||($owner['status']??'')!=='PASS'||($owner['decision']??'')!=='PASS'
++                ||empty($owner['ok'])||empty($owner['pre_title_duplicate_gate']['ok'])
++                ||($owner['cannibalization']['decision']??'')!=='PASS'
++                ||($topic['decision']??'')!=='PASS'
++                ||($topic['planning_suitability']??'')!=='YES'
++                ||($topic['topic_role']??'')!=='ARTICLE_TOPIC'
++                ||($topic['research_job_contract']??'')!=='PSTE_AUTOMATIC_LONGTAIL_RESEARCH_JOB_V2'
++                ||($topic['research_run_status']??'')!=='COMPLETE'
++                ||!in_array($context,['CURRENT','NOT_REQUIRED'],true)
++                ||!empty($topic['category_gap_proposal'])
++                ||trim((string)($topic['source_query']??''))===''
++                ||trim((string)($topic['production_title']??''))===''
++                ||trim((string)($topic['category_slug']??''))===''
++                ||trim((string)($topic['article_type']??''))===''
++                ||trim((string)($topic['topic_family_name']??''))===''
++                ||(int)($topic['category_id']??0)<=0
++                ||array_intersect(self::HARD_BLOCK_REASONS,$codes))
++                return self::blocked('PORTAL_TOPIC_FINAL_CENTRAL_COVERAGE_NOT_CURRENT');
++            return ['ok'=>true,'status'=>'PSERC_PORTAL_TOPIC_EVIDENCE_PASS',
++                'reason_codes'=>[],'evidence_sources'=>['PSTE_FINAL_CENTRAL_OWNER'],
++                'enrichment_sources'=>[],'context_state'=>$context,
++                'category_slug'=>(string)$topic['category_slug'],
++                'article_type'=>(string)$topic['article_type'],
++                'topic_family'=>(string)$topic['topic_family_name'],
++                'write_attempted'=>false];
++        }
+         if(!empty($topic['single_external_seo_owner_receipt'])){
+             $receipt=(array)$topic['single_external_seo_owner_receipt'];
+             $poolKey=trim((string)($topic['pool_key']??''));
+
+--- vorher/arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-seo-reader.php
++++ nachher/arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-seo-reader.php
+@@ -160,7 +160,24 @@
+             $eligible=false;
+             $reasons[]='SEO_EXTERNAL_SINGLE_OWNER_PROOF_MISSING_OR_STALE';
+         }
++        // The normal PSTE research owner has already decided coverage once.
++        // Consume only a final, unchanged PASS from that SAME source. Do not
++        // grant this shortcut to a preliminary gate, manual override or review.
++        $centralApproved=$eligible&&!$externalOwnerClaimed&&$rawQuery!==''
++            &&empty($candidate['human_review_required'])
++            &&trim((string)($candidate['manual_status']??''))===''
++            &&empty($candidate['discovery_only'])
++            &&empty($candidate['duplicate_of_candidate_id'])
++            &&empty($candidate['category_gap_proposal'])
++            &&($candidate['research_job_contract']??'')==='PSTE_AUTOMATIC_LONGTAIL_RESEARCH_JOB_V2'
++            &&($candidate['research_run_status']??'')==='COMPLETE'
++            &&($ownerGate['contract']??'')==='PSTE_PLANNING_READINESS_GATE_V1_PRETITLE_PARITY'
++            &&($ownerGate['status']??'')==='PASS'&&!empty($ownerGate['ok'])
++            &&($ownerGate['decision']??'')==='PASS'
++            &&!empty($ownerGate['pre_title_duplicate_gate']['ok'])
++            &&($ownerGate['cannibalization']['decision']??'')==='PASS';
+         $normalized=[
++            'upstream_central_coverage_receipt'=>$centralApproved?$ownerGate:[],
+             'single_external_seo_owner_receipt'=>$single,
+             'pool_key'=>(string)($candidate['pool_key']??$candidate['global_topic_uuid']??''),
+             'candidate_id'=>(string)($candidate['candidate_id']??''),
