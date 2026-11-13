@@ -143,6 +143,19 @@ once(
                 if (!isset($product_stems[(string)$term])) { $equipment_match=false; break; }
             }""",
 "Exact complete equipment phrase tokens required in candidate")
+
+once(
+"""        $title_stems = array();
+        foreach ($this->idealo_match_tokens($title_n) as $token) { $title_stems[$this->idealo_match_stem($token)] = true; }""",
+"""        $title_stems = array();
+        foreach ($this->idealo_match_tokens($title_n) as $token) { $title_stems[$this->idealo_match_stem($token)] = true; }
+        if (preg_match('/(?:^|\\s)3d(?:\\s|$)/',$title_n)) { $title_stems['3d']=true; }""",
+"Require literal 3d qualifier in context product title")
+once(
+"""        $product_stems = array(); foreach ($primary as $token) { $product_stems[$this->idealo_match_stem($token)] = true; }""",
+"""        $product_stems = array(); foreach ($primary as $token) { $product_stems[$this->idealo_match_stem($token)] = true; }
+        if (preg_match('/(?:^|\\s)3d(?:\\s|$)/',$this->idealo_match_normalize($title))) { $product_stems['3d']=true; }""",
+"Require literal 3d qualifier in original feed matcher")
 data[trait]=s.encode()
 m=data[main].decode()
 start=m.index('    private function hd_idealo_category_title_relevant(')
@@ -183,6 +196,13 @@ new="""        $topic_match=true;
             if (!isset($found[$term])) { return false; }
         }
         return true;"""
+found_old="""        foreach ($this->idealo_match_tokens($title) as $word) {
+            $found[$this->idealo_match_stem($word)]=true;
+        }"""
+found_new=found_old+"""
+        if (preg_match('/(?:^|\\s)3d(?:\\s|$)/',$this->idealo_match_normalize($title))) { $found['3d']=true; }"""
+assert a.count(found_old)==1,'original final product title token location'
+a=a.replace(found_old,found_new,1)
 assert a.count(old)==1
 m=m[:start]+a.replace(old,new)+m[end:]
 assert '0.1.38' in m
