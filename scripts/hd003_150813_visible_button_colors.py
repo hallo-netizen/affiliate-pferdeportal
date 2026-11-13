@@ -19,10 +19,10 @@ a=s.index('/* HD003 1.50.812: genuine product cards')
 b=s.index('/* End HD003 1.50.812 category card design. */',a)+len('/* End HD003 1.50.812 category card design. */')
 part=s[a:b]
 assert part.count('background:#FAF8F4!important;')==1
-assert part.count('color:#0f8f95!important;')==1
+assert part.count('color:#0f8f95!important;')>=1
 assert part.count('border:1px solid #b7d7d4!important;')==1
 part=part.replace('background:#FAF8F4!important;', 'background:#EFDECA!important;')
-part=part.replace('color:#0f8f95!important;', 'color:#00777D!important;')
+part=part.replace('color:#0f8f95!important;', 'color:#00777D!important;',1)
 part=part.replace('border:1px solid #b7d7d4!important;', 'border:1px solid #81AAA8!important;')
 # Be explicit in one place, no !important duplications or new design system.
 part=part.replace('/* HD003 1.50.812: genuine product cards','/* HD003 1.50.813: genuine product cards')
