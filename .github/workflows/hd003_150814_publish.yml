@@ -1,0 +1,64 @@
+name: HD003 1.50.814 tested empty-products fix – office and release
+on:
+  push:
+    branches: [hobbyroom/hd003-150814-remove-empty-product-previews-20261113]
+    paths: [.github/workflows/hd003_150814_publish.yml]
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - name: Gate on finished original-methods tests
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          test "$(gh api repos/"$GITHUB_REPOSITORY"/actions/runs/43411117782 --jq .conclusion)" = success
+          python3 scripts/hd003_150814_no_product_placeholders.py /tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.814_OHNE_LEERKARTEN.zip
+          echo '263284e057b9c2a3cc57cc4807301ab2e74c1daeae8dfeb0a16191c49a9dc18f  /tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.814_OHNE_LEERKARTEN.zip' | sha256sum -c
+      - name: Recheck source-level PHP user-state 0/1/3 cards regression
+        run: |
+          python3 scripts/hd003_150814_real_methods_qa.py /tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.814_OHNE_LEERKARTEN.zip /tmp/hd003_150814_release_qa.php
+          php -l /tmp/hd003_150814_release_qa.php
+          php /tmp/hd003_150814_release_qa.php
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          src='/tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.814_OHNE_LEERKARTEN.zip'
+          with ZipFile(src) as z:
+            assert z.testzip() is None and len(z.namelist())==1291
+            for name in z.namelist():
+              if name.endswith('.php'):
+                f=Path('/tmp/hd003_150814_full_php')/name
+                f.parent.mkdir(parents=True,exist_ok=True)
+                f.write_bytes(z.read(name))
+          PY
+          find /tmp/hd003_150814_full_php -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Archive FULL original plugin and append current error register status
+        run: |
+          python3 scripts/hd003_150814_archive_verified.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/HOBBY_DEPOT_DESIGN_HD003_1.50.814.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/MANIFEST.md
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/HD003_FEHLERPROTOKOLL_LEERE_PRODUKTKARTEN_20261113.md
+          git commit -m "HD003 1.50.814: complete real-method-tested no fake products; preserve 1.50.813, log mistakes"
+          git fetch origin hobbyroom/hd003-150814-remove-empty-product-previews-20261113
+          git rebase origin/hobbyroom/hd003-150814-remove-empty-product-previews-20261113
+          git push origin HEAD:refs/heads/hobbyroom/hd003-150814-remove-empty-product-previews-20261113
+      - name: Release exact complete tested ZIP
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG=hobby-hd003-1.50.814-no-empty-product-cards-20261113
+          FILE=/tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.814_OHNE_LEERKARTEN.zip
+          cat >/tmp/notes.txt <<'EOF'
+          Vollständiges Hobby Depot HD003 1.50.814. Behebt die echte Ursache der drei großen leeren „Nur eingeloggt sichtbar / Affiliate-Produkt / Platz aktuell nicht belegt“-Karten: Keinerlei fiktive Produktvorschau mehr, wenn der Affiliate-Shortcode keine echten Produkte liefert. Bei 0 Produktkarten wird der gesamte Empfehlungenblock ausgelassen. Bereits vorhandene echte Produkte und sämtliche anderen Banner-, Magazin- und Designbereiche unverändert. 1291 ZIP-CRC, sämtliche PHP-Dateien Syntax, 36 echte Plugin-Methoden-Lauftests für eingeloggte/ausgeloggte 0/1/3 Produktkarten. Realer Import des Standardfeeds 2901 und echte Airbrush-Angebote noch OFFEN; keine Live-WordPress-Installation behauptet. Fehlerprotokoll im Hobbydepot-Designbüro.
+          EOF
+          gh release create "$TAG" "$FILE#HOBBY_DEPOT_DESIGN_HD003_1.50.814_OHNE_LEERKARTEN.zip" --repo "$GITHUB_REPOSITORY" --target hobbyroom/hd003-150814-remove-empty-product-previews-20261113 --title "Hobby Depot HD003 1.50.814 – keine leeren Produktkarten" --notes-file /tmp/notes.txt
+          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json name,tagName,url,assets
