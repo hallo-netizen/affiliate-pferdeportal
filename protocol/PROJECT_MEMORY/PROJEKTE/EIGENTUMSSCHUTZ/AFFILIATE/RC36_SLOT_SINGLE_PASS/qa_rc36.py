@@ -29,6 +29,7 @@ with ZipFile(Z) as z:
 function absint($x){return abs((int)$x);}
 function sanitize_key($x){return strtolower(preg_replace('/[^a-z0-9_\-]/','',strtolower((string)$x)));}
 function sanitize_text_field($x){return trim(strip_tags((string)$x));}
+function esc_url_raw($x){return (string)$x;}
 function wp_http_validate_url($x){return str_starts_with((string)$x,'https://');}
 function is_wp_error($x){return $x instanceof WP_Error;}
 function ok($c,$s){if(!$c){fwrite(STDERR,"FAIL $s\n");exit(8);}echo "PASS $s\n";}
