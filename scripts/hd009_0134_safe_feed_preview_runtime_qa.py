@@ -121,7 +121,7 @@ function ck($condition,$description){
 $headers='id,product_title,product_deeplink,ean,gtins_product,asins_product,main_category,sub_category,brand_name,image_url';
 $lines=array(
 '1,Teleskop Refraktor,https://ipn.idealo.de/click?x=1,4006381333931,,,Astronomie,Teleskope,ACME,https://cdn.idealo.com/item1.jpg',
-'2,Airbrushpistole Profi,https://ipn.idealo.de/click?x=2,4006381333932,,,Hobby und Basteln,Airbrush,ACME,https://cdn.idealo.com/item2.jpg',
+'2,Airbrush Pistole Profi,https://ipn.idealo.de/click?x=2,4006381333932,,,Hobby und Basteln,Airbrush,ACME,https://cdn.idealo.com/item2.jpg',
 '3,Kamera Zubehör,https://ipn.idealo.de/click?x=3,,,,Foto,Objektive,ACME,https://cdn.idealo.com/item3.jpg',
 '4,Schraubendreher,https://ipn.idealo.de/click?x=4,4006381333933,,,Werkzeuge,Schrauben,ACME,https://cdn.idealo.com/item4.jpg',
 '5,Airbrush Flasche,https://ipn.idealo.de/click?x=5,4006381333934,,,Hobby,Hobby,ACME,https://example.org/notcdn.jpg',
