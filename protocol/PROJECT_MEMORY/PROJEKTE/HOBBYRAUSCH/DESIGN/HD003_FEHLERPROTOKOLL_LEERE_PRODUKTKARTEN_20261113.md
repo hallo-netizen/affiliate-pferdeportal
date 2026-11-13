@@ -53,3 +53,11 @@
 - Exakt herunterladbares vollständiges ZIP `HOBBY_DEPOT_DESIGN_HD003_1.50.814_OHNE_LEERKARTEN.zip`, **65.765.018 Byte**, SHA256 `263284e057b9c2a3cc57cc4807301ab2e74c1daeae8dfeb0a16191c49a9dc18f`.
 - Neues `CURRENT.zip` und die versionsfeste `1.50.814.zip` im Design-Pluginbüro nachweislich vorhanden und identisch. `1.50.813.zip` bleibt separat erhalten.
 - **Keine Liveinstallation und keine echte Airbrush-Produktversorgung nachgewiesen**. Leere Karten sind quellenbasiert behoben, aber relevante Produkte fehlen weiterhin, bis bestehende Idealo-Feed-Daten und Zielabgleich tatsächlich genügend passende Angebote liefern.
+
+
+## Stand 06 – eingeloggte Vorschau gesondert korrigiert
+- Eigenen Fehler in 1.50.814 bestätigt: Die vorherigen drei falschen Admin-Produktkacheln wurden entfernt, aber **auch jede Orientierung**, wo Produktwerbung sitzt.
+- In 1.50.815 erscheint bei eingeloggtem Anwender stattdessen ein **schmaler, klar gekennzeichneter Hinweis**, nicht drei große Scheinprodukte. Öffentlicher Besucher ohne Produkte sieht überhaupt keinen Empfehlungsblock.
+- 38 echte Original-PHP-Methodentests: Null/Eins/Drei Produkte, angemeldet/abgemeldet, Kategorien/Homepage, echte Karten 1:1 beibehalten, alle bestanden; volles 1291-Dateien-ZIP CRC und sämtliche PHP-Lints erfolgreich.
+- QA: https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43442464715
+- **Als Testkandidat archiviert**, nicht als Live-Erfolg oder abgeschlossenes Idealo-Problem deklariert. Bisherige CURRENT 1.50.814 unverändert.
