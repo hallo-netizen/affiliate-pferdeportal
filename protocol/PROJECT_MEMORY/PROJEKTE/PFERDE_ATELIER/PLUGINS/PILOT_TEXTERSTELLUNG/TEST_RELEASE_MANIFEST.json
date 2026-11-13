@@ -1,0 +1,31 @@
+{
+  "name": "Texterstellung",
+  "version": "0.3.0-test",
+  "install_type": "WordPress plugin TEST ONLY",
+  "archive": "Texterstellung_0.3.0_TEST_INSTALLIEREN.zip",
+  "bytes": 30973,
+  "sha256": "9fe7d4a3e4f168bace01f014ff4f358db2f01b6b8b9e532734f2085bfbb91974",
+  "php_files": 6,
+  "archive_file_count": 8,
+  "tests": {
+    "legacy_real_cases": 35,
+    "integrated": 28,
+    "batch": 15,
+    "bad_item_isolation": 5,
+    "diagnosis": 27,
+    "admin_diagnostic_download_smoke": 9,
+    "total_local_checks": 119
+  },
+  "test_environment_verified_by": "mocked local WordPress stubs, not real WP",
+  "secrets_exported": false,
+  "known_limitations": [
+    "Full automatic PSTE sematic approvals not migrated",
+    "Actual WP and K0 end-to-end remains unproven",
+    "No native PPM booking"
+  ],
+  "sources_unchanged_sha256": {
+    "old_artikelwerkstatt_zip": "f381f622af5eca5714a2f289169ce3774ef9afdf68423b9f2be416fcb1830171",
+    "old_pste_zip": "7fc98a17e4c2319a66afd23c0ad944a07b4492e7a9982933205f29069fdcd121",
+    "old_pserc_zip": "fd80f7ec3451b437be0eaeedabf2142c5eb1b5130939f7b8dba3b3a2f9d2b59f"
+  }
+}
