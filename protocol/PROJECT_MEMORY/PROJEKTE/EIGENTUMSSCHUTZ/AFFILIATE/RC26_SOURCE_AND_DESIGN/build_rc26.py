@@ -257,6 +257,7 @@ with ZipFile(BytesIO(old)) as z:
   background:#FAF8F4!important;
   color:#B35C40!important;
   box-shadow:none!important;
+  transition:none!important;
 }
 .ppar-hb-category-products-grid .ppar-banner-button:hover,
 .ppar-hb-category-products-grid .ppar-banner-offer-button:hover,
