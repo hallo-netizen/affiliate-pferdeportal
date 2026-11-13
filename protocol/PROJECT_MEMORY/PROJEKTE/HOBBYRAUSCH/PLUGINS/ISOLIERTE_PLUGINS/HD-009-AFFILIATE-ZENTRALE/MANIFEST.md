@@ -1,3 +1,8 @@
+# HD009 CURRENT 0.1.36 – Produktrelevanz und Fakten
+
+Full plugin c5207290e535aaad03f26713d4e39b59836475e63cfeff9d57dc04a53944ca68. Alte 0.1.35- und 0.1.34-Stände erhalten. Beweis: AFFILIATE/HD009_0.1.36_PRODUCTS_FACTS_BUTTONS_20261113.md
+
+---
 # HD009 CURRENT 0.1.35 – exakte Hobby-Produktzuordnung
 
 Aktuelles vollständiges ZIP und HOBBY_DEPOT_AFFILIATE_HD009_0.1.35.zip: c30b3381928454671a8784f99c6bd59aaec79c800b9d38925462fc9dd29fe246. Alte Versionen 0.1.33 und 0.1.34-Kandidat unverändert archiviert. Beleg: AFFILIATE/HD009_AIRBRUSH_RELEVANZ_0.1.35_20261113.md.
