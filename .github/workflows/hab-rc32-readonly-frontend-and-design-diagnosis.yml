@@ -1,0 +1,71 @@
+name: HAB RC32 read-only true banner DOM and design bridge root audit
+on:
+  push:
+    branches: [hab-affiliate-rc32-banner-display-rootfix-20261113]
+    paths: [.github/workflows/hab-rc32-readonly-frontend-and-design-diagnosis.yml]
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Confirm public real HTML cards, rendered placeholders, assets and design mounts
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request,re,html,json,collections
+          pages={
+            'hausrat':'https://hab-und-bewahr.de/versicherungen/hausrat-und-gebaude/hausratversicherung/',
+            'motorrad':'https://hab-und-bewahr.de/versicherungen/fahrzeuge-und-reisen/motorradversicherung/',
+            'wassermelder':'https://hab-und-bewahr.de/wasser-und-feuchtigkeit/wasser-und-feuchtigkeit-leckage-und-rohrbruch/c22-wassermelder-eaa526ba7d/',
+          }
+          for name,u in pages.items():
+            try:
+              req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0 (HAB-Quality/1.0)','Accept':'text/html'})
+              with urllib.request.urlopen(req,timeout=18) as r:
+                source=r.read(2500000).decode('utf-8','replace')
+                print('LIVE_PAGE',name,'status',r.status,'bytes',len(source),'final_route',r.geturl().split('hab-und-bewahr.de')[-1])
+                html_no_css=re.sub(r'<style\b[^>]*>.*?</style\s*>','',source,flags=re.I|re.S)
+                visible=re.sub(r'<script\b[^>]*>.*?</script\s*>','',html_no_css,flags=re.I|re.S)
+                visible=re.sub(r'<noscript\b[^>]*>.*?</noscript\s*>','',visible,flags=re.I|re.S)
+                stats={}
+                for label,pattern in {
+                  'real_slot_tags':r'<(?:div|section)\b[^>]*class=["\x27][^"\x27]*ppar-affiliate-slot',
+                  'real_house_banner':r'<(?:div|section)\b[^>]*class=["\x27][^"\x27]*ppar-hb-insurance-own(?:\s|[-"])',
+                  'real_external_banner':r'<(?:div|section|img)\b[^>]*class=["\x27][^"\x27]*(?:ppar-banner|ppar-overview-wide-banner)',
+                  'actual_product_group':r'<(?:div|section)\b[^>]*class=["\x27][^"\x27]*ppar-hb-category-product-group',
+                  'actual_product_card':r'data-ppar-category-product-card\s*=',
+                  'tarifcheck_in_dom':r'tarifcheck',
+                  'visible_fallback_label':r'Eigener Themenhinweis',
+                  'insurance_title':r'(Hausratversicherung|Motorradversicherung)',
+                }.items():stats[label]=len(re.findall(pattern,visible,flags=re.I))
+                print('LIVE_VISIBLE_DOM_METRICS',name,json.dumps(stats,ensure_ascii=False))
+                tags=re.findall(r'<(?:div|section|article|main)\b[^>]{0,1200}>',visible,re.I)
+                selected=[]
+                for tag in tags:
+                    if 'ppar-' in tag or 'hbdp-' in tag or 'hab-' in tag or 'affiliate' in tag:
+                      classes=re.findall(r'class=["\x27]([^"\x27]+)',tag)
+                      if classes:
+                        data=re.findall(r'\s(data-ppar-[\w-]+)=["\x27]([^"\x27]{0,100})',tag)
+                        selected.append({'class':classes[0][:230],'slots':dict(data)})
+                print('LIVE_MOUNTED_CLASSES',name,json.dumps(selected[:40],ensure_ascii=False))
+                print('LIVE_PLUGIN_ASSET_VERSIONS',name,list(dict.fromkeys(re.findall(r'(?:affiliate|hab|bewahr)[^"\x27<>\s]{0,160}\.(?:css|js)\?ver=[^"\x27<>\s]{1,22}',source,re.I)))[:16])
+            except Exception as e:print('LIVE_FETCH_FAILED',name,type(e).__name__,str(e)[:200])
+          from pathlib import Path
+          from zipfile import ZipFile
+          zpath=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip')
+          print('DESIGN_SOURCE_PRESENT',zpath.exists())
+          if zpath.exists():
+            with ZipFile(zpath) as z:
+              print('DESIGN_ZIP_FILES',len(z.namelist()),'CHECK',z.testzip())
+              matches=[]
+              for fname in z.namelist():
+                if not fname.endswith('.php'):continue
+                text=z.read(fname).decode('utf8','replace')
+                for match in re.finditer(r'function\s+([a-z_0-9]*affiliate[a-z_0-9]*|[a-z_0-9]*banner[a-z_0-9]*|[a-z_0-9]*hab[a-z_0-9]*card[a-z_0-9]*)\s*\(|apply_filters\s*\(\s*[\x27"]([^\x27"]*(?:affiliate|banner|insurance|product)[^\x27"]*)[\x27"]|do_shortcode\s*\(.*?pp_affiliate',text,re.I):
+                  snippet=text[max(0,match.start()-150):match.start()+320]
+                  matches.append({'file':fname,'snippet':snippet[:400]})
+              print('DESIGN_HOOK_REFERENCES',json.dumps(matches[:90],ensure_ascii=False))
+          print('HAB_RC32_READONLY_DIAG_COMPLETE')
+          PY
