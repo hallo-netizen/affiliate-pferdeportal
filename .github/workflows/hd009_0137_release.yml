@@ -1,0 +1,60 @@
+name: HD009 0.1.37 – geprüfte korrekte Produktartikel und Stichpunkte
+on:
+  push:
+    branches: [hobbyroom/hd009-037-last-render-safety-20261113]
+    paths: [.github/workflows/hd009_0137_release.yml]
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require exact passed test run and deterministic complete ZIP
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          test "$(gh api repos/"$GITHUB_REPOSITORY"/actions/runs/43408681944 --jq .conclusion)" = success
+          python3 scripts/hd009_0137_fix_relevance_facts.py /tmp/HOBBY_DEPOT_HD009_0.1.37_RELEVANT_FACTS.zip
+          echo '34b870ad459e9b075a5c8c0aedc335939a72f6689d03216bcfd4134798c73503  /tmp/HOBBY_DEPOT_HD009_0.1.37_RELEVANT_FACTS.zip' | sha256sum -c
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          src='/tmp/HOBBY_DEPOT_HD009_0.1.37_RELEVANT_FACTS.zip'
+          with ZipFile(src) as z:
+            assert z.testzip() is None and len(z.namelist())==41
+            for name in z.namelist():
+              if name.endswith('.php'):
+                p=Path('/tmp/HD009php')/name
+                p.parent.mkdir(parents=True,exist_ok=True)
+                p.write_bytes(z.read(name))
+          print('ALL_ORIGINAL_ZIP_ENTRIES_CRC_PASS')
+          PY
+          find /tmp/HD009php -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Archive full verified release as CURRENT in its existing plugin office
+        run: |
+          python3 scripts/hd009_0137_archive.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/HOBBY_DEPOT_AFFILIATE_HD009_0.1.37.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/MANIFEST.md
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/CURRENT.md
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/HD009_AIRBRUSH_FAKTEN_AUSGABE_0.1.37_20261113.md
+          git commit -m "HD009 complete source-locked QA-passed update and evidence"
+          git fetch origin hobbyroom/hd009-037-last-render-safety-20261113
+          git rebase origin/hobbyroom/hd009-037-last-render-safety-20261113
+          git push origin HEAD:refs/heads/hobbyroom/hd009-037-last-render-safety-20261113
+      - name: Publish exact full installable ZIP
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG=hobby-hd009-0.1.37-last-render-facts-20261113
+          FILE=/tmp/HOBBY_DEPOT_HD009_0.1.37_RELEVANT_FACTS.zip
+          cat > /tmp/release-notes.txt <<'EOF'
+          Vollständiges Hobby Depot HD009 0.1.37. Falsche Airbrush-Artikel im tatsächlichen letzten Ausgabeschritt blockiert; belegbare Stichpunkte auch bei sparsamen Produkttiteln; fehlende Produktbilder werden nicht durch Platzhalter ersetzt. Multiprovider, Amazon, eBay, Idealo-Feedvergleich unverändert. 41 ZIP CRC / 24 PHP lint / 19 echte Funktionsprüfungen bestanden. Nicht live installiert.
+          EOF
+          gh release create "$TAG" "$FILE#HOBBY_DEPOT_HD009_0.1.37_RELEVANT_FACTS.zip" --repo "$GITHUB_REPOSITORY" --target hobbyroom/hd009-037-last-render-safety-20261113 --title "HD009 0.1.37 – geprüfte korrekte Produktartikel und Stichpunkte" --notes-file /tmp/release-notes.txt
+          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json assets,name,tagName,url
