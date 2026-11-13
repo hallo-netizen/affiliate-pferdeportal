@@ -1,4 +1,4 @@
-name: Hab RC26 verified source, mock exclusion and design complete QA
+name: Hab RC26 source feed-list and mobile design full verified release
 on:
   push:
     branches: [hab-affiliate-rc26-source-design-20261113]
