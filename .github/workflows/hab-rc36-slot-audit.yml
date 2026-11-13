@@ -84,8 +84,8 @@ jobs:
             s=z.read(name).decode(errors="replace")
             if any(x in s for x in ("ppar_affiliate_slot_matrix","product_after_category_tiles","output_no_design_slot","Kein realer Designslot")):
               print("\nFILE",name,"chars",len(s))
-              for term in ("function slot_matrix(","function hb_insurance_scope","function output_format_slot","function hb_slot","function register_slot"):
+              for term in ("function campaign_slot_allowed(","function hb_insurance_original_inline_allowed(","function hb_insurance_original_wide_allowed(","function overview_wide_banner_slot(","function hab_bw_area_slot(","function provide_leaf_category_affiliate_slot_html("):
                 for m in list(re.finditer(re.escape(term),s))[:3]:
                   p=m.start()
-                  print("\nMATCH",term,"at",p,"\n",s[max(0,p-700):min(len(s),p+19000)])
+                  print("\nMATCH",term,"at",p,"\n",s[max(0,p-700):min(len(s),p+7700)])
           PY
