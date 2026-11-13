@@ -1,4 +1,4 @@
-name: Hab RC26 verified feed source, safe fallback and full design QA
+name: Hab RC26 full feed and responsive design validation with multi-provider buttons
 on:
   push:
     branches: [hab-affiliate-rc26-source-design-20261113]
