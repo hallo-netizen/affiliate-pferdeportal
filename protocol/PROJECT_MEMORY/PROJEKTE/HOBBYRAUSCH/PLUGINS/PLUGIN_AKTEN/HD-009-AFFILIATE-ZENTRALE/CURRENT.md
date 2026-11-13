@@ -1,3 +1,9 @@
+# HD009 CURRENT 0.1.35 – exakte Hobby-Produktzuordnung
+
+Aktuelles vollständiges ZIP und HOBBY_DEPOT_AFFILIATE_HD009_0.1.35.zip: c30b3381928454671a8784f99c6bd59aaec79c800b9d38925462fc9dd29fe246. Alte Versionen 0.1.33 und 0.1.34-Kandidat unverändert archiviert. Beleg: AFFILIATE/HD009_AIRBRUSH_RELEVANZ_0.1.35_20261113.md.
+
+---
+
 # HD009 AKTUELL: 0.1.33 – direkter iPN-Export
 
 Vollständiges geprüftes CURRENT.zip und HOBBY_DEPOT_AFFILIATE_HD009_0.1.33.zip. SHA256: b6482b5d880e941c97ac726dffa85fbc46ba8514587e23700951d176ebcb63db. Unverändertes 0.1.32 als Sicherung.
