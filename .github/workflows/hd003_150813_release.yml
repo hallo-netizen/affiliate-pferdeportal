@@ -1,0 +1,60 @@
+name: HD003 1.50.813 – sichtbare beige-türkise Produktbuttons
+on:
+  push:
+    branches: [hobbyroom/hd003-150813-visible-colors-20261113]
+    paths: [.github/workflows/hd003_150813_release.yml]
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require exact passed test run and deterministic complete ZIP
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          test "$(gh api repos/"$GITHUB_REPOSITORY"/actions/runs/43408810672 --jq .conclusion)" = success
+          python3 scripts/hd003_150813_visible_button_colors.py /tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.813_SICHTBARE_FARBEN.zip
+          echo '5fb7053f31d705b9c2001fbcdfecf518c05d8c1fe52283f058943ca48f6eba73  /tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.813_SICHTBARE_FARBEN.zip' | sha256sum -c
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          src='/tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.813_SICHTBARE_FARBEN.zip'
+          with ZipFile(src) as z:
+            assert z.testzip() is None and len(z.namelist())==1291
+            for name in z.namelist():
+              if name.endswith('.php'):
+                p=Path('/tmp/HD003php')/name
+                p.parent.mkdir(parents=True,exist_ok=True)
+                p.write_bytes(z.read(name))
+          print('ALL_ORIGINAL_ZIP_ENTRIES_CRC_PASS')
+          PY
+          find /tmp/HD003php -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Archive full verified release as CURRENT in its existing plugin office
+        run: |
+          python3 scripts/hd003_150813_archive.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/HOBBY_DEPOT_DESIGN_HD003_1.50.813.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/MANIFEST.md
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/HD003_SICHTBARE_PRODUKTBUTTONS_1.50.813_20261113.md
+          git commit -m "HD003 complete source-locked QA-passed update and evidence"
+          git fetch origin hobbyroom/hd003-150813-visible-colors-20261113
+          git rebase origin/hobbyroom/hd003-150813-visible-colors-20261113
+          git push origin HEAD:refs/heads/hobbyroom/hd003-150813-visible-colors-20261113
+      - name: Publish exact full installable ZIP
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG=hobby-hd003-1.50.813-visible-teal-beige-20261113
+          FILE=/tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.813_SICHTBARE_FARBEN.zip
+          cat > /tmp/release-notes.txt <<'EOF'
+          Vollständiges Hobby Depot Design HD003 1.50.813. Deutlich beige Buttons mit kräftiger türkisfarbener Schrift, 1px-Radius, Bilder/Fakten/Buttons unverändert angeordnet. 1291 ZIP CRC / 13 PHP lint / vier Chrome-Breiten auf Farben und Stichpunkte geprüft. Sonst keine Designänderungen. Nicht live installiert.
+          EOF
+          gh release create "$TAG" "$FILE#HOBBY_DEPOT_DESIGN_HD003_1.50.813_SICHTBARE_FARBEN.zip" --repo "$GITHUB_REPOSITORY" --target hobbyroom/hd003-150813-visible-colors-20261113 --title "HD003 1.50.813 – sichtbare beige-türkise Produktbuttons" --notes-file /tmp/release-notes.txt
+          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json assets,name,tagName,url
