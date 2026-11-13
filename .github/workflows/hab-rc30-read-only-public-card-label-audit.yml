@@ -1,0 +1,42 @@
+name: HAB RC30 read-only actual ad labels and product bullet source
+on:
+  push:
+    branches: [hab-affiliate-rc30-one-label-bullets-20261113]
+    paths: [.github/workflows/hab-rc30-read-only-public-card-label-audit.yml]
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read existing design and publicly visible HTML; change nothing
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import urllib.request,re
+          R=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS')
+          with ZipFile(R/'HAB-001-DESIGN/CURRENT.zip') as z:
+            for file in z.namelist():
+              if not file.endswith('.php'):continue
+              raw=z.read(file).decode('utf-8','replace')
+              matches=list(re.finditer(r'Empfehlungen|Anzeig[eE]|ANZEIGE|ppar-hb-category|hbdp-detail-products',raw))
+              if matches and len(matches)<120:
+                print('DESIGN_FILE',file,'HITS',len(matches))
+                for m in matches[:12]:print('DESIGN_MATCH',repr(raw[max(0,m.start()-140):m.end()+170]))
+          u='https://hab-und-bewahr.de/einbruch-und-diebstahl/einbruch-und-diebstahl-haus-und-wohnung/c22-haustuerschloesser-dd9773fd40/'
+          try:
+            req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0','Accept':'text/html'})
+            with urllib.request.urlopen(req,timeout=18) as response:
+              html=response.read(1800000).decode('utf-8','replace')
+              print('PUBLIC_STATUS',response.status,'HTML_BYTES',len(html))
+              for word in ['Empfehlungen','ppar-hb-category-product-group','ppar-hb-category-product-adlabel','ppar-affiliate-label','ppar-banner-description']:
+                occurrences=[m.start() for m in re.finditer(re.escape(word),html)]
+                print('PUBLIC_OCCURRENCES',word,len(occurrences))
+                for i in occurrences[:5]:print('PUBLIC_AROUND',word,repr(html[max(0,i-250):i+400]))
+          except Exception as e:print('PUBLIC_UNAVAILABLE',type(e).__name__,str(e)[:170])
+          print('RC30_READ_ONLY_AUDIT_DONE')
+          PY
