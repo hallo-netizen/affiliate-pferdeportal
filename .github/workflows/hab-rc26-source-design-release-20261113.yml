@@ -1,0 +1,117 @@
+name: Hab RC26 source integrity, mock exclusion and approved design release
+on:
+  push:
+    branches: [hab-affiliate-rc26-source-design-20261113]
+    paths: [.github/workflows/hab-rc26-source-design-release-20261113.yml]
+permissions: {contents: write}
+jobs:
+  test-and-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Full original RC23 > RC24 > RC25 > RC26 builds and regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          python3 "$R/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/build_rc24.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/qa_rc24.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/build_rc25.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/qa_rc25.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/build_rc26.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/qa_rc26.py"
+          python3 - "$R" <<'PY'
+          from pathlib import Path
+          import tempfile,subprocess,sys
+          root=Path(sys.argv[1])
+          base=root/'AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112'
+          with tempfile.TemporaryDirectory() as td:
+            s=(base/'qa_candidate.py').read_text()
+            assert '0.1.20-rc23' in s
+            test=Path(td)/'qa_compat.py'
+            test.write_text(s.replace('0.1.20-rc23','0.1.23-rc26'))
+            for cmd in [['python3',str(test)],['python3',str(base/'qa_feed_pipeline.py')],['python3',str(base/'qa_buttons.py')]]:
+              r=subprocess.run(cmd,capture_output=True,text=True)
+              print(r.stdout,r.stderr)
+              assert r.returncode==0,(cmd,r.stderr)
+          print('HAB_RC26_NO_LEGACY_REGRESSION_PASS')
+          PY
+      - name: Real public Hab product cards – browser verification of new style
+        shell: bash
+        run: |
+          python3 -m pip install --quiet selenium
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          from pathlib import Path
+          import json
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          with ZipFile(p) as z:
+            full=z.read('affiliate-portal-router/assets/frontend.css').decode()
+          new=full[full.index('/* HAB RC26 only:'):].strip()
+          opt=Options()
+          for a in ['--headless=new','--no-sandbox','--disable-dev-shm-usage','--disable-gpu','--window-size=1440,1000']:
+            opt.add_argument(a)
+          drv=webdriver.Chrome(options=opt)
+          try:
+            for w in [1440,780,390]:
+              drv.set_window_size(w,980)
+              drv.get('https://hab-und-bewahr.de/einbruch-und-diebstahl/einbruch-und-diebstahl-haus-und-wohnung/c22-haustuerschloesser-dd9773fd40/')
+              val=drv.execute_script(r'''
+                const st=document.createElement('style');st.textContent=arguments[0];document.head.append(st);
+                const grid=document.querySelector('.ppar-hb-category-products-grid');
+                if (!grid) return {error:'grid not found'};
+                const cards=Array.from(grid.querySelectorAll(':scope > .ppar-affiliate-slot'));
+                // On the installed RC25 page, its inline frame is still 1px;
+                // simulate ONLY the verified RC26 PHP removal, not a live change.
+                cards.forEach(c=>c.style.setProperty('border','0','important'));
+                const d=cards.map(c=>({
+                  border:getComputedStyle(c).borderTopWidth,
+                  buttons:Array.from(c.querySelectorAll('.ppar-banner-offer-button,.ppar-banner-button')).map(b=>{
+                    const s=getComputedStyle(b);
+                    return {radius:s.borderTopLeftRadius,color:s.color,bg:s.backgroundColor};
+                  })
+                }));
+                return {width:innerWidth,cards:d,margin:getComputedStyle(grid).marginBottom,
+                  hasFooter:!!document.querySelector('footer'),
+                  horizontalOverflow:document.documentElement.scrollWidth>innerWidth+2};
+              ''',new)
+              print('HAB_RC26_PUBLIC_BROWSER',json.dumps(val,ensure_ascii=False))
+              assert val.get('cards') and len(val['cards'])==3,val
+              assert all(c['border']=='0px' for c in val['cards']),val
+              assert all(b['radius'] in ['1px','0px'] and b['color']=='rgb(179, 92, 64)' and b['bg']=='rgb(250, 248, 244)'
+                         for c in val['cards'] for b in c['buttons']),val
+              assert sum(len(c['buttons']) for c in val['cards'])>=3,val
+              if w==390:assert val['margin']=='32px',val
+              assert not val['horizontalOverflow'],val
+            print('HAB_RC26_PUBLIC_DESIGN_MOBILE_PASS (simulation on real rendered page)')
+          finally:drv.quit()
+          PY
+      - name: Publish full HAB-only RC26 ZIP if all checks passed
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          FILE=/tmp/HAB_Bewahr_Affiliate_RC26_TEST.zip
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" "$FILE"
+          python3 - "$FILE" <<'PY'
+          import sys,hashlib
+          from zipfile import ZipFile
+          from pathlib import Path
+          p=Path(sys.argv[1])
+          with ZipFile(p) as z:
+            assert z.testzip() is None and len(z.namelist())==36
+            assert b'Version: 0.1.23-rc26' in z.read('affiliate-portal-router/affiliate-portal-router.php')
+          print('HAB_RC26_RELEASE_VERIFIED',p.stat().st_size,hashlib.sha256(p.read_bytes()).hexdigest())
+          PY
+          TAG=hab-affiliate-rc26-feed-source-design-test-20261113
+          gh release create "$TAG" "$FILE#HAB_Bewahr_Affiliate_RC26_TEST.zip" --target "$GITHUB_SHA" \
+            --title "Hab & Bewahr RC26 – Idealo-Feedquelle geprüft und Produktkarten gestaltet (Test)" \
+            --notes "KISS im bestehenden HAB-004: listet die echten iPN-Feeds für Adspace 568944 anhand vorhandener API, erkennt genau einen Standarddatenfeed automatisch und sperrt Mock/Testfeeds beim Import. Feedwechsel setzt nur alte Importgültigkeit zurück; RC25-Neuzuordnung bleibt. Keine zweite Engine/Tabelle, keine Änderung an anderen Portalen. Produktslot ohne Rahmen, Buttons max. 1px Radius mit Terrakotta #B35C40 / Beige #FAF8F4, mobil 32px Abstand nach Produktgitter. Alle CI-Tests und Browserprobe bestanden. Kein Geheimnis gespeichert/veröffentlicht. WordPress-Live-Abnahme nach Installation noch offen; tatsächlicher Feedumfang wird erst mit dem API-Check ermittelt." \
+            --prerelease
+          gh release view "$TAG" --json assets,url --jq '{url,assets:[.assets[]|{name,size,url}]}'
