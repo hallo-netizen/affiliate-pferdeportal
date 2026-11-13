@@ -1,0 +1,59 @@
+name: HAB RC28 read-only level-by-level product-output contract audit
+on:
+  push:
+    branches: [hab-affiliate-rc28-catalog-evidence-20261113]
+    paths: [.github/workflows/hab-rc28-leaf-product-contract-audit-20261113.yml]
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read final existing HAB-004 plug-in code at all category levels
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          python3 "$R/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py" >/dev/null
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/build_rc24.py" >/dev/null
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/build_rc25.py" >/dev/null
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/build_rc26.py" >/dev/null
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/build_rc27.py" >/dev/null
+          python3 "$R/AFFILIATE/RC28_CATALOG_KISS/build_rc28.py" >/dev/null
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import re
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          with ZipFile(p) as z:
+            bridge=z.read('affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php').decode()
+            main=z.read('affiliate-portal-router/affiliate-portal-router.php').decode()
+            idealo=z.read('affiliate-portal-router/includes/trait-ppar-idealo.php').decode()
+            for key,s in [('BRIDGE',bridge),('MAIN',main),('IDEALO',idealo)]:
+              print('HAB_SOURCE',key,'bytes',len(s))
+              names=re.findall(r'(?:public|protected|private)(?:\s+static)?\s+function\s+(\w+)\s*\(',s)
+              keep=[n for n in names if re.search(r'area|context|categor|product|target|material|rank|slot|group',n,re.I)]
+              print('HAB_METHOD_INDEX',key,keep[:150])
+            def f(s,name):
+              m=re.search(r'(?:public|protected|private)(?:\s+static)?\s+function\s+'+re.escape(name)+r'\s*\(',s)
+              if not m:return '[ABSENT]'
+              op=s.index('{',m.end());level=0
+              for pos in range(op,len(s)):
+                if s[pos]=='{':level+=1
+                elif s[pos]=='}':
+                  level-=1
+                  if level==0:return s[m.start():pos+1]
+              return '[INCOMPLETE]'
+            for key,s,names in [
+              ('BRIDGE',bridge,['area','area_products','catalog','product_family','nearest_page','area_banner','category_product_grid_markup']),
+              ('MAIN',main,['hab_bw_area_slot','get_category_archive_context','provide_leaf_category_affiliate_slot_html','get_page_context','get_page_context_from_page','render_affiliate_slot_for_context']),
+              ('IDEALO',idealo,['idealo_target_keys_for_product_slug','idealo_target_keys_for_concept','idealo_materialize_campaigns','idealo_hab_coverage_report'])
+            ]:
+              for name in names:
+                m=f(s,name)
+                print('===HAB_AUDIT_METHOD_BEGIN',key,name,'chars',len(m))
+                print(m[:18000])
+                print('===HAB_AUDIT_METHOD_END',key,name)
+          print('HAB_LEAF_CONTRACT_READ_ONLY_AUDIT_COMPLETE')
+          PY
