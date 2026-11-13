@@ -1,0 +1,87 @@
+name: HAB RC33 one owner no duplicated insurance banner decisions full QA
+on:
+  push:
+    branches: [hab-affiliate-rc33-one-decision-20261113]
+    paths: [.github/workflows/hab-rc33-one-decision-rootfix-verified-release.yml]
+permissions: {contents: write}
+jobs:
+  full-legacy-and-real-php-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 19
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild all prior HAB releases and real source tests before new root fix
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          python3 "$R/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/build_rc24.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/qa_rc24.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/build_rc25.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/qa_rc25.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/build_rc26.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/qa_rc26.py"
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/build_rc27.py"
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/qa_rc27.py"
+          python3 "$R/AFFILIATE/RC28_CATALOG_KISS/build_rc28.py"
+          python3 "$R/AFFILIATE/RC28_CATALOG_KISS/qa_rc28.py"
+          python3 "$R/AFFILIATE/RC29_PRODUCT_NAMES_LEAF_CONTRACT/build_rc29.py"
+          python3 "$R/AFFILIATE/RC29_PRODUCT_NAMES_LEAF_CONTRACT/qa_rc29.py"
+          python3 "$R/AFFILIATE/RC30_ONE_LABEL_BULLETS/build_rc30.py"
+          python3 "$R/AFFILIATE/RC30_ONE_LABEL_BULLETS/qa_rc30.py"
+          python3 "$R/AFFILIATE/RC31_INSURANCE_CASCADE/build_rc31.py"
+          python3 "$R/AFFILIATE/RC31_INSURANCE_CASCADE/qa_rc31.py"
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" /tmp/RC31_BASE.zip
+          python3 "$R/AFFILIATE/RC33_ONE_DECISION/build_rc33.py"
+          python3 "$R/AFFILIATE/RC33_ONE_DECISION/qa_rc33.py"
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          from hashlib import sha256
+          R=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ')
+          p=R/'PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          with ZipFile('/tmp/RC31_BASE.zip') as a,ZipFile(p) as b:
+            changed={n for n in a.namelist() if a.read(n)!=b.read(n)}
+            allowed={'affiliate-portal-router/affiliate-portal-router.php','affiliate-portal-router/includes/trait-ppar-output-objects.php','affiliate-portal-router/readme.txt'}
+            assert changed==allowed,changed
+            assert a.read('affiliate-portal-router/assets/frontend.css')==b.read('affiliate-portal-router/assets/frontend.css')
+            assert a.read('affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php')==b.read('affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php')
+            assert a.read('affiliate-portal-router/includes/trait-ppar-idealo.php')==b.read('affiliate-portal-router/includes/trait-ppar-idealo.php')
+            assert a.read('affiliate-portal-router/includes/trait-ppar-tariff-tools.php')==b.read('affiliate-portal-router/includes/trait-ppar-tariff-tools.php')
+            assert b.testzip() is None and len(b.namelist())==36
+          print('HAB_RC33_EXACTLY_THREE_OLD_SOURCE_FILES_CHANGED_PASS',p.stat().st_size,sha256(p.read_bytes()).hexdigest())
+          PY
+      - name: All original merchant and feed regressions unchanged
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess,tempfile
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112')
+          with tempfile.TemporaryDirectory() as td:
+            s=(p/'qa_candidate.py').read_text()
+            assert '0.1.20-rc23' in s
+            q=Path(td)/'qa_rc33_compat.py'
+            q.write_text(s.replace('0.1.20-rc23','0.1.30-rc33'))
+            for cmd in [['python3',str(q)],['python3',str(p/'qa_feed_pipeline.py')],['python3',str(p/'qa_buttons.py')]]:
+              r=subprocess.run(cmd,capture_output=True,text=True)
+              print(r.stdout,r.stderr)
+              assert r.returncode==0,(cmd,r.stderr)
+          print('HAB_RC33_ALL_EXISTING_FEED_MERCHANT_CONTROLS_PASS')
+          PY
+      - name: Release only when all prior tests and true PHP frontend tests PASS
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          FILE=/tmp/HAB_Bewahr_Affiliate_RC33_TEST.zip
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" "$FILE"
+          TAG=hab-affiliate-rc33-one-authoritative-banner-decision-20261113
+          gh release create "$TAG" "$FILE#HAB_Bewahr_Affiliate_RC33_TEST.zip" --target "$GITHUB_SHA" \
+            --title "Hab & Bewahr RC33 – eine zentrale Entscheidung für Versicherungsbanner (Test)" \
+            --notes "KISS-Ursache statt Symptome: Nur beim Bannerimport wird das passende Versicherungsthema samt echten Unterzielen entschieden und gespeichert. Der spätere Planer darf die Zielkarte nicht überschreiben. Bei der Ausgabe wird ausschließlich diese einmal gespeicherte Karte verwendet; die alten zweiten Titel-/Familien-/Partner-Regeln entfallen. Alte globale Bannerzuordnungen werden zunächst nicht ausgespielt und beim nächsten Öffnen der Affiliate-Zentrale automatisch in Gruppen korrigiert. Keine Sicherheitsprüfungen für Links, Bilder, Formate oder manuelle Vetos entfernt. Bestehendes Design, Produktbanner, Idealo/eBay/OTTO, Tarifrechner und andere Portale unverändert. Realer Original-PHP-Test: Hausrat + seine Unterkategorie PASS, Motorrad/Wassermelder/alte falsche Zuordnung BLOCK; überprüfte Originalbanner bleiben erhalten. Alle historischen Tests und 25 PHP-Lints bestanden. Live-Abnahme nach Installation bleibt offen." \
+            --prerelease
+          gh release view "$TAG" --json assets,url --jq '{url,assets:[.assets[]|{name,size,url}]}'
