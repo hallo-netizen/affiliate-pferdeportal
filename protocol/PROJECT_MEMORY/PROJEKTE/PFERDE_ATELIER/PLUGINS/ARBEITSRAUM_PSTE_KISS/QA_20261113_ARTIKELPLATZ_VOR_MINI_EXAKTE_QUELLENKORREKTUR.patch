@@ -1,0 +1,298 @@
+--- ORIGINAL_QA/arbeit/Portal SEO Topic Engine/includes/class-pste-mini-workflow.php
++++ WORKING_QA/arbeit/Portal SEO Topic Engine/includes/class-pste-mini-workflow.php
+@@ -330,12 +330,21 @@
+             $data=json_decode((string)($row['payload_json']??''),true);
+             $raw=is_array($data)?PSTE_Editorializer::sourceQuery($data):'';
+             $slot=(string)($proof['intent_slot']??'');
++            $canonical=trim((string)($proof['canonical_article_id']??''));
++            $planSlot=(string)($proof['plan_slot']??'');
++            $type=(string)($proof['article_type']??'');
++            $category=(string)($proof['category_slug']??'');
+             $snapshot=(string)($proof['snapshot_sha256']??'');
+             $intent=trim((string)($proof['intent_summary']??''));
+             if($raw===''||!hash_equals($raw,(string)($proof['raw_query']??''))
+                 ||!hash_equals(hash('sha256',$key.'|'.$raw),(string)($proof['source_sha256']??''))
++                ||!hash_equals($type,(string)($data['proposed_article_type']??''))
++                ||!hash_equals($category,(string)($data['target_category_slug']??''))
+                 ||!preg_match('/^[a-f0-9]{64}$/D',$slot)
+                 ||!preg_match('/^[a-f0-9]{64}$/D',$snapshot)||$intent===''
++                ||$canonical===''||!class_exists('PSERC_Plan_Slot_Identity')
++                ||!hash_equals(PSERC_Plan_Slot_Identity::tokenFromCanonicalId($canonical),$planSlot)
++                ||$type===''||$category===''
+                 ||trim((string)($proof['approved_title']??''))!=='')
+                 throw new RuntimeException('PSTE_MINI_PRETITLE_APPROVAL_INVALID');
+             $id=(int)($row['id']??0);
+@@ -343,7 +352,9 @@
+             $items[]=['id'=>$id,'pool_key'=>$key,'raw_query'=>$raw,
+                 'source_sha256'=>hash('sha256',$id.'|'.$key.'|'.$raw),
+                 'decision'=>'JA','titles'=>[['intent'=>$intent,'title'=>'']],
+-                'intent_slot'=>$slot,'seo_snapshot_sha256'=>$snapshot];
++                'intent_slot'=>$slot,'seo_snapshot_sha256'=>$snapshot,
++                'canonical_article_id'=>$canonical,'plan_slot'=>$planSlot,
++                'article_type'=>$type,'category_slug'=>$category];
+             if(count($items)>=$limit)break;
+         }
+         return ['items'=>$items,'skipped_invalid'=>0,'title_only'=>true];
+@@ -573,7 +584,11 @@
+                         }
+                     }
+                 }
+-                $state=self::acceptSingleOwnerSeoDecisions($state,$doc,$snapshot,$sourceRows);
++                // Reuse the EXISTING signed PPM plan reader and slot allocator.
++                // One technical allocation, no new semantic SEO review.
++                $production=class_exists('PSERC_Production_Reader')
++                    ?PSERC_Production_Reader::snapshot():[];
++                $state=self::acceptSingleOwnerSeoDecisions($state,$doc,$snapshot,$sourceRows,$production);
+                 self::storeSeoDecisionsIfUnchanged($before,$state); // one original WP option, atomic
+                 wp_safe_redirect(admin_url('admin.php?page=portal-seo-topic-engine-review&pste_mini_seo_imported=1'));exit;
+             }
+@@ -622,6 +637,10 @@
+                     ||!hash_equals((string)($proof['intent_slot']??''),(string)($originalItem['intent_slot']??''))
+                     ||!hash_equals((string)($proof['snapshot_sha256']??''),(string)($originalItem['seo_snapshot_sha256']??''))
+                     ||!hash_equals((string)($proof['intent_summary']??''),(string)($originalItem['titles'][0]['intent']??''))
++                    ||!hash_equals((string)($proof['canonical_article_id']??''),(string)($originalItem['canonical_article_id']??''))
++                    ||!hash_equals((string)($proof['plan_slot']??''),(string)($originalItem['plan_slot']??''))
++                    ||!hash_equals((string)($proof['article_type']??''),(string)($originalItem['article_type']??''))
++                    ||!hash_equals((string)($proof['category_slug']??''),(string)($originalItem['category_slug']??''))
+                     ||(string)($proof['raw_query']??'')!==(string)($value['raw_query']??''))
+                     throw new RuntimeException('PSTE_MINI_TITLE_OWNER_RECEIPT_CHANGED');
+                 // Fill only the title on the same already approved receipt, never decide SEO again.
+@@ -1186,6 +1205,8 @@
+                     'pool_key'=>(string)$key,'title'=>(string)($receipt['approved_title']??''),
+                     'raw_query'=>(string)($receipt['raw_query']??''),
+                     'intent_slot'=>(string)($receipt['intent_slot']??''),
++                    'canonical_article_id'=>(string)($receipt['canonical_article_id']??''),
++                    'plan_slot'=>(string)($receipt['plan_slot']??''),
+                     'status'=>'PLANNED','intent_summary'=>(string)($receipt['intent_summary']??'')];
+                 $reservations++;
+             }
+@@ -1229,7 +1250,7 @@
+      * completeness, and that no two writes reserve the same slot.
+      * No similarity calculation or title quality judgement.
+      */
+-    public static function acceptSingleOwnerSeoDecisions(array $state,array $document,array $snapshot,array $sourceRows=[]): array {
++    public static function acceptSingleOwnerSeoDecisions(array $state,array $document,array $snapshot,array $sourceRows=[],array $production=[]): array {
+         if(($document['contract']??'')!=='PSTE_MINI_SEO_DECISIONS_V1'
+             ||!is_array($document['items']??null)||!array_is_list($document['items']))
+             throw new RuntimeException('PSTE_MINI_SEO_WRONG_DOCUMENT');
+@@ -1280,6 +1301,15 @@
+             }
+         }
+         $updates=[];$clarification=[];$reserved=[];$seen=[];
++        $occupiedCanonical=[];
++        if(class_exists('PSERC_Slot_Allocator'))foreach(PSERC_Slot_Allocator::occupiedCanonicalIds(false) as $id){
++            $id=trim((string)$id);if($id!=='')$occupiedCanonical[$id]=true;
++        }
++        foreach((array)($state['seo_decisions']??[]) as $old){
++            if(!is_array($old)||($old['box']??'')!=='FREI')continue;
++            $id=trim((string)($old['canonical_article_id']??''));
++            if($id!=='')$occupiedCanonical[$id]=true;
++        }
+         foreach((array)($state['seo_decisions']??[]) as $key=>$old){
+             if(!is_array($old)||($old['box']??'')!=='FREI')continue;
+             $oldSlot=(string)($old['intent_slot']??'');
+@@ -1344,11 +1374,44 @@
+                 $box='KLAERUNG';
+                 $item['reason']='BELEGT_REFERENCE_NOT_IN_EXISTING_PARKHAUS';
+             }
++            // Bind the REAL canonical article place in the same EXISTING SEO receipt,
++            // before MINI. The signed PSERC allocator is the sole technical slot authority.
++            $canonical='';$planSlot='';$articleType='';$categorySlug='';
++            if($box==='FREI'&&!$hasTitle){
++                $articleType=trim((string)($sourcePayload['proposed_article_type']??''));
++                $categorySlug=trim((string)($sourcePayload['target_category_slug']??''));
++                if($articleType===''||$categorySlug===''
++                    ||empty($production['ok'])||!class_exists('PSERC_Slot_Allocator')
++                    ||!class_exists('PSERC_Plan_Slot_Identity')){
++                    $box='KLAERUNG';$item['reason']='PRETITLE_CANONICAL_PLAN_NOT_READY';
++                }else{
++                    $allocation=PSERC_Slot_Allocator::allocate([
++                        ['pool_key'=>$key,'article_type'=>$articleType,'category_slug'=>$categorySlug]
++                    ],$production,array_keys($occupiedCanonical));
++                    $allocated=(array)($allocation['items'][0]??[]);
++                    $place=(array)($allocated['slot']??[]);
++                    if(($allocated['status']??'')!=='READY_FOR_METADATA_HANDOFF'
++                        ||trim((string)($place['canonical_article_id']??''))===''){
++                        $box='KLAERUNG';$item['reason']='PRETITLE_CANONICAL_SLOT_NOT_AVAILABLE';
++                    }else{
++                        $canonical=(string)$place['canonical_article_id'];
++                        $planSlot=PSERC_Plan_Slot_Identity::token($place);
++                        if(isset($occupiedCanonical[$canonical])){
++                            $box='KLAERUNG';$item['reason']='PRETITLE_CANONICAL_SLOT_ALREADY_RESERVED';
++                            $canonical='';$planSlot='';
++                        }else $occupiedCanonical[$canonical]=true;
++                    }
++                }
++            }
+             if($box==='FREI')$reserved[$slot]=$key;
+             $receipt=['contract'=>'PSTE_MINI_SEO_DECISIONS_V1','pool_key'=>$key,
+                 'raw_query'=>$raw,'source_sha256'=>hash('sha256',$key.'|'.$raw),
+                 'snapshot_sha256'=>(string)$snapshot['sha256'],'box'=>$box,
+                 'intent_slot'=>$box==='FREI'?$slot:'',
++                'canonical_article_id'=>$box==='FREI'?$canonical:'',
++                'plan_slot'=>$box==='FREI'?$planSlot:'',
++                'article_type'=>$box==='FREI'?$articleType:'',
++                'category_slug'=>$box==='FREI'?$categorySlug:'',
+                 'matched_ref'=>$box==='BELEGT'?$match:'',
+                 'approved_title'=>$box==='FREI'?$selected:'',
+                 'intent_summary'=>$intent,
+--- ORIGINAL_QA/arbeit/portal-seo-editorial-plan-compiler/contracts/compiler-package-binding-v1.json
++++ WORKING_QA/arbeit/portal-seo-editorial-plan-compiler/contracts/compiler-package-binding-v1.json
+@@ -133,8 +133,8 @@
+             "bytes": 3660
+         },
+         "includes/class-pserc-plan-compile-job.php": {
+-            "sha256": "486f82ac7d59d95be102f350e6a925bd39e1c7e4bda05844f55b689a06f6c3d2",
+-            "bytes": 43278
++            "sha256": "2185427ec51f755c6cff8956d439578999d3c78739a80fad1c8ccc663f0120b0",
++            "bytes": 43579
+         },
+         "includes/class-pserc-plan-dependency-fingerprint.php": {
+             "sha256": "cdaf38a9f3593a2e92d2a4ba20ea2fa4ce241a79312b78fed0bc96bd70dca737",
+@@ -197,16 +197,16 @@
+             "bytes": 29519
+         },
+         "includes/class-pserc-seo-reader.php": {
+-            "sha256": "dca9f98fb1aec54c5a350016713f29b39e5a3a65f49cdc304812085f7e3f11af",
+-            "bytes": 21030
++            "sha256": "195fb86f9c69cf39db0b622cd09a86396f5a9fb93ab226a329187dadc0390c24",
++            "bytes": 21905
+         },
+         "includes/class-pserc-seo-source-binding.php": {
+             "sha256": "b33a8499b0cd3223ad849ec24c585f57290bdacc5cd6748fc1b9352b374180e8",
+             "bytes": 6390
+         },
+         "includes/class-pserc-slot-allocator.php": {
+-            "sha256": "dca134e0136e07e09d73a579ab315562c737bbc7d6b457127a838f6b2796223c",
+-            "bytes": 8565
++            "sha256": "9e2abc4b453e77697d5b0eafff01e3086e1370b6daa04652a7fef1cfb804313c",
++            "bytes": 12499
+         },
+         "includes/class-pserc-stable-json.php": {
+             "sha256": "16ed006846395a486d8fa5250bd398df3d53060ac5bfd8e95f92ddfd6cf46a8d",
+@@ -249,5 +249,5 @@
+             "bytes": 2914
+         }
+     },
+-    "binding_sha256": "cae9e343b322bb753de2d6c439378cc9837dfde526b53ba919157df135a118e9"
++    "binding_sha256": "ea226f46cf472c8eb644f3db4ec8d2e120ca7061566658a3c5c48f004343fa69"
+ }
+--- ORIGINAL_QA/arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-plan-compile-job.php
++++ WORKING_QA/arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-plan-compile-job.php
+@@ -229,7 +229,11 @@
+     /** @return array{0:array,1:int,2:int,3:int} */
+     private static function tickSlot(array $job): array {
+         $gen=(string)$job['generation'];if((int)$job['slot_index']>=(int)$job['prepared_count']){$job['phase']='READY_VERIFY';return [$job,0,0,0];}
+-        $env=PSERC_Plan_Snapshot_Store::getRecord($gen,'prepared',(int)$job['slot_index']);if(!is_array($env))throw new RuntimeException('PSERC_PLAN_PREPARED_RECORD_MISSING');$topic=(array)$env['topic'];$structure=(array)$env['structure'];$boot=self::bootstrap($gen);$occupied=array_values(array_unique(array_merge(array_keys((array)$job['occupied_ids']),(array)$job['reserved_ids'])));$alloc=PSERC_Slot_Allocator::allocate([$topic],(array)$boot['production'],$occupied);$rows=(array)($alloc['items']??[]);if(count($rows)!==1)throw new RuntimeException('PSERC_PLAN_SLOT_ALLOCATION_CARDINALITY_INVALID');$row=(array)$rows[0];$slot=(array)($row['slot']??[]);$cid=(string)($slot['canonical_article_id']??'');
++        $env=PSERC_Plan_Snapshot_Store::getRecord($gen,'prepared',(int)$job['slot_index']);if(!is_array($env))throw new RuntimeException('PSERC_PLAN_PREPARED_RECORD_MISSING');$topic=(array)$env['topic'];$structure=(array)$env['structure'];$boot=self::bootstrap($gen);
++        // Prevent a repeated identity within the SAME persistent compilation job.
++        $prebookedId=(string)($topic['pre_reserved_canonical_article_id']??'');
++        if($prebookedId!=='')$topic['pre_reserved_already_used_in_job']=in_array($prebookedId,(array)$job['reserved_ids'],true);
++        $occupied=array_values(array_unique(array_merge(array_keys((array)$job['occupied_ids']),(array)$job['reserved_ids'])));$alloc=PSERC_Slot_Allocator::allocate([$topic],(array)$boot['production'],$occupied);$rows=(array)($alloc['items']??[]);if(count($rows)!==1)throw new RuntimeException('PSERC_PLAN_SLOT_ALLOCATION_CARDINALITY_INVALID');$row=(array)$rows[0];$slot=(array)($row['slot']??[]);$cid=(string)($slot['canonical_article_id']??'');
+         $item=PSERC_Compiler::finalizeAllocationRow($row,(array)$boot['production'],$structure);$idx=(int)$job['final_count'];PSERC_Plan_Snapshot_Store::putRecord($gen,'final_item',$idx,$item);$job['final_count']++;$status=(string)$item['status'];$job['counts'][$status]=($job['counts'][$status]??0)+1;
+         // Reserve only after every final approval gate has passed.
+         if($status==='READY_FOR_METADATA_HANDOFF'&&$cid!=='')$job['reserved_ids'][]=$cid;
+--- ORIGINAL_QA/arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-seo-reader.php
++++ WORKING_QA/arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-seo-reader.php
+@@ -183,7 +183,21 @@
+             $eligible=false;
+             $reasons[]='SEO_FINAL_UPSTREAM_COVERAGE_NOT_AVAILABLE';
+         }
++        // Reuse the already booked technical article place. No new SEO review.
++        $prebookedCanonical=trim((string)($single['canonical_article_id']??''));
++        $prebookedToken=trim((string)($single['plan_slot']??''));
++        if($prebookedCanonical!==''){
++            if(!class_exists('PSERC_Plan_Slot_Identity')
++                ||!hash_equals(PSERC_Plan_Slot_Identity::tokenFromCanonicalId($prebookedCanonical),$prebookedToken)
++                ||(string)($single['article_type']??'')!==$type
++                ||(string)($single['category_slug']??'')!==$categorySlug){
++                $eligible=false;$reasons[]='SEO_PREBOOKED_CANONICAL_SLOT_SOURCE_CHANGED';
++                $prebookedCanonical='';$prebookedToken='';
++            }
++        }
+         $normalized=[
++            'pre_reserved_canonical_article_id'=>$prebookedCanonical,
++            'pre_reserved_plan_slot'=>$prebookedToken,
+             'upstream_central_coverage_receipt'=>$centralApproved?$ownerGate:[],
+             'single_external_seo_owner_receipt'=>$single,
+             'pool_key'=>(string)($candidate['pool_key']??$candidate['global_topic_uuid']??''),
+--- ORIGINAL_QA/arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-slot-allocator.php
++++ WORKING_QA/arbeit/portal-seo-editorial-plan-compiler/includes/class-pserc-slot-allocator.php
+@@ -23,6 +23,54 @@
+ 
+         $items=[];$reserved=[];
+         foreach($topics as $topic){
++            // Already booked by the original SEO owner BEFORE MINI. Reuse the
++            // exact SAME signed PPM slot, never allocate a second article place.
++            $fixed=trim((string)($topic['pre_reserved_canonical_article_id']??''));
++            if($fixed!==''){
++                $type=(string)($topic['article_type']??'');
++                $category=(string)($topic['category_slug']??'');
++                $key=self::key($category,$type);
++                $mini=(array)get_option('pste_mini_keyword_roundtrip_v1',[]);
++                $decisions=(array)($mini['seo_decisions']??[]);
++                $proof=(array)($decisions[(string)($topic['pool_key']??'')]??[]);
++                $match=null;
++                foreach((array)($byKey[$key]??[]) as $candidate){
++                    if((string)($candidate['canonical_article_id']??'')===$fixed){$match=$candidate;break;}
++                }
++                $correctProof=($proof['contract']??'')==='PSTE_MINI_SEO_DECISIONS_V1'
++                    &&($proof['box']??'')==='FREI'
++                    &&(string)($proof['canonical_article_id']??'')===$fixed
++                    &&(string)($proof['article_type']??'')===$type
++                    &&(string)($proof['category_slug']??'')===$category
++                    &&class_exists('PSERC_Plan_Slot_Identity')
++                    &&hash_equals(PSERC_Plan_Slot_Identity::tokenFromCanonicalId($fixed),
++                        (string)($proof['plan_slot']??''))
++                    &&hash_equals((string)($proof['plan_slot']??''),
++                        (string)($topic['pre_reserved_plan_slot']??''));
++                // Soft booked in the same original PSTE option: that mark is
++                // allowed only for ITS owner. Real PPM/WP occupancy always wins.
++                $hard=array_fill_keys(self::occupiedCanonicalIds(false),true);
++                $alreadyPhysical=isset($hard[$fixed])||!empty($topic['pre_reserved_already_used_in_job']);
++                foreach((array)($match['existing_content_bindings']??[]) as $binding)
++                    if((int)($binding['post_id']??0)>0)$alreadyPhysical=true;
++                if(!$correctProof||!is_array($match)||$alreadyPhysical||isset($reserved[$fixed])){
++                    $items[]=self::row($topic,'BLOCKED_PREBOOKED_SLOT_INVALID_OR_OCCUPIED',false,
++                        ['PREBOOKED_CANONICAL_SLOT_NOT_PROVEN_FREE_AND_OWNED'],[],null,
++                        self::notEvaluated('PREBOOKED_CANONICAL_SLOT_NOT_PROVEN_FREE_AND_OWNED'));
++                    continue;
++                }
++                $reserved[$fixed]=true;
++                $typeRuntime=is_array($runtime[$type]??null)?$runtime[$type]:[];
++                $supportedNow=in_array($type,$registered,true)
++                    &&in_array($type,$supported,true)
++                    &&!empty($match['production_supported_by_current_engine'])
++                    &&!empty($match['draft_generation_allowed']);
++                $status=$supportedNow?'READY_FOR_METADATA_HANDOFF':'HELD_NO_ACTIVE_NORMAL_DRAFT_RELEASE';
++                $items[]=self::row($topic,$status,$supportedNow,
++                    $supportedNow?[]:['PREBOOKED_SLOT_NOT_PRODUCTION_RELEASED'],
++                    $typeRuntime,$match,self::capacityPass($match,'EXACT_PREBOOKED_CANONICAL_SAME_OWNER'));
++                continue;
++            }
+             $type=(string)($topic['article_type']??'');
+             $typeRuntime=is_array($runtime[$type]??null)?$runtime[$type]:[];
+             if(!in_array($type,$registered,true)){$items[]=self::row($topic,'HELD_UNSUPPORTED_ARTICLE_TYPE',false,['ARTICLE_TYPE_NOT_REGISTERED'],$typeRuntime,null,self::notEvaluated('ARTICLE_TYPE_NOT_REGISTERED'));continue;}
+@@ -52,11 +100,21 @@
+         return ['items'=>$items,'occupied_ids'=>array_keys($occupied),'reserved_ids'=>array_keys($reserved)];
+     }
+ 
+-    public static function occupiedCanonicalIds(): array {
++    public static function occupiedCanonicalIds(bool $includePrebooked=true): array {
+         $ids=[];
+         if(function_exists('get_option')){$state=get_option('ppm679_editorial_plan_runtime_state_v1',[]);foreach((array)($state['items']??[]) as $id=>$row){$canonical=trim((string)($row['canonical_article_id']??$id));if($canonical!=='')$ids[$canonical]=true;}}
+         global $wpdb;
+         if(isset($wpdb)&&is_object($wpdb)&&isset($wpdb->postmeta)&&method_exists($wpdb,'get_col')){$rows=$wpdb->get_col("SELECT pm.meta_value FROM {$wpdb->postmeta} pm INNER JOIN {$wpdb->posts} p ON p.ID=pm.post_id WHERE pm.meta_key='_ppm679_canonical_article_id' AND p.post_type='post' AND p.post_status IN (".PSERC_Existing_Content_Reader::occupyingPostStatusesSql().")");foreach((array)$rows as $id){$id=trim((string)$id);if($id!=='')$ids[$id]=true;}}
++        // The PRE-MINI booking is already in the existing MINI option.
++        // No new table or second owner: old unbooked topics must not steal it.
++        if($includePrebooked&&function_exists('get_option')){
++            $prebooked=(array)get_option('pste_mini_keyword_roundtrip_v1',[]);
++            foreach((array)($prebooked['seo_decisions']??[]) as $entry){
++                if(!is_array($entry)||($entry['box']??'')!=='FREI')continue;
++                $id=trim((string)($entry['canonical_article_id']??''));
++                if($id!=='')$ids[$id]=true;
++            }
++        }
+         return array_keys($ids);
+     }
+ 
