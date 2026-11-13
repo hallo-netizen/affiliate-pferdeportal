@@ -106,7 +106,7 @@ jobs:
           }
           ck($q->relevant('Airbrushpistole Set 0,3 mm',$ctx),'Genuine compound Airbrushpistole accepted');
           ck($q->relevant('Airbrush Pistole Kompressor',$ctx),'Separated exact Airbrush accepted');
-          ck(!$q->relevant('Airbrusht Shirt Damen',$ctx),'Gibberish not proof of useful gear'===false || true);
+          ck(!$q->relevant('Airbrusht Shirt Damen',$ctx),'One-letter pseudo-compound is not title evidence');
           $good=array('creative_type'=>'product','network'=>'idealo','title'=>'Airbrush Pistole Set 0,3 mm schwarz',
             'url'=>'https://idealo.example/p','image_url'=>'https://idealo.example/p.jpg',
             'button_text'=>'Bei idealo vergleichen','price'=>'54.90','currency'=>'EUR','availability'=>'available');
