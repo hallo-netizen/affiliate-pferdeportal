@@ -56,3 +56,43 @@ E. Entscheiden anhand Test: Legacy PSERC-Plan und PPM-Planfunktion überflüssig
 **Verbindliche Pilot-Empfehlung:** **Ja** zu genau **einem** schlanken Plugin mit Worker-Grenzen, **nein** zu Total-Neubau und zusätzlichen Plänen; **keine endgültige Entfernung** der PPM-Abhängigkeit, bis der tatsächliche Import- und Schreibvertrag dafür geprüft und real nachgewiesen wurde.
 
 **Nächster Schritt:** Umsetzungsplan aus konkreten Originalfunktionen mit Quellbeleg und Minimal-Diff erstellen; dann isolierten Pilot bauen und echte Testdatensätze prüfen. Keine Liveänderung.
+
+
+## 6. Verbindliche Ergänzung – Zuständigkeitssperre, vollständige Code-Inventur und Portalneutralität
+**Datum:** 13.11.2026. Diese drei Ergänzungen sind Bestandteil des verbindlichen Pilot-Zielvertrags. Sie ändern nicht die früheren Grenzen: K0, externe Titelerstellung und deren Dateiformate bleiben unverändert; kein Live-Release.
+
+### 16. Technisch erzwungene Einmalzuständigkeit (Anti-Aufblähungs-Vertrag)
+**Ziel:** Das System soll neue überflüssige Zuständigkeiten möglichst automatisch bereits beim Einbau verhindern.
+
+- Vor dem Umbau gibt es eine **abgeschlossene, kurze Aufgabentabelle** für genau diese Schritte: `Recherche/Fachfreigabe`, `freigegebenes Regal`, `externer Titel`, `Entnahme/Export`, `K0 extern`, `Rückgabe/Entwurfsimport`, `Wiederaufnahme`. Die Kategorienabdeckung gehört ausschließlich zur **ersten** fachlichen Planung.
+- Pro **fachlicher Entscheidung** gibt es **genau einen Eigentümer**. Zu jedem Schritt festhalten: erlaubte Eingaben, erlaubte Ausgaben, zulässige Statusänderung, **verbotene Fachentscheidungen**. Nachgelagerte Schritte transportieren ausschließlich gebundene Fakten.
+- **Keine neuen Fachworker, Gremien, Gates, Prüfinstanzen, Tabellen, Zwischenpläne oder Statuskopien ohne vorherigen belegten Bedarf und ausdrückliche Nutzerfreigabe.** Eine neue Prüffunktion darf niemals eine bereits entschiedene Suchintention, Kategorie, Artikelart oder Textqualität nochmals bewerten.
+- **Technische Sicherheitskontrollen sind keine zweite fachliche Prüfung:** Auftrags-ID, unveränderliche Übergabefelder, parallelsichere Entnahme, Wiederanlauf, sichere Entwurfsanlage und Duplikatverhinderung sind notwendig und gehören jeweils nur an die technisch zuständige Stelle.
+- Eine kleine **automatische Vertragsprüfung** am Pilot-Build und vor Freigabe kontrolliert: nur definierte Rollen; jeder fachliche Entscheidungsaufruf an genau einer Stelle; keine Nachentscheidung in Export/Import; eindeutige Auftragsstatusquelle; K0-Fünf-Felder und Titel-/Rückgabeformat unverändert. Testfälle müssen zusätzliche unerlaubte Freigaben/Worker **negativ** nachweislich blockieren.
+- **Kein unprüfbares Versprechen:** Diese Regel verhindert belegbare Rollen- und Vertragserweiterungen, aber nicht jeden denkbaren Programmfehler. Sie ersetzt keine tatsächlichen End-to-End-Tests.
+
+### 17. Lückenlose, aber verhältnismäßige Codebereinigung
+**Annahme bestätigt, Präzisierung:** Alle vorhandenen Quelldateien, Funktionen, Hooks, Schnittstellen, Schreibzugriffe und erreichbaren Entscheidungs-/Abbruchpfade **inventarisieren und beurteilen**. Nicht jede einzelne Anweisung manuell zur neuen fachlichen Abstimmung machen – das wäre selbst ein KISS-Verstoß.
+
+Für jede relevante Funktion eine knappe, belegte Entscheidung: `BEHALTEN`, `UNVERÄNDERT ÜBERNEHMEN`, `VEREINFACHEN`, `ENTFERNEN`, `OFFEN BIS ECHTTEST` – mit tatsächlicher Verwendung, Grund und Risiko.
+
+- Alte Codestücke, toter Code, überholte Verweise, doppelte fachliche Kontrollen, doppelte Daten-/Statushaltung und ungenutzte Abhängigkeiten **nur nach belegtem Nichtgebrauch** entfernen.
+- Besonders kritisch: WordPress-Aktionen/Hooks, K0-Export-/Importformat, PPM-Rücklese- und Import-Gates, Titelrücklauf, Entwurfsstatus, Sicherheits-/Publish-Sperren sowie Wiederanlauf und Altdatenmigration.
+- **Vorher/Nachher-Gegenprobe** derselben echten Ein- und Ausgaben; keine Löschung nur aufgrund statischer Suchtreffer. Beschränkung auf den bestehenden relevanten Ablauf; kein unnötiger Neuaufbau oder unbegrenzter Audit aller WordPress-/K0-Kerne.
+- Das Ergebnis ist eine kurze **Behalten-/Entfernen-Liste plus Minimal-Diff und Negativtests**, nicht ein weiteres umfangreiches Prüfungssystem im Produkt.
+
+### 18. Portalneutraler Kern mit schlankem Portalprofil
+**Ja, ausdrückliches Ziel: derselbe Plugin-Code soll auf Pferdeatelier, Hobby Depot und Hab & Bewahr installierbar sein.**
+
+- **EIN allgemeiner, wiederverwendbarer Plugin-Kern pro WordPress-Installation**, mit gleichbleibenden Zuständigkeiten, Auftragsspeicherung, Worker-Grenzen, Export-/Import-Format und Rücklaufkontrolle. **Nicht** drei auseinanderlaufende Quellkopien und kein zentraler Server, der Portaldaten vermischt.
+- **Portalabhängiges ausschließlich im lokalen Profil oder vorhandenen WP-Kategoriedaten:** Portalidentität, Themenwortschatz/Ausschlussbegriffe, Kategoriebaum, Suchquellen-/Prompt-Kontext, gültige Artikelarten und eventuelle Redaktionsrichtlinien. Konfiguration möglichst aus vorhandenen WordPress-Daten ableiten; keine unnötige neue Einstellungswelt.
+- **Nachgewiesener Ist-Befund aus QA-Originalquellcode:** PSTE enthält fest eingebaute Wörter wie `pferd`/`pferde` in der Kannibalisierungsprüfung und feste Pferde-Kategorien in der Artikelart-Zuordnung; PSERC enthält `PFERDE_ATELIER_...`-Konstanten für Import-/Abschlussverträge. **Unverändertes Kopieren ist deshalb keine geprüfte Portalneutralität.**
+- Zur Entkopplung **die vorhandene fachliche Entscheidungslogik bewahren**, nur die harten Pferdeatelier-Annahmen in genau **ein** Portalprofil verschieben; Funktionalität weder auf Hobby Depot noch Hab & Bewahr erraten. Kategorieabdeckung für jedes Portal anhand seines **eigenen** Baums; keine Gleichverteilung erzwingen.
+- **Gleicher Quellstand, getrennte Datenbanken/Portalprofile, getrennte Testläufe.** Zuerst Pferdeatelier-Echttest; danach zusätzlicher Negativ-/Positivtest mit je echten Kategorien/Beispielaufträgen aus Hobby Depot und Hab & Bewahr. Keine Freigabe als „universell“ ohne beide realen Portal-Gegenproben.
+- **Keine Veränderung von K0:** Die fünf Eingabefelder und das vorhandene Rückgabeformat bleiben Pflicht. Ein eventuell anders benanntes `plan_slot` ist nur nach echtem Vertragsnachweis durch stabile Auftragskennung ersetzbar.
+- Portalneutralität darf **nicht** zu neuen Plugins, Worker-Schichten oder doppelten Entscheidungsregeln führen. Sie ist eine **Daten-/Konfigurationsgrenze**, kein Neubau eines Frameworks.
+
+### Startvorgabe für den nächsten Chat
+**Zuerst** Rollen-/Funktionskarte und Quellnutzungsinventur erstellen; dann vorhandene stabile Funktionen in einem neuen Portal-neutralen Pilot **gezielt übernehmen**, PPM-Abhängigkeiten nur nach konkretem Nachweis entfernen; anschließend 3 reale Altaufträge, 20er-Charge und Portalprofile testen. Keine Liveänderung; keine neue Fachprüfung. **Nicht** nochmals eine Grundsatzarchitektur ausdenken.
+
+**Status:** Drei Ergänzungen beschlossen/dokumentiert. Noch kein fertiger Code, kein universeller Test und keine WP-Liveabnahme.
