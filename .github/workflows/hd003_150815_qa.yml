@@ -1,0 +1,48 @@
+name: HD003 1.50.815 exact original PHP source tests and small editor-only preview
+on:
+  push:
+    branches: [hobbyroom/hd003-150815-admin-compact-empty-preview-20261113]
+    paths: [.github/workflows/hd003_150815_qa.yml, scripts/hd003_150815_editor_product_preview_build.py, scripts/hd003_150815_real_methods_qa.py]
+permissions:
+  contents: read
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify entire HD003 1.50.815
+        run: |
+          python3 scripts/hd003_150815_editor_product_preview_build.py /tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.815_EDITOR_PLATZVORSCHAU.zip
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re,hashlib
+          old='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip'
+          new='/tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.815_EDITOR_PLATZVORSCHAU.zip'
+          main='affiliate-portal-template-kit/pferde-template-kit.php'
+          profile='affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php'
+          with ZipFile(old) as a,ZipFile(new) as b:
+            assert a.namelist()==b.namelist() and len(a.namelist())==1291
+            assert a.testzip() is None and b.testzip() is None
+            d=[n for n in a.namelist() if a.read(n)!=b.read(n)]
+            assert set(d)=={main,profile},d
+            o=a.read(profile).decode();n=b.read(profile).decode()
+            oldbranch="if (!$cards) { return ''; }"
+            modified='if (!$cards) {\n            if (!self::logged_in_preview()) { return \'\'; }'
+            assert oldbranch in o and modified in n
+            assert 'hd-admin-product-slot-note' in n and 'Nur für angemeldete Benutzer sichtbar' in n
+            assert 'background:#EFDECA!important;' in n
+            assert 'border-radius:1px!important;' in n
+            for path in b.namelist():
+              if path.endswith('.php'):
+                p=Path('/tmp/hd003_815_php')/path;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(b.read(path))
+            print('ORIGINAL1291_ZIP_CRC_PASS','ORIGINAL_OTHER1289_FILES_UNCHANGED',d)
+            print('FULL_ZIP_SHA256',hashlib.sha256(Path(new).read_bytes()).hexdigest())
+          PY
+          find /tmp/hd003_815_php -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Execute REAL category and homepage PHP methods logged in/out with 0/1/3 genuine product cards
+        run: |
+          python3 scripts/hd003_150815_real_methods_qa.py /tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.815_EDITOR_PLATZVORSCHAU.zip /tmp/hd003_815_real_methods.php
+          php -l /tmp/hd003_815_real_methods.php
+          php /tmp/hd003_815_real_methods.php
