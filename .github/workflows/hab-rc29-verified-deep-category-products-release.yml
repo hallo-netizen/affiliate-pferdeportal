@@ -1,4 +1,4 @@
-name: HAB RC29 product names and actual deepest-category routing QA
+name: HAB RC29 product names, accessory exclusion and deepest-category routing QA
 on:
   push:
     branches: [hab-affiliate-rc29-product-names-leaf-contract-20261113]
