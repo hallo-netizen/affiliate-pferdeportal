@@ -1,0 +1,76 @@
+name: HAB RC28 exact category-source KISS tests and release
+on:
+  push:
+    branches: [hab-affiliate-rc28-catalog-evidence-20261113]
+    paths: [.github/workflows/hab-rc28-kiss-catalog-release-20261113.yml]
+permissions: {contents: write}
+jobs:
+  verified-build-and-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild and prove exact historic bases before new release
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          python3 "$R/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/build_rc24.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/qa_rc24.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/build_rc25.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/qa_rc25.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/build_rc26.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/qa_rc26.py"
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/build_rc27.py"
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/qa_rc27.py"
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" /tmp/HAB_RC27_BASE.zip
+          python3 "$R/AFFILIATE/RC28_CATALOG_KISS/build_rc28.py"
+          python3 "$R/AFFILIATE/RC28_CATALOG_KISS/qa_rc28.py"
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import hashlib
+          R=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ')
+          p=R/'PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          with ZipFile('/tmp/HAB_RC27_BASE.zip') as old,ZipFile(p) as new:
+            touched={n for n in old.namelist() if old.read(n)!=new.read(n)}
+            allowed={'affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php','affiliate-portal-router/includes/trait-ppar-idealo.php','affiliate-portal-router/affiliate-portal-router.php','affiliate-portal-router/readme.txt'}
+            assert touched==allowed,touched
+            assert old.read('affiliate-portal-router/assets/frontend.css')==new.read('affiliate-portal-router/assets/frontend.css')
+            assert new.testzip() is None and len(new.namelist())==36
+          print('HAB_RC28_4_EXISTING_FILES_ONLY_CSS_UNCHANGED_PASS',p.stat().st_size,hashlib.sha256(p.read_bytes()).hexdigest())
+          PY
+      - name: Retest original feed / multiprovider workflow with unchanged components
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess,tempfile
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112')
+          with tempfile.TemporaryDirectory() as td:
+            s=(p/'qa_candidate.py').read_text()
+            assert '0.1.20-rc23' in s
+            q=Path(td)/'qa_rc28_legacy.py'
+            q.write_text(s.replace('0.1.20-rc23','0.1.25-rc28'))
+            for command in [['python3',str(q)],['python3',str(p/'qa_feed_pipeline.py')],['python3',str(p/'qa_buttons.py')]]:
+              r=subprocess.run(command,capture_output=True,text=True)
+              print(r.stdout,r.stderr)
+              assert r.returncode==0,(command,r.stderr)
+          print('HAB_RC28_LEGACY_AFFILIATE_PASS')
+          PY
+      - name: Publish installable HAB-only plugin only after complete PASS
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          FILE=/tmp/HAB_Bewahr_Affiliate_RC28_TEST.zip
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" "$FILE"
+          TAG=hab-affiliate-rc28-kiss-topic-category-recognition-20261113
+          gh release create "$TAG" "$FILE#HAB_Bewahr_Affiliate_RC28_TEST.zip" --target "$GITHUB_SHA" \
+            --title "Hab & Bewahr RC28 – Warenbegriffe aus echten Themenseiten und eindeutigen Kategorien (Test)" \
+            --notes "Bestehender Kategorienmatcher, KEINE neue Architektur: wenn eine redaktionelle Endkategorie keinen Warennamen enthält, übernimmt sie den bekannten Produktnamen der bereits zugeordneten veröffentlichten WordPress-Themenseite, soweit dort ein eindeutiger Warenbegriff vorliegt. Echte deutsche Wortformen (Türschloss, Feuerlöscher, Video-Türsprechanlage, Akku-Ladegeräte, Abdichtungsmaterialien) werden erkannt statt durch fehlerhafte Umlaut-/Pluralmuster übersehen. Versicherungen, FAQ und unbekannte Themen bleiben ausgeschlossen. Der vorhandene Abdeckungsbericht weist die über Elternseite erkannten Kategorien aus. Alle 25 PHP-Dateien, komplette RC23–RC28-Kette und echte PHP-Beispielfälle getestet. Nur 4 Dateien geändert, CSS und übriges Plugin unverändert. ERWARTUNG: Die echten Zahlen und die 21 bisher fehlenden Produktgruppen müssen NACH einmaligem Live-Import bewertet werden; es werden keine GTINs/Bilder erfunden und keine Verbesserung behauptet, bevor WordPress sie beweist." \
+            --prerelease
+          gh release view "$TAG" --json assets,url --jq '{url,assets:[.assets[]|{name,size,url}]}'
