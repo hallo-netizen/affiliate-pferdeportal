@@ -1,0 +1,81 @@
+name: HD009 study full 381 equipment matching coverage and actual HD007 API
+on:
+  push:
+    branches: [hobbyroom/hd009-038-real-equipment-matcher-20261113]
+    paths: [.github/workflows/hd009_038_full_equipment_coverage.yml]
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read only: actual hobbies and equipment opportunities
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import json,re,collections,unicodedata
+          base=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          with ZipFile(base/'HD-007-HOBBYREGISTER-CORE/CURRENT.zip') as z:
+            data=json.loads(z.read('hd-hobbyregister-core/data/hobby-register.json'))
+            code=z.read('hd-hobbyregister-core/includes/class-hd-hobbyregister-core.php').decode('utf8').splitlines()
+            entry=z.read('hd-hobbyregister-core/hobby-depot-hobbyregister-core.php').decode('utf8').splitlines()
+          rows=list(data['records'].values()) if isinstance(data['records'],dict) else data['records']
+          def norm(s):
+            s=unicodedata.normalize('NFKD',str(s).lower());s=''.join(c for c in s if not unicodedata.combining(c))
+            s=s.replace('ß','ss')
+            return ' '.join(re.findall(r'[a-z0-9]+',s))
+          class_hits=[];rejections=[]
+          for x in rows:
+            if not isinstance(x,dict):continue
+            name=str(x.get('canonical_name') or x.get('name') or '')
+            need=str((x.get('result_profile') or {}).get('what_do_you_need') or '')
+            first=re.split('[,;|]',need,1)[0].strip()
+            root=norm(name); item=norm(first)
+            allowed=bool(re.fullmatch('[a-z0-9]{5,}',root) and re.fullmatch('[a-z0-9]{9,}',item) and item.startswith(root) and len(item)-len(root)>=4)
+            if allowed:class_hits.append((name,first,need))
+            elif need:rejections.append((name,first,need))
+          lines=['# HD009 – full real HD007 equipment audit (no modified data)','Original hobby records: '+str(len(rows)),'Nonempty: '+str(len(class_hits)+len(rejections)),'Currently accepted first compounds: '+str(len(class_hits))]
+          lines.extend('ACCEPTED | '+x[0]+' | '+x[1] for x in class_hits)
+          lines.append('REJECTED_SAMPLE '+str(min(100,len(rejections))))
+          lines.extend('REJECTED | '+x[0]+' | '+x[1] for x in rejections[:100])
+          for name,src,terms in [
+            ('HD007_GET',code,['public static function get(', 'public static function get_by_name(', 'public static function records(', 'private static function read_json(']),
+            ('HD007_ENTRY',entry,['hd_hobbyregister_get_by_name','hd_hobbyregister_records'])
+          ]:
+            lines.append('=== '+name)
+            for t in terms:
+              hits=[i for i,r in enumerate(src) if t in r]
+              for i in hits[:3]:
+                for j in range(max(0,i-2),min(len(src),i+36)):
+                  lines.append(f'{j+1} {src[j][:900]}')
+          with ZipFile(base/'HD-009-AFFILIATE-ZENTRALE/CURRENT.zip') as z:
+            original=z.read('affiliate-portal-router/includes/trait-ppar-idealo.php').decode('utf8').splitlines()
+            main=z.read('affiliate-portal-router/hobby-depot-affiliate-router.php').decode('utf8').splitlines()
+          for name,src,keys in [
+            ('IDEALO_MATCH',original,['private function idealo_match_primary_tokens(', 'private function idealo_materialize_campaigns(']),
+            ('HD009_FINAL',main,['private function hd_idealo_category_title_relevant(', 'private function hd_idealo_product_targets_exact_hobby_page(', 'private function hd_category_card_title_facts('])
+          ]:
+            lines.append('=== '+name)
+            for t in keys:
+              hits=[i for i,r in enumerate(src) if t in r]
+              for i in hits[:3]:
+                for j in range(max(0,i-2),min(len(src),i+85)):
+                  lines.append(f'{j+1} {src[j][:900]}')
+          dest=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/EVIDENCE/HD009_038_FULL_REGISTER_AUDIT_20261113.txt')
+          dest.parent.mkdir(parents=True,exist_ok=True)
+          dest.write_text('\n'.join(lines))
+          print('ALL_HOBBIES',len(rows),'ACCEPTED',len(class_hits),'REJECTED',len(rejections),'FILE',dest.stat().st_size)
+          print('ACTUAL_ACCEPTED',json.dumps(class_hits[:80],ensure_ascii=False))
+          PY
+      - name: Archive read-only evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/EVIDENCE/HD009_038_FULL_REGISTER_AUDIT_20261113.txt
+          git commit -m "Read-only audit actual 381 hobbies, allowed specific compounds and original HD007 getter"
+          git fetch origin hobbyroom/hd009-038-real-equipment-matcher-20261113
+          git rebase origin/hobbyroom/hd009-038-real-equipment-matcher-20261113
+          git push origin HEAD:refs/heads/hobbyroom/hd009-038-real-equipment-matcher-20261113
