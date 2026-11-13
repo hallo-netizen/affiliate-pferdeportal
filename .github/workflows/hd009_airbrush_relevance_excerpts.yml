@@ -1,0 +1,41 @@
+name: HD009 exact relevance, inherited target and category slots methods
+on:
+  push:
+    branches: [audit/hobby-airbrush-cards-design-20261113]
+    paths: [.github/workflows/hd009_airbrush_relevance_excerpts.yml]
+permissions:
+  contents: write
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read exact original matcher and rendering relevance functions
+        run: |
+          python3 - <<'PY'
+          import zipfile,pathlib
+          z=zipfile.ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          src=z.read('affiliate-portal-router/hobby-depot-affiliate-router.php').decode().splitlines()
+          trait=z.read('affiliate-portal-router/includes/trait-ppar-idealo.php').decode().splitlines()
+          parts=[
+            (src,[(710,800),(3166,3418),(4185,4240),(4559,4718),(4930,4975),(5005,5160),(5178,5350),(7933,8035)],'MAIN'),
+            (trait,[(330,418),(645,675),(755,814)],'IDEALO')
+          ]
+          output=[]
+          for a,ranges,label in parts:
+            for start,end in ranges:
+              output.append(f'=== {label} {start}-{end} ===')
+              output.extend(f'{i+1:5d} {a[i]}' for i in range(start-1,min(end,len(a))))
+          path=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/RESEARCH_AIRBRUSH_RELEVANCE_20261113.txt')
+          path.parent.mkdir(exist_ok=True,parents=True)
+          path.write_text('\n'.join(output))
+          print('EXTRACTED',len(output),'LINES',path,'BYTES',path.stat().st_size)
+          PY
+      - name: Commit only isolated excerpt, never plugin or live assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/RESEARCH_AIRBRUSH_RELEVANCE_20261113.txt
+          git commit -m "Evidence only: HD009 existing relevance and category product decision points"
+          git push origin HEAD:audit/hobby-airbrush-cards-design-20261113
