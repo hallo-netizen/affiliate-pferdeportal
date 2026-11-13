@@ -69,6 +69,7 @@ function probe($v,$message){if(!$v){fwrite(STDERR,"FAILED ".$message."\n");exit(
 class OriginalIdealoTest {
     const OPTION_NETWORK_IDEALO='existing_option';
     public function idealo_settings(){return $GLOBALS['settings'];}
+    public function inspectFeed($s){return $this->idealo_find_feed_metadata($s);}
     private function idealo_credentials_present($s){return !empty($s['api_key'])&&!empty($s['adspace_id'])&&!empty($s['feed_id']);}
     private function idealo_partner_api_base(){return 'https://api.ingenious.cloud';}
     private function idealo_partner_api_post($url,$key){
@@ -107,11 +108,11 @@ probe(count($GLOBALS['settings']['api_feed_inventory'])===2
   && $GLOBALS['settings']['api_feed_inventory'][0]['mock']===true
   && $GLOBALS['settings']['api_feed_inventory'][1]['mock']===false,
     'Show both real provider feeds, mark mock as EXCLUDED');
-$meta=$p->idealo_find_feed_metadata($GLOBALS['settings']);
+$meta=$p->inspectFeed($GLOBALS['settings']);
 probe($meta['name']==='Standard Datafeed' && $meta['number_of_products']===2901,
     'Refresh reads only the authorized active production feed');
 $bad=$GLOBALS['settings'];$bad['feed_id']='2901';
-$meta=$p->idealo_find_feed_metadata($bad);
+$meta=$p->inspectFeed($bad);
 probe(is_wp_error($meta)&&$meta->code==='hb_mock_feed_forbidden',
     'Production refresh REJECTS a selected mock feed');
 $state=$GLOBALS['settings'];
