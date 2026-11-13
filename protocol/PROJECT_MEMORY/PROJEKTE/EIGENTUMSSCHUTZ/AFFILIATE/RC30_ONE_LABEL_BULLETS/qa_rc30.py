@@ -55,6 +55,7 @@ class TestedActualRouter {
   public $offer=array();
   public function is_enabled(){return true;}
   public function hb_insurance_scope($ctx){return 'other';}
+  public function hb_insurance_campaign_allowed($campaign,$context){return true;}
   public function assignment_selection_for_slot($context,$slot){return array('handled'=>false);}
   public function select_campaign_for_slot($context,$slot,$forced=''){return array('campaign'=>$this->offer);}
   public function campaign_to_group_banner($campaign){return array(array('id'=>'real-idealo'),$campaign);}
