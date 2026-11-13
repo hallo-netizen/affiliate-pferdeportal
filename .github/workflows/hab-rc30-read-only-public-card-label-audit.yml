@@ -47,5 +47,17 @@ jobs:
           if 'html' in locals():
             for m in re.finditer(r'content\s*:\s*[\x27\x22](?:ANZEIGE|Anzeige)|hbdp-detail-products-feed:(?:before|after)|hbdp-detail-products-feed::(?:before|after)',html):
               print('PUBLIC_CSS_LABEL_RULE',repr(html[max(0,m.start()-250):m.end()+180]))
+          if 'html' in locals():
+            start=html.find('class="hbdp-detail-section hbdp-detail-products"')
+            end=html.find('</section>',start)
+            if start>=0 and end>start:
+              piece=html[start:end+10]
+              for m in re.finditer('anzeige',piece,re.I):
+                print('CARD_VISIBLE_LABEL_SOURCE',repr(piece[max(0,m.start()-200):m.end()+180]))
+          with ZipFile(R/'HAB-004-AFFILIATE/CURRENT.zip') as z:
+            css=z.read('affiliate-portal-router/assets/frontend.css').decode('utf-8','replace')
+            for word in ['.ppar-hb-category-product-adlabel','.ppar-banner-link::before','ppar-banner-description']:
+              for m in list(re.finditer(re.escape(word),css,re.I))[-5:]:
+                print('AFFILIATE_CSS_RULE',word,repr(css[max(0,m.start()-180):m.end()+300]))
           print('RC30_READ_ONLY_AUDIT_DONE')
           PY
