@@ -1,0 +1,73 @@
+name: Hab RC27 real feed counts, selection and full plugin regression
+on:
+  push:
+    branches: [hab-affiliate-rc27-evidence-feed-choice-20261113]
+    paths: [.github/workflows/hab-rc27-evidence-feed-choice-release-20261113.yml]
+permissions: {contents: write}
+jobs:
+  build-verify-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild entire prior tested chain, then test exact real API-count contradiction
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          python3 "$R/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/build_rc24.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/qa_rc24.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/build_rc25.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/qa_rc25.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/build_rc26.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/qa_rc26.py"
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" /tmp/HAB_RC26_COMPARE.zip
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/build_rc27.py"
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/qa_rc27.py"
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          R=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ')
+          new=R/'PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          old=Path('/tmp/HAB_RC26_COMPARE.zip')
+          with ZipFile(old) as a, ZipFile(new) as b:
+            changes={n for n in a.namelist() if a.read(n)!=b.read(n)}
+            expected={'affiliate-portal-router/includes/trait-ppar-idealo.php','affiliate-portal-router/affiliate-portal-router.php','affiliate-portal-router/readme.txt'}
+            assert changes==expected,changes
+            assert a.read('affiliate-portal-router/assets/frontend.css')==b.read('affiliate-portal-router/assets/frontend.css')
+            print('HAB_RC27_NO_DESIGN_CHANGE_AND_3_FILE_KISS_PASS')
+          PY
+      - name: Verify previous provider and product behaviors unchanged
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess,tempfile
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112')
+          with tempfile.TemporaryDirectory() as td:
+            s=(p/'qa_candidate.py').read_text()
+            assert '0.1.20-rc23' in s
+            q=Path(td)/'qa_rc27_compat.py'
+            q.write_text(s.replace('0.1.20-rc23','0.1.24-rc27'))
+            for cmd in [['python3',str(q)],['python3',str(p/'qa_feed_pipeline.py')],['python3',str(p/'qa_buttons.py')]]:
+              r=subprocess.run(cmd,capture_output=True,text=True)
+              print(r.stdout,r.stderr)
+              assert r.returncode==0,(cmd,r.stderr)
+          print('HAB_RC27_LEGACY_FUNCTIONS_PASS')
+          PY
+      - name: Release HAB-only tested ZIP and QA evidence
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          ZIP=/tmp/HAB_Bewahr_Affiliate_RC27_TEST.zip
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" "$ZIP"
+          TAG=hab-affiliate-rc27-real-feed-evidence-20261113
+          gh release create "$TAG" "$ZIP#HAB_Bewahr_Affiliate_RC27_TEST.zip" --target "$GITHUB_SHA" \
+            --title "Hab & Bewahr RC27 – tatsächliche Feedzahlen statt Namensautomatik (Test)" \
+            --notes "Nachgewiesener Fall: iPN 2747 Fashion/Sport/Outdoor=548821 API-Produkte; iPN 2901 Standard=0 API-Produkte, aber 1949 echte Produkte beim letzten Import. WICHTIG: 0 im API-Feld beweist kein leeres Feed-CSV. RC27 übernimmt daher niemals nur aufgrund des Namens Standard eine andere Quelle. Bereits bestätigte Quelle bleibt; ausdrücklich ausgewählter verifizierter Nicht-Mock-Feed wird nicht zurücküberschrieben. Vorhandene Daten bleiben, kein Import ausgeführt. Das existierende iPN-Adminformular listet die verifizierten Feeds und erklärt, dass eine API-Zahl keine gemessene Sicherheits-Abdeckung ist. Drei bestehende Dateien geändert; CSS identisch zu RC26, keine weiteren Portale betroffen. Testrelease: Live-Quellenvergleich und Produktabdeckung NICHT behauptet." \
+            --prerelease
+          gh release view "$TAG" --json assets,url --jq '{url,assets:[.assets[]|{name,size,url}]}'
