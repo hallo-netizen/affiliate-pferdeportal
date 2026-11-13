@@ -39,11 +39,11 @@ jobs:
               print('===HAB_METHOD_BEGIN',method,'CHARS',len(block),'===')
               print(block[:26000])
               print('===HAB_METHOD_END',method,'===')
-          for name,url in [('taxonomy','https://hab-und-bewahr.de/wp-json/wp/v2/categories?per_page=100&page=1'),('taxonomy_2','https://hab-und-bewahr.de/wp-json/wp/v2/categories?per_page=100&page=2')]:
+          for name,url in [('taxonomy','https://hab-und-bewahr.de/wp-json/wp/v2/categories?per_page=25&page=1&_fields=id,name,slug,parent'),('taxonomy_2','https://hab-und-bewahr.de/wp-json/wp/v2/categories?per_page=25&page=2&_fields=id,name,slug,parent')]:
             try:
               req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (compatible; HAB_readonly_audit/1.0)','Accept':'application/json'})
               with urllib.request.urlopen(req,timeout=17) as resp:
-                body=resp.read(500000)
+                body=resp.read(2500000)
                 data=json.loads(body)
                 print('PUBLIC_WORDPRESS_REST',name,'status',resp.status,'total',resp.headers.get('X-WP-Total'),'totalPages',resp.headers.get('X-WP-TotalPages'),'count',len(data) if isinstance(data,list) else None)
                 if isinstance(data,list): print('PUBLIC_CATEGORY_SAMPLES',json.dumps([{'name':x.get('name'),'slug':x.get('slug'),'parent':x.get('parent')} for x in data[:38]],ensure_ascii=False))
