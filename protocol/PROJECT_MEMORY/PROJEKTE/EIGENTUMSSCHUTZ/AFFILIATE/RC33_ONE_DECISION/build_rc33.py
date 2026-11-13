@@ -140,15 +140,19 @@ with ZipFile(BytesIO(raw)) as z:
         m=once(m,before_guard,new_rank_head)
     else:
         m=once(m,without_guard,new_rank_head)
-    # The historic override was a duplicate owner for non-central banners.
-    # Preserve the existing strictly centralized output_object_v4 condition.
-    m=once(m,
-        """            if ($required_type === 'banner' && $forced_campaign_id_norm === ''
+    # Remove a historical exception that allowed banners outside the
+    # one central Creative Library. Some later source versions already
+    # carry the correct strict rule.
+    old_exception="""            if ($required_type === 'banner' && $forced_campaign_id_norm === ''
                 && (string)($runtime_campaign['source'] ?? '') !== 'output_object_v4'
                 && !($this->hb_insurance_scope($rank_context)==='insurance'
-                     && $this->hb_insurance_campaign_allowed($runtime_campaign,$rank_context,$slot_type))) { continue; }""",
-        """            if ($required_type === 'banner' && $forced_campaign_id_norm === ''
-                && (string)($runtime_campaign['source'] ?? '') !== 'output_object_v4') { continue; }""")
+                     && $this->hb_insurance_campaign_allowed($runtime_campaign,$rank_context,$slot_type))) { continue; }"""
+    strict_central="""            if ($required_type === 'banner' && $forced_campaign_id_norm === ''
+                && (string)($runtime_campaign['source'] ?? '') !== 'output_object_v4') { continue; }"""
+    if m.count(old_exception)==1:
+        m=once(m,old_exception,strict_central)
+    else:
+        assert m.count(strict_central)==1,"Central-source rule unexpectedly changed"
     # Remove remaining RC19 duplicate semantic selection that tried to prioritize
     # "all insurance" by reading title, on top of the canonical plan, if any.
     # Search & characterize in QA; no ungrounded regex deletions.
