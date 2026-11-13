@@ -102,7 +102,7 @@ jobs:
             ck(!$q->relevant($title,$ctx),'Wrong Airbrush product title rejected: '.$title);
             $b=array('creative_type'=>'product','network'=>'idealo','title'=>$title,'url'=>'https://idealo.example/test',
                 'image_url'=>'https://idealo.example/p.jpg','button_text'=>'Bei idealo vergleichen','price'=>'39','currency'=>'EUR');
-            ck($q->render($b,$ctx)==='','Actual LAST render method blocks '+$title);
+            ck($q->render($b,$ctx)==='','Actual LAST render method blocks '.$title);
           }
           ck($q->relevant('Airbrushpistole Set 0,3 mm',$ctx),'Genuine compound Airbrushpistole accepted');
           ck($q->relevant('Airbrush Pistole Kompressor',$ctx),'Separated exact Airbrush accepted');
