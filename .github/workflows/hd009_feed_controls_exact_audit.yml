@@ -1,0 +1,46 @@
+name: Hobby Depot verify real feed 2901 comparison controls & product activation
+on:
+  push:
+    branches: [hobbyroom/hd009-037-last-render-safety-20261113]
+    paths: [.github/workflows/hd009_feed_controls_exact_audit.yml]
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read exact 0.1.37 current PHP settings, compare and import callbacks
+        run: |
+          python3 - <<'PY'
+          import pathlib,zipfile,re
+          base=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          with zipfile.ZipFile(base) as z:
+            data={n:z.read(n).decode('utf-8','replace').splitlines() for n in z.namelist() if n.endswith('.php') and z.getinfo(n).file_size<3000000}
+          out=[]
+          terms=r'(?i)standardfeed|standard feed|2901|2747|feed jetzt aktualisieren|provider-fachseite|feed vergleichen|vergleich|hobby|feed-wechsel|feed_id|refresh|materialisier|ranked_campaign|automa.*feed'
+          for n,a in data.items():
+            hits=[i for i,l in enumerate(a) if re.search(terms,l)]
+            if not hits: continue
+            out.append('FILE '+n+' LINES '+str(len(a))+' HITS '+str(len(hits)))
+            for i in hits[:145]:
+              l=a[i]
+              if not re.search(r'(?i)standardfeed|standard feed|2901|2747|gefahrlos|feed jetzt aktualisieren|provider-fachseite|compare|render_sync_card|feed wechseln|feed_url|output_mode|hobby_feed_verified',l):continue
+              out.append('HIT '+str(i+1)+' '+l[:1000])
+              if re.search(r'(?i)standardfeed|standard feed|2901|2747|gefahrlos|feed jetzt aktualisieren',l):
+                out.extend('NEAR '+str(j+1)+' '+a[j][:1100] for j in range(max(0,i-9),min(len(a),i+21)))
+          path=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/EVIDENCE/HD009_FEED_COMPARE_CLICKPATH_20261113.txt')
+          path.parent.mkdir(parents=True,exist_ok=True)
+          path.write_text('\n'.join(out))
+          print('EXTRACTED',len(out),'records',path.stat().st_size)
+          PY
+      - name: Commit exact proof
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/EVIDENCE/HD009_FEED_COMPARE_CLICKPATH_20261113.txt
+          git commit -m "Audit real existing HD009 standardfeed 2901 comparison and refresh clickpath"
+          git fetch origin hobbyroom/hd009-037-last-render-safety-20261113
+          git rebase origin/hobbyroom/hd009-037-last-render-safety-20261113
+          git push origin HEAD:refs/heads/hobbyroom/hd009-037-last-render-safety-20261113
