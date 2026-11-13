@@ -1,0 +1,27 @@
+name: HAB exact public front-end links, read only
+on:
+  push:
+    branches: [hab-coverage-tarifcheck-verified-audit-20261113]
+    paths: [.github/workflows/hab-readonly-exact-frontend-links-20261113.yml]
+permissions: {contents: read}
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Retrieve exact public canonical URL fields
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request,urllib.parse,json
+          for q in ['hausratversicherung','motorradversicherung','wassermelder']:
+            u='https://hab-und-bewahr.de/wp-json/wp/v2/pages?per_page=30&search='+urllib.parse.quote(q)+'&_fields=id,slug,link,title'
+            try:
+              r=urllib.request.urlopen(urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0','Accept':'application/json'}),timeout=15)
+              rows=json.loads(r.read())
+              for x in rows:
+                print('EXACT_PUBLIC_LINK',q,x['slug'],x['link'])
+            except Exception as e:
+              print('QUERY_UNAVAILABLE',q,str(e)[:180])
+          PY
