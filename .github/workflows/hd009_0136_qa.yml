@@ -1,0 +1,121 @@
+name: HD009 0.1.36 exact topic and truthful card facts QA
+on:
+  push:
+    branches: [hobbyroom/hd009-036-relevance-provider-cards-20261113]
+    paths: [.github/workflows/hd009_0136_qa.yml, scripts/hd009_0136_product_card_build.py]
+permissions:
+  contents: read
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deterministic full plugin build and original API/import identity proof
+        run: |
+          python3 scripts/hd009_0136_product_card_build.py /tmp/HOBBY_DEPOT_HD009_0.1.36_PRODUCT_RELEVANCE_AND_BUTTONS.zip
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re
+          a='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip'
+          b='/tmp/HOBBY_DEPOT_HD009_0.1.36_PRODUCT_RELEVANCE_AND_BUTTONS.zip'
+          with ZipFile(a) as src,ZipFile(b) as dst:
+            assert len(src.namelist())==len(dst.namelist())==41
+            assert src.namelist()==dst.namelist() and src.testzip() is None and dst.testzip() is None
+            name='affiliate-portal-router/hobby-depot-affiliate-router.php'
+            diff=[n for n in src.namelist() if src.read(n)!=dst.read(n)]
+            assert diff==[name],diff
+            old=src.read(name).decode();new=dst.read(name).decode()
+            def method(s,q):
+                st=re.search(r'^    (?:public|private|protected) function '+re.escape(q)+r'\(',s,re.M)
+                assert st,q
+                end=re.search(r'^    (?:public|private|protected) function ',s[st.end():],re.M)
+                return s[st.start():st.end()+end.start()] if end else s[st.start():]
+            for f in [
+                'idealo_materialize_campaigns','idealo_import_feed_file',
+                'hd_idealo_standard_feed_compare_work','multiprovider_matching_offers_for_banner',
+                'multiprovider_render_offer_buttons','category_product_shared_rank_base',
+                'category_product_ranked_candidates_from_shared_base','ranked_campaigns_for_slot_uncached',
+                'render_affiliate_slot_for_context']:
+                if 'function '+f+'(' not in old:continue
+                assert method(old,f)==method(new,f),'DO NOT CHANGE CORE '+f
+            assert "multiprovider_render_offer_buttons($offers, 'banner')" in new
+            assert "private function hd_category_card_title_facts(" in new
+            assert "data-ppar-category-product-card=" in new
+            assert "ppar-product-facts-heading" in new
+            assert "grid-template-columns:minmax(0,1fr)!important" in new
+            for n in dst.namelist():
+              if n.endswith('.php'):
+                p=Path('/tmp/hd009php')/n
+                p.parent.mkdir(parents=True,exist_ok=True)
+                p.write_bytes(dst.read(n))
+            print('FULL_ZIP_41_FILES_CRC_PASS')
+            print('ONE_CHANGED_PHP',diff)
+            print('ALL_ORIGINAL_IMPORT_MULTIPROVIDER_AND_PROVIDER_FUNCTIONS_UNMODIFIED')
+          PY
+          find /tmp/hd009php -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Execute extracted PHP functions against literal wrong and correct products
+        run: |
+          python3 - <<'PY'
+          import re
+          from zipfile import ZipFile
+          from pathlib import Path
+          with ZipFile('/tmp/HOBBY_DEPOT_HD009_0.1.36_PRODUCT_RELEVANCE_AND_BUTTONS.zip') as z:
+            main=z.read('affiliate-portal-router/hobby-depot-affiliate-router.php').decode()
+            trait=z.read('affiliate-portal-router/includes/trait-ppar-idealo.php').decode()
+          def get(s,name):
+            m=re.search(r'^    (?:private|public|protected) function '+re.escape(name)+r'\(',s,re.M)
+            assert m,name
+            after=s[m.end():]
+            end=re.search(r'^    (?:private|public|protected) function ',after,re.M)
+            return s[m.start():m.end()+end.start()] if end else s[m.start():]
+          names=['idealo_match_normalize','idealo_match_stem','idealo_match_tokens','idealo_match_primary_tokens','idealo_match_distinct_tokens']
+          parts='\n'.join([get(trait,n) for n in names]+[get(main,n) for n in ['hd_idealo_product_targets_exact_hobby_page','hd_category_card_title_facts']])
+          php='''<?php
+          error_reporting(E_ALL);
+          function sanitize_key($x){return preg_replace('/[^a-z0-9_\\-]/','',strtolower((string)$x));}
+          function sanitize_title($x){return sanitize_key($x);}
+          function wp_strip_all_tags($x){return strip_tags((string)$x);}
+          function remove_accents($x){return strtr((string)$x,array('ü'=>'u','ö'=>'o','ä'=>'a','ß'=>'ss'));}
+          class T {
+          '''+parts+'''
+          public function allow($a,$b,$c){return $this->hd_idealo_product_targets_exact_hobby_page($a,$b,$c);}
+          public function facts($t){return $this->hd_category_card_title_facts($t);}
+          }
+          function ck($v,$msg){static $i=0;$i++;if(!$v){fwrite(STDERR,"FAIL ".$i." ".$msg."\\n");exit(1);}echo "PASS ".$i." ".$msg."\\n";}
+          $t=new T;
+          $air=array('post_type'=>'page','primary_slug'=>'airbrush','primary_name'=>'Airbrush');
+          $x=array('network'=>'idealo','source'=>'idealo_product_feed_v1','automation_target_keys'=>array('page:airbrush'),'title'=>'Kari Traa Damen Malene Cape thyme');
+          ck(!$t->allow($x,$air,'category_product_1'),'Old clothing with direct cached Airbrush target blocked');
+          $x['title']='Bogner Schurwoll-Pullover Malene für Damen';
+          ck(!$t->allow($x,$air,'category_product_2'),'Second cached dress blocked');
+          $x['title']='Gründl Cotton Quick Batik';
+          ck(!$t->allow($x,$air,'category_product_3'),'Batik cotton blocked');
+          $x['title']='Airbrush Pistole Set 0,3 mm';
+          ck($t->allow($x,$air,'category_product_1'),'True Airbrush product with target approved');
+          $x['automation_target_keys']=array('page:malen-zeichnen');
+          ck(!$t->allow($x,$air,'category_product_1'),'Parent-only targeted product blocked');
+          $x['network']='amazon';
+          ck($t->allow($x,$air,'category_product_1'),'Amazon unchanged');
+          $x['network']='ebay';
+          ck($t->allow($x,$air,'category_product_1'),'eBay unchanged');
+          $x['network']='idealo';$x['automation_target_keys']=array('page:airbrush');
+          ck($t->allow($x,$air,'post_bottom_products'),'Article output unchanged');
+          $x['title']='Malene Kleid';
+          ck(!$t->allow($x,array('post_type'=>'page','primary_slug'=>'malen','primary_name'=>'Malen'),'category_product_1'),'No Malene/Malen false positive');
+          ck($t->allow(array('network'=>'idealo','source'=>'idealo_product_feed_v1',
+              'automation_target_keys'=>array('page:teleskope'),'title'=>'Teleskop Objektiv'),
+              array('post_type'=>'page','primary_slug'=>'teleskope','primary_name'=>'Teleskope'),'category_product_1'),
+              'Valid German telescope inflection accepted');
+          $facts=$t->facts('Airbrush Pistole Set 0,3 mm schwarz');
+          ck(count($facts)===3,'Three title-sourced facts, not invented: size, kit, color');
+          ck(str_contains(implode('|',$facts),'0,3 mm')&&str_contains(implode('|',$facts),'Set')&&str_contains(implode('|',$facts),'schwarz'),
+              'Contents literally present in product title');
+          ck($t->facts('Fantasiename-28193')===array(),'No made-up specifications on empty-evidence product');
+          echo "ORIGINAL_PHP_RELEVANCE_AND_FACTS_TESTS_PASS\\n";
+          '''
+          Path('/tmp/hd009_0136_php_test.php').write_text(php)
+          PY
+          php -l /tmp/hd009_0136_php_test.php
+          php /tmp/hd009_0136_php_test.php
