@@ -1,3 +1,17 @@
+## 13.11.2026 – RC31: TARIFCHECK INSURANCE NUR IM VERIFIZIERTEN ZWEIG, ALLE UNTEREBENEN
+
+**Neueste vollständig getestete HAB-004-Test-ZIP:** `HAB_Bewahr_Affiliate_RC31_TEST.zip`, Version **0.1.28-rc31**. Release `hab-affiliate-rc31-insurance-branch-cascade-20261113`. GitHub Actions **43439019366 SUCCESS**, vollständige RC23–RC31-Kette, 25 PHP-Lints, produktive Zuordnungsmethoden mit Hausrat/Motorrad/generischer Versicherung und tatsächlicher Endkategorie erfolgreich simuliert; bestehende Produktkarten / Händlerfunktionen bleiben unverändert.
+
+**Nachgewiesener RC30-Defekt:** Pauschale Tarifcheck-Mehrziel-Zuordnung verwendete teilweise den falschen früheren Bereich `Wissen > Versicherungen & Recht` statt des echten Versicherungsbaums und konnte spezifische Banner zu breit ausspielen. **RC31 nutzt nur den verifizierten echten Versicherungs-Kategoriebaum**: Spezialbanner ausschließlich auf der fachlich richtigen R2/R3-Seite und ihren echten untersten Nachkommen; echte allgemeine Versicherungsvergleiche innerhalb der gesamten Versicherungswelt. Keine Werbung in fremden Welten, keine erfundenen Zuordnungen. Bereits eingefügte Original-Tarifcheck-Banner werden ohne Reimport beim Besuch der Affiliate-Zentrale in **60er-Gruppen** automatisch neu zugeordnet (nur technisch geprüfte Bilder; keine neue Tabelle / Cron / Benutzeraktionen).
+
+**Idealo-Abdeckung:** 20 von 52 Gruppen hatten beim letzten echten Import sichere **Idealo**-Treffer, 2.147 Produkte. Diese Kennzahl bezeichnet nicht die gesamte Portalabdeckung mit eBay und Amazon; Tresore und Wassermelder hatten öffentlich bereits Produktkarten. Die Bericht-Beschriftung wurde entsprechend korrigiert. Kein Feedwechsel. **32 fehlende Idealo-Gruppen weiter offen**, keine unbelegte Erfolgsmeldung.
+
+**Noch nicht erledigt:** RC31 **nicht live installiert**, echte Tarifcheck-Bestände noch nicht direkt geprüft und Neu-Zuordnung noch nicht live abgenommen. Nutzer muss nur bestehendes Plugin einmal mit RC31 aktualisieren und Affiliate-Zentrale besuchen. **Keine Banner erneut eingeben**, Tarifrechner/Textlinks erst anschließend, Kurzformulare vorerst nicht.
+
+Vollständiger Test-, Ziel- und Versionsbeleg: `RC31_INSURANCE_CASCADE/ABNAHME_RC31_20261113.md`. Historisch darunter stehende Zustände sind überholt.
+
+---
+
 ## 13.11.2026 – RC30 NUR ANZEIGE-KENNZEICHNUNG + PRODUKT-STICHPUNKTE (OFFLINE-PASS)
 
 **Aktuelle fertig getestete Test-ZIP:** HAB-004 **0.1.27-rc30**, `HAB_Bewahr_Affiliate_RC30_TEST.zip`, 2.346.028 Bytes, SHA256 `baa8e87cbab1f1bbbbce4f482bd73a706985f583c847f543eb93fbf7c644f34f`. Release `hab-affiliate-rc30-one-ad-label-real-bullets-20261113`; GitHub Actions **43419366272 SUCCESS**.
