@@ -2,7 +2,7 @@ name: HD003 1.50.813 visible beige and teal button design QA
 on:
   push:
     branches: [hobbyroom/hd003-150813-visible-colors-20261113]
-    paths: [.github/workflows/hd003_150813_qa.yml]
+    paths: [.github/workflows/hd003_150813_qa.yml, scripts/hd003_150813_visible_button_colors.py]
 permissions:
   contents: read
 jobs:
@@ -37,7 +37,7 @@ jobs:
             newblock=new[new.index(startnew):new.index(stopnew)+len(stopnew)]
             expected=oldblock.replace(start,startnew).replace(stop,stopnew).replace(
                 'background:#FAF8F4!important;','background:#EFDECA!important;').replace(
-                'color:#0f8f95!important;','color:#00777D!important;').replace(
+                'color:#0f8f95!important;','color:#00777D!important;',1).replace(
                 'border:1px solid #b7d7d4!important;','border:1px solid #81AAA8!important;')
             assert newblock==expected,'Only 3 colors may change'
             assert new.replace(newblock,oldblock,1)==old,'No other profile changes'
