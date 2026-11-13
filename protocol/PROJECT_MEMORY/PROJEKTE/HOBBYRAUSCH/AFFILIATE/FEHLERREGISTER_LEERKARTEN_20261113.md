@@ -37,3 +37,12 @@
 - Prüfung braucht ausdrücklich eingeloggte **und** ausgeloggte Darstellung bei 0/1/3 echten Produkt-Slots; keine künstlichen Produktbeschreibungen.
 - Quelle: `AFFILIATE/EVIDENCE/HD003_HD009_LEERKARTEN_CODE_20261113.txt` (exakte Quellenzeilen aus GitHub-Actions-Abgleich). 
 - **Noch keine neue Version in WordPress installiert.**
+
+## Stand 03 – korrigierter Design-Code, vollständiger Test bestanden
+- Neue **HD003 1.50.814** aus der unveränderten 1.50.813 gebaut. ZIP-SHA256 `263284e057b9c2a3cc57cc4807301ab2e74c1daeae8dfeb0a16191c49a9dc18f`.
+- Nur drei existierende Zeilen zur Erzeugung falscher Produktplatzhalter beziehungsweise deren Hinweis entfernt; Versionskennung angepasst. **Keine anderen Designänderungen, kein Affiliate-Plugin-Umbau.**
+- Die originalen 1.291 ZIP-Dateien geprüft (CRC bestanden); alle Original-PHP-Dateien auf Syntax geprüft; 1.289 Dateien byte-identisch.
+- **36 echte PHP-Funktionstests** mit aus dem vollständigen Originalplugin extrahierten Funktionen bestanden: eingeloggt/ausgeloggt, 0/1/3 echte Karten in Kategorie, Leaf, Homepage. 0 = keine Empfehlungen-Sektion, 1 = genau eine echte Karte, 3 = drei echte Karten. Originale HTML-Inhalte bleiben erhalten. Admin-Vorschauen für Nicht-Produkte unverändert.
+- Nachweis [GitHub Actions 43411117782](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43411117782).
+- **Grenze:** Tests laufen mit reproduzierbaren echten Plugin-Methoden und nachgebildeten Shortcode-Antworten, nicht mit einer authentifizierten Live-WordPress-Session. Eine reale passende Airbrush-Produktauswahl ist dadurch **noch nicht** hergestellt; dafür müssen Feed 2901 und Zuordnungsbedingungen getrennt geprüft werden. **Nicht als erfolgreiche Live-Produkteinbindung bezeichnen.**
+- **Archivierung und Veröffentlichung:** folgt im nächsten dokumentierten Schritt; 1.50.813 bleibt Sicherung.
