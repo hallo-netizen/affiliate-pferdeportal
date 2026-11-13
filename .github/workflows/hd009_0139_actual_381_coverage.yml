@@ -2,7 +2,7 @@ name: HD009 0.1.39 exact 381 active hobby alias coverage, honest evidence
 on:
   push:
     branches: [hobbyroom/hd009-039-validated-equipment-forms-20261113]
-    paths: [.github/workflows/hd009_0139_actual_381_coverage.yml]
+    paths: [.github/workflows/hd009_0139_actual_381_coverage.yml, scripts/hd009_0139_safe_compound_equipment_build.py, scripts/hd009_0139_original_php_equipment_qa.py]
 permissions:
   contents: write
 jobs:
