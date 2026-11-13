@@ -1,0 +1,110 @@
+name: HAB RC35 original HTML href single decision KISS
+on:
+  push:
+    branches: [hab-affiliate-rc35-html-link-kiss-20261113]
+    paths:
+      - .github/workflows/hab-rc35-html-link-kiss-full-qa-release.yml
+      - protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/RC34_KISS_DIAG/build_rc34.py
+      - protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/RC34_KISS_DIAG/qa_rc34.py
+      - protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/RC35_HTML_LINK_KISS/build_rc35.py
+      - protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/RC35_HTML_LINK_KISS/qa_rc35.py
+permissions: {contents: write}
+jobs:
+  full-real-php-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and retest complete RC23–RC34 chain; no shortcuts
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          python3 "$R/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/build_rc24.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/qa_rc24.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/build_rc25.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/qa_rc25.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/build_rc26.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/qa_rc26.py"
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/build_rc27.py"
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/qa_rc27.py"
+          python3 "$R/AFFILIATE/RC28_CATALOG_KISS/build_rc28.py"
+          python3 "$R/AFFILIATE/RC28_CATALOG_KISS/qa_rc28.py"
+          python3 "$R/AFFILIATE/RC29_PRODUCT_NAMES_LEAF_CONTRACT/build_rc29.py"
+          python3 "$R/AFFILIATE/RC29_PRODUCT_NAMES_LEAF_CONTRACT/qa_rc29.py"
+          python3 "$R/AFFILIATE/RC30_ONE_LABEL_BULLETS/build_rc30.py"
+          python3 "$R/AFFILIATE/RC30_ONE_LABEL_BULLETS/qa_rc30.py"
+          python3 "$R/AFFILIATE/RC31_INSURANCE_CASCADE/build_rc31.py"
+          python3 "$R/AFFILIATE/RC31_INSURANCE_CASCADE/qa_rc31.py"
+          python3 "$R/AFFILIATE/RC33_ONE_DECISION/build_rc33.py"
+          python3 "$R/AFFILIATE/RC33_ONE_DECISION/qa_rc33.py"
+          python3 "$R/AFFILIATE/RC33_ONE_DECISION/qa_materialize_rc33.py"
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" /tmp/RC33_BASE.zip
+          python3 "$R/AFFILIATE/RC34_KISS_DIAG/build_rc34.py"
+          python3 "$R/AFFILIATE/RC34_KISS_DIAG/qa_rc34.py"
+          python3 "$R/AFFILIATE/RC33_ONE_DECISION/qa_materialize_rc33.py"
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          from hashlib import sha256
+          R=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ')
+          p=R/'PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          with ZipFile('/tmp/RC33_BASE.zip') as a, ZipFile(p) as b:
+            changed={n for n in a.namelist() if a.read(n)!=b.read(n)}
+            wanted={'affiliate-portal-router/affiliate-portal-router.php','affiliate-portal-router/readme.txt','affiliate-portal-router/includes/trait-ppar-output-objects.php','affiliate-portal-router/includes/trait-ppar-creative-library.php'}
+            assert changed==wanted,changed
+            for unchanged in ['assets/frontend.css','includes/trait-ppar-idealo.php','includes/trait-ppar-tariff-tools.php','includes/trait-ppar-automation-suite.php','includes/class-ppar-hab-bewahr-bridge.php']:
+              assert a.read('affiliate-portal-router/'+unchanged)==b.read('affiliate-portal-router/'+unchanged),unchanged
+          print('HAB_RC34_ONLY_SINGLE_EXISTING_ROUTING_AND_LOGGING_PATH_CHANGED_PASS',p.stat().st_size,sha256(p.read_bytes()).hexdigest())
+          PY
+      - name: Extend exactly the same import evidence reader (RC35)
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          python3 "$R/AFFILIATE/RC35_HTML_LINK_KISS/build_rc35.py"
+          python3 "$R/AFFILIATE/RC35_HTML_LINK_KISS/qa_rc35.py"
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          p=Path("protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip")
+          with ZipFile(p) as z:
+            assert z.testzip() is None
+            assert len(z.namelist())==36
+            assert b"Version: 0.1.32-rc35" in z.read("affiliate-portal-router/affiliate-portal-router.php")
+          print("RC35_COMPLETE_ARCHIVE_PASS")
+          PY
+      - name: Previous Amazon Idealo eBay product and provider verification
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess,tempfile
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112')
+          with tempfile.TemporaryDirectory() as td:
+            s=(p/'qa_candidate.py').read_text()
+            assert '0.1.20-rc23' in s
+            q=Path(td)/'qa_rc34_compat.py'
+            q.write_text(s.replace('0.1.20-rc23','0.1.32-rc35'))
+            for cmd in [['python3',str(q)],['python3',str(p/'qa_feed_pipeline.py')],['python3',str(p/'qa_buttons.py')]]:
+              r=subprocess.run(cmd,capture_output=True,text=True)
+              print(r.stdout,r.stderr)
+              assert r.returncode==0,(cmd,r.stderr)
+          print('HAB_RC34_PREVIOUS_FEED_PRODUCT_SAFETY_QA_PASS')
+          PY
+      - name: Publish complete existing HAB plugin zip only after all tests green
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          FILE=/tmp/HAB_Bewahr_Affiliate_RC35_TEST.zip
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" "$FILE"
+          TAG=hab-affiliate-rc35-html-link-single-decision-20261113
+          gh release create "$TAG" "$FILE#HAB_Bewahr_Affiliate_RC35_TEST.zip" --target "$GITHUB_SHA" \
+            --title "Hab & Bewahr RC35 – KISS Original-HTML-Ziel auswerten (Test)" \
+            --notes "Uses the SAME existing import-time banner decision: original saved HTML href deep parameter from verified Tarifcheck host, true first-party landing paths, preserved HTML anchor text and same-host successful redirects. No extra topic decision, import job, table, public lookup, reimport or frontend change. Full original PHP mapping and all earlier provider regression tests required. No claim that all 160 actual private banners display before on-site acceptance." \
+            --prerelease
+          gh release view "$TAG" --json assets,url --jq '{url,assets:[.assets[]|{name,size,url}]}'
