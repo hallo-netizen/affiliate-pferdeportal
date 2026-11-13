@@ -1,4 +1,4 @@
-name: HAB RC30 real PHP label bullets and legal placement acceptance
+name: HAB RC30 full real renderer tests with all existing affiliate gates
 on:
   push:
     branches: [hab-affiliate-rc30-one-label-bullets-20261113]
