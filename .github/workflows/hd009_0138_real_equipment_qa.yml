@@ -35,7 +35,7 @@ jobs:
               assert m,n
               # Match the exact method body; inserted new method comments after
               # the previous method must not count as a changed original method.
-              end=s.index('\\n    }',m.end())+len('\\n    }')
+              end=s.index('\n    }',m.end())+len('\n    }')
               return s[m.start():end]
             critical=[
               'idealo_import_feed_file',
