@@ -1,0 +1,91 @@
+name: HAB RC34 KISS single banner decision plus live error report
+on:
+  push:
+    branches: [hab-affiliate-rc34-one-rule-diagnostics-20261113]
+    paths:
+      - .github/workflows/hab-rc34-kiss-diagnostics-verified-release.yml
+      - protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/RC34_KISS_DIAG/build_rc34.py
+      - protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/RC34_KISS_DIAG/qa_rc34.py
+permissions: {contents: write}
+jobs:
+  full-real-php-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and retest complete RC23–RC34 chain; no shortcuts
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          python3 "$R/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/build_rc24.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/qa_rc24.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/build_rc25.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/qa_rc25.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/build_rc26.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/qa_rc26.py"
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/build_rc27.py"
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/qa_rc27.py"
+          python3 "$R/AFFILIATE/RC28_CATALOG_KISS/build_rc28.py"
+          python3 "$R/AFFILIATE/RC28_CATALOG_KISS/qa_rc28.py"
+          python3 "$R/AFFILIATE/RC29_PRODUCT_NAMES_LEAF_CONTRACT/build_rc29.py"
+          python3 "$R/AFFILIATE/RC29_PRODUCT_NAMES_LEAF_CONTRACT/qa_rc29.py"
+          python3 "$R/AFFILIATE/RC30_ONE_LABEL_BULLETS/build_rc30.py"
+          python3 "$R/AFFILIATE/RC30_ONE_LABEL_BULLETS/qa_rc30.py"
+          python3 "$R/AFFILIATE/RC31_INSURANCE_CASCADE/build_rc31.py"
+          python3 "$R/AFFILIATE/RC31_INSURANCE_CASCADE/qa_rc31.py"
+          python3 "$R/AFFILIATE/RC33_ONE_DECISION/build_rc33.py"
+          python3 "$R/AFFILIATE/RC33_ONE_DECISION/qa_rc33.py"
+          python3 "$R/AFFILIATE/RC33_ONE_DECISION/qa_materialize_rc33.py"
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" /tmp/RC33_BASE.zip
+          python3 "$R/AFFILIATE/RC34_KISS_DIAG/build_rc34.py"
+          python3 "$R/AFFILIATE/RC34_KISS_DIAG/qa_rc34.py"
+          python3 "$R/AFFILIATE/RC33_ONE_DECISION/qa_materialize_rc33.py"
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          from hashlib import sha256
+          R=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ')
+          p=R/'PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          with ZipFile('/tmp/RC33_BASE.zip') as a, ZipFile(p) as b:
+            changed={n for n in a.namelist() if a.read(n)!=b.read(n)}
+            wanted={'affiliate-portal-router/affiliate-portal-router.php','affiliate-portal-router/readme.txt','affiliate-portal-router/includes/trait-ppar-output-objects.php','affiliate-portal-router/includes/trait-ppar-creative-library.php'}
+            assert changed==wanted,changed
+            for unchanged in ['assets/frontend.css','includes/trait-ppar-idealo.php','includes/trait-ppar-tariff-tools.php','includes/trait-ppar-automation-suite.php','includes/class-ppar-hab-bewahr-bridge.php']:
+              assert a.read('affiliate-portal-router/'+unchanged)==b.read('affiliate-portal-router/'+unchanged),unchanged
+          print('HAB_RC34_ONLY_SINGLE_EXISTING_ROUTING_AND_LOGGING_PATH_CHANGED_PASS',p.stat().st_size,sha256(p.read_bytes()).hexdigest())
+          PY
+      - name: Previous Amazon Idealo eBay product and provider verification
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess,tempfile
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112')
+          with tempfile.TemporaryDirectory() as td:
+            s=(p/'qa_candidate.py').read_text()
+            assert '0.1.20-rc23' in s
+            q=Path(td)/'qa_rc34_compat.py'
+            q.write_text(s.replace('0.1.20-rc23','0.1.31-rc34'))
+            for cmd in [['python3',str(q)],['python3',str(p/'qa_feed_pipeline.py')],['python3',str(p/'qa_buttons.py')]]:
+              r=subprocess.run(cmd,capture_output=True,text=True)
+              print(r.stdout,r.stderr)
+              assert r.returncode==0,(cmd,r.stderr)
+          print('HAB_RC34_PREVIOUS_FEED_PRODUCT_SAFETY_QA_PASS')
+          PY
+      - name: Publish complete existing HAB plugin zip only after all tests green
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          FILE=/tmp/HAB_Bewahr_Affiliate_RC34_TEST.zip
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" "$FILE"
+          TAG=hab-affiliate-rc34-single-partner-gate-diagnosis-20261113
+          gh release create "$TAG" "$FILE#HAB_Bewahr_Affiliate_RC34_TEST.zip" --target "$GITHUB_SHA" \
+            --title "Hab & Bewahr RC34 – KISS und echter Tarifcheck-Fehlerbericht (Test)" \
+            --notes "One original banner identifier across import, actual same existing rebind and backend: also recognizes direct:tarifcheck when title differs, Tarifcheck Deutschland partner names and genuine destination sites. All stored verified existing creatives are reconsidered in same 60-row admin batch, no reimport, no duplicate runner. A second map writer can no longer remove original stored category subtree. Read-only private existing Werbemittel & Ausspielung page shows how many ACTUAL banner originals fail image verification, destination mapping, materialization, publication or an explicit veto; no tracking URLs displayed, checkpoint aggregates stored in standard WP option. Existing design, images, links, Idealo, other providers untouched. Green 25/25 PHP lint and actual PHP tests. This is a diagnostic: actual private WordPress banner data can only be evaluated after installing and reading this backend report; do not claim banners are all visible." \
+            --prerelease
+          gh release view "$TAG" --json assets,url --jq '{url,assets:[.assets[]|{name,size,url}]}'
