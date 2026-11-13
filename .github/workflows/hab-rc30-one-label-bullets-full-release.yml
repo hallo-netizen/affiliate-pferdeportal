@@ -1,4 +1,4 @@
-name: HAB RC30 one Anzeige and real bullet facts full acceptance
+name: HAB RC30 real PHP label bullets and legal placement acceptance
 on:
   push:
     branches: [hab-affiliate-rc30-one-label-bullets-20261113]
