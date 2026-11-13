@@ -1,4 +1,4 @@
-name: HAB RC31 verified insurance banner subtree, Idealo coverage clarity
+name: HAB RC31 product and verified insurance branch regression
 on:
   push:
     branches: [hab-affiliate-rc31-insurance-cascade-20261113]
