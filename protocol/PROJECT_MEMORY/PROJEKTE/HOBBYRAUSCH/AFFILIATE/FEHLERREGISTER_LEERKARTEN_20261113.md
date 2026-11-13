@@ -26,3 +26,14 @@
 
 ## Änderungslog
 - 2026-11-13, Stand 01: Dokumentation eröffnet. **Noch kein Plugin geändert oder installiert.**
+
+## Stand 02 – Ursache im echten Quellcode bewiesen
+- Quellarchiv **HD003 1.50.813** vollständig geprüft (1291 Dateien, CRC ok, Original-SHA256 `5fb7053f31d705b9c2001fbcdfecf518c05d8c1fe52283f058943ca48f6eba73`).
+- `class-hobby-depot-profile-v150709.php`, Zeile 3219: Bei fehlendem Affiliate-HTML wird für eingeloggte Personen bewusst `affiliate_preview_placeholder('Affiliate-Produkt',...)` erzeugt, bis zu drei Stück. Zeile 1827 ist der **wörtlich zum Screenshot passende Text** „Nur eingeloggt sichtbar / Affiliate-Produkt / Platz aktuell nicht belegt“.
+- Zeilen 3654–3661 bauen aus diesen erzeugten Vorschauen drei große **Empfehlungen-Karten**. Die zuletzt vergrößerten HD003-Produktkarten-CSS-Regeln machen daraus besonders auffällige leere Boxen.
+- Damit ist der Fehler **nicht nur fehlender Import**, sondern zusätzlich ein unberechtigter Admin-Platzhalter im öffentlichen Seitenlayout, sobald der Betreiber angemeldet ist.
+- Der Screenshot wurde zu Recht nicht durch die vorherigen CSS-/PHP-Simulationen erkannt, weil es dort immer künstliche Beispielprodukte gab.
+- Geplanter minimaler Eingriff: Vorhandene **Produkt**-Vorschau im HD003-Ausgabepfad entfernen; Banner-/Redaktionsvorschauen nicht verändern; echte vorhandene Produkt-HTML unverändert durchlassen. Bei 0 Produkten ganze Empfehlungen-Sektion weglassen.
+- Prüfung braucht ausdrücklich eingeloggte **und** ausgeloggte Darstellung bei 0/1/3 echten Produkt-Slots; keine künstlichen Produktbeschreibungen.
+- Quelle: `AFFILIATE/EVIDENCE/HD003_HD009_LEERKARTEN_CODE_20261113.txt` (exakte Quellenzeilen aus GitHub-Actions-Abgleich). 
+- **Noch keine neue Version in WordPress installiert.**
