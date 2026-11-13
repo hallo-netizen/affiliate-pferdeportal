@@ -1,0 +1,35 @@
+name: Archive complete HD003 1.50.815 tested editor-preview candidate only
+on:
+  push:
+    branches: [hobbyroom/hd003-150815-admin-compact-empty-preview-20261113]
+    paths: [.github/workflows/hd003_150815_archive.yml]
+permissions:
+  contents: write
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 11
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify exact completed PHP methods QA
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          test "$(gh api repos/"$GITHUB_REPOSITORY"/actions/runs/43442464715 --jq .conclusion)" = success
+          python3 scripts/hd003_150815_editor_product_preview_build.py /tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.815_EDITOR_PLATZVORSCHAU.zip
+          echo '191349ae0f41d6f4d38587d180a12e98b95bff32fb96f132867d4ad7d0b74b1d  /tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.815_EDITOR_PLATZVORSCHAU.zip' | sha256sum -c
+          python3 scripts/hd003_150815_real_methods_qa.py /tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.815_EDITOR_PLATZVORSCHAU.zip /tmp/hd003_815_retest.php
+          php /tmp/hd003_815_retest.php
+      - name: Copy only to existing Design candidate office and append error register
+        run: |
+          python3 scripts/hd003_150815_archive_candidate.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CANDIDATES/HOBBY_DEPOT_DESIGN_HD003_1.50.815_ADMIN_VORSCHAU_NUR_TEST.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CANDIDATES/CANDIDATE_1.50.815_STATUS.md
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/HD003_FEHLERPROTOKOLL_LEERE_PRODUKTKARTEN_20261113.md
+          git commit -m "HD003 1.50.815: tested compact logged-in-only placement status, no large fake cards, current unchanged"
+          git fetch origin hobbyroom/hd003-150815-admin-compact-empty-preview-20261113
+          git rebase origin/hobbyroom/hd003-150815-admin-compact-empty-preview-20261113
+          git push origin HEAD:refs/heads/hobbyroom/hd003-150815-admin-compact-empty-preview-20261113
