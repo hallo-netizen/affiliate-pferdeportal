@@ -1,0 +1,28 @@
+wp_id,world,old_page,v45_decision,reason,related_candidates_or_page,change_wp
+rbt_product_0034,Sport,Linienroboter,BESTEHENDE_SEITE,"Sportplatz-Linienroboter bleibt Platzmarkierung, keine automatische Sportkamera",S07 nur andere Kamerafunktion,NEIN
+rbt_product_0035,Sport,Tennisplatzroboter,BESTEHENDE_SEITE,"Tennisplatzpflege ROBOT-TEN kann bereits Abdecken, Linien, Wasser und Platzpflege übernehmen; keine zweite Seite allein für Plane",ROB-0323 Abdeckroboter nur Vertiefung,NEIN
+rbt_product_0045,Garten,Schneeroboter,BESTEHENDE_SEITE,Privat-/kleine Grundstücke: Schnee räumen; professionelle Winterdienste nur bei eigenen Gerätetypen/Fragen separat,Yarbo privat; keine angenommene Profi-Seite,NEIN
+rbt_product_0048,Freizeit,Bootsreiniger,BESTEHENDE_SEITE,Bootsrumpf-Reinigungsroboter andere Aufgabe als Erkundungs-ROV,F01 Unterwassererkundung getrennt,NEIN
+rbt_product_0052,Sport,Golfballroboter,BESTEHENDE_SEITE,"Golfbälle sammeln bereits vorhanden, nicht Golfbunker rechen",S01 Golfbunker getrennt,NEIN
+rbt_product_0054,Sport,Ballsammelroboter,BESTEHENDE_SEITE,"Ballsammeln für Tennis/Padel/Pickleball eine Funktionsfamilie, nicht drei neue Sportseiten",Robotik-Owner ROB-0054/55/56 bleibt,NEIN
+rbt_product_0059,Bildung,Lernroboter,VORHANDENE_SEITE_VERTIEFEN,"Allgemeiner Lernroboter darf Bau, ROS, Haptik, Lesen und Laborexperimente nicht als bloße Modelle verschlucken",B01 B02 B03 B04 B05 B07 getrennte Informationsaufgaben,NEIN
+rbt_product_0060,Freizeit,Robotertiere,BESTEHENDE_SEITE,"Programmierbares Robotertier für Spiel, nicht automatisch therapeutisches PARO oder EDU-Vierbeiner",B06 separate Bildungshardware,NEIN
+rbt_product_0061,Freizeit,Tischroboter,BESTEHENDE_SEITE,"KI-Schreibtischroboter für Unterhaltung, nicht physischer Instrument-Spielroboter",F05 Musikspiel getrennt,NEIN
+rbt_product_0062,Freizeit,Schachroboter,BESTEHENDE_SEITE,"Schachspielroboter für Freizeit, kein physischer Billardroboter",S05 Sportkontext getrennt,NEIN
+rbt_product_0063,Freizeit,Zeichenroboter,BESTEHENDE_SEITE,Stiftplotter/Zeichenmaschine; echte Pinselmalerei benötigt andere Steuerung und Materialien,F04 Pinselmalroboter getrennt,NEIN
+rbt_product_0067,Sport,Tischtennisroboter,BESTEHENDE_SEITE,"Ballwurf-Tischtennistrainer keine Maschine, die ein Match mit Schläger spielt",S06 autonome Tischtennisgegner getrennt,NEIN
+rbt_product_0068,Sport,Basketballroboter,BESTEHENDE_SEITE,Basketball-Wurf-/Passautomat bleibt eigenständig; Roboterdefinition regelmäßig konsistent prüfen,Kein zusätzliches Robotertraining allein wegen Modell,NEIN
+rbt_product_0069,Sport,Golf-Folgetrolleys,BESTEHENDE_SEITE,"Selbstfolgender Golfwagen unterscheidet sich von Reise-Folgekoffer, Zweck und Nutzerfragen bereits getrennt",Keine zweite identische Hobbytrolley-Seite,NEIN
+rbt_product_0164,Garten,Poolroboter,ZIELGRUPPENSEITE_UNTERSCHIEDLICH,Poolreinigung im Privathaus unterscheidet sich deutlich vom Betrieb öffentlicher/Hotelbäder,G05 Gewerbe-Bäder: große Modelle,NEIN
+rbt_product_0249,Garten,Poolskimmer,BESTEHENDE_SEITE,"Pooloberflächen-Skimmer andere Funktion als Boden-/Wandpoolreinigung, bereits separat",Keine weitere identische Skimmerseite,NEIN
+rbt_product_0476,Garten,Laubroboter,BESTEHENDE_SEITE,Laub- und Schmutzblasroboter im Garten bereits vorhanden; Hundeabfall-Sammeln ist andere Aufgabe,GA02 getrennt,NEIN
+rbt_product_0477,Garten,Beetroboter,BEREITS_ZIELGRUPPENGETRENNT,Hausgarten-Beetroboter (FarmBot) im Gegensatz zur vorhandenen gewerblichen Feld-Sä-/Jätrobotik,Gewerbe rbt_product_0486 bereits vorhanden,NEIN
+rbt_product_0478,Bildung,Schultelepräsenz,BEREITS_ZIELGRUPPENGETRENNT,Schultelepräsenz für kranke Schülerinnen und Schüler gegen private Familien-Telepräsenz,Haushalt H03 aus V44 bereits geplant,NEIN
+rbt_product_0501,Garten,Mähroboter,ZIELGRUPPENSEITE_UNTERSCHIEDLICH,Mähroboter für Hausgarten gegen Profi-Mähen auf großen Flächen durch Dienstleister,G04 Gewerbe-Grünpflege: andere Geräteklassse,NEIN
+rbt_product_0502,Freizeit,Futterboote,BESTEHENDE_SEITE,GPS-Autopilot-Futterboot beim Angeln nicht ein Erkundungs-ROV,F01 getrennt,NEIN
+rbt_product_0503,Freizeit,Tischroboterarme,ZIELGRUPPENSEITE_UNTERSCHIEDLICH,Maker-Tischarm im Hobby gegen Unterrichtsarm mit didaktischer Struktur,B04 Lehrroboterarme getrennt,NEIN
+rbt_product_0504,Freizeit,Folgekoffer,BESTEHENDE_SEITE,Folgekoffer fürs Reisen nicht Wohnungs-Transportroboter; Zweck und Wege bereits getrennt,H01 aus V44 geplant,NEIN
+rbt_product_0506,Freizeit,Roboterhunde,ZIELGRUPPENSEITE_UNTERSCHIEDLICH,Hobby-Roboterhund für Spiel und Vorführung gegen EDU-Quadruped für Robotikstudium,B06 EDU-Roboterhund getrennt,NEIN
+rbt_product_0521,Sport,Tennisroboter,BESTEHENDE_SEITE,"Tennisball-Zuspiel und -Wurfmaschine bereits vorhanden, Badminton andere Flugkörper/Trainingsabläufe",S03 Badminton getrennt,NEIN
+rbt_product_0526,Garten,Trimmroboter,BESTEHENDE_SEITE,"Rasen-Kantentrimmroboter bereits vorhanden, Heckenschnitt anderes Ziel/Greifwerkzeug",GA01 Heckenschnitt getrennt,NEIN
+rbt_product_0536,Bildung,Lerndrohnen,BEREITS_ZIELGRUPPENGETRENNT,"Lerndrohnen behandeln schulische Flugprogrammierung, Freizeit-Folgedrohnen Video/Tracking",F03 Folgedrohnen getrennt,NEIN
