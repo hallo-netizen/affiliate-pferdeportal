@@ -131,11 +131,13 @@ with ZipFile(BytesIO(raw)) as z:
     mode_at=m.index("        $mode =",begin)
     old_prefix=m[begin:mode_at]
     print("RC33_RANK_LEGACY_PREFIX",repr(old_prefix[:600]))
-    assert len(old_prefix)<1250,("Unknown extra preconditions",old_prefix)
-    assert "function campaign_match_rank(" in old_prefix
-    assert old_prefix.count("hb_insurance_campaign_allowed")<=1
-    if "return" in old_prefix:
-        assert "hb_insurance_campaign_allowed" in old_prefix,("Unrelated guard must be preserved",old_prefix)
+    assert len(old_prefix)<4000,("Unexpected extra legacy ranking",old_prefix)
+    assert old_prefix.count("hb_insurance_campaign_allowed")==1
+    assert "General approved insurance umbrella campaign only as" in old_prefix,old_prefix
+    assert "return array('specificity'=>125" in old_prefix,old_prefix
+    # The removed prefix contains exactly TWO older independent decisions:
+    # explicit identity/topic gate, plus a general-insurance name heuristic.
+    # Both are replaced by one canonical import-time mapping lookup.
     new_prefix="""    private function campaign_match_rank($campaign, $context) {
         $hb_scope=$this->hb_insurance_scope($context);
         if($hb_scope==='mixed')return null;
