@@ -35,7 +35,7 @@ with ZipFile(reg) as z:
     data=json.loads(z.read('hd-hobbyregister-core/data/hobby-register.json'))
 records=data['records']
 values=list(records.values()) if isinstance(records,dict) else records
-names=['Airbrush','Airbrush-Modellbau','Buchbinden','Münzen','3D-Druck','Aeroponik','Häkeln','Drechseln','Robotik']
+names=['Airbrush','Airbrush-Modellbau','Buchbinden','Münzen','3D-Druck','Aeroponik','Häkeln','Drechseln','Robotik','CB-Funk','RC-Offroad']
 examples={str(r.get('canonical_name') or ''):r for r in values if isinstance(r,dict) and (r.get('canonical_name') in names)}
 assert 'Airbrush' in examples and examples['Airbrush']['result_profile']['what_do_you_need'].startswith('Airbrushpistole')
 assert 'Airbrush-Modellbau' in examples and 'Münzen' in examples
@@ -67,7 +67,7 @@ __ORIGINAL_METHODS__
 }
 function ck($ok,$label){static $i=0;$i++;if(!$ok){fwrite(STDERR,"FAIL $i: $label\n");exit(1);}echo "PASS $i: $label\n";}
 $targets=array();
-foreach(array('Airbrush','Airbrush-Modellbau','Buchbinden','Münzen','3D-Druck','Aeroponik','Häkeln','Drechseln','Robotik') as $key){
+foreach(array('Airbrush','Airbrush-Modellbau','Buchbinden','Münzen','3D-Druck','Aeroponik','Häkeln','Drechseln','Robotik','CB-Funk','RC-Offroad') as $key){
   $id='concept-'.sanitize_key(str_replace(' ','-',$key));
   $targets[$id]=array('id'=>$id,'title'=>$key,'target_pages'=>array(array('hub'=>'Gestalten','main_hub'=>'Gestalten')));
 }
@@ -82,6 +82,9 @@ ck(count($q->equipped('Aeroponik'))===2,'Aeroponik-System named hyphenated compo
 ck(count($q->equipped('Häkeln'))===1,'Häkelnadel is a real hobby compound');
 ck(count($q->equipped('Drechseln'))===1,'Drechselbank from hobby form');
 ck($q->equipped('Robotik')===array(),'Mixed robot kit or individual parts is ambiguous and excluded');
+ck(count($q->equipped('CB-Funk'))===2,'CB-Funkgerät requires both CB and Funkgerät: not generic Funkgerät');
+ck(count($q->equipped('RC-Offroad'))===2,'RC-Offroadfahrzeug requires both RC and Offroadfahrzeug');
+
 function row($name){return array('product_title'=>$name,'main_category'=>'Hobby Technik','sub_category'=>'Airbrush Zubehör');}
 $x=$q->match(row('Airbrushpistole 0,3 mm Profi'));
 ck($x['status']==='matched' && $x['concept']['title']==='Airbrush','Real source matcher recognizes actual HD007 equipment term');
@@ -112,6 +115,17 @@ $x=$q->match(row('Häkelnadel 3 mm'));
 ck($x['status']==='matched' && $x['concept']['title']==='Häkeln','Häkelnadel matches original reviewed hobby gear');
 $x=$q->match(row('Drechselbank 600W'));
 ck($x['status']==='matched' && $x['concept']['title']==='Drechseln','Drechselbank matches verified equipment term');
+
+$x=$q->match(row('Funkgerät mit Akku'));
+ck($x['status']!=='matched','Generic Funkgerät never assigned to CB-Funk');
+$x=$q->match(row('CB Funkgerät mit Akku'));
+ck($x['status']==='matched' && $x['concept']['title']==='CB-Funk','Literal CB qualifier and Funkgerät match their actual HD007 equipment');
+ck($q->relevant('CB Funkgerät mit Akku','CB-Funk'),'Final public output also requires real CB qualifier');
+$x=$q->match(row('Offroadfahrzeug Modellauto'));
+ck($x['status']!=='matched','Generic Offroadfahrzeug never assigned to RC-Offroad');
+$x=$q->match(row('RC Offroadfahrzeug 1:16'));
+ck($x['status']==='matched' && $x['concept']['title']==='RC-Offroad','Exact source-backed RC Offroad vehicle');
+ck($q->relevant('RC Offroadfahrzeug 1:16','RC-Offroad'),'Final output requires literal RC qualifier');
 $x=$q->match(row('Normaler 3D Farbdrucker ohne Druckausrüstung'));
 ck($x['status']!=='matched','Do not infer 3D Drucker from different Farbdrucker token');
 echo "REAL_HD007_EQUIPMENT_ORIGINAL_MATCHER_TESTS_PASS\n";
