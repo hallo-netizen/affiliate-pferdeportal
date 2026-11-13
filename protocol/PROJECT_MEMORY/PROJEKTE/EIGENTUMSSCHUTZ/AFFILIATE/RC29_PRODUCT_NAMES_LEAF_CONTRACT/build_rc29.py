@@ -102,6 +102,23 @@ with ZipFile(BytesIO(old)) as z:
             foreach ($this->idealo_match_tokens($title_n) as $token) { $title_stems[$this->idealo_match_stem($token)] = true; }
         }
         $required =""")
+    # Proven bug: idealo_match_primary_tokens() used idealo_match_tokens(),
+    # which already removed "fuer"/"mit". Accessory titles could be falsely
+    # treated as genuine devices. Cut raw words BEFORE stopword filtering.
+    t=once(t,
+        """        $tokens = $this->idealo_match_tokens($text); $out = array();
+        foreach ($tokens as $idx => $token) {
+            if (isset($bounds[$token])) { return $idx === 0 ? array() : $out; }
+            $out[] = $token;
+        }
+        return $out;""",
+        """        $raw = preg_split('/\\s+/', $this->idealo_match_normalize($text));
+        $head = array();
+        foreach ((array)$raw as $word) {
+            if (isset($bounds[$word])) { break; }
+            $head[] = $word;
+        }
+        return $head ? $this->idealo_match_tokens(implode(' ', $head)) : array();""")
     t=once(t,
         """        $product_stems = array(); foreach ($primary as $token) { $product_stems[$this->idealo_match_stem($token)] = true; }
         $candidate_ids = array();""",
