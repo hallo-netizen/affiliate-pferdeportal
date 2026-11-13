@@ -69,6 +69,8 @@ $GLOBALS['settings']=array(
     'last_import_started_at'=>time()-3605,'last_import_at'=>time()-3600
 );
 class TestHD009 {
+    const IDEALO_REFRESH_LOCK='ppar_idealo_refresh_lock_v1';
+    const HD_IDEALO_PREVIEW_OPTION='ppar_hd009_feed_preview_v1';
     public $metadata_request=array();
     public $download_request=array();
     public $synthetic_path='';
