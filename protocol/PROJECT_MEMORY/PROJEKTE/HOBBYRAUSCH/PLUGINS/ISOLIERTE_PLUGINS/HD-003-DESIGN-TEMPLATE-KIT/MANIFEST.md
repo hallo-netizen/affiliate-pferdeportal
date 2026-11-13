@@ -1,3 +1,11 @@
+# HD003 CURRENT 1.50.814 – keine leeren Affiliate-Produktkarten
+
+Fehlerwurzel: eingeloggte Produktplatzhalter wurden als Empfehlungen-Karten ausgegeben. 3 Quellzeilen korrigiert, 36 originale PHP-Lauftests und 1.291 ZIP-CRC bestanden. Vollversion sha256 \`263284e057b9c2a3cc57cc4807301ab2e74c1daeae8dfeb0a16191c49a9dc18f\`. Vorversion 1.50.813 sicher gespeichert. Lücken bei echter Produktversorgung bestehen weiter. Führendes Fehlerregister: \`DESIGN/HD003_FEHLERPROTOKOLL_LEERE_PRODUKTKARTEN_20261113.md\`.
+
+GitHub Actions: https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43411117782
+
+---
+
 # HD003 CURRENT 1.50.813 – sichtbares Beige und Türkis
 
 Vollständiges CURRENT.zip SHA256: 5fb7053f31d705b9c2001fbcdfecf518c05d8c1fe52283f058943ca48f6eba73. Vorversion als versioniertes ZIP archiviert. Details: DESIGN/HD003_SICHTBARE_PRODUKTBUTTONS_1.50.813_20261113.md.

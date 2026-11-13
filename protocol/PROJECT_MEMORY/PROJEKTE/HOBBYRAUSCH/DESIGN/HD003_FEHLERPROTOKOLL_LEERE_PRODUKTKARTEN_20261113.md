@@ -40,3 +40,10 @@
 - Stand 01: Fehler-Screenshot dokumentiert, keine Änderung.
 - Stand 02: Zeile 3219 als Ursache und Zeile 1827 als wortgleicher Platzhalter bewiesen.
 - Stand 03: HD003 1.50.814 vollständig gebaut und 36 PHP-Lauftests bestanden. Noch nicht veröffentlicht oder installiert.
+
+
+## Stand 04 – vollständiges Plugin nach harten Tests im Büro archiviert
+- Datei \`HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip\` und versionsfeste Datei \`HOBBY_DEPOT_DESIGN_HD003_1.50.814.zip\` sind vollständig, byte-identisch und auf SHA256 \`263284e057b9c2a3cc57cc4807301ab2e74c1daeae8dfeb0a16191c49a9dc18f\` verifiziert.
+- Vorversion \`HOBBY_DEPOT_DESIGN_HD003_1.50.813.zip\` ist unverändert vorhanden.
+- Keine WordPress-Liveinstallation durch das Büro; keine echte Airbrush-Produktversorgung nachgewiesen.
+- Download nach Freigabe: https://github.com/hallo-netizen/affiliate-pferdeportal/releases/download/hobby-hd003-1.50.814-no-empty-product-cards-20261113/HOBBY_DEPOT_DESIGN_HD003_1.50.814_OHNE_LEERKARTEN.zip
