@@ -21,7 +21,7 @@ with ZipFile(Z) as z:
     assert main.count("private function hb_insurance_banner_rank(")==1
     assert main.count("private function hb_insurance_campaign_allowed(")==1
     assert "HB_INSURANCE_CANONICAL:" in o
-    assert "hb_insurance_specific_verified" in o
+    assert "hab_insurance_specific_verified" in o
     assert "ppar_hab_rc33_tarifcheck_reconcile_v1" in o
     assert "&& !($this->hb_insurance_scope($rank_context)" not in main
     assert "if($hb_scope==='insurance')return $this->hb_insurance_banner_rank" in main
