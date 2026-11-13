@@ -1,3 +1,9 @@
+# HD009 CURRENT 0.1.37 – sichere Airbrush-Ausgabe und Stichpunkte
+
+Vollständiges CURRENT.zip SHA256: 34b870ad459e9b075a5c8c0aedc335939a72f6689d03216bcfd4134798c73503. Vorversion als versioniertes ZIP archiviert. Details: AFFILIATE/HD009_AIRBRUSH_FAKTEN_AUSGABE_0.1.37_20261113.md.
+
+---
+
 # HD009 CURRENT 0.1.36 – Produktrelevanz und Fakten
 
 Full plugin c5207290e535aaad03f26713d4e39b59836475e63cfeff9d57dc04a53944ca68. Alte 0.1.35- und 0.1.34-Stände erhalten. Beweis: AFFILIATE/HD009_0.1.36_PRODUCTS_FACTS_BUTTONS_20261113.md
