@@ -33,8 +33,10 @@ jobs:
             def method(s,n):
               m=re.search(r'^    (?:public|private|protected) function '+re.escape(n)+r'\(',s,re.M)
               assert m,n
-              next_method=pattern.search(s,m.end())
-              return s[m.start():next_method.start()] if next_method else s[m.start():]
+              # Match the exact method body; inserted new method comments after
+              # the previous method must not count as a changed original method.
+              end=s.index('\\n    }',m.end())+len('\\n    }')
+              return s[m.start():end]
             critical=[
               'idealo_import_feed_file',
               'idealo_materialize_campaigns',
