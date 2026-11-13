@@ -26,6 +26,30 @@ code=once(code,
     """return '<section class="hd-portal-section hd-catlevel-products"><header><span>Anzeige</span><h2>Empfehlungen</h2></header><div class="hd-catlevel-product-grid">';""",
     "one ad disclosure above recommendations") if False else code
 # Actual code is concatenated HTML at this exact line; replace just this one context string.
+# The wrapper already prints a section-level "Anzeige". Do not repeat the badge
+# or aria-label on every card in that one section. All other slots retain their
+# existing disclosure verbatim.
+code=once(code,
+    "private static function inline_partner_product($product) {",
+    "private static function inline_partner_product($product, $in_labeled_section=false) {",
+    "optional section-level disclosure")
+code=once(code,
+    """return '<div class="hd-next-partner-product'.(!empty($product['preview'])?' is-preview':'').'" aria-label="Anzeige · Partner"><span class="hd-next-partner-label">Anzeige · Partner</span><div class="hd-next-partner-content">'.$html.'</div></div>';""",
+    """return '<div class="hd-next-partner-product'.(!empty($product['preview'])?' is-preview':'').'"'.($in_labeled_section?'':' aria-label="Anzeige · Partner"').'>'.($in_labeled_section?'':'<span class="hd-next-partner-label">Anzeige · Partner</span>').'<div class="hd-next-partner-content">'.$html.'</div></div>';""",
+    "no redundant per-card disclosure")
+code=once(code,
+    """            $html = self::inline_partner_product($product);
+            if ($html !== '') { $cards[] = $html; }
+        }
+        if (!$cards) { return ''; }
+        return '<section class="hd-portal-section hd-catlevel-products">""",
+    """            $html = self::inline_partner_product($product, true);
+            if ($html !== '') { $cards[] = $html; }
+        }
+        if (!$cards) { return ''; }
+        return '<section class="hd-portal-section hd-catlevel-products">""",
+    "only category recommendations use grouped disclosure")
+
 code=once(code,
     """<header><span>Anzeige · Partner</span><h2>Empfehlungen</h2></header><div class="hd-catlevel-product-grid">""",
     """<header><span>Anzeige</span><h2>Empfehlungen</h2></header><div class="hd-catlevel-product-grid">""",
