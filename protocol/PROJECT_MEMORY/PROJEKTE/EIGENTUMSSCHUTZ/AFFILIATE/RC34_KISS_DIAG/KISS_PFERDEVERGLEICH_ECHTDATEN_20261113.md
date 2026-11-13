@@ -1,3 +1,9 @@
+# Korrektur 13.11.2026 – Original-HTML enthält möglicherweise bereits das eindeutige Ziel
+
+Die frühere Aussage, der gespeicherte HTML-Code enthalte keine verwertbare Zielinformation, war nicht belegt und ist zurückgezogen. Im vorhandenen Import sind das originale HTML, das href und eventuell ein Tiefenziel wie `deep=kfz-versicherung` bereits gespeichert. Der Code hat diese Evidenz für bestimmte Tracking-URL-Zustände **ignoriert**. Der fixierte Einleseweg und die Tests stehen unter `RC35_HTML_LINK_KISS/`. Eine tatsächliche Prüfung aller 160 privaten Original-Codes steht weiterhin aus. Keine Banner neu importieren.
+
+---
+
 # Hab & Bewahr – KISS Bannerablauf und echter Datenblocker, 13.11.2026
 
 ## Ist anhand des Nutzer-Screenshots nach RC34
