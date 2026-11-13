@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+"""Keep QA-verified HD009 0.1.38 only as candidate until live private feed rows prove supply."""
+from pathlib import Path
+from zipfile import ZipFile
+import hashlib,shutil
+root=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH')
+office=root/'PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE'
+source=Path('/tmp/HOBBY_DEPOT_HD009_0.1.38_EQUIPMENT_MATCH_CANDIDATE.zip')
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+baseline='34b870ad459e9b075a5c8c0aedc335939a72f6689d03216bcfd4134798c73503'
+candidate='08ffe170601928b45c645809f6738bcc501bba8ea91b813bf1a4d808ee865573'
+assert sha(office/'CURRENT.zip')==baseline, 'Unexpected current plugin, refuse'
+assert sha(source)==candidate, 'Not QA-tested candidate'
+with ZipFile(source) as z:
+    assert z.testzip() is None and len(z.namelist())==41
+target=office/'CANDIDATES/HOBBY_DEPOT_HD009_0.1.38_HD007_AUSRUESTUNG_NUR_TEST.zip'
+target.parent.mkdir(parents=True,exist_ok=True)
+shutil.copy2(source,target)
+assert sha(target)==candidate and sha(office/'CURRENT.zip')==baseline
+report="""# HD009 0.1.38 – echte HD007-Ausrüstungsdaten im Idealo-Matcher
+
+Status 13.11.2026: **geprüfter Kandidat, KEIN RELEASE, KEIN LIVE-UPDATE.**
+Aktuelles Plugin HD009 0.1.37 bleibt unverändert.
+
+## Bewiesene Ursache
+- Hobby Depot hatte bereits 2.530 zugeordnete Idealo-Produkte (Feed 2747),
+  429 Produktkampagnen auf 52 Hobbyziele bei 381 aktiven Hobbys.
+- Alle 381 Hobbys haben Ausrüstungsangaben im vorhandenen HD007 Register.
+- Der originale Idealo-Matcher \`idealo_match_index\` verwendet ausschließlich
+  den Hobbytitel. Echte passende Produktnamen wie „Airbrushpistole“ werden
+  andernfalls übersehen; allgemeine Begriffe wie „Kompressor“ alleine
+  dürfen jedoch keine sichere Airbrush-Zuordnung bewirken.
+- Der spätere Ausgabecheck hatte Produkte ohne konkreten Hobbynamen
+  zusätzlich gesperrt; der existierende Code erkennt sichere Komposita
+  wie Airbrushpistole an.
+
+## Lösung in bestehender HD009-Kette (keine neue Technik)
+- Nutzt die vorhandene öffentliche HD007-API \`hd_hobbyregister_get_by_name\`,
+  ohne neue Registerdateien, Tabellen, externe Dienste oder WordPress-Core.
+- Pro Hobby darf nur ein **eindeutig zum Hobby passendes, spezifisches
+  zusammengesetztes Erst-Ausrüstungswort** als zusätzliches Produktkriterium
+  aufgenommen werden. Reine generische Wörter, mehrdeutige oder mehrfach
+  beanspruchte Ausrüstung bleiben ausgeschlossen.
+- Der bisherige exakte Titelabgleich und alle harten Sperren bleiben erhalten.
+- Wirkliche Feed-IDs, API/Tracking, Staging, GTIN, Bildprüfung, Materialisierung,
+  Mehranbieter-Karten, Amazon/DataForSEO, eBay und Design bleiben unberührt.
+
+## Originalquellen, Tests, Grenzen
+- Vollständiges Original-HD009 0.1.37 SHA256: \`34b870ad459e9b075a5c8c0aedc335939a72f6689d03216bcfd4134798c73503\`
+- Kandidat HD009 0.1.38 SHA256: \`08ffe170601928b45c645809f6738bcc501bba8ea91b813bf1a4d808ee865573\`
+- Nur die bestehende Idealo-Matcher-Datei und Versionsheader geändert.
+- Alle 41 ZIP-Dateien CRC erfolgreich, sämtliche PHP-Dateien Syntax OK,
+  ursprüngliche Import-, Vergleichs-, GTIN-/Bild- und Materialisierungsfunktionen
+  **byte-identisch**.
+- **15 echte PHP-Lauftests** des bestehenden Matchers zusammen mit
+  den Original-Ausrüstungsangaben aus dem vollständigen HD007-Plugin bestanden:
+  „Airbrushpistole“ passt, „Malene“-Mantel, Pullover und Batik-Garn nicht.
+  „Kompressor“, „Farben“, generisches „Papier“ und „Aufbewahrung“
+  werden nicht blind zugeordnet; 0/1/3 vorhandene Anbieter bleiben
+  im übrigen Design unverändert.
+- Prüfbeleg: https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43418518016
+
+## Offener wichtiger Echtdatentest
+**Es ist nicht bewiesen, dass Feed 2747 oder Feed 2901 echte Airbrushpistolen
+mit gültiger GTIN, Bild, Deep Link und der richtigen Hobby-ID liefern.**
+Ohne solche Original-Feedzeilen wird auch nach diesem Matcher-Fix kein
+Airbrush-Produkt angezeigt.
+Der echte Standardfeed-2901-Vergleich wurde in den bislang archivierten
+Hobbydepot-Belegen nicht ausgewertet. Nur der Vergleichsknopf und der
+bisherige Import 2747 sind nachgewiesen.
+
+Keine weitere Plugin-Installation empfehlen, bevor echte private Feedzeilen
+bzw. ein Live-Importbeleg eine korrekte, kaufbare Abdeckung bestätigen.
+Keine erneute API-Einrichtung oder bereits ausgeführte Importe verlangen.
+"""
+(root/'AFFILIATE/HD009_0.1.38_EQUIPEMENT_CANDIDATE_20261113.md').write_text(report)
+(target.parent/'CANDIDATE_0.1.38_STATUS.md').write_text(
+    'Nur getestete Zwischenfassung, nicht als CURRENT und nicht im WordPress installieren. '
+    'Source: AFFILIATE/HD009_0.1.38_EQUIPEMENT_CANDIDATE_20261113.md\n'
+    'SHA256: '+candidate+'\n')
+print('CANDIDATE_SAVED_ONLY',target.stat().st_size,sha(target))
+print('CURRENT_PRESERVED',sha(office/'CURRENT.zip'))
