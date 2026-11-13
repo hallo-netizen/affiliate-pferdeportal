@@ -1,0 +1,33 @@
+name: Hobby Depot recommendation label and product grid exact source audit
+on:
+  push:
+    branches: [hobbyroom/hd003-150811-recommendation-design-20261113]
+    paths: [.github/workflows/hd003_product_layout_audit.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compare exact HD003 CURRENT cards design CSS and HTML with live
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile,re,hashlib
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          print('HD003_CURRENT_SHA',hashlib.sha256(p.read_bytes()).hexdigest(),'size',p.stat().st_size)
+          with zipfile.ZipFile(p) as z:
+            print('ZIP_FILES',len(z.namelist()),'CRC',z.testzip())
+            name='affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php'
+            code=z.read(name).decode('utf8','replace')
+            lines=code.splitlines()
+            for i,l in enumerate(lines):
+              if ('function ' in l and any(w in l for w in ['render_term_next_level','render_catlevel_product','affiliate','render_next_partner_product','render_context_products','render_product'])) or ('hd-catlevel-products' in l) or ('hd-next-partner-product' in l) or ('hd-catlevel-product-grid' in l) or ('hd-next-partner-label' in l):
+                print('SOURCE_HIT',i+1,l[:1250])
+                if ('hd-next-partner-product' in l or 'hd-catlevel-products' in l) and i<5400:
+                  for j in range(max(0,i-6),min(i+11,len(lines))):print('SURROUND',j+1,lines[j][:1000])
+              if ('hd-catlevel-product-grid' in l or 'hd-next-partner-label' in l or 'hd-next-partner-product' in l) and i>5000:
+                print('STYLE_HIT',i+1,l[:1500])
+          PY
