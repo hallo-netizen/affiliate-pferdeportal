@@ -39,6 +39,7 @@ with ZipFile(P) as z:
            "idealo_target_keys_for_concept"]
     selected="\n".join(get(source,n) for n in names)
     rank=get(auto,"automation_campaign_exact_target_rank_uncached")
+    target_normalizer=get(auto,"automation_normalize_target_key")
     php=r'''<?php
 class WP_Error {private $x;function __construct($x,$message=''){$this->x=$message;}}
 function is_wp_error($x){return $x instanceof WP_Error;}
@@ -126,7 +127,7 @@ $r=$m->automation_campaign_exact_target_rank_uncached(
 ok(($r['specificity']??0)===520,'Same product displayed on parent topic page');
 echo "HAB_RC29_LEAF_ROUTING_REAL_PHP_PASS\n";
 '''
-    php=php.replace("ACTUAL",selected).replace("REAL_RANK",rank)
+    php=php.replace("ACTUAL",selected).replace("REAL_RANK",rank+"\n"+target_normalizer)
     with TemporaryDirectory() as td:
         files=[n for n in z.namelist() if n.endswith('.php')]
         assert len(files)==25
