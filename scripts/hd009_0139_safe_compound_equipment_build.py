@@ -62,6 +62,10 @@ s=s[:start]+r'''    /**
         }
         if (!$match) { return array(); }
         $terms=$this->idealo_match_tokens($first);
+        // The legacy Idealo tokenizer intentionally skips two-character
+        // terms. Preserve literal technical qualifiers (e.g. 3D-Drucker)
+        // only inside this verified equipment phrase.
+        if (preg_match('/(?:^|\\s)3d(?:\\s|$)/',$item_norm)) { array_unshift($terms,'3d'); }
         if (!$terms || count($terms)>3) { return array(); }
         $stems=array();
         foreach ($terms as $t) {
