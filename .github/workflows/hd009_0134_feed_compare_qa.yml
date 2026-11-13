@@ -68,3 +68,8 @@ jobs:
             print('PHP_SOURCE_COUNT',len(list(Path('/tmp/hd009_0134').rglob('*.php'))))
           PY
           find /tmp/hd009_0134 -name '*.php' -type f -print0 | xargs -0 -n1 php -l
+      - name: Run actual preview and original matcher PHP tests with synthetic compressed feed
+        run: |
+          python3 scripts/hd009_0134_safe_feed_preview_runtime_qa.py /tmp/HD009_0.1.34_FEEDVERGLEICH_CANDIDATE.zip /tmp/hd009_0134_qa.php
+          php -l /tmp/hd009_0134_qa.php
+          php /tmp/hd009_0134_qa.php
