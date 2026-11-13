@@ -1,3 +1,11 @@
+## 13.11.2026 – RC31 NEUESTE GEPRÜFTE TESTVERSION, NOCH NICHT LIVE
+
+`HAB_Bewahr_Affiliate_RC31_TEST.zip` (2.349.072 Bytes, SHA256 `fa72cf9519ccaf92c672581eff35a8e4908a3f15511a1ef5f272448a36c99d56`), Plugin **0.1.28-rc31**, GitHub-Release `hab-affiliate-rc31-insurance-branch-cascade-20261113`, QA GitHub Actions **43439019366 SUCCESS**. Spezialversicherungsbanner ausschließlich in eigenem nachgewiesenen Versicherungszweig mit echter Verteilung zu den Unterkategorien; echte allgemeine Versicherungen innerhalb des gesamten Versicherungsbaums, andere Welten und Kredit sauber ausgeschlossen. Automatisches Neu-Zuordnen der schon gespeicherten Tarifcheck-Originale im Affiliate-Backend, max. 60 pro Aufruf; kein Reimport. Idealo-Bericht nennt jetzt ausdrücklich nur *Idealo*-Feedabdeckung, andere Anbieter weiter wie bisher. Testvollbeleg `../../../AFFILIATE/RC31_INSURANCE_CASCADE/ABNAHME_RC31_20261113.md`.
+
+**Archiv- und Livewarnung:** `CURRENT.zip` hier ist weiterhin historische RC22-Baubasis, nicht RC31 und keine Aussage zur Liveinstallation. RC31 vollständige ZIP liegt ausschließlich als explizites Testrelease. WordPress-Liveabnahme offen. Keine anderen Portale, keine Kategorie- oder Designänderung.
+
+---
+
 ## 13.11.2026 – RC30 (0.1.27-rc30), neueste vollständig getestete HAB-004-Test-ZIP
 
 **Release:** `hab-affiliate-rc30-one-ad-label-real-bullets-20261113`, komplette Datei `HAB_Bewahr_Affiliate_RC30_TEST.zip` (2.346.028 Bytes; SHA256 `baa8e87cbab1f1bbbbce4f482bd73a706985f583c847f543eb93fbf7c644f34f`). Test `43419366272` vollständig PASS, echte PHP-Gruppen- und Produktkartenausgabe geprüft. Doppelte Anzeige aus dem **Produkt-Slot selbst** entfernt; Gruppentitel-Anzeige bleibt; echte Produktdaten in kurze Stichpunkte getrennt. Nur PHP-Hauptdatei/CSS/Readme geändert. Design RC19, Kategoriebaum, Affiliate-Provider, andere Portale und bestehende Importe unangetastet. **Liveinstallation noch offen. Kein Reimport zur Überprüfung erforderlich.** Prüfakte `../../../AFFILIATE/RC30_ONE_LABEL_BULLETS/ABNAHME_RC30_20261113.md`.
