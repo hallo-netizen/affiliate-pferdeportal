@@ -1,3 +1,23 @@
+## 13.11.2026, 18:11 MEZ – RC36 ECHTE WEBSITE-ABNAHME: TEILWEISE ERFOLG, KEINE VOLLSTAENDIGE AUSGABE
+
+Nutzer-Screenshot aus Hab & Bewahr → Affiliate-Zentrale → Werbemittel & Ausspielung, Stand Anzeige 13.11.2026 17:11 (internes WP-Anzeige-Uhrzeitfeld):
+- Tarifcheck: 160 erfasste Banner, Bild offen 0, Bildfehler 0, Ziel fehlt **80**, Ausgabe fehlt 0, Ausgabe gesperrt **40**, Entwurf 0, aktiv **40**, Original gesperrt 0.
+- Vor RC36: aktiv 20, Format gesperrt 60, Ziel fehlt 80. Reale Änderung nach RC36: +20 aktiv und −20 Formatfehler, aber die Hälfte der Originale ohne gespeicherte fachliche Zielzuordnung.
+- Alle 40 verbleibenden gesperrten Banner melden „Kein realer Designslot passt zu Zielkontext und Bildformat.“ Die **tatsächlichen 40 Maße/Linkarten sind nicht aus dem Screenshot ablesbar** und weder in GitHub noch in ursprünglichen Uploads vollständig hinterlegt.
+- Die 80 als „Ziel fehlt“ klassifizierten Banner haben in `hab_rc34_tarifcheck_report()` lediglich **keinen gespeicherten mapped-Eintrag** in `topic_targets`. Das beweist nicht, dass die Original-HTML-Codes keine Zielinformation enthalten.
+
+**KEIN weitergehender Fix ohne Echtdatennachweis.** RC36-QA war ein isolierter Original-PHP-Test mit simulierten WordPress-Daten und vier Formaten (728×90, 468×60, 300×250, 125×125), **kein vollständiger Test aller 160 real importierten Bannercodes**. Darum nicht auf zusätzliche rechteckige/vertikale Formate oder Wortlisten raten.
+
+Nächster zwingender Einmalschritt für Ursache:
+1. Aus den bereits vorhandenen 160 WordPress-Originaldatensätzen **aggregiert und datensparsam** nach Format (Pixel), Zielstatus, gespeicherter Ziel-URL / Linkquelle (nur Typ/Host, niemals Affiliatelink oder IDs) und Fehlerart auswerten.
+2. Für die 80 fehlenden Zielkarten prüfen: Ist in `tracking_url` ein eindeutiger Anbieter-Tiefenlink, ist eine echte Landingpage in `destination_url` hinterlegt, oder enthält HTML/Bannertitel eine eindeutig passende Versicherungsart? Damit klar unterscheiden zwischen „vorhandene Evidenz wurde nicht benutzt“ und „Quelle selbst liefert keinen eindeutigen Fachbegriff“.
+3. Für die 40 Formatfehler **wirkliche Maße** gegen bestehende reale Designplätze und die bestehende Ausgabe vergleichen. Keine künstlichen Layouts und keine verzerrten Banner. Formatfreigabe und fachliche Zielzuordnung einmalig zentral beim Import; Frontend liest lediglich die gespeicherte Zuordnung.
+4. Erst danach eine vollständig lokale End-to-end-Regression gegen die **nachgewiesenen Fallgruppen** und einen einzigen zielgerichteten Release bauen. Keine weiteren Blind-RC.
+
+**Aktuell nachgewiesen:** 40 Banner veröffentlicht (WP-Status), nicht zwingend öffentlich gerendert. Kein weiterer automatischer Umbau auf der Live-Seite erfolgt.
+
+---
+
 ## 13.11.2026 – RC36 TARIFCHECK-BANNER EINZIGE FORMATWAHL / LOKALE PHP-ABNAHME GRÜN
 
 **Aktueller Hab-&-Bewahr Banner-Teststand:** `0.1.33-rc36`, komplette `HAB_Bewahr_Affiliate_RC36_TEST.zip`, 2.352.417 Bytes, SHA256 `c209d2ab37b889bd901e4aa665dde6ecce94e43f3541a2458f39e7e525a42dc4`, Release `hab-affiliate-rc36-one-format-decision-20261113`. Original-PHP-Gesamttest `https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43466588171` **SUCCESS**.
