@@ -1,0 +1,46 @@
+wp_id,hauptkategorie,bestehende_seite,bestehende_untergruppe,status,moegliche_parallelseite,begruendung
+rbt_product_0004,Gewerbe,Entmistungsroboter,Landwirtschaft,KEINE_WEITERE_SEITE,,"Entmistung in landwirtschaftlicher Tierhaltung, nicht privater Wohnungsroboter."
+rbt_product_0022,Gewerbe,Futterschieberoboter,Landwirtschaft,KEINE_WEITERE_SEITE,,"Futteranschieben im Stall, keine Haushalt-Analogiekategorie."
+rbt_product_0027,Gewerbe,Melkroboter,Landwirtschaft,KEINE_WEITERE_SEITE,,"Melkroboter für landwirtschaftliche Nutztiere, keine private Küche."
+rbt_product_0032,Gewerbe,PV-Reinigungsroboter,Reinigung,KEINE_WEITERE_SEITE,,Großflächen-PV-Reinigung nicht auf private Hausdächer übertragen ohne geeignete private Roboterplattform.
+rbt_product_0072,Pflege,Essroboter,Alltagshilfen,PRUEFEN,Haushalt > Persönliche Esshilfe,"Zu Hause Einrichtung/Alltagsintegration und Kostenträger vs therapeutischer Hilfsmittelbezug; identisches Gerät Obi, keine pauschale zweite Seite."
+rbt_product_0073,Pflege,Rollstuhlarme,Alltagshilfen,KEINE_WEITERE_SEITE,,"Rollstuhlarm ist ohnehin eine persönliche Alltagshilfe; bloß ""zuhause"" erzeugt keinen neuen Hauptinhalt."
+rbt_product_0074,Pflege,Treppenrollstühle,Mobilität,PRUEFEN,Haushalt > Treppenhilfe,Wohnungs-/Treppenumbau versus individuelle Mobilität; Maß- und Produkttypabgrenzung offen.
+rbt_product_0088,Haushalt,Haustierroboter,Haustiere,KEINE_WEITERE_SEITE,,"Privater Haustierroboter existiert, mit mobiler Telepräsenz anderer Kommunikationsaufgabe nicht automatisch gleichsetzen."
+rbt_product_0090,Gewerbe,Inventurroboter,Lagerlogistik,KEINE_WEITERE_SEITE,,Inventur im Warenlager/Handel anders als Haushalt-Aufräumen; letzteres wird separat nach echten Funktionen geprüft.
+rbt_product_0166,Gewerbe,Fassadenroboter,Reinigung,BEREITS_GETRENNT,Haushalt > Fensterputzroboter,Private Fensterputzroboter existieren als anderer bestehender Kontext; keine private Kopie einer Fassadenmaschine.
+rbt_product_0201,Gewerbe,Baristaroboter,Gastronomie,PRUEFEN,Haushalt > Getränkeroboter,"Barista-Anlage für Besucher vs private Getränkezubereitung, nicht gewöhnlichen Kaffeevollautomaten als Roboter ausgeben."
+rbt_product_0208,Gewerbe,Scheuersaugroboter,Reinigung,BEREITS_GETRENNT,Haushalt > Saugroboter,Privat versus Gewerbe bereits separate WP-Funktionen; bleibt so.
+rbt_product_0355,Haushalt,Fensterputzroboter,Reinigung,BEREITS_GETRENNT,Gewerbe > Fassadenroboter,Privates Fensterputzen und professionelle Fassadenreinigung sind bereits zwei technisch und inhaltlich unterschiedliche WP-Kontexte.
+rbt_product_0479,Gewerbe,Kameraroboter,Medientechnik,PRUEFEN,Freizeit > Kameraroboter,"Professionelle Kameraautomatik vs Hobbyaufnahme; Nutzungslogik/Modelle trennbar, im Auftrag nur Haushalts-/Pflege-/Gewerbe-Audit."
+rbt_product_0480,Gewerbe,Bestückungsroboter,Fertigung,KEINE_WEITERE_SEITE,,Leiterplatten-Bestückung in Kleinbetrieben nicht Haushalt; Maker-/Bildungsnachfrage gesondert.
+rbt_product_0486,Gewerbe,Sä-/Jätroboter,Landwirtschaft,BEREITS_GETRENNT,Garten > Beetroboter,Gewerblicher Pflanzroboter im Gewächshaus vs kleine Beetpflege mit bestehendem Garten-WP-Typ.
+rbt_product_0487,Gewerbe,Schweißroboter,Fertigung,KEINE_WEITERE_SEITE,,"Schweißroboter ist für Werkstatt, nicht private Wohnung; Hobbyanwendung ohne zusätzliche Funktionsklasse nicht belegt."
+rbt_product_0488,Gewerbe,Servierroboter,Gastronomie,FACHLICH_GETRENNT,Haushalt > Servierroboter zuhause,Gastronomie-Servierrobotik und privater Serviereinsatz sind unterschiedliche Suchintentionen. Fraunhofer Care-O-bot als privater Funktionsdemonstrator ROB-0576; privat gegen Haushalts-Transport gesondert thematisch abgegrenzt. Pflege bekommt eigene Versorgungskontexte.
+rbt_product_0489,Gewerbe,Pikierroboter,Landwirtschaft,PRUEFEN,Garten > Sä-/Pflanzroboter,Pikieren professionell vs privater Beetroboter; vorhandenen Gartenbestand und kleine Hobbytechnik prüfen.
+rbt_product_0490,Gewerbe,Hotelroboter,Hotelbetrieb,FACHLICH_GETRENNT,Haushalt > Transportroboter,Hotel-Boten für Aufzüge/Zimmer/Betriebsabläufe statt privater Gegenstandstransport; eigener Haushaltskandidat ROB-0574.
+rbt_product_0491,Gewerbe,Empfangsroboter,Hotelbetrieb,FACHLICH_GETRENNT,Haushalt > Telepräsenzroboter,Empfangsroboter im Geschäft ist andere Suchaufgabe als mobile private Videoverbindung ROB-0575.
+rbt_product_0492,Gewerbe,Barkeeperroboter,Gastronomie,PRUEFEN,Haushalt > Cocktailroboter,Professioneller Cocktail-Barkeeper-Roboter vs private Zapf-/Mixautomatik; Roboterdefinition und Inhaltsnutzen prüfen.
+rbt_product_0495,Gewerbe,Druckfarmroboter,Fertigung,KEINE_WEITERE_SEITE,,"3D-Druckfarm industrieller Dauerbetrieb, nicht gleich 3D-Drucker zu Hause."
+rbt_product_0500,Haushalt,Saugroboter,Reinigung,BEREITS_GETRENNT,Gewerbe > Scheuersaugroboter,Privater Saugroboter und gewerbliche Scheuersaugmaschine mit größeren Flächen/Service/Flotten sind bereits getrennt.
+rbt_product_0507,Gewerbe,Wanddruckroboter,Baustelle,KEINE_WEITERE_SEITE,,Gewerblicher Wanddruckroboter ohne eigene Haushaltsfunktion.
+rbt_product_0511,Gewerbe,Schraubroboter,Fertigung,KEINE_WEITERE_SEITE,,Werkstatt-Schraubroboter bleibt Produktionsanwendung; keine Wohnungs-Analogie.
+rbt_product_0512,Gewerbe,Etikettierroboter,Fertigung,KEINE_WEITERE_SEITE,,Gewerbliche Etikettierautomation vs normaler Haushalts-Etikettendrucker.
+rbt_product_0513,Gewerbe,Palettierroboter,Fertigung,KEINE_WEITERE_SEITE,,Palettenhandling nicht privater Haushaltstransport.
+rbt_product_0514,Gewerbe,Lötroboter,Fertigung,KEINE_WEITERE_SEITE,,Industrie-Lötroboter nicht allgemeines Haushaltsgerät; Maker-/Bildungsbezug separat.
+rbt_product_0516,Gewerbe,Dosierroboter,Fertigung,PRUEFEN,Haushalt > Koch-/Dosierroboter,Dosierung für kleine Küche oder private Versorgung nur nach konkretem Gerätebeleg; nicht aus Industriesystem einfach kopieren.
+rbt_product_0519,Gewerbe,Estrichroboter,Baustelle,KEINE_WEITERE_SEITE,,"Estrichrobotik im Handwerk/Bau, nicht private Wohnnutzung als Gerät."
+rbt_product_0520,Gewerbe,Schleifroboter,Fertigung,KEINE_WEITERE_SEITE,,Gewerbliche Schleifmaschine nicht als Küchen-/Wohnroboter ausgeben.
+rbt_product_0525,Gewerbe,Palettenhubroboter,Lagerlogistik,FACHLICH_GETRENNT,Haushalt > Transportroboter,Palettenhub im Lager/Werkstatt hat keine private Wohneignung; Haushalts-Transport ROB-0574 benötigt eigene Seite.
+rbt_product_0527,Gewerbe,Gerüstroboter,Baustelle,KEINE_WEITERE_SEITE,,"Gerüstaufbau/-lift ist Handwerk, kein privater Haushalt-Serviceroboter."
+rbt_product_0530,Gewerbe,Sprühroboter,Landwirtschaft,PRUEFEN,Garten > Pflanzenroboter,Sprührobotik für professionelle Kulturen vs Privatgarten; Sicherheits-/Regelfragen und Gerätebeleg nötig.
+rbt_product_0535,Gewerbe,Fotoroboter,Medientechnik,PRUEFEN,Freizeit > Fotoroboter,Professionelle 360°-Produktfotografie vs privates Kreativprojekt sind andere Zielabsichten; konkrete Hobbyroboter separat prüfen.
+rbt_product_0538,Gewerbe,Requisitenroboter,Medientechnik,PRUEFEN,Freizeit > Requisitenroboter,"Studio-/Eventtechnologie versus Hobby-Robotik, nicht nur andere Nutzung derselben Kamera."
+rbt_product_0540,Pflege,Geh-Exoskelette,Mobilität,KEINE_WEITERE_SEITE,,Exoskelett schon persönliche Mobilität; eigener Haushalttext nur bei abweichender Geräteklasse.
+rbt_product_0541,Gewerbe,Spritzroboter,Landwirtschaft,KEINE_WEITERE_SEITE,,Agrar-Spritztechnik keine generelle Privathaushaltsanwendung.
+rbt_product_0543,Pflege,Armorthesen,Prothetik,KEINE_WEITERE_SEITE,,"Persönliche Armorthese: medizinische Anpassung ist in der Pflege-Seite zentral, keine zweite reine Wohnungsseite."
+rbt_product_0544,Pflege,Handprothesen,Prothetik,KEINE_WEITERE_SEITE,,"Handprothese ist individuelles Hilfsmittel, nicht allgemeiner Haushaltsroboter."
+rbt_product_0545,Pflege,Knieprothesen,Prothetik,KEINE_WEITERE_SEITE,,Knieprothese nicht nur durch Gebrauch zu Hause zu einem Haushaltsrobotertyp.
+rbt_product_0546,Pflege,Therapieroboter,Therapie,PRUEFEN,Haushalt > Begleitroboter,Klinischer/therapeutischer PARO-Einsatz versus privater Gesprächs-/Begleitroboter mit anderen Modellen; Robotikgrenze ElliQ prüfen.
+rbt_product_0547,Gewerbe,Agrardrohnen,Landwirtschaft,KEINE_WEITERE_SEITE,,Agrardrohnen keine allgemeine Privatdrohnenklasse (auch mögliche Rechtsgrenzen).
+rbt_product_0548,Gewerbe,Traktorroboter,Landwirtschaft,KEINE_WEITERE_SEITE,,Autonomer Traktor nicht sinnvoll als Haushaltsgerät.
