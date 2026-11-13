@@ -22,6 +22,8 @@ with ZipFile(Z) as z:
 source=(R/"AFFILIATE/RC31_INSURANCE_CASCADE/qa_rc31.py").read_text()
 assert source.count("0.1.28-rc31")>=1
 source=source.replace("0.1.28-rc31","0.1.32-rc35")
+# The inherited, one-time migration already has its RC34 checkpoint key.
+source=source.replace("ppar_hab_rc31_tarifcheck_reconcile_v1","ppar_hab_rc34_tarifcheck_reconcile_v1")
 anchor="$motor=banner('motorradversicherung/','Motorradversicherung vergleichen');"
 assert source.count(anchor)==1
 checks=r'''
