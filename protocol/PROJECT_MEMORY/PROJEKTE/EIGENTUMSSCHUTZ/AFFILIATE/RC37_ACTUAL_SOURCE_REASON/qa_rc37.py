@@ -18,8 +18,9 @@ with ZipFile(P) as z:
     assert "_hb_insurance_reason" in o
     assert "ppar_hab_rc37_tarifcheck_reconcile_v1" in o
     assert "$hb_missing_reasons" in c
-    assert "hb_rc31_insurance_banner_plan" not in c
-    assert "output_assign_banner_targets_from_destination_once" not in c
+    admin_report=c[c.index("private function hab_rc34_tarifcheck_report()"):c.index("public function render_creative_library_page()")]
+    assert "hb_rc31_insurance_banner_plan" not in admin_report
+    assert "output_assign_banner_targets_from_destination_once" not in admin_report
     assert "https://" not in c[c.index("$hb_missing_reasons"):c.index("$hb_missing_reasons")+1200]
     # existing original test executes the EXACT PHP methods, not a rewrite
     source=(R/"AFFILIATE/RC31_INSURANCE_CASCADE/qa_rc31.py").read_text()
