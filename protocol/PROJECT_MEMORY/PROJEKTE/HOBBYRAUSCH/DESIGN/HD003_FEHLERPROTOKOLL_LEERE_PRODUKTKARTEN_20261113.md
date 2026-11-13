@@ -47,3 +47,9 @@
 - Vorversion \`HOBBY_DEPOT_DESIGN_HD003_1.50.813.zip\` ist unverändert vorhanden.
 - Keine WordPress-Liveinstallation durch das Büro; keine echte Airbrush-Produktversorgung nachgewiesen.
 - Download nach Freigabe: https://github.com/hallo-netizen/affiliate-pferdeportal/releases/download/hobby-hd003-1.50.814-no-empty-product-cards-20261113/HOBBY_DEPOT_DESIGN_HD003_1.50.814_OHNE_LEERKARTEN.zip
+
+## Stand 05 – Veröffentlichung kontrolliert
+- GitHub-Build/Archiv/Release: **vollständig erfolgreich**. [Prüf- und Veröffentlichungs-Lauf](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43411671049).
+- Exakt herunterladbares vollständiges ZIP `HOBBY_DEPOT_DESIGN_HD003_1.50.814_OHNE_LEERKARTEN.zip`, **65.765.018 Byte**, SHA256 `263284e057b9c2a3cc57cc4807301ab2e74c1daeae8dfeb0a16191c49a9dc18f`.
+- Neues `CURRENT.zip` und die versionsfeste `1.50.814.zip` im Design-Pluginbüro nachweislich vorhanden und identisch. `1.50.813.zip` bleibt separat erhalten.
+- **Keine Liveinstallation und keine echte Airbrush-Produktversorgung nachgewiesen**. Leere Karten sind quellenbasiert behoben, aber relevante Produkte fehlen weiterhin, bis bestehende Idealo-Feed-Daten und Zielabgleich tatsächlich genügend passende Angebote liefern.
