@@ -54,23 +54,21 @@ with ZipFile(BytesIO(raw)) as original:
                     'crop'=>'contain','upscale_max'=>1.0,
                 ));
             }''')
-    marker='''                if ($output_type === 'portal_banner'
-                    && $status === 'ready'
-                    && sanitize_key((string) ($classification['source'] ?? '')) !== 'manual_fixed_target') {'''
+    # Extend compatible placements inside the ONE existing ready-banner block.
+    # We anchor its actual stored assignment, not an assumed version of if().
+    marker="                    $classification['_ppar_banner_compatible_slots']=$compatible_banner_slots;"
     o=one(o,marker,
-    '''                // One stored insurance target may span real R2/R3/leaf
-                // render surfaces. Save the compatible ORIGINAL slot names.
-                if ($output_type === 'portal_banner' && $status === 'ready'
-                    && in_array(sanitize_key((string)($classification['source']??'')),array(
+    '''                    // Existing R2 and R3/leaf slot surfaces share the same
+                    // stored, once-verified insurance format decision.
+                    if (in_array(sanitize_key((string)($classification['source']??'')),array(
                         'hab_insurance_specific_verified','hab_insurance_general_verified'),true)
-                    && in_array(sanitize_key((string)($slot['slot_id']??'')),array(
-                        'hub_after_cards','product_after_category_tiles'),true)) {
-                    $compatible_banner_slots=array_values(array_unique(array_merge(
-                        (array)$compatible_banner_slots,
-                        array('hub_after_cards','product_after_category_tiles'))));
-                }
-
-'''+marker)
+                        && in_array(sanitize_key((string)($slot['slot_id']??'')),array(
+                            'hub_after_cards','product_after_category_tiles'),true)) {
+                        $compatible_banner_slots=array_values(array_unique(array_merge(
+                            (array)$compatible_banner_slots,
+                            array('hub_after_cards','product_after_category_tiles'))));
+                    }
+''' + marker)
     o=one(o,"$option='ppar_hab_rc35_tarifcheck_reconcile_v1';","$option='ppar_hab_rc36_tarifcheck_reconcile_v1';")
     files[out]=o.encode()
     m=files[main].decode()
