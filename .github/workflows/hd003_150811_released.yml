@@ -1,0 +1,57 @@
+name: HD003 1.50.811 verified full plugin archive and release
+on:
+  push:
+    branches: [hobbyroom/hd003-150811-recommendation-design-20261113]
+    paths: [.github/workflows/hd003_150811_released.yml]
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require successful real browser QA and deterministic full plugin
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          test "$(gh api repos/"$GITHUB_REPOSITORY"/actions/runs/43401407288 --jq .conclusion)" = success
+          python3 scripts/hd003_150811_products_display_build.py /tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.811_PRODUKTKARTEN.zip
+          echo '3cc8118ed5d9d22acadfd2e9aa9184068f71cbe9ccb2574bcffacdd16d8ac6df  /tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.811_PRODUKTKARTEN.zip' | sha256sum -c
+          python3 - <<'PY'
+          import pathlib,zipfile
+          f='/tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.811_PRODUKTKARTEN.zip'
+          with zipfile.ZipFile(f) as z:
+            assert len(z.namelist())==1291 and z.testzip() is None
+            for name in z.namelist():
+              if name.endswith('.php'):
+                p=pathlib.Path('/tmp/hd003php')/name
+                p.parent.mkdir(exist_ok=True,parents=True)
+                p.write_bytes(z.read(name))
+          print('ALL_1291_ZIP_CRC_PASS')
+          PY
+          find /tmp/hd003php -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Archive exact tested HD003 1.50.811 and evidence in Hobby Depot plugin office
+        run: |
+          python3 scripts/hd003_150811_archive_after_qa.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/HOBBY_DEPOT_DESIGN_HD003_1.50.811.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/MANIFEST.md
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/HD003_PRODUKTKARTEN_ANZEIGE_EINMAL_1.50.811_20261113.md
+          git commit -m "HD003 1.50.811 full product design verified, current archived"
+          git fetch origin hobbyroom/hd003-150811-recommendation-design-20261113
+          git rebase origin/hobbyroom/hd003-150811-recommendation-design-20261113
+          git push origin HEAD:refs/heads/hobbyroom/hd003-150811-recommendation-design-20261113
+      - name: Publish exact tested full Design plugin
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG=hobby-depot-hd003-1.50.811-recommendation-grid-20261113
+          FILE=/tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.811_PRODUKTKARTEN.zip
+          printf 'HD003 1.50.811: One Anzeige label above recommendations, no per-card label, 3/2/1 large product card grid; 1291 original files, 13 PHP lint, 1440/850/390px actual Chrome tests PASS. HD009 handles separate product relevancy. 1.50.810 retained as backup; not yet installed on WordPress.\n' > /tmp/notes.txt
+          gh release create "$TAG" "$FILE#HOBBY_DEPOT_DESIGN_HD003_1.50.811_PRODUKTKARTEN.zip" --repo "$GITHUB_REPOSITORY" --target hobbyroom/hd003-150811-recommendation-design-20261113 --title "Hobby Depot Design 1.50.811 – passende Produktkacheln" --notes-file /tmp/notes.txt
+          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json name,assets,url
