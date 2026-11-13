@@ -25,6 +25,7 @@ with ZipFile(Z) as z:
         "output_save_local_campaign"
     ])
     harness=r'''<?php
+function is_wp_error($x){return false;}
 function sanitize_key($x){return strtolower(preg_replace('/[^a-z0-9_-]/','',strtolower((string)$x)));}
 function sanitize_text_field($x){return trim(strip_tags((string)$x));}
 function sanitize_textarea_field($x){return trim(strip_tags((string)$x));}
