@@ -1,4 +1,4 @@
-name: Hab RC26 full feed and responsive design validation with multi-provider buttons
+name: Hab RC26 approved full pipeline and instant terracotta product buttons
 on:
   push:
     branches: [hab-affiliate-rc26-source-design-20261113]
