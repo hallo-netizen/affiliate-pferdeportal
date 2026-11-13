@@ -1,4 +1,7 @@
 # ROBOTIK – V41: Dubletten zusammengeführt, Kategorienbalance neu berechnet, Neuordnung beurteilt
+
+> **KORREKTUR 13.11.2026 / V42 – WICHTIG:** Die in diesem historischen V41-Bericht empfohlenen Neuordnungen A/B sind **VERWORFEN**, weil sie den verbindlichen Zielvertrag verletzt haben. Gewerbe darf NICHT in Landwirtschaft, Service & Handel und Handwerk & Industrie als neue Hauptkategorien zerlegt werden. Handwerk und Industrie sind verschiedene Zielgruppen/Zugänge. **Aktuell verbindlich** sind weiterhin Haushalt, Garten, Freizeit, Sport, Bildung, Pflege, Gewerbe; Industrie ist nachgeordnet über Gewerbe mit eigenen Landingpages erreichbar. Die Zahlenrechnungen unten sind nur Historie und dürfen nicht als gültiges Menü-/Importkonzept genutzt werden. Die 19 dokumentierten Dubletten-Zusammenführungen bleiben als Forschungsergebnis bestehen. **Gültiges Korrekturprotokoll:** `ZIELVERTRAG_KORREKTUR_NEUORDNUNG_V42_20261113.md`.
+
 **Datum:** 13.11.2026 · **Status:** geprüfte Forschungs-/Szenarioberechnung, KEINE WordPress-/Plugin-/SEO-Freigabe.
 
 ## 1. Auftrag / Zielvertrag
