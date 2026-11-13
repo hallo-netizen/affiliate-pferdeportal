@@ -1,3 +1,11 @@
+## 13.11.2026 – RC30 (0.1.27-rc30), neueste vollständig getestete HAB-004-Test-ZIP
+
+**Release:** `hab-affiliate-rc30-one-ad-label-real-bullets-20261113`, komplette Datei `HAB_Bewahr_Affiliate_RC30_TEST.zip` (2.346.028 Bytes; SHA256 `baa8e87cbab1f1bbbbce4f482bd73a706985f583c847f543eb93fbf7c644f34f`). Test `43419366272` vollständig PASS, echte PHP-Gruppen- und Produktkartenausgabe geprüft. Doppelte Anzeige aus dem **Produkt-Slot selbst** entfernt; Gruppentitel-Anzeige bleibt; echte Produktdaten in kurze Stichpunkte getrennt. Nur PHP-Hauptdatei/CSS/Readme geändert. Design RC19, Kategoriebaum, Affiliate-Provider, andere Portale und bestehende Importe unangetastet. **Liveinstallation noch offen. Kein Reimport zur Überprüfung erforderlich.** Prüfakte `../../../AFFILIATE/RC30_ONE_LABEL_BULLETS/ABNAHME_RC30_20261113.md`.
+
+**Historische Ablage:** `CURRENT.zip` im Archiv bleibt weiterhin die reproduzierbare ältere RC22-Basis; installierbare RC30 ist die oben genannte vollständige Test-ZIP aus dem GitHub-Release. Nicht diese beiden Versionen verwechseln.
+
+---
+
 ## 13.11.2026 – RC28 (0.1.25-rc28) NEUESTE GEPRÜFTE TEST-VERSION – LIVEABNAHME OFFEN
 
 **Vollständiger GitHub-Release:** `hab-affiliate-rc28-kiss-topic-category-recognition-20261113`; Datei `HAB_Bewahr_Affiliate_RC28_TEST.zip` (2.344.644 Bytes; SHA256 `e474e25ec0f63440dfb5d69c993d0b0884431ee10cd009b589b3b6b50cc66f32`). Prüfung `43410070887` SUCCESS; 25/25 PHP-Lint, Regressionen ursprünglicher Affiliate-Funktionen, echte PHP-Kategorietests und alle 36 ZIP-Einträge bestanden. KISS-Ursache: Warenname nur aus redaktioneller Endkategorie statt bereits zugeordneter physischer Themenseite; eindeutige deutsche Schreib-/Pluralformen bislang übersehen. Korrigiert ausschließlich vier bestehende Dateien. Ausführlicher Bericht `../../../AFFILIATE/RC28_CATALOG_KISS/ABNAHME_RC28_20261113.md`.
