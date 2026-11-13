@@ -212,8 +212,9 @@ with ZipFile(BytesIO(old)) as z:
           <?php if (empty($s['api_feed_inventory'])): ?><p>Noch keine vollständige Feedliste geprüft. Unter Anbieter & APIs einmal „Speichern & API prüfen“ ausführen.</p><?php endif; ?>
         </section>
         <section class="postbox" style="padding:18px;margin-top:18px;max-width:900px"><h2>Feed-Test / Fallback</h2>''')
-    t=once(t,'Produktiv ist Feed 2901 für den serverseitigen Stream-Abruf vorgesehen.',
-             'Produktiv wird ausschließlich der in der Partner-API verifizierte Standardfeed für den serverseitigen Stream-Abruf verwendet.')
+    if 'Produktiv ist Feed 2901 für den serverseitigen Stream-Abruf vorgesehen.' in t:
+        t=once(t,'Produktiv ist Feed 2901 für den serverseitigen Stream-Abruf vorgesehen.',
+                 'Produktiv wird ausschließlich der in der Partner-API verifizierte Standardfeed für den serverseitigen Stream-Abruf verwendet.')
     f[trait]=t.encode("utf8")
     m=f[main].decode("utf8")
     m=once(m,"Version: 0.1.22-rc25","Version: 0.1.23-rc26")
