@@ -1,0 +1,33 @@
+name: HD009 compare promised 2901 control vs real complete archived plugin
+on:
+  push:
+    branches: [hobbyroom/hd009-037-last-render-safety-20261113]
+    paths: [.github/workflows/hd009_2901_compare_control_audit.yml]
+permissions:
+  contents: read
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify exact version source has 2901 comparison or not
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          root=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE')
+          names=[('CURRENT_0137',root/'CURRENT.zip'),('CANDIDATE_0134',root/'CANDIDATES/HOBBY_DEPOT_HD009_0.1.34_FEEDVERGLEICH.zip')]
+          for label,p in names:
+            print('ARCHIVE',label,'EXISTS',p.exists())
+            if not p.exists():continue
+            with ZipFile(p) as z:
+              texts={n:z.read(n).decode('utf-8','replace') for n in z.namelist() if n.endswith(('.php','.js'))}
+            for term in ['2901','2747','gefahrlos','feedvergleichen','feedvergleich','idealo_standard_feed_compare','Feed jetzt aktualisieren']:
+              hits=[(n,txt.lower().count(term.lower())) for n,txt in texts.items() if term.lower() in txt.lower()]
+              print('SEARCH',label,term,hits[:6])
+            for name,text in texts.items():
+              for i,line in enumerate(text.splitlines()):
+                if '2901' in line or 'gefahrlos' in line.lower() or 'standardfeed' in line.lower() or 'feedvergleich' in line.lower():
+                  print('FOUND',label,name,i+1,line[:400])
+          PY
