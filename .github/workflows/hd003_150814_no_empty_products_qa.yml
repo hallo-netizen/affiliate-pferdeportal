@@ -1,0 +1,63 @@
+name: HD003 1.50.814 no dummy product slots hard integration QA
+on:
+  push:
+    branches: [hobbyroom/hd003-150814-remove-empty-product-previews-20261113]
+    paths: [.github/workflows/hd003_150814_no_empty_products_qa.yml, scripts/hd003_150814_no_product_placeholders.py, scripts/hd003_150814_real_methods_qa.py]
+permissions:
+  contents: read
+jobs:
+  hard_qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build unchanged-source complete 1.50.814
+        run: python3 scripts/hd003_150814_no_product_placeholders.py /tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.814_OHNE_LEERKARTEN.zip
+      - name: Check exact source-only diff, 1291 ZIP CRC and PHP syntax
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import hashlib
+          root='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip'
+          test='/tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.814_OHNE_LEERKARTEN.zip'
+          path='affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php'
+          main='affiliate-portal-template-kit/pferde-template-kit.php'
+          with ZipFile(root) as x,ZipFile(test) as y:
+            assert x.namelist()==y.namelist() and len(x.namelist())==1291
+            assert x.testzip() is None and y.testzip() is None
+            changed=[p for p in x.namelist() if x.read(p)!=y.read(p)]
+            assert set(changed)=={main,path},changed
+            old=x.read(path).decode('utf8');new=y.read(path).decode('utf8')
+            replacements=[
+              ("if($html==='' && self::logged_in_preview()){$html=self::affiliate_preview_placeholder('Affiliate-Produkt',$slot);$preview=$html!=='';}",
+               "if($html===''){continue;}"),
+              ("if ($html === '') { $html = self::affiliate_preview_placeholder('product', $slot); }",
+               "if ($html === '') { continue; }"),
+              ('$note = self::logged_in_preview() ? \'<span class="hd-admin-preview-note">Leere Produktplätze siehst du nur im eingeloggten Zustand.</span>\' : \'\';',
+               "$note = '';"),
+            ]
+            verify=old
+            for oldtext,newtext in replacements:
+                assert verify.count(oldtext)==1,'Missing exact old anchor'
+                verify=verify.replace(oldtext,newtext,1)
+            assert verify==new,'Unexpected behavior/design changed beyond 3 approved product placeholder lines'
+            assert y.read(main)==x.read(main).replace(b'1.50.813',b'1.50.814')
+            assert new.count("return '<section class=\"hd-portal-section hd-catlevel-products\"")>=1
+            assert new.count('background:#EFDECA!important;')>=1
+            assert 'private static function affiliate_preview_placeholder' in new,'Banner/admin other preview helper left intact'
+            for p in y.namelist():
+              if p.endswith('.php'):
+                f=Path('/tmp/hd003_150814_php')/p
+                f.parent.mkdir(parents=True,exist_ok=True)
+                f.write_bytes(y.read(p))
+            print('EXACT_3_PRODUCT_SOURCE_LINES_ONLY; OTHER_1289_FILES_BYTE_IDENTICAL')
+            print('1291_ZIP_ENTRIES_CRC_PASS')
+            print('FULL_ZIP_SHA256',hashlib.sha256(Path(test).read_bytes()).hexdigest())
+          PY
+          find /tmp/hd003_150814_php -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Real HD003 methods tests with logged-in and public 0/1/3 real shortcode outputs
+        run: |
+          python3 scripts/hd003_150814_real_methods_qa.py /tmp/HOBBY_DEPOT_DESIGN_HD003_1.50.814_OHNE_LEERKARTEN.zip /tmp/hd003_150814_actual_methods_qa.php
+          php -l /tmp/hd003_150814_actual_methods_qa.php
+          php /tmp/hd003_150814_actual_methods_qa.php
