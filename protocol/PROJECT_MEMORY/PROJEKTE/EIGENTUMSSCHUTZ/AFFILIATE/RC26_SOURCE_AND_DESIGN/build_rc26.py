@@ -197,9 +197,6 @@ with ZipFile(BytesIO(old)) as z:
         'Offizielle iPN-Download-URL für Feed 2901 <span',
         'Optionale frühere Download-URL (wird nicht mehr zum Import verwendet) <span')
     t=once(t,
-        '        $s=$this->idealo_settings(); $counts=$this->network_sync_counts(\'idealo\'); ?>',
-        '        $s=$this->idealo_settings(); $counts=$this->network_sync_counts(\'idealo\'); ?>')
-    t=once(t,
         '<section class="postbox" style="padding:18px"><h2>Partner-API</h2><p>',
         '<section class="postbox" style="padding:18px"><h2>Partner-API</h2><p><strong>Produktquelle:</strong> <?php echo esc_html((string)($s[\'api_last_feed_name\']??\'noch nicht geprüft\')); ?> · Feed <?php echo esc_html((string)($s[\'feed_id\']??\'\')); ?><br>')
     t=once(t,
