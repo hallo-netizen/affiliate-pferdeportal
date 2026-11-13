@@ -68,3 +68,13 @@
 - **Originale nach Prüfsumme unverändert:** PSTE SHA256 `7fc98a17e4c2319a66afd23c0ad944a07b4492e7a9982933205f29069fdcd121`; PSERC SHA256 `fd80f7ec3451b437be0eaeedabf2142c5eb1b5130939f7b8dba3b3a2f9d2b59f`.
 - **Offen, NICHT als erledigt behaupten:** automatische vollwertige alte PSTE-Semantik (im Testpilot nur einmalige **manuelle** redaktionelle Freigabe nach Recherche), echter DataForSEO-Anbieterabruf, echter externer MINI-Worker-/K0-Rücklauf, echter WordPress-Draft-Test, unbewiesene neue Auftrag-ID vs PPM-K0-Altplan. Darum nur **Testinstallation**, nicht Liveersatz.
 - **Nächste Aktion:** Nutzer installiert Test-ZIP auf separater WordPress-Testinstallation, aktiviert; deaktiviert Alt-SEO-/Plan-/Produktionsplugins **nur dort selbst**; beginnt mit einem sicheren Sofortartikel und einem echten K0-Rücklauf. Ergebnisse gegen genau diese gespeicherte Abnahme prüfen. Nicht erneut Architektur umbauen.
+
+
+## Schritt 6 – Nutzerpräzisierung: Diagnose für belegbasierte Fehlersuche + Name Texterstellung
+**Anforderung 13.11.2026:** **Ein Plugin „Texterstellung“** statt „Artikelwerkstatt – KISS“. Die **Diagnose ist Bestandteil desselben Plugins**, kein zusätzliches Diagnose-/Prüfplugin.
+- **Zweck der Diagnose:** Im Fehlerfall für den Entwickler/Assistenten nachprüfbare technische Belege, statt anhand von Screenshots Ursachen zu raten: letzte Aktionen mit Zeit und Ergebnis, genaue Fehlerkennungen, Auftrags-/Schrittzuordnung, Statusverteilung, fehlende Pflichtfelder, Import-/Export-Sperrgründe und Einstellungen/Plugin-Versionen (nur diagnostisch).
+- **Einfache Bedienung:** Im WordPress-Backend eine Diagnose-Zusammenfassung und ein einzelner JSON-Download. Bericht kann vom Nutzer in Chat hochgeladen werden; **kein automatisches Versenden**.
+- **Datensparsam:** Keine Passwörter, API-Tokens, Cookie-/Nonce-Werte oder vollständige Artikeltexte im Report, keine personenbezogenen Rohdaten. Technische Angaben und einzelne Keyword-/Auftragsdaten soweit zur Fehlersuche erforderlich. Nur berechtigter Administrator, Download nur mit Nonce.
+- **Nur protokollieren, nicht doppelt entscheiden:** Diagnose darf keine neuen inhaltlichen Prüfungen, keine SEO-Nachentscheidung, keine weiteren Worker und kein Nachschreiben alter Pluginoptionen hinzufügen. Nur tatsächlich beobachtete Fehler melden; “kein Fehler festgestellt” ist kein Live-Abnahmebeweis.
+- **Testinstallation:** Isolierte WP-Testkopie, alte Plugins unangetastet; eigene Daten; Import/K0/Titelverträge unverändert.
+- **Status:** Entwicklung der Umbenennung und integrierten Diagnose begonnen. Kein neuer Installer ausgegeben; Abschluss erst nach lokalen Gegenproben und Code-/GitHub-Sicherung.
