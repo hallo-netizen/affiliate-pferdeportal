@@ -38,5 +38,14 @@ jobs:
                 print('PUBLIC_OCCURRENCES',word,len(occurrences))
                 for i in occurrences[:5]:print('PUBLIC_AROUND',word,repr(html[max(0,i-250):i+400]))
           except Exception as e:print('PUBLIC_UNAVAILABLE',type(e).__name__,str(e)[:170])
+          with ZipFile(R/'HAB-001-DESIGN/CURRENT.zip') as z:
+            for filename in z.namelist():
+              if filename.endswith('.css'):
+                css=z.read(filename).decode('utf-8','replace')
+                for m in re.finditer(r'content\s*:\s*[\x27\x22](?:ANZEIGE|Anzeige)|hbdp-detail-products-feed:(?:before|after)|hbdp-detail-products-feed::(?:before|after)',css):
+                  print('CSS_LABEL_SOURCE',filename,repr(css[max(0,m.start()-300):m.end()+220]))
+          if 'html' in locals():
+            for m in re.finditer(r'content\s*:\s*[\x27\x22](?:ANZEIGE|Anzeige)|hbdp-detail-products-feed:(?:before|after)|hbdp-detail-products-feed::(?:before|after)',html):
+              print('PUBLIC_CSS_LABEL_RULE',repr(html[max(0,m.start()-250):m.end()+180]))
           print('RC30_READ_ONLY_AUDIT_DONE')
           PY
