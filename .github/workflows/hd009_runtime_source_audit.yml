@@ -1,0 +1,43 @@
+name: HD009 identify campaign source guard bypass and product facts
+on:
+  push:
+    branches: [audit/hd009-live-cards-missing-facts-20261113]
+    paths: [.github/workflows/hd009_runtime_source_audit.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Print only known original source routing and data fields
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          with ZipFile(p) as z:
+            main=z.read('affiliate-portal-router/hobby-depot-affiliate-router.php').decode().splitlines()
+            idealo=z.read('affiliate-portal-router/includes/trait-ppar-idealo.php').decode().splitlines()
+          for i,line in enumerate(main):
+            if ('function ' in line and re.search(r'campaign_from_post|ranked_campaign_from_post|output_object|render_affiliate_slot|render_banner|build_.*context',line)):
+              print('FUNCTION',i+1,line.strip()[:500])
+            if ('source' in line and any(k in line for k in ('output_object_v4','campaign_from_post','idealo_product_feed_v1','_ppar_runtime'))) or ('network' in line and 'idealo' in line and i>1000):
+              print('SOURCE_LINE',i+1,line.strip()[:500])
+            if any(k in line for k in ('primary_name', 'primary_slug')) and (i>=4520 and i<=4615):
+              print('GUARD_LINE',i+1,line.strip()[:450])
+          for i,line in enumerate(idealo):
+            if i>=765 and i<=820 and any(k in line for k in ("['source']","['description']","['quality_note']","['brand']","['main_category']","['sub_category']")):
+              print('IDEALO_FIELD',i+1,line[:1000])
+          for tag,a,name in [
+            ('MAIN',main,'campaign_from_post('),
+            ('MAIN',main,'ranked_campaign_from_post_cached('),
+            ('MAIN',main,'render_affiliate_slot_for_context('),
+          ]:
+            start=next((i for i,line in enumerate(a) if 'function '+name in line),None)
+            if start is not None:
+              end=min(start+120,len(a))
+              print('SECTION',name,'AT',start+1)
+              for i in range(start,end):print('SOURCE',i+1,a[i][:650])
+          PY
