@@ -1,0 +1,36 @@
+name: HD009 compare design exact current source inspection
+on:
+  push:
+    branches: [hobbyroom/hd009-dual-feed-safe-compare-20261113]
+    paths: [.github/workflows/hd009-dual-feed-audit.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract exact installed-current sources for isolated read-only review
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile,hashlib
+          src=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          assert hashlib.sha256(src.read_bytes()).hexdigest()=='b6482b5d880e941c97ac726dffa85fbc46ba8514587e23700951d176ebcb63db'
+          base=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/RESEARCH_HD009_SAFE_FEED_COMPARE')
+          base.mkdir(exist_ok=True,parents=True)
+          with zipfile.ZipFile(src) as z:
+            for srcpath,dstname in [
+                ('affiliate-portal-router/includes/trait-ppar-idealo.php','CURRENT_TRAIT_IDEALO.php.txt'),
+                ('affiliate-portal-router/includes/class-hdar-hobby-depot-source.php','CURRENT_HOBBY_SOURCE.php.txt')]:
+              s=z.read(srcpath);(base/dstname).write_bytes(s)
+          print('ORIGINAL_HD009_SHA_PASS')
+          PY
+      - name: Save source extracts only on isolated audit branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/RESEARCH_HD009_SAFE_FEED_COMPARE/
+          git commit -m "Evidence only: exact HD009 0.1.33 idealo matcher and catalog source" || true
+          git push origin HEAD:hobbyroom/hd009-dual-feed-safe-compare-20261113
