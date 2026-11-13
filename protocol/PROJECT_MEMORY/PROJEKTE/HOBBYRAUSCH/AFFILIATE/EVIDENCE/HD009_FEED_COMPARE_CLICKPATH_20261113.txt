@@ -1,0 +1,99 @@
+FILE affiliate-portal-router/hobby-depot-affiliate-router.php LINES 11273 HITS 245
+FILE affiliate-portal-router/includes/class-hdar-amazon-start.php LINES 978 HITS 34
+FILE affiliate-portal-router/includes/class-hdar-hobby-depot-source.php LINES 245 HITS 21
+FILE affiliate-portal-router/includes/class-ppar-admin-kiss.php LINES 678 HITS 9
+HIT 267         echo '<p class="description">Unterstützt: Digistore24-Partnerschaftsexport, idealo-Standardfeed sowie eindeutig erkennbare Awin-/ADCELL-Werbemitteldateien. eBay wird erkannt, aber nicht in einen falschen Dateiimport gezwungen.</p>';
+NEAR 258         echo '<h2 style="margin-top:0">Datei importieren</h2>';
+NEAR 259         echo '<p>Eine Datei hochladen. Die Affiliate-Zentrale erkennt den Anbieter selbst. Unklare oder widersprüchliche Dateien werden ohne Datenänderung abgewiesen.</p>';
+NEAR 260         if ($notice === 'success') { echo '<div class="notice notice-success inline"><p>'.esc_html($message).'</p></div>'; }
+NEAR 261         if ($notice === 'failed') { echo '<div class="notice notice-error inline"><p>'.esc_html($message).'</p></div>'; }
+NEAR 262         echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'" enctype="multipart/form-data">';
+NEAR 263         echo '<input type="hidden" name="action" value="'.esc_attr(self::IMPORT_ACTION).'">';
+NEAR 264         wp_nonce_field(self::IMPORT_NONCE_ACTION, self::IMPORT_NONCE_FIELD);
+NEAR 265         echo '<p><input type="file" name="affiliate_import_file" accept=".csv,.csv.gz,.json,.txt,.gz" required></p>';
+NEAR 266         echo '<p><button class="button button-primary" type="submit">Datei prüfen &amp; importieren</button></p>';
+NEAR 267         echo '<p class="description">Unterstützt: Digistore24-Partnerschaftsexport, idealo-Standardfeed sowie eindeutig erkennbare Awin-/ADCELL-Werbemitteldateien. eBay wird erkannt, aber nicht in einen falschen Dateiimport gezwungen.</p>';
+NEAR 268         echo '</form>';
+NEAR 269         if (!empty($last['provider']) && !empty($last['imported_at'])) {
+NEAR 270             echo '<p class="description"><strong>Letzter Import:</strong> '.esc_html((string)$last['provider']).' · '.esc_html(wp_date('d.m.Y H:i',absint($last['imported_at'])));
+NEAR 271             if (!empty($last['message'])) { echo ' · '.esc_html((string)$last['message']); }
+NEAR 272             echo '</p>';
+NEAR 273         }
+NEAR 274         echo '</section>';
+NEAR 275     }
+NEAR 276 
+NEAR 277     public static function handle_universal_import() {
+NEAR 278         if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
+NEAR 279         check_admin_referer(self::IMPORT_NONCE_ACTION, self::IMPORT_NONCE_FIELD);
+NEAR 280         $file = $_FILES['affiliate_import_file'] ?? null;
+NEAR 281         if (!is_array($file) || (int)($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK || empty($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])) {
+NEAR 282             self::import_redirect('failed','Dateiupload fehlgeschlagen.');
+NEAR 283         }
+NEAR 284         $size = (int)($file['size'] ?? 0);
+NEAR 285         $limit = function_exists('wp_max_upload_size') ? (int)wp_max_upload_size() : 0;
+NEAR 286         if ($size <= 0 || ($limit > 0 && $size > $limit)) { self::import_redirect('failed','Die Datei ist leer oder größer als das Server-Uploadlimit.'); }
+NEAR 287         $name = sanitize_file_name((string)($file['name'] ?? 'import'));
+FILE affiliate-portal-router/includes/class-ppar-deal-radar.php LINES 488 HITS 18
+FILE affiliate-portal-router/includes/class-ppar-ds24-manual-downstream.php LINES 223 HITS 2
+FILE affiliate-portal-router/includes/class-ppar-partner-analytics.php LINES 281 HITS 9
+FILE affiliate-portal-router/includes/class-ppar-product-source-plan.php LINES 226 HITS 2
+FILE affiliate-portal-router/includes/trait-ppar-article-plans.php LINES 1169 HITS 8
+FILE affiliate-portal-router/includes/trait-ppar-automation-suite.php LINES 4539 HITS 75
+HIT 1442     private function automation_validate_awin_feed_url($url) {
+HIT 1485         $validated = $this->automation_validate_awin_feed_url($configured_url);
+HIT 1517             $validated = $this->automation_validate_awin_feed_url($configured_url);
+HIT 1544             $validated = $this->automation_validate_awin_feed_url($url);
+HIT 1623         $url = $this->automation_validate_awin_feed_url((string) ($feed['url'] ?? ''));
+HIT 1702     private function automation_download_adcell_feed_url($url, $job_uuid) {
+HIT 2032             $download = $this->automation_download_adcell_feed_url((string) ($details['csv_url'] ?? ''), (string) $job['job_uuid']);
+FILE affiliate-portal-router/includes/trait-ppar-awin-programme-gate.php LINES 375 HITS 23
+FILE affiliate-portal-router/includes/trait-ppar-creative-library.php LINES 1997 HITS 5
+FILE affiliate-portal-router/includes/trait-ppar-digistore24.php LINES 1609 HITS 17
+FILE affiliate-portal-router/includes/trait-ppar-ebay-account-deletion.php LINES 698 HITS 1
+FILE affiliate-portal-router/includes/trait-ppar-ebay-run.php LINES 2212 HITS 29
+FILE affiliate-portal-router/includes/trait-ppar-ebay.php LINES 9968 HITS 338
+FILE affiliate-portal-router/includes/trait-ppar-housekeeping.php LINES 290 HITS 3
+FILE affiliate-portal-router/includes/trait-ppar-idealo.php LINES 1653 HITS 204
+HIT 73             'hobby_feed_verified' => false,
+HIT 126         $settings['hobby_feed_verified'] = !empty($settings['hobby_feed_verified']);
+HIT 154         return !empty($settings['hobby_feed_verified'])
+HIT 459         $settings['hobby_feed_verified'] = !empty($raw['hobby_feed_verified']) && $adspace !== '' && $feed !== '';
+HIT 527             && !empty($s['hobby_feed_verified'])
+HIT 794                 $family['advertiser_id']='84749'; $family['programme_name']='idealo DE'; $family['programme_status']='active'; $family['programme_status_source']='idealo_ipn_feed'; $family['programme_status_checked_at']=time(); $family['quality_manual_status']='auto_verified'; $family['quality_note']='Familien-/Kategorievergleich aus sicher gemapptem Standardfeed-Konzept; repräsentatives Bild aus derselben Produktfamilie, kein konkretes Produktversprechen.'; $family['render_mode']='image_link';
+NEAR 785                 if ($candidate_image!=='' && stripos($candidate_image,'https://')===0 && $candidate_tracking!=='') { $family_row=(array)$family_candidate; break; }
+NEAR 786             }
+NEAR 787             if (!$family_row) { continue; }
+NEAR 788             $family_payload=(array)($family_row['_payload']??array());
+NEAR 789             $family_image=esc_url_raw((string)($family_row['image_url']??''));
+NEAR 790             $family_url=$this->idealo_comparison_deeplink_from_product_url((string)($family_row['tracking_url']??''),$concept);
+NEAR 791             if ($family_url!=='' && $family_image!=='') {
+NEAR 792                 $family_key='family:'.$concept_id; $ids=get_posts(array('post_type'=>self::CAMPAIGN_POST_TYPE,'post_status'=>array('publish','draft','private'),'meta_key'=>'_ppar_idealo_external_key','meta_value'=>$family_key,'posts_per_page'=>1,'fields'=>'ids')); $family_post_id=$ids?absint($ids[0]):0;
+NEAR 793                 $family=$this->central_blank_campaign(); $family['id']=sanitize_key('idealo-family-'.substr(hash('sha256',$concept_id),0,20)); $family['name']='idealo Vergleich – '.(string)$concept['title']; $family['partner']='idealo'; $family['creative_type']='product'; $family['network']='idealo';
+NEAR 794                 $family['advertiser_id']='84749'; $family['programme_name']='idealo DE'; $family['programme_status']='active'; $family['programme_status_source']='idealo_ipn_feed'; $family['programme_status_checked_at']=time(); $family['quality_manual_status']='auto_verified'; $family['quality_note']='Familien-/Kategorievergleich aus sicher gemapptem Standardfeed-Konzept; repräsentatives Bild aus derselben Produktfamilie, kein konkretes Produktversprechen.'; $family['render_mode']='image_link';
+NEAR 795                 $family['active']=$should_active; $family['assignment_mode']='page_tree'; $family['match_descendants']=false; $family['automation_target_keys']=$target_keys; $family['placements']=array('hub_product_1','hub_product_2','hub_product_3','category_product_1','category_product_2','category_product_3','post_bottom_products');
+NEAR 796                 $family['priority']=97; $family['label']='idealo · Affiliate'; $family['title']=(string)$concept['title']; $family['description']='Preise und Angebote bei idealo vergleichen'; $family['button_text']='Bei idealo vergleichen'; $family['image_url']=$family_image; $family['url']=$family_url; $family['target']='_blank'; $family['price']=''; $family['currency']='EUR'; $family['availability']=''; $family['health_check_enabled']=false; $family['source']='idealo_family_deeplink_v1'; $family['last_synced']=absint($family_row['last_seen']??time()); $family['external_id']=$family_key; $family['product_gtins']=array(); $family['product_asins']=array(); $family['product_identity_source']='family'; $family['product_provider']='idealo'; $family['idealo_surface_kind']='comparison';
+NEAR 797                 $saved=$this->save_campaign_record($family,$family_post_id); if (!is_wp_error($saved)&&$saved) { $family_post_id=absint($saved); update_post_meta($family_post_id,'_ppar_idealo_auto',1); update_post_meta($family_post_id,'_ppar_idealo_external_key',$family_key); update_post_meta($family_post_id,'_ppar_idealo_concept_id',$concept_id); $selected_keys[$family_key]=true; $saved_count++; }
+NEAR 798             }
+NEAR 799             $target_limit=max(1,min(25,absint($limit_per_target))); $target_saved=0; $seen_target_gtins=array();
+NEAR 800             foreach ($items as $row) {
+NEAR 801                 if ($target_saved >= $target_limit) { break; }
+NEAR 802                 $payload=(array)$row['_payload']; $external_key=substr(sanitize_text_field((string)($row['external_key']??'')),0,191); if ($external_key==='') { continue; }
+NEAR 803                 $tracking=esc_url_raw((string)($row['tracking_url']??'')); $title=sanitize_text_field((string)($row['title']??'')); $image=esc_url_raw((string)($row['image_url']??'')); if ($tracking===''||$title===''||$image==='') { continue; }
+NEAR 804                 $gtins=$this->idealo_normalize_gtins_from_values(array($payload['ean']??'',$payload['gtins_product']??'')); $asins=$this->idealo_normalize_asins_from_values(array($payload['asins_product']??'')); if (!$gtins) { continue; }
+NEAR 805                 if (array_intersect($gtins,array_keys($seen_target_gtins))) { continue; }
+NEAR 806                 $ids=get_posts(array('post_type'=>self::CAMPAIGN_POST_TYPE,'post_status'=>array('publish','draft','private'),'meta_key'=>'_ppar_idealo_external_key','meta_value'=>$external_key,'posts_per_page'=>1,'fields'=>'ids')); $post_id=$ids?absint($ids[0]):0;
+NEAR 807                 $campaign=$this->central_blank_campaign(); $campaign['id']=sanitize_key('idealo-'.substr(hash('sha256',$external_key),0,20)); $campaign['name']='idealo – '.$title; $campaign['partner']='idealo'; $campaign['creative_type']='product'; $campaign['network']='idealo';
+NEAR 808                 $campaign['advertiser_id']=sanitize_text_field((string)($settings['api_last_advertiser_id']??'')); $campaign['programme_name']='idealo DE'; $campaign['programme_status']='active'; $campaign['programme_status_source']='idealo_ipn_feed'; $campaign['programme_status_checked_at']=time(); $campaign['quality_manual_status']='auto_verified'; $campaign['quality_note']='Hobby-Depot-Ziele + konservatives Kontextmatching + GTIN.'; $campaign['render_mode']='image_link';
+NEAR 809                 $campaign['active']=$should_active; $campaign['assignment_mode']='page_tree'; $campaign['match_descendants']=false; $campaign['automation_target_keys']=$target_keys; $campaign['placements']=array('hub_product_1','hub_product_2','hub_product_3','category_product_1','category_product_2','category_product_3','post_bottom_products');
+NEAR 810                 $rank=$row['_rank']; $match_score=isset($payload['__idealo_match_score'])?(int)$payload['__idealo_match_score']:0; $campaign['priority']=max(40,min(95,55+(int)min(40,floor($match_score/10)))); $campaign['label']='idealo · Affiliate'; $campaign['title']=$title; $campaign['description']=''; $campaign['button_text']='Bei idealo vergleichen';
+NEAR 811                 $campaign['image_url']=$image; $campaign['url']=$tracking; $campaign['target']='_blank'; $campaign['price']=sanitize_text_field((string)($row['price']??'')); $campaign['currency']='EUR'; $campaign['availability']='available'; $campaign['health_check_enabled']=false; $campaign['source']='idealo_product_feed_v1'; $campaign['last_synced']=absint($row['last_seen']??time()); $campaign['external_id']=$external_key; $campaign['product_gtins']=$gtins; $campaign['product_asins']=$asins; $campaign['product_identity_source']='gtin'; $campaign['product_provider']='idealo'; $campaign['idealo_surface_kind']='product';
+NEAR 812                 $saved=$this->save_campaign_record($campaign,$post_id); if (is_wp_error($saved)||!$saved) { continue; }
+NEAR 813                 $post_id=absint($saved); update_post_meta($post_id,'_ppar_idealo_auto',1); update_post_meta($post_id,'_ppar_idealo_external_key',$external_key); update_post_meta($post_id,'_ppar_idealo_concept_id',$concept_id); update_post_meta($post_id,'_ppar_idealo_target_slugs',wp_json_encode(array_values(array_unique(array_filter(array_map(static function($p){return is_array($p)?sanitize_title((string)($p['slug']??'')):'';},(array)($concept['target_pages']??array())))))));
+NEAR 814                 delete_post_meta($post_id,'_ppar_product_gtin'); foreach ($gtins as $gtin) { add_post_meta($post_id,'_ppar_product_gtin',$gtin,false); } delete_post_meta($post_id,'_ppar_product_asin'); foreach ($asins as $asin) { add_post_meta($post_id,'_ppar_product_asin',$asin,false); }
+FILE affiliate-portal-router/includes/trait-ppar-network-sync.php LINES 1310 HITS 17
+FILE affiliate-portal-router/includes/trait-ppar-output-objects.php LINES 3662 HITS 21
+FILE affiliate-portal-router/includes/trait-ppar-provider-registry.php LINES 853 HITS 10
+HIT 796         if ($provider === '') { wp_die('Unbekannte Provider-Fachseite.'); }
+HIT 802             <p><strong>Provider-Fachseite.</strong> Zugangsdaten bleiben zentral unter <a href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-networks')); ?>">Netzwerke &amp; API</a>. Hier liegt ausschließlich provider-spezifische Betriebslogik.</p>
+HIT 845                     <?php elseif (!empty($provider['specialist_menu']) && !empty($provider['specialist_slug'])) : ?><a class="button" href="<?php echo esc_url(admin_url('admin.php?page='.(string)$provider['specialist_slug'])); ?>">Provider-Fachseite öffnen</a>
+FILE affiliate-portal-router/includes/trait-ppar-tariff-tools.php LINES 531 HITS 1
