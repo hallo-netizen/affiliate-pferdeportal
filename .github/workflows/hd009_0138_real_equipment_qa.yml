@@ -1,0 +1,68 @@
+name: HD009 0.1.38 real-HD007 equipment matching regression tests (candidate only)
+on:
+  push:
+    branches: [hobbyroom/hd009-038-real-equipment-matcher-20261113]
+    paths: [.github/workflows/hd009_0138_real_equipment_qa.yml]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build complete unchanged-source HD009 and inspect controlled diff
+        run: |
+          python3 scripts/hd009_0138_equipment_match_candidate.py /tmp/HOBBY_DEPOT_HD009_0.1.38_EQUIPMENT_MATCH_CANDIDATE.zip
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re,hashlib
+          src='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip'
+          new='/tmp/HOBBY_DEPOT_HD009_0.1.38_EQUIPMENT_MATCH_CANDIDATE.zip'
+          with ZipFile(src) as x,ZipFile(new) as y:
+            assert x.testzip() is None and y.testzip() is None
+            assert x.namelist()==y.namelist() and len(y.namelist())==41
+            trait='affiliate-portal-router/includes/trait-ppar-idealo.php'
+            main='affiliate-portal-router/hobby-depot-affiliate-router.php'
+            changed=[k for k in x.namelist() if x.read(k)!=y.read(k)]
+            assert set(changed)=={main,trait},changed
+            a=x.read(trait).decode();b=y.read(trait).decode()
+            # EXACT existing feed import and original materialization must not change.
+            pattern=re.compile(r'^    (?:public|private|protected) function ',re.M)
+            def method(s,n):
+              m=re.search(r'^    (?:public|private|protected) function '+re.escape(n)+r'\(',s,re.M)
+              assert m,n
+              next_method=pattern.search(s,m.end())
+              return s[m.start():next_method.start()] if next_method else s[m.start():]
+            critical=[
+              'idealo_import_feed_file',
+              'idealo_materialize_campaigns',
+              'idealo_find_feed_metadata',
+              'idealo_download_feed_to_temp',
+              'idealo_stream_close',
+              'idealo_refresh_remote_feed',
+              'hd_idealo_standard_feed_compare_work',
+              'hd_idealo_preview_csv',
+              'idealo_match_stem',
+              'idealo_match_tokens',
+              'idealo_match_distinct_tokens',
+              'idealo_normalize_gtins_from_values',
+            ]
+            for q in critical:assert method(a,q)==method(b,q),'Original importer/QA changed '+q
+            for n in y.namelist():
+              if n.endswith('.php'):
+                p=Path('/tmp/hd009_138_php')/n
+                p.parent.mkdir(parents=True,exist_ok=True)
+                p.write_bytes(y.read(n))
+            print('FULL_PLUGIN_CRC_41_PASS')
+            print('ORIGINAL_IMPORT_MATERIALIZATION_FEEDCOMPARE_API_GTIN_UNCHANGED')
+            print('ONLY_APPROVED_FILES',changed)
+            print('CANDIDATE_SHA256',hashlib.sha256(Path(new).read_bytes()).hexdigest())
+          PY
+          find /tmp/hd009_138_php -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Execute exact original matcher and REAL installed hobby register data
+        run: |
+          python3 scripts/hd009_0138_original_php_equipment_qa.py /tmp/HOBBY_DEPOT_HD009_0.1.38_EQUIPMENT_MATCH_CANDIDATE.zip /tmp/hd009_0138_actual_php_test.php protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip
+          php -l /tmp/hd009_0138_actual_php_test.php
+          php /tmp/hd009_0138_actual_php_test.php
