@@ -1,0 +1,371 @@
+FILE affiliate-portal-router/hobby-depot-affiliate-router.php bytes 727531 lines 11190
+3361             if (class_exists('HDAR_Hobby_Depot_Source')) {
+3362                 $catalog = HDAR_Hobby_Depot_Source::catalog();
+3367                         $product = sanitize_key((string)($row['product_slug'] ?? ''));
+6675             $slug = sanitize_title((string) ($payload['ebay_verified_product_slug'] ?? ''));
+6763                 foreach (array('business_concepts','business_hub_concepts') as $concept_group) {
+6929                 $slug = sanitize_title((string) ($payload['ebay_verified_product_slug'] ?? ''));
+6962         $concepts = array_values((array) ($catalog['business_concepts'] ?? array()));
+6976             foreach ((array) ($concept['target_pages'] ?? array()) as $page) {
+7029             'physical_target_pages' => 0,
+7031             'published_target_pages' => 0,
+7057             if ($physical) { $summary['physical_target_pages']++; } else { $summary['excluded_information_pages']++; }
+7062             if ($page_status === 'publish') { $summary['published_target_pages']++; }
+7160         $expected = max(1, absint($summary['physical_target_pages']));
+7198             'Produktpflicht'=>absint($s['physical_target_pages']??0),
+FILE affiliate-portal-router/includes/class-hdar-hobby-depot-source.php bytes 11583 lines 245
+10 final class HDAR_Hobby_Depot_Source {
+108         $business_concepts = array();
+149             $business_concepts[] = array(
+153                 'target_pages'=>array($target),
+181                     'product_slug'=>$hobby_slug,
+224                 'business_concepts'=>count($business_concepts),
+230             'business_concepts'=>$business_concepts,
+240                 'required_product_concept_ids'=>array_values(array_map(static function($c){ return (string)$c['id']; }, $business_concepts)),
+SOURCEFILE_ALL_START
+1 <?php
+2 /**
+3  * Hobby Depot portal source adapter for HD-009.
+4  *
+5  * Single truth: HD-004 read-only category registry.
+6  * No copied category/product master is stored in this plugin.
+7  */
+8 if (!defined('ABSPATH')) { exit; }
+9 
+10 final class HDAR_Hobby_Depot_Source {
+11     private static $catalog = null;
+12 
+13     private static function text($value) {
+14         $value = wp_strip_all_tags((string)$value);
+15         $value = remove_accents($value);
+16         $value = strtolower($value);
+17         $value = preg_replace('/[^a-z0-9]+/u', ' ', $value);
+18         return trim(preg_replace('/\s+/', ' ', $value));
+19     }
+20 
+21     private static function path_labels($node_id, $nodes) {
+22         $labels = array();
+23         $seen = array();
+24         $cursor = (string)$node_id;
+25         while ($cursor !== '' && isset($nodes[$cursor]) && !isset($seen[$cursor])) {
+26             $seen[$cursor] = true;
+27             $node = $nodes[$cursor];
+28             $label = sanitize_text_field((string)($node['display_name'] ?? $node['name'] ?? ''));
+29             if ($label !== '') { array_unshift($labels, $label); }
+30             $cursor = (string)($node['parent_id'] ?? '');
+31         }
+32         return $labels;
+33     }
+34 
+35     private static function ancestor($node_id, $nodes, $predicate) {
+36         $seen = array();
+37         $cursor = (string)$node_id;
+38         while ($cursor !== '' && isset($nodes[$cursor]) && !isset($seen[$cursor])) {
+39             $seen[$cursor] = true;
+40             $node = $nodes[$cursor];
+41             if (call_user_func($predicate, $node, $cursor)) { return $node; }
+42             $cursor = (string)($node['parent_id'] ?? '');
+43         }
+44         return array();
+45     }
+46 
+47     public static function catalog() {
+48         if (is_array(self::$catalog)) { return self::$catalog; }
+49         if (!function_exists('hd_category_registry_ready') || !hd_category_registry_ready()
+50             || !function_exists('hd_category_registry_snapshot')) {
+51             return new WP_Error('hdar_category_registry_unavailable', 'Hobby-Depot-Kategorie-Registry ist nicht bereit.');
+52         }
+53 
+54         $snapshot = hd_category_registry_snapshot();
+55         if (!is_array($snapshot) || empty($snapshot['nodes']) || !is_array($snapshot['nodes'])) {
+56             return new WP_Error('hdar_category_snapshot_invalid', 'Hobby-Depot-Kategorie-Snapshot ist leer oder ungültig.');
+57         }
+58 
+59         $nodes = array();
+60         foreach ($snapshot['nodes'] as $node) {
+61             if (!is_array($node)) { continue; }
+62             $id = (string)($node['node_id'] ?? '');
+63             if ($id === '' || (string)($node['pillar'] ?? '') !== 'core' || (string)($node['status'] ?? 'active') !== 'active') { continue; }
+64             $nodes[$id] = $node;
+65         }
+66         if (!$nodes) {
+67             return new WP_Error('hdar_category_snapshot_no_core', 'Hobby-Depot-Snapshot enthält keine aktiven CORE-Knoten.');
+68         }
+69 
+70         $worlds = array();
+71         $children = array();
+72         foreach ($nodes as $id => $node) {
+73             $parent_id = (string)($node['parent_id'] ?? '');
+74             if ($parent_id !== '') {
+75                 if (!isset($children[$parent_id])) { $children[$parent_id] = array(); }
+76                 $children[$parent_id][] = $node;
+77             }
+78             if (preg_match('/^core:world:[^:]+$/', $id)) { $worlds[$id] = $node; }
+79         }
+80         if (count($worlds) !== 8) {
+81             return new WP_Error('hdar_world_count_invalid', 'Hobby Depot muss exakt acht aktive CORE-Welten liefern.');
+82         }
+83 
+84         // Hobbyseiten werden strukturell bestimmt, nicht über historische ID-Präfixe:
+85         // aktive CORE-Seite + mindestens eine direkte aktive Content-Kategorie.
+86         // Der aktuelle Zielbaum enthält unterschiedliche ID-Familien
+87         // (u. a. core:hobby:*, core:entity:* und core:proposal:*).
+88         $hobbies = array();
+89         foreach ($nodes as $id => $node) {
+90             if ((string)($node['object_type'] ?? '') !== 'page') { continue; }
+91             $has_direct_category = false;
+92             foreach ((array)($children[$id] ?? array()) as $child) {
+93                 if ((string)($child['object_type'] ?? '') === 'category') {
+94                     $has_direct_category = true;
+95                     break;
+96                 }
+97             }
+98             if ($has_direct_category) { $hobbies[$id] = $node; }
+99         }
+100         if (!$hobbies) {
+101             return new WP_Error('hdar_hobby_targets_missing', 'Hobby-Depot-Snapshot enthält keine strukturell belegten CORE-Hobbyseiten.');
+102         }
+103         if (count($hobbies) < 300) {
+104             return new WP_Error('hdar_hobby_target_count_implausible', 'Hobby-Depot-Snapshot enthält implausibel wenige strukturell belegte Hobbyseiten.');
+105         }
+106 
+107         $product_targets = array();
+108         $business_concepts = array();
+109         $world_profiles = array();
+110         foreach ($worlds as $world_id => $world) {
+111             $world_slug = sanitize_title((string)($world['slug'] ?? ''));
+112             $world_label = sanitize_text_field((string)($world['display_name'] ?? ''));
+113             if ($world_slug === '' || $world_label === '') { continue; }
+114             $world_profiles[$world_slug] = array(
+115                 'label' => $world_label,
+116                 'phrases' => array(),
+117                 'strong_phrases' => array(),
+118             );
+119         }
+120 
+121         foreach ($hobbies as $id => $node) {
+122             $slug = sanitize_title((string)($node['slug'] ?? ''));
+123             $title = sanitize_text_field((string)($node['display_name'] ?? ''));
+124             if ($slug === '' || $title === '') { continue; }
+125             $world = self::ancestor($id, $nodes, static function($n, $nid){ return preg_match('/^core:world:[^:]+$/', (string)$nid) === 1; });
+126             $world_slug = sanitize_title((string)($world['slug'] ?? ''));
+127             $world_label = sanitize_text_field((string)($world['display_name'] ?? ''));
+128             if ($world_slug === '' || !isset($world_profiles[$world_slug])) { continue; }
+129 
+130             $parent_id = (string)($node['parent_id'] ?? '');
+131             $parent = isset($nodes[$parent_id]) ? $nodes[$parent_id] : array();
+132             $hub = sanitize_text_field((string)($parent['display_name'] ?? $world_label));
+133             $hub_slug = sanitize_title((string)($parent['slug'] ?? $world_slug));
+134             $normalized = self::text($title . ' ' . $hub . ' ' . $world_label);
+135 
+136             $target = array(
+137                 'slug'=>$slug,
+138                 'title'=>$title,
+139                 'description'=>'Produkt- und Zubehörrecherche für das Hobby ' . $title . '.',
+140                 'hub'=>$hub,
+141                 'hub_slug'=>$hub_slug,
+142                 'main_hub'=>$world_label,
+143                 'main_slug'=>$world_slug,
+144                 'private_bucket_slug'=>$world_slug,
+145                 'normalized'=>$normalized,
+146                 'node_id'=>$id,
+147             );
+148             $product_targets[] = $target;
+149             $business_concepts[] = array(
+150                 'id'=>'concept-' . sanitize_key($slug),
+151                 'title'=>$title,
+152                 'normalized_title'=>self::text($title),
+153                 'target_pages'=>array($target),
+154                 'private_bucket_slugs'=>array($world_slug),
+155                 'hub_slugs'=>array($hub_slug),
+156                 'main_slugs'=>array($world_slug),
+157                 'private_bucket_slug'=>$world_slug,
+158             );
+159             $world_profiles[$world_slug]['phrases'][] = $title;
+160             $world_profiles[$world_slug]['strong_phrases'][] = $title;
+161         }
+162 
+163         $article_targets = array();
+164         foreach ($hobbies as $hobby_id => $hobby) {
+165             $hobby_slug = sanitize_title((string)($hobby['slug'] ?? ''));
+166             $hobby_title = sanitize_text_field((string)($hobby['display_name'] ?? ''));
+167             if ($hobby_slug === '' || $hobby_title === '') { continue; }
+168             $world = self::ancestor($hobby_id, $nodes, static function($n, $nid){ return preg_match('/^core:world:[^:]+$/', (string)$nid) === 1; });
+169             $parent_id = (string)($hobby['parent_id'] ?? '');
+170             $parent = isset($nodes[$parent_id]) ? $nodes[$parent_id] : array();
+171             foreach ((array)($children[$hobby_id] ?? array()) as $node) {
+172                 if ((string)($node['object_type'] ?? '') !== 'category') { continue; }
+173                 $id = (string)($node['node_id'] ?? '');
+174                 $slug = sanitize_title((string)($node['slug'] ?? ''));
+175                 $name = sanitize_text_field((string)($node['display_name'] ?? ''));
+176                 if ($id === '' || $slug === '' || $name === '') { continue; }
+177                 $article_targets[] = array(
+178                     'category_slug'=>$slug,
+179                     'category_name'=>$name,
+180                     'product'=>$hobby_title,
+181                     'product_slug'=>$hobby_slug,
+182                     'hub'=>sanitize_text_field((string)($parent['display_name'] ?? '')),
+183                     'hub_slug'=>sanitize_title((string)($parent['slug'] ?? '')),
+184                     'main_hub'=>sanitize_text_field((string)($world['display_name'] ?? '')),
+185                     'main_slug'=>sanitize_title((string)($world['slug'] ?? '')),
+186                     'theme'=>$name,
+187                     'path'=>implode(' > ', self::path_labels($id, $nodes)),
+188                     'node_id'=>$id,
+189                 );
+190             }
+191         }
+192 
+193         $search_rules = array();
+194         foreach ($worlds as $id => $world) {
+195             $slug = sanitize_title((string)($world['slug'] ?? ''));
+196             $label = sanitize_text_field((string)($world['display_name'] ?? ''));
+197             if ($slug === '' || $label === '') { continue; }
+198             $search_rules[] = array(
+199                 'id'=>$slug,
+200                 'label'=>$label,
+201                 'query'=>$label,
+202                 'target_term_slug'=>$slug,
+203                 'candidate_main_slugs'=>array($slug),
+204                 'candidate_buckets'=>array($slug),
+205                 'private'=>true,
+206                 'business'=>true,
+207                 'active'=>true,
+208             );
+209         }
+210 
+211         foreach ($world_profiles as $slug => &$profile) {
+212             $profile['phrases'] = array_values(array_unique(array_filter($profile['phrases'])));
+213             $profile['strong_phrases'] = array_values(array_unique(array_filter($profile['strong_phrases'])));
+214         }
+215         unset($profile);
+216 
+217         self::$catalog = array(
+218             'schema'=>'hdar-hobby-depot-catalog-v1',
+219             'source_revision'=>(string)($snapshot['revision'] ?? (function_exists('hd_category_registry_revision') ? hd_category_registry_revision() : '')),
+220             'counts'=>array(
+221                 'worlds'=>count($worlds),
+222                 'product_pages'=>count($product_targets),
+223                 'article_categories'=>count($article_targets),
+224                 'business_concepts'=>count($business_concepts),
+225             ),
+226             'search_rules'=>$search_rules,
+227             'product_targets'=>$product_targets,
+228             'article_targets'=>$article_targets,
+229             'private_bucket_profiles'=>$world_profiles,
+230             'business_concepts'=>$business_concepts,
+231             'business_hub_concepts'=>array(),
+232             'hard_negative_markers'=>array(),
+233             'strong_domain_markers'=>array(),
+234             'content_policy'=>array(
+235                 'version'=>'hdar-1',
+236                 'mode'=>'EXACT_OR_STRONG_TARGET_EVIDENCE_FAIL_CLOSED',
+237             ),
+238             'business_supply_contract'=>array(
+239                 'version'=>'hdar-1',
+240                 'required_product_concept_ids'=>array_values(array_map(static function($c){ return (string)$c['id']; }, $business_concepts)),
+241             ),
+242         );
+243         return self::$catalog;
+244     }
+245 }
+SOURCEFILE_ALL_END
+FILE affiliate-portal-router/includes/class-ppar-deal-radar.php bytes 29801 lines 488
+97         if ($slug === '' || !class_exists('HDAR_Hobby_Depot_Source')) { return array(); }
+98         $catalog = HDAR_Hobby_Depot_Source::catalog();
+FILE affiliate-portal-router/includes/trait-ppar-ebay-run.php bytes 148223 lines 2212
+955         $hd_catalog = class_exists('HDAR_Hobby_Depot_Source') ? HDAR_Hobby_Depot_Source::catalog() : null;
+FILE affiliate-portal-router/includes/trait-ppar-ebay.php bytes 651990 lines 9968
+164         if (!class_exists('HDAR_Hobby_Depot_Source')) {
+167         $catalog = HDAR_Hobby_Depot_Source::catalog();
+173             || empty($catalog['business_concepts'])
+694                 (array)($catalog['business_concepts'] ?? array()),
+700                     $primary_page = is_array($concept['target_pages'][0] ?? null) ? $concept['target_pages'][0] : array();
+708                             'product_slug'=>'','product_title'=>'','hub'=>'Private Anzeigen','main_hub'=>'Anzeigenmarkt',
+768             'product_slug'=>'',
+925                 $primary = is_array($concept['target_pages'][0] ?? null) ? $concept['target_pages'][0] : array();
+1001         foreach (array('product'=>'business_concepts','hub'=>'business_hub_concepts') as $kind=>$field) {
+1144         $concept_pool = ($expected_kind === 'product' && $expected_concept) ? array($expected_concept) : (array) ($catalog['business_concepts'] ?? array());
+1166             foreach ((array) ($concept['target_pages'] ?? array()) as $page) {
+1223         $pages=array_values(array_filter((array)($best['target_pages']??array()),'is_array'));
+1232             'product_slug'=>sanitize_title((string)($primary['slug']??'')),
+2268             'product'=>(array)($catalog['business_concepts'] ?? array()),
+2275                 $primary = is_array($concept['target_pages'][0] ?? null) ? $concept['target_pages'][0] : array();
+3023         foreach (array('business_concepts','business_hub_concepts') as $field) {
+3633         foreach((array)($catalog['business_concepts']??array()) as $concept){
+3771             $state['prepare_business_concepts'] = 0;
+3793             $state['prepare_business_concepts'] = absint($state['prepare_business_concepts'] ?? 0) + absint($part['concepts'] ?? 0);
+3812             'concepts'=>absint($state['prepare_business_concepts'] ?? 0),
+4330         $slug=function_exists('get_post_meta')?(string)get_post_meta($listing_id,'_ppar_ebay_product_slug',true):'';
+5660         update_post_meta($listing_id, '_ppar_ebay_product_slug', sanitize_title((string) ($classification['product_slug'] ?? '')));
+5731             'ebay_verified_product_slug'=>sanitize_title((string) ($classification['product_slug'] ?? '')),'ebay_verified_product_concept'=>sanitize_key((string) ($classification['product_concept_id'] ?? '')),'ebay_verified_concept_kind'=>sanitize_key((string) ($classification['concept_kind'] ?? 'product')),'ebay_verified_product_targets'=>array_values((array) ($classification['product_target_slugs'] ?? array())),'ebay_verified_path'=>sanitize_text_field((string) ($classification['path'] ?? ''))
+5780             'product'=>(array)($catalog['business_concepts']??array()),
+5786                 $pages=array_values(array_filter((array)($concept['target_pages']??array()),'is_array'));
+5796                     'product_slug'=>sanitize_title((string)($primary['slug']??'')),
+5803                     'target_pages'=>$pages,'score'=>$score,'evidence_hash'=>$evidence_hash,
+5842         $keys=array(); $product_slugs=(array)($contract['product_target_slugs']??array());
+5846             $slug=sanitize_title((string)($contract['product_slug']??''));
+5852                 if(!is_array($page)||!in_array(sanitize_title((string)($page['slug']??'')),$product_slugs,true)){continue;}
+5856                 if(!is_array($article)||!in_array(sanitize_title((string)($article['product_slug']??'')),$product_slugs,true)){continue;}
+6276             'product_slug'=>$slug,
+6385             'product'=>(array) ($catalog['business_concepts'] ?? array()),
+6391                 $primary = is_array($concept['target_pages'][0] ?? null) ? $concept['target_pages'][0] : array();
+FILE affiliate-portal-router/includes/trait-ppar-idealo.php bytes 124866 lines 1653
+266         if (!class_exists('HDAR_Hobby_Depot_Source')) {
+269         $data = HDAR_Hobby_Depot_Source::catalog();
+272         foreach ((array)($data['business_concepts'] ?? array()) as $concept) {
+286     private function idealo_match_normalize($text) {
+293     private function idealo_match_stem($token) {
+308     private function idealo_match_tokens($text) {
+314         foreach (preg_split('/\s+/', $this->idealo_match_normalize($text)) as $token) {
+322     private function idealo_match_primary_tokens($text) {
+325         $tokens = $this->idealo_match_tokens($text); $out = array();
+333     private function idealo_match_distinct_tokens($text, $primary = false) {
+336         $tokens = $primary ? $this->idealo_match_primary_tokens($text) : $this->idealo_match_tokens($text);
+342     private function idealo_match_index() {
+349             $core = $this->idealo_match_distinct_tokens((string) ($concept['title'] ?? ''), true);
+350             if (!$core) { $core = $this->idealo_match_distinct_tokens((string) ($concept['title'] ?? ''), false); }
+351             $stems = array(); foreach ($core as $token) { $stems[$this->idealo_match_stem($token)] = true; }
+353             $first_page = is_array(($concept['target_pages'] ?? null)) && !empty($concept['target_pages']) && is_array($concept['target_pages'][0]) ? $concept['target_pages'][0] : array();
+354             $hub = array(); foreach ($this->idealo_match_distinct_tokens((string) ($first_page['hub'] ?? '')) as $token) { $hub[$this->idealo_match_stem($token)] = true; }
+355             $main = array(); foreach ($this->idealo_match_distinct_tokens((string) ($first_page['main_hub'] ?? '')) as $token) { $main[$this->idealo_match_stem($token)] = true; }
+356             $all = array(); foreach ($this->idealo_match_distinct_tokens((string) ($concept['title'] ?? '')) as $token) { $all[$this->idealo_match_stem($token)] = true; }
+358             $entry = array('id'=>$id,'title'=>(string)($concept['title']??''),'stems'=>$stems,'hub_stems'=>array_keys($hub),'main_stems'=>array_keys($main),'rel_stems'=>$rel,'main_hub'=>(string)($first_page['main_hub']??''),'hub'=>(string)($first_page['hub']??''),'target_pages'=>(array)($concept['target_pages']??array()));
+362         if (!$concepts || count($concepts) !== count((array)$catalog['_idealo_required_concepts'])) { return $cache = new WP_Error('idealo_match_index_incomplete', 'Matcher konnte nicht alle Hobby-Depot-Recherchekonzepte binden.'); }
+371     private function idealo_match_blocked($text, $catalog) {
+374             $term = $this->idealo_match_normalize($term);
+381     private function idealo_match_context_score($concept, $title_n, $main_n, $sub_n, $catalog) {
+383         if ($this->idealo_match_blocked($full, $catalog)) { return 0; }
+386         foreach ($this->idealo_match_tokens($title_n) as $token) { $title_stems[$this->idealo_match_stem($token)] = true; }
+394         foreach ($this->idealo_match_tokens($main_n . ' ' . $sub_n) as $token) { $category_stems[$this->idealo_match_stem($token)] = true; }
+403     private function idealo_match_feed_row_to_concept($row) {
+404         $mi = $this->idealo_match_index(); if (is_wp_error($mi)) { return $mi; }
+406         $primary = $this->idealo_match_primary_tokens($title); if (!$primary) { return array('status'=>'none'); }
+407         $product_stems = array(); foreach ($primary as $token) { $product_stems[$this->idealo_match_stem($token)] = true; }
+410         $title_n=$this->idealo_match_normalize($title); $main_n=$this->idealo_match_normalize((string)($row['main_category']??'')); $sub_n=$this->idealo_match_normalize((string)($row['sub_category']??''));
+411         $category_stems=array(); foreach ($this->idealo_match_tokens($main_n.' '.$sub_n) as $token) { $category_stems[]=$this->idealo_match_stem($token); }
+412         $full_title_stems=array(); foreach ($this->idealo_match_tokens($title) as $token) { $full_title_stems[]=$this->idealo_match_stem($token); }
+417             $context=$this->idealo_match_context_score($concept,$title_n,$main_n,$sub_n,$mi['catalog']); if ($context<=0) { $context_rejected=true; continue; }
+418             $phrase=$this->idealo_match_normalize(implode(' ',$this->idealo_match_primary_tokens((string)$concept['title']))); $pt=$this->idealo_match_normalize(implode(' ',$primary));
+624         $mi=$this->idealo_match_index(); if (is_wp_error($mi)) { $this->idealo_stream_close($stream); return $mi; }
+631             $match=$this->idealo_match_feed_row_to_concept($row); if (is_wp_error($match)) { $this->idealo_stream_close($stream); return $match; }
+634             $row['__idealo_concept_id']=$concept_id; $row['__idealo_match_score']=(string)absint($match['score']??0); $row['__idealo_context_score']=(string)absint($match['context']??0); $row['__currency_eur']='EUR'; $row['__programme_external_id']=sanitize_text_field((string)($this->idealo_settings()['api_last_advertiser_id']??'')); $row['__programme_name']='idealo DE'; $row['__price']=isset($row['price'])?(string)$row['price']:''; $row['__image_url']=$this->idealo_direct_image_url((string)$row
+645         $parsed=array('headers'=>array_merge($headers,array('__idealo_concept_id','__idealo_match_score','__idealo_context_score','__currency_eur','__programme_external_id','__programme_name','__price','__image_url')),'mapping'=>$mapping,'delimiter'=>',','rows'=>$rows);
+657     private function idealo_target_keys_for_product_slug($product_slug) {
+658         $product_slug=sanitize_title((string)$product_slug); if ($product_slug==='') { return array(); }
+659         $keys=array('page:'.$product_slug); $catalog=$this->idealo_portal_supply_catalog();
+662                 if (!is_array($page)||sanitize_title((string)($page['slug']??''))!==$product_slug) { continue; }
+666                 if (!is_array($article)||sanitize_title((string)($article['product_slug']??''))!==$product_slug) { continue; }
+675         foreach ((array)($concept['target_pages']??array()) as $page) {
+678             $keys=array_merge($keys,$this->idealo_target_keys_for_product_slug($slug));
+761         $match=is_numeric($payload['__idealo_match_score']??null)?(float)$payload['__idealo_match_score']:0.0;
+769         $mi=$this->idealo_match_index(); if (is_wp_error($mi)) { return $mi; }
+810                 $rank=$row['_rank']; $match_score=isset($payload['__idealo_match_score'])?(int)$payload['__idealo_match_score']:0; $campaign['priority']=max(40,min(95,55+(int)min(40,floor($match_score/10)))); $campaign['label']='idealo · Affiliate'; $campaign['title']=$title; $campaign['description']=''; $campaign['button_text']='Bei idealo vergleichen';
+813                 $post_id=absint($saved); update_post_meta($post_id,'_ppar_idealo_auto',1); update_post_meta($post_id,'_ppar_idealo_external_key',$external_key); update_post_meta($post_id,'_ppar_idealo_concept_id',$concept_id); update_post_meta($post_id,'_ppar_idealo_target_slugs',wp_json_encode(array_values(array_unique(array_filter(array_map(static function($p){return is_array($p)?sanitize_title((string)($p['slug']??'')):'';},(array)($concept['target_pages']??array())))))));
+1420         $mi = $this->idealo_match_index();
+1435             $match=$this->idealo_match_feed_row_to_concept($row);
+1469         $map=$this->idealo_match_index();
+1513         $catalog=$this->idealo_match_index();
+FILE affiliate-portal-router/includes/trait-ppar-output-objects.php bytes 236399 lines 3662
+229         if (class_exists('HDAR_Hobby_Depot_Source')) {
+230             $hdar_catalog = HDAR_Hobby_Depot_Source::catalog();
+2875             update_post_meta($campaign_id, '_ppar_ebay_product_slug', sanitize_title((string) ($payload['ebay_verified_product_slug'] ?? '')));
