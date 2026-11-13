@@ -1,0 +1,91 @@
+name: HAB RC36 audit packed real slots before one owner format solution
+on:
+  push:
+    branches: [hab-affiliate-rc36-slot-one-pass-20261113]
+    paths:
+      - .github/workflows/hab-rc36-slot-audit.yml
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and retest complete RC23–RC34 chain; no shortcuts
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          python3 "$R/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/build_rc24.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/qa_rc24.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/build_rc25.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/qa_rc25.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/build_rc26.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/qa_rc26.py"
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/build_rc27.py"
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/qa_rc27.py"
+          python3 "$R/AFFILIATE/RC28_CATALOG_KISS/build_rc28.py"
+          python3 "$R/AFFILIATE/RC28_CATALOG_KISS/qa_rc28.py"
+          python3 "$R/AFFILIATE/RC29_PRODUCT_NAMES_LEAF_CONTRACT/build_rc29.py"
+          python3 "$R/AFFILIATE/RC29_PRODUCT_NAMES_LEAF_CONTRACT/qa_rc29.py"
+          python3 "$R/AFFILIATE/RC30_ONE_LABEL_BULLETS/build_rc30.py"
+          python3 "$R/AFFILIATE/RC30_ONE_LABEL_BULLETS/qa_rc30.py"
+          python3 "$R/AFFILIATE/RC31_INSURANCE_CASCADE/build_rc31.py"
+          python3 "$R/AFFILIATE/RC31_INSURANCE_CASCADE/qa_rc31.py"
+          python3 "$R/AFFILIATE/RC33_ONE_DECISION/build_rc33.py"
+          python3 "$R/AFFILIATE/RC33_ONE_DECISION/qa_rc33.py"
+          python3 "$R/AFFILIATE/RC33_ONE_DECISION/qa_materialize_rc33.py"
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" /tmp/RC33_BASE.zip
+          python3 "$R/AFFILIATE/RC34_KISS_DIAG/build_rc34.py"
+          python3 "$R/AFFILIATE/RC34_KISS_DIAG/qa_rc34.py"
+          python3 "$R/AFFILIATE/RC33_ONE_DECISION/qa_materialize_rc33.py"
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          from hashlib import sha256
+          R=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ')
+          p=R/'PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          with ZipFile('/tmp/RC33_BASE.zip') as a, ZipFile(p) as b:
+            changed={n for n in a.namelist() if a.read(n)!=b.read(n)}
+            wanted={'affiliate-portal-router/affiliate-portal-router.php','affiliate-portal-router/readme.txt','affiliate-portal-router/includes/trait-ppar-output-objects.php','affiliate-portal-router/includes/trait-ppar-creative-library.php'}
+            assert changed==wanted,changed
+            for unchanged in ['assets/frontend.css','includes/trait-ppar-idealo.php','includes/trait-ppar-tariff-tools.php','includes/trait-ppar-automation-suite.php','includes/class-ppar-hab-bewahr-bridge.php']:
+              assert a.read('affiliate-portal-router/'+unchanged)==b.read('affiliate-portal-router/'+unchanged),unchanged
+          print('HAB_RC34_ONLY_SINGLE_EXISTING_ROUTING_AND_LOGGING_PATH_CHANGED_PASS',p.stat().st_size,sha256(p.read_bytes()).hexdigest())
+          PY
+      - name: Extend exactly the same import evidence reader (RC35)
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          python3 "$R/AFFILIATE/RC35_HTML_LINK_KISS/build_rc35.py"
+          python3 "$R/AFFILIATE/RC35_HTML_LINK_KISS/qa_rc35.py"
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          p=Path("protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip")
+          with ZipFile(p) as z:
+            assert z.testzip() is None
+            assert len(z.namelist())==36
+            assert b"Version: 0.1.32-rc35" in z.read("affiliate-portal-router/affiliate-portal-router.php")
+          print("RC35_COMPLETE_ARCHIVE_PASS")
+          PY
+
+      - name: Inspect all actual design slots and contexts in packed plugin
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re
+          z=ZipFile("protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip")
+          for name in z.namelist():
+            if not name.endswith(".php"):continue
+            s=z.read(name).decode(errors="replace")
+            if any(x in s for x in ("ppar_affiliate_slot_matrix","product_after_category_tiles","output_no_design_slot","Kein realer Designslot")):
+              print("\nFILE",name,"chars",len(s))
+              for term in ("ppar_affiliate_slot_matrix","function hb_insurance_scope","function output_format_slot","function hb_slot","function register_slot"):
+                for m in list(re.finditer(re.escape(term),s))[:3]:
+                  p=m.start()
+                  print("\nMATCH",term,"at",p,"\n",s[max(0,p-700):min(len(s),p+5700)])
+          PY
