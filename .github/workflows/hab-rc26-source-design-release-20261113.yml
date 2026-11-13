@@ -72,7 +72,8 @@ jobs:
                   border:getComputedStyle(c).borderTopWidth,
                   buttons:Array.from(c.querySelectorAll('.ppar-banner-offer-button,.ppar-banner-button')).map(b=>{
                     const s=getComputedStyle(b);
-                    return {radius:s.borderTopLeftRadius,color:s.color,bg:s.backgroundColor,inline:b.getAttribute('style'),element:b.outerHTML.slice(0,550),priority:b.style.getPropertyPriority('background')};
+                    const matched=[];for(const sheet of document.styleSheets){try{for(const rule of sheet.cssRules){if(rule.selectorText && b.matches(rule.selectorText) && /background/i.test(rule.style.cssText)){matched.push({sel:rule.selectorText.slice(0,260),bg:rule.style.getPropertyValue('background'),color:rule.style.getPropertyValue('background-color'),important:rule.style.getPropertyPriority('background')||rule.style.getPropertyPriority('background-color')});}}}catch(e){}};
+                    return {radius:s.borderTopLeftRadius,color:s.color,bg:s.backgroundColor,inline:b.getAttribute('style'),element:b.outerHTML.slice(0,250),priority:b.style.getPropertyPriority('background'),hover:b.matches(':hover'),matched:matched.slice(-12)};
                   })
                 }));
                 return {width:innerWidth,cards:d,margin:getComputedStyle(grid).marginBottom,
