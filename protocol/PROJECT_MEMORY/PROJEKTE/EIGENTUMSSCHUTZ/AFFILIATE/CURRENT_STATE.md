@@ -1,3 +1,19 @@
+## 13.11.2026 – RC36 TARIFCHECK-BANNER EINZIGE FORMATWAHL / LOKALE PHP-ABNAHME GRÜN
+
+**Aktueller Hab-&-Bewahr Banner-Teststand:** `0.1.33-rc36`, komplette `HAB_Bewahr_Affiliate_RC36_TEST.zip`, 2.352.417 Bytes, SHA256 `c209d2ab37b889bd901e4aa665dde6ecce94e43f3541a2458f39e7e525a42dc4`, Release `hab-affiliate-rc36-one-format-decision-20261113`. Original-PHP-Gesamttest `https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43466588171` **SUCCESS**.
+
+**Letzter echter Nutzer-Screenshot mit installiertem RC35:** 160 Tarifcheck-Banner, 20 Ausgabe aktiv, 60 "Kein realer Designslot passt zu Zielkontext und Bildformat", 80 "Kein fachlich freigegebener Versicherungszweig gespeichert". Dies ist **kein** Beweis, dass RC36 die echten 160 bereits freigibt. 20/60/80 sind getrennte **Ergebnisse derselben Regeln** an verschiedenen Originalen, keine verschiedenen fachlichen Prüfverfahren.
+
+**Quellennachweis:** Die bestehende Hab-Brücke `includes/class-ppar-hab-bewahr-bridge.php::slot_matrix()` ließ in `hub_after_cards` und `product_after_category_tiles` nur breite Formate zu (Seitenverhältnis 2,5–12); der echte Versicherungs-Renderer akzeptierte aber 300×250 und 125×125 für passende Versicherungsplätze. Ein späterer `campaign_matches_contract_slot_rule()` testete die Geometrie nochmals unabhängig. Das widersprach der bereits beim Import möglichen fachlichen Bestätigung.
+
+**RC36 nur an vier HAB-Dateien geändert:** Verifizierte Versicherungs-Originalbanner 728×90, 468×60, 300×250 und 125×125 auf dem **bereits vorhandenen** Hub-/R2-/R3-/Kategorie-Bannerplatz nach einer einzigen Importentscheidung zugeordnet, ohne neue Slots, keine gestreckten Motive, keine Fachentscheidung im Frontend; dieses liest bestehende freigegebene Platzierungen. Hohe Skyscraper/zu kleine Vorlagen werden nicht blind erlaubt. Originalbild/Tracking/Veto bleiben geprüft. Einmaliger Nachlauf der bestehenden 60er-Batches mit neuer sicherer Option, kein Reimport; andere sechs Schutzwelten, Pferde Atelier/Hobby Depot unverändert.
+
+**Beweis:** Alle Original-Dateien aus fertiger ZIP: 16 Format-/Kontextfälle einschließlich technischer Materialisierung, negative fremde Seite und unzulässige Formate, finale gespeicherte Frontend-Platzverwendung, ursprüngliche aktive Kampagnenerzeugung, 25 PHP-Syntaxprüfungen und vollständige RC23–RC35 Provider-Regressionen bestanden. GitHub-Test mit simulierten WordPress-Daten, **kein echter private-Live-160-Datensatz**.
+
+**NEXT ACTION:** RC36 als vorhandenes HAB-004 ersetzen; Affiliate-Zentrale → Werbemittel & Ausspielung dreimal öffnen (max. 60 pro Besuch) und neuen Ergebnis-Screenshot liefern. Prüfen, ob ehemals 60 Formatfehler zurückgehen und wie viele der 80 fachlichen Zuordnungen weiter fehlen; erst auf dieser echten Grundlage weitere zielgerichtete Änderungen. Keine Banner neu importieren, keine Verbreiterung in andere Welten, keine neue Engine, kein anderer Pluginumbau.
+
+---
+
 ## 13.11.2026 – RC34: KISS, EINE PARTNERERKENNUNG + ECHTES BANNER-FEHLERPROTOKOLL
 
 **NEUESTE GRÜN GEPRÜFTE HAB-004 TESTVERSION:** `0.1.31-rc34` – `HAB_Bewahr_Affiliate_RC34_TEST.zip`, 2.351.032 Bytes, SHA256 `bdd7ba78da62995768ee3c476f60fa7c18352161c7d6f9b5bade35978853cb62`, GitHub Release `hab-affiliate-rc34-single-partner-gate-diagnosis-20261113`; **Actions 43454290216 SUCCESS**, alle Altversionen RC23–RC34 komplett neu gebaut, 25 PHP-Lints, PHP-E2E und altbewährte Idealo-/eBay-/Mehrhändlertests bestanden.
