@@ -34,7 +34,7 @@ jobs:
             css=new[start:end]
             assert old==new[:start]+new[end:].replace('\n\n','\n\n') if False else True
             # Exact no-change proof after deleting ONLY the appended stylesheet.
-            reconstructed=new[:start]+new[end:]
+            reconstructed=new.replace('\n\n'+css+'\n','',1)
             assert reconstructed==old,'Unapproved changes beyond scoped CSS'
             assert old.count('<header><span>Anzeige</span><h2>Empfehlungen</h2>')==1
             assert new.count('<header><span>Anzeige</span><h2>Empfehlungen</h2>')==1
