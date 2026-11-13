@@ -1,0 +1,70 @@
+name: HD009 0.1.34 safe feed comparison build and hard QA
+on:
+  push:
+    branches: [hobbyroom/hd009-dual-feed-safe-compare-20261113]
+    paths: [.github/workflows/hd009_0134_feed_compare_qa.yml]
+permissions:
+  contents: read
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild complete HD009 from exact original current 0.1.33
+        run: |
+          python3 scripts/hd009_0134_safe_feed_preview_build.py /tmp/HD009_0.1.34_FEEDVERGLEICH_CANDIDATE.zip
+      - name: Lint every original PHP file, verify original importer and all unrelated PHP byte unchanged
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile,hashlib,re
+          p=Path('/tmp/HD009_0.1.34_FEEDVERGLEICH_CANDIDATE.zip')
+          o=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip')
+          with zipfile.ZipFile(o) as a,zipfile.ZipFile(p) as b:
+            assert len(a.namelist())==len(b.namelist())==41
+            assert a.testzip() is None and b.testzip() is None
+            assert a.namelist()==b.namelist()
+            diff=[n for n in a.namelist() if a.read(n)!=b.read(n)]
+            t='affiliate-portal-router/includes/trait-ppar-idealo.php'
+            main='affiliate-portal-router/hobby-depot-affiliate-router.php'
+            assert set(diff)=={t,main},diff
+            old=a.read(t).decode();new=b.read(t).decode()
+            begin=re.compile(r'^    (?:private|public|protected) function [a-zA-Z_]+\(',re.M)
+            def extract(s,key):
+              start=s.index(key);next=begin.search(s,start+len(key))
+              return s[start:next.start()] if next else s[start:]
+            protected=[
+              'private function idealo_import_feed_file(',
+              'private function idealo_materialize_campaigns(',
+              'private function idealo_match_feed_row_to_concept(',
+              'private function idealo_match_index(',
+              'private function idealo_find_feed_metadata(',
+              'private function hd_idealo_feed_download_url(',
+              'private function idealo_download_feed_to_temp(',
+              'private function idealo_refresh_remote_feed(',
+              'private function idealo_campaigns_should_be_active(',
+              'public function idealo_campaign_publicly_allowed(',
+              'public function idealo_provider_access_save(',
+              'public function idealo_provider_access_test(',
+              'private function idealo_queue_manual_refresh(',
+            ]
+            for key in protected:
+              assert extract(old,key)==extract(new,key),'UNAPPROVED EXISTING METHOD CHANGE: '+key
+            fragment=new[new.index("    private function hd_idealo_preview_save"):new.index("    public function idealo_render_sync_card(")]
+            for forbidden in ['network_sync_upsert_products(', 'save_campaign_record(', 'idealo_materialize_campaigns(', 'update_post_meta(', 'wp_insert_post(', 'self::OPTION_NETWORK_IDEALO,']:
+              assert forbidden not in fragment,forbidden
+            assert 'idealo_find_feed_metadata($other)' in fragment
+            assert 'idealo_match_feed_row_to_concept($row)' in fragment
+            assert "$other['feed_id']='2901'" in fragment
+            print('UNALTERED_IMPORTER_AND_OUTPUT_METHODS',len(protected))
+            print('SINGLE_ORIGINAL_ZIP_41_CRC_PASS')
+            print('DIFF_ONLY',diff)
+            for name in b.namelist():
+              if name.endswith('.php'):
+                x=Path('/tmp/hd009_0134')/name
+                x.parent.mkdir(parents=True,exist_ok=True)
+                x.write_bytes(b.read(name))
+            print('PHP_SOURCE_COUNT',len(list(Path('/tmp/hd009_0134').rglob('*.php'))))
+          PY
+          find /tmp/hd009_0134 -name '*.php' -type f -print0 | xargs -0 -n1 php -l
