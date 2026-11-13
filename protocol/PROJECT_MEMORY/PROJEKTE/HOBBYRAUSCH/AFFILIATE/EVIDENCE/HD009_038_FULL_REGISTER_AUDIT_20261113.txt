@@ -1,0 +1,722 @@
+# HD009 – full real HD007 equipment audit (no modified data)
+Original hobby records: 862
+Nonempty: 862
+Currently accepted first compounds: 8
+ACCEPTED | Airbrush | Airbrushpistole
+ACCEPTED | Backgammon | Backgammonbrett
+ACCEPTED | Carrom | Carrombrett
+ACCEPTED | Hydroponik | Hydroponiksystem
+ACCEPTED | Häkeln | Häkelnadel
+ACCEPTED | Makramee | Makrameegarn
+ACCEPTED | Modellraketen | Modellraketenbausatz
+ACCEPTED | Wasserkefir | Wasserkefirkristalle
+REJECTED_SAMPLE 100
+REJECTED | 3D-Bogenschießen | Bogen
+REJECTED | 3D-Druck | 3D-Drucker
+REJECTED | 3D-Scanning | Scanner oder Smartphone
+REJECTED | Aeroponik | Aeroponik-System
+REJECTED | Air-Dry Clay | Air-Dry Clay
+REJECTED | Airbrush-Modellbau | Modell
+REJECTED | Alabasterschnitzen | Alabaster
+REJECTED | Algenkultur | Kulturgefäß
+REJECTED | alte Brettspiele | Regalplatz
+REJECTED | alte Computer | Platz
+REJECTED | alte Gemüsesorten | Saatgut
+REJECTED | alte Handschriften entziffern | Lesematerial
+REJECTED | alte Handwerksgeräte restaurieren | Werkbank
+REJECTED | alte HiFi-Geräte | Regal- oder Stellfläche
+REJECTED | alte Kameras reparieren | Feinwerkzeug
+REJECTED | alte Radios restaurieren | Messgerät
+REJECTED | alte Schlüssel | Aufbewahrung
+REJECTED | alte Schreibmaschinen | Stellfläche
+REJECTED | alte Spielekonsolen restaurieren | Werkzeug
+REJECTED | alte Telefone | Regalplatz
+REJECTED | alte Werbung | Archivhüllen
+REJECTED | alte Werkzeuge | Lagerplatz
+REJECTED | Altered Books | Ausgedientes Buch
+REJECTED | Amateur Radio Direction Finding | Peilempfänger
+REJECTED | Amateurastronomie | Freier Himmel
+REJECTED | Amateurfunk | Funkgerät
+REJECTED | Ameisenfarmen | Formicarium
+REJECTED | Ameisenhaltung | Formicarium
+REJECTED | Angeln | Rute
+REJECTED | Anspitzer | Kleine Aufbewahrung
+REJECTED | Anthotypie | Pflanzenmaterial
+REJECTED | Aquaristik | Aquarium
+REJECTED | Aquascaping | Aquarium
+REJECTED | Architekturmodellbau | Karton
+REJECTED | Arduino | Arduino-Board
+REJECTED | Artemia-Zucht | Behälter
+REJECTED | Artist Trading Cards | Kartenmaterial
+REJECTED | Asselhaltung | Behälter
+REJECTED | Astrofotografie | Kamera
+REJECTED | Automaten | Viel Stellfläche
+REJECTED | Automatenfiguren | Aufbewahrungsboxen oder Vitrine und Informationen zu Serien und Herkunft.
+REJECTED | Automodellbau | Modellbausatz
+REJECTED | Axtwurf als Sport | Wurfaxt
+REJECTED | B-Movie-Poster | Planmappe oder Rahmen
+REJECTED | Balance Board | Balance Board und eine freie
+REJECTED | Banknoten | Schutzhüllen oder Album und verlässliche Bestimmungshilfen.
+REJECTED | Baoding Balls | Ein Paar Baoding-Kugeln und ein paar Minuten freie Hand.
+REJECTED | Barometer | Regal- oder Wandplatz
+REJECTED | Batik | Stoff
+REJECTED | BattleBots-Modellbau | Werkstatt
+REJECTED | Baumklettern | Kletterausrüstung
+REJECTED | Baumzucht aus Samen | Saatgut
+REJECTED | Bean-to-Bar-Schokolade | Kakaobohnen
+REJECTED | Benchmark Hunting | Karten oder Datenbankzugang
+REJECTED | Bernstein suchen | Wetterfeste Kleidung
+REJECTED | Besenbinden | Reisig oder Fasern
+REJECTED | Betonkunst | Betonmischung
+REJECTED | Betonmöbel | Große Arbeitsfläche
+REJECTED | Beyblade-Tuning | Beyblades
+REJECTED | Bier brauen | Braugefäße
+REJECTED | Bierdeckel | Sammelboxen oder Alben und eine einfache Ordnungssystematik.
+REJECTED | Bikepacking | Zuverlässiges Fahrrad
+REJECTED | Bioactive Terrariums | Terrarium
+REJECTED | Bioakustik | Audiorecorder oder Mikrofon
+REJECTED | Biosphären bauen | Glasgefäß
+REJECTED | Biotop-Aquarien | Aquarium
+REJECTED | Birding | Fernglas
+REJECTED | Bismut-Kristalle züchten | Bismut
+REJECTED | Bismut-Kristallzucht | Bismut
+REJECTED | Bitters herstellen | Gläser
+REJECTED | Blasrohrsport | Sportblasrohr
+REJECTED | Blechschilder | Wand- oder Lagerfläche
+REJECTED | Blindfold Cubing | Speedcube
+REJECTED | Blitzfotografie | Kamera
+REJECTED | Bodenanalyse | Probengerät oder Schaufel
+REJECTED | Bodenproben sammeln | Kleine Behälter
+REJECTED | Bog Snorkelling | Schnorchel
+REJECTED | Bogenschießen | Bogen
+REJECTED | Bonbons herstellen | Topf
+REJECTED | Bonsai | Bonsai oder Jungbaum
+REJECTED | Bonsai aus Samen | Saatgut
+REJECTED | Bonsai-Chili | Chilipflanze
+REJECTED | Bonsai-Landschaften | Mehrere Bonsai oder Jungpflanzen
+REJECTED | Book Nooks | Bausatz oder Material
+REJECTED | Boomerangwerfen | Geeigneten Bumerang
+REJECTED | Bossaball | Spezielle Bossaball-Anlage
+REJECTED | Bottle Digging | Erlaubten Fundplatz
+REJECTED | Bouldern | Kletterschuhe
+REJECTED | Brandmalerei | Brennstift
+REJECTED | Brettchenweben | Webbrettchen
+REJECTED | Briefmarken sammeln | Album oder Steckkarten
+REJECTED | Briefpapier herstellen | Papier
+REJECTED | Bromelien | Bromelie
+REJECTED | Brotbacken mit Spezialöfen | Mehl
+REJECTED | Bubble Soccer | Spielfläche
+REJECTED | Buchbinden | Papier
+REJECTED | Buchkunst | Papier
+REJECTED | Buchrestaurierung | Feinwerkzeug
+REJECTED | Buhurt | Zugelassene Rüstung
+REJECTED | Bushcraft | Outdoor-Kleidung
+=== HD007_GET
+79         }
+80     }
+81     public static function get($registry_id) {
+82         self::index();
+83         return isset(self::$by_id[$registry_id]) ? self::$by_id[$registry_id] : null;
+84     }
+85     public static function get_by_name($name) {
+86         self::index();
+87         return isset(self::$by_name[$name]) ? self::$by_name[$name] : null;
+88     }
+89     public static function count() { return count(self::records()); }
+90     public static function ready() {
+91         $rows = self::records();
+92         if (count($rows) !== 862) return false;
+93         foreach ($rows as $row) {
+94             if (($row['classification_status'] ?? '') === 'PENDING_REVIEW') return false;
+95             if (($row['result_profile']['status'] ?? '') !== 'REVIEWED') return false;
+96             if (!isset($row['traits']) || count($row['traits']) !== 57) return false;
+97         }
+98         return true;
+99     }
+100     private static $articles = null;
+101     private static $image_map = null;
+102 
+103     public static function articles() {
+104         if (self::$articles === null) {
+105             self::$articles = self::read_json('hobby-articles-v1.json');
+106             if (!is_array(self::$articles)) self::$articles = array();
+107         }
+108         return self::$articles;
+109     }
+110 
+111     public static function article($registry_id) {
+112         $all = self::articles();
+113         return isset($all[$registry_id]) && is_array($all[$registry_id]) ? $all[$registry_id] : null;
+114     }
+115 
+116     public static function image_map() {
+83         return isset(self::$by_id[$registry_id]) ? self::$by_id[$registry_id] : null;
+84     }
+85     public static function get_by_name($name) {
+86         self::index();
+87         return isset(self::$by_name[$name]) ? self::$by_name[$name] : null;
+88     }
+89     public static function count() { return count(self::records()); }
+90     public static function ready() {
+91         $rows = self::records();
+92         if (count($rows) !== 862) return false;
+93         foreach ($rows as $row) {
+94             if (($row['classification_status'] ?? '') === 'PENDING_REVIEW') return false;
+95             if (($row['result_profile']['status'] ?? '') !== 'REVIEWED') return false;
+96             if (!isset($row['traits']) || count($row['traits']) !== 57) return false;
+97         }
+98         return true;
+99     }
+100     private static $articles = null;
+101     private static $image_map = null;
+102 
+103     public static function articles() {
+104         if (self::$articles === null) {
+105             self::$articles = self::read_json('hobby-articles-v1.json');
+106             if (!is_array(self::$articles)) self::$articles = array();
+107         }
+108         return self::$articles;
+109     }
+110 
+111     public static function article($registry_id) {
+112         $all = self::articles();
+113         return isset($all[$registry_id]) && is_array($all[$registry_id]) ? $all[$registry_id] : null;
+114     }
+115 
+116     public static function image_map() {
+117         if (self::$image_map === null) {
+118             self::$image_map = self::read_json('hobby-image-map-v1.json');
+119             if (!is_array(self::$image_map)) self::$image_map = array();
+120         }
+64         return is_array($data) ? $data : array();
+65     }
+66     public static function records() {
+67         $r = self::register();
+68         return isset($r['records']) && is_array($r['records']) ? $r['records'] : array();
+69     }
+70     private static function index() {
+71         if (self::$by_id !== null) return;
+72         self::$by_id = array(); self::$by_name = array();
+73         foreach (self::records() as $row) {
+74             if (!is_array($row)) continue;
+75             $id = isset($row['registry_id']) ? (string)$row['registry_id'] : '';
+76             $name = isset($row['canonical_name']) ? (string)$row['canonical_name'] : '';
+77             if ($id !== '') self::$by_id[$id] = $row;
+78             if ($name !== '') self::$by_name[$name] = $row;
+79         }
+80     }
+81     public static function get($registry_id) {
+82         self::index();
+83         return isset(self::$by_id[$registry_id]) ? self::$by_id[$registry_id] : null;
+84     }
+85     public static function get_by_name($name) {
+86         self::index();
+87         return isset(self::$by_name[$name]) ? self::$by_name[$name] : null;
+88     }
+89     public static function count() { return count(self::records()); }
+90     public static function ready() {
+91         $rows = self::records();
+92         if (count($rows) !== 862) return false;
+93         foreach ($rows as $row) {
+94             if (($row['classification_status'] ?? '') === 'PENDING_REVIEW') return false;
+95             if (($row['result_profile']['status'] ?? '') !== 'REVIEWED') return false;
+96             if (!isset($row['traits']) || count($row['traits']) !== 57) return false;
+97         }
+98         return true;
+99     }
+100     private static $articles = null;
+101     private static $image_map = null;
+52     public static function active_data_dir() { return self::data_dir(); }
+53     private static function data_path($name) { return self::data_dir() . '/' . $name; }
+54     private static function read_json($name) { return self::decode_file(self::data_path($name)); }
+55     public static function register() {
+56         if (self::$register === null) {
+57             self::$register = self::read_json('hobby-register.json');
+58             if (!is_array(self::$register)) self::$register = array('records'=>array());
+59         }
+60         return self::$register;
+61     }
+62     public static function schema() {
+63         $data = self::read_json('traits-schema.json');
+64         return is_array($data) ? $data : array();
+65     }
+66     public static function records() {
+67         $r = self::register();
+68         return isset($r['records']) && is_array($r['records']) ? $r['records'] : array();
+69     }
+70     private static function index() {
+71         if (self::$by_id !== null) return;
+72         self::$by_id = array(); self::$by_name = array();
+73         foreach (self::records() as $row) {
+74             if (!is_array($row)) continue;
+75             $id = isset($row['registry_id']) ? (string)$row['registry_id'] : '';
+76             $name = isset($row['canonical_name']) ? (string)$row['canonical_name'] : '';
+77             if ($id !== '') self::$by_id[$id] = $row;
+78             if ($name !== '') self::$by_name[$name] = $row;
+79         }
+80     }
+81     public static function get($registry_id) {
+82         self::index();
+83         return isset(self::$by_id[$registry_id]) ? self::$by_id[$registry_id] : null;
+84     }
+85     public static function get_by_name($name) {
+86         self::index();
+87         return isset(self::$by_name[$name]) ? self::$by_name[$name] : null;
+88     }
+89     public static function count() { return count(self::records()); }
+=== HD007_ENTRY
+13     if (!function_exists('hd_hobbyregister_records')) { function hd_hobbyregister_records() { return HD_Hobbyregister_Core_Stable127::records(); } }
+14     if (!function_exists('hd_hobbyregister_get')) { function hd_hobbyregister_get($registry_id) { return HD_Hobbyregister_Core_Stable127::get($registry_id); } }
+15     if (!function_exists('hd_hobbyregister_get_by_name')) { function hd_hobbyregister_get_by_name($name) { return HD_Hobbyregister_Core_Stable127::get_by_name($name); } }
+16     if (!function_exists('hd_hobbyregister_finder_rows')) { function hd_hobbyregister_finder_rows() { return HD_Hobbyregister_Core_Stable127::finder_rows(); } }
+17     if (!function_exists('hd_hobbyregister_ready')) { function hd_hobbyregister_ready() { return HD_Hobbyregister_Core_Stable127::ready(); } }
+18 }
+19 if (function_exists('add_action')) { add_action('plugins_loaded', 'hd_hobbyregister_127_register_compat_api', PHP_INT_MAX); }
+20 else { hd_hobbyregister_127_register_compat_api(); }
+11 HD_Hobbyregister_Frontend_Stable127::boot();
+12 function hd_hobbyregister_127_register_compat_api() {
+13     if (!function_exists('hd_hobbyregister_records')) { function hd_hobbyregister_records() { return HD_Hobbyregister_Core_Stable127::records(); } }
+14     if (!function_exists('hd_hobbyregister_get')) { function hd_hobbyregister_get($registry_id) { return HD_Hobbyregister_Core_Stable127::get($registry_id); } }
+15     if (!function_exists('hd_hobbyregister_get_by_name')) { function hd_hobbyregister_get_by_name($name) { return HD_Hobbyregister_Core_Stable127::get_by_name($name); } }
+16     if (!function_exists('hd_hobbyregister_finder_rows')) { function hd_hobbyregister_finder_rows() { return HD_Hobbyregister_Core_Stable127::finder_rows(); } }
+17     if (!function_exists('hd_hobbyregister_ready')) { function hd_hobbyregister_ready() { return HD_Hobbyregister_Core_Stable127::ready(); } }
+18 }
+19 if (function_exists('add_action')) { add_action('plugins_loaded', 'hd_hobbyregister_127_register_compat_api', PHP_INT_MAX); }
+20 else { hd_hobbyregister_127_register_compat_api(); }
+=== IDEALO_MATCH
+320     }
+321 
+322     private function idealo_match_primary_tokens($text) {
+323         static $bounds = null;
+324         if ($bounds === null) { $bounds = array_fill_keys(array('fur','fuer','for','im','in','am','an','auf','bei','zur','zum','als','passend','geeignet','kompatibel','compatible','fits','mit','with','ohne','without','inkl','inklusive','including','zubehor','zubehoer','accessory','accessories','ersatzteil','ersatzteile'), true); }
+325         $tokens = $this->idealo_match_tokens($text); $out = array();
+326         foreach ($tokens as $idx => $token) {
+327             if (isset($bounds[$token])) { return $idx === 0 ? array() : $out; }
+328             $out[] = $token;
+329         }
+330         return $out;
+331     }
+332 
+333     private function idealo_match_distinct_tokens($text, $primary = false) {
+334         static $drop = null;
+335         if ($drop === null) { $drop = array_fill_keys(array('zubehor','zubehoer','artikel','angebot','angebote','produkt','produkte','set','sets','original','universal','neu','gebraucht','damen','herren','kinder','schwarz','braun','blau','rot','grun','gruen','weiss','weis','beige','grosse','groesse','size','cm','mm','kg','stuck','stueck','paar','fur','fuer','mit','ohne'), true); }
+336         $tokens = $primary ? $this->idealo_match_primary_tokens($text) : $this->idealo_match_tokens($text);
+337         $out = array();
+338         foreach ($tokens as $token) { if (!isset($drop[$token])) { $out[$token] = true; } }
+339         return array_keys($out);
+340     }
+341 
+342     private function idealo_match_index() {
+343         static $cache = null;
+344         if (is_array($cache) || is_wp_error($cache)) { return $cache; }
+345         $catalog = $this->idealo_portal_supply_catalog();
+346         if (is_wp_error($catalog)) { return $cache = $catalog; }
+347         $concepts = array(); $index = array();
+348         foreach ((array) $catalog['_idealo_required_concepts'] as $id => $concept) {
+349             $core = $this->idealo_match_distinct_tokens((string) ($concept['title'] ?? ''), true);
+350             if (!$core) { $core = $this->idealo_match_distinct_tokens((string) ($concept['title'] ?? ''), false); }
+351             $stems = array(); foreach ($core as $token) { $stems[$this->idealo_match_stem($token)] = true; }
+352             $stems = array_keys($stems); if (!$stems) { continue; }
+353             $first_page = is_array(($concept['target_pages'] ?? null)) && !empty($concept['target_pages']) && is_array($concept['target_pages'][0]) ? $concept['target_pages'][0] : array();
+354             $hub = array(); foreach ($this->idealo_match_distinct_tokens((string) ($first_page['hub'] ?? '')) as $token) { $hub[$this->idealo_match_stem($token)] = true; }
+355             $main = array(); foreach ($this->idealo_match_distinct_tokens((string) ($first_page['main_hub'] ?? '')) as $token) { $main[$this->idealo_match_stem($token)] = true; }
+356             $all = array(); foreach ($this->idealo_match_distinct_tokens((string) ($concept['title'] ?? '')) as $token) { $all[$this->idealo_match_stem($token)] = true; }
+357             $rel = array_values(array_diff(array_keys($all), $stems));
+358             $entry = array('id'=>$id,'title'=>(string)($concept['title']??''),'stems'=>$stems,'hub_stems'=>array_keys($hub),'main_stems'=>array_keys($main),'rel_stems'=>$rel,'main_hub'=>(string)($first_page['main_hub']??''),'hub'=>(string)($first_page['hub']??''),'target_pages'=>(array)($concept['target_pages']??array()));
+359             $concepts[$id] = $entry;
+360             foreach ($stems as $stem) { if (!isset($index[$stem])) { $index[$stem] = array(); } $index[$stem][$id] = true; }
+361         }
+362         if (!$concepts || count($concepts) !== count((array)$catalog['_idealo_required_concepts'])) { return $cache = new WP_Error('idealo_match_index_incomplete', 'Matcher konnte nicht alle Hobby-Depot-Recherchekonzepte binden.'); }
+363         return $cache = array('concepts'=>$concepts,'index'=>$index,'catalog'=>$catalog);
+364     }
+365 
+366     private function idealo_text_has_root($text, $roots) {
+367         foreach ((array) $roots as $root) { if ($root !== '' && strpos((string)$text, (string)$root) !== false) { return true; } }
+368         return false;
+369     }
+370 
+371     private function idealo_match_blocked($text, $catalog) {
+372         $haystack = ' ' . (string)$text . ' ';
+373         foreach ((array)($catalog['hard_negative_markers'] ?? array()) as $term) {
+374             $term = $this->idealo_match_normalize($term);
+375             if ($term !== '' && strpos($haystack, ' ' . $term . ' ') !== false) { return true; }
+376         }
+377         return false;
+378     }
+379 
+380     /** Returns 0 = reject; 1..3 = increasingly strong context evidence. */
+381     private function idealo_match_context_score($concept, $title_n, $main_n, $sub_n, $catalog) {
+382         $full = trim($title_n . ' ' . $main_n . ' ' . $sub_n);
+383         if ($this->idealo_match_blocked($full, $catalog)) { return 0; }
+384 
+385         $title_stems = array();
+386         foreach ($this->idealo_match_tokens($title_n) as $token) { $title_stems[$this->idealo_match_stem($token)] = true; }
+387         $required = array_values(array_filter((array)($concept['stems'] ?? array())));
+388         if (!$required) { return 0; }
+389         foreach ($required as $stem) {
+390             if (!isset($title_stems[$stem])) { return 0; }
+391         }
+392 
+393         $category_stems = array();
+394         foreach ($this->idealo_match_tokens($main_n . ' ' . $sub_n) as $token) { $category_stems[$this->idealo_match_stem($token)] = true; }
+395         $context_hits = 0;
+396         foreach (array_merge((array)($concept['hub_stems'] ?? array()), (array)($concept['main_stems'] ?? array())) as $stem) {
+397             if (isset($category_stems[$stem])) { $context_hits++; }
+398         }
+399         return $context_hits > 0 ? 3 : 2;
+400     }
+401 
+402     /** Conservative one-row matcher: no AI/fuzzy product identity and no cross-provider assumption. */
+403     private function idealo_match_feed_row_to_concept($row) {
+404         $mi = $this->idealo_match_index(); if (is_wp_error($mi)) { return $mi; }
+405         $title = (string) ($row['product_title'] ?? '');
+406         $primary = $this->idealo_match_primary_tokens($title); if (!$primary) { return array('status'=>'none'); }
+765     }
+766 
+767     private function idealo_materialize_campaigns($limit_per_target=12) {
+768         if (!function_exists('get_posts')) { return new WP_Error('idealo_campaign_runtime_missing','WordPress-Kampagnenruntime fehlt.'); }
+769         $mi=$this->idealo_match_index(); if (is_wp_error($mi)) { return $mi; }
+770         $concept_map=$mi['concepts']; global $wpdb; $table=$this->network_sync_table('products'); $settings=$this->idealo_settings(); $snapshot_started=absint($settings['last_import_started_at']??0);
+771         $sql="SELECT * FROM {$table} WHERE network='idealo' AND quality_status='pass'"; $args=array(); if ($snapshot_started>0) { $sql.=' AND last_seen >= %d'; $args[]=$snapshot_started; } $sql.=' ORDER BY category ASC, id ASC';
+772         $prepared=$args?call_user_func_array(array($wpdb,'prepare'),array_merge(array($sql),$args)):$sql; $rows=(array)$wpdb->get_results($prepared,ARRAY_A); $groups=array();
+773         foreach ($rows as $row) { $concept_id=sanitize_key((string)($row['category']??'')); if (!isset($concept_map[$concept_id])) { continue; } $payload=json_decode((string)($row['payload']??''),true); $payload=is_array($payload)?$payload:array(); if (sanitize_key((string)($payload['__idealo_concept_id']??''))!==$concept_id) { continue; } $row['_payload']=$payload; $row['_rank']=$this->idealo_payload_rank_tuple($payload,(string)($row['external_key']??'')); $groups[$concept_id][]=$row; }
+774         $selected_keys=array(); $saved_count=0; $targets=0; $should_active=$this->idealo_campaigns_should_be_active();
+775         foreach ($groups as $concept_id=>$items) {
+776             $concept=$concept_map[$concept_id]; usort($items,static function($a,$b){ return $a['_rank']<=>$b['_rank']; }); if (!$items) { continue; }
+777             $target_keys=$this->idealo_target_keys_for_concept($concept); if (!$target_keys) { continue; } $targets++;
+778             // One family/search comparison campaign per safe concept. It uses a
+779             // real iPN click URL from the same concept and only overrides trg,
+780             // exactly as the documented deeplink mechanism permits.
+781             $family_row=array();
+782             foreach ($items as $family_candidate) {
+783                 $candidate_image=esc_url_raw((string)($family_candidate['image_url']??''));
+784                 $candidate_tracking=esc_url_raw((string)($family_candidate['tracking_url']??''));
+785                 if ($candidate_image!=='' && stripos($candidate_image,'https://')===0 && $candidate_tracking!=='') { $family_row=(array)$family_candidate; break; }
+786             }
+787             if (!$family_row) { continue; }
+788             $family_payload=(array)($family_row['_payload']??array());
+789             $family_image=esc_url_raw((string)($family_row['image_url']??''));
+790             $family_url=$this->idealo_comparison_deeplink_from_product_url((string)($family_row['tracking_url']??''),$concept);
+791             if ($family_url!=='' && $family_image!=='') {
+792                 $family_key='family:'.$concept_id; $ids=get_posts(array('post_type'=>self::CAMPAIGN_POST_TYPE,'post_status'=>array('publish','draft','private'),'meta_key'=>'_ppar_idealo_external_key','meta_value'=>$family_key,'posts_per_page'=>1,'fields'=>'ids')); $family_post_id=$ids?absint($ids[0]):0;
+793                 $family=$this->central_blank_campaign(); $family['id']=sanitize_key('idealo-family-'.substr(hash('sha256',$concept_id),0,20)); $family['name']='idealo Vergleich – '.(string)$concept['title']; $family['partner']='idealo'; $family['creative_type']='product'; $family['network']='idealo';
+794                 $family['advertiser_id']='84749'; $family['programme_name']='idealo DE'; $family['programme_status']='active'; $family['programme_status_source']='idealo_ipn_feed'; $family['programme_status_checked_at']=time(); $family['quality_manual_status']='auto_verified'; $family['quality_note']='Familien-/Kategorievergleich aus sicher gemapptem Standardfeed-Konzept; repräsentatives Bild aus derselben Produktfamilie, kein konkretes Produktversprechen.'; $family['render_mode']='image_link';
+795                 $family['active']=$should_active; $family['assignment_mode']='page_tree'; $family['match_descendants']=false; $family['automation_target_keys']=$target_keys; $family['placements']=array('hub_product_1','hub_product_2','hub_product_3','category_product_1','category_product_2','category_product_3','post_bottom_products');
+796                 $family['priority']=97; $family['label']='idealo · Affiliate'; $family['title']=(string)$concept['title']; $family['description']='Preise und Angebote bei idealo vergleichen'; $family['button_text']='Bei idealo vergleichen'; $family['image_url']=$family_image; $family['url']=$family_url; $family['target']='_blank'; $family['price']=''; $family['currency']='EUR'; $family['availability']=''; $family['health_check_enabled']=false; $family['source']='idealo_family_deeplink_v1'; $family['last_synced']=absint($family_row['last_seen']??time()); $family['external_id']=$family_key; $family['product_gtins']=array(); $family['product_asins']=array(); $family['product_identity_source']='family'; $family['product_provider']='idealo'; $family['idealo_surface_kind']='comparison';
+797                 $saved=$this->save_campaign_record($family,$family_post_id); if (!is_wp_error($saved)&&$saved) { $family_post_id=absint($saved); update_post_meta($family_post_id,'_ppar_idealo_auto',1); update_post_meta($family_post_id,'_ppar_idealo_external_key',$family_key); update_post_meta($family_post_id,'_ppar_idealo_concept_id',$concept_id); $selected_keys[$family_key]=true; $saved_count++; }
+798             }
+799             $target_limit=max(1,min(25,absint($limit_per_target))); $target_saved=0; $seen_target_gtins=array();
+800             foreach ($items as $row) {
+801                 if ($target_saved >= $target_limit) { break; }
+802                 $payload=(array)$row['_payload']; $external_key=substr(sanitize_text_field((string)($row['external_key']??'')),0,191); if ($external_key==='') { continue; }
+803                 $tracking=esc_url_raw((string)($row['tracking_url']??'')); $title=sanitize_text_field((string)($row['title']??'')); $image=esc_url_raw((string)($row['image_url']??'')); if ($tracking===''||$title===''||$image==='') { continue; }
+804                 $gtins=$this->idealo_normalize_gtins_from_values(array($payload['ean']??'',$payload['gtins_product']??'')); $asins=$this->idealo_normalize_asins_from_values(array($payload['asins_product']??'')); if (!$gtins) { continue; }
+805                 if (array_intersect($gtins,array_keys($seen_target_gtins))) { continue; }
+806                 $ids=get_posts(array('post_type'=>self::CAMPAIGN_POST_TYPE,'post_status'=>array('publish','draft','private'),'meta_key'=>'_ppar_idealo_external_key','meta_value'=>$external_key,'posts_per_page'=>1,'fields'=>'ids')); $post_id=$ids?absint($ids[0]):0;
+807                 $campaign=$this->central_blank_campaign(); $campaign['id']=sanitize_key('idealo-'.substr(hash('sha256',$external_key),0,20)); $campaign['name']='idealo – '.$title; $campaign['partner']='idealo'; $campaign['creative_type']='product'; $campaign['network']='idealo';
+808                 $campaign['advertiser_id']=sanitize_text_field((string)($settings['api_last_advertiser_id']??'')); $campaign['programme_name']='idealo DE'; $campaign['programme_status']='active'; $campaign['programme_status_source']='idealo_ipn_feed'; $campaign['programme_status_checked_at']=time(); $campaign['quality_manual_status']='auto_verified'; $campaign['quality_note']='Hobby-Depot-Ziele + konservatives Kontextmatching + GTIN.'; $campaign['render_mode']='image_link';
+809                 $campaign['active']=$should_active; $campaign['assignment_mode']='page_tree'; $campaign['match_descendants']=false; $campaign['automation_target_keys']=$target_keys; $campaign['placements']=array('hub_product_1','hub_product_2','hub_product_3','category_product_1','category_product_2','category_product_3','post_bottom_products');
+810                 $rank=$row['_rank']; $match_score=isset($payload['__idealo_match_score'])?(int)$payload['__idealo_match_score']:0; $campaign['priority']=max(40,min(95,55+(int)min(40,floor($match_score/10)))); $campaign['label']='idealo · Affiliate'; $campaign['title']=$title; $campaign['description']=''; $campaign['button_text']='Bei idealo vergleichen';
+811                 $campaign['image_url']=$image; $campaign['url']=$tracking; $campaign['target']='_blank'; $campaign['price']=sanitize_text_field((string)($row['price']??'')); $campaign['currency']='EUR'; $campaign['availability']='available'; $campaign['health_check_enabled']=false; $campaign['source']='idealo_product_feed_v1'; $campaign['last_synced']=absint($row['last_seen']??time()); $campaign['external_id']=$external_key; $campaign['product_gtins']=$gtins; $campaign['product_asins']=$asins; $campaign['product_identity_source']='gtin'; $campaign['product_provider']='idealo'; $campaign['idealo_surface_kind']='product';
+812                 $saved=$this->save_campaign_record($campaign,$post_id); if (is_wp_error($saved)||!$saved) { continue; }
+813                 $post_id=absint($saved); update_post_meta($post_id,'_ppar_idealo_auto',1); update_post_meta($post_id,'_ppar_idealo_external_key',$external_key); update_post_meta($post_id,'_ppar_idealo_concept_id',$concept_id); update_post_meta($post_id,'_ppar_idealo_target_slugs',wp_json_encode(array_values(array_unique(array_filter(array_map(static function($p){return is_array($p)?sanitize_title((string)($p['slug']??'')):'';},(array)($concept['target_pages']??array())))))));
+814                 delete_post_meta($post_id,'_ppar_product_gtin'); foreach ($gtins as $gtin) { add_post_meta($post_id,'_ppar_product_gtin',$gtin,false); } delete_post_meta($post_id,'_ppar_product_asin'); foreach ($asins as $asin) { add_post_meta($post_id,'_ppar_product_asin',$asin,false); }
+815                 foreach ($gtins as $gtin) { $seen_target_gtins[$gtin]=true; } $selected_keys[$external_key]=true; $saved_count++; $target_saved++;
+816             }
+817         }
+818         $existing=get_posts(array('post_type'=>self::CAMPAIGN_POST_TYPE,'post_status'=>array('publish','draft','private'),'meta_key'=>'_ppar_idealo_auto','meta_value'=>'1','posts_per_page'=>-1,'fields'=>'ids')); $retired=0;
+819         foreach ((array)$existing as $id) { $id=absint($id); $key=(string)get_post_meta($id,'_ppar_idealo_external_key',true); $campaign=$this->campaign_from_post(get_post($id)); if (!$campaign) { continue; } $desired=!empty($selected_keys[$key])&&$should_active; if ((bool)$campaign['active']!==$desired) { $campaign['active']=$desired; $this->save_campaign_record($campaign,$id); if (!$desired) { $retired++; } } }
+820         $this->idealo_sync_campaign_activation();
+821         if ($saved_count>0 && method_exists($this,'article_plan_bump_campaign_revision')) { $this->article_plan_bump_campaign_revision('idealo_materialized'); }
+822         return array('campaigns'=>$saved_count,'targets'=>$targets,'retired'=>$retired,'contract_concepts'=>count((array)$concept_map),'strategy'=>$this->idealo_link_strategy());
+823     }
+824 
+825     private function idealo_sync_campaign_activation() {
+826         if (!function_exists('get_posts')) { return; }
+827         $active=$this->idealo_campaigns_should_be_active();
+828         $ids=get_posts(array('post_type'=>self::CAMPAIGN_POST_TYPE,'post_status'=>array('publish','draft','private'),'meta_key'=>'_ppar_idealo_auto','meta_value'=>'1','posts_per_page'=>-1,'fields'=>'ids'));
+829         foreach ((array)$ids as $id) { $campaign=$this->campaign_from_post(get_post(absint($id))); if (!$campaign) { continue; } $desired=$active && $this->idealo_campaign_publicly_allowed(array_merge($campaign,array('active'=>true))); if ((bool)$campaign['active']!==$desired) { $campaign['active']=$desired; $this->save_campaign_record($campaign,absint($id)); } }
+830     }
+831 
+832     public function idealo_maybe_upgrade_materialization() {
+833         if ((string)get_option(self::IDEALO_SCHEMA_OPTION,'0')==='5') { return; }
+834         $s=$this->idealo_settings();
+835         // Never auto-select an old feed from another portal. Existing IDs are
+836         // retained only as unverified values until confirmed for Hobby Depot.
+837         $s['link_strategy']=$this->idealo_sanitize_link_strategy($s['link_strategy']??'hybrid');
+838         update_option(self::OPTION_NETWORK_IDEALO,$s,false);
+839         // No stale products are resurrected by upgrading a portal.
+840         update_option(self::IDEALO_SCHEMA_OPTION,'5',false); $this->idealo_sync_campaign_activation();
+841     }
+842 
+843 
+844     public function idealo_cron_schedules($schedules) {
+845         if (!isset($schedules['ppar_twelve_hours'])) { $schedules['ppar_twelve_hours']=array('interval'=>12*HOUR_IN_SECONDS,'display'=>'Alle zwölf Stunden'); }
+846         return $schedules;
+847     }
+848 
+849     public function idealo_ensure_refresh_schedule() {
+850         if (!function_exists('wp_next_scheduled')||!function_exists('wp_schedule_event')) { return; }
+851         $s=$this->idealo_settings(); $wanted=!empty($s['auto_refresh'])&&$this->hd_idealo_feed_source_ready($s);
+=== HD009_FINAL
+2987     }
+2988 
+2989     private function hd_idealo_category_title_relevant($title,$context) {
+2990         $title=trim(wp_strip_all_tags((string)$title));
+2991         $topic=trim((string)($context['primary_name']??''));
+2992         if ($topic==='') { $topic=str_replace('-', ' ',sanitize_title((string)($context['primary_slug']??''))); }
+2993         if ($title==='' || $topic==='') { return false; }
+2994         $need=$this->idealo_match_distinct_tokens($topic,true);
+2995         if (!$need) { return false; }
+2996         $found=array();
+2997         foreach ($this->idealo_match_tokens($title) as $word) {
+2998             $found[$this->idealo_match_stem($word)]=true;
+2999         }
+3000         foreach ($need as $word) {
+3001             $stem=$this->idealo_match_stem($word);
+3002             if (isset($found[$stem])) { continue; }
+3003             // A literal compound such as Airbrushpistole is relevant.
+3004             // One-letter Malene/Malen substrings remain rejected.
+3005             $compound=false;
+3006             foreach (array_keys($found) as $term) {
+3007                 if (strlen($stem)>=5 && strpos($term,$stem)===0
+3008                     && strlen($term)-strlen($stem)>=4) { $compound=true; break; }
+3009             }
+3010             if (!$compound) { return false; }
+3011         }
+3012         return true;
+3013     }
+3014 
+3015     private function render_banner($banner, $post_id, $context, $group, $slot_type) {
+3016         // One public launch policy, including legacy/indirect rendering routes.
+3017         if (HDAR_Amazon_Start::launch_active() && !$this->hdar_launch_public_campaign_allowed($banner)) { return ''; }
+3018         $mode = isset($banner['mode']) ? sanitize_key($banner['mode']) : 'image_link';
+3019         $subid = $this->build_subid($post_id, $context, $group, $slot_type);
+3020         $replacements = array(
+3021             '{post_id}' => (string) $post_id,
+3022             '{category_slug}' => $context['primary_slug'],
+3023             '{category_name}' => $context['primary_name'],
+3024             '{group_id}' => $group['id'] ?? '',
+3025             '{slot}' => $slot_type,
+3026             '{subid}' => $subid,
+3027         );
+3028 
+3029         if ($mode === 'html') {
+3030             $raw = isset($banner['html']) ? (string) $banner['html'] : '';
+3031             $raw = strtr($raw, $replacements);
+3032             return $this->filter_allowed_banner_html($raw);
+3033         }
+3034 
+3035         $url = isset($banner['url']) ? strtr((string) $banner['url'], $replacements) : '';
+3036         $url = $this->apply_subid_to_url($url, $subid, $banner['subid_param'] ?? '');
+3037         if (method_exists($this, 'multiprovider_runtime_tracking_url')) { $url = $this->multiprovider_runtime_tracking_url($url, (string)($banner['network'] ?? '')); }
+3038         $image_url = isset($banner['image_url']) ? strtr((string) $banner['image_url'], $replacements) : '';
+3039         if (method_exists($this, 'multiprovider_runtime_image_url')) { $image_url = $this->multiprovider_runtime_image_url($image_url, (string)($banner['network'] ?? ''), absint($banner['campaign_post_id'] ?? 0)); }
+3040         $title = isset($banner['title']) ? strtr((string) $banner['title'], $replacements) : '';
+3041         $button = isset($banner['button_text']) ? strtr((string) $banner['button_text'], $replacements) : '';
+3042         $description = isset($banner['description']) ? strtr((string) $banner['description'], $replacements) : '';
+3043         $price = isset($banner['price']) ? trim(strtr((string)$banner['price'], $replacements)) : '';
+3044         $currency = isset($banner['currency']) ? strtoupper(substr(sanitize_text_field((string)$banner['currency']), 0, 3)) : 'EUR';
+3045         $availability = isset($banner['availability']) ? trim(strtr((string)$banner['availability'], $replacements)) : '';
+3046         $seller_name = isset($banner['seller_name']) ? trim(strtr((string)$banner['seller_name'], $replacements)) : '';
+3047         $creative_type = sanitize_key((string)($banner['creative_type'] ?? 'banner'));
+3048         $network = sanitize_key((string)($banner['network'] ?? ''));
+3049         $normalized_slot_type = sanitize_key((string)$slot_type);
+3050         // V6.72.176: Das Portal-Design baut eBay-BUSINESS-Produktkarten auf
+3051         // Hub-/Kategorie-Rastern nach DOMContentLoaded aus Bild, Titel, Preis und
+3052         // CTA neu auf. Der Beschreibungstext bleibt dabei absichtlich unsichtbar.
+3053         // Er bleibt vollstaendig im Kampagnen-/Quelldatensatz erhalten, wird aber
+3054         // nicht mehr als spaeter verworfener DOM-Text ausgeliefert.
+3055         if ($network === 'ebay'
+3056             && $creative_type === 'product'
+3057             && preg_match('/^(?:category|hub)_product_[123]$/', $normalized_slot_type)) {
+3058             $description = '';
+3059         }
+3060         $is_glossary_single_slot = in_array($normalized_slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
+3061         $is_classic_post_slot = sanitize_key((string)$slot_type) === 'post_inline_banner';
+3062         $uses_editorial_single_chrome = $is_glossary_single_slot || $is_classic_post_slot;
+3063         if ($uses_editorial_single_chrome) {
+3064             // Redaktionelle Einzeltypen verwenden denselben reduzierten Werbeblock:
+3065             // nur Creative + portaltypischer CTA; kein Bannername, Partner-/Gueltigkeits-
+3066             // oder sonstiger Creative-Text. Der Pflicht-Werbehinweis sitzt ausserhalb.
+3067             $title = '';
+3068             $description = '';
+3069             $button = 'Mehr erfahren';
+3070         }
+3071         $category_product_slot = (bool) preg_match('/^category_product_[123]$/', sanitize_key((string)$slot_type));
+3072         // Final shared output gate: checked here, not only in a preferred
+3073         // candidate route. Product source labels may change across versions.
+4654      * it, including previously materialized campaigns. No child inheritance.
+4655      */
+4656     private function hd_idealo_product_targets_exact_hobby_page($campaign, $context, $slot_type) {
+4657         if (!preg_match('/^category_product_[123]$/', sanitize_key((string)$slot_type))) { return true; }
+4658         if (sanitize_key((string)($campaign['network']??''))!=='idealo') { return true; }
+4659         if (sanitize_key((string)($context['post_type']??''))!=='page') { return true; }
+4660         $slug=sanitize_title((string)($context['primary_slug']??''));
+4661         if ($slug==='') { return false; }
+4662         $target='page:'.$slug;
+4663         foreach ((array)($campaign['automation_target_keys']??array()) as $key) {
+4664             if ((string)$key===$target) { return true; }
+4665         }
+4666         return false;
+4667     }
+4668 
+4669     private function category_product_shared_rank_base($context) {
+4670         if (!$this->ranked_campaigns_request_cache_allowed()) { return null; }
+4671         $context = is_array($context) ? $context : array();
+4672         if (!empty($context['exact_product_identifiers'])) { return null; }
+4673 
+4674         $cache_context = $context;
+4675         unset($cache_context['slot_type'], $cache_context['banner_distribution_position']);
+4676         $cache_key = hash('sha256', serialize($cache_context));
+4677         if (array_key_exists($cache_key, $this->category_product_shared_rank_base_request_cache)) {
+4678             return $this->category_product_shared_rank_base_request_cache[$cache_key];
+4679         }
+4680         $this->category_product_shared_rank_base_build_count++;
+4681 
+4682         $slot_type = 'category_product_1';
+4683         $rank_context = $context;
+4684         $rank_context['slot_type'] = $slot_type;
+4685         $rank_context['_ppar_norm_primary_slug'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($context['primary_slug'] ?? ''));
+4686         $rank_context['_ppar_norm_post_type'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($context['post_type'] ?? ''));
+4687         $rank_context['_ppar_norm_ancestor_ids'] = isset($context['ancestor_ids']) && is_array($context['ancestor_ids']) ? array_map('intval', $context['ancestor_ids']) : array();
+4688         $rank_context['_ppar_norm_slugs'] = isset($context['slugs']) && is_array($context['slugs']) ? array_map(array($this, 'ranked_campaign_sanitize_key_request_cached'), $context['slugs']) : array();
+4689         $rank_context['_ppar_norm_term_ids'] = isset($context['term_ids']) && is_array($context['term_ids']) ? array_map('intval', $context['term_ids']) : array();
+4690         $rank_context['_ppar_norm_direct_term_slugs'] = isset($context['direct_term_slugs']) && is_array($context['direct_term_slugs']) ? array_values(array_filter(array_map(array($this, 'ranked_campaign_sanitize_key_request_cached'), $context['direct_term_slugs']))) : array();
+4691         $rank_context['_ppar_norm_semantic_primary_target_key'] = method_exists($this, 'automation_normalize_target_key') ? $this->automation_normalize_target_key((string) ($context['semantic_primary_target_key'] ?? '')) : '';
+4692         $rank_context['_ppar_norm_semantic_ancestor_target_keys'] = method_exists($this, 'automation_normalize_target_key') ? array_values(array_filter(array_map(array($this, 'automation_normalize_target_key'), (array) ($context['semantic_ancestor_target_keys'] ?? array())))) : array();
+4693         $rank_context['_ppar_norm_product_family_slug'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($context['product_family_slug'] ?? ''));
+4694 
+4695         $posts = $this->ranked_campaign_posts_snapshot();
+4696         $index = $this->ranked_campaign_candidate_index('placement');
+4697         $positions = array();
+4698         foreach (array('category_product_1','category_product_2','category_product_3','category_product','*') as $placement) {
+4699             foreach ((array) ($index['product_by_placement'][$placement] ?? array()) as $position => $_true) {
+4700                 $positions[(int) $position] = true;
+4701             }
+4702         }
+4703         if (!$positions) {
+4704             return $this->category_product_shared_rank_base_request_cache[$cache_key] = array();
+4705         }
+4706         ksort($positions, SORT_NUMERIC);
+4707 
+4708         $raw_records = $this->ranked_campaign_raw_records_snapshot();
+4709         $candidates = array();
+4710         foreach (array_keys($positions) as $position) {
+4711             $position = (int) $position;
+4712             if (!isset($posts[$position]) || !is_object($posts[$position])) { continue; }
+4713 
+4714             $record = isset($raw_records[$position]) && is_array($raw_records[$position]) ? $raw_records[$position] : array();
+4715             $stored = isset($record['stored']) && is_array($record['stored']) ? $record['stored'] : array();
+4716             $raw_targets = $this->ranked_campaign_raw_target_keys($position, $stored);
+4717             if ($raw_targets) {
+4718                 $target_probe = array('automation_target_keys'=>$raw_targets);
+4719                 $automation_rank = method_exists($this, 'automation_campaign_exact_target_rank')
+4720                     ? $this->automation_campaign_exact_target_rank($target_probe, $rank_context)
+4721                     : null;
+4722                 $fill_post_type = (string) $rank_context['_ppar_norm_post_type'];
+4723                 if (!$automation_rank && !in_array($fill_post_type, array('uge_term','post','uge_group_archive'), true)) {
+4724                     continue;
+4725                 }
+4726             }
+4727 
+4728             $campaign = $this->ranked_campaign_from_post_cached($posts[$position]);
+4729             if (!is_array($campaign)) { continue; }
+4730             if (!$this->hd_idealo_product_targets_exact_hobby_page($campaign, $rank_context, $slot_type)) {
+4731                 continue;
+4732             }
+4733             $runtime_campaign = $campaign;
+4734             $runtime_campaign['_ppar_runtime_normalized_slot_type'] = 1;
+4735             if (empty($runtime_campaign['_ppar_runtime_normalized'])) {
+4736                 $runtime_campaign['_ppar_runtime_normalized'] = 1;
+4737                 $runtime_campaign['_ppar_norm_id'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['id'] ?? ''));
+4738                 $runtime_campaign['_ppar_norm_network'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['network'] ?? 'manual'));
+4739                 $runtime_campaign['_ppar_norm_creative_type'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['creative_type'] ?? 'banner'));
+4740                 $runtime_campaign['_ppar_norm_render_mode'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['render_mode'] ?? 'image_link'));
+2948      * Price/provider/subject are described as such, not fictional specs.
+2949      */
+2950     private function hd_category_card_title_facts($title,$context=array(),$network='',$price='',$currency='EUR') {
+2951         $title=trim(wp_strip_all_tags((string)$title));
+2952         if ($title==='') { return array(); }
+2953         $facts=array();
+2954         // Product type and numeric specification have priority.
+2955         if (preg_match('/\b(airbrushpistole|airbrushkompressor|spritzpistole|reinigungsset|teleskop|kompressor|pinselset|farbset)\b/ui',$title,$m)) {
+2956             $facts[]='Produktart: '.$m[1];
+2957         } elseif (preg_match('/\bairbrush[\s-]*(pistole|kompressor|set|farbe|reiniger)\b/ui',$title,$m)) {
+2958             $facts[]='Produktart: Airbrush '.$m[1];
+2959         }
+2960         if (preg_match('/(?<![0-9])([0-9]{1,3}(?:[.,][0-9]{1,2})?)\s*(mm|ml|cm|kg|g)\b/ui',$title,$m)) {
+2961             $facts[]='Angabe: '.$m[1].' '.$m[2];
+2962         }
+2963         if (preg_match('/\b(starterset|komplettset|set|kit)\b/ui',$title,$m)) {
+2964             $facts[]='Ausführung: '.$m[1];
+2965         }
+2966         if (preg_match('/\b(schwarz|weiss|weiß|blau|rot|grün|gruen|braun|beige|silber|gold|grau|gelb)\b/ui',$title,$m)) {
+2967             $facts[]='Farbe: '.$m[1];
+2968         }
+2969         if (preg_match('/\b(edelstahl|baumwolle|aluminium|kunststoff|acryl|leder)\b/ui',$title,$m)) {
+2970             $facts[]='Material: '.$m[1];
+2971         }
+2972         // Every other fallback is clearly identified as *topic, price or
+2973         // source*, not a claimed special feature. Only use topic if the
+2974         // product title independently contains the hobby words.
+2975         if (count($facts)<2 && $this->hd_idealo_category_title_relevant($title,$context)) {
+2976             $topic=trim((string)($context['primary_name']??''));
+2977             if ($topic==='') { $topic=str_replace('-', ' ',sanitize_title((string)($context['primary_slug']??''))); }
+2978             if ($topic!=='') { $facts[]='Thema: '.$topic; }
+2979         }
+2980         if (count($facts)<2 && trim((string)$price)!=='') {
+2981             $facts[]='Preis: '.trim((string)$price).' '.strtoupper(substr(sanitize_text_field((string)$currency),0,3));
+2982         }
+2983         if (count($facts)<2 && in_array(sanitize_key((string)$network),array('idealo','amazon','ebay','otto'),true)) {
+2984             $facts[]='Anbieter: '.ucfirst(sanitize_key((string)$network));
+2985         }
+2986         return array_slice(array_values(array_unique($facts)),0,3);
+2987     }
+2988 
+2989     private function hd_idealo_category_title_relevant($title,$context) {
+2990         $title=trim(wp_strip_all_tags((string)$title));
+2991         $topic=trim((string)($context['primary_name']??''));
+2992         if ($topic==='') { $topic=str_replace('-', ' ',sanitize_title((string)($context['primary_slug']??''))); }
+2993         if ($title==='' || $topic==='') { return false; }
+2994         $need=$this->idealo_match_distinct_tokens($topic,true);
+2995         if (!$need) { return false; }
+2996         $found=array();
+2997         foreach ($this->idealo_match_tokens($title) as $word) {
+2998             $found[$this->idealo_match_stem($word)]=true;
+2999         }
+3000         foreach ($need as $word) {
+3001             $stem=$this->idealo_match_stem($word);
+3002             if (isset($found[$stem])) { continue; }
+3003             // A literal compound such as Airbrushpistole is relevant.
+3004             // One-letter Malene/Malen substrings remain rejected.
+3005             $compound=false;
+3006             foreach (array_keys($found) as $term) {
+3007                 if (strlen($stem)>=5 && strpos($term,$stem)===0
+3008                     && strlen($term)-strlen($stem)>=4) { $compound=true; break; }
+3009             }
+3010             if (!$compound) { return false; }
+3011         }
+3012         return true;
+3013     }
+3014 
+3015     private function render_banner($banner, $post_id, $context, $group, $slot_type) {
+3016         // One public launch policy, including legacy/indirect rendering routes.
+3017         if (HDAR_Amazon_Start::launch_active() && !$this->hdar_launch_public_campaign_allowed($banner)) { return ''; }
+3018         $mode = isset($banner['mode']) ? sanitize_key($banner['mode']) : 'image_link';
+3019         $subid = $this->build_subid($post_id, $context, $group, $slot_type);
+3020         $replacements = array(
+3021             '{post_id}' => (string) $post_id,
+3022             '{category_slug}' => $context['primary_slug'],
+3023             '{category_name}' => $context['primary_name'],
+3024             '{group_id}' => $group['id'] ?? '',
+3025             '{slot}' => $slot_type,
+3026             '{subid}' => $subid,
+3027         );
+3028 
+3029         if ($mode === 'html') {
+3030             $raw = isset($banner['html']) ? (string) $banner['html'] : '';
+3031             $raw = strtr($raw, $replacements);
+3032             return $this->filter_allowed_banner_html($raw);
+3033         }
+3034 
