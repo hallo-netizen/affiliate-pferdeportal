@@ -1,0 +1,154 @@
+name: HAB RC37 read original stored reason (single decision) full regression
+on:
+  push:
+    branches: [hab-affiliate-rc37-actual-origin-failure-reasons-20261113]
+    paths:
+      - .github/workflows/hab-affiliate-rc37-real-reason-full-qa.yml
+      - protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/RC37_ACTUAL_SOURCE_REASON/**
+permissions: {contents: write}
+jobs:
+  verified-full-original:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and retest complete RC23–RC34 chain; no shortcuts
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          python3 "$R/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/build_rc24.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/qa_rc24.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/build_rc25.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/qa_rc25.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/build_rc26.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/qa_rc26.py"
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/build_rc27.py"
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/qa_rc27.py"
+          python3 "$R/AFFILIATE/RC28_CATALOG_KISS/build_rc28.py"
+          python3 "$R/AFFILIATE/RC28_CATALOG_KISS/qa_rc28.py"
+          python3 "$R/AFFILIATE/RC29_PRODUCT_NAMES_LEAF_CONTRACT/build_rc29.py"
+          python3 "$R/AFFILIATE/RC29_PRODUCT_NAMES_LEAF_CONTRACT/qa_rc29.py"
+          python3 "$R/AFFILIATE/RC30_ONE_LABEL_BULLETS/build_rc30.py"
+          python3 "$R/AFFILIATE/RC30_ONE_LABEL_BULLETS/qa_rc30.py"
+          python3 "$R/AFFILIATE/RC31_INSURANCE_CASCADE/build_rc31.py"
+          python3 "$R/AFFILIATE/RC31_INSURANCE_CASCADE/qa_rc31.py"
+          python3 "$R/AFFILIATE/RC33_ONE_DECISION/build_rc33.py"
+          python3 "$R/AFFILIATE/RC33_ONE_DECISION/qa_rc33.py"
+          python3 "$R/AFFILIATE/RC33_ONE_DECISION/qa_materialize_rc33.py"
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" /tmp/RC33_BASE.zip
+          python3 "$R/AFFILIATE/RC34_KISS_DIAG/build_rc34.py"
+          python3 "$R/AFFILIATE/RC34_KISS_DIAG/qa_rc34.py"
+          python3 "$R/AFFILIATE/RC33_ONE_DECISION/qa_materialize_rc33.py"
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          from hashlib import sha256
+          R=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ')
+          p=R/'PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          with ZipFile('/tmp/RC33_BASE.zip') as a, ZipFile(p) as b:
+            changed={n for n in a.namelist() if a.read(n)!=b.read(n)}
+            wanted={'affiliate-portal-router/affiliate-portal-router.php','affiliate-portal-router/readme.txt','affiliate-portal-router/includes/trait-ppar-output-objects.php','affiliate-portal-router/includes/trait-ppar-creative-library.php'}
+            assert changed==wanted,changed
+            for unchanged in ['assets/frontend.css','includes/trait-ppar-idealo.php','includes/trait-ppar-tariff-tools.php','includes/trait-ppar-automation-suite.php','includes/class-ppar-hab-bewahr-bridge.php']:
+              assert a.read('affiliate-portal-router/'+unchanged)==b.read('affiliate-portal-router/'+unchanged),unchanged
+          print('HAB_RC34_ONLY_SINGLE_EXISTING_ROUTING_AND_LOGGING_PATH_CHANGED_PASS',p.stat().st_size,sha256(p.read_bytes()).hexdigest())
+          PY
+      - name: Extend exactly the same import evidence reader (RC35)
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          python3 "$R/AFFILIATE/RC35_HTML_LINK_KISS/build_rc35.py"
+          python3 "$R/AFFILIATE/RC35_HTML_LINK_KISS/qa_rc35.py"
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          p=Path("protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip")
+          with ZipFile(p) as z:
+            assert z.testzip() is None
+            assert len(z.namelist())==36
+            assert b"Version: 0.1.32-rc35" in z.read("affiliate-portal-router/affiliate-portal-router.php")
+          print("RC35_COMPLETE_ARCHIVE_PASS")
+          PY
+      - name: Previous Amazon Idealo eBay product and provider verification
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess,tempfile
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112')
+          with tempfile.TemporaryDirectory() as td:
+            s=(p/'qa_candidate.py').read_text()
+            assert '0.1.20-rc23' in s
+            q=Path(td)/'qa_rc34_compat.py'
+            q.write_text(s.replace('0.1.20-rc23','0.1.32-rc35'))
+            for cmd in [['python3',str(q)],['python3',str(p/'qa_feed_pipeline.py')],['python3',str(p/'qa_buttons.py')]]:
+              r=subprocess.run(cmd,capture_output=True,text=True)
+              print(r.stdout,r.stderr)
+              assert r.returncode==0,(cmd,r.stderr)
+          print('HAB_RC34_PREVIOUS_FEED_PRODUCT_SAFETY_QA_PASS')
+          PY
+
+      - name: Build RC36 from exact RC35 completed original and run all slot-public tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" /tmp/RC35_exact.zip
+          python3 "$R/AFFILIATE/RC36_SLOT_SINGLE_PASS/build_rc36.py"
+          python3 "$R/AFFILIATE/RC36_SLOT_SINGLE_PASS/qa_rc36.py"
+          python3 "$R/AFFILIATE/RC33_ONE_DECISION/qa_materialize_rc33.py"
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          from hashlib import sha256
+          p=Path("protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip")
+          with ZipFile("/tmp/RC35_exact.zip") as a,ZipFile(p) as b:
+            assert a.testzip() is None and b.testzip() is None and len(a.namelist())==len(b.namelist())==36
+            changed={n for n in a.namelist() if a.read(n)!=b.read(n)}
+            expected={"affiliate-portal-router/affiliate-portal-router.php","affiliate-portal-router/includes/trait-ppar-output-objects.php","affiliate-portal-router/assets/frontend.css","affiliate-portal-router/readme.txt"}
+            assert changed==expected,(changed,expected)
+            assert b"ppar_hab_rc36_tarifcheck_reconcile_v1" in b.read("affiliate-portal-router/includes/trait-ppar-output-objects.php")
+          print("RC36_FINAL_COMPLETE_ORIGINAL_TEST_ZIP_PASS",p.stat().st_size,sha256(p.read_bytes()).hexdigest())
+          PY
+
+      - name: Build RC37 from exact fully tested RC36 + original PHP regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" /tmp/RC36_exact.zip
+          python3 "$R/AFFILIATE/RC37_ACTUAL_SOURCE_REASON/build_rc37.py"
+          python3 "$R/AFFILIATE/RC37_ACTUAL_SOURCE_REASON/qa_rc37.py"
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          from hashlib import sha256
+          p=Path("protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip")
+          with ZipFile("/tmp/RC36_exact.zip") as a,ZipFile(p) as b:
+            assert a.testzip() is None and b.testzip() is None
+            assert len(a.namelist())==len(b.namelist())==36
+            changed={n for n in a.namelist() if a.read(n)!=b.read(n)}
+            want={'affiliate-portal-router/affiliate-portal-router.php','affiliate-portal-router/readme.txt',
+              'affiliate-portal-router/includes/trait-ppar-output-objects.php',
+              'affiliate-portal-router/includes/trait-ppar-creative-library.php'}
+            assert changed==want,(changed,want)
+            assert b"_hb_insurance_reason" in b.read("affiliate-portal-router/includes/trait-ppar-output-objects.php")
+          print("RC37_FINAL_ONLY_IMPORT_REASON_AND_READONLY_REPORT",p.stat().st_size,sha256(p.read_bytes()).hexdigest())
+          PY
+      - name: Release only a fully green RC37; no blind category or slot changes
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          P=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip
+          cp "$P" /tmp/HAB_Bewahr_Affiliate_RC37_BEWEIS.zip
+          TAG=hab-affiliate-rc37-original-rejection-reasons-20261113
+          gh release create "$TAG" /tmp/HAB_Bewahr_Affiliate_RC37_BEWEIS.zip --target "$GITHUB_SHA" \
+            --title "Hab & Bewahr RC37 – echte Zuordnungsgründe, ohne neue Regeln" \
+            --notes "No routing, slot or frontend change. The existing one-time WordPress backend pass writes the original insurance decision reason into the already existing banner payload. The existing read-only Tarifcheck report shows totals by actual missing-target reason, stored destination type and blocked picture dimensions. All original PHP, 160-simulation-independent canonical/format QA and other providers must pass before the release. Reopen the backend Werbemittel & Ausspielung three times (up to 60 rows per request), then share one diagnostic screenshot. No banner reimport, no extra worker, table or new classification decision." \
+            --prerelease
+          gh release view "$TAG" --json assets,url --jq '{url,assets:[.assets[]|{name,size,url}]}'
