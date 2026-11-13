@@ -1,0 +1,35 @@
+name: Archive QA-verified HD009 equipment matching as isolated candidate only
+on:
+  push:
+    branches: [hobbyroom/hd009-038-real-equipment-matcher-20261113]
+    paths: [.github/workflows/hd009_0138_candidate_archive.yml]
+permissions:
+  contents: write
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require successful original 15-assertion PHP regression test
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          test "$(gh api repos/"$GITHUB_REPOSITORY"/actions/runs/43418518016 --jq .conclusion)" = success
+          python3 scripts/hd009_0138_equipment_match_candidate.py /tmp/HOBBY_DEPOT_HD009_0.1.38_EQUIPMENT_MATCH_CANDIDATE.zip
+          echo '08ffe170601928b45c645809f6738bcc501bba8ea91b813bf1a4d808ee865573  /tmp/HOBBY_DEPOT_HD009_0.1.38_EQUIPMENT_MATCH_CANDIDATE.zip' | sha256sum -c
+          python3 scripts/hd009_0138_original_php_equipment_qa.py /tmp/HOBBY_DEPOT_HD009_0.1.38_EQUIPMENT_MATCH_CANDIDATE.zip /tmp/qa_138.php protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip
+          php /tmp/qa_138.php
+      - name: Archive only – don't change HD009 CURRENT, don't publish plugin release
+        run: |
+          python3 scripts/hd009_0138_archive_candidate_only.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CANDIDATES/HOBBY_DEPOT_HD009_0.1.38_HD007_AUSRUESTUNG_NUR_TEST.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CANDIDATES/CANDIDATE_0.1.38_STATUS.md
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/HD009_0.1.38_EQUIPEMENT_CANDIDATE_20261113.md
+          git commit -m "HD009 0.1.38 real equipment matcher: 15/15 original PHP tests, archived only; current untouched"
+          git fetch origin hobbyroom/hd009-038-real-equipment-matcher-20261113
+          git rebase origin/hobbyroom/hd009-038-real-equipment-matcher-20261113
+          git push origin HEAD:refs/heads/hobbyroom/hd009-038-real-equipment-matcher-20261113
