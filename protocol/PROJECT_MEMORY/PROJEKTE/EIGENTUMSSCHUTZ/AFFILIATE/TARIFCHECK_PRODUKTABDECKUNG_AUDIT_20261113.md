@@ -1,0 +1,25 @@
+# Hab & Bewahr – KISS: Produktabdeckung und bereits erfasste Tarifcheck-Banner
+Stand: 13.11.2026. **Read-only-Prüfung**, keine Plugin-/WordPress-Änderung.
+
+## Benutzerstatus / neuer Auftrag
+- Nutzer bestätigt: **ALLE Tarifcheck-Banner bereits über vorhandene Werbemittelverwaltung eingetragen.** Auf keinen Fall erneut um Import oder manuelle Mehrfacheinpflege bitten.
+- **Tarifrechner und Textlinks noch nicht** eingegeben.
+- **Kurzformulare können vorerst vollständig entfallen**; für erste Phase Banner über Versicherungszweig, vollständige Rechner nur auf exakt passenden Vergleichsseiten, Textlinks kontextuell in vorhandenen Ratgebern/Unterkategorien.
+- Wunsch: Bei Tarifrechnern Farbe und Breite **nicht einzeln im Tarifcheck-Partnerkonto für jeden Rechner** manuell eingeben. KISS-Lösung im vorhandenen **Rechner & Textlinks**-Modul: eine zentrale Stilvorgabe und bei Bedarf individuelle Ausnahme. **Noch nicht implementiert.** Falls Rechner im fremden iframe gerendert wird, ist innere Farbe nur über offiziell von Tarifcheck bereitgestellte Parameter, nicht per WordPress-CSS, steuerbar. Breite der äußeren Einbindung kann das Modul zentral steuern. Bestehendes Modul enthält aktuell ausschließlich Name, HTML-Code, Status.
+
+## Nachgewiesene echte Live-Abdeckung – unverändert
+- GitHub Actions Read-only `43436040667`: SUCCESS; ausschließlich öffentliche WordPress-REST-Antworten und Seiten-HTML gelesen.
+- 20 unterschiedliche, real öffentlich erreichbare **Versicherungsseiten**, u.a. Hausrat-Umgebung, Berufsunfähigkeit, Rechtsschutz, Pflege, gesetzliche und private Krankenversicherung. Alle 20 lieferten im HTML ein bestehendes **internes Versicherungshinweis-/Ersatzbanner** (CSS-Klasse `ppar-hb-insurance-own`), **0 sichtbare Tarifcheck-Nennung**. Das heißt *nicht*, dass Nutzer-Banner nicht gespeichert sind; es beweist, dass sie auf diesen Live-Seiten zu diesem Zeitpunkt **nicht sichtbar ausgegeben wurden**.
+- Zugleich zwei echte Produktseiten `Tresore` und `Wassermelder` öffentlich geprüft: jeweils **drei Produktkarten** in einer Gruppe. Daher nie pauschal behaupten, diese Seiten seien generell ohne Produktanzeige – `kein passender Idealo-Feedtreffer` ist etwas anderes als `gar keine Karte`.
+- Verifizierte Quellcode-Ursache für Tarifcheck-Mapping-Verdacht: `includes/trait-ppar-output-objects.php::output_tarifcheck_target_allowed()` prüft für Versicherungsbanner die Kategorie-Zielkette **„Wissen > Versicherungen & Recht“**, nicht den aktuellen großen echten **Versicherungen**-Hauptzweig. Die Funktion `output_assign_banner_targets_from_destination_once()` unterscheidet `tarifcheck_insurance_all_insurance_categories` und normale Mapping-Fälle. Ob genau dieser Pfad den gespeicherten Bannern die Auszahlung verhindert, kann ohne private gespeicherte Datensätze noch nicht abschließend bewiesen werden.
+- Bestehender Code `includes/trait-ppar-tariff-tools.php`: Tarifrechner und Textlinks lassen sich im WordPress-Backend zentral anlegen/bearbeiten. **Speichern allein bewirkt keine automatische Platzierung**, sondern erzeugt stabile Shortcodes. Zielvertrag: Nutzer soll keine Platzhalter manuell in hunderte Seiten kopieren.
+
+## Strukturiertes KISS-Vorgehen
+1. **Produktabdeckung** und **Versicherungswerbung** getrennt prüfen und dann zusammen gegen Zielvertrag testen. Keine neuen Provider/Frontend-Runtime-Datenquellen, kein Blindwechsel von Idealo 2901 auf 2747.
+2. **Tarifcheck-Banner:** bereits vorhandene gespeicherte Banner **nicht verändern, erneut importieren oder löschen**. Abgleichen: originaler bestätigter Versicherungsbereich, tatsächlich zugeordnete Ziel-URLs und Ausspielungsfreigaben, verfügbare Maße/Formate; Ursache der 20 öffentlichen Fallback-Anzeigen nachweisen. Korrektur nur im bereits bestehenden Zuordnungsweg und vorhandener Ausgabe. Keine Finanz-/Kreditbanner unter Versicherungen.
+3. **Produktgruppen:** 20 von 52 Idealo-Gruppen hatten sichere Feedtreffer im letzten Bericht; `Tresore` und `Wassermelder` zeigten dennoch drei Karten öffentlich. Deshalb Abdeckungsbericht strikt nach `gesicherte iPN-Feedquelle`, `beliebige Frontend-Produkte`, `passende physische Waren` unterscheiden, bevor Änderungen geplant werden.
+4. **Rechner/Links:** in der vorhandenen Plugin-Maske später jeweils einmal Originalcode bzw. Original-Trackinglink erfassen; Rechner auf passenden Vergleichsseiten, Links in passenden Beratungssträngen. Keine Kurzformulare für Phase 1. Danach **zentrale Style-Einstellung** des bestehenden Moduls, erst prüfen welche Parameter die offiziellen Tarifcheck-Codes zulassen; keine falsche Zusage, fremde iframe-Inhalte beliebig umzufärben.
+5. **Einmalige Gesamtabnahme:** echte Versicherungsbanner R1/R2/R3/Endkategorie/Artikel, drei Produktkarten bis zur untersten Ebene, GTIN/Provider-Links, Mobil/Datenschutz und keine Doppel-„Anzeige“.
+
+### Status
+Plan und Live-Nachweis im Hab-Büro gespeichert. **Keine** neue Pluginversion, Live-WordPress-Veränderung, zweite Bannerimport-Runde oder Rechnereinpflege durchgeführt. Die echte gespeicherte Tarifcheck-Bannerliste liegt nur in der angemeldeten WordPress-Datenbank, nicht auf öffentlichen Webseiten.
