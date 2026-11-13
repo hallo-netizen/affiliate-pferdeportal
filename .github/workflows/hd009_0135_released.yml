@@ -1,0 +1,55 @@
+name: HD009 0.1.35 verified full plugin archive and release
+on:
+  push:
+    branches: [hobbyroom/hd009-035-exact-product-context-20261113]
+    paths: [.github/workflows/hd009_0135_released.yml]
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify source test run passed and exact full build checksum
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          test "$(gh api repos/"$GITHUB_REPOSITORY"/actions/runs/43400956434 --jq .conclusion)" = success
+          python3 scripts/hd009_0135_thematic_product_cards_build.py /tmp/HOBBY_DEPOT_HD009_0.1.35_THEMATIC_PRODUCT_CARDS.zip
+          echo 'c30b3381928454671a8784f99c6bd59aaec79c800b9d38925462fc9dd29fe246  /tmp/HOBBY_DEPOT_HD009_0.1.35_THEMATIC_PRODUCT_CARDS.zip' | sha256sum -c
+          python3 - <<'PY'
+          import pathlib,zipfile
+          p='/tmp/HOBBY_DEPOT_HD009_0.1.35_THEMATIC_PRODUCT_CARDS.zip'
+          with zipfile.ZipFile(p) as z:
+            assert len(z.namelist())==41 and z.testzip() is None
+            for name in z.namelist():
+              if name.endswith('.php'):
+                f=pathlib.Path('/tmp/hd009php')/name;f.parent.mkdir(exist_ok=True,parents=True);f.write_bytes(z.read(name))
+          print('ALL_41_ZIP_CRC_PASS')
+          PY
+          find /tmp/hd009php -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Save tested plugin as CURRENT in Hobby Depot Pluginbuero
+        run: |
+          python3 scripts/hd009_0135_archive_after_qa.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CURRENT.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/HOBBY_DEPOT_AFFILIATE_HD009_0.1.35.zip
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/MANIFEST.md
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-009-AFFILIATE-ZENTRALE/CURRENT.md
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/HD009_AIRBRUSH_RELEVANZ_0.1.35_20261113.md
+          git commit -m "HD009 0.1.35 verified relevance rootfix full plugin archive"
+          git fetch origin hobbyroom/hd009-035-exact-product-context-20261113
+          git rebase origin/hobbyroom/hd009-035-exact-product-context-20261113
+          git push origin HEAD:refs/heads/hobbyroom/hd009-035-exact-product-context-20261113
+      - name: Release verified full plugin ZIP
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG=hobby-hd009-0.1.35-airbrush-relevance-20261113
+          FILE=/tmp/HOBBY_DEPOT_HD009_0.1.35_THEMATIC_PRODUCT_CARDS.zip
+          printf 'HD009 0.1.35: filters unrelated inherited idealo products on Hobby pages, fixes Malene/Malen false stemming; retains read-only 2901 compare, Amazon, eBay, images, tracking. Original QA run 43400956434 PASS. Not yet installed in WordPress.\n' > /tmp/notes.txt
+          gh release create "$TAG" "$FILE#HOBBY_DEPOT_HD009_0.1.35_THEMATIC_PRODUCT_CARDS.zip" --repo "$GITHUB_REPOSITORY" --target hobbyroom/hd009-035-exact-product-context-20261113 --title "Hobby Depot HD009 0.1.35 – passende Produkte" --notes-file /tmp/notes.txt
+          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json name,assets,url
