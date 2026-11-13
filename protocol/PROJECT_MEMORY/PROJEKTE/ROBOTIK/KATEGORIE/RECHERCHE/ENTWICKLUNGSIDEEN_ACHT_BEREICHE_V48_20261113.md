@@ -34,7 +34,7 @@ Ein eigenes recherchierbares Robotikthema darf **Idee**, **theoretischer Entwurf
 - Unitree Entwickler-SDK G1/H1 u. a.: https://github.com/unitreerobotics
 - Agility Digit 5 in Entwicklung und Digit4 bei GXO: https://www.agilityrobotics.com/content/agility-unveils-digit-5-humanoid-robot-built-for-cooperatively-safe-work-at-scale ; https://www.agilityrobotics.com/content/gxo-and-agility-robotics-expand-partnership-to-accelerate-deployment-of-humanoids-in-u-s-operations
 - Realbotix Series 1 Reservierung/2027 geplante Lieferung: https://www.realbotix.com/series-1
-- IFR 2026 professionelle Servicerobotik, darunter ca. 7.000 große Humanoide 2025: https://ifr.org/ifr-press-releases/news/additive-manufacturing-statistics/
+- IFR 2026 professionelle Servicerobotik, darunter ca. 7.000 große Humanoide 2025: https://ifr.org/ifr-press-releases/news/global-sales-of-professional-service-robots-surge-24-percent
 
 ## Daten-/Prüfprotokoll
 - Master bleibt **EINMAL in der Library** `/robotik/Recherchebüro/CURRENT.json`, nun **V48**. Ausgang **576** Forschungseinträge, **3** zielgruppenkontextuell abgegrenzte Forschungsfunde `ROB-0577..0579` hinzugefügt, neuer Bestand **579**. **Alle 576 Originalrecords mit sämtlichen alten Feldern und Werten unverändert**, IDs eindeutig. Bloße Ideen nicht als neue dokumentierte existierende Technikobjekte aufgeblasen.
