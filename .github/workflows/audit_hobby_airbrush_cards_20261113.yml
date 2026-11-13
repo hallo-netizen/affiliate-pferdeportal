@@ -1,0 +1,67 @@
+name: HD Airbrush live card source and comparison audit
+on:
+  push:
+    branches: [audit/hobby-airbrush-cards-design-20261113]
+    paths: [.github/workflows/audit_hobby_airbrush_cards_20261113.yml]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prove whether cards and badge are rendered by HD003 or HD009 and inspect live provider markup
+        run: |
+          python3 - <<'PY'
+          import zipfile, pathlib,re,urllib.request,html,hashlib
+          base=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS')
+          zips=[
+           ('HD003',base/'HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip'),
+           ('HD009',base/'HD-009-AFFILIATE-ZENTRALE/CURRENT.zip'),
+           ('HD007',base/'HD-007-HOBBYREGISTER-CORE/CURRENT.zip'),
+          ]
+          patterns=[
+            re.compile(x,re.I) for x in [
+            'ANZEIGE.{0,35}PARTNER','Empfehlungen','anzeige.*partner','affiliate.*recommendation',
+            'hd.*recommend','hd.*product','ppar.*product','recommend.*grid',
+            'ppar.*slot','bannermark','font-size.*10px','woocommerce',
+            'Kani Traa','Bogner Schurwoll','Gründl Cotton'
+          ]]
+          for name,src in zips:
+            print('PLUGIN_ARCHIVE',name,src.stat().st_size,hashlib.sha256(src.read_bytes()).hexdigest())
+            with zipfile.ZipFile(src) as z:
+              print('FILES',name,len(z.namelist()),z.testzip())
+              matched=0
+              for p in z.namelist():
+                if not p.endswith(('.php','.css','.js','.html','.txt')):continue
+                if z.getinfo(p).file_size>1600000:continue
+                try:lines=z.read(p).decode('utf8','replace').splitlines()
+                except:continue
+                hits=[]
+                for i,l in enumerate(lines):
+                  if any(pat.search(l) for pat in patterns):
+                    hits.append((i+1,l[:600]))
+                if hits and any(re.search(r'(empfehlungen|anzeige.{0,60}partner|recommen|ppar.*slot)',l,re.I) for _,l in hits):
+                  print('PLUGIN_MATCH',name,p,'HITS',len(hits))
+                  for n,l in hits[:35]:print('CODE_MATCH',name,n,l[:650])
+                  matched+=1
+                if matched>16:break
+          for name,url in [
+            ('HOBBY_AIRBRUSH','https://hobby-depot.de/gestalten/malen-zeichnen/airbrush/'),
+            ('PFERD_SCHABRACKEN','https://www.pferde-atelier.de/category/schabracken-beratung/'),
+            ('HAB_SCHLOESSER','https://hab-und-bewahr.de/category/c22-haustuerschloesser-dd9773fd40/')
+          ]:
+            try:
+              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0','Cache-Control':'no-cache'})
+              with urllib.request.urlopen(req,timeout=18) as r:
+                data=r.read(3500000).decode('utf8','replace')
+                print('LIVE',name,'status',r.status,'final_url',r.url,'bytes',len(data))
+                for token in ('Kani Traa','Bogner','Gründl','Cotton Quick','Empfehlungen','ANZEIGE','PARTNER','ppar','hd-affiliate','idealo'):
+                  print('LIVECOUNT',name,token,data.lower().count(token.lower()))
+                  m=re.search(re.escape(token),data,re.I)
+                  if m: print('LIVE_SNIPPET',name,token,re.sub(r'\s+',' ',data[max(0,m.start()-350):m.end()+550])[:1100])
+                for match in list(re.finditer(r'<(?:div|section|article|ul)[^>]*class="[^"]*(?:product|affiliate|recommend|ppar)[^"]*"[^>]*>',data,re.I))[:18]:
+                  print('LIVE_ELEMENT',name,re.sub(r'\s+',' ',match.group(0))[:550])
+            except Exception as e:print('LIVE_ERROR',name,type(e).__name__,str(e)[:280])
+          PY
