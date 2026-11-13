@@ -1,0 +1,84 @@
+name: HAB RC31 verified insurance banner subtree, Idealo coverage clarity
+on:
+  push:
+    branches: [hab-affiliate-rc31-insurance-cascade-20261113]
+    paths: [.github/workflows/hab-rc31-insurance-cascade-verified-release.yml]
+permissions: {contents: write}
+jobs:
+  full-regression-and-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build exact RC23–RC31 chain with existing tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          python3 "$R/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/build_rc24.py"
+          python3 "$R/AFFILIATE/RC24_COVERAGE_DESIGN/qa_rc24.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/build_rc25.py"
+          python3 "$R/AFFILIATE/RC25_MAPPING_REFRESH/qa_rc25.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/build_rc26.py"
+          python3 "$R/AFFILIATE/RC26_SOURCE_AND_DESIGN/qa_rc26.py"
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/build_rc27.py"
+          python3 "$R/AFFILIATE/RC27_EVIDENCE_FEED_CHOICE/qa_rc27.py"
+          python3 "$R/AFFILIATE/RC28_CATALOG_KISS/build_rc28.py"
+          python3 "$R/AFFILIATE/RC28_CATALOG_KISS/qa_rc28.py"
+          python3 "$R/AFFILIATE/RC29_PRODUCT_NAMES_LEAF_CONTRACT/build_rc29.py"
+          python3 "$R/AFFILIATE/RC29_PRODUCT_NAMES_LEAF_CONTRACT/qa_rc29.py"
+          python3 "$R/AFFILIATE/RC30_ONE_LABEL_BULLETS/build_rc30.py"
+          python3 "$R/AFFILIATE/RC30_ONE_LABEL_BULLETS/qa_rc30.py"
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" /tmp/RC30_BASE.zip
+          python3 "$R/AFFILIATE/RC31_INSURANCE_CASCADE/build_rc31.py"
+          python3 "$R/AFFILIATE/RC31_INSURANCE_CASCADE/qa_rc31.py"
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import hashlib
+          R=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ')
+          p=R/'PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          with ZipFile('/tmp/RC30_BASE.zip') as a,ZipFile(p) as b:
+            diff={n for n in a.namelist() if a.read(n)!=b.read(n)}
+            want={'affiliate-portal-router/includes/trait-ppar-output-objects.php','affiliate-portal-router/includes/trait-ppar-idealo.php','affiliate-portal-router/affiliate-portal-router.php','affiliate-portal-router/readme.txt'}
+            assert diff==want,diff
+            assert a.read('affiliate-portal-router/assets/frontend.css')==b.read('affiliate-portal-router/assets/frontend.css')
+            assert a.read('affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php')==b.read('affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php')
+            assert a.read('affiliate-portal-router/includes/trait-ppar-tariff-tools.php')==b.read('affiliate-portal-router/includes/trait-ppar-tariff-tools.php')
+            assert a.read('affiliate-portal-router/includes/trait-ppar-idealo.php')!=b.read('affiliate-portal-router/includes/trait-ppar-idealo.php')
+          print('HAB_RC31_ONLY_4_EXISTING_FILES_CSS_CALCULATORS_AND_IDEALO_DATA_UNCHANGED_PASS',p.stat().st_size,hashlib.sha256(p.read_bytes()).hexdigest())
+          PY
+      - name: Previous provider and product behavior regressions
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess,tempfile
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112')
+          with tempfile.TemporaryDirectory() as td:
+            s=(p/'qa_candidate.py').read_text()
+            assert '0.1.20-rc23' in s
+            q=Path(td)/'qa_rc31_compat.py'
+            q.write_text(s.replace('0.1.20-rc23','0.1.28-rc31'))
+            for cmd in [['python3',str(q)],['python3',str(p/'qa_feed_pipeline.py')],['python3',str(p/'qa_buttons.py')]]:
+              r=subprocess.run(cmd,capture_output=True,text=True)
+              print(r.stdout,r.stderr)
+              assert r.returncode==0,(cmd,r.stderr)
+          print('HAB_RC31_PRODUCT_IDEALO_EBAY_AND_MULTI_PROVIDER_PASS')
+          PY
+      - name: Publish full HAB-004 TEST ZIP only on complete green acceptance
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          FILE=/tmp/HAB_Bewahr_Affiliate_RC31_TEST.zip
+          cp "$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip" "$FILE"
+          TAG=hab-affiliate-rc31-insurance-branch-cascade-20261113
+          gh release create "$TAG" "$FILE#HAB_Bewahr_Affiliate_RC31_TEST.zip" --target "$GITHUB_SHA" \
+            --title "Hab & Bewahr RC31 – Versicherungsbanner nur im richtigen Zweig bis ganz unten (Test)" \
+            --notes "HAB KISS-Zielvertrag: vorhandene Original-Tarifcheck-Banner werden anhand echter Ziele und des bereits verifizierten Versicherungskategoriebaums zugewiesen. Ein echtes Spezialbanner darf NUR vom passenden R2/R3-Anker zu dessen eigenen Nachkommen, nicht pauschal in alle Versicherungen. Ein belegter allgemeiner Versicherungsvergleich darf die ganze Versicherungshierarchie bedienen. Nie in andere Welten, nie Kredit-/Produktbanner im Versicherungszweig. Bereits gespeicherte technisch geprüfte Tarifcheck-Banner werden automatisch in kleinen Admin-Chargen neu zugeordnet; keine Reimporte, keine neue Tabelle, keine neuen Worker. Idealo-Import und Produktkarten unverändert; der Abdeckungsbericht unterscheidet echte Idealo-Feedtreffer von Produkten anderer Händler. Echte Plugin-PHP-Methoden inkl. 65-Banner-Migration und gesamte vorhandene Regressionen bestanden. Externe Live-Bannerliste und neue echte Live-Ausgabe erst nach Installation verifizierbar." \
+            --prerelease
+          gh release view "$TAG" --json assets,url --jq '{url,assets:[.assets[]|{name,size,url}]}'
