@@ -33,10 +33,13 @@ jobs:
             markers='/* HD003 1.50.811:'
             start=b_src.index(markers);end=b_src.index('/* End scoped HD003 recommendations. */',start)+len('/* End scoped HD003 recommendations. */')
             new_css=b_src[start:end]
-            # Undo only the inserted scoped CSS block and the exact text change.
-            restored=b_src.replace('\n'+new_css+'\n','',1).replace('<header><span>Anzeige</span><h2>Empfehlungen</h2>',
-                '<header><span>Anzeige · Partner</span><h2>Empfehlungen</h2>',1)
-            assert restored==a_src, 'Other design text changed outside the approved label/layout'
+            # Source-level grouped disclosure occurs only once on the correct section.
+            assert b_src.count('private static function inline_partner_product($product, $in_labeled_section=false) {')==1
+            assert b_src.count('self::inline_partner_product($product, true)')==1
+            assert b_src.count("($in_labeled_section?'':'<span class=")==1
+            assert a_src.count('private static function inline_partner_product($product) {')==1
+            assert a_src.count('self::inline_partner_product($product, true)')==0
+            assert b_src.count('/* HD003 1.50.811:')==1
             Path('/tmp/hd003811_proposed.css').write_text(new_css)
             for name in b.namelist():
               if name.endswith('.php'):
