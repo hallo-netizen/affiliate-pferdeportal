@@ -91,3 +91,18 @@
 - **GitHub:** dieses Protokoll, Zielvertrag Regel 20, `2026-11-13_TEXTERSTELLUNG_0.3.0_DIAGNOSE_ABNAHME.md`, Release-Manifest und verlustfreie Base64-ZIP im Ordner `PILOT_TEXTERSTELLUNG`. Außerdem in der persistenten Files-Library `/pferdeatelier/PLUGINS/ARBEITSRAUM_PSTE_KISS/` gespeichert. PR #768 bleibt DRAFT.
 - **Nächste Arbeit:** Nutzer installiert nur die neue Texterstellung-ZIP auf separater TEST-WP. Benutzer deaktiviert dort selbst bisherige Plugins, falls notwendig. Vor und nach realem ersten Test über die eingebaute Schaltfläche Diagnose-JSON sichern. Bei Fehlern zuerst das JSON auslesen, keine Ursachen raten.
 - **Noch offen:** automatischer gleichwertiger PSTE-SEO-Fachentscheid, echte DataForSEO-/K0-/WordPress-E2E-Abnahme und PPM-Slot-Kompatibilität. Deshalb Testinstallationsfreigabe, **keine Livefreigabe**. Keine Behauptung, die 61 alten Artikel seien fertig produzierbar.
+
+
+## Schritt 8 – Texterstellung 0.4.0: Vollständiges Backend-Hauptmenü und Redaktionsrunde
+**13.11.2026, isolierte Kopie, keine Alt-/Liveänderung.**
+- Die frühere 0.3.0 hatte alle Stationen unter `Werkzeuge` und nur vereinfachte redaktionelle Handfreigabe. **Anforderung korrigiert:** eigenständiger linker Menüpunkt `Texterstellung` mit 8 Untermenüs, nicht eine lange Werkzeuge-Seite.
+- Zusätzlich **externe einmalige redaktionelle SEO-Entscheidungsdatei** `TEXTERSTELLUNG_SINGLE_EDITOR_BATCH_V1`: recherchierte Themen, vorhandene WordPress-Beiträge, fest vorgemerkte Aufträge und Kategorieinventar; Rücknahme von FREI/BELEGT/KLAERUNG; unveränderliche Quelldaten; fehlerhafter Einzelfall isoliert, Korrektur derselben Charge möglich. Kein neuer nachgelagerter SEO-Prüfer.
+- Eigene verschlüsselte DataForSEO-Zugangsdaten pro Testportal statt Abhängigkeit von alten PSTE-Optionen; nur lesender Fallback für historische gespeicherte Daten.
+- **Eindeutige Zuständigkeit:** Während die externe Redaktionsdatei bearbeitet wird, blockiert eine zusätzliche manuelle Freigabe desselben Themas. Titel-, K0-, Rückgabe- und Diagnoseschnittstellen unverändert.
+- **151 unterschiedliche lokale PHP-Gegenproben bestanden** über 6 Gruppen, plus gesonderte echte Fehleraktions-/JSON-Download-Prüfungen in der Simulation. Neue Simulation: 20 Keywords => 15 FREI, 3 BELEGT, 2 KLÄRUNG => 15 Titel => 15 K0-Aufträge => 10+5 WordPress-Draft-Mocks, Zweitimport 0 Duplikate.
+- ZIP `Texterstellung_0.4.0_TEST_INSTALLIEREN.zip`, 34.346 Bytes, SHA256 `8a5c2faf39081e05d5610bb4757e9d4f6d8eaaa8f52ca0771007be0ab6c8c3c5`, ZIP-Test/6 PHP-Syntaxprüfungen PASS. Alte PSTE/PSERC/TXE-.3-Dateien bitidentisch (Manifest/Abnahmebericht).
+- Sicherung: Vollständiger Installer und Tests/Manifeste persistent im Library-Büro `/pferdeatelier/PLUGINS/ARBEITSRAUM_PSTE_KISS/`; Installer verlustfrei auch als Base64 auf GitHub unter `protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/PILOT_TEXTERSTELLUNG/Texterstellung_0.4.0_TEST_INSTALLIEREN.zip.base64.txt`. GitHub-Leseprotokoll `2026-11-13_TEXTERSTELLUNG_0.4.0_ABNAHME_UND_CHATUEBERGABE.md`.
+- **Noch offen:** echter WP-Test, echter DataForSEO-Anbieterabruf, echter externer K0-Rücklauf auf neuem Auftrag/Slot, automatische vollwertige PSTE-SEO-Entscheidung. Ein vollständiger WP-E2E-Erfolg darf nicht behauptet werden.
+- **Genau nächste Handlung:** Nutzer installiert **nur 0.4.0** auf separater TEST-WP; dort selbst alte Plugins deaktivieren, nicht auf Live. Linke Navigation `Texterstellung → Diagnose` vor dem ersten echten Versuch; danach `Sofortartikel`, echte Kategorie und Rücklauf testen. Bericht als JSON bereitstellen; Fehler nur nach Datenbeweis reparieren.
+
+**Status:** Isoliertes Paket und GitHub-Abnahme fertig; reale WordPress-Testabnahme offen.
