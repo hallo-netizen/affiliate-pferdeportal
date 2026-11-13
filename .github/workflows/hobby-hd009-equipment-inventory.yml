@@ -1,0 +1,27 @@
+name: Hobby Depot 381 hobby equipment coverage inventory and evidence
+on:
+  push:
+    branches: [audit/hobby-hd009-equipment-coverage-20261113]
+    paths: [.github/workflows/hobby-hd009-equipment-inventory.yml]
+permissions:
+  contents: write
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compute literal inventory from exact HD007 and HD009 archived sources
+        run: |
+          python3 scripts/hobby_hd009_equipment_inventory_20261113.py
+      - name: Archive checked inventory as separate audit, without modifying plugin
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/EVIDENCE/HD009_HOBBYREGISTER_AUSRUESTUNGSINVENTUR_381_20261113.csv
+          git add protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/EVIDENCE/HD009_HOBBYREGISTER_AUSRUESTUNGSINVENTUR_SUMMARY_20261113.json
+          git commit -m "Record complete 381-hobby literal equipment inventory, not guessed feed eligibility"
+          git fetch origin audit/hobby-hd009-equipment-coverage-20261113
+          git rebase origin/audit/hobby-hd009-equipment-coverage-20261113
+          git push origin HEAD:refs/heads/audit/hobby-hd009-equipment-coverage-20261113
