@@ -2084,3 +2084,10 @@ Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wa
 - Eine einzige Fach-Keywordzuordnung in `WASSERTECHNIK/KATEGORIEKONZEPT/W4_KEYWORDPROFIL_218_20261114.csv`; dieselben 218 Vorschläge im Pluginmanifest von WT001 0.1.2.
 - Durchgängiger lokaler Testblock: PHP-Lint, ZIP-CRC, WP-CLI-Preflight, 218 Owner, 0 doppelte/verworfene Begriffe, 0 Import- und Paid-Hooks PASS.
 - Isolierte, nicht auf WordPress installierte Test-ZIP in Pluginbüro. WP v0.1.1 bleibt bis zu Nutzerupdate live. Keine anderen Portalgebäude, kein WordPress-Inhaltsimport, keine API-Kosten.
+
+
+## 2026-11-14 – WT001 0.1.2 echter WordPress-Export technisch abgenommen
+- Nutzerexport unverändert als Original-JSON archiviert, SHA256 `2194c0387224183cc2481aba3d4254d59ebf85b70ef8a18c680e624ecd4d76ec`, Git-Blob `a9ab79ef0b1998486b7caabc717039ad054b539a`.
+- Vollständiger Abgleich gegen einzigen W4-Kategorie-Keywordplan: 218/218 eindeutige Keyword-/Owner-Zuordnungen; 128 Korrekturen exakt, weitere 90 nur Groß-/Kleinschreibung normalisiert; null technische Fehler.
+- WordPress-Admin-Export von Version 0.1.2 nachgewiesen, kein neuer WP-Inventur- oder SEMANTISCHER SEO-Nachweis. Keine bezahlte API-Aufrufe, kein Import.
+- Alle Wassertechnik-CURRENTs auf **einmalige kostenkontrollierte** künftige SEO-Recherche nach ausdrücklicher Freigabe aktualisiert. Kein weiterer Preflight nötig.
