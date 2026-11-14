@@ -189,17 +189,16 @@ final class TXE_Workshop {
         $canonical=self::text($item['article_id']??'');
         if ($slot!=='' && !preg_match('/^[a-f0-9]{64}$/D',$slot))throw new RuntimeException('PLAN_SLOT_INVALID');
         if ($canonical!=='' && $slot!=='' && !hash_equals(self::slot($canonical),$slot))throw new RuntimeException('SLOT_ARTICLE_ID_MISMATCH');
-        if ($kind==='ALT_FREIGABE' && ($canonical==='' || $slot==='')) {
-            // Keep the original decision but never fabricate a production-ready identity.
-            $canonical='';$slot='';
-        }
+        // Partially recorded old identities stay visible and unchanged, but remain held.
+        // Never generate or clear an original canonical ID or slot on import.
         $slotOrigin=($slot!=='' ? 'PROVIDED_IN_APPROVAL' : 'GENERATED_LOCALLY');
         // Historical FREI decisions keep their original article identity. A missing
         // original booking is a technical HOLD, not permission to invent a new slot.
         if ($canonical==='' && $slot==='') {
             if ($kind!=='ALT_FREIGABE') { $canonical=$id;$slot=self::slot($id); }
         }
-        $ready=$keyword!==''&&$title!==''&&$category!==''&&$type!==''&&$slot!=='';
+        $ready=$keyword!==''&&$title!==''&&$category!==''&&$type!==''&&$slot!==''
+            &&($kind!=='ALT_FREIGABE'||$canonical!=='');
         $s['orders'][$id]=[
             'id'=>$id,'source_id'=>$source,'origin'=>$kind,'intent'=>self::text($item['intent']??''),
             'target_keyword'=>$keyword,'title'=>$title,'category'=>$category,'article_type'=>$type,
