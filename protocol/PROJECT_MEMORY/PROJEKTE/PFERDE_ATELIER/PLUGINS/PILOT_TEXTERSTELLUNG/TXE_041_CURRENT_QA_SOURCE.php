@@ -19,11 +19,15 @@ if (function_exists('get_site_option')) {
     $txeActivePlugins = array_merge($txeActivePlugins, array_keys((array)get_site_option('active_sitewide_plugins', [])));
 }
 foreach ($txeActivePlugins as $txePluginPath) {
-    if (basename((string)$txePluginPath) === 'portal-seo-topic-engine.php') { $txeOldActive = true; break; }
+    $txeOldEntry = basename((string)$txePluginPath);
+    if (in_array($txeOldEntry, ['portal-seo-topic-engine.php', 'portal-seo-editorial-plan-compiler.php'], true)) {
+        $txeOldActive = true;
+        break;
+    }
 }
-if ($txeOldActive || class_exists('PSTE_Plugin', false)) {
+if ($txeOldActive || class_exists('PSTE_Plugin', false) || class_exists('PSERC_Plugin', false) || defined('PSERC_VERSION')) {
     add_action('admin_notices', static function () {
-        echo '<div class="notice notice-error"><p>Texterstellung: alte Themenengine noch aktiv. Keine zweite Recherche gestartet.</p></div>';
+        echo '<div class="notice notice-error"><p>Texterstellung: PSTE oder PSERC ist bereits aktiv. Keine zweite Recherche, Planung oder Importverarbeitung gestartet.</p></div>';
     });
     return;
 }
