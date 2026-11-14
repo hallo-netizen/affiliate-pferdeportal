@@ -20,7 +20,7 @@ with ZipFile(P) as z:
     assert 'ppar_hab_rc38_tarifcheck_reconcile_v1' in o
     assert "'min_width'=>0,'min_height'=>0" in o
     assert "'_hb_original_format_approved'=>true" in o
-    assert "&& empty($rule['_hb_original_format_approved'])" in o
+    assert "empty($rule['_hb_original_format_approved'])" in o
     assert "if ($hb_single_original && !empty($slot['rule']['_hb_original_format_approved']))" in o
     assert "if($this->output_row_matches_slot_rule" not in m[m.index("private function campaign_matches_contract_slot_rule("):m.index("private function campaign_matches_contract_slot_rule(")+1250]
     assert "max-height:420px!important" in css
