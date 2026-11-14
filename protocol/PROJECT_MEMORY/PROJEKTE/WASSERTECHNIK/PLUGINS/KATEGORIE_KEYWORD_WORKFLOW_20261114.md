@@ -1,16 +1,10 @@
-# Wassertechnik – Kategorie-Plugin/Rechercheablauf W3 (14.11.2026)
+# Wassertechnik – eine fachliche und technische Entscheidungskette
 
-**Status:** Fachlicher Ablauf aus aktueller Robotik V52 bestätigt; eine funktionsfähige Wassertechnik-Pluginversion ist **NICHT** nachgewiesen.
+**Stand 14.11.2026.** Fachbaum W4, SEO-Daten W5, schreibfreie Gesamtvorschau W6 und Menüentwurf W7 sind vorhanden. Keine Wiederholung vorhandener Prüfungen.
 
-**Richtig ist:**
-1. W2-Rohbaum im Wassertechnik-Kategoriebüro als Ausgangsdaten; W3 prüft zusätzlich getrennte Käufer-/Industriekontexte. Neue produktbezogene Seiten nur mit eigenem, plausiblen Fragen-/Technikbedarf.
-2. Sechs *vorgesehene* Industrie-Landingpages werden auf reale Funktion und Überschneidung geprüft; sie sind kein fertiger zweiter Baum und keine sofortige WordPress-Freigabe.
-3. Je letzte Produktseite passende WP-Beitragskategorien nur mit mindestens 3–5 unterschiedlichen Beitragsansätzen. Alte Artikelideen bleiben Konzeptsammlung und werden nicht als SEO-Daten ausgegeben.
-4. **Nach Freigabe des vollständigen Fachbaums**: Das bereits im Quellenbüro liegende HAB-002-Kategorie-Plugin wird nur als Quellreferenz vollständig geprüft. Eine neue, standortisolierte Wassertechnik-Pluginkopie nutzt bestehende Kategorie-/DataForSEO-Logik, soweit im echten Quellcode nachweislich vorhanden. Keine zweite Plugin-/Importlinie oder neue Core-Architektur.
-5. **SEO ausschließlich im WordPress-Backend, bevor neue WP-Seiten zwingend existieren müssen:** Wie bei Robotik kann der reine Preflight aus einem im Plugin befindlichen, vollständig aktualisierten und verbindlich abgenommenen Baumprofil abgeleitet werden. Es ist ausdrücklich zu prüfen, dass nicht nur die alten W2-Keywords statt der W3-Kontextseiten gemessen werden.
-6. Kostenloser Profil-/Keyword-Preflight und evtl. DataForSEO-Zugangstest; kostenpflichtige Recherche nur manuell, einzelne autorisierte Anfrage; Ergebnisse dokumentieren, fachlich einarbeiten.
-7. Erst nach finaler fachlicher und SEO-Prüfung: Importvorschau mit 0 Schreibungen, ausdrückliche Freigabe, genau ein ADD-only-Lauf und echter WP-Readback. Keine Alt-Importe erneut starten.
-
-**Trennregel:** W3-Fachkonzept entscheidet den Seiten-/Artikel-Owner. WP-Plugin recherchiert SEO und vollzieht nur genehmigte Importe. Das Designplugin steuert ausschließlich die sichtbare Ausgabe. Keine doppelten Entscheidungsstellen.
-
-**Noch OFFEN:** Quellprüfung, Website-Bindung und WP/DataForSEO-Funktionsnachweis des Wassertechnik-Plugins. Nicht behaupten, SEO sei bereits ausgeführt.
+1. **Konkretes Produkt** bildet die unterste WordPress-Seitenebene. Darunter werden sinnvoll benannte, frei gewählte **produktspezifische Beitragskategorien** geführt. Grob 3–5 fachlich verschiedene Artikelideen je Kategorie sollen plausibel sein, keine starre technische Sperre.
+2. **SEO nur einmal** aus W5 auf die 218 vorhandenen W4-Owner zurückgeführt; fehlende Werte sind keine Null-Nachfrage. Keine zweite Keywordentscheidung, kein kostenpflichtiger Gesamt-Neustart.
+3. **Ein Importziel W6**: 113 WP-Seiten, 105 flache WP-Beitragskategorien; keine Beiträge aus den 356 Ideen. Kategorien redaktionell auf genau eine Produktseite bezogen, nicht als zusätzliche WordPress-Unterseite.
+4. **Ein technischer Block fehlt:** WT001 0.1.4 besitzt nach Quellprüfung keinen Inhaltsimport (`W8_IMPORT_QUELLCODE_PRUEFUNG_20261114.md`). Nur die vorhandene WT001-Identität dafür einmalig erweitern, kein zweiter Schreiber.
+5. Nach **ausdrücklicher** Importfreigabe: einmaliger Bestandsabgleich, ein ADD-only-Import, ein WordPress-Readback. Originalseiten nicht löschen, keine Fremdportale verändern.
+6. Mega-Menü aus W7 nach fachlicher Nähe und optischem Gleichgewicht aufbauen. Produktkategorien nur im Produktkontext, nicht als vierte Mega-Menüebene. Desktop/Mobil erst nach Frontendfreigabe tatsächlich prüfen.
