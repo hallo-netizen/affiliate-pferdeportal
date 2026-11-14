@@ -193,7 +193,7 @@ Darunter **Geschirrspüler-Einräumrobotik**, Pflegehaarwäsche, Blindenführung
 ## 6. Der nächste Schritt im nachgewiesenen Workflow
 
 1. **Zwölf bislang nicht zugeordnete Forschungsfälle wurden in derselben Fachrunde nachgeprüft:** **neun weitere eigenständige Funktions-/Konzeptseiten-Kandidaten** mit jeweils 3×3 fachlich unterscheidbaren Artikelideen, **drei noch offene Robotik-/Familiengrenzfälle**. Sie werden als eigene Forschungsqueue geführt, **nicht stillschweigend in die 131 Seitenpositionen addiert**. Die Abgrenzung mit bestehenden Produkttypen ist vor Aufnahme in den finalen Baum abzuschließen. Details im Abschnitt 8 unten.
-2. Gleichzeitig die **63 generisch benannten Alt-WP-Inhaltskategorien** anhand der bereits vorhandenen 356 Einzelthemen sinnvoll und kurz benennen; nur die fachlichen Vorschläge im Profilentwurf, noch keine WP-Schreibvorgänge.
+2. **63/63 generische Originalrubriken nun einzeln aus ihren vier wirklichen Artikelthemen mit einem fachlichen 1–2-Wort-Namensvorschlag versehen**. Vollständige überprüfbare Tabelle `V51_63_FACHNAMEN_STATT_KAUFBERATUNG.csv`. **Nur Vorschläge im neuen Konzept**; Original-Plugin-/WordPress-Namen nicht überschrieben. Eine abschließende Redaktionsprüfung kann manche Begriffe verbessern.
 3. Den vollständigen 8er-Fachbaum anschließend **einmal fachlich abnehmen** (einschließlich Industrie-Hubs, Magazin, Glossar/Finder/Register, Anzeigen). **Danach** die separate Keyword-/Kannibalisierungsprüfung aus dem bestehenden Plugin/SEO-Weg.
 4. **Erst nach bestätigter Freigabe** und frischer Read-only-WordPress-Bestandsaufnahme einen kontrollierten Delta-Import desselben Robotik-Plugins planen. Der letzte echte Live-Inventurbeleg stammt vom 09.11. und ersetzt den aktuellen Abruf nicht.
 
@@ -223,3 +223,7 @@ Darunter **Geschirrspüler-Einräumrobotik**, Pflegehaarwäsche, Blindenführung
 - **ROB-0562 Geschirrspüler-Einräumroboter** (Haushalt, FUNKTION_FACHKANDIDAT): Geschirr physisch erfassen und in Maschine einräumen statt Essen kochen; Forscher demonstrieren Teilaufgaben, kein verkaufsfähiger Haushaltsroboter Quelle: https://www.max-robotics.com/en/research/publications/cmu42tbzo01ajpd42mhutzdf3
 
 Für die neun eigenständigen Kandidaten sind die **27 individuellen Rubriken mit 81 Artikelansätzen** in der strukturierten JSON-Datei hinterlegt. Die drei übrigen Fälle bleiben ohne künstliche WP-Endseite.
+
+## 9. 63 Originalrubriken „Kaufberatung“ mit differenzierten Fachnamen versehen
+
+Nicht pauschal in „Einsatz“ umbenannt, sondern **63 konkrete 1–2-Wort-Vorschläge** aus den **jeweils vier** vorhandenen Artikelrichtungen des Originals entwickelt; Original-Kategorietitel und ID bleiben unberührt. Beispiele: Melkroboter → **Stallplanung** (Herdengröße, Laufwege, Altstall, Betrieb), Blindenführroboter wird **nicht** an eine bestehende Kategorie umgehängt, Scheuersaugroboter → **Bodenreinigung**, Palettenhubroboter → **Lagertransport**, Bau-/Transport-Nischen jeweils passend. Die 63er-CSV enthält den vollständigen Abgleich und vier Originalthemen pro Vorschlag. Kein Import, kein fertiger Artikel.
