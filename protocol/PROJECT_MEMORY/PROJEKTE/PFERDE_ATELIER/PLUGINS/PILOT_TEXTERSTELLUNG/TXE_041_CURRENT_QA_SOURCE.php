@@ -31,16 +31,24 @@ if ($txeOldActive || class_exists('PSTE_Plugin', false) || class_exists('PSERC_P
     });
     return;
 }
-require_once __DIR__.'/original/pste/portal-seo-topic-engine.php';
-// The WordPress backend has one top-level entry. Existing PSTE admin functions remain intact.
-add_action('admin_menu', static function () { remove_menu_page('portal-seo-topic-engine'); }, 1001);
-// Existing PSERC import functions: unchanged originals. No second importer implementation.
-require_once __DIR__.'/original/pserc/class-pserc-stable-json.php';
-require_once __DIR__.'/original/pserc/class-pserc-plan-slot-identity.php';
-require_once __DIR__.'/original/pserc/class-pserc-system4-import.php';
-// Original PSERC K0 batch encoder and technical five-field boundary (unchanged).
-require_once __DIR__.'/original/pserc/class-pserc-plan-snapshot-store.php';
-require_once __DIR__.'/original/pserc/class-pserc-metadata-boundary.php';
+// Critical: the original PSTE entry point registers cron/loopback actions immediately.
+// Load it ONLY for the site explicitly confirmed for this test, not merely on activation.
+$txeIsConfirmed = function_exists('get_option') && function_exists('home_url')
+    && function_exists('get_current_blog_id')
+    && hash_equals(hash('sha256', (string)home_url('/') . '|' . (string)get_current_blog_id()),
+        (string)get_option('texterstellung_testsite_confirmation_v1', ''));
+if ($txeIsConfirmed) {
+    require_once __DIR__.'/original/pste/portal-seo-topic-engine.php';
+    // The WordPress backend has one top-level entry. Existing PSTE admin functions remain intact.
+    add_action('admin_menu', static function () { remove_menu_page('portal-seo-topic-engine'); }, 1001);
+    // Existing PSERC import functions: unchanged originals. No second importer implementation.
+    require_once __DIR__.'/original/pserc/class-pserc-stable-json.php';
+    require_once __DIR__.'/original/pserc/class-pserc-plan-slot-identity.php';
+    require_once __DIR__.'/original/pserc/class-pserc-system4-import.php';
+    // Original PSERC K0 batch encoder and technical five-field boundary (unchanged).
+    require_once __DIR__.'/original/pserc/class-pserc-plan-snapshot-store.php';
+    require_once __DIR__.'/original/pserc/class-pserc-metadata-boundary.php';
+}
 
 
 final class TXE_Workshop {
@@ -77,9 +85,11 @@ final class TXE_Workshop {
         if (!self::permitted()) {
             wp_die('TESTSITE_CONFIRMATION_NOT_SAVED');
         }
-        // The nested unchanged PSTE source cannot receive the WordPress plugin
-        // activation callback itself. Reuse its dormant status-only activation
-        // ONLY after the administrator confirms the isolated test site.
+        // Only NOW, after the confirmed administrator action, load the original code.
+        // The next ordinary request loads it automatically using the saved site proof.
+        if (!class_exists('PSTE_Plugin', false)) {
+            require_once __DIR__.'/original/pste/portal-seo-topic-engine.php';
+        }
         PSTE_Plugin::activate();
         wp_safe_redirect(add_query_arg(['page'=>self::SLUG, 'txe_testmode'=>'enabled'], admin_url('admin.php')));
         exit;
@@ -764,14 +774,10 @@ final class TXE_Workshop {
                 $r=self::loadLegacyApprovals();
                 self::redirect('Alte FREI-Freigaben nur lesend übernommen: '.(int)$r['total'].', davon '.(int)$r['held'].' ohne vollständige Daten.');
             }
-            if($action==='txe_export_titles'){
-                self::download(self::exportTitleBatch((int)($_POST['count']??20)),'texterstellung-titelauftrag.json');
-            }
-            if($action==='txe_import_titles'){
-                $r=self::importTitleBatch(self::fileJson('title_file'));
-                TXE_Diagnose::record('TITLE_BATCH_RESULT',['item_count'=>(int)($r['titles']??0),'held'=>count((array)($r['held']??[]))]);
-                self::redirect('Titel zurück: '.(int)$r['titles'].', offen: '.(int)$r['pending'].', fehlerhafte Einzelantworten: '.count($r['held']));
-            }
+            // Title desk uses the unchanged PSTE original admin_post handlers.
+            // Old TXE synthetic row IDs must not become an alternative live title route.
+            if(in_array($action,['txe_export_titles','txe_import_titles'],true))
+                throw new RuntimeException('ORIGINAL_PSTE_TITLE_ACTION_ONLY');
 
             if($action==='txe_quick'){
                 $id=self::quick(['target_keyword'=>sanitize_text_field(wp_unslash($_POST['keyword']??'')),
@@ -901,8 +907,22 @@ final class TXE_Workshop {
         }
         if($view==='titel') {
         echo '<h2>3. Externe Titelrunde – Originalformat</h2><p>Nur fest freigegebene Suchabsichten ohne Titel. Der externe Titelworker darf ausschließlich das Titelfeld ausfüllen.</p>';
-        self::formStart('export_titles');echo 'Anzahl: <input type="number" name="count" min="1" max="50" value="20">';submit_button('Titeldatei exportieren','secondary','submit',false);echo '</form>';
-        self::formStart('import_titles',true);echo '<input type="file" name="title_file" accept=".json,application/json" required>';submit_button('Titeldatei zurücknehmen','secondary','submit',false);echo '</form>';
+        if (!PSTE_Plugin::isReady()) {
+            echo '<div class="notice notice-warning"><p>Original-Titelwerkstatt noch nicht freigegeben. Zuerst die bestehende PSTE-Migration abschließen.</p></div>';
+        } else {
+        // The existing PSTE admin_post actions read actual pool IDs and the signed SEO receipts.
+        // No synthetic TXE title batch: the old worker retains full title ownership.
+        echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';
+        echo '<input type="hidden" name="action" value="pste_mini_keyword_export">';
+        wp_nonce_field('pste_mini_keyword_export');
+        echo 'Original-Titelrunde: <select name="mini_limit"><option value="100">bis 100</option><option value="500">bis 500</option></select> ';
+        submit_button('Original-Titelauftrag herunterladen','secondary','submit',false);echo '</form>';
+        echo '<form method="post" enctype="multipart/form-data" action="'.esc_url(admin_url('admin-post.php')).'">';
+        echo '<input type="hidden" name="action" value="pste_mini_keyword_import">';
+        wp_nonce_field('pste_mini_keyword_import');
+        echo '<input type="file" name="mini_result_json" accept=".json,application/json" required> ';
+        submit_button('Original-Titelantwort einlesen','secondary','submit',false);echo '</form>';
+        }
         echo '<h2>Externen Titel einem wartenden Sofortauftrag zuordnen</h2>';
         self::formStart('title_return');echo '<input name="order_id" placeholder="Auftragsnummer" required> <input name="title" placeholder="Extern fertiggestellter Titel" required>';submit_button('Nur Titel zuordnen','secondary','submit',false);echo '</form>';
         }
