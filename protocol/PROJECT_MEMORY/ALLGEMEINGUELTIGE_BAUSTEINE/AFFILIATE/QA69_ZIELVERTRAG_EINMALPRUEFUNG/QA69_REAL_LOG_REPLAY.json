@@ -1,0 +1,66 @@
+{
+  "type": "REAL_AUDIT_EVENT_REPLAY_ONLY",
+  "user_input_files": [
+    {
+      "filename": "pferdeatelier-ebay-lauf-574cb003b132.csv",
+      "sha256": "6e7f81b324612c01b6e3b26871408e91c72ed6c74b18b63ef6ac5281793d5d4f",
+      "bytes": 875794
+    },
+    {
+      "filename": "Pferdeatelier_eBay_fehlende_Produktfamilien_97507628-4f4.csv",
+      "sha256": "3c45b8f810664d518b958e887894ee50df6bea236e45d509e1345b4812071cdf",
+      "bytes": 75259
+    }
+  ],
+  "replayed_event_count": 2769,
+  "replayed_real_state_count": 2769,
+  "same_run_uuid": "97507628-4f4d-4527-bd77-fa573bce7067",
+  "real_observed_final": {
+    "status": "running",
+    "phase": "gapfill_discovery",
+    "progress_seq": "474",
+    "transport_ticks": "468",
+    "selection_scanned": "155",
+    "selection_materialized": "2",
+    "skipped_item_errors_count": "153",
+    "covered": "5",
+    "required": "283"
+  },
+  "pre_public_cleanup_actual": {
+    "audit_events": 395,
+    "unique_worker_ticks": 196,
+    "from_utc": "2026-11-14T02:56:26+00:00",
+    "to_utc": "2026-11-14T06:35:04+00:00",
+    "note": "Audited real stages; removed code branch prevents the same scan in future canonical selection; an exact total time saving cannot be inferred"
+  },
+  "missing_families_actual": {
+    "Angebote im Suchausschnitt, aber nicht angenommen": 31,
+    "Abruf hat zulässige Angebote; trotzdem nicht in dieser Abdeckung": 32,
+    "Kein zugeordneter Einzelabruf in diesem Teilstand": 215
+  },
+  "missing_family_count": 278,
+  "forbidden_claims": [
+    "Real 283-family eBay product simulation",
+    "Real WordPress DB/public output test",
+    "Real 153 item revalidation",
+    "Live workflow success"
+  ],
+  "unavailable_original_inputs": [
+    "creative_identity_hash",
+    "fresh_until",
+    "item_id",
+    "output_object",
+    "policy_state",
+    "public_checkpoint",
+    "source_payload",
+    "source_rating",
+    "source_state",
+    "wp_options_snapshot"
+  ],
+  "real_inputs_complete_for_product_decision_reexecution": false,
+  "replay_integrity_pass": true,
+  "replay_errors": [],
+  "full_1_to_1_e2e_acceptance": false,
+  "full_1_to_1_e2e_verdict": "NOT_ACCEPTED_NO_REAL_WP_AND_EBAY_ITEM_SNAPSHOT",
+  "next_evidence_needed": "Current read-only WordPress source/creative/output/options snapshot plus full non-secret original eBay responses for same time-window, with real public results and scheduler ticks."
+}
