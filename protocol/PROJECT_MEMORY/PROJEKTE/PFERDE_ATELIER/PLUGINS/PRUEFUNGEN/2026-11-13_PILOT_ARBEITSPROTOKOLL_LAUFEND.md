@@ -128,3 +128,9 @@
 - Vollständiges Paket im persistenten Library-Büro `/pferdeatelier/PLUGINS/ARBEITSRAUM_PSTE_KISS/` und als verlustfreies ZIP-Base64 im GitHub-PR (Ordner `PILOT_TEXTERSTELLUNG`) gespeichert. Bericht `2026-11-14_TEXTERSTELLUNG_0.4.1_AKTIVIERUNGSFIX_BERICHT.md`; reproduzierbare Testdatei und Release-Manifest daneben.
 - **Nächster Schritt:** Nutzer lädt ausschließlich Version 0.4.1 auf der separaten Test-WP hoch und ersetzt, falls angeboten, 0.4.0. Aktivieren; links `Texterstellung` öffnen; **Testmodus mit Checkbox** freischalten; danach den echten Diagnose-JSON-Bericht ziehen und testen. **Nie** auf Live den Testmodus freigeben. Alte Plugins bleiben unangetastet.
 - **Bekannte Grenze unverändert:** alte automatische PSTE-Semantik nicht 1:1 übernommen; reale WordPress-K0-Ende-zu-Ende-Abnahme offen. Keine Livefreigabe.
+
+### Schritt 10 – Nutzer meldet: Version 0.4.1 installiert, erste Echtdiagnose ausstehend
+- **14.11.2026:** Nutzer bestätigt im Chat: „4.1. ist installiert. wie weiter?“ Nur **Installation** ist bestätigt; Aktivierung, Adminfreigabe und Testlauf sind **noch nicht** nachgewiesen.
+- Konkreter bestehender Bedienweg (kein Neubau): Plugin ggf. aktivieren → links **Texterstellung** öffnen → bestehende einmalige Testinstallation-Bestätigung in 0.4.1 setzen → **Diagnose**-JSON herunterladen und bereitstellen.
+- Nach dem ersten echten Diagnosebericht Ursachen anhand dieser Daten prüfen. Erst anschließend regulären Sofortartikel → Titel → K0 → Import erproben. Keine Vermutung über Erfolg, keine Plugins der produktiven Website verändern.
+- Nutzer wünscht künftig **normale Aktivierung ohne unnötige zusätzliche Sperrmechanik**. Für die bereits installierte 0.4.1 den aktuell tatsächlich vorhandenen Bedienweg erklären; keine ungetestete ZIP behaupten. Für einen eventuellen nächsten Patch keine weiteren unnötigen Einrichtungsanforderungen hinzufügen.
