@@ -4,11 +4,11 @@
 ## Stand und belastbare Zählung
 - Der geprüfte **V52/V67-Bestandsbaum** führt **100 fachliche Robotertyp-Seiten** in sieben Privatwelten (ohne Gewerbe), darunter Haushalt 18, Garten 14, Freizeit 14, Sport 17, Bildung 10, Pflege 15, Humanoide 12. **Das sind Robotertyp-Seiten, nicht 100 nach Marktstatus validierte Modelle.** Der gesonderte neue Recherchebestand V67–V73 ist nicht vollständig in diese 100 umgewandelt.
 - Die sechs Quellendeltas V69, V70, V71, V72, V72-Fortsetzung und V73 enthalten **116 Einzelfunde**: **5 Produkt / 39 Projekt / 72 Idee**. Dies ist ein **einseitiger neuer Quellenjahrgang**, keine belastbare Quote aller Robotermodelle im Roboterbüro oder aller späteren Webseiten. Zu früheren Quellen und Typen kommt es zu Überschneidungen; bloß addieren ist fachlich falsch.
-- V74 stellt der Ideenlast **17 belegte Hersteller-Produktbeispiele** aus sieben nichtindustriellen Hauptwelten gegenüber. **Nicht 17 neue Kategorien oder neu entdeckte Geräte**: 3 Modelle/Hersteller sind bereits ausdrücklich aus V69 bzw. V67 bekannt, weitere mögliche Überschneidungen mit älteren 581 Forschungsfunden werden konservativ als Ergänzung zum bestehenden Typ behandelt.
+- V74 stellt der Ideenlast **21 belegte Hersteller-Produktbeispiele** aus sieben nichtindustriellen Hauptwelten gegenüber. **Nicht 21 neue Kategorien oder neu entdeckte Geräte**: 3 Modelle/Hersteller sind bereits ausdrücklich aus V69 bzw. V67 bekannt, weitere mögliche Überschneidungen mit älteren 581 Forschungsfunden werden konservativ als Ergänzung zum bestehenden Typ behandelt.
 - **Gesamtverhältnis Produkt/Projekt/Idee derzeit nicht präzise bestimmbar**, weil die älteren Typseiten und 581 Master-Rechercheeinträge noch keine einheitliche Statusklassifikation pro tatsächlich eigenständigem Modell haben. Keine Scheingenauigkeit und kein pauschales 70-Prozent-PASS.
 - **Redaktionelle Leitlinie:** Reale, konkret existierende Geräte **deutlich überwiegend**; ungefähr zwei Drittel bis drei Viertel als Richtung, **kein Sollzwang**, keine 70,0005-%-Grenze, keine Löschung vorhandener Ideen, kein Auffüllen durch Hersteller-Varianten. Für neue Recherchen gezielt mehr Produktquellen suchen; weiter Patente/Entwürfe berücksichtigen.
 
-## 17 Hersteller- und Produktbelege, exakt ein Fundstatus
+## 21 Hersteller- und Produktbelege, exakt ein Fundstatus
 | ID | Welt | Nachgewiesenes Produkt | Typ-Owner / Entscheidung |
 |---|---|---|---|
 | V74-001 | Garten | Yarbo Y40 Schneeräumroboter | Schneeroboter: bestehender Typ; Modellbeleg |
@@ -29,6 +29,11 @@
 | V74-016 | Pflege | Trexo Home | Geh-Exoskelette: bereits im V67-Umfeld recherchierter Hersteller; Produktbeleg, keine neue Typseite |
 | V74-017 | Humanoide | Unitree G1 | Entwicklungsroboter: bereits früher dokumentierte Plattform; vorhandenen Robotertyp vertiefen, keine Arbeitswelt |
 
+| V74-018 | Haushalt | Ecovacs WINBOT W2 OMNI | Fensterputzroboter: bestehender Typ; zusätzliches aktuell angebotenes Modell |
+| V74-019 | Haushalt | Enabot EBO Air 2 | Haustierroboter: bestehender Typ; Kamera/Telepräsenzfunktion ist keine zusätzliche Roboterklasse |
+| V74-020 | Haushalt | Roborock Saros Z70 | Saugroboter / Aufräumroboter: bestehender Saugroboter als konkreter Nachweis für begrenzte Aufräumfunktion, KEINE neue universelle Haushaltshelferseite |
+| V74-021 | Haushalt | Whisker Litter-Robot 4 | Haustierroboter / Katzenkloroboter: bestehender bereits in V67 geführter Katzenkloroboter-Fall; Produktbeleg |
+
 ## Quellen, konkrete Grenzen
 - **V74-001: Yarbo Y40 Schneeräumroboter** – Yarbo Europa: autonom fahrendes Schneeräumsystem, Shop nennt Versand/In-stock für konkretes System **Quelle:** https://eu.yarbo.com/products/yarbo-snow-blower.
 - **V74-002: Yarbo Y40 mit Laubgebläse** – Yarbo Europa: mobile Plattform mit Laubgebläse im Händlerangebot **Quelle:** https://eu.yarbo.com/de/collections/leaf-blower.
@@ -48,6 +53,11 @@
 - **V74-016: Trexo Home** – Europäischer Herstellerauftritt: tatsächlich eingesetztes Kinder-Gehsystem; regionale Bestellung über Reservierung und individuelle Passprüfung **Quelle:** https://eu.trexorobotics.com/trexo-home.
 - **V74-017: Unitree G1** – Hersteller-Shop: real gebauter Humanoid im Angebot, Standardmodell aktuell als rückständig/backordered markiert; KEIN Nachweis für selbstständige Haushaltspflege **Quelle:** https://shop.unitree.com/collections/humanoid-robot/products/unitree-g1.
 
+- **V74-018: Ecovacs WINBOT W2 OMNI** – Deutscher Hersteller-Shop: realer, sensorgestützter Fensterputzroboter mit eigener Station; konkrete Glasmaße und Sicherungsseil beachten **Quelle:** https://www.ecovacs.com/de/shop/winbot-window-cleaning-robot/winbot-w2-omni.
+- **V74-019: Enabot EBO Air 2** – Deutscher Hersteller-Shop: motorisch fahrender Begleit- und Beobachtungsroboter mit Kamera und Ladestation; derzeit im Shop ausdrücklich auch als ausverkauft bezeichnet **Quelle:** https://de.store.enabot.com/products/ebo-air-2-familybot.
+- **V74-020: Roborock Saros Z70** – Deutscher Hersteller-Shop: kaufbarer Saugroboter mit ausfahrbarem Roboterarm; laut Hersteller nur ausgewählte kleine Gegenstände bis 300 g automatisch aufnehmbar **Quelle:** https://de.roborock.com/products/roborock-saros-z70?variant=47153432952989.
+- **V74-021: Whisker Litter-Robot 4** – Europa-Shop: reale selbstreinigende Katzentoilette, automatisiert Streusieben und Abfalltrennung; transportiert Tiere NICHT **Quelle:** https://www.litter-robot.com/eu/litter-robot-4.html.
+
 ### Zwei fachlich sinnvolle neue Robotertyp-Kandidaten aus REALEN Produkten
 **Sport / Wander-Exoskelette (Hypershell X)**
 - **Technik:** Antrieb am Hüftgurt und unterstützte Schritte; Sensordaten im Gelände; Akkulaufzeit und Leistung; Passform und Grenzen.
@@ -64,7 +74,7 @@
 ## Fachliche Qualitätsgrenzen
 - Echtes Produkt bedeutet **physisch gebaut und vom Hersteller vertrieben/angeboten**; **nicht**, dass es gerade in Deutschland lagernd, medizinisch wirksam oder im Alltag universell einsetzbar ist.
 - Exaktes Modell in **ein** Robotermodellregister; bestehende Owner **nicht duplizieren**. Projekt/Idee mit eigener Quelle weiterhin aufbewahren. Ein Spezialgerät kann als Modellbeleg einen bestehenden Robotertyp stärken, ohne neue Seite.
-- **Moflin** ist bereits V69-006. **Trexo / Unitree** sind früher dokumentierte Geräte. **GoChess Lite/Pro, smarte Sensorgeräte und andere automatisierte Gegenstände ohne eigentliche Robotik** werden nicht als zusätzliche Roboter gezählt.
+- **Moflin** ist bereits V69-006. **Trexo / Unitree** sind früher dokumentierte Geräte. **GoChess Lite/Mini, smarte Sensorgeräte und andere automatisierte Gegenstände ohne eigentliche Robotik** werden nicht als zusätzliche Roboter gezählt.
 - Sport-Exoskelett **nicht** mit medizinischem Pflege-Exoskelett zusammenwerfen: Hersteller schreibt ausdrücklich, dass Hypershell kein Medizinprodukt ist.
 - **Ausgeschlossen:** Gewerbe, industrielle Robotik, humanoide Arbeitsroboter; auch bei gemischten Herstelleranwendungen nur die private Nutzung recherchiert.
 - Magazin/Glossar/Roboterfinder/Anzeigenmarkt bleiben **eine** gemeinsam abgeleitete Datenansicht; **kein** neues zweites Register. 16 SEO-HOLDs und der zuletzt nachgewiesene WP-Zwischenstand 16/227 bleiben unverändert.
