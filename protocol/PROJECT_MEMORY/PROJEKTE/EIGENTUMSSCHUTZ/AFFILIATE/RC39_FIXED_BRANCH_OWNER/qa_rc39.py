@@ -117,8 +117,8 @@ old=(R/"AFFILIATE/RC38_PFERDE_CENTRAL_FORMAT/qa_rc38.py").read_text()
 old=old.replace("0.1.35-rc38","0.1.36-rc39")
 old=old.replace("ppar_hab_rc38_tarifcheck_reconcile_v1","ppar_hab_rc39_tarifcheck_reconcile_v1")
 # The historical RC37 gate was replaced exactly once with RC39 as well.
-old=old.replace("0.1.34-rc37","0.1.36-rc39")
-old=old.replace("ppar_hab_rc37_tarifcheck_reconcile_v1","ppar_hab_rc39_tarifcheck_reconcile_v1")
+# Preserve the historical RC37 source assertion; its replacement target
+# is already RC39 from the two lines above.
 with TemporaryDirectory() as td:
     p=Path(td)/"qa_rc38_on_rc39.py"
     p.write_text(old)
