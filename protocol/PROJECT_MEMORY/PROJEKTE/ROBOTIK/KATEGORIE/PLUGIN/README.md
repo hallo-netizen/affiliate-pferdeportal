@@ -1,5 +1,13 @@
 # Robotik – Pluginbüro / Kategorie-Workflow
 
+## 0.4.8 / V62 – WP-Gesamtvorschau ohne Schreibvorgänge (TEST, 14.11.2026)
+- Der alte 0.4.7-Code und Datenbestand bleiben unverändert; 2 neue Dateien (Sollbaum-Master und Nur-Lese-Vorschau), nur Menüanmeldung im Hauptfile ergänzt.
+- **8 Welten, 188 Seitenpositionen (141 Typen + 47 Gruppen), 296 Inhaltsrubriken**, neu im Soll: achte WP-Hauptwelt „Humanoide“. 26 SEO-Redaktionsvorschläge; alle 16 SEO-HOLDs unverändert.
+- **WordPress → Robotik Kategorie → Gesamtvorschau (nur lesend)**: Seite ermittelt ausschließlich aktuelle Bestände via vorhandener Inventurklasse und prüft exakte Originalkennung/Hierarchie; EIN JSON-Export mit Beibehalten-/Konflikt-/Neuanlagekandidaten. Keine WP-Objekte, Optionen, SEO-Gebühren, Frontend oder Writer verändert.
+- ACHTUNG: **Erstimport bleibt alt 104 Seiten/89 Kategorien**, daher bis zum final freigegebenen V62-Deltawriter nicht benutzen. Die Vorschau ist keine Importfreigabe. 6 PHP-Lint, 16 Mocktests, ZIP und 7 identische alte Dateien lokal geprüft; Live-WP-Readback noch offen.
+- GitHub **`PLUGIN/CURRENT.zip` = `PLUGIN/VERSIONEN/0.4.8.zip`**, 93.496 Bytes, SHA256 `d42b046f3d27b52c68a63ebaaf6775b6c73935124223d14d247cdac5666cf7ff`.
+
+
 ## 0.4.7 / V60 – Task-Fehler 40101 und 9/38-Fortsetzung (TEST)
 - **Bestehendes Plugin aktualisieren; KEIN Neuaufbau.** Im WordPress-0.4.6-Lauf scheiterte das erste SERP-Google-Ergebnis bei Auftrag 10 mit DataForSEO `Internal SE Server Error.` (offizieller innerer Task-Code **40101**). Der alte Code erkannte nur HTTP500; seine Wiederaufnahme konnte nach vorherigen Lücken den echten Index 9 nicht abbilden.
 - Ein manueller Fortsetzen-Button bewahrt die bisherigen **9/38** Schritte (8 reale Ergebnisse + 1 offener Freizeit-Auftrag), Kosten 0,3535 USD und das bisherige genehmigte Budget. Der zehnte Auftrag wird **nicht** erneut gesendet. Künftige belegte 40101-, 50000- oder HTTP500-Anbieterfehler überspringt das Plugin ohne Wiederholung und markiert sie im Bericht **NICHT_GEPRUEFT**. Parameterfehler/unklare Fehler bleiben sicher blockiert.
