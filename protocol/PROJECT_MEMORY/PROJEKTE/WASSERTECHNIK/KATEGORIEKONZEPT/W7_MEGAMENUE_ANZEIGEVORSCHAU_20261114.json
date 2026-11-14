@@ -659,7 +659,7 @@
             {
               "heading": "Kommunale/Großanlagen",
               "heading_type": "industry_landing",
-              "wp_group_path": null,
+              "wp_group_path": "industrie-grossanlagen/kommunale-grossanlagen",
               "products": []
             }
           ]
@@ -701,7 +701,7 @@
             {
               "heading": "Industrielles Abwasser",
               "heading_type": "industry_landing",
-              "wp_group_path": null,
+              "wp_group_path": "industrie-grossanlagen/industrielles-abwasser",
               "products": []
             }
           ]
