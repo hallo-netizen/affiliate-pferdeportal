@@ -1,0 +1,35 @@
+--- /mnt/data/ebay_qa72/affiliate-portal-router/includes/trait-ppar-ebay-run.php	2026-11-14 15:23:04.000000000 +0000
++++ /mnt/data/ebay_qa73/affiliate-portal-router/includes/trait-ppar-ebay-run.php	2026-11-14 16:12:21.731552374 +0000
+@@ -679,6 +679,17 @@
+             'private_listing_ids'=>array(),
+             'verification'=>array('business'=>$business,'private'=>$private),
+         );
++        // One canonical publication per run and unchanged verified membership.
++        // A storage failure after the checkpoint write can replay this same phase.
++        // In that case reuse the already-written checkpoint; never write it twice.
++        $published=$this->ebay_public_checkpoint_load();
++        if ($this->ebay_public_checkpoint_is_safe($published)
++            && sanitize_key((string)($published['source']??''))==='canonical_public_verify'
++            && sanitize_text_field((string)($published['run_uuid']??''))===(string)$checkpoint['run_uuid']
++            && $this->ebay_public_checkpoint_business_ids($published)
++                ===$this->ebay_public_checkpoint_business_ids($checkpoint)) {
++            return $published;
++        }
+         $previous = $this->ebay_public_checkpoint_business_ids();
+         $saved = $this->ebay_public_checkpoint_save($checkpoint,$expected_before);
+         // The public checkpoint can withdraw or add eBay cards AFTER an article
+@@ -3101,7 +3112,13 @@
+             if(empty($plan['checkpoint_business_cleanup_initialized'])){$plan['business_prune_cursor']=0;$plan['checkpoint_business_cleanup_initialized']=1;unset($plan['checkpoint_business_cleanup_done']);}
+             if(!method_exists($this,'ebay_selection_prune_business_batch')){$this->ebay_run_fail('checkpoint_business_cleanup_missing','BUSINESS-Checkpoint-Bereinigung fehlt.');return;}
+             $this->ebay_selection_prune_business_batch($settings,$plan,50,true,false);
+-            $current=$this->ebay_run_load();$current['checkpoint_cleanup_selection']=$plan;$this->ebay_run_save($current);
++            $current=$this->ebay_run_load();$current['checkpoint_cleanup_selection']=$plan;
++            if(!is_array($this->ebay_run_save($current))){
++                // A cleanup result that was not durably saved is NOT a completed run.
++                $this->ebay_run_fail('checkpoint_business_cleanup_state_save_failed',
++                    'Der Schlussabgleich wurde nicht sicher gespeichert. Der freigegebene Altbestand bleibt erhalten.');
++                return;
++            }
+             if($this->ebay_run_checkpoint_cleanup_fail_if_needed($plan,'business')){return;}
+             if(!empty($plan['checkpoint_business_cleanup_done'])){
+                 $routes=is_array($current['config_snapshot']['seller_routes']??null)?$current['config_snapshot']['seller_routes']:array();
