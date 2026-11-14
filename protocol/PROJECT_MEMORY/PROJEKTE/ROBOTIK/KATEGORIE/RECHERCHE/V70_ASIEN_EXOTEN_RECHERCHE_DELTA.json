@@ -1,0 +1,367 @@
+{
+  "schema": "ROBOTIK_V70_ASIEN_EXOTEN_RECHERCHE_DELTA_NO_WP_WRITES",
+  "date": "2026-11-14",
+  "scope": [
+    "Haushalt",
+    "Garten",
+    "Freizeit",
+    "Sport",
+    "Bildung",
+    "Pflege",
+    "Humanoide"
+  ],
+  "excluded": [
+    "Gewerbe",
+    "Industrie",
+    "Humanoide/Arbeit"
+  ],
+  "labels": [
+    "Produkt",
+    "Projekt",
+    "Idee"
+  ],
+  "label_rule": "Eine grobe Kennzeichnung, Urheber als Freitext und ein Beleg. Keine komplexe Reifestufenleiter.",
+  "central_robot_office": "Funde als Research-Delta für EINEN Originalbestand, nicht eigenständige zweite Roboterdatenbank. Register/Finder/Glossar/Magazin sind Lesesichten/Verknüpfungen.",
+  "status": "RESEARCH_ONLY_DO_NOT_IMPORT",
+  "counts": {
+    "new_primary_evidence_finds": 22,
+    "Projekt": 7,
+    "Idee": 15,
+    "core_type_candidates": 2,
+    "deepen_existing_types": 20,
+    "borderline_not_robot": 1
+  },
+  "findings": [
+    {
+      "id": "V70-001",
+      "title": "SPRO – nur draußen aufladbarer Begleitroboter",
+      "label": "Projekt",
+      "world": "Pflege",
+      "owner": "Pflegebegleiter / vorhandene humanoidfreie soziale Assistenz",
+      "origin": "Ōita University, Japan",
+      "source_url": "https://www.jstage.jst.go.jp/article/jsmermd/2025/0/2025_1A1-E09/_article/-char/en",
+      "confirmed_scope": "Forschungsprototyp; bewusst nicht in der Wohnung ladbar, um Ausflüge zu motivieren",
+      "editorial_decision": "REGISTER_UND_MAGAZIN",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-002",
+      "title": "Springender Kugelroboter mit Gefühlsausdruck",
+      "label": "Projekt",
+      "world": "Freizeit",
+      "owner": "Robotertiere / Begleitroboter",
+      "origin": "Universität Tsukuba, Japan",
+      "source_url": "https://www.jstage.jst.go.jp/article/jsmermd/2025/0/2025_2A2-P05/_article/-char/en",
+      "confirmed_scope": "Forschungsgerät springt, rollt und dreht sich für nonverbale Interaktion",
+      "editorial_decision": "REGISTER_UND_MAGAZIN",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-003",
+      "title": "Haustierroboter, der sich in Bett oder Transportbox verwandelt",
+      "label": "Idee",
+      "world": "Haushalt",
+      "owner": "Haustierroboter",
+      "origin": "Hanyang University ERICA, Südkorea",
+      "source_url": "https://patents.google.com/patent/KR20250110994A/en",
+      "confirmed_scope": "Patentanmeldung beschreibt Spiel-, Mess-, Schlafplatz- und Transportform; kein gebauter Funktionsnachweis",
+      "editorial_decision": "BESTAND_VERTIEFEN",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-004",
+      "title": "Haustier-Massageroboter mit Bodenreinigung",
+      "label": "Idee",
+      "world": "Haushalt",
+      "owner": "Haustierroboter; Zweitverweis Saugroboter",
+      "origin": "Chinesische Patentanmeldung",
+      "source_url": "https://patents.google.com/patent/CN112690708A/en",
+      "confirmed_scope": "Geplant sind Fahren, Tierkontakt und Massage auf einer Reinigungsplattform",
+      "editorial_decision": "BESTAND_VERTIEFEN",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-005",
+      "title": "Saugroboter, der sich wie ein Haustier verhält",
+      "label": "Idee",
+      "world": "Haushalt",
+      "owner": "Saugroboter; Querverweis Begleitroboter",
+      "origin": "Japanische Patentanmeldung, WO2026038427A1",
+      "source_url": "https://patents.google.com/patent/WO2026038427A1/en",
+      "confirmed_scope": "Vorgesehene Interaktionen: Anschmiegen, Folgen, spielerische Bewegungen",
+      "editorial_decision": "BESTAND_VERTIEFEN",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-006",
+      "title": "Fliegendes Roboterhaustier",
+      "label": "Idee",
+      "world": "Freizeit",
+      "owner": "Robotertiere; Querverweis Folgedrohnen",
+      "origin": "Japanisches Patent JP7796344B2",
+      "source_url": "https://patents.google.com/patent/JP7796344B2/en",
+      "confirmed_scope": "Flugroboter soll pet-ähnliche Bewegungen ausführen, ohne belegten Heimproduktstatus",
+      "editorial_decision": "BESTAND_VERTIEFEN",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-007",
+      "title": "Oktopus-Pflegekamera für Haustiere",
+      "label": "Idee",
+      "world": "Haushalt",
+      "owner": "Haustierroboter",
+      "origin": "Guangzhou Academy of Fine Arts, China, Studienarbeit 2026",
+      "source_url": "https://sid.gzarts.edu.cn/bysjz/ex2026.htm",
+      "confirmed_scope": "Entwurf: anpassbare Tentakel-Halterung, fahrbares Modul, drehbare Kamera und Projektor",
+      "editorial_decision": "BESTAND_VERTIEFEN",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-008",
+      "title": "Jelly – kleine emotionale Fleckenputzroboter",
+      "label": "Idee",
+      "world": "Haushalt",
+      "owner": "Nasswischroboter / Reinigung; Suchintent für Spezialrobotertyp prüfen",
+      "origin": "Guangzhou Academy of Fine Arts, China, Studienarbeit 2026",
+      "source_url": "https://sid.gzarts.edu.cn/bysjz/ex2026.htm",
+      "confirmed_scope": "Entwurfsgruppe für kleine, spontane Reinigungsarbeiten, keine nachgewiesenen Seriengeräte",
+      "editorial_decision": "REGISTER_UND_MAGAZIN",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-009",
+      "title": "NIKKO – freundlicher Pflegeassistent",
+      "label": "Idee",
+      "world": "Pflege",
+      "owner": "Pflegebegleiter",
+      "origin": "Guangzhou Academy of Fine Arts, China, Studienarbeit 2026",
+      "source_url": "https://sid.gzarts.edu.cn/bysjz/ex2026.htm",
+      "confirmed_scope": "Entwurf für assistierende Aufgaben in der Pflege; keine belegte funktionierende Komplettmaschine",
+      "editorial_decision": "BESTAND_VERTIEFEN",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-010",
+      "title": "Mobiler Medikamentenhilfe-Roboter",
+      "label": "Idee",
+      "world": "Pflege",
+      "owner": "Pflege-Servierroboter / private Medikationshilfe fachlich abgrenzen",
+      "origin": "Shanghai Jiao Tong University, China, Studienarbeit 2026",
+      "source_url": "https://designschool.sjtu.edu.cn/dynamic/news/detail/6a6f01a23920e14c35e88c3f",
+      "confirmed_scope": "Konzept eines mobilen Medikamententrägers mit pflegerischer Kontrolle im Stationsumfeld",
+      "editorial_decision": "REGISTER_UND_MAGAZIN",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-011",
+      "title": "Hand-Exoskelett mit muskelabhängiger Regelung",
+      "label": "Idee",
+      "world": "Pflege",
+      "owner": "Handrehabilitationsroboter – V67_N04",
+      "origin": "Shanghai Jiao Tong University, China, Studienarbeit 2026",
+      "source_url": "https://designschool.sjtu.edu.cn/dynamic/news/detail/6a6f01a23920e14c35e88c3f",
+      "confirmed_scope": "Konzept zur Anpassung von Fingerbewegungen mithilfe von Muskelmessung; keine klinische Wirksamkeit behaupten",
+      "editorial_decision": "V67_KANDIDAT_VERTIEFEN",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-012",
+      "title": "Saugroboter schiebt herumliegende Gegenstände",
+      "label": "Idee",
+      "world": "Haushalt",
+      "owner": "Aufräumroboter / Saugroboter",
+      "origin": "Samsung, Südkorea, KR20250010572A",
+      "source_url": "https://patents.google.com/patent/KR20250010572A/en",
+      "confirmed_scope": "Patent mit herunterklappbarer Schubvorrichtung zum Bewegen erkannter Objekte",
+      "editorial_decision": "BESTAND_VERTIEFEN",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-013",
+      "title": "Katzenkloroboter mit Greifarm und Schaufel",
+      "label": "Idee",
+      "world": "Haushalt",
+      "owner": "Katzenkloroboter – V67_N01",
+      "origin": "Shenzhen Picea Robotics, China, CN119498209A",
+      "source_url": "https://patents.google.com/patent/CN119498209A/en",
+      "confirmed_scope": "Patent beschreibt kameragesteuertes selektives Aufnehmen statt einer rotierenden Trommel",
+      "editorial_decision": "V67_KANDIDAT_VERTIEFEN",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-014",
+      "title": "Interaktiver Haustier-Spielroboter mit Reaktionsmodi",
+      "label": "Idee",
+      "world": "Haushalt",
+      "owner": "Haustierroboter",
+      "origin": "Koreanische Patentanmeldung KR20240082030A",
+      "source_url": "https://patents.google.com/patent/KR20240082030A/en",
+      "confirmed_scope": "Geplante Spielantworten je nach erkanntem Tierverhalten",
+      "editorial_decision": "BESTAND_VERTIEFEN",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-015",
+      "title": "Robot Housekeeper – hausnahe Testwohnung",
+      "label": "Projekt",
+      "world": "Haushalt",
+      "owner": "Aufräumroboter; Querverweis Humanoide",
+      "origin": "Universität Tokio / Miraikan, Japan, März 2026",
+      "source_url": "https://weblab.t.u-tokyo.ac.jp/news/2026-0310/",
+      "confirmed_scope": "Versuchsaufbau mit ferngesteuertem Toyota HSR im Wohnzimmer; nicht als autonome Haushaltshilfe ausgeben",
+      "editorial_decision": "BESTAND_VERTIEFEN",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-016",
+      "title": "Home Leo – hundeförmiger Altersbegleiter",
+      "label": "Projekt",
+      "world": "Pflege",
+      "owner": "Pflegebegleiter / Robotertiere",
+      "origin": "Kawasaki Heavy Industries, Japan, Oktober 2026",
+      "source_url": "https://www.japantimes.co.jp/business/2026/10/07/companies/kawasaki-heavy-industries-dog-robots/",
+      "confirmed_scope": "Vorführprototyp für Gespräche und Begleitung älterer Menschen",
+      "editorial_decision": "BESTAND_VERTIEFEN",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-017",
+      "title": "AIREC – Pflege-Humanoid mit Windelwechsel-Ziel",
+      "label": "Projekt",
+      "world": "Humanoide",
+      "owner": "Fernpflegeassistenten / Pflegebegleiter",
+      "origin": "Waseda University / JST Moonshot, Japan",
+      "source_url": "https://www.jst.go.jp/moonshot/en/program/goal3/3C_ogata.html",
+      "confirmed_scope": "Forschungsprogramm, Windelwechsel als Ziel bis 2030; keine erreichte Fähigkeit behaupten",
+      "editorial_decision": "BESTAND_VERTIEFEN",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-018",
+      "title": "Nimbus – Toilettenhilfe im Pflege-Labor",
+      "label": "Projekt",
+      "world": "Pflege",
+      "owner": "Toilettenhilfen / Mobile Toilettenroboter V68_N07 abgrenzen",
+      "origin": "Tohoku University, Japan",
+      "source_url": "https://www.nature.com/articles/d42473-025-00226-3",
+      "confirmed_scope": "Forscher zeigen Assistenz bei Toilettenaufgaben in einer nachgebildeten Pflegesituation",
+      "editorial_decision": "REGISTER_UND_MAGAZIN",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-019",
+      "title": "ANgeL – Sprachgesteuerter Transporthelfer für Seniorinnen/Senioren",
+      "label": "Projekt",
+      "world": "Pflege",
+      "owner": "Transportroboter / Pflege-Servierroboter",
+      "origin": "Japan, JSME Robomec 2025",
+      "source_url": "https://www.jstage.jst.go.jp/browse/jsmermd/2025/0/_contents/-char/en",
+      "confirmed_scope": "Fahrender LiDAR-Versuchsroboter mit Sprach- und Gamepadsteuerung",
+      "editorial_decision": "BESTAND_VERTIEFEN",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-020",
+      "title": "Schuhschrankroboter mit Greifarm und Reinigung",
+      "label": "Idee",
+      "world": "Haushalt",
+      "owner": "NEUER_TYPGATE: Schuhschrankroboter; Abgrenzung zu V68 Kleiderschrankroboter",
+      "origin": "Jiaxing Nanhu University, China, CN120021855A",
+      "source_url": "https://patents.google.com/patent/CN120021855A/en",
+      "confirmed_scope": "Greif-, Sortier- und Reinigungskonstruktion in einem Schuhschrank; Patent statt Serienbeleg",
+      "editorial_decision": "NEUER_TYPGATE",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-021",
+      "title": "Schuhreinigungsroboter mit beweglichen Bürsten",
+      "label": "Idee",
+      "world": "Haushalt",
+      "owner": "NEUER_TYPGATE: Schuhreinigungsroboter",
+      "origin": "Shenzhen Technology University, CN113723475A; weiterer 2026 Schuhwaschroboter",
+      "source_url": "https://patents.google.com/patent/CN113723475A/en",
+      "confirmed_scope": "Universitätspatent für optisch geführte mechanische Reinigung, nicht mit bloßem Schuhwaschautomaten gleichsetzen",
+      "editorial_decision": "NEUER_TYPGATE",
+      "import_allowed": false
+    },
+    {
+      "id": "V70-022",
+      "title": "Haustierorientierter Saugroboter",
+      "label": "Idee",
+      "world": "Haushalt",
+      "owner": "Saugroboter / Haustierroboter",
+      "origin": "Samsung, Südkorea, KR20260050800A",
+      "source_url": "https://patents.google.com/patent/KR20260050800A/en",
+      "confirmed_scope": "Patentanmeldung zu Reinigung und Haustier-Erkennung als Ergänzung bestehender Saugroboter",
+      "editorial_decision": "BESTAND_VERTIEFEN",
+      "import_allowed": false
+    }
+  ],
+  "new_type_candidates": [
+    {
+      "type": "Schuhschrankroboter",
+      "world": "Haushalt",
+      "status": "NUR_FACHKANDIDAT_KEINE_WP_SEITE",
+      "article_category_plausibility": {
+        "Aufbewahrung": [
+          "Schuhe erkennen und sortieren",
+          "Schuhfächer automatisch anfahren",
+          "Mechanische Greifer für unterschiedliche Schuhe",
+          "Störfälle bei Paar- und Größenverwechslung"
+        ],
+        "Technik": [
+          "Greifarm und Führungsschienen",
+          "Sensorik und Schuhposition",
+          "Nachrüstung und Raumbedarf",
+          "Antrieb, Strom und Bedienung"
+        ],
+        "Konzept": [
+          "Was das chinesische Hochschulpatent tatsächlich beschreibt",
+          "Unterschied zum Kleiderschrankroboter",
+          "Reinigung als Zusatzfunktion",
+          "Künftige Varianten und technische Grenzen"
+        ]
+      }
+    },
+    {
+      "type": "Schuhreinigungsroboter",
+      "world": "Haushalt",
+      "status": "NUR_FACHKANDIDAT_KEINE_WP_SEITE",
+      "article_category_plausibility": {
+        "Reinigung": [
+          "Sohlen und Obermaterial getrennt bearbeiten",
+          "Bürsten und rotierende Schuhe",
+          "Nass- oder Trockenverfahren",
+          "Unterschiedliche Stoffe und Leder"
+        ],
+        "Steuerung": [
+          "Kamera erkennt die Schuhform",
+          "Bürstenwinkel und Anpresskraft",
+          "Automatische Reinigung von Kanten",
+          "Hygiene und Beschädigungsschutz"
+        ],
+        "Entwicklung": [
+          "Shenzhen-Patent mit Bildverarbeitung",
+          "Weitere chinesische Schuhroboter-Patente",
+          "Unterschied zu einer gewöhnlichen Schuhwaschmaschine",
+          "Platzbedarf, Kosten und offene Fragen"
+        ]
+      }
+    }
+  ],
+  "borderline_not_robot": {
+    "title": "Emotionserkennende Haustier-Transportbox, Studienentwurf 2026",
+    "source": "https://art.hutb.edu.cn/yxzp1/2025byz1/gysjx/content_90051",
+    "reason": "Behauptet Sensoren/Beruhigung, aber keinen hinreichend belegten Roboterantrieb; als angrenzendes Gadget nicht als CORE-Robotertyp zählen."
+  },
+  "prior_source_context": [
+    "V52 originaler Achtwelten-Plan",
+    "V67 vier geprüfte Kandidaten",
+    "V68 neun geprüfte Typkandidaten",
+    "V69 15 einzelne Quellenfunde"
+  ],
+  "no_design_change": true,
+  "no_plugin_release": true,
+  "no_wordpress_write": true,
+  "no_paid_seo": true
+}
