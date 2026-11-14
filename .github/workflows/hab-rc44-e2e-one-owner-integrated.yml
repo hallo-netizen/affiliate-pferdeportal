@@ -1,0 +1,81 @@
+name: HAB RC44 one owner integrated trace original ZIP (NO RELEASE)
+on:
+  push:
+    branches: [hab-affiliate-rc44-frontend-slot-and-source-target-20261114]
+    paths: [.github/workflows/hab-rc44-e2e-one-owner-integrated.yml]
+permissions: {contents: read}
+jobs:
+  actual-one-owner-trace:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: One complete trace from original stored assignment through actual frontend selectors
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          from hashlib import sha256
+          import re,subprocess,tempfile
+          base=Path("protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ")
+          aff=base/"PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip"
+          design=base/"PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip"
+          assert sha256(aff.read_bytes()).hexdigest()=="2a9701c465fdf4ac1830a6b02b9329f5613337587c65379f09be94c20b00e681"
+          assert aff.exists() and design.exists()
+          with ZipFile(aff) as z:
+              src={n:z.read(n).decode('utf8','replace') for n in z.namelist() if n.endswith(".php")}
+          def method(name):
+              for f,s in src.items():
+                  m=re.search(r'(?:(?:public|private|protected)\s+)?function\s+'+re.escape(name)+r'\s*\(',s)
+                  if not m:continue
+                  a=s.index('{',m.end());level=0
+                  for j in range(a,len(s)):
+                      if s[j]=='{':level+=1
+                      if s[j]=='}':
+                          level-=1
+                          if level==0:break
+                  return f,s[m.start():j+1]
+              return None,None
+          for name in ['campaign_from_post','ranked_campaigns_for_slot_uncached','select_campaign_for_slot','assignment_selection_for_slot','automation_campaign_exact_target_rank_uncached','get_content_context','hb_insurance_scope','hb_insurance_banner_rank','hb_insurance_campaign_allowed','hb_insurance_house_banner']:
+              file,s=method(name)
+              print('SOURCE_METHOD',name,'FILE',file,'SIZE',len(s) if s else 0)
+              if s:print('SOURCE_BODY_BEGIN',name,'\n',s[:12500],'\nSOURCE_BODY_END',name)
+          # Original PHP accepts stored campaign exactly once for approved slot; no guessed data.
+          _,gate=method('campaign_matches_contract_slot_rule')
+          assert gate and "output_object_v4" in gate
+          _,rank=method('automation_campaign_exact_target_rank_uncached')
+          assert rank and 'automation_target_keys' in rank
+          _,area=method('hab_bw_area_slot')
+          assert area and 'product_after_category_tiles' in area
+          print('FULL_TRACE_GATES_EXIST',len(gate),len(rank),len(area))
+          # Source-only red flags are tracked, not called passing end-to-end.
+          print('R2_ACTUAL_REQUEST_FROM_ORIGINAL','product_after_category_tiles' if "($type==='hub1' ? 'hub_after_cards'" in area and "$type==='hub2' ? 'hub_after_cards'" not in area else 'recheck')
+          print('R2_SAVED_SLOT_FROM_ORIGINAL','hub_after_cards' if "&& isset($matches['hub_after_cards'])" in method('output_format_slot')[1] else 'unknown')
+          # Check actual design image geometry and CSS: no writes
+          with ZipFile(design) as z:
+              css=z.read('hab-bewahr-design-vorschau/assets/area-prototype.css').decode('utf8','replace')
+              print('DESIGN_NARROW_TILE', 'grid-column:span 1!important' in css)
+          # Run actual WordPress-independent original campaign format gate on synthetic complete record.
+          php='''<?php
+          function sanitize_key($s){return preg_replace('/[^a-z0-9_-]/','',strtolower((string)$s));}
+          class Owner { function equivalent_slot_names($s){return array($s);} function slot_required_creative_type($s){return 'banner';}
+          METHOD
+          }
+          $o=new Owner();
+          $row=array('source'=>'output_object_v4','creative_type'=>'banner',
+              'auto_topic_reason'=>'HB_INSURANCE_CANONICAL:hab_insurance_verified',
+              'placements'=>array('product_after_category_tiles'),
+              'image_url'=>'https://example.com/real-banner.png','render_mode'=>'image_link','dimensions'=>'728x90');
+          echo 'GATE_R3_EXPECT_TRUE='.($o->campaign_matches_contract_slot_rule($row,'product_after_category_tiles')?'1':'0')."\\n";
+          echo 'GATE_R2_EXPECT_FALSE='.($o->campaign_matches_contract_slot_rule($row,'hub_after_cards')?'1':'0')."\\n";
+          '''.replace('METHOD',gate.replace('private function','public function',1))
+          with tempfile.TemporaryDirectory() as d:
+              f=Path(d)/'gate.php';f.write_text(php)
+              x=subprocess.run(['php',str(f)],capture_output=True,text=True)
+              print(x.stdout,x.stderr)
+              assert x.returncode==0
+              assert 'GATE_R3_EXPECT_TRUE=1' in x.stdout
+              assert 'GATE_R2_EXPECT_FALSE=0' in x.stdout
+          print('INTEGRATED_RC44_ORIGINAL_SOURCE_TRACE_COMPLETED_NOT_RELEASED')
+          PY
