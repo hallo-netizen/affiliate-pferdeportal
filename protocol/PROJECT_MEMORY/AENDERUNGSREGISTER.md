@@ -2117,3 +2117,10 @@ Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wa
 - **Keine automatisch gelöschte Kategorie oder neue Produktseite.** W5 priorisiert vorläufig 13 konkrete kaufnahe Produkt-Keywords und 14 informationsorientierte Produkt-Keywords jeweils ab 1000 Google-Ads-Suchanfragen/Monat, nach Anbieter-Intent und vorhandener Fachseite. Kaufpriorität ist kein Rankingversprechen.
 - `KATEGORIEKONZEPT/W5_SEO_GESAMTAUSWERTUNG_20261114.md`, `KATEGORIEKONZEPT/W5_SEO_AUDIT_218_20261114.json`, `PRUEFUNG/W5_QUELLENABGLEICH_20261114.md` bilden **eine** abgeleitete Auswertungsstufe. W4 Fachbaum bleibt führend.
 - Keine DataForSEO-Kosten für Auswertung, kein WordPress-Inhaltsschreiben, kein fremdes Portal verändert. NEXT: vorhandene Produktzweige redaktionell priorisieren; Import erst nach schreibfreier WP-Gesamtvorschau und ausdrücklicher Freigabe.
+
+## 2026-11-14 – Wassertechnik W6: 218er schreibfreie Gesamtimportvorschau in EINEM Vorgang
+- Aus den unveränderten W4- und W5-Dateien **113 geplante WP-Seiten und 105 geplante WP-Beitragskategorien** einzeln gemappt, alle 218 Owner erhalten. W6-Maschinenvorschau plus lesbare Gesamtauswertung im Wassertechnik-Kategoriebüro. W4/W5 unverändert.
+- Vorhandener echter WP-Snapshot vom 14.11.2026 12:28:47 UTC: 2 Standardseiten, 1 Standardbeitrag, 1 Standardkategorie; **0 Zielslug-Kollisionen** in diesem Snapshot. Keine Behauptung späteren Live-Zustands.
+- 13 kaufnahe und 14 informationsorientierte Produktseiten redaktionell vorgezogen; 3 Überschneidungsgruppen fachlich abgegrenzt und als SEO-Intent-Restvorbehalt geführt, **keine** automatische Zusammenlegung/Löschung.
+- KISS: **kein neues Plugin, keine API-Kosten, kein WordPress-Schreiben**, kein paralleler SEO- oder Import-Schreiber. Import bleibt bis ausdrückliche Gesamtfreigabe gesperrt.
+- PROTOKOLL: PASS · QUELLEN: W4/W5/WP-SNAPSHOT · ZIELVERTRAG: PASS · FRONTEND: UNVERÄNDERT · FREMDPORTALE: UNVERÄNDERT.

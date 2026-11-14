@@ -1,6 +1,6 @@
 # WASSERTECHNIK / KATEGORIEKONZEPT – einzige aktuelle Büroautorität
 
-**Stand:** 14.11.2026 · **Status:** W4 FACHBAUM UNVERÄNDERT; W5 SEO-TEILMESSUNG VERIFIZIERT UND REDAKTIONELL PRIORISIERT; 218 OWNER, NO WP IMPORT.
+**Stand:** 14.11.2026 · **Status:** W4-Fachbaum erhalten, W5-SEO-Auswertung vollständig, W6 schreibfreie 218er WP-Gesamtvorschau erstellt; Import nicht freigegeben.
 
 **Quelle:** Nutzer-ZIP `WASSERTECHNIK_KATEGORIEKONZEPT_MASTER_001.zip` (30.07.2026); Prüfsummen lokal PASS. Original-ZIP bytegleich im Quellenbüro GitHub gespeichert (`../QUELLEN/ORIGINAL_/WASSERTECHNIK_KATEGORIEKONZEPT_MASTER_001.zip`).
 
@@ -16,6 +16,9 @@
 
 **W5-SEO-Messauswertung:** Originalbericht `../PRUEFUNG/ORIGINAL_DATAFORSEO_218_20261114.json` und `W5_SEO_GESAMTAUSWERTUNG_20261114.md` mit zugehörigem `W5_SEO_AUDIT_218_20261114.json`. 106/218 Suchvolumina, 218/218 Anbieter-Suchabsichten, **0 organische Schwierigkeit**; 13 gemessen kaufnahe Produkt-Keywords und 14 gemessen informationsorientierte Produkt-Keywords >=1000 (nur vorläufige Redaktionsreihenfolge). 112 fehlende Volumina sind nicht null Suchanfragen. Bei den 105 Inhaltskategorien nur 26 mit Messwert; keine Kategorie/URL automatisch streichen.
 
-**NEXT ACTION:** Redaktionell die bestehenden 27 priorisierten Produktzweige in W4 zuerst ausarbeiten; alle übrigen W4-Owner beibehalten. Vor einer geplanten einmaligen WordPress-Übernahme den tatsächlichen WP-Bestand schreibfrei erfassen und einen Gesamt-Importplan aus der einen W4-Fachquelle prüfen; Import ausschließlich nach ausdrücklicher Freigabe. Kein neuer bezahlter DataForSEO-Gesamtlauf.
+**NEXT ACTION:** W6-Gesamtvorschau als einen gebündelten Freigabegegenstand behandeln; 3 bereits fachlich abgegrenzte Überschneidungen ohne automatische Zusammenlegung erhalten. Danach ausdrücklich freigegebener ADD-only-Import, nicht vorher.
 
 **Grenze:** Keine WordPress-/HivePress-Produktion, keine fremden Projektdateien verändern.
+
+
+**W6-Nachweis:** `W6_WORDPRESS_IMPORTVORSCHAU_218_20261114.json` (218 Einzelziele) und `W6_WORDPRESS_GESAMTVORSCHAU_20261114.md` (Gesamtentscheidung, WordPress-Snapshot und 27 Redaktionsprioritäten). W4/W5 nicht neu geschrieben; keine API-, Plugin- oder WP-Aktion.
