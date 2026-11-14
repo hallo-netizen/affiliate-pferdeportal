@@ -8,10 +8,10 @@
 4. Die tatsächlich geplante Theme-/Design-Identität festlegen, erst dann genau ein eigenes Designplugin; kein zweites Navigations-/Kachel-Plugin.
 5. Benötigte Plugins einzeln prüfen: HivePress (Anzeigen), Yoast SEO/Sitemap, ggf. WPForms (Kontakt), eigenes Wassertechnik-Kategorie-Workflow-Plugin **erst nach neutraler Portierung**, später Affiliate-Zentrale. Keine Plugin-Dopplung.
 6. Pflichtseiten und Navigation: Startseite, Impressum, Datenschutz, Kontakt, Werbekennzeichnung, Magazin, Anzeigenmarkt; tatsächliche Formulare testen.
-7. Zielstruktur Hauptseite → Unterseite → Inhaltskategorie → Beitrag und getrennte HivePress-Anzeigenkategorien festlegen; keine Blindimporte.
+7. Zielstruktur Hauptseite → ggf. Zwischenbereich → konkrete Produktseite → produktbezogene WP-Inhaltskategorie → Beitrag und getrennte HivePress-Anzeigenkategorien festlegen; keine Blindimporte.
 8. SEO: URLs, Indexierungsfreigaben, Canonicals, Sitemap, robots, Menüs, interne Links; Staging bis zur Abnahme nicht indexieren.
 9. Bilder: zentrale Bildlogik der anderen Portale nur als Lesevorlage; Motive fachlich Wassertechnik und nicht aus Fremdprojekten live übernehmen.
-10. Erster Import ausschließlich als Vorschau mit 0 Änderungen; nach Freigabe ADD-only auf neuer Site. Danach WordPress-IDs, Slugs, Menüs, Desktop/Mobil und Darstellungsweg prüfen.
+10. Erster Import ausschließlich als Vorschau mit 0 Änderungen; nach Freigabe ADD-only auf neuer Site. Danach WordPress-IDs und Slugs einmalig zurücklesen sowie das fachlich und optisch ausgeglichene Mega-Menü im vorhandenen Design auf Desktop/Mobil prüfen.
 11. Sicherheit/Performance: Updates, Zugänge, Rollen, Caching, Bildgrößen, Datenschutz; kein Frontend-Netzwerkabruf zur Affiliate-Bannerzuordnung.
 12. Abschluss erst nach echter Staging-/Live-Prüfung, nicht nach bloßer lokaler Simulation.
 
