@@ -1,0 +1,96 @@
+name: HD009 0.1.40 ONE thematic decision with true HD007 related gear
+on:
+  push:
+    branches: [hobbyroom/hd009-0140-one-decision-related-gear-20261114]
+    paths:
+      - .github/workflows/hd009_0140_single_decision_qa.yml
+      - scripts/hd009_0140_single_decision_build.py
+      - scripts/hd009_0140_single_decision_qa.py
+permissions:
+  contents: write
+jobs:
+  original-php-and-full-archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build from exact archived 0.1.39, never overwrite CURRENT
+        run: |
+          set -e
+          python3 scripts/hd009_0140_single_decision_build.py \
+            protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CANDIDATES/HOBBY_DEPOT_HD009_0.1.39_VERIFIZIERTE_AUSRUESTUNG_NUR_TEST.zip \
+            /tmp/HOBBY_DEPOT_HD009_0.1.40_ONE_DECISION_NUR_TEST.zip
+      - name: Validate complete archive, all PHP, single decision, original import and provider paths
+        run: |
+          set -e
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import re,hashlib
+          office=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE')
+          inp=office/'CANDIDATES/HOBBY_DEPOT_HD009_0.1.39_VERIFIZIERTE_AUSRUESTUNG_NUR_TEST.zip'
+          out=Path('/tmp/HOBBY_DEPOT_HD009_0.1.40_ONE_DECISION_NUR_TEST.zip')
+          with ZipFile(inp) as a,ZipFile(out) as b:
+            assert a.testzip() is None and b.testzip() is None
+            assert len(a.namelist())==len(b.namelist())==41
+            assert a.namelist()==b.namelist()
+            d=[n for n in a.namelist() if a.read(n)!=b.read(n)]
+            t='affiliate-portal-router/includes/trait-ppar-idealo.php'
+            m='affiliate-portal-router/hobby-depot-affiliate-router.php'
+            assert set(d)=={t,m},d
+            a_t=a.read(t).decode();b_t=b.read(t).decode(); b_m=b.read(m).decode()
+            def method(s,n):
+              mt=re.search(r'^\s{4}(?:private|public|protected) function '+re.escape(n)+r'\(',s,re.M)
+              assert mt,n
+              nx=re.search(r'^\s{4}(?:private|public|protected) function ',s[mt.end():],re.M)
+              return s[mt.start():mt.end()+nx.start()] if nx else s[mt.start():]
+            for name in ('idealo_import_feed_file','idealo_materialize_campaigns','idealo_find_feed_metadata','idealo_download_feed_to_temp','idealo_refresh_remote_feed','hd_idealo_standard_feed_compare_work','idealo_provider_access_save','idealo_provider_access_test'):
+              assert method(a_t,name)==method(b_t,name),name
+            assert 'hd_idealo_category_title_relevant' not in b_m
+            assert b_t.count('private function idealo_match_feed_row_to_concept(')==1
+            assert b_t.count('private function idealo_match_related_equipment_stems(')==1
+            assert 'idealo_match_feed_row_to_concept($row)' in b_t
+            assert 'Version: 0.1.40' in b_m
+            p=Path('/tmp/hd009_0140_php')
+            for f in b.namelist():
+              if f.endswith('.php'):
+                dst=p/f;dst.parent.mkdir(parents=True,exist_ok=True);dst.write_bytes(b.read(f))
+            print('SINGLE_DECISION_CONFIRMED')
+            print('UNMODIFIED_FEED_IMPORT_MATERIALIZATION_COMPARISON_PROVIDER_CONFIRMED')
+            print('CHANGED_FILES_ONLY',d)
+            print('SHA256',hashlib.sha256(out.read_bytes()).hexdigest())
+          PY
+          find /tmp/hd009_0140_php -name '*.php' -type f -print0 | xargs -0 -n1 php -l
+      - name: Test original PHP rules against real HD007 records, negative and related scenarios
+        run: |
+          set -e
+          python3 scripts/hd009_0140_single_decision_qa.py \
+            /tmp/HOBBY_DEPOT_HD009_0.1.40_ONE_DECISION_NUR_TEST.zip \
+            /tmp/hd009_0140_real_php.php \
+            protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip
+          php -l /tmp/hd009_0140_real_php.php
+          php /tmp/hd009_0140_real_php.php
+      - name: Archive full tested candidate only, retain official CURRENT 0.1.37
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          root=protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE
+          target="$root/CANDIDATES/HOBBY_DEPOT_HD009_0.1.40_EINE_ENTSCHEIDUNG_NUR_TEST.zip"
+          cp /tmp/HOBBY_DEPOT_HD009_0.1.40_ONE_DECISION_NUR_TEST.zip "$target"
+          sha256sum "$target"
+          cat > "$root/CANDIDATES/CANDIDATE_0.1.40_STATUS.md" <<'EOF'
+          # HD009 0.1.40 – zentraler einmaliger Idealo-Produktentscheid
+          Status: **nur Testkandidat, nicht live installiert**.
+          - Eine einzige thematische Entscheidung im bestehenden Idealo-Feed-Matcher.
+          - Eindeutig hobbybezogene Produkte plus verwandte HD007-Ausrüstung, sofern die Produktkategorie das Hobby bestätigt.
+          - Kein zweiter Themenabgleich bei Ausgabe; keine zweite Engine.
+          - Bestehende 2747/2901-Verbindung, Import, Staging, Materialisierung, eBay, Amazon, Design unverändert.
+          - Echte Produktabdeckung privater iPN-Feeds und Live-WordPress-Ausgabe bleiben noch zu prüfen; keine ungeprüften Produktversprechen.
+          - 0.1.37 bleibt offizielles CURRENT und 0.1.39 als Sicherung erhalten.
+          EOF
+          git add "$target" "$root/CANDIDATES/CANDIDATE_0.1.40_STATUS.md"
+          if ! git diff --cached --quiet; then
+            git commit -m "archive(hobby): tested 0.1.40 ONE decision candidate; no current change"
+            git push
+          fi
