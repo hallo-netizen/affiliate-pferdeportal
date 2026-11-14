@@ -1,6 +1,6 @@
 # WASSERTECHNIK / PRUEFUNG – einzige aktuelle Büroautorität
 
-**Stand:** 14.11.2026 · **Status:** WT001 0.1.2 echter WordPress-Preflight PASS; WT001 **0.1.3** kostenkontrollierter Gesamt-Recherchecode OFFLINE PASS; reale WP-/Provider-Prüfung und Import offen.
+**Stand:** 14.11.2026 · **Status:** WT001 0.1.4 lokale Fehlerfamilienprüfung (Robotik-Fortsetzung + unzulässige Suchabsichtsparameter) PASS. Echter WordPress- und Anbieter-Restaufruf offen. Keine neue SEO-Gesamtfreigabe.
 
 **Gesichert:** Master-Archiv-internes SHA256SUMS.txt lokal geprüft; originale Git-Blob-Identität stimmt bytegenau mit Nutzervorlage; automatische 18/18 Regelprüfung ist Altbeleg.
 
@@ -14,6 +14,6 @@
 
 **Beleg:** `WT001_013_EINMALIGE_GESAMTABNAHME_20261114.md` dokumentiert lokalen vollständigen Erfolgspfad sowie Fehlerpfade und feste Aufrufbegrenzungen. **Keine** echten API-Kosten und kein echter WP-0.1.3-Test behauptet.
 
-**NEXT ACTION:** WT001 0.1.3 als Update installieren, im WP-Admin **einen ausdrücklich kostenpflichtigen** 218er Auftrag starten und **ein** Ergebnis-JSON exportieren. Erst dann echte SEO-Auswertung; kein WordPress-Import.
+**NEXT ACTION:** V0.1.4 im bestehenden Wassertechnik-WP aktualisieren, alte 0.1.3-Ergebnisse ohne neuen Gesamtauftrag erhalten, **nur die Suchabsicht** einmal nach ausdrücklicher Kostenfreigabe prüfen und einen JSON-Bericht liefern. Schwierigkeitsmessung bleibt offen; kein Import.
 
 **Grenze:** Keine WordPress-/HivePress-Produktion, keine fremden Projektdateien verändern.

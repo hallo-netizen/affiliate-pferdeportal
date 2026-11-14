@@ -2099,3 +2099,12 @@ Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wa
 - Offline-PHP 4/4, ZIP 6/6, Mock 3×218 PASS, Netzwerk-/Budget-/falsche-Site-/Doppelklick-Negativtests PASS. **Keine echte API-Recherche und keine Ausgabe verursacht**.
 - Original-ZIP `WASSERTECHNIK_KATEGORIE_WORKFLOW_0.1.3_SEO_GESAMTRECHERCHE_NUR_TEST.zip` im Wassertechnik-Pluginbüro, SHA256 `272403e8c094825c918db65a01a78321baf59ac19af07bc05d089c2cdaa0bb5c`; vollständiger Bericht `WASSERTECHNIK/PRUEFUNG/WT001_013_EINMALIGE_GESAMTABNAHME_20261114.md`.
 - NEXT ACTION: Einmal WordPress-Update auf 0.1.3 und ausdrücklich kostenpflichtig bestätigter Gesamtauftrag; danach ein JSON-Export, SEO-W4-Endentscheidung. Import unverändert gesperrt.
+
+
+## 14.11.2026 – Wassertechnik WT001 0.1.4: Robotik-Fehlerfortsetzung übertragen und Search-Intent-Payload korrigiert
+- WP 0.1.3 Echtfehler (1/3, 0,09000 USD, `bulk_keyword_difficulty` generischer Status, 218 Owner) geprüft. Tatsächlicher Anbieterstatus vom Altplugin nicht gespeichert – keine Ursache erfunden.
+- Bestehenden **Robotik-0.4.7-Lösungsweg** übernommen (belegte Anbieterstörung separat, alte Daten und Run-ID erhalten, fehlende Messung explizit als `NICHT_GEPRUEFT`, keinen abgebrochenen Auftrag nochmals senden). Robotik nicht verändert.
+- Nachgewiesener weiterer Codefehler im v0.1.3 Search Intent: unzulässiges `language_code` entfernt, dokumentierter Request nur mit `keywords`.
+- Neue v0.1.4 gleiches Plugin, 218 Owner und Inventur bytegleich; sicherer einmaliger Fortsetzungsweg: exakt alten Run prüfen, Button mit eigener ausdrücklicher Kostenfreigabe, **nur 1 neuen Intent-POST**, ursprüngliche 0,09 USD bleiben. Budgetreserve für unbekannte Altgebühr, maximal 0,25 USD Folgekostenrahmen – tatsächliche Anbieterrechnung vorbehalten.
+- Lokal PHP-Lint 4/4, ZIP CRC 6/6, 11 durchgängige Erfolgs-/Negativ-Szenarien PASS; kein WP-Content-Writer, kein Live-WP-Update/API-POST durch Assistent.
+- Beleg im Wassertechnik-Prüfbüro `WT001_014_ROBOTIK_FEHLERFORTSETZUNG_PRUEFUNG_20261114.md`, aktuelle installierbare Test-ZIP `WASSERTECHNIK_KATEGORIE_WORKFLOW_0.1.4_FORTSETZUNG_OHNE_NEUSTART_NUR_TEST.zip`. Alte Version nur Archiv. Kein anderer Portalcode geändert.
