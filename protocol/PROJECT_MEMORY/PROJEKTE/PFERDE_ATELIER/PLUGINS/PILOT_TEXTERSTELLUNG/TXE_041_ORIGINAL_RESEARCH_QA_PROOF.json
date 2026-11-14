@@ -1,0 +1,22 @@
+{
+  "base_original_import_zip_sha256": "f866f0e14eaf44ccfee9c4695b818c14734957a65ae9c556c8031e2e9aad4adc",
+  "qa_zip_sha256": "20829044ea530bcddc6d739ad25da9d14afa5f0fe286acb3e25c1d636fb3a835",
+  "orig_old_unchanged_files": 10,
+  "orig_old_other_files": 10,
+  "pste_original_files": 121,
+  "pste_original_unchanged": 121,
+  "passes": {
+    "boot": 10,
+    "conflict": 3,
+    "admin_menu": 7,
+    "original_frei_identity": 7
+  },
+  "not_tested": [
+    "real WordPress DB",
+    "external DataForSEO API",
+    "original PPM runtime",
+    "complete K0 E2E",
+    "portal neutrality"
+  ],
+  "release_allowed": false
+}
