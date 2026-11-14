@@ -91,6 +91,12 @@ def edit_import(block):
         $settings['last_message']=sprintf("""
     assert block.count(old)==1
     block=block.replace(old,new,1)
+    old="""        $import_started_at=time(); $counts=$this->network_sync_upsert_products('idealo',$parsed); $hash=hash_file('sha256',$path); $settings=$this->idealo_settings();"""
+    new="""        $import_started_at=time(); $counts=$this->network_sync_upsert_products('idealo',$parsed);
+        if (is_wp_error($counts)) { return $counts; } // Failed storage is not a successful product decision.
+        $hash=hash_file('sha256',$path); $settings=$this->idealo_settings();"""
+    assert block.count(old)==1,'Missing original stage-to-import handoff'
+    block=block.replace(old,new,1)
     old="""        $materialized=$this->idealo_materialize_campaigns(); $settings=$this->idealo_settings();
 """
     new="""        $materialized=$this->idealo_materialize_campaigns(); $settings=$this->idealo_settings();
@@ -175,6 +181,44 @@ def edit_schedule(block):
 edit_method("    public function idealo_ensure_refresh_schedule(",
             "    private function idealo_refresh_lock_acquire(",edit_schedule)
 
+# One database read failure must never look like zero accepted hobby products
+# and trigger wholesale retirement of valid existing campaign records.
+def edit_materialize(block):
+    old="""$rows=(array)$wpdb->get_results($prepared,ARRAY_A); $groups=array();"""
+    new="""$raw_rows=$wpdb->get_results($prepared,ARRAY_A);
+        if (trim((string)($wpdb->last_error??''))!=='') {
+            return new WP_Error('idealo_staging_read_failed','Idealo-Datenbankabfrage fehlgeschlagen; bestehende Anzeigen bleiben unverändert.');
+        }
+        $rows=(array)$raw_rows; $groups=array();"""
+    assert block.count(old)==1,'Original materialization read changed'
+    return block.replace(old,new,1)
+edit_method("    private function idealo_materialize_campaigns(",
+            "    public function idealo_maybe_upgrade_materialization(",edit_materialize)
+
+# Database write errors must be handled by their real owner, when the INSERT /
+# UPDATE occurs. Do not create a later semantic gate or replay engine.
+net_trait="affiliate-portal-router/includes/trait-ppar-network-sync.php"
+network=files[net_trait].decode("utf-8")
+net_beg=network.index("    private function network_sync_upsert_products(")
+net_end=network.index("    private function network_sync_download_and_stage_products(",net_beg)
+method=network[net_beg:net_end]
+assert method.count("$wpdb->update(")==2 and method.count("$wpdb->insert(")==1, "Unexpected database write paths"
+method=method.replace("$wpdb->update(","$write_result=$wpdb->update(")
+method=method.replace("$wpdb->insert(","$write_result=$wpdb->insert(")
+old="""            $counts[$quality]++;
+        }
+        return $counts;"""
+new="""            if ($network==='idealo' && $write_result===false) {
+                return new WP_Error('idealo_staging_write_failed','Idealo-Produkt konnte nicht gespeichert werden; bisherige Anzeigen bleiben erhalten.');
+            }
+            $counts[$quality]++;
+        }
+        return $counts;"""
+assert method.count(old)==1
+method=method.replace(old,new,1)
+network=network[:net_beg]+method+network[net_end:]
+files[net_trait]=network.encode("utf-8")
+
 files[trait]=s.encode("utf-8")
 m=files[main].decode("utf-8")
 # Both placement and thematic acceptance have exactly one authority:
@@ -248,7 +292,7 @@ m=m.replace("Version: 0.1.40","Version: 0.1.41",1)
 files[main]=m.encode("utf-8")
 with ZipFile(src) as z:
     modified=[n for n in files if files[n]!=z.read(n)]
-    assert set(modified)=={trait,main}, modified
+    assert set(modified)=={trait,main,net_trait}, modified
 stream=io.BytesIO()
 with ZipFile(stream,"w") as z:
     for item in entries: z.writestr(item,files[item.filename])
