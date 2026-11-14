@@ -1,5 +1,12 @@
 # Robotik – Pluginbüro / Kategorie-Workflow
 
+## 0.4.10 / V65 – 68 neue Entwurfsseiten sichtbar machen (TEST)
+- Neues geschütztes Adminmenü `Neue Seiten sichtbar machen` in **demselben Plugin**. Der reale ursprüngliche Stand war **16/227**, deshalb keine Publikation bis zum frischen **227/227-Livebeleg**. Erst nach zentralem Sicherheitsabgleich von 104+68 Seiten, 248 Rubriken und 16/48 SEO-HOLDs bietet es EINEN manuellen 68er-Veröffentlichungslauf; im Abbruchfall gespeichert und sicher fortsetzbar. Keine Neuanlage, keine alten Seiten-IDs/URLs/SEO-Funktionen geändert.
+- **Live 16 SEO-HOLD-Robotertypen weiter gesperrt**, kein Behaupten von Vollständigkeit aller 188 Planseiten. Neue Seiten können inhaltlich leer sein; Sichtbarkeit ist keine redaktionelle SEO-Freigabe.
+- 8-Welten-Megamenü und Vertiefungsrubriken auf Produktseiten **im eigenen vorhandenen Designplugin 0.2.4**, nicht im Kategorieplugin. Kompletter Bericht `../../DESIGN/V65_C_VERTRAG_MENUE_UND_VEROEFFENTLICHUNG_20261114.md`.
+- Lokal: 10 PHP-Lint, ZIP CRC, reale V62-Inventur in WP-Mocks mit 227er-Import/68er-Publikation, 172 genau-einmal verlinkte Seiten, Chrome 1440/1024/900/390 px PASS. **Kein echter WP-Live-Test dieser Version.** `PLUGIN/CURRENT.zip` = `PLUGIN/VERSIONEN/0.4.10.zip`, SHA256 `1c0852ea75a93d8344514ef3d2618c31e28a57c61a57858db8e9fcfd1e6a3361`.
+
+
 ## 0.4.9 / V63 – eine geschützte Gesamtübernahme statt vieler Einzelschritte (TEST, 14.11.2026)
 - **Echter WP-Live-Soll-Ist-Export geprüft:** 115 Seiten + 90 Kategorien; 104 alte Seiten, 89 alte Kategorien 1:1 bestätigt, null Konflikte. **11 andere Seiten + 1 andere Kategorie** bleiben unberührt.
 - **68 neue Entwurfsseiten und 159 flache Inhaltsrubriken** bilden den **einen sicheren Schreibblock**. **16 noch ungeklärte Robotertypen und ihre 48 Rubriken** bleiben explizit gesperrt. Vollbaum 188/296 weiter gültig, keine Löschung.

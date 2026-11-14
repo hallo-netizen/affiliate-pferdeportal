@@ -1,0 +1,97 @@
+/* 0.2.4 – plain black, white, grey; homepage is independent of the WordPress theme. */
+body.robotik-structure-test,body.rtd-preview-home{--rtd-border:#d7d7d7;--rtd-ink:#212121;--rtd-soft:#777;--rtd-bg:#fff}
+/* Hide only the old theme header/footer, and only AFTER JS safely mounted our replacements. */
+body.rtd-mounted #masthead:not(#robotik-strukturkopf),
+body.rtd-mounted header.site-header:not(.rtd-header),
+body.rtd-mounted .site-header:not(.rtd-header),
+body.rtd-mounted #colophon:not(#robotik-strukturfuss),
+body.rtd-mounted footer.site-footer:not(.rtd-footer),
+body.rtd-mounted .site-footer:not(.rtd-footer){display:none!important}
+body.rtd-mounted{min-height:100vh;display:flex;flex-direction:column}
+body.rtd-mounted>#page,body.rtd-mounted>.site,body.rtd-mounted>#content{flex:1 0 auto;min-width:0}
+body.rtd-mounted>#robotik-strukturkopf{order:-99;flex:0 0 auto}
+body.rtd-mounted>#robotik-strukturfuss{order:99;flex:0 0 auto;margin-top:auto}
+body.robotik-structure-test .rtd-header,body.robotik-structure-test .rtd-footer{font-family:Arial,Helvetica,sans-serif;color:var(--rtd-ink);background:var(--rtd-bg);font-weight:400;letter-spacing:normal;text-transform:none;box-sizing:border-box}
+body.robotik-structure-test .rtd-header *,body.robotik-structure-test .rtd-footer *{box-sizing:border-box}
+body.robotik-structure-test .rtd-header a,body.robotik-structure-test .rtd-footer a{color:var(--rtd-ink);text-decoration:none}
+body.robotik-structure-test .rtd-header a:hover,body.robotik-structure-test .rtd-footer a:hover{text-decoration:underline}
+body.robotik-structure-test .rtd-header{position:relative;z-index:999999;border-bottom:1px solid var(--rtd-border);width:100%;margin:0!important;padding:0!important;max-width:none!important}
+.rtd-topbar{border-bottom:1px solid var(--rtd-border)}
+.rtd-topbar-inner{max-width:1340px;margin:auto;padding:0 25px;min-height:76px;display:flex;align-items:center;gap:42px}
+.rtd-logo{font-weight:800!important;letter-spacing:.09em!important;font-size:24px!important;line-height:1!important;white-space:nowrap}
+.rtd-mainnav{flex:1;min-width:0;display:flex;align-items:stretch;gap:7px;justify-content:space-between;align-self:stretch}
+.rtd-section{flex:1;min-width:0;position:static;margin:0!important;padding:0!important;border:0!important;background:transparent!important}
+.rtd-section>summary{height:100%;min-height:74px;display:flex;justify-content:center;align-items:center;gap:8px;white-space:nowrap;cursor:pointer;list-style:none;padding:12px 7px!important;font-size:15px!important;font-weight:700!important;line-height:1.2;color:var(--rtd-ink)!important;background:transparent!important;border:0!important;margin:0!important}
+.rtd-section>summary::-webkit-details-marker{display:none}
+.rtd-section>summary:hover,.rtd-section[open]>summary{background:#f3f3f3!important}
+.rtd-caret{font-size:15px;color:var(--rtd-soft)}
+.rtd-mega{position:absolute;top:100%;left:0;right:0;z-index:1000000;display:none;background:#fff;border:1px solid var(--rtd-border);border-top:0;box-shadow:0 10px 20px rgba(0,0,0,.12);padding:19px max(25px,calc((100vw - 1340px)/2 + 25px));max-height:70vh;overflow:auto;text-align:left}
+.rtd-section[open]>.rtd-mega{display:block}
+.rtd-mega-top{border-bottom:1px solid var(--rtd-border);padding-bottom:12px;margin-bottom:16px;font-size:14px}
+.rtd-all-link{font-weight:700}
+.rtd-mega-grid{display:grid;grid-template-columns:repeat(var(--rtd-columns,3),minmax(0,1fr));gap:25px;align-items:start}.rtd-mega-column{min-width:0}
+.rtd-mega-group{min-width:0;display:block;width:100%;margin:0 0 19px}
+.rtd-mega-group h3{font-size:14px!important;font-weight:750!important;line-height:1.5;margin:0 0 8px!important;padding:0!important;text-transform:none!important}
+.rtd-mega-group ul,.rtd-footer-column ul{list-style:none!important;padding:0!important;margin:0!important}
+.rtd-mega-group li{font-size:13px!important;line-height:1.5;margin:0 0 6px!important;padding:0!important}.rtd-mega-group .rtd-nested{padding-left:14px!important;margin-top:5px!important;border-left:1px solid #dedede}
+.rtd-mega-group a{overflow-wrap:break-word}
+.rtd-industry{border:1px solid #d2d2d2;background:#f7f7f7;padding:11px!important}
+.rtd-utils{background:#fff}
+.rtd-utils-inner{max-width:1340px;margin:auto;padding:10px 25px;display:flex;flex-wrap:wrap;gap:28px;font-size:13px!important;line-height:1.35}
+.rtd-pending{color:var(--rtd-soft);cursor:default}
+.rtd-mobile-toggle{display:none!important;border:1px solid #bbb;background:#fff;padding:10px 12px;color:#222;border-radius:0;font-size:14px;cursor:pointer}
+.rtd-missing{font-size:12px;padding:9px 20px;margin:0;background:#f7f7f7;border-bottom:1px dashed #bbb}
+body.robotik-structure-test .rtd-footer{display:block;position:relative;border-top:1px solid var(--rtd-border);width:100%;margin:0;padding:0;max-width:none;background:#fafafa!important}
+.rtd-footer-inner{max-width:1340px;margin:auto;padding:19px 25px 16px}
+.rtd-footer-header{border-bottom:1px solid var(--rtd-border);padding-bottom:14px;margin-bottom:20px;display:flex;align-items:center;gap:15px;font-size:13px}
+.rtd-footer-header strong{font-size:18px;font-weight:800;letter-spacing:.08em}
+.rtd-footer-header span{color:var(--rtd-soft)}
+.rtd-footer-bottom{border-top:1px solid var(--rtd-border);margin-top:12px;padding-top:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.rtd-footer-utils,.rtd-legal{display:flex;gap:20px;flex-wrap:wrap;font-size:12px}
+.rtd-header a:focus-visible,.rtd-footer a:focus-visible,.rtd-section summary:focus-visible,.rtd-mobile-toggle:focus-visible{outline:2px solid #333;outline-offset:3px}
+@media(max-width:1100px){.rtd-topbar-inner{gap:15px;padding:0 17px}.rtd-section>summary{font-size:13px!important}.rtd-logo{font-size:20px!important}}
+@media(max-width:780px){
+ .rtd-topbar-inner{min-height:62px;padding:0 15px;justify-content:space-between;flex-wrap:wrap;gap:0}
+ .rtd-mobile-toggle{display:block!important}
+ .rtd-mainnav{display:none;order:3;flex:0 0 100%;width:100%;padding:0;align-self:auto;max-height:74vh;overflow:auto}
+ .rtd-header.rtd-mobile-open .rtd-mainnav{display:block}
+ .rtd-section{border-top:1px solid var(--rtd-border)!important}
+ .rtd-section>summary{min-height:48px;justify-content:space-between;font-size:15px!important;padding:12px 8px!important}
+ .rtd-mega{position:static;display:none;max-height:none;overflow:visible;border:0;box-shadow:none;padding:11px 8px 18px}
+ .rtd-section[open]>.rtd-mega{display:block}
+ .rtd-mega-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+ .rtd-utils-inner{padding:10px 15px;gap:12px 20px}
+ .rtd-footer-inner{padding:23px 15px}
+ 
+}
+@media(max-width:450px){.rtd-mega-grid{grid-template-columns:1fr}}
+
+/* Stand-alone homepage only: no theme header, posts listing or sidebar. */
+body.rtd-preview-home{box-sizing:border-box!important;margin:0!important;min-height:100vh!important;display:flex!important;flex-direction:column!important;width:100%!important;max-width:none!important;overflow-x:hidden;font-family:Arial,Helvetica,sans-serif;background:#fff}
+body.rtd-preview-home.admin-bar{min-height:calc(100vh - 32px)!important}
+body.rtd-preview-home .rtd-header{flex:0 0 auto}
+body.rtd-preview-home .rtd-preview-stage{display:block;min-height:110px;flex:1 0 auto;background:#fff}
+body.rtd-preview-home .rtd-footer{flex:0 0 auto;margin-top:auto!important;background:#eaeaea!important;border-top:2px solid #aaa!important}
+body.rtd-preview-home .rtd-footer-inner{padding-top:19px}
+body.rtd-preview-home .rtd-footer-header{border-bottom:2px solid #bbb}
+body.rtd-preview-home .rtd-footer-bottom{border-top:1px solid #bbb}
+body.rtd-preview-home .rtd-mega{top:76px}
+@media (min-width:781px){
+  body.rtd-preview-home .rtd-section:hover>.rtd-mega,
+  body.rtd-preview-home .rtd-section:focus-within>.rtd-mega{display:block}
+}
+@media(max-width:1100px){body.rtd-preview-home .rtd-mega{top:76px}}
+@media(max-width:780px){
+  body.rtd-preview-home.admin-bar{min-height:calc(100vh - 46px)!important}
+  body.rtd-preview-home .rtd-mega{top:auto}
+  body.rtd-preview-home .rtd-footer{margin-top:auto!important}
+}
+
+/* Clear proof of the running version while the layout is being approved. */
+.rtd-version{font-size:11px;color:#777;display:block;text-align:right;margin-top:10px}
+/* WordPress admin toolbar occupies the top of the viewport. */
+body.rtd-preview-home.admin-bar{padding-top:32px!important;min-height:100vh!important}
+@media(max-width:782px){body.rtd-preview-home.admin-bar{padding-top:46px!important;min-height:100vh!important}}
+
+@media(min-width:781px) and (max-width:1120px){.rtd-mega-grid{grid-template-columns:repeat(var(--rtd-columns,3),minmax(0,1fr))}.rtd-mainnav{gap:2px}.rtd-topbar-inner{gap:10px}.rtd-logo{font-size:18px!important}.rtd-section>summary{font-size:12px!important;padding:12px 3px!important}}
+.rtd-product-categories{clear:both;margin:26px 0 34px;padding:20px;border:1px solid #d7d7d7;background:#fafafa}.rtd-product-categories h2{font-size:19px;margin:0 0 12px}.rtd-product-categories ul{display:flex;flex-wrap:wrap;gap:10px;list-style:none;margin:0;padding:0}.rtd-product-categories li{border:1px solid #dadada;background:#fff;padding:9px 12px;font-size:14px}.rtd-product-categories a{text-decoration:underline}.rtd-product-categories span{color:#555}
