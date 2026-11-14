@@ -17,7 +17,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -e
-          test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/43612628777" --jq .conclusion)" = success
+          test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/43619290847" --jq .conclusion)" = success
           base=protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE
           test "$(sha256sum "$base/CURRENT.zip" | awk '{print $1}')" = 34b870ad459e9b075a5c8c0aedc335939a72f6689d03216bcfd4134798c73503
       - name: Archive exact tested candidate ONLY, no CURRENT mutation
@@ -26,16 +26,16 @@ jobs:
           office=protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE
           target="$office/CANDIDATES/HOBBY_DEPOT_HD009_0.1.41_KISS_NUR_INTERN.zip"
           python3 scripts/hd009_0141_full_workflow_build.py "$office/CANDIDATES/HOBBY_DEPOT_HD009_0.1.40_EINE_ENTSCHEIDUNG_NUR_TEST.zip" "$target"
-          echo "86cfca33840cdc6ab2bbb0037f6264a91582dfd4ea4802da16ed3140188811c1  $target" | sha256sum -c
+          echo "175322f2a3f26e5640066d0c96e51bfbc8ef9a61ba09339ee8767c943e08f948  $target" | sha256sum -c
           cat > "$office/CANDIDATES/CANDIDATE_0.1.41_STATUS.md" <<'EOF'
           HD009 0.1.41 – nur INTERNER Stand, NICHT zur Installation ausgeben.
           Original-PHP-Gesamttests, einmalige Produktentscheidung und Zielautorität,
           Original-Import bis Karte: Datenbankfehler stoppen vor Materialisierung,
-          2747/2901-CSV.GZ, erneute Verarbeitung bei gleichem Hash/304 bestanden.
-          QA: actions/runs/43612628777.
+          2747/2901-CSV.GZ nur mit identischer aktueller Zuordnungsregel, erneute Verarbeitung bei gleichem Hash/304 bestanden.
+          QA: actions/runs/43619290847.
           PRIVATE echte Feeds und vollständige WordPress-Liveausgabe NICHT geprüft.
           Original CURRENT 0.1.37 und HD003-CURRENT unverändert.
-          SHA256 86cfca33840cdc6ab2bbb0037f6264a91582dfd4ea4802da16ed3140188811c1
+          SHA256 175322f2a3f26e5640066d0c96e51bfbc8ef9a61ba09339ee8767c943e08f948
           Details: AFFILIATE/FEHLERREGISTER_LEERKARTEN_20261113.md Stand 11.
           EOF
           git config user.name "github-actions[bot]"
