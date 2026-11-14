@@ -45,7 +45,9 @@ jobs:
               'fixed_keyless_endpoint': endpoint_ok,
               'five_failures_then_stop': 'MAX_CONSECUTIVE_FAILURES=5' in s,
               'v2_contract_only': "external_tick_v2" in s,
-              'v2_active_states_only': bool(re.search(r'^\s+advanced\|busy\|retryable_error\|active_idle\)\s*
+              'v2_active_states_only': "advanced|busy|retryable_error|active_idle)" in s,
+              'idle_not_terminal': "idle|throttled)" in s and "completed|failed|disabled)" in s,
+              'idle_diagnostic': "ebay_idle_diag run_status=" in s,
               'bom_safe_json': "decode('utf-8-sig')" in s,
               'cache_buster_and_no_store': '?heartbeat=${GITHUB_RUN_ID}' in s and "--header 'Cache-Control: no-store'" in s,
               'stale_response_guard': 'last_server_time' in s and 'stale heartbeat response' in s,
@@ -71,7 +73,6 @@ jobs:
           MAX_TICKS=4
           MAX_CONSECUTIVE_FAILURES=5
           consecutive_failures=0
-          active_seen=0
           last_server_time=0
 
           for n in $(seq 1 "$MAX_TICKS"); do
@@ -96,12 +97,12 @@ jobs:
               allowed={'advanced','busy','retryable_error','completed','failed','disabled','idle','throttled'}
               if s not in allowed or c!='external_tick_v2' or not isinstance(t,int) or t<=0:
                   raise ValueError('invalid external_tick_v2 response')
-              # The actual saved WordPress run status wins over the generic idle label.
+              # Idle is not proof that a stored canonical run has completed.
               if s=='idle':
-                  wp_status=str(d.get('run_status') or '').lower()
-                  if wp_status=='running' or (wp_status=='paused' and d.get('reason')=='availability_tick'):
-                      s='active_idle'
-                  print(f"ebay_idle_status run_status={wp_status or 'missing'} phase={str(d.get('phase') or 'missing')[:50]} reason={str(d.get('reason') or 'missing')[:80]}",file=sys.stderr)
+                  safe=lambda v: ''.join(ch for ch in str(v or '') if ch.isalnum() or ch in '_-')[:64]
+                  print(f"ebay_idle_diag run_status={safe(d.get('run_status'))} phase={safe(d.get('phase'))} reason={safe(d.get('reason'))}",file=sys.stderr)
+              if s=='idle' and d.get('run_status') in ('running','paused'):
+                  s='active_idle'
               print(f"{s} {t}")
           except Exception:
               pass
@@ -123,132 +124,13 @@ jobs:
                 consecutive_failures=0
                 echo "heartbeat $n status=$status server_time=$server_time"
                 case "$status" in
-                  idle)
-                    if [ "$active_seen" -eq 1 ]; then
-                      echo 'unexpected idle after active work: continue this bounded window'
-                    else
-                      echo 'idle, no active work in this window; next scheduled run will recheck'
-                      exit 0
-                    fi
-                    ;;
                   completed|failed|disabled)
-                    echo "terminal heartbeat status=$status"
+                    echo "terminal heartbeat status=$status; no successor runner required"
                     exit 0
                     ;;
-                  throttled)
+                  idle|throttled)
                     ;;
                   advanced|busy|retryable_error|active_idle)
-                    active_seen=1
-                    ;;
-                esac
-              fi
-            fi
-
-            if [ "$consecutive_failures" -ge "$MAX_CONSECUTIVE_FAILURES" ]; then
-              echo 'five consecutive heartbeat failures; stop this runner and let the safety schedule retry later'
-              exit 1
-            fi
-            if [ "$n" -lt "$MAX_TICKS" ]; then sleep 30; fi
-          done
-
-          echo 'heartbeat work window complete; next scheduled run continues the same stored eBay cursor'
-,s,re.M)),
-              'active_run_not_idle': "wp_status=='running'" in s and "s='active_idle'" in s,
-              'no_false_terminal_after_progress': 'unexpected idle after active work: continue this bounded window' in s,
-              'idle_evidence': 'ebay_idle_status run_status=' in s,
-              'bom_safe_json': "decode('utf-8-sig')" in s,
-              'cache_buster_and_no_store': '?heartbeat=${GITHUB_RUN_ID}' in s and "--header 'Cache-Control: no-store'" in s,
-              'stale_response_guard': 'last_server_time' in s and 'stale heartbeat response' in s,
-              'no_overlap': 'cancel-in-progress: false' in s,
-              'no_self_dispatch': not re.search(r'^\s*dispatch_url=',s,re.M),
-              'heartbeat_not_on_pr': "if: github.event_name != 'pull_request'" in s,
-          }
-          for k,v in checks.items(): print(('PASS ' if v else 'FAIL ')+k)
-          if not all(checks.values()): raise SystemExit(1)
-          print(f'SCHEDULER_KISS_ASSERTIONS={len(checks)} FAIL=0')
-          PY
-
-  heartbeat:
-    if: github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - name: Keep the active canonical eBay run moving
-        shell: bash
-        run: |
-          set -u
-          URL='https://pferde-atelier.de/wp-json/affiliate-zentrale/v1/ebay/tick'
-          MAX_TICKS=4
-          MAX_CONSECUTIVE_FAILURES=5
-          consecutive_failures=0
-          active_seen=0
-          last_server_time=0
-
-          for n in $(seq 1 "$MAX_TICKS"); do
-            body="heartbeat-$n.json"
-            err="heartbeat-$n.err"
-            tick_url="$URL?heartbeat=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${n}-$(date +%s)"
-            code=$(curl --silent --show-error --output "$body" --write-out '%{http_code}' --request POST --max-time 45 --header 'Cache-Control: no-store' "$tick_url" 2>"$err" || true)
-
-            if [ "$code" != '200' ]; then
-              consecutive_failures=$((consecutive_failures + 1))
-              echo "heartbeat $n transport failure http=${code:-none} consecutive=$consecutive_failures"
-              cat "$err" || true
-            else
-              parsed=$(python3 - "$body" <<'PY' || true
-          import json,sys
-          try:
-              raw=open(sys.argv[1],'rb').read().decode('utf-8-sig').strip()
-              d=json.loads(raw)
-              s=d.get('status') if isinstance(d,dict) else None
-              c=d.get('contract') if isinstance(d,dict) else None
-              t=d.get('server_time') if isinstance(d,dict) else None
-              allowed={'advanced','busy','retryable_error','completed','failed','disabled','idle','throttled'}
-              if s not in allowed or c!='external_tick_v2' or not isinstance(t,int) or t<=0:
-                  raise ValueError('invalid external_tick_v2 response')
-              # The actual saved WordPress run status wins over the generic idle label.
-              if s=='idle':
-                  wp_status=str(d.get('run_status') or '').lower()
-                  if wp_status=='running' or (wp_status=='paused' and d.get('reason')=='availability_tick'):
-                      s='active_idle'
-                  print(f"ebay_idle_status run_status={wp_status or 'missing'} phase={str(d.get('phase') or 'missing')[:50]} reason={str(d.get('reason') or 'missing')[:80]}",file=sys.stderr)
-              print(f"{s} {t}")
-          except Exception:
-              pass
-          PY
-              )
-
-              status=${parsed%% *}
-              server_time=${parsed##* }
-              if [ -z "$parsed" ] || [ "$status" = "$server_time" ]; then
-                consecutive_failures=$((consecutive_failures + 1))
-                echo "heartbeat $n invalid v2 response consecutive=$consecutive_failures"
-                head -c 800 "$body" || true
-                echo
-              elif [ "$status" != 'throttled' ] && [ "$server_time" -le "$last_server_time" ]; then
-                consecutive_failures=$((consecutive_failures + 1))
-                echo "heartbeat $n stale heartbeat response server_time=$server_time previous=$last_server_time consecutive=$consecutive_failures"
-              else
-                if [ "$status" != 'throttled' ]; then last_server_time=$server_time; fi
-                consecutive_failures=0
-                echo "heartbeat $n status=$status server_time=$server_time"
-                case "$status" in
-                  idle)
-                    if [ "$active_seen" -eq 1 ]; then
-                      echo 'unexpected idle after active work: continue this bounded window'
-                    else
-                      echo 'idle, no active work in this window; next scheduled run will recheck'
-                      exit 0
-                    fi
-                    ;;
-                  completed|failed|disabled)
-                    echo "terminal heartbeat status=$status"
-                    exit 0
-                    ;;
-                  throttled)
-                    ;;
-                  advanced|busy|retryable_error|active_idle)
-                    active_seen=1
                     ;;
                 esac
               fi
