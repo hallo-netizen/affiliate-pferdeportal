@@ -70,7 +70,7 @@ foreach(array('Airbrush','Airbrush-Modellbau','Buchbinden','Münzen','3D-Druck',
   $id='concept-'.sanitize_key(str_replace(' ','-',$key));
   $targets[$id]=array('id'=>$id,'title'=>$key,'target_pages'=>array(array('hub'=>'Gestalten','main_hub'=>'Gestalten')));
 }
-$catalog=array('_idealo_required_concepts'=>$targets,'hard_negative_markers'=>array());
+$catalog=array('_idealo_required_concepts'=>$targets,'hard_negative_markers'=>array('damen'));
 $q=new RealHD009MatcherQA($catalog);
 ck(count($q->equipped('Airbrush'))===1,'Actual HD007 Airbrush first equipment is a safe compound');
 ck($q->equipped('Buchbinden')===array(),'Generic Papier excluded even if it occurs in feed');
