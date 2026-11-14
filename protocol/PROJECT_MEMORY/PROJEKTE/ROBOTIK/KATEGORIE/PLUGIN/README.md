@@ -1,5 +1,11 @@
 # Robotik – Pluginbüro / Kategorie-Workflow
 
+## 0.4.5 / V58 – gezielte Wiederaufnahme des beim Anbieter bestätigten 50000-Abbruchs (TEST)
+- **Kein kompletter Neustart, kein neues Plugin.** Der tatsächlich in WordPress `BLOCKED_UNCERTAIN 0/38` gestoppte 0.4.4-Durchlauf kann mit derselben Identität auf 0.4.5 aktualisiert werden. Nur bei gespeichertem ersten HTTP-500-Fehler bietet das Backend **einmalig manuelle Wiederaufnahme** mit erneuter ausdrücklicher Kostenbestätigung.
+- Bestehende 38er-Auftragsliste, Run-ID, Kostenrahmen und V52-Fachmaster bleiben erhalten. Nach weiteren Fehlern wird kein zweites Mal automatisch oder manuell wiederholt. Original-Import-/Veröffentlichungsdateien byte-identisch.
+- Quellprüfungen und lokale WP-Simulation bestanden; **noch kein echter Live-Lauf**. `PLUGIN/CURRENT.zip` = `PLUGIN/VERSIONEN/0.4.5.zip` (TEST). Bericht `PLUGIN/SEO_V58_RELEASEPRUEFUNG_20261114.md`.
+
+
 ## NEUESTE GEBÜNDELTE TESTVERSION 14.11.2026 – 0.4.4 / V57
 - **Einziges vorhandenes Kategorie-Plugin**. Geschütztes 0.4.3-Update, V52-Fachbestand weiterhin nur SEO, alter Erstimport 104/89 **bytegleich**, vorhandene WordPress-Inhalte unangetastet.
 - Ein kostenbegrenzter SEO-Gesamtlauf: **437 Overview-Keywords**, **8 Keyword-Ideas-Aufträge** für alle 141 Typseiten über acht Hauptwelten, **29 Google-Top10-Suchen** als **16** URL-Konfliktvergleiche. 38 interne Aufträge, **ein Nutzer-Kostenstart**, ein Ergebnis-JSON. 300 Ideen je Welt sind Begrenzung, keine garantiert vollständige Forschung.
