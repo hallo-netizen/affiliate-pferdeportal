@@ -2144,3 +2144,12 @@ Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wa
 - PHP-Syntaxprüfung lokal PASS, ZIP-/W6-Integrität PASS, sechs gebündelte WP-Mock-Fälle PASS (normaler Gesamtimport, idempotenter Wiederholungslauf, Rollback bei Kategorienfehler, falsche Site, WP-Konflikt, abweichende Importvorlage). Bericht `PLUGINS/W9_IMPORT_PLUGIN_OFFLINE_ABNAHME_20261114.md`.
 - **Echter WordPress-Live-Test NICHT erfolgt; Testversion NICHT installiert; keine tatsächlichen WordPress-Seiten/Kategorien geschrieben und keine Importfreigabe.** Nächster Praxisschritt: nach ausdrücklicher Freigabe eine Aktualisierung des vorhandenen WT001 auf der gebundenen Testseite, eine Gesamtvorschau, gesonderte Importfreigabe und ein Readback. Kein neues Plugin, keine neuen API-Gebühren, keine Änderungen an anderen Portalen.
 - PROTOKOLL PASS · KISS PASS · EINE_PLUGINIDENTITAET PASS · SEO/BAUM/MEGAMENUE UNVERÄNDERT · SCHREIBFREIGABE OFFEN.
+
+## 2026-11-14 – Wassertechnik W10: neun Hauptmenüpunkte als Vertragsverstoß erkannt, sieben vorgeschlagen
+- Aktueller W7-Bestand: acht Käuferbereiche plus sichtbarer Industriepunkt = **neun**, entgegen Nutzervertrag **sechs bis acht**. Unterteilung zu kleinteilig, u. a. Brunnen 3 Produkte, Bewässerung 6, Wassertanks 6.
+- Vorliegendes **W10-KONZEPT, noch keine Ausführung**: Brunnen + Bewässerung zu 9 Produkten; Regenwasser + Wassertanks zu 15; zusammen mit Wasseraufbereitung 19, Wasseranalyse 8, Pumpen & Druck 12, Abwasser 8, Industrie 8 = **sieben** sinnvolle Menü-/Hauptbereiche, alle 79 alten Produktlinks genau einmal.
+- Menüs der kleinen Bereiche durch vorhandene Produktlinks in sinnvolle, teilweise rein visuelle Gruppen ordnen, **keine** neuen SEO-Seiten als Füllmaterial. Zielvertrag Produkt-Endseite → frei gewählte zugehörige Inhaltskategorie → Beiträge bleibt unverändert.
+- Gezielte Hersteller-/Sortimentsrecherche für mögliche echte Lücken (Brunnenköpfe, Regner, Fettabscheider), **keine** pauschale neue kostenpflichtige SEO-Abfrage, keine neuen WP-Owner automatisch.
+- Wichtige SEO-Grenze: sieben sichtbare Menüeinträge ändern nicht automatisch die neun technisch vorhandenen WP-Hauptseiten. Für echte sieben WP-Hauptseiten wäre ein einmaliger gemeinsamer Seitenbaum-/URL-Umbau mit vollständigen Weiterleitungen erforderlich; nicht stillschweigend umsetzen.
+- Konzeptbeleg: `PROJEKTE/WASSERTECHNIK/KATEGORIEKONZEPT/W10_HAUPTKATEGORIEN_KONSOLIDIERUNG_KONZEPT_20261114.md`.
+- PROTOKOLL: KONZEPT SICHERUNG PASS · FREIGABE: OFFEN · WP-/PLUGIN-/FRONTEND-ÄNDERUNGEN: KEINE · FREMDE PORTALE: UNVERÄNDERT.
