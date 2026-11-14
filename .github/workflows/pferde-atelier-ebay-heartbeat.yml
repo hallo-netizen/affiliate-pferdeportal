@@ -39,15 +39,16 @@ jobs:
           checks={
               'single_schedule_5m': "cron: '*/5 * * * *'" in s,
               'timeout_safe_window': 'MAX_TICKS=4' in s and 'timeout-minutes: 10' in s,
-              'minute_ticks': 'sleep 30' in s,
+              'minute_ticks_after_45s_server_rate_gate': 'sleep 60' in s,
               'post_only': '--request POST' in s,
               'bounded_http': '--max-time 45' in s,
               'fixed_keyless_endpoint': endpoint_ok,
               'four_failures_then_stop': 'MAX_CONSECUTIVE_FAILURES=4' in s,
               'v2_contract_only': "external_tick_v2" in s,
               'v2_active_states_only': "advanced|busy|retryable_error|active_idle)" in s,
-              'idle_not_terminal': "idle|throttled)" in s and "completed|failed|disabled)" in s,
+              'true_idle_exits_and_active_idle_continues': "idle|completed|disabled)" in s and "advanced|busy|retryable_error|active_idle)" in s,
               'idle_diagnostic': "ebay_idle_diag run_status=" in s,
+              'failed_run_is_failed_job': "canonical eBay run failed; GitHub job must not appear successful" in s,
               'bom_safe_json': "decode('utf-8-sig')" in s,
               'cache_buster_and_no_store': '?heartbeat=${GITHUB_RUN_ID}' in s and "--header 'Cache-Control: no-store'" in s,
               'stale_response_guard': 'last_server_time' in s and 'stale heartbeat response' in s,
@@ -101,7 +102,7 @@ jobs:
               if s=='idle':
                   safe=lambda v: ''.join(ch for ch in str(v or '') if ch.isalnum() or ch in '_-')[:64]
                   print(f"ebay_idle_diag run_status={safe(d.get('run_status'))} phase={safe(d.get('phase'))} reason={safe(d.get('reason'))}",file=sys.stderr)
-              if s=='idle' and d.get('run_status') in ('running','paused'):
+              if s=='idle' and (d.get('run_status')=='running' or (d.get('run_status')=='paused' and d.get('reason')!='operator_paused')):
                   s='active_idle'
               print(f"{s} {t}")
           except Exception:
@@ -124,11 +125,19 @@ jobs:
                 consecutive_failures=0
                 echo "heartbeat $n status=$status server_time=$server_time"
                 case "$status" in
-                  completed|failed|disabled)
+                  completed|disabled)
                     echo "terminal heartbeat status=$status; no successor runner required"
                     exit 0
                     ;;
-                  idle|throttled)
+                  failed)
+                    echo 'canonical eBay run failed; GitHub job must not appear successful'
+                    exit 1
+                    ;;
+                  idle)
+                    echo 'no active canonical work or explicitly operator-paused; nothing to repeat'
+                    exit 0
+                    ;;
+                  throttled)
                     ;;
                   advanced|busy|retryable_error|active_idle)
                     ;;
@@ -140,7 +149,7 @@ jobs:
               echo 'four consecutive heartbeat failures; stop this runner and let the safety schedule retry later'
               exit 1
             fi
-            if [ "$n" -lt "$MAX_TICKS" ]; then sleep 30; fi
+            if [ "$n" -lt "$MAX_TICKS" ]; then sleep 60; fi
           done
 
           echo 'heartbeat work window complete; next scheduled run continues the same stored eBay cursor'
