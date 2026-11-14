@@ -33,6 +33,7 @@ class WP_Error{
 }
 function is_wp_error($x){return $x instanceof WP_Error;}
 function absint($n){return abs((int)$n);}
+function sanitize_text_field($x){return strip_tags((string)$x);}
 function update_option($k,$v,$autoload=false){$GLOBALS['settings']=$v;return true;}
 function wp_next_scheduled($hook){return $GLOBALS['cron'][$hook]??false;}
 function wp_schedule_single_event($stamp,$hook){$GLOBALS['cron'][$hook]=$stamp;$GLOBALS['one_shots']++;return true;}
