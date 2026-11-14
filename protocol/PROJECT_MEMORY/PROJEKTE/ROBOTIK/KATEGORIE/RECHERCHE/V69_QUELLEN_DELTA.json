@@ -1,0 +1,165 @@
+{
+  "schema": "V69 research-delta, not a robot master",
+  "date": "2026-11-14",
+  "classes": [
+    "Produkt",
+    "Projekt",
+    "Idee"
+  ],
+  "scope": [
+    "Haushalt",
+    "Garten",
+    "Freizeit",
+    "Sport",
+    "Bildung",
+    "Pflege",
+    "Humanoide"
+  ],
+  "excluded": [
+    "Gewerbe",
+    "Industrie",
+    "Humanoide/Arbeit"
+  ],
+  "research_only": true,
+  "candidates_for_new_core": [
+    "V69-001",
+    "V69-002"
+  ],
+  "findings": [
+    {
+      "id": "V69-001",
+      "label": "Produkt",
+      "name": "g.eN – automatischer Zahnpflegeroboter",
+      "world": "Pflege",
+      "owner": "NEUER TYPKANDIDAT Zahnpflegeroboter",
+      "origin": "Universitäts-Startup Genics, Japan",
+      "url": "https://www.waseda.jp/inst/entrepreneur/news/2026/10/16/9376/"
+    },
+    {
+      "id": "V69-002",
+      "label": "Projekt",
+      "name": "Pflanzengetriebener Saatroboter",
+      "world": "Garten",
+      "owner": "TYPKANDIDAT, zuerst Register+Magazin; Saathilfe/Beetrobotik abgleichen",
+      "origin": "University of Electro-Communications, Japan",
+      "url": "https://d3ctc1v6gkh7de.cloudfront.net/news/newsrelease/2026/20261109_8080.html"
+    },
+    {
+      "id": "V69-003",
+      "label": "Projekt",
+      "name": "Eisschnelllauf-Trainingsroboter mit Seilzug",
+      "world": "Sport",
+      "owner": "Register+Sportmagazin; Trainingsroboter prüfen",
+      "origin": "Forschungsteams China und Korea, Facharbeit",
+      "url": "https://ms.copernicus.org/articles/17/731/2026/"
+    },
+    {
+      "id": "V69-004",
+      "label": "Idee",
+      "name": "PIVOT – modularer Haushaltsroboter",
+      "world": "Haushalt",
+      "owner": "Register, bestehende Haushaltsassistenten",
+      "origin": "Studentischer Entwurf, Shanghai Institute of Visual Art",
+      "url": "https://www.siva.edu.cn/2026/0512/c582a31992/page.htm"
+    },
+    {
+      "id": "V69-005",
+      "label": "Idee",
+      "name": "1+N-Gartenpflegeroboter",
+      "world": "Garten",
+      "owner": "Register, bestehende Mäh-/Gartenroboter",
+      "origin": "Studentischer Entwurf, Shanghai Institute of Visual Art",
+      "url": "https://www.siva.edu.cn/2026/0512/c582a31992/page.htm"
+    },
+    {
+      "id": "V69-006",
+      "label": "Produkt",
+      "name": "Moflin – flauschiges Roboterhaustier",
+      "world": "Freizeit",
+      "owner": "Register, bestehende Robotertiere",
+      "origin": "Casio, Japan; in Deutschland angeboten",
+      "url": "https://www.casio.com/de/moflin/"
+    },
+    {
+      "id": "V69-007",
+      "label": "Produkt",
+      "name": "Mirumi – interaktiver Taschenanhänger",
+      "world": "Freizeit",
+      "owner": "Register, bestehende Roboterbegleiter",
+      "origin": "Yukai Engineering, Japan; UK-Verkauf 2026",
+      "url": "https://store-uk.mirumi.tokyo/pages/press"
+    },
+    {
+      "id": "V69-008",
+      "label": "Produkt",
+      "name": "Nékojita FuFu – Getränkekühl-Miniroboter",
+      "world": "Haushalt",
+      "owner": "Register + Magazin; derzeit keine neue Typseite",
+      "origin": "Yukai Engineering, Japan; automatisierter Lüfter als Roboter vermarktet",
+      "url": "https://globalstore.ux-xu.com/products/nekojita-fufu"
+    },
+    {
+      "id": "V69-009",
+      "label": "Projekt",
+      "name": "poiq – kommunikativer Tischroboter",
+      "world": "Freizeit",
+      "owner": "Register, bestehende Tischroboter",
+      "origin": "Sony Design, Japan; Entwicklungsprojekt",
+      "url": "https://www.sony.com/en/brand/futureproof/project/poiq/"
+    },
+    {
+      "id": "V69-010",
+      "label": "Projekt",
+      "name": "CLOiD – humanoide Haushaltshilfe",
+      "world": "Humanoide",
+      "owner": "Register, bestehende humanoide Haushaltsassistenten",
+      "origin": "LG, Korea; Vorführung 2026, nicht automatisch serienreif",
+      "url": "https://view.asiae.co.kr/en/article/2026010605583214400"
+    },
+    {
+      "id": "V69-011",
+      "label": "Idee",
+      "name": "Tier-Spiel- und Fütterroboter, Design CN309986642S",
+      "world": "Haushalt",
+      "owner": "Register, bestehende Haustierroboter",
+      "origin": "Private Erfinder, China; Design belegt keine getestete Funktion",
+      "url": "https://patents.google.com/patent/CN309986642S/zh"
+    },
+    {
+      "id": "V69-012",
+      "label": "Idee",
+      "name": "Katzen-Begleitroboter, Design CN309920879S",
+      "world": "Freizeit",
+      "owner": "Register, bestehende Robotertiere",
+      "origin": "Changzhou Institute of Technology, China",
+      "url": "https://patents.google.com/patent/CN309920879S/en"
+    },
+    {
+      "id": "V69-013",
+      "label": "Idee",
+      "name": "KI-Katzenroboter, Design CN309811806S",
+      "world": "Freizeit",
+      "owner": "Register, bestehende Robotertiere",
+      "origin": "Shenzhen, China; Design mit Kamera-/Sprachidee",
+      "url": "https://patents.google.com/patent/CN309811806S/en"
+    },
+    {
+      "id": "V69-014",
+      "label": "Idee",
+      "name": "Roboterhaustier mit Begleitfunktion, Design CN309730565S",
+      "world": "Freizeit",
+      "owner": "Register, bestehende Robotertiere",
+      "origin": "Qingdao Institute of Technology, China",
+      "url": "https://patents.google.com/patent/CN309730565S/en"
+    },
+    {
+      "id": "V69-015",
+      "label": "Idee",
+      "name": "Tierwaschautomat, Patent CN122004149A",
+      "world": "Haushalt",
+      "owner": "Register, V68_N01 Tierwaschroboter ergänzen, KEIN neuer Typ",
+      "origin": "Shenzhen Chongdian, China; Patent ohne Prototypbeweis",
+      "url": "https://patents.google.com/patent/CN122004149A/en"
+    }
+  ]
+}

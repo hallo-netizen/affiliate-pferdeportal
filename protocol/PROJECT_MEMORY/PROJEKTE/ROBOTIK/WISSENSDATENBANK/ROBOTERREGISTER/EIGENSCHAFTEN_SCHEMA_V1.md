@@ -44,3 +44,6 @@ Erst nach Fach-/Keyword-Prüfung: Haupt-/Zwischenebene = WP-Seite; letzte Seite 
 
 ## Technische Umsetzungsgrenze
 Die installierte Robotik-Version 0.3.0 hat noch **keinen** automatischen Master-/Trait-Leser. Die Eigenschaften im GitHub-Master sind Vorbereitung, keine neue WP-Funktion. Nur eine spätere **read-only** Anbindung an die freigegebene Masterrevision, keinen zweiten Writer bauen.
+
+## 14.11.2026 / V69: ein Fund, drei Kennzeichnungen
+**Produkt:** nachweislich angebotenes Gerät. **Projekt:** tatsächlich entwickelte oder gezeigte Lösung. **Idee:** studentischer Entwurf, Patent, Designstudie ohne gebauten Beleg. Dies ist exakt **ein** gemeinsames Feld pro Fund, kein zusätzlicher Reifegradbaum. Herkunft/Urheber und Quelle/Standdatum als Freitext; fachlicher Robotertyp-Owner einmalig verknüpft. Entwicklung von Idee zu Projekt zu Produkt: vorhandenen Datensatz aktualisieren, **nicht** eine zweite Identität anlegen. Kein regelmäßiger Dreiwochen-Zwang. Glossar, Finder, Magazin und Register sind Ansichten. V69-Recherche ist ein Delta und **kein neuer Master**.

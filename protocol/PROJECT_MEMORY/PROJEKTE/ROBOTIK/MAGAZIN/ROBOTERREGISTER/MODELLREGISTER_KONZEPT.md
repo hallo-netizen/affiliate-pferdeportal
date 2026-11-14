@@ -11,3 +11,6 @@ Ein Hersteller + genau ein Modell/Variante = eine Modellidentität mit Herstelle
 6. Ein primärer Link zur passenden CORE-Produktseite, zu Glossarbegriffen und später zu echten Angeboten.
 
 **SEO:** Hersteller-Modell-Intent kann eine eigenständige Registerseite tragen, aber nicht die allgemeine „Welcher Servierroboter?“-/„Wie funktioniert AMR?“-Beratung doppeln. Indexierung erst bei erwiesenem eigenständigem Suchzweck. Registerdaten sind keine Preis- oder Verfügbarkeitsbehauptungen und nicht automatisch eine Anzeige. **Keine WordPress-Produktion**.
+
+## V69 / drei einfache Fundkennzeichen
+Das Roboterregister ist ab jetzt **auch für Patentideen, Studienarbeiten, Designentwürfe und Prototypen** offen, selbst wenn es kein Kaufgerät gibt. Zu jedem Eintrag nur **Produkt · Projekt · Idee**, Name, Urheber, Quelle/Datum und der eine fachliche Typ-Owner. Bei unklarer Robotertypseite zuerst Registeraufnahme; nicht wegen einer Idee automatisch eine CORE-Seite erzwingen. Magazin/Finder/Glossar verlinken auf den zentralen Eintrag. Keine Zweitliste.

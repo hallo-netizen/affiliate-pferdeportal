@@ -1,5 +1,11 @@
 # ROBOTIK / KATEGORIE – EINZIGER AKTUELLER STATUS
 
+## AKTUELL 14.11.2026 – V69: DREI KISS-LABELS UND 15 NEUE QUELLENFUNDE
+- Nutzerbindung: Alle Patente, studentischen Designideen und Forschungen **erfassen**, Marktreife ist keine Zugangshürde. **EIN Kennzeichen je Fund: `Produkt` (angeboten), `Projekt` (entwickelt/getestet), `Idee` (Patent/Entwurf ohne gebauten Nachweis)**. Herkunft/Quelle/Datenstand als Klartext, keine Status-Matrix oder Dreiwochen-Prüfpflicht.
+- Neue belegte Asienrunde: **15 Funde, 4 Produkte / 4 Projekte / 7 Ideen**, Japan/China/Korea. Zwei fachliche Typkandidaten (Zahnpflegeroboter und pflanzengetriebener Saatroboter), alle anderen 13 als Registereinträge bei vorhandenen Typen/V68. Vier Artikelansätze pro jeweils drei möglichen Rubriken für beide neuen Kandidaten. Nur sieben private Welten, keine Industrie/Gewerbe.
+- Recherchequellen und alle Zuordnungen `KATEGORIE/RECHERCHE/V69_ASIEN_DREI_KENNZEICHNUNGEN_20261114.md` und `V69_QUELLEN_DELTA.json`. Register/Finder/Magazin/Glossar lesen den EINEN Robotikbestand; kein zweiter Master, keine Live-Änderung, keine API-Kosten. Der tatsächliche WP-Importabschluss ist weiter nicht neu belegt.
+
+
 ## AKTUELL 14.11.2026 – V67: SIEBEN WELTEN GEBÜNDELT WEITER RECHERCHIERT; GEWERBE & INDUSTRIE AUSGESPART
 - Nutzerauftrag: **Haushalt, Garten, Freizeit, Sport, Bildung, Pflege, Humanoide** im Gesamtblock vertiefen. **Gewerbe, Industrie und humanoide Arbeits-/Industrieanwendungen NICHT bearbeiten**. Design offen, kein neuer WP-Import oder Designwechsel.
 - Vollständiger Datenabgleich zum V62-Master: **100 bestehende konkrete Robotertyp-Seiten, 33 Gruppenseiten, 231 WordPress-Inhaltsrubriken**, davon **31** Produkttypen mit nur einer Rubrik, **7** mit zwei, **62** mit drei. **16 SEO-HOLD-Typen** gehören zu diesen Welten und bleiben ausgesperrt. C-Vertrag: letzte Seite = konkreter Robotertyp, darunter nur sinnvoll differenzierte Rubriken, circa 3–5 eigenständige Artikel pro Rubrik als grobe Redaktionseinschätzung, keine starre Anzahl.
