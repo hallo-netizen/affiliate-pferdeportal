@@ -38,6 +38,8 @@ $txeIsConfirmed = function_exists('get_option') && function_exists('home_url')
     && hash_equals(hash('sha256', (string)home_url('/') . '|' . (string)get_current_blog_id()),
         (string)get_option('texterstellung_testsite_confirmation_v1', ''));
 if ($txeIsConfirmed) {
+    // Technical adapter: no second editorial production plan. Only on the explicitly confirmed testsite.
+    if (!defined('TXE_PLANFREE_KISS_V1')) { define('TXE_PLANFREE_KISS_V1', true); }
     require_once __DIR__.'/original/pste/portal-seo-topic-engine.php';
     // Preserve the original draft-only safety after removing the PPM planning runtime.
     // This is a technical WordPress safeguard, not another SEO or content decision.
