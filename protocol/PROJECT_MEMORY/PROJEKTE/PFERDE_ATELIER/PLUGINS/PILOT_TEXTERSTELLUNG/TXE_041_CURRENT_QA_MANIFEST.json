@@ -1,0 +1,71 @@
+{
+  "status": "SOURCE_ONLY__NO_INSTALL_APPROVAL",
+  "based_on": "Texterstellung 0.4.1 current original-research QA candidate",
+  "version": "0.4.1-original-k0-sync-qa",
+  "zip_filename": "Texterstellung_0.4.1_K0_Synchronisierung_QA_NICHT_INSTALLIEREN.zip",
+  "zip_sha256": "1aa45bb9cd5e35b133e90d83a9b03c2872cbc0c510a1d1589da7ec5b1477cff3",
+  "zip_size_bytes": 711693,
+  "originals_previous_candidate_unchanged": 131,
+  "previous_candidate_files": 132,
+  "modified_existing": {
+    "texterstellung.php": {
+      "before_sha256": "ca0cceeceaa679b7210a0bf1339650628fa08257cfe0ad0e4d971637fdc9c0de",
+      "after_sha256": "d7823a610fd4231395a862ba9e84f008a6dd782424a273952224f958ae8e2e6b"
+    }
+  },
+  "added_byte_identical_original_pserc_modules": {
+    "original/pserc/class-pserc-metadata-boundary.php": "acfc6cc95878b75d14485b5b4fca9c8ead87ae81bdda0e79d53244e32f89c767",
+    "original/pserc/class-pserc-plan-snapshot-store.php": "36168ea02d7399627cca57e0327c022f5374f6d272a5831d7a560ff582c361b2"
+  },
+  "php_syntax_pass": 94,
+  "qa_reports": {
+    "QA_TXE041_ORIGINAL_K0_VS_LEGACY.php": {
+      "pass": 15,
+      "total": 15
+    },
+    "QA_TXE041_ORIGINAL_FREI_SYNC_K0.php": {
+      "pass": 10,
+      "total": 10
+    },
+    "QA_TXE041_ORIGINAL_RESEARCH_BOOT.php": {
+      "pass": true
+    },
+    "QA_TXE041_ORIGINAL_RESEARCH_ADMIN.php": {
+      "pass": true
+    },
+    "QA_TXE041_ORIGINAL_RESEARCH_CONFLICT.php": {
+      "pass": true
+    },
+    "QA_TXE041_ORIGINAL_FREI_BRIDGE.php": {
+      "pass": true
+    },
+    "QA_TXE041_REUSE_ORIGINAL_IMPORT_ppm": {
+      "pass": 8,
+      "total": 8
+    },
+    "QA_TXE041_REUSE_ORIGINAL_IMPORT_no-ppm": {
+      "pass": 1,
+      "total": 1
+    }
+  },
+  "contracts": {
+    "source_k0": "PSERC_Plan_Snapshot_Store::batchFromItems",
+    "source_technical_validator": "PSERC_Metadata_Boundary::requireReadyBatchForExport",
+    "original_seo_owner": "PSTE_Mini_Workflow::hasStoredFinalFrei",
+    "original_importer": "PSERC_System4_Import::importPayload"
+  },
+  "changes": [
+    "original PSERC five-field K0 generator and validator",
+    "automatic read-only handoff from original stored FREI approvals at title/K0 export",
+    "fill only original missing technical identity, never invent",
+    "PSTE dormant activation only after explicit test confirmation"
+  ],
+  "not_proven": [
+    "actual WordPress/PSTE migration",
+    "live DataForSEO/PAA",
+    "original PPM 6.7.9 runtime",
+    "actual K0 execution",
+    "fully functional portal-neutral variants"
+  ],
+  "release_allowed": false
+}
