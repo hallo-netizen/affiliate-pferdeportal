@@ -28,6 +28,8 @@ auf Flurebene Facharbeit beginnen, Projekte miteinander vermischen oder ein unbe
 - `MENSCH/START_HERE.md`
 - `ROBOTIK/START_HERE.md` → Robotik (Büro Kategorie)
 
+- `WASSERTECHNIK/START_HERE.md` → Wassertechnik (eigenes Projektgebäude)
+
 Neue Projekte entstehen ausschließlich nach dem definierten Projektstartweg.
 
 **Projektgebäude sind strikt getrennt.** Current-, Arbeits- und Fachdateien eines Gebäudes dürfen nicht als Current-/Arbeitsquelle eines anderen Gebäudes dienen.
