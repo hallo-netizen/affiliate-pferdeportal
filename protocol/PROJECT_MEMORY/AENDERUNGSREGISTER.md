@@ -2055,3 +2055,10 @@ Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wa
 - Drei zusätzliche Hersteller-belegte Industrietechniken: EDI, Hochdruckpumpe, Kühlwasser-Dosierstation. Sechs thematische Industrie-Landingbereiche, keine parallele Kaufnavigation.
 - Fachplan: 79 Produktseitenkandidaten, 103 individuelle WP-Rubrikentwürfe, 350 grobe Themenrichtungen. Alle W2-Originaldaten erhalten.
 - Drei W2-Überlappungsfamilien bewusst offen, kein WordPress-Import oder Plugin-Entwicklung, SEO in WordPress weiterhin ausstehend.
+
+
+## 2026-11-14 – WT001 Wassertechnik schreibfreie Kategorieplugin-SEO-Vorschau
+- Vorhandenes Robotik-Kategorieplugin 0.4.3 als echte Quelle untersucht. DataForSEO-/Inventurcode zielgerichtet zu **WT001 0.1.0** isoliert; HAB-002-Original bleibt unangetastet. **Alter Robotik-Import bewusst vollständig deaktiviert.**
+- W4-SEO-Ableitung 79 Produktseiten + 105 Produktkategorien = 184 eindeutige Begriffe, 79/79 Quellzeilen exakt gegen Campus-W4 geprüft. Offline PHP-/ZIP-/Mock-Tests PASS. Bezahlaufrufe und WordPress-Importschreiber technisch unerreichbar.
+- ZIP als exakter Git-Blob a28507fc35561144f1ada9aa400a39bca229b9fd im Wassertechnik-Pluginbüro; SHA256 b80d18ea9a4a2eb32b73a6887e417ca18890ef6b27c2b507dfeefbcb6d03c450. Keine WP-/Fremdportal-Dateien verändert.
+- **Weiter:** echte Wassertechnik-WP-Testseite für kostenlosen 184er Preflight/JSON-Export; nach expliziter Freigabe spätere bezahlte SEO- und Importphase separat.
