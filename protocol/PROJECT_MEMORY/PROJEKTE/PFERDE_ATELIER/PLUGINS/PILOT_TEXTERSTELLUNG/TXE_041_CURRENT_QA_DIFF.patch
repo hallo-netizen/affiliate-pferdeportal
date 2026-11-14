@@ -1,0 +1,130 @@
+--- Texterstellung_0.4.1_Originalrecherche/texterstellung.php
++++ Texterstellung_0.4.1_K0_Synchronisierung/texterstellung.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Texterstellung
+  * Description: Portalneutrale Texterstellung mit integrierter Fehlerdiagnose: Recherche, Freigaberegal, Sofortartikel, Titeldateien, K0-Export, Entwurfsimport. Isolierte Testinstallation.
+- * Version: 0.4.1-originalresearch-qa
++ * Version: 0.4.1-original-k0-sync-qa
+  * Requires PHP: 8.1
+  */
+ if (!defined('ABSPATH')) { exit; }
+@@ -34,6 +34,9 @@
+ require_once __DIR__.'/original/pserc/class-pserc-stable-json.php';
+ require_once __DIR__.'/original/pserc/class-pserc-plan-slot-identity.php';
+ require_once __DIR__.'/original/pserc/class-pserc-system4-import.php';
++// Original PSERC K0 batch encoder and technical five-field boundary (unchanged).
++require_once __DIR__.'/original/pserc/class-pserc-plan-snapshot-store.php';
++require_once __DIR__.'/original/pserc/class-pserc-metadata-boundary.php';
+ 
+ 
+ final class TXE_Workshop {
+@@ -70,6 +73,10 @@
+         if (!self::permitted()) {
+             wp_die('TESTSITE_CONFIRMATION_NOT_SAVED');
+         }
++        // The nested unchanged PSTE source cannot receive the WordPress plugin
++        // activation callback itself. Reuse its dormant status-only activation
++        // ONLY after the administrator confirms the isolated test site.
++        PSTE_Plugin::activate();
+         wp_safe_redirect(add_query_arg(['page'=>self::SLUG, 'txe_testmode'=>'enabled'], admin_url('admin.php')));
+         exit;
+     }
+@@ -137,6 +144,8 @@
+     private static function ready(array $o): bool {
+         if (($o['status']??'')!=='FREI') return false;
+         foreach (['title','target_keyword','category','article_type','plan_slot'] as $k)if(self::text($o[$k]??'')==='')return false;
++        // Historical canonical identities are owned by PSTE; never mint one here.
++        if (($o['origin']??'')==='ALT_FREIGABE' && self::text($o['article_id']??'')==='')return false;
+         return true;
+     }
+     private static function checkedCategory(string $slug): string {
+@@ -153,6 +162,32 @@
+             foreach (['source_id','target_keyword','category','article_type','title'] as $k) {
+                 $incoming=self::text($item[$k]??'');
+                 if ($incoming!=='' && self::text($prior[$k]??'')!=='' && $incoming!==self::text($prior[$k])) throw new RuntimeException('EXISTING_APPROVAL_CHANGED:'.$id.':'.$k);
++            }
++            // The same unchanged PSTE approval can later acquire its missing
++            // original technical bindings. Fill ONLY previously empty fields;
++            // never reevaluate the original SEO decision or replace an identity.
++            if ($kind==='ALT_FREIGABE' && ($prior['origin']??'')==='ALT_FREIGABE'
++                && ($prior['status']??'')==='METADATEN_OFFEN') {
++                $updated=$prior;
++                foreach (['title','category','article_type','intent','article_id','plan_slot'] as $k) {
++                    $incoming=self::text($item[$k]??'');
++                    if ($incoming==='')continue;
++                    $current=self::text($updated[$k]??'');
++                    if ($current!=='' && $incoming!==$current)throw new RuntimeException('ORIGINAL_BINDING_CHANGED:'.$id.':'.$k);
++                    if ($current==='') {
++                        if($k==='category')self::checkedCategory($incoming);
++                        $updated[$k]=$incoming;
++                    }
++                }
++                if (self::text($updated['article_id']??'')!=='' && self::text($updated['plan_slot']??'')!==''
++                    && !hash_equals(self::slot((string)$updated['article_id']),(string)$updated['plan_slot']))
++                    throw new RuntimeException('SLOT_ARTICLE_ID_MISMATCH');
++                $complete=true;
++                foreach(['title','target_keyword','category','article_type','article_id','plan_slot'] as $k)
++                    if(self::text($updated[$k]??'')===''){$complete=false;break;}
++                $updated['status']=$complete?'FREI':'METADATEN_OFFEN';
++                if($complete)$updated['slot_origin']='PROVIDED_IN_APPROVAL';
++                $s['orders'][$id]=$updated;
+             }
+             return $id;
+         }
+@@ -232,10 +267,8 @@
+         return self::mutate(static function(array $s)use($json){
+             $contract=self::text($json['contract']??'');$new=[];$held=0;$issues=[];
+             if ($contract===self::K0_CONTRACT) {
+-                $batch=$json;$claim=self::text($batch['batch_sha256']??'');unset($batch['batch_sha256']);
+-                if (!hash_equals(self::digest($batch),$claim))throw new RuntimeException('K0_BATCH_HASH_MISMATCH');
+-                $items=(array)($json['items']??[]);
+-                if ((int)($json['item_count']??-1)!==count($items)||!count($items))throw new RuntimeException('K0_ITEMS_INVALID');
++                PSERC_Metadata_Boundary::requireReadyBatchForExport($json);
++                $items=(array)$json['items'];
+                 foreach($items as $i=>$v){
+                     try {if(!is_array($v))throw new RuntimeException('ITEM_INVALID');
+                     $keys=array_keys($v);sort($keys);$want=['title','target_keyword','category','article_type','plan_slot'];sort($want);
+@@ -263,11 +296,14 @@
+             'title'=>(string)$order['title'],'target_keyword'=>(string)$order['target_keyword'],
+             'category'=>(string)$order['category'],'article_type'=>(string)$order['article_type'],
+             'plan_slot'=>(string)$order['plan_slot']];}
+-        $batch=['contract'=>self::K0_CONTRACT,'status'=>$out?'READY_FOR_TEXTMACHINE_METADATA_INTAKE':'NO_READY_ITEMS',
+-            'item_count'=>count($out),'publish_allowed'=>false,'content_or_format_payload_present'=>false,'items'=>$out];
+-        $batch['batch_sha256']=self::digest($batch);return $batch;
++        // Unchanged PSERC source now builds AND validates the exact K0 handoff.
++        // No second editorial or title decision is made here.
++        $batch=PSERC_Plan_Snapshot_Store::batchFromItems($out);
++        PSERC_Metadata_Boundary::requireReadyBatchForExport($batch);
++        return $batch;
+     }
+     public static function export(int $n): array {
++        self::syncOriginalFrei();
+         $n=min(50,max(1,$n));
+         return self::mutate(static function(array $s)use($n){
+             $selection=[];
+@@ -530,6 +566,16 @@
+         return self::ingest(['contract'=>'PSTE_MINI_SEO_DECISIONS_V1','items'=>$items]);
+     }
+ 
++    /** Technical handoff only: original PSTE is the sole owner of FREI decisions. */
++    private static function syncOriginalFrei(): void {
++        $original=get_option('pste_mini_keyword_roundtrip_v1',[]);
++        if (!is_array($original) || empty($original['seo_decisions']))return;
++        try {self::loadLegacyApprovals();}
++        catch(RuntimeException $e) {
++            if($e->getMessage()!=='NO_FREE_OLD_APPROVALS')throw $e;
++        }
++    }
++
+     /** Full historical title-worker file shape. Only titles[0].title may be changed externally. */
+     private static function originalTitleGovernance(): array {
+         $file=__DIR__.'/contracts/intent-first-title-governance-v1.json';
+@@ -538,6 +584,7 @@
+         return $v;
+     }
+     public static function exportTitleBatch(int $n=20): array {
++        self::syncOriginalFrei();
+         $n=max(1,min(50,$n));
+         return self::mutate(static function(array $s)use($n){
+             if(!empty($s['active_title_batch'])&&isset($s['title_batches'][$s['active_title_batch']])){
