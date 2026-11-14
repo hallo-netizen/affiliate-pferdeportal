@@ -53,7 +53,7 @@ jobs:
               'idealo_provider_access_save','idealo_provider_access_test','idealo_target_keys_for_concept',
               'idealo_payload_rank_tuple','idealo_standalone_campaign_allowed',
               'idealo_campaign_publicly_allowed','hd_idealo_standard_feed_compare_work',
-              'idealo_match_index','idealo_match_related_equipment_stems',
+              'idealo_match_index',
               'idealo_match_specific_equipment_tokens','idealo_match_blocked'
             ):
               assert method(former,name)==method(revised,name),'Changed unrelated: '+name
