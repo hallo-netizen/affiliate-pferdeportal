@@ -208,7 +208,11 @@ if "hd_idealo_product_targets_exact_hobby_page" in m:
 # The original single campaign placement resolver is now the only exact
 # Idealo page-slot decision, using the already stored target keys.
 first=m.index("    private function campaign_match_rank(")
-last=m.index("    private function get_content_context(",first)
+import re
+tail=m[first+len("    private function campaign_match_rank("):]
+next_method=re.search(r'(?m)^    (?:private|public|protected) function ',tail)
+assert next_method, "Could not find the next method after the original placement function"
+last=first+len("    private function campaign_match_rank(")+next_method.start()
 rank=m[first:last]
 spot="        $glossary_single_banner = $required_creative_type === 'banner'"
 assert rank.count(spot)==1
