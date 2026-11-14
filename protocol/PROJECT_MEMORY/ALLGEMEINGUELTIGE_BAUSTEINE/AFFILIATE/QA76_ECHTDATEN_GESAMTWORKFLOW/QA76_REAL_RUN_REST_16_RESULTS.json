@@ -1,0 +1,220 @@
+{
+  "type": "ORIGINAL_QA75_PHP_REST_RUN_STATUS_TEST_REAL_UUID_STEP_WITH_MOCKED_WORKER",
+  "original_real_run_uuid": "97507628-4f4d-4527-bd77-fa573bce7067",
+  "real_phase": "gapfill_discovery",
+  "real_step": 474,
+  "checks": 64,
+  "errors": 0,
+  "cases": [
+    {
+      "name": "real_running_advanced",
+      "original_php_result": "advanced",
+      "expected": "advanced",
+      "checks": {
+        "result_equals_expected": true,
+        "same_historic_run_on_active": true,
+        "no_start_when_running_or_paused": true,
+        "safe_legacy_campaigns_untouched": true
+      },
+      "worker_calls": 1,
+      "run_start_calls": 0
+    },
+    {
+      "name": "real_running_wrong_worker_idle",
+      "original_php_result": "busy",
+      "expected": "busy",
+      "checks": {
+        "result_equals_expected": true,
+        "same_historic_run_on_active": true,
+        "no_start_when_running_or_paused": true,
+        "safe_legacy_campaigns_untouched": true
+      },
+      "worker_calls": 1,
+      "run_start_calls": 0
+    },
+    {
+      "name": "real_running_wrong_worker_completed",
+      "original_php_result": "WP_ERROR:ebay_worker_terminal_state_unverified",
+      "expected": "WP_ERROR:ebay_worker_terminal_state_unverified",
+      "checks": {
+        "result_equals_expected": true,
+        "same_historic_run_on_active": true,
+        "no_start_when_running_or_paused": true,
+        "safe_legacy_campaigns_untouched": true
+      },
+      "worker_calls": 1,
+      "run_start_calls": 0
+    },
+    {
+      "name": "real_running_worker_failed_unstored",
+      "original_php_result": "WP_ERROR:ebay_worker_terminal_state_unverified",
+      "expected": "WP_ERROR:ebay_worker_terminal_state_unverified",
+      "checks": {
+        "result_equals_expected": true,
+        "same_historic_run_on_active": true,
+        "no_start_when_running_or_paused": true,
+        "safe_legacy_campaigns_untouched": true
+      },
+      "worker_calls": 1,
+      "run_start_calls": 0
+    },
+    {
+      "name": "saved_incoherent_running_terminal_phase",
+      "original_php_result": "WP_ERROR:ebay_run_state_inconsistent",
+      "expected": "WP_ERROR:ebay_run_state_inconsistent",
+      "checks": {
+        "result_equals_expected": true,
+        "same_historic_run_on_active": true,
+        "no_start_when_running_or_paused": true,
+        "safe_legacy_campaigns_untouched": true
+      },
+      "worker_calls": 0,
+      "run_start_calls": 0
+    },
+    {
+      "name": "saved_invalid_schema_running",
+      "original_php_result": "WP_ERROR:ebay_run_state_inconsistent",
+      "expected": "WP_ERROR:ebay_run_state_inconsistent",
+      "checks": {
+        "result_equals_expected": true,
+        "same_historic_run_on_active": true,
+        "no_start_when_running_or_paused": true,
+        "safe_legacy_campaigns_untouched": true
+      },
+      "worker_calls": 0,
+      "run_start_calls": 0
+    },
+    {
+      "name": "paused_by_operator",
+      "original_php_result": "idle",
+      "expected": "idle",
+      "checks": {
+        "result_equals_expected": true,
+        "same_historic_run_on_active": true,
+        "no_start_when_running_or_paused": true,
+        "safe_legacy_campaigns_untouched": true
+      },
+      "worker_calls": 0,
+      "run_start_calls": 0
+    },
+    {
+      "name": "paused_by_system",
+      "original_php_result": "busy",
+      "expected": "busy",
+      "checks": {
+        "result_equals_expected": true,
+        "same_historic_run_on_active": true,
+        "no_start_when_running_or_paused": true,
+        "safe_legacy_campaigns_untouched": true
+      },
+      "worker_calls": 1,
+      "run_start_calls": 0
+    },
+    {
+      "name": "old_failed_not_restarted",
+      "original_php_result": "failed",
+      "expected": "failed",
+      "checks": {
+        "result_equals_expected": true,
+        "same_historic_run_on_active": true,
+        "no_start_when_running_or_paused": true,
+        "safe_legacy_campaigns_untouched": true
+      },
+      "worker_calls": 0,
+      "run_start_calls": 0
+    },
+    {
+      "name": "completed_not_yet_due",
+      "original_php_result": "idle",
+      "expected": "idle",
+      "checks": {
+        "result_equals_expected": true,
+        "same_historic_run_on_active": true,
+        "no_start_when_running_or_paused": true,
+        "safe_legacy_campaigns_untouched": true
+      },
+      "worker_calls": 0,
+      "run_start_calls": 0
+    },
+    {
+      "name": "completed_now_due",
+      "original_php_result": "advanced",
+      "expected": "advanced",
+      "checks": {
+        "result_equals_expected": true,
+        "same_historic_run_on_active": true,
+        "no_start_when_running_or_paused": true,
+        "safe_legacy_campaigns_untouched": true
+      },
+      "worker_calls": 1,
+      "run_start_calls": 1
+    },
+    {
+      "name": "empty_run_no_due",
+      "original_php_result": "idle",
+      "expected": "idle",
+      "checks": {
+        "result_equals_expected": true,
+        "same_historic_run_on_active": true,
+        "no_start_when_running_or_paused": true,
+        "safe_legacy_campaigns_untouched": true
+      },
+      "worker_calls": 0,
+      "run_start_calls": 0
+    },
+    {
+      "name": "bad_status_no_auto_overwrite",
+      "original_php_result": "WP_ERROR:ebay_run_state_inconsistent",
+      "expected": "WP_ERROR:ebay_run_state_inconsistent",
+      "checks": {
+        "result_equals_expected": true,
+        "same_historic_run_on_active": true,
+        "no_start_when_running_or_paused": true,
+        "safe_legacy_campaigns_untouched": true
+      },
+      "worker_calls": 0,
+      "run_start_calls": 0
+    },
+    {
+      "name": "worker_state_regresses",
+      "original_php_result": "WP_ERROR:ebay_run_state_inconsistent_after_tick",
+      "expected": "WP_ERROR:ebay_run_state_inconsistent_after_tick",
+      "checks": {
+        "result_equals_expected": true,
+        "same_historic_run_on_active": true,
+        "no_start_when_running_or_paused": true,
+        "safe_legacy_campaigns_untouched": true
+      },
+      "worker_calls": 1,
+      "run_start_calls": 0
+    },
+    {
+      "name": "worker_finishes",
+      "original_php_result": "completed",
+      "expected": "completed",
+      "checks": {
+        "result_equals_expected": true,
+        "same_historic_run_on_active": true,
+        "no_start_when_running_or_paused": true,
+        "safe_legacy_campaigns_untouched": true
+      },
+      "worker_calls": 1,
+      "run_start_calls": 0
+    },
+    {
+      "name": "worker_fails_safely",
+      "original_php_result": "failed",
+      "expected": "failed",
+      "checks": {
+        "result_equals_expected": true,
+        "same_historic_run_on_active": true,
+        "no_start_when_running_or_paused": true,
+        "safe_legacy_campaigns_untouched": true
+      },
+      "worker_calls": 1,
+      "run_start_calls": 0
+    }
+  ],
+  "network_io": "none, worker and WordPress responses modeled",
+  "live_test": false
+}
