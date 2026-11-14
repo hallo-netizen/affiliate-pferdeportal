@@ -1,0 +1,139 @@
+{
+  "title": "Ebay Gesamtabnahme nach historischen Fehlern QA27–QA65",
+  "run_uuid": "97507628-4f4d-4527-bd77-fa573bce7067",
+  "original_csv": "pferdeatelier-ebay-lauf-574cb003b132.csv",
+  "original_events": 2769,
+  "original_last": {
+    "status": "running",
+    "phase": "gapfill_discovery",
+    "progress_seq": "474",
+    "transport_ticks": "468",
+    "selection_scanned": "155",
+    "selection_materialized": "2",
+    "skipped_item_errors_count": "153",
+    "covered": "5",
+    "required": "283",
+    "search_found": "2056",
+    "search_accepted": "201"
+  },
+  "real_missing_csv": "Pferdeatelier_eBay_fehlende_Produktfamilien_97507628-4f4.csv",
+  "missing_count": 278,
+  "missing_breakdown": {
+    "no_related_individual_query_in_current_partial_section": 215,
+    "accepted_but_still_uncovered": 32,
+    "queries_but_no_accepted_offer": 31
+  },
+  "historical_issues": [
+    {
+      "qa": "27–31,39–43,55,59–65",
+      "issue": "GitHub-Wecksignal, REST-Status, Stopp/Fortsetzen, scheinbar aktiver Lauf",
+      "result": "Einmalige Tick-Verarbeitung lokal geprüft; regelmäßige reale Zustellung NICHT abgenommen; Main unverändert, PR #759 geschützt"
+    },
+    {
+      "qa": "36–41",
+      "issue": "Familienkapazität stoppt kompletten Lauf; alte Fehlerläufe nicht wieder aufgenommen",
+      "result": "Lokal korrigiert; aktuelle sichere Produktabdeckung nicht bewiesen"
+    },
+    {
+      "qa": "48–50",
+      "issue": "Gapfill entfernt vorherige Kandidaten, Abschluss/Cleanup konnte 482 von 578 SAFE-IDs verlieren",
+      "result": "Lokal korrigiert, QA50 Mock 578→580; echter öffentlicher Bestand nicht gemessen"
+    },
+    {
+      "qa": "51–54",
+      "issue": "Doppelte Partner-/Portalentscheidungen, unterschiedliche Produktbestandslisten, Verfügbarkeitsworker trifft Fachentscheidung",
+      "result": "Lokal vereinheitlicht, Safe-Checkpoint-CAS; realer Gesamtbestand nicht abgenommen"
+    },
+    {
+      "qa": "56–58",
+      "issue": "Nur 5/283 nach vielen Ticks, 153 abgelaufene ausgewählte Produkte",
+      "result": "Lokale gezielte getItem-Neubestätigung; echter Export weiterhin 153 skips"
+    },
+    {
+      "qa": "63",
+      "issue": "Teilrecherche-Ende fälschlich statt Gesamtabschluss als Startuhr",
+      "result": "Lokal korrigiert, kein abgeschlossener Live-Gesamtlauf"
+    },
+    {
+      "qa": "29",
+      "issue": "PRIVATE-Altanzeigen-Livebereinigung gescheitert",
+      "result": "Keine bestätigte Live-Endabnahme"
+    },
+    {
+      "qa": "laufender Screenshot",
+      "issue": "Audit-Speichervorgang fehlgeschlagen",
+      "result": "Weiterhin im WordPress-Screenshot gemeldet"
+    }
+  ],
+  "code": {
+    "package": "Affiliate_6.72.346_EBAY_GESAMTWORKFLOW_TEST.zip",
+    "sha256": "2528ebfa053172cebaa0140200ce4681d0582257a91844a24f1044d6e30d7404",
+    "crc": "PASS",
+    "php_files": 23,
+    "zip_files": 66
+  },
+  "gates": [
+    {
+      "gate": "Katalog/Sollfamilien",
+      "state": "PASS",
+      "evidence": "Katalog 283; echter Lauf 283 Pflichtfamilien; 278 fehlend"
+    },
+    {
+      "gate": "Ein einziger verlässlich ankommender GitHub-Arbeitsaufruf",
+      "state": "NICHT NACHGEWIESEN",
+      "evidence": "Main-Workflow */15 + Selbstverkettung; beobachtete ausgefallene geplante Starts nach 10:25; PR 759 blockiert"
+    },
+    {
+      "gate": "Lauf und Cursor ohne Nullsetzung weiterbearbeitet",
+      "state": "NICHT ABGENOMMEN",
+      "evidence": "Original CSV: running/gapfill_discovery Fortschritt 474; letzter Nutzerstand Schritt 475, später PAUSIERT"
+    },
+    {
+      "gate": "Individuell passende Quellen recherchiert",
+      "state": "OFFEN",
+      "evidence": "215 fehlende Familien ohne zugeordneten Einzelabruf IM AKTUELLEN SUCHTEIL; 31 abgefragt ohne angenommenes Angebot"
+    },
+    {
+      "gate": "Nur einmalige Produkt-/Familienentscheidung",
+      "state": "NUR LOKAL GEPRUEFT",
+      "evidence": "QA54: eine Planner-Entscheidung je Produkt/Portal/Durchgang; reale WordPress-Daten nicht gegengeprüft"
+    },
+    {
+      "gate": "Ausgewählte Produkte aktuell und veröffentlicht",
+      "state": "NICHT BESTANDEN IM REALEN EXPORT",
+      "evidence": "155 geprüft, 2 materialisiert, 153 übersprungen; QA58-Mockfix noch nicht im echten Lauf nachgewiesen"
+    },
+    {
+      "gate": "Angenommene Angebote erklären die Abdeckung",
+      "state": "NICHT BESTANDEN IM REALEN EXPORT",
+      "evidence": "32 fehlende Familien hatten angenommene Angebote im Suchteil; dennoch keine Abdeckung"
+    },
+    {
+      "gate": "Alte nachweislich gültige Produkte bleiben erhalten",
+      "state": "NICHT LIVE VERIFIZIERT",
+      "evidence": "578 gespeicherte Freigaben in WordPress-Oberfläche; kein vollständiger echter Source/Creative/Frontend-Abgleich"
+    },
+    {
+      "gate": "Öffentliche Abdeckung und HivePress-Ausgabe",
+      "state": "NICHT BESTANDEN IM REALEN EXPORT",
+      "evidence": "5/283 Familien im gespeicherten geprüften Kandidatenstand; öffentliche Seiten nicht endabgenommen"
+    },
+    {
+      "gate": "Protokolle dauerhaft gespeichert",
+      "state": "FEHLER IM LIVE-SCREENSHOT",
+      "evidence": "WordPress meldet fehlgeschlagenen Protokoll-Speichervorgang; Export kann historische Einträge enthalten, aber nicht vollständig"
+    },
+    {
+      "gate": "Vollständiger Abschluss und sicherer Folgestart",
+      "state": "NICHT ABGENOMMEN",
+      "evidence": "Der echte Export endet running/gapfill_discovery, nicht completed; QA63 Abschlussfrist nur lokal getestet"
+    },
+    {
+      "gate": "Keine schädliche PRIVATE-/Fremdanbieter-Veröffentlichung",
+      "state": "NICHT LIVE ABGENOMMEN",
+      "evidence": "QA29 PRIVATE-Altlasten-Livebereinigung gescheitert; spätere lokale KISS-Prüfungen ersetzen keine öffentliche Kontrolle"
+    }
+  ],
+  "full_contract_accepted": false,
+  "important": "QA63 130/130 testet simulierte WP-/eBay-Antworten. Dieser Report ist ein echter Evidenzabgleich und KEIN neuer erfolgreicher Live-Lauf."
+}
