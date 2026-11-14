@@ -33,3 +33,32 @@ jobs:
                   i=s.find("function output_format_slot(")
                   print("EXACT_SLOT_SELECT",s[i:i+4300])
           PY
+
+      - name: Inspect true bridge hub surface and exact slot priority
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import re
+          p=Path("protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip")
+          with ZipFile(p) as z:
+            for path,names in [
+              ("affiliate-portal-router/includes/class-ppar-hab-bewahr-bridge.php",("area_banner","world_banner","slot_matrix","render_slot")),
+              ("affiliate-portal-router/includes/trait-ppar-output-objects.php",("output_format_slot","hb_rc31_insurance_banner_plan")),
+              ("affiliate-portal-router/affiliate-portal-router.php",("campaign_target_matches_context","select_campaign_for_slot_position"))
+            ]:
+              src=z.read(path).decode('utf-8')
+              for name in names:
+                m=re.search(r"function\s+"+name+r"\s*\(",src)
+                if not m:continue
+                start=src.find("{",m.end());depth=0
+                for i in range(start,len(src)):
+                  if src[i]=="{":depth+=1
+                  elif src[i]=="}":
+                    depth-=1
+                    if depth==0:break
+                part=src[m.start():i+1]
+                print("EXACT METHOD",path,name,"LEN",len(part))
+                print(part[:12000])
+          PY
