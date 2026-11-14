@@ -10,6 +10,8 @@
 
 **Ergebnis:** Alle 9/9 W3-Grenzfälle entschieden; 6 Industriegruppen durch konkrete Herstellerangebote fachlich gestützt; 8 zusätzliche Industrie-Produktkandidaten mit 16 WP-Rubriken und 48 Beitragsideen. **Blocker:** Drei vorhandene W2-Überschneidungsgruppen redaktionell prüfen, danach fachliche Abnahme. WT001 0.1.1 (vollständige W4-Haupt-/Unter-/Industrie-/Produkt-/Rubrik-Ebenen im SEO-Preflight) ist lokal gebaut und geprüft; WordPress-Live-Test und kostenpflichtige SEO-Recherche offen. Das WordPress-Importmodul bleibt gesperrt.
 
-**NEXT ACTION:** Die technischen 218 W4-Owner sind aus WordPress vollständig exportiert. Jetzt die 124 zusammengesetzten und vier weiteren Sammelbegriffe redaktionell verbessern, ohne die acht Hauptbereiche, 79 Produktseiten oder 105 Rubriken neu aufzubauen. Ergebnisse zentral in W4-Keywordprofil zurückführen; erst nach echter Keywordrecherche und Freigabe WordPress-Import.
+**Keyword-Entwurfsprofil vollständig korrigiert:** 218 Struktur-Owner bleiben erhalten. 128 bisher automatisch zusammengesetzte/zu breite Begriffe wurden in einen konzeptionell konkreteren Suchvorschlag geändert; 90 bestehende Startbegriffe bleiben. Zentraler Mapping-Bestand `W4_KEYWORDPROFIL_218_20261114.csv` (nicht SEO-gemessen). 356 alte W4-Beitragsideen und alle 79 Produktseiten/105 Kategorien unverändert.
+
+**NEXT ACTION:** Kostenfreien WordPress-Preflight mit der WT001-Version **0.1.2** ausführen und den Export gegen die aktuelle W4_KEYWORDPROFIL_218_20261114.csv abgleichen. Danach Suchvolumen/Konkurrenz ausschließlich nach gesonderter Freigabe innerhalb des WordPress-Kategorieplugins prüfen. Kein Import.
 
 **Grenze:** Keine WordPress-/HivePress-Produktion, keine fremden Projektdateien verändern.

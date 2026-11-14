@@ -1,6 +1,6 @@
 # WASSERTECHNIK / PRUEFUNG – einzige aktuelle Büroautorität
 
-**Stand:** 14.11.2026 · **Status:** WT001 0.1.1 WordPress-Admin-Exports PASS; SEMANTISCHES SEO/BEZAHLRECHERCHE/IMPORT OFFEN.
+**Stand:** 14.11.2026 · **Status:** WT001 0.1.2 redaktionelles Vollbaum-SEO-Profil lokal PASS; echter WordPress-Update-/Exporttest sowie SEO-Bezahlrecherche und Import offen.
 
 **Gesichert:** Master-Archiv-internes SHA256SUMS.txt lokal geprüft; originale Git-Blob-Identität stimmt bytegenau mit Nutzervorlage; automatische 18/18 Regelprüfung ist Altbeleg.
 
@@ -8,6 +8,8 @@
 
 **Beleg:** `WORDPRESS_TEST_20261114/` enthält die vom Nutzer exportierte 218er Keywordliste und die WP-Bestandsaufnahme; 218/218 Owner lesbar, 0 technisch verworfen. WP 0.1.1 auf `wasser.oliver-beil.de` meldet nur Standardinhalte. **128** Begriffe benötigen vor einer kostenpflichtigen Abfrage besondere redaktionelle Formulierungsprüfung (124 automatisch kombinierte, 4 Sammelbegriffe). Import aus W4 nicht freigegeben, Hab-002-Importquelle nicht portiert.
 
-**NEXT ACTION:** `WORDPRESS_TEST_20261114/W4_KEYWORD_QUALITAET_218_20261114.csv` redaktionell durcharbeiten und zentral eine sinnvolle Keyword-/Intent-Zuordnung zum bestehenden W4-Baum festlegen. Erst danach optional kostenpflichtige DataForSEO-Prüfung über kontrollierte WordPress-Pluginfunktion – nur nach Freigabe.
+**Konzeptabgleich:** Die 128 zuvor markierten Formulierungen sind vollständig im zentralen Entwurfsprofil `../KATEGORIEKONZEPT/W4_KEYWORDPROFIL_218_20261114.csv` überarbeitet, ohne Strukturänderung. Alle 218 zugeordnet, 0 doppelte Begriffe/Owner, 0 bezahlte Daten.
+
+**NEXT ACTION:** Echten WP-Update-/Exporttest von WT001 0.1.2 auf `wasser.oliver-beil.de` mit kostenlosem 218er Preflight durchführen. Danach Suchintent/Volumen nur nach ausdrücklicher Kostenfreigabe und separater tatsächlicher Prüfung.
 
 **Grenze:** Keine WordPress-/HivePress-Produktion, keine fremden Projektdateien verändern.
