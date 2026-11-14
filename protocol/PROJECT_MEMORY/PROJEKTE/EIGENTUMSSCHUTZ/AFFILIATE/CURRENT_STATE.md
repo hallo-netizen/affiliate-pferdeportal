@@ -1,3 +1,17 @@
+## 14.11.2026 – QUELLEN-RETTUNG OHNE NEUES PLUGIN: ORIGINALBILDER UND TRACKINGLINKS NOCH IM BESTAND
+
+**Nachfrage „weiter, prüfe“:** GitHub-Baum von RC41 vollständig auf Dateien mit Tarifcheck-Roh-Bannercodes, exportierten Tabellen, HTML/CSV/SQL und Backups kontrolliert (1560 GitHub-Dateien). **Keine vollständigen 160 ursprünglichen HTML-Bannercodes oder Live-WP-Datenbankkopie vorhanden.** Die private WordPress-Datenbank konnte nicht unmittelbar aus GitHub abgefragt werden.
+
+**Wesentliche Entdeckung am echten bestehenden Plugin:** `creative_library_normalize_row()` speichert die Bild-URL (`image_url`) und den Trackinglink (`tracking_url`) separat und unabhängig vom früheren Verlust einzelner HTML-Tags/Attribute. `render_creative_library_page()` zeigt vorhandene Bannerbilder bereits als Vorschaubilder in der bestehenden Kachelansicht. `creative_library_query_rows()` filtert sowohl `provider=direct:tarifcheck` als auch `topic_status=no_match` (obwohl `no_match` im Dropdown „Alle technischen Zustände“ nicht als Option angeboten wird). Der ursprünglich bestehende zentrale Zielentscheider setzt beim nicht zuordenbaren Banner `topic_status=no_match`. Damit gibt es **einen vorhandenen rein lesenden Zugang zur tatsächlichen Galerie der 80 offenen Bannermotive – ohne Neueinlesen, neues Plugin oder zusätzliche Zuordnungsentscheidung**.
+
+**Direkter vorhandener WordPress-Admin-Filter:** `https://hab-und-bewahr.de/wp-admin/admin.php?page=affiliate-portal-creative-library&provider=direct%3Atarifcheck&topic_status=no_match`. Im Admin angemeldet lassen sich die Bannerbilder unterhalb der Filterung ansehen. Ein Screenshot der **tatsächlich gezeigten alten Motive** bietet den Beleg für die Produktart auch dann, wenn der ursprünglich gespeicherte HTML-Text schon verloren ist. Falls ein Bild selbst keine Produktart zeigt, ist die vorhandene Trackinglink-Zielseite bzw. das produktbezogene Originalwerbemittel im offiziellen Tarifcheck-Partnerportal nötig. **Kein blindes Kategorieraten aus ad_id, Bannergröße oder allgemeinem Tarifcheck-Namen.**
+
+**Öffentliche Anbieterprüfung:** Das offizielle Tarifcheck-Partnerprogramm bestätigt, dass Banner für einzelne Produkte und verschiedene Größen bereitgestellt werden (`https://www.tarifcheck-partnerprogramm.de/werbemoeglichkeiten/`). Die ursprüngliche Produktkategorie kann im Tarifcheck-Werbemittelbereich nachgeschlagen werden; die konkrete Zuordnung der 80 privaten Datensätze ist aus öffentlichen Quellen und GitHub allein nicht beweisbar.
+
+**Nächste Datenbeschaffung (keine zweite Engine):** Bestand im vorhandenen WordPress-Admin via bereits implementiertem Filter visuell prüfen, Bildmotive den tatsächlichen Produkttypen zuordnen, dann ausschließlich einmal die bestehende zentrale Quell-/Versicherungszuordnung auf Grundlage nachgewiesener Motive/Landingpage korrigieren. RC41 als root-cause fix für neue Imports lokal getestet, noch **kein neues Plugin zur Installation empfohlen**, weil es verlorene historische Attribute nicht wiederherstellt. Keine Frontend- oder sonstigen Portaländerungen.
+
+---
+
 ## 14.11.2026 – Ursachenbeweis: Original-HTML vor erster Speicherung verloren / zentral korrigiert, KEIN Blind-Release
 
 **Echter Website-Stand nach RC40 (Nutzer-Screenshots 10:33/10:34):** 160 Tarifcheck-Banner, 80 aktiv, 80 ohne nachweisbares Ziel, 0 Format-Sperren. Trotz angeblich vollständigem Vorab-Auslesen blieb die 80/80-Zahl unverändert. RC40-Tests hatten Original-HTML künstlich direkt in gespeicherte Datensätze gegeben und damit den produktiven Importpfad umgangen.
