@@ -86,3 +86,12 @@ Die TXE-Hauptdatei hat vier eigenständige aufgerufene Stellen, aber **keinen** 
 **Zählung:** 6 direkt blockiert, 16 offen, 1 teilweise belegt; **0 vollständig als neuer Zielworkflow abgenommen**. Alle anderen Einzelvorgaben des Regeltextes gelten unverändert, diese Zeilen verkürzen den Vertrag nicht.
 
 **Harte Schlussfolgerung:** **Keine Neuimplementierung, kein Release.** Originaldateien wurden nur gelesen, 0.4.1 unverändert gelassen. Erst die Original-Aufrufkette inkl. PPM vollständig klären, dann nur gezielt unveränderten Originalcode in isolierter Umgebung verwenden; notwendige Anschlussänderungen separat nachweisen und ausdrücklich freigeben. Danach Alt-Neu-Echtlauf, vorher keine neue installierbare ZIP.
+
+
+### Original-Funktionstests: 44 PASS mit unverändertem Quellcode
+
+- **Im aktuellen Arbeitsgang wirklich ausgeführt:** zwei schon existierende QA-Testdateien, **ohne Änderung der Testdateien oder des Original-PHP-Codes**. Reiner lokaler Testpfad auf die abgelegten PSTE/PSERC-QA-Quellen, PHP 8.4.24.
+- `QA_20261113_KISS_30_ORIGINALMINI_TESTS.php`: **30/30 PASS**; echte Original-Methoden von `PSTE_Mini_Workflow`, `PSERC_Slot_Allocator` und `PSERC_Plan_Slot_Identity` mit künstlichen WordPress-/Produktionsplandaten; feste Freigabe, Titel nur extern, PPM-Platzkennung, Schutz vor Doppelvergabe und manipulierten Eingaben.
+- `QA_20261113_KISS_PPM_SPAETER_STARTSCHUTZ_TEST.php`: **14/14 PASS**; originale `PSERC_PPM_Bypass_Guard`-Methoden mit nachgebautem WP-Hook-System und simulierten PPM-Klassen; alte direkte PPM-Browseraufrufe werden unter diesem Test blockiert.
+- Beide Prozesse mit Exitcode 0. [Maschinenlesbarer Laufnachweis mit Test-/Originaldatei-SHA und deutlichen Grenzen](2026-11-14_TEXTERSTELLUNG_ORIGINAL_QA_TESTLAUF.json).
+- **Grenze:** Diese 44 PASS beweisen nur die genannten *alten* Funktionen mit Testdaten, nicht automatische SEO-/PAA-Recherche, echtes WordPress, Datenbankabgleich, reale PPM-6.7.9-Schnittstelle, K0 oder das neue Plugin 0.4.1. **Kein Alt-Neu-Vollvergleich, keinerlei Installationsfreigabe.**
