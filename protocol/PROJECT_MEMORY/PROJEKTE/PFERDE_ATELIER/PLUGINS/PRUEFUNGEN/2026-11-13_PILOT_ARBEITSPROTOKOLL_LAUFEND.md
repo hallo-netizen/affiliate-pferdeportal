@@ -114,3 +114,17 @@
 - **Korrekturziel 0.4.1:** Aktivierung ohne wp-config-Änderung zulassen; **alle produktiven Plugin-Aktionen bis zur bewussten Admin-Bestätigung im Backend sperren**. Bestätigung an genau diese WordPress-Website binden; beim Kopieren auf eine andere Site erneut bestätigen; eigene Datensätze und alte Plugins unverändert. Keine WordPress-Core-/Frontendänderungen, keine SEO-Doppelprüfung, keine externe Verbindung nötig. Einziger linker Hauptmenüpunkt bleibt `Texterstellung`.
 - **Abnahme vor neuer ZIP:** Originaldateien/Altdaten byteidentisch, Aktivierung in WP-Standardumgebung, alle Aktionswege vor Bestätigung blockiert, Adminbestätigung mit Nonce, nachher voller Admin-Menü-/Workflowzugriff, Fremdsite wieder gesperrt, PHP Syntax/ZIP-Integrität, reale Testseite weiterhin offen.
 - **Stand:** Nachweis geprüft, kleiner gezielter Fix in separater 0.4.1-Arbeitskopie begonnen, noch keine Installerfreigabe und keine Liveänderung.
+
+
+### Schritt 9 – Lösung und Testpaket 0.4.1 vollständig gespeichert
+**14.11.2026 / Nutzer-Screenshot 08:09**: Testinstallation auf `oliver-beil.de` durch eigenes `wp_die` in `TXE_Workshop::activate` abgebrochen, weil `WP_ENVIRONMENT_TYPE` standardmäßig `production` meldet. Bestätigte Ursachenkette: 0.4.0 Original-ZIP `texterstellung.php` Zeilen 23–35. Kein WordPress-Fehler.
+
+**Gezielte Korrektur 0.4.1-test:**
+- Plugin lässt sich ohne Eingriff in `wp-config.php` normal aktivieren. **Kein Autostart und keine Verarbeitung vor Freigabe.**
+- Linker Hauptmenüpunkt `Texterstellung` erscheint sofort. Die eigentlichen Arbeitsschritte sind erst nach einmaliger **Administratorbestätigung „Dies ist die separate Testinstallation“** auf genau dieser Site freigegeben. Adminrechte + Nonce + Checkbox erforderlich; Domainwechsel sperrt wieder.
+- Alte Aufträge und ursprüngliche 0.4.0-Quellcode-Dateien unberührt. **Nur** `texterstellung.php` (Aktivierung/UI), `class-txe-diagnose.php` (ehrliche Adminbestätigung als Quellenangabe und Versionsnummer), `README` (Installationsanleitung) im **neuen** ZIP geändert. Die fünf übrigen ZIP-Dateien bitidentisch.
+- **37 lokale funktionale PASS** in WordPress-Simulation (explizit `production` ohne `wp-config.php`-Override, gesperrte Aufträge vor Zustimmung, Admin/nonadmin, fehlende Checkbox, falscher Nonce, einmalige Zustimmung, Sofortauftrag, K0-Fünf-Felder, reservierte Charge, Mehrfachexport, Wiederdownload, Domainwechsel). **6 PHP-Syntaxprüfungen PASS**, ZIP-CRC PASS. Kein echter WordPress-Serverzugriff und kein echter K0-E2E-Test behauptet.
+- **Aktueller Testinstaller (ersetzt 0.4.0):** `Texterstellung_0.4.1_TEST_INSTALLIEREN.zip`, 35.228 Byte, SHA256 `f34fe278eaca382ca99c7f537463644dbd1508b9fb4198980e173df59edae280`.
+- Vollständiges Paket im persistenten Library-Büro `/pferdeatelier/PLUGINS/ARBEITSRAUM_PSTE_KISS/` und als verlustfreies ZIP-Base64 im GitHub-PR (Ordner `PILOT_TEXTERSTELLUNG`) gespeichert. Bericht `2026-11-14_TEXTERSTELLUNG_0.4.1_AKTIVIERUNGSFIX_BERICHT.md`; reproduzierbare Testdatei und Release-Manifest daneben.
+- **Nächster Schritt:** Nutzer lädt ausschließlich Version 0.4.1 auf der separaten Test-WP hoch und ersetzt, falls angeboten, 0.4.0. Aktivieren; links `Texterstellung` öffnen; **Testmodus mit Checkbox** freischalten; danach den echten Diagnose-JSON-Bericht ziehen und testen. **Nie** auf Live den Testmodus freigeben. Alte Plugins bleiben unangetastet.
+- **Bekannte Grenze unverändert:** alte automatische PSTE-Semantik nicht 1:1 übernommen; reale WordPress-K0-Ende-zu-Ende-Abnahme offen. Keine Livefreigabe.
