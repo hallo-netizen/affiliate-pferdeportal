@@ -1,3 +1,27 @@
+## 14.11.2026 – RC38 EIN ZENTRALER FORMATENTSCHEID (PFERDE-ATELIER-PRINZIP) – LOKAL GRÜN, LIVE NOCH OFFEN
+
+**Zielvertrag:** Originalbanner unverzerrt und unbeschnitten anzeigen, **niemals vergrößern**, bei Bedarf ausschließlich proportional verkleinern. Fachziel + bestehenden Seitenplatz genau einmal beim Einlesen/Backendreconcile festlegen. Der öffentliche Aufruf darf nur die gespeicherten Zielpfade und Platznamen verwenden. Bild-, Tracking-, Provider-, Freigabe- und Veto-Sicherheitsregeln bleiben bestehen, sind keine zweite thematische Entscheidung. Keine zusätzlichen Worker, Tabellen, neuen Anzeigenflächen oder anderen Portaländerungen.
+
+**Originalbeweis:** RC37 (0.1.34-rc37) hatte noch separate starre Bildformat-Annahmen im einzigen Formatplaner (`output_format_slot`), im zusätzlich aufgerufenen kompatiblen-Slot-Scan, im Speichergate (`output_auto_contract_banner_allowed`) und in zwei öffentlichen Altfiltern (`hb_insurance_original_inline_allowed` / `hb_insurance_original_wide_allowed`). Dadurch wurden echte Formate aus der Website (120×60, 234×60, 120×600, 160×600) abgewiesen, obwohl eine proportionale Darstellung im vorhandenen Hub-/Kategorieplatz möglich ist.
+
+**RC38-Korrektur im vorhandenen HAB-004 (0.1.35-rc38):**
+- Für **verifizierte** Versicherungsbanner von Tarifcheck auf dem vorhandenen Hab-Versicherungsbaum genau eine zentrale Formatwahl, über `output_format_slot()`. Die bereits registrierten Plätze `start_after_topics`, `hub_after_cards` und `product_after_category_tiles` bleiben bestehen. Die einmalige Formatfreigabe nutzt echte Maße; kein fiktives Ziel oder Banner.
+- Der früher parallel laufende, separate globale Kompatibilitätsscan wird für bereits fachlich entschiedene Tarifcheck-Originale ausgelassen. Die echte Platzliste wird anhand der einmal gewählten Freigabe gespeichert. Für andere Bannerpartner/Portale bleiben die bisherigen Abläufe bestehen.
+- Das Speichern liest das Freigabeergebnis, kontrolliert weiterhin echte Bildmaße, Bildhash und gültige originale Trackinglinks, **entscheidet nicht noch einmal über das Format**.
+- Beim öffentlichen Anzeigen werden für kanonisch gespeicherte Versicherungskampagnen die zwei alten Format-Fallbackprüfungen nicht mehr ausgeführt. Die bestehende Kampagnenauswahl liest ausschließlich bereits genehmigte Plätze, ohne neue Fach- oder Formatentscheidung. Andere Altbanner bleiben unverändert.
+- Die vorhandenen Versicherungs-Bildelemente (normal und Querformat) verwenden intrinsische Bildgröße oder kleiner: `width:auto; height:auto; max-width:100%; max-height:420px; object-fit:contain` (nur Hab-Versicherungszweig). Kein Aufblasen von 120×60, kein Strecken, kein Abschneiden; Hochkant darf proportional bis 420 px Höhe schrumpfen.
+- Bestehender einmaliger Backend-Reconcile wird mit der neuen Versionskennung ausgeführt; **keine Neuanlage/kein Neuimport**.
+
+**Lokale Abnahme:** GitHub Actions https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43573754186 **SUCCESS**. Original PHP aus der vollständig gebauten Plugin-ZIP: 8 echte Formatklassen (728×90, 468×60, 300×250, 125×125, 120×60, 234×60, 120×600, 160×600) × 4 vorhandene Zielkontexte = **32 erfolgreich nachgewiesene Format-Kontextfälle**. Drei zu kleine Quellen bleiben ohne Skalier-Trick ausgeschlossen. Öffentliche Kampagnenregel liest gespeicherte Platzliste; alte zwei nachgelagerte Formatfilter springen bei kanonischen Hab-Versicherungskampagnen nicht an. 25 PHP-Dateien Syntaxprüfung sowie RC23–RC37 einschließlich Amazon, eBay, Idealo, Zielkarten- und Berichtstests bestanden. Exakt vier bisherige HAB-004-Dateien verändert, keine neue Engine.
+
+**Release:** https://github.com/hallo-netizen/affiliate-pferdeportal/releases/tag/hab-affiliate-rc38-pferde-central-format-20261114 – `HAB_Bewahr_Affiliate_RC38_PFERDE_KISS_TEST.zip`, 2.354.017 Bytes, SHA256 `ff37c53a3d15479b7ac93be49fc6f4689238e08d5ccc471b24d06cdaff732d46`.
+
+**Noch nicht bewiesen / keine Behauptung:** Wie viele der 40 bisher wegen Format gesperrten Banner nach Einbau auf der echten WordPress-Seite veröffentlicht werden. Die anderen **80** Banner mit `No verified specific/general insurance`, `tracking_checked` haben nach wie vor keine belastbare fachliche Zielkarte. Die 80 originalen HTML-HREFs sind in GitHub nicht lesbar. Keine erfundene Zuordnung, kein neues Ziel-Erkennungssystem ohne Echtdaten.
+
+**Nächster einziger Live-Schritt:** RC38 als vorhandene Affiliate-Zentrale installieren, unter `Affiliate-Zentrale → Werbemittel & Ausspielung` die Seite **dreimal** aufrufen, damit der bisherige 60er-Batch-Nachlauf alle 160 Datensätze verarbeitet. Screenshot von Zähler und Ursachen liefern. Keine Banner neu importieren, keine zusätzliche Plugininstallation. Bei den 80 weiterhin unklaren Quellen Originalzielinformation **an derselben** zentralen Einlesestelle verifizieren; keine neue nachgelagerte Entscheidung.
+
+---
+
 ## 14.11.2026, 08:17 – RC37: NACHGEWIESENE ECHTE URSACHENGRUPPEN UND KISS-GRENZE
 
 **Sichtprüfung des vom Nutzer bereitgestellten echten WordPress-Fehlerberichts (zwei Screenshots, 14.11.2026 08:17):**
