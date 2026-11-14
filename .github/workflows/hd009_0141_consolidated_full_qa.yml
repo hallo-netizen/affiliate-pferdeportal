@@ -88,7 +88,7 @@ jobs:
             /tmp/HOBBY_DEPOT_HD009_0.1.41_SINGLE_KISS_TEST.zip /tmp/hd009_0141_compare.php
           php -l /tmp/hd009_0141_compare.php
           php /tmp/hd009_0141_compare.php
-      - name: Original refresh and activation lifecycle: new rule, unchanged hash, 304, retry, no double import
+      - name: "Original refresh and activation lifecycle: new rule, unchanged hash, 304, retry, no double import"
         run: |
           set -e
           python3 scripts/hd009_0141_refresh_qa.py \
