@@ -1,6 +1,6 @@
 # WASSERTECHNIK / KATEGORIEKONZEPT – einzige aktuelle Büroautorität
 
-**Stand:** 14.11.2026 · **Status:** W4-Fachbaum erhalten, W5-SEO-Auswertung vollständig, W6 schreibfreie 218er WP-Gesamtvorschau erstellt; Import nicht freigegeben.
+**Stand:** 14.11.2026 · **Status:** W4-Fachbaum, W5-SEO-Daten und W6-Importvorschau bleiben erhalten; W7 SEO-Vertrag und schreibfreies Mega-Menü-Konzept dokumentiert; kein WP-Import.
 
 **Quelle:** Nutzer-ZIP `WASSERTECHNIK_KATEGORIEKONZEPT_MASTER_001.zip` (30.07.2026); Prüfsummen lokal PASS. Original-ZIP bytegleich im Quellenbüro GitHub gespeichert (`../QUELLEN/ORIGINAL_/WASSERTECHNIK_KATEGORIEKONZEPT_MASTER_001.zip`).
 
@@ -16,9 +16,11 @@
 
 **W5-SEO-Messauswertung:** Originalbericht `../PRUEFUNG/ORIGINAL_DATAFORSEO_218_20261114.json` und `W5_SEO_GESAMTAUSWERTUNG_20261114.md` mit zugehörigem `W5_SEO_AUDIT_218_20261114.json`. 106/218 Suchvolumina, 218/218 Anbieter-Suchabsichten, **0 organische Schwierigkeit**; 13 gemessen kaufnahe Produkt-Keywords und 14 gemessen informationsorientierte Produkt-Keywords >=1000 (nur vorläufige Redaktionsreihenfolge). 112 fehlende Volumina sind nicht null Suchanfragen. Bei den 105 Inhaltskategorien nur 26 mit Messwert; keine Kategorie/URL automatisch streichen.
 
-**NEXT ACTION:** W6-Gesamtvorschau als einen gebündelten Freigabegegenstand behandeln; 3 bereits fachlich abgegrenzte Überschneidungen ohne automatische Zusammenlegung erhalten. Danach ausdrücklich freigegebener ADD-only-Import, nicht vorher.
+**NEXT ACTION:** W7-Menügestaltung und grob geschätzte, sinnvolle Produktthemen-Kategorien in der einen späteren WordPress-Gesamtübernahme berücksichtigen. Import nur nach ausdrücklicher Freigabe.
 
 **Grenze:** Keine WordPress-/HivePress-Produktion, keine fremden Projektdateien verändern.
 
 
 **W6-Nachweis:** `W6_WORDPRESS_IMPORTVORSCHAU_218_20261114.json` (218 Einzelziele) und `W6_WORDPRESS_GESAMTVORSCHAU_20261114.md` (Gesamtentscheidung, WordPress-Snapshot und 27 Redaktionsprioritäten). W4/W5 nicht neu geschrieben; keine API-, Plugin- oder WP-Aktion.
+
+**W7:** `W7_SEO_MENUE_GESAMTPRUEFUNG_20261114.md` und `W7_MEGAMENUE_ANZEIGEVORSCHAU_20261114.json`. 79 konkrete Produktseiten, 105 produktbezogene Rubriken, 356 Artikelideen; 76 dreistufige und 3 direkte Produktpfade. Zwei rein sichtbare Menügruppen ohne zusätzliche WordPress-Seite oder Keyword. 3–5 Artikelideen sind eine ungefähre redaktionelle Orientierung, keine technische Sperre.

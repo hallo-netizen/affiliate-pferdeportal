@@ -11,10 +11,17 @@ Breites fachlich nachvollziehbares **Informations- und Affiliateportal** über W
 ## Robotik-Regel v43/v52 passend auf Wassertechnik übertragen
 - **Ein zentraler fachlicher Produkt-/Techniknachweis**, aber bei *nachweisbar verschiedener Suchintention* dürfen mehrere eigenständige konkrete Produkt-/Kontextseiten entstehen (auch gleiche Kurzbezeichnung in verschiedenen Teilbäumen).
 - Ein zweiter Seiten-Owner ist **nicht allein wegen Privat/Gewerbe, Herstellermarke, Preisklasse oder abweichendem H1** zulässig. Es müssen andere Fragen, Modelle/Größen, technische Anforderungen, Kauf-/Betriebsentscheidungen und wirklich andere Inhalte vorliegen.
-- Eigene WP-Inhaltskategorien nur bei jeweils mindestens **drei bis fünf plausibel unterschiedlichen Beitragsansätzen**. Artikelansätze sind in der Fachphase grob zu entwickeln; keine erfundenen Suchvolumina.
+- Die unterste Seitenebene behandelt **ein konkretes Produkt oder System**. Die darunter zugeordneten WP-Inhaltskategorien vertiefen genau dieses Produkt; Namen und Anzahl bestimmen Fachlogik und Nutzen, nicht eine Standardliste. Ungefähr **3–5 unterschiedliche Einzelartikel je Kategorie** sollen redaktionell plausibel sein: grobe Orientierung, **keine starre technische Sperre**. Keine erfundenen Suchvolumina.
 - **Industrielle Fachinhalte werden nicht ausgesperrt.** Zugang über wenige Industrie-Landingpages, an denen ggf. vertiefende, tatsächlich eigenständige industrietechnische Produktseiten hängen oder die auf bestehende Produkt-Owner verlinken. Keine zweite gespiegelte Vollnavigation.
 - Produkte in Entwicklung/Prototypen können als Informationen behandelt werden, sofern technisch nachvollziehbar und entsprechend gekennzeichnet; die bloße Nicht-Kaufbarkeit ist kein Ausschluss. Kauf- und Affiliate-Angebote benötigen aber reale verifizierte Bezugswege.
 - Gelegentliches Vorhandensein in Großindustrie ist kein Grund, einen für Vereine oder kleine Betriebe nutzbaren Produkttyp aus dem Hauptbaum auszulagern.
+
+## Menübild und Menütiefe
+- Fachlicher Weg: Hauptbereich → falls sinnvoll Zwischenbereich → **konkrete Produktseite** → zugehörige Beitragskategorie → Beiträge. Unterschiedliche, fachlich sinnvolle Pfadlängen sind möglich.
+- Im geöffneten Mega-Menü soll die Darstellung ungefähr **ausgewogen** sein: Gruppen und Produktlinks nach Thema und sichtbarer Anzahl auf Spalten verteilen, nicht unnötig zergliedern.
+- **Keine neuen Seiten, Keywords oder SEO-Owner allein für symmetrische Optik.** Eine Menü-Überschrift darf rein visuell sein, ohne WordPress-Seite.
+- Produktspezifische Inhaltskategorien auf Produktseiten zeigen, nicht als weitere Mega-Menü-Tiefenebene.
+- Tatsächliche Desktop-/Mobilansicht erst nach Freigabe mit der bestehenden Designsteuerung prüfen.
 
 ## Recherche und Freigabe
 1. Aus dem Master 001 und W2: vorhandene 71 Produktseiten, 89 Rubriken und 308 Themenrichtungen als **historische Basiskandidaten**, keine WordPress-Freigabe.

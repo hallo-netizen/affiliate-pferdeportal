@@ -21,7 +21,7 @@
 - [PRUEFUNG](./PRUEFUNG/START_HERE.md) — Unabhängige fachliche und technische Gegenprüfung.
 
 ## Drei Säulen
-1. [Kategoriebaum](./KATEGORIEKONZEPT/START_HERE.md): Hauptseite → Unterseite → letzte WP-Kategorie → Beitrag.
+1. [Kategoriebaum](./KATEGORIEKONZEPT/START_HERE.md): Hauptseite → ggf. Zwischenbereich → konkrete Produktseite → produktspezifische WP-Beitragskategorie → einzelne Beiträge.
 2. [Journal](./JOURNAL/START_HERE.md): ergänzende Ratgeber, Wissen, Umwelt, Hygiene; keine doppelte Produktkategorie.
 3. [HivePress-Anzeigenmarkt](./ANZEIGENMARKT_HIVEPRESS/START_HERE.md): Anbieter, Dienstleister, Fachhandel und Gebrauchtmarkt.
 

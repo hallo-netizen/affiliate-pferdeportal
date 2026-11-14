@@ -1,0 +1,719 @@
+{
+  "version": "W7_20261114",
+  "project": "WASSERTECHNIK",
+  "status": "ANZEIGEPLAN_ONLY_NO_WORDPRESS_CHANGE",
+  "authoritative_W4_blob": "74bfdbfbafe89c960e5ad843fca84349d74d6ee9",
+  "policy": "Produktseiten sind letzte WP-Seitenebene; Kategorien darunter fachlich frei; 3-5 plausible Einzelartikel grobe Orientierung, keine technische Sperre; Mega-Menü zeigt Gruppen+Produktlinks, Produktkategorien erst auf Produktseiten.",
+  "counts": {
+    "products": 79,
+    "categories": 105,
+    "article_ideas": 356,
+    "categories_with_3_ideas": 64,
+    "categories_with_4_ideas": 41,
+    "products_one_category": 53,
+    "products_two_categories": 26,
+    "products_deep": 76,
+    "products_direct": [
+      "Gartenschlauch",
+      "Tank-Füllstandsanzeige",
+      "Tankdurchführung"
+    ],
+    "duplicates_identical_titles": 0,
+    "bad_category_links": 0
+  },
+  "nav": [
+    {
+      "area": "Wasseraufbereitung",
+      "industry_information_only": false,
+      "products": 19,
+      "columns": [
+        {
+          "column": 1,
+          "product_links": 7,
+          "sections": [
+            {
+              "heading": "Hauswasserfilter",
+              "heading_type": "existing_wp_group",
+              "wp_group_path": "wasseraufbereitung/hauswasserfilter",
+              "products": [
+                {
+                  "name": "Feinfilter",
+                  "wp_page_path": "wasseraufbereitung/hauswasserfilter/feinfilter"
+                },
+                {
+                  "name": "Manueller Rückspülfilter",
+                  "wp_page_path": "wasseraufbereitung/hauswasserfilter/manueller-rueckspuelfilter"
+                },
+                {
+                  "name": "Automatischer Rückspülfilter",
+                  "wp_page_path": "wasseraufbereitung/hauswasserfilter/automatischer-rueckspuelfilter"
+                }
+              ]
+            },
+            {
+              "heading": "Trinkwasserfilter",
+              "heading_type": "existing_wp_group",
+              "wp_group_path": "wasseraufbereitung/trinkwasserfilter",
+              "products": [
+                {
+                  "name": "Tischwasserfilter",
+                  "wp_page_path": "wasseraufbereitung/trinkwasserfilter/tischwasserfilter"
+                },
+                {
+                  "name": "Wasserhahnfilter",
+                  "wp_page_path": "wasseraufbereitung/trinkwasserfilter/wasserhahnfilter"
+                },
+                {
+                  "name": "Untertischfilter",
+                  "wp_page_path": "wasseraufbereitung/trinkwasserfilter/untertischfilter"
+                },
+                {
+                  "name": "Outdoor-Wasserfilter",
+                  "wp_page_path": "wasseraufbereitung/trinkwasserfilter/outdoor-wasserfilter"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "column": 2,
+          "product_links": 7,
+          "sections": [
+            {
+              "heading": "Osmoseanlagen",
+              "heading_type": "existing_wp_group",
+              "wp_group_path": "wasseraufbereitung/osmoseanlagen",
+              "products": [
+                {
+                  "name": "Auftisch-Osmoseanlage",
+                  "wp_page_path": "wasseraufbereitung/osmoseanlagen/auftisch-osmoseanlage"
+                },
+                {
+                  "name": "Untertisch-Osmoseanlage",
+                  "wp_page_path": "wasseraufbereitung/osmoseanlagen/untertisch-osmoseanlage"
+                },
+                {
+                  "name": "Direct-Flow-Osmoseanlage",
+                  "wp_page_path": "wasseraufbereitung/osmoseanlagen/direct-flow-osmoseanlage"
+                },
+                {
+                  "name": "Osmoseanlage mit Drucktank",
+                  "wp_page_path": "wasseraufbereitung/osmoseanlagen/osmoseanlage-mit-drucktank"
+                }
+              ]
+            },
+            {
+              "heading": "Filterzubehör",
+              "heading_type": "existing_wp_group",
+              "wp_group_path": "wasseraufbereitung/filterzubehoer",
+              "products": [
+                {
+                  "name": "Wasserfilter-Ersatzkartusche",
+                  "wp_page_path": "wasseraufbereitung/filterzubehoer/wasserfilter-ersatzkartusche"
+                },
+                {
+                  "name": "Filtergehäuse",
+                  "wp_page_path": "wasseraufbereitung/filterzubehoer/filtergehaeuse"
+                },
+                {
+                  "name": "Wasserfilter-Anschlussadapter",
+                  "wp_page_path": "wasseraufbereitung/filterzubehoer/wasserfilter-anschlussadapter"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "column": 3,
+          "product_links": 5,
+          "sections": [
+            {
+              "heading": "Aufbereitungsanlagen",
+              "heading_type": "existing_wp_group",
+              "wp_group_path": "wasseraufbereitung/aufbereitungsanlagen",
+              "products": [
+                {
+                  "name": "Enthärtungsanlage",
+                  "wp_page_path": "wasseraufbereitung/aufbereitungsanlagen/enthaertungsanlage"
+                },
+                {
+                  "name": "UV-Desinfektionsanlage",
+                  "wp_page_path": "wasseraufbereitung/aufbereitungsanlagen/uv-desinfektionsanlage"
+                },
+                {
+                  "name": "Wasser-Dosieranlage",
+                  "wp_page_path": "wasseraufbereitung/aufbereitungsanlagen/wasser-dosieranlage"
+                },
+                {
+                  "name": "Enteisenungsanlage",
+                  "wp_page_path": "wasseraufbereitung/aufbereitungsanlagen/enteisenungsanlage"
+                },
+                {
+                  "name": "Systemtrenner",
+                  "wp_page_path": "wasseraufbereitung/aufbereitungsanlagen/systemtrenner"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "area": "Wasseranalyse",
+      "industry_information_only": false,
+      "products": 8,
+      "columns": [
+        {
+          "column": 1,
+          "product_links": 5,
+          "sections": [
+            {
+              "heading": "Testsets",
+              "heading_type": "existing_wp_group",
+              "wp_group_path": "wasseranalyse/testsets",
+              "products": [
+                {
+                  "name": "Trinkwasser-Labortestset",
+                  "wp_page_path": "wasseranalyse/testsets/trinkwasser-labortestset"
+                },
+                {
+                  "name": "Brunnenwasser-Testset",
+                  "wp_page_path": "wasseranalyse/testsets/brunnenwasser-testset"
+                },
+                {
+                  "name": "Schadstoff-Labortestset",
+                  "wp_page_path": "wasseranalyse/testsets/schadstoff-labortestset"
+                },
+                {
+                  "name": "Wasserteststreifen",
+                  "wp_page_path": "wasseranalyse/testsets/wasserteststreifen"
+                },
+                {
+                  "name": "Wasser-Probenahmeset",
+                  "wp_page_path": "wasseranalyse/testsets/wasser-probenahmeset"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "column": 2,
+          "product_links": 3,
+          "sections": [
+            {
+              "heading": "Messgeräte",
+              "heading_type": "existing_wp_group",
+              "wp_group_path": "wasseranalyse/messgeraete",
+              "products": [
+                {
+                  "name": "Wasser-Multimessgerät",
+                  "wp_page_path": "wasseranalyse/messgeraete/wasser-multimessgeraet"
+                },
+                {
+                  "name": "pH-Messgerät",
+                  "wp_page_path": "wasseranalyse/messgeraete/ph-messgeraet"
+                },
+                {
+                  "name": "Wasser-Photometer",
+                  "wp_page_path": "wasseranalyse/messgeraete/wasser-photometer"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "area": "Brunnen",
+      "industry_information_only": false,
+      "products": 3,
+      "columns": [
+        {
+          "column": 1,
+          "product_links": 3,
+          "sections": [
+            {
+              "heading": "Brunnenbauteile",
+              "heading_type": "existing_wp_group",
+              "wp_group_path": "brunnen/brunnenbauteile",
+              "products": [
+                {
+                  "name": "Gartenbrunnen-Bausatz",
+                  "wp_page_path": "brunnen/brunnenbauteile/gartenbrunnen-bausatz"
+                },
+                {
+                  "name": "Schlagbrunnen-Set",
+                  "wp_page_path": "brunnen/brunnenbauteile/schlagbrunnen-set"
+                },
+                {
+                  "name": "Brunnenfilterrohr",
+                  "wp_page_path": "brunnen/brunnenbauteile/brunnenfilterrohr"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "area": "Pumpen & Druck",
+      "industry_information_only": false,
+      "products": 12,
+      "columns": [
+        {
+          "column": 1,
+          "product_links": 5,
+          "sections": [
+            {
+              "heading": "Pumpen",
+              "heading_type": "existing_wp_group",
+              "wp_group_path": "pumpen-druck/pumpen",
+              "products": [
+                {
+                  "name": "Gartenpumpe",
+                  "wp_page_path": "pumpen-druck/pumpen/gartenpumpe"
+                },
+                {
+                  "name": "Tauchpumpe",
+                  "wp_page_path": "pumpen-druck/pumpen/tauchpumpe"
+                },
+                {
+                  "name": "Tiefbrunnenpumpe",
+                  "wp_page_path": "pumpen-druck/pumpen/tiefbrunnenpumpe"
+                },
+                {
+                  "name": "Schmutzwasserpumpe",
+                  "wp_page_path": "pumpen-druck/pumpen/schmutzwasserpumpe"
+                },
+                {
+                  "name": "Klarwasserpumpe",
+                  "wp_page_path": "pumpen-druck/pumpen/klarwasserpumpe"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "column": 2,
+          "product_links": 3,
+          "sections": [
+            {
+              "heading": "Druckversorgung",
+              "heading_type": "existing_wp_group",
+              "wp_group_path": "pumpen-druck/druckversorgung",
+              "products": [
+                {
+                  "name": "Hauswasserwerk",
+                  "wp_page_path": "pumpen-druck/druckversorgung/hauswasserwerk"
+                },
+                {
+                  "name": "Druckerhöhungsanlage",
+                  "wp_page_path": "pumpen-druck/druckversorgung/druckerhoehungsanlage"
+                },
+                {
+                  "name": "Druckbehälter",
+                  "wp_page_path": "pumpen-druck/druckversorgung/druckbehaelter"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "column": 3,
+          "product_links": 4,
+          "sections": [
+            {
+              "heading": "Steuerung & Zubehör",
+              "heading_type": "existing_wp_group",
+              "wp_group_path": "pumpen-druck/steuerung-zubehoer",
+              "products": [
+                {
+                  "name": "Pumpensteuergerät",
+                  "wp_page_path": "pumpen-druck/steuerung-zubehoer/pumpensteuergeraet"
+                },
+                {
+                  "name": "Rückschlagventil",
+                  "wp_page_path": "pumpen-druck/steuerung-zubehoer/rueckschlagventil"
+                },
+                {
+                  "name": "Pumpen-Saugschlauchset",
+                  "wp_page_path": "pumpen-druck/steuerung-zubehoer/pumpen-saugschlauchset"
+                },
+                {
+                  "name": "Pumpenvorfilter",
+                  "wp_page_path": "pumpen-druck/steuerung-zubehoer/pumpenvorfilter"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "area": "Regenwasser",
+      "industry_information_only": false,
+      "products": 9,
+      "columns": [
+        {
+          "column": 1,
+          "product_links": 3,
+          "sections": [
+            {
+              "heading": "Regenspeicher",
+              "heading_type": "existing_wp_group",
+              "wp_group_path": "regenwasser/regenspeicher",
+              "products": [
+                {
+                  "name": "Regentonne",
+                  "wp_page_path": "regenwasser/regenspeicher/regentonne"
+                },
+                {
+                  "name": "Regenwasser-Erdtank",
+                  "wp_page_path": "regenwasser/regenspeicher/regenwasser-erdtank"
+                },
+                {
+                  "name": "Regenwasser-Kellertank",
+                  "wp_page_path": "regenwasser/regenspeicher/regenwasser-kellertank"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "column": 2,
+          "product_links": 3,
+          "sections": [
+            {
+              "heading": "Filter & Förderung",
+              "heading_type": "existing_wp_group",
+              "wp_group_path": "regenwasser/filter-foerderung",
+              "products": [
+                {
+                  "name": "Fallrohrfilter",
+                  "wp_page_path": "regenwasser/filter-foerderung/fallrohrfilter"
+                },
+                {
+                  "name": "Zisternenpumpe",
+                  "wp_page_path": "regenwasser/filter-foerderung/zisternenpumpe"
+                },
+                {
+                  "name": "Zisternenfilter",
+                  "wp_page_path": "regenwasser/filter-foerderung/zisternenfilter"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "column": 3,
+          "product_links": 3,
+          "sections": [
+            {
+              "heading": "Nutzung & Rückhalt",
+              "heading_type": "existing_wp_group",
+              "wp_group_path": "regenwasser/nutzung-rueckhalt",
+              "products": [
+                {
+                  "name": "Regenwasser-Hauszentrale",
+                  "wp_page_path": "regenwasser/nutzung-rueckhalt/regenwasser-hauszentrale"
+                },
+                {
+                  "name": "Rigolensystem",
+                  "wp_page_path": "regenwasser/nutzung-rueckhalt/rigolensystem"
+                },
+                {
+                  "name": "Retentionszisterne",
+                  "wp_page_path": "regenwasser/nutzung-rueckhalt/retentionszisterne"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "area": "Bewässerung",
+      "industry_information_only": false,
+      "products": 6,
+      "columns": [
+        {
+          "column": 1,
+          "product_links": 3,
+          "sections": [
+            {
+              "heading": "Bewässerungssysteme",
+              "heading_type": "existing_wp_group",
+              "wp_group_path": "bewaesserung/bewaesserungssysteme",
+              "products": [
+                {
+                  "name": "Tropfbewässerungsset",
+                  "wp_page_path": "bewaesserung/bewaesserungssysteme/tropfbewaesserungsset"
+                },
+                {
+                  "name": "Versenkregner",
+                  "wp_page_path": "bewaesserung/bewaesserungssysteme/versenkregner"
+                }
+              ]
+            },
+            {
+              "heading": "Weitere Bewässerung",
+              "heading_type": "visual_only",
+              "wp_group_path": null,
+              "products": [
+                {
+                  "name": "Gartenschlauch",
+                  "wp_page_path": "bewaesserung/gartenschlauch"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "column": 2,
+          "product_links": 3,
+          "sections": [
+            {
+              "heading": "Steuerung",
+              "heading_type": "existing_wp_group",
+              "wp_group_path": "bewaesserung/steuerung",
+              "products": [
+                {
+                  "name": "Bewässerungscomputer",
+                  "wp_page_path": "bewaesserung/steuerung/bewaesserungscomputer"
+                },
+                {
+                  "name": "Bodenfeuchtesensor",
+                  "wp_page_path": "bewaesserung/steuerung/bodenfeuchtesensor"
+                },
+                {
+                  "name": "Bewässerungs-Wasserzähler",
+                  "wp_page_path": "bewaesserung/steuerung/bewaesserungs-wasserzaehler"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "area": "Wassertanks",
+      "industry_information_only": false,
+      "products": 6,
+      "columns": [
+        {
+          "column": 1,
+          "product_links": 4,
+          "sections": [
+            {
+              "heading": "Tankarten",
+              "heading_type": "existing_wp_group",
+              "wp_group_path": "wassertanks/tankarten",
+              "products": [
+                {
+                  "name": "Trinkwassertank",
+                  "wp_page_path": "wassertanks/tankarten/trinkwassertank"
+                },
+                {
+                  "name": "IBC-Wassertank",
+                  "wp_page_path": "wassertanks/tankarten/ibc-wassertank"
+                },
+                {
+                  "name": "Mobiler Wassertank",
+                  "wp_page_path": "wassertanks/tankarten/mobiler-wassertank"
+                },
+                {
+                  "name": "Nutzwassertank",
+                  "wp_page_path": "wassertanks/tankarten/nutzwassertank"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "column": 2,
+          "product_links": 2,
+          "sections": [
+            {
+              "heading": "Tankzubehör",
+              "heading_type": "visual_only",
+              "wp_group_path": null,
+              "products": [
+                {
+                  "name": "Tank-Füllstandsanzeige",
+                  "wp_page_path": "wassertanks/tank-fuellstandsanzeige"
+                },
+                {
+                  "name": "Tankdurchführung",
+                  "wp_page_path": "wassertanks/tankdurchfuehrung"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "area": "Abwassertechnik",
+      "industry_information_only": false,
+      "products": 8,
+      "columns": [
+        {
+          "column": 1,
+          "product_links": 5,
+          "sections": [
+            {
+              "heading": "Entwässerung",
+              "heading_type": "existing_wp_group",
+              "wp_group_path": "abwassertechnik/entwaesserung",
+              "products": [
+                {
+                  "name": "Hebeanlage",
+                  "wp_page_path": "abwassertechnik/entwaesserung/hebeanlage"
+                },
+                {
+                  "name": "Rückstauverschluss",
+                  "wp_page_path": "abwassertechnik/entwaesserung/rueckstauverschluss"
+                },
+                {
+                  "name": "Bodenablauf",
+                  "wp_page_path": "abwassertechnik/entwaesserung/bodenablauf"
+                },
+                {
+                  "name": "Revisionsschacht",
+                  "wp_page_path": "abwassertechnik/entwaesserung/revisionsschacht"
+                },
+                {
+                  "name": "Abwasserrohr",
+                  "wp_page_path": "abwassertechnik/entwaesserung/abwasserrohr"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "column": 2,
+          "product_links": 3,
+          "sections": [
+            {
+              "heading": "Aufbereitung & Speicherung",
+              "heading_type": "existing_wp_group",
+              "wp_group_path": "abwassertechnik/aufbereitung-speicherung",
+              "products": [
+                {
+                  "name": "Grauwasseranlage",
+                  "wp_page_path": "abwassertechnik/aufbereitung-speicherung/grauwasseranlage"
+                },
+                {
+                  "name": "Kleinkläranlage",
+                  "wp_page_path": "abwassertechnik/aufbereitung-speicherung/kleinklaeranlage"
+                },
+                {
+                  "name": "Abwassertank",
+                  "wp_page_path": "abwassertechnik/aufbereitung-speicherung/abwassertank"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "area": "Industrie & Großanlagen",
+      "industry_information_only": true,
+      "products": 8,
+      "columns": [
+        {
+          "column": 1,
+          "product_links": 4,
+          "sections": [
+            {
+              "heading": "Industrielle Wasseraufbereitung",
+              "heading_type": "industry_landing",
+              "wp_group_path": "industrie-grossanlagen/industrielle-wasseraufbereitung",
+              "products": [
+                {
+                  "name": "Gewerbliche Umkehrosmoseanlage",
+                  "wp_page_path": "industrie-grossanlagen/industrielle-wasseraufbereitung/gewerbliche-umkehrosmoseanlage"
+                },
+                {
+                  "name": "Mehrschichtfilteranlage",
+                  "wp_page_path": "industrie-grossanlagen/industrielle-wasseraufbereitung/mehrschichtfilteranlage"
+                },
+                {
+                  "name": "Elektrodeionisationsanlage",
+                  "wp_page_path": "industrie-grossanlagen/industrielle-wasseraufbereitung/elektrodeionisationsanlage"
+                }
+              ]
+            },
+            {
+              "heading": "Kühl- & Kreislaufwasser",
+              "heading_type": "industry_landing",
+              "wp_group_path": "industrie-grossanlagen/kuehl-kreislaufwasser",
+              "products": [
+                {
+                  "name": "Kühlwasser-Dosierstation",
+                  "wp_page_path": "industrie-grossanlagen/kuehl-kreislaufwasser/kuehlwasser-dosierstation"
+                }
+              ]
+            },
+            {
+              "heading": "Kommunale/Großanlagen",
+              "heading_type": "industry_landing",
+              "wp_group_path": "industrie-grossanlagen/kommunale-grossanlagen",
+              "products": []
+            }
+          ]
+        },
+        {
+          "column": 2,
+          "product_links": 4,
+          "sections": [
+            {
+              "heading": "Industrie-Pumpen",
+              "heading_type": "industry_landing",
+              "wp_group_path": "industrie-grossanlagen/industrie-pumpen",
+              "products": [
+                {
+                  "name": "Industrielle Hochdruckpumpe",
+                  "wp_page_path": "industrie-grossanlagen/industrie-pumpen/industrielle-hochdruckpumpe"
+                },
+                {
+                  "name": "Industrielle Feststoffpumpe",
+                  "wp_page_path": "industrie-grossanlagen/industrie-pumpen/industrielle-feststoffpumpe"
+                }
+              ]
+            },
+            {
+              "heading": "Messung, Regelung & Dosierung",
+              "heading_type": "industry_landing",
+              "wp_group_path": "industrie-grossanlagen/messung-regelung-dosierung",
+              "products": [
+                {
+                  "name": "Chemikalien-Dosierpumpe",
+                  "wp_page_path": "industrie-grossanlagen/messung-regelung-dosierung/chemikalien-dosierpumpe"
+                },
+                {
+                  "name": "Online-Wasseranalysestation",
+                  "wp_page_path": "industrie-grossanlagen/messung-regelung-dosierung/online-wasseranalysestation"
+                }
+              ]
+            },
+            {
+              "heading": "Industrielles Abwasser",
+              "heading_type": "industry_landing",
+              "wp_group_path": "industrie-grossanlagen/industrielles-abwasser",
+              "products": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "restrictions": [
+    "Keine WordPress- oder URL-Änderung",
+    "Menüüberschriften mit heading_type=visual_only sind keine Seiten",
+    "Industrie gesondert als Informationszugang, nicht gleichrangige Kaufhierarchie",
+    "Kein realer Desktop-/Mobil-Frontendtest",
+    "Keine zusätzlichen SEO-/API-Aufrufe"
+  ]
+}
