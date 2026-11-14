@@ -1,4 +1,7 @@
 # ROBOTIK V49 – Humanoide: konkreter geschützter Fach- und Inhaltsbaum
+
+> **Nachprüfung 14.11.2026, Version V50:** Der V49-Entwurf ist weiterhin als Quellen-/Artikelarchiv gültig, aber die **aktuelle redaktionelle Seitenentscheidung** steht in `HUMANOIDE_RED_AUDIT_V50_20261114.md` und `HUMANOIDE_SEITENENTSCHEID_V50.json`: **12 eigene Fachseiten, 4 Zukunftskapitel (HU02, HU05, HU09, HU16)**. Die Konzepte bleiben vollständig Thema, sind aber derzeit keine zusätzlichen selbstständigen WP-Zielseiten. Die echte WordPress-Inventur vom 09.11. enthielt nur zwei Seiten; die 104er XML besteht aus leeren Entwurfsseiten. **Kein SEO-PASS, keine Veröffentlichung oder Migration.**
+
 **13.11.2026 · Konzept ausgearbeitet, nicht in WordPress eingespielt.**
 
 ## 1. ZIELVERTRAG / STATUS
