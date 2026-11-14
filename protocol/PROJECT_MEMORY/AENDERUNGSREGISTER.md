@@ -2131,3 +2131,9 @@ Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wa
 - Mega-Menü fachlich und optisch auf Spalten verteilt: 8 Käufer-Hauptbereiche + separater Industrie-Infozugang, jeder der 79 Produktlinks genau einmal. Zwei rein visuelle Beschriftungen, **0 neue WP-Seiten/URLs**. W7-Gesamtprüfung und JSON-Anzeigeplan im Wassertechnik-Kategoriebüro.
 - Kein Plugin, keine bezahlte API-Abfrage, keine WordPress-/Frontend-Aktion und keine Fremdportaländerung; reale Desktop-/Mobilansicht offen bis zur ausdrücklichen Freigabe.
 - ZIELVERTRAG: PASS · EINHEITLICHER PRODUKTWEG: PASS · SEO_218: UNVERÄNDERT · KISS: PASS.
+
+## 2026-11-14 – Wassertechnik W8: echter WT001-Quellbefund, Importfunktion fehlt
+- GitHub-WT001 ZIP v0.1.4 mit sechs Einträgen und vier PHP-Dateien tatsächlich untersucht: Inventur und SEO vorhanden, **kein WordPress-Seiten-/Kategorien-Import**. Vollständiger Beleg `PROJEKTE/WASSERTECHNIK/PLUGINS/W8_IMPORT_QUELLCODE_PRUEFUNG_20261114.md`.
+- W4, W5, W6, W7 unverändert. Einzig notwendiger neuer Hauptfunktionsblock: ADD-only-Import innerhalb **derselben** WT001-Pluginidentität, keine zweite Pluginlinie, kein doppelt prüfender Worker. 113 Seiten, 105 WP-Kategorien, kein Import der 356 Themenideen.
+- Vorhandene veraltete Plugin-Anleitungen, Plugin-/Prüf-/WordPress-Current und Adapterstatus gebündelt an tatsächlichen Stand angepasst. Kein neues Plugin/ZIP, keine neue SEO-Messung, keine WordPress- oder Frontend-Schreibaktion, keine Fremdportaländerung.
+- Vor tatsächlicher WordPress-Anlage: einmalige Gesamtbestandsprüfung und ausdrückliche Importfreigabe; ein ADD-only-Lauf, ein Readback. PROTOKOLL PASS / EINHEITLICHE QUELLE PASS / KISS PASS / SCHREIBFREIGABE NOCH OFFEN.
