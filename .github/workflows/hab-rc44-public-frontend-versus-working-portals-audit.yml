@@ -1,0 +1,50 @@
+name: HAB exact public frontend compare Pferde Atelier Hobby Depot (read-only audit)
+on:
+  push:
+    branches: [hab-affiliate-rc44-frontend-slot-and-source-target-20261114]
+    paths:
+      - .github/workflows/hab-rc44-public-frontend-versus-working-portals-audit.yml
+permissions: {contents: read}
+jobs:
+  read-only-public-frontend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compare actual public HTML banner slots, no modifications, no tracking details
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request,urllib.parse,ssl,re,html,json
+          from html.parser import HTMLParser
+          urls=[
+          ('HAB R2 Haftpflicht','https://hab-und-bewahr.de/versicherungen/haftpflicht-und-rechtsschutz/'),
+          ('HAB R2 Kranken','https://hab-und-bewahr.de/?page_id=766'),
+          ('HAB R2 Gewerbe','https://hab-und-bewahr.de/?page_id=767'),
+          ('HAB R3 Grundbesitzer','https://hab-und-bewahr.de/?page_id=784'),
+          ('HAB R3 Tierkranken','https://hab-und-bewahr.de/?page_id=815'),
+          ('HAB R3 Hundehaftpflicht','https://hab-und-bewahr.de/?page_id=786'),
+          ('PFERD Start','https://pferde-atelier.de/'),
+          ('HOBBY Start','https://hobby-depot.de/')]
+          class Parse(HTMLParser):
+            def __init__(self):
+              super().__init__();self.slots=[];self.banners=[];self.wp=[];self.currentSlot=''
+            def handle_starttag(self,t,at):
+              a=dict(at);c=a.get('class','')
+              if a.get('data-ppar-slot'):self.slots.append({'slot':a.get('data-ppar-slot',''),'class':c[:105]})
+              if t=='img' and ('ppar-' in c or 'banner' in c.lower()):
+                u=a.get('src','')
+                self.banners.append({'class':c[:100], 'width':a.get('width'), 'height':a.get('height'), 'file':urllib.parse.urlparse(u).path.split('/')[-1][:75]})
+              if t=='body':self.wp.append(c[:220])
+          for label,url in urls:
+            try:
+              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/128.0.0.0 Safari/537.36','Accept':'text/html,application/xhtml+xml'})
+              with urllib.request.urlopen(req,timeout=12) as r:
+                text=r.read(2000000).decode('utf-8','replace');status=r.status;resolved=r.url
+              obj=Parse();obj.feed(text)
+              terms=['ppar-overview-wide-banner-image','ppar-category-large-banner-image','ppar-affiliate-slot','ppar-overview-banner-v67266','hub_after_cards','product_after_category_tiles','Mehr erfahren']
+              counts={t:text.count(t) for t in terms}
+              print(json.dumps({'name':label,'http':status,'url':urllib.parse.urlparse(resolved).path,'html_chars':len(text),'slots':obj.slots[:10],'img_banner':obj.banners[:10],'counts':counts,'body':obj.wp[:1]},ensure_ascii=False))
+            except Exception as e:
+              print(json.dumps({'name':label,'error':str(e)[:180]},ensure_ascii=False))
+          PY
