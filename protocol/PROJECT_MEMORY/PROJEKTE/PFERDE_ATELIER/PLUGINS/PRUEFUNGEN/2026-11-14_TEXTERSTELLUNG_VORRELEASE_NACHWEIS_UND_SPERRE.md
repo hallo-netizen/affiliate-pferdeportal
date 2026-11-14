@@ -46,3 +46,43 @@ Die drei originalen ZIP-Dateien wurden tatsächlich im Container extrahiert und 
 
 ### Ergänzung: grobe Quellabhängigkeits-Reichweite (statische Warnung, kein Beweis notwendiger Dateien)
 Eine zusätzliche *rein statische* Verweissuche über die Originalklassen (`Klasse::Methode`, `new`, `class_exists`) erreicht von den 14 ausgewählten Kern-Einstiegsdateien aus **106 von 125** Original-PHP-Dateien (77 PSTE, 29 PSERC) Querverweise. Die Zahl sagt **NICHT**, dass 106 Dateien tatsächlich gebraucht werden oder dass 19 andere gefahrlos löschbar sind: WordPress-Hooks, dynamische Aufrufe, Plugin-Einstiegsdateien und die separate PPM-Implementierung können zusätzliche Laufzeitbezüge haben. **Folge:** Keine voreilige Übernahme isolierter Funktionen und keine Löschung aufgrund statischer Suche; Funktion+direkte Abhängigkeiten bis zum echten Aufrufpfad verifizieren. Kein Umbau erfolgt.
+
+
+## Ergänzung: 31 Original-Aufrufbelege und 23-Regel-Sperrliste
+
+**Neue direkte Quellenprüfung:** [Aufrufstellen-Gegenprobe (JSON)](2026-11-14_TEXTERSTELLUNG_ORIGINAL_AUFRUFWEGE_V1.json), mit **31/31** positiven Quellstellen in den alten PSTE-/PSERC-Dateien. Nachweisbare Kette: `PSTE_Plugin::init → PSTE_Research_Driver::register → cron/Anstoß → PSTE_Breadth_Research_Queue::advance / PSTE_Research_Job::advance → PEOPLE_ALSO_ASK/QUESTIONS → PSTE_Runner → PSTE_Repository`; Titel importiert die Originaldaten aus dem Pool, PSERC-Manifest und -Importer haben weitere identifizierte Originalabhängigkeiten. Es handelt sich um **statische Codebelege**, nicht um einen Live-Erfolg.
+
+Die TXE-Hauptdatei hat vier eigenständige aufgerufene Stellen, aber **keinen** der sechs ausdrücklich geprüften direkten Original-Verbindungen: Treiberregistrierung, PAA-Task-Aufruf, automatische Original-SEO-Klassen, Themenpool-Originaltabellenzugriff, PSERC-System4-Import oder PPM-Rückleseaufruf. Der Code der TXE-Clientmethoden allein ersetzt den Original-Worker **nicht**. Die Suchprüfung gilt für die TXE-Hauptdatei; dynamische Aufrufe über nicht geprüfte Wege sind damit nicht generell ausgeschlossen.
+
+**Zusätzliche Grenze:** Die PPM-6.7.9-Original-ZIP ist auf GitHub nachweisbar (unter `control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip`, 1.614.485 Bytes). Ein lesbarer Volltext des PPM-Originals liegt dieser Prüfung weiterhin **nicht** vor. Deshalb keine Behauptung, die notwendige PPM-Importfunktion könne entfallen.
+
+### Verbindlicher Stand aller 23 Zielvertragsregeln für 0.4.1 (keine Freigabe)
+| Regel | Ziel | Abnahme aktuell | Nächster notwendiger Beweis |
+|---|---|---|---|
+| 1 | Originalfunktionen erhalten | **BLOCKIERT** | 0.4.1 ersetzt mehrere Originalarbeitswege |
+| 2 | Getrennte Worker | **OFFEN** | Fach- und technische Rollen alt gegen neu abgleichen |
+| 3 | Eine vollständige automatische SEO-Entscheidung | **BLOCKIERT** | Original-SEO und PAA nicht im normalen 0.4.1-Lauf |
+| 4 | K0 alleinige Textqualität | **OFFEN** | K0 und WP-Rücklauf real prüfen |
+| 5 | Nur eine Auftragsquelle, kompletter Altbestand | **BLOCKIERT** | Alte Themen-, Zuordnungs- und Identitätstabellen fehlen im TXE-Abgleich |
+| 6 | Reservierung/Doppelexport | **OFFEN** | Nur simulationsnah, kein echter Parallel-WP-Test |
+| 7 | Wiederanlauf ohne erneute Freigabe | **OFFEN** | Abbruch/Wiederaufnahme am echten Auftrag nicht bewiesen |
+| 8 | Genau ein WP-Entwurf | **OFFEN** | Echter Doppelimport plus Publish-Sperre fehlt |
+| 9 | Titel/K0-Schnittstelle unverändert | **BLOCKIERT** | Manifest und PPM-Import ohne Originalbeweis ersetzt |
+| 10 | Nur nutzlose Teile entfernen | **OFFEN** | Alle tatsächlichen Abhängigkeiten noch nicht geschlossen |
+| 11 | Keine Zusatzinfrastruktur | **OFFEN** | Bis endgültiger Release mit Quelle kontrollieren |
+| 12 | Live-Schutz, Testisolierung | **OFFEN** | In diesem Prüfschritt keine Liveänderung; WP-Echtlauf ausstehend |
+| 13 | Historische 61 Freigaben respektieren | **OFFEN** | Altbestandsdaten und IDs noch nicht live identisch nachgewiesen |
+| 14 | Original-vs-Neu-Echtlauf erforderlich | **BLOCKIERT** | Nicht durchgeführt |
+| 15 | Ein zentrales Protokoll | **TEILBELEG** | Nachweis im bestehenden GitHub-Prüf- und Arbeitsprotokoll |
+| 16 | Einmalige Zuständigkeit erzwingen | **OFFEN** | Kein vollständiger Callgraph/Negativtest vorliegend |
+| 17 | Quellcodebereinigung ohne Verlust | **OFFEN** | Mögliche entfernbare Dateien nicht belegt |
+| 18 | Portalneutralität | **OFFEN** | Hobby Depot/Hab & Bewahr noch nicht mit Originaldaten abgenommen |
+| 19 | Sofortartikel ohne Nebenplanung | **OFFEN** | Vollständiger Gleichlauf mit Altbestand nicht geprüft |
+| 20 | Diagnose ohne zweite Fachprüfung | **OFFEN** | Nur lokaler Nachweis, echter WP-Diagnosebericht fehlt |
+| 21 | Vollständiges Backend | **OFFEN** | Menüs existieren im Test-Code, Automatismen fehlen |
+| 22 | Sichere Aktivierung ohne Sperrfehler | **OFFEN** | Nur simuliert, realer WP-Aktivierungstest fehlt |
+| 23 | Quellcodeidentität und vollständiger Alt-Neu-Diff | **BLOCKIERT** | 0.4.1 0/6 identische PHP-Dateien, kein Funktionsgleichheitsnachweis |
+
+**Zählung:** 6 direkt blockiert, 16 offen, 1 teilweise belegt; **0 vollständig als neuer Zielworkflow abgenommen**. Alle anderen Einzelvorgaben des Regeltextes gelten unverändert, diese Zeilen verkürzen den Vertrag nicht.
+
+**Harte Schlussfolgerung:** **Keine Neuimplementierung, kein Release.** Originaldateien wurden nur gelesen, 0.4.1 unverändert gelassen. Erst die Original-Aufrufkette inkl. PPM vollständig klären, dann nur gezielt unveränderten Originalcode in isolierter Umgebung verwenden; notwendige Anschlussänderungen separat nachweisen und ausdrücklich freigeben. Danach Alt-Neu-Echtlauf, vorher keine neue installierbare ZIP.
