@@ -1,5 +1,14 @@
 # Robotik – Pluginbüro / Kategorie-Workflow
 
+## 0.4.9 / V63 – eine geschützte Gesamtübernahme statt vieler Einzelschritte (TEST, 14.11.2026)
+- **Echter WP-Live-Soll-Ist-Export geprüft:** 115 Seiten + 90 Kategorien; 104 alte Seiten, 89 alte Kategorien 1:1 bestätigt, null Konflikte. **11 andere Seiten + 1 andere Kategorie** bleiben unberührt.
+- **68 neue Entwurfsseiten und 159 flache Inhaltsrubriken** bilden den **einen sicheren Schreibblock**. **16 noch ungeklärte Robotertypen und ihre 48 Rubriken** bleiben explizit gesperrt. Vollbaum 188/296 weiter gültig, keine Löschung.
+- WP-Menü: **`Robotik Kategorie → Gesamtübernahme (geschützt)`**. Aufruf zeigt automatisch die frische komplette Vorschau – keine weitere Datei vorher hochladen. Bei fehlerfreiem Plan **eine ausdrückliche Schreibfreigabe**, dann ein fortsetzbarer Import und ein automatischer vollständiger Rückvergleich. Anschließend **EIN JSON-Ergebnisbericht**.
+- Es werden **keine** alten Inhalte aktualisiert/veröffentlicht/gelöscht, kein Frontend-Menü umgebaut, kein API-Aufruf, kein Cron und keine neue Datenbanktabelle angelegt. Alter Erstimport 104/89 und DataForSEO/Veröffentlichung bleiben unverändert; nicht alten Erstimport nutzen.
+- **7 PHP-Lint, ZIP-CRC, 15 lokale WordPress-Mockprüfungen PASS; realer WP-Live-Schreibtest offen.** ZIP `PLUGIN/CURRENT.zip` = `PLUGIN/VERSIONEN/0.4.9.zip`, SHA256 `1829a6b7cf3d243f361431736ebd027949724b293aac40306db60df00f4ff8b0`.
+- Vollbelege `RECHERCHE/V63_GEBUENDELTER_DELTAIMPORT_RELEASEPRUEFUNG_20261114.md` und `RECHERCHE/V63_GESCHUETZTER_DELTA_PLAN.json` sowie geänderte Pluginquellen im gleichnamigen V63-Büro.
+
+
 ## 0.4.8 / V62 – WP-Gesamtvorschau ohne Schreibvorgänge (TEST, 14.11.2026)
 - Der alte 0.4.7-Code und Datenbestand bleiben unverändert; 2 neue Dateien (Sollbaum-Master und Nur-Lese-Vorschau), nur Menüanmeldung im Hauptfile ergänzt.
 - **8 Welten, 188 Seitenpositionen (141 Typen + 47 Gruppen), 296 Inhaltsrubriken**, neu im Soll: achte WP-Hauptwelt „Humanoide“. 26 SEO-Redaktionsvorschläge; alle 16 SEO-HOLDs unverändert.

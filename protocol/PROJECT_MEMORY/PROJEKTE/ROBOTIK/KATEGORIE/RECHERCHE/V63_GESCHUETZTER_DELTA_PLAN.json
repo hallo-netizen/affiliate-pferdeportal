@@ -1,0 +1,3497 @@
+{
+  "schema": "robotik-v63-delta-soll-v1",
+  "basis": "V62 WordPress Livebericht 2026-11-14 14:44:28 UTC",
+  "wordpress_url": "https://robotik.oliver-beil.de/",
+  "simulation_only": true,
+  "write_authorized": false,
+  "existing_inventory": {
+    "pages": 115,
+    "categories": 90,
+    "posts": 0,
+    "hivepress_categories": 0,
+    "hivepress_listings": 0
+  },
+  "existing_ids_verified": {
+    "pages": 104,
+    "categories": 89
+  },
+  "untouched_other_live_objects": {
+    "pages": 11,
+    "categories": 1
+  },
+  "planned_safe_additions": {
+    "pages": 68,
+    "categories": 159
+  },
+  "planned_hold_exclusions": {
+    "pages": 16,
+    "categories": 48
+  },
+  "planned_total_after_safe_import_if_unchanged": {
+    "pages": 183,
+    "categories": 249
+  },
+  "all_nodes_in_original_soll": {
+    "pages": 188,
+    "categories": 296
+  },
+  "rules": [
+    "all previous WP object IDs remain intact",
+    "no SEO holds imported",
+    "all new pages draft only",
+    "no automatic publication or menu changes",
+    "WordPress categories flat, parent type linked via term meta",
+    "same old first import unchanged",
+    "live inventory is rechecked immediately before any real writing",
+    "no API costs"
+  ],
+  "safe_pages": [
+    {
+      "source_id": "V62_WORLD_HUMANOIDE_NUR_ENTWURF",
+      "path": [
+        "Humanoide"
+      ],
+      "role": "group",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "V52_HUB_Bildung_Forschung",
+      "path": [
+        "Bildung",
+        "Forschung"
+      ],
+      "role": "group",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "V52_HUB_Bildung_Lernhilfe",
+      "path": [
+        "Bildung",
+        "Lernhilfe"
+      ],
+      "role": "group",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "V52_HUB_Freizeit_Filmen",
+      "path": [
+        "Freizeit",
+        "Filmen"
+      ],
+      "role": "group",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "V52_HUB_Haushalt_Alltagshilfe",
+      "path": [
+        "Haushalt",
+        "Alltagshilfe"
+      ],
+      "role": "group",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "V52_HUB_Haushalt_Kommunikation",
+      "path": [
+        "Haushalt",
+        "Kommunikation"
+      ],
+      "role": "group",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "V52_HUB_Haushalt_Reinigung",
+      "path": [
+        "Haushalt",
+        "Reinigung"
+      ],
+      "role": "group",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "V52_HUB_Humanoide_Arbeit",
+      "path": [
+        "Humanoide",
+        "Arbeit"
+      ],
+      "role": "group",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "V52_HUB_Humanoide_Bildung",
+      "path": [
+        "Humanoide",
+        "Bildung"
+      ],
+      "role": "group",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "V52_HUB_Humanoide_Haushalt",
+      "path": [
+        "Humanoide",
+        "Haushalt"
+      ],
+      "role": "group",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "V52_HUB_Humanoide_Intimrobotik",
+      "path": [
+        "Humanoide",
+        "Intimrobotik"
+      ],
+      "role": "group",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "V52_HUB_Humanoide_Pflege",
+      "path": [
+        "Humanoide",
+        "Pflege"
+      ],
+      "role": "group",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "V52_HUB_Humanoide_Unterhaltung",
+      "path": [
+        "Humanoide",
+        "Unterhaltung"
+      ],
+      "role": "group",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "V52_HUB_Pflege_Versorgung",
+      "path": [
+        "Pflege",
+        "Versorgung"
+      ],
+      "role": "group",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "V52_HUB_Pflege_Haarpflege",
+      "path": [
+        "Pflege",
+        "Haarpflege"
+      ],
+      "role": "group",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_h01",
+      "path": [
+        "Haushalt",
+        "Alltagshilfe",
+        "Transportroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_h02",
+      "path": [
+        "Haushalt",
+        "Kochroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_h04",
+      "path": [
+        "Haushalt",
+        "Wäschefaltroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_h05",
+      "path": [
+        "Haushalt",
+        "Reinigung",
+        "WC-Reinigungsroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_h08",
+      "path": [
+        "Haushalt",
+        "Reinigung",
+        "Luftreinigungsroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_h09",
+      "path": [
+        "Haushalt",
+        "Aquarienroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_p01",
+      "path": [
+        "Pflege",
+        "Telepräsenzroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_p02",
+      "path": [
+        "Pflege",
+        "Versorgung",
+        "Kliniktransportroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_p03",
+      "path": [
+        "Pflege",
+        "Versorgung",
+        "Pflege-Servierroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_g01",
+      "path": [
+        "Gewerbe",
+        "Gastronomie",
+        "Küchenroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_g02",
+      "path": [
+        "Gewerbe",
+        "Reinigung",
+        "Sanitärreinigungsroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_g03",
+      "path": [
+        "Gewerbe",
+        "Wäschereiroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_h11",
+      "path": [
+        "Haushalt",
+        "Alltagshilfe",
+        "Esshilferoboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_h13",
+      "path": [
+        "Haushalt",
+        "Alltagshilfe",
+        "Ankleideroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_h14",
+      "path": [
+        "Haushalt",
+        "Alltagshilfe",
+        "Duschroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_p04",
+      "path": [
+        "Pflege",
+        "Versorgung",
+        "Pflege-Reinigungsroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_ga01",
+      "path": [
+        "Garten",
+        "Heckenschneidroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_ga02",
+      "path": [
+        "Garten",
+        "Hundekotroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_ga03",
+      "path": [
+        "Garten",
+        "Flächenpflege",
+        "Terrassenroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_ga05",
+      "path": [
+        "Garten",
+        "Bienenstockroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_f04",
+      "path": [
+        "Freizeit",
+        "Pinselmalroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_f05",
+      "path": [
+        "Freizeit",
+        "Musikroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_s01",
+      "path": [
+        "Sport",
+        "Golf",
+        "Bunkerrechenroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_s02",
+      "path": [
+        "Sport",
+        "Eisaufbereitungsroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_s04",
+      "path": [
+        "Sport",
+        "Ballsport",
+        "Torwartroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_s05",
+      "path": [
+        "Sport",
+        "Billardroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_s06",
+      "path": [
+        "Sport",
+        "Ballsport",
+        "Tischtennis-Spielroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_b03",
+      "path": [
+        "Bildung",
+        "Lernhilfe",
+        "Schreiblernroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_b06",
+      "path": [
+        "Bildung",
+        "Forschung",
+        "EDU-Roboterhunde"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_g04",
+      "path": [
+        "Gewerbe",
+        "Profi-Mähroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v46_g05",
+      "path": [
+        "Gewerbe",
+        "Profi-Poolroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu01",
+      "path": [
+        "Humanoide",
+        "Haushalt",
+        "Haushaltsassistenten"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu03",
+      "path": [
+        "Humanoide",
+        "Pflege",
+        "Fernpflegeassistenten"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu04",
+      "path": [
+        "Humanoide",
+        "Pflege",
+        "Pflegebegleiter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu06",
+      "path": [
+        "Humanoide",
+        "Arbeit",
+        "Lagerarbeiter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu07",
+      "path": [
+        "Humanoide",
+        "Arbeit",
+        "Produktionshelfer"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu08",
+      "path": [
+        "Humanoide",
+        "Arbeit",
+        "Empfangsroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu10",
+      "path": [
+        "Humanoide",
+        "Arbeit",
+        "Werkstatthelfer"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu11",
+      "path": [
+        "Humanoide",
+        "Bildung",
+        "Entwicklungsroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu12",
+      "path": [
+        "Humanoide",
+        "Bildung",
+        "Schulroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu13",
+      "path": [
+        "Humanoide",
+        "Unterhaltung",
+        "Showroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu14",
+      "path": [
+        "Humanoide",
+        "Unterhaltung",
+        "Gesprächsroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu15",
+      "path": [
+        "Humanoide",
+        "Intimrobotik",
+        "Intimroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0220",
+      "path": [
+        "Garten",
+        "Mückenfangroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0408",
+      "path": [
+        "Pflege",
+        "Haarpflege",
+        "Haarwaschroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0424",
+      "path": [
+        "Pflege",
+        "Mobilität",
+        "Blindenführroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0571",
+      "path": [
+        "Garten",
+        "Teichpflegeroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0568",
+      "path": [
+        "Sport",
+        "Reaktionstrainer"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0440",
+      "path": [
+        "Sport",
+        "Kletterwand-Routenroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0457",
+      "path": [
+        "Gewerbe",
+        "Elektronik-Reparaturroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0473",
+      "path": [
+        "Gewerbe",
+        "Biotoppflege-Roboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0562",
+      "path": [
+        "Haushalt",
+        "Geschirrspüler-Einräumroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0570",
+      "path": [
+        "Pflege",
+        "Haarpflege",
+        "Haarpflegeroboter"
+      ],
+      "role": "product",
+      "slug_policy": "sanitize_title on live WordPress, prevent collisions"
+    }
+  ],
+  "safe_categories": [
+    {
+      "source_id": "v46_h01_facet_1",
+      "owner_id": "v46_h01",
+      "owner_path": [
+        "Haushalt",
+        "Alltagshilfe",
+        "Transportroboter"
+      ],
+      "short_label": "Wohnräume",
+      "topic_directions": [
+        "Enge Flure und Durchgänge",
+        "Türschwellen und Bodenbeläge",
+        "Sturz- und Hindernisbereiche"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h01_facet_2",
+      "owner_id": "v46_h01",
+      "owner_path": [
+        "Haushalt",
+        "Alltagshilfe",
+        "Transportroboter"
+      ],
+      "short_label": "Alltagstransport",
+      "topic_directions": [
+        "Getränke sicher abstellen",
+        "Tablett- und Gepäcktransport",
+        "Transport für Menschen mit eingeschränkter Mobilität"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h01_facet_3",
+      "owner_id": "v46_h01",
+      "owner_path": [
+        "Haushalt",
+        "Alltagshilfe",
+        "Transportroboter"
+      ],
+      "short_label": "Bedienung",
+      "topic_directions": [
+        "Sprachbefehle und Fahrziele",
+        "Ladestation und Stellfläche",
+        "Grenzen bei Treppen und Türen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h02_facet_1",
+      "owner_id": "v46_h02",
+      "owner_path": [
+        "Haushalt",
+        "Kochroboter"
+      ],
+      "short_label": "Mahlzeiten",
+      "topic_directions": [
+        "Portionen für Familien",
+        "Vorbearbeitung von Zutaten",
+        "Anpassung an Ernährungswünsche"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h02_facet_2",
+      "owner_id": "v46_h02",
+      "owner_path": [
+        "Haushalt",
+        "Kochroboter"
+      ],
+      "short_label": "Küchentechnik",
+      "topic_directions": [
+        "Heizen und Rühren als Roboterfunktion",
+        "Standfläche und Anschlüsse",
+        "Reinigung der Kontaktteile"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h02_facet_3",
+      "owner_id": "v46_h02",
+      "owner_path": [
+        "Haushalt",
+        "Kochroboter"
+      ],
+      "short_label": "Entwicklung",
+      "topic_directions": [
+        "Marktstand nach Ländern",
+        "Unterschied zum normalen Kochautomaten",
+        "Grenzen im selbstständigen Betrieb"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h04_facet_1",
+      "owner_id": "v46_h04",
+      "owner_path": [
+        "Haushalt",
+        "Wäschefaltroboter"
+      ],
+      "short_label": "Wäschearten",
+      "topic_directions": [
+        "T-Shirts gegenüber Hosen",
+        "Materialien und Faltqualität",
+        "Größenwechsel bei Textilien"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h04_facet_2",
+      "owner_id": "v46_h04",
+      "owner_path": [
+        "Haushalt",
+        "Wäschefaltroboter"
+      ],
+      "short_label": "Abläufe",
+      "topic_directions": [
+        "Sortieren vor dem Falten",
+        "Übergabe in Wäschekorb",
+        "Einbau in private Waschroutine"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h04_facet_3",
+      "owner_id": "v46_h04",
+      "owner_path": [
+        "Haushalt",
+        "Wäschefaltroboter"
+      ],
+      "short_label": "Entwicklung",
+      "topic_directions": [
+        "Prototyp gegenüber Auslieferungsstand",
+        "Preis-/Aboangaben nur mit Beleg",
+        "Fehler und Handkorrekturen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h05_facet_1",
+      "owner_id": "v46_h05",
+      "owner_path": [
+        "Haushalt",
+        "Reinigung",
+        "WC-Reinigungsroboter"
+      ],
+      "short_label": "Badgestaltung",
+      "topic_directions": [
+        "Toilettenformen",
+        "Enge Standorte",
+        "Nässe und Hindernisse"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h05_facet_2",
+      "owner_id": "v46_h05",
+      "owner_path": [
+        "Haushalt",
+        "Reinigung",
+        "WC-Reinigungsroboter"
+      ],
+      "short_label": "Reinigungsfunktion",
+      "topic_directions": [
+        "Bürsten und Greifer",
+        "Erreichbare Randbereiche",
+        "Reinigungsmittel und Hygiene"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h05_facet_3",
+      "owner_id": "v46_h05",
+      "owner_path": [
+        "Haushalt",
+        "Reinigung",
+        "WC-Reinigungsroboter"
+      ],
+      "short_label": "Forschung",
+      "topic_directions": [
+        "Labor- und Praxistests",
+        "Fehlerquellen beim Anfahren",
+        "Marktreife ohne Wunschdenken"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h08_facet_1",
+      "owner_id": "v46_h08",
+      "owner_path": [
+        "Haushalt",
+        "Reinigung",
+        "Luftreinigungsroboter"
+      ],
+      "short_label": "Raumnavigation",
+      "topic_directions": [
+        "Mehrere Zimmer anfahren",
+        "Enge Wohnungen",
+        "Hindernisse und Türen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h08_facet_2",
+      "owner_id": "v46_h08",
+      "owner_path": [
+        "Haushalt",
+        "Reinigung",
+        "Luftreinigungsroboter"
+      ],
+      "short_label": "Luftqualität",
+      "topic_directions": [
+        "Filteraufbau und Feinstaub",
+        "Räume und Luftwechsel",
+        "Geräusch im Alltag"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h08_facet_3",
+      "owner_id": "v46_h08",
+      "owner_path": [
+        "Haushalt",
+        "Reinigung",
+        "Luftreinigungsroboter"
+      ],
+      "short_label": "Betrieb",
+      "topic_directions": [
+        "Filterkosten",
+        "Strombedarf",
+        "Stand der Geräteverfügbarkeit"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h09_facet_1",
+      "owner_id": "v46_h09",
+      "owner_path": [
+        "Haushalt",
+        "Aquarienroboter"
+      ],
+      "short_label": "Aquarien",
+      "topic_directions": [
+        "Glasdicke und Befestigung",
+        "Runde versus gerade Scheiben",
+        "Kleine versus große Becken"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h09_facet_2",
+      "owner_id": "v46_h09",
+      "owner_path": [
+        "Haushalt",
+        "Aquarienroboter"
+      ],
+      "short_label": "Betrieb",
+      "topic_directions": [
+        "Algenbelag entfernen",
+        "Fisch- und Pflanzenverträglichkeit",
+        "Bewegung und Hindernisse"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h09_facet_3",
+      "owner_id": "v46_h09",
+      "owner_path": [
+        "Haushalt",
+        "Aquarienroboter"
+      ],
+      "short_label": "Wartung",
+      "topic_directions": [
+        "Magnetbefestigung",
+        "Reinigung der Bürsten",
+        "Störungen und Stromversorgung"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_p01_facet_1",
+      "owner_id": "v46_p01",
+      "owner_path": [
+        "Pflege",
+        "Telepräsenzroboter"
+      ],
+      "short_label": "Besuchskontakt",
+      "topic_directions": [
+        "Besuche durch Angehörige",
+        "Gespräche mit mehreren Beteiligten",
+        "Geplante virtuelle Besuchszeiten"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_p01_facet_2",
+      "owner_id": "v46_p01",
+      "owner_path": [
+        "Pflege",
+        "Telepräsenzroboter"
+      ],
+      "short_label": "Einrichtung",
+      "topic_directions": [
+        "Personal-Einweisung",
+        "Raum- und Ladeplanung",
+        "WLAN und Nutzerkonten"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_p01_facet_3",
+      "owner_id": "v46_p01",
+      "owner_path": [
+        "Pflege",
+        "Telepräsenzroboter"
+      ],
+      "short_label": "Datenschutz",
+      "topic_directions": [
+        "Einwilligung von Bewohnenden",
+        "Kameranutzung in geteilten Räumen",
+        "Löschung und Zugriffsrechte"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_p02_facet_1",
+      "owner_id": "v46_p02",
+      "owner_path": [
+        "Pflege",
+        "Versorgung",
+        "Kliniktransportroboter"
+      ],
+      "short_label": "Materialwege",
+      "topic_directions": [
+        "Medikamente zu Stationen",
+        "Laborproben transportieren",
+        "Persönliche Versorgungsgüter"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_p02_facet_2",
+      "owner_id": "v46_p02",
+      "owner_path": [
+        "Pflege",
+        "Versorgung",
+        "Kliniktransportroboter"
+      ],
+      "short_label": "Sicherheit",
+      "topic_directions": [
+        "Verschließbare Fächer",
+        "Hygiene und Übergabe",
+        "Gebäudefahrstühle und Türen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_p02_facet_3",
+      "owner_id": "v46_p02",
+      "owner_path": [
+        "Pflege",
+        "Versorgung",
+        "Kliniktransportroboter"
+      ],
+      "short_label": "Organisation",
+      "topic_directions": [
+        "Einbindung in Pflegeteams",
+        "Ladestationen und Dienste",
+        "Ausfallszenarien"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_p03_facet_1",
+      "owner_id": "v46_p03",
+      "owner_path": [
+        "Pflege",
+        "Versorgung",
+        "Pflege-Servierroboter"
+      ],
+      "short_label": "Bewohner",
+      "topic_directions": [
+        "Getränke anbieten",
+        "Essensausgabe im Gemeinschaftsraum",
+        "Besondere Mobilitätsbedürfnisse"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_p03_facet_2",
+      "owner_id": "v46_p03",
+      "owner_path": [
+        "Pflege",
+        "Versorgung",
+        "Pflege-Servierroboter"
+      ],
+      "short_label": "Pflegealltag",
+      "topic_directions": [
+        "Touren und Personalunterstützung",
+        "Küche-Station-Übergabe",
+        "Hygiene bei Kontaktflächen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_p03_facet_3",
+      "owner_id": "v46_p03",
+      "owner_path": [
+        "Pflege",
+        "Versorgung",
+        "Pflege-Servierroboter"
+      ],
+      "short_label": "Akzeptanz",
+      "topic_directions": [
+        "Einführung in Einrichtungen",
+        "Ansprechbarkeit und Bedienung",
+        "Forschung zu Bewohnerreaktionen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_g01_facet_1",
+      "owner_id": "v46_g01",
+      "owner_path": [
+        "Gewerbe",
+        "Gastronomie",
+        "Küchenroboter"
+      ],
+      "short_label": "Betriebsabläufe",
+      "topic_directions": [
+        "Portionen pro Stunde",
+        "Zutatenlogistik",
+        "Personalübergabe und Ausgabe"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_g01_facet_2",
+      "owner_id": "v46_g01",
+      "owner_path": [
+        "Gewerbe",
+        "Gastronomie",
+        "Küchenroboter"
+      ],
+      "short_label": "Technik",
+      "topic_directions": [
+        "Stationäre Roboterzellen",
+        "Reinigungsprotokolle",
+        "Anpassung an Speisekarten"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_g01_facet_3",
+      "owner_id": "v46_g01",
+      "owner_path": [
+        "Gewerbe",
+        "Gastronomie",
+        "Küchenroboter"
+      ],
+      "short_label": "Wirtschaftlichkeit",
+      "topic_directions": [
+        "Platzbedarf",
+        "Wartungsverträge",
+        "Leasing und laufende Betriebskosten"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_g02_facet_1",
+      "owner_id": "v46_g02",
+      "owner_path": [
+        "Gewerbe",
+        "Reinigung",
+        "Sanitärreinigungsroboter"
+      ],
+      "short_label": "Sanitärbetrieb",
+      "topic_directions": [
+        "Frequenz und Durchsatz",
+        "Öffentliche Toilettenräume",
+        "Einrichtung von Wartungsfenstern"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_g02_facet_2",
+      "owner_id": "v46_g02",
+      "owner_path": [
+        "Gewerbe",
+        "Reinigung",
+        "Sanitärreinigungsroboter"
+      ],
+      "short_label": "Hygiene",
+      "topic_directions": [
+        "Reinigungsmittelversorgung",
+        "Dokumentation und Kontrollen",
+        "Sichere Entsorgung"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_g02_facet_3",
+      "owner_id": "v46_g02",
+      "owner_path": [
+        "Gewerbe",
+        "Reinigung",
+        "Sanitärreinigungsroboter"
+      ],
+      "short_label": "Betreiberfragen",
+      "topic_directions": [
+        "Kosten pro Einsatz",
+        "Wartungspläne",
+        "Störungen im Publikumsverkehr"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_g03_facet_1",
+      "owner_id": "v46_g03",
+      "owner_path": [
+        "Gewerbe",
+        "Wäschereiroboter"
+      ],
+      "short_label": "Wäschereiprozesse",
+      "topic_directions": [
+        "Wäsche aufgeben",
+        "Handtücher sortieren",
+        "Weitergabe an Faltlinie"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_g03_facet_2",
+      "owner_id": "v46_g03",
+      "owner_path": [
+        "Gewerbe",
+        "Wäschereiroboter"
+      ],
+      "short_label": "Betriebstechnik",
+      "topic_directions": [
+        "Stationäre Greifarmtechnik",
+        "Schichtwechsel und Bediener",
+        "Anbindung an Fördereinheiten"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_g03_facet_3",
+      "owner_id": "v46_g03",
+      "owner_path": [
+        "Gewerbe",
+        "Wäschereiroboter"
+      ],
+      "short_label": "Betriebskosten",
+      "topic_directions": [
+        "Personalzeit bewerten",
+        "Wartung und Ersatzteile",
+        "Leistung in verschiedenen Textilien"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h11_facet_1",
+      "owner_id": "v46_h11",
+      "owner_path": [
+        "Haushalt",
+        "Alltagshilfe",
+        "Esshilferoboter"
+      ],
+      "short_label": "Wohnalltag",
+      "topic_directions": [
+        "Tischhöhen und Sitzposition",
+        "Essen im Familienkreis",
+        "Portionieren und Schüsselanordnung"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h11_facet_2",
+      "owner_id": "v46_h11",
+      "owner_path": [
+        "Haushalt",
+        "Alltagshilfe",
+        "Esshilferoboter"
+      ],
+      "short_label": "Bedienung",
+      "topic_directions": [
+        "Taster und Steuerhilfen",
+        "Reinigung in der Küche",
+        "Grenzen beim selbstständigen Essen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h11_facet_3",
+      "owner_id": "v46_h11",
+      "owner_path": [
+        "Haushalt",
+        "Alltagshilfe",
+        "Esshilferoboter"
+      ],
+      "short_label": "Nutzungsfragen",
+      "topic_directions": [
+        "Aufstellung im Wohnraum",
+        "Hilfe durch Angehörige",
+        "Unterschied zu normalem Servierroboter"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h13_facet_1",
+      "owner_id": "v46_h13",
+      "owner_path": [
+        "Haushalt",
+        "Alltagshilfe",
+        "Ankleideroboter"
+      ],
+      "short_label": "Kleidung",
+      "topic_directions": [
+        "Ärmel mit Roboterhilfe anziehen",
+        "Hosen- und Jackenformen",
+        "Empfindliche und enge Textilien"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h13_facet_2",
+      "owner_id": "v46_h13",
+      "owner_path": [
+        "Haushalt",
+        "Alltagshilfe",
+        "Ankleideroboter"
+      ],
+      "short_label": "Wohnung",
+      "topic_directions": [
+        "Platz am Schrank und Bett",
+        "Aufstehen und Körperhaltung",
+        "Privatsphäre im persönlichen Raum"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h13_facet_3",
+      "owner_id": "v46_h13",
+      "owner_path": [
+        "Haushalt",
+        "Alltagshilfe",
+        "Ankleideroboter"
+      ],
+      "short_label": "Entwicklung",
+      "topic_directions": [
+        "Roboterkraft beim Körperkontakt",
+        "Anpassung an Eigenbewegungen",
+        "Grenzen bisheriger Ankleideversuche"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h14_facet_1",
+      "owner_id": "v46_h14",
+      "owner_path": [
+        "Haushalt",
+        "Alltagshilfe",
+        "Duschroboter"
+      ],
+      "short_label": "Badgrundriss",
+      "topic_directions": [
+        "Barrierefreie Duschen und Platz",
+        "Nasse Flächen und Rutschgefahr",
+        "Anschluss und Reinigung im Privatbad"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h14_facet_2",
+      "owner_id": "v46_h14",
+      "owner_path": [
+        "Haushalt",
+        "Alltagshilfe",
+        "Duschroboter"
+      ],
+      "short_label": "Unterstützung",
+      "topic_directions": [
+        "Einzelne Körperbereiche erreichen",
+        "Steuerung und Abbruchmöglichkeit",
+        "Unterschied zu mechanischem Duschstuhl"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_h14_facet_3",
+      "owner_id": "v46_h14",
+      "owner_path": [
+        "Haushalt",
+        "Alltagshilfe",
+        "Duschroboter"
+      ],
+      "short_label": "Sicherheit",
+      "topic_directions": [
+        "Roboterkontakt bei nasser Haut",
+        "Schutz von Kameradaten",
+        "Entwicklungsstand und Eignungsgrenzen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_p04_facet_1",
+      "owner_id": "v46_p04",
+      "owner_path": [
+        "Pflege",
+        "Versorgung",
+        "Pflege-Reinigungsroboter"
+      ],
+      "short_label": "Bewohnerbereiche",
+      "topic_directions": [
+        "Sichere Fahrt bei Gehhilfen",
+        "Rücksicht auf Ruhezeiten",
+        "Reinigung gemeinsamer Aufenthaltsräume"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_p04_facet_2",
+      "owner_id": "v46_p04",
+      "owner_path": [
+        "Pflege",
+        "Versorgung",
+        "Pflege-Reinigungsroboter"
+      ],
+      "short_label": "Hygieneablauf",
+      "topic_directions": [
+        "Reinigungsnachweise im Pflegebetrieb",
+        "Umgang mit Wasser und Verbrauchsmitteln",
+        "Zusammenarbeit mit Hauswirtschaft"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_p04_facet_3",
+      "owner_id": "v46_p04",
+      "owner_path": [
+        "Pflege",
+        "Versorgung",
+        "Pflege-Reinigungsroboter"
+      ],
+      "short_label": "Einführung",
+      "topic_directions": [
+        "Routen über mehrere Wohnbereiche",
+        "Zugangsrechte und Dienstübergaben",
+        "Störungen bei Personenverkehr"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_ga01_facet_1",
+      "owner_id": "v46_ga01",
+      "owner_path": [
+        "Garten",
+        "Heckenschneidroboter"
+      ],
+      "short_label": "Pflanzen",
+      "topic_directions": [
+        "Hecken und Buchsbaum unterscheiden",
+        "Rosensträucher schneiden",
+        "Schnittformen und Zweigdichte"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_ga01_facet_2",
+      "owner_id": "v46_ga01",
+      "owner_path": [
+        "Garten",
+        "Heckenschneidroboter"
+      ],
+      "short_label": "Navigation",
+      "topic_directions": [
+        "Hindernisse in Beeten",
+        "Erkennen von Pflanzenkonturen",
+        "Umgang mit beweglichen Zweigen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_ga01_facet_3",
+      "owner_id": "v46_ga01",
+      "owner_path": [
+        "Garten",
+        "Heckenschneidroboter"
+      ],
+      "short_label": "Forschung",
+      "topic_directions": [
+        "TrimBot-Prototyp und Entwicklungsstand",
+        "Unterschied zu Rasentrimmern",
+        "Schutz von Pflanzen und Menschen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_ga02_facet_1",
+      "owner_id": "v46_ga02",
+      "owner_path": [
+        "Garten",
+        "Hundekotroboter"
+      ],
+      "short_label": "Erkennung",
+      "topic_directions": [
+        "Kot von Steinen unterscheiden",
+        "Verdeckte Stellen im Gras",
+        "Spielzeug und andere Hindernisse"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_ga02_facet_2",
+      "owner_id": "v46_ga02",
+      "owner_path": [
+        "Garten",
+        "Hundekotroboter"
+      ],
+      "short_label": "Aufnahme",
+      "topic_directions": [
+        "Sammeln ohne Verschmieren",
+        "Beutel und Hygienebox",
+        "Umgang mit unebenem Grund"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_ga02_facet_3",
+      "owner_id": "v46_ga02",
+      "owner_path": [
+        "Garten",
+        "Hundekotroboter"
+      ],
+      "short_label": "Gartenpraxis",
+      "topic_directions": [
+        "Flächenabdeckung am Zaun",
+        "Sicherheit bei spielenden Hunden",
+        "Stand von Prototyp und Markteinführung"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_ga03_facet_1",
+      "owner_id": "v46_ga03",
+      "owner_path": [
+        "Garten",
+        "Flächenpflege",
+        "Terrassenroboter"
+      ],
+      "short_label": "Beläge",
+      "topic_directions": [
+        "Pflastersteine und Fugen",
+        "Holzterrassen und Materialgrenzen",
+        "Empfindliche Steinterrassen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_ga03_facet_2",
+      "owner_id": "v46_ga03",
+      "owner_path": [
+        "Garten",
+        "Flächenpflege",
+        "Terrassenroboter"
+      ],
+      "short_label": "Reinigung",
+      "topic_directions": [
+        "Wasseranschluss und Reichweite",
+        "Algen und festhaftender Schmutz",
+        "Ränder und Außenmöbel"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_ga03_facet_3",
+      "owner_id": "v46_ga03",
+      "owner_path": [
+        "Garten",
+        "Flächenpflege",
+        "Terrassenroboter"
+      ],
+      "short_label": "Entwicklung",
+      "topic_directions": [
+        "Navigation auf Gehwegen",
+        "Sicherheitsfragen bei Hochdruck",
+        "Prototypenstand gegen Werbeversprechen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_ga05_facet_1",
+      "owner_id": "v46_ga05",
+      "owner_path": [
+        "Garten",
+        "Bienenstockroboter"
+      ],
+      "short_label": "Stockaufbau",
+      "topic_directions": [
+        "Rahmen entnehmen als Konzept",
+        "Kastenformen und Gewicht",
+        "Bienen beim Öffnen schützen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_ga05_facet_2",
+      "owner_id": "v46_ga05",
+      "owner_path": [
+        "Garten",
+        "Bienenstockroboter"
+      ],
+      "short_label": "Beobachtung",
+      "topic_directions": [
+        "Kameraauswertung an Waben",
+        "Temperatur und Stockklima",
+        "Völkerentwicklung mit Sensorik"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_ga05_facet_3",
+      "owner_id": "v46_ga05",
+      "owner_path": [
+        "Garten",
+        "Bienenstockroboter"
+      ],
+      "short_label": "Machbarkeit",
+      "topic_directions": [
+        "Kostenannahmen aus Konzept",
+        "Prototypen- und Testplanung",
+        "Abgrenzung zu reinem Smart-Beehive-Sensor"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_f04_facet_1",
+      "owner_id": "v46_f04",
+      "owner_path": [
+        "Freizeit",
+        "Pinselmalroboter"
+      ],
+      "short_label": "Maltechnik",
+      "topic_directions": [
+        "Pinsel und Farbdruck",
+        "Farbmischung auf Leinwand",
+        "Abweichungen bei wiederholten Strichen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_f04_facet_2",
+      "owner_id": "v46_f04",
+      "owner_path": [
+        "Freizeit",
+        "Pinselmalroboter"
+      ],
+      "short_label": "Kunstpraxis",
+      "topic_directions": [
+        "Zusammenarbeit zwischen Mensch und Roboter",
+        "Abstrakte Bilder und Gegenstände",
+        "Originalgemälde statt Plot-Ausdruck"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_f04_facet_3",
+      "owner_id": "v46_f04",
+      "owner_path": [
+        "Freizeit",
+        "Pinselmalroboter"
+      ],
+      "short_label": "Entwicklung",
+      "topic_directions": [
+        "Optische Kontrolle des Malfortschritts",
+        "Roboterarm und Pinselmechanik",
+        "Forschungstand e-David und Versuche"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_f05_facet_1",
+      "owner_id": "v46_f05",
+      "owner_path": [
+        "Freizeit",
+        "Musikroboter"
+      ],
+      "short_label": "Instrumente",
+      "topic_directions": [
+        "Pianotasten mit Roboterhand",
+        "Geigenbogen und Saiten",
+        "Mechanische Schlagzeuge"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_f05_facet_2",
+      "owner_id": "v46_f05",
+      "owner_path": [
+        "Freizeit",
+        "Musikroboter"
+      ],
+      "short_label": "Musiksteuerung",
+      "topic_directions": [
+        "Erkennen von Melodien",
+        "Timing und Anschlagstärke",
+        "Wiederholbare versus gelernte Musik"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_f05_facet_3",
+      "owner_id": "v46_f05",
+      "owner_path": [
+        "Freizeit",
+        "Musikroboter"
+      ],
+      "short_label": "Entwicklung",
+      "topic_directions": [
+        "Roboterhand und Fingerbewegung",
+        "Lernen durch Hören",
+        "Klangqualität und physische Grenzen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_s01_facet_1",
+      "owner_id": "v46_s01",
+      "owner_path": [
+        "Sport",
+        "Golf",
+        "Bunkerrechenroboter"
+      ],
+      "short_label": "Bunkerformen",
+      "topic_directions": [
+        "Sandflächen und Gefälle",
+        "Randbereiche und Kanten",
+        "Größe und Eignung verschiedener Bunker"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_s01_facet_2",
+      "owner_id": "v46_s01",
+      "owner_path": [
+        "Sport",
+        "Golf",
+        "Bunkerrechenroboter"
+      ],
+      "short_label": "Pflegepraxis",
+      "topic_directions": [
+        "Fahrpläne vor dem Spiel",
+        "Unterschied zum Handrechen",
+        "Wartung nach Regen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_s01_facet_3",
+      "owner_id": "v46_s01",
+      "owner_path": [
+        "Sport",
+        "Golf",
+        "Bunkerrechenroboter"
+      ],
+      "short_label": "Technik",
+      "topic_directions": [
+        "Bodenhaftung im Sand",
+        "Routenplanung an Hindernissen",
+        "Stand der Herstellererprobung"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_s02_facet_1",
+      "owner_id": "v46_s02",
+      "owner_path": [
+        "Sport",
+        "Eisaufbereitungsroboter"
+      ],
+      "short_label": "Eisflächen",
+      "topic_directions": [
+        "Vereinseisbahn und Trainingszeiten",
+        "Eiskanten und Feldgrößen",
+        "Unterschied zu manuell gefahrenen Eisbereitern"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_s02_facet_2",
+      "owner_id": "v46_s02",
+      "owner_path": [
+        "Sport",
+        "Eisaufbereitungsroboter"
+      ],
+      "short_label": "Robotik",
+      "topic_directions": [
+        "Flotten von Kleinrobotern als Konzept",
+        "Routen und Sicherheitszonen",
+        "Wasser- und Energiefragen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_s02_facet_3",
+      "owner_id": "v46_s02",
+      "owner_path": [
+        "Sport",
+        "Eisaufbereitungsroboter"
+      ],
+      "short_label": "Marktstand",
+      "topic_directions": [
+        "Prototypstatus statt Auslieferung",
+        "Herstellerziele versus Messwerte",
+        "Einsparrechnungen kritisch einordnen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_s04_facet_1",
+      "owner_id": "v46_s04",
+      "owner_path": [
+        "Sport",
+        "Ballsport",
+        "Torwartroboter"
+      ],
+      "short_label": "Training",
+      "topic_directions": [
+        "Elfmeterschüsse",
+        "Reaktion auf Schusswinkel",
+        "Jugend-/Vereinstraining"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_s04_facet_2",
+      "owner_id": "v46_s04",
+      "owner_path": [
+        "Sport",
+        "Ballsport",
+        "Torwartroboter"
+      ],
+      "short_label": "Spieltechnik",
+      "topic_directions": [
+        "Kamera- und Flugbahnerkennung",
+        "Bewegung des Torwartsystems",
+        "Begrenzung bei hohen Schüssen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_s04_facet_3",
+      "owner_id": "v46_s04",
+      "owner_path": [
+        "Sport",
+        "Ballsport",
+        "Torwartroboter"
+      ],
+      "short_label": "Veranstaltung",
+      "topic_directions": [
+        "Platzbedarf an Torwand",
+        "Aufsicht und sichere Nutzung",
+        "Miete versus feste Aufstellung"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_s05_facet_1",
+      "owner_id": "v46_s05",
+      "owner_path": [
+        "Sport",
+        "Billardroboter"
+      ],
+      "short_label": "Spielvarianten",
+      "topic_directions": [
+        "8-Ball als Demonstration",
+        "Kugelaufstellung und Spielregeln",
+        "Training gegen Maschinengegner"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_s05_facet_2",
+      "owner_id": "v46_s05",
+      "owner_path": [
+        "Sport",
+        "Billardroboter"
+      ],
+      "short_label": "Technik",
+      "topic_directions": [
+        "Kameraerkennung der Kugeln",
+        "Stoßwinkel und Kraft",
+        "Robotermechanik am Tisch"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_s05_facet_3",
+      "owner_id": "v46_s05",
+      "owner_path": [
+        "Sport",
+        "Billardroboter"
+      ],
+      "short_label": "Forschung",
+      "topic_directions": [
+        "Erzielte Prototyp-Trefferquote",
+        "Weiterentwicklung anderer Varianten",
+        "Grenzen bei realen Partien"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_s06_facet_1",
+      "owner_id": "v46_s06",
+      "owner_path": [
+        "Sport",
+        "Ballsport",
+        "Tischtennis-Spielroboter"
+      ],
+      "short_label": "Spielniveau",
+      "topic_directions": [
+        "Ballwechsel gegen Menschen",
+        "Umgang mit Drall",
+        "Unterschied zu Ballwurfgeräten"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_s06_facet_2",
+      "owner_id": "v46_s06",
+      "owner_path": [
+        "Sport",
+        "Ballsport",
+        "Tischtennis-Spielroboter"
+      ],
+      "short_label": "Robotertechnik",
+      "topic_directions": [
+        "Schnelle Bilderkennung",
+        "Reaktionszeit und Bewegungsarm",
+        "Strategie und Schlagwinkel"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_s06_facet_3",
+      "owner_id": "v46_s06",
+      "owner_path": [
+        "Sport",
+        "Ballsport",
+        "Tischtennis-Spielroboter"
+      ],
+      "short_label": "Entwicklung",
+      "topic_directions": [
+        "Tests gegen gute Spieler",
+        "Grenzen im Trainingsalltag",
+        "Zeitpunkt einer möglichen Marktreife offen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_b03_facet_1",
+      "owner_id": "v46_b03",
+      "owner_path": [
+        "Bildung",
+        "Lernhilfe",
+        "Schreiblernroboter"
+      ],
+      "short_label": "Lernaufgaben",
+      "topic_directions": [
+        "Buchstaben und Formen üben",
+        "Unterschiedliche Schriftstile",
+        "Lernfortschritt bei Übungen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_b03_facet_2",
+      "owner_id": "v46_b03",
+      "owner_path": [
+        "Bildung",
+        "Lernhilfe",
+        "Schreiblernroboter"
+      ],
+      "short_label": "Haptik",
+      "topic_directions": [
+        "Kraftanpassung beim Führen",
+        "Personalisierung der Bewegung",
+        "Sicherheit bei Handkontakt"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_b03_facet_3",
+      "owner_id": "v46_b03",
+      "owner_path": [
+        "Bildung",
+        "Lernhilfe",
+        "Schreiblernroboter"
+      ],
+      "short_label": "Forschung",
+      "topic_directions": [
+        "Versuche mit Testpersonen",
+        "Grenzen bei Lernschwierigkeiten",
+        "Unterschied zum einfachen Stiftplotter"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_b06_facet_1",
+      "owner_id": "v46_b06",
+      "owner_path": [
+        "Bildung",
+        "Forschung",
+        "EDU-Roboterhunde"
+      ],
+      "short_label": "Lernzwecke",
+      "topic_directions": [
+        "Gehmuster im Team untersuchen",
+        "Sensordaten auswerten",
+        "Robotereinsatz in Parcours"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_b06_facet_2",
+      "owner_id": "v46_b06",
+      "owner_path": [
+        "Bildung",
+        "Forschung",
+        "EDU-Roboterhunde"
+      ],
+      "short_label": "Ausrüstung",
+      "topic_directions": [
+        "EDU-Modelle und Rechenmodule",
+        "Schutz bei bewegten Robotern",
+        "Klassenräume und Außengelände"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_b06_facet_3",
+      "owner_id": "v46_b06",
+      "owner_path": [
+        "Bildung",
+        "Forschung",
+        "EDU-Roboterhunde"
+      ],
+      "short_label": "Forschung",
+      "topic_directions": [
+        "Navigation und Kartierung",
+        "Simulation von Laufverhalten",
+        "Fehleranalyse bei vierbeiniger Bewegung"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_g04_facet_1",
+      "owner_id": "v46_g04",
+      "owner_path": [
+        "Gewerbe",
+        "Profi-Mähroboter"
+      ],
+      "short_label": "Betriebsflächen",
+      "topic_directions": [
+        "Große und wechselnde Grünanlagen",
+        "Hanglagen und öffentliche Flächen",
+        "Abgrenzung zu Hausgartenflächen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_g04_facet_2",
+      "owner_id": "v46_g04",
+      "owner_path": [
+        "Gewerbe",
+        "Profi-Mähroboter"
+      ],
+      "short_label": "Maschinen",
+      "topic_directions": [
+        "Trag- und Schnittbreiten der Profimodelle",
+        "Transport zwischen Kundengrundstücken",
+        "Navigation und Sicherheitszonen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_g04_facet_3",
+      "owner_id": "v46_g04",
+      "owner_path": [
+        "Gewerbe",
+        "Profi-Mähroboter"
+      ],
+      "short_label": "Betrieb",
+      "topic_directions": [
+        "Wartung in der Saison",
+        "Schulungen der Teams",
+        "Kosten/Flächenleistung prüfen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_g05_facet_1",
+      "owner_id": "v46_g05",
+      "owner_path": [
+        "Gewerbe",
+        "Profi-Poolroboter"
+      ],
+      "short_label": "Beckentypen",
+      "topic_directions": [
+        "Öffentliches Hallenbad",
+        "Hotel- und Vereinsbecken",
+        "Große Becken und längere Laufzeiten"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_g05_facet_2",
+      "owner_id": "v46_g05",
+      "owner_path": [
+        "Gewerbe",
+        "Profi-Poolroboter"
+      ],
+      "short_label": "Reinigung",
+      "topic_directions": [
+        "Bodenreinigung und Filterkapazität",
+        "Zyklen bei öffentlicher Nutzung",
+        "Betrieb bei Badepausen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v46_g05_facet_3",
+      "owner_id": "v46_g05",
+      "owner_path": [
+        "Gewerbe",
+        "Profi-Poolroboter"
+      ],
+      "short_label": "Betreiber",
+      "topic_directions": [
+        "Einbindung in Reinigungsplan",
+        "Wartung und Gerätetransport",
+        "Investition und Ersatzteile"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu01_facet_1",
+      "owner_id": "hu_hu01",
+      "owner_path": [
+        "Humanoide",
+        "Haushalt",
+        "Haushaltsassistenten"
+      ],
+      "short_label": "Wohnräume",
+      "topic_directions": [
+        "Wie Humanoide Türschwellen und enge Flure bewältigen sollen",
+        "Greifhöhen für Schränke im Wohnraum",
+        "Treppen und Haustiere als Grenze heutiger Geräte"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu01_facet_2",
+      "owner_id": "hu_hu01",
+      "owner_path": [
+        "Humanoide",
+        "Haushalt",
+        "Haushaltsassistenten"
+      ],
+      "short_label": "Bedienung",
+      "topic_directions": [
+        "Grundautonomie gegenüber Fernhilfe",
+        "Tagesaufgaben und Unterbrechungen anordnen",
+        "Wer erhält Zugriff auf Haushaltskameras?"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu01_facet_3",
+      "owner_id": "hu_hu01",
+      "owner_path": [
+        "Humanoide",
+        "Haushalt",
+        "Haushaltsassistenten"
+      ],
+      "short_label": "Marktstand",
+      "topic_directions": [
+        "US-Vorbestellung von 1X NEO",
+        "Herstellerdemo versus eigenständiger Praxistest",
+        "Erwartungen an Humanoiden im eigenen Haushalt"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu03_facet_1",
+      "owner_id": "hu_hu03",
+      "owner_path": [
+        "Humanoide",
+        "Pflege",
+        "Fernpflegeassistenten"
+      ],
+      "short_label": "Alltagshilfe",
+      "topic_directions": [
+        "Unterstützung bei einfachen Gegenständen",
+        "Wie Aufgaben aus der Ferne angeleitet werden",
+        "Grenzen beim selbstständigen Wohnen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu03_facet_2",
+      "owner_id": "hu_hu03",
+      "owner_path": [
+        "Humanoide",
+        "Pflege",
+        "Fernpflegeassistenten"
+      ],
+      "short_label": "Fernsteuerung",
+      "topic_directions": [
+        "Wer darf einen Pflegeroboter fernbedienen?",
+        "Unterschied Fernbetrieb und Eigenständigkeit",
+        "Schutz privater Räume und Kamerabilder"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu03_facet_3",
+      "owner_id": "hu_hu03",
+      "owner_path": [
+        "Humanoide",
+        "Pflege",
+        "Fernpflegeassistenten"
+      ],
+      "short_label": "Projektstand",
+      "topic_directions": [
+        "Robody Förderziele bis Mai 2027",
+        "Prototyp und alltagstaugliches System unterscheiden",
+        "Herausforderungen der Sicherheit im Wohnraum"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu04_facet_1",
+      "owner_id": "hu_hu04",
+      "owner_path": [
+        "Humanoide",
+        "Pflege",
+        "Pflegebegleiter"
+      ],
+      "short_label": "Einrichtungen",
+      "topic_directions": [
+        "Bewohneraktivierung und Gruppengespräche",
+        "Wegweiser und Informationsausgabe",
+        "Abgrenzung von therapeutischer Behandlung"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu04_facet_2",
+      "owner_id": "hu_hu04",
+      "owner_path": [
+        "Humanoide",
+        "Pflege",
+        "Pflegebegleiter"
+      ],
+      "short_label": "Einführung",
+      "topic_directions": [
+        "Mitarbeiter anleiten und Aufgaben beschränken",
+        "Einsatzzeiten in Wohnbereichen",
+        "Akzeptanz bei Bewohnern und Angehörigen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu04_facet_3",
+      "owner_id": "hu_hu04",
+      "owner_path": [
+        "Humanoide",
+        "Pflege",
+        "Pflegebegleiter"
+      ],
+      "short_label": "Datenschutz",
+      "topic_directions": [
+        "Sprachdialog mit externem Dienst erklären",
+        "Bildverarbeitung am Gerät unterscheiden",
+        "Zustimmung und Widerruf im Pflegeheim"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu06_facet_1",
+      "owner_id": "hu_hu06",
+      "owner_path": [
+        "Humanoide",
+        "Arbeit",
+        "Lagerarbeiter"
+      ],
+      "short_label": "Lageraufgaben",
+      "topic_directions": [
+        "Behälter aufnehmen und bewegen",
+        "Kistenübergabe zwischen Stationen",
+        "Handhabung in Menschen-geeigneten Arbeitswegen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu06_facet_2",
+      "owner_id": "hu_hu06",
+      "owner_path": [
+        "Humanoide",
+        "Arbeit",
+        "Lagerarbeiter"
+      ],
+      "short_label": "Pilotbetrieb",
+      "topic_directions": [
+        "Was ein GXO-Einsatz tatsächlich belegt",
+        "Pilotprojekt versus gewerbliche Skalierung",
+        "Einschränkungen bei kleineren Lagerhallen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu06_facet_3",
+      "owner_id": "hu_hu06",
+      "owner_path": [
+        "Humanoide",
+        "Arbeit",
+        "Lagerarbeiter"
+      ],
+      "short_label": "Wirtschaftlichkeit",
+      "topic_directions": [
+        "Aufwand für Einlernen eines Roboters",
+        "Sicherheit beim Arbeiten zwischen Personen",
+        "Kosten- und Leistungsangaben richtig prüfen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu07_facet_1",
+      "owner_id": "hu_hu07",
+      "owner_path": [
+        "Humanoide",
+        "Arbeit",
+        "Produktionshelfer"
+      ],
+      "short_label": "Arbeitsplätze",
+      "topic_directions": [
+        "Bauteile greifen und passend ablegen",
+        "Pilotaufgaben im BMW-Karosseriebau",
+        "Mensch-Roboter-Arbeit im vorhandenen Raum"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu07_facet_2",
+      "owner_id": "hu_hu07",
+      "owner_path": [
+        "Humanoide",
+        "Arbeit",
+        "Produktionshelfer"
+      ],
+      "short_label": "Fertigung",
+      "topic_directions": [
+        "Unterschied zum stationären Roboterarm",
+        "Wie Roboter in Serienabläufe eingeführt werden",
+        "Welche Tätigkeiten BMW nur testet"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu07_facet_3",
+      "owner_id": "hu_hu07",
+      "owner_path": [
+        "Humanoide",
+        "Arbeit",
+        "Produktionshelfer"
+      ],
+      "short_label": "Sicherheit",
+      "topic_directions": [
+        "Schutzzonen und Berührungsschutz",
+        "Ausfallverhalten bei manuellem Eingreifen",
+        "Integration ohne falsche Autonomieversprechen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu08_facet_1",
+      "owner_id": "hu_hu08",
+      "owner_path": [
+        "Humanoide",
+        "Arbeit",
+        "Empfangsroboter"
+      ],
+      "short_label": "Empfang",
+      "topic_directions": [
+        "Kunden begrüßen und weiterleiten",
+        "Sprachen und Auskunftsgrenzen",
+        "Alltag im kleinen Laden oder Hotel"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu08_facet_2",
+      "owner_id": "hu_hu08",
+      "owner_path": [
+        "Humanoide",
+        "Arbeit",
+        "Empfangsroboter"
+      ],
+      "short_label": "Betrieb",
+      "topic_directions": [
+        "Personalunterstützung statt Personalersatz",
+        "Aufstellen und Betreuung der Roboter",
+        "Miete für Veranstaltungen versus Dauerbetrieb"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu08_facet_3",
+      "owner_id": "hu_hu08",
+      "owner_path": [
+        "Humanoide",
+        "Arbeit",
+        "Empfangsroboter"
+      ],
+      "short_label": "Vertrauen",
+      "topic_directions": [
+        "Bild- und Sprachaufnahmen beim Kundenkontakt",
+        "Erkennbare Grenzen von Antworten",
+        "Barrierefreiheit für verschiedene Gäste"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu10_facet_1",
+      "owner_id": "hu_hu10",
+      "owner_path": [
+        "Humanoide",
+        "Arbeit",
+        "Werkstatthelfer"
+      ],
+      "short_label": "Betriebsgrößen",
+      "topic_directions": [
+        "Werkstattwege zwischen Maschinen",
+        "Werkstückübergabe ohne Großanlage",
+        "Wenige wechselnde Aufgaben im Familienbetrieb"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu10_facet_2",
+      "owner_id": "hu_hu10",
+      "owner_path": [
+        "Humanoide",
+        "Arbeit",
+        "Werkstatthelfer"
+      ],
+      "short_label": "Einführung",
+      "topic_directions": [
+        "Platz und Zugänglichkeit in kleinen Betrieben",
+        "Forschungsstand von KMUmanoid",
+        "Sicherheitsrisiken ohne Spezialpersonal"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu10_facet_3",
+      "owner_id": "hu_hu10",
+      "owner_path": [
+        "Humanoide",
+        "Arbeit",
+        "Werkstatthelfer"
+      ],
+      "short_label": "Kostenfragen",
+      "topic_directions": [
+        "Wirtschaftlichkeit bei seltenen Aufgaben",
+        "Trainingsaufwand je neuer Tätigkeit",
+        "Leasing- und Dienstleistungsmodelle als Perspektive"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu11_facet_1",
+      "owner_id": "hu_hu11",
+      "owner_path": [
+        "Humanoide",
+        "Bildung",
+        "Entwicklungsroboter"
+      ],
+      "short_label": "Programmierung",
+      "topic_directions": [
+        "EDU-Version gegenüber Standardmodell",
+        "Bewegungsprogramme und SDK",
+        "Softwaretest im abgesicherten Versuchsraum"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu11_facet_2",
+      "owner_id": "hu_hu11",
+      "owner_path": [
+        "Humanoide",
+        "Bildung",
+        "Entwicklungsroboter"
+      ],
+      "short_label": "Messungen",
+      "topic_directions": [
+        "Bewegungsfreiheit und Sensorsysteme",
+        "Ergebnisse Fraunhofer G1-Benchmark",
+        "Greifen versus Hersteller-Werbedemo"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu11_facet_3",
+      "owner_id": "hu_hu11",
+      "owner_path": [
+        "Humanoide",
+        "Bildung",
+        "Entwicklungsroboter"
+      ],
+      "short_label": "Laborbetrieb",
+      "topic_directions": [
+        "Platzbedarf und Schutzbereich",
+        "Laden und Wartung im Uni-Labor",
+        "Fehlende Fertigfähigkeiten nach Kauf"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu12_facet_1",
+      "owner_id": "hu_hu12",
+      "owner_path": [
+        "Humanoide",
+        "Bildung",
+        "Schulroboter"
+      ],
+      "short_label": "Unterricht",
+      "topic_directions": [
+        "Robotergesten im Klassenraum",
+        "Gesprächsaufgaben und Sprachübungen",
+        "MINT-Fragen mit körperlicher Demonstration"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu12_facet_2",
+      "owner_id": "hu_hu12",
+      "owner_path": [
+        "Humanoide",
+        "Bildung",
+        "Schulroboter"
+      ],
+      "short_label": "Schulpraxis",
+      "topic_directions": [
+        "Altersangemessene Lernaufgaben",
+        "Roboterstunden für Lerngruppen planen",
+        "Lehrkräfte und Robotik-Kurse abstimmen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu12_facet_3",
+      "owner_id": "hu_hu12",
+      "owner_path": [
+        "Humanoide",
+        "Bildung",
+        "Schulroboter"
+      ],
+      "short_label": "Schutz",
+      "topic_directions": [
+        "Kamera und Ton im Unterricht",
+        "Einverständnis bei Minderjährigen",
+        "Unterschied Telepräsenz und humanoider Lehrer"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu13_facet_1",
+      "owner_id": "hu_hu13",
+      "owner_path": [
+        "Humanoide",
+        "Unterhaltung",
+        "Showroboter"
+      ],
+      "short_label": "Auftritte",
+      "topic_directions": [
+        "Messemoderation und Interaktion",
+        "Humanoide Roboter im Museum",
+        "Bühnenanimation statt Haushaltsdienst"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu13_facet_2",
+      "owner_id": "hu_hu13",
+      "owner_path": [
+        "Humanoide",
+        "Unterhaltung",
+        "Showroboter"
+      ],
+      "short_label": "Organisation",
+      "topic_directions": [
+        "Mietsystem gegenüber Kauf",
+        "Technische Betreuung am Messestand",
+        "Sprachvorführung und Live-Moderation"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu13_facet_3",
+      "owner_id": "hu_hu13",
+      "owner_path": [
+        "Humanoide",
+        "Unterhaltung",
+        "Showroboter"
+      ],
+      "short_label": "Grenzen",
+      "topic_directions": [
+        "Gesichtsmimik als Showfunktion",
+        "Sprach-KI gegenüber realen Fähigkeiten",
+        "Sicherer Abstand und Vorführbedingungen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu14_facet_1",
+      "owner_id": "hu_hu14",
+      "owner_path": [
+        "Humanoide",
+        "Unterhaltung",
+        "Gesprächsroboter"
+      ],
+      "short_label": "Kommunikation",
+      "topic_directions": [
+        "Wie ein Gesicht dem Gespräch Ausdruck gibt",
+        "Sprachdialog und individuelle Rollen",
+        "Grenzen angeblicher emotionaler Reaktionen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu14_facet_2",
+      "owner_id": "hu_hu14",
+      "owner_path": [
+        "Humanoide",
+        "Unterhaltung",
+        "Gesprächsroboter"
+      ],
+      "short_label": "Alltag",
+      "topic_directions": [
+        "Tischgeräte gegenüber Ganzkörper-Showroboter",
+        "Privatheit bei Gesprächen zuhause",
+        "Bewegliche Roboterteile und tatsächliche Mobilität"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu14_facet_3",
+      "owner_id": "hu_hu14",
+      "owner_path": [
+        "Humanoide",
+        "Unterhaltung",
+        "Gesprächsroboter"
+      ],
+      "short_label": "Marktstand",
+      "topic_directions": [
+        "Reservierung versus Auslieferung 2027",
+        "Bedeutung zusätzlicher AI-Abos",
+        "Herstellerziele versus eigene Prüfung"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu15_facet_1",
+      "owner_id": "hu_hu15",
+      "owner_path": [
+        "Humanoide",
+        "Intimrobotik",
+        "Intimroboter"
+      ],
+      "short_label": "Robotikgrade",
+      "topic_directions": [
+        "Bewegliche Mimik gegenüber statischer Puppe",
+        "Warum Kopfbewegung keine autonome Ganzkörperpflege ist",
+        "Sprachdialog und künstliche Interaktion unterscheiden"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu15_facet_2",
+      "owner_id": "hu_hu15",
+      "owner_path": [
+        "Humanoide",
+        "Intimrobotik",
+        "Intimroboter"
+      ],
+      "short_label": "Privatsphäre",
+      "topic_directions": [
+        "Sprachdaten und Einwilligung",
+        "Welche Daten Apps verarbeiten könnten",
+        "Gerätesicherheit und Zugangsschutz"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "hu_hu15_facet_3",
+      "owner_id": "hu_hu15",
+      "owner_path": [
+        "Humanoide",
+        "Intimrobotik",
+        "Intimroboter"
+      ],
+      "short_label": "Entwicklung",
+      "topic_directions": [
+        "Stand der Harmony-Warteliste",
+        "Teilkörper gegen Vollkörperkonzepte",
+        "Grenzen heutiger Interaktionssysteme"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0220_facet_1",
+      "owner_id": "v52_rob-0220",
+      "owner_path": [
+        "Garten",
+        "Mückenfangroboter"
+      ],
+      "short_label": "Erkennung",
+      "topic_directions": [
+        "Mücken von anderen Insekten unterscheiden",
+        "Verfolgung beweglicher Ziele",
+        "Grenzen von Sensoren im Außenbereich"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0220_facet_2",
+      "owner_id": "v52_rob-0220",
+      "owner_path": [
+        "Garten",
+        "Mückenfangroboter"
+      ],
+      "short_label": "Einsatz",
+      "topic_directions": [
+        "Kleine Gärten und Terrassen als mögliches Einsatzszenario",
+        "Flugzeit und Fläche bei Prototypen",
+        "Abgrenzung zu stationären Fallen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0220_facet_3",
+      "owner_id": "v52_rob-0220",
+      "owner_path": [
+        "Garten",
+        "Mückenfangroboter"
+      ],
+      "short_label": "Entwicklung",
+      "topic_directions": [
+        "Nachgewiesene Versuche des Prototyps",
+        "Energieverbrauch und Wartung als offene Fragen",
+        "Sicherheit für andere Insekten und Menschen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0408_facet_1",
+      "owner_id": "v52_rob-0408",
+      "owner_path": [
+        "Pflege",
+        "Haarpflege",
+        "Haarwaschroboter"
+      ],
+      "short_label": "Waschaufgaben",
+      "topic_directions": [
+        "Kopfhautkontakt und Sensorik",
+        "Unterschiedliche Haarlängen als Herausforderung",
+        "Waschmittel und Spülabläufe"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0408_facet_2",
+      "owner_id": "v52_rob-0408",
+      "owner_path": [
+        "Pflege",
+        "Haarpflege",
+        "Haarwaschroboter"
+      ],
+      "short_label": "Pflegebetrieb",
+      "topic_directions": [
+        "Behandlung in betreuten Einrichtungen",
+        "Hygiene zwischen Nutzenden",
+        "Mitwirkung von Pflegepersonal"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0408_facet_3",
+      "owner_id": "v52_rob-0408",
+      "owner_path": [
+        "Pflege",
+        "Haarpflege",
+        "Haarwaschroboter"
+      ],
+      "short_label": "Forschung",
+      "topic_directions": [
+        "Forschungsstand des Demonstrators",
+        "Kontaktkraft und Sicherheit",
+        "Abgrenzung zu Kämmen und Haarschneiden"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0424_facet_1",
+      "owner_id": "v52_rob-0424",
+      "owner_path": [
+        "Pflege",
+        "Mobilität",
+        "Blindenführroboter"
+      ],
+      "short_label": "Orientierung",
+      "topic_directions": [
+        "Route vorzeigen und später wiederholen",
+        "Kreuzungen und Hindernisse",
+        "Unterschied zu Navi-Apps"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0424_facet_2",
+      "owner_id": "v52_rob-0424",
+      "owner_path": [
+        "Pflege",
+        "Mobilität",
+        "Blindenführroboter"
+      ],
+      "short_label": "Assistenz",
+      "topic_directions": [
+        "Führgeschwindigkeit und Nutzersignale",
+        "Unvorhergesehene Situationen",
+        "Alltagsgrenzen im öffentlichen Raum"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0424_facet_3",
+      "owner_id": "v52_rob-0424",
+      "owner_path": [
+        "Pflege",
+        "Mobilität",
+        "Blindenführroboter"
+      ],
+      "short_label": "Forschung",
+      "topic_directions": [
+        "Tests mit Betroffenen",
+        "Auswirkungen von Geräuschen und ruckartigen Bewegungen",
+        "Stand von Forschung und Verfügbarkeit"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0571_facet_1",
+      "owner_id": "v52_rob-0571",
+      "owner_path": [
+        "Garten",
+        "Teichpflegeroboter"
+      ],
+      "short_label": "Gewässer",
+      "topic_directions": [
+        "Gartenteich und privater Zierteich als Nutzungsidee",
+        "Algen von Schwimmpflanzen unterscheiden",
+        "Schutz von Fischen und Bodengrund"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0571_facet_2",
+      "owner_id": "v52_rob-0571",
+      "owner_path": [
+        "Garten",
+        "Teichpflegeroboter"
+      ],
+      "short_label": "Funktion",
+      "topic_directions": [
+        "Algenaufnahme statt Poolbodenbürsten",
+        "Oberflächenmüll gegenüber Algenreinigung",
+        "Antrieb und Bergung im flachen Wasser"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0571_facet_3",
+      "owner_id": "v52_rob-0571",
+      "owner_path": [
+        "Garten",
+        "Teichpflegeroboter"
+      ],
+      "short_label": "Entwicklung",
+      "topic_directions": [
+        "AURABot als dokumentierter Teilaufbau",
+        "SCRUB V2 als größerer Feldtest",
+        "Grenzen einer privaten Miniversion"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0568_facet_1",
+      "owner_id": "v52_rob-0568",
+      "owner_path": [
+        "Sport",
+        "Reaktionstrainer"
+      ],
+      "short_label": "Trainingsarten",
+      "topic_directions": [
+        "Reaktionsübungen im geregelten Sport",
+        "Anpassung an Erfahrungsniveau",
+        "Sichere Übungssituationen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0568_facet_2",
+      "owner_id": "v52_rob-0568",
+      "owner_path": [
+        "Sport",
+        "Reaktionstrainer"
+      ],
+      "short_label": "Sensorik",
+      "topic_directions": [
+        "Bewegung wahrnehmen",
+        "Anpassung der Zielbewegung",
+        "Grenzen schneller Erkennung"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0568_facet_3",
+      "owner_id": "v52_rob-0568",
+      "owner_path": [
+        "Sport",
+        "Reaktionstrainer"
+      ],
+      "short_label": "Forschung",
+      "topic_directions": [
+        "Prototyp und Versuchsbedingungen",
+        "Unterschied zu statischen Trainingsgeräten",
+        "Sicherheitsanforderungen bei Interaktion"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0440_facet_1",
+      "owner_id": "v52_rob-0440",
+      "owner_path": [
+        "Sport",
+        "Kletterwand-Routenroboter"
+      ],
+      "short_label": "Routenbau",
+      "topic_directions": [
+        "Griffmuster für unterschiedliche Schwierigkeitsstufen",
+        "Unterschiedliche Wandneigungen",
+        "Wechsel von Routen im Trainingsbetrieb"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0440_facet_2",
+      "owner_id": "v52_rob-0440",
+      "owner_path": [
+        "Sport",
+        "Kletterwand-Routenroboter"
+      ],
+      "short_label": "Mechanik",
+      "topic_directions": [
+        "Greifen und Befestigen von Griffen als Konzept",
+        "Erkennen von Schraubpositionen",
+        "Kontrolle der Haltefestigkeit als offene Frage"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0440_facet_3",
+      "owner_id": "v52_rob-0440",
+      "owner_path": [
+        "Sport",
+        "Kletterwand-Routenroboter"
+      ],
+      "short_label": "Entwicklung",
+      "topic_directions": [
+        "Patentinhalt versus getesteter Roboter",
+        "Sicherheitsanforderungen im Kletterzentrum",
+        "Wirtschaftlichkeit als hypothetische Prüfung"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0457_facet_1",
+      "owner_id": "v52_rob-0457",
+      "owner_path": [
+        "Gewerbe",
+        "Elektronik-Reparaturroboter"
+      ],
+      "short_label": "Schadensarten",
+      "topic_directions": [
+        "Fehler an Platinen finden",
+        "Nachlöten kleiner Bauteile",
+        "Unterschied zu Serienlöten"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0457_facet_2",
+      "owner_id": "v52_rob-0457",
+      "owner_path": [
+        "Gewerbe",
+        "Elektronik-Reparaturroboter"
+      ],
+      "short_label": "Reparaturbetrieb",
+      "topic_directions": [
+        "Wechselnde Gerätemodelle",
+        "Kleinserien versus individuelle Reparatur",
+        "Ausschuss- und Wiederverwendungsquoten"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0457_facet_3",
+      "owner_id": "v52_rob-0457",
+      "owner_path": [
+        "Gewerbe",
+        "Elektronik-Reparaturroboter"
+      ],
+      "short_label": "Technik",
+      "topic_directions": [
+        "Kamera und Lötwerkzeug koppeln",
+        "Bewegungsgenauigkeit bei Schäden",
+        "Grenzen in Repartly/ABB-Beispielen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0473_facet_1",
+      "owner_id": "v52_rob-0473",
+      "owner_path": [
+        "Gewerbe",
+        "Biotoppflege-Roboter"
+      ],
+      "short_label": "Einsatzflächen",
+      "topic_directions": [
+        "Straßenrand und Böschung",
+        "Grünflächen mit Wildpflanzen",
+        "Abgrenzung zur Golfplatzpflege"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0473_facet_2",
+      "owner_id": "v52_rob-0473",
+      "owner_path": [
+        "Gewerbe",
+        "Biotoppflege-Roboter"
+      ],
+      "short_label": "Naturschutz",
+      "topic_directions": [
+        "Blühflächen erhalten",
+        "Nacherneuerung heimischer Samen",
+        "Verhalten bei Insektenhabitaten"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0473_facet_3",
+      "owner_id": "v52_rob-0473",
+      "owner_path": [
+        "Gewerbe",
+        "Biotoppflege-Roboter"
+      ],
+      "short_label": "Forschung",
+      "topic_directions": [
+        "Biobots-Projektstand 2026-2028",
+        "Sicherheit am öffentlichen Verkehrsraum",
+        "Mäh- und Nachsaatmodul als Entwicklung"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0562_facet_1",
+      "owner_id": "v52_rob-0562",
+      "owner_path": [
+        "Haushalt",
+        "Geschirrspüler-Einräumroboter"
+      ],
+      "short_label": "Geschirr",
+      "topic_directions": [
+        "Teller und Gläser unterschiedlich greifen",
+        "Besteck richtig einsortieren",
+        "Unregelmäßige Formen und Flüssigkeitsreste"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0562_facet_2",
+      "owner_id": "v52_rob-0562",
+      "owner_path": [
+        "Haushalt",
+        "Geschirrspüler-Einräumroboter"
+      ],
+      "short_label": "Küche",
+      "topic_directions": [
+        "Geschirrkorb und Möbelposition",
+        "Abstand zur Arbeitsplatte",
+        "Zusammenarbeit mit Menschen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0562_facet_3",
+      "owner_id": "v52_rob-0562",
+      "owner_path": [
+        "Haushalt",
+        "Geschirrspüler-Einräumroboter"
+      ],
+      "short_label": "Entwicklung",
+      "topic_directions": [
+        "Simulation versus realer Greifer",
+        "Bisher demonstrierte Teilfunktionen",
+        "Sicherheitsgrenzen bei Glas und Porzellan"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0570_facet_1",
+      "owner_id": "v52_rob-0570",
+      "owner_path": [
+        "Pflege",
+        "Haarpflege",
+        "Haarpflegeroboter"
+      ],
+      "short_label": "Berührung",
+      "topic_directions": [
+        "Robotisches Fingerkämmen bei unterschiedlichen Frisuren",
+        "Weiche Greifer gegenüber starren Werkzeugen",
+        "Kräfte am Haar und an der Kopfhaut begrenzen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0570_facet_2",
+      "owner_id": "v52_rob-0570",
+      "owner_path": [
+        "Pflege",
+        "Haarpflege",
+        "Haarpflegeroboter"
+      ],
+      "short_label": "Pflegealltag",
+      "topic_directions": [
+        "Anwendungen bei eingeschränkter Beweglichkeit",
+        "Einwilligung, Komfort und Abbruch der Behandlung",
+        "Haartypen und individuelle Empfindlichkeiten"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    },
+    {
+      "source_id": "v52_rob-0570_facet_3",
+      "owner_id": "v52_rob-0570",
+      "owner_path": [
+        "Pflege",
+        "Haarpflege",
+        "Haarpflegeroboter"
+      ],
+      "short_label": "Forschung",
+      "topic_directions": [
+        "MOE-Hair als Forschungsrobotik aus 2025",
+        "Versuche an Modellköpfen und ihre Grenzen",
+        "Nutzerstudie mit zwölf Teilnehmenden richtig einordnen"
+      ],
+      "slug_policy": "sanitize_title of full owner path + short label, prevent collisions"
+    }
+  ],
+  "hold_pages": [
+    {
+      "source_id": "v46_h03",
+      "path": [
+        "Haushalt",
+        "Kommunikation",
+        "Telepräsenzroboter"
+      ]
+    },
+    {
+      "source_id": "v46_h06",
+      "path": [
+        "Haushalt",
+        "Alltagshilfe",
+        "Aufräumroboter"
+      ]
+    },
+    {
+      "source_id": "v46_h07",
+      "path": [
+        "Haushalt",
+        "Reinigung",
+        "Nasswischroboter"
+      ]
+    },
+    {
+      "source_id": "v46_h10",
+      "path": [
+        "Haushalt",
+        "Alltagshilfe",
+        "Servierroboter"
+      ]
+    },
+    {
+      "source_id": "v46_h12",
+      "path": [
+        "Haushalt",
+        "Kommunikation",
+        "Begleitroboter"
+      ]
+    },
+    {
+      "source_id": "v46_ga04",
+      "path": [
+        "Garten",
+        "Grillreinigungsroboter"
+      ]
+    },
+    {
+      "source_id": "v46_f01",
+      "path": [
+        "Freizeit",
+        "Outdoor",
+        "Unterwasserroboter"
+      ]
+    },
+    {
+      "source_id": "v46_f02",
+      "path": [
+        "Freizeit",
+        "Filmen",
+        "Kamerabewegungsroboter"
+      ]
+    },
+    {
+      "source_id": "v46_f03",
+      "path": [
+        "Freizeit",
+        "Filmen",
+        "Folgedrohnen"
+      ]
+    },
+    {
+      "source_id": "v46_s03",
+      "path": [
+        "Sport",
+        "Ballsport",
+        "Badmintonroboter"
+      ]
+    },
+    {
+      "source_id": "v46_s07",
+      "path": [
+        "Sport",
+        "Sportkameraroboter"
+      ]
+    },
+    {
+      "source_id": "v46_b01",
+      "path": [
+        "Bildung",
+        "Roboterbaukästen"
+      ]
+    },
+    {
+      "source_id": "v46_b02",
+      "path": [
+        "Bildung",
+        "Forschung",
+        "ROS-Roboter"
+      ]
+    },
+    {
+      "source_id": "v46_b04",
+      "path": [
+        "Bildung",
+        "Forschung",
+        "Lehrroboterarme"
+      ]
+    },
+    {
+      "source_id": "v46_b05",
+      "path": [
+        "Bildung",
+        "Lernhilfe",
+        "Leselernroboter"
+      ]
+    },
+    {
+      "source_id": "v46_b07",
+      "path": [
+        "Bildung",
+        "Forschung",
+        "Chemielaborroboter"
+      ]
+    }
+  ],
+  "hold_categories": [
+    {
+      "source_id": "v46_h03_facet_1",
+      "owner_id": "v46_h03"
+    },
+    {
+      "source_id": "v46_h03_facet_2",
+      "owner_id": "v46_h03"
+    },
+    {
+      "source_id": "v46_h03_facet_3",
+      "owner_id": "v46_h03"
+    },
+    {
+      "source_id": "v46_h06_facet_1",
+      "owner_id": "v46_h06"
+    },
+    {
+      "source_id": "v46_h06_facet_2",
+      "owner_id": "v46_h06"
+    },
+    {
+      "source_id": "v46_h06_facet_3",
+      "owner_id": "v46_h06"
+    },
+    {
+      "source_id": "v46_h07_facet_1",
+      "owner_id": "v46_h07"
+    },
+    {
+      "source_id": "v46_h07_facet_2",
+      "owner_id": "v46_h07"
+    },
+    {
+      "source_id": "v46_h07_facet_3",
+      "owner_id": "v46_h07"
+    },
+    {
+      "source_id": "v46_h10_facet_1",
+      "owner_id": "v46_h10"
+    },
+    {
+      "source_id": "v46_h10_facet_2",
+      "owner_id": "v46_h10"
+    },
+    {
+      "source_id": "v46_h10_facet_3",
+      "owner_id": "v46_h10"
+    },
+    {
+      "source_id": "v46_h12_facet_1",
+      "owner_id": "v46_h12"
+    },
+    {
+      "source_id": "v46_h12_facet_2",
+      "owner_id": "v46_h12"
+    },
+    {
+      "source_id": "v46_h12_facet_3",
+      "owner_id": "v46_h12"
+    },
+    {
+      "source_id": "v46_ga04_facet_1",
+      "owner_id": "v46_ga04"
+    },
+    {
+      "source_id": "v46_ga04_facet_2",
+      "owner_id": "v46_ga04"
+    },
+    {
+      "source_id": "v46_ga04_facet_3",
+      "owner_id": "v46_ga04"
+    },
+    {
+      "source_id": "v46_f01_facet_1",
+      "owner_id": "v46_f01"
+    },
+    {
+      "source_id": "v46_f01_facet_2",
+      "owner_id": "v46_f01"
+    },
+    {
+      "source_id": "v46_f01_facet_3",
+      "owner_id": "v46_f01"
+    },
+    {
+      "source_id": "v46_f02_facet_1",
+      "owner_id": "v46_f02"
+    },
+    {
+      "source_id": "v46_f02_facet_2",
+      "owner_id": "v46_f02"
+    },
+    {
+      "source_id": "v46_f02_facet_3",
+      "owner_id": "v46_f02"
+    },
+    {
+      "source_id": "v46_f03_facet_1",
+      "owner_id": "v46_f03"
+    },
+    {
+      "source_id": "v46_f03_facet_2",
+      "owner_id": "v46_f03"
+    },
+    {
+      "source_id": "v46_f03_facet_3",
+      "owner_id": "v46_f03"
+    },
+    {
+      "source_id": "v46_s03_facet_1",
+      "owner_id": "v46_s03"
+    },
+    {
+      "source_id": "v46_s03_facet_2",
+      "owner_id": "v46_s03"
+    },
+    {
+      "source_id": "v46_s03_facet_3",
+      "owner_id": "v46_s03"
+    },
+    {
+      "source_id": "v46_s07_facet_1",
+      "owner_id": "v46_s07"
+    },
+    {
+      "source_id": "v46_s07_facet_2",
+      "owner_id": "v46_s07"
+    },
+    {
+      "source_id": "v46_s07_facet_3",
+      "owner_id": "v46_s07"
+    },
+    {
+      "source_id": "v46_b01_facet_1",
+      "owner_id": "v46_b01"
+    },
+    {
+      "source_id": "v46_b01_facet_2",
+      "owner_id": "v46_b01"
+    },
+    {
+      "source_id": "v46_b01_facet_3",
+      "owner_id": "v46_b01"
+    },
+    {
+      "source_id": "v46_b02_facet_1",
+      "owner_id": "v46_b02"
+    },
+    {
+      "source_id": "v46_b02_facet_2",
+      "owner_id": "v46_b02"
+    },
+    {
+      "source_id": "v46_b02_facet_3",
+      "owner_id": "v46_b02"
+    },
+    {
+      "source_id": "v46_b04_facet_1",
+      "owner_id": "v46_b04"
+    },
+    {
+      "source_id": "v46_b04_facet_2",
+      "owner_id": "v46_b04"
+    },
+    {
+      "source_id": "v46_b04_facet_3",
+      "owner_id": "v46_b04"
+    },
+    {
+      "source_id": "v46_b05_facet_1",
+      "owner_id": "v46_b05"
+    },
+    {
+      "source_id": "v46_b05_facet_2",
+      "owner_id": "v46_b05"
+    },
+    {
+      "source_id": "v46_b05_facet_3",
+      "owner_id": "v46_b05"
+    },
+    {
+      "source_id": "v46_b07_facet_1",
+      "owner_id": "v46_b07"
+    },
+    {
+      "source_id": "v46_b07_facet_2",
+      "owner_id": "v46_b07"
+    },
+    {
+      "source_id": "v46_b07_facet_3",
+      "owner_id": "v46_b07"
+    }
+  ]
+}
