@@ -21,6 +21,15 @@ $id2=$rm->invokeArgs(null,[&$state,$other,'ALT_FREIGABE']);
 $checks['missing_original_slot_remains_empty']=($state['orders'][$id2]['plan_slot']??'')==='';
 $checks['missing_original_id_remains_empty']=($state['orders'][$id2]['article_id']??'')==='';
 $checks['missing_original_identity_on_hold']=($state['orders'][$id2]['status']??'')==='METADATEN_OFFEN';
+$partial=$fields;$partial['source_id']='orig-id-777';$partial['target_keyword']='pferdedecken reinigen nach regen';$partial['plan_slot']='';
+$id3=$rm->invokeArgs(null,[&$state,$partial,'ALT_FREIGABE']);
+$checks['partial_original_canonical_preserved']=($state['orders'][$id3]['article_id']??'')===$original;
+$checks['partial_original_identity_held']=($state['orders'][$id3]['status']??'')==='METADATEN_OFFEN';
+$half=$fields;$half['source_id']='orig-id-778';$half['target_keyword']='pferdedecken reinigen im winter';$half['article_id']='';
+$id4=$rm->invokeArgs(null,[&$state,$half,'ALT_FREIGABE']);
+$checks['partial_original_slot_preserved']=($state['orders'][$id4]['plan_slot']??'')===$slot;
+$checks['slot_without_original_article_held']=($state['orders'][$id4]['status']??'')==='METADATEN_OFFEN';
+
 try{$bad=$fields;$bad['source_id']='orig-id-789';$bad['target_keyword']='pferdedecken neu';$bad['plan_slot']=str_repeat('b',64);$rm->invokeArgs(null,[&$state,$bad,'ALT_FREIGABE']);$checks['mismatched_identity_rejected']=false;}catch(RuntimeException $ex){$checks['mismatched_identity_rejected']=$ex->getMessage()==='SLOT_ARTICLE_ID_MISMATCH';}
 $result=['pass'=>!in_array(false,$checks,true),'checks'=>$checks,'source'=>'Original PSERC_Plan_Slot_Identity and existing TXE enqueue'];
 echo json_encode($result,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES),"\n";exit($result['pass']?0:1);
