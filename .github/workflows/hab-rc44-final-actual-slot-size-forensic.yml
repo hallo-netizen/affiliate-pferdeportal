@@ -1,4 +1,4 @@
-name: HAB actual end-to-end failure proof: saved slot vs page slot and grid image sizes (READ ONLY)
+name: 'HAB end-to-end failure proof: saved slot vs page slot and image size (READ ONLY)'
 on:
   push:
     branches: [hab-affiliate-rc44-frontend-slot-and-source-target-20261114]
