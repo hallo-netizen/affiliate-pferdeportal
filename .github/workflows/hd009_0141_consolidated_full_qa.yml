@@ -9,6 +9,7 @@ on:
       - scripts/hd009_0141_compare_qa.py
       - scripts/hd009_0141_refresh_qa.py
       - scripts/hd009_0141_routing_qa.py
+      - scripts/hd009_0141_storage_qa.py
 permissions:
   contents: read
 jobs:
@@ -111,6 +112,13 @@ jobs:
             /tmp/HOBBY_DEPOT_HD009_0.1.41_SINGLE_KISS_TEST.zip /tmp/hd009_0141_compare.php
           php -l /tmp/hd009_0141_compare.php
           php /tmp/hd009_0141_compare.php
+      - name: Original importer and materializer - DB write/read failures must not retire valid campaigns
+        run: |
+          set -e
+          python3 scripts/hd009_0141_storage_qa.py \
+            /tmp/HOBBY_DEPOT_HD009_0.1.41_SINGLE_KISS_TEST.zip /tmp/hd009_0141_stage.php
+          php -l /tmp/hd009_0141_stage.php
+          php /tmp/hd009_0141_stage.php
       - name: One original product-placement authority, no unrelated article fallback
         run: |
           set -e
