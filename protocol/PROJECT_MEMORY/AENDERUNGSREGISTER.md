@@ -2048,3 +2048,10 @@ Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wa
 - **Beleg:** Robotik Recherche CURRENT V52 (inkl. research_round_v43/v44); V52 Fachbaum; Hersteller KSB / Grünbeck. Sonstige Vorschläge sind als ungeprüft gekennzeichnet.
 - **Umfang:** Zielvertrag, Fachabgrenzung und Kategorie-Plugin-Workflow korrigiert; W2-Originalzahlen unverändert, neun gezielte Grenzprüfungen und sechs Industrie-Landing-Themen als Rechercheplan.
 - **Keine Live-Änderung:** keine WP-Seiten, kein DataForSEO-Aufruf, keine Plugin-ZIP-Entwicklung, keine anderen Projektgebäude betroffen.
+
+
+## 2026-11-14 – W4 Wassertechnik: Industrie-Fachbaum nach Quellenprüfung
+- Die neun W3-Grenzfälle vollständig bearbeitet. Fünf produktbezogene zusätzliche Fachseiten plausibel, drei keine neuen Seiten, ein industrieller Tauchmotorpumpenfall in Feststoffpumpe integriert.
+- Drei zusätzliche Hersteller-belegte Industrietechniken: EDI, Hochdruckpumpe, Kühlwasser-Dosierstation. Sechs thematische Industrie-Landingbereiche, keine parallele Kaufnavigation.
+- Fachplan: 79 Produktseitenkandidaten, 103 individuelle WP-Rubrikentwürfe, 350 grobe Themenrichtungen. Alle W2-Originaldaten erhalten.
+- Drei W2-Überlappungsfamilien bewusst offen, kein WordPress-Import oder Plugin-Entwicklung, SEO in WordPress weiterhin ausstehend.

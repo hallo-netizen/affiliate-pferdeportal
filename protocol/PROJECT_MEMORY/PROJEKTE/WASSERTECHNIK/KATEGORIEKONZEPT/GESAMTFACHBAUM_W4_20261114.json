@@ -1,0 +1,4587 @@
+{
+  "version": "W4_2026-11-14",
+  "project": "WASSERTECHNIK",
+  "state": "FACHBAUM_W4_KONZEPTIONELL_KLARGESTELLT_NO_SEO_NO_WP_IMPORT",
+  "goal": "Breites Informationsportal, kaufnahe Priorität Privat, Kleinbetriebe, Vereine",
+  "WP_layers": "8 Hauptbereiche → optionale Fachunterseite → konkrete Produktartseite → WP-Inhaltskategorie (3-5 eigenständige Beitragsideen) → später Beiträge",
+  "industry_hub": {
+    "title": "Industrie & Großanlagen",
+    "kind": "ZUSÄTZLICHER_INFO_EINSTIEG_KEIN_GLEICHRANGIGER_KAUF_HAUPTBEREICH",
+    "landings": [
+      "Industrielle Wasseraufbereitung",
+      "Industrie-Pumpen",
+      "Kühl- & Kreislaufwasser",
+      "Industrielles Abwasser",
+      "Messung, Regelung & Dosierung",
+      "Kommunale/Großanlagen"
+    ]
+  },
+  "main_areas": [
+    "Wasseraufbereitung",
+    "Wasseranalyse",
+    "Brunnen",
+    "Pumpen & Druck",
+    "Regenwasser",
+    "Bewässerung",
+    "Wassertanks",
+    "Abwassertechnik"
+  ],
+  "counts": {
+    "old_products": 71,
+    "new_products": 8,
+    "all_products": 79,
+    "old_categories": 89,
+    "new_categories": 16,
+    "all_categories": 105,
+    "old_topics": 308,
+    "new_topics": 48,
+    "all_topics": 356,
+    "industry_landing_pages": 6,
+    "intent_cases": 9
+  },
+  "intent_cases": [
+    {
+      "case": "Gartenpumpe für Vereine",
+      "existing_owner": "Gartenpumpe",
+      "decision": "KEINE_EXTRA_SEITE",
+      "reason": "Käuferetikett allein schafft keine andere Pumpenfunktion",
+      "source": null
+    },
+    {
+      "case": "Industrielle Tauchmotorpumpe",
+      "existing_owner": "Tauchpumpe",
+      "decision": "IN_FESTSTOFFPUMPE_INTEGRIEREN",
+      "reason": "KSB belegt industriellen Tauchmotorpumpen-Einsatz; keine doppelte Seite ohne abgrenzbare zusätzliche Aufgabe",
+      "source": "https://www.ksb.com/de-de/lc/produkte/pumpe/tauchmotorpumpe/amarex/A31B"
+    },
+    {
+      "case": "Gewerbliche Umkehrosmoseanlage",
+      "existing_owner": "Untertisch-Osmoseanlage",
+      "decision": "EIGENE_PRODUKTFAMILIE",
+      "reason": "Anlagenleistung und Prozess-/Permeatüberwachung unterscheiden sich von Küchen-Osmose",
+      "source": "https://www.gruenbeck.de/produkte-loesungen/gruenbeck-fuer-gewerbe/membrantechnik/umkehrosmose/geno-osmo-x"
+    },
+    {
+      "case": "Chemikaliendosierung",
+      "existing_owner": "Wasser-Dosieranlage",
+      "decision": "EIGENE_PRODUKTFAMILIE",
+      "reason": "Dosierpumpe für Prozessmedien mit spezifischen Druck- und Werkstoffanforderungen",
+      "source": "https://www.prominent.com/en/Industry-Solutions/Industry-Solutions/Chemical-Industry/Chemical-Industry.html"
+    },
+    {
+      "case": "Industrielle Feststoffpumpe",
+      "existing_owner": "Schmutzwasserpumpe",
+      "decision": "EIGENE_PRODUKTFAMILIE",
+      "reason": "Förderung feststoffbeladener Abwässer mit Speziallaufrädern und Ausführungen",
+      "source": "https://www.ksb.com/de-de/loesungen/abwassertechnik/abwasserentsorgung-und-transport"
+    },
+    {
+      "case": "Online-Wasseranalyse",
+      "existing_owner": "Wasser-Multimessgerät",
+      "decision": "EIGENE_PRODUKTFAMILIE",
+      "reason": "Kontinuierliche Prozess-Sensorik statt tragbarer Messung",
+      "source": "https://www.de.endress.com/de/loesungen/wasserueberwachung-chemische-industrie"
+    },
+    {
+      "case": "Retentions- oder Gewerbetank",
+      "existing_owner": "Retentionszisterne",
+      "decision": "BESTAND_GENUEGT",
+      "reason": "W2 hat Retentionszisterne, Nutzwassertank; gleiche Nutzung kein weiterer Owner",
+      "source": null
+    },
+    {
+      "case": "Industrielle Filteranlage",
+      "existing_owner": "Feinfilter",
+      "decision": "EIGENE_PRODUKTFAMILIE",
+      "reason": "Filterbett und Rückspültechnik statt Feinfilter-Kartusche",
+      "source": "https://www.gruenbeck.de/produkte-loesungen/gruenbeck-fuer-gewerbe/filteranlagen/filteranlagen-geno-mat"
+    },
+    {
+      "case": "Hebeanlage kleiner Betrieb",
+      "existing_owner": "Hebeanlage",
+      "decision": "BESTAND_GENUEGT",
+      "reason": "Allein Gewerbe-Etikett unterscheidet die Produktart nicht",
+      "source": null
+    }
+  ],
+  "industry_landing_pages": [
+    {
+      "name": "Industrielle Wasseraufbereitung",
+      "id": "WT-W4-LP-1",
+      "parent": "Industrie & Großanlagen",
+      "role": "INDUSTRIE_INFORMATIONSLANDING_NO_WP",
+      "candidate_new_products": [
+        "Gewerbliche Umkehrosmoseanlage",
+        "Mehrschichtfilteranlage",
+        "Elektrodeionisationsanlage"
+      ],
+      "cross_links_to_existing": [
+        "Untertisch-Osmoseanlage",
+        "Enthärtungsanlage"
+      ],
+      "themes": [
+        "Reinstwasser und Vorbehandlung",
+        "Membran- und Filtertechnik",
+        "Betrieb und Qualitätsüberwachung"
+      ],
+      "sources": [
+        "https://www.gruenbeck.de/produkte-loesungen/gruenbeck-fuer-gewerbe/membrantechnik/umkehrosmose/geno-osmo-x",
+        "https://www.gruenbeck.de/produkte-loesungen/gruenbeck-fuer-gewerbe/filteranlagen/filteranlagen-geno-mat",
+        "https://www.grundfos.com/de/about-us/what-we-do/water-treatment"
+      ],
+      "wp_status": "KEINE_WP_ID_SEO_UND_VERÖFFENTLICHUNG_OFFEN"
+    },
+    {
+      "name": "Industrie-Pumpen",
+      "id": "WT-W4-LP-2",
+      "parent": "Industrie & Großanlagen",
+      "role": "INDUSTRIE_INFORMATIONSLANDING_NO_WP",
+      "candidate_new_products": [
+        "Industrielle Hochdruckpumpe",
+        "Industrielle Feststoffpumpe"
+      ],
+      "cross_links_to_existing": [
+        "Druckerhöhungsanlage",
+        "Schmutzwasserpumpe"
+      ],
+      "themes": [
+        "Kreisel- und Hochdruckförderung",
+        "Förderung belasteter Medien",
+        "Dauerbetrieb, Material und Wartung"
+      ],
+      "sources": [
+        "https://www.ksb.com/de-de/loesungen/industrie/industrielle-wasseraufbereitung",
+        "https://www.ksb.com/de-de/loesungen/abwassertechnik/abwasserentsorgung-und-transport"
+      ],
+      "wp_status": "KEINE_WP_ID_SEO_UND_VERÖFFENTLICHUNG_OFFEN"
+    },
+    {
+      "name": "Kühl- & Kreislaufwasser",
+      "id": "WT-W4-LP-3",
+      "parent": "Industrie & Großanlagen",
+      "role": "INDUSTRIE_INFORMATIONSLANDING_NO_WP",
+      "candidate_new_products": [
+        "Kühlwasser-Dosierstation"
+      ],
+      "cross_links_to_existing": [
+        "Wasser-Dosieranlage",
+        "Pumpensteuergerät"
+      ],
+      "themes": [
+        "Kühlwasserqualität",
+        "Kühlwasser-Zirkulation",
+        "Dosierung und Überwachung"
+      ],
+      "sources": [
+        "https://www.grundfos.com/de/about-us/what-we-do/water-treatment",
+        "https://www.veoliawatertechnologies.de/maerkte/chemische-industrie"
+      ],
+      "wp_status": "KEINE_WP_ID_SEO_UND_VERÖFFENTLICHUNG_OFFEN"
+    },
+    {
+      "name": "Industrielles Abwasser",
+      "id": "WT-W4-LP-4",
+      "parent": "Industrie & Großanlagen",
+      "role": "INDUSTRIE_INFORMATIONSLANDING_NO_WP",
+      "candidate_new_products": [],
+      "cross_links_to_existing": [
+        "Hebeanlage",
+        "Schmutzwasserpumpe"
+      ],
+      "themes": [
+        "Mechanische und biologische Behandlung",
+        "Chemische Abwasserbehandlung",
+        "Schlammförderung und Anlagenbetrieb"
+      ],
+      "sources": [
+        "https://www.veoliawatertechnologies.de/anwendungen/industrieabwasser",
+        "https://www.ksb.com/de-de/loesungen/abwassertechnik/abwasserentsorgung-und-transport"
+      ],
+      "wp_status": "KEINE_WP_ID_SEO_UND_VERÖFFENTLICHUNG_OFFEN"
+    },
+    {
+      "name": "Messung, Regelung & Dosierung",
+      "id": "WT-W4-LP-5",
+      "parent": "Industrie & Großanlagen",
+      "role": "INDUSTRIE_INFORMATIONSLANDING_NO_WP",
+      "candidate_new_products": [
+        "Chemikalien-Dosierpumpe",
+        "Online-Wasseranalysestation"
+      ],
+      "cross_links_to_existing": [
+        "Wasser-Multimessgerät",
+        "pH-Messgerät"
+      ],
+      "themes": [
+        "Online-Sensorik",
+        "Regelung und Automatisierung",
+        "Chemikaliendosierung"
+      ],
+      "sources": [
+        "https://www.de.endress.com/de/loesungen/wasserueberwachung-chemische-industrie",
+        "https://www.prominent.com/en/Industry-Solutions/Industry-Solutions/Chemical-Industry/Chemical-Industry.html"
+      ],
+      "wp_status": "KEINE_WP_ID_SEO_UND_VERÖFFENTLICHUNG_OFFEN"
+    },
+    {
+      "name": "Kommunale/Großanlagen",
+      "id": "WT-W4-LP-6",
+      "parent": "Industrie & Großanlagen",
+      "role": "INDUSTRIE_INFORMATIONSLANDING_NO_WP",
+      "candidate_new_products": [],
+      "cross_links_to_existing": [
+        "Druckerhöhungsanlage",
+        "Hebeanlage"
+      ],
+      "themes": [
+        "Versorgungsnetze und Pumpstationen",
+        "Großflächige Trinkwasseraufbereitung",
+        "Abwassertransport und Wartung"
+      ],
+      "sources": [
+        "https://www.ksb.com/de-de/loesungen/wassertechnik/wasserversorgung-und-wassertransport",
+        "https://www.grundfos.com/de/about-us/what-we-do"
+      ],
+      "wp_status": "KEINE_WP_ID_SEO_UND_VERÖFFENTLICHUNG_OFFEN"
+    }
+  ],
+  "new_product_pages": [
+    {
+      "product": "Gewerbliche Umkehrosmoseanlage",
+      "root": "Industrie & Großanlagen",
+      "group": "Industrielle Wasseraufbereitung",
+      "role": "WP_PRODUKTSEITE_NEUER_FACHKANDIDAT",
+      "source_id": "WT-W4-IND-01",
+      "source_name": null,
+      "source_path": null,
+      "source_status": "HERSTELLERBELEG_VORHANDEN_SEO_NICHT_GEPRUEFT",
+      "comparison_to_w2": "Untertisch-Osmoseanlage",
+      "evidence_urls": [
+        "https://www.gruenbeck.de/produkte-loesungen/gruenbeck-fuer-gewerbe/membrantechnik/umkehrosmose/geno-osmo-x",
+        "https://www.grundfos.com/de/about-us/what-we-do/water-treatment"
+      ],
+      "target_groups": [
+        "Industrie",
+        "Kleinbetrieb_wo_tatsaechlich_passend"
+      ],
+      "wp_product_owner_key": "WT:industrie/industrielle-wasseraufbereitung/gewerbliche-umkehrosmoseanlage",
+      "proposed_wp_page_slug": "gewerbliche-umkehrosmoseanlage",
+      "proposed_wp_path_segments": [
+        "industrie-grossanlagen",
+        "industrielle-wasseraufbereitung",
+        "gewerbliche-umkehrosmoseanlage"
+      ],
+      "article_categories": [
+        {
+          "name": "Anlagenauswahl",
+          "article_ideas": [
+            "Permeatmenge und Spitzenbedarf im Gewerbe bestimmen",
+            "Rohwasserqualität und Vorbehandlung abgrenzen",
+            "Prozesswasserqualität bei der Auswahl berücksichtigen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-gewerbliche-umkehrosmoseanlage-anlagenauswahl",
+          "parent_product_owner": "WT:industrie/industrielle-wasseraufbereitung/gewerbliche-umkehrosmoseanlage",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        },
+        {
+          "name": "Anlagenbetrieb",
+          "article_ideas": [
+            "Membranpflege und Spülzyklen planen",
+            "Leitfähigkeitsüberwachung und Betriebsdatenerfassung prüfen",
+            "Rückgewinnung und Betriebskosten unterscheiden"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-gewerbliche-umkehrosmoseanlage-anlagenbetrieb",
+          "parent_product_owner": "WT:industrie/industrielle-wasseraufbereitung/gewerbliche-umkehrosmoseanlage",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        }
+      ],
+      "editorial_gate": "EIGENSTAENDIGE_PRODUKTFAMILIE_FACHLICH_BEGUENDET_SEO_NOCH_OFFEN"
+    },
+    {
+      "product": "Mehrschichtfilteranlage",
+      "root": "Industrie & Großanlagen",
+      "group": "Industrielle Wasseraufbereitung",
+      "role": "WP_PRODUKTSEITE_NEUER_FACHKANDIDAT",
+      "source_id": "WT-W4-IND-02",
+      "source_name": null,
+      "source_path": null,
+      "source_status": "HERSTELLERBELEG_VORHANDEN_SEO_NICHT_GEPRUEFT",
+      "comparison_to_w2": "Feinfilter",
+      "evidence_urls": [
+        "https://www.gruenbeck.de/produkte-loesungen/gruenbeck-fuer-gewerbe/filteranlagen/filteranlagen-geno-mat"
+      ],
+      "target_groups": [
+        "Industrie",
+        "Kleinbetrieb_wo_tatsaechlich_passend"
+      ],
+      "wp_product_owner_key": "WT:industrie/industrielle-wasseraufbereitung/mehrschichtfilteranlage",
+      "proposed_wp_page_slug": "mehrschichtfilteranlage",
+      "proposed_wp_path_segments": [
+        "industrie-grossanlagen",
+        "industrielle-wasseraufbereitung",
+        "mehrschichtfilteranlage"
+      ],
+      "article_categories": [
+        {
+          "name": "Filtermaterial",
+          "article_ideas": [
+            "Kies- und Mehrschichtfilter nach Verschmutzung vergleichen",
+            "Durchfluss und Filterfläche der Anlage unterscheiden",
+            "Filtermedien und Einsatzgrenzen abgrenzen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-mehrschichtfilteranlage-filtermaterial",
+          "parent_product_owner": "WT:industrie/industrielle-wasseraufbereitung/mehrschichtfilteranlage",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        },
+        {
+          "name": "Rückspültechnik",
+          "article_ideas": [
+            "Rückspülung und Erstfiltrat unterscheiden",
+            "Automatische Rückspülsteuerung prüfen",
+            "Druckverlust und Wartungsaufwand beurteilen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-mehrschichtfilteranlage-rueckspueltechnik",
+          "parent_product_owner": "WT:industrie/industrielle-wasseraufbereitung/mehrschichtfilteranlage",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        }
+      ],
+      "editorial_gate": "EIGENSTAENDIGE_PRODUKTFAMILIE_FACHLICH_BEGUENDET_SEO_NOCH_OFFEN"
+    },
+    {
+      "product": "Elektrodeionisationsanlage",
+      "root": "Industrie & Großanlagen",
+      "group": "Industrielle Wasseraufbereitung",
+      "role": "WP_PRODUKTSEITE_NEUER_FACHKANDIDAT",
+      "source_id": "WT-W4-IND-03",
+      "source_name": null,
+      "source_path": null,
+      "source_status": "HERSTELLERBELEG_VORHANDEN_SEO_NICHT_GEPRUEFT",
+      "comparison_to_w2": "Gewerbliche Umkehrosmoseanlage",
+      "evidence_urls": [
+        "https://www.grundfos.com/de/about-us/what-we-do/water-treatment",
+        "https://www.grundfos.com/de/learn/research-and-insights/ultrapure-water-quality"
+      ],
+      "target_groups": [
+        "Industrie",
+        "Kleinbetrieb_wo_tatsaechlich_passend"
+      ],
+      "wp_product_owner_key": "WT:industrie/industrielle-wasseraufbereitung/elektrodeionisationsanlage",
+      "proposed_wp_page_slug": "elektrodeionisationsanlage",
+      "proposed_wp_path_segments": [
+        "industrie-grossanlagen",
+        "industrielle-wasseraufbereitung",
+        "elektrodeionisationsanlage"
+      ],
+      "article_categories": [
+        {
+          "name": "Reinstwasser",
+          "article_ideas": [
+            "EDI und Mischbett-Ionentauscher vergleichen",
+            "Umkehrosmose vor EDI als Vorbehandlung prüfen",
+            "Benötigte Speisewasserqualität vor dem Kauf bestimmen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-elektrodeionisationsanlage-reinstwasser",
+          "parent_product_owner": "WT:industrie/industrielle-wasseraufbereitung/elektrodeionisationsanlage",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        },
+        {
+          "name": "Betrieb",
+          "article_ideas": [
+            "Kontinuierlichen Entsalzungsbetrieb erklären",
+            "Leitfähigkeit und Restverunreinigung überwachen",
+            "Wartung gegenüber Harzregeneration vergleichen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-elektrodeionisationsanlage-betrieb",
+          "parent_product_owner": "WT:industrie/industrielle-wasseraufbereitung/elektrodeionisationsanlage",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        }
+      ],
+      "editorial_gate": "EIGENSTAENDIGE_PRODUKTFAMILIE_FACHLICH_BEGUENDET_SEO_NOCH_OFFEN"
+    },
+    {
+      "product": "Chemikalien-Dosierpumpe",
+      "root": "Industrie & Großanlagen",
+      "group": "Messung, Regelung & Dosierung",
+      "role": "WP_PRODUKTSEITE_NEUER_FACHKANDIDAT",
+      "source_id": "WT-W4-IND-04",
+      "source_name": null,
+      "source_path": null,
+      "source_status": "HERSTELLERBELEG_VORHANDEN_SEO_NICHT_GEPRUEFT",
+      "comparison_to_w2": "Wasser-Dosieranlage",
+      "evidence_urls": [
+        "https://www.prominent.com/en/Industry-Solutions/Industry-Solutions/Chemical-Industry/Chemical-Industry.html",
+        "https://www.veoliawatertechnologies.de/maerkte/chemische-industrie"
+      ],
+      "target_groups": [
+        "Industrie",
+        "Kleinbetrieb_wo_tatsaechlich_passend"
+      ],
+      "wp_product_owner_key": "WT:industrie/messung-regelung-dosierung/chemikalien-dosierpumpe",
+      "proposed_wp_page_slug": "chemikalien-dosierpumpe",
+      "proposed_wp_path_segments": [
+        "industrie-grossanlagen",
+        "messung-regelung-dosierung",
+        "chemikalien-dosierpumpe"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "Fördermenge und Gegendruck von Dosierpumpen bewerten",
+            "Medienbeständigkeit der Werkstoffe prüfen",
+            "Membranpumpe und Exzenterschneckenpumpe unterscheiden"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-chemikalien-dosierpumpe-auswahl",
+          "parent_product_owner": "WT:industrie/messung-regelung-dosierung/chemikalien-dosierpumpe",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        },
+        {
+          "name": "Dosierbetrieb",
+          "article_ideas": [
+            "Dosierleistung anhand von Durchflusssignalen regeln",
+            "Dosierüberwachung und Fehlermeldungen einordnen",
+            "Wartung und Medienwechsel sicher planen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-chemikalien-dosierpumpe-dosierbetrieb",
+          "parent_product_owner": "WT:industrie/messung-regelung-dosierung/chemikalien-dosierpumpe",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        }
+      ],
+      "editorial_gate": "EIGENSTAENDIGE_PRODUKTFAMILIE_FACHLICH_BEGUENDET_SEO_NOCH_OFFEN"
+    },
+    {
+      "product": "Industrielle Hochdruckpumpe",
+      "root": "Industrie & Großanlagen",
+      "group": "Industrie-Pumpen",
+      "role": "WP_PRODUKTSEITE_NEUER_FACHKANDIDAT",
+      "source_id": "WT-W4-IND-05",
+      "source_name": null,
+      "source_path": null,
+      "source_status": "HERSTELLERBELEG_VORHANDEN_SEO_NICHT_GEPRUEFT",
+      "comparison_to_w2": "Druckerhöhungsanlage",
+      "evidence_urls": [
+        "https://www.ksb.com/de-de/loesungen/industrie/industrielle-wasseraufbereitung",
+        "https://www.grundfos.com/de/about-us/what-we-do/water-treatment"
+      ],
+      "target_groups": [
+        "Industrie",
+        "Kleinbetrieb_wo_tatsaechlich_passend"
+      ],
+      "wp_product_owner_key": "WT:industrie/industrie-pumpen/industrielle-hochdruckpumpe",
+      "proposed_wp_page_slug": "industrielle-hochdruckpumpe",
+      "proposed_wp_path_segments": [
+        "industrie-grossanlagen",
+        "industrie-pumpen",
+        "industrielle-hochdruckpumpe"
+      ],
+      "article_categories": [
+        {
+          "name": "Pumpenauslegung",
+          "article_ideas": [
+            "Förderdruck und Durchfluss für industrielle Aufgaben unterscheiden",
+            "Mehrstufige Hochdruckpumpen nach Wasserqualität auswählen",
+            "Regelung und Redundanz für Dauerbetrieb vergleichen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-industrielle-hochdruckpumpe-pumpenauslegung",
+          "parent_product_owner": "WT:industrie/industrie-pumpen/industrielle-hochdruckpumpe",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        },
+        {
+          "name": "Wartung",
+          "article_ideas": [
+            "Dichtungen und Trockenlaufschutz beurteilen",
+            "Drehzahlregelung bei wechselndem Bedarf",
+            "Ersatzteile und Lebensdauer bei Dauerbetrieb vergleichen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-industrielle-hochdruckpumpe-wartung",
+          "parent_product_owner": "WT:industrie/industrie-pumpen/industrielle-hochdruckpumpe",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        }
+      ],
+      "editorial_gate": "EIGENSTAENDIGE_PRODUKTFAMILIE_FACHLICH_BEGUENDET_SEO_NOCH_OFFEN"
+    },
+    {
+      "product": "Industrielle Feststoffpumpe",
+      "root": "Industrie & Großanlagen",
+      "group": "Industrie-Pumpen",
+      "role": "WP_PRODUKTSEITE_NEUER_FACHKANDIDAT",
+      "source_id": "WT-W4-IND-06",
+      "source_name": null,
+      "source_path": null,
+      "source_status": "HERSTELLERBELEG_VORHANDEN_SEO_NICHT_GEPRUEFT",
+      "comparison_to_w2": "Schmutzwasserpumpe",
+      "evidence_urls": [
+        "https://www.ksb.com/de-de/loesungen/abwassertechnik/abwasserentsorgung-und-transport",
+        "https://www.ksb.com/de-de/loesungen/industrie/industrielle-wasseraufbereitung",
+        "https://www.ksb.com/de-de/lc/produkte/pumpe/tauchmotorpumpe/amarex/A31B"
+      ],
+      "target_groups": [
+        "Industrie",
+        "Kleinbetrieb_wo_tatsaechlich_passend"
+      ],
+      "wp_product_owner_key": "WT:industrie/industrie-pumpen/industrielle-feststoffpumpe",
+      "proposed_wp_page_slug": "industrielle-feststoffpumpe",
+      "proposed_wp_path_segments": [
+        "industrie-grossanlagen",
+        "industrie-pumpen",
+        "industrielle-feststoffpumpe"
+      ],
+      "article_categories": [
+        {
+          "name": "Fördermedien",
+          "article_ideas": [
+            "Freien Kugeldurchgang nach Feststoffgehalt einordnen",
+            "Schlammhaltiges Industrieabwasser von Haushaltsabwasser abgrenzen",
+            "Korrosions- und Verschleißschutz bei Feststoffpumpen vergleichen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-industrielle-feststoffpumpe-foerdermedien",
+          "parent_product_owner": "WT:industrie/industrie-pumpen/industrielle-feststoffpumpe",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        },
+        {
+          "name": "Pumpenbetrieb",
+          "article_ideas": [
+            "Stationäre und mobile Pumpen vergleichen",
+            "Verstopfung und Verschleiß im Förderbetrieb vermeiden",
+            "Explosionsgeschützte Ausführungen und Wartung fachlich einordnen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-industrielle-feststoffpumpe-pumpenbetrieb",
+          "parent_product_owner": "WT:industrie/industrie-pumpen/industrielle-feststoffpumpe",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        }
+      ],
+      "editorial_gate": "EIGENSTAENDIGE_PRODUKTFAMILIE_FACHLICH_BEGUENDET_SEO_NOCH_OFFEN"
+    },
+    {
+      "product": "Online-Wasseranalysestation",
+      "root": "Industrie & Großanlagen",
+      "group": "Messung, Regelung & Dosierung",
+      "role": "WP_PRODUKTSEITE_NEUER_FACHKANDIDAT",
+      "source_id": "WT-W4-IND-07",
+      "source_name": null,
+      "source_path": null,
+      "source_status": "HERSTELLERBELEG_VORHANDEN_SEO_NICHT_GEPRUEFT",
+      "comparison_to_w2": "Wasser-Multimessgerät",
+      "evidence_urls": [
+        "https://www.de.endress.com/de/loesungen/wasserueberwachung-chemische-industrie",
+        "https://www.de.endress.com/de/branchenoptimierte-loesungen/loesungen/ueberwachungssysteme-industrieabwasser"
+      ],
+      "target_groups": [
+        "Industrie",
+        "Kleinbetrieb_wo_tatsaechlich_passend"
+      ],
+      "wp_product_owner_key": "WT:industrie/messung-regelung-dosierung/online-wasseranalysestation",
+      "proposed_wp_page_slug": "online-wasseranalysestation",
+      "proposed_wp_path_segments": [
+        "industrie-grossanlagen",
+        "messung-regelung-dosierung",
+        "online-wasseranalysestation"
+      ],
+      "article_categories": [
+        {
+          "name": "Messtechnik",
+          "article_ideas": [
+            "Online-pH, Leitfähigkeit und Trübung nach Aufgabe unterscheiden",
+            "Mehrkanal-Messumformer und Einzelsensoren vergleichen",
+            "Probenaufbereitung und Durchflussarmatur planen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-online-wasseranalysestation-messtechnik",
+          "parent_product_owner": "WT:industrie/messung-regelung-dosierung/online-wasseranalysestation",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        },
+        {
+          "name": "Messbetrieb",
+          "article_ideas": [
+            "Kalibrierung und automatische Sensorreinigung unterscheiden",
+            "Messwerte in Anlagensteuerung und Alarmierung übertragen",
+            "Messfehler durch Verschmutzung und Sensordrift einordnen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-online-wasseranalysestation-messbetrieb",
+          "parent_product_owner": "WT:industrie/messung-regelung-dosierung/online-wasseranalysestation",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        }
+      ],
+      "editorial_gate": "EIGENSTAENDIGE_PRODUKTFAMILIE_FACHLICH_BEGUENDET_SEO_NOCH_OFFEN"
+    },
+    {
+      "product": "Kühlwasser-Dosierstation",
+      "root": "Industrie & Großanlagen",
+      "group": "Kühl- & Kreislaufwasser",
+      "role": "WP_PRODUKTSEITE_NEUER_FACHKANDIDAT",
+      "source_id": "WT-W4-IND-08",
+      "source_name": null,
+      "source_path": null,
+      "source_status": "HERSTELLERBELEG_VORHANDEN_SEO_NICHT_GEPRUEFT",
+      "comparison_to_w2": "Chemikalien-Dosierpumpe",
+      "evidence_urls": [
+        "https://www.grundfos.com/de/about-us/what-we-do/water-treatment",
+        "https://www.veoliawatertechnologies.de/maerkte/chemische-industrie",
+        "https://www.prominent.com/en/Industry-Solutions/Industry-Solutions/Chemical-Industry/Chemical-Industry.html"
+      ],
+      "target_groups": [
+        "Industrie",
+        "Kleinbetrieb_wo_tatsaechlich_passend"
+      ],
+      "wp_product_owner_key": "WT:industrie/kuehl-kreislaufwasser/kuehlwasser-dosierstation",
+      "proposed_wp_page_slug": "kuehlwasser-dosierstation",
+      "proposed_wp_path_segments": [
+        "industrie-grossanlagen",
+        "kuehl-kreislaufwasser",
+        "kuehlwasser-dosierstation"
+      ],
+      "article_categories": [
+        {
+          "name": "Kühlkreislauf",
+          "article_ideas": [
+            "Ablagerung und Korrosion im Kühlkreislauf unterscheiden",
+            "Dosierstation an Kühlkreislauf und Wasserwechsel anpassen",
+            "Messung und Regelung im Kühlwasser koordinieren"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-kuehlwasser-dosierstation-kuehlkreislauf",
+          "parent_product_owner": "WT:industrie/kuehl-kreislaufwasser/kuehlwasser-dosierstation",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        },
+        {
+          "name": "Dosierbetrieb",
+          "article_ideas": [
+            "Verbrauch und Dosieraufgabe bei Kühlwasserbehandlung einordnen",
+            "Wartungs- und Kontrollaufgaben der Station unterscheiden",
+            "Komplett-Dosiersystem von einzelner Dosierpumpe abgrenzen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-kuehlwasser-dosierstation-dosierbetrieb",
+          "parent_product_owner": "WT:industrie/kuehl-kreislaufwasser/kuehlwasser-dosierstation",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        }
+      ],
+      "editorial_gate": "EIGENSTAENDIGE_PRODUKTFAMILIE_FACHLICH_BEGUENDET_SEO_NOCH_OFFEN"
+    }
+  ],
+  "all_product_pages": [
+    {
+      "product": "Feinfilter",
+      "root": "Wasseraufbereitung",
+      "group": "Hauswasserfilter",
+      "source_name": "Feinfilter",
+      "source_path": "Wasseraufbereitung/Hauswasserfilter/Feinfilter",
+      "source_id": "c_80a02bf0ab59d7a7",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Filterpraxis",
+          "article_ideas": [
+            "Feinfilter in der Hausinstallation: passende Filterfeinheit für Sand und Rost wählen",
+            "Feinfilter vor einer Enthärtungsanlage: Einbaureihenfolge und Druckverlust richtig planen",
+            "Feinfiltereinsatz wechseln: hygienisches Vorgehen und sinnvolle Wartungsintervalle",
+            "80, 100 oder 200 Mikrometer: welche Feinheit ein Hauswasserfilter wirklich braucht"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-feinfilter-filterpraxis",
+          "parent_product_owner": "WT:wasseraufbereitung/hauswasserfilter/feinfilter",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Feinfilter in der Hausinstallation: passende Filterfeinheit für Sand und Rost wählen",
+        "Feinfilter vor einer Enthärtungsanlage: Einbaureihenfolge und Druckverlust richtig planen",
+        "Feinfiltereinsatz wechseln: hygienisches Vorgehen und sinnvolle Wartungsintervalle",
+        "80, 100 oder 200 Mikrometer: welche Feinheit ein Hauswasserfilter wirklich braucht"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseraufbereitung",
+        "hauswasserfilter",
+        "feinfilter"
+      ],
+      "proposed_wp_page_slug": "feinfilter",
+      "wp_product_owner_key": "WT:wasseraufbereitung/hauswasserfilter/feinfilter",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Manueller Rückspülfilter",
+      "root": "Wasseraufbereitung",
+      "group": "Hauswasserfilter",
+      "source_name": "Rückspülfilter",
+      "source_path": "Wasseraufbereitung/Hauswasserfilter/Rückspülfilter",
+      "source_id": "c_27b212b011c4053d",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "Manuellen Rückspülfilter nach Durchfluss und Anschlussmaß auswählen",
+            "Passenden manuellen Schutzfilter für Haus oder Vereinsheim dimensionieren",
+            "Welche Filterfeinheit eignet sich für einen manuell betriebenen Rückspülfilter?"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-manueller-rueckspuelfilter-auswahl",
+          "parent_product_owner": "WT:wasseraufbereitung/hauswasserfilter/manueller-rueckspuelfilter",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        },
+        {
+          "name": "Betrieb",
+          "article_ideas": [
+            "Manuelle Rückspülung am Schutzfilter durchführen",
+            "Druckabfall hinter dem manuellen Filter richtig einschätzen",
+            "Spülwasseranschluss und Wartungsintervall am manuellen Rückspülfilter planen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-manueller-rueckspuelfilter-betrieb",
+          "parent_product_owner": "WT:wasseraufbereitung/hauswasserfilter/manueller-rueckspuelfilter",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Rückspülfilter auswählen: manuelle Rückspülung oder automatische Auslösung",
+        "Rückspülfilter richtig bedienen: Dauer, Wasserbedarf und Entsorgung des Spülwassers",
+        "Druckabfall hinter dem Rückspülfilter: Ursachen systematisch prüfen",
+        "Rückspülfilter im Altbau nachrüsten: Platzbedarf, Ablauf und Anschlussgröße"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseraufbereitung",
+        "hauswasserfilter",
+        "manueller-rueckspuelfilter"
+      ],
+      "proposed_wp_page_slug": "manueller-rueckspuelfilter",
+      "wp_product_owner_key": "WT:wasseraufbereitung/hauswasserfilter/manueller-rueckspuelfilter",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE",
+      "audit_note": "W4-QA: ursprünglicher Rückspülfilter als manueller Typ gegenüber automatischem geklärt; Hersteller Grünbeck MR/MRA; Quelle im Ausgangsmodell nicht umbenannt."
+    },
+    {
+      "product": "Automatischer Rückspülfilter",
+      "root": "Wasseraufbereitung",
+      "group": "Hauswasserfilter",
+      "source_name": "Automatikfilter",
+      "source_path": "Wasseraufbereitung/Hauswasserfilter/Automatikfilter",
+      "source_id": "c_e5ec31d986da1033",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Filterautomatik",
+          "article_ideas": [
+            "Automatikfilter mit Zeit- oder Differenzdrucksteuerung: welches Prinzip passt zur Anlage",
+            "Automatikfilter im Mehrfamilienhaus dimensionieren: Durchfluss und Spitzenlasten",
+            "Strom- und Spülwasserbedarf von Automatikfiltern realistisch vergleichen",
+            "Automatikfilter warten: Sensoren, Ventile und Rückspülmechanik prüfen"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-automatischer-rueckspuelfilter-filterautomatik",
+          "parent_product_owner": "WT:wasseraufbereitung/hauswasserfilter/automatischer-rueckspuelfilter",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Automatikfilter mit Zeit- oder Differenzdrucksteuerung: welches Prinzip passt zur Anlage",
+        "Automatikfilter im Mehrfamilienhaus dimensionieren: Durchfluss und Spitzenlasten",
+        "Strom- und Spülwasserbedarf von Automatikfiltern realistisch vergleichen",
+        "Automatikfilter warten: Sensoren, Ventile und Rückspülmechanik prüfen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseraufbereitung",
+        "hauswasserfilter",
+        "automatischer-rueckspuelfilter"
+      ],
+      "proposed_wp_page_slug": "automatischer-rueckspuelfilter",
+      "wp_product_owner_key": "WT:wasseraufbereitung/hauswasserfilter/automatischer-rueckspuelfilter",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Tischwasserfilter",
+      "root": "Wasseraufbereitung",
+      "group": "Trinkwasserfilter",
+      "source_name": "Tischfilter",
+      "source_path": "Wasseraufbereitung/Trinkwasserfilter/Tischfilter",
+      "source_id": "c_0bfc52e8ffde3bcb",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Filteralltag",
+          "article_ideas": [
+            "Tischwasserfilter mit Aktivkohle: Geschmack, Chlor und Grenzen der Filterwirkung",
+            "Kartuschenkosten bei Tischfiltern: Jahreskosten statt Gerätepreis vergleichen",
+            "Entfernt ein Tischfilter Kalk: Härte, Karbonathärte und Werbeversprechen einordnen",
+            "Keime im Tischwasserfilter vermeiden: Lagerung, Kühlung und Kartuschenwechsel"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-tischwasserfilter-filteralltag",
+          "parent_product_owner": "WT:wasseraufbereitung/trinkwasserfilter/tischwasserfilter",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Tischwasserfilter mit Aktivkohle: Geschmack, Chlor und Grenzen der Filterwirkung",
+        "Kartuschenkosten bei Tischfiltern: Jahreskosten statt Gerätepreis vergleichen",
+        "Entfernt ein Tischfilter Kalk: Härte, Karbonathärte und Werbeversprechen einordnen",
+        "Keime im Tischwasserfilter vermeiden: Lagerung, Kühlung und Kartuschenwechsel"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseraufbereitung",
+        "trinkwasserfilter",
+        "tischwasserfilter"
+      ],
+      "proposed_wp_page_slug": "tischwasserfilter",
+      "wp_product_owner_key": "WT:wasseraufbereitung/trinkwasserfilter/tischwasserfilter",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Wasserhahnfilter",
+      "root": "Wasseraufbereitung",
+      "group": "Trinkwasserfilter",
+      "source_name": "Armaturfilter",
+      "source_path": "Wasseraufbereitung/Trinkwasserfilter/Armaturfilter",
+      "source_id": "c_d54cfe7d3bad8b76",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Nachrüstung",
+          "article_ideas": [
+            "Wasserfilter am Wasserhahn nachrüsten: Gewinde, Adapter und Platzbedarf prüfen",
+            "Durchfluss oder Filterleistung: Zielkonflikte bei Armaturfiltern verstehen",
+            "Armaturfilter für Mietwohnungen: rückbaubare Lösungen ohne Eingriff in die Leitung",
+            "Kartusche am Armaturfilter wechseln: Druckentlastung und Dichtigkeitskontrolle"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-wasserhahnfilter-nachruestung",
+          "parent_product_owner": "WT:wasseraufbereitung/trinkwasserfilter/wasserhahnfilter",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Wasserfilter am Wasserhahn nachrüsten: Gewinde, Adapter und Platzbedarf prüfen",
+        "Durchfluss oder Filterleistung: Zielkonflikte bei Armaturfiltern verstehen",
+        "Armaturfilter für Mietwohnungen: rückbaubare Lösungen ohne Eingriff in die Leitung",
+        "Kartusche am Armaturfilter wechseln: Druckentlastung und Dichtigkeitskontrolle"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseraufbereitung",
+        "trinkwasserfilter",
+        "wasserhahnfilter"
+      ],
+      "proposed_wp_page_slug": "wasserhahnfilter",
+      "wp_product_owner_key": "WT:wasseraufbereitung/trinkwasserfilter/wasserhahnfilter",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Untertischfilter",
+      "root": "Wasseraufbereitung",
+      "group": "Trinkwasserfilter",
+      "source_name": "Untertischfilter",
+      "source_path": "Wasseraufbereitung/Trinkwasserfilter/Untertischfilter",
+      "source_id": "c_e534e327b8572e0f",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Filtereinbau",
+          "article_ideas": [
+            "Untertischfilter mit separatem Hahn oder Drei-Wege-Armatur: Vor- und Nachteile",
+            "Aktivkohle, Hohlfaser oder Membran: Filterstufen unter der Spüle vergleichen",
+            "Untertischfilter bei wenig Schrankraum planen: Gehäuse, Schläuche und Wechselweg",
+            "Leckageschutz für Untertischfilter: Absperrung, Sensor und Montagefehler"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-untertischfilter-filtereinbau",
+          "parent_product_owner": "WT:wasseraufbereitung/trinkwasserfilter/untertischfilter",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Untertischfilter mit separatem Hahn oder Drei-Wege-Armatur: Vor- und Nachteile",
+        "Aktivkohle, Hohlfaser oder Membran: Filterstufen unter der Spüle vergleichen",
+        "Untertischfilter bei wenig Schrankraum planen: Gehäuse, Schläuche und Wechselweg",
+        "Leckageschutz für Untertischfilter: Absperrung, Sensor und Montagefehler"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseraufbereitung",
+        "trinkwasserfilter",
+        "untertischfilter"
+      ],
+      "proposed_wp_page_slug": "untertischfilter",
+      "wp_product_owner_key": "WT:wasseraufbereitung/trinkwasserfilter/untertischfilter",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Outdoor-Wasserfilter",
+      "root": "Wasseraufbereitung",
+      "group": "Trinkwasserfilter",
+      "source_name": "Outdoorfilter",
+      "source_path": "Wasseraufbereitung/Trinkwasserfilter/Outdoorfilter",
+      "source_id": "c_d602be7982dc1e7e",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Wasserfiltration",
+          "article_ideas": [
+            "Hohlfaser oder Keramik: Outdoor-Wasserfilter nach Wasserquelle auswählen",
+            "Warum viele Outdoorfilter keine Viren entfernen: Porengröße und Einsatzgrenzen",
+            "Outdoorfilter rückspülen und desinfizieren: Leistung unterwegs erhalten",
+            "Durchflussmenge bei Schwerkraft-, Pump- und Flaschenfiltern vergleichen"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-outdoor-wasserfilter-wasserfiltration",
+          "parent_product_owner": "WT:wasseraufbereitung/trinkwasserfilter/outdoor-wasserfilter",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Hohlfaser oder Keramik: Outdoor-Wasserfilter nach Wasserquelle auswählen",
+        "Warum viele Outdoorfilter keine Viren entfernen: Porengröße und Einsatzgrenzen",
+        "Outdoorfilter rückspülen und desinfizieren: Leistung unterwegs erhalten",
+        "Durchflussmenge bei Schwerkraft-, Pump- und Flaschenfiltern vergleichen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseraufbereitung",
+        "trinkwasserfilter",
+        "outdoor-wasserfilter"
+      ],
+      "proposed_wp_page_slug": "outdoor-wasserfilter",
+      "wp_product_owner_key": "WT:wasseraufbereitung/trinkwasserfilter/outdoor-wasserfilter",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Auftisch-Osmoseanlage",
+      "root": "Wasseraufbereitung",
+      "group": "Osmoseanlagen",
+      "source_name": "Auftisch-Osmose",
+      "source_path": "Wasseraufbereitung/Osmoseanlagen/Auftisch-Osmose",
+      "source_id": "c_7e8397c6fa57df77",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Anlagenpraxis",
+          "article_ideas": [
+            "Auftisch-Osmoseanlage ohne Festanschluss: Wasserweg, Abwasser und Bedienung",
+            "Auftisch-Osmose mit Heißwasserfunktion: Energiebedarf und Hygienepunkte",
+            "Tankgröße und Tagesleistung bei Auftischanlagen richtig einschätzen",
+            "Filterwechsel bei Auftisch-Osmose: Kosten und Verfügbarkeit vor dem Kauf prüfen"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-auftisch-osmoseanlage-anlagenpraxis",
+          "parent_product_owner": "WT:wasseraufbereitung/osmoseanlagen/auftisch-osmoseanlage",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Auftisch-Osmoseanlage ohne Festanschluss: Wasserweg, Abwasser und Bedienung",
+        "Auftisch-Osmose mit Heißwasserfunktion: Energiebedarf und Hygienepunkte",
+        "Tankgröße und Tagesleistung bei Auftischanlagen richtig einschätzen",
+        "Filterwechsel bei Auftisch-Osmose: Kosten und Verfügbarkeit vor dem Kauf prüfen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseraufbereitung",
+        "osmoseanlagen",
+        "auftisch-osmoseanlage"
+      ],
+      "proposed_wp_page_slug": "auftisch-osmoseanlage",
+      "wp_product_owner_key": "WT:wasseraufbereitung/osmoseanlagen/auftisch-osmoseanlage",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Untertisch-Osmoseanlage",
+      "root": "Wasseraufbereitung",
+      "group": "Osmoseanlagen",
+      "source_name": "Untertisch-Osmose",
+      "source_path": "Wasseraufbereitung/Osmoseanlagen/Untertisch-Osmose",
+      "source_id": "c_2c066f9cb6bfcfaa",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "Passende Untertisch-Osmoseanlage nach Einbauplatz und Wasseranschluss wählen",
+            "Wasserbedarf und Armaturanschluss für die Untertischinstallation prüfen",
+            "Tanklose und tankgebundene Untertischsysteme bei Platzbedarf und Nutzung einordnen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-untertisch-osmoseanlage-auswahl",
+          "parent_product_owner": "WT:wasseraufbereitung/osmoseanlagen/untertisch-osmoseanlage",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        },
+        {
+          "name": "Wartung",
+          "article_ideas": [
+            "Filter- und Membranwechsel fachgerecht vorbereiten",
+            "Stillstand, Spülen und Hygiene im Alltag berücksichtigen",
+            "Undichte Anschlussstellen nach dem Wechsel erkennen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-untertisch-osmoseanlage-wartung",
+          "parent_product_owner": "WT:wasseraufbereitung/osmoseanlagen/untertisch-osmoseanlage",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Untertisch-Osmoseanlage einbauen: Abwasseranschluss, Druck und separate Armatur",
+        "Untertisch-Osmose für Mietwohnungen: reversible Einbauvarianten",
+        "Verkeimung im Osmosesystem vermeiden: Spülung, Stillstand und Filterwechsel",
+        "Permeatleistung bei kaltem Leitungswasser realistisch berechnen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseraufbereitung",
+        "osmoseanlagen",
+        "untertisch-osmoseanlage"
+      ],
+      "proposed_wp_page_slug": "untertisch-osmoseanlage",
+      "wp_product_owner_key": "WT:wasseraufbereitung/osmoseanlagen/untertisch-osmoseanlage",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE",
+      "audit_note": "Anwendungsseite Untertisch (Installation, Armatur/Platz, allgemeine Unterspülennutzung), nicht zweite Kopie der Direct-Flow- und Drucktank-Technik-Seiten."
+    },
+    {
+      "product": "Direct-Flow-Osmoseanlage",
+      "root": "Wasseraufbereitung",
+      "group": "Osmoseanlagen",
+      "source_name": "Direct-Flow-Osmose",
+      "source_path": "Wasseraufbereitung/Osmoseanlagen/Direct-Flow-Osmose",
+      "source_id": "c_622ff31488bf44c5",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Anlagenleistung",
+          "article_ideas": [
+            "Direct-Flow-Osmose dimensionieren: Membranleistung für mehrere Zapfstellen",
+            "Direct-Flow oder Tankanlage: Druck, Wartezeit und Abwasserverhältnis vergleichen",
+            "Boosterpumpe bei Direct-Flow-Anlagen: Geräusch, Strombedarf und Wartung",
+            "Automatische Spülprogramme prüfen: was sie leisten und was nicht"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-direct-flow-osmoseanlage-anlagenleistung",
+          "parent_product_owner": "WT:wasseraufbereitung/osmoseanlagen/direct-flow-osmoseanlage",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Direct-Flow-Osmose dimensionieren: Membranleistung für mehrere Zapfstellen",
+        "Direct-Flow oder Tankanlage: Druck, Wartezeit und Abwasserverhältnis vergleichen",
+        "Boosterpumpe bei Direct-Flow-Anlagen: Geräusch, Strombedarf und Wartung",
+        "Automatische Spülprogramme prüfen: was sie leisten und was nicht"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseraufbereitung",
+        "osmoseanlagen",
+        "direct-flow-osmoseanlage"
+      ],
+      "proposed_wp_page_slug": "direct-flow-osmoseanlage",
+      "wp_product_owner_key": "WT:wasseraufbereitung/osmoseanlagen/direct-flow-osmoseanlage",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE",
+      "audit_note": "Technologischer Fokus Direktdurchfluss/tanklos – Durchfluss, Pumpe, Rückgewinnung und Wartung; kein zweiter allgemeiner Untertisch-Montageartikel."
+    },
+    {
+      "product": "Osmoseanlage mit Drucktank",
+      "root": "Wasseraufbereitung",
+      "group": "Osmoseanlagen",
+      "source_name": "Tank-Osmose",
+      "source_path": "Wasseraufbereitung/Osmoseanlagen/Tank-Osmose",
+      "source_id": "c_02bf922ea10b32ab",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Drucktankbetrieb",
+          "article_ideas": [
+            "Osmoseanlage mit Drucktank: nutzbares Volumen und Nachfüllzeit verstehen",
+            "Drucktank hygienisch betreiben: Membran, Vordruck und Stagnation",
+            "Tank-Osmose bei niedrigem Leitungsdruck: Boosterpumpe sinnvoll auswählen",
+            "Geschmack nach dem Tank: Remineralisierung und Nachfilter kritisch vergleichen"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-osmoseanlage-mit-drucktank-drucktankbetrieb",
+          "parent_product_owner": "WT:wasseraufbereitung/osmoseanlagen/osmoseanlage-mit-drucktank",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Osmoseanlage mit Drucktank: nutzbares Volumen und Nachfüllzeit verstehen",
+        "Drucktank hygienisch betreiben: Membran, Vordruck und Stagnation",
+        "Tank-Osmose bei niedrigem Leitungsdruck: Boosterpumpe sinnvoll auswählen",
+        "Geschmack nach dem Tank: Remineralisierung und Nachfilter kritisch vergleichen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseraufbereitung",
+        "osmoseanlagen",
+        "osmoseanlage-mit-drucktank"
+      ],
+      "proposed_wp_page_slug": "osmoseanlage-mit-drucktank",
+      "wp_product_owner_key": "WT:wasseraufbereitung/osmoseanlagen/osmoseanlage-mit-drucktank",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE",
+      "audit_note": "Technologischer Fokus Vorrat/Drucktank – nutzbares Tankvolumen, Druck, Stagnation und Regeneration; andere Fragen als tanklos."
+    },
+    {
+      "product": "Enthärtungsanlage",
+      "root": "Wasseraufbereitung",
+      "group": "Aufbereitungsanlagen",
+      "source_name": "Enthärtungsanlagen",
+      "source_path": "Wasseraufbereitung/Enthärtungsanlagen",
+      "source_id": "c_7ea25ea4debb494e",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "Anlagenkapazität nach Wasserhärte und Haushaltsverbrauch wählen",
+            "Einzel- und Doppelenthärtung für kleine Betriebe vergleichen",
+            "Anschluss, Bypass und Platzbedarf vor dem Kauf prüfen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-enthaertungsanlage-auswahl",
+          "parent_product_owner": "WT:wasseraufbereitung/aufbereitungsanlagen/enthaertungsanlage",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        },
+        {
+          "name": "Betrieb",
+          "article_ideas": [
+            "Regeneriersalz und laufende Betriebskosten kalkulieren",
+            "Resthärte und Verschneidung kontrollieren",
+            "Typische Warnmeldungen und Wartungsintervalle einordnen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-enthaertungsanlage-betrieb",
+          "parent_product_owner": "WT:wasseraufbereitung/aufbereitungsanlagen/enthaertungsanlage",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Enthärtungsanlage dimensionieren: Wasserhärte, Verbrauch und Kapazität zusammenführen",
+        "Einzel- oder Doppelenthärtung: Unterschiede bei Dauerbetrieb und Regeneration",
+        "Salzverbrauch einer Enthärtungsanlage: Einfluss von Einstellung und Rohwasserhärte",
+        "Bypass und Verschneidung einstellen: gewünschte Resthärte sicher erreichen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseraufbereitung",
+        "aufbereitungsanlagen",
+        "enthaertungsanlage"
+      ],
+      "proposed_wp_page_slug": "enthaertungsanlage",
+      "wp_product_owner_key": "WT:wasseraufbereitung/aufbereitungsanlagen/enthaertungsanlage",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "UV-Desinfektionsanlage",
+      "root": "Wasseraufbereitung",
+      "group": "Aufbereitungsanlagen",
+      "source_name": "UV-Anlagen",
+      "source_path": "Wasseraufbereitung/UV-Anlagen",
+      "source_id": "c_cfd4525c2660b2b6",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "UV-Betrieb",
+          "article_ideas": [
+            "UV-Anlage dimensionieren: Durchfluss, UV-Dosis und Wassertrübung berücksichtigen",
+            "Vorfiltration vor UV-Desinfektion: wann Eisen und Trübstoffe die Wirkung mindern",
+            "UV-Lampe und Quarzrohr warten: Betriebsstunden, Belag und Dichtigkeitsprüfung",
+            "UV-Anlage mit Überwachung: Sensor, Alarm und Sicherheitsabschaltung vergleichen"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-uv-desinfektionsanlage-uv-betrieb",
+          "parent_product_owner": "WT:wasseraufbereitung/aufbereitungsanlagen/uv-desinfektionsanlage",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "UV-Anlage dimensionieren: Durchfluss, UV-Dosis und Wassertrübung berücksichtigen",
+        "Vorfiltration vor UV-Desinfektion: wann Eisen und Trübstoffe die Wirkung mindern",
+        "UV-Lampe und Quarzrohr warten: Betriebsstunden, Belag und Dichtigkeitsprüfung",
+        "UV-Anlage mit Überwachung: Sensor, Alarm und Sicherheitsabschaltung vergleichen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseraufbereitung",
+        "aufbereitungsanlagen",
+        "uv-desinfektionsanlage"
+      ],
+      "proposed_wp_page_slug": "uv-desinfektionsanlage",
+      "wp_product_owner_key": "WT:wasseraufbereitung/aufbereitungsanlagen/uv-desinfektionsanlage",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Wasser-Dosieranlage",
+      "root": "Wasseraufbereitung",
+      "group": "Aufbereitungsanlagen",
+      "source_name": "Dosieranlagen",
+      "source_path": "Wasseraufbereitung/Dosieranlagen",
+      "source_id": "c_c3f381c7fc1d9666",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Dosierpraxis",
+          "article_ideas": [
+            "Dosieranlage gegen Korrosion und Kalk: Einsatzgrenzen vor dem Einbau prüfen",
+            "Dosiermenge einstellen: Wasserverbrauch, Impulsgeber und Wirkstoffkonzentration",
+            "Dosiermittel nachfüllen: Lagerung, Hygiene und Dokumentation",
+            "Dosierung oder Enthärtung: unterschiedliche Ziele und Folgekosten vergleichen"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-wasser-dosieranlage-dosierpraxis",
+          "parent_product_owner": "WT:wasseraufbereitung/aufbereitungsanlagen/wasser-dosieranlage",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Dosieranlage gegen Korrosion und Kalk: Einsatzgrenzen vor dem Einbau prüfen",
+        "Dosiermenge einstellen: Wasserverbrauch, Impulsgeber und Wirkstoffkonzentration",
+        "Dosiermittel nachfüllen: Lagerung, Hygiene und Dokumentation",
+        "Dosierung oder Enthärtung: unterschiedliche Ziele und Folgekosten vergleichen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseraufbereitung",
+        "aufbereitungsanlagen",
+        "wasser-dosieranlage"
+      ],
+      "proposed_wp_page_slug": "wasser-dosieranlage",
+      "wp_product_owner_key": "WT:wasseraufbereitung/aufbereitungsanlagen/wasser-dosieranlage",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Wasserfilter-Ersatzkartusche",
+      "root": "Wasseraufbereitung",
+      "group": "Filterzubehör",
+      "source_name": "Ersatzfilter",
+      "source_path": "Wasseraufbereitung/Filterzubehör/Ersatzfilter",
+      "source_id": "c_45f9a534de2d22e1",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Kartuschenwechsel",
+          "article_ideas": [
+            "Ersatzfilter eindeutig zuordnen: Bauform, Anschluss und Herstellerkennung prüfen",
+            "Originalfilter oder kompatible Kartusche: Passform, Leistung und Nachweisbarkeit",
+            "Ersatzfilter bevorraten: Lagerdauer, Verpackung und hygienische Aufbewahrung",
+            "Filterwechselkosten über fünf Jahre: versteckte Folgekosten eines Systems"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-wasserfilter-ersatzkartusche-kartuschenwechsel",
+          "parent_product_owner": "WT:wasseraufbereitung/filterzubehoer/wasserfilter-ersatzkartusche",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Ersatzfilter eindeutig zuordnen: Bauform, Anschluss und Herstellerkennung prüfen",
+        "Originalfilter oder kompatible Kartusche: Passform, Leistung und Nachweisbarkeit",
+        "Ersatzfilter bevorraten: Lagerdauer, Verpackung und hygienische Aufbewahrung",
+        "Filterwechselkosten über fünf Jahre: versteckte Folgekosten eines Systems"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseraufbereitung",
+        "filterzubehoer",
+        "wasserfilter-ersatzkartusche"
+      ],
+      "proposed_wp_page_slug": "wasserfilter-ersatzkartusche",
+      "wp_product_owner_key": "WT:wasseraufbereitung/filterzubehoer/wasserfilter-ersatzkartusche",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Filtergehäuse",
+      "root": "Wasseraufbereitung",
+      "group": "Filterzubehör",
+      "source_name": "Filtergehäuse",
+      "source_path": "Wasseraufbereitung/Filterzubehör/Filtergehäuse",
+      "source_id": "c_e3a9b6776402179a",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Gehäusepraxis",
+          "article_ideas": [
+            "Filtergehäuse aus Kunststoff oder Metall: Druck, Temperatur und Trinkwasserkontakt",
+            "Single-, Duo- oder Trio-Gehäuse: sinnvolle Stufenkombinationen planen",
+            "Filtergehäuse abdichten: O-Ring, Gewinde und Anzugsmoment richtig behandeln",
+            "Transparente Filtertassen: Vorteile, UV-Risiken und Einbauort"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-filtergehaeuse-gehaeusepraxis",
+          "parent_product_owner": "WT:wasseraufbereitung/filterzubehoer/filtergehaeuse",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Filtergehäuse aus Kunststoff oder Metall: Druck, Temperatur und Trinkwasserkontakt",
+        "Single-, Duo- oder Trio-Gehäuse: sinnvolle Stufenkombinationen planen",
+        "Filtergehäuse abdichten: O-Ring, Gewinde und Anzugsmoment richtig behandeln",
+        "Transparente Filtertassen: Vorteile, UV-Risiken und Einbauort"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseraufbereitung",
+        "filterzubehoer",
+        "filtergehaeuse"
+      ],
+      "proposed_wp_page_slug": "filtergehaeuse",
+      "wp_product_owner_key": "WT:wasseraufbereitung/filterzubehoer/filtergehaeuse",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Wasserfilter-Anschlussadapter",
+      "root": "Wasseraufbereitung",
+      "group": "Filterzubehör",
+      "source_name": "Anschlussadapter",
+      "source_path": "Wasseraufbereitung/Filterzubehör/Anschlussadapter",
+      "source_id": "c_7ef641054f9860e4",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Anschlusslösungen",
+          "article_ideas": [
+            "Adapter für Wasserfilter auswählen: Zollmaß, Gewindeart und Dichtprinzip",
+            "Drei-Wege-Armatur anschließen: Adapterketten und Druckverlust vermeiden",
+            "Schnellsteckverbinder für Filteranlagen: Rohrmaß und Sicherungsclip prüfen",
+            "Übergang von Kupfer, Edelstahl oder Kunststoff auf Filtersysteme planen"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-wasserfilter-anschlussadapter-anschlussloesungen",
+          "parent_product_owner": "WT:wasseraufbereitung/filterzubehoer/wasserfilter-anschlussadapter",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Adapter für Wasserfilter auswählen: Zollmaß, Gewindeart und Dichtprinzip",
+        "Drei-Wege-Armatur anschließen: Adapterketten und Druckverlust vermeiden",
+        "Schnellsteckverbinder für Filteranlagen: Rohrmaß und Sicherungsclip prüfen",
+        "Übergang von Kupfer, Edelstahl oder Kunststoff auf Filtersysteme planen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseraufbereitung",
+        "filterzubehoer",
+        "wasserfilter-anschlussadapter"
+      ],
+      "proposed_wp_page_slug": "wasserfilter-anschlussadapter",
+      "wp_product_owner_key": "WT:wasseraufbereitung/filterzubehoer/wasserfilter-anschlussadapter",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Trinkwasser-Labortestset",
+      "root": "Wasseranalyse",
+      "group": "Testsets",
+      "source_name": "Trinkwasseranalyse",
+      "source_path": "Wasseranalyse/Trinkwasseranalyse",
+      "source_id": "c_66cfb43160c6f414",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Testauswahl",
+          "article_ideas": [
+            "Allgemeines Leitungswasser-Testpaket nach Anlass auswählen",
+            "Basisparameter und Zusatzanalysen im Trinkwasser-Testset unterscheiden",
+            "Standardpaket für Haushalt, Vereinsheim oder kleine Praxis vergleichen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-trinkwasser-labortestset-testauswahl",
+          "parent_product_owner": "WT:wasseranalyse/testsets/trinkwasser-labortestset",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        },
+        {
+          "name": "Probenahme",
+          "article_ideas": [
+            "Probenflaschen richtig handhaben",
+            "Probe innerhalb der vorgesehenen Frist versenden",
+            "Laborbefund von einfacher Schnelltestanzeige unterscheiden"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-trinkwasser-labortestset-probenahme",
+          "parent_product_owner": "WT:wasseranalyse/testsets/trinkwasser-labortestset",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Trinkwasseranalyse auswählen: welche Parameter zum Gebäude und zur Fragestellung passen",
+        "Probe am Wasserhahn nehmen: Stagnations- und Zufallsprobe unterscheiden",
+        "Kosten einer Trinkwasseranalyse: Basispaket, Schwermetalle und Mikrobiologie",
+        "Laborbericht verstehen: Grenzwert, Bestimmungsgrenze und Messunsicherheit"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseranalyse",
+        "testsets",
+        "trinkwasser-labortestset"
+      ],
+      "proposed_wp_page_slug": "trinkwasser-labortestset",
+      "wp_product_owner_key": "WT:wasseranalyse/testsets/trinkwasser-labortestset",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE",
+      "audit_note": "Allgemeines Analysepaket mit breitem Parameterprofil. Spezielle Zielschadstoffanalyse bleibt anderer Informations- und Kaufanlass; fachlich plausibel, SEO ausstehend."
+    },
+    {
+      "product": "Brunnenwasser-Testset",
+      "root": "Wasseranalyse",
+      "group": "Testsets",
+      "source_name": "Brunnenwasseranalyse",
+      "source_path": "Wasseranalyse/Brunnenwasseranalyse",
+      "source_id": "c_615db3441b597e54",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Testauswahl",
+          "article_ideas": [
+            "Sinnvolle Startparameter für neues Brunnenwasser bestimmen",
+            "Eisen, Mangan und Nitrat im Probenpaket berücksichtigen",
+            "Schnelltest und Laborprüfung nach Verwendungszweck trennen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-brunnenwasser-testset-testauswahl",
+          "parent_product_owner": "WT:wasseranalyse/testsets/brunnenwasser-testset",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        },
+        {
+          "name": "Probenahme",
+          "article_ideas": [
+            "Brunnenwasserprobe ohne Sedimenteinflüsse gewinnen",
+            "Geeignete Probenflasche und Versandbedingungen wählen",
+            "Messwerte vor und nach der Behandlung vergleichen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-brunnenwasser-testset-probenahme",
+          "parent_product_owner": "WT:wasseranalyse/testsets/brunnenwasser-testset",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Brunnenwasser vor der Nutzung prüfen: sinnvolles Mindestpaket an Parametern",
+        "Eisen, Mangan, Nitrat und Keime im Brunnenwasser gemeinsam bewerten",
+        "Brunnenwasser saisonal beproben: Zeitpunkt nach Starkregen und Trockenperioden",
+        "Analysewerte in eine passende Aufbereitungskette übersetzen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseranalyse",
+        "testsets",
+        "brunnenwasser-testset"
+      ],
+      "proposed_wp_page_slug": "brunnenwasser-testset",
+      "wp_product_owner_key": "WT:wasseranalyse/testsets/brunnenwasser-testset",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Schadstoff-Labortestset",
+      "root": "Wasseranalyse",
+      "group": "Testsets",
+      "source_name": "Schadstoffanalyse",
+      "source_path": "Wasseranalyse/Schadstoffanalyse",
+      "source_id": "c_8e2f7beb0108b7b8",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Analysepakete",
+          "article_ideas": [
+            "PFAS, Blei, Kupfer oder Arsen: zielgerichtetes Analysepaket zusammenstellen",
+            "Komplettanalyse oder Einzelparameter: Kosten und Aussagekraft vergleichen",
+            "Probenkette dokumentieren: Gefäß, Transport und Zuordnung der Entnahmestelle",
+            "Auffälligen Messwert bestätigen: Kontrollprobe und mögliche Kontamination"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-schadstoff-labortestset-analysepakete",
+          "parent_product_owner": "WT:wasseranalyse/testsets/schadstoff-labortestset",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "PFAS, Blei, Kupfer oder Arsen: zielgerichtetes Analysepaket zusammenstellen",
+        "Komplettanalyse oder Einzelparameter: Kosten und Aussagekraft vergleichen",
+        "Probenkette dokumentieren: Gefäß, Transport und Zuordnung der Entnahmestelle",
+        "Auffälligen Messwert bestätigen: Kontrollprobe und mögliche Kontamination"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseranalyse",
+        "testsets",
+        "schadstoff-labortestset"
+      ],
+      "proposed_wp_page_slug": "schadstoff-labortestset",
+      "wp_product_owner_key": "WT:wasseranalyse/testsets/schadstoff-labortestset",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE",
+      "audit_note": "Gezielte Untersuchungen von z. B. PFAS/Schwermetallen mit spezialisiertem Analyseziel; gesonderte Produktklasse im Fachkonzept; SEO noch ungemessen."
+    },
+    {
+      "product": "Wasserteststreifen",
+      "root": "Wasseranalyse",
+      "group": "Testsets",
+      "source_name": "Schnelltests",
+      "source_path": "Wasseranalyse/Schnelltests",
+      "source_id": "c_d2f1df282af61df6",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Testpraxis",
+          "article_ideas": [
+            "Teststreifen für Härte, Nitrat und Chlor: Genauigkeit und Ablesefehler",
+            "Schnelltest richtig lagern: Feuchtigkeit, Haltbarkeit und Reagenzschutz",
+            "Farbskala oder digitales Lesegerät: Reproduzierbarkeit im Heimgebrauch",
+            "Wann ein Schnelltest nicht genügt und ein akkreditiertes Labor nötig ist"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-wasserteststreifen-testpraxis",
+          "parent_product_owner": "WT:wasseranalyse/testsets/wasserteststreifen",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Teststreifen für Härte, Nitrat und Chlor: Genauigkeit und Ablesefehler",
+        "Schnelltest richtig lagern: Feuchtigkeit, Haltbarkeit und Reagenzschutz",
+        "Farbskala oder digitales Lesegerät: Reproduzierbarkeit im Heimgebrauch",
+        "Wann ein Schnelltest nicht genügt und ein akkreditiertes Labor nötig ist"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseranalyse",
+        "testsets",
+        "wasserteststreifen"
+      ],
+      "proposed_wp_page_slug": "wasserteststreifen",
+      "wp_product_owner_key": "WT:wasseranalyse/testsets/wasserteststreifen",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Wasser-Multimessgerät",
+      "root": "Wasseranalyse",
+      "group": "Messgeräte",
+      "source_name": "Messgeräte",
+      "source_path": "Wasseranalyse/Messgeräte",
+      "source_id": "c_8b047b8e2577ac57",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "pH-, Leitwert- und TDS-Funktion unterscheiden",
+            "Messbereich und Kalibriermöglichkeit vor dem Kauf prüfen",
+            "Einfache Teststreifen mit elektronischen Messgeräten vergleichen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-wasser-multimessgeraet-auswahl",
+          "parent_product_owner": "WT:wasseranalyse/messgeraete/wasser-multimessgeraet",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        },
+        {
+          "name": "Messpraxis",
+          "article_ideas": [
+            "pH-Sensor richtig kalibrieren",
+            "Temperaturkompensation beim Messen beachten",
+            "Messwerte richtig interpretieren und Laborgrenzen erkennen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-wasser-multimessgeraet-messpraxis",
+          "parent_product_owner": "WT:wasseranalyse/messgeraete/wasser-multimessgeraet",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "pH, Leitfähigkeit und TDS: welche Größe ein Handmessgerät tatsächlich erfasst",
+        "Messgerät kalibrieren: Pufferlösungen, Zellkonstante und Temperatur",
+        "Automatische Temperaturkompensation richtig interpretieren",
+        "Einsteigergerät oder Mehrparametergerät: Messbereich und Wartungsaufwand vergleichen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseranalyse",
+        "messgeraete",
+        "wasser-multimessgeraet"
+      ],
+      "proposed_wp_page_slug": "wasser-multimessgeraet",
+      "wp_product_owner_key": "WT:wasseranalyse/messgeraete/wasser-multimessgeraet",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Wasser-Probenahmeset",
+      "root": "Wasseranalyse",
+      "group": "Testsets",
+      "source_name": "Probenahme",
+      "source_path": "Wasseranalyse/Probenahme",
+      "source_id": "c_4f288186b12e47ae",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Probenahme",
+          "article_ideas": [
+            "Stagnationsprobe oder Spülprobe: passende Entnahmestrategie wählen",
+            "Sterile Probenflasche verwenden: Hahnvorbereitung und Kontamination vermeiden",
+            "Wasserprobe kühlen und transportieren: Zeitfenster für chemische und mikrobiologische Tests",
+            "Repräsentative Probe aus Tank, Brunnen oder Leitung entnehmen"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-wasser-probenahmeset-probenahme",
+          "parent_product_owner": "WT:wasseranalyse/testsets/wasser-probenahmeset",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Stagnationsprobe oder Spülprobe: passende Entnahmestrategie wählen",
+        "Sterile Probenflasche verwenden: Hahnvorbereitung und Kontamination vermeiden",
+        "Wasserprobe kühlen und transportieren: Zeitfenster für chemische und mikrobiologische Tests",
+        "Repräsentative Probe aus Tank, Brunnen oder Leitung entnehmen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wasseranalyse",
+        "testsets",
+        "wasser-probenahmeset"
+      ],
+      "proposed_wp_page_slug": "wasser-probenahmeset",
+      "wp_product_owner_key": "WT:wasseranalyse/testsets/wasser-probenahmeset",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Gartenbrunnen-Bausatz",
+      "root": "Brunnen",
+      "group": "Brunnenbauteile",
+      "source_name": "Gartenbrunnen",
+      "source_path": "Brunnen/Gartenbrunnen",
+      "source_id": "c_b92daef8e5eefbca",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Gartenbrunnenbau",
+          "article_ideas": [
+            "Gartenbrunnen nach Bewässerungsbedarf dimensionieren: Menge statt nur Tiefe",
+            "Ansaughöhe beim Gartenbrunnen: wann eine Oberflächenpumpe nicht mehr reicht",
+            "Gartenbrunnen winterfest machen: Leitung, Pumpe und Entnahmestelle entleeren",
+            "Gartenbrunnen anmelden oder genehmigen: örtliche Vorgaben systematisch prüfen"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-gartenbrunnen-bausatz-gartenbrunnenbau",
+          "parent_product_owner": "WT:brunnen/brunnenbauteile/gartenbrunnen-bausatz",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Gartenbrunnen nach Bewässerungsbedarf dimensionieren: Menge statt nur Tiefe",
+        "Ansaughöhe beim Gartenbrunnen: wann eine Oberflächenpumpe nicht mehr reicht",
+        "Gartenbrunnen winterfest machen: Leitung, Pumpe und Entnahmestelle entleeren",
+        "Gartenbrunnen anmelden oder genehmigen: örtliche Vorgaben systematisch prüfen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "brunnen",
+        "brunnenbauteile",
+        "gartenbrunnen-bausatz"
+      ],
+      "proposed_wp_page_slug": "gartenbrunnen-bausatz",
+      "wp_product_owner_key": "WT:brunnen/brunnenbauteile/gartenbrunnen-bausatz",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Schlagbrunnen-Set",
+      "root": "Brunnen",
+      "group": "Brunnenbauteile",
+      "source_name": "Schlagbrunnen",
+      "source_path": "Brunnen/Schlagbrunnen",
+      "source_id": "c_cc56b7d34e700ce3",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Schlagbrunnenbau",
+          "article_ideas": [
+            "Geeigneter Boden für einen Schlagbrunnen: Korngröße, Grundwasserstand und Tiefe",
+            "Filterrohr und Rammspitze auswählen: Durchmesser und Schlitzweite",
+            "Schlagbrunnen herstellen: Muffen, Rammkopf und senkrechte Führung",
+            "Schlagbrunnen liefert zu wenig Wasser: Verockerung, Versandung und Ansaughöhe"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-schlagbrunnen-set-schlagbrunnenbau",
+          "parent_product_owner": "WT:brunnen/brunnenbauteile/schlagbrunnen-set",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Geeigneter Boden für einen Schlagbrunnen: Korngröße, Grundwasserstand und Tiefe",
+        "Filterrohr und Rammspitze auswählen: Durchmesser und Schlitzweite",
+        "Schlagbrunnen herstellen: Muffen, Rammkopf und senkrechte Führung",
+        "Schlagbrunnen liefert zu wenig Wasser: Verockerung, Versandung und Ansaughöhe"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "brunnen",
+        "brunnenbauteile",
+        "schlagbrunnen-set"
+      ],
+      "proposed_wp_page_slug": "schlagbrunnen-set",
+      "wp_product_owner_key": "WT:brunnen/brunnenbauteile/schlagbrunnen-set",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Brunnenfilterrohr",
+      "root": "Brunnen",
+      "group": "Brunnenbauteile",
+      "source_name": "Brunnenausbau",
+      "source_path": "Brunnen/Brunnenausbau",
+      "source_id": "c_678e737ebcef5178",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Brunnenausbau",
+          "article_ideas": [
+            "Brunnenrohr und Filterstrecke auslegen: Durchmesser, Schlitzweite und Länge",
+            "Filterkies richtig wählen: Abstimmung auf Boden und Filterrohr",
+            "Brunnenkopf abdichten: Oberflächenwasser und Kleintiere fernhalten",
+            "Pumpe im Brunnen positionieren: Abstand zu Filterstrecke und Brunnenboden"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-brunnenfilterrohr-brunnenausbau",
+          "parent_product_owner": "WT:brunnen/brunnenbauteile/brunnenfilterrohr",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Brunnenrohr und Filterstrecke auslegen: Durchmesser, Schlitzweite und Länge",
+        "Filterkies richtig wählen: Abstimmung auf Boden und Filterrohr",
+        "Brunnenkopf abdichten: Oberflächenwasser und Kleintiere fernhalten",
+        "Pumpe im Brunnen positionieren: Abstand zu Filterstrecke und Brunnenboden"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "brunnen",
+        "brunnenbauteile",
+        "brunnenfilterrohr"
+      ],
+      "proposed_wp_page_slug": "brunnenfilterrohr",
+      "wp_product_owner_key": "WT:brunnen/brunnenbauteile/brunnenfilterrohr",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Gartenpumpe",
+      "root": "Pumpen & Druck",
+      "group": "Pumpen",
+      "source_name": "Gartenpumpen",
+      "source_path": "Pumpen & Druck/Gartenpumpen",
+      "source_id": "c_0857c58d5479a4bf",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "Gartenpumpen nach Förderhöhe, Druck und Durchfluss vergleichen",
+            "Selbstansaugende Pumpe und Tauchpumpe nach Wasserquelle auswählen",
+            "Pumpengröße für Gartenschlauch und mehrere Regner bestimmen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-gartenpumpe-auswahl",
+          "parent_product_owner": "WT:pumpen-druck/pumpen/gartenpumpe",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        },
+        {
+          "name": "Störungen",
+          "article_ideas": [
+            "Pumpe zieht Luft: Saugseite und Anschlüsse prüfen",
+            "Druck fällt ab: Filter, Ventile und Leckagen eingrenzen",
+            "Lautstärke und Trockenlauf im Gartenbetrieb vermeiden"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-gartenpumpe-stoerungen",
+          "parent_product_owner": "WT:pumpen-druck/pumpen/gartenpumpe",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Gartenpumpe auswählen: Förderhöhe, Ansaughöhe und benötigte Wassermenge",
+        "Selbstansaugende Gartenpumpe in Betrieb nehmen: Saugleitung vollständig befüllen",
+        "Gartenpumpe ist laut: Kavitation, Befestigung und Luft in der Leitung prüfen",
+        "Gartenpumpe für Regner dimensionieren: Druckbedarf und gleichzeitige Verbraucher"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "pumpen-druck",
+        "pumpen",
+        "gartenpumpe"
+      ],
+      "proposed_wp_page_slug": "gartenpumpe",
+      "wp_product_owner_key": "WT:pumpen-druck/pumpen/gartenpumpe",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Tauchpumpe",
+      "root": "Pumpen & Druck",
+      "group": "Pumpen",
+      "source_name": "Tauchpumpen",
+      "source_path": "Pumpen & Druck/Tauchpumpen",
+      "source_id": "c_28002ac59caad115",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Pumpeneinsatz",
+          "article_ideas": [
+            "Tauchpumpe für Tank oder Schacht auswählen: Eintauchtiefe und Kühlung",
+            "Tauchpumpe mit Schwimmerschalter: Schaltpunkte und Mindestwasserstand",
+            "Tauchpumpe fördert nicht: Drehrichtung, Luftpolster und verstopfter Einlauf",
+            "Flachsaugende Tauchpumpe: erreichbarer Restwasserstand und Einsatzgrenzen"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-tauchpumpe-pumpeneinsatz",
+          "parent_product_owner": "WT:pumpen-druck/pumpen/tauchpumpe",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Tauchpumpe für Tank oder Schacht auswählen: Eintauchtiefe und Kühlung",
+        "Tauchpumpe mit Schwimmerschalter: Schaltpunkte und Mindestwasserstand",
+        "Tauchpumpe fördert nicht: Drehrichtung, Luftpolster und verstopfter Einlauf",
+        "Flachsaugende Tauchpumpe: erreichbarer Restwasserstand und Einsatzgrenzen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "pumpen-druck",
+        "pumpen",
+        "tauchpumpe"
+      ],
+      "proposed_wp_page_slug": "tauchpumpe",
+      "wp_product_owner_key": "WT:pumpen-druck/pumpen/tauchpumpe",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Tiefbrunnenpumpe",
+      "root": "Pumpen & Druck",
+      "group": "Pumpen",
+      "source_name": "Tiefbrunnenpumpen",
+      "source_path": "Pumpen & Druck/Tiefbrunnenpumpen",
+      "source_id": "c_4c19b8b4dfc6015c",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "Brunnentiefe, Förderhöhe und Wasserbedarf zusammen berechnen",
+            "Drei- und Vier-Zoll-Tiefbrunnenpumpen vergleichen",
+            "Pumpenkennlinie mit Rohrverlusten abgleichen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-tiefbrunnenpumpe-auswahl",
+          "parent_product_owner": "WT:pumpen-druck/pumpen/tiefbrunnenpumpe",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        },
+        {
+          "name": "Betrieb",
+          "article_ideas": [
+            "Trockenlaufschutz im Brunnen sinnvoll auswählen",
+            "Sand und Sedimente als Schadensquelle prüfen",
+            "Pumpe im Filterbrunnen richtig positionieren"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-tiefbrunnenpumpe-betrieb",
+          "parent_product_owner": "WT:pumpen-druck/pumpen/tiefbrunnenpumpe",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Tiefbrunnenpumpe dimensionieren: Brunnenleistung, Förderhöhe und Rohrverluste",
+        "3-Zoll oder 4-Zoll-Pumpe: Brunnenrohr und Kühlströmung berücksichtigen",
+        "Tiefbrunnenpumpe richtig aufhängen: Seil, Kabel und Steigleitung",
+        "Takten der Tiefbrunnenpumpe vermeiden: Druckbehälter und Steuerung abstimmen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "pumpen-druck",
+        "pumpen",
+        "tiefbrunnenpumpe"
+      ],
+      "proposed_wp_page_slug": "tiefbrunnenpumpe",
+      "wp_product_owner_key": "WT:pumpen-druck/pumpen/tiefbrunnenpumpe",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Schmutzwasserpumpe",
+      "root": "Pumpen & Druck",
+      "group": "Pumpen",
+      "source_name": "Schmutzwasserpumpen",
+      "source_path": "Pumpen & Druck/Schmutzwasserpumpen",
+      "source_id": "c_629db1d0c14bf72d",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Schmutzwassereinsatz",
+          "article_ideas": [
+            "Schmutzwasserpumpe nach Korngröße und freiem Durchgang auswählen",
+            "Schmutzwasserpumpe im Keller einsetzen: Restwasser, Schlauch und Stromsicherheit",
+            "Verstopfte Schmutzwasserpumpe reinigen: Laufrad und Einlauf kontrollieren",
+            "Schmutzwasserpumpe für Baugrube: Schlammanteil und Dauerbetrieb bewerten"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-schmutzwasserpumpe-schmutzwassereinsatz",
+          "parent_product_owner": "WT:pumpen-druck/pumpen/schmutzwasserpumpe",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Schmutzwasserpumpe nach Korngröße und freiem Durchgang auswählen",
+        "Schmutzwasserpumpe im Keller einsetzen: Restwasser, Schlauch und Stromsicherheit",
+        "Verstopfte Schmutzwasserpumpe reinigen: Laufrad und Einlauf kontrollieren",
+        "Schmutzwasserpumpe für Baugrube: Schlammanteil und Dauerbetrieb bewerten"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "pumpen-druck",
+        "pumpen",
+        "schmutzwasserpumpe"
+      ],
+      "proposed_wp_page_slug": "schmutzwasserpumpe",
+      "wp_product_owner_key": "WT:pumpen-druck/pumpen/schmutzwasserpumpe",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Klarwasserpumpe",
+      "root": "Pumpen & Druck",
+      "group": "Pumpen",
+      "source_name": "Klarwasserpumpen",
+      "source_path": "Pumpen & Druck/Klarwasserpumpen",
+      "source_id": "c_22d7abff47e2de25",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Klarwasserentwässerung",
+          "article_ideas": [
+            "Klarwasserpumpe für Pool, Tank oder Keller: Fördermenge und Restwasserstand",
+            "Klarwasserpumpe mit flacher Absaugung richtig positionieren",
+            "Schwimmerschalter bei engem Schacht: integrierte und externe Lösungen",
+            "Klarwasser- oder Schmutzwasserpumpe: Medium und Korngröße entscheiden"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-klarwasserpumpe-klarwasserentwaesserung",
+          "parent_product_owner": "WT:pumpen-druck/pumpen/klarwasserpumpe",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Klarwasserpumpe für Pool, Tank oder Keller: Fördermenge und Restwasserstand",
+        "Klarwasserpumpe mit flacher Absaugung richtig positionieren",
+        "Schwimmerschalter bei engem Schacht: integrierte und externe Lösungen",
+        "Klarwasser- oder Schmutzwasserpumpe: Medium und Korngröße entscheiden"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "pumpen-druck",
+        "pumpen",
+        "klarwasserpumpe"
+      ],
+      "proposed_wp_page_slug": "klarwasserpumpe",
+      "wp_product_owner_key": "WT:pumpen-druck/pumpen/klarwasserpumpe",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Hauswasserwerk",
+      "root": "Pumpen & Druck",
+      "group": "Druckversorgung",
+      "source_name": "Hauswasserwerke",
+      "source_path": "Pumpen & Druck/Hauswasserwerke",
+      "source_id": "c_9a4fd29c1d8af231",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Hauswasserversorgung",
+          "article_ideas": [
+            "Hauswasserwerk dimensionieren: Zapfstellen, Förderhöhe und Behältergröße",
+            "Membrandruckbehälter am Hauswasserwerk: Vordruck prüfen und einstellen",
+            "Hauswasserwerk schaltet ständig: Leckage, Rückschlagventil oder kleine Hysterese",
+            "Hauswasserwerk für Brunnen oder Zisterne: Unterschiede bei Ansaugung und Schutz"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-hauswasserwerk-hauswasserversorgung",
+          "parent_product_owner": "WT:pumpen-druck/druckversorgung/hauswasserwerk",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Hauswasserwerk dimensionieren: Zapfstellen, Förderhöhe und Behältergröße",
+        "Membrandruckbehälter am Hauswasserwerk: Vordruck prüfen und einstellen",
+        "Hauswasserwerk schaltet ständig: Leckage, Rückschlagventil oder kleine Hysterese",
+        "Hauswasserwerk für Brunnen oder Zisterne: Unterschiede bei Ansaugung und Schutz"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "pumpen-druck",
+        "druckversorgung",
+        "hauswasserwerk"
+      ],
+      "proposed_wp_page_slug": "hauswasserwerk",
+      "wp_product_owner_key": "WT:pumpen-druck/druckversorgung/hauswasserwerk",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Druckerhöhungsanlage",
+      "root": "Pumpen & Druck",
+      "group": "Druckversorgung",
+      "source_name": "Druckerhöhungsanlagen",
+      "source_path": "Pumpen & Druck/Druckerhöhungsanlagen",
+      "source_id": "c_9dc62b0789174a07",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Druckerhöhung",
+          "article_ideas": [
+            "Druckerhöhungsanlage für ein Einfamilienhaus auslegen",
+            "Konstantdruck oder Druckschalter: Komfort und Energiebedarf vergleichen",
+            "Druckerhöhung direkt am Trinkwassernetz: Vordruckkontrolle und Absicherung",
+            "Mehrpumpenanlage dimensionieren: Redundanz und Spitzenlasten"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-druckerhoehungsanlage-druckerhoehung",
+          "parent_product_owner": "WT:pumpen-druck/druckversorgung/druckerhoehungsanlage",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Druckerhöhungsanlage für ein Einfamilienhaus auslegen",
+        "Konstantdruck oder Druckschalter: Komfort und Energiebedarf vergleichen",
+        "Druckerhöhung direkt am Trinkwassernetz: Vordruckkontrolle und Absicherung",
+        "Mehrpumpenanlage dimensionieren: Redundanz und Spitzenlasten"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "pumpen-druck",
+        "druckversorgung",
+        "druckerhoehungsanlage"
+      ],
+      "proposed_wp_page_slug": "druckerhoehungsanlage",
+      "wp_product_owner_key": "WT:pumpen-druck/druckversorgung/druckerhoehungsanlage",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Pumpensteuergerät",
+      "root": "Pumpen & Druck",
+      "group": "Steuerung & Zubehör",
+      "source_name": "Pumpensteuerung",
+      "source_path": "Pumpen & Druck/Pumpensteuerung",
+      "source_id": "c_289eaa4c0104a90c",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Pumpensteuerung",
+          "article_ideas": [
+            "Elektronische Pumpensteuerung oder Druckschalter: passende Schaltlogik wählen",
+            "Trockenlaufschutz einstellen: Stromaufnahme, Druck oder Füllstand als Signal",
+            "Frequenzsteuerung für Pumpen: konstanten Druck ohne Takten erreichen",
+            "Füllstandsschalter verdrahten und Schaltpunkte betriebssicher festlegen"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-pumpensteuergeraet-pumpensteuerung",
+          "parent_product_owner": "WT:pumpen-druck/steuerung-zubehoer/pumpensteuergeraet",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Elektronische Pumpensteuerung oder Druckschalter: passende Schaltlogik wählen",
+        "Trockenlaufschutz einstellen: Stromaufnahme, Druck oder Füllstand als Signal",
+        "Frequenzsteuerung für Pumpen: konstanten Druck ohne Takten erreichen",
+        "Füllstandsschalter verdrahten und Schaltpunkte betriebssicher festlegen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "pumpen-druck",
+        "steuerung-zubehoer",
+        "pumpensteuergeraet"
+      ],
+      "proposed_wp_page_slug": "pumpensteuergeraet",
+      "wp_product_owner_key": "WT:pumpen-druck/steuerung-zubehoer/pumpensteuergeraet",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Regentonne",
+      "root": "Regenwasser",
+      "group": "Regenspeicher",
+      "source_name": "Regentonnen",
+      "source_path": "Regenwasser/Regenspeicher/Regentonnen",
+      "source_id": "c_a338c903cb14811d",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Regenwasserspeicherung",
+          "article_ideas": [
+            "Regentonne nach Dachfläche und Gartenbedarf dimensionieren",
+            "Regentonne frostsicher betreiben: Entleerung, Auslauf und Material",
+            "Regentonnen verbinden: gleiche Wasserstände ohne Leckagen",
+            "Fallrohrsammler für Regentonnen: Filter, Überlaufstopp und Rohrgröße"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-regentonne-regenwasserspeicherung",
+          "parent_product_owner": "WT:regenwasser/regenspeicher/regentonne",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Regentonne nach Dachfläche und Gartenbedarf dimensionieren",
+        "Regentonne frostsicher betreiben: Entleerung, Auslauf und Material",
+        "Regentonnen verbinden: gleiche Wasserstände ohne Leckagen",
+        "Fallrohrsammler für Regentonnen: Filter, Überlaufstopp und Rohrgröße"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "regenwasser",
+        "regenspeicher",
+        "regentonne"
+      ],
+      "proposed_wp_page_slug": "regentonne",
+      "wp_product_owner_key": "WT:regenwasser/regenspeicher/regentonne",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Regenwasser-Erdtank",
+      "root": "Regenwasser",
+      "group": "Regenspeicher",
+      "source_name": "Erdtanks",
+      "source_path": "Regenwasser/Regenspeicher/Erdtanks",
+      "source_id": "c_a524276b4cb59ba0",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "Zisternenvolumen aus Dachfläche und Bewässerungsbedarf ableiten",
+            "Kunststoff- und Betontank nach Einbausituation vergleichen",
+            "Tragfähigkeit bei befahrbaren Flächen vor dem Kauf prüfen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-regenwasser-erdtank-auswahl",
+          "parent_product_owner": "WT:regenwasser/regenspeicher/regenwasser-erdtank",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        },
+        {
+          "name": "Einbau",
+          "article_ideas": [
+            "Aushub, Einbautiefe und Grundwasser berücksichtigen",
+            "Zulauf, Überlauf und Entnahme korrekt anordnen",
+            "Revisionszugang und Reinigung langfristig ermöglichen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-regenwasser-erdtank-einbau",
+          "parent_product_owner": "WT:regenwasser/regenspeicher/regenwasser-erdtank",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Regenwasser-Erdtank dimensionieren: Ertrag, Verbrauch und Überlauf berücksichtigen",
+        "Erdtank einbauen: Baugrube, Grundwasser und befahrbare Abdeckung",
+        "Kunststoff- oder Betonzisterne: Gewicht, Einbau und Wartung vergleichen",
+        "Erdtank gegen Auftrieb sichern: Grundwasserstand und Herstellerangaben"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "regenwasser",
+        "regenspeicher",
+        "regenwasser-erdtank"
+      ],
+      "proposed_wp_page_slug": "regenwasser-erdtank",
+      "wp_product_owner_key": "WT:regenwasser/regenspeicher/regenwasser-erdtank",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Regenwasser-Kellertank",
+      "root": "Regenwasser",
+      "group": "Regenspeicher",
+      "source_name": "Kellertanks",
+      "source_path": "Regenwasser/Regenspeicher/Kellertanks",
+      "source_id": "c_11b7a7b3af39fdcb",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Kellertankplanung",
+          "article_ideas": [
+            "Kellertank für Regenwasser modular planen: Türbreite und nutzbares Volumen",
+            "Kellertank gegen Geruch und Überlauf absichern",
+            "Kellertanks verbinden: kommunizierende Behälter und Reinigungszugang",
+            "Tragfähigkeit des Aufstellorts für gefüllte Kellertanks prüfen"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-regenwasser-kellertank-kellertankplanung",
+          "parent_product_owner": "WT:regenwasser/regenspeicher/regenwasser-kellertank",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Kellertank für Regenwasser modular planen: Türbreite und nutzbares Volumen",
+        "Kellertank gegen Geruch und Überlauf absichern",
+        "Kellertanks verbinden: kommunizierende Behälter und Reinigungszugang",
+        "Tragfähigkeit des Aufstellorts für gefüllte Kellertanks prüfen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "regenwasser",
+        "regenspeicher",
+        "regenwasser-kellertank"
+      ],
+      "proposed_wp_page_slug": "regenwasser-kellertank",
+      "wp_product_owner_key": "WT:regenwasser/regenspeicher/regenwasser-kellertank",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Fallrohrfilter",
+      "root": "Regenwasser",
+      "group": "Filter & Förderung",
+      "source_name": "Regenwasserfilter",
+      "source_path": "Regenwasser/Regenwasserfilter",
+      "source_id": "c_51f0c976b04bb151",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Vorfiltration",
+          "article_ideas": [
+            "Regenwasserfilter nach Dachfläche und Nutzung auswählen",
+            "Fallrohrfilter, Korbfilter oder Wirbelfilter: Wartung und Wasserertrag vergleichen",
+            "Filter vor der Zisterne einbauen: Gefälle und Notüberlauf planen",
+            "Regenwasserfilter reinigen: Intervalle nach Dach und Baumbestand"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-fallrohrfilter-vorfiltration",
+          "parent_product_owner": "WT:regenwasser/filter-foerderung/fallrohrfilter",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Regenwasserfilter nach Dachfläche und Nutzung auswählen",
+        "Fallrohrfilter, Korbfilter oder Wirbelfilter: Wartung und Wasserertrag vergleichen",
+        "Filter vor der Zisterne einbauen: Gefälle und Notüberlauf planen",
+        "Regenwasserfilter reinigen: Intervalle nach Dach und Baumbestand"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "regenwasser",
+        "filter-foerderung",
+        "fallrohrfilter"
+      ],
+      "proposed_wp_page_slug": "fallrohrfilter",
+      "wp_product_owner_key": "WT:regenwasser/filter-foerderung/fallrohrfilter",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Zisternenpumpe",
+      "root": "Regenwasser",
+      "group": "Filter & Förderung",
+      "source_name": "Regenwasserpumpen",
+      "source_path": "Regenwasser/Regenwasserpumpen",
+      "source_id": "c_38634ac7d679560f",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "Zisternenpumpe nach Förderhöhe und Entnahmestellen dimensionieren",
+            "Schwimmende Entnahme oder Bodenansaugung vergleichen",
+            "Drucksteuerung für Garten und Hausbedarf abgrenzen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-zisternenpumpe-auswahl",
+          "parent_product_owner": "WT:regenwasser/filter-foerderung/zisternenpumpe",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        },
+        {
+          "name": "Betrieb",
+          "article_ideas": [
+            "Trockenlauf und Luftansaugung vermeiden",
+            "Winterbetrieb bei Außenanlagen vorbereiten",
+            "Rückschlagventil und Filter vor der Pumpe prüfen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-zisternenpumpe-betrieb",
+          "parent_product_owner": "WT:regenwasser/filter-foerderung/zisternenpumpe",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Zisternenpumpe für Garten oder Haus dimensionieren",
+        "Schwimmende Entnahme: Wasser unter der Oberfläche statt vom Tankboden fördern",
+        "Unterwasserpumpe oder Saugpumpe für Regenwasser vergleichen",
+        "Regenwasserpumpe gegen Trockenlauf und häufiges Takten schützen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "regenwasser",
+        "filter-foerderung",
+        "zisternenpumpe"
+      ],
+      "proposed_wp_page_slug": "zisternenpumpe",
+      "wp_product_owner_key": "WT:regenwasser/filter-foerderung/zisternenpumpe",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Regenwasser-Hauszentrale",
+      "root": "Regenwasser",
+      "group": "Nutzung & Rückhalt",
+      "source_name": "Hausnutzung",
+      "source_path": "Regenwasser/Hausnutzung",
+      "source_id": "c_87839b5d9e584443",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Planung",
+          "article_ideas": [
+            "WC- und Gartenwasserbedarf zusammenführen",
+            "Trinkwassernachspeisung und Trennung der Netze planen",
+            "Bauliche Voraussetzungen für Vereinsheim oder kleines Geschäft prüfen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-regenwasser-hauszentrale-planung",
+          "parent_product_owner": "WT:regenwasser/nutzung-rueckhalt/regenwasser-hauszentrale",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        },
+        {
+          "name": "Betrieb",
+          "article_ideas": [
+            "Wartung von Steuerung und Druckversorgung",
+            "Wasserstände und automatische Nachspeisung überwachen",
+            "Kosten für Filter, Strom und Instandhaltung ermitteln"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-regenwasser-hauszentrale-betrieb",
+          "parent_product_owner": "WT:regenwasser/nutzung-rueckhalt/regenwasser-hauszentrale",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Regenwasser für WC und Waschmaschine: Leitungsnetz strikt trennen",
+        "Trinkwassernachspeisung mit freiem Auslauf sicher planen",
+        "Regenwassernutzung im Haus wirtschaftlich berechnen: Verbrauch und Wartung",
+        "Kennzeichnung von Betriebswasserleitungen und Zapfstellen umsetzen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "regenwasser",
+        "nutzung-rueckhalt",
+        "regenwasser-hauszentrale"
+      ],
+      "proposed_wp_page_slug": "regenwasser-hauszentrale",
+      "wp_product_owner_key": "WT:regenwasser/nutzung-rueckhalt/regenwasser-hauszentrale",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Rigolensystem",
+      "root": "Regenwasser",
+      "group": "Nutzung & Rückhalt",
+      "source_name": "Versickerungsanlagen",
+      "source_path": "Regenwasser/Versickerungsanlagen",
+      "source_id": "c_ae035e203001f393",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Versickerung",
+          "article_ideas": [
+            "Rigole dimensionieren: Dachfläche, Boden und Bemessungsregen",
+            "Sickerschacht oder Mulde: Flächenbedarf und Wartung vergleichen",
+            "Vorbehandlung vor der Versickerung: Sedimente und belastete Flächen",
+            "Versickerungsleistung des Bodens mit einem einfachen Test abschätzen"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-rigolensystem-versickerung",
+          "parent_product_owner": "WT:regenwasser/nutzung-rueckhalt/rigolensystem",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Rigole dimensionieren: Dachfläche, Boden und Bemessungsregen",
+        "Sickerschacht oder Mulde: Flächenbedarf und Wartung vergleichen",
+        "Vorbehandlung vor der Versickerung: Sedimente und belastete Flächen",
+        "Versickerungsleistung des Bodens mit einem einfachen Test abschätzen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "regenwasser",
+        "nutzung-rueckhalt",
+        "rigolensystem"
+      ],
+      "proposed_wp_page_slug": "rigolensystem",
+      "wp_product_owner_key": "WT:regenwasser/nutzung-rueckhalt/rigolensystem",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Retentionszisterne",
+      "root": "Regenwasser",
+      "group": "Nutzung & Rückhalt",
+      "source_name": "Retentionsanlagen",
+      "source_path": "Regenwasser/Retentionsanlagen",
+      "source_id": "c_d0ebf4c01429d446",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Regenrückhalt",
+          "article_ideas": [
+            "Retentionszisterne auslegen: Rückhaltevolumen und Drosselabfluss",
+            "Regenwassernutzung und Retention in einem Tank kombinieren",
+            "Drossel und Notüberlauf einer Retentionsanlage warten",
+            "Retentionsvolumen bei Starkregen: kommunale Vorgaben in die Planung übernehmen"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-retentionszisterne-regenrueckhalt",
+          "parent_product_owner": "WT:regenwasser/nutzung-rueckhalt/retentionszisterne",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Retentionszisterne auslegen: Rückhaltevolumen und Drosselabfluss",
+        "Regenwassernutzung und Retention in einem Tank kombinieren",
+        "Drossel und Notüberlauf einer Retentionsanlage warten",
+        "Retentionsvolumen bei Starkregen: kommunale Vorgaben in die Planung übernehmen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "regenwasser",
+        "nutzung-rueckhalt",
+        "retentionszisterne"
+      ],
+      "proposed_wp_page_slug": "retentionszisterne",
+      "wp_product_owner_key": "WT:regenwasser/nutzung-rueckhalt/retentionszisterne",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Tropfbewässerungsset",
+      "root": "Bewässerung",
+      "group": "Bewässerungssysteme",
+      "source_name": "Tropfbewässerung",
+      "source_path": "Bewässerung/Tropfbewässerung",
+      "source_id": "c_e269cbab96b89672",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "Tropfrohr und Einzeltropfer für Beet und Hecke vergleichen",
+            "Wasserbedarf und Tropferabstände je Pflanzzone abschätzen",
+            "Bewässerungsset für Hochbeet, Garten oder Vereinsfläche auswählen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-tropfbewaesserungsset-auswahl",
+          "parent_product_owner": "WT:bewaesserung/bewaesserungssysteme/tropfbewaesserungsset",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        },
+        {
+          "name": "Betrieb",
+          "article_ideas": [
+            "Druckregler und Filter in die Tropfbewässerung integrieren",
+            "Verstopfte Tropfer erkennen und reinigen",
+            "Winterpause und Wiederinbetriebnahme vorbereiten"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-tropfbewaesserungsset-betrieb",
+          "parent_product_owner": "WT:bewaesserung/bewaesserungssysteme/tropfbewaesserungsset",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Tropfbewässerung dimensionieren: Tropfermenge, Leitungslänge und Druck",
+        "Druckkompensierende oder einfache Tropfer: Höhenunterschiede berücksichtigen",
+        "Tropfschlauch unter Mulch verlegen: Abstand und Verstopfungsschutz",
+        "Tropfbewässerung winterfest machen und Leitungen spülen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "bewaesserung",
+        "bewaesserungssysteme",
+        "tropfbewaesserungsset"
+      ],
+      "proposed_wp_page_slug": "tropfbewaesserungsset",
+      "wp_product_owner_key": "WT:bewaesserung/bewaesserungssysteme/tropfbewaesserungsset",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Versenkregner",
+      "root": "Bewässerung",
+      "group": "Bewässerungssysteme",
+      "source_name": "Sprinklersysteme",
+      "source_path": "Bewässerung/Sprinklersysteme",
+      "source_id": "c_bd5efc76eb86d237",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Planung",
+          "article_ideas": [
+            "Wurfweiten und Regnerabstände ohne trockene Flächen planen",
+            "Druck und Durchfluss pro Bewässerungszone kalkulieren",
+            "Regnertypen für Rasen, Randbereiche und Sportvereinsflächen wählen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-versenkregner-planung",
+          "parent_product_owner": "WT:bewaesserung/bewaesserungssysteme/versenkregner",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        },
+        {
+          "name": "Wartung",
+          "article_ideas": [
+            "Düsen reinigen und Regner einstellen",
+            "Frostschutz und Winterentleerung planen",
+            "Ungleichmäßige Wasserverteilung diagnostizieren"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-versenkregner-wartung",
+          "parent_product_owner": "WT:bewaesserung/bewaesserungssysteme/versenkregner",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Versenkregner planen: Wurfweiten überlappen statt Lücken erzeugen",
+        "Kreis-, Viereck- oder Impulsregner: passende Flächenform wählen",
+        "Sprinklerzonen nach verfügbarem Wasserdruck aufteilen",
+        "Düsen eines Sprinklersystems reinigen und gleichmäßig einstellen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "bewaesserung",
+        "bewaesserungssysteme",
+        "versenkregner"
+      ],
+      "proposed_wp_page_slug": "versenkregner",
+      "wp_product_owner_key": "WT:bewaesserung/bewaesserungssysteme/versenkregner",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Bewässerungscomputer",
+      "root": "Bewässerung",
+      "group": "Steuerung",
+      "source_name": "Bewässerungscomputer",
+      "source_path": "Bewässerung/Bewässerungscomputer",
+      "source_id": "c_b9636072f02d4544",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Bewässerungsautomatik",
+          "article_ideas": [
+            "Bewässerungscomputer mit einem oder mehreren Ausgängen auswählen",
+            "Bewässerungszeiten nach Bodenart und Pflanzenbedarf festlegen",
+            "Bewässerungscomputer mit Wetterdaten: Nutzen und Ausfallrisiken",
+            "Batterie, Ventil und Frostschutz bei Bewässerungscomputern warten"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-bewaesserungscomputer-bewaesserungsautomatik",
+          "parent_product_owner": "WT:bewaesserung/steuerung/bewaesserungscomputer",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Bewässerungscomputer mit einem oder mehreren Ausgängen auswählen",
+        "Bewässerungszeiten nach Bodenart und Pflanzenbedarf festlegen",
+        "Bewässerungscomputer mit Wetterdaten: Nutzen und Ausfallrisiken",
+        "Batterie, Ventil und Frostschutz bei Bewässerungscomputern warten"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "bewaesserung",
+        "steuerung",
+        "bewaesserungscomputer"
+      ],
+      "proposed_wp_page_slug": "bewaesserungscomputer",
+      "wp_product_owner_key": "WT:bewaesserung/steuerung/bewaesserungscomputer",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Bodenfeuchtesensor",
+      "root": "Bewässerung",
+      "group": "Steuerung",
+      "source_name": "Bodenfeuchtesensoren",
+      "source_path": "Bewässerung/Bodenfeuchtesensoren",
+      "source_id": "c_b0ed3ca95b4fd87e",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Sensoreinsatz",
+          "article_ideas": [
+            "Bodenfeuchtesensor richtig platzieren: Wurzelzone statt Oberfläche messen",
+            "Schwellwert für automatische Bewässerung praktisch einstellen",
+            "Kapazitive und tensiometrische Sensoren im Garten vergleichen",
+            "Fehlmessungen durch Salz, Bodenart und schlechten Bodenkontakt erkennen"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-bodenfeuchtesensor-sensoreinsatz",
+          "parent_product_owner": "WT:bewaesserung/steuerung/bodenfeuchtesensor",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Bodenfeuchtesensor richtig platzieren: Wurzelzone statt Oberfläche messen",
+        "Schwellwert für automatische Bewässerung praktisch einstellen",
+        "Kapazitive und tensiometrische Sensoren im Garten vergleichen",
+        "Fehlmessungen durch Salz, Bodenart und schlechten Bodenkontakt erkennen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "bewaesserung",
+        "steuerung",
+        "bodenfeuchtesensor"
+      ],
+      "proposed_wp_page_slug": "bodenfeuchtesensor",
+      "wp_product_owner_key": "WT:bewaesserung/steuerung/bodenfeuchtesensor",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Gartenschlauch",
+      "root": "Bewässerung",
+      "group": null,
+      "source_name": "Gartenschläuche",
+      "source_path": "Bewässerung/Gartenschläuche",
+      "source_id": "c_b877053b93b555e2",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Schlauchpraxis",
+          "article_ideas": [
+            "Gartenschlauch-Durchmesser nach Länge und Durchfluss auswählen",
+            "Knicksicher, dehnbar oder flach: Schlauchtypen im Praxiseinsatz vergleichen",
+            "Schlauchkupplungen abdichten: O-Ringe und Stecksysteme warten",
+            "Schlauchwagen und Wandbox: Aufrollmechanik und Frostlagerung"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-gartenschlauch-schlauchpraxis",
+          "parent_product_owner": "WT:bewaesserung/gartenschlauch",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Gartenschlauch-Durchmesser nach Länge und Durchfluss auswählen",
+        "Knicksicher, dehnbar oder flach: Schlauchtypen im Praxiseinsatz vergleichen",
+        "Schlauchkupplungen abdichten: O-Ringe und Stecksysteme warten",
+        "Schlauchwagen und Wandbox: Aufrollmechanik und Frostlagerung"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "bewaesserung",
+        "gartenschlauch"
+      ],
+      "proposed_wp_page_slug": "gartenschlauch",
+      "wp_product_owner_key": "WT:bewaesserung/gartenschlauch",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Trinkwassertank",
+      "root": "Wassertanks",
+      "group": "Tankarten",
+      "source_name": "Trinkwassertanks",
+      "source_path": "Wassertanks/Trinkwassertanks",
+      "source_id": "c_4dcdddcf889e52ea",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Trinkwasserspeicherung",
+          "article_ideas": [
+            "Trinkwassertank auswählen: Materialeignung, Lichtschutz und Reinigungszugang",
+            "Trinkwassertank dimensionieren: Verbrauch, Reserve und Wasserwechsel",
+            "Trinkwassertank desinfizieren: Konzentration, Einwirkzeit und Spülung",
+            "Stagnation im Trinkwassertank vermeiden: Umwälzung und Entnahmeführung"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-trinkwassertank-trinkwasserspeicherung",
+          "parent_product_owner": "WT:wassertanks/tankarten/trinkwassertank",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Trinkwassertank auswählen: Materialeignung, Lichtschutz und Reinigungszugang",
+        "Trinkwassertank dimensionieren: Verbrauch, Reserve und Wasserwechsel",
+        "Trinkwassertank desinfizieren: Konzentration, Einwirkzeit und Spülung",
+        "Stagnation im Trinkwassertank vermeiden: Umwälzung und Entnahmeführung"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wassertanks",
+        "tankarten",
+        "trinkwassertank"
+      ],
+      "proposed_wp_page_slug": "trinkwassertank",
+      "wp_product_owner_key": "WT:wassertanks/tankarten/trinkwassertank",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "IBC-Wassertank",
+      "root": "Wassertanks",
+      "group": "Tankarten",
+      "source_name": "IBC-Container",
+      "source_path": "Wassertanks/IBC-Container",
+      "source_id": "c_c1fc41c2854307e2",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "IBC-Herkunft für unterschiedliche Wasserarten prüfen",
+            "500 und 1.000 Liter nach Aufstellfläche und Nutzung vergleichen",
+            "Lebensmitteleignung und Vorbefüllung korrekt beurteilen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-ibc-wassertank-auswahl",
+          "parent_product_owner": "WT:wassertanks/tankarten/ibc-wassertank",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        },
+        {
+          "name": "Betrieb",
+          "article_ideas": [
+            "Lichtschutz gegen Algenbildung",
+            "Auslaufhahn und Tankadapter passend verbinden",
+            "IBC reinigen und frostsicher überwintern"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-ibc-wassertank-betrieb",
+          "parent_product_owner": "WT:wassertanks/tankarten/ibc-wassertank",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "IBC-Container für Wasser nutzen: Vorbefüllung und Materialfreigabe prüfen",
+        "IBC vor Licht und Frost schützen: Abdeckung und Aufstellort",
+        "Mehrere IBC verbinden: gleichmäßige Entnahme und sichere Armaturen",
+        "IBC reinigen: Rückstände erkennen und schwer erreichbare Stellen behandeln"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wassertanks",
+        "tankarten",
+        "ibc-wassertank"
+      ],
+      "proposed_wp_page_slug": "ibc-wassertank",
+      "wp_product_owner_key": "WT:wassertanks/tankarten/ibc-wassertank",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Mobiler Wassertank",
+      "root": "Wassertanks",
+      "group": "Tankarten",
+      "source_name": "Mobile Wassertanks",
+      "source_path": "Wassertanks/Mobile Wassertanks",
+      "source_id": "c_cb6e85dbbb87ba54",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Wassertransport",
+          "article_ideas": [
+            "Mobiler Wassertank für Anhänger oder Fahrzeug: Gewicht und Ladungssicherung",
+            "Faltkanister, Wassertasche oder starrer Tank: Einsatzdauer vergleichen",
+            "Schwallbewegung in Transporttanks: Form und Befestigung berücksichtigen",
+            "Mobile Tanks hygienisch trocknen und geruchsfrei lagern"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-mobiler-wassertank-wassertransport",
+          "parent_product_owner": "WT:wassertanks/tankarten/mobiler-wassertank",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Mobiler Wassertank für Anhänger oder Fahrzeug: Gewicht und Ladungssicherung",
+        "Faltkanister, Wassertasche oder starrer Tank: Einsatzdauer vergleichen",
+        "Schwallbewegung in Transporttanks: Form und Befestigung berücksichtigen",
+        "Mobile Tanks hygienisch trocknen und geruchsfrei lagern"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wassertanks",
+        "tankarten",
+        "mobiler-wassertank"
+      ],
+      "proposed_wp_page_slug": "mobiler-wassertank",
+      "wp_product_owner_key": "WT:wassertanks/tankarten/mobiler-wassertank",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Nutzwassertank",
+      "root": "Wassertanks",
+      "group": "Tankarten",
+      "source_name": "Nutzwassertanks",
+      "source_path": "Wassertanks/Nutzwassertanks",
+      "source_id": "c_524f1ddf3b32ec0e",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Nutzwasserspeicherung",
+          "article_ideas": [
+            "Nutzwassertank für Garten oder Betrieb: Medium und Material abstimmen",
+            "Oberirdischen Tank UV- und frostsicher aufstellen",
+            "Entnahme aus Nutzwassertanks: Anschlussposition und Restvolumen",
+            "Belüftung und Überlauf eines Nutzwassertanks dimensionieren"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-nutzwassertank-nutzwasserspeicherung",
+          "parent_product_owner": "WT:wassertanks/tankarten/nutzwassertank",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Nutzwassertank für Garten oder Betrieb: Medium und Material abstimmen",
+        "Oberirdischen Tank UV- und frostsicher aufstellen",
+        "Entnahme aus Nutzwassertanks: Anschlussposition und Restvolumen",
+        "Belüftung und Überlauf eines Nutzwassertanks dimensionieren"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "wassertanks",
+        "tankarten",
+        "nutzwassertank"
+      ],
+      "proposed_wp_page_slug": "nutzwassertank",
+      "wp_product_owner_key": "WT:wassertanks/tankarten/nutzwassertank",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Hebeanlage",
+      "root": "Abwassertechnik",
+      "group": "Entwässerung",
+      "source_name": "Hebeanlagen",
+      "source_path": "Abwassertechnik/Hebeanlagen",
+      "source_id": "c_fc02b3c1b644d3b6",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "Kleinhebeanlage oder Fäkalienhebeanlage nach Abwasserart wählen",
+            "Förderhöhe, Druckleitung und Aufstellort richtig planen",
+            "Ein- oder Zweipumpenlösung für Vereinsheim bzw. Kleinbetrieb prüfen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-hebeanlage-auswahl",
+          "parent_product_owner": "WT:abwassertechnik/entwaesserung/hebeanlage",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        },
+        {
+          "name": "Betrieb",
+          "article_ideas": [
+            "Alarm und Rückstauschutz bei Ausfall verstehen",
+            "Wartungsintervalle und typische Verstopfungsursachen",
+            "Stromausfall und längere Stillstandszeiten berücksichtigen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-hebeanlage-betrieb",
+          "parent_product_owner": "WT:abwassertechnik/entwaesserung/hebeanlage",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Hebeanlage dimensionieren: Zufluss, Förderhöhe und Druckleitung",
+        "Fäkalien- oder Kleinhebeanlage: angeschlossene Entwässerungsgegenstände entscheiden",
+        "Doppelhebeanlage für Ausfallsicherheit: Steuerung und Alarm",
+        "Hebeanlage warten: Rückflussverhinderer, Behälter und Pumpe prüfen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "abwassertechnik",
+        "entwaesserung",
+        "hebeanlage"
+      ],
+      "proposed_wp_page_slug": "hebeanlage",
+      "wp_product_owner_key": "WT:abwassertechnik/entwaesserung/hebeanlage",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Rückstauverschluss",
+      "root": "Abwassertechnik",
+      "group": "Entwässerung",
+      "source_name": "Rückstauschutz",
+      "source_path": "Abwassertechnik/Rückstauschutz",
+      "source_id": "c_83310ec6a96c8c2b",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Eignung",
+          "article_ideas": [
+            "Rückstauverschluss oder Hebeanlage für die konkrete Entwässerung wählen",
+            "Rückstauebene und zulässige Ablaufstellen im Altbau ermitteln",
+            "Manuellen und elektronischen Rückstauverschluss vergleichen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-rueckstauverschluss-eignung",
+          "parent_product_owner": "WT:abwassertechnik/entwaesserung/rueckstauverschluss",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        },
+        {
+          "name": "Wartung",
+          "article_ideas": [
+            "Klappenfunktion regelmäßig prüfen",
+            "Verschmutzungen an Dichtung und Verriegelung beseitigen",
+            "Alarm- und Stromausfallsituation durchspielen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-rueckstauverschluss-wartung",
+          "parent_product_owner": "WT:abwassertechnik/entwaesserung/rueckstauverschluss",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Rückstauverschluss oder Hebeanlage: Nutzung unterhalb der Rückstauebene",
+        "Rückstauklappe regelmäßig prüfen: Verschluss, Dichtung und Alarm",
+        "Elektronischer Rückstauautomat: Stromausfall und Notverschluss",
+        "Rückstauschutz im Bestand nachrüsten: Leitungsführung und Zugänglichkeit"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "abwassertechnik",
+        "entwaesserung",
+        "rueckstauverschluss"
+      ],
+      "proposed_wp_page_slug": "rueckstauverschluss",
+      "wp_product_owner_key": "WT:abwassertechnik/entwaesserung/rueckstauverschluss",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Grauwasseranlage",
+      "root": "Abwassertechnik",
+      "group": "Aufbereitung & Speicherung",
+      "source_name": "Grauwasseranlagen",
+      "source_path": "Abwassertechnik/Grauwasseranlagen",
+      "source_id": "c_6c6f8326734d479b",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Planung",
+          "article_ideas": [
+            "Grauwasserquellen und geplanten Wasserverbrauch unterscheiden",
+            "Speichervolumen und Hygieneanforderungen vergleichen",
+            "Aufstellort und getrennte Betriebswasserleitungen planen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-grauwasseranlage-planung",
+          "parent_product_owner": "WT:abwassertechnik/aufbereitung-speicherung/grauwasseranlage",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        },
+        {
+          "name": "Betrieb",
+          "article_ideas": [
+            "Filterpflege und Betriebswasserqualität überwachen",
+            "Störfälle bei Pumpen und Sensoren unterscheiden",
+            "Wirtschaftlichkeit für Wohnhaus oder kleine Anlage prüfen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-grauwasseranlage-betrieb",
+          "parent_product_owner": "WT:abwassertechnik/aufbereitung-speicherung/grauwasseranlage",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Grauwasseranlage planen: Quellen, Verbrauch und Speichervolumen",
+        "Grauwasser aufbereiten: biologische Stufe, Membran und Desinfektion",
+        "Grauwasserleitungen vom Trinkwassernetz sicher trennen und kennzeichnen",
+        "Wartungs- und Energiekosten einer Grauwasseranlage realistisch berechnen"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "abwassertechnik",
+        "aufbereitung-speicherung",
+        "grauwasseranlage"
+      ],
+      "proposed_wp_page_slug": "grauwasseranlage",
+      "wp_product_owner_key": "WT:abwassertechnik/aufbereitung-speicherung/grauwasseranlage",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Kleinkläranlage",
+      "root": "Abwassertechnik",
+      "group": "Aufbereitung & Speicherung",
+      "source_name": "Kleinkläranlagen",
+      "source_path": "Abwassertechnik/Kleinkläranlagen",
+      "source_id": "c_908a4f0604144128",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "SBR-System und Pflanzenkläranlage konzeptionell vergleichen",
+            "Anlagengröße nach Nutzung und saisonaler Belegung abschätzen",
+            "Zulassungen, Genehmigungen und Platzbedarf vor dem Kauf prüfen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-kleinklaeranlage-auswahl",
+          "parent_product_owner": "WT:abwassertechnik/aufbereitung-speicherung/kleinklaeranlage",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        },
+        {
+          "name": "Betrieb",
+          "article_ideas": [
+            "Wartung und Schlammabfuhr organisieren",
+            "Stillstand bei Ferienobjekten oder Vereinsanlagen berücksichtigen",
+            "Häufige Funktionsstörungen einordnen"
+          ],
+          "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
+          "proposed_wp_slug": "wt-kleinklaeranlage-betrieb",
+          "parent_product_owner": "WT:abwassertechnik/aufbereitung-speicherung/kleinklaeranlage",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "SBR- oder Pflanzenkläranlage: Grundstück, Lastschwankung und Wartung vergleichen",
+        "Kleinkläranlage dimensionieren: Einwohnerwerte und Spitzenbelastung",
+        "Nachrüstung einer bestehenden Grube: technische und behördliche Prüfung",
+        "Betriebsstörungen erkennen: Schlamm, Belüftung und Ablaufqualität"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "abwassertechnik",
+        "aufbereitung-speicherung",
+        "kleinklaeranlage"
+      ],
+      "proposed_wp_page_slug": "kleinklaeranlage",
+      "wp_product_owner_key": "WT:abwassertechnik/aufbereitung-speicherung/kleinklaeranlage",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Abwassertank",
+      "root": "Abwassertechnik",
+      "group": "Aufbereitung & Speicherung",
+      "source_name": "Abwassertanks",
+      "source_path": "Abwassertechnik/Abwassertanks",
+      "source_id": "c_5ec9a4a2a799cca6",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Abwasserspeicherung",
+          "article_ideas": [
+            "Abwassertank dimensionieren: Nutzung, Entleerungsintervall und Reserve",
+            "Fäkalientank im Garten oder auf dem Freizeitgrundstück dicht einbauen",
+            "Füllstandsalarm für Abwassertanks: Sensorposition und Ausfallsicherheit",
+            "Geruch aus dem Abwassertank durch Entlüftung und dichte Anschlüsse reduzieren"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-abwassertank-abwasserspeicherung",
+          "parent_product_owner": "WT:abwassertechnik/aufbereitung-speicherung/abwassertank",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Abwassertank dimensionieren: Nutzung, Entleerungsintervall und Reserve",
+        "Fäkalientank im Garten oder auf dem Freizeitgrundstück dicht einbauen",
+        "Füllstandsalarm für Abwassertanks: Sensorposition und Ausfallsicherheit",
+        "Geruch aus dem Abwassertank durch Entlüftung und dichte Anschlüsse reduzieren"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "abwassertechnik",
+        "aufbereitung-speicherung",
+        "abwassertank"
+      ],
+      "proposed_wp_page_slug": "abwassertank",
+      "wp_product_owner_key": "WT:abwassertechnik/aufbereitung-speicherung/abwassertank",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Bodenablauf",
+      "root": "Abwassertechnik",
+      "group": "Entwässerung",
+      "source_name": "Bodenabläufe",
+      "source_path": "Abwassertechnik/Bodenabläufe",
+      "source_id": "c_1f66a41f36344745",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Kellerentwässerung",
+          "article_ideas": [
+            "Bodenablauf nach Sperrwasserhöhe und Ablaufleistung auswählen",
+            "Geruchsverschluss im selten genutzten Ablauf vor Austrocknung schützen",
+            "Bodenablauf im Keller gegen Rückstau richtig einordnen",
+            "Bodenablauf reinigen: Rost, Einsatz und Anschlussleitung zugänglich halten"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-bodenablauf-kellerentwaesserung",
+          "parent_product_owner": "WT:abwassertechnik/entwaesserung/bodenablauf",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Bodenablauf nach Sperrwasserhöhe und Ablaufleistung auswählen",
+        "Geruchsverschluss im selten genutzten Ablauf vor Austrocknung schützen",
+        "Bodenablauf im Keller gegen Rückstau richtig einordnen",
+        "Bodenablauf reinigen: Rost, Einsatz und Anschlussleitung zugänglich halten"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "abwassertechnik",
+        "entwaesserung",
+        "bodenablauf"
+      ],
+      "proposed_wp_page_slug": "bodenablauf",
+      "wp_product_owner_key": "WT:abwassertechnik/entwaesserung/bodenablauf",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Revisionsschacht",
+      "root": "Abwassertechnik",
+      "group": "Entwässerung",
+      "source_name": "Revisionsschächte",
+      "source_path": "Abwassertechnik/Revisionsschächte",
+      "source_id": "c_1f75db9504ffe8cd",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Schachtplanung",
+          "article_ideas": [
+            "Revisionsschacht positionieren: Richtungswechsel und Zugänglichkeit",
+            "Kunststoff- oder Betonschacht: Einbau und Belastung vergleichen",
+            "Revisionsschacht gegen Fremdwasser und Wurzeleinwuchs abdichten",
+            "Kanalinspektion über den Revisionsschacht vorbereiten"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-revisionsschacht-schachtplanung",
+          "parent_product_owner": "WT:abwassertechnik/entwaesserung/revisionsschacht",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Revisionsschacht positionieren: Richtungswechsel und Zugänglichkeit",
+        "Kunststoff- oder Betonschacht: Einbau und Belastung vergleichen",
+        "Revisionsschacht gegen Fremdwasser und Wurzeleinwuchs abdichten",
+        "Kanalinspektion über den Revisionsschacht vorbereiten"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "abwassertechnik",
+        "entwaesserung",
+        "revisionsschacht"
+      ],
+      "proposed_wp_page_slug": "revisionsschacht",
+      "wp_product_owner_key": "WT:abwassertechnik/entwaesserung/revisionsschacht",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Abwasserrohr",
+      "root": "Abwassertechnik",
+      "group": "Entwässerung",
+      "source_name": "Abwasserrohre",
+      "source_path": "Abwassertechnik/Abwasserrohre",
+      "source_id": "c_6b95f89aced54769",
+      "role": "WP_PRODUKTSEITE_ENTWURF",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Rohrinstallation",
+          "article_ideas": [
+            "Abwasserrohr-Durchmesser und Gefälle im Gebäude richtig wählen",
+            "HT-, KG- und schallgedämmte Rohre: Einsatzbereiche trennen",
+            "Rohrverbindungen dicht montieren: Dichtung, Gleitmittel und Einstecktiefe",
+            "Belüftung von Abwasserleitungen: Unterdruck und leere Geruchsverschlüsse vermeiden"
+          ],
+          "origin": "MASTER_001_ALTVORSCHLAG_NO_SEO",
+          "category_stage": "THEMENKONZEPT_AUS_ALT_4_IDEEN_KEIN_SEO",
+          "proposed_wp_slug": "wt-abwasserrohr-rohrinstallation",
+          "parent_product_owner": "WT:abwassertechnik/entwaesserung/abwasserrohr",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [
+        "Abwasserrohr-Durchmesser und Gefälle im Gebäude richtig wählen",
+        "HT-, KG- und schallgedämmte Rohre: Einsatzbereiche trennen",
+        "Rohrverbindungen dicht montieren: Dichtung, Gleitmittel und Einstecktiefe",
+        "Belüftung von Abwasserleitungen: Unterdruck und leere Geruchsverschlüsse vermeiden"
+      ],
+      "source_status": "VORSCHLAG_NICHT_NACHGEPRUEFT",
+      "proposed_wp_path_segments": [
+        "abwassertechnik",
+        "entwaesserung",
+        "abwasserrohr"
+      ],
+      "proposed_wp_page_slug": "abwasserrohr",
+      "wp_product_owner_key": "WT:abwassertechnik/entwaesserung/abwasserrohr",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Enteisenungsanlage",
+      "root": "Wasseraufbereitung",
+      "group": "Aufbereitungsanlagen",
+      "source_name": null,
+      "source_path": null,
+      "source_id": null,
+      "role": "WP_PRODUKTSEITE_NEUER_KANDIDAT",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "Eisen- und Manganwerte vor der Anlagenauswahl beurteilen",
+            "Filtermaterial und Anlagenkapazität unterscheiden",
+            "Brunnenwasseranalyse als Planungsgrundlage verwenden"
+          ],
+          "origin": "NEUE_KONZEPTIDEEN_NO_SEO",
+          "proposed_wp_slug": "wt-enteisenungsanlage-auswahl",
+          "parent_product_owner": "WT:wasseraufbereitung/aufbereitungsanlagen/enteisenungsanlage",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [],
+      "source_status": "NEU_NUR_KONZEPT",
+      "proposed_wp_path_segments": [
+        "wasseraufbereitung",
+        "aufbereitungsanlagen",
+        "enteisenungsanlage"
+      ],
+      "proposed_wp_page_slug": "enteisenungsanlage",
+      "wp_product_owner_key": "WT:wasseraufbereitung/aufbereitungsanlagen/enteisenungsanlage",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Systemtrenner",
+      "root": "Wasseraufbereitung",
+      "group": "Aufbereitungsanlagen",
+      "source_name": null,
+      "source_path": null,
+      "source_id": null,
+      "role": "WP_PRODUKTSEITE_NEUER_KANDIDAT",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Einsatz",
+          "article_ideas": [
+            "Systemtrenner bei Gartenwasser- und Betriebswassernutzung einordnen",
+            "Anschluss- und Druckbedingungen vor der Auswahl prüfen",
+            "Wartungsanforderungen und Einbauverantwortung unterscheiden"
+          ],
+          "origin": "NEUE_KONZEPTIDEEN_NO_SEO",
+          "proposed_wp_slug": "wt-systemtrenner-einsatz",
+          "parent_product_owner": "WT:wasseraufbereitung/aufbereitungsanlagen/systemtrenner",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [],
+      "source_status": "NEU_NUR_KONZEPT",
+      "proposed_wp_path_segments": [
+        "wasseraufbereitung",
+        "aufbereitungsanlagen",
+        "systemtrenner"
+      ],
+      "proposed_wp_page_slug": "systemtrenner",
+      "wp_product_owner_key": "WT:wasseraufbereitung/aufbereitungsanlagen/systemtrenner",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "pH-Messgerät",
+      "root": "Wasseranalyse",
+      "group": "Messgeräte",
+      "source_name": null,
+      "source_path": null,
+      "source_id": null,
+      "role": "WP_PRODUKTSEITE_NEUER_KANDIDAT",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Messpraxis",
+          "article_ideas": [
+            "pH-Elektrode kalibrieren",
+            "Messgerät fachgerecht lagern",
+            "Messbereich und Auflösung beurteilen"
+          ],
+          "origin": "NEUE_KONZEPTIDEEN_NO_SEO",
+          "proposed_wp_slug": "wt-ph-messgeraet-messpraxis",
+          "parent_product_owner": "WT:wasseranalyse/messgeraete/ph-messgeraet",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [],
+      "source_status": "NEU_NUR_KONZEPT",
+      "proposed_wp_path_segments": [
+        "wasseranalyse",
+        "messgeraete",
+        "ph-messgeraet"
+      ],
+      "proposed_wp_page_slug": "ph-messgeraet",
+      "wp_product_owner_key": "WT:wasseranalyse/messgeraete/ph-messgeraet",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Wasser-Photometer",
+      "root": "Wasseranalyse",
+      "group": "Messgeräte",
+      "source_name": null,
+      "source_path": null,
+      "source_id": null,
+      "role": "WP_PRODUKTSEITE_NEUER_KANDIDAT",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "Photometer und Teststreifen bei typischen Parametern vergleichen",
+            "Messmethoden und Reagenzienbedarf unterscheiden",
+            "Geräte für Verein und Kleinbetrieb nach Nutzung wählen"
+          ],
+          "origin": "NEUE_KONZEPTIDEEN_NO_SEO",
+          "proposed_wp_slug": "wt-wasser-photometer-auswahl",
+          "parent_product_owner": "WT:wasseranalyse/messgeraete/wasser-photometer",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [],
+      "source_status": "NEU_NUR_KONZEPT",
+      "proposed_wp_path_segments": [
+        "wasseranalyse",
+        "messgeraete",
+        "wasser-photometer"
+      ],
+      "proposed_wp_page_slug": "wasser-photometer",
+      "wp_product_owner_key": "WT:wasseranalyse/messgeraete/wasser-photometer",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Rückschlagventil",
+      "root": "Pumpen & Druck",
+      "group": "Steuerung & Zubehör",
+      "source_name": null,
+      "source_path": null,
+      "source_id": null,
+      "role": "WP_PRODUKTSEITE_NEUER_KANDIDAT",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "Rückschlagventil nach Nennweite und Medium wählen",
+            "Einbaulage und Öffnungsdruck berücksichtigen",
+            "Rückfluss als Fehlerquelle in der Pumpenanlage prüfen"
+          ],
+          "origin": "NEUE_KONZEPTIDEEN_NO_SEO",
+          "proposed_wp_slug": "wt-rueckschlagventil-auswahl",
+          "parent_product_owner": "WT:pumpen-druck/steuerung-zubehoer/rueckschlagventil",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [],
+      "source_status": "NEU_NUR_KONZEPT",
+      "proposed_wp_path_segments": [
+        "pumpen-druck",
+        "steuerung-zubehoer",
+        "rueckschlagventil"
+      ],
+      "proposed_wp_page_slug": "rueckschlagventil",
+      "wp_product_owner_key": "WT:pumpen-druck/steuerung-zubehoer/rueckschlagventil",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Pumpen-Saugschlauchset",
+      "root": "Pumpen & Druck",
+      "group": "Steuerung & Zubehör",
+      "source_name": null,
+      "source_path": null,
+      "source_id": null,
+      "role": "WP_PRODUKTSEITE_NEUER_KANDIDAT",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Anschluss",
+          "article_ideas": [
+            "Durchmesser und Schlauchlänge an Förderbedarf anpassen",
+            "Dichte Verbindungen an Saugschläuchen herstellen",
+            "Saugkorb und Vorfilter nach Wasserquelle auswählen"
+          ],
+          "origin": "NEUE_KONZEPTIDEEN_NO_SEO",
+          "proposed_wp_slug": "wt-pumpen-saugschlauchset-anschluss",
+          "parent_product_owner": "WT:pumpen-druck/steuerung-zubehoer/pumpen-saugschlauchset",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [],
+      "source_status": "NEU_NUR_KONZEPT",
+      "proposed_wp_path_segments": [
+        "pumpen-druck",
+        "steuerung-zubehoer",
+        "pumpen-saugschlauchset"
+      ],
+      "proposed_wp_page_slug": "pumpen-saugschlauchset",
+      "wp_product_owner_key": "WT:pumpen-druck/steuerung-zubehoer/pumpen-saugschlauchset",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Druckbehälter",
+      "root": "Pumpen & Druck",
+      "group": "Druckversorgung",
+      "source_name": null,
+      "source_path": null,
+      "source_id": null,
+      "role": "WP_PRODUKTSEITE_NEUER_KANDIDAT",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "Behältervolumen nach Pumpenleistung dimensionieren",
+            "Vordruck und Schaltpunkte aufeinander abstimmen",
+            "Membranbehälter und einfachen Druckspeicher unterscheiden"
+          ],
+          "origin": "NEUE_KONZEPTIDEEN_NO_SEO",
+          "proposed_wp_slug": "wt-druckbehaelter-auswahl",
+          "parent_product_owner": "WT:pumpen-druck/druckversorgung/druckbehaelter",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [],
+      "source_status": "NEU_NUR_KONZEPT",
+      "proposed_wp_path_segments": [
+        "pumpen-druck",
+        "druckversorgung",
+        "druckbehaelter"
+      ],
+      "proposed_wp_page_slug": "druckbehaelter",
+      "wp_product_owner_key": "WT:pumpen-druck/druckversorgung/druckbehaelter",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Pumpenvorfilter",
+      "root": "Pumpen & Druck",
+      "group": "Steuerung & Zubehör",
+      "source_name": null,
+      "source_path": null,
+      "source_id": null,
+      "role": "WP_PRODUKTSEITE_NEUER_KANDIDAT",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "Saugseitige Vorfilter nach Durchfluss beurteilen",
+            "Filterwirkung gegen zusätzlichen Saugwiderstand abwägen",
+            "Vorfiltereinsatz sicher reinigen und wechseln"
+          ],
+          "origin": "NEUE_KONZEPTIDEEN_NO_SEO",
+          "proposed_wp_slug": "wt-pumpenvorfilter-auswahl",
+          "parent_product_owner": "WT:pumpen-druck/steuerung-zubehoer/pumpenvorfilter",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [],
+      "source_status": "NEU_NUR_KONZEPT",
+      "proposed_wp_path_segments": [
+        "pumpen-druck",
+        "steuerung-zubehoer",
+        "pumpenvorfilter"
+      ],
+      "proposed_wp_page_slug": "pumpenvorfilter",
+      "wp_product_owner_key": "WT:pumpen-druck/steuerung-zubehoer/pumpenvorfilter",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Tank-Füllstandsanzeige",
+      "root": "Wassertanks",
+      "group": null,
+      "source_name": null,
+      "source_path": null,
+      "source_id": null,
+      "role": "WP_PRODUKTSEITE_NEUER_KANDIDAT",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "Schwimmer und Ultraschallsensor vergleichen",
+            "Füllstandsanzeige bei unterschiedlich hohen Tanks nachrüsten",
+            "Anzeige und Alarmgrenzen für Vereinstanks planen"
+          ],
+          "origin": "NEUE_KONZEPTIDEEN_NO_SEO",
+          "proposed_wp_slug": "wt-tank-fuellstandsanzeige-auswahl",
+          "parent_product_owner": "WT:wassertanks/tank-fuellstandsanzeige",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [],
+      "source_status": "NEU_NUR_KONZEPT",
+      "proposed_wp_path_segments": [
+        "wassertanks",
+        "tank-fuellstandsanzeige"
+      ],
+      "proposed_wp_page_slug": "tank-fuellstandsanzeige",
+      "wp_product_owner_key": "WT:wassertanks/tank-fuellstandsanzeige",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Tankdurchführung",
+      "root": "Wassertanks",
+      "group": null,
+      "source_name": null,
+      "source_path": null,
+      "source_id": null,
+      "role": "WP_PRODUKTSEITE_NEUER_KANDIDAT",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Montage",
+          "article_ideas": [
+            "Tankdurchführung nach Wandmaterial und Stärke auswählen",
+            "Dichtung und Gewinde für wasserführende Anschlüsse abstimmen",
+            "Undichte Tankdurchführung nach dem Einbau prüfen"
+          ],
+          "origin": "NEUE_KONZEPTIDEEN_NO_SEO",
+          "proposed_wp_slug": "wt-tankdurchfuehrung-montage",
+          "parent_product_owner": "WT:wassertanks/tankdurchfuehrung",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [],
+      "source_status": "NEU_NUR_KONZEPT",
+      "proposed_wp_path_segments": [
+        "wassertanks",
+        "tankdurchfuehrung"
+      ],
+      "proposed_wp_page_slug": "tankdurchfuehrung",
+      "wp_product_owner_key": "WT:wassertanks/tankdurchfuehrung",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Zisternenfilter",
+      "root": "Regenwasser",
+      "group": "Filter & Förderung",
+      "source_name": null,
+      "source_path": null,
+      "source_id": null,
+      "role": "WP_PRODUKTSEITE_NEUER_KANDIDAT",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "Zisternenfilter und Fallrohrfilter nach Einbauort abgrenzen",
+            "Filterdurchsatz nach Dachfläche abschätzen",
+            "Zisternenfilter reinigen und Wartungszugang planen"
+          ],
+          "origin": "NEUE_KONZEPTIDEEN_NO_SEO",
+          "proposed_wp_slug": "wt-zisternenfilter-auswahl",
+          "parent_product_owner": "WT:regenwasser/filter-foerderung/zisternenfilter",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [],
+      "source_status": "NEU_NUR_KONZEPT",
+      "proposed_wp_path_segments": [
+        "regenwasser",
+        "filter-foerderung",
+        "zisternenfilter"
+      ],
+      "proposed_wp_page_slug": "zisternenfilter",
+      "wp_product_owner_key": "WT:regenwasser/filter-foerderung/zisternenfilter",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Bewässerungs-Wasserzähler",
+      "root": "Bewässerung",
+      "group": "Steuerung",
+      "source_name": null,
+      "source_path": null,
+      "source_id": null,
+      "role": "WP_PRODUKTSEITE_NEUER_KANDIDAT",
+      "target_groups": [
+        "Privat",
+        "Kleinbetrieb",
+        "Verein"
+      ],
+      "article_categories": [
+        {
+          "name": "Einsatz",
+          "article_ideas": [
+            "Wasserverbrauch einzelner Bewässerungszonen messen",
+            "Zähler mit vorhandenen Schlauchgrößen kombinieren",
+            "Messwerte für die Einstellung der Bewässerungscomputer nutzen"
+          ],
+          "origin": "NEUE_KONZEPTIDEEN_NO_SEO",
+          "proposed_wp_slug": "wt-bewaesserungs-wasserzaehler-einsatz",
+          "parent_product_owner": "WT:bewaesserung/steuerung/bewaesserungs-wasserzaehler",
+          "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
+        }
+      ],
+      "legacy_topics": [],
+      "source_status": "NEU_NUR_KONZEPT",
+      "proposed_wp_path_segments": [
+        "bewaesserung",
+        "steuerung",
+        "bewaesserungs-wasserzaehler"
+      ],
+      "proposed_wp_page_slug": "bewaesserungs-wasserzaehler",
+      "wp_product_owner_key": "WT:bewaesserung/steuerung/bewaesserungs-wasserzaehler",
+      "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
+      "retained_source": "W2_2026-11-14",
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+    },
+    {
+      "product": "Gewerbliche Umkehrosmoseanlage",
+      "root": "Industrie & Großanlagen",
+      "group": "Industrielle Wasseraufbereitung",
+      "role": "WP_PRODUKTSEITE_NEUER_FACHKANDIDAT",
+      "source_id": "WT-W4-IND-01",
+      "source_name": null,
+      "source_path": null,
+      "source_status": "HERSTELLERBELEG_VORHANDEN_SEO_NICHT_GEPRUEFT",
+      "comparison_to_w2": "Untertisch-Osmoseanlage",
+      "evidence_urls": [
+        "https://www.gruenbeck.de/produkte-loesungen/gruenbeck-fuer-gewerbe/membrantechnik/umkehrosmose/geno-osmo-x",
+        "https://www.grundfos.com/de/about-us/what-we-do/water-treatment"
+      ],
+      "target_groups": [
+        "Industrie",
+        "Kleinbetrieb_wo_tatsaechlich_passend"
+      ],
+      "wp_product_owner_key": "WT:industrie/industrielle-wasseraufbereitung/gewerbliche-umkehrosmoseanlage",
+      "proposed_wp_page_slug": "gewerbliche-umkehrosmoseanlage",
+      "proposed_wp_path_segments": [
+        "industrie-grossanlagen",
+        "industrielle-wasseraufbereitung",
+        "gewerbliche-umkehrosmoseanlage"
+      ],
+      "article_categories": [
+        {
+          "name": "Anlagenauswahl",
+          "article_ideas": [
+            "Permeatmenge und Spitzenbedarf im Gewerbe bestimmen",
+            "Rohwasserqualität und Vorbehandlung abgrenzen",
+            "Prozesswasserqualität bei der Auswahl berücksichtigen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-gewerbliche-umkehrosmoseanlage-anlagenauswahl",
+          "parent_product_owner": "WT:industrie/industrielle-wasseraufbereitung/gewerbliche-umkehrosmoseanlage",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        },
+        {
+          "name": "Anlagenbetrieb",
+          "article_ideas": [
+            "Membranpflege und Spülzyklen planen",
+            "Leitfähigkeitsüberwachung und Betriebsdatenerfassung prüfen",
+            "Rückgewinnung und Betriebskosten unterscheiden"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-gewerbliche-umkehrosmoseanlage-anlagenbetrieb",
+          "parent_product_owner": "WT:industrie/industrielle-wasseraufbereitung/gewerbliche-umkehrosmoseanlage",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        }
+      ],
+      "editorial_gate": "EIGENSTAENDIGE_PRODUKTFAMILIE_FACHLICH_BEGUENDET_SEO_NOCH_OFFEN"
+    },
+    {
+      "product": "Mehrschichtfilteranlage",
+      "root": "Industrie & Großanlagen",
+      "group": "Industrielle Wasseraufbereitung",
+      "role": "WP_PRODUKTSEITE_NEUER_FACHKANDIDAT",
+      "source_id": "WT-W4-IND-02",
+      "source_name": null,
+      "source_path": null,
+      "source_status": "HERSTELLERBELEG_VORHANDEN_SEO_NICHT_GEPRUEFT",
+      "comparison_to_w2": "Feinfilter",
+      "evidence_urls": [
+        "https://www.gruenbeck.de/produkte-loesungen/gruenbeck-fuer-gewerbe/filteranlagen/filteranlagen-geno-mat"
+      ],
+      "target_groups": [
+        "Industrie",
+        "Kleinbetrieb_wo_tatsaechlich_passend"
+      ],
+      "wp_product_owner_key": "WT:industrie/industrielle-wasseraufbereitung/mehrschichtfilteranlage",
+      "proposed_wp_page_slug": "mehrschichtfilteranlage",
+      "proposed_wp_path_segments": [
+        "industrie-grossanlagen",
+        "industrielle-wasseraufbereitung",
+        "mehrschichtfilteranlage"
+      ],
+      "article_categories": [
+        {
+          "name": "Filtermaterial",
+          "article_ideas": [
+            "Kies- und Mehrschichtfilter nach Verschmutzung vergleichen",
+            "Durchfluss und Filterfläche der Anlage unterscheiden",
+            "Filtermedien und Einsatzgrenzen abgrenzen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-mehrschichtfilteranlage-filtermaterial",
+          "parent_product_owner": "WT:industrie/industrielle-wasseraufbereitung/mehrschichtfilteranlage",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        },
+        {
+          "name": "Rückspültechnik",
+          "article_ideas": [
+            "Rückspülung und Erstfiltrat unterscheiden",
+            "Automatische Rückspülsteuerung prüfen",
+            "Druckverlust und Wartungsaufwand beurteilen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-mehrschichtfilteranlage-rueckspueltechnik",
+          "parent_product_owner": "WT:industrie/industrielle-wasseraufbereitung/mehrschichtfilteranlage",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        }
+      ],
+      "editorial_gate": "EIGENSTAENDIGE_PRODUKTFAMILIE_FACHLICH_BEGUENDET_SEO_NOCH_OFFEN"
+    },
+    {
+      "product": "Elektrodeionisationsanlage",
+      "root": "Industrie & Großanlagen",
+      "group": "Industrielle Wasseraufbereitung",
+      "role": "WP_PRODUKTSEITE_NEUER_FACHKANDIDAT",
+      "source_id": "WT-W4-IND-03",
+      "source_name": null,
+      "source_path": null,
+      "source_status": "HERSTELLERBELEG_VORHANDEN_SEO_NICHT_GEPRUEFT",
+      "comparison_to_w2": "Gewerbliche Umkehrosmoseanlage",
+      "evidence_urls": [
+        "https://www.grundfos.com/de/about-us/what-we-do/water-treatment",
+        "https://www.grundfos.com/de/learn/research-and-insights/ultrapure-water-quality"
+      ],
+      "target_groups": [
+        "Industrie",
+        "Kleinbetrieb_wo_tatsaechlich_passend"
+      ],
+      "wp_product_owner_key": "WT:industrie/industrielle-wasseraufbereitung/elektrodeionisationsanlage",
+      "proposed_wp_page_slug": "elektrodeionisationsanlage",
+      "proposed_wp_path_segments": [
+        "industrie-grossanlagen",
+        "industrielle-wasseraufbereitung",
+        "elektrodeionisationsanlage"
+      ],
+      "article_categories": [
+        {
+          "name": "Reinstwasser",
+          "article_ideas": [
+            "EDI und Mischbett-Ionentauscher vergleichen",
+            "Umkehrosmose vor EDI als Vorbehandlung prüfen",
+            "Benötigte Speisewasserqualität vor dem Kauf bestimmen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-elektrodeionisationsanlage-reinstwasser",
+          "parent_product_owner": "WT:industrie/industrielle-wasseraufbereitung/elektrodeionisationsanlage",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        },
+        {
+          "name": "Betrieb",
+          "article_ideas": [
+            "Kontinuierlichen Entsalzungsbetrieb erklären",
+            "Leitfähigkeit und Restverunreinigung überwachen",
+            "Wartung gegenüber Harzregeneration vergleichen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-elektrodeionisationsanlage-betrieb",
+          "parent_product_owner": "WT:industrie/industrielle-wasseraufbereitung/elektrodeionisationsanlage",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        }
+      ],
+      "editorial_gate": "EIGENSTAENDIGE_PRODUKTFAMILIE_FACHLICH_BEGUENDET_SEO_NOCH_OFFEN"
+    },
+    {
+      "product": "Chemikalien-Dosierpumpe",
+      "root": "Industrie & Großanlagen",
+      "group": "Messung, Regelung & Dosierung",
+      "role": "WP_PRODUKTSEITE_NEUER_FACHKANDIDAT",
+      "source_id": "WT-W4-IND-04",
+      "source_name": null,
+      "source_path": null,
+      "source_status": "HERSTELLERBELEG_VORHANDEN_SEO_NICHT_GEPRUEFT",
+      "comparison_to_w2": "Wasser-Dosieranlage",
+      "evidence_urls": [
+        "https://www.prominent.com/en/Industry-Solutions/Industry-Solutions/Chemical-Industry/Chemical-Industry.html",
+        "https://www.veoliawatertechnologies.de/maerkte/chemische-industrie"
+      ],
+      "target_groups": [
+        "Industrie",
+        "Kleinbetrieb_wo_tatsaechlich_passend"
+      ],
+      "wp_product_owner_key": "WT:industrie/messung-regelung-dosierung/chemikalien-dosierpumpe",
+      "proposed_wp_page_slug": "chemikalien-dosierpumpe",
+      "proposed_wp_path_segments": [
+        "industrie-grossanlagen",
+        "messung-regelung-dosierung",
+        "chemikalien-dosierpumpe"
+      ],
+      "article_categories": [
+        {
+          "name": "Auswahl",
+          "article_ideas": [
+            "Fördermenge und Gegendruck von Dosierpumpen bewerten",
+            "Medienbeständigkeit der Werkstoffe prüfen",
+            "Membranpumpe und Exzenterschneckenpumpe unterscheiden"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-chemikalien-dosierpumpe-auswahl",
+          "parent_product_owner": "WT:industrie/messung-regelung-dosierung/chemikalien-dosierpumpe",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        },
+        {
+          "name": "Dosierbetrieb",
+          "article_ideas": [
+            "Dosierleistung anhand von Durchflusssignalen regeln",
+            "Dosierüberwachung und Fehlermeldungen einordnen",
+            "Wartung und Medienwechsel sicher planen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-chemikalien-dosierpumpe-dosierbetrieb",
+          "parent_product_owner": "WT:industrie/messung-regelung-dosierung/chemikalien-dosierpumpe",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        }
+      ],
+      "editorial_gate": "EIGENSTAENDIGE_PRODUKTFAMILIE_FACHLICH_BEGUENDET_SEO_NOCH_OFFEN"
+    },
+    {
+      "product": "Industrielle Hochdruckpumpe",
+      "root": "Industrie & Großanlagen",
+      "group": "Industrie-Pumpen",
+      "role": "WP_PRODUKTSEITE_NEUER_FACHKANDIDAT",
+      "source_id": "WT-W4-IND-05",
+      "source_name": null,
+      "source_path": null,
+      "source_status": "HERSTELLERBELEG_VORHANDEN_SEO_NICHT_GEPRUEFT",
+      "comparison_to_w2": "Druckerhöhungsanlage",
+      "evidence_urls": [
+        "https://www.ksb.com/de-de/loesungen/industrie/industrielle-wasseraufbereitung",
+        "https://www.grundfos.com/de/about-us/what-we-do/water-treatment"
+      ],
+      "target_groups": [
+        "Industrie",
+        "Kleinbetrieb_wo_tatsaechlich_passend"
+      ],
+      "wp_product_owner_key": "WT:industrie/industrie-pumpen/industrielle-hochdruckpumpe",
+      "proposed_wp_page_slug": "industrielle-hochdruckpumpe",
+      "proposed_wp_path_segments": [
+        "industrie-grossanlagen",
+        "industrie-pumpen",
+        "industrielle-hochdruckpumpe"
+      ],
+      "article_categories": [
+        {
+          "name": "Pumpenauslegung",
+          "article_ideas": [
+            "Förderdruck und Durchfluss für industrielle Aufgaben unterscheiden",
+            "Mehrstufige Hochdruckpumpen nach Wasserqualität auswählen",
+            "Regelung und Redundanz für Dauerbetrieb vergleichen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-industrielle-hochdruckpumpe-pumpenauslegung",
+          "parent_product_owner": "WT:industrie/industrie-pumpen/industrielle-hochdruckpumpe",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        },
+        {
+          "name": "Wartung",
+          "article_ideas": [
+            "Dichtungen und Trockenlaufschutz beurteilen",
+            "Drehzahlregelung bei wechselndem Bedarf",
+            "Ersatzteile und Lebensdauer bei Dauerbetrieb vergleichen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-industrielle-hochdruckpumpe-wartung",
+          "parent_product_owner": "WT:industrie/industrie-pumpen/industrielle-hochdruckpumpe",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        }
+      ],
+      "editorial_gate": "EIGENSTAENDIGE_PRODUKTFAMILIE_FACHLICH_BEGUENDET_SEO_NOCH_OFFEN"
+    },
+    {
+      "product": "Industrielle Feststoffpumpe",
+      "root": "Industrie & Großanlagen",
+      "group": "Industrie-Pumpen",
+      "role": "WP_PRODUKTSEITE_NEUER_FACHKANDIDAT",
+      "source_id": "WT-W4-IND-06",
+      "source_name": null,
+      "source_path": null,
+      "source_status": "HERSTELLERBELEG_VORHANDEN_SEO_NICHT_GEPRUEFT",
+      "comparison_to_w2": "Schmutzwasserpumpe",
+      "evidence_urls": [
+        "https://www.ksb.com/de-de/loesungen/abwassertechnik/abwasserentsorgung-und-transport",
+        "https://www.ksb.com/de-de/loesungen/industrie/industrielle-wasseraufbereitung",
+        "https://www.ksb.com/de-de/lc/produkte/pumpe/tauchmotorpumpe/amarex/A31B"
+      ],
+      "target_groups": [
+        "Industrie",
+        "Kleinbetrieb_wo_tatsaechlich_passend"
+      ],
+      "wp_product_owner_key": "WT:industrie/industrie-pumpen/industrielle-feststoffpumpe",
+      "proposed_wp_page_slug": "industrielle-feststoffpumpe",
+      "proposed_wp_path_segments": [
+        "industrie-grossanlagen",
+        "industrie-pumpen",
+        "industrielle-feststoffpumpe"
+      ],
+      "article_categories": [
+        {
+          "name": "Fördermedien",
+          "article_ideas": [
+            "Freien Kugeldurchgang nach Feststoffgehalt einordnen",
+            "Schlammhaltiges Industrieabwasser von Haushaltsabwasser abgrenzen",
+            "Korrosions- und Verschleißschutz bei Feststoffpumpen vergleichen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-industrielle-feststoffpumpe-foerdermedien",
+          "parent_product_owner": "WT:industrie/industrie-pumpen/industrielle-feststoffpumpe",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        },
+        {
+          "name": "Pumpenbetrieb",
+          "article_ideas": [
+            "Stationäre und mobile Pumpen vergleichen",
+            "Verstopfung und Verschleiß im Förderbetrieb vermeiden",
+            "Explosionsgeschützte Ausführungen und Wartung fachlich einordnen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-industrielle-feststoffpumpe-pumpenbetrieb",
+          "parent_product_owner": "WT:industrie/industrie-pumpen/industrielle-feststoffpumpe",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        }
+      ],
+      "editorial_gate": "EIGENSTAENDIGE_PRODUKTFAMILIE_FACHLICH_BEGUENDET_SEO_NOCH_OFFEN"
+    },
+    {
+      "product": "Online-Wasseranalysestation",
+      "root": "Industrie & Großanlagen",
+      "group": "Messung, Regelung & Dosierung",
+      "role": "WP_PRODUKTSEITE_NEUER_FACHKANDIDAT",
+      "source_id": "WT-W4-IND-07",
+      "source_name": null,
+      "source_path": null,
+      "source_status": "HERSTELLERBELEG_VORHANDEN_SEO_NICHT_GEPRUEFT",
+      "comparison_to_w2": "Wasser-Multimessgerät",
+      "evidence_urls": [
+        "https://www.de.endress.com/de/loesungen/wasserueberwachung-chemische-industrie",
+        "https://www.de.endress.com/de/branchenoptimierte-loesungen/loesungen/ueberwachungssysteme-industrieabwasser"
+      ],
+      "target_groups": [
+        "Industrie",
+        "Kleinbetrieb_wo_tatsaechlich_passend"
+      ],
+      "wp_product_owner_key": "WT:industrie/messung-regelung-dosierung/online-wasseranalysestation",
+      "proposed_wp_page_slug": "online-wasseranalysestation",
+      "proposed_wp_path_segments": [
+        "industrie-grossanlagen",
+        "messung-regelung-dosierung",
+        "online-wasseranalysestation"
+      ],
+      "article_categories": [
+        {
+          "name": "Messtechnik",
+          "article_ideas": [
+            "Online-pH, Leitfähigkeit und Trübung nach Aufgabe unterscheiden",
+            "Mehrkanal-Messumformer und Einzelsensoren vergleichen",
+            "Probenaufbereitung und Durchflussarmatur planen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-online-wasseranalysestation-messtechnik",
+          "parent_product_owner": "WT:industrie/messung-regelung-dosierung/online-wasseranalysestation",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        },
+        {
+          "name": "Messbetrieb",
+          "article_ideas": [
+            "Kalibrierung und automatische Sensorreinigung unterscheiden",
+            "Messwerte in Anlagensteuerung und Alarmierung übertragen",
+            "Messfehler durch Verschmutzung und Sensordrift einordnen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-online-wasseranalysestation-messbetrieb",
+          "parent_product_owner": "WT:industrie/messung-regelung-dosierung/online-wasseranalysestation",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        }
+      ],
+      "editorial_gate": "EIGENSTAENDIGE_PRODUKTFAMILIE_FACHLICH_BEGUENDET_SEO_NOCH_OFFEN"
+    },
+    {
+      "product": "Kühlwasser-Dosierstation",
+      "root": "Industrie & Großanlagen",
+      "group": "Kühl- & Kreislaufwasser",
+      "role": "WP_PRODUKTSEITE_NEUER_FACHKANDIDAT",
+      "source_id": "WT-W4-IND-08",
+      "source_name": null,
+      "source_path": null,
+      "source_status": "HERSTELLERBELEG_VORHANDEN_SEO_NICHT_GEPRUEFT",
+      "comparison_to_w2": "Chemikalien-Dosierpumpe",
+      "evidence_urls": [
+        "https://www.grundfos.com/de/about-us/what-we-do/water-treatment",
+        "https://www.veoliawatertechnologies.de/maerkte/chemische-industrie",
+        "https://www.prominent.com/en/Industry-Solutions/Industry-Solutions/Chemical-Industry/Chemical-Industry.html"
+      ],
+      "target_groups": [
+        "Industrie",
+        "Kleinbetrieb_wo_tatsaechlich_passend"
+      ],
+      "wp_product_owner_key": "WT:industrie/kuehl-kreislaufwasser/kuehlwasser-dosierstation",
+      "proposed_wp_page_slug": "kuehlwasser-dosierstation",
+      "proposed_wp_path_segments": [
+        "industrie-grossanlagen",
+        "kuehl-kreislaufwasser",
+        "kuehlwasser-dosierstation"
+      ],
+      "article_categories": [
+        {
+          "name": "Kühlkreislauf",
+          "article_ideas": [
+            "Ablagerung und Korrosion im Kühlkreislauf unterscheiden",
+            "Dosierstation an Kühlkreislauf und Wasserwechsel anpassen",
+            "Messung und Regelung im Kühlwasser koordinieren"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-kuehlwasser-dosierstation-kuehlkreislauf",
+          "parent_product_owner": "WT:industrie/kuehl-kreislaufwasser/kuehlwasser-dosierstation",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        },
+        {
+          "name": "Dosierbetrieb",
+          "article_ideas": [
+            "Verbrauch und Dosieraufgabe bei Kühlwasserbehandlung einordnen",
+            "Wartungs- und Kontrollaufgaben der Station unterscheiden",
+            "Komplett-Dosiersystem von einzelner Dosierpumpe abgrenzen"
+          ],
+          "origin": "W4_FACHKONZEPT_NICHT_GEMESSENE_KEYWORDS",
+          "proposed_wp_slug": "wt-kuehlwasser-dosierstation-dosierbetrieb",
+          "parent_product_owner": "WT:industrie/kuehl-kreislaufwasser/kuehlwasser-dosierstation",
+          "status": "VORSCHLAG_NICHT_IMPORTIEREN"
+        }
+      ],
+      "editorial_gate": "EIGENSTAENDIGE_PRODUKTFAMILIE_FACHLICH_BEGUENDET_SEO_NOCH_OFFEN"
+    }
+  ],
+  "review_needed": [
+    {
+      "family": "Rueckspuelfilter",
+      "original_names": [
+        "Rückspülfilter",
+        "Automatischer Rückspülfilter"
+      ],
+      "decision": "MANUELL_VS_AUTOMATISCH_GETRENNT",
+      "proof_url": "https://www.gruenbeck.de/service/presse-news/artikel/starke-filterleistung-einfacher-betrieb",
+      "seo_status": "OFFEN"
+    },
+    {
+      "family": "Osmose",
+      "original_names": [
+        "Untertisch-Osmoseanlage",
+        "Direct-Flow-Osmoseanlage",
+        "Osmoseanlage mit Drucktank"
+      ],
+      "decision": "EINBAUKONTEXT_VS_TANKLOSE_UND_TANKSYSTEM_TECHNOLOGIE_SEITEN_FACHLICH_ABGEGRENZT",
+      "proof_url": "https://www.waterdropfilter.de/collections/untertisch-ro-systeme",
+      "seo_status": "OFFEN"
+    },
+    {
+      "family": "Labortests",
+      "original_names": [
+        "Trinkwasser-Labortestset",
+        "Schadstoff-Labortestset"
+      ],
+      "decision": "ALLGEMEINE_WASSERANALYSE_VS_ZIELGERICHTETE_SCHADSTOFFANALYSE",
+      "proof_url": "https://ivario.com/collections/wassertests",
+      "seo_status": "OFFEN"
+    }
+  ],
+  "limitations": [
+    "Herstellerprodukte belegt, Keywordnachfrage nicht gemessen",
+    "Keine selbständige Affiliate-Provision für Industrieprodukte nachgewiesen",
+    "Industrie-Überblick belegt, keine Vollmarkt-Abdeckung bewiesen",
+    "WP-Kategorie-Plugin für Wassertechnik nicht portiert",
+    "Kein WordPress-Import, keine WP-IDs, keine produktive Website geprüft"
+  ],
+  "context_audit": {
+    "date": "2026-11-14",
+    "status": "DREI_W2_KONTEXTFAELLE_KONZEPTIONELL_ENTSCHIEDEN",
+    "no_new_product_pages": true,
+    "no_removed_existing_product_pages": true,
+    "no_wordpress_write": true,
+    "no_keyword_data": true,
+    "fully_reconciled_with_sources": true
+  }
+}
