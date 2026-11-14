@@ -8,8 +8,8 @@
 
 **BINDENDE FACHABGRENZUNG:** `W3_INDUSTRIE_KONTEXT_ABGRENZUNG_20261114.md` und `../ZIELVERTRAG.md`. W4-Gesamtfachentwurf: `GESAMTFACHBAUM_W4_20261114.json`; die 71 W2-Produktseiten bleiben unverändert historische Ausgangsbasis. Bindende inhaltliche Abgrenzung weiter W3.
 
-**Ergebnis:** Alle 9/9 W3-Grenzfälle entschieden; 6 Industriegruppen durch konkrete Herstellerangebote fachlich gestützt; 8 zusätzliche Industrie-Produktkandidaten mit 16 WP-Rubriken und 48 Beitragsideen. **Blocker:** Drei vorhandene W2-Überschneidungsgruppen redaktionell prüfen, danach fachliche Abnahme. WT001 (reine SEO-/Bestandsprüfversion) ist lokal gebaut und geprüft; WordPress-Live-Test und kostenpflichtige SEO-Recherche offen. Das WordPress-Importmodul bleibt gesperrt.
+**Ergebnis:** Alle 9/9 W3-Grenzfälle entschieden; 6 Industriegruppen durch konkrete Herstellerangebote fachlich gestützt; 8 zusätzliche Industrie-Produktkandidaten mit 16 WP-Rubriken und 48 Beitragsideen. **Blocker:** Drei vorhandene W2-Überschneidungsgruppen redaktionell prüfen, danach fachliche Abnahme. WT001 0.1.1 (vollständige W4-Haupt-/Unter-/Industrie-/Produkt-/Rubrik-Ebenen im SEO-Preflight) ist lokal gebaut und geprüft; WordPress-Live-Test und kostenpflichtige SEO-Recherche offen. Das WordPress-Importmodul bleibt gesperrt.
 
-**NEXT ACTION:** Die WT001-SEO-Vorschaudatei aus `../PLUGINS/` ausschließlich auf einer **neuen** Wassertechnik-WordPress-Testinstallation testen: 184 W4-Keywords kostenlos prüfen/exportieren, WordPress-Bestand auslesen. Keine Import-/Bezahlfunktion. Erst nach echtem WP-Readback über eine neue, gesonderte Importfreigabe entscheiden.
+**NEXT ACTION:** WT001 0.1.1 aus dem Pluginbüro auf einer **isolierten neuen Wassertechnik-Testwebsite** verwenden. Kostenlosen 218er W4-Preflight im WordPress-Backend erzeugen und exportieren, Bestandsaufnahme ebenfalls. Keine bezahlten API-Aufrufe und kein Import.
 
 **Grenze:** Keine WordPress-/HivePress-Produktion, keine fremden Projektdateien verändern.
