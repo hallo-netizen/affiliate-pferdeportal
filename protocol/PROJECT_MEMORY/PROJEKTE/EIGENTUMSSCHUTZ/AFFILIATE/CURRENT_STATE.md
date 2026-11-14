@@ -1,3 +1,18 @@
+## 14.11.2026 – REALE RC38-ABNAHME, 09:06 MEZ: FORMATE ERLEDIGT / FEHLENDE ZIELDATEN VERBLEIBEN
+
+**Echte Nutzer-Screenshots 09:06.07 und 09:06.18:** Tarifcheck: 160 gefunden, 80 aktiv, 80 Ziel fehlt, **0 Ausgabe gesperrt**, 0 Bild offen, 0 Bildfehler, 0 Entwürfe, 0 gesperrte Originale. Diagnose des verbleibenden 80er-Blocks: **80 × `No verified specific/general insurance`**, **80 × `tracking_checked`**, keine gesperrten Bildmaße. Vor RC38: 40 aktiv / 40 Format gesperrt / 80 Ziel fehlt. **Damit sind +40 Originalbanner aktiviert und alle 40 Formatfehler beseitigt**. Noch keine unabhängige Einzelprüfung der 80 öffentlich gerenderten Banner.
+
+**Quellcodeprüfung im Original (RC31→RC38):**
+- `creative_library_parse_html_codes()` liest aus dem HTML `<a href>` als `tracking_url`, setzt `destination_url` zunächst auf leere Zeichenkette; `<img title/alt>` wird nur übernommen, wenn belegt.
+- `creative_library_normalize_row()` versucht echte Landing-URL zu decodieren oder über den bestehenden Import-Redirect-Resolver zu bestimmen; bei nicht endgültig entschlüsseltem Tracking-Link bleibt Status `tracking_checked`. Der Datensatz bleibt erhalten.
+- Der einzige HAB-Versicherungs-Entscheider `hb_rc31_insurance_banner_plan()` prüft echte Landing-Zielinformation, vorhandene Provider-Rubrik, Originaltitel/Beschreibung und (ab RC35) den bereits gespeicherten Original-Ankertext. Nur wenn eine reale R2/R3-Versicherungsart oder ein ausdrücklich allgemeiner Versicherungsvergleich daraus eindeutig folgt, wird eine passende Zielkarte gespeichert.
+- Alle 80 `No verified specific/general insurance` bedeuten **nur**, dass in den **vom Entscheider ausgewerteten** Informationen kein passender Fachbegriff gefunden wurde; sie beweisen nicht, dass der HTML-Code keine Zielinformation enthält.
+- Der bekannte `deep=`-Parameter wird bisher nur für festgelegte belegte Tarifcheck-Linkhosts erfasst. Für die 80 Original-HREFs ist **weder ihre Host-/Pfadstruktur noch ihr Werbemitteltext in den Screenshots oder den GitHub-Quellen vorhanden**. Kein seriöser URL-Parser-Fix oder freie Themenzuordnung kann ohne diesen Echtdatennachweis behauptet werden.
+
+**Einziger weiterhin notwendiger Schritt:** Die 80 bereits gespeicherten originalen Tracking-HREFs samt zugehörigen Produktnamen/HTML-Titeln einmal read-only sichten und gegen echte Ziel-URL + Anbieter-Kategorie vergleichen. Danach **nur die eine zentrale Importentscheidung** korrigieren und alle 160 prüfen. Keine Banner neu importieren; keine neuen Slots, Bildeingriffe, separaten Klassifikatoren, nachgelagerten Entscheidungen oder pauschalen Versicherungszuordnungen. Keine neue ZIP allein aufgrund einer unbewiesenen Vermutung. Der RC38-Stand bleibt für Format- und Zielabnahmen Grundlage.
+
+---
+
 ## 14.11.2026 – RC38 EIN ZENTRALER FORMATENTSCHEID (PFERDE-ATELIER-PRINZIP) – LOKAL GRÜN, LIVE NOCH OFFEN
 
 **Zielvertrag:** Originalbanner unverzerrt und unbeschnitten anzeigen, **niemals vergrößern**, bei Bedarf ausschließlich proportional verkleinern. Fachziel + bestehenden Seitenplatz genau einmal beim Einlesen/Backendreconcile festlegen. Der öffentliche Aufruf darf nur die gespeicherten Zielpfade und Platznamen verwenden. Bild-, Tracking-, Provider-, Freigabe- und Veto-Sicherheitsregeln bleiben bestehen, sind keine zweite thematische Entscheidung. Keine zusätzlichen Worker, Tabellen, neuen Anzeigenflächen oder anderen Portaländerungen.
