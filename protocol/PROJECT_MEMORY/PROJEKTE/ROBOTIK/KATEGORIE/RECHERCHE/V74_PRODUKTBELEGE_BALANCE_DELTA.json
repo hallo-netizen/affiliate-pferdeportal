@@ -1,0 +1,253 @@
+{
+  "schema": "ROBOTIK_V74_PRODUKTBELEGE_RECHERCHE_DELTA_KEIN_ZWEITER_MASTER",
+  "date": "2026-11-14",
+  "scope": [
+    "Haushalt",
+    "Garten",
+    "Freizeit",
+    "Sport",
+    "Bildung",
+    "Pflege",
+    "Humanoide (nur privat/lernen)"
+  ],
+  "excluded": [
+    "Gewerbe",
+    "Industrie",
+    "Humanoide gewerbliche oder industrielle Arbeit"
+  ],
+  "source_base": "V73 und V52/V67-V73",
+  "classification": "Produkt | Projekt | Idee, nur ein Status je Fund",
+  "source_count": 17,
+  "status_counts": {
+    "Produkt": 17,
+    "Projekt": 0,
+    "Idee": 0
+  },
+  "candidate_new_function_types": [
+    "Wander-Exoskelette (Sport)",
+    "Sandmalroboter (Freizeit)"
+  ],
+  "do_not_auto_promote": true,
+  "research_prior_distribution": {
+    "cohort": "V69–V73: 116 Einzel-Funde; nicht 116 Robotertypen",
+    "records": 116,
+    "Produkt": 5,
+    "Projekt": 39,
+    "Idee": 72,
+    "scope_note": "Nur Recherche-Quellenzählung; die Gesamtquote der vorhandenen 100 privaten Robotertyp-Seiten ist damit NICHT berechenbar"
+  },
+  "balance_guideline": "Reale Modelle sollen im veröffentlichten Gesamtbestand deutlich überwiegen, grobe Richtung etwa zwei Drittel bis drei Viertel; keinerlei feste Quote, Ausschluss, Löschung oder Stoppschwelle.",
+  "findings": [
+    {
+      "id": "V74-001",
+      "kennzeichnung": "Produkt",
+      "name": "Yarbo Y40 Schneeräumroboter",
+      "welt": "Garten",
+      "owner": "Schneeroboter",
+      "quelle": "https://eu.yarbo.com/products/yarbo-snow-blower",
+      "beleg": "Yarbo Europa: autonom fahrendes Schneeräumsystem, Shop nennt Versand/In-stock für konkretes System",
+      "zuordnung": "bestehender Typ; Modellbeleg",
+      "art": "Hersteller-/Hersteller-Shop-Beleg",
+      "regionale_verfuegbarkeit": "Nur soweit im Quellenbeleg ersichtlich; für Deutschland nicht pauschal behauptet"
+    },
+    {
+      "id": "V74-002",
+      "kennzeichnung": "Produkt",
+      "name": "Yarbo Y40 mit Laubgebläse",
+      "welt": "Garten",
+      "owner": "Laubroboter",
+      "quelle": "https://eu.yarbo.com/de/collections/leaf-blower",
+      "beleg": "Yarbo Europa: mobile Plattform mit Laubgebläse im Händlerangebot",
+      "zuordnung": "bestehender Typ; kein zusätzlicher Robotertyp allein durch Modul",
+      "art": "Hersteller-/Hersteller-Shop-Beleg",
+      "regionale_verfuegbarkeit": "Nur soweit im Quellenbeleg ersichtlich; für Deutschland nicht pauschal behauptet"
+    },
+    {
+      "id": "V74-003",
+      "kennzeichnung": "Produkt",
+      "name": "Aiper EcoSurfer S2",
+      "welt": "Garten",
+      "owner": "Poolskimmer",
+      "quelle": "https://aiper.store/de/products/aiper-surfer-s2-kabelloser-roboter-pool-skimmer",
+      "beleg": "Hersteller-Shop Deutschland: autonomer solarunterstützter Pooloberflächen-Skimmer; keine Boden-/Wandreinigung",
+      "zuordnung": "bestehender Typ; Poolskimmer von Poolroboter unterscheiden",
+      "art": "Hersteller-/Hersteller-Shop-Beleg",
+      "regionale_verfuegbarkeit": "Nur soweit im Quellenbeleg ersichtlich; für Deutschland nicht pauschal behauptet"
+    },
+    {
+      "id": "V74-004",
+      "kennzeichnung": "Produkt",
+      "name": "Stewart Golf Q Follow",
+      "welt": "Sport",
+      "owner": "Golf-Folgetrolleys",
+      "quelle": "https://www.stewartgolf.co.uk/products/stewart-golf-q-follow",
+      "beleg": "Hersteller-Shop Großbritannien: tatsächlich angebotener, selbstfolgender Golf-Trolley; Follow- und Fernmodus",
+      "zuordnung": "bestehender Typ",
+      "art": "Hersteller-/Hersteller-Shop-Beleg",
+      "regionale_verfuegbarkeit": "Nur soweit im Quellenbeleg ersichtlich; für Deutschland nicht pauschal behauptet"
+    },
+    {
+      "id": "V74-005",
+      "kennzeichnung": "Produkt",
+      "name": "Hypershell X Pro S",
+      "welt": "Sport",
+      "owner": "Wander-Exoskelette",
+      "quelle": "https://eu.hypershell.tech/de-de/products/new-hypershell-x-series",
+      "beleg": "Hersteller-Shop Europa: erhältliches, motorisch unterstützendes Exoskelett für Wandern und Bewegung; ausdrücklich KEIN Medizinprodukt",
+      "zuordnung": "NEUER_TYPKANDIDAT; getrennte Nutzerabsicht von therapeutischen Geh-Exoskeletten",
+      "art": "Hersteller-/Hersteller-Shop-Beleg",
+      "regionale_verfuegbarkeit": "Nur soweit im Quellenbeleg ersichtlich; für Deutschland nicht pauschal behauptet"
+    },
+    {
+      "id": "V74-006",
+      "kennzeichnung": "Produkt",
+      "name": "Makeblock mBot2",
+      "welt": "Bildung",
+      "owner": "Lernroboter",
+      "quelle": "https://www.makeblock.com/products/buy-mbot2",
+      "beleg": "Hersteller-Shop: programmierbarer Lernroboter als Bausatz mit Sensoren; auch für zu Hause",
+      "zuordnung": "bestehender Typ",
+      "art": "Hersteller-/Hersteller-Shop-Beleg",
+      "regionale_verfuegbarkeit": "Nur soweit im Quellenbeleg ersichtlich; für Deutschland nicht pauschal behauptet"
+    },
+    {
+      "id": "V74-007",
+      "kennzeichnung": "Produkt",
+      "name": "Sphero indi",
+      "welt": "Bildung",
+      "owner": "Lernroboter",
+      "quelle": "https://sphero.com/collections/indi",
+      "beleg": "Hersteller-Shop: Lernroboter für frühe Programmierkonzepte ohne Bildschirm",
+      "zuordnung": "bestehender Typ; keine eigene Typseite je Modell",
+      "art": "Hersteller-/Hersteller-Shop-Beleg",
+      "regionale_verfuegbarkeit": "Nur soweit im Quellenbeleg ersichtlich; für Deutschland nicht pauschal behauptet"
+    },
+    {
+      "id": "V74-008",
+      "kennzeichnung": "Produkt",
+      "name": "Petoi Bittle X V2",
+      "welt": "Freizeit",
+      "owner": "Roboterhunde",
+      "quelle": "https://www.petoi.com/products/petoi-robot-dog-bittle-x-voice-controlled",
+      "beleg": "Hersteller-Shop: programmierbarer und tatsächlich angebotener Vierbeiner; fertige und Bausatz-Variante",
+      "zuordnung": "bestehender Typ; alternativ Bildungszugang verlinken",
+      "art": "Hersteller-/Hersteller-Shop-Beleg",
+      "regionale_verfuegbarkeit": "Nur soweit im Quellenbeleg ersichtlich; für Deutschland nicht pauschal behauptet"
+    },
+    {
+      "id": "V74-009",
+      "kennzeichnung": "Produkt",
+      "name": "Airwheel SR5",
+      "welt": "Freizeit",
+      "owner": "Folgekoffer",
+      "quelle": "https://www.airwheel.net/de/product/sr5",
+      "beleg": "Herstellerseite: physischer, selbstfolgender Koffer mit Ortungsarmband und Hinderniserkennung; regionale Kaufbarkeit separat prüfen",
+      "zuordnung": "bestehender Typ; kein Beleg deutscher Sofortlieferung",
+      "art": "Hersteller-/Hersteller-Shop-Beleg",
+      "regionale_verfuegbarkeit": "Nur soweit im Quellenbeleg ersichtlich; für Deutschland nicht pauschal behauptet"
+    },
+    {
+      "id": "V74-010",
+      "kennzeichnung": "Produkt",
+      "name": "Energize Lab Eilik",
+      "welt": "Freizeit",
+      "owner": "Tischroboter",
+      "quelle": "https://store.energizelab.com/de/products/eilik",
+      "beleg": "Offizieller Shop: interaktiver Desktop-Roboter mit Servoantrieben und Berührungsreaktionen",
+      "zuordnung": "bestehender Typ; als Unterhaltung, keine unbelegte Therapie",
+      "art": "Hersteller-/Hersteller-Shop-Beleg",
+      "regionale_verfuegbarkeit": "Nur soweit im Quellenbeleg ersichtlich; für Deutschland nicht pauschal behauptet"
+    },
+    {
+      "id": "V74-011",
+      "kennzeichnung": "Produkt",
+      "name": "Sisyphus Mini ES",
+      "welt": "Freizeit",
+      "owner": "Sandmalroboter",
+      "quelle": "https://sisyphus-industries.com/product/essential/",
+      "beleg": "Hersteller-Shop: tatsächlich angebotene motorische Sandzeicheneinheit (bewegter Magnet führt Kugel durch Sand)",
+      "zuordnung": "NEUER_TYPKANDIDAT; funktional abweichend von Pinselmalroboter",
+      "art": "Hersteller-/Hersteller-Shop-Beleg",
+      "regionale_verfuegbarkeit": "Nur soweit im Quellenbeleg ersichtlich; für Deutschland nicht pauschal behauptet"
+    },
+    {
+      "id": "V74-012",
+      "kennzeichnung": "Produkt",
+      "name": "Particula GoChess XR (1XR/4XR)",
+      "welt": "Freizeit",
+      "owner": "Schachroboter",
+      "quelle": "https://support.particula-tech.com/article/what-is-gochess?product=gochess",
+      "beleg": "Hersteller-Support: NUR GoChess XR bewegt Schachfiguren selbst; Lite/Mini sind keine solchen Roboter",
+      "zuordnung": "bestehender Typ; keine Produktmarken-Kopie",
+      "art": "Hersteller-/Hersteller-Shop-Beleg",
+      "regionale_verfuegbarkeit": "Nur soweit im Quellenbeleg ersichtlich; für Deutschland nicht pauschal behauptet"
+    },
+    {
+      "id": "V74-013",
+      "kennzeichnung": "Produkt",
+      "name": "Casio Moflin",
+      "welt": "Freizeit",
+      "owner": "Robotertiere",
+      "quelle": "https://www.casio.com/us/moflin/",
+      "beleg": "Hersteller-Shop: seit 2024 in Japan und seit 2025 UK/USA angebotener flauschiger Interaktionsroboter",
+      "zuordnung": "EXPLIZITE BESTANDSDUBLETTE V69-006; nur neuer Produkthinweis/Quelle",
+      "art": "Hersteller-/Hersteller-Shop-Beleg",
+      "regionale_verfuegbarkeit": "Nur soweit im Quellenbeleg ersichtlich; für Deutschland nicht pauschal behauptet"
+    },
+    {
+      "id": "V74-014",
+      "kennzeichnung": "Produkt",
+      "name": "Obi Robot Generation 3",
+      "welt": "Pflege",
+      "owner": "Essroboter",
+      "quelle": "https://meetobi.com/de/shop/product/obi-robot/",
+      "beleg": "Hersteller-Shop: Essassistenz mit bewegtem Roboterarm zur gezielten Nahrungsauswahl; individuelle Eignungsprüfung erforderlich",
+      "zuordnung": "bestehender Typ",
+      "art": "Hersteller-/Hersteller-Shop-Beleg",
+      "regionale_verfuegbarkeit": "Nur soweit im Quellenbeleg ersichtlich; für Deutschland nicht pauschal behauptet"
+    },
+    {
+      "id": "V74-015",
+      "kennzeichnung": "Produkt",
+      "name": "Myomo MyoPro",
+      "welt": "Pflege",
+      "owner": "Armorthesen",
+      "quelle": "https://ir.myomo.com/company-profile",
+      "beleg": "Hersteller/Investorenseite: reale an Patienten ausgegebene, motorunterstützte Armorthese, laut Firma über 600 Nutzer",
+      "zuordnung": "bestehender Typ; Beleg für realen Einsatz, keine pauschale Therapiebehauptung",
+      "art": "Hersteller-/Hersteller-Shop-Beleg",
+      "regionale_verfuegbarkeit": "Nur soweit im Quellenbeleg ersichtlich; für Deutschland nicht pauschal behauptet"
+    },
+    {
+      "id": "V74-016",
+      "kennzeichnung": "Produkt",
+      "name": "Trexo Home",
+      "welt": "Pflege",
+      "owner": "Geh-Exoskelette",
+      "quelle": "https://eu.trexorobotics.com/trexo-home",
+      "beleg": "Europäischer Herstellerauftritt: tatsächlich eingesetztes Kinder-Gehsystem; regionale Bestellung über Reservierung und individuelle Passprüfung",
+      "zuordnung": "bereits im V67-Umfeld recherchierter Hersteller; Produktbeleg, keine neue Typseite",
+      "art": "Hersteller-/Hersteller-Shop-Beleg",
+      "regionale_verfuegbarkeit": "Nur soweit im Quellenbeleg ersichtlich; für Deutschland nicht pauschal behauptet"
+    },
+    {
+      "id": "V74-017",
+      "kennzeichnung": "Produkt",
+      "name": "Unitree G1",
+      "welt": "Humanoide",
+      "owner": "Entwicklungsroboter",
+      "quelle": "https://shop.unitree.com/collections/humanoid-robot/products/unitree-g1",
+      "beleg": "Hersteller-Shop: real gebauter Humanoid im Angebot, Standardmodell aktuell als rückständig/backordered markiert; KEIN Nachweis für selbstständige Haushaltspflege",
+      "zuordnung": "bereits früher dokumentierte Plattform; vorhandenen Robotertyp vertiefen, keine Arbeitswelt",
+      "art": "Hersteller-/Hersteller-Shop-Beleg",
+      "regionale_verfuegbarkeit": "Nur soweit im Quellenbeleg ersichtlich; für Deutschland nicht pauschal behauptet"
+    }
+  ],
+  "known_model_not_new": [
+    "V74-013 Moflin bereits V69-006",
+    "V74-016 Trexo als Modell/Hersteller bereits V67 erwähnt",
+    "V74-017 Unitree G1 bereits in älterer Humanoiden-/V67-Recherche behandelt"
+  ],
+  "no_wordpress_or_plugin_change": true,
+  "no_paid_api": true
+}
