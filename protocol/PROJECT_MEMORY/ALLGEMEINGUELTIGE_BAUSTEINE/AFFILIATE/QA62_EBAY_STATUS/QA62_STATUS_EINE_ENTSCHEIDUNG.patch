@@ -1,0 +1,223 @@
+--- a/pferdeportal-affiliate-router.php
++++ b/pferdeportal-affiliate-router.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
+  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
+- * Version: 6.72.344
++ * Version: 6.72.345
+  * Author: OpenAI
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -120,7 +120,7 @@
+     use PPAR_DFS_Amazon_Trait;
+     use PPAR_Digistore24_Trait;
+     use PPAR_Housekeeping_Trait;
+-    const VERSION = '6.72.344';
++    const VERSION = '6.72.345';
+     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
+     const CONTRACT_VERSION = '1.0';
+     const PROVIDER_CONTRACT_VERSION = '2.0';
+
+--- a/includes/trait-ppar-ebay-run.php
++++ b/includes/trait-ppar-ebay-run.php
+@@ -1228,6 +1228,43 @@
+         return '';
+     }
+ 
++    /** One authoritative decision from the saved canonical run, shared by
++     * admission and the outward heartbeat response. This method performs NO
++     * work, never changes a source record and never starts another worker.
++     * An incoherent saved run is NOT an empty run: fail closed without resetting
++     * the saved UUID, cursor, public checkpoint or previously valid products. */
++    private function ebay_external_tick_saved_run_state($run) {
++        $run=is_array($run)?$run:array();
++        if (!$run) { return 'empty'; }
++        if ((string)($run['schema']??'')!=='1.0') { return 'inconsistent'; }
++        $status=sanitize_key((string)($run['status']??''));
++        $phase=sanitize_key((string)($run['phase']??''));
++        // Reuse the established canonical active predicate. There must never
++        // be a separate competing definition of an active workflow.
++        if ($this->ebay_run_is_active($run)) {
++            return $status==='paused'
++                && sanitize_key((string)($run['resume_reason']??''))==='operator_stop'
++                ? 'operator_paused' : 'active';
++        }
++        if ($status==='completed' && $phase==='completed') { return 'completed'; }
++        if ($status==='failed' && $phase==='failed') { return 'failed'; }
++        // Older completed local check snapshots are recognized as terminal.
++        if ($status==='local_checked' && !in_array($phase,array('completed','failed'),true)) { return 'completed'; }
++        return 'inconsistent';
++    }
++
++    /** Read-only transport status. Never vetoes a valid winner, ranks products,
++     * evaluates coverage or performs any second editorial decision. */
++    private function ebay_external_tick_run_context($run) {
++        $run=is_array($run)?$run:array();
++        return array(
++            'run_status'=>sanitize_key((string)($run['status']??'idle')),
++            'phase'=>sanitize_key((string)($run['phase']??'idle')),
++            'run_uuid'=>sanitize_text_field((string)($run['run_uuid']??'')),
++            'plugin_version'=>self::VERSION,
++        );
++    }
++
+     /** KISS public heartbeat. One POST performs at most one bounded canonical
+      * package. The caller gets no control over provider, operation or settings.
+      * Candidate-local failures remain skippable inside the worker; terminal
+@@ -1235,13 +1272,15 @@
+     public function handle_ebay_external_tick($request) {
+         if (function_exists('nocache_headers')) { nocache_headers(); }
+         if (!$this->ebay_external_tick_admit()) {
+-            $out = array('status'=>'throttled','transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2');
++            $out = array_merge(array('status'=>'throttled','transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2'),
++                $this->ebay_external_tick_run_context($this->ebay_run_load()));
+             return function_exists('rest_ensure_response') ? rest_ensure_response($out) : $out;
+         }
+ 
+         $settings = $this->ebay_settings();
+         if (empty($settings['enabled'])) {
+-            $out=array('status'=>'disabled','transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2');
++            $out=array_merge(array('status'=>'disabled','transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2'),
++                $this->ebay_external_tick_run_context($this->ebay_run_load()));
+             return function_exists('rest_ensure_response') ? rest_ensure_response($out) : $out;
+         }
+ 
+@@ -1263,7 +1302,8 @@
+             $recovery_reason_ok=in_array($resume_reason,array('private_public_gate_recovery','business_gap_proof_recovery','private_public_freshness_revalidation'),true);
+             if ($current_uuid === '' || !hash_equals($current_uuid, $recovery_run) || !$this->ebay_run_is_active($run) || !$recovery_reason_ok) {
+                 $status = $this->ebay_run_is_active($run) ? 'busy' : ($current_status === 'completed' ? 'completed' : ($current_status === 'failed' ? 'failed' : 'idle'));
+-                $out=array('status'=>$status,'transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2','run_uuid'=>$current_uuid,'reason'=>'stale_recovery_bootstrap');
++                $out=array_merge(array('status'=>$status,'transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2','reason'=>'stale_recovery_bootstrap'),
++                    $this->ebay_external_tick_run_context($run));
+                 return function_exists('rest_ensure_response') ? rest_ensure_response($out) : $out;
+             }
+         }
+@@ -1274,35 +1314,35 @@
+             $restored=$this->ebay_run_resume_failed_family_cap($run);
+             $run=is_array($restored)?$restored:$this->ebay_run_load();
+         }
+-        $stored_status = sanitize_key((string)($run['status'] ?? ''));
+-        // One purpose per entry point: this endpoint drives ONLY the canonical
+-        // eBay research run. Existing availability WP-Cron has its own state
+-        // and cannot turn an active research tick into a false terminal idle.
+-        if ($stored_status === 'paused'
+-            && sanitize_key((string)($run['resume_reason']??'')) === 'operator_stop') {
+-            $out=array('status'=>'idle','run_status'=>'paused','reason'=>'operator_paused',
++        // Exactly ONE lifecycle decision governs the existing run. An invalid
++        // saved state must never be silently interpreted as "nothing running".
++        $saved_state=$this->ebay_external_tick_saved_run_state($run);
++        if ($saved_state==='inconsistent') {
++            return new WP_Error('ebay_run_state_inconsistent',
++                'Gespeicherter eBay-Laufzustand widersprüchlich. Kein Neustart und kein Überschreiben bestehender Produkte.');
++        }
++        if ($saved_state==='operator_paused') {
++            $out=array_merge(array('status'=>'idle','reason'=>'operator_paused',
+                 'transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2',
+-                'run_uuid'=>sanitize_text_field((string)($run['run_uuid']??'')),
+-                'reason_code'=>'manual_stop');
++                'reason_code'=>'manual_stop'),$this->ebay_external_tick_run_context($run));
+             return function_exists('rest_ensure_response') ? rest_ensure_response($out) : $out;
+         }
+-        if ((string)($run['schema'] ?? '') === '1.0' && $stored_status === 'failed') {
+-            $out=array(
+-                'status'=>'failed','transport'=>'external_tick','restart_required'=>1,'server_time'=>time(),'contract'=>'external_tick_v2',
+-                'run_uuid'=>sanitize_text_field((string)($run['run_uuid']??'')),
+-                'phase'=>sanitize_key((string)($run['phase']??'failed')),
+-                'error_code'=>sanitize_key((string)($run['error_code']??'')),
+-            );
++        if ($saved_state==='failed') {
++            $out=array_merge(array('status'=>'failed','restart_required'=>1,
++                'transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2',
++                'error_code'=>sanitize_key((string)($run['error_code']??''))),
++                $this->ebay_external_tick_run_context($run));
+             return function_exists('rest_ensure_response') ? rest_ensure_response($out) : $out;
+         }
+-
+-        if (!$this->ebay_run_is_active($run)) {
+-            $operation = $this->ebay_external_tick_due_operation($settings);
+-            if ($operation === '') {
+-                $out=array('status'=>'idle','transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2');
++        if ($saved_state!=='active') {
++            $operation=$this->ebay_external_tick_due_operation($settings);
++            if ($operation==='') {
++                $out=array_merge(array('status'=>'idle','reason'=>'no_due_operation',
++                    'transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2'),
++                    $this->ebay_external_tick_run_context($run));
+                 return function_exists('rest_ensure_response') ? rest_ensure_response($out) : $out;
+             }
+-            $started = $this->ebay_run_start(false, $operation);
++            $started=$this->ebay_run_start(false,$operation);
+             if (is_wp_error($started)) { return $started; }
+         }
+ 
+@@ -1312,41 +1352,36 @@
+         }
+         $fresh = $this->ebay_run_load();
+         $tick_result=sanitize_key((string)($result['tick_result']??'retryable_error'));
+-        // Manual stop is not a provider failure. The canonical worker correctly
+-        // returns "paused"; tell the external watchdog "idle" so it does not
+-        // start another useless self-drive loop. Keep run_status="paused" and
+-        // the stored cursor unchanged until an explicit operator resume.
+-        if ($tick_result==='paused'
+-            && sanitize_key((string)($fresh['status']??''))==='paused'
+-            && sanitize_key((string)($fresh['resume_reason']??''))==='operator_stop') {
++        // The same saved-state decision governs the single outward status.
++        // A nonterminal saved run can NEVER respond with terminal "idle".
++        $after_state=$this->ebay_external_tick_saved_run_state($fresh);
++        if ($after_state==='inconsistent' || $after_state==='empty') {
++            return new WP_Error('ebay_run_state_inconsistent_after_tick',
++                'eBay-Arbeitsstand nach dem Paket widersprüchlich. Alte Freigaben bleiben erhalten.');
++        }
++        if ($after_state==='operator_paused') {
+             $tick_result='idle';
+-        }
+-        if(!in_array($tick_result,array('advanced','busy','retryable_error','completed','local_checked','failed','idle','paused'),true)){$tick_result='retryable_error';}
+-        // One status decision, based on the SAVED canonical run. The only
+-        // automatic clock uses this status. Never mislabel an active run idle,
+-        // and never emit the unsupported internal "local_checked" as a tick.
+-        $current_status=sanitize_key((string)($fresh['status']??''));
+-        $manual_pause=$current_status==='paused'
+-            && sanitize_key((string)($fresh['resume_reason']??''))==='operator_stop';
+-        if ($manual_pause) {
+-            $tick_result='idle';
+-        } elseif ($this->ebay_run_is_active($fresh)) {
++        } elseif ($after_state==='active') {
++            // A worker claiming terminal success/failure without persisting that
++            // transition is a storage/ownership conflict, NOT normal progress.
++            // Never silently turn that disagreement into another green "busy".
++            if (in_array($tick_result,array('completed','local_checked','failed'),true)) {
++                return new WP_Error('ebay_worker_terminal_state_unverified',
++                    'eBay-Worker meldete Abschluss, der gespeicherte Lauf ist noch aktiv. Kein falscher Abschluss.');
++            }
+             if (!in_array($tick_result,array('advanced','busy','retryable_error'),true)) {
+                 $tick_result='busy';
+             }
+-        } elseif (in_array($current_status,array('completed','local_checked'),true)) {
++        } elseif ($after_state==='completed') {
+             $tick_result='completed';
+-        } elseif ($current_status==='failed') {
++        } else {
+             $tick_result='failed';
+         }
+-        $out=array(
++        $out=array_merge(array(
+             'status'=>$tick_result,
+-            'run_status'=>sanitize_key((string)($fresh['status']??'idle')),
+-            'phase'=>sanitize_key((string)($fresh['phase']??'idle')),
+             'transport'=>'external_tick',
+             'server_time'=>time(),
+             'contract'=>'external_tick_v2',
+-            'run_uuid'=>sanitize_text_field((string)($fresh['run_uuid']??'')),
+             'progress_seq'=>absint($fresh['progress_seq']??0),
+             'progress_before'=>absint($result['progress_before']??0),
+             'progress_after'=>absint($result['progress_after']??($fresh['progress_seq']??0)),
+@@ -1356,7 +1391,7 @@
+             'skipped_item_errors'=>absint($fresh['skipped_item_errors_count']??0),
+             'completed_with_skips'=>!empty($fresh['completed_with_skips'])?1:0,
+             'error_code'=>sanitize_key((string)($fresh['error_code']??'')),
+-        );
++        ),$this->ebay_external_tick_run_context($fresh));
+         return function_exists('rest_ensure_response') ? rest_ensure_response($out) : $out;
+     }
+ 
