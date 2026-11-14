@@ -1,71 +1,721 @@
 {
-  "status": "SOURCE_ONLY__NO_INSTALL_APPROVAL",
-  "based_on": "Texterstellung 0.4.1 current original-research QA candidate",
-  "version": "0.4.1-original-k0-sync-qa",
-  "zip_filename": "Texterstellung_0.4.1_K0_Synchronisierung_QA_NICHT_INSTALLIEREN.zip",
-  "zip_sha256": "1aa45bb9cd5e35b133e90d83a9b03c2872cbc0c510a1d1589da7ec5b1477cff3",
-  "zip_size_bytes": 711693,
-  "originals_previous_candidate_unchanged": 131,
-  "previous_candidate_files": 132,
-  "modified_existing": {
-    "texterstellung.php": {
-      "before_sha256": "ca0cceeceaa679b7210a0bf1339650628fa08257cfe0ad0e4d971637fdc9c0de",
-      "after_sha256": "d7823a610fd4231395a862ba9e84f008a6dd782424a273952224f958ae8e2e6b"
+  "status": "SOURCE_QA_NOT_INSTALL_APPROVED",
+  "candidate_version": "0.4.1-current-integration-QA",
+  "from_existing_plugin_version": "0.4.1-test",
+  "candidate_zip_name": "Texterstellung_0.4.1_Gesamtweg_QA_NICHT_INSTALLIEREN.zip",
+  "candidate_zip_sha256": "37cd4b2adfbe00acbaa232f83f5a1d3ddb3bc3e71846f81a6b5f4f933c93bba7",
+  "reference_original_sha256": {
+    "TXE_0_4_1": "f34fe278eaca382ca99c7f537463644dbd1508b9fb4198980e173df59edae280",
+    "PSTE_QA_0_57_144_50": "7fc98a17e4c2319a66afd23c0ad944a07b4492e7a9982933205f29069fdcd121",
+    "PSERC_QA_0_28_71": "fd80f7ec3451b437be0eaeedabf2142c5eb1b5130939f7b8dba3b3a2f9d2b59f"
+  },
+  "all_134_file_origins": [
+    {
+      "file": "texterstellung/README-TESTINSTALLATION.txt",
+      "sha256": "b88b852dadda740f67dc1094d0a4affd0a1f4987d7272458236f73fc49c5b1d7",
+      "origin": "TXE_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/contracts/intent-first-title-governance-v1.json",
+      "sha256": "437d27e2619b1a2e29c5a771f604d0c01bb8496e45b00aaaa5813f67a2544008",
+      "origin": "TXE_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/includes/class-txe-credentials.php",
+      "sha256": "a1ee15dd4cd9b5ee186d7e4a6bc894a9485e992db25001d2eb4745ab2dce7fa6",
+      "origin": "TXE_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/includes/class-txe-dataforseo-client.php",
+      "sha256": "136b2122e5df4225500b08bae66d7aa2b53e4506cc5cff2081b4507e00dd49d7",
+      "origin": "TXE_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/includes/class-txe-diagnose.php",
+      "sha256": "d5a77c3a52c763ae27bebb2c44fb04ecdc61b75f0a8e95412c7355315694a299",
+      "origin": "TXE_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/includes/class-txe-normalizer.php",
+      "sha256": "d886f0228b8381b63bd01ca38efb6bf812f6b48a662113203965e7206d299e5a",
+      "origin": "TXE_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/includes/class-txe-secret-store.php",
+      "sha256": "d732c9e1c43b87fec4cc4a20987f1d6856067d80f2b0b6f813d66d338483177a",
+      "origin": "TXE_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pserc/class-pserc-metadata-boundary.php",
+      "sha256": "acfc6cc95878b75d14485b5b4fca9c8ead87ae81bdda0e79d53244e32f89c767",
+      "origin": "PSERC_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pserc/class-pserc-plan-slot-identity.php",
+      "sha256": "be879535a391e588570954b72a4ba6bf7fd4015c0c249e9899843d102376df5b",
+      "origin": "PSERC_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pserc/class-pserc-plan-snapshot-store.php",
+      "sha256": "36168ea02d7399627cca57e0327c022f5374f6d272a5831d7a560ff582c361b2",
+      "origin": "PSERC_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pserc/class-pserc-stable-json.php",
+      "sha256": "16ed006846395a486d8fa5250bd398df3d53060ac5bfd8e95f92ddfd6cf46a8d",
+      "origin": "PSERC_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pserc/class-pserc-system4-import.php",
+      "sha256": "05a521d9caf5ac94e5c1a940c9e9f76d48ed09ca7bbb2694cad2d5c87f3e9878",
+      "origin": "PSERC_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/admin-navigation-v1.json",
+      "sha256": "69fab099c0c58e1816e023059817f77ca38feab55da9d44011bf6d366626ef89",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/article-type-extension-manifest-v1.json",
+      "sha256": "cb519fc9c92bf0853f987287d749cd37361328a41cc2389a82340a05243edf1a",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/article-type-extension-manifest-v1.sig",
+      "sha256": "bf854adb3fa6121aac7ecd406f98910666f04d104190ce9218ba119744603e05",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/article-type-intent-ontology-v2.json",
+      "sha256": "c155d85a7b545371de11247a207ce018d8d2f135350243b96b4e1d383fd540ca",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/budget-reservations-v1.json",
+      "sha256": "576ddf22c7c67e9ea352d7aad8e539fe0656873e4b131a9e9b27470d2ace4003",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/context-refresh-batch-v3.json",
+      "sha256": "6435656ec8a77ac437a87bfebc724e12d6562735459ef553e335d16a4073903b",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/coverage-priority-model-v1.json",
+      "sha256": "2a1ce22161a4db8eafc38dec8a9d7ac8ad8899a5fedbc8568fcc5dbdcde3b95d",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/credential-update-invariance-v1.json",
+      "sha256": "8e13c3897720ae0e330e95f972d17e65670ca9356f4125cdf538faf5ecaf47af",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/database-write-guard-v1.json",
+      "sha256": "3f12c75d2e0d38e98f8433af0ecd31e8737104cb776ba8ae2b9b9e97288cc750",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/end-to-end-dual-strand-sandbox-v1.json",
+      "sha256": "1580fafca51155e401ddb9e7585b54787368e07819cf8ca1e1fba13b14573c39",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/family-identity-v2.json",
+      "sha256": "14923f8e9b26320fc6decf50358b75d742277030be68309417132c098fdb5b9b",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/family-reclassification-v2.json",
+      "sha256": "639f8bfef757b649f9052bd9ccbac26d70be4259a9839c99650d49f3d2ed67aa",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/frozen-topic-model-v3.json",
+      "sha256": "98a9503c90dead77b41d3a8080337c128755c0e3aae0d7a9fbc8436dc6695a7e",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/general-editorialization-v2.json",
+      "sha256": "17dfc7c7239ae7af7723b9900d5a563153680f503614512729a182a3f0f16b9f",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/generality-contract-v1.json",
+      "sha256": "396f1230c6631fa16f28b018ac340fd5e6e5f703b65686301be90aac0061b768",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/global-topic-identity-v1.json",
+      "sha256": "715979b3eb9f6ea3c2d2a6eb152bcfe4d35a97c5b99829b055df60b2b606f4ab",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/global-topic-workflow-v1.json",
+      "sha256": "c6b208a125b1d0dcaaeb627139e78b928ee743765a0aa7dc3a2eb3e20cfd173c",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/intent-first-title-governance-v1.json",
+      "sha256": "437d27e2619b1a2e29c5a771f604d0c01bb8496e45b00aaaa5813f67a2544008",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/journal-article-type-v1.json",
+      "sha256": "8e4a148d17beef0bef15d06e7600710891b73957f68616c7df660b13a9069c25",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/persistence-fail-closed-v1.json",
+      "sha256": "9b8ebd30716e0d1bbe534e193c3f1753c88bc7dc19d7457bef4ffa306e2610ea",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/portal-domain-seeds-v1.json",
+      "sha256": "8fe412ac986df5cf6bfb39246889345af13d1e59c82bc34b455f7b9ed1fbc93d",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/ppc-interface-v1.json",
+      "sha256": "99d12062c8671c0ee216a4b63c404e4e24b4c387ea6c2e0afa5f4f8297a1bdc0",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/practical-cost-budget-policy-v1.json",
+      "sha256": "a1acc075f737ed9501924706f7e132e1de3f70dcbad0228247f788f9954a8d3a",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/practical-longtail-workflow-v1.json",
+      "sha256": "91d0a4ab1aa76645374a80904c762cb9cb6a0b1d2a4520fdfe262c37960a5c83",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/protected-baseline-v1.json",
+      "sha256": "e0398e31b40b739541483ef66355a51a420090fb68263f14dc86259a60acc316",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/question-title-faq-priority-v1.json",
+      "sha256": "4ace2402ba2cd73be38c933c42db72686755c873151f9bbacd578ce73faeccdb",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/safe-boot-and-admin-containment-v2.json",
+      "sha256": "0378cb08dd36e6c3558178aa9febe27778d84e7cc909f75e091f35041516f07c",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/sandbox-provider-error-policy-v1.json",
+      "sha256": "055adae0004675838f8aed941ec7c681def8c7fa2d646129d62a80a5c166b229",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/search-console-read-only-v1.json",
+      "sha256": "17a4a2985a108a4bd39621bb906509edc7b9d9f2c1feffd4c2ef308b620e4231",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/security-and-override-v2.json",
+      "sha256": "df056a44284b0b9c386ae655fb2e81356acc7245b856e06d3d27ef7722e8770c",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/semantic-review-sandbox-v6.json",
+      "sha256": "80f2196468471c0f1c1665d803a60a5a4807adb1b98cb7062ac41f82e8e66c79",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/topic-family-and-faq-quality-v2.json",
+      "sha256": "46f44b9b16b3e148d9fcb4369938041bd9eec82be06631155f7a0f40551c0586",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/topic-migration-recovery-v4.json",
+      "sha256": "935415d88e8918e74df00a6ecc0cc6066156b2efcbae2808c47d2fdd8a369300",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/topic-pool-and-manual-review-v2.json",
+      "sha256": "9ee53afa3809421b74174bf3aa3bfa44f34b095d5cb939aa983877a7e54a210c",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/traffic-light-decision-policy-v2.json",
+      "sha256": "5641ef2dc96f483922a8064608d058707cc9cdcb5227b78df6de04d1effb789a",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/contracts/upstream-editorial-ownership-v1.json",
+      "sha256": "7a118a4dbd61dd445d13102512a1d08f98bc64efbfac18241b1fbb66f917cc51",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/fixtures/existing-evidence-lane-b-110.json",
+      "sha256": "cc13139315b16626476a91869432314cef17da0bc6f73a05bf7d74a7d5e12f89",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/fixtures/portal-category-map-v1.json",
+      "sha256": "0c4c8fe4c6ca9b4887301ec3d6b5c5596a39be2dbbeb97d1ac154ec5fb61e19f",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-admin.php",
+      "sha256": "ee1434348347125b49fe4cca56095d25a99af9eb97d52cf2d4191f3939110899",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-analytics.php",
+      "sha256": "8b2a859ef0818e9f072da484975bdec4659c898f07127aa738471f4435061fa3",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-article-ownership-gate.php",
+      "sha256": "f908038652a46855fd12e665f814bf2c46be69ca8fcc87a55231ab2af64d37b5",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-article-type-extension-registry.php",
+      "sha256": "bced3718f2663f412eed2cab0e42a17f9da6d967641490119db5aa3f10fb9591",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-article-type-extension-router.php",
+      "sha256": "84abe5676709c7aa6eb27cc6ceba39d19fd19716f55ce7c0f98c1e52150f1c79",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-article-type-intent-ontology.php",
+      "sha256": "3b06882c1e607f57b6a807451b07b93d835f6d8a6fcdd4b9cd09433c3269ed6d",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-article-type-registry.php",
+      "sha256": "df563ee1e95f58d3a88e244ae332c01de8a5d75f2b05dc659757bd91a23cda94",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-auth.php",
+      "sha256": "ae96939b3f1458d94d1541a92b4651cf09b03905c009a8da904c334ad428cfe1",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-breadth-research-queue.php",
+      "sha256": "e0d36d01eb316285bf632b3b5fe2f3e459b2c10fe40cf4372eee852e01c9d1af",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-budget-reservations.php",
+      "sha256": "c5306da2c319d51c5f67237a52dc0622c4250bc8cc643619f618072b5d5a1095",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-cannibalization.php",
+      "sha256": "f19f14956e0adcd6bcee7eee907786d0a209144d76bef26661b0600b7e2903b7",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-category-context.php",
+      "sha256": "7a3fd0505301eb57ea13a2dfd0eaaa1e4dfadc3e2796b9f6010dc0d8cbd563ba",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-category-gap.php",
+      "sha256": "c65e3866d436e4f3f903a46105f98a7d8cc9c27876a24890d9323b574d998ea1",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-clean-reset.php",
+      "sha256": "8d0eb55693043677ac34aa7cb025d53a5dcb3ab357cc71e2a99028baa594611d",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-compiler-read-capability.php",
+      "sha256": "3d5facf1318c18ba254c2a02089fd0c77067f6ff0b6de80a1d71a2faabf1d96f",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-context-diagnostics.php",
+      "sha256": "15a184253b12f511bf0eb2bd9483f1edd40fb68f91528abcbfa4113b89f3a986",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-context-evaluator.php",
+      "sha256": "a699ea68a911c9d61f4fbf3cf158b8f36871801f58a3d33cc2ebf784aec0a6de",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-context-index-store.php",
+      "sha256": "ec24a579281eac67aa65df29aff47bdc3df575fb289b66acba74c84b6dbb38e5",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-context-refresh.php",
+      "sha256": "f82234f4202728fec6ab4dac32a1e5add5876bb5fe9836721a0aa49b10b13494",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-cost-guard.php",
+      "sha256": "edea0a4c48b0c420492ad206fa3bae4f62aae205884aff1f80baf539b54f0273",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-credentials.php",
+      "sha256": "be862855b08ac89a63b614e67ccd3e5f621ef9da72f4489d698f093067f1d27b",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-dataforseo-client.php",
+      "sha256": "5b34e4d735f7c5604d41aa63dfb3b029fc9efe48b1937d24edb7e7fc32476553",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-db-write-guard.php",
+      "sha256": "bb26886185dd795389d4143aba97bd9afbca1bf3eaaecd1f24d0aa22cad00337",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-diagnostic-exception.php",
+      "sha256": "3ab395a7db22df853550cc8b87e4557c8beb09a62f9e01b7ab5377d6b143660d",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-domain-risk-gate.php",
+      "sha256": "5e3885e77bc9243929a1ab6a04beabc41ba16e0b765551a2dfb47351817f77b7",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-editorial-quality-gate.php",
+      "sha256": "dd227908975e9fff36a9f31b8c4c1fe6e8dc9dcf8be6073e1c01f29c4dd65f1c",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-editorial-topic-normalizer.php",
+      "sha256": "fe74d862584bfc264605475ba858d14dec8d5364f8c5192c5f93f5628ffef764",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-editorializer.php",
+      "sha256": "ba6f31b4fa4ec2441fde1307e87c602fce0767453a5265727ceeea7f1b5841b3",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-evidence-audit.php",
+      "sha256": "69dc63da9b20ccf9e2daad4593eb2d7f54d81a6ec1d17d258198c50568a8833f",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-family-identity-v2.php",
+      "sha256": "74be8330ef9fa4129526074bc05742fe8a2a073668a1e52d839f4ae957a1c09b",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-family-membership.php",
+      "sha256": "fd4b76bb0a8afaebdbf6a3ac3c8fbc74e621a6b28f959e41b0d9f2d02c4de0a0",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-family-reclassification-v2.php",
+      "sha256": "8065578f609181ae48d4aaba8ba406fc4db6f0397ce871055a9b7503e24cecb3",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-family-structure-router.php",
+      "sha256": "8b02f6a47bf2b7ca83c05c07c90b54aa04620ba345ddb1077bec428558fb7a04",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-first-party-import.php",
+      "sha256": "a44c9937ccdf759bf8e645e359f971677c350fa92942e12898cfcfd1cbe9b56c",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-flight-recorder.php",
+      "sha256": "e10739a312a42c35a7805048757506125b6dfc85a93c3b3a1fd006adac2723d8",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-forensic-diagnostics.php",
+      "sha256": "e3b7d276cd9a3242b989376435ed4a89db2f137a4c82bb7a9b2f945fc6c50035",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-german-title-reviewer.php",
+      "sha256": "f5405e1398161f4e0f661ae3e851710fb66092d9ff32acf80dd5ce11485374ba",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-gsc-client.php",
+      "sha256": "32066998a73c1cfefc0471ace584f44d76b0ec3fe8c7256af2bbb272b7013fcc",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-gsc-credentials.php",
+      "sha256": "08cd787707dc4a135adb7ae6e9792a767880dc28576ccad6b52be2be8b3c9a27",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-intent-profile.php",
+      "sha256": "a07249468ea50b4afdb5506f322f3f16b04cb17774f4e08b5ace76f24c222711",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-journal-article-type.php",
+      "sha256": "1ad97c59b46f3649aff38e4e8c2cd18f6ea43dc52ed3c0271c8263a01ee80c8e",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-journal-semantic-router.php",
+      "sha256": "83f5ff07e0f5eefb0bf8400d04d2a385f3abb0c2a3d7235bf79cac7668ba0d6b",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-mini-workflow.php",
+      "sha256": "c59d1957305d735e7870875f07340b5e831d467e2fd9dd0b76dd5fedf6402637",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-normal-metadata-path.php",
+      "sha256": "2e747f014452e53d4186995ac21be12b5bc06950ab054c0c9416bfd9b8d01b22",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-normal-reentry-coordinator.php",
+      "sha256": "b2ddeb83bdcdb2d9454e256a27aa245d49a3864edb72ca09abaa04f3bc9c718b",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-normalizer.php",
+      "sha256": "57e2360c608a33e55689e8d6fc3d9fe00831381d13564a6e7779fe2fc2022278",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-overlay.php",
+      "sha256": "a523b1910842434860229f705dddd51e431edb5000326d2f7b0bc4cb4306d5b5",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-planning-readiness-gate.php",
+      "sha256": "b894d77d5396c4ae6eeb4f45bdf34fa78cfaa527fae431eaf247aa0cca4f2941",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-plugin.php",
+      "sha256": "c09de5e04303a5d51343e6fe4dd3aa6d4ad3873797672680d291c8d515de8055",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-portal-category-map.php",
+      "sha256": "19b86b8e816b46f37770ba117910a36e9aaa5ff5f4fd6d80234f03022fe64a95",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-portal-relevance-gate.php",
+      "sha256": "2be5f09f83b2f9302cb6704d022f16f9ca64893181639f882025123eda64a907",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-product-choice-classifier.php",
+      "sha256": "64aca8d8ba3534d0cf525d042a929f29a68b0d4a2d956fda6b2add2a08eb115c",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-query-record.php",
+      "sha256": "bb214aeb36633d6fe0fc304a268a052c97cc742853a79d43a765adc90146a371",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-repository.php",
+      "sha256": "9584264a8f692c7b69a92894bd2b7a7d8ce01f263d5f1cc0c3d7413c2d0cd80a",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-research-archive.php",
+      "sha256": "df2ce827eb1ecdc9900e32bde3c9cebb924f93559d835b825286d6b0f775bfe1",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-research-driver.php",
+      "sha256": "c85fd3e2d38394e2bbd9e4c98042a3777acbd39574337777a9f6382efe07807e",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-research-job.php",
+      "sha256": "aed246c645c630b447caa24ce8bf51257ec033c6a53906527b9a13944498afac",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-runner.php",
+      "sha256": "9f46b4abb3c4c9c45c43da0560049b23f1d3e072298d3b91f79f1e365c06166d",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-safe-migration-job.php",
+      "sha256": "4dc66169f9433147328660718fd168d0faf91341ed437e2057a3368251376148",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-sandbox-internal-planner.php",
+      "sha256": "d8876dc875c1ce0e0b78eedf30a1ba3eec2f314c030f8e38f9cec32f3f798e61",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-sandbox-maintenance-health.php",
+      "sha256": "5b23a1ca6320480599dd2c25715df81cb9799347b154254fd1127ec90c804975",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-sandbox-portal-relevance.php",
+      "sha256": "9fc34faf7d34ab8a4836ea1482e2cd50d35796b27e1d835dec700d30382482ca",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-sandbox-provider-error-policy.php",
+      "sha256": "498eebc8491665c4ff98d6d5594d1a85d800d5091ce4075ed960340720432d7c",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-sandbox-record-contract.php",
+      "sha256": "686eabf94f9f64598816ee1a0b2a7e1f62ebb58ebe6317164a8ea9f5c8d37c26",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-sandbox-record-store.php",
+      "sha256": "3e5da6213e6af022e3843efd63f8c10b72bb9cb4059ad389b30589d2bb46c0f2",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-sandbox-seo-relevance.php",
+      "sha256": "022a5c67245c9948d0655ffae74d729e472d381ea2bcf9ffa1c538322394dd59",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-secret-store.php",
+      "sha256": "2963095edee81001368dc03ebeecae8de4e41d7400ce76ca38c2d15c32c1de0b",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-semantic-classifier.php",
+      "sha256": "696500549c6ba5df660264568fd6e23562aeca1e7dfb2f3fbe1502a7237874ed",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-semantic-retriever-a.php",
+      "sha256": "16cda066047533a6bf48345839ad2154c7c2052563c12fe6bf361c4674234476",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-semantic-retriever-b.php",
+      "sha256": "0e60fc4029a972b87c77cffde58b70259931d24817ef8f7c6fd13ac6a2c4d756",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-semantic-review-sandbox.php",
+      "sha256": "3af23067f0377f4a8a54a89081025d279a0061c62e3cde38b32617d66acdca36",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-snapshot.php",
+      "sha256": "d7515cf50bda588f388bd4d4bc8434b4db2cdf211789018a6018e887eedb763b",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-storage-codec.php",
+      "sha256": "81d4fe600a9466b53dd058024ebb4951335f118e9c6df6b6a040e9b6c89de967",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-storage-maintenance.php",
+      "sha256": "10c6d71a107cf6ef59d279708d12f894b2ebf77ee4be8fa06c4c061c91d7320c",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-title-diversity.php",
+      "sha256": "89755179f6b3f8dec104bdacb7d27aa38f373efe2d06c6696eb3f19e834d48d7",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-title-pipeline.php",
+      "sha256": "bfc4428cf5bc5601ac5a3b1698fd4ea66158bec165f66d064e5102e498d2f116",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-title-validator.php",
+      "sha256": "accee63eec5a146f8e3fdc71a3615050584115a1556d3d5d85f58281f6a7f63e",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-token-equivalence.php",
+      "sha256": "090d30b3903c122acfbc5f1664d952344d337b032102ab3d12c57de5544574c5",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-topic-policy.php",
+      "sha256": "d3f2c179535d58b785b123f6e9115ef52cfc5677ef24253216d6bd0769ee3ec5",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-type-fit-probe.php",
+      "sha256": "6b4c50ca4216f253047c0b4d56764c5c0d768f522866a2a22dcd4a2a3f799d65",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/includes/class-pste-work-queue.php",
+      "sha256": "1cd66df4a9ebd8b6afebda399e82d65124722f7a6db24c106125550ae1254d0e",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/portal-seo-topic-engine.php",
+      "sha256": "220ba276b3d1d77dba607e7ee7ffaa12f92dc1d1440bbf45b5cc544f63dd1d16",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/original/pste/uninstall.php",
+      "sha256": "a0c6ddc38f64d8f172761962e475a1d00a7904e25ae0f3dba8b1e20e843f0ad2",
+      "origin": "PSTE_ORIGINAL_UNCHANGED"
+    },
+    {
+      "file": "texterstellung/texterstellung.php",
+      "sha256": "df058a4d7a4f024b69d6bd27ee8094ee24c2f7ee7df9bdd1d8e76f7efdc115b8",
+      "origin": "TXE_ADAPTER"
+    }
+  ],
+  "file_counts": {
+    "TXE_UNCHANGED": 7,
+    "TXE_ADAPTER": 1,
+    "PSTE_ORIGINAL_UNCHANGED": 121,
+    "PSERC_ORIGINAL_UNCHANGED": 5
+  },
+  "new_fachworkers": 0,
+  "original_module_changes": 0,
+  "full_original_txe_to_candidate_patch_sha256": "b7089e1231a09c6c8a48573a6841e6c3fa6340f6e1640863095084242a78b81a",
+  "tests": {
+    "QA_TXE041_REAL_CHAIN_20_CURRENT.php": {
+      "pass": 14,
+      "total": 14,
+      "live_wordpress": false
+    },
+    "PSERC_PSTE_CONFLICT_none": {
+      "pass": true
+    },
+    "PSERC_PSTE_CONFLICT_pste": {
+      "pass": true
+    },
+    "PSERC_PSTE_CONFLICT_pserc": {
+      "pass": true
+    },
+    "PSERC_PSTE_CONFLICT_both": {
+      "pass": true
     }
   },
-  "added_byte_identical_original_pserc_modules": {
-    "original/pserc/class-pserc-metadata-boundary.php": "acfc6cc95878b75d14485b5b4fca9c8ead87ae81bdda0e79d53244e32f89c767",
-    "original/pserc/class-pserc-plan-snapshot-store.php": "36168ea02d7399627cca57e0327c022f5374f6d272a5831d7a560ff582c361b2"
-  },
-  "php_syntax_pass": 94,
-  "qa_reports": {
-    "QA_TXE041_ORIGINAL_K0_VS_LEGACY.php": {
-      "pass": 15,
-      "total": 15
-    },
-    "QA_TXE041_ORIGINAL_FREI_SYNC_K0.php": {
-      "pass": 10,
-      "total": 10
-    },
-    "QA_TXE041_ORIGINAL_RESEARCH_BOOT.php": {
-      "pass": true
-    },
-    "QA_TXE041_ORIGINAL_RESEARCH_ADMIN.php": {
-      "pass": true
-    },
-    "QA_TXE041_ORIGINAL_RESEARCH_CONFLICT.php": {
-      "pass": true
-    },
-    "QA_TXE041_ORIGINAL_FREI_BRIDGE.php": {
-      "pass": true
-    },
-    "QA_TXE041_REUSE_ORIGINAL_IMPORT_ppm": {
-      "pass": 8,
-      "total": 8
-    },
-    "QA_TXE041_REUSE_ORIGINAL_IMPORT_no-ppm": {
-      "pass": 1,
-      "total": 1
-    }
-  },
-  "contracts": {
-    "source_k0": "PSERC_Plan_Snapshot_Store::batchFromItems",
-    "source_technical_validator": "PSERC_Metadata_Boundary::requireReadyBatchForExport",
-    "original_seo_owner": "PSTE_Mini_Workflow::hasStoredFinalFrei",
-    "original_importer": "PSERC_System4_Import::importPayload"
-  },
-  "changes": [
-    "original PSERC five-field K0 generator and validator",
-    "automatic read-only handoff from original stored FREI approvals at title/K0 export",
-    "fill only original missing technical identity, never invent",
-    "PSTE dormant activation only after explicit test confirmation"
+  "verified_integrated_path": "20 original already approved and fully bound topics -> 20 title assignments -> K0 export 13+7 -> 20 draft imports -> replay same 13 creates 0 additional drafts",
+  "remaining_release_blockers": [
+    "Original PPM 6.7.9 source and its runtime record_readback not executable in container: WP/PPM mock used",
+    "Real WordPress test instance unavailable",
+    "Real external K0 not run; only the unchanged five-field handoff and mock K0 response",
+    "Full original DataForSEO to editorial approval to WordPress source/target sync not executed end to end",
+    "Target contract rules 1-23 not all verified"
   ],
-  "not_proven": [
-    "actual WordPress/PSTE migration",
-    "live DataForSEO/PAA",
-    "original PPM 6.7.9 runtime",
-    "actual K0 execution",
-    "fully functional portal-neutral variants"
-  ],
-  "release_allowed": false
+  "not_release": true
 }
