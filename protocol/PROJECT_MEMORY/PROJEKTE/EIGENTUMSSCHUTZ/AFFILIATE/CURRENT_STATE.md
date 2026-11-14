@@ -1,3 +1,29 @@
+## 14.11.2026 – RC43: ECHTER EXPORT BEWEIST URSACHE DER 80 BLOCKADEN; VOLLSTÄNDIGE PHP-QA BESTANDEN
+
+**ECHTER WORDPRESS-BESTAND:** Nutzer-Export `hab-tarifcheck-bestandspruefung-20261114-130255.json`: 160 Tarifcheck-Banner, 80 auto_verified, 80 no_match; 2.599 aktive verifizierte WP-Knoten, davon Versicherung mit 5 R2 und 46 R3; 300 gespeicherte Ausgabeobjekte (80 published, 80 review, 140 superseded).
+
+**BISHERIGE HAUPTURSACHEN-ERKLÄRUNG HIERMIT WIDERLEGT:** Ausnahmslos ALLE 80 nicht zugeordneten Originale besitzen eine eindeutige `deep=`-Produktart **im gespeicherten Werbelink und identisch im gespeicherten `_source_evidence.destination`**. Die Informationen sind für diese 80 also **NICHT beim Import verloren gegangen**. Der nachgewiesene HTML-Verlust war ein separater Bug, aber nicht deren Blockierungsursache. Auch alle 80 zugeordneten Banner haben solche Deep-Informationen.
+
+**EIGENTLICHE URSACHE:** Der EINZIGE bisherige Hab-Versicherungs-Entscheider bestand auf wortwörtlichen Zielseiten-Namen; zehn echte spezifische Werbeprodukte haben gegenüber den vorhandenen WP-R2/R3-Kategorien abweichende Begriffe, daher genau 80× `No verified specific/general insurance`.
+
+**BELEGTE EINMALIGE FESTE ZUORDNUNG (jeweils 8 Formate; 10 Gruppen = 80):**
+- Riester-Rente, Rürup-Rente, Rentenversicherung, Lebensversicherung, Krankenzusatzversicherung → R2 `Krankenversicherung & Vorsorge` (WP 766; 40 Banner)
+- Hundekrankenversicherung → R3 `Tierkrankenversicherung` (WP 815; 8)
+- Haftpflichtversicherung und Hundeversicherung → R2 `Haftpflicht & Rechtsschutz` (WP 765; 16)
+- Grundbesitzerhaftpflicht → R3 `Haus- und Grundbesitzerhaftpflichtversicherung` (WP 784; 8)
+- Firmenversicherung → R2 `Gewerbeversicherungen & Finanzen` (WP 767; 8)
+Alle zehn Ziele existieren bereits im echten verifizierten WordPress-Baum. Es müssen KEINE Kategorien angelegt werden. R2 wird nur mit ihren tatsächlichen Unterseiten verbunden; nicht mit anderen R2. Die 80 vorher aktiven Banner (zehn andere Deep-Produktgruppen) bleiben unverändert.
+
+**RC43** (0.1.40-rc43): Nur der bisherige eine zentrale Versicherungs-Owner entscheidet anhand des einmal ausgelesenen Original-`deep`-Texts mit festem Katalog über die vorhandene reale Zielseite. Kein zweiter Klassifikator, kein Frontend-Check, keine neue DB-Tabelle, kein Neuimport. RC41-Vorabauslesen und RC42-Admin-JSON-Export bleiben erhalten.
+
+**END-TO-END ORIGINALCODE-QA BESTANDEN:** https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43598368122 — echte vollständige PHP-Pluginmethoden, alle 20 tatsächlich in den Originaldaten vorkommenden `deep`-Produktbezeichnungen × 8 Originalformate = **160** sichere Zielentscheidungen an echten WP-Seitennamen und IDs; bestehende 80 bleiben korrekt, bisher fehlende 80 sind zuordenbar. R2/R3-Isolierung, unbekannte und Finanzbanner weiterhin gesperrt. Gesamte RC23–RC42-Regression, private JSON-Export-Sicherheit, Bildformate bestanden. Nur 3 bereits vorhandene Plugin-Dateien verändert.
+
+**INSTALLATIONS-ZIP:** https://github.com/hallo-netizen/affiliate-pferdeportal/releases/download/hab-affiliate-rc43-real-160-source-deep-mapping-20261114/HAB_Bewahr_Affiliate_RC43_REAL_160_DEEP_ZUORDNUNG_TEST.zip — 2.361.375 Bytes, SHA256 `7e9a92fa2ee5ac93c6dce8bd4924858d661478921b6768c2103172845ed9e2e8`.
+
+**JETZT:** RC43 als Update des bestehenden Hab-Affiliate-Plugins installieren; `Affiliate-Zentrale → Werbemittel & Ausspielung` **dreimal** öffnen/aktualisieren (unveränderter Backend-Nachlauf: 60 Originale je Besuch). KEIN Neuimport, KEIN neuer HTML-/Bilderexport. Danach Live-Übersicht prüfen: Soll bei unverändertem Bestand **160 aktiv / 0 ohne Ziel** sein – tatsächlicher Live-Nachweis steht weiterhin aus. Original-JSON enthält private Affiliate-IDs und bleibt **ausschließlich im privaten Upload**, nicht in GitHub.
+
+---
+
 ## 14.11.2026 – RC42 ECHTER NÄCHSTER SCHRITT ERLEDIGT: EINMALIGER WORDPRESS-BESTANDS-EXPORT
 
 **Stand:** Die dokumentierten Ursachen aus RC39–RC41 bleiben bestehen. Echte Live-Werte zuletzt **160 importiert / 80 aktiv gemeldet / 80 ohne Ziel / 0 Formatsperren** unter RC40. Diese 80 sind weiterhin NICHT geklärt, keine erfundene Wiederherstellung und keine neuen Bannerimporte.
