@@ -1,5 +1,13 @@
 # Robotik – Pluginbüro / Kategorie-Workflow
 
+## NEUESTE VORBEREITETE TESTVERSION 14.11.2026 – 0.4.3, NOCH NICHT LIVE
+- **Gleiche Pluginidentität**, quellgeprüft aus Original **0.4.2**. Fertiges Test-ZIP liegt in der Library **`/robotik/Konzeptbüro/ROBOTIK_KATEGORIE_WORKFLOW_0.4.3_SEO_V52_NUR_TEST.zip`** (SHA256 `c06fb36d5e1e1d2d5955de6f9f90daeb28f35db9b23bf09d4269dfc212c52382`). Das GitHub-`CURRENT.zip` **ist weiterhin die historische 0.3.0** und wird **nicht fälschlich als 0.4.3 bezeichnet**; für V53 **keine ZIP-Datei in GitHub synchronisiert**, aber die drei geänderten/zusätzlichen Quellkomponenten vollständig im `V53_SOURCE/` und Tests in `SEO_V53_RELEASE_PRUEFUNG_20261114.md`.
+- Nur **WordPress → Robotik Kategorie → DataForSEO** nutzt jetzt **141 Typseiten-/296 Rubrik-Suchbegriffe** aus dem V52-Fachentwurf; 16 alte HOLDs werden mitgeführt. 437 eindeutige Suchbegriffe, 0 verworfen, kostenloser JSON-Export ergänzt. **Kostenpflichtige Abfrage unverändert nur mit Nutzerbestätigung.**
+- **Vier alte Dateien bytegleich**: Inventur, Erstimport, Sammelveröffentlichung und altes Erstimportprofil. **Daher weiterhin keine Möglichkeit, mit dem historischen Erstimport alle 141 V52-Typen zu übernehmen.** Nicht den alten Erstimport starten, um V52 umzusetzen.
+- **Tests lokal:** 5 PHP-Dateien syntaxgeprüft, ZIP CRC okay, PHP-Preflight 437/437 und 16/16 HOLD, Backend-UI-Simulation bestanden; **keine echte WordPress-Installation oder bezahlte API geprüft**. Noch keine Freigabe für WordPress-/URL-/SEO-Änderungen.
+- **Unmittelbarer Nutzerweg nach Installation der Testversion:** `Robotik Kategorie → DataForSEO → Gesamte Keywordliste prüfen (kostenlos) → SEO-Keywordliste als JSON herunterladen`. Datei zurück in den Chat, damit der tatsächliche WordPress-Readback mit V52 übereinstimmt. Kein Paid-Start.
+
+
 ## AKTUELLER ERGÄNZUNGSSTAND 11.11.2026 – 0.4.1 FERTIG, NOCH NICHT LIVE
 - Das unterhalb dieser Ergänzung beschriebene GitHub-`CURRENT.zip` 0.3.0 ist **historischer GitHub-Bestand**; es ist nicht mit dem inzwischen bereitgestellten 0.4.0 zu verwechseln.
 - Nutzer meldete den vorherigen 0.4.0-Schritt als erledigt. Echte 193/193-WordPress-Live-Prüfung wurde nicht erneut bereitgestellt.
