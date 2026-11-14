@@ -1,0 +1,64 @@
+{
+  "contract": "PSTE_KISS_SINGLE_OWNER_REAL_61_QA_ONLY_V1",
+  "result": "REJECTED_FOR_RELEASE_MAJORITY_NOT_MET",
+  "source": {
+    "actual_61_diagnostic_sha256": "d4691706235598ffd0f37648896e8b8a436c0bcf61868590d296fb6b955ad114",
+    "original_1165_category_inventory_sha256": "0c4c8fe4c6ca9b4887301ec3d6b5c5596a39be2dbbeb97d1ac154ec5fb61e19f",
+    "original_admin_sha256": "21ba70eaa7871e18f342bc0922be41441b266a2fd4fca54b776b878dbca8538a",
+    "patched_admin_sha256": "566a564b56e2838ccfd4d56b2d18291a085f53909b8f1724ce8be81bcfda3144"
+  },
+  "data": {
+    "real_topics": 61,
+    "real_historic_categories": 1165,
+    "original_product_families": 264,
+    "original_pass_historic": 7,
+    "unique_family_candidates": 9,
+    "no_unique_family": 52,
+    "unique_with_type_candidate": 8,
+    "original_pass_among_unique": 7,
+    "new_production_ready_proven": 0,
+    "journal_from_approved_title": 1
+  },
+  "negative_cases": [
+    "magnetfeld gamasche pferd ≠ Magnetfelddecken",
+    "pferdeanhänger 4 pferde ≠ 2er Pferdeanhänger",
+    "dünger für Pferdeweiden ≠ Nachsaat für Pferdeweiden"
+  ],
+  "checks": {
+    "61 unchanged real IDs and titles": true,
+    "1165 original WP category entries (historic)": true,
+    "264 original product families": true,
+    "Only 9 exact unique topic families": true,
+    "52 original topics without unique family": true,
+    "No generic horse-only category capture": true,
+    "Magnetfeldgamaschen not sent to Magnetfelddecken": true,
+    "Four-horse trailer not sent to two-horse trailer": true,
+    "Water trough for stall not forced into pasture category": true,
+    "Existing lexical type ambiguity preserved": true,
+    "7 existing original PASS among 9 unique candidates": true,
+    "Only remaining two candidates either HELD or type-undecided": true,
+    "10 existing original owner regression assertions": true,
+    "Original Journal recognizes only one of approved titles": true,
+    "No artificial WP category ID or K0 ready generated": true,
+    "11 trailer subjects and 11 pasture subjects in original data": true
+  },
+  "technical_owner_regression": {
+    "one_owner_assigns_only_two_unambiguous_frei": true,
+    "nonfree_no_category_vote": true,
+    "blocked_topic_left_untouched": true,
+    "stale_topic_left_untouched": true,
+    "previous_category_owner_not_redecided": true,
+    "single_owner_audit_proven": true,
+    "repeated_run_never_second_decision": true,
+    "unauthorized_cron_refused": true,
+    "category_removed_stays_pending": true,
+    "existing_category_later_restored_is_assigned_once": true
+  },
+  "limits": [
+    "July 2026 original category fixture, not live WP table",
+    "No real WP writes, titles untouched",
+    "No live K0/PSERC/PPM",
+    "No new category creation",
+    "No approval of a production ZIP"
+  ]
+}
