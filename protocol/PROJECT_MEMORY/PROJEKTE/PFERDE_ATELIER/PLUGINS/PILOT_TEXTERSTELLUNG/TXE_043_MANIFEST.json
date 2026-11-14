@@ -1,0 +1,33 @@
+{
+  "version": "0.4.3",
+  "zip_sha256": "55373d1c388db342a2179353eb05676bc9c07aa09f2719a4fde10ea967d5252a",
+  "old_zip_sha256": "788271f4ff0d2596d7fa1dabb142973caa55205261cac065c1231bce444be9b7",
+  "unchanged_count": 170,
+  "original_unchanged_count": 164,
+  "total_old": 173,
+  "total_new": 173,
+  "changed_files": [
+    "texterstellung/README-TESTINSTALLATION.txt",
+    "texterstellung/includes/class-txe-legacy-source-bridge.php",
+    "texterstellung/texterstellung.php"
+  ],
+  "added_files": [],
+  "dropped_files": [],
+  "install_permission": "ONLY_ISOLATED_WORDPRESS_TEST",
+  "full_e2e_proven": false,
+  "no_original_extra_data_generated": true,
+  "category_regression_12of12": true,
+  "current_real_diagnostic_17of17": true,
+  "synthetic_positive_regression_27of27": true,
+  "cron_guard_regression_5of5": true,
+  "php_syntax_pass_count": 117,
+  "zip_integrity_pass": true,
+  "actual_original_report_20261109": {
+    "FREI": 61,
+    "normal_path": 8,
+    "title_return_PASS": 7,
+    "CATEGORY_ROOM_TOPIC_POOL": 52,
+    "protected_or_unclassified": 1
+  },
+  "real_wp_db_test_executed": false
+}
