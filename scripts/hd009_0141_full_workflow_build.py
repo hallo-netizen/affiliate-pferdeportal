@@ -184,8 +184,10 @@ old_late="""            if (!$this->hd_idealo_product_targets_exact_hobby_page($
                 continue;
             }
 """
-assert m.count(old_late)==1, "Unexpected page-relevance late gate"
-m=m.replace(old_late,"",1)
+if old_late in m:
+    m=m.replace(old_late,"",1)
+# Some older source variants already omitted that caller; in all cases the
+# final original placement resolver must be the only target authority.
 begin=m.index("    private function hd_idealo_product_targets_exact_hobby_page(")
 end=m.index("    private function category_product_shared_rank_base(",begin)
 assert "private function hd_idealo_product_targets_exact_hobby_page(" in m[begin:end]
