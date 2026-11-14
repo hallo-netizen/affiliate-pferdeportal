@@ -1,0 +1,19 @@
+# QA67 – Durchgehender eBay-Gesamtablauf: unnötige Doppelarbeit entfernt
+
+**Quellbasis:** Vollständiges vorhandenes eBay-/Affiliate-Plugin `6.72.346`, unveränderte Original-PHP-Phasen, Nutzerexport mit 2.769 Laufereignissen. **Nur QA-Änderung – keine Liveinstallation, kein neuer Pluginrelease.**
+
+## Hart belegte Ablaufursache
+
+Im realen Lauf wurden nach der eBay-Vollsuche noch **1.692 Protokolleinträge in `refresh_remote`** zwischen 13.11.2026 16:48:07 UTC und 20:28:06 UTC erzeugt – **3 Stunden 40 Minuten Wartezeit** allein für die globale Bestandsaktualisierung. Der nachfolgende ausgewählte Angebotsbestand wurde erst ab 14.11. 02:51:58 UTC materialisiert: **155 ausgewählt, 2 übernommen, 153 übersprungen**, u. a. weil die ursprüngliche Quellenbestätigung inzwischen abgelaufen war. Zusätzlich wurden im selben Gesamtlauf **5/283** Familien gezählt. Der Weg `Suche -> ganze Datenbank aktualisieren -> Auswahl -> Einzelangebot neu prüfen -> öffentliche Schlussprüfung` prüft nicht nur doppelt, sondern macht die erste Suchbestätigung zeitlich wieder wertlos.
+
+## Eine einfache Änderung im ursprünglichen Code, keine neue Architektur
+
+Bei einem **vollen `sync`-Lauf**, sobald die vorhandene eBay-Produktsuche `completed` meldet, folgt **sofort** die vorhandene `selection_prepare`-Phase. Der redundante vorherige globale Inventarabgleich entfällt nur für diesen Pfad. Der normale *eigenständige* `refresh`-Lauf ist unverändert. Direkt vor der Übernahme prüft weiterhin der vorhandene Selektionsarbeiter nur das **tatsächlich ausgewählte** eBay-Angebot (`getItem` bei abgelaufener Frische); die öffentliche Schlussprüfung prüft die Quelle, Policy, Zuordnung und veröffentlichten Creative-Belege wie bisher. Kein neuer Worker, kein zweites Produkturteil, kein neuer Cron, keine neue Tabelle, kein Core-, Frontend- oder GitHub-Workflow-Eingriff. **Der aktuell pausierte alte Run im bereits erreichten `gapfill_discovery` wird durch diese Änderung bewusst nicht zurückgesetzt oder heimlich umgestellt.**
+
+## Zusammenhängende Original-PHP-Gegenprobe
+
+7 vollständige Original-PHP-Worker-Abschlussläufe – normal, gültiges Altprodukt gesperrt, neues Produkt gesperrt, DB-Ausfall, Änderung während Nachsuche, ohne neuen Treffer, Speicherfehler – mit **identischen simulierten WordPress-/eBay-Eingängen** vor und nach Änderung. **7/7 identische finale Statusmeldungen, öffentliche Bestände, Veröffentlichungszahlen, Fehler, alte SAFE-Verluste und Anzahl neuer Suchen.** Ein überflüssiger Übergabe-Tick entfällt bereits im kleinen Modell (z. B. normal **24 -> 23**), in der realen Struktur zusätzlich der komplette mehrstündige globale Refresh-Abschnitt. Der bestehende *einmalige* ausgewählte Quellen-Neucheck besteht **9/9**, alle **23 PHP-Dateien Syntax PASS**. Unabhängiger `refresh`-Pfad im Quellcode byteidentisch. Die Beweismatrix mit sämtlichen sieben Fällen ist in `QA67_TEST_RESULT.json`, Original-PHP-Harness in `QA67_REAL_SYNC_FULL_PHASE_CHAIN.php`, ausführbarer Vergleich in `qa67_matrix.py`.
+
+## Nicht als behoben ausgeben
+
+Die Tests benutzen den echten kanonischen PHP-Controller und die originale Publikations-/Bereinigungsmethode, aber **WordPress-Datenbank, eBay-Netzwerk und GitHub-Zustellung sind nachgestellt**. Ein Live- oder Netzwerktest ist nicht möglich. **Derzeitige 5/283, 578 gespeicherte SAFE-Freigaben und pausierter Run bleiben real unverändert.** Der GitHub-Wecker ist separat unzuverlässig (bisheriger Workflow-Schutz PR #759); diese KISS-Verschlankung kann fehlende externe Zeitgeber nicht ersetzen und sollte nicht als fertiger Gesamtfix verkauft werden. Keine neue ZIP empfohlen, solange GitHub-Transport und Live-Coverage nicht gemeinsam abgenommen sind.
