@@ -1,0 +1,31 @@
+{
+  "status": "QA_ONLY_NOT_RELEASED",
+  "basis": "Texterstellung_0.4.1_Gesamtweg_QA_NICHT_INSTALLIEREN.zip",
+  "original_source_files_unchanged": 133,
+  "source_files_total": 134,
+  "changed_files": [
+    "texterstellung/texterstellung.php"
+  ],
+  "change": "Delay loading unchanged PSTE job hooks until admin site confirmation; use original PSTE title export/import forms, disable legacy TXE synthetic title endpoints, hold title forms until PSTE ready",
+  "new_worker_files": 0,
+  "new_seo_decision_functions": 0,
+  "changed_pste_original_files": 0,
+  "changed_pserc_original_files": 0,
+  "old_zip_sha256": "37cd4b2adfbe00acbaa232f83f5a1d3ddb3bc3e71846f81a6b5f4f933c93bba7",
+  "new_zip_sha256": "8c7460d6cd7ec873a81771269fbf6ed8f0ffda137a4d7d359ee7b7fda4621018",
+  "new_zip_bytes": 712142,
+  "main_source_sha256": "5ed00e875375fda85abcc1b5e0feaa1a833dd1aca04ab8654f6787d3fe63b247",
+  "test_results": {
+    "source_gate_3_modes": "3/3 local PHP mocks",
+    "full_20_article_chain": "14/14 local PHP mocks",
+    "old_plugins_conflicts": "4/4 local PHP mocks",
+    "php_syntax": "94/94 clean"
+  },
+  "outstanding": [
+    "No real WordPress+PPM test",
+    "PPM 6.7.9 original ZIP not retrievable as inspectable bytes in current tools",
+    "PSTE legacy 61 approvals incompletely bound",
+    "No real DataForSEO or K0 run",
+    "No full 23-rule E2E release approval"
+  ]
+}
