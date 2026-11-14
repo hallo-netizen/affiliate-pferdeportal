@@ -1,0 +1,408 @@
+{
+  "schema": "ROBOTIK_V71_ASIATISCHE_HOCHSCHULEN_PATENTE_RECHERCHE_DELTA",
+  "datum": "2026-11-14",
+  "scope": [
+    "Haushalt",
+    "Garten",
+    "Freizeit",
+    "Sport",
+    "Bildung",
+    "Pflege",
+    "Humanoide"
+  ],
+  "ausgenommen": [
+    "Gewerbe",
+    "Industrie",
+    "Humanoide/Arbeit"
+  ],
+  "nur_recherche": true,
+  "label_system": [
+    "Produkt",
+    "Projekt",
+    "Idee"
+  ],
+  "belege": [
+    {
+      "id": "V71-001",
+      "kennzeichnung": "Idee",
+      "welt": "Haushalt",
+      "fund": "Fliegender Haushalts-Putzroboter",
+      "urheber": "Suzhou City College (China)",
+      "quelle": "https://patents.google.com/patent/CN121080845A/en",
+      "beleg": "Patent 2025: Fahrwerk und Flugmechanik, Reinigungsarm für hohe oder schwer zugängliche Stellen. Patent belegt kein aufgebautes Fluggerät.",
+      "zuordnung": "Bestehende Reinigungsroboter vertiefen; flugfähige Sonderbauart, keine automatische neue CORE-Seite",
+      "entscheidung": "Variante"
+    },
+    {
+      "id": "V71-002",
+      "kennzeichnung": "Idee",
+      "welt": "Haushalt",
+      "fund": "Fischputz- und Ausnehmmaschine für die Privatküche",
+      "urheber": "Sanjiang College, Jiangsu (China), Hochschulwettbewerb 2026",
+      "quelle": "https://www.ycit.edu.cn/info/1020/113487.htm",
+      "beleg": "Studentischer Entwurf mit virtueller Vorführung für Schuppen, Ausnehmen und Reinigen; kein autonomer Greifarm oder funktionierendes Küchengerät belegt.",
+      "zuordnung": "Eigenständiges Haushaltsgerät als Randkandidat; Abgrenzung Automat vs. Roboter offen",
+      "entscheidung": "Grenzfall"
+    },
+    {
+      "id": "V71-003",
+      "kennzeichnung": "Projekt",
+      "welt": "Freizeit",
+      "fund": "Essbarer, sprechender Roboter",
+      "urheber": "University of Electro-Communications / Doshisha University (Japan)",
+      "quelle": "https://www.nakata-lab.mi.uec.ac.jp/portfolio/human_edible_robot_interaction/",
+      "beleg": "Gelatine-/Apfelsaft-Körper mit pneumatischer Bewegung; Forschung zu Interaktion und Ess-Erleben. Laboraufbau, kein Lebensmittel-Serienprodukt.",
+      "zuordnung": "Neuer Typkandidat „Essbare Roboter“; Register und Magazin sicher",
+      "entscheidung": "Neue_Typprüfung"
+    },
+    {
+      "id": "V71-004",
+      "kennzeichnung": "Idee",
+      "welt": "Garten",
+      "fund": "Mobiler Mückenjäger mit Zimmerkamera",
+      "urheber": "Privater Erfinder (China), Patent 2020",
+      "quelle": "https://patents.google.com/patent/CN111708281A/en",
+      "beleg": "Decken-Kameras und verfahrbarer Mückenfangroboter als Patent; Eintrag inzwischen withdrawn.",
+      "zuordnung": "Bestehender Mückenfangroboter (V52), nur Indoor-Variante ergänzen",
+      "entscheidung": "Bestehender_Typ"
+    },
+    {
+      "id": "V71-005",
+      "kennzeichnung": "Projekt",
+      "welt": "Freizeit",
+      "fund": "MOFU – aufblasbarer, flauschiger Kugelroboter",
+      "urheber": "University of Electro-Communications / Sony (Japan)",
+      "quelle": "https://www.uec.ac.jp/eng/news/announcement/2026/20260908_7921.html",
+      "beleg": "2026 entwickelter fahrender Roboter, der seine ganze Körpergröße ändert. Untersucht empfundene Lebendigkeit, kein Roboterhaustier im Handel.",
+      "zuordnung": "Register unter Begleitrobotern/Robotertieren; nicht mit springendem Kugelroboter V70 verwechseln",
+      "entscheidung": "Bestehender_Typ"
+    },
+    {
+      "id": "V71-006",
+      "kennzeichnung": "Projekt",
+      "welt": "Haushalt",
+      "fund": "Roboter zum Wäscheaufhängen",
+      "urheber": "Oyama National College of Technology (Japan), Robotikwettbewerb 2019",
+      "quelle": "https://www.oyama-ct.ac.jp/2019/11/26/",
+      "beleg": "Im nationalen japanischen Robotikwettbewerb gebaute Roboter hängen Handtücher, Hemden und Bettwäsche auf. Wettbewerbsaufbau, kein Haushaltsserienprodukt.",
+      "zuordnung": "Neuer Typkandidat „Wäscheaufhängroboter“ (nicht Wäschefaltroboter)",
+      "entscheidung": "Neue_Typprüfung"
+    },
+    {
+      "id": "V71-007",
+      "kennzeichnung": "Projekt",
+      "welt": "Haushalt",
+      "fund": "Von Handbewegungen lernender Haushaltsroboter",
+      "urheber": "Jiangnan University (China), Wettbewerb 2026",
+      "quelle": "https://news.jiangnan.edu.cn/info/1081/108823.htm",
+      "beleg": "Höhenverstellbarer Haushaltsroboter mit zwei Armen; vorgeführtes studentisches Modell, linke Armbewegung soll rechten Arm anlernen.",
+      "zuordnung": "Bereits vorhandener Haushaltsassistent/Aufräumroboter; Modell ins Register",
+      "entscheidung": "Bestehender_Typ"
+    },
+    {
+      "id": "V71-008",
+      "kennzeichnung": "Idee",
+      "welt": "Haushalt",
+      "fund": "Rotierender Duft- und Kleiderschrankautomat",
+      "urheber": "Yancheng Institute of Technology (China), Wettbewerb 2026",
+      "quelle": "https://www.ycit.edu.cn/info/1020/113487.htm",
+      "beleg": "Studentisches Smart-Wardrobe-Modell mit beweglicher Aufhängung, Feuchtigkeitsregulation, Spiegel und automatischer Bereitstellung.",
+      "zuordnung": "V68 Kleiderschrankroboter-Kandidat ergänzen, nicht zweiter Typ",
+      "entscheidung": "Bestehender_Kandidat"
+    },
+    {
+      "id": "V71-009",
+      "kennzeichnung": "Idee",
+      "welt": "Pflege",
+      "fund": "Fahrender Seniorenhelfer mit Warmhaltefächern",
+      "urheber": "Wei Mei La Ma Beijing Health Management (China), Patent",
+      "quelle": "https://patents.google.com/patent/CN119772921B/en",
+      "beleg": "Patentschrift zu Sprachkommunikation, Aufbewahrung und temperierter Anlieferung von Gegenständen an ältere Menschen. Kein Endnutzerverkauf belegt.",
+      "zuordnung": "Vorhandener Pflege-Servierroboter; Registereintrag",
+      "entscheidung": "Bestehender_Typ"
+    },
+    {
+      "id": "V71-010",
+      "kennzeichnung": "Idee",
+      "welt": "Bildung",
+      "fund": "Roboter-Säugling zum Üben der Babypflege",
+      "urheber": "Beijing Xinyun Tiandi Technology (China), Patent 2023/2024",
+      "quelle": "https://patents.google.com/patent/CN116533267B/en",
+      "beleg": "Patentierte interaktive Säuglingspuppe mit Lageerkennung und Rückmeldung zu Pflegehandlungen; konkrete Trainingsaufgabe, nicht zur realen Babypflege.",
+      "zuordnung": "Eigenständiger Robotertyp-Kandidat „Säuglings-Pflegetrainer“",
+      "entscheidung": "Neue_Typprüfung"
+    },
+    {
+      "id": "V71-011",
+      "kennzeichnung": "Idee",
+      "welt": "Haushalt",
+      "fund": "Babysitter-Roboter mit Projektion",
+      "urheber": "Privater Erfinder (China), Patent 2026",
+      "quelle": "https://patents.google.com/patent/CN121848415A/en",
+      "beleg": "Mobiler Begleitroboter mit Kamera und Projektionsmodul für Babyinteraktion; Patent belegt kein einsatzfähiges Babysittergerät.",
+      "zuordnung": "Vorhandene Haushalts-Begleitroboter; Entwicklungs-Magazin",
+      "entscheidung": "Bestehender_Typ"
+    },
+    {
+      "id": "V71-012",
+      "kennzeichnung": "Idee",
+      "welt": "Freizeit",
+      "fund": "Schwebende Fisch-, Quallen- und Wolkenroboter",
+      "urheber": "Keio University / Forschungsteam DIS 2026 (Japan), Designstudie",
+      "quelle": "https://kaikunze.de/post/2026-06-22-floating-companion/",
+      "beleg": "Fünf Szenarien weicher schwebender Heimroboter: Fischkontakt, Atemhilfe, Haustierspiel, Erinnerung. Forschungs-/Designideen, nicht fünf käufliche Modelle.",
+      "zuordnung": "Im Register als EIN Designforschungsprojekt, unter Begleitrobotern verlinkt",
+      "entscheidung": "Bestehender_Typ"
+    },
+    {
+      "id": "V71-013",
+      "kennzeichnung": "Projekt",
+      "welt": "Freizeit",
+      "fund": "Weicher Flugroboter, der sich auf Menschen niederlässt",
+      "urheber": "University of Tokyo (Japan), Soft Robotics 2026",
+      "quelle": "https://journals.sagepub.com/doi/full/10.1177/21695172261425911",
+      "beleg": "Erprobter aufblasbarer Flugprototyp kann sich zum Kontakt auf einer Person niederlassen; keine Spielzeug-Auslieferung.",
+      "zuordnung": "Vorhandene Drohnen/Begleitrobotik als Forschungseintrag",
+      "entscheidung": "Bestehender_Typ"
+    },
+    {
+      "id": "V71-014",
+      "kennzeichnung": "Projekt",
+      "welt": "Haushalt",
+      "fund": "Haushaltsroboter im öffentlichen Fernsteuerungs-Versuch",
+      "urheber": "University of Tokyo / AIRoA / Miraikan (Japan), Test 2026",
+      "quelle": "https://airoa.org/updates/20260310/212/",
+      "beleg": "Teilnehmer konnten einen fernbedienten Haushaltsroboter in wohnungsähnlicher Umgebung erleben; nicht autonomes Seriengerät.",
+      "zuordnung": "Vorhandene Haushaltsassistenten und Telepräsenzrobotik vertiefen",
+      "entscheidung": "Bestehender_Typ"
+    },
+    {
+      "id": "V71-015",
+      "kennzeichnung": "Idee",
+      "welt": "Pflege",
+      "fund": "Roboter zum selbstständigen Nagelschneiden und Feilen",
+      "urheber": "Privater Erfinder (China), Patent 2016/2017",
+      "quelle": "https://patents.google.com/patent/CN106579720A/en",
+      "beleg": "Patentiertes Gerät mit beweglichem Schlitten, kleinen Kameras, Schneid- und Schleifwerkzeug für Fingernägel. Mechanische Ausführung beschrieben, gebauter Roboter nicht bestätigt.",
+      "zuordnung": "Neuer Typkandidat „Nagelpflegeroboter“; nicht Haarpflege",
+      "entscheidung": "Neue_Typprüfung"
+    },
+    {
+      "id": "V71-016",
+      "kennzeichnung": "Projekt",
+      "welt": "Pflege",
+      "fund": "EleTac – weicher Greifer mit Elefantenrüssel-Tastsinn",
+      "urheber": "Japan Advanced Institute of Science and Technology (Japan), 2026",
+      "quelle": "https://www.jaist.ac.jp/english/whatsnew/press/2026/07/07-1.html",
+      "beleg": "Forschungs-Greifer mit Sicht-/Tastsensorik; Komponenteninnovation für sichere Haushalts-/Pflege-Roboter, kein selbstständiger Robotertyp.",
+      "zuordnung": "Technikglossar und Magazin unter Greifer/Sensorik, nicht neue CORE-Seite",
+      "entscheidung": "Bauteil"
+    },
+    {
+      "id": "V71-017",
+      "kennzeichnung": "Projekt",
+      "welt": "Humanoide",
+      "fund": "Humanoiden-Gesicht mit lebender Haut",
+      "urheber": "University of Tokyo (Japan), Forschung 2024",
+      "quelle": "https://www.u-tokyo.ac.jp/focus/en/press/z0508_00360.html",
+      "beleg": "Laborverfahren, lebende Haut an Roboter-Gesichtern zu befestigen; Forschungsbauteil, kein neuer Humanoiden-Typ.",
+      "zuordnung": "Magazin/Glossar zu Biohybridrobotik und künstlicher Haut",
+      "entscheidung": "Bauteil"
+    },
+    {
+      "id": "V71-018",
+      "kennzeichnung": "Idee",
+      "welt": "Humanoide",
+      "fund": "Faltbarer Haushaltsassistent mit Armen und Rädern",
+      "urheber": "Internationale Patentanmeldung; China-Publikation 2026",
+      "quelle": "https://patents.google.com/patent/CN122161694A/en",
+      "beleg": "Faltbares Haushaltsrobotersystem patentiert; selbe Patentfamilie wie US20260200098A1, nur ein Registereintrag.",
+      "zuordnung": "Bestehender humanoider Haushaltsassistent; kein neuer Robotertyp",
+      "entscheidung": "Bestehender_Typ"
+    },
+    {
+      "id": "V71-019",
+      "kennzeichnung": "Projekt",
+      "welt": "Pflege",
+      "fund": "Teleoperierter Alltagshelfer für Menschen mit Einschränkungen",
+      "urheber": "University of Tsukuba (Japan), Forschung 2025",
+      "quelle": "https://www.tsukuba.ac.jp/en/research-news/20250319140000.html",
+      "beleg": "Wissenschaftlicher Roboter zur unterstützten Ausführung täglicher Aufgaben mit Signalen zur Nutzerintention. Kein universeller Autonomie-Nachweis.",
+      "zuordnung": "Vorhandene Pflege-/Assistenzrobotik vertiefen",
+      "entscheidung": "Bestehender_Typ"
+    },
+    {
+      "id": "V71-020",
+      "kennzeichnung": "Projekt",
+      "welt": "Bildung",
+      "fund": "Lernroboter zur Förderung von Ausdauer bei Kindern",
+      "urheber": "Osaka University (Japan), Forschungsstudie 2026",
+      "quelle": "https://www.hus.osaka-u.ac.jp/ja/news/260716a/",
+      "beleg": "Forscher untersuchten Einfluss ermutigender Roboteräußerungen auf 4–5-jährige Kinder bei schwierigen Aufgaben; eigener Robotertyp nicht belegt.",
+      "zuordnung": "Vorhandene Lern-/Begleitroboter vertiefen; Magazin-Studienbeitrag",
+      "entscheidung": "Bestehender_Typ"
+    },
+    {
+      "id": "V71-021",
+      "kennzeichnung": "Idee",
+      "welt": "Haushalt",
+      "fund": "Zweiteiliger Badezimmerreinigungsroboter",
+      "urheber": "Wenzhou Vocational School (China), Abschlussdesign 2025",
+      "quelle": "https://art.wzut.edu.cn/art/art_321/art_44859.html",
+      "beleg": "Studentischer Hausbad-Entwurf mit getrenntem Boden- und WC-Reinigungsmodul; keine konkrete Heimmarktreife.",
+      "zuordnung": "V68 Bad-/WC-Reinigungskandidaten erweitern; nicht zweite Seite",
+      "entscheidung": "Bestehender_Kandidat"
+    }
+  ],
+  "zahlen": {
+    "belege": 21,
+    "Idee": 11,
+    "Projekt": 10,
+    "Produkt": 0,
+    "neue_typkandidaten": 4,
+    "bestehende_typen_und_randgebiete": 17
+  },
+  "neue_typkandidaten": [
+    {
+      "name": "Wäscheaufhängroboter",
+      "welt": "Haushalt",
+      "fund_id": "V71-006",
+      "vertiefungskategorien": [
+        {
+          "name": "Mechanik",
+          "artikelansätze": [
+            "Greifen weicher Textilien",
+            "Hemden auf Bügel hängen",
+            "Handtücher und Laken befestigen",
+            "Wind und Klammern als Herausforderung"
+          ]
+        },
+        {
+          "name": "Bedienung",
+          "artikelansätze": [
+            "Automatisches Sortieren vor dem Aufhängen",
+            "Trockengestelle erkennen",
+            "Wäscheleine und Bügel unterscheiden",
+            "Einsatz in kleinen Wohnungen"
+          ]
+        },
+        {
+          "name": "Entwicklung",
+          "artikelansätze": [
+            "Japans Robocon-Wettbewerb 2019",
+            "Abgrenzung zum Wäschefaltroboter",
+            "Was Forschungsprototypen leisten",
+            "Warum flexible Textilien schwierig sind"
+          ]
+        }
+      ],
+      "freigabe": "NICHT_IMPORTIEREN_RED_AUDIT"
+    },
+    {
+      "name": "Nagelpflegeroboter",
+      "welt": "Pflege",
+      "fund_id": "V71-015",
+      "vertiefungskategorien": [
+        {
+          "name": "Werkzeuge",
+          "artikelansätze": [
+            "Automatisch schneiden oder feilen",
+            "Nagelerkennung mit Kameras",
+            "Fingernägel und Fußnägel unterscheiden",
+            "Hygienische Werkzeugwechsel"
+          ]
+        },
+        {
+          "name": "Sicherheit",
+          "artikelansätze": [
+            "Finger sicher fixieren",
+            "Abstand zu Haut und Nagelbett",
+            "Notabschaltung bei Bewegung",
+            "Eignung bei Pflegebedürftigkeit"
+          ]
+        },
+        {
+          "name": "Forschung",
+          "artikelansätze": [
+            "Was das chinesische Patent beschreibt",
+            "Patent versus nachgewiesenes Produkt",
+            "Vergleich mit normaler Nagelfeile",
+            "Technische Grenzen präziser Schnittführung"
+          ]
+        }
+      ],
+      "freigabe": "NICHT_IMPORTIEREN_RED_AUDIT"
+    },
+    {
+      "name": "Essbare Roboter",
+      "welt": "Freizeit",
+      "fund_id": "V71-003",
+      "vertiefungskategorien": [
+        {
+          "name": "Materialien",
+          "artikelansätze": [
+            "Gelatine als Roboterkörper",
+            "Bewegung durch Druckluft",
+            "Verarbeitung essbarer Bestandteile",
+            "Grenze zwischen Lebensmittel und Robotik"
+          ]
+        },
+        {
+          "name": "Interaktion",
+          "artikelansätze": [
+            "Bewegung vor dem Essen",
+            "Stimmen und Reaktionen",
+            "Wahrnehmung von Lebendigkeit",
+            "Experimente mit dem Ess-Erlebnis"
+          ]
+        },
+        {
+          "name": "Forschung",
+          "artikelansätze": [
+            "Studien der japanischen Universitäten",
+            "Aufbau des Laborgeräts",
+            "Ethik und Wahrnehmung",
+            "Möglichkeiten essbarer Softrobotik"
+          ]
+        }
+      ],
+      "freigabe": "NICHT_IMPORTIEREN_RED_AUDIT"
+    },
+    {
+      "name": "Säuglings-Pflegetrainer",
+      "welt": "Bildung",
+      "fund_id": "V71-010",
+      "vertiefungskategorien": [
+        {
+          "name": "Training",
+          "artikelansätze": [
+            "Säugling richtig halten",
+            "Wickeln mit Sensorrückmeldung",
+            "Pflegegriffe sicher üben",
+            "Reaktion auf fehlerhafte Haltung"
+          ]
+        },
+        {
+          "name": "Sensorik",
+          "artikelansätze": [
+            "Lagesensoren und Auswertung",
+            "Rückmeldung über Kopfstütze",
+            "Simulierte Geräusche und Reaktionen",
+            "Schulung ohne echtes Kind"
+          ]
+        },
+        {
+          "name": "Entwicklung",
+          "artikelansätze": [
+            "Chinesische Patente im Vergleich",
+            "Unterschied zur gewöhnlichen Übungspuppe",
+            "Anwendungen in Pflegeausbildung",
+            "Grenzen heutiger Simulationen"
+          ]
+        }
+      ],
+      "freigabe": "NICHT_IMPORTIEREN_RED_AUDIT"
+    }
+  ],
+  "altbestand": "V52 188 Sollseiten, V67–V70 Recherche; Mückenfangroboter bereits im V52, andere Varianten nicht duplizieren; 16 SEO-HOLDs unverändert."
+}
