@@ -1,0 +1,39 @@
+name: HAB exact RC44 PHP owner vs live own-placeholder conflict - read only
+on:
+  push:
+    branches: [hab-affiliate-rc44-frontend-slot-and-source-target-20261114]
+    paths:
+      - .github/workflows/hab-rc44-real-own-placeholder-source-audit.yml
+permissions: {contents: read}
+jobs:
+  inspect-exact-binary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Find actual own placeholder and old slot/target selector in exact RC44 ZIP
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          from hashlib import sha256
+          import re
+          p=Path("protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip")
+          assert sha256(p.read_bytes()).hexdigest()=="2a9701c465fdf4ac1830a6b02b9329f5613337587c65379f09be94c20b00e681"
+          terms=["ppar-hb-insurance-own","Eigener Themenhinweis","Versicherungsschutz passend auswählen","hbdp-area-inline-ad-tile","ppar-hb-insurance-slot","output_format_slot","output_campaign_by_post_id","ppar_hb_rc44"]
+          with ZipFile(p) as z:
+            for name in z.namelist():
+              if not name.endswith((".php",".css",".js")):continue
+              s=z.read(name).decode("utf-8","replace")
+              for t in terms:
+                i=s.find(t)
+                if i<0:continue
+                print("SRC",name,"TERM",t,"AT",i)
+                start=max(0,i-(4500 if t in ("ppar-hb-insurance-own","Eigener Themenhinweis") else 1400))
+                end=min(len(s),i+(8500 if t in ("ppar-hb-insurance-own","Eigener Themenhinweis") else 3500))
+                frag=s[start:end]
+                # mask exact partner URLs and IDs
+                frag=re.sub(r"https?://[^\s'\"<>]+","[url]",frag)
+                print("CODE",frag[:12000])
+          PY
