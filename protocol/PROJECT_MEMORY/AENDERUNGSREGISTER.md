@@ -2040,3 +2040,11 @@ Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wa
 - **Plugin:** Hab-&-Bewahr-Quelle nur unverändert als NUR-REFERENZ-ZIP gespeichert. **Kein** Wassertechnik-Plugin freigegeben, **kein** Import, **keine** SEO-API-Anfrage.
 - **Nächster Schritt:** Produkt-Owner und Rubriken fachlich klären, dann Konzept in das geprüfte künftige WordPress-Kategorie-Plugin zur DataForSEO-Prüfung übergeben; erst nach Freigabe Import.
 - **Freigabe:** Strukturplausibilität lokal PASS; fachliche Vollprüfung, SEO, WordPress-Live und Pluginportierung offen.
+
+
+## 2026-11-14 – Wassertechnik W3: Robotik v43/v52 fachlich übertragen
+- **Korrektur:** W2 hatte Industrie als außerhalb der Produktbreite beschrieben und nur einen Produktseiten-Owner je Funktion zugelassen. Das widerspricht der nachgewiesenen jüngeren Robotik-V43-Regel.
+- **Ziel:** breites Wassertechnik-Informationsportal, Hauptkaufgruppe Privatpersonen, Kleinbetriebe, Vereine. Industrie-Landingpages bleiben erreichbar; inhaltlich echte separate Produkt-/Zielkontextseiten sind möglich, keine automatische Duplizierung.
+- **Beleg:** Robotik Recherche CURRENT V52 (inkl. research_round_v43/v44); V52 Fachbaum; Hersteller KSB / Grünbeck. Sonstige Vorschläge sind als ungeprüft gekennzeichnet.
+- **Umfang:** Zielvertrag, Fachabgrenzung und Kategorie-Plugin-Workflow korrigiert; W2-Originalzahlen unverändert, neun gezielte Grenzprüfungen und sechs Industrie-Landing-Themen als Rechercheplan.
+- **Keine Live-Änderung:** keine WP-Seiten, kein DataForSEO-Aufruf, keine Plugin-ZIP-Entwicklung, keine anderen Projektgebäude betroffen.

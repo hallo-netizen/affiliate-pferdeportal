@@ -1,24 +1,42 @@
-# Wassertechnik – Abgrenzung Privat / Kleinbetrieb / Verein
+# Wassertechnik – Zielgruppen-/Industrie-Abgrenzung W3 (ersetzt die enge W2-Regel)
 
-**Referenz:** Robotik-Recherchebüro CURRENT V52 (14.11.2026), Eigentümer/Suchintention/Produktseite, plus Wassertechnik-Master 001 Konflikt- und Filterregeln.
+**Stand:** 14.11.2026 · **Entscheidung:** Robotik-V43/V52-Prinzip fachlich angepasst, keine bloße 1:1-Kopie.
 
-## Verbindliche Marktgrenze
-**Im Fokus:** Haus, Wohnung, Garten, eigener Brunnen, Regenwasser, kleine Gewerbeflächen wie Gaststätte, Café, Friseursalon, Hofladen, kleiner Handwerksbetrieb, Sport- oder Kleingartenverein, Vereinsheim sowie kleinere landwirtschaftliche Anwender.
+## 1. Portalbreite vs. wirtschaftliche Priorität
+- Ein breites Informationsportal über die Wassertechnik einschließlich Industrie, größerer Technik, Entwicklung und anspruchsvoller Spezialanwendungen.
+- Hohe Kauf- und Nutzernähe bei Privatpersonen, kleinen Betrieben, Vereinen und kleinen Einrichtungen ist der Schwerpunkt der **Hauptnavigation, Produktberatung und Affiliate-Priorisierung**.
+- Industrielle Maschinen sind nicht ausgeschlossen; eigene Landingpages bieten Zugang zu Industrie-/Prozesswassertechnik. Keine zweite vollständige Parallelhierarchie.
 
-**Nicht als gleichrangige Themenwelten:** große Fabriken, kommunale Großkläranlagen, Industrieprozesswasser, Großbetriebswassersysteme, Großlogistik, kommunaler Rohrnetz-/Wasserwerksbau. Anlagen dürfen im Journal erwähnt werden, aber nicht den Produktbaum ausweiten.
+## 2. Die neue Regel für scheinbare Dopplungen
+Ein Technik-/Produktfakt wird nur **einmal** im Fachregister geführt. **Mehrere produktbezogene WordPress-Seiten sind zulässig**, falls die Suchabsicht und tatsächliche Auswahl-/Nutzungsfrage hinreichend unterschiedlich sind.
 
-## Wie privat / gewerblich trennen?
-1. **Nicht zwei identische Bäume.** Ein Produkt bekommt ein kanonisches Zuhause unabhängig davon, ob ein Eigentümer Privatperson, Gastronom oder Verein ist.
-2. **Unterschiedliche Anforderungen gehören zu Produktartikeln.** Beispielsweise Dosierung, Verbrauch, Kosten, Anschluss, Größe, Normen und Wartung im kleinen Betrieb.
-3. **Ein eigener Produktseitenzweig nur bei eigener Funktion.** Etwa eine technisch verschiedene gewerbliche Wasseraufbereitungsstation, falls Fachsubstanz und eigener Käuferbedarf nachgewiesen werden. Kein pauschaler B2B-Strang.
-4. **Besucherzugänge als Landingpage oder Navigation, nicht als zweite Produkt-Hierarchie:** 'Für Haus & Garten', 'Für Betriebe & Vereine' verlinken die gleichen fachlichen Produktseiten. Keine gespiegelten SEO-Inhalte.
-5. **HivePress:** Kundengruppe privat/Gewerbe/Verein ist Filter, ebenso Leistungen und Region. Dienstleisterverzeichnis kein Klon des Produktbaums.
+Zweiter Kontextseiten-Owner erst nach Prüfung von fünf Punkten:
+1. **Nutzeraufgabe**: z. B. Keller entwässern vs. Industrieprozess stabil fördern;
+2. **Geräte/Technik**: verwendete Pumpentypen, Leistung, Werkstoffe, Anschlüsse, Antrieb, Ausrüstung tatsächlich verschieden;
+3. **Kauffragen**: Auswahlkriterien, Service, Betrieb, Sicherheit, wirtschaftlicher Einsatz unterscheiden sich wesentlich;
+4. **Inhaltstiefe**: je gewünschter Inhaltskategorie mindestens drei fachlich unterschiedliche Beitragsthemen;
+5. **Belege und Abgrenzung**: Hersteller-/Fachbeleg und Abgleich mit bestehenden Seiten-Ownern. **Google-Suchabsicht noch separat in WordPress prüfen**, bevor ein zweiter Seitenkontext endgültig freigegeben wird.
 
-## Beispiele der produktbezogenen Zuständigkeit
-- Tiefbrunnenpumpe: Pumpen & Druck. Brunnen und Garten verlinken dorthin.
-- Zisternenpumpe: Regenwasser. Generische Tauchpumpen bleiben im Pumpenzweig.
-- Brunnenwasser-Testset: Wasseranalyse. Behandlung von Brunnenwasser erklärt der Journalbereich mit Produktverweisen zu Wasseraufbereitung.
-- Regenwasser-Erdtank: Regenwasser. Allgemeine Nutzwassertanks: Wassertanks.
-- Rigolensystem: Regenwasser. Abwasserrohre und Rückstauverschluss: Abwassertechnik.
+Nur anderer Titel, Hersteller, Stadt, ein neues Keyword oder das Etikett „gewerblich“ = **kein** Grund für zweite Seite.
 
-**Weitere Abgrenzung:** Auch wenn Produkte in Industrieausführungen existieren, dürfen alle Produkte nicht pauschal als nur privat klassifiziert werden. Reifegrad/Preis/Verfügbarkeit sind keine Gründe, die Zielgruppe zu verdoppeln.
+**Beispiel, noch keine neue Seite freigegeben:** Tauchpumpe für privaten Keller und industrielle Prozess-/Medienpumpe können getrennte Produkt-/Kontextseiten rechtfertigen, **wenn** der oben genannte Nachweis vorliegt. Dagegen ist dieselbe Gartenpumpe für Hausgarten und Schrebergartenverein kein zweiter Produkttyp.
+
+**Beispiel mit Produktbeleg:** Grünbeck GENO-OSMO-X ist eine gewerbliche/industrielle Umkehrosmoseanlage für technische Entsalzung; die Fragen zu Permeatleistung, Prozessanforderung, Anbindung und Betrieb unterscheiden sich potentiell von einer Untertisch-Osmoseanlage für die private Küche. Beleg: https://www.gruenbeck.de/produkte-loesungen/gruenbeck-fuer-gewerbe/membrantechnik/umkehrosmose/geno-osmo-x
+
+## 3. Industrie als Zugangsbereich
+**Kein zusätzlicher gleichberechtigter Hauptmenüpunkt zwingend.** Ein sichtbarer Einstieg „Industrie & Großanlagen“ führt zu wenigen thematisch klar getrennten Landingpages:
+- Industrielle Wasseraufbereitung (Prozess-, Reinst-/Vollentsalzungswasser);
+- Industrie-Pumpen und Fördertechnik (Prozess-, Hochdruck- und chemisch belastete Pumpen);
+- Kühl-/Kreislaufwassertechnik;
+- Industrielle Abwasserbehandlung und Neutralisation;
+- Messen, Steuern und Dosieren in Anlagen;
+- Kommunale und großtechnische Wassersysteme (getrennter Informationszugang).
+
+Dies sind **Recherche- und Landingpage-Vorschläge**. Keine einzige Landingpage bzw. Produktseite ist mit dieser Datei bereits SEO- oder WordPress-freigegeben. Industrietechnik wird verlinkt, nicht als zweites identisches Produktregister gepflegt.
+
+**Belege für sachliche Industrie-Unterschiede:** KSB listet Prozess-, Chemienorm-, Hochdruck- und Medienpumpen für industrielle Aufbereitung, Kühlkreisläufe und Reinigung: https://www.ksb.com/de-de/loesungen/industrie/industrielle-wasseraufbereitung
+
+## 4. Drei Säulen
+Produkt-/Anwendungswissen in CORE-Fachseiten; übergreifende Fragen im Journal/Glossar; Anbieter- und Dienstleistersuche bei HivePress. Reale Nutzer-/Suchabsicht entscheidet den redaktionellen Owner, keine doppelte Anbieter-Landingpage im Produktbaum.
+
+**Harte Grenze:** Industrie nicht ausschließen, keine künstliche Verdopplung, keine fest zugesagte Vollabdeckung/SEO-Reichweite ohne Bestands-/Lückenprüfung. Alte W2-Regel „keine zusätzlichen Kontextseiten“ gilt nicht mehr.

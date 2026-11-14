@@ -1,14 +1,14 @@
 {
   "version": "W2_2026-11-14",
   "project": "WASSERTECHNIK",
-  "state": "FACHENTWURF_KEINE_WORDPRESS_FREIGABE",
+  "state": "HISTORISCHER_W2_FACHENTWURF_W3_ABGRENZUNG_GILT",
   "basis": "WASSERTECHNIK_KATEGORIEKONZEPT_MASTER_001 + ROBOTIK_CURRENTS_2026_11_14",
   "audience": "Privatpersonen, kleine inhabergeführte Betriebe, Vereine; große Industrie/kommunale Großprojekte außerhalb des Fokus",
   "rules": {
     "last_page": "konkrete Produktart",
     "categories": "nur bei plausibel 3 bis 5 eigenständigen Beitragsthemen; Themenprobe keine SEO-Freigabe",
     "wordpress": "Hauptseite -> fachlich nötige Zwischenseite -> Produktseite -> WordPress-Beitragskategorie -> Beiträge",
-    "audience_separation": "ein Produkt-Owner, Zielgruppen als Facetten/Anwendungen; keine gespiegelten Privat- und Gewerbebäume",
+    "audience_separation": "W3: multiple independent WP context/product pages allowed for genuinely distinct audience intent and substantial technical/editorial difference; single underlying product evidence entry; no automatic duplicates.",
     "search": "erst Fachbaum, danach DataForSEO im WordPress-Kategorieplugin, Auswertung, manuelle Freigabe, Import"
   },
   "counts": {
@@ -3525,5 +3525,6 @@
     "DataForSEO-Backend-Funktion des Wassertechnik-Plugins und WP-Anbindung noch nicht freigegeben"
   ],
   "category_identity_rule": "Globale eindeutige vorgeschlagene Slugs, je Kategorie genau ein WP-Produktseiten-Owner. Keine WP-IDs oder Live-Slugs behauptet.",
-  "category_topic_quality": "Alte 4er-Themenproben sind nur plausibel, die endgültige Suchintentionszusammengehörigkeit ist im WordPress-DataForSEO-Arbeitsgang je Kategorie zu bestätigen."
+  "category_topic_quality": "Alte 4er-Themenproben sind nur plausibel, die endgültige Suchintentionszusammengehörigkeit ist im WordPress-DataForSEO-Arbeitsgang je Kategorie zu bestätigen.",
+  "superseded_rule_notice": "W2 remains original 71-page inventory; W3 context/industry decision in ZIELGRUPPEN_ABGRENZUNG_20261114.md overrides W2 audience_separation and industry exclusion; no WP import"
 }

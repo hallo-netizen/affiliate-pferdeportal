@@ -1,18 +1,16 @@
-# Wassertechnik – verbindlicher Kategorie- und Keyword-Workflow (14.11.2026)
+# Wassertechnik – Kategorie-Plugin/Rechercheablauf W3 (14.11.2026)
 
-**Geprüfte Referenzen:** Robotik Kategorie-Workflow 0.4.2 / Datenfreigaberegeln aus Robotik-Prüfbericht 12.11.2026, Robotik-Recherchebüro V52 sowie Hab-&-Bewahr-Standard Kategorie/Navigation (17.10.2026). **Wassertechnik hat derzeit noch kein freigegebenes installierbares eigenes Kategorie-Plugin.** Das Archiv HAB-002 ist ausschließlich eine nicht-installierbare Quellvorlage.
+**Status:** Fachlicher Ablauf aus aktueller Robotik V52 bestätigt; eine funktionsfähige Wassertechnik-Pluginversion ist **NICHT** nachgewiesen.
 
-1. **Hier im Kategorie-Konzeptbüro:** alte Master-138-Knoten inventarisieren, 69 ursprüngliche Blätter ownerweise beurteilen, Produkte von Aufgaben/Services trennen, Fachbaum und eine grobe Themenprobe von 3–5 Beiträgen je vorgeschlagener Kategorie erarbeiten. Privater / kleiner gewerblicher Einsatz nur differenzieren, falls wirklich anderer Produkt-Owner. Der aktuelle W2-Baum bleibt vorläufig.
-2. **Plugin fachlich passend machen, keine Eigenneuentwicklung:** Hab-002 1.14.8.37 als Quellvorlage, Robotik 0.4.2 nur als geprüfte Referenz zum DataForSEO-Ablauf. Ob Hab-002 DataForSEO im aktuellen Quellcode enthält, ist hier noch nicht nachgewiesen; daher KEINE Behauptung, es funktioniere schon im Wassertechnik-Plugin. Quelle vollständig prüfen, neue Wassertechnik-Site binden, keine fremden WP-IDs, keine Konkurrenzschreiber.
-3. **Erst danach SEO im WordPress-Backend des Kategorie-Plugins:** vollständig geprüften Konzeptentwurf als Vorschau in das WP-Plugin übernehmen, **keinen** Erstimport. Keywordliste kostenlos im Backend prüfen, ggf. DataForSEO-Verbindung kostenlos testen. Kostenpflichtige Keyword-/SERP-Abfragen nur nach ausdrücklicher Freigabe und Kostenkontrolle, kein automatischer Dauerlauf.
-4. **Ergebnisse zurück in den Baum:** Suchabsicht/Volumen/SEO-Konkurrenz nur dann als belegt ausweisen, wenn echte Ergebnisse vorliegen. Fachliche Korrekturen und Zusammenlegung schwacher Rubriken; weiterhin keine bloße Keyword-Massenerzeugung.
-5. **Freigabe und einmaliger Import:** Nach Gesamtbaum-/Duplikat-/Inhalts-/Pluginprüfung erst ausdrückliche Freigabe; 0-Schreib-Preflight, dann ADD-only, Readback aller Seiten/Artikelkategorien/IDs, Frontend-Desktop/Mobil-Prüfung, kein zweiter Importlauf.
+**Richtig ist:**
+1. W2-Rohbaum im Wassertechnik-Kategoriebüro als Ausgangsdaten; W3 prüft zusätzlich getrennte Käufer-/Industriekontexte. Neue produktbezogene Seiten nur mit eigenem, plausiblen Fragen-/Technikbedarf.
+2. Sechs *vorgesehene* Industrie-Landingpages werden auf reale Funktion und Überschneidung geprüft; sie sind kein fertiger zweiter Baum und keine sofortige WordPress-Freigabe.
+3. Je letzte Produktseite passende WP-Beitragskategorien nur mit mindestens 3–5 unterschiedlichen Beitragsansätzen. Alte Artikelideen bleiben Konzeptsammlung und werden nicht als SEO-Daten ausgegeben.
+4. **Nach Freigabe des vollständigen Fachbaums**: Das bereits im Quellenbüro liegende HAB-002-Kategorie-Plugin wird nur als Quellreferenz vollständig geprüft. Eine neue, standortisolierte Wassertechnik-Pluginkopie nutzt bestehende Kategorie-/DataForSEO-Logik, soweit im echten Quellcode nachweislich vorhanden. Keine zweite Plugin-/Importlinie oder neue Core-Architektur.
+5. **SEO ausschließlich im WordPress-Backend, bevor neue WP-Seiten zwingend existieren müssen:** Wie bei Robotik kann der reine Preflight aus einem im Plugin befindlichen, vollständig aktualisierten und verbindlich abgenommenen Baumprofil abgeleitet werden. Es ist ausdrücklich zu prüfen, dass nicht nur die alten W2-Keywords statt der W3-Kontextseiten gemessen werden.
+6. Kostenloser Profil-/Keyword-Preflight und evtl. DataForSEO-Zugangstest; kostenpflichtige Recherche nur manuell, einzelne autorisierte Anfrage; Ergebnisse dokumentieren, fachlich einarbeiten.
+7. Erst nach finaler fachlicher und SEO-Prüfung: Importvorschau mit 0 Schreibungen, ausdrückliche Freigabe, genau ein ADD-only-Lauf und echter WP-Readback. Keine Alt-Importe erneut starten.
 
-## Harte Sperren
-- Keine SEO-Recherche als fertiger WordPress-Ersatz außerhalb des WordPress-Plugins.
-- Kein WordPress-Write vor fachlicher Freigabe.
-- Keine Übernahme der Hab-&-Bewahr- oder Robotik-Knoten und IDs nach Wassertechnik.
-- Keine zweite DataForSEO/Plugin-Identität und kein zweiter Kategorie-Writer.
-- Die 276 Alt-Longtails sind Ideen, **keine** bestätigten Keywords.
+**Trennregel:** W3-Fachkonzept entscheidet den Seiten-/Artikel-Owner. WP-Plugin recherchiert SEO und vollzieht nur genehmigte Importe. Das Designplugin steuert ausschließlich die sichtbare Ausgabe. Keine doppelten Entscheidungsstellen.
 
-**NEXT ACTION:** W2-Fachbaum vollständig gegen Original-Owner und Nutzen überprüfen, nicht installieren und keine DataForSEO-Kosten auslösen.
+**Noch OFFEN:** Quellprüfung, Website-Bindung und WP/DataForSEO-Funktionsnachweis des Wassertechnik-Plugins. Nicht behaupten, SEO sei bereits ausgeführt.
