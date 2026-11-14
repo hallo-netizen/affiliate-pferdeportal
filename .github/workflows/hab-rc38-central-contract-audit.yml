@@ -166,6 +166,15 @@ jobs:
                   if depth==0:end=j+1;break
               print('METHOD',n,'SIZE',end-i)
               print(s[i:min(end,i+18000)])
+          main=z.read('affiliate-portal-router/affiliate-portal-router.php').decode()
+          for n in ('hb_insurance_original_inline_allowed(', 'hb_insurance_original_wide_allowed(', 'campaign_matches_contract_slot_rule(', 'output_banner_compatible_slots('):
+            print('CALLSITE',n)
+            for fn,content in [('main',main),('output',z.read('affiliate-portal-router/includes/trait-ppar-output-objects.php').decode())]:
+              all_matches=list(re.finditer(re.escape(n),content))
+              print(fn,'count',len(all_matches))
+              for p in all_matches[:12]:
+                at=p.start()
+                print('CALL_CONTEXT',content[max(0,at-950):min(len(content),at+850)])
           css=z.read('affiliate-portal-router/assets/frontend.css').decode()
           for n in ('ppar-hb-insurance-slot','ppar-overview-wide-banner-slot','ppar-banner-image-wrap','ppar-banner-image'):
             p=css.rfind(n);print('CSS',n,css[max(0,p-550):p+1200])
