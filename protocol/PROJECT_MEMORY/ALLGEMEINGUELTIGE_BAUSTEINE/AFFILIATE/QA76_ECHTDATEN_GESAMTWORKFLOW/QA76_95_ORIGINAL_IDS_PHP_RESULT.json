@@ -1,0 +1,20 @@
+{
+  "test": "ORIGINAL_95_IDS_WITH_EXPLICITLY_SIMULATED_WP_ROWS_AND_GETITEM_RESPONSE",
+  "real_historical_errors": [
+    "business_selected_stale_during_apply"
+  ],
+  "source_rows": "MOCK (historical WordPress rows unavailable)",
+  "source_replies": "MOCK (historical eBay GetItem replies unavailable)",
+  "original_plugin_php_method": "PPAR_Ebay_Trait::ebay_selection_apply_business_batch",
+  "original_refresh_php_method": "PPAR_Ebay_Trait::ebay_public_availability_refresh_one",
+  "result": "MOCK_PASS_ONLY_NOT_LIVE",
+  "ticks": 95,
+  "remote_getItem_mock_calls": 95,
+  "publication_mock_calls": 95,
+  "soft_failures": 0,
+  "all_95_real_ids_followed": true,
+  "at_most_one_stale_remote_per_tick": true,
+  "end_phase": "business_prune",
+  "run_status": "running",
+  "no_historic_provider_1to1_proof": true
+}
