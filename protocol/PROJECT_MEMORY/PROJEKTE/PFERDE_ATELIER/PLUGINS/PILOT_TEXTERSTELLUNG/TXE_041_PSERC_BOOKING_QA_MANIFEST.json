@@ -1,0 +1,28 @@
+{
+  "status": "QA_ONLY_NOT_RELEASED",
+  "purpose": "Restore unchanged original PSERC allocator, signed production reader and extension registry in existing 0.4.1 candidate",
+  "source_zip": "Texterstellung_0.4.1_Originaltitel_SichererStart_QA_NICHT_INSTALLIEREN.zip",
+  "source_zip_sha256": "8c7460d6cd7ec873a81771269fbf6ed8f0ffda137a4d7d359ee7b7fda4621018",
+  "result_zip": "Texterstellung_0.4.1_PSERC_Originalplatz_QA_NICHT_INSTALLIEREN.zip",
+  "result_zip_sha256": "f7812d7e56f043717712d017eefcec51e229d83f95e13537ac26a3cd4d41f959",
+  "previous_files_unchanged": 133,
+  "changed_existing_files": [
+    "texterstellung/texterstellung.php"
+  ],
+  "new_original_files_byte_identical": {
+    "texterstellung/original/pserc/class-pserc-article-type-extension-registry.php": "3f754e3ce4338b8ec5b7fb61189ec5128e9910f6f7ac44bfd4b9cc7a3f85fe32",
+    "texterstellung/original/pserc/class-pserc-production-reader.php": "d7bfcbf52bad1a3c9f9f1788f630b3fd7fc35fe4395503a8357d70505acf00d3",
+    "texterstellung/original/pserc/class-pserc-slot-allocator.php": "9e2abc4b453e77697d5b0eafff01e3086e1370b6daa04652a7fef1cfb804313c",
+    "texterstellung/original/pserc/contracts/article-type-extension-manifest-v1.json": "cb519fc9c92bf0853f987287d749cd37361328a41cc2389a82340a05243edf1a",
+    "texterstellung/original/pserc/contracts/article-type-extension-manifest-v1.sig": "bf854adb3fa6121aac7ecd406f98910666f04d104190ce9218ba119744603e05",
+    "texterstellung/original/pserc/contracts/journal-article-type-v1.json": "ce85abdc9de994273b3d47b9b6abbb5ba63970d57e32a7b79d476a8e07c00927"
+  },
+  "files_total": 140,
+  "php_files": 97,
+  "php_syntax_failures": [],
+  "ppi_implementation_modified": false,
+  "new_fachentscheidungen": 0,
+  "real_wordpress_ppm_test": "NOT_DONE",
+  "release_allowed": false,
+  "note": "PPM679 actual standalone original source is still not available locally, and unchanged original reader deliberately requires authentic PPM 6.7.9 contracts."
+}
