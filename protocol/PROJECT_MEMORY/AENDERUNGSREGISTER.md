@@ -2153,3 +2153,10 @@ Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wa
 - Wichtige SEO-Grenze: sieben sichtbare Menüeinträge ändern nicht automatisch die neun technisch vorhandenen WP-Hauptseiten. Für echte sieben WP-Hauptseiten wäre ein einmaliger gemeinsamer Seitenbaum-/URL-Umbau mit vollständigen Weiterleitungen erforderlich; nicht stillschweigend umsetzen.
 - Konzeptbeleg: `PROJEKTE/WASSERTECHNIK/KATEGORIEKONZEPT/W10_HAUPTKATEGORIEN_KONSOLIDIERUNG_KONZEPT_20261114.md`.
 - PROTOKOLL: KONZEPT SICHERUNG PASS · FREIGABE: OFFEN · WP-/PLUGIN-/FRONTEND-ÄNDERUNGEN: KEINE · FREMDE PORTALE: UNVERÄNDERT.
+
+## 2026-11-14 – Wassertechnik W11: echte 7-Hauptbereiche-Vorbereitung in WT001 0.1.7
+- W10-Konsolidierung fachlich/technisch: sieben sichtbare Hauptbereiche, alle 79 Produktlinks einmal, höchstens drei Menüspalten, keine leeren Industrie-Gruppen. Keine künstlichen SEO-Objekte.
+- Bisheriges WT001 0.1.6 in **derselben Pluginidentität** auf lokale Test-ZIP 0.1.7 vorbereitet (nur Chat-Anhang, **nicht GitHub-Binärarchiv**): SHA256 `0d27ea4caa9296ae750874957ddc7b51a3243c3af04a6e0e419e13297a91d246`.
+- Nach separater Freigabe genau **2 Seiten-Umhängungen** (Bewässerung unter Brunnen, Wassertanks unter Regenwasser), 2 Titeländerungen, 17 geänderte WP-Seitenpfade mit 301. 113 Seiten-IDs, 105 WP-Kategorien, 79 Produkte bestehen fort. Vor Freigabe nur neues Menü; Links bleiben auf alten Pfaden erreichbar.
+- PHP-Lint/ZIP-CRC, 113-/105-WordPress-Komplett-Mock, Fehler-Rollback, Fremdsite/Kollision/Fingerprint und 301, Desktop/Mobil-Interaktion lokal geprüft. **Kein WordPress-Livetest, kein Live-Import, keine neuen Kosten**. Bericht `PROJEKTE/WASSERTECHNIK/PLUGINS/W11_WT001_017_SIEBEN_HAUPTBEREICHE_QA_20261114.md`.
+- Stand im Büro dokumentiert, die ZIP selbst liegt nur im Chat. PROTOKOLL: PASS · KISS: PASS · WP-SCHREIBFREIGABE: OFFEN · FREMDPORTALE UNVERÄNDERT.
