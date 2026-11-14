@@ -1,6 +1,6 @@
 # WASSERTECHNIK / PRUEFUNG – einzige aktuelle Büroautorität
 
-**Stand:** 14.11.2026 · **Status:** WT001 0.1.2 redaktionelles Vollbaum-SEO-Profil lokal PASS; echter WordPress-Update-/Exporttest sowie SEO-Bezahlrecherche und Import offen.
+**Stand:** 14.11.2026 · **Status:** WT001 0.1.2 echter WordPress-Preflight PASS; kostenpflichtige DataForSEO-Recherche, Suchabsichts- und Importfreigabe offen.
 
 **Gesichert:** Master-Archiv-internes SHA256SUMS.txt lokal geprüft; originale Git-Blob-Identität stimmt bytegenau mit Nutzervorlage; automatische 18/18 Regelprüfung ist Altbeleg.
 
@@ -10,6 +10,8 @@
 
 **Konzeptabgleich:** Die 128 zuvor markierten Formulierungen sind vollständig im zentralen Entwurfsprofil `../KATEGORIEKONZEPT/W4_KEYWORDPROFIL_218_20261114.csv` überarbeitet, ohne Strukturänderung. Alle 218 zugeordnet, 0 doppelte Begriffe/Owner, 0 bezahlte Daten.
 
-**NEXT ACTION:** Echten WP-Update-/Exporttest von WT001 0.1.2 auf `wasser.oliver-beil.de` mit kostenlosem 218er Preflight durchführen. Danach Suchintent/Volumen nur nach ausdrücklicher Kostenfreigabe und separater tatsächlicher Prüfung.
+**Beleg:** `WT001_012_LIVE_EXPORT_ABNAHME_20261114.md` mit originaler Nutzerdatei: 218/218 Owner, 128/128 Neufassungen, 90/90 übrige Begriffe bis auf Schreibweise gleich, null verworfene und null freigegebene Bezahlaufrufe.
+
+**NEXT ACTION:** Einmaliger kostenkontrollierter SEO-Rechercheauftrag für 218 W4-Keywords aus dem bestehenden WP-Kategorieplugin, nach vorheriger ausdrücklicher Kostenfreigabe. Kein weiterer Preflight, keine Importfreigabe.
 
 **Grenze:** Keine WordPress-/HivePress-Produktion, keine fremden Projektdateien verändern.

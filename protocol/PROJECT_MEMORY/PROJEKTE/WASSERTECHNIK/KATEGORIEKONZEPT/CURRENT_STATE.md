@@ -12,6 +12,8 @@
 
 **Keyword-Entwurfsprofil vollständig korrigiert:** 218 Struktur-Owner bleiben erhalten. 128 bisher automatisch zusammengesetzte/zu breite Begriffe wurden in einen konzeptionell konkreteren Suchvorschlag geändert; 90 bestehende Startbegriffe bleiben. Zentraler Mapping-Bestand `W4_KEYWORDPROFIL_218_20261114.csv` (nicht SEO-gemessen). 356 alte W4-Beitragsideen und alle 79 Produktseiten/105 Kategorien unverändert.
 
-**NEXT ACTION:** Kostenfreien WordPress-Preflight mit der WT001-Version **0.1.2** ausführen und den Export gegen die aktuelle W4_KEYWORDPROFIL_218_20261114.csv abgleichen. Danach Suchvolumen/Konkurrenz ausschließlich nach gesonderter Freigabe innerhalb des WordPress-Kategorieplugins prüfen. Kein Import.
+**SEO-Preflight abgeschlossen:** WT001 0.1.2 exportiert 218/218 W4-Begriffe und alle 128 Korrekturen korrekt; vollständiger Wort-/Owner-Abgleich mit `W4_KEYWORDPROFIL_218_20261114.csv` PASS. Keine neuen Begriffsrunden erforderlich.
+
+**NEXT ACTION:** Die 218 Begriffe gemeinsam in einem kostenkontrollierten DataForSEO-Auftrag **innerhalb des Wassertechnik-Kategorieplugins** recherchieren, aber erst nach ausdrücklicher Kostenfreigabe. Ergebnisse einmal zentral auf W4-Fachbaum zurückführen, dann fachliche/SEO-Gesamtentscheidung. Kein WordPress-Import.
 
 **Grenze:** Keine WordPress-/HivePress-Produktion, keine fremden Projektdateien verändern.
