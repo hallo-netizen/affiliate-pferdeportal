@@ -1,0 +1,629 @@
+{
+  "schema": "robotik-v61-seo-evidence-audit-v1",
+  "date": "2026-11-14",
+  "source_file": "robotik-v57-seo-gesamtbericht.json",
+  "source_run_status": "COMPLETE_WITH_GAPS",
+  "paid_steps_success": 35,
+  "paid_steps_total": 38,
+  "skipped_steps_count": 3,
+  "paid_cost_recorded_usd": 0.40752,
+  "possible_unreported_cost_reserve_usd": 0.17500000000000002,
+  "source_owner_total": 437,
+  "seo_keywords_with_data": 46,
+  "seo_keywords_without_data": 391,
+  "seo_keywords_without_data_mean_zero_searches": false,
+  "seo_keywords_with_data_by_kind": {
+    "product": 45,
+    "category": 1
+  },
+  "keyword_ideas_unique": 1613,
+  "keyword_ideas_no_volume": 60,
+  "ideas_worlds_processed": [
+    "Haushalt",
+    "Garten",
+    "Sport",
+    "Bildung",
+    "Pflege",
+    "Humanoide",
+    "Gewerbe"
+  ],
+  "ideas_worlds_absent": [
+    "Freizeit"
+  ],
+  "ideas_worlds_at_provider_limit": [
+    "Haushalt",
+    "Garten",
+    "Sport",
+    "Bildung",
+    "Pflege",
+    "Humanoide",
+    "Gewerbe"
+  ],
+  "serp_queries_with_response": 27,
+  "serp_saved_result_urls": 29,
+  "serp_opaque_google_goto_urls": 27,
+  "serp_non_goto_urls": 2,
+  "serp_compare_valid_pairs": 0,
+  "serp_compare_inconclusive_pairs": 16,
+  "hold_decision": "ALL_16_KEPT_OPEN_NOT_SEO_APPROVED",
+  "wordpress_write_allowed": false,
+  "provider_repeat_required_now": false,
+  "source_diagnosis": "Plugin normalizes google.com/goto?unique... to google.com/goto, so unrelated search results compare as equal URLs, and real organic domains cannot be distinguished. In original request resolve_goto_urls=false.",
+  "partial_kw_overview": "According to provider documentation, keywords omitted in results are absent from its keyword database (not proof of zero search demand).",
+  "human_review_candidates_count": 26,
+  "priority_candidate_keywords": [
+    {
+      "keyword": "saugroboter test",
+      "monthly_searches_dataforseo": 22200,
+      "intent_dataforseo": "informational",
+      "found_in_seed_worlds": [
+        "Haushalt",
+        "Garten"
+      ],
+      "editorial_destination": "Saugroboter – Tests, Beratung",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "worx mähroboter",
+      "monthly_searches_dataforseo": 18100,
+      "intent_dataforseo": "transactional",
+      "found_in_seed_worlds": [
+        "Garten"
+      ],
+      "editorial_destination": "Mähroboter – Tests, Marken",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "saug wisch roboter",
+      "monthly_searches_dataforseo": 18100,
+      "intent_dataforseo": "transactional",
+      "found_in_seed_worlds": [
+        "Bildung"
+      ],
+      "editorial_destination": "Saug-Wisch-Kombinationen – mögliche eigene Suchabsicht",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "fensterputzroboter test",
+      "monthly_searches_dataforseo": 14800,
+      "intent_dataforseo": "informational",
+      "found_in_seed_worlds": [
+        "Haushalt",
+        "Garten"
+      ],
+      "editorial_destination": "Fensterputzroboter – Tests, Beratung",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "kress mähroboter",
+      "monthly_searches_dataforseo": 14800,
+      "intent_dataforseo": "transactional",
+      "found_in_seed_worlds": [
+        "Garten"
+      ],
+      "editorial_destination": "Mähroboter – Tests, Marken",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "humanoide roboter",
+      "monthly_searches_dataforseo": 12100,
+      "intent_dataforseo": "transactional",
+      "found_in_seed_worlds": [
+        "Gewerbe"
+      ],
+      "editorial_destination": "Humanoide – Überblick",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "mähroboter test",
+      "monthly_searches_dataforseo": 9900,
+      "intent_dataforseo": "informational",
+      "found_in_seed_worlds": [
+        "Haushalt",
+        "Garten"
+      ],
+      "editorial_destination": "Mähroboter – Tests, Marken",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "saugroboter mit wischfunktion test",
+      "monthly_searches_dataforseo": 8100,
+      "intent_dataforseo": "commercial",
+      "found_in_seed_worlds": [
+        "Haushalt",
+        "Garten"
+      ],
+      "editorial_destination": "Saugroboter – Tests, Beratung",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "saug-wisch-roboter testsieger",
+      "monthly_searches_dataforseo": 6600,
+      "intent_dataforseo": "informational",
+      "found_in_seed_worlds": [
+        "Haushalt",
+        "Garten",
+        "Bildung"
+      ],
+      "editorial_destination": "Saug-Wisch-Kombinationen – mögliche eigene Suchabsicht",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "roboter bausatz",
+      "monthly_searches_dataforseo": 5400,
+      "intent_dataforseo": "transactional",
+      "found_in_seed_worlds": [
+        "Gewerbe"
+      ],
+      "editorial_destination": "Bildung – Bausätze",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "fensterputzroboter testsieger",
+      "monthly_searches_dataforseo": 4400,
+      "intent_dataforseo": "informational",
+      "found_in_seed_worlds": [
+        "Haushalt",
+        "Garten"
+      ],
+      "editorial_destination": "Fensterputzroboter – Tests, Beratung",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "wischroboter test",
+      "monthly_searches_dataforseo": 4400,
+      "intent_dataforseo": "informational",
+      "found_in_seed_worlds": [
+        "Haushalt",
+        "Garten"
+      ],
+      "editorial_destination": "Saug-Wisch-Kombinationen – mögliche eigene Suchabsicht",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "saugroboter vergleich",
+      "monthly_searches_dataforseo": 2400,
+      "intent_dataforseo": "commercial",
+      "found_in_seed_worlds": [
+        "Haushalt"
+      ],
+      "editorial_destination": "Saugroboter – Tests, Beratung",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "poolroboter von steinbach",
+      "monthly_searches_dataforseo": 2400,
+      "intent_dataforseo": "transactional",
+      "found_in_seed_worlds": [
+        "Garten"
+      ],
+      "editorial_destination": "Poolroboter – Beratung",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "saugroboter dreame",
+      "monthly_searches_dataforseo": 1900,
+      "intent_dataforseo": "informational",
+      "found_in_seed_worlds": [
+        "Haushalt"
+      ],
+      "editorial_destination": "Saugroboter – Tests, Beratung",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "saugroboter roborock",
+      "monthly_searches_dataforseo": 1900,
+      "intent_dataforseo": "transactional",
+      "found_in_seed_worlds": [
+        "Haushalt"
+      ],
+      "editorial_destination": "Saugroboter – Tests, Beratung",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "roboter spielzeug",
+      "monthly_searches_dataforseo": 1900,
+      "intent_dataforseo": "transactional",
+      "found_in_seed_worlds": [
+        "Bildung"
+      ],
+      "editorial_destination": "Bildung – Bausätze",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "roboter mensch",
+      "monthly_searches_dataforseo": 1600,
+      "intent_dataforseo": "transactional",
+      "found_in_seed_worlds": [
+        "Sport",
+        "Bildung",
+        "Humanoide"
+      ],
+      "editorial_destination": "Humanoide – Überblick",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "saugroboter für tierhaare",
+      "monthly_searches_dataforseo": 1300,
+      "intent_dataforseo": "transactional",
+      "found_in_seed_worlds": [
+        "Haushalt"
+      ],
+      "editorial_destination": "Saugroboter – Tests, Beratung",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "test mähroboter ohne begrenzungskabel",
+      "monthly_searches_dataforseo": 1300,
+      "intent_dataforseo": "commercial",
+      "found_in_seed_worlds": [
+        "Garten"
+      ],
+      "editorial_destination": "Mähroboter – Tests, Marken",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "fanuc roboter",
+      "monthly_searches_dataforseo": 1300,
+      "intent_dataforseo": "transactional",
+      "found_in_seed_worlds": [
+        "Gewerbe"
+      ],
+      "editorial_destination": "Gewerbe – Industrieroboter",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "fensterputzroboter erfahrungen",
+      "monthly_searches_dataforseo": 1000,
+      "intent_dataforseo": "informational",
+      "found_in_seed_worlds": [
+        "Haushalt"
+      ],
+      "editorial_destination": "Fensterputzroboter – Tests, Beratung",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "mähroboter vergleich",
+      "monthly_searches_dataforseo": 880,
+      "intent_dataforseo": "commercial",
+      "found_in_seed_worlds": [
+        "Garten"
+      ],
+      "editorial_destination": "Mähroboter – Tests, Marken",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "poolroboter testsieger",
+      "monthly_searches_dataforseo": 880,
+      "intent_dataforseo": "informational",
+      "found_in_seed_worlds": [
+        "Haushalt",
+        "Garten"
+      ],
+      "editorial_destination": "Poolroboter – Beratung",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "humanoide roboter für zuhause",
+      "monthly_searches_dataforseo": 880,
+      "intent_dataforseo": "transactional",
+      "found_in_seed_worlds": [
+        "Bildung"
+      ],
+      "editorial_destination": "Humanoide – Überblick",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    },
+    {
+      "keyword": "roboter zum selbst bauen",
+      "monthly_searches_dataforseo": 720,
+      "intent_dataforseo": "transactional",
+      "found_in_seed_worlds": [
+        "Sport",
+        "Bildung",
+        "Humanoide"
+      ],
+      "editorial_destination": "Bildung – Bausätze",
+      "editorial_state": "KANDIDAT_FUER_BESTEHENDEN_FACHZWEIG_KEINE_AUTOMATISCHE_SEITE"
+    }
+  ],
+  "nonrobot_semantic_risks": [
+    {
+      "keyword": "knieprothesen",
+      "search_volume": 9900,
+      "issue": "Suchbegriff kann auch nicht-robotische Waren/Dienstleistungen erfassen; nur inhaltlich passenden Teil nutzen"
+    },
+    {
+      "keyword": "poolskimmer",
+      "search_volume": 12100,
+      "issue": "Suchbegriff kann auch nicht-robotische Waren/Dienstleistungen erfassen; nur inhaltlich passenden Teil nutzen"
+    },
+    {
+      "keyword": "bootsreiniger",
+      "search_volume": 170,
+      "issue": "Suchbegriff kann auch nicht-robotische Waren/Dienstleistungen erfassen; nur inhaltlich passenden Teil nutzen"
+    },
+    {
+      "keyword": "armorthesen",
+      "search_volume": 50,
+      "issue": "Suchbegriff kann auch nicht-robotische Waren/Dienstleistungen erfassen; nur inhaltlich passenden Teil nutzen"
+    },
+    {
+      "keyword": "handprothesen",
+      "search_volume": 90,
+      "issue": "Suchbegriff kann auch nicht-robotische Waren/Dienstleistungen erfassen; nur inhaltlich passenden Teil nutzen"
+    },
+    {
+      "keyword": "treppenrollstühle",
+      "search_volume": 10,
+      "issue": "Suchbegriff kann auch nicht-robotische Waren/Dienstleistungen erfassen; nur inhaltlich passenden Teil nutzen"
+    },
+    {
+      "keyword": "reaktionstrainer",
+      "search_volume": 170,
+      "issue": "Suchbegriff kann auch nicht-robotische Waren/Dienstleistungen erfassen; nur inhaltlich passenden Teil nutzen"
+    },
+    {
+      "keyword": "futterboote",
+      "search_volume": 170,
+      "issue": "Suchbegriff kann auch nicht-robotische Waren/Dienstleistungen erfassen; nur inhaltlich passenden Teil nutzen"
+    },
+    {
+      "keyword": "robotertiere",
+      "search_volume": 50,
+      "issue": "Suchbegriff kann auch nicht-robotische Waren/Dienstleistungen erfassen; nur inhaltlich passenden Teil nutzen"
+    }
+  ],
+  "review_16": [
+    {
+      "hold_id": "v46_h03",
+      "world": "Haushalt",
+      "target": "telepräsenzroboter zuhause familie videobesuche",
+      "competitor": "telepräsenzroboter im pflegeheim angehörigenkontakt",
+      "competitor_owner": "v46_p01",
+      "competitor_label": "Pflege-Telepraesenz",
+      "overlap_count": 0,
+      "status": "NICHT_PRUEFBAR",
+      "target_results": null,
+      "competitor_results": 1,
+      "seo_verdict": "UNBELEGT_WEGEN_UNAUFGELOESTEN_GOOGLE_GOTO_URLS",
+      "action": "FACHKANDIDAT_UNVERAENDERT_BEHALTEN_KEIN_WP_IMPORT"
+    },
+    {
+      "hold_id": "v46_h06",
+      "world": "Haushalt",
+      "target": "aufräumroboter wohnung spielzeug sortieren",
+      "competitor": "humanoide haushaltsroboter für zuhause",
+      "competitor_owner": "hu_hu01",
+      "competitor_label": "Haushaltshumanoid",
+      "overlap_count": 1,
+      "status": "UEBERSCHNEIDUNG_GERING",
+      "target_results": 1,
+      "competitor_results": 1,
+      "seo_verdict": "UNBELEGT_WEGEN_UNAUFGELOESTEN_GOOGLE_GOTO_URLS",
+      "action": "FACHKANDIDAT_UNVERAENDERT_BEHALTEN_KEIN_WP_IMPORT"
+    },
+    {
+      "hold_id": "v46_h07",
+      "world": "Haushalt",
+      "target": "reiner nasswischroboter ohne staubsaugen",
+      "competitor": "saugroboter",
+      "competitor_owner": "rbt_product_0500",
+      "competitor_label": "Saugroboter",
+      "overlap_count": 1,
+      "status": "UEBERSCHNEIDUNG_GERING",
+      "target_results": 1,
+      "competitor_results": 1,
+      "seo_verdict": "UNBELEGT_WEGEN_UNAUFGELOESTEN_GOOGLE_GOTO_URLS",
+      "action": "FACHKANDIDAT_UNVERAENDERT_BEHALTEN_KEIN_WP_IMPORT"
+    },
+    {
+      "hold_id": "v46_h10",
+      "world": "Haushalt",
+      "target": "servierroboter für zuhause gäste getränke",
+      "competitor": "servierroboter",
+      "competitor_owner": "rbt_product_0488",
+      "competitor_label": "Gewerbe-Servierroboter",
+      "overlap_count": 1,
+      "status": "UEBERSCHNEIDUNG_GERING",
+      "target_results": 1,
+      "competitor_results": 1,
+      "seo_verdict": "UNBELEGT_WEGEN_UNAUFGELOESTEN_GOOGLE_GOTO_URLS",
+      "action": "FACHKANDIDAT_UNVERAENDERT_BEHALTEN_KEIN_WP_IMPORT"
+    },
+    {
+      "hold_id": "v46_h12",
+      "world": "Haushalt",
+      "target": "sozialer begleitroboter für alleinlebende zuhause",
+      "competitor": "menschenähnlicher gesprächsroboter als begleiter",
+      "competitor_owner": "hu_hu14",
+      "competitor_label": "Humanoider Begleiter",
+      "overlap_count": 1,
+      "status": "UEBERSCHNEIDUNG_GERING",
+      "target_results": 1,
+      "competitor_results": 1,
+      "seo_verdict": "UNBELEGT_WEGEN_UNAUFGELOESTEN_GOOGLE_GOTO_URLS",
+      "action": "FACHKANDIDAT_UNVERAENDERT_BEHALTEN_KEIN_WP_IMPORT"
+    },
+    {
+      "hold_id": "v46_ga04",
+      "world": "Garten",
+      "target": "grillrost reinigungsroboter grillbot",
+      "competitor": "elektrische grillbürste",
+      "competitor_owner": null,
+      "competitor_label": "Elektrische Grillbuerste",
+      "overlap_count": 1,
+      "status": "UEBERSCHNEIDUNG_GERING",
+      "target_results": 1,
+      "competitor_results": 1,
+      "seo_verdict": "UNBELEGT_WEGEN_UNAUFGELOESTEN_GOOGLE_GOTO_URLS",
+      "action": "FACHKANDIDAT_UNVERAENDERT_BEHALTEN_KEIN_WP_IMPORT"
+    },
+    {
+      "hold_id": "v46_f01",
+      "world": "Freizeit",
+      "target": "unterwasser erkundungsroboter hobby rov",
+      "competitor": "bootsreiniger",
+      "competitor_owner": "rbt_product_0048",
+      "competitor_label": "Bootsreiniger",
+      "overlap_count": 1,
+      "status": "UEBERSCHNEIDUNG_GERING",
+      "target_results": 1,
+      "competitor_results": 1,
+      "seo_verdict": "UNBELEGT_WEGEN_UNAUFGELOESTEN_GOOGLE_GOTO_URLS",
+      "action": "FACHKANDIDAT_UNVERAENDERT_BEHALTEN_KEIN_WP_IMPORT"
+    },
+    {
+      "hold_id": "v46_f02",
+      "world": "Freizeit",
+      "target": "kamerabewegungsroboter für hobbyfilmer timelapse slider",
+      "competitor": "kameraroboter",
+      "competitor_owner": "rbt_product_0479",
+      "competitor_label": "Gewerbe-Kameraroboter",
+      "overlap_count": 1,
+      "status": "UEBERSCHNEIDUNG_GERING",
+      "target_results": 1,
+      "competitor_results": 1,
+      "seo_verdict": "UNBELEGT_WEGEN_UNAUFGELOESTEN_GOOGLE_GOTO_URLS",
+      "action": "FACHKANDIDAT_UNVERAENDERT_BEHALTEN_KEIN_WP_IMPORT"
+    },
+    {
+      "hold_id": "v46_f03",
+      "world": "Freizeit",
+      "target": "folgedrohne automatische verfolgung freizeitvideo",
+      "competitor": "lerndrohnen",
+      "competitor_owner": "rbt_product_0536",
+      "competitor_label": "Lerndrohnen",
+      "overlap_count": 1,
+      "status": "UEBERSCHNEIDUNG_GERING",
+      "target_results": 1,
+      "competitor_results": 1,
+      "seo_verdict": "UNBELEGT_WEGEN_UNAUFGELOESTEN_GOOGLE_GOTO_URLS",
+      "action": "FACHKANDIDAT_UNVERAENDERT_BEHALTEN_KEIN_WP_IMPORT"
+    },
+    {
+      "hold_id": "v46_s03",
+      "world": "Sport",
+      "target": "badminton zuspielroboter federball training",
+      "competitor": "badminton ballmaschine",
+      "competitor_owner": null,
+      "competitor_label": "Badminton-Ballmaschine",
+      "overlap_count": 1,
+      "status": "UEBERSCHNEIDUNG_GERING",
+      "target_results": 2,
+      "competitor_results": 1,
+      "seo_verdict": "UNBELEGT_WEGEN_UNAUFGELOESTEN_GOOGLE_GOTO_URLS",
+      "action": "FACHKANDIDAT_UNVERAENDERT_BEHALTEN_KEIN_WP_IMPORT"
+    },
+    {
+      "hold_id": "v46_s07",
+      "world": "Sport",
+      "target": "sportkameraroboter automatische spielverfolgung mannschaft",
+      "competitor": "kameraroboter",
+      "competitor_owner": "rbt_product_0479",
+      "competitor_label": "Gewerbe-Kameraroboter",
+      "overlap_count": 1,
+      "status": "UEBERSCHNEIDUNG_GERING",
+      "target_results": 1,
+      "competitor_results": 1,
+      "seo_verdict": "UNBELEGT_WEGEN_UNAUFGELOESTEN_GOOGLE_GOTO_URLS",
+      "action": "FACHKANDIDAT_UNVERAENDERT_BEHALTEN_KEIN_WP_IMPORT"
+    },
+    {
+      "hold_id": "v46_b01",
+      "world": "Bildung",
+      "target": "roboterbaukasten schule mechanisch zusammenbauen",
+      "competitor": "lernroboter",
+      "competitor_owner": "rbt_product_0059",
+      "competitor_label": "Lernroboter",
+      "overlap_count": 1,
+      "status": "UEBERSCHNEIDUNG_GERING",
+      "target_results": 1,
+      "competitor_results": 1,
+      "seo_verdict": "UNBELEGT_WEGEN_UNAUFGELOESTEN_GOOGLE_GOTO_URLS",
+      "action": "FACHKANDIDAT_UNVERAENDERT_BEHALTEN_KEIN_WP_IMPORT"
+    },
+    {
+      "hold_id": "v46_b02",
+      "world": "Bildung",
+      "target": "mobile ros forschungsplattform roboter hochschule",
+      "competitor": "lernroboter",
+      "competitor_owner": "rbt_product_0059",
+      "competitor_label": "Lernroboter",
+      "overlap_count": 1,
+      "status": "UEBERSCHNEIDUNG_GERING",
+      "target_results": 2,
+      "competitor_results": 1,
+      "seo_verdict": "UNBELEGT_WEGEN_UNAUFGELOESTEN_GOOGLE_GOTO_URLS",
+      "action": "FACHKANDIDAT_UNVERAENDERT_BEHALTEN_KEIN_WP_IMPORT"
+    },
+    {
+      "hold_id": "v46_b04",
+      "world": "Bildung",
+      "target": "lehrroboterarm für schulunterricht programmieren",
+      "competitor": "tischroboterarme",
+      "competitor_owner": "rbt_product_0503",
+      "competitor_label": "Tischroboterarme",
+      "overlap_count": 0,
+      "status": "NICHT_PRUEFBAR",
+      "target_results": 1,
+      "competitor_results": null,
+      "seo_verdict": "UNBELEGT_WEGEN_UNAUFGELOESTEN_GOOGLE_GOTO_URLS",
+      "action": "FACHKANDIDAT_UNVERAENDERT_BEHALTEN_KEIN_WP_IMPORT"
+    },
+    {
+      "hold_id": "v46_b05",
+      "world": "Bildung",
+      "target": "leselernroboter grundschule vorlesen begleiten",
+      "competitor": "lernroboter",
+      "competitor_owner": "rbt_product_0059",
+      "competitor_label": "Lernroboter",
+      "overlap_count": 1,
+      "status": "UEBERSCHNEIDUNG_GERING",
+      "target_results": 1,
+      "competitor_results": 1,
+      "seo_verdict": "UNBELEGT_WEGEN_UNAUFGELOESTEN_GOOGLE_GOTO_URLS",
+      "action": "FACHKANDIDAT_UNVERAENDERT_BEHALTEN_KEIN_WP_IMPORT"
+    },
+    {
+      "hold_id": "v46_b07",
+      "world": "Bildung",
+      "target": "chemie experimentierroboter hochschule labor praktikum",
+      "competitor": "laborautomatisierung chemie",
+      "competitor_owner": null,
+      "competitor_label": "Laborautomatisierung",
+      "overlap_count": 1,
+      "status": "UEBERSCHNEIDUNG_GERING",
+      "target_results": 1,
+      "competitor_results": 1,
+      "seo_verdict": "UNBELEGT_WEGEN_UNAUFGELOESTEN_GOOGLE_GOTO_URLS",
+      "action": "FACHKANDIDAT_UNVERAENDERT_BEHALTEN_KEIN_WP_IMPORT"
+    }
+  ],
+  "skipped_steps": [
+    {
+      "index": 3,
+      "type": "ideas",
+      "world": "Freizeit",
+      "status": "NICHT_GEPRUEFT",
+      "reason": "Vorheriger Anbieter-HTTP-500 (Freizeit); keine erneute Anfrage",
+      "possible_provider_cost_not_recorded": true
+    },
+    {
+      "index": 9,
+      "type": "serp",
+      "world": "HOLD-Vergleich",
+      "status": "NICHT_GEPRUEFT",
+      "reason": "Anbieter-/Suchmaschinen-Serverfehler bei HOLD-Vergleich; kein erneuter API-Aufruf",
+      "possible_provider_cost_not_recorded": true
+    },
+    {
+      "index": 34,
+      "type": "serp",
+      "world": "HOLD-Vergleich",
+      "status": "NICHT_GEPRUEFT",
+      "reason": "Anbieter-/Suchmaschinen-Serverfehler bei einem weiteren Teilauftrag; nicht wiederholt",
+      "possible_provider_cost_not_recorded": true
+    }
+  ],
+  "safeguard": "Keine automatische Löschung, keine automatischen Kategorien, keine Importfreigabe, keine weiteren API-Kosten."
+}
