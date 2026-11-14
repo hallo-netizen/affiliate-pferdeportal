@@ -1,0 +1,37 @@
+--- a/affiliate-portal-router/includes/trait-ppar-ebay-run.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+@@ -683,11 +683,17 @@
+         // A storage failure after the checkpoint write can replay this same phase.
+         // In that case reuse the already-written checkpoint; never write it twice.
+         $published=$this->ebay_public_checkpoint_load();
++        // The new candidate has not been stored and therefore has no "safe"
++        // marker yet. Do not send it through the stored-checkpoint reader:
++        // that would always return an EMPTY membership and duplicate commits.
++        // Normalize its already-verified IDs, without a second public gate.
++        $candidate_ids=array_values(array_unique(array_filter(array_map('absint',
++            (array)$checkpoint['business_campaign_ids']))));
++        sort($candidate_ids,SORT_NUMERIC);
+         if ($this->ebay_public_checkpoint_is_safe($published)
+             && sanitize_key((string)($published['source']??''))==='canonical_public_verify'
+             && sanitize_text_field((string)($published['run_uuid']??''))===(string)$checkpoint['run_uuid']
+-            && $this->ebay_public_checkpoint_business_ids($published)
+-                ===$this->ebay_public_checkpoint_business_ids($checkpoint)) {
++            && $this->ebay_public_checkpoint_business_ids($published)===$candidate_ids) {
+             return $published;
+         }
+         $previous = $this->ebay_public_checkpoint_business_ids();
+@@ -3010,7 +3016,13 @@
+                     $current['checkpoint_deferred_reason']='unverified_search_would_withdraw_last_good';
+                     $current['checkpoint_deferred_previous_business_count']=count($old_ids);
+                     $current['checkpoint_deferred_candidate_business_count']=count($new_ids);
+-                    $this->ebay_run_save($current);
++                    if(!is_array($this->ebay_run_save($current))){
++                        // Never declare a deferred SAFE result completed when
++                        // the reason was not durably saved in the same run.
++                        $this->ebay_run_fail('unverified_search_deferred_state_save_failed',
++                            'Der aufgeschobene öffentliche Abschluss konnte nicht gespeichert werden.');
++                        return;
++                    }
+                     $business['checkpoint_status']='deferred_last_good_retained';
+                     $manifest=array('business'=>$business,'private'=>$private,'verified_at'=>time(),
+                         'run_uuid'=>(string)($current['run_uuid']??''),
