@@ -1,0 +1,162 @@
+{
+  "version": "W3_2026-11-14",
+  "project": "WASSERTECHNIK",
+  "status": "GEZIELTER_RECHERCHEAUFTRAG_NICHT_WP_SEO",
+  "authority": "KATEGORIEKONZEPT/CURRENT_STATE.md",
+  "sources": [
+    "Robotik Recherche CURRENT.json V52 2026-11-14; research_round_v43, v44",
+    "Robotik V52_ACHTWELTEN_GESAMTBAUM_NUR_FACHENTWURF",
+    "Wassertechnik W2 71 Produktseiten und 89 Artikelkategorien",
+    "Hersteller-KSB und Grünbeck Original-Produktseiten"
+  ],
+  "rules": {
+    "evidence": "Fund/Herstellerprodukt einmal fachlich registrieren; belegbare separate Kontext-/Suchabsicht kann mehrere eigenständige WP-Produktseiten erhalten.",
+    "duplication": "Nicht nur Titel/Käuferetikett doppeln; andere Technik, Zielgruppe/Fragen, Produktmodelle und eigenständiger Inhalt nachweisen.",
+    "wordpressDepth": "Produktseite -> WP-Inhaltskategorien nur mit mindestens 3 konzeptionellen Beiträgen",
+    "industry": "Informationsumfang Industrie einschließen, über Landingpages verlinken, ohne zweite parallele Produkthierarchie.",
+    "seo": "Ausschließlich im WordPress-Kategorieplugin nach fachlichem Baum; bestehende ZIP noch nicht für Wassertechnik portiert"
+  },
+  "phase_order": [
+    {
+      "phase": "1",
+      "task": "Vorhandene 71 W2-Produktseiten und 69 Alt-Knoten beibehalten, nach Eigentümer und grob anderen Nutzungskontexten abgleichen",
+      "limit": "Keine Vollneurecherche und keine neue Masseninventur"
+    },
+    {
+      "phase": "2",
+      "task": "Für die Industrie sechs Landingpage-Themen mit realen Hersteller-/Fachbelegen auf ausreichend fachliche Breite prüfen",
+      "limit": "Nur thematisch notwendige weitere Produktarten, kein ungeprüftes Industrie-Produktseitenmassiv"
+    },
+    {
+      "phase": "3",
+      "task": "Bei bestehenden Produktfamilien alle in der Kontextmatrix benannten Intent-Grenzfälle recherchieren und entscheiden",
+      "limit": "Unklar bleibt Kandidat oder Landing-Verweis, nicht automatische neue WP-Seite"
+    },
+    {
+      "phase": "4",
+      "task": "Für wirklich eigenständige Produkt-/Kontextseiten mögliche WP-Kategorien und pro Rubrik mindestens drei verschiedene Beitragsideen erarbeiten",
+      "limit": "Konzeptionell, keine bereits gemessene Suchnachfrage behaupten"
+    },
+    {
+      "phase": "5",
+      "task": "Erst jetzt Wassertechnik Kategorie-Plugin auf korrekten kompletten Fachbaum und neutralen Profilstand portieren, kostenfreie Keyword-Preflight-Liste in WordPress prüfen, danach explizit freigegebene echte DataForSEO-Analyse",
+      "limit": "Kein kostenpflichtiger Aufruf ohne Freigabe, keine WordPress-Schreibung"
+    },
+    {
+      "phase": "6",
+      "task": "SEO-Befund auf Fachbaum zurückspielen, nach Endabnahme einmaliger kontrollierter Import, dann später Affiliate-Produktsortiment/Anbieter gesondert belegen",
+      "limit": "SEO, Affiliateverträge und Kaufbarkeit keine konzeptionelle Existenzbedingung"
+    }
+  ],
+  "industry_landing_candidates": [
+    {
+      "title": "Industrielle Wasseraufbereitung",
+      "purpose": "Kühl-, Prozess-, Reinstwasser, gewerbliche Osmose/Vollentsalzung",
+      "example": "Grünbeck GENO-OSMO-X",
+      "src": "https://www.gruenbeck.de/produkte-loesungen/gruenbeck-fuer-gewerbe/membrantechnik/umkehrosmose/geno-osmo-x",
+      "state": "INFORMATION_LANDING_KANDIDAT"
+    },
+    {
+      "title": "Industrie-Pumpen",
+      "purpose": "Prozess-/Chemienorm-/Hochdruckpumpen, Medienbeständigkeit",
+      "example": "KSB Prozess-, Hochdruck- und Chemienormpumpen",
+      "src": "https://www.ksb.com/de-de/loesungen/industrie/industrielle-wasseraufbereitung",
+      "state": "INFORMATION_LANDING_KANDIDAT"
+    },
+    {
+      "title": "Kühl- & Kreislaufwasser",
+      "purpose": "Anlagenwasser, Kreislauf, Kühlwasserbehandlung",
+      "example": "KSB industrielle Kühlkreisläufe",
+      "src": "https://www.ksb.com/de-de/loesungen/industrie/industrielle-wasseraufbereitung",
+      "state": "INFORMATION_LANDING_KANDIDAT"
+    },
+    {
+      "title": "Industrielles Abwasser",
+      "purpose": "Abwasserreinigung, Neutralisation, Feststoffe, Fördertechnik",
+      "example": "KSB Pumpen für Medien mit Feststoffen",
+      "src": "https://www.ksb.com/de-de/loesungen/industrie/industrielle-wasseraufbereitung",
+      "state": "INFORMATION_LANDING_KANDIDAT"
+    },
+    {
+      "title": "Messung, Regelung & Dosierung",
+      "purpose": "Anlagenüberwachung, automatisierte Dosierung, Prozessdaten",
+      "example": "Grünbeck Anlage mit Datenlogging/Steuerung",
+      "src": "https://www.gruenbeck.de/produkte-loesungen/gruenbeck-fuer-gewerbe/membrantechnik/umkehrosmose/geno-osmo-x",
+      "state": "INFORMATION_LANDING_KANDIDAT"
+    },
+    {
+      "title": "Kommunale/Großanlagen",
+      "purpose": "Wasserwerke, Verteilnetze, großtechnische Aufbereitung, Abwasseranlagen",
+      "example": "KSB kommunale/industrielle Pumpenanwendungen",
+      "src": "https://www.ksb.com/de-de/produkte/produktbauarten/wasserpumpe",
+      "state": "INFORMATION_LANDING_KANDIDAT"
+    }
+  ],
+  "cross_intent_tests": [
+    {
+      "existing": "Gartenpumpe",
+      "possible": "Gartenpumpe für Vereinsanlage",
+      "disposition": "EINE_SEITE_SOFERN_IDENTISCH",
+      "why": "Nur Nutzeretikett, gleiche Funktion und Technik – kein inhaltlich eigener Kontext belegt."
+    },
+    {
+      "existing": "Tauchpumpe",
+      "possible": "Industrielle Medien-/Prozesstauchpumpe",
+      "disposition": "GEZIELTER_KONTEXTTEST",
+      "why": "Fördereigenschaften, Medium, Sicherheits- und Betreiberfragen können eigenständig sein; fachliche Quellen und real unterschiedliche Modelltypen nachprüfen."
+    },
+    {
+      "existing": "Untertisch-Osmoseanlage",
+      "possible": "Gewerbliche/industrielle Umkehrosmoseanlage",
+      "disposition": "GETRENNTE_PRODUKTFAMILIE_PLAUSIBEL_ZU_BELEGEN",
+      "why": "Großanlagen unterscheiden sich u.a. bei Durchsatz, Betriebsführung und Permeat; konkrete Produktbelege vorhanden, SEO noch offen.",
+      "source": "https://www.gruenbeck.de/produkte-loesungen/gruenbeck-fuer-gewerbe/membrantechnik/umkehrosmose/geno-osmo-x"
+    },
+    {
+      "existing": "Wasser-Dosieranlage",
+      "possible": "Chemie-/Prozessdosieranlage",
+      "disposition": "GEZIELTER_KONTEXTTEST",
+      "why": "Privates Aufbereiten und betrieblicher Prozess können andere Dosiermedien, Mess- und Sicherheitsanforderungen haben."
+    },
+    {
+      "existing": "Schmutzwasserpumpe",
+      "possible": "Industrielle Schmutz-/Feststoffpumpe",
+      "disposition": "GEZIELTER_KONTEXTTEST",
+      "why": "Industrie bietet echte Spezialpumpentypen; Herstellerfunktion, Medium und Auswahlfragen abgrenzen.",
+      "source": "https://www.ksb.com/de-de/loesungen/industrie/industrielle-wasseraufbereitung"
+    },
+    {
+      "existing": "Wasser-Multimessgerät",
+      "possible": "Online-Prozessmessgerät",
+      "disposition": "GEZIELTER_KONTEXTTEST",
+      "why": "Handmessung/Probennahme vs. laufende Prozessmessung haben potenziell andere Aufgaben und Zubehör."
+    },
+    {
+      "existing": "Regenwasser-Erdtank",
+      "possible": "Retentions- oder Gewerbetank",
+      "disposition": "BESTANDSABGLEICH",
+      "why": "Unterschiedliche Speicherfunktion, Objektgröße und Zulassung relevant; Bestand Retentionszisterne und Nutzwassertank schon vorhanden."
+    },
+    {
+      "existing": "Feinfilter",
+      "possible": "Industrieller Prozesswasserfilter",
+      "disposition": "GEZIELTER_KONTEXTTEST",
+      "why": "Allgemeine Hausinstallation vs. industrielle Medienfilterung; Medien, Nenndurchfluss, Wartung und Sicherheitsgrenzen prüfen."
+    },
+    {
+      "existing": "Hebeanlage",
+      "possible": "Hebeanlage für kleines Gewerbe",
+      "disposition": "KEINE_ZUSATZSEITE_OHNE_NACHWEIS",
+      "why": "Der alleinige Einsatz in einem kleinen Betrieb rechtfertigt keine neue Produktseite."
+    }
+  ],
+  "researcher_notes": "Die neun Abgrenzungsprüfungen sind bewusst ein gezielter Startkorridor, keine Behauptung vollständiger Marktinventur oder endgültiger Produktseitenzahl. Zusätzliche Prüfungen nur bei nachgewiesener konkreter Lücke.",
+  "not_verified": [
+    "Vollständigkeit industrieller Produktfamilien",
+    "Doppelte Suchintention per Google/Keyword",
+    "Neue WordPress-Seiten",
+    "Verfügbare Affiliatepartner für Industrietechnik",
+    "Freigabe neuer Produktseiten",
+    "Aktuelle Plugin-DataForSEO-Funktion für Wassertechnik"
+  ]
+}
