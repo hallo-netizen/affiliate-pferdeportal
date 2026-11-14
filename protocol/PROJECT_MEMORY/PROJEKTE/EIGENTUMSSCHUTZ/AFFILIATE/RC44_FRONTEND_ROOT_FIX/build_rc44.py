@@ -65,6 +65,15 @@ with ZipFile(BytesIO(old)) as z:
                 '<!--ppar-overview-cta-v67280-->' .
                 '<div class="ppar-overview-wide-banner-cta-wrap"><a class="ppar-overview-wide-banner-cta" href="' . esc_url($url) . '" target="' . esc_attr($target) . '" rel="' . esc_attr($rel) . '">Mehr erfahren</a></div>';""",
         """                '</a>';""")
+    # Remove now-obsolete split/append path for that second button too.
+    # Keeping this would let arbitrary obsolete saved HTML inject the CTA.
+    m=once(m,
+        """                            $overview_parts = explode('<!--ppar-overview-cta-v67280-->', (string)$html, 2);
+                            $out .= '<div class="ppar-affiliate-content">' . (string)($overview_parts[0] ?? '') . '</div>';
+                            $out .= $disclosure;
+                            if (!empty($overview_parts[1])) { $out .= (string)$overview_parts[1]; }""",
+        """                            $out .= '<div class="ppar-affiliate-content">' . (string)$html . '</div>';
+                            $out .= $disclosure;""")
     m=once(m,"Version: 0.1.40-rc43","Version: 0.1.41-rc44")
     data[MAIN]=m.encode()
     rd=data[README].decode()
