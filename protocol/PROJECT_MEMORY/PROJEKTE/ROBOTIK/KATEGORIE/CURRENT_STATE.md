@@ -1,5 +1,11 @@
 # ROBOTIK / KATEGORIE – EINZIGER AKTUELLER STATUS
 
+## V72-FORTSETZUNG, 14.11.2026 – ZWEITER RECHERCHEBLOCK IM SELBEN CHAT, BEIDE GESICHERT
+- Nach 26 schon erfassten V72-Asienbelegen **11 weitere unterschiedliche Primärquellen** zu privatem Garten, Sport, häuslicher Pflege: **jetzt 37 voneinander verschiedene Quellen-URLs** in V72, weiterhin NO WP IMPORT. **3 zusätzliche fachliche Robotertyp-Kandidaten** (je 3 C-Vertrag-Rubriken und 4 Artikelrichtungen): mobiler Bewässerungsroboter (Garten), automatischer Buchseitenwendroboter (Pflege), Bade-Transferroboter (Pflege). Zusammen sind es 8 Fachkandidaten für V72 (5 + 3), keine Freigabe.
+- Belege für **Badminton-/Tischtennisvarianten** bereits vorhandenen Sportseiten zugeordnet, keine neuen Roboterklassen; statische Sport-Analytik, reine Aquariumpumpen und stationäre Blumentöpfe NICHT als Robotertypen erfasst. Chinesische Patente ausdrücklich als **Idee**, kein Verkauf unterstellt. Gewerbe/Industrie weiter ausdrücklich außen vor.
+- Zusätzlicher Bericht `RECHERCHE/V72_WEITERRECHERCHE_20261114.md`, strukturiertes `RECHERCHE/V72_WEITERRECHERCHE_DELTA.json`, beide in Library `/robotik/Konzeptbüro/`. Keine Plugin-, Design-, WP- oder kostenpflichtige SEO-Aktion. Ein zentrales Roboterbüro, ein Eintrag = genau ein Kennzeichen Produkt/Projekt/Idee.
+
+
 ## AKTUELL 14.11.2026 – V72: WEITERE 26 ASIATISCHE QUELLENBELEGE ALS EINEN RECHERCHEBLOCK GESICHERT
 - Vorab gegen **echten V62-Sollbaum 188 Seiten / 296 Beitragskategorien** und V67–V71 (insbesondere 22 V70 und 21 V71 Fundbelege) abgeglichen: **26 neue unterschiedliche Quellen-URLs**, 18 Ideen/Patente und 8 Forschungsprojekte; keine Behauptung, 26 neue Gerätetypen entdeckt zu haben. Kein gleicher Quellenlink aus V70/V71, bestehende Owner dokumentiert, frühere Robotertypen und 16 SEO-HOLDs unverändert.
 - **Fünf eigene Fachkandidaten nur zur späteren Entscheidung:** Babyberuhigungsroboter (Haushalt), Vorhangreinigungsroboter (Haushalt), Geschirrwaschroboter mit Greifern (Haushalt, unterscheidet sich von V62 Geschirrspüler-Einräumroboter), Pflanzenbegleitroboter/fahrender Lichtsuch-Blumentopf (Garten), Haustierbürstroboter (Haushalt, gegenüber V68 Tierwaschroboter abgrenzen). Je 3 plausible Rubriken mit je 4 eigenen Artikelfragen = 15 Rubriken/60 vorläufige Artikelideen. **Keine SEO-Freigabe, keine WordPress-Anlage.**

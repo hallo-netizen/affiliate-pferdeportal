@@ -1,0 +1,212 @@
+{
+  "schema": "V72_CONTINUED_RESEARCH_ADDENDUM",
+  "date": "2026-11-14",
+  "scope": [
+    "Garten",
+    "Sport",
+    "Bildung",
+    "Pflege"
+  ],
+  "excluded": [
+    "Gewerbe",
+    "Industrie"
+  ],
+  "source_count": 11,
+  "classification_count": {
+    "Idee": 11
+  },
+  "prev_V72_source_count": 26,
+  "combined_V72_source_count": 37,
+  "no_overlap_with_previous_sources": true,
+  "items": [
+    {
+      "id": "V72E-001",
+      "name": "Sprinkler-Roboter fährt selbstständig den Garten ab",
+      "kennzeichnung": "Idee",
+      "bereich": "Garten",
+      "fachbesitzer": "Mobiler Bewässerungsroboter (NEU zu prüfen)",
+      "quelle": "https://patents.google.com/patent/CN223681679U/zh",
+      "entscheidung": "TYPKANDIDAT",
+      "begründung": "2025 Patent: Radar/Wegeplanung, Bewässerung, selbstständiges Nachfüllen an Basis; anders als ortsfeste Sprinkler."
+    },
+    {
+      "id": "V72E-002",
+      "name": "Mobiler Gartensprinkler mit eigener Steuerung",
+      "kennzeichnung": "Idee",
+      "bereich": "Garten",
+      "fachbesitzer": "Mobiler Bewässerungsroboter (gleicher Typ V72E-001)",
+      "quelle": "https://patents.google.com/patent/CN119547715A/zh",
+      "entscheidung": "GLEICHER_TYP",
+      "begründung": "Weitere Patentanmeldung zur selben Aufgabenfamilie, keine neue Kategorie."
+    },
+    {
+      "id": "V72E-003",
+      "name": "Pflanzenpflegeroboter, der auch Erde lockert",
+      "kennzeichnung": "Idee",
+      "bereich": "Garten",
+      "fachbesitzer": "Pflanzenbegleitroboter (V72-006)",
+      "quelle": "https://patents.google.com/patent/CN106069273A/zh",
+      "entscheidung": "BESTEHENDER_KANDIDAT",
+      "begründung": "2016 Patent: bewegt Topfpflanze, lockert Erde, gießt. Neue Funktion desselben Pflanzenbegleiter-Typs."
+    },
+    {
+      "id": "V72E-004",
+      "name": "Automatischer Buchseitenwendroboter für Menschen ohne Handfunktion",
+      "kennzeichnung": "Idee",
+      "bereich": "Pflege",
+      "fachbesitzer": "Buchseitenwendroboter (NEU zu prüfen)",
+      "quelle": "https://patents.google.com/patent/CN107053194A/zh",
+      "entscheidung": "TYPKANDIDAT",
+      "begründung": "2017 Patent: Unterdrucksauger, mechanischer Umblätterarm, Sprachbefehl und Abstandssensor; zur barrierearmen Lektüre."
+    },
+    {
+      "id": "V72E-005",
+      "name": "Automatischer Seitenwender – frühere Hochschulforschung",
+      "kennzeichnung": "Idee",
+      "bereich": "Pflege",
+      "fachbesitzer": "Buchseitenwendroboter (gleicher Typ V72E-004)",
+      "quelle": "https://patents.google.com/patent/CN1562642A/zh",
+      "entscheidung": "GLEICHER_TYP",
+      "begründung": "Shanghai Jiao Tong University, 2004/2005; Seitenwender auch fürs Lesen, Noten, Scannen. Kein zweiter Produkttyp."
+    },
+    {
+      "id": "V72E-006",
+      "name": "Präzisionsroboter zum automatischen Blättern",
+      "kennzeichnung": "Idee",
+      "bereich": "Pflege",
+      "fachbesitzer": "Buchseitenwendroboter (gleicher Typ V72E-004)",
+      "quelle": "https://patents.google.com/patent/CN209936938U/zh",
+      "entscheidung": "GLEICHER_TYP",
+      "begründung": "Spätere Patentschrift mit robotischer Blatttrennung und mechanischem Seitenwender."
+    },
+    {
+      "id": "V72E-007",
+      "name": "Hebehilfe-Roboter bringt Senioren in die Badewanne",
+      "kennzeichnung": "Idee",
+      "bereich": "Pflege",
+      "fachbesitzer": "Bade-Transferroboter (NEU zu prüfen)",
+      "quelle": "https://patents.google.com/patent/CN221469722U/zh",
+      "entscheidung": "TYPKANDIDAT",
+      "begründung": "2024 Patent: faltbarer Lift mit beweglichem Sitz, dient Umsetzen/Transfer ins Bad; nicht selbst Körperwaschen."
+    },
+    {
+      "id": "V72E-008",
+      "name": "Badmintonroboter mit aktivem Zuspiel und Rückschlag",
+      "kennzeichnung": "Idee",
+      "bereich": "Sport",
+      "fachbesitzer": "Badmintonroboter (V62 vorhanden)",
+      "quelle": "https://patents.google.com/patent/CN106075853B/zh",
+      "entscheidung": "BESTEHENDER_TYP",
+      "begründung": "Patent für Greifer/Schlagwerk, Fahrgestell und Schwierigkeitssteuerung. Zusätzliche Registeridee zum vorhandenen Badmintonroboter."
+    },
+    {
+      "id": "V72E-009",
+      "name": "Badminton-Rückschlagroboter ohne Schläger",
+      "kennzeichnung": "Idee",
+      "bereich": "Sport",
+      "fachbesitzer": "Badmintonroboter (V62 vorhanden)",
+      "quelle": "https://patents.google.com/patent/CN105561563B/zh",
+      "entscheidung": "BESTEHENDER_TYP",
+      "begründung": "Racketloser Rückspielmechanismus; technische Bauart innerhalb bestehender Robotertyp-Seite."
+    },
+    {
+      "id": "V72E-010",
+      "name": "Tischtennisroboter sammelt Bälle und schießt sie wieder zu",
+      "kennzeichnung": "Idee",
+      "bereich": "Sport",
+      "fachbesitzer": "Tischtennisroboter / Ballsammelroboter (V62 vorhanden)",
+      "quelle": "https://patents.google.com/patent/CN111888738A/zh",
+      "entscheidung": "BESTEHENDE_TYPEN",
+      "begründung": "Shanghai Second Polytechnic University: Kombinierter Fahr-, Sammel- und Ballwerfer, kein neuer Sport."
+    },
+    {
+      "id": "V72E-011",
+      "name": "Adaptive Ball-Sparringsrobotersteuerung je Spielstärke",
+      "kennzeichnung": "Idee",
+      "bereich": "Sport",
+      "fachbesitzer": "Ballsportroboter (Tischtennis, Badminton; V62 vorhanden)",
+      "quelle": "https://patents.google.com/patent/CN112621773A/zh",
+      "entscheidung": "BESTEHENDER_TYP",
+      "begründung": "Patent beschreibt Anpassung der Rückschlagstrategie an Spielstärke, kein separater Robotertyp."
+    }
+  ],
+  "new_type_candidates": [
+    {
+      "name": "Mobiler Bewässerungsroboter",
+      "world": "Garten",
+      "proof": "V72E-001",
+      "facets": {
+        "Einsatz": [
+          "Beete und Rasen unterscheiden",
+          "Aufstellung und Wegeplanung",
+          "Sprühdüsen und Wassermengen",
+          "Hindernisse und enge Wege"
+        ],
+        "Technik": [
+          "Radar und Abstandsfühler",
+          "Schlauchsystem versus Wassertank",
+          "Selbstständiges Nachtanken",
+          "Bewässerung nach Feuchtebedarf"
+        ],
+        "Entwicklung": [
+          "Patent der mobilen Beregnung",
+          "Unterschied zum Beetroboter",
+          "Grenzen bei Wind und Steigungen",
+          "Einsatz in kleinen Privatgärten"
+        ]
+      }
+    },
+    {
+      "name": "Buchseitenwendroboter",
+      "world": "Pflege",
+      "proof": "V72E-004",
+      "facets": {
+        "Bedienung": [
+          "Sprachsteuerung für Umblättern",
+          "Auslösen per Taste oder Kopfbewegung",
+          "Buchhalterungen für unterschiedliche Formate",
+          "Beleuchtung und Leseabstand"
+        ],
+        "Mechanik": [
+          "Saugnäpfe und Greifer",
+          "Einzelne Seiten zuverlässig trennen",
+          "Schutz dünner Papierseiten",
+          "Blättern vorwärts und rückwärts"
+        ],
+        "Entwicklung": [
+          "Alte Patente von Hochschulen",
+          "Hilfsmittel für Menschen mit Einschränkungen",
+          "Abgrenzung zu reinen Scannern",
+          "Prototypen und Einsatzgrenzen"
+        ]
+      }
+    },
+    {
+      "name": "Bade-Transferroboter",
+      "world": "Pflege",
+      "proof": "V72E-007",
+      "facets": {
+        "Transfer": [
+          "Umsetzen aus Rollstuhl oder Sitz",
+          "Heben und Senken in die Wanne",
+          "Platzbedarf im privaten Badezimmer",
+          "Positionierung und Andocken"
+        ],
+        "Sicherheit": [
+          "Stabilität des Sitzes",
+          "Rutschsicherung und sichere Verriegelung",
+          "Manuelle Hilfe und Notstopp",
+          "Eignung bei eingeschränkter Mobilität"
+        ],
+        "Entwicklung": [
+          "Chinesisches Lift-Roboterpatent",
+          "Abgrenzung zu Waschrobotern",
+          "Vergleich zu klassischen Patientenliftern",
+          "Forschungsstand und Nachrüstung"
+        ]
+      }
+    }
+  ],
+  "article_directions": 36,
+  "no_import": true
+}
