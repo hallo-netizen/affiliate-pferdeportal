@@ -1,9 +1,7 @@
 # Wassertechnik – Kategorieplugin WT001
 
-**Aktuelles Update: v0.1.4** – `WASSERTECHNIK_KATEGORIE_WORKFLOW_0.1.4_FORTSETZUNG_OHNE_NEUSTART_NUR_TEST.zip`, SHA256 `73b50022aecde2e3d7fd805acfeb94c7c588489abe85383da0905a5fd5736fd4`.
+**Aktueller belegter Stand:** WT001 0.1.4, weiterhin einzige Pluginidentität. Der DataForSEO-Lauf ist beendet: 218 Suchabsichten, 106 Suchvolumina, organische Difficulty offen; **NICHT erneut starten**. Original-Daten W5.
 
-**Für den laufenden, gesperrten SEO-Auftrag:** Nicht erneut die 218er Gesamtrecherche starten. Nur bereits bezahlte Suchvolumina behalten, den fehlgeschlagenen zweiten DataForSEO-Auftrag als **NICHT GEPRUEFT** ausweisen, dann ausschließlich die dritte Suchabsicht einmalig nach separater Kostenfreigabe abrufen. Anbieterlistenkosten ca. 0,03816 USD zusätzlich, Altgebühr 0,09 USD plus mögliche noch unbekannte Abrechnung für den gescheiterten Auftrag.
+**W8 im echten Quellcode belegt:** Die Version 0.1.4 kann Inventur/SEO, **aber keinen Import von WordPress-Seiten oder Inhaltskategorien**. Siehe `W8_IMPORT_QUELLCODE_PRUEFUNG_20261114.md`.
 
-**Installationsweg:** Vorhandene Pluginversion durch v0.1.4 aktualisieren → `Wassertechnik Kategorie → DataForSEO` → `GESPERRTEN LAUF SICHER FORTSETZEN – KEINE WIEDERHOLUNG` mit ausdrücklicher Freigabe → `Gesamten SEO-Bericht als JSON herunterladen`.
-
-**Grenze:** WordPress-Live-Test von 0.1.4 und tatsächliche Anbieterantwort noch nicht erfolgt. Kein Import, keine Veröffentlichung, keine weiteren Anbietergebühren ohne Bestätigung.
+**Nächster Hauptfunktionsblock:** Einmalige, ADD-only-Importfunktion im **selben Plugin** für die W6-Gesamtvorschau (113 Seiten, 105 produktbezogene Kategorien). W7 legt den Menüaufbau fest, nicht weitere WordPress-Seiten. Keine neue Pluginlinie, keine weitere SEO-Gesamtrecherche. **Kein realer Import ohne ausdrückliche Freigabe.**
