@@ -1,17 +1,15 @@
 # WASSERTECHNIK / PLUGINS – einzige aktuelle Büroautorität
 
-**Stand:** 14.11.2026 · **Status:** WT001 v0.1.1 ECHTER WORDPRESS-ADMIN-EXPORT NACHGEWIESEN; SEO-SUCHINTENTION UND BEZAHLRECHERCHE OFFEN.
+**Stand:** 14.11.2026 · **Status:** **WT001 v0.1.2** gebaut, komplett lokal geprüft; echter WordPress-Update-/Exporttest offen.
 
-## Aktive Kandidatenversion
-- `WASSERTECHNIK_KATEGORIE_WORKFLOW_0.1.1_GESAMTBAUM_SEO_NUR_TEST.zip`, Version **0.1.1**, Git-Blob `cf457f42092c087984fc155dfa08b5eda7fd36b2`, SHA256 `01d835f6353a5d9ae2041155b3d2331c424ace48606a48ffac03e58cc6dcfd34`.
-- **Warum Update erforderlich:** WT001 v0.1.0 hat nur 79 Produktseiten und 105 Inhaltskategorien vorbereitet, die acht Hauptseiten, 19 Untergruppenseiten, einen Industrieeinstieg und sechs Industrielanding-Seiten **ausgelassen**. Kein zweiter verdeckter Keywordplan.
-- **Neu:** Der kostenlose WordPress-Preflight umfasst jetzt **218** voneinander unterscheidbare vorläufige Suchbegriffe mit eindeutigen Kontext-/Owner-IDs: 8 Hauptseiten + 19 Untergruppen + 1 Industrieeinstieg + 6 Industrie-Landingpages + 79 Produktseiten + 105 Inhaltskategorien. **356 W4-Beitragsideen** bleiben im Fachmodell, nicht als recherchierte SEO-Daten ausgegeben.
-- **Sicherheitskorrektur:** Sämtliche alten bezahlten DataForSEO-Methoden und POST-Anfragen sind aus dem Prüfplugin entfernt, nicht lediglich versteckt; importierende/veröffentlichende WP-Hooks existieren ebenfalls nicht. Kostenloser API-Verbindungstest erfolgt nur mit explizitem Administrator-Klick.
-- **Offline-Nachweis:** PHP-Syntax 3/3 PASS, ZIP-CRC PASS, WP-Mock 218/218 unterschiedliche Keyword-/Owner-Datensätze PASS, 0 verworfen, 0 Import-/Paid-Admin-Hooks, stabile Prüfsumme. `../PRUEFUNG/WT001_011_OFFLINE_ABNAHME_20261114.md`.
-- **WP-Live-Status:** Nutzerexport von `https://wasser.oliver-beil.de/` bestätigt WT001 0.1.1 und funktionsfähige kostenlose Preflight-/Bestandsbericht-Ausgabe. Domainbezogene Nachweise über tiefere Server-/Datenbank-Isolation liegen nicht vor. Keine kostenpflichtigen API-Aufrufe, keine Suchvolumina, kein Import.
-- **Vorversion:** 0.1.0 bleibt zur Historie im Pluginbüro, darf wegen unvollständigem Gesamtbaum **nicht** für die abschließende W4-SEO-Prüfung verwendet werden. Keine parallele Aktivierung zweier Pluginstände.
-- **HAB-002:** unveränderte Referenz-ZIP; Import-PHP nicht portiert. Erst nach fachlicher + SEO-Abnahme darf überhaupt über ein Importmodul entschieden werden.
+**Aktive Version:** `WASSERTECHNIK_KATEGORIE_WORKFLOW_0.1.2_SEO_BEGRIFFE_NUR_TEST.zip`. SHA256 `265eb7b49e2a7fe20eea01eda0e2bd680c07577c53092f21eda4`; Git-Blob `ff2b006a1df25795fec82f94ad5e79b6d0465f60`. WP-Pluginidentität bleibt unverändert `wassertechnik-kategorie-workflow` (Update, nicht parallel aktivieren).
 
-**NEXT ACTION:** Den W4-SEO-Preflight redaktionell qualifizieren, insbesondere 124 zusammengesetzte Begriffe und vier Sammelbezeichnungen (siehe `../PRUEFUNG/WORDPRESS_TEST_20261114/W4_KEYWORD_QUALITAET_218_20261114.csv`). Danach **ein** verbessertes W4-Keywordprofil zur SEO-Recherche im WordPress-Kategorieplugin. Keine Kosten oder Importe ohne Freigabe.
+**Funktion und Quelle:** Alle **218 W4-Struktur-Owner** erhalten: 8 Hauptseiten, 19 Untergruppen, 1 Industrie-Hub, 6 Industrie-Landings, 79 Produktseiten, 105 Inhaltskategorien. **128** automatisch zusammengesetzte oder zu breite Suchbegriffe durch fachlich konkretere, aus 356 Beitragsthemen konzeptionell abgeleitete Suchvorschläge ersetzt, **90** unverändert. Struktur- und Kategorienamen bleiben original W4. Eine einzige aus W4 abgeleitete Keyword-Zuordnung: `../KATEGORIEKONZEPT/W4_KEYWORDPROFIL_218_20261114.csv`, aus derselben Tabelle das Plugin-Manifest gebaut. Kein zweiter redaktioneller Owner.
 
-**Grenze:** Fremdportale/WordPress-Core nicht anfassen. Keine neuen Inhalte, keine mehreren Plugin-Schreiber.
+**Harte Sperre:** Alle 218 neuen Suchbegriffe sind weiterhin **ungeprüfte** SEO-Vorschläge. Bezahl-DataForSEO, WP-Seiten-/Kategorieimport und Veröffentlichung sind **in dieser Pluginversion technisch nicht vorhanden**. Admin kann nur kostenlos prüfen/exportieren, WordPress-Bestand lesen oder per explizitem Klick den kostenlosen DataForSEO-Zugangstest ausführen.
+
+**Test:** PHP-Lint 3/3 PASS, ZIP-CRC PASS, PHP WordPress-Mock 218/218 Owner, 128/128 Änderungen, 0 Rejects, eindeutige Suchbegriffe und Kategorie-Owner; 0 kostenpflichtige API-/Import-Hooks. `../PRUEFUNG/WT001_012_GESAMTABNAHME_20261114.md`. Keine WordPress-Live-Installation durch uns ausgeführt.
+
+**Vorversionen:** 0.1.0 und 0.1.1 nur Historie. WT001 0.1.1 ist auf `https://wasser.oliver-beil.de/` durch den Nutzerexport nachgewiesen; **0.1.2 ist dort noch nicht installiert/getestet**. Keine Site-Isolation über die WP-Exportdaten hinaus behaupten.
+
+**NEXT ACTION:** Ausschließlich auf der Wassertechnik-Testwebsite **WT001 v0.1.1 auf v0.1.2 aktualisieren**, **Wassertechnik Kategorie → DataForSEO → Gesamte Keywordliste prüfen (kostenlos)** ausführen und exportieren. Soll: 218 Owner, 128 redaktionelle Änderungen, 0 verworfen, `paid_research_approved=false`. Keine Import-/Bezahlrecherche. Danach gesondert die echte Keywordrecherche vornehmen, falls Kosten und Verfahren freigegeben.

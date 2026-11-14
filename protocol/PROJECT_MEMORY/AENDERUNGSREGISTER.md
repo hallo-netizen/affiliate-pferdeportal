@@ -2076,3 +2076,11 @@ Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wa
 - W4 218/218 eindeutige Owner und kein technischer Reject/Review Hold; WP-Meldung: nur 2 Standardseiten, 1 Beispielbeitrag, 1 Standardkategorie, HivePress noch nicht konfiguriert.
 - **Kritische Differenz:** null technische Sperren sind **kein** semantischer SEO-PASS. 19 zusammengesetzte Gruppentitel + 105 Inhaltsrubrik-Begriffe + 4 weitere Sammelbezeichnungen müssen vor Bezahlrecherche redaktionell überprüft werden.
 - Volle 218er Eigentümer-/Qualitätsliste im Prüfbüro abgelegt. Kein WordPress-/Plugin-Code-Schreibzugriff, keine API-Kosten und keine Änderungen an anderen Campus-Portalen.
+
+
+## 14.11.2026 – Wassertechnik WT001 0.1.2: 128 Suchformulierungen einmalig korrigiert
+- Vorherige Vorprüfung: 218 Struktur-Owner, darunter 124 künstlich kombinierte Formulierungen + vier Sammelbezeichnungen. Kein Anlass, den Kategoriebaum nochmals zu bauen.
+- Jetzt: 128 redaktionell konkrete, noch nicht gemessene Suchvorschläge; 90 Startbegriffe unverändert; 218/218 Owner und 105/105 Inhaltsrubriken erhalten.
+- Eine einzige Fach-Keywordzuordnung in `WASSERTECHNIK/KATEGORIEKONZEPT/W4_KEYWORDPROFIL_218_20261114.csv`; dieselben 218 Vorschläge im Pluginmanifest von WT001 0.1.2.
+- Durchgängiger lokaler Testblock: PHP-Lint, ZIP-CRC, WP-CLI-Preflight, 218 Owner, 0 doppelte/verworfene Begriffe, 0 Import- und Paid-Hooks PASS.
+- Isolierte, nicht auf WordPress installierte Test-ZIP in Pluginbüro. WP v0.1.1 bleibt bis zu Nutzerupdate live. Keine anderen Portalgebäude, kein WordPress-Inhaltsimport, keine API-Kosten.
