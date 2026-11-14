@@ -1,3 +1,21 @@
+## 14.11.2026 – RC42 ECHTER NÄCHSTER SCHRITT ERLEDIGT: EINMALIGER WORDPRESS-BESTANDS-EXPORT
+
+**Stand:** Die dokumentierten Ursachen aus RC39–RC41 bleiben bestehen. Echte Live-Werte zuletzt **160 importiert / 80 aktiv gemeldet / 80 ohne Ziel / 0 Formatsperren** unter RC40. Diese 80 sind weiterhin NICHT geklärt, keine erfundene Wiederherstellung und keine neuen Bannerimporte.
+
+**RC42 (0.1.39-rc42) freigegeben, ausschließlich zur Datenbeschaffung:** Der bereits vorhandene HAB-004/Affiliate-Zentrale-Plugin-Code enthält jetzt im **WordPress-Backend von Hab & Bewahr** auf **Werbemittel & Ausspielung** genau einen geschützten Button **„Tarifcheck-Bestand einmalig als JSON exportieren“**. Ein Klick erstellt **eine einzige lokale JSON-Datei** aus den tatsächlich bereits gespeicherten Tarifcheck-Werbemitteln samt vorhandener Quellfelder, Bild-/Werbelinks, bisheriger Zielentscheidung, aktuellem echtem WordPress-Versicherungsbaum sowie hinterlegten Ausgabeobjekten. **Nur Lesezugriffe: keine neue Tabelle, kein Worker, kein Schreibzugriff, kein Neuimport, keine neuen Zielentscheidungen, keine öffentliche Ausgabe und keine Änderung anderer Portale.** Für neue Banner ist RC41s geprüfte Vorab-Auslesekorrektur enthalten; der Export rekonstruiert aber NICHT früher gelöschte Original-Attribute.
+
+**Original-PHP-Test und Sicherheit:** https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43596932545 **SUCCESS**. 160 strukturgleiche gespeicherte Datensätze (80 zugeordnet/80 ohne Ziel) durch den tatsächlich gepackten Exportcode, vorhandene WordPress-Zielknoten und Ausgabeobjekte, **exakt 0 DB-Schreiboperationen**. Zugriff bei fehlender Berechtigung, ungültiger Bestätigung und von anderen Portalen jeweils gesperrt; 25 PHP-Quelldateien syntaktisch geprüft; RC23–RC41 komplett erneut bestanden. Gegenüber RC41 exakt 3 bestehende Plugin-Dateien geändert (Backend Export, Backend Admin-Registrierung, readme/Version).
+
+**Download:** https://github.com/hallo-netizen/affiliate-pferdeportal/releases/download/hab-affiliate-rc42-once-readonly-tarifcheck-export-20261114/HAB_Bewahr_Affiliate_RC42_EINMAL_EXPORT_TEST.zip — 2.360.773 Bytes, SHA256 `10d6ccfc5b334880040c8aeaf44498c533b0e81f135ac0c34e5da4696967f504`.
+
+**JETZT KONKRET, nur der Nutzer:** 1) ZIP RC42 in WordPress als Update des **bestehenden** Affiliate-Zentrale-Plugins installieren; 2) **Affiliate-Zentrale → Werbemittel & Ausspielung** öffnen; 3) Button **„Tarifcheck-Bestand einmalig als JSON exportieren“** anklicken; 4) **nur diese eine JSON-Datei hier im Chat hochladen**. **Keine Screenshots, keine Banner-Neuimporte, nicht dreimal die Seite öffnen**. Datei ist privat und enthält Affiliate-Links, also NICHT auf öffentliches GitHub hochladen.
+
+**Danach, allein Aufgabe des Assistenten:** Die tatsächlichen 80 fehlenden Fälle in der JSON-Datei anhand der dort vorhandenen gespeicherten Quellhinweise, Links, Bannerbilder, vorhandenen Zielpfade und aktiven WordPress-Kategorien einzeln und gesammelt prüfen. Zuerst belegte Fehlergruppen, erst dann EINE fachliche Korrektur in dem vorhandenen zentralen Importentscheider. Keine neuen Plugin-Zuordnungsversuche auf Verdacht.
+
+**Zentrale Fehlerakte:** [`TARIFCHECK_160_BANNER_FEHLER_UND_NAECHSTER_SCHRITT_20261114.md`](./TARIFCHECK_160_BANNER_FEHLER_UND_NAECHSTER_SCHRITT_20261114.md)
+
+---
+
 ## 14.11.2026 – VERBINDLICHE ÜBERGABE: TARIFCHECK 160 / 80 / 80, ALLE FEHLER UND NÄCHSTER SCHRITT
 
 **Status: NICHT GELÖST.** Letzter echter WordPress-Stand nach RC40: 160 Tarifcheck-Banner, 80 als aktiv gemeldet, 80 ohne Ziel, 0 Formatfehler. RC39 und RC40 brachten bei den 80 ungelösten Bannern keinen Fortschritt. RC41 wurde nur auf GitHub mit echtem PHP-End-to-End-Verlauf erfolgreich getestet, **nicht zur Installation ausgegeben** und behebt nicht automatisch vor RC41 verlorene Alt-HTML-Attribute.
