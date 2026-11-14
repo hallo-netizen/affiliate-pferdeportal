@@ -14,7 +14,7 @@
 
 **Beleg:** `WT001_013_EINMALIGE_GESAMTABNAHME_20261114.md` dokumentiert lokalen vollständigen Erfolgspfad sowie Fehlerpfade und feste Aufrufbegrenzungen. **Keine** echten API-Kosten und kein echter WP-0.1.3-Test behauptet.
 
-**NEXT ACTION:** W6 schreibfreie Gesamtvorschau gegen den bestehenden WP-Snapshot ist erstellt; vor Import eine gebündelte Freigabe einschließlich 3 offener SEO-Intent-Abgrenzungen, dann ggf. ein ADD-only-Vorgang mit echter WP-Rücklesung.
+**NEXT ACTION:** W7-SEO-Vertragsregeln und Menüplanung in die eine Gesamtimport-Freigabe aufnehmen; danach ggf. ADD-only-Import mit einem echten WP-Readback und Desktop-/Mobil-Menüprüfung.
 
 **Grenze:** Keine WordPress-/HivePress-Produktion, keine fremden Projektdateien verändern.
 
@@ -28,3 +28,6 @@
 
 ## W6 – 14.11.2026 Gesamtvorschau ohne WordPress-Schreiben
 218/218 SEO-Owner aus W5 auf 113 W4-Seitenziele und 105 Beitragskategorien abgebildet. 0 doppelte Zielpfade, 0 doppelte Kategorie-Slugs, 0 fehlende Eltern, 0 belegte Kollisionen mit dem WP-Snapshot vom 14.11., 12:28:47 UTC (2 Seiten, 1 Beitrag, 1 Kategorie). 13 P1 und 14 P2 Produktseiten priorisiert. Drei W4-Überschneidungsgruppen sind fachlich differenziert, endgültige SERP-Abgrenzung nicht behauptet. Keine neuen API-Kosten, Plugins, WP-Schreibaktionen. Belege im Kategorie-Büro: `W6_WORDPRESS_IMPORTVORSCHAU_218_20261114.json`, `W6_WORDPRESS_GESAMTVORSCHAU_20261114.md`.
+
+## W7 – Gebündelte Struktur- und Menükontrolle (14.11.2026)
+79/79 konkrete unterste Produktseiten, 105/105 Produktkategorien, 356 grob mögliche Artikel; 64 Kategorien mit 3 und 41 mit 4 Ideen, keine exakt doppelten Artikeltitel oder fehlende Produktbezüge. 53 Produkte besitzen eine, 26 zwei Kategorien. **Nur redaktionelle Plausibilität, kein starres Thema-Mindestzahlgate.** 76 Produktpfade über Zwischenebene, 3 Direktpfade; mit zwei rein visuellen Labels auf Menüspalten ausgeglichen. Acht Käuferbereiche plus Industrie-Informationszugang. Der wirkliche WP-Mega-Menü-Anblick ist **noch nicht getestet**. Nachweis `../KATEGORIEKONZEPT/W7_SEO_MENUE_GESAMTPRUEFUNG_20261114.md` und `../KATEGORIEKONZEPT/W7_MEGAMENUE_ANZEIGEVORSCHAU_20261114.json`.
