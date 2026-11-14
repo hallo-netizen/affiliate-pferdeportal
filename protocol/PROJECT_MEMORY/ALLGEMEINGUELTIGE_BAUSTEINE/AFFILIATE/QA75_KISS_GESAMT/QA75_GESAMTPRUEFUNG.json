@@ -1,0 +1,109 @@
+{
+  "name": "QA75 VERIFIED FULL CONTRACT QA ONLY",
+  "qa71_plugin_sha256": "e2d04337bf0d2c3ca8176059231b317f3682343239cef03bb68e4a57fa78c6b6",
+  "original_real_event_count": 2769,
+  "original_real_gap_family_count": 278,
+  "original_real_run_uuid": "97507628-4f4d-4527-bd77-fa573bce7067",
+  "original_real_ending": "running / gapfill_discovery / 5 of 283",
+  "original_php_full_chain_regression_checks": 5627,
+  "additional_checks": 5686,
+  "additional_failed": 0,
+  "additional_failures": [],
+  "scenarios": [
+    {
+      "name": "normal",
+      "status": "completed",
+      "error": null,
+      "families_covered": 259,
+      "families_with_reasons": 24,
+      "public_count": 580,
+      "public_writes": 2,
+      "lost_old_ids": 0
+    },
+    {
+      "name": "old_blocked",
+      "status": "completed",
+      "error": null,
+      "families_covered": 258,
+      "families_with_reasons": 25,
+      "public_count": 579,
+      "public_writes": 2,
+      "lost_old_ids": 1
+    },
+    {
+      "name": "new_blocked",
+      "status": "completed",
+      "error": null,
+      "families_covered": 258,
+      "families_with_reasons": 25,
+      "public_count": 579,
+      "public_writes": 1,
+      "lost_old_ids": 0
+    },
+    {
+      "name": "db_down",
+      "status": "failed",
+      "error": "business_public_storage_read_failed",
+      "families_covered": null,
+      "families_with_reasons": 0,
+      "public_count": 580,
+      "public_writes": 1,
+      "lost_old_ids": 0
+    },
+    {
+      "name": "churn",
+      "status": "completed",
+      "error": null,
+      "families_covered": 258,
+      "families_with_reasons": 25,
+      "public_count": 579,
+      "public_writes": 2,
+      "lost_old_ids": 1
+    },
+    {
+      "name": "no_new",
+      "status": "completed",
+      "error": null,
+      "families_covered": 257,
+      "families_with_reasons": 26,
+      "public_count": 578,
+      "public_writes": 1,
+      "lost_old_ids": 0
+    },
+    {
+      "name": "save_fail",
+      "status": "failed",
+      "error": "public_checkpoint_commit_failed",
+      "families_covered": null,
+      "families_with_reasons": 0,
+      "public_count": 580,
+      "public_writes": 1,
+      "lost_old_ids": 0
+    },
+    {
+      "name": "post_commit_state_save_fail",
+      "status": "failed",
+      "error": "public_checkpoint_cleanup_handoff_save_failed",
+      "families_covered": null,
+      "families_with_reasons": 0,
+      "public_count": 580,
+      "public_writes": 2,
+      "lost_old_ids": 0
+    },
+    {
+      "name": "collision_retry_state_save_fail",
+      "status": "failed",
+      "error": "public_checkpoint_collision_state_save_failed",
+      "families_covered": null,
+      "families_with_reasons": 0,
+      "public_count": 580,
+      "public_writes": 1,
+      "lost_old_ids": 0
+    }
+  ],
+  "patched_php_files_vs_QA74": [
+    "includes/trait-ppar-ebay-run.php"
+  ],
+  "full_live_acceptance": false,
+  "reason_live_acceptance_blocked": "Real 283-family endpoint and public checkpoint, corresponding individual live eBay response and authorized working GitHub timer not proven."
+}
