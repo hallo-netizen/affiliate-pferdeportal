@@ -144,3 +144,8 @@
 - Weitere aktive WP-Plugins laut Diagnose u. a. Portal Production Center und Link Policy Gate, aber PSTE, PSERC und PPM nicht in aktiver Pluginliste; **kein Beleg für eine Intervention**. Altplugins nicht ungefragt deaktivieren.
 - **Kleinster nächster, echter Testschritt:** Admin öffnet links `Texterstellung → Recherche`, startet genau **eine** begrenzte echte Recherche; danach denselben Diagnose-JSON-Download erneut durchführen und vorlegen. Erst dann konkrete technische Störstelle anhand der echten Events nachweisen. Keine neue Pluginversion und keine Codeänderung wegen dieses leeren Erstberichts.
 - Diagnose wurde nicht automatisch gesendet; vom Nutzer hochgeladen. **WordPress-/K0-Echt-Ende-zu-Ende-Test weiterhin offen.**
+
+### Schritt 12 – 14.11.2026: Testkeyword nur als Vorschlag, nicht als garantiert neues Keyword
+- Nutzer wünscht **ein konkret noch nicht recherchiertes** Keyword zum Test. Stichprobe aus originalem PSTE-Diagnoseexport `pste-gesamtdiagnose-2026-11-13.json` geprüft: Er zählt 5.020 Themen, listet aber nur 14 Beispiel-Einträge statt aller Keywords. Ein garantiert neuer Begriff ist daraus **nicht beweisbar**. Keine Behauptung einer vollständigen Gegenprüfung.
+- **Konkreter Recherchetest-Vorschlag:** `Fliegendecke Pferd scheuert an der Schulter`. Volltextsuche im verfügbaren Diagnoseexport negativ, jedoch ohne vollständigen Keywordpool kein Ausschluss früherer Recherche.
+- Wichtige offene Produktergänzung: Texterstellung muss den bestehenden Keyword-Pool samt Recherchestatus vor neuer Recherche verlässlich anzeigen/abgleichen, ohne Datenverlust oder doppelte fachliche SEO-Freigabe. Plugin/Live unverändert.
