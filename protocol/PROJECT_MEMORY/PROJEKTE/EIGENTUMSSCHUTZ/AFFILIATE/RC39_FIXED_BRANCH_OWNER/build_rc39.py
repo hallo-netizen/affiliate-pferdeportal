@@ -45,6 +45,9 @@ with ZipFile(BytesIO(raw)) as source:
             'hausrat'=>array('hausratversicherung'),
             'wohngebaude'=>array('wohngebaudeversicherung'),
             'wohngebaeude'=>array('wohngebaudeversicherung'),
+            'wohngebaeudeversicherung'=>array('wohngebaudeversicherung'),
+            'berufsunfaehigkeit'=>array('berufsunfaehigkeitsversicherung'),
+            'berufsunfaehigkeitsversicherung'=>array('berufsunfahigkeitsversicherung'),
             'grundbesitzer haftpflicht'=>array('haus und grundbesitzerhaftpflichtversicherung'),
         );
         $original_all=$all;
@@ -52,6 +55,31 @@ with ZipFile(BytesIO(raw)) as source:
             if(preg_match('/(?<![a-z0-9])'.preg_quote($literal,'/').'(?![a-z0-9])/u',$original_all)){
                 foreach($expanded as $variant)$all.=' '.$this->output_text($variant);
             }
+        }
+        // Fixed groups are product identities, NOT extra decision owners.
+        // Multiple different special insurance products must not silently
+        // become a broad parent advertisement when no specific R3 exists.
+        $product_identity_groups=array(
+            'car'=>array('autoversicherung','kfz versicherung','kraftfahrzeugversicherung'),
+            'motorcycle'=>array('motorradversicherung'),
+            'household'=>array('hausratversicherung'),
+            'building'=>array('wohngebaudeversicherung','wohngebaeudeversicherung'),
+            'private_liability'=>array('privathaftpflichtversicherung'),
+            'legal'=>array('rechtsschutzversicherung'),
+            'private_health'=>array('private krankenversicherung','pkv'),
+            'occupational_disability'=>array('berufsunfahigkeitsversicherung','berufsunfaehigkeitsversicherung'),
+            'travel'=>array('reiseversicherung'),
+        );
+        $distinct_specials=array();
+        foreach($product_identity_groups as $product_id=>$forms){
+            foreach($forms as $form){
+                if(preg_match('/(?<![a-z0-9])'.preg_quote($form,'/').'(?![a-z0-9])/u',$all)){
+                    $distinct_specials[$product_id]=true;break;
+                }
+            }
+        }
+        if(count($distinct_specials)>1){
+            return array('status'=>'blocked','reason'=>'Conflicting specific insurance names');
         }
         // Never allow credit, shopping, energy, or financing masquerading as insurance.""")
     # Existing exact R2/R3 full phrase match remains FIRST priority. If
