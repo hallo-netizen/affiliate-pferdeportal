@@ -1,7 +1,7 @@
 name: Pferde Atelier eBay heartbeat
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '*/5 * * * *'
   workflow_dispatch:
   pull_request:
     paths:
@@ -9,7 +9,6 @@ on:
 
 permissions:
   contents: read
-  actions: write
 
 concurrency:
   group: pferde-atelier-ebay-heartbeat
@@ -38,21 +37,22 @@ jobs:
           endpoint=re.search(r"^\s*URL='([^']+)'$",s,re.M)
           endpoint_ok=bool(endpoint and endpoint.group(1)=='https://pferde-atelier.de/wp-json/affiliate-zentrale/v1/ebay/tick')
           checks={
-              'safety_schedule_15m': "cron: '*/15 * * * *'" in s,
-              'timeout_safe_window': 'MAX_TICKS=30' in s and 'timeout-minutes: 60' in s,
-              'minute_ticks': 'sleep 60' in s,
+              'single_schedule_5m': "cron: '*/5 * * * *'" in s,
+              'timeout_safe_window': 'MAX_TICKS=4' in s and 'timeout-minutes: 10' in s,
+              'minute_ticks': 'sleep 30' in s,
               'post_only': '--request POST' in s,
               'bounded_http': '--max-time 45' in s,
               'fixed_keyless_endpoint': endpoint_ok,
               'five_failures_then_stop': 'MAX_CONSECUTIVE_FAILURES=5' in s,
               'v2_contract_only': "external_tick_v2" in s,
-              'v2_active_states_only': bool(re.search(r'^\s+advanced\|busy\|retryable_error\)\s*$',s,re.M)),
+              'v2_active_states_only': "advanced|busy|retryable_error|active_idle)" in s,
+              'idle_not_terminal': "idle|throttled)" in s and "completed|failed|disabled)" in s,
+              'idle_diagnostic': "ebay_idle_diag run_status=" in s,
               'bom_safe_json': "decode('utf-8-sig')" in s,
               'cache_buster_and_no_store': '?heartbeat=${GITHUB_RUN_ID}' in s and "--header 'Cache-Control: no-store'" in s,
               'stale_response_guard': 'last_server_time' in s and 'stale heartbeat response' in s,
-              'self_dispatch': '/actions/workflows/pferde-atelier-ebay-heartbeat.yml/dispatches' in s,
-              'self_dispatch_ref_main': '\"ref\":\"main\"' in s,
               'no_overlap': 'cancel-in-progress: false' in s,
+              'no_self_dispatch': not re.search(r'^\s*dispatch_url=',s,re.M),
               'heartbeat_not_on_pr': "if: github.event_name != 'pull_request'" in s,
           }
           for k,v in checks.items(): print(('PASS ' if v else 'FAIL ')+k)
@@ -63,19 +63,16 @@ jobs:
   heartbeat:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 10
     steps:
       - name: Keep the active canonical eBay run moving
         shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           set -u
           URL='https://pferde-atelier.de/wp-json/affiliate-zentrale/v1/ebay/tick'
-          MAX_TICKS=30
+          MAX_TICKS=4
           MAX_CONSECUTIVE_FAILURES=5
           consecutive_failures=0
-          active_seen=0
           last_server_time=0
 
           for n in $(seq 1 "$MAX_TICKS"); do
@@ -100,8 +97,11 @@ jobs:
               allowed={'advanced','busy','retryable_error','completed','failed','disabled','idle','throttled'}
               if s not in allowed or c!='external_tick_v2' or not isinstance(t,int) or t<=0:
                   raise ValueError('invalid external_tick_v2 response')
-              # Availability may yield "idle" even while the canonical research run stays active.
-              if s=='idle' and d.get('reason')=='availability_tick' and d.get('run_status') in ('running','paused'):
+              # Idle is not proof that a stored canonical run has completed.
+              if s=='idle':
+                  safe=lambda v: ''.join(ch for ch in str(v or '') if ch.isalnum() or ch in '_-')[:64]
+                  print(f"ebay_idle_diag run_status={safe(d.get('run_status'))} phase={safe(d.get('phase'))} reason={safe(d.get('reason'))}",file=sys.stderr)
+              if s=='idle' and d.get('run_status') in ('running','paused'):
                   s='active_idle'
               print(f"{s} {t}")
           except Exception:
@@ -124,17 +124,13 @@ jobs:
                 consecutive_failures=0
                 echo "heartbeat $n status=$status server_time=$server_time"
                 case "$status" in
-                  idle|completed|failed|disabled)
+                  completed|failed|disabled)
                     echo "terminal heartbeat status=$status; no successor runner required"
                     exit 0
                     ;;
-                  throttled)
+                  idle|throttled)
                     ;;
-                  advanced|busy|retryable_error)
-                    active_seen=1
-                    ;;
-                  active_idle)
-                    active_seen=1
+                  advanced|busy|retryable_error|active_idle)
                     ;;
                 esac
               fi
@@ -144,25 +140,7 @@ jobs:
               echo 'five consecutive heartbeat failures; stop this runner and let the safety schedule retry later'
               exit 1
             fi
-            if [ "$n" -lt "$MAX_TICKS" ]; then sleep 60; fi
+            if [ "$n" -lt "$MAX_TICKS" ]; then sleep 30; fi
           done
 
-          if [ "$active_seen" -eq 1 ]; then
-            dispatch_url="https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/pferde-atelier-ebay-heartbeat.yml/dispatches"
-            for attempt in 1 2 3; do
-              dispatch_code=$(curl --silent --show-error --output "dispatch-$attempt.json" --write-out '%{http_code}' --request POST --max-time 30 \
-                --header 'Accept: application/vnd.github+json' \
-                --header "Authorization: Bearer ${GH_TOKEN}" \
-                --header 'X-GitHub-Api-Version: 2022-11-28' \
-                --data '{"ref":"main"}' \
-                "$dispatch_url" || true)
-              if [ "$dispatch_code" = '204' ]; then
-                echo 'successor heartbeat runner dispatched'
-                exit 0
-              fi
-              echo "successor dispatch attempt $attempt failed http=${dispatch_code:-none}"
-              sleep 10
-            done
-            echo 'successor dispatch failed after three attempts; safety schedule remains available'
-            exit 1
-          fi
+          echo 'heartbeat work window complete; next scheduled run continues the same stored eBay cursor'
