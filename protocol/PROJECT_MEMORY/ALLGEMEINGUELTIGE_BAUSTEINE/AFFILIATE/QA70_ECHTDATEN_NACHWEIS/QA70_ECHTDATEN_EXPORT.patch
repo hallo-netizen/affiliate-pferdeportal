@@ -1,0 +1,226 @@
+diff -ruN base/affiliate-portal-router/includes/trait-ppar-automation-suite.php src/affiliate-portal-router/includes/trait-ppar-automation-suite.php
+--- base/affiliate-portal-router/includes/trait-ppar-automation-suite.php	2026-11-14 14:25:08.000000000 +0000
++++ src/affiliate-portal-router/includes/trait-ppar-automation-suite.php	2026-11-14 14:33:41.997501884 +0000
+@@ -4235,7 +4235,7 @@
+ 
+         // Provider-worker routing only: do not create a second source sync or rescan
+         // the entire creative pool. Never interrupt an older in-progress pool run.
+-        if (in_array(self::VERSION, array('6.72.336','6.72.337','6.72.339','6.72.340','6.72.341','6.72.342','6.72.343','6.72.344','6.72.345','6.72.346','6.72.347','6.72.348'), true)) {
++        if (in_array(self::VERSION, array('6.72.336','6.72.337','6.72.339','6.72.340','6.72.341','6.72.342','6.72.343','6.72.344','6.72.345','6.72.346','6.72.347','6.72.348','6.72.349'), true)) {
+             if (strpos($state, 'running:') === 0 || get_option(self::OPTION_FULL_POOL_AUTOMATION_CURSOR, null) !== null) { return; }
+             update_option(self::OPTION_FULL_POOL_AUTOMATION_VERSION, self::VERSION, false);
+             return;
+diff -ruN base/affiliate-portal-router/includes/trait-ppar-ebay-run.php src/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+--- base/affiliate-portal-router/includes/trait-ppar-ebay-run.php	2026-11-14 14:25:08.000000000 +0000
++++ src/affiliate-portal-router/includes/trait-ppar-ebay-run.php	2026-11-14 14:36:18.545506531 +0000
+@@ -1006,7 +1006,9 @@
+             ? sanitize_text_field((string)wp_unslash($_POST['run_uuid'])) : '';
+         $format = isset($_POST['format']) && is_scalar($_POST['format'])
+             ? sanitize_key((string)wp_unslash($_POST['format'])) : 'csv';
+-        if (!in_array($format,array('csv','json'),true)) { wp_die('Format unbekannt.',400); }
++        if (!in_array($format,array('csv','json','evidence'),true)) { wp_die('Format unbekannt.',400); }
++        // One existing protected export entry, no new route/worker/cron.
++        if ($format === 'evidence') { $this->ebay_evidence_export_read_only($uuid); exit; }
+         $index = get_option('ppar_ebay_audit_run_index_v1', array());
+         $index = is_array($index) ? $index : array();
+         $current = $this->ebay_run_load();
+@@ -1074,6 +1076,150 @@
+         exit;
+     }
+ 
++    /** QA70: read-only admin export of EXISTING persisted eBay decision inputs.
++     * No remote getItem requests, no data update or WP-Cron. Historical HTTP
++     * replies cannot be reconstructed if they were never persisted.
++     */
++    private function ebay_evidence_export_read_only($requested_uuid) {
++        if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.',403); }
++        $run = $this->ebay_run_load();
++        $uuid = (string)($run['run_uuid'] ?? '');
++        if ($uuid === '' || !in_array($requested_uuid, array('', 'current', $uuid), true)) {
++            wp_die('Nur der aktuelle, bereits gespeicherte Lauf kann exportiert werden.',400);
++        }
++        global $wpdb;
++        if (!is_object($wpdb) || !method_exists($wpdb,'get_results') || !method_exists($wpdb,'prepare')) {
++            wp_die('WordPress-Datenbank nicht verfügbar.',500);
++        }
++        if (function_exists('nocache_headers')) { nocache_headers(); }
++        header('Content-Type: application/x-ndjson; charset=utf-8');
++        header('Content-Disposition: attachment; filename="pferdeatelier-ebay-echtdaten-'.substr(hash('sha256',$uuid),0,12).'.ndjson"');
++        header('X-Content-Type-Options: nosniff');
++        header('Cache-Control: no-store');
++        $out = fopen('php://output', 'w');
++        if (!$out) { exit; }
++        $checkpoint = $this->ebay_public_checkpoint_load();
++        $run_before = hash('sha256', serialize($run));
++        $checkpoint_before = hash('sha256', serialize($checkpoint));
++        $this->ebay_evidence_emit($out,'meta',array(
++            'schema'=>'ebay_persisted_snapshot_v1','run_uuid'=>$uuid,
++            'plugin_version'=>self::VERSION,'captured_at'=>time(),
++            'source'=>'read_only_wordpress_persisted_data',
++            'historical_http_answers_included'=>false,
++            'read_only'=>true));
++        $this->ebay_evidence_emit($out,'run_state',$run);
++        $this->ebay_evidence_emit($out,'public_checkpoint',$checkpoint);
++        $settings=$this->ebay_settings();
++        $this->ebay_evidence_emit($out,'settings_contract',array(
++            'marketplace_id'=>$settings['marketplace_id'] ?? '',
++            'business_enabled'=>!empty($settings['business_enabled']),
++            'catalog_verified_sha256'=>$settings['catalog_verified_sha256'] ?? '',
++            'rules'=>$settings['rules'] ?? array()));
++        // Bundled canonical target catalogue is part of this very plugin, not a second rule engine.
++        $catalog = $this->ebay_portal_catalog();
++        if (!is_wp_error($catalog)) {
++            $this->ebay_evidence_emit($out,'catalog',array(
++                'source_sha256'=>$catalog['source_sha256'] ?? '',
++                'counts'=>$catalog['counts'] ?? array(),
++                'business_concepts'=>$catalog['business_concepts'] ?? array(),
++                'business_hub_concepts'=>$catalog['business_hub_concepts'] ?? array(),
++                'search_rules'=>$catalog['search_rules'] ?? array()));
++        }
++        $errors=array();$counts=array();$post_ids=array();
++        $specs=array(
++            array('item','ebay_items_table',"seller_account_type='BUSINESS'",
++                'id,item_id,legacy_item_id,seller_account_type,rule_id,target_term_id,listing_post_id,creative_identity_hash,title,short_description,condition_text,price_value,currency,shipping_value,item_web_url,image_url,item_end_at,source_hash,source_payload,status,source_state,policy_state,route_state,output_state,policy_version,classifier_version,source_checked_at,rejection_reason,last_seen,fresh_until,created_at,updated_at'),
++            array('output','output_objects_table',"provider='ebay'",
++                'id,object_key,portal_key,creative_identity_hash,provider,partner_external_id,output_type,target_type,target_key,target_label,slot_id,status,confidence,decision_source,decision_reason,campaign_post_id,listing_post_id,tracking_url,image_url,image_width,image_height,image_hash,source_fingerprint,payload,last_verified,created_at,updated_at'),
++            array('creative','creative_library_table',"provider='ebay'",
++                'id,provider,external_id,identity_hash,creative_type,title,description,tags,image_url,width,height,source_status,source_kind,availability_state,missing_count,last_complete_run,review_status,selected,content_scope,scope_source,classified_at,topic_status,topic_score,topic_targets,source_hash,payload,first_seen,last_seen'),
++            array('manual_decision','output_portal_decisions_table',
++                "creative_identity_hash IN (SELECT identity_hash FROM {$this->creative_library_table()} WHERE provider='ebay')",
++                'id,portal_key,creative_identity_hash,manual_status,reason,created_at,updated_at'),
++        );
++        foreach($specs as $spec){
++            list($kind,$method,$condition,$columns)=$spec;
++            $table=$this->$method(); $last=0; $counts[$kind]=0;
++            // ID-cursor streaming avoids loading the whole catalogue into memory.
++            for($batch=0;$batch<250;$batch++){
++                $sql=$wpdb->prepare("SELECT {$columns} FROM {$table} WHERE {$condition} AND id>%d ORDER BY id ASC LIMIT 200",$last);
++                $rows=$wpdb->get_results($sql,ARRAY_A);
++                if(!is_array($rows) || (string)($wpdb->last_error ?? '') !== ''){
++                    $errors[]=$kind.'_database_read_failed';break;
++                }
++                if(!$rows){break;}
++                foreach($rows as $row){
++                    if(absint($row['id']??0)<=$last){$errors[]=$kind.'_cursor_invariant_failed';break 2;}
++                    $last=absint($row['id']);
++                    foreach(array('source_payload','payload','topic_targets') as $field){
++                        if(!isset($row[$field]) || !is_string($row[$field])){continue;}
++                        $decoded=json_decode($row[$field],true);
++                        if(json_last_error()===JSON_ERROR_NONE){$row[$field]=$decoded;}
++                    }
++                    if($kind==='output'){
++                        // Reproducible tracking evidence without exporting private affiliate query strings.
++                        $row['tracking_url_sha256']=hash('sha256',(string)($row['tracking_url']??''));
++                        unset($row['tracking_url']);
++                        $post_id=absint($row['campaign_post_id']??0);
++                        if($post_id){$post_ids[$post_id]=true;}
++                    }
++                    $this->ebay_evidence_emit($out,$kind,$row);
++                    $counts[$kind]++;
++                }
++                if(count($rows)<200){break;}
++            }
++            if($batch>=250){$errors[]=$kind.'_export_limit_reached';}
++        }
++        foreach((array)($checkpoint['business_campaign_ids']??array()) as $id){
++            $id=absint($id);if($id){$post_ids[$id]=true;}
++        }
++        // Actual WordPress public post state for every checkpoint/output campaign.
++        $counts['post']=0;
++        foreach(array_chunk(array_keys($post_ids),200) as $ids){
++            $marks=implode(',',array_fill(0,count($ids),'%d'));
++            $sql=$wpdb->prepare("SELECT ID,post_type,post_status,post_title,post_name,post_modified_gmt FROM {$wpdb->posts} WHERE ID IN ({$marks})",...$ids);
++            $rows=$wpdb->get_results($sql,ARRAY_A);
++            if(!is_array($rows) || (string)($wpdb->last_error ?? '') !== ''){$errors[]='posts_database_read_failed';break;}
++            foreach($rows as $row){$this->ebay_evidence_emit($out,'post',$row);$counts['post']++;}
++        }
++        // A post can be missing; this is a fact the replay must be able to detect.
++        $counts['referenced_post_ids']=count($post_ids);
++        $after=$this->ebay_run_load();$check_after=$this->ebay_public_checkpoint_load();
++        $run_stable=hash_equals($run_before,hash('sha256',serialize($after)));
++        $checkpoint_stable=hash_equals($checkpoint_before,hash('sha256',serialize($check_after)));
++        if(!$run_stable || !$checkpoint_stable){$errors[]='snapshot_changed_during_export';}
++        $this->ebay_evidence_emit($out,'end',array(
++            'run_uuid'=>$uuid,'counts'=>$counts,'read_errors'=>$errors,
++            'run_unchanged_during_export'=>$run_stable,
++            'checkpoint_unchanged_during_export'=>$checkpoint_stable,
++            'snapshot_complete'=>empty($errors),
++            'original_ebay_http_responses_recoverable'=>false,
++            'full_one_to_one_live_acceptance'=>false));
++        fclose($out);
++        exit;
++    }
++
++    /** Only allow safe source facts into a private user-initiated export.
++     * Never copy API credentials, HTTP authentication or customer addresses. */
++    private function ebay_evidence_redact($value,$depth=0){
++        if($depth>24){return '[NESTING_LIMIT]';}
++        if(!is_array($value)){return is_object($value)?'[OBJECT]':$value;}
++        $out=array();
++        foreach($value as $key=>$data){
++            $label=strtolower((string)$key);
++            if($label==='tracking_url' || $label==='affiliate_url' || preg_match('/(?:secret|password|passphrase|token|authorization|cookie|credential|api_key|api[-_]?key|client_id|access_key|refresh_key|email|phone|buyer|customer|postal|address|seller_username)/i',$label)){
++                $out[$key]='[REDACTED]';continue;
++            }
++            $out[$key]=$this->ebay_evidence_redact($data,$depth+1);
++        }
++        return $out;
++    }
++
++    private function ebay_evidence_emit($out,$kind,$data){
++        fwrite($out,wp_json_encode(array('kind'=>$kind,'data'=>$this->ebay_evidence_redact($data)),
++            JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_INVALID_UTF8_SUBSTITUTE)."\n");
++    }
++
+     private function ebay_audit_export_row($out, $row, $columns, $format) {
+         if ($format === 'json') { fwrite($out,wp_json_encode($row,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)."\n"); return; }
+         $cells = array();
+diff -ruN base/affiliate-portal-router/includes/trait-ppar-ebay.php src/affiliate-portal-router/includes/trait-ppar-ebay.php
+--- base/affiliate-portal-router/includes/trait-ppar-ebay.php	2026-11-14 14:25:08.000000000 +0000
++++ src/affiliate-portal-router/includes/trait-ppar-ebay.php	2026-11-14 14:33:41.989044605 +0000
+@@ -11260,6 +11260,7 @@
+                   <?php wp_nonce_field('ppar_ebay_audit_export','ppar_ebay_nonce'); ?>
+                   <button class="button button-primary" name="format" value="csv">Lauf- und Fehlerprotokoll (CSV)</button>
+                   <button class="button" name="format" value="json">Vollprotokoll (JSON)</button>
++                  <button class="button" name="format" value="evidence">Echte Produktdaten für Gesamtprüfung (nur lesen)</button>
+                 </form>
+                 <?php $ppar_audit_write_error=absint(get_option('ppar_ebay_audit_write_error_v1',0)); ?>
+                 <?php if ($ppar_audit_write_error) : ?><p class="notice notice-error inline"><strong>Achtung:</strong> Ein Protokoll-Speichervorgang ist fehlgeschlagen. Historische Einträge bitte nicht als vollständig betrachten.</p><?php endif; ?>
+diff -ruN base/affiliate-portal-router/pferdeportal-affiliate-router.php src/affiliate-portal-router/pferdeportal-affiliate-router.php
+--- base/affiliate-portal-router/pferdeportal-affiliate-router.php	2026-11-14 14:25:08.000000000 +0000
++++ src/affiliate-portal-router/pferdeportal-affiliate-router.php	2026-11-14 14:33:42.004476310 +0000
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
+  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
+- * Version: 6.72.348
++ * Version: 6.72.349
+  * Author: OpenAI
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -120,7 +120,7 @@
+     use PPAR_DFS_Amazon_Trait;
+     use PPAR_Digistore24_Trait;
+     use PPAR_Housekeeping_Trait;
+-    const VERSION = '6.72.348';
++    const VERSION = '6.72.349';
+     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
+     const CONTRACT_VERSION = '1.0';
+     const PROVIDER_CONTRACT_VERSION = '2.0';
+diff -ruN base/affiliate-portal-router/readme.txt src/affiliate-portal-router/readme.txt
+--- base/affiliate-portal-router/readme.txt	2026-11-14 14:25:08.000000000 +0000
++++ src/affiliate-portal-router/readme.txt	2026-11-14 14:33:42.008216309 +0000
+@@ -1,3 +1,4 @@
++V6.72.349 QA: one-click read-only current-run saved source/item/output/creative/catalogue/checkpoint export through existing admin post. No new worker, cron, table, eBay request, publication or edit. Historical missing provider API replies cannot be recovered; no live acceptance.
+ V6.72.348 NUR QA: eBay-Vollsync nach abgeschlossener Suche ohne zweite globale Bestandsrunde direkt zur Auswahl; gezielte Frischeprüfung ausgewählter Quellen und finale öffentliche Freigabe unverändert. Die Versionen 6.72.345–347 lösen keinen ungewollten gesamten Werbemittelpool-Sync wegen des Pluginversionswechsels aus. Alle anderen Prozesse unverändert. Live noch nicht abgenommen.
+ V6.72.344 NUR QA: bereits ausgewählte BUSINESS-Artikel mit abgelaufener 6h-Frische werden vor Materialisierung einzeln über die EXISTIERENDE getItem-/Availability-Methode bestätigt; höchstens eine nachgeprüfte Quelle je Worker-Takt, nur ein begrenzter Transport-Retry, danach weiter mit bestehenden Sicherheits-/Familien-/Public-Gates. Alte sichere Publikationen bleiben getrennt. Kein neuer Worker/Cron/Tabelle/Suchprofil. WP/eBay live nicht abgenommen.
+ V6.72.343 QA54 WORKER-REGAL TEST: eBay-Verfuegbarkeitspruefung aendert keine Produktauswahl; Werbemittelplanung mit einmaliger Portal-/Partnerentscheidung; gleiche eBay-Public-Quellenpruefung fuer inkrementelle und finale Freigaben; atomare Freigabeliste gegen paralleles Ueberschreiben. Bestehender Kanonischer eBay-Worker, bestehende WP-Cron-Verfuegbarkeitspruefung und vorhandene Datenhaltung. Alle sieben bisherigen lokalen Gesamtfaelle erneut geprueft, WP-/eBay-Dienste nachgestellt. Keine vier neuen autonomen Worker, keine neue Tabelle, keine zusaetzliche Automatik, keine Live-Abnahme. NUR ISOLIERTE TESTSEITE.
+@@ -91,7 +92,7 @@
+ V6.72.236 TEST: Backend-Portalabdeckung hat bisher 329 Ziele x 3 LIVE-Router-Auswahlen synchron ausgefuehrt; jetzt acht Ziele pro Request und vollstaendiger JSON-Export in begrenzten Lesebloecken. PRIVATE-HivePress-Stale-Filter kehrt auf normalen Seiten sofort zurueck; BUSINESS-Checkpoint scannt bei abgeschaltetem PRIVATE keine alten PRIVATE-HivePress-Importe mehr. Kein neuer Worker, keine DB-Tabelle, keine Provider-/Ranking-/BUSINESS-Aenderung. Lokale PHP-/JavaScript-/Mock-Pruefungen, KEINE WP/MariaDB-Host-Abnahme.
+ V6.72.234 TEST: Direkter Rueckbau eBay-PRIVATE aus Affiliate-Zentrale 6.72.233: alte automatische Admin-Init-Loeschung, PRIVATE-HivePress-Backendfunktionen, PRIVATE-Kategorieanlage, PRIVATE-Discovery und PRIVATE-Bedienfelder entfernt. Angehende INDIVIDUAL-Datensaetze werden auch aus alten Laufplaenen hart abgewiesen. BUSINESS/Idealo/Artikel/Banner unveraendert. Bestehende PRIVATE-DB-Altlasten werden durch das Installieren NICHT automatisch geloescht; keine unkontrollierten Datenbankaktionen. Nur Testinstallation; kein behaupteter WordPress-/MariaDB-Livepass.
+ V6.72.233: PRIVATE-only Aufraeumweg ueber admin_init reaktiviert (kein Frontend/AJAX); alter falscher Complete-Marker wird nachverarbeitet; Abschluss erst bei tatsaechlich geleerter Unterkategorie-Struktur. PRIVATE-Neuanlage gesperrt. BUSINESS/idealo/Artikelunveraendert.
+-Stable tag: 6.72.348
++Stable tag: 6.72.349
+ V6.72.232 SICHERHEITSSTOPP: Automatischer PHP-init-Loeschlauf der 6.72.231 entfernt; PRIVAT-eBay bleibt abgeschaltet und im oeffentlichen HivePress-Filter gesperrt; keine eigenstaendige Datenbankbereinigung, keine Datenrestauration.
+ V6.72.230 PRIVATE-EBAY-ENTFERNUNG: PRIVATE-Verkaeuferroute bleibt zwingend aus; auf Adminaufrufen werden ausschliesslich eBay-markierte HivePress-Importanzeigen kontrolliert in den Papierkorb verschoben, manuelle Anzeigen vor Entfernung der Unterkategorien der Hauptkategorie Private Anzeigen zugeordnet. Alle Unterkategorien werden geloescht, Stammkategorie und native Anzeigen bleiben. Die PRIVAT-HivePress-Frontend-/Preview-Hooks und Einrichtungsoberflaeche sind abgekoppelt; BUSINESS, idealo, Artikel, Banner, Kategorien der Redaktion, CSS/JS bleiben unveraendert. Idempotente, zeitbegrenzte Bereinigung ohne neuen Cron/Runner; Fortschritt in der eBay-Fachseite.
+ V6.72.226 PRODUKTAUSGABE KISS (LOKALER TESTKANDIDAT): Stellt die vertragliche Reihenfolge exakt -> weiterer Themenkreis -> zuletzt nur bestaetigt freigegebene Pferdeprodukte wieder her. Kategorie-/Hub-/Journal-Produktplaetze werden bei zu wenigen Treffern nur aus dem vorhandenen indexierten Kampagnenbestand ergaenzt. Auf normalen Einzelbeitraegen bleibt exakt verlangte Produktidentitaet strikt; fuer allgemeine Beitraege werden zuletzt gepruefte eBay-/idealo-Angebote zugelassen. Anbieter koennen innerhalb derselben Relevanzstufe gemischt werden; spaetere Amazon-Einbindung bleibt getrennt. Bestehende Sperren fuer eBay-BUSINESS-Quelle, private Anzeigen, Quelle, Health, Veto, Bild, Partner und idealo-48h-Grenze bleiben aktiv. Der vorhandene idealo-Hintergrundrefresh muss veraltete unveraenderte Feeds vollstaendig neu pruefen, statt dauerhaft per Hash abzubrechen. Kein Umbau von Imports, Renderer, Kategorien, Bannern, Provideradaptern, Tracking, Datenbanktabellen oder Template. Keine neue Frontend-Providerabfrage. Tests sind lokale Funktionssimulation; kein behaupteter Live-/WP-/MariaDB-PASS.
