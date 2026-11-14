@@ -113,7 +113,9 @@ def edit_refresh(block):
     old="""        $s=$this->idealo_settings();
         if ($metadata_first) {"""
     new="""        $s=$this->idealo_settings();
-        $rematch_required=(string)($s['last_match_revision']??'')!==$this->idealo_match_contract_revision();
+        $rematch_required=(string)($s['last_match_revision']??'')!==$this->idealo_match_contract_revision()
+            || (string)($s['last_import_feed_id']??'')!==(string)($s['feed_id']??'')
+            || (string)($s['last_import_adspace_id']??'')!==(string)($s['adspace_id']??'');
         if ($metadata_first) {"""
     assert block.count(old)==1
     block=block.replace(old,new,1)
@@ -157,7 +159,9 @@ def edit_schedule(block):
     new="""        $s=$this->idealo_settings(); $source_ready=$this->hd_idealo_feed_source_ready($s);
         $wanted=!empty($s['auto_refresh'])&&$source_ready;
         $needs_rule_refresh=!empty($s['enabled']) && $source_ready && absint($s['last_import_at']??0)>0
-            && (string)($s['last_match_revision']??'')!==$this->idealo_match_contract_revision();
+            && ((string)($s['last_match_revision']??'')!==$this->idealo_match_contract_revision()
+                || (string)($s['last_import_feed_id']??'')!==(string)($s['feed_id']??'')
+                || (string)($s['last_import_adspace_id']??'')!==(string)($s['adspace_id']??''));
         if ($needs_rule_refresh && function_exists('wp_schedule_single_event')
             && !wp_next_scheduled(self::IDEALO_MANUAL_REFRESH_HOOK)
             && (time()-absint($s['match_rebuild_requested_at']??0))>=12*HOUR_IN_SECONDS) {
