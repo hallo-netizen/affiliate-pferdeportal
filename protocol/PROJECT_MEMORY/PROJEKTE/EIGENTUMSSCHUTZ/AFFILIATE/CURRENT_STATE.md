@@ -1,3 +1,20 @@
+## 14.11.2026 – RC43 LIVE-BANNER 160/160, VOLLSTÄNDIGE ZIP JETZT IM HAB-004-PLUGINBÜRO ARCHIVIERT
+
+**Echter WordPress-Nutzernachweis (Screenshot vom 14.11.2026 um 14:38 Uhr):** „Werbemittel & Ausspielung“ zeigt **160 Banner gefunden, 160 aktiv, 160 Bilder geprüft, 0 ohne Ziel, 0 Ausgabe fehlt, 0 Ausgabe gesperrt, 0 Bildfehler und 0 blockiert**. Die Diagnose meldet „Alle gefundenen Banner sind gespeichert und veröffentlicht.“ Damit wurde der frühere Live-Fehler (80/80) **nach RC43 tatsächlich behoben**. Eine gesonderte Sichtprüfung einer öffentlichen Versicherungsseite wurde **noch nicht durchgeführt**; der Backend-Status allein beweist noch nicht die konkrete Platzierung im Frontend.
+
+**Installierte/freigegebene vollständige HAB-004 Affiliate-Zentrale:** Plugin **0.1.40-rc43**. **Zwei exakt identische echte Git-Binärdateien im offiziellen Plugin-Büro**, jeweils 2.361.375 Bytes, 36 ZIP-Einträge, SHA256 `7e9a92fa2ee5ac93c6dce8bd4924858d661478921b6768c2103172845ed9e2e8`:
+- **Offizieller aktueller Stand:** `ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip`
+- **Feste versionsgebundene Sicherung:** `ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/HAB_AFFILIATE_RC43_0.1.40-rc43.zip`
+Die Dateien sind **im Repository selbst** eingecheckt, nicht nur als Release-Link oder bloßer Vermerk. Original-Release als unabhängiger Download: https://github.com/hallo-netizen/affiliate-pferdeportal/releases/tag/hab-affiliate-rc43-real-160-source-deep-mapping-20261114 .
+
+**Nachweis der Archivierung:** https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43601163695 (SUCCESS). Die Git-Dateien beider ZIPs sind 2.361.375 Bytes groß und identisch; Archiv-/SHA-/36-Einträge-Prüfung bestanden. Die bisherige historische Originalversion RC22 bleibt separat als `HAB_AFFILIATE_RC22_0.1.19-rc22.zip` unverändert erhalten. Der bestehende historische Build `AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py` liest nun ausdrücklich **nur diese eingefrorene RC22-Versionsdatei** als Baubasis und schreibt wie bisher temporär in `CURRENT.zip` im CI-Arbeitsverzeichnis. Dadurch bleibt der vollständige RC23–RC43-Bau reproduzierbar, während im offiziellen Büro dauerhaft RC43 als `CURRENT.zip` liegt. Ein separater RC23-Neubau inkl. vorhandener Original-QA hat im Archivierungsjob bestanden.
+
+**Ursache und Lösung:** Alle 80 zuvor blockierten Originalbanner hatten schon ein eindeutig gespeichertes `deep=`-Versicherungsprodukt. Keine fehlenden Kategorien und keine fehlende Originalinformation. Der zentrale Entscheider erkannte 10 vorhandene Produktbezeichnungen nicht als Alias eines vorhandenen R2-/R3-Ziels. RC43 hat exakt diese 10 Gruppen (je 8 Formate) EINMAL im bestehenden Backend fachlich zugeordnet, keine nachgelagerte Zweitprüfung, keine zusätzliche Tabelle/Worker/Frontend-Logik und kein Neuimport. RC43 vollständige echte PHP-Tests 160/160 PASS: https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43598368122. Ein anderes historisch festgestelltes Problem mit entfernten HTML-Attributen bleibt durch RC41s bereits integrierten Vorab-Import-Fix für zukünftige Originale abgesichert, war aber **nicht Ursache der 80 aktuellen Zielprobleme**.
+
+**Nächster fachlicher Schritt:** Kein neues Plugin für die bereits behobene Ziellücke. Nur die **Sichtbarkeit eines konkreten vorhandenen Bannerplatzes auf einer öffentlichen Versicherungsseite** kontrollieren (Backend-„aktiv“/„veröffentlicht“ von wirklicher Bildschirmdarstellung unterscheiden). Wenn bereits sichtbar, Tarifcheck-Arbeit abschließen. Falls nicht, ausschließlich den bestehenden Anzeigenplatz prüfen, keine erneute Kategorie-/Importentwicklung.
+
+---
+
 ## 14.11.2026 – RC43: ECHTER EXPORT BEWEIST URSACHE DER 80 BLOCKADEN; VOLLSTÄNDIGE PHP-QA BESTANDEN
 
 **ECHTER WORDPRESS-BESTAND:** Nutzer-Export `hab-tarifcheck-bestandspruefung-20261114-130255.json`: 160 Tarifcheck-Banner, 80 auto_verified, 80 no_match; 2.599 aktive verifizierte WP-Knoten, davon Versicherung mit 5 R2 und 46 R3; 300 gespeicherte Ausgabeobjekte (80 published, 80 review, 140 superseded).
