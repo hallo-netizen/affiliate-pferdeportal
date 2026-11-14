@@ -71,6 +71,7 @@ jobs:
           MAX_TICKS=4
           MAX_CONSECUTIVE_FAILURES=5
           consecutive_failures=0
+          active_seen=0
           last_server_time=0
 
           for n in $(seq 1 "$MAX_TICKS"); do
@@ -95,9 +96,12 @@ jobs:
               allowed={'advanced','busy','retryable_error','completed','failed','disabled','idle','throttled'}
               if s not in allowed or c!='external_tick_v2' or not isinstance(t,int) or t<=0:
                   raise ValueError('invalid external_tick_v2 response')
-              # Availability may yield "idle" even while the canonical research run stays active.
-              if s=='idle' and d.get('reason')=='availability_tick' and d.get('run_status') in ('running','paused'):
-                  s='active_idle'
+              # The actual saved WordPress run status wins over the generic idle label.
+              if s=='idle':
+                  wp_status=str(d.get('run_status') or '').lower()
+                  if wp_status=='running' or (wp_status=='paused' and d.get('reason')=='availability_tick'):
+                      s='active_idle'
+                  print(f"ebay_idle_status run_status={wp_status or 'missing'} phase={str(d.get('phase') or 'missing')[:50]} reason={str(d.get('reason') or 'missing')[:80]}",file=sys.stderr)
               print(f"{s} {t}")
           except Exception:
               pass
@@ -119,13 +123,22 @@ jobs:
                 consecutive_failures=0
                 echo "heartbeat $n status=$status server_time=$server_time"
                 case "$status" in
-                  idle|completed|failed|disabled)
-                    echo "terminal heartbeat status=$status; no successor runner required"
+                  idle)
+                    if [ "$active_seen" -eq 1 ]; then
+                      echo 'unexpected idle after active work: continue this bounded window'
+                    else
+                      echo 'idle, no active work in this window; next scheduled run will recheck'
+                      exit 0
+                    fi
+                    ;;
+                  completed|failed|disabled)
+                    echo "terminal heartbeat status=$status"
                     exit 0
                     ;;
                   throttled)
                     ;;
                   advanced|busy|retryable_error|active_idle)
+                    active_seen=1
                     ;;
                 esac
               fi
