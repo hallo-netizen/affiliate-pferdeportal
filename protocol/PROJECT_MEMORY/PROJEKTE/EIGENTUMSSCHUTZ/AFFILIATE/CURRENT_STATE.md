@@ -1,3 +1,17 @@
+## 14.11.2026, 10:07 – RC39 reale Abnahme unverändert 80/80; originaler Importfehler reproduziert
+
+**Reale WordPress-Bannerlage (Nutzer-Screenshots 10:00):** Tarifcheck 160 gefunden / 80 aktiv / **80 ohne Ziel** / 0 Formatfehler. RC39 brachte **keine zusätzliche Zielzuordnung**. Für die 80: `tracking_checked`, `No verified specific/general insurance`.
+
+**Neuer Beweis (OHNE Plugin-Veröffentlichung):** https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43578958808 (**SUCCESS**). Der echte RC39-HTML-Parser und Original-PHP-Entscheider wurden mit 160 **synthetischen, strukturgleichen** HTML-Links ausgeführt. 80 mit `deep=hausratversicherung` wurden erkannt; 80 ohne Versicherungsinformation im Link wurden gesperrt – mit **genau der echten Live-Fehlermeldung**. Das Einfügen einer weiteren Kategorie in den Testbaum konnte die 80 nicht retten. Ergebnisbericht: https://github.com/hallo-netizen/affiliate-pferdeportal/blob/hab-rc39-failed-80-real-html-repro-20261114/protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/RC39_REAL_HTML_REPRO/REPRO_ERGEBNIS_20261114.md
+
+**Im Code nachweisbar:** `creative_library_parse_html_codes()` kann `<img title>`/Alt leer erhalten; `creative_library_normalize_row()` ersetzt dann den Titel durch `Tarifcheck Banner`, ohne dabei für diese HTML-Importzeile `title_source=manual_missing` zu belegen. Der eine Fachentscheider kann so eine nichtssagende künstliche Bezeichnung als scheinbaren Quelltext behandeln und meldet `No verified specific/general insurance`, auch wenn keine echte Versicherung ausgelesen wurde. RC39-Namenssynonyme/-Elternzuordnung greifen erst **nach** einer erkannten Versicherungsart. Deshalb war kein Erfolg bei den 80 zu erwarten, solange der Quelldecoder den Produktbezug nicht liefert.
+
+**Grenze:** Die 160 privaten ORIGINAL-HTML-Codes sind nicht in GitHub/Uploads vorhanden; die erfolgreiche künstliche 80/80-Reproduktion beweist **nicht**, dass die 80 echten Codes keinerlei Versicherungsangaben enthalten. Auch nicht, dass alle 80 denselben fehlenden Produkt-Quellcode haben. Keine neue ZIP auf Verdacht.
+
+**Nächster Nachweis:** In der einen WordPress-Bannerablage die 80 originalen href/src-/HTML-Daten und die tatsächlich erkannten Produktangaben **read-only** aggregieren (Partner-IDs nicht veröffentlichen), gegen den aktiven Kategoriebaum abgleichen, dann gezielt **denselben einen Import-/Entscheidweg** reparieren und mit den nachgewiesenen Fallgruppen simulieren. Ziel/Format beim Import einmal entscheiden, niemals im Frontend neu klassifizieren.
+
+---
+
 ## 14.11.2026 – RC39 EIN FESTER KATEGORIE-OWNER + OBERKATEGORIE-VERERBUNG / KISS
 
 **Vom Nutzer gewünschter Entscheid:** Kategoriebestand bleibt unverändert. Stabile Versicherungsbezeichnungen werden im bereits vorhandenen Importentscheider fest zugeordnet. Existiert eine konkrete R3-Seite, wird ihre echte WP-Seite mit ihren Unterkategorien als Ziel gespeichert. Existiert sie nicht, darf die **nachweislich relevante vorhandene R2-Oberkategorie** mit ihrem vorhandenen Unterbaum übernehmen. Nur **ausdrücklich allgemeine Versicherungsvergleiche** gelangen unter die gesamte R1-Hauptkategorie mit allen Kindern; eine bloße unbekannte Tarifcheck-Werbung darf nicht automatisch zu einer allgemeinen Versicherung werden. Unterschiedliche konkrete Versicherungsprodukte bleiben getrennt. Kredite/Finanzen dürfen nicht in die Versicherungswelt.
