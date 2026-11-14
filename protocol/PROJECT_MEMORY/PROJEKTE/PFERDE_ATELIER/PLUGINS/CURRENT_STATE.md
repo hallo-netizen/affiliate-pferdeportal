@@ -2,6 +2,11 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+<!-- TEXTERSTELLUNG_KISS_FINAL_20261114_BEGIN -->
+**NEUE VERBINDLICHE BETREIBERENTSCHEIDUNG – 14.11.2026 (SOLL, keine Plugin-Freigabe):** Texterstellung exakt **WordPress Recherche/Pferd JA-NEIN → EIN gemeinsamer externer MINI-Durchlauf (Kategorie/Artikelart + Redaktionsplan inkl. Kannibalisierung/Dubletten/Abdeckungsbilanz + Titel; jeder Teilworker nur eine Zuständigkeit) → WordPress EIN Rückimport ins zentrale Auftragsregal und vollständiger K0-Auftrag → extern K0 schreibt → WordPress Entwurf importieren**. Kein doppelter externer SEO-/Titelumlauf, kein internes nachträgliches Kategorieurteil, kein separates Planungsbüro. VOLLSTÄNDIGER BETREIBER-ZIELVERTRAG: [`TEXTERSTELLUNG_KISS_ENDGUELTIGER_WORKFLOW_20261114.md`](TEXTERSTELLUNG_KISS_ENDGUELTIGER_WORKFLOW_20261114.md). Historische, hierunter stehende QA- und Plugin-Statusnotizen werden **nicht** zu Implementierungs- oder Installationsbelegen. Nächster Arbeitsschritt: echte kompakte WordPress-Bestandsübergabe und 61-Altthemen-Abnahmetest, noch kein neues ZIP.
+<!-- TEXTERSTELLUNG_KISS_FINAL_20261114_END -->
+
+
 > **Einzige aktuelle Zustandsautorität dieses Scopes.** Status, erster offener Blocker und NEXT ACTION werden nur hier gepflegt.  
 > `HOBBYRAUM.md` ist lediglich abgeleitete Ausführungsfläche.
 
