@@ -9,7 +9,10 @@ from zipfile import ZipFile
 import hashlib
 root=Path("protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ")
 p=root/"PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip"
-old=p.read_bytes()
+# The immutable RC22 archive is the historical build base.
+# Office CURRENT.zip can now correctly track the LIVE RC43 version without
+# breaking the deterministic RC23 -> RC43 QA reconstruction.
+old=(root/"PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/HAB_AFFILIATE_RC22_0.1.19-rc22.zip").read_bytes()
 sha=lambda b:hashlib.sha256(b).hexdigest()
 assert sha(old)=="c9d501396d5500e699eb6dd8d867318c41e8ea8efc43c8fe00ad9ee4ab4e32d1",("Unapproved HAB base",sha(old))
 base="affiliate-portal-router/"
