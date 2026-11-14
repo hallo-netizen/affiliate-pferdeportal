@@ -37,10 +37,18 @@ jobs:
                           if level==0:break
                   return f,s[m.start():j+1]
               return None,None
-          for name in ['campaign_from_post','ranked_campaigns_for_slot_uncached','select_campaign_for_slot','assignment_selection_for_slot','automation_campaign_exact_target_rank_uncached','get_content_context','hb_insurance_scope','hb_insurance_banner_rank','hb_insurance_campaign_allowed','hb_insurance_house_banner']:
+          for name in ['campaign_from_post','ranked_campaigns_for_slot_uncached','ranked_campaign_candidate_pool','campaign_match_rank','campaign_is_complete','select_campaign_for_slot','assignment_selection_for_slot','automation_campaign_exact_target_rank_uncached','get_content_context','hb_insurance_scope','hb_insurance_banner_rank','hb_insurance_campaign_allowed','hb_insurance_house_banner']:
               file,s=method(name)
               print('SOURCE_METHOD',name,'FILE',file,'SIZE',len(s) if s else 0)
               if s:print('SOURCE_BODY_BEGIN',name,'\n',s[:12500],'\nSOURCE_BODY_END',name)
+          for filename,code in src.items():
+              hits=list(re.finditer(r'HB_INSURANCE_CANONICAL|automation_target_keys|output_object_v4',code))
+              if not hits:continue
+              print('SOURCE_WRITE_EVIDENCE_FILE',filename,'HITS',len(hits))
+              for m in hits[:16]:
+                  window=code[max(0,m.start()-850):m.start()+850]
+                  if 'update_post_meta' in window or 'wp_insert_post' in window or 'output_object' in window:
+                      print('SOURCE_WRITE_CONTEXT',repr(window[:1500]))
           # Original PHP accepts stored campaign exactly once for approved slot; no guessed data.
           _,gate=method('campaign_matches_contract_slot_rule')
           assert gate and "output_object_v4" in gate
