@@ -43,7 +43,7 @@ jobs:
               'post_only': '--request POST' in s,
               'bounded_http': '--max-time 45' in s,
               'fixed_keyless_endpoint': endpoint_ok,
-              'five_failures_then_stop': 'MAX_CONSECUTIVE_FAILURES=5' in s,
+              'four_failures_then_stop': 'MAX_CONSECUTIVE_FAILURES=4' in s,
               'v2_contract_only': "external_tick_v2" in s,
               'v2_active_states_only': "advanced|busy|retryable_error|active_idle)" in s,
               'idle_not_terminal': "idle|throttled)" in s and "completed|failed|disabled)" in s,
@@ -71,7 +71,7 @@ jobs:
           set -u
           URL='https://pferde-atelier.de/wp-json/affiliate-zentrale/v1/ebay/tick'
           MAX_TICKS=4
-          MAX_CONSECUTIVE_FAILURES=5
+          MAX_CONSECUTIVE_FAILURES=4
           consecutive_failures=0
           last_server_time=0
 
@@ -137,7 +137,7 @@ jobs:
             fi
 
             if [ "$consecutive_failures" -ge "$MAX_CONSECUTIVE_FAILURES" ]; then
-              echo 'five consecutive heartbeat failures; stop this runner and let the safety schedule retry later'
+              echo 'four consecutive heartbeat failures; stop this runner and let the safety schedule retry later'
               exit 1
             fi
             if [ "$n" -lt "$MAX_TICKS" ]; then sleep 30; fi
