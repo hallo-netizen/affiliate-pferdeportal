@@ -116,7 +116,8 @@ jobs:
         run: |
           set -e
           python3 scripts/hd009_0141_storage_qa.py \
-            /tmp/HOBBY_DEPOT_HD009_0.1.41_SINGLE_KISS_TEST.zip /tmp/hd009_0141_stage.php
+            /tmp/HOBBY_DEPOT_HD009_0.1.41_SINGLE_KISS_TEST.zip /tmp/hd009_0141_stage.php \
+            protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip
           php -l /tmp/hd009_0141_stage.php
           php /tmp/hd009_0141_stage.php
       - name: One original product-placement authority, no unrelated article fallback
