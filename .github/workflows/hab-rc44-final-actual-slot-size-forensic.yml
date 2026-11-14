@@ -1,0 +1,104 @@
+name: HAB actual end-to-end failure proof: saved slot vs page slot and grid image sizes (READ ONLY)
+on:
+  push:
+    branches: [hab-affiliate-rc44-frontend-slot-and-source-target-20261114]
+    paths:
+      - .github/workflows/hab-rc44-final-actual-slot-size-forensic.yml
+permissions: {contents: read}
+jobs:
+  prove-exact-unhandled-mismatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 11
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exact RC44 PHP page entry and saved owner request DIFFER (test both on same page)
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import re,subprocess,tempfile
+          from pathlib import Path
+          from zipfile import ZipFile
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          with ZipFile(p) as z: src=z.read('affiliate-portal-router/affiliate-portal-router.php').decode()
+          m=re.search(r'public\s+function\s+hab_bw_area_slot\s*\(',src)
+          assert m
+          first=src.index('{',m.end());d=0
+          for j in range(first,len(src)):
+            if src[j]=='{':d+=1
+            if src[j]=='}':
+              d-=1
+              if d==0:break
+          method=src[m.start():j+1]
+          php='''<?php
+          function absint($x){return abs((int)$x);}
+          function get_post_type($id){return 'page';}
+          function get_post_status($id){return 'publish';}
+          function sanitize_key($x){return strtolower((string)$x);}
+          class PPAR_HB_Design_Contract {
+            static function affiliate_page_type($id){return in_array($id,array(765,766,767))?'hub2':'leaf';}
+          }
+          class PPAR_HB_Integration {
+            static function verified_nodes(){return array(
+              'core:area:insurance:haftpflicht-und-rechtsschutz'=>array('type'=>'page','wp_id'=>765,'pillar'=>'core'),
+              'core:area:insurance:krankenversicherung-und-vorsorge'=>array('type'=>'page','wp_id'=>766,'pillar'=>'core'),
+              'core:subarea:insurance:haus-und-grundbesitzerhaftpflichtversicherung'=>array('type'=>'page','wp_id'=>784,'pillar'=>'core'));}
+          }
+          class ActualRC44Area {
+            function is_enabled(){return true;}
+            function get_content_context($id){return array('post_type'=>'page','post_id'=>$id);}
+            function hb_insurance_scope($ctx){return 'insurance';}
+            function render_affiliate_slot_for_context($id,$context,$slot,$intent,$other){return $slot;}
+            METHOD
+          }
+          $a=new ActualRC44Area;
+          foreach(array(array(765,'core:area:insurance:haftpflicht-und-rechtsschutz'),array(766,'core:area:insurance:krankenversicherung-und-vorsorge'),array(784,'core:subarea:insurance:haus-und-grundbesitzerhaftpflichtversicherung')) as $row){
+            $actual=$a->hab_bw_area_slot($row[0],'banner',$row[1]);
+            $required=in_array($row[0],array(765,766))?'hub_after_cards':'product_after_category_tiles';
+            echo "ACTUAL_PAGE_ID=".$row[0]." actual_requested_slot=".$actual." stored_owner_slot=".$required." MATCH=".($actual===$required?'yes':'NO')."\n";
+            if($row[0]===765 && $actual===$required)exit(17);
+          }
+          echo "RC44_PUBLIC_R2_SLOT_MISMATCH_REPRODUCED_WITH_EXACT_PHP_FUNCTION\n";
+          '''.replace('METHOD',method)
+          with tempfile.TemporaryDirectory() as tmp:
+            f=Path(tmp)/'r2.php';f.write_text(php)
+            res=subprocess.run(['php',str(f)],text=True,capture_output=True)
+            print(res.stdout);print(res.stderr)
+            assert res.returncode==0,(res.stdout,res.stderr)
+            assert 'RC44_PUBLIC_R2_SLOT_MISMATCH_REPRODUCED_WITH_EXACT_PHP_FUNCTION' in res.stdout
+          PY
+      - name: Design original grid classes and actual original banner 468x60 in narrow single tile
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          from collections import Counter
+          import re
+          z=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip')
+          with ZipFile(z) as za:
+            for n in ['hab-bewahr-design-vorschau/assets/area-prototype.css',
+                      'hab-bewahr-design-vorschau/assets/style.css']:
+              s=za.read(n).decode('utf8','replace')
+              for term in ['.hbdp-area-demo-topics','.hbdp-area-inline-ad-tile','.hbdp-detail-inline-ad-tile']:
+                p=s.find(term)
+                if p>=0:print('EXACT_DESIGN',n,term,s[max(0,p-350):p+1400].replace('\n',' ')[:1600])
+          PY
+      - name: Check public R3 pages that already had 80 PUBLISHED output objects before RC43
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request,re,json
+          pages={777:'Motorradversicherung',828:'Risikolebensversicherung',822:'Pflegezusatzversicherung',
+                 823:'Berufsunfaehigkeit',824:'Unfallversicherung',769:'Wohngebaeudeversicherung',
+                 782:'Rechtsschutzversicherung',818:'Private Krankenversicherung'}
+          for ident,label in pages.items():
+            try:
+              u='https://hab-und-bewahr.de/?page_id='+str(ident)
+              req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) Chrome/128.0 Safari/537.36'})
+              with urllib.request.urlopen(req,timeout=12) as r:s=r.read(1200000).decode('utf8','replace')
+              print('OLD_PUBLISHED_R3_PUBLIC',label,ident,
+                'real_banner_imgs',s.count('ppar-overview-wide-banner-image'),
+                'own_placeholder',s.count('ppar-hb-insurance-own-wide'),
+                'raw_ally_ppar_slot',s.count('data-ppar-slot='))
+            except Exception as e:print('OLD_PUBLISHED_R3_ERROR',label,str(e)[:150])
+          PY
