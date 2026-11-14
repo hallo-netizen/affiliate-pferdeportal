@@ -1,5 +1,12 @@
 # Robotik – Pluginbüro / Kategorie-Workflow
 
+## 0.4.6 / V59 – vorhandenen 3/38-Lauf ohne wiederholte Anbieterabfrage fortsetzen (TEST)
+- 0.4.5-Praxisfehler **HTTP500 beim vierten Auftrag (Freizeit Keyword Ideas, 14 gültige Seeds)**; 0.4.5 bot Wiederaufnahme nur am Start (0/38), nicht nach drei bereits erfassten Ergebnissen.
+- Ein **manueller Fortsetzen-Klick mit ausdrücklicher Bestätigung** im bestehenden Menü: Drei erfolgreiche Aufträge, angefallene Kosten und ursprüngliches Budget bleiben. Gescheiterter Auftrag wird als **NICHT GEPRUEFT** dokumentiert und nie erneut gesendet. Folgeaufträge werden gebündelt abgearbeitet. Weitere direkte HTTP500-Ideas-/SERP-Fehler werden nicht erneut angefragt und landen als belegte Lücken im Bericht; Abschluss heißt `COMPLETE_WITH_GAPS` statt falschem vollständigen PASS.
+- Budgetkontrolle berücksichtigt zusätzlich **unsichere maximale Anbieter-Abbuchungen** aus Fehlerfällen. Kein neuer Writer, kein neuer Erstimport, keine neuen Kategorien, kein neues Plugin.
+- PHP-/ZIP-/WP-Mocktests bestanden, **noch keine echte WordPress-Abnahme**. `PLUGIN/CURRENT.zip` = `PLUGIN/VERSIONEN/0.4.6.zip` (Test). Details `PLUGIN/SEO_V59_RELEASE_PRUEFUNG_20261114.md`.
+
+
 ## 0.4.5 / V58 – gezielte Wiederaufnahme des beim Anbieter bestätigten 50000-Abbruchs (TEST)
 - **Kein kompletter Neustart, kein neues Plugin.** Der tatsächlich in WordPress `BLOCKED_UNCERTAIN 0/38` gestoppte 0.4.4-Durchlauf kann mit derselben Identität auf 0.4.5 aktualisiert werden. Nur bei gespeichertem ersten HTTP-500-Fehler bietet das Backend **einmalig manuelle Wiederaufnahme** mit erneuter ausdrücklicher Kostenbestätigung.
 - Bestehende 38er-Auftragsliste, Run-ID, Kostenrahmen und V52-Fachmaster bleiben erhalten. Nach weiteren Fehlern wird kein zweites Mal automatisch oder manuell wiederholt. Original-Import-/Veröffentlichungsdateien byte-identisch.
