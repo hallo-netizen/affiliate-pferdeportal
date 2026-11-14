@@ -192,7 +192,11 @@ begin=m.index("    private function hd_idealo_product_targets_exact_hobby_page("
 end=m.index("    private function category_product_shared_rank_base(",begin)
 assert "private function hd_idealo_product_targets_exact_hobby_page(" in m[begin:end]
 m=m[:begin]+m[end:]
-assert "hd_idealo_product_targets_exact_hobby_page" not in m
+if "hd_idealo_product_targets_exact_hobby_page" in m:
+    for i,line in enumerate(m.splitlines()):
+        if "hd_idealo_product_targets_exact_hobby_page" in line:
+            print("REMAINING_LATE_CALL",i,repr("\\n".join(m.splitlines()[max(0,i-3):i+5])))
+    raise AssertionError("Old late target method still referenced")
 
 # The original single campaign placement resolver is now the only exact
 # Idealo page-slot decision, using the already stored target keys.
