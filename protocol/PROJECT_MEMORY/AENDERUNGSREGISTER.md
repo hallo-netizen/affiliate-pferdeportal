@@ -2031,3 +2031,12 @@ Der aktive Campus-Ruleset 25817526 verlangt `single-current-lock` für jeden PR 
 
 GRENZE:
 Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wahrheit. Nur die bestehende Pflichtprüfung wird für alle Änderungen erreichbar gemacht. Fehlerquelle: `BAUCONTAINER/ARCHITEKTUR_FEHLERKISTE.md` → BAU-044.
+
+
+## 2026-11-14 – Wassertechnik-Gebäude einschließlich W2-Fachkonzept integriert
+- **Projekt:** Wassertechnik mit sieben Fachbüros, originalgetreuer Quellenablage (3 Markdown-Fassungen und Master-ZIP) und geprüftem Routing neu angelegt.
+- **Warum:** Eigenständige Projektwahrheit, dreisäuliges Portal, unveränderte Fremdprojekte, durchgängiger produktbezogener Kategorienaufbau statt Tätigkeiten als vermeintliche Produkte.
+- **W2:** 8 Hauptbereiche, 71 konkrete Produktseiten-Kandidaten, 89 konzeptionelle WP-Kategorien und 308 Thema-Proben; Fokus Privatkunden, kleine Betriebe und Vereine. Alle Kategorieentwürfe mit jeweils mindestens drei eigenständigen möglichen Artikeln und eindeutigem Owner. Frühere abstrakte Altentwürfe unverändert als Originale gesichert.
+- **Plugin:** Hab-&-Bewahr-Quelle nur unverändert als NUR-REFERENZ-ZIP gespeichert. **Kein** Wassertechnik-Plugin freigegeben, **kein** Import, **keine** SEO-API-Anfrage.
+- **Nächster Schritt:** Produkt-Owner und Rubriken fachlich klären, dann Konzept in das geprüfte künftige WordPress-Kategorie-Plugin zur DataForSEO-Prüfung übergeben; erst nach Freigabe Import.
+- **Freigabe:** Strukturplausibilität lokal PASS; fachliche Vollprüfung, SEO, WordPress-Live und Pluginportierung offen.
