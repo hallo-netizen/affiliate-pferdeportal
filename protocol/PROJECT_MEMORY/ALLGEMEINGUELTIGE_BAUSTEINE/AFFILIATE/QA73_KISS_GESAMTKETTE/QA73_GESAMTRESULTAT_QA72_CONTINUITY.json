@@ -1,0 +1,281 @@
+{
+  "name": "QA73 KISS full chain + terminal persistence / idempotent publication",
+  "original_data": {
+    "events": 2769,
+    "uuid": "97507628-4f4d-4527-bd77-fa573bce7067",
+    "last_phase": "gapfill_discovery",
+    "live_public_covered": 5,
+    "required": 283,
+    "missing_families": 278,
+    "family_status_values": {
+      "Angebote im Suchausschnitt, aber nicht angenommen": 31,
+      "Abruf hat zulässige Angebote; trotzdem nicht in dieser Abdeckung": 32,
+      "Kein zugeordneter Einzelabruf in diesem Teilstand": 215
+    },
+    "real_full_run_finished": false
+  },
+  "before_after_actual_trait_php": {
+    "before": {
+      "upsert_same_classify_calls": 1,
+      "upsert_same_quality_calls": 1,
+      "upsert_unchanged_extra_preserved": true,
+      "upsert_changed_classify_calls": 1,
+      "debug": {
+        "fresh": true,
+        "seller": "BUSINESS",
+        "itemid": "secondary",
+        "policy": "allowed",
+        "route": "ready"
+      },
+      "quality_calls": 9,
+      "quality_by_id": {
+        "a": 2,
+        "b": 2,
+        "c": 2,
+        "x": 2,
+        "v": 1
+      },
+      "primary_plan_active": [
+        "b",
+        "c",
+        "a"
+      ],
+      "primary_plan_reserve": [
+        "x"
+      ],
+      "primary_plan_pool": 4,
+      "secondary_planning_classify_calls": 1,
+      "secondary_plan_active": [
+        "secondary"
+      ],
+      "secondary_attach_classify_calls": 6,
+      "secondary_same_source_success": true,
+      "same_source_error": null,
+      "secondary_different_source_rejected": false,
+      "secondary_different_source_code": null,
+      "writes_after_good": 1,
+      "total_writes": 2
+    },
+    "after": {
+      "upsert_same_classify_calls": 0,
+      "upsert_same_quality_calls": 0,
+      "upsert_unchanged_extra_preserved": true,
+      "upsert_changed_classify_calls": 1,
+      "debug": {
+        "fresh": true,
+        "seller": "BUSINESS",
+        "itemid": "secondary",
+        "policy": "allowed",
+        "route": "ready"
+      },
+      "quality_calls": 5,
+      "quality_by_id": {
+        "a": 1,
+        "b": 1,
+        "c": 1,
+        "x": 1,
+        "v": 1
+      },
+      "primary_plan_active": [
+        "b",
+        "c",
+        "a"
+      ],
+      "primary_plan_reserve": [
+        "x"
+      ],
+      "primary_plan_pool": 4,
+      "secondary_planning_classify_calls": 0,
+      "secondary_plan_active": [
+        "secondary"
+      ],
+      "secondary_attach_classify_calls": 0,
+      "secondary_same_source_success": true,
+      "same_source_error": null,
+      "secondary_different_source_rejected": true,
+      "secondary_different_source_code": "ebay_secondary_stored_source_mismatch",
+      "writes_after_good": 1,
+      "total_writes": 2
+    }
+  },
+  "full_php_controller_scenarios_with_mock_wp_ebay": {
+    "normal": {
+      "status": "completed",
+      "safe_public_count": 580,
+      "error": null,
+      "ticks": 23,
+      "phases": [
+        "reconcile_local",
+        "refresh_remote",
+        "selection_prepare",
+        "business_select",
+        "business_materialize",
+        "coverage_verify",
+        "gapfill_discovery",
+        "gapfill_select",
+        "public_verify",
+        "checkpoint_cleanup_business"
+      ]
+    },
+    "old_blocked": {
+      "status": "completed",
+      "safe_public_count": 579,
+      "error": null,
+      "ticks": 23,
+      "phases": [
+        "reconcile_local",
+        "refresh_remote",
+        "selection_prepare",
+        "business_select",
+        "business_materialize",
+        "coverage_verify",
+        "gapfill_discovery",
+        "gapfill_select",
+        "public_verify",
+        "checkpoint_cleanup_business"
+      ]
+    },
+    "new_blocked": {
+      "status": "completed",
+      "safe_public_count": 579,
+      "error": null,
+      "ticks": 11,
+      "phases": [
+        "reconcile_local",
+        "refresh_remote",
+        "selection_prepare",
+        "business_select",
+        "business_materialize",
+        "coverage_verify",
+        "gapfill_discovery",
+        "gapfill_select",
+        "public_verify"
+      ]
+    },
+    "db_down": {
+      "status": "failed",
+      "safe_public_count": 580,
+      "error": "business_public_storage_read_failed",
+      "ticks": 11,
+      "phases": [
+        "reconcile_local",
+        "refresh_remote",
+        "selection_prepare",
+        "business_select",
+        "business_materialize",
+        "coverage_verify",
+        "gapfill_discovery",
+        "gapfill_select",
+        "public_verify"
+      ]
+    },
+    "churn": {
+      "status": "completed",
+      "safe_public_count": 579,
+      "error": null,
+      "ticks": 27,
+      "phases": [
+        "reconcile_local",
+        "refresh_remote",
+        "selection_prepare",
+        "business_select",
+        "business_materialize",
+        "coverage_verify",
+        "gapfill_discovery",
+        "gapfill_select",
+        "public_verify",
+        "checkpoint_cleanup_business"
+      ]
+    },
+    "no_new": {
+      "status": "completed",
+      "safe_public_count": 578,
+      "error": null,
+      "ticks": 23,
+      "phases": [
+        "reconcile_local",
+        "refresh_remote",
+        "selection_prepare",
+        "business_select",
+        "business_materialize",
+        "coverage_verify",
+        "gapfill_discovery",
+        "gapfill_select",
+        "public_verify",
+        "checkpoint_cleanup_business"
+      ]
+    },
+    "save_fail": {
+      "status": "failed",
+      "safe_public_count": 580,
+      "error": "public_checkpoint_commit_failed",
+      "ticks": 11,
+      "phases": [
+        "reconcile_local",
+        "refresh_remote",
+        "selection_prepare",
+        "business_select",
+        "business_materialize",
+        "coverage_verify",
+        "gapfill_discovery",
+        "gapfill_select",
+        "public_verify"
+      ]
+    }
+  },
+  "other_php_suites": [
+    {
+      "suite": "QA71_FINAL_SOURCE_SINGLE_DECISION.php",
+      "cases": 7,
+      "expected": 7,
+      "pass": true
+    },
+    {
+      "suite": "QA71_BUSINESS_REFRESH_NO_REDECISION.php",
+      "cases": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "suite": "QA71_REAL_AVAILABILITY_HELPER.php",
+      "cases": 7,
+      "expected": 7,
+      "pass": true
+    },
+    {
+      "suite": "QA69_SELECTION_NO_PREPUBLIC_PRUNE.php",
+      "cases": 5,
+      "expected": 5,
+      "pass": true
+    },
+    {
+      "suite": "QA69_NO_REPEATED_GATE.php",
+      "cases": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "suite": "QA62_REAL_EBAY_TRAIT_TICK_TEST.php",
+      "cases": 16,
+      "expected": 16,
+      "pass": true
+    },
+    {
+      "suite": "QA63_REAL_DUE_CONTRACT.php",
+      "cases": 11,
+      "expected": 11,
+      "pass": true
+    }
+  ],
+  "selected_freshness_cases": 9,
+  "changed_php_files": [
+    "includes/trait-ppar-ebay-run.php",
+    "includes/trait-ppar-ebay.php"
+  ],
+  "php_syntax_files": 23,
+  "checks": 5627,
+  "failures": [],
+  "local_test_pass": true,
+  "full_contract_pass": false,
+  "reason_not_accepted": "Original-CSV lacks original per-item eBay responses, WP snapshots, live GH ticks and completed public checkpoint. Real run stops at 5/283."
+}
