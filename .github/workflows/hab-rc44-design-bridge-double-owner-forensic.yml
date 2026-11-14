@@ -1,0 +1,65 @@
+name: HAB read-only DESIGN ZIP actual empty insurance slot and affiliate mismatch forensic
+on:
+  push:
+    branches: [hab-affiliate-rc44-frontend-slot-and-source-target-20261114]
+    paths:
+      - .github/workflows/hab-rc44-design-bridge-double-owner-forensic.yml
+permissions: {contents: read}
+jobs:
+  inspect-true-live-template-and-design:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit live HAB-001 design PHP owners in exact archived original ZIP
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re
+          p=Path("protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-001-DESIGN/CURRENT.zip")
+          print("DESIGN ZIP",p.stat().st_size)
+          matchers=["ppar-hb-insurance-own","ppar_hb_insurance_own","hbdp-body","product_after_category_tiles","ppar_affiliate_slot_matrix","hub_after_cards"]
+          with ZipFile(p) as z:
+            print("FILES",len(z.namelist()))
+            matched=[]
+            for info in z.infolist():
+              if not info.filename.endswith((".php",".css",".js")) or info.file_size>5000000:continue
+              s=z.read(info.filename).decode("utf-8","replace")
+              ms=[x for x in matchers if x in s]
+              if ms:
+                matched.append((info.filename,ms,len(s)))
+                for x in ms:
+                  i=s.find(x); start=max(0,i-1100);end=min(len(s),i+2200)
+                  fragment=s[start:end]
+                  fragment=re.sub(r"https?://[^\s'\"<>]+","[url]",fragment)
+                  print("DESIGN_MATCH",info.filename,x,i,fragment.replace("\n"," ")[:3000])
+            print("DESIGN_MATCH_SUMMARY",matched[:60])
+          PY
+      - name: Inspect public HTML when blank placeholder differs from working slot
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request,re
+          urls={
+            'HAB Haftpflicht':'https://hab-und-bewahr.de/?page_id=765',
+            'HAB Kranken':'https://hab-und-bewahr.de/?page_id=766',
+            'HAB Grundbesitzer':'https://hab-und-bewahr.de/?page_id=784',
+            'HAB Hund':'https://hab-und-bewahr.de/?page_id=786',
+            'Pferde Start':'https://pferde-atelier.de/',
+            'Hobby Start':'https://hobby-depot.de/'
+          }
+          for name,url in urls.items():
+            try:
+              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 Chrome/128'})
+              s=urllib.request.urlopen(req,timeout=15).read(1500000).decode('utf-8','replace')
+              for term in ['ppar-hb-insurance-own','ppar-slot-product_after_category_tiles','ppar-overview-wide-banner-image']:
+                i=s.find(term)
+                if i<0:continue
+                snippet=s[max(0,i-950):i+3000]
+                snippet=re.sub(r"(?:href|src)=[\"'][^\"']+[\"']",r'[url-removed]',snippet)
+                snippet=re.sub(r"<!--.*?-->","",snippet,flags=re.S)
+                print('LIVE_HTML',name,term, 'CHARS',len(s),'SNIPPET',snippet.replace('\n',' ')[:3200])
+            except Exception as e: print('ERROR',name,str(e)[:170])
+          PY
