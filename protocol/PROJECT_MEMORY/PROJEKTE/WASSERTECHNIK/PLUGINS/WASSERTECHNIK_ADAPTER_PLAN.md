@@ -18,3 +18,6 @@ Der Quellcode der 49 ZIP-Einträge wurde hier noch nicht vollständig entpackt, 
 **Aktualisierung 14.11.2026:** Für den schreibfreien SEO-Preflight existiert inzwischen die lokal geprüfte **WT001 0.1.0** als isolierte Kopie der Robotik-0.4.3-DataForSEO-/Inventur-Module; **kein HAB-002-PHP-Port, kein WordPress-Import**. Der ursprüngliche Adapterplan bezieht sich nur noch auf eine spätere WordPress-Importversion nach Fach-/SEO-Freigabe. Die kostenlose WT001 ist im Plugin-CURRENT dokumentiert.
 
 **Freigabestatus der Import-Portierung:** BLOCKED bis vollständige Quellen- und WP-Live-Prüfung. WT001-SEO-Preview: OFFLINE PASS, WP LIVE OFFEN.
+
+## W8 – WT001-Quellnachweis, 14.11.2026
+Die tatsächliche WT001 Version 0.1.4 wurde aus dem GitHub-ZIP entpackt (sechs Einträge, vier PHP-Dateien). Inventur-/SEO-Funktionen sind enthalten; kein WordPress-Inhaltsimporter. **Das ist kein Grund für eine zweite Pluginlinie.** Eine funktionsfähige Importfunktion muss einmalig innerhalb derselben Pluginidentität ergänzt werden. HAB-002 bleibt lediglich historische Quellreferenz und ist **nicht** als Wassertechnik-Importer übernommen. Siehe `W8_IMPORT_QUELLCODE_PRUEFUNG_20261114.md`.
