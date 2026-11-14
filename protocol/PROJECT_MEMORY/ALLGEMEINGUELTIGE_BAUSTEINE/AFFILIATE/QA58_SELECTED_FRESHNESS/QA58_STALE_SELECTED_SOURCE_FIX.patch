@@ -1,0 +1,170 @@
+--- a/includes/trait-ppar-automation-suite.php
++++ b/includes/trait-ppar-automation-suite.php
+@@ -4235,7 +4235,7 @@
+ 
+         // Provider-worker routing only: do not create a second source sync or rescan
+         // the entire creative pool. Never interrupt an older in-progress pool run.
+-        if (in_array(self::VERSION, array('6.72.336','6.72.337','6.72.339','6.72.340','6.72.341','6.72.342','6.72.343'), true)) {
++        if (in_array(self::VERSION, array('6.72.336','6.72.337','6.72.339','6.72.340','6.72.341','6.72.342','6.72.343','6.72.344'), true)) {
+             if (strpos($state, 'running:') === 0 || get_option(self::OPTION_FULL_POOL_AUTOMATION_CURSOR, null) !== null) { return; }
+             update_option(self::OPTION_FULL_POOL_AUTOMATION_VERSION, self::VERSION, false);
+             return;
+--- a/includes/trait-ppar-ebay.php
++++ b/includes/trait-ppar-ebay.php
+@@ -4955,6 +4955,49 @@
+         $stats['recoverable_failed']=absint($stats['recoverable_failed']??0)+1;
+     }
+ 
++    /** Only the selected original eBay item is rechecked before materialisation.
++     * Reuse the independent availability-only source updater: no family/rank
++     * decision, new search, public checkpoint or second worker is allowed here.
++     * The reloaded DB row remains the only proof of a successful source update.
++     */
++    private function ebay_business_recheck_selected_stale_source($row, $settings) {
++        $row=is_array($row)?$row:array();
++        $id=absint($row['id']??0);
++        if($id<=0 || strtoupper(sanitize_key((string)($row['seller_account_type']??'')))!=='BUSINESS'){
++            return new WP_Error('ebay_selected_source_identity_invalid','Ausgewählte BUSINESS-Quelle ist nicht eindeutig.');
++        }
++        // Only freshness may be repaired here. Policy/routing failures must
++        // return to the existing one central product-selection decision.
++        if(sanitize_key((string)($row['source_state']??''))!=='available'
++            || sanitize_key((string)($row['policy_state']??''))!=='allowed'
++            || !in_array(sanitize_key((string)($row['route_state']??'')),array('ready','review_last_good'),true)){
++            return new WP_Error('ebay_selected_source_review_required','Quelle braucht erneute fachliche Freigabe.');
++        }
++        $token=$this->ebay_access_token($settings);
++        if(is_wp_error($token)){return $token;}
++        $job=array('summary'=>array('checked'=>0,'requests'=>0,'transient_errors'=>0,
++            'technical_errors'=>0,'excluded'=>0,'available'=>0,'ended'=>0,
++            'updated'=>0,'revived'=>0,'replaced'=>0,'errors'=>array()));
++        $this->ebay_public_availability_refresh_one($job,$row,$settings,$token);
++        global $wpdb;
++        $wpdb->last_error='';
++        $fresh=$wpdb->get_row($wpdb->prepare('SELECT * FROM '.$this->ebay_items_table().' WHERE id=%d',$id),ARRAY_A);
++        if(!is_array($fresh) || trim((string)($wpdb->last_error??''))!==''){
++            return new WP_Error('ebay_selected_source_storage_unavailable','Nachprüfung konnte nicht aus der Datenbank bestätigt werden.');
++        }
++        if(sanitize_text_field((string)($fresh['item_id']??''))!==sanitize_text_field((string)($row['item_id']??''))
++            || (string)($fresh['creative_identity_hash']??'')!==(string)($row['creative_identity_hash']??'')
++            || sanitize_key((string)($fresh['rule_id']??''))!==sanitize_key((string)($row['rule_id']??''))) {
++            return new WP_Error('ebay_selected_source_changed','eBay-Artikel wurde inzwischen anders zugeordnet.');
++        }
++        if(!$this->ebay_business_source_row_is_public_fresh($fresh)){
++            $summary=(array)($job['summary']??array());
++            $reason=absint($summary['transient_errors']??0)>0?'ebay_selected_source_transient':'ebay_selected_source_not_fresh';
++            return new WP_Error($reason,'Ausgewählter eBay-Artikel konnte nicht erneut aktuell bestätigt werden.');
++        }
++        return $fresh;
++    }
++
+     /**
+      * BUSINESS phase 1: materialize every selected winner while existing valid
+      * public campaigns stay untouched. This prevents a partial/failed recovery
+@@ -4991,9 +5034,12 @@
+             return 0;
+         }
+         $stats=is_array($state['stats']['business']??null)?$state['stats']['business']:array();
++        $freshness_requests=0;
++        $freshness_deferred=false;
+         foreach($rows as $row){
+             $row_id=absint($row['id']??0);if($row_id<=0){continue;}
+-            $state['business_cursor']=max(absint($state['business_cursor']??0),$row_id);
++            $previous_business_cursor=absint($state['business_cursor']??0);
++            $state['business_cursor']=max($previous_business_cursor,$row_id);
+             $stats['scanned']=absint($stats['scanned']??0)+1;
+             $item_id=(string)($row['item_id']??'');
+             $now=time();$end=absint($row['item_end_at']??0);
+@@ -5005,13 +5051,41 @@
+                 continue;
+             }
+             if(!isset($state['business_active'][$item_id])){continue;}
+-            // A source can age out between prepare and apply in a long-lived run.
+-            // Treat that as a bounded candidate-local soft failure so coverage /
+-            // gap-fill owns the replacement instead of publishing guaranteed-stale
+-            // data and later reporting a contradictory public 0/N state.
++            // A discovered selection may be older than the six-hour source
++            // window by the time this bounded worker reaches it. Recheck JUST
++            // this selected article through the existing availability API.
++            // At most one eBay network recheck per worker tick; all further
++            // stale rows remain on the same durable cursor for the next tick.
+             if(!$this->ebay_business_source_row_is_public_fresh($row,$now)){
+-                $this->ebay_business_selection_record_soft_failure($state,$stats,$item_id,'business_selected_stale_during_apply',$row);
+-                continue;
++                if($freshness_requests>=1){
++                    $state['business_cursor']=$previous_business_cursor;
++                    $stats['scanned']=max(0,absint($stats['scanned']??0)-1);
++                    $freshness_deferred=true;
++                    break;
++                }
++                $freshness_requests++;
++                $rechecked=$this->ebay_business_recheck_selected_stale_source($row,$settings);
++                if(is_wp_error($rechecked)){
++                    $code=sanitize_key((string)$rechecked->get_error_code());
++                    // A single eBay/transport delay is not proof that the item
++                    // ended. Retry once on the NEXT ordinary worker tick.
++                    if(in_array($code,array('ebay_refresh_transport','ebay_refresh_transient_http','ebay_selected_source_transient'),true)
++                        && absint($state['business_freshness_retry'][$item_id]??0)<1){
++                        if(!isset($state['business_freshness_retry'])||!is_array($state['business_freshness_retry'])){$state['business_freshness_retry']=array();}
++                        $state['business_freshness_retry'][$item_id]=1;
++                        $state['business_cursor']=$previous_business_cursor;
++                        $stats['scanned']=max(0,absint($stats['scanned']??0)-1);
++                        $freshness_deferred=true;
++                        break;
++                    }
++                    if($code==='ebay_selected_source_storage_unavailable'){
++                        $stats['errors'][]=array('item_id'=>$item_id,'code'=>$code);
++                    }else{
++                        $this->ebay_business_selection_record_soft_failure($state,$stats,$item_id,$code,$row);
++                    }
++                    continue;
++                }
++                $row=$rechecked;
+             }
+             $item=$this->ebay_business_source_row_item($row,$settings);
+             if(is_wp_error($item)){
+@@ -5077,7 +5151,7 @@
+             $state['plan_stats']['business']=array_merge($state['plan_stats']['business'],$this->ebay_business_selection_coverage(array('active'=>(array)($state['business_active']??array()))));
+         }
+         $state['stats']['business']=$stats;
+-        if(count($rows)<$limit){
++        if(count($rows)<$limit && !$freshness_deferred){
+             $expected=count((array)($state['business_active']??array()));
+             $materialized=absint($stats['materialized']??0);
+             $errors=(array)($stats['errors']??array());
+--- a/pferdeportal-affiliate-router.php
++++ b/pferdeportal-affiliate-router.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
+  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
+- * Version: 6.72.343
++ * Version: 6.72.344
+  * Author: OpenAI
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -120,7 +120,7 @@
+     use PPAR_DFS_Amazon_Trait;
+     use PPAR_Digistore24_Trait;
+     use PPAR_Housekeeping_Trait;
+-    const VERSION = '6.72.343';
++    const VERSION = '6.72.344';
+     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
+     const CONTRACT_VERSION = '1.0';
+     const PROVIDER_CONTRACT_VERSION = '2.0';
+--- a/readme.txt
++++ b/readme.txt
+@@ -1,3 +1,4 @@
++V6.72.344 NUR QA: bereits ausgewählte BUSINESS-Artikel mit abgelaufener 6h-Frische werden vor Materialisierung einzeln über die EXISTIERENDE getItem-/Availability-Methode bestätigt; höchstens eine nachgeprüfte Quelle je Worker-Takt, nur ein begrenzter Transport-Retry, danach weiter mit bestehenden Sicherheits-/Familien-/Public-Gates. Alte sichere Publikationen bleiben getrennt. Kein neuer Worker/Cron/Tabelle/Suchprofil. WP/eBay live nicht abgenommen.
+ V6.72.343 QA54 WORKER-REGAL TEST: eBay-Verfuegbarkeitspruefung aendert keine Produktauswahl; Werbemittelplanung mit einmaliger Portal-/Partnerentscheidung; gleiche eBay-Public-Quellenpruefung fuer inkrementelle und finale Freigaben; atomare Freigabeliste gegen paralleles Ueberschreiben. Bestehender Kanonischer eBay-Worker, bestehende WP-Cron-Verfuegbarkeitspruefung und vorhandene Datenhaltung. Alle sieben bisherigen lokalen Gesamtfaelle erneut geprueft, WP-/eBay-Dienste nachgestellt. Keine vier neuen autonomen Worker, keine neue Tabelle, keine zusaetzliche Automatik, keine Live-Abnahme. NUR ISOLIERTE TESTSEITE.
+ 
+ V6.72.342 QA50 GESAMTABLAUF-TEST: eBay-Produktkandidaten, bisheriger SAFE-Bestand, oeffentliche Quellen-/Creative-Pruefung, Familienabdeckung, erneute Nachsuche und finale Bereinigung teilen dieselben verifizierten Produkt-Identitaeten. Vorzeitige Kandidaten-/Freigabeverluste verhindert; alte laufende Auswahl mit veralteter Ziel-Familienliste wird nicht wiederverwendet. Ohne belegte Quelle keine Freigabe, bei technischen Speicherfehlern fail-closed. Original-Kanonischer eBay-Arbeiter und echte Cleanup-Funktion im lokalen 23-27-Takt-Phasenmodell getestet, WP-/eBay-Dienste nachgestellt; keine Live-Abnahme. Keine neue Datenbank, kein neuer Cron, kein zweiter Worker. Vollstaendige Test-ZIP nur fuer isolierte WordPress-Testseite.
+@@ -89,7 +90,7 @@
+ V6.72.236 TEST: Backend-Portalabdeckung hat bisher 329 Ziele x 3 LIVE-Router-Auswahlen synchron ausgefuehrt; jetzt acht Ziele pro Request und vollstaendiger JSON-Export in begrenzten Lesebloecken. PRIVATE-HivePress-Stale-Filter kehrt auf normalen Seiten sofort zurueck; BUSINESS-Checkpoint scannt bei abgeschaltetem PRIVATE keine alten PRIVATE-HivePress-Importe mehr. Kein neuer Worker, keine DB-Tabelle, keine Provider-/Ranking-/BUSINESS-Aenderung. Lokale PHP-/JavaScript-/Mock-Pruefungen, KEINE WP/MariaDB-Host-Abnahme.
+ V6.72.234 TEST: Direkter Rueckbau eBay-PRIVATE aus Affiliate-Zentrale 6.72.233: alte automatische Admin-Init-Loeschung, PRIVATE-HivePress-Backendfunktionen, PRIVATE-Kategorieanlage, PRIVATE-Discovery und PRIVATE-Bedienfelder entfernt. Angehende INDIVIDUAL-Datensaetze werden auch aus alten Laufplaenen hart abgewiesen. BUSINESS/Idealo/Artikel/Banner unveraendert. Bestehende PRIVATE-DB-Altlasten werden durch das Installieren NICHT automatisch geloescht; keine unkontrollierten Datenbankaktionen. Nur Testinstallation; kein behaupteter WordPress-/MariaDB-Livepass.
+ V6.72.233: PRIVATE-only Aufraeumweg ueber admin_init reaktiviert (kein Frontend/AJAX); alter falscher Complete-Marker wird nachverarbeitet; Abschluss erst bei tatsaechlich geleerter Unterkategorie-Struktur. PRIVATE-Neuanlage gesperrt. BUSINESS/idealo/Artikelunveraendert.
+-Stable tag: 6.72.343
++Stable tag: 6.72.344
+ V6.72.232 SICHERHEITSSTOPP: Automatischer PHP-init-Loeschlauf der 6.72.231 entfernt; PRIVAT-eBay bleibt abgeschaltet und im oeffentlichen HivePress-Filter gesperrt; keine eigenstaendige Datenbankbereinigung, keine Datenrestauration.
+ V6.72.230 PRIVATE-EBAY-ENTFERNUNG: PRIVATE-Verkaeuferroute bleibt zwingend aus; auf Adminaufrufen werden ausschliesslich eBay-markierte HivePress-Importanzeigen kontrolliert in den Papierkorb verschoben, manuelle Anzeigen vor Entfernung der Unterkategorien der Hauptkategorie Private Anzeigen zugeordnet. Alle Unterkategorien werden geloescht, Stammkategorie und native Anzeigen bleiben. Die PRIVAT-HivePress-Frontend-/Preview-Hooks und Einrichtungsoberflaeche sind abgekoppelt; BUSINESS, idealo, Artikel, Banner, Kategorien der Redaktion, CSS/JS bleiben unveraendert. Idempotente, zeitbegrenzte Bereinigung ohne neuen Cron/Runner; Fortschritt in der eBay-Fachseite.
+ V6.72.226 PRODUKTAUSGABE KISS (LOKALER TESTKANDIDAT): Stellt die vertragliche Reihenfolge exakt -> weiterer Themenkreis -> zuletzt nur bestaetigt freigegebene Pferdeprodukte wieder her. Kategorie-/Hub-/Journal-Produktplaetze werden bei zu wenigen Treffern nur aus dem vorhandenen indexierten Kampagnenbestand ergaenzt. Auf normalen Einzelbeitraegen bleibt exakt verlangte Produktidentitaet strikt; fuer allgemeine Beitraege werden zuletzt gepruefte eBay-/idealo-Angebote zugelassen. Anbieter koennen innerhalb derselben Relevanzstufe gemischt werden; spaetere Amazon-Einbindung bleibt getrennt. Bestehende Sperren fuer eBay-BUSINESS-Quelle, private Anzeigen, Quelle, Health, Veto, Bild, Partner und idealo-48h-Grenze bleiben aktiv. Der vorhandene idealo-Hintergrundrefresh muss veraltete unveraenderte Feeds vollstaendig neu pruefen, statt dauerhaft per Hash abzubrechen. Kein Umbau von Imports, Renderer, Kategorien, Bannern, Provideradaptern, Tracking, Datenbanktabellen oder Template. Keine neue Frontend-Providerabfrage. Tests sind lokale Funktionssimulation; kein behaupteter Live-/WP-/MariaDB-PASS.
