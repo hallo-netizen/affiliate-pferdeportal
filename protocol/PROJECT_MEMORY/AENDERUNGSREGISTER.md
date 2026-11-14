@@ -2108,3 +2108,12 @@ Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wa
 - Neue v0.1.4 gleiches Plugin, 218 Owner und Inventur bytegleich; sicherer einmaliger Fortsetzungsweg: exakt alten Run prüfen, Button mit eigener ausdrücklicher Kostenfreigabe, **nur 1 neuen Intent-POST**, ursprüngliche 0,09 USD bleiben. Budgetreserve für unbekannte Altgebühr, maximal 0,25 USD Folgekostenrahmen – tatsächliche Anbieterrechnung vorbehalten.
 - Lokal PHP-Lint 4/4, ZIP CRC 6/6, 11 durchgängige Erfolgs-/Negativ-Szenarien PASS; kein WP-Content-Writer, kein Live-WP-Update/API-POST durch Assistent.
 - Beleg im Wassertechnik-Prüfbüro `WT001_014_ROBOTIK_FEHLERFORTSETZUNG_PRUEFUNG_20261114.md`, aktuelle installierbare Test-ZIP `WASSERTECHNIK_KATEGORIE_WORKFLOW_0.1.4_FORTSETZUNG_OHNE_NEUSTART_NUR_TEST.zip`. Alte Version nur Archiv. Kein anderer Portalcode geändert.
+
+
+## 2026-11-14 – Wassertechnik W5: echte 218er SEO-Ergebnisse ausgewertet, W4-Owner unverändert
+- Original-Nutzerexport aus der installierten Fortsetzung WT001 **0.1.4** bytegenau im Wassertechnik-Prüfbüro auf GitHub archiviert: SHA256 `6bf02d4202eb0b18467ecee7433cf5e81340fe78def14d4518b4d99714c225fd`. Lauf `COMPLETE_WITH_GAPS`, berichtete Kosten **0,12816 USD**.
+- Gegen **einen bestehenden W4-Keywordplan** 218/218 Owner mit Typ/Welt/Kategoriennamen/Urtext geprüft: 128 korrigierte Keywords exakt, 90 bis auf Groß-/Kleinschreibung identisch. 0 verlorene Zuordnungen.
+- 106 reale Anbieter-Suchvolumenwerte, 112 ohne Volumenwert, 218 Anbieter-Intentklassifikationen, 0 organische Keyword-Schwierigkeiten. Fehlende Werte niemals 0, Anzeigenwettbewerb niemals organische Konkurrenz.
+- **Keine automatisch gelöschte Kategorie oder neue Produktseite.** W5 priorisiert vorläufig 13 konkrete kaufnahe Produkt-Keywords und 14 informationsorientierte Produkt-Keywords jeweils ab 1000 Google-Ads-Suchanfragen/Monat, nach Anbieter-Intent und vorhandener Fachseite. Kaufpriorität ist kein Rankingversprechen.
+- `KATEGORIEKONZEPT/W5_SEO_GESAMTAUSWERTUNG_20261114.md`, `KATEGORIEKONZEPT/W5_SEO_AUDIT_218_20261114.json`, `PRUEFUNG/W5_QUELLENABGLEICH_20261114.md` bilden **eine** abgeleitete Auswertungsstufe. W4 Fachbaum bleibt führend.
+- Keine DataForSEO-Kosten für Auswertung, kein WordPress-Inhaltsschreiben, kein fremdes Portal verändert. NEXT: vorhandene Produktzweige redaktionell priorisieren; Import erst nach schreibfreier WP-Gesamtvorschau und ausdrücklicher Freigabe.

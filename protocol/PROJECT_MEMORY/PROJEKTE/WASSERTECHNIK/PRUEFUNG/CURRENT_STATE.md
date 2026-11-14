@@ -1,6 +1,6 @@
 # WASSERTECHNIK / PRUEFUNG – einzige aktuelle Büroautorität
 
-**Stand:** 14.11.2026 · **Status:** WT001 0.1.4 lokale Fehlerfamilienprüfung (Robotik-Fortsetzung + unzulässige Suchabsichtsparameter) PASS. Echter WordPress- und Anbieter-Restaufruf offen. Keine neue SEO-Gesamtfreigabe.
+**Stand:** 14.11.2026 · **Status:** WT001 0.1.4 echter WordPress-Fortsetzungsbericht geprüft: COMPLETE_WITH_GAPS; DataForSEO Volume + Intent PASS; organische Difficulty offen, Import gesperrt.
 
 **Gesichert:** Master-Archiv-internes SHA256SUMS.txt lokal geprüft; originale Git-Blob-Identität stimmt bytegenau mit Nutzervorlage; automatische 18/18 Regelprüfung ist Altbeleg.
 
@@ -14,6 +14,14 @@
 
 **Beleg:** `WT001_013_EINMALIGE_GESAMTABNAHME_20261114.md` dokumentiert lokalen vollständigen Erfolgspfad sowie Fehlerpfade und feste Aufrufbegrenzungen. **Keine** echten API-Kosten und kein echter WP-0.1.3-Test behauptet.
 
-**NEXT ACTION:** V0.1.4 im bestehenden Wassertechnik-WP aktualisieren, alte 0.1.3-Ergebnisse ohne neuen Gesamtauftrag erhalten, **nur die Suchabsicht** einmal nach ausdrücklicher Kostenfreigabe prüfen und einen JSON-Bericht liefern. Schwierigkeitsmessung bleibt offen; kein Import.
+**NEXT ACTION:** Originalen 218er DataForSEO-Export und W5-SEO-Datenauswertung als maßgebliche Prüfbasis verwenden; 13 kaufnahe + 14 informationsorientierte Produktzweige vorläufig priorisiert. Keine neue kostenpflichtige Gesamtabfrage. Vor einem späteren Import erst eine schreibfreie WP-Inventur und W4-Gesamtvorschau prüfen, dann gesonderte Schreibfreigabe.
 
 **Grenze:** Keine WordPress-/HivePress-Produktion, keine fremden Projektdateien verändern.
+
+
+## 14.11.2026 – echter DataForSEO-Export 0.1.4
+- Originaldatei `ORIGINAL_DATAFORSEO_218_20261114.json`, SHA256 `6bf02d4202eb0b18467ecee7433cf5e81340fe78def14d4518b4d99714c225fd`, Git-Blob `21cbf83df44857265d04a0361da10e558a0a71f5`.
+- Datenabgleich gegen die **unveränderte W4-Zuordnung** `KATEGORIEKONZEPT/W4_KEYWORDPROFIL_218_20261114.csv` (Git-Blob `e8ca0c2d8344fdb6cd2ed931fea6e685cf33e30c`): **218/218 IDs, Welt, Typ, Fachbezeichnung und Urtext identisch; 128 redaktionelle Begriffe exakt, 90 nur Groß-/Kleinschreibung.**
+- 106 Suchvolumenwerte, 112 unbeantwortet, 218 Intentklassifikationen (89 transactional, 57 commercial, 72 informational), 0 Difficultywerte, 55 Intent-Wahrscheinlichkeiten unter 60 %, 0 Lösch-/Importentscheidung.
+- Erst- und letzter Anbieteraufruf: 0,09 USD + 0,03816 USD; Kosten laut Export 0,12816 USD; nicht gemeldete mögliche Altgebühr separat markiert. Kein neuer API-POST bei der Auswertung.
+- Arbeitsdateien in `KATEGORIEKONZEPT/W5_SEO_AUDIT_218_20261114.json` und `KATEGORIEKONZEPT/W5_SEO_GESAMTAUSWERTUNG_20261114.md`; Detailprüfung `PRUEFUNG/W5_QUELLENABGLEICH_20261114.md`.
