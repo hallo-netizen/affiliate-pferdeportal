@@ -1,0 +1,51 @@
+{
+  "full_phase_cases": [
+    "normal",
+    "old_blocked",
+    "new_blocked",
+    "db_down",
+    "churn",
+    "no_new",
+    "save_fail"
+  ],
+  "full_phase_same_safe_results": true,
+  "run_states": 16,
+  "due_clock": 11,
+  "selected_source_check": "9/9 including 153 individually rechecked model items",
+  "wp_init_cases": 5,
+  "real_source": {
+    "run_uuid": "97507628-4f4d-4527-bd77-fa573bce7067",
+    "events": 2769,
+    "last_phase": "gapfill_discovery",
+    "covered": 5,
+    "required": 283,
+    "selected_materialized": 2,
+    "selected_skipped": 153,
+    "refresh_remote_events_including_search_and_inventory": 1692,
+    "first_search_counter_final_at_utc": "2026-11-13T18:40:49+00:00",
+    "remote_phase_done_utc": "2026-11-13T20:28:06+00:00",
+    "time_attribution_note": "refresh_remote includes both discovery and inventory: 3h40 must NOT be labelled inventory-only"
+  },
+  "integrity": {
+    "package": "/mnt/data/Affiliate_6.72.347_EBAY_KISS_GESAMTABLAUF_NUR_TEST.zip",
+    "sha256": "fc1cc1f76947a617ec7cb24ddd4899750f85a83eca0ab11fc88a37babb35258e",
+    "size_bytes": 5387380,
+    "php_lints": 23,
+    "total_package_files": 66,
+    "changed_files": [
+      "affiliate-portal-router/includes/trait-ppar-automation-suite.php",
+      "affiliate-portal-router/includes/trait-ppar-ebay-run.php",
+      "affiliate-portal-router/pferdeportal-affiliate-router.php",
+      "affiliate-portal-router/readme.txt"
+    ],
+    "unchanged_files": 62,
+    "zip_crc_ok": true
+  },
+  "pass": true,
+  "failures": [],
+  "qa_status": "QA_ONLY_NOT_LIVE",
+  "live_wordpress_tested": false,
+  "live_ebay_api_tested": false,
+  "live_github_delivery_tested": false,
+  "real_public_family_coverage_verified": false
+}
