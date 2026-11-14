@@ -1,4 +1,19 @@
 # PFERDE ATELIER – KISS-EINPLUGIN: VERBINDLICHER ARBEITSVERTRAG / CHATÜBERGABE
+
+## VERBINDLICHER ZIELVERTRAG – NEUFASSUNG 14.11.2026
+
+1. **KEIN FUNKTIONSABBAU.** Der vollständige bewährte Funktionsumfang aller beteiligten Altplugins bleibt erhalten. Keine Funktion ohne belegten gleichwertigen Ersatz streichen.
+2. **KEIN AUTOMATIKABBAU.** Keyword-Recherche inklusive Google-Fragen, Pferde-/Portalbezug, Suchintention, Doppelthemen, Kategorieabdeckung, Kategorie und Artikelart werden wie bisher automatisch bearbeitet. Manuelle Bedienung **nur zusätzlich**, niemals als Ersatz.
+3. **Bewährten Originalcode übernehmen statt neu erfinden.** Jede bestehende Funktion vor dem Umbau gegen alten Ablauf und Originaldaten zuordnen; tote Verweise und nachweislich doppelte Technik entfernen, **nicht die Leistung**.
+4. **Ein Plugin „Texterstellung“, Worker-Prinzip.** Pro Schritt ein Verantwortlicher und genau eine fachliche Entscheidung; keine zweite SEO-/K0-Qualitätsprüfung, keine neuen Zwischenpläne oder überflüssige Zuständigkeiten.
+5. **Bestandsdaten erhalten.** Alle früher recherchierten Keywords, Freigaben, Kategorien, Suchintentionen, Artikel und Bearbeitungsstände einlesen/erhalten; nur fehlende Themen neu recherchieren; keine Doppelbearbeitung.
+6. **Produktion unverändert nutzbar.** Externe Titelerstellung, K0 mit seinen bestehenden Regeln und fünf Feldern, Sofortartikel-Kurzweg und WordPress-Rückimport bleiben funktional und im Dateiformat unverändert. Sofortartikel erscheinen automatisch in derselben Redaktionsthemenübersicht.
+7. **Ein verlässlicher Auftragsbestand.** Sichere Entnahme, Wiederaufnahme und eindeutiger Import; alte PPM-/Artikelplatz-Abhängigkeiten nur nach erwiesenem funktionsgleichen Ersatz entfernen.
+8. **Portalneutral und diagnostizierbar.** Gleicher Code für Pferdeatelier, Hobby Depot und Hab & Bewahr; Portalbegriffe/Kategorien in getrennten Profilen. Entwicklerdiagnose im selben Plugin, ohne neue fachliche Prüfungen.
+9. **Abnahme nur gegen kompletten Altumfang.** Funktionsvergleich Alt → Neu **und** vollständiger echter Test von Recherche bis WordPress-Entwurf einschließlich Fehlerfällen. Keine weitere ZIP als „fertig“ oder „voller Workflow“ anbieten, solange ein Punkt fehlt. Live und bestehende Plugins bleiben unangetastet.
+
+**Vorrang:** Diese Neufassung ersetzt alle widersprechenden älteren Vereinfachungsannahmen. Vereinfachung betrifft ausschließlich Technik, Doppelschritte und Zuständigkeiten – niemals Leistung oder Automatisierung.
+
 **Stand:** 13.11.2026 | **Zweck:** Der nächste Chat kann ohne erneute Grundsatzdebatte mit der belegten Inventur und einem gefahrlosen Test-Pilot beginnen.
 
 **Status:** Konzept/Regeln festgelegt; kein neues Plugin erstellt; kein echter WordPress-Ende-zu-Ende-Test durchgeführt; kein Live-Umbau; keine Installationsfreigabe. Das Dokument ist eine **PR-Arbeitsübergabe**, keine zweite Current-Autorität und ersetzt die Campus-Büro-Current nicht. Basis: [Inventur und Empfehlung](2026-11-13_KISS_INVENTUR_EIN_PLUGIN_VERBINDLICHE_EMPFEHLUNG.md), [Regal-Modell](2026-11-13_PRODUKTIONSPLAN_KISS_ERGEBNISOFFEN.md), PR #768.
