@@ -1,0 +1,97 @@
+name: HD009 0.1.41 consolidated KISS one decision whole-workflow QA
+on:
+  push:
+    branches: [hobbyroom/hd009-0141-kiss-full-workflow-20261114]
+    paths:
+      - .github/workflows/hd009_0141_consolidated_full_qa.yml
+      - scripts/hd009_0141_full_workflow_build.py
+      - scripts/hd009_0141_single_matcher_qa.py
+      - scripts/hd009_0141_compare_qa.py
+      - scripts/hd009_0141_refresh_qa.py
+permissions:
+  contents: read
+jobs:
+  consolidated:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build only one complete plugin candidate from the last passed full ZIP
+        run: |
+          set -e
+          python3 scripts/hd009_0141_full_workflow_build.py \
+            protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CANDIDATES/HOBBY_DEPOT_HD009_0.1.40_EINE_ENTSCHEIDUNG_NUR_TEST.zip \
+            /tmp/HOBBY_DEPOT_HD009_0.1.41_SINGLE_KISS_TEST.zip
+      - name: Check complete 41-file ZIP, 24 PHP files and unchanged provider and storage methods
+        run: |
+          set -e
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import re,hashlib
+          root=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE')
+          old=root/'CANDIDATES/HOBBY_DEPOT_HD009_0.1.40_EINE_ENTSCHEIDUNG_NUR_TEST.zip'
+          new=Path('/tmp/HOBBY_DEPOT_HD009_0.1.41_SINGLE_KISS_TEST.zip')
+          t='affiliate-portal-router/includes/trait-ppar-idealo.php'
+          m='affiliate-portal-router/hobby-depot-affiliate-router.php'
+          with ZipFile(old) as a,ZipFile(new) as b:
+            assert a.testzip() is None and b.testzip() is None
+            assert len(a.namelist())==len(b.namelist())==41
+            assert a.namelist()==b.namelist()
+            diffs=[name for name in a.namelist() if a.read(name)!=b.read(name)]
+            assert set(diffs)=={m,t},diffs
+            former=a.read(t).decode();revised=b.read(t).decode()
+            def method(text,name):
+              found=re.search(r'^    (?:private|public|protected) function '+re.escape(name)+r'\(',text,re.M)
+              assert found,name
+              rest=text[found.end():]
+              next_method=re.search(r'^    (?:private|public|protected) function ',rest,re.M)
+              return text[found.start():found.end()+next_method.start()] if next_method else text[found.start():]
+            for name in (
+              'idealo_materialize_campaigns','idealo_find_feed_metadata','hd_idealo_feed_download_url',
+              'idealo_download_feed_to_temp','idealo_open_feed_stream','idealo_stream_close',
+              'idealo_provider_access_save','idealo_provider_access_test','idealo_target_keys_for_concept',
+              'idealo_payload_rank_tuple','idealo_standalone_campaign_allowed',
+              'idealo_campaign_publicly_allowed','hd_idealo_standard_feed_compare_work',
+              'idealo_match_index','idealo_match_related_equipment_stems',
+              'idealo_match_specific_equipment_tokens','idealo_match_blocked'
+            ):
+              assert method(former,name)==method(revised,name),'Changed unrelated: '+name
+            assert revised.count('private function idealo_match_feed_row_to_concept(')==1
+            assert revised.count("hd009-match-0.1.41")==1
+            main=b.read(m).decode()
+            assert 'hd_idealo_category_title_relevant' not in main
+            assert 'Version: 0.1.41' in main
+            assert 'Version: 0.1.40' not in main[:500]
+            phproot=Path('/tmp/hd009_0141_php')
+            for name in b.namelist():
+              if name.endswith('.php'):
+                dst=phproot/name;dst.parent.mkdir(parents=True,exist_ok=True);dst.write_bytes(b.read(name))
+            print('PASS_FULL_PLUGIN_41_ENTRIES',len(b.namelist()))
+            print('PASS_EXACTLY_ONE_RELEVANCE_DECISION')
+            print('PASS_UNRELATED_PROVIDERS_UNCHANGED')
+            print('SHA256',hashlib.sha256(new.read_bytes()).hexdigest())
+          PY
+          find /tmp/hd009_0141_php -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Original real HD007 matcher with direct, related, rejected, and category-negative tests
+        run: |
+          set -e
+          python3 scripts/hd009_0141_single_matcher_qa.py \
+            /tmp/HOBBY_DEPOT_HD009_0.1.41_SINGLE_KISS_TEST.zip /tmp/hd009_0141_matcher.php \
+            protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-007-HOBBYREGISTER-CORE/CURRENT.zip
+          php -l /tmp/hd009_0141_matcher.php
+          php /tmp/hd009_0141_matcher.php
+      - name: Original PHP read-only 2747-vs-2901 complete CSV GZIP preview regression
+        run: |
+          set -e
+          python3 scripts/hd009_0141_compare_qa.py \
+            /tmp/HOBBY_DEPOT_HD009_0.1.41_SINGLE_KISS_TEST.zip /tmp/hd009_0141_compare.php
+          php -l /tmp/hd009_0141_compare.php
+          php /tmp/hd009_0141_compare.php
+      - name: Original refresh and activation lifecycle: new rule, unchanged hash, 304, retry, no double import
+        run: |
+          set -e
+          python3 scripts/hd009_0141_refresh_qa.py \
+            /tmp/HOBBY_DEPOT_HD009_0.1.41_SINGLE_KISS_TEST.zip /tmp/hd009_0141_refresh.php
+          php -l /tmp/hd009_0141_refresh.php
+          php /tmp/hd009_0141_refresh.php
