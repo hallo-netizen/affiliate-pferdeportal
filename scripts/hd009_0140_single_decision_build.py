@@ -117,7 +117,7 @@ assert m.count(old_fact)==1, "No re-evaluation in product description"
 m=m.replace(old_fact,new_fact,1)
 # The old method is no longer used anywhere. Remove it rather than keep a
 # second conflicting source of relevance that a future caller can revive.
-start=m.index("    /** Public-safe text evidence, no API/DB access and no fuzzy substring. */")
+start=m.index("    private function hd_idealo_category_title_relevant(")
 end=m.index("    private function render_banner(",start)
 old_method=m[start:end]
 assert "private function hd_idealo_category_title_relevant(" in old_method
