@@ -74,6 +74,21 @@ jobs:
             print('SHA256',hashlib.sha256(new.read_bytes()).hexdigest())
           PY
           find /tmp/hd009_0141_php -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Verify plugin version declarations and absence of duplicate late decisions
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          import re
+          with ZipFile('/tmp/HOBBY_DEPOT_HD009_0.1.41_SINGLE_KISS_TEST.zip') as z:
+            main=z.read('affiliate-portal-router/hobby-depot-affiliate-router.php').decode()
+            trait=z.read('affiliate-portal-router/includes/trait-ppar-idealo.php').decode()
+            version_lines=[v.strip() for v in main.splitlines() if re.search(r'(?:const |define\().*VERSION|Version:\s*0\.1\.',v)]
+            print('VERSION_LINES',version_lines[:15])
+            print('NO_LATE_IDEALO_CHECKS',main.count('hd_idealo_category_title_relevant'),main.count('hd_idealo_product_targets_exact_hobby_page'))
+            assert 'Version: 0.1.41' in main
+            assert main.count('hd_idealo_category_title_relevant')==0
+            assert main.count('hd_idealo_product_targets_exact_hobby_page')==0
+          PY
       - name: Original real HD007 matcher with direct, related, rejected, and category-negative tests
         run: |
           set -e
