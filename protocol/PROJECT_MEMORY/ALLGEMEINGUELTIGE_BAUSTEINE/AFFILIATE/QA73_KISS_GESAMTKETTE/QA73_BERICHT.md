@@ -1,0 +1,21 @@
+# QA73 – Pferdeatelier eBay: ein Bestand, ein Abschluss (Teststand)
+
+**Stand:** 14.11.2026. **Abnahme: NICHT BESTANDEN.** Grundlage sind die echten QA71-Laufereignisse (2.769; Ende 5/283, kein Liveabschluss), vollständiges ursprüngliches QA71-Plugin 6.72.350 und der geprüfte QA72-Quellpatch. Die QA73-Änderung betrifft **nur** die vorhandene `includes/trait-ppar-ebay-run.php`; sämtliche QA72-Änderungen an `trait-ppar-ebay.php` bleiben unverändert. Keine neue Engine, Worker, Tabelle, WordPress-Cron, Freigabe oder installierbare Plugin-ZIP.
+
+## Zwei am echten PHP vorher/nachher nachgewiesene Fehler
+
+1. **Doppelter öffentlicher Abschluss nach verlorener Zustandsmeldung.** Wenn die öffentliche Freigabe korrekt gespeichert wird, aber anschließend das Speichern der nächsten Laufphase fehlschlägt, schreibt der nächste normale Tick denselben Freigabestand nochmals. Original-PHP mit einer einmaligen nachgestellten WordPress-Speicherstörung: **3** statt regulär **2** öffentliche Speicherungen (eine frühere inkrementelle, eine endgültige, eine fehlerhafte Wiederholung). QA73 verwendet die **bereits gespeicherte endgültige Freigabe desselben Laufs** mit identischem bestätigten Produktbestand. Ergebnis im gleichen Test: **2** Speicherungen, unveränderter Altbestand, Lauf endet im nachgestellten Szenario regulär. Eine neue Produktauswahl oder zweite fachliche Kontrolle entsteht nicht.
+2. **Falsches „Fertig“, wenn die letzte Bereinigung nicht gespeichert werden konnte.** Die ursprüngliche Methode ignoriert das fehlgeschlagene Speichern und setzt den Lauf trotzdem auf `completed`. Einmalig nachgestellter Fehler beim Speichern des letzten Bereinigungsschritts: Original **`completed` ohne Fehlercode**, QA73 **`failed` mit `checkpoint_business_cleanup_state_save_failed`**, alter öffentlicher Bestand bleibt erhalten. Der Endstatus wird nur nach nachgewiesener Sicherung des Bereinigungsfortschritts gesetzt. Ein dauerhaft ausgefallener WordPress-Speicher kann selbst einen Fehlerstatus nicht mehr sicher speichern; das ist keine behauptete Live-Freigabe.
+
+**Methodik:** Beide Tests rufen die Original-PHP-Methoden auf, mit nachgestellten WordPress-Datenbankantworten; das Testmodell übernimmt ausdrücklich die WordPress-Vertragsbedingung, dass gespeicherte öffentliche Checkpoints den Status `safe` tragen. Sie sind keine historischen echten eBay-HTTP-Daten.
+
+## Gesamttest in einer Auswertung
+
+- Bisheriger QA72-Gesamttest auf QA73-Quellstand: **5.627 lokale Prüfungen ohne Fehler**; sieben vollständige Controllerläufe, 50 weitere PHP-Fälle, neun Quellaktualitätsfälle, 2.769 echte originale Audit-Ereignisse und 278 Fehlfamilien, 23 PHP-Syntaxdateien.
+- Neue gezielte persistente Fehler- und Bestandsregression: **89 weitere lokale Prüfungen ohne Fehler**, einschließlich gleicher Ergebnisse in allen sieben bereits vorhandenen Vollablauf-Szenarien; genau eine zusätzlich geänderte bestehende PHP-Datei gegenüber QA72.
+- **GitHub-Wecker bleibt ein echter Blocker:** PR #759 ist offen/ungemergt und durch den bestehenden Hardlock geschützt. In seinem Quelltext stehen `MAX_TICKS=4` und `MAX_CONSECUTIVE_FAILURES=5`; der vorgesehene Fünfer-Abbruch kann innerhalb eines Vierer-Arbeitsfensters nicht auslösen. Keine Umgehung des Hardlocks, keine geschützte Workflow-Datei geändert. Auch ein 5-Minuten-Zeitplan garantiert keine tatsächliche GitHub-Ausführung.
+- Das historische eBay-Protokoll enthält **keine** vollständigen Original-getItem-Antworten, dazugehörigen historischen WordPress-Zeilen oder einen echten Public-/Cleanup-Endzustand. Daher keine echte 1:1-Produktentscheidungssimulation und keine Abnahme. Der gespeicherte historische Lauf endet bei 5 von 283 Familien.
+
+**KISS-Ziel:** Eine Produktentscheidung bei Auswahl, eine unveränderliche gespeicherte Entscheidung pro unverändertem Quellstand, Aktualität ohne neue Fachentscheidung, ein kanonischer Cursor, idempotente Veröffentlichung und ein erst nach gesicherter Bereinigung bestätigter Abschluss. **QA73 ist Beweis- und Quellstand, kein Plugin zur Installation.**
+
+Dateien: `QA73_RUN_TRAIT.patch`, `QA73_ZUSATZREGRESSION.py`, `QA73_ZUSATZREGRESSION.json`, `QA73_GESAMTKETTE.py`, `QA73_GESAMTRESULTAT_QA72_CONTINUITY.json`, `QA73_POST_COMMIT_REALISTIC_TEST.php`, `QA73_CLEANUP_LAST_WRITEFAIL_TEST.php` sowie QA71/QA72-Nachweisarchive im bestehenden Pferdeatelier-Büro.
