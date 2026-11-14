@@ -1,7 +1,9 @@
-# Wassertechnik – Kategorieplugin WT001
+# Wassertechnik – WT001, eine Pluginidentität
 
-**Aktueller belegter Stand:** WT001 0.1.4, weiterhin einzige Pluginidentität. Der DataForSEO-Lauf ist beendet: 218 Suchabsichten, 106 Suchvolumina, organische Difficulty offen; **NICHT erneut starten**. Original-Daten W5.
+**Live belegter SEO-Stand:** Version 0.1.4, abgeschlossene DataForSEO-Messung (W5); **nicht erneut starten**.
 
-**W8 im echten Quellcode belegt:** Die Version 0.1.4 kann Inventur/SEO, **aber keinen Import von WordPress-Seiten oder Inhaltskategorien**. Siehe `W8_IMPORT_QUELLCODE_PRUEFUNG_20261114.md`.
+**Neu vorbereiteter Gesamtimport (W9):** `WASSERTECHNIK_KATEGORIE_WORKFLOW_0.1.5_IMPORT_NUR_TEST.zip` als **Update des bestehenden Plugins**, nicht als zweite Plugininstallation. ZIP und PHP-Importer offline geprüft; **kein WordPress-Livetest und noch keine Importfreigabe**. Bericht: `W9_IMPORT_PLUGIN_OFFLINE_ABNAHME_20261114.md`.
 
-**Nächster Hauptfunktionsblock:** Einmalige, ADD-only-Importfunktion im **selben Plugin** für die W6-Gesamtvorschau (113 Seiten, 105 produktbezogene Kategorien). W7 legt den Menüaufbau fest, nicht weitere WordPress-Seiten. Keine neue Pluginlinie, keine weitere SEO-Gesamtrecherche. **Kein realer Import ohne ausdrückliche Freigabe.**
+Die einzige neue Funktion ist der **ADD-only-Strukturimport** aus der bestehenden W6-Liste: 113 Seiten und 105 produktbezogene Kategorien; keine 356 Artikel und keine automatische Veröffentlichung. Frontend/Mega-Menü W7 erst nach entsprechender Freigabe prüfen.
+
+**Nächster Schritt:** Nach ausdrücklicher Freigabe die eine Testversion als Update auf der gebundenen Wassertechnik-Testseite prüfen; danach erst gesonderte Importfreigabe. Kein weiterer DataForSEO-Kostenlauf.

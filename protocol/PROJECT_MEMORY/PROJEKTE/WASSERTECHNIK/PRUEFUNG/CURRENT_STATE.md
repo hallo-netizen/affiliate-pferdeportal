@@ -14,7 +14,7 @@
 
 **Beleg:** `WT001_013_EINMALIGE_GESAMTABNAHME_20261114.md` dokumentiert lokalen vollständigen Erfolgspfad sowie Fehlerpfade und feste Aufrufbegrenzungen. **Keine** echten API-Kosten und kein echter WP-0.1.3-Test behauptet.
 
-**NEXT ACTION:** Nur den in W8 nachgewiesenen fehlenden Import-Hauptfunktionsblock in derselben WT001-Pluginidentität vorbereiten und zentral prüfen; danach ausdrückliche Schreibfreigabe, einmaliger ADD-only-Import und WP-Readback.
+**NEXT ACTION:** W9-Test-ZIP aus vorhandener WT001-Pluginidentität offline geprüft; realen Test auf gebundener WP-Website nur nach Freigabe, danach gesonderte ADD-only-Importfreigabe und einen WP-Readback.
 
 **Grenze:** Keine WordPress-/HivePress-Produktion, keine fremden Projektdateien verändern.
 
@@ -34,3 +34,6 @@
 
 ## W8 – echte Plugin-Quellprüfung 14.11.2026
 WT001 0.1.4 GitHub-ZIP mit sechs Einträgen untersucht; PHP-Code enthält Inventur/SEO/Recherche, keine WP-Seiten-/Kategorien-Anlage. W6 bleibt **schreibfreie** Vorschau, kein Import. Einzige fachliche/technische Lücke: derselben Pluginidentität eine einmalige Importfunktion ergänzen; **noch nicht implementiert**, WP nicht verändert. Beleg `../PLUGINS/W8_IMPORT_QUELLCODE_PRUEFUNG_20261114.md`.
+
+## W9 – gebündelte Offline-Importabnahme (14.11.2026)
+Vorhandene WT001 0.1.4 um einen einzigen Import-Hauptfunktionsblock auf Testversion 0.1.5 erweitert. 8-Dateien-ZIP mit 218 W6-Ownern (113 Seiten, 105 Kategorien). PHP-Lint und sechs gebündelte lokale WordPress-Mock-Szenarien bestanden: Erfolg, Wiederholung ohne Dubletten, Fehler-Rücknahme ausschließlich neu angelegter Objekte, falsche Website, vorhandener Pfadkonflikt, geänderter Plan. **Kein WordPress-Live-Test und keine Importfreigabe.** Details `../PLUGINS/W9_IMPORT_PLUGIN_OFFLINE_ABNAHME_20261114.md`.
