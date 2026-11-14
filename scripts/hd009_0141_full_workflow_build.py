@@ -177,6 +177,55 @@ edit_method("    public function idealo_ensure_refresh_schedule(",
 
 files[trait]=s.encode("utf-8")
 m=files[main].decode("utf-8")
+# Both placement and thematic acceptance have exactly one authority:
+# feed matcher for product identity; standard campaign_match_rank for placement.
+# Remove a second late Idealo-specific page gate from the cached render path.
+old_late="""            if (!$this->hd_idealo_product_targets_exact_hobby_page($campaign, $rank_context, $slot_type)) {
+                continue;
+            }
+"""
+assert m.count(old_late)==1, "Unexpected page-relevance late gate"
+m=m.replace(old_late,"",1)
+begin=m.index("    private function hd_idealo_product_targets_exact_hobby_page(")
+end=m.index("    private function category_product_shared_rank_base(",begin)
+assert "private function hd_idealo_product_targets_exact_hobby_page(" in m[begin:end]
+m=m[:begin]+m[end:]
+assert "hd_idealo_product_targets_exact_hobby_page" not in m
+
+# The original single campaign placement resolver is now the only exact
+# Idealo page-slot decision, using the already stored target keys.
+first=m.index("    private function campaign_match_rank(")
+last=m.index("    private function get_content_context(",first)
+rank=m[first:last]
+spot="        $glossary_single_banner = $required_creative_type === 'banner'"
+assert rank.count(spot)==1
+early=r"""        // Idealo feed products are bound ONCE to targets at import.
+        // On a hobby page, only its exact stored page key may fill product
+        // slots. Other networks keep their original rank rules untouched.
+        if ($required_creative_type==='product'
+            && preg_match('/^category_product_[123]$/',$slot_type)
+            && $context_post_type==='page'
+            && sanitize_key((string)($campaign['network']??''))==='idealo'
+            && sanitize_key((string)($campaign['source']??''))==='idealo_product_feed_v1') {
+            $slug=sanitize_title((string)($context['primary_slug']??''));
+            return $slug!=='' && in_array('page:'.$slug,(array)($campaign['automation_target_keys']??array()),true)
+                ? array('specificity'=>500,'matches'=>1,'reason'=>'Gespeichertes genaues Idealo-Hobbyziel.')
+                : null;
+        }
+
+"""
+rank=rank.replace(spot,early+spot,1)
+# Prevent the global ANY-article Idealo fallback from bypassing the
+# single imported topic decision. eBay's longstanding fallback is unchanged.
+old_fallback=r"""            $verified_idealo = $provider === 'idealo'
+                && $source === 'idealo_product_feed_v1'
+                && sanitize_key((string)($campaign['product_identity_source'] ?? '')) === 'gtin'
+                && !empty($campaign['product_gtins']);
+            if ($verified_ebay || $verified_idealo) {"""
+new_fallback="""            if ($verified_ebay) {"""
+assert rank.count(old_fallback)==1,"Generic article fallback changed"
+rank=rank.replace(old_fallback,new_fallback,1)
+m=m[:first]+rank+m[last:]
 assert m.count("Version: 0.1.40")==1
 m=m.replace("Version: 0.1.40","Version: 0.1.41",1)
 files[main]=m.encode("utf-8")
