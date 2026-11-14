@@ -15,4 +15,6 @@ Der Quellcode der 49 ZIP-Einträge wurde hier noch nicht vollständig entpackt, 
 - Keine neue Tabelle, kein WP-Core-Eingriff, kein Frontend-HTTP, keine zweite Schreiber-Instanz.
 - Positive/negative Tests auf echtem Blank-WordPress, u.a. falsche Site, falsche Parent-ID, Fremdprojekt, Doppelausführung, Importfehler, konkurrierendes Plugin, unveränderte Revision.
 
-**Freigabestatus:** BLOCKED bis alle konkreten Nachweise vorliegen.
+**Aktualisierung 14.11.2026:** Für den schreibfreien SEO-Preflight existiert inzwischen die lokal geprüfte **WT001 0.1.0** als isolierte Kopie der Robotik-0.4.3-DataForSEO-/Inventur-Module; **kein HAB-002-PHP-Port, kein WordPress-Import**. Der ursprüngliche Adapterplan bezieht sich nur noch auf eine spätere WordPress-Importversion nach Fach-/SEO-Freigabe. Die kostenlose WT001 ist im Plugin-CURRENT dokumentiert.
+
+**Freigabestatus der Import-Portierung:** BLOCKED bis vollständige Quellen- und WP-Live-Prüfung. WT001-SEO-Preview: OFFLINE PASS, WP LIVE OFFEN.
