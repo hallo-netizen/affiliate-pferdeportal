@@ -1,3 +1,23 @@
+## 14.11.2026 – RC44: VERBINDLICHE 6-SEITEN-FRONTEND-ABNAHME ERFASST
+
+**Bürostatus:** RC44 / 0.1.41-rc44 als vollständiges geprüftes `CURRENT.zip` und `HAB_AFFILIATE_RC44_0.1.41-rc44.zip` im HAB-004-Pluginbüro gespeichert; SHA256 `2a9701c465fdf4ac1830a6b02b9329f5613337587c65379f09be94c20b00e681`. Vollständige PHP-/Regressionstests SUCCESS: https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43605029576.
+
+**Letzter bestätigter Live-Stand gehört zu RC43:** 160 aktiv/0 ohne Ziel, aber öffentliche Anzeige fehlerhaft (Hundehaftpflicht auf Tierkranken, R2 leer, fehlendes Grundbesitzer-R3-Banner, doppelter „Mehr erfahren“-Button). **RC44 ist technisch getestet, die Live-Frontend-Abnahme steht noch aus.**
+
+**Exakter nächster Schritt:** RC44 im bestehenden WordPress-Plugin aktualisieren, bestehende Werbemittel-Seite dreimal aktualisieren (kein Neuimport), **6 konkrete Zielseiten ohne eingeloggte Admin-Anzeige** prüfen:
+1. https://hab-und-bewahr.de/?page_id=815 – Tierkrankenversicherung: KEIN Hundehaftpflicht-Motiv.
+2. https://hab-und-bewahr.de/?page_id=786 – Hundehaftpflichtversicherung: genau passendes Motiv.
+3. https://hab-und-bewahr.de/?page_id=765 – Haftpflicht & Rechtsschutz (R2): Banner direkt auf dem R2-Hub.
+4. https://hab-und-bewahr.de/?page_id=766 – Krankenversicherung & Vorsorge (R2): Banner direkt auf dem R2-Hub.
+5. https://hab-und-bewahr.de/?page_id=784 – Haus- und Grundbesitzerhaftpflichtversicherung (R3): fehlende Anzeige aus RC43 erneut prüfen, Lösung hier NOCH NICHT bewiesen.
+6. https://hab-und-bewahr.de/?page_id=767 – Gewerbeversicherungen & Finanzen (R2): Firmenversicherungsbanner auf dem R2-Hub.
+
+**Auf allen vorhandenen Bildbannern:** Bild selbst anklickbar, kein zusätzlicher „Mehr erfahren“-Button, Anzeige-Kennzeichnung vorhanden, Bild nicht beschnitten/vergrößert. Status bitte pro Seite nur als JA/NEIN geben. Aus WordPress-IDs abgeleitete Links: öffentliche Erreichbarkeit über externes Web in diesem Durchgang nicht bestätigt, IDs aus echtem WordPress-Baum.
+
+**Vollständige, dauerhafte Abnahmeakte:** [`RC44_FRONTEND_ABNAHME_ZIELSEITEN_20261114.md`](./RC44_FRONTEND_ABNAHME_ZIELSEITEN_20261114.md).
+
+---
+
 ## 14.11.2026 – RC44 GETESTET UND IM PLUGIN-BÜRO: ECHTE FRONTEND-FEHLER 14:52/14:54
 
 **Live-Stand vor RC44 (nach RC43, Nutzerbeobachtung 14:52):** WordPress-Backend meldet 160/160 Banner aktiv/0 ohne Ziel. **Öffentliche Sichtprüfung widerspricht einer vollständigen Abnahme:** Auf `Tierkrankenversicherung` wird fälschlich ein `Hundehaftpflichtvers.`-Motiv ausgegeben, darunter ein abgesetzter dunkelgrüner `Mehr erfahren`-Button. Auf `Haus- und Grundbesitzerhaftpflichtversicherung`, `Haftpflicht & Rechtsschutz` und `Krankenversicherung & Vorsorge` meldet Nutzer keine sichtbare Banneranzeige. Diese drei fehlen noch als **tatsächlich live bestätigte Anzeige**, auch wenn RC44 das nachgewiesene Hub2-Slotproblem korrigiert.
