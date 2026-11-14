@@ -76,7 +76,7 @@ foreach($raw['rows'] as $i=>$original) {
   $row['destination_url']=$original['tracking_url'];
   $row['tracking_url']=$original['tracking_url'];
   $row['payload']=json_encode(array('_destination_source'=>'tracking_checked',
-    'title_source'=>'manual_missing','html'=>$original['html'],
+    'html'=>$original['html'],
     '_dimension_state'=>'verified'));
   $p=$o->hb_rc31_insurance_banner_plan($row,$portal,$GLOBALS['targets'],array('page','category'));
   if(($p['status']??'')==='ready') {
@@ -106,7 +106,7 @@ $GLOBALS['targets'][]=array('type'=>'page','id'=>987,'key'=>'page:987',
 $r=banner('unknown/','Tarifcheck Banner');
 $r['tracking_url']='https://a.partner-versicherung.de/click.php?partner_id=DEMO&ad_id=161';
 $r['destination_url']=$r['tracking_url'];
-$r['payload']=json_encode(array('_destination_source'=>'tracking_checked','title_source'=>'manual_missing',
+$r['payload']=json_encode(array('_destination_source'=>'tracking_checked',
  'html'=>'<a href="https://a.partner-versicherung.de/click.php?ad_id=161"><img src="https://a.partner-versicherung.de/img.png" alt=""></a>'));
 $failure=$o->hb_rc31_insurance_banner_plan($r,$portal,$GLOBALS['targets'],array('page','category'));
 ok($failure['status']==='blocked' && $failure['reason']==='No verified specific/general insurance',
