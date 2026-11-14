@@ -49,6 +49,14 @@ jobs:
                   window=code[max(0,m.start()-850):m.start()+850]
                   if 'update_post_meta' in window or 'wp_insert_post' in window or 'output_object' in window:
                       print('SOURCE_WRITE_CONTEXT',repr(window[:1500]))
+          for filename,code in src.items():
+              if 'trait-ppar-output-objects' not in filename and 'trait-ppar-creative-library' not in filename:continue
+              for token in ('HB_INSURANCE_CANONICAL','save_campaign_record','output_object_v4','campaign_post_id'):
+                  for m in list(re.finditer(re.escape(token),code))[:15]:
+                      before=code[max(0,m.start()-2200):m.start()]
+                      names=list(re.finditer(r'function\\s+([A-Za-z0-9_]+)\\s*\\(',before))
+                      name=names[-1].group(1) if names else 'previous_scope'
+                      print('MATERIALIZATION_TOKEN',filename,token,'METHOD',name,'CONTEXT',repr(code[max(0,m.start()-900):m.start()+1400]))
           # Original PHP accepts stored campaign exactly once for approved slot; no guessed data.
           _,gate=method('campaign_matches_contract_slot_rule')
           assert gate and "output_object_v4" in gate
