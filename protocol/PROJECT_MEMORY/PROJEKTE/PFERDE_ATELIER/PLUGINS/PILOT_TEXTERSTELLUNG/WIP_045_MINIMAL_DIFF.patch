@@ -1,0 +1,175 @@
+--- 044/texterstellung/README-TESTINSTALLATION.txt
++++ 045/texterstellung/README-TESTINSTALLATION.txt
+@@ -1,3 +1,6 @@
++0.4.5-WIP – NUR INTERNE QA, NICHT INSTALLIEREN ODER WEITERGEBEN.
++Die Gesamtabnahme ist nicht bestanden; die echten 61 Altaufträge können nicht vollständig bis zum WordPress-Entwurf laufen.
++
+ TEXTERSTELLUNG – WordPress-Testversion (Stand 14.11.2026)
+ =======================================================
+ Version 0.4.4: vollständiger Testkandidat, KEINE LIVE-FREIGABE.
+--- 044/texterstellung/includes/class-txe-legacy-source-bridge.php
++++ 045/texterstellung/includes/class-txe-legacy-source-bridge.php
+@@ -21,7 +21,7 @@
+             if(!$alreadyComplete)$keys[]=$key;
+         }
+         $rows=self::readRows(array_values(array_unique($keys)));
+-        $out=[];$reasonCounts=[];
++        $out=[];$reasonCounts=[];$observedGaps=[];$openRoomCount=0;$unresolvedRoomCount=0;
+         foreach($proofs as $key=>$proof) {
+             if(!is_array($proof)||($proof['box']??'')!=='FREI')continue;
+             $key=(string)$key;$reason='ORIGINAL_SOURCE_NOT_FOUND';
+@@ -35,6 +35,26 @@
+             } elseif(isset($rows[$key])) {
+                 $row=$rows[$key];$candidate=json_decode((string)($row['payload_json']??''),true);
+                 if(!is_array($candidate))$candidate=[];
++                // Category monitoring only READS the ORIGINAL, frozen gap proposal.
++                // It never reruns Fach/Magazin or article-type classification.
++                $path=(array)($candidate['normal_metadata_path']??[]);
++                if(($path['contract']??'')==='PSTE_NORMAL_METADATA_PATH_V2'
++                    &&($path['status']??'')==='STRUCTURE_GAP'
++                    &&!empty($path['category_backlog_required'])
++                    &&($path['worker_flow']['storage']??'')==='CATEGORY_ROOM_TOPIC_POOL') {
++                    ++$openRoomCount;
++                    $gap=(array)($path['category_gap_proposal']??[]);
++                    $proposalId=trim((string)($gap['proposal_id']??''));
++                    $proposalName=trim((string)($gap['proposed_name']??''));
++                    if(($gap['contract']??'')==='PSTE_CATEGORY_GAP_ANALYSIS_V2'
++                        &&($gap['status']??'')==='CATEGORY_GAP_PROPOSED'
++                        &&$proposalId!=='' && $proposalName!=='') {
++                        $entry=$observedGaps[$proposalId]??['name'=>$proposalName,'count'=>0];
++                        if($entry['name']===$proposalName)++$entry['count'];
++                        else ++$unresolvedRoomCount;
++                        $observedGaps[$proposalId]=$entry;
++                    } else ++$unresolvedRoomCount;
++                }
+                 // The pool UUID and raw query must identify exactly the previously approved topic.
+                 $storedRaw=trim((string)($candidate['raw_query']??$candidate['query_record']['raw_query']??''));
+                 if($storedRaw!=='' && !hash_equals($storedRaw,$raw))$reason='ORIGINAL_SOURCE_QUERY_CONFLICT';
+@@ -66,7 +86,13 @@
+             $out[$key]=['data'=>$resolved,'reason'=>$reason];
+             $reasonCounts[$reason]=($reasonCounts[$reason]??0)+1;
+         }
+-        return ['items'=>$out,'counts'=>$reasonCounts];
++        // No category decision, no auto-created WordPress terms, no write to
++        // the old pool. The recorded distinct gaps support separate monitoring.
++        return ['items'=>$out,'counts'=>$reasonCounts,
++            'category_gap_watch'=>['open_room_topics'=>$openRoomCount,
++                'distinct_stored_gap_proposals'=>count($observedGaps),
++                'unresolved_stored_gap_proposal'=>$unresolvedRoomCount,
++                'proposals'=>array_values($observedGaps)]];
+     }
+ 
+     private static function savedMetadata(array $row,array $candidate): ?array {
+--- 044/texterstellung/texterstellung.php
++++ 045/texterstellung/texterstellung.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Texterstellung
+  * Description: Portalneutrale Texterstellung mit integrierter Fehlerdiagnose: Recherche, Freigaberegal, Sofortartikel, Titeldateien, K0-Export, Entwurfsimport. Isolierte Testinstallation.
+- * Version: 0.4.4
++ * Version: 0.4.5-wip
+  * Requires PHP: 8.1
+  */
+ if (!defined('ABSPATH')) { exit; }
+@@ -190,7 +190,11 @@
+         if(!self::permitted()||!defined('DOING_CRON')||!DOING_CRON)return;
+         self::$categoryRefreshCron=true;
+         try {
+-            self::loadLegacyApprovals();
++            // The scheduled category-gap watch is read-only as to editorial
++            // decisions. Only the original one-time owner may choose a lane.
++            // This imports new, already-final original bindings without retrying
++            // a pending category judgement from the earlier category room.
++            self::loadLegacyApprovals(false);
+         } catch(Throwable $error) {
+             TXE_Diagnose::record('CATEGORY_RECONCILE_HELD',
+                 ['code'=>TXE_Diagnose::errorCode($error)]);
+@@ -268,6 +272,8 @@
+             if ($kind==='ALT_FREIGABE' && ($prior['origin']??'')==='ALT_FREIGABE'
+                 && ($prior['status']??'')==='METADATEN_OFFEN') {
+                 $updated=$prior;
++                // Stored in the SAME order, not another approval table.
++                if(!empty($item['category_owner_visited']))$updated['category_owner_visited']=true;
+                 foreach (['title','category','article_type','intent','article_id','plan_slot'] as $k) {
+                     $incoming=self::text($item[$k]??'');
+                     if ($incoming==='')continue;
+@@ -338,6 +344,7 @@
+             'target_keyword'=>$keyword,'title'=>$title,'category'=>$category,'article_type'=>$type,
+             'article_id'=>$canonical,'plan_slot'=>$slot,'slot_origin'=>$slotOrigin,'status'=>$ready?'FREI':'METADATEN_OFFEN',
+             'batch'=>'','post_id'=>0,
++            'category_owner_visited'=>$kind==='ALT_FREIGABE'&&!empty($item['category_owner_visited']),
+         ];
+         return $id;
+     }
+@@ -383,7 +390,8 @@
+                         'category'=>self::text($v['category']??$v['category_slug']??''),
+                         'article_type'=>self::text($v['article_type']??''),'intent'=>self::text($v['intent_summary']??''),
+                         'article_id'=>self::text($v['canonical_article_id']??''),
+-                        'plan_slot'=>self::text($v['plan_slot']??'')], 'ALT_FREIGABE');}catch(RuntimeException $e){$issues[]=['index'=>$i,'reason'=>$e->getMessage()];TXE_Diagnose::record('APPROVAL_ITEM_HELD',['index'=>$i,'code'=>TXE_Diagnose::errorCode($e)]);}
++                        'plan_slot'=>self::text($v['plan_slot']??''),
++                        'category_owner_visited'=>!empty($v['category_owner_visited'])], 'ALT_FREIGABE');}catch(RuntimeException $e){$issues[]=['index'=>$i,'reason'=>$e->getMessage()];TXE_Diagnose::record('APPROVAL_ITEM_HELD',['index'=>$i,'code'=>TXE_Diagnose::errorCode($e)]);}
+                 }
+             } else {throw new RuntimeException('UNSUPPORTED_APPROVAL_FORMAT');}
+             foreach($new as $id)if(($s['orders'][$id]['status']??'')==='METADATEN_OFFEN')$held++;
+@@ -647,22 +655,38 @@
+         // The original category worker runs once at its own Fach/Magazin decision
+         // boundary. The SEO FREI verdict is frozen; missing categories remain parked.
+         // Reuse this same owner on explicit import and in the existing daily sync.
++        // Once an original topic has entered its category owner, the same
++        // editorial decision must not run a second time. The visit flag lives
++        // on the existing TXE order, not in a parallel approval register.
++        $savedOrders=(array)(self::state()['orders']??[]);
++        $previouslyVisited=[];
++        foreach($savedOrders as $o)
++            if(($o['origin']??'')==='ALT_FREIGABE' && !empty($o['category_owner_visited']))
++                $previouslyVisited[(string)($o['source_id']??'')]=true;
+         $freeKeys=[];
+         foreach($proofs as $poolKey=>$proof)
+-            if(is_array($proof)&&($proof['box']??'')==='FREI')$freeKeys[]=(string)$poolKey;
++            if(is_array($proof)&&($proof['box']??'')==='FREI'
++                && !isset($previouslyVisited[(string)$poolKey]))$freeKeys[]=(string)$poolKey;
++        $ownerVisitKeys=[];
+         $reviewer=self::$categoryRefreshCron
+             ?(int)get_option('texterstellung_category_owner_reviewer_v1',0)
+             :(int)(function_exists('get_current_user_id')?get_current_user_id():0);
+         if(!self::$categoryRefreshCron && $reviewer>0 && function_exists('current_user_can')
+             && current_user_can('manage_options'))
+             update_option('texterstellung_category_owner_reviewer_v1',$reviewer,false);
+-        if(!$runCategoryOwner){
+-            // Title/K0 transports must NEVER rerun a category/SEO decision.
++        if(!$runCategoryOwner || !$freeKeys){
++            // No category choice on cron, title, export or a repeat import.
+         }elseif($reviewer>0 && function_exists('user_can') && user_can($reviewer,'manage_options')
+             && class_exists('PSTE_Admin') && method_exists('PSTE_Admin','completeExistingCategoryRoom')){
+             try{
+                 $categoryOwner=PSTE_Admin::completeExistingCategoryRoom($freeKeys,$reviewer);
+                 TXE_Diagnose::record('ORIGINAL_CATEGORY_OWNER_COMPLETE',['provider'=>$categoryOwner]);
++                // Freeze a first owner visit only when the ORIGINAL owner
++                // completed its full source scan. Technical source/read errors
++                // are not editorial decisions and must remain retryable.
++                if((int)($categoryOwner['failed']??0)===0
++                    &&(int)($categoryOwner['source_missing']??0)===0)
++                    $ownerVisitKeys=array_fill_keys($freeKeys,true);
+             }catch(Throwable $e){
+                 TXE_Diagnose::record('ORIGINAL_CATEGORY_OWNER_HELD',
+                     ['code'=>TXE_Diagnose::errorCode($e)]);
+@@ -675,6 +699,11 @@
+         // after a second editorial classification or a separate production plan.
+         $recovered=TXE_Legacy_Source_Bridge::recover($proofs);
+         TXE_Diagnose::record('ORIGINAL_SOURCE_RECONCILED', ['provider'=>$recovered['counts']]);
++        // Independent gap-watch facts from the SAME original-source read.
++        // No second category vote and no second full DB scan.
++        if(self::$categoryRefreshCron)
++            TXE_Diagnose::record('CATEGORY_GAP_WATCH_READ_ONLY',
++                ['provider'=>array_diff_key((array)($recovered['category_gap_watch']??[]),['proposals'=>true])]);
+         foreach($proofs as $key=>$proof){
+             if(!is_array($proof)||($proof['box']??'')!=='FREI')continue;
+             $title=self::text($proof['approved_title']??'');
+@@ -696,6 +725,7 @@
+                 'article_type'=>$fields['article_type'],
+                 'canonical_article_id'=>$fields['canonical_article_id'],
+                 'plan_slot'=>$fields['plan_slot'],
++                'category_owner_visited'=>isset($ownerVisitKeys[(string)$key]) || isset($previouslyVisited[(string)$key]),
+             ];
+         }
+         if(!$items)throw new RuntimeException('NO_FREE_OLD_APPROVALS');
