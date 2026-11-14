@@ -8,6 +8,9 @@
 4. **Extern – K0:** einen vollständigen Artikel nach den gültigen K0-Qualitätsregeln schreiben; keine fachliche Doppelprüfung von Keyword, Kategorie, SEO, Titel, Themenpriorität.
 5. **WordPress – Rückimport:** K0-Artikel unter der bestehenden Auftrags-ID als unveröffentlichten Entwurf speichern und zentralen Regalstatus aktualisieren. Keine zweite Fachentscheidung.
 
+## Verbindliche Zwischenstation: WordPress zwischen MINI und K0
+**Betreiberbestätigung am 14.11.2026:** Der Rückimport des fertigen MINI-Ergebnisses in das vorhandene WordPress-Auftragsregal bleibt bewusst bestehen. Dies ist eine **dauerhafte Sicherung und Übergabegrenze**, keine zweite SEO-, Kategorie-, Titel- oder Inhaltsprüfung. WordPress speichert eingefrorene fachliche Entscheidungen, deren einmalige Quell-/Auftragsidentität und Fortschritt; der vorhandene K0-Export nimmt nur den bereits gespeicherten fertigen Auftrag. Nach Abbruch kann K0 beim gespeicherten Auftrag wieder ansetzen, ohne MINI neu zu starten. Auch nach K0-Rückimport aktualisiert WordPress denselben Regalstatus. Der direkte Kurzschluss MINI -> K0 ohne persistentes zentrales Regal ist **nicht** Teil des Zielvertrags. Keine zusätzlichen Datenbanken/Worker oder fachliche Freigabestufen bauen.
+
 ## Einziger Eigentümer jeder Frage
 - Pferderelevanz = WP-Recherche.
 - Kategorie, Fach/Magazin, Artikelart = Kategorie-/Typ-Teilworker **innerhalb des EINEN MINI**.
