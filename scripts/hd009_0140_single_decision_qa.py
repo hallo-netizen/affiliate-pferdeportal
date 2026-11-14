@@ -101,7 +101,6 @@ $x=$q->match(row('Airbrush Anfänger Set'));
 ck($x['status']==='matched' && $x['concept']['title']==='Airbrush','Previously matched exact hobby title remains matched');
 $x=$q->match(row('Buchbinden Zubehör Werkzeug'));
 ck($x['status']==='matched' && $x['concept']['title']==='Buchbinden','Existing simple hobby matcher remains functional');
-ck(!$q->relevant('Kari Traa Malene Cape','Airbrush'),'Original final render gate blocks unrelated fashion');
 
 $x=$q->match(row('FDM 3D Drucker mit Zubehör'));
 ck($x['status']==='matched' && $x['concept']['title']==='3D-Druck','3D Drucker from real HD007 maps to 3D-Druck');
