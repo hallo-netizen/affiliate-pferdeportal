@@ -1,0 +1,12 @@
+{
+  "file_counts": {
+    "TXE_UNCHANGED": 7,
+    "TXE_ADAPTER": 1,
+    "PSTE_ORIGINAL_UNCHANGED": 121,
+    "PSERC_ORIGINAL_UNCHANGED": 5
+  },
+  "integrated_test_pass": 14,
+  "conflict_modes_pass": 4,
+  "zip_sha256": "37cd4b2adfbe00acbaa232f83f5a1d3ddb3bc3e71846f81a6b5f4f933c93bba7",
+  "qa_only": true
+}
