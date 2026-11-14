@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Texterstellung
  * Description: Portalneutrale Texterstellung mit integrierter Fehlerdiagnose: Recherche, Freigaberegal, Sofortartikel, Titeldateien, K0-Export, Entwurfsimport. Isolierte Testinstallation.
- * Version: 0.4.1-original-k0-sync-qa
+ * Version: 0.4.3
  * Requires PHP: 8.1
  */
 if (!defined('ABSPATH')) { exit; }
@@ -11,6 +11,7 @@ require_once __DIR__.'/includes/class-txe-secret-store.php';
 require_once __DIR__.'/includes/class-txe-credentials.php';
 require_once __DIR__.'/includes/class-txe-dataforseo-client.php';
 require_once __DIR__.'/includes/class-txe-diagnose.php';
+require_once __DIR__.'/includes/class-txe-legacy-source-bridge.php';
 // Reuse the whole PSTE original source unchanged (search, PAA, editorial rules and pool).
 // Do not activate both the standalone PSTE plugin and this consolidated candidate.
 $txeOldActive = false;
@@ -112,6 +113,8 @@ if ($txeIsConfirmed) {
 
 final class TXE_Workshop {
     const OPTION = 'texterstellung_orders_v1';
+    private static bool $categoryRefreshCron=false;
+    private const CATEGORY_REFRESH_HOOK='txe_existing_category_reconcile_daily';
     const SLUG = 'texterstellung';
     const K0_CONTRACT = 'PSERC_TEXTMACHINE_METADATA_BATCH_V2';
     const IMPORT_CONTRACT = 'PFERDE_ATELIER_WORDPRESS_IMPORT_V1';
@@ -154,6 +157,12 @@ final class TXE_Workshop {
         exit;
     }
     public static function init(): void {
+        // Same existing category/source reader, once daily; no new fachlicher Worker.
+        add_action(self::CATEGORY_REFRESH_HOOK,[self::class,'reconcileExistingCategoryBindings']);
+        if(self::permitted() && function_exists('wp_next_scheduled') && function_exists('wp_schedule_event')
+            && !wp_next_scheduled(self::CATEGORY_REFRESH_HOOK)) {
+            wp_schedule_event(time()+3600,'daily',self::CATEGORY_REFRESH_HOOK);
+        }
         add_action('admin_menu', [self::class,'menu']);
         add_action('admin_post_txe_testmode_confirm', [self::class,'confirmTestMode']);
         TXE_Diagnose::init();
@@ -171,7 +180,23 @@ final class TXE_Workshop {
     }
     private static function access(): void {
         if (!self::permitted()) { throw new RuntimeException('TESTENVIRONMENT_REQUIRED'); }
+        // A daily trusted WordPress cron runs with no logged-in administrator.
+        // It invokes ONLY the already existing original-source reconcile path.
+        if(self::$categoryRefreshCron && defined('DOING_CRON') && DOING_CRON)return;
         if (!function_exists('current_user_can') || !current_user_can('manage_options')) { throw new RuntimeException('ADMIN_ONLY'); }
+    }
+    public static function reconcileExistingCategoryBindings(): void {
+        if(!self::permitted()||!defined('DOING_CRON')||!DOING_CRON)return;
+        self::$categoryRefreshCron=true;
+        try {
+            self::loadLegacyApprovals();
+        } catch(Throwable $error) {
+            TXE_Diagnose::record('CATEGORY_RECONCILE_HELD',
+                ['code'=>TXE_Diagnose::errorCode($error)]);
+        } finally {self::$categoryRefreshCron=false;}
+    }
+    public static function deactivate(): void {
+        if(function_exists('wp_clear_scheduled_hook'))wp_clear_scheduled_hook(self::CATEGORY_REFRESH_HOOK);
     }
     private static function state(): array {
         $s=get_option(self::OPTION, []);
@@ -618,6 +643,9 @@ final class TXE_Workshop {
         $proofs=is_array($state)?($state['seo_decisions']??[]):[];
         if(!is_array($proofs)||!count($proofs))throw new RuntimeException('NO_OLD_APPROVALS_FOUND_USE_APPROVAL_FILE');
         $items=[];$completed=(array)($state['completed']??[]);
+        // Read the original persisted topic rows ONCE. No second SEO owner and no writes.
+        $recovered=TXE_Legacy_Source_Bridge::recover($proofs);
+        TXE_Diagnose::record('ORIGINAL_SOURCE_RECONCILED', ['provider'=>$recovered['counts']]);
         foreach($proofs as $key=>$proof){
             if(!is_array($proof)||($proof['box']??'')!=='FREI')continue;
             $title=self::text($proof['approved_title']??'');
@@ -626,17 +654,25 @@ final class TXE_Workshop {
             // The original PSTE receipt is the only SEO authority, including its
             // original source hash. No new FREI decision is made on import.
             if (!PSTE_Mini_Workflow::hasStoredFinalFrei((string)$key,$raw)) continue;
+            $original=(array)($recovered['items'][$key]['data']??[]);
+            $fields=[];
+            foreach(['category_slug','article_type','canonical_article_id','plan_slot'] as $field) {
+                $fields[$field]=self::text($proof[$field]??'');
+                if($fields[$field]==='')$fields[$field]=self::text($original[$field]??'');
+            }
             $items[]=[
                 'box'=>'FREI','pool_key'=>(string)$key,'raw_query'=>$raw,
                 'approved_title'=>$title,'intent_summary'=>self::text($proof['intent_summary']??''),
-                'category_slug'=>self::text($proof['category_slug']??''),
-                'article_type'=>self::text($proof['article_type']??''),
-                'canonical_article_id'=>self::text($proof['canonical_article_id']??''),
-                'plan_slot'=>self::text($proof['plan_slot']??''),
+                'category_slug'=>$fields['category_slug'],
+                'article_type'=>$fields['article_type'],
+                'canonical_article_id'=>$fields['canonical_article_id'],
+                'plan_slot'=>$fields['plan_slot'],
             ];
         }
         if(!$items)throw new RuntimeException('NO_FREE_OLD_APPROVALS');
-        return self::ingest(['contract'=>'PSTE_MINI_SEO_DECISIONS_V1','items'=>$items]);
+        $result=self::ingest(['contract'=>'PSTE_MINI_SEO_DECISIONS_V1','items'=>$items]);
+        $result['original_source_counts']=$recovered['counts'];
+        return $result;
     }
 
     /** Technical handoff only: original PSTE is the sole owner of FREI decisions. */
@@ -831,7 +867,10 @@ final class TXE_Workshop {
             }
             if($action==='txe_load_legacy'){
                 $r=self::loadLegacyApprovals();
-                self::redirect('Alte FREI-Freigaben nur lesend übernommen: '.(int)$r['total'].', davon '.(int)$r['held'].' ohne vollständige Daten.');
+                $linked=(int)($r['original_source_counts']['RECOVERED_FROM_ORIGINAL_PSTE']??0);
+                self::redirect('Alte FREI-Freigaben abgeglichen: '.(int)$r['total'].', bereit '.(int)$r['ready']
+                    .', gesperrt '.(int)$r['held'].', Originaldaten eindeutig nachgewiesen '.$linked
+                    .'. Fehlende Angaben bleiben geschützt; Diagnose enthält die Quellenursachen.');
             }
             // Title desk uses the unchanged PSTE original admin_post handlers.
             // Old TXE synthetic row IDs must not become an alternative live title route.
@@ -1018,4 +1057,5 @@ final class TXE_Workshop {
     }
 }
 register_activation_hook(__FILE__, [TXE_Workshop::class,'activate']);
+register_deactivation_hook(__FILE__, [TXE_Workshop::class,'deactivate']);
 add_action('plugins_loaded',[TXE_Workshop::class,'init']);
