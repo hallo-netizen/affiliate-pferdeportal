@@ -6,7 +6,7 @@ Tests the ONE storage boundary, no late topical re-decision.
 """
 from pathlib import Path
 from zipfile import ZipFile
-import re,sys
+import re,sys,json
 
 with ZipFile(Path(sys.argv[1])) as z:
     idealo=z.read('affiliate-portal-router/includes/trait-ppar-idealo.php').decode()
@@ -20,7 +20,19 @@ def method(source,name):
 
 names=['idealo_match_contract_revision','idealo_import_feed_file','idealo_materialize_campaigns',
        'idealo_target_keys_for_concept','idealo_payload_rank_tuple','idealo_campaigns_should_be_active']
-source="\n".join(method(idealo,n) for n in names)+"\n"+method(network,'network_sync_upsert_products')
+matcher_methods=['idealo_match_normalize','idealo_match_stem','idealo_match_tokens',
+ 'idealo_match_primary_tokens','idealo_match_distinct_tokens',
+ 'idealo_match_specific_equipment_tokens','idealo_match_related_equipment_stems',
+ 'idealo_match_index','idealo_text_has_root','idealo_match_blocked',
+ 'idealo_match_context_score','idealo_match_feed_row_to_concept']
+source="\n".join(method(idealo,n) for n in names+matcher_methods)+"\n"+method(network,'network_sync_upsert_products')
+with ZipFile(Path(sys.argv[3])) as z:
+    data=json.loads(z.read('hd-hobbyregister-core/data/hobby-register.json'))
+records=data['records']
+values=list(records.values()) if isinstance(records,dict) else records
+examples={r['canonical_name']:r for r in values if isinstance(r,dict) and r.get('canonical_name')=='Airbrush'}
+assert 'Airbrush' in examples and 'Kompressor' in examples['Airbrush']['result_profile']['what_do_you_need']
+serialized=json.dumps(examples,ensure_ascii=False)
 assert 'idealo_staging_write_failed' in source
 assert 'idealo_staging_read_failed' in source
 assert "if (is_wp_error($counts)) { return $counts; }" in source
@@ -37,6 +49,10 @@ class WP_Error {
 function is_wp_error($x){return $x instanceof WP_Error;}
 function absint($x){return abs((int)$x);}
 function sanitize_text_field($x){return trim(strip_tags((string)$x));}
+function remove_accents($x){return strtr((string)$x,array('ü'=>'u','ä'=>'a','ö'=>'o','ß'=>'ss'));}
+function wp_strip_all_tags($x){return strip_tags((string)$x);}
+$GLOBALS['real_hobby_records']=json_decode('__REAL_HD007_JSON__',true,512,JSON_THROW_ON_ERROR);
+function hd_hobbyregister_get_by_name($name){return $GLOBALS['real_hobby_records'][$name]??null;}
 function sanitize_key($x){return preg_replace('/[^a-z0-9_\-]/','',strtolower((string)$x));}
 function sanitize_title($x){return preg_replace('/[^a-z0-9_\-]/','',strtolower((string)$x));}
 function esc_url_raw($x){return (string)$x;}
@@ -107,13 +123,12 @@ class OriginalIdealoPipeline {
  private function idealo_settings(){return $GLOBALS['options'][self::OPTION_NETWORK_IDEALO];}
  private function idealo_credentials_present($s){return !empty($s['api_key'])&&!empty($s['hobby_feed_verified']);}
  private function idealo_sanitize_output_mode($s){return (string)$s;}
- private function idealo_portal_supply_catalog(){return array('_idealo_required_concepts'=>array());}
- private function idealo_match_index(){return array('concepts'=>array('concept-airbrush'=>array('id'=>'concept-airbrush','title'=>'Airbrush','main_hub'=>'Gestalten','hub'=>'Airbrush','target_pages'=>array(array('slug'=>'airbrush','main_slug'=>'gestalten','hub_slug'=>'airbrush')))));}
- private function idealo_match_feed_row_to_concept($r){
-   // The original matcher has already been executed separately with real HD007
-   // data; this fixture tests staging and materialization, not a second decision.
-   if(strpos((string)($r['product_title']??''),'Airbrush')===false)return array('status'=>'none');
-   return array('status'=>'matched','score'=>250,'context'=>2,'concept'=>array('id'=>'concept-airbrush','title'=>'Airbrush','main_hub'=>'Gestalten','hub'=>'Airbrush'));
+ private function idealo_portal_supply_catalog(){
+   return array('_idealo_required_concepts'=>array(
+    'concept-airbrush'=>array('id'=>'concept-airbrush','title'=>'Airbrush',
+      'target_pages'=>array(array('slug'=>'airbrush','main_slug'=>'gestalten',
+      'hub_slug'=>'airbrush','hub'=>'Airbrush','main_hub'=>'Gestalten')))),
+     'hard_negative_markers'=>array('damen'));
  }
  private function idealo_open_feed_stream($path){return fopen($path,'rb');}
  private function idealo_stream_close($stream){fclose($stream);}
@@ -156,7 +171,15 @@ $good=array(
  'product_deeplink'=>'https://ipn.idealo.de/click?test=1',
  'ean'=>'4006381333931','main_category'=>'Malen','sub_category'=>'Airbrush',
  'brand_name'=>'ACME','image_url'=>'https://cdn.idealo.com/a.jpg');
-makefile($csv,$headers,array($good));
+$related=$good;$related['id']='b';
+$related['product_title']='Kompressor 50 Liter';
+$related['ean']='4006381333932';
+$related['sub_category']='Airbrush Zubehör';
+$related['image_url']='https://cdn.idealo.com/b.jpg';
+$wrong=$good;$wrong['id']='c';$wrong['product_title']='Kari Traa Damen Malene Cape';
+$wrong['ean']='4006381333933';$wrong['main_category']='Mode';
+$wrong['sub_category']='Damen';$wrong['image_url']='https://cdn.idealo.com/c.jpg';
+makefile($csv,$headers,array($good,$related,$wrong));
 $state=$GLOBALS['options'][OriginalIdealoPipeline::OPTION_NETWORK_IDEALO];
 $GLOBALS['wpdb']->mode='write';
 $r=$p->import($csv);
@@ -170,19 +193,23 @@ ck(count($GLOBALS['campaigns'])===0,'Failed DB read must not delete existing pro
 $GLOBALS['wpdb']->mode='';
 $r=$p->import($csv);
 ck(!is_wp_error($r)&&($r['status']??'')==='success','Original feed importer finishes successfully with real DB writes');
-ck(($r['details']['matching_rows']??0)===1,'Exactly one accepted source row reaches the storage owner');
-ck(count($GLOBALS['campaigns'])===2,'Original materializer generates a family comparison and one GTIN product card');
+ck(($r['details']['matching_rows']??0)===2,'Real original matcher accepts direct product plus related compressor, rejects fashion');
+ck(count($GLOBALS['campaigns'])===3,'Original materializer generates a family comparison and two GTIN product cards');
 ck(($GLOBALS['options'][OriginalIdealoPipeline::OPTION_NETWORK_IDEALO]['last_match_revision']??'')==='hd009-match-0.1.41','Matcher contract revised exactly once after staging');
-$found=false;
+$found=false;$related_found=false;$no_fashion=true;
 foreach($GLOBALS['campaigns'] as $c)if(($c['source']??'')==='idealo_product_feed_v1'){
- $found=($c['active']??false)===true
-  && in_array('page:airbrush',$c['automation_target_keys']??array(),true)
-  && ($c['product_gtins'][0]??'')==='4006381333931'
-  && ($c['image_url']??'')==='https://cdn.idealo.com/a.jpg';
+ $usable=($c['active']??false)===true && in_array('page:airbrush',$c['automation_target_keys']??array(),true);
+ if(($c['product_gtins'][0]??'')==='4006381333931'){$found=$usable&&($c['image_url']??'')==='https://cdn.idealo.com/a.jpg';}
+ if(($c['product_gtins'][0]??'')==='4006381333932'){$related_found=$usable&&($c['image_url']??'')==='https://cdn.idealo.com/b.jpg';}
+ if(stripos((string)($c['title']??''),'Malene')!==false){$no_fashion=false;}
 }
-ck($found,'Stored original campaign keeps the one imported hobby target, real image and GTIN');
+ck($found,'Direct product keeps its original hobby target, image and GTIN');
+ck($related_found,'Related compressor from ONE real matcher reaches genuine product card');
+ck($no_fashion,'Fashion rejected once before storage; never materialized');
 unlink($csv);
 echo "ONE_DECISION_TO_STORED_CARD_ORIGINAL_PHP_PIPELINE_PASS\n";
 '''.replace('__ORIGINAL_METHODS__',source)
+encoded=serialized.replace('\\','\\\\').replace("'","\\'").replace("\n"," ")
+php=php.replace('__REAL_HD007_JSON__',encoded)
 dest=Path(sys.argv[2]);dest.parent.mkdir(parents=True,exist_ok=True);dest.write_text(php)
-print('ORIGINAL_PHP_METHOD_COUNT',len(names)+1,'SIZE',len(php))
+print('ORIGINAL_PHP_METHOD_COUNT',len(names)+len(matcher_methods)+1,'SIZE',len(php))
