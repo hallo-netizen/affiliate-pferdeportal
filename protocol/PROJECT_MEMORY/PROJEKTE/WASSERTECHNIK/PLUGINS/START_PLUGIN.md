@@ -1,9 +1,11 @@
-# Wassertechnik – Kategorieplugin WT001 (aktueller Stand)
+# Wassertechnik – Kategorie-Plugin
 
-**Aktive Testversion:** `0.1.2` `WASSERTECHNIK_KATEGORIE_WORKFLOW_0.1.2_SEO_BEGRIFFE_NUR_TEST.zip`; SHA256 `265eb7b49e2a7fe20eea01eda0e2bd680c07577c53092f21eda4`. Ersetzt die ältere WordPress-Version 0.1.1 **als Update derselben Pluginidentität**.
+**Aktueller Testkandidat: WT001 Version 0.1.3** (`WASSERTECHNIK_KATEGORIE_WORKFLOW_0.1.3_SEO_GESAMTRECHERCHE_NUR_TEST.zip`, SHA256 `272403e8c094825c918db65a01a78321baf59ac19af07bc05d089c2cdaa0bb5c`).
 
-**Enthält:** 218 W4-Owner (8 Haupt, 19 Gruppen, 1 Industriehub, 6 Industrielandings, 79 Produkte, 105 Inhaltskategorien), davon 128 redaktionell konkretisierte Suchvorschläge und 90 unveränderte Startbegriffe. Originale WP-Labels/Hierarchie bleiben unverändert. Mapping: `../KATEGORIEKONZEPT/W4_KEYWORDPROFIL_218_20261114.csv`.
+Ein Plugin, eine Version, ein fachlicher W4-Keyword-Owner je Suchbegriff. 218 Kandidaten, davon 128 redaktionell verfeinert, bleiben vollständig erhalten. Die vorhandene Pluginfunktion für kostenfreie Keyword-/Bestandsprüfung bleibt bestehen.
 
-**Sperre:** 0 bezahlte Keywordabfragen und 0 WordPress-Inhaltsimports möglich. Alle Suchbegriffe sind **Entwürfe**, keine Google-Messergebnisse.
+**Erweitert:** Drei Sammelabfragen für Suchvolumen, organische Ranking-Schwierigkeit und Google-Suchabsicht; **einmalig** und erst nach ausdrücklicher Kostenfreigabe beim Klick im WP-Backend (ungefähr 0,17 USD nach Preisstand 14.11.2026; Budgetstopp bei Folgeschritten ab 0,25 USD). Ergebnis als ein JSON-Export. **Keine Import- oder Veröffentlichungsfunktion**.
 
-**NEXT ACTION:** WP 0.1.1 auf 0.1.2 aktualisieren, kostenlos 218er Preflight exportieren und einmal mit `W4_KEYWORDPROFIL_218_20261114.csv` abgleichen. Keine weitere Miniprüfung im Vorfeld; Live-Export ist der eine notwendige WordPress-Nachweis.
+**Nicht erneut verwenden:** 0.1.0/0.1.1 (veraltete Kandidaten); 0.1.2 nur Archiv/aktueller nachgewiesener Livebestand bis zum Update.
+
+**NEXT ACTION:** v0.1.3 als Update derselben Pluginidentität auf `wasser.oliver-beil.de` → DataForSEO-Menü → einmalige Gesamtrecherche bestätigen → ein Ergebnis-JSON exportieren. Kein weiterer kostenloser Preflight und keine neue Teil-Pluginrunde.

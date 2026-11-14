@@ -1,6 +1,6 @@
 # WASSERTECHNIK / PRUEFUNG – einzige aktuelle Büroautorität
 
-**Stand:** 14.11.2026 · **Status:** WT001 0.1.2 echter WordPress-Preflight PASS; kostenpflichtige DataForSEO-Recherche, Suchabsichts- und Importfreigabe offen.
+**Stand:** 14.11.2026 · **Status:** WT001 0.1.2 echter WordPress-Preflight PASS; WT001 **0.1.3** kostenkontrollierter Gesamt-Recherchecode OFFLINE PASS; reale WP-/Provider-Prüfung und Import offen.
 
 **Gesichert:** Master-Archiv-internes SHA256SUMS.txt lokal geprüft; originale Git-Blob-Identität stimmt bytegenau mit Nutzervorlage; automatische 18/18 Regelprüfung ist Altbeleg.
 
@@ -12,6 +12,8 @@
 
 **Beleg:** `WT001_012_LIVE_EXPORT_ABNAHME_20261114.md` mit originaler Nutzerdatei: 218/218 Owner, 128/128 Neufassungen, 90/90 übrige Begriffe bis auf Schreibweise gleich, null verworfene und null freigegebene Bezahlaufrufe.
 
-**NEXT ACTION:** Einmaliger kostenkontrollierter SEO-Rechercheauftrag für 218 W4-Keywords aus dem bestehenden WP-Kategorieplugin, nach vorheriger ausdrücklicher Kostenfreigabe. Kein weiterer Preflight, keine Importfreigabe.
+**Beleg:** `WT001_013_EINMALIGE_GESAMTABNAHME_20261114.md` dokumentiert lokalen vollständigen Erfolgspfad sowie Fehlerpfade und feste Aufrufbegrenzungen. **Keine** echten API-Kosten und kein echter WP-0.1.3-Test behauptet.
+
+**NEXT ACTION:** WT001 0.1.3 als Update installieren, im WP-Admin **einen ausdrücklich kostenpflichtigen** 218er Auftrag starten und **ein** Ergebnis-JSON exportieren. Erst dann echte SEO-Auswertung; kein WordPress-Import.
 
 **Grenze:** Keine WordPress-/HivePress-Produktion, keine fremden Projektdateien verändern.

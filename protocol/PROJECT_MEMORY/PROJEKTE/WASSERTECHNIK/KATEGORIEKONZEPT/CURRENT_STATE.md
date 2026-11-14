@@ -14,6 +14,6 @@
 
 **SEO-Preflight abgeschlossen:** WT001 0.1.2 exportiert 218/218 W4-Begriffe und alle 128 Korrekturen korrekt; vollständiger Wort-/Owner-Abgleich mit `W4_KEYWORDPROFIL_218_20261114.csv` PASS. Keine neuen Begriffsrunden erforderlich.
 
-**NEXT ACTION:** Die 218 Begriffe gemeinsam in einem kostenkontrollierten DataForSEO-Auftrag **innerhalb des Wassertechnik-Kategorieplugins** recherchieren, aber erst nach ausdrücklicher Kostenfreigabe. Ergebnisse einmal zentral auf W4-Fachbaum zurückführen, dann fachliche/SEO-Gesamtentscheidung. Kein WordPress-Import.
+**NEXT ACTION:** Die für den einen W4-SEO-Gesamtauftrag fertig gebaute, lokal geprüfte Plugin-Version **WT001 0.1.3** ist bereit. WP-Update → dort genau eine bestätigte kostenpflichtige Recherche für 218 W4-Begriffe → ein vollständiges Ergebnis-JSON. Daten einmal in W4 zurückführen, danach zentrale Fach-/SEO-Entscheidung. Keine weiteren Keyword-Vorprüfungen, kein WordPress-Import.
 
 **Grenze:** Keine WordPress-/HivePress-Produktion, keine fremden Projektdateien verändern.
