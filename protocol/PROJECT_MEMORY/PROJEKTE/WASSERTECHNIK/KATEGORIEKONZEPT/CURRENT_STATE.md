@@ -16,7 +16,7 @@
 
 **W5-SEO-Messauswertung:** Originalbericht `../PRUEFUNG/ORIGINAL_DATAFORSEO_218_20261114.json` und `W5_SEO_GESAMTAUSWERTUNG_20261114.md` mit zugehörigem `W5_SEO_AUDIT_218_20261114.json`. 106/218 Suchvolumina, 218/218 Anbieter-Suchabsichten, **0 organische Schwierigkeit**; 13 gemessen kaufnahe Produkt-Keywords und 14 gemessen informationsorientierte Produkt-Keywords >=1000 (nur vorläufige Redaktionsreihenfolge). 112 fehlende Volumina sind nicht null Suchanfragen. Bei den 105 Inhaltskategorien nur 26 mit Messwert; keine Kategorie/URL automatisch streichen.
 
-**NEXT ACTION:** W7-Menügestaltung und grob geschätzte, sinnvolle Produktthemen-Kategorien in der einen späteren WordPress-Gesamtübernahme berücksichtigen. Import nur nach ausdrücklicher Freigabe.
+**NEXT ACTION:** W10-Konzept für 7 statt bisher 9 sichtbare Hauptbereiche als eine Gesamtentscheidung fachlich freigeben; falls auch echte WP-Hauptseitenzahl 7 sein soll, eine gemeinsame kontrollierte URL-/Eltern-Migration mit Weiterleitungen planen. Keine Plugin-/Frontendänderung ohne Freigabe.
 
 **Grenze:** Keine WordPress-/HivePress-Produktion, keine fremden Projektdateien verändern.
 
@@ -24,3 +24,6 @@
 **W6-Nachweis:** `W6_WORDPRESS_IMPORTVORSCHAU_218_20261114.json` (218 Einzelziele) und `W6_WORDPRESS_GESAMTVORSCHAU_20261114.md` (Gesamtentscheidung, WordPress-Snapshot und 27 Redaktionsprioritäten). W4/W5 nicht neu geschrieben; keine API-, Plugin- oder WP-Aktion.
 
 **W7:** `W7_SEO_MENUE_GESAMTPRUEFUNG_20261114.md` und `W7_MEGAMENUE_ANZEIGEVORSCHAU_20261114.json`. 79 konkrete Produktseiten, 105 produktbezogene Rubriken, 356 Artikelideen; 76 dreistufige und 3 direkte Produktpfade. Zwei rein sichtbare Menügruppen ohne zusätzliche WordPress-Seite oder Keyword. 3–5 Artikelideen sind eine ungefähre redaktionelle Orientierung, keine technische Sperre.
+
+
+**W10 – Nutzerbeanstandung (14.11.2026):** W7 hatte **9** sichtbare Hauptbereiche (8 Käuferbereiche plus Industrie) trotz verbindlicher Vorgabe **6–8**. Einzige fachlich empfohlene Lösung: 7 Hauptbereiche, **Brunnen + Bewässerung** (9 Produktseiten) und **Regenwasser + Wassertanks** (15) als sinnvolle Fusionen. Alle vorhandenen **79** Produktseiten erhalten. In Wasseranalyse und Abwassertechnik vorhandene Produktlinks nur **visuell** in jeweils 3 sinnvolle Gruppen gliedern, keine künstlichen WP-Seiten. Gezielte Zusatzprodukt-Recherche dokumentiert (Brunnenkopf, Regner, Fettabscheider etc.), bisher nicht freigegeben. **Konzept, kein neuer WP-Baum/Importer/Frontendänderung.** Siehe `W10_HAUPTKATEGORIEN_KONSOLIDIERUNG_KONZEPT_20261114.md`. Bloß 7 Menü-Reiter verstecken die neun technisch vorhandenen WP-Hauptseiten; tatsächliche Korrektur ist eine separate SEO-/URL-relevante Gesamtentscheidung.
