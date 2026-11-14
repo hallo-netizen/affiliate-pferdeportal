@@ -2,6 +2,11 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+<!-- TEXTERSTELLUNG_KISS_QA_20261114_BEGIN -->
+**14.11.2026 – Texterstellung KISS Implementierungsstand (PR #784, unverändert KEIN Installer):** Die jüngste Betreiber-SOLL-Fassung steht in [`TEXTERSTELLUNG_KISS_ENDGUELTIGER_WORKFLOW_20261114.md`](TEXTERSTELLUNG_KISS_ENDGUELTIGER_WORKFLOW_20261114.md). Geprüfter QA-Arbeitsstand: [`TEXTERSTELLUNG_KISS_QA_STAND_20261114.md`](TEXTERSTELLUNG_KISS_QA_STAND_20261114.md). 144/144 lokale Tests, 117/117 PHP-Syntax PASS; 87 Originalentscheidungen / 61 FREI / 1.179 historischer Bestandsdatensätze, Abbruch/Wiederaufnahme nach neun Einträgen. QA-Artefakt im privaten Plugin-Büro `/pferdeatelier/PLUGINS/ARBEITSRAUM_PSTE_KISS/TEXTERSTELLUNG_KISS_20261114_QA_NICHT_INSTALLIEREN.zip`. **RELEASE BLOCKED**: ursprünglicher kanonischer PPM-6.7.9-Planplatz nicht angebunden, realer externer MINI-Teilworker-Checkpoint nicht geprüft, neue Keyword-Recherche/Live-Bestandsfrische und echtes MINI→K0→WP-E2E fehlen. Kein neuer Worker, kein Live-Eingriff, keine Installation.
+<!-- TEXTERSTELLUNG_KISS_QA_20261114_END -->
+
+
 <!-- TEXTERSTELLUNG_KISS_FINAL_20261114_BEGIN -->
 **NEUE VERBINDLICHE BETREIBERENTSCHEIDUNG – 14.11.2026 (SOLL, keine Plugin-Freigabe):** Texterstellung exakt **WordPress Recherche/Pferd JA-NEIN → EIN gemeinsamer externer MINI-Durchlauf (Kategorie/Artikelart + Redaktionsplan inkl. Kannibalisierung/Dubletten/Abdeckungsbilanz + Titel; jeder Teilworker nur eine Zuständigkeit) → WordPress EIN Rückimport ins zentrale Auftragsregal und vollständiger K0-Auftrag → extern K0 schreibt → WordPress Entwurf importieren**. Kein doppelter externer SEO-/Titelumlauf, kein internes nachträgliches Kategorieurteil, kein separates Planungsbüro. VOLLSTÄNDIGER BETREIBER-ZIELVERTRAG: [`TEXTERSTELLUNG_KISS_ENDGUELTIGER_WORKFLOW_20261114.md`](TEXTERSTELLUNG_KISS_ENDGUELTIGER_WORKFLOW_20261114.md). Historische, hierunter stehende QA- und Plugin-Statusnotizen werden **nicht** zu Implementierungs- oder Installationsbelegen. Nächster Arbeitsschritt: echte kompakte WordPress-Bestandsübergabe und 61-Altthemen-Abnahmetest, noch kein neues ZIP.
 <!-- TEXTERSTELLUNG_KISS_FINAL_20261114_END -->
