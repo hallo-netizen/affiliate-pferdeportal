@@ -1,0 +1,43 @@
+{
+  "type": "QA76_SINGLE_STAGING_PLUGIN_NO_LIVE_PROOF",
+  "origin_zip": "Affiliate_6.72.350_KISS_EINMALIGE_PRODUKTENTSCHEIDUNG_QA.zip",
+  "origin_sha256": "e2d04337bf0d2c3ca8176059231b317f3682343239cef03bb68e4a57fa78c6b6",
+  "version": "6.72.351",
+  "package": "Affiliate_6.72.351_EBAY_KISS_GESAMTWORKFLOW_TESTINSTALLATION.zip",
+  "package_sha256": "65e6bff15af26ec559ccbb40333ec7168cc5f4a22eb7a77f682f07e5bb47e247",
+  "package_bytes": 5394092,
+  "files_total": 66,
+  "php_files_syntax_ok": 23,
+  "changed_package_files": {
+    "affiliate-portal-router/includes/trait-ppar-automation-suite.php": {
+      "original_sha256": "7c9dd3dd3a73ab0d69c17a919cef26ae49b8e61a93e7f7e74097d4e656f1f3e0",
+      "new_sha256": "1c3c55f41721ab598615fbdbc6cc114b8eeccea0ae7a980be72d6e787f7ca414",
+      "size": 248805
+    },
+    "affiliate-portal-router/includes/trait-ppar-ebay-run.php": {
+      "original_sha256": "bf1cfb723994b57214b1015b316f217028e402abd543c475c41ee7f15af2c30b",
+      "new_sha256": "f43d29f877984b4a39fe129b65c9b9f1cef4c10972f0223831a2d29de8c3f29e",
+      "size": 233933
+    },
+    "affiliate-portal-router/includes/trait-ppar-ebay.php": {
+      "original_sha256": "65b4edf77d9abc7e64f947ab0fa4365a03955abcd432927abc67ea250c1ef360",
+      "new_sha256": "2e602baadb72b1d8e16f3de6b7be9833a0dc004e346cc7796b780996f65025b8",
+      "size": 776192
+    },
+    "affiliate-portal-router/pferdeportal-affiliate-router.php": {
+      "original_sha256": "b02561465dbebc407b8288d405866a39f95db6e19e20270763f940826ae5bb6c",
+      "new_sha256": "d469bbe98f57764c0b6316b7fcec4323a86911bd9c30512c333e5f63459b9944",
+      "size": 838168
+    },
+    "affiliate-portal-router/readme.txt": {
+      "original_sha256": "f33fa4f9283fdd759b94648aea2dd4d53319fe0d4b13d1b41acd765364238575",
+      "new_sha256": "a9b18ef8a59ce3a7aac6817a263d5fee5c8719fddfb8df208dd68028f6b79267",
+      "size": 82948
+    }
+  },
+  "unchanged_package_files": 61,
+  "no_live_installation_done": true,
+  "real_provider_end_to_end_proven": false,
+  "manual_pause_respected": true,
+  "no_extra_clock_or_worker": true
+}
