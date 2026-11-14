@@ -20,14 +20,14 @@ if (function_exists('get_site_option')) {
 }
 foreach ($txeActivePlugins as $txePluginPath) {
     $txeOldEntry = basename((string)$txePluginPath);
-    if (in_array($txeOldEntry, ['portal-seo-topic-engine.php', 'portal-seo-editorial-plan-compiler.php'], true)) {
+    if (in_array($txeOldEntry, ['portal-seo-topic-engine.php', 'portal-seo-editorial-plan-compiler.php', 'portal-production-machine.php'], true)) {
         $txeOldActive = true;
         break;
     }
 }
 if ($txeOldActive || class_exists('PSTE_Plugin', false) || class_exists('PSERC_Plugin', false) || defined('PSERC_VERSION')) {
     add_action('admin_notices', static function () {
-        echo '<div class="notice notice-error"><p>Texterstellung: PSTE oder PSERC ist bereits aktiv. Keine zweite Recherche, Planung oder Importverarbeitung gestartet.</p></div>';
+        echo '<div class="notice notice-error"><p>Texterstellung: PSTE, PSERC oder PPM ist noch aktiv. Auf der isolierten Testseite alte Plugins zuerst deaktivieren.</p></div>';
     });
     return;
 }
@@ -39,22 +39,52 @@ $txeIsConfirmed = function_exists('get_option') && function_exists('home_url')
         (string)get_option('texterstellung_testsite_confirmation_v1', ''));
 if ($txeIsConfirmed) {
     require_once __DIR__.'/original/pste/portal-seo-topic-engine.php';
+    // Preserve the original draft-only safety after removing the PPM planning runtime.
+    // This is a technical WordPress safeguard, not another SEO or content decision.
+    add_filter('wp_insert_post_data', static function(array $postData, array $postarr): array {
+        $postId = (int)($postarr['ID'] ?? 0);
+        if ($postId > 0 && in_array((string)($postData['post_status'] ?? ''), ['publish', 'future'], true)
+            && function_exists('get_post_meta') && function_exists('get_post')
+            && (string)get_post_meta($postId, '_pserc_publish_blocked', true) === '1') {
+            $existing = get_post($postId);
+            $status = is_object($existing) ? (string)($existing->post_status ?? '')
+                : (is_array($existing) ? (string)($existing['post_status'] ?? '') : '');
+            if ($status === 'draft') $postData['post_status'] = 'draft';
+        }
+        return $postData;
+    }, 10, 2);
     // The WordPress backend has one top-level entry. Existing PSTE admin functions remain intact.
     add_action('admin_menu', static function () { remove_menu_page('portal-seo-topic-engine'); }, 1001);
     // Existing PSERC import functions: unchanged originals. No second importer implementation.
-    require_once __DIR__.'/original/pserc/class-pserc-stable-json.php';
-    require_once __DIR__.'/original/pserc/class-pserc-plan-slot-identity.php';
-    require_once __DIR__.'/original/pserc/class-pserc-system4-import.php';
-    // Original PSERC K0 batch encoder and technical five-field boundary (unchanged).
-    require_once __DIR__.'/original/pserc/class-pserc-plan-snapshot-store.php';
-    require_once __DIR__.'/original/pserc/class-pserc-metadata-boundary.php';
-    // The original PSTE SEO owner calls these PSERC classes for signed,
-    // category-bound canonical article slots. All three modules are unchanged.
-    // No second SEO decision, no new production plan, no generated legacy IDs.
+    // Only original PSERC code: keep the upstream includes/ and contracts/ structure.
     if (!defined('PSERC_DIR')) { define('PSERC_DIR', __DIR__.'/original/pserc/'); }
-    require_once __DIR__.'/original/pserc/class-pserc-article-type-extension-registry.php';
-    require_once __DIR__.'/original/pserc/class-pserc-production-reader.php';
-    require_once __DIR__.'/original/pserc/class-pserc-slot-allocator.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-stable-json.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-plan-slot-identity.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-article-type-extension-registry.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-production-reader.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-slot-allocator.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-article-type-extension-planning-gate.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-assignment-consistency-gate.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-compiler.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-editorial-outcome-gate.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-editorial-strand.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-existing-content-reader.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-language-gate.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-metadata-boundary.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-package-integrity.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-plan-compile-job.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-plan-dependency-fingerprint.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-plan-metrics.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-plan-snapshot-store.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-portal-structure-gate.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-portal-topic-evidence-gate.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-release-aggregator.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-seo-reader.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-seo-source-binding.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-system4-import.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-target-keyword.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-technical-strand.php';
+    require_once __DIR__.'/original/pserc/includes/class-pserc-title-rule-compatibility.php';
 }
 
 
@@ -351,8 +381,8 @@ final class TXE_Workshop {
     public static function lastBatch(): array {self::access();$s=self::state();if(!is_array($s['last_batch']??null))throw new RuntimeException('NO_PREVIOUS_BATCH');return $s['last_batch'];}
 
     /** Keep the existing TXE order reservation, but delegate WordPress writes
-     *  to the unchanged PSERC importer and its original PPM publish protection.
-     *  No own content assessment, no own replacement importer.
+     *  to the PSERC original importer with only the PPM planning call removed.
+     *  No own content assessment. Draft and duplicate protection stay active.
      */
     public static function importDrafts(array $json): array {
         $verified=PSERC_System4_Import::normalizePayload($json);
