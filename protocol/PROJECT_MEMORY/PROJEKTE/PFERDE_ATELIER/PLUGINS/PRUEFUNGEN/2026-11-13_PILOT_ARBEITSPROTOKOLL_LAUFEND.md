@@ -209,3 +209,10 @@
 - **Neue hart belegte Grenze:** 0.4.1 ersetzt Original-PAA-Jobs/Bestands-SEO-Regeln/PSERC-Manifest und -Import durch eigenständige Pfade. Vorhandener PPM-Rückleseaufruf ist nicht nachgewiesen ersetzbar. Keine vorschnelle Bezeichnung als Originalübernahme.
 - **Quellabhängigkeit nur warnend:** Statische Verweis-Suche erreicht 106/125 PHP-Dateien; nicht als Beweis, dass 106 benötigt oder andere 19 löschbar sind. Keine Löschung, kein Codeumbau.
 - **Status:** 0.4.1 gesperrt; noch offene direkte Aufrufketten und echte WP-/K0-Gegenläufe. Keine neue Plugin-ZIP, keine PHP-Eigenentwicklung, keine Liveänderung. Erst unveränderte Originalfunktionen samt Abhängigkeiten und voller Vertragsnachweis; dann Freigabeentscheidung, nicht vorher.
+
+
+### Schritt 18 – 14.11.2026: Originalmethoden wirklich ausgeführt (kein Test des neuen Plugins)
+- In unveränderten PSTE-.50-/PSERC-.71-Originalquellen anhand vorhandener QA-Tests **30/30** Original-MINI-/Platz-/Titel-Prüfungen und **14/14** PPM-Browser-Einstiegsschutz-Prüfungen erfolgreich lokal ausgeführt.
+- **Keine Produktkopie verändert**, Testpfade nur temporär verlinkt. Echter WP-Datensatz/PPM-Kern/K0/Alt-Neu-Nachweis fehlen weiterhin. Die 44 Tests belegen ausschließlich genannte alte Methoden gegen Mockdaten.
+- Beleg: `2026-11-14_TEXTERSTELLUNG_ORIGINAL_QA_TESTLAUF.json`; zentraler Bericht `2026-11-14_TEXTERSTELLUNG_VORRELEASE_NACHWEIS_UND_SPERRE.md` ergänzt.
+- Zielvertrag R1–R23, Originalübernahmeregel R23 und **Verbot jeder nicht ausdrücklich genehmigten fachlichen Eigenentwicklung** weiterhin hart gesperrt. **Kein neues Plugin, keine Liveänderung.**
