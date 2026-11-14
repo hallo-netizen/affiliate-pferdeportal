@@ -1,7 +1,7 @@
 {
   "version": "W4_2026-11-14",
   "project": "WASSERTECHNIK",
-  "state": "HERSTELLERBELEGTER_FACHENTWURF_KEINE_WP_SEO_ODER_IMPORT_FREIGABE",
+  "state": "FACHBAUM_W4_KONZEPTIONELL_KLARGESTELLT_NO_SEO_NO_WP_IMPORT",
   "goal": "Breites Informationsportal, kaufnahe Priorität Privat, Kleinbetriebe, Vereine",
   "WP_layers": "8 Hauptbereiche → optionale Fachunterseite → konkrete Produktartseite → WP-Inhaltskategorie (3-5 eigenständige Beitragsideen) → später Beiträge",
   "industry_hub": {
@@ -721,7 +721,7 @@
       "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
     },
     {
-      "product": "Rückspülfilter",
+      "product": "Manueller Rückspülfilter",
       "root": "Wasseraufbereitung",
       "group": "Hauswasserfilter",
       "source_name": "Rückspülfilter",
@@ -737,25 +737,25 @@
         {
           "name": "Auswahl",
           "article_ideas": [
-            "Manueller oder automatischer Rückspülfilter: wann lohnt sich welcher?",
-            "Nenndurchfluss und Anschlussmaß für Einfamilienhaus oder Vereinsheim wählen",
-            "Welche Filterfeinheit ist für die Hausinstallation sinnvoll?"
+            "Manuellen Rückspülfilter nach Durchfluss und Anschlussmaß auswählen",
+            "Passenden manuellen Schutzfilter für Haus oder Vereinsheim dimensionieren",
+            "Welche Filterfeinheit eignet sich für einen manuell betriebenen Rückspülfilter?"
           ],
           "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
-          "proposed_wp_slug": "wt-rueckspuelfilter-auswahl",
-          "parent_product_owner": "WT:wasseraufbereitung/hauswasserfilter/rueckspuelfilter",
+          "proposed_wp_slug": "wt-manueller-rueckspuelfilter-auswahl",
+          "parent_product_owner": "WT:wasseraufbereitung/hauswasserfilter/manueller-rueckspuelfilter",
           "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
         },
         {
           "name": "Betrieb",
           "article_ideas": [
-            "Rückspülintervall abhängig von Wasser und Betrieb bestimmen",
-            "Druckabfall nach der Installation systematisch prüfen",
-            "Rückspülwasser ableiten und jährlichen Service einplanen"
+            "Manuelle Rückspülung am Schutzfilter durchführen",
+            "Druckabfall hinter dem manuellen Filter richtig einschätzen",
+            "Spülwasseranschluss und Wartungsintervall am manuellen Rückspülfilter planen"
           ],
           "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
-          "proposed_wp_slug": "wt-rueckspuelfilter-betrieb",
-          "parent_product_owner": "WT:wasseraufbereitung/hauswasserfilter/rueckspuelfilter",
+          "proposed_wp_slug": "wt-manueller-rueckspuelfilter-betrieb",
+          "parent_product_owner": "WT:wasseraufbereitung/hauswasserfilter/manueller-rueckspuelfilter",
           "status": "KONZEPT_NUR_THEMENPROBE_BIS_WORDPRESS_SEO"
         }
       ],
@@ -769,13 +769,14 @@
       "proposed_wp_path_segments": [
         "wasseraufbereitung",
         "hauswasserfilter",
-        "rueckspuelfilter"
+        "manueller-rueckspuelfilter"
       ],
-      "proposed_wp_page_slug": "rueckspuelfilter",
-      "wp_product_owner_key": "WT:wasseraufbereitung/hauswasserfilter/rueckspuelfilter",
+      "proposed_wp_page_slug": "manueller-rueckspuelfilter",
+      "wp_product_owner_key": "WT:wasseraufbereitung/hauswasserfilter/manueller-rueckspuelfilter",
       "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
       "retained_source": "W2_2026-11-14",
-      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE",
+      "audit_note": "W4-QA: ursprünglicher Rückspülfilter als manueller Typ gegenüber automatischem geklärt; Hersteller Grünbeck MR/MRA; Quelle im Ausgangsmodell nicht umbenannt."
     },
     {
       "product": "Automatischer Rückspülfilter",
@@ -1076,9 +1077,9 @@
         {
           "name": "Auswahl",
           "article_ideas": [
-            "Tank, Direct-Flow und Untertisch-System nach Zapfbedarf vergleichen",
-            "Platzbedarf, Wasseranschlüsse und Membranleistung vor dem Kauf prüfen",
-            "Wasser- und Abwassermenge im Haushalt überschlagen"
+            "Passende Untertisch-Osmoseanlage nach Einbauplatz und Wasseranschluss wählen",
+            "Wasserbedarf und Armaturanschluss für die Untertischinstallation prüfen",
+            "Tanklose und tankgebundene Untertischsysteme bei Platzbedarf und Nutzung einordnen"
           ],
           "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
           "proposed_wp_slug": "wt-untertisch-osmoseanlage-auswahl",
@@ -1114,7 +1115,8 @@
       "wp_product_owner_key": "WT:wasseraufbereitung/osmoseanlagen/untertisch-osmoseanlage",
       "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
       "retained_source": "W2_2026-11-14",
-      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE",
+      "audit_note": "Anwendungsseite Untertisch (Installation, Armatur/Platz, allgemeine Unterspülennutzung), nicht zweite Kopie der Direct-Flow- und Drucktank-Technik-Seiten."
     },
     {
       "product": "Direct-Flow-Osmoseanlage",
@@ -1161,7 +1163,8 @@
       "wp_product_owner_key": "WT:wasseraufbereitung/osmoseanlagen/direct-flow-osmoseanlage",
       "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
       "retained_source": "W2_2026-11-14",
-      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE",
+      "audit_note": "Technologischer Fokus Direktdurchfluss/tanklos – Durchfluss, Pumpe, Rückgewinnung und Wartung; kein zweiter allgemeiner Untertisch-Montageartikel."
     },
     {
       "product": "Osmoseanlage mit Drucktank",
@@ -1208,7 +1211,8 @@
       "wp_product_owner_key": "WT:wasseraufbereitung/osmoseanlagen/osmoseanlage-mit-drucktank",
       "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
       "retained_source": "W2_2026-11-14",
-      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE",
+      "audit_note": "Technologischer Fokus Vorrat/Drucktank – nutzbares Tankvolumen, Druck, Stagnation und Regeneration; andere Fragen als tanklos."
     },
     {
       "product": "Enthärtungsanlage",
@@ -1519,9 +1523,9 @@
         {
           "name": "Testauswahl",
           "article_ideas": [
-            "Laborpaket für Leitungswasser anhand der Fragestellung wählen",
-            "Chemische und mikrobiologische Untersuchungen unterscheiden",
-            "Testpakete nach Entnahmestellen und Nutzerziel vergleichen"
+            "Allgemeines Leitungswasser-Testpaket nach Anlass auswählen",
+            "Basisparameter und Zusatzanalysen im Trinkwasser-Testset unterscheiden",
+            "Standardpaket für Haushalt, Vereinsheim oder kleine Praxis vergleichen"
           ],
           "origin": "FACHKONZEPT_GEPRUEFT_PLAUSIBEL_NO_SEO",
           "proposed_wp_slug": "wt-trinkwasser-labortestset-testauswahl",
@@ -1557,7 +1561,8 @@
       "wp_product_owner_key": "WT:wasseranalyse/testsets/trinkwasser-labortestset",
       "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
       "retained_source": "W2_2026-11-14",
-      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE",
+      "audit_note": "Allgemeines Analysepaket mit breitem Parameterprofil. Spezielle Zielschadstoffanalyse bleibt anderer Informations- und Kaufanlass; fachlich plausibel, SEO ausstehend."
     },
     {
       "product": "Brunnenwasser-Testset",
@@ -1661,7 +1666,8 @@
       "wp_product_owner_key": "WT:wasseranalyse/testsets/schadstoff-labortestset",
       "scope": "privat_kleinbetriebe_vereine_nur_konzeptionell",
       "retained_source": "W2_2026-11-14",
-      "state": "FACHENTWURF_ALTE_PRODUKTSEITE"
+      "state": "FACHENTWURF_ALTE_PRODUKTSEITE",
+      "audit_note": "Gezielte Untersuchungen von z. B. PFAS/Schwermetallen mit spezialisiertem Analyseziel; gesonderte Produktklasse im Fachkonzept; SEO noch ungemessen."
     },
     {
       "product": "Wasserteststreifen",
@@ -4531,26 +4537,35 @@
   ],
   "review_needed": [
     {
-      "pages": [
+      "family": "Rueckspuelfilter",
+      "original_names": [
         "Rückspülfilter",
         "Automatischer Rückspülfilter"
       ],
-      "issue": "Spezialfall einer Funktionsfamilie, SEO-Intent noch nicht belegt"
+      "decision": "MANUELL_VS_AUTOMATISCH_GETRENNT",
+      "proof_url": "https://www.gruenbeck.de/service/presse-news/artikel/starke-filterleistung-einfacher-betrieb",
+      "seo_status": "OFFEN"
     },
     {
-      "pages": [
+      "family": "Osmose",
+      "original_names": [
         "Untertisch-Osmoseanlage",
         "Direct-Flow-Osmoseanlage",
         "Osmoseanlage mit Drucktank"
       ],
-      "issue": "Einbauort und Funktionsprinzip können sich überschneiden"
+      "decision": "EINBAUKONTEXT_VS_TANKLOSE_UND_TANKSYSTEM_TECHNOLOGIE_SEITEN_FACHLICH_ABGEGRENZT",
+      "proof_url": "https://www.waterdropfilter.de/collections/untertisch-ro-systeme",
+      "seo_status": "OFFEN"
     },
     {
-      "pages": [
+      "family": "Labortests",
+      "original_names": [
         "Trinkwasser-Labortestset",
         "Schadstoff-Labortestset"
       ],
-      "issue": "Einzelparameter/Labortestpakete können dieselbe Kaufabsicht haben"
+      "decision": "ALLGEMEINE_WASSERANALYSE_VS_ZIELGERICHTETE_SCHADSTOFFANALYSE",
+      "proof_url": "https://ivario.com/collections/wassertests",
+      "seo_status": "OFFEN"
     }
   ],
   "limitations": [
@@ -4559,5 +4574,14 @@
     "Industrie-Überblick belegt, keine Vollmarkt-Abdeckung bewiesen",
     "WP-Kategorie-Plugin für Wassertechnik nicht portiert",
     "Kein WordPress-Import, keine WP-IDs, keine produktive Website geprüft"
-  ]
+  ],
+  "context_audit": {
+    "date": "2026-11-14",
+    "status": "DREI_W2_KONTEXTFAELLE_KONZEPTIONELL_ENTSCHIEDEN",
+    "no_new_product_pages": true,
+    "no_removed_existing_product_pages": true,
+    "no_wordpress_write": true,
+    "no_keyword_data": true,
+    "fully_reconciled_with_sources": true
+  }
 }

@@ -10,6 +10,6 @@
 
 **Ergebnis:** Alle 9/9 W3-Grenzfälle entschieden; 6 Industriegruppen durch konkrete Herstellerangebote fachlich gestützt; 8 zusätzliche Industrie-Produktkandidaten mit 16 WP-Rubriken und 48 Beitragsideen. **Blocker:** Drei vorhandene W2-Überschneidungsgruppen redaktionell prüfen, danach fachliche Abnahme. Pluginportierung und SEO in WordPress bleiben offen.
 
-**NEXT ACTION:** Die drei W2-Überlappungsgruppen Rückspülfilter, Osmose-Varianten und Labortestsets fachlich prüfen; W4 auf klare Themen-Owner abnehmen. Erst danach Wassertechnik-WordPress-Kategorieplugin an den vollständigen W4-Baum binden und dort SEO-Preflight ausführen. Kein Import, keine kostenpflichtigen SEO-Abfragen ohne Freigabe.
+**NEXT ACTION:** Das im Büro gesicherte HAB-002-Kategorie-Plugin vollständig im Quellcode prüfen, die vorhandene DataForSEO-/Importfunktion nachweisen und die isolierte Wassertechnik-Version auf den vollständigen W4-Baum vorbereiten. Erst dann kostenloser WP-Keyword-Preflight, danach ggf. ausdrücklich freigegebene SEO-Anfragen. Keine Website-Schreibaktion.
 
 **Grenze:** Keine WordPress-/HivePress-Produktion, keine fremden Projektdateien verändern.

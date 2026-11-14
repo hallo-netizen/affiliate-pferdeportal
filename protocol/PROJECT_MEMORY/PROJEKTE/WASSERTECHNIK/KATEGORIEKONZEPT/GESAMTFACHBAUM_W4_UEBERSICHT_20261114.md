@@ -41,3 +41,10 @@ Zusätzlich **Industrie & Großanlagen** als Informations-Einstieg, mit sechs th
 **Offen:** Bestehende Überschneidungen bei Rückspülfiltern, privaten Osmose-Varianten und Labor-Testsets. Dies sind drei separate Redaktionsprüfungen, keine bereits bestätigten Dopplungen. Keine SEO-Zahlen behaupten.
 
 **Nächster Arbeitsschritt:** Diese drei Themenpaare fachlich prüfen; danach Gesamtfachbaum abnehmen. Dann ausschließlich im WordPress-Kategorieplugin das vollständige neue W4-Profil kostenlos prüfen; eine bezahlte DataForSEO-Recherche erfordert ausdrückliche Freigabe. Vorher kein Import.
+
+
+## Abschließender W4-Kontextvergleich (14.11.2026)
+- **Rückspülfilter:** Das ursprüngliche W2-Rückspülfilter-Thema heißt im W4-Arbeitsbaum jetzt „Manueller Rückspülfilter“, gegenüber der vorhandenen „Automatischer Rückspülfilter“-Seite. Grünbeck MR/MRA belegt die technischen Unterschiede. Inhaltstitel beider Seiten wurden fachlich getrennt.
+- **Osmose:** Untertisch-Osmose = Einbau-/Nutzungsabsicht, Direct-Flow = tanklose Technik/Leistung, Osmose mit Drucktank = Speicher-/Vorratsbetrieb. Sie können fachlich unterschiedliche Inhalte tragen, müssen jedoch nach echter WordPress-SEO-Recherche auf doppelte Suchintention geprüft werden.
+- **Labortests:** allgemeines Trinkwasser-Testpaket vs gezielte Schadstoffanalyse (IVARIO: Kombipaket, PFAS-Analyse etc.) ist fachlich differenzierbar. Nach SEO-Intent ggf. zusammenlegen, nicht im Vorfeld blind.
+- **Ergebnis:** Weiterhin 79 Produktseiten-Kandidaten, 105 WP-Kategorien und 356 Themenideen; keine zusätzlichen Slug-/Owner-Kollisionen und keine WP-/SEO-Aktion.
