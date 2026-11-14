@@ -1,0 +1,29 @@
+--- a/affiliate-portal-router/includes/trait-ppar-ebay-run.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+@@ -3080,7 +3080,10 @@
+                     $current['public_checkpoint_collision_retries']=$retry+1;
+                     $current['progress_seq']=absint($current['progress_seq']??0)+1;
+                     $current['last_progress_at']=time();
+-                    $this->ebay_run_save($current);
++                    if(!is_array($this->ebay_run_save($current))){
++                        $this->ebay_run_fail('public_checkpoint_collision_state_save_failed',
++                            'Der geaenderte Freigabestand konnte nicht sicher gespeichert werden.');
++                    }
+                     return;
+                 }
+             }
+@@ -3094,7 +3097,13 @@
+         if(!empty($routes['business'])){$current['phase']='checkpoint_cleanup_business';$current['resume_reason']='checkpoint_committed';}
+         else{$this->ebay_run_complete($manifest);return;} // No PRIVATE cleanup on legacy snapshots.
+         $current['progress_seq']=absint($current['progress_seq']??0)+1;$current['last_progress_at']=time();$current['no_progress_count']=0;
+-        $this->ebay_run_save($current);
++        if(!is_array($this->ebay_run_save($current))){
++            // Public membership was already committed. Never silently repeat
++            // final verification after losing the durable cleanup handoff.
++            $this->ebay_run_fail('public_checkpoint_cleanup_handoff_save_failed',
++                'Die Freigabe wurde gespeichert, der Uebergang zur Bereinigung jedoch nicht.');
++            return;
++        }
+     }
+ 
+     /** Fail closed on any cleanup-engine failure after the new public checkpoint
