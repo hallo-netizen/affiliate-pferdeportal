@@ -23,7 +23,7 @@ jobs:
           python3 scripts/hd009_0141_full_workflow_build.py \
             protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE/CANDIDATES/HOBBY_DEPOT_HD009_0.1.40_EINE_ENTSCHEIDUNG_NUR_TEST.zip \
             /tmp/HOBBY_DEPOT_HD009_0.1.41_SINGLE_KISS_TEST.zip
-      - name: Check complete 41-file ZIP, 24 PHP files and unchanged provider and storage methods
+      - name: Check full ZIP, PHP and unchanged unrelated provider methods
         run: |
           set -e
           python3 - <<'PY'
@@ -35,12 +35,13 @@ jobs:
           new=Path('/tmp/HOBBY_DEPOT_HD009_0.1.41_SINGLE_KISS_TEST.zip')
           t='affiliate-portal-router/includes/trait-ppar-idealo.php'
           m='affiliate-portal-router/hobby-depot-affiliate-router.php'
+          net='affiliate-portal-router/includes/trait-ppar-network-sync.php'
           with ZipFile(old) as a,ZipFile(new) as b:
             assert a.testzip() is None and b.testzip() is None
             assert len(a.namelist())==len(b.namelist())==41
             assert a.namelist()==b.namelist()
             diffs=[name for name in a.namelist() if a.read(name)!=b.read(name)]
-            assert set(diffs)=={m,t},diffs
+            assert set(diffs)=={m,t,net},diffs
             former=a.read(t).decode();revised=b.read(t).decode()
             def method(text,name):
               found=re.search(r'^    (?:private|public|protected) function '+re.escape(name)+r'\(',text,re.M)
@@ -49,7 +50,7 @@ jobs:
               next_method=re.search(r'^    (?:private|public|protected) function ',rest,re.M)
               return text[found.start():found.end()+next_method.start()] if next_method else text[found.start():]
             for name in (
-              'idealo_materialize_campaigns','idealo_find_feed_metadata','hd_idealo_feed_download_url',
+              'idealo_find_feed_metadata','hd_idealo_feed_download_url',
               'idealo_download_feed_to_temp','idealo_open_feed_stream','idealo_stream_close',
               'idealo_provider_access_save','idealo_provider_access_test','idealo_target_keys_for_concept',
               'idealo_payload_rank_tuple','idealo_standalone_campaign_allowed',
@@ -58,6 +59,12 @@ jobs:
               'idealo_match_specific_equipment_tokens','idealo_match_blocked'
             ):
               assert method(former,name)==method(revised,name),'Changed unrelated: '+name
+            assert method(former,'idealo_materialize_campaigns')!=method(revised,'idealo_materialize_campaigns')
+            assert "idealo_staging_read_failed" in method(revised,'idealo_materialize_campaigns')
+            assert "is_wp_error($counts)" in method(revised,'idealo_import_feed_file')
+            old_net=a.read(net).decode(); new_net=b.read(net).decode()
+            assert "idealo_staging_write_failed" not in old_net
+            assert "idealo_staging_write_failed" in method(new_net,'network_sync_upsert_products')
             assert revised.count('private function idealo_match_feed_row_to_concept(')==1
             assert revised.count("hd009-match-0.1.41")==1
             main=b.read(m).decode()
