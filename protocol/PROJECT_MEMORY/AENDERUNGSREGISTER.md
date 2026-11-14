@@ -2124,3 +2124,10 @@ Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wa
 - 13 kaufnahe und 14 informationsorientierte Produktseiten redaktionell vorgezogen; 3 Überschneidungsgruppen fachlich abgegrenzt und als SEO-Intent-Restvorbehalt geführt, **keine** automatische Zusammenlegung/Löschung.
 - KISS: **kein neues Plugin, keine API-Kosten, kein WordPress-Schreiben**, kein paralleler SEO- oder Import-Schreiber. Import bleibt bis ausdrückliche Gesamtfreigabe gesperrt.
 - PROTOKOLL: PASS · QUELLEN: W4/W5/WP-SNAPSHOT · ZIELVERTRAG: PASS · FRONTEND: UNVERÄNDERT · FREMDPORTALE: UNVERÄNDERT.
+
+## 2026-11-14 – Wassertechnik W7: SEO-Vertrag & Mega-Menü gebündelt
+- Zielvertrag präzisiert: unterste Seitenebene = konkretes Produkt; darunter sinnvolle freie Produkt-Inhaltskategorien mit grob 3–5 plausiblen Einzelartikeln je Rubrik als **weiche Orientierung, keine technische Sperre**. Zwei alte Kurzbeschreibungen in Start/WordPress-Einrichtung entsprechend korrigiert.
+- 79 Produktseiten, 105 Produktkategorien, 356 grobe Artikelideen; 76 dreistufige und 3 direkte Produktpfade. Keine W4-/W5-/W6-Strukturänderung, kein neuer SEO-Owner.
+- Mega-Menü fachlich und optisch auf Spalten verteilt: 8 Käufer-Hauptbereiche + separater Industrie-Infozugang, jeder der 79 Produktlinks genau einmal. Zwei rein visuelle Beschriftungen, **0 neue WP-Seiten/URLs**. W7-Gesamtprüfung und JSON-Anzeigeplan im Wassertechnik-Kategoriebüro.
+- Kein Plugin, keine bezahlte API-Abfrage, keine WordPress-/Frontend-Aktion und keine Fremdportaländerung; reale Desktop-/Mobilansicht offen bis zur ausdrücklichen Freigabe.
+- ZIELVERTRAG: PASS · EINHEITLICHER PRODUKTWEG: PASS · SEO_218: UNVERÄNDERT · KISS: PASS.
