@@ -1,0 +1,1446 @@
+{
+  "summary": {
+    "version": "V50",
+    "date": "2026-11-14",
+    "site": "https://robotik.oliver-beil.de/",
+    "status": "FINALER_REDAKTIONELLER_FACHPLAN_KEIN_SEO_ODER_WP_PASS",
+    "navigation": [
+      "Haushalt",
+      "Garten",
+      "Freizeit",
+      "Sport",
+      "Bildung",
+      "Pflege",
+      "Humanoide",
+      "Gewerbe"
+    ],
+    "humanoid_secondary": [
+      "Haushalt",
+      "Pflege",
+      "Arbeit",
+      "Bildung",
+      "Unterhaltung",
+      "Intimrobotik"
+    ],
+    "humanoid_original_topics": 16,
+    "standalone_editorial_pages": 12,
+    "future_chapters": 4,
+    "old_wp_wxr_draft_nodes": 104,
+    "old_wp_wxr_nonempty_body_count": 0,
+    "old_wp_wxr_statuses": {
+      "draft": 104
+    },
+    "actual_site_inventory_date": "2026-11-09",
+    "actual_site_inventory_page_count": 2,
+    "live_website_fetch": "FAILED",
+    "google_rankings_and_search_volumes": "NICHT_GEMESSEN",
+    "internet_search_results": "Echte deutschsprachige Web-Suchtreffer zu Themen und Modellen als Orientierung, kein vollständiger Google-SERP-Messlauf",
+    "original_wp_ids_changed": 0,
+    "original_wp_urls_changed": 0,
+    "wp_changes": 0,
+    "keyword_paid_api_calls": 0,
+    "existing_v46_seo_holds_untouched": 16,
+    "old_research_records": 581
+  },
+  "subpages": [
+    {
+      "name": "Haushalt",
+      "path": [
+        "Humanoide",
+        "Haushalt"
+      ],
+      "note": "informative Landingpage, keine Produkttypseite",
+      "draft_wp": true,
+      "wp_id": null,
+      "wp_url": null
+    },
+    {
+      "name": "Pflege",
+      "path": [
+        "Humanoide",
+        "Pflege"
+      ],
+      "note": "informative Landingpage, keine Produkttypseite",
+      "draft_wp": true,
+      "wp_id": null,
+      "wp_url": null
+    },
+    {
+      "name": "Arbeit",
+      "path": [
+        "Humanoide",
+        "Arbeit"
+      ],
+      "note": "informative Landingpage, keine Produkttypseite",
+      "draft_wp": true,
+      "wp_id": null,
+      "wp_url": null
+    },
+    {
+      "name": "Bildung",
+      "path": [
+        "Humanoide",
+        "Bildung"
+      ],
+      "note": "informative Landingpage, keine Produkttypseite",
+      "draft_wp": true,
+      "wp_id": null,
+      "wp_url": null
+    },
+    {
+      "name": "Unterhaltung",
+      "path": [
+        "Humanoide",
+        "Unterhaltung"
+      ],
+      "note": "informative Landingpage, keine Produkttypseite",
+      "draft_wp": true,
+      "wp_id": null,
+      "wp_url": null
+    },
+    {
+      "name": "Intimrobotik",
+      "path": [
+        "Humanoide",
+        "Intimrobotik"
+      ],
+      "note": "informative Landingpage, keine Produkttypseite",
+      "draft_wp": true,
+      "wp_id": null,
+      "wp_url": null
+    }
+  ],
+  "decisions": [
+    {
+      "code": "HU01",
+      "parent_path": [
+        "Humanoide",
+        "Haushalt"
+      ],
+      "nav_short": "Haushaltsassistenten",
+      "stage": "NEO: US-Vorbestellung; Figure 03: Herstellerprototyp",
+      "gate": "FACHLICH_AUSGEARBEITET",
+      "draft_search_intent": "humanoide haushaltsroboter für zuhause",
+      "unique_promise": "Menschenähnliche, mobil greifende Mehrzweckassistenz in der Wohnung; nicht beliebige Saug-/Transportroboter",
+      "model_evidence": [
+        "1X NEO",
+        "Figure 03"
+      ],
+      "sources": [
+        "https://www.1x.tech/order",
+        "https://www.figure.ai/news/introducing-figure-03"
+      ],
+      "collision_check": [
+        "Haushalt > Aufräumroboter (H06)",
+        "Haushalt > Transportroboter (H01)",
+        "Haushalt > Servierroboter (H10)"
+      ],
+      "wp_article_categories": [
+        {
+          "name": "Wohnräume",
+          "three_distinct_article_angles": [
+            "Wie Humanoide Türschwellen und enge Flure bewältigen sollen",
+            "Greifhöhen für Schränke im Wohnraum",
+            "Treppen und Haustiere als Grenze heutiger Geräte"
+          ]
+        },
+        {
+          "name": "Bedienung",
+          "three_distinct_article_angles": [
+            "Grundautonomie gegenüber Fernhilfe",
+            "Tagesaufgaben und Unterbrechungen anordnen",
+            "Wer erhält Zugriff auf Haushaltskameras?"
+          ]
+        },
+        {
+          "name": "Marktstand",
+          "three_distinct_article_angles": [
+            "US-Vorbestellung von 1X NEO",
+            "Herstellerdemo versus eigenständiger Praxistest",
+            "Erwartungen an Humanoiden im eigenen Haushalt"
+          ]
+        }
+      ],
+      "notes": "Kein Copy der allgemeinen Haushalt-Aufräumseite: humanoide Körperbauform und allgemeine Multitask-Plattform als Seitenkern.",
+      "wp_id": null,
+      "wp_url": null,
+      "wp_parent_id": null,
+      "wp_approved": false,
+      "v50": {
+        "status": "EIGENE_FACHSEITE",
+        "draft_seo_title": "Humanoide Haushaltsassistenten: Modelle, Aufgaben und Grenzen",
+        "draft_h1": "Humanoide Roboter für den Haushalt",
+        "search_intent_distinction": "Wohnung, Alltagsaufgaben, tatsächliche Modelle und Fernhilfe",
+        "cross_entry_recommendation": "Haushalt: Orientierungskarte zu humanoiden Haushaltsassistenten",
+        "search_source_urls_observed": [
+          "https://www.mdr.de/wissen/naturwissenschaften-technik/humanoide-roboter-hilfe-im-haushalt-tesla-neo-neura-100.html",
+          "https://www.1x.tech/neo"
+        ],
+        "existing_wordpress_wxr_comparison": [
+          "Haushalt (WXR-Hub)",
+          "Haushalt > Aufräumroboter H06 (V46, noch kein Live-WP)"
+        ],
+        "critical_warning": "Bestellung/Vorbestellung ist nicht gleich praktisch autonomer Haushaltsbetrieb",
+        "actual_google_serp_directly_verified": false,
+        "live_wp_body_compared": false,
+        "new_wp_url": null,
+        "publish_approved": false
+      }
+    },
+    {
+      "code": "HU02",
+      "parent_path": [
+        "Humanoide",
+        "Haushalt"
+      ],
+      "nav_short": "Küchenhelfer",
+      "stage": "Figure-Helix Geschirrhandhabung als Roboterdemo; Haushalts-Kochhumanoid noch Zukunftsidee",
+      "gate": "KONZEPT_SEITENHOLD",
+      "draft_search_intent": "humanoider küchenroboter kochen geschirrspüler",
+      "unique_promise": "Spezifische humanoide Handarbeit im Haushalt bei Geschirr, Zutaten und Küchenorganisation, deutlich enger als HU01",
+      "model_evidence": [
+        "Figure Helix 02 Forschungsdemonstration"
+      ],
+      "sources": [
+        "https://www.figure.ai/news/helix-02"
+      ],
+      "collision_check": [
+        "HU01",
+        "Haushalt > Kochroboter für Zuhause (H02)",
+        "Haushalt > Geschirrspüler-/Einräumroboter ROB-0562"
+      ],
+      "wp_article_categories": [
+        {
+          "name": "Küchenaufgaben",
+          "three_distinct_article_angles": [
+            "Einräumen eines Geschirrspülers als Demo",
+            "Zutaten greifen und Besteck sortieren als Forschungsfragen",
+            "Teller und zerbrechliches Glas sicher handhaben"
+          ]
+        },
+        {
+          "name": "Sicherheit",
+          "three_distinct_article_angles": [
+            "Hygiene bei Lebensmittelkontakt",
+            "Heiße Oberflächen und scharfe Küchenwerkzeuge",
+            "Not-Aus bei Personen in enger Küche"
+          ]
+        },
+        {
+          "name": "Zukunft",
+          "three_distinct_article_angles": [
+            "Welche Arbeit kann ein Humanoid heute belegen?",
+            "Welche Fähigkeiten sind nur geplant?",
+            "Unterschied humanoider Küchenhand zu Kochautomat"
+          ]
+        }
+      ],
+      "notes": "Nur thematisch ausarbeiten, nicht als eigenständige WP-Produkttypseite vor Abschluss der Überschneidungsprüfung. Keine Vollautonomie für Kochen behaupten.",
+      "wp_id": null,
+      "wp_url": null,
+      "wp_parent_id": null,
+      "wp_approved": false,
+      "v50": {
+        "status": "ZUKUNFTSKAPITEL",
+        "draft_seo_title": "Humanoide Küchenhelfer – Zukunft und Forschungsstand",
+        "draft_h1": "Humanoide Küchenrobotik: Geschirr und Kochen",
+        "search_intent_distinction": "Geschirr einräumen ist demonstriert, eigenständiges autonomes Kochen nicht",
+        "cross_entry_recommendation": "Unter HU01 als eigenständiges Zukunftskapitel, ggf. später eigene Seite",
+        "search_source_urls_observed": [
+          "https://www.figure.ai/news/helix-02",
+          "https://www.mdr.de/wissen/naturwissenschaften-technik/humanoide-roboter-hilfe-im-haushalt-tesla-neo-neura-100.html"
+        ],
+        "existing_wordpress_wxr_comparison": [
+          "HU01",
+          "Haushalt > Kochroboter H02 (V46)"
+        ],
+        "critical_warning": "Nicht als fertiger Haushaltskochroboter darstellen; im Suchfeld überlappt HU01",
+        "actual_google_serp_directly_verified": false,
+        "live_wp_body_compared": false,
+        "new_wp_url": null,
+        "publish_approved": false
+      }
+    },
+    {
+      "code": "HU03",
+      "parent_path": [
+        "Humanoide",
+        "Pflege"
+      ],
+      "nav_short": "Fernpflegeassistenten",
+      "stage": "EU-Förderprojekt Robody 2026–2027; Fernsteuerung/Planung, kein Serienbetrieb",
+      "gate": "FACHLICH_AUSGEARBEITET",
+      "draft_search_intent": "humanoide pflege roboter zuhause fernassistenz",
+      "unique_promise": "Humanoider körperlicher Fernassistenzansatz im privaten Seniorenwohnen, explizit andere Fragen als Pflegeeinrichtung",
+      "model_evidence": [
+        "Devanthro Robody"
+      ],
+      "sources": [
+        "https://cordis.europa.eu/project/id/101329100/de"
+      ],
+      "collision_check": [
+        "Pflege > Pflegeheim-Telepräsenz P01",
+        "Haushalt > Telepräsenz H03",
+        "Pflege > Duschhilfe/Ankleidehilfe"
+      ],
+      "wp_article_categories": [
+        {
+          "name": "Alltagshilfe",
+          "three_distinct_article_angles": [
+            "Unterstützung bei einfachen Gegenständen",
+            "Wie Aufgaben aus der Ferne angeleitet werden",
+            "Grenzen beim selbstständigen Wohnen"
+          ]
+        },
+        {
+          "name": "Fernsteuerung",
+          "three_distinct_article_angles": [
+            "Wer darf einen Pflegeroboter fernbedienen?",
+            "Unterschied Fernbetrieb und Eigenständigkeit",
+            "Schutz privater Räume und Kamerabilder"
+          ]
+        },
+        {
+          "name": "Projektstand",
+          "three_distinct_article_angles": [
+            "Robody Förderziele bis Mai 2027",
+            "Prototyp und alltagstaugliches System unterscheiden",
+            "Herausforderungen der Sicherheit im Wohnraum"
+          ]
+        }
+      ],
+      "notes": "Aus CORDIS keine nachgewiesene medizinische Wirkung oder Auslieferung ableiten.",
+      "wp_id": null,
+      "wp_url": null,
+      "wp_parent_id": null,
+      "wp_approved": false,
+      "v50": {
+        "status": "EIGENE_FACHSEITE",
+        "draft_seo_title": "Humanoide Fernpflege-Roboter für das eigene Zuhause",
+        "draft_h1": "Humanoide Fernassistenz in der häuslichen Pflege",
+        "search_intent_distinction": "Pflege im Privathaushalt, Fernsteuerung, Einwilligung und Sicherheit",
+        "cross_entry_recommendation": "Pflege > Unterstützung: Link direkt zur HU03",
+        "search_source_urls_observed": [
+          "https://geriatrie.charite.de/metas/meldung/artikel/detail/robody_humanoider_teleroboter_fuer_die_pflege",
+          "https://cordis.europa.eu/project/id/101329100/de"
+        ],
+        "existing_wordpress_wxr_comparison": [
+          "Pflege (WXR-Hub)",
+          "Schultelepräsenz (WXR-Typ)",
+          "Pflege > Telepräsenz P01 (V46)"
+        ],
+        "critical_warning": "EU-Forschungsprojekt, kein fertiges selbstständig pflegendes System",
+        "actual_google_serp_directly_verified": false,
+        "live_wp_body_compared": false,
+        "new_wp_url": null,
+        "publish_approved": false
+      }
+    },
+    {
+      "code": "HU04",
+      "parent_path": [
+        "Humanoide",
+        "Pflege"
+      ],
+      "nav_short": "Pflegebegleiter",
+      "stage": "uMe Anbieter-Lieferung; nonklinische Interaktion ja, Pflegeleistung nein",
+      "gate": "FACHLICH_AUSGEARBEITET",
+      "draft_search_intent": "humanoider roboter seniorenheim beschäftigung information",
+      "unique_promise": "Humanoide Gesprächs-, Erinnerungs- und Orientierungsunterstützung in der Pflegeeinrichtung, nicht physische medizinische Pflege",
+      "model_evidence": [
+        "United Robotics uMe (humanoide Plattform)"
+      ],
+      "sources": [
+        "https://unitedrobotics.group/en/robots/ume"
+      ],
+      "collision_check": [
+        "Pflege > Therapieroboter rbt_product_0546",
+        "Humanoide > Unterhaltung > Gesprächsroboter HU14"
+      ],
+      "wp_article_categories": [
+        {
+          "name": "Einrichtungen",
+          "three_distinct_article_angles": [
+            "Bewohneraktivierung und Gruppengespräche",
+            "Wegweiser und Informationsausgabe",
+            "Abgrenzung von therapeutischer Behandlung"
+          ]
+        },
+        {
+          "name": "Einführung",
+          "three_distinct_article_angles": [
+            "Mitarbeiter anleiten und Aufgaben beschränken",
+            "Einsatzzeiten in Wohnbereichen",
+            "Akzeptanz bei Bewohnern und Angehörigen"
+          ]
+        },
+        {
+          "name": "Datenschutz",
+          "three_distinct_article_angles": [
+            "Sprachdialog mit externem Dienst erklären",
+            "Bildverarbeitung am Gerät unterscheiden",
+            "Zustimmung und Widerruf im Pflegeheim"
+          ]
+        }
+      ],
+      "notes": "uMe ist laut Hersteller eine vorhandene humanoide Plattform; spezifische Pflegewirkung nicht nachgewiesen.",
+      "wp_id": null,
+      "wp_url": null,
+      "wp_parent_id": null,
+      "wp_approved": false,
+      "v50": {
+        "status": "EIGENE_FACHSEITE",
+        "draft_seo_title": "Humanoide Roboter zur Begleitung im Pflegeheim",
+        "draft_h1": "Humanoide Begleitroboter in Pflegeeinrichtungen",
+        "search_intent_distinction": "Betreuung, Gespräch/Orientierung statt körperlicher Pflege; Datenschutz Einrichtung",
+        "cross_entry_recommendation": "Pflege > Betreuung: Link direkt HU04",
+        "search_source_urls_observed": [
+          "https://www1.wdr.de/nrw/essen/Essen-Messe-Altenpflege-100.html",
+          "https://unitedrobotics.group/en/robots/ume"
+        ],
+        "existing_wordpress_wxr_comparison": [
+          "Therapieroboter (WXR-Typ)",
+          "Humanoide > Unterhaltung/Gespräch HU14"
+        ],
+        "critical_warning": "uMe: Interaktion real; kein Beleg autonomer medizinischer Pflege",
+        "actual_google_serp_directly_verified": false,
+        "live_wp_body_compared": false,
+        "new_wp_url": null,
+        "publish_approved": false
+      }
+    },
+    {
+      "code": "HU05",
+      "parent_path": [
+        "Humanoide",
+        "Pflege"
+      ],
+      "nav_short": "Pflegehilfen",
+      "stage": "Redaktionelle Zukunftsidee; keine bestätigte sichere autonome Hebe-/Transferhilfe",
+      "gate": "KONZEPT_SEITENHOLD",
+      "draft_search_intent": "humanoider hebepflegeroboter patienten transferieren",
+      "unique_promise": "Zukunftsentwurf menschenähnlicher körperlicher Pflegehilfe bei Umlagerung und Anheben; nicht als vorhandenes Medizinprodukt zählen",
+      "model_evidence": [
+        "Konzeptideen, kein nachgewiesenes konkretes Serienmodell"
+      ],
+      "sources": [
+        "https://cordis.europa.eu/project/id/101329100/de",
+        "https://www.ipa.fraunhofer.de/de/presse/presseinformationen/benchmark-fuer-humanoide-roboter.html"
+      ],
+      "collision_check": [
+        "HU03",
+        "Pflege > Geh-Exoskelette",
+        "Pflege > Patienten-Umlagerrobotik"
+      ],
+      "wp_article_categories": [
+        {
+          "name": "Szenarien",
+          "three_distinct_article_angles": [
+            "Unterstützung beim Aufstehen als Zukunftsfall",
+            "Sicheres Umlagern als ungelöste Aufgabe",
+            "Forschungsbedarf bei wechselnder Körperhaltung"
+          ]
+        },
+        {
+          "name": "Grenzen",
+          "three_distinct_article_angles": [
+            "Körperkontakt und Kraftbegrenzung",
+            "Haftung und Erreichbarkeit menschlicher Hilfe",
+            "Keine ungeprüften Heil-/Pflegeversprechen"
+          ]
+        },
+        {
+          "name": "Entwicklung",
+          "three_distinct_article_angles": [
+            "Sensorik unter Körperkontakt als Forschungsfrage",
+            "Konzepte gegenüber echten Prototypen trennen",
+            "Welche Tests vor einer Nutzung nötig wären"
+          ]
+        }
+      ],
+      "notes": "Nur als Konzeptinhalte in Pflege-Humanoid-Übersicht; keine eigenständige Endseite bis Beleg und neue Suchabsicht.",
+      "wp_id": null,
+      "wp_url": null,
+      "wp_parent_id": null,
+      "wp_approved": false,
+      "v50": {
+        "status": "ZUKUNFTSKAPITEL",
+        "draft_seo_title": "Humanoide Hebe- und Umlageroboter – mögliche Zukunft",
+        "draft_h1": "Zukunftskonzept: humanoide körperliche Pflegehilfe",
+        "search_intent_distinction": "Sichere Patientenübernahme und körperliche Assistenz sind nicht real verifiziert",
+        "cross_entry_recommendation": "Als Zukunftskapitel unter Humanoide > Pflege (HU03/HU04 getrennt)",
+        "search_source_urls_observed": [
+          "https://cordis.europa.eu/project/id/101329100/de",
+          "https://www.fraunhofer.de/de/forschung/artikel-2026/humanoide-robotik.html"
+        ],
+        "existing_wordpress_wxr_comparison": [
+          "Pflege (WXR-Hub)",
+          "HU03",
+          "Ankleidehilfe/Duschassistenz (V46)"
+        ],
+        "critical_warning": "Keine Behauptung medizinischer Zulassung/Patientenhebung",
+        "actual_google_serp_directly_verified": false,
+        "live_wp_body_compared": false,
+        "new_wp_url": null,
+        "publish_approved": false
+      }
+    },
+    {
+      "code": "HU06",
+      "parent_path": [
+        "Humanoide",
+        "Arbeit"
+      ],
+      "nav_short": "Lagerarbeiter",
+      "stage": "Digit im GXO-Lagerbetrieb; erweiterte Einsätze angekündigt",
+      "gate": "FACHLICH_AUSGEARBEITET",
+      "draft_search_intent": "humanoide lagerroboter kisten tragen logistik",
+      "unique_promise": "Humanoide Kistenaufnahme und Materialbewegung in Lagern statt allgemeiner Lager-Transportwagen",
+      "model_evidence": [
+        "Agility Digit 4/5"
+      ],
+      "sources": [
+        "https://gxo.com/news_article/gxo-and-agility-robotics-expand-partnership-to-accelerate-deployment-of-humanoids-in-u-s-operations/"
+      ],
+      "collision_check": [
+        "Gewerbe > Palettenhubroboter rbt_product_0525",
+        "Gewerbe > Lagerlogistik allgemein"
+      ],
+      "wp_article_categories": [
+        {
+          "name": "Lageraufgaben",
+          "three_distinct_article_angles": [
+            "Behälter aufnehmen und bewegen",
+            "Kistenübergabe zwischen Stationen",
+            "Handhabung in Menschen-geeigneten Arbeitswegen"
+          ]
+        },
+        {
+          "name": "Pilotbetrieb",
+          "three_distinct_article_angles": [
+            "Was ein GXO-Einsatz tatsächlich belegt",
+            "Pilotprojekt versus gewerbliche Skalierung",
+            "Einschränkungen bei kleineren Lagerhallen"
+          ]
+        },
+        {
+          "name": "Wirtschaftlichkeit",
+          "three_distinct_article_angles": [
+            "Aufwand für Einlernen eines Roboters",
+            "Sicherheit beim Arbeiten zwischen Personen",
+            "Kosten- und Leistungsangaben richtig prüfen"
+          ]
+        }
+      ],
+      "notes": "GXO ist großer Betrieb: keine belegte KMU-Lieferbarkeit aus Pilot ableiten. Für KMU existiert HU10 als gesondertes Forschungsziel.",
+      "wp_id": null,
+      "wp_url": null,
+      "wp_parent_id": null,
+      "wp_approved": false,
+      "v50": {
+        "status": "EIGENE_FACHSEITE",
+        "draft_seo_title": "Humanoide Lagerroboter: Materialtransport und Praxiseinsätze",
+        "draft_h1": "Humanoide Roboter in Lager und Logistik",
+        "search_intent_distinction": "Lagereinsatz Kisten/Totes, Bewegungsabläufe, Betriebsintegration",
+        "cross_entry_recommendation": "Gewerbe > Industrie > Anlagen/Logistik: Link HU06",
+        "search_source_urls_observed": [
+          "https://www.agilityrobotics.com/content/digit-moves-over-100k-totes",
+          "https://investors.agilityrobotics.com/news-releases/news-release-details/agility-robotics-highlights-commercial-momentum-and-growing"
+        ],
+        "existing_wordpress_wxr_comparison": [
+          "Gewerbe > Lagerlogistik (WXR-Hub)",
+          "Palettenhubroboter (WXR-Typ)"
+        ],
+        "critical_warning": "Pilot/kommerzieller Einsatz in Großlogistik ≠ für kleine Betriebe kaufbares Komplettprodukt",
+        "actual_google_serp_directly_verified": false,
+        "live_wp_body_compared": false,
+        "new_wp_url": null,
+        "publish_approved": false
+      }
+    },
+    {
+      "code": "HU07",
+      "parent_path": [
+        "Humanoide",
+        "Arbeit"
+      ],
+      "nav_short": "Produktionshelfer",
+      "stage": "BMW/Figure-Pilot 2025–2026; keine breit lieferbare Universalmaschine",
+      "gate": "FACHLICH_AUSGEARBEITET",
+      "draft_search_intent": "humanoide produktionsroboter montage bauteile",
+      "unique_promise": "Humanoide Greif-/Bereitstellungsaufgaben an Fertigungsstationen und ergonomische Betriebsfragen",
+      "model_evidence": [
+        "Figure 02/03 bei BMW",
+        "AEON BMW Leipzig"
+      ],
+      "sources": [
+        "https://www.bmwgroup.com/de/news/allgemein/2026/humanoide-roboter-in-leipzig.html"
+      ],
+      "collision_check": [
+        "HU06",
+        "Gewerbe > Bestückungsroboter rbt_product_0480",
+        "Gewerbe > Schraubroboter rbt_product_0511"
+      ],
+      "wp_article_categories": [
+        {
+          "name": "Arbeitsplätze",
+          "three_distinct_article_angles": [
+            "Bauteile greifen und passend ablegen",
+            "Pilotaufgaben im BMW-Karosseriebau",
+            "Mensch-Roboter-Arbeit im vorhandenen Raum"
+          ]
+        },
+        {
+          "name": "Fertigung",
+          "three_distinct_article_angles": [
+            "Unterschied zum stationären Roboterarm",
+            "Wie Roboter in Serienabläufe eingeführt werden",
+            "Welche Tätigkeiten BMW nur testet"
+          ]
+        },
+        {
+          "name": "Sicherheit",
+          "three_distinct_article_angles": [
+            "Schutzzonen und Berührungsschutz",
+            "Ausfallverhalten bei manuellem Eingreifen",
+            "Integration ohne falsche Autonomieversprechen"
+          ]
+        }
+      ],
+      "notes": "Aktuelle industrielle Piloten als Fälle; Handwerk nicht automatisch mit Großindustrie zusammenführen.",
+      "wp_id": null,
+      "wp_url": null,
+      "wp_parent_id": null,
+      "wp_approved": false,
+      "v50": {
+        "status": "EIGENE_FACHSEITE",
+        "draft_seo_title": "Humanoide Produktionsroboter: Erfahrungen aus Fabriktests",
+        "draft_h1": "Humanoide Roboter in der Produktion",
+        "search_intent_distinction": "Wiederholte Greif-/Montageaufgaben und Pilotstatus, getrennt von Lagertransport",
+        "cross_entry_recommendation": "Gewerbe > Industrie > Fertigung: Link HU07",
+        "search_source_urls_observed": [
+          "https://www.bmwgroup.com/de/news/allgemein/2026/humanoide-roboter-in-leipzig.html",
+          "https://www.press.bmwgroup.com/deutschland/article/detail/T0455860DE/bmw-group-setzt-erstmals-humanoide-roboter-in-der-produktion-in-deutschland-ein"
+        ],
+        "existing_wordpress_wxr_comparison": [
+          "Gewerbe > Fertigung (WXR-Hub)",
+          "Schweißroboter (WXR-Typ)",
+          "Bestückungsroboter (WXR-Typ)"
+        ],
+        "critical_warning": "BMW-Pilot nicht mit frei verfügbarem Fertigungs-Alleskönner gleichsetzen",
+        "actual_google_serp_directly_verified": false,
+        "live_wp_body_compared": false,
+        "new_wp_url": null,
+        "publish_approved": false
+      }
+    },
+    {
+      "code": "HU08",
+      "parent_path": [
+        "Humanoide",
+        "Arbeit"
+      ],
+      "nav_short": "Empfangsroboter",
+      "stage": "Ameca demonstrierbar/vermietbar; Realbotix 2027 Reservierungen, unterschiedliche Reife",
+      "gate": "FACHLICH_AUSGEARBEITET",
+      "draft_search_intent": "humanoide empfangsroboter rezeption geschäft",
+      "unique_promise": "Kundenbegrüßung und Fragen an Empfang/Theke im kleinen Betrieb, nicht Tabletttransport oder reine Messeunterhaltung",
+      "model_evidence": [
+        "Engineered Arts Ameca",
+        "Realbotix Series 1"
+      ],
+      "sources": [
+        "https://www.engineeredarts.com/robot/ameca/",
+        "https://www.realbotix.com/series-1"
+      ],
+      "collision_check": [
+        "Gewerbe > Empfangsroboter rbt_product_0491",
+        "HU13"
+      ],
+      "wp_article_categories": [
+        {
+          "name": "Empfang",
+          "three_distinct_article_angles": [
+            "Kunden begrüßen und weiterleiten",
+            "Sprachen und Auskunftsgrenzen",
+            "Alltag im kleinen Laden oder Hotel"
+          ]
+        },
+        {
+          "name": "Betrieb",
+          "three_distinct_article_angles": [
+            "Personalunterstützung statt Personalersatz",
+            "Aufstellen und Betreuung der Roboter",
+            "Miete für Veranstaltungen versus Dauerbetrieb"
+          ]
+        },
+        {
+          "name": "Vertrauen",
+          "three_distinct_article_angles": [
+            "Bild- und Sprachaufnahmen beim Kundenkontakt",
+            "Erkennbare Grenzen von Antworten",
+            "Barrierefreiheit für verschiedene Gäste"
+          ]
+        }
+      ],
+      "notes": "Service-Kontext B2B statt Ameca Show. Nicht behaupten, dass soziale Mimik physische Kellnerdienste belegt.",
+      "wp_id": null,
+      "wp_url": null,
+      "wp_parent_id": null,
+      "wp_approved": false,
+      "v50": {
+        "status": "EIGENE_FACHSEITE",
+        "draft_seo_title": "Humanoide Empfangsroboter: Begrüßung und Besucherinformation",
+        "draft_h1": "Humanoide Roboter an Empfang und Rezeption",
+        "search_intent_distinction": "Humanoide Körperpräsenz, Begrüßung/Interaktion; branchenspezifisches Gewerbe getrennt",
+        "cross_entry_recommendation": "Gewerbe > Hotelbetrieb/Empfang: Link HU08 mit eigener Funktionserklärung",
+        "search_source_urls_observed": [
+          "https://roboarca.de/roboter-fuer/service.html",
+          "https://www.heise.de/news/Realbotix-humanoide-Roboter-mit-austauschbarem-Design-11128323.html"
+        ],
+        "existing_wordpress_wxr_comparison": [
+          "Empfangsroboter (WXR-Typ)",
+          "HU13",
+          "HU14"
+        ],
+        "critical_warning": "Kollision mit bestehendem Empfangsroboter: Modelle und Bauform explizit trennen",
+        "actual_google_serp_directly_verified": false,
+        "live_wp_body_compared": false,
+        "new_wp_url": null,
+        "publish_approved": false
+      }
+    },
+    {
+      "code": "HU09",
+      "parent_path": [
+        "Humanoide",
+        "Arbeit"
+      ],
+      "nav_short": "Bedienroboter",
+      "stage": "Zukunftskonzept, kein verifizierter autonomer humanoider Restaurantkellner",
+      "gate": "KONZEPT_SEITENHOLD",
+      "draft_search_intent": "humanoider kellner gastroboter serviert essen",
+      "unique_promise": "Menschengestaltige Restaurantbedienung mit Greifhänden, getrennt von fahrendem Tablettserviceroboter",
+      "model_evidence": [
+        "Konzeptionelle Funktion, keine nachgewiesene Restaurant-Serienanlage"
+      ],
+      "sources": [
+        "https://www.engineeredarts.com/robot/ameca/",
+        "https://www.ipa.fraunhofer.de/de/presse/presseinformationen/benchmark-fuer-humanoide-roboter.html"
+      ],
+      "collision_check": [
+        "Gewerbe > Restaurant-Servierroboter rbt_product_0488",
+        "HU08",
+        "HU02"
+      ],
+      "wp_article_categories": [
+        {
+          "name": "Restaurantideen",
+          "three_distinct_article_angles": [
+            "Aufnehmen von Bestellungen mit humanoidem Service",
+            "Übergeben statt bloßes Transportieren von Tellern",
+            "Persönliche Ansprache als Zukunftsszenario"
+          ]
+        },
+        {
+          "name": "Grenzen",
+          "three_distinct_article_angles": [
+            "Lebensmittelsicherheit und Hygiene",
+            "Kollisionen zwischen Gästen und Bedienung",
+            "Geschwindigkeit versus menschliches Servicepersonal"
+          ]
+        },
+        {
+          "name": "Forschung",
+          "three_distinct_article_angles": [
+            "Welche Roboterarme wirklich greifen können",
+            "Showgeräte von Kellnerroboter trennen",
+            "Warum heutige Restaurantboten anders gebaut sind"
+          ]
+        }
+      ],
+      "notes": "Als Zukunftsidee möglich, aber als eigenständige WP-Produkttypseite noch HOLD; nicht schon existierende autonome Humanoid-Kellner suggerieren.",
+      "wp_id": null,
+      "wp_url": null,
+      "wp_parent_id": null,
+      "wp_approved": false,
+      "v50": {
+        "status": "ZUKUNFTSKAPITEL",
+        "draft_seo_title": "Humanoide Kellner – Roboterbedienung als Zukunftsprojekt",
+        "draft_h1": "Zukunftskonzept: humanoide Restaurantbedienung",
+        "search_intent_distinction": "Greifende humanoide Tischbedienung anders als rollende Teller-Transportplattform",
+        "cross_entry_recommendation": "Unter Humanoide > Arbeit als Konzept-Kapitel; Gewerbe-Gastro bleibt eigene Bedienroboterseite",
+        "search_source_urls_observed": [
+          "https://www.anivatar.com/de/robot-kelner",
+          "https://roboarca.de/roboter-fuer/service.html"
+        ],
+        "existing_wordpress_wxr_comparison": [
+          "Servierroboter (WXR-Typ)",
+          "HU08"
+        ],
+        "critical_warning": "Gefundene Restaurantrobotik zeigt überwiegend rollenden Serviceroboter, keinen autonomen humanoiden Kellner",
+        "actual_google_serp_directly_verified": false,
+        "live_wp_body_compared": false,
+        "new_wp_url": null,
+        "publish_approved": false
+      }
+    },
+    {
+      "code": "HU10",
+      "parent_path": [
+        "Humanoide",
+        "Arbeit"
+      ],
+      "nav_short": "Werkstatthelfer",
+      "stage": "Fraunhofer KMUmanoid: Forschungs-/Simulationsszenarien für Mittelstand",
+      "gate": "FACHLICH_AUSGEARBEITET",
+      "draft_search_intent": "humanoide roboter für handwerksbetriebe werkstatt",
+      "unique_promise": "Kleine Werkstätten/Mittelstand als andere Käuferfrage gegenüber Großserienfertigung, konkrete Forschungsaufgaben im KMU",
+      "model_evidence": [
+        "Fraunhofer KMUmanoid mit Unitree G1 Materialtransport-Szenario"
+      ],
+      "sources": [
+        "https://www.ipa.fraunhofer.de/de/referenzprojekte/kmumanoid.html"
+      ],
+      "collision_check": [
+        "HU06",
+        "HU07",
+        "Gewerbe > Handwerk/Industrie-Landingpage"
+      ],
+      "wp_article_categories": [
+        {
+          "name": "Betriebsgrößen",
+          "three_distinct_article_angles": [
+            "Werkstattwege zwischen Maschinen",
+            "Werkstückübergabe ohne Großanlage",
+            "Wenige wechselnde Aufgaben im Familienbetrieb"
+          ]
+        },
+        {
+          "name": "Einführung",
+          "three_distinct_article_angles": [
+            "Platz und Zugänglichkeit in kleinen Betrieben",
+            "Forschungsstand von KMUmanoid",
+            "Sicherheitsrisiken ohne Spezialpersonal"
+          ]
+        },
+        {
+          "name": "Kostenfragen",
+          "three_distinct_article_angles": [
+            "Wirtschaftlichkeit bei seltenen Aufgaben",
+            "Trainingsaufwand je neuer Tätigkeit",
+            "Leasing- und Dienstleistungsmodelle als Perspektive"
+          ]
+        }
+      ],
+      "notes": "Echte KMU-Anwendung nur simulativ demonstriert; als Forschungsseite gerade wegen des Käuferfokus sinnvoll.",
+      "wp_id": null,
+      "wp_url": null,
+      "wp_parent_id": null,
+      "wp_approved": false,
+      "v50": {
+        "status": "EIGENE_FACHSEITE",
+        "draft_seo_title": "Humanoide Werkstatthelfer für kleine Betriebe",
+        "draft_h1": "Humanoide Roboter im Handwerk: Forschung und Chancen",
+        "search_intent_distinction": "Kleine Werkstätten, Materialtransport, Kosten und Arbeitsschutz statt Großfabrik",
+        "cross_entry_recommendation": "Gewerbe > Handwerk: Link HU10",
+        "search_source_urls_observed": [
+          "https://www.ipa.fraunhofer.de/de/referenzprojekte/kmumanoid.html",
+          "https://www.iosb.fraunhofer.de/de/presse/presseinformationen/2026/start-humanoid-robots-experience-lab.html"
+        ],
+        "existing_wordpress_wxr_comparison": [
+          "Gewerbe > Fertigung (WXR-Hub)",
+          "HU06",
+          "HU07"
+        ],
+        "critical_warning": "Fraunhofer KMUmanoid belegt Szenarien, nicht Serien-KMU-Gerät",
+        "actual_google_serp_directly_verified": false,
+        "live_wp_body_compared": false,
+        "new_wp_url": null,
+        "publish_approved": false
+      }
+    },
+    {
+      "code": "HU11",
+      "parent_path": [
+        "Humanoide",
+        "Bildung"
+      ],
+      "nav_short": "Entwicklungsroboter",
+      "stage": "Unitree G1 EDU als reale Hardwareplattform, Fähigkeiten nur nach Konfiguration",
+      "gate": "FACHLICH_AUSGEARBEITET",
+      "draft_search_intent": "humanoide programmierroboter entwickler g1 edu",
+      "unique_promise": "Offene humanoide Forschungsmobilität, Sensorik und Programmierung, nicht Sprachlernassistent im Unterricht",
+      "model_evidence": [
+        "Unitree G1 EDU/G1-D"
+      ],
+      "sources": [
+        "https://www.unitree.com/g1/"
+      ],
+      "collision_check": [
+        "Bildung > ROS-Lernplattform B02",
+        "Freizeit > Roboterarme",
+        "HU12"
+      ],
+      "wp_article_categories": [
+        {
+          "name": "Programmierung",
+          "three_distinct_article_angles": [
+            "EDU-Version gegenüber Standardmodell",
+            "Bewegungsprogramme und SDK",
+            "Softwaretest im abgesicherten Versuchsraum"
+          ]
+        },
+        {
+          "name": "Messungen",
+          "three_distinct_article_angles": [
+            "Bewegungsfreiheit und Sensorsysteme",
+            "Ergebnisse Fraunhofer G1-Benchmark",
+            "Greifen versus Hersteller-Werbedemo"
+          ]
+        },
+        {
+          "name": "Laborbetrieb",
+          "three_distinct_article_angles": [
+            "Platzbedarf und Schutzbereich",
+            "Laden und Wartung im Uni-Labor",
+            "Fehlende Fertigfähigkeiten nach Kauf"
+          ]
+        }
+      ],
+      "notes": "Fraunhofer-G1-Kriterien als unabhängige Gegenkontrolle, statt Werbefähigkeiten zu übernehmen.",
+      "wp_id": null,
+      "wp_url": null,
+      "wp_parent_id": null,
+      "wp_approved": false,
+      "v50": {
+        "status": "EIGENE_FACHSEITE",
+        "draft_seo_title": "Humanoide Entwicklungsroboter: Programmieren und Forschen",
+        "draft_h1": "Humanoide Forschungsroboter und Entwicklerplattformen",
+        "search_intent_distinction": "SDK, ROS, Steuerung und Laborprogrammierung auf körperlichem humanoidem System",
+        "cross_entry_recommendation": "Bildung > Forschung/Programmieren: Link HU11",
+        "search_source_urls_observed": [
+          "https://www.unitree.com/g1/",
+          "https://shop.unitree.com/collections/humanoid-robot/products/unitree-g1"
+        ],
+        "existing_wordpress_wxr_comparison": [
+          "Lernroboter (WXR-Typ)",
+          "Tischroboterarme (WXR-Typ)",
+          "ROS-Lernplattformen B02 (V46)"
+        ],
+        "critical_warning": "Unitree G1 Basis und EDU-Entwicklerversion nicht verwechseln",
+        "actual_google_serp_directly_verified": false,
+        "live_wp_body_compared": false,
+        "new_wp_url": null,
+        "publish_approved": false
+      }
+    },
+    {
+      "code": "HU12",
+      "parent_path": [
+        "Humanoide",
+        "Bildung"
+      ],
+      "nav_short": "Schulroboter",
+      "stage": "NAO/uMe als reale Bildungsplattformen, konkrete Sprach-/Lernfunktionen unterscheiden",
+      "gate": "FACHLICH_AUSGEARBEITET",
+      "draft_search_intent": "humanoider schulroboter unterricht programmieren mit kindern",
+      "unique_promise": "Humanoide Lern- und Interaktionsroboter für Schulen, anderes Didaktik-/Betreuungsziel als G1-Forschung",
+      "model_evidence": [
+        "NAO",
+        "United Robotics uMe"
+      ],
+      "sources": [
+        "https://unitedrobotics.group/en/industries/education",
+        "https://unitedrobotics.group/en/robots/ume"
+      ],
+      "collision_check": [
+        "Bildung > Lernroboter rbt_product_0059",
+        "HU11"
+      ],
+      "wp_article_categories": [
+        {
+          "name": "Unterricht",
+          "three_distinct_article_angles": [
+            "Robotergesten im Klassenraum",
+            "Gesprächsaufgaben und Sprachübungen",
+            "MINT-Fragen mit körperlicher Demonstration"
+          ]
+        },
+        {
+          "name": "Schulpraxis",
+          "three_distinct_article_angles": [
+            "Altersangemessene Lernaufgaben",
+            "Roboterstunden für Lerngruppen planen",
+            "Lehrkräfte und Robotik-Kurse abstimmen"
+          ]
+        },
+        {
+          "name": "Schutz",
+          "three_distinct_article_angles": [
+            "Kamera und Ton im Unterricht",
+            "Einverständnis bei Minderjährigen",
+            "Unterschied Telepräsenz und humanoider Lehrer"
+          ]
+        }
+      ],
+      "notes": "Nicht Unterrichtserfolg nach Herstellerbehauptung garantieren; NAO und uMe haben verschiedene Ausstattung.",
+      "wp_id": null,
+      "wp_url": null,
+      "wp_parent_id": null,
+      "wp_approved": false,
+      "v50": {
+        "status": "EIGENE_FACHSEITE",
+        "draft_seo_title": "Humanoide Schulroboter für Unterricht und Lernprojekte",
+        "draft_h1": "Humanoide Lernroboter für Schulen",
+        "search_intent_distinction": "Lehrkonzepte, Unterrichtsgruppen, Begleitung vs ROS-Labor",
+        "cross_entry_recommendation": "Bildung > Lernroboter: Link HU12",
+        "search_source_urls_observed": [
+          "https://unitedrobotics.group/en/robots/ume",
+          "https://irisrobotics.eu/de/humanoid-robots-and-educational-kits"
+        ],
+        "existing_wordpress_wxr_comparison": [
+          "Lernroboter (WXR-Typ)",
+          "HU11"
+        ],
+        "critical_warning": "Kollision mit bestehender Lernroboterseite: nur menschähnliche Plattformen und deren Didaktik",
+        "actual_google_serp_directly_verified": false,
+        "live_wp_body_compared": false,
+        "new_wp_url": null,
+        "publish_approved": false
+      }
+    },
+    {
+      "code": "HU13",
+      "parent_path": [
+        "Humanoide",
+        "Unterhaltung"
+      ],
+      "nav_short": "Showroboter",
+      "stage": "Ameca reale Messe-/Showinteraktion; mietbar laut Anbieter",
+      "gate": "FACHLICH_AUSGEARBEITET",
+      "draft_search_intent": "humanoider showroboter messe veranstaltung buchen",
+      "unique_promise": "Bühnenpräsenz, Museum, Messegespräche und Vorführung, nicht durchgehender kleiner Ladenempfang",
+      "model_evidence": [
+        "Engineered Arts Ameca"
+      ],
+      "sources": [
+        "https://www.engineeredarts.com/robot/ameca/"
+      ],
+      "collision_check": [
+        "HU08",
+        "Freizeit > Tischroboter/Robotertiere"
+      ],
+      "wp_article_categories": [
+        {
+          "name": "Auftritte",
+          "three_distinct_article_angles": [
+            "Messemoderation und Interaktion",
+            "Humanoide Roboter im Museum",
+            "Bühnenanimation statt Haushaltsdienst"
+          ]
+        },
+        {
+          "name": "Organisation",
+          "three_distinct_article_angles": [
+            "Mietsystem gegenüber Kauf",
+            "Technische Betreuung am Messestand",
+            "Sprachvorführung und Live-Moderation"
+          ]
+        },
+        {
+          "name": "Grenzen",
+          "three_distinct_article_angles": [
+            "Gesichtsmimik als Showfunktion",
+            "Sprach-KI gegenüber realen Fähigkeiten",
+            "Sicherer Abstand und Vorführbedingungen"
+          ]
+        }
+      ],
+      "notes": "Ein Ameca-Modell kann im Register einmal erscheinen und im Empfangs- vs Show-Kontext redaktionell getrennt sein.",
+      "wp_id": null,
+      "wp_url": null,
+      "wp_parent_id": null,
+      "wp_approved": false,
+      "v50": {
+        "status": "EIGENE_FACHSEITE",
+        "draft_seo_title": "Humanoide Showroboter: Messen und Veranstaltungen",
+        "draft_h1": "Humanoide Roboter für Messe, Show und Event",
+        "search_intent_distinction": "Miete, Operatoren, Publikum, Bühnenshow statt laufendem Empfang",
+        "cross_entry_recommendation": "Freizeit > Veranstaltungen; Gewerbe > Events: Link HU13",
+        "search_source_urls_observed": [
+          "https://wianco.com/humanoide-roboter/",
+          "https://www.roboticrental.de/humanoide-roboter"
+        ],
+        "existing_wordpress_wxr_comparison": [
+          "Empfangsroboter (WXR-Typ)",
+          "HU08"
+        ],
+        "critical_warning": "Showbetrieb mit Operator nicht als unbeaufsichtigte Kundenbetreuung beschreiben",
+        "actual_google_serp_directly_verified": false,
+        "live_wp_body_compared": false,
+        "new_wp_url": null,
+        "publish_approved": false
+      }
+    },
+    {
+      "code": "HU14",
+      "parent_path": [
+        "Humanoide",
+        "Unterhaltung"
+      ],
+      "nav_short": "Gesprächsroboter",
+      "stage": "Realbotix Series 1 zur Reservierung, Lieferung für 2027 angekündigt",
+      "gate": "FACHLICH_AUSGEARBEITET",
+      "draft_search_intent": "menschenähnlicher gesprächsroboter als begleiter",
+      "unique_promise": "Humanoide Gesprächs-/Sozialpräsenz mit Gesicht und Mimik, nicht stationärer Smart-Speaker ohne Körperbewegung",
+      "model_evidence": [
+        "Realbotix Series 1 Aria/Mila etc."
+      ],
+      "sources": [
+        "https://www.realbotix.com/series-1"
+      ],
+      "collision_check": [
+        "Haushalt > Begleitroboter H12",
+        "HU04",
+        "HU08",
+        "HU15"
+      ],
+      "wp_article_categories": [
+        {
+          "name": "Kommunikation",
+          "three_distinct_article_angles": [
+            "Wie ein Gesicht dem Gespräch Ausdruck gibt",
+            "Sprachdialog und individuelle Rollen",
+            "Grenzen angeblicher emotionaler Reaktionen"
+          ]
+        },
+        {
+          "name": "Alltag",
+          "three_distinct_article_angles": [
+            "Tischgeräte gegenüber Ganzkörper-Showroboter",
+            "Privatheit bei Gesprächen zuhause",
+            "Bewegliche Roboterteile und tatsächliche Mobilität"
+          ]
+        },
+        {
+          "name": "Marktstand",
+          "three_distinct_article_angles": [
+            "Reservierung versus Auslieferung 2027",
+            "Bedeutung zusätzlicher AI-Abos",
+            "Herstellerziele versus eigene Prüfung"
+          ]
+        }
+      ],
+      "notes": "Realbotix Series1 bewirbt Begleitung, nicht automatisch sexuelle Funktionen; nicht fälschlich in Intimrobotik umdeuten.",
+      "wp_id": null,
+      "wp_url": null,
+      "wp_parent_id": null,
+      "wp_approved": false,
+      "v50": {
+        "status": "EIGENE_FACHSEITE",
+        "draft_seo_title": "Menschenähnliche Gesprächsroboter: Dialog und Begleitung",
+        "draft_h1": "Humanoide Gesprächs- und Begleitroboter",
+        "search_intent_distinction": "Mimik, Sprache, soziale Interaktion statt Wohnungs-Fernpflege oder Rezeption",
+        "cross_entry_recommendation": "Haushalt > Begleitung: Link HU14 (bei tatsächlich humanoiden Modellen)",
+        "search_source_urls_observed": [
+          "https://www.heise.de/news/Realbotix-humanoide-Roboter-mit-austauschbarem-Design-11128323.html",
+          "https://www.realbotix.com/series-1"
+        ],
+        "existing_wordpress_wxr_comparison": [
+          "Therapieroboter (WXR-Typ)",
+          "Haushalt > Begleitroboter H12 (V46)",
+          "HU04",
+          "HU15"
+        ],
+        "critical_warning": "Realbotix weist laut heise Sexrobotik-Anwendung zurück; nicht mit HU15 vermengen",
+        "actual_google_serp_directly_verified": false,
+        "live_wp_body_compared": false,
+        "new_wp_url": null,
+        "publish_approved": false
+      }
+    },
+    {
+      "code": "HU15",
+      "parent_path": [
+        "Humanoide",
+        "Intimrobotik"
+      ],
+      "nav_short": "Intimroboter",
+      "stage": "Realdoll Harmony: bewegter Kopf, Körper nicht robotisch; Warteliste",
+      "gate": "FACHLICH_AUSGEARBEITET",
+      "draft_search_intent": "intimroboter humanoide roboterpuppe beweglicher kopf",
+      "unique_promise": "Funktionaler Unterschied statischer Sexpuppe und angetriebener interaktiver Teilkörperrobotik",
+      "model_evidence": [
+        "Realdoll Harmony (robotischer Kopf; nicht gehender humanoider Körper)"
+      ],
+      "sources": [
+        "https://www.realdoll.com/product/robot-harmony/"
+      ],
+      "collision_check": [
+        "Humanoide > Unterhaltung > Gesprächsroboter HU14",
+        "statische Puppen ohne Robotik"
+      ],
+      "wp_article_categories": [
+        {
+          "name": "Robotikgrade",
+          "three_distinct_article_angles": [
+            "Bewegliche Mimik gegenüber statischer Puppe",
+            "Warum Kopfbewegung keine autonome Ganzkörperpflege ist",
+            "Sprachdialog und künstliche Interaktion unterscheiden"
+          ]
+        },
+        {
+          "name": "Privatsphäre",
+          "three_distinct_article_angles": [
+            "Sprachdaten und Einwilligung",
+            "Welche Daten Apps verarbeiten könnten",
+            "Gerätesicherheit und Zugangsschutz"
+          ]
+        },
+        {
+          "name": "Entwicklung",
+          "three_distinct_article_angles": [
+            "Stand der Harmony-Warteliste",
+            "Teilkörper gegen Vollkörperkonzepte",
+            "Grenzen heutiger Interaktionssysteme"
+          ]
+        }
+      ],
+      "notes": "Neutral-sachliche Robotik-Information, keine Produktwerbung oder expliziten Anleitungen. Anbieterstatus ohne unabhängigen Leistungstest.",
+      "wp_id": null,
+      "wp_url": null,
+      "wp_parent_id": null,
+      "wp_approved": false,
+      "v50": {
+        "status": "EIGENE_FACHSEITE",
+        "draft_seo_title": "Intimroboter mit beweglichem Kopf: Technik und Grenzen",
+        "draft_h1": "Robotische Intimpuppen: was ist wirklich beweglich?",
+        "search_intent_distinction": "Robotischer Kopf/Teilmechanik, KI-Gespräch, Abgrenzung statische Puppen",
+        "cross_entry_recommendation": "Humanoide > Intimrobotik (kein anderer Hauptbereich nötig)",
+        "search_source_urls_observed": [
+          "https://www.realdoll.com/product/robot-harmony/",
+          "https://alpha-bionic.info/sexroboter-hersteller-modelle/"
+        ],
+        "existing_wordpress_wxr_comparison": [
+          "HU14",
+          "HU16"
+        ],
+        "critical_warning": "RealDoll Harmony: Kopf robotisch, Körper nicht frei gehend; Warteliste ≠ Lieferung",
+        "actual_google_serp_directly_verified": false,
+        "live_wp_body_compared": false,
+        "new_wp_url": null,
+        "publish_approved": false
+      }
+    },
+    {
+      "code": "HU16",
+      "parent_path": [
+        "Humanoide",
+        "Intimrobotik"
+      ],
+      "nav_short": "Partnerhumanoide",
+      "stage": "Redaktioneller Zukunftsentwurf ohne bewiesenen autonomen Ganzkörper-Intimroboter",
+      "gate": "KONZEPT_SEITENHOLD",
+      "draft_search_intent": "voll beweglicher sexroboter humanoid zukunft",
+      "unique_promise": "Zukunftsmöglichkeit vollbeweglicher menschähnlicher Partnerrobotik, getrennt von heutiger Animatronik ohne Beleg für reale autonome Fähigkeiten",
+      "model_evidence": [
+        "Theorie/Idee, kein belegtes Seriengerät"
+      ],
+      "sources": [
+        "https://www.realdoll.com/product/robot-harmony/",
+        "https://www.realbotix.com/series-1"
+      ],
+      "collision_check": [
+        "HU14",
+        "HU15"
+      ],
+      "wp_article_categories": [
+        {
+          "name": "Zukunftsbilder",
+          "three_distinct_article_angles": [
+            "Bewegliche Hände und Arme als Entwicklungsziel",
+            "Haushaltsbegleitung gegenüber Intiminteraktion",
+            "Grenzen technisch vollständiger Ganzkörpermobilität"
+          ]
+        },
+        {
+          "name": "Gesellschaft",
+          "three_distinct_article_angles": [
+            "Einwilligung und Privatsphäre als Debattenthema",
+            "Rechtliche Fragen bei Personalisierung",
+            "Kritische Folgen von Beziehungssimulation"
+          ]
+        },
+        {
+          "name": "Forschung",
+          "three_distinct_article_angles": [
+            "Teilkörper-Animatronik als Vorstufe",
+            "Woran echte Robotik erkennbar wäre",
+            "Hypothesen gegenüber marktreifen Produkten"
+          ]
+        }
+      ],
+      "notes": "Nicht als eigenständige bewiesene Robotertype vermarkten; bis eigenständiger Hardware-/Nachfragebeleg nur Konzeptkapitel unter HU15.",
+      "wp_id": null,
+      "wp_url": null,
+      "wp_parent_id": null,
+      "wp_approved": false,
+      "v50": {
+        "status": "ZUKUNFTSKAPITEL",
+        "draft_seo_title": "Vollbewegliche Partnerhumanoide – ein Zukunftsentwurf",
+        "draft_h1": "Zukunftskonzept: selbstständig bewegliche Partnerroboter",
+        "search_intent_distinction": "Vision ganzkörperlich autonomer humanoider Partner im Unterschied zu HU15 Teilrobotik",
+        "cross_entry_recommendation": "Als Zukunftskapitel in Humanoide > Intimrobotik / HU15, nicht als falsches reales Modell",
+        "search_source_urls_observed": [
+          "https://www.realdoll.com/product/robot-harmony/",
+          "https://www.heise.de/news/Realbotix-humanoide-Roboter-mit-austauschbarem-Design-11128323.html"
+        ],
+        "existing_wordpress_wxr_comparison": [
+          "HU15",
+          "HU14"
+        ],
+        "critical_warning": "Kein nachgewiesener autonomer Ganzkörper-Sexroboter; Realbotix nicht als Sexroboter anführen",
+        "actual_google_serp_directly_verified": false,
+        "live_wp_body_compared": false,
+        "new_wp_url": null,
+        "publish_approved": false
+      }
+    }
+  ],
+  "crosslink_policy": {
+    "now": "Fachplan mit kurzen beschreibenden Linkkarten zu konkret passenden Humanoiden-Unterseiten, keine Redirects, keine vorhandenen WP-Seiten ändern",
+    "haushalt": [
+      "HU01 – Humanoide Haushaltshilfe; Zukunftsküche HU02 als Kapitel in HU01"
+    ],
+    "pflege": [
+      "HU03 – humanoide häusliche Fernpflegehilfe",
+      "HU04 – soziale Humanoide in Pflegeheimen",
+      "HU05 Zukunft körperliche Pflege als Kapitel in Humanoide > Pflege"
+    ],
+    "gewerbe": [
+      "HU08 – Empfang",
+      "HU10 – KMU/Handwerk",
+      "HU13 – Event/Show",
+      "Gewerbe > Industrie > Anlagen – HU06",
+      "Gewerbe > Industrie > Fertigung – HU07",
+      "HU09 Konzept Kellner nur als Kapitel unter Humanoide > Arbeit"
+    ],
+    "bildung": [
+      "HU11 – Forschung und Entwicklertools",
+      "HU12 – Schule"
+    ],
+    "freizeit": [
+      "HU13 – Event/Unterhaltung",
+      "HU14 – Gesprächspartner"
+    ],
+    "urls": "Keine WP-URLs/Redirects ohne echte Installation und Freigabe"
+  },
+  "protected_wordpress_wxr_titles": [
+    "Agrardrohnen",
+    "Alltagshilfen",
+    "Armorthesen",
+    "Ballsammelroboter",
+    "Ballsport",
+    "Baristaroboter",
+    "Barkeeperroboter",
+    "Basketballroboter",
+    "Baustelle",
+    "Beetroboter",
+    "Bestückungsroboter",
+    "Bildung",
+    "Bootsreiniger",
+    "Dosierroboter",
+    "Druckfarmroboter",
+    "Empfangsroboter",
+    "Entmistungsroboter",
+    "Essroboter",
+    "Estrichroboter",
+    "Etikettierroboter",
+    "Fassadenroboter",
+    "Fensterputzroboter",
+    "Fertigung",
+    "Flächenpflege",
+    "Folgekoffer",
+    "Fotoroboter",
+    "Freizeit",
+    "Futterboote",
+    "Futterschieberoboter",
+    "Garten",
+    "Gastronomie",
+    "Geh-Exoskelette",
+    "Gerüstroboter",
+    "Gewerbe",
+    "Golf",
+    "Golf-Folgetrolleys",
+    "Golfballroboter",
+    "Handprothesen",
+    "Haushalt",
+    "Haustierroboter",
+    "Hotelbetrieb",
+    "Hotelroboter",
+    "Industrie",
+    "Infrastruktur",
+    "Inventurroboter",
+    "Kameraroboter",
+    "Knieprothesen",
+    "Lagerlogistik",
+    "Landwirtschaft",
+    "Laubroboter",
+    "Lerndrohnen",
+    "Lernroboter",
+    "Linienroboter",
+    "Logistik",
+    "Lötroboter",
+    "Medientechnik",
+    "Melkroboter",
+    "Mobilität",
+    "Modellbau",
+    "Mähroboter",
+    "Outdoor",
+    "PV-Reinigungsroboter",
+    "Palettenhubroboter",
+    "Palettierroboter",
+    "Pflege",
+    "Pikierroboter",
+    "Platzpflege",
+    "Poolpflege",
+    "Poolroboter",
+    "Poolskimmer",
+    "Produktion",
+    "Prothetik",
+    "Rasenpflege",
+    "Reinigung",
+    "Requisitenroboter",
+    "Roboterhunde",
+    "Robotertiere",
+    "Rollstuhlarme",
+    "Saugroboter",
+    "Schachroboter",
+    "Scheuersaugroboter",
+    "Schleifroboter",
+    "Schneeroboter",
+    "Schraubroboter",
+    "Schultelepräsenz",
+    "Schweißroboter",
+    "Servierroboter",
+    "Spezialrobotik",
+    "Spielzeug",
+    "Sport",
+    "Spritzroboter",
+    "Sprühroboter",
+    "Sä-/Jätroboter",
+    "Tennisplatzroboter",
+    "Tennisroboter",
+    "Therapieroboter",
+    "Tischroboter",
+    "Tischroboterarme",
+    "Tischtennisroboter",
+    "Traktorroboter",
+    "Treppenrollstühle",
+    "Trimmroboter",
+    "Wanddruckroboter",
+    "Zeichenroboter"
+  ],
+  "evidence_level": "Fachliche Quellen-/Suchtreffer-Abgrenzung; kein belegter Live-WP-Content- oder Google-Indexierungsvergleich"
+}
