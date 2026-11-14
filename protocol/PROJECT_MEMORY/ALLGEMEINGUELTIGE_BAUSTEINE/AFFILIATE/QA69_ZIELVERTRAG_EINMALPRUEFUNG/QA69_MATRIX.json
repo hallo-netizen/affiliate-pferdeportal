@@ -1,0 +1,605 @@
+{
+  "qa": "QA69",
+  "test_status": "PASS",
+  "failures": [],
+  "e2e_product_test": "BLOCKED_NOT_ENOUGH_REAL_INPUTS",
+  "e2e_production_release": "NOT_APPROVED",
+  "no_synthetic_data_claimed_as_real": true,
+  "real_original_2769_event_replay": true,
+  "root_problem_actual_saved": {
+    "unnecessary_pre_public_cleanup_ticks": 196,
+    "skipped_at_selection": 153,
+    "covered": "5/283"
+  },
+  "tested": {
+    "original_real_csv_replay": {
+      "type": "REAL_AUDIT_EVENT_REPLAY_ONLY",
+      "user_input_files": [
+        {
+          "filename": "pferdeatelier-ebay-lauf-574cb003b132.csv",
+          "sha256": "6e7f81b324612c01b6e3b26871408e91c72ed6c74b18b63ef6ac5281793d5d4f",
+          "bytes": 875794
+        },
+        {
+          "filename": "Pferdeatelier_eBay_fehlende_Produktfamilien_97507628-4f4.csv",
+          "sha256": "3c45b8f810664d518b958e887894ee50df6bea236e45d509e1345b4812071cdf",
+          "bytes": 75259
+        }
+      ],
+      "replayed_event_count": 2769,
+      "replayed_real_state_count": 2769,
+      "same_run_uuid": "97507628-4f4d-4527-bd77-fa573bce7067",
+      "real_observed_final": {
+        "status": "running",
+        "phase": "gapfill_discovery",
+        "progress_seq": "474",
+        "transport_ticks": "468",
+        "selection_scanned": "155",
+        "selection_materialized": "2",
+        "skipped_item_errors_count": "153",
+        "covered": "5",
+        "required": "283"
+      },
+      "pre_public_cleanup_actual": {
+        "audit_events": 395,
+        "unique_worker_ticks": 196,
+        "from_utc": "2026-11-14T02:56:26+00:00",
+        "to_utc": "2026-11-14T06:35:04+00:00",
+        "note": "Audited real stages; removed code branch prevents the same scan in future canonical selection; an exact total time saving cannot be inferred"
+      },
+      "missing_families_actual": {
+        "Angebote im Suchausschnitt, aber nicht angenommen": 31,
+        "Abruf hat zulässige Angebote; trotzdem nicht in dieser Abdeckung": 32,
+        "Kein zugeordneter Einzelabruf in diesem Teilstand": 215
+      },
+      "missing_family_count": 278,
+      "forbidden_claims": [
+        "Real 283-family eBay product simulation",
+        "Real WordPress DB/public output test",
+        "Real 153 item revalidation",
+        "Live workflow success"
+      ],
+      "unavailable_original_inputs": [
+        "creative_identity_hash",
+        "fresh_until",
+        "item_id",
+        "output_object",
+        "policy_state",
+        "public_checkpoint",
+        "source_payload",
+        "source_rating",
+        "source_state",
+        "wp_options_snapshot"
+      ],
+      "real_inputs_complete_for_product_decision_reexecution": false,
+      "replay_integrity_pass": true,
+      "replay_errors": [],
+      "full_1_to_1_e2e_acceptance": false,
+      "full_1_to_1_e2e_verdict": "NOT_ACCEPTED_NO_REAL_WP_AND_EBAY_ITEM_SNAPSHOT",
+      "next_evidence_needed": "Current read-only WordPress source/creative/output/options snapshot plus full non-secret original eBay responses for same time-window, with real public results and scheduler ticks."
+    },
+    "original_php_selector_red_green": {
+      "baseline": [
+        {
+          "name": "full_old_prune_phase_recovery",
+          "canonical": true,
+          "begin": "business_prune",
+          "reason": "canonical_run",
+          "end": "complete",
+          "status": "complete",
+          "db_queries": 1,
+          "canonical_cleanup_deferred_to_public_checkpoint": false,
+          "run_uuid": "97507628-4f4d-4527-bd77-fa573bce7067",
+          "run_state": "running"
+        },
+        {
+          "name": "full_materialization_finishes_without_prune",
+          "canonical": true,
+          "begin": "business_materialize",
+          "reason": "canonical_run",
+          "end": "business_prune",
+          "status": "running",
+          "db_queries": 0,
+          "canonical_cleanup_deferred_to_public_checkpoint": false,
+          "run_uuid": "97507628-4f4d-4527-bd77-fa573bce7067",
+          "run_state": "running"
+        },
+        {
+          "name": "gapfill_after_reuse_finishes_without_prune",
+          "canonical": true,
+          "begin": "business_prune",
+          "reason": "canonical_gapfill",
+          "end": "complete",
+          "status": "complete",
+          "db_queries": 1,
+          "canonical_cleanup_deferred_to_public_checkpoint": false,
+          "run_uuid": "97507628-4f4d-4527-bd77-fa573bce7067",
+          "run_state": "running"
+        },
+        {
+          "name": "standalone_keeps_existing_prune",
+          "canonical": false,
+          "begin": "business_prune",
+          "reason": "canonical_run",
+          "end": "complete",
+          "status": "complete",
+          "db_queries": 1,
+          "canonical_cleanup_deferred_to_public_checkpoint": false,
+          "run_uuid": "97507628-4f4d-4527-bd77-fa573bce7067",
+          "run_state": "running"
+        },
+        {
+          "name": "standalone_materialization_still_enters_prune",
+          "canonical": false,
+          "begin": "business_materialize",
+          "reason": "canonical_run",
+          "end": "business_prune",
+          "status": "running",
+          "db_queries": 0,
+          "canonical_cleanup_deferred_to_public_checkpoint": false,
+          "run_uuid": "97507628-4f4d-4527-bd77-fa573bce7067",
+          "run_state": "running"
+        }
+      ],
+      "fixed": [
+        {
+          "name": "full_old_prune_phase_recovery",
+          "canonical": true,
+          "begin": "business_prune",
+          "reason": "canonical_run",
+          "end": "complete",
+          "status": "complete",
+          "db_queries": 0,
+          "canonical_cleanup_deferred_to_public_checkpoint": true,
+          "run_uuid": "97507628-4f4d-4527-bd77-fa573bce7067",
+          "run_state": "running"
+        },
+        {
+          "name": "full_materialization_finishes_without_prune",
+          "canonical": true,
+          "begin": "business_materialize",
+          "reason": "canonical_run",
+          "end": "complete",
+          "status": "complete",
+          "db_queries": 0,
+          "canonical_cleanup_deferred_to_public_checkpoint": true,
+          "run_uuid": "97507628-4f4d-4527-bd77-fa573bce7067",
+          "run_state": "running"
+        },
+        {
+          "name": "gapfill_after_reuse_finishes_without_prune",
+          "canonical": true,
+          "begin": "business_prune",
+          "reason": "canonical_gapfill",
+          "end": "complete",
+          "status": "complete",
+          "db_queries": 0,
+          "canonical_cleanup_deferred_to_public_checkpoint": true,
+          "run_uuid": "97507628-4f4d-4527-bd77-fa573bce7067",
+          "run_state": "running"
+        },
+        {
+          "name": "standalone_keeps_existing_prune",
+          "canonical": false,
+          "begin": "business_prune",
+          "reason": "canonical_run",
+          "end": "complete",
+          "status": "complete",
+          "db_queries": 1,
+          "canonical_cleanup_deferred_to_public_checkpoint": false,
+          "run_uuid": "97507628-4f4d-4527-bd77-fa573bce7067",
+          "run_state": "running"
+        },
+        {
+          "name": "standalone_materialization_still_enters_prune",
+          "canonical": false,
+          "begin": "business_materialize",
+          "reason": "canonical_run",
+          "end": "business_prune",
+          "status": "running",
+          "db_queries": 0,
+          "canonical_cleanup_deferred_to_public_checkpoint": false,
+          "run_uuid": "97507628-4f4d-4527-bd77-fa573bce7067",
+          "run_state": "running"
+        }
+      ],
+      "note": "Original source method executed with fake DB; NOT a real 196-tick WordPress DB replay"
+    },
+    "original_php_public_gate_red_green": {
+      "baseline": [
+        {
+          "case": "duplicate_known_578_no_second_gate",
+          "gate_calls": 1,
+          "save_calls": 0,
+          "result": false,
+          "post_count": 578
+        },
+        {
+          "case": "one_new_candidate_proven_once",
+          "gate_calls": 1,
+          "save_calls": 1,
+          "result": 1,
+          "post_count": 579
+        },
+        {
+          "case": "unsafe_previous_checkpoint_not_overwritten",
+          "gate_calls": 0,
+          "save_calls": 0,
+          "result": false,
+          "post_count": 578
+        }
+      ],
+      "fixed": [
+        {
+          "case": "duplicate_known_578_no_second_gate",
+          "gate_calls": 0,
+          "save_calls": 0,
+          "result": false,
+          "post_count": 578
+        },
+        {
+          "case": "one_new_candidate_proven_once",
+          "gate_calls": 1,
+          "save_calls": 1,
+          "result": 1,
+          "post_count": 579
+        },
+        {
+          "case": "unsafe_previous_checkpoint_not_overwritten",
+          "gate_calls": 0,
+          "save_calls": 0,
+          "result": false,
+          "post_count": 578
+        }
+      ],
+      "note": "Real PHP method with fake already-safe campaign IDs and mocked gate output"
+    },
+    "original_canonical_php_full_model": {
+      "cases": [
+        {
+          "case": "normal",
+          "baseline": {
+            "scenario": "normal",
+            "status": "completed",
+            "last_phase": "completed",
+            "progress_seq": 31,
+            "worker_tickets": 23,
+            "candidate_count": 580,
+            "public_count": 580,
+            "new_searches": 1,
+            "lost_old_ids": 0,
+            "new_ids": [
+              1579,
+              1580
+            ],
+            "families_covered_in_run": 259,
+            "selection_calls": 2,
+            "public_writes": 2,
+            "published_outputs": 580,
+            "cleanup_logic": "Unmodified original ebay_selection_prune_business_batch copied verbatim from trait-ppar-ebay.php",
+            "error": null
+          },
+          "patched": {
+            "scenario": "normal",
+            "status": "completed",
+            "last_phase": "completed",
+            "progress_seq": 31,
+            "worker_tickets": 23,
+            "candidate_count": 580,
+            "public_count": 580,
+            "new_searches": 1,
+            "lost_old_ids": 0,
+            "new_ids": [
+              1579,
+              1580
+            ],
+            "families_covered_in_run": 259,
+            "selection_calls": 2,
+            "public_writes": 2,
+            "published_outputs": 580,
+            "cleanup_logic": "Unmodified original ebay_selection_prune_business_batch copied verbatim from trait-ppar-ebay.php",
+            "error": null
+          }
+        },
+        {
+          "case": "old_blocked",
+          "baseline": {
+            "scenario": "old_blocked",
+            "status": "completed",
+            "last_phase": "completed",
+            "progress_seq": 31,
+            "worker_tickets": 23,
+            "candidate_count": 579,
+            "public_count": 579,
+            "new_searches": 1,
+            "lost_old_ids": 1,
+            "new_ids": [
+              1579,
+              1580
+            ],
+            "families_covered_in_run": 258,
+            "selection_calls": 2,
+            "public_writes": 2,
+            "published_outputs": 579,
+            "cleanup_logic": "Unmodified original ebay_selection_prune_business_batch copied verbatim from trait-ppar-ebay.php",
+            "error": null
+          },
+          "patched": {
+            "scenario": "old_blocked",
+            "status": "completed",
+            "last_phase": "completed",
+            "progress_seq": 31,
+            "worker_tickets": 23,
+            "candidate_count": 579,
+            "public_count": 579,
+            "new_searches": 1,
+            "lost_old_ids": 1,
+            "new_ids": [
+              1579,
+              1580
+            ],
+            "families_covered_in_run": 258,
+            "selection_calls": 2,
+            "public_writes": 2,
+            "published_outputs": 579,
+            "cleanup_logic": "Unmodified original ebay_selection_prune_business_batch copied verbatim from trait-ppar-ebay.php",
+            "error": null
+          }
+        },
+        {
+          "case": "new_blocked",
+          "baseline": {
+            "scenario": "new_blocked",
+            "status": "completed",
+            "last_phase": "completed",
+            "progress_seq": 18,
+            "worker_tickets": 11,
+            "candidate_count": 97,
+            "public_count": 579,
+            "new_searches": 1,
+            "lost_old_ids": 0,
+            "new_ids": [
+              1580
+            ],
+            "families_covered_in_run": 258,
+            "selection_calls": 2,
+            "public_writes": 1,
+            "published_outputs": 580,
+            "cleanup_logic": "Unmodified original ebay_selection_prune_business_batch copied verbatim from trait-ppar-ebay.php",
+            "error": null
+          },
+          "patched": {
+            "scenario": "new_blocked",
+            "status": "completed",
+            "last_phase": "completed",
+            "progress_seq": 18,
+            "worker_tickets": 11,
+            "candidate_count": 97,
+            "public_count": 579,
+            "new_searches": 1,
+            "lost_old_ids": 0,
+            "new_ids": [
+              1580
+            ],
+            "families_covered_in_run": 258,
+            "selection_calls": 2,
+            "public_writes": 1,
+            "published_outputs": 580,
+            "cleanup_logic": "Unmodified original ebay_selection_prune_business_batch copied verbatim from trait-ppar-ebay.php",
+            "error": null
+          }
+        },
+        {
+          "case": "db_down",
+          "baseline": {
+            "scenario": "db_down",
+            "status": "failed",
+            "last_phase": "failed",
+            "progress_seq": 18,
+            "worker_tickets": 11,
+            "candidate_count": 98,
+            "public_count": 580,
+            "new_searches": 1,
+            "lost_old_ids": 0,
+            "new_ids": [
+              1579,
+              1580
+            ],
+            "families_covered_in_run": 259,
+            "selection_calls": 2,
+            "public_writes": 1,
+            "published_outputs": 580,
+            "cleanup_logic": "Unmodified original ebay_selection_prune_business_batch copied verbatim from trait-ppar-ebay.php",
+            "error": "business_public_storage_read_failed"
+          },
+          "patched": {
+            "scenario": "db_down",
+            "status": "failed",
+            "last_phase": "failed",
+            "progress_seq": 18,
+            "worker_tickets": 11,
+            "candidate_count": 98,
+            "public_count": 580,
+            "new_searches": 1,
+            "lost_old_ids": 0,
+            "new_ids": [
+              1579,
+              1580
+            ],
+            "families_covered_in_run": 259,
+            "selection_calls": 2,
+            "public_writes": 1,
+            "published_outputs": 580,
+            "cleanup_logic": "Unmodified original ebay_selection_prune_business_batch copied verbatim from trait-ppar-ebay.php",
+            "error": "business_public_storage_read_failed"
+          }
+        },
+        {
+          "case": "churn",
+          "baseline": {
+            "scenario": "churn",
+            "status": "completed",
+            "last_phase": "completed",
+            "progress_seq": 37,
+            "worker_tickets": 27,
+            "candidate_count": 579,
+            "public_count": 579,
+            "new_searches": 1,
+            "lost_old_ids": 1,
+            "new_ids": [
+              1579,
+              1580
+            ],
+            "families_covered_in_run": 258,
+            "selection_calls": 3,
+            "public_writes": 2,
+            "published_outputs": 580,
+            "cleanup_logic": "Unmodified original ebay_selection_prune_business_batch copied verbatim from trait-ppar-ebay.php",
+            "error": null
+          },
+          "patched": {
+            "scenario": "churn",
+            "status": "completed",
+            "last_phase": "completed",
+            "progress_seq": 37,
+            "worker_tickets": 27,
+            "candidate_count": 579,
+            "public_count": 579,
+            "new_searches": 1,
+            "lost_old_ids": 1,
+            "new_ids": [
+              1579,
+              1580
+            ],
+            "families_covered_in_run": 258,
+            "selection_calls": 3,
+            "public_writes": 2,
+            "published_outputs": 580,
+            "cleanup_logic": "Unmodified original ebay_selection_prune_business_batch copied verbatim from trait-ppar-ebay.php",
+            "error": null
+          }
+        },
+        {
+          "case": "no_new",
+          "baseline": {
+            "scenario": "no_new",
+            "status": "completed",
+            "last_phase": "completed",
+            "progress_seq": 31,
+            "worker_tickets": 23,
+            "candidate_count": 578,
+            "public_count": 578,
+            "new_searches": 1,
+            "lost_old_ids": 0,
+            "new_ids": [],
+            "families_covered_in_run": 257,
+            "selection_calls": 2,
+            "public_writes": 1,
+            "published_outputs": 578,
+            "cleanup_logic": "Unmodified original ebay_selection_prune_business_batch copied verbatim from trait-ppar-ebay.php",
+            "error": null
+          },
+          "patched": {
+            "scenario": "no_new",
+            "status": "completed",
+            "last_phase": "completed",
+            "progress_seq": 31,
+            "worker_tickets": 23,
+            "candidate_count": 578,
+            "public_count": 578,
+            "new_searches": 1,
+            "lost_old_ids": 0,
+            "new_ids": [],
+            "families_covered_in_run": 257,
+            "selection_calls": 2,
+            "public_writes": 1,
+            "published_outputs": 578,
+            "cleanup_logic": "Unmodified original ebay_selection_prune_business_batch copied verbatim from trait-ppar-ebay.php",
+            "error": null
+          }
+        },
+        {
+          "case": "save_fail",
+          "baseline": {
+            "scenario": "save_fail",
+            "status": "failed",
+            "last_phase": "failed",
+            "progress_seq": 18,
+            "worker_tickets": 11,
+            "candidate_count": 580,
+            "public_count": 580,
+            "new_searches": 1,
+            "lost_old_ids": 0,
+            "new_ids": [
+              1579,
+              1580
+            ],
+            "families_covered_in_run": 259,
+            "selection_calls": 2,
+            "public_writes": 1,
+            "published_outputs": 580,
+            "cleanup_logic": "Unmodified original ebay_selection_prune_business_batch copied verbatim from trait-ppar-ebay.php",
+            "error": "public_checkpoint_commit_failed"
+          },
+          "patched": {
+            "scenario": "save_fail",
+            "status": "failed",
+            "last_phase": "failed",
+            "progress_seq": 18,
+            "worker_tickets": 11,
+            "candidate_count": 580,
+            "public_count": 580,
+            "new_searches": 1,
+            "lost_old_ids": 0,
+            "new_ids": [
+              1579,
+              1580
+            ],
+            "families_covered_in_run": 259,
+            "selection_calls": 2,
+            "public_writes": 1,
+            "published_outputs": 580,
+            "cleanup_logic": "Unmodified original ebay_selection_prune_business_batch copied verbatim from trait-ppar-ebay.php",
+            "error": "public_checkpoint_commit_failed"
+          }
+        }
+      ],
+      "note": "Real PHP phase methods but WordPress SQL, provider and nested selection services intentionally MOCKED; not actual E2E"
+    },
+    "source_freshness_original_php": {
+      "suite": "9/9",
+      "original_php": true,
+      "ebay_api_payload": "MOCKED",
+      "model_stale_items": 153
+    },
+    "original_controller_lifecycle": {
+      "status_cases": 16,
+      "due_cases": 11,
+      "provider_and_wordpress_live": false
+    },
+    "package_integrity": {
+      "name": "Affiliate_6.72.348_EBAY_EINMALPRUEFUNG_QA_KEINE_LIVEABNAHME.zip",
+      "sha256": "e9f0f30bfbf1cbdbe2f113a6cffec9e1fb666a222a66194d91371c915d94eb88",
+      "files": 66,
+      "changed_files": [
+        "affiliate-portal-router/includes/trait-ppar-automation-suite.php",
+        "affiliate-portal-router/includes/trait-ppar-ebay-run.php",
+        "affiliate-portal-router/includes/trait-ppar-ebay.php",
+        "affiliate-portal-router/pferdeportal-affiliate-router.php",
+        "affiliate-portal-router/readme.txt"
+      ],
+      "unchanged_files": 61,
+      "php_lint_files": 23,
+      "zip_crc_ok": true,
+      "bytes": 5387899
+    }
+  },
+  "acceptance_missing": [
+    "Real WP eBay source rows with source_payload and timestamps",
+    "Real published campaign/creative/output rows",
+    "Real WP run/selection/SAFE options",
+    "Original real provider response records for source freshening and verification",
+    "Verified public output for same run",
+    "Proven delivery of external GitHub heartbeat at runtime"
+  ]
+}
