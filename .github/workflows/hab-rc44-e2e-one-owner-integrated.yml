@@ -54,6 +54,11 @@ jobs:
               positions=list(re.finditer(re.escape(token),out))
               print('OUTPUT_OWNER_TOKEN',token,'TOTAL',len(positions))
               for m in positions[:10]:print('OUTPUT_OWNER_CONTEXT',token,repr(out[max(0,m.start()-1500):m.start()+1600]))
+          _,save=method('output_save_local_campaign')
+          assert save
+          for token in ("$auto_publish", "$campaign['active']", "$campaign['placements']", "$campaign['automation_target_keys']", "$campaign['auto_topic_reason']", "$campaign['assignment_mode']"):
+              for match in list(re.finditer(re.escape(token),save))[:6]:
+                  print("MATERIALIZER_FIELD",token,repr(save[max(0,match.start()-450):match.start()+850]))
           # Original PHP accepts stored campaign exactly once for approved slot; no guessed data.
           _,gate=method('campaign_matches_contract_slot_rule')
           assert gate and "output_object_v4" in gate
