@@ -172,3 +172,9 @@
 - **Keine neue ZIP, kein Liveumbau, keine Änderung bestehender Plugins.** Nur aus isolierter Kopie arbeiten. Ausnahmen nur nach expliziter Nutzerentscheidung.
 - **Nächster legitimer Arbeitsansatz:** Eine verbindliche Soll/Ist-Liste jedes bestehenden Worker-Schritts mit Originalquellbeleg und realer Datenausgabe, bevor erneut ein Artefakt zur Installation angeboten wird. Manuelle SEO-Bearbeitung ausschließlich als Zusatz für Ausnahmefälle, niemals als Ersatz.
 - Diese Feststellung korrigiert frühere Erfolgsmeldungen in PR #768, ohne deren historischen Nachweis zu löschen.
+
+### Schritt 15 – 14.11.2026: Quellübernahme-Beweispflicht je Release
+- Neue verbindliche Nutzerregel: **Nach JEDEM Plugin** Quellcode-Übernahme beweisen, nicht behaupten. Altes Original SHA und Funktion, neues Ziel SHA, exakten Zeilen-Diff, 1:1-Funktionstest und zwingend sichtbare technische Adapter als solche markieren.
+- **Tatsächlich durchgeführter 0.4.1-Istvergleich:** Gegen PSTE QA .50 (83 PHP-Dateien) und PSERC QA .71 (42 PHP-Dateien) **0/6** Plugin-PHP-Dateien byteidentisch; `class-txe-dataforseo-client.php` (~95,7 % Textähnlichkeit) und `class-txe-secret-store.php` (~98,2 %) weitgehend abgeleitet, übrige Dateien stark abweichend. Es wäre **falsch**, die bestehende Texterstellung als unveränderte Übernahme zu bezeichnen.
+- Nachweis GitHub: `2026-11-14_TEXTERSTELLUNG_041_QUELLUEBERNAHME_IST_BEWEIS.md` im Prüfungen-Ordner, Zielvertrag **Regel 23** im bestehenden Zielvertrag verankert (keine separate Zielvertrags-Neufassung).
+- **0.4.1 nicht funktionsgleich freigeben**; keine neue ZIP und keine Änderung an alten Plugins. Für jede neue Version erst Quell-/Funktionsbeweis, dann ggf. echtes Test-WP, dann Installer.
