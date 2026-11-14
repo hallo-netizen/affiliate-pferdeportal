@@ -1,0 +1,130 @@
+--- v347/includes/trait-ppar-ebay.php
++++ v348/includes/trait-ppar-ebay.php
+@@ -5708,6 +5708,28 @@
+         return true;
+     }
+ 
++    /**
++     * Single-writer rule: the canonical eBay run is the ONLY owner of business
++     * cleanup. The selection worker may materialize chosen offers, but its old
++     * pre-public full-table prune must not rescan and pre-decide other products.
++     * Gapfill's one-time reuse pass still belongs to selection; the final
++     * verified public checkpoint still owns the real cleanup after commit.
++     * Standalone selection retains its existing behaviour.
++     */
++    private function ebay_selection_complete_canonical_staging(&$state) {
++        if (sanitize_key((string)($state['phase'] ?? '')) !== 'business_prune'
++            || sanitize_key((string)($state['selection_scope'] ?? '')) !== 'business'
++            || !method_exists($this,'ebay_run_checkpoint_staging_active')
++            || !$this->ebay_run_checkpoint_staging_active()) { return false; }
++        if (sanitize_key((string)($state['reason'] ?? '')) === 'canonical_gapfill'
++            && empty($state['business_reuse_done'])) { return false; }
++        $state['phase']='complete';
++        $state['status']='complete';
++        $state['completed_at']=time();
++        $state['canonical_cleanup_deferred_to_public_checkpoint']=1;
++        return true;
++    }
++
+     private function ebay_selection_process_tick($settings = null, $state = null) {
+         $settings=is_array($settings)?$this->ebay_normalize_settings($settings,true):$this->ebay_settings();
+         $state=is_array($state)?$state:$this->ebay_selection_state_load();
+@@ -5736,13 +5758,15 @@
+         if(sanitize_key((string)($state['phase']??''))==='business_materialize'){
+             $this->ebay_selection_apply_business_batch($settings,$state,50);
+         }elseif(sanitize_key((string)($state['phase']??''))==='business_prune'){
+-            if (sanitize_key((string)($state['reason']??''))==='canonical_gapfill'
+-                && empty($state['business_reuse_done'])) {
+-                // Paused pre-upgrade selections are at business_prune. Bring
+-                // their remaining local-source checks INTO this same run.
+-                $this->ebay_selection_reuse_checkpoint_batch($settings,$state,4);
+-            } else {
+-                $this->ebay_selection_prune_business_batch($settings,$state,50);
++            if (!$this->ebay_selection_complete_canonical_staging($state)) {
++                if (sanitize_key((string)($state['reason']??''))==='canonical_gapfill'
++                    && empty($state['business_reuse_done'])) {
++                    // One outstanding gapfill reuse pass; no duplicate cleanup.
++                    $this->ebay_selection_reuse_checkpoint_batch($settings,$state,4);
++                } else {
++                    // Only independent standalone selection retains legacy prune.
++                    $this->ebay_selection_prune_business_batch($settings,$state,50);
++                }
+             }
+         }elseif(sanitize_key((string)($state['phase']??''))==='private_prune'){
+             $this->ebay_selection_apply_private_post_batch($settings,$state,50);
+@@ -5751,6 +5775,9 @@
+         }elseif(sanitize_key((string)($state['phase']??''))==='private_verify'){
+             $this->ebay_selection_verify_private_final($settings,$state);
+         }
++        // Normal materialization can finish in this very tick. Do not queue a
++        // needless business_prune package; public checkpoint owns the cleanup.
++        $this->ebay_selection_complete_canonical_staging($state);
+         $state['last_tick_ms']=(int)round((microtime(true)-$started)*1000);
+         $this->ebay_selection_state_save($state);
+         if($this->ebay_selection_state_is_open($state)){
+--- v347/includes/trait-ppar-ebay-run.php
++++ v348/includes/trait-ppar-ebay-run.php
+@@ -533,6 +533,15 @@
+             if(!$this->ebay_public_checkpoint_is_safe($checkpoint)){return false;}
+             $before=$this->ebay_public_checkpoint_business_ids($checkpoint);
+         }
++        // No new campaign means no new approval decision. Previously the
++        // exact same SAFE and selection IDs re-entered the expensive full
++        // public-source/creative gate on every bounded selection worker tick.
++        // That repeated whole-inventory proof is neither a new family decision
++        // nor a freshness refresh. Existing verified SAFE items remain owned
++        // by the independent freshness worker and the final public commit.
++        $pending=array_values(array_diff($campaign_ids,$before));
++        if (!$pending) { return false; }
++        $campaign_ids=$pending;
+         // ONE public item decision. Incremental, replacement and final
+         // publication use the same real output/source/creative/target gate.
+         // Count the existing SAFE family members too: an incremental fourth
+--- v347/includes/trait-ppar-automation-suite.php
++++ v348/includes/trait-ppar-automation-suite.php
+@@ -4235,7 +4235,7 @@
+ 
+         // Provider-worker routing only: do not create a second source sync or rescan
+         // the entire creative pool. Never interrupt an older in-progress pool run.
+-        if (in_array(self::VERSION, array('6.72.336','6.72.337','6.72.339','6.72.340','6.72.341','6.72.342','6.72.343','6.72.344','6.72.345','6.72.346','6.72.347'), true)) {
++        if (in_array(self::VERSION, array('6.72.336','6.72.337','6.72.339','6.72.340','6.72.341','6.72.342','6.72.343','6.72.344','6.72.345','6.72.346','6.72.347','6.72.348'), true)) {
+             if (strpos($state, 'running:') === 0 || get_option(self::OPTION_FULL_POOL_AUTOMATION_CURSOR, null) !== null) { return; }
+             update_option(self::OPTION_FULL_POOL_AUTOMATION_VERSION, self::VERSION, false);
+             return;
+--- v347/pferdeportal-affiliate-router.php
++++ v348/pferdeportal-affiliate-router.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
+  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
+- * Version: 6.72.347
++ * Version: 6.72.348
+  * Author: OpenAI
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -120,7 +120,7 @@
+     use PPAR_DFS_Amazon_Trait;
+     use PPAR_Digistore24_Trait;
+     use PPAR_Housekeeping_Trait;
+-    const VERSION = '6.72.347';
++    const VERSION = '6.72.348';
+     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
+     const CONTRACT_VERSION = '1.0';
+     const PROVIDER_CONTRACT_VERSION = '2.0';
+--- v347/readme.txt
++++ v348/readme.txt
+@@ -1,4 +1,4 @@
+-V6.72.347 NUR QA: eBay-Vollsync nach abgeschlossener Suche ohne zweite globale Bestandsrunde direkt zur Auswahl; gezielte Frischeprüfung ausgewählter Quellen und finale öffentliche Freigabe unverändert. Die Versionen 6.72.345–347 lösen keinen ungewollten gesamten Werbemittelpool-Sync wegen des Pluginversionswechsels aus. Alle anderen Prozesse unverändert. Live noch nicht abgenommen.
++V6.72.348 NUR QA: eBay-Vollsync nach abgeschlossener Suche ohne zweite globale Bestandsrunde direkt zur Auswahl; gezielte Frischeprüfung ausgewählter Quellen und finale öffentliche Freigabe unverändert. Die Versionen 6.72.345–347 lösen keinen ungewollten gesamten Werbemittelpool-Sync wegen des Pluginversionswechsels aus. Alle anderen Prozesse unverändert. Live noch nicht abgenommen.
+ V6.72.344 NUR QA: bereits ausgewählte BUSINESS-Artikel mit abgelaufener 6h-Frische werden vor Materialisierung einzeln über die EXISTIERENDE getItem-/Availability-Methode bestätigt; höchstens eine nachgeprüfte Quelle je Worker-Takt, nur ein begrenzter Transport-Retry, danach weiter mit bestehenden Sicherheits-/Familien-/Public-Gates. Alte sichere Publikationen bleiben getrennt. Kein neuer Worker/Cron/Tabelle/Suchprofil. WP/eBay live nicht abgenommen.
+ V6.72.343 QA54 WORKER-REGAL TEST: eBay-Verfuegbarkeitspruefung aendert keine Produktauswahl; Werbemittelplanung mit einmaliger Portal-/Partnerentscheidung; gleiche eBay-Public-Quellenpruefung fuer inkrementelle und finale Freigaben; atomare Freigabeliste gegen paralleles Ueberschreiben. Bestehender Kanonischer eBay-Worker, bestehende WP-Cron-Verfuegbarkeitspruefung und vorhandene Datenhaltung. Alle sieben bisherigen lokalen Gesamtfaelle erneut geprueft, WP-/eBay-Dienste nachgestellt. Keine vier neuen autonomen Worker, keine neue Tabelle, keine zusaetzliche Automatik, keine Live-Abnahme. NUR ISOLIERTE TESTSEITE.
+ 
+@@ -91,7 +91,7 @@
+ V6.72.236 TEST: Backend-Portalabdeckung hat bisher 329 Ziele x 3 LIVE-Router-Auswahlen synchron ausgefuehrt; jetzt acht Ziele pro Request und vollstaendiger JSON-Export in begrenzten Lesebloecken. PRIVATE-HivePress-Stale-Filter kehrt auf normalen Seiten sofort zurueck; BUSINESS-Checkpoint scannt bei abgeschaltetem PRIVATE keine alten PRIVATE-HivePress-Importe mehr. Kein neuer Worker, keine DB-Tabelle, keine Provider-/Ranking-/BUSINESS-Aenderung. Lokale PHP-/JavaScript-/Mock-Pruefungen, KEINE WP/MariaDB-Host-Abnahme.
+ V6.72.234 TEST: Direkter Rueckbau eBay-PRIVATE aus Affiliate-Zentrale 6.72.233: alte automatische Admin-Init-Loeschung, PRIVATE-HivePress-Backendfunktionen, PRIVATE-Kategorieanlage, PRIVATE-Discovery und PRIVATE-Bedienfelder entfernt. Angehende INDIVIDUAL-Datensaetze werden auch aus alten Laufplaenen hart abgewiesen. BUSINESS/Idealo/Artikel/Banner unveraendert. Bestehende PRIVATE-DB-Altlasten werden durch das Installieren NICHT automatisch geloescht; keine unkontrollierten Datenbankaktionen. Nur Testinstallation; kein behaupteter WordPress-/MariaDB-Livepass.
+ V6.72.233: PRIVATE-only Aufraeumweg ueber admin_init reaktiviert (kein Frontend/AJAX); alter falscher Complete-Marker wird nachverarbeitet; Abschluss erst bei tatsaechlich geleerter Unterkategorie-Struktur. PRIVATE-Neuanlage gesperrt. BUSINESS/idealo/Artikelunveraendert.
+-Stable tag: 6.72.347
++Stable tag: 6.72.348
+ V6.72.232 SICHERHEITSSTOPP: Automatischer PHP-init-Loeschlauf der 6.72.231 entfernt; PRIVAT-eBay bleibt abgeschaltet und im oeffentlichen HivePress-Filter gesperrt; keine eigenstaendige Datenbankbereinigung, keine Datenrestauration.
+ V6.72.230 PRIVATE-EBAY-ENTFERNUNG: PRIVATE-Verkaeuferroute bleibt zwingend aus; auf Adminaufrufen werden ausschliesslich eBay-markierte HivePress-Importanzeigen kontrolliert in den Papierkorb verschoben, manuelle Anzeigen vor Entfernung der Unterkategorien der Hauptkategorie Private Anzeigen zugeordnet. Alle Unterkategorien werden geloescht, Stammkategorie und native Anzeigen bleiben. Die PRIVAT-HivePress-Frontend-/Preview-Hooks und Einrichtungsoberflaeche sind abgekoppelt; BUSINESS, idealo, Artikel, Banner, Kategorien der Redaktion, CSS/JS bleiben unveraendert. Idempotente, zeitbegrenzte Bereinigung ohne neuen Cron/Runner; Fortschritt in der eBay-Fachseite.
+ V6.72.226 PRODUKTAUSGABE KISS (LOKALER TESTKANDIDAT): Stellt die vertragliche Reihenfolge exakt -> weiterer Themenkreis -> zuletzt nur bestaetigt freigegebene Pferdeprodukte wieder her. Kategorie-/Hub-/Journal-Produktplaetze werden bei zu wenigen Treffern nur aus dem vorhandenen indexierten Kampagnenbestand ergaenzt. Auf normalen Einzelbeitraegen bleibt exakt verlangte Produktidentitaet strikt; fuer allgemeine Beitraege werden zuletzt gepruefte eBay-/idealo-Angebote zugelassen. Anbieter koennen innerhalb derselben Relevanzstufe gemischt werden; spaetere Amazon-Einbindung bleibt getrennt. Bestehende Sperren fuer eBay-BUSINESS-Quelle, private Anzeigen, Quelle, Health, Veto, Bild, Partner und idealo-48h-Grenze bleiben aktiv. Der vorhandene idealo-Hintergrundrefresh muss veraltete unveraenderte Feeds vollstaendig neu pruefen, statt dauerhaft per Hash abzubrechen. Kein Umbau von Imports, Renderer, Kategorien, Bannern, Provideradaptern, Tracking, Datenbanktabellen oder Template. Keine neue Frontend-Providerabfrage. Tests sind lokale Funktionssimulation; kein behaupteter Live-/WP-/MariaDB-PASS.
