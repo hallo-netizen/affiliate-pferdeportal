@@ -1,5 +1,12 @@
 # Robotik – Pluginbüro / Kategorie-Workflow
 
+## 0.4.7 / V60 – Task-Fehler 40101 und 9/38-Fortsetzung (TEST)
+- **Bestehendes Plugin aktualisieren; KEIN Neuaufbau.** Im WordPress-0.4.6-Lauf scheiterte das erste SERP-Google-Ergebnis bei Auftrag 10 mit DataForSEO `Internal SE Server Error.` (offizieller innerer Task-Code **40101**). Der alte Code erkannte nur HTTP500; seine Wiederaufnahme konnte nach vorherigen Lücken den echten Index 9 nicht abbilden.
+- Ein manueller Fortsetzen-Button bewahrt die bisherigen **9/38** Schritte (8 reale Ergebnisse + 1 offener Freizeit-Auftrag), Kosten 0,3535 USD und das bisherige genehmigte Budget. Der zehnte Auftrag wird **nicht** erneut gesendet. Künftige belegte 40101-, 50000- oder HTTP500-Anbieterfehler überspringt das Plugin ohne Wiederholung und markiert sie im Bericht **NICHT_GEPRUEFT**. Parameterfehler/unklare Fehler bleiben sicher blockiert.
+- **5/5 PHP-Lint, ZIP CRC, 23 lokale Prüfungen PASS**; noch kein echter Live-Test von 0.4.7. WordPress-Importer, Veröffentlichung, V52-Fachdaten und bisherige Ergebnisse bleiben unverändert.
+- **`PLUGIN/CURRENT.zip` = `PLUGIN/VERSIONEN/0.4.7.zip`** (57.513 Bytes, SHA256 `1b40052cb8d959de30bc950839d2d58d9b964d9e60cf9a1faf5f058ba44574eb`). Beleg `PLUGIN/SEO_V60_RELEASE_PRUEFUNG_20261114.md`.
+
+
 ## 0.4.6 / V59 – vorhandenen 3/38-Lauf ohne wiederholte Anbieterabfrage fortsetzen (TEST)
 - 0.4.5-Praxisfehler **HTTP500 beim vierten Auftrag (Freizeit Keyword Ideas, 14 gültige Seeds)**; 0.4.5 bot Wiederaufnahme nur am Start (0/38), nicht nach drei bereits erfassten Ergebnissen.
 - Ein **manueller Fortsetzen-Klick mit ausdrücklicher Bestätigung** im bestehenden Menü: Drei erfolgreiche Aufträge, angefallene Kosten und ursprüngliches Budget bleiben. Gescheiterter Auftrag wird als **NICHT GEPRUEFT** dokumentiert und nie erneut gesendet. Folgeaufträge werden gebündelt abgearbeitet. Weitere direkte HTTP500-Ideas-/SERP-Fehler werden nicht erneut angefragt und landen als belegte Lücken im Bericht; Abschluss heißt `COMPLETE_WITH_GAPS` statt falschem vollständigen PASS.
