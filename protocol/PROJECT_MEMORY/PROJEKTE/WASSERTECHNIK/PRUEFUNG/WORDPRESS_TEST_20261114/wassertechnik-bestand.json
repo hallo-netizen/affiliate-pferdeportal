@@ -1,0 +1,87 @@
+{
+    "schema": "wassertechnik-wp-inventory-v1",
+    "plugin_version": "0.1.1",
+    "site_url": "https://wasser.oliver-beil.de/",
+    "created_utc": "2026-11-14T12:28:47+00:00",
+    "mode": "READ_ONLY_INVENTORY",
+    "no_semantic_or_keyword_audit": true,
+    "pages": {
+        "state": "READ",
+        "count": 2,
+        "complete": true,
+        "items": [
+            {
+                "id": 2,
+                "parent_id": 0,
+                "title": "Beispielseite",
+                "slug": "beispielseite",
+                "status": "publish",
+                "type": "page"
+            },
+            {
+                "id": 3,
+                "parent_id": 0,
+                "title": "Datenschutzerklärung",
+                "slug": "datenschutzerklaerung",
+                "status": "draft",
+                "type": "page"
+            }
+        ],
+        "notes": []
+    },
+    "posts": {
+        "state": "READ",
+        "count": 1,
+        "complete": true,
+        "items": [
+            {
+                "id": 1,
+                "parent_id": 0,
+                "title": "Hallo Welt!",
+                "slug": "hallo-welt",
+                "status": "publish",
+                "type": "post",
+                "term_ids": [
+                    1
+                ]
+            }
+        ],
+        "notes": []
+    },
+    "categories": {
+        "state": "READ",
+        "count": 1,
+        "complete": true,
+        "items": [
+            {
+                "id": 1,
+                "parent_id": 0,
+                "name": "Allgemein",
+                "slug": "allgemein",
+                "count": 1
+            }
+        ],
+        "notes": []
+    },
+    "hivepress_listing_categories": {
+        "state": "NOT_CONFIGURED",
+        "count": 0,
+        "complete": false,
+        "items": [],
+        "notes": []
+    },
+    "hivepress_listings": {
+        "state": "NOT_CONFIGURED",
+        "count": 0,
+        "complete": false,
+        "items": [],
+        "notes": []
+    },
+    "editorial_taxonomy_candidates": [],
+    "editorial_status": "NOT_MAPPED",
+    "affiliate_advertisement_status": "NOT_CONNECTED",
+    "research_master_status": "NOT_CONNECTED",
+    "keyword_research_status": "NOT_CONNECTED",
+    "frontend_navigation_status": "NOT_CHECKED",
+    "issues": []
+}
