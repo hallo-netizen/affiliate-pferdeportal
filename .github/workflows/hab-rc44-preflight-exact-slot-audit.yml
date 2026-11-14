@@ -1,0 +1,35 @@
+name: Hab RC44 read-only exact RC43 banner slots and frontend audit
+on:
+  push:
+    branches: [hab-affiliate-rc44-frontend-slot-and-source-target-20261114]
+    paths:
+      - .github/workflows/hab-rc44-preflight-exact-slot-audit.yml
+permissions: {contents: read}
+jobs:
+  forensic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read exact archived production RC43 and inspect slot owners
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          from hashlib import sha256
+          p=Path("protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip")
+          assert sha256(p.read_bytes()).hexdigest()=="7e9a92fa2ee5ac93c6dce8bd4924858d661478921b6768c2103172845ed9e2e8"
+          with ZipFile(p) as z:
+            for n in z.namelist():
+              if n.endswith('.php') and ('hb-bewahr' in n or 'hab-bewahr' in n or 'bridge' in n or 'output-objects' in n or n.endswith('affiliate-portal-router.php')):
+                s=z.read(n).decode('utf-8')
+                print("SOURCE FILE",n,len(s))
+                for kw in ['hub_after_cards','product_after_category_tiles','ppar_affiliate_slot_matrix','output_format_slot','output_auto_category_large_banner_allowed','hundeversicherung','ppar-overview-wide-banner-cta-wrap']:
+                  i=s.find(kw)
+                  if i>=0:print("SECTION",kw,"FIRST",i,s[max(0,i-170):i+1450].replace("\n"," "))
+                if n.endswith('trait-ppar-output-objects.php'):
+                  i=s.find("function hb_rc31_insurance_banner_plan(")
+                  print("EXACT_HAB_OWNER_TAIL",s[i+6000:i+15500])
+                  i=s.find("function output_format_slot(")
+                  print("EXACT_SLOT_SELECT",s[i:i+4300])
+          PY
