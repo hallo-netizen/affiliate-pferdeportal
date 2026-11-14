@@ -219,6 +219,32 @@ method=method.replace(old,new,1)
 network=network[:net_beg]+method+network[net_end:]
 files[net_trait]=network.encode("utf-8")
 
+# The read-only 2747-vs-2901 comparison MUST NOT compare old-rule
+# 2747 saved categories against newly matched 2901 categories.
+# Reuse the existing automatic 2747 rematch first; same one authority.
+def edit_compare_gate(block):
+    old="""            || absint($settings['last_import_at']??0) <= 0) { return false; }"""
+    new="""            || absint($settings['last_import_at']??0) <= 0
+            || (string)($settings['last_match_revision']??'')!==$this->idealo_match_contract_revision()) { return false; }"""
+    assert block.count(old)==1,"Preview baseline permission changed"
+    return block.replace(old,new,1)
+edit_method("    private function hd_idealo_preview_allowed(",
+            "    /** Reuse the *exact* HD009 matcher",edit_compare_gate)
+
+# SELECT errors are not 'zero old hobbies'; report one real read failure
+# instead of publishing a misleading 2901 victory.
+def edit_compare_base(block):
+    old="""        $ids=(array)$wpdb->get_col($sql);"""
+    new="""        $ids=(array)$wpdb->get_col($sql);
+        if (trim((string)($wpdb->last_error??''))!=='') {
+            return new WP_Error('hd009_compare_baseline_db_failed',
+                'Bisheriger 2747-Bestand nicht lesbar; kein Feedvergleich freigegeben.');
+        }"""
+    assert block.count(old)==1
+    return block.replace(old,new,1)
+edit_method("    private function hd_idealo_preview_existing_concepts(",
+            "    /** Heavy work exclusively on private",edit_compare_base)
+
 files[trait]=s.encode("utf-8")
 m=files[main].decode("utf-8")
 # Both placement and thematic acceptance have exactly one authority:
