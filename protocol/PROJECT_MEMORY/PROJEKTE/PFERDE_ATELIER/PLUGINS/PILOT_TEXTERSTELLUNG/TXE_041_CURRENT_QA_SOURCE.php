@@ -48,6 +48,13 @@ if ($txeIsConfirmed) {
     // Original PSERC K0 batch encoder and technical five-field boundary (unchanged).
     require_once __DIR__.'/original/pserc/class-pserc-plan-snapshot-store.php';
     require_once __DIR__.'/original/pserc/class-pserc-metadata-boundary.php';
+    // The original PSTE SEO owner calls these PSERC classes for signed,
+    // category-bound canonical article slots. All three modules are unchanged.
+    // No second SEO decision, no new production plan, no generated legacy IDs.
+    if (!defined('PSERC_DIR')) { define('PSERC_DIR', __DIR__.'/original/pserc/'); }
+    require_once __DIR__.'/original/pserc/class-pserc-article-type-extension-registry.php';
+    require_once __DIR__.'/original/pserc/class-pserc-production-reader.php';
+    require_once __DIR__.'/original/pserc/class-pserc-slot-allocator.php';
 }
 
 
