@@ -1,0 +1,69 @@
+--- v346/affiliate-portal-router/includes/trait-ppar-ebay-run.php
++++ v347/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+@@ -1898,7 +1898,18 @@
+                 if($status==='completed_with_technical_gaps'){
+                     $run['discovery_technical_supply_warning']=$this->ebay_run_transient_supply_warning($job);
+                 }
+-                $run['remote_subphase']='inventory';$run['resume_reason']='';
++                // KISS: The full discovery just fetched provider facts. A second
++                // inventory-wide scan here rechecks thousands of unrelated rows
++                // before materialising any winner. In the real 14 Nov run this
++                // stage consumed 1692 audit records; 153 chosen rows expired
++                // before publication. Keep the independently scheduled refresh
++                // operation, but let a full search select its freshly found
++                // offers immediately. The existing per-selected getItem and
++                // final public-source proof still enforce six-hour freshness.
++                $operation=sanitize_key((string)($run['operation']??''));
++                $run['remote_subphase']=$operation==='sync'?'discovery_complete':'inventory';
++                if($operation==='sync'){$run['phase']='selection_prepare';}
++                $run['resume_reason']='';
+                 $run['progress_seq']=absint($run['progress_seq']??0)+1;
+                 $run['last_progress_at']=time();$this->ebay_run_save($run);
+             }
+--- v346/affiliate-portal-router/includes/trait-ppar-automation-suite.php
++++ v347/affiliate-portal-router/includes/trait-ppar-automation-suite.php
+@@ -4235,7 +4235,7 @@
+ 
+         // Provider-worker routing only: do not create a second source sync or rescan
+         // the entire creative pool. Never interrupt an older in-progress pool run.
+-        if (in_array(self::VERSION, array('6.72.336','6.72.337','6.72.339','6.72.340','6.72.341','6.72.342','6.72.343','6.72.344'), true)) {
++        if (in_array(self::VERSION, array('6.72.336','6.72.337','6.72.339','6.72.340','6.72.341','6.72.342','6.72.343','6.72.344','6.72.345','6.72.346','6.72.347'), true)) {
+             if (strpos($state, 'running:') === 0 || get_option(self::OPTION_FULL_POOL_AUTOMATION_CURSOR, null) !== null) { return; }
+             update_option(self::OPTION_FULL_POOL_AUTOMATION_VERSION, self::VERSION, false);
+             return;
+--- v346/affiliate-portal-router/pferdeportal-affiliate-router.php
++++ v347/affiliate-portal-router/pferdeportal-affiliate-router.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
+  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
+- * Version: 6.72.346
++ * Version: 6.72.347
+  * Author: OpenAI
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -120,7 +120,7 @@
+     use PPAR_DFS_Amazon_Trait;
+     use PPAR_Digistore24_Trait;
+     use PPAR_Housekeeping_Trait;
+-    const VERSION = '6.72.346';
++    const VERSION = '6.72.347';
+     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
+     const CONTRACT_VERSION = '1.0';
+     const PROVIDER_CONTRACT_VERSION = '2.0';
+--- v346/affiliate-portal-router/readme.txt
++++ v347/affiliate-portal-router/readme.txt
+@@ -1,3 +1,4 @@
++V6.72.347 NUR QA: eBay-Vollsync nach abgeschlossener Suche ohne zweite globale Bestandsrunde direkt zur Auswahl; gezielte Frischeprüfung ausgewählter Quellen und finale öffentliche Freigabe unverändert. Die Versionen 6.72.345–347 lösen keinen ungewollten gesamten Werbemittelpool-Sync wegen des Pluginversionswechsels aus. Alle anderen Prozesse unverändert. Live noch nicht abgenommen.
+ V6.72.344 NUR QA: bereits ausgewählte BUSINESS-Artikel mit abgelaufener 6h-Frische werden vor Materialisierung einzeln über die EXISTIERENDE getItem-/Availability-Methode bestätigt; höchstens eine nachgeprüfte Quelle je Worker-Takt, nur ein begrenzter Transport-Retry, danach weiter mit bestehenden Sicherheits-/Familien-/Public-Gates. Alte sichere Publikationen bleiben getrennt. Kein neuer Worker/Cron/Tabelle/Suchprofil. WP/eBay live nicht abgenommen.
+ V6.72.343 QA54 WORKER-REGAL TEST: eBay-Verfuegbarkeitspruefung aendert keine Produktauswahl; Werbemittelplanung mit einmaliger Portal-/Partnerentscheidung; gleiche eBay-Public-Quellenpruefung fuer inkrementelle und finale Freigaben; atomare Freigabeliste gegen paralleles Ueberschreiben. Bestehender Kanonischer eBay-Worker, bestehende WP-Cron-Verfuegbarkeitspruefung und vorhandene Datenhaltung. Alle sieben bisherigen lokalen Gesamtfaelle erneut geprueft, WP-/eBay-Dienste nachgestellt. Keine vier neuen autonomen Worker, keine neue Tabelle, keine zusaetzliche Automatik, keine Live-Abnahme. NUR ISOLIERTE TESTSEITE.
+ 
+@@ -90,7 +91,7 @@
+ V6.72.236 TEST: Backend-Portalabdeckung hat bisher 329 Ziele x 3 LIVE-Router-Auswahlen synchron ausgefuehrt; jetzt acht Ziele pro Request und vollstaendiger JSON-Export in begrenzten Lesebloecken. PRIVATE-HivePress-Stale-Filter kehrt auf normalen Seiten sofort zurueck; BUSINESS-Checkpoint scannt bei abgeschaltetem PRIVATE keine alten PRIVATE-HivePress-Importe mehr. Kein neuer Worker, keine DB-Tabelle, keine Provider-/Ranking-/BUSINESS-Aenderung. Lokale PHP-/JavaScript-/Mock-Pruefungen, KEINE WP/MariaDB-Host-Abnahme.
+ V6.72.234 TEST: Direkter Rueckbau eBay-PRIVATE aus Affiliate-Zentrale 6.72.233: alte automatische Admin-Init-Loeschung, PRIVATE-HivePress-Backendfunktionen, PRIVATE-Kategorieanlage, PRIVATE-Discovery und PRIVATE-Bedienfelder entfernt. Angehende INDIVIDUAL-Datensaetze werden auch aus alten Laufplaenen hart abgewiesen. BUSINESS/Idealo/Artikel/Banner unveraendert. Bestehende PRIVATE-DB-Altlasten werden durch das Installieren NICHT automatisch geloescht; keine unkontrollierten Datenbankaktionen. Nur Testinstallation; kein behaupteter WordPress-/MariaDB-Livepass.
+ V6.72.233: PRIVATE-only Aufraeumweg ueber admin_init reaktiviert (kein Frontend/AJAX); alter falscher Complete-Marker wird nachverarbeitet; Abschluss erst bei tatsaechlich geleerter Unterkategorie-Struktur. PRIVATE-Neuanlage gesperrt. BUSINESS/idealo/Artikelunveraendert.
+-Stable tag: 6.72.344
++Stable tag: 6.72.347
+ V6.72.232 SICHERHEITSSTOPP: Automatischer PHP-init-Loeschlauf der 6.72.231 entfernt; PRIVAT-eBay bleibt abgeschaltet und im oeffentlichen HivePress-Filter gesperrt; keine eigenstaendige Datenbankbereinigung, keine Datenrestauration.
+ V6.72.230 PRIVATE-EBAY-ENTFERNUNG: PRIVATE-Verkaeuferroute bleibt zwingend aus; auf Adminaufrufen werden ausschliesslich eBay-markierte HivePress-Importanzeigen kontrolliert in den Papierkorb verschoben, manuelle Anzeigen vor Entfernung der Unterkategorien der Hauptkategorie Private Anzeigen zugeordnet. Alle Unterkategorien werden geloescht, Stammkategorie und native Anzeigen bleiben. Die PRIVAT-HivePress-Frontend-/Preview-Hooks und Einrichtungsoberflaeche sind abgekoppelt; BUSINESS, idealo, Artikel, Banner, Kategorien der Redaktion, CSS/JS bleiben unveraendert. Idempotente, zeitbegrenzte Bereinigung ohne neuen Cron/Runner; Fortschritt in der eBay-Fachseite.
+ V6.72.226 PRODUKTAUSGABE KISS (LOKALER TESTKANDIDAT): Stellt die vertragliche Reihenfolge exakt -> weiterer Themenkreis -> zuletzt nur bestaetigt freigegebene Pferdeprodukte wieder her. Kategorie-/Hub-/Journal-Produktplaetze werden bei zu wenigen Treffern nur aus dem vorhandenen indexierten Kampagnenbestand ergaenzt. Auf normalen Einzelbeitraegen bleibt exakt verlangte Produktidentitaet strikt; fuer allgemeine Beitraege werden zuletzt gepruefte eBay-/idealo-Angebote zugelassen. Anbieter koennen innerhalb derselben Relevanzstufe gemischt werden; spaetere Amazon-Einbindung bleibt getrennt. Bestehende Sperren fuer eBay-BUSINESS-Quelle, private Anzeigen, Quelle, Health, Veto, Bild, Partner und idealo-48h-Grenze bleiben aktiv. Der vorhandene idealo-Hintergrundrefresh muss veraltete unveraenderte Feeds vollstaendig neu pruefen, statt dauerhaft per Hash abzubrechen. Kein Umbau von Imports, Renderer, Kategorien, Bannern, Provideradaptern, Tracking, Datenbanktabellen oder Template. Keine neue Frontend-Providerabfrage. Tests sind lokale Funktionssimulation; kein behaupteter Live-/WP-/MariaDB-PASS.
