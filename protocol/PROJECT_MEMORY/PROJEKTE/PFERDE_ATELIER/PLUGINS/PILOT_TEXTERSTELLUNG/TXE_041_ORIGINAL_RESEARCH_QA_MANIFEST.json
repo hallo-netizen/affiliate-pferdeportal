@@ -2,7 +2,7 @@
   "version": "0.4.1-originalresearch-qa",
   "release_allowed": false,
   "base_sha256": "f866f0e14eaf44ccfee9c4695b818c14734957a65ae9c556c8031e2e9aad4adc",
-  "result_sha256": "20829044ea530bcddc6d739ad25da9d14afa5f0fe286acb3e25c1d636fb3a835",
+  "result_sha256": "8faa5885dd6d5af2c52116c85faa0ef4708261b7fd035ffef004e175ed579fbe",
   "original_pste_source_file_count": 121,
   "original_pste_identical_files": 121,
   "pste_original_php_files": 83,
@@ -17,5 +17,7 @@
   "status": "PHP_SYNTAX_AND_MOCK_BOOT_ONLY__NO_WORDPRESS_E2E__DO_NOT_INSTALL",
   "expected_next": "test original PSTE live under cloned WP; do not publish until full target contract",
   "legacy_frei_identity": "source canonical_article_id and plan_slot retained; missing original slots remain unallocated and held",
-  "legacy_frei_validation": "PSTE_Mini_Workflow::hasStoredFinalFrei (original unchanged function)"
+  "legacy_frei_validation": "PSTE_Mini_Workflow::hasStoredFinalFrei (original unchanged function)",
+  "qa_status": "QA_SOURCE_ONLY_NOT_RELEASED",
+  "partial_old_id_policy": "Original IDs and slots retained verbatim even when incomplete; partial records held"
 }
