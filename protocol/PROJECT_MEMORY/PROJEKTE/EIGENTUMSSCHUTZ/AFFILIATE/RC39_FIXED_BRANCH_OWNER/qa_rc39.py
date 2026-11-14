@@ -27,6 +27,7 @@ source=source.replace("ppar_hab_rc31_tarifcheck_reconcile_v1",
 anchor="$mapped=$o->output_assign_banner_targets_from_destination_once($motor);"
 assert source.count(anchor)==1
 checks=r'''
+$baselineNodes=$GLOBALS['nodes']; $baselineTargets=$GLOBALS['targets'];
 // Shorthand must be normalized in exactly the existing importer decision.
 $shortHaus=banner('tarifcheck/','Hausrat');
 $shortPlan=$o->hb_rc31_insurance_banner_plan($shortHaus,$portal,$GLOBALS['targets'],array('page','category'));
@@ -98,6 +99,8 @@ ok($blocked['status']==='blocked','Unverified Tarifcheck creative NEVER becomes 
 $two=banner('tarifcheck/','Wohngebäudeversicherung und Reiseversicherung');
 $both=$o->hb_rc31_insurance_banner_plan($two,$portal,$GLOBALS['targets'],array('page','category'));
 ok($both['status']==='blocked','Two unrelated specialists never become one broad parent');
+// Restore original RC31 fixture before its own unchanged general 9-node test.
+$GLOBALS['nodes']=$baselineNodes; $GLOBALS['targets']=$baselineTargets;
 '''
 source=source.replace(anchor,checks+"\n"+anchor,1)
 with TemporaryDirectory() as td:
