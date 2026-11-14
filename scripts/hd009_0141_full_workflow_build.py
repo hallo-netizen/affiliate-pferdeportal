@@ -185,14 +185,16 @@ old_late="""            if (!$this->hd_idealo_product_targets_exact_hobby_page($
             }
 """
 marker="if (!$this->hd_idealo_product_targets_exact_hobby_page("
-assert m.count(marker)==1,"Expected exactly one duplicate target check"
-pos=m.index(marker)
-line_start=m.rfind("\n",0,pos)+1
-continue_pos=m.index("continue;",pos)
-closing_line_end=m.index("\n",m.index("\n",continue_pos)+1)+1
-removed_block=m[line_start:closing_line_end]
-assert removed_block.count("continue;")==1 and "}" in removed_block,removed_block
-m=m[:line_start]+m[closing_line_end:]
+assert marker in m,"Missing legacy target gate call"
+lines=m.splitlines(keepends=True)
+kept=[];i=0;removed_count=0
+while i<len(lines):
+    if marker in lines[i]:
+        assert i+2<len(lines) and lines[i+1].strip()=="continue;" and lines[i+2].strip()=="}",repr(lines[i:i+3])
+        removed_count+=1;i+=3;continue
+    kept.append(lines[i]);i+=1
+m="".join(kept)
+assert removed_count>=1 and marker not in m, "All late duplicate checks must be removed"
 begin=m.index("    private function hd_idealo_product_targets_exact_hobby_page(")
 end=m.index("    private function category_product_shared_rank_base(",begin)
 assert "private function hd_idealo_product_targets_exact_hobby_page(" in m[begin:end]
