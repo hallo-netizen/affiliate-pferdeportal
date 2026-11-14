@@ -1,0 +1,62 @@
+name: HAB RC44 exact frontend fixes original 160-row owner and no redundant CTA
+on:
+  push:
+    branches: [hab-affiliate-rc44-frontend-slot-and-source-target-20261114]
+    paths:
+      - .github/workflows/hab-rc44-frontend-root-fix-full-php-qa.yml
+      - protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/AFFILIATE/RC44_FRONTEND_ROOT_FIX/**
+permissions: {contents: write}
+jobs:
+  full-original-php:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Rebuild from exact archived live RC43, test real PHP all prior groups
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          P="$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip"
+          cp "$P" /tmp/RC43_PREVIOUS_LIVE.zip
+          echo "7e9a92fa2ee5ac93c6dce8bd4924858d661478921b6768c2103172845ed9e2e8  /tmp/RC43_PREVIOUS_LIVE.zip" | sha256sum -c -
+          python3 "$R/AFFILIATE/RC44_FRONTEND_ROOT_FIX/build_rc44.py"
+          python3 "$R/AFFILIATE/RC44_FRONTEND_ROOT_FIX/qa_rc44.py"
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          from hashlib import sha256
+          R=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ')
+          p=R/'PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip'
+          with ZipFile('/tmp/RC43_PREVIOUS_LIVE.zip') as a, ZipFile(p) as b:
+            assert a.testzip() is None and b.testzip() is None
+            assert len(a.namelist())==len(b.namelist())==36
+            changed={x for x in a.namelist() if a.read(x)!=b.read(x)}
+            expected={'affiliate-portal-router/includes/trait-ppar-output-objects.php',
+                      'affiliate-portal-router/affiliate-portal-router.php',
+                      'affiliate-portal-router/readme.txt'}
+            assert changed==expected,(changed,expected)
+          print('RC44_NO_OTHER_PORTAL_OR_PLUGIN_CODE_CHANGE_PASS',p.stat().st_size,sha256(p.read_bytes()).hexdigest())
+          PY
+      - name: Archive full QA-passed RC44 unchanged into HAB-004 office and release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          O=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE
+          cp "$O/CURRENT.zip" "$O/HAB_AFFILIATE_RC44_0.1.41-rc44.zip"
+          cmp "$O/CURRENT.zip" "$O/HAB_AFFILIATE_RC44_0.1.41-rc44.zip"
+          git add "$O/CURRENT.zip" "$O/HAB_AFFILIATE_RC44_0.1.41-rc44.zip"
+          git -c user.name="GitHub Actions" -c user.email="github-actions[bot]@users.noreply.github.com" commit -m "archive(hab): RC44 tested full original plugin, one target owner plus linked-image only"
+          git push origin HEAD:refs/heads/hab-affiliate-rc44-frontend-slot-and-source-target-20261114
+          sha256sum "$O/CURRENT.zip"
+          TAG=hab-affiliate-rc44-hub2-target-and-banner-only-20261114
+          cp "$O/CURRENT.zip" /tmp/HAB_Bewahr_Affiliate_RC44_EIN_OWNER_FRONTEND_TEST.zip
+          gh release create "$TAG" /tmp/HAB_Bewahr_Affiliate_RC44_EIN_OWNER_FRONTEND_TEST.zip \
+            --repo hallo-netizen/affiliate-pferdeportal --target "$(git rev-parse HEAD)" \
+            --title "Hab & Bewahr RC44 – richtige Versicherungsseiten, echter Hubslot, Banner ohne Doppelbutton" \
+            --notes "Test candidate based on LIVE RC43 with 160 active banners. From source: Hundeversicherung creative shown as Hundehaftpflicht now maps to actual Hundehaftpflicht R3 and never Tierkranken R3. Ambiguous R2-only insurance groups no longer spray into unrelated R3. The ONE original output slot selection gives insurance hub2 the real hub_after_cards slot rather than product_after_category_tiles. Original images already fully clickable: duplicate 'Mehr erfahren' CTA removed from the original wide image-only renderer, 'Anzeige' preserved. Full original-PHP 160 source groups, negative sibling checks, actual slot chooser, old provider/export tests, 25 PHP lint, and only three original files changed. No WP/Design changes and no banner re-import. Live frontend confirmation required after installation." --prerelease
+          gh release view "$TAG" --repo hallo-netizen/affiliate-pferdeportal --json assets,url --jq '{url,assets:[.assets[]|{name,size,url}]}'
