@@ -1,0 +1,545 @@
+{
+  "site_source": "V62_20261114_WP_READONLY+V62_FULL_8_WORLD_TREE",
+  "date": "2026-11-14",
+  "scope": [
+    "Haushalt",
+    "Garten",
+    "Freizeit",
+    "Sport",
+    "Bildung",
+    "Pflege",
+    "Humanoide"
+  ],
+  "excluded": [
+    "Gewerbe",
+    "Industrie",
+    "Arbeitsanwendungen unter Humanoide"
+  ],
+  "existing_scoped_type_count": 100,
+  "existing_scoped_group_count": 33,
+  "existing_scoped_facet_count": 231,
+  "existing_scoped_hold_count": 16,
+  "existing_facet_distribution": {
+    "1": 31,
+    "2": 7,
+    "3": 62
+  },
+  "worlds": {
+    "Haushalt": {
+      "existing_product_pages": 18,
+      "existing_group_pages": 4,
+      "existing_facets": 49,
+      "single_facet_pages": 2,
+      "hold_product_pages": 5
+    },
+    "Garten": {
+      "existing_product_pages": 14,
+      "existing_group_pages": 4,
+      "existing_facets": 30,
+      "single_facet_pages": 5,
+      "hold_product_pages": 1
+    },
+    "Freizeit": {
+      "existing_product_pages": 14,
+      "existing_group_pages": 5,
+      "existing_facets": 25,
+      "single_facet_pages": 8,
+      "hold_product_pages": 3
+    },
+    "Sport": {
+      "existing_product_pages": 17,
+      "existing_group_pages": 4,
+      "existing_facets": 36,
+      "single_facet_pages": 7,
+      "hold_product_pages": 2
+    },
+    "Bildung": {
+      "existing_product_pages": 10,
+      "existing_group_pages": 3,
+      "existing_facets": 25,
+      "single_facet_pages": 2,
+      "hold_product_pages": 5
+    },
+    "Pflege": {
+      "existing_product_pages": 15,
+      "existing_group_pages": 6,
+      "existing_facets": 30,
+      "single_facet_pages": 7,
+      "hold_product_pages": 0
+    },
+    "Humanoide": {
+      "existing_product_pages": 12,
+      "existing_group_pages": 7,
+      "existing_facets": 36,
+      "single_facet_pages": 0,
+      "hold_product_pages": 0
+    }
+  },
+  "new_editorial_type_candidates": [
+    {
+      "id": "V67_N01",
+      "world": "Haushalt",
+      "type": "Katzenkloroboter",
+      "path": [
+        "Haushalt",
+        "Katzenkloroboter"
+      ],
+      "decision": "NEUER_PRODUKTTYP_REDAKTIONELL_PRUEFEN",
+      "strength": "HOCH",
+      "reason": "Eigenstaendiger mechanischer Produkttyp, bestehender Haustierroboter behandelt mobile Begleiter/Kamerafahrzeuge.",
+      "evidence": [
+        "https://www.litter-robot.com/eu/litter-robot-4.html",
+        "https://www.petkit-eu.com/de/products/purobot-max-pro-2-automatic-cat-litter-box"
+      ],
+      "facets": [
+        {
+          "label": "Auswahl",
+          "articles": [
+            "Geschlossene gegen offene Katzenkloroboter",
+            "Katzenkloroboter bei mehreren Katzen",
+            "Eintrittshoehe fuer kleine und aeltere Katzen",
+            "Katzenstreu-Kompatibilitaet vergleichen"
+          ]
+        },
+        {
+          "label": "Sicherheit",
+          "articles": [
+            "Sensoren und Einklemmschutz",
+            "Katzen schrittweise eingewoehnen",
+            "Betrieb bei Kitten und Leichtgewichten",
+            "Kamera und Datenschutz im Katzenklo"
+          ]
+        },
+        {
+          "label": "Betrieb",
+          "articles": [
+            "Reinigung und Desinfektion",
+            "Gerueche und Abfallbehaelter",
+            "Ersatzbeutel und Folgekosten",
+            "Appfehler und manuelle Reinigung"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "V67_N02",
+      "world": "Sport",
+      "type": "Padel-Trainingsroboter",
+      "path": [
+        "Sport",
+        "Ballsport",
+        "Padel-Trainingsroboter"
+      ],
+      "decision": "NEUER_PRODUKTTYP_REDAKTIONELL_PRUEFEN",
+      "strength": "HOCH",
+      "reason": "Spezifischer Ballsport, gesondertes Trainingsangebot und Platz-/Bandenfragen; nicht blind als Tennisroboter-Seite verdoppeln.",
+      "evidence": [
+        "https://www.tennibot.com/",
+        "https://store.pongbotsports.com/blogs/media/pongbot-to-unveil-ai-coaching-robot-aura-for-tennis-pickleball-and-padel-at-ifa-berlin"
+      ],
+      "facets": [
+        {
+          "label": "Auswahl",
+          "articles": [
+            "Padel-Ballmaschine fuer Einsteiger",
+            "Ballkapazitaet und Mobilitaet",
+            "App-Steuerung und Programme",
+            "Tennis- und Padel-Kompatibilitaet"
+          ]
+        },
+        {
+          "label": "Training",
+          "articles": [
+            "Bandenruecklaeufe gezielt ueben",
+            "Volley- und Lobtraining",
+            "Trainingsfolgen fuer Einzelspieler",
+            "Spin und Platzierung einstellen"
+          ]
+        },
+        {
+          "label": "Betrieb",
+          "articles": [
+            "Akku und Ladezeiten",
+            "Aufstellung und Sicherheitsabstaende",
+            "Ballverschleiss und Pflege",
+            "Transport zum Platz"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "V67_N03",
+      "world": "Sport",
+      "type": "Pickleball-Trainingsroboter",
+      "path": [
+        "Sport",
+        "Ballsport",
+        "Pickleball-Trainingsroboter"
+      ],
+      "decision": "NEUER_PRODUKTTYP_REDAKTIONELL_PRUEFEN",
+      "strength": "HOCH",
+      "reason": "Eigenstaendige Ballgroesse, Spiel- und Trainingsablaeufe; Anbieter fuehren spezielle und kombinierte Trainingsmaschinen.",
+      "evidence": [
+        "https://spinshotsports.de/de/products/spinshot-player-pickleball-machine",
+        "https://www.tennibot.com/"
+      ],
+      "facets": [
+        {
+          "label": "Auswahl",
+          "articles": [
+            "Spezielle gegen Multisport-Ballmaschinen",
+            "Portable Pickleball-Trainingsroboter",
+            "Ballbehaelter und Geschwindigkeit",
+            "Fernbedienung und App"
+          ]
+        },
+        {
+          "label": "Training",
+          "articles": [
+            "Dink- und Kitchen-Training",
+            "Return- und Aufschlagtraining",
+            "Spin und Schlagplatzierung",
+            "Einsteiger- gegen Matchprogramme"
+          ]
+        },
+        {
+          "label": "Betrieb",
+          "articles": [
+            "Akku- und Netzbetrieb",
+            "Aufstellflaeche und Sicherheit",
+            "Kugeln und Verschleiss",
+            "Transport und Lagerung"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "V67_N04",
+      "world": "Pflege",
+      "type": "Handrehabilitationsroboter",
+      "path": [
+        "Pflege",
+        "Handrehabilitationsroboter"
+      ],
+      "decision": "NEUER_PRODUKTTYP_REDAKTIONELL_PRUEFEN",
+      "strength": "HOCH",
+      "reason": "Motorisierte Therapiehandschuhe zur Funktionsrehabilitation unterscheiden sich von Handprothesen und allgemeinen Armorthesen. Fachlichen Geltungsbereich Medizinprodukt beachten.",
+      "evidence": [
+        "https://www.gloreha.com/r-touch-elite-sinfonia-plus/",
+        "https://www.gloreha.com/r-touch-pro-sinfonia/"
+      ],
+      "facets": [
+        {
+          "label": "Therapieformen",
+          "articles": [
+            "Passives Fingertraining",
+            "Aktiv assistierte Bewegungen",
+            "Spiegelgestuetztes Handtraining",
+            "Trainingsspiele und Rueckmeldung"
+          ]
+        },
+        {
+          "label": "Anwendung",
+          "articles": [
+            "Auswahl fuer unterschiedliche Bewegungsziele",
+            "Anpassung und Handgroessen",
+            "Begleitetes Training zuhause",
+            "Sicherheitsfragen und fachliche Begleitung"
+          ]
+        },
+        {
+          "label": "Technik",
+          "articles": [
+            "Antriebsarten und Handgelenkfreiheit",
+            "Sensorik und Bewegungsmessung",
+            "Wartung und Reinigung",
+            "Kosten und moegliche Kostentraeger"
+          ]
+        }
+      ]
+    }
+  ],
+  "existing_page_refinements": [
+    {
+      "world": "Haushalt",
+      "existing": "Fensterputzroboter",
+      "action": "VERTIEFEN",
+      "suggestions": [
+        "Fensterformen",
+        "Kaufvergleich",
+        "Wartung"
+      ],
+      "evidence": null,
+      "note": "Vorhandene einzelne Rubrik Fensterpflege ist zu breit; 3-5 Artikel je neue Rubrik plausibel. Keine neuen Seiten."
+    },
+    {
+      "world": "Haushalt",
+      "existing": "Haustierroboter",
+      "action": "KLARER_ABGRENZEN",
+      "suggestions": [
+        "Kamera & Datenschutz",
+        "Interaktives Spielen",
+        "Navigation & Sicherheit"
+      ],
+      "evidence": "https://www.enabot.com/de/home-robot/ebo-air",
+      "note": "Fahrende Haustierkameras vs. mechanische Katzenklos fachlich trennen."
+    },
+    {
+      "world": "Haushalt",
+      "existing": "Wäschefaltroboter",
+      "action": "REDAKTION_STATT_NEU",
+      "suggestions": [
+        "Textilien",
+        "Bedienung",
+        "Marktreife"
+      ],
+      "evidence": "https://www.weaverobotics.com/isaac-0",
+      "note": "Bisherige Seite besteht; eingeschraenkte Kalifornien-Auslieferung, teilweise Fernbedienung kennzeichnen."
+    },
+    {
+      "world": "Garten",
+      "existing": "Beetroboter",
+      "action": "VERTIEFEN",
+      "suggestions": [
+        "Aussaat",
+        "Bewässerung",
+        "Unkrautpflege"
+      ],
+      "evidence": "https://farm.bot/pages/genesis",
+      "note": "FarmBot deckt alle drei Funktionen auf einer Plattform; nicht drei robotertypgleiche Seiten anlegen."
+    },
+    {
+      "world": "Garten",
+      "existing": "Mähroboter",
+      "action": "VERTIEFEN",
+      "suggestions": [
+        "Navigation",
+        "Randpflege",
+        "Multifunktion"
+      ],
+      "evidence": "https://eu.yarbo.com/de/products/yarbo-4-in-1-yard-robot",
+      "note": "Modulrobotik ist eher eigener Vergleich unter vorhandenem Produkt-Cluster."
+    },
+    {
+      "world": "Garten",
+      "existing": "Poolskimmer",
+      "action": "VERTIEFEN",
+      "suggestions": [
+        "Poolformen",
+        "Solarbetrieb",
+        "Betrieb & Wartung"
+      ],
+      "evidence": null,
+      "note": "Vorhandener Ein-Kategorien-Typ; keine neue WP-Seite."
+    },
+    {
+      "world": "Freizeit",
+      "existing": "Zeichenroboter",
+      "action": "VERTIEFEN",
+      "suggestions": [
+        "Stiftplotter",
+        "Papier & Medien",
+        "Software & Motive"
+      ],
+      "evidence": null,
+      "note": "Keine neue Plotter-Kopie; Produktseite bereits vorhanden."
+    },
+    {
+      "world": "Freizeit",
+      "existing": "Roboterhunde",
+      "action": "ABGRENZEN",
+      "suggestions": [
+        "Entwicklerplattformen",
+        "Spiel & Interaktion",
+        "Sicherheit & Preis"
+      ],
+      "evidence": null,
+      "note": "Nicht mit Robotertiere und Pflege-Therapie robotischen Tieren vermischen."
+    },
+    {
+      "world": "Freizeit",
+      "existing": "Futterboote",
+      "action": "VERTIEFEN",
+      "suggestions": [
+        "GPS-Navigation",
+        "Angelmethoden",
+        "Akkus & Gewässer"
+      ],
+      "evidence": null,
+      "note": "Bestehender Produktbereich, keine Doppelung mit Unterwasser-ROVs."
+    },
+    {
+      "world": "Sport",
+      "existing": "Tennisroboter",
+      "action": "VERTIEFEN",
+      "suggestions": [
+        "Balltechnik",
+        "KI-Training",
+        "Mobilität"
+      ],
+      "evidence": "https://www.tennibot.com/",
+      "note": "Adaptive mobile Tennisroboter sind ein neues Vertiefungsthema, keine neue Tennisroboter-WP-Seite."
+    },
+    {
+      "world": "Sport",
+      "existing": "Basketballroboter",
+      "action": "VERTIEFEN",
+      "suggestions": [
+        "Wurfprogramme",
+        "Ballrückgabe",
+        "Aufstellung & Sicherheit"
+      ],
+      "evidence": null,
+      "note": "Als Wurftrainer definieren, nicht einen humanoiden Basketballspieler behaupten."
+    },
+    {
+      "world": "Bildung",
+      "existing": "Lernroboter",
+      "action": "DOPPELUNG_BEREINIGEN",
+      "suggestions": [
+        "Geräteauswahl",
+        "Programmierung",
+        "Unterrichtseinsatz"
+      ],
+      "evidence": "https://www.makeblock.com/pages/mbot2-coding-robot",
+      "note": "ZWEI bestehende Rubriken heißen Programmierung; fachlich zusammenführen/auseinanderziehen statt dritte Rubrik hinzufügen. IDs nicht verändern."
+    },
+    {
+      "world": "Bildung",
+      "existing": "Roboterbaukästen",
+      "action": "SEO_HOLD_BEIBEHALTEN",
+      "suggestions": [
+        "Bausysteme",
+        "Programmierung",
+        "Projekte"
+      ],
+      "evidence": "https://www.makeblock.com/pages/mbot2-coding-robot",
+      "note": "Sachlich belegt, aber derzeitiger 16er SEO-HOLD darf nicht automatisch freigegeben werden."
+    },
+    {
+      "world": "Bildung",
+      "existing": "Lerndrohnen",
+      "action": "VERTIEFEN",
+      "suggestions": [
+        "Indoor-Sicherheit",
+        "Programmierung",
+        "Schulprojekte"
+      ],
+      "evidence": null,
+      "note": "Eigener konkreter Robotertyp besteht."
+    },
+    {
+      "world": "Pflege",
+      "existing": "Geh-Exoskelette",
+      "action": "VERTIEFEN",
+      "suggestions": [
+        "Kinder-Exoskelette",
+        "Training zuhause",
+        "Anpassung & Sicherheit"
+      ],
+      "evidence": "https://eu.trexorobotics.com/",
+      "note": "Trexo Home ist robotisches Gehtraining fuer Kinder; keine neue Dublette als Kinder-Gehroboter."
+    },
+    {
+      "world": "Pflege",
+      "existing": "Rollstuhlarme",
+      "action": "VERTIEFEN",
+      "suggestions": [
+        "Alltagsgreifen",
+        "Bedienelemente",
+        "Finanzierung & Hilfe"
+      ],
+      "evidence": "https://assistive.kinovarobotics.com/product/jaco-robotic-arm",
+      "note": "Vorhandener konkreter Rollstuhl-Greifarm, separates Pflegeprodukt."
+    },
+    {
+      "world": "Pflege",
+      "existing": "Armorthesen / Handprothesen / Knieprothesen",
+      "action": "BEGRIFFE_QUALIFIZIEREN",
+      "suggestions": [
+        "Aktive motorisierte Systeme",
+        "Funktionen",
+        "Alltag & Versorgung"
+      ],
+      "evidence": "https://www.gloreha.com/r-touch-elite-sinfonia-plus/",
+      "note": "Passive Orthesen/Prothesen sind nicht automatisch Robotik; Aktivierung und Sensorsteuerung nachweisen."
+    },
+    {
+      "world": "Humanoide",
+      "existing": "Haushaltsassistenten",
+      "action": "MARKTREIFE_ABGRENZEN",
+      "suggestions": [
+        "Autonomie & Fernhilfe",
+        "Sicherheit",
+        "Markt & Kosten"
+      ],
+      "evidence": "https://www.1x.tech/order",
+      "note": "Vorbestellung ist kein Beweis fuer autonome Seriennutzung in Deutschland."
+    },
+    {
+      "world": "Humanoide",
+      "existing": "Entwicklungsroboter",
+      "action": "VERTIEFEN",
+      "suggestions": [
+        "Lernplattformen",
+        "Bewegung & Sensorik",
+        "Entwicklerzugang"
+      ],
+      "evidence": "https://shop.unitree.com/products/unitree-r1",
+      "note": "Humanoide Entwicklerplattformen existieren; kein zweiter Kopietyp Mini-Humanoide."
+    }
+  ],
+  "boundary_or_exclusions": [
+    {
+      "world": "Freizeit",
+      "name": "Automatische Teleskope / Roboter-Teleskope",
+      "state": "RANDGEBIET_FACHPROFIL_PRUEFEN",
+      "reason": "Autonomes GoTo und Nachfuehrung ist belegt; Suchintention ist Smart-Teleskop/Astrofotografie, nicht unbedingt Roboter. Ersteinordnung als Magazin/Freizeit, keine neue WP-Seite.",
+      "evidence": "https://www.seestar.com/de/products/seestar-s30-pro"
+    },
+    {
+      "world": "Garten",
+      "name": "Eigenstaendiger Unkrautroboter",
+      "state": "KEINE_EIGENE_NEUSEITE",
+      "reason": "Tertill eingestellt; FarmBot integriert Jäten schon in vorhandene Beetroboter-Funktion.",
+      "evidence": "https://tertill.com/"
+    },
+    {
+      "world": "Garten",
+      "name": "Modularer Ganzjahres-Gartenroboter",
+      "state": "BESTEHENDE_SEITEN_KREUZVERLINKEN",
+      "reason": "Yarbo nutzt dieselbe Roboterplattform fuer Mäh-/Schnee-/Laubmodule; kein mehrfaches SEO-Duplikat.",
+      "evidence": "https://eu.yarbo.com/de/products/yarbo-4-in-1-yard-robot"
+    },
+    {
+      "world": "Pflege",
+      "name": "Selbstfahrende Rollstuehle",
+      "state": "RANDGEBIET_BEOBACHTEN",
+      "reason": "Autonome Fahrservices sind belegt, aber die hier gefundene Nutzung ist am Flughafen; das ist nicht automatisch ein privates Pflegeprodukt.",
+      "evidence": "https://whill.inc/gb/news"
+    },
+    {
+      "world": "Haushalt",
+      "name": "Robotische Katzenfutterautomaten",
+      "state": "KEIN_AUTOMATISCHER_ROBOTERTYP",
+      "reason": "Zeitgesteuerte Futternäpfe ohne autonome Fortbewegung/Manipulation nicht automatisch mit eigenständiger Robotik verwechseln.",
+      "evidence": null
+    },
+    {
+      "world": "Bildung",
+      "name": "Kleinhumanoide Schulroboter",
+      "state": "BESTEHENDE_SEITEN",
+      "reason": "Bildung/Schulroboter oder Humanoide/Entwicklungsroboter existieren; erst konkrete Nutzungsabsicht abgrenzen.",
+      "evidence": "https://shop.unitree.com/products/unitree-r1"
+    },
+    {
+      "world": "Humanoide",
+      "name": "Allgemein autonomer Haushalts-Humanoid",
+      "state": "MARKTREIFE_HOLD",
+      "reason": "Anbieter nimmt Vorbestellungen an, Fernhilfe vorgesehen; kein Beleg fuer autonomes Massengeschaeft in Deutschland.",
+      "evidence": "https://www.1x.tech/order"
+    }
+  ],
+  "no_live_import_no_paid_api": true,
+  "no_seo_volume_validation_of_new_words": true
+}
