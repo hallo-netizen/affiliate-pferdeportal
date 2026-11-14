@@ -1,6 +1,6 @@
 {
   "base_original_import_zip_sha256": "f866f0e14eaf44ccfee9c4695b818c14734957a65ae9c556c8031e2e9aad4adc",
-  "qa_zip_sha256": "20829044ea530bcddc6d739ad25da9d14afa5f0fe286acb3e25c1d636fb3a835",
+  "qa_zip_sha256": "8faa5885dd6d5af2c52116c85faa0ef4708261b7fd035ffef004e175ed579fbe",
   "orig_old_unchanged_files": 10,
   "orig_old_other_files": 10,
   "pste_original_files": 121,
@@ -9,7 +9,7 @@
     "boot": 10,
     "conflict": 3,
     "admin_menu": 7,
-    "original_frei_identity": 7
+    "original_frei_identity": 11
   },
   "not_tested": [
     "real WordPress DB",
