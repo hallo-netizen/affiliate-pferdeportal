@@ -41,6 +41,26 @@ if ($txeIsConfirmed) {
     // Technical adapter: no second editorial production plan. Only on the explicitly confirmed testsite.
     if (!defined('TXE_PLANFREE_KISS_V1')) { define('TXE_PLANFREE_KISS_V1', true); }
     require_once __DIR__.'/original/pste/portal-seo-topic-engine.php';
+    // Remove obsolete SECOND planning actions after the unchanged PSTE registers
+    // them. Original research, single SEO owner and MINI title actions are kept.
+    if (function_exists('remove_action')) {
+        foreach ([
+            ['admin_post_pste_mini_forward_to_plan', 'PSTE_Mini_Workflow', 'forwardToPlan'],
+            ['admin_post_pste_mini_legacy_plan_rebind', 'PSTE_Mini_Workflow', 'legacyEmptyPlanRebind'],
+            ['admin_post_pste_import_editorial_plan', 'PSTE_Admin', 'importEditorialPlan'],
+            ['admin_post_pste_export_planning_topics', 'PSTE_Admin', 'exportPlanningTopics'],
+            ['admin_post_pste_title_desk_export', 'PSTE_Admin', 'exportTitleDesk'],
+            ['admin_post_pste_title_desk_import', 'PSTE_Admin', 'importTitleDesk'],
+            ['pste_title_desk_reentry', 'PSTE_Admin', 'processTitleDeskReentry'],
+            ['wp_ajax_pste_title_desk_reentry_continue', 'PSTE_Admin', 'continueTitleDeskReentry'],
+            ['wp_ajax_nopriv_pste_title_desk_reentry_continue', 'PSTE_Admin', 'continueTitleDeskReentry'],
+            ['wp_ajax_pste_production_auto_step', 'PSTE_Admin', 'productionAutoStepAjax'],
+            ['wp_ajax_pste_production_auto_status', 'PSTE_Admin', 'productionAutoStatusAjax'],
+            ['wp_ajax_pste_production_auto_cancel', 'PSTE_Admin', 'productionAutoCancelAjax'],
+        ] as [$hook, $owner, $method]) {
+            remove_action($hook, [$owner, $method]);
+        }
+    }
     // Preserve the original draft-only safety after removing the PPM planning runtime.
     // This is a technical WordPress safeguard, not another SEO or content decision.
     add_filter('wp_insert_post_data', static function(array $postData, array $postarr): array {
