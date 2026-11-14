@@ -184,10 +184,15 @@ old_late="""            if (!$this->hd_idealo_product_targets_exact_hobby_page($
                 continue;
             }
 """
-import re
-late_pattern=r'(?m)^[ \t]*if \(!\$this->hd_idealo_product_targets_exact_hobby_page\([^\n]+\)\) \{\r?\n[ \t]*continue;\r?\n[ \t]*\}\r?\n'
-m,removed_late=re.subn(late_pattern,"",m)
-assert removed_late==1,"Expected exactly one legacy duplicate placement gate"
+marker="if (!$this->hd_idealo_product_targets_exact_hobby_page("
+assert m.count(marker)==1,"Expected exactly one duplicate target check"
+pos=m.index(marker)
+line_start=m.rfind("\n",0,pos)+1
+continue_pos=m.index("continue;",pos)
+closing_line_end=m.index("\n",m.index("\n",continue_pos)+1)+1
+removed_block=m[line_start:closing_line_end]
+assert removed_block.count("continue;")==1 and "}" in removed_block,removed_block
+m=m[:line_start]+m[closing_line_end:]
 begin=m.index("    private function hd_idealo_product_targets_exact_hobby_page(")
 end=m.index("    private function category_product_shared_rank_base(",begin)
 assert "private function hd_idealo_product_targets_exact_hobby_page(" in m[begin:end]
