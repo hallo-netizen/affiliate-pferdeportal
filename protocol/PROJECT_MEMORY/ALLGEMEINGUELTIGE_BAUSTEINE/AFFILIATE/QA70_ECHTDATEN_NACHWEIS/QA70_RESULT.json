@@ -1,0 +1,61 @@
+{
+  "qa": "QA70",
+  "plugin_version": "6.72.349",
+  "package": "Affiliate_6.72.349_EBAY_ECHTDATEN_EXPORT_NUR_QA.zip",
+  "sha256": "c6b29cc7466d4fa26d76d575aab7f319d75ebe514f8d561b2b4b55a9fee57a82",
+  "size": 5390795,
+  "source_plugin_version": "6.72.348",
+  "zip_files": 66,
+  "php_lint_files": 23,
+  "changed_files": [
+    "affiliate-portal-router/includes/trait-ppar-automation-suite.php",
+    "affiliate-portal-router/includes/trait-ppar-ebay-run.php",
+    "affiliate-portal-router/includes/trait-ppar-ebay.php",
+    "affiliate-portal-router/pferdeportal-affiliate-router.php",
+    "affiliate-portal-router/readme.txt"
+  ],
+  "unchanged_files": 61,
+  "crc_pass": true,
+  "original_real_audit": {
+    "file": "pferdeatelier-ebay-lauf-574cb003b132.csv",
+    "sha256": "6e7f81b324612c01b6e3b26871408e91c72ed6c74b18b63ef6ac5281793d5d4f",
+    "rows": 2769,
+    "run_uuid": "97507628-4f4d-4527-bd77-fa573bce7067",
+    "last_coverage": "5/283",
+    "stale_skips": 153,
+    "early_cleanup_worker_ticks": 196,
+    "missing_families": 278
+  },
+  "new_evidence_export": {
+    "entrypoint": "existing admin_post_ppar_ebay_audit_export",
+    "format": "evidence",
+    "method": "read-only streaming NDJSON",
+    "schema": "ebay_persisted_snapshot_v1",
+    "read_only_php_test": "PASS",
+    "php_test_fixture_item_count": 2,
+    "source_method_runs": "ORIGINAL PHP",
+    "admin_permission_and_nonce": "existing protected export route",
+    "auth_secrets_redacted": "PASS",
+    "no_extra_cron_workers_tables": "PASS",
+    "status_and_checkpoint_unchanged_in_test": "PASS",
+    "stability_reported_in_result": "PASS",
+    "original_historical_provider_responses_restored": false
+  },
+  "regressions": {
+    "selector": "5/5",
+    "public_gate": "3/3",
+    "canonical_full_model": "7/7 MOCKED DB/EBAY",
+    "rest_status": "16/16 MOCKED WP",
+    "due": "11/11 MOCKED WP",
+    "source_freshness": "9/9 MOCKED API"
+  },
+  "one_to_one_real_e2e_simulation": "NOT POSSIBLE WITH CURRENT TWO CSVS",
+  "release": "NOT APPROVED",
+  "required_after_export": [
+    "Install only in controlled test copy with snapshot of real WP DB, or consent to controlled live plugin update with backup",
+    "One click export on same run UUID; inspect no read errors and stable snapshot",
+    "Use original persisted offer payload, run/cursor, output, creative and public rows",
+    "Historical missing eBay HTTP replies remain unavailable unless already persisted; do not invent",
+    "Check true GitHub scheduled tick arrival and public visibility before acceptance"
+  ]
+}
