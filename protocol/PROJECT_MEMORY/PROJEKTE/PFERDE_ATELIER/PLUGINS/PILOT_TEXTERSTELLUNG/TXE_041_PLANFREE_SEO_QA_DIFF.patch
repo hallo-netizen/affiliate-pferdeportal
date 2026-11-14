@@ -1,0 +1,346 @@
+--- a/texterstellung/original/pste/includes/class-pste-mini-workflow.php
++++ b/texterstellung/original/pste/includes/class-pste-mini-workflow.php
+@@ -736,8 +736,8 @@
+                 }
+                 // Reuse the EXISTING signed PPM plan reader and slot allocator.
+                 // One technical allocation, no new semantic SEO review.
+-                $production=class_exists('PSERC_Production_Reader')
+-                    ?PSERC_Production_Reader::snapshot():[];
++                $production=defined('TXE_PLANFREE_KISS_V1') && TXE_PLANFREE_KISS_V1
++                    ? [] : (class_exists('PSERC_Production_Reader') ? PSERC_Production_Reader::snapshot() : []);
+                 $state=self::acceptSingleOwnerSeoDecisions($state,$doc,$snapshot,$sourceRows,$production);
+                 self::storeSeoDecisionsIfUnchanged($before,$state); // one original WP option, atomic
+                 wp_safe_redirect(admin_url('admin.php?page=portal-seo-topic-engine-review&pste_mini_seo_imported=1'));exit;
+@@ -1214,137 +1214,150 @@
+             if($editorialUnknown>0)$sourceProblems[]='EDITORIAL_PLAN_UNRESOLVED:'.$editorialUnknown;
+             if($editorialConflict)$sourceProblems[]='EDITORIAL_PLAN_SOURCE_CONFLICT';
+ 
+-            $pserc=self::readExistingPsercPlanForParkhaus();
+-            $result['sources']['PSERC_ACTIVE_PLAN']=[
+-                'complete'=>!empty($pserc['complete']),'reason'=>(string)($pserc['reason']??''),
+-                'snapshot_sha256'=>(string)($pserc['snapshot_sha256']??''),
+-                'item_count'=>(int)($pserc['item_count']??0)];
+-            foreach((array)($pserc['items']??[]) as $item)if(is_array($item))$result['items'][]=$item;
+-            // Every actual source must be present and trustworthy. Editorial plan may
+-            // explicitly be NOT_AVAILABLE, as PSERC's own bound dependency contract allows.
+-            if(empty($pserc['complete']))throw new RuntimeException('PSERC_PLAN_NOT_PROVEN_COMPLETE');
++            // This legacy plan is read ONLY when it already exists; it is not created for new articles.
++            $planFree=defined('TXE_PLANFREE_KISS_V1') && TXE_PLANFREE_KISS_V1;
++            $historicalPlan=$planFree && class_exists('PSERC_Plan_Snapshot_Store')
++                ?get_option(PSERC_Plan_Snapshot_Store::ACTIVE_OPTION, null):null;
++            if($planFree && ($historicalPlan===null || $historicalPlan===false)){
++                $result['sources']['PSERC_ACTIVE_PLAN']=['complete'=>true,
++                    'status'=>'NO_HISTORICAL_PLAN_REQUIRED','item_count'=>0];
++            }else{
++                $pserc=self::readExistingPsercPlanForParkhaus();
++                $result['sources']['PSERC_ACTIVE_PLAN']=[
++                    'complete'=>!empty($pserc['complete']),'reason'=>(string)($pserc['reason']??''),
++                    'snapshot_sha256'=>(string)($pserc['snapshot_sha256']??''),
++                    'item_count'=>(int)($pserc['item_count']??0)];
++                foreach((array)($pserc['items']??[]) as $item)if(is_array($item))$result['items'][]=$item;
++                if(empty($pserc['complete']))throw new RuntimeException('PSERC_PLAN_NOT_PROVEN_COMPLETE');
++            }
+ 
+             // The PPM679 runtime Redaktionsplan is ALREADY in WordPress. Read
+             // only its occupied canonical IDs, never write or create a second plan.
+             // PSERC_Slot_Allocator::occupiedCanonicalIds() uses this SAME option.
+             $runtimeOriginal=get_option('ppm679_editorial_plan_runtime_state_v1',null);
+-            // Source completeness belongs HERE, once per full parkhouse export.
+-            // Missing/empty saved PPM679 plan cannot mean "all article slots free".
+-            if(!is_array($runtimeOriginal)||!is_array($runtimeOriginal['items']??null))
+-                throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_MISSING_OR_INVALID');
+-            $runtimeItems=$runtimeOriginal['items'];
+-            if(!$runtimeItems)
+-                throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_EMPTY');
+-            $runtimeMissingTitles=[];$historicalOrphans=[];$migratedPostIds=[];
+-            $seenCanonicals=[];$seenSlots=[];
+-            foreach($runtimeItems as $itemId=>$item){
+-                if(!is_array($item))throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_ITEM_INVALID');
+-                $canonical=trim((string)($item['canonical_article_id']??$itemId));
+-                if($canonical==='')throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_SLOT_ID_MISSING');
+-                $slot=trim((string)($item['plan_slot_sha256']??$item['plan_slot']??''));
+-                if(isset($seenCanonicals[$canonical]))throw new RuntimeException('EXISTING_RUNTIME_DUPLICATE_CANONICAL');
+-                $seenCanonicals[$canonical]=true;
+-                if(!preg_match('/^[a-f0-9]{64}$/D',$slot))
+-                    throw new RuntimeException('EXISTING_RUNTIME_INVALID_PLAN_SLOT');
+-                if(isset($seenSlots[$slot]))throw new RuntimeException('EXISTING_RUNTIME_DUPLICATE_PLAN_SLOT');
+-                $seenSlots[$slot]=true;
+-                $postId=(int)($item['post_id']??0);
+-                $wpRow=$wordpressById[$postId]??null;
+-                $matchingCanonical=(array)($wordpressByCanonical[$canonical]??[]);
+-                $matchingIdentityAndSlot=array_values(array_filter($matchingCanonical,
+-                    static fn($x)=>(string)($x['plan_slot']??'')===$slot));
+-                // A reused post ID with a DIFFERENT recorded identity must not
+-                // lend its unrelated title to an older reservation.
+-                $directIdentityMismatch=is_array($wpRow)
+-                    &&trim((string)($wpRow['canonical_article_id']??''))!==''
+-                    &&trim((string)$wpRow['canonical_article_id'])!==$canonical;
+-                if($directIdentityMismatch)$wpRow=null;
+-                // Canonical alias pollution exists in the ACTUAL user's WP
+-                // metadata: two unrelated posts share one canonical, but only
+-                // one possesses the matching plan slot. That exact slot owns
+-                // the plan identity; the other post remains a separate WP
+-                // article and is reported as an alias collision.
+-                $directSlotConflict=is_array($wpRow)
+-                    &&trim((string)($wpRow['plan_slot']??''))!==''
+-                    &&(string)$wpRow['plan_slot']!==$slot;
+-                $migrationSlotConflict=!is_array($wpRow)&&count($matchingCanonical)>0
+-                    &&count($matchingIdentityAndSlot)!==1;
+-                $identityConflict=$directIdentityMismatch||$directSlotConflict
+-                    ||count($matchingIdentityAndSlot)>1||$migrationSlotConflict;
+-                $relinkedPostId=0;
+-                // Search the already-scanned WP inventory by BOTH immutable
+-                // identity and slot; never match by title or canonical alone.
+-                if(!is_array($wpRow)&&!$identityConflict&&count($matchingIdentityAndSlot)===1){
+-                    $wpRow=$matchingIdentityAndSlot[0];
+-                    $relinkedPostId=(int)($wpRow['id']??0);
+-                    $migratedPostIds[]=$postId;
++            if($planFree && ($runtimeOriginal===null || $runtimeOriginal===false)){
++                $result['sources']['PPM679_EXISTING_EDITORIAL_RUNTIME']=[
++                    'complete'=>true,'status'=>'NO_HISTORICAL_PLAN_REQUIRED','item_count'=>0];
++            }else{
++    
++                // Source completeness belongs HERE, once per full parkhouse export.
++                // Missing/empty saved PPM679 plan cannot mean "all article slots free".
++                if(!is_array($runtimeOriginal)||!is_array($runtimeOriginal['items']??null))
++                    throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_MISSING_OR_INVALID');
++                $runtimeItems=$runtimeOriginal['items'];
++                if(!$runtimeItems)
++                    throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_EMPTY');
++                $runtimeMissingTitles=[];$historicalOrphans=[];$migratedPostIds=[];
++                $seenCanonicals=[];$seenSlots=[];
++                foreach($runtimeItems as $itemId=>$item){
++                    if(!is_array($item))throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_ITEM_INVALID');
++                    $canonical=trim((string)($item['canonical_article_id']??$itemId));
++                    if($canonical==='')throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_SLOT_ID_MISSING');
++                    $slot=trim((string)($item['plan_slot_sha256']??$item['plan_slot']??''));
++                    if(isset($seenCanonicals[$canonical]))throw new RuntimeException('EXISTING_RUNTIME_DUPLICATE_CANONICAL');
++                    $seenCanonicals[$canonical]=true;
++                    if(!preg_match('/^[a-f0-9]{64}$/D',$slot))
++                        throw new RuntimeException('EXISTING_RUNTIME_INVALID_PLAN_SLOT');
++                    if(isset($seenSlots[$slot]))throw new RuntimeException('EXISTING_RUNTIME_DUPLICATE_PLAN_SLOT');
++                    $seenSlots[$slot]=true;
++                    $postId=(int)($item['post_id']??0);
++                    $wpRow=$wordpressById[$postId]??null;
++                    $matchingCanonical=(array)($wordpressByCanonical[$canonical]??[]);
++                    $matchingIdentityAndSlot=array_values(array_filter($matchingCanonical,
++                        static fn($x)=>(string)($x['plan_slot']??'')===$slot));
++                    // A reused post ID with a DIFFERENT recorded identity must not
++                    // lend its unrelated title to an older reservation.
++                    $directIdentityMismatch=is_array($wpRow)
++                        &&trim((string)($wpRow['canonical_article_id']??''))!==''
++                        &&trim((string)$wpRow['canonical_article_id'])!==$canonical;
++                    if($directIdentityMismatch)$wpRow=null;
++                    // Canonical alias pollution exists in the ACTUAL user's WP
++                    // metadata: two unrelated posts share one canonical, but only
++                    // one possesses the matching plan slot. That exact slot owns
++                    // the plan identity; the other post remains a separate WP
++                    // article and is reported as an alias collision.
++                    $directSlotConflict=is_array($wpRow)
++                        &&trim((string)($wpRow['plan_slot']??''))!==''
++                        &&(string)$wpRow['plan_slot']!==$slot;
++                    $migrationSlotConflict=!is_array($wpRow)&&count($matchingCanonical)>0
++                        &&count($matchingIdentityAndSlot)!==1;
++                    $identityConflict=$directIdentityMismatch||$directSlotConflict
++                        ||count($matchingIdentityAndSlot)>1||$migrationSlotConflict;
++                    $relinkedPostId=0;
++                    // Search the already-scanned WP inventory by BOTH immutable
++                    // identity and slot; never match by title or canonical alone.
++                    if(!is_array($wpRow)&&!$identityConflict&&count($matchingIdentityAndSlot)===1){
++                        $wpRow=$matchingIdentityAndSlot[0];
++                        $relinkedPostId=(int)($wpRow['id']??0);
++                        $migratedPostIds[]=$postId;
++                    }
++                    $postLookupAttempted=false;$postConfirmedMissing=false;
++                    if($postId>0&&!is_array($wpRow)&&!$identityConflict&&function_exists('get_post')){
++                        $postLookupAttempted=true;$post=get_post($postId);
++                        $postConfirmedMissing=!is_object($post);
++                        if(is_object($post)&&isset($post->ID))
++                            $wpRow=['id'=>(int)$post->ID,'title'=>(string)($post->post_title??''),
++                                'status'=>(string)($post->post_status??''),'target_keyword'=>'','categories'=>[]];
++                    }
++                    $storedTitleValue=$item['title']??null;
++                    $ambiguousStoredTitle=is_array($storedTitleValue)&&$storedTitleValue!==[]
++                        &&PSTE_Snapshot::editorialSafeText($storedTitleValue)==='';
++                    $runtimeTitle=PSTE_Snapshot::editorialSafeText($storedTitleValue);
++                    $title=$runtimeTitle!==''&&$runtimeTitle!=='Array'?$runtimeTitle:
++                        (is_array($wpRow)?trim((string)($wpRow['title']??'')):'');
++                    $titleUnresolved=$identityConflict||$title===''||$title==='Array';
++                    $historicalOrphan=$titleUnresolved&&!$ambiguousStoredTitle&&$postId>0&&$postLookupAttempted
++                        &&$postConfirmedMissing&&!$identityConflict&&count($matchingCanonical)===0
++                        &&$slot!==''&&(string)($item['status']??'')==='DRAFT_CREATED_READBACK_PASS'
++                        &&trim((string)($item['target_keyword']??''))===''
++                        &&trim((string)($item['category_slug']??''))===''
++                        &&trim((string)($item['article_type']??''))==='';
++                    if($titleUnresolved){
++                        $title='';
++                        if($historicalOrphan)$historicalOrphans[]=$postId;
++                        else $runtimeMissingTitles[]=$postId;
++                    }
++                    $targetKeyword=is_string($item['target_keyword']??null)?trim($item['target_keyword']):'';
++                    if($targetKeyword===''&&is_array($wpRow))$targetKeyword=(string)($wpRow['target_keyword']??'');
++                    $category=trim((string)($item['category_slug']??''));
++                    $wpCategories=is_array($wpRow)?(array)($wpRow['categories']??[]):[];
++                    $result['items'][]=['source'=>'PPM679_EXISTING_EDITORIAL_RUNTIME',
++                        'canonical_article_id'=>$canonical,
++                        'plan_slot'=>$slot,
++                        'post_id'=>$postId,
++                        'resolved_post_id'=>$relinkedPostId>0?$relinkedPostId:$postId,
++                        'post_link_status'=>$historicalOrphan?'HISTORICAL_POST_MISSING_SLOT_STILL_RESERVED':($relinkedPostId>0?'RELINKED_BY_EXACT_CANONICAL_AND_SLOT':(count($matchingCanonical)>1?'EXACT_SLOT_OWNER_WITH_DUPLICATE_CANONICAL_ALIAS':'UNCHANGED')),
++                        'technical_reservation'=>true,
++                        'semantic_occupancy'=>$historicalOrphan?'NONE':($titleUnresolved?'UNKNOWN':'PRESENT'),
++                        'post_status'=>is_array($wpRow)?(string)($wpRow['status']??''):'',
++                        'status'=>(string)($item['status']??'PLANNED'),
++                        'category'=>$category,
++                        'categories'=>$wpCategories,
++                        'article_type'=>(string)($item['article_type']??''),
++                        'target_keyword'=>$targetKeyword,
++                        'title'=>$title,
++                        'title_status'=>$historicalOrphan?'HISTORICAL_ORPHAN_RESERVATION':($titleUnresolved?'UNRESOLVED_SOURCE_TITLE':'RESOLVED')];
+                 }
+-                $postLookupAttempted=false;$postConfirmedMissing=false;
+-                if($postId>0&&!is_array($wpRow)&&!$identityConflict&&function_exists('get_post')){
+-                    $postLookupAttempted=true;$post=get_post($postId);
+-                    $postConfirmedMissing=!is_object($post);
+-                    if(is_object($post)&&isset($post->ID))
+-                        $wpRow=['id'=>(int)$post->ID,'title'=>(string)($post->post_title??''),
+-                            'status'=>(string)($post->post_status??''),'target_keyword'=>'','categories'=>[]];
+-                }
+-                $storedTitleValue=$item['title']??null;
+-                $ambiguousStoredTitle=is_array($storedTitleValue)&&$storedTitleValue!==[]
+-                    &&PSTE_Snapshot::editorialSafeText($storedTitleValue)==='';
+-                $runtimeTitle=PSTE_Snapshot::editorialSafeText($storedTitleValue);
+-                $title=$runtimeTitle!==''&&$runtimeTitle!=='Array'?$runtimeTitle:
+-                    (is_array($wpRow)?trim((string)($wpRow['title']??'')):'');
+-                $titleUnresolved=$identityConflict||$title===''||$title==='Array';
+-                $historicalOrphan=$titleUnresolved&&!$ambiguousStoredTitle&&$postId>0&&$postLookupAttempted
+-                    &&$postConfirmedMissing&&!$identityConflict&&count($matchingCanonical)===0
+-                    &&$slot!==''&&(string)($item['status']??'')==='DRAFT_CREATED_READBACK_PASS'
+-                    &&trim((string)($item['target_keyword']??''))===''
+-                    &&trim((string)($item['category_slug']??''))===''
+-                    &&trim((string)($item['article_type']??''))==='';
+-                if($titleUnresolved){
+-                    $title='';
+-                    if($historicalOrphan)$historicalOrphans[]=$postId;
+-                    else $runtimeMissingTitles[]=$postId;
+-                }
+-                $targetKeyword=is_string($item['target_keyword']??null)?trim($item['target_keyword']):'';
+-                if($targetKeyword===''&&is_array($wpRow))$targetKeyword=(string)($wpRow['target_keyword']??'');
+-                $category=trim((string)($item['category_slug']??''));
+-                $wpCategories=is_array($wpRow)?(array)($wpRow['categories']??[]):[];
+-                $result['items'][]=['source'=>'PPM679_EXISTING_EDITORIAL_RUNTIME',
+-                    'canonical_article_id'=>$canonical,
+-                    'plan_slot'=>$slot,
+-                    'post_id'=>$postId,
+-                    'resolved_post_id'=>$relinkedPostId>0?$relinkedPostId:$postId,
+-                    'post_link_status'=>$historicalOrphan?'HISTORICAL_POST_MISSING_SLOT_STILL_RESERVED':($relinkedPostId>0?'RELINKED_BY_EXACT_CANONICAL_AND_SLOT':(count($matchingCanonical)>1?'EXACT_SLOT_OWNER_WITH_DUPLICATE_CANONICAL_ALIAS':'UNCHANGED')),
+-                    'technical_reservation'=>true,
+-                    'semantic_occupancy'=>$historicalOrphan?'NONE':($titleUnresolved?'UNKNOWN':'PRESENT'),
+-                    'post_status'=>is_array($wpRow)?(string)($wpRow['status']??''):'',
+-                    'status'=>(string)($item['status']??'PLANNED'),
+-                    'category'=>$category,
+-                    'categories'=>$wpCategories,
+-                    'article_type'=>(string)($item['article_type']??''),
+-                    'target_keyword'=>$targetKeyword,
+-                    'title'=>$title,
+-                    'title_status'=>$historicalOrphan?'HISTORICAL_ORPHAN_RESERVATION':($titleUnresolved?'UNRESOLVED_SOURCE_TITLE':'RESOLVED')];
+-            }
+-            $runtimeAfter=get_option('ppm679_editorial_plan_runtime_state_v1',null);
+-            $beforeRuntime=wp_json_encode($runtimeOriginal,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+-            $afterRuntime=wp_json_encode($runtimeAfter,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+-            if(!is_string($beforeRuntime)||!is_string($afterRuntime)
+-                ||!hash_equals(hash('sha256',$beforeRuntime),hash('sha256',$afterRuntime)))
+-                throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_CHANGED_DURING_SCAN');
+-            $result['sources']['PPM679_EXISTING_EDITORIAL_RUNTIME']=[
+-                'complete'=>count($runtimeMissingTitles)===0,
+-                'status'=>$runtimeOriginal===null||$runtimeOriginal===false?'NOT_PRESENT':'PRESENT',
+-                'item_count'=>count($runtimeItems),
+-                'unresolved_count'=>count($runtimeMissingTitles),
+-                'unresolved_post_ids'=>$runtimeMissingTitles,
+-                'historical_orphan_count'=>count($historicalOrphans),
+-                'historical_orphan_post_ids'=>$historicalOrphans,
+-                'migrated_post_count'=>count($migratedPostIds),
+-                'migrated_original_post_ids'=>$migratedPostIds,
+-                'sha256'=>hash('sha256',$beforeRuntime)];
+-            if($runtimeMissingTitles)
+-                $sourceProblems[]='PPM679_RUNTIME_TITLE_UNRESOLVED:'.count($runtimeMissingTitles);
++                $runtimeAfter=get_option('ppm679_editorial_plan_runtime_state_v1',null);
++                $beforeRuntime=wp_json_encode($runtimeOriginal,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
++                $afterRuntime=wp_json_encode($runtimeAfter,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
++                if(!is_string($beforeRuntime)||!is_string($afterRuntime)
++                    ||!hash_equals(hash('sha256',$beforeRuntime),hash('sha256',$afterRuntime)))
++                    throw new RuntimeException('EXISTING_RUNTIME_EDITORIAL_PLAN_CHANGED_DURING_SCAN');
++                $result['sources']['PPM679_EXISTING_EDITORIAL_RUNTIME']=[
++                    'complete'=>count($runtimeMissingTitles)===0,
++                    'status'=>$runtimeOriginal===null||$runtimeOriginal===false?'NOT_PRESENT':'PRESENT',
++                    'item_count'=>count($runtimeItems),
++                    'unresolved_count'=>count($runtimeMissingTitles),
++                    'unresolved_post_ids'=>$runtimeMissingTitles,
++                    'historical_orphan_count'=>count($historicalOrphans),
++                    'historical_orphan_post_ids'=>$historicalOrphans,
++                    'migrated_post_count'=>count($migratedPostIds),
++                    'migrated_original_post_ids'=>$migratedPostIds,
++                    'sha256'=>hash('sha256',$beforeRuntime)];
++                if($runtimeMissingTitles)
++                    $sourceProblems[]='PPM679_RUNTIME_TITLE_UNRESOLVED:'.count($runtimeMissingTitles);
++            }
+ 
+             // Earlier externally approved slots live in the existing MINI option.
+             // Show them to the same owner on later batches; no shadow database.
+@@ -1550,6 +1563,24 @@
+                         $box='KLAERUNG';$item['reason']='EXISTING_PREBOOKING_SOURCE_BINDING_CHANGED';
+                     }else{
+                         $canonical=$priorCanonical;$planSlot=$priorPlanSlot;
++                    }
++                }elseif(defined('TXE_PLANFREE_KISS_V1') && TXE_PLANFREE_KISS_V1){
++                    // A historic FREI without original binding is never assigned a new identity.
++                    if(($prior['box']??'')==='FREI'){
++                        $box='KLAERUNG';$item['reason']='PRETITLE_CANONICAL_PLAN_NOT_READY';
++                    }elseif($articleType==='' || $categorySlug===''
++                        ||!preg_match('/^[a-f0-9]{64}$/D',$key)
++                        ||!class_exists('PSERC_Plan_Slot_Identity')){
++                        $box='KLAERUNG';$item['reason']='PRETITLE_CANONICAL_PLAN_NOT_READY';
++                    }else{
++                        // The ORIGINAL PSTE topic UUID is the one immutable article identity;
++                        // the original PSERC function derives the required five-field K0 token.
++                        $proposedSlot=PSERC_Plan_Slot_Identity::tokenFromCanonicalId($key);
++                        if(isset($occupiedCanonical[$key]) || isset($occupiedPlanSlots[$proposedSlot])){
++                            $box='KLAERUNG';$item['reason']='PRETITLE_CANONICAL_SLOT_ALREADY_RESERVED';
++                        }else{
++                            $canonical=$key;$planSlot=$proposedSlot;$occupiedCanonical[$key]=true;
++                        }
+                     }
+                 }elseif($articleType===''||$categorySlug===''
+                     ||empty($production['ok'])||!class_exists('PSERC_Slot_Allocator')
+--- a/texterstellung/texterstellung.php
++++ b/texterstellung/texterstellung.php
+@@ -38,7 +38,29 @@
+     && hash_equals(hash('sha256', (string)home_url('/') . '|' . (string)get_current_blog_id()),
+         (string)get_option('texterstellung_testsite_confirmation_v1', ''));
+ if ($txeIsConfirmed) {
++    // Technical adapter: no second editorial production plan. Only on the explicitly confirmed testsite.
++    if (!defined('TXE_PLANFREE_KISS_V1')) { define('TXE_PLANFREE_KISS_V1', true); }
+     require_once __DIR__.'/original/pste/portal-seo-topic-engine.php';
++    // Remove obsolete SECOND planning actions after the unchanged PSTE registers
++    // them. Original research, single SEO owner and MINI title actions are kept.
++    if (function_exists('remove_action')) {
++        foreach ([
++            ['admin_post_pste_mini_forward_to_plan', 'PSTE_Mini_Workflow', 'forwardToPlan'],
++            ['admin_post_pste_mini_legacy_plan_rebind', 'PSTE_Mini_Workflow', 'legacyEmptyPlanRebind'],
++            ['admin_post_pste_import_editorial_plan', 'PSTE_Admin', 'importEditorialPlan'],
++            ['admin_post_pste_export_planning_topics', 'PSTE_Admin', 'exportPlanningTopics'],
++            ['admin_post_pste_title_desk_export', 'PSTE_Admin', 'exportTitleDesk'],
++            ['admin_post_pste_title_desk_import', 'PSTE_Admin', 'importTitleDesk'],
++            ['pste_title_desk_reentry', 'PSTE_Admin', 'processTitleDeskReentry'],
++            ['wp_ajax_pste_title_desk_reentry_continue', 'PSTE_Admin', 'continueTitleDeskReentry'],
++            ['wp_ajax_nopriv_pste_title_desk_reentry_continue', 'PSTE_Admin', 'continueTitleDeskReentry'],
++            ['wp_ajax_pste_production_auto_step', 'PSTE_Admin', 'productionAutoStepAjax'],
++            ['wp_ajax_pste_production_auto_status', 'PSTE_Admin', 'productionAutoStatusAjax'],
++            ['wp_ajax_pste_production_auto_cancel', 'PSTE_Admin', 'productionAutoCancelAjax'],
++        ] as [$hook, $owner, $method]) {
++            remove_action($hook, [$owner, $method]);
++        }
++    }
+     // Preserve the original draft-only safety after removing the PPM planning runtime.
+     // This is a technical WordPress safeguard, not another SEO or content decision.
+     add_filter('wp_insert_post_data', static function(array $postData, array $postarr): array {

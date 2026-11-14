@@ -1,0 +1,110 @@
+--- ORIGINAL_QA/texterstellung.php
++++ PLANFREI_QA/texterstellung.php
+@@ -20,14 +20,14 @@
+ }
+ foreach ($txeActivePlugins as $txePluginPath) {
+     $txeOldEntry = basename((string)$txePluginPath);
+-    if (in_array($txeOldEntry, ['portal-seo-topic-engine.php', 'portal-seo-editorial-plan-compiler.php'], true)) {
++    if (in_array($txeOldEntry, ['portal-seo-topic-engine.php', 'portal-seo-editorial-plan-compiler.php', 'portal-production-machine.php'], true)) {
+         $txeOldActive = true;
+         break;
+     }
+ }
+ if ($txeOldActive || class_exists('PSTE_Plugin', false) || class_exists('PSERC_Plugin', false) || defined('PSERC_VERSION')) {
+     add_action('admin_notices', static function () {
+-        echo '<div class="notice notice-error"><p>Texterstellung: PSTE oder PSERC ist bereits aktiv. Keine zweite Recherche, Planung oder Importverarbeitung gestartet.</p></div>';
++        echo '<div class="notice notice-error"><p>Texterstellung: PSTE, PSERC oder PPM ist noch aktiv. Auf der isolierten Testseite alte Plugins zuerst deaktivieren.</p></div>';
+     });
+     return;
+ }
+@@ -39,6 +39,20 @@
+         (string)get_option('texterstellung_testsite_confirmation_v1', ''));
+ if ($txeIsConfirmed) {
+     require_once __DIR__.'/original/pste/portal-seo-topic-engine.php';
++    // Preserve the original draft-only safety after removing the PPM planning runtime.
++    // This is a technical WordPress safeguard, not another SEO or content decision.
++    add_filter('wp_insert_post_data', static function(array $postData, array $postarr): array {
++        $postId = (int)($postarr['ID'] ?? 0);
++        if ($postId > 0 && in_array((string)($postData['post_status'] ?? ''), ['publish', 'future'], true)
++            && function_exists('get_post_meta') && function_exists('get_post')
++            && (string)get_post_meta($postId, '_pserc_publish_blocked', true) === '1') {
++            $existing = get_post($postId);
++            $status = is_object($existing) ? (string)($existing->post_status ?? '')
++                : (is_array($existing) ? (string)($existing['post_status'] ?? '') : '');
++            if ($status === 'draft') $postData['post_status'] = 'draft';
++        }
++        return $postData;
++    }, 10, 2);
+     // The WordPress backend has one top-level entry. Existing PSTE admin functions remain intact.
+     add_action('admin_menu', static function () { remove_menu_page('portal-seo-topic-engine'); }, 1001);
+     // Existing PSERC import functions: unchanged originals. No second importer implementation.
+@@ -367,8 +381,8 @@
+     public static function lastBatch(): array {self::access();$s=self::state();if(!is_array($s['last_batch']??null))throw new RuntimeException('NO_PREVIOUS_BATCH');return $s['last_batch'];}
+ 
+     /** Keep the existing TXE order reservation, but delegate WordPress writes
+-     *  to the unchanged PSERC importer and its original PPM publish protection.
+-     *  No own content assessment, no own replacement importer.
++     *  to the PSERC original importer with only the PPM planning call removed.
++     *  No own content assessment. Draft and duplicate protection stay active.
+      */
+     public static function importDrafts(array $json): array {
+         $verified=PSERC_System4_Import::normalizePayload($json);
+
+--- PSERC_ORIGINAL/class-pserc-system4-import.php
++++ PLANFREI_QA/class-pserc-system4-import.php
+@@ -49,7 +49,7 @@
+         $rows=(array)$normalized['rows'];
+         $sourceContract=(string)$normalized['source_contract'];
+         $batchSha=(string)$normalized['batch_sha256'];
+-        if(!class_exists('PPM679_Editorial_Plan_Runtime_Gate')||!method_exists('PPM679_Editorial_Plan_Runtime_Gate','record_readback'))return self::blocked('PSERC_SYSTEM4_EDITORIAL_RUNTIME_GATE_UNAVAILABLE');
++        // No separate editorial production plan: the existing order/WordPress readback is authoritative.
+ 
+         // One full preflight before the first WordPress write.
+         $prepared=[];
+@@ -67,14 +67,13 @@
+             $prepared[]=['row'=>$row,'term_id'=>(int)$category['term_id'],'existing'=>null];
+         }
+ 
+-        $created=[];$existingFulfilled=[];$existingReused=[];$readback=[];$runtimeBindings=[];$runtimeReadback=[];
++        $created=[];$existingFulfilled=[];$existingReused=[];$readback=[];
+         foreach($prepared as $i=>$item){
+             $row=(array)$item['row'];$termId=(int)$item['term_id'];$existing=is_array($item['existing']??null)?(array)$item['existing']:null;
+-            $runtimeBindings[]=['canonical_article_id'=>(string)$row['article_id'],'plan_slot_sha256'=>(string)$row['plan_slot'],'inventory_snapshot_sha256'=>''];
+             if($existing!==null){
+                 $postId=(int)$existing['post_id'];$status=(string)$existing['post_status'];$contentHash=(string)$existing['content_sha256'];
+                 $rb=['ok'=>true,'post_id'=>$postId,'post_status'=>$status,'plan_slot'=>(string)$row['plan_slot'],'article_id'=>(string)$row['article_id'],'content_sha256'=>$contentHash,'category_term_id'=>$termId,'existing_mode'=>(string)$existing['mode'],'publish_allowed'=>false];
+-                $readback[]=$rb;$runtimeReadback[]=['canonical_article_id'=>(string)$row['article_id'],'post_id'=>$postId,'post_status'=>$status,'content_hash'=>$contentHash];
++                $readback[]=$rb;
+                 if($existing['mode']==='PUBLISHED_SLOT_ALREADY_FULFILLED')$existingFulfilled[]=$postId;else $existingReused[]=$postId;
+                 continue;
+             }
+@@ -95,25 +94,15 @@
+             $postId=(int)$postId;$created[]=$postId;
+             $rb=self::readback($postId,$row,$termId,$meta);
+             if(empty($rb['ok'])){self::rollback($created);return self::blocked('PSERC_SYSTEM4_WORDPRESS_READBACK_MISMATCH',['index'=>$i,'readback'=>$rb,'rolled_back_count'=>count($created)]);}
+-            $readback[]=$rb;$runtimeReadback[]=['canonical_article_id'=>(string)$row['article_id'],'post_id'=>$postId,'post_status'=>'draft','content_hash'=>(string)$row['content_sha256']];
+-        }
+-
+-        $planSync=PPM679_Editorial_Plan_Runtime_Gate::record_readback($runtimeBindings,$runtimeReadback,'wordpress_article_import');
+-        if(empty($planSync['ok'])){
+-            $alreadyCurrent=false;
+-            if(class_exists('PPM679_WP')&&method_exists('PPM679_WP','get_option')&&isset($planSync['state'])&&is_array($planSync['state'])){
+-                $current=PPM679_WP::get_option('ppm679_editorial_plan_runtime_state_v1',[]);
+-                if(is_array($current)&&class_exists('PPM679_Diagnostic')&&method_exists('PPM679_Diagnostic','stable_hash'))$alreadyCurrent=hash_equals(PPM679_Diagnostic::stable_hash($current),PPM679_Diagnostic::stable_hash((array)$planSync['state']));
+-            }
+-            if(!$alreadyCurrent){self::rollback($created);return self::blocked('PSERC_SYSTEM4_REDAKTIONSPLAN_RUNTIME_SYNC_FAILED',['plan_sync'=>$planSync,'rolled_back_count'=>count($created),'redaktionsplan_read_attempted'=>true,'redaktionsplan_write_attempted'=>true]);}
+-            $planSync=['ok'=>true,'status'=>'EDITORIAL_RUNTIME_STATE_ALREADY_CURRENT','state'=>$planSync['state'],'publish_allowed'=>false];
+-        }
++            $readback[]=$rb;
++        }
++
+ 
+         return [
+             'ok'=>true,'contract'=>self::RESULT_CONTRACT,'status'=>'PSERC_SYSTEM4_WORDPRESS_DRAFT_IMPORT_PASS',
+             'source_contract'=>$sourceContract,'input_mode'=>(string)$normalized['input_mode'],'batch_sha256'=>$batchSha,'article_count'=>count($prepared),
+             'created_post_ids'=>$created,'existing_fulfilled_post_ids'=>$existingFulfilled,'existing_reused_post_ids'=>$existingReused,
+-            'readback'=>$readback,'redaktionsplan_runtime_sync'=>$planSync,'redaktionsplan_read_attempted'=>true,'redaktionsplan_write_attempted'=>true,
++            'readback'=>$readback,'redaktionsplan_runtime_sync'=>null,'redaktionsplan_read_attempted'=>false,'redaktionsplan_write_attempted'=>false,
+             'publish_allowed'=>false,'plugin_version'=>defined('PSERC_VERSION')?(string)PSERC_VERSION:'UNKNOWN','plugin_build'=>defined('PSERC_BUILD')?(string)PSERC_BUILD:'UNKNOWN',
+         ];
+     }

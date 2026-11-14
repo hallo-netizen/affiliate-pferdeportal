@@ -1,0 +1,24 @@
+{
+  "qa_zip": "Texterstellung_0.4.1_Planfrei_Entwurfsschutz_QA_NICHT_INSTALLIEREN.zip",
+  "qa_sha256": "40f4bfc77b77f8ae47675e54e436163e1e30266b6ef5b522cadfae607b3db4c1",
+  "original_qa_zip": "Texterstellung_0.4.1_PSERC_Originalwege_QA_NICHT_INSTALLIEREN.zip",
+  "unchanged_files": 170,
+  "changed_files": [
+    "texterstellung/original/pserc/includes/class-pserc-system4-import.php",
+    "texterstellung/texterstellung.php"
+  ],
+  "original_pste_php_untouched": true,
+  "original_pserc_php_changed": [
+    "texterstellung/original/pserc/includes/class-pserc-system4-import.php"
+  ],
+  "technical_changes_only": [
+    "remove PPM record_readback from original importer copy",
+    "same original WP draft insert/readback/collision/rollback",
+    "block future manual publish of draft with original _pserc_publish_blocked post-meta"
+  ],
+  "no_new_research_editorial_title_or_k0_logic": true,
+  "wordpress_real_e2e_test": false,
+  "not_install_approved": true,
+  "php_lint_pass": 116,
+  "ppm_conflict_blocked_on_test": true
+}

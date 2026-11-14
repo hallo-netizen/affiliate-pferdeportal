@@ -1,0 +1,108 @@
+{
+  "status": "QA_ONLY_NOT_RELEASED",
+  "date": "2026-11-14",
+  "qa_pass": 67,
+  "qa_total": 67,
+  "cases": {
+    "QA_PSTE_SEO_OWNER.json": {
+      "pass": 13,
+      "total": 13,
+      "checks": {
+        "new_FREI_no_PPM_is_FREI": "PASS",
+        "canonical_uses_original_PSTE_pool_key": "PASS",
+        "slot_from_UNCHANGED_PSERC_method": "PASS",
+        "original_article_type_and_category": "PASS",
+        "repeat_keeps_original_identity": "PASS",
+        "legacy_FREI_unbooked_remains_unchanged": "PASS",
+        "legacy_FREI_unbooked_is_technical_hold": "PASS",
+        "existing_identity_collision_rejected": "PASS",
+        "mismatched_original_query_cannot_be_FREI": "PASS",
+        "incomplete_source_snapshot_fails_closed": "PASS",
+        "duplicate_source_rows_not_approved": "PASS",
+        "missing_source_row_not_approved": "PASS",
+        "BELEGT_unknown_reference_blocked": "PASS"
+      }
+    },
+    "QA_PARKHAUS.json": {
+      "pass": 7,
+      "total": 7,
+      "checks": {
+        "empty_wp_pste_without_ppm_yields_complete_snapshot": true,
+        "original_wp_inventory_is_checked": true,
+        "original_pste_pool_is_checked": true,
+        "no_ppm_source_is_optional_not_created": true,
+        "no_pserc_plan_is_optional_not_created": true,
+        "corrupt_existing_ppm_history_still_fails_closed": true,
+        "corrupt_existing_pserc_history_still_fails_closed": true
+      },
+      "errors": []
+    },
+    "QA_20_NEW_FREI_END2END_MOCK.json": {
+      "pass": 27,
+      "total": 27,
+      "checks": {
+        "new_frei_20_with_original_seo_owner": true,
+        "original_title_worker_eligible_20": true,
+        "original_frei_read_20": true,
+        "title_export_20": true,
+        "title_frozen_repeated_export": true,
+        "title_import_20": true,
+        "k0_export_13": true,
+        "k0_export_7": true,
+        "k0_contract_identical_original": true,
+        "all_20_reserved_once": true,
+        "repeated_13_download_identical": true,
+        "import_first_13": true,
+        "import_remaining_7": true,
+        "no_separate_planning_write": true,
+        "all_20_drafts_and_original_blocks": true,
+        "return_again_no_new_posts": true,
+        "works_without_ppm_runtime": true,
+        "modified_content_duplicate_refused": true,
+        "wrong_article_id_refused": true,
+        "wrong_category_refused": true,
+        "missing_plan_slot_refused": true,
+        "publish_and_legacy_block_meta_preserved": true,
+        "published_transition_blocked": true,
+        "scheduled_publication_blocked": true,
+        "unrelated_post_not_blocked": true,
+        "already_public_post_preserved": true,
+        "old_frei_unchanged": true
+      },
+      "errors": []
+    },
+    "QA_CONFLICT.json": {
+      "pass": 5,
+      "total": 5,
+      "checks": {
+        "ppm_is_marked_active": true,
+        "pste_not_loaded": true,
+        "pserc_not_loaded": true,
+        "no_jobs_registered": true,
+        "conflict_notice_registered": true
+      }
+    },
+    "QA_NO_SECOND_PLAN_HOOKS.json": {
+      "pass": 15,
+      "total": 15,
+      "tests": {
+        "disabled_admin_post_pste_mini_forward_to_plan": true,
+        "disabled_admin_post_pste_mini_legacy_plan_rebind": true,
+        "disabled_admin_post_pste_import_editorial_plan": true,
+        "disabled_admin_post_pste_export_planning_topics": true,
+        "disabled_admin_post_pste_title_desk_export": true,
+        "disabled_admin_post_pste_title_desk_import": true,
+        "disabled_pste_title_desk_reentry": true,
+        "disabled_wp_ajax_pste_title_desk_reentry_continue": true,
+        "disabled_wp_ajax_nopriv_pste_title_desk_reentry_continue": true,
+        "disabled_wp_ajax_pste_production_auto_step": true,
+        "disabled_wp_ajax_pste_production_auto_status": true,
+        "disabled_wp_ajax_pste_production_auto_cancel": true,
+        "unchanged_mini_title_hook_retained": true,
+        "original_PSTE_research_registered": true,
+        "original_PSTE_loaded": true
+      }
+    }
+  },
+  "live_wordpress_test": false
+}

@@ -1,0 +1,50 @@
+{
+  "verification": "ORIGINAL_PHP_METHOD_TESTS_WITH_WP_MOCKS_NOT_REAL_WP",
+  "date": "2026-11-14",
+  "php_version": "8.4.24",
+  "source_files": [
+    {
+      "name": "source/pste/Portal SEO Topic Engine/includes/class-pste-mini-workflow.php",
+      "sha256": "c59d1957305d735e7870875f07340b5e831d467e2fd9dd0b76dd5fedf6402637"
+    },
+    {
+      "name": "source/pserc/portal-seo-editorial-plan-compiler/includes/class-pserc-slot-allocator.php",
+      "sha256": "9e2abc4b453e77697d5b0eafff01e3086e1370b6daa04652a7fef1cfb804313c"
+    },
+    {
+      "name": "source/pserc/portal-seo-editorial-plan-compiler/includes/class-pserc-plan-slot-identity.php",
+      "sha256": "be879535a391e588570954b72a4ba6bf7fd4015c0c249e9899843d102376df5b"
+    },
+    {
+      "name": "source/pserc/portal-seo-editorial-plan-compiler/includes/class-pserc-ppm-bypass-guard.php",
+      "sha256": "2855be8f5bdaabbec204db0804dde5844fb29a2310f7adda756bc9a8a8c394a8"
+    }
+  ],
+  "test_runs": [
+    {
+      "name": "QA_20261113_KISS_30_ORIGINALMINI_TESTS.php",
+      "test_php_sha256": "9bdf239d1d09198c0071798a523f45857f5914844f2cbe74d77d7d095de87d4e",
+      "exit_code": 0,
+      "pass_total": 30,
+      "lines": 31,
+      "unexpected_lines": [],
+      "pass": true
+    },
+    {
+      "name": "QA_20261113_KISS_PPM_SPAETER_STARTSCHUTZ_TEST.php",
+      "test_php_sha256": "f258683f66497e89e9eb9d8ba0b1c553914e2f051e62212d288ab51381cb8c73",
+      "exit_code": 0,
+      "pass_total": 14,
+      "lines": 1,
+      "unexpected_lines": [],
+      "pass": true
+    }
+  ],
+  "limitations": [
+    "Both original test scripts include WordPress and PPM mocks; this is not a real WordPress end-to-end run.",
+    "The PPM 6.7.9 original archive source has not been inspected.",
+    "TXE 0.4.1 has not passed an original-vs-new same-data test.",
+    "Symlinks provided only filesystem test path aliases, no original PHP was edited.",
+    "No plugin built, installed, or released."
+  ]
+}

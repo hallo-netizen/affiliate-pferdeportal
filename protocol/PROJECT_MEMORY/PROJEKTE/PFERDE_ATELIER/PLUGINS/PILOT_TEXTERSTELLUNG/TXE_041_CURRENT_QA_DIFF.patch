@@ -1,0 +1,519 @@
+--- Texterstellung_0.4.1_TEST_INSTALLIEREN.zip/texterstellung.php
++++ Texterstellung_0.4.1_Gesamtweg_QA_NICHT_INSTALLIEREN.zip/texterstellung.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Texterstellung
+  * Description: Portalneutrale Texterstellung mit integrierter Fehlerdiagnose: Recherche, Freigaberegal, Sofortartikel, Titeldateien, K0-Export, Entwurfsimport. Isolierte Testinstallation.
+- * Version: 0.4.1-test
++ * Version: 0.4.1-original-k0-sync-qa
+  * Requires PHP: 8.1
+  */
+ if (!defined('ABSPATH')) { exit; }
+@@ -11,6 +11,36 @@
+ require_once __DIR__.'/includes/class-txe-credentials.php';
+ require_once __DIR__.'/includes/class-txe-dataforseo-client.php';
+ require_once __DIR__.'/includes/class-txe-diagnose.php';
++// Reuse the whole PSTE original source unchanged (search, PAA, editorial rules and pool).
++// Do not activate both the standalone PSTE plugin and this consolidated candidate.
++$txeOldActive = false;
++$txeActivePlugins = function_exists('get_option') ? (array)get_option('active_plugins', []) : [];
++if (function_exists('get_site_option')) {
++    $txeActivePlugins = array_merge($txeActivePlugins, array_keys((array)get_site_option('active_sitewide_plugins', [])));
++}
++foreach ($txeActivePlugins as $txePluginPath) {
++    $txeOldEntry = basename((string)$txePluginPath);
++    if (in_array($txeOldEntry, ['portal-seo-topic-engine.php', 'portal-seo-editorial-plan-compiler.php'], true)) {
++        $txeOldActive = true;
++        break;
++    }
++}
++if ($txeOldActive || class_exists('PSTE_Plugin', false) || class_exists('PSERC_Plugin', false) || defined('PSERC_VERSION')) {
++    add_action('admin_notices', static function () {
++        echo '<div class="notice notice-error"><p>Texterstellung: PSTE oder PSERC ist bereits aktiv. Keine zweite Recherche, Planung oder Importverarbeitung gestartet.</p></div>';
++    });
++    return;
++}
++require_once __DIR__.'/original/pste/portal-seo-topic-engine.php';
++// The WordPress backend has one top-level entry. Existing PSTE admin functions remain intact.
++add_action('admin_menu', static function () { remove_menu_page('portal-seo-topic-engine'); }, 1001);
++// Existing PSERC import functions: unchanged originals. No second importer implementation.
++require_once __DIR__.'/original/pserc/class-pserc-stable-json.php';
++require_once __DIR__.'/original/pserc/class-pserc-plan-slot-identity.php';
++require_once __DIR__.'/original/pserc/class-pserc-system4-import.php';
++// Original PSERC K0 batch encoder and technical five-field boundary (unchanged).
++require_once __DIR__.'/original/pserc/class-pserc-plan-snapshot-store.php';
++require_once __DIR__.'/original/pserc/class-pserc-metadata-boundary.php';
+ 
+ 
+ final class TXE_Workshop {
+@@ -47,6 +77,10 @@
+         if (!self::permitted()) {
+             wp_die('TESTSITE_CONFIRMATION_NOT_SAVED');
+         }
++        // The nested unchanged PSTE source cannot receive the WordPress plugin
++        // activation callback itself. Reuse its dormant status-only activation
++        // ONLY after the administrator confirms the isolated test site.
++        PSTE_Plugin::activate();
+         wp_safe_redirect(add_query_arg(['page'=>self::SLUG, 'txe_testmode'=>'enabled'], admin_url('admin.php')));
+         exit;
+     }
+@@ -114,6 +148,8 @@
+     private static function ready(array $o): bool {
+         if (($o['status']??'')!=='FREI') return false;
+         foreach (['title','target_keyword','category','article_type','plan_slot'] as $k)if(self::text($o[$k]??'')==='')return false;
++        // Historical canonical identities are owned by PSTE; never mint one here.
++        if (($o['origin']??'')==='ALT_FREIGABE' && self::text($o['article_id']??'')==='')return false;
+         return true;
+     }
+     private static function checkedCategory(string $slug): string {
+@@ -130,6 +166,32 @@
+             foreach (['source_id','target_keyword','category','article_type','title'] as $k) {
+                 $incoming=self::text($item[$k]??'');
+                 if ($incoming!=='' && self::text($prior[$k]??'')!=='' && $incoming!==self::text($prior[$k])) throw new RuntimeException('EXISTING_APPROVAL_CHANGED:'.$id.':'.$k);
++            }
++            // The same unchanged PSTE approval can later acquire its missing
++            // original technical bindings. Fill ONLY previously empty fields;
++            // never reevaluate the original SEO decision or replace an identity.
++            if ($kind==='ALT_FREIGABE' && ($prior['origin']??'')==='ALT_FREIGABE'
++                && ($prior['status']??'')==='METADATEN_OFFEN') {
++                $updated=$prior;
++                foreach (['title','category','article_type','intent','article_id','plan_slot'] as $k) {
++                    $incoming=self::text($item[$k]??'');
++                    if ($incoming==='')continue;
++                    $current=self::text($updated[$k]??'');
++                    if ($current!=='' && $incoming!==$current)throw new RuntimeException('ORIGINAL_BINDING_CHANGED:'.$id.':'.$k);
++                    if ($current==='') {
++                        if($k==='category')self::checkedCategory($incoming);
++                        $updated[$k]=$incoming;
++                    }
++                }
++                if (self::text($updated['article_id']??'')!=='' && self::text($updated['plan_slot']??'')!==''
++                    && !hash_equals(self::slot((string)$updated['article_id']),(string)$updated['plan_slot']))
++                    throw new RuntimeException('SLOT_ARTICLE_ID_MISMATCH');
++                $complete=true;
++                foreach(['title','target_keyword','category','article_type','article_id','plan_slot'] as $k)
++                    if(self::text($updated[$k]??'')===''){$complete=false;break;}
++                $updated['status']=$complete?'FREI':'METADATEN_OFFEN';
++                if($complete)$updated['slot_origin']='PROVIDED_IN_APPROVAL';
++                $s['orders'][$id]=$updated;
+             }
+             return $id;
+         }
+@@ -166,9 +228,16 @@
+         $canonical=self::text($item['article_id']??'');
+         if ($slot!=='' && !preg_match('/^[a-f0-9]{64}$/D',$slot))throw new RuntimeException('PLAN_SLOT_INVALID');
+         if ($canonical!=='' && $slot!=='' && !hash_equals(self::slot($canonical),$slot))throw new RuntimeException('SLOT_ARTICLE_ID_MISMATCH');
++        // Partially recorded old identities stay visible and unchanged, but remain held.
++        // Never generate or clear an original canonical ID or slot on import.
+         $slotOrigin=($slot!=='' ? 'PROVIDED_IN_APPROVAL' : 'GENERATED_LOCALLY');
+-        if ($canonical==='' && $slot==='') { $canonical=$id;$slot=self::slot($id); }
+-        $ready=$keyword!==''&&$title!==''&&$category!==''&&$type!==''&&$slot!=='';
++        // Historical FREI decisions keep their original article identity. A missing
++        // original booking is a technical HOLD, not permission to invent a new slot.
++        if ($canonical==='' && $slot==='') {
++            if ($kind!=='ALT_FREIGABE') { $canonical=$id;$slot=self::slot($id); }
++        }
++        $ready=$keyword!==''&&$title!==''&&$category!==''&&$type!==''&&$slot!==''
++            &&($kind!=='ALT_FREIGABE'||$canonical!=='');
+         $s['orders'][$id]=[
+             'id'=>$id,'source_id'=>$source,'origin'=>$kind,'intent'=>self::text($item['intent']??''),
+             'target_keyword'=>$keyword,'title'=>$title,'category'=>$category,'article_type'=>$type,
+@@ -202,10 +271,8 @@
+         return self::mutate(static function(array $s)use($json){
+             $contract=self::text($json['contract']??'');$new=[];$held=0;$issues=[];
+             if ($contract===self::K0_CONTRACT) {
+-                $batch=$json;$claim=self::text($batch['batch_sha256']??'');unset($batch['batch_sha256']);
+-                if (!hash_equals(self::digest($batch),$claim))throw new RuntimeException('K0_BATCH_HASH_MISMATCH');
+-                $items=(array)($json['items']??[]);
+-                if ((int)($json['item_count']??-1)!==count($items)||!count($items))throw new RuntimeException('K0_ITEMS_INVALID');
++                PSERC_Metadata_Boundary::requireReadyBatchForExport($json);
++                $items=(array)$json['items'];
+                 foreach($items as $i=>$v){
+                     try {if(!is_array($v))throw new RuntimeException('ITEM_INVALID');
+                     $keys=array_keys($v);sort($keys);$want=['title','target_keyword','category','article_type','plan_slot'];sort($want);
+@@ -219,7 +286,9 @@
+                     try{$new[]=self::enqueue($s,['source_id'=>self::text($v['pool_key']??''),
+                         'target_keyword'=>self::text($v['raw_query']??''),'title'=>self::text($v['approved_title']??''),
+                         'category'=>self::text($v['category']??$v['category_slug']??''),
+-                        'article_type'=>self::text($v['article_type']??''),'intent'=>self::text($v['intent_summary']??'')], 'ALT_FREIGABE');}catch(RuntimeException $e){$issues[]=['index'=>$i,'reason'=>$e->getMessage()];TXE_Diagnose::record('APPROVAL_ITEM_HELD',['index'=>$i,'code'=>TXE_Diagnose::errorCode($e)]);}
++                        'article_type'=>self::text($v['article_type']??''),'intent'=>self::text($v['intent_summary']??''),
++                        'article_id'=>self::text($v['canonical_article_id']??''),
++                        'plan_slot'=>self::text($v['plan_slot']??'')], 'ALT_FREIGABE');}catch(RuntimeException $e){$issues[]=['index'=>$i,'reason'=>$e->getMessage()];TXE_Diagnose::record('APPROVAL_ITEM_HELD',['index'=>$i,'code'=>TXE_Diagnose::errorCode($e)]);}
+                 }
+             } else {throw new RuntimeException('UNSUPPORTED_APPROVAL_FORMAT');}
+             foreach($new as $id)if(($s['orders'][$id]['status']??'')==='METADATEN_OFFEN')$held++;
+@@ -231,11 +300,14 @@
+             'title'=>(string)$order['title'],'target_keyword'=>(string)$order['target_keyword'],
+             'category'=>(string)$order['category'],'article_type'=>(string)$order['article_type'],
+             'plan_slot'=>(string)$order['plan_slot']];}
+-        $batch=['contract'=>self::K0_CONTRACT,'status'=>$out?'READY_FOR_TEXTMACHINE_METADATA_INTAKE':'NO_READY_ITEMS',
+-            'item_count'=>count($out),'publish_allowed'=>false,'content_or_format_payload_present'=>false,'items'=>$out];
+-        $batch['batch_sha256']=self::digest($batch);return $batch;
++        // Unchanged PSERC source now builds AND validates the exact K0 handoff.
++        // No second editorial or title decision is made here.
++        $batch=PSERC_Plan_Snapshot_Store::batchFromItems($out);
++        PSERC_Metadata_Boundary::requireReadyBatchForExport($batch);
++        return $batch;
+     }
+     public static function export(int $n): array {
++        self::syncOriginalFrei();
+         $n=min(50,max(1,$n));
+         return self::mutate(static function(array $s)use($n){
+             $selection=[];
+@@ -261,111 +333,71 @@
+     }
+     public static function lastBatch(): array {self::access();$s=self::state();if(!is_array($s['last_batch']??null))throw new RuntimeException('NO_PREVIOUS_BATCH');return $s['last_batch'];}
+ 
+-    private static function normalizedArticles(array $json): array {
+-        $contract=self::text($json['contract']??'');
+-        if(!in_array($contract,[self::IMPORT_CONTRACT,'SYSTEM4_WORDPRESS_HANDOFF_V1','SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1'],true))throw new RuntimeException('RETURN_CONTRACT_CHANGED');
+-        $raw=$json['articles']??null;if(!is_array($raw)||!count($raw)||count($raw)>50)throw new RuntimeException('RETURN_ARTICLES_INVALID');
+-        $out=[];$seen=[];$seenSlugs=[];$seenTitles=[];
+-        foreach($raw as $r){if(!is_array($r))throw new RuntimeException('RETURN_ROW_INVALID');
+-            $pc=(array)($r['production_context']??[]);$pi=(array)($pc['production_plan_item']??[]);$runtime=(array)($pi['runtime_order']??[]);
+-            $v=['article_id'=>self::text($r['article_id']??$pi['canonical_article_id']??''),
+-                'slug'=>self::text($r['slug']??$runtime['slug']??''),
+-                'title'=>self::text($r['title']??''),'target_keyword'=>self::text($r['target_keyword']??''),
+-                'article_type'=>self::text($r['article_type']??''),'category'=>self::text($r['category']??''),
+-                'plan_slot'=>self::text($r['plan_slot']??''),'body'=>(string)($r['body']??'')];
+-            foreach($v as $k=>$val)if(trim($val)==='')throw new RuntimeException('RETURN_FIELD_MISSING:'.$k);
+-            if(!hash_equals(self::slot($v['article_id']),$v['plan_slot']))throw new RuntimeException('RETURN_ARTICLE_SLOT_MISMATCH');
+-            if(!preg_match('/^[a-f0-9]{64}$/D',$v['plan_slot'])||isset($seen[$v['plan_slot']]))throw new RuntimeException('RETURN_DUPLICATE_SLOT');
+-            if(sanitize_title($v['slug'])!==$v['slug'])throw new RuntimeException('RETURN_SLUG_NOT_CANONICAL');
+-            $titleKey=function_exists('mb_strtolower')?mb_strtolower($v['title'],'UTF-8'):strtolower($v['title']);
+-            if(isset($seenSlugs[$v['slug']])||isset($seenTitles[$titleKey]))throw new RuntimeException('RETURN_DUPLICATE_SLUG_OR_TITLE');
+-            $seen[$v['plan_slot']]=true;$seenSlugs[$v['slug']]=true;$seenTitles[$titleKey]=true;$out[]=$v;
+-        }
+-        return $out;
+-    }
++    /** Keep the existing TXE order reservation, but delegate WordPress writes
++     *  to the unchanged PSERC importer and its original PPM publish protection.
++     *  No own content assessment, no own replacement importer.
++     */
+     public static function importDrafts(array $json): array {
+-        $rows=self::normalizedArticles($json);
+-        return self::mutate(static function(array $s)use($rows){
+-            $prepared=[];
++        $verified=PSERC_System4_Import::normalizePayload($json);
++        if(empty($verified['ok']))throw new RuntimeException('ORIGINAL_PSERC_IMPORT_BLOCKED:'.(string)($verified['reason_codes'][0]??$verified['status']??'UNKNOWN'));
++        $rows=(array)$verified['rows'];
++        return self::mutate(static function(array $s)use($rows,$json){
++            $orderBySlot=[];
++            foreach($s['orders'] as $id=>$o){
++                $slot=(string)($o['plan_slot']??'');
++                if($slot!=='' && isset($orderBySlot[$slot]))throw new RuntimeException('ORDER_SLOT_DUPLICATE');
++                if($slot!=='')$orderBySlot[$slot]=(string)$id;
++            }
+             foreach($rows as $v){
+-                $found=null;
+-                foreach($s['orders'] as $id=>$o)if(hash_equals((string)($o['plan_slot']??''),$v['plan_slot'])){$found=$id;break;}
+-                if($found===null)throw new RuntimeException('RETURN_NOT_IN_THIS_QUEUE');
+-                $o=$s['orders'][$found];
+-                if(!in_array((string)$o['status'],['EXPORTIERT','IMPORTIERT'],true))throw new RuntimeException('RETURN_NOT_EXPORTED');
+-                foreach(['title','target_keyword','category','article_type'] as $k)if((string)$o[$k]!==$v[$k])throw new RuntimeException('RETURN_APPROVAL_MISMATCH:'.$k);
+-                if(($o['article_id']??'')!=='' && !hash_equals((string)$o['article_id'],$v['article_id']))throw new RuntimeException('RETURN_ARTICLE_ID_MISMATCH');
+-                $term=get_term_by('slug',$v['category'],'category');
+-                if(!is_object($term)||!isset($term->term_id))throw new RuntimeException('RETURN_CATEGORY_MISSING');
+-                $existing=get_posts(['post_type'=>'post','post_status'=>'any','posts_per_page'=>2,'fields'=>'ids','meta_key'=>'_texterstellung_order_id','meta_value'=>$found]);
+-                $postId=$existing?(int)$existing[0]:0;
+-                if($postId){
+-                    $post=get_post($postId);
+-                    if(!$post||$post->post_status!=='draft'||$post->post_title!==$v['title']||$post->post_name!==$v['slug']||hash('sha256',(string)$post->post_content)!==hash('sha256',$v['body'])
+-                        ||(string)get_post_meta($postId,'_texterstellung_plan_slot',true)!==$v['plan_slot']
+-                        ||array_values(array_map('intval',(array)wp_get_post_categories($postId)))!==[(int)$term->term_id])throw new RuntimeException('RETURN_EXISTING_DRAFT_CHANGED');
+-                    if((int)($o['post_id']??0)>0 && (int)$o['post_id']!==$postId)throw new RuntimeException('RETURN_POST_ID_MISMATCH');
+-                }else{
+-                    $collision=get_page_by_path($v['slug'],OBJECT,'post');
+-                    if(is_object($collision))throw new RuntimeException('RETURN_SLUG_COLLIDES_WITH_OTHER_POST');
++                $slot=$v['plan_slot'];
++                if(!isset($orderBySlot[$slot]))throw new RuntimeException('RETURN_NOT_IN_THIS_QUEUE');
++                $o=$s['orders'][$orderBySlot[$slot]];
++                if(!in_array((string)($o['status']??''),['EXPORTIERT','IMPORTIERT'],true))throw new RuntimeException('RETURN_NOT_EXPORTED');
++                foreach(['title','target_keyword','category','article_type'] as $key){
++                    if((string)($o[$key]??'')!==$v[$key])throw new RuntimeException('RETURN_APPROVAL_MISMATCH:'.$key);
+                 }
+-                $prepared[]=['id'=>$found,'row'=>$v,'term_id'=>(int)$term->term_id,'post_id'=>$postId];
+-            }
+-            $new=[];$result=[];
+-            try{
+-                foreach($prepared as $p){
+-                    $id=$p['id'];$v=$p['row'];$postId=$p['post_id'];
+-                    if(!$postId){
+-                        $newPost=['post_type'=>'post','post_status'=>'draft','post_title'=>$v['title'],
+-                            'post_name'=>$v['slug'],'post_content'=>$v['body'],'post_category'=>[$p['term_id']],
+-                            'meta_input'=>['_texterstellung_order_id'=>$id,'_texterstellung_plan_slot'=>$v['plan_slot'],
+-                                '_texterstellung_publish_blocked'=>'1','_texterstellung_article_type'=>$v['article_type'],
+-                                '_texterstellung_target_keyword'=>$v['target_keyword']]];
+-                        $postId=wp_insert_post(function_exists('wp_slash')?wp_slash($newPost):$newPost,true);
+-                        if(is_wp_error($postId)||!(int)$postId)throw new RuntimeException('DRAFT_INSERT_FAILED');
+-                        $postId=(int)$postId;$new[]=$postId;
+-                    }
+-                    $post=get_post($postId);
+-                    if(!$post||$post->post_status!=='draft'||$post->post_name!==$v['slug']||$post->post_title!==$v['title']
+-                        ||hash('sha256',(string)$post->post_content)!==hash('sha256',$v['body'])
+-                        ||(string)get_post_meta($postId,'_texterstellung_order_id',true)!==$id
+-                        ||(string)get_post_meta($postId,'_texterstellung_plan_slot',true)!==$v['plan_slot']
+-                        ||array_values(array_map('intval',(array)wp_get_post_categories($postId)))!==[(int)$p['term_id']])throw new RuntimeException('DRAFT_READBACK_FAILED');
+-                    $s['orders'][$id]['status']='IMPORTIERT';$s['orders'][$id]['post_id']=$postId;
+-                    $result[]=$postId;
+-                }
+-                self::changed($s);return ['state'=>$s,'result'=>['imported'=>count($result),'draft_ids'=>$result,'created'=>count($new)]];
+-            }catch(Throwable $e){foreach(array_reverse($new) as $postId)wp_delete_post($postId,true);throw $e;}
++                if(($o['article_id']??'')!==''&&!hash_equals((string)$o['article_id'],$v['article_id']))throw new RuntimeException('RETURN_ARTICLE_ID_MISMATCH');
++            }
++            $result=PSERC_System4_Import::importPayload($json);
++            if(empty($result['ok'])){
++                $codes=(array)($result['reason_codes']??[]);
++                throw new RuntimeException('ORIGINAL_PSERC_IMPORT_BLOCKED:'.(string)($codes[0]??$result['status']??'UNKNOWN'));
++            }
++            $readback=[];
++            foreach((array)($result['readback']??[]) as $rb){
++                if(!empty($rb['ok']))$readback[(string)($rb['plan_slot']??'')]=(int)($rb['post_id']??0);
++            }
++            foreach($rows as $v){
++                $postId=$readback[$v['plan_slot']]??0;
++                if($postId<=0)throw new RuntimeException('ORIGINAL_IMPORT_READBACK_MISSING');
++                $id=$orderBySlot[$v['plan_slot']];
++                $s['orders'][$id]['status']='IMPORTIERT';
++                $s['orders'][$id]['post_id']=$postId;
++            }
++            self::changed($s);
++            return ['state'=>$s,'result'=>['imported'=>count($rows),'draft_ids'=>array_values($readback),'created'=>count((array)($result['created_post_ids']??[]))]];
+         });
+     }
+-    /** One external research provider request. No downstream editor or forced automatic approval. */
+-    public static function runResearch(string $seed,int $limit=30): array {
++    /** Original PSTE owns DataForSEO, Google questions, SEO decisions, costs and saved pool. */
++    public static function runResearch(string $seed,int $categoryId): array {
+         self::access();
+-        $seed=self::text($seed);$limit=max(1,min(50,$limit));
+-        if($seed===''||(function_exists('mb_strlen')?mb_strlen($seed,'UTF-8'):strlen($seed))>160)throw new RuntimeException('RESEARCH_SEED_INVALID');
+-        // Reuse the original PSTE DataForSEO driver step, including its cache and safe error semantics.
+-        $client=new TXE_DataForSEO_Client('production');
+-        $result=$client->keywordSuggestionsDriverStep($seed,'Germany','German',$limit);
+-        $keywords=TXE_DataForSEO_Client::extractKeywords($result);
+-        $created=0;$new=[];
+-        foreach(array_slice($keywords,0,$limit) as $row){
+-            $keyword=self::text($row['keyword']??'');
+-            if($keyword==='')continue;
+-            $key=hash('sha256',self::portal().'|'.$keyword);
+-            $new[$key]=[
+-                'key'=>$key,'keyword'=>$keyword,'seed'=>$seed,
+-                'search_volume'=>$row['search_volume']??null,'competition'=>$row['competition']??null,
+-                'source'=>'DATAFORSEO','status'=>'RECHERCHIERT',
+-            ];
+-        }
+-        return self::mutate(static function(array $s)use($new,$seed,&$created) {
+-            if(!isset($s['research'])||!is_array($s['research']))$s['research']=[];
+-            foreach($new as $key=>$row){
+-                if(!isset($s['research'][$key])){$s['research'][$key]=$row;$created++;}
+-            }
+-            self::changed($s);
+-            return ['state'=>$s,'result'=>['read'=>count($new),'new'=>$created,'seed'=>$seed]];
+-        });
++        $seed=self::text($seed);
++        if($seed===''||(function_exists('mb_strlen')?mb_strlen($seed,'UTF-8'):strlen($seed))>160)
++            throw new RuntimeException('RESEARCH_SEED_INVALID');
++        if($categoryId<=0)throw new RuntimeException('CATEGORY_REQUIRED_FOR_ORIGINAL_RESEARCH');
++        if(!PSTE_Plugin::isReady())throw new RuntimeException('ORIGINAL_PSTE_MIGRATION_REQUIRED');
++        $job=PSTE_Research_Job::start($categoryId,$seed,PSTE_Plugin::settings());
++        $driver=PSTE_Research_Driver::kick(0,'START_SINGLE');
++        return ['job_uuid'=>(string)($job['job_uuid']??''),'status'=>(string)($driver['status']??'STARTED')];
++    }
++
++    /** Source-of-truth read: use the actual PSTE topic pool, do not clone its decisions. */
++    public static function originalTopicPool(): array {
++        self::access();
++        if(!PSTE_Plugin::isReady())throw new RuntimeException('ORIGINAL_PSTE_MIGRATION_REQUIRED');
++        return ['total'=>PSTE_Repository::topicPoolCount(),
++            'page'=>PSTE_Repository::adminTopicPoolPage(null,40),
++            'job'=>PSTE_Research_Job::peek()];
+     }
+ 
+     /** The one editorial owner decides portal relevance, intent, category and article type. */
+@@ -521,15 +553,31 @@
+             if(!is_array($proof)||($proof['box']??'')!=='FREI')continue;
+             $title=self::text($proof['approved_title']??'');
+             if($title==='')$title=self::text($completed[$key]['titles'][0]['title']??'');
++            $raw=self::text($proof['raw_query']??'');
++            // The original PSTE receipt is the only SEO authority, including its
++            // original source hash. No new FREI decision is made on import.
++            if (!PSTE_Mini_Workflow::hasStoredFinalFrei((string)$key,$raw)) continue;
+             $items[]=[
+-                'box'=>'FREI','pool_key'=>(string)$key,'raw_query'=>self::text($proof['raw_query']??''),
++                'box'=>'FREI','pool_key'=>(string)$key,'raw_query'=>$raw,
+                 'approved_title'=>$title,'intent_summary'=>self::text($proof['intent_summary']??''),
+                 'category_slug'=>self::text($proof['category_slug']??''),
+                 'article_type'=>self::text($proof['article_type']??''),
++                'canonical_article_id'=>self::text($proof['canonical_article_id']??''),
++                'plan_slot'=>self::text($proof['plan_slot']??''),
+             ];
+         }
+         if(!$items)throw new RuntimeException('NO_FREE_OLD_APPROVALS');
+         return self::ingest(['contract'=>'PSTE_MINI_SEO_DECISIONS_V1','items'=>$items]);
++    }
++
++    /** Technical handoff only: original PSTE is the sole owner of FREI decisions. */
++    private static function syncOriginalFrei(): void {
++        $original=get_option('pste_mini_keyword_roundtrip_v1',[]);
++        if (!is_array($original) || empty($original['seo_decisions']))return;
++        try {self::loadLegacyApprovals();}
++        catch(RuntimeException $e) {
++            if($e->getMessage()!=='NO_FREE_OLD_APPROVALS')throw $e;
++        }
+     }
+ 
+     /** Full historical title-worker file shape. Only titles[0].title may be changed externally. */
+@@ -540,6 +588,7 @@
+         return $v;
+     }
+     public static function exportTitleBatch(int $n=20): array {
++        self::syncOriginalFrei();
+         $n=max(1,min(50,$n));
+         return self::mutate(static function(array $s)use($n){
+             if(!empty($s['active_title_batch'])&&isset($s['title_batches'][$s['active_title_batch']])){
+@@ -632,9 +681,16 @@
+         $rows=$payload['articles']??null;
+         if(!is_array($rows)||!array_is_list($rows)||!count($rows)||count($rows)>50)throw new RuntimeException('RETURN_ARTICLES_INVALID');
+         $out=['imported'=>0,'created'=>0,'draft_ids'=>[],'held'=>[]];
++        $seenSlots=[];$seenSlugs=[];$seenTitles=[];
+         foreach($rows as $i=>$row){
+             try{
++                $validated=PSERC_System4_Import::normalizePayload(['contract'=>$contract,'articles'=>[$row]]);
++                if(empty($validated['ok']))throw new RuntimeException('ORIGINAL_PSERC_IMPORT_BLOCKED:'.(string)($validated['reason_codes'][0]??$validated['status']??'UNKNOWN'));
++                $item=$validated['rows'][0];
++                $slot=$item['plan_slot'];$slug=$item['slug'];$titleKey=sanitize_title($item['title']);
++                if(isset($seenSlots[$slot])||isset($seenSlugs[$slug])||isset($seenTitles[$titleKey]))throw new RuntimeException('DUPLICATE_IN_RETURN_BATCH');
+                 $one=self::importDrafts(['contract'=>$contract,'articles'=>[$row]]);
++                $seenSlots[$slot]=true;$seenSlugs[$slug]=true;$seenTitles[$titleKey]=true;
+                 $out['imported']+=(int)$one['imported'];$out['created']+=(int)$one['created'];
+                 $out['draft_ids']=array_merge($out['draft_ids'],(array)$one['draft_ids']);
+             }catch(Throwable $e){
+@@ -677,11 +733,12 @@
+             TXE_Diagnose::record('ACTION_STARTED');
+             TXE_Diagnose::recordUpload();
+             if($action==='txe_credentials_save') {
+-                TXE_Credentials::save(sanitize_text_field(wp_unslash($_POST['login']??'')),
++                PSTE_Credentials::saveFromAdmin(sanitize_text_field(wp_unslash($_POST['login']??'')),
+                     (string)wp_unslash($_POST['password']??''));
+                 TXE_Diagnose::record('CREDENTIALS_UPDATED',['code'=>'PORTAL_LOCAL_SETTINGS']);
+                 self::redirect('DataForSEO Zugangsdaten für dieses Testportal gespeichert.');
+             }
++            if(in_array($action,['txe_seo_export','txe_seo_import','txe_approve_research'],true)) throw new RuntimeException('ORIGINAL_SEO_OWNER_ONLY');
+             if($action==='txe_seo_export') {
+                 self::download(self::seoExport((int)($_POST['count']??20)),'texterstellung-redaktion-seo-auftrag.json');
+             }
+@@ -692,9 +749,9 @@
+             }
+             if($action==='txe_research') {
+                 if(empty($_POST['cost_ack']))throw new RuntimeException('DATAFORSEO_KOSTEN_NICHT_BESTAETIGT');
+-                $result=self::runResearch(sanitize_text_field(wp_unslash($_POST['seed']??'')),(int)($_POST['limit']??20));
+-                TXE_Diagnose::record('RESEARCH_RESULT',['item_count'=>(int)($result['read']??0),'created'=>(int)($result['new']??0)]);
+-                self::redirect('DataForSEO Recherche: '.$result['read'].' gefunden, '.$result['new'].' neue Vorschläge gespeichert. Einmalige redaktionelle Freigabe noch erforderlich.');
++                $result=self::runResearch(sanitize_text_field(wp_unslash($_POST['seed']??'')),(int)($_POST['category_id']??0));
++                TXE_Diagnose::record('RESEARCH_STARTED',['code'=>'ORIGINAL_PSTE_RESEARCH_JOB']);
++                self::redirect('Original-Recherche gestartet. Google-Fragen und SEO werden im bestehenden PSTE-Job verarbeitet.');
+             }
+             if($action==='txe_approve_research') {
+                 $id=self::approveResearch(sanitize_text_field(wp_unslash($_POST['research_id']??'')),
+@@ -772,7 +829,7 @@
+     public static function page(): void {
+         if(!current_user_can('manage_options'))wp_die('Nicht erlaubt');
+         $view=self::view();
+-        echo '<div class="wrap"><h1>Texterstellung <small style="font-size:13px">0.4.1 – Testinstallation</small></h1>';
++        echo '<div class="wrap"><h1>Texterstellung <small style="font-size:13px">0.4.1 Originalrecherche – QA</small></h1>';
+         if (!self::permitted()) {
+             echo '<div class="notice notice-warning"><p><strong>Testmodus noch nicht freigeschaltet.</strong> Das Plugin ist installiert, aber es wird nichts recherchiert, exportiert oder importiert. Es sind keine WordPress-Konfigurationsänderungen erforderlich.</p></div>';
+             echo '<h2>Diese Testinstallation einmalig bestätigen</h2><p>Prüfe die Adresse: <strong>'.esc_html(home_url('/')).'</strong>. Bestätige ausschließlich, wenn es sich um eine <strong>getrennte Testinstallation</strong> handelt. <strong>Niemals auf der Live-Website bestätigen.</strong></p>';
+@@ -797,53 +854,50 @@
+         echo '<p><strong>Auftragsregal:</strong> '.count((array)$s['orders']).' · '.esc_html(wp_json_encode($counts)).'</p>';
+         if($view==='uebersicht') {
+             echo '<h2>Workflowübersicht</h2><p>Der spätere Ablauf ist hier in einem Plugin zusammengeführt. Jede Station ist links separat anwählbar.</p>';
+-            echo '<ol><li>Recherche: Keyword-Vorschläge sammeln</li><li>Redaktionsplan: einmal entscheiden und Lücken in Kategorien sehen</li><li>Sofortartikel: Themen direkt ins Regal legen</li><li>Titelerstellung: Datei extern bearbeiten lassen</li><li>K0-Export: bis 50 freigegebene Themen reservieren und exportieren</li><li>Rückimport: K0-Texte als WordPress-Entwürfe einspielen</li><li>Diagnose: Fehlerbelege als JSON herunterladen</li></ol>';
+-            echo '<p><strong>Testgrenze:</strong> Die Recherche ist echt, sobald Zugangsdaten vorliegen. SEO-Freigaben werden einmalig manuell oder über eine externe Redaktionsdatei entschieden; die vollständige alte automatische PSTE-Klassifizierung ist noch nicht nachgewiesen. K0 bleibt extern.</p>';
++            echo '<ol><li>Recherche: Original-Recherche samt Google-Fragen und SEO ausführen</li><li>Redaktionsplan: einmal entscheiden und Lücken in Kategorien sehen</li><li>Sofortartikel: Themen direkt ins Regal legen</li><li>Titelerstellung: Datei extern bearbeiten lassen</li><li>K0-Export: bis 50 freigegebene Themen reservieren und exportieren</li><li>Rückimport: K0-Texte als WordPress-Entwürfe einspielen</li><li>Diagnose: Fehlerbelege als JSON herunterladen</li></ol>';
++            echo '<p><strong>Testgrenze:</strong> Recherche/Google-Fragen/SEO-Entscheidung kommen vollständig aus der unveränderten PSTE-Originalengine. Ein echter Ende-zu-Ende-Test steht aus. K0 bleibt extern.</p>';
+             echo '<p><a class="button button-primary" href="'.esc_url(self::sectionLink('recherche')).'">Workflow starten</a> <a class="button" href="'.esc_url(self::sectionLink('diagnose')).'">Diagnose öffnen</a></p>';
+         }
+         if($view==='recherche') {
+-            echo '<h2>DataForSEO-Zugang für dieses Portal</h2><p>Zugangsdaten werden im eigenen Plugin gespeichert (verschlüsselt). Alternativ vorhandene gespeicherte Zugangsdaten nur lesend verwenden.</p>';
++            echo '<h2>Originalrecherche PSTE</h2><p>DataForSEO, Google-Fragen, Kostenschutz und automatische Redaktion laufen ausschließlich über den unveränderten PSTE-Worker.</p>';
++            echo '<p><a class="button" href="'.esc_url(admin_url('admin.php?page=portal-seo-topic-engine-settings')).'">Bestehende Recherche-Einstellungen / Migration</a></p>';
++            if(!PSTE_Plugin::isReady()) echo '<div class="notice notice-warning"><p>Die originale PSTE-Migration ist noch nicht abgeschlossen. Bestehende Daten werden nicht verändert.</p></div>';
+             self::formStart('credentials_save');
+-            echo '<p><input name="login" autocomplete="off" placeholder="DataForSEO Login" required> <input type="password" autocomplete="new-password" name="password" placeholder="Passwort" required></p>';
+-            submit_button('Zugangsdaten speichern','secondary','submit',false);echo '</form>';
+-        echo '<h2>1. Keyword-Recherche (DataForSEO)</h2><p>Verwendet die vorhandenen DataForSEO-Zugangsdaten nur lesend. Eine kostenpflichtige Anfrage wird ausschließlich durch deinen Klick ausgelöst. Keine Freigabe ohne redaktionelle Entscheidung.</p>';
+-        self::formStart('research');
+-        echo '<p>Ausgangsbegriff <input required name="seed" placeholder="z.B. Pferdedecken"> Anzahl <input type="number" min="1" max="50" value="20" name="limit" style="width:80px"> <label><input type="checkbox" name="cost_ack" value="1" required> Kostenpflichtige Echtanfrage ausdrücklich starten</label></p>';
+-        submit_button('Recherchieren','secondary','submit',false);echo '</form>';
+-        $recent=array_slice(array_reverse((array)($s['research']??[]),true),0,50,true);
+-        echo '<h3>Recherche-Vorschläge (redaktionell einmal freigeben)</h3>';
+-        echo '<table class="widefat striped"><thead><tr><th>Suchbegriff / Nachfrage</th><th>Einmalige Entscheidung</th></tr></thead><tbody>';
+-        foreach($recent as $key=>$rec){
+-            echo '<tr><td>'.esc_html((string)$rec['keyword']).' <small>(Monat: '.esc_html((string)($rec['search_volume']??'unbekannt')).')</small><br>'.esc_html((string)$rec['status']).'</td><td>';
+-            if(($rec['status']??'')==='FREIGEGEBEN'){echo 'Bereits freigegeben';}else{
+-                self::formStart('approve_research');
+-                echo '<input type="hidden" name="research_id" value="'.esc_attr((string)$key).'">';
+-                echo 'Kategorie: <select name="category">';foreach((array)get_categories(['hide_empty'=>false]) as $cat)echo '<option value="'.esc_attr($cat->slug).'">'.esc_html($cat->name).'</option>';echo '</select> ';
+-                echo 'Art: <input required name="article_type" value="Beratung" size="13"> ';
+-                echo 'Suchabsicht: <input required name="intent" size="20" placeholder="konkrete Absicht"> ';
+-                submit_button('Einmal freigeben','secondary','submit',false);
+-                echo '</form>';
+-            }
+-            echo '</td></tr>';
+-        }
+-        echo '</tbody></table>';
++            echo '<p><input name="login" autocomplete="off" placeholder="DataForSEO Login" required> <input type="password" name="password" autocomplete="new-password" placeholder="Passwort" required></p>';
++            submit_button('Zugangsdaten der Originalengine speichern','secondary','submit',false);echo '</form>';
++            self::formStart('research');
++            echo '<p>Ausgangsbegriff: <input required name="seed" placeholder="z.B. Pferdedecken"> Kategorie: <select name="category_id">';
++            foreach((array)get_categories(['hide_empty'=>false]) as $term) echo '<option value="'.(int)$term->term_id.'">'.esc_html($term->name).'</option>';
++            echo '</select> <label><input type="checkbox" name="cost_ack" value="1" required> Kostenpflichtige Originalrecherche starten</label></p>';
++            submit_button('Originalrecherche starten','primary','submit',false);echo '</form>';
++            if(PSTE_Plugin::isReady()){
++                $original=self::originalTopicPool();
++                echo '<h3>Bereits gespeicherte Originaldaten: '.(int)$original['total'].' Themen</h3>';
++                $job=$original['job'];
++                if(is_array($job))echo '<p>Aktueller Originalauftrag: '.esc_html((string)($job['status']??'UNBEKANNT')).'</p>';
++                echo '<table class="widefat striped"><thead><tr><th>Thema</th><th>Gespeicherter Status</th><th>Kategorie</th></tr></thead><tbody>';
++                foreach((array)($original['page']['items']??[]) as $item){
++                    echo '<tr><td>'.esc_html(PSTE_Editorializer::sourceQuery($item)).'</td><td>'.esc_html((string)($item['pool_status']??'')).'</td><td>'.esc_html((string)($item['target_category_name']??'')).'</td></tr>';
++                }
++                echo '</tbody></table>';
++            }
+         }
+         if($view==='redaktion') {
+-            echo '<h2>Einmalige externe SEO-Entscheidung</h2><p>Die recherchierten Begriffe werden einmalig vom zuständigen externen Redakteur auf Portaleignung, Suchintention, Überschneidung, Kategorie und Artikelart beurteilt. Danach keine zweite Fachprüfung.</p>';
+-            self::formStart('seo_export');echo 'Anzahl <input type="number" name="count" min="1" max="50" value="20"> ';
+-            submit_button('Redaktionsdatei exportieren','secondary','submit',false);echo '</form>';
+-            self::formStart('seo_import',true);echo '<input type="file" name="seo_file" accept=".json,application/json" required> ';
+-            submit_button('Redaktionelle Entscheidungen übernehmen','secondary','submit',false);echo '</form>';
+-        echo '<h2>2. Bestehende SEO-Freigaben lesen</h2><p>Übernimmt alte FREI-Freigaben aus der deaktivierbaren Themenengine nur lesend; unvollständige bleiben im Regal angehalten.</p>';
+-        self::formStart('load_legacy');submit_button('Bestehende FREI-Freigaben übernehmen','secondary','submit',false);echo '</form>';
+-        echo '<h2>Redaktionelle Abdeckung (kein neuer SEO-Prüfer)</h2>';
+-        $coverage=self::coverage();echo '<p>Kategorien mit wenig oder keinen vorhandenen und geplanten Artikeln stehen zuerst. Keine künstliche Gleichverteilung.</p>';
+-        echo '<table class="widefat striped"><thead><tr><th>Kategorie</th><th>Bestehende Beiträge</th><th>Vorgemerkte Aufträge</th></tr></thead><tbody>';
+-        foreach(array_slice($coverage,0,100) as $r)echo '<tr><td>'.esc_html($r['category']).'</td><td>'.(int)$r['existing'].'</td><td>'.(int)$r['planned'].'</td></tr>';
+-        echo '</tbody></table>';
+-
+-        echo '<h2>Vorhandene Freigaben übernehmen</h2><p>Akzeptiert die bestehende K0-Fünf-Felder-Datei oder historische PSTE-SEO-Freigaben. Fehlende Metadaten bleiben gesperrt, nichts wird geraten.</p>';
+-        self::formStart('import_queue',true);echo '<input type="file" name="queue_file" accept=".json,application/json" required>';submit_button('Freigabedatei übernehmen');echo '</form>';
++            echo '<h2>Originalredaktion (einziger SEO-Entscheider)</h2>';
++            echo '<p><a class="button" href="'.esc_url(admin_url('admin.php?page=portal-seo-topic-engine-review')).'">Original-Themenprüfung öffnen</a></p>';
++            if(PSTE_Plugin::isReady()){
++                $count=PSTE_Repository::topicPoolCount();
++                echo '<p>Gespeicherter Keyword-Pool: <strong>'.(int)$count.'</strong> Themen. Bestehende Entscheidungen bleiben im Originalspeicher.</p>';
++                $coverage=PSTE_Analytics::coverage();
++                echo '<table class="widefat striped"><thead><tr><th>Kategoriefamilie</th><th>Veröffentlicht</th><th>Geplant</th><th>Suchnachfrage</th></tr></thead><tbody>';
++                foreach(array_slice($coverage,0,50) as $r)echo '<tr><td>'.esc_html((string)($r['category_name']??'')).'</td><td>'.(int)($r['published']??0).'</td><td>'.(int)($r['planned_pass']??0).'</td><td>'.esc_html((string)($r['candidate_volume']??0)).'</td></tr>';
++                echo '</tbody></table>';
++            }
++            echo '<h3>Bereits freigegebene Altthemen übertragen</h3><p>Nur bestehende FREI-Entscheidungen, ohne neue fachliche Prüfung. Unvollständige Themen bleiben gesperrt.</p>';
++            self::formStart('load_legacy');submit_button('Bestehende FREI-Freigaben übernehmen','secondary','submit',false);echo '</form>';
++            echo '<h3>Vorhandenen K0-Auftrag einlesen</h3>';
++            self::formStart('import_queue',true);echo '<input type="file" name="queue_file" accept=".json,application/json" required>';
++            submit_button('Bestehenden Auftrag einlesen','secondary','submit',false);echo '</form>';
+         }
+         if($view==='titel') {
+         echo '<h2>3. Externe Titelrunde – Originalformat</h2><p>Nur fest freigegebene Suchabsichten ohne Titel. Der externe Titelworker darf ausschließlich das Titelfeld ausfüllen.</p>';

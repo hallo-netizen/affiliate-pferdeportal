@@ -1,0 +1,56 @@
+{
+  "status": "QA_ONLY_NOT_RELEASED",
+  "base_zip": "Texterstellung_0.4.1_Planfrei_Entwurfsschutz_QA_NICHT_INSTALLIEREN.zip",
+  "current_zip": "Texterstellung_0.4.1_PLANFREI_SEO_BRIDGE_QA_NICHT_INSTALLIEREN.zip",
+  "zip_sha256": "d61897007fefdda9a7b3da7ff1aad17b05beab5dfb7aec0d97e79261e83a5613",
+  "file_count": 172,
+  "php_file_count": 116,
+  "php_syntax_pass": 116,
+  "source_unchanged": 170,
+  "technical_changed": 2,
+  "changed_source_sha256": {
+    "original/pste/includes/class-pste-mini-workflow.php": {
+      "before_sha256": "c59d1957305d735e7870875f07340b5e831d467e2fd9dd0b76dd5fedf6402637",
+      "after_sha256": "4dd807ac90f5301b4e931376e7190c46b75c5a05280b0904d9d6162abab6ed68"
+    },
+    "texterstellung.php": {
+      "before_sha256": "6fb1087e0324804789d60d24cdecb81c6845f72979dd4e732b4214bab874e42b",
+      "after_sha256": "1230db28c113d5831374637e1d1c0b6bca0a85ac3a32413f9da4f33336cba309"
+    }
+  },
+  "one_owner_seo_core_original_preserved": true,
+  "new_editorial_workers": 0,
+  "old_plan_actions_disabled": 12,
+  "qa_pass": 67,
+  "qa_total": 67,
+  "qa_suites": {
+    "QA_PSTE_SEO_OWNER.json": {
+      "pass": 13,
+      "total": 13
+    },
+    "QA_PARKHAUS.json": {
+      "pass": 7,
+      "total": 7
+    },
+    "QA_20_NEW_FREI_END2END_MOCK.json": {
+      "pass": 27,
+      "total": 27
+    },
+    "QA_CONFLICT.json": {
+      "pass": 5,
+      "total": 5
+    },
+    "QA_NO_SECOND_PLAN_HOOKS.json": {
+      "pass": 15,
+      "total": 15
+    }
+  },
+  "limits": [
+    "WP functions and PPM emulated, no real WordPress installation tested",
+    "external SEO inputs simulated, no live DataForSEO PAA proof",
+    "K0 five-field handoff simulated, no live K0 writing",
+    "legacy original 61 FREI records with missing canonical IDs not auto-rekeyed",
+    "other inherited original PSTE pathways require live audit before release"
+  ],
+  "install_approved": false
+}
