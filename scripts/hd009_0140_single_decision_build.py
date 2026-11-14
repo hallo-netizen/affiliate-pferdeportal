@@ -38,7 +38,7 @@ helper=r'''    /**
         $need=trim((string)($record['result_profile']['what_do_you_need']??''));
         if ($need==='') { return array(); }
         $out=array();
-        foreach (array_slice((array)preg_split('/[,;|]+/u',$need),0,12) as $phrase) {
+        foreach (array_slice((array)preg_split('/[,;|]+|\s+(?:oder|und|sowie)\s+/ui',$need),0,12) as $phrase) {
             // Last substantive noun of each source item:
             // "geeigneten Arbeitsplatz" -> Arbeitsplatz.
             $tokens=$this->idealo_match_tokens((string)$phrase);
@@ -71,6 +71,11 @@ replace_exact(
 replace_exact(
 """        $category_stems=array(); foreach ($this->idealo_match_tokens($main_n.' '.$sub_n) as $token) { $category_stems[]=$this->idealo_match_stem($token); }""",
 """        $category_stems=array(); foreach ($this->idealo_match_tokens($main_n.' '.$sub_n) as $token) { $category_stems[]=$this->idealo_match_stem($token); }
+        foreach (preg_split('/\s+/',$this->idealo_match_normalize($main_n.' '.$sub_n)) as $short) {
+            if (strlen((string)$short)===2 && preg_match('/^(?:[a-z]{2}|[0-9][a-z])$/',(string)$short)) {
+                $category_stems[]=(string)$short;
+            }
+        }
         $category_qualified=array_fill_keys($category_stems,true);""",
 "category evidence only once")
 replace_exact(
