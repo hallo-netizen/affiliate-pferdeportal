@@ -10,4 +10,6 @@
 
 **Aktuell kein neues Kategorie-Plugin bauen:** Bezahl-API braucht nicht nochmals repariert oder für denselben kompletten Lauf benutzt zu werden. W4-Keyword-Owner bleiben alle erhalten. Für eine spätere **eigene Importfunktion** sind aktueller WordPress-Readback, vollständige Fach-/SEO-Freigabe und gesonderte Schreibfreigabe nötig. Original Hab-002/Robotik und die Fremdportale bleiben unangetastet.
 
-**NEXT ACTION:** Aus den vorhandenen W4-/W5-Daten die schreibfreie WordPress-Importplanung und anschließende Textproduktion vorbereiten. Kein weiterer DataForSEO-Kostenlauf, kein WordPress-Import vor gesonderter Freigabe.
+**NEXT ACTION:** Die eine fehlende ADD-only-Importfunktion ausschließlich in bestehendem WT001 vorbereiten und als Ganzes prüfen; WordPress-Schreiben erst nach ausdrücklicher Freigabe und einmaliger Rücklesung. Keine neue DataForSEO-Recherche.
+
+**W8 Nachweis:** `W8_IMPORT_QUELLCODE_PRUEFUNG_20261114.md` – tatsächliche WT001-0.1.4-ZIP-Inhalte untersucht: keine Seiten-/Kategorien-Schreibfunktion. Keine neue Pluginversion oder WordPress-Schreibaktion.
