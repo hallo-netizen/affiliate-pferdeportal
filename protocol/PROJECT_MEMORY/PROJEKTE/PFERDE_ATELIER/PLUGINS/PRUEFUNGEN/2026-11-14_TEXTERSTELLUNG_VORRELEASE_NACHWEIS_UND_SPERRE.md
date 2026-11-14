@@ -95,3 +95,24 @@ Die TXE-Hauptdatei hat vier eigenständige aufgerufene Stellen, aber **keinen** 
 - `QA_20261113_KISS_PPM_SPAETER_STARTSCHUTZ_TEST.php`: **14/14 PASS**; originale `PSERC_PPM_Bypass_Guard`-Methoden mit nachgebautem WP-Hook-System und simulierten PPM-Klassen; alte direkte PPM-Browseraufrufe werden unter diesem Test blockiert.
 - Beide Prozesse mit Exitcode 0. [Maschinenlesbarer Laufnachweis mit Test-/Originaldatei-SHA und deutlichen Grenzen](2026-11-14_TEXTERSTELLUNG_ORIGINAL_QA_TESTLAUF.json).
 - **Grenze:** Diese 44 PASS beweisen nur die genannten *alten* Funktionen mit Testdaten, nicht automatische SEO-/PAA-Recherche, echtes WordPress, Datenbankabgleich, reale PPM-6.7.9-Schnittstelle, K0 oder das neue Plugin 0.4.1. **Kein Alt-Neu-Vollvergleich, keinerlei Installationsfreigabe.**
+
+
+### Import-Originalfunktionslauf: 27/27 PASS – aber kein echter PPM-Lauf
+
+Am 14.11.2026 die **unveränderten** drei PSERC-Originalmodule `class-pserc-system4-import.php`, `class-pserc-plan-slot-identity.php` und `class-pserc-stable-json.php` in einer separaten PHP-Testumgebung ausgeführt. **Keine** neuen Produkt-/Pluginfunktionen implementiert; die neuen PHP-Dateien sind ausschließlich lokale QA-Testskripte mit nachgebildeten WordPress-Funktionen und PPM-Rückmeldung.
+
+| Test | Originalmethode | Ergebnis |
+|---|---|---|
+| 7 Form-/Identitäts-/Dubletten-Negativproben + fehlende PPM-Klasse | `normalizePayload` und `importPayload` | 8/8 PASS; fehlende PPM-Klasse verhindert WordPress-Schreiben |
+| Original-Import mit PPM-Testklasse, ungültige Kategorie, Entwurf, Wiederholung, fehlgeschlagene PPM-Rückmeldung und Rollback | `importPayload` | 11/11 PASS |
+| **20er-Charge** in zwei Schritten **13 + 7**, alle Entwurf, erneuter Import **0** neue Posts, abgeänderte Rückgabe blockiert, PPM-Fehler rollt 21. Post zurück | `importPayload` | 8/8 PASS |
+
+Gesamt **27/27 Originalmethoden-Tests PASS**, **ausschließlich mit nachgebauten WordPress- und PPM-Funktionen**. Originaldateien ungeändert; der PHP-Testcode ist keine Plugin-Eigenentwicklung. [Messwerte mit Prüfsummen der drei Originalquellen und QA-Testskripte](2026-11-14_TEXTERSTELLUNG_ORIGINAL_PSERC_IMPORT_27_QA.json), reproduzierbare [QA Einzeltests](QA_ORIGINAL_PSERC_IMPORT_20261114.php) und [QA 20er-Charge](QA_ORIGINAL_PSERC_IMPORT_BATCH20_20261114.php). Die aufgeführten SHA-256-Werte beziehen sich auf die im lokalen Test tatsächlich benutzten Quellbytes; bei der GitHub-Textablage der QA-Testskripte können Zeilenumbrüche normalisiert sein.
+
+**Konkrete Quellvertragsdifferenz, durch statischen Original-/TXE-Abgleich bestätigt:**
+- Der Originalimport prüft `PPM679_Editorial_Plan_Runtime_Gate::record_readback()`, schreibt unter anderem `_ppm679_publish_blocked`, führt globalen Kollisionsvorabgleich durch und nimmt beim PPM-Synchronisierungsfehler neue Posts zurück. **Die TXE-0.4.1-Importfunktion ruft den Originalimport und PPM nicht auf und setzt ihre eigenen `_texterstellung_...`-Felder.** Daraus folgt **keine** nachgewiesene Gleichwertigkeit zum alten PPM-/Publish-Vertrag.
+- Der TXE-Hashansatz für `plan_slot` hat im Quellcode denselben Algorithmus wie `PSERC_Plan_Slot_Identity::tokenFromCanonicalId()` (`sha256('pserc-plan-slot-v2|' . id)`). Das **allein** belegt nicht, dass TXE für historische Freigaben **dieselbe kanonische ID** verwendet. Alte IDs und deren Herkunft dürfen nicht stillschweigend geändert werden.
+- Die **belegbar kleinste Importkern-Originalbasis** besteht aus den genannten drei PSERC-PHP-Modulen **plus** den echten WordPress-Funktionen und der wirklichen PPM-6.7.9-Laufzeitklasse. **Diese PPM-Klasse ist noch nicht im Quelltext geprüft:** Die ZIP liegt in GitHub, aber ihre Binärdaten ließen sich über die verfügbare GitHub-Textschnittstelle nicht vollständig auslesen. Deshalb **kein riskantes Umgehen/Neuprogrammieren** der PPM-Grenze.
+- **Keine Freigabe**: Die Tests sind keine echten WordPress-Importe, keine echte PPM-Rückmeldung, kein K0-Lauf und kein Alt-/Neu-Gesamtergebnis. Der 23-Regel-Zielvertrag bleibt vollständig **gesperrt**.
+
+**Verbindliche nächste Originalarbeitsstrecke:** Echte PPM-Importklasse/Vertrag nachweisbar lesen und mit dem unveränderten PSERC-Importer auf isolierter WordPress-Testinstallation abnehmen; dazu ursprüngliche K0-Manifest-/Titel-/Rechercheklassen und vollständigen Bestandsabgleich erhalten. Erst vor jeder ZIP eine identische Code-Übernahme mit Datei-SHA/Zeilen-Diff und Echttest beweisen. **Kein eigenständiger Plugin-Importersatz.**
