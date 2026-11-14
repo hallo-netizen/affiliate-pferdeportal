@@ -1,0 +1,230 @@
+{
+  "checks": [
+    {
+      "name": "real_running_advanced",
+      "passed": true,
+      "want": [
+        "advanced",
+        0,
+        1
+      ],
+      "got": [
+        "advanced",
+        0,
+        1
+      ]
+    },
+    {
+      "name": "real_running_wrong_worker_idle",
+      "passed": true,
+      "want": [
+        "busy",
+        0,
+        1
+      ],
+      "got": [
+        "busy",
+        0,
+        1
+      ]
+    },
+    {
+      "name": "real_running_wrong_worker_completed",
+      "passed": true,
+      "want": [
+        "ebay_worker_terminal_state_unverified",
+        0,
+        1
+      ],
+      "got": [
+        "ebay_worker_terminal_state_unverified",
+        0,
+        1
+      ]
+    },
+    {
+      "name": "real_running_worker_failed_unstored",
+      "passed": true,
+      "want": [
+        "ebay_worker_terminal_state_unverified",
+        0,
+        1
+      ],
+      "got": [
+        "ebay_worker_terminal_state_unverified",
+        0,
+        1
+      ]
+    },
+    {
+      "name": "saved_incoherent_running_terminal_phase",
+      "passed": true,
+      "want": [
+        "ebay_run_state_inconsistent",
+        0,
+        0
+      ],
+      "got": [
+        "ebay_run_state_inconsistent",
+        0,
+        0
+      ]
+    },
+    {
+      "name": "saved_invalid_schema_running",
+      "passed": true,
+      "want": [
+        "ebay_run_state_inconsistent",
+        0,
+        0
+      ],
+      "got": [
+        "ebay_run_state_inconsistent",
+        0,
+        0
+      ]
+    },
+    {
+      "name": "paused_by_operator",
+      "passed": true,
+      "want": [
+        "idle",
+        0,
+        0
+      ],
+      "got": [
+        "idle",
+        0,
+        0
+      ]
+    },
+    {
+      "name": "paused_by_system",
+      "passed": true,
+      "want": [
+        "busy",
+        0,
+        1
+      ],
+      "got": [
+        "busy",
+        0,
+        1
+      ]
+    },
+    {
+      "name": "old_failed_not_restarted",
+      "passed": true,
+      "want": [
+        "failed",
+        0,
+        0
+      ],
+      "got": [
+        "failed",
+        0,
+        0
+      ]
+    },
+    {
+      "name": "completed_not_yet_due",
+      "passed": true,
+      "want": [
+        "idle",
+        0,
+        0
+      ],
+      "got": [
+        "idle",
+        0,
+        0
+      ]
+    },
+    {
+      "name": "completed_now_due",
+      "passed": true,
+      "want": [
+        "advanced",
+        1,
+        1
+      ],
+      "got": [
+        "advanced",
+        1,
+        1
+      ]
+    },
+    {
+      "name": "empty_run_no_due",
+      "passed": true,
+      "want": [
+        "idle",
+        0,
+        0
+      ],
+      "got": [
+        "idle",
+        0,
+        0
+      ]
+    },
+    {
+      "name": "bad_status_no_auto_overwrite",
+      "passed": true,
+      "want": [
+        "ebay_run_state_inconsistent",
+        0,
+        0
+      ],
+      "got": [
+        "ebay_run_state_inconsistent",
+        0,
+        0
+      ]
+    },
+    {
+      "name": "worker_state_regresses",
+      "passed": true,
+      "want": [
+        "ebay_run_state_inconsistent_after_tick",
+        0,
+        1
+      ],
+      "got": [
+        "ebay_run_state_inconsistent_after_tick",
+        0,
+        1
+      ]
+    },
+    {
+      "name": "worker_finishes",
+      "passed": true,
+      "want": [
+        "completed",
+        0,
+        1
+      ],
+      "got": [
+        "completed",
+        0,
+        1
+      ]
+    },
+    {
+      "name": "worker_fails_safely",
+      "passed": true,
+      "want": [
+        "failed",
+        0,
+        1
+      ],
+      "got": [
+        "failed",
+        0,
+        1
+      ]
+    }
+  ],
+  "passed": 16,
+  "total": 16
+}
