@@ -1,0 +1,91 @@
+{
+  "purpose": "One full sync, no redundant inventory-wide refresh after discovery; selected items are still rechecked before materialisation and public commit.",
+  "cases": [
+    {
+      "case": "normal",
+      "status": "completed",
+      "public_items_before": 580,
+      "public_items_after": 580,
+      "old_safe_removed": 0,
+      "old_ticks": 24,
+      "new_ticks": 23,
+      "full_sync_discovery_done": true,
+      "skipped_bulk_refresh": true
+    },
+    {
+      "case": "old_blocked",
+      "status": "completed",
+      "public_items_before": 579,
+      "public_items_after": 579,
+      "old_safe_removed": 1,
+      "old_ticks": 24,
+      "new_ticks": 23,
+      "full_sync_discovery_done": true,
+      "skipped_bulk_refresh": true
+    },
+    {
+      "case": "new_blocked",
+      "status": "completed",
+      "public_items_before": 579,
+      "public_items_after": 579,
+      "old_safe_removed": 0,
+      "old_ticks": 12,
+      "new_ticks": 11,
+      "full_sync_discovery_done": true,
+      "skipped_bulk_refresh": true
+    },
+    {
+      "case": "db_down",
+      "status": "failed",
+      "public_items_before": 580,
+      "public_items_after": 580,
+      "old_safe_removed": 0,
+      "old_ticks": 12,
+      "new_ticks": 11,
+      "full_sync_discovery_done": true,
+      "skipped_bulk_refresh": true
+    },
+    {
+      "case": "churn",
+      "status": "completed",
+      "public_items_before": 579,
+      "public_items_after": 579,
+      "old_safe_removed": 1,
+      "old_ticks": 28,
+      "new_ticks": 27,
+      "full_sync_discovery_done": true,
+      "skipped_bulk_refresh": true
+    },
+    {
+      "case": "no_new",
+      "status": "completed",
+      "public_items_before": 578,
+      "public_items_after": 578,
+      "old_safe_removed": 0,
+      "old_ticks": 24,
+      "new_ticks": 23,
+      "full_sync_discovery_done": true,
+      "skipped_bulk_refresh": true
+    },
+    {
+      "case": "save_fail",
+      "status": "failed",
+      "public_items_before": 580,
+      "public_items_after": 580,
+      "old_safe_removed": 0,
+      "old_ticks": 12,
+      "new_ticks": 11,
+      "full_sync_discovery_done": true,
+      "skipped_bulk_refresh": true
+    }
+  ],
+  "all_cases_same_final_public_and_errors": true,
+  "independent_inventory_refresh_unchanged": true,
+  "freshness_test": "9/9",
+  "php_files_lint": 23,
+  "original_php_phase_chain": true,
+  "mocked_service_boundary": "Real WordPress SQL/eBay network/GitHub schedule are NOT tested.",
+  "live_verified": false,
+  "plugin_release": false,
+  "status": "QA_ONLY"
+}
