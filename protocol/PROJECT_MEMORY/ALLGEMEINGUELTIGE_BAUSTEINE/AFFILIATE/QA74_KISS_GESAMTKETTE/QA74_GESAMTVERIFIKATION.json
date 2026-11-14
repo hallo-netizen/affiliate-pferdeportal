@@ -1,0 +1,242 @@
+{
+  "teststand": "QA74",
+  "date": "2026-11-14",
+  "actual_test_methods": "Original PHP `ebay_public_checkpoint_is_safe` and `ebay_public_checkpoint_business_ids` retained; original engine PHP phases executed with mocked WP + eBay responses",
+  "changed_files_vs_QA73": [
+    "includes/trait-ppar-ebay-run.php"
+  ],
+  "QA73_checkpoint_bug_reproduced": true,
+  "direct_real_helper_test_before": {
+    "same_run_same_membership": {
+      "writes": 1,
+      "status": "safe",
+      "checkpoint_id": "29d8b45a5568e9a6bad73e9a",
+      "published_count": 578
+    },
+    "same_run_different_membership": {
+      "writes": 1,
+      "status": "safe",
+      "checkpoint_id": "09abcbb37e2f80ae14388688",
+      "published_count": 579
+    },
+    "different_run_same_membership": {
+      "writes": 1,
+      "status": "safe",
+      "checkpoint_id": "eb95296fb83e4fab716c3494",
+      "published_count": 578
+    },
+    "different_source_same_membership": {
+      "writes": 1,
+      "status": "safe",
+      "checkpoint_id": "9e3ad612eb5e177e89db642f",
+      "published_count": 578
+    }
+  },
+  "direct_real_helper_test_after": {
+    "same_run_same_membership": {
+      "writes": 0,
+      "status": "safe",
+      "checkpoint_id": "already-final",
+      "published_count": 578
+    },
+    "same_run_different_membership": {
+      "writes": 1,
+      "status": "safe",
+      "checkpoint_id": "c5cb108b1f08c4cb4253ef21",
+      "published_count": 579
+    },
+    "different_run_same_membership": {
+      "writes": 1,
+      "status": "safe",
+      "checkpoint_id": "ac54d902913b3c9c5fa0d345",
+      "published_count": 578
+    },
+    "different_source_same_membership": {
+      "writes": 1,
+      "status": "safe",
+      "checkpoint_id": "6aeac9f53c803f61bc861d82",
+      "published_count": 578
+    }
+  },
+  "full_scenarios_real_helpers": [
+    {
+      "scenario": "normal",
+      "before": {
+        "status": "completed",
+        "error": null,
+        "public_writes": 2,
+        "public_count": 580,
+        "lost_old_ids": 0
+      },
+      "after": {
+        "status": "completed",
+        "error": null,
+        "public_writes": 2,
+        "public_count": 580,
+        "lost_old_ids": 0
+      }
+    },
+    {
+      "scenario": "old_blocked",
+      "before": {
+        "status": "completed",
+        "error": null,
+        "public_writes": 2,
+        "public_count": 579,
+        "lost_old_ids": 1
+      },
+      "after": {
+        "status": "completed",
+        "error": null,
+        "public_writes": 2,
+        "public_count": 579,
+        "lost_old_ids": 1
+      }
+    },
+    {
+      "scenario": "new_blocked",
+      "before": {
+        "status": "completed",
+        "error": null,
+        "public_writes": 1,
+        "public_count": 579,
+        "lost_old_ids": 0
+      },
+      "after": {
+        "status": "completed",
+        "error": null,
+        "public_writes": 1,
+        "public_count": 579,
+        "lost_old_ids": 0
+      }
+    },
+    {
+      "scenario": "db_down",
+      "before": {
+        "status": "failed",
+        "error": "business_public_storage_read_failed",
+        "public_writes": 1,
+        "public_count": 580,
+        "lost_old_ids": 0
+      },
+      "after": {
+        "status": "failed",
+        "error": "business_public_storage_read_failed",
+        "public_writes": 1,
+        "public_count": 580,
+        "lost_old_ids": 0
+      }
+    },
+    {
+      "scenario": "churn",
+      "before": {
+        "status": "completed",
+        "error": null,
+        "public_writes": 2,
+        "public_count": 579,
+        "lost_old_ids": 1
+      },
+      "after": {
+        "status": "completed",
+        "error": null,
+        "public_writes": 2,
+        "public_count": 579,
+        "lost_old_ids": 1
+      }
+    },
+    {
+      "scenario": "no_new",
+      "before": {
+        "status": "completed",
+        "error": null,
+        "public_writes": 1,
+        "public_count": 578,
+        "lost_old_ids": 0
+      },
+      "after": {
+        "status": "completed",
+        "error": null,
+        "public_writes": 1,
+        "public_count": 578,
+        "lost_old_ids": 0
+      }
+    },
+    {
+      "scenario": "save_fail",
+      "before": {
+        "status": "failed",
+        "error": "public_checkpoint_commit_failed",
+        "public_writes": 1,
+        "public_count": 580,
+        "lost_old_ids": 0
+      },
+      "after": {
+        "status": "failed",
+        "error": "public_checkpoint_commit_failed",
+        "public_writes": 1,
+        "public_count": 580,
+        "lost_old_ids": 0
+      }
+    },
+    {
+      "scenario": "post_commit_state_save_fail",
+      "before": {
+        "status": "completed",
+        "error": null,
+        "public_writes": 3,
+        "public_count": 580,
+        "lost_old_ids": 0
+      },
+      "after": {
+        "status": "completed",
+        "error": null,
+        "public_writes": 2,
+        "public_count": 580,
+        "lost_old_ids": 0
+      }
+    },
+    {
+      "scenario": "deferred_save_fail",
+      "before": {
+        "status": "completed",
+        "error": null,
+        "public_writes": 1,
+        "public_count": 580,
+        "lost_old_ids": 0
+      },
+      "after": {
+        "status": "failed",
+        "error": "unverified_search_deferred_state_save_failed",
+        "public_writes": 1,
+        "public_count": 580,
+        "lost_old_ids": 0
+      }
+    },
+    {
+      "scenario": "cleanup_final_save_fail",
+      "after": {
+        "status": "failed",
+        "error": "checkpoint_business_cleanup_state_save_failed",
+        "public_count": 580,
+        "lost_old_ids": 0
+      }
+    }
+  ],
+  "previous_QA73_full_chain": {
+    "checks": 5627,
+    "failed": 0,
+    "model_runs": 7,
+    "other_suite_cases": 50,
+    "real_events": 2769,
+    "local_pass": true,
+    "live_accepted": false,
+    "fail_examples": []
+  },
+  "additional_assertions": 102,
+  "additional_errors": [],
+  "local_pass": true,
+  "historical_real_events": 2769,
+  "historical_public_coverage": "5/283",
+  "live_full_contract_pass": false,
+  "reason_no_acceptance": "Historical real run has no final public/cleanup events and lacks historical item responses; QA is mock and source replay only. Protected GitHub PR #759 is not merged."
+}
