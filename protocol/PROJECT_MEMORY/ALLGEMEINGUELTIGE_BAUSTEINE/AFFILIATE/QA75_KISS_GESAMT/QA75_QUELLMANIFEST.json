@@ -1,0 +1,20 @@
+{
+  "origin": "QA71 original plugin 6.72.350, SHA256 e2d04337bf0d2c3ca8176059231b317f3682343239cef03bb68e4a57fa78c6b6",
+  "patch_sha256": "1f2df1d499e6a02ee6b8e6165b861da544ed0990c3a09e97a3d417dac956ec6a",
+  "changed_php_files_vs_original_qa71": [
+    "includes/trait-ppar-ebay-run.php",
+    "includes/trait-ppar-ebay.php"
+  ],
+  "unchanged_original_package_files": 64,
+  "php_syntax_files": 23,
+  "qa74_existing_checks": 5627,
+  "qa75_additional_checks_including_real_log_replay": 5686,
+  "qa75_regression_scenarios": 9,
+  "reproduced_original_audit_events": 2769,
+  "real_missing_product_families": 278,
+  "illustrative_successful_models_with_283_outcomes": 5,
+  "live_approved": false,
+  "workflow_pr": 759,
+  "workflow_pr_commit": "1f3b53d5c3166328ed6e3f3ae73629617fe8554a",
+  "workflow_protected_unmerged": true
+}
