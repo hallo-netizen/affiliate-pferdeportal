@@ -1,0 +1,70 @@
+--- /mnt/data/texterstellung_fix_045/texterstellung/original/pste/includes/class-pste-admin.php	2026-11-14 15:29:05.630013994 +0000
++++ /mnt/data/texterstellung_internal_046/class-pste-admin.php	2026-11-14 16:37:51.345885144 +0000
+@@ -689,11 +689,28 @@
+             }
+             return count($matches)===1?array_values($matches)[0]:['status'=>count($matches)>1?'UNRESOLVED':'MISSING','name'=>$name];
+         }
+-        // Fach only when the previously bound original family+article-type
+-        // relation resolves uniquely to a real current WP term.
+-        if(self::currentEditorialArea($c)!=='FACH'||!$registry)return ['status'=>'UNRESOLVED'];
++        // ONE original Fach-category decision: use the already-bound family/type,
++        // OR, only when that decision is still open, try a uniquely named existing
++        // WP product family. No second approval, category fabrication or guess.
++        if(!$registry)return ['status'=>'UNRESOLVED'];
+         $family=(string)($path['family_key']??'');$type=(string)($path['article_type']??'');
+-        if($family===''||$type===''||strcasecmp($type,'Journal')===0)return ['status'=>'UNRESOLVED'];
++        $area=self::currentEditorialArea($c);
++        if($family!==''&&$area!=='FACH')return ['status'=>'UNRESOLVED'];
++        if($family==='' && in_array($area,['FACH','UNDECIDED'],true)) {
++            $unique=self::singleOwnerUniqueFamilyFromExistingCatalogue($raw,$registry);
++            if(($unique['status']??'')!=='UNIQUE')return ['status'=>'UNRESOLVED'];
++            $family=(string)$unique['family_key'];
++        }
++        if($family===''||$area==='MAGAZIN')return ['status'=>'UNRESOLVED'];
++        if($type==='') {
++            $available=PSTE_Article_Type_Registry::availableTypes($registry,$family);
++            $signals=PSTE_Article_Type_Intent_Ontology::strongSignals($raw,$available);
++            if(count($signals)===1)$type=(string)$signals[0];
++            elseif($signals===[] && !PSTE_Article_Type_Intent_Ontology::hasExplicitIntentOrAmbiguity($raw,$available)
++                && in_array('Beratung',$available,true))$type='Beratung';
++            else return ['status'=>'UNRESOLVED'];
++        }
++        if(strcasecmp($type,'Journal')===0)return ['status'=>'UNRESOLVED'];
+         $target=PSTE_Article_Type_Registry::resolve($registry,$family,$type);
+         $id=(int)($target['term_id']??0);$slug=(string)($target['slug']??'');
+         $term=$id>0&&function_exists('get_term')?get_term($id,'category'):false;
+@@ -705,6 +722,34 @@
+         return $label!==''?['status'=>'MISSING','name'=>$label]:['status'=>'UNRESOLVED'];
+     }
+ 
++    /**
++     * Part of the SAME original category decision, not a second category/SEO check.
++     * A product family is accepted only when EVERY meaningful family word is
++     * present in the unchanged original query, and exactly one family qualifies.
++     * Broad words such as "Pferd" alone never claim a subcategory.
++     */
++    private static function singleOwnerUniqueFamilyFromExistingCatalogue(string $raw,array $registry): array {
++        if(!class_exists('PSTE_Token_Equivalence'))return ['status'=>'UNRESOLVED'];
++        $query=array_fill_keys(PSTE_Token_Equivalence::tokens($raw),true);
++        $generic=array_fill_keys(['pferd','pferde','pferdes','pferdeweid','weid',
++            'artikel','ratgeb','wissen','allgemein','zubehoer','zugeh','produkt'],true);
++        $matches=[];
++        foreach((array)($registry['families']??[]) as $key=>$row){
++            $words=PSTE_Token_Equivalence::tokens((string)($row['topic_family_name']??''));
++            $words=array_values(array_filter($words,static fn($word)=>!isset($generic[$word])));
++            if(!$words)continue;
++            $matched=true;
++            foreach($words as $word){
++                // Exact original equivalence stems, no substring guess:
++                // "Gamaschen" must not become "Magnetfelddecken".
++                if(!isset($query[$word])){$matched=false;break;}
++            }
++            if($matched)$matches[]=(string)$key;
++        }
++        return count($matches)===1?['status'=>'UNIQUE','family_key'=>$matches[0]]:
++            ['status'=>count($matches)>1?'AMBIGUOUS':'NO_MATCH','family_key'=>''];
++    }
++
+     /** One operator confirmation for many existing safe proposals; never creates categories or articles. */
+     public static function applyRoomSuggestions(): void {
+         try {
