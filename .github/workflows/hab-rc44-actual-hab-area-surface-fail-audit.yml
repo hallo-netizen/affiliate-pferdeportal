@@ -1,0 +1,43 @@
+name: HAB RC44 exact R2 R3 render call versus one backend slot - read only
+on:
+  push:
+    branches: [hab-affiliate-rc44-frontend-slot-and-source-target-20261114]
+    paths:
+      - .github/workflows/hab-rc44-actual-hab-area-surface-fail-audit.yml
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract exact archived RC44 render and selector contracts
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re
+          p=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          with ZipFile(p) as z:
+            sources={x:z.read(x).decode('utf8') for x in (
+              'affiliate-portal-router/affiliate-portal-router.php',
+              'affiliate-portal-router/includes/trait-ppar-output-objects.php',
+              'affiliate-portal-router/includes/trait-ppar-automation-suite.php')}
+            for n in ['hab_bw_area_slot','hb_insurance_banner_rank','hb_insurance_campaign_allowed',
+              'render_affiliate_slot_for_context','campaign_slot_allowed','campaign_matches_contract_slot_rule',
+              'automation_campaign_exact_target_rank','output_format_slot','output_auto_contract_banner_allowed']:
+              for f,s in sources.items():
+                m=re.search(r'function\s+'+n+r'\s*\(',s)
+                if not m:continue
+                start=s.find('{',m.end());depth=0
+                for i in range(start,len(s)):
+                  if s[i]=='{':depth+=1
+                  elif s[i]=='}':
+                    depth-=1
+                    if depth==0:break
+                part=s[m.start():i+1]
+                print('METHOD',n,'FILE',f,'LENGTH',len(part))
+                print(part[:22000])
+                break
+          PY
