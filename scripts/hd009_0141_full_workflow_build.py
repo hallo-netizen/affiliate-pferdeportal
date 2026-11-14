@@ -184,10 +184,10 @@ old_late="""            if (!$this->hd_idealo_product_targets_exact_hobby_page($
                 continue;
             }
 """
-if old_late in m:
-    m=m.replace(old_late,"",1)
-# Some older source variants already omitted that caller; in all cases the
-# final original placement resolver must be the only target authority.
+import re
+late_pattern=r'(?m)^[ \t]*if \(!\$this->hd_idealo_product_targets_exact_hobby_page\([^\n]+\)\) \{\r?\n[ \t]*continue;\r?\n[ \t]*\}\r?\n'
+m,removed_late=re.subn(late_pattern,"",m)
+assert removed_late==1,"Expected exactly one legacy duplicate placement gate"
 begin=m.index("    private function hd_idealo_product_targets_exact_hobby_page(")
 end=m.index("    private function category_product_shared_rank_base(",begin)
 assert "private function hd_idealo_product_targets_exact_hobby_page(" in m[begin:end]
