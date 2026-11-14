@@ -1,3 +1,16 @@
+## 14.11.2026, 08:17 – RC37: NACHGEWIESENE ECHTE URSACHENGRUPPEN UND KISS-GRENZE
+
+**Sichtprüfung des vom Nutzer bereitgestellten echten WordPress-Fehlerberichts (zwei Screenshots, 14.11.2026 08:17):**
+- 160 Tarifcheck-Originale; 40 `aktiv`, 80 `Ziel fehlt`, 40 `Ausgabe gesperrt`; 80 Originalbilder geprüft, 0 Bildfehler, 0 Bild offen, 0 Entwurf.
+- Die gesamten **80 unzugeordneten** Datensätze tragen den **gleichen** im EINEN Importentscheid gespeicherten Grund `No verified specific/general insurance` und den Quellenstatus `tracking_checked`.
+- Die **40 Format-Sperren** sind exakt vier Gruppen zu je 10: **120×60, 120×600, 160×600, 234×60 Pixel**.
+- Bei diesen Bildmaßen handelt es sich um echte Originalformate, die mit dem realen bestehenden Slot-Vertrag aus RC36 nicht passen. 120×600 / 160×600 sind hochkant, keine bestehenden vertikalen Kategorie-Bannerslots nachgewiesen; 120×60 / 234×60 sind zu schmal für derzeitige breite Bannerplätze. Ein bloßes Absenken der Minima ohne Nachweis einer sinnvollen Darstellung wäre keine KISS-Lösung.
+- Gespeicherter Status `tracking_checked` **ist kein Nachweis**, dass das Original-HTML keine fachliche Zielinformation enthält. Die RC35-Leseregel erkennt lediglich definierte Original-Linkstrukturen (bekannter Tiefenparameter und Erstpartei-Zielpfad), nicht alle möglichen externen Partnerlink-Formate. `No verified specific/general insurance` sagt nur, dass keine spezielle WP-Versicherungsseite und kein ausdrücklicher allgemeiner Vergleich im vom Entscheider gelesenen Text erkannt wurden. Quelle und tatsächlicher URL-Pfad der 80 privaten Originale sind aus dem Screenshot NICHT sichtbar.
+- **Kein weiterer Blind-Release.** Nächster einzig sinnvoller Ursachenbeweis ist Einsicht in die **bereits gespeicherten Original-HREFs und Zielinfos** (datensparsam nur Link-Domain, Pfad-/Parameter-Namen ohne Partner-ID, gespeicherter Provider-Rubrikenname, erkannter Text). Danach im **einen bestehenden Importentscheid** die tatsächlich belegten Linkinformationen verwerten; keine zweite Prüfung, keine nachgelagerte Entscheidung, keine Wiederimporte.
+- **Grenze der vorhandenen Belege:** GitHub enthält Code und synthetische Funktionstests, aber keinen Live-Datenbankexport der 160 Original-HREFs. Eine exakte Korrektur aller 80 aus den Screenshots wäre Spekulation. Auch die 40 „aktiven“ Banner sind als veröffentlicht gezählt, nicht durch einzelne öffentliche Seitenansichten verifiziert.
+
+---
+
 ## 13.11.2026 – RC37 geprüft und veröffentlicht: GENAUEN ABLEHNUNGSGRUND DER ECHTEN 80 BANNER LESEN
 
 - **Realer Ausgangsstand nach RC36:** 160 Tarifcheck-Banner; 40 veröffentlicht, 40 mit gespeichertem Ausgabeblocker (vorwiegend Designslot/Format), 80 ohne gespeicherte fachliche Zielkarte. Screenshot vom Nutzer.
