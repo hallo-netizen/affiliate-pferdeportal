@@ -1,0 +1,131 @@
+{
+  "status": "TEST_CANDIDATE_NOT_LIVE_RELEASE",
+  "version": "0.4.3",
+  "source": "/mnt/data/Texterstellung_0.4.3_CategoryWorker_Bindings_NUR_TESTWORDPRESS.zip",
+  "zip_sha256": "55373d1c388db342a2179353eb05676bc9c07aa09f2719a4fde10ea967d5252a",
+  "tests": {
+    "real_61_no_fill_result.json": {
+      "scenario": "REAL_61_DATA_NO_SYNTHETIC_FILLS",
+      "status": "EXPECTED_REAL_DATA_BLOCK_REPRODUCED",
+      "pass": 17,
+      "total": 17,
+      "checks": {
+        "exact_zip_main_verified": true,
+        "61_real_orders_from_latest_diagnosis": true,
+        "61_unchanged_original_ids": true,
+        "61_original_mini_titles_match": true,
+        "61_no_category": true,
+        "61_no_type": true,
+        "61_no_article_identity": true,
+        "61_no_plan_slot": true,
+        "61_metadata_not_final_from_actual_server_log": true,
+        "zero_items_in_ready_status": true,
+        "title_export_correctly_blocked": true,
+        "k0_export_correctly_blocked": true,
+        "real_orders_unmodified": true,
+        "no_fake_metadata_added": true,
+        "no_wp_posts_written": true,
+        "no_k0_batch_saved": true,
+        "no_test_fixtures_added": true
+      },
+      "plugin_main_sha256": "dab72eb5098fafdbdf010b4be103b23227f4d45c7e02c7252e67938a47cd71a6",
+      "installer_zip_sha256": "55373d1c388db342a2179353eb05676bc9c07aa09f2719a4fde10ea967d5252a",
+      "actual_diagnosis_sha256": "d4691706235598ffd0f37648896e8b8a436c0bcf61868590d296fb6b955ad114",
+      "original_titles_sha256": "a02cb27a74bbba1365b88c7d8de1252cf916c1120132a88264336bd6d188c5d6",
+      "actual_server_reconciliation_reason": {
+        "ORIGINAL_EDITORIAL_METADATA_NOT_FINAL": 61
+      },
+      "observed": {
+        "title_export": {
+          "success": false,
+          "error": "NO_APPROVED_TOPICS_NEED_TITLES"
+        },
+        "k0_export": {
+          "success": false,
+          "error": "NO_APPROVED_READY_ARTICLES"
+        }
+      },
+      "drafts_created": 0,
+      "ready_real_orders": 0,
+      "real_orders_left_unmodified": true,
+      "limits": [
+        "WordPress functions are simulated; no direct access to live wpdb topic_pool",
+        "Historical SEO receipts not re-read from live WP DB; latest real server diagnostic supplied proof of reconciliation",
+        "No artificial category/type/identity/slot inserted",
+        "No external DataForSEO, actual K0 text service or WordPress draft import invoked"
+      ]
+    },
+    "QA_CATEGORY_SOURCE_TRUE_OWNER_RESULT.json": {
+      "status": "PASS",
+      "tests": 12,
+      "total": 12,
+      "checks": {
+        "original_REASSIGNED_single_confirmed_owner": true,
+        "original_REASSIGNED_without_reviewer_held": true,
+        "original_REASSIGNED_wrong_current_category_held": true,
+        "APPROVED_is_not_a_category_vote": true,
+        "no_existing_category_held": true,
+        "original_normal_path_without_old_PPM_planning_gate": true,
+        "normal_path_invalid_source_query_held": true,
+        "normal_path_stale_structure_held": true,
+        "normal_path_missing_term_held": true,
+        "normal_path_article_type_disagreement_held": true,
+        "normal_path_open_category_review_held": true,
+        "normal_path_undecided_area_held": true
+      }
+    },
+    "QA_20_ORIGINAL_OWNER_REGRESSION_RESULT.json": {
+      "pass": 27,
+      "total": 27,
+      "checks": {
+        "new_frei_20_with_original_seo_owner": true,
+        "original_title_worker_eligible_20": true,
+        "original_frei_read_20": true,
+        "title_export_20": true,
+        "title_frozen_repeated_export": true,
+        "title_import_20": true,
+        "k0_export_13": true,
+        "k0_export_7": true,
+        "k0_contract_identical_original": true,
+        "all_20_reserved_once": true,
+        "repeated_13_download_identical": true,
+        "import_first_13": true,
+        "import_remaining_7": true,
+        "no_separate_planning_write": true,
+        "all_20_drafts_and_original_blocks": true,
+        "return_again_no_new_posts": true,
+        "works_without_ppm_runtime": true,
+        "modified_content_duplicate_refused": true,
+        "wrong_article_id_refused": true,
+        "wrong_category_refused": true,
+        "missing_plan_slot_refused": true,
+        "publish_and_legacy_block_meta_preserved": true,
+        "published_transition_blocked": true,
+        "scheduled_publication_blocked": true,
+        "unrelated_post_not_blocked": true,
+        "already_public_post_preserved": true,
+        "old_frei_unchanged": true
+      },
+      "errors": []
+    },
+    "QA_DAILY_CATEGORY_RECONCILE_RESULT.json": {
+      "tests": {
+        "no_daily_schedule_without_explicit_site_confirmation": true,
+        "daily_hook_scheduled_after_confirmation": true,
+        "same_hook_not_scheduled_twice": true,
+        "no_fabricated_source_after_daily_run": true,
+        "schedule_removed_on_deactivation": true
+      },
+      "pass": 5,
+      "total": 5
+    }
+  },
+  "current_wp_server_live_source_rows_read": false,
+  "real_61_expected_state": "61_HELD_AS_IN_LATEST_DIAGNOSIS; UNKNOWN_NUMBER_MAY_ADVANCE_AFTER_ACTUAL_DB_RECONCILE",
+  "synthetic_category_values_inserted_into_real_61": 0,
+  "unresolved_gaps": [
+    "52 category room historically unresolved; must be assigned by original existing category owner, not by blind fill",
+    "WordPress-category baseline live term IDs and currently persisted 61 PSTE rows unavailable offline",
+    "no actual external Google/K0 WordPress end-to-end run"
+  ]
+}
