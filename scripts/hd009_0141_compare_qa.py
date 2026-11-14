@@ -54,9 +54,9 @@ function update_option($k,$value,$autoload=false){
     $GLOBALS['options'][$k]=$value;return true;
 }
 class FakeDB {
-    public $calls=array();
+    public $calls=array(); public $last_error=''; public $fail_read=false;
     function prepare($sql,...$params){$this->calls[]=array('prepare',$sql,$params);return vsprintf(str_replace(array('%s','%d'),array("'%s'",'%d'),$sql),$params);}
-    function get_col($sql){$this->calls[]=array('get_col',$sql);if(strpos($sql,'SELECT DISTINCT category')!==0){throw new Exception('UNEXPECTED DB QUERY');}return array('concept-teleskop','concept-kamera');}
+    function get_col($sql){$this->calls[]=array('get_col',$sql);if(strpos($sql,'SELECT DISTINCT category')!==0){throw new Exception('UNEXPECTED DB QUERY');}if($this->fail_read){$this->last_error='Simulated read failure';return null;} $this->last_error='';return array('concept-teleskop','concept-kamera');}
 }
 $GLOBALS['wpdb']=new FakeDB();
 $GLOBALS['transients']=array();
@@ -67,7 +67,8 @@ $GLOBALS['settings']=array(
     'feed_etag'=>'"2747-ETAG"','feed_last_modified'=>'prior_date',
     'api_last_checked_at'=>time()-100,'refresh_state'=>'success',
     'last_import_feed_id'=>'2747','last_import_adspace_id'=>'568912',
-    'last_import_started_at'=>time()-3605,'last_import_at'=>time()-3600
+    'last_import_started_at'=>time()-3605,'last_import_at'=>time()-3600,
+    'last_match_revision'=>'hd009-match-0.1.41'
 );
 class TestHD009 {
     const IDEALO_REFRESH_LOCK='ppar_idealo_refresh_lock_v1';
@@ -182,6 +183,21 @@ ck(is_wp_error($blocked) && $blocked->get_error_code()==='idealo_feed_not_found'
     'Unavailable 2901 feed causes clean failure without mutating current 2747 products');
 ck($GLOBALS['options']['live_idealo']===$before,
     'Negative access test preserves production configuration');
+$oldrule=$GLOBALS['settings']; $oldrule['last_match_revision']='hd009-match-0.1.37';
+ck(!$p->allowed($oldrule),'Old-rule 2747 baseline rejected, must rematch automatically first');
+$save=$GLOBALS['settings'];
+$GLOBALS['settings']['last_match_revision']='hd009-match-0.1.37';
+$legacy=$p->run();
+ck(is_wp_error($legacy)&&$legacy->get_error_code()==='hd009_preview_baseline_changed',
+    'No misleading cross-version 2747-vs-2901 result or unnecessary 2901 download');
+$GLOBALS['settings']=$save;
+$GLOBALS['wpdb']->fail_read=true;
+$dbfail=$p->run();
+ck(is_wp_error($dbfail)&&$dbfail->get_error_code()==='hd009_compare_baseline_db_failed',
+    'Failed 2747 database SELECT never reported as zero hobbies');
+$GLOBALS['wpdb']->fail_read=false;
+ck($GLOBALS['options']['live_idealo']===$before&&($GLOBALS['settings']['feed_id']??'')==='2747',
+    'Rejected or failed comparison never changes production feed or options');
 unlink($f);
 echo "FULL_MATCHER_SAFE_2747_2901_COMPARISON_TESTS_PASS\n";
 '''.replace('__EXTRACTED__',source)
