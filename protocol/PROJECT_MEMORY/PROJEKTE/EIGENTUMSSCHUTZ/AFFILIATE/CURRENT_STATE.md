@@ -1,3 +1,22 @@
+## 14.11.2026 – RC39 EIN FESTER KATEGORIE-OWNER + OBERKATEGORIE-VERERBUNG / KISS
+
+**Vom Nutzer gewünschter Entscheid:** Kategoriebestand bleibt unverändert. Stabile Versicherungsbezeichnungen werden im bereits vorhandenen Importentscheider fest zugeordnet. Existiert eine konkrete R3-Seite, wird ihre echte WP-Seite mit ihren Unterkategorien als Ziel gespeichert. Existiert sie nicht, darf die **nachweislich relevante vorhandene R2-Oberkategorie** mit ihrem vorhandenen Unterbaum übernehmen. Nur **ausdrücklich allgemeine Versicherungsvergleiche** gelangen unter die gesamte R1-Hauptkategorie mit allen Kindern; eine bloße unbekannte Tarifcheck-Werbung darf nicht automatisch zu einer allgemeinen Versicherung werden. Unterschiedliche konkrete Versicherungsprodukte bleiben getrennt. Kredite/Finanzen dürfen nicht in die Versicherungswelt.
+
+**RC39 (0.1.36-rc39) konkret:** Nur der EINE vorhandene `hb_rc31_insurance_banner_plan()`-Entscheider in `includes/trait-ppar-output-objects.php` erweitert. Feste Bezeichnungsvarianten (z. B. Kfz→Autoversicherung, PKV→Private Krankenversicherung, Hausrat→Hausratversicherung, Wohngebäude/ae/ä) werden nur auf **bestehende verifizierte WP-Zielknoten** abgebildet. Wenn kein R3 existiert, darf eine im aktiven Baum schon vorhandene, explizit passende Endkategorie ihre echte Elternseite bestimmen; alternativ die feste passende R2-Gruppe. Das vom ausgewählten realen Elternknoten ausgehende Zielset ist eine einzige gespeicherte Zuordnung und nicht mehrfach gestreute Bannerkopien. Keine Änderung an Ziel-IDs, WordPress-Kategorien, Layout, Bildskalierung, Werbeplatzvorlagen, Importen oder anderen Portalen.
+
+**Vollständige QA mit Original-PHP statt umgeschriebenem Mock:** GitHub Actions **SUCCESS**: https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43578230776
+- RC23–RC38 einschließlich ursprünglicher Anbieter (Amazon/eBay/Idealo) und aller 8 Bannerformate/32 Seitenformatfälle erfolgreich.
+- Neue echte PHP-Zuordnungsfälle: Hausrat-Kurzform zum echten R3; Kfz-Synonym zum vorhandenen Auto-R3 statt Motorrad; PKV zu Private Krankenversicherung; nur Endkategorie vorhanden → vorhandene R2 mit Unterbaum; spezifischer R3 fehlt → feste passende R2 mit Unterbaum; fachfremder Nachbarzweig ausgeschlossen; unbekanntes Tarifcheck-Banner ohne echten Versicherungsbeweis **blockiert**; zwei widersprüchliche Versicherungsarten **blockiert**; allgemeiner echter Vergleich erreicht weiterhin R1.
+- Genau drei bereits vorhandene Original-Plugin-Dateien geändert (Zielentscheid, Versionskopf, readme). **Kein** zweiter Matcher, keine Datenbanktabelle, keine Frontendentscheidung, kein Bild-Fix.
+
+**Freigegebene Test-ZIP:** https://github.com/hallo-netizen/affiliate-pferdeportal/releases/download/hab-affiliate-rc39-fixed-parent-mapping-20261114/HAB_Bewahr_Affiliate_RC39_FIXED_TARGET_KISS_TEST.zip (2.355.709 Bytes, SHA256 `135c97298a20da952d2ec0c1a127123cde54cc903ffbdc06f5f2e2761aa9bcfa`).
+
+**Live-Grenze:** Vor RC39 letzter echter Nutzerstand 160 Tarifcheck-Banner, 80 aktiv, 80 ohne Ziel, 0 Format-Sperren. Die 80 privaten Original-Links liegen weiterhin NICHT im GitHub-Quellarchiv. Die neue feste Namenszuordnung kann nur helfen, wenn ein nachweisbarer Produktbegriff aus einer gespeicherten Originalquelle ausgelesen wird; bei 80 anonymen Tracking-Links ohne verwertbaren Produktnamen **müssen** unklare Banner weiterhin gesperrt bleiben. Kein Versprechen einer 160/160-Abdeckung, keine Behauptung einer echten Live-Seitenanzeige.
+
+**Nächster Nutzerschritt:** RC39 als vorhandene HAB-004-Affiliate-Zentrale installieren (kein zusätzliches Plugin), Affiliate-Zentrale → Werbemittel & Ausspielung dreimal öffnen (bestehender 60er-Batch ohne Reimport). Echten Screenshot prüfen: aktiv / Ziel fehlt / gesperrt. Bei unveränderten 80 unklaren Originalen ist **Quelle nicht eindeutig**, keine pauschale Fehlzuordnung erzwingen. Keine weitere Pluginversion ohne echte Original-HREF-/Rubrik-Belege.
+
+---
+
 ## 14.11.2026 – Nachprüfung: 80 ungeklärte Ziele – Plugin oder fehlende Kategorie? / Veröffentlichung belegen
 
 **Reines Quell-Audit erfolgreich (kein Pluginrelease, keine WP-Änderung):** https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43577174436
