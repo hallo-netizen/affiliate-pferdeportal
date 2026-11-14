@@ -1,3 +1,16 @@
+## 14.11.2026 – VERBINDLICHE ÜBERGABE: TARIFCHECK 160 / 80 / 80, ALLE FEHLER UND NÄCHSTER SCHRITT
+
+**Status: NICHT GELÖST.** Letzter echter WordPress-Stand nach RC40: 160 Tarifcheck-Banner, 80 als aktiv gemeldet, 80 ohne Ziel, 0 Formatfehler. RC39 und RC40 brachten bei den 80 ungelösten Bannern keinen Fortschritt. RC41 wurde nur auf GitHub mit echtem PHP-End-to-End-Verlauf erfolgreich getestet, **nicht zur Installation ausgegeben** und behebt nicht automatisch vor RC41 verlorene Alt-HTML-Attribute.
+
+**Bewiesene Hauptursache:** Original-HTML wird beim Import nach `creative_library_parse_html_codes()` in `creative_library_normalize_row()` durch `sanitize_text_field()` verarbeitet, wodurch HTML-Attribute verschwinden **bevor** die RC40-Auslesung beginnt. RC40 meldet den unvollständigen Inhalt dennoch als gelesen. Reproduktionsbeweis: https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43582129807. RC41 korrigiert diese Reihenfolge für künftig eingelesene Originale, Beleg: https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43582511129. **Ob die 80 echten Altbanner alle dadurch betroffen sind, ist noch unbewiesen.**
+
+**Zwingender NÄCHSTER SCHRITT (ohne Benutzer-Screenshots und Neuimport):** Im vorhandenen HAB-004-/Affiliate-Zentrale-Plugin **eine einzige nur lesende, admin-geschützte Exportfunktion** für die 160 bereits gespeicherten Tarifcheck-Banner + echten WordPress-Versicherungsbaum erstellen und mit dem Original-PHP-Plugin gegen Datenverlust/Schreibfreiheit testen. Benutzer betätigt anschließend **einmal den Export-Button** und lädt nur **eine Datei** hoch. Erst die echten Daten dieser Datei entscheiden einmalig über die 80 fehlenden Zuordnungen. Keine neue separate Zuordnungslogik, keine zweiten Prüfungen, keine neuen Worker/Tabellen, keine Bildänderungen und keine erneute Pluginfreigabe auf Verdacht. **Der Export ist derzeit noch NICHT umgesetzt; nicht so darstellen, als stünde ein Button bereit.**
+
+**Vollständige Fehler-, Versions-, Beweis- und Arbeitsakte:**
+[`TARIFCHECK_160_BANNER_FEHLER_UND_NAECHSTER_SCHRITT_20261114.md`](./TARIFCHECK_160_BANNER_FEHLER_UND_NAECHSTER_SCHRITT_20261114.md)
+
+---
+
 ## 14.11.2026 – QUELLEN-RETTUNG OHNE NEUES PLUGIN: ORIGINALBILDER UND TRACKINGLINKS NOCH IM BESTAND
 
 **Nachfrage „weiter, prüfe“:** GitHub-Baum von RC41 vollständig auf Dateien mit Tarifcheck-Roh-Bannercodes, exportierten Tabellen, HTML/CSV/SQL und Backups kontrolliert (1560 GitHub-Dateien). **Keine vollständigen 160 ursprünglichen HTML-Bannercodes oder Live-WP-Datenbankkopie vorhanden.** Die private WordPress-Datenbank konnte nicht unmittelbar aus GitHub abgefragt werden.
