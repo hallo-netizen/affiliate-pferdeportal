@@ -2062,3 +2062,10 @@ Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wa
 - W4-SEO-Ableitung 79 Produktseiten + 105 Produktkategorien = 184 eindeutige Begriffe, 79/79 Quellzeilen exakt gegen Campus-W4 geprüft. Offline PHP-/ZIP-/Mock-Tests PASS. Bezahlaufrufe und WordPress-Importschreiber technisch unerreichbar.
 - ZIP als exakter Git-Blob a28507fc35561144f1ada9aa400a39bca229b9fd im Wassertechnik-Pluginbüro; SHA256 b80d18ea9a4a2eb32b73a6887e417ca18890ef6b27c2b507dfeefbcb6d03c450. Keine WP-/Fremdportal-Dateien verändert.
 - **Weiter:** echte Wassertechnik-WP-Testseite für kostenlosen 184er Preflight/JSON-Export; nach expliziter Freigabe spätere bezahlte SEO- und Importphase separat.
+
+
+## 14.11.2026 Wassertechnik WT001 0.1.1 – gesamte obere W4-Seitenstruktur im SEO-Profil
+- **Ursache:** 0.1.0 prüfte nur die 79 Produktseiten/105 Inhaltsrubriken. Hauptseiten, Zwischen-/Gruppenseiten und Industrielandings fehlten.
+- **Korrektur:** 0.1.1 erfasst 8 + 19 + 1 + 6 + 79 + 105 = 218 unterscheidbare W4-SEO-Kandidaten, keine Dubletten oder ausgelassene Begriffe. Gleiche Pluginidentität; 0.1.0 bleibt nur Historie.
+- **Sicherheit:** Alte bezahlte DataForSEO-POST-Abfragen/Methoden komplett aus der Vorschau entfernt. Keine WordPress-Content-Schreibfunktionen. PHP-Lint, ZIP-Test, Mock-Preflight und Negativprüfungen PASS. Kein Live-WP, keine echten API-Kosten.
+- **Datei:** WT001 0.1.1 im Wassertechnik-Pluginbüro, Git-Blob cf457f42092c087984fc155dfa08b5eda7fd36b2; SHA256 01d835f6353a5d9ae2041155b3d2331c424ace48606a48ffac03e58cc6dcfd34.
