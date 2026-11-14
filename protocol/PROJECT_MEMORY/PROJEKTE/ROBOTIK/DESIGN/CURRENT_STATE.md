@@ -1,5 +1,11 @@
 # ROBOTIK – DESIGN – CURRENT
 
+## AKTUELL 14.11.2026 – V64: Ursache unruhiges Megamenü im ORIGINALCODE bestätigt; KISS-Lösung nur vorgeschlagen
+- Nutzer will künftig **optisch gleichmäßiges Menü**, ohne C-Vertrag zu verletzen. Original Design `robotik-strukturdesign` **0.2.3** direkt aus Library-Installer geprüft: nur 7 `ROOTS`, also Humanoide nicht verlinkbar; direkt unter Welt liegende Produkttypen werden als scheinbar leere Überschriften statt als gebündelte Roboterlinks gezeichnet; CSS verteilt Blockhöhen nicht; für eingeloggte Admins sind Draftseiten eingeblendet, für Besucher nicht.
+- Dokumentierte V64-Lösung `DESIGN/V64_MEGAMENUE_HARMONISIERUNG_20261114.md`: echtes Seiten-/Kategorieprofil UNVERÄNDERT, **direkte Robotertypen in rein optischer Gruppe bündeln**, echte Fachgruppen beibehalten, 2–4 optisch ausgeglichene Spalten, achte Welt ergänzen, Drafts nicht in normale öffentliche Navigation, Rubriken erst auf letzter Produktseite; Industrie-Sonderfall bleibt. Keine künstlichen Unterkategorien zum Füllen, mindestens ungefähr 3–5 plausible Artikel pro sinnvoller WP-Rubrik. 55/141 Produkttypen haben 1 Rubrik (kein automatischer Fehler), 17 zwei, 69 drei, 296 Rubriken mit jeweils 3–4 Themenrichtungen.
+- **Noch KEIN Design-Plugin geändert und KEIN Frontend freigegeben**. Bei Freigabe vor Release einen Offlinevergleich und Linktest aller veröffentlichten Seiten + Mobil/8 Welten in einer Runde, dann EIN bestehendes Design-Plugin aktualisieren. Kategorie-Plugin 0.4.9 und laufenden WordPress-Import 16/227 aus dem bisherigen Zwischenexport nicht verändern.
+
+
 ## NEUESTER STAND 12.11.2026 – Design 0.2.3 optisch vom Nutzer als OK bestätigt
 - Keine weitere Design-ZIP: Nutzer sieht Header/Footer als okay. Unterschiedliche Menü-Tiefe fachlich korrekt.
 - Original-ZIP-PHP und eingebetteter Kategorieplan 0.4.2: **104/104 WordPress-Seiten im lokalen Mega-Menü verlinkt** (7 Hauptseiten, 25 Zwischenbereiche, 72 Produkte).
