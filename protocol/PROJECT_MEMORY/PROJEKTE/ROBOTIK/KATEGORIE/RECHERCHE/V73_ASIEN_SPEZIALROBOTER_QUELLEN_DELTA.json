@@ -1,0 +1,437 @@
+{
+  "schema": "robotik-v73-recherche-delta-kein-zweitmaster-v1",
+  "date": "2026-11-14",
+  "scope": [
+    "Haushalt",
+    "Garten",
+    "Freizeit",
+    "Sport",
+    "Bildung",
+    "Pflege",
+    "Humanoide"
+  ],
+  "excluded": [
+    "Gewerbe",
+    "Industrie",
+    "Humanoide/Arbeit"
+  ],
+  "labels": [
+    "Produkt",
+    "Projekt",
+    "Idee"
+  ],
+  "finds": [
+    {
+      "id": "V73-001",
+      "name": "Schminkroboter Cosmetic Dresser",
+      "kennzeichnung": "Projekt",
+      "welt": "Pflege",
+      "urheber": "Aoyama-Gakuin-Universität / Kao, Japan",
+      "quelle": "https://www.aoyama.ac.jp/center104/2025/event_20250930_01",
+      "owner": "Schminkroboter",
+      "entscheidung": "NEUER_TYPKANDIDAT",
+      "anmerkung": "2025 gezeigter Forschungsprototyp; Kamera, fein dosierter Pinseldruck; einzelne Funktionen noch Entwicklung. In früherem Gespräch war Schminkrobotik schon als Thema erwähnt – jetzt zusätzliche Hochschul-Primärquelle."
+    },
+    {
+      "id": "V73-002",
+      "name": "Anpassbares Roboterkissen von Ax Robotix",
+      "kennzeichnung": "Produkt",
+      "welt": "Haushalt",
+      "urheber": "Ax Robotix / J-GoodTech, Japan",
+      "quelle": "https://jgoodtech.smrj.go.jp/corp/info/JC0000000048513?createdLocale=en_US&preview=false&tabSelected=appeal",
+      "owner": "Roboterkissen",
+      "entscheidung": "NEUER_TYPKANDIDAT",
+      "anmerkung": "Herstellerprofil nennt Verkauf formverändernder Schlaftechnik und Tests bei Pflege-/Übernachtungseinrichtungen; keine medizinische Wirksamkeit abgeleitet."
+    },
+    {
+      "id": "V73-003",
+      "name": "KI-Kissen passt seine Höhe an Schlafposition an",
+      "kennzeichnung": "Projekt",
+      "welt": "Haushalt",
+      "urheber": "National Institute of Technology Oita / Waseda, Japan",
+      "quelle": "https://www.jstage.jst.go.jp/article/jje/61/Supplement/61_E2-04/_article/-char/en",
+      "owner": "Roboterkissen",
+      "entscheidung": "SAME_TYP_REGISTER",
+      "anmerkung": "2025 wissenschaftliche Konferenzpräsentation; gleicher Robotertyp wie V73-002, kein zusätzlicher Typ."
+    },
+    {
+      "id": "V73-004",
+      "name": "Forschungsroboter zum Bettenmachen",
+      "kennzeichnung": "Projekt",
+      "welt": "Haushalt",
+      "urheber": "Nara Institute of Science and Technology / Nagoya University, Japan",
+      "quelle": "https://www.jstage.jst.go.jp/article/jsmermd/2017/0/2017_2P2-F10/_article/-char/en",
+      "owner": "Bettmachroboter",
+      "entscheidung": "NEUER_TYPKANDIDAT",
+      "anmerkung": "2017 Versuche mit Greifarm und Spezialgreifer zum Einstecken von Laken; dies ist eine spezielle Roboteraufgabe, nicht bloß ein Humanoid, der zufällig ein Bett macht."
+    },
+    {
+      "id": "V73-005",
+      "name": "Intelligenter Haushalts-Bügelroboter",
+      "kennzeichnung": "Idee",
+      "welt": "Haushalt",
+      "urheber": "Hangzhou Youdi Industrial Design, China",
+      "quelle": "https://patents.google.com/patent/CN114672977A/zh",
+      "owner": "Bügelroboter",
+      "entscheidung": "NEUER_TYPKANDIDAT",
+      "anmerkung": "Chinesische Patentanmeldung für Kleidung auf Formbügel, gezielte Dampfbewegung und Luftsteuerung. Patent kein Produktbeweis."
+    },
+    {
+      "id": "V73-006",
+      "name": "Roboterarm zum Brillenreinigen",
+      "kennzeichnung": "Idee",
+      "welt": "Haushalt",
+      "urheber": "Guangzhou Huaruibote Technology, China",
+      "quelle": "https://patents.google.com/patent/CN112346262A/en",
+      "owner": "Brillenreinigungsroboter",
+      "entscheidung": "NEUER_TYPKANDIDAT",
+      "anmerkung": "Greifarm bewegt Brille zwischen Reinigung mit Ultraschall und Wasserspülung. Nicht nur rotierende Bürsten."
+    },
+    {
+      "id": "V73-007",
+      "name": "Vollautomatische Brillenreinigung und Trocknung",
+      "kennzeichnung": "Idee",
+      "welt": "Haushalt",
+      "urheber": "Shanghai Jinglip Internet Technology, China",
+      "quelle": "https://patents.google.com/patent/CN117031786A/en",
+      "owner": "Brillenreinigungsroboter",
+      "entscheidung": "SAME_TYP_REGISTER",
+      "anmerkung": "Weitere Patentanmeldung zur Brillenreinigung mit Bewegung und Trocknung, kein zweiter Fachtyp."
+    },
+    {
+      "id": "V73-008",
+      "name": "Katzen-Gesundheitsroboter mit Vitalwertsensoren",
+      "kennzeichnung": "Idee",
+      "welt": "Haushalt",
+      "urheber": "Silla University / HT Systems, Südkorea",
+      "quelle": "https://patents.google.com/patent/KR20250088839A/en",
+      "owner": "Haustierroboter",
+      "entscheidung": "BESTEHENDER_TYP_REGISTER",
+      "anmerkung": "Patententwurf mit Katzen-Aufnahmebox und Radar-/Temperatur-/Gewichts-Messung; Gesundheitsfunktionen nicht als klinisch validiert bezeichnen."
+    },
+    {
+      "id": "V73-009",
+      "name": "Modulare individuelle Haustierbetreuung",
+      "kennzeichnung": "Idee",
+      "welt": "Haushalt",
+      "urheber": "Korea University of Technology and Education / Sejong University",
+      "quelle": "https://patents.google.com/patent/KR20250003177A/en",
+      "owner": "Haustierroboter",
+      "entscheidung": "BESTEHENDER_TYP_REGISTER",
+      "anmerkung": "Patentanmeldung kombiniert unterschiedliche Betreuungsmodule und Cloud-Dienste. Das Patent wurde 2026 laut Akten abgelehnt; historische Fundidee bleibt zulässig."
+    },
+    {
+      "id": "V73-010",
+      "name": "Smart-Home-Roboter für indirekte Familienfürsorge",
+      "kennzeichnung": "Idee",
+      "welt": "Pflege",
+      "urheber": "Sungshin Women’s University, Südkorea",
+      "quelle": "https://patents.google.com/patent/KR20250114583A/en",
+      "owner": "Pflegebegleiter",
+      "entscheidung": "BESTEHENDER_TYP_REGISTER",
+      "anmerkung": "Patent beschreibt Verbindung aus Körperdaten, Wohnsensorik und sichtbarer Roboterrückmeldung; kein selbstständig handelnder Pflegeprototyp belegt."
+    },
+    {
+      "id": "V73-011",
+      "name": "Ace spielt echtes Tischtennis gegen Spitzenspieler",
+      "kennzeichnung": "Projekt",
+      "welt": "Sport",
+      "urheber": "Sony AI, Japan",
+      "quelle": "https://ai.sony/news/sony-ai-announces-breakthrough-research-in-real-world-artificial-intelligence-and-robotics",
+      "owner": "Tischtennis-Spielroboter",
+      "entscheidung": "BESTEHENDER_TYP_REGISTER",
+      "anmerkung": "2026 publiziertes Experiment unter Wettkampfbedingungen; vorhandene Fachseite Tischtennis-Spielroboter nicht duplizieren."
+    },
+    {
+      "id": "V73-012",
+      "name": "Loving Baby – Kinder-Emotionsroboter",
+      "kennzeichnung": "Projekt",
+      "welt": "Bildung",
+      "urheber": "HKUST / Education University of Hong Kong",
+      "quelle": "https://emia.hkust.edu.hk/news/iip-graduates-clinch-four-local-and-international-awards-their-innovative-emotional-support",
+      "owner": "Lern-/Begleitroboter",
+      "entscheidung": "BESTEHENDER_TYP_REGISTER",
+      "anmerkung": "2026 preisgekröntes Forschungsprojekt mit interaktivem Spiel und emotionaler Unterstützung; nicht gleich mit echtem Säuglingspfleger verwechseln."
+    },
+    {
+      "id": "V73-013",
+      "name": "Kuschelroboter zeigt Erinnerungen ohne Worte",
+      "kennzeichnung": "Projekt",
+      "welt": "Freizeit",
+      "urheber": "Universität Tokio, JSK Laboratory, Japan",
+      "quelle": "https://www.jsk.t.u-tokyo.ac.jp/cgi-bin/bib/bib2htm.cgi?file=25&lang=ja&mode=all",
+      "owner": "Roboterkuscheltiere",
+      "entscheidung": "BESTEHENDER_TYP_REGISTER",
+      "anmerkung": "2026 dokumentierte wissenschaftliche Präsentation und Ausstellung mit Plüschtierroboter und nonverbaler Erinnerungskommunikation."
+    },
+    {
+      "id": "V73-014",
+      "name": "Tragbarer Kuschelroboter umarmt den Arm",
+      "kennzeichnung": "Projekt",
+      "welt": "Freizeit",
+      "urheber": "Kansai University, Japan",
+      "quelle": "https://www.kansai-u.ac.jp/reed_rfl/archive/36_1.php",
+      "owner": "Begleitroboter",
+      "entscheidung": "BESTEHENDER_TYP_REGISTER",
+      "anmerkung": "Universitätsprojekt: Plüschfigur klammert sich am Arm fest und vermittelt Signale durch Druck und Bewegung."
+    },
+    {
+      "id": "V73-015",
+      "name": "Küchenroboter lernt Gemüse-, Dressings- und Teigaufgaben",
+      "kennzeichnung": "Projekt",
+      "welt": "Haushalt",
+      "urheber": "University of Electro-Communications, Japan",
+      "quelle": "https://www.robo.lab.uec.ac.jp/ja/project/cooking-robot/",
+      "owner": "Kochroboter",
+      "entscheidung": "BESTEHENDER_TYP_REGISTER",
+      "anmerkung": "2024 Forschungsliste mehrerer Kochoperationen und menschlicher Demonstrationen; vorhandene Kochroboter-Seite vertiefen."
+    },
+    {
+      "id": "V73-016",
+      "name": "Sofa mit eigenem Bodenreinigungsantrieb",
+      "kennzeichnung": "Idee",
+      "welt": "Haushalt",
+      "urheber": "Chinesische Möbelerfinder / Patentanmeldung",
+      "quelle": "https://patents.google.com/patent/CN223695405U/zh",
+      "owner": "Reinigungsroboter / intelligente Möbel",
+      "entscheidung": "GRENZFALL_REGISTER",
+      "anmerkung": "Sofa integriert motorisierten Putzmechanismus für seinen Unterboden; Möbelstück ist nicht automatisch eine eigenständige Roboterklasse."
+    },
+    {
+      "id": "V73-017",
+      "name": "Sofa mit rotierendem und selbstreinigendem Sitzpolster",
+      "kennzeichnung": "Idee",
+      "welt": "Haushalt",
+      "urheber": "Chinesische Patentanmeldung 2025",
+      "quelle": "https://patents.google.com/patent/CN223640425U/zh",
+      "owner": "Reinigungsroboter / intelligente Möbel",
+      "entscheidung": "GRENZFALL_REGISTER",
+      "anmerkung": "Mechanismus reinigt die Polsterfläche des Sofas. Interessanter Entwurf, aber zunächst automatisiertes Möbel, keine eigene Fachseite."
+    },
+    {
+      "id": "V73-018",
+      "name": "KI-Kommunikationsroboter für Haustiere",
+      "kennzeichnung": "Idee",
+      "welt": "Haushalt",
+      "urheber": "Hanyang University ERICA, Südkorea",
+      "quelle": "https://patents.google.com/patent/KR20260024553A/en",
+      "owner": "Haustierroboter",
+      "entscheidung": "BESTEHENDER_TYP_REGISTER",
+      "anmerkung": "2026 Hochschulpatent für KI-Kommunikation mit Haustieren; Plattform/Anwendung ohne eigenständigen Gerätetyp."
+    },
+    {
+      "id": "V73-019",
+      "name": "Zweiarmiger Küchen-Lernroboter CURI",
+      "kennzeichnung": "Projekt",
+      "welt": "Haushalt",
+      "urheber": "Chinese University of Hong Kong",
+      "quelle": "https://cuhkintouch.cpr.cuhk.edu.hk/2025/01/say-hello-to-your-all-rounded-robot-butler/",
+      "owner": "Kochroboter / Haushaltsassistent",
+      "entscheidung": "BESTEHENDER_TYP_REGISTER",
+      "anmerkung": "2025 Forschung: zweihändiger Roboter lernt Haus-/Küchenbewegungen; Universität sagt ausdrücklich, dass er noch kein komplettes Gericht gekocht hat."
+    },
+    {
+      "id": "V73-020",
+      "name": "Einschlaf-Kuschelroboter zum Streicheln und Beruhigen",
+      "kennzeichnung": "Projekt",
+      "welt": "Freizeit",
+      "urheber": "Seikei University / Hitotsubashi University, Japan",
+      "quelle": "https://www.jstage.jst.go.jp/article/pscjspe/2024S/0/2024S_454/_article/-char/en",
+      "owner": "Begleitroboter",
+      "entscheidung": "BESTEHENDER_TYP_REGISTER",
+      "anmerkung": "2024 Fachkongress zu Robotik-Kuschelkissen und Einschlaf-Interaktion; kein medizinischer Therapieeffekt behauptet."
+    },
+    {
+      "id": "V73-021",
+      "name": "Automatische Tierwaschkammer mit Warmluft",
+      "kennzeichnung": "Idee",
+      "welt": "Haushalt",
+      "urheber": "Jiangsu Xingguang, China",
+      "quelle": "https://patents.google.com/patent/CN223943500U/zh",
+      "owner": "Tierwaschroboter V68_N01",
+      "entscheidung": "VORHANDENER_V68_KANDIDAT",
+      "anmerkung": "2026 Gebrauchsmuster zur Tierwäsche mit Sprühen und Warmluft; zusätzliches Patent, aber kein neuer Robotertyp, keine unabhängige Tierwohlprüfung."
+    }
+  ],
+  "source_url_count": 21,
+  "status_counts": {
+    "Projekt": 10,
+    "Produkt": 1,
+    "Idee": 10
+  },
+  "new_type_candidates": [
+    {
+      "name": "Schminkroboter",
+      "welt": "Pflege",
+      "facets": [
+        {
+          "name": "Technik",
+          "article_directions": [
+            "Kameras erfassen Gesichtsform und Hauttöne",
+            "Wie dosiert ein Roboter den Pinseldruck?",
+            "Pinselwechsel und unterschiedliche Werkzeuge",
+            "Wie verhindert ein Roboter ungleichmäßiges Auftragen?"
+          ]
+        },
+        {
+          "name": "Anwendung",
+          "article_directions": [
+            "Welche Schminkschritte wurden demonstriert?",
+            "Unterschiedliche Hauttypen und Formen",
+            "Hygiene und Reinigung der Schminkwerkzeuge",
+            "Sicherheit bei Augen und bewegtem Gesicht"
+          ]
+        },
+        {
+          "name": "Forschung",
+          "article_directions": [
+            "Japanischer Cosmetic-Dresser-Prototyp 2025",
+            "Zusammenarbeit mit Kosmetikkonzern Kao",
+            "Unterschied zu einfachen Make-up-Druckern",
+            "Welche Technik ist noch Forschungsarbeit?"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Roboterkissen",
+      "welt": "Haushalt",
+      "facets": [
+        {
+          "name": "Mechanik",
+          "article_directions": [
+            "Höhe und Winkel automatisch verändern",
+            "Drucksensoren erkennen Positionswechsel",
+            "Luftkammern gegen mechanische Verstellung",
+            "Lautstärke und Energie im Schlaf"
+          ]
+        },
+        {
+          "name": "Schlafalltag",
+          "article_directions": [
+            "Seitenlage und Rückenlage unterscheiden",
+            "Einstellung für Lesen im Bett",
+            "Nutzungs- und Hygienefragen",
+            "Grenzen von individuellen Körperanpassungen"
+          ]
+        },
+        {
+          "name": "Markt & Forschung",
+          "article_directions": [
+            "Ax Robotix in Japan: Gerät und Forschungsstand",
+            "Unterschied zu starren Nackenkissen",
+            "KI-Kissen der Oita-Hochschule",
+            "Wie misst man den tatsächlichen Nutzen?"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bettmachroboter",
+      "welt": "Haushalt",
+      "facets": [
+        {
+          "name": "Greiftechnik",
+          "article_directions": [
+            "Textilien falten, greifen und glätten",
+            "Wie wird ein Laken unter die Matratze gesteckt?",
+            "Kraftsensoren und Greiffinger",
+            "Was passiert mit dünnen oder dehnbaren Laken?"
+          ]
+        },
+        {
+          "name": "Alltag",
+          "article_directions": [
+            "Welche Bettarten sind geeignet?",
+            "Matratzenhöhe und nötiger Platz",
+            "Grenzen beim Kissen- und Deckenbeziehen",
+            "Sicherheit und Zeitaufwand in Wohnungen"
+          ]
+        },
+        {
+          "name": "Forschung",
+          "article_directions": [
+            "NAIST-Greifroboter von 2017",
+            "Unterschied zur allgemeinen Haushaltsassistenz",
+            "Warum Textilien eine schwere Roboteraufgabe sind",
+            "Welcher Entwicklungsschritt fehlt zur Alltagsanwendung?"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bügelroboter",
+      "welt": "Haushalt",
+      "facets": [
+        {
+          "name": "Kleidung",
+          "article_directions": [
+            "Hemd, Hose und Kleid unterschiedlich behandeln",
+            "Empfindliche Textilien und Temperatur",
+            "Faltenbildung an Kragen und Ärmeln",
+            "Wann ist Dampf geeignet?"
+          ]
+        },
+        {
+          "name": "Technik",
+          "article_directions": [
+            "Aufblasbarer Formbügel als Halter",
+            "Gesteuerte Dampfdüse und Fahrweg",
+            "Luftführung zum Formen und Trocknen",
+            "Bedienung und Sicherheitsabschaltung"
+          ]
+        },
+        {
+          "name": "Entwicklung",
+          "article_directions": [
+            "Chinesisches Haushalts-Bügelpatent von 2022",
+            "Roboter gegen Dampf-Bügelpuppe abgrenzen",
+            "Größen und Automatisierungsgrenzen",
+            "Was ist über funktionierende Prototypen bekannt?"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Brillenreinigungsroboter",
+      "welt": "Haushalt",
+      "facets": [
+        {
+          "name": "Verfahren",
+          "article_directions": [
+            "Ultraschallbad gegen mechanisches Wischen",
+            "Reinigung von Fassungen und Nasenpads",
+            "Trocknen ohne neue Wasserflecken",
+            "Was vertragen beschichtete Gläser?"
+          ]
+        },
+        {
+          "name": "Mechanik",
+          "article_directions": [
+            "Greifarm bewegt Brillen zwischen Bädern",
+            "Automatisches Klemmen und Drehen",
+            "Bürstenbewegung und Druckregelung",
+            "Fehler bei randlosen Brillen"
+          ]
+        },
+        {
+          "name": "Einsatz",
+          "article_directions": [
+            "Chinesische Patente für Brillenroboter",
+            "Abgrenzung zum gewöhnlichen Ultraschallgerät",
+            "Reinigungsflüssigkeiten und Hygiene",
+            "Einsatz in privaten Haushalten und bei Optikern"
+          ]
+        }
+      ]
+    }
+  ],
+  "new_type_candidate_count": 5,
+  "candidate_facet_count": 15,
+  "candidate_topic_count": 60,
+  "wordpress_changes": 0,
+  "plugin_changes": 0,
+  "design_changes": 0,
+  "paid_api_calls": 0,
+  "note": "Nur quellenbelegte Recherche-Delta, keine WordPress-, SEO- oder Masteraufnahme; keine zweite Datenbank."
+}
