@@ -106,3 +106,11 @@
 - **Genau nächste Handlung:** Nutzer installiert **nur 0.4.0** auf separater TEST-WP; dort selbst alte Plugins deaktivieren, nicht auf Live. Linke Navigation `Texterstellung → Diagnose` vor dem ersten echten Versuch; danach `Sofortartikel`, echte Kategorie und Rücklauf testen. Bericht als JSON bereitstellen; Fehler nur nach Datenbeweis reparieren.
 
 **Status:** Isoliertes Paket und GitHub-Abnahme fertig; reale WordPress-Testabnahme offen.
+
+
+## Schritt 9 – 14.11.2026: Testaktivierung auf echter WP-Seite blockiert
+- **Echter Nutzer-Screenshot 08:09:** WordPress-Aktivierung auf Nutzer-Testseite `oliver-beil.de` zeigt sofort `TEXTERSTELLUNG_TEST_ONLY` mit Anforderung `WP_ENVIRONMENT_TYPE=staging` in wp-config.php. **Plugin-Eigenfehler in der Aktivierungssperre**, kein Nachweis eines WP-Problems.
+- **Quellnachweis aus 0.4.0 Original-ZIP:** `texterstellung/texterstellung.php`, `TXE_Workshop::activate()` ruft `permitted()` auf und `wp_die(...)`, wenn WordPress nicht als Staging erkannt wird. Dieser Blocker macht das Plugin auf einer legitimen Testinstallation mit Standard-WP-Umgebung unbenutzbar; lokale QA hat diese reale Variante nicht abgedeckt.
+- **Korrekturziel 0.4.1:** Aktivierung ohne wp-config-Änderung zulassen; **alle produktiven Plugin-Aktionen bis zur bewussten Admin-Bestätigung im Backend sperren**. Bestätigung an genau diese WordPress-Website binden; beim Kopieren auf eine andere Site erneut bestätigen; eigene Datensätze und alte Plugins unverändert. Keine WordPress-Core-/Frontendänderungen, keine SEO-Doppelprüfung, keine externe Verbindung nötig. Einziger linker Hauptmenüpunkt bleibt `Texterstellung`.
+- **Abnahme vor neuer ZIP:** Originaldateien/Altdaten byteidentisch, Aktivierung in WP-Standardumgebung, alle Aktionswege vor Bestätigung blockiert, Adminbestätigung mit Nonce, nachher voller Admin-Menü-/Workflowzugriff, Fremdsite wieder gesperrt, PHP Syntax/ZIP-Integrität, reale Testseite weiterhin offen.
+- **Stand:** Nachweis geprüft, kleiner gezielter Fix in separater 0.4.1-Arbeitskopie begonnen, noch keine Installerfreigabe und keine Liveänderung.
