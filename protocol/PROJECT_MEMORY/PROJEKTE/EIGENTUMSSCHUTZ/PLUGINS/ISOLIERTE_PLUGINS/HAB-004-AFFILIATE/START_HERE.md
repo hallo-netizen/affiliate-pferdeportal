@@ -1,3 +1,5 @@
+> **ACHTUNG – RC44 LIVE-FRONTEND-FEHLGESCHLAGEN (14.11.2026, 15:57).** `CURRENT.zip` ist nur der eingefrorene installierte Prüfstand, KEINE bestandene Live-Abnahme. Öffentlich funktionieren nur einzelne Banner; R2-Anzeigenplatz wird anders gespeichert als vom realen Seiten-Renderer abgerufen; Banner ist in der 1-von-3-Kachel zu klein; sieben früher veröffentlichte R3 zeigen keinen Werbebanner. **Kein weiteres Plugin freigeben, bis der komplette tatsächliche Design→Ausgabe-Ablauf R2+R3 stimmt.** Details: `../../../AFFILIATE/RC44_ECHTE_FRONTEND_FEHLERURSACHEN_20261114_1557.md` und [Originalcode-/Live-Test](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43609064755).
+
 # HAB-004 – Affiliate-Zentrale | CURRENT: RC44 (0.1.41-rc44)
 
 **Gültiges vollständiges Plugin:** `CURRENT.zip` in diesem Verzeichnis. Exakt dieselbe Archivdatei zusätzlich unter `HAB_AFFILIATE_RC44_0.1.41-rc44.zip`. Beide 2.361.654 Bytes, SHA256 `2a9701c465fdf4ac1830a6b02b9329f5613337587c65379f09be94c20b00e681`, 36 ZIP-Dateien. Bereits wirklich auf GitHub im Plugin-Büro gespeichert (keine bloßen Download-Links).
