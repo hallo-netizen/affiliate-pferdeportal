@@ -1,0 +1,107 @@
+{
+  "title": "QA76 full trace + source PHP & mock WordPress/eBay integration; NOT a real 1:1 product-provider replay",
+  "status": "PASS_AVAILABLE_EVIDENCE_ONLY",
+  "live_full_workflow_accepted": false,
+  "real_283_family_outcomes_last_observed": {
+    "covered": 5,
+    "accepted_but_not_covered": 32,
+    "no_accepted_offer": 31,
+    "no_individual_search_yet": 215
+  },
+  "real_153_skips": {
+    "counter": 153,
+    "actual_item_ids_available": 95,
+    "missing_individual_ids": 58,
+    "observed_code": "business_selected_stale_during_apply"
+  },
+  "real_external_45sec_timeout_evidence": true,
+  "real_provider_getitem_responses_in_snapshot": false,
+  "real_wp_source_rows_for_nov_14_snapshot": false,
+  "checks_in_this_driver": 127,
+  "checks_failed": 0,
+  "failures": [],
+  "previous_qa75_full_regression": "5627 baseline + 5686 extra checks PASS (re-run 14 Nov 2026)",
+  "original_php_model_scenarios": [
+    {
+      "case": "normal",
+      "status": "completed",
+      "error": null,
+      "covered_from_simulated_provider": 259,
+      "missing_from_simulated_provider": 24,
+      "public_verified_count": 580
+    },
+    {
+      "case": "old_blocked",
+      "status": "completed",
+      "error": null,
+      "covered_from_simulated_provider": 258,
+      "missing_from_simulated_provider": 25,
+      "public_verified_count": 579
+    },
+    {
+      "case": "new_blocked",
+      "status": "completed",
+      "error": null,
+      "covered_from_simulated_provider": 258,
+      "missing_from_simulated_provider": 25,
+      "public_verified_count": 579
+    },
+    {
+      "case": "db_down",
+      "status": "failed",
+      "error": "business_public_storage_read_failed",
+      "covered_from_simulated_provider": null,
+      "missing_from_simulated_provider": 0,
+      "public_verified_count": 580
+    },
+    {
+      "case": "churn",
+      "status": "completed",
+      "error": null,
+      "covered_from_simulated_provider": 258,
+      "missing_from_simulated_provider": 25,
+      "public_verified_count": 579
+    },
+    {
+      "case": "no_new",
+      "status": "completed",
+      "error": null,
+      "covered_from_simulated_provider": 257,
+      "missing_from_simulated_provider": 26,
+      "public_verified_count": 578
+    },
+    {
+      "case": "save_fail",
+      "status": "failed",
+      "error": "public_checkpoint_commit_failed",
+      "covered_from_simulated_provider": null,
+      "missing_from_simulated_provider": 0,
+      "public_verified_count": 580
+    },
+    {
+      "case": "post_commit_state_save_fail",
+      "status": "failed",
+      "error": "public_checkpoint_cleanup_handoff_save_failed",
+      "covered_from_simulated_provider": null,
+      "missing_from_simulated_provider": 0,
+      "public_verified_count": 580
+    },
+    {
+      "case": "collision_retry_state_save_fail",
+      "status": "failed",
+      "error": "public_checkpoint_collision_state_save_failed",
+      "covered_from_simulated_provider": null,
+      "missing_from_simulated_provider": 0,
+      "public_verified_count": 580
+    }
+  ],
+  "real_family_trace_checks": 11187,
+  "original_php_stale_scenarios": 9,
+  "original_php_rest_status_scenarios": 16,
+  "original_ids_mock_getitem_scenarios": 95,
+  "package": "Affiliate_6.72.351_EBAY_KISS_GESAMTWORKFLOW_TESTINSTALLATION.zip",
+  "package_sha256": "65e6bff15af26ec559ccbb40333ec7168cc5f4a22eb7a77f682f07e5bb47e247",
+  "repository_protected_heartbeat_PR": 759,
+  "authorized_heartbeat_live": false,
+  "limitations": "Historical real getItem eBay provider payloads and relevant WordPress DB rows are unavailable; the HTTP 45s timeout and public end state must be verified on the real system after an authorized test installation."
+}
