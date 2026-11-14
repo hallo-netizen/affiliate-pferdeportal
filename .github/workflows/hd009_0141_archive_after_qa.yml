@@ -1,0 +1,44 @@
+name: Archive HD009 0.1.41 QA-passed full plugin INTERNALLY only
+on:
+  push:
+    branches: [hobbyroom/hd009-0141-kiss-full-workflow-20261114]
+    paths:
+      - .github/workflows/hd009_0141_archive_after_qa.yml
+permissions:
+  contents: write
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify complete QA success and stable original CURRENT
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/43611345759" --jq .conclusion)" = success
+          base=protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE
+          test "$(sha256sum "$base/CURRENT.zip" | awk '{print $1}')" = 34b870ad459e9b075a5c8c0aedc335939a72f6689d03216bcfd4134798c73503
+      - name: Archive exact tested candidate ONLY, no CURRENT mutation
+        run: |
+          set -e
+          office=protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE
+          target="$office/CANDIDATES/HOBBY_DEPOT_HD009_0.1.41_KISS_NUR_INTERN.zip"
+          python3 scripts/hd009_0141_full_workflow_build.py "$office/CANDIDATES/HOBBY_DEPOT_HD009_0.1.40_EINE_ENTSCHEIDUNG_NUR_TEST.zip" "$target"
+          echo "a91a835621f2bec12e02d2ab693bcc55df1027faee89a0539700178643b789b5  $target" | sha256sum -c
+          cat > "$office/CANDIDATES/CANDIDATE_0.1.41_STATUS.md" <<'EOF'
+          HD009 0.1.41 – nur INTERNER Stand, NICHT zur Installation ausgeben.
+          Original-PHP-Gesamttests, einmalige Produktentscheidung und Zielautorität,
+          2747/2901-CSV.GZ, erneute Verarbeitung bei gleichem Hash/304 bestanden.
+          QA: actions/runs/43611345759.
+          PRIVATE echte Feeds und vollständige WordPress-Liveausgabe NICHT geprüft.
+          Original CURRENT 0.1.37 und HD003-CURRENT unverändert.
+          SHA256 a91a835621f2bec12e02d2ab693bcc55df1027faee89a0539700178643b789b5
+          Details: AFFILIATE/FEHLERREGISTER_LEERKARTEN_20261113.md Stand 11.
+          EOF
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$target" "$office/CANDIDATES/CANDIDATE_0.1.41_STATUS.md"
+          git commit -m "archive(hobby): verified HD009 0.1.41 internal only; no live release"
+          git push
