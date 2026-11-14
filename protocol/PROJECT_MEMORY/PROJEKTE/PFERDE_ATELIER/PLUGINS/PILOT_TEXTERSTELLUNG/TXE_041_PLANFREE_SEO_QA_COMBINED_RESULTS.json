@@ -1,9 +1,9 @@
 {
   "status": "QA_ONLY_NOT_RELEASED",
   "date": "2026-11-14",
-  "basis_zip": "Texterstellung_0.4.1_PLANFREI_SEO_BRIDGE_QA_NICHT_INSTALLIEREN.zip",
-  "test_environment": "local PHP mock WordPress/PPM, not real server",
-  "test_cases": {
+  "qa_pass": 67,
+  "qa_total": 67,
+  "cases": {
     "QA_PSTE_SEO_OWNER.json": {
       "pass": 13,
       "total": 13,
@@ -81,9 +81,28 @@
         "no_jobs_registered": true,
         "conflict_notice_registered": true
       }
+    },
+    "QA_NO_SECOND_PLAN_HOOKS.json": {
+      "pass": 15,
+      "total": 15,
+      "tests": {
+        "disabled_admin_post_pste_mini_forward_to_plan": true,
+        "disabled_admin_post_pste_mini_legacy_plan_rebind": true,
+        "disabled_admin_post_pste_import_editorial_plan": true,
+        "disabled_admin_post_pste_export_planning_topics": true,
+        "disabled_admin_post_pste_title_desk_export": true,
+        "disabled_admin_post_pste_title_desk_import": true,
+        "disabled_pste_title_desk_reentry": true,
+        "disabled_wp_ajax_pste_title_desk_reentry_continue": true,
+        "disabled_wp_ajax_nopriv_pste_title_desk_reentry_continue": true,
+        "disabled_wp_ajax_pste_production_auto_step": true,
+        "disabled_wp_ajax_pste_production_auto_status": true,
+        "disabled_wp_ajax_pste_production_auto_cancel": true,
+        "unchanged_mini_title_hook_retained": true,
+        "original_PSTE_research_registered": true,
+        "original_PSTE_loaded": true
+      }
     }
   },
-  "full_contract_accepted": false,
-  "passed": 52,
-  "total": 52
+  "live_wordpress_test": false
 }
