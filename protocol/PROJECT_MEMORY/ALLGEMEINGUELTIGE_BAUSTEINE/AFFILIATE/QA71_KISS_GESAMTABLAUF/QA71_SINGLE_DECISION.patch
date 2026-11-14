@@ -1,0 +1,128 @@
+--- 6.72.348/affiliate-portal-router/includes/trait-ppar-automation-suite.php
++++ 6.72.350/affiliate-portal-router/includes/trait-ppar-automation-suite.php
+@@ -4235,7 +4235,7 @@
+ 
+         // Provider-worker routing only: do not create a second source sync or rescan
+         // the entire creative pool. Never interrupt an older in-progress pool run.
+-        if (in_array(self::VERSION, array('6.72.336','6.72.337','6.72.339','6.72.340','6.72.341','6.72.342','6.72.343','6.72.344','6.72.345','6.72.346','6.72.347','6.72.348'), true)) {
++        if (in_array(self::VERSION, array('6.72.336','6.72.337','6.72.339','6.72.340','6.72.341','6.72.342','6.72.343','6.72.344','6.72.345','6.72.346','6.72.347','6.72.348','6.72.350'), true)) {
+             if (strpos($state, 'running:') === 0 || get_option(self::OPTION_FULL_POOL_AUTOMATION_CURSOR, null) !== null) { return; }
+             update_option(self::OPTION_FULL_POOL_AUTOMATION_VERSION, self::VERSION, false);
+             return;
+--- 6.72.348/affiliate-portal-router/includes/trait-ppar-ebay-run.php
++++ 6.72.350/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+@@ -1909,10 +1909,11 @@
+                 }
+                 // KISS: The full discovery just fetched provider facts. A second
+                 // inventory-wide scan here rechecks thousands of unrelated rows
+-                // before materialising any winner. In the real 14 Nov run this
+-                // stage consumed 1692 audit records; 153 chosen rows expired
+-                // before publication. Keep the independently scheduled refresh
+-                // operation, but let a full search select its freshly found
++                // before materialising any winner. The real 14 Nov export
++                // contains 1692 refresh_remote records across discovery AND
++                // inventory; it does not separate the two inner subphases.
++                // 153 chosen rows expired before publication. Keep the independent
++                // refresh operation, but let a full search select its freshly found
+                 // offers immediately. The existing per-selected getItem and
+                 // final public-source proof still enforce six-hour freshness.
+                 $operation=sanitize_key((string)($run['operation']??''));
+@@ -2772,12 +2773,27 @@
+                 $task=array('last_id'=>0,'summary'=>array(
+                     'checked'=>0,'requests'=>0,'transient_errors'=>0,
+                     'technical_errors'=>0,'excluded'=>0,'available'=>0,
+-                    'ended'=>0,'updated'=>0,'revived'=>0,'errors'=>array()));
+-                $this->ebay_refresh_process_row($task,$row,$settings,$token);
++                    'ended'=>0,'updated'=>0,'revived'=>0,'superseded'=>0,
++                    'errors'=>array()));
++                // The final source worker is only allowed to confirm availability.
++                // The global inventory refresh would RE-CLASSIFY, RE-RANK and
++                // rewrite the selected product here, contradicting the one-
++                // decision contract. Reuse the EXISTING availability-only worker.
++                $this->ebay_public_availability_refresh_one($task,$row,$settings,$token);
+                 // Count real getItem attempts (including failures) against
+                 // the existing two-request limit. A locally ended offer makes
+                 // no eBay request and must not waste the remote budget.
+                 if(absint($task['summary']['requests']??0)>0){$remotes++;}
++                // Source changed, ended, or was overwritten concurrently:
++                // never reinterpret this as an approved selection. Mark this
++                // one product unverified; safe old shelf is not replaced.
++                $changed_source=absint($task['summary']['excluded']??0)>0
++                    || absint($task['summary']['ended']??0)>0
++                    || absint($task['summary']['superseded']??0)>0;
++                if($changed_source){
++                    $this->ebay_run_public_source_mark_unverified($state,$id,'public_source_refresh_source_changed');
++                    $cursor++;$checked++;continue;
++                }
+                 $errors=(array)($task['summary']['errors']??array());
+                 if($errors || absint($task['summary']['technical_errors']??0)>0
+                     || absint($task['summary']['transient_errors']??0)>0){
+--- 6.72.348/affiliate-portal-router/includes/trait-ppar-ebay.php
++++ 6.72.350/affiliate-portal-router/includes/trait-ppar-ebay.php
+@@ -9296,6 +9296,12 @@
+             $type=sanitize_key((string)$fresh->get_error_code());
+             $field=in_array($type,array('ebay_refresh_transient_http','ebay_refresh_transport'),true)?'transient_errors':'technical_errors';
+             $summary[$field]=absint($summary[$field]??0)+1;
++            // Preserve the existing final gate's global-auth vs per-item
++            // failure distinction without introducing a second decision.
++            if(!isset($summary['errors'])||!is_array($summary['errors'])){$summary['errors']=array();}
++            if(count($summary['errors'])<30){$summary['errors'][]=array(
++                'item_id'=>(string)($row['item_id']??''),
++                'code'=>$type,'error'=>$fresh->get_error_message());}
+             // A failed request is no proof of unavailability. Do not touch
+             // any selection or public status; advance only the retry timestamp.
+             global $wpdb;
+@@ -9313,6 +9319,11 @@
+         $item=$this->ebay_accept_item((array)($fresh['raw']??array()),'BUSINESS',$settings);
+         if(is_wp_error($item)){
+             $summary['technical_errors']=absint($summary['technical_errors']??0)+1;
++            if(!isset($summary['errors'])||!is_array($summary['errors'])){$summary['errors']=array();}
++            if(count($summary['errors'])<30){$summary['errors'][]=array(
++                'item_id'=>(string)($row['item_id']??''),
++                'code'=>sanitize_key((string)$item->get_error_code()),
++                'error'=>$item->get_error_message());}
+             // Do not treat an unverified changed source as a fresh approval.
+             return;
+         }
+@@ -9726,6 +9737,14 @@
+         if(!$this->ebay_route_enabled($row_seller_type,$settings)){
+             $summary['excluded']=absint($summary['excluded']??0)+1;
+             $summary['disabled_route_skipped']=absint($summary['disabled_route_skipped']??0)+1;
++            return;
++        }
++        if($row_seller_type==='BUSINESS'){
++            // Refresh is a SOURCE task, not another family/rank decision.
++            // Reuse the existing availability-only implementation; do not
++            // reclassify or upsert selected output, nor trigger a second
++            // automatic BUSINESS selection from unchanged source facts.
++            $this->ebay_public_availability_refresh_one($job,$row,$settings,$token);
+             return;
+         }
+         $summary['checked']++;
+--- 6.72.348/affiliate-portal-router/pferdeportal-affiliate-router.php
++++ 6.72.350/affiliate-portal-router/pferdeportal-affiliate-router.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
+  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
+- * Version: 6.72.348
++ * Version: 6.72.350
+  * Author: OpenAI
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -120,7 +120,7 @@
+     use PPAR_DFS_Amazon_Trait;
+     use PPAR_Digistore24_Trait;
+     use PPAR_Housekeeping_Trait;
+-    const VERSION = '6.72.348';
++    const VERSION = '6.72.350';
+     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
+     const CONTRACT_VERSION = '1.0';
+     const PROVIDER_CONTRACT_VERSION = '2.0';
+--- 6.72.348/affiliate-portal-router/readme.txt
++++ 6.72.350/affiliate-portal-router/readme.txt
+@@ -1,3 +1,4 @@
++V6.72.350 QA: kanonische öffentliche Schluss-Frischeprüfung nutzt vorhandenen reinen Verfügbarkeitsprüfer statt des globalen eBay-Refresh, der vorher erneut Fachzuordnung, Qualitätsrang und Kandidatenrolle entschieden hat. Abgelaufene/änderte Quellen bleiben gesperrt; SAFE und Schluss-Gate unverändert. Keine neue Engine, keine Live-Freigabe.
+ V6.72.348 NUR QA: eBay-Vollsync nach abgeschlossener Suche ohne zweite globale Bestandsrunde direkt zur Auswahl; gezielte Frischeprüfung ausgewählter Quellen und finale öffentliche Freigabe unverändert. Die Versionen 6.72.345–347 lösen keinen ungewollten gesamten Werbemittelpool-Sync wegen des Pluginversionswechsels aus. Alle anderen Prozesse unverändert. Live noch nicht abgenommen.
+ V6.72.344 NUR QA: bereits ausgewählte BUSINESS-Artikel mit abgelaufener 6h-Frische werden vor Materialisierung einzeln über die EXISTIERENDE getItem-/Availability-Methode bestätigt; höchstens eine nachgeprüfte Quelle je Worker-Takt, nur ein begrenzter Transport-Retry, danach weiter mit bestehenden Sicherheits-/Familien-/Public-Gates. Alte sichere Publikationen bleiben getrennt. Kein neuer Worker/Cron/Tabelle/Suchprofil. WP/eBay live nicht abgenommen.
+ V6.72.343 QA54 WORKER-REGAL TEST: eBay-Verfuegbarkeitspruefung aendert keine Produktauswahl; Werbemittelplanung mit einmaliger Portal-/Partnerentscheidung; gleiche eBay-Public-Quellenpruefung fuer inkrementelle und finale Freigaben; atomare Freigabeliste gegen paralleles Ueberschreiben. Bestehender Kanonischer eBay-Worker, bestehende WP-Cron-Verfuegbarkeitspruefung und vorhandene Datenhaltung. Alle sieben bisherigen lokalen Gesamtfaelle erneut geprueft, WP-/eBay-Dienste nachgestellt. Keine vier neuen autonomen Worker, keine neue Tabelle, keine zusaetzliche Automatik, keine Live-Abnahme. NUR ISOLIERTE TESTSEITE.
