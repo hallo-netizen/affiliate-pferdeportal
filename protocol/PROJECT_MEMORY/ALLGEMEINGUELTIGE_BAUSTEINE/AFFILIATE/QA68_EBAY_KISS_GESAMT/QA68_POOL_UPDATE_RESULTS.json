@@ -1,0 +1,55 @@
+{
+  "passed": 5,
+  "cases": [
+    {
+      "scenario": "upgrade_completed",
+      "before_automatic_jobs": 2,
+      "after_automatic_jobs": 0,
+      "state_after": {
+        "pool_version": "6.72.347"
+      },
+      "idempotent": true
+    },
+    {
+      "scenario": "upgrade_in_progress",
+      "before_automatic_jobs": 0,
+      "after_automatic_jobs": 0,
+      "state_after": {
+        "pool_version": "running:6.72.346",
+        "pool_cursor": 217
+      },
+      "idempotent": true
+    },
+    {
+      "scenario": "upgrade_old_cursor",
+      "before_automatic_jobs": 2,
+      "after_automatic_jobs": 0,
+      "state_after": {
+        "pool_version": "6.72.345",
+        "pool_cursor": 83
+      },
+      "idempotent": true
+    },
+    {
+      "scenario": "upgrade_no_previous_state",
+      "before_automatic_jobs": 2,
+      "after_automatic_jobs": 0,
+      "state_after": {
+        "pool_version": "6.72.347"
+      },
+      "idempotent": true
+    },
+    {
+      "scenario": "already_current",
+      "before_automatic_jobs": 0,
+      "after_automatic_jobs": 0,
+      "state_after": {
+        "pool_version": "6.72.347"
+      },
+      "idempotent": true
+    }
+  ],
+  "before": "actual original v346 WordPress init hook",
+  "after": "actual v347 code",
+  "comment": "Real WordPress DB/network not used."
+}
