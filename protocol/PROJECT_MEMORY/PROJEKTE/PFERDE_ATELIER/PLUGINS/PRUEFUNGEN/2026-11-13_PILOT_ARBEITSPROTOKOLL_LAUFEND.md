@@ -134,3 +134,13 @@
 - Konkreter bestehender Bedienweg (kein Neubau): Plugin ggf. aktivieren → links **Texterstellung** öffnen → bestehende einmalige Testinstallation-Bestätigung in 0.4.1 setzen → **Diagnose**-JSON herunterladen und bereitstellen.
 - Nach dem ersten echten Diagnosebericht Ursachen anhand dieser Daten prüfen. Erst anschließend regulären Sofortartikel → Titel → K0 → Import erproben. Keine Vermutung über Erfolg, keine Plugins der produktiven Website verändern.
 - Nutzer wünscht künftig **normale Aktivierung ohne unnötige zusätzliche Sperrmechanik**. Für die bereits installierte 0.4.1 den aktuell tatsächlich vorhandenen Bedienweg erklären; keine ungetestete ZIP behaupten. Für einen eventuellen nächsten Patch keine weiteren unnötigen Einrichtungsanforderungen hinzufügen.
+
+
+### Schritt 11 – 14.11.2026 08:22 UTC: erster echter Texterstellung-0.4.1-Diagnoseexport
+**Quelle:** Nutzereingereichte reale Datei `texterstellung-diagnose-20261114-072230.json`, `generated_utc=2026-11-14T07:22:30+00:00` (08:22:30 Berlin), `diagnosis_contract=TEXTERSTELLUNG_DIAGNOSE_V1`.
+- **Echter Befund:** `plugin.version=0.4.1-test`; WordPress-Testmodus adminbestätigt (`is_test_environment=true`, `test_mode_admin_confirmed_for_this_site=true`). WordPress meldet intern `wp_environment=production` – **kein Aktivierungsfehler**, weil 0.4.1 erfolgreich aktiviert ist.
+- `dataforseo_credentials_present.stored_login=true` und `stored_password=true`; **das beweist nur gespeicherte Zugangsdaten, nicht deren erfolgreiche Nutzung oder Anbieterantwort**.
+- `queue.saved_state=false`, `order_count=0`, `research_count=0`, `title_batch_count=0`, `last_k0_batch=null`, `orders=[]`, `last_events=[]`, `draft_faults=[]`; noch kein tatsächlicher Produktions-/Rechercheaufruf in diesem Datenbestand nachgewiesen. Keine technische Blockade aus dem JSON ableitbar.
+- Weitere aktive WP-Plugins laut Diagnose u. a. Portal Production Center und Link Policy Gate, aber PSTE, PSERC und PPM nicht in aktiver Pluginliste; **kein Beleg für eine Intervention**. Altplugins nicht ungefragt deaktivieren.
+- **Kleinster nächster, echter Testschritt:** Admin öffnet links `Texterstellung → Recherche`, startet genau **eine** begrenzte echte Recherche; danach denselben Diagnose-JSON-Download erneut durchführen und vorlegen. Erst dann konkrete technische Störstelle anhand der echten Events nachweisen. Keine neue Pluginversion und keine Codeänderung wegen dieses leeren Erstberichts.
+- Diagnose wurde nicht automatisch gesendet; vom Nutzer hochgeladen. **WordPress-/K0-Echt-Ende-zu-Ende-Test weiterhin offen.**
