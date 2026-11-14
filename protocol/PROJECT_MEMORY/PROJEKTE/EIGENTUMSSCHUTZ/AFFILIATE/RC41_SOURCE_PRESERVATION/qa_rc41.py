@@ -19,6 +19,8 @@ with ZipFile(P) as z:
 
 old=(R/"AFFILIATE/RC40_SOURCE_LOSS_PROOF/qa_source_loss.py").read_text()
 assert "RC40_ACTUAL_PHP_FULL_IMPORT_SOURCE_LOSS_PROVEN" in old
+old=old.replace('assert "$this->creative_library_read_original_banner_once($normalized)" in methods',
+                'assert "$this->creative_library_read_original_banner_once($normalized,$html)" in methods')
 old=old.replace(
     """ok(($payload['_source_read_version']??0)===1,
   'RC40 irrevocably marks this source as already read');
