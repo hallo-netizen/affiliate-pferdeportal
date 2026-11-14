@@ -10,6 +10,6 @@
 
 **Ergebnis:** Alle 9/9 W3-Grenzfälle entschieden; 6 Industriegruppen durch konkrete Herstellerangebote fachlich gestützt; 8 zusätzliche Industrie-Produktkandidaten mit 16 WP-Rubriken und 48 Beitragsideen. **Blocker:** Drei vorhandene W2-Überschneidungsgruppen redaktionell prüfen, danach fachliche Abnahme. WT001 0.1.1 (vollständige W4-Haupt-/Unter-/Industrie-/Produkt-/Rubrik-Ebenen im SEO-Preflight) ist lokal gebaut und geprüft; WordPress-Live-Test und kostenpflichtige SEO-Recherche offen. Das WordPress-Importmodul bleibt gesperrt.
 
-**NEXT ACTION:** WT001 0.1.1 aus dem Pluginbüro auf einer **isolierten neuen Wassertechnik-Testwebsite** verwenden. Kostenlosen 218er W4-Preflight im WordPress-Backend erzeugen und exportieren, Bestandsaufnahme ebenfalls. Keine bezahlten API-Aufrufe und kein Import.
+**NEXT ACTION:** Die technischen 218 W4-Owner sind aus WordPress vollständig exportiert. Jetzt die 124 zusammengesetzten und vier weiteren Sammelbegriffe redaktionell verbessern, ohne die acht Hauptbereiche, 79 Produktseiten oder 105 Rubriken neu aufzubauen. Ergebnisse zentral in W4-Keywordprofil zurückführen; erst nach echter Keywordrecherche und Freigabe WordPress-Import.
 
 **Grenze:** Keine WordPress-/HivePress-Produktion, keine fremden Projektdateien verändern.

@@ -1,0 +1,2855 @@
+{
+    "schema": "wassertechnik-dfs-preflight-v1",
+    "version": "0.1.1",
+    "source": "W4_SEO_CANDIDATES_NICHT_IMPORT",
+    "source_sha256": "ba70d1f5e67715ad4b93c80dca043579f8da23ef8da5652ff13eb37b9601f28f",
+    "review_holds": 0,
+    "location_name": "Germany",
+    "language_code": "de",
+    "count": {
+        "main": 8,
+        "group": 19,
+        "industry_hub": 1,
+        "industry_landing": 6,
+        "product_pages": 79,
+        "facets": 105
+    },
+    "unique_keywords": 218,
+    "keywords": [
+        {
+            "keyword": "wasseraufbereitung",
+            "owners": [
+                {
+                    "id": "wt_main_01",
+                    "type": "main",
+                    "label": "Wasseraufbereitung",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_OBERE_WP_SEITE_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "wasseranalyse",
+            "owners": [
+                {
+                    "id": "wt_main_02",
+                    "type": "main",
+                    "label": "Wasseranalyse",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_OBERE_WP_SEITE_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "brunnen",
+            "owners": [
+                {
+                    "id": "wt_main_03",
+                    "type": "main",
+                    "label": "Brunnen",
+                    "world": "Brunnen",
+                    "review_hold": false,
+                    "source": "W4_OBERE_WP_SEITE_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "pumpen & druck",
+            "owners": [
+                {
+                    "id": "wt_main_04",
+                    "type": "main",
+                    "label": "Pumpen & Druck",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_OBERE_WP_SEITE_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "regenwasser",
+            "owners": [
+                {
+                    "id": "wt_main_05",
+                    "type": "main",
+                    "label": "Regenwasser",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_OBERE_WP_SEITE_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "bewässerung",
+            "owners": [
+                {
+                    "id": "wt_main_06",
+                    "type": "main",
+                    "label": "Bewässerung",
+                    "world": "Bewässerung",
+                    "review_hold": false,
+                    "source": "W4_OBERE_WP_SEITE_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "wassertanks",
+            "owners": [
+                {
+                    "id": "wt_main_07",
+                    "type": "main",
+                    "label": "Wassertanks",
+                    "world": "Wassertanks",
+                    "review_hold": false,
+                    "source": "W4_OBERE_WP_SEITE_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "abwassertechnik",
+            "owners": [
+                {
+                    "id": "wt_main_08",
+                    "type": "main",
+                    "label": "Abwassertechnik",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_OBERE_WP_SEITE_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "abwassertechnik aufbereitung & speicherung",
+            "owners": [
+                {
+                    "id": "wt_group_01",
+                    "type": "group",
+                    "label": "Abwassertechnik Aufbereitung & Speicherung",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_GRUPPENSEITE_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "abwassertechnik entwässerung",
+            "owners": [
+                {
+                    "id": "wt_group_02",
+                    "type": "group",
+                    "label": "Abwassertechnik Entwässerung",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_GRUPPENSEITE_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "bewässerung bewässerungssysteme",
+            "owners": [
+                {
+                    "id": "wt_group_03",
+                    "type": "group",
+                    "label": "Bewässerung Bewässerungssysteme",
+                    "world": "Bewässerung",
+                    "review_hold": false,
+                    "source": "W4_GRUPPENSEITE_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "bewässerung steuerung",
+            "owners": [
+                {
+                    "id": "wt_group_04",
+                    "type": "group",
+                    "label": "Bewässerung Steuerung",
+                    "world": "Bewässerung",
+                    "review_hold": false,
+                    "source": "W4_GRUPPENSEITE_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "brunnen brunnenbauteile",
+            "owners": [
+                {
+                    "id": "wt_group_05",
+                    "type": "group",
+                    "label": "Brunnen Brunnenbauteile",
+                    "world": "Brunnen",
+                    "review_hold": false,
+                    "source": "W4_GRUPPENSEITE_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "pumpen & druck druckversorgung",
+            "owners": [
+                {
+                    "id": "wt_group_06",
+                    "type": "group",
+                    "label": "Pumpen & Druck Druckversorgung",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_GRUPPENSEITE_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "pumpen & druck pumpen",
+            "owners": [
+                {
+                    "id": "wt_group_07",
+                    "type": "group",
+                    "label": "Pumpen & Druck Pumpen",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_GRUPPENSEITE_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "pumpen & druck steuerung & zubehör",
+            "owners": [
+                {
+                    "id": "wt_group_08",
+                    "type": "group",
+                    "label": "Pumpen & Druck Steuerung & Zubehör",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_GRUPPENSEITE_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "regenwasser filter & förderung",
+            "owners": [
+                {
+                    "id": "wt_group_09",
+                    "type": "group",
+                    "label": "Regenwasser Filter & Förderung",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_GRUPPENSEITE_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "regenwasser nutzung & rückhalt",
+            "owners": [
+                {
+                    "id": "wt_group_10",
+                    "type": "group",
+                    "label": "Regenwasser Nutzung & Rückhalt",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_GRUPPENSEITE_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "regenwasser regenspeicher",
+            "owners": [
+                {
+                    "id": "wt_group_11",
+                    "type": "group",
+                    "label": "Regenwasser Regenspeicher",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_GRUPPENSEITE_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "wasseranalyse messgeräte",
+            "owners": [
+                {
+                    "id": "wt_group_12",
+                    "type": "group",
+                    "label": "Wasseranalyse Messgeräte",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_GRUPPENSEITE_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "wasseranalyse testsets",
+            "owners": [
+                {
+                    "id": "wt_group_13",
+                    "type": "group",
+                    "label": "Wasseranalyse Testsets",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_GRUPPENSEITE_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "wasseraufbereitung aufbereitungsanlagen",
+            "owners": [
+                {
+                    "id": "wt_group_14",
+                    "type": "group",
+                    "label": "Wasseraufbereitung Aufbereitungsanlagen",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_GRUPPENSEITE_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "wasseraufbereitung filterzubehör",
+            "owners": [
+                {
+                    "id": "wt_group_15",
+                    "type": "group",
+                    "label": "Wasseraufbereitung Filterzubehör",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_GRUPPENSEITE_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "wasseraufbereitung hauswasserfilter",
+            "owners": [
+                {
+                    "id": "wt_group_16",
+                    "type": "group",
+                    "label": "Wasseraufbereitung Hauswasserfilter",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_GRUPPENSEITE_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "wasseraufbereitung osmoseanlagen",
+            "owners": [
+                {
+                    "id": "wt_group_17",
+                    "type": "group",
+                    "label": "Wasseraufbereitung Osmoseanlagen",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_GRUPPENSEITE_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "wasseraufbereitung trinkwasserfilter",
+            "owners": [
+                {
+                    "id": "wt_group_18",
+                    "type": "group",
+                    "label": "Wasseraufbereitung Trinkwasserfilter",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_GRUPPENSEITE_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "wassertanks tankarten",
+            "owners": [
+                {
+                    "id": "wt_group_19",
+                    "type": "group",
+                    "label": "Wassertanks Tankarten",
+                    "world": "Wassertanks",
+                    "review_hold": false,
+                    "source": "W4_GRUPPENSEITE_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "industrielle wassertechnik",
+            "owners": [
+                {
+                    "id": "wt_industry_hub_01",
+                    "type": "industry_hub",
+                    "label": "Industrielle Wassertechnik",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_INFOLANDING_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "industrielle wasseraufbereitung",
+            "owners": [
+                {
+                    "id": "wt_industry_landing_01",
+                    "type": "industry_landing",
+                    "label": "Industrielle Wasseraufbereitung",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_INDUS_LANDING_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "industrie-pumpen",
+            "owners": [
+                {
+                    "id": "wt_industry_landing_02",
+                    "type": "industry_landing",
+                    "label": "Industrie-Pumpen",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_INDUS_LANDING_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "kühl- & kreislaufwasser",
+            "owners": [
+                {
+                    "id": "wt_industry_landing_03",
+                    "type": "industry_landing",
+                    "label": "Kühl- & Kreislaufwasser",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_INDUS_LANDING_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "industrielles abwasser",
+            "owners": [
+                {
+                    "id": "wt_industry_landing_04",
+                    "type": "industry_landing",
+                    "label": "Industrielles Abwasser",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_INDUS_LANDING_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "messung, regelung & dosierung",
+            "owners": [
+                {
+                    "id": "wt_industry_landing_05",
+                    "type": "industry_landing",
+                    "label": "Messung, Regelung & Dosierung",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_INDUS_LANDING_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "kommunale/großanlagen",
+            "owners": [
+                {
+                    "id": "wt_industry_landing_06",
+                    "type": "industry_landing",
+                    "label": "Kommunale/Großanlagen",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_INDUS_LANDING_KONZEPT_NICHT_GEMESSEN"
+                }
+            ]
+        },
+        {
+            "keyword": "feinfilter",
+            "owners": [
+                {
+                    "id": "wt_product_0001",
+                    "type": "product",
+                    "label": "Feinfilter",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "feinfilter filterpraxis",
+            "owners": [
+                {
+                    "id": "wt_cat_0001_1",
+                    "type": "category",
+                    "label": "Feinfilter Filterpraxis",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "manueller rückspülfilter",
+            "owners": [
+                {
+                    "id": "wt_product_0002",
+                    "type": "product",
+                    "label": "Manueller Rückspülfilter",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "manueller rückspülfilter auswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0002_1",
+                    "type": "category",
+                    "label": "Manueller Rückspülfilter Auswahl",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "manueller rückspülfilter betrieb",
+            "owners": [
+                {
+                    "id": "wt_cat_0002_2",
+                    "type": "category",
+                    "label": "Manueller Rückspülfilter Betrieb",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "automatischer rückspülfilter",
+            "owners": [
+                {
+                    "id": "wt_product_0003",
+                    "type": "product",
+                    "label": "Automatischer Rückspülfilter",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "automatischer rückspülfilter filterautomatik",
+            "owners": [
+                {
+                    "id": "wt_cat_0003_1",
+                    "type": "category",
+                    "label": "Automatischer Rückspülfilter Filterautomatik",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "tischwasserfilter",
+            "owners": [
+                {
+                    "id": "wt_product_0004",
+                    "type": "product",
+                    "label": "Tischwasserfilter",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "tischwasserfilter filteralltag",
+            "owners": [
+                {
+                    "id": "wt_cat_0004_1",
+                    "type": "category",
+                    "label": "Tischwasserfilter Filteralltag",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "wasserhahnfilter",
+            "owners": [
+                {
+                    "id": "wt_product_0005",
+                    "type": "product",
+                    "label": "Wasserhahnfilter",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "wasserhahnfilter nachrüstung",
+            "owners": [
+                {
+                    "id": "wt_cat_0005_1",
+                    "type": "category",
+                    "label": "Wasserhahnfilter Nachrüstung",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "untertischfilter",
+            "owners": [
+                {
+                    "id": "wt_product_0006",
+                    "type": "product",
+                    "label": "Untertischfilter",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "untertischfilter filtereinbau",
+            "owners": [
+                {
+                    "id": "wt_cat_0006_1",
+                    "type": "category",
+                    "label": "Untertischfilter Filtereinbau",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "outdoor-wasserfilter",
+            "owners": [
+                {
+                    "id": "wt_product_0007",
+                    "type": "product",
+                    "label": "Outdoor-Wasserfilter",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "outdoor-wasserfilter wasserfiltration",
+            "owners": [
+                {
+                    "id": "wt_cat_0007_1",
+                    "type": "category",
+                    "label": "Outdoor-Wasserfilter Wasserfiltration",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "auftisch-osmoseanlage",
+            "owners": [
+                {
+                    "id": "wt_product_0008",
+                    "type": "product",
+                    "label": "Auftisch-Osmoseanlage",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "auftisch-osmoseanlage anlagenpraxis",
+            "owners": [
+                {
+                    "id": "wt_cat_0008_1",
+                    "type": "category",
+                    "label": "Auftisch-Osmoseanlage Anlagenpraxis",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "untertisch-osmoseanlage",
+            "owners": [
+                {
+                    "id": "wt_product_0009",
+                    "type": "product",
+                    "label": "Untertisch-Osmoseanlage",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "untertisch-osmoseanlage auswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0009_1",
+                    "type": "category",
+                    "label": "Untertisch-Osmoseanlage Auswahl",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "untertisch-osmoseanlage wartung",
+            "owners": [
+                {
+                    "id": "wt_cat_0009_2",
+                    "type": "category",
+                    "label": "Untertisch-Osmoseanlage Wartung",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "direct-flow-osmoseanlage",
+            "owners": [
+                {
+                    "id": "wt_product_0010",
+                    "type": "product",
+                    "label": "Direct-Flow-Osmoseanlage",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "direct-flow-osmoseanlage anlagenleistung",
+            "owners": [
+                {
+                    "id": "wt_cat_0010_1",
+                    "type": "category",
+                    "label": "Direct-Flow-Osmoseanlage Anlagenleistung",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "osmoseanlage mit drucktank",
+            "owners": [
+                {
+                    "id": "wt_product_0011",
+                    "type": "product",
+                    "label": "Osmoseanlage mit Drucktank",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "osmoseanlage mit drucktank drucktankbetrieb",
+            "owners": [
+                {
+                    "id": "wt_cat_0011_1",
+                    "type": "category",
+                    "label": "Osmoseanlage mit Drucktank Drucktankbetrieb",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "enthärtungsanlage",
+            "owners": [
+                {
+                    "id": "wt_product_0012",
+                    "type": "product",
+                    "label": "Enthärtungsanlage",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "enthärtungsanlage auswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0012_1",
+                    "type": "category",
+                    "label": "Enthärtungsanlage Auswahl",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "enthärtungsanlage betrieb",
+            "owners": [
+                {
+                    "id": "wt_cat_0012_2",
+                    "type": "category",
+                    "label": "Enthärtungsanlage Betrieb",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "uv-desinfektionsanlage",
+            "owners": [
+                {
+                    "id": "wt_product_0013",
+                    "type": "product",
+                    "label": "UV-Desinfektionsanlage",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "uv-desinfektionsanlage uv-betrieb",
+            "owners": [
+                {
+                    "id": "wt_cat_0013_1",
+                    "type": "category",
+                    "label": "UV-Desinfektionsanlage UV-Betrieb",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "wasser-dosieranlage",
+            "owners": [
+                {
+                    "id": "wt_product_0014",
+                    "type": "product",
+                    "label": "Wasser-Dosieranlage",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "wasser-dosieranlage dosierpraxis",
+            "owners": [
+                {
+                    "id": "wt_cat_0014_1",
+                    "type": "category",
+                    "label": "Wasser-Dosieranlage Dosierpraxis",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "wasserfilter-ersatzkartusche",
+            "owners": [
+                {
+                    "id": "wt_product_0015",
+                    "type": "product",
+                    "label": "Wasserfilter-Ersatzkartusche",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "wasserfilter-ersatzkartusche kartuschenwechsel",
+            "owners": [
+                {
+                    "id": "wt_cat_0015_1",
+                    "type": "category",
+                    "label": "Wasserfilter-Ersatzkartusche Kartuschenwechsel",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "filtergehäuse",
+            "owners": [
+                {
+                    "id": "wt_product_0016",
+                    "type": "product",
+                    "label": "Filtergehäuse",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "filtergehäuse gehäusepraxis",
+            "owners": [
+                {
+                    "id": "wt_cat_0016_1",
+                    "type": "category",
+                    "label": "Filtergehäuse Gehäusepraxis",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "wasserfilter-anschlussadapter",
+            "owners": [
+                {
+                    "id": "wt_product_0017",
+                    "type": "product",
+                    "label": "Wasserfilter-Anschlussadapter",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "wasserfilter-anschlussadapter anschlusslösungen",
+            "owners": [
+                {
+                    "id": "wt_cat_0017_1",
+                    "type": "category",
+                    "label": "Wasserfilter-Anschlussadapter Anschlusslösungen",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "trinkwasser-labortestset",
+            "owners": [
+                {
+                    "id": "wt_product_0018",
+                    "type": "product",
+                    "label": "Trinkwasser-Labortestset",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "trinkwasser-labortestset testauswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0018_1",
+                    "type": "category",
+                    "label": "Trinkwasser-Labortestset Testauswahl",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "trinkwasser-labortestset probenahme",
+            "owners": [
+                {
+                    "id": "wt_cat_0018_2",
+                    "type": "category",
+                    "label": "Trinkwasser-Labortestset Probenahme",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "brunnenwasser-testset",
+            "owners": [
+                {
+                    "id": "wt_product_0019",
+                    "type": "product",
+                    "label": "Brunnenwasser-Testset",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "brunnenwasser-testset testauswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0019_1",
+                    "type": "category",
+                    "label": "Brunnenwasser-Testset Testauswahl",                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "brunnenwasser-testset probenahme",
+            "owners": [
+                {
+                    "id": "wt_cat_0019_2",
+                    "type": "category",
+                    "label": "Brunnenwasser-Testset Probenahme",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "schadstoff-labortestset",
+            "owners": [
+                {
+                    "id": "wt_product_0020",
+                    "type": "product",
+                    "label": "Schadstoff-Labortestset",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "schadstoff-labortestset analysepakete",
+            "owners": [
+                {
+                    "id": "wt_cat_0020_1",
+                    "type": "category",
+                    "label": "Schadstoff-Labortestset Analysepakete",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "wasserteststreifen",
+            "owners": [
+                {
+                    "id": "wt_product_0021",
+                    "type": "product",
+                    "label": "Wasserteststreifen",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "wasserteststreifen testpraxis",
+            "owners": [
+                {
+                    "id": "wt_cat_0021_1",
+                    "type": "category",
+                    "label": "Wasserteststreifen Testpraxis",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "wasser-multimessgerät",
+            "owners": [
+                {
+                    "id": "wt_product_0022",
+                    "type": "product",
+                    "label": "Wasser-Multimessgerät",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "wasser-multimessgerät auswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0022_1",
+                    "type": "category",
+                    "label": "Wasser-Multimessgerät Auswahl",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "wasser-multimessgerät messpraxis",
+            "owners": [
+                {
+                    "id": "wt_cat_0022_2",
+                    "type": "category",
+                    "label": "Wasser-Multimessgerät Messpraxis",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "wasser-probenahmeset",
+            "owners": [
+                {
+                    "id": "wt_product_0023",
+                    "type": "product",
+                    "label": "Wasser-Probenahmeset",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "wasser-probenahmeset probenahme",
+            "owners": [
+                {
+                    "id": "wt_cat_0023_1",
+                    "type": "category",
+                    "label": "Wasser-Probenahmeset Probenahme",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "gartenbrunnen-bausatz",
+            "owners": [
+                {
+                    "id": "wt_product_0024",
+                    "type": "product",
+                    "label": "Gartenbrunnen-Bausatz",
+                    "world": "Brunnen",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "gartenbrunnen-bausatz gartenbrunnenbau",
+            "owners": [
+                {
+                    "id": "wt_cat_0024_1",
+                    "type": "category",
+                    "label": "Gartenbrunnen-Bausatz Gartenbrunnenbau",
+                    "world": "Brunnen",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "schlagbrunnen-set",
+            "owners": [
+                {
+                    "id": "wt_product_0025",
+                    "type": "product",
+                    "label": "Schlagbrunnen-Set",
+                    "world": "Brunnen",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "schlagbrunnen-set schlagbrunnenbau",
+            "owners": [
+                {
+                    "id": "wt_cat_0025_1",
+                    "type": "category",
+                    "label": "Schlagbrunnen-Set Schlagbrunnenbau",
+                    "world": "Brunnen",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "brunnenfilterrohr",
+            "owners": [
+                {
+                    "id": "wt_product_0026",
+                    "type": "product",
+                    "label": "Brunnenfilterrohr",
+                    "world": "Brunnen",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "brunnenfilterrohr brunnenausbau",
+            "owners": [
+                {
+                    "id": "wt_cat_0026_1",
+                    "type": "category",
+                    "label": "Brunnenfilterrohr Brunnenausbau",
+                    "world": "Brunnen",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "gartenpumpe",
+            "owners": [
+                {
+                    "id": "wt_product_0027",
+                    "type": "product",
+                    "label": "Gartenpumpe",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "gartenpumpe auswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0027_1",
+                    "type": "category",
+                    "label": "Gartenpumpe Auswahl",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "gartenpumpe störungen",
+            "owners": [
+                {
+                    "id": "wt_cat_0027_2",
+                    "type": "category",
+                    "label": "Gartenpumpe Störungen",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "tauchpumpe",
+            "owners": [
+                {
+                    "id": "wt_product_0028",
+                    "type": "product",
+                    "label": "Tauchpumpe",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "tauchpumpe pumpeneinsatz",
+            "owners": [
+                {
+                    "id": "wt_cat_0028_1",
+                    "type": "category",
+                    "label": "Tauchpumpe Pumpeneinsatz",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "tiefbrunnenpumpe",
+            "owners": [
+                {
+                    "id": "wt_product_0029",
+                    "type": "product",
+                    "label": "Tiefbrunnenpumpe",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "tiefbrunnenpumpe auswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0029_1",
+                    "type": "category",
+                    "label": "Tiefbrunnenpumpe Auswahl",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "tiefbrunnenpumpe betrieb",
+            "owners": [
+                {
+                    "id": "wt_cat_0029_2",
+                    "type": "category",
+                    "label": "Tiefbrunnenpumpe Betrieb",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "schmutzwasserpumpe",
+            "owners": [
+                {
+                    "id": "wt_product_0030",
+                    "type": "product",
+                    "label": "Schmutzwasserpumpe",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "schmutzwasserpumpe schmutzwassereinsatz",
+            "owners": [
+                {
+                    "id": "wt_cat_0030_1",
+                    "type": "category",
+                    "label": "Schmutzwasserpumpe Schmutzwassereinsatz",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "klarwasserpumpe",
+            "owners": [
+                {
+                    "id": "wt_product_0031",
+                    "type": "product",
+                    "label": "Klarwasserpumpe",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "klarwasserpumpe klarwasserentwässerung",
+            "owners": [
+                {
+                    "id": "wt_cat_0031_1",
+                    "type": "category",
+                    "label": "Klarwasserpumpe Klarwasserentwässerung",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "hauswasserwerk",
+            "owners": [
+                {
+                    "id": "wt_product_0032",
+                    "type": "product",
+                    "label": "Hauswasserwerk",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "hauswasserwerk hauswasserversorgung",
+            "owners": [
+                {
+                    "id": "wt_cat_0032_1",
+                    "type": "category",
+                    "label": "Hauswasserwerk Hauswasserversorgung",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "druckerhöhungsanlage",
+            "owners": [
+                {
+                    "id": "wt_product_0033",
+                    "type": "product",
+                    "label": "Druckerhöhungsanlage",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "druckerhöhungsanlage druckerhöhung",
+            "owners": [
+                {
+                    "id": "wt_cat_0033_1",
+                    "type": "category",
+                    "label": "Druckerhöhungsanlage Druckerhöhung",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "pumpensteuergerät",
+            "owners": [
+                {
+                    "id": "wt_product_0034",
+                    "type": "product",
+                    "label": "Pumpensteuergerät",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "pumpensteuergerät pumpensteuerung",
+            "owners": [
+                {
+                    "id": "wt_cat_0034_1",
+                    "type": "category",
+                    "label": "Pumpensteuergerät Pumpensteuerung",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "regentonne",
+            "owners": [
+                {
+                    "id": "wt_product_0035",
+                    "type": "product",
+                    "label": "Regentonne",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "regentonne regenwasserspeicherung",
+            "owners": [
+                {
+                    "id": "wt_cat_0035_1",
+                    "type": "category",
+                    "label": "Regentonne Regenwasserspeicherung",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "regenwasser-erdtank",
+            "owners": [
+                {
+                    "id": "wt_product_0036",
+                    "type": "product",
+                    "label": "Regenwasser-Erdtank",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "regenwasser-erdtank auswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0036_1",
+                    "type": "category",
+                    "label": "Regenwasser-Erdtank Auswahl",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "regenwasser-erdtank einbau",
+            "owners": [
+                {
+                    "id": "wt_cat_0036_2",
+                    "type": "category",
+                    "label": "Regenwasser-Erdtank Einbau",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "regenwasser-kellertank",
+            "owners": [
+                {
+                    "id": "wt_product_0037",
+                    "type": "product",
+                    "label": "Regenwasser-Kellertank",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "regenwasser-kellertank kellertankplanung",
+            "owners": [
+                {
+                    "id": "wt_cat_0037_1",
+                    "type": "category",
+                    "label": "Regenwasser-Kellertank Kellertankplanung",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "fallrohrfilter",
+            "owners": [
+                {
+                    "id": "wt_product_0038",
+                    "type": "product",
+                    "label": "Fallrohrfilter",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "fallrohrfilter vorfiltration",
+            "owners": [
+                {
+                    "id": "wt_cat_0038_1",
+                    "type": "category",
+                    "label": "Fallrohrfilter Vorfiltration",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "zisternenpumpe",
+            "owners": [
+                {
+                    "id": "wt_product_0039",
+                    "type": "product",
+                    "label": "Zisternenpumpe",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "zisternenpumpe auswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0039_1",
+                    "type": "category",
+                    "label": "Zisternenpumpe Auswahl",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "zisternenpumpe betrieb",
+            "owners": [
+                {
+                    "id": "wt_cat_0039_2",
+                    "type": "category",
+                    "label": "Zisternenpumpe Betrieb",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "regenwasser-hauszentrale",
+            "owners": [
+                {
+                    "id": "wt_product_0040",
+                    "type": "product",
+                    "label": "Regenwasser-Hauszentrale",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "regenwasser-hauszentrale planung",
+            "owners": [
+                {
+                    "id": "wt_cat_0040_1",
+                    "type": "category",
+                    "label": "Regenwasser-Hauszentrale Planung",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "regenwasser-hauszentrale betrieb",
+            "owners": [
+                {
+                    "id": "wt_cat_0040_2",
+                    "type": "category",
+                    "label": "Regenwasser-Hauszentrale Betrieb",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "rigolensystem",
+            "owners": [
+                {
+                    "id": "wt_product_0041",
+                    "type": "product",
+                    "label": "Rigolensystem",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "rigolensystem versickerung",
+            "owners": [
+                {
+                    "id": "wt_cat_0041_1",
+                    "type": "category",
+                    "label": "Rigolensystem Versickerung",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "retentionszisterne",
+            "owners": [
+                {
+                    "id": "wt_product_0042",
+                    "type": "product",
+                    "label": "Retentionszisterne",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "retentionszisterne regenrückhalt",
+            "owners": [
+                {
+                    "id": "wt_cat_0042_1",
+                    "type": "category",
+                    "label": "Retentionszisterne Regenrückhalt",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "tropfbewässerungsset",
+            "owners": [
+                {
+                    "id": "wt_product_0043",
+                    "type": "product",
+                    "label": "Tropfbewässerungsset",
+                    "world": "Bewässerung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "tropfbewässerungsset auswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0043_1",
+                    "type": "category",
+                    "label": "Tropfbewässerungsset Auswahl",
+                    "world": "Bewässerung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "tropfbewässerungsset betrieb",
+            "owners": [
+                {
+                    "id": "wt_cat_0043_2",
+                    "type": "category",
+                    "label": "Tropfbewässerungsset Betrieb",
+                    "world": "Bewässerung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "versenkregner",
+            "owners": [
+                {
+                    "id": "wt_product_0044",
+                    "type": "product",
+                    "label": "Versenkregner",
+                    "world": "Bewässerung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "versenkregner planung",
+            "owners": [
+                {
+                    "id": "wt_cat_0044_1",
+                    "type": "category",
+                    "label": "Versenkregner Planung",
+                    "world": "Bewässerung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "versenkregner wartung",
+            "owners": [
+                {
+                    "id": "wt_cat_0044_2",
+                    "type": "category",
+                    "label": "Versenkregner Wartung",
+                    "world": "Bewässerung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "bewässerungscomputer",
+            "owners": [
+                {
+                    "id": "wt_product_0045",
+                    "type": "product",
+                    "label": "Bewässerungscomputer",
+                    "world": "Bewässerung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "bewässerungscomputer bewässerungsautomatik",
+            "owners": [
+                {
+                    "id": "wt_cat_0045_1",
+                    "type": "category",
+                    "label": "Bewässerungscomputer Bewässerungsautomatik",
+                    "world": "Bewässerung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "bodenfeuchtesensor",
+            "owners": [
+                {
+                    "id": "wt_product_0046",
+                    "type": "product",
+                    "label": "Bodenfeuchtesensor",
+                    "world": "Bewässerung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "bodenfeuchtesensor sensoreinsatz",
+            "owners": [
+                {
+                    "id": "wt_cat_0046_1",
+                    "type": "category",
+                    "label": "Bodenfeuchtesensor Sensoreinsatz",
+                    "world": "Bewässerung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "gartenschlauch",
+            "owners": [
+                {
+                    "id": "wt_product_0047",
+                    "type": "product",
+                    "label": "Gartenschlauch",
+                    "world": "Bewässerung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "gartenschlauch schlauchpraxis",
+            "owners": [
+                {
+                    "id": "wt_cat_0047_1",
+                    "type": "category",
+                    "label": "Gartenschlauch Schlauchpraxis",
+                    "world": "Bewässerung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "trinkwassertank",
+            "owners": [
+                {
+                    "id": "wt_product_0048",
+                    "type": "product",
+                    "label": "Trinkwassertank",
+                    "world": "Wassertanks",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "trinkwassertank trinkwasserspeicherung",
+            "owners": [
+                {
+                    "id": "wt_cat_0048_1",
+                    "type": "category",
+                    "label": "Trinkwassertank Trinkwasserspeicherung",
+                    "world": "Wassertanks",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "ibc-wassertank",
+            "owners": [
+                {
+                    "id": "wt_product_0049",
+                    "type": "product",
+                    "label": "IBC-Wassertank",
+                    "world": "Wassertanks",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "ibc-wassertank auswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0049_1",
+                    "type": "category",
+                    "label": "IBC-Wassertank Auswahl",
+                    "world": "Wassertanks",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "ibc-wassertank betrieb",
+            "owners": [
+                {
+                    "id": "wt_cat_0049_2",
+                    "type": "category",
+                    "label": "IBC-Wassertank Betrieb",
+                    "world": "Wassertanks",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "mobiler wassertank",
+            "owners": [
+                {
+                    "id": "wt_product_0050",
+                    "type": "product",
+                    "label": "Mobiler Wassertank",
+                    "world": "Wassertanks",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "mobiler wassertank wassertransport",
+            "owners": [
+                {
+                    "id": "wt_cat_0050_1",
+                    "type": "category",
+                    "label": "Mobiler Wassertank Wassertransport",
+                    "world": "Wassertanks",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "nutzwassertank",
+            "owners": [
+                {
+                    "id": "wt_product_0051",
+                    "type": "product",
+                    "label": "Nutzwassertank",
+                    "world": "Wassertanks",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "nutzwassertank nutzwasserspeicherung",
+            "owners": [
+                {
+                    "id": "wt_cat_0051_1",
+                    "type": "category",
+                    "label": "Nutzwassertank Nutzwasserspeicherung",
+                    "world": "Wassertanks",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "hebeanlage",
+            "owners": [
+                {
+                    "id": "wt_product_0052",
+                    "type": "product",
+                    "label": "Hebeanlage",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "hebeanlage auswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0052_1",
+                    "type": "category",
+                    "label": "Hebeanlage Auswahl",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "hebeanlage betrieb",
+            "owners": [
+                {
+                    "id": "wt_cat_0052_2",
+                    "type": "category",                    "label": "Hebeanlage Betrieb",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "rückstauverschluss",
+            "owners": [
+                {
+                    "id": "wt_product_0053",
+                    "type": "product",
+                    "label": "Rückstauverschluss",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "rückstauverschluss eignung",
+            "owners": [
+                {
+                    "id": "wt_cat_0053_1",
+                    "type": "category",
+                    "label": "Rückstauverschluss Eignung",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "rückstauverschluss wartung",
+            "owners": [
+                {
+                    "id": "wt_cat_0053_2",
+                    "type": "category",
+                    "label": "Rückstauverschluss Wartung",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "grauwasseranlage",
+            "owners": [
+                {
+                    "id": "wt_product_0054",
+                    "type": "product",
+                    "label": "Grauwasseranlage",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "grauwasseranlage planung",
+            "owners": [
+                {
+                    "id": "wt_cat_0054_1",
+                    "type": "category",
+                    "label": "Grauwasseranlage Planung",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "grauwasseranlage betrieb",
+            "owners": [
+                {
+                    "id": "wt_cat_0054_2",
+                    "type": "category",
+                    "label": "Grauwasseranlage Betrieb",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "kleinkläranlage",
+            "owners": [
+                {
+                    "id": "wt_product_0055",
+                    "type": "product",
+                    "label": "Kleinkläranlage",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "kleinkläranlage auswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0055_1",
+                    "type": "category",
+                    "label": "Kleinkläranlage Auswahl",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "kleinkläranlage betrieb",
+            "owners": [
+                {
+                    "id": "wt_cat_0055_2",
+                    "type": "category",
+                    "label": "Kleinkläranlage Betrieb",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "abwassertank",
+            "owners": [
+                {
+                    "id": "wt_product_0056",
+                    "type": "product",
+                    "label": "Abwassertank",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "abwassertank abwasserspeicherung",
+            "owners": [
+                {
+                    "id": "wt_cat_0056_1",
+                    "type": "category",
+                    "label": "Abwassertank Abwasserspeicherung",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "bodenablauf",
+            "owners": [
+                {
+                    "id": "wt_product_0057",
+                    "type": "product",
+                    "label": "Bodenablauf",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "bodenablauf kellerentwässerung",
+            "owners": [
+                {
+                    "id": "wt_cat_0057_1",
+                    "type": "category",
+                    "label": "Bodenablauf Kellerentwässerung",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "revisionsschacht",
+            "owners": [
+                {
+                    "id": "wt_product_0058",
+                    "type": "product",
+                    "label": "Revisionsschacht",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "revisionsschacht schachtplanung",
+            "owners": [
+                {
+                    "id": "wt_cat_0058_1",
+                    "type": "category",
+                    "label": "Revisionsschacht Schachtplanung",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "abwasserrohr",
+            "owners": [
+                {
+                    "id": "wt_product_0059",
+                    "type": "product",
+                    "label": "Abwasserrohr",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "abwasserrohr rohrinstallation",
+            "owners": [
+                {
+                    "id": "wt_cat_0059_1",
+                    "type": "category",
+                    "label": "Abwasserrohr Rohrinstallation",
+                    "world": "Abwassertechnik",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "enteisenungsanlage",
+            "owners": [
+                {
+                    "id": "wt_product_0060",
+                    "type": "product",
+                    "label": "Enteisenungsanlage",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "enteisenungsanlage auswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0060_1",
+                    "type": "category",
+                    "label": "Enteisenungsanlage Auswahl",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "systemtrenner",
+            "owners": [
+                {
+                    "id": "wt_product_0061",
+                    "type": "product",
+                    "label": "Systemtrenner",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "systemtrenner einsatz",
+            "owners": [
+                {
+                    "id": "wt_cat_0061_1",
+                    "type": "category",
+                    "label": "Systemtrenner Einsatz",
+                    "world": "Wasseraufbereitung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "ph-messgerät",
+            "owners": [
+                {
+                    "id": "wt_product_0062",
+                    "type": "product",
+                    "label": "pH-Messgerät",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "ph-messgerät messpraxis",
+            "owners": [
+                {
+                    "id": "wt_cat_0062_1",
+                    "type": "category",
+                    "label": "pH-Messgerät Messpraxis",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "wasser-photometer",
+            "owners": [
+                {
+                    "id": "wt_product_0063",
+                    "type": "product",
+                    "label": "Wasser-Photometer",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "wasser-photometer auswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0063_1",
+                    "type": "category",
+                    "label": "Wasser-Photometer Auswahl",
+                    "world": "Wasseranalyse",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "rückschlagventil",
+            "owners": [
+                {
+                    "id": "wt_product_0064",
+                    "type": "product",
+                    "label": "Rückschlagventil",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "rückschlagventil auswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0064_1",
+                    "type": "category",
+                    "label": "Rückschlagventil Auswahl",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "pumpen-saugschlauchset",
+            "owners": [
+                {
+                    "id": "wt_product_0065",
+                    "type": "product",
+                    "label": "Pumpen-Saugschlauchset",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "pumpen-saugschlauchset anschluss",
+            "owners": [
+                {
+                    "id": "wt_cat_0065_1",
+                    "type": "category",
+                    "label": "Pumpen-Saugschlauchset Anschluss",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "druckbehälter",
+            "owners": [
+                {
+                    "id": "wt_product_0066",
+                    "type": "product",
+                    "label": "Druckbehälter",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "druckbehälter auswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0066_1",
+                    "type": "category",
+                    "label": "Druckbehälter Auswahl",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "pumpenvorfilter",
+            "owners": [
+                {
+                    "id": "wt_product_0067",
+                    "type": "product",
+                    "label": "Pumpenvorfilter",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "pumpenvorfilter auswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0067_1",
+                    "type": "category",
+                    "label": "Pumpenvorfilter Auswahl",
+                    "world": "Pumpen & Druck",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "tank-füllstandsanzeige",
+            "owners": [
+                {
+                    "id": "wt_product_0068",
+                    "type": "product",
+                    "label": "Tank-Füllstandsanzeige",
+                    "world": "Wassertanks",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "tank-füllstandsanzeige auswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0068_1",
+                    "type": "category",
+                    "label": "Tank-Füllstandsanzeige Auswahl",
+                    "world": "Wassertanks",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "tankdurchführung",
+            "owners": [
+                {
+                    "id": "wt_product_0069",
+                    "type": "product",
+                    "label": "Tankdurchführung",
+                    "world": "Wassertanks",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "tankdurchführung montage",
+            "owners": [
+                {
+                    "id": "wt_cat_0069_1",
+                    "type": "category",
+                    "label": "Tankdurchführung Montage",
+                    "world": "Wassertanks",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "zisternenfilter",
+            "owners": [
+                {
+                    "id": "wt_product_0070",
+                    "type": "product",
+                    "label": "Zisternenfilter",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "zisternenfilter auswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0070_1",
+                    "type": "category",
+                    "label": "Zisternenfilter Auswahl",
+                    "world": "Regenwasser",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "bewässerungs-wasserzähler",
+            "owners": [
+                {
+                    "id": "wt_product_0071",
+                    "type": "product",
+                    "label": "Bewässerungs-Wasserzähler",
+                    "world": "Bewässerung",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "bewässerungs-wasserzähler einsatz",
+            "owners": [
+                {
+                    "id": "wt_cat_0071_1",
+                    "type": "category",
+                    "label": "Bewässerungs-Wasserzähler Einsatz",
+                    "world": "Bewässerung",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "gewerbliche umkehrosmoseanlage",
+            "owners": [
+                {
+                    "id": "wt_product_0072",
+                    "type": "product",
+                    "label": "Gewerbliche Umkehrosmoseanlage",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "gewerbliche umkehrosmoseanlage anlagenauswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0072_1",
+                    "type": "category",
+                    "label": "Gewerbliche Umkehrosmoseanlage Anlagenauswahl",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "gewerbliche umkehrosmoseanlage anlagenbetrieb",
+            "owners": [
+                {
+                    "id": "wt_cat_0072_2",
+                    "type": "category",
+                    "label": "Gewerbliche Umkehrosmoseanlage Anlagenbetrieb",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "mehrschichtfilteranlage",
+            "owners": [
+                {
+                    "id": "wt_product_0073",
+                    "type": "product",
+                    "label": "Mehrschichtfilteranlage",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "mehrschichtfilteranlage filtermaterial",
+            "owners": [
+                {
+                    "id": "wt_cat_0073_1",
+                    "type": "category",
+                    "label": "Mehrschichtfilteranlage Filtermaterial",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "mehrschichtfilteranlage rückspültechnik",
+            "owners": [
+                {
+                    "id": "wt_cat_0073_2",
+                    "type": "category",
+                    "label": "Mehrschichtfilteranlage Rückspültechnik",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "elektrodeionisationsanlage",
+            "owners": [
+                {
+                    "id": "wt_product_0074",
+                    "type": "product",
+                    "label": "Elektrodeionisationsanlage",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "elektrodeionisationsanlage reinstwasser",
+            "owners": [
+                {
+                    "id": "wt_cat_0074_1",
+                    "type": "category",
+                    "label": "Elektrodeionisationsanlage Reinstwasser",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "elektrodeionisationsanlage betrieb",
+            "owners": [
+                {
+                    "id": "wt_cat_0074_2",
+                    "type": "category",
+                    "label": "Elektrodeionisationsanlage Betrieb",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "chemikalien-dosierpumpe",
+            "owners": [
+                {
+                    "id": "wt_product_0075",
+                    "type": "product",
+                    "label": "Chemikalien-Dosierpumpe",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "chemikalien-dosierpumpe auswahl",
+            "owners": [
+                {
+                    "id": "wt_cat_0075_1",
+                    "type": "category",
+                    "label": "Chemikalien-Dosierpumpe Auswahl",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "chemikalien-dosierpumpe dosierbetrieb",
+            "owners": [
+                {
+                    "id": "wt_cat_0075_2",
+                    "type": "category",
+                    "label": "Chemikalien-Dosierpumpe Dosierbetrieb",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "industrielle hochdruckpumpe",
+            "owners": [
+                {
+                    "id": "wt_product_0076",
+                    "type": "product",
+                    "label": "Industrielle Hochdruckpumpe",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "industrielle hochdruckpumpe pumpenauslegung",
+            "owners": [
+                {
+                    "id": "wt_cat_0076_1",
+                    "type": "category",
+                    "label": "Industrielle Hochdruckpumpe Pumpenauslegung",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "industrielle hochdruckpumpe wartung",
+            "owners": [
+                {
+                    "id": "wt_cat_0076_2",
+                    "type": "category",
+                    "label": "Industrielle Hochdruckpumpe Wartung",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "industrielle feststoffpumpe",
+            "owners": [
+                {
+                    "id": "wt_product_0077",
+                    "type": "product",
+                    "label": "Industrielle Feststoffpumpe",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "industrielle feststoffpumpe fördermedien",
+            "owners": [
+                {
+                    "id": "wt_cat_0077_1",
+                    "type": "category",
+                    "label": "Industrielle Feststoffpumpe Fördermedien",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "industrielle feststoffpumpe pumpenbetrieb",
+            "owners": [
+                {
+                    "id": "wt_cat_0077_2",
+                    "type": "category",
+                    "label": "Industrielle Feststoffpumpe Pumpenbetrieb",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "online-wasseranalysestation",
+            "owners": [
+                {
+                    "id": "wt_product_0078",
+                    "type": "product",
+                    "label": "Online-Wasseranalysestation",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "online-wasseranalysestation messtechnik",
+            "owners": [
+                {
+                    "id": "wt_cat_0078_1",
+                    "type": "category",
+                    "label": "Online-Wasseranalysestation Messtechnik",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "online-wasseranalysestation messbetrieb",
+            "owners": [
+                {
+                    "id": "wt_cat_0078_2",
+                    "type": "category",
+                    "label": "Online-Wasseranalysestation Messbetrieb",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "kühlwasser-dosierstation",
+            "owners": [
+                {
+                    "id": "wt_product_0079",
+                    "type": "product",
+                    "label": "Kühlwasser-Dosierstation",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_FACHPLAN_KONZEPT"
+                }
+            ]
+        },
+        {
+            "keyword": "kühlwasser-dosierstation kühlkreislauf",
+            "owners": [
+                {
+                    "id": "wt_cat_0079_1",
+                    "type": "category",
+                    "label": "Kühlwasser-Dosierstation Kühlkreislauf",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        },
+        {
+            "keyword": "kühlwasser-dosierstation dosierbetrieb",
+            "owners": [
+                {
+                    "id": "wt_cat_0079_2",
+                    "type": "category",
+                    "label": "Kühlwasser-Dosierstation Dosierbetrieb",
+                    "world": "Industrie & Großanlagen",
+                    "review_hold": false,
+                    "source": "W4_KONZEPT_RUBRIK_NO_SEO"
+                }
+            ]
+        }
+    ],
+    "rejected": [],
+    "fingerprint": "18db2da41da0a576cc07275766862606039dd630c963beb2e2caed05123c5b0f",
+    "generated_at_utc": "2026-11-14T12:29:04+00:00"
+}

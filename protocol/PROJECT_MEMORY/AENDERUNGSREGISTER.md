@@ -2069,3 +2069,10 @@ Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wa
 - **Korrektur:** 0.1.1 erfasst 8 + 19 + 1 + 6 + 79 + 105 = 218 unterscheidbare W4-SEO-Kandidaten, keine Dubletten oder ausgelassene Begriffe. Gleiche Pluginidentität; 0.1.0 bleibt nur Historie.
 - **Sicherheit:** Alte bezahlte DataForSEO-POST-Abfragen/Methoden komplett aus der Vorschau entfernt. Keine WordPress-Content-Schreibfunktionen. PHP-Lint, ZIP-Test, Mock-Preflight und Negativprüfungen PASS. Kein Live-WP, keine echten API-Kosten.
 - **Datei:** WT001 0.1.1 im Wassertechnik-Pluginbüro, Git-Blob cf457f42092c087984fc155dfa08b5eda7fd36b2; SHA256 01d835f6353a5d9ae2041155b3d2331c424ace48606a48ffac03e58cc6dcfd34.
+
+
+## 2026-11-14 – Wassertechnik: echter WT001-WordPress-Export / semantische Keywordprüfung
+- Nutzerexporte von `wasser.oliver-beil.de` gelesen und im Wassertechnik-Prüfbüro als Original-JSON hinterlegt.
+- W4 218/218 eindeutige Owner und kein technischer Reject/Review Hold; WP-Meldung: nur 2 Standardseiten, 1 Beispielbeitrag, 1 Standardkategorie, HivePress noch nicht konfiguriert.
+- **Kritische Differenz:** null technische Sperren sind **kein** semantischer SEO-PASS. 19 zusammengesetzte Gruppentitel + 105 Inhaltsrubrik-Begriffe + 4 weitere Sammelbezeichnungen müssen vor Bezahlrecherche redaktionell überprüft werden.
+- Volle 218er Eigentümer-/Qualitätsliste im Prüfbüro abgelegt. Kein WordPress-/Plugin-Code-Schreibzugriff, keine API-Kosten und keine Änderungen an anderen Campus-Portalen.
