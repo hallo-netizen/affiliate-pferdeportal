@@ -1,0 +1,12 @@
+{
+  "source_zip": "/mnt/data/ebay_full_audit/Affiliate_6.72.345_EBAY_STATUS_EINE_ENTSCHEIDUNG_QA.zip",
+  "new_zip": "/mnt/data/Affiliate_6.72.346_EBAY_GESAMTWORKFLOW_TEST.zip",
+  "file_count": 66,
+  "modified": [
+    "affiliate-portal-router/includes/trait-ppar-ebay-run.php",
+    "affiliate-portal-router/pferdeportal-affiliate-router.php"
+  ],
+  "untouched": 64,
+  "sha256": "2528ebfa053172cebaa0140200ce4681d0582257a91844a24f1044d6e30d7404",
+  "bytes": 5391360
+}
