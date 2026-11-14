@@ -1,0 +1,446 @@
+{
+  "schema": "V72_RECHERCHE_DELTA_KEIN_FACHMASTER",
+  "date": "2026-11-14",
+  "scope": [
+    "Haushalt",
+    "Garten",
+    "Freizeit",
+    "Sport",
+    "Bildung",
+    "Pflege",
+    "Humanoide"
+  ],
+  "excluded": [
+    "Gewerbe",
+    "Industrie",
+    "Humanoide/Arbeit"
+  ],
+  "status": "RESEARCH_ONLY_NO_WP_CHANGES",
+  "classification": "Produkt / Projekt / Idee; Herkunft und Quelle als Klartext",
+  "source_count": 26,
+  "source_count_by_type": {
+    "Idee": 18,
+    "Projekt": 8
+  },
+  "distinct_source_urls": 26,
+  "no_overlap_with_V70_V71_source_urls": true,
+  "items": [
+    {
+      "id": "V72-001",
+      "name": "Baby-Einschlafroboter mit sanftem Greifarm",
+      "kennzeichnung": "Idee",
+      "bereich": "Haushalt",
+      "fachbesitzer": "Babyberuhigungsroboter (NEU zu prüfen)",
+      "urheber": "Nanjing University, China",
+      "quelle": "https://patents.google.com/patent/CN110842929A/zh",
+      "einordnung": "2019/2020 patentierter Arm klopft/streichert beruhigend und reagiert auf Weinen; Patent kein Beleg der Sicherheit oder Serienreife.",
+      "entscheidung": "TYPKANDIDAT"
+    },
+    {
+      "id": "V72-002",
+      "name": "Schuh- und Socken-Anzieh- und Ausziehroboter",
+      "kennzeichnung": "Idee",
+      "bereich": "Pflege",
+      "fachbesitzer": "Ankleideroboter (V62 vorhanden)",
+      "urheber": "Pingxiang University, China",
+      "quelle": "https://patents.google.com/patent/CN210551253U/en",
+      "einordnung": "Patentschrift mit Schuhspann- und Sockenmodul; eigenständiger Einsatz, aber zunächst vorhandene Ankleideroboter-Seite vertiefen.",
+      "entscheidung": "REGISTER"
+    },
+    {
+      "id": "V72-003",
+      "name": "Vorhangreinigungsroboter – geschütztes Hochschuldesign",
+      "kennzeichnung": "Idee",
+      "bereich": "Haushalt",
+      "fachbesitzer": "Vorhangreinigungsroboter (NEU zu prüfen)",
+      "urheber": "Chengdu Technological University, China",
+      "quelle": "https://patents.google.com/patent/CN309106844S/en",
+      "einordnung": "2025 veröffentlichtes Gestaltungsmuster für Reinigung hängender Vorhänge; ein Design ist kein Prototyp.",
+      "entscheidung": "TYPKANDIDAT"
+    },
+    {
+      "id": "V72-004",
+      "name": "Vorhangreinigung ohne Abnehmen der Vorhänge",
+      "kennzeichnung": "Idee",
+      "bereich": "Haushalt",
+      "fachbesitzer": "Vorhangreinigungsroboter (derselbe Typ wie V72-003)",
+      "urheber": "Weihai Haiou Intelligent Electronic Technology, China",
+      "quelle": "https://patents.google.com/patent/CN113100659B/zh",
+      "einordnung": "Mechanische Reinigung direkt am Vorhang; konkretes Patent, keine zweite Produkttyp-Seite.",
+      "entscheidung": "REGISTER"
+    },
+    {
+      "id": "V72-005",
+      "name": "Geschirrwaschroboter mit Greifarmen und Bürsten",
+      "kennzeichnung": "Idee",
+      "bereich": "Haushalt",
+      "fachbesitzer": "Geschirrwaschroboter (NEU zu prüfen)",
+      "urheber": "Chinesische Erfinder / Patent",
+      "quelle": "https://patents.google.com/patent/CN106361242A/zh",
+      "einordnung": "Reinigt Teller direkt mit Greifern und Bürsten; abzugrenzen von bereits vorhandener Seite Geschirrspüler-Einräumroboter.",
+      "entscheidung": "TYPKANDIDAT"
+    },
+    {
+      "id": "V72-006",
+      "name": "Fahrender Blumentopf mit Lichtsuche und Bewässerung",
+      "kennzeichnung": "Idee",
+      "bereich": "Garten",
+      "fachbesitzer": "Pflanzenbegleitroboter (NEU zu prüfen)",
+      "urheber": "Chinesische Erfinder / Patent 2013",
+      "quelle": "https://patents.google.com/patent/CN103461078A/zh",
+      "einordnung": "Angetriebene Räder bringen Topfpflanzen gezielt ins Licht; zusätzlich automatische Bewässerung. Keine bloße smarte Pflanzensensorik.",
+      "entscheidung": "TYPKANDIDAT"
+    },
+    {
+      "id": "V72-007",
+      "name": "Pflanzenhaustier mit Lichtverfolgung und Sprache",
+      "kennzeichnung": "Idee",
+      "bereich": "Garten",
+      "fachbesitzer": "Pflanzenbegleitroboter (gleicher Typ V72-006)",
+      "urheber": "Chinesische Erfinder / Patent",
+      "quelle": "https://patents.google.com/patent/CN110442173A/zh",
+      "einordnung": "Verbindet Bewässerung, Lichtsuche und Sprechen zum Robotik-Pflanzenbegleiter. Nicht zweiten Typ eröffnen.",
+      "entscheidung": "REGISTER"
+    },
+    {
+      "id": "V72-008",
+      "name": "Tierbürstroboter mit verstellbarem Fellkamm",
+      "kennzeichnung": "Idee",
+      "bereich": "Haushalt",
+      "fachbesitzer": "Haustierbürstroboter (NEU zu prüfen)",
+      "urheber": "Individueller Erfinder, China",
+      "quelle": "https://patents.google.com/patent/CN112293290A/zh",
+      "einordnung": "Motorisch verstellbarer Kammring für unterschiedlich große Tiere; eigenständige Fellpflege gegenüber Tierwäsche, aber gemeinsame Kategorie möglich.",
+      "entscheidung": "TYPKANDIDAT"
+    },
+    {
+      "id": "V72-009",
+      "name": "Mobiler KI-Tierpfleger mit zwei Armen",
+      "kennzeichnung": "Idee",
+      "bereich": "Haushalt",
+      "fachbesitzer": "Haustierroboter / Tierwaschroboter V68",
+      "urheber": "Chinesische Patentanmelder",
+      "quelle": "https://patents.google.com/patent/CN119130735A/zh",
+      "einordnung": "Ein Arm soll massieren, der andere bürsten/reinigen; kombiniert vorhandene Funktionen statt neuer Obergruppe.",
+      "entscheidung": "REGISTER"
+    },
+    {
+      "id": "V72-010",
+      "name": "Fahrender Haustier-Spielplatz mit eigener Mitfahrfläche",
+      "kennzeichnung": "Idee",
+      "bereich": "Haushalt",
+      "fachbesitzer": "Haustierroboter (V62 vorhanden)",
+      "urheber": "Shanghai Tiangen Network Technology, China",
+      "quelle": "https://patents.google.com/patent/CN113500608A/zh",
+      "einordnung": "Mobile Plattform mit Spielzeug und Tierkamera; Haustiere können laut Patent mitfahren. Modellvariante, keine neue Typseite.",
+      "entscheidung": "REGISTER"
+    },
+    {
+      "id": "V72-011",
+      "name": "Haustierroboter mit Augmented-Reality-Erlebnis",
+      "kennzeichnung": "Idee",
+      "bereich": "Haushalt",
+      "fachbesitzer": "Haustierroboter (V62 vorhanden)",
+      "urheber": "Sichuan Changhong Hongwei Technology, China",
+      "quelle": "https://patents.google.com/patent/CN121170211A/zh",
+      "einordnung": "Haustierkamera-Perspektive wird mit AR für entfernten Besitzer aufbereitet; Funktionsvariante, keine neue Geräteklasse.",
+      "entscheidung": "REGISTER"
+    },
+    {
+      "id": "V72-012",
+      "name": "Automatischer Nagellackierroboter mit Kamera und Muster",
+      "kennzeichnung": "Idee",
+      "bereich": "Pflege",
+      "fachbesitzer": "Nagelpflegeroboter (V71-Kandidat)",
+      "urheber": "Chinesischer Patentanmelder",
+      "quelle": "https://patents.google.com/patent/CN108477809B/zh",
+      "einordnung": "Patentierte Mustererkennung mit Lack- und Musterdruck; Nagellackieren ist zusätzliches Thema zum V71-Nagelschneideroboter.",
+      "entscheidung": "REGISTER"
+    },
+    {
+      "id": "V72-013",
+      "name": "Ganzkörper-Badepflegeroboter für eingeschränkte Menschen",
+      "kennzeichnung": "Idee",
+      "bereich": "Pflege",
+      "fachbesitzer": "Dusch- / Körperpflegeassistenz",
+      "urheber": "Chinesischer Patentanmelder",
+      "quelle": "https://patents.google.com/patent/CN109330445A/zh",
+      "einordnung": "Patentschrift mit Sitz-, Wasch- und Bürstmechanik; keine nachgewiesene Anwendung am Patienten. Vorhandene Pflege- und Duschtypen abgleichen.",
+      "entscheidung": "REGISTER"
+    },
+    {
+      "id": "V72-014",
+      "name": "Babypflege-Trainingsroboter mit Hunger- und Windelsensor",
+      "kennzeichnung": "Idee",
+      "bereich": "Bildung",
+      "fachbesitzer": "Säuglings-Pflegetrainer (V71 vorhanden)",
+      "urheber": "Chinesischer Patentanmelder",
+      "quelle": "https://patents.google.com/patent/CN108393893A/zh",
+      "einordnung": "Sensoren lassen Trainingspuppe Hunger und nasse Windeln simulieren; vorhandenen V71-Typ ergänzen.",
+      "entscheidung": "REGISTER"
+    },
+    {
+      "id": "V72-015",
+      "name": "Rivo – modularer Familien- und Haustierassistent",
+      "kennzeichnung": "Idee",
+      "bereich": "Haushalt",
+      "fachbesitzer": "Haushaltsassistenten / Haustierroboter",
+      "urheber": "China Academy of Art, Studierenden-Design 2026",
+      "quelle": "https://zjnews.zjol.com.cn/yc/qmt/202606/t20260606_31709252.shtml",
+      "einordnung": "Kunsthochschul-Entwurf mit austauschbaren Greif-, Pflege-, Tier- und Berührungsarmen. Keine vier neuen Robotertypen.",
+      "entscheidung": "REGISTER"
+    },
+    {
+      "id": "V72-016",
+      "name": "Bewegliche Hände für Wäsche und Lebensmittel",
+      "kennzeichnung": "Projekt",
+      "bereich": "Haushalt",
+      "fachbesitzer": "Haushaltsassistenz / Wäschefaltroboter",
+      "urheber": "Sugano Laboratory, Waseda University, Japan",
+      "quelle": "https://www.sugano.mech.waseda.ac.jp/en/research/cognitive-robotics-en/",
+      "einordnung": "Universitätslabor erforscht Greifen verformbarer Gegenstände und beidarmige Hausarbeit; Projekt, nicht fertiges Haushaltsgerät.",
+      "entscheidung": "REGISTER"
+    },
+    {
+      "id": "V72-017",
+      "name": "Haushaltsroboter, der ein kleines Frühstück vorbereitet",
+      "kennzeichnung": "Projekt",
+      "bereich": "Humanoide",
+      "fachbesitzer": "Humanoide Haushaltsassistenten (V62 vorhanden)",
+      "urheber": "JST Moonshot / Kawaharazuka Project, Japan",
+      "quelle": "https://www.jst.go.jp/moonshot/en/program/goal3/3D_kawaharazuka.html",
+      "einordnung": "Projektziel: neue Aufgaben nach einmaligem Vormachen oder Anweisung; als Forschungsziel kennzeichnen, nicht als erledigten Praxistest.",
+      "entscheidung": "REGISTER"
+    },
+    {
+      "id": "V72-018",
+      "name": "Haushaltsroboter mit präziser Kraftregelung",
+      "kennzeichnung": "Projekt",
+      "bereich": "Haushalt",
+      "fachbesitzer": "Haushaltsassistenten (V62 vorhanden)",
+      "urheber": "Tsukuba University, Japan",
+      "quelle": "https://tiar.centers.tsukuba.ac.jp/en/journal/1291/",
+      "einordnung": "Forschung zu Greifen, Reinigen und Kochen mit Kraftsteuerung; keine neue Kategorie für dieselbe universelle Plattform.",
+      "entscheidung": "REGISTER"
+    },
+    {
+      "id": "V72-019",
+      "name": "HIRO-Chan – Roboterbaby als emotionales Trainingsobjekt",
+      "kennzeichnung": "Projekt",
+      "bereich": "Bildung",
+      "fachbesitzer": "Roboterbabys / Pflege-Trainer",
+      "urheber": "Miraikan (Museum of Emerging Science), Japan",
+      "quelle": "https://www.miraikan.jst.go.jp/en/exhibitions/future/hellorobots/",
+      "einordnung": "Museum beschreibt sensorgesteuertes, babyähnliches interaktives Robotersystem; als konkretes Modell ins Register.",
+      "entscheidung": "REGISTER"
+    },
+    {
+      "id": "V72-020",
+      "name": "Emotionaler Seniorenbegleiter mit Opern- und Gesprächsfunktion",
+      "kennzeichnung": "Idee",
+      "bereich": "Pflege",
+      "fachbesitzer": "Pflegebegleiter (V62 vorhanden)",
+      "urheber": "Zhengzhou Soki Culture Media / Beijing Foreign Studies University",
+      "quelle": "https://thelondondesignawards.com/cn/winner-info.php?id=8152",
+      "einordnung": "2026 ausgezeichnetes Design für ältere Alleinlebende; Funktionsumfang aus Designbeschreibung, keine Serienreife abgeleitet.",
+      "entscheidung": "REGISTER"
+    },
+    {
+      "id": "V72-021",
+      "name": "Roboter für Körperreinigung einschließlich Toilettenhilfe",
+      "kennzeichnung": "Projekt",
+      "bereich": "Pflege",
+      "fachbesitzer": "Humanoide Pflegeassistenten / Körperpflege",
+      "urheber": "JST Moonshot / Sugano Project, Japan",
+      "quelle": "https://www.jst.go.jp/moonshot/en/program/goal3/31_sugano.html",
+      "einordnung": "Moonshot-Projekt nennt für 2030 ausdrücklich Pflegeaufgaben wie Körperreinigung, Geh- und Toilettenhilfe; Ziel, keine Verkaufsbehauptung.",
+      "entscheidung": "REGISTER"
+    },
+    {
+      "id": "V72-022",
+      "name": "Roboterhunde mit an Hundeverhalten orientierten Pflegebesuchen",
+      "kennzeichnung": "Projekt",
+      "bereich": "Pflege",
+      "fachbesitzer": "Pflegebegleiter / Robotertiere",
+      "urheber": "Chuo University, Japan, Studie Juli 2026",
+      "quelle": "https://chuo-u.repo.nii.ac.jp/records/2003956",
+      "einordnung": "Wissenschaftliche Arbeit zu psychophysiologischen Effekten wiederholter Roboterhund-Sitzungen. Studie im Register und Magazin, kein neues Modell erfunden.",
+      "entscheidung": "REGISTER"
+    },
+    {
+      "id": "V72-023",
+      "name": "KI-Living-Lab für Haushaltshilfen",
+      "kennzeichnung": "Projekt",
+      "bereich": "Humanoide",
+      "fachbesitzer": "Haushaltsassistenten (V62 vorhanden)",
+      "urheber": "Miraikan / AI Robot Association / University of Tokyo",
+      "quelle": "https://www.miraikan.jst.go.jp/en/lab/facilities/AIRobotLivingLab/",
+      "einordnung": "Reale Forschungsumgebung zur Verbesserung von Alltagsrobotern per Nutzerfeedback. Forschungsprojekt statt käufliches Robotermodell.",
+      "entscheidung": "REGISTER"
+    },
+    {
+      "id": "V72-024",
+      "name": "Haustierpflege-Roboter mit Fütterung und Kamera",
+      "kennzeichnung": "Idee",
+      "bereich": "Haushalt",
+      "fachbesitzer": "Haustierroboter (V62 vorhanden)",
+      "urheber": "Chinesischer Patentanmelder",
+      "quelle": "https://patents.google.com/patent/CN212260115U/zh",
+      "einordnung": "Mobile Haustierbegleitung mit Fütter- und Überwachungsfunktionen. Bestehende Kategorie statt Neuanlage.",
+      "entscheidung": "REGISTER"
+    },
+    {
+      "id": "V72-025",
+      "name": "Selbstreinigungs-Roboter, der Haustierfell abstreift",
+      "kennzeichnung": "Idee",
+      "bereich": "Haushalt",
+      "fachbesitzer": "Saugroboter / Haustierroboter",
+      "urheber": "Chinesischer Patentanmelder",
+      "quelle": "https://patents.google.com/patent/CN118844863B/zh",
+      "einordnung": "Reinigungsroboter mit elektrostatischem Fellfang und Selbstreinigung; Variante eines bestehenden Reinigungsroboters.",
+      "entscheidung": "REGISTER"
+    },
+    {
+      "id": "V72-026",
+      "name": "Humanoider Forschungsroboter mit rollenden Füßen",
+      "kennzeichnung": "Projekt",
+      "bereich": "Humanoide",
+      "fachbesitzer": "Humanoide Mobilität / Entwicklungsroboter",
+      "urheber": "JST Moonshot / Osaka Metropolitan University, Japan",
+      "quelle": "https://www.jst.go.jp/moonshot/en/program/goal3/3N_nakagawa.html",
+      "einordnung": "2026 gestartetes Forschungsprojekt zur kombinierten Roll-/Fußmobilität. Keine zusätzliche Arbeits-/Industriekategorie.",
+      "entscheidung": "REGISTER"
+    }
+  ],
+  "new_type_candidates": [
+    {
+      "name": "Babyberuhigungsroboter",
+      "welt": "Haushalt",
+      "beleg_id": "V72-001",
+      "rubriken": {
+        "Funktionen": [
+          "Mechanisches Streicheln statt Musik",
+          "Geräuscherkennung und Reaktion",
+          "Sanfte Bewegungssteuerung",
+          "Abgrenzung zu intelligenten Babywiegen"
+        ],
+        "Sicherheit": [
+          "Abstand zwischen Roboterarm und Baby",
+          "Grenzen der Babyschlaf-Automation",
+          "Notabschaltung und Beaufsichtigung",
+          "Unterschied von Patent und geprüftem Kinderprodukt"
+        ],
+        "Entwicklung": [
+          "Nanjing-Patent im Detail",
+          "Konzepte für weiche Roboterarme",
+          "Erprobung mit Dummys statt Säuglingen",
+          "Forschung zu Berührung und Beruhigung"
+        ]
+      }
+    },
+    {
+      "name": "Vorhangreinigungsroboter",
+      "welt": "Haushalt",
+      "beleg_id": "V72-003",
+      "rubriken": {
+        "Verfahren": [
+          "Staub entfernen ohne Vorhang abzunehmen",
+          "Trockenbürsten versus Absaugen",
+          "Reinigung unterschiedlicher Stoffarten",
+          "Falten und Säume erreichen"
+        ],
+        "Technik": [
+          "Kletter- und Führungssysteme",
+          "Antrieb entlang der Gardine",
+          "Sensorik für Falten und Hindernisse",
+          "Auffangen von Staub"
+        ],
+        "Entwicklung": [
+          "Chengdu-Designanmeldung",
+          "Vergleich alter Reinigungspatente",
+          "Grenzen eines bloßen Designmusters",
+          "Wann sich ein Prototyp lohnt"
+        ]
+      }
+    },
+    {
+      "name": "Geschirrwaschroboter",
+      "welt": "Haushalt",
+      "beleg_id": "V72-005",
+      "rubriken": {
+        "Handhabung": [
+          "Greifer für Gläser und Teller",
+          "Unterschiedliche Größen und Formen",
+          "Aufnehmen ohne Beschädigung",
+          "Ablauf der Handwäsche durch Roboter"
+        ],
+        "Reinigung": [
+          "Bürsten und Sprühtechniken",
+          "Erkennen von Resten",
+          "Reinigungsmittel und Wasser",
+          "Hygiene und Trocknung"
+        ],
+        "Abgrenzung": [
+          "Spülroboter gegenüber Geschirrspülmaschine",
+          "Unterschied zum Einräumroboter",
+          "Chinesisches Patent als Konzept",
+          "Aufwand und realistische Grenzen"
+        ]
+      }
+    },
+    {
+      "name": "Pflanzenbegleitroboter",
+      "welt": "Garten",
+      "beleg_id": "V72-006",
+      "rubriken": {
+        "Mobilität": [
+          "Fahrende Pflanzentöpfe mit Sensoren",
+          "Lichtsuche und schattige Standorte",
+          "Schwellen und Hindernisse im Haus",
+          "Drehen gegenüber freier Bewegung"
+        ],
+        "Pflanzenpflege": [
+          "Feuchte messen und bewässern",
+          "Lichtbedarf verschiedener Pflanzen",
+          "Wasser- und Batteriereserven",
+          "Schutz vor zu viel Sonne"
+        ],
+        "Entwicklung": [
+          "Patent des mobilen Blumentopfs von 2013",
+          "Pflanzenhaustiere als Interaktionsidee",
+          "Abgrenzung zum stationären Smart-Topf",
+          "Bezüge zu Beet- und Saatrobotern"
+        ]
+      }
+    },
+    {
+      "name": "Haustierbürstroboter",
+      "welt": "Haushalt",
+      "beleg_id": "V72-008",
+      "rubriken": {
+        "Felltypen": [
+          "Kurz- und Langhaarfell",
+          "Kleine und große Haustiere",
+          "Verfilzungen und empfindliche Bereiche",
+          "Bürstenformen und Materialien"
+        ],
+        "Technik": [
+          "Motorisch verstellbare Kammringe",
+          "Bürsten mit Saugfunktion",
+          "Sensoren für Fellwiderstand",
+          "Automatisches Reinigen der Bürste"
+        ],
+        "Tierwohl": [
+          "Stress und Gewöhnung",
+          "Sicherer Stopp und Ausstieg",
+          "Abgrenzung zur Waschmaschine für Tiere",
+          "Patentlage und offene Prototypfragen"
+        ]
+      }
+    }
+  ],
+  "new_type_candidate_count": 5,
+  "candidate_facets": 15,
+  "article_directions": 60,
+  "note": "Die Funde sind einzelne Belege, NICHT lauter neue Robotertypseiten. Alle 5 Typkandidaten sind vorläufig. V67–V71-Dopplungen auf Funktionsebene bewusst markiert."
+}
