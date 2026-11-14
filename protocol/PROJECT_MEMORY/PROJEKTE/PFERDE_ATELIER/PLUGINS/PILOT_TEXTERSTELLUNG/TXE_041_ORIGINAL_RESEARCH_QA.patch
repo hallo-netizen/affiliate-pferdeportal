@@ -35,25 +35,26 @@
  // Existing PSERC import functions: unchanged originals. No second importer implementation.
  require_once __DIR__.'/original/pserc/class-pserc-stable-json.php';
  require_once __DIR__.'/original/pserc/class-pserc-plan-slot-identity.php';
-@@ -170,8 +189,16 @@
+@@ -170,9 +189,16 @@
          $canonical=self::text($item['article_id']??'');
          if ($slot!=='' && !preg_match('/^[a-f0-9]{64}$/D',$slot))throw new RuntimeException('PLAN_SLOT_INVALID');
          if ($canonical!=='' && $slot!=='' && !hash_equals(self::slot($canonical),$slot))throw new RuntimeException('SLOT_ARTICLE_ID_MISMATCH');
-+        if ($kind==='ALT_FREIGABE' && ($canonical==='' || $slot==='')) {
-+            // Keep the original decision but never fabricate a production-ready identity.
-+            $canonical='';$slot='';
-+        }
++        // Partially recorded old identities stay visible and unchanged, but remain held.
++        // Never generate or clear an original canonical ID or slot on import.
          $slotOrigin=($slot!=='' ? 'PROVIDED_IN_APPROVAL' : 'GENERATED_LOCALLY');
 -        if ($canonical==='' && $slot==='') { $canonical=$id;$slot=self::slot($id); }
+-        $ready=$keyword!==''&&$title!==''&&$category!==''&&$type!==''&&$slot!=='';
 +        // Historical FREI decisions keep their original article identity. A missing
 +        // original booking is a technical HOLD, not permission to invent a new slot.
 +        if ($canonical==='' && $slot==='') {
 +            if ($kind!=='ALT_FREIGABE') { $canonical=$id;$slot=self::slot($id); }
 +        }
-         $ready=$keyword!==''&&$title!==''&&$category!==''&&$type!==''&&$slot!=='';
++        $ready=$keyword!==''&&$title!==''&&$category!==''&&$type!==''&&$slot!==''
++            &&($kind!=='ALT_FREIGABE'||$canonical!=='');
          $s['orders'][$id]=[
              'id'=>$id,'source_id'=>$source,'origin'=>$kind,'intent'=>self::text($item['intent']??''),
-@@ -223,7 +250,9 @@
+             'target_keyword'=>$keyword,'title'=>$title,'category'=>$category,'article_type'=>$type,
+@@ -223,7 +249,9 @@
                      try{$new[]=self::enqueue($s,['source_id'=>self::text($v['pool_key']??''),
                          'target_keyword'=>self::text($v['raw_query']??''),'title'=>self::text($v['approved_title']??''),
                          'category'=>self::text($v['category']??$v['category_slug']??''),
@@ -64,7 +65,7 @@
                  }
              } else {throw new RuntimeException('UNSUPPORTED_APPROVAL_FORMAT');}
              foreach($new as $id)if(($s['orders'][$id]['status']??'')==='METADATEN_OFFEN')$held++;
-@@ -310,34 +339,26 @@
+@@ -310,34 +338,26 @@
              return ['state'=>$s,'result'=>['imported'=>count($rows),'draft_ids'=>array_values($readback),'created'=>count((array)($result['created_post_ids']??[]))]];
          });
      }
@@ -118,7 +119,7 @@
      }
  
      /** The one editorial owner decides portal relevance, intent, category and article type. */
-@@ -493,11 +514,17 @@
+@@ -493,11 +513,17 @@
              if(!is_array($proof)||($proof['box']??'')!=='FREI')continue;
              $title=self::text($proof['approved_title']??'');
              if($title==='')$title=self::text($completed[$key]['titles'][0]['title']??'');
@@ -137,7 +138,7 @@
              ];
          }
          if(!$items)throw new RuntimeException('NO_FREE_OLD_APPROVALS');
-@@ -656,11 +683,12 @@
+@@ -656,11 +682,12 @@
              TXE_Diagnose::record('ACTION_STARTED');
              TXE_Diagnose::recordUpload();
              if($action==='txe_credentials_save') {
@@ -151,7 +152,7 @@
              if($action==='txe_seo_export') {
                  self::download(self::seoExport((int)($_POST['count']??20)),'texterstellung-redaktion-seo-auftrag.json');
              }
-@@ -671,9 +699,9 @@
+@@ -671,9 +698,9 @@
              }
              if($action==='txe_research') {
                  if(empty($_POST['cost_ack']))throw new RuntimeException('DATAFORSEO_KOSTEN_NICHT_BESTAETIGT');
@@ -164,7 +165,7 @@
              }
              if($action==='txe_approve_research') {
                  $id=self::approveResearch(sanitize_text_field(wp_unslash($_POST['research_id']??'')),
-@@ -751,7 +779,7 @@
+@@ -751,7 +778,7 @@
      public static function page(): void {
          if(!current_user_can('manage_options'))wp_die('Nicht erlaubt');
          $view=self::view();
@@ -173,7 +174,7 @@
          if (!self::permitted()) {
              echo '<div class="notice notice-warning"><p><strong>Testmodus noch nicht freigeschaltet.</strong> Das Plugin ist installiert, aber es wird nichts recherchiert, exportiert oder importiert. Es sind keine WordPress-Konfigurationsänderungen erforderlich.</p></div>';
              echo '<h2>Diese Testinstallation einmalig bestätigen</h2><p>Prüfe die Adresse: <strong>'.esc_html(home_url('/')).'</strong>. Bestätige ausschließlich, wenn es sich um eine <strong>getrennte Testinstallation</strong> handelt. <strong>Niemals auf der Live-Website bestätigen.</strong></p>';
-@@ -776,53 +804,50 @@
+@@ -776,53 +803,50 @@
          echo '<p><strong>Auftragsregal:</strong> '.count((array)$s['orders']).' · '.esc_html(wp_json_encode($counts)).'</p>';
          if($view==='uebersicht') {
              echo '<h2>Workflowübersicht</h2><p>Der spätere Ablauf ist hier in einem Plugin zusammengeführt. Jede Station ist links separat anwählbar.</p>';
