@@ -1,0 +1,34 @@
+--- /mnt/data/ebay_full_audit/src/affiliate-portal-router/includes/trait-ppar-ebay-run.php	2026-11-14 09:30:30.555851492 +0000
++++ /mnt/data/ebay_full_audit/qa63/src/affiliate-portal-router/includes/trait-ppar-ebay-run.php	2026-11-14 09:43:32.204445296 +0000
+@@ -1213,8 +1213,11 @@
+         return true;
+     }
+ 
+-    /** Determine the next automatic canonical operation without any server cron.
+-     * Discovery owns the complete 3h cycle; otherwise refresh is due hourly. */
++    /** One clock and one completed-cycle boundary. A nested eBay discovery
++     * result is NOT the end of the canonical WordPress workflow. Never start
++     * another full search before the preceding saved canonical run actually
++     * finished its publication and cleanup. Existing legacy last_sync remains
++     * the fallback only when no completed canonical full cycle exists. */
+     private function ebay_external_tick_due_operation($settings) {
+         $settings = is_array($settings) ? $settings : $this->ebay_settings();
+         if (empty($settings['enabled'])) { return ''; }
+@@ -1223,6 +1226,17 @@
+         $refresh = is_array($settings['last_refresh'] ?? null) ? $settings['last_refresh'] : array();
+         $last_sync = absint($sync['finished_at'] ?? 0);
+         $last_refresh = absint($refresh['finished_at'] ?? 0);
++        $saved = $this->ebay_run_load();
++        if (is_array($saved) && (string)($saved['schema']??'')==='1.0'
++            && sanitize_key((string)($saved['status']??''))==='completed'
++            && sanitize_key((string)($saved['phase']??''))==='completed') {
++            $finished=absint($saved['finished_at']??0);
++            if ($finished>0 && $finished<=$now) {
++                $operation=sanitize_key((string)($saved['operation']??''));
++                if ($operation==='sync') { $last_sync=$finished; }
++                if ($operation==='refresh') { $last_refresh=$finished; }
++            }
++        }
+         if ($last_sync <= 0 || ($now - $last_sync) >= 3 * HOUR_IN_SECONDS) { return 'sync'; }
+         if (!empty($settings['inventory_refresh_enabled']) && ($last_refresh <= 0 || ($now - $last_refresh) >= HOUR_IN_SECONDS)) { return 'refresh'; }
+         return '';
