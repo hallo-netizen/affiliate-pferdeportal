@@ -1,0 +1,79 @@
+name: Hab & Bewahr HAB-004 save verified RC43 plugin ZIP into office CURRENT
+on:
+  push:
+    branches: [hab-affiliate-rc43-real-160-deep-owner-20261114]
+    paths:
+      - .github/workflows/hab-rc43-archive-current-zip-office-20261114.yml
+permissions:
+  contents: write
+jobs:
+  archive-tested-live-plugin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Verify immutable old base and full historical reconstruction after office move
+        shell: bash
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          O="$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE"
+          OLD=c9d501396d5500e699eb6dd8d867318c41e8ea8efc43c8fe00ad9ee4ab4e32d1
+          echo "$OLD  $O/HAB_AFFILIATE_RC22_0.1.19-rc22.zip" | sha256sum -c -
+          echo "$OLD  $O/CURRENT.zip" | sha256sum -c -
+          python3 "$R/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/build_candidate.py"
+          python3 "$R/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112/qa_candidate.py"
+          echo "HISTORICAL_RC22_IMMUTABLE_SOURCE_REBUILD_QA_PASS"
+      - name: Download exact verified RC43 full ZIP from tested release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          R=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ
+          O="$R/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE"
+          mkdir -p /tmp/rc43
+          gh release download hab-affiliate-rc43-real-160-source-deep-mapping-20261114 \
+            --pattern HAB_Bewahr_Affiliate_RC43_REAL_160_DEEP_ZUORDNUNG_TEST.zip \
+            --dir /tmp/rc43 \
+            --repo hallo-netizen/affiliate-pferdeportal
+          SOURCE=/tmp/rc43/HAB_Bewahr_Affiliate_RC43_REAL_160_DEEP_ZUORDNUNG_TEST.zip
+          HASH=7e9a92fa2ee5ac93c6dce8bd4924858d661478921b6768c2103172845ed9e2e8
+          echo "$HASH  $SOURCE" | sha256sum -c -
+          unzip -tqq "$SOURCE"
+          test "$(unzip -Z1 "$SOURCE" | wc -l)" -eq 36
+          unzip -p "$SOURCE" affiliate-portal-router/affiliate-portal-router.php | grep -F 'Version: 0.1.40-rc43'
+          cp "$SOURCE" "$O/HAB_AFFILIATE_RC43_0.1.40-rc43.zip"
+          cp "$SOURCE" "$O/CURRENT.zip"
+          cmp "$O/CURRENT.zip" "$O/HAB_AFFILIATE_RC43_0.1.40-rc43.zip"
+          echo "$HASH  $O/CURRENT.zip" | sha256sum -c -
+          echo "$HASH  $O/HAB_AFFILIATE_RC43_0.1.40-rc43.zip" | sha256sum -c -
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          from zipfile import ZipFile
+          root=Path("protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ")
+          d=root/"PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE"
+          previous=d/"HAB_AFFILIATE_RC22_0.1.19-rc22.zip"
+          latest=d/"CURRENT.zip"
+          assert hashlib.sha256(previous.read_bytes()).hexdigest()=="c9d501396d5500e699eb6dd8d867318c41e8ea8efc43c8fe00ad9ee4ab4e32d1"
+          with ZipFile(latest) as z:
+            assert z.testzip() is None and len(z.namelist())==36
+            php=z.read("affiliate-portal-router/affiliate-portal-router.php")
+            assert b"Version: 0.1.40-rc43" in php
+            assert b"ppar_hab_rc43_tarifcheck_reconcile_v1" in z.read("affiliate-portal-router/includes/trait-ppar-output-objects.php")
+          print("OFFICE_CURRENT_RC43_ARCHIVED_UNCHANGED_TESTED_COMPLETE_36_FILES_PASS")
+          PY
+      - name: Commit checked RC43 originals into official Plugin-Büro only
+        shell: bash
+        run: |
+          set -euo pipefail
+          O=protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE
+          git add "$O/CURRENT.zip" "$O/HAB_AFFILIATE_RC43_0.1.40-rc43.zip"
+          git diff --cached --stat
+          git -c user.name="GitHub Actions" -c user.email="github-actions[bot]@users.noreply.github.com" \
+            commit -m "archive(hab): certified live RC43 full plugin as official CURRENT.zip and immutable release copy"
+          git push origin HEAD:refs/heads/hab-affiliate-rc43-real-160-deep-owner-20261114
+          echo "OFFICIAL_HAB_PLUGIN_OFFICE_PLUGIN_SAVED_IN_GIT_PASS"
