@@ -61,6 +61,8 @@ class RealHD009Worker {
    $GLOBALS['imports']++;
    if (!is_file($path)) return new WP_Error('missing','No downloaded file');
    $GLOBALS['settings']['last_match_revision']=$this->idealo_match_contract_revision();
+   $GLOBALS['settings']['last_import_feed_id']=(string)$GLOBALS['settings']['feed_id'];
+   $GLOBALS['settings']['last_import_adspace_id']=(string)$GLOBALS['settings']['adspace_id'];
    $GLOBALS['settings']['last_import_at']=time();
    return array('status'=>'success','message'=>'Import with full match');
  }
@@ -106,6 +108,16 @@ $GLOBALS['remote_hash']='new-data';
 $r=$w->refresh();
 ck(($r['status']??'')==='unchanged','HTTP304 with verified current revision is safe');
 ck($GLOBALS['settings']['last_import_at']>=time()-2,'HTTP304 keeps valid last-good product cards fresh');
+$GLOBALS['remote_hash']=$GLOBALS['settings']['last_remote_file_hash'];
+$GLOBALS['settings']['feed_id']='2901';
+$GLOBALS['settings']['last_import_feed_id']='2747';
+$GLOBALS['download_mode']='downloaded';
+$before_switch=$GLOBALS['imports'];
+ck(!$w->active(),'Feed switch cannot publish 2747 campaigns as though they were from 2901');
+$r=$w->refresh();
+ck(!is_wp_error($r)&&$GLOBALS['imports']===$before_switch+1,'Feed switch forces new one-time decision even if content hash is identical');
+ck($GLOBALS['download_arguments']['feed_id']==='2901'&&$GLOBALS['download_arguments']['feed_etag']===''&&$GLOBALS['download_arguments']['feed_last_modified']==='','Feed switch cannot reuse old feed cache/conditional headers');
+ck($w->active(),'New feed activated only after its own full completed import');
 $GLOBALS['settings']['enabled']=false;
 ck(!$w->active(),'Disabled provider remains disabled; semantic matching does not bypass access permission');
 
