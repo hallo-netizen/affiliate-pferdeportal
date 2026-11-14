@@ -1,0 +1,18 @@
+{
+  "source_baseline": "Affiliate_6.72.343_KISS_WORKER_REGAL_GESAMT_TEST.zip",
+  "source_sha256": "297cb36c1c273d9ed6c2972ef31f8c49ae327aebcd8beb397b5d9963f02eb454",
+  "version": "6.72.344",
+  "changed_files": [
+    "includes/trait-ppar-automation-suite.php",
+    "includes/trait-ppar-ebay.php",
+    "pferdeportal-affiliate-router.php",
+    "readme.txt"
+  ],
+  "package_sha256": "b473aee90b488d3400557aacc3e96006e7899c8f56fdc58ec0ccc0941dc254fa",
+  "package_size_bytes": 5386299,
+  "file_count": 66,
+  "php_lint_count": 23,
+  "qa58_actual_materializer_regression": "9/9 GREEN, 2/9 BASELINE, 153 stale successful item rechecks in 153 limited ticks",
+  "qa54_full_phase": "normal 578 to 580, 0 lost old; no new 578; old blocked 579; new blocked old 578 retained; db error fail-closed; churn 579",
+  "status": "NOT LIVE; no real WP/eBay API/database integration"
+}
