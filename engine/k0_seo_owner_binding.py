@@ -70,6 +70,12 @@ def _strict_item(item):
 
 def inspect(manifest):
     """Return (unchanged five-field batch, upstream-decision index)."""
+    # Modern source: one already-frozen WordPress order, no PSERC plan/SEO redecision.
+    # Historical K0 manifests keep their existing verification unchanged.
+    if isinstance(manifest,dict) and manifest.get("contract")=="WP_K0_SOURCE_RECEIPT_V1":
+        from .wp_order_identity_receipt import inspect as inspect_wordpress_order
+        original, profiles, _ = inspect_wordpress_order(manifest)
+        return original, profiles
     if not isinstance(manifest,dict) or manifest.get('mode')!=MANIFEST_MODE:
         raise Blocked('K0_OWNER_MANIFEST_OR_MODE_INVALID')
     claimed=manifest.get('manifest_sha256')
