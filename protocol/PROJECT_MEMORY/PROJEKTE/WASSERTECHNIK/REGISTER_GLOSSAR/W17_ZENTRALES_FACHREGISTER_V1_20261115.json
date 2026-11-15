@@ -11,7 +11,9 @@
     "w17_products": "protocol/PROJECT_MEMORY/PROJEKTE/WASSERTECHNIK/REGISTER_GLOSSAR/W17_NEUE_FACHRECHERCHE_28_PRODUKTE_20261115.json",
     "w17_products_sha": "261aaacf497dda7df9c3ea2f0ed1f053c7716712",
     "w17_gloss_provider": "protocol/PROJECT_MEMORY/PROJEKTE/WASSERTECHNIK/REGISTER_GLOSSAR/W17_GLOSSAR_UND_ANBIETERRUBRIKEN_STARTBESTAND_20261115.json",
-    "w17_gloss_provider_sha": "12d486748f375f5c979605482027418591d682b8"
+    "w17_gloss_provider_sha": "12d486748f375f5c979605482027418591d682b8",
+    "w5_seo_file": "KATEGORIEKONZEPT/W5_SEO_AUDIT_218_20261114.json",
+    "w5_sha": "17d85a7bbe168fb7a9135e289976a2adf263ac59"
   },
   "kontrolliertes_vokabular": {
     "typ": [
@@ -101,7 +103,9 @@
     "alte_w4_fachprodukte": 79,
     "alte_bis_w16": 230,
     "neue_w17_fachkandidaten": 28,
-    "bekannte_produkt_alias_beziehungen": 3
+    "bekannte_produkt_alias_beziehungen": 3,
+    "w4_products_seo_measured": 59,
+    "w4_products_seo_no_volume": 20
   },
   "regeln": {
     "wp_seitenebene": "Letzte WP-Seitenebene ist konkrete Produktart oder System.",
@@ -109,7 +113,8 @@
     "glossar": "Keine künstliche Produktseite.",
     "anbieterrubrik": "Keine behaupteten realen Firmen.",
     "unbekannt": "Leeres Array/null statt erfundener Daten.",
-    "wordpress": "Kein Import; ausdrückliche Freigabe notwendig."
+    "wordpress": "Kein Import; ausdrückliche Freigabe notwendig.",
+    "w5": "59/79 bisherige W4-Produktseiten mit Anbieter-Suchvolumen, 20 ohne gelieferten Wert. Null bedeutet NICHT null Suchanfragen. Alte Keyworddifficulty nicht gemessen. W5-Daten wiederverwendet, keine neue API-Kosten."
   },
   "eintraege": [
     {
@@ -140,9 +145,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseraufbereitung/hauswasserfilter/feinfilter",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 260,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0001",
+        "keyword": "feinfilter",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.5254,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -188,9 +198,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseraufbereitung/hauswasserfilter/manueller-rueckspuelfilter",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 10,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0002",
+        "keyword": "manueller rückspülfilter",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.4749,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -243,9 +258,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseraufbereitung/hauswasserfilter/automatischer-rueckspuelfilter",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 320,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0003",
+        "keyword": "automatischer rückspülfilter",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.6363,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -291,9 +311,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseraufbereitung/trinkwasserfilter/tischwasserfilter",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 720,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0004",
+        "keyword": "tischwasserfilter",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.7585,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -339,9 +364,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseraufbereitung/trinkwasserfilter/wasserhahnfilter",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 1000,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0005",
+        "keyword": "wasserhahnfilter",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.8344,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -387,9 +417,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseraufbereitung/trinkwasserfilter/untertischfilter",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 90,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0006",
+        "keyword": "untertischfilter",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.4309,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -435,9 +470,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseraufbereitung/trinkwasserfilter/outdoor-wasserfilter",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 880,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0007",
+        "keyword": "outdoor-wasserfilter",
+        "w5_suchintention": "commercial",
+        "w5_intent_wahrscheinlichkeit": 0.7997,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -483,9 +523,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseraufbereitung/osmoseanlagen/auftisch-osmoseanlage",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 320,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0008",
+        "keyword": "auftisch-osmoseanlage",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.4567,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -531,9 +576,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseraufbereitung/osmoseanlagen/untertisch-osmoseanlage",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 140,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0009",
+        "keyword": "untertisch-osmoseanlage",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.5662,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -586,9 +636,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseraufbereitung/osmoseanlagen/direct-flow-osmoseanlage",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 90,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0010",
+        "keyword": "direct-flow-osmoseanlage",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.8013,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -634,9 +689,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseraufbereitung/osmoseanlagen/osmoseanlage-mit-drucktank",
-        "status": "w5_teilwerte_vorhanden",
+        "status": "w5_teilmessung",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0011",
+        "keyword": "osmoseanlage mit drucktank",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.578,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -682,9 +742,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseraufbereitung/aufbereitungsanlagen/enthaertungsanlage",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 9900,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0012",
+        "keyword": "enthärtungsanlage",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.8997,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -737,9 +802,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseraufbereitung/aufbereitungsanlagen/uv-desinfektionsanlage",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 30,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0013",
+        "keyword": "uv-desinfektionsanlage",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.4261,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -785,9 +855,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseraufbereitung/aufbereitungsanlagen/wasser-dosieranlage",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 30,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0014",
+        "keyword": "wasser-dosieranlage",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.4755,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -833,9 +908,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseraufbereitung/filterzubehoer/wasserfilter-ersatzkartusche",
-        "status": "w5_teilwerte_vorhanden",
+        "status": "w5_teilmessung",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0015",
+        "keyword": "wasserfilter-ersatzkartusche",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.7365,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -881,9 +961,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseraufbereitung/filterzubehoer/filtergehaeuse",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 320,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0016",
+        "keyword": "filtergehäuse",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.7184,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -929,9 +1014,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseraufbereitung/filterzubehoer/wasserfilter-anschlussadapter",
-        "status": "w5_teilwerte_vorhanden",
+        "status": "w5_teilmessung",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0017",
+        "keyword": "wasserfilter-anschlussadapter",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.8307,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -980,9 +1070,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseranalyse/testsets/trinkwasser-labortestset",
-        "status": "w5_teilwerte_vorhanden",
+        "status": "w5_teilmessung",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0018",
+        "keyword": "trinkwasser-labortestset",
+        "w5_suchintention": "commercial",
+        "w5_intent_wahrscheinlichkeit": 0.4839,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -1037,9 +1132,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseranalyse/testsets/brunnenwasser-testset",
-        "status": "w5_teilwerte_vorhanden",
+        "status": "w5_teilmessung",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0019",
+        "keyword": "brunnenwasser-testset",
+        "w5_suchintention": "commercial",
+        "w5_intent_wahrscheinlichkeit": 0.7616,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -1094,9 +1194,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseranalyse/testsets/schadstoff-labortestset",
-        "status": "w5_teilwerte_vorhanden",
+        "status": "w5_teilmessung",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0020",
+        "keyword": "schadstoff-labortestset",
+        "w5_suchintention": "commercial",
+        "w5_intent_wahrscheinlichkeit": 0.6588,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -1142,9 +1247,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseranalyse/testsets/wasserteststreifen",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 390,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0021",
+        "keyword": "wasserteststreifen",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.9628,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -1190,9 +1300,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseranalyse/messgeraete/wasser-multimessgeraet",
-        "status": "w5_teilwerte_vorhanden",
+        "status": "w5_teilmessung",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0022",
+        "keyword": "wasser-multimessgerät",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.5472,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -1245,9 +1360,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseranalyse/testsets/wasser-probenahmeset",
-        "status": "w5_teilwerte_vorhanden",
+        "status": "w5_teilmessung",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0023",
+        "keyword": "wasser-probenahmeset",
+        "w5_suchintention": "commercial",
+        "w5_intent_wahrscheinlichkeit": 0.8366,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -1293,9 +1413,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:brunnen/brunnenbauteile/gartenbrunnen-bausatz",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 30,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0024",
+        "keyword": "gartenbrunnen-bausatz",
+        "w5_suchintention": "commercial",
+        "w5_intent_wahrscheinlichkeit": 0.8265,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -1341,9 +1466,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:brunnen/brunnenbauteile/schlagbrunnen-set",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 260,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0025",
+        "keyword": "schlagbrunnen-set",
+        "w5_suchintention": "commercial",
+        "w5_intent_wahrscheinlichkeit": 0.4177,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -1391,9 +1521,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:brunnen/brunnenbauteile/brunnenfilterrohr",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 210,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0026",
+        "keyword": "brunnenfilterrohr",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.64,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -1439,9 +1574,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:pumpen-druck/pumpen/gartenpumpe",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 12100,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0027",
+        "keyword": "gartenpumpe",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.6906,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -1494,9 +1634,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:pumpen-druck/pumpen/tauchpumpe",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 18100,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0028",
+        "keyword": "tauchpumpe",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.7168,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -1544,9 +1689,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:pumpen-druck/pumpen/tiefbrunnenpumpe",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 5400,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0029",
+        "keyword": "tiefbrunnenpumpe",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.4659,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -1601,9 +1751,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:pumpen-druck/pumpen/schmutzwasserpumpe",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 12100,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0030",
+        "keyword": "schmutzwasserpumpe",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.6639,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -1651,9 +1806,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:pumpen-druck/pumpen/klarwasserpumpe",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 170,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0031",
+        "keyword": "klarwasserpumpe",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.8044,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -1699,9 +1859,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:pumpen-druck/druckversorgung/hauswasserwerk",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 22200,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0032",
+        "keyword": "hauswasserwerk",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.496,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -1747,9 +1912,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:pumpen-druck/druckversorgung/druckerhoehungsanlage",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 1300,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0033",
+        "keyword": "druckerhöhungsanlage",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.5291,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -1795,9 +1965,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:pumpen-druck/steuerung-zubehoer/pumpensteuergeraet",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 10,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0034",
+        "keyword": "pumpensteuergerät",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.8291,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -1845,9 +2020,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:regenwasser/regenspeicher/regentonne",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 49500,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0035",
+        "keyword": "regentonne",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.6232,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -1895,9 +2075,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:regenwasser/regenspeicher/regenwasser-erdtank",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 880,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0036",
+        "keyword": "regenwasser-erdtank",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.4504,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -1952,9 +2137,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:regenwasser/regenspeicher/regenwasser-kellertank",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 70,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0037",
+        "keyword": "regenwasser-kellertank",
+        "w5_suchintention": "commercial",
+        "w5_intent_wahrscheinlichkeit": 0.4658,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -2002,9 +2192,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:regenwasser/filter-foerderung/fallrohrfilter",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 1000,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0038",
+        "keyword": "fallrohrfilter",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.5921,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -2052,9 +2247,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:regenwasser/filter-foerderung/zisternenpumpe",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 1900,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0039",
+        "keyword": "zisternenpumpe",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.6964,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -2107,9 +2307,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:regenwasser/nutzung-rueckhalt/regenwasser-hauszentrale",
-        "status": "w5_teilwerte_vorhanden",
+        "status": "w5_teilmessung",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0040",
+        "keyword": "regenwasser-hauszentrale",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.531,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -2162,9 +2367,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:regenwasser/nutzung-rueckhalt/rigolensystem",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 210,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0041",
+        "keyword": "rigolensystem",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.9139,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -2212,9 +2422,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:regenwasser/nutzung-rueckhalt/retentionszisterne",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 880,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0042",
+        "keyword": "retentionszisterne",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.9647,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -2260,9 +2475,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:bewaesserung/bewaesserungssysteme/tropfbewaesserungsset",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 40,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0043",
+        "keyword": "tropfbewässerungsset",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.8566,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -2315,9 +2535,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:bewaesserung/bewaesserungssysteme/versenkregner",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 1300,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0044",
+        "keyword": "versenkregner",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.7432,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -2370,9 +2595,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:bewaesserung/steuerung/bewaesserungscomputer",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 5400,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0045",
+        "keyword": "bewässerungscomputer",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.5744,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -2418,9 +2648,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:bewaesserung/steuerung/bodenfeuchtesensor",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 1000,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0046",
+        "keyword": "bodenfeuchtesensor",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.6179,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -2466,9 +2701,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:bewaesserung/gartenschlauch",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 18100,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0047",
+        "keyword": "gartenschlauch",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.7572,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -2516,9 +2756,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wassertanks/tankarten/trinkwassertank",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 480,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0048",
+        "keyword": "trinkwassertank",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.804,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -2564,9 +2809,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wassertanks/tankarten/ibc-wassertank",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 1000,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0049",
+        "keyword": "ibc-wassertank",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.3548,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -2619,9 +2869,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wassertanks/tankarten/mobiler-wassertank",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 170,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0050",
+        "keyword": "mobiler wassertank",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.7931,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -2667,9 +2922,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wassertanks/tankarten/nutzwassertank",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 10,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0051",
+        "keyword": "nutzwassertank",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.7338,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -2717,9 +2977,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:abwassertechnik/entwaesserung/hebeanlage",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 9900,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0052",
+        "keyword": "hebeanlage",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.4613,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -2774,9 +3039,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:abwassertechnik/entwaesserung/rueckstauverschluss",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 590,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0053",
+        "keyword": "rückstauverschluss",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.9135,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -2832,9 +3102,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:abwassertechnik/aufbereitung-speicherung/grauwasseranlage",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 210,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0054",
+        "keyword": "grauwasseranlage",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.6318,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -2889,9 +3164,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:abwassertechnik/aufbereitung-speicherung/kleinklaeranlage",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 2900,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0055",
+        "keyword": "kleinkläranlage",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.5812,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -2946,9 +3226,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:abwassertechnik/aufbereitung-speicherung/abwassertank",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 1000,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0056",
+        "keyword": "abwassertank",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.7442,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -2996,9 +3281,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:abwassertechnik/entwaesserung/bodenablauf",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 3600,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0057",
+        "keyword": "bodenablauf",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.9951,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -3046,9 +3336,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:abwassertechnik/entwaesserung/revisionsschacht",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 5400,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0058",
+        "keyword": "revisionsschacht",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.921,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -3096,9 +3391,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:abwassertechnik/entwaesserung/abwasserrohr",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 5400,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0059",
+        "keyword": "abwasserrohr",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.6564,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -3144,9 +3444,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseraufbereitung/aufbereitungsanlagen/enteisenungsanlage",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 170,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0060",
+        "keyword": "enteisenungsanlage",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.8556,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -3191,9 +3496,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseraufbereitung/aufbereitungsanlagen/systemtrenner",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 2900,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0061",
+        "keyword": "systemtrenner",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.8888,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -3238,9 +3548,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseranalyse/messgeraete/ph-messgeraet",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 4400,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0062",
+        "keyword": "ph-messgerät",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.8517,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -3285,9 +3600,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wasseranalyse/messgeraete/wasser-photometer",
-        "status": "w5_teilwerte_vorhanden",
+        "status": "w5_teilmessung",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0063",
+        "keyword": "wasser-photometer",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.6202,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -3332,9 +3652,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:pumpen-druck/steuerung-zubehoer/rueckschlagventil",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 12100,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0064",
+        "keyword": "rückschlagventil",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.4744,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -3379,9 +3704,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:pumpen-druck/steuerung-zubehoer/pumpen-saugschlauchset",
-        "status": "w5_teilwerte_vorhanden",
+        "status": "w5_teilmessung",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0065",
+        "keyword": "pumpen-saugschlauchset",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.8358,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -3426,9 +3756,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:pumpen-druck/druckversorgung/druckbehaelter",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 1300,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0066",
+        "keyword": "druckbehälter",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.542,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -3473,9 +3808,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:pumpen-druck/steuerung-zubehoer/pumpenvorfilter",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 320,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0067",
+        "keyword": "pumpenvorfilter",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.4946,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -3520,9 +3860,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wassertanks/tank-fuellstandsanzeige",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 140,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0068",
+        "keyword": "tank-füllstandsanzeige",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.5474,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -3567,9 +3912,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:wassertanks/tankdurchfuehrung",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 1000,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0069",
+        "keyword": "tankdurchführung",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.94,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -3616,9 +3966,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:regenwasser/filter-foerderung/zisternenfilter",
-        "status": "w5_teilwerte_vorhanden",
-        "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "status": "w5_teilmessung",
+        "suchvolumen": 590,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0070",
+        "keyword": "zisternenfilter",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.4669,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -3663,9 +4018,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:bewaesserung/steuerung/bewaesserungs-wasserzaehler",
-        "status": "w5_teilwerte_vorhanden",
+        "status": "w5_teilmessung",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0071",
+        "keyword": "bewässerungs-wasserzähler",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.4459,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -3710,9 +4070,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:industrie/industrielle-wasseraufbereitung/gewerbliche-umkehrosmoseanlage",
-        "status": "w5_teilwerte_vorhanden",
+        "status": "w5_teilmessung",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0072",
+        "keyword": "gewerbliche umkehrosmoseanlage",
+        "w5_suchintention": "commercial",
+        "w5_intent_wahrscheinlichkeit": 0.7947,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -3765,9 +4130,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:industrie/industrielle-wasseraufbereitung/mehrschichtfilteranlage",
-        "status": "w5_teilwerte_vorhanden",
+        "status": "w5_teilmessung",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0073",
+        "keyword": "mehrschichtfilteranlage",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.5488,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -3818,9 +4188,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:industrie/industrielle-wasseraufbereitung/elektrodeionisationsanlage",
-        "status": "w5_teilwerte_vorhanden",
+        "status": "w5_teilmessung",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0074",
+        "keyword": "elektrodeionisationsanlage",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.9177,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -3873,9 +4248,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:industrie/messung-regelung-dosierung/chemikalien-dosierpumpe",
-        "status": "w5_teilwerte_vorhanden",
+        "status": "w5_teilmessung",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0075",
+        "keyword": "chemikalien-dosierpumpe",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.8727,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -3928,9 +4308,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:industrie/industrie-pumpen/industrielle-hochdruckpumpe",
-        "status": "w5_teilwerte_vorhanden",
+        "status": "w5_teilmessung",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0076",
+        "keyword": "industrielle hochdruckpumpe",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.511,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -3983,9 +4368,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:industrie/industrie-pumpen/industrielle-feststoffpumpe",
-        "status": "w5_teilwerte_vorhanden",
+        "status": "w5_teilmessung",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0077",
+        "keyword": "industrielle feststoffpumpe",
+        "w5_suchintention": "commercial",
+        "w5_intent_wahrscheinlichkeit": 0.5838,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -4038,9 +4428,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:industrie/messung-regelung-dosierung/online-wasseranalysestation",
-        "status": "w5_teilwerte_vorhanden",
+        "status": "w5_teilmessung",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0078",
+        "keyword": "online-wasseranalysestation",
+        "w5_suchintention": "informational",
+        "w5_intent_wahrscheinlichkeit": 0.5538,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -4093,9 +4488,14 @@
       "quellen": [],
       "seo": {
         "owner_id": "WT:industrie/kuehl-kreislaufwasser/kuehlwasser-dosierstation",
-        "status": "w5_teilwerte_vorhanden",
+        "status": "w5_teilmessung",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": "wt_product_0079",
+        "keyword": "kühlwasser-dosierstation",
+        "w5_suchintention": "transactional",
+        "w5_intent_wahrscheinlichkeit": 0.7161,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -4154,7 +4554,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -4213,7 +4618,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -4264,7 +4674,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -4315,7 +4730,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -4374,7 +4794,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -4425,7 +4850,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -4476,7 +4906,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -4533,7 +4968,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -4590,7 +5030,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -4649,7 +5094,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -4706,7 +5156,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -4757,7 +5212,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -4816,7 +5276,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -4867,7 +5332,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -4926,7 +5396,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -4985,7 +5460,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -5034,7 +5514,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -5083,7 +5568,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -5134,7 +5624,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -5193,7 +5688,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -5250,7 +5750,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -5301,7 +5806,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -5352,7 +5862,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -5402,7 +5917,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -5453,7 +5973,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -5502,7 +6027,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -5553,7 +6083,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -5604,7 +6139,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -5655,7 +6195,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -5706,7 +6251,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -5757,7 +6307,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -5806,7 +6361,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -5857,7 +6417,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -5908,7 +6473,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -5957,7 +6527,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -6006,7 +6581,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -6055,7 +6635,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -6104,7 +6689,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -6153,7 +6743,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -6204,7 +6799,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -6255,7 +6855,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -6306,7 +6911,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -6355,7 +6965,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -6406,7 +7021,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -6457,7 +7077,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -6506,7 +7131,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -6555,7 +7185,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -6604,7 +7239,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -6653,7 +7293,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -6702,7 +7347,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -6751,7 +7401,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -6800,7 +7455,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -6851,7 +7511,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -6900,7 +7565,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -6951,7 +7621,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7000,7 +7675,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7049,7 +7729,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7098,7 +7783,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7147,7 +7837,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7196,7 +7891,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7245,7 +7945,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7294,7 +7999,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7343,7 +8053,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7392,7 +8107,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7441,7 +8161,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7492,7 +8217,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7541,7 +8271,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7597,7 +8332,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7648,7 +8388,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7697,7 +8442,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7746,7 +8496,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7795,7 +8550,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7844,7 +8604,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7893,7 +8658,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7942,7 +8712,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -7991,7 +8766,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -8040,7 +8820,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -8089,7 +8874,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -8138,7 +8928,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -8187,7 +8982,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -8236,7 +9036,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -8287,7 +9092,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -8338,7 +9148,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -8389,7 +9204,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -8440,7 +9260,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -8494,7 +9319,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -8543,7 +9373,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -8594,7 +9429,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -8645,7 +9485,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -8696,7 +9541,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -8747,7 +9597,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -8798,7 +9653,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -8847,7 +9707,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -8898,7 +9763,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -8947,7 +9817,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -8998,7 +9873,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -9049,7 +9929,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -9100,7 +9985,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -9151,7 +10041,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -9203,7 +10098,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -9254,7 +10154,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -9303,7 +10208,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -9352,7 +10262,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -9403,7 +10318,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -9454,7 +10374,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -9505,7 +10430,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -9554,7 +10484,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -9603,7 +10538,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -9652,7 +10592,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -9703,7 +10648,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -9754,7 +10704,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -9803,7 +10758,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -9854,7 +10814,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -9901,7 +10866,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -9948,7 +10918,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -9997,7 +10972,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -10044,7 +11024,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -10091,7 +11076,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -10138,7 +11128,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -10185,7 +11180,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -10232,7 +11232,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -10279,7 +11284,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -10326,7 +11336,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -10373,7 +11388,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -10422,7 +11442,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -10471,7 +11496,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -10520,7 +11550,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -10569,7 +11604,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -10620,7 +11660,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -10671,7 +11716,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -10720,7 +11770,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -10767,7 +11822,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -10816,7 +11876,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -10865,7 +11930,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -10914,7 +11984,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -10963,7 +12038,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -11012,7 +12092,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -11061,7 +12146,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -11115,7 +12205,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -11164,7 +12259,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -11211,7 +12311,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -11260,7 +12365,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -11309,7 +12419,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -11360,7 +12475,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -11409,7 +12529,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -11456,7 +12581,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -11505,7 +12635,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -11556,7 +12691,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -11607,7 +12747,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -11656,7 +12801,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -11707,7 +12857,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -11766,7 +12921,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -11823,7 +12983,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -11881,7 +13046,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -11939,7 +13109,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -11995,7 +13170,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -12051,7 +13231,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -12109,7 +13294,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -12167,7 +13357,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -12223,7 +13418,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -12280,7 +13480,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -12335,7 +13540,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -12394,7 +13604,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -12452,7 +13667,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -12509,7 +13729,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -12566,7 +13791,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -12622,7 +13852,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -12677,7 +13912,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -12735,7 +13975,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -12792,7 +14037,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -12849,7 +14099,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -12906,7 +14161,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -12964,7 +14224,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -13021,7 +14286,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -13078,7 +14348,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -13135,7 +14410,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -13192,7 +14472,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -13250,7 +14535,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -13306,7 +14596,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [
         {
@@ -13360,7 +14655,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -13407,7 +14707,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -13451,7 +14756,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -13498,7 +14808,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -13548,7 +14863,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -13593,7 +14913,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -13642,7 +14967,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -13690,7 +15020,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -13739,7 +15074,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -13788,7 +15128,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -13835,7 +15180,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -13877,7 +15227,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -13921,7 +15276,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -13968,7 +15328,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -14012,7 +15377,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -14054,7 +15424,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -14101,7 +15476,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -14143,7 +15523,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -14191,7 +15576,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -14234,7 +15624,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -14278,7 +15673,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -14326,7 +15726,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -14371,7 +15776,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -14420,7 +15830,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -14464,7 +15879,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -14514,7 +15934,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -14558,7 +15983,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -14606,7 +16036,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -14649,7 +16084,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -14694,7 +16134,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -14743,7 +16188,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -14790,7 +16240,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -14837,7 +16292,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -14879,7 +16339,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -14927,7 +16392,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -14975,7 +16445,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [
@@ -15023,7 +16498,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -15065,7 +16545,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -15108,7 +16593,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -15149,7 +16639,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -15188,7 +16683,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -15228,7 +16728,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -15268,7 +16773,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -15308,7 +16818,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -15349,7 +16864,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -15389,7 +16909,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -15428,7 +16953,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -15468,7 +16998,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -15506,7 +17041,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -15546,7 +17086,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -15586,7 +17131,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -15627,7 +17177,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -15668,7 +17223,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -15708,7 +17268,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
@@ -15747,7 +17312,12 @@
         "owner_id": null,
         "status": "ungeprueft",
         "suchvolumen": null,
-        "serp_abgleich": "nicht_geprueft"
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
       },
       "artikelkategorien": [],
       "verknuepfungen": [],
