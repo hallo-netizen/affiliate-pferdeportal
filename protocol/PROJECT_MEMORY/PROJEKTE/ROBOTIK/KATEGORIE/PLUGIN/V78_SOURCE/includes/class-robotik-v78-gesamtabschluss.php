@@ -1,8 +1,8 @@
 <?php
 /**
- * 0.4.12: ONE explicit approval for the original 227, publication 68 and
- * approved follow-up 16+48. No new writer, SEO, cron, WP table or restart.
- * All phases use existing V63, V65 and V77 routines/state/options.
+ * 0.4.13: ONE approval covers old 227, 104 original pages published,
+ * 68 new pages published and the approved follow-up 16+48.
+ * Same existing WordPress writers and state, no API or cron.
  */
 if (!defined('ABSPATH')) exit;
 final class Robotik_V78_Gesamtabschluss {
@@ -36,8 +36,10 @@ final class Robotik_V78_Gesamtabschluss {
     private static function currentPhase():string {
         $v77=get_option('robotik_v77_fachnachtrag_state',[]);
         $v65=get_option('robotik_v65_publication_state',[]);
+        $v63=get_option('robotik_v63_delta_state',[]);
         if(is_array($v77)&&isset($v77['status']))return 'nachtrag';
         if(is_array($v65)&&isset($v65['status']))return 'veroeffentlichen';
+        if(is_array($v63)&&($v63['status']??'')==='COMPLETE_SAFE_DELTA_WITH_16_HOLDS')return 'altseiten';
         return 'uebernehmen';
     }
     private static function redirect():void {
@@ -92,7 +94,7 @@ final class Robotik_V78_Gesamtabschluss {
         update_option(self::STATE,[
             'status'=>'RUNNING','phase'=>$p['phase'],'authorized_once'=>true,'manifest'=>$p['manifest'],
             'error'=>'','started_utc'=>gmdate('c'),
-            'scope'=>'227 bestehende Importaufgaben + 68 Seitensichtbarkeiten + 64 fachlich freigegebene Nachtragsobjekte',
+            'scope'=>'227 Importaufgaben + 104 alte Seiten publizieren + 68 neue Seiten publizieren + 64 Fachnachtragsobjekte',
             'no_google_calls'=>true,'no_industry_change'=>true],false);
         self::redirect();
     }
@@ -134,14 +136,62 @@ final class Robotik_V78_Gesamtabschluss {
         if(($s['status']??'')==='COMPLETE_SAFE_DELTA_WITH_16_HOLDS'){
             if((int)($s['verified']??0)!==227||(int)($s['index']??0)!==227)
                 throw new RuntimeException('Alter 227er Readback fehlt.');
-            return 'veroeffentlichen';
+            return 'altseiten';
         }
         if(($s['status']??'')!=='WRITING')throw new RuntimeException('Unbekannter alter Importstatus.');
         return 'uebernehmen';
     }
+    private static function stageOldPages():string {
+        // The original V65 preview requires all 104 old pages published.
+        // V78 version 0.4.12 missed that existing phase entirely.
+        $p=Robotik_Publish::preview();
+        if(empty($p['valid']) || (int)($p['expected']??0)!==104 ||
+           (int)($p['counts']['draft']??-1)+(int)($p['counts']['publish']??-1)!==104 ||
+           count((array)($p['ids']??[]))!==104)
+            throw new RuntimeException('104 Originalseiten nicht eindeutig: '.
+                implode(' | ',array_slice((array)($p['errors']??[]),0,3)));
+        $s=get_option('robotik_first_publish_state_v1',[]);
+        if(!is_array($s))throw new RuntimeException('104er Veroeffentlichungszustand nicht lesbar.');
+        if(!isset($s['status'])) {
+            if((int)$p['counts']['publish']===104)return 'veroeffentlichen';
+            $s=['status'=>'WRITING','index'=>0,'total'=>104,
+                'published'=>0,'already_published'=>0,'verified'=>0,'error'=>'',
+                'ids'=>array_values($p['ids']),'token'=>$p['token'],
+                'started_at'=>gmdate('c')];
+            update_option('robotik_first_publish_state_v1',$s,false);
+        }
+        if(($s['status']??'')==='BLOCKED') {
+            $ids=array_values((array)($p['ids']??[]));
+            if((int)($s['total']??0)!==104 || (int)($s['index']??-1)<0 ||
+               (int)($s['index']??-1)>104 || $ids!==(array)($s['ids']??[]))
+                throw new RuntimeException('104er Seiten weichen vom gespeicherten Lauf ab.');
+            $s['status']='WRITING';$s['error']='';
+            update_option('robotik_first_publish_state_v1',$s,false);
+        }
+        if(($s['status']??'')==='WRITING')$s=Robotik_Publish::advance();
+        if(($s['status']??'')==='BLOCKED')
+            throw new RuntimeException('104er Veroeffentlichung gestoppt: '.($s['error']??'Konflikt'));
+        if(($s['status']??'')==='COMPLETE') {
+            if((int)($s['verified']??0)!==104 || (int)($s['index']??0)!==104)
+                throw new RuntimeException('104er Abschluss ist unvollstaendig.');
+            $after=Robotik_Publish::preview();
+            if(empty($after['valid']) || (int)$after['counts']['publish']!==104)
+                throw new RuntimeException('104 alte Seiten sind nicht oeffentlich.');
+            return 'veroeffentlichen';
+        }
+        if(($s['status']??'')!=='WRITING')
+            throw new RuntimeException('Unbekannter alter 104er Status.');
+        return 'altseiten';
+    }
     private static function stagePublication():string {
         $s=get_option('robotik_v65_publication_state',[]);
         if(!is_array($s))throw new RuntimeException('V65-Zustand nicht lesbar.');
+        // Correct a V78 0.4.12 run paused at this phase after V63 completed.
+        if(!isset($s['status'])) {
+            $old=Robotik_Publish::preview();
+            if(empty($old['valid']))throw new RuntimeException('104 Altseiten nicht eindeutig.');
+            if((int)($old['counts']['publish']??0)!==104)return 'altseiten';
+        }
         if(!isset($s['status'])) {
             $p=Robotik_V65_Publication::preview(); // one existing decision/owner
             if(empty($p['ready'])||count((array)($p['items']??[]))!==68)
@@ -213,6 +263,7 @@ final class Robotik_V78_Gesamtabschluss {
                 throw new RuntimeException('Freigabe oder Originalfachplan geaendert.');
             switch($state['phase']){
                 case 'uebernehmen':$new=self::stageImport();break;
+                case 'altseiten':$new=self::stageOldPages();break;
                 case 'veroeffentlichen':$new=self::stagePublication();break;
                 case 'nachtrag':$new=self::stageFollowup();break;
                 default:throw new RuntimeException('Unbekannte Ablaufphase.');
@@ -221,7 +272,7 @@ final class Robotik_V78_Gesamtabschluss {
             if($new==='abgeschlossen') {
                 $state['status']='COMPLETE';
                 $state['finished_utc']=gmdate('c');
-                $state['verified']=['original_import'=>227,'new_published_pages'=>68,
+                $state['verified']=['original_import'=>227,'original_published_pages'=>104,'new_published_pages'=>68,
                     'approved_followup_pages'=>16,'approved_followup_categories'=>48,
                     'manifest_page_positions'=>188,'manifest_wp_categories'=>296];
             }
@@ -235,8 +286,8 @@ final class Robotik_V78_Gesamtabschluss {
     public static function tick():void {
         self::authorized();check_ajax_referer('robotik_v78_tick');
         $s=self::advance();
-        $totals=['uebernehmen'=>227,'veroeffentlichen'=>68,'nachtrag'=>64];
-        $sources=['uebernehmen'=>'robotik_v63_delta_state','veroeffentlichen'=>'robotik_v65_publication_state',
+        $totals=['uebernehmen'=>227,'altseiten'=>104,'veroeffentlichen'=>68,'nachtrag'=>64];
+        $sources=['uebernehmen'=>'robotik_v63_delta_state','altseiten'=>'robotik_first_publish_state_v1','veroeffentlichen'=>'robotik_v65_publication_state',
             'nachtrag'=>'robotik_v77_fachnachtrag_state'];
         $phase=$s['phase']??'uebernehmen';
         $sub=get_option($sources[$phase]??'robotik_v77_fachnachtrag_state',[]);
@@ -255,6 +306,7 @@ final class Robotik_V78_Gesamtabschluss {
             'verified'=>$s['verified']??null,'manifest_sha256'=>$s['manifest'],
             'phase_states'=>[
                 'import'=>get_option('robotik_v63_delta_state',[]),
+                'original_pages_publication'=>get_option('robotik_first_publish_state_v1',[]),
                 'publication'=>get_option('robotik_v65_publication_state',[]),
                 'followup'=>get_option('robotik_v77_fachnachtrag_state',[])],
             'old_google_url_hold_cleared_editorially'=>16,
@@ -267,7 +319,7 @@ final class Robotik_V78_Gesamtabschluss {
     public static function screen():void {
         self::authorized();$s=get_option(self::STATE,[]);
         echo '<div class="wrap"><h1>Robotik – gesamter Kategorieabschluss</h1>';
-        echo '<p><strong>Ein Plugin, eine Freigabe, ein automatischer Ablauf:</strong> bestehenden 227er Import beenden, 68 neue Seiten sichtbar machen, 16 weitere Typseiten und 48 Rubriken ohne Google-Sperre nachtragen. Bereits Erledigtes bleibt erhalten. Gewerbe/Industrie werden nicht erweitert.</p>';
+        echo '<p><strong>Ein Plugin, eine Freigabe, ein automatischer Ablauf:</strong> bestehenden 227er Import abschliessen, 104 vorhandene Seiten oeffentlich machen, 68 neue Seiten veroeffentlichen und 16 weitere Typseiten mit 48 Rubriken ohne Google-Sperre nachtragen. Bereits Erledigtes bleibt erhalten. Gewerbe/Industrie werden nicht erweitert.</p>';
         if(!is_array($s)||!isset($s['status'])){
             try{$p=self::initialCheck();}catch(Throwable $e){$p=['error'=>$e->getMessage()];}
             if(!empty($p['error']))echo '<div class="notice notice-error"><p>'.esc_html($p['error']).'</p></div>';
@@ -278,7 +330,7 @@ final class Robotik_V78_Gesamtabschluss {
                 wp_nonce_field('robotik_v78_start');
                 echo '<input type="hidden" name="action" value="robotik_v78_start">';
                 echo '<input type="hidden" name="robotik_v78_token" value="'.esc_attr($token).'">';
-                echo '<p><label><input type="checkbox" name="robotik_v78_approve" value="1" required> Ich genehmige einmalig alle noch fehlenden Teile des bestehenden Kategorieplans einschließlich Veröffentlichung der 68 Seiten und der 16 zusätzlichen Fachseiten; auch leere Seiten dürfen sichtbar werden.</label></p>';
+                echo '<p><label><input type="checkbox" name="robotik_v78_approve" value="1" required> Ich genehmige einmalig alle noch fehlenden Teile des bestehenden Kategorieplans einschließlich Veröffentlichung der 104 alten, 68 weiteren und 16 zusätzlichen Fachseiten; auch leere Seiten dürfen sichtbar werden.</label></p>';
                 submit_button('Gesamten Robotik-Kategorieablauf EINMAL abschliessen','primary');echo '</form>';
             }
         }else{
@@ -298,7 +350,7 @@ final class Robotik_V78_Gesamtabschluss {
                 echo '<script>(function(){var n='.wp_json_encode($nonce).',p=document.getElementById("robotik-v78-progress");function go(){var d=new FormData();d.append("action","robotik_v78_tick");d.append("_ajax_nonce",n);fetch(ajaxurl,{method:"POST",credentials:"same-origin",body:d}).then(r=>r.json()).then(j=>{if(!j.success)throw Error("WP-Antwort");var a=j.data;p.textContent=a.status+" · "+a.phase+" "+a.done+"/"+a.total+(a.error?" · "+a.error:"");if(a.status==="RUNNING")setTimeout(go,a.busy?800:100);else location.reload();}).catch(e=>{p.textContent="Verbindung unterbrochen. Seite neu laden setzt denselben gespeicherten Auftrag fort.";});}go();})();</script>';
             }
             if($st==='COMPLETE'){
-                echo '<div class="notice notice-success"><p>Einmaliger Gesamtabschluss vollstaendig. Bestehender 227er Import, 68er Veroeffentlichung und 64er Fachnachtrag wurden abgeschlossen.</p></div>';
+                echo '<div class="notice notice-success"><p>Einmaliger Gesamtabschluss vollstaendig. Bestehender 227er Import, 104 alte veroeffentlichte Seiten, 68 neue veroeffentlichte Seiten und 64er Fachnachtrag wurden abgeschlossen.</p></div>';
                 echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';
                 wp_nonce_field('robotik_v78_export');
                 echo '<input type="hidden" name="action" value="robotik_v78_export">';
