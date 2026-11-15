@@ -5019,7 +5019,7 @@
     }
   ],
   "canonical_source": true,
-  "revision": 21,
+  "revision": 22,
   "research_state": "GRUNDLAGENRECHERCHE_ABGESCHLOSSEN_V84_SEO_BESTAND_ABGEGLICHEN_V86",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
@@ -16508,5 +16508,4866 @@
     "new_category_pages": 0,
     "new_plugins": 0,
     "next_paid_request_only_if_explicitly_approved": "Ein einmaliger gezielter DataForSEO-Nachlauf für fehlende Freizeit-Welt, 48 V84-Ziele und ggf. priorisierte, tatsächlich wichtige sonstige Lücken; vorher Kosten/Vollständigkeit aufzeigen; nicht die gesamte alte Runde blind wiederholen"
+  },
+  "seo_nachlauf_v87": {
+    "status": "ENTSCHEIDUNGSREIFE_FREIGABEVORLAGE_KEIN_ANBIETERLAUF",
+    "updated": "2026-11-15",
+    "source": "V52 Original + V63 Delta + V84 Delta + v51 Kuerzelnamen",
+    "plan_counts": {
+      "landing": 47,
+      "robot_type": 157,
+      "facet": 328,
+      "total_unique_keywords": 532,
+      "previously_not_in_v61_scope_landing": 47,
+      "v84_new_owner_entries": 48
+    },
+    "task_1": {
+      "endpoint": "keywords_data/google_ads/search_volume/live",
+      "location_name": "Germany",
+      "language_code": "de",
+      "search_partners": false,
+      "keywords": [
+        {
+          "owner_id": "rbt_a7b82adfb00b8fd4",
+          "owner_type": "landing",
+          "world": "Haushalt",
+          "path": "Haushalt",
+          "keyword": "haushaltsroboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_4739e123026ad3c4",
+          "owner_type": "landing",
+          "world": "Garten",
+          "path": "Garten",
+          "keyword": "gartenroboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_4c3b60b5f506ff47",
+          "owner_type": "landing",
+          "world": "Freizeit",
+          "path": "Freizeit",
+          "keyword": "freizeitroboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_dcb31e217c9ac890",
+          "owner_type": "landing",
+          "world": "Sport",
+          "path": "Sport",
+          "keyword": "sportroboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_0127df03dbd274f6",
+          "owner_type": "landing",
+          "world": "Bildung",
+          "path": "Bildung",
+          "keyword": "roboter bildung",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_e764c403a44632be",
+          "owner_type": "landing",
+          "world": "Pflege",
+          "path": "Pflege",
+          "keyword": "pflegeroboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_755fcb1630bd0bf3",
+          "owner_type": "landing",
+          "world": "Gewerbe",
+          "path": "Gewerbe",
+          "keyword": "gewerberoboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_7d8fe4f632107944",
+          "owner_type": "landing",
+          "world": "Garten",
+          "path": "Garten › Rasenpflege",
+          "keyword": "rasenpflege roboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_01886d207f71989f",
+          "owner_type": "landing",
+          "world": "Garten",
+          "path": "Garten › Flächenpflege",
+          "keyword": "flächenpflege roboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_43072508026dcf99",
+          "owner_type": "landing",
+          "world": "Garten",
+          "path": "Garten › Poolpflege",
+          "keyword": "poolreinigungsroboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_2a9f15b10b6f0ff1",
+          "owner_type": "landing",
+          "world": "Freizeit",
+          "path": "Freizeit › Spielzeug",
+          "keyword": "roboter spielzeug",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_ee14ec5df0d71085",
+          "owner_type": "landing",
+          "world": "Freizeit",
+          "path": "Freizeit › Modellbau",
+          "keyword": "roboter modellbau",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_9160c762eec5edbd",
+          "owner_type": "landing",
+          "world": "Freizeit",
+          "path": "Freizeit › Outdoor",
+          "keyword": "outdoor roboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_c921e3a524a4ad2a",
+          "owner_type": "landing",
+          "world": "Sport",
+          "path": "Sport › Ballsport",
+          "keyword": "ballroboter training",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_fdf4787d1ec68c76",
+          "owner_type": "landing",
+          "world": "Sport",
+          "path": "Sport › Golf",
+          "keyword": "golf roboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_251f51aef767b156",
+          "owner_type": "landing",
+          "world": "Sport",
+          "path": "Sport › Platzpflege",
+          "keyword": "sportplatz pflegeroboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_3470134ba898fde9",
+          "owner_type": "landing",
+          "world": "Pflege",
+          "path": "Pflege › Alltagshilfen",
+          "keyword": "roboter alltagshilfe pflege",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_339e34df37230157",
+          "owner_type": "landing",
+          "world": "Pflege",
+          "path": "Pflege › Mobilität",
+          "keyword": "mobilitätsroboter pflege",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_6de6b6bd301052ce",
+          "owner_type": "landing",
+          "world": "Pflege",
+          "path": "Pflege › Prothetik",
+          "keyword": "robotische prothetik",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_8783c3c0b821205c",
+          "owner_type": "landing",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Reinigung",
+          "keyword": "reinigungsroboter gewerbe",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_b58c5eee3d9fdfc6",
+          "owner_type": "landing",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Gastronomie",
+          "keyword": "gastro roboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_c55176fa9fdfbe8b",
+          "owner_type": "landing",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Hotelbetrieb",
+          "keyword": "hotelroboter gewerbe",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_126def754f731c77",
+          "owner_type": "landing",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Lagerlogistik",
+          "keyword": "lagerroboter logistik",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_a851decd18fc1e86",
+          "owner_type": "landing",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung",
+          "keyword": "fertigungsroboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_0584036b1943a56f",
+          "owner_type": "landing",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Baustelle",
+          "keyword": "bauroboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_81e05b9269df658c",
+          "owner_type": "landing",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Medientechnik",
+          "keyword": "medienroboter studio",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_61bb67eab3f57c70",
+          "owner_type": "landing",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft",
+          "keyword": "agrarroboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_product_0004",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Entmistungsroboter",
+          "keyword": "entmistungsroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0022",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Futterschieberoboter",
+          "keyword": "futterschieberoboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0027",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Melkroboter",
+          "keyword": "melkroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0032",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Reinigung › PV-Reinigungsroboter",
+          "keyword": "pv-reinigungsroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0034",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Platzpflege › Linienroboter",
+          "keyword": "linienroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0035",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Platzpflege › Tennisplatzroboter",
+          "keyword": "tennisplatzroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0045",
+          "owner_type": "robot_type",
+          "world": "Garten",
+          "path": "Garten › Flächenpflege › Schneeroboter",
+          "keyword": "schneeroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0048",
+          "owner_type": "robot_type",
+          "world": "Freizeit",
+          "path": "Freizeit › Outdoor › Bootsreiniger",
+          "keyword": "bootsreinigungsroboter",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "rbt_product_0052",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Golf › Golfballroboter",
+          "keyword": "golfballroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0054",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Platzpflege › Ballsammelroboter",
+          "keyword": "ballsammelroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0059",
+          "owner_type": "robot_type",
+          "world": "Bildung",
+          "path": "Bildung › Lernroboter",
+          "keyword": "lernroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0060",
+          "owner_type": "robot_type",
+          "world": "Freizeit",
+          "path": "Freizeit › Spielzeug › Robotertiere",
+          "keyword": "robotertiere",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0061",
+          "owner_type": "robot_type",
+          "world": "Freizeit",
+          "path": "Freizeit › Spielzeug › Tischroboter",
+          "keyword": "tischroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0062",
+          "owner_type": "robot_type",
+          "world": "Freizeit",
+          "path": "Freizeit › Spielzeug › Schachroboter",
+          "keyword": "schachroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0063",
+          "owner_type": "robot_type",
+          "world": "Freizeit",
+          "path": "Freizeit › Zeichenroboter",
+          "keyword": "zeichenroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0067",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Tischtennisroboter",
+          "keyword": "tischtennis ballmaschine",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "rbt_product_0068",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Basketballroboter",
+          "keyword": "basketballroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0069",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Golf › Golf-Folgetrolleys",
+          "keyword": "golf-folgetrolleys",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0072",
+          "owner_type": "robot_type",
+          "world": "Pflege",
+          "path": "Pflege › Alltagshilfen › Essroboter",
+          "keyword": "essroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0073",
+          "owner_type": "robot_type",
+          "world": "Pflege",
+          "path": "Pflege › Alltagshilfen › Rollstuhlarme",
+          "keyword": "rollstuhlarme",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0074",
+          "owner_type": "robot_type",
+          "world": "Pflege",
+          "path": "Pflege › Mobilität › Treppenrollstühle",
+          "keyword": "elektrischer treppenrollstuhl",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "rbt_product_0088",
+          "owner_type": "robot_type",
+          "world": "Haushalt",
+          "path": "Haushalt › Haustierroboter",
+          "keyword": "haustierroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0090",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Lagerlogistik › Inventurroboter",
+          "keyword": "inventurroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0164",
+          "owner_type": "robot_type",
+          "world": "Garten",
+          "path": "Garten › Poolpflege › Poolroboter",
+          "keyword": "poolroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0166",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Reinigung › Fassadenroboter",
+          "keyword": "fassadenroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0201",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Gastronomie › Baristaroboter",
+          "keyword": "baristaroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0208",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Reinigung › Scheuersaugroboter",
+          "keyword": "scheuersaugroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0249",
+          "owner_type": "robot_type",
+          "world": "Garten",
+          "path": "Garten › Poolpflege › Poolskimmer",
+          "keyword": "pool skimmer roboter",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "rbt_product_0355",
+          "owner_type": "robot_type",
+          "world": "Haushalt",
+          "path": "Haushalt › Fensterputzroboter",
+          "keyword": "fensterputzroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0476",
+          "owner_type": "robot_type",
+          "world": "Garten",
+          "path": "Garten › Flächenpflege › Laubroboter",
+          "keyword": "laubroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0477",
+          "owner_type": "robot_type",
+          "world": "Garten",
+          "path": "Garten › Beetroboter",
+          "keyword": "beetroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0478",
+          "owner_type": "robot_type",
+          "world": "Bildung",
+          "path": "Bildung › Schultelepräsenz",
+          "keyword": "schultelepräsenz",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0479",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Medientechnik › Kameraroboter",
+          "keyword": "kameraroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0480",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung › Bestückungsroboter",
+          "keyword": "roboter bestückung industrie",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "rbt_product_0486",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Sä-/Jätroboter",
+          "keyword": "sä-/jätroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0487",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung › Schweißroboter",
+          "keyword": "schweißroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0488",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Gastronomie › Servierroboter",
+          "keyword": "restaurant servierroboter",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "rbt_product_0489",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Pikierroboter",
+          "keyword": "pikierroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0490",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Hotelbetrieb › Hotelroboter",
+          "keyword": "hotelroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0491",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Hotelbetrieb › Empfangsroboter",
+          "keyword": "empfangsroboter hotel",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "rbt_product_0492",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Gastronomie › Barkeeperroboter",
+          "keyword": "barkeeperroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0495",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung › Druckfarmroboter",
+          "keyword": "druckfarmroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0500",
+          "owner_type": "robot_type",
+          "world": "Haushalt",
+          "path": "Haushalt › Saugroboter",
+          "keyword": "saugroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0501",
+          "owner_type": "robot_type",
+          "world": "Garten",
+          "path": "Garten › Rasenpflege › Mähroboter",
+          "keyword": "mähroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0502",
+          "owner_type": "robot_type",
+          "world": "Freizeit",
+          "path": "Freizeit › Outdoor › Futterboote",
+          "keyword": "futterboot ferngesteuert",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "rbt_product_0503",
+          "owner_type": "robot_type",
+          "world": "Freizeit",
+          "path": "Freizeit › Modellbau › Tischroboterarme",
+          "keyword": "tischroboterarme",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0504",
+          "owner_type": "robot_type",
+          "world": "Freizeit",
+          "path": "Freizeit › Outdoor › Folgekoffer",
+          "keyword": "folgekoffer",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0506",
+          "owner_type": "robot_type",
+          "world": "Freizeit",
+          "path": "Freizeit › Modellbau › Roboterhunde",
+          "keyword": "roboterhunde",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0507",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Baustelle › Wanddruckroboter",
+          "keyword": "wanddruckroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0511",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung › Schraubroboter",
+          "keyword": "schraubroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0512",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung › Etikettierroboter",
+          "keyword": "etikettierroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0513",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung › Palettierroboter",
+          "keyword": "palettierroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0514",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung › Lötroboter",
+          "keyword": "lötroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0516",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung › Dosierroboter",
+          "keyword": "dosierroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0519",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Baustelle › Estrichroboter",
+          "keyword": "estrichroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0520",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung › Schleifroboter",
+          "keyword": "schleifroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0521",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Tennisroboter",
+          "keyword": "tennisroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0525",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Lagerlogistik › Palettenhubroboter",
+          "keyword": "palettenhubroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0526",
+          "owner_type": "robot_type",
+          "world": "Garten",
+          "path": "Garten › Rasenpflege › Trimmroboter",
+          "keyword": "trimmroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0527",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Baustelle › Gerüstroboter",
+          "keyword": "gerüstroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0530",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Sprühroboter",
+          "keyword": "sprühroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0535",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Medientechnik › Fotoroboter",
+          "keyword": "fotoroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0536",
+          "owner_type": "robot_type",
+          "world": "Bildung",
+          "path": "Bildung › Lerndrohnen",
+          "keyword": "lerndrohnen",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0538",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Medientechnik › Requisitenroboter",
+          "keyword": "requisitenroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0540",
+          "owner_type": "robot_type",
+          "world": "Pflege",
+          "path": "Pflege › Mobilität › Geh-Exoskelette",
+          "keyword": "geh-exoskelette",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0541",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Spritzroboter",
+          "keyword": "spritzroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0543",
+          "owner_type": "robot_type",
+          "world": "Pflege",
+          "path": "Pflege › Prothetik › Armorthesen",
+          "keyword": "robotische armorthese",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "rbt_product_0544",
+          "owner_type": "robot_type",
+          "world": "Pflege",
+          "path": "Pflege › Prothetik › Handprothesen",
+          "keyword": "robotische handprothese",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "rbt_product_0545",
+          "owner_type": "robot_type",
+          "world": "Pflege",
+          "path": "Pflege › Prothetik › Knieprothesen",
+          "keyword": "robotische knieprothese",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "rbt_product_0546",
+          "owner_type": "robot_type",
+          "world": "Pflege",
+          "path": "Pflege › Therapieroboter",
+          "keyword": "therapieroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0547",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Agrardrohnen",
+          "keyword": "agrardrohnen",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_product_0548",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Traktorroboter",
+          "keyword": "traktorroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_3b3bf3ee8dc98fb2",
+          "owner_type": "landing",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Industrie",
+          "keyword": "industrieroboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_ef13a7d43364d4ea",
+          "owner_type": "landing",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Industrie › Produktion",
+          "keyword": "industrieroboter produktion",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_50269631fbb78a08",
+          "owner_type": "landing",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Industrie › Logistik",
+          "keyword": "industrieroboter logistik",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_89feaf3cf05014de",
+          "owner_type": "landing",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Industrie › Infrastruktur",
+          "keyword": "industrie roboter infrastruktur",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "rbt_28ffc87ae9e0b8cb",
+          "owner_type": "landing",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Industrie › Spezialrobotik",
+          "keyword": "industrie spezialroboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "V62_WORLD_HUMANOIDE_NUR_ENTWURF",
+          "owner_type": "landing",
+          "world": "Humanoide",
+          "path": "Humanoide",
+          "keyword": "humanoide roboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "V52_HUB_Bildung_Forschung",
+          "owner_type": "landing",
+          "world": "Bildung",
+          "path": "Bildung › Forschung",
+          "keyword": "robotikforschung lehrroboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "V52_HUB_Bildung_Lernhilfe",
+          "owner_type": "landing",
+          "world": "Bildung",
+          "path": "Bildung › Lernhilfe",
+          "keyword": "roboter lernhilfe",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "V52_HUB_Freizeit_Filmen",
+          "owner_type": "landing",
+          "world": "Freizeit",
+          "path": "Freizeit › Filmen",
+          "keyword": "filmroboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "V52_HUB_Haushalt_Alltagshilfe",
+          "owner_type": "landing",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe",
+          "keyword": "haushaltsassistenz roboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "V52_HUB_Haushalt_Kommunikation",
+          "owner_type": "landing",
+          "world": "Haushalt",
+          "path": "Haushalt › Kommunikation",
+          "keyword": "kommunikationsroboter zuhause",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "V52_HUB_Haushalt_Reinigung",
+          "owner_type": "landing",
+          "world": "Haushalt",
+          "path": "Haushalt › Reinigung",
+          "keyword": "reinigungsroboter haushalt",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "V52_HUB_Humanoide_Arbeit",
+          "owner_type": "landing",
+          "world": "Humanoide",
+          "path": "Humanoide › Arbeit",
+          "keyword": "humanoide arbeitsroboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "V52_HUB_Humanoide_Bildung",
+          "owner_type": "landing",
+          "world": "Humanoide",
+          "path": "Humanoide › Bildung",
+          "keyword": "humanoide lernroboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "V52_HUB_Humanoide_Haushalt",
+          "owner_type": "landing",
+          "world": "Humanoide",
+          "path": "Humanoide › Haushalt",
+          "keyword": "humanoide haushaltsroboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "V52_HUB_Humanoide_Intimrobotik",
+          "owner_type": "landing",
+          "world": "Humanoide",
+          "path": "Humanoide › Intimrobotik",
+          "keyword": "humanoide intimrobotik",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "V52_HUB_Humanoide_Pflege",
+          "owner_type": "landing",
+          "world": "Humanoide",
+          "path": "Humanoide › Pflege",
+          "keyword": "humanoide pflegeroboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "V52_HUB_Humanoide_Unterhaltung",
+          "owner_type": "landing",
+          "world": "Humanoide",
+          "path": "Humanoide › Unterhaltung",
+          "keyword": "humanoide unterhaltungsroboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "V52_HUB_Pflege_Versorgung",
+          "owner_type": "landing",
+          "world": "Pflege",
+          "path": "Pflege › Versorgung",
+          "keyword": "pflegeversorgungsroboter",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "V52_HUB_Pflege_Haarpflege",
+          "owner_type": "landing",
+          "world": "Pflege",
+          "path": "Pflege › Haarpflege",
+          "keyword": "robotik haarpflege",
+          "phase": "v78",
+          "rule": "GROUP_INTENT"
+        },
+        {
+          "owner_id": "v46_h01",
+          "owner_type": "robot_type",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Transportroboter",
+          "keyword": "transportroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_h02",
+          "owner_type": "robot_type",
+          "world": "Haushalt",
+          "path": "Haushalt › Kochroboter",
+          "keyword": "kochroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_h04",
+          "owner_type": "robot_type",
+          "world": "Haushalt",
+          "path": "Haushalt › Wäschefaltroboter",
+          "keyword": "wäschefaltroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_h05",
+          "owner_type": "robot_type",
+          "world": "Haushalt",
+          "path": "Haushalt › Reinigung › WC-Reinigungsroboter",
+          "keyword": "wc-reinigungsroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_h08",
+          "owner_type": "robot_type",
+          "world": "Haushalt",
+          "path": "Haushalt › Reinigung › Luftreinigungsroboter",
+          "keyword": "luftreinigungsroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_h09",
+          "owner_type": "robot_type",
+          "world": "Haushalt",
+          "path": "Haushalt › Aquarienroboter",
+          "keyword": "aquarienroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_p01",
+          "owner_type": "robot_type",
+          "world": "Pflege",
+          "path": "Pflege › Telepräsenzroboter",
+          "keyword": "telepräsenzroboter pflege",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "v46_p02",
+          "owner_type": "robot_type",
+          "world": "Pflege",
+          "path": "Pflege › Versorgung › Kliniktransportroboter",
+          "keyword": "kliniktransportroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_p03",
+          "owner_type": "robot_type",
+          "world": "Pflege",
+          "path": "Pflege › Versorgung › Pflege-Servierroboter",
+          "keyword": "servierroboter pflege",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "v46_g01",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Gastronomie › Küchenroboter",
+          "keyword": "küchenroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_g02",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Reinigung › Sanitärreinigungsroboter",
+          "keyword": "sanitärreinigungsroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_g03",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Wäschereiroboter",
+          "keyword": "wäschereiroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_h11",
+          "owner_type": "robot_type",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Esshilferoboter",
+          "keyword": "esshilferoboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_h13",
+          "owner_type": "robot_type",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Ankleideroboter",
+          "keyword": "ankleideroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_h14",
+          "owner_type": "robot_type",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Duschroboter",
+          "keyword": "duschroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_p04",
+          "owner_type": "robot_type",
+          "world": "Pflege",
+          "path": "Pflege › Versorgung › Pflege-Reinigungsroboter",
+          "keyword": "pflege-reinigungsroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_ga01",
+          "owner_type": "robot_type",
+          "world": "Garten",
+          "path": "Garten › Heckenschneidroboter",
+          "keyword": "heckenschneidroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_ga02",
+          "owner_type": "robot_type",
+          "world": "Garten",
+          "path": "Garten › Hundekotroboter",
+          "keyword": "hundekotroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_ga03",
+          "owner_type": "robot_type",
+          "world": "Garten",
+          "path": "Garten › Flächenpflege › Terrassenroboter",
+          "keyword": "terrassenroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_ga05",
+          "owner_type": "robot_type",
+          "world": "Garten",
+          "path": "Garten › Bienenstockroboter",
+          "keyword": "bienenstockroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_f04",
+          "owner_type": "robot_type",
+          "world": "Freizeit",
+          "path": "Freizeit › Pinselmalroboter",
+          "keyword": "pinselmalroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_f05",
+          "owner_type": "robot_type",
+          "world": "Freizeit",
+          "path": "Freizeit › Musikroboter",
+          "keyword": "musikroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_s01",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Golf › Bunkerrechenroboter",
+          "keyword": "bunkerrechenroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_s02",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Eisaufbereitungsroboter",
+          "keyword": "eisaufbereitungsroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_s04",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Torwartroboter",
+          "keyword": "torwartroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_s05",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Billardroboter",
+          "keyword": "billardroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_s06",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Tischtennis-Spielroboter",
+          "keyword": "tischtennis spielender roboter",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "v46_b03",
+          "owner_type": "robot_type",
+          "world": "Bildung",
+          "path": "Bildung › Lernhilfe › Schreiblernroboter",
+          "keyword": "schreiblernroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_b06",
+          "owner_type": "robot_type",
+          "world": "Bildung",
+          "path": "Bildung › Forschung › EDU-Roboterhunde",
+          "keyword": "edu-roboterhunde",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_g04",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Profi-Mähroboter",
+          "keyword": "profi-mähroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_g05",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Profi-Poolroboter",
+          "keyword": "profi-poolroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "hu_hu01",
+          "owner_type": "robot_type",
+          "world": "Humanoide",
+          "path": "Humanoide › Haushalt › Haushaltsassistenten",
+          "keyword": "humanoider haushaltsroboter",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "hu_hu03",
+          "owner_type": "robot_type",
+          "world": "Humanoide",
+          "path": "Humanoide › Pflege › Fernpflegeassistenten",
+          "keyword": "fernpflegeassistenten",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "hu_hu04",
+          "owner_type": "robot_type",
+          "world": "Humanoide",
+          "path": "Humanoide › Pflege › Pflegebegleiter",
+          "keyword": "pflegebegleiter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "hu_hu06",
+          "owner_type": "robot_type",
+          "world": "Humanoide",
+          "path": "Humanoide › Arbeit › Lagerarbeiter",
+          "keyword": "humanoider lagerroboter",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "hu_hu07",
+          "owner_type": "robot_type",
+          "world": "Humanoide",
+          "path": "Humanoide › Arbeit › Produktionshelfer",
+          "keyword": "humanoider produktionsroboter",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "hu_hu08",
+          "owner_type": "robot_type",
+          "world": "Humanoide",
+          "path": "Humanoide › Arbeit › Empfangsroboter",
+          "keyword": "humanoider empfangsroboter",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "hu_hu10",
+          "owner_type": "robot_type",
+          "world": "Humanoide",
+          "path": "Humanoide › Arbeit › Werkstatthelfer",
+          "keyword": "werkstatthelfer",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "hu_hu11",
+          "owner_type": "robot_type",
+          "world": "Humanoide",
+          "path": "Humanoide › Bildung › Entwicklungsroboter",
+          "keyword": "entwicklungsroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "hu_hu12",
+          "owner_type": "robot_type",
+          "world": "Humanoide",
+          "path": "Humanoide › Bildung › Schulroboter",
+          "keyword": "humanoider schulroboter",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "hu_hu13",
+          "owner_type": "robot_type",
+          "world": "Humanoide",
+          "path": "Humanoide › Unterhaltung › Showroboter",
+          "keyword": "showroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "hu_hu14",
+          "owner_type": "robot_type",
+          "world": "Humanoide",
+          "path": "Humanoide › Unterhaltung › Gesprächsroboter",
+          "keyword": "gesprächsroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "hu_hu15",
+          "owner_type": "robot_type",
+          "world": "Humanoide",
+          "path": "Humanoide › Intimrobotik › Intimroboter",
+          "keyword": "intimroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v52_rob-0220",
+          "owner_type": "robot_type",
+          "world": "Garten",
+          "path": "Garten › Mückenfangroboter",
+          "keyword": "mückenfangroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v52_rob-0408",
+          "owner_type": "robot_type",
+          "world": "Pflege",
+          "path": "Pflege › Haarpflege › Haarwaschroboter",
+          "keyword": "haarwaschroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v52_rob-0424",
+          "owner_type": "robot_type",
+          "world": "Pflege",
+          "path": "Pflege › Mobilität › Blindenführroboter",
+          "keyword": "blindenführroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v52_rob-0571",
+          "owner_type": "robot_type",
+          "world": "Garten",
+          "path": "Garten › Teichpflegeroboter",
+          "keyword": "teichpflegeroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v52_rob-0568",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Reaktionstrainer",
+          "keyword": "roboter reaktionstrainer",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "v52_rob-0440",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Kletterwand-Routenroboter",
+          "keyword": "kletterwand-routenroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v52_rob-0457",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Elektronik-Reparaturroboter",
+          "keyword": "elektronik-reparaturroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v52_rob-0473",
+          "owner_type": "robot_type",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Biotoppflege-Roboter",
+          "keyword": "biotoppflege-roboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v52_rob-0562",
+          "owner_type": "robot_type",
+          "world": "Haushalt",
+          "path": "Haushalt › Geschirrspüler-Einräumroboter",
+          "keyword": "geschirrspüler-einräumroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v52_rob-0570",
+          "owner_type": "robot_type",
+          "world": "Pflege",
+          "path": "Pflege › Haarpflege › Haarpflegeroboter",
+          "keyword": "haarpflegeroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_h03",
+          "owner_type": "robot_type",
+          "world": "Haushalt",
+          "path": "Haushalt › Kommunikation › Telepräsenzroboter",
+          "keyword": "telepräsenzroboter zuhause",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "v46_h06",
+          "owner_type": "robot_type",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Aufräumroboter",
+          "keyword": "aufräumroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_h07",
+          "owner_type": "robot_type",
+          "world": "Haushalt",
+          "path": "Haushalt › Reinigung › Nasswischroboter",
+          "keyword": "nasswischroboter ohne saugen",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "v46_h10",
+          "owner_type": "robot_type",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Servierroboter",
+          "keyword": "servierroboter zuhause",
+          "phase": "v78",
+          "rule": "SPECIFIC_INTENT"
+        },
+        {
+          "owner_id": "v46_h12",
+          "owner_type": "robot_type",
+          "world": "Haushalt",
+          "path": "Haushalt › Kommunikation › Begleitroboter",
+          "keyword": "begleitroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_ga04",
+          "owner_type": "robot_type",
+          "world": "Garten",
+          "path": "Garten › Grillreinigungsroboter",
+          "keyword": "grillreinigungsroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_f01",
+          "owner_type": "robot_type",
+          "world": "Freizeit",
+          "path": "Freizeit › Outdoor › Unterwasserroboter",
+          "keyword": "unterwasserroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_f02",
+          "owner_type": "robot_type",
+          "world": "Freizeit",
+          "path": "Freizeit › Filmen › Kamerabewegungsroboter",
+          "keyword": "kamerabewegungsroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_f03",
+          "owner_type": "robot_type",
+          "world": "Freizeit",
+          "path": "Freizeit › Filmen › Folgedrohnen",
+          "keyword": "folgedrohnen",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_s03",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Badmintonroboter",
+          "keyword": "badmintonroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_s07",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Sportkameraroboter",
+          "keyword": "sportkameraroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_b01",
+          "owner_type": "robot_type",
+          "world": "Bildung",
+          "path": "Bildung › Roboterbaukästen",
+          "keyword": "roboterbaukästen",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_b02",
+          "owner_type": "robot_type",
+          "world": "Bildung",
+          "path": "Bildung › Forschung › ROS-Roboter",
+          "keyword": "ros-roboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_b04",
+          "owner_type": "robot_type",
+          "world": "Bildung",
+          "path": "Bildung › Forschung › Lehrroboterarme",
+          "keyword": "lehrroboterarme",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_b05",
+          "owner_type": "robot_type",
+          "world": "Bildung",
+          "path": "Bildung › Lernhilfe › Leselernroboter",
+          "keyword": "leselernroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v46_b07",
+          "owner_type": "robot_type",
+          "world": "Bildung",
+          "path": "Bildung › Forschung › Chemielaborroboter",
+          "keyword": "chemielaborroboter",
+          "phase": "v78",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v84_fin_01",
+          "owner_type": "robot_type",
+          "world": "Haushalt",
+          "path": "Haushalt › Reinigung › Katzenkloroboter",
+          "keyword": "katzenkloroboter",
+          "phase": "v84",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v84_fin_02",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Padel-Trainingsroboter",
+          "keyword": "padel-trainingsroboter",
+          "phase": "v84",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v84_fin_03",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Pickleball-Trainingsroboter",
+          "keyword": "pickleball-trainingsroboter",
+          "phase": "v84",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v84_fin_04",
+          "owner_type": "robot_type",
+          "world": "Pflege",
+          "path": "Pflege › Handrehabilitationsroboter",
+          "keyword": "handrehabilitationsroboter",
+          "phase": "v84",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v84_fin_05",
+          "owner_type": "robot_type",
+          "world": "Pflege",
+          "path": "Pflege › Zahnpflegeroboter",
+          "keyword": "zahnpflegeroboter",
+          "phase": "v84",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v84_fin_26",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Wander-Exoskelette",
+          "keyword": "wander-exoskelette",
+          "phase": "v84",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v84_fin_27",
+          "owner_type": "robot_type",
+          "world": "Freizeit",
+          "path": "Freizeit › Sandmalroboter",
+          "keyword": "sandmalroboter",
+          "phase": "v84",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v84_fin_28",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Baseball-Wurfroboter",
+          "keyword": "baseball-wurfroboter",
+          "phase": "v84",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v84_fin_29",
+          "owner_type": "robot_type",
+          "world": "Freizeit",
+          "path": "Freizeit › Spielzeug › Transformationsroboter",
+          "keyword": "transformationsroboter",
+          "phase": "v84",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v84_v82_01",
+          "owner_type": "robot_type",
+          "world": "Haushalt",
+          "path": "Haushalt › Hausüberwachungsroboter",
+          "keyword": "hausüberwachungsroboter",
+          "phase": "v84",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v84_v82_02",
+          "owner_type": "robot_type",
+          "world": "Freizeit",
+          "path": "Freizeit › Robotische Teleskope",
+          "keyword": "robotische teleskope",
+          "phase": "v84",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v84_v82_03",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Volleyball-Ballmaschinen",
+          "keyword": "volleyball-ballmaschinen",
+          "phase": "v84",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v84_v82_04",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Cricket-Ballmaschinen",
+          "keyword": "cricket-ballmaschinen",
+          "phase": "v84",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v84_v82_05",
+          "owner_type": "robot_type",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Fußball-Trainingsroboter",
+          "keyword": "fußball-trainingsroboter",
+          "phase": "v84",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v84_v83_01",
+          "owner_type": "robot_type",
+          "world": "Pflege",
+          "path": "Pflege › Massageroboter",
+          "keyword": "massageroboter",
+          "phase": "v84",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "v84_v83_02",
+          "owner_type": "robot_type",
+          "world": "Pflege",
+          "path": "Pflege › Nagelpflegeroboter",
+          "keyword": "nagelpflegeroboter",
+          "phase": "v84",
+          "rule": "TYPE_TITLE"
+        },
+        {
+          "owner_id": "rbt_1a89fd0bc29fef98",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Entmistungsroboter",
+          "keyword": "entmistungsroboter stallbetrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_b19380b553bb19da",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Futterschieberoboter",
+          "keyword": "futterschieberoboter futterbetrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_b4f2516aec64ec42",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Melkroboter",
+          "keyword": "melkroboter stallplanung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_21e8c210becb7ce9",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Melkroboter",
+          "keyword": "melkroboter betrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_82f097f2eaf179a4",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Reinigung › PV-Reinigungsroboter",
+          "keyword": "pv-reinigungsroboter dachreinigung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_ff64ccae8930501c",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Reinigung › PV-Reinigungsroboter",
+          "keyword": "pv-reinigungsroboter betrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_faf3bee47378bcd6",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Platzpflege › Linienroboter",
+          "keyword": "linienroboter platzmarkierung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_be2ea310a4e37638",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Platzpflege › Tennisplatzroboter",
+          "keyword": "tennisplatzroboter platzpflege",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_254ddb4f8dc8e53f",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Flächenpflege › Schneeroboter",
+          "keyword": "schneeroboter winterdienst",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_cc2ae4c159f86f87",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Outdoor › Bootsreiniger",
+          "keyword": "bootsreinigungsroboter rumpfreinigung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_10de7e6184f4993f",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Golf › Golfballroboter",
+          "keyword": "golfballroboter ballsammlung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_26fd25e617513e76",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Platzpflege › Ballsammelroboter",
+          "keyword": "ballsammelroboter ballsammlung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_cd49298266772482",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Lernroboter",
+          "keyword": "lernroboter geräteauswahl",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_6eb8f78f5b00ec2e",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Lernroboter",
+          "keyword": "lernroboter programmierung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_15aafc4325ca56ca",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Spielzeug › Robotertiere",
+          "keyword": "robotertiere spielpraxis",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_a87abf01929921d0",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Spielzeug › Tischroboter",
+          "keyword": "tischroboter alltag",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_855dd0440fc8ff88",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Spielzeug › Schachroboter",
+          "keyword": "schachroboter schachpraxis",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_78ba18c817636191",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Zeichenroboter",
+          "keyword": "zeichenroboter zeichentechnik",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_408ea0f61efe8356",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Tischtennisroboter",
+          "keyword": "tischtennis ballmaschine balltraining",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_a6d02fc60f829885",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Tischtennisroboter",
+          "keyword": "tischtennis ballmaschine training",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_683c2e9e25b9ad96",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Basketballroboter",
+          "keyword": "basketballroboter wurftraining",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_bca35a737afd3d29",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Golf › Golf-Folgetrolleys",
+          "keyword": "golf-folgetrolleys spielbegleitung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_6066e9fce68ef249",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Alltagshilfen › Essroboter",
+          "keyword": "essroboter versorgung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_3633312f2df9f46a",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Alltagshilfen › Rollstuhlarme",
+          "keyword": "rollstuhlarme versorgung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_da9051309d5496fd",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Mobilität › Treppenrollstühle",
+          "keyword": "elektrischer treppenrollstuhl versorgung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_3a2c3d35936d1f12",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Haustierroboter",
+          "keyword": "haustierroboter tierbetreuung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_3c48939d8fbbd82a",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Lagerlogistik › Inventurroboter",
+          "keyword": "inventurroboter regalprüfung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_029454d3d08d2d84",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Poolpflege › Poolroboter",
+          "keyword": "poolroboter poolpflege",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_bc531cbc23671562",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Poolpflege › Poolroboter",
+          "keyword": "poolroboter pflege",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_2c8f9d686c8b85ff",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Reinigung › Fassadenroboter",
+          "keyword": "fassadenroboter fassadenpflege",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_f7627834cb5d518d",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Gastronomie › Baristaroboter",
+          "keyword": "baristaroboter kaffeeausgabe",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_ec960247e0c9a301",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Reinigung › Scheuersaugroboter",
+          "keyword": "scheuersaugroboter bodenreinigung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_95492c47bb514421",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Reinigung › Scheuersaugroboter",
+          "keyword": "scheuersaugroboter betrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_8a691103a7bcfd05",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Poolpflege › Poolskimmer",
+          "keyword": "pool skimmer roboter oberflächenpflege",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_f20d16b4bce57bc5",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Fensterputzroboter",
+          "keyword": "fensterputzroboter fensterpflege",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_c6e1cc71e6378bd3",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Flächenpflege › Laubroboter",
+          "keyword": "laubroboter laubbeseitigung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_000eb8fdc7142c35",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Beetroboter",
+          "keyword": "beetroboter beetpflege",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_457bf524d91b3eb9",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Schultelepräsenz",
+          "keyword": "schultelepräsenz einsatz",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_108f1ca363f277ac",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Medientechnik › Kameraroboter",
+          "keyword": "kameraroboter kameraführung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_86f81f9a9a921498",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Medientechnik › Kameraroboter",
+          "keyword": "kameraroboter anwendung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_49b86f25e4278cc4",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung › Bestückungsroboter",
+          "keyword": "roboter bestückung industrie leiterplatten",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_474fa3ebac598e25",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Sä-/Jätroboter",
+          "keyword": "sä-/jätroboter aussaat",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_0eb4cf74ddd6c77e",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Sä-/Jätroboter",
+          "keyword": "sä-/jätroboter betrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_fe88183166b05ee8",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung › Schweißroboter",
+          "keyword": "schweißroboter schweißtechnik",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_ed66576c17b5ff89",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Gastronomie › Servierroboter",
+          "keyword": "restaurant servierroboter restaurantbetrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_100dd2ec856d3e7b",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Gastronomie › Servierroboter",
+          "keyword": "restaurant servierroboter einsatz",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_07b3c4ee79353b8c",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Pikierroboter",
+          "keyword": "pikierroboter jungpflanzen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_4a54d5850440451b",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Hotelbetrieb › Hotelroboter",
+          "keyword": "hotelroboter hotelbetrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_d5c7826b400fdde8",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Hotelbetrieb › Hotelroboter",
+          "keyword": "hotelroboter betrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_a8382ab5864262af",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Hotelbetrieb › Empfangsroboter",
+          "keyword": "empfangsroboter hotel besucherführung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_72e09b38e56566bf",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Gastronomie › Barkeeperroboter",
+          "keyword": "barkeeperroboter ausschank",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_545de9d604989dbc",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung › Druckfarmroboter",
+          "keyword": "druckfarmroboter druckbetrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_6c921042e3a48087",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Saugroboter",
+          "keyword": "saugroboter bodenpflege",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_555df046c19a7b23",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Saugroboter",
+          "keyword": "saugroboter wartung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_b507e620f55eca64",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Rasenpflege › Mähroboter",
+          "keyword": "mähroboter rasenpflege",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_6ef0b578ff24edc2",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Rasenpflege › Mähroboter",
+          "keyword": "mähroboter betrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_6f7de53c155de5a0",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Outdoor › Futterboote",
+          "keyword": "futterboot ferngesteuert angelbetrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_758d017a7da3f0d5",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Modellbau › Tischroboterarme",
+          "keyword": "tischroboterarme werkstatteinsatz",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_1503bbe8901c9be8",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Modellbau › Tischroboterarme",
+          "keyword": "tischroboterarme programmierung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_ded50e43b0d5c963",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Outdoor › Folgekoffer",
+          "keyword": "folgekoffer reisen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_2ac32adbc9f75766",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Modellbau › Roboterhunde",
+          "keyword": "roboterhunde entwicklung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_84f512110edcdbc6",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Baustelle › Wanddruckroboter",
+          "keyword": "wanddruckroboter wanddruck",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_581dc4a82b503f1a",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung › Schraubroboter",
+          "keyword": "schraubroboter montage",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_27aba656fbe9deff",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung › Etikettierroboter",
+          "keyword": "etikettierroboter kennzeichnung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_75c4e04ab6f706b9",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung › Palettierroboter",
+          "keyword": "palettierroboter palettierung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_40d80c31c15c5b36",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung › Palettierroboter",
+          "keyword": "palettierroboter betrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_c1848af7943745f7",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung › Lötroboter",
+          "keyword": "lötroboter löttechnik",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_f7cb17e1456fd0c9",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung › Lötroboter",
+          "keyword": "lötroboter betrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_308057de14701c8f",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung › Dosierroboter",
+          "keyword": "dosierroboter materialauftrag",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_7f8e0135b4ecb933",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Baustelle › Estrichroboter",
+          "keyword": "estrichroboter estricharbeiten",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_55abb45d95783b58",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Fertigung › Schleifroboter",
+          "keyword": "schleifroboter oberflächenbearbeitung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_4a6a5c3d2619ed60",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Tennisroboter",
+          "keyword": "tennisroboter training",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_9ac60b2e264a367d",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Lagerlogistik › Palettenhubroboter",
+          "keyword": "palettenhubroboter lagertransport",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_785813333658b9e8",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Rasenpflege › Trimmroboter",
+          "keyword": "trimmroboter rasenkanten",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_ae633d71cc88926a",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Baustelle › Gerüstroboter",
+          "keyword": "gerüstroboter baustellenlogistik",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_f84a1c8f17feede0",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Sprühroboter",
+          "keyword": "sprühroboter gewächshauspflege",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_47c7065ad4be33d1",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Medientechnik › Fotoroboter",
+          "keyword": "fotoroboter produktfotografie",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_aac0df44599bd17c",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Lerndrohnen",
+          "keyword": "lerndrohnen schulbetrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_ec9f8c47859b3650",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Medientechnik › Requisitenroboter",
+          "keyword": "requisitenroboter studioeinsatz",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_540a2b68857ac7d3",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Mobilität › Geh-Exoskelette",
+          "keyword": "geh-exoskelette versorgung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_03391bb7af7bad25",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Mobilität › Geh-Exoskelette",
+          "keyword": "geh-exoskelette alltag",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_5dfbb0bafd50ed86",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Spritzroboter",
+          "keyword": "spritzroboter pflanzenschutz",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_b2cf7c7103fedacb",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Prothetik › Armorthesen",
+          "keyword": "robotische armorthese versorgung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_9844e69fd70749a1",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Prothetik › Handprothesen",
+          "keyword": "robotische handprothese versorgung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_5b34c19cf89b6211",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Prothetik › Knieprothesen",
+          "keyword": "robotische knieprothese versorgung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_2336a2085201e264",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Therapieroboter",
+          "keyword": "therapieroboter einsatz",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_dc69542de139e996",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Agrardrohnen",
+          "keyword": "agrardrohnen feldeinsatz",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_290689835ebf197f",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Agrardrohnen",
+          "keyword": "agrardrohnen einsatz",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "rbt_1afec1aadc980ecb",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Landwirtschaft › Traktorroboter",
+          "keyword": "traktorroboter feldarbeit",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h01_facet_1",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Transportroboter",
+          "keyword": "transportroboter wohnräume",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h01_facet_2",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Transportroboter",
+          "keyword": "transportroboter alltagstransport",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h01_facet_3",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Transportroboter",
+          "keyword": "transportroboter bedienung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h02_facet_1",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Kochroboter",
+          "keyword": "kochroboter mahlzeiten",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h02_facet_2",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Kochroboter",
+          "keyword": "kochroboter küchentechnik",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h02_facet_3",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Kochroboter",
+          "keyword": "kochroboter entwicklung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h04_facet_1",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Wäschefaltroboter",
+          "keyword": "wäschefaltroboter wäschearten",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h04_facet_2",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Wäschefaltroboter",
+          "keyword": "wäschefaltroboter abläufe",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h04_facet_3",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Wäschefaltroboter",
+          "keyword": "wäschefaltroboter entwicklung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h05_facet_1",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Reinigung › WC-Reinigungsroboter",
+          "keyword": "wc-reinigungsroboter badgestaltung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h05_facet_2",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Reinigung › WC-Reinigungsroboter",
+          "keyword": "wc-reinigungsroboter reinigungsfunktion",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h05_facet_3",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Reinigung › WC-Reinigungsroboter",
+          "keyword": "wc-reinigungsroboter forschung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h08_facet_1",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Reinigung › Luftreinigungsroboter",
+          "keyword": "luftreinigungsroboter raumnavigation",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h08_facet_2",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Reinigung › Luftreinigungsroboter",
+          "keyword": "luftreinigungsroboter luftqualität",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h08_facet_3",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Reinigung › Luftreinigungsroboter",
+          "keyword": "luftreinigungsroboter betrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h09_facet_1",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Aquarienroboter",
+          "keyword": "aquarienroboter aquarien",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h09_facet_2",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Aquarienroboter",
+          "keyword": "aquarienroboter betrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h09_facet_3",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Aquarienroboter",
+          "keyword": "aquarienroboter wartung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_p01_facet_1",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Telepräsenzroboter",
+          "keyword": "telepräsenzroboter pflege besuchskontakt",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_p01_facet_2",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Telepräsenzroboter",
+          "keyword": "telepräsenzroboter pflege einrichtung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_p01_facet_3",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Telepräsenzroboter",
+          "keyword": "telepräsenzroboter pflege datenschutz",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_p02_facet_1",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Versorgung › Kliniktransportroboter",
+          "keyword": "kliniktransportroboter materialwege",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_p02_facet_2",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Versorgung › Kliniktransportroboter",
+          "keyword": "kliniktransportroboter sicherheit",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_p02_facet_3",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Versorgung › Kliniktransportroboter",
+          "keyword": "kliniktransportroboter organisation",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_p03_facet_1",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Versorgung › Pflege-Servierroboter",
+          "keyword": "servierroboter pflege bewohner",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_p03_facet_2",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Versorgung › Pflege-Servierroboter",
+          "keyword": "servierroboter pflege pflegealltag",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_p03_facet_3",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Versorgung › Pflege-Servierroboter",
+          "keyword": "servierroboter pflege akzeptanz",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_g01_facet_1",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Gastronomie › Küchenroboter",
+          "keyword": "küchenroboter betriebsabläufe",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_g01_facet_2",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Gastronomie › Küchenroboter",
+          "keyword": "küchenroboter technik",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_g01_facet_3",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Gastronomie › Küchenroboter",
+          "keyword": "küchenroboter wirtschaftlichkeit",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_g02_facet_1",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Reinigung › Sanitärreinigungsroboter",
+          "keyword": "sanitärreinigungsroboter sanitärbetrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_g02_facet_2",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Reinigung › Sanitärreinigungsroboter",
+          "keyword": "sanitärreinigungsroboter hygiene",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_g02_facet_3",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Reinigung › Sanitärreinigungsroboter",
+          "keyword": "sanitärreinigungsroboter betreiberfragen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_g03_facet_1",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Wäschereiroboter",
+          "keyword": "wäschereiroboter wäschereiprozesse",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_g03_facet_2",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Wäschereiroboter",
+          "keyword": "wäschereiroboter betriebstechnik",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_g03_facet_3",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Wäschereiroboter",
+          "keyword": "wäschereiroboter betriebskosten",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h11_facet_1",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Esshilferoboter",
+          "keyword": "esshilferoboter wohnalltag",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h11_facet_2",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Esshilferoboter",
+          "keyword": "esshilferoboter bedienung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h11_facet_3",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Esshilferoboter",
+          "keyword": "esshilferoboter nutzungsfragen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h13_facet_1",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Ankleideroboter",
+          "keyword": "ankleideroboter kleidung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h13_facet_2",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Ankleideroboter",
+          "keyword": "ankleideroboter wohnung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h13_facet_3",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Ankleideroboter",
+          "keyword": "ankleideroboter entwicklung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h14_facet_1",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Duschroboter",
+          "keyword": "duschroboter badgrundriss",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h14_facet_2",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Duschroboter",
+          "keyword": "duschroboter unterstützung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h14_facet_3",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Duschroboter",
+          "keyword": "duschroboter sicherheit",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_p04_facet_1",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Versorgung › Pflege-Reinigungsroboter",
+          "keyword": "pflege-reinigungsroboter bewohnerbereiche",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_p04_facet_2",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Versorgung › Pflege-Reinigungsroboter",
+          "keyword": "pflege-reinigungsroboter hygieneablauf",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_p04_facet_3",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Versorgung › Pflege-Reinigungsroboter",
+          "keyword": "pflege-reinigungsroboter einführung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_ga01_facet_1",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Heckenschneidroboter",
+          "keyword": "heckenschneidroboter pflanzen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_ga01_facet_2",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Heckenschneidroboter",
+          "keyword": "heckenschneidroboter navigation",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_ga01_facet_3",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Heckenschneidroboter",
+          "keyword": "heckenschneidroboter forschung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_ga02_facet_1",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Hundekotroboter",
+          "keyword": "hundekotroboter erkennung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_ga02_facet_2",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Hundekotroboter",
+          "keyword": "hundekotroboter aufnahme",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_ga02_facet_3",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Hundekotroboter",
+          "keyword": "hundekotroboter gartenpraxis",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_ga03_facet_1",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Flächenpflege › Terrassenroboter",
+          "keyword": "terrassenroboter beläge",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_ga03_facet_2",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Flächenpflege › Terrassenroboter",
+          "keyword": "terrassenroboter reinigung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_ga03_facet_3",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Flächenpflege › Terrassenroboter",
+          "keyword": "terrassenroboter entwicklung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_ga05_facet_1",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Bienenstockroboter",
+          "keyword": "bienenstockroboter stockaufbau",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_ga05_facet_2",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Bienenstockroboter",
+          "keyword": "bienenstockroboter beobachtung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_ga05_facet_3",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Bienenstockroboter",
+          "keyword": "bienenstockroboter machbarkeit",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_f04_facet_1",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Pinselmalroboter",
+          "keyword": "pinselmalroboter maltechnik",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_f04_facet_2",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Pinselmalroboter",
+          "keyword": "pinselmalroboter kunstpraxis",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_f04_facet_3",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Pinselmalroboter",
+          "keyword": "pinselmalroboter entwicklung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_f05_facet_1",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Musikroboter",
+          "keyword": "musikroboter instrumente",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_f05_facet_2",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Musikroboter",
+          "keyword": "musikroboter musiksteuerung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_f05_facet_3",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Musikroboter",
+          "keyword": "musikroboter entwicklung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s01_facet_1",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Golf › Bunkerrechenroboter",
+          "keyword": "bunkerrechenroboter bunkerformen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s01_facet_2",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Golf › Bunkerrechenroboter",
+          "keyword": "bunkerrechenroboter pflegepraxis",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s01_facet_3",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Golf › Bunkerrechenroboter",
+          "keyword": "bunkerrechenroboter technik",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s02_facet_1",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Eisaufbereitungsroboter",
+          "keyword": "eisaufbereitungsroboter eisflächen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s02_facet_2",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Eisaufbereitungsroboter",
+          "keyword": "eisaufbereitungsroboter robotik",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s02_facet_3",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Eisaufbereitungsroboter",
+          "keyword": "eisaufbereitungsroboter marktstand",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s04_facet_1",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Torwartroboter",
+          "keyword": "torwartroboter training",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s04_facet_2",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Torwartroboter",
+          "keyword": "torwartroboter spieltechnik",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s04_facet_3",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Torwartroboter",
+          "keyword": "torwartroboter veranstaltung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s05_facet_1",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Billardroboter",
+          "keyword": "billardroboter spielvarianten",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s05_facet_2",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Billardroboter",
+          "keyword": "billardroboter technik",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s05_facet_3",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Billardroboter",
+          "keyword": "billardroboter forschung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s06_facet_1",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Tischtennis-Spielroboter",
+          "keyword": "tischtennis spielender roboter spielniveau",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s06_facet_2",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Tischtennis-Spielroboter",
+          "keyword": "tischtennis spielender roboter robotertechnik",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s06_facet_3",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Tischtennis-Spielroboter",
+          "keyword": "tischtennis spielender roboter entwicklung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b03_facet_1",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Lernhilfe › Schreiblernroboter",
+          "keyword": "schreiblernroboter lernaufgaben",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b03_facet_2",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Lernhilfe › Schreiblernroboter",
+          "keyword": "schreiblernroboter haptik",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b03_facet_3",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Lernhilfe › Schreiblernroboter",
+          "keyword": "schreiblernroboter forschung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b06_facet_1",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Forschung › EDU-Roboterhunde",
+          "keyword": "edu-roboterhunde lernzwecke",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b06_facet_2",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Forschung › EDU-Roboterhunde",
+          "keyword": "edu-roboterhunde ausrüstung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b06_facet_3",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Forschung › EDU-Roboterhunde",
+          "keyword": "edu-roboterhunde forschung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_g04_facet_1",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Profi-Mähroboter",
+          "keyword": "profi-mähroboter betriebsflächen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_g04_facet_2",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Profi-Mähroboter",
+          "keyword": "profi-mähroboter maschinen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_g04_facet_3",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Profi-Mähroboter",
+          "keyword": "profi-mähroboter betrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_g05_facet_1",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Profi-Poolroboter",
+          "keyword": "profi-poolroboter beckentypen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_g05_facet_2",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Profi-Poolroboter",
+          "keyword": "profi-poolroboter reinigung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_g05_facet_3",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Profi-Poolroboter",
+          "keyword": "profi-poolroboter betreiber",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu01_facet_1",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Haushalt › Haushaltsassistenten",
+          "keyword": "humanoider haushaltsroboter wohnräume",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu01_facet_2",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Haushalt › Haushaltsassistenten",
+          "keyword": "humanoider haushaltsroboter bedienung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu01_facet_3",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Haushalt › Haushaltsassistenten",
+          "keyword": "humanoider haushaltsroboter marktstand",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu03_facet_1",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Pflege › Fernpflegeassistenten",
+          "keyword": "fernpflegeassistenten alltagshilfe",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu03_facet_2",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Pflege › Fernpflegeassistenten",
+          "keyword": "fernpflegeassistenten fernsteuerung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu03_facet_3",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Pflege › Fernpflegeassistenten",
+          "keyword": "fernpflegeassistenten projektstand",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu04_facet_1",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Pflege › Pflegebegleiter",
+          "keyword": "pflegebegleiter einrichtungen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu04_facet_2",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Pflege › Pflegebegleiter",
+          "keyword": "pflegebegleiter einführung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu04_facet_3",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Pflege › Pflegebegleiter",
+          "keyword": "pflegebegleiter datenschutz",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu06_facet_1",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Arbeit › Lagerarbeiter",
+          "keyword": "humanoider lagerroboter lageraufgaben",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu06_facet_2",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Arbeit › Lagerarbeiter",
+          "keyword": "humanoider lagerroboter pilotbetrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu06_facet_3",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Arbeit › Lagerarbeiter",
+          "keyword": "humanoider lagerroboter wirtschaftlichkeit",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu07_facet_1",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Arbeit › Produktionshelfer",
+          "keyword": "humanoider produktionsroboter arbeitsplätze",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu07_facet_2",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Arbeit › Produktionshelfer",
+          "keyword": "humanoider produktionsroboter fertigung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu07_facet_3",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Arbeit › Produktionshelfer",
+          "keyword": "humanoider produktionsroboter sicherheit",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu08_facet_1",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Arbeit › Empfangsroboter",
+          "keyword": "humanoider empfangsroboter empfang",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu08_facet_2",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Arbeit › Empfangsroboter",
+          "keyword": "humanoider empfangsroboter betrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu08_facet_3",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Arbeit › Empfangsroboter",
+          "keyword": "humanoider empfangsroboter vertrauen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu10_facet_1",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Arbeit › Werkstatthelfer",
+          "keyword": "werkstatthelfer betriebsgrößen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu10_facet_2",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Arbeit › Werkstatthelfer",
+          "keyword": "werkstatthelfer einführung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu10_facet_3",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Arbeit › Werkstatthelfer",
+          "keyword": "werkstatthelfer kostenfragen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu11_facet_1",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Bildung › Entwicklungsroboter",
+          "keyword": "entwicklungsroboter programmierung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu11_facet_2",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Bildung › Entwicklungsroboter",
+          "keyword": "entwicklungsroboter messungen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu11_facet_3",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Bildung › Entwicklungsroboter",
+          "keyword": "entwicklungsroboter laborbetrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu12_facet_1",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Bildung › Schulroboter",
+          "keyword": "humanoider schulroboter unterricht",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu12_facet_2",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Bildung › Schulroboter",
+          "keyword": "humanoider schulroboter schulpraxis",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu12_facet_3",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Bildung › Schulroboter",
+          "keyword": "humanoider schulroboter schutz",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu13_facet_1",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Unterhaltung › Showroboter",
+          "keyword": "showroboter auftritte",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu13_facet_2",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Unterhaltung › Showroboter",
+          "keyword": "showroboter organisation",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu13_facet_3",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Unterhaltung › Showroboter",
+          "keyword": "showroboter grenzen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu14_facet_1",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Unterhaltung › Gesprächsroboter",
+          "keyword": "gesprächsroboter kommunikation",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu14_facet_2",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Unterhaltung › Gesprächsroboter",
+          "keyword": "gesprächsroboter alltag",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu14_facet_3",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Unterhaltung › Gesprächsroboter",
+          "keyword": "gesprächsroboter marktstand",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu15_facet_1",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Intimrobotik › Intimroboter",
+          "keyword": "intimroboter robotikgrade",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu15_facet_2",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Intimrobotik › Intimroboter",
+          "keyword": "intimroboter privatsphäre",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "hu_hu15_facet_3",
+          "owner_type": "facet",
+          "world": "Humanoide",
+          "path": "Humanoide › Intimrobotik › Intimroboter",
+          "keyword": "intimroboter entwicklung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0220_facet_1",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Mückenfangroboter",
+          "keyword": "mückenfangroboter erkennung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0220_facet_2",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Mückenfangroboter",
+          "keyword": "mückenfangroboter einsatz",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0220_facet_3",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Mückenfangroboter",
+          "keyword": "mückenfangroboter entwicklung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0408_facet_1",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Haarpflege › Haarwaschroboter",
+          "keyword": "haarwaschroboter waschaufgaben",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0408_facet_2",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Haarpflege › Haarwaschroboter",
+          "keyword": "haarwaschroboter pflegebetrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0408_facet_3",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Haarpflege › Haarwaschroboter",
+          "keyword": "haarwaschroboter forschung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0424_facet_1",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Mobilität › Blindenführroboter",
+          "keyword": "blindenführroboter orientierung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0424_facet_2",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Mobilität › Blindenführroboter",
+          "keyword": "blindenführroboter assistenz",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0424_facet_3",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Mobilität › Blindenführroboter",
+          "keyword": "blindenführroboter forschung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0571_facet_1",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Teichpflegeroboter",
+          "keyword": "teichpflegeroboter gewässer",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0571_facet_2",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Teichpflegeroboter",
+          "keyword": "teichpflegeroboter funktion",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0571_facet_3",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Teichpflegeroboter",
+          "keyword": "teichpflegeroboter entwicklung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0568_facet_1",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Reaktionstrainer",
+          "keyword": "roboter reaktionstrainer trainingsarten",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0568_facet_2",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Reaktionstrainer",
+          "keyword": "roboter reaktionstrainer sensorik",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0568_facet_3",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Reaktionstrainer",
+          "keyword": "roboter reaktionstrainer forschung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0440_facet_1",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Kletterwand-Routenroboter",
+          "keyword": "kletterwand-routenroboter routenbau",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0440_facet_2",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Kletterwand-Routenroboter",
+          "keyword": "kletterwand-routenroboter mechanik",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0440_facet_3",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Kletterwand-Routenroboter",
+          "keyword": "kletterwand-routenroboter entwicklung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0457_facet_1",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Elektronik-Reparaturroboter",
+          "keyword": "elektronik-reparaturroboter schadensarten",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0457_facet_2",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Elektronik-Reparaturroboter",
+          "keyword": "elektronik-reparaturroboter reparaturbetrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0457_facet_3",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Elektronik-Reparaturroboter",
+          "keyword": "elektronik-reparaturroboter technik",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0473_facet_1",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Biotoppflege-Roboter",
+          "keyword": "biotoppflege-roboter einsatzflächen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0473_facet_2",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Biotoppflege-Roboter",
+          "keyword": "biotoppflege-roboter naturschutz",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0473_facet_3",
+          "owner_type": "facet",
+          "world": "Gewerbe",
+          "path": "Gewerbe › Biotoppflege-Roboter",
+          "keyword": "biotoppflege-roboter forschung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0562_facet_1",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Geschirrspüler-Einräumroboter",
+          "keyword": "geschirrspüler-einräumroboter geschirr",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0562_facet_2",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Geschirrspüler-Einräumroboter",
+          "keyword": "geschirrspüler-einräumroboter küche",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0562_facet_3",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Geschirrspüler-Einräumroboter",
+          "keyword": "geschirrspüler-einräumroboter entwicklung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0570_facet_1",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Haarpflege › Haarpflegeroboter",
+          "keyword": "haarpflegeroboter berührung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0570_facet_2",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Haarpflege › Haarpflegeroboter",
+          "keyword": "haarpflegeroboter pflegealltag",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v52_rob-0570_facet_3",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Haarpflege › Haarpflegeroboter",
+          "keyword": "haarpflegeroboter forschung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h03_facet_1",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Kommunikation › Telepräsenzroboter",
+          "keyword": "telepräsenzroboter zuhause kommunikation",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h03_facet_2",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Kommunikation › Telepräsenzroboter",
+          "keyword": "telepräsenzroboter zuhause wohnung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h03_facet_3",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Kommunikation › Telepräsenzroboter",
+          "keyword": "telepräsenzroboter zuhause privatsphäre",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h06_facet_1",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Aufräumroboter",
+          "keyword": "aufräumroboter aufgaben",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h06_facet_2",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Aufräumroboter",
+          "keyword": "aufräumroboter erkennung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h06_facet_3",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Aufräumroboter",
+          "keyword": "aufräumroboter grenzen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h07_facet_1",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Reinigung › Nasswischroboter",
+          "keyword": "nasswischroboter ohne saugen bodenbeläge",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h07_facet_2",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Reinigung › Nasswischroboter",
+          "keyword": "nasswischroboter ohne saugen reinigung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h07_facet_3",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Reinigung › Nasswischroboter",
+          "keyword": "nasswischroboter ohne saugen pflege",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h10_facet_1",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Servierroboter",
+          "keyword": "servierroboter zuhause anfragen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h10_facet_2",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Servierroboter",
+          "keyword": "servierroboter zuhause speisen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h10_facet_3",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Alltagshilfe › Servierroboter",
+          "keyword": "servierroboter zuhause wohnpraxis",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h12_facet_1",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Kommunikation › Begleitroboter",
+          "keyword": "begleitroboter gespräche",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h12_facet_2",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Kommunikation › Begleitroboter",
+          "keyword": "begleitroboter kontakte",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_h12_facet_3",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Kommunikation › Begleitroboter",
+          "keyword": "begleitroboter privatheit",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_ga04_facet_1",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Grillreinigungsroboter",
+          "keyword": "grillreinigungsroboter grilltypen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_ga04_facet_2",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Grillreinigungsroboter",
+          "keyword": "grillreinigungsroboter bürsten",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_ga04_facet_3",
+          "owner_type": "facet",
+          "world": "Garten",
+          "path": "Garten › Grillreinigungsroboter",
+          "keyword": "grillreinigungsroboter sicherheit",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_f01_facet_1",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Outdoor › Unterwasserroboter",
+          "keyword": "unterwasserroboter einsatz",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_f01_facet_2",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Outdoor › Unterwasserroboter",
+          "keyword": "unterwasserroboter technik",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_f01_facet_3",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Outdoor › Unterwasserroboter",
+          "keyword": "unterwasserroboter ausrüstung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_f02_facet_1",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Filmen › Kamerabewegungsroboter",
+          "keyword": "kamerabewegungsroboter filmideen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_f02_facet_2",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Filmen › Kamerabewegungsroboter",
+          "keyword": "kamerabewegungsroboter steuerung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_f02_facet_3",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Filmen › Kamerabewegungsroboter",
+          "keyword": "kamerabewegungsroboter kaufpraxis",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_f03_facet_1",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Filmen › Folgedrohnen",
+          "keyword": "folgedrohnen aufnahme",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_f03_facet_2",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Filmen › Folgedrohnen",
+          "keyword": "folgedrohnen betrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_f03_facet_3",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Filmen › Folgedrohnen",
+          "keyword": "folgedrohnen recht",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s03_facet_1",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Badmintonroboter",
+          "keyword": "badmintonroboter trainingsformen",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s03_facet_2",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Badmintonroboter",
+          "keyword": "badmintonroboter maschinentechnik",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s03_facet_3",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Badmintonroboter",
+          "keyword": "badmintonroboter praxistauglichkeit",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s07_facet_1",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Sportkameraroboter",
+          "keyword": "sportkameraroboter vereinsbetrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s07_facet_2",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Sportkameraroboter",
+          "keyword": "sportkameraroboter analyse",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_s07_facet_3",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Sportkameraroboter",
+          "keyword": "sportkameraroboter datenschutz",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b01_facet_1",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Roboterbaukästen",
+          "keyword": "roboterbaukästen aufbau",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b01_facet_2",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Roboterbaukästen",
+          "keyword": "roboterbaukästen programmierung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b01_facet_3",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Roboterbaukästen",
+          "keyword": "roboterbaukästen schulbetrieb",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b02_facet_1",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Forschung › ROS-Roboter",
+          "keyword": "ros-roboter navigation",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b02_facet_2",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Forschung › ROS-Roboter",
+          "keyword": "ros-roboter entwicklung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b02_facet_3",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Forschung › ROS-Roboter",
+          "keyword": "ros-roboter lehre",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b04_facet_1",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Forschung › Lehrroboterarme",
+          "keyword": "lehrroboterarme schulaufgaben",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b04_facet_2",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Forschung › Lehrroboterarme",
+          "keyword": "lehrroboterarme einrichtung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b04_facet_3",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Forschung › Lehrroboterarme",
+          "keyword": "lehrroboterarme programmieren",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b05_facet_1",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Lernhilfe › Leselernroboter",
+          "keyword": "leselernroboter leseförderung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b05_facet_2",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Lernhilfe › Leselernroboter",
+          "keyword": "leselernroboter unterricht",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b05_facet_3",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Lernhilfe › Leselernroboter",
+          "keyword": "leselernroboter forschung",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b07_facet_1",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Forschung › Chemielaborroboter",
+          "keyword": "chemielaborroboter versuche",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b07_facet_2",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Forschung › Chemielaborroboter",
+          "keyword": "chemielaborroboter labortechnik",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v46_b07_facet_3",
+          "owner_type": "facet",
+          "world": "Bildung",
+          "path": "Bildung › Forschung › Chemielaborroboter",
+          "keyword": "chemielaborroboter lehrkonzept",
+          "phase": "v78",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_fin_01_facet_1",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Reinigung › Katzenkloroboter",
+          "keyword": "katzenkloroboter auswahl",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_fin_01_facet_2",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Reinigung › Katzenkloroboter",
+          "keyword": "katzenkloroboter betrieb",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_fin_02_facet_1",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Padel-Trainingsroboter",
+          "keyword": "padel-trainingsroboter training",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_fin_02_facet_2",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Padel-Trainingsroboter",
+          "keyword": "padel-trainingsroboter geräte",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_fin_03_facet_1",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Pickleball-Trainingsroboter",
+          "keyword": "pickleball-trainingsroboter training",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_fin_03_facet_2",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Pickleball-Trainingsroboter",
+          "keyword": "pickleball-trainingsroboter auswahl",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_fin_04_facet_1",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Handrehabilitationsroboter",
+          "keyword": "handrehabilitationsroboter therapieformen",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_fin_04_facet_2",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Handrehabilitationsroboter",
+          "keyword": "handrehabilitationsroboter anwendung",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_fin_05_facet_1",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Zahnpflegeroboter",
+          "keyword": "zahnpflegeroboter funktionsweise",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_fin_05_facet_2",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Zahnpflegeroboter",
+          "keyword": "zahnpflegeroboter marktstand",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_fin_26_facet_1",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Wander-Exoskelette",
+          "keyword": "wander-exoskelette einsatz",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_fin_26_facet_2",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Wander-Exoskelette",
+          "keyword": "wander-exoskelette auswahl",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_fin_27_facet_1",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Sandmalroboter",
+          "keyword": "sandmalroboter technik",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_fin_27_facet_2",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Sandmalroboter",
+          "keyword": "sandmalroboter aufstellung",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_fin_28_facet_1",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Baseball-Wurfroboter",
+          "keyword": "baseball-wurfroboter training",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_fin_28_facet_2",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Baseball-Wurfroboter",
+          "keyword": "baseball-wurfroboter geräte",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_fin_29_facet_1",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Spielzeug › Transformationsroboter",
+          "keyword": "transformationsroboter modelle",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_fin_29_facet_2",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Spielzeug › Transformationsroboter",
+          "keyword": "transformationsroboter betrieb",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_v82_01_facet_1",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Hausüberwachungsroboter",
+          "keyword": "hausüberwachungsroboter überwachung",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_v82_01_facet_2",
+          "owner_type": "facet",
+          "world": "Haushalt",
+          "path": "Haushalt › Hausüberwachungsroboter",
+          "keyword": "hausüberwachungsroboter datenschutz",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_v82_02_facet_1",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Robotische Teleskope",
+          "keyword": "robotische teleskope beobachtung",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_v82_02_facet_2",
+          "owner_type": "facet",
+          "world": "Freizeit",
+          "path": "Freizeit › Robotische Teleskope",
+          "keyword": "robotische teleskope ausstattung",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_v82_03_facet_1",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Volleyball-Ballmaschinen",
+          "keyword": "volleyball-ballmaschinen training",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_v82_03_facet_2",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Volleyball-Ballmaschinen",
+          "keyword": "volleyball-ballmaschinen geräte",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_v82_04_facet_1",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Cricket-Ballmaschinen",
+          "keyword": "cricket-ballmaschinen training",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_v82_04_facet_2",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Cricket-Ballmaschinen",
+          "keyword": "cricket-ballmaschinen betrieb",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_v82_05_facet_1",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Fußball-Trainingsroboter",
+          "keyword": "fußball-trainingsroboter training",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_v82_05_facet_2",
+          "owner_type": "facet",
+          "world": "Sport",
+          "path": "Sport › Ballsport › Fußball-Trainingsroboter",
+          "keyword": "fußball-trainingsroboter anlagen",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_v83_01_facet_1",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Massageroboter",
+          "keyword": "massageroboter anwendung",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_v83_01_facet_2",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Massageroboter",
+          "keyword": "massageroboter betrieb",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_v83_02_facet_1",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Nagelpflegeroboter",
+          "keyword": "nagelpflegeroboter behandlung",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        },
+        {
+          "owner_id": "v84_v83_02_facet_2",
+          "owner_type": "facet",
+          "world": "Pflege",
+          "path": "Pflege › Nagelpflegeroboter",
+          "keyword": "nagelpflegeroboter marktstand",
+          "phase": "v84",
+          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+        }
+      ],
+      "provider_keyword_limit": 1000,
+      "estimated_usd_2026_11_15": 0.09,
+      "meaning": "STARTBEGRIFFE_NICHT_SEO_FREIGABE"
+    },
+    "task_2": {
+      "endpoint": "dataforseo_labs/google/keyword_ideas/live",
+      "location_name": "Germany",
+      "language_code": "de",
+      "limit": 300,
+      "include_serp_info": false,
+      "seed_keywords": [
+        "bootsreinigungsroboter",
+        "robotertiere",
+        "tischroboter",
+        "schachroboter",
+        "zeichenroboter",
+        "futterboot ferngesteuert",
+        "tischroboterarme",
+        "folgekoffer",
+        "roboterhunde",
+        "pinselmalroboter",
+        "musikroboter",
+        "unterwasserroboter",
+        "kamerabewegungsroboter",
+        "folgedrohnen",
+        "sandmalroboter",
+        "transformationsroboter",
+        "robotische teleskope"
+      ],
+      "estimated_max_usd_2026_11_15": 0.048,
+      "reason": "Freizeit im V61 Export wegen Anbieterfehler nie geliefert"
+    },
+    "cost": {
+      "estimate_total_usd": 0.138,
+      "preapproval_max_usd": 0.2,
+      "no_call_without_explicit_authorization": true,
+      "verify_account_price_preflight": true,
+      "quote_not_invoice": true
+    },
+    "rules": [
+      "These 532 keywords are search seeds, not SEO-approved page names.",
+      "All source IDs and canonical owners preserved; no WordPress edits.",
+      "Generic old labels use already approved conceptual short-name proposals; actual WordPress terms unchanged.",
+      "No results is not equal zero demand.",
+      "SERP rerun for 16 historical holds deliberately excluded.",
+      "Do not repeat 391 older words in separate paid calls; one flat-fee all-tree baseline.",
+      "Request run must not be retried automatically after timeout/uncertain response.",
+      "Plugin 0.4.14 still uses fixed V52 437-keyword plan and DOES NOT implement these two new tasks.",
+      "A single future existing-plugin update is necessary before an admin can execute batch; no second plugin identity."
+    ],
+    "new_provider_calls": 0,
+    "wordpress_writes": 0,
+    "keyword_results": 0
   }
 }
