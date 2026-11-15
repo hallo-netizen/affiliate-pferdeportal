@@ -184,7 +184,8 @@
     "entscheidungsvergleich_w21": "Die einzige aktuelle Entscheidung je Paar steht in funktionsvergleiche_50_aktuell, in den Produktdatensätzen nur Referenz. Keine weitere nachgelagerte Entscheidung.",
     "w22_einmalentscheidung": "Ein Vergleich, eine Entscheidung im Feld funktionsvergleiche_50_aktuell. Produktdaten verweisen nur auf die Entscheidung; kein zweiter Prüfschritt.",
     "w23_arbeitsnavigation": "Die w23-Markteinsortierung ist eine fachliche Arbeitsgruppierung und KEINE neue WordPress-Kategorie oder zusätzliche Alias-/SEO-Entscheidung.",
-    "w23_funktionszuordnung": "Die technische Aufgabe wird im einen Feld merkmale.funktionen direkt am Produkt berichtigt; W4-SEO/WordPress bleibt unverändert. Kein zweiter paralleler Status."
+    "w23_funktionszuordnung": "Die technische Aufgabe wird im einen Feld merkmale.funktionen direkt am Produkt berichtigt; W4-SEO/WordPress bleibt unverändert. Kein zweiter paralleler Status.",
+    "w24_verfuegbarkeit_einmal": "Die Käufergruppe steht EINMAL in merkmale.zielgruppen; der technische Marktstatus in technikstand. Quelle und Prüfbegründung in w24_evidenz. W23-Doppel-Caches aus dem aktuellen Master entfernt. Dies ist keine SEO-/WP-Freigabe."
   },
   "eintraege": [
     {
@@ -250,8 +251,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -334,8 +333,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -411,8 +408,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -488,8 +483,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -565,8 +558,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -642,8 +633,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -719,8 +708,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -796,8 +783,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -880,8 +865,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -957,8 +940,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -1035,8 +1016,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -1119,8 +1098,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -1199,8 +1176,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -1276,8 +1251,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -1356,8 +1329,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -1433,8 +1404,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -1510,8 +1479,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -1597,8 +1564,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -1683,8 +1648,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -1762,8 +1725,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -1839,8 +1800,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -1923,8 +1882,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -2000,8 +1957,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -2080,8 +2035,6 @@
         "suchfeld_w13": "01",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -2157,8 +2110,6 @@
         "suchfeld_w13": "01",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -2239,8 +2190,6 @@
         "suchfeld_w13": "01",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -2326,8 +2275,6 @@
         "suchfeld_w13": "03",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -2406,8 +2353,6 @@
         "suchfeld_w13": "03",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -2492,8 +2437,6 @@
         "suchfeld_w13": "03",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -2574,8 +2517,6 @@
         "suchfeld_w13": "03",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -2653,8 +2594,6 @@
         "suchfeld_w13": "03",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -2730,8 +2669,6 @@
         "suchfeld_w13": "03",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -2810,8 +2747,6 @@
         "suchfeld_w13": "03",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -2890,8 +2825,6 @@
         "suchfeld_w13": "03",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -2969,8 +2902,6 @@
         "suchfeld_w13": "09",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -3055,8 +2986,6 @@
         "suchfeld_w13": "09",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -3134,8 +3063,6 @@
         "suchfeld_w13": "09",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -3213,8 +3140,6 @@
         "suchfeld_w13": "09",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -3299,8 +3224,6 @@
         "suchfeld_w13": "09",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -3389,8 +3312,6 @@
         "suchfeld_w13": "09",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -3469,8 +3390,6 @@
         "suchfeld_w13": "09",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -3548,8 +3467,6 @@
         "suchfeld_w13": "09",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -3635,8 +3552,6 @@
         "suchfeld_w13": "10",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -3719,8 +3634,6 @@
         "suchfeld_w13": "10",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -3796,8 +3709,6 @@
         "suchfeld_w13": "10",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -3873,8 +3784,6 @@
         "suchfeld_w13": "10",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -3950,8 +3859,6 @@
         "suchfeld_w13": "10",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -4029,8 +3936,6 @@
         "suchfeld_w13": "02",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -4113,8 +4018,6 @@
         "suchfeld_w13": "02",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -4190,8 +4093,6 @@
         "suchfeld_w13": "02",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -4267,8 +4168,6 @@
         "suchfeld_w13": "02",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -4356,8 +4255,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -4442,8 +4339,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -4533,8 +4428,6 @@
         "suchfeld_w13": "12",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -4619,8 +4512,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -4698,8 +4589,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -4777,8 +4666,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -4856,8 +4743,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -4935,8 +4820,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -5011,8 +4894,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -5090,8 +4971,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -5166,8 +5045,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -5242,8 +5119,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -5321,8 +5196,6 @@
         "suchfeld_w13": "03",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -5397,8 +5270,6 @@
         "suchfeld_w13": "03",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -5473,8 +5344,6 @@
         "suchfeld_w13": "03",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -5549,8 +5418,6 @@
         "suchfeld_w13": "03",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -5625,8 +5492,6 @@
         "suchfeld_w13": "02",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -5701,8 +5566,6 @@
         "suchfeld_w13": "02",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -5779,8 +5642,6 @@
         "suchfeld_w13": "09",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -5858,8 +5719,6 @@
         "suchfeld_w13": "10",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -5953,8 +5812,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -6037,8 +5894,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -6124,8 +5979,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -6208,8 +6061,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -6292,8 +6143,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -6376,8 +6225,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -6465,8 +6312,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -6552,8 +6397,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "bestehender_w4_owner",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "w4_bestehender_owner_ohne_externe_einzelquelle_im_register",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -6588,7 +6431,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -6648,8 +6491,6 @@
         "suchfeld_w13": "01",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -6685,7 +6526,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -6737,8 +6578,6 @@
         "suchfeld_w13": "01",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -6774,7 +6613,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -6821,8 +6660,6 @@
         "suchfeld_w13": "10",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -6858,7 +6695,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -6913,8 +6750,6 @@
         "suchfeld_w13": "10",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -6950,7 +6785,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -7005,8 +6840,6 @@
         "suchfeld_w13": "10",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -7042,7 +6875,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -7089,8 +6922,6 @@
         "suchfeld_w13": "10",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -7178,8 +7009,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -7212,7 +7041,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -7272,8 +7101,6 @@
         "suchfeld_w13": "06",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -7307,7 +7134,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -7362,8 +7189,6 @@
         "suchfeld_w13": "08",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -7400,7 +7225,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -7460,8 +7285,6 @@
         "suchfeld_w13": "06",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -7495,7 +7318,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -7550,8 +7373,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -7642,8 +7463,6 @@
         "suchfeld_w13": "12",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -7679,7 +7498,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -7731,8 +7550,6 @@
         "suchfeld_w13": "09",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -7824,8 +7641,6 @@
         "suchfeld_w13": "09",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -7859,7 +7674,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -7914,8 +7729,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -7951,7 +7764,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -7998,8 +7811,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -8032,7 +7843,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -8084,8 +7895,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -8118,7 +7927,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -8173,8 +7982,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -8210,7 +8017,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -8268,8 +8075,6 @@
         "suchfeld_w13": "15",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -8305,7 +8110,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -8368,8 +8173,6 @@
         "suchfeld_w13": "15",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -8403,7 +8206,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -8450,8 +8253,6 @@
         "suchfeld_w13": "15",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -8487,7 +8288,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -8534,8 +8335,6 @@
         "suchfeld_w13": "15",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -8571,7 +8370,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -8621,8 +8420,6 @@
         "suchfeld_w13": "15",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -8657,7 +8454,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -8704,8 +8501,6 @@
         "suchfeld_w13": "15",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -8741,7 +8536,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -8788,8 +8583,6 @@
         "suchfeld_w13": "15",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -8823,7 +8616,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -8870,8 +8663,6 @@
         "suchfeld_w13": "15",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -8907,7 +8698,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -8959,8 +8750,6 @@
         "suchfeld_w13": "01",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -8996,7 +8785,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -9048,8 +8837,6 @@
         "suchfeld_w13": "01",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -9085,7 +8872,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -9137,8 +8924,6 @@
         "suchfeld_w13": "01",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -9218,8 +9003,6 @@
         "suchfeld_w13": "01",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -9254,7 +9037,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "grenzfall",
       "freigabe": "nicht_freigegeben",
@@ -9306,8 +9089,6 @@
         "suchfeld_w13": "01",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -9385,8 +9166,6 @@
         "suchfeld_w13": "02",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -9465,8 +9244,6 @@
         "suchfeld_w13": "02",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -9548,8 +9325,6 @@
         "suchfeld_w13": "02",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -9626,8 +9401,6 @@
         "suchfeld_w13": "02",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -9707,8 +9480,6 @@
         "suchfeld_w13": "03",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -9788,8 +9559,6 @@
         "suchfeld_w13": "03",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -9869,8 +9638,6 @@
         "suchfeld_w13": "03",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -9950,8 +9717,6 @@
         "suchfeld_w13": "03",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -10030,8 +9795,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -10110,8 +9873,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -10193,8 +9954,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -10271,8 +10030,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -10351,8 +10108,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -10431,8 +10186,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -10509,8 +10262,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -10594,8 +10345,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -10672,8 +10421,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -10750,8 +10497,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -10835,8 +10580,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -10913,8 +10656,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -10991,8 +10732,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -11071,8 +10810,6 @@
         "suchfeld_w13": "06",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -11150,8 +10887,6 @@
         "suchfeld_w13": "06",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -11230,8 +10965,6 @@
         "suchfeld_w13": "06",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -11308,8 +11041,6 @@
         "suchfeld_w13": "06",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -11386,8 +11117,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -11464,8 +11193,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -11542,8 +11269,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -11620,8 +11345,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -11698,8 +11421,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -11781,8 +11502,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -11862,8 +11581,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -11943,8 +11660,6 @@
         "suchfeld_w13": "08",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -12021,8 +11736,6 @@
         "suchfeld_w13": "08",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -12101,8 +11814,6 @@
         "suchfeld_w13": "08",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -12184,8 +11895,6 @@
         "suchfeld_w13": "08",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "kanonischer_alias",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -12265,8 +11974,6 @@
         "suchfeld_w13": "09",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -12345,8 +12052,6 @@
         "suchfeld_w13": "09",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -12423,8 +12128,6 @@
         "suchfeld_w13": "09",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -12502,8 +12205,6 @@
         "suchfeld_w13": "09",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -12536,7 +12237,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "grenzfall",
       "freigabe": "nicht_freigegeben",
@@ -12591,8 +12292,6 @@
         "suchfeld_w13": "09",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -12625,7 +12324,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -12677,8 +12376,6 @@
         "suchfeld_w13": "10",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -12711,7 +12408,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "grenzfall",
       "freigabe": "nicht_freigegeben",
@@ -12763,8 +12460,6 @@
         "suchfeld_w13": "10",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -12797,7 +12492,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "grenzfall",
       "freigabe": "nicht_freigegeben",
@@ -12847,8 +12542,6 @@
         "suchfeld_w13": "10",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -12882,7 +12575,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "grenzfall",
       "freigabe": "nicht_freigegeben",
@@ -12934,8 +12627,6 @@
         "suchfeld_w13": "10",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -12968,7 +12659,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -13015,8 +12706,6 @@
         "suchfeld_w13": "11",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -13049,7 +12738,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -13099,8 +12788,6 @@
         "suchfeld_w13": "11",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -13133,7 +12820,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "grenzfall",
       "freigabe": "nicht_freigegeben",
@@ -13183,8 +12870,6 @@
         "suchfeld_w13": "11",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -13217,7 +12902,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "grenzfall",
       "freigabe": "nicht_freigegeben",
@@ -13264,8 +12949,6 @@
         "suchfeld_w13": "11",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -13343,8 +13026,6 @@
         "suchfeld_w13": "11",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -13426,8 +13107,6 @@
         "suchfeld_w13": "12",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -13506,8 +13185,6 @@
         "suchfeld_w13": "12",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -13589,8 +13266,6 @@
         "suchfeld_w13": "12",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -13674,8 +13349,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "kanonischer_alias",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -13755,8 +13428,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -13833,8 +13504,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -13913,8 +13582,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -13993,8 +13660,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -14076,8 +13741,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -14156,8 +13819,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -14240,8 +13901,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -14318,8 +13977,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -14398,8 +14055,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -14476,8 +14131,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -14556,8 +14209,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -14636,8 +14287,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -14672,7 +14321,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -14719,8 +14368,6 @@
         "suchfeld_w13": "15",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -14756,7 +14403,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "grenzfall",
       "freigabe": "nicht_freigegeben",
@@ -14806,8 +14453,6 @@
         "suchfeld_w13": "15",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -14844,7 +14489,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "grenzfall",
       "freigabe": "nicht_freigegeben",
@@ -14891,8 +14536,6 @@
         "suchfeld_w13": "15",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -14928,7 +14571,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "grenzfall",
       "freigabe": "nicht_freigegeben",
@@ -14978,8 +14621,6 @@
         "suchfeld_w13": "15",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -15057,8 +14698,6 @@
         "suchfeld_w13": "16",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -15138,8 +14777,6 @@
         "suchfeld_w13": "16",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -15221,8 +14858,6 @@
         "suchfeld_w13": "16",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -15309,8 +14944,6 @@
         "suchfeld_w13": "16",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "kanonischer_alias",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -15392,8 +15025,6 @@
         "suchfeld_w13": "17",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -15473,8 +15104,6 @@
         "suchfeld_w13": "17",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -15551,8 +15180,6 @@
         "suchfeld_w13": "17",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -15629,8 +15256,6 @@
         "suchfeld_w13": "17",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -15712,8 +15337,6 @@
         "suchfeld_w13": "17",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -15792,8 +15415,6 @@
         "suchfeld_w13": "18",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -15870,8 +15491,6 @@
         "suchfeld_w13": "18",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -15953,8 +15572,6 @@
         "suchfeld_w13": "18",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -16032,8 +15649,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -16108,8 +15723,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -16189,8 +15802,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -16265,8 +15876,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -16341,8 +15950,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -16417,8 +16024,6 @@
         "suchfeld_w13": "11",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -16493,8 +16098,6 @@
         "suchfeld_w13": "11",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -16569,8 +16172,6 @@
         "suchfeld_w13": "11",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -16645,8 +16246,6 @@
         "suchfeld_w13": "11",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -16721,8 +16320,6 @@
         "suchfeld_w13": "11",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -16800,8 +16397,6 @@
         "suchfeld_w13": "11",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -16834,7 +16429,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "grenzfall",
       "freigabe": "nicht_freigegeben",
@@ -16889,8 +16484,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -16924,7 +16517,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -16971,8 +16564,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -17050,8 +16641,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -17128,8 +16717,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -17216,8 +16803,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "kanonischer_alias",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -17299,8 +16884,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -17380,8 +16963,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -17412,7 +16993,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -17459,8 +17040,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -17543,8 +17122,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "kanonischer_alias",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -17621,8 +17198,6 @@
         "suchfeld_w13": "17",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -17702,8 +17277,6 @@
         "suchfeld_w13": "01",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -17780,8 +17353,6 @@
         "suchfeld_w13": "18",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -17858,8 +17429,6 @@
         "suchfeld_w13": "11",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -17941,8 +17510,6 @@
         "suchfeld_w13": "11",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "kanonischer_alias",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -17975,7 +17542,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "recherche_offen",
       "freigabe": "nicht_freigegeben",
@@ -18027,8 +17594,6 @@
         "suchfeld_w13": "01",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -18062,7 +17627,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "grenzfall",
       "freigabe": "nicht_freigegeben",
@@ -18112,8 +17677,6 @@
         "suchfeld_w13": "01",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -18145,7 +17708,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "grenzfall",
       "freigabe": "nicht_freigegeben",
@@ -18192,8 +17755,6 @@
         "suchfeld_w13": "01",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -18271,8 +17832,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -18352,8 +17911,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -18435,8 +17992,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -18468,7 +18023,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "grenzfall",
       "freigabe": "nicht_freigegeben",
@@ -18518,8 +18073,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -18550,7 +18103,7 @@
         ],
         "technologien": []
       },
-      "merkmale_status": "fachlich_geprueft",
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
       "technikstand": "marktprodukt",
       "bearbeitungsstand": "grenzfall",
       "freigabe": "nicht_freigegeben",
@@ -18597,8 +18150,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -18676,8 +18227,6 @@
         "suchfeld_w13": "16",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -18756,8 +18305,6 @@
         "suchfeld_w13": "16",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -18839,8 +18386,6 @@
         "suchfeld_w13": "15",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -18922,8 +18467,6 @@
         "suchfeld_w13": "15",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "kanonischer_alias",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -19007,8 +18550,6 @@
         "suchfeld_w13": "15",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "kanonischer_alias",
-        "kaufnaehe_vorlaeufig": "zielgruppe_unbekannt",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -19095,8 +18636,6 @@
         "suchfeld_w13": "12",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -19184,8 +18723,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -19271,8 +18808,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -19361,8 +18896,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -19449,8 +18982,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -19537,8 +19068,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -19627,8 +19156,6 @@
         "suchfeld_w13": "06",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -19714,8 +19241,6 @@
         "suchfeld_w13": "06",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -19799,8 +19324,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -19885,8 +19408,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -19972,8 +19493,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -20063,8 +19582,6 @@
         "suchfeld_w13": "08",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -20153,8 +19670,6 @@
         "suchfeld_w13": "08",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -20239,8 +19754,6 @@
         "suchfeld_w13": "08",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -20325,8 +19838,6 @@
         "suchfeld_w13": "08",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -20410,8 +19921,6 @@
         "suchfeld_w13": "18",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -20494,8 +20003,6 @@
         "suchfeld_w13": "18",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -20581,8 +20088,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -20667,8 +20172,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -20753,8 +20256,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -20839,8 +20340,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -20926,8 +20425,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -21020,8 +20517,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "kanonischer_alias",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -21106,8 +20601,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -21195,8 +20688,6 @@
         "suchfeld_w13": "12",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -21284,8 +20775,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -21374,8 +20863,6 @@
         "suchfeld_w13": "18",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -21459,8 +20946,6 @@
         "suchfeld_w13": "18",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "forschung_prototyp",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -24640,8 +24125,6 @@
         "suchfeld_w13": "17",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -24733,8 +24216,6 @@
         "suchfeld_w13": "17",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -24824,8 +24305,6 @@
         "suchfeld_w13": "17",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -24914,8 +24393,6 @@
         "suchfeld_w13": "17",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -25008,8 +24485,6 @@
         "suchfeld_w13": "09",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -25103,8 +24578,6 @@
         "suchfeld_w13": "09",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -25201,8 +24674,6 @@
         "suchfeld_w13": "10",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -25291,8 +24762,6 @@
         "suchfeld_w13": "10",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -25386,8 +24855,6 @@
         "suchfeld_w13": "10",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -25472,8 +24939,6 @@
         "suchfeld_w13": "10",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -25567,8 +25032,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -25662,8 +25125,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -25756,8 +25217,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -25850,8 +25309,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -25945,8 +25402,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -26037,8 +25492,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -26126,8 +25579,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -27048,8 +26499,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -27147,8 +26596,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -27242,8 +26689,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -27335,8 +26780,6 @@
         "suchfeld_w13": "18",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -27427,8 +26870,6 @@
         "suchfeld_w13": "18",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -27520,8 +26961,6 @@
         "suchfeld_w13": "17",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -27610,8 +27049,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -27704,8 +27141,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -27797,8 +27232,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -27890,8 +27323,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -27983,8 +27414,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -28077,8 +27506,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -28168,8 +27595,6 @@
         "suchfeld_w13": "18",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "eher_fachlich_kommunal_industriell",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -28261,8 +27686,6 @@
         "suchfeld_w13": "09",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_vorhanden_technikstand_ungeklaert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -28354,8 +27777,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -29544,8 +28965,6 @@
         "suchfeld_w13": "09",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -29639,8 +29058,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -29729,8 +29146,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -29819,8 +29234,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -29913,8 +29326,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -30004,8 +29415,6 @@
         "suchfeld_w13": "01",
         "menuefeld_nur_entwurf": "Brunnen & Speicher",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -30093,8 +29502,6 @@
         "suchfeld_w13": "18",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -30188,8 +29595,6 @@
         "suchfeld_w13": "08",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -30626,8 +30031,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -30720,8 +30123,6 @@
         "suchfeld_w13": "10",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -30814,8 +30215,6 @@
         "suchfeld_w13": "11",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -30903,8 +30302,6 @@
         "suchfeld_w13": "16",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -30994,8 +30391,6 @@
         "suchfeld_w13": "17",
         "menuefeld_nur_entwurf": "Freizeit & Gewässertechnik",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -31083,8 +30478,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -31177,8 +30570,6 @@
         "suchfeld_w13": "13",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -31269,8 +30660,6 @@
         "suchfeld_w13": "08",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "fach_oder_seo_grenzfall",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -31708,8 +31097,6 @@
         "suchfeld_w13": "18",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -31804,8 +31191,6 @@
         "suchfeld_w13": "18",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -31894,8 +31279,6 @@
         "suchfeld_w13": "10",
         "menuefeld_nur_entwurf": "Regenwasser & Bewässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -31984,8 +31367,6 @@
         "suchfeld_w13": "14",
         "menuefeld_nur_entwurf": "Abwasser & Entwässerung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -32079,8 +31460,6 @@
         "suchfeld_w13": "18",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -32171,8 +31550,6 @@
         "suchfeld_w13": "18",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -32268,8 +31645,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -32358,8 +31733,6 @@
         "suchfeld_w13": "18",
         "menuefeld_nur_entwurf": "Prozesswasser & Spezialanlagen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -32796,8 +32169,6 @@
         "suchfeld_w13": "05",
         "menuefeld_nur_entwurf": "Trinkwasser & Aufbereitung",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -32887,8 +32258,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -32977,8 +32346,6 @@
         "suchfeld_w13": "04",
         "menuefeld_nur_entwurf": "Pumpen & Leitungen",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -33073,8 +32440,6 @@
         "suchfeld_w13": "07",
         "menuefeld_nur_entwurf": "Messen & Steuern",
         "portalrolle": "forschungsprodukt_nicht_freigegeben",
-        "kaufnaehe_vorlaeufig": "moeglich_privat_kleinbetrieb",
-        "quellen_und_technikstand": "fachquelle_und_marktprodukt_indiziert",
         "seitenfreigabe": false,
         "herleitung": "vorhandene_W13_Suchfeldzuordnung_und_bisherige_Produktquelle",
         "stand": "2026-11-15"
@@ -34240,16 +33605,6 @@
       "kanonischer_alias": 9,
       "forschung_prototyp": 1
     },
-    "kaufnaehe_vorlaeufig": {
-      "moeglich_privat_kleinbetrieb": 126,
-      "eher_fachlich_kommunal_industriell": 41,
-      "zielgruppe_unbekannt": 151
-    },
-    "beleg_und_technikstand": {
-      "w4_bestehender_owner_ohne_externe_einzelquelle_im_register": 79,
-      "fachquelle_vorhanden_technikstand_ungeklaert": 153,
-      "fachquelle_und_marktprodukt_indiziert": 86
-    },
     "entscheidung": "18 Recherchefelder sind nicht 18 Hauptkategorien; 8 reine Arbeitsgruppen ohne WordPress-Veröffentlichung; produktbezogene Freigabe bleibt unverändert.",
     "offene_punkte": [
       "Zielgruppe bei älteren Forschungsdatensätzen häufig nicht dokumentiert",
@@ -34660,6 +34015,12 @@
       "W16-007",
       "W16-008"
     ],
-    "hinweis": "Kein Echtzeit-Lagerbestand, kein pauschales Affiliate-Versprechen; Marktstatus bedeutet konkrete Hersteller-Produktart. Unbekannte Zielgruppen nicht geraten."
+    "hinweis": "Kein Echtzeit-Lagerbestand, kein pauschales Affiliate-Versprechen; Marktstatus bedeutet konkrete Hersteller-Produktart. Unbekannte Zielgruppen nicht geraten.",
+    "kaufgruppengliederung": {
+      "privat_kleinbetrieb_verein": 171,
+      "fach_einrichtung_kommune_industrie": 44,
+      "unbekannt": 103
+    },
+    "quellenbelegt_nur_kaufgruppe_und_technikstand": true
   }
 }
