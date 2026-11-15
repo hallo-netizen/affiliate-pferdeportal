@@ -1,4 +1,17 @@
 # ROBOTIK – ABSCHLUSS DER PRIVATEN FACHRECHERCHE (V76)
+
+## AKTUELLE ENTSCHEIDUNG 15.11.2026 – KEINE GOOGLE-ADRESSEN-SPERRE (ersetzt ältere V61/V76-HOLD-Empfehlungen)
+
+**Der Nutzer hat die Google-URL-Sperre ausdrücklich aufgehoben.** Es gibt **keine Pflicht zu echten Google-SERP-Zieladressen** als Voraussetzung für die fachliche Kategorienentscheidung. Die alten 16 V46-Fälle sind anhand des originalen Fachplans, der tatsächlich nachgewiesenen Funktionen und der vorhandenen drei Inhaltsrubriken pro Typ **einmalig redaktionell entschieden**:
+
+- **16 von 16 eigenständige fachliche Robotertyp-Seiten im bestehenden V62-Sollplan beibehalten**, zugehörige **48 bereits geplante Beitragsrubriken** ebenfalls; **0 fachliche Google-HOLDs übrig**.
+- **S03 Badminton:** `Badminton-Ballmaschine` und `Badminton-Zuspielroboter` sind **Synonyme EINER bereits geplanten einzigen Seite**, keine zwei WP-Seiten. Die vorige V76-Einordnung „Doppelung möglich“ bezog sich nur auf die Wörter und ist als Seitenentscheidung **überholt**.
+- **Alle anderen 15:** Funktion oder Zielgruppe von ähnlichen Robotern unterscheidbar. Gleiche Herstellergeräte dürfen in unterschiedlichen Nutzungskontexten erläutert werden, aber der konkrete Modellregistereintrag wird nur EINMAL gepflegt. **Gewerbe, Industrie und humanoide Arbeit unverändert**.
+- **Kein Google-Neulauf, keine Bezahl-API.** Keywords sind Zusatzinformation, keine redaktionelle Freigabehürde. Keine Änderung am WordPress-/SEO-Plugin allein aus dieser Entscheidung.
+- **Technische Wahrheit bleibt separat:** Das bisherige WordPress-Kategorie-Plugin 0.4.10 erbt noch die historische V63-Sperre von 16 Seiten/48 Rubriken im Importcode. **In GitHub ist dies nun fachlich aufgehoben, nicht bereits technisch importiert.** Bestehende, möglicherweise laufende **227 geschützte Aufgaben** zuerst mit demselben Auftrag abschließen oder auf realen Ist-Stand prüfen; **kein Neustart**. Danach die 16 Seiten + 48 Kategorien als **einen gebündelten 64er-Nachtrag** durch den vorhandenen EINEN WordPress-Kategorie-Writer umsetzen, erst nach ausdrücklicher WordPress-Schreibfreigabe. **Keine zweite Pluginidentität, keine Google-URL-Prüfung**.
+- Die **11 weiteren V76-Fachkandidaten** sind davon unabhängig und bleiben im Konzept; nicht mit den 16 alten, bereits eingeplanten Seiten additiv falsch doppelt erfassen.
+- Einzige detaillierte maschinenlesbare Zuordnung der **16 befreiten bisherigen HOLD-Seiten** und ihrer 48 IDs im bereits bestehenden `V76_FACHABSCHLUSS_29_KANDIDATEN.json`, Feld `release_plan_16` und `seo_hold_review`.
+
 **Datum: 15.11.2026 · Abschluss der Recherche, NICHT WordPress-/SEO-/Plugin-Freigabe.**
 
 ## 1. Wo stehen wir?
@@ -85,9 +98,9 @@ Der unveränderte V52/V67-Basisplan umfasst **100 Robotertyp-Seiten in sieben Ka
 **Quellenbasis:** V52/V61–V63 und V67–V75; vollständige Zuordnung und Quellen je Eintrag in `V76_FACHABSCHLUSS_29_KANDIDATEN.json`. **Keine WordPress-, Plugin-, Design- oder API-Änderung in V76.**
 
 
-## 8. Technischer Nachlauf vom 15.11.2026 – 16 SEO-Sperren und WordPress-Stand
+## 8. HISTORISCHER technischer Nachlauf – ältere Vorprüfung, ersetzt durch obige Fachentscheidung
 
-**Nachgeprüft aus V61, keinem neuen Bezahl-API-Lauf:** 16 bisherige SEO-Konflikte. **10 Paare fachlich plausibel unterscheidbar, 5 fachlich zu überlappend für eine sichere Trennung, 1 Verdacht auf denselben Typ (Badminton-Zuspielroboter/Ballmaschine).** Alle 16 bleiben **SEO-HOLD**. Fachliche Trennbarkeit ist **keine Google-SERP-Freigabe und kein Importbefehl**. Der Fehler des alten SEO-Ergebnisses ist mit den gespeicherten `google.com/goto`-Weiterleitungen bereits nachgewiesen; es liegen keine echten Vergleichs-Zieladressen vor.
+**Historischer Zwischenstand, vor Aufhebung der Google-Sperre; NICHT mehr aktuelle Freigaberegel.** Nachgeprüft aus V61, keinem neuen Bezahl-API-Lauf: 16 bisherige SEO-Konflikte. **10 Paare fachlich plausibel unterscheidbar, 5 fachlich zu überlappend für eine sichere Trennung, 1 Verdacht auf denselben Typ (Badminton-Zuspielroboter/Ballmaschine).** Alle 16 bleiben **SEO-HOLD**. Fachliche Trennbarkeit ist **keine Google-SERP-Freigabe und kein Importbefehl**. Der Fehler des alten SEO-Ergebnisses ist mit den gespeicherten `google.com/goto`-Weiterleitungen bereits nachgewiesen; es liegen keine echten Vergleichs-Zieladressen vor.
 
 | ID | Welt | Vergleich | Redaktionelle Vorprüfung (SEO bleibt HOLD) |
 |---|---|---|---|
