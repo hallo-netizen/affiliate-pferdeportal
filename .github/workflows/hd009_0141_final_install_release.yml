@@ -1,0 +1,154 @@
+name: Hobby Depot HD009 0.1.41 one complete installable release
+on:
+  push:
+    branches: [hobbyroom/hd009-0141-kiss-full-workflow-20261114]
+    paths: [.github/workflows/hd009_0141_final_install_release.yml]
+permissions:
+  contents: write
+jobs:
+  final_release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify complete previous tests and byte-exact old and new plugins
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/43619290847" --jq .conclusion)" = success
+          test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/43619399333" --jq .conclusion)" = success
+          office=protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE
+          final="$office/CANDIDATES/HOBBY_DEPOT_HD009_0.1.41_KISS_NUR_INTERN.zip"
+          test "$(sha256sum "$office/CURRENT.zip" | awk '{print $1}')" = 34b870ad459e9b075a5c8c0aedc335939a72f6689d03216bcfd4134798c73503
+          test "$(sha256sum "$office/HOBBY_DEPOT_AFFILIATE_HD009_0.1.37.zip" | awk '{print $1}')" = 34b870ad459e9b075a5c8c0aedc335939a72f6689d03216bcfd4134798c73503
+          test "$(sha256sum "$final" | awk '{print $1}')" = 175322f2a3f26e5640066d0c96e51bfbc8ef9a61ba09339ee8767c943e08f948
+      - name: Validate WordPress plugin replaces SAME installed directory, no parallel plugin
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import re,hashlib
+          root=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE')
+          with ZipFile(root/'CURRENT.zip') as old,ZipFile(root/'CANDIDATES/HOBBY_DEPOT_HD009_0.1.41_KISS_NUR_INTERN.zip') as new:
+            assert old.testzip() is None and new.testzip() is None
+            assert len(old.namelist())==len(new.namelist())==41
+            assert old.namelist()==new.namelist()
+            assert {name.split('/')[0] for name in new.namelist()}=={'affiliate-portal-router'}
+            main='affiliate-portal-router/hobby-depot-affiliate-router.php'
+            oldmain=old.read(main).decode()
+            newmain=new.read(main).decode()
+            assert 'Plugin Name:' in newmain[:500]
+            assert re.search(r'(?m)^\s*\*\s*Version:\s*0\.1\.37\s*$',oldmain)
+            assert re.search(r'(?m)^\s*\*\s*Version:\s*0\.1\.41\s*$',newmain)
+            assert 'hd_idealo_category_title_relevant' not in newmain
+            assert 'hd_idealo_product_targets_exact_hobby_page' not in newmain
+            change={n for n in new.namelist() if old.read(n)!=new.read(n)}
+            assert change=={
+              'affiliate-portal-router/hobby-depot-affiliate-router.php',
+              'affiliate-portal-router/includes/trait-ppar-idealo.php',
+              'affiliate-portal-router/includes/trait-ppar-network-sync.php'
+            }, change
+            phps=[p for p in new.namelist() if p.endswith('.php')]
+            assert len(phps)==24
+            for name in phps:
+              p=Path('/tmp/final_hd009')/name
+              p.parent.mkdir(parents=True,exist_ok=True)
+              p.write_bytes(new.read(name))
+            print('ONE_WORDPRESS_PLUGIN_REPLACEMENT_PASS',len(new.namelist()),len(phps),len(change))
+          PY
+          find /tmp/final_hd009 -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/php_lint.log
+          test "$(grep -c 'No syntax errors detected' /tmp/php_lint.log)" -eq 24
+      - name: Re-run whole original PHP product decision, storage, feed comparison and refresh
+        run: |
+          set -euo pipefail
+          root=protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS
+          full="$root/HD-009-AFFILIATE-ZENTRALE/CANDIDATES/HOBBY_DEPOT_HD009_0.1.41_KISS_NUR_INTERN.zip"
+          register="$root/HD-007-HOBBYREGISTER-CORE/CURRENT.zip"
+          python3 scripts/hd009_0141_single_matcher_qa.py "$full" /tmp/full_match.php "$register"
+          php /tmp/full_match.php
+          python3 scripts/hd009_0141_storage_qa.py "$full" /tmp/full_storage.php "$register"
+          php /tmp/full_storage.php
+          python3 scripts/hd009_0141_compare_qa.py "$full" /tmp/full_compare.php
+          php /tmp/full_compare.php
+          python3 scripts/hd009_0141_routing_qa.py "$full" /tmp/full_target.php
+          php /tmp/full_target.php
+          python3 scripts/hd009_0141_refresh_qa.py "$full" /tmp/full_refresh.php
+          php /tmp/full_refresh.php
+      - name: Promote one approved full plugin in the same office, keeping old rollback
+        run: |
+          set -euo pipefail
+          office=protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE
+          new="$office/CANDIDATES/HOBBY_DEPOT_HD009_0.1.41_KISS_NUR_INTERN.zip"
+          cp "$new" "$office/CURRENT.zip"
+          cp "$new" "$office/HOBBY_DEPOT_AFFILIATE_HD009_0.1.41.zip"
+          test "$(sha256sum "$office/CURRENT.zip" | awk '{print $1}')" = 175322f2a3f26e5640066d0c96e51bfbc8ef9a61ba09339ee8767c943e08f948
+          python3 - <<'PY'
+          from pathlib import Path
+          base=Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH')
+          office=base/'PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE'
+          notes="""# Hobby Depot HD009 0.1.41 – offizielles vollständiges Installationsplugin
+
+          Freigegebene WordPress-ZIP: HOBBY_DEPOT_AFFILIATE_HD009_0.1.41.zip
+          CURRENT.zip ist byteidentisch; alter 0.1.37-Rollback bleibt vollständig erhalten.
+          41 ZIP-Dateien, 24 fehlerfrei geprüfte PHP-Dateien, derselbe Original-Pluginordner.
+          SHA256: 175322f2a3f26e5640066d0c96e51bfbc8ef9a61ba09339ee8767c943e08f948.
+          Keine zusätzlichen Plugins oder WordPress-Tabellen, keine doppelte Produktentscheidung.
+          Zentrale fachliche Idealo-Produktzuordnung beim Import, eindeutige Seitenziel-Zuordnung,
+          sichere Fehlerstopps und lesender Vergleich 2747 gegen 2901.
+          Technische Original-PHP-Prüfung: GitHub Actions Run 43619290847.
+          Echte private Idealo-Feedzahlen müssen nach Installation im vorhandenen WordPress
+          gelesen werden: erst vollständiger 2747-Neuabgleich, dann einmalig den Feedvergleich
+          2747/2901 starten. Feed-ID nicht manuell wechseln.
+          Bis ein aktueller 2747-Abgleich abgeschlossen ist, zeigt das Plugin die alten
+          Idealo-Karten absichtlich nicht; eBay/Amazon bleiben unverändert.
+          
+          ---
+          
+          """
+          import textwrap
+          notes=textwrap.dedent(notes)
+          manifest=office/'MANIFEST.md'
+          if not manifest.read_text().startswith('# Hobby Depot HD009 0.1.41'):
+              manifest.write_text(notes+manifest.read_text())
+          current=base/'AFFILIATE/CURRENT_STATE.md'
+          if not current.read_text().startswith('# Hobby Depot HD009 0.1.41'):
+              current.write_text(notes+current.read_text())
+          status=office/'CANDIDATES/CANDIDATE_0.1.41_STATUS.md'
+          status.write_text(notes)
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$office/CURRENT.zip" "$office/HOBBY_DEPOT_AFFILIATE_HD009_0.1.41.zip" \
+            "$office/MANIFEST.md" "$office/CANDIDATES/CANDIDATE_0.1.41_STATUS.md" \
+            protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/CURRENT_STATE.md
+          git commit -m "release(hobby HD009): one fully tested 0.1.41 installer, unchanged 0.1.37 rollback"
+          git push origin HEAD:"$GITHUB_REF_NAME"
+      - name: Publish one exact ZIP as a direct downloadable GitHub release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag=hobby-hd009-0.1.41-install-20261115
+          asset=HOBBY_DEPOT_AFFILIATE_HD009_0.1.41.zip
+          office=protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-009-AFFILIATE-ZENTRALE
+          cp "$office/$asset" "/tmp/$asset"
+          test "$(sha256sum "/tmp/$asset" | awk '{print $1}')" = 175322f2a3f26e5640066d0c96e51bfbc8ef9a61ba09339ee8767c943e08f948
+          cat >/tmp/release.md <<'EOF'
+          EIN vollständiges Update für das bestehende Hobby-Depot-HD009-Plugin von 0.1.37 auf 0.1.41.
+          Nur diese eine ZIP installieren. Der alte Stand bleibt im Plugin-Büro als Rückfall erhalten.
+          Zentrale Produktentscheidung, passende verwandte Ausrüstung, korrekte Zielseiten,
+          sichere Datenbankfehlerbehandlung und lesender Feedvergleich 2747/2901.
+          Original-PHP-Gesamttest: GitHub Actions 43619290847.
+          Nach Installation: bestehenden 2747-Neuabgleich abschließen, danach einmalig
+          Feedvergleich 2747/2901 im WordPress starten; NICHT die Feed-ID ändern.
+          Echter 2901-Vergleich erfordert den vorhandenen privaten WordPress-Zugang.
+          SHA256: 175322f2a3f26e5640066d0c96e51bfbc8ef9a61ba09339ee8767c943e08f948.
+          EOF
+          gh release create "$tag" "/tmp/$asset" --repo "$GITHUB_REPOSITORY" \
+            --target "$(git rev-parse HEAD)" \
+            --title "Hobby Depot HD009 0.1.41 – vollständiges Installationsplugin" \
+            --notes-file /tmp/release.md
+          gh release view "$tag" --repo "$GITHUB_REPOSITORY" --json url,assets \
+            --jq '{url:.url,assets:[.assets[]|{name:.name,size:.size,url:.url}]}'
