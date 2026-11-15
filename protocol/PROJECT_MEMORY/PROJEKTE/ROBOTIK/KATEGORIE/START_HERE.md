@@ -1,5 +1,10 @@
 # ROBOTIK → KATEGORIE
 
+## AKTUELL 15.11.2026 – KATEGORIEABNAHME V84, EINZIGER FACHMASTER REV20
+- **Grundlagenrecherche abgeschlossen:** 19 offene neue Fälle → **16 letzte Typseiten + 32 flache Inhaltsrubriken**, die anderen **3** sind feste Magazin-/Registerthemen. Keine neunte Hauptkategorie, keine neue Zwischenebene, keine zusätzliche Recherche-Endlosschleife. Alle 19 Entscheidungen im einzigen `RECHERCHE/PRODUKTE_V2_20261108.json`, Feld `category_release_v84` (**Revision 20**); bisherige 68 Basiskandidaten und 189 Randfunde bleiben erhalten.
+- **Einziger aktueller WordPress-Installer: `PLUGIN/CURRENT.zip` Version 0.4.14** = `PLUGIN/VERSIONEN/0.4.14.zip`, Backend **Robotik Kategorie → Gesamtabschluss (einmalig)**. Dort nach altem Abschluss ein gebündelter, einmalig bestätigter 48er-Fachnachtrag; echte WP-Liveausführung noch offen, GitHub-CI bestanden. Technischer Bericht: `PLUGIN/V84_GRUNDLAGENFACHABSCHLUSS_UND_ONECLICK_20261115.md`.
+- Magazin/Glossar/Roboterregister/Roboterfinder/Anzeigenmarkt werden **für alle Zielgruppen gemeinsam** angeboten. Keine Texte im Kategorieplugin, K0 folgt später. Es wurde kein anderes Modul heimlich in WordPress installiert oder verändert. Alle älteren Infos zu Revision 18 oder Plugin 0.4.13 nachfolgend sind **Historie**.
+
 ## AKTUELL 15.11.2026 – EINZIGER MASTER REVISION 18, KATEGORIENRECHERCHE V82+V83
 - **Projektwahrheit in `CURRENT_STATE.md`**, Fachmaster **`RECHERCHE/PRODUKTE_V2_20261108.json` Revision 18** (68 ursprüngliche Hauptkandidaten und 189 Recherche-/Randfunde, bestehende IDs erhalten).
 - Neu erforscht: **8** mögliche weitere Robotertyp-Seiten **unter bereits vorhandenen Elternbereichen** aus Haushalt, Freizeit/Modellbau, Sport/Ballsport und Pflege. Zusammenhängender Fachbericht **`RECHERCHE/V82_FUENF_NISCHEN_BESTANDSABGLEICH_20261115.md`** mit V83-Ergänzung. **Nicht** in WordPress angelegt.
