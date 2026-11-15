@@ -1,0 +1,267 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Horseware-Regendecken und ihre Unterschiede bei Schnitt und Ausstattung",
+    "target_keyword": "horseware regendecken",
+    "category": "pferdedecken-regendecken-vergleich",
+    "article_type": "Vergleich",
+    "plan_slot": "9221a640f9bba8b62c6444ccc808d0c7e3a9ce1b5f47ef81bee72cf5b6866a8a"
+  },
+  "content_profile": {
+    "search_intent": "Markenberatung"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Horseware – Häufige Fragen",
+          "source_url": "https://www.horseware.com/de-de/faqs"
+        },
+        {
+          "source_title": "Horseware – Technik und Innovation",
+          "source_url": "https://www.horseware.com/en-eu/technology-innovation"
+        },
+        {
+          "source_title": "Houghton Country – Horseware Passformen",
+          "source_url": "https://www.houghtoncountry.co.uk/horseware-ireland-size-guides"
+        }
+      ],
+      "claims": [
+        "Amigo Bravo 12 verwendet 1200D-Polyester als Obermaterial.",
+        "Rhino-Weidedecken bestehen außen aus 1000D-Polypropylen und haben eine zusätzliche wasserdichte Schicht unter dem Außenmaterial.",
+        "Rambo-Weidedecken setzen auf 1000D ballistisches Nylon als besonders widerstandsfähigen Außenstoff.",
+        "Der Surefit-Halsausschnitt bei V- oder Disk-Brustverschlüssen soll Druck am Widerrist vermindern und Schulterfreiheit ermöglichen.",
+        "Ein klassischer Halsausschnitt mit doppeltem Brustverschluss ist gerade geschnitten, während Horseware weitere Schnittformen anbietet.",
+        "Horseware verwendet verschiedene Außenmaterialien und Denier-Stärken und bewirbt seine Weidedecken als wasserdicht und atmungsaktiv.",
+        "Ein Horseware-Liner lässt sich bei kompatiblen Außendecken zur zusätzlichen Wärme befestigen; Kompatibilität ist modellabhängig.",
+        "Beinausschnitte unterstützen laut Hersteller die Bewegungsfreiheit, ohne zusätzliche Gehfalten zu benötigen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Vergleich",
+      "target_keyword": "horseware regendecken",
+      "topic": "Horseware-Regendecken und ihre Unterschiede bei Schnitt und Ausstattung",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdedecken-regendecken-vergleich",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "comparison_targets": [
+        "Amigo",
+        "Rhino",
+        "Rambo"
+      ],
+      "comparison_criteria": [
+        "Außenmaterial und Strapazierfähigkeit",
+        "Brustverschluss und Schulterfreiheit",
+        "Wetterschutz und Liner-Kompatibilität"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Horseware – Häufige Fragen",
+        "source_url": "https://www.horseware.com/de-de/faqs",
+        "evidence_text_sha256": "5b22296aba13487e56a56567471f62f91845ea023fe2aab7185e565fb2a83946",
+        "statement": "Amigo Bravo 12 verwendet 1200D-Polyester als Obermaterial.",
+        "evidence_text": "Die Amigo®-Bravo12-Decken sind aus robustem 1200D-Polyester hergestellt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F2": {
+        "source_title": "Horseware – Häufige Fragen",
+        "source_url": "https://www.horseware.com/de-de/faqs",
+        "evidence_text_sha256": "d15253d666f2cdac11f5cd9885cc2f7b6750d942c09945902c868a359fc15128",
+        "statement": "Rhino-Weidedecken bestehen außen aus 1000D-Polypropylen und haben eine zusätzliche wasserdichte Schicht unter dem Außenmaterial.",
+        "evidence_text": "Rhino®-Decken sind aus einem Außenmaterial aus 1000D-Polypropylen hergestellt. Die Rhino-Decken sind insofern einzigartig, als sie anders aufgebaut sind als andere Weidedecken – sie weisen eine wasserdichte Schicht zwischen dem Außenstoff und der Füllung auf, bekannt als Barrier-Layer.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F3": {
+        "source_title": "Horseware – Häufige Fragen",
+        "source_url": "https://www.horseware.com/de-de/faqs",
+        "evidence_text_sha256": "32cc044e870b36be62d5761ec44055973bb4d5ac9dd586a1f4d679ca727a9da3",
+        "statement": "Rambo-Weidedecken setzen auf 1000D ballistisches Nylon als besonders widerstandsfähigen Außenstoff.",
+        "evidence_text": "Rambo®-Decken sind aus 1000D ballistischem Nylon gefertigt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F4": {
+        "source_title": "Horseware – Häufige Fragen",
+        "source_url": "https://www.horseware.com/de-de/faqs",
+        "evidence_text_sha256": "5086b609426e92b02af001eb2f108e067180d87b146354049a89d5bbcde97d5f",
+        "statement": "Der Surefit-Halsausschnitt bei V- oder Disk-Brustverschlüssen soll Druck am Widerrist vermindern und Schulterfreiheit ermöglichen.",
+        "evidence_text": "Den Surefit-Halsausschnitt findet man bei Decken mit Disk- oder V-Brustverschluss. Dieses Design setzt die Decke vor den Widerrist und reduziert dadurch den Druck auf diesen Bereich.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F5": {
+        "source_title": "Horseware – Häufige Fragen",
+        "source_url": "https://www.horseware.com/de-de/faqs",
+        "evidence_text_sha256": "eb1033c5b7b6f26622ef38fbd7e67978440d887984657ea0493dd245c4d9b844",
+        "statement": "Ein klassischer Halsausschnitt mit doppeltem Brustverschluss ist gerade geschnitten, während Horseware weitere Schnittformen anbietet.",
+        "evidence_text": "Klassischer Schnitt (Standard-Halsausschnitt mit doppeltem Brustverschluss): Der gerade geschnittene Brustverschluss ist leicht zu handhaben und der Halsausschnitt rahmt den Hals des Pferdes ein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F6": {
+        "source_title": "Horseware – Technik und Innovation",
+        "source_url": "https://www.horseware.com/en-eu/technology-innovation",
+        "evidence_text_sha256": "048869140911c8340553f3f122bca85999f782f7a39bf92c39c86985497ba88f",
+        "statement": "Horseware verwendet verschiedene Außenmaterialien und Denier-Stärken und bewirbt seine Weidedecken als wasserdicht und atmungsaktiv.",
+        "evidence_text": "All Horseware Ireland turnouts are waterproof and breathable to ensure your horse stays dry and comfortable at all times.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F7": {
+        "source_title": "Horseware – Technik und Innovation",
+        "source_url": "https://www.horseware.com/en-eu/technology-innovation",
+        "evidence_text_sha256": "20be89a5cbddf257a92d9763e4a5cd99c8d2fd9e66b880e0f62df70cfd8b47e5",
+        "statement": "Ein Horseware-Liner lässt sich bei kompatiblen Außendecken zur zusätzlichen Wärme befestigen; Kompatibilität ist modellabhängig.",
+        "evidence_text": "You can use any weight turnout that is liner compatible and add a Horseware Liner as additional layer for more warmth, to create lightweight, medium weight or heavyweight blanket.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F8": {
+        "source_title": "Horseware – Häufige Fragen",
+        "source_url": "https://www.horseware.com/de-de/faqs",
+        "evidence_text_sha256": "269b19de2745905f9e147020d6448a97e335f75ebf1e4692f233f0e2339cac6f",
+        "statement": "Beinausschnitte unterstützen laut Hersteller die Bewegungsfreiheit, ohne zusätzliche Gehfalten zu benötigen.",
+        "evidence_text": "Die Bögen im unteren Saum der Decke sorgen für Bewegungsfreiheit, ohne dass zusätzlicher Stoff angebracht werden muss oder ein konzentrierter Druckpunkt entsteht, wie es bei Gehfalten häufig der Fall ist.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+        "anchor": "Auswahl und Einsatz von Regendecken",
+        "block": "options"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/wann-eine-regendecke-sinnvoll-ist-und-wann-das-pferd-ohne-decke-bleiben-kann/",
+        "anchor": "wann Pferde überhaupt eine Regendecke brauchen",
+        "block": "comparison"
+      },
+      {
+        "role": "further_information",
+        "href": "/schritt-fuer-schritt-regendecken-reparieren/",
+        "anchor": "beschädigte Regendecken fachgerecht reparieren",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+        "active": true
+      },
+      {
+        "href": "/wann-eine-regendecke-sinnvoll-ist-und-wann-das-pferd-ohne-decke-bleiben-kann/",
+        "active": true
+      },
+      {
+        "href": "/schritt-fuer-schritt-regendecken-reparieren/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdedecken-regendecken-vergleich",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Horseware",
+      "Regendecken",
+      "Amigo",
+      "Rhino",
+      "Rambo",
+      "Passform",
+      "Schulterfreiheit",
+      "Sicherheit",
+      "Außenmaterial",
+      "Liner",
+      "Vergleich"
+    ],
+    "comparison_source_bindings": [
+      {
+        "source_label": "Amigo",
+        "nearest_option_heading": "Amigo",
+        "source_title": "Horseware – Häufige Fragen",
+        "source_url": "https://www.horseware.com/de-de/faqs"
+      },
+      {
+        "source_label": "Rhino",
+        "nearest_option_heading": "Rhino",
+        "source_title": "Horseware – Häufige Fragen",
+        "source_url": "https://www.horseware.com/de-de/faqs"
+      },
+      {
+        "source_label": "Rambo",
+        "nearest_option_heading": "Rambo",
+        "source_title": "Horseware – Häufige Fragen",
+        "source_url": "https://www.horseware.com/de-de/faqs"
+      }
+    ],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Ein direkter Vergleich von Amigo, Rhino und Rambo nach Oberstoff, Passform und weiteren Funktionen zeigt den praktischen Unterschied der Modellreihen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "advantages"
+  },
+  "publish_allowed": false
+}
