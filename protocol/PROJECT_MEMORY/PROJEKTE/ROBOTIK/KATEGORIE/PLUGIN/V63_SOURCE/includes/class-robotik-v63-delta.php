@@ -19,6 +19,7 @@ final class Robotik_V63_Delta {
     public static function boot(): void {
         add_action('admin_menu',[self::class,'menu'],32);
         add_action('admin_post_robotik_v63_delta_start',[self::class,'start']);
+        add_action('admin_post_robotik_v63_delta_resume',[self::class,'resume']);
         add_action('wp_ajax_robotik_v63_delta_tick',[self::class,'ajax_tick']);
         add_action('admin_post_robotik_v63_delta_result',[self::class,'export']);
     }
@@ -247,6 +248,24 @@ final class Robotik_V63_Delta {
             'error'=>'','started'=>gmdate('c')];
         update_option(self::STATE,$state,false);self::location();
     }
+    public static function resume():void {
+        self::authorized();check_admin_referer('robotik_v63_delta_resume');
+        $s=get_option(self::STATE,[]);
+        if(!is_array($s)||($s['status']??'')!=='BLOCKED' ||
+           (int)($s['total']??0)!==227 || !isset($s['index']))
+            wp_die('Kein unterbrochener 227er-Originalauftrag zum Fortsetzen.');
+        try{$p=self::prepare();}catch(Throwable $e){wp_die('Keine Fortsetzung: '.$e->getMessage());}
+        if($p['errors'] || (int)$p['task_count']!==227 || (int)$p['task_done']<(int)$s['index'] ||
+           !hash_equals((string)($s['manifest_sha256']??''),(string)hash_file('sha256',__DIR__.'/../assets/robotik-v62-sollvorschau.json')))
+            wp_die('Bestehender Importstand weicht ab; kein Neustart und kein doppelter Import.');
+        $existingPages=array_flip($p['prior_wp_page_ids']);$existingTerms=array_flip($p['prior_wp_term_ids']);
+        foreach((array)($s['existing_pages_preserved']??[]) as $id)
+            if(!isset($existingPages[$id]))wp_die('Eine urspruengliche Seite fehlt. Lauf nicht fortsetzen.');
+        foreach((array)($s['existing_terms_preserved']??[]) as $id)
+            if(!isset($existingTerms[$id]))wp_die('Eine urspruengliche Rubrik fehlt. Lauf nicht fortsetzen.');
+        $s['status']='WRITING';$s['error']='';update_option(self::STATE,$s,false);
+        self::location();
+    }
     public static function createOne(array $task,array &$pages,array &$terms):string {
         $id=$task['source_id'];
         if($task['kind']==='page'){
@@ -372,6 +391,12 @@ final class Robotik_V63_Delta {
             echo '<p><strong>Importstatus:</strong> <span id="robotik-v63-state">'.esc_html($status).' · '.(int)($state['index']??0).' / 227 · Seiten angelegt '.(int)($state['created_pages']??0).' · Kategorien angelegt '.(int)($state['created_categories']??0).'</span></p>';
             if(!empty($state['error']))echo '<div class="notice notice-error"><p>'.esc_html($state['error']).'</p></div>';
             if($status==='COMPLETE_SAFE_DELTA_WITH_16_HOLDS')echo '<div class="notice notice-success"><p>227 von 227 sicheren Aenderungen erstellt und zurueckgelesen. Die 16 fachlich freigegebenen Seiten und 48 Rubriken koennen jetzt gesammelt nachgetragen werden.</p></div>';
+            if($status==='BLOCKED'){
+                echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';
+                wp_nonce_field('robotik_v63_delta_resume');
+                echo '<input type="hidden" name="action" value="robotik_v63_delta_resume">';
+                submit_button('Gespeicherten Originalimport sicher fortsetzen','secondary'); echo '</form>';
+            }
             if($status==='WRITING'){
                 $nonce=wp_create_nonce('robotik_v63_delta_tick');
                 echo '<script>(function(){var n='.wp_json_encode($nonce).',i=document.getElementById("robotik-v63-state");function go(){var d=new FormData();d.append("action","robotik_v63_delta_tick");d.append("_ajax_nonce",n);fetch(ajaxurl,{method:"POST",credentials:"same-origin",body:d}).then(r=>r.json()).then(j=>{if(!j.success)throw Error("WP verweigert Anfrage");var a=j.data;i.textContent=a.status+" · "+a.index+" / "+a.total+" · Seiten "+a.created_pages+" · Kategorien "+a.created_categories+(a.error?" · "+a.error:"");if(a.status==="WRITING")setTimeout(go,a.busy?800:0);else location.reload();}).catch(e=>{i.textContent="Verbindung unterbrochen: "+e.message+". Seite neu laden setzt gespeicherten Lauf fort.";});}go();})();</script>';
