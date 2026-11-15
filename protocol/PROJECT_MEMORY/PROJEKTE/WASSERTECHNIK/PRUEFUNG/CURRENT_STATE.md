@@ -43,3 +43,9 @@ Die vorherigen W4-/W5-/W6-/W7-/W12-Prüfungen belegten vor allem **innere Konsis
 
 ## W14 (15.11.2026) – externe Marktsichtung als echter Zwischenstand
 Erstmals alle 18 W13-Felder anhand Hersteller-/Fachquellen durchgesehen: **87** neue Namen, **2** funktionsgleiche Aliase sofort vereinheitlicht, max. **85** zusätzlich mögliche Produktfamilien. Davon 43 fachliche/SEO-Grenzfälle. Ein je passend vorgeschlagenes Fachrubrik-Thema mit **3** konkreten Beitragsrichtungen pro Fund (261 Richtungen), keine WordPress-Inhaltsanlage. **Nicht aus 18/18 erstmals berührten Feldern auf umfassende Abdeckung schließen.** Beleg: `../KATEGORIEKONZEPT/W14_GESAMTSTAND_ERSTE_MARKTWELLE_20261115.md` und `W14_MARKTRECHERCHE_18_FELDER_MASTER_WELLE1_20261115.json`. Keine WP-/Plugin- oder bezahlte SEO-Schreibaktion. Fortlaufender Nachweis zwingend.
+
+## W15 – 15.11.2026: zweiter unabhängiger Fachmarktabgleich, keine Vollständigkeitsbehauptung
+- W15-Spezialsuche **25** Produkt-/Techniknamen mit echten Fach-/Herstellerkatalogen und möglichen 3 Artikeln je vorgeschlagener Kategorie. Eine funktionsgleiche Gewächshaus-Dosierstation mit W14-Fertigations-Dosiereinheit als Alias verknüpft.
+- Ein gemeinsamer schreibfreier Arbeitsmaster verbindet W4-79/W12-26/W14-87/W15-25 = **217** Fundnamen, **3** bereits dokumentierte gleiche Funktionen, rechnerisch max. **214** weitereinzelne Funktionskandidaten vor allen verbleibenden Intent-/Funktionsprüfungen. 254 Kategorienideen, 803 Artikelideen **nicht** aktuelle WordPress-Anlagen. Namenabgleich alleine ersetzt keinen Funktions-/SERP-Abgleich.
+- Nachweise `../KATEGORIEKONZEPT/W15_GEMEINSAMER_PRODUKTFORSCHUNGSMASTER_20261115.json`, `W15_SPEZIALSEKTOREN_WELLE2_PRODUKTFUNDE_20261115.json`, `W15_GESAMTSTAND_ZWEITE_RECHERCHEWELLE_20261115.md`. Recherche **weiter offen**: ununtersuchte Spezialnischen, funktionale Aliausräumung und SEO.
+- **Keine** WP-/WT001-/Designänderung oder neue DataForSEO-Ausgabe; W4/W5/W6/W7 bleiben unberührt.

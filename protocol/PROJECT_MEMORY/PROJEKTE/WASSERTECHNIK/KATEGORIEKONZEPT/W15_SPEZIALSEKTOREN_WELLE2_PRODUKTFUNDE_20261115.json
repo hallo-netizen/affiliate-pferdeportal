@@ -1,0 +1,374 @@
+{
+  "version": "W15_20261115_SPECIAL_WAVE",
+  "state": "RECHERCHE_ZWISCHENSTAND_KEIN_WP_IMPORT",
+  "source_basis": "additional web-verified primary sources independent of current category tree",
+  "counts": {
+    "research_names": 25,
+    "new_names_not_in_W4_W12_W14": 25,
+    "editorial_categories_proposed": 25,
+    "concrete_article_ideas": 75,
+    "first_pass_new": 9,
+    "functional_or_intent_boundary": 15,
+    "alias_without_new_owner": 1,
+    "maximum_distinct_function_candidates": 24
+  },
+  "role_counts": {
+    "INTENT_GRENZFALL": 15,
+    "NEU_KANDIDAT": 9,
+    "GLEICHE_FUNKTION_QUERVERWEIS": 1
+  },
+  "notes": "These are research candidates only. Technical uniqueness and Google SERP are not validated. Some W15 products are almost certainly aliases/overlapping with W4/W12/W14 and will be combined before any WP page decision.",
+  "items": [
+    {
+      "field": "Löschwasserversorgung",
+      "product": "Löschwasser-Trennstation",
+      "category_candidate": "Trinkwasser von Löschwasser trennen",
+      "article_directions": [
+        "Löschwasser-Trennstation und allgemeinen Systemtrenner vergleichen",
+        "Trennstation für Anlagen mit stagnierendem Wasser einordnen",
+        "Zulauf- und Druckbedingungen einer Löschwasser-Trennstation prüfen"
+      ],
+      "primary_source_url": "https://www.bvfa.de/164/technischer-brandschutz/loeschwassertechnik/systeme-der-loeschwassertechnik/",
+      "research_role": "INTENT_GRENZFALL",
+      "relationship_note": "W4 Systemtrenner allgemeiner; Brandschutz-Zweck kann eigenständige technische Anlage sein.",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Löschwasserversorgung",
+      "product": "Löschwasser-Füll- und Entleerungsstation",
+      "category_candidate": "Löschwasserleitung automatisch entleeren",
+      "article_directions": [
+        "Füll- und Entleerungsstation im nassen/trockenen Strang erklären",
+        "Schließ- und Füllabläufe einer Löschwasserleitung beurteilen",
+        "Frostschutz und hygienischen Betrieb einer Füllstation planen"
+      ],
+      "primary_source_url": "https://www.bvfa.de/164/technischer-brandschutz/loeschwassertechnik/systeme-der-loeschwassertechnik/",
+      "research_role": "NEU_KANDIDAT",
+      "relationship_note": "",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Löschwasserversorgung",
+      "product": "Feuerlösch-Druckerhöhungsanlage",
+      "category_candidate": "Löschwasserdruck bereitstellen",
+      "article_directions": [
+        "Feuerlösch-Druckerhöhung mit normaler Hausdruckerhöhung vergleichen",
+        "Förderleistung von Feuerlöschpumpengruppen dimensionieren",
+        "Überwachungs- und Sicherheitsfunktionen im Löschwasserbetrieb berücksichtigen"
+      ],
+      "primary_source_url": "https://www.graf-feuerschutz.de/produkte/loeschwassertechnik.html",
+      "research_role": "INTENT_GRENZFALL",
+      "relationship_note": "W4 Druckerhöhungsanlage allgemein; eigene Brandschutznorm/Anwendung. Querverweis Hab & Bewahr.",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Löschwasserversorgung",
+      "product": "Wandhydrant",
+      "category_candidate": "Stationäre Wasserentnahme bei Feuerlöschanlagen",
+      "article_directions": [
+        "Wandhydranten mit formstabilem und flachem Schlauch unterscheiden",
+        "Wandhydranten an die verfügbare Löschwassermenge anpassen",
+        "Wandhydranten-Anschluss und Wasserentnahmestelle kontrollieren"
+      ],
+      "primary_source_url": "https://www.graf-feuerschutz.de/produkte/loeschwassertechnik.html",
+      "research_role": "INTENT_GRENZFALL",
+      "relationship_note": "Fachlich Wasserentnahme aber stark Brandschutz-Portal; eine kanonische Produktseite festlegen.",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Löschwasserversorgung",
+      "product": "Löschwasser-Einspeiseeinrichtung",
+      "category_candidate": "Feuerwehr-Einspeiseanschlüsse",
+      "article_directions": [
+        "Löschwasser-Einspeisung von Entnahmeeinrichtungen unterscheiden",
+        "Anschlüsse und Zugänglichkeit für Feuerwehreinspeisung bewerten",
+        "Rückflusssicherung bei Löschwasser-Einspeisestellen berücksichtigen"
+      ],
+      "primary_source_url": "https://www.graf-feuerschutz.de/produkte/loeschwassertechnik.html",
+      "research_role": "INTENT_GRENZFALL",
+      "relationship_note": "Sehr spezielle Brandschutzbaugruppe, kein pauschal kaufnaher Nutzerkreis.",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Aquakultur/Fischzucht",
+      "product": "Aquakultur-Sauerstoffkegel",
+      "category_candidate": "Gelösten Sauerstoff einbringen",
+      "article_directions": [
+        "Sauerstoffkegel mit Luftausströmern in Fischzucht vergleichen",
+        "Sauerstoffbedarf bei hoher Fischbesatzdichte beurteilen",
+        "Druck und Durchfluss einer Sauerstoffeintragseinheit abstimmen"
+      ],
+      "primary_source_url": "https://en.yutanke.com/collections",
+      "research_role": "NEU_KANDIDAT",
+      "relationship_note": "",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Aquakultur/Fischzucht",
+      "product": "Aquakultur-Entgasungsturm",
+      "category_candidate": "Kohlendioxid aus Kreislaufwasser entfernen",
+      "article_directions": [
+        "CO₂-Entgasung in Fischkreislaufanlagen einordnen",
+        "Entgasungsturm und Sauerstoffeintrag als unterschiedliche Funktionen erklären",
+        "Luftdurchsatz und Abfluss in einem Entgasungsturm abstimmen"
+      ],
+      "primary_source_url": "https://en.yutanke.com/collections",
+      "research_role": "NEU_KANDIDAT",
+      "relationship_note": "",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Aquakultur/Fischzucht",
+      "product": "Aquakultur-Eiweißabschäumer",
+      "category_candidate": "Organische Belastung aus Kreislaufwasser entfernen",
+      "article_directions": [
+        "Eiweißabschäumer und Trommelfilter funktional unterscheiden",
+        "Einbauposition eines Abschäumers im Aquakultur-Kreislauf bestimmen",
+        "Schaumbildung und Abtrennung organischer Stoffe beurteilen"
+      ],
+      "primary_source_url": "https://www.sigma-aquaculture.com/products/",
+      "research_role": "NEU_KANDIDAT",
+      "relationship_note": "",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Aquakultur/Fischzucht",
+      "product": "Aquakultur-Kreislaufanlage",
+      "category_candidate": "Geschlossener Wasserkreislauf",
+      "article_directions": [
+        "Wasserkreislauf mit Trommelfilter, Biofilter und UV aufbauen",
+        "Durchsatz und Wasserverluste einer RAS-Anlage abschätzen",
+        "Fischzucht-Kreislaufanlage für Süß- und Salzwasser vergleichen"
+      ],
+      "primary_source_url": "https://en.yutanke.com/collections",
+      "research_role": "INTENT_GRENZFALL",
+      "relationship_note": "Komplettsystem gegenüber Einzelprodukten, kein zweiter Produkt-Owner je Modul.",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Aquakultur/Fischzucht",
+      "product": "Fischzucht-Sauerstoffgenerator",
+      "category_candidate": "Vor-Ort-Sauerstoffversorgung",
+      "article_directions": [
+        "Sauerstoffgenerator und gespeicherten Sauerstoff für Fischzucht vergleichen",
+        "Sauerstoffproduktion an Wasserverbrauch und Fischbesatz koppeln",
+        "Backup und Betriebsüberwachung eines Sauerstoffgenerators einplanen"
+      ],
+      "primary_source_url": "https://en.yutanke.com/collections",
+      "research_role": "NEU_KANDIDAT",
+      "relationship_note": "",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Aquakultur/Fischzucht",
+      "product": "Radialströmungs-Feststoffabscheider",
+      "category_candidate": "Absetzabscheider in der Fischzucht",
+      "article_directions": [
+        "Radialströmungsabscheider und Trommelfilter vergleichen",
+        "Abscheidekammer nach Schmutzfracht und Durchfluss wählen",
+        "Schlammabzug bei Kreislauf-Fischhaltung planen"
+      ],
+      "primary_source_url": "https://www.sigma-aquaculture.com/products/",
+      "research_role": "INTENT_GRENZFALL",
+      "relationship_note": "Unterschied zu W12 Sedimentationsanlage und W14 Lamellenklärer prüfen.",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Hochwasser/Notentwässerung",
+      "product": "Mobile Flutpumpenbox",
+      "category_candidate": "Schnelle Wasserabfuhr",
+      "article_directions": [
+        "Flutpumpenbox gegenüber einer Schmutzwasserpumpe als Einzelgerät vergleichen",
+        "Förderhöhe und Schlauchlänge eines Flutpumpensets beurteilen",
+        "Transportbox und Grobschmutzschutz bei Notentwässerung nutzen"
+      ],
+      "primary_source_url": "https://www.zehnder-pumpen.de/Flutset/16916",
+      "research_role": "INTENT_GRENZFALL",
+      "relationship_note": "W4 Schmutzwasserpumpe kann in Flutset enthalten sein; eigener Owner nur bei Systemsuchabsicht.",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Hochwasser/Notentwässerung",
+      "product": "Mobiles Hochwasser-Pumpenaggregat",
+      "category_candidate": "Hochwassermengen kurzfristig fördern",
+      "article_directions": [
+        "Mobile Großpumpe und kleine Kellerentwässerungspumpe abgrenzen",
+        "Transport- und Aufstellbedingungen von Hochwasseraggregaten bewerten",
+        "Schlauchanschlüsse und Fördermenge bei Flutpumpen einplanen"
+      ],
+      "primary_source_url": "https://www.bbapumpen.de/schnelleinsatz-pumpenpaket-fur-hochwasserschutz",
+      "research_role": "NEU_KANDIDAT",
+      "relationship_note": "",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Hochwasser/Notentwässerung",
+      "product": "Flachabsaugkrümmer für Hochwasserpumpen",
+      "category_candidate": "Niedrige Restwasserstände absaugen",
+      "article_directions": [
+        "Flachabsaugkrümmer als Pumpenzubehör auswählen",
+        "Absaugkrümmer mit Rückschlagklappe vergleichen",
+        "Restwasserhöhe und Wiederanlauf des Pumpensystems beurteilen"
+      ],
+      "primary_source_url": "https://www.spechtenhauserpumpen.de/shg-mobile-hochwasserschutzpumpen.html",
+      "research_role": "INTENT_GRENZFALL",
+      "relationship_note": "Kaufzubehör zu Hochwasserpumpe, keine eigene Produktseite erzwingen.",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Kühl-/Prozesswasser",
+      "product": "Kühlturm-Absalzautomatik",
+      "category_candidate": "Leitfähigkeitsgeregelte Wassererneuerung",
+      "article_directions": [
+        "Kühlwasser-Absalzautomatik nach Leitfähigkeit einstellen",
+        "Absalzventil und Wasserzähler für Kühlturmkreislauf abstimmen",
+        "Absalzsteuerung und Dosierregelung funktional unterscheiden"
+      ],
+      "primary_source_url": "https://www.ecolab-engineering.de/de/anwendungen/produkte/systeme/coolprotect",
+      "research_role": "NEU_KANDIDAT",
+      "relationship_note": "",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Kühl-/Prozesswasser",
+      "product": "Kühlwasser-Scheibenfilter",
+      "category_candidate": "Nebenstromfiltration im Kühlkreis",
+      "article_directions": [
+        "Scheibenfilter für Kühlwasser und Hauswasser-Feinfilter unterscheiden",
+        "Verschmutzungsgrad und Spülbedarf von Kühlsystemfiltern bewerten",
+        "Kühlwasser-Nebenstromfilter in den Kreislauf integrieren"
+      ],
+      "primary_source_url": "https://www.veoliawatertechnologies.de/anwendungen/kuehlwasseraufbereitung",
+      "research_role": "INTENT_GRENZFALL",
+      "relationship_note": "W4 Feinfilter und Industrie-Mehrschichtfilter bereits vorhanden.",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Kühl-/Prozesswasser",
+      "product": "Kühlwasser-Dosierregler",
+      "category_candidate": "Biozid- und Korrosionsschutzdosierung steuern",
+      "article_directions": [
+        "Messwertabhängige Bioziddosierung im Kühlwasser regeln",
+        "Dosierregler und automatische Absalzung koordinieren",
+        "Grenzwertalarm und Sicherheitsverriegelung im Kühlwasserregler bewerten"
+      ],
+      "primary_source_url": "https://www.ecolab-engineering.de/de/anwendungen/produkte/systeme/coolprotect",
+      "research_role": "INTENT_GRENZFALL",
+      "relationship_note": "W4 Kühlwasser-Dosierstation, W14 Absalzautomatik nahe; kein Duplikat ohne andere technische Kaufaufgabe.",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Wassertechnik Gastronomie",
+      "product": "Gewerbe-Spülwasserfilter",
+      "category_candidate": "Wasserqualität für Spülmaschinen",
+      "article_directions": [
+        "Spülwasserfilter für Kalkschutz und Vollentsalzung vergleichen",
+        "Filterkapazität bei gewerblicher Spültechnik dimensionieren",
+        "Filterkartuschen anhand von Wasserhärte und Verbrauch wechseln"
+      ],
+      "primary_source_url": "https://www.bwt-wam.com/de/anwendungen/spuelen/",
+      "research_role": "INTENT_GRENZFALL",
+      "relationship_note": "W4 Wasserfilterkartuschen und W12 Strahlregler nicht gleich, aber Filter für Spültechnik Nische.",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Wassertechnik Gastronomie",
+      "product": "Leitungsgebundener Wasserspender",
+      "category_candidate": "Trinkwasserausgabe in Einrichtungen",
+      "article_directions": [
+        "Leitungsgebundenen Wasserspender und Gallonensystem vergleichen",
+        "Wasserspender für Vereine und kleine Betriebe dimensionieren",
+        "Hygienemaßnahmen und Filterung an Wasserspendern beurteilen"
+      ],
+      "primary_source_url": "https://www.waterlogic.de/branchen/oeffentlicher-raum-verein/",
+      "research_role": "NEU_KANDIDAT",
+      "relationship_note": "",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Wassertechnik Gastronomie",
+      "product": "Spültechnik-Umkehrosmoseanlage",
+      "category_candidate": "Osmose für gewerbliche Spülmaschinen",
+      "article_directions": [
+        "Spülwasser-Umkehrosmose und Enthärtung unterscheiden",
+        "Reinwasserbedarf einer gewerblichen Spülmaschine bestimmen",
+        "Wasserfilter und Membranmodul bei Spültechnik abstimmen"
+      ],
+      "primary_source_url": "https://www.bwt-wam.com/de/anwendungen/spuelen/",
+      "research_role": "INTENT_GRENZFALL",
+      "relationship_note": "W4 Gewerbliche Umkehrosmoseanlage vorhanden; ggf. nur Anwendungskategorie statt eigene WP-Seite.",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Regenwasser/Gewässerschutz",
+      "product": "Havarie-Wasserrückhaltesystem",
+      "category_candidate": "Verunreinigtes Lösch- oder Betriebswasser zurückhalten",
+      "article_directions": [
+        "Havarie-Rückhaltung und normale Regenwasserretention vergleichen",
+        "Rückhaltevolumen bei Störfallwasser bestimmen",
+        "Automatische Sperrarmatur und Auffangsystem kombinieren"
+      ],
+      "primary_source_url": "https://www.aco-haustechnik.de/produkte/",
+      "research_role": "INTENT_GRENZFALL",
+      "relationship_note": "W4 Retentionszisterne und W12 Sedimentationsanlage, getrennte Sicherheitsaufgabe ggf. Betreiber statt Käufer.",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Geothermie/Grundwasser",
+      "product": "Schluckbrunnen-Bausystem",
+      "category_candidate": "Grundwasser wieder einleiten",
+      "article_directions": [
+        "Schluckbrunnen und Entnahmebrunnen im Grundwasserwärmesystem unterscheiden",
+        "Hydraulische Leistung eines Schluckbrunnens abschätzen",
+        "Schluckbrunnen vor Verockerung und Verstopfung schützen"
+      ],
+      "primary_source_url": "https://www.betonwerk-kuehne.de/produkte/regenwasserbewirtschaftung/saugbrunnen-und-schluckbrunnen/",
+      "research_role": "INTENT_GRENZFALL",
+      "relationship_note": "W4 Brunnen-Bausatz; gegenüber allgemeinem Brunnenbau und Wärmepumpe keine Kopie.",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Geothermie/Grundwasser",
+      "product": "Grundwasser-Wärmetauscher",
+      "category_candidate": "Grundwasserwärme übertragen",
+      "article_directions": [
+        "Wärmetauscherwerkstoff passend zur Grundwasserchemie wählen",
+        "Grundwasser-Wärmetauscher und Direktverdampfung unterscheiden",
+        "Wartung bei Verockerung des Wärmetauschers beurteilen"
+      ],
+      "primary_source_url": "https://www.wwa-wm.bayern.de/themen/grundwasser_boden/geothermie/index.htm",
+      "research_role": "INTENT_GRENZFALL",
+      "relationship_note": "Grenzgebiet Heizung/Haustechnik, wasserführende Technik separat bewerten.",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Gewächshaus-Wasserkreislauf",
+      "product": "Gewächshaus-Drainwasseraufbereitungsanlage",
+      "category_candidate": "Nährstoffhaltiges Drainwasser wiederverwenden",
+      "article_directions": [
+        "Drainwasserfiltration vor der Wiederverwendung vergleichen",
+        "UV- und alternative Desinfektion von Drainwasser beurteilen",
+        "Wiederverwendung von Nährstoffen bei Drainwasser planen"
+      ],
+      "primary_source_url": "https://dutchgreenhouses.com/de/bewaesserung",
+      "research_role": "NEU_KANDIDAT",
+      "relationship_note": "",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+    },
+    {
+      "field": "Gewächshaus-Wasserkreislauf",
+      "product": "Gewächshaus-Dosier-Mischstation",
+      "category_candidate": "Bewässerungswasser und Nährlösung mischen",
+      "article_directions": [
+        "pH- und EC-Regelung in Gewächshaus-Dosierstationen kombinieren",
+        "Mischbehälter und Dosierkanäle dimensionieren",
+        "Nährstoffrezepturen bei wechselnder Wasserqualität regeln"
+      ],
+      "primary_source_url": "https://www.netafim.de/Produkte-und-Loesungen/Werkzeuge/Fertigation/",
+      "research_role": "GLEICHE_FUNKTION_QUERVERWEIS",
+      "relationship_note": "Identische Systemaufgabe wie W14 Fertigations-Dosiereinheit; unterschiedliche Einsatzsprache, ohne weiteren Funktionsbeleg nur ein SEO-/Produkt-Owner.",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN",
+      "canonical_product": "Fertigations-Dosiereinheit"
+    }
+  ]
+}
