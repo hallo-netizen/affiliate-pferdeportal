@@ -1,4 +1,8 @@
 # Robotik-Pluginbüro – einziges Release-/Prüfprotokoll
+
+## Aktuelle Version 15.11.2026: 0.4.11
+**Installierbar:** `PLUGIN/CURRENT.zip` = `PLUGIN/VERSIONEN/0.4.11.zip`. Quellstand und Tests: `PLUGIN/V77_RELEASE_VERIFIZIERT_20261115.md`. Ältere Aussagen über `CURRENT.zip` gehören zum jeweiligen historischen Versionseintrag und sind keine Installationsanweisung.
+
 Stand 09.11.2026. **Protokoll nach jedem neuen Plugin im selben Commit mit Installer und CURRENT_STATE.md fortschreiben.**
 
 | Version | Datei im Archiv | Änderung | Prüfstatus | WordPress |
