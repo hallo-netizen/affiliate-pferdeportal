@@ -307,7 +307,7 @@
         "kleinbetrieb",
         "industrie"
       ],
-      "source_url": "https://www.3m.com.au/3M/en_AU/liquicel-au/",
+      "source_url": "https://www.solventum.com/en-au/home/purification-filtration/manufacturing/advanced-dissolved-gas-control/",
       "artikelkategorie": "Gelöste Gase entfernen",
       "artikelideen": [
         "Membranentgasung und thermischen Kessel-Speisewasserentgaser unterscheiden",
@@ -397,9 +397,9 @@
         "Wirbelabscheider im Regenwasserkanal nach Durchfluss bewerten",
         "Sedimententnahme und Wartung eines Regenwasser-Wirbelabscheiders planen"
       ],
-      "abgrenzung": "W12 Regenwasser-Sedimentationsanlage und W17 Hydrozyklon sind funktional verwandt; EPA belegt das Prinzip, keine separate SERP-Nachfrage.",
+      "abgrenzung": "W12 Regenwasser-Sedimentationsanlage und W17 Hydrozyklon sind funktional verwandt; EPA belegt das Prinzip, keine separate SERP-Nachfrage. Bisher nur Verfahrensquelle, kein separater konkreter Herstellerartikel belegt; kein Marktproduktstatus.",
       "bearbeitungsstand": "grenzfall",
-      "technikstand": "marktprodukt"
+      "technikstand": "ungeklaert"
     },
     {
       "name": "Abwasserschlamm-Kammerfilterpresse",
@@ -418,14 +418,14 @@
         "kleinbetrieb",
         "industrie"
       ],
-      "source_url": "https://www.arieschem.com/about-us/markets-served/commercial-laundries-industry/",
+      "source_url": "https://www.andritz.com/products-en/separation/filter-presses/filter-press-side-bar-overhead",
       "artikelkategorie": "Schlamm pressen",
       "artikelideen": [
         "Kammerfilterpresse und Schneckenpresse zur Schlammentwässerung vergleichen",
         "Filtrationsdruck und Kuchentrockenheit bei Abwasserfilterpressen beurteilen",
         "Filtertücher und Entleerungsablauf einer Kammerfilterpresse einordnen"
       ],
-      "abgrenzung": "W14 Klärschlamm-Schneckenpresse entzieht Wasser durch andere Mechanik; eine Filterpresse ist eine eigenständige Gerätebauart.",
+      "abgrenzung": "W14 Klärschlamm-Schneckenpresse entzieht Wasser durch andere Mechanik; eine Filterpresse ist eine eigenständige Gerätebauart. Herstellerquelle nun direkt zu industriellen Filterpressen einschliesslich Abwasser-/Schlammentwässerung geprüft.",
       "bearbeitungsstand": "recherche_offen",
       "technikstand": "marktprodukt"
     }
@@ -437,5 +437,5 @@
     "marked_intent_boundary": 9,
     "distinct_names_from_W18": 15
   },
-  "caveat": "Die Hersteller belegen Techniktypen und Anwendungsfälle, nicht gesonderte SEO-Suchintentionen. Bauteil/Gesamtsystem, Industrieanwendung und Branchenvarianteneinträge werden vor einer Freigabe funktionsbezogen kanonisiert."
+  "caveat": "Die Hersteller belegen Techniktypen und Anwendungsfälle, nicht gesonderte SEO-Suchintentionen. Bauteil/Gesamtsystem, Industrieanwendung und Branchenvarianteneinträge werden vor einer Freigabe funktionsbezogen kanonisiert. Ursprünglich unpassende Kammerfilterpressen-Belegseite durch ANDRITZ Produktseite ersetzt; für hydrodynamischen Regenwasserabscheider nur Prinzip, kein Serienproduktstatus. Frühere 3M Liqui-Cel-URL leitet auf Solventum um; Direktquelle angepasst."
 }
