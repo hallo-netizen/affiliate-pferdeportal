@@ -1,4 +1,12 @@
 # ROBOTIK – CAMPUS-BÜROGEBÄUDE
+
+## AKTUELL 15.11.2026 – ROBOTIK GRUNDLAGEN ERLEDIGT, ALLE DREI SÄULEN FACHLICH GEKLÄRT
+- **Hauptportal:** Acht Hauptwelten; vorhandene Kategorien laut Nutzer live. **19 neue Robotertypvorschläge einmalig entschieden:** 16 eigene neue Typseiten/32 individuelle Kategorien, drei Sonderthemen gehören ins Magazin/Register. **Die breite Grundlagenrecherche ist geschlossen**, keine nächste offene Randthemensuche als Voraussetzung.
+- **Installierbares aktuelles Kategorieplugin nur `KATEGORIE/PLUGIN/CURRENT.zip` 0.4.14** (exakte Versionsdatei `KATEGORIE/PLUGIN/VERSIONEN/0.4.14.zip`): nach altem 227/104/68/64-Komplettabschluss eine einzige neue Freigabe für 48 weitere Objekte. Vollständige Tests bestanden, **WordPress-Liveausführung der neuen 48 noch nicht belegt**. Alle Details im `KATEGORIE/CURRENT_STATE.md`.
+- **Eine gemeinsame Magazin-/Wissenswelt:** sechs Magazinthemen, ein Modellregister (**19 Pilotmodelle**), ein Glossar (**558 Begriffe / 14 gezielt geordnet**), ein Finder (**14 Aufgaben / 16 unvollständig belegte Pilottypen**), für Privat bis Industrie gemeinsam. Konzept und Ist: `MAGAZIN/CURRENT_STATE.md`; kein zweites Magazin pro Zielgruppe.
+- **Eine dritte Säule HivePress-Anzeigenmarkt:** Fachkonzept mit 7 schlanken Anbieter-/Servicebereichen, `ANZEIGENMARKT/START_HERE.md`, keine erfundenen Liveinserate.
+- **Noch nicht erfolgt:** tatsächlicher 48er-WordPress-Nachtrag, Livekontrolle der übrigen Magazin-/HivePress-Module, K0-Fachartikel. Bitte ältere Stände unten als **Historie** und nicht als Installationsanweisung lesen.
+
 Stand: 08.11.2026
 
 Dieses Gebäude gehört ausschließlich zu Robotik. Aktives Büro: [Kategorie](KATEGORIE/START_HERE.md).
