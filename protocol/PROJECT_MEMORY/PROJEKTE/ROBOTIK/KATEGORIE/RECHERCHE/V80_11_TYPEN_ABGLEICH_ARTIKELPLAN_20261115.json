@@ -108,7 +108,8 @@
         }
       ],
       "wordpress_write": false,
-      "industry_unchanged": true
+      "industry_unchanged": true,
+      "canonical_research_id": "rf142"
     },
     {
       "id": "FIN-02",
@@ -159,7 +160,8 @@
         }
       ],
       "wordpress_write": false,
-      "industry_unchanged": true
+      "industry_unchanged": true,
+      "canonical_research_id": "rf148"
     },
     {
       "id": "FIN-03",
@@ -214,7 +216,8 @@
         }
       ],
       "wordpress_write": false,
-      "industry_unchanged": true
+      "industry_unchanged": true,
+      "canonical_research_id": "rf175"
     },
     {
       "id": "FIN-04",
@@ -263,7 +266,8 @@
         }
       ],
       "wordpress_write": false,
-      "industry_unchanged": true
+      "industry_unchanged": true,
+      "canonical_research_id": "rf176"
     },
     {
       "id": "FIN-05",
@@ -312,7 +316,8 @@
         }
       ],
       "wordpress_write": false,
-      "industry_unchanged": true
+      "industry_unchanged": true,
+      "canonical_research_id": "rf177"
     },
     {
       "id": "FIN-21",
@@ -361,7 +366,8 @@
         }
       ],
       "wordpress_write": false,
-      "industry_unchanged": true
+      "industry_unchanged": true,
+      "canonical_research_id": "rf178"
     },
     {
       "id": "FIN-22",
@@ -416,7 +422,8 @@
         }
       ],
       "wordpress_write": false,
-      "industry_unchanged": true
+      "industry_unchanged": true,
+      "canonical_research_id": "rf179"
     },
     {
       "id": "FIN-26",
@@ -465,7 +472,8 @@
         }
       ],
       "wordpress_write": false,
-      "industry_unchanged": true
+      "industry_unchanged": true,
+      "canonical_research_id": "rf180"
     },
     {
       "id": "FIN-27",
@@ -514,7 +522,8 @@
         }
       ],
       "wordpress_write": false,
-      "industry_unchanged": true
+      "industry_unchanged": true,
+      "canonical_research_id": "rf181"
     },
     {
       "id": "FIN-28",
@@ -565,7 +574,8 @@
         }
       ],
       "wordpress_write": false,
-      "industry_unchanged": true
+      "industry_unchanged": true,
+      "canonical_research_id": "rf182"
     },
     {
       "id": "FIN-29",
@@ -620,7 +630,8 @@
         }
       ],
       "wordpress_write": false,
-      "industry_unchanged": true
+      "industry_unchanged": true,
+      "canonical_research_id": "rf183"
     }
   ],
   "article_plan_rule": "Nur zwei konkret begründete Rubriken je Typ; mindestens vier eigenständige Artikelideen je Rubrik. Keine automatischen Rubriken allein um eine Zielzahl zu erreichen.",
@@ -644,5 +655,63 @@
       }
     ],
     "separate_type_pages_not_same_product_urls": true
+  },
+  "canonical_single_master": {
+    "path": "PRODUKTE_V2_20261108.json",
+    "master_revision": 15,
+    "original_base_candidates_preserved": 68,
+    "previous_frontier": 174,
+    "new_frontier_total": 183,
+    "relinked_original_ids": [
+      {
+        "proposal": "FIN-01",
+        "existing_master_id": "rf142",
+        "action": "LINK_ONLY_ORIGINAL_ID_RETAINED"
+      },
+      {
+        "proposal": "FIN-02",
+        "existing_master_id": "rf148",
+        "action": "LINK_ONLY_ORIGINAL_ID_RETAINED"
+      }
+    ],
+    "new_research_entries": [
+      {
+        "proposal": "FIN-03",
+        "new_master_id": "rf175"
+      },
+      {
+        "proposal": "FIN-04",
+        "new_master_id": "rf176"
+      },
+      {
+        "proposal": "FIN-05",
+        "new_master_id": "rf177"
+      },
+      {
+        "proposal": "FIN-21",
+        "new_master_id": "rf178"
+      },
+      {
+        "proposal": "FIN-22",
+        "new_master_id": "rf179"
+      },
+      {
+        "proposal": "FIN-26",
+        "new_master_id": "rf180"
+      },
+      {
+        "proposal": "FIN-27",
+        "new_master_id": "rf181"
+      },
+      {
+        "proposal": "FIN-28",
+        "new_master_id": "rf182"
+      },
+      {
+        "proposal": "FIN-29",
+        "new_master_id": "rf183"
+      }
+    ],
+    "avoid_parallel_product_master": true
   }
 }
