@@ -14,6 +14,7 @@ final class Robotik_V78_Gesamtabschluss {
         add_action('admin_menu',[self::class,'menu'],40);
         add_action('admin_post_robotik_v78_start',[self::class,'start']);
         add_action('admin_post_robotik_v78_export',[self::class,'export']);
+        add_action('admin_post_robotik_v78_resume',[self::class,'resume']);
         add_action('wp_ajax_robotik_v78_tick',[self::class,'tick']);
     }
     public static function menu():void {
@@ -93,6 +94,20 @@ final class Robotik_V78_Gesamtabschluss {
             'error'=>'','started_utc'=>gmdate('c'),
             'scope'=>'227 bestehende Importaufgaben + 68 Seitensichtbarkeiten + 64 fachlich freigegebene Nachtragsobjekte',
             'no_google_calls'=>true,'no_industry_change'=>true],false);
+        self::redirect();
+    }
+    public static function resume():void {
+        self::authorized();check_admin_referer('robotik_v78_resume');
+        $s=get_option(self::STATE,[]);
+        if(!is_array($s)||($s['status']??'')!=='BLOCKED' || empty($s['authorized_once']))
+            wp_die('Kein einmalig freigegebener Gesamtauftrag zum Fortsetzen.');
+        try{
+            if(!hash_equals((string)($s['manifest']??''),self::manifest()))
+                throw new RuntimeException('Der freigegebene Sollplan wurde geaendert.');
+        }catch(Throwable $e){wp_die(esc_html($e->getMessage()));}
+        // Original phase handles actual inventory/recovery checks only once.
+        $s['status']='RUNNING';$s['error']='';
+        update_option(self::STATE,$s,false);
         self::redirect();
     }
     private static function stageImport():string {
@@ -269,7 +284,14 @@ final class Robotik_V78_Gesamtabschluss {
         }else{
             $st=(string)$s['status'];
             echo '<p id="robotik-v78-progress"><strong>Gesamtstatus: </strong>'.esc_html($st).' · '.esc_html((string)($s['phase']??'')).'</p>';
-            if($st==='BLOCKED')echo '<div class="notice notice-error"><p>Der automatische Ablauf wurde bei einem realen Konflikt gestoppt: '.esc_html((string)($s['error']??'')).'. Der gespeicherte Stand bleibt erhalten, kein erneuter Start.</p></div>';
+            if($st==='BLOCKED'){
+                echo '<div class="notice notice-error"><p>Der automatische Ablauf wurde bei einem realen Konflikt gestoppt: '.esc_html((string)($s['error']??'')).'. Der gespeicherte Stand bleibt erhalten, kein erneuter Start.</p></div>';
+                echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';
+                wp_nonce_field('robotik_v78_resume');
+                echo '<input type="hidden" name="action" value="robotik_v78_resume">';
+                submit_button('Gespeicherten Gesamtauftrag nach Fehlerbehebung fortsetzen','secondary');
+                echo '</form>';
+            }
             if($st==='RUNNING'){
                 $nonce=wp_create_nonce('robotik_v78_tick');
                 echo '<p>Der Ablauf setzt alle bereits freigegebenen Schritte nacheinander fort. Diese Seite waehrend der Ausfuehrung offen halten.</p>';
