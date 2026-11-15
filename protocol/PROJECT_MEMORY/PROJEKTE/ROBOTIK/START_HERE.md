@@ -1,5 +1,9 @@
 # ROBOTIK – CAMPUS-BÜROGEBÄUDE
 
+## FINALER FACHABSCHLUSS KATEGORIEN – V85 / 15.11.2026
+- **Komplette überprüfte Baumübersicht:** [KATEGORIE/KATEGORIEN_ABSCHLUSS_V85_20261115.md](KATEGORIE/KATEGORIEN_ABSCHLUSS_V85_20261115.md). 8 Hauptbereiche, 47 Gruppen-/Zwischenseiten, 157 Robotertypen, 328 untergeordnete Inhaltsrubriken. Im fachlichen Soll ohne offene Strukturfehler.
+- **Letzter WordPress-Schritt separat:** Nur V84 16 zusätzliche Typseiten/32 Kategorien im vorhandenen 0.4.14-Kategorieplugin; V78-Altabschluss ist gemäß Nutzer-JSON bereits durchgeführt. Keine neue Grundlagenrecherche, kein alter Reimport, kein weiteres Fachkonzept nötig.
+
 ## AKTUELL 15.11.2026 – LIVEBERICHT V78 ABGEGLICHEN, V84 NOCH OFFEN
 - **Belegter V78-Altabschluss:** vom Nutzer eingereichte WordPress-JSON meldet `COMPLETE` für 227 Importpositionen, 104 alte veröffentlichte Seiten, 68 neu veröffentlichte Seiten und 64 alte Nachtragsobjekte. Die **64** bestehen aus 16 alten Seiten + 48 alten Kategorien.
 - **Separat offen:** Plugin **0.4.14** enthält den letzten V84-Nachtrag **16 zusätzliche Robotertypseiten + 32 neue Inhaltsrubriken**. Dessen Live-Ausführung ist mit der V78-JSON **nicht bestätigt**. Keine zweite Durchführung des Altabschlusses.
