@@ -1,5 +1,9 @@
 # ROBOTIK – CAMPUS-BÜROGEBÄUDE
 
+## KATEGORIEN GEBÜNDELT FACHLICH NACHGEARBEITET – 15.11.2026
+- Vollständige Übersicht `KATEGORIE/KATEGORIEN_ABSCHLUSS_V85_20261115.md`: 204 Soll-Seiten, 328 Rubriken, Industrie-Zielseiten für 4 vorhandene Landingpages (28 eindeutige Querverweise), 63 alte generische Rubrik-Kurzlabels samt 1 geklärtem Konflikt.
+- **V78 alt abgeschlossen; V84 zusätzlich 16+32 live noch nicht belegt.** 0.4.14 ist der bestehende Installer. Die 28 Querverweise und 63 Kurzlabels sind **nur konzeptionell zugeordnet**, nicht auf der Website umgesetzt. Keine doppelte Installation, keine WordPress-Schreibänderung und kein neues Kategorienplugin durch diese Dokumentation.
+
 ## FINALER FACHABSCHLUSS KATEGORIEN – V85 / 15.11.2026
 - **Komplette überprüfte Baumübersicht:** [KATEGORIE/KATEGORIEN_ABSCHLUSS_V85_20261115.md](KATEGORIE/KATEGORIEN_ABSCHLUSS_V85_20261115.md). 8 Hauptbereiche, 47 Gruppen-/Zwischenseiten, 157 Robotertypen, 328 untergeordnete Inhaltsrubriken. Im fachlichen Soll ohne offene Strukturfehler.
 - **Letzter WordPress-Schritt separat:** Nur V84 16 zusätzliche Typseiten/32 Kategorien im vorhandenen 0.4.14-Kategorieplugin; V78-Altabschluss ist gemäß Nutzer-JSON bereits durchgeführt. Keine neue Grundlagenrecherche, kein alter Reimport, kein weiteres Fachkonzept nötig.
