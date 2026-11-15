@@ -1,5 +1,10 @@
 # ROBOTIK → KATEGORIE
 
+## AKTUELL 15.11.2026 – EINZIGER MASTER REVISION 18, KATEGORIENRECHERCHE V82+V83
+- **Projektwahrheit in `CURRENT_STATE.md`**, Fachmaster **`RECHERCHE/PRODUKTE_V2_20261108.json` Revision 18** (68 ursprüngliche Hauptkandidaten und 189 Recherche-/Randfunde, bestehende IDs erhalten).
+- Neu erforscht: **8** mögliche weitere Robotertyp-Seiten **unter bereits vorhandenen Elternbereichen** aus Haushalt, Freizeit/Modellbau, Sport/Ballsport und Pflege. Zusammenhängender Fachbericht **`RECHERCHE/V82_FUENF_NISCHEN_BESTANDSABGLEICH_20261115.md`** mit V83-Ergänzung. **Nicht** in WordPress angelegt.
+- **Keine neue Pluginversion, kein erneuter Import, keine Entwurfsseiten, keine fertigen Fachartikel.** K0 macht später die Texterstellung. Fehlende Google-Adressen blockieren die Recherche nicht. Alte Standangaben nachfolgend sind Historie.
+
 ## AKTUELL 15.11.2026 – KATEGORIEN LIVE, FACHFORSCHUNG V80
 - Nutzer bestätigt: **Kategorien im Frontend sichtbar**. Live-Gesamtdaten noch nicht separat aus WordPress exportiert; keine weiteren Plugins auf Verdacht.
 - **Einziger Kategorieplugin-Installer laut heutigem Release: `PLUGIN/CURRENT.zip` = 0.4.13.** Ältere Versionsangaben unten sind historische Forschungs-/Teststationen, keine Installationsanweisung.
