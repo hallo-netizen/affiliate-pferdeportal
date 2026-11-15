@@ -28,8 +28,9 @@ class Robotik_V77_Fachnachtrag {
     public static function resumeSaved():void {global $options;$s=$options['robotik_v77_fachnachtrag_state'];if($s['status']!=='BLOCKED')throw new Exception('resume only blocked');$s['status']='WRITING';$options['robotik_v77_fachnachtrag_state']=$s;}
     public static function advance():array {global $options;$s=$options['robotik_v77_fachnachtrag_state'];if($s['status']!=='WRITING')throw new Exception('wrong followup state');$s['index']=min(64,$s['index']+16);self::$write++;if($s['index']===64){$s['status']='COMPLETE';$s['verified']=64;} $options['robotik_v77_fachnachtrag_state']=$s;return $s;}
 }
-require dirname(__DIR__).'/includes/class-robotik-v78-gesamtabschluss.php';
-$manifest=hash_file('sha256',dirname(__DIR__).'/assets/robotik-v62-sollvorschau.json');
+$sourceFile=$argv[1]??dirname(__DIR__).'/includes/class-robotik-v78-gesamtabschluss.php';
+require $sourceFile;
+$manifest=hash_file('sha256',dirname($sourceFile).'/../assets/robotik-v62-sollvorschau.json');
 check(strlen($manifest)===64,'real manifest present');
 check((Robotik_V78_Gesamtabschluss::advance()['status']??'')!=='COMPLETE','no unattended start');
 $options['robotik_v78_gesamtabschluss_state']=['status'=>'RUNNING','phase'=>'uebernehmen','authorized_once'=>true,'manifest'=>$manifest,'error'=>''];
