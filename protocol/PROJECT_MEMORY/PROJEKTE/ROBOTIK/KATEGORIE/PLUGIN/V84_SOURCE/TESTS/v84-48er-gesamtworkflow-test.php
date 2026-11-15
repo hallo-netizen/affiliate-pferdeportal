@@ -50,7 +50,7 @@ class Robotik_V63_Delta {
         // Return exactly 188 original sources with the actual parent names mapped to real mock IDs.
         $origin=[];
         for($i=1;$i<=188;$i++)$origin['origin_'.str_pad((string)$i,3,'0',STR_PAD_LEFT)]=$i;
-        foreach(['rbt_a7b82adfb00b8fd4','rbt_4c3b60b5f506ff47','rbt_c921e3a524a4ad2a','rbt_e764c403a44632be','rbt_ee14ec5df0d71085','V52_HUB_Haushalt_Reinigung','V52_HUB_Haushalt_Alltagshilfe','rbt_2a9f15b10b6f0ff1'] as $i=>$key){unset($origin['origin_'.str_pad((string)($i+1),3,'0',STR_PAD_LEFT)]);$origin[$key]=$i+1;}
+        foreach(['rbt_a7b82adfb00b8fd4','rbt_4c3b60b5f506ff47','rbt_c921e3a524a4ad2a','rbt_e764c403a44632be','rbt_ee14ec5df0d71085','V52_HUB_Haushalt_Reinigung','V52_HUB_Haushalt_Alltagshilfe','rbt_2a9f15b10b6f0ff1','rbt_dcb31e217c9ac890'] as $i=>$key){unset($origin['origin_'.str_pad((string)($i+1),3,'0',STR_PAD_LEFT)]);$origin[$key]=$i+1;}
         return ['errors'=>[],'task_done'=>227,'task_remaining'=>0,'page_ids'=>$origin,'term_ids'=>$cats,
             'prior_wp_page_ids'=>range(1,188),'prior_wp_term_ids'=>range(1001,1296)];
     }
@@ -89,6 +89,7 @@ $opts['robotik_v77_fachnachtrag_state']=['status'=>'COMPLETE','verified'=>64];
 $source=$argv[1]??dirname(__DIR__).'/includes/class-robotik-v84-kategorien-nachtrag.php';
 require $source;
 $start=Robotik_V84_Kategorien_Nachtrag::plan();
+echo 'PREFLIGHT: '.json_encode(['errors'=>$start['errors'],'done'=>$start['done'],'remaining'=>$start['remaining'],'basePages'=>count($start['page_ids']),'baseTerms'=>count($start['term_ids'])])."\n";
 testcheck($start['errors']===[] && $start['remaining']===48,'48 unique tasks, 188+296 preserved');
 $manifest=hash_file('sha256',dirname($source).'/../assets/robotik-v84-delta.json');
 $opts['robotik_v84_kategorien_nachtrag_state']=['status'=>'WRITING','index'=>0,'total'=>48,
