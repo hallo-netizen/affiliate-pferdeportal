@@ -79,3 +79,7 @@ W20-Einzelmaster 392 Datensätze (298/72/22) und 50 fortgeschriebene W19-Funktio
 
 ## W21 – 15.11.2026: Register-/Quellenstand
 406 IDs/Einträge mit Typen 306/76/24, Referenzen, kontrolliertem Vokabular und je >=3 verschiedenen Artikelideen pro neuem Produkt nach Datenabgleich geprüft. 50 Funktionsfälle 43 getrennt, 1 Alias, 6 offen. Per-Produkt-Parallelentscheidungen entfernt, nur Vergleichsreferenzen, eine entscheidende Vergleichsliste. Nachweis `../REGISTER_GLOSSAR/W21_BREITRECHERCHE_FUNKTIONSKLAERUNG_GESAMTSTAND_20261115.md`. Kein WordPress/Plugin/SEO-Schreiben.
+
+
+## W22 – 15.11.2026: fachliches Register/Quellen geprüft
+Einziger aktueller Forschungsregistermaster: `../REGISTER_GLOSSAR/W22_ZENTRALES_FACHREGISTER_20261115.json`. 420 eindeutige IDs = 314 Produktbezeichnungen inkl. Alias-/Grenzfälle, 80 Glossar, 26 geplante Anbieter-Rubriken. Kontrollierte Filterwerte, Querverweise, 9 kanonische Aliasbeziehungen und für 8 neue Produktkandidaten je 3 verschiedene Artikelideen anhand des Registers geprüft. 50 zentrale Funktionspaare: 44 fachlich unterschieden, 1 Bauform-Unterart, 3 kanonische Aliaspaare, 2 überlappende Einsatz-/Mess-/Zulassungsbezeichnungen. Je Paar nur eine zentrale Entscheidung. Produktbeleg und Zusammenfassung `../REGISTER_GLOSSAR/W22_FUNKTIONSCHECK_NEUFUNDE_GESAMTSTAND_20261115.md`. **W4 79 echte WordPress-Fachowner, vorhandene W5-Werte, Plugins, Website und alle SEO-API-Aufrufe unverändert.** Kein Import, keine Seitenfreigabe.
