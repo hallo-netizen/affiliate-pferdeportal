@@ -1,4 +1,63 @@
-# Robotik – Kategorienkonzept und SEO: fortlaufender Hauptstand V88 (15.11.2026)
+# Robotik – Kategorienkonzept und SEO: fortlaufender Hauptstand V89 (15.11.2026)
+
+## V89 – Echter DataForSEO-Gesamtbericht vollständig abgeglichen (15.11.2026)
+
+**Stand: Anbieter-Gesamtlauf abgeschlossen, geprüft und gespeichert.** Der vom Nutzer hochgeladene echte Bericht `robotik-dataforseo-532-und-freizeit-gesamtbericht.json` hat `status=COMPLETE`, 2 abgeschlossene Aufgaben, **0,138 USD** ausgewiesene Anbietergebühren. Er wurde als **unveränderte Belegdatei im Robotik-SEO-Büro** abgelegt: `/robotik/SEO-Berichte/robotik-dataforseo-532-und-freizeit-gesamtbericht-20261115.json`. Datei-SHA256: `f5d6407b4003b2a0a61f17ff876642a6a6b568995421f4611df23389fe72b0f2`. Kein weiterer kostenpflichtiger Lauf nötig.
+
+**Gesamtergebnis, gegen den einen Forschungs-/Kategorienmaster geprüft:**
+
+| Ebene | Abgefragte und exakt zugeordnete Begriffe | Mit Zahlenwert | Ohne Zahlenwert |
+|---|---:|---:|---:|
+| Übersichts- und Landingpages | 47 | 20 | 27 |
+| Konkrete Robotertypen | 157 | 65 | 92 |
+| Fachliche Inhaltsrubriken | 328 | 2 | 326 |
+| **Gesamt** | **532** | **87** | **445** |
+
+**532/532 Besitzerkennungen, Suchbegriffe, Ebenen, Fachwelten und Zielseitenpfade stimmen exakt mit der vorab gespeicherten Abfragefassung überein; 0 Doppelungen, 0 fehlende oder fremde Besitzer.** Unter den 87 Zahlenwerten stehen **85 positive Werte und genau 2 vom Anbieter ausdrücklich als 0 gemeldete Werte** (Aquarienroboter und Roboterbaukästen). Bei den weiteren 445 ist der Wert **unbekannt**, nicht automatisch 0. Die 532er-Komplettabfrage misst je Position nur **einen konkreten Suchbegriff** – sie beweist keine vollständige Nachfrage für alle Synonyme.
+
+### Tatsächlich gemessene thematische Prioritäten
+
+| Bereits vorhandener Bereich | Fachwelt | Suchanfragen/Monat laut Bericht | Seitentyp |
+|---|---|---:|---|
+| Fensterputzroboter | Haushalt | 90.500 | Robotertyp |
+| Mähroboter | Garten | 60.500 | Robotertyp |
+| Saugroboter | Haushalt | 49.500 | Robotertyp |
+| Poolroboter | Garten | 18.100 | Robotertyp |
+| Humanoide Roboter | Humanoide | 12.100 | Übersichtsseite |
+| Roboterhunde | Freizeit | 3.600 | Robotertyp |
+| Haushaltsroboter | Haushalt | 2.900 | Übersichtsseite |
+| Roboter-Spielzeug | Freizeit | 1.900 | Übersichtsseite |
+| Melkroboter | Gewerbe | 1.600 | Robotertyp |
+| Pflegeroboter | Pflege | 1.300 | Übersichtsseite |
+| Kochroboter | Haushalt | 1.300 | Robotertyp |
+| Tischtennis-Ballmaschine | Sport | 1.000 | Robotertyp |
+| Schweißroboter | Gewerbe | 1.000 | Robotertyp |
+| Industrieroboter | Gewerbe | 880 | Industrie-Landingpage |
+
+**Interpretation:** Google-Ads-Suchvolumen sind Anbieter-Schätzwerte, **keine Zahl tatsächlicher Website-Besucher**. Im Bericht als `competition` ausgewiesene hohe Werte betreffen **Anzeigenkonkurrenz**, nicht den organischen SEO-Schwierigkeitsgrad. Für Synonyme, Vergleichsbegriffe, Hersteller und Test-Longtails muss die redaktionelle Suchabsicht zusätzlich stimmen. Gegenüber dem älteren V61-Bericht geänderte Anbieterzahlen sind **kein Beweis eines zeitlichen Nachfrage-Trends**.
+
+### Neue V84-Typen gezielt geprüft
+
+Bei den 16 zusätzlich geplanten Typen haben nur **drei** einen Zahlwert: **Massageroboter 260**, **Katzenkloroboter 140**, **Sandmalroboter 10**. Die anderen **13** werden nicht gestrichen. Die bisherige fachliche Entscheidung zu 16 CORE-Typen und 3 Magazin-/Registerfällen bleibt bestehen; der SEO-Bericht ist keine neue WordPress-Freigabe.
+
+### Freizeit: 300 Ideen – fachlich aussondern statt 300 neue Seiten bauen
+
+Die zweite Abfrage lieferte exakt **300 Keyword-Ideen**, die vollständig im bestehenden Fachmaster unter `seo_nachlauf_v87.task_2.ideas_from_provider` gespeichert sind. Die Herkunft aus der Freizeit-Saat ist **keine** fachliche Freizeit-Zuordnung. Mindestens drei Aufgabenfamilien sauber trennen:
+
+- **Für bestehende Freizeit- und Spielzeugzweige vorrangig prüfen:** `roboter spielzeug` (1.900), `roboter hund spielzeug` (590), `roboter hund kaufen` (390), `roboter katze` / `roboter-katze` (je 1.600; alternative Schreibweisen **nicht addieren**). Modellbau-/Bildungsfragen wie `roboter selber bauen` (590) und `roboter zum selbst bauen` (720) auf die jeweiligen bestehenden Themen verteilen, keine Kopien erstellen.
+- **Bedeutung unklar, nicht automatisch neuen Robotertyp anlegen:** `roboter kämpfen` (720), `roboter-kampf` (480), `roboter spiele` (390) und `fußball roboter` (480). Das kann Spielzeug, Computerspiel oder Sportroboter meinen; vor einem neuen Fachzweig bleibt die Absicht offen.
+- **Nicht als Freizeit-Nachfrage verbuchen:** `staubsauger roboter`, `rasenmäher roboter` und `saug wisch roboter` gehören zu vorhandenen Haushalt-/Gartenthemen; `hetzner robot`, `besetzung von i robot`, `thermomix kaufen` oder `snackautomat kaufen` sind keine Beweise für neue Freizeit-Robotertypen.
+
+### Endgültige Umsetzungsempfehlung aus den vorhandenen Daten
+
+1. **Bevorzugte Inhalte:** zuerst Fensterputzroboter, Mähroboter, Saugroboter und Poolroboter mit Tests/Kaufentscheidungen/Anwendungen; daneben humanoide Roboter als verständliche Übersicht mit eindeutiger Kennzeichnung Produkt, Projekt oder Idee. In Freizeit Spielzeugroboter, Roboterhunde und konkrete Modellbau-Themen stärker bearbeiten. Diese redaktionelle Reihenfolge begründet **keine Änderung der vorhandenen Elternseiten oder Kategorien**.
+2. **Rubriken nicht streichen:** 326 der 328 Rubrikbegriffe ohne Zahlenwert sind **kein Löschargument**. Eine spezifische Wortkombination wie `saugroboter wartung` kann ohne direkte Kennzahl bleiben, obwohl die übergeordnete Nachfrage groß ist. Vorhandene, jeweils mit mindestens drei möglichen Fachbeiträgen geprüfte Rubriken bleiben erhalten.
+3. **Keine weiteren Bezahlabfragen oder neuen SEO-Plugins:** Der konkrete 2er-Lauf ist zu Ende. Die wichtigen restlichen Aufgaben sind **redaktionell**: aus den echten Suchbegriffen passende Magazinbeiträge/Kaufberatung ableiten, fachfremde Keyword-Ideen filtern und die bestehenden Industrie-Landingpages sinnvoll verlinken. Die 28 vorbereiteten Industrie-Querverweise und 63 Alt-Rubriknamen sind weiterhin nur geplant; sichtbare Änderungen benötigen Freigabe.
+4. **Live-Abgrenzung bleibt verbindlich:** Der Bericht beweist den DataForSEO-Lauf, **nicht**, dass der V84-WordPress-Nachtrag 16+32 ausgeführt wurde. Die dokumentierte WP-Altbasis 188/296 bleibt die letzte durch den Nutzerbericht bestätigte Version. Kein automatischer Import, keine Frontendänderung.
+
+**Fortlaufende Ablage:** Einzige aktuelle Datei `KATEGORIEN_AKTUELL.md` jetzt **V89**. Einziger Fachmaster `RECHERCHE/PRODUKTE_V2_20261108.json` **Rev26**, mit allen 532 Suchwerten direkt an deren bestehenden Besitzerobjekten, allen 300 Freizeit-Ideen und genau einem `actual_run_v89`-Laufbeleg. Keine neue Parallel-Abschlussdatei.
+
+---
 
 ## V88 – Plugin 0.4.15: gebündelten DataForSEO-Nachlauf installierbar gemacht (15.11.2026)
 
