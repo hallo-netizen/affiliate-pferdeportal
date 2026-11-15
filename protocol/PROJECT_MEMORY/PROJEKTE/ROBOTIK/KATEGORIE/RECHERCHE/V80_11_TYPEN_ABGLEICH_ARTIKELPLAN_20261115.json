@@ -27,7 +27,8 @@
     "Kein automatischer Sollprofil-Umbau des bereits live gemeldeten Kategorienbaums, keine neue Pluginversion.",
     "Bei Padel (PONGBOT Aura) nur Vorbestellstatus; bei Schminkroboter nur universitärer Prototyp.",
     "Bei Roboterkissen zwei unterschiedliche Gerätearten; Aussagen über Schlafwirkung gesondert prüfen.",
-    "Artikelrubriken sind 2 je Typ, keine mechanischen 3-Standardrubriken; mindestens vier fachlich unterscheidbare Inhaltsrichtungen."
+    "Artikelrubriken sind 2 je Typ, keine mechanischen 3-Standardrubriken; mindestens vier fachlich unterscheidbare Inhaltsrichtungen.",
+    "Der Prototyp Schminkroboter hat keinen Serienverkaufsbeleg. Padel PONGBOT Aura befindet sich laut Hersteller im Vorbestell-Vertrieb, Lieferbeleg offen."
   ],
   "model_ownership": {
     "registered_once": [
@@ -77,8 +78,8 @@
           "url": "https://www.litter-robot.com/eu/de/litter-robot-4.html"
         },
         {
-          "name": "PETKIT PUROBOT",
-          "url": "https://petkit.com/"
+          "name": "PETKIT Purobot Max Pro 2",
+          "url": "https://www.petkit.com/products/purobot-max-pro-2-automatic-cat-litter-box-with-ai-camera"
         }
       ],
       "unique_intent_and_duplicate_rule": "Automatische Reinigung der Katzentoilette; Haustierroboter bleiben Begleit-/Interaktionsgeräte.",
@@ -621,5 +622,27 @@
       "wordpress_write": false,
       "industry_unchanged": true
     }
-  ]
+  ],
+  "article_plan_rule": "Nur zwei konkret begründete Rubriken je Typ; mindestens vier eigenständige Artikelideen je Rubrik. Keine automatischen Rubriken allein um eine Zielzahl zu erreichen.",
+  "external_evidence_checked_on": "2026-11-15",
+  "fact_check": {
+    "source_count_direct": 15,
+    "model_claims_not_independently_tested": true,
+    "no_wp_live_inference": true,
+    "urls_official_vendors_or_universities": true,
+    "availability_not_equal_global_shippability": true
+  },
+  "model_duplicate_prevention": {
+    "multi_sport_shared_evidence": [
+      {
+        "model": "PONGBOT Aura – Mehrsportgerät",
+        "type_candidate_ids": [
+          "FIN-02",
+          "FIN-03"
+        ],
+        "number_of_product_records_to_create": 1
+      }
+    ],
+    "separate_type_pages_not_same_product_urls": true
+  }
 }
