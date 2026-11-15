@@ -300,3 +300,125 @@ Nach dem in der Nutzer-JSON belegten V78-Abschluss: **bereits vorhandenes Plugin
 - Letzter Nachtrag: `PLUGIN/V84_SOURCE/assets/robotik-v84-delta.json` (nur ausführbare Momentaufnahme der Entscheidung im zentralen Fachmaster, Revision 20)
 - Bestätigung des V78-Laufs: Nutzer-JSON `robotik-gesamtabschluss-20261115-122514(1).json`
 - Führender fachlicher Master bleibt **ausschließlich** `RECHERCHE/PRODUKTE_V2_20261108.json`. Diese Übersicht darf ihn nicht ersetzen.
+
+## Abschlusskorrektur: Industrie-Landingpages mit echten Zielseiten verbinden
+
+Die vollständige Prüfung der **47 Gruppen-Seiten** zeigt fünf Industrie-Übersichten, unter denen **keine direkten Robotertyp-Unterseiten** liegen: `Gewerbe › Industrie` und die vier tatsächlichen Unter-Landingpages `Produktion`, `Logistik`, `Infrastruktur`, `Spezialrobotik`. Das ist nicht die ursprünglich angedachte Dreiteilung aus V5, sondern der spätere **verbindliche V62-Seitenbestand**. Keine zusätzliche Hauptwelt, keine neue Zwischenseite, keine Verschiebung vorhandener Produktseiten.
+
+**Abschließender Navigationsvertrag:** Die Industrie-Hauptlanding verlinkt die vier vorhandenen Unter-Landingpages; jede von ihnen erhält normale, direkt anklickbare Links auf sachlich passende **bereits vorhandene** Robotertyp-Seiten aus dem übrigen CORE-Baum. Für das Ziel wird nur die bestehende eindeutige WordPress-Seite verwendet. Keine Kopie der Produktseite, keine zusätzlichen Kategorien, keine erfundene URL und kein 'Industrie-only'-Merkmal ohne Einsatznachweis. Die Links gehören in die bestehende Landingpage-/Designausgabe, nicht in die 48er-V84-Neuanlage.
+
+### Gewerbe › Industrie › Produktion (10 Querverweise)
+
+- Gewerbe › Fertigung › Bestückungsroboter — vorhandene Seitenkennung `rbt_product_0480`
+- Gewerbe › Fertigung › Schweißroboter — vorhandene Seitenkennung `rbt_product_0487`
+- Gewerbe › Fertigung › Schraubroboter — vorhandene Seitenkennung `rbt_product_0511`
+- Gewerbe › Fertigung › Etikettierroboter — vorhandene Seitenkennung `rbt_product_0512`
+- Gewerbe › Fertigung › Druckfarmroboter — vorhandene Seitenkennung `rbt_product_0495`
+- Gewerbe › Fertigung › Lötroboter — vorhandene Seitenkennung `rbt_product_0514`
+- Gewerbe › Fertigung › Dosierroboter — vorhandene Seitenkennung `rbt_product_0516`
+- Gewerbe › Fertigung › Schleifroboter — vorhandene Seitenkennung `rbt_product_0520`
+- Humanoide › Arbeit › Produktionshelfer — vorhandene Seitenkennung `hu_hu07`
+- Humanoide › Arbeit › Werkstatthelfer — vorhandene Seitenkennung `hu_hu10`
+
+### Gewerbe › Industrie › Logistik (5 Querverweise)
+
+- Gewerbe › Lagerlogistik › Inventurroboter — vorhandene Seitenkennung `rbt_product_0090`
+- Gewerbe › Lagerlogistik › Palettenhubroboter — vorhandene Seitenkennung `rbt_product_0525`
+- Gewerbe › Fertigung › Palettierroboter — vorhandene Seitenkennung `rbt_product_0513`
+- Humanoide › Arbeit › Lagerarbeiter — vorhandene Seitenkennung `hu_hu06`
+- Pflege › Versorgung › Kliniktransportroboter — vorhandene Seitenkennung `v46_p02`
+
+### Gewerbe › Industrie › Infrastruktur (7 Querverweise)
+
+- Gewerbe › Baustelle › Wanddruckroboter — vorhandene Seitenkennung `rbt_product_0507`
+- Gewerbe › Baustelle › Estrichroboter — vorhandene Seitenkennung `rbt_product_0519`
+- Gewerbe › Baustelle › Gerüstroboter — vorhandene Seitenkennung `rbt_product_0527`
+- Gewerbe › Reinigung › PV-Reinigungsroboter — vorhandene Seitenkennung `rbt_product_0032`
+- Gewerbe › Reinigung › Fassadenroboter — vorhandene Seitenkennung `rbt_product_0166`
+- Gewerbe › Reinigung › Sanitärreinigungsroboter — vorhandene Seitenkennung `v46_g02`
+- Gewerbe › Biotoppflege-Roboter — vorhandene Seitenkennung `v52_rob-0473`
+
+### Gewerbe › Industrie › Spezialrobotik (6 Querverweise)
+
+- Gewerbe › Elektronik-Reparaturroboter — vorhandene Seitenkennung `v52_rob-0457`
+- Gewerbe › Landwirtschaft › Agrardrohnen — vorhandene Seitenkennung `rbt_product_0547`
+- Gewerbe › Landwirtschaft › Traktorroboter — vorhandene Seitenkennung `rbt_product_0548`
+- Humanoide › Bildung › Entwicklungsroboter — vorhandene Seitenkennung `hu_hu11`
+- Bildung › Forschung › Chemielaborroboter — vorhandene Seitenkennung `v46_b07`
+- Gewerbe › Landwirtschaft › Sprühroboter — vorhandene Seitenkennung `rbt_product_0530`
+
+**Geprüft:** 4/4 vorhandene Industrie-Unter-Landingpages; **28/28** eindeutige vorhandene veröffentlichte V78-Soll-Robotertypseiten als Ziel; 0 Dubletten, 0 fehlende Quellenpfade. Die tatsächlichen Links wurden **noch nicht im WordPress-Frontend erstellt oder geprüft**. Die Hauptseite `Gewerbe › Industrie` ist keine Robotertypseite und braucht nur die vier realen Landingpage-Links.
+
+## Abschlusskorrektur: 63 pauschale alte Rubrik-Kurznamen
+
+Von den 89 ursprünglichen WordPress-Rubriken heißen **63** schlicht `Kaufberatung`. Zu allen liegen bereits themenspezifische Kurznamen als **V51-Vorschläge** vor. Ich habe diese Vorschläge gegen die übrigen Rubriken **desselben Robotertyps** abgeglichen. Dabei gab es **einen tatsächlichen Namenskonflikt**: `Bildung › Lernroboter` hat bereits die Rubrik `Programmierung`; deshalb heißt der alternative Kurzname für die alte `Kaufberatung` hier **`Geräteauswahl`**. Alle **63 Namen sind nun auf derselben Typseite eindeutig** und haben in der Freigabevorlage mindestens drei Themenansätze. Die vorhandenen WordPress-Rubriken werden dafür nicht neu angelegt.
+
+| Robotertyp-Pfad | Alter Kurzname | Konkretisierter Vorschlag |
+|---|---|---|
+| Gewerbe › Landwirtschaft › Entmistungsroboter | Kaufberatung | Stallbetrieb |
+| Gewerbe › Landwirtschaft › Futterschieberoboter | Kaufberatung | Futterbetrieb |
+| Gewerbe › Landwirtschaft › Melkroboter | Kaufberatung | Stallplanung |
+| Gewerbe › Reinigung › PV-Reinigungsroboter | Kaufberatung | Dachreinigung |
+| Sport › Platzpflege › Linienroboter | Kaufberatung | Platzmarkierung |
+| Sport › Platzpflege › Tennisplatzroboter | Kaufberatung | Platzpflege |
+| Garten › Flächenpflege › Schneeroboter | Kaufberatung | Winterdienst |
+| Freizeit › Outdoor › Bootsreiniger | Kaufberatung | Rumpfreinigung |
+| Sport › Golf › Golfballroboter | Kaufberatung | Ballsammlung |
+| Sport › Platzpflege › Ballsammelroboter | Kaufberatung | Ballsammlung |
+| Bildung › Lernroboter | Kaufberatung | Geräteauswahl |
+| Freizeit › Spielzeug › Robotertiere | Kaufberatung | Spielpraxis |
+| Freizeit › Spielzeug › Tischroboter | Kaufberatung | Alltag |
+| Freizeit › Spielzeug › Schachroboter | Kaufberatung | Schachpraxis |
+| Freizeit › Zeichenroboter | Kaufberatung | Zeichentechnik |
+| Sport › Ballsport › Tischtennisroboter | Kaufberatung | Balltraining |
+| Sport › Ballsport › Basketballroboter | Kaufberatung | Wurftraining |
+| Sport › Golf › Golf-Folgetrolleys | Kaufberatung | Spielbegleitung |
+| Haushalt › Haustierroboter | Kaufberatung | Tierbetreuung |
+| Gewerbe › Lagerlogistik › Inventurroboter | Kaufberatung | Regalprüfung |
+| Garten › Poolpflege › Poolroboter | Kaufberatung | Poolpflege |
+| Gewerbe › Reinigung › Fassadenroboter | Kaufberatung | Fassadenpflege |
+| Gewerbe › Gastronomie › Baristaroboter | Kaufberatung | Kaffeeausgabe |
+| Gewerbe › Reinigung › Scheuersaugroboter | Kaufberatung | Bodenreinigung |
+| Garten › Poolpflege › Poolskimmer | Kaufberatung | Oberflächenpflege |
+| Haushalt › Fensterputzroboter | Kaufberatung | Fensterpflege |
+| Garten › Flächenpflege › Laubroboter | Kaufberatung | Laubbeseitigung |
+| Garten › Beetroboter | Kaufberatung | Beetpflege |
+| Gewerbe › Medientechnik › Kameraroboter | Kaufberatung | Kameraführung |
+| Gewerbe › Fertigung › Bestückungsroboter | Kaufberatung | Leiterplatten |
+| Gewerbe › Landwirtschaft › Sä-/Jätroboter | Kaufberatung | Aussaat |
+| Gewerbe › Fertigung › Schweißroboter | Kaufberatung | Schweißtechnik |
+| Gewerbe › Gastronomie › Servierroboter | Kaufberatung | Restaurantbetrieb |
+| Gewerbe › Landwirtschaft › Pikierroboter | Kaufberatung | Jungpflanzen |
+| Gewerbe › Hotelbetrieb › Hotelroboter | Kaufberatung | Hotelbetrieb |
+| Gewerbe › Hotelbetrieb › Empfangsroboter | Kaufberatung | Besucherführung |
+| Gewerbe › Gastronomie › Barkeeperroboter | Kaufberatung | Ausschank |
+| Gewerbe › Fertigung › Druckfarmroboter | Kaufberatung | Druckbetrieb |
+| Haushalt › Saugroboter | Kaufberatung | Bodenpflege |
+| Garten › Rasenpflege › Mähroboter | Kaufberatung | Rasenpflege |
+| Freizeit › Outdoor › Futterboote | Kaufberatung | Angelbetrieb |
+| Freizeit › Modellbau › Tischroboterarme | Kaufberatung | Werkstatteinsatz |
+| Freizeit › Outdoor › Folgekoffer | Kaufberatung | Reisen |
+| Freizeit › Modellbau › Roboterhunde | Kaufberatung | Entwicklung |
+| Gewerbe › Baustelle › Wanddruckroboter | Kaufberatung | Wanddruck |
+| Gewerbe › Fertigung › Schraubroboter | Kaufberatung | Montage |
+| Gewerbe › Fertigung › Etikettierroboter | Kaufberatung | Kennzeichnung |
+| Gewerbe › Fertigung › Palettierroboter | Kaufberatung | Palettierung |
+| Gewerbe › Fertigung › Lötroboter | Kaufberatung | Löttechnik |
+| Gewerbe › Fertigung › Dosierroboter | Kaufberatung | Materialauftrag |
+| Gewerbe › Baustelle › Estrichroboter | Kaufberatung | Estricharbeiten |
+| Gewerbe › Fertigung › Schleifroboter | Kaufberatung | Oberflächenbearbeitung |
+| Sport › Ballsport › Tennisroboter | Kaufberatung | Training |
+| Gewerbe › Lagerlogistik › Palettenhubroboter | Kaufberatung | Lagertransport |
+| Garten › Rasenpflege › Trimmroboter | Kaufberatung | Rasenkanten |
+| Gewerbe › Baustelle › Gerüstroboter | Kaufberatung | Baustellenlogistik |
+| Gewerbe › Landwirtschaft › Sprühroboter | Kaufberatung | Gewächshauspflege |
+| Gewerbe › Medientechnik › Fotoroboter | Kaufberatung | Produktfotografie |
+| Bildung › Lerndrohnen | Kaufberatung | Schulbetrieb |
+| Gewerbe › Medientechnik › Requisitenroboter | Kaufberatung | Studioeinsatz |
+| Gewerbe › Landwirtschaft › Spritzroboter | Kaufberatung | Pflanzenschutz |
+| Gewerbe › Landwirtschaft › Agrardrohnen | Kaufberatung | Feldeinsatz |
+| Gewerbe › Landwirtschaft › Traktorroboter | Kaufberatung | Feldarbeit |
+
+**Grenze:** Die 63 Kurznamensvorschläge sind bislang **nur redaktionelle Darstellungsvorschläge**, **keine freigegebene WordPress-Umbenennung**. Eine spätere Übernahme muss die vorhandenen Rubrik-IDs, Rubrik-URLs und Beitragszuordnungen schützen; keine zweite Kategorie anlegen. Das vorhandene Plugin 0.4.14 arbeitet den **16+32-Nachtrag** ab, nicht diese 63 möglichen Altbezeichnungen. Sichtbare Änderungen benötigen die gesonderte Umsetzungsgenehmigung.
+
+**Endstand:** Der fachliche Kategorienplan einschließlich der bisher leeren Industrie-Verweiswege und aller generischen Bestandsrubriknamen ist jetzt vollständig aufgearbeitet. Die noch nicht live nachgewiesenen Arbeiten bleiben getrennt: V84 (16 Seiten + 32 Rubriken) und später ggf. die Industrie-Inhaltslinks und 63 Alt-Kurznamen. Keine neue Grundlagenrecherche, kein zusätzlicher Baum und kein heimlicher WordPress-Schreibvorgang.
