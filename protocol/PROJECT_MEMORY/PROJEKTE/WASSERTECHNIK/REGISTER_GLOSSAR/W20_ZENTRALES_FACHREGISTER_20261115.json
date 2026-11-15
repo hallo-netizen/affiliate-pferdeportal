@@ -144,7 +144,8 @@
     "neue_w20_anbieterrubriken": 2,
     "w19_vergleichspaare_getrennt": 34,
     "w19_vergleichspaare_alias": 1,
-    "w19_vergleichspaare_offen": 15
+    "w19_vergleichspaare_offen": 15,
+    "w20_aktualisierte_altprodukt_status": 63
   },
   "regeln": {
     "wp_seitenebene": "Letzte WP-Seitenebene ist konkrete Produktart oder System.",
@@ -953,13 +954,13 @@
       "hinweis": "Aufbereitungsanlagen",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W17-P027"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W17-P027",
@@ -1083,13 +1084,13 @@
       "hinweis": "Filterzubehör",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W15-018"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W15-018",
@@ -1661,13 +1662,13 @@
       "hinweis": "Brunnenbauteile",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W15-022"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W15-022",
@@ -1793,13 +1794,13 @@
       "hinweis": "Brunnenbauteile",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W16-002"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W16-002",
@@ -1870,13 +1871,13 @@
       "hinweis": "Pumpen",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W14-078"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-078",
@@ -1946,7 +1947,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-077",
@@ -2087,7 +2088,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W15-012",
@@ -2273,13 +2274,13 @@
       "hinweis": "Druckversorgung",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W15-003"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W15-003",
@@ -2343,13 +2344,13 @@
       "hinweis": "Steuerung & Zubehör",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W14-012"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-012",
@@ -2750,7 +2751,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-008",
@@ -2949,7 +2950,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-058",
@@ -3518,13 +3519,13 @@
       "hinweis": "Entwässerung",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W14-011"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-011",
@@ -3667,13 +3668,13 @@
       "hinweis": "Aufbereitung & Speicherung",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W14-056"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-056",
@@ -4112,13 +4113,13 @@
       "hinweis": "Aufbereitungsanlagen",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W15-001"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W15-001",
@@ -4299,13 +4300,13 @@
       "hinweis": "Steuerung & Zubehör",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W18-P012"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W18-P012",
@@ -4730,7 +4731,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-036",
@@ -4815,7 +4816,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W16-007",
@@ -4963,7 +4964,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W17-P011",
@@ -5241,7 +5242,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W17-P023",
@@ -5312,13 +5313,13 @@
       "hinweis": "Kühl- & Kreislaufwasser",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W15-017"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W15-017",
@@ -5653,13 +5654,13 @@
       "hinweis": "Vorhandenes Tropfbewässerungsset ist Gesamtsystem; Tropfrohr ist separat kaufbares Rohrprodukt mit eigenem Einbau",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W18-P009"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W18-P009",
@@ -6067,13 +6068,13 @@
       "hinweis": "Nicht mit vorhandenem Wasserfilter-Anschlussadapter verwechseln: Durchflusssteuerung statt Filteranschluss",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W18-P011"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W18-P011",
@@ -6148,13 +6149,13 @@
       "hinweis": "Bestehende Grauwasseranlage bereitet Wasser zur Wiederverwendung auf; Wärmetauscher gewinnt Wärme aus Abwasser zurück",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W17-P025"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W17-P025",
@@ -6299,7 +6300,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-046",
@@ -6565,13 +6566,13 @@
       "hinweis": "Einzelmessgerät gegenüber vorhandenem Wasser-Multimessgerät: SEO-Intent-Kollision zwingend prüfen",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W17-P004"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W17-P004",
@@ -6646,13 +6647,13 @@
       "hinweis": "Abgrenzung zu Hauswasserfeinfilter über Poolkreislauf, Rückspülung und Filtermedium",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W16-011"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W16-011",
@@ -6727,13 +6728,13 @@
       "hinweis": "Bestehende Wasser-Dosieranlage betrifft Wasseraufbereitung allgemein; Pool-pH-/Desinfektionsregelung unterscheidet sich chemisch und fachlich",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W14-075"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-075",
@@ -6930,7 +6931,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-073",
@@ -7628,7 +7629,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-040",
@@ -7754,13 +7755,13 @@
       "hinweis": "Gegen W4 Druckerhöhungsanlage und vorhandene Pumpen abgrenzen.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W14-013"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-013",
@@ -7825,13 +7826,13 @@
       "hinweis": "Abgrenzung zur W4 Hebeanlage wesentlich.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W4-052"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-052",
@@ -7896,13 +7897,13 @@
       "hinweis": "W4 Pumpensteuergerät ist breiter Oberbegriff; nur spezialisierte Suchabsicht rechtfertigt eigenen Owner.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W4-034"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-034",
@@ -7967,13 +7968,13 @@
       "hinweis": "Eher Industrie/Kommunal und gegenüber allgemeiner Kreiselpumpe abzugrenzen.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W14-010"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-010",
@@ -8172,7 +8173,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-049",
@@ -9426,7 +9427,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-071",
@@ -9503,13 +9504,13 @@
       "hinweis": "W4 Bewässerungs-Wasserzähler und Tankmessung haben anderes Messobjekt; mögliche Keywordüberschneidung.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W14-036"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-036",
@@ -9574,13 +9575,13 @@
       "hinweis": "Nur als separate Seite wenn Funkmodul eigenständig gekauft wird; integrierter Ultraschallzähler ist bereits Kandidat.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W14-036"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-036",
@@ -10089,7 +10090,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W12-014",
@@ -10282,7 +10283,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-016",
@@ -10469,13 +10470,13 @@
       "hinweis": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W14-053"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-053",
@@ -10540,13 +10541,13 @@
       "hinweis": "Gleiche Großberegnungsfamilie, andere Geometrie; SEO-Abgrenzung offen.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W14-052"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-052",
@@ -10735,13 +10736,13 @@
       "hinweis": "W4 Grauwasseranlage als Komplettsystem; Einzelmodul nur bei eigenständiger Ersatzteil-/Technik-Kaufabsicht.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W4-054"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-054",
@@ -10877,7 +10878,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-043",
@@ -11010,13 +11011,13 @@
       "hinweis": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W18-P006"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W18-P006",
@@ -11270,13 +11271,13 @@
       "hinweis": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W18-P013"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W18-P013",
@@ -11406,14 +11407,14 @@
       "hinweis": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W18-P015",
           "W18-P017"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W18-P015",
@@ -11866,7 +11867,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W12-023",
@@ -11997,13 +11998,13 @@
       "hinweis": "W12 Pool-Dosieranlage ist funktional nah; keine automatische neue Seite.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W12-020"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W12-020",
@@ -12135,7 +12136,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-028",
@@ -12202,13 +12203,13 @@
       "hinweis": "Andere mobile 12-V-Frischwasserfunktion als W4 Gartenpumpe; W14 mobile Tauchpumpe getrennt prüfen.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W4-027"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-027",
@@ -12353,13 +12354,13 @@
       "hinweis": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W14-084"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-084",
@@ -12424,13 +12425,13 @@
       "hinweis": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W18-P002"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W18-P002",
@@ -12619,13 +12620,13 @@
       "hinweis": "Grundwasser-Pegeldatenlogger kann integrierte Funkfunktion haben; kein doppelter Owner ohne klare separat kaufbare Einheit.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W14-080"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-080",
@@ -12816,13 +12817,13 @@
       "hinweis": "W4 Gewerbliche Umkehrosmose und mobile Yachtanlage können überlappen; kein zusätzlicher Owner allein wegen Anwendung.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICHE_ABGRENZUNG_ZUM_ALIAS_SEO_OFFEN",
         "vergleichs_ids": [
           "W14-079"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-079",
@@ -12885,13 +12886,13 @@
       "hinweis": "W4 Systemtrenner allgemeiner; Brandschutz-Zweck kann eigenständige technische Anlage sein.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W4-061"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-061",
@@ -13015,13 +13016,13 @@
       "hinweis": "W4 Druckerhöhungsanlage allgemein; eigene Brandschutznorm/Anwendung. Querverweis Hab & Bewahr.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W4-033"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-033",
@@ -13497,13 +13498,13 @@
       "hinweis": "Unterschied zu W12 Sedimentationsanlage und W14 Lamellenklärer prüfen.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W17-P002"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W17-P002",
@@ -13574,7 +13575,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-030",
@@ -13830,7 +13831,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W18-P007",
@@ -13897,13 +13898,13 @@
       "hinweis": "W4 Kühlwasser-Dosierstation, W14 Absalzautomatik nahe; kein Duplikat ohne andere technische Kaufaufgabe.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W4-079"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-079",
@@ -13968,13 +13969,13 @@
       "hinweis": "W4 Wasserfilterkartuschen und W12 Strahlregler nicht gleich, aber Filter für Spültechnik Nische.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W4-015"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-015",
@@ -14225,13 +14226,13 @@
       "hinweis": "W4 Brunnen-Bausatz; gegenüber allgemeinem Brunnenbau und Wärmepumpe keine Kopie.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W4-024"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-024",
@@ -14545,13 +14546,13 @@
       "hinweis": "W4 Brunnenfilterrohr ist andere Anwendung, Fachunterscheidung könnte eigenständig sein.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W4-026"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-026",
@@ -14742,7 +14743,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W16-006",
@@ -14815,7 +14816,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W16-005",
@@ -14886,7 +14887,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-072",
@@ -15136,13 +15137,13 @@
       "hinweis": "Anderer Betriebsmaßstab als W12 private Pool-Sandfilteranlage; nicht nur größerer Herstellername.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W12-019"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W12-019",
@@ -15420,13 +15421,13 @@
       "hinweis": "Teil der Waschwasser-Recyclinganlage; eigenständige Produktseite nur bei tatsächlichem Gerätekauf.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W15-011"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W15-011",
@@ -15570,13 +15571,13 @@
       "hinweis": "W12 Leitfähigkeitsmessgerät und W14 Inline-Analytik nahe, eigene Funktion/Intent offen.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W12-018"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W12-018",
@@ -15648,13 +15649,13 @@
       "hinweis": "W4 gewerbliche Umkehrosmose und EDI sind Vorbehandlung, Labor-Typ-1-Wasser ist spezifisches Gesamtsystem.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W17-P006"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W17-P006",
@@ -15726,13 +15727,13 @@
       "hinweis": "Integrierte Typ-1-/Typ-2-Systeme vorhanden; eigenständige SEO-Endseite noch ungeklärt.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W17-P005"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W17-P005",
@@ -15812,7 +15813,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-072",
@@ -16096,7 +16097,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-074",
@@ -16171,13 +16172,13 @@
       "hinweis": "W12 Leckageschutzventil stellt Wasser ab, ortet aber Leckstelle nicht.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W17-P013"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W17-P013",
@@ -16251,13 +16252,13 @@
       "hinweis": "Anderes Messverfahren; unter Wasserleckortung eigenständige kaufbare Gerätefamilie, SEO-Intent offen.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W17-P012"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W17-P012",
@@ -16956,7 +16957,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-078",
@@ -17098,13 +17099,13 @@
       "hinweis": "W12 Duschwasser-Wärmetauscher ist kleinteiliger Gebäude-/Duschanwendungsfall; fachlich nah, SEO offen.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W12-012"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W12-012",
@@ -17183,7 +17184,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W18-P014",
@@ -17257,13 +17258,13 @@
       "hinweis": "W4 UV-Desinfektionsanlage tötet Mikroorganismen; AOP baut bestimmte Stoffe chemisch ab, fachlich unterschiedlicher Zweck.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W4-013"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-013",
@@ -20572,13 +20573,13 @@
       "hinweis": "W14 Radar-Wasserstandssensor/Grundwasser-Pegellogger: eigenes Einperl-Messverfahren und außerhalb des Wassers liegende Technik.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W14-081"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-081",
@@ -20803,13 +20804,13 @@
       "hinweis": "W12 Regenwasser-Sedimentationsanlage entfernt vor allem Partikel; Substratfilter erfasst auch gelöste Stoffe.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W12-014"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W12-014",
@@ -20888,13 +20889,13 @@
       "hinweis": "W14 Flachdachablauf und W12 Regenwasser-Ablaufdrossel sind fachliche Nachbarn; integriertes Drossel-Dachsystem nur bei eigenständiger Kaufabsicht.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W14-060"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-060",
@@ -20980,7 +20981,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W15-016",
@@ -21060,13 +21061,13 @@
       "hinweis": "W4 Feinfilter/Pumpenvorfilter und Bewässerungs-Scheibenfilter überschneiden sich technisch; erst als Produktfamilie abgrenzen.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W18-P007"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W18-P007",
@@ -21145,13 +21146,13 @@
       "hinweis": "W12 Tropfrohr und W4 Tropfbewässerungsset sind Komplett- bzw. Leitungsprodukte; einzeln steckbare Tropfer sind eigene Komponente.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W12-005"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W12-005",
@@ -21299,13 +21300,13 @@
       "hinweis": "W12 Wasserspar-Strahlregler enthält teils Mengenregler, separate Einsteck- oder Leitungsbaugruppe nur bei eigener Kaufabsicht.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W12-011"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W12-011",
@@ -21384,13 +21385,13 @@
       "hinweis": "W4 Rückschlagventil und Systemtrenner: starkes Duplikatrisiko, nur mit echter Produktspezifik und anderer Suchintention.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W4-064"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W4-064",
@@ -21468,13 +21469,13 @@
       "hinweis": "W14 Abwasser-Rechenanlage/Sandfang sind Teilkomponenten; hier integrierte Gesamtanlage. SEO-Abgrenzung ausdrücklich offen.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W14-064"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-064",
@@ -21558,7 +21559,7 @@
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W17-P026",
@@ -21636,14 +21637,14 @@
       "hinweis": "W14 Klärschlamm-Schneckenpresse entwässert mechanisch; Bandtrockner trocknet thermisch.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W14-066",
           "W18-P016"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-066",
@@ -21725,13 +21726,13 @@
       "hinweis": "Kein bloß anderer Bandtrockner, sondern mechanisches Wenden für solare Trocknung.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W18-P015"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W18-P015",
@@ -21804,13 +21805,13 @@
       "hinweis": "W14 Feststoffpumpe/Schneckenpresse haben andere Förder- bzw. Entwässerungsaufgaben.",
       "aktualisiert": "2026-11-15",
       "funktionspruefung": {
-        "stand": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+        "stand": "FACHLICH_GETRENNT_SEO_NOCH_OFFEN",
         "vergleichs_ids": [
           "W14-066"
         ],
         "begruendung": null,
         "pruefdatum": "2026-11-15",
-        "hinweis": "Einmaliges Register-Screening. Ohne expliziten Vergleich kein Beweis, dass keine Doppelung vorliegt.",
+        "hinweis": "W20: Status aus den konkreten Einzelvergleichen; fachlich getrennt bedeutet keine selbstständige SEO-/WP-Freigabe.",
         "w20_paarentscheidungen": [
           {
             "mit_id": "W14-066",
