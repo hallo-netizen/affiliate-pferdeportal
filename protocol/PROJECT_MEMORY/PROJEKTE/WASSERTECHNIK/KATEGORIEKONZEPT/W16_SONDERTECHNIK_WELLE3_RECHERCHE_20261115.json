@@ -1,0 +1,194 @@
+{
+  "version": "W16_20261115_SPECIAL_CROSS_SECTOR_RESEARCH",
+  "status": "RECHERCHIERTE_PRODUKTFUNDE_KEINE_WORDPRESS_FREIGABE",
+  "scope": "Bauwasserhaltung, Brauwasser, medizinische Reinwassertechnik, mobile Notversorgung, öffentliche Schwimmbäder",
+  "count": 13,
+  "category_ideas": 13,
+  "article_ideas": 39,
+  "base_master": "W15_GEMEINSAMER_PRODUKTFORSCHUNGSMASTER_20261115.json",
+  "warning": "Hersteller- und Fachwebseiten belegen Technikbereiche, nicht alle hier formulierten Produkte als einzeln vermarktete Produkt-Owner. Überschneidungen und Google-SERP unbewiesen; insbesondere Medizinprodukte ausschließlich als Informationsbereiche.",
+  "items": [
+    {
+      "field": "Baustellenwasserhaltung",
+      "product": "Vakuum-Grundwasserabsenkanlage",
+      "source_url": "https://www.wellpoint.de/grundwasserabsenkung/",
+      "category_candidate": "Grundwasserabsenkung",
+      "article_directions": [
+        "Vakuum- und offene Grundwasserabsenkung technisch vergleichen",
+        "Vakuum-Wasserhaltungsanlage mit Filterbrunnen planen",
+        "Grundwasserabsenkung während der Bauzeit überwachen"
+      ],
+      "decision": "NEU_RECHERCHIERT_SEO_OFFEN",
+      "relationship": "Neue technische Gesamtanlage; prüfen, ob W14 Entwässerungs-Pumpstation oder Brunnenanlage bereits dieselbe Kaufaufgabe abdeckt.",
+      "editorial_only": "Vorschlag für Fach- oder Informations-Produktendseite, kein SEO-/WP-Owner und keine geprüfte Nachfrage"
+    },
+    {
+      "field": "Baustellenwasserhaltung",
+      "product": "Wellpoint-Filterlanze",
+      "source_url": "https://www.wellpoint.de/mietpalette/",
+      "category_candidate": "Nadelfiltertechnik",
+      "article_directions": [
+        "Wellpoint-Filterlanze für Grundwasserabsenkung auswählen",
+        "Filterlanze und große Brunnenfilterrohre vergleichen",
+        "Einspülung und Anschluss von Nadelfiltern im Baugrund beurteilen"
+      ],
+      "decision": "INTENT_TECHNIK_GRENZFALL",
+      "relationship": "W4 Brunnenfilterrohr ist andere Anwendung, Fachunterscheidung könnte eigenständig sein.",
+      "editorial_only": "Vorschlag für Fach- oder Informations-Produktendseite, kein SEO-/WP-Owner und keine geprüfte Nachfrage"
+    },
+    {
+      "field": "Baustellenwasserhaltung",
+      "product": "Bauwasserhaltungs-Sammelleitung",
+      "source_url": "https://www.wellpoint.de/mietpalette/",
+      "category_candidate": "Sammelrohrsysteme",
+      "article_directions": [
+        "Sammelleitung für mehrere Grundwasser-Filterlanzen dimensionieren",
+        "Saugseitige Dichtheit von Wasserhaltungsleitungen prüfen",
+        "Flexible und starre Leitungen bei Bauwasserhaltung vergleichen"
+      ],
+      "decision": "INTENT_TECHNIK_GRENZFALL",
+      "relationship": "W4 Pumpen-Saugschlauchset sowie W14 Rohrsysteme könnten denselben Kaufbedarf abdecken.",
+      "editorial_only": "Vorschlag für Fach- oder Informations-Produktendseite, kein SEO-/WP-Owner und keine geprüfte Nachfrage"
+    },
+    {
+      "field": "Brauwassertechnik",
+      "product": "Brauwasser-Entgasungsanlage",
+      "source_url": "https://www.centec.de/category/brauerei",
+      "category_candidate": "Sauerstoffentfernung aus Brauwasser",
+      "article_directions": [
+        "Thermische und Membran-Brauwasserentgasung vergleichen",
+        "Rest-Sauerstoffwerte und Wasserdurchsatz einer Entgasungsanlage bewerten",
+        "Wärmerückgewinnung bei der Brauwasserentgasung einordnen"
+      ],
+      "decision": "NEU_RECHERCHIERT_SEO_OFFEN",
+      "relationship": "Spezielle Lebensmittel-/Getränkewasseranwendung; Industriewassertechnik/kleine Brauereien, nicht Bierabfüllmaschinen.",
+      "editorial_only": "Vorschlag für Fach- oder Informations-Produktendseite, kein SEO-/WP-Owner und keine geprüfte Nachfrage"
+    },
+    {
+      "field": "Brauwassertechnik",
+      "product": "Brauwasser-Mineralisierungsanlage",
+      "source_url": "https://www.euwa.com/brauwasseraufbereitung.html",
+      "category_candidate": "Brauwasser-Ionenprofil",
+      "article_directions": [
+        "Calciumgehalt und Ionenprofil bei Brauwasser einstellen",
+        "Gezielte Remineralisierung und reine Enthärtung unterscheiden",
+        "Brauwasser-Mineralisierung mit vorgeschalteter Osmose kombinieren"
+      ],
+      "decision": "INTENT_TECHNIK_GRENZFALL",
+      "relationship": "W4 Wasser-Dosieranlage / Gewerbe-Umkehrosmose; als neue Systemseite nur bei eigenständiger technischem Zweck.",
+      "editorial_only": "Vorschlag für Fach- oder Informations-Produktendseite, kein SEO-/WP-Owner und keine geprüfte Nachfrage"
+    },
+    {
+      "field": "Brauwassertechnik",
+      "product": "Brauwasser-Kalkwasseraufbereitungsanlage",
+      "source_url": "https://www.euwa.com/brauwasseraufbereitung.html",
+      "category_candidate": "Kalkwasserbehandlung im Brauprozess",
+      "article_directions": [
+        "Kalkwasseraufbereitung gegenüber direkter Mineralstoffdosierung abgrenzen",
+        "Membranverfahren und Kalkwasserherstellung zusammen beurteilen",
+        "Brauwasserhärte und gewünschte Calciumkonzentration abstimmen"
+      ],
+      "decision": "INTENT_TECHNIK_GRENZFALL",
+      "relationship": "Mögliche funktionale Nähe zum vorigen Mineralisierungssystem; erst einmal einen Owner prüfen.",
+      "editorial_only": "Vorschlag für Fach- oder Informations-Produktendseite, kein SEO-/WP-Owner und keine geprüfte Nachfrage"
+    },
+    {
+      "field": "Medizinische Reinwassertechnik",
+      "product": "Dialyse-Umkehrosmoseanlage",
+      "source_url": "https://freseniusmedicalcare.com/de/medizinisches-fachpersonal/zentrumsdialyse/water-technology/dialysewasserversorgung/",
+      "category_candidate": "Spezialisierte Dialyse-Reinwassererzeugung",
+      "article_directions": [
+        "Dialyse-Reinwasseranlage gegenüber gewerblicher Osmoseanlage fachlich abgrenzen",
+        "Zentrale und dezentrale Dialyse-Wasserversorgungssysteme vergleichen",
+        "Überwachungs- und Ausfallsicherheitsfunktionen der Dialysewasseranlage beschreiben"
+      ],
+      "decision": "INTENT_TECHNIK_GRENZFALL",
+      "relationship": "Medizinisches Fachsegment nur informationsorientiert. W4 gewerbliche RO technisch verwandt; kein medizinischer Betriebsratgeber ohne Expertenprüfung.",
+      "editorial_only": "Vorschlag für Fach- oder Informations-Produktendseite, kein SEO-/WP-Owner und keine geprüfte Nachfrage"
+    },
+    {
+      "field": "Medizinische Reinwassertechnik",
+      "product": "Dialyse-Permeat-Verteilsystem",
+      "source_url": "https://freseniusmedicalcare.com/de/medizinisches-fachpersonal/zentrumsdialyse/water-technology/dialysewasserversorgung/",
+      "category_candidate": "Dialyse-Reinwasserverteilung",
+      "article_directions": [
+        "Zentrale Reinwassererzeugung und Permeatverteilung unterscheiden",
+        "Ringleitung und dezentrale Versorgung eines Dialysezentrums vergleichen",
+        "Hygiene- und Überwachungsebenen einer Permeatversorgung einordnen"
+      ],
+      "decision": "INTENT_TECHNIK_GRENZFALL",
+      "relationship": "Gesamtsystem/Leitungsnetz, Quelle muss konkrete Produktunabhängigkeit zusätzlich belegen.",
+      "editorial_only": "Vorschlag für Fach- oder Informations-Produktendseite, kein SEO-/WP-Owner und keine geprüfte Nachfrage"
+    },
+    {
+      "field": "Mobile Notwasserversorgung",
+      "product": "Mobile Trinkwasser-Verteilstation",
+      "source_url": "https://www.reutlingen.ihk.de/netzwerke/innovation-nachhaltigkeit-umwelt/wasser/uebersicht/detail/?cHash=7e2f97b9634cc7d8d11e84fc66803678&tx_ihkmaps_detail%5Baction%5D=detail&tx_ihkmaps_detail%5Bcontroller%5D=Map&tx_ihkmaps_detail%5Bitem%5D=3875&tx_ihkmaps_detail%5Btype%5D=item",
+      "category_candidate": "Mobiles Verteilen von Trinkwasser",
+      "article_directions": [
+        "Mobile Wasserverteilstation für Veranstaltung oder Notversorgung einordnen",
+        "Anforderungen an Behälter und Wasseranschlüsse gegenüberstellen",
+        "Unterschied zwischen Verteilstation und mobiler Wasseraufbereitung erklären"
+      ],
+      "decision": "NEU_RECHERCHIERT_SEO_OFFEN",
+      "relationship": "Erweiterte mobile Wasserversorgung; kein Wasser-Filtergerät und keine W4 Trinkwassertank-Dublette.",
+      "editorial_only": "Vorschlag für Fach- oder Informations-Produktendseite, kein SEO-/WP-Owner und keine geprüfte Nachfrage"
+    },
+    {
+      "field": "Mobile Notwasserversorgung",
+      "product": "Mobile Trinkwasseraufbereitungs-Containeranlage",
+      "source_url": "https://www.ikts.fraunhofer.de/de/industrieloesungen/schutz_sicherheit/einsatz-und-krisenversorgung.html",
+      "category_candidate": "Mobile Wasseraufbereitung",
+      "article_directions": [
+        "Mobile Membranwasseraufbereitung und stationäre Anlage vergleichen",
+        "Rohwasserarten bei mobiler Wasserreinigung unterscheiden",
+        "Versorgungskapazität und Transportanforderungen mobiler Anlagen beurteilen"
+      ],
+      "decision": "INTENT_TECHNIK_GRENZFALL",
+      "relationship": "Fraunhofer beschreibt Technologie/Anwendungen, nicht jeden konkreten kaufbaren Hersteller-Container; Verfügbarkeit/Studienstatus offen.",
+      "editorial_only": "Vorschlag für Fach- oder Informations-Produktendseite, kein SEO-/WP-Owner und keine geprüfte Nachfrage"
+    },
+    {
+      "field": "Öffentliche Bäder",
+      "product": "Schwimmbad-Unterdruckfilteranlage",
+      "source_url": "https://www.chriwa-group.com/awg/verfahren/schwimmbadtechnik",
+      "category_candidate": "Großbecken-Wasserfiltration",
+      "article_directions": [
+        "Unterdruckfilteranlage und klassische Pool-Sandfiltertechnik vergleichen",
+        "Filterleistung für kommunale Badebecken planen",
+        "Rückspülung und Filtermedien in Unterdrucksystemen einordnen"
+      ],
+      "decision": "NEU_RECHERCHIERT_SEO_OFFEN",
+      "relationship": "Anderer Betriebsmaßstab als W12 private Pool-Sandfilteranlage; nicht nur größerer Herstellername.",
+      "editorial_only": "Vorschlag für Fach- oder Informations-Produktendseite, kein SEO-/WP-Owner und keine geprüfte Nachfrage"
+    },
+    {
+      "field": "Öffentliche Bäder",
+      "product": "Schwimmbad-Ozonbehandlungsanlage",
+      "source_url": "https://www.chriwa-group.com/awg/verfahren/schwimmbadtechnik",
+      "category_candidate": "Ozonbehandlung von Beckenwasser",
+      "article_directions": [
+        "Ozonverfahren und UV-Behandlung im Schwimmbad vergleichen",
+        "Mehrstufige Ozon-Filter-Kombinationen einordnen",
+        "Restozonbehandlung in öffentlicher Schwimmbadtechnik beurteilen"
+      ],
+      "decision": "INTENT_TECHNIK_GRENZFALL",
+      "relationship": "W14 Ozon-Wasserdesinfektionsanlage oder W12 Pool-Dosieranlage funktionsnah; nicht automatisch eigene SEO-Seite.",
+      "editorial_only": "Vorschlag für Fach- oder Informations-Produktendseite, kein SEO-/WP-Owner und keine geprüfte Nachfrage"
+    },
+    {
+      "field": "Öffentliche Bäder",
+      "product": "Schwimmbad-Flockungsdosierstation",
+      "source_url": "https://www.prominent.de/de/Produkte/Produkte/Produktkatalog/Produktkatalog.html",
+      "category_candidate": "Flockungsmittel im Schwimmbad dosieren",
+      "article_directions": [
+        "Flockungsdosierung und pH-Regelung im Schwimmbad abgrenzen",
+        "Dosiermengen mit Filterdurchsatz und Wassertrübung abstimmen",
+        "Flockung vor Mehrschichtfiltration im Schwimmbad beurteilen"
+      ],
+      "decision": "INTENT_TECHNIK_GRENZFALL",
+      "relationship": "W14 Flockungsmittel-Dosierstation ist allgemeiner; Branchenvariante ohne wirklich andere Technik nicht duplizieren.",
+      "editorial_only": "Vorschlag für Fach- oder Informations-Produktendseite, kein SEO-/WP-Owner und keine geprüfte Nachfrage"
+    }
+  ]
+}
