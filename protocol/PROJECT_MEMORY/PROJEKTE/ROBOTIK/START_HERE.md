@@ -1,5 +1,11 @@
 # ROBOTIK – CAMPUS-BÜROGEBÄUDE
 
+## AKTUELL V89 (15.11.2026) – DATAFORSEO 532/532 ABGESCHLOSSEN UND GESPEICHERT
+- **Nur eine fortlaufende aktuelle Fassung** [KATEGORIEN_AKTUELL.md](KATEGORIE/KATEGORIEN_AKTUELL.md) V89 und **einziger Forschungs-/SEO-Master** `KATEGORIE/RECHERCHE/PRODUKTE_V2_20261108.json` Rev26.
+- **Tatsächlicher bezahlter DataForSEO-Lauf aus Nutzerdatei:** COMPLETE, 2/2, **0,138 USD**. 532 Besitzerpositionen exakt zugeordnet, 87 mit Zahl, 445 ohne Zahl (nicht als 0 behandeln). 300 Freizeit-Ideen vollständig im Master, mit fachlich begrenzter erster Auswahl; falsche Freizeit-/Kino-/Haushalts-Treffer nicht zu neuen Typseiten machen.
+- **Originalbericht im SEO-Büro:** `/robotik/SEO-Berichte/robotik-dataforseo-532-und-freizeit-gesamtbericht-20261115.json`. Echte Top-Prioritäten: Fensterputzroboter 90.500, Mähroboter 60.500, Saugroboter 49.500, Poolroboter 18.100; Humanoide Übersichtsseite 12.100. Angaben sind Anbieter-Suchvolumina, keine Besucherprognosen.
+- **Ab jetzt keine neue bezahlte DataForSEO-Abfrage nötig.** Redaktionelle SEO-Inhalte/Keyword-Intent in bestehende Fachrubriken einordnen. Alt-WP-Abschluss V78 dokumentiert; V84-Neuseiten 16/32 nicht live nachgewiesen, keinerlei WordPress-Änderungen durch SEO-Abgleich.
+
 ## AKTUELL V88 (15.11.2026) – SEO-PLUGIN 0.4.15 GETESTET UND BEREIT
 - **Fortlaufender Robotik-Fachstand:** [KATEGORIEN_AKTUELL.md](KATEGORIE/KATEGORIEN_AKTUELL.md) (V88) und einziger maschinenlesbarer Fachmaster `KATEGORIE/RECHERCHE/PRODUKTE_V2_20261108.json` (Rev24).
 - **Fertige bestehende Pluginidentität:** `robotik-kategorie-workflow` **0.4.15** mit 532er Google-Ads-Suchvolumen-Sammellauf und 17er Freizeit-Ideenlauf. Ein Admin-Freigabeklick, maximal 0,20 USD; historische 437er-/38er-Ausgaben geschützt, alter Bezahllauf für Neustart gesperrt. Alle 12 PHP-Dateien und WordPress-Mocktests PASS, kein echter API-Aufruf und keine WordPress-Live-Änderung.
