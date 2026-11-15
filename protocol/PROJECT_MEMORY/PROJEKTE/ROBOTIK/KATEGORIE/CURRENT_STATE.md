@@ -1,5 +1,10 @@
 # ROBOTIK / KATEGORIE – EINZIGER AKTUELLER STATUS
 
+## FACHLICHER KATEGORIENABSCHLUSS V85 – 15.11.2026
+- **Endgültige, vollständig aus den freigegebenen Dateien abgeleitete Baumübersicht:** [KATEGORIEN_ABSCHLUSS_V85_20261115.md](KATEGORIEN_ABSCHLUSS_V85_20261115.md). **Keine zweite Produktdatenbank**, einziger Master bleibt `RECHERCHE/PRODUKTE_V2_20261108.json` Rev20.
+- **Verifiziert im SOLL:** 8 Hauptbereiche, **204 eindeutige Seitenpositionen** = 47 Gruppen-/Zwischenseiten + 157 letzte Robotertypseiten; dazu **328 zugeordnete Inhaltsrubriken** mit je mindestens drei vorgesehenen Themenansätzen. Keine doppelten Seitenpfade, fehlenden Eltern, verwaisten Rubriken oder Typseiten ohne Rubrik. Die 48 alten Hold-Rubriken wurden aus der V52-Freigabevorlage abgeglichen; tatsächliche WordPress-Bezeichnungen nicht einzeln ausgelesen.
+- **Ausführungsstand sauber getrennt:** V78-Altabschluss liegt als WordPress-Bericht vor (188 Seitenpositionen/296 Kategorien); **V84 zusätzlich 16+32 bleibt live offen**, obwohl fachlich freigegeben und technisch simuliert. Zum Kategorieabschluss fachlich **keine weiteren offenen Entscheidungen oder Recherchen**; verbleibt ausschließlich eine gebündelte Backend-Freigabe des bereits vorhandenen 0.4.14-Plugins und deren realer Abschlussbericht.
+
 ## AKTUELLER LIVE-NACHWEIS 15.11.2026 – ALTABSCHLUSS BESTAETIGT, V84-NACHTRAG NOCH OFFEN
 - **Vom Nutzer gelieferter echter WordPress-Abschlussbericht** `robotik-gesamtabschluss-20261115-122514(1).json`, Schema `robotik-v78-einmaliger-gesamtabschluss-v1`, Status `COMPLETE`, `approved_once=true`, `finished_utc=2026-11-15T10:47:16+00:00`. Es handelt sich um den **ALTEN** Einmal-Gesamtabschluss, nicht um die neue V84-Freigabe.
 - **Nachgewiesen im alten Lauf:** 227/227 geprüfte Importpositionen; 104/104 ursprüngliche Seiten veröffentlicht; 68/68 neue Seiten veröffentlicht; alter `followup` 64/64 (16 ältere Seiten + 48 ältere WP-Kategorien). Bericht bestätigt den früheren Sollbestand mit 188 Seitenpositionen und 296 WP-Kategorien. Als vom Bericht behaupteter abgeschlossener WordPress-Lauf gekennzeichnet, keine unabhängige externe Frontend-Messung.
