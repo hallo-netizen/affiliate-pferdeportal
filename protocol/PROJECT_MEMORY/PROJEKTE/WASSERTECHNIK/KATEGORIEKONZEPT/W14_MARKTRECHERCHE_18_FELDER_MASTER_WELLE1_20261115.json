@@ -7,11 +7,14 @@
     "W12_previous_candidates": 26
   },
   "counts": {
-    "new_distinct_research_names": 87,
+    "research_names_found": 87,
     "fields_touched": 18,
-    "topic_categories": 87,
-    "article_directions": 261,
-    "overlap_cases": 45
+    "distinct_new_function_candidates": 85,
+    "internal_synonyms_or_duplicates": 2,
+    "editorial_depth_examples": 261,
+    "article_categories_as_research_options": 87,
+    "intent_cases_in_distinct_candidates": 43,
+    "high_confidence_function_candidates": 42
   },
   "per_field": {
     "1": 5,
@@ -35,9 +38,10 @@
   },
   "status_counts": {
     "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT": 42,
-    "INTENT_GRENZFALL": 45
+    "INTENT_GRENZFALL": 43,
+    "GLEICHE_FUNKTION_QUERVERWEIS": 2
   },
-  "validation": "Unique product name vs all 79 W4 and 26 W12, one proposed contextual category and 3 distinct article directions per new research name; no live SERP or SEO search volume validation. Cross-function/intent overlaps flagged and not approved for WP.",
+  "validation": "87 researched labels: 2 function-equivalent same-source aliases explicitly merged, thus at most 85 additional distinct functional research candidates, including 43 intent/technical overlaps unresolved. 3 editorial ideas for each observed label are NOT yet final publishable taxonomy. Existing W4/W12 labels compared exactly; no live SEO or SERP verification.",
   "items": [
     {
       "research_field": 1,
@@ -683,8 +687,8 @@
       "research_field": 8,
       "product": "Automatische Wasser-Nachspeiseeinheit",
       "source_url": "https://www.intewa.com/de/produkte-fuer-wasseraufbereitung-und-wiederverwendung-sowie-regenwasser-management/",
-      "status": "INTENT_GRENZFALL",
-      "overlap_note": "Siehe Feld 02 Nachspeisesteuerung; nur ein Owner für diese Funktion!",
+      "status": "GLEICHE_FUNKTION_QUERVERWEIS",
+      "overlap_note": "Gleiche fachliche Funktion wie W14 Regenwasser-Nachspeisesteuerung; eine Produktseite statt zweier konkurrierender SEO-Owner.",
       "content_category": {
         "name": "Nachspeisemanagement",
         "article_ideas": [
@@ -693,7 +697,8 @@
           "Fehler und Ventilstörungen an Nachspeisesystemen erkennen"
         ]
       },
-      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen.",
+      "canonical_product_candidate": "Regenwasser-Nachspeisesteuerung"
     },
     {
       "research_field": 9,
@@ -971,8 +976,8 @@
       "research_field": 13,
       "product": "Fertig-Abwasserpumpstation",
       "source_url": "https://www.aco-haustechnik.de/produkte/",
-      "status": "INTENT_GRENZFALL",
-      "overlap_note": "Siehe Feld 03 Entwässerungs-Pumpstation; diese beiden sind derselbe mögliche Owner.",
+      "status": "GLEICHE_FUNKTION_QUERVERWEIS",
+      "overlap_note": "Gleiche fachliche Funktion wie W14 Entwässerungs-Pumpstation; eine Produktseite statt zweier konkurrierender SEO-Owner.",
       "content_category": {
         "name": "Abwasserförderung außerhalb des Hauses",
         "article_ideas": [
@@ -981,7 +986,8 @@
           "Doppelpumpensteuerung und Alarm bei Abwasserpumpstationen wählen"
         ]
       },
-      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen.",
+      "canonical_product_candidate": "Entwässerungs-Pumpstation"
     },
     {
       "research_field": 13,
