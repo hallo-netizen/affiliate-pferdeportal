@@ -75,3 +75,7 @@ Der gesamte W18-Forschungsbestand von **275** Produktbezeichnungen wurde nun in 
 
 ## W20 – 15.11.2026: Register und Funktionsgrenzen
 W20-Einzelmaster 392 Datensätze (298/72/22) und 50 fortgeschriebene W19-Funktionsvergleichspaare (34 begründet getrennt, 1 Alias, 15 offen) vor dem Speichern kontrolliert; eindeutige IDs, gültiges kontrolliertes Vokabular, vorhandene Verweise und 3 unterschiedliche Beitragsideen für alle 8 neuen Produkttypkandidaten. W4 79 WordPress-Owner und W5-Suchvolumen nicht geändert. W20-Bericht unter `../REGISTER_GLOSSAR/W20_FUNKTIONSCHECK_UND_PRODUKTLUECKEN_GESAMTSTAND_20261115.md`. Keine WordPress-/Plugin-/SEO-API-Aktion.
+
+
+## W21 – 15.11.2026: Register-/Quellenstand
+406 IDs/Einträge mit Typen 306/76/24, Referenzen, kontrolliertem Vokabular und je >=3 verschiedenen Artikelideen pro neuem Produkt nach Datenabgleich geprüft. 50 Funktionsfälle 43 getrennt, 1 Alias, 6 offen. Per-Produkt-Parallelentscheidungen entfernt, nur Vergleichsreferenzen, eine entscheidende Vergleichsliste. Nachweis `../REGISTER_GLOSSAR/W21_BREITRECHERCHE_FUNKTIONSKLAERUNG_GESAMTSTAND_20261115.md`. Kein WordPress/Plugin/SEO-Schreiben.
