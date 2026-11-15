@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Horseware-Regendecken und ihre Unterschiede bei Schnitt und Ausstattung",
+      "target_keyword": "horseware regendecken",
+      "category": "pferdedecken-regendecken-vergleich",
+      "article_type": "Vergleich",
+      "plan_slot": "9221a640f9bba8b62c6444ccc808d0c7e3a9ce1b5f47ef81bee72cf5b6866a8a"
+    }
+  ],
+  "batch_sha256": "24b3ac26694c994295acab6c872821e073a2e47ab27fea4d8577cf56f27ba20f"
+}
