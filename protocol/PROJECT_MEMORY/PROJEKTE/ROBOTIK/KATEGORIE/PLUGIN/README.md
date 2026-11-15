@@ -1,5 +1,8 @@
 # Robotik – Pluginbüro / Kategorie-Workflow
 
+## AKTUELL 15.11.2026 – EINZIGES KATEGORIEPLUGIN 0.4.13
+`CURRENT.zip` = `VERSIONEN/0.4.13.zip`: Vollständiges geprüftes Update. **0.4.12 hatte eine nachgewiesene Lücke:** Vor 68 neu veröffentlichten Seiten verlangt das Plugin **104 bereits veröffentlichte Altseiten**, führte diese aber im Einmalablauf selbst nicht aus. **0.4.13 integriert den schon vorhandenen alten 104er-Veröffentlichungsworker.** Ablauf: 227 (fortsetzen) → 104 veröffentlichen → 68 veröffentlichen → 16 Typseiten/48 Rubriken, alles mit **einer** Gesamtfreigabe. Keine Änderung an Design/Frontend, keine neue Google-Abfrage. CI mit ZIP, PHP-Lint und Gesamtsimulation PASS: https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43704446763. Echter WordPress-Liveabschluss weiterhin offen. Details `V79_104_ALTSEITEN_SICHTBARKEIT_20261115.md`. Ältere Versionsempfehlungen sind historisch.
+
 ## AKTUELL 15.11.2026 – EINZIGE INSTALLATIONSVERSION 0.4.12
 **KISS-Endversion:** `PLUGIN/CURRENT.zip` = `PLUGIN/VERSIONEN/0.4.12.zip`. Nur **ein** Plugin-Update und **eine** Gesamtfreigabe in WordPress unter `Robotik Kategorie → Gesamtabschluss (einmalig)`. Danach folgen Import 227/227 (mit dem vorhandenen Index), 68er Veröffentlichung und 16+48-Nachtrag **automatisch**, zum Schluss ein Gesamtbericht. Keine alten Einzelmenüs, neue Google-Sperre oder kostenpflichtigen API-Aufrufe. Bereits getroffene fachliche Entscheidungen werden nicht wiederholt.
 **Echte GitHub-Abnahme:** <https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43701031122> vollständig erfolgreich, inklusive simuliertem Start bei 16/227 und Wiederaufnahme nach BLOCKED. **Noch kein WordPress-Liveabschluss**.
