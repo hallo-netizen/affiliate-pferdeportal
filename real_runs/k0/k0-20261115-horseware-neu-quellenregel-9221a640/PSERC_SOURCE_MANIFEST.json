@@ -1,0 +1,399 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "oliver-beil.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 20,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Horseware-Regendecken und ihre Unterschiede bei Schnitt und Ausstattung",
+        "target_keyword": "horseware regendecken",
+        "category": "pferdedecken-regendecken-vergleich",
+        "article_type": "Vergleich",
+        "plan_slot": "9221a640f9bba8b62c6444ccc808d0c7e3a9ce1b5f47ef81bee72cf5b6866a8a"
+      },
+      {
+        "title": "Regendecken für Ponys mit der richtigen Größe und Passform finden",
+        "target_keyword": "regendecken für ponys",
+        "category": "pferdedecken-regendecken-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "0166d8f649e72a4678d69ab6bbfb78a4e563bad8d08372989fd7fc8a8a228258"
+      },
+      {
+        "title": "Günstige Regendecken für Pferde und worauf es beim Kauf ankommt",
+        "target_keyword": "günstige regendecken für pferde",
+        "category": "pferdedecken-regendecken-kosten",
+        "article_type": "Kosten",
+        "plan_slot": "5e28d78d17ef4bad6dd8d5508886575a4524ec7256a162a87db05704a4bf67ed"
+      },
+      {
+        "title": "Regendecken für Pferde im Sale kaufen und Fehlkäufe vermeiden",
+        "target_keyword": "regendecken sale",
+        "category": "pferdedecken-regendecken-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "9ac55f0fc11d5d50e2691b8ab0ce996d6a5b9b87439aba90d3413277070f8176"
+      },
+      {
+        "title": "Regendecken von Krämer nach Passform und Ausstattung auswählen",
+        "target_keyword": "regendecken krämer",
+        "category": "pferdedecken-regendecken-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "a6f8352d1e704ed2334a0abdc50af37fb246bb9d94adc5337f50b0632fcada08"
+      },
+      {
+        "title": "Die Unterschiede zwischen Regendecken und anderen Pferdedecken",
+        "target_keyword": "pferdedecken regendecken",
+        "category": "pferdedecken-regendecken-vergleich",
+        "article_type": "Vergleich",
+        "plan_slot": "ee9e119db508fc0b5d7b746963ae876d24bf8633e214d10b1fd9198fc33118cf"
+      },
+      {
+        "title": "Gut sitzende Regendecken für Shetlandponys finden",
+        "target_keyword": "shetty regendecken",
+        "category": "pferdedecken-regendecken-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "1a4889ac8d36d373c901e384c787ca58458a3279f97289f584e75cf1b0627b14"
+      },
+      {
+        "title": "Magnetfeld-Gamaschen für Pferde und was über ihre Wirkung bekannt ist",
+        "target_keyword": "magnetfeld gamasche pferd",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Journal",
+        "plan_slot": "fc0df9a19f7b36915477e616ee60403fb756c5bdf1fd61a1282f91b79a6af823"
+      },
+      {
+        "title": "Pferdesolarium selber bauen und mögliche Sicherheitsrisiken kennen",
+        "target_keyword": "solarium pferd selber bauen",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "Anleitung",
+        "plan_slot": "286101d6527727f673503de630a1ca8bb30040a808c2f5cdc504e54d269fbd9a"
+      },
+      {
+        "title": "Welches Pferd gilt als das teuerste Deutschlands?",
+        "target_keyword": "teuerstes pferd deutschland",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "Journal",
+        "plan_slot": "7ef097950eaf095bbe7452cc974db5be28fd573e6c0d876534a2dffc6d262cfb"
+      },
+      {
+        "title": "Eine Pferdefigur aus Bronze als Geschenk oder Dekoration auswählen",
+        "target_keyword": "bronzefigur pferd",
+        "category": "reiterleben-community",
+        "article_type": "Beratung",
+        "plan_slot": "85bec9ce6c437fb58376a948f5d312ef280c2480c91b110c8ef42a492425e1ae"
+      },
+      {
+        "title": "Eine passende Überwachungskamera für den Pferdestall finden",
+        "target_keyword": "überwachungskamera pferd",
+        "category": "kameras-im-stall-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "e7f86ee1bdfba0b52de2e5d1dad65ce6af81bdc8098b24d16c0d7ad2df0b02a6"
+      },
+      {
+        "title": "Ein zuverlässiges Transportunternehmen für Pferde finden",
+        "target_keyword": "transportunternehmen pferd",
+        "category": "reiterleben-community",
+        "article_type": "Beratung",
+        "plan_slot": "6fbc3ed89e4c3b99c15837343195750ef2e4bb41aec52060d33774257be94909"
+      },
+      {
+        "title": "Wasserführanlagen für Pferde und ihre Einsatzmöglichkeiten",
+        "target_keyword": "wasserführanlage pferd",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Journal",
+        "plan_slot": "517b5cf27b2521ac13004a52b690224c2d0dce36b2a2f859e0325b5a9cd46cd7"
+      },
+      {
+        "title": "Hilft Lebermoos tatsächlich gegen Pilzprobleme beim Pferd?",
+        "target_keyword": "lebermoos pferd pilz",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Journal",
+        "plan_slot": "1b485b94e12660a4f06c5bb9bfef10d76a996b126ba56f0adc5dcb4494ccc546"
+      },
+      {
+        "title": "Fliegeneier beim Pferd erkennen und entfernen",
+        "target_keyword": "fliegeneier pferd",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Anleitung",
+        "plan_slot": "44405551f15bdc9639bf0d5a50489fd75b1037bf66ad522d2502e3f8f9e32e52"
+      },
+      {
+        "title": "Aufbau und Funktion der Eierstöcke bei der Stute",
+        "target_keyword": "eierstöcke pferd",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Journal",
+        "plan_slot": "49bcef6e0ddb8bb8335f0ca35e1f3cb529b9d0fdee414b1ccbbf01e1d5405141"
+      },
+      {
+        "title": "Gebrauchte Pferdeeinstreu richtig kompostieren",
+        "target_keyword": "kompost einstreu pferd",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "Anleitung",
+        "plan_slot": "b14e426bd68f085ad0a0395da4d6d87ccdf9c3ecdbd9e60a1ca88c762d43daff"
+      },
+      {
+        "title": "Pfriemenschwanz-Eier beim Pferd erkennen und einen Befall abklären",
+        "target_keyword": "pfriemenschwanz pferd eier",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Journal",
+        "plan_slot": "4e3f6e24c8ef0558a11ea2db5cfe97a30bca76783a874097f8ecd6001d864821"
+      },
+      {
+        "title": "Ein individuelles Namensschild für die Pferdebox selber machen",
+        "target_keyword": "namensschild pferd selber machen",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "Anleitung",
+        "plan_slot": "465ca939a236357828fcf0019279a3c3157532ce3e26b6dcca129c1ffa8e272a"
+      }
+    ],
+    "batch_sha256": "b42c66f32837264bafcd505dd53f0da797e142274ccaefdc2fe882f3352b323b"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Horseware-Regendecken und ihre Unterschiede bei Schnitt und Ausstattung",
+        "target_keyword": "horseware regendecken",
+        "category": "pferdedecken-regendecken-vergleich",
+        "article_type": "Vergleich",
+        "plan_slot": "9221a640f9bba8b62c6444ccc808d0c7e3a9ce1b5f47ef81bee72cf5b6866a8a"
+      },
+      "order_id": "TXE-28fe244e1ca82a090e8d175fa8a236d6",
+      "article_id": "article:1ace0cb0ccea0cee8701b324",
+      "search_intent": "Markenberatung"
+    },
+    {
+      "metadata_binding": {
+        "title": "Regendecken für Ponys mit der richtigen Größe und Passform finden",
+        "target_keyword": "regendecken für ponys",
+        "category": "pferdedecken-regendecken-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "0166d8f649e72a4678d69ab6bbfb78a4e563bad8d08372989fd7fc8a8a228258"
+      },
+      "order_id": "TXE-cd9d24726aa37110d8794d2bead8fdf3",
+      "article_id": "article:d1711e53b70209b2d7f73855",
+      "search_intent": "Kaufberatung – Pony"
+    },
+    {
+      "metadata_binding": {
+        "title": "Günstige Regendecken für Pferde und worauf es beim Kauf ankommt",
+        "target_keyword": "günstige regendecken für pferde",
+        "category": "pferdedecken-regendecken-kosten",
+        "article_type": "Kosten",
+        "plan_slot": "5e28d78d17ef4bad6dd8d5508886575a4524ec7256a162a87db05704a4bf67ed"
+      },
+      "order_id": "TXE-b2a12fbb6f31d28228204922cd2fcb64",
+      "article_id": "article:52e8eb597960c84a98c699fa",
+      "search_intent": "Preisberatung"
+    },
+    {
+      "metadata_binding": {
+        "title": "Regendecken für Pferde im Sale kaufen und Fehlkäufe vermeiden",
+        "target_keyword": "regendecken sale",
+        "category": "pferdedecken-regendecken-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "9ac55f0fc11d5d50e2691b8ab0ce996d6a5b9b87439aba90d3413277070f8176"
+      },
+      "order_id": "TXE-0bef2dc3603cc31985dd0255f02cb24e",
+      "article_id": "article:d09b425e50a56e2bb2194398",
+      "search_intent": "Schnäppchenkauf – Beratung"
+    },
+    {
+      "metadata_binding": {
+        "title": "Regendecken von Krämer nach Passform und Ausstattung auswählen",
+        "target_keyword": "regendecken krämer",
+        "category": "pferdedecken-regendecken-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "a6f8352d1e704ed2334a0abdc50af37fb246bb9d94adc5337f50b0632fcada08"
+      },
+      "order_id": "TXE-87e814400bf41c68c5cc1fe5f47fd9da",
+      "article_id": "article:0ef2c1902bf299cef01e5af4",
+      "search_intent": "Händlerberatung"
+    },
+    {
+      "metadata_binding": {
+        "title": "Die Unterschiede zwischen Regendecken und anderen Pferdedecken",
+        "target_keyword": "pferdedecken regendecken",
+        "category": "pferdedecken-regendecken-vergleich",
+        "article_type": "Vergleich",
+        "plan_slot": "ee9e119db508fc0b5d7b746963ae876d24bf8633e214d10b1fd9198fc33118cf"
+      },
+      "order_id": "TXE-1f5642eb03d6a8337b13e0c0ff6f6a81",
+      "article_id": "article:e65cd9c4febfcf17bc2ec3de",
+      "search_intent": "Deckenarten – Grundlagen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Gut sitzende Regendecken für Shetlandponys finden",
+        "target_keyword": "shetty regendecken",
+        "category": "pferdedecken-regendecken-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "1a4889ac8d36d373c901e384c787ca58458a3279f97289f584e75cf1b0627b14"
+      },
+      "order_id": "TXE-08f27fc3a095a226cd00582b415739c4",
+      "article_id": "article:0c590fb554394fd01b1a3058",
+      "search_intent": "Kaufberatung – Shetlandpony"
+    },
+    {
+      "metadata_binding": {
+        "title": "Magnetfeld-Gamaschen für Pferde und was über ihre Wirkung bekannt ist",
+        "target_keyword": "magnetfeld gamasche pferd",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Journal",
+        "plan_slot": "fc0df9a19f7b36915477e616ee60403fb756c5bdf1fd61a1282f91b79a6af823"
+      },
+      "order_id": "TXE-59d5f1d3ce2f7ceab0faad86fdddb099",
+      "article_id": "article:40c79221f21fe76ff3057d6c",
+      "search_intent": "Produktberatung mit Evidenzeinordnung"
+    },
+    {
+      "metadata_binding": {
+        "title": "Pferdesolarium selber bauen und mögliche Sicherheitsrisiken kennen",
+        "target_keyword": "solarium pferd selber bauen",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "Anleitung",
+        "plan_slot": "286101d6527727f673503de630a1ca8bb30040a808c2f5cdc504e54d269fbd9a"
+      },
+      "order_id": "TXE-460afd53335bcbd17330c84e2905dcb2",
+      "article_id": "article:62a130da484f70ba3efd9662",
+      "search_intent": "Sicherheit – Eigenbau"
+    },
+    {
+      "metadata_binding": {
+        "title": "Welches Pferd gilt als das teuerste Deutschlands?",
+        "target_keyword": "teuerstes pferd deutschland",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "Journal",
+        "plan_slot": "7ef097950eaf095bbe7452cc974db5be28fd573e6c0d876534a2dffc6d262cfb"
+      },
+      "order_id": "TXE-118f738b9a042db523863dd4bef9a740",
+      "article_id": "article:7540f3dfab7707ec25f14427",
+      "search_intent": "Pferdemarkt – Spitzenpreise"
+    },
+    {
+      "metadata_binding": {
+        "title": "Eine Pferdefigur aus Bronze als Geschenk oder Dekoration auswählen",
+        "target_keyword": "bronzefigur pferd",
+        "category": "reiterleben-community",
+        "article_type": "Beratung",
+        "plan_slot": "85bec9ce6c437fb58376a948f5d312ef280c2480c91b110c8ef42a492425e1ae"
+      },
+      "order_id": "TXE-dd7416ecfa1c7deb529361f0c22d5931",
+      "article_id": "article:406d5b97f7583012b4c11b39",
+      "search_intent": "Geschenk- und Dekorationsberatung"
+    },
+    {
+      "metadata_binding": {
+        "title": "Eine passende Überwachungskamera für den Pferdestall finden",
+        "target_keyword": "überwachungskamera pferd",
+        "category": "kameras-im-stall-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "e7f86ee1bdfba0b52de2e5d1dad65ce6af81bdc8098b24d16c0d7ad2df0b02a6"
+      },
+      "order_id": "TXE-873ff0219ea9b494fee027a50eb1d45f",
+      "article_id": "article:0ff9caa0cbbfd151c6318ae4",
+      "search_intent": "Kaufberatung – Stallüberwachung"
+    },
+    {
+      "metadata_binding": {
+        "title": "Ein zuverlässiges Transportunternehmen für Pferde finden",
+        "target_keyword": "transportunternehmen pferd",
+        "category": "reiterleben-community",
+        "article_type": "Beratung",
+        "plan_slot": "6fbc3ed89e4c3b99c15837343195750ef2e4bb41aec52060d33774257be94909"
+      },
+      "order_id": "TXE-9b8d92fad98dfac7537393b49293c59f",
+      "article_id": "article:805e2422ff7b943a7dc72d92",
+      "search_intent": "Dienstleisterauswahl – Transport"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wasserführanlagen für Pferde und ihre Einsatzmöglichkeiten",
+        "target_keyword": "wasserführanlage pferd",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Journal",
+        "plan_slot": "517b5cf27b2521ac13004a52b690224c2d0dce36b2a2f859e0325b5a9cd46cd7"
+      },
+      "order_id": "TXE-5997bbefd4b567cef7b8ba9642ff590d",
+      "article_id": "article:c0e9a6e802db1bc1c0fd3f99",
+      "search_intent": "Gesundheit und Training – Wasserführanlage"
+    },
+    {
+      "metadata_binding": {
+        "title": "Hilft Lebermoos tatsächlich gegen Pilzprobleme beim Pferd?",
+        "target_keyword": "lebermoos pferd pilz",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Journal",
+        "plan_slot": "1b485b94e12660a4f06c5bb9bfef10d76a996b126ba56f0adc5dcb4494ccc546"
+      },
+      "order_id": "TXE-9300e16dc61583767332c5dec20beeb7",
+      "article_id": "article:38963fc4b80cd8cc50727a4b",
+      "search_intent": "Gesundheit – Wirksamkeit kritisch einordnen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Fliegeneier beim Pferd erkennen und entfernen",
+        "target_keyword": "fliegeneier pferd",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Anleitung",
+        "plan_slot": "44405551f15bdc9639bf0d5a50489fd75b1037bf66ad522d2502e3f8f9e32e52"
+      },
+      "order_id": "TXE-21af45579bb4175bbbfe1e77baa1539f",
+      "article_id": "article:e069b1d7ea7e98cde91d83a9",
+      "search_intent": "Parasiten – Erkennen und Vorbeugen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Aufbau und Funktion der Eierstöcke bei der Stute",
+        "target_keyword": "eierstöcke pferd",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Journal",
+        "plan_slot": "49bcef6e0ddb8bb8335f0ca35e1f3cb529b9d0fdee414b1ccbbf01e1d5405141"
+      },
+      "order_id": "TXE-64bf267990e7fba1224741acccd35794",
+      "article_id": "article:07be97740bbcabb17d39f6b8",
+      "search_intent": "Anatomie und Fortpflanzung"
+    },
+    {
+      "metadata_binding": {
+        "title": "Gebrauchte Pferdeeinstreu richtig kompostieren",
+        "target_keyword": "kompost einstreu pferd",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "Anleitung",
+        "plan_slot": "b14e426bd68f085ad0a0395da4d6d87ccdf9c3ecdbd9e60a1ca88c762d43daff"
+      },
+      "order_id": "TXE-4367da1046937e739f33897ce7d0e1df",
+      "article_id": "article:3e5479bc812881ca486ec922",
+      "search_intent": "Stallmanagement – Kompostierung"
+    },
+    {
+      "metadata_binding": {
+        "title": "Pfriemenschwanz-Eier beim Pferd erkennen und einen Befall abklären",
+        "target_keyword": "pfriemenschwanz pferd eier",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Journal",
+        "plan_slot": "4e3f6e24c8ef0558a11ea2db5cfe97a30bca76783a874097f8ecd6001d864821"
+      },
+      "order_id": "TXE-571eb9bfc818f73e964033a63ce439ff",
+      "article_id": "article:5f8ec609d056cfb44cb74afa",
+      "search_intent": "Parasiten – Pfriemenschwanz"
+    },
+    {
+      "metadata_binding": {
+        "title": "Ein individuelles Namensschild für die Pferdebox selber machen",
+        "target_keyword": "namensschild pferd selber machen",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "Anleitung",
+        "plan_slot": "465ca939a236357828fcf0019279a3c3157532ce3e26b6dcca129c1ffa8e272a"
+      },
+      "order_id": "TXE-801a45e794db56c795348f2459914539",
+      "article_id": "article:902c9d455d51c3e4824e1e36",
+      "search_intent": "Anleitung – Stallbeschriftung"
+    }
+  ],
+  "manifest_sha256": "7ec814794d238e1f3a2df42e85ca5aee4210d401ba5b435310b34a4b81b7d5d1"
+}
