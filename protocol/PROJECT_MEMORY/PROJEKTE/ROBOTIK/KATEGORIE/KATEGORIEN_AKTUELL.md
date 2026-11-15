@@ -2,7 +2,7 @@
 
 ## V87 – Preisgeprüfter einmaliger DataForSEO-Nachlauf vorbereitet (15.11.2026)
 
-**Einmaliger Nachlauf als fachlich fertige Freigabevorlage, aber noch nicht kostenpflichtig ausgeführt.** Alle Aufgaben sind im **einzigen** Fachmaster `RECHERCHE/PRODUKTE_V2_20261108.json` Revision **22**, Feld `seo_nachlauf_v87`, gespeichert. Die Datei hier ist nur die lesbare, fortlaufend gepflegte Auswertung, **kein weiterer Master**.
+**Einmaliger Nachlauf als fachlich fertige Freigabevorlage, aber noch nicht kostenpflichtig ausgeführt.** Alle Aufgaben sind im **einzigen** Fachmaster `RECHERCHE/PRODUKTE_V2_20261108.json` Revision **23**, Feld `seo_nachlauf_v87`, gespeichert. Die Datei hier ist nur die lesbare, fortlaufend gepflegte Auswertung, **kein weiterer Master**.
 
 ### Gesamte Suchabdeckung statt nur Robotertypen
 
@@ -15,7 +15,7 @@
 
 Ein sauberer Begriff wurde jeder Position mit **festem Owner und eindeutiger Herkunft** zugeordnet. Einfache, aber irreführende Begriffe wurden konkretisiert, z. B. **`robotische knieprothese`** statt `knieprothesen`, **`servierroboter zuhause`** statt allgemeinem `servierroboter` für die private Seite und **`industrieroboter logistik`** für die betreffende Industrie-Landingpage. Bei den 63 alten generischen `Kaufberatung`-Rubriken wurden die bereits erarbeiteten konkreten Kategorievorschläge verwendet; **keine Live-Umbenennung**. Die 532 Begriffe sind **Startpunkte für Messungen**, noch keine nachgewiesenen Suchvolumina und keine Garantie passender Suchabsicht.
 
-**Validiert:** 47/47 Gruppenbegriffe, 157/157 Robotertypbegriffe und 328/328 Rubrikbegriffe; **0 doppelte Suchbegriffe**, **0 Verletzungen des Limits von 80 Zeichen oder zehn Wörtern**. Jede Wortfolge bleibt ihrem ursprünglichen, eindeutig belegten Seiteneigentümer zugeordnet. Die 16+32 V84-Objekte sind vollständig enthalten.
+**Zusätzliche Zeichenkontrolle:** Drei Suchbegriffe rund um Sä-/Jätroboter wurden für die Anbieterabfrage ohne Schrägstrich formuliert. Seiten- und Rubriknamen bleiben unverändert. **Validiert:** 47/47 Gruppenbegriffe, 157/157 Robotertypbegriffe und 328/328 Rubrikbegriffe; **0 doppelte Suchbegriffe**, **0 Verletzungen des Limits von 80 Zeichen oder zehn Wörtern**. Jede Wortfolge bleibt ihrem ursprünglichen, eindeutig belegten Seiteneigentümer zugeordnet. Die 16+32 V84-Objekte sind vollständig enthalten.
 
 ### Der einzige kostenpflichtige Nachlauf – erst mit ausdrücklicher Freigabe
 
@@ -30,7 +30,7 @@ Ein sauberer Begriff wurde jeder Position mit **festem Owner und eindeutiger Her
 
 ### Reihenfolge und Status
 
-**Jetzt erledigt:** 532 eindeutige Startbegriffe, 17 Freizeit-Seeds, Anbieter-Preis-/Grenzprüfung, Zuordnung im zentralen Master Rev22 und kostenfreie Gesamtabnahme des Suchplans. **Noch offen:** Kostenfreigabe durch den Nutzer, fertig getestete vorhandene Plugin-Weiterentwicklung für diese zwei Aufgaben, tatsächlicher DataForSEO-Bericht, fachlicher Soll-/Ist-SEO-Abgleich anhand der echten Messwerte. Die WordPress-Seiten und V84-Veröffentlichung bleiben vollständig getrennt.
+**Jetzt erledigt:** 532 eindeutige Startbegriffe, 17 Freizeit-Seeds, Anbieter-Preis-/Grenzprüfung, Zuordnung im zentralen Master Rev23 und kostenfreie Gesamtabnahme des Suchplans. **Noch offen:** Kostenfreigabe durch den Nutzer, fertig getestete vorhandene Plugin-Weiterentwicklung für diese zwei Aufgaben, tatsächlicher DataForSEO-Bericht, fachlicher Soll-/Ist-SEO-Abgleich anhand der echten Messwerte. Die WordPress-Seiten und V84-Veröffentlichung bleiben vollständig getrennt.
 
 **Versionsregel:** V87 ist eine Fortschreibung **dieser selben Datei**, keine weitere `ABSCHLUSS_V87`-Datei. Der einzige Fachmaster bleibt das genannte JSON; frühere V85/V86-Zeilen dienen der nachvollziehbaren Historie.
 
