@@ -5019,7 +5019,7 @@
     }
   ],
   "canonical_source": true,
-  "revision": 16,
+  "revision": 17,
   "research_state": "UNAPPROVED",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
@@ -9182,7 +9182,45 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "research_v82": {
+        "date": "2026-11-15",
+        "candidate_id": "V82-01",
+        "additional_usecase": "Hausüberwachungsroboter (neuer Funktionskontext)",
+        "path": [
+          "Haushalt",
+          "Hausüberwachungsroboter"
+        ],
+        "existing_parent_source_id": "rbt_a7b82adfb00b8fd4",
+        "evidence": [
+          {
+            "name": "Enabot EBO Air 2 Plus",
+            "url": "https://www.enabot.com/de/home-robot/ebo-air-2-plus"
+          }
+        ],
+        "facet_suggestions": [
+          {
+            "name": "Überwachung",
+            "topics": [
+              "Wohnräume auf Patrouillenrouten prüfen",
+              "Ereignisse erkennen und aufzeichnen",
+              "Hausüberwachung gegenüber Haustierbeobachtung abgrenzen"
+            ]
+          },
+          {
+            "name": "Datenschutz",
+            "topics": [
+              "Familienkonten und Kamera-Zugriffsrechte",
+              "App-Benachrichtigungen und Aufzeichnung",
+              "Nutzung bei Besuch und gemeinsam genutzten Wohnräumen"
+            ]
+          }
+        ],
+        "duplicate_policy": "rf143 Mobile Haustier-Überwachungsroboter schon Forschungs-ID: dieselben Enabot-Geräte nicht zweimal registrieren; Haushalts-Nutzung als Kontextseite, nicht zweiter Modell-Owner",
+        "stage": "Produkt",
+        "site_publish": "NICHT_FREIGEGEBEN",
+        "verification": "HERSTELLER_OFFIZIELL"
+      }
     },
     {
       "id": "rf144",
@@ -9547,6 +9585,18 @@
         "generated_from": "2026-11-10 manufacturer function/market evidence and editorial review, not keyword data",
         "keyword_research_done": false,
         "approved_for_wordpress": false
+      },
+      "research_v82": {
+        "date": "2026-11-15",
+        "additional_official_evidence": "https://farm.bot/",
+        "manufacturer": "FarmBot Genesis",
+        "stage": "Produkt (v1.8 gelistet, v1.9 Vorbestellung)",
+        "existing_wp_parent": [
+          "Garten",
+          "Beetroboter"
+        ],
+        "decision": "KEINE_NEUE_TYPSEITE",
+        "reason": "Saen, Bewaessern und Beetpflege sind Funktionen desselben FarmBot-Modells, nicht drei Robotertypen. Bereits Garten > Beetroboter in V62."
       }
     },
     {
@@ -11148,6 +11198,270 @@
         "wp_release": "NICHT_FREIGEGEBEN",
         "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
         "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
+      }
+    },
+    {
+      "id": "rf184",
+      "name": "Robotische Teleskope",
+      "topic_kind": "V82_NISCHE_ROBOTERTYP_FACHVORSCHLAG_NICHT_WP",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Freizeit",
+      "source_url": "https://vaonis.com/products/vespera-3",
+      "evidence_grade": "HERSTELLER_PRODUKTBELEG",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "research_v82": {
+        "research_id": "rf184",
+        "candidate_id": "V82-02",
+        "title": "Robotische Teleskope",
+        "world": "Freizeit",
+        "path": [
+          "Freizeit",
+          "Robotische Teleskope"
+        ],
+        "stage": "Produkt",
+        "scope": "Teleskope mit motorischer Himmelsobjekt-Suche, automatischer Nachführung und geplanter Beobachtungsfolge; kein normaler Foto-Tripod und kein Kamerabewegungsroboter für Filmsets.",
+        "models": [
+          {
+            "name": "Vaonis Vespera 3",
+            "url": "https://vaonis.com/products/vespera-3"
+          },
+          {
+            "name": "Vaonis Vespera II",
+            "url": "https://vaonis.com/products/vespera-2"
+          }
+        ],
+        "facets": [
+          {
+            "name": "Beobachtung",
+            "topics": [
+              "Ziel automatisch am Nachthimmel finden",
+              "Sterne und Nebel motorisch nachführen",
+              "Beobachtungssequenzen planen"
+            ]
+          },
+          {
+            "name": "Ausstattung",
+            "topics": [
+              "Optik und Sensorauflösung vergleichen",
+              "Aufstellung und Himmelsausrichtung",
+              "Akkulaufzeit und Steuer-App"
+            ]
+          }
+        ],
+        "duplicate": "Kein eigener Fotodrohnen- oder Filmkameraroboter; Optik/Tracking für Astronomie unterscheidet sich. Hersteller-Modelle im Register einzeln, keine zweite Typsite für Vespera Pro/II/III.",
+        "notes": "Automatisches Teleskop liegt am Rand der Robotik; klare motorische Bewegung/Positionierung, aber keine allgemeine Service-Robotik.",
+        "robotics_boundary": "AUTOMATISIERUNGS_RANDBEREICH: Computergesteuerte motorisierte Zielsuche/Nachführung, nicht ein frei fahrender Roboter.",
+        "parent_existing_source_id": "rbt_4c3b60b5f506ff47",
+        "proposed_wp_write": false,
+        "keyword_status": "NICHT_GEMESSEN_KEINE_URL_SPERRPFLICHT",
+        "site_status": "FACHKANDIDAT_UNVEROEFFENTLICHT",
+        "no_model_duplicate": true
+      }
+    },
+    {
+      "id": "rf185",
+      "name": "Volleyball-Ballmaschinen",
+      "topic_kind": "V82_NISCHE_ROBOTERTYP_FACHVORSCHLAG_NICHT_WP",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Sport",
+      "source_url": "https://sportsattack.com/product/smash-attack-volleyball-machine/",
+      "evidence_grade": "HERSTELLER_PRODUKTBELEG",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "research_v82": {
+        "research_id": "rf185",
+        "candidate_id": "V82-03",
+        "title": "Volleyball-Ballmaschinen",
+        "world": "Sport",
+        "path": [
+          "Sport",
+          "Ballsport",
+          "Volleyball-Ballmaschinen"
+        ],
+        "stage": "Produkt",
+        "scope": "Motorisierte Volleyball-Zuspieltechnik für Aufschlagannahme, Block-/Schlagtraining und Volley; unterscheidet sich vom Tennis-/Badminton-/Baseballzuspiel.",
+        "models": [
+          {
+            "name": "Sports Attack Smash Attack",
+            "url": "https://sportsattack.com/product/smash-attack-volleyball-machine/"
+          },
+          {
+            "name": "Sports Attack Skill Attack",
+            "url": "https://sportsattack.com/product-category/volleyball/volleyball-machines/?wc_view_mode=list"
+          }
+        ],
+        "facets": [
+          {
+            "name": "Training",
+            "topics": [
+              "Aufschlagannahme systematisch wiederholen",
+              "Volleyball-Spins und Ballhöhen",
+              "Zuspiel für Angriffs- und Abwehrübungen"
+            ]
+          },
+          {
+            "name": "Geräte",
+            "topics": [
+              "Aufstellhöhe und Wurfrichtung vergleichen",
+              "Antrieb und Ballzufuhr verstehen",
+              "Transport und Nutzung in Vereinshallen"
+            ]
+          }
+        ],
+        "duplicate": "Gleiche Geräteklasse Volleyball – ein Typ, Modelle im Modellregister. Kein doppelter Universal-Ballmaschinen-Eintrag.",
+        "notes": "Hersteller verkauft unterschiedliche Volleyballmaschinen; motorisierte Wurfautomatik nicht als freifahrender autonomer Trainer ausgeben.",
+        "robotics_boundary": "AUTOMATISIERUNGS_RANDBEREICH: motorisierte Zuspielmaschine, Bediener beaufsichtigt Training.",
+        "parent_existing_source_id": "rbt_c921e3a524a4ad2a",
+        "proposed_wp_write": false,
+        "keyword_status": "NICHT_GEMESSEN_KEINE_URL_SPERRPFLICHT",
+        "site_status": "FACHKANDIDAT_UNVEROEFFENTLICHT",
+        "no_model_duplicate": true
+      }
+    },
+    {
+      "id": "rf186",
+      "name": "Cricket-Ballmaschinen",
+      "topic_kind": "V82_NISCHE_ROBOTERTYP_FACHVORSCHLAG_NICHT_WP",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Sport",
+      "source_url": "https://www.bola.co.uk/shop/bola-professional-bowling-machine",
+      "evidence_grade": "HERSTELLER_PRODUKTBELEG",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "research_v82": {
+        "research_id": "rf186",
+        "candidate_id": "V82-04",
+        "title": "Cricket-Ballmaschinen",
+        "world": "Sport",
+        "path": [
+          "Sport",
+          "Ballsport",
+          "Cricket-Ballmaschinen"
+        ],
+        "stage": "Produkt",
+        "scope": "Cricket-Bowlingmaschinen für unterschiedliche Geschwindigkeiten, Spin/Swing und Trainingssequenzen; keine Baseball-Pitching-Maschine.",
+        "models": [
+          {
+            "name": "BOLA Professional Bowling Machine",
+            "url": "https://www.bola.co.uk/shop/bola-professional-bowling-machine"
+          }
+        ],
+        "facets": [
+          {
+            "name": "Training",
+            "topics": [
+              "Wurfarten und Swing/Spin üben",
+              "Geschwindigkeit und Zielbereich einstellen",
+              "Training ohne menschlichen Bowler planen"
+            ]
+          },
+          {
+            "name": "Betrieb",
+            "topics": [
+              "Optionalen automatischen Ballzuführer abgrenzen",
+              "Akkubetrieb gegenüber Netzbetrieb",
+              "Ballkompatibilität und Aufstellplatz"
+            ]
+          }
+        ],
+        "duplicate": "Cricket ist nicht Baseball: Ball, Wurfbewegung und Training unterscheiden sich; keine zweite Seite pro BOLA-Modell.",
+        "notes": "Automatische Ballzufuhr bei BOLA Professional ist ein ZUSATZTEIL, nicht in jedem Basismodell enthalten.",
+        "robotics_boundary": "AUTOMATISIERUNGS_RANDBEREICH: stationäre motorisierte Bowlingmaschine, kein autonomes mobiles Gerät.",
+        "parent_existing_source_id": "rbt_c921e3a524a4ad2a",
+        "proposed_wp_write": false,
+        "keyword_status": "NICHT_GEMESSEN_KEINE_URL_SPERRPFLICHT",
+        "site_status": "FACHKANDIDAT_UNVEROEFFENTLICHT",
+        "no_model_duplicate": true
+      }
+    },
+    {
+      "id": "rf187",
+      "name": "Fußball-Trainingsroboter",
+      "topic_kind": "V82_NISCHE_ROBOTERTYP_FACHVORSCHLAG_NICHT_WP",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Sport",
+      "source_url": "https://footbot.eu/",
+      "evidence_grade": "HERSTELLER_PRODUKTBELEG",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "research_v82": {
+        "research_id": "rf187",
+        "candidate_id": "V82-05",
+        "title": "Fußball-Trainingsroboter",
+        "world": "Sport",
+        "path": [
+          "Sport",
+          "Ballsport",
+          "Fußball-Trainingsroboter"
+        ],
+        "stage": "Produkt",
+        "scope": "Automatisiertes Ballzuspiel und interaktive Reaktionsübungen; nicht der Torwartroboter, der Schüsse hält.",
+        "models": [
+          {
+            "name": "FOOTBOT Fußball-Trainingssystem",
+            "url": "https://footbot.eu/"
+          }
+        ],
+        "facets": [
+          {
+            "name": "Training",
+            "topics": [
+              "Fußball aus mehreren Richtungen zuspielen",
+              "Reaktion und Ballannahme mit Zielwänden",
+              "Schwierigkeit und Trainingsfolge einstellen"
+            ]
+          },
+          {
+            "name": "Anlagen",
+            "topics": [
+              "Feste Trainingsanlage gegenüber mobiler Ballmaschine",
+              "Ballrückführung und Zielbereich",
+              "Einsatz in Verein und Trainingszentrum"
+            ]
+          }
+        ],
+        "duplicate": "Bereits existierender Sport > Ballsport > Torwartroboter hat andere Aufgabe (Ballabwehr), Football-Balllauncher greift nicht selbst ins Tor.",
+        "notes": "FOOTBOT ist eine ortsfeste, mehrteilige Trainingsanlage. Produktstatus heißt Anbieterbeleg, nicht nachgewiesene Serieninstallationszahl oder Heimlieferbarkeit.",
+        "robotics_boundary": "AUTOMATISIERUNGS_RANDBEREICH: fest installiertes automatisches Fußball-Zuspielsystem für Trainingsanlagen.",
+        "parent_existing_source_id": "rbt_c921e3a524a4ad2a",
+        "proposed_wp_write": false,
+        "keyword_status": "NICHT_GEMESSEN_KEINE_URL_SPERRPFLICHT",
+        "site_status": "FACHKANDIDAT_UNVEROEFFENTLICHT",
+        "no_model_duplicate": true
+      }
+    },
+    {
+      "id": "rf188",
+      "name": "Autonome Mücken-Abfangdrohne",
+      "topic_kind": "V82_PROJEKT_NUR_REGISTER_EXISTIERENDER_TYP",
+      "proposed_owner": "V62 GARTEN_MUECKENFANGROBOTER",
+      "proposed_location": "Garten > Mückenfangroboter",
+      "source_url": "https://tornyol.com/",
+      "evidence_grade": "HERSTELLERPROJEKT_US_VORBESTELLUNG",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "KEINE_NEUE_SEITE",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "research_v82": {
+        "date": "2026-11-15",
+        "stage": "Projekt",
+        "source_urls": [
+          "https://tornyol.com/",
+          "https://www.ycombinator.com/companies/tornyol"
+        ],
+        "claim": "Autonome fliegende Mücken-Erkennung/-Abfangung mit Basisstation",
+        "market_status": "Kaution bzw Vorbestellung, Hersteller peilt US-Versand 2027 an; aktueller Nachweis keine öffentlich ausgelieferte Serienware",
+        "related_existing_wp_path": [
+          "Garten",
+          "Mückenfangroboter"
+        ],
+        "related_existing_unpromoted": "ROB-0220",
+        "decision": "UNTER_BESTEHENDER_GARTEN_TYPSEITE_MODELLREGISTER_KEINE_NEUE_TYPSEITE",
+        "notice": "Herstellerclaims nicht als unabhängig nachgewiesene Funktionssicherheit darstellen; kein Einsatz gegen Personen/Tiere"
       }
     }
   ],
@@ -13261,6 +13575,278 @@
         "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
         "wp_post_id": null,
         "wp_publish_authorized": false
+      }
+    ]
+  },
+  "research_round_v82": {
+    "date": "2026-11-15",
+    "scope": "Privat-/Vereins- und Randrobotik, KEINE neuen Gewerbe-/Industriebaeume",
+    "status": "NISCHENRECHERCHE_FACHENTWURF_NICHT_WORDPRESS",
+    "sources": "Herstellerseiten Vaonis, Enabot, Sports Attack, BOLA, FOOTBOT, FarmBot, Tornyol; historische Looj Händleranzeige",
+    "existing_master_base_type_count": 68,
+    "previous_frontier": 183,
+    "new_research_ids": [
+      "rf184",
+      "rf185",
+      "rf186",
+      "rf187",
+      "rf188"
+    ],
+    "total_frontier": 188,
+    "new_type_page_candidates": 5,
+    "existing_identity_reused_for_new_context": {
+      "research_id": "rf143",
+      "candidate_id": "V82-01"
+    },
+    "new_wp_page_candidate_research_ids": [
+      "rf184",
+      "rf185",
+      "rf186",
+      "rf187"
+    ],
+    "model_or_variant_existing_wp_only": [
+      {
+        "id": "rf150",
+        "model": "FarmBot Genesis",
+        "target_wp_path": [
+          "Garten",
+          "Beetroboter"
+        ]
+      },
+      {
+        "id": "rf188",
+        "model": "Tornyol Mücken-Abfangdrohne",
+        "target_wp_path": [
+          "Garten",
+          "Mückenfangroboter"
+        ]
+      }
+    ],
+    "not_added": [
+      {
+        "name": "Dachrinnen-Reinigungsroboter / iRobot Looj 330",
+        "reason": "Historisch gelistetes Produkt, bei Best Buy ausdrücklich nicht mehr als Neuware verfügbar; kein aktueller Markt- oder Funktionsstandard belegt",
+        "source": "https://www.bestbuy.com/site/irobot-looj-330-gutter-cleaning-robot-black/5549037.p"
+      }
+    ],
+    "product_boundary": "Motorisierte Teleskope, Ballmaschinen und feste Fußballtrainingsanlagen als Automatisierungs-Randbereich klar markieren, nicht als frei bewegliche autonome Roboter verkaufen",
+    "category_decision": "Keine Kategorien-Anzahlvorgabe: maximal zwei vorläufige fachlich begruendete Rubriken, jeweils mindestens drei eigenstaendige Beitragsthemen; keine WP Anlage",
+    "wordpress_writes": 0,
+    "paid_api_calls": 0,
+    "google_url_gate": false,
+    "no_extra_master": true,
+    "no_industry_change": true,
+    "candidates": [
+      {
+        "candidate_id": "V82-01",
+        "research_id": "rf143",
+        "title": "Hausüberwachungsroboter",
+        "path": [
+          "Haushalt",
+          "Hausüberwachungsroboter"
+        ],
+        "parent_existing_source_id": "rbt_a7b82adfb00b8fd4",
+        "stage": "Produkt",
+        "model_source_urls": [
+          {
+            "name": "Enabot EBO Air 2 Plus",
+            "url": "https://www.enabot.com/de/home-robot/ebo-air-2-plus"
+          }
+        ],
+        "robotics_boundary": "Mobiler Kameraroboter mit eigener Patrouillenroute, echtes Fahrgerät. Kommunikation und Begleitung sind zusätzliche Einsatzzwecke desselben Modells.",
+        "distinct_function": "Bewegliche Hauspatrouille mit Kameras und Routen, nicht nur statische Überwachungskamera und nicht einfach Haustierspielzeug.",
+        "duplicate_prevention": "rf143 Mobile Haustier-Überwachungsroboter schon Forschungs-ID: dieselben Enabot-Geräte nicht zweimal registrieren; Haushalts-Nutzung als Kontextseite, nicht zweiter Modell-Owner",
+        "facets": [
+          {
+            "name": "Überwachung",
+            "topics": [
+              "Wohnräume auf Patrouillenrouten prüfen",
+              "Ereignisse erkennen und aufzeichnen",
+              "Hausüberwachung gegenüber Haustierbeobachtung abgrenzen"
+            ]
+          },
+          {
+            "name": "Datenschutz",
+            "topics": [
+              "Familienkonten und Kamera-Zugriffsrechte",
+              "App-Benachrichtigungen und Aufzeichnung",
+              "Nutzung bei Besuch und gemeinsam genutzten Wohnräumen"
+            ]
+          }
+        ],
+        "market_note": "Produkt EBO Air 2 Plus vom Hersteller im deutschen Shop als zeitweise ausverkauft gelistet; keine ständige Lieferbarkeit behaupten",
+        "wordpress_status": "FACHKANDIDAT_UNVEROEFFENTLICHT"
+      },
+      {
+        "candidate_id": "V82-02",
+        "research_id": "rf184",
+        "title": "Robotische Teleskope",
+        "path": [
+          "Freizeit",
+          "Robotische Teleskope"
+        ],
+        "parent_existing_source_id": "rbt_4c3b60b5f506ff47",
+        "stage": "Produkt",
+        "model_source_urls": [
+          {
+            "name": "Vaonis Vespera 3",
+            "url": "https://vaonis.com/products/vespera-3"
+          },
+          {
+            "name": "Vaonis Vespera II",
+            "url": "https://vaonis.com/products/vespera-2"
+          }
+        ],
+        "robotics_boundary": "AUTOMATISIERUNGS_RANDBEREICH: Computergesteuerte motorisierte Zielsuche/Nachführung, nicht ein frei fahrender Roboter.",
+        "distinct_function": "Teleskope mit motorischer Himmelsobjekt-Suche, automatischer Nachführung und geplanter Beobachtungsfolge; kein normaler Foto-Tripod und kein Kamerabewegungsroboter für Filmsets.",
+        "duplicate_prevention": "Kein eigener Fotodrohnen- oder Filmkameraroboter; Optik/Tracking für Astronomie unterscheidet sich. Hersteller-Modelle im Register einzeln, keine zweite Typsite für Vespera Pro/II/III.",
+        "facets": [
+          {
+            "name": "Beobachtung",
+            "topics": [
+              "Ziel automatisch am Nachthimmel finden",
+              "Sterne und Nebel motorisch nachführen",
+              "Beobachtungssequenzen planen"
+            ]
+          },
+          {
+            "name": "Ausstattung",
+            "topics": [
+              "Optik und Sensorauflösung vergleichen",
+              "Aufstellung und Himmelsausrichtung",
+              "Akkulaufzeit und Steuer-App"
+            ]
+          }
+        ],
+        "market_note": "Automatisches Teleskop liegt am Rand der Robotik; klare motorische Bewegung/Positionierung, aber keine allgemeine Service-Robotik.",
+        "wordpress_status": "FACHKANDIDAT_UNVEROEFFENTLICHT"
+      },
+      {
+        "candidate_id": "V82-03",
+        "research_id": "rf185",
+        "title": "Volleyball-Ballmaschinen",
+        "path": [
+          "Sport",
+          "Ballsport",
+          "Volleyball-Ballmaschinen"
+        ],
+        "parent_existing_source_id": "rbt_c921e3a524a4ad2a",
+        "stage": "Produkt",
+        "model_source_urls": [
+          {
+            "name": "Sports Attack Smash Attack",
+            "url": "https://sportsattack.com/product/smash-attack-volleyball-machine/"
+          },
+          {
+            "name": "Sports Attack Skill Attack",
+            "url": "https://sportsattack.com/product-category/volleyball/volleyball-machines/?wc_view_mode=list"
+          }
+        ],
+        "robotics_boundary": "AUTOMATISIERUNGS_RANDBEREICH: motorisierte Zuspielmaschine, Bediener beaufsichtigt Training.",
+        "distinct_function": "Motorisierte Volleyball-Zuspieltechnik für Aufschlagannahme, Block-/Schlagtraining und Volley; unterscheidet sich vom Tennis-/Badminton-/Baseballzuspiel.",
+        "duplicate_prevention": "Gleiche Geräteklasse Volleyball – ein Typ, Modelle im Modellregister. Kein doppelter Universal-Ballmaschinen-Eintrag.",
+        "facets": [
+          {
+            "name": "Training",
+            "topics": [
+              "Aufschlagannahme systematisch wiederholen",
+              "Volleyball-Spins und Ballhöhen",
+              "Zuspiel für Angriffs- und Abwehrübungen"
+            ]
+          },
+          {
+            "name": "Geräte",
+            "topics": [
+              "Aufstellhöhe und Wurfrichtung vergleichen",
+              "Antrieb und Ballzufuhr verstehen",
+              "Transport und Nutzung in Vereinshallen"
+            ]
+          }
+        ],
+        "market_note": "Hersteller verkauft unterschiedliche Volleyballmaschinen; motorisierte Wurfautomatik nicht als freifahrender autonomer Trainer ausgeben.",
+        "wordpress_status": "FACHKANDIDAT_UNVEROEFFENTLICHT"
+      },
+      {
+        "candidate_id": "V82-04",
+        "research_id": "rf186",
+        "title": "Cricket-Ballmaschinen",
+        "path": [
+          "Sport",
+          "Ballsport",
+          "Cricket-Ballmaschinen"
+        ],
+        "parent_existing_source_id": "rbt_c921e3a524a4ad2a",
+        "stage": "Produkt",
+        "model_source_urls": [
+          {
+            "name": "BOLA Professional Bowling Machine",
+            "url": "https://www.bola.co.uk/shop/bola-professional-bowling-machine"
+          }
+        ],
+        "robotics_boundary": "AUTOMATISIERUNGS_RANDBEREICH: stationäre motorisierte Bowlingmaschine, kein autonomes mobiles Gerät.",
+        "distinct_function": "Cricket-Bowlingmaschinen für unterschiedliche Geschwindigkeiten, Spin/Swing und Trainingssequenzen; keine Baseball-Pitching-Maschine.",
+        "duplicate_prevention": "Cricket ist nicht Baseball: Ball, Wurfbewegung und Training unterscheiden sich; keine zweite Seite pro BOLA-Modell.",
+        "facets": [
+          {
+            "name": "Training",
+            "topics": [
+              "Wurfarten und Swing/Spin üben",
+              "Geschwindigkeit und Zielbereich einstellen",
+              "Training ohne menschlichen Bowler planen"
+            ]
+          },
+          {
+            "name": "Betrieb",
+            "topics": [
+              "Optionalen automatischen Ballzuführer abgrenzen",
+              "Akkubetrieb gegenüber Netzbetrieb",
+              "Ballkompatibilität und Aufstellplatz"
+            ]
+          }
+        ],
+        "market_note": "Automatische Ballzufuhr bei BOLA Professional ist ein ZUSATZTEIL, nicht in jedem Basismodell enthalten.",
+        "wordpress_status": "FACHKANDIDAT_UNVEROEFFENTLICHT"
+      },
+      {
+        "candidate_id": "V82-05",
+        "research_id": "rf187",
+        "title": "Fußball-Trainingsroboter",
+        "path": [
+          "Sport",
+          "Ballsport",
+          "Fußball-Trainingsroboter"
+        ],
+        "parent_existing_source_id": "rbt_c921e3a524a4ad2a",
+        "stage": "Produkt",
+        "model_source_urls": [
+          {
+            "name": "FOOTBOT Fußball-Trainingssystem",
+            "url": "https://footbot.eu/"
+          }
+        ],
+        "robotics_boundary": "AUTOMATISIERUNGS_RANDBEREICH: fest installiertes automatisches Fußball-Zuspielsystem für Trainingsanlagen.",
+        "distinct_function": "Automatisiertes Ballzuspiel und interaktive Reaktionsübungen; nicht der Torwartroboter, der Schüsse hält.",
+        "duplicate_prevention": "Bereits existierender Sport > Ballsport > Torwartroboter hat andere Aufgabe (Ballabwehr), Football-Balllauncher greift nicht selbst ins Tor.",
+        "facets": [
+          {
+            "name": "Training",
+            "topics": [
+              "Fußball aus mehreren Richtungen zuspielen",
+              "Reaktion und Ballannahme mit Zielwänden",
+              "Schwierigkeit und Trainingsfolge einstellen"
+            ]
+          },
+          {
+            "name": "Anlagen",
+            "topics": [
+              "Feste Trainingsanlage gegenüber mobiler Ballmaschine",
+              "Ballrückführung und Zielbereich",
+              "Einsatz in Verein und Trainingszentrum"
+            ]
+          }
+        ],
+        "market_note": "FOOTBOT ist eine ortsfeste, mehrteilige Trainingsanlage. Produktstatus heißt Anbieterbeleg, nicht nachgewiesene Serieninstallationszahl oder Heimlieferbarkeit.",
+        "wordpress_status": "FACHKANDIDAT_UNVEROEFFENTLICHT"
       }
     ]
   }
