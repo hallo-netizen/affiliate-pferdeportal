@@ -1,0 +1,4824 @@
+{
+  "version": "W19_2026-11-15_FUNCTION_RECONCILIATION",
+  "status": "275_275_BESTANDSZEILEN_SYSTEMATISCH_ERFASST_ABER_NICHT_ALLE_SEO_KOLLISIONEN_ABSCHLIESSEND_GEPRUEFT",
+  "scope": {
+    "old_research_product_names": 275,
+    "verified_old_aliases": 3,
+    "newly_accepted_function_aliases": 3,
+    "comparison_pairs_explicit": 50,
+    "old_W4_owners_kept": 79
+  },
+  "results": {
+    "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT": 176,
+    "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN": 93,
+    "KANONISCHER_ALIAS": 6
+  },
+  "basis": "One pass over all 275 W18 product entries with the existing function/water attributes; explicit manual comparison of the listed function-neighbor pairs and three additional high-confidence application aliases. For all other entries no absence of duplication claimed.",
+  "new_alias_decisions": [
+    {
+      "id": "W15-020",
+      "name": "Spültechnik-Umkehrosmoseanlage",
+      "canonical_id": "W4-072",
+      "canonical_name": "Gewerbliche Umkehrosmoseanlage",
+      "reason": "Spültechnik nutzt dieselbe Umkehrosmose-Grundfunktion wie gewerbliche RO; die Anwendung Spülmaschine allein begründet keinen neuen Produkt-Owner.",
+      "confidence": "fachliche_funktionsidentitaet_nur_anwendung_anders",
+      "decision": "ALIAS_FUER_SPAETEREN_SEO_BAUM_KEINE_WP_AENDERUNG"
+    },
+    {
+      "id": "W16-012",
+      "name": "Schwimmbad-Ozonbehandlungsanlage",
+      "canonical_id": "W14-021",
+      "canonical_name": "Ozon-Wasserdesinfektionsanlage",
+      "reason": "Ozonbehandlung im Schwimmbad ist eine Anwendungsvariante der Wasserdesinfektion mit Ozon; keine neue Funktionsart allein wegen des Einsatzortes.",
+      "confidence": "fachliche_funktionsidentitaet_nur_anwendung_anders",
+      "decision": "ALIAS_FUER_SPAETEREN_SEO_BAUM_KEINE_WP_AENDERUNG"
+    },
+    {
+      "id": "W16-013",
+      "name": "Schwimmbad-Flockungsdosierstation",
+      "canonical_id": "W14-024",
+      "canonical_name": "Flockungsmittel-Dosierstation",
+      "reason": "Flockungsmittel-Dosierstation im Bad und allgemeine Flockungsmittel-Dosierstation dosieren dieselbe technische Stoffklasse; Branchenbezeichnung ist kein eigener Owner.",
+      "confidence": "fachliche_funktionsidentitaet_nur_anwendung_anders",
+      "decision": "ALIAS_FUER_SPAETEREN_SEO_BAUM_KEINE_WP_AENDERUNG"
+    }
+  ],
+  "unresolved_product_function_pairs": [
+    {
+      "id": "W14-008",
+      "name": "Regenwasser-Nachspeisesteuerung",
+      "compared_with": "W4-040",
+      "comparison_name": "Regenwasser-Hauszentrale",
+      "reason": "Nachspeisesteuerung kann Bestandteil einer Regenwasser-Hauszentrale sein; einzelnes separat kaufbares Modul offen.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W14-011",
+      "name": "Entwässerungs-Pumpstation",
+      "compared_with": "W4-052",
+      "comparison_name": "Hebeanlage",
+      "reason": "Pumpstation und Gebäudehebeanlage: ähnlich, aber unterschiedliche Einbau-/Förderbedingungen.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W14-012",
+      "name": "Pumpen-Frequenzumrichter",
+      "compared_with": "W4-034",
+      "comparison_name": "Pumpensteuergerät",
+      "reason": "Frequenzumrichter und Pumpensteuergerät: Drehzahlregelung ist ggf. spezielle separat kaufbare Baugruppe.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W14-013",
+      "name": "Spiralgehäusepumpe",
+      "compared_with": "W14-010",
+      "comparison_name": "Inline-Kreiselpumpe",
+      "reason": "Spiralgehäuse- und Inline-Kreiselpumpe: Bauart, Einbausituation und Leistung unterscheiden.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W14-036",
+      "name": "Ultraschall-Wasserzähler",
+      "compared_with": "W4-071",
+      "comparison_name": "Bewässerungs-Wasserzähler",
+      "reason": "Ultraschall-Wasserzähler und Bewässerungs-Wasserzähler: andere Messbauarten/Nutzung.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W14-037",
+      "name": "Durchfluss-Messgerät für Wasser",
+      "compared_with": "W14-036",
+      "comparison_name": "Ultraschall-Wasserzähler",
+      "reason": "Durchfluss-Messgerät und Wasserzähler: Messgegenstand ähnlich, Auswertung/Zulassung unterschiedlich.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W14-038",
+      "name": "Funk-Wasserzähler-Fernablesemodul",
+      "compared_with": "W14-036",
+      "comparison_name": "Ultraschall-Wasserzähler",
+      "reason": "Funk-Fernablesemodul kann Zubehör eines Wasserzählers oder integrierte Funktion sein.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W14-046",
+      "name": "Absetzfilterschacht",
+      "compared_with": "W12-014",
+      "comparison_name": "Regenwasser-Sedimentationsanlage",
+      "reason": "Absetzfilterschacht und Regenwasser-Sedimentationsanlage können dieselbe Stufe in anderer Bauform sein.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W14-049",
+      "name": "Bewässerungs-Verlegerohr",
+      "compared_with": "W14-016",
+      "comparison_name": "Trinkwasser-PE-Rohr",
+      "reason": "PE-Verlegerohr für Bewässerung und Trinkwasser-PE-Rohr: gleicher Grundwerkstoff, unterschiedliche Zulassungs-/Anwendungsanforderungen.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W14-053",
+      "name": "Lineare Feldberegnungsanlage",
+      "compared_with": "W14-052",
+      "comparison_name": "Pivot-Kreisberegnungsanlage",
+      "reason": "Linear- und Pivot-Beregnung erfüllen Bewässerung in unterschiedlichen Feldgeometrien.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W14-056",
+      "name": "Grauwasser-Ultrafiltrationsmodul",
+      "compared_with": "W4-054",
+      "comparison_name": "Grauwasseranlage",
+      "reason": "Grauwasser-Ultrafiltrationsmodul ist Teilanlage, Grauwasseranlage ein Komplettsystem.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W14-058",
+      "name": "Regenwasser-Unterflurbewässerungssystem",
+      "compared_with": "W4-043",
+      "comparison_name": "Tropfbewässerungsset",
+      "reason": "Unterflurbewässerung und Tropfbewässerungsset: andere Wasserabgabe-/Einbautechnik möglich.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W14-073",
+      "name": "Teich-Trommelfilter",
+      "compared_with": "W12-023",
+      "comparison_name": "Teichfilter",
+      "reason": "Teich-Trommelfilter ist Teilgruppe der Teichfilter; eigenständige Kauf-/Auswahlfragen prüfen.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W14-075",
+      "name": "Pool-Wasserpflegecontroller",
+      "compared_with": "W12-020",
+      "comparison_name": "Pool-Dosieranlage",
+      "reason": "Pool-Wasserpflegecontroller und Pool-Dosieranlage: Steuerung kann separat oder integriert sein.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W14-077",
+      "name": "Wohnmobil-Tauchpumpe 12 V",
+      "compared_with": "W4-028",
+      "comparison_name": "Tauchpumpe",
+      "reason": "12-V-Wohnmobil-Tauchpumpe und allgemeine Tauchpumpe: unterschiedliche elektrische/technische Anforderungen möglich.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W14-078",
+      "name": "Wohnmobil-Trinkwasserdruckpumpe",
+      "compared_with": "W4-027",
+      "comparison_name": "Gartenpumpe",
+      "reason": "Wohnmobil-Trinkwasserdruckpumpe und Gartenpumpe: Membranpumpen- und Förderprinzip unterscheiden.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W14-079",
+      "name": "Yacht-Meerwasserentsalzungsanlage",
+      "compared_with": "W14-087",
+      "comparison_name": "Kompakte Meerwasser-Umkehrosmoseanlage",
+      "reason": "Yacht-Watermaker und kompakte Meerwasser-RO: häufig dieselbe technische Gesamtfamilie mit mobiler Anwendung.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W14-084",
+      "name": "Grundwasser-Messstellen-Telemetrie",
+      "compared_with": "W14-080",
+      "comparison_name": "Grundwasser-Pegeldatenlogger",
+      "reason": "Messstellen-Telemetrie und Pegeldatenlogger: Funk-/Datenübertragungsmodul kann integriert sein.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W15-001",
+      "name": "Löschwasser-Trennstation",
+      "compared_with": "W4-061",
+      "comparison_name": "Systemtrenner",
+      "reason": "Löschwasser-Trennstation enthält möglicherweise Systemtrennung, ist aber funktional vollständige Station.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W15-003",
+      "name": "Feuerlösch-Druckerhöhungsanlage",
+      "compared_with": "W4-033",
+      "comparison_name": "Druckerhöhungsanlage",
+      "reason": "Feuerlösch-Druckerhöhungsanlage und Hausdruckerhöhung: Norm-/Sicherheits-/Funktionskontext unterschiedlich.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W15-012",
+      "name": "Mobile Flutpumpenbox",
+      "compared_with": "W4-030",
+      "comparison_name": "Schmutzwasserpumpe",
+      "reason": "Flutpumpenset kann Schmutzwasserpumpe plus Zubehör sein; Komplettset vs Einzelgerät.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W15-016",
+      "name": "Kühlwasser-Scheibenfilter",
+      "compared_with": "W18-P007",
+      "comparison_name": "Bewässerungs-Scheibenfilter",
+      "reason": "Kühlwasser- und Bewässerungs-Scheibenfilter: gemeinsames Filterprinzip, abweichende Einsatzparameter.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W15-017",
+      "name": "Kühlwasser-Dosierregler",
+      "compared_with": "W4-079",
+      "comparison_name": "Kühlwasser-Dosierstation",
+      "reason": "Kühlwasser-Dosierregler kann Teil der kompletten Kühlwasser-Dosierstation sein.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W15-018",
+      "name": "Gewerbe-Spülwasserfilter",
+      "compared_with": "W4-015",
+      "comparison_name": "Wasserfilter-Ersatzkartusche",
+      "reason": "Gewerbe-Spülwasserfilter und Filterkartusche: Komplettgerät vs austauschbarer Filtereinsatz.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W15-022",
+      "name": "Schluckbrunnen-Bausystem",
+      "compared_with": "W4-024",
+      "comparison_name": "Gartenbrunnen-Bausatz",
+      "reason": "Schluckbrunnen-Bausystem und Gartenbrunnen-Bausatz: Wasser-Rückführung vs Gewinnung.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W16-002",
+      "name": "Wellpoint-Filterlanze",
+      "compared_with": "W4-026",
+      "comparison_name": "Brunnenfilterrohr",
+      "reason": "Wellpoint-Filterlanze und Brunnenfilterrohr: unterschiedliche Bau- und Einsatztechnik.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W16-005",
+      "name": "Brauwasser-Mineralisierungsanlage",
+      "compared_with": "W16-006",
+      "comparison_name": "Brauwasser-Kalkwasseraufbereitungsanlage",
+      "reason": "Brauwasser-Mineralisierung und Kalkwasseraufbereitung könnten Verfahrensvariante bzw. getrennte chemische Stufen sein.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W16-007",
+      "name": "Dialyse-Umkehrosmoseanlage",
+      "compared_with": "W4-072",
+      "comparison_name": "Gewerbliche Umkehrosmoseanlage",
+      "reason": "Dialyse-RO hat besondere Anforderungen gegenüber allgemeiner gewerblicher RO; eigenständige Anlage noch ungeklärt.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W16-011",
+      "name": "Schwimmbad-Unterdruckfilteranlage",
+      "compared_with": "W12-019",
+      "comparison_name": "Pool-Sandfilteranlage",
+      "reason": "Öffentliche Schwimmbad-Unterdruckfilteranlage vs private Pool-Sandfilteranlage: anderes Anlagenprinzip/Größe.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W17-P002",
+      "name": "Waschwasser-Hydrozyklon",
+      "compared_with": "W15-011",
+      "comparison_name": "Radialströmungs-Feststoffabscheider",
+      "reason": "Hydrozyklon und Radialströmungsabscheider: beide Feststoffseparation, verschiedene physikalische Strömung.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W17-P004",
+      "name": "CIP-Leitfähigkeitsmesssystem",
+      "compared_with": "W12-018",
+      "comparison_name": "Leitfähigkeitsmessgerät",
+      "reason": "CIP-Leitfähigkeitsmesssystem vs allgemeines Leitfähigkeitsmessgerät: integrierte Prozessmessung und Einzelgerät.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W17-P006",
+      "name": "Labor-Reinwasseranlage Typ 2",
+      "compared_with": "W17-P005",
+      "comparison_name": "Labor-Reinstwasseranlage Typ 1",
+      "reason": "Laborreinwasser Typ 2 und Reinstwasser Typ 1: unterschiedliche Anforderungen, oft kombinierte Technik.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W17-P007",
+      "name": "Luftbefeuchter-Wasseraufbereitungsanlage",
+      "compared_with": "W4-072",
+      "comparison_name": "Gewerbliche Umkehrosmoseanlage",
+      "reason": "Wasseraufbereitung für Befeuchter verwendet häufig Osmose/Enthärtung; Anwendung allein genügt nicht.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W17-P011",
+      "name": "Wasserstoffelektrolyse-Reinstwasseranlage",
+      "compared_with": "W4-074",
+      "comparison_name": "Elektrodeionisationsanlage",
+      "reason": "Elektrolyse-Wasserversorgung nutzt häufig EDI/RO; Gesamtsystem und einzeln kaufbare Anlagen abgrenzen.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W17-P013",
+      "name": "Wasserleck-Korrelator",
+      "compared_with": "W17-P012",
+      "comparison_name": "Akustisches Wasserleckortungsgerät",
+      "reason": "Wasserleck-Korrelator vs akustisches Horchgerät: anderes Messverfahren und Gerätetyp.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W17-P023",
+      "name": "Trinkwasser-Multiparameterpanel",
+      "compared_with": "W4-078",
+      "comparison_name": "Online-Wasseranalysestation",
+      "reason": "Multiparameterpanel und Online-Wasseranalysestation: beide mehrere Parameter stationär, fachliche Abgrenzung offen.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W17-P025",
+      "name": "Kommunaler Abwasserwärmetauscher",
+      "compared_with": "W12-012",
+      "comparison_name": "Duschwasser-Wärmetauscher",
+      "reason": "Kommunaler Abwasserwärmetauscher und Duschwasser-Wärmetauscher: gleicher Wärmeübertragungszweck, anderer Anlagenmaßstab.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W17-P027",
+      "name": "UV-H2O2-Oxidationsanlage",
+      "compared_with": "W4-013",
+      "comparison_name": "UV-Desinfektionsanlage",
+      "reason": "UV-AOP zur Stoffoxidation und UV-Desinfektion unterscheiden sich in Ziel und Zusatzchemie.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W18-P002",
+      "name": "Hydrologischer Einperl-Pegelsensor",
+      "compared_with": "W14-081",
+      "comparison_name": "Radar-Wasserstandssensor",
+      "reason": "Einperl- und Radarpegelmessung: Pegel derselben Wasserart, aber anderes Messprinzip.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W18-P005",
+      "name": "Regenwasser-Substratfilteranlage",
+      "compared_with": "W12-014",
+      "comparison_name": "Regenwasser-Sedimentationsanlage",
+      "reason": "Substratfiltration kann zusätzlich gelöste Stoffe entfernen, Sedimentation primär Partikel.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W18-P006",
+      "name": "Retentionsdach-Drosselablauf",
+      "compared_with": "W14-060",
+      "comparison_name": "Flachdachablauf",
+      "reason": "Retentionsdach-Drosselablauf vs Flachdachablauf: Funktionsintegration Drosselung im Dach.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W18-P007",
+      "name": "Bewässerungs-Scheibenfilter",
+      "compared_with": "W18-P008",
+      "comparison_name": "Bewässerungs-Siebfilter",
+      "reason": "Scheibenfilter vs Siebfilter in Bewässerung: gleicher Zweck aber andere Filterelementbauart.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W18-P009",
+      "name": "Einzeltropfer für Bewässerung",
+      "compared_with": "W12-005",
+      "comparison_name": "Tropfrohr",
+      "reason": "Einzeltropfer und Tropfrohr: einzelnes Auslasselement vs Verteilrohr.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W18-P011",
+      "name": "Trinkwasser-Durchflussmengenregler",
+      "compared_with": "W12-011",
+      "comparison_name": "Wasserspar-Strahlregler",
+      "reason": "Durchflussmengenregler und Wasserspar-Strahlregler: eigenständiges Einbauelement vs Strahlregler mit Durchflussregelung.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W18-P012",
+      "name": "Trinkwasser-Rückflussverhinderer-Patrone",
+      "compared_with": "W4-064",
+      "comparison_name": "Rückschlagventil",
+      "reason": "Trinkwasser-Rückflussverhinderer-Patrone und Rückschlagventil: gleiche Rückflussfunktion, aber Ersatzpatrone vs ganzes Ventil.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W18-P013",
+      "name": "Abwasser-Kompaktvorkläranlage",
+      "compared_with": "W14-064",
+      "comparison_name": "Abwasser-Rechenanlage",
+      "reason": "Abwasser-Kompaktvorkläranlage vs Rechenanlage: gesamter Prozess vs einzelne mechanische Reinigungsstufe.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W18-P014",
+      "name": "Abwasser-Sandwaschanlage",
+      "compared_with": "W17-P026",
+      "comparison_name": "Abwasser-Sandklassierer",
+      "reason": "Sandwaschanlage und Sandklassierer: Waschen organischer Anhaftungen vs Klassieren/Trennen, teils kombiniert.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W18-P015",
+      "name": "Klärschlamm-Bandtrockner",
+      "compared_with": "W14-066",
+      "comparison_name": "Klärschlamm-Schneckenpresse",
+      "reason": "Bandtrockner und Schneckenpresse: thermisches Trocknen vs mechanisches Entwässern.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W18-P016",
+      "name": "Solarer Klärschlammwender",
+      "compared_with": "W18-P015",
+      "comparison_name": "Klärschlamm-Bandtrockner",
+      "reason": "Solarer Schlammwender und Bandtrockner: andere Anlagensysteme der Schlammtrocknung.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    },
+    {
+      "id": "W18-P017",
+      "name": "Klärschlamm-Förderschnecke",
+      "compared_with": "W14-066",
+      "comparison_name": "Klärschlamm-Schneckenpresse",
+      "reason": "Klärschlamm-Förderschnecke vs Schneckenpresse: Transportfunktion vs mechanische Entwässerung.",
+      "status": "ABGRENZUNG_OFFEN_KEIN_ALIAS_ENTSCHEID",
+      "dimension": "funktion_bauart_kaufabsicht"
+    }
+  ],
+  "entry_status": [
+    {
+      "id": "W4-001",
+      "name": "Feinfilter",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-001",
+      "qualification": null
+    },
+    {
+      "id": "W4-002",
+      "name": "Manueller Rückspülfilter",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-002",
+      "qualification": null
+    },
+    {
+      "id": "W4-003",
+      "name": "Automatischer Rückspülfilter",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-003",
+      "qualification": null
+    },
+    {
+      "id": "W4-004",
+      "name": "Tischwasserfilter",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-004",
+      "qualification": null
+    },
+    {
+      "id": "W4-005",
+      "name": "Wasserhahnfilter",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-005",
+      "qualification": null
+    },
+    {
+      "id": "W4-006",
+      "name": "Untertischfilter",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-006",
+      "qualification": null
+    },
+    {
+      "id": "W4-007",
+      "name": "Outdoor-Wasserfilter",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-007",
+      "qualification": null
+    },
+    {
+      "id": "W4-008",
+      "name": "Auftisch-Osmoseanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-008",
+      "qualification": null
+    },
+    {
+      "id": "W4-009",
+      "name": "Untertisch-Osmoseanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-009",
+      "qualification": null
+    },
+    {
+      "id": "W4-010",
+      "name": "Direct-Flow-Osmoseanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-010",
+      "qualification": null
+    },
+    {
+      "id": "W4-011",
+      "name": "Osmoseanlage mit Drucktank",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-011",
+      "qualification": null
+    },
+    {
+      "id": "W4-012",
+      "name": "Enthärtungsanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-012",
+      "qualification": null
+    },
+    {
+      "id": "W4-013",
+      "name": "UV-Desinfektionsanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W17-P027"
+      ],
+      "candidate_canonical_id": "W4-013",
+      "qualification": null
+    },
+    {
+      "id": "W4-014",
+      "name": "Wasser-Dosieranlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-014",
+      "qualification": null
+    },
+    {
+      "id": "W4-015",
+      "name": "Wasserfilter-Ersatzkartusche",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W15-018"
+      ],
+      "candidate_canonical_id": "W4-015",
+      "qualification": null
+    },
+    {
+      "id": "W4-016",
+      "name": "Filtergehäuse",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-016",
+      "qualification": null
+    },
+    {
+      "id": "W4-017",
+      "name": "Wasserfilter-Anschlussadapter",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-017",
+      "qualification": null
+    },
+    {
+      "id": "W4-018",
+      "name": "Trinkwasser-Labortestset",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "trinkwasser",
+        "prozesswasser"
+      ],
+      "original_owner": true,
+      "source_category": "Wasseranalyse",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-018",
+      "qualification": null
+    },
+    {
+      "id": "W4-019",
+      "name": "Brunnenwasser-Testset",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Wasseranalyse",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-019",
+      "qualification": null
+    },
+    {
+      "id": "W4-020",
+      "name": "Schadstoff-Labortestset",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": true,
+      "source_category": "Wasseranalyse",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-020",
+      "qualification": null
+    },
+    {
+      "id": "W4-021",
+      "name": "Wasserteststreifen",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseranalyse",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-021",
+      "qualification": null
+    },
+    {
+      "id": "W4-022",
+      "name": "Wasser-Multimessgerät",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseranalyse",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-022",
+      "qualification": null
+    },
+    {
+      "id": "W4-023",
+      "name": "Wasser-Probenahmeset",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseranalyse",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-023",
+      "qualification": null
+    },
+    {
+      "id": "W4-024",
+      "name": "Gartenbrunnen-Bausatz",
+      "functions": [],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Brunnen",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W15-022"
+      ],
+      "candidate_canonical_id": "W4-024",
+      "qualification": null
+    },
+    {
+      "id": "W4-025",
+      "name": "Schlagbrunnen-Set",
+      "functions": [],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Brunnen",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-025",
+      "qualification": null
+    },
+    {
+      "id": "W4-026",
+      "name": "Brunnenfilterrohr",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Brunnen",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W16-002"
+      ],
+      "candidate_canonical_id": "W4-026",
+      "qualification": null
+    },
+    {
+      "id": "W4-027",
+      "name": "Gartenpumpe",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Pumpen & Druck",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-078"
+      ],
+      "candidate_canonical_id": "W4-027",
+      "qualification": null
+    },
+    {
+      "id": "W4-028",
+      "name": "Tauchpumpe",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Pumpen & Druck",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-077"
+      ],
+      "candidate_canonical_id": "W4-028",
+      "qualification": null
+    },
+    {
+      "id": "W4-029",
+      "name": "Tiefbrunnenpumpe",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Pumpen & Druck",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-029",
+      "qualification": null
+    },
+    {
+      "id": "W4-030",
+      "name": "Schmutzwasserpumpe",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Pumpen & Druck",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W15-012"
+      ],
+      "candidate_canonical_id": "W4-030",
+      "qualification": null
+    },
+    {
+      "id": "W4-031",
+      "name": "Klarwasserpumpe",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Pumpen & Druck",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-031",
+      "qualification": null
+    },
+    {
+      "id": "W4-032",
+      "name": "Hauswasserwerk",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Pumpen & Druck",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-032",
+      "qualification": null
+    },
+    {
+      "id": "W4-033",
+      "name": "Druckerhöhungsanlage",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Pumpen & Druck",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W15-003"
+      ],
+      "candidate_canonical_id": "W4-033",
+      "qualification": null
+    },
+    {
+      "id": "W4-034",
+      "name": "Pumpensteuergerät",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Pumpen & Druck",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-012"
+      ],
+      "candidate_canonical_id": "W4-034",
+      "qualification": null
+    },
+    {
+      "id": "W4-035",
+      "name": "Regentonne",
+      "functions": [
+        "speichern"
+      ],
+      "water_types": [
+        "regenwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Regenwasser",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-035",
+      "qualification": null
+    },
+    {
+      "id": "W4-036",
+      "name": "Regenwasser-Erdtank",
+      "functions": [
+        "speichern"
+      ],
+      "water_types": [
+        "regenwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Regenwasser",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-036",
+      "qualification": null
+    },
+    {
+      "id": "W4-037",
+      "name": "Regenwasser-Kellertank",
+      "functions": [
+        "speichern"
+      ],
+      "water_types": [
+        "regenwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Regenwasser",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-037",
+      "qualification": null
+    },
+    {
+      "id": "W4-038",
+      "name": "Fallrohrfilter",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "regenwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Regenwasser",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-038",
+      "qualification": null
+    },
+    {
+      "id": "W4-039",
+      "name": "Zisternenpumpe",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [
+        "regenwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Regenwasser",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-039",
+      "qualification": null
+    },
+    {
+      "id": "W4-040",
+      "name": "Regenwasser-Hauszentrale",
+      "functions": [],
+      "water_types": [
+        "regenwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Regenwasser",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-008"
+      ],
+      "candidate_canonical_id": "W4-040",
+      "qualification": null
+    },
+    {
+      "id": "W4-041",
+      "name": "Rigolensystem",
+      "functions": [],
+      "water_types": [
+        "regenwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Regenwasser",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-041",
+      "qualification": null
+    },
+    {
+      "id": "W4-042",
+      "name": "Retentionszisterne",
+      "functions": [
+        "speichern"
+      ],
+      "water_types": [
+        "regenwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Regenwasser",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-042",
+      "qualification": null
+    },
+    {
+      "id": "W4-043",
+      "name": "Tropfbewässerungsset",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Bewässerung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-058"
+      ],
+      "candidate_canonical_id": "W4-043",
+      "qualification": null
+    },
+    {
+      "id": "W4-044",
+      "name": "Versenkregner",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Bewässerung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-044",
+      "qualification": null
+    },
+    {
+      "id": "W4-045",
+      "name": "Bewässerungscomputer",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Bewässerung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-045",
+      "qualification": null
+    },
+    {
+      "id": "W4-046",
+      "name": "Bodenfeuchtesensor",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Bewässerung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-046",
+      "qualification": null
+    },
+    {
+      "id": "W4-047",
+      "name": "Gartenschlauch",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Bewässerung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-047",
+      "qualification": null
+    },
+    {
+      "id": "W4-048",
+      "name": "Trinkwassertank",
+      "functions": [
+        "speichern"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Wassertanks",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-048",
+      "qualification": null
+    },
+    {
+      "id": "W4-049",
+      "name": "IBC-Wassertank",
+      "functions": [
+        "speichern"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wassertanks",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-049",
+      "qualification": null
+    },
+    {
+      "id": "W4-050",
+      "name": "Mobiler Wassertank",
+      "functions": [
+        "speichern"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wassertanks",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-050",
+      "qualification": null
+    },
+    {
+      "id": "W4-051",
+      "name": "Nutzwassertank",
+      "functions": [
+        "speichern"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wassertanks",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-051",
+      "qualification": null
+    },
+    {
+      "id": "W4-052",
+      "name": "Hebeanlage",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Abwassertechnik",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-011"
+      ],
+      "candidate_canonical_id": "W4-052",
+      "qualification": null
+    },
+    {
+      "id": "W4-053",
+      "name": "Rückstauverschluss",
+      "functions": [
+        "entsorgen"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Abwassertechnik",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-053",
+      "qualification": null
+    },
+    {
+      "id": "W4-054",
+      "name": "Grauwasseranlage",
+      "functions": [
+        "entsorgen"
+      ],
+      "water_types": [
+        "grauwasser",
+        "abwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Abwassertechnik",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-056"
+      ],
+      "candidate_canonical_id": "W4-054",
+      "qualification": null
+    },
+    {
+      "id": "W4-055",
+      "name": "Kleinkläranlage",
+      "functions": [
+        "entsorgen"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Abwassertechnik",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-055",
+      "qualification": null
+    },
+    {
+      "id": "W4-056",
+      "name": "Abwassertank",
+      "functions": [
+        "speichern"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Abwassertechnik",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-056",
+      "qualification": null
+    },
+    {
+      "id": "W4-057",
+      "name": "Bodenablauf",
+      "functions": [
+        "entsorgen"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Abwassertechnik",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-057",
+      "qualification": null
+    },
+    {
+      "id": "W4-058",
+      "name": "Revisionsschacht",
+      "functions": [
+        "entsorgen"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Abwassertechnik",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-058",
+      "qualification": null
+    },
+    {
+      "id": "W4-059",
+      "name": "Abwasserrohr",
+      "functions": [
+        "entsorgen"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Abwassertechnik",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-059",
+      "qualification": null
+    },
+    {
+      "id": "W4-060",
+      "name": "Enteisenungsanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-060",
+      "qualification": null
+    },
+    {
+      "id": "W4-061",
+      "name": "Systemtrenner",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W15-001"
+      ],
+      "candidate_canonical_id": "W4-061",
+      "qualification": null
+    },
+    {
+      "id": "W4-062",
+      "name": "pH-Messgerät",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseranalyse",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-062",
+      "qualification": null
+    },
+    {
+      "id": "W4-063",
+      "name": "Wasser-Photometer",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wasseranalyse",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-063",
+      "qualification": null
+    },
+    {
+      "id": "W4-064",
+      "name": "Rückschlagventil",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Pumpen & Druck",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W18-P012"
+      ],
+      "candidate_canonical_id": "W4-064",
+      "qualification": null
+    },
+    {
+      "id": "W4-065",
+      "name": "Pumpen-Saugschlauchset",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Pumpen & Druck",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-065",
+      "qualification": null
+    },
+    {
+      "id": "W4-066",
+      "name": "Druckbehälter",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Pumpen & Druck",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-066",
+      "qualification": null
+    },
+    {
+      "id": "W4-067",
+      "name": "Pumpenvorfilter",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Pumpen & Druck",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-067",
+      "qualification": null
+    },
+    {
+      "id": "W4-068",
+      "name": "Tank-Füllstandsanzeige",
+      "functions": [
+        "speichern"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wassertanks",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-068",
+      "qualification": null
+    },
+    {
+      "id": "W4-069",
+      "name": "Tankdurchführung",
+      "functions": [
+        "speichern"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Wassertanks",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-069",
+      "qualification": null
+    },
+    {
+      "id": "W4-070",
+      "name": "Zisternenfilter",
+      "functions": [
+        "speichern"
+      ],
+      "water_types": [
+        "regenwasser"
+      ],
+      "original_owner": true,
+      "source_category": "Regenwasser",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-070",
+      "qualification": null
+    },
+    {
+      "id": "W4-071",
+      "name": "Bewässerungs-Wasserzähler",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [],
+      "original_owner": true,
+      "source_category": "Bewässerung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-036"
+      ],
+      "candidate_canonical_id": "W4-071",
+      "qualification": null
+    },
+    {
+      "id": "W4-072",
+      "name": "Gewerbliche Umkehrosmoseanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": true,
+      "source_category": "Industrie & Großanlagen",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W16-007",
+        "W17-P007"
+      ],
+      "candidate_canonical_id": "W4-072",
+      "qualification": null
+    },
+    {
+      "id": "W4-073",
+      "name": "Mehrschichtfilteranlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": true,
+      "source_category": "Industrie & Großanlagen",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-073",
+      "qualification": null
+    },
+    {
+      "id": "W4-074",
+      "name": "Elektrodeionisationsanlage",
+      "functions": [],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": true,
+      "source_category": "Industrie & Großanlagen",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W17-P011"
+      ],
+      "candidate_canonical_id": "W4-074",
+      "qualification": null
+    },
+    {
+      "id": "W4-075",
+      "name": "Chemikalien-Dosierpumpe",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": true,
+      "source_category": "Industrie & Großanlagen",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-075",
+      "qualification": null
+    },
+    {
+      "id": "W4-076",
+      "name": "Industrielle Hochdruckpumpe",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": true,
+      "source_category": "Industrie & Großanlagen",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-076",
+      "qualification": null
+    },
+    {
+      "id": "W4-077",
+      "name": "Industrielle Feststoffpumpe",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": true,
+      "source_category": "Industrie & Großanlagen",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-077",
+      "qualification": null
+    },
+    {
+      "id": "W4-078",
+      "name": "Online-Wasseranalysestation",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": true,
+      "source_category": "Industrie & Großanlagen",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W17-P023"
+      ],
+      "candidate_canonical_id": "W4-078",
+      "qualification": null
+    },
+    {
+      "id": "W4-079",
+      "name": "Kühlwasser-Dosierstation",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": true,
+      "source_category": "Industrie & Großanlagen",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W15-017"
+      ],
+      "candidate_canonical_id": "W4-079",
+      "qualification": null
+    },
+    {
+      "id": "W12-001",
+      "name": "Brunnenkopf",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Brunnen & Bewässerung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W12-001",
+      "qualification": null
+    },
+    {
+      "id": "W12-002",
+      "name": "Brunnen-Vollwandrohr",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Brunnen & Bewässerung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W12-002",
+      "qualification": null
+    },
+    {
+      "id": "W12-003",
+      "name": "Viereckregner",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Brunnen & Bewässerung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W12-003",
+      "qualification": null
+    },
+    {
+      "id": "W12-004",
+      "name": "Bewässerungs-Magnetventil",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Brunnen & Bewässerung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W12-004",
+      "qualification": null
+    },
+    {
+      "id": "W12-005",
+      "name": "Tropfrohr",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Brunnen & Bewässerung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W18-P009"
+      ],
+      "candidate_canonical_id": "W12-005",
+      "qualification": null
+    },
+    {
+      "id": "W12-006",
+      "name": "Solar-Bewässerungsset",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Brunnen & Bewässerung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W12-006",
+      "qualification": null
+    },
+    {
+      "id": "W12-007",
+      "name": "Trinkwasser-Druckminderer",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Pumpen & Druck",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W12-007",
+      "qualification": null
+    },
+    {
+      "id": "W12-008",
+      "name": "Warmwasser-Zirkulationspumpe",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Pumpen & Druck",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W12-008",
+      "qualification": null
+    },
+    {
+      "id": "W12-009",
+      "name": "Automatisches Leckageschutzventil",
+      "functions": [
+        "schuetzen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Pumpen & Druck",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W12-009",
+      "qualification": null
+    },
+    {
+      "id": "W12-010",
+      "name": "Trinkwasser-Hygienespülstation",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W12-010",
+      "qualification": null
+    },
+    {
+      "id": "W12-011",
+      "name": "Wasserspar-Strahlregler",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Wasseraufbereitung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W18-P011"
+      ],
+      "candidate_canonical_id": "W12-011",
+      "qualification": null
+    },
+    {
+      "id": "W12-012",
+      "name": "Duschwasser-Wärmetauscher",
+      "functions": [
+        "entsorgen"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Abwassertechnik",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W17-P025"
+      ],
+      "candidate_canonical_id": "W12-012",
+      "qualification": null
+    },
+    {
+      "id": "W12-013",
+      "name": "Regenwasser-Ablaufdrossel",
+      "functions": [
+        "speichern"
+      ],
+      "water_types": [
+        "regenwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Regenwasser & Wassertanks",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W12-013",
+      "qualification": null
+    },
+    {
+      "id": "W12-014",
+      "name": "Regenwasser-Sedimentationsanlage",
+      "functions": [
+        "speichern"
+      ],
+      "water_types": [
+        "regenwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Regenwasser & Wassertanks",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-046",
+        "W18-P005"
+      ],
+      "candidate_canonical_id": "W12-014",
+      "qualification": null
+    },
+    {
+      "id": "W12-015",
+      "name": "Fettabscheider",
+      "functions": [
+        "entsorgen"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Abwassertechnik",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W12-015",
+      "qualification": null
+    },
+    {
+      "id": "W12-016",
+      "name": "Leichtflüssigkeitsabscheider",
+      "functions": [
+        "entsorgen"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Abwassertechnik",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W12-016",
+      "qualification": null
+    },
+    {
+      "id": "W12-017",
+      "name": "Gelöstsauerstoff-Messgerät",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Wasseranalyse",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W12-017",
+      "qualification": null
+    },
+    {
+      "id": "W12-018",
+      "name": "Leitfähigkeitsmessgerät",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Wasseranalyse",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W17-P004"
+      ],
+      "candidate_canonical_id": "W12-018",
+      "qualification": null
+    },
+    {
+      "id": "W12-019",
+      "name": "Pool-Sandfilteranlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "pool_und_teichwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Pool & Teich (optionaler 8. Hauptbereich)",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W16-011"
+      ],
+      "candidate_canonical_id": "W12-019",
+      "qualification": null
+    },
+    {
+      "id": "W12-020",
+      "name": "Pool-Dosieranlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "pool_und_teichwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Pool & Teich (optionaler 8. Hauptbereich)",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-075"
+      ],
+      "candidate_canonical_id": "W12-020",
+      "qualification": null
+    },
+    {
+      "id": "W12-021",
+      "name": "Pool-Salzelektrolyseanlage",
+      "functions": [],
+      "water_types": [
+        "pool_und_teichwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Pool & Teich (optionaler 8. Hauptbereich)",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W12-021",
+      "qualification": null
+    },
+    {
+      "id": "W12-022",
+      "name": "Pool-Umwälzpumpe",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [
+        "pool_und_teichwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Pool & Teich (optionaler 8. Hauptbereich)",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W12-022",
+      "qualification": null
+    },
+    {
+      "id": "W12-023",
+      "name": "Teichfilter",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "pool_und_teichwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Pool & Teich (optionaler 8. Hauptbereich)",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-073"
+      ],
+      "candidate_canonical_id": "W12-023",
+      "qualification": null
+    },
+    {
+      "id": "W12-024",
+      "name": "Teich-UVC-Klärer",
+      "functions": [],
+      "water_types": [
+        "abwasser",
+        "pool_und_teichwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Pool & Teich (optionaler 8. Hauptbereich)",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W12-024",
+      "qualification": null
+    },
+    {
+      "id": "W12-025",
+      "name": "Teichpumpe",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [
+        "pool_und_teichwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Pool & Teich (optionaler 8. Hauptbereich)",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W12-025",
+      "qualification": null
+    },
+    {
+      "id": "W12-026",
+      "name": "Teichbelüfter",
+      "functions": [],
+      "water_types": [
+        "pool_und_teichwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Pool & Teich (optionaler 8. Hauptbereich)",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W12-026",
+      "qualification": null
+    },
+    {
+      "id": "W14-001",
+      "name": "Brunnen-Steigleitung",
+      "functions": [
+        "wasser_gewinnen"
+      ],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 01",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-001",
+      "qualification": null
+    },
+    {
+      "id": "W14-002",
+      "name": "Brunnenschacht",
+      "functions": [
+        "wasser_gewinnen"
+      ],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 01",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-002",
+      "qualification": null
+    },
+    {
+      "id": "W14-003",
+      "name": "Grundwassermessstellen-Ausbaurohr",
+      "functions": [
+        "wasser_gewinnen"
+      ],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 01",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-003",
+      "qualification": null
+    },
+    {
+      "id": "W14-004",
+      "name": "Brunnen-Regenerierungsausrüstung",
+      "functions": [
+        "wasser_gewinnen"
+      ],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 01",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-004",
+      "qualification": null
+    },
+    {
+      "id": "W14-005",
+      "name": "Brunnen-Quarzfilterkies",
+      "functions": [
+        "wasser_gewinnen"
+      ],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 01",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-005",
+      "qualification": null
+    },
+    {
+      "id": "W14-006",
+      "name": "Schwimmende Tankentnahme",
+      "functions": [
+        "speichern"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 02",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-006",
+      "qualification": null
+    },
+    {
+      "id": "W14-007",
+      "name": "Regenwasser-Überlaufsiphon",
+      "functions": [
+        "speichern"
+      ],
+      "water_types": [
+        "regenwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 02",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-007",
+      "qualification": null
+    },
+    {
+      "id": "W14-008",
+      "name": "Regenwasser-Nachspeisesteuerung",
+      "functions": [
+        "speichern"
+      ],
+      "water_types": [
+        "regenwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 02",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-040"
+      ],
+      "candidate_canonical_id": "W14-008",
+      "qualification": null
+    },
+    {
+      "id": "W14-009",
+      "name": "Flexibler Löschwasserspeicher",
+      "functions": [
+        "speichern"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 02",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-009",
+      "qualification": null
+    },
+    {
+      "id": "W14-010",
+      "name": "Inline-Kreiselpumpe",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 03",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-013"
+      ],
+      "candidate_canonical_id": "W14-010",
+      "qualification": null
+    },
+    {
+      "id": "W14-011",
+      "name": "Entwässerungs-Pumpstation",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 03",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-052"
+      ],
+      "candidate_canonical_id": "W14-011",
+      "qualification": null
+    },
+    {
+      "id": "W14-012",
+      "name": "Pumpen-Frequenzumrichter",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 03",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-034"
+      ],
+      "candidate_canonical_id": "W14-012",
+      "qualification": null
+    },
+    {
+      "id": "W14-013",
+      "name": "Spiralgehäusepumpe",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 03",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-010"
+      ],
+      "candidate_canonical_id": "W14-013",
+      "qualification": null
+    },
+    {
+      "id": "W14-014",
+      "name": "Trinkwasser-Absperrventil",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 04",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-014",
+      "qualification": null
+    },
+    {
+      "id": "W14-015",
+      "name": "Trinkwasser-Rohrverbinder",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 04",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-015",
+      "qualification": null
+    },
+    {
+      "id": "W14-016",
+      "name": "Trinkwasser-PE-Rohr",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 04",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-049"
+      ],
+      "candidate_canonical_id": "W14-016",
+      "qualification": null
+    },
+    {
+      "id": "W14-017",
+      "name": "Heizungsfüllstation mit Systemtrenner",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 04",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-017",
+      "qualification": null
+    },
+    {
+      "id": "W14-018",
+      "name": "Thermostatisches Trinkwasser-Mischventil",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 04",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-018",
+      "qualification": null
+    },
+    {
+      "id": "W14-019",
+      "name": "Trinkwasser-Sicherheitsgruppe",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 04",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-019",
+      "qualification": null
+    },
+    {
+      "id": "W14-020",
+      "name": "Frostsicheres Außen-Auslaufventil",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 04",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-020",
+      "qualification": null
+    },
+    {
+      "id": "W14-021",
+      "name": "Ozon-Wasserdesinfektionsanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 05",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-021",
+      "qualification": null
+    },
+    {
+      "id": "W14-022",
+      "name": "Chlordioxid-Dosieranlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 05",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-022",
+      "qualification": null
+    },
+    {
+      "id": "W14-023",
+      "name": "Elektrolyse-Desinfektionsanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 05",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-023",
+      "qualification": null
+    },
+    {
+      "id": "W14-024",
+      "name": "Flockungsmittel-Dosierstation",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 05",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-024",
+      "qualification": null
+    },
+    {
+      "id": "W14-025",
+      "name": "PFAS-Aktivkohlefiltersystem",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 05",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-025",
+      "qualification": null
+    },
+    {
+      "id": "W14-026",
+      "name": "Nanofiltrationsanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 05",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-026",
+      "qualification": null
+    },
+    {
+      "id": "W14-027",
+      "name": "Trinkwassererwärmer",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 06",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-027",
+      "qualification": null
+    },
+    {
+      "id": "W14-028",
+      "name": "Warmwasser-Zirkulationsregulierventil",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 06",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-028",
+      "qualification": null
+    },
+    {
+      "id": "W14-029",
+      "name": "Trinkwasser-Probenahmeventil",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 06",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-029",
+      "qualification": null
+    },
+    {
+      "id": "W14-030",
+      "name": "Frischwasserstation",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 06",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-030",
+      "qualification": null
+    },
+    {
+      "id": "W14-031",
+      "name": "Trübungsmessgerät",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 07",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-031",
+      "qualification": null
+    },
+    {
+      "id": "W14-032",
+      "name": "Chlor-Messgerät",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 07",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-032",
+      "qualification": null
+    },
+    {
+      "id": "W14-033",
+      "name": "Nitrat-Wasseranalysator",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 07",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-033",
+      "qualification": null
+    },
+    {
+      "id": "W14-034",
+      "name": "CSB-Onlineanalysator",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 07",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-034",
+      "qualification": null
+    },
+    {
+      "id": "W14-035",
+      "name": "Automatischer Wasser-Probenehmer",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 07",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-035",
+      "qualification": null
+    },
+    {
+      "id": "W14-036",
+      "name": "Ultraschall-Wasserzähler",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 07",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-071",
+        "W14-037",
+        "W14-038"
+      ],
+      "candidate_canonical_id": "W14-036",
+      "qualification": null
+    },
+    {
+      "id": "W14-037",
+      "name": "Durchfluss-Messgerät für Wasser",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 07",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-036"
+      ],
+      "candidate_canonical_id": "W14-037",
+      "qualification": null
+    },
+    {
+      "id": "W14-038",
+      "name": "Funk-Wasserzähler-Fernablesemodul",
+      "functions": [
+        "steuern"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 08",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-036"
+      ],
+      "candidate_canonical_id": "W14-038",
+      "qualification": null
+    },
+    {
+      "id": "W14-039",
+      "name": "Wasserverbrauchs-Datenlogger",
+      "functions": [
+        "steuern"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 08",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-039",
+      "qualification": null
+    },
+    {
+      "id": "W14-040",
+      "name": "Regenwasser-Fernsteuerungsmodul",
+      "functions": [
+        "steuern"
+      ],
+      "water_types": [
+        "regenwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 08",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-040",
+      "qualification": null
+    },
+    {
+      "id": "W14-041",
+      "name": "Automatische Wasser-Nachspeiseeinheit",
+      "functions": [
+        "steuern"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 08",
+      "screening_result": "KANONISCHER_ALIAS",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-008",
+      "qualification": null
+    },
+    {
+      "id": "W14-042",
+      "name": "Regenwasser-Filterrinne",
+      "functions": [
+        "wiederverwenden"
+      ],
+      "water_types": [
+        "regenwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 09",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-042",
+      "qualification": null
+    },
+    {
+      "id": "W14-043",
+      "name": "Regenwasser-Sickerschacht",
+      "functions": [
+        "wiederverwenden"
+      ],
+      "water_types": [
+        "regenwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 09",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-043",
+      "qualification": null
+    },
+    {
+      "id": "W14-044",
+      "name": "Entwässerungsrinne",
+      "functions": [
+        "wiederverwenden"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 09",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-044",
+      "qualification": null
+    },
+    {
+      "id": "W14-045",
+      "name": "Starkregen-Rückhaltebox",
+      "functions": [
+        "wiederverwenden"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 09",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-045",
+      "qualification": null
+    },
+    {
+      "id": "W14-046",
+      "name": "Absetzfilterschacht",
+      "functions": [
+        "wiederverwenden"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 09",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W12-014"
+      ],
+      "candidate_canonical_id": "W14-046",
+      "qualification": null
+    },
+    {
+      "id": "W14-047",
+      "name": "Mikrosprinkler",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 10",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-047",
+      "qualification": null
+    },
+    {
+      "id": "W14-048",
+      "name": "Bewässerungs-Druckregler",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 10",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-048",
+      "qualification": null
+    },
+    {
+      "id": "W14-049",
+      "name": "Bewässerungs-Verlegerohr",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 10",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-016"
+      ],
+      "candidate_canonical_id": "W14-049",
+      "qualification": null
+    },
+    {
+      "id": "W14-050",
+      "name": "Bewässerungs-Ventilbox",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 10",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-050",
+      "qualification": null
+    },
+    {
+      "id": "W14-051",
+      "name": "Beregnungsmaschine",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 11",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-051",
+      "qualification": null
+    },
+    {
+      "id": "W14-052",
+      "name": "Pivot-Kreisberegnungsanlage",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 11",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-053"
+      ],
+      "candidate_canonical_id": "W14-052",
+      "qualification": null
+    },
+    {
+      "id": "W14-053",
+      "name": "Lineare Feldberegnungsanlage",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 11",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-052"
+      ],
+      "candidate_canonical_id": "W14-053",
+      "qualification": null
+    },
+    {
+      "id": "W14-054",
+      "name": "Fertigations-Dosiereinheit",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 11",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-054",
+      "qualification": null
+    },
+    {
+      "id": "W14-055",
+      "name": "Beheizbares Tiertränkebecken",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 11",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-055",
+      "qualification": null
+    },
+    {
+      "id": "W14-056",
+      "name": "Grauwasser-Ultrafiltrationsmodul",
+      "functions": [
+        "wiederverwenden"
+      ],
+      "water_types": [
+        "grauwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 12",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-054"
+      ],
+      "candidate_canonical_id": "W14-056",
+      "qualification": null
+    },
+    {
+      "id": "W14-057",
+      "name": "Grauwasser-Bioreaktor-Füllkörper",
+      "functions": [
+        "wiederverwenden"
+      ],
+      "water_types": [
+        "grauwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 12",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-057",
+      "qualification": null
+    },
+    {
+      "id": "W14-058",
+      "name": "Regenwasser-Unterflurbewässerungssystem",
+      "functions": [
+        "wiederverwenden"
+      ],
+      "water_types": [
+        "regenwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 12",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-043"
+      ],
+      "candidate_canonical_id": "W14-058",
+      "qualification": null
+    },
+    {
+      "id": "W14-059",
+      "name": "Fertig-Abwasserpumpstation",
+      "functions": [
+        "entsorgen"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 13",
+      "screening_result": "KANONISCHER_ALIAS",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-011",
+      "qualification": null
+    },
+    {
+      "id": "W14-060",
+      "name": "Flachdachablauf",
+      "functions": [
+        "entsorgen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 13",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W18-P006"
+      ],
+      "candidate_canonical_id": "W14-060",
+      "qualification": null
+    },
+    {
+      "id": "W14-061",
+      "name": "Attika-Notüberlauf",
+      "functions": [
+        "entsorgen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 13",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-061",
+      "qualification": null
+    },
+    {
+      "id": "W14-062",
+      "name": "Abwasser-Vakuumentwässerungsanlage",
+      "functions": [
+        "entsorgen"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 13",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-062",
+      "qualification": null
+    },
+    {
+      "id": "W14-063",
+      "name": "Abwasser-Schlammfang",
+      "functions": [
+        "entsorgen"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 13",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-063",
+      "qualification": null
+    },
+    {
+      "id": "W14-064",
+      "name": "Abwasser-Rechenanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 14",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W18-P013"
+      ],
+      "candidate_canonical_id": "W14-064",
+      "qualification": null
+    },
+    {
+      "id": "W14-065",
+      "name": "Abwasser-Trommelsieb",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 14",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-065",
+      "qualification": null
+    },
+    {
+      "id": "W14-066",
+      "name": "Klärschlamm-Schneckenpresse",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 14",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W18-P015",
+        "W18-P017"
+      ],
+      "candidate_canonical_id": "W14-066",
+      "qualification": null
+    },
+    {
+      "id": "W14-067",
+      "name": "Druckentspannungs-Flotationsanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 14",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-067",
+      "qualification": null
+    },
+    {
+      "id": "W14-068",
+      "name": "Lamellenklärer",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 14",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-068",
+      "qualification": null
+    },
+    {
+      "id": "W14-069",
+      "name": "MBBR-Bioreaktor",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 14",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-069",
+      "qualification": null
+    },
+    {
+      "id": "W14-070",
+      "name": "Anaerobe Abwasserbehandlungsanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 14",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-070",
+      "qualification": null
+    },
+    {
+      "id": "W14-071",
+      "name": "Industrie-Verdampfungskristallisator",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 14",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-071",
+      "qualification": null
+    },
+    {
+      "id": "W14-072",
+      "name": "Teich-Oberflächenskimmer",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "pool_und_teichwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 15",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-072",
+      "qualification": null
+    },
+    {
+      "id": "W14-073",
+      "name": "Teich-Trommelfilter",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "pool_und_teichwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 15",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W12-023"
+      ],
+      "candidate_canonical_id": "W14-073",
+      "qualification": null
+    },
+    {
+      "id": "W14-074",
+      "name": "Teich-Schlammsauger",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser",
+        "pool_und_teichwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 15",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-074",
+      "qualification": null
+    },
+    {
+      "id": "W14-075",
+      "name": "Pool-Wasserpflegecontroller",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "pool_und_teichwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 15",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W12-020"
+      ],
+      "candidate_canonical_id": "W14-075",
+      "qualification": null
+    },
+    {
+      "id": "W14-076",
+      "name": "Wohnmobil-Wassereinfüllstutzen",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 16",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-076",
+      "qualification": null
+    },
+    {
+      "id": "W14-077",
+      "name": "Wohnmobil-Tauchpumpe 12 V",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 16",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-028"
+      ],
+      "candidate_canonical_id": "W14-077",
+      "qualification": null
+    },
+    {
+      "id": "W14-078",
+      "name": "Wohnmobil-Trinkwasserdruckpumpe",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 16",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-027"
+      ],
+      "candidate_canonical_id": "W14-078",
+      "qualification": null
+    },
+    {
+      "id": "W14-079",
+      "name": "Yacht-Meerwasserentsalzungsanlage",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [
+        "meerwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 16",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-087"
+      ],
+      "candidate_canonical_id": "W14-079",
+      "qualification": null
+    },
+    {
+      "id": "W14-080",
+      "name": "Grundwasser-Pegeldatenlogger",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 17",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-084"
+      ],
+      "candidate_canonical_id": "W14-080",
+      "qualification": null
+    },
+    {
+      "id": "W14-081",
+      "name": "Radar-Wasserstandssensor",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 17",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W18-P002"
+      ],
+      "candidate_canonical_id": "W14-081",
+      "qualification": null
+    },
+    {
+      "id": "W14-082",
+      "name": "Abfluss-Geschwindigkeitsmessgerät",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 17",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-082",
+      "qualification": null
+    },
+    {
+      "id": "W14-083",
+      "name": "Radar-Regenmessgerät",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 17",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-083",
+      "qualification": null
+    },
+    {
+      "id": "W14-084",
+      "name": "Grundwasser-Messstellen-Telemetrie",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 17",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-080"
+      ],
+      "candidate_canonical_id": "W14-084",
+      "qualification": null
+    },
+    {
+      "id": "W14-085",
+      "name": "Atmosphärischer Trinkwasser-Generator",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 18",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-085",
+      "qualification": null
+    },
+    {
+      "id": "W14-086",
+      "name": "Membrandestillationsmodul",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Suchfeld 18",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-086",
+      "qualification": null
+    },
+    {
+      "id": "W14-087",
+      "name": "Kompakte Meerwasser-Umkehrosmoseanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "meerwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Suchfeld 18",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-079"
+      ],
+      "candidate_canonical_id": "W14-087",
+      "qualification": null
+    },
+    {
+      "id": "W15-001",
+      "name": "Löschwasser-Trennstation",
+      "functions": [],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Löschwasserversorgung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-061"
+      ],
+      "candidate_canonical_id": "W15-001",
+      "qualification": null
+    },
+    {
+      "id": "W15-002",
+      "name": "Löschwasser-Füll- und Entleerungsstation",
+      "functions": [],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Löschwasserversorgung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W15-002",
+      "qualification": null
+    },
+    {
+      "id": "W15-003",
+      "name": "Feuerlösch-Druckerhöhungsanlage",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Löschwasserversorgung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-033"
+      ],
+      "candidate_canonical_id": "W15-003",
+      "qualification": null
+    },
+    {
+      "id": "W15-004",
+      "name": "Wandhydrant",
+      "functions": [],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Löschwasserversorgung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W15-004",
+      "qualification": null
+    },
+    {
+      "id": "W15-005",
+      "name": "Löschwasser-Einspeiseeinrichtung",
+      "functions": [],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Löschwasserversorgung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W15-005",
+      "qualification": null
+    },
+    {
+      "id": "W15-006",
+      "name": "Aquakultur-Sauerstoffkegel",
+      "functions": [],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Aquakultur/Fischzucht",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W15-006",
+      "qualification": null
+    },
+    {
+      "id": "W15-007",
+      "name": "Aquakultur-Entgasungsturm",
+      "functions": [],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Aquakultur/Fischzucht",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W15-007",
+      "qualification": null
+    },
+    {
+      "id": "W15-008",
+      "name": "Aquakultur-Eiweißabschäumer",
+      "functions": [],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Aquakultur/Fischzucht",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W15-008",
+      "qualification": null
+    },
+    {
+      "id": "W15-009",
+      "name": "Aquakultur-Kreislaufanlage",
+      "functions": [],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Aquakultur/Fischzucht",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W15-009",
+      "qualification": null
+    },
+    {
+      "id": "W15-010",
+      "name": "Fischzucht-Sauerstoffgenerator",
+      "functions": [],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Aquakultur/Fischzucht",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W15-010",
+      "qualification": null
+    },
+    {
+      "id": "W15-011",
+      "name": "Radialströmungs-Feststoffabscheider",
+      "functions": [],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Aquakultur/Fischzucht",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W17-P002"
+      ],
+      "candidate_canonical_id": "W15-011",
+      "qualification": null
+    },
+    {
+      "id": "W15-012",
+      "name": "Mobile Flutpumpenbox",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Hochwasser/Notentwässerung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-030"
+      ],
+      "candidate_canonical_id": "W15-012",
+      "qualification": null
+    },
+    {
+      "id": "W15-013",
+      "name": "Mobiles Hochwasser-Pumpenaggregat",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Hochwasser/Notentwässerung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W15-013",
+      "qualification": null
+    },
+    {
+      "id": "W15-014",
+      "name": "Flachabsaugkrümmer für Hochwasserpumpen",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Hochwasser/Notentwässerung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W15-014",
+      "qualification": null
+    },
+    {
+      "id": "W15-015",
+      "name": "Kühlturm-Absalzautomatik",
+      "functions": [],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": false,
+      "source_category": "Kühl-/Prozesswasser",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W15-015",
+      "qualification": null
+    },
+    {
+      "id": "W15-016",
+      "name": "Kühlwasser-Scheibenfilter",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": false,
+      "source_category": "Kühl-/Prozesswasser",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W18-P007"
+      ],
+      "candidate_canonical_id": "W15-016",
+      "qualification": null
+    },
+    {
+      "id": "W15-017",
+      "name": "Kühlwasser-Dosierregler",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": false,
+      "source_category": "Kühl-/Prozesswasser",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-079"
+      ],
+      "candidate_canonical_id": "W15-017",
+      "qualification": null
+    },
+    {
+      "id": "W15-018",
+      "name": "Gewerbe-Spülwasserfilter",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Wassertechnik Gastronomie",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-015"
+      ],
+      "candidate_canonical_id": "W15-018",
+      "qualification": null
+    },
+    {
+      "id": "W15-019",
+      "name": "Leitungsgebundener Wasserspender",
+      "functions": [],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Wassertechnik Gastronomie",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W15-019",
+      "qualification": null
+    },
+    {
+      "id": "W15-020",
+      "name": "Spültechnik-Umkehrosmoseanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Wassertechnik Gastronomie",
+      "screening_result": "KANONISCHER_ALIAS",
+      "comparisons": [],
+      "candidate_canonical_id": "W4-072",
+      "qualification": "Spültechnik nutzt dieselbe Umkehrosmose-Grundfunktion wie gewerbliche RO; die Anwendung Spülmaschine allein begründet keinen neuen Produkt-Owner."
+    },
+    {
+      "id": "W15-021",
+      "name": "Havarie-Wasserrückhaltesystem",
+      "functions": [],
+      "water_types": [
+        "regenwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Regenwasser/Gewässerschutz",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W15-021",
+      "qualification": null
+    },
+    {
+      "id": "W15-022",
+      "name": "Schluckbrunnen-Bausystem",
+      "functions": [],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Geothermie/Grundwasser",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-024"
+      ],
+      "candidate_canonical_id": "W15-022",
+      "qualification": null
+    },
+    {
+      "id": "W15-023",
+      "name": "Grundwasser-Wärmetauscher",
+      "functions": [],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Geothermie/Grundwasser",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W15-023",
+      "qualification": null
+    },
+    {
+      "id": "W15-024",
+      "name": "Gewächshaus-Drainwasseraufbereitungsanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Gewächshaus-Wasserkreislauf",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W15-024",
+      "qualification": null
+    },
+    {
+      "id": "W15-025",
+      "name": "Gewächshaus-Dosier-Mischstation",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Gewächshaus-Wasserkreislauf",
+      "screening_result": "KANONISCHER_ALIAS",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-054",
+      "qualification": null
+    },
+    {
+      "id": "W16-001",
+      "name": "Vakuum-Grundwasserabsenkanlage",
+      "functions": [],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Baustellenwasserhaltung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W16-001",
+      "qualification": null
+    },
+    {
+      "id": "W16-002",
+      "name": "Wellpoint-Filterlanze",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Baustellenwasserhaltung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-026"
+      ],
+      "candidate_canonical_id": "W16-002",
+      "qualification": null
+    },
+    {
+      "id": "W16-003",
+      "name": "Bauwasserhaltungs-Sammelleitung",
+      "functions": [],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Baustellenwasserhaltung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W16-003",
+      "qualification": null
+    },
+    {
+      "id": "W16-004",
+      "name": "Brauwasser-Entgasungsanlage",
+      "functions": [],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": false,
+      "source_category": "Brauwassertechnik",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W16-004",
+      "qualification": null
+    },
+    {
+      "id": "W16-005",
+      "name": "Brauwasser-Mineralisierungsanlage",
+      "functions": [],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": false,
+      "source_category": "Brauwassertechnik",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W16-006"
+      ],
+      "candidate_canonical_id": "W16-005",
+      "qualification": null
+    },
+    {
+      "id": "W16-006",
+      "name": "Brauwasser-Kalkwasseraufbereitungsanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": false,
+      "source_category": "Brauwassertechnik",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W16-005"
+      ],
+      "candidate_canonical_id": "W16-006",
+      "qualification": null
+    },
+    {
+      "id": "W16-007",
+      "name": "Dialyse-Umkehrosmoseanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Medizinische Reinwassertechnik",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-072"
+      ],
+      "candidate_canonical_id": "W16-007",
+      "qualification": null
+    },
+    {
+      "id": "W16-008",
+      "name": "Dialyse-Permeat-Verteilsystem",
+      "functions": [],
+      "water_types": [],
+      "original_owner": false,
+      "source_category": "Medizinische Reinwassertechnik",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W16-008",
+      "qualification": null
+    },
+    {
+      "id": "W16-009",
+      "name": "Mobile Trinkwasser-Verteilstation",
+      "functions": [],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Mobile Notwasserversorgung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W16-009",
+      "qualification": null
+    },
+    {
+      "id": "W16-010",
+      "name": "Mobile Trinkwasseraufbereitungs-Containeranlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Mobile Notwasserversorgung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W16-010",
+      "qualification": null
+    },
+    {
+      "id": "W16-011",
+      "name": "Schwimmbad-Unterdruckfilteranlage",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [
+        "pool_und_teichwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Öffentliche Bäder",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W12-019"
+      ],
+      "candidate_canonical_id": "W16-011",
+      "qualification": null
+    },
+    {
+      "id": "W16-012",
+      "name": "Schwimmbad-Ozonbehandlungsanlage",
+      "functions": [],
+      "water_types": [
+        "pool_und_teichwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Öffentliche Bäder",
+      "screening_result": "KANONISCHER_ALIAS",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-021",
+      "qualification": "Ozonbehandlung im Schwimmbad ist eine Anwendungsvariante der Wasserdesinfektion mit Ozon; keine neue Funktionsart allein wegen des Einsatzortes."
+    },
+    {
+      "id": "W16-013",
+      "name": "Schwimmbad-Flockungsdosierstation",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "pool_und_teichwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Öffentliche Bäder",
+      "screening_result": "KANONISCHER_ALIAS",
+      "comparisons": [],
+      "candidate_canonical_id": "W14-024",
+      "qualification": "Flockungsmittel-Dosierstation im Bad und allgemeine Flockungsmittel-Dosierstation dosieren dieselbe technische Stoffklasse; Branchenbezeichnung ist kein eigener Owner."
+    },
+    {
+      "id": "W17-P001",
+      "name": "Fahrzeugwaschwasser-Recyclinganlage",
+      "functions": [
+        "wiederverwenden",
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser",
+        "brauchwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Wasserwiederverwendung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W17-P001",
+      "qualification": null
+    },
+    {
+      "id": "W17-P002",
+      "name": "Waschwasser-Hydrozyklon",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Mechanische Abscheidung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W15-011"
+      ],
+      "candidate_canonical_id": "W17-P002",
+      "qualification": null
+    },
+    {
+      "id": "W17-P003",
+      "name": "CIP-Reinigungsstation",
+      "functions": [
+        "reinigen",
+        "steuern"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": false,
+      "source_category": "Prozessreinigung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W17-P003",
+      "qualification": null
+    },
+    {
+      "id": "W17-P004",
+      "name": "CIP-Leitfähigkeitsmesssystem",
+      "functions": [
+        "messen",
+        "steuern"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": false,
+      "source_category": "Prozessreinigung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W12-018"
+      ],
+      "candidate_canonical_id": "W17-P004",
+      "qualification": null
+    },
+    {
+      "id": "W17-P005",
+      "name": "Labor-Reinstwasseranlage Typ 1",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": false,
+      "source_category": "Laborwassertechnik",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W17-P006"
+      ],
+      "candidate_canonical_id": "W17-P005",
+      "qualification": null
+    },
+    {
+      "id": "W17-P006",
+      "name": "Labor-Reinwasseranlage Typ 2",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": false,
+      "source_category": "Laborwassertechnik",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W17-P005"
+      ],
+      "candidate_canonical_id": "W17-P006",
+      "qualification": null
+    },
+    {
+      "id": "W17-P007",
+      "name": "Luftbefeuchter-Wasseraufbereitungsanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "trinkwasser",
+        "prozesswasser"
+      ],
+      "original_owner": false,
+      "source_category": "Gebäudewassertechnik",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-072"
+      ],
+      "candidate_canonical_id": "W17-P007",
+      "qualification": null
+    },
+    {
+      "id": "W17-P008",
+      "name": "Hochdruckdüsen-Luftbefeuchtungssystem",
+      "functions": [
+        "verteilen",
+        "steuern"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": false,
+      "source_category": "Gebäudewassertechnik",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W17-P008",
+      "qualification": null
+    },
+    {
+      "id": "W17-P009",
+      "name": "Galvanik-Spülwasser-Ionenaustauscheranlage",
+      "functions": [
+        "aufbereiten",
+        "wiederverwenden"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": false,
+      "source_category": "Industrielles Wasserrecycling",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W17-P009",
+      "qualification": null
+    },
+    {
+      "id": "W17-P010",
+      "name": "Galvanik-Metallrückgewinnungsanlage",
+      "functions": [
+        "aufbereiten",
+        "wiederverwenden"
+      ],
+      "water_types": [
+        "prozesswasser",
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Industrielles Wasserrecycling",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W17-P010",
+      "qualification": null
+    },
+    {
+      "id": "W17-P011",
+      "name": "Wasserstoffelektrolyse-Reinstwasseranlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": false,
+      "source_category": "Industrielle Wasseraufbereitung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-074"
+      ],
+      "candidate_canonical_id": "W17-P011",
+      "qualification": null
+    },
+    {
+      "id": "W17-P012",
+      "name": "Akustisches Wasserleckortungsgerät",
+      "functions": [
+        "messen",
+        "schuetzen"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Leckortung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W17-P013"
+      ],
+      "candidate_canonical_id": "W17-P012",
+      "qualification": null
+    },
+    {
+      "id": "W17-P013",
+      "name": "Wasserleck-Korrelator",
+      "functions": [
+        "messen",
+        "schuetzen"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Leckortung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W17-P012"
+      ],
+      "candidate_canonical_id": "W17-P013",
+      "qualification": null
+    },
+    {
+      "id": "W17-P014",
+      "name": "Wasserleck-Geräuschlogger",
+      "functions": [
+        "messen",
+        "steuern"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Leckortung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W17-P014",
+      "qualification": null
+    },
+    {
+      "id": "W17-P015",
+      "name": "Wasserrohr-Leitungsortungsgerät",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Leitungsortung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W17-P015",
+      "qualification": null
+    },
+    {
+      "id": "W17-P016",
+      "name": "Kondensatrückspeiseanlage",
+      "functions": [
+        "wiederverwenden",
+        "foerdern"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": false,
+      "source_category": "Dampf- und Kesselwassertechnik",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W17-P016",
+      "qualification": null
+    },
+    {
+      "id": "W17-P017",
+      "name": "Kesselspeisewasser-Entgaser",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "original_owner": false,
+      "source_category": "Dampf- und Kesselwassertechnik",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W17-P017",
+      "qualification": null
+    },
+    {
+      "id": "W17-P018",
+      "name": "Online-TOC-Wasseranalysator",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "prozesswasser",
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Wasseranalytik",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W17-P018",
+      "qualification": null
+    },
+    {
+      "id": "W17-P019",
+      "name": "Schlammspiegel-Sensor",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Wasseranalytik",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W17-P019",
+      "qualification": null
+    },
+    {
+      "id": "W17-P020",
+      "name": "Ammonium-Onlineanalysator",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Wasseranalytik",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W17-P020",
+      "qualification": null
+    },
+    {
+      "id": "W17-P021",
+      "name": "Phosphat-Onlineanalysator",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Wasseranalytik",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W17-P021",
+      "qualification": null
+    },
+    {
+      "id": "W17-P022",
+      "name": "Redox-Messsensor",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "trinkwasser",
+        "prozesswasser"
+      ],
+      "original_owner": false,
+      "source_category": "Wasseranalytik",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W17-P022",
+      "qualification": null
+    },
+    {
+      "id": "W17-P023",
+      "name": "Trinkwasser-Multiparameterpanel",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Wasseranalytik",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-078"
+      ],
+      "candidate_canonical_id": "W17-P023",
+      "qualification": null
+    },
+    {
+      "id": "W17-P024",
+      "name": "Membranbioreaktor-Kompaktkläranlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Abwassertechnik",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W17-P024",
+      "qualification": null
+    },
+    {
+      "id": "W17-P025",
+      "name": "Kommunaler Abwasserwärmetauscher",
+      "functions": [
+        "waerme_uebertragen"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Abwasserwärmenutzung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W12-012"
+      ],
+      "candidate_canonical_id": "W17-P025",
+      "qualification": null
+    },
+    {
+      "id": "W17-P026",
+      "name": "Abwasser-Sandklassierer",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Abwassertechnik",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W18-P014"
+      ],
+      "candidate_canonical_id": "W17-P026",
+      "qualification": null
+    },
+    {
+      "id": "W17-P027",
+      "name": "UV-H2O2-Oxidationsanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser",
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Spezialwasseraufbereitung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-013"
+      ],
+      "candidate_canonical_id": "W17-P027",
+      "qualification": null
+    },
+    {
+      "id": "W17-P028",
+      "name": "172-nm-Photolyse-Wasserreaktor",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser",
+        "prozesswasser"
+      ],
+      "original_owner": false,
+      "source_category": "Neue Wasserverfahren",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W17-P028",
+      "qualification": null
+    },
+    {
+      "id": "W18-P001",
+      "name": "Kamerabasiertes Gewässer-Abflussmesssystem",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "oberflaechenwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Gewässerüberwachung",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W18-P001",
+      "qualification": null
+    },
+    {
+      "id": "W18-P002",
+      "name": "Hydrologischer Einperl-Pegelsensor",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "oberflaechenwasser",
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Gewässerüberwachung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-081"
+      ],
+      "candidate_canonical_id": "W18-P002",
+      "qualification": null
+    },
+    {
+      "id": "W18-P003",
+      "name": "Grundwasser-Kabellichtlot",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Brunnen und Messstellen",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W18-P003",
+      "qualification": null
+    },
+    {
+      "id": "W18-P004",
+      "name": "Gewässer-Blaualgen-Fluoreszenzsensor",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "oberflaechenwasser",
+        "pool_und_teichwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Gewässeranalytik",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W18-P004",
+      "qualification": null
+    },
+    {
+      "id": "W18-P005",
+      "name": "Regenwasser-Substratfilteranlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "regenwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Regenwasserbehandlung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W12-014"
+      ],
+      "candidate_canonical_id": "W18-P005",
+      "qualification": null
+    },
+    {
+      "id": "W18-P006",
+      "name": "Retentionsdach-Drosselablauf",
+      "functions": [
+        "speichern",
+        "verteilen"
+      ],
+      "water_types": [
+        "regenwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Regenwasserrückhalt",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-060"
+      ],
+      "candidate_canonical_id": "W18-P006",
+      "qualification": null
+    },
+    {
+      "id": "W18-P007",
+      "name": "Bewässerungs-Scheibenfilter",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "brauchwasser",
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Garten und Landwirtschaft",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W15-016",
+        "W18-P008"
+      ],
+      "candidate_canonical_id": "W18-P007",
+      "qualification": null
+    },
+    {
+      "id": "W18-P008",
+      "name": "Bewässerungs-Siebfilter",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "brauchwasser",
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Garten und Landwirtschaft",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W18-P007"
+      ],
+      "candidate_canonical_id": "W18-P008",
+      "qualification": null
+    },
+    {
+      "id": "W18-P009",
+      "name": "Einzeltropfer für Bewässerung",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [
+        "brauchwasser",
+        "regenwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Garten und Landwirtschaft",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W12-005"
+      ],
+      "candidate_canonical_id": "W18-P009",
+      "qualification": null
+    },
+    {
+      "id": "W18-P010",
+      "name": "Bewässerungs-Flachschlauch",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [
+        "brauchwasser",
+        "grundwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Garten und Landwirtschaft",
+      "screening_result": "BISHER_KEIN_KONKRETER_GLEICHFUNKTIONSVERDACHT_NOTIERT",
+      "comparisons": [],
+      "candidate_canonical_id": "W18-P010",
+      "qualification": null
+    },
+    {
+      "id": "W18-P011",
+      "name": "Trinkwasser-Durchflussmengenregler",
+      "functions": [
+        "steuern",
+        "verteilen"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Trinkwasserarmaturen",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W12-011"
+      ],
+      "candidate_canonical_id": "W18-P011",
+      "qualification": null
+    },
+    {
+      "id": "W18-P012",
+      "name": "Trinkwasser-Rückflussverhinderer-Patrone",
+      "functions": [
+        "schuetzen",
+        "verteilen"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Trinkwassersicherung",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W4-064"
+      ],
+      "candidate_canonical_id": "W18-P012",
+      "qualification": null
+    },
+    {
+      "id": "W18-P013",
+      "name": "Abwasser-Kompaktvorkläranlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Kommunale Abwassertechnik",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-064"
+      ],
+      "candidate_canonical_id": "W18-P013",
+      "qualification": null
+    },
+    {
+      "id": "W18-P014",
+      "name": "Abwasser-Sandwaschanlage",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Kommunale Abwassertechnik",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W17-P026"
+      ],
+      "candidate_canonical_id": "W18-P014",
+      "qualification": null
+    },
+    {
+      "id": "W18-P015",
+      "name": "Klärschlamm-Bandtrockner",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Kommunale Abwassertechnik",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-066",
+        "W18-P016"
+      ],
+      "candidate_canonical_id": "W18-P015",
+      "qualification": null
+    },
+    {
+      "id": "W18-P016",
+      "name": "Solarer Klärschlammwender",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Kommunale Abwassertechnik",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W18-P015"
+      ],
+      "candidate_canonical_id": "W18-P016",
+      "qualification": null
+    },
+    {
+      "id": "W18-P017",
+      "name": "Klärschlamm-Förderschnecke",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "original_owner": false,
+      "source_category": "Kommunale Abwassertechnik",
+      "screening_result": "KONKRETER_FUNKTION_KAUFINTENT_KONFLIKT_OFFEN",
+      "comparisons": [
+        "W14-066"
+      ],
+      "candidate_canonical_id": "W18-P017",
+      "qualification": null
+    }
+  ],
+  "important": "Geprüft bedeutet hier kontrolliertes Register-Screening, keine echte Hersteller-Prüfung jedes der 275 Altprodukte und keine Google-SERP-Messung. Die vielen offenen Grenzfälle bleiben sichtbar statt irrtümlich zu Freigaben zu werden. Historische WordPress-Owner behalten ihre IDs und URLs."
+}
