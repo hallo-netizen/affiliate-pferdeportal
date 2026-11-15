@@ -1,0 +1,30 @@
+name: Robotik V77 einmalige Pluginpruefung
+on:
+  push:
+    branches:
+      - campus/robotik-v76-fachrecherche-abschluss-20261115
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: PHP Syntax und ZIP Struktur
+        run: |
+          set -euo pipefail
+          D=protocol/PROJECT_MEMORY/PROJEKTE/ROBOTIK/KATEGORIE/PLUGIN
+          php -l "$D/V63_SOURCE/includes/class-robotik-v63-delta.php"
+          php -l "$D/V65_SOURCE/includes/class-robotik-v65-publication.php"
+          php -l "$D/V65_SOURCE/robotik-kategorie-workflow.php"
+          php -l "$D/V77_SOURCE/includes/class-robotik-v77-fachnachtrag.php"
+          unzip -t "$D/CURRENT.zip"
+          cmp "$D/CURRENT.zip" "$D/VERSIONEN/0.4.11.zip"
+          mkdir -p /tmp/robotik-v77-check
+          unzip -q "$D/CURRENT.zip" -d /tmp/robotik-v77-check
+          Z=/tmp/robotik-v77-check/robotik-kategorie-workflow
+          cmp "$D/V63_SOURCE/includes/class-robotik-v63-delta.php" "$Z/includes/class-robotik-v63-delta.php"
+          cmp "$D/V65_SOURCE/includes/class-robotik-v65-publication.php" "$Z/includes/class-robotik-v65-publication.php"
+          cmp "$D/V65_SOURCE/robotik-kategorie-workflow.php" "$Z/robotik-kategorie-workflow.php"
+          cmp "$D/V77_SOURCE/includes/class-robotik-v77-fachnachtrag.php" "$Z/includes/class-robotik-v77-fachnachtrag.php"
+          find "$Z" -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+          grep -q 'Version: 0.4.11' "$Z/robotik-kategorie-workflow.php"
+          echo "ROB-77 TEST OK"
