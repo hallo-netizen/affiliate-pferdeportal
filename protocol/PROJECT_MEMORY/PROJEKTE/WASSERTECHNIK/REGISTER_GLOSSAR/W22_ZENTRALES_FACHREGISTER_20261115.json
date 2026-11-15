@@ -118,8 +118,8 @@
     ]
   },
   "zaehlung": {
-    "gesamt": 406,
-    "produkt": 306,
+    "gesamt": 414,
+    "produkt": 314,
     "glossar": 76,
     "anbieterrubrik": 24,
     "alte_w4_fachprodukte": 79,
@@ -135,8 +135,8 @@
     "neue_w19_fachkandidaten": 15,
     "neue_w19_glossarbegriffe": 15,
     "neue_w19_anbieterrubriken": 4,
-    "gesamt_produkt_kategorienideen": 343,
-    "gesamt_vorgeschlagene_artikelideen": 1070,
+    "gesamt_produkt_kategorienideen": 351,
+    "gesamt_vorgeschlagene_artikelideen": 1094,
     "vorbestand_275_funktions_screening": 275,
     "vorbestand_50_konkrete_abgrenzungspaare": 50,
     "neu_begruendete_alias_entscheidungen": 3,
@@ -153,7 +153,8 @@
     "w21_vergleichspaare_fachlich_getrennt": 43,
     "w21_vergleichspaare_alias": 1,
     "w21_vergleichspaare_offen": 6,
-    "w21_neu_geklärt": 9
+    "w21_neu_geklärt": 9,
+    "neue_w22_fachkandidaten": 8
   },
   "regeln": {
     "wp_seitenebene": "Letzte WP-Seitenebene ist konkrete Produktart oder System.",
@@ -26109,6 +26110,596 @@
         "begruendung": null,
         "pruefdatum": "2026-11-15",
         "hinweis": "Keine eigene SEO- oder WordPress-Freigabe."
+      }
+    },
+    {
+      "id": "W22-P001",
+      "typ": "produkt",
+      "name": "Magnetit-Schlammabscheider für Heizungswasser",
+      "definition": null,
+      "synonyme": [],
+      "kanonisch_id": "W22-P001",
+      "fachbereich": "Heiz- und Kühlwasser",
+      "merkmale": {
+        "funktionen": [
+          "aufbereiten",
+          "schuetzen"
+        ],
+        "wasserarten": [
+          "prozesswasser"
+        ],
+        "einsatzorte": [
+          "haus",
+          "kleingewerbe",
+          "industrie"
+        ],
+        "zielgruppen": [
+          "privat",
+          "kleinbetrieb",
+          "industrie"
+        ],
+        "technologien": []
+      },
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
+      "technikstand": "marktprodukt",
+      "bearbeitungsstand": "recherche_offen",
+      "freigabe": "nicht_freigegeben",
+      "quellen": [
+        {
+          "url": "https://www.spirotech.de/produkte/spirotrap/spirotrap-mb3mbl--messing--magnet--uni-118/",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W22_Webquelle_2026-11-15"
+        }
+      ],
+      "seo": {
+        "owner_id": null,
+        "status": "ungeprueft",
+        "suchvolumen": null,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
+      },
+      "artikelkategorien": [
+        {
+          "name": "Magnetit aus Heizungswasser entfernen",
+          "article_ideas": [
+            "Schlammabscheider und Hauswasserfilter unterscheiden",
+            "Magnetitabscheider passend zur Wärmepumpe wählen",
+            "Magnetitabscheider im Rücklauf warten"
+          ]
+        }
+      ],
+      "verknuepfungen": [],
+      "herkunft": "W22_BREITRECHERCHE_20261115",
+      "hinweis": "Herstellerprodukt belegt; fachlich von W4-001 abzugrenzen. Eigener SEO-Owner nicht freigegeben.",
+      "aktualisiert": "2026-11-15",
+      "funktionspruefung": {
+        "stand": "FACHKANDIDAT_SEO_OFFEN",
+        "vergleichs_ids": [
+          "W4-001"
+        ],
+        "begruendung": "Gegen W4-001 abgegrenzt; unabhängige Kaufabsicht/SEO noch zu prüfen.",
+        "pruefdatum": "2026-11-15",
+        "hinweis": "Keine WordPress-Freigabe."
+      }
+    },
+    {
+      "id": "W22-P002",
+      "typ": "produkt",
+      "name": "Mikroblasenabscheider für Heizungswasser",
+      "definition": null,
+      "synonyme": [],
+      "kanonisch_id": "W22-P002",
+      "fachbereich": "Heiz- und Kühlwasser",
+      "merkmale": {
+        "funktionen": [
+          "aufbereiten",
+          "schuetzen"
+        ],
+        "wasserarten": [
+          "prozesswasser"
+        ],
+        "einsatzorte": [
+          "haus",
+          "kleingewerbe",
+          "industrie"
+        ],
+        "zielgruppen": [
+          "privat",
+          "kleinbetrieb",
+          "industrie"
+        ],
+        "technologien": []
+      },
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
+      "technikstand": "marktprodukt",
+      "bearbeitungsstand": "recherche_offen",
+      "freigabe": "nicht_freigegeben",
+      "quellen": [
+        {
+          "url": "https://www.spirotech.de/produkte/spirovent/",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W22_Webquelle_2026-11-15"
+        }
+      ],
+      "seo": {
+        "owner_id": null,
+        "status": "ungeprueft",
+        "suchvolumen": null,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
+      },
+      "artikelkategorien": [
+        {
+          "name": "Luft aus Heizungswasser trennen",
+          "article_ideas": [
+            "Mikroblasenabscheider und Entlüftungsventil vergleichen",
+            "Luftabscheider im Heizkreis richtig platzieren",
+            "Mikroblasenabscheider und Schlammabscheider kombinieren"
+          ]
+        }
+      ],
+      "verknuepfungen": [],
+      "herkunft": "W22_BREITRECHERCHE_20261115",
+      "hinweis": "Herstellerprodukt belegt; fachlich von W22-P001 abzugrenzen. Eigener SEO-Owner nicht freigegeben.",
+      "aktualisiert": "2026-11-15",
+      "funktionspruefung": {
+        "stand": "FACHKANDIDAT_SEO_OFFEN",
+        "vergleichs_ids": [
+          "W22-P001"
+        ],
+        "begruendung": "Gegen W22-P001 abgegrenzt; unabhängige Kaufabsicht/SEO noch zu prüfen.",
+        "pruefdatum": "2026-11-15",
+        "hinweis": "Keine WordPress-Freigabe."
+      }
+    },
+    {
+      "id": "W22-P003",
+      "typ": "produkt",
+      "name": "Automatisches Spülventil für Tropfbewässerung",
+      "definition": null,
+      "synonyme": [],
+      "kanonisch_id": "W22-P003",
+      "fachbereich": "Bewässerungswartung",
+      "merkmale": {
+        "funktionen": [
+          "reinigen",
+          "steuern"
+        ],
+        "wasserarten": [
+          "brauchwasser",
+          "regenwasser"
+        ],
+        "einsatzorte": [
+          "garten",
+          "landwirtschaft"
+        ],
+        "zielgruppen": [
+          "privat",
+          "kleinbetrieb"
+        ],
+        "technologien": []
+      },
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
+      "technikstand": "marktprodukt",
+      "bearbeitungsstand": "recherche_offen",
+      "freigabe": "nicht_freigegeben",
+      "quellen": [
+        {
+          "url": "https://www.hunterirrigation.com/de/irrigation-product/micro-irrigation/automatisches-spuelventil",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W22_Webquelle_2026-11-15"
+        }
+      ],
+      "seo": {
+        "owner_id": null,
+        "status": "ungeprueft",
+        "suchvolumen": null,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
+      },
+      "artikelkategorien": [
+        {
+          "name": "Tropfleitungen automatisch spülen",
+          "article_ideas": [
+            "Spülventil und Magnetventil unterscheiden",
+            "Spülventil in Tropfleitungen einbauen",
+            "Spülwassermenge und Wartung planen"
+          ]
+        }
+      ],
+      "verknuepfungen": [],
+      "herkunft": "W22_BREITRECHERCHE_20261115",
+      "hinweis": "Herstellerprodukt belegt; fachlich von W12-004 abzugrenzen. Eigener SEO-Owner nicht freigegeben.",
+      "aktualisiert": "2026-11-15",
+      "funktionspruefung": {
+        "stand": "FACHKANDIDAT_SEO_OFFEN",
+        "vergleichs_ids": [
+          "W12-004"
+        ],
+        "begruendung": "Gegen W12-004 abgegrenzt; unabhängige Kaufabsicht/SEO noch zu prüfen.",
+        "pruefdatum": "2026-11-15",
+        "hinweis": "Keine WordPress-Freigabe."
+      }
+    },
+    {
+      "id": "W22-P004",
+      "typ": "produkt",
+      "name": "Membrantellerbelüfter für Abwasserbecken",
+      "definition": null,
+      "synonyme": [],
+      "kanonisch_id": "W22-P004",
+      "fachbereich": "Biologische Abwassertechnik",
+      "merkmale": {
+        "funktionen": [
+          "aufbereiten"
+        ],
+        "wasserarten": [
+          "abwasser"
+        ],
+        "einsatzorte": [
+          "kommune",
+          "industrie",
+          "kleingewerbe"
+        ],
+        "zielgruppen": [
+          "kommune",
+          "industrie",
+          "kleinbetrieb"
+        ],
+        "technologien": []
+      },
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
+      "technikstand": "marktprodukt",
+      "bearbeitungsstand": "recherche_offen",
+      "freigabe": "nicht_freigegeben",
+      "quellen": [
+        {
+          "url": "https://wilo.com/de/de/Katalog/de/produkte/sevio-elastox-d-12_id1651?t=1",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W22_Webquelle_2026-11-15"
+        }
+      ],
+      "seo": {
+        "owner_id": null,
+        "status": "ungeprueft",
+        "suchvolumen": null,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
+      },
+      "artikelkategorien": [
+        {
+          "name": "Sauerstoff in Belebungsbecken eintragen",
+          "article_ideas": [
+            "Tellerbelüfter und Oberflächenbelüfter vergleichen",
+            "Belüftermembran nach Abwasserart wählen",
+            "Tellerbelüfter im Belebungsbecken warten"
+          ]
+        }
+      ],
+      "verknuepfungen": [],
+      "herkunft": "W22_BREITRECHERCHE_20261115",
+      "hinweis": "Herstellerprodukt belegt; fachlich von W14-069 abzugrenzen. Eigener SEO-Owner nicht freigegeben.",
+      "aktualisiert": "2026-11-15",
+      "funktionspruefung": {
+        "stand": "FACHKANDIDAT_SEO_OFFEN",
+        "vergleichs_ids": [
+          "W14-069"
+        ],
+        "begruendung": "Gegen W14-069 abgegrenzt; unabhängige Kaufabsicht/SEO noch zu prüfen.",
+        "pruefdatum": "2026-11-15",
+        "hinweis": "Keine WordPress-Freigabe."
+      }
+    },
+    {
+      "id": "W22-P005",
+      "typ": "produkt",
+      "name": "Wasserkraftschnecke",
+      "definition": null,
+      "synonyme": [],
+      "kanonisch_id": "W22-P005",
+      "fachbereich": "Kleinwasserkraft",
+      "merkmale": {
+        "funktionen": [
+          "energie_erzeugen"
+        ],
+        "wasserarten": [
+          "oberflaechenwasser",
+          "prozesswasser"
+        ],
+        "einsatzorte": [
+          "kommune",
+          "industrie"
+        ],
+        "zielgruppen": [
+          "kommune",
+          "industrie",
+          "kleinbetrieb"
+        ],
+        "technologien": []
+      },
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
+      "technikstand": "marktprodukt",
+      "bearbeitungsstand": "recherche_offen",
+      "freigabe": "nicht_freigegeben",
+      "quellen": [
+        {
+          "url": "https://www.wlw.de/de/firma/wam-gmbh-389542/produkte/wasserkraftschnecken-pae-68869",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W22_Webquelle_2026-11-15"
+        }
+      ],
+      "seo": {
+        "owner_id": null,
+        "status": "ungeprueft",
+        "suchvolumen": null,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
+      },
+      "artikelkategorien": [
+        {
+          "name": "Niedrige Fallhöhen energetisch nutzen",
+          "article_ideas": [
+            "Wasserkraftschnecke und Turbine vergleichen",
+            "Wassermenge und Fallhöhe abstimmen",
+            "Wartung und Fischschutz berücksichtigen"
+          ]
+        }
+      ],
+      "verknuepfungen": [],
+      "herkunft": "W22_BREITRECHERCHE_20261115",
+      "hinweis": "Herstellerprodukt belegt; fachlich von W4-077 abzugrenzen. Eigener SEO-Owner nicht freigegeben.",
+      "aktualisiert": "2026-11-15",
+      "funktionspruefung": {
+        "stand": "FACHKANDIDAT_SEO_OFFEN",
+        "vergleichs_ids": [
+          "W4-077"
+        ],
+        "begruendung": "Gegen W4-077 abgegrenzt; unabhängige Kaufabsicht/SEO noch zu prüfen.",
+        "pruefdatum": "2026-11-15",
+        "hinweis": "Keine WordPress-Freigabe."
+      }
+    },
+    {
+      "id": "W22-P006",
+      "typ": "produkt",
+      "name": "Rohrleitungs-Mikroturbinen-Stromgenerator",
+      "definition": null,
+      "synonyme": [],
+      "kanonisch_id": "W22-P006",
+      "fachbereich": "Energie aus Rohrnetzen",
+      "merkmale": {
+        "funktionen": [
+          "energie_erzeugen",
+          "messen"
+        ],
+        "wasserarten": [
+          "trinkwasser",
+          "brauchwasser"
+        ],
+        "einsatzorte": [
+          "wasserwerk",
+          "kommune",
+          "landwirtschaft"
+        ],
+        "zielgruppen": [
+          "kommune",
+          "industrie",
+          "kleinbetrieb"
+        ],
+        "technologien": []
+      },
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
+      "technikstand": "marktprodukt",
+      "bearbeitungsstand": "recherche_offen",
+      "freigabe": "nicht_freigegeben",
+      "quellen": [
+        {
+          "url": "https://www.afcvalves.eu/de/produkte/hydraulische-stromerzeuger",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W22_Webquelle_2026-11-15"
+        }
+      ],
+      "seo": {
+        "owner_id": null,
+        "status": "ungeprueft",
+        "suchvolumen": null,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
+      },
+      "artikelkategorien": [
+        {
+          "name": "Messstellen mit Rohrleitungsstrom versorgen",
+          "article_ideas": [
+            "Rohrgenerator und Batterie vergleichen",
+            "Durchfluss und Druckverlust beim Generator beachten",
+            "Rohrgenerator mit Drucklogger koppeln"
+          ]
+        }
+      ],
+      "verknuepfungen": [],
+      "herkunft": "W22_BREITRECHERCHE_20261115",
+      "hinweis": "Herstellerprodukt belegt; fachlich von W14-084 abzugrenzen. Eigener SEO-Owner nicht freigegeben.",
+      "aktualisiert": "2026-11-15",
+      "funktionspruefung": {
+        "stand": "FACHKANDIDAT_SEO_OFFEN",
+        "vergleichs_ids": [
+          "W14-084"
+        ],
+        "begruendung": "Gegen W14-084 abgegrenzt; unabhängige Kaufabsicht/SEO noch zu prüfen.",
+        "pruefdatum": "2026-11-15",
+        "hinweis": "Keine WordPress-Freigabe."
+      }
+    },
+    {
+      "id": "W22-P007",
+      "typ": "produkt",
+      "name": "Hochdruckpumpe für Wassernebel-Löschanlagen",
+      "definition": null,
+      "synonyme": [],
+      "kanonisch_id": "W22-P007",
+      "fachbereich": "Löschwassertechnik",
+      "merkmale": {
+        "funktionen": [
+          "foerdern",
+          "schuetzen"
+        ],
+        "wasserarten": [
+          "trinkwasser",
+          "brauchwasser"
+        ],
+        "einsatzorte": [
+          "kleingewerbe",
+          "kommune",
+          "industrie"
+        ],
+        "zielgruppen": [
+          "kleinbetrieb",
+          "kommune",
+          "industrie"
+        ],
+        "technologien": []
+      },
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
+      "technikstand": "marktprodukt",
+      "bearbeitungsstand": "recherche_offen",
+      "freigabe": "nicht_freigegeben",
+      "quellen": [
+        {
+          "url": "https://www.danfoss.com/de-de/industries/marine-and-offshore/dcs/fire-fighting/",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W22_Webquelle_2026-11-15"
+        }
+      ],
+      "seo": {
+        "owner_id": null,
+        "status": "ungeprueft",
+        "suchvolumen": null,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
+      },
+      "artikelkategorien": [
+        {
+          "name": "Wassernebel-Löschpumpen auswählen",
+          "article_ideas": [
+            "Wassernebelpumpe und Hydrantenpumpe abgrenzen",
+            "Pumpendruck und Förderleistung beurteilen",
+            "Wassernebelpumpe mit Düsen abstimmen"
+          ]
+        }
+      ],
+      "verknuepfungen": [],
+      "herkunft": "W22_BREITRECHERCHE_20261115",
+      "hinweis": "Herstellerprodukt belegt; fachlich von W15-003 abzugrenzen. Eigener SEO-Owner nicht freigegeben.",
+      "aktualisiert": "2026-11-15",
+      "funktionspruefung": {
+        "stand": "FACHKANDIDAT_SEO_OFFEN",
+        "vergleichs_ids": [
+          "W15-003"
+        ],
+        "begruendung": "Gegen W15-003 abgegrenzt; unabhängige Kaufabsicht/SEO noch zu prüfen.",
+        "pruefdatum": "2026-11-15",
+        "hinweis": "Keine WordPress-Freigabe."
+      }
+    },
+    {
+      "id": "W22-P008",
+      "typ": "produkt",
+      "name": "Automatischer Wasserkraft-Rechenreiniger",
+      "definition": null,
+      "synonyme": [],
+      "kanonisch_id": "W22-P008",
+      "fachbereich": "Kleinwasserkraft",
+      "merkmale": {
+        "funktionen": [
+          "reinigen",
+          "schuetzen"
+        ],
+        "wasserarten": [
+          "oberflaechenwasser"
+        ],
+        "einsatzorte": [
+          "kommune",
+          "industrie"
+        ],
+        "zielgruppen": [
+          "kommune",
+          "industrie",
+          "kleinbetrieb"
+        ],
+        "technologien": []
+      },
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
+      "technikstand": "marktprodukt",
+      "bearbeitungsstand": "recherche_offen",
+      "freigabe": "nicht_freigegeben",
+      "quellen": [
+        {
+          "url": "https://www.twa-wasserkraft.de/leistungen/rechenreiniger",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W22_Webquelle_2026-11-15"
+        }
+      ],
+      "seo": {
+        "owner_id": null,
+        "status": "ungeprueft",
+        "suchvolumen": null,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
+      },
+      "artikelkategorien": [
+        {
+          "name": "Einlaufrechen von Schwemmgut befreien",
+          "article_ideas": [
+            "Vertikal- und Horizontalrechenreiniger vergleichen",
+            "Hydraulische und elektrische Rechenreiniger wählen",
+            "Fischschutz und Rechengutentsorgung planen"
+          ]
+        }
+      ],
+      "verknuepfungen": [],
+      "herkunft": "W22_BREITRECHERCHE_20261115",
+      "hinweis": "Herstellerprodukt belegt; fachlich von W14-064 abzugrenzen. Eigener SEO-Owner nicht freigegeben.",
+      "aktualisiert": "2026-11-15",
+      "funktionspruefung": {
+        "stand": "FACHKANDIDAT_SEO_OFFEN",
+        "vergleichs_ids": [
+          "W14-064"
+        ],
+        "begruendung": "Gegen W14-064 abgegrenzt; unabhängige Kaufabsicht/SEO noch zu prüfen.",
+        "pruefdatum": "2026-11-15",
+        "hinweis": "Keine WordPress-Freigabe."
       }
     }
   ],
