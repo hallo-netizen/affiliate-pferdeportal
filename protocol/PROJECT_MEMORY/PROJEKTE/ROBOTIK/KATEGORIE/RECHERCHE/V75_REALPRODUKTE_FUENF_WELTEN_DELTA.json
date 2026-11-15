@@ -1,0 +1,222 @@
+{
+  "schema": "ROBOTIK_V75_REALPRODUKTE_FUENF_PRIVATE_WELTEN_DELTA",
+  "date": "2026-11-15",
+  "source_base": "campus/robotik-v74-produktbalance-private-bereiche-20261114",
+  "scope": [
+    "Garten",
+    "Sport",
+    "Bildung",
+    "Pflege",
+    "Freizeit"
+  ],
+  "excluded": [
+    "Gewerbe",
+    "Industrie",
+    "Humanoide Arbeit"
+  ],
+  "status_system": [
+    "Produkt",
+    "Projekt",
+    "Idee"
+  ],
+  "quantity": 15,
+  "status_counts": {
+    "Produkt": 15,
+    "Projekt": 0,
+    "Idee": 0
+  },
+  "first_party_evidence_only": true,
+  "no_claim_of_new_models_count": true,
+  "register_policy": "Nur ergänzende Quellen zum bestehenden einen Roboterbüro, kein neuer Master, keine automatische Fachseitenanlage",
+  "candidate_new_function_types": [
+    "Baseball-Wurfroboter",
+    "Transformationsroboter"
+  ],
+  "items": [
+    {
+      "id": "V75-001",
+      "kennzeichnung": "Produkt",
+      "name": "GARDENA smart SILENO sense",
+      "welt": "Garten",
+      "owner": "Mähroboter",
+      "quelle": "https://www.gardena.com/de/c/entdecke/produkte/rasenpflege/maehroboter",
+      "nachweis": "Hersteller führt 400- und 600-m²-Modelle mit kamera- und satellitengestützter Navigation im deutschen Sortiment",
+      "zuordnung": "BESTEHENDER_TYP; nachweislich konkretes Kaufprodukt",
+      "mehrfach_nutzen": "Nur ein zentrales Modell, zusätzliche Verweise ohne Produktduplikat",
+      "hinweis": "Produkt bedeutet tatsächlich real gebaute und öffentlich vertriebene bzw. vertriebene Hardware, nicht garantierten aktuellen Lagerbestand oder verifizierte Wirksamkeit"
+    },
+    {
+      "id": "V75-002",
+      "kennzeichnung": "Produkt",
+      "name": "ECOVACS GOAT A1600 LiDAR PRO",
+      "welt": "Garten",
+      "owner": "Mähroboter / Trimmroboter",
+      "quelle": "https://www.ecovacs.com/de/shop/goat-robotic-lawn-mower",
+      "nachweis": "Deutscher Hersteller-Shop führt Mähroboter mit LiDAR-Navigation und integriertem Kantentrimmer; keine getrennte Roboterklasse allein durch Trimmermodul",
+      "zuordnung": "BESTEHENDE_TYPEN; zwei Funktionen an einem Gerät",
+      "mehrfach_nutzen": "Nur ein zentrales Modell, zusätzliche Verweise ohne Produktduplikat",
+      "hinweis": "Produkt bedeutet tatsächlich real gebaute und öffentlich vertriebene bzw. vertriebene Hardware, nicht garantierten aktuellen Lagerbestand oder verifizierte Wirksamkeit"
+    },
+    {
+      "id": "V75-003",
+      "kennzeichnung": "Produkt",
+      "name": "Beatbot AquaSense 2",
+      "welt": "Garten",
+      "owner": "Poolroboter",
+      "quelle": "https://eu.beatbot.com/de/products/aquasense-2-de",
+      "nachweis": "EU-Hersteller-Shop listet kabellosen Poolroboter zur Boden-, Wand- und Wasserlinienreinigung; Shop bezeichnet ihn als lagernd",
+      "zuordnung": "BESTEHENDER_TYP; kein Poolskimmer",
+      "mehrfach_nutzen": "Nur ein zentrales Modell, zusätzliche Verweise ohne Produktduplikat",
+      "hinweis": "Produkt bedeutet tatsächlich real gebaute und öffentlich vertriebene bzw. vertriebene Hardware, nicht garantierten aktuellen Lagerbestand oder verifizierte Wirksamkeit"
+    },
+    {
+      "id": "V75-004",
+      "kennzeichnung": "Produkt",
+      "name": "Maytronics Dolphin LIBERTY 400",
+      "welt": "Garten",
+      "owner": "Poolroboter",
+      "quelle": "https://www.maytronics.com/de-de/store/residential-pools/cordless-cleaners/dolphin-liberty-400/99998140-EU.html",
+      "nachweis": "Deutsche Herstellerseite bietet realen Akku-Poolroboter mit Boden-, Wand- und Wasserlinienreinigung; keine pauschale Aussage zur heutigen Lagerverfügbarkeit",
+      "zuordnung": "BESTEHENDER_TYP; zweiter Hersteller kein weiterer Typ",
+      "mehrfach_nutzen": "Nur ein zentrales Modell, zusätzliche Verweise ohne Produktduplikat",
+      "hinweis": "Produkt bedeutet tatsächlich real gebaute und öffentlich vertriebene bzw. vertriebene Hardware, nicht garantierten aktuellen Lagerbestand oder verifizierte Wirksamkeit"
+    },
+    {
+      "id": "V75-005",
+      "kennzeichnung": "Produkt",
+      "name": "PONGBOT Pace S Pro",
+      "welt": "Sport",
+      "owner": "Tennisroboter",
+      "quelle": "https://pong-bot.de/de/produkt/pace-s-pro/",
+      "nachweis": "Offizieller deutscher Vertriebspartner bietet reale Trainingsballmaschine mit motorisierter Ballausgabe und Spielerpositionserfassung an",
+      "zuordnung": "BESTEHENDER_TYP; Interaktion kein eigener Roboterbaum",
+      "mehrfach_nutzen": "Nur ein zentrales Modell, zusätzliche Verweise ohne Produktduplikat",
+      "hinweis": "Produkt bedeutet tatsächlich real gebaute und öffentlich vertriebene bzw. vertriebene Hardware, nicht garantierten aktuellen Lagerbestand oder verifizierte Wirksamkeit"
+    },
+    {
+      "id": "V75-006",
+      "kennzeichnung": "Produkt",
+      "name": "Dr. Dish Home",
+      "welt": "Sport",
+      "owner": "Basketballroboter",
+      "quelle": "https://eu.drdishbasketball.com/for-home",
+      "nachweis": "Hersteller bietet automatisch drehende Ball-Rückspiel-Trainingsmaschine ausdrücklich für private Einfahrten und Heimtraining",
+      "zuordnung": "BESTEHENDER_TYP; nicht als selbstspielender Gegner kennzeichnen",
+      "mehrfach_nutzen": "Nur ein zentrales Modell, zusätzliche Verweise ohne Produktduplikat",
+      "hinweis": "Produkt bedeutet tatsächlich real gebaute und öffentlich vertriebene bzw. vertriebene Hardware, nicht garantierten aktuellen Lagerbestand oder verifizierte Wirksamkeit"
+    },
+    {
+      "id": "V75-007",
+      "kennzeichnung": "Produkt",
+      "name": "Sports Attack I-Hack Attack",
+      "welt": "Sport",
+      "owner": "Baseball-Wurfroboter",
+      "quelle": "https://sportsattack.com/i-hack-attack-2-baseball-pitching-machine/",
+      "nachweis": "Hersteller verkauft eine programmierbare Baseball-Wurfmaschine mit motorisch gesteuerter Geschwindigkeit, Spin und Wurfsequenzen",
+      "zuordnung": "NEUER_TYPKANDIDAT; prüfe private Trainingsabsicht und Sport-Unterscheidung",
+      "mehrfach_nutzen": "Nur ein zentrales Modell, zusätzliche Verweise ohne Produktduplikat",
+      "hinweis": "Produkt bedeutet tatsächlich real gebaute und öffentlich vertriebene bzw. vertriebene Hardware, nicht garantierten aktuellen Lagerbestand oder verifizierte Wirksamkeit"
+    },
+    {
+      "id": "V75-008",
+      "kennzeichnung": "Produkt",
+      "name": "Ozobot Evo Entry Kit",
+      "welt": "Bildung",
+      "owner": "Lernroboter",
+      "quelle": "https://ozobot.com/products/evo-entry-kit-1",
+      "nachweis": "Offizieller Shop beschreibt physisch fahrendes Programmiergerät mit Farbsensoren, Näherungssensoren und privater Lernnutzung; Shop kann bei einzelner Variante Sold out melden",
+      "zuordnung": "BESTEHENDER_TYP; konkrete Modell- und Materialbasis",
+      "mehrfach_nutzen": "Nur ein zentrales Modell, zusätzliche Verweise ohne Produktduplikat",
+      "hinweis": "Produkt bedeutet tatsächlich real gebaute und öffentlich vertriebene bzw. vertriebene Hardware, nicht garantierten aktuellen Lagerbestand oder verifizierte Wirksamkeit"
+    },
+    {
+      "id": "V75-009",
+      "kennzeichnung": "Produkt",
+      "name": "Matatalab Tale-Bot Pro",
+      "welt": "Bildung",
+      "owner": "Lernroboter",
+      "quelle": "https://matatalab.com/en/tale-botpro",
+      "nachweis": "Hersteller dokumentiert tatsächlich gebautes Vorschul-Robotermodell mit Tastenprogrammierung, Bewegungen und Sprachwiedergabe",
+      "zuordnung": "BESTEHENDER_TYP; keine neue Seite nur weil andere Altersklasse",
+      "mehrfach_nutzen": "Nur ein zentrales Modell, zusätzliche Verweise ohne Produktduplikat",
+      "hinweis": "Produkt bedeutet tatsächlich real gebaute und öffentlich vertriebene bzw. vertriebene Hardware, nicht garantierten aktuellen Lagerbestand oder verifizierte Wirksamkeit"
+    },
+    {
+      "id": "V75-010",
+      "kennzeichnung": "Produkt",
+      "name": "KUBO Coding Robot",
+      "welt": "Bildung",
+      "owner": "Lernroboter",
+      "quelle": "https://kubo-robot.com/",
+      "nachweis": "Hersteller bewirbt real über Bildungspartner vertriebenen fahrbaren Lernroboter mit physischen Programmierelementen",
+      "zuordnung": "BESTEHENDER_TYP; über Partner vertrieben, nicht pauschal frei lieferbar",
+      "mehrfach_nutzen": "Nur ein zentrales Modell, zusätzliche Verweise ohne Produktduplikat",
+      "hinweis": "Produkt bedeutet tatsächlich real gebaute und öffentlich vertriebene bzw. vertriebene Hardware, nicht garantierten aktuellen Lagerbestand oder verifizierte Wirksamkeit"
+    },
+    {
+      "id": "V75-011",
+      "kennzeichnung": "Produkt",
+      "name": "LuxAI QTrobot Autism Home",
+      "welt": "Bildung",
+      "owner": "Lernroboter / soziale Lernassistenz",
+      "quelle": "https://luxai.com/robot-for-teaching-children-with-autism-at-home/",
+      "nachweis": "Hersteller bietet physisches interaktives QTrobot-Hardwarepaket für Eltern zu Hause; aktive Software-Subscription erforderlich; Nutzen nicht pauschal medizinisch beweisen",
+      "zuordnung": "BESTEHENDER_TYP; Verlinkung Pflege, keine doppelte Produktseite",
+      "mehrfach_nutzen": "Nur ein zentrales Modell, zusätzliche Verweise ohne Produktduplikat",
+      "hinweis": "Produkt bedeutet tatsächlich real gebaute und öffentlich vertriebene bzw. vertriebene Hardware, nicht garantierten aktuellen Lagerbestand oder verifizierte Wirksamkeit"
+    },
+    {
+      "id": "V75-012",
+      "kennzeichnung": "Produkt",
+      "name": "Kinova Jaco Assistive Arm",
+      "welt": "Pflege",
+      "owner": "Rollstuhlarme",
+      "quelle": "https://assistive.kinovarobotics.com/product/jaco-robotic-arm",
+      "nachweis": "Hersteller dokumentiert realen mehrgelenkigen Greifarm für Elektrorollstühle; Funktionen wie Greifen, Essen/Trinken und Bedienelemente betätigen",
+      "zuordnung": "BESTEHENDER_TYP; in älteren Rechercheumfeldern bereits erwähnt",
+      "mehrfach_nutzen": "Nur ein zentrales Modell, zusätzliche Verweise ohne Produktduplikat",
+      "hinweis": "Produkt bedeutet tatsächlich real gebaute und öffentlich vertriebene bzw. vertriebene Hardware, nicht garantierten aktuellen Lagerbestand oder verifizierte Wirksamkeit"
+    },
+    {
+      "id": "V75-013",
+      "kennzeichnung": "Produkt",
+      "name": "PARO Roboter-Robbe",
+      "welt": "Pflege",
+      "owner": "Pflegebegleiter / Therapieroboter",
+      "quelle": "https://robbeparo.de/product/",
+      "nachweis": "Offizieller deutscher Vertriebspartner bietet tatsächlich existierende berührungsreaktive Roboter-Robbe an; konkrete Therapieeffekte nicht ohne gesonderten Beleg behaupten",
+      "zuordnung": "BESTEHENDER_TYP; Reha-/Pflegekontext; keine neue Roboterfamilie allein für Marke",
+      "mehrfach_nutzen": "Nur ein zentrales Modell, zusätzliche Verweise ohne Produktduplikat",
+      "hinweis": "Produkt bedeutet tatsächlich real gebaute und öffentlich vertriebene bzw. vertriebene Hardware, nicht garantierten aktuellen Lagerbestand oder verifizierte Wirksamkeit"
+    },
+    {
+      "id": "V75-014",
+      "kennzeichnung": "Produkt",
+      "name": "Robosen Flagship Grimlock",
+      "welt": "Freizeit",
+      "owner": "Transformationsroboter",
+      "quelle": "https://www.robosen.com/de/grimlock-g1-flagship",
+      "nachweis": "Hersteller zeigt selbsttransformierenden motorisierten Spiel-/Sammlerroboter mit 34 Servomotoren, App und Sprachsteuerung; deutsche Produktseite meldet ausverkauft",
+      "zuordnung": "NEUER_TYPKANDIDAT; real gebaut, nicht mit einfachem unbeweglichem Spielzeug verwechseln",
+      "mehrfach_nutzen": "Nur ein zentrales Modell, zusätzliche Verweise ohne Produktduplikat",
+      "hinweis": "Produkt bedeutet tatsächlich real gebaute und öffentlich vertriebene bzw. vertriebene Hardware, nicht garantierten aktuellen Lagerbestand oder verifizierte Wirksamkeit"
+    },
+    {
+      "id": "V75-015",
+      "kennzeichnung": "Produkt",
+      "name": "Petoi Nybble Q",
+      "welt": "Freizeit",
+      "owner": "Robotertiere / Roboterkatzen",
+      "quelle": "https://www.petoi.com/products/petoi-nybble-q-robot-cat",
+      "nachweis": "Hersteller vertreibt programmierbare Robotkatze mit 11 bewegten Gelenken; Freizeit und Bildung, nur ein Modell im Register",
+      "zuordnung": "BESTEHENDER_TYP; anderer Petoi-Produkttyp als V74 Bittle-Hund",
+      "mehrfach_nutzen": "Nur ein zentrales Modell, zusätzliche Verweise ohne Produktduplikat",
+      "hinweis": "Produkt bedeutet tatsächlich real gebaute und öffentlich vertriebene bzw. vertriebene Hardware, nicht garantierten aktuellen Lagerbestand oder verifizierte Wirksamkeit"
+    }
+  ],
+  "duplicate_warning": "Einzelne Modelle und Funktionsklassen können bereits in 581 ursprünglichen Forschungsmaster-Funden und V74 enthalten sein; nicht addieren oder neue Modellzahl erfinden.",
+  "balance_note": "V69–V73 Quellen-Kohorte 116: 5 Produkt, 39 Projekt, 72 Idee. V74 21 und V75 15 produktbasierte Quellenbelege. Alle zusammen sind nicht die Marktstatusverteilung des ganzen Portals; ältere Quellen, Kategorien und Modelle sind nicht einheitlich klassifiziert.",
+  "wordpress_changes": 0,
+  "plugin_changes": 0,
+  "paid_seo_calls": 0
+}
