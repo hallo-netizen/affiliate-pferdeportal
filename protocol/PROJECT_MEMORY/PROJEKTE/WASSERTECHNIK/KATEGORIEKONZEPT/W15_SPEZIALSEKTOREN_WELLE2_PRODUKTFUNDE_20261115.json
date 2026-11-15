@@ -8,11 +8,14 @@
     "editorial_categories_proposed": 25,
     "concrete_article_ideas": 75,
     "first_pass_new": 9,
-    "functional_or_intent_boundary": 16
+    "functional_or_intent_boundary": 15,
+    "alias_without_new_owner": 1,
+    "maximum_distinct_function_candidates": 24
   },
   "role_counts": {
-    "INTENT_GRENZFALL": 16,
-    "NEU_KANDIDAT": 9
+    "INTENT_GRENZFALL": 15,
+    "NEU_KANDIDAT": 9,
+    "GLEICHE_FUNKTION_QUERVERWEIS": 1
   },
   "notes": "These are research candidates only. Technical uniqueness and Google SERP are not validated. Some W15 products are almost certainly aliases/overlapping with W4/W12/W14 and will be combined before any WP page decision.",
   "items": [
@@ -362,9 +365,10 @@
         "Nährstoffrezepturen bei wechselnder Wasserqualität regeln"
       ],
       "primary_source_url": "https://www.netafim.de/Produkte-und-Loesungen/Werkzeuge/Fertigation/",
-      "research_role": "INTENT_GRENZFALL",
-      "relationship_note": "W14 Fertigations-Dosiereinheit bereits erfasst; vermutlich eine funktionale Einheit = Alias bis anderer Nachweis.",
-      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN"
+      "research_role": "GLEICHE_FUNKTION_QUERVERWEIS",
+      "relationship_note": "Identische Systemaufgabe wie W14 Fertigations-Dosiereinheit; unterschiedliche Einsatzsprache, ohne weiteren Funktionsbeleg nur ein SEO-/Produkt-Owner.",
+      "wordpress_status": "NICHT_ANGELEGT_EINMALIGE_FACH_ENTSCHEIDUNG_NOCH_OFFEN",
+      "canonical_product": "Fertigations-Dosiereinheit"
     }
   ]
 }
