@@ -141,7 +141,13 @@ final class Robotik_V65_Publication {
     public static function screen():void {
         self::authorized();$state=get_option(self::STATE,[]);
         echo '<div class="wrap"><h1>Robotik – 68 neue Seiten sichtbar machen</h1>';
-        echo '<p>Nur vorhandene, nach 227/227 gepruefte Robotik-Entwurfsseiten. Die 16 fachlich offenen SEO-Faelle, deren 48 Rubriken und alle fremden Seiten bleiben unangetastet. WordPress-Kategorien selbst sind bereits angelegt und muessen nicht publiziert werden.</p>';
+        echo '<p>Nur vorhandene, nach 227/227 gepruefte Robotik-Entwurfsseiten. Die weiteren 16 fachlich freigegebenen Seiten und 48 Rubriken folgen in einer eigenen gesicherten Fortsetzungsphase. Fremde Seiten bleiben unangetastet. WordPress-Kategorien selbst sind bereits angelegt und muessen nicht publiziert werden.</p>';
+        // The 68-page phase is complete: do not revalidate the old 248-term
+        // pre-followup count after the 16+48 phase has legitimately finished.
+        if(($state['status']??'')==='COMPLETE'){
+            echo '<div class="notice notice-success"><p>68/68 bisherige neue Seiten veroeffentlicht. Die weiteren 16 Fachseiten werden im geschuetzten Nachtrag derselben Kategorie-Gesamtuebernahme bearbeitet.</p></div>';
+            echo '</div>'; return;
+        }
         try{$p=self::preview();}catch(Throwable $e){$p=['ready'=>false,'notice'=>$e->getMessage()];}
         if(!empty($p['notice']))echo '<div class="notice notice-warning"><p>'.esc_html($p['notice']).'</p></div>';
         if(!empty($p['ready'])){
@@ -151,7 +157,7 @@ final class Robotik_V65_Publication {
                 wp_nonce_field('robotik_v65_publish_start');
                 echo '<input type="hidden" name="action" value="robotik_v65_publish_start">';
                 echo '<input type="hidden" name="robotik_v65_token" value="'.esc_attr($p['token']).'">';
-                echo '<label><input type="checkbox" name="robotik_v65_approve" value="1" required> 68 gepruefte neue Seiten oeffentlich freigeben (auch ohne fertige Fachartikel). 16 SEO-HOLD-Seiten bleiben gesperrt.</label>';
+                echo '<label><input type="checkbox" name="robotik_v65_approve" value="1" required> 68 gepruefte neue Seiten oeffentlich freigeben (auch ohne fertige Fachartikel). 16 weitere Fachseiten folgen im selben geschuetzten Workflow.</label>';
                 submit_button('Einmalig alle neuen Seiten veroeffentlichen','primary');echo '</form>';
             }
         }
