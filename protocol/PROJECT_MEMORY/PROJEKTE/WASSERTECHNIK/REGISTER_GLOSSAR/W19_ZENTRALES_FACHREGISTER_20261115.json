@@ -25,7 +25,8 @@
     "w19_2_file": "REGISTER_GLOSSAR/W19_GLOSSAR_UND_ANBIETERRUBRIKEN_20261115.json",
     "w19_2_sha": "672ecc902f6b9707acb13a7ab1fb704f6840a0a2",
     "w19_3_file": "REGISTER_GLOSSAR/W19_FUNKTIONALE_ABGRENZUNG_275_BESTAND_20261115.json",
-    "w19_3_sha": "4d9c758b34bb1d1996b8a16b8cc08492b80cd3d5"
+    "w19_3_sha": "4d9c758b34bb1d1996b8a16b8cc08492b80cd3d5",
+    "w19_original_ballast_primary": "https://www.alfalaval.com/products/process-solutions/ballast-water-treatment-system/pureballast-3/"
   },
   "kontrolliertes_vokabular": {
     "typ": [
@@ -22119,7 +22120,7 @@
       "freigabe": "nicht_freigegeben",
       "quellen": [
         {
-          "url": "https://www.alfalaval.com/products/process-solutions/ballast-water-management-system/pureballast-3/",
+          "url": "https://www.alfalaval.com/products/process-solutions/ballast-water-treatment-system/pureballast-3/",
           "art": "hersteller_oder_fachquelle",
           "pruefung": "W19_Webquelle_2026-11-15"
         }
