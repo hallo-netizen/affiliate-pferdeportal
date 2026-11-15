@@ -1,6 +1,14 @@
 # Robotik V80 – 11 neue Robotertypen: Bestandsabgleich, Modelle, Artikelthemen
 *15. November 2026 · Fachplanung nach Nutzerbestätigung „Kategorien live“ · kein neuer Import und keine Frontend-Änderung*
 
+## 0. Im zentralen Fachmaster erledigt – keine zweite Forschungsdatenbank
+
+Die 11 vorgeschlagenen Seiten sind **als Forschung** im **EINEN bestehenden Fachmaster `RECHERCHE/PRODUKTE_V2_20261108.json`, Revision 15**, quellengebunden verankert:
+- **2 schon bestehende Forschungstypen übernommen statt doppelt angelegt:** `FIN-01 Katzenkloroboter → rf142` (alter Fachbegriff „Automatische Katzentoiletten-Reinigungsgeräte“); `FIN-02 Padel-Trainingsroboter → rf148` (alter Grenzbegriff „Mobile Tennis- und Padel-Trainingsroboter“).
+- **9 wirklich neue Forschungskennungen ergänzt:** `FIN-03=rf175, FIN-04=rf176, FIN-05=rf177, FIN-21=rf178, FIN-22=rf179, FIN-26=rf180, FIN-27=rf181, FIN-28=rf182, FIN-29=rf183`.
+- **68 bestehende Master-Robotertypkandidaten und alle 174 bisherigen Randkandidaten unverändert erhalten**; der Forschungsrandbestand hat jetzt **183 eindeutig gekennzeichnete Einträge**. Die ältere Einordnung von rf142 („vorläufig nicht als Robotertyp”) ist durch die neue fachliche V80-Quellenprüfung als **historische V8-Vorprüfung** einzuordnen; der reale WordPress-Import ist damit nicht freigegeben.
+- Das betrifft **Fachrecherche**, keine neue veröffentlichte Seite, keine neue WP-Kategorie, kein zweites Register. Im Roboterfinder später ausschließlich die Daten aus diesem Master referenzieren.
+
 ## 1. Ergebnis in einem Satz
 
 **Alle 11 fachlich vorgeschlagenen neuen Robotertypen lassen sich eindeutig an eine bereits vorhandene übergeordnete WordPress-Seite im verbindlichen V62-Baum (188 Seiten) hängen: 11 Typseiten, 0 künstliche Zwischenebenen, 0 neue Hauptwelten.** Für jeden Typ werden **genau zwei individuell sinnvolle flache Beitragsrubriken mit jeweils vier eigenständigen Artikelideen** vorgeschlagen, also **22 mögliche Rubriken und 88 redaktionelle Themenrichtungen**. Dies sind keine veröffentlichten Artikel oder WordPress-Kategorien.
