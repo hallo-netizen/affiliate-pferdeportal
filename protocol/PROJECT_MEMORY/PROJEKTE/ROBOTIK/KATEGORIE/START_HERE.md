@@ -1,4 +1,12 @@
 # ROBOTIK → KATEGORIE
+
+## AKTUELL 15.11.2026 – KATEGORIEN LIVE, FACHFORSCHUNG V80
+- Nutzer bestätigt: **Kategorien im Frontend sichtbar**. Live-Gesamtdaten noch nicht separat aus WordPress exportiert; keine weiteren Plugins auf Verdacht.
+- **Einziger Kategorieplugin-Installer laut heutigem Release: `PLUGIN/CURRENT.zip` = 0.4.13.** Ältere Versionsangaben unten sind historische Forschungs-/Teststationen, keine Installationsanweisung.
+- **Einziger Fachmaster:** `RECHERCHE/PRODUKTE_V2_20261108.json` **Revision 15** mit unveränderten 68 Grundkandidaten und **183 Forschungskandidaten** (zuvor 174; neun neu). Die **11 neuen Typvorschläge sind darin bereits eingeordnet**, zwei alte Kennungen `rf142/rf148` statt Duplikaten benutzt.
+- **Nächste gebündelte Fachunterlage:** `RECHERCHE/V80_11_TYPEN_ABGLEICH_ARTIKELPLAN_20261115.md` und dazu die JSON-Datei: 11 mögliche Fachseiten mit vorhandenen Elternseiten, 22 sinnvolle Rubriken und 88 artikeltragfähige Themenrichtungen; **keine WordPress-Schreibfreigabe für diese 11**. 18 weitere neue Forschungsfunde bleiben im Register/als Magazinthemen.
+- **Kein Google-Adressen-Zwang**, keine bezahlten SEO-Abfragen, keine zweite Entscheidung oder Kopie der Produktdatenbank. Diese aktuelle Zusammenfassung ersetzt alle widersprechenden historischen Hinweise nachfolgend.
+
 Stand: 10.11.2026
 
 **Einziger operativer Status:** [CURRENT_STATE.md](CURRENT_STATE.md). **EINZIGER Forschungsmaster Revision 11**; frühere Versionen in älteren Prüfprotokollen sind historische Zwischenstände.
