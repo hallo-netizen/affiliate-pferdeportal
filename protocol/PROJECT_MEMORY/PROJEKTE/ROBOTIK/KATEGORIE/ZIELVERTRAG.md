@@ -1,5 +1,12 @@
 # ZIELVERTRAG – KATEGORIEN ROBOTIK
 
+## V76 – FACHRECHERCHE SCHLUSSPUNKT VOR SEO/WORDPRESS (15.11.2026)
+- Die vereinbarte einmalige private Abschlussrunde ist mit der V76-Zusammenführung beendet. V52/V67 bleiben der **unveränderte Basisplan**, die 11 in V76 konkret benannten **redaktionellen Ergänzungsvorschläge** sind **nicht bereits importiert oder automatisch freigegeben**. Weitere 18 Kandidaten erhalten im zentralen Recherchebestand einen fachlichen Anknüpfungspunkt; **keine Löschungen**.
+- Nur die echten **unterschiedlichen Robotertyp-Funktionen** sollen eigene letzte WordPress-Seiten haben; konkrete Hersteller-Modelle, Patente, Projekte, Ideen bleiben auch ohne neue Kategorieseite dokumentiert und können für Magazin/Glossar dienen. Ein Hersteller-Modell kann in mehreren Anwendungen referenziert sein, wird aber nur einmal registriert.
+- Die 100 im Sieben-Welten-Fachbaum enthaltenen Typseiten umfassen auch 4 humanoide Arbeitsanwendungen außerhalb des aktuellen Rechercheauftrags. **Die 100 sind eine Baumzählung, keine genaue Privatanwendungs- oder Marktstatusquote.** Reale Produkte sollen später sichtbar überwiegen, ohne starre Quote oder willkürliches Aussortieren.
+- **Keine weitere breite Recherche als Voraussetzung für den gegenwärtigen Fachabschluss**. Folgearbeiten gehören zur getrennten SEO-/WP-Umsetzungsstrecke und brauchen vorhandene Freigaben, vor allem 16 echte SERP-HOLD-Prüfungen und V63 Live-Readback. Keine Verschiebung von Gewerbe/Industrie, keine Arbeits-Humanoiden-Recherche.
+- Referenz: `RECHERCHE/V76_ENDGUELTIGE_FACHRECHERCHE_PRIVAT_20261115.md`, `RECHERCHE/V76_FACHABSCHLUSS_29_KANDIDATEN.json`.
+
 ## V74 – VERBINDLICHE QUALITÄTSRICHTUNG: REALE ROBOTER ÜBERWIEGEN, KEIN STARRES QUOTENSYSTEM (14.11.2026)
 - Der spätere öffentliche Robotik-Bestand soll **in klarer Mehrheit konkrete, tatsächlich existierende Geräte und funktionierende Produktarten** zeigen. Als **grobe redaktionelle Richtung** gelten etwa zwei Drittel bis drei Viertel; **keine Mindest-/Höchstschwelle, kein automatisches Aussortieren, kein 70,0005-%-Kontrollwert**. Fachliche Qualität und nachgewiesene Funktionen haben Vorrang vor exakten Zahlen.
 - **Auch außergewöhnliche Patente, studentische Entwürfe, Designstudien und Forschungsprototypen weiter gezielt recherchieren und transparent als `Idee` oder `Projekt` kennzeichnen**; ein thematisch relevanter Fund wird niemals allein wegen der Mischungsquote verworfen. `Produkt | Projekt | Idee` bleibt die EINZIGE Grobkennzeichnung, Herkunft/Quelle/Datum als normale Felder.
