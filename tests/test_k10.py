@@ -131,6 +131,35 @@ class K10Tests(unittest.TestCase):
         result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
         self.assertIn('HARD_RULE_NOT_PASS:facts.trace_binding',result['findings'])
 
+    def test_source_marker_must_not_print_source_name(self):
+        # A source can be named in natural prose; the source marker itself is invisible.
+        from engine.checkers import fact_receipts
+        a=make_base()
+        needle=trace('F1','Fachquelle F1',a['research_claims']['F1']['evidence_text_sha256'])
+        visible=needle.replace('></span>','>Neckermann von Buxtehude</span>')
+        a['html']=a['html'].replace(needle,visible,1)
+        receipt={r['rule_id']:r for r in fact_receipts(a)}['facts.trace_binding']
+        self.assertEqual(receipt['status'],'FAIL')
+        self.assertIn('visible_source_marker:F1',receipt['evidence']['findings'])
+
+    def test_natural_source_mention_and_invisible_marker_still_pass(self):
+        from engine.checkers import fact_receipts
+        a=make_base()
+        a['html']=a['html'].replace('Eine Longierpeitsche unterstützt',
+                                    'Laut Neckermann von Buxtehude unterstützt eine Longierpeitsche',1)
+        receipt={r['rule_id']:r for r in fact_receipts(a)}['facts.trace_binding']
+        self.assertEqual(receipt['status'],'PASS')
+
+    def test_actual_horseware_bad_marker_blocked_old_marker_allowed(self):
+        from engine.checkers import fact_receipts
+        from pathlib import Path
+        source=Path('real_runs/k0')
+        old=json.loads((source/'k0-20261110-42619ca7-01-r2'/'SEALED_WRITER_PRODUCT.json').read_text(encoding='utf-8'))
+        broken=json.loads((source/'k0-20261115-horseware-9221a640'/'SEALED_WRITER_PRODUCT.json').read_text(encoding='utf-8'))
+        for a,expected in ((old,'PASS'),(broken,'FAIL')):
+            receipt={r['rule_id']:r for r in fact_receipts(a)}['facts.trace_binding']
+            self.assertEqual(receipt['status'],expected)
+
     def test_preflight_receipts_compose_with_lt68_receipt_without_content_recheck(self):
         a=make_base()
         prepared,receipts,report=preflight_article(a)
