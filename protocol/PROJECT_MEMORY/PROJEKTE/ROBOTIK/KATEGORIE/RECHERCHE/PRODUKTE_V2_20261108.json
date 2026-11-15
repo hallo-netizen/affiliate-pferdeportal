@@ -1,7 +1,7 @@
 {
   "project": "robotik",
   "record_type": "RESEARCH_CANDIDATES_NOT_IMPORT",
-  "updated": "2026-11-10",
+  "updated": "2026-11-15",
   "not_a_wordpress_plan": true,
   "keyword_calls": 0,
   "approved_product_pages": 0,
@@ -5019,7 +5019,7 @@
     }
   ],
   "canonical_source": true,
-  "revision": 14,
+  "revision": 15,
   "research_state": "UNAPPROVED",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
@@ -9108,6 +9108,58 @@
         "decision": "NO_CATEGORY_TREE_YET",
         "reason": "Automatische Katzentoilette benötigt erst fachliche Abgrenzung: reine Automatik oder tatsächlich Robotik",
         "no_forced_wp_categories": true
+      },
+      "research_v80": {
+        "date": "2026-11-15",
+        "v80_proposal_id": "FIN-01",
+        "source_plan": "V80_11_TYPEN_ABGLEICH_ARTIKELPLAN_20261115.json",
+        "target_path": [
+          "Haushalt",
+          "Reinigung",
+          "Katzenkloroboter"
+        ],
+        "existing_parent_source_id": "V52_HUB_Haushalt_Reinigung",
+        "editorial_stage": "Produkt",
+        "producer_evidence_stage": "Produkt",
+        "source_urls": [
+          {
+            "name": "Whisker Litter-Robot 4",
+            "url": "https://www.litter-robot.com/eu/de/litter-robot-4.html"
+          },
+          {
+            "name": "PETKIT Purobot Max Pro 2",
+            "url": "https://www.petkit.com/products/purobot-max-pro-2-automatic-cat-litter-box-with-ai-camera"
+          }
+        ],
+        "article_category_proposals": [
+          {
+            "proposed_local_id": "fin-01_facet_1",
+            "name": "Auswahl",
+            "topics": [
+              "Eignung für große Katzen",
+              "Sicherheitssensoren beim Reinigungslauf",
+              "Welche Katzenstreu funktioniert?",
+              "Was gilt im Mehrkatzenhaushalt?"
+            ],
+            "has_minimum_four_real_angles": true
+          },
+          {
+            "proposed_local_id": "fin-01_facet_2",
+            "name": "Betrieb",
+            "topics": [
+              "Abfallbehälter und Entleerung",
+              "Gerüche und Filter",
+              "Reinigung der Mechanik",
+              "Strombedarf und Stellfläche"
+            ],
+            "has_minimum_four_real_angles": true
+          }
+        ],
+        "distinct_intent": "Automatische Reinigung der Katzentoilette; Haustierroboter bleiben Begleit-/Interaktionsgeräte.",
+        "keyword_measurement": "NICHT_ERHOBEN_KEINE_GOOGLE_URL_SPERRE",
+        "wp_release": "NICHT_FREIGEGEBEN",
+        "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
+        "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
       }
     },
     {
@@ -9347,7 +9399,55 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "research_v80": {
+        "date": "2026-11-15",
+        "v80_proposal_id": "FIN-02",
+        "source_plan": "V80_11_TYPEN_ABGLEICH_ARTIKELPLAN_20261115.json",
+        "target_path": [
+          "Sport",
+          "Ballsport",
+          "Padel-Trainingsroboter"
+        ],
+        "existing_parent_source_id": "rbt_c921e3a524a4ad2a",
+        "editorial_stage": "Projekt",
+        "producer_evidence_stage": "Produkt (Vorbestellung)",
+        "source_urls": [
+          {
+            "name": "PONGBOT Aura – Mehrsportgerät",
+            "url": "https://store.pongbotsports.com/products/aura"
+          }
+        ],
+        "article_category_proposals": [
+          {
+            "proposed_local_id": "fin-02_facet_1",
+            "name": "Training",
+            "topics": [
+              "Grundschläge und Volleys beim Padel",
+              "Solo-Training auf dem Padelplatz",
+              "Bande im Padeltraining sinnvoll berücksichtigen",
+              "Zuspieltempo für Einsteiger"
+            ],
+            "has_minimum_four_real_angles": true
+          },
+          {
+            "proposed_local_id": "fin-02_facet_2",
+            "name": "Geräte",
+            "topics": [
+              "Welche Ballmaschinen können Padel?",
+              "Platzbedarf und Akkulaufzeit",
+              "Padel-Funktion bei Mehrsportgeräten freischalten",
+              "Grenzen bei Banden- und Doppeltraining"
+            ],
+            "has_minimum_four_real_angles": true
+          }
+        ],
+        "distinct_intent": "Padel-spezifische Trainingsfragen; Tennis, Padel und Pickleball sind Sportarten, kein Anlass, Aura mehrfach als Produkt anzulegen.",
+        "keyword_measurement": "NICHT_ERHOBEN_KEINE_GOOGLE_URL_SPERRE",
+        "wp_release": "NICHT_FREIGEGEBEN",
+        "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
+        "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
+      }
     },
     {
       "id": "rf149",
@@ -10478,6 +10578,577 @@
         "keyword_research_done": false,
         "approved_for_wordpress": false
       }
+    },
+    {
+      "id": "rf175",
+      "name": "Pickleball-Trainingsroboter",
+      "topic_kind": "V80_11_TYPE_CANDIDATE_RESEARCH_ONLY",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Sport",
+      "source_url": "https://spinshotsports.de/de/products/spinshot-player-pickleball-machine",
+      "evidence_grade": "OFFICIAL_VENDOR_OR_UNIVERSITY_NOT_INDEPENDENT_TEST",
+      "related_existing_ids": [
+        "rf148"
+      ],
+      "non_duplication_rule": "Pickleball als eigene Sportart mit eigenen Bällen und Übungsfragen; Sportgerät im Modellregister trotzdem nur einmal.",
+      "keyword_status": "NICHT_GEMESSEN_KEINE_GOOGLE_URL_SPERRPRUEFUNG",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "research_v80": {
+        "date": "2026-11-15",
+        "v80_proposal_id": "FIN-03",
+        "source_plan": "V80_11_TYPEN_ABGLEICH_ARTIKELPLAN_20261115.json",
+        "target_path": [
+          "Sport",
+          "Ballsport",
+          "Pickleball-Trainingsroboter"
+        ],
+        "existing_parent_source_id": "rbt_c921e3a524a4ad2a",
+        "editorial_stage": "Produkt",
+        "producer_evidence_stage": "Produkt",
+        "source_urls": [
+          {
+            "name": "Spinshot Player Pickleball",
+            "url": "https://spinshotsports.de/de/products/spinshot-player-pickleball-machine"
+          },
+          {
+            "name": "PONGBOT Aura – Mehrsportgerät",
+            "url": "https://store.pongbotsports.com/products/aura"
+          }
+        ],
+        "article_category_proposals": [
+          {
+            "proposed_local_id": "fin-03_facet_1",
+            "name": "Training",
+            "topics": [
+              "Dink-Training am Netz",
+              "Volley-Übungen allein",
+              "Rückschläge gezielt wiederholen",
+              "Übungsfolgen für verschiedene Spielstärken"
+            ],
+            "has_minimum_four_real_angles": true
+          },
+          {
+            "proposed_local_id": "fin-03_facet_2",
+            "name": "Auswahl",
+            "topics": [
+              "Welche Ballgrößen unterstützt die Maschine?",
+              "Wurfrichtung und Spin einstellen",
+              "Akku und Tragbarkeit vergleichen",
+              "App-Steuerung und Trainingsprogramme"
+            ],
+            "has_minimum_four_real_angles": true
+          }
+        ],
+        "distinct_intent": "Pickleball als eigene Sportart mit eigenen Bällen und Übungsfragen; Sportgerät im Modellregister trotzdem nur einmal.",
+        "keyword_measurement": "NICHT_ERHOBEN_KEINE_GOOGLE_URL_SPERRE",
+        "wp_release": "NICHT_FREIGEGEBEN",
+        "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
+        "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
+      }
+    },
+    {
+      "id": "rf176",
+      "name": "Handrehabilitationsroboter",
+      "topic_kind": "V80_11_TYPE_CANDIDATE_RESEARCH_ONLY",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Pflege",
+      "source_url": "https://www.gloreha.de/r-touch-pro-sinfonia/",
+      "evidence_grade": "OFFICIAL_VENDOR_OR_UNIVERSITY_NOT_INDEPENDENT_TEST",
+      "related_existing_ids": [
+        "rb042"
+      ],
+      "non_duplication_rule": "Motorisierte Finger-/Handtherapie unter fachlicher Anleitung; kein allgemeiner Therapieroboter und keine Handprothese.",
+      "keyword_status": "NICHT_GEMESSEN_KEINE_GOOGLE_URL_SPERRPRUEFUNG",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "research_v80": {
+        "date": "2026-11-15",
+        "v80_proposal_id": "FIN-04",
+        "source_plan": "V80_11_TYPEN_ABGLEICH_ARTIKELPLAN_20261115.json",
+        "target_path": [
+          "Pflege",
+          "Handrehabilitationsroboter"
+        ],
+        "existing_parent_source_id": "rbt_e764c403a44632be",
+        "editorial_stage": "Produkt",
+        "producer_evidence_stage": "Produkt",
+        "source_urls": [
+          {
+            "name": "Gloreha R-TOUCH PRO Sinfonia",
+            "url": "https://www.gloreha.de/r-touch-pro-sinfonia/"
+          }
+        ],
+        "article_category_proposals": [
+          {
+            "proposed_local_id": "fin-04_facet_1",
+            "name": "Therapieformen",
+            "topics": [
+              "Passive Fingermobilisierung",
+              "Bewegung der gesunden auf die betroffene Hand übertragen",
+              "Aktiv unterstützte Bewegungsübungen",
+              "Für welche Therapieziele sind Robotikhandschuhe gedacht?"
+            ],
+            "has_minimum_four_real_angles": true
+          },
+          {
+            "proposed_local_id": "fin-04_facet_2",
+            "name": "Anwendung",
+            "topics": [
+              "Handgröße und Passform",
+              "Therapie unter Aufsicht",
+              "Hygiene und Reinigung",
+              "Grenzen gegenüber manueller Handtherapie"
+            ],
+            "has_minimum_four_real_angles": true
+          }
+        ],
+        "distinct_intent": "Motorisierte Finger-/Handtherapie unter fachlicher Anleitung; kein allgemeiner Therapieroboter und keine Handprothese.",
+        "keyword_measurement": "NICHT_ERHOBEN_KEINE_GOOGLE_URL_SPERRE",
+        "wp_release": "NICHT_FREIGEGEBEN",
+        "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
+        "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
+      }
+    },
+    {
+      "id": "rf177",
+      "name": "Zahnpflegeroboter",
+      "topic_kind": "V80_11_TYPE_CANDIDATE_RESEARCH_ONLY",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Pflege",
+      "source_url": "https://www.waseda.jp/inst/entrepreneur/news/2026/10/16/9376/",
+      "evidence_grade": "OFFICIAL_VENDOR_OR_UNIVERSITY_NOT_INDEPENDENT_TEST",
+      "related_existing_ids": [],
+      "non_duplication_rule": "Mechanisch geführte Zahnpflege; nicht mit gewöhnlicher elektrischer Zahnbürste oder professioneller Dentalrobotik gleichsetzen.",
+      "keyword_status": "NICHT_GEMESSEN_KEINE_GOOGLE_URL_SPERRPRUEFUNG",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "research_v80": {
+        "date": "2026-11-15",
+        "v80_proposal_id": "FIN-05",
+        "source_plan": "V80_11_TYPEN_ABGLEICH_ARTIKELPLAN_20261115.json",
+        "target_path": [
+          "Pflege",
+          "Zahnpflegeroboter"
+        ],
+        "existing_parent_source_id": "rbt_e764c403a44632be",
+        "editorial_stage": "Produkt",
+        "producer_evidence_stage": "Produkt",
+        "source_urls": [
+          {
+            "name": "Genics g.eN – automatisches Zähneputzen",
+            "url": "https://www.waseda.jp/inst/entrepreneur/news/2026/10/16/9376/"
+          }
+        ],
+        "article_category_proposals": [
+          {
+            "proposed_local_id": "fin-05_facet_1",
+            "name": "Funktionsweise",
+            "topics": [
+              "Bürstenbewegung ohne Handführung",
+              "Anpassung an unterschiedliche Zahnreihen",
+              "Reinigung des Geräts nach der Nutzung",
+              "Was unterscheidet es von einer elektrischen Zahnbürste?"
+            ],
+            "has_minimum_four_real_angles": true
+          },
+          {
+            "proposed_local_id": "fin-05_facet_2",
+            "name": "Marktstand",
+            "topics": [
+              "Genics g.eN und Verkaufsstart Japan",
+              "Verfügbarkeit und Sprachen außerhalb Japans",
+              "Mundhygiene und individuelle Einschränkungen",
+              "Ersatzteile, Pflege und Betriebskosten"
+            ],
+            "has_minimum_four_real_angles": true
+          }
+        ],
+        "distinct_intent": "Mechanisch geführte Zahnpflege; nicht mit gewöhnlicher elektrischer Zahnbürste oder professioneller Dentalrobotik gleichsetzen.",
+        "keyword_measurement": "NICHT_ERHOBEN_KEINE_GOOGLE_URL_SPERRE",
+        "wp_release": "NICHT_FREIGEGEBEN",
+        "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
+        "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
+      }
+    },
+    {
+      "id": "rf178",
+      "name": "Schminkroboter",
+      "topic_kind": "V80_11_TYPE_CANDIDATE_RESEARCH_ONLY",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Pflege",
+      "source_url": "https://www.aoyama.ac.jp/center104/2025/event_20250930_01",
+      "evidence_grade": "OFFICIAL_VENDOR_OR_UNIVERSITY_NOT_INDEPENDENT_TEST",
+      "related_existing_ids": [],
+      "non_duplication_rule": "Wissenschaftlicher Prototyp für automatisierten Make-up-Auftrag; ausdrücklich kein Serienprodukt und keine selbstständige medizinische Versorgung.",
+      "keyword_status": "NICHT_GEMESSEN_KEINE_GOOGLE_URL_SPERRPRUEFUNG",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "research_v80": {
+        "date": "2026-11-15",
+        "v80_proposal_id": "FIN-21",
+        "source_plan": "V80_11_TYPEN_ABGLEICH_ARTIKELPLAN_20261115.json",
+        "target_path": [
+          "Pflege",
+          "Schminkroboter"
+        ],
+        "existing_parent_source_id": "rbt_e764c403a44632be",
+        "editorial_stage": "Projekt",
+        "producer_evidence_stage": "Projekt",
+        "source_urls": [
+          {
+            "name": "Aoyama Gakuin – Cosmetic Dresser Robot Prototyp",
+            "url": "https://www.aoyama.ac.jp/center104/2025/event_20250930_01"
+          }
+        ],
+        "article_category_proposals": [
+          {
+            "proposed_local_id": "fin-21_facet_1",
+            "name": "Forschung",
+            "topics": [
+              "Gesichts- und Hautanalyse",
+              "Pinseldruck und Bewegung steuern",
+              "Unterschied zwischen Demo und selbstständiger Anwendung",
+              "Forschungsstand des Aoyama-Prototyps"
+            ],
+            "has_minimum_four_real_angles": true
+          },
+          {
+            "proposed_local_id": "fin-21_facet_2",
+            "name": "Sicherheit",
+            "topics": [
+              "Hygiene von Kosmetikwerkzeugen",
+              "Arbeiten in Augennähe",
+              "Persönliche Hautunterschiede",
+              "Was bis zur Alltagstauglichkeit fehlt"
+            ],
+            "has_minimum_four_real_angles": true
+          }
+        ],
+        "distinct_intent": "Wissenschaftlicher Prototyp für automatisierten Make-up-Auftrag; ausdrücklich kein Serienprodukt und keine selbstständige medizinische Versorgung.",
+        "keyword_measurement": "NICHT_ERHOBEN_KEINE_GOOGLE_URL_SPERRE",
+        "wp_release": "NICHT_FREIGEGEBEN",
+        "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
+        "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
+      }
+    },
+    {
+      "id": "rf179",
+      "name": "Roboterkissen",
+      "topic_kind": "V80_11_TYPE_CANDIDATE_RESEARCH_ONLY",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Haushalt",
+      "source_url": "https://jgoodtech.smrj.go.jp/corp/info/JC0000000048513?createdLocale=en_US&preview=false&tabSelected=appeal",
+      "evidence_grade": "OFFICIAL_VENDOR_OR_UNIVERSITY_NOT_INDEPENDENT_TEST",
+      "related_existing_ids": [],
+      "non_duplication_rule": "Motorisch veränderbares Kissen oder Atemkissen; weder gewöhnliches Smart-Kissen noch belegte medizinische Schlaftherapie.",
+      "keyword_status": "NICHT_GEMESSEN_KEINE_GOOGLE_URL_SPERRPRUEFUNG",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "research_v80": {
+        "date": "2026-11-15",
+        "v80_proposal_id": "FIN-22",
+        "source_plan": "V80_11_TYPEN_ABGLEICH_ARTIKELPLAN_20261115.json",
+        "target_path": [
+          "Haushalt",
+          "Alltagshilfe",
+          "Roboterkissen"
+        ],
+        "existing_parent_source_id": "V52_HUB_Haushalt_Alltagshilfe",
+        "editorial_stage": "Produkt",
+        "producer_evidence_stage": "Produkt / Herstellerentwicklung",
+        "source_urls": [
+          {
+            "name": "Ax Robotix – verstellbares Robot Pillow",
+            "url": "https://jgoodtech.smrj.go.jp/corp/info/JC0000000048513?createdLocale=en_US&preview=false&tabSelected=appeal"
+          },
+          {
+            "name": "Yukai Engineering – fufuly Atemkissen",
+            "url": "https://www.ux-xu.com/prototype_case/fufuly"
+          }
+        ],
+        "article_category_proposals": [
+          {
+            "proposed_local_id": "fin-22_facet_1",
+            "name": "Funktionen",
+            "topics": [
+              "Schlafposition dynamisch anpassen",
+              "Kissenhöhe motorisch verändern",
+              "Atmungsähnliche Kissenbewegungen",
+              "Steuerung und Sensorik der Modelle"
+            ],
+            "has_minimum_four_real_angles": true
+          },
+          {
+            "proposed_local_id": "fin-22_facet_2",
+            "name": "Nutzung",
+            "topics": [
+              "Lautstärke und Bettkomfort",
+              "Reinigung und Hygiene",
+              "Unterschiede zwischen Ax Robotix und fufuly",
+              "Welche Wirkversprechen sind tatsächlich belegt?"
+            ],
+            "has_minimum_four_real_angles": true
+          }
+        ],
+        "distinct_intent": "Motorisch veränderbares Kissen oder Atemkissen; weder gewöhnliches Smart-Kissen noch belegte medizinische Schlaftherapie.",
+        "keyword_measurement": "NICHT_ERHOBEN_KEINE_GOOGLE_URL_SPERRE",
+        "wp_release": "NICHT_FREIGEGEBEN",
+        "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
+        "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
+      }
+    },
+    {
+      "id": "rf180",
+      "name": "Wander-Exoskelette",
+      "topic_kind": "V80_11_TYPE_CANDIDATE_RESEARCH_ONLY",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Sport",
+      "source_url": "https://eu.hypershell.tech/de-de/products/new-hypershell-x-series",
+      "evidence_grade": "OFFICIAL_VENDOR_OR_UNIVERSITY_NOT_INDEPENDENT_TEST",
+      "related_existing_ids": [
+        "rb043"
+      ],
+      "non_duplication_rule": "Outdoor-Gehunterstützung für Wandern/Sport; Pflege > Mobilität > Geh-Exoskelette behandelt Rehabilitation und Hilfsmittel, kein doppelter Modell-Owner.",
+      "keyword_status": "NICHT_GEMESSEN_KEINE_GOOGLE_URL_SPERRPRUEFUNG",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "research_v80": {
+        "date": "2026-11-15",
+        "v80_proposal_id": "FIN-26",
+        "source_plan": "V80_11_TYPEN_ABGLEICH_ARTIKELPLAN_20261115.json",
+        "target_path": [
+          "Sport",
+          "Wander-Exoskelette"
+        ],
+        "existing_parent_source_id": "rbt_dcb31e217c9ac890",
+        "editorial_stage": "Produkt",
+        "producer_evidence_stage": "Produkt",
+        "source_urls": [
+          {
+            "name": "Hypershell X Serie",
+            "url": "https://eu.hypershell.tech/de-de/products/new-hypershell-x-series"
+          }
+        ],
+        "article_category_proposals": [
+          {
+            "proposed_local_id": "fin-26_facet_1",
+            "name": "Einsatz",
+            "topics": [
+              "Steigungen beim Wandern",
+              "Abstiege und Treppen",
+              "Lange Gehstrecken und Pausen",
+              "Grenzen bei unebenem Gelände"
+            ],
+            "has_minimum_four_real_angles": true
+          },
+          {
+            "proposed_local_id": "fin-26_facet_2",
+            "name": "Auswahl",
+            "topics": [
+              "Passform und Tragesystem",
+              "Akkureichweite realistisch einschätzen",
+              "Gewicht und Transport",
+              "Sportgerät oder medizinisches Hilfsmittel?"
+            ],
+            "has_minimum_four_real_angles": true
+          }
+        ],
+        "distinct_intent": "Outdoor-Gehunterstützung für Wandern/Sport; Pflege > Mobilität > Geh-Exoskelette behandelt Rehabilitation und Hilfsmittel, kein doppelter Modell-Owner.",
+        "keyword_measurement": "NICHT_ERHOBEN_KEINE_GOOGLE_URL_SPERRE",
+        "wp_release": "NICHT_FREIGEGEBEN",
+        "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
+        "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
+      }
+    },
+    {
+      "id": "rf181",
+      "name": "Sandmalroboter",
+      "topic_kind": "V80_11_TYPE_CANDIDATE_RESEARCH_ONLY",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Freizeit",
+      "source_url": "https://sisyphus-industries.com/product/essential/",
+      "evidence_grade": "OFFICIAL_VENDOR_OR_UNIVERSITY_NOT_INDEPENDENT_TEST",
+      "related_existing_ids": [],
+      "non_duplication_rule": "Mechanische Musterzeichnung mit Kugel im Sand; nicht Pinselmalroboter, nicht handgeführtes Sandbild.",
+      "keyword_status": "NICHT_GEMESSEN_KEINE_GOOGLE_URL_SPERRPRUEFUNG",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "research_v80": {
+        "date": "2026-11-15",
+        "v80_proposal_id": "FIN-27",
+        "source_plan": "V80_11_TYPEN_ABGLEICH_ARTIKELPLAN_20261115.json",
+        "target_path": [
+          "Freizeit",
+          "Sandmalroboter"
+        ],
+        "existing_parent_source_id": "rbt_4c3b60b5f506ff47",
+        "editorial_stage": "Produkt",
+        "producer_evidence_stage": "Produkt",
+        "source_urls": [
+          {
+            "name": "Sisyphus Essential Mini Sand Table",
+            "url": "https://sisyphus-industries.com/product/essential/"
+          }
+        ],
+        "article_category_proposals": [
+          {
+            "proposed_local_id": "fin-27_facet_1",
+            "name": "Technik",
+            "topics": [
+              "Magnetisch bewegte Stahlkugel",
+              "Muster programmieren",
+              "Antriebe und Steuerung",
+              "Geräuschpegel bei langsamer Bewegung"
+            ],
+            "has_minimum_four_real_angles": true
+          },
+          {
+            "proposed_local_id": "fin-27_facet_2",
+            "name": "Aufstellung",
+            "topics": [
+              "Tischfläche und Raumgröße",
+              "Wartung von Sand und Kugel",
+              "Strom und Zeitsteuerung",
+              "Musterbibliotheken und eigene Vorlagen"
+            ],
+            "has_minimum_four_real_angles": true
+          }
+        ],
+        "distinct_intent": "Mechanische Musterzeichnung mit Kugel im Sand; nicht Pinselmalroboter, nicht handgeführtes Sandbild.",
+        "keyword_measurement": "NICHT_ERHOBEN_KEINE_GOOGLE_URL_SPERRE",
+        "wp_release": "NICHT_FREIGEGEBEN",
+        "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
+        "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
+      }
+    },
+    {
+      "id": "rf182",
+      "name": "Baseball-Wurfroboter",
+      "topic_kind": "V80_11_TYPE_CANDIDATE_RESEARCH_ONLY",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Sport",
+      "source_url": "https://sportsattack.com/i-hack-attack-2-baseball-pitching-machine/",
+      "evidence_grade": "OFFICIAL_VENDOR_OR_UNIVERSITY_NOT_INDEPENDENT_TEST",
+      "related_existing_ids": [],
+      "non_duplication_rule": "Programmierbare automatische Baseball-Wurfmaschine; nur robotische Trainingsautomatik, keine frei fahrende/spielende humanoide Maschine.",
+      "keyword_status": "NICHT_GEMESSEN_KEINE_GOOGLE_URL_SPERRPRUEFUNG",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "research_v80": {
+        "date": "2026-11-15",
+        "v80_proposal_id": "FIN-28",
+        "source_plan": "V80_11_TYPEN_ABGLEICH_ARTIKELPLAN_20261115.json",
+        "target_path": [
+          "Sport",
+          "Ballsport",
+          "Baseball-Wurfroboter"
+        ],
+        "existing_parent_source_id": "rbt_c921e3a524a4ad2a",
+        "editorial_stage": "Produkt",
+        "producer_evidence_stage": "Produkt",
+        "source_urls": [
+          {
+            "name": "Sports Attack I-Hack Attack Pitching Machine",
+            "url": "https://sportsattack.com/i-hack-attack-2-baseball-pitching-machine/"
+          }
+        ],
+        "article_category_proposals": [
+          {
+            "proposed_local_id": "fin-28_facet_1",
+            "name": "Training",
+            "topics": [
+              "Fastball und Tempowechsel",
+              "Spin und Flugkurven üben",
+              "Trefferzone wiederholt anspielen",
+              "Abläufe für unterschiedliche Spielstärken"
+            ],
+            "has_minimum_four_real_angles": true
+          },
+          {
+            "proposed_local_id": "fin-28_facet_2",
+            "name": "Geräte",
+            "topics": [
+              "Bedienung programmierter Wurfsequenzen",
+              "Welche Trainingsbälle geeignet sind",
+              "Aufstellabstand und Platzsicherheit",
+              "Transport, Stromversorgung und Wartung"
+            ],
+            "has_minimum_four_real_angles": true
+          }
+        ],
+        "distinct_intent": "Programmierbare automatische Baseball-Wurfmaschine; nur robotische Trainingsautomatik, keine frei fahrende/spielende humanoide Maschine.",
+        "keyword_measurement": "NICHT_ERHOBEN_KEINE_GOOGLE_URL_SPERRE",
+        "wp_release": "NICHT_FREIGEGEBEN",
+        "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
+        "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
+      }
+    },
+    {
+      "id": "rf183",
+      "name": "Transformationsroboter",
+      "topic_kind": "V80_11_TYPE_CANDIDATE_RESEARCH_ONLY",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Freizeit",
+      "source_url": "https://www.robosen.com/de/grimlock-g1-flagship",
+      "evidence_grade": "OFFICIAL_VENDOR_OR_UNIVERSITY_NOT_INDEPENDENT_TEST",
+      "related_existing_ids": [],
+      "non_duplication_rule": "Motorisch selbst veränderliche Spielfiguren; keine zweite Seite unter allgemeine Robotertiere/Showroboter und kein gewöhnliches Transformers-Spielzeug ohne Motoren.",
+      "keyword_status": "NICHT_GEMESSEN_KEINE_GOOGLE_URL_SPERRPRUEFUNG",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "NICHT_GEPRUEFT",
+      "research_v80": {
+        "date": "2026-11-15",
+        "v80_proposal_id": "FIN-29",
+        "source_plan": "V80_11_TYPEN_ABGLEICH_ARTIKELPLAN_20261115.json",
+        "target_path": [
+          "Freizeit",
+          "Spielzeug",
+          "Transformationsroboter"
+        ],
+        "existing_parent_source_id": "rbt_2a9f15b10b6f0ff1",
+        "editorial_stage": "Produkt",
+        "producer_evidence_stage": "Produkt",
+        "source_urls": [
+          {
+            "name": "Robosen Grimlock Flagship",
+            "url": "https://www.robosen.com/de/grimlock-g1-flagship"
+          },
+          {
+            "name": "Robosen Flagship Series",
+            "url": "https://eu.robosen.com/collections/flagship-series"
+          }
+        ],
+        "article_category_proposals": [
+          {
+            "proposed_local_id": "fin-29_facet_1",
+            "name": "Modelle",
+            "topics": [
+              "Robosen Grimlock und die Transformation",
+              "Andere selbst transformierende Robosen-Modelle",
+              "Sprachbefehle und App-Steuerung",
+              "Unterschied zu manuell verwandelbaren Figuren"
+            ],
+            "has_minimum_four_real_angles": true
+          },
+          {
+            "proposed_local_id": "fin-29_facet_2",
+            "name": "Betrieb",
+            "topics": [
+              "Bewegungsraum im Haushalt",
+              "Laden und Akkulaufzeit",
+              "Möglichkeiten der Programmierung",
+              "Verfügbarkeit und Ersatzteilversorgung"
+            ],
+            "has_minimum_four_real_angles": true
+          }
+        ],
+        "distinct_intent": "Motorisch selbst veränderliche Spielfiguren; keine zweite Seite unter allgemeine Robotertiere/Showroboter und kein gewöhnliches Transformers-Spielzeug ohne Motoren.",
+        "keyword_measurement": "NICHT_ERHOBEN_KEINE_GOOGLE_URL_SPERRE",
+        "wp_release": "NICHT_FREIGEGEBEN",
+        "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
+        "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
+      }
     }
   ],
   "research_expansion": {
@@ -11116,5 +11787,74 @@
       "rf169",
       "rf174"
     ]
+  },
+  "research_v80": {
+    "date": "2026-11-15",
+    "status": "FACHRECHERCHE_IN_EINZIGEM_BESTEHENDEN_MASTER_NICHT_WORDPRESS",
+    "basis": "V76 FIN-01..FIN-29, 11 Fachkandidaten, 188 bestehende V62 Typ-/Gruppenseiten im Soll",
+    "original_candidates_unchanged": 68,
+    "previous_frontier": 174,
+    "existing_research_id_links": [
+      {
+        "proposal": "FIN-01",
+        "existing_master_id": "rf142",
+        "action": "LINK_ONLY_ORIGINAL_ID_RETAINED"
+      },
+      {
+        "proposal": "FIN-02",
+        "existing_master_id": "rf148",
+        "action": "LINK_ONLY_ORIGINAL_ID_RETAINED"
+      }
+    ],
+    "new_frontier_entries": [
+      {
+        "proposal": "FIN-03",
+        "new_master_id": "rf175"
+      },
+      {
+        "proposal": "FIN-04",
+        "new_master_id": "rf176"
+      },
+      {
+        "proposal": "FIN-05",
+        "new_master_id": "rf177"
+      },
+      {
+        "proposal": "FIN-21",
+        "new_master_id": "rf178"
+      },
+      {
+        "proposal": "FIN-22",
+        "new_master_id": "rf179"
+      },
+      {
+        "proposal": "FIN-26",
+        "new_master_id": "rf180"
+      },
+      {
+        "proposal": "FIN-27",
+        "new_master_id": "rf181"
+      },
+      {
+        "proposal": "FIN-28",
+        "new_master_id": "rf182"
+      },
+      {
+        "proposal": "FIN-29",
+        "new_master_id": "rf183"
+      }
+    ],
+    "total_frontier": 183,
+    "profile_candidates": 11,
+    "article_category_proposals": 22,
+    "editorial_directions": 88,
+    "wordpress_pages_created": 0,
+    "wordpress_categories_created": 0,
+    "seo_paid_calls": 0,
+    "google_urls_required": false,
+    "industry_or_business_touched": false,
+    "source_plan": "V80_11_TYPEN_ABGLEICH_ARTIKELPLAN_20261115.json",
+    "model_dedup": "PONGBOT Aura einmal, Links auf Tennis/Padel/Pickleball; Katzenklo bereits rf142",
+    "previous_revisions_are_historical": true
   }
 }
