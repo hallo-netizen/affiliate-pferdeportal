@@ -1,5 +1,10 @@
 # ROBOTIK / KATEGORIE – EINZIGER AKTUELLER STATUS
 
+## ABSCHLUSSERGÄNZUNG 15.11.2026 – INDUSTRIE-QUERVERWEISE UND ALT-KURZNAMEN
+- Die finale Baumübersicht `KATEGORIEN_ABSCHLUSS_V85_20261115.md` ist jetzt zusätzlich auf **fünf vorhandene, aber ohne direkte Typseiten geführte Industrie-Landingpages** geprüft. Für ihre vier Unterbereiche liegen **28 eindeutige Verweise auf bereits bestehende V78-Typseiten** bereit. Keine neuen Industrie-Typseiten, keine geänderten WP-Parents; tatsächliche HTML-Links sind noch nicht im Live-Frontend angebracht.
+- **63 alte generische `Kaufberatung`-Rubriken** haben bereits aus V51 konkrete Kurznamensvorschläge. Diese wurden vollständig durchgesehen; **1 Dopplungsrisiko** bei `Bildung › Lernroboter` wurde als Vorschlag `Geräteauswahl` statt nochmals `Programmierung` geklärt. 0 Kurzlabelkonflikte im aktuellen redaktionellen Plan. Dies sind **noch keine WP-Umbenennungen**.
+- **Eine Sammelübergabe statt Einzeltests:** V78-Abschluss ist gemäß vom Nutzer gelieferter JSON bestätigt; 0.4.14 bleibt einziger V84-Nachtrag für 16+32. Die Nutzerfreigabe und der tatsächliche V84-Abschlussbericht stehen noch aus. Industrie-Links und Alt-Kurznamen sind vorbereitet, aber sichtbar nur mit gesonderter Umsetzungsgenehmigung zu ändern. Kein neues Plugin auf Verdacht und keine neue Grundlagenrecherche.
+
 ## FACHLICHER KATEGORIENABSCHLUSS V85 – 15.11.2026
 - **Endgültige, vollständig aus den freigegebenen Dateien abgeleitete Baumübersicht:** [KATEGORIEN_ABSCHLUSS_V85_20261115.md](KATEGORIEN_ABSCHLUSS_V85_20261115.md). **Keine zweite Produktdatenbank**, einziger Master bleibt `RECHERCHE/PRODUKTE_V2_20261108.json` Rev20.
 - **Verifiziert im SOLL:** 8 Hauptbereiche, **204 eindeutige Seitenpositionen** = 47 Gruppen-/Zwischenseiten + 157 letzte Robotertypseiten; dazu **328 zugeordnete Inhaltsrubriken** mit je mindestens drei vorgesehenen Themenansätzen. Keine doppelten Seitenpfade, fehlenden Eltern, verwaisten Rubriken oder Typseiten ohne Rubrik. Die 48 alten Hold-Rubriken wurden aus der V52-Freigabevorlage abgeglichen; tatsächliche WordPress-Bezeichnungen nicht einzeln ausgelesen.
