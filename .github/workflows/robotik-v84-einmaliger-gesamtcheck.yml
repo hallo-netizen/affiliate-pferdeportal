@@ -1,4 +1,4 @@
-name: Robotik V84 einmaliger 16-32-Check
+name: Robotik 0.4.14 FINAL TEST und Chat-ZIP
 on:
   push:
     branches:
@@ -8,10 +8,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: PHP und WordPress-Mock (16/32) pruefen
+      - name: Komplettes bestehendes Plugin, ZIP und alter/neuer Gesamtworkflow
         run: |
           set -euo pipefail
-          D=protocol/PROJECT_MEMORY/PROJEKTE/ROBOTIK/KATEGORIE/PLUGIN/V84_SOURCE
-          php -l "$D/includes/class-robotik-v84-kategorien-nachtrag.php"
-          php -l "$D/TESTS/v84-48er-gesamtworkflow-test.php"
-          php "$D/TESTS/v84-48er-gesamtworkflow-test.php" "$D/includes/class-robotik-v84-kategorien-nachtrag.php"
+          D=protocol/PROJECT_MEMORY/PROJEKTE/ROBOTIK/KATEGORIE/PLUGIN
+          unzip -t "$D/CURRENT.zip"
+          cmp "$D/CURRENT.zip" "$D/VERSIONEN/0.4.14.zip"
+          mkdir -p /tmp/robotik-v84
+          unzip -q "$D/CURRENT.zip" -d /tmp/robotik-v84
+          Z=/tmp/robotik-v84/robotik-kategorie-workflow
+          test "$(find "$Z" -type f -name '*.php' | wc -l)" -eq 11
+          find "$Z" -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+          cmp "$Z/robotik-kategorie-workflow.php" "$D/V65_SOURCE/robotik-kategorie-workflow.php"
+          cmp "$Z/includes/class-robotik-v78-gesamtabschluss.php" "$D/V78_SOURCE/includes/class-robotik-v78-gesamtabschluss.php"
+          cmp "$Z/includes/class-robotik-v84-kategorien-nachtrag.php" "$D/V84_SOURCE/includes/class-robotik-v84-kategorien-nachtrag.php"
+          cmp "$Z/assets/robotik-v84-delta.json" "$D/V84_SOURCE/assets/robotik-v84-delta.json"
+          cmp "$Z/includes/class-robotik-v63-delta.php" "$D/V63_SOURCE/includes/class-robotik-v63-delta.php"
+          cmp "$Z/includes/class-robotik-v65-publication.php" "$D/V65_SOURCE/includes/class-robotik-v65-publication.php"
+          cmp "$Z/includes/class-robotik-v77-fachnachtrag.php" "$D/V77_SOURCE/includes/class-robotik-v77-fachnachtrag.php"
+          grep -q 'Version: 0.4.14' "$Z/robotik-kategorie-workflow.php"
+          php "$D/V77_SOURCE/TESTS/fachnachtrag-phasen-test.php" "$Z/assets/robotik-v62-sollvorschau.json"
+          php "$D/V78_SOURCE/TESTS/einmaliger-gesamtabschluss-test.php" "$Z/includes/class-robotik-v78-gesamtabschluss.php"
+          php "$D/V84_SOURCE/TESTS/v84-48er-gesamtworkflow-test.php" "$Z/includes/class-robotik-v84-kategorien-nachtrag.php"
+          test "$(jq '.tasks | map(select(.kind == "page")) | length' "$Z/assets/robotik-v84-delta.json")" -eq 16
+          test "$(jq '.tasks | map(select(.kind == "category")) | length' "$Z/assets/robotik-v84-delta.json")" -eq 32
+          echo "ROBOTIK 0.4.14 ALLE 227-104-68-64 UND 16-32 TESTS BESTANDEN"
+      - name: Original WordPress Installer fuer direkten Chat
+        run: |
+          mkdir -p /tmp/robotik-chat
+          cp protocol/PROJECT_MEMORY/PROJEKTE/ROBOTIK/KATEGORIE/PLUGIN/CURRENT.zip /tmp/robotik-chat/robotik-kategorie-workflow-0.4.14.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: robotik-kategorie-workflow-0.4.14
+          path: /tmp/robotik-chat/robotik-kategorie-workflow-0.4.14.zip
+          retention-days: 1
