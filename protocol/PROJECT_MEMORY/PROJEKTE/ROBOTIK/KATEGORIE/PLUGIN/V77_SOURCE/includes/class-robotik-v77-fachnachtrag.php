@@ -119,14 +119,25 @@ final class Robotik_V77_Fachnachtrag {
             'error'=>'','started'=>gmdate('c')],false);
         self::back();
     }
-    public static function resume():void {
-        self::guard();check_admin_referer('robotik_v77_resume');
+    public static function resumeSaved():void {
         $s=get_option(self::STATE,[]);
         if(!is_array($s)||($s['status']??'')!=='BLOCKED'||(int)($s['total']??0)!==self::TOTAL)
-            wp_die('Kein sicher gespeicherter Nachtrag zum Fortsetzen.');
-        try{$p=self::plan();}catch(Throwable $e){wp_die(esc_html($e->getMessage()));}
-        if($p['errors']||$p['done']<(int)$s['index'])wp_die('Abweichender Livebestand: nicht wiederholen.');
-        $s['status']='WRITING';$s['error']='';update_option(self::STATE,$s,false);self::back();
+            throw new RuntimeException('Kein gespeicherter 64er-Fachnachtrag.');
+        $p=self::plan();
+        if($p['errors']||$p['done']<(int)$s['index']||
+           !hash_equals((string)($s['manifest']??''),(string)hash_file('sha256',__DIR__.'/../assets/robotik-v62-sollvorschau.json')))
+            throw new RuntimeException('Fachnachtrag oder Sollprofil weicht ab, keine Wiederholung.');
+        $priorPages=array_flip($p['prior_pages']);$priorTerms=array_flip($p['prior_terms']);
+        foreach((array)($s['prior_pages']??[]) as $id)
+            if(!isset($priorPages[$id]))throw new RuntimeException('Bestehende WordPress-Seite fehlt.');
+        foreach((array)($s['prior_terms']??[]) as $id)
+            if(!isset($priorTerms[$id]))throw new RuntimeException('Bestehende WordPress-Kategorie fehlt.');
+        $s['status']='WRITING';$s['error']='';update_option(self::STATE,$s,false);
+    }
+    public static function resume():void {
+        self::guard();check_admin_referer('robotik_v77_resume');
+        try{self::resumeSaved();}catch(Throwable $e){wp_die(esc_html($e->getMessage()));}
+        self::back();
     }
     public static function advance():array {
         $s=get_option(self::STATE,[]);
