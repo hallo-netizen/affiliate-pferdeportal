@@ -1,0 +1,30 @@
+name: Robotik 0.4.12 einmalige Abnahme
+on:
+  push:
+    branches:
+      - campus/robotik-v78-einmaliger-gesamtabschluss-20261115
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Originale Plugin-ZIP und durchgehenden Workflow pruefen
+        run: |
+          set -euo pipefail
+          D=protocol/PROJECT_MEMORY/PROJEKTE/ROBOTIK/KATEGORIE/PLUGIN
+          unzip -t "$D/CURRENT.zip"
+          cmp "$D/CURRENT.zip" "$D/VERSIONEN/0.4.12.zip"
+          mkdir -p /tmp/robotik-0412
+          unzip -q "$D/CURRENT.zip" -d /tmp/robotik-0412
+          Z=/tmp/robotik-0412/robotik-kategorie-workflow
+          test "$(find "$Z" -type f -name '*.php' | wc -l)" -eq 10
+          find "$Z" -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+          cmp "$D/V63_SOURCE/includes/class-robotik-v63-delta.php" "$Z/includes/class-robotik-v63-delta.php"
+          cmp "$D/V65_SOURCE/includes/class-robotik-v65-publication.php" "$Z/includes/class-robotik-v65-publication.php"
+          cmp "$D/V77_SOURCE/includes/class-robotik-v77-fachnachtrag.php" "$Z/includes/class-robotik-v77-fachnachtrag.php"
+          cmp "$D/V65_SOURCE/robotik-kategorie-workflow.php" "$Z/robotik-kategorie-workflow.php"
+          cmp "$D/V78_SOURCE/includes/class-robotik-v78-gesamtabschluss.php" "$Z/includes/class-robotik-v78-gesamtabschluss.php"
+          grep -q 'Version: 0.4.12' "$Z/robotik-kategorie-workflow.php"
+          php "$D/V77_SOURCE/TESTS/fachnachtrag-phasen-test.php" "$Z/assets/robotik-v62-sollvorschau.json"
+          php "$D/V78_SOURCE/TESTS/einmaliger-gesamtabschluss-test.php" "$Z/includes/class-robotik-v78-gesamtabschluss.php"
+          echo "ROBOTIK 0.4.12 ZIP+PHP+ONE-APPROVAL TEST PASS"
