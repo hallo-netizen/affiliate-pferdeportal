@@ -54,8 +54,8 @@ class Robotik_V63_Delta {
         return ['errors'=>[],'task_done'=>227,'task_remaining'=>0,'page_ids'=>$origin,'term_ids'=>$cats,
             'prior_wp_page_ids'=>range(1,188),'prior_wp_term_ids'=>range(1001,1296)];
     }
-    public static function createOne(array $task,array &$pages,array &$terms):string {
-        global $posts,$terms as $allterms,$writes;
+    public static function createOne(array $task,array &$pages,array &$termMap):string {
+        global $posts,$terms,$writes;
         $source=$task['source_id'];
         if($task['kind']==='page'){
             if(isset($pages[$source]))return 'existing';
@@ -68,16 +68,16 @@ class Robotik_V63_Delta {
             update_post_meta($id,'_robotik_page_role','product');
             $pages[$source]=$id;$writes++;return 'page';
         }
-        if(isset($terms[$source]))return 'existing';
+        if(isset($termMap[$source]))return 'existing';
         $owner=(int)($pages[$task['parent_source_id']]??0);
         if(!$owner)throw new RuntimeException('Fixture: no category owner '.$source);
-        $id=max(array_keys($allterms))+1;
-        $allterms[$id]=(object)['term_id'=>$id,'parent'=>0,
+        $id=max(array_keys($terms))+1;
+        $terms[$id]=(object)['term_id'=>$id,'parent'=>0,
             'name'=>$task['name'],'slug'=>$task['slug']];
         update_term_meta($id,'_robotik_kategorie_node_id',$source);
         update_term_meta($id,'_robotik_product_page_id',$owner);
         update_term_meta($id,'_robotik_short_label',$task['short_label']);
-        $terms[$source]=$id;$writes++;return 'category';
+        $termMap[$source]=$id;$writes++;return 'category';
     }
 }
 for($i=1;$i<=188;$i++)$posts[$i]=(object)['ID'=>$i,'post_type'=>'page','post_parent'=>0,
