@@ -1,5 +1,8 @@
 # Robotik – Pluginbüro / Kategorie-Workflow
 
+## AKTUELL 15.11.2026 – INSTALLIERBARE VERSION 0.4.11
+**Nur dieser Status ist aktuell.** `CURRENT.zip` und `VERSIONEN/0.4.11.zip` sind bytegleiche, PHP-geprüfte Installationspakete. Dieses Update **führt den bestehenden gespeicherten 227er Lauf fort**, korrigiert das Lesen bereits veröffentlichter Seiten und fügt nach der bisherigen 68er-Veröffentlichung **einen einzigen freigegebenen 16-Seiten-/48-Rubriken-Nachtrag** innerhalb derselben Pluginidentität hinzu. **Google-Adressen sind kein Sperrgrund**. Bericht `V77_RELEASE_VERIFIZIERT_20261115.md` und [GitHub-PHP-/ZIP-/Mocktest](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43698916919). **Nicht mit einem WordPress-Liveabschluss verwechseln.** Alle älteren Current-/Versionsangaben weiter unten sind historische Berichte und durch diesen Eintrag ersetzt.
+
 ## 0.4.10 / V65 – 68 neue Entwurfsseiten sichtbar machen (TEST)
 - Neues geschütztes Adminmenü `Neue Seiten sichtbar machen` in **demselben Plugin**. Der reale ursprüngliche Stand war **16/227**, deshalb keine Publikation bis zum frischen **227/227-Livebeleg**. Erst nach zentralem Sicherheitsabgleich von 104+68 Seiten, 248 Rubriken und 16/48 SEO-HOLDs bietet es EINEN manuellen 68er-Veröffentlichungslauf; im Abbruchfall gespeichert und sicher fortsetzbar. Keine Neuanlage, keine alten Seiten-IDs/URLs/SEO-Funktionen geändert.
 - **Live 16 SEO-HOLD-Robotertypen weiter gesperrt**, kein Behaupten von Vollständigkeit aller 188 Planseiten. Neue Seiten können inhaltlich leer sein; Sichtbarkeit ist keine redaktionelle SEO-Freigabe.
