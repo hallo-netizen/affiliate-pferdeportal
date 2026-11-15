@@ -1,0 +1,1435 @@
+{
+  "version": "W14_2026-11-15_RESEARCH_WAVE_1",
+  "project": "WASSERTECHNIK",
+  "state": "RECHERCHEFORTSCHRITT_KEIN_VOLLSTAENDIGER_FACHBAUM",
+  "basis": {
+    "W4_existing_product_types": 79,
+    "W12_previous_candidates": 26
+  },
+  "counts": {
+    "new_distinct_research_names": 87,
+    "fields_touched": 18,
+    "topic_categories": 87,
+    "article_directions": 261,
+    "overlap_cases": 45
+  },
+  "per_field": {
+    "1": 5,
+    "2": 4,
+    "3": 4,
+    "4": 7,
+    "5": 6,
+    "6": 4,
+    "7": 7,
+    "8": 4,
+    "9": 5,
+    "10": 4,
+    "11": 5,
+    "12": 3,
+    "13": 5,
+    "14": 8,
+    "15": 4,
+    "16": 4,
+    "17": 5,
+    "18": 3
+  },
+  "status_counts": {
+    "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT": 42,
+    "INTENT_GRENZFALL": 45
+  },
+  "validation": "Unique product name vs all 79 W4 and 26 W12, one proposed contextual category and 3 distinct article directions per new research name; no live SERP or SEO search volume validation. Cross-function/intent overlaps flagged and not approved for WP.",
+  "items": [
+    {
+      "research_field": 1,
+      "product": "Brunnen-Steigleitung",
+      "source_url": "https://www.stuewa.de/de/produkte",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Förderleitungen im Brunnen",
+        "article_ideas": [
+          "Steigleitung aus Edelstahl oder Kunststoff auswählen",
+          "Rohrverbindungen für den Pumpenausbau vergleichen",
+          "Druckbelastung langer Brunnen-Steigleitungen berücksichtigen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 1,
+      "product": "Brunnenschacht",
+      "source_url": "https://www.stuewa.de/de/produkte",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Brunnenschachttechnik",
+        "article_ideas": [
+          "Brunnenschacht nach Pumpen- und Armaturenplatz planen",
+          "Schachtdeckel und Abdichtung richtig auswählen",
+          "Zugänglichkeit und Entwässerung von Brunnenschächten bewerten"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 1,
+      "product": "Grundwassermessstellen-Ausbaurohr",
+      "source_url": "https://www.stuewa.de/de/produkte",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Messstellenausbau",
+        "article_ideas": [
+          "Ausbaurohr nach Pegelrohrdurchmesser auswählen",
+          "Filterstrecken von Messstellen gegenüber Förderbrunnen unterscheiden",
+          "Dichtung zwischen Messstellenhorizonten planen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 1,
+      "product": "Brunnen-Regenerierungsausrüstung",
+      "source_url": "https://www.stuewa.de/de/produkte",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Nicht mit Brunnenreinigungschemikalien oder Dienstleistung gleichsetzen.",
+      "content_category": {
+        "name": "Brunneninstandhaltung",
+        "article_ideas": [
+          "Mechanische Regenerierung von Brunnenfiltern abgrenzen",
+          "Brunnen-Reinigungsausrüstung nach Durchmesser auswählen",
+          "Wiederinbetriebnahme eines regenerierten Brunnens kontrollieren"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 1,
+      "product": "Brunnen-Quarzfilterkies",
+      "source_url": "https://www.stuewa.de/de/produkte/verpressmaterial-dichtungstone-quarzfilterkies/quarzfilterkies",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Material mit eigener Fachfunktion; gegen allgemeines Filtermaterial/Brunnenfilterrohr abgrenzen.",
+      "content_category": {
+        "name": "Filtermaterial beim Brunnenausbau",
+        "article_ideas": [
+          "Körnung des Brunnenfilterkieses nach Bodenschichtung wählen",
+          "Filterkies bei Bohr- und Schachtbrunnen unterscheiden",
+          "Filterkies gegen Verockerung und Versandung richtig beurteilen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 2,
+      "product": "Schwimmende Tankentnahme",
+      "source_url": "https://www.intewa.com/de/produkte-fuer-wasseraufbereitung-und-wiederverwendung-sowie-regenwasser-management/",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Wasserentnahme aus Speichern",
+        "article_ideas": [
+          "Schwimmende Entnahme gegen feste Bodenentnahme vergleichen",
+          "Entnahmetiefe bei Zisternen mit Sediment beachten",
+          "Schwimmende Tankentnahme an Pumpe und Tank anschließen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 2,
+      "product": "Regenwasser-Überlaufsiphon",
+      "source_url": "https://www.intewa.com/de/produkte-fuer-wasseraufbereitung-und-wiederverwendung-sowie-regenwasser-management/",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Tanküberlauf",
+        "article_ideas": [
+          "Überlaufsiphon mit einfachem Tanküberlauf vergleichen",
+          "Geruchs- und Kleintierschutz bei Tanküberläufen beurteilen",
+          "Ablaufhöhe und Rohrquerschnitt an Regenwassertanks festlegen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 2,
+      "product": "Regenwasser-Nachspeisesteuerung",
+      "source_url": "https://www.intewa.com/de/produkte-fuer-wasseraufbereitung-und-wiederverwendung-sowie-regenwasser-management/",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W4 Regenwasser-Hauszentrale erfüllt teilweise dieselbe Funktion; ggf. Unterkategorie statt zweite Produktseite.",
+      "content_category": {
+        "name": "Automatische Trinkwassernachspeisung",
+        "article_ideas": [
+          "Trinkwasser-Nachspeisung über Tankfüllstand steuern",
+          "Freien Auslauf und Systemtrennung der Nachspeisung einordnen",
+          "Nachspeiseventil bei Pumpenstörung überprüfen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 2,
+      "product": "Flexibler Löschwasserspeicher",
+      "source_url": "https://www.intewa.com/de/produkte-fuer-wasseraufbereitung-und-wiederverwendung-sowie-regenwasser-management/",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Spezialsegment Brandschutz und Industrie; keine neue allgemeine Tank-Kopie.",
+      "content_category": {
+        "name": "Löschwasserbevorratung",
+        "article_ideas": [
+          "Flexiblen Speichersack gegen festen Löschwassertank vergleichen",
+          "Lagerfläche und erforderliches Löschwasservolumen bestimmen",
+          "Anschlüsse und Frostschutz für Löschwasserspeicher beurteilen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 3,
+      "product": "Inline-Kreiselpumpe",
+      "source_url": "https://www.ksb.com/de-de/produkte/produktbauarten",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Gegen W4 Druckerhöhungsanlage und vorhandene Pumpen abgrenzen.",
+      "content_category": {
+        "name": "Pumpenbauart und Einsatz",
+        "article_ideas": [
+          "Inlinepumpen für Einbau in Rohrleitungen auswählen",
+          "Förderkennlinie mit der Rohrnetzkennlinie abgleichen",
+          "Trockenaufstellung und Platzbedarf einer Inlinepumpe vergleichen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 3,
+      "product": "Entwässerungs-Pumpstation",
+      "source_url": "https://www.ksb.com/de-de/produkte/produktbauarten",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Abgrenzung zur W4 Hebeanlage wesentlich.",
+      "content_category": {
+        "name": "Pumpstation für größere Entwässerungsaufgaben",
+        "article_ideas": [
+          "Einzel- und Doppelpumpstation unterscheiden",
+          "Förderhöhe bei tiefliegender Entwässerung bestimmen",
+          "Pumpstation mit Hebeanlage für Gebäude vergleichen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 3,
+      "product": "Pumpen-Frequenzumrichter",
+      "source_url": "https://www.ksb.com/de-de/produkte/produktbauarten",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W4 Pumpensteuergerät ist breiter Oberbegriff; nur spezialisierte Suchabsicht rechtfertigt eigenen Owner.",
+      "content_category": {
+        "name": "Drehzahlregelung",
+        "article_ideas": [
+          "Druckgeregelte Pumpen über Frequenzumrichter auslegen",
+          "Drehzahlabsenkung und Förderkennlinie kombinieren",
+          "Frequenzumrichter bei Trockenlauf und Störungen absichern"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 3,
+      "product": "Spiralgehäusepumpe",
+      "source_url": "https://www.ksb.com/de-de/produkte/produktbauarten",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Eher Industrie/Kommunal und gegenüber allgemeiner Kreiselpumpe abzugrenzen.",
+      "content_category": {
+        "name": "Kreiselpumpen für große Fördermengen",
+        "article_ideas": [
+          "Spiralgehäusepumpen nach Fördermenge auswählen",
+          "Laufradformen für klares und belastetes Wasser unterscheiden",
+          "Pumpenwerkstoffe für große Wasserströme bewerten"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 4,
+      "product": "Trinkwasser-Absperrventil",
+      "source_url": "https://www.dvgw-cert.com/leistungen/zertifizierung-von-produkten/produktgruppen",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Absperrtechnik",
+        "article_ideas": [
+          "Kugelhahn und Schrägsitzventil für Trinkwasser vergleichen",
+          "Absperrventile nach Durchmesser und Werkstoff auswählen",
+          "Bedienbarkeit und Einbauort von Hauptabsperrventilen planen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 4,
+      "product": "Trinkwasser-Rohrverbinder",
+      "source_url": "https://www.dvgw-cert.com/leistungen/zertifizierung-von-produkten/produktgruppen",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Rohrverbindungen",
+        "article_ideas": [
+          "Press-, Klemm- und Schraubverbindungen unterscheiden",
+          "Trinkwassergeeignete Fittings nach Rohrmaterial auswählen",
+          "Übergangsverbinder zwischen Metall und Kunststoff beurteilen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 4,
+      "product": "Trinkwasser-PE-Rohr",
+      "source_url": "https://www.dvgw-cert.com/leistungen/zertifizierung-von-produkten/produktgruppen",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Die DVGW-Verzeichnisquelle belegt Rohrleitungen als Produktgruppe; Werkstoff-Kategorien nicht beliebig vervielfachen.",
+      "content_category": {
+        "name": "Leitungsaufbau",
+        "article_ideas": [
+          "PE-Wasserrohr für Hausanschluss und Verteilung auswählen",
+          "Druckstufen und Außendurchmesser von PE-Rohren vergleichen",
+          "Erdverlegung und Verbindungstechnik von Wasserleitungen beurteilen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 4,
+      "product": "Heizungsfüllstation mit Systemtrenner",
+      "source_url": "https://www.dvgw-cert.com/leistungen/zertifizierung-von-produkten/produktgruppen",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Sicheres Nachfüllen von Heizungswasser",
+        "article_ideas": [
+          "Füllstation von einfachem Systemtrenner unterscheiden",
+          "Druckminderer und Absicherung an Heizungsfüllstationen auswählen",
+          "Wasserbehandlung beim Befüllen der Heizung beurteilen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 4,
+      "product": "Thermostatisches Trinkwasser-Mischventil",
+      "source_url": "https://www.dvgw-cert.com/leistungen/zertifizierung-von-produkten/produktgruppen",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Temperaturbegrenzung",
+        "article_ideas": [
+          "Mischventil für Trinkwarmwasser nach Durchfluss auswählen",
+          "Verbrühschutz und Mischtemperatur bewerten",
+          "Thermostatmischer zentral oder dezentral einsetzen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 4,
+      "product": "Trinkwasser-Sicherheitsgruppe",
+      "source_url": "https://www.dvgw-cert.com/leistungen/zertifizierung-von-produkten/produktgruppen",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Sicherungsarmaturen",
+        "article_ideas": [
+          "Sicherheitsgruppe am Trinkwassererwärmer richtig einordnen",
+          "Sicherheitsventil und Rückflussverhinderer unterscheiden",
+          "Anschlussdimension und Ablauf einer Sicherheitsgruppe planen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 4,
+      "product": "Frostsicheres Außen-Auslaufventil",
+      "source_url": "https://www.dvgw-cert.com/leistungen/zertifizierung-von-produkten/produktgruppen",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Wasserentnahme im Außenbereich",
+        "article_ideas": [
+          "Frostsicheres Garten-Auslaufventil gegenüber Standardhahn vergleichen",
+          "Einbautiefe und Gefälle von Außenarmaturen beurteilen",
+          "Außen-Auslaufventil mit Schlauch und Sicherungsarmatur kombinieren"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 5,
+      "product": "Ozon-Wasserdesinfektionsanlage",
+      "source_url": "https://www.prominent.de/de/Produkte/Produkte/Produktkatalog/Produktkatalog.html",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Ozonbehandlung",
+        "article_ideas": [
+          "Ozonanlage nach Wasserart und Behandlungsziel auswählen",
+          "Ozonkontaktzeit und Restozon bei der Desinfektion beurteilen",
+          "Ozon-Wasserbehandlung von UV-Desinfektion unterscheiden"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 5,
+      "product": "Chlordioxid-Dosieranlage",
+      "source_url": "https://www.prominent.de/de/Produkte/Produkte/Produktkatalog/Produktkatalog.html",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Chlordioxidbehandlung",
+        "article_ideas": [
+          "Chlordioxidanlage nach Wasserbedarf dimensionieren",
+          "Dosierregelung und Überwachung vergleichen",
+          "Chlordioxidbehandlung von herkömmlicher Dosierung abgrenzen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 5,
+      "product": "Elektrolyse-Desinfektionsanlage",
+      "source_url": "https://www.prominent.de/de/Produkte/Produkte/Produktkatalog/Produktkatalog.html",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Nicht ohne Nachweis von Pool-Salzelektrolyse oder Industrie-Dosiersystem übernehmen.",
+      "content_category": {
+        "name": "Vor-Ort-Erzeugung von Desinfektionsmittel",
+        "article_ideas": [
+          "Elektrolyseanlagen nach erforderlicher Desinfektionsleistung auswählen",
+          "Salzqualität und Verbrauch für die Elektrolyse beurteilen",
+          "Elektrolyse-Desinfektion mit Ozon und UV vergleichen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 5,
+      "product": "Flockungsmittel-Dosierstation",
+      "source_url": "https://www.prominent.de/de/Produkte/Produkte/Produktkatalog/Produktkatalog.html",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W4 Wasser-Dosieranlage und Industrie Chemikalien-Dosierpumpe bereits vorhanden.",
+      "content_category": {
+        "name": "Flockungsmittelzugabe",
+        "article_ideas": [
+          "Flockungsstation nach Durchfluss und Trübung auslegen",
+          "Dosierpumpe und Mischstrecke bei Flockung abstimmen",
+          "Flockung vor Filterung oder Sedimentation bewerten"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 5,
+      "product": "PFAS-Aktivkohlefiltersystem",
+      "source_url": "https://www.gruenbeck.de/service/dokumente-und-downloads/prospekte",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Eigenständige Schadstoffsuchintention nur mit zusätzlichem SEO-Nachweis; nicht jedes Filtermedium als Seite.",
+      "content_category": {
+        "name": "Schadstoffadsorption",
+        "article_ideas": [
+          "PFAS-Adsorber gegenüber Standard-Hauswasserfilter abgrenzen",
+          "Aktivkohlemedium und Durchbruchüberwachung beurteilen",
+          "Filterwechsel bei PFAS-belastetem Rohwasser organisieren"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 5,
+      "product": "Nanofiltrationsanlage",
+      "source_url": "https://www.gruenbeck.de/service/dokumente-und-downloads/prospekte",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W4 Osmoseanlagen und Industrie-Umkehrosmose klar abgrenzen.",
+      "content_category": {
+        "name": "Membrantrennung",
+        "article_ideas": [
+          "Nanofiltration mit Umkehrosmose vergleichen",
+          "Nanofiltrationsmembran nach Zielstoff und Salzrückhalt auswählen",
+          "Vorbehandlung und Reinigungsbedarf einer NF-Anlage einschätzen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 6,
+      "product": "Trinkwassererwärmer",
+      "source_url": "https://www.dvgw.de/themen/wasser/verbraucherinformationen/trinkwasser-installation",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Schnittmenge Heizung/Haustechnik: nicht gesamtes Heiztechnikportal eröffnen.",
+      "content_category": {
+        "name": "Trinkwassererwärmung",
+        "article_ideas": [
+          "Speicher- und Durchlauferwärmung für Trinkwasser vergleichen",
+          "Volumen und Zapfleistung eines Trinkwassererwärmers bestimmen",
+          "Hygienische Temperaturführung bei Trinkwassererwärmern beurteilen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 6,
+      "product": "Warmwasser-Zirkulationsregulierventil",
+      "source_url": "https://www.dvgw.de/themen/wasser/verbraucherinformationen/trinkwasser-installation",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Hydraulischer Abgleich",
+        "article_ideas": [
+          "Thermostatisches Zirkulationsventil von Absperrventil unterscheiden",
+          "Zirkulationsstränge hydraulisch ausgleichen",
+          "Ventiltemperatur und Hygienefunktion beurteilen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 6,
+      "product": "Trinkwasser-Probenahmeventil",
+      "source_url": "https://www.dvgw.de/themen/wasser/verbraucherinformationen/trinkwasser-installation",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Probenahmeinstallation",
+        "article_ideas": [
+          "Probenahmeventil für mikrobiologische Wasserprüfung auswählen",
+          "Probenahmestellen im Leitungsnetz planen",
+          "Probenahmeventil für hygienische Entnahme vorbereiten"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 6,
+      "product": "Frischwasserstation",
+      "source_url": "https://www.dvgw.de/themen/wasser/verbraucherinformationen/trinkwasser-installation",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Grenze zu Heizungs-/Warmwassertechnik; klarer wassertechnischer Nutzen nötig.",
+      "content_category": {
+        "name": "Frischwasser über Wärmetauscher",
+        "article_ideas": [
+          "Frischwasserstation mit Trinkwarmwasserspeicher vergleichen",
+          "Zapfleistung einer Frischwasserstation dimensionieren",
+          "Plattenwärmetauscher und Zirkulationsanschluss beurteilen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 7,
+      "product": "Trübungsmessgerät",
+      "source_url": "https://www.xylemanalytics.com/de/produkte/listing-wtw-all",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Trübungsmessung",
+        "article_ideas": [
+          "Labor- und Online-Trübungsgeräte unterscheiden",
+          "Trübungsbereich und Messverfahren auswählen",
+          "Kalibrierung und Messküvetten bei Trübungsmessung beurteilen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 7,
+      "product": "Chlor-Messgerät",
+      "source_url": "https://www.xylemanalytics.com/de/produkte/listing-wtw-all",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Desinfektionskontrolle",
+        "article_ideas": [
+          "Freies und gesamtes Chlor in Wasser messen",
+          "DPD-Test und Online-Chlorsensor vergleichen",
+          "Messbereich und Kalibrierung von Chlor-Messgeräten auswählen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 7,
+      "product": "Nitrat-Wasseranalysator",
+      "source_url": "https://www.xylemanalytics.com/de/produkte/listing-wtw-all",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W4 Labortest- und Wasser-Photometerseiten; eigenständige Gerätefunktion belegen.",
+      "content_category": {
+        "name": "Nährstoffmessung",
+        "article_ideas": [
+          "Nitratanalysator gegen einfache Schnelltests abgrenzen",
+          "Messverfahren für Nitrat in Grund- und Prozesswasser vergleichen",
+          "Probenaufbereitung und Messbereich auswählen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 7,
+      "product": "CSB-Onlineanalysator",
+      "source_url": "https://www.xylemanalytics.com/de/produkte/listing-wtw-all",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Organische Belastung messen",
+        "article_ideas": [
+          "CSB-Analysator nach Abwasserart auswählen",
+          "Online-CSB und Laborverfahren vergleichen",
+          "Reinigung und Wartung eines CSB-Analysators planen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 7,
+      "product": "Automatischer Wasser-Probenehmer",
+      "source_url": "https://www.xylemanalytics.com/de/produkte/listing-wtw-all",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Zeitgesteuerte Probenahme",
+        "article_ideas": [
+          "Zeit- und mengenproportionale Probenahme vergleichen",
+          "Kühlung und Flaschenzahl von Auto-Probenehmern wählen",
+          "Probenahmeprogramm für Abwasseranlagen planen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 7,
+      "product": "Ultraschall-Wasserzähler",
+      "source_url": "https://www.xylemanalytics.com/de/produkte/listing-wtw-all",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Digitales Wasserzählen",
+        "article_ideas": [
+          "Ultraschall- und mechanische Wasserzähler vergleichen",
+          "Messbereich und Einbauposition eines Ultraschallzählers bestimmen",
+          "Funkablesung und Leckagehinweise bei Wasserzählern nutzen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 7,
+      "product": "Durchfluss-Messgerät für Wasser",
+      "source_url": "https://www.xylemanalytics.com/de/produkte/listing-wtw-all",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W4 Bewässerungs-Wasserzähler und Tankmessung haben anderes Messobjekt; mögliche Keywordüberschneidung.",
+      "content_category": {
+        "name": "Volumenstrom messen",
+        "article_ideas": [
+          "Ultraschall- und magnetisch-induktive Durchflussmesser vergleichen",
+          "Messstelle und Rohrdurchmesser für Wasserfluss bestimmen",
+          "Durchflussmessung bei geringer Strömung beurteilen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 8,
+      "product": "Funk-Wasserzähler-Fernablesemodul",
+      "source_url": "https://www.diehl.com/metering/de/produkte-loesungen/produkte/wasserzaehler/",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Nur als separate Seite wenn Funkmodul eigenständig gekauft wird; integrierter Ultraschallzähler ist bereits Kandidat.",
+      "content_category": {
+        "name": "Digitale Zählerkommunikation",
+        "article_ideas": [
+          "Funkmodule für Wasserzähler nach Übertragungsweg wählen",
+          "Wasserzählerstände zentral auslesen und prüfen",
+          "Batteriebetrieb und Reichweite eines Funkmoduls beurteilen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 8,
+      "product": "Wasserverbrauchs-Datenlogger",
+      "source_url": "https://www.diehl.com/metering/de/produkte-loesungen/produkte/wasserzaehler/",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Wasserzähler/Smart-Home-Software evtl. gleiche Kaufabsicht.",
+      "content_category": {
+        "name": "Wasserverbrauch langfristig überwachen",
+        "article_ideas": [
+          "Intervallaufzeichnung von Wasserverbrauchsdaten einrichten",
+          "Grenzwertalarme aus Durchflussdaten ableiten",
+          "Datenlogger an Wasserzähler-Schnittstellen anbinden"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 8,
+      "product": "Regenwasser-Fernsteuerungsmodul",
+      "source_url": "https://www.intewa.com/de/produkte-fuer-wasseraufbereitung-und-wiederverwendung-sowie-regenwasser-management/",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W12 Leckageschutz, W4 Hauszentrale und Tank-Füllstandsanzeige sind angrenzende Geräte.",
+      "content_category": {
+        "name": "Anlagenüberwachung",
+        "article_ideas": [
+          "Fernsteuerungsmodul für Regenwasserpumpen auswählen",
+          "Füllstand und Störmeldungen im Regenwassersystem fernüberwachen",
+          "Sicheren Betrieb bei Verbindungsabbruch gewährleisten"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 8,
+      "product": "Automatische Wasser-Nachspeiseeinheit",
+      "source_url": "https://www.intewa.com/de/produkte-fuer-wasseraufbereitung-und-wiederverwendung-sowie-regenwasser-management/",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Siehe Feld 02 Nachspeisesteuerung; nur ein Owner für diese Funktion!",
+      "content_category": {
+        "name": "Nachspeisemanagement",
+        "article_ideas": [
+          "Nachspeisung bei sinkendem Wasserstand automatisch auslösen",
+          "Trinkwassernachspeiseeinheit mit Systemtrenner kombinieren",
+          "Fehler und Ventilstörungen an Nachspeisesystemen erkennen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 9,
+      "product": "Regenwasser-Filterrinne",
+      "source_url": "https://www.hauraton.com/de/produkte/regenwasserbehandlung/",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Behandlung von Oberflächenabfluss",
+        "article_ideas": [
+          "Filterrinne von herkömmlicher Entwässerungsrinne unterscheiden",
+          "Filtersubstrat nach Verkehrsflächenbelastung auswählen",
+          "Filterrinne mit Versickerung kombinieren"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 9,
+      "product": "Regenwasser-Sickerschacht",
+      "source_url": "https://www.hauraton.com/de/produkte/regenwasserbehandlung/",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W4 Rigolensystem; Funktion und Einbausituation differenzieren.",
+      "content_category": {
+        "name": "Punktuelle Versickerung",
+        "article_ideas": [
+          "Sickerschacht gegen Rigolenversickerung vergleichen",
+          "Sickerschacht nach Regenmenge und Boden beurteilen",
+          "Filterung vor der Sickerschacht-Einleitung vorsehen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 9,
+      "product": "Entwässerungsrinne",
+      "source_url": "https://www.hauraton.com/de/produkte/regenwasserbehandlung/",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Oberflächenentwässerung",
+        "article_ideas": [
+          "Entwässerungsrinne nach Belastungsklasse auswählen",
+          "Gefälle und Anschluss an den Ablauf planen",
+          "Linienentwässerung gegenüber Punktablauf abgrenzen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 9,
+      "product": "Starkregen-Rückhaltebox",
+      "source_url": "https://www.hauraton.com/de/produkte/regenwasserbehandlung/",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W4 Rigolensystem und Retentionszisterne; nur bei funktionalem Unterschied eigene Seite.",
+      "content_category": {
+        "name": "Dezentrale Wasserretention",
+        "article_ideas": [
+          "Retentionsbox und Rigolensystem gegenüberstellen",
+          "Speichervolumen für Starkregenrückhalt bestimmen",
+          "Wartbarkeit und Rückhaltedrossel kombinieren"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 9,
+      "product": "Absetzfilterschacht",
+      "source_url": "https://www.graf.info/de/retention/filter.html",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W12 Regenwasser-Sedimentationsanlage ähnlich, Abgrenzung nötig.",
+      "content_category": {
+        "name": "Sedimentfilterung",
+        "article_ideas": [
+          "Absetzfilterschacht vor einer Rigole einplanen",
+          "Absetzschacht und Korbfilter vergleichen",
+          "Schlammvolumen und Wartungszugang dimensionieren"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 10,
+      "product": "Mikrosprinkler",
+      "source_url": "https://www.netafim.de/Produkte-und-Loesungen/Produkte/",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Feinberegnung",
+        "article_ideas": [
+          "Mikrosprinkler für Pflanzreihen und Gewächshaus auswählen",
+          "Tropf- und Mikrosprinklertechnik vergleichen",
+          "Druck und Filterfeinheit bei Mikrosprinklern abstimmen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 10,
+      "product": "Bewässerungs-Druckregler",
+      "source_url": "https://www.netafim.de/Produkte-und-Loesungen/Produkte/",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W12 Trinkwasser-Druckminderer ist anderer Einsatz; technische Trennung plausibel.",
+      "content_category": {
+        "name": "Druckstabilisierung in Bewässerungsnetzen",
+        "article_ideas": [
+          "Druckregler für Tropfrohre und Regner einstellen",
+          "Druckverlust langer Bewässerungsleitungen berechnen",
+          "Druckregler mit Ventilen in Zonen kombinieren"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 10,
+      "product": "Bewässerungs-Verlegerohr",
+      "source_url": "https://www.netafim.de/Produkte-und-Loesungen/Produkte/",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Siehe Feld 04 PE-Wasserrohr: unterschiedliche Trinkwasserzulassung/Einsatz, aber nicht blind doppelten Owner.",
+      "content_category": {
+        "name": "Leitungen im Garten",
+        "article_ideas": [
+          "PE-Verlegerohr nach Durchmesser und Druckstufe wählen",
+          "Verlegerohr im Rasen und Beet verlegen",
+          "Abzweigverbinder und Frostentleerung planen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 10,
+      "product": "Bewässerungs-Ventilbox",
+      "source_url": "https://www.netafim.de/Produkte-und-Loesungen/Produkte/",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W12 Bewässerungs-Magnetventil ist das eingebaute Bauteil, nicht die Box.",
+      "content_category": {
+        "name": "Ventilgruppen schützen",
+        "article_ideas": [
+          "Ventilbox für mehrere Bewässerungskreise auswählen",
+          "Ventilbox mit Ablauf und Wartungszugang planen",
+          "Magnetventile in einer Ventilbox anordnen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 11,
+      "product": "Beregnungsmaschine",
+      "source_url": "https://www.bauer-at.com/de/produkte/",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Mobile Feldberegnung",
+        "article_ideas": [
+          "Schlauchtrommel-Beregnungsmaschine nach Flächenbedarf auswählen",
+          "Beregnungsmaschine mit mobilen Regnern vergleichen",
+          "Zuggeschwindigkeit und Wassermenge abstimmen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 11,
+      "product": "Pivot-Kreisberegnungsanlage",
+      "source_url": "https://www.bauer-at.com/de/produkte/",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Großflächenberegnung",
+        "article_ideas": [
+          "Pivot-Kreisregner und mobile Beregnungsmaschinen vergleichen",
+          "Wassermenge und Feldgeometrie für Pivot-Beregnung planen",
+          "Düsen und Fahrgeschwindigkeit auf Wasserverteilung abstimmen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 11,
+      "product": "Lineare Feldberegnungsanlage",
+      "source_url": "https://www.bauer-at.com/de/produkte/",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Gleiche Großberegnungsfamilie, andere Geometrie; SEO-Abgrenzung offen.",
+      "content_category": {
+        "name": "Reihenberegnung",
+        "article_ideas": [
+          "Lineare Beregnung und Pivot-Anlage vergleichen",
+          "Wasserzufuhr und Fahrspur für Linearberegnung planen",
+          "Regnerwahl und Druckverteilung auf Feldlänge optimieren"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 11,
+      "product": "Fertigations-Dosiereinheit",
+      "source_url": "https://www.netafim.de/Produkte-und-Loesungen/Werkzeuge/Fertigation/",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W4 Wasser-Dosieranlage bzw. Industrie Chemikalien-Dosierpumpe; eigentliche landwirtschaftliche Anwendung muss anders sein.",
+      "content_category": {
+        "name": "Wasser-Dünger-Zugabe",
+        "article_ideas": [
+          "Fertigation für Gewächshaus und Freiland unterscheiden",
+          "Dosierung anhand von pH und Leitfähigkeit regeln",
+          "Düngetanks und Dosierkanäle bei Fertigation vergleichen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 11,
+      "product": "Beheizbares Tiertränkebecken",
+      "source_url": "https://www.averde.de/catalog/traenken-traenkebecken-heizkabel/traenkebecken-fuer-den-stall",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Winterfeste Viehtränken",
+        "article_ideas": [
+          "Beheizte Tränkebecken nach Tierart auswählen",
+          "Ventilbetrieb bei Frost und Wasserdruck prüfen",
+          "Energieversorgung und Hygiene einer Tränke planen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 12,
+      "product": "Grauwasser-Ultrafiltrationsmodul",
+      "source_url": "https://www.intewa.com/de/produkte-fuer-wasseraufbereitung-und-wiederverwendung-sowie-regenwasser-management/",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W4 Grauwasseranlage als Komplettsystem; Einzelmodul nur bei eigenständiger Ersatzteil-/Technik-Kaufabsicht.",
+      "content_category": {
+        "name": "Membranaufbereitung von Grauwasser",
+        "article_ideas": [
+          "Ultrafiltrationsmodul als Teil einer Grauwasseranlage bewerten",
+          "Membranfläche nach Wasseraufkommen dimensionieren",
+          "Membranspülung und Betriebsintervalle planen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 12,
+      "product": "Grauwasser-Bioreaktor-Füllkörper",
+      "source_url": "https://www.intewa.com/de/produkte-fuer-wasseraufbereitung-und-wiederverwendung-sowie-regenwasser-management/",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W4 Grauwasseranlage und Membranmodule; ggf. redaktionelle Kategorie statt Seite.",
+      "content_category": {
+        "name": "Biologische Grauwasserreinigung",
+        "article_ideas": [
+          "Trägermaterial für Grauwasser-Bioreaktoren wählen",
+          "Füllkörper zur Verbesserung biologischer Behandlung einsetzen",
+          "Luftversorgung und biologische Belastung abstimmen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 12,
+      "product": "Regenwasser-Unterflurbewässerungssystem",
+      "source_url": "https://www.intewa.com/de/produkte-fuer-wasseraufbereitung-und-wiederverwendung-sowie-regenwasser-management/",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W4 Rigolensystem und Tropfbewässerungsset überschneiden sich; funktionale Grenze prüfen.",
+      "content_category": {
+        "name": "Kapillare Wasserversorgung",
+        "article_ideas": [
+          "Unterflur-Speicherbewässerung gegenüber Tropfrohr vergleichen",
+          "Speicher und kapillare Wasserabgabe dimensionieren",
+          "Wurzelzone und Bodenbeschaffenheit berücksichtigen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 13,
+      "product": "Fertig-Abwasserpumpstation",
+      "source_url": "https://www.aco-haustechnik.de/produkte/",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Siehe Feld 03 Entwässerungs-Pumpstation; diese beiden sind derselbe mögliche Owner.",
+      "content_category": {
+        "name": "Abwasserförderung außerhalb des Hauses",
+        "article_ideas": [
+          "Pumpstation für Grundstücksentwässerung dimensionieren",
+          "Fertigpumpstation und Gebäudehebeanlage vergleichen",
+          "Doppelpumpensteuerung und Alarm bei Abwasserpumpstationen wählen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 13,
+      "product": "Flachdachablauf",
+      "source_url": "https://www.aco-haustechnik.de/produkte/",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Dachentwässerung",
+        "article_ideas": [
+          "Flachdachablauf nach Dachaufbau und Abfluss auswählen",
+          "Ablaufheizung und Laubschutz beurteilen",
+          "Notentwässerung für Flachdächer zusätzlich planen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 13,
+      "product": "Attika-Notüberlauf",
+      "source_url": "https://www.aco-haustechnik.de/produkte/",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Dachablauf und Notüberlauf fachlich verwandt; getrennte Kaufabsicht prüfen.",
+      "content_category": {
+        "name": "Sicherheit der Dachentwässerung",
+        "article_ideas": [
+          "Attika-Notüberlauf gegen regulären Dachablauf unterscheiden",
+          "Notüberlauf nach Rückstauhöhe dimensionieren",
+          "Einbauposition und Dachabdichtung berücksichtigen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 13,
+      "product": "Abwasser-Vakuumentwässerungsanlage",
+      "source_url": "https://www.aco-haustechnik.de/produkte/",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Nischen- und Gewerbetechnik, kein Massen-Affiliateprodukt.",
+      "content_category": {
+        "name": "Unterdruckentwässerung",
+        "article_ideas": [
+          "Vakuumentwässerung gegenüber Gefälleleitung vergleichen",
+          "Unterdruckstation für Einzelbereiche dimensionieren",
+          "Luftanteile und Wartung einer Vakuumentwässerung beurteilen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 13,
+      "product": "Abwasser-Schlammfang",
+      "source_url": "https://www.aco-haustechnik.de/produkte/",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Vorreinigung von Abwasser",
+        "article_ideas": [
+          "Schlammfang vor Fettabscheider und Ölabscheider vergleichen",
+          "Schlammfangvolumen für Abwasserbelastung bemessen",
+          "Reinigung und Entleerung eines Schlammfangs planen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 14,
+      "product": "Abwasser-Rechenanlage",
+      "source_url": "https://www.huber-se.com/company-huber/huber-technology-brands/",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Mechanische Grobreinigung",
+        "article_ideas": [
+          "Fein- und Grobrechen in Kläranlagen vergleichen",
+          "Rechenweite und Rechengutförderung dimensionieren",
+          "Rechenreinigung automatisieren und überwachen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 14,
+      "product": "Abwasser-Trommelsieb",
+      "source_url": "https://www.huber-se.com/company-huber/huber-technology-brands/",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Rotierende Siebfiltration",
+        "article_ideas": [
+          "Trommelsieb nach Schmutzpartikelgröße auswählen",
+          "Siebkorbdrehung und Reinigungswasser abstimmen",
+          "Trommelsieb und statischen Rechen vergleichen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 14,
+      "product": "Klärschlamm-Schneckenpresse",
+      "source_url": "https://www.huber-se.com/company-huber/huber-technology-brands/",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Schlammentwässerung",
+        "article_ideas": [
+          "Schneckenpresse und Zentrifuge für Klärschlamm vergleichen",
+          "Flockungsmittel und Zulaufkonsistenz abstimmen",
+          "Trockensubstanz nach Schneckenpressung bewerten"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 14,
+      "product": "Druckentspannungs-Flotationsanlage",
+      "source_url": "https://www.veoliawatertech.com/en/expertise/applications/industrial-wastewater-treatment",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Abwasserflotation",
+        "article_ideas": [
+          "Flotation bei öl- und feststoffbelastetem Abwasser auswählen",
+          "Luftdosierung und Flockung in Flotationsanlagen abstimmen",
+          "Flotationsschlamm abziehen und behandeln"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 14,
+      "product": "Lamellenklärer",
+      "source_url": "https://www.veoliawatertech.com/en/expertise/applications/industrial-wastewater-treatment",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Sedimentationsbeschleunigung",
+        "article_ideas": [
+          "Lamellenklärer und konventionelles Absetzbecken vergleichen",
+          "Hydraulische Belastung eines Lamellenklärers beurteilen",
+          "Flockung und Schlammabzug abstimmen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 14,
+      "product": "MBBR-Bioreaktor",
+      "source_url": "https://www.veoliawatertech.com/en/expertise/applications/industrial-wastewater-treatment",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W4 Kleinkläranlage ist Gesamtsystem, MBBR eine Verfahrenstechnik; eigenständiger Anlagen-Owner nur im Gewerbe/Kommunal.",
+      "content_category": {
+        "name": "Biologische Abwasserbehandlung",
+        "article_ideas": [
+          "Bewegtbett-Bioreaktor und Festbettfilter vergleichen",
+          "Füllkörper und Belüftung von MBBR-Anlagen dimensionieren",
+          "Stickstoffabbau und Nachklärung bewerten"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 14,
+      "product": "Anaerobe Abwasserbehandlungsanlage",
+      "source_url": "https://www.veoliawatertech.com/en/expertise/applications/industrial-wastewater-treatment",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Energiegewinnung aus Abwasser",
+        "article_ideas": [
+          "Anaerobe Behandlung bei hochbelastetem Gewerbeabwasser einordnen",
+          "Organische Belastung und Biogasproduktion beurteilen",
+          "Vorreinigung und Nachbehandlung kombinieren"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 14,
+      "product": "Industrie-Verdampfungskristallisator",
+      "source_url": "https://www.veoliawatertech.com/en/expertise/applications/industrial-wastewater-treatment",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Abwasser-Konzentratbehandlung",
+        "article_ideas": [
+          "Verdampfungskristallisation für Prozesskonzentrate beurteilen",
+          "Energiebedarf und Konzentratrückgewinnung abschätzen",
+          "Kristallisator und Membrantrennung abgrenzen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 15,
+      "product": "Teich-Oberflächenskimmer",
+      "source_url": "https://www.oase.com/de-DE/teich-wassergarten/uvc-clarifiers-filters-and-aerators",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Schwimmschmutz entfernen",
+        "article_ideas": [
+          "Oberflächenskimmer gegenüber Teichfilter vergleichen",
+          "Schwimmschmutz und Einbauort bei Teichskimmern beurteilen",
+          "Skimmerpumpe und Wasserstand aufeinander abstimmen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 15,
+      "product": "Teich-Trommelfilter",
+      "source_url": "https://www.oase.com/de-DE/teich-wassergarten/uvc-clarifiers-filters-and-aerators",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W12 Teichfilter ist übergeordneter Begriff; separate Seite nur bei eigenständigem Kauf-Intent.",
+      "content_category": {
+        "name": "Automatische Teichsiebung",
+        "article_ideas": [
+          "Trommelfilter nach Teichvolumen und Belastung auswählen",
+          "Automatische Siebspülung und Wasserverbrauch beurteilen",
+          "Trommelfilter und Durchlauffilter unterscheiden"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 15,
+      "product": "Teich-Schlammsauger",
+      "source_url": "https://www.oase.com/de-DE/teich-wassergarten/uvc-clarifiers-filters-and-aerators",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Gartenpflege-Randgebiet; klar wassertechnische Gerätelinie.",
+      "content_category": {
+        "name": "Teichbodenreinigung",
+        "article_ideas": [
+          "Teichschlammsauger nach Saugtechnik auswählen",
+          "Rückführung und Entsorgung abgesaugten Teichwassers unterscheiden",
+          "Schlammabsaugung bei empfindlichem Fischbestand planen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 15,
+      "product": "Pool-Wasserpflegecontroller",
+      "source_url": "https://www.bayrol.de/bayrol-technik-dosieranlagen",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W12 Pool-Dosieranlage ist funktional nah; keine automatische neue Seite.",
+      "content_category": {
+        "name": "Zentrale Poolautomatisierung",
+        "article_ideas": [
+          "Poolcontroller gegenüber reiner Dosieranlage vergleichen",
+          "pH-/Redoxregelung und Pumpensteuerung integrieren",
+          "Fernüberwachung und Fehlermeldung beim Poolcontroller beurteilen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 16,
+      "product": "Wohnmobil-Wassereinfüllstutzen",
+      "source_url": "https://presse.reich-web.com/pressemeldungen/wasserversorgung-in-freizeitfahrzeugen-1",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Mobile Tankbefüllung",
+        "article_ideas": [
+          "Wassereinfüllstutzen mit Belüftung auswählen",
+          "Einfüllstutzen und Wassertank hygienisch anschließen",
+          "Einfüllstutzen vor Frost und Fremdwasser schützen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 16,
+      "product": "Wohnmobil-Tauchpumpe 12 V",
+      "source_url": "https://presse.reich-web.com/pressemeldungen/wasserversorgung-in-freizeitfahrzeugen-1",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W4 Tauchpumpe allgemein, W12 Warmwasser-Zirkulationspumpe andere Technik; SEO-Intent mobile Pumpe prüfen.",
+      "content_category": {
+        "name": "Mobile Wasserförderung",
+        "article_ideas": [
+          "12-V-Tauchpumpe gegen Wohnmobil-Druckpumpe vergleichen",
+          "Förderdruck und Zapfstellenzahl abstimmen",
+          "Elektrische Versorgung bei mobilen Tauchpumpen prüfen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 16,
+      "product": "Wohnmobil-Trinkwasserdruckpumpe",
+      "source_url": "https://presse.reich-web.com/pressemeldungen/wasserversorgung-in-freizeitfahrzeugen-1",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Andere mobile 12-V-Frischwasserfunktion als W4 Gartenpumpe; W14 mobile Tauchpumpe getrennt prüfen.",
+      "content_category": {
+        "name": "Mobile Druckwasserversorgung",
+        "article_ideas": [
+          "Wohnmobil-Membranpumpe nach Förderleistung auswählen",
+          "Trockenlaufschutz und Druckschalter beurteilen",
+          "Geräuschentwicklung von mobilen Druckpumpen vergleichen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 16,
+      "product": "Yacht-Meerwasserentsalzungsanlage",
+      "source_url": "https://www.lenntech.com/products/LennRO/index.html",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Meerwasser-RO gegenüber W4 gewerblicher Umkehrosmoseanlage; mobile Nutzer-/Technikfrage kann eigenständig sein.",
+      "content_category": {
+        "name": "Wassergewinnung auf See",
+        "article_ideas": [
+          "Yacht-Watermaker nach Tagesbedarf dimensionieren",
+          "Vorfilter und Meerwassereinlass am Watermaker abstimmen",
+          "Strombedarf und Membranpflege im Boot beurteilen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 17,
+      "product": "Grundwasser-Pegeldatenlogger",
+      "source_url": "https://www.ott.com/de/products",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Kontinuierliche Brunnenpegelmessung",
+        "article_ideas": [
+          "Drucksensor- und Schwimmer-Pegellogger vergleichen",
+          "Messintervall und Batterie für Grundwassermessung planen",
+          "Fernübertragung von Grundwasserpegeln beurteilen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 17,
+      "product": "Radar-Wasserstandssensor",
+      "source_url": "https://www.ott.com/de/products",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Berührungslose Pegelüberwachung",
+        "article_ideas": [
+          "Radar- und Drucksonde für Wasserstände vergleichen",
+          "Einbauhöhe und Messbereich eines Radar-Pegelsensors wählen",
+          "Störungen durch Brückenbauwerke und Reflexionen beurteilen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 17,
+      "product": "Abfluss-Geschwindigkeitsmessgerät",
+      "source_url": "https://www.ott.com/de/products",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Abflussmessung im Gewässer",
+        "article_ideas": [
+          "Abflussgeschwindigkeit mit Ultraschall und Flügelrad vergleichen",
+          "Messquerschnitt und Wasserstand für Abfluss bestimmen",
+          "Messungen bei Hochwasser sicher einordnen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 17,
+      "product": "Radar-Regenmessgerät",
+      "source_url": "https://www.ott.com/de/products",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Niederschlagsmessung",
+        "article_ideas": [
+          "Radar- und Kippwaagen-Regenmesser vergleichen",
+          "Regenmesser für Starkregenfrühwarnung auswählen",
+          "Standort und Datenübertragung eines Niederschlagssensors planen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 17,
+      "product": "Grundwasser-Messstellen-Telemetrie",
+      "source_url": "https://www.ott.com/de/products",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Grundwasser-Pegeldatenlogger kann integrierte Funkfunktion haben; kein doppelter Owner ohne klare separat kaufbare Einheit.",
+      "content_category": {
+        "name": "Messdatenübertragung",
+        "article_ideas": [
+          "Mobilfunk- und Funktelemetrie für Pegelmessstellen vergleichen",
+          "Stromversorgung einer autarken Messstation planen",
+          "Alarmwerte und Datenhaltung für Grundwassersensoren festlegen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 18,
+      "product": "Atmosphärischer Trinkwasser-Generator",
+      "source_url": "https://watergen.com/product-page-genny/",
+      "status": "NEU_KANDIDAT_NOCH_NICHT_SEO_GEPRUEFT",
+      "overlap_note": "Erste Quellenprüfung, funktionale Abgrenzung zu W4/W12 im Gesamtabgleich offen.",
+      "content_category": {
+        "name": "Wassergewinnung aus Luftfeuchte",
+        "article_ideas": [
+          "Wasserleistung von Luftwasser-Generatoren nach Klima vergleichen",
+          "Energiebedarf und Wartung eines Luftwasser-Generators bewerten",
+          "Aufbereitung und Mineralisierung des Kondensats beurteilen"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 18,
+      "product": "Membrandestillationsmodul",
+      "source_url": "https://rnsolutionsbv.com/technology/products",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "Echte Spezial-/Industrie-Technik, Produkte/Pilot-/Serienreife gesondert prüfen.",
+      "content_category": {
+        "name": "Thermische Membrantrennung",
+        "article_ideas": [
+          "Membrandestillation mit Umkehrosmose vergleichen",
+          "Abwärme als Energiequelle der Membrandestillation nutzen",
+          "Modulfläche und Konzentratbehandlung dimensionieren"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    },
+    {
+      "research_field": 18,
+      "product": "Kompakte Meerwasser-Umkehrosmoseanlage",
+      "source_url": "https://www.lenntech.com/products/LennRO/index.html",
+      "status": "INTENT_GRENZFALL",
+      "overlap_note": "W4 Gewerbliche Umkehrosmose und mobile Yachtanlage können überlappen; kein zusätzlicher Owner allein wegen Anwendung.",
+      "content_category": {
+        "name": "Kleine Meerwasserentsalzung",
+        "article_ideas": [
+          "Hochdruckpumpe und Vorfilter in Meerwasser-RO auslegen",
+          "Energiebedarf und Salzrückhalt bei Meerwasserumkehrosmose vergleichen",
+          "Kompaktanlage bei wechselnden Rohwasserbedingungen betreiben"
+        ]
+      },
+      "verified_scope": "Produkttyp im Hersteller-/Fachverzeichnis belegt; weder SEO-Suchvolumen noch eigenständige Suchintention gemessen."
+    }
+  ]
+}
