@@ -5019,8 +5019,8 @@
     }
   ],
   "canonical_source": true,
-  "revision": 20,
-  "research_state": "GRUNDLAGENRECHERCHE_ABGESCHLOSSEN_V84",
+  "revision": 21,
+  "research_state": "GRUNDLAGENRECHERCHE_ABGESCHLOSSEN_V84_SEO_BESTAND_ABGEGLICHEN_V86",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
   "legacy_term_reconciliation": [
@@ -16104,5 +16104,409 @@
     "no_duplicated_types": true,
     "no_wp_writes": true,
     "one_finder_for_all_audiences": true
+  },
+  "seo_alignment_v86": {
+    "date": "2026-11-15",
+    "status": "DATENABGLEICH_AUS_BEREITS_BEZAHLTER_V61_QUELLE_KEIN_NEUER_API_LAUF",
+    "base_source": "RECHERCHE/V61_SEO_AUDIT_ERGEBNIS.json",
+    "underlying_source": "robotik-v57-seo-gesamtbericht.json (in der V61-Auditdatei angegeben)",
+    "plan_before_v84": {
+      "robot_types": 141,
+      "flat_categories": 296,
+      "old_keyword_owner_total": 437,
+      "keyword_owner_results_with_volume": 46,
+      "keyword_owner_without_provider_record": 391
+    },
+    "plan_after_v84": {
+      "robot_types": 157,
+      "flat_categories": 328,
+      "total_owners": 485,
+      "additional_owners_not_in_prior_dataforseo_run": 48,
+      "known_old_owners_with_data": 46,
+      "owners_without_measured_volume_or_unqueried": 439
+    },
+    "old_owner_data_kind": {
+      "product": 45,
+      "category": 1
+    },
+    "keyword_ideas": {
+      "from_prior_run": 1613,
+      "selected": 26,
+      "missing_world": "Freizeit",
+      "seven_worlds_capped_at_provider_max": true
+    },
+    "provider_cost_usd_reported": 0.40752,
+    "comparison_old_16": {
+      "count": 16,
+      "valid_search_result_url_comparisons": 0,
+      "previous_nonvalid_urls": 27,
+      "previous_nonvalid_total_urls": 29,
+      "redaction_status": "FACHLICH_SEIT_V84_BESCHLOSSEN_SEO_NICHT_VERIFIZIERT_KEINE_NEUE_SPERRE"
+    },
+    "priority_idea_mappings": [
+      {
+        "keyword": "saugroboter test",
+        "monthly_searches_dataforseo": 22200,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "rbt_product_0500",
+        "owner_path": [
+          "Haushalt",
+          "Saugroboter"
+        ],
+        "decision": "FACHBEITRAG"
+      },
+      {
+        "keyword": "worx mähroboter",
+        "monthly_searches_dataforseo": 18100,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "rbt_product_0501",
+        "owner_path": [
+          "Garten",
+          "Rasenpflege",
+          "Mähroboter"
+        ],
+        "decision": "MARKENTHEMA"
+      },
+      {
+        "keyword": "saug wisch roboter",
+        "monthly_searches_dataforseo": 18100,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "rbt_product_0500",
+        "owner_path": [
+          "Haushalt",
+          "Saugroboter"
+        ],
+        "decision": "HYBRID_THEMENKONFLIKT"
+      },
+      {
+        "keyword": "fensterputzroboter test",
+        "monthly_searches_dataforseo": 14800,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "rbt_product_0355",
+        "owner_path": [
+          "Haushalt",
+          "Fensterputzroboter"
+        ],
+        "decision": "FACHBEITRAG"
+      },
+      {
+        "keyword": "kress mähroboter",
+        "monthly_searches_dataforseo": 14800,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "rbt_product_0501",
+        "owner_path": [
+          "Garten",
+          "Rasenpflege",
+          "Mähroboter"
+        ],
+        "decision": "MARKENTHEMA"
+      },
+      {
+        "keyword": "humanoide roboter",
+        "monthly_searches_dataforseo": 12100,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "V62_WORLD_HUMANOIDE_NUR_ENTWURF",
+        "owner_path": [
+          "Humanoide"
+        ],
+        "decision": "GRUPPENSUCHE"
+      },
+      {
+        "keyword": "mähroboter test",
+        "monthly_searches_dataforseo": 9900,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "rbt_product_0501",
+        "owner_path": [
+          "Garten",
+          "Rasenpflege",
+          "Mähroboter"
+        ],
+        "decision": "FACHBEITRAG"
+      },
+      {
+        "keyword": "saugroboter mit wischfunktion test",
+        "monthly_searches_dataforseo": 8100,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "rbt_product_0500",
+        "owner_path": [
+          "Haushalt",
+          "Saugroboter"
+        ],
+        "decision": "HYBRID_THEMENKONFLIKT"
+      },
+      {
+        "keyword": "saug-wisch-roboter testsieger",
+        "monthly_searches_dataforseo": 6600,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "rbt_product_0500",
+        "owner_path": [
+          "Haushalt",
+          "Saugroboter"
+        ],
+        "decision": "HYBRID_THEMENKONFLIKT"
+      },
+      {
+        "keyword": "roboter bausatz",
+        "monthly_searches_dataforseo": 5400,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "v46_b01",
+        "owner_path": [
+          "Bildung",
+          "Roboterbaukästen"
+        ],
+        "decision": "FACHBEITRAG"
+      },
+      {
+        "keyword": "fensterputzroboter testsieger",
+        "monthly_searches_dataforseo": 4400,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "rbt_product_0355",
+        "owner_path": [
+          "Haushalt",
+          "Fensterputzroboter"
+        ],
+        "decision": "FACHBEITRAG"
+      },
+      {
+        "keyword": "wischroboter test",
+        "monthly_searches_dataforseo": 4400,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": null,
+        "owner_path": null,
+        "decision": "OFFENE_ABGRENZUNG_WISCH_ONLY_ODER_KOMBINATION",
+        "possible_owner_ids": [
+          "v46_h07",
+          "rbt_product_0500"
+        ]
+      },
+      {
+        "keyword": "saugroboter vergleich",
+        "monthly_searches_dataforseo": 2400,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "rbt_product_0500",
+        "owner_path": [
+          "Haushalt",
+          "Saugroboter"
+        ],
+        "decision": "FACHBEITRAG"
+      },
+      {
+        "keyword": "poolroboter von steinbach",
+        "monthly_searches_dataforseo": 2400,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "rbt_product_0164",
+        "owner_path": [
+          "Garten",
+          "Poolpflege",
+          "Poolroboter"
+        ],
+        "decision": "MARKENTHEMA"
+      },
+      {
+        "keyword": "saugroboter dreame",
+        "monthly_searches_dataforseo": 1900,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "rbt_product_0500",
+        "owner_path": [
+          "Haushalt",
+          "Saugroboter"
+        ],
+        "decision": "MARKENTHEMA"
+      },
+      {
+        "keyword": "saugroboter roborock",
+        "monthly_searches_dataforseo": 1900,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "rbt_product_0500",
+        "owner_path": [
+          "Haushalt",
+          "Saugroboter"
+        ],
+        "decision": "MARKENTHEMA"
+      },
+      {
+        "keyword": "roboter spielzeug",
+        "monthly_searches_dataforseo": 1900,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "rbt_2a9f15b10b6f0ff1",
+        "owner_path": [
+          "Freizeit",
+          "Spielzeug"
+        ],
+        "decision": "GRUPPENSUCHE"
+      },
+      {
+        "keyword": "roboter mensch",
+        "monthly_searches_dataforseo": 1600,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "V62_WORLD_HUMANOIDE_NUR_ENTWURF",
+        "owner_path": [
+          "Humanoide"
+        ],
+        "decision": "GRUPPENSUCHE"
+      },
+      {
+        "keyword": "saugroboter für tierhaare",
+        "monthly_searches_dataforseo": 1300,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "rbt_product_0500",
+        "owner_path": [
+          "Haushalt",
+          "Saugroboter"
+        ],
+        "decision": "FACHBEITRAG"
+      },
+      {
+        "keyword": "test mähroboter ohne begrenzungskabel",
+        "monthly_searches_dataforseo": 1300,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "rbt_product_0501",
+        "owner_path": [
+          "Garten",
+          "Rasenpflege",
+          "Mähroboter"
+        ],
+        "decision": "FACHBEITRAG"
+      },
+      {
+        "keyword": "fanuc roboter",
+        "monthly_searches_dataforseo": 1300,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "rbt_ef13a7d43364d4ea",
+        "owner_path": [
+          "Gewerbe",
+          "Industrie",
+          "Produktion"
+        ],
+        "decision": "HERSTELLER_REGISTER_ODER_FERTIGUNG_LINK"
+      },
+      {
+        "keyword": "fensterputzroboter erfahrungen",
+        "monthly_searches_dataforseo": 1000,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "rbt_product_0355",
+        "owner_path": [
+          "Haushalt",
+          "Fensterputzroboter"
+        ],
+        "decision": "FACHBEITRAG"
+      },
+      {
+        "keyword": "mähroboter vergleich",
+        "monthly_searches_dataforseo": 880,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "rbt_product_0501",
+        "owner_path": [
+          "Garten",
+          "Rasenpflege",
+          "Mähroboter"
+        ],
+        "decision": "FACHBEITRAG"
+      },
+      {
+        "keyword": "poolroboter testsieger",
+        "monthly_searches_dataforseo": 880,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "rbt_product_0164",
+        "owner_path": [
+          "Garten",
+          "Poolpflege",
+          "Poolroboter"
+        ],
+        "decision": "FACHBEITRAG"
+      },
+      {
+        "keyword": "humanoide roboter für zuhause",
+        "monthly_searches_dataforseo": 880,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "hu_hu01",
+        "owner_path": [
+          "Humanoide",
+          "Haushalt",
+          "Haushaltsassistenten"
+        ],
+        "decision": "FACHBEITRAG"
+      },
+      {
+        "keyword": "roboter zum selbst bauen",
+        "monthly_searches_dataforseo": 720,
+        "source": "V61_1613_IDEEN_AUSWAHL_NICHT_46_OWNER_WERTE",
+        "owner_id": "v46_b01",
+        "owner_path": [
+          "Bildung",
+          "Roboterbaukästen"
+        ],
+        "decision": "FACHBEITRAG"
+      }
+    ],
+    "nonrobot_volume_risks": [
+      {
+        "keyword": "knieprothesen",
+        "volume": 9900,
+        "possible_owner_id": "rbt_product_0545",
+        "decision": "NICHT_ROBOTIK_GESICHERT_KEINE_STRUKTURAENDERUNG"
+      },
+      {
+        "keyword": "poolskimmer",
+        "volume": 12100,
+        "possible_owner_id": "rbt_product_0249",
+        "decision": "NICHT_ROBOTIK_GESICHERT_KEINE_STRUKTURAENDERUNG"
+      },
+      {
+        "keyword": "bootsreiniger",
+        "volume": 170,
+        "possible_owner_id": "rbt_product_0048",
+        "decision": "NICHT_ROBOTIK_GESICHERT_KEINE_STRUKTURAENDERUNG"
+      },
+      {
+        "keyword": "armorthesen",
+        "volume": 50,
+        "possible_owner_id": "rbt_product_0543",
+        "decision": "NICHT_ROBOTIK_GESICHERT_KEINE_STRUKTURAENDERUNG"
+      },
+      {
+        "keyword": "handprothesen",
+        "volume": 90,
+        "possible_owner_id": "rbt_product_0544",
+        "decision": "NICHT_ROBOTIK_GESICHERT_KEINE_STRUKTURAENDERUNG"
+      },
+      {
+        "keyword": "treppenrollstühle",
+        "volume": 10,
+        "possible_owner_id": null,
+        "decision": "NICHT_ROBOTIK_GESICHERT_KEINE_STRUKTURAENDERUNG"
+      },
+      {
+        "keyword": "reaktionstrainer",
+        "volume": 170,
+        "possible_owner_id": null,
+        "decision": "NICHT_ROBOTIK_GESICHERT_KEINE_STRUKTURAENDERUNG"
+      },
+      {
+        "keyword": "futterboote",
+        "volume": 170,
+        "possible_owner_id": null,
+        "decision": "NICHT_ROBOTIK_GESICHERT_KEINE_STRUKTURAENDERUNG"
+      },
+      {
+        "keyword": "robotertiere",
+        "volume": 50,
+        "possible_owner_id": "rbt_product_0060",
+        "decision": "NICHT_ROBOTIK_GESICHERT_KEINE_STRUKTURAENDERUNG"
+      }
+    ],
+    "seo_decisions": [
+      "Vorhandene Zielseiten für Suchbegriffe verwenden; kein automatischer Neuseitenimport",
+      "Saug-Wisch-Kombinationssuche nicht als Beleg für reine Nasswischroboter werten; separat als Artikel-/Suchintentfall behandeln",
+      "Freizeit-Seed-Ideen fehlen aus dem Vorlauf; vorhandene Robotertypen und Ideen nicht als nachfragefrei klassifizieren",
+      "Fanuc ist primär Hersteller-/Markenintention; keine neue Hersteller-Robotertypseite",
+      "Roboter-Spielzeug als Freizeit-Spielzeug behandeln, nicht aus Keyword-Seed 'Bildung' ableiten",
+      "Die 16 historischen SEO-HOLDs bleiben redaktionell entschieden; fehlerhafte SERP-Vergleiche nicht als SEO-Freigabe ausgeben"
+    ],
+    "new_paid_calls": 0,
+    "new_wp_writes": 0,
+    "new_category_pages": 0,
+    "new_plugins": 0,
+    "next_paid_request_only_if_explicitly_approved": "Ein einmaliger gezielter DataForSEO-Nachlauf für fehlende Freizeit-Welt, 48 V84-Ziele und ggf. priorisierte, tatsächlich wichtige sonstige Lücken; vorher Kosten/Vollständigkeit aufzeigen; nicht die gesamte alte Runde blind wiederholen"
   }
 }
