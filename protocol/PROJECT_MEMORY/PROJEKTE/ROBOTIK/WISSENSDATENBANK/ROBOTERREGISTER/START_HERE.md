@@ -1,5 +1,10 @@
 # Büro Roboterregister / einheitliche Eigenschaften
 
+## AKTUELL 15.11.2026 – EIN ROBOTERTYPEN-MASTER REVISION 20
+- **`../../KATEGORIE/RECHERCHE/PRODUKTE_V2_20261108.json` Revision 20** ist die **einzige** Typen-/Eigenschaftsdatenquelle: 68 ursprüngliche Kandidaten und 189 Forschungsrandfunde, alte IDs erhalten. Fachlicher 19→16+3-Grundlagenabschluss im Feld `category_release_v84`. **Keine weitere breite Rechercherunde erforderlich.**
+- Bei **16** für den letzten Kategorie-Nachtrag ausgewählten Typen einige begrenzte, belegte Finderfelder `finder_traits_v1` ergänzt. Noch unbestätigte Eignungs- oder Sicherheitswerte bleiben `NICHT_RECHERCHIERT`, nicht „nein“ oder „passt“. Ein einziger späterer Finder für alle Zielgruppen.
+- **Die öffentliche Hersteller-/Modellseite ist ein anderer Datensatztyp**: aktueller Pilot `../../MAGAZIN/ROBOTERREGISTER/MODELLE_PILOT_V2.json` mit 19 eindeutigen Herstellermodellen/Projekten; keine zweite Robotertypenquelle und keine WP-Veröffentlichung. Die älteren Revisionen unten sind Projektgeschichte.
+
 ## AKTUELL 15.11.2026 – DATENQUELLE REVISION 18, WISSENSREGISTER BLEIBT EINE ANSICHT
 - Der **einzige bestehende Robotertyp-Fachmaster** `../../KATEGORIE/RECHERCHE/PRODUKTE_V2_20261108.json` hat **Revision 18**, weiterhin 68 ursprüngliche Robotertypkandidaten, Forschungsrandbestand jetzt **189** statt 183. Neue V82/V83-Themen nutzen bestehende Forschungskennungen, soweit passend (Enabot `rf143`, Massage `rf158`, Nagelpflege `rf159`), statt doppelte Hersteller- und Produktlisten anzulegen.
 - Acht mögliche neue Typseiten in der Kategorie-Fachplanung, **noch nicht WordPress oder Finder**; Stand in `../../KATEGORIE/CURRENT_STATE.md`, Detailbelege in `../../KATEGORIE/RECHERCHE/V82_FUENF_NISCHEN_BESTANDSABGLEICH_20261115.md`. Alles Folgende ist ältere Projekthistorie.
