@@ -177,7 +177,8 @@
     "vokabular_erweiterung": "Für neue tatsächlich recherchierte Einsatzkontexte und Wasserarten exakt 3 neue Wasserarten sowie 5 Einsatzfelder zentral ergänzt; keine ad hoc Tags in Einzeldateien.",
     "entscheidungsvergleich_w21": "Die einzige aktuelle Entscheidung je Paar steht in funktionsvergleiche_50_aktuell, in den Produktdatensätzen nur Referenz. Keine weitere nachgelagerte Entscheidung.",
     "w22_einmalentscheidung": "Ein Vergleich, eine Entscheidung im Feld funktionsvergleiche_50_aktuell. Produktdaten verweisen nur auf die Entscheidung; kein zweiter Prüfschritt.",
-    "w23_arbeitsnavigation": "Die w23-Markteinsortierung ist eine fachliche Arbeitsgruppierung und KEINE neue WordPress-Kategorie oder zusätzliche Alias-/SEO-Entscheidung."
+    "w23_arbeitsnavigation": "Die w23-Markteinsortierung ist eine fachliche Arbeitsgruppierung und KEINE neue WordPress-Kategorie oder zusätzliche Alias-/SEO-Entscheidung.",
+    "w23_funktionszuordnung": "Die technische Aufgabe wird im einen Feld merkmale.funktionen direkt am Produkt berichtigt; W4-SEO/WordPress bleibt unverändert. Kein zweiter paralleler Status."
   },
   "eintraege": [
     {
@@ -904,7 +905,8 @@
       "fachbereich": "Wasseraufbereitung",
       "merkmale": {
         "funktionen": [
-          "foerdern"
+          "aufbereiten",
+          "speichern"
         ],
         "wasserarten": [],
         "einsatzorte": [],
@@ -1998,7 +2000,7 @@
       "fachbereich": "Brunnen",
       "merkmale": {
         "funktionen": [
-          "aufbereiten"
+          "wasser_gewinnen"
         ],
         "wasserarten": [
           "grundwasser"
@@ -2595,7 +2597,7 @@
       "fachbereich": "Pumpen & Druck",
       "merkmale": {
         "funktionen": [
-          "foerdern"
+          "steuern"
         ],
         "wasserarten": [],
         "einsatzorte": [],
@@ -3041,7 +3043,10 @@
       "kanonisch_id": "W4-040",
       "fachbereich": "Regenwasser",
       "merkmale": {
-        "funktionen": [],
+        "funktionen": [
+          "foerdern",
+          "steuern"
+        ],
         "wasserarten": [
           "regenwasser"
         ],
@@ -3121,7 +3126,10 @@
       "kanonisch_id": "W4-041",
       "fachbereich": "Regenwasser",
       "merkmale": {
-        "funktionen": [],
+        "funktionen": [
+          "speichern",
+          "entsorgen"
+        ],
         "wasserarten": [
           "regenwasser"
         ],
@@ -3421,7 +3429,7 @@
       "fachbereich": "Bewässerung",
       "merkmale": {
         "funktionen": [
-          "verteilen"
+          "steuern"
         ],
         "wasserarten": [],
         "einsatzorte": [],
@@ -4002,7 +4010,7 @@
       "fachbereich": "Abwassertechnik",
       "merkmale": {
         "funktionen": [
-          "entsorgen"
+          "schuetzen"
         ],
         "wasserarten": [
           "abwasser"
@@ -4081,7 +4089,8 @@
       "fachbereich": "Abwassertechnik",
       "merkmale": {
         "funktionen": [
-          "entsorgen"
+          "aufbereiten",
+          "wiederverwenden"
         ],
         "wasserarten": [
           "grauwasser",
@@ -4164,7 +4173,7 @@
       "fachbereich": "Abwassertechnik",
       "merkmale": {
         "funktionen": [
-          "entsorgen"
+          "aufbereiten"
         ],
         "wasserarten": [
           "abwasser"
@@ -4600,7 +4609,7 @@
       "fachbereich": "Wasseraufbereitung",
       "merkmale": {
         "funktionen": [
-          "aufbereiten"
+          "schuetzen"
         ],
         "wasserarten": [],
         "einsatzorte": [],
@@ -4810,7 +4819,7 @@
       "fachbereich": "Pumpen & Druck",
       "merkmale": {
         "funktionen": [
-          "foerdern"
+          "schuetzen"
         ],
         "wasserarten": [],
         "einsatzorte": [],
@@ -4951,7 +4960,7 @@
       "fachbereich": "Pumpen & Druck",
       "merkmale": {
         "funktionen": [
-          "foerdern"
+          "speichern"
         ],
         "wasserarten": [],
         "einsatzorte": [],
@@ -5020,7 +5029,7 @@
       "fachbereich": "Pumpen & Druck",
       "merkmale": {
         "funktionen": [
-          "foerdern"
+          "aufbereiten"
         ],
         "wasserarten": [],
         "einsatzorte": [],
@@ -5089,7 +5098,7 @@
       "fachbereich": "Wassertanks",
       "merkmale": {
         "funktionen": [
-          "speichern"
+          "messen"
         ],
         "wasserarten": [],
         "einsatzorte": [],
@@ -5158,7 +5167,7 @@
       "fachbereich": "Wassertanks",
       "merkmale": {
         "funktionen": [
-          "speichern"
+          "verteilen"
         ],
         "wasserarten": [],
         "einsatzorte": [],
@@ -5227,7 +5236,7 @@
       "fachbereich": "Regenwasser",
       "merkmale": {
         "funktionen": [
-          "speichern"
+          "aufbereiten"
         ],
         "wasserarten": [
           "regenwasser"
@@ -5534,7 +5543,9 @@
       "kanonisch_id": "W4-074",
       "fachbereich": "Industrie & Großanlagen",
       "merkmale": {
-        "funktionen": [],
+        "funktionen": [
+          "aufbereiten"
+        ],
         "wasserarten": [
           "prozesswasser"
         ],
@@ -8511,7 +8522,7 @@
       "fachbereich": "Suchfeld 02",
       "merkmale": {
         "funktionen": [
-          "speichern"
+          "steuern"
         ],
         "wasserarten": [
           "regenwasser"
@@ -9904,7 +9915,7 @@
       "fachbereich": "Suchfeld 06",
       "merkmale": {
         "funktionen": [
-          "aufbereiten"
+          "waerme_uebertragen"
         ],
         "wasserarten": [
           "trinkwasser"
@@ -9977,7 +9988,8 @@
       "fachbereich": "Suchfeld 06",
       "merkmale": {
         "funktionen": [
-          "aufbereiten"
+          "steuern",
+          "verteilen"
         ],
         "wasserarten": [],
         "einsatzorte": [],
@@ -10048,7 +10060,7 @@
       "fachbereich": "Suchfeld 06",
       "merkmale": {
         "funktionen": [
-          "aufbereiten"
+          "messen"
         ],
         "wasserarten": [
           "trinkwasser"
@@ -10121,7 +10133,7 @@
       "fachbereich": "Suchfeld 06",
       "merkmale": {
         "funktionen": [
-          "aufbereiten"
+          "waerme_uebertragen"
         ],
         "wasserarten": [],
         "einsatzorte": [],
@@ -10991,7 +11003,8 @@
       "fachbereich": "Suchfeld 09",
       "merkmale": {
         "funktionen": [
-          "wiederverwenden"
+          "aufbereiten",
+          "entsorgen"
         ],
         "wasserarten": [
           "regenwasser"
@@ -11064,7 +11077,7 @@
       "fachbereich": "Suchfeld 09",
       "merkmale": {
         "funktionen": [
-          "wiederverwenden"
+          "entsorgen"
         ],
         "wasserarten": [
           "regenwasser"
@@ -11137,7 +11150,7 @@
       "fachbereich": "Suchfeld 09",
       "merkmale": {
         "funktionen": [
-          "wiederverwenden"
+          "entsorgen"
         ],
         "wasserarten": [],
         "einsatzorte": [],
@@ -11208,7 +11221,8 @@
       "fachbereich": "Suchfeld 09",
       "merkmale": {
         "funktionen": [
-          "wiederverwenden"
+          "speichern",
+          "schuetzen"
         ],
         "wasserarten": [],
         "einsatzorte": [],
@@ -11279,7 +11293,7 @@
       "fachbereich": "Suchfeld 09",
       "merkmale": {
         "funktionen": [
-          "wiederverwenden"
+          "aufbereiten"
         ],
         "wasserarten": [],
         "einsatzorte": [],
@@ -12001,7 +12015,7 @@
       "fachbereich": "Suchfeld 12",
       "merkmale": {
         "funktionen": [
-          "wiederverwenden"
+          "aufbereiten"
         ],
         "wasserarten": [
           "grauwasser"
@@ -12077,7 +12091,7 @@
       "fachbereich": "Suchfeld 12",
       "merkmale": {
         "funktionen": [
-          "wiederverwenden"
+          "aufbereiten"
         ],
         "wasserarten": [
           "grauwasser"
@@ -12150,7 +12164,7 @@
       "fachbereich": "Suchfeld 12",
       "merkmale": {
         "funktionen": [
-          "wiederverwenden"
+          "verteilen"
         ],
         "wasserarten": [
           "regenwasser"
@@ -13405,7 +13419,7 @@
       "fachbereich": "Suchfeld 15",
       "merkmale": {
         "funktionen": [
-          "aufbereiten"
+          "steuern"
         ],
         "wasserarten": [
           "pool_und_teichwasser"
@@ -13481,7 +13495,7 @@
       "fachbereich": "Suchfeld 16",
       "merkmale": {
         "funktionen": [
-          "foerdern"
+          "verteilen"
         ],
         "wasserarten": [],
         "einsatzorte": [],
@@ -31728,6 +31742,330 @@
       "Technischer Marktstatus vieler Alt-Forschungsbezeichnungen ungeklärt",
       "SEO/Produktowner aller neuen Forschungstitel noch nicht bestätigt",
       "Bestehende W4-79-URLs nicht verändern"
+    ],
+    "funktionsmetadaten_korrigiert": 32,
+    "funktionskorrekturen": [
+      {
+        "id": "W4-011",
+        "produkt": "Osmoseanlage mit Drucktank",
+        "vorher": [
+          "foerdern"
+        ],
+        "jetzt": [
+          "aufbereiten",
+          "speichern"
+        ]
+      },
+      {
+        "id": "W4-026",
+        "produkt": "Brunnenfilterrohr",
+        "vorher": [
+          "aufbereiten"
+        ],
+        "jetzt": [
+          "wasser_gewinnen"
+        ]
+      },
+      {
+        "id": "W4-034",
+        "produkt": "Pumpensteuergerät",
+        "vorher": [
+          "foerdern"
+        ],
+        "jetzt": [
+          "steuern"
+        ]
+      },
+      {
+        "id": "W4-040",
+        "produkt": "Regenwasser-Hauszentrale",
+        "vorher": [],
+        "jetzt": [
+          "foerdern",
+          "steuern"
+        ]
+      },
+      {
+        "id": "W4-041",
+        "produkt": "Rigolensystem",
+        "vorher": [],
+        "jetzt": [
+          "speichern",
+          "entsorgen"
+        ]
+      },
+      {
+        "id": "W4-045",
+        "produkt": "Bewässerungscomputer",
+        "vorher": [
+          "verteilen"
+        ],
+        "jetzt": [
+          "steuern"
+        ]
+      },
+      {
+        "id": "W4-053",
+        "produkt": "Rückstauverschluss",
+        "vorher": [
+          "entsorgen"
+        ],
+        "jetzt": [
+          "schuetzen"
+        ]
+      },
+      {
+        "id": "W4-054",
+        "produkt": "Grauwasseranlage",
+        "vorher": [
+          "entsorgen"
+        ],
+        "jetzt": [
+          "aufbereiten",
+          "wiederverwenden"
+        ]
+      },
+      {
+        "id": "W4-055",
+        "produkt": "Kleinkläranlage",
+        "vorher": [
+          "entsorgen"
+        ],
+        "jetzt": [
+          "aufbereiten"
+        ]
+      },
+      {
+        "id": "W4-061",
+        "produkt": "Systemtrenner",
+        "vorher": [
+          "aufbereiten"
+        ],
+        "jetzt": [
+          "schuetzen"
+        ]
+      },
+      {
+        "id": "W4-064",
+        "produkt": "Rückschlagventil",
+        "vorher": [
+          "foerdern"
+        ],
+        "jetzt": [
+          "schuetzen"
+        ]
+      },
+      {
+        "id": "W4-066",
+        "produkt": "Druckbehälter",
+        "vorher": [
+          "foerdern"
+        ],
+        "jetzt": [
+          "speichern"
+        ]
+      },
+      {
+        "id": "W4-067",
+        "produkt": "Pumpenvorfilter",
+        "vorher": [
+          "foerdern"
+        ],
+        "jetzt": [
+          "aufbereiten"
+        ]
+      },
+      {
+        "id": "W4-068",
+        "produkt": "Tank-Füllstandsanzeige",
+        "vorher": [
+          "speichern"
+        ],
+        "jetzt": [
+          "messen"
+        ]
+      },
+      {
+        "id": "W4-069",
+        "produkt": "Tankdurchführung",
+        "vorher": [
+          "speichern"
+        ],
+        "jetzt": [
+          "verteilen"
+        ]
+      },
+      {
+        "id": "W4-070",
+        "produkt": "Zisternenfilter",
+        "vorher": [
+          "speichern"
+        ],
+        "jetzt": [
+          "aufbereiten"
+        ]
+      },
+      {
+        "id": "W4-074",
+        "produkt": "Elektrodeionisationsanlage",
+        "vorher": [],
+        "jetzt": [
+          "aufbereiten"
+        ]
+      },
+      {
+        "id": "W14-008",
+        "produkt": "Regenwasser-Nachspeisesteuerung",
+        "vorher": [
+          "speichern"
+        ],
+        "jetzt": [
+          "steuern"
+        ]
+      },
+      {
+        "id": "W14-027",
+        "produkt": "Trinkwassererwärmer",
+        "vorher": [
+          "aufbereiten"
+        ],
+        "jetzt": [
+          "waerme_uebertragen"
+        ]
+      },
+      {
+        "id": "W14-028",
+        "produkt": "Warmwasser-Zirkulationsregulierventil",
+        "vorher": [
+          "aufbereiten"
+        ],
+        "jetzt": [
+          "steuern",
+          "verteilen"
+        ]
+      },
+      {
+        "id": "W14-029",
+        "produkt": "Trinkwasser-Probenahmeventil",
+        "vorher": [
+          "aufbereiten"
+        ],
+        "jetzt": [
+          "messen"
+        ]
+      },
+      {
+        "id": "W14-030",
+        "produkt": "Frischwasserstation",
+        "vorher": [
+          "aufbereiten"
+        ],
+        "jetzt": [
+          "waerme_uebertragen"
+        ]
+      },
+      {
+        "id": "W14-042",
+        "produkt": "Regenwasser-Filterrinne",
+        "vorher": [
+          "wiederverwenden"
+        ],
+        "jetzt": [
+          "aufbereiten",
+          "entsorgen"
+        ]
+      },
+      {
+        "id": "W14-043",
+        "produkt": "Regenwasser-Sickerschacht",
+        "vorher": [
+          "wiederverwenden"
+        ],
+        "jetzt": [
+          "entsorgen"
+        ]
+      },
+      {
+        "id": "W14-044",
+        "produkt": "Entwässerungsrinne",
+        "vorher": [
+          "wiederverwenden"
+        ],
+        "jetzt": [
+          "entsorgen"
+        ]
+      },
+      {
+        "id": "W14-045",
+        "produkt": "Starkregen-Rückhaltebox",
+        "vorher": [
+          "wiederverwenden"
+        ],
+        "jetzt": [
+          "speichern",
+          "schuetzen"
+        ]
+      },
+      {
+        "id": "W14-046",
+        "produkt": "Absetzfilterschacht",
+        "vorher": [
+          "wiederverwenden"
+        ],
+        "jetzt": [
+          "aufbereiten"
+        ]
+      },
+      {
+        "id": "W14-056",
+        "produkt": "Grauwasser-Ultrafiltrationsmodul",
+        "vorher": [
+          "wiederverwenden"
+        ],
+        "jetzt": [
+          "aufbereiten"
+        ]
+      },
+      {
+        "id": "W14-057",
+        "produkt": "Grauwasser-Bioreaktor-Füllkörper",
+        "vorher": [
+          "wiederverwenden"
+        ],
+        "jetzt": [
+          "aufbereiten"
+        ]
+      },
+      {
+        "id": "W14-058",
+        "produkt": "Regenwasser-Unterflurbewässerungssystem",
+        "vorher": [
+          "wiederverwenden"
+        ],
+        "jetzt": [
+          "verteilen"
+        ]
+      },
+      {
+        "id": "W14-075",
+        "produkt": "Pool-Wasserpflegecontroller",
+        "vorher": [
+          "aufbereiten"
+        ],
+        "jetzt": [
+          "steuern"
+        ]
+      },
+      {
+        "id": "W14-076",
+        "produkt": "Wohnmobil-Wassereinfüllstutzen",
+        "vorher": [
+          "foerdern"
+        ],
+        "jetzt": [
+          "verteilen"
+        ]
+      }
     ]
   }
 }
