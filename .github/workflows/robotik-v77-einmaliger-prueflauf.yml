@@ -27,4 +27,5 @@ jobs:
           cmp "$D/V77_SOURCE/includes/class-robotik-v77-fachnachtrag.php" "$Z/includes/class-robotik-v77-fachnachtrag.php"
           find "$Z" -type f -name '*.php' -print0 | xargs -0 -n1 php -l
           grep -q 'Version: 0.4.11' "$Z/robotik-kategorie-workflow.php"
+          php "$D/V77_SOURCE/TESTS/fachnachtrag-phasen-test.php" "$Z/assets/robotik-v62-sollvorschau.json"
           echo "ROB-77 TEST OK"
