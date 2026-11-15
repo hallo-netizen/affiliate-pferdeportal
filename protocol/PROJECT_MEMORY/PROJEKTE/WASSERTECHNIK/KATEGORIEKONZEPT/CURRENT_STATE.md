@@ -80,3 +80,7 @@ Funktionsorientiertes Register-Screening: **275/275** alte Produktnamen nach vor
 Aktuelle Ideen aus der Forschungsdatei: **327** mögliche Produktartikelkategorien und **1.022** Artikelrichtungen einschließlich Alias- und offener Kandidaten; alte tatsächliche W4-Fachbasis **105 Kategorien/356 Ideen** unverändert. Nachweis: `../REGISTER_GLOSSAR/W19_FUNKTIONALE_ABGRENZUNG_275_BESTAND_20261115.json`, `../REGISTER_GLOSSAR/W19_NEUE_PRODUKTFUNDE_20261115.json` und `../REGISTER_GLOSSAR/W19_FORSCHUNG_UND_FUNKTIONSBEREINIGUNG_GESAMTSTAND_20261115.md`.
 
 **NEXT:** gezielt die 50 offenen Funktionsvergleiche mit echten Hersteller-/Kaufabsichtsbelegen in **dem einen** Register entscheiden, weiter externen Markt systematisch erforschen. Erst danach 6–8 WP-Hauptkategorien/kurzes Mega-Menü aus fachlich tragfähiger Produkttiefe und erst nach ausdrücklicher Freigabe WP-Übernahme. **Keine WP-/Plugin-/Frontend-/API-Kostenänderung.**
+
+
+## W20 – 15.11.2026: Produktfunktionen weiter abgegrenzt
+Einziger aktiver Register-Master jetzt `../REGISTER_GLOSSAR/W20_ZENTRALES_FACHREGISTER_20261115.json` mit 392 Einträgen (298 Produktnamen inkl. Alias/Grenzfälle, 72 Glossar, 22 Anbieter). 50 W19-Vergleichspaare: 34 fachlich unterschieden ohne SEO-Freigabe, 1 Alias, 15 offen. 8 neue Fachproduktkandidaten mit je 3 Artikelideen und belegter Quelle. **Erst weitere offene Technik-/Suchintent-Abgrenzung, dann endgültiger 6–8-Kategorienbaum.** WordPress/WT001/Frontend unverändert.
