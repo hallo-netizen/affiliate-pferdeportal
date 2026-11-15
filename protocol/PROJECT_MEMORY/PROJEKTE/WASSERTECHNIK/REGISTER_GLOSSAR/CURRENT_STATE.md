@@ -1,20 +1,20 @@
-# WASSERTECHNIK – EINZIGER AKTUELLER FORSCHUNGSSTAND
-**15.11.2026 · W23 · keine endgültige WordPress-/SEO-Freigabe**
+# WASSERTECHNIK – EINZIGER AKTUELLER FORSCHUNGS-, PRODUKT- UND FACHREGISTERSTAND
+**15.11.2026 · W24 · Markt-/Käuferbeleg-Screening, noch keine SEO-/WordPress-Freigabe**
 
-**Einzige aktive Masterdatei:** `W23_ZENTRALES_FACHREGISTER_20261115.json`. W22 und ältere Bestände sind nur Historie, keine zweite Datenautorität.
+**Aktiver Master nur:** `W24_ZENTRALES_FACHREGISTER_20261115.json`. W23 und älter sind Historie und keine zweite fortzuschreibende Datenquelle.
 
-**426 Registereinträge = 318 Produktbezeichnungen einschließlich Alias/Grenzfälle, 82 Glossarbegriffe, 26 Anbieter-Rubriken.** Nicht 318 freigegebene WordPress-Produktseiten. W4-Altowner **79** unverändert.
+**426 einheitliche Datensätze:** 318 Produktbezeichnungen einschließlich 9 Funktions-Aliase/SEO-Grenzfälle, 82 Glossarbegriffe, 26 geplante Anbieter-Rubriken. 79 echte W4-WordPress-Produktowner bleiben unverändert.
 
-**W23 neu:** 4 konkrete Hersteller-Produktfunde (salzfreies Kalkschutzgerät, Wasserzählerschacht, selbstregulierendes Rohr-Frostschutz-Heizkabel, Grundwasser-Probenahmepumpe), pro Produkt eine fachlich passende Rubrik mit mindestens drei unterschiedlichen Artikeln. 2 zugehörige Glossarbegriffe, keine weiteren Anbieter-Rubriken.
+**W24-Inhalt:** Für **48** zuvor unklare Produkte wurde die echte Hersteller-Produktart einschließlich belegter Einsatz-/Käufergruppe bestätigt. Damit **151 → 103** Zielgruppen ungeklärt, **231 → 183** Technik-/Marktstatus ungeklärt, **86 → 134** als Marktproduktart markiert. Marktprodukt bedeutet *es gibt den Produkttyp im Angebot*, **nicht** Lagerbestand oder Affiliate-Buchbarkeit. Für Dialyseeinrichtungen ein normierter Käufergruppentyp `medizinische_einrichtung` ergänzt; keine individuellen Tags erfunden.
 
-**Alle 318 Produkte einmalig in 18 W13-Suchfelder und 8 vorläufige Menügruppen eingeordnet.** Verteilung: Brunnen & Speicher **25**, Pumpen & Leitungen **41**, Trinkwasser & Aufbereitung **37**, Messen & Steuern **36**, Regenwasser & Bewässerung **48**, Abwasser & Entwässerung **45**, Prozesswasser & Spezialanlagen **46**, Freizeit & Gewässertechnik **40**. Diese Namen sind ein Arbeitsentwurf, nicht veröffentlicht oder als endgültig bestätigt.
+**Keine künstliche Freigabe:** Die W23-Arbeitsgruppen und alle 18 Suchfelder bleiben in der Forschungsdatei für die Navigation: Brunnen & Speicher 25; Pumpen & Leitungen 41; Trinkwasser & Aufbereitung 37; Messen & Steuern 36; Regenwasser & Bewässerung 48; Abwasser & Entwässerung 45; Prozesswasser & Spezialanlagen 46; Freizeit & Gewässertechnik 40. **Nur Arbeitsentwurf, keine WP-Hauptkategorien.**
 
-**32 erkennbar unpassende oder fehlende Produkt-Funktionsetiketten** direkt im einen Register korrigiert. W4-79 Produktnamen, SEO-Mappings, URLs und bestehende Artikelkategorien unverändert. QA: alle **426 IDs**, Referenzen, kontrollierte Funktionswerte und 3er-Tiefe neuer Produkte geprüft. Bestehende **9 Aliase**, 50 Vergleichspaare und 2 offene SEO-Überlappungen unverändert.
+**Zahlen unverändert:** 355 mögliche Produkt-Inhaltsrubriken, 1.106 Fachartikelideen einschließlich Grenzfällen. 50 Funktionsvergleiche im Master, insgesamt 9 Aliasbeziehungen, 2 nicht abschließend geklärte SEO-Überlappungen. **Ein aktueller Käufergruppenwert pro Produkt (`merkmale.zielgruppen`), ein technischer Status (`technikstand`) und ein W24-Quellenbeleg (`w24_evidenz`).** Veraltete doppelte W23-Kauf-/Markt-Caches im aktuellen Master entfernt.
 
-**Offen:** Zielgruppe bei **151** Produktbezeichnungen noch unbekannt, Technikstatus bei **231** ungeklärt, **1** Prototyp, **86** Marktprodukte. Die 18 Suchfelder sind mit Bestandsbeispielen belegt, aber Markt-Vollständigkeit nicht nachgewiesen. Keine erfundenen Suchvolumina oder Marktfreigaben. **355 Forschungs-Kategorienideen / 1.106 mögliche Artikelideen** enthalten auch Grenzfälle und Alias-Inhalte, NICHT neue WP-Beiträge.
+**W4 bestehende 79 WordPress-Produktowner, 105 Fachrubriken, 356 Artikelideen, W5-Suchvolumen 59 vorhanden / 20 unbekannt: nicht angetastet.** Keine neuen DataForSEO- oder SERP-Aufrufe.
 
-**Bericht:** `W23_GESAMTSCREENING_MARKTBREITE_KAUFNUTZEN_20261115.md`.
+**Quellenbericht:** `W24_MARKTSTATUS_UND_ZIELGRUPPEN_QUELLENBERICHT_20261115.md`.
 
-**NÄCHSTER SCHRITT:** Für die 151 unbekannten Zielgruppen und andere wirklich relevante Grenzfälle Originalquellen konsolidieren und danach den endgültigen 6–8-Hauptkategorienbaum aus eindeutig geeigneten Produktfamilien ableiten. KISS: ein Register, eine fachliche Entscheidung, kein zusätzlicher Nachprüfungsapparat.
+**NÄCHSTER SCHRITT W25:** Quellen- und Marktstatus für die verbliebenen 103 Käufergruppen-Lücken bündeln, Priorität auf kaufnahe Produktfamilien und verbliebene 183 Technik-Unklarheiten. Bestehende Spezialindustrie-Themen als Informations-/Fachregister führen, bis eigenständige Käufer- und SEO-Funktion wirklich belegt ist. Danach Produktowner-Liste und **einmaliger** endgültiger 6–8-Hauptkategorienbaum. Keine ewigen parallelen Nachprüfungen.
 
-**WP/WT001/Plugins/Menü/Frontend und DataForSEO unverändert. W4 weiterhin 79 Produktseiten / 105 Kategorien / 356 Artikelideen, W5 weiterhin 59 gelieferte Werte / 20 unbekannt.**
+**WordPress, Plugins, WT001, Menüs, Frontend: UNVERÄNDERT.**
