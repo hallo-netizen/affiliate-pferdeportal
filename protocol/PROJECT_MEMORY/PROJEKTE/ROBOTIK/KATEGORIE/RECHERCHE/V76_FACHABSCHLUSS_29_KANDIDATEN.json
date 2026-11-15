@@ -418,5 +418,185 @@
     "Alten V63-Importzustand real in WP fertig lesen, nicht aus GitHub-Plan auf abgeschlossen schließen",
     "Magazin, Glossar, Finder, Register einmalig mit demselben Roboterbüro verknüpfen; keine Parallelveröffentlichung"
   ],
-  "scope_caveat": "100 sind eine strukturelle sieben-Welten-Zahl, keine exakt bereinigte reine Privatwelt-Zahl. Humanoide Arbeitsseiten sind ausdrücklich außerhalb dieser neuen Recherche; keine neuen Arbeits- oder Gewerbetypen."
+  "scope_caveat": "100 sind eine strukturelle sieben-Welten-Zahl, keine exakt bereinigte reine Privatwelt-Zahl. Humanoide Arbeitsseiten sind ausdrücklich außerhalb dieser neuen Recherche; keine neuen Arbeits- oder Gewerbetypen.",
+  "seo_hold_readonly_review_date": "2026-11-15",
+  "seo_hold_source": "RECHERCHE/V61_SEO_GESAMTAUSWERTUNG_20261114.md",
+  "seo_hold_review_summary": {
+    "all_holds": 16,
+    "editorially_distinct": 10,
+    "editorial_overlap_open": 5,
+    "possible_duplicate": 1,
+    "seo_cleared": 0,
+    "paid_api_calls": 0
+  },
+  "seo_hold_review": [
+    {
+      "id": "v46_h03",
+      "world": "Haushalt",
+      "comparison": "Familien-Telepräsenz zuhause / Angehörigenkontakt im Pflegeheim",
+      "evaluation": "FACHLICH_TRENNBAR",
+      "reason": "Unterschiedliche Umgebung/Nutzergruppe; gleicher Hardwaretyp möglich. Keine Gewerbe-/Pflegeheim-Baumarbeit jetzt.",
+      "independent_source": "https://ohmnilabs.com/seniorcare/",
+      "seo_status": "HOLD_WEIL_KEIN_ECHTER_GOOGLE_SERP_URL_VERGLEICH",
+      "wp_publish_authorized": false
+    },
+    {
+      "id": "v46_h06",
+      "world": "Haushalt",
+      "comparison": "Aufräumroboter / humanoider Haushaltsroboter",
+      "evaluation": "ABGRENZUNG_OFFEN",
+      "reason": "Aufräumen ist eine Aufgabe, humanoid eine Bauform. Gleiches Modell kann beides erfüllen; Doppelseite nur bei eigenständiger Nutzersuche.",
+      "independent_source": "https://epoch.ai/publications/where-autonomy-works-evaluating-robot-capabilities-in-2026",
+      "seo_status": "HOLD_WEIL_KEIN_ECHTER_GOOGLE_SERP_URL_VERGLEICH",
+      "wp_publish_authorized": false
+    },
+    {
+      "id": "v46_h07",
+      "world": "Haushalt",
+      "comparison": "Reiner Nasswischroboter / Saugroboter",
+      "evaluation": "ABGRENZUNG_OFFEN",
+      "reason": "Reiner Wischer ist technisch unterscheidbar, aktueller Markt enthält zahlreiche Saug-Wisch-Kombigeräte. Keine klare SEO-Seitenentscheidung.",
+      "independent_source": "https://www.test.de/Saugroboter-im-Test-4806685-0",
+      "seo_status": "HOLD_WEIL_KEIN_ECHTER_GOOGLE_SERP_URL_VERGLEICH",
+      "wp_publish_authorized": false
+    },
+    {
+      "id": "v46_h10",
+      "world": "Haushalt",
+      "comparison": "Servierroboter zuhause / allgemeiner Servierroboter",
+      "evaluation": "FACHLICH_TRENNBAR",
+      "reason": "Wohnung, Sicherheit und Privatbedarf gegen kommerzielle Servierrobotik; Gewerbebereich bleibt unverändert.",
+      "independent_source": null,
+      "seo_status": "HOLD_WEIL_KEIN_ECHTER_GOOGLE_SERP_URL_VERGLEICH",
+      "wp_publish_authorized": false
+    },
+    {
+      "id": "v46_h12",
+      "world": "Haushalt",
+      "comparison": "Sozialer Begleitroboter / humanoider Gesprächsroboter",
+      "evaluation": "ABGRENZUNG_OFFEN",
+      "reason": "Begleitung ist ein Zweck, humanoid eine Bauform; derselbe Roboter kann beide Suchaufgaben bedienen.",
+      "independent_source": null,
+      "seo_status": "HOLD_WEIL_KEIN_ECHTER_GOOGLE_SERP_URL_VERGLEICH",
+      "wp_publish_authorized": false
+    },
+    {
+      "id": "v46_ga04",
+      "world": "Garten",
+      "comparison": "Fahrender Grillreinigungsroboter / elektrische Hand-Grillbürste",
+      "evaluation": "FACHLICH_TRENNBAR",
+      "reason": "Roboter fährt/reinigt eigenständig, Handbürste wird geführt; nicht als derselbe Gerätetyp behandeln.",
+      "independent_source": "https://www.grillfuerst.de/magazin/ratgeber/tests-vergleiche/elektrische-grillbuersten-test/",
+      "seo_status": "HOLD_WEIL_KEIN_ECHTER_GOOGLE_SERP_URL_VERGLEICH",
+      "wp_publish_authorized": false
+    },
+    {
+      "id": "v46_f01",
+      "world": "Freizeit",
+      "comparison": "Unterwasser-Hobby-ROV / Bootsreinigungsroboter",
+      "evaluation": "FACHLICH_TRENNBAR",
+      "reason": "Erkundung/Video vs Reinigung eines Boots: eigenständige Aufgaben; keine industrielle Nutzung ableiten.",
+      "independent_source": null,
+      "seo_status": "HOLD_WEIL_KEIN_ECHTER_GOOGLE_SERP_URL_VERGLEICH",
+      "wp_publish_authorized": false
+    },
+    {
+      "id": "v46_f02",
+      "world": "Freizeit",
+      "comparison": "Kamerabewegungsroboter für Timelapse / Kameraroboter",
+      "evaluation": "ABGRENZUNG_OFFEN",
+      "reason": "Kamera-Slider ist spezieller Typ eines allgemeinen Kamerabewegungsgeräts, Überschneidungen möglich.",
+      "independent_source": null,
+      "seo_status": "HOLD_WEIL_KEIN_ECHTER_GOOGLE_SERP_URL_VERGLEICH",
+      "wp_publish_authorized": false
+    },
+    {
+      "id": "v46_f03",
+      "world": "Freizeit",
+      "comparison": "Automatische Folgedrohne / Lerndrohne",
+      "evaluation": "FACHLICH_TRENNBAR",
+      "reason": "Autonome Personenverfolgung als Freizeitfilmfunktion vs Lern- und Programmieraufgabe, auch bei überlappender Hardware.",
+      "independent_source": null,
+      "seo_status": "HOLD_WEIL_KEIN_ECHTER_GOOGLE_SERP_URL_VERGLEICH",
+      "wp_publish_authorized": false
+    },
+    {
+      "id": "v46_s03",
+      "world": "Sport",
+      "comparison": "Badminton-Zuspielroboter / Badminton-Ballmaschine",
+      "evaluation": "DOPPELUNGSVERDACHT",
+      "reason": "Beide Formulierungen können dieselbe programmierbare Federball-Zuspielmaschine meinen; keine zweite Seite ohne echten Geräte-/Suchabsichtsunterschied.",
+      "independent_source": "https://www.ijeedu.com/index.php/ijeedu/article/view/335",
+      "seo_status": "HOLD_WEIL_KEIN_ECHTER_GOOGLE_SERP_URL_VERGLEICH",
+      "wp_publish_authorized": false
+    },
+    {
+      "id": "v46_s07",
+      "world": "Sport",
+      "comparison": "Sportkameraroboter / allgemeiner Kameraroboter",
+      "evaluation": "FACHLICH_TRENNBAR",
+      "reason": "Automatische Spiel-/Ballverfolgung mit eigenem Sportbedarf statt allgemeine Filmbewegung; echte Sportkamerahardware belegt.",
+      "independent_source": "https://shop.movensee.com/de/produkte/pix4team-2.html",
+      "seo_status": "HOLD_WEIL_KEIN_ECHTER_GOOGLE_SERP_URL_VERGLEICH",
+      "wp_publish_authorized": false
+    },
+    {
+      "id": "v46_b01",
+      "world": "Bildung",
+      "comparison": "Mechanischer Roboterbaukasten / fertiger Lernroboter",
+      "evaluation": "FACHLICH_TRENNBAR",
+      "reason": "Zusammenbauen/Mechanik lernen gegen fertigen Lernroboter; gleicher Hersteller möglich, aber unterschiedliches Lernziel.",
+      "independent_source": "https://www.nist.gov/programs-projects/low-cost-robot-science-kit-education",
+      "seo_status": "HOLD_WEIL_KEIN_ECHTER_GOOGLE_SERP_URL_VERGLEICH",
+      "wp_publish_authorized": false
+    },
+    {
+      "id": "v46_b02",
+      "world": "Bildung",
+      "comparison": "Mobile ROS-Forschungsplattform / Lernroboter",
+      "evaluation": "FACHLICH_TRENNBAR",
+      "reason": "ROS-Forschungsplattform und Kinder-Lernroboter unterscheiden sich im Niveau und Projektziel.",
+      "independent_source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7248833/",
+      "seo_status": "HOLD_WEIL_KEIN_ECHTER_GOOGLE_SERP_URL_VERGLEICH",
+      "wp_publish_authorized": false
+    },
+    {
+      "id": "v46_b04",
+      "world": "Bildung",
+      "comparison": "Lehrroboterarm / Tischroboterarm",
+      "evaluation": "ABGRENZUNG_OFFEN",
+      "reason": "Ein identischer Tisch-Greifarm kann im Unterricht eingesetzt werden. Eigene Seite nur bei eigenen Lehrfunktionen, nicht bloß anderer Nutzungsort.",
+      "independent_source": null,
+      "seo_status": "HOLD_WEIL_KEIN_ECHTER_GOOGLE_SERP_URL_VERGLEICH",
+      "wp_publish_authorized": false
+    },
+    {
+      "id": "v46_b05",
+      "world": "Bildung",
+      "comparison": "Leselernroboter / Lernroboter",
+      "evaluation": "FACHLICH_TRENNBAR",
+      "reason": "Lese-/Vorlesefunktion ist enger als allgemeines Programmierenlernen; klare Funktion nachweisen, nicht bloß Werbenamen.",
+      "independent_source": null,
+      "seo_status": "HOLD_WEIL_KEIN_ECHTER_GOOGLE_SERP_URL_VERGLEICH",
+      "wp_publish_authorized": false
+    },
+    {
+      "id": "v46_b07",
+      "world": "Bildung",
+      "comparison": "Chemie-Experimentierroboter für Unterricht / Laboraustomatisierung",
+      "evaluation": "FACHLICH_TRENNBAR",
+      "reason": "Nachgewiesene robotische Lehrexperimente, ausdrücklich kein großgewerblicher/industrieller Laborzweig.",
+      "independent_source": "https://www.nist.gov/programs-projects/low-cost-robot-science-kit-education",
+      "seo_status": "HOLD_WEIL_KEIN_ECHTER_GOOGLE_SERP_URL_VERGLEICH",
+      "wp_publish_authorized": false
+    }
+  ],
+  "wordpress_readback_attempt": {
+    "date": "2026-11-15",
+    "public_home": "https://robotik.oliver-beil.de/",
+    "result": "In dieser Umgebung weder per Webabruf noch direkter Adressauflösung zugänglich; kein Beweis dass Website global offline ist.",
+    "last_verified_live_progress": "16/227 aus früherem V63-Bericht",
+    "current_live_progress": "UNBESTAETIGT",
+    "needed_once": "Ein aktueller WordPress-Gesamtbericht aus bestehendem Robotik-Kategorie-Plugin, erst falls der Live-Stand ohne Zugang nicht belegbar bleibt."
+  }
 }
