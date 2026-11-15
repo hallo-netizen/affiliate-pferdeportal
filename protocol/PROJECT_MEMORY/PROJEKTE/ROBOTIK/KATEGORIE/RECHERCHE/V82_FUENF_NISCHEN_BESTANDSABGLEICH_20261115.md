@@ -99,3 +99,24 @@ Nach Abgleich mit **allen 188 ursprünglich geplanten Seiten** aus V52/V63 und d
 ## Nächster sinnvoller Arbeitsblock
 
 Mehr **echte Randrobotikprodukte und Prototypen** recherchieren, zuerst in Haushalt, Garten, Sport, Freizeit und Bildung; bestehende Robotiktypen, die nur in anderem Zusammenhang verwendet werden, als Modelle/Registereinträge behandeln. Das fertige Kategoriesoll bleibt bis ausdrücklicher Freigabe unangetastet. **K0 ist weiterhin allein für die spätere Texterstellung zuständig.**
+
+
+---
+
+## Zusatzrecherche V83 – drei weitere fachlich geprüfte Randbereiche (15.11.2026)
+
+Auch diese drei Vorschläge erhalten **keine neuen Haupt-/Zwischenebenen**, sondern hängen an bereits vorhandenen Gruppen. Zwei sind **keine neuen Forschungsidentitäten**: Einträge `rf158` und `rf159` wurden mit tatsächlich nachgewiesenen neuen Geräte- und Standortbelegen aktualisiert. Einzig `rf189` ist eine neue Forschungskennung.
+
+| Fach-ID | Mögliche Typseite | Bestehender Elternbereich | Grobe Stufe | Forschungs-ID | Beleg |
+|---|---|---|---|---|---|
+| V83-01 | **Massageroboter** | Pflege | Produkt | `rf158` unverändert | [Aescape – reale Wellness-Standorte](https://www.aescape.com/about), [Massage Envy Pressemitteilung](https://www.massageenvy.com/about-us/newsroom/press-releases/massage-envy-introduces-aescape-robotic-massage-at-select-franchised-locations) |
+| V83-02 | **Nagelpflegeroboter** | Pflege | Produkt | `rf159` unverändert | [10Beauty mit buchbaren US-Standorten](https://www.10beauty.co/), [Übernahme von Clockwork 2025](https://www.prnewswire.com/news-releases/10beauty-acquires-clockwork-bringing-together-the-two-leading-innovators-in-autonomous-manicures-302384172.html) |
+| V83-03 | **Baustein-Sortierroboter** | Freizeit › Modellbau | Projekt | `rf189` neu | [Sorter V2 Entwicklerprojekt](https://basically.website/sorter-v2), [Dokumentation: gebaut, kein Kit](https://docs.basically.website/) |
+
+**Fachliche Trennung:** Massageroboter im Wellnessbetrieb statt medizinische Therapie oder bloßer Massagesessel; Nagelpflegeroboter für Maniküre statt Gesichtsschminkroboter, mit aktueller **US-Salonlösung**, ausdrücklich **kein nachgewiesener deutscher Heimverkauf**; Baustein-Sortierroboter als real gebautes **Hobbyprojekt**, nicht als Serienprodukt oder allgemeiner Roboterbaukasten.
+
+**Kein künstliches Aufblasen:** Digitale Strickmaschinen von Kniterate sind real erhältlich, aber reine digitale Strickautomation belegt noch keine eigene notwendige Robotertypseiten-Intention. Bleibt ein Randthema für Hobbydepot bzw. Magazin, keine neue Robotikseite. <https://www.kniterate.com/>
+
+**Konsolidierter Forschungsstand V82 + V83:** **8** zusätzliche mögliche Typseiten unter vorhandenen übergeordneten Bereichen, **0** neue Haupt-/Zwischenebenen, **16 optional fachlich begründete Rubrikvorschläge** (nicht automatisch WordPress-Kategorien). Der einzige Master `PRODUKTE_V2_20261108.json` steht nun auf **Revision 18**, 68 alte Basiseinträge unverändert, **189 Randfunde**. Zwei V82-/V83-Neuentdeckungen teilen mit vorhandenen Forschungsidentitäten bzw. Modellen dieselbe Karte (`rf143`, `rf158`, `rf159`); unnötige Doppelungen vermieden. **Keine WordPress-Änderungen**.
+
+**Verbindliche Einzelheiten:** Feld `research_round_v83` im bestehenden Fachmaster, nicht ein zweites Fachmaster-Dokument. Früher im V82-Abschnitt genannte Gesamtplan-Zahlen sind historische Zwischenstände vor diesen drei zusätzlichen Kandidaten.
