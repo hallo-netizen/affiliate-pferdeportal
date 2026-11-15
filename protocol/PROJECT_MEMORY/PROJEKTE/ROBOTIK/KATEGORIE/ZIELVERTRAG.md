@@ -1,5 +1,10 @@
 # ZIELVERTRAG – KATEGORIEN ROBOTIK
 
+## 15.11.2026 – V79 KONKRETE KISS-KORREKTUR ZUM BESTEHENDEN EINMALABLAUF
+- Bestehender `Robotik Kategorie-Workflow 0.4.13`: **EINE freigegebene Gesamtausführung** für 227 gespeicherte Importaufgaben, die **104 bereits vorhandenen Seiten mit dem originalen Publikationsworker**, 68 zusätzliche Seiten und 16 weitere fachlich freigegebene Typseiten mit 48 Beitragsrubriken. Die zusätzliche 104er Phase ist keine neue Freigabeentscheidung und kein zweiter Writer, sondern die vorher versehentlich ausgelassene notwendige Originalfunktion. Alle bereits erledigten Schritte bleiben erhalten.
+- Fehlende Google-Zieladressen bleiben ausdrücklich **KEIN** Sperrgrund. Die Kategorieübernahme erfindet keine Homepage: die vorhandene Designsteuerung bleibt für die tatsächliche öffentliche Darstellung verantwortlich. Ohne echten WP-Abschluss und aktiviertes Designplugin darf keine sichtbare Live-Änderung behauptet werden.
+- Beleg und aktuelle Handhabung: `PLUGIN/V79_104_ALTSEITEN_SICHTBARKEIT_20261115.md`. Kein Umbau von Gewerbe/Industrie und keine zusätzliche Design-Pluginversion ohne nachgewiesene Notwendigkeit.
+
 ## V78 – VERBINDLICHER AUSFÜHRUNGSMODUS: EINMALIGE GESAMTFREIGABE (15.11.2026)
 - Der bestehende Robotik-Kategorie-Workflow fasst **alle bereits freigegebenen Schritte** zu **einer Admin-Gesamtfreigabe** zusammen: **gespeicherter 227er Import → 68 vorhandene Entwurfsseiten veröffentlichen → fachlich entschiedene 16 Typseiten + 48 Rubriken in einem Nachtrag**. Die eine Freigabe umfasst auch die Sichtbarkeit leerer WP-Seiten. Keine drei manuellen Freigaben, kein Neustart und keine doppelte Entscheidung.
 - Ein fachlich bereits endgültig entschiedener Google-URL-HOLD darf **nicht erneut als Freigabesicherheit** auftauchen. Technische Identitäts-/Doppelungs-/Parent-/Besitzerprüfungen bleiben allein zum Schutz bestehender Objekte erhalten; bei echtem Konflikt kein blindes Weiterschreiben. Keine zusätzlichen Plugins, Tabellen, API-Kosten oder Hintergrundjobs.
