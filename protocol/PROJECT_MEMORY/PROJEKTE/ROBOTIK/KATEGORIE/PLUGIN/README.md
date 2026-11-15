@@ -1,5 +1,10 @@
 # Robotik – Pluginbüro / Kategorie-Workflow
 
+## AKTUELL 15.11.2026 – EINZIGE INSTALLATIONSVERSION 0.4.12
+**KISS-Endversion:** `PLUGIN/CURRENT.zip` = `PLUGIN/VERSIONEN/0.4.12.zip`. Nur **ein** Plugin-Update und **eine** Gesamtfreigabe in WordPress unter `Robotik Kategorie → Gesamtabschluss (einmalig)`. Danach folgen Import 227/227 (mit dem vorhandenen Index), 68er Veröffentlichung und 16+48-Nachtrag **automatisch**, zum Schluss ein Gesamtbericht. Keine alten Einzelmenüs, neue Google-Sperre oder kostenpflichtigen API-Aufrufe. Bereits getroffene fachliche Entscheidungen werden nicht wiederholt.
+**Echte GitHub-Abnahme:** <https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43701031122> vollständig erfolgreich, inklusive simuliertem Start bei 16/227 und Wiederaufnahme nach BLOCKED. **Noch kein WordPress-Liveabschluss**.
+Anleitung und Änderungsbeleg: `V78_RELEASE_VERIFIZIERT_20261115.md`. Alles Weitere in dieser Datei ist **historisch**, insbesondere die vorherige Einzelbedienung 0.4.11.
+
 ## AKTUELL 15.11.2026 – INSTALLIERBARE VERSION 0.4.11
 **Nur dieser Status ist aktuell.** `CURRENT.zip` und `VERSIONEN/0.4.11.zip` sind bytegleiche, PHP-geprüfte Installationspakete. Dieses Update **führt den bestehenden gespeicherten 227er Lauf fort**, korrigiert das Lesen bereits veröffentlichter Seiten und fügt nach der bisherigen 68er-Veröffentlichung **einen einzigen freigegebenen 16-Seiten-/48-Rubriken-Nachtrag** innerhalb derselben Pluginidentität hinzu. **Google-Adressen sind kein Sperrgrund**. Bericht `V77_RELEASE_VERIFIZIERT_20261115.md` und [GitHub-PHP-/ZIP-/Mocktest](https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43698916919). **Nicht mit einem WordPress-Liveabschluss verwechseln.** Alle älteren Current-/Versionsangaben weiter unten sind historische Berichte und durch diesen Eintrag ersetzt.
 
