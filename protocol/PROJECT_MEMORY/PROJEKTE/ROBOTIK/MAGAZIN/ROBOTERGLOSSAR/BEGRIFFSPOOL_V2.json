@@ -10,11 +10,16 @@
       "owner_candidate": "rb014",
       "intent_precheck": "ALIAS_CORE",
       "synonyms": [],
-      "summary_definition": null,
-      "source_urls": [],
-      "verified_at": null,
-      "status": "KANDIDAT_UNGEPRUEFT",
-      "wp_slug": null
+      "summary_definition": "AMR bezeichnet einen mobilen Roboter, der innerhalb seiner Umgebung selbständig Wege planen kann. Die konkrete Fähigkeit hängt vom jeweiligen Fahrzeug ab.",
+      "source_urls": [
+        "https://www.vda.de/de/themen/automobilindustrie/vda-5050"
+      ],
+      "verified_at": "2026-11-15",
+      "status": "V84_KURZDEFINITION_QUELLENBASIERT_KEINE_WP_FREIGABE",
+      "wp_slug": null,
+      "final_route_v84": "ALIAS_CORE",
+      "publication_allowed": false,
+      "editorial_caveat": "Kurzdefinition, kein Langtext. Nur GLOSSAR_KURZDEFINITION sind spätere eigenständige Glossar-Seitenkandidaten; Alias ohne SEO-Zweitseite."
     },
     {
       "term_id": "term-agv",
@@ -22,14 +27,18 @@
       "owner_candidate": "rb015",
       "intent_precheck": "ALIAS_CORE",
       "synonyms": [],
-      "summary_definition": "Ein AGV ist ein fahrerloses Transportfahrzeug, das Güter entlang vorgegebener Wege oder mithilfe externer Führung transportiert; der Begriff wird in der Praxis unterschiedlich verwendet.",
+      "summary_definition": "AGV ist eine englische Bezeichnung für fahrerlose Transportfahrzeuge. Für die konkrete Art der Wegführung sind Bauart und Technik entscheidend.",
       "source_urls": [
-        "https://ifr.org/pages/"
+        "https://ifr.org/pages/",
+        "https://www.vda.de/de/themen/automobilindustrie/vda-5050"
       ],
-      "verified_at": "2026-11-09",
-      "status": "ENTWURF_QUELLENRECHERCHE_KEINE_SEO_FREIGABE",
+      "verified_at": "2026-11-15",
+      "status": "V84_KURZDEFINITION_QUELLENBASIERT_KEINE_WP_FREIGABE",
       "wp_slug": null,
-      "distinction": "Mit AMR und FTF abgleichen; diese Kurzdefinition ist keine starre Marktgrenze"
+      "distinction": "Mit AMR und FTF abgleichen; diese Kurzdefinition ist keine starre Marktgrenze",
+      "final_route_v84": "ALIAS_CORE",
+      "publication_allowed": false,
+      "editorial_caveat": "Kurzdefinition, kein Langtext. Nur GLOSSAR_KURZDEFINITION sind spätere eigenständige Glossar-Seitenkandidaten; Alias ohne SEO-Zweitseite."
     },
     {
       "term_id": "term-ftf",
@@ -37,11 +46,16 @@
       "owner_candidate": "rb015",
       "intent_precheck": "ALIAS_CORE",
       "synonyms": [],
-      "summary_definition": null,
-      "source_urls": [],
-      "verified_at": null,
-      "status": "KANDIDAT_UNGEPRUEFT",
-      "wp_slug": null
+      "summary_definition": "FTF bedeutet fahrerloses Transportfahrzeug und wird im Logistikkontext häufig mit AGV verbunden. Kein zweiter eigenständiger Text zur selben Grundfrage.",
+      "source_urls": [
+        "https://www.vda.de/de/themen/automobilindustrie/vda-5050"
+      ],
+      "verified_at": "2026-11-15",
+      "status": "V84_KURZDEFINITION_QUELLENBASIERT_KEINE_WP_FREIGABE",
+      "wp_slug": null,
+      "final_route_v84": "ALIAS_ZU_AGV",
+      "publication_allowed": false,
+      "editorial_caveat": "Kurzdefinition, kein Langtext. Nur GLOSSAR_KURZDEFINITION sind spätere eigenständige Glossar-Seitenkandidaten; Alias ohne SEO-Zweitseite."
     },
     {
       "term_id": "term-cobot",
@@ -49,11 +63,16 @@
       "owner_candidate": "robotik-technik",
       "intent_precheck": "DEFINITIONSPRUEFUNG",
       "synonyms": [],
-      "summary_definition": null,
-      "source_urls": [],
-      "verified_at": null,
-      "status": "KANDIDAT_UNGEPRUEFT",
-      "wp_slug": null
+      "summary_definition": "Cobot ist die umgangssprachliche Kurzform für kollaborierenden Roboter. Ob Menschen ohne zusätzliche Schutzmaßnahmen in seiner Nähe arbeiten dürfen, hängt von der gesamten Anwendung und der Sicherheitsbewertung ab.",
+      "source_urls": [
+        "https://ifr.org/industrial-robots"
+      ],
+      "verified_at": "2026-11-15",
+      "status": "V84_KURZDEFINITION_QUELLENBASIERT_KEINE_WP_FREIGABE",
+      "wp_slug": null,
+      "final_route_v84": "GLOSSAR_KURZDEFINITION",
+      "publication_allowed": false,
+      "editorial_caveat": "Kurzdefinition, kein Langtext. Nur GLOSSAR_KURZDEFINITION sind spätere eigenständige Glossar-Seitenkandidaten; Alias ohne SEO-Zweitseite."
     },
     {
       "term_id": "term-scara",
@@ -61,11 +80,16 @@
       "owner_candidate": "rb007",
       "intent_precheck": "ALIAS_CORE",
       "synonyms": [],
-      "summary_definition": null,
-      "source_urls": [],
-      "verified_at": null,
-      "status": "KANDIDAT_UNGEPRUEFT",
-      "wp_slug": null
+      "summary_definition": "SCARA ist eine Bauform von Industrierobotern mit besonders geeigneter Bewegung für schnelles Handhaben und Fügen in einer Ebene.",
+      "source_urls": [
+        "https://ifr.org/industrial-robots"
+      ],
+      "verified_at": "2026-11-15",
+      "status": "V84_KURZDEFINITION_QUELLENBASIERT_KEINE_WP_FREIGABE",
+      "wp_slug": null,
+      "final_route_v84": "ALIAS_CORE",
+      "publication_allowed": false,
+      "editorial_caveat": "Kurzdefinition, kein Langtext. Nur GLOSSAR_KURZDEFINITION sind spätere eigenständige Glossar-Seitenkandidaten; Alias ohne SEO-Zweitseite."
     },
     {
       "term_id": "term-delta-roboter",
@@ -85,11 +109,16 @@
       "owner_candidate": "robotik-technik",
       "intent_precheck": "DEFINITIONSPRUEFUNG",
       "synonyms": [],
-      "summary_definition": null,
-      "source_urls": [],
-      "verified_at": null,
-      "status": "KANDIDAT_UNGEPRUEFT",
-      "wp_slug": null
+      "summary_definition": "SLAM bedeutet gleichzeitige Kartenerstellung und Positionsbestimmung. Ein mobiler Roboter schätzt seine eigene Position und baut dabei eine Karte seiner Umgebung auf.",
+      "source_urls": [
+        "https://docs.nav2.org/tutorials/docs/navigation2_with_slam.html"
+      ],
+      "verified_at": "2026-11-15",
+      "status": "V84_KURZDEFINITION_QUELLENBASIERT_KEINE_WP_FREIGABE",
+      "wp_slug": null,
+      "final_route_v84": "GLOSSAR_KURZDEFINITION",
+      "publication_allowed": false,
+      "editorial_caveat": "Kurzdefinition, kein Langtext. Nur GLOSSAR_KURZDEFINITION sind spätere eigenständige Glossar-Seitenkandidaten; Alias ohne SEO-Zweitseite."
     },
     {
       "term_id": "term-vslam",
@@ -112,11 +141,16 @@
       "owner_candidate": "robotik-technik",
       "intent_precheck": "DEFINITIONSPRUEFUNG",
       "synonyms": [],
-      "summary_definition": null,
-      "source_urls": [],
-      "verified_at": null,
-      "status": "KANDIDAT_UNGEPRUEFT",
-      "wp_slug": null
+      "summary_definition": "LiDAR ist ein Messverfahren, das Entfernungen mit ausgesendetem und reflektiertem Laserlicht bestimmt. Mobile Roboter können damit Hindernisse und Teile ihrer Umgebung erfassen.",
+      "source_urls": [
+        "https://docs.nav2.org/"
+      ],
+      "verified_at": "2026-11-15",
+      "status": "V84_KURZDEFINITION_QUELLENBASIERT_KEINE_WP_FREIGABE",
+      "wp_slug": null,
+      "final_route_v84": "GLOSSAR_KURZDEFINITION",
+      "publication_allowed": false,
+      "editorial_caveat": "Kurzdefinition, kein Langtext. Nur GLOSSAR_KURZDEFINITION sind spätere eigenständige Glossar-Seitenkandidaten; Alias ohne SEO-Zweitseite."
     },
     {
       "term_id": "term-rtk-gnss",
@@ -148,11 +182,16 @@
       "owner_candidate": "end-effektor",
       "intent_precheck": "ALIAS_PRUEFEN",
       "synonyms": [],
-      "summary_definition": null,
-      "source_urls": [],
-      "verified_at": null,
-      "status": "KANDIDAT_UNGEPRUEFT",
-      "wp_slug": null
+      "summary_definition": "Robotergreifer sind Werkzeuge am Roboter, mit denen Gegenstände gehalten, bewegt oder abgelegt werden können. Es gibt unterschiedliche mechanische und vakuumbasierte Bauweisen.",
+      "source_urls": [
+        "https://ifr.org/industrial-robots"
+      ],
+      "verified_at": "2026-11-15",
+      "status": "V84_KURZDEFINITION_QUELLENBASIERT_KEINE_WP_FREIGABE",
+      "wp_slug": null,
+      "final_route_v84": "GLOSSAR_KURZDEFINITION",
+      "publication_allowed": false,
+      "editorial_caveat": "Kurzdefinition, kein Langtext. Nur GLOSSAR_KURZDEFINITION sind spätere eigenständige Glossar-Seitenkandidaten; Alias ohne SEO-Zweitseite."
     },
     {
       "term_id": "term-freiheitsgrad",
@@ -290,11 +329,16 @@
       "owner_candidate": "robotik-technik",
       "intent_precheck": "DEFINITIONSPRUEFUNG",
       "synonyms": [],
-      "summary_definition": null,
-      "source_urls": [],
-      "verified_at": null,
-      "status": "KANDIDAT_UNGEPRUEFT",
-      "wp_slug": null
+      "summary_definition": "Der Autonomiegrad beschreibt, wie viele Entscheidungen und Bewegungen ein Roboter in einer konkreten Aufgabe selbständig übernimmt. Eine einfache Zahl reicht selten zur Beurteilung aller Funktionen.",
+      "source_urls": [
+        "https://www.vda.de/de/themen/automobilindustrie/vda-5050"
+      ],
+      "verified_at": "2026-11-15",
+      "status": "V84_KURZDEFINITION_QUELLENBASIERT_KEINE_WP_FREIGABE",
+      "wp_slug": null,
+      "final_route_v84": "GLOSSAR_KURZDEFINITION",
+      "publication_allowed": false,
+      "editorial_caveat": "Kurzdefinition, kein Langtext. Nur GLOSSAR_KURZDEFINITION sind spätere eigenständige Glossar-Seitenkandidaten; Alias ohne SEO-Zweitseite."
     },
     {
       "term_id": "term-machine-vision",
@@ -314,14 +358,19 @@
       "owner_candidate": "robotik-technik",
       "intent_precheck": "DEFINITIONSPRUEFUNG",
       "synonyms": [],
-      "summary_definition": null,
-      "source_urls": [],
-      "verified_at": null,
-      "status": "KANDIDAT_UNGEPRUEFT",
+      "summary_definition": "ROS 2 ist ein offenes Software-Ökosystem mit Werkzeugen und Bausteinen, die Roboterprogramme beim Austausch von Daten und der Zusammenarbeit von Funktionen unterstützen.",
+      "source_urls": [
+        "https://docs.ros.org/"
+      ],
+      "verified_at": "2026-11-15",
+      "status": "V84_KURZDEFINITION_QUELLENBASIERT_KEINE_WP_FREIGABE",
       "wp_slug": null,
       "themenwelten": [
         "Software, KI & Entwicklung"
-      ]
+      ],
+      "final_route_v84": "GLOSSAR_KURZDEFINITION",
+      "publication_allowed": false,
+      "editorial_caveat": "Kurzdefinition, kein Langtext. Nur GLOSSAR_KURZDEFINITION sind spätere eigenständige Glossar-Seitenkandidaten; Alias ohne SEO-Zweitseite."
     },
     {
       "term_id": "term-digitaler-zwilling",
@@ -404,11 +453,16 @@
       "owner_candidate": "rb068",
       "intent_precheck": "ALIAS_CORE_ABGRENZUNG",
       "synonyms": [],
-      "summary_definition": null,
-      "source_urls": [],
-      "verified_at": null,
-      "status": "KANDIDAT_UNGEPRUEFT",
-      "wp_slug": null
+      "summary_definition": "Ein humanoider Roboter besitzt eine in wesentlichen Merkmalen dem Menschen ähnliche Körperform. Das sagt für sich allein noch nichts über selbständige Fähigkeiten.",
+      "source_urls": [
+        "https://ifr.org/wr-service-robots"
+      ],
+      "verified_at": "2026-11-15",
+      "status": "V84_KURZDEFINITION_QUELLENBASIERT_KEINE_WP_FREIGABE",
+      "wp_slug": null,
+      "final_route_v84": "ALIAS_CORE",
+      "publication_allowed": false,
+      "editorial_caveat": "Kurzdefinition, kein Langtext. Nur GLOSSAR_KURZDEFINITION sind spätere eigenständige Glossar-Seitenkandidaten; Alias ohne SEO-Zweitseite."
     },
     {
       "term_id": "term-autonome-navigation",
@@ -428,15 +482,19 @@
       "owner_candidate": "robotik-technik",
       "intent_precheck": "DEFINITIONSPRUEFUNG",
       "synonyms": [],
-      "summary_definition": "Robotik ist das Fachgebiet, das sich mit Aufbau, Steuerung und Anwendung von Robotern beschäftigt.",
+      "summary_definition": "Robotik ist das Gebiet, das Roboter und ihr Zusammenwirken aus Mechanik, Steuerung, Sensorik und Software entwickelt und einsetzt.",
       "source_urls": [
         "https://ifr.org/industrial-robots",
-        "https://ifr.org/pages/"
+        "https://ifr.org/pages/",
+        "https://www.iso.org/standard/75539.html"
       ],
-      "verified_at": "2026-11-09",
-      "status": "ENTWURF_QUELLENRECHERCHE_KEINE_SEO_FREIGABE",
+      "verified_at": "2026-11-15",
+      "status": "V84_KURZDEFINITION_QUELLENBASIERT_KEINE_WP_FREIGABE",
       "wp_slug": null,
-      "distinction": "Keine Kaufberatung; übergeordnetes Fachgebiet"
+      "distinction": "Keine Kaufberatung; übergeordnetes Fachgebiet",
+      "final_route_v84": "GLOSSAR_KURZDEFINITION",
+      "publication_allowed": false,
+      "editorial_caveat": "Kurzdefinition, kein Langtext. Nur GLOSSAR_KURZDEFINITION sind spätere eigenständige Glossar-Seitenkandidaten; Alias ohne SEO-Zweitseite."
     },
     {
       "term_id": "term-serviceroboter",
@@ -444,11 +502,16 @@
       "owner_candidate": "robotik-technik",
       "intent_precheck": "DEFINITIONSPRUEFUNG",
       "synonyms": [],
-      "summary_definition": null,
-      "source_urls": [],
-      "verified_at": null,
-      "status": "KANDIDAT_UNGEPRUEFT",
-      "wp_slug": null
+      "summary_definition": "Serviceroboter übernehmen nützliche Aufgaben außerhalb der klassischen industriellen Fertigung. Ihre Einsatzgebiete reichen von Reinigung über Transport bis hin zu Assistenz.",
+      "source_urls": [
+        "https://ifr.org/wr-service-robots"
+      ],
+      "verified_at": "2026-11-15",
+      "status": "V84_KURZDEFINITION_QUELLENBASIERT_KEINE_WP_FREIGABE",
+      "wp_slug": null,
+      "final_route_v84": "GLOSSAR_KURZDEFINITION",
+      "publication_allowed": false,
+      "editorial_caveat": "Kurzdefinition, kein Langtext. Nur GLOSSAR_KURZDEFINITION sind spätere eigenständige Glossar-Seitenkandidaten; Alias ohne SEO-Zweitseite."
     },
     {
       "term_id": "term-v2-abstraktion",
@@ -3749,18 +3812,23 @@
     {
       "term_id": "term-v2-vda-5050",
       "begriff": "VDA 5050",
-      "owner_candidate": "ZU_PRUEFEN",
+      "owner_candidate": "robotik-technik",
       "intent_precheck": "BEGRIFF_ODER_ALIAS_PRUEFEN",
       "synonyms": [],
-      "summary_definition": null,
-      "source_urls": [],
-      "verified_at": null,
-      "status": "KANDIDAT_QUELLEN_UND_OWNER_PRUEFEN",
+      "summary_definition": "VDA 5050 beschreibt eine offene Kommunikationsschnittstelle zwischen mobilen Robotern und einer gemeinsamen Leitsteuerung. Seit März 2026 ist Version 3.0.0 veröffentlicht.",
+      "source_urls": [
+        "https://www.vda.de/de/themen/automobilindustrie/vda-5050"
+      ],
+      "verified_at": "2026-11-15",
+      "status": "V84_KURZDEFINITION_QUELLENBASIERT_KEINE_WP_FREIGABE",
       "wp_slug": null,
       "themenwelten": [
         "Steuerung, Regelung & Kommunikation"
       ],
-      "rechercheprioritaet": "NORMAL"
+      "rechercheprioritaet": "NORMAL",
+      "final_route_v84": "GLOSSAR_KURZDEFINITION",
+      "publication_allowed": false,
+      "editorial_caveat": "Kurzdefinition, kein Langtext. Nur GLOSSAR_KURZDEFINITION sind spätere eigenständige Glossar-Seitenkandidaten; Alias ohne SEO-Zweitseite."
     },
     {
       "term_id": "term-v2-wlan-roaming",
@@ -8819,8 +8887,8 @@
       "rechercheprioritaet": "NORMAL"
     }
   ],
-  "updated": "2026-11-09",
-  "definition_drafts": 4,
+  "updated": "2026-11-15",
+  "definition_drafts": 16,
   "publication_allowed": false,
   "alpha_coverage": {
     "A": 44,
@@ -8868,5 +8936,16 @@
     "Anbieter, Beschaffung & Geschäftsmodelle",
     "Bildung, Forschung & Robotik-Forschung"
   ],
-  "expansion_method": "A-Z AND ALL SUBJECT DOMAINS, RESEARCH CANDIDATES; NOT ALL TERMS INDIVIDUALLY FACT-CHECKED"
+  "expansion_method": "A-Z AND ALL SUBJECT DOMAINS, RESEARCH CANDIDATES; NOT ALL TERMS INDIVIDUALLY FACT-CHECKED",
+  "v84_final_round": {
+    "date": "2026-11-15",
+    "source_of_truth": "same 558 existing terms",
+    "checked": 14,
+    "new_wordpress_pages": 0,
+    "alias_only": 5,
+    "independent_glossary_candidates": 9,
+    "no_bulk_publish": true,
+    "source_policy": "Quellen zur sachlichen Erläuterung, keine wortgetreue Normübernahme",
+    "notes": "ISO 8373:2021 ist veröffentlicht; ISO/DIS 8373 (2026) nach ISO weiter Entwurf."
+  }
 }
