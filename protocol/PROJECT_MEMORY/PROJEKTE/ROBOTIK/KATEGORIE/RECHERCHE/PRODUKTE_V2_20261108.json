@@ -5019,7 +5019,7 @@
     }
   ],
   "canonical_source": true,
-  "revision": 17,
+  "revision": 18,
   "research_state": "UNAPPROVED",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
@@ -9832,7 +9832,50 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "research_v83": {
+        "date": "2026-11-15",
+        "site_candidate_id": "V83-01",
+        "path": [
+          "Pflege",
+          "Massageroboter"
+        ],
+        "stage": "Produkt",
+        "model_sources": [
+          {
+            "name": "Aescape Robotic Massage",
+            "url": "https://www.aescape.com/about"
+          },
+          {
+            "name": "Aescape Buchung und neue Massagen seit 2026",
+            "url": "https://www.aescape.com/in-the-news/create-your-aescape"
+          }
+        ],
+        "distinct_function": "Roboterarme zur körperlichen Massage als Wellnessleistung in Studios/Hotels; nicht medizinische Therapieroboter, keine Massagegerät-Matratze ohne bewegliche Robotermechanik.",
+        "facets": [
+          {
+            "name": "Anwendung",
+            "topics": [
+              "Bedienbare Massageprogramme und Druckeinstellungen",
+              "Abgrenzung Wellness gegen therapeutische Behandlung",
+              "Ablauf, Kleidung und Nutzersteuerung"
+            ]
+          },
+          {
+            "name": "Betrieb",
+            "topics": [
+              "Standortbetrieb im Studio und Hotel",
+              "Zutritts- und Datenschutzfragen",
+              "Reinigung, Betreuung und fachliche Grenzen"
+            ]
+          }
+        ],
+        "market_status": "Aescape nennt Standorte in US-Wellnessbetrieben, auch Massage Envy meldete Installation. In Deutschland gibt es nach Branchenbericht andere robotische Massagesysteme; diese Modelle NICHT gleichsetzen. Keinen allgemeinen Verkauf an Privatnutzer behaupten.",
+        "duplicate_policy": "Bestehende Forschungskennung rf158 nutzen. Wellness/kleine Betriebe als Einsatzgebiet unter Pflege, keine zwei Modellregistereinträge pro Nutzung.",
+        "wordpress_created": false,
+        "category_publish_status": "NICHT_FREIGEGEBEN",
+        "google_url_gate": false
+      }
     },
     {
       "id": "rf159",
@@ -9854,7 +9897,50 @@
       "checked_at": "2026-11-10",
       "keyword_status": "NICHT_GEMESSEN",
       "wp_release": "NICHT_FREIGEGEBEN",
-      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT"
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "research_v83": {
+        "date": "2026-11-15",
+        "site_candidate_id": "V83-02",
+        "path": [
+          "Pflege",
+          "Nagelpflegeroboter"
+        ],
+        "stage": "Produkt",
+        "model_sources": [
+          {
+            "name": "10Beauty Full Service Robotic Manicure",
+            "url": "https://www.10beauty.co/"
+          },
+          {
+            "name": "10Beauty Akquisition Clockwork 2025",
+            "url": "https://www.prnewswire.com/news-releases/10beauty-acquires-clockwork-bringing-together-the-two-leading-innovators-in-autonomous-manicures-302384172.html"
+          }
+        ],
+        "distinct_function": "Motorische, bildgestützt gesteuerte Nagelpflege in Salons; nicht einzelne alte Patentidee oder gewöhnlicher Nagellack-Drucker. Eigenständiger Funktionsraum gegenüber Schminkroboter für das Gesicht.",
+        "facets": [
+          {
+            "name": "Behandlung",
+            "topics": [
+              "Nagelbild und Steuerung der Werkzeuge",
+              "Umfang der maschinellen Maniküre",
+              "Hygiene bei Kontakt an Händen"
+            ]
+          },
+          {
+            "name": "Marktstand",
+            "topics": [
+              "10Beauty US-Standorte gegenüber Deutschland",
+              "Clockwork/Nimble-Übernahme als Historie",
+              "Kapseln und Verbrauchsmaterial der Systeme"
+            ]
+          }
+        ],
+        "market_status": "10Beauty listet 2026 reale US-Salonstandorte und Buchungsoptionen; kein belegter Heimverkauf oder deutsches Filialangebot. Frühere Patentidee FIN-10 nicht als dasselbe Gerät ausgeben.",
+        "duplicate_policy": "Bestehende Forschungskennung rf159 für Nagellackier-/Nagelpflegeroboter wiederverwenden; ältere Nimble-/Clockwork-Unternehmen als historische Modellbelege statt zweite Produktidentität.",
+        "wordpress_created": false,
+        "category_publish_status": "NICHT_FREIGEGEBEN",
+        "google_url_gate": false
+      }
     },
     {
       "id": "rf160",
@@ -11462,6 +11548,62 @@
         "related_existing_unpromoted": "ROB-0220",
         "decision": "UNTER_BESTEHENDER_GARTEN_TYPSEITE_MODELLREGISTER_KEINE_NEUE_TYPSEITE",
         "notice": "Herstellerclaims nicht als unabhängig nachgewiesene Funktionssicherheit darstellen; kein Einsatz gegen Personen/Tiere"
+      }
+    },
+    {
+      "id": "rf189",
+      "name": "Baustein-Sortierroboter",
+      "topic_kind": "V83_HOBBY_ROBOTER_PROJEKT_FACHVORSCHLAG",
+      "proposed_owner": "CORE_PRODUCT_CANDIDATE",
+      "proposed_location": "Freizeit > Modellbau",
+      "source_url": "https://basically.website/sorter-v2",
+      "evidence_grade": "ENTWICKLERPROJEKT_PRAKTISCH_GEBAUT_KEINE_SERIENWARE",
+      "keyword_status": "NICHT_GEMESSEN",
+      "wp_release": "NICHT_FREIGEGEBEN",
+      "affiliate_status": "KEIN_PARTNERPROGRAMM_GEPRUEFT",
+      "research_v83": {
+        "date": "2026-11-15",
+        "site_candidate_id": "V83-03",
+        "path": [
+          "Freizeit",
+          "Modellbau",
+          "Baustein-Sortierroboter"
+        ],
+        "stage": "Projekt",
+        "model_sources": [
+          {
+            "name": "Sorter V2 Entwicklerprojekt",
+            "url": "https://basically.website/sorter-v2"
+          },
+          {
+            "name": "Sorter V2 Entwicklerdokumentation",
+            "url": "https://docs.basically.website/"
+          }
+        ],
+        "distinct_function": "Physische Kamera-/Förder-/Sortiermechanik für Klemmbausteine; Modellbau- und Sammleraufgabe, weder Robotik-Lehrbaukasten noch industrielle Müllsortieranlage.",
+        "facets": [
+          {
+            "name": "Technik",
+            "topics": [
+              "Bausteine automatisch zuführen und vereinzeln",
+              "Kamera und Form-/Farberkennung",
+              "Sortierausgabe in getrennte Behälter"
+            ]
+          },
+          {
+            "name": "Projekte",
+            "topics": [
+              "Hobbyprototyp gegenüber fertiger Kaufware",
+              "Bauaufwand und Materialbedarf",
+              "Grenzen der veröffentlichten Anleitung"
+            ]
+          }
+        ],
+        "market_status": "Dokumentation 2026: funktionierende Aufbauten existieren, aber kein fertiges Kit/Preis und unvollständige Bauanleitungen; ausdrücklich kein kaufbares Seriengerät.",
+        "duplicate_policy": "Keine Wiederholung von Bildung > Roboterbaukästen (dort Roboter selbst bauen), hier Sortiermaschine für vorhandene Bausteine im Hobby/Modellbau.",
+        "wordpress_created": false,
+        "category_publish_status": "NICHT_FREIGEGEBEN",
+        "google_url_gate": false
       }
     }
   ],
@@ -13847,6 +13989,172 @@
         ],
         "market_note": "FOOTBOT ist eine ortsfeste, mehrteilige Trainingsanlage. Produktstatus heißt Anbieterbeleg, nicht nachgewiesene Serieninstallationszahl oder Heimlieferbarkeit.",
         "wordpress_status": "FACHKANDIDAT_UNVEROEFFENTLICHT"
+      }
+    ]
+  },
+  "research_round_v83": {
+    "date": "2026-11-15",
+    "status": "ZUSATZFACHLUECKEN_OHNE_WORDPRESS_SCHREIBUNG",
+    "basis": "V82 und echter aktueller Hersteller-/Fachbeleg für Wellness, Nagelpflege, Hobbybaustein-Sortierung",
+    "type_page_candidates": 3,
+    "research_existing_id_reuse": [
+      "rf158",
+      "rf159"
+    ],
+    "research_new_ids": [
+      "rf189"
+    ],
+    "frontier_before": 188,
+    "frontier_after": 189,
+    "old_type_master_unchanged": 68,
+    "no_wp_writes": true,
+    "no_industry_tree_changes": true,
+    "stage_labels": "Produkt / Projekt / Idee, nur eine Kennzeichnung je Fund",
+    "no_google_url_block": true,
+    "existing_wordpress_parent_paths": [
+      [
+        "Pflege"
+      ],
+      [
+        "Pflege"
+      ],
+      [
+        "Freizeit",
+        "Modellbau"
+      ]
+    ],
+    "not_new_type": [
+      {
+        "name": "Kniterate – digitale Strickmaschine",
+        "stage": "Produkt",
+        "source": "https://www.kniterate.com/",
+        "decision": "Echte programmierte Strickmaschine, aber keine hinreichend eigenständige Robotik-Funktion belegt; besser als automatisierte Fertigung im Hobbymagazin als eigene Robotertypseiten."
+      }
+    ],
+    "candidates": [
+      {
+        "id": "V83-01",
+        "research_id": "rf158",
+        "title": "Massageroboter",
+        "path": [
+          "Pflege",
+          "Massageroboter"
+        ],
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Aescape Robotic Massage",
+            "url": "https://www.aescape.com/about"
+          },
+          {
+            "name": "Aescape Buchung und neue Massagen seit 2026",
+            "url": "https://www.aescape.com/in-the-news/create-your-aescape"
+          }
+        ],
+        "reason": "Roboterarme zur körperlichen Massage als Wellnessleistung in Studios/Hotels; nicht medizinische Therapieroboter, keine Massagegerät-Matratze ohne bewegliche Robotermechanik.",
+        "facets": [
+          {
+            "name": "Anwendung",
+            "topics": [
+              "Bedienbare Massageprogramme und Druckeinstellungen",
+              "Abgrenzung Wellness gegen therapeutische Behandlung",
+              "Ablauf, Kleidung und Nutzersteuerung"
+            ]
+          },
+          {
+            "name": "Betrieb",
+            "topics": [
+              "Standortbetrieb im Studio und Hotel",
+              "Zutritts- und Datenschutzfragen",
+              "Reinigung, Betreuung und fachliche Grenzen"
+            ]
+          }
+        ],
+        "market_note": "Aescape nennt Standorte in US-Wellnessbetrieben, auch Massage Envy meldete Installation. In Deutschland gibt es nach Branchenbericht andere robotische Massagesysteme; diese Modelle NICHT gleichsetzen. Keinen allgemeinen Verkauf an Privatnutzer behaupten.",
+        "duplicate": "Bestehende Forschungskennung rf158 nutzen. Wellness/kleine Betriebe als Einsatzgebiet unter Pflege, keine zwei Modellregistereinträge pro Nutzung."
+      },
+      {
+        "id": "V83-02",
+        "research_id": "rf159",
+        "title": "Nagelpflegeroboter",
+        "path": [
+          "Pflege",
+          "Nagelpflegeroboter"
+        ],
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "10Beauty Full Service Robotic Manicure",
+            "url": "https://www.10beauty.co/"
+          },
+          {
+            "name": "10Beauty Akquisition Clockwork 2025",
+            "url": "https://www.prnewswire.com/news-releases/10beauty-acquires-clockwork-bringing-together-the-two-leading-innovators-in-autonomous-manicures-302384172.html"
+          }
+        ],
+        "reason": "Motorische, bildgestützt gesteuerte Nagelpflege in Salons; nicht einzelne alte Patentidee oder gewöhnlicher Nagellack-Drucker. Eigenständiger Funktionsraum gegenüber Schminkroboter für das Gesicht.",
+        "facets": [
+          {
+            "name": "Behandlung",
+            "topics": [
+              "Nagelbild und Steuerung der Werkzeuge",
+              "Umfang der maschinellen Maniküre",
+              "Hygiene bei Kontakt an Händen"
+            ]
+          },
+          {
+            "name": "Marktstand",
+            "topics": [
+              "10Beauty US-Standorte gegenüber Deutschland",
+              "Clockwork/Nimble-Übernahme als Historie",
+              "Kapseln und Verbrauchsmaterial der Systeme"
+            ]
+          }
+        ],
+        "market_note": "10Beauty listet 2026 reale US-Salonstandorte und Buchungsoptionen; kein belegter Heimverkauf oder deutsches Filialangebot. Frühere Patentidee FIN-10 nicht als dasselbe Gerät ausgeben.",
+        "duplicate": "Bestehende Forschungskennung rf159 für Nagellackier-/Nagelpflegeroboter wiederverwenden; ältere Nimble-/Clockwork-Unternehmen als historische Modellbelege statt zweite Produktidentität."
+      },
+      {
+        "id": "V83-03",
+        "research_id": "rf189",
+        "title": "Baustein-Sortierroboter",
+        "path": [
+          "Freizeit",
+          "Modellbau",
+          "Baustein-Sortierroboter"
+        ],
+        "stage": "Projekt",
+        "models": [
+          {
+            "name": "Sorter V2 Entwicklerprojekt",
+            "url": "https://basically.website/sorter-v2"
+          },
+          {
+            "name": "Sorter V2 Entwicklerdokumentation",
+            "url": "https://docs.basically.website/"
+          }
+        ],
+        "reason": "Physische Kamera-/Förder-/Sortiermechanik für Klemmbausteine; Modellbau- und Sammleraufgabe, weder Robotik-Lehrbaukasten noch industrielle Müllsortieranlage.",
+        "facets": [
+          {
+            "name": "Technik",
+            "topics": [
+              "Bausteine automatisch zuführen und vereinzeln",
+              "Kamera und Form-/Farberkennung",
+              "Sortierausgabe in getrennte Behälter"
+            ]
+          },
+          {
+            "name": "Projekte",
+            "topics": [
+              "Hobbyprototyp gegenüber fertiger Kaufware",
+              "Bauaufwand und Materialbedarf",
+              "Grenzen der veröffentlichten Anleitung"
+            ]
+          }
+        ],
+        "market_note": "Dokumentation 2026: funktionierende Aufbauten existieren, aber kein fertiges Kit/Preis und unvollständige Bauanleitungen; ausdrücklich kein kaufbares Seriengerät.",
+        "duplicate": "Keine Wiederholung von Bildung > Roboterbaukästen (dort Roboter selbst bauen), hier Sortiermaschine für vorhandene Bausteine im Hobby/Modellbau."
       }
     ]
   }
