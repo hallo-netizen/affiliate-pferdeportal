@@ -1,5 +1,11 @@
 # ZIELVERTRAG – KATEGORIEN ROBOTIK
 
+## V78 – VERBINDLICHER AUSFÜHRUNGSMODUS: EINMALIGE GESAMTFREIGABE (15.11.2026)
+- Der bestehende Robotik-Kategorie-Workflow fasst **alle bereits freigegebenen Schritte** zu **einer Admin-Gesamtfreigabe** zusammen: **gespeicherter 227er Import → 68 vorhandene Entwurfsseiten veröffentlichen → fachlich entschiedene 16 Typseiten + 48 Rubriken in einem Nachtrag**. Die eine Freigabe umfasst auch die Sichtbarkeit leerer WP-Seiten. Keine drei manuellen Freigaben, kein Neustart und keine doppelte Entscheidung.
+- Ein fachlich bereits endgültig entschiedener Google-URL-HOLD darf **nicht erneut als Freigabesicherheit** auftauchen. Technische Identitäts-/Doppelungs-/Parent-/Besitzerprüfungen bleiben allein zum Schutz bestehender Objekte erhalten; bei echtem Konflikt kein blindes Weiterschreiben. Keine zusätzlichen Plugins, Tabellen, API-Kosten oder Hintergrundjobs.
+- Künftig nach Benutzer-Update 0.4.12 nur **`Robotik Kategorie → Gesamtabschluss (einmalig)`** benutzen. Das gesamte Ergebnis wird **einmal** als JSON ausgegeben. WP-Livefreigabe ist dadurch noch nicht vorweggenommen; der Administrator muss die Zustimmung im Backend ausdrücklich erteilen.
+- Grundlage: `PLUGIN/V78_RELEASE_VERIFIZIERT_20261115.md`. 11 V76-Neukandidaten sind weiterhin nur redaktionelle Vorschläge außerhalb dieses V62-Importumfangs.
+
 ## VERBINDLICH 15.11.2026 – GOOGLE-SERP-ADRESSEN SIND KEINE SPERRE
 - **Die 16 bisherigen V46/V61-SEO-HOLDs sind auf Entscheidung des Nutzers fachlich aufgehoben.** Fehlende oder verschleierte Google-Trefferadressen sind **weder eine erforderliche Prüfung noch ein Grund, Kategorien oder Robotertyp-Seiten zu blockieren**. Keine neue kostenpflichtige API-Abfrage. Soweit die tatsächliche Funktion, eindeutige Nutzerabsicht und drei unterscheidbare Beitragsmöglichkeiten je Kategorie aus den vorhandenen Quellen nachgewiesen sind, genügt diese einmalige fachliche Entscheidung.
 - Abgleich mit Original V46, V62, V63: **16 klar umrissene Seiten** und **48 zugeordnete Beitragskategorien**, darunter **genau eine Seite Badmintonroboter** (Synonyme: Badmintonballmaschine/Badminton-Zuspielroboter, **keine zweite Seite**). Modelle nur einmal im Roboterregister, Nutzer- und Anwendungskontexte sachlich trennen. Keine Änderung an Gewerbe, Industrie oder Humanoiden-Arbeit.
