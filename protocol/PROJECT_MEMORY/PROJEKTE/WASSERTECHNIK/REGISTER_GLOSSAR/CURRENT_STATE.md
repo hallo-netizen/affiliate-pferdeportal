@@ -1,18 +1,24 @@
 # WASSERTECHNIK / REGISTER & GLOSSAR – EINZIGER AKTUELLER STAND
-**Stand: 15.11.2026 · W17 · RECHERCHE AKTIV, KEINE WORDPRESS-ÄNDERUNG**
 
-**Einzige zentrale aktuelle Fachregister-Quelle:** `W17_ZENTRALES_FACHREGISTER_V1_20261115.json`
+**Stand: 15.11.2026 · W18 · RECHERCHE AKTIV · KEINE WORDPRESS-/PLUGINÄNDERUNG**
 
-- **313 einheitliche Datensätze:** 258 recherchierte Produktbezeichnungen (= W4 79, W12/W14/W15/W16 151, W17 28), 39 Glossar-Entwürfe, 16 spätere Anbieterregister-Rubriken.
-- **Keine Behauptung von 258 eigenen Produktseiten.** W4 hat 79 bisherige Produkt-Owner, 3 schon erkannte Funktions-Aliase stehen zentral als Verweise, viele weitere inhaltliche und SEO-Grenzfälle bleiben offen.
-- **Alle 313/313 Datensätze** haben dieselben Grundfelder und kontrollierten Filter: Typ, Funktionen, Wasserarten, Einsätze, Zielgruppen, Technikstatus, Bearbeitungsstatus und Quellen. Unbekanntes bleibt leer/null. Ein `kanonisch_id` je erfasster Produktfunktion; Synonyme verweisen auf einen Owner.
-- **W17-Neurecherche:** 28 Produkttypen aus Waschwasserrecycling, CIP, Laborreinstwasser, Gebäudewasser, Galvanik, Leckortung, Kessel/Kondensat, Analytik und Spezial-Abwasser; 28 vorgeschlagene Kategorien mit je mindestens 3 unterschiedlichen Artikelfragen (= 84 Ideen). 17 erste eigenständige Kandidaten, 10 Intent-Grenzfälle, 1 gekennzeichneter 172-nm-Fraunhofer-Prototyp; keine SEO-/WP-Freigabe.
-- **Glossar:** 39 Fachbegriffe, jeweils mit einer konkreten Kurzdefinition und Fachquelle; 21 bereits auf einen konkreten Produkt-Owner verlinkt. **Anbieterregister:** 16 reine Dienstleistungs-/Anbieter-Rubriken, **keine tatsächlichen Firmen**.
-- **W5-SEO-Werte erhalten:** alle 79 W4-Produktowner gemappt; 59 mit bereits gemessenen Suchvolumina, 20 ohne Anbieterwert (nicht als null Nachfrage interpretieren). Neue Produkte ohne Suchvolumenmessung; keine neuen API-Kosten.
-- **Prüfung:** 313/313 gleiche Felder, alle IDs eindeutig, alle Filterwerte im gemeinsamen Vokabular, 3 Alias-Referenzen und 21 Glossar-Produktverknüpfungen zeigen auf vorhandene IDs, neue 28/28 Vorschläge mit mindestens 3 Artikeln je Kategorie.
+**Einzige aktuell fortzuschreibende Forschungsregister-Quelle:** `W18_ZENTRALES_FACHREGISTER_20261115.json` (W17 bleibt unveränderter historischer Vorgänger).
 
-**Forschungs-/Quellnachweis:** `W17_NEUE_FACHRECHERCHE_28_PRODUKTE_20261115.json`, `W17_GLOSSAR_UND_ANBIETERRUBRIKEN_STARTBESTAND_20261115.json`. **Datenvertrag:** `W17_DATENVERTRAG_EIN_REGISTER_20261115.md`. **Lesbarer Prüf-/Gesamtstand:** `W17_RECHERCHE_REGISTER_GLOSSAR_GESAMTSTAND_20261115.md`.
+## Tatsächlich erreichter Stand
+- **344 gleichförmige Datensätze:** 275 recherchierte Produktbezeichnungen (79 alte W4-Fachowner, 196 zusätzlich erfasste Bezeichnungen einschließlich Alias- und Intent-Grenzfällen), 53 Glossarbegriffe, 16 **nur konzipierte** Anbieter-Rubriken. **Keine 275 freigegebenen WP-Produktseiten!**
+- W18 selbst: **17** quellenbelegte technische Neufunde mit je einer sinnvollen möglichen Fachkategorie und **3** verschiedenen Artikelideen (51 Ansätze), **14** quellenbelegte Glossarbegriffe mit 14 wechselseitigen Produktreferenzen. **5** bewusst nicht als zusätzliche Produkte angelegte Wiederholungen. 11 der 17 Funde ausdrücklich technische-/SEO-Intent-Grenzfälle, 6 zunächst plausible eigenständige Funktionen.
+- **Kontrolliertes Filtervokabular:** `typ`, `kanonisch_id`, `funktionen[]`, `wasserarten[]`, `einsatzorte[]`, `zielgruppen[]`, Technikstand, Bearbeitungsstand, Hersteller-/Fachquelle, SEO und produktbezogene Rubriken. 344/344 einheitlich aufgebaut, eindeutige Referenzen. Noch nicht belegte alte Filter bleiben vorläufig oder leer.
+- **Alte W5-Messwerte erhalten**: W4 79/79 an gemessene Produktowner gebunden; 59 gelieferte Suchvolumen, 20 unbekannte Anbieterwerte. Keine zusätzlichen bezahlten SEO-Recherchen.
+- **Sachliche Zählkorrektur:** W17-Bericht zeigte fälschlich die fortgeschriebenen W16-Forschungssummen von 267 Rubriken/842 Artikelideen. Tatsächlicher W17-Registerstand hatte **295/926**. Nach W18 sind es **312 vorläufige redaktionelle Produkt-Kategorievorschläge und 977 Artikelideen**, ausdrücklich einschließlich nicht freigegebener Alias- und Grenzfall-Themen. **Nur W4 105 Rubriken/356 Ideen** sind die bisherige WP-Fachbasis. Keine dieser Forschungsideen wurde als WP-Inhalt importiert.
 
-**NEXT:** Breitrecherche auf Basis **einer** fortgeschriebenen Registerdatei weiterführen und Funktionsüberschneidungen/unsichere Quellen/Filtermerkmale einmal im zentralen Register klären. **Erst** wenn Fach-/SEO-Abgrenzung vollständig, finale Struktur mit 6–8 Hauptkategorien bestimmen und nach ausdrücklicher Freigabe **eine** Übergabe an vorhandenes WT001. Keine weiteren Mini-Plugins, keine laufenden API-Kosten.
+## Aktuelle Quellen und Nachweise
+- **Forschung/Master:** `W18_ZENTRALES_FACHREGISTER_20261115.json`
+- **17 recherchierte Produkttypen, 14 Glossarbegriffe, 5 ausgeschlossene Dopplungen:** `W18_NEUFUNDE_UND_ABGRENZUNGEN_20261115.json`
+- **Verständlicher vollständiger W18-Stand:** `W18_RECHERCHE_UND_REGISTER_GESAMTSTAND_20261115.md`
+- **Einheitlicher, unveränderter Datenvertrag:** `W17_DATENVERTRAG_EIN_REGISTER_20261115.md`
+- **Historische Version:** `W17_ZENTRALES_FACHREGISTER_V1_20261115.json`
 
-**KISS:** Register nicht mehrfach neu aufbauen; W4/W5/W6/W7 und WordPress nicht eigenmächtig ändern. Kein Frontend-/Plugin-Update in W17.
+## Verbindlicher nächster Arbeitsblock
+Weiter unabhängige breite Quellenrecherche und wirkliche **funktionale** Überlappungsabgrenzung im **selben** zentralen Register. Bei gleichen Produkten nur eine kanonische Produkt-ID, alle anderen Begriffe/Anwendungen als Verweis. Für künftige tatsächliche Produkt-Endseiten nur sinnvoll getrennte Produkt-/Systemfunktionen; darunter fachliche Beitragskategorien mit **mindestens 3 verschiedenen möglichen Beiträgen je Kategorie**. Erst anschließend **6–8** tragfähige WP-Hauptkategorien und eine einmalige kontrollierte WordPress-Übernahme nach ausdrücklicher Freigabe.
+
+**Keine WP-/Plugin-/Frontend-/API-/Fremdportal-Änderungen.** W18 ist ein Forschungsstand, keine SEO- oder Importfreigabe.
