@@ -1,24 +1,37 @@
-# WASSERTECHNIK / REGISTER & GLOSSAR – EINZIGER AKTUELLER STAND
+# WASSERTECHNIK – EINZIGER AKTUELLER FORSCHUNGS-, PRODUKT-, GLOSSAR- UND ANBIETERREGISTER-STAND
+**15.11.2026 · W19 · laufende Fachrecherche, noch keine abschließende Produkt- oder WordPress-Freigabe**
 
-**Stand: 15.11.2026 · W18 · RECHERCHE AKTIV · KEINE WORDPRESS-/PLUGINÄNDERUNG**
+## Eine einzige aktuelle Registerdatei
+`W19_ZENTRALES_FACHREGISTER_20261115.json`
 
-**Einzige aktuell fortzuschreibende Forschungsregister-Quelle:** `W18_ZENTRALES_FACHREGISTER_20261115.json` (W17 bleibt unveränderter historischer Vorgänger).
+Die W18-Datei ist die **unveränderte historische Vorversion**; nicht als zweite aktive Datenquelle weiterführen. Die aktuellen Register-IDs, Quellen, einheitlichen Filtermerkmale und bekannten Produkt-Aliasbeziehungen stehen zentral in W19.
 
-## Tatsächlich erreichter Stand
-- **344 gleichförmige Datensätze:** 275 recherchierte Produktbezeichnungen (79 alte W4-Fachowner, 196 zusätzlich erfasste Bezeichnungen einschließlich Alias- und Intent-Grenzfällen), 53 Glossarbegriffe, 16 **nur konzipierte** Anbieter-Rubriken. **Keine 275 freigegebenen WP-Produktseiten!**
-- W18 selbst: **17** quellenbelegte technische Neufunde mit je einer sinnvollen möglichen Fachkategorie und **3** verschiedenen Artikelideen (51 Ansätze), **14** quellenbelegte Glossarbegriffe mit 14 wechselseitigen Produktreferenzen. **5** bewusst nicht als zusätzliche Produkte angelegte Wiederholungen. 11 der 17 Funde ausdrücklich technische-/SEO-Intent-Grenzfälle, 6 zunächst plausible eigenständige Funktionen.
-- **Kontrolliertes Filtervokabular:** `typ`, `kanonisch_id`, `funktionen[]`, `wasserarten[]`, `einsatzorte[]`, `zielgruppen[]`, Technikstand, Bearbeitungsstand, Hersteller-/Fachquelle, SEO und produktbezogene Rubriken. 344/344 einheitlich aufgebaut, eindeutige Referenzen. Noch nicht belegte alte Filter bleiben vorläufig oder leer.
-- **Alte W5-Messwerte erhalten**: W4 79/79 an gemessene Produktowner gebunden; 59 gelieferte Suchvolumen, 20 unbekannte Anbieterwerte. Keine zusätzlichen bezahlten SEO-Recherchen.
-- **Sachliche Zählkorrektur:** W17-Bericht zeigte fälschlich die fortgeschriebenen W16-Forschungssummen von 267 Rubriken/842 Artikelideen. Tatsächlicher W17-Registerstand hatte **295/926**. Nach W18 sind es **312 vorläufige redaktionelle Produkt-Kategorievorschläge und 977 Artikelideen**, ausdrücklich einschließlich nicht freigegebener Alias- und Grenzfall-Themen. **Nur W4 105 Rubriken/356 Ideen** sind die bisherige WP-Fachbasis. Keine dieser Forschungsideen wurde als WP-Inhalt importiert.
+**Jetzt tatsächlich 378 einheitliche Datensätze**:
+- **290 Produktbezeichnungen** = **79** bisherige W4-Fachproduktowner plus **211** Forschungsbezeichnungen inklusive Aliasnamen und ungeklärten Überschneidungen. **Nicht 290 freigegebene WP-Seiten!**
+- **68** Glossarbegriffe (15 W19-Neufunde, mit Quelle und konkretem Produktbezug).
+- **20** nur geplante Anbieter-/Dienstleistungsrubriken (4 W19-Ergänzungen; **keine Firmen**).
+- **327** vorgeschlagene, individuell produktbezogene Artikelrubriken mit **1.022** Einzelartikelideen **einschließlich** Alias- und Forschungsgrenzfall-Kandidaten. Nur **W4 105 Kategorien/356 Ideen** gehören zur bisherigen WP-Fachbasis. Neue 15 Produktkandidaten mit je einer passenden Kategorie und mindestens drei konkret unterschiedlichen Beiträgen: 15/15 PASS.
+- **Alte W5-SEO-Werte erhalten:** alle 79 W4-Fachowner zugeordnet, 59 gelieferte Suchvolumen, 20 ohne gelieferten Wert (nicht null Nachfrage). **Keine neue SEO-API-Abfrage.**
 
-## Aktuelle Quellen und Nachweise
-- **Forschung/Master:** `W18_ZENTRALES_FACHREGISTER_20261115.json`
-- **17 recherchierte Produkttypen, 14 Glossarbegriffe, 5 ausgeschlossene Dopplungen:** `W18_NEUFUNDE_UND_ABGRENZUNGEN_20261115.json`
-- **Verständlicher vollständiger W18-Stand:** `W18_RECHERCHE_UND_REGISTER_GESAMTSTAND_20261115.md`
-- **Einheitlicher, unveränderter Datenvertrag:** `W17_DATENVERTRAG_EIN_REGISTER_20261115.md`
-- **Historische Version:** `W17_ZENTRALES_FACHREGISTER_V1_20261115.json`
+## Echte Funktionsbereinigung – exakter Umfang
+`W19_FUNKTIONALE_ABGRENZUNG_275_BESTAND_20261115.json`: Alle **275** W18-Forschungs-Produktnamen genau einmal im Funktions-Screening erfasst, samt technischer Hauptfunktion, Wasserart und Abgleichstatus.
+- **6** bekannte Aliasbeziehungen, davon **3 neu** auf die eigentliche Produktfunktion zurückgeführt: Spültechnik-RO → gewerbliche RO; Schwimmbad-Ozonanlage → Ozon-Wasserdesinfektion; Schwimmbad-Flockungsdosierstation → Flockungsdosierstation. Bestehende W4-Seiten/URLs **nicht** verändert.
+- **50** ausdrücklich einzeln begründete offene Funktions-/Bauart-/Kaufabsichtsvergleiche, **93** der 275 vorigen Produktnamen sind daran beteiligt.
+- Für die übrigen **176** ist aktuell **kein konkreter** dieser 50 Konflikte erfasst. **Das ist KEIN Beweis, dass diese bereits abschließend fachlich und SEO-seitig eigenständige Produktseiten sind.**
+- 15 neue W19-Produktfunde aus Rohrnetz, Schiffswasser, eDNA, Wäscherei, Deponie/Industrie, Entsalzung/Beschneiung/Schlamm; **9** als technischer bzw. Intent-Grenzfall markiert und **6** zunächst fachlich getrennte Recherchekandidaten. **Kein SEO-Owner neu freigegeben.**
 
-## Verbindlicher nächster Arbeitsblock
-Weiter unabhängige breite Quellenrecherche und wirkliche **funktionale** Überlappungsabgrenzung im **selben** zentralen Register. Bei gleichen Produkten nur eine kanonische Produkt-ID, alle anderen Begriffe/Anwendungen als Verweis. Für künftige tatsächliche Produkt-Endseiten nur sinnvoll getrennte Produkt-/Systemfunktionen; darunter fachliche Beitragskategorien mit **mindestens 3 verschiedenen möglichen Beiträgen je Kategorie**. Erst anschließend **6–8** tragfähige WP-Hauptkategorien und eine einmalige kontrollierte WordPress-Übernahme nach ausdrücklicher Freigabe.
+## Gleichbleibendes Register- und Glossarkonzept
+- Bei allen **378** Datensätzen dieselben Grundfelder für stabile ID, Typ, kanonischen Verweis, Fachbereich, Funktion, Wasserart, Einsatz, Zielgruppe, technischen Status, Quelle, SEO, Produkt-Beitragskategorien, Querverweise und Funktionsscreening.
+- Verbindlicher Datenvertrag bleibt `W17_DATENVERTRAG_EIN_REGISTER_20261115.md`.
+- Normiertes Vokabular **an einer Stelle** um drei belegte neue Wasserarten (`ballastwasser`, `bilgenwasser`, `deponiesickerwasser`) und fünf Einsatzkontexte (`wasserwerk`, `schifffahrt`, `waescherei`, `deponie`, `wintertourismus`) ergänzt. Unbekannte Werte bleiben leer, nicht geraten.
+- Glossar und spätere Anbieter-Rubriken kommen aus **demselben** Register; keine künstlichen Produktseiten, keine erfundenen Anbieter. Das Frontend wurde in W19 nicht um ein Register erweitert.
 
-**Keine WP-/Plugin-/Frontend-/API-/Fremdportal-Änderungen.** W18 ist ein Forschungsstand, keine SEO- oder Importfreigabe.
+## Quellbelege und Status
+- Neue Produkte mit Hersteller-/Fachseiten: `W19_NEUE_PRODUKTFUNDE_20261115.json`.
+- Neue Glossarbegriffe und Anbieterrubriken: `W19_GLOSSAR_UND_ANBIETERRUBRIKEN_20261115.json`.
+- Funktionsvergleich 275 Altbezeichnungen: `W19_FUNKTIONALE_ABGRENZUNG_275_BESTAND_20261115.json`.
+- Lesbarer W19-Prüf-/Gesamtbericht: `W19_FORSCHUNG_UND_FUNKTIONSBEREINIGUNG_GESAMTSTAND_20261115.md`.
+
+**NEXT:** Die **50 offenen Funktionsvergleiche** im zentralen Register fachlich entscheiden (nur wirklich gleiche technische Funktion zusammenführen); daneben Breitrecherche weiterführen, Stand jedes Mal **einmal** in diesem CURRENT und im zentralen Änderungsregister aktualisieren. **Erst nach ausreichender Gesamtfachabdeckung** den endgültigen 6–8-Hauptkategorienbaum ableiten und später mit gesonderter Freigabe an das vorhandene WT001 übergeben.
+
+**WORDPRESS/WT001/MENÜ/FRONTEND: NICHT GEÄNDERT · SEO-API-KOSTEN: 0 NEU · RECHERCHE: NOCH OFFEN.**
