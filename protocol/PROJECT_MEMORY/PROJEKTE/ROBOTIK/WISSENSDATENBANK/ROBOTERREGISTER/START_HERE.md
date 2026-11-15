@@ -1,4 +1,10 @@
 # Büro Roboterregister / einheitliche Eigenschaften
+
+## AKTUALISIERUNG 15.11.2026 – EIN MASTER, KEIN ZWEITES REGISTER
+- Der einzige gültige Robotertypen-Forschungsmaster `../../KATEGORIE/RECHERCHE/PRODUKTE_V2_20261108.json` steht auf **Revision 15: 68 unverschobene Basiskandidaten + 183 Forschungsrandkandidaten**. Zwei V80-Vorschläge referenzieren bestehende Typ-IDs `rf142` und `rf148`; neun Forschungsidentitäten `rf175–rf183` neu. **Nicht** in einer zweiten Produktliste ablegen.
+- V80 hat die 11 Kandidaten gegen den vorhandenen 188er WordPress-Sollbaum verknüpft und 22 fachliche Rubriken / 88 mögliche Artikelrichtungen dokumentiert. Quelle `../../KATEGORIE/RECHERCHE/V80_11_TYPEN_ABGLEICH_ARTIKELPLAN_20261115.md`; die Such- und Findermerkmale sind **nicht automatisch voll erhoben**. Keine neuen WordPress-Objekte oder Produktkarten als bereits publiziert ausgeben.
+- Stand 09.11.2026 und damalige Zählungen weiter unten sind **historisch**; die aktuelle Projektwahrheit steht ausschließlich in `../../KATEGORIE/CURRENT_STATE.md`.
+
 Stand 09.11.2026 · SCHEMA EINGERICHTET, FAKTENRECHERCHE OFFEN
 
 ## Bewährtes Vorbild
