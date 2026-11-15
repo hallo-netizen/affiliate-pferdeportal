@@ -1,12 +1,12 @@
 # WASSERTECHNIK – EINZIGER AKTUELLER FORSCHUNGSSTAND
-**15.11.2026 · W20 · offener Forschungsstand, keine SEO-/WordPress-Freigabe**
+**15.11.2026 · W21 · noch keine WordPress-/SEO-Freigabe**
 
-**Einziger aktiv fortzuschreibender Master:** `W20_ZENTRALES_FACHREGISTER_20261115.json`. W19 und ältere Versionen bleiben nur Historie. **392 Einträge = 298 Produktbezeichnungen, 72 Glossar, 22 Anbieter-Rubriken.** Die Produktzahl enthält Alias- und SEO-Grenzfälle, keine 298 WordPress-Seiten!
+**Aktiver Master ausschließlich `W21_ZENTRALES_FACHREGISTER_20261115.json`.** W20 und vorher sind nur Historie. **406 Einträge = 306 Produktbezeichnungen inkl. Alias- und ungeklärten Fällen, 76 Glossar, 24 Anbieter-Rubriken.**
 
-**50 W19-Funktionsvergleiche:** 34 technische Funktionsunterschiede dokumentiert (SEO-Owner nicht freigegeben), 1 zusätzliche gleiche Funktionsfamilie zusammengeführt (Yacht-RO → kompakte Meerwasser-RO), 15 Paare bleiben begründet offen. **7** bekannte Aliasbeziehungen.
+Von den 50 W19-Funktionsvergleichen nun **43 fachlich unterscheidbar (ohne SEO-Freigabe), 1 Alias, 6 begründet offen.** Herstellerbelege für 9 von vorher 15 offenen Vergleichen ergänzt. Genau **eine Funktionsentscheidung** in der zentralen Vergleichsliste; in Produkten nur Referenzen.
 
-**8 neue quellbelegte Produkttypen**: Regenwasser-Erstspülumleiter, Rohrkamera, elektrische Rohrreinigungsmaschine, Hochdruck-Rohrreinigungsset, Wasserschlagdämpfer, Solartiefbrunnenpumpensystem, RO-Energierückgewinnung, smarter Wasserlecksensor. **4 Glossarideen, 2 geplante Anbieter-Rubriken** ergänzt, je Produkttyp 3 mögliche Fachartikel in einer passenden Kategorie. Keine erfundenen Anbieter.
+**8 neue Marktprodukte/-Kandidaten**: Klimaanlagen-Kondensatpumpe, Bewässerungs-Regensensor, Venturi-Düngerinjektor, manueller Meerwasserentsalzer, mobile Hochwasser-Dammbalken, Trinkwasser-Ausdehnungsgefäß, Brennwert-Kondensatneutralisation, Spurengas-Leckortungsgerät. Je eine passende Produktkategorie mit mindestens drei konkreten Fachartikeln. 4 Glossar-/2 Anbieter-Rubriken ergänzend. **343 Rubrikideen / 1070 Fachartikelideen** inkl. offener Grenzfälle, NICHT veröffentlichte Seiten/Beiträge.
 
-**Der W4-Bestand ist unverändert:** 79 WordPress-Produktseiten, 105 Fachrubriken, 356 Artikelideen. Alte W5-Suchdaten (59 gelieferte Volumina, 20 unbekannt) bleiben erhalten. W20-Gesamtideen inkl. unfreigegebener Grenzfälle: 335 Produktfachrubriken / 1046 mögliche Artikel.
+**W4 weiterhin 79 Produktseiten +105 Kategorien +356 Artikelideen, W5 59 gemessene Suchvolumen +20 unbekannt.** Bericht `W21_BREITRECHERCHE_FUNKTIONSKLAERUNG_GESAMTSTAND_20261115.md`.
 
-**Gesamtbericht:** `W20_FUNKTIONSCHECK_UND_PRODUKTLUECKEN_GESAMTSTAND_20261115.md`. 50 Entscheidungen sind ausschließlich in der aktuellen W20-Masterdatei gespeichert. **NEXT:** 15 offene Vergleiche + weitere Sektoren, erst danach endgültige 6–8 Hauptbereiche. Kein Plugin, kein WP-Import, keine neuen SEO-API-Kosten.
+**NEXT:** 6 offene Funktionsthemen und weitere Randbereiche; danach endgültig 6–8 Hauptbereiche und konkrete Produkte mit darunter passenden Rubriken (mindestens 3 Artikelideen). **WP, WT001, Frontend, SEO-API unverändert.**
