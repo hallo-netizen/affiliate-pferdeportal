@@ -24,7 +24,7 @@ final class Robotik_V65_Publication {
     private static function authorized():void {
         if (!current_user_can('manage_options')) throw new RuntimeException('Nur Administratoren koennen veröffentlichen.');
     }
-    private static function preview():array {
+    public static function preview():array {
         self::authorized();
         $import=get_option(self::IMPORT,[]);
         if (!is_array($import) || ($import['status']??'')!=='COMPLETE_SAFE_DELTA_WITH_16_HOLDS' ||
@@ -76,16 +76,20 @@ final class Robotik_V65_Publication {
             'published'=>0,'already_published'=>0,'error'=>'','started_at'=>gmdate('c')],false);
         self::redirect();
     }
-    public static function resume():void {
-        self::authorized();check_admin_referer('robotik_v65_publish_resume');
+    public static function resumeSaved():void {
         $s=get_option(self::STATE,[]);
         if(!is_array($s)||($s['status']??'')!=='BLOCKED'||count((array)($s['items']??[]))!==68)
-            wp_die('Kein sicher wiederaufnehmbarer Veroeffentlichungslauf.');
-        try{$p=self::preview();}catch(Throwable $e){wp_die('Abbruch: '.$e->getMessage());}
+            throw new RuntimeException('Kein gesicherter 68er-Veroeffentlichungslauf.');
+        $p=self::preview();
         $old=array_map(static fn($x)=>[$x['id'],$x['source_id']],$s['items']);
         $now=array_map(static fn($x)=>[$x['id'],$x['source_id']],$p['items']??[]);
-        if(empty($p['ready'])||$old!==$now)wp_die('WordPress-Bestand geaendert; keine Fortsetzung.');
+        if(empty($p['ready'])||$old!==$now)
+            throw new RuntimeException('WordPress-Seiten weichen vom gespeicherten Veroeffentlichungsauftrag ab.');
         $s['status']='WRITING';$s['error']='';update_option(self::STATE,$s,false);
+    }
+    public static function resume():void {
+        self::authorized();check_admin_referer('robotik_v65_publish_resume');
+        try{self::resumeSaved();}catch(Throwable $e){wp_die(esc_html($e->getMessage()));}
         self::redirect();
     }
     public static function advance():array {
