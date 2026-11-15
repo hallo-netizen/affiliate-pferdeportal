@@ -1,0 +1,823 @@
+{
+  "version": "W17_20261115",
+  "status": "KANDIDATEN_FUER_ZENTRALES_FACHREGISTER_KEIN_WORDPRESS_IMPORT",
+  "source_set": {
+    "kaercher": "https://www.kaercher.com/de/de/professional/produkte/wasserrecycling-c231",
+    "alfa": "https://www.alfalaval.com/de/products/process-solutions/brewery-solutions/cip-modules/cip-station/",
+    "knick": "https://www.knick-international.com/de/prozessanalytik/branchenloesungen/ueberwachung-von-cip-sip-prozessen/",
+    "merck": "https://www.merckmillipore.com/DE/de/products/water-purification/type-1/milli-q-iq-7003-7005-7010-7015/sPWb.qB.epcAAAFmBrUSP0Vj%2Cnav",
+    "hyg": "https://www.hygromatik.com/de/wasseraufbereitung",
+    "condair": "https://www.condair.de/de/unternehmen/nachrichten/condair-vita-neues-system-fur-die-direkt-raumluftbefeuchtung",
+    "decker": "https://decker-vt.de/produkte/ionenaustauscheranlage/",
+    "agw": "https://www.agw.de/anlagenbau/recyclingverfahren/",
+    "enviro": "https://www.envirofalk.com/produkte/greenpure-ptx/",
+    "sewerin": "https://www.sewerin.com/produkte/wasser",
+    "gestra": "https://www.gestra.com/global/de-DE/products/system-and-packaged-solutions/condensate-return-unit",
+    "spirax": "https://ebooks.spiraxsarco.com/view/77532886/22/",
+    "endress": "https://www.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht",
+    "toc": "https://www.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht/SAK-CSB-TOC-Analysatoren",
+    "sludge": "https://www.de.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht/schlammspiegelmessung",
+    "nutrient": "https://www.de.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht/Analysator-Ammonium-Nitrat-Phosphat-Gesamtphosphor",
+    "panel": "https://www.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht/trinkwasserpanel-chlor",
+    "huber": "https://www.huber-se.com/de-de/anwendungen-loesungen/detail/membran-belebungsverfahren/",
+    "huberheat": "https://www.huber-se.com/de-de/produkte/detail/huber-abwasserwaermetauscher-rowin/",
+    "hubersand": "https://www.huber-se.com/de-de/anwendungen-loesungen/detail/sand-fett-abscheidung/",
+    "alma": "https://www.almawatech.com/alma-oxi-uv/",
+    "fraunhofer": "https://www.igb.fraunhofer.de/de/forschung/greentech-solutions/wasser-abwasser/advanced-oxidation-processes-aop.html"
+  },
+  "counts": {
+    "new_product_labels": 28,
+    "articles_per_category_min": 3,
+    "proposed_categories": 28,
+    "proposed_ideas": 84
+  },
+  "items": [
+    {
+      "name": "Fahrzeugwaschwasser-Recyclinganlage",
+      "fachfeld": "Wasserwiederverwendung",
+      "funktionen": [
+        "wiederverwenden",
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "abwasser",
+        "brauchwasser"
+      ],
+      "einsatzfelder": [
+        "kleingewerbe",
+        "industrie"
+      ],
+      "zielgruppen": [
+        "kleinbetrieb",
+        "industrie"
+      ],
+      "source_url": "https://www.kaercher.com/de/de/professional/produkte/wasserrecycling-c231",
+      "vorgeschlagene_kategorie": "Wasserrecycling im Waschbetrieb",
+      "artikelideen": [
+        "Waschwasser-Recyclinganlage nach Waschplatzgröße auswählen",
+        "Kreislaufwasser und Frischwasser im Waschbetrieb trennen",
+        "Absetzbecken und Filter im Waschwasser-Recycling planen"
+      ],
+      "abgrenzung": "Nicht W4 Grauwasseranlage: Waschwasser aus Fahrzeugwäsche hat eigene Schmutzfracht.",
+      "status": "forschungs_kandidat",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Waschwasser-Hydrozyklon",
+      "fachfeld": "Mechanische Abscheidung",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "abwasser"
+      ],
+      "einsatzfelder": [
+        "kleingewerbe",
+        "industrie"
+      ],
+      "zielgruppen": [
+        "kleinbetrieb",
+        "industrie"
+      ],
+      "source_url": "https://www.kaercher.com/de/de/professional/produkte/wasserrecycling-c231",
+      "vorgeschlagene_kategorie": "Zyklonabscheidung",
+      "artikelideen": [
+        "Hydrozyklon nach Partikelgröße und Durchfluss auswählen",
+        "Druckverlust und Abscheidewirkung bei Waschwasser vergleichen",
+        "Hydrozyklon von Sandfilter und Absetzbecken unterscheiden"
+      ],
+      "abgrenzung": "Teil der Waschwasser-Recyclinganlage; eigenständige Produktseite nur bei tatsächlichem Gerätekauf.",
+      "status": "intent_grenzfall",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "CIP-Reinigungsstation",
+      "fachfeld": "Prozessreinigung",
+      "funktionen": [
+        "reinigen",
+        "steuern"
+      ],
+      "wasserarten": [
+        "prozesswasser"
+      ],
+      "einsatzfelder": [
+        "gastro_lebensmittel",
+        "industrie"
+      ],
+      "zielgruppen": [
+        "kleinbetrieb",
+        "industrie"
+      ],
+      "source_url": "https://www.alfalaval.com/de/products/process-solutions/brewery-solutions/cip-modules/cip-station/",
+      "vorgeschlagene_kategorie": "Reinigungskreislauf",
+      "artikelideen": [
+        "Ein- und Mehrtank-CIP-Stationen vergleichen",
+        "Wasser- und Reinigungsmedienrückführung in CIP planen",
+        "Temperatur und Durchfluss in einer CIP-Reinigungsstation überwachen"
+      ],
+      "abgrenzung": "W16 Brauwassertechnik betrifft Wasserbereitung, nicht Reinigung der verrohrten Produktionsanlage.",
+      "status": "forschungs_kandidat",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "CIP-Leitfähigkeitsmesssystem",
+      "fachfeld": "Prozessreinigung",
+      "funktionen": [
+        "messen",
+        "steuern"
+      ],
+      "wasserarten": [
+        "prozesswasser"
+      ],
+      "einsatzfelder": [
+        "gastro_lebensmittel",
+        "industrie"
+      ],
+      "zielgruppen": [
+        "kleinbetrieb",
+        "industrie"
+      ],
+      "source_url": "https://www.knick-international.com/de/prozessanalytik/branchenloesungen/ueberwachung-von-cip-sip-prozessen/",
+      "vorgeschlagene_kategorie": "Spülmedienüberwachung",
+      "artikelideen": [
+        "CIP-Leitfähigkeitsmessung zur Phasentrennung einsetzen",
+        "Messsonde für wechselnde Temperatur und aggressive Medien auswählen",
+        "Leitfähigkeit zur Reinigungsmittelkonzentration nutzen"
+      ],
+      "abgrenzung": "W12 Leitfähigkeitsmessgerät und W14 Inline-Analytik nahe, eigene Funktion/Intent offen.",
+      "status": "intent_grenzfall",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Labor-Reinstwasseranlage Typ 1",
+      "fachfeld": "Laborwassertechnik",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "prozesswasser"
+      ],
+      "einsatzfelder": [
+        "labor"
+      ],
+      "zielgruppen": [
+        "kleinbetrieb",
+        "industrie"
+      ],
+      "source_url": "https://www.merckmillipore.com/DE/de/products/water-purification/type-1/milli-q-iq-7003-7005-7010-7015/sPWb.qB.epcAAAFmBrUSP0Vj%2Cnav",
+      "vorgeschlagene_kategorie": "Laborwasserqualität",
+      "artikelideen": [
+        "Typ-1-Reinstwasseranlage nach täglichem Bedarf wählen",
+        "UV und Endfiltration von Vorbehandlung unterscheiden",
+        "Wasserentnahme und Qualität für Analytik absichern"
+      ],
+      "abgrenzung": "W4 gewerbliche Umkehrosmose und EDI sind Vorbehandlung, Labor-Typ-1-Wasser ist spezifisches Gesamtsystem.",
+      "status": "forschungs_kandidat",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Labor-Reinwasseranlage Typ 2",
+      "fachfeld": "Laborwassertechnik",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "prozesswasser"
+      ],
+      "einsatzfelder": [
+        "labor"
+      ],
+      "zielgruppen": [
+        "kleinbetrieb",
+        "industrie"
+      ],
+      "source_url": "https://www.merckmillipore.com/DE/de/products/water-purification/type-1/milli-q-iq-7003-7005-7010-7015/sPWb.qB.epcAAAFmBrUSP0Vj%2Cnav",
+      "vorgeschlagene_kategorie": "Reinwasserstufen",
+      "artikelideen": [
+        "Typ-2-Reinwasseranlage nach Anwendung auswählen",
+        "Typ-2-Reinwasser gegenüber Typ 1 abgrenzen",
+        "Vorratsspeicher und Entnahme einer Typ-2-Anlage planen"
+      ],
+      "abgrenzung": "Integrierte Typ-1-/Typ-2-Systeme vorhanden; eigenständige SEO-Endseite noch ungeklärt.",
+      "status": "intent_grenzfall",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Luftbefeuchter-Wasseraufbereitungsanlage",
+      "fachfeld": "Gebäudewassertechnik",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "trinkwasser",
+        "prozesswasser"
+      ],
+      "einsatzfelder": [
+        "kleingewerbe",
+        "industrie"
+      ],
+      "zielgruppen": [
+        "kleinbetrieb",
+        "industrie"
+      ],
+      "source_url": "https://www.hygromatik.com/de/wasseraufbereitung",
+      "vorgeschlagene_kategorie": "Befeuchtungswasser behandeln",
+      "artikelideen": [
+        "Enthärtung oder Umkehrosmose für Befeuchtungswasser vergleichen",
+        "Anforderungen an Restleitfähigkeit beim Dampfbefeuchter einordnen",
+        "Wasseraufbereitung und Kalkablagerungen im Befeuchtungssystem bewerten"
+      ],
+      "abgrenzung": "Nicht einfach neue RO-/Enthärtungsseite nach Anwendung, funktionale Überschneidung sehr hoch.",
+      "status": "intent_grenzfall",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Hochdruckdüsen-Luftbefeuchtungssystem",
+      "fachfeld": "Gebäudewassertechnik",
+      "funktionen": [
+        "verteilen",
+        "steuern"
+      ],
+      "wasserarten": [
+        "prozesswasser"
+      ],
+      "einsatzfelder": [
+        "kleingewerbe",
+        "industrie"
+      ],
+      "zielgruppen": [
+        "kleinbetrieb",
+        "industrie"
+      ],
+      "source_url": "https://www.condair.de/de/unternehmen/nachrichten/condair-vita-neues-system-fur-die-direkt-raumluftbefeuchtung",
+      "vorgeschlagene_kategorie": "Wasserzerstäubung",
+      "artikelideen": [
+        "Hochdruckdüsen-System und Dampfbefeuchter vergleichen",
+        "Hygienische Wasserbereitstellung für Wasserzerstäubung beurteilen",
+        "Düsenleistung und digitale Überwachung kombinieren"
+      ],
+      "abgrenzung": "Berührt Gebäudeklima, eigene Wassertechnikkomponente fachlich abgrenzen.",
+      "status": "intent_grenzfall",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Galvanik-Spülwasser-Ionenaustauscheranlage",
+      "fachfeld": "Industrielles Wasserrecycling",
+      "funktionen": [
+        "aufbereiten",
+        "wiederverwenden"
+      ],
+      "wasserarten": [
+        "prozesswasser"
+      ],
+      "einsatzfelder": [
+        "industrie"
+      ],
+      "zielgruppen": [
+        "industrie"
+      ],
+      "source_url": "https://decker-vt.de/produkte/ionenaustauscheranlage/",
+      "vorgeschlagene_kategorie": "Spülwasserkreislauf",
+      "artikelideen": [
+        "Ionenaustauscheranlage nach Spülwassermenge dimensionieren",
+        "Kationen- und Anionenaustauscher im Spülwasserkreislauf unterscheiden",
+        "Regeneration und Reinwasserqualität überwachen"
+      ],
+      "abgrenzung": "W4 Elektro-Deionisation funktioniert anders; W14 Industrie-Kreislaufkomponenten getrennt prüfen.",
+      "status": "forschungs_kandidat",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Galvanik-Metallrückgewinnungsanlage",
+      "fachfeld": "Industrielles Wasserrecycling",
+      "funktionen": [
+        "aufbereiten",
+        "wiederverwenden"
+      ],
+      "wasserarten": [
+        "prozesswasser",
+        "abwasser"
+      ],
+      "einsatzfelder": [
+        "industrie"
+      ],
+      "zielgruppen": [
+        "industrie"
+      ],
+      "source_url": "https://www.agw.de/anlagenbau/recyclingverfahren/",
+      "vorgeschlagene_kategorie": "Metallrückgewinnung",
+      "artikelideen": [
+        "Selektive Metallrückgewinnung aus Spülwasser beurteilen",
+        "Wertstoffrückgewinnung und reine Vollentsalzung abgrenzen",
+        "Konzentratbildung und Kreislaufführung zusammen planen"
+      ],
+      "abgrenzung": "Ionenaustauscher kann Teilkomponente sein; eigene Funktion Wertstoffrückgewinnung.",
+      "status": "forschungs_kandidat",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Wasserstoffelektrolyse-Reinstwasseranlage",
+      "fachfeld": "Industrielle Wasseraufbereitung",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "prozesswasser"
+      ],
+      "einsatzfelder": [
+        "industrie"
+      ],
+      "zielgruppen": [
+        "industrie"
+      ],
+      "source_url": "https://www.envirofalk.com/produkte/greenpure-ptx/",
+      "vorgeschlagene_kategorie": "Speisewasser für Elektrolyse",
+      "artikelideen": [
+        "Leitfähigkeitsanforderung von Elektrolyse-Speisewasser einordnen",
+        "RO und EDI für Wasserstoffelektrolyse kombinieren",
+        "Pufferung und Qualitätsüberwachung der Reinstwasseranlage planen"
+      ],
+      "abgrenzung": "W4 gewerbliche Osmose / EDI; ein anderer Käufer allein rechtfertigt keine weitere Produktseite.",
+      "status": "intent_grenzfall",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Akustisches Wasserleckortungsgerät",
+      "fachfeld": "Leckortung",
+      "funktionen": [
+        "messen",
+        "schuetzen"
+      ],
+      "wasserarten": [
+        "trinkwasser"
+      ],
+      "einsatzfelder": [
+        "haus",
+        "kommune"
+      ],
+      "zielgruppen": [
+        "privat",
+        "kleinbetrieb",
+        "kommune"
+      ],
+      "source_url": "https://www.sewerin.com/produkte/wasser",
+      "vorgeschlagene_kategorie": "Akustische Leckortung",
+      "artikelideen": [
+        "Wasserleckortungsgerät für Innenraum und Erdleitung wählen",
+        "Geräuschfilter und Bodenmikrofone vergleichen",
+        "Messung bei Leitungen aus Kunststoff und Metall beurteilen"
+      ],
+      "abgrenzung": "W12 Leckageschutzventil stellt Wasser ab, ortet aber Leckstelle nicht.",
+      "status": "forschungs_kandidat",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Wasserleck-Korrelator",
+      "fachfeld": "Leckortung",
+      "funktionen": [
+        "messen",
+        "schuetzen"
+      ],
+      "wasserarten": [
+        "trinkwasser"
+      ],
+      "einsatzfelder": [
+        "kommune",
+        "kleingewerbe"
+      ],
+      "zielgruppen": [
+        "kleinbetrieb",
+        "kommune"
+      ],
+      "source_url": "https://www.sewerin.com/produkte/wasser",
+      "vorgeschlagene_kategorie": "Korrelationsmessung",
+      "artikelideen": [
+        "Korrelator für erdverlegte Wasserleitungen auswählen",
+        "Leitungsmaterial und Sensorabstand bei Korrelation berücksichtigen",
+        "Korrelator gegenüber akustischem Horchgerät abgrenzen"
+      ],
+      "abgrenzung": "Anderes Messverfahren; unter Wasserleckortung eigenständige kaufbare Gerätefamilie, SEO-Intent offen.",
+      "status": "intent_grenzfall",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Wasserleck-Geräuschlogger",
+      "fachfeld": "Leckortung",
+      "funktionen": [
+        "messen",
+        "steuern"
+      ],
+      "wasserarten": [
+        "trinkwasser"
+      ],
+      "einsatzfelder": [
+        "kommune"
+      ],
+      "zielgruppen": [
+        "kommune",
+        "kleinbetrieb"
+      ],
+      "source_url": "https://www.sewerin.com/produkte/wasser",
+      "vorgeschlagene_kategorie": "Dauerhafte Lecküberwachung",
+      "artikelideen": [
+        "Geräuschlogger für Wasserrohrnetze verteilen",
+        "Loggermessung und einmalige akustische Lecksuche unterscheiden",
+        "Übertragungsintervalle und Alarmgrenzen für Leckgeräuschlogger wählen"
+      ],
+      "abgrenzung": "Messung erfolgt kontinuierlich; nicht identisch mit Hand-Leckortungsgerät.",
+      "status": "forschungs_kandidat",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Wasserrohr-Leitungsortungsgerät",
+      "fachfeld": "Leitungsortung",
+      "funktionen": [
+        "messen"
+      ],
+      "wasserarten": [
+        "trinkwasser"
+      ],
+      "einsatzfelder": [
+        "haus",
+        "kommune"
+      ],
+      "zielgruppen": [
+        "kleinbetrieb",
+        "kommune"
+      ],
+      "source_url": "https://www.sewerin.com/produkte/wasser",
+      "vorgeschlagene_kategorie": "Rohrleitungsortung",
+      "artikelideen": [
+        "Nichtmetallische Leitungen ohne Aufgraben lokalisieren",
+        "Akustische und elektromagnetische Leitungsortung unterscheiden",
+        "Ortungsgerät zur Leitungsdokumentation verwenden"
+      ],
+      "abgrenzung": "Funktion Lage der Leitung, nicht Austrittsstelle des Wassers; Abgrenzung zu Elektrik/Ortung.",
+      "status": "forschungs_kandidat",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Kondensatrückspeiseanlage",
+      "fachfeld": "Dampf- und Kesselwassertechnik",
+      "funktionen": [
+        "wiederverwenden",
+        "foerdern"
+      ],
+      "wasserarten": [
+        "prozesswasser"
+      ],
+      "einsatzfelder": [
+        "industrie"
+      ],
+      "zielgruppen": [
+        "industrie"
+      ],
+      "source_url": "https://www.gestra.com/global/de-DE/products/system-and-packaged-solutions/condensate-return-unit",
+      "vorgeschlagene_kategorie": "Kondensatrückführung",
+      "artikelideen": [
+        "Kondensatrückspeiseanlage nach Rücklaufmenge auslegen",
+        "Kondensatbehälter und Rückspeisepumpe abstimmen",
+        "Wärmeverluste bei der Kondensatrückführung verringern"
+      ],
+      "abgrenzung": "Nicht W12 Duschwasser-Wärmetauscher: Rückführung von Dampfkondensat.",
+      "status": "forschungs_kandidat",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Kesselspeisewasser-Entgaser",
+      "fachfeld": "Dampf- und Kesselwassertechnik",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "prozesswasser"
+      ],
+      "einsatzfelder": [
+        "industrie"
+      ],
+      "zielgruppen": [
+        "industrie"
+      ],
+      "source_url": "https://ebooks.spiraxsarco.com/view/77532886/22/",
+      "vorgeschlagene_kategorie": "Entgasung von Speisewasser",
+      "artikelideen": [
+        "Thermischen Kesselwasserentgaser und Membranentgasung vergleichen",
+        "Sauerstoffgehalt und Korrosionsschutz im Speisewasser betrachten",
+        "Entgasung und Kondensat-Rückführung sinnvoll kombinieren"
+      ],
+      "abgrenzung": "W16 Brauwasserentgasung dient anderem Wassermedium und Prozess; funktionale Überschneidung möglich.",
+      "status": "intent_grenzfall",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Online-TOC-Wasseranalysator",
+      "fachfeld": "Wasseranalytik",
+      "funktionen": [
+        "messen"
+      ],
+      "wasserarten": [
+        "prozesswasser",
+        "abwasser"
+      ],
+      "einsatzfelder": [
+        "industrie",
+        "kommune"
+      ],
+      "zielgruppen": [
+        "industrie",
+        "kommune"
+      ],
+      "source_url": "https://www.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht/SAK-CSB-TOC-Analysatoren",
+      "vorgeschlagene_kategorie": "Organischen Kohlenstoff messen",
+      "artikelideen": [
+        "TOC-Onlineanalysator für Prozesswasser auswählen",
+        "TOC und CSB als unterschiedliche Belastungskennzahlen vergleichen",
+        "Probeneinspeisung und Wartung einer TOC-Messstelle einplanen"
+      ],
+      "abgrenzung": "W14 CSB-Onlineanalysator misst anderen Parameter; eigene technische Messfunktion.",
+      "status": "forschungs_kandidat",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Schlammspiegel-Sensor",
+      "fachfeld": "Wasseranalytik",
+      "funktionen": [
+        "messen"
+      ],
+      "wasserarten": [
+        "abwasser"
+      ],
+      "einsatzfelder": [
+        "kommune",
+        "industrie"
+      ],
+      "zielgruppen": [
+        "kommune",
+        "industrie"
+      ],
+      "source_url": "https://www.de.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht/schlammspiegelmessung",
+      "vorgeschlagene_kategorie": "Schlammhöhe erfassen",
+      "artikelideen": [
+        "Ultraschallsensor zur Schlammspiegelmessung auswählen",
+        "Schlammspiegel und Trübungsmessung unterscheiden",
+        "Sensorreinigung und Einbauort im Nachklärbecken planen"
+      ],
+      "abgrenzung": "W14 Pegel- und Trübungssensoren messen andere Größen.",
+      "status": "forschungs_kandidat",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Ammonium-Onlineanalysator",
+      "fachfeld": "Wasseranalytik",
+      "funktionen": [
+        "messen"
+      ],
+      "wasserarten": [
+        "abwasser"
+      ],
+      "einsatzfelder": [
+        "kommune",
+        "industrie"
+      ],
+      "zielgruppen": [
+        "kommune",
+        "industrie"
+      ],
+      "source_url": "https://www.de.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht/Analysator-Ammonium-Nitrat-Phosphat-Gesamtphosphor",
+      "vorgeschlagene_kategorie": "Stickstoffverbindungen messen",
+      "artikelideen": [
+        "Ammonium-Onlineanalysator mit Ionenselektivelektrode vergleichen",
+        "Reagenzien und Probenaufbereitung bei Ammoniummessung einordnen",
+        "Onlinewerte zur Belüftungsregelung einer Kläranlage verwenden"
+      ],
+      "abgrenzung": "W14 Nitrat-Wasseranalysator misst andere Nährstoffkomponente.",
+      "status": "forschungs_kandidat",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Phosphat-Onlineanalysator",
+      "fachfeld": "Wasseranalytik",
+      "funktionen": [
+        "messen"
+      ],
+      "wasserarten": [
+        "abwasser"
+      ],
+      "einsatzfelder": [
+        "kommune",
+        "industrie"
+      ],
+      "zielgruppen": [
+        "kommune",
+        "industrie"
+      ],
+      "source_url": "https://www.de.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht/Analysator-Ammonium-Nitrat-Phosphat-Gesamtphosphor",
+      "vorgeschlagene_kategorie": "Phosphatüberwachung",
+      "artikelideen": [
+        "Phosphat-Onlineanalysator für Kläranlagen auswählen",
+        "Kolorimetrische Phosphatmessung gegenüber Sensorsystemen vergleichen",
+        "Phosphatwerte zur Fällmitteldosierung nutzen"
+      ],
+      "abgrenzung": "Von W14 Nitratanalysator und W4 Photometer durch Onlineprozess getrennt.",
+      "status": "forschungs_kandidat",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Redox-Messsensor",
+      "fachfeld": "Wasseranalytik",
+      "funktionen": [
+        "messen"
+      ],
+      "wasserarten": [
+        "trinkwasser",
+        "prozesswasser"
+      ],
+      "einsatzfelder": [
+        "kleingewerbe",
+        "industrie"
+      ],
+      "zielgruppen": [
+        "kleinbetrieb",
+        "industrie"
+      ],
+      "source_url": "https://www.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht",
+      "vorgeschlagene_kategorie": "Oxidations-Reduktionspotential",
+      "artikelideen": [
+        "Redoxsensor und pH-Sensor funktional vergleichen",
+        "Referenzelektrode und Kalibrierung bei Redoxmessung beurteilen",
+        "Redoxpotential für Prozesssteuerung einordnen"
+      ],
+      "abgrenzung": "Nicht mit W4 pH-Gerät identisch.",
+      "status": "forschungs_kandidat",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Trinkwasser-Multiparameterpanel",
+      "fachfeld": "Wasseranalytik",
+      "funktionen": [
+        "messen"
+      ],
+      "wasserarten": [
+        "trinkwasser"
+      ],
+      "einsatzfelder": [
+        "kommune",
+        "industrie"
+      ],
+      "zielgruppen": [
+        "kommune",
+        "industrie"
+      ],
+      "source_url": "https://www.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht/trinkwasserpanel-chlor",
+      "vorgeschlagene_kategorie": "Mehrere Trinkwasserwerte messen",
+      "artikelideen": [
+        "Multiparameterpanel für Chlor pH und Trübung kombinieren",
+        "Vormontierte Trinkwasser-Messstrecke gegenüber Einzelgeräten prüfen",
+        "Probenverbrauch und Kalibrierung einer Messpanelanlage bewerten"
+      ],
+      "abgrenzung": "W4 Wasser-Multimessgerät und W4 Onlinewasseranalysestation technisch sehr nah; kein automatischer neuer Owner.",
+      "status": "intent_grenzfall",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Membranbioreaktor-Kompaktkläranlage",
+      "fachfeld": "Abwassertechnik",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "abwasser"
+      ],
+      "einsatzfelder": [
+        "industrie",
+        "kommune"
+      ],
+      "zielgruppen": [
+        "kommune",
+        "industrie"
+      ],
+      "source_url": "https://www.huber-se.com/de-de/anwendungen-loesungen/detail/membran-belebungsverfahren/",
+      "vorgeschlagene_kategorie": "Membranbiologische Abwasserbehandlung",
+      "artikelideen": [
+        "MBR-Kompaktkläranlage gegenüber MBBR-Bioreaktor unterscheiden",
+        "Membranfläche und biologische Reinigung im MBR kombinieren",
+        "Membranreinigung und Permeatqualität im MBR beurteilen"
+      ],
+      "abgrenzung": "W14 MBBR anders; W4 Kleinkläranlage allgemeiner, fachliche Einzel-Intentprüfung offen.",
+      "status": "forschungs_kandidat",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Kommunaler Abwasserwärmetauscher",
+      "fachfeld": "Abwasserwärmenutzung",
+      "funktionen": [
+        "waerme_uebertragen"
+      ],
+      "wasserarten": [
+        "abwasser"
+      ],
+      "einsatzfelder": [
+        "kommune",
+        "industrie"
+      ],
+      "zielgruppen": [
+        "kommune",
+        "industrie"
+      ],
+      "source_url": "https://www.huber-se.com/de-de/produkte/detail/huber-abwasserwaermetauscher-rowin/",
+      "vorgeschlagene_kategorie": "Wärme aus Abwasser zurückgewinnen",
+      "artikelideen": [
+        "Abwasserwärmetauscher im Kanal oder Nebenstrom vergleichen",
+        "Verschmutzung und Selbstreinigung eines Abwasserwärmetauschers beurteilen",
+        "Wärmeentzug und Wärmepumpe aufeinander abstimmen"
+      ],
+      "abgrenzung": "W12 Duschwasser-Wärmetauscher ist kleinteiliger Gebäude-/Duschanwendungsfall; fachlich nah, SEO offen.",
+      "status": "intent_grenzfall",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Abwasser-Sandklassierer",
+      "fachfeld": "Abwassertechnik",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "abwasser"
+      ],
+      "einsatzfelder": [
+        "kommune",
+        "industrie"
+      ],
+      "zielgruppen": [
+        "kommune",
+        "industrie"
+      ],
+      "source_url": "https://www.huber-se.com/de-de/anwendungen-loesungen/detail/sand-fett-abscheidung/",
+      "vorgeschlagene_kategorie": "Abgetrennten Sand reinigen",
+      "artikelideen": [
+        "Sandklassierer und Sandfang als zwei Funktionsstufen unterscheiden",
+        "Wassergehalt und Austrag des klassierten Sands beurteilen",
+        "Sandfangzulauf und Klassierleistung abstimmen"
+      ],
+      "abgrenzung": "W14 Lamellenklärer und Abwasser-Rechenanlage anders, Sandklassierer eigenständiges Aggregat.",
+      "status": "forschungs_kandidat",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "UV-H2O2-Oxidationsanlage",
+      "fachfeld": "Spezialwasseraufbereitung",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "prozesswasser",
+        "abwasser"
+      ],
+      "einsatzfelder": [
+        "industrie",
+        "kommune"
+      ],
+      "zielgruppen": [
+        "industrie",
+        "kommune"
+      ],
+      "source_url": "https://www.almawatech.com/alma-oxi-uv/",
+      "vorgeschlagene_kategorie": "Mikroschadstoffe oxidieren",
+      "artikelideen": [
+        "UV-Wasserstoffperoxid-Oxidation gegenüber UV-Desinfektion abgrenzen",
+        "Vorbehandlung und UV-Durchlässigkeit für AOP bewerten",
+        "Oxidationsleistung und Nachbehandlung einer AOP-Anlage prüfen"
+      ],
+      "abgrenzung": "W4 UV-Desinfektionsanlage tötet Mikroorganismen; AOP baut bestimmte Stoffe chemisch ab, fachlich unterschiedlicher Zweck.",
+      "status": "forschungs_kandidat",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "172-nm-Photolyse-Wasserreaktor",
+      "fachfeld": "Neue Wasserverfahren",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "abwasser",
+        "prozesswasser"
+      ],
+      "einsatzfelder": [
+        "industrie"
+      ],
+      "zielgruppen": [
+        "industrie"
+      ],
+      "source_url": "https://www.igb.fraunhofer.de/de/forschung/greentech-solutions/wasser-abwasser/advanced-oxidation-processes-aop.html",
+      "vorgeschlagene_kategorie": "Photolytische Spurenstoffoxidation",
+      "artikelideen": [
+        "UV-Photolyse mit Wasserstoffperoxid-Verfahren vergleichen",
+        "172-nm-Reaktor als Prototyp und nicht als Serienanlage einordnen",
+        "Energieeintrag und Abbau von Spurenstoffen bei Photolyse bewerten"
+      ],
+      "abgrenzung": "Fraunhofer beschreibt Forschung und Technikumsmaßstab, nicht frei kaufbaren Standardartikel.",
+      "status": "forschungsstand",
+      "technikstand": "prototyp"
+    }
+  ]
+}
