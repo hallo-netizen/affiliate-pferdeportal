@@ -1,0 +1,769 @@
+{
+  "schema_version": "W17_20261115",
+  "status": "GLOSSAR_UND_ANBIETER_RUBRIK_VORSCHLAEGE_KEINE_WP_SEITEN",
+  "counts": {
+    "glossary_terms": 39,
+    "provider_category_types": 16
+  },
+  "glossary": [
+    {
+      "name": "Cleaning in Place",
+      "definition": "Reinigung von Leitungen, Tanks und Anlagen ohne deren vollständige Demontage, meist durch geregelte Spülkreisläufe.",
+      "source_url": "https://www.alfalaval.com/de/products/process-solutions/brewery-solutions/cip-modules/cip-station/",
+      "functions": [
+        "reinigen",
+        "steuern"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "synonyms": [
+        "CIP"
+      ]
+    },
+    {
+      "name": "Spülphase",
+      "definition": "Abschnitt einer Anlagenreinigung, in dem Wasser oder Reinigungslösung durch die zu reinigende Anlage geführt wird.",
+      "source_url": "https://www.alfalaval.com/de/products/process-solutions/brewery-solutions/cip-modules/cip-station/",
+      "functions": [
+        "reinigen"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "Wasserrecycling",
+      "definition": "Aufbereitung bereits verwendeten Wassers mit erneuter Nutzung im gleichen oder einem anderen geeigneten Prozess.",
+      "source_url": "https://www.kaercher.com/de/de/professional/produkte/wasserrecycling-c231",
+      "functions": [
+        "wiederverwenden",
+        "aufbereiten"
+      ],
+      "water_types": [
+        "brauchwasser",
+        "abwasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "Hydrozyklon",
+      "definition": "Abscheider, der Teilchen mithilfe einer rotierenden Strömung aus Wasser trennt.",
+      "source_url": "https://www.kaercher.com/de/de/professional/produkte/wasserrecycling-c231",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "Ultrafiltration",
+      "definition": "Membranfiltration, die auch sehr kleine Partikel und Biomasse zurückhalten kann.",
+      "source_url": "https://www.huber-se.com/de-de/anwendungen-loesungen/detail/membran-belebungsverfahren/",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser",
+        "prozesswasser"
+      ],
+      "synonyms": [
+        "UF"
+      ]
+    },
+    {
+      "name": "Umkehrosmose",
+      "definition": "Membranverfahren, bei dem Wasser unter Druck von vielen gelösten Stoffen getrennt wird.",
+      "source_url": "https://www.merckmillipore.com/DE/de/products/water-purification/type-1/milli-q-iq-7003-7005-7010-7015/sPWb.qB.epcAAAFmBrUSP0Vj%2Cnav",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "trinkwasser",
+        "prozesswasser"
+      ],
+      "synonyms": [
+        "RO"
+      ]
+    },
+    {
+      "name": "Elektrodeionisation",
+      "definition": "Elektrisch unterstützte Entionisierung zur weiteren Reinigung bereits vorbehandelten Wassers.",
+      "source_url": "https://www.merckmillipore.com/DE/de/products/water-purification/type-1/milli-q-iq-7003-7005-7010-7015/sPWb.qB.epcAAAFmBrUSP0Vj%2Cnav",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "synonyms": [
+        "EDI"
+      ]
+    },
+    {
+      "name": "Ionenaustausch",
+      "definition": "Verfahren zur Entfernung gelöster Ionen mithilfe geeigneter Austauscherharze.",
+      "source_url": "https://decker-vt.de/produkte/ionenaustauscheranlage/",
+      "functions": [
+        "aufbereiten",
+        "wiederverwenden"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "Laborwasser Typ 1",
+      "definition": "Reinstwasser-Qualitätsstufe für besonders empfindliche Labor- und Analyseverfahren.",
+      "source_url": "https://www.merckmillipore.com/DE/de/products/water-purification/type-1/milli-q-iq-7003-7005-7010-7015/sPWb.qB.epcAAAFmBrUSP0Vj%2Cnav",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "synonyms": [
+        "Typ-1-Reinstwasser"
+      ]
+    },
+    {
+      "name": "Laborwasser Typ 2",
+      "definition": "Reinwasser-Qualitätsstufe für zahlreiche Laboraufgaben und als mögliche Vorstufe für Reinstwasser.",
+      "source_url": "https://www.merckmillipore.com/DE/de/products/water-purification/type-1/milli-q-iq-7003-7005-7010-7015/sPWb.qB.epcAAAFmBrUSP0Vj%2Cnav",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "synonyms": [
+        "Typ-2-Reinwasser"
+      ]
+    },
+    {
+      "name": "Permeat",
+      "definition": "Der Teil eines Wasserstroms, der eine Membran passiert und auf der gereinigten Seite gewonnen wird.",
+      "source_url": "https://www.merckmillipore.com/DE/de/products/water-purification/type-1/milli-q-iq-7003-7005-7010-7015/sPWb.qB.epcAAAFmBrUSP0Vj%2Cnav",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "Konzentrat",
+      "definition": "Der beim Membranverfahren zurückbleibende Wasserstrom mit höherer Konzentration zurückgehaltener Stoffe.",
+      "source_url": "https://www.merckmillipore.com/DE/de/products/water-purification/type-1/milli-q-iq-7003-7005-7010-7015/sPWb.qB.epcAAAFmBrUSP0Vj%2Cnav",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "Membranbioreaktor",
+      "definition": "Abwasseranlage mit biologischer Reinigung und Membrantrennung statt herkömmlicher Nachklärung.",
+      "source_url": "https://www.huber-se.com/de-de/anwendungen-loesungen/detail/membran-belebungsverfahren/",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "synonyms": [
+        "MBR"
+      ]
+    },
+    {
+      "name": "Belebtschlamm",
+      "definition": "Mikroorganismenhaltige Biomasse zur biologischen Behandlung organisch belasteten Abwassers.",
+      "source_url": "https://www.huber-se.com/de-de/anwendungen-loesungen/detail/membran-belebungsverfahren/",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "Bewegtbett-Bioreaktor",
+      "definition": "Biologisches Reinigungsverfahren mit beweglichen Trägerelementen für Mikroorganismen.",
+      "source_url": "https://www.colasit.com/de/produkte/prozessanlagenbau/-aquakulturanlagen/gesamtanlagen-ras/",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "synonyms": [
+        "MBBR"
+      ]
+    },
+    {
+      "name": "Schlammspiegel",
+      "definition": "Grenz- oder Übergangsbereich zwischen sedimentiertem Schlamm und darüber stehendem Wasser im Becken.",
+      "source_url": "https://www.de.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht/schlammspiegelmessung",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "Sandfang",
+      "definition": "Anlagenstufe zur Abscheidung von Sand und mineralischen Partikeln aus Abwasser.",
+      "source_url": "https://www.huber-se.com/de-de/anwendungen-loesungen/detail/sand-fett-abscheidung/",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "Sandklassierer",
+      "definition": "Aggregat zum Abtrennen und Aufbereiten bereits ausgeschiedenen Sands aus Abwasserbehandlungsstufen.",
+      "source_url": "https://www.huber-se.com/de-de/anwendungen-loesungen/detail/sand-fett-abscheidung/",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "Leitfähigkeit",
+      "definition": "Messgröße für die Fähigkeit des Wassers, elektrischen Strom zu leiten; abhängig unter anderem von gelösten Ionen.",
+      "source_url": "https://www.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "trinkwasser",
+        "prozesswasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "pH-Wert",
+      "definition": "Maß für den sauren oder alkalischen Charakter einer wässrigen Lösung.",
+      "source_url": "https://www.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "trinkwasser",
+        "prozesswasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "Redoxpotenzial",
+      "definition": "Elektrisches Potenzial als Kenngröße für Oxidations- und Reduktionsbedingungen im Wasser.",
+      "source_url": "https://www.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "synonyms": [
+        "ORP"
+      ]
+    },
+    {
+      "name": "Trübung",
+      "definition": "Messgröße für die Lichtstreuung durch Schwebstoffe oder andere Teilchen im Wasser.",
+      "source_url": "https://www.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "trinkwasser",
+        "abwasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "TOC",
+      "definition": "Gesamtgehalt an organisch gebundenem Kohlenstoff als Summenparameter der Wasseranalytik.",
+      "source_url": "https://www.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "prozesswasser",
+        "abwasser"
+      ],
+      "synonyms": [
+        "Total Organic Carbon"
+      ]
+    },
+    {
+      "name": "CSB",
+      "definition": "Kenngröße für den chemischen Sauerstoffbedarf zur Bewertung oxidierbarer Wasserinhaltsstoffe.",
+      "source_url": "https://www.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "synonyms": [
+        "Chemischer Sauerstoffbedarf"
+      ]
+    },
+    {
+      "name": "Ammonium",
+      "definition": "Gelöste Stickstoffverbindung, deren Konzentration unter anderem bei der Abwasserbehandlung gemessen wird.",
+      "source_url": "https://www.de.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht/Analysator-Ammonium-Nitrat-Phosphat-Gesamtphosphor",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "synonyms": [
+        "NH4"
+      ]
+    },
+    {
+      "name": "Nitrat",
+      "definition": "Stickstoffverbindung, die als Wasserinhaltsstoff beispielsweise im Grundwasser oder Abwasser bestimmt wird.",
+      "source_url": "https://www.de.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht/Analysator-Ammonium-Nitrat-Phosphat-Gesamtphosphor",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "grundwasser",
+        "abwasser"
+      ],
+      "synonyms": [
+        "NO3"
+      ]
+    },
+    {
+      "name": "Phosphat",
+      "definition": "Phosphorhaltiger Wasserinhaltsstoff, dessen Messung in der Kläranlagentechnik relevant ist.",
+      "source_url": "https://www.de.endress.com/de/messgeraete-fuer-die-prozesstechnik/fluessigkeitsanalyse-produktuebersicht/Analysator-Ammonium-Nitrat-Phosphat-Gesamtphosphor",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "synonyms": [
+        "PO4"
+      ]
+    },
+    {
+      "name": "Flockung",
+      "definition": "Verfahren, bei dem feine Teilchen zu größeren Flocken zusammengeführt werden, um sie besser abtrennen zu können.",
+      "source_url": "https://www.huber-se.com/de-de/anwendungen-loesungen/detail/sand-fett-abscheidung/",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser",
+        "prozesswasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "CIP-Leitfähigkeitsüberwachung",
+      "definition": "Messung der Leitfähigkeit zur Unterscheidung und Kontrolle von Reinigungs- und Spülmedien in CIP-Anlagen.",
+      "source_url": "https://www.knick-international.com/de/prozessanalytik/branchenloesungen/ueberwachung-von-cip-sip-prozessen/",
+      "functions": [
+        "messen",
+        "steuern"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "Erweiterte Oxidation",
+      "definition": "Wasseraufbereitungsverfahren, bei denen besonders reaktive Oxidationsmittel oder Radikale schwer abbaubare Stoffe angreifen.",
+      "source_url": "https://www.igb.fraunhofer.de/de/forschung/greentech-solutions/wasser-abwasser/advanced-oxidation-processes-aop.html",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser",
+        "abwasser"
+      ],
+      "synonyms": [
+        "AOP"
+      ]
+    },
+    {
+      "name": "UV-Photolyse",
+      "definition": "Durch ultraviolettes Licht ausgelöste chemische Umwandlung von Stoffen in Wasser.",
+      "source_url": "https://www.cbp.fraunhofer.de/content/igb/de/forschung/greentech-solutions/wasser-abwasser/photolyse.html",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "synonyms": [
+        "Photolyse"
+      ]
+    },
+    {
+      "name": "Kondensatrückführung",
+      "definition": "Sammeln und erneutes Zuführen von Kondensat aus einer Dampf- oder Wärmeanlage.",
+      "source_url": "https://www.gestra.com/global/de-DE/products/system-and-packaged-solutions/condensate-return-unit",
+      "functions": [
+        "wiederverwenden"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "Kesselspeisewasser",
+      "definition": "Wasser, das einer Dampfkesselanlage zur Erzeugung von Dampf zugeführt wird.",
+      "source_url": "https://ebooks.spiraxsarco.com/view/77532886/22/",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "Speisewasserentgasung",
+      "definition": "Entfernung gelöster Gase aus Kesselspeisewasser, insbesondere zur Verminderung von Korrosionsrisiken.",
+      "source_url": "https://ebooks.spiraxsarco.com/view/77532886/22/",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "Leckagekorrelation",
+      "definition": "Messverfahren zur Ortung von Wasserleitungslecks anhand zeitlicher Zusammenhänge aufgenommener Leckgeräusche.",
+      "source_url": "https://www.sewerin.com/produkte/wasser",
+      "functions": [
+        "messen",
+        "schuetzen"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "Geräuschlogger",
+      "definition": "Messgerät, das über längere Zeit Geräusche in Rohrnetzen erfasst und zur Lecksuche auswertbar macht.",
+      "source_url": "https://www.sewerin.com/produkte/wasser",
+      "functions": [
+        "messen",
+        "steuern"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "Wasserhärte",
+      "definition": "Maß für die im Wasser enthaltenen Erdalkalimetalle, vor allem Calcium und Magnesium.",
+      "source_url": "https://www.hygromatik.com/de/wasseraufbereitung",
+      "functions": [
+        "messen",
+        "aufbereiten"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "Spülwasserkreislauf",
+      "definition": "Technisches System, in dem verbrauchtes Spülwasser aufbereitet und einer erneuten Spülung zugeführt wird.",
+      "source_url": "https://decker-vt.de/produkte/ionenaustauscheranlage/",
+      "functions": [
+        "wiederverwenden"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "synonyms": []
+    },
+    {
+      "name": "Wasserwiederverwendung",
+      "definition": "Erneuter Einsatz geeigneten aufbereiteten Wassers anstelle einer vollständigen Versorgung mit neuem Frischwasser.",
+      "source_url": "https://www.kaercher.com/de/de/professional/produkte/wasserrecycling-c231",
+      "functions": [
+        "wiederverwenden"
+      ],
+      "water_types": [
+        "brauchwasser",
+        "abwasser"
+      ],
+      "synonyms": []
+    }
+  ],
+  "provider_rubrics": [
+    {
+      "name": "Wasseranalyselabor",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "trinkwasser",
+        "grundwasser",
+        "abwasser"
+      ],
+      "audiences": [
+        "kleinbetrieb",
+        "privat"
+      ],
+      "status": "VORSCHLAG_ANBIETERRUBRIK_KEIN_ECHTER_ANBIETER"
+    },
+    {
+      "name": "Brunnenbau und Brunnenservice",
+      "functions": [
+        "wasser_gewinnen"
+      ],
+      "water_types": [
+        "grundwasser"
+      ],
+      "audiences": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "status": "VORSCHLAG_ANBIETERRUBRIK_KEIN_ECHTER_ANBIETER"
+    },
+    {
+      "name": "Pumpenmontage und Wartung",
+      "functions": [
+        "foerdern"
+      ],
+      "water_types": [
+        "brauchwasser",
+        "abwasser"
+      ],
+      "audiences": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "status": "VORSCHLAG_ANBIETERRUBRIK_KEIN_ECHTER_ANBIETER"
+    },
+    {
+      "name": "Trinkwasserinstallation",
+      "functions": [
+        "verteilen",
+        "sichern"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "audiences": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "status": "VORSCHLAG_ANBIETERRUBRIK_KEIN_ECHTER_ANBIETER"
+    },
+    {
+      "name": "Wasserfilter- und Aufbereitungsservice",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "trinkwasser",
+        "prozesswasser"
+      ],
+      "audiences": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "status": "VORSCHLAG_ANBIETERRUBRIK_KEIN_ECHTER_ANBIETER"
+    },
+    {
+      "name": "Bewässerungsplanung und -montage",
+      "functions": [
+        "steuern",
+        "verteilen"
+      ],
+      "water_types": [
+        "brauchwasser",
+        "regenwasser"
+      ],
+      "audiences": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "status": "VORSCHLAG_ANBIETERRUBRIK_KEIN_ECHTER_ANBIETER"
+    },
+    {
+      "name": "Regenwasseranlagen-Fachbetrieb",
+      "functions": [
+        "speichern",
+        "wiederverwenden"
+      ],
+      "water_types": [
+        "regenwasser"
+      ],
+      "audiences": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "status": "VORSCHLAG_ANBIETERRUBRIK_KEIN_ECHTER_ANBIETER"
+    },
+    {
+      "name": "Abwassertechnik und Abscheiderwartung",
+      "functions": [
+        "entsorgen",
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "audiences": [
+        "kleinbetrieb"
+      ],
+      "status": "VORSCHLAG_ANBIETERRUBRIK_KEIN_ECHTER_ANBIETER"
+    },
+    {
+      "name": "Pool- und Teichwassertechnik",
+      "functions": [
+        "aufbereiten",
+        "foerdern"
+      ],
+      "water_types": [
+        "pool_und_teichwasser"
+      ],
+      "audiences": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "status": "VORSCHLAG_ANBIETERRUBRIK_KEIN_ECHTER_ANBIETER"
+    },
+    {
+      "name": "Industrielle Wasseraufbereitung",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "audiences": [
+        "industrie"
+      ],
+      "status": "VORSCHLAG_ANBIETERRUBRIK_KEIN_ECHTER_ANBIETER"
+    },
+    {
+      "name": "Leckortung und Rohrnetzprüfung",
+      "functions": [
+        "messen",
+        "schuetzen"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "audiences": [
+        "kleinbetrieb",
+        "kommune"
+      ],
+      "status": "VORSCHLAG_ANBIETERRUBRIK_KEIN_ECHTER_ANBIETER"
+    },
+    {
+      "name": "CIP- und Hygieneanlagenservice",
+      "functions": [
+        "reinigen",
+        "steuern"
+      ],
+      "water_types": [
+        "prozesswasser"
+      ],
+      "audiences": [
+        "kleinbetrieb",
+        "industrie"
+      ],
+      "status": "VORSCHLAG_ANBIETERRUBRIK_KEIN_ECHTER_ANBIETER"
+    },
+    {
+      "name": "Mobile Wasserversorgung und Notpumpdienst",
+      "functions": [
+        "foerdern",
+        "verteilen"
+      ],
+      "water_types": [
+        "trinkwasser",
+        "abwasser"
+      ],
+      "audiences": [
+        "kleinbetrieb",
+        "kommune"
+      ],
+      "status": "VORSCHLAG_ANBIETERRUBRIK_KEIN_ECHTER_ANBIETER"
+    },
+    {
+      "name": "Mess- und Regeltechnik für Wasseranlagen",
+      "functions": [
+        "messen",
+        "steuern"
+      ],
+      "water_types": [
+        "trinkwasser",
+        "prozesswasser"
+      ],
+      "audiences": [
+        "kleinbetrieb",
+        "industrie"
+      ],
+      "status": "VORSCHLAG_ANBIETERRUBRIK_KEIN_ECHTER_ANBIETER"
+    },
+    {
+      "name": "Wasserrückgewinnung für Gewerbe",
+      "functions": [
+        "wiederverwenden"
+      ],
+      "water_types": [
+        "brauchwasser",
+        "prozesswasser"
+      ],
+      "audiences": [
+        "kleinbetrieb",
+        "industrie"
+      ],
+      "status": "VORSCHLAG_ANBIETERRUBRIK_KEIN_ECHTER_ANBIETER"
+    },
+    {
+      "name": "Gewässer- und Pegelmesstechnik",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "grundwasser",
+        "oberflaechenwasser"
+      ],
+      "audiences": [
+        "kommune"
+      ],
+      "status": "VORSCHLAG_ANBIETERRUBRIK_KEIN_ECHTER_ANBIETER"
+    }
+  ]
+}
