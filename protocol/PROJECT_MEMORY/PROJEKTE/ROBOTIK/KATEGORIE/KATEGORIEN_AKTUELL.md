@@ -1,4 +1,23 @@
-# Robotik – Kategorienkonzept und SEO: fortlaufender Hauptstand V87 (15.11.2026)
+# Robotik – Kategorienkonzept und SEO: fortlaufender Hauptstand V88 (15.11.2026)
+
+## V88 – Plugin 0.4.15: gebündelten DataForSEO-Nachlauf installierbar gemacht (15.11.2026)
+
+**Umgesetzt und lokal getestet, noch nicht im echten WordPress installiert oder kostenpflichtig gestartet.** Bestehende Pluginidentität `robotik-kategorie-workflow` ist unverändert. Die neue ZIP **0.4.15** (143.860 Byte; SHA256 `64a6b9127ce1bfd50bf0dc5db8e20f13a73e65d43617a4958dfc0a70c1661c30`) ist als vollständiges Installationspaket in der **persönlichen Library unter `/robotik/Plugin-Buero/robotik-kategorie-workflow-0.4.15.zip`** gespeichert und in diesem Chat verfügbar. **Wichtige Unterscheidung:** Auf dem GitHub-Arbeitszweig heißt `PLUGIN/CURRENT.zip` noch **0.4.14**, bis dort die Binärdatei separat ersetzt wird. Nicht die 0.4.14 von GitHub als neue Version ausgeben.
+
+**Fertig im bestehenden Plugin:**
+
+- Menü **Robotik Kategorie → SEO-Nachlauf** für eine einzige ausdrückliche Admin-Freigabe mit **0,20 USD** Kostenobergrenze. Kein Start bei Installation/Seitenaufruf, kein Cron.
+- **Auftrag 1:** 532 eindeutige Keywords (47 Überblicksseiten, 157 Robotertypen, 328 Rubriken) in **einem** Google Ads Search Volume Live-Auftrag (Anbieterlimit bis 1.000). Jede vorhandene Original-Owner-ID bleibt im Ergebnis erhalten. Kein Messwert wird als 0 erfunden.
+- **Auftrag 2:** Die 17 vorgesehenen Freizeit-Suchbegriffe in **einem** Labs Google Keyword Ideas Live-Auftrag, maximal 300 neue Ideen. Keine automatischen Seiten/Kategorien aus Anbieter-Ideen.
+- **Alter bezahlter 437er-/38er-Durchlauf serverseitig gesperrt** und nicht länger in der normalen Admin-Oberfläche als Startangebot sichtbar. Alter SEO-Abschlussbericht weiterhin lesbar/exportierbar, gespeicherte DataForSEO-Zugangsdaten unverändert.
+- **13 von 16 bisherigen ZIP-Dateien bytegleich:** bestehender Import, V63/V65/V77/V78/V84-Abschluss, Inventory und Publikation unangetastet. Nur bisherige Hauptdatei, DataForSEO-Zugangsklasse und README geändert; zwei neue Zusatzdateien. Keine Frontend-Änderung, keine neue Pluginidentität oder WordPress-Tabelle.
+- **Tests:** 12/12 PHP-Dateien fehlerfrei; ZIP-Integrität bestanden; alle 532 Owner-Zuordnungen und 17 Freizeitbegriffe geprüft; einmaliger Freigabeklick, zweiter Admin-Tab, simulierte 2 API-Antworten, Kostenrechnung 0,138 USD, fehlende Volumenwerte als unbekannt, Wiederholungsverbot nach Abschluss und Anbieterfehler in simuliertem WordPress **PASS**. Echte Live-Abfragen oder echtes WordPress wurden damit nicht getestet.
+
+**Ein gebündelter WordPress-Schritt für den Nutzer:** Bestehendes Robotik-Kategorieplugin auf **0.4.15** aktualisieren; danach **Robotik Kategorie → SEO-Nachlauf → EINEN SEO-Gesamtlauf starten** inklusive einmaliger ausdrücklicher Gebührenfreigabe bis 0,20 USD; dann **einen** JSON-Gesamtbericht herunterladen und im Chat bereitstellen. Ein einziger SEO-Nachlauf, **keine Wiederholung des alten Imports** und kein zusätzlicher Anbietertest zwischendrin. Im echten Anbieterfall können Preise abweichen; die Abfrage stoppt vor einem weiteren Aufruf, wenn das geplante Budget nicht reicht. Bei Serverfehlern keine automatische Wiederholung.
+
+**Maschinenlesbarer einziger Fachmaster:** `RECHERCHE/PRODUKTE_V2_20261108.json` Revision **24**, der bestehende `seo_nachlauf_v87`-Eintrag enthält nun den Release-Status und die Testergebnisse. Dies bleibt dasselbe fortgeschriebene Dokument – keine neue V88-Abschlussdatei.
+
+---
 
 ## V87 – Preisgeprüfter einmaliger DataForSEO-Nachlauf vorbereitet (15.11.2026)
 
