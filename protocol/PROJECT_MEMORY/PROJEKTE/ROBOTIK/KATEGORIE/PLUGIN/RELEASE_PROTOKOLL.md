@@ -1,5 +1,11 @@
 # Robotik-Pluginbüro – einziges Release-/Prüfprotokoll
 
+## RELEASE AKTUELL 15.11.2026 – 0.4.14 ERSETZT 0.4.13
+- **Installierbarer Installer:** `PLUGIN/CURRENT.zip` = `PLUGIN/VERSIONEN/0.4.14.zip` (233147 Bytes; SHA256 `4ef443b7c04cf3abc1f22ab9fd5d2ce675008f30180ddd46896d8b67bd38daa5`), dieselbe Pluginidentität.
+- **Einmaliger Gesamtnachtrag** im alten Gesamtabschluss-Backend: 16 fachlich geklärte eigene Robotertyp-Seiten mit direkter Veröffentlichung plus 32 flache thematisch individuelle WP-Kategorien, 0 neue Haupt-/Zwischenseiten, 3 Randthemen ausdrücklich nicht als CORE importiert. Alle 16 greifen auf den bestehenden V63-Writer zurück, keine zweite Importmaschine. Alt 227/104/68/64 bleibt bestehen.
+- **GitHub-Actions-Abnahme PASS:** https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43712225606: ZIP, 11 PHP-Dateien, Altfluss und 48er Mock, ohne ID- oder Slug-Doppelung. **WordPress-Liveausführung nicht belegt.** Eine Freigabe im Backend erforderlich; zuvor muss der ursprüngliche Gesamtabschluss tatsächlich als COMPLETE gespeichert sein.
+- Protokoll `V84_GRUNDLAGENFACHABSCHLUSS_UND_ONECLICK_20261115.md`. Alte Downloadhinweise auf 0.4.13 oder 0.4.12 sind veraltet.
+
 ## AKTUELL 15.11.2026 – 0.4.13 löst 0.4.12 ab
 - `PLUGIN/CURRENT.zip` = `PLUGIN/VERSIONEN/0.4.13.zip`, GitHub-Dateikennung `a8149236e98debdb93f6657d9e07447700aecf54`. Das Paket ist PHP- und ZIP-geprüft, kein echter WordPress-Live-PASS.
 - V79 ergänzt **einmalig und ohne neuen Worker** die im vorherigen Sammelablauf vergessene **104er Originalseiten-Veröffentlichung**, bevor die 68 neuen Seiten an die Reihe kommen. Bestehende 227er und 64er Aufgaben bleiben unverändert; keine doppelte Zustimmung, keine Google-Adressen-Sperre. Auch unter 0.4.12 gespeicherte Zwischenzustände werden korrigiert.
