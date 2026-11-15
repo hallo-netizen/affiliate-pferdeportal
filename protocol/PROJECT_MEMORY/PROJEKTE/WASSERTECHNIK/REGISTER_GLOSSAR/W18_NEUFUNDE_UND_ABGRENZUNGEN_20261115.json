@@ -1,0 +1,667 @@
+{
+  "version": "W18_2026-11-15",
+  "state": "RECHERCHE_KEIN_WORDPRESS_IMPORT",
+  "new_products": 17,
+  "new_glossary": 14,
+  "same_owner_instead_of_new": 5,
+  "products": [
+    {
+      "name": "Kamerabasiertes Gewässer-Abflussmesssystem",
+      "fachbereich": "Gewässerüberwachung",
+      "funktionen": [
+        "messen"
+      ],
+      "wasserarten": [
+        "oberflaechenwasser"
+      ],
+      "einsatzorte": [
+        "kommune"
+      ],
+      "zielgruppen": [
+        "kommune"
+      ],
+      "source_url": "https://www.ott.com/de/products/hydrosight?hsLang=de",
+      "artikelkategorie": "Berührungslose Abflussmessung",
+      "artikelideen": [
+        "Kamerabasierte Abflussmessung mit Radarsensoren vergleichen",
+        "Abflussmessung in offenen Gewässern bei Hochwasser bewerten",
+        "Video-Messsystem an schwierigen Messstellen installieren"
+      ],
+      "abgrenzung": "W14 Radar-Wasserstandssensor erfasst Pegel; das Kamerasystem erfasst zusätzlich Oberflächengeschwindigkeit und Abfluss.",
+      "bearbeitungsstand": "recherche_offen"
+    },
+    {
+      "name": "Hydrologischer Einperl-Pegelsensor",
+      "fachbereich": "Gewässerüberwachung",
+      "funktionen": [
+        "messen"
+      ],
+      "wasserarten": [
+        "oberflaechenwasser",
+        "grundwasser"
+      ],
+      "einsatzorte": [
+        "kommune"
+      ],
+      "zielgruppen": [
+        "kommune"
+      ],
+      "source_url": "https://www.ott.com/de/press-release-and-news/ott-cbs-500",
+      "artikelkategorie": "Einperl-Pegeltechnik",
+      "artikelideen": [
+        "Einperl-Pegelsensor und hydrostatische Sonde unterscheiden",
+        "Druckluftleitung und Einperltopf für Pegelmessung wählen",
+        "Wartung des Pegelsensors bei Sedimentbelastung bewerten"
+      ],
+      "abgrenzung": "W14 Radar-Wasserstandssensor/Grundwasser-Pegellogger: eigenes Einperl-Messverfahren und außerhalb des Wassers liegende Technik.",
+      "bearbeitungsstand": "grenzfall"
+    },
+    {
+      "name": "Grundwasser-Kabellichtlot",
+      "fachbereich": "Brunnen und Messstellen",
+      "funktionen": [
+        "messen"
+      ],
+      "wasserarten": [
+        "grundwasser"
+      ],
+      "einsatzorte": [
+        "kommune",
+        "kleingewerbe"
+      ],
+      "zielgruppen": [
+        "kleinbetrieb",
+        "kommune"
+      ],
+      "source_url": "https://www.ott.com/de/products",
+      "artikelkategorie": "Manuelle Abstichmessung",
+      "artikelideen": [
+        "Grundwasserstand mit Kabellichtlot statt Datenlogger bestimmen",
+        "Kabellichtlot nach Messstellentiefe auswählen",
+        "Signalgeber und Sondenkopf eines Kabellichtlots kontrollieren"
+      ],
+      "abgrenzung": "W14 Grundwasser-Pegeldatenlogger misst automatisch; Kabellichtlot dient der manuellen Kontrollmessung.",
+      "bearbeitungsstand": "recherche_offen"
+    },
+    {
+      "name": "Gewässer-Blaualgen-Fluoreszenzsensor",
+      "fachbereich": "Gewässeranalytik",
+      "funktionen": [
+        "messen"
+      ],
+      "wasserarten": [
+        "oberflaechenwasser",
+        "pool_und_teichwasser"
+      ],
+      "einsatzorte": [
+        "kommune"
+      ],
+      "zielgruppen": [
+        "kommune"
+      ],
+      "source_url": "https://www.ott.com/de/products",
+      "artikelkategorie": "Cyanobakterienüberwachung",
+      "artikelideen": [
+        "Blaualgen-Fluoreszenzsensor nach Gewässerart auswählen",
+        "Phycocyanin- und Phycoerythrinmessung unterscheiden",
+        "Blaualgen-Messsonde bei Bewuchs und Verschmutzung pflegen"
+      ],
+      "abgrenzung": "Spezifischer Sensor für Cyanobakterien-Indikatoren; nicht vorhandener W17 Redox- oder W14 Sauerstoffsensor.",
+      "bearbeitungsstand": "recherche_offen"
+    },
+    {
+      "name": "Regenwasser-Substratfilteranlage",
+      "fachbereich": "Regenwasserbehandlung",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "regenwasser"
+      ],
+      "einsatzorte": [
+        "kommune",
+        "kleingewerbe"
+      ],
+      "zielgruppen": [
+        "kleinbetrieb",
+        "kommune"
+      ],
+      "source_url": "https://www.aco.de/anwendungen/regenwasserbewirtschaftung/regenwasserbehandlung",
+      "artikelkategorie": "Substratfiltration",
+      "artikelideen": [
+        "Substratfilter und reine Sedimentationsanlage für Regenabfluss vergleichen",
+        "Filtrations- und Adsorptionsstufe nach Flächenbelastung auswählen",
+        "Filtermaterial und Wartungsintervall von Regenwasseranlagen beurteilen"
+      ],
+      "abgrenzung": "W12 Regenwasser-Sedimentationsanlage entfernt vor allem Partikel; Substratfilter erfasst auch gelöste Stoffe.",
+      "bearbeitungsstand": "recherche_offen"
+    },
+    {
+      "name": "Retentionsdach-Drosselablauf",
+      "fachbereich": "Regenwasserrückhalt",
+      "funktionen": [
+        "speichern",
+        "verteilen"
+      ],
+      "wasserarten": [
+        "regenwasser"
+      ],
+      "einsatzorte": [
+        "haus",
+        "kleingewerbe"
+      ],
+      "zielgruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "source_url": "https://www.zinco.de/p/rds28",
+      "artikelkategorie": "Dachentwässerung mit Rückhalt",
+      "artikelideen": [
+        "Retentionsdachablauf und normalen Flachdachablauf vergleichen",
+        "Drosselung und Anstauhöhe von Retentionsdachabläufen abstimmen",
+        "Notüberlauf bei geplantem Dachwasseranstau berücksichtigen"
+      ],
+      "abgrenzung": "W14 Flachdachablauf und W12 Regenwasser-Ablaufdrossel sind fachliche Nachbarn; integriertes Drossel-Dachsystem nur bei eigenständiger Kaufabsicht.",
+      "bearbeitungsstand": "grenzfall"
+    },
+    {
+      "name": "Bewässerungs-Scheibenfilter",
+      "fachbereich": "Garten und Landwirtschaft",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "brauchwasser",
+        "grundwasser"
+      ],
+      "einsatzorte": [
+        "garten",
+        "landwirtschaft"
+      ],
+      "zielgruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "source_url": "https://www.netafim.de/tropfbewasserung-im-garten-und-landschaftsbau/product/filter/scheibenfilter/",
+      "artikelkategorie": "Tropfbewässerungs-Filtertechnik",
+      "artikelideen": [
+        "Scheibenfilter und Siebfilter für Tropfbewässerung vergleichen",
+        "Filterfeinheit und Durchfluss eines Bewässerungsfilters abstimmen",
+        "Scheibenfilter zum Reinigen öffnen und pflegen"
+      ],
+      "abgrenzung": "W15 Kühlwasser-Scheibenfilter ähnliches Filterprinzip, aber andere Wasser- und Betriebsanforderungen; SEO-Intent offen.",
+      "bearbeitungsstand": "grenzfall"
+    },
+    {
+      "name": "Bewässerungs-Siebfilter",
+      "fachbereich": "Garten und Landwirtschaft",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "brauchwasser",
+        "grundwasser"
+      ],
+      "einsatzorte": [
+        "garten",
+        "landwirtschaft"
+      ],
+      "zielgruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "source_url": "https://www.netafim.de/Produkte-und-Loesungen/Produkte/",
+      "artikelkategorie": "Bewässerungs-Siebtechnik",
+      "artikelideen": [
+        "Siebfilter vor Tropfleitungen und Mikrosprinklern einsetzen",
+        "Siebfeinheit nach Regnertyp und Wasserquelle wählen",
+        "Manuelle und automatische Siebfilterreinigung unterscheiden"
+      ],
+      "abgrenzung": "W4 Feinfilter/Pumpenvorfilter und Bewässerungs-Scheibenfilter überschneiden sich technisch; erst als Produktfamilie abgrenzen.",
+      "bearbeitungsstand": "grenzfall"
+    },
+    {
+      "name": "Einzeltropfer für Bewässerung",
+      "fachbereich": "Garten und Landwirtschaft",
+      "funktionen": [
+        "verteilen"
+      ],
+      "wasserarten": [
+        "brauchwasser",
+        "regenwasser"
+      ],
+      "einsatzorte": [
+        "garten",
+        "landwirtschaft"
+      ],
+      "zielgruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "source_url": "https://www.netafim.de/Produkte-und-Loesungen/Produkte/",
+      "artikelkategorie": "Einzeltropfer",
+      "artikelideen": [
+        "Einzeltropfer mit fest integrierten Tropfrohren vergleichen",
+        "Tropferabstand und Wassermenge für Pflanzengefäße bestimmen",
+        "Verstopfung und Druckausgleich bei einzelnen Tropfern beurteilen"
+      ],
+      "abgrenzung": "W12 Tropfrohr und W4 Tropfbewässerungsset sind Komplett- bzw. Leitungsprodukte; einzeln steckbare Tropfer sind eigene Komponente.",
+      "bearbeitungsstand": "grenzfall"
+    },
+    {
+      "name": "Bewässerungs-Flachschlauch",
+      "fachbereich": "Garten und Landwirtschaft",
+      "funktionen": [
+        "verteilen"
+      ],
+      "wasserarten": [
+        "brauchwasser",
+        "grundwasser"
+      ],
+      "einsatzorte": [
+        "garten",
+        "landwirtschaft"
+      ],
+      "zielgruppen": [
+        "kleinbetrieb"
+      ],
+      "source_url": "https://www.netafim.de/Produkte-und-Loesungen/Produkte/",
+      "artikelkategorie": "Flache Transportleitungen",
+      "artikelideen": [
+        "Flachschlauch und normaler Gartenschlauch für Bewässerung vergleichen",
+        "Durchmesser und Druckbelastung von Bewässerungs-Flachschläuchen wählen",
+        "Flachschlauch in Feldbewässerung verlegen und aufrollen"
+      ],
+      "abgrenzung": "W4 Gartenschlauch und W14 Bewässerungs-Verlegerohr: flexibles großvolumiges Transportsystem kann funktional eigenständig sein.",
+      "bearbeitungsstand": "grenzfall"
+    },
+    {
+      "name": "Trinkwasser-Durchflussmengenregler",
+      "fachbereich": "Trinkwasserarmaturen",
+      "funktionen": [
+        "steuern",
+        "verteilen"
+      ],
+      "wasserarten": [
+        "trinkwasser"
+      ],
+      "einsatzorte": [
+        "haus",
+        "kleingewerbe"
+      ],
+      "zielgruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "source_url": "https://www.neoperl.com/global/de/handel/produkte/mengenregler",
+      "artikelkategorie": "Durchfluss konstant halten",
+      "artikelideen": [
+        "Eigenständigen Mengenregler und Wasserspar-Strahlregler vergleichen",
+        "Durchflussklasse bei wechselndem Wasserdruck auswählen",
+        "Mengenregler für mehrere Entnahmestellen dimensionieren"
+      ],
+      "abgrenzung": "W12 Wasserspar-Strahlregler enthält teils Mengenregler, separate Einsteck- oder Leitungsbaugruppe nur bei eigener Kaufabsicht.",
+      "bearbeitungsstand": "grenzfall"
+    },
+    {
+      "name": "Trinkwasser-Rückflussverhinderer-Patrone",
+      "fachbereich": "Trinkwassersicherung",
+      "funktionen": [
+        "schuetzen",
+        "verteilen"
+      ],
+      "wasserarten": [
+        "trinkwasser"
+      ],
+      "einsatzorte": [
+        "haus",
+        "kleingewerbe"
+      ],
+      "zielgruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "source_url": "https://www.neoperl.com/de/de/handel/produkte/rueckflussverhinderer",
+      "artikelkategorie": "Rückfluss in Armaturen verhindern",
+      "artikelideen": [
+        "Rückflussverhinderer-Patrone und allgemeines Rückschlagventil unterscheiden",
+        "Öffnungsdruck und Dichtwerkstoff einer Trinkwasser-Patrone wählen",
+        "Einbaurichtung und Wartung einer Rückflussverhinderer-Patrone beurteilen"
+      ],
+      "abgrenzung": "W4 Rückschlagventil und Systemtrenner: starkes Duplikatrisiko, nur mit echter Produktspezifik und anderer Suchintention.",
+      "bearbeitungsstand": "grenzfall"
+    },
+    {
+      "name": "Abwasser-Kompaktvorkläranlage",
+      "fachbereich": "Kommunale Abwassertechnik",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "abwasser"
+      ],
+      "einsatzorte": [
+        "kommune",
+        "industrie"
+      ],
+      "zielgruppen": [
+        "kommune",
+        "industrie"
+      ],
+      "source_url": "https://www.huber-se.com/de-de/produkte/rechen-feinsiebe-feinstsiebe/kompaktanlagen/",
+      "artikelkategorie": "Kombinierte mechanische Vorreinigung",
+      "artikelideen": [
+        "Kompaktvorkläranlage und getrennte Rechen-/Sandfangstufen vergleichen",
+        "Rechengutbehandlung und Fettabscheidung in einer Kompaktanlage bewerten",
+        "Aufstellfläche und Durchsatz kombinierter Vorreinigungsanlagen planen"
+      ],
+      "abgrenzung": "W14 Abwasser-Rechenanlage/Sandfang sind Teilkomponenten; hier integrierte Gesamtanlage. SEO-Abgrenzung ausdrücklich offen.",
+      "bearbeitungsstand": "grenzfall"
+    },
+    {
+      "name": "Abwasser-Sandwaschanlage",
+      "fachbereich": "Kommunale Abwassertechnik",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "abwasser"
+      ],
+      "einsatzorte": [
+        "kommune",
+        "industrie"
+      ],
+      "zielgruppen": [
+        "kommune",
+        "industrie"
+      ],
+      "source_url": "https://www.huber-se.com/de-de/produkte/sandwaschanlagen-aggregate/sandwaescher/",
+      "artikelkategorie": "Sand aus Abwasser reinigen",
+      "artikelideen": [
+        "Sandwaschanlage und Sandklassierer funktional unterscheiden",
+        "Organische Anhaftungen vom abgeschiedenen Sand entfernen",
+        "Wasserbedarf und Schlammaustrag bei Sandwäsche beurteilen"
+      ],
+      "abgrenzung": "W17 Abwasser-Sandklassierer separiert Sand; die Waschanlage reinigt organische Anhaftungen als andere Funktion.",
+      "bearbeitungsstand": "recherche_offen"
+    },
+    {
+      "name": "Klärschlamm-Bandtrockner",
+      "fachbereich": "Kommunale Abwassertechnik",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "abwasser"
+      ],
+      "einsatzorte": [
+        "kommune",
+        "industrie"
+      ],
+      "zielgruppen": [
+        "kommune",
+        "industrie"
+      ],
+      "source_url": "https://www.huber-se.com/de-de/anwendungen-loesungen/schlammbehandlung/schlammtrocknung/",
+      "artikelkategorie": "Bandtrocknung",
+      "artikelideen": [
+        "Klärschlamm-Bandtrockner und Schneckenpresse unterscheiden",
+        "Wärmebedarf und Ziel-Trockensubstanz bei Bandtrocknung abschätzen",
+        "Bandtrocknung und solare Schlammtrocknung vergleichen"
+      ],
+      "abgrenzung": "W14 Klärschlamm-Schneckenpresse entwässert mechanisch; Bandtrockner trocknet thermisch.",
+      "bearbeitungsstand": "recherche_offen"
+    },
+    {
+      "name": "Solarer Klärschlammwender",
+      "fachbereich": "Kommunale Abwassertechnik",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "abwasser"
+      ],
+      "einsatzorte": [
+        "kommune"
+      ],
+      "zielgruppen": [
+        "kommune"
+      ],
+      "source_url": "https://www.huber-se.com/de-de/anwendungen-loesungen/schlammbehandlung/schlammtrocknung/",
+      "artikelkategorie": "Solare Schlammtrocknung",
+      "artikelideen": [
+        "Schlammwender und Bandtrockner als unterschiedliche Verfahren vergleichen",
+        "Bewegungszyklus und Schichtdicke bei solaren Schlammanlagen bestimmen",
+        "Schlammwender in Gewächshaus-Trocknungsanlage einordnen"
+      ],
+      "abgrenzung": "Kein bloß anderer Bandtrockner, sondern mechanisches Wenden für solare Trocknung.",
+      "bearbeitungsstand": "grenzfall"
+    },
+    {
+      "name": "Klärschlamm-Förderschnecke",
+      "fachbereich": "Kommunale Abwassertechnik",
+      "funktionen": [
+        "foerdern"
+      ],
+      "wasserarten": [
+        "abwasser"
+      ],
+      "einsatzorte": [
+        "kommune",
+        "industrie"
+      ],
+      "zielgruppen": [
+        "kommune",
+        "industrie"
+      ],
+      "source_url": "https://www.huber-se.com/de-de/anwendungen-loesungen/transport-rechengut-schlamm-sand/schlamm-transport/",
+      "artikelkategorie": "Fördern von entwässertem Schlamm",
+      "artikelideen": [
+        "Förderschnecke für entwässerten Klärschlamm auslegen",
+        "Förderschnecke und Schlammpumpe vergleichen",
+        "Neigung und Einhausung beim Schlammtransport berücksichtigen"
+      ],
+      "abgrenzung": "W14 Feststoffpumpe/Schneckenpresse haben andere Förder- bzw. Entwässerungsaufgaben.",
+      "bearbeitungsstand": "grenzfall"
+    }
+  ],
+  "glossary": [
+    {
+      "name": "Kamerabasierte Abflussmessung",
+      "definition": "Bestimmung von Pegel, Fließgeschwindigkeit und Abfluss mithilfe automatischer Videoauswertung.",
+      "source_url": "https://www.ott.com/de/products/hydrosight?hsLang=de",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "oberflaechenwasser"
+      ],
+      "product_name": "Kamerabasiertes Gewässer-Abflussmesssystem"
+    },
+    {
+      "name": "Einperlpegelmessung",
+      "definition": "Pegelbestimmung durch die Auswertung des Drucks einer Luftleitung, die in das Wasser eintaucht.",
+      "source_url": "https://www.ott.com/de/press-release-and-news/ott-cbs-500",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "grundwasser",
+        "oberflaechenwasser"
+      ],
+      "product_name": "Hydrologischer Einperl-Pegelsensor"
+    },
+    {
+      "name": "Kabellichtlot",
+      "definition": "Manuelles Messgerät für den Abstand von einer Bezugsebene zur Wasseroberfläche in einem Brunnen oder Pegelrohr.",
+      "source_url": "https://www.ott.com/de/products",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "grundwasser"
+      ],
+      "product_name": "Grundwasser-Kabellichtlot"
+    },
+    {
+      "name": "Cyanobakterien",
+      "definition": "Gruppe photosynthetischer Bakterien im Wasser; bestimmte Arten können unter passenden Bedingungen problematische Massenentwicklungen bilden.",
+      "source_url": "https://www.ott.com/de/products",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "oberflaechenwasser"
+      ],
+      "product_name": "Gewässer-Blaualgen-Fluoreszenzsensor"
+    },
+    {
+      "name": "Substratfiltration",
+      "definition": "Behandlung von Regenabfluss mit einem geeigneten Filtermaterial, das Partikel und bestimmte gelöste Stoffe zurückhalten kann.",
+      "source_url": "https://www.aco.de/anwendungen/regenwasserbewirtschaftung/regenwasserbehandlung",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "regenwasser"
+      ],
+      "product_name": "Regenwasser-Substratfilteranlage"
+    },
+    {
+      "name": "Retentionsdach",
+      "definition": "Dachaufbau, der Niederschlagswasser gezielt aufnimmt und zeitverzögert abführt.",
+      "source_url": "https://www.zinco.de/p/rds28",
+      "functions": [
+        "speichern"
+      ],
+      "water_types": [
+        "regenwasser"
+      ],
+      "product_name": "Retentionsdach-Drosselablauf"
+    },
+    {
+      "name": "Scheibenfiltration",
+      "definition": "Mechanische Wasserfiltration durch aufeinandergepresste gerillte Filterscheiben.",
+      "source_url": "https://www.netafim.de/tropfbewasserung-im-garten-und-landschaftsbau/product/filter/scheibenfilter/",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "brauchwasser"
+      ],
+      "product_name": "Bewässerungs-Scheibenfilter"
+    },
+    {
+      "name": "Einzeltropfer",
+      "definition": "Einzelnes Bauteil, das Wasser aus einer Bewässerungsleitung in kleiner, bestimmter Menge abgibt.",
+      "source_url": "https://www.netafim.de/Produkte-und-Loesungen/Produkte/",
+      "functions": [
+        "verteilen"
+      ],
+      "water_types": [
+        "brauchwasser"
+      ],
+      "product_name": "Einzeltropfer für Bewässerung"
+    },
+    {
+      "name": "Durchflussmengenregelung",
+      "definition": "Technische Begrenzung oder Stabilisierung des Wasserstroms auch bei schwankendem Leitungsdruck.",
+      "source_url": "https://www.neoperl.com/global/de/handel/produkte/mengenregler",
+      "functions": [
+        "steuern"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "product_name": "Trinkwasser-Durchflussmengenregler"
+    },
+    {
+      "name": "Rückflussverhinderer",
+      "definition": "Sicherungsbauteil, das Wasser nur in einer Richtung passieren lässt und Rückfluss vermindert.",
+      "source_url": "https://www.neoperl.com/de/de/handel/produkte/rueckflussverhinderer",
+      "functions": [
+        "schuetzen"
+      ],
+      "water_types": [
+        "trinkwasser"
+      ],
+      "product_name": "Trinkwasser-Rückflussverhinderer-Patrone"
+    },
+    {
+      "name": "Mechanische Abwasservorreinigung",
+      "definition": "Erste Reinigungsstufe, in der etwa Grobstoffe, Sand und teilweise Fette aus Abwasser entfernt werden.",
+      "source_url": "https://www.huber-se.com/de-de/produkte/rechen-feinsiebe-feinstsiebe/kompaktanlagen/",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "product_name": "Abwasser-Kompaktvorkläranlage"
+    },
+    {
+      "name": "Sandwäsche",
+      "definition": "Behandlung ausgeschiedenen Sands, um anhaftende organische Stoffe abzutrennen.",
+      "source_url": "https://www.huber-se.com/de-de/produkte/sandwaschanlagen-aggregate/sandwaescher/",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "product_name": "Abwasser-Sandwaschanlage"
+    },
+    {
+      "name": "Klärschlamm-Bandtrocknung",
+      "definition": "Thermische Trocknung entwässerten Klärschlamms auf einem durch einen Luftstrom geführten Band.",
+      "source_url": "https://www.huber-se.com/de-de/anwendungen-loesungen/schlammbehandlung/schlammtrocknung/",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "product_name": "Klärschlamm-Bandtrockner"
+    },
+    {
+      "name": "Solare Schlammtrocknung",
+      "definition": "Schlammtrocknung mit Sonnenwärme, oft in einem Gewächshaus mit maschinellem Schlammwender.",
+      "source_url": "https://www.huber-se.com/de-de/anwendungen-loesungen/schlammbehandlung/schlammtrocknung/",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "abwasser"
+      ],
+      "product_name": "Solarer Klärschlammwender"
+    }
+  ],
+  "excluded_aliases": [
+    {
+      "found": "Retentionsdrossel für Regenwassertank",
+      "owner": "W12-013",
+      "why": "Bereits als Regenwasser-Ablaufdrossel vorhanden; Dachablauf ist getrennt zu prüfen."
+    },
+    {
+      "found": "Automatische Trinkwasser-Hygienespülstation",
+      "owner": "W12-010",
+      "why": "Bereits als Trinkwasser-Hygienespülstation vorhanden, Hersteller-Modell kein neuer Owner."
+    },
+    {
+      "found": "Radar-Wasserstandssensor im Abwasserbecken",
+      "owner": "W14-081",
+      "why": "Radar-Wasserstandssensor bereits vorhanden; anderes Einsatzmedium allein kein neuer Owner."
+    },
+    {
+      "found": "Pumpstation-Füllstandsteuergerät",
+      "owner": "W4-034",
+      "why": "Mit vorhandener Pumpensteuerung und Pegeltechnologie stark überlappend; ohne eigenständige Intent-Prüfung nur Anwendungsfall."
+    },
+    {
+      "found": "Regenwasser-Rohrsedimentationsanlage",
+      "owner": "W12-014",
+      "why": "Vorhandene Regenwasser-Sedimentationsanlage, Rohrform begründet allein noch keine neue Produktseite."
+    }
+  ],
+  "warning": "Kein SEO-/SERP-Check und keine reale Anbieter-Zuordnung; Funktions- und Indexierungsgrenzfälle sind dokumentiert."
+}
