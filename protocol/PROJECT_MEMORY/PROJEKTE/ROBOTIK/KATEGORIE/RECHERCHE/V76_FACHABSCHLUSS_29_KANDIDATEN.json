@@ -3,7 +3,7 @@
   "date": "2026-11-15",
   "status": "RECHERCHEFACHABSCHLUSS_KEINE_WORDPRESS_FREIGABE",
   "authority": "PROJEKTE/ROBOTIK/KATEGORIE/ZIELVERTRAG.md",
-  "reference_baseline": "V52 und V67: 100 private Typseiten im 188-Seiten-Gesamtfachplan; Industrie/Gewerbe nicht bearbeitet",
+  "reference_baseline": "V52 und V67: 100 Typseiten in sieben Welten außerhalb der Hauptwelt Gewerbe; im Humanoiden-Zweig sind auch vier gewerbliche/industrielle Arbeitsfunktionen (Lager, Produktion, Empfang, Werkstatt) enthalten, die nur im unveränderten Basisplan mitgezählt, nicht recherchiert oder verändert wurden.",
   "source_batch": "V67,V69,V70,V71,V72,V72E,V73,V74,V75",
   "candidate_count": 29,
   "editorially_recommended_new_type_candidates": 11,
@@ -417,5 +417,6 @@
     "Fachliche 11 Ergänzungen erst im bestehenden Kategorie-Plugin nach ausdrücklicher Freigabe im Gesamtsoll ergänzen, nicht als zweite Liste/zweites Plugin",
     "Alten V63-Importzustand real in WP fertig lesen, nicht aus GitHub-Plan auf abgeschlossen schließen",
     "Magazin, Glossar, Finder, Register einmalig mit demselben Roboterbüro verknüpfen; keine Parallelveröffentlichung"
-  ]
+  ],
+  "scope_caveat": "100 sind eine strukturelle sieben-Welten-Zahl, keine exakt bereinigte reine Privatwelt-Zahl. Humanoide Arbeitsseiten sind ausdrücklich außerhalb dieser neuen Recherche; keine neuen Arbeits- oder Gewerbetypen."
 }
