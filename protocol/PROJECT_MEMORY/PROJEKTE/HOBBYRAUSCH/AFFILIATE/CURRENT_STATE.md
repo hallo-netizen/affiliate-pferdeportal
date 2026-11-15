@@ -1,3 +1,21 @@
+# Hobby Depot HD009 0.1.41 – offizielles vollständiges Installationsplugin
+
+Freigegebene WordPress-ZIP: HOBBY_DEPOT_AFFILIATE_HD009_0.1.41.zip
+CURRENT.zip ist byteidentisch; alter 0.1.37-Rollback bleibt vollständig erhalten.
+41 ZIP-Dateien, 24 fehlerfrei geprüfte PHP-Dateien, derselbe Original-Pluginordner.
+SHA256: 175322f2a3f26e5640066d0c96e51bfbc8ef9a61ba09339ee8767c943e08f948.
+Keine zusätzlichen Plugins oder WordPress-Tabellen, keine doppelte Produktentscheidung.
+Zentrale fachliche Idealo-Produktzuordnung beim Import, eindeutige Seitenziel-Zuordnung,
+sichere Fehlerstopps und lesender Vergleich 2747 gegen 2901.
+Technische Original-PHP-Prüfung: GitHub Actions Run 43619290847.
+Echte private Idealo-Feedzahlen müssen nach Installation im vorhandenen WordPress
+gelesen werden: erst vollständiger 2747-Neuabgleich, dann einmalig den Feedvergleich
+2747/2901 starten. Feed-ID nicht manuell wechseln.
+Bis ein aktueller 2747-Abgleich abgeschlossen ist, zeigt das Plugin die alten
+Idealo-Karten absichtlich nicht; eBay/Amazon bleiben unverändert.
+
+---
+
 # HOBBY DEPOT – AFFILIATE – EINZIGE AKTUELLE FACH-AUTORITÄT
 
 **HD009 0.1.32 – geprüftes CURRENT vom 08.11.2026.** Nach dem echten WordPress-Prüfergebnis „Metallringe → Kettenhemdflechten, post:903183“ den systemweiten fehlerhaften Suchwort-Weg korrigiert: nicht blind erstes allgemeines Material und nicht blind spätere Hilfsbegriffe als kostenpflichtige Amazon-Suche. 186 streng gefilterte Kandidaten, primäre Ausrüstung und im realen Artikeltitel belegte Begriffe; für das Kettenhemdbeispiel „Kettenhemd Ringe“, nicht „Metallringe“. **Alte automatische Kostenfreigabe wird beim Update ungültig – bewusst neu aktivieren erst nach kostenloser Prüfung.** Volles HD009-ZIP `HOBBY_DEPOT_AFFILIATE_HD009_0.1.32.zip` = `CURRENT.zip`; 1.564.075 Bytes, SHA-256 `d433db74b493407a4c26faef591574e644201846078b7aa7aa3541126f9359b8`. PHP 24/24 und ZIP 41/41, echte PHP-Fixturetests gegen Originalregister und DataForSEO-POST/GET, Kostenlimit und Negativfälle PASS (Action 42500774245). **Noch offen:** wirklicher kostenfreier Check im installierten WP, legitime Amazon-Produktbilder, eBay-/Idealo-Vorrang. Keine reale bezahlte Suche ausgelöst, keine anderen Plugins verändert. Bericht `AFFILIATE/DATAFORSEO_SUCHWORTPRUEFUNG_0.1.32_20261108.md`.
