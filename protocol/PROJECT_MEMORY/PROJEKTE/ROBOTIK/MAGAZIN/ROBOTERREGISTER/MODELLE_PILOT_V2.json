@@ -1,0 +1,414 @@
+{
+  "schema": "ROBOTIK_MODELREGISTER_PILOT_V2",
+  "date": "2026-11-15",
+  "status": "EINZIGE_AKTUELLE_REGISTER_PILOTDATEI_NICHT_LIVE",
+  "replaces_current": "MODELLE_PILOT_V1.json historical four, no second active register",
+  "source_type_master": "../../KATEGORIE/RECHERCHE/PRODUKTE_V2_20261108.json#revision19",
+  "count": 19,
+  "existing_unmodified_pilots": 4,
+  "new_pilots": 15,
+  "unique_model_identities": 19,
+  "schema_rule": "Ein Hersteller und genaues Modell = ein Eintrag, Produkt/Projekt/Idee nur einmal; mehrere Typlinks erlaubt",
+  "wordpress_models_published": 0,
+  "models": [
+    {
+      "model_id": "model-mir-mir250",
+      "manufacturer": "Mobile Industrial Robots",
+      "model": "MiR250",
+      "variant": "MiR250",
+      "related_rb_ids": [
+        "rb014",
+        "rb016"
+      ],
+      "primary_rb_id": "rb014",
+      "manufacturer_url": "https://mobile-industrial-robots.com/de/produkte/roboter/mir250",
+      "specs": [
+        {
+          "name": "traglast_kg",
+          "value": 250,
+          "context": "Herstellerangabe, Transportlast"
+        },
+        {
+          "name": "breite_mm",
+          "value": 580,
+          "context": "Grundfläche, eine Seite"
+        },
+        {
+          "name": "laenge_mm",
+          "value": 800,
+          "context": "Grundfläche, andere Seite"
+        }
+      ],
+      "source_type": "HERSTELLERANGABE_NICHT_UNABHAENGIG_GETESTET",
+      "last_checked": "2026-11-09",
+      "model_data_status": "QUELLENBELEGT_FUER_GENANNTE_FELDER_NO_WP_APPROVAL",
+      "wp_published": false,
+      "stage": "Produkt",
+      "source_kind": "HERSTELLER",
+      "publication_status": "NICHT_WORDPRESS_PUBLIZIERT",
+      "model_role": "BESTEHENDER_PILOT_UNVERAENDERT"
+    },
+    {
+      "model_id": "model-pudu-bellabotpro",
+      "manufacturer": "PUDU Robotics",
+      "model": "BellaBot Pro",
+      "variant": "BellaBot Pro",
+      "related_rb_ids": [
+        "rb022"
+      ],
+      "primary_rb_id": "rb022",
+      "manufacturer_url": "https://www.pudurobotics.com/de/products/bellabotpro",
+      "specs": [
+        {
+          "name": "max_transportlast_kg",
+          "value": 40,
+          "context": "Maximale Gesamtlast laut Hersteller"
+        },
+        {
+          "name": "max_last_je_tablett_kg",
+          "value": 10,
+          "context": "Pro Tablett laut Hersteller"
+        },
+        {
+          "name": "durchfahrt_breite_cm",
+          "value": 65,
+          "context": "Herstellerangabe"
+        }
+      ],
+      "source_type": "HERSTELLERANGABE_NICHT_UNABHAENGIG_GETESTET",
+      "last_checked": "2026-11-09",
+      "model_data_status": "QUELLENBELEGT_FUER_GENANNTE_FELDER_NO_WP_APPROVAL",
+      "wp_published": false,
+      "stage": "Produkt",
+      "source_kind": "HERSTELLER",
+      "publication_status": "NICHT_WORDPRESS_PUBLIZIERT",
+      "model_role": "BESTEHENDER_PILOT_UNVERAENDERT"
+    },
+    {
+      "model_id": "model-lely-a5-next",
+      "manufacturer": "Lely",
+      "model": "Astronaut A5 Next",
+      "variant": "A5 Next",
+      "related_rb_ids": [
+        "rb034"
+      ],
+      "primary_rb_id": "rb034",
+      "manufacturer_url": "https://www.lely.com/de/loesungen/melken/astronaut/",
+      "specs": [
+        {
+          "name": "hybridarm",
+          "value": true,
+          "context": "Hersteller nennt Kombination elektrische Bewegung und Pneumatik"
+        },
+        {
+          "name": "geradliniger_zugang",
+          "value": true,
+          "context": "I-Flow-Konzept laut Hersteller"
+        },
+        {
+          "name": "zitzenerkennung",
+          "value": true,
+          "context": "Herstellerbeschreibung"
+        }
+      ],
+      "source_type": "HERSTELLERANGABE_NICHT_UNABHAENGIG_GETESTET",
+      "last_checked": "2026-11-09",
+      "model_data_status": "QUELLENBELEGT_FUER_GENANNTE_FELDER_NO_WP_APPROVAL",
+      "wp_published": false,
+      "stage": "Produkt",
+      "source_kind": "HERSTELLER",
+      "publication_status": "NICHT_WORDPRESS_PUBLIZIERT",
+      "model_role": "BESTEHENDER_PILOT_UNVERAENDERT"
+    },
+    {
+      "model_id": "model-ur-ur20-1750",
+      "manufacturer": "Universal Robots",
+      "model": "UR20-1750",
+      "variant": "UR20-1750 (früher UR20)",
+      "related_rb_ids": [
+        "rb001",
+        "rb004",
+        "rb006"
+      ],
+      "primary_rb_id": null,
+      "manufacturer_url": "https://www.universal-robots.com/de/produkte/",
+      "specs": [
+        {
+          "name": "nutzlast_kg",
+          "value": 20,
+          "context": "Reguläre Nutzlast; Hersteller nennt erweiterte Nutzlast 25 kg unter passenden Bedingungen"
+        },
+        {
+          "name": "reichweite_mm",
+          "value": 1750,
+          "context": "Herstellerangabe"
+        }
+      ],
+      "source_type": "HERSTELLERANGABE_NICHT_UNABHAENGIG_GETESTET",
+      "last_checked": "2026-11-09",
+      "model_data_status": "QUELLENBELEGT_FUER_GENANNTE_FELDER_NO_WP_APPROVAL",
+      "wp_published": false,
+      "stage": "Produkt",
+      "source_kind": "HERSTELLER",
+      "publication_status": "NICHT_WORDPRESS_PUBLIZIERT",
+      "model_role": "BESTEHENDER_PILOT_UNVERAENDERT"
+    },
+    {
+      "model_id": "model-v84-whisker-litterrobot4",
+      "manufacturer": "Whisker",
+      "model": "Litter-Robot 4",
+      "variant": "Litter-Robot 4",
+      "stage": "Produkt",
+      "primary_robot_type_research_id": "rf142",
+      "related_robot_type_research_ids": [],
+      "manufacturer_url": "https://www.litter-robot.com/eu/litter-robot-4.html",
+      "source_checked": "2026-11-15",
+      "specific_specs": [],
+      "facts_and_limits": "Automatische Reinigung einer Katzentoilette, Herstellerbeleg; Sicherheitssensoren modellbezogen prüfen.",
+      "model_role": "CORE_16_FACHNACHTRAG",
+      "publication_status": "DATENSATZ_VORBEREITET_NICHT_WORDPRESS_PUBLIZIERT",
+      "pricing_or_delivery": "NICHT_PAUSCHAL_NACHGEWIESEN",
+      "independent_test": false
+    },
+    {
+      "model_id": "model-v84-pongbot-aura",
+      "manufacturer": "PONGBOT",
+      "model": "Aura",
+      "variant": "Aura",
+      "stage": "Produkt",
+      "primary_robot_type_research_id": "rf148",
+      "related_robot_type_research_ids": [
+        "rf175"
+      ],
+      "manufacturer_url": "https://store.pongbotsports.com/products/aura",
+      "source_checked": "2026-11-15",
+      "specific_specs": [],
+      "facts_and_limits": "Ein einziges Gerät für Tennis, Padel und Pickleball; Varianten/Freischaltungen beachten.",
+      "model_role": "CORE_16_FACHNACHTRAG",
+      "publication_status": "DATENSATZ_VORBEREITET_NICHT_WORDPRESS_PUBLIZIERT",
+      "pricing_or_delivery": "NICHT_PAUSCHAL_NACHGEWIESEN",
+      "independent_test": false
+    },
+    {
+      "model_id": "model-v84-genics-gen",
+      "manufacturer": "Genics",
+      "model": "g.eN",
+      "variant": "g.eN",
+      "stage": "Produkt",
+      "primary_robot_type_research_id": "rf177",
+      "related_robot_type_research_ids": [],
+      "manufacturer_url": "https://www.waseda.jp/inst/entrepreneur/news/2026/10/16/9376/",
+      "source_checked": "2026-11-15",
+      "specific_specs": [],
+      "facts_and_limits": "Ab Oktober 2026 Verkauf in Japan nach Waseda; keine deutsche Verfügbarkeit behaupten.",
+      "model_role": "CORE_16_FACHNACHTRAG",
+      "publication_status": "DATENSATZ_VORBEREITET_NICHT_WORDPRESS_PUBLIZIERT",
+      "pricing_or_delivery": "NICHT_PAUSCHAL_NACHGEWIESEN",
+      "independent_test": false
+    },
+    {
+      "model_id": "model-v84-hypershell-x-max-s",
+      "manufacturer": "Hypershell",
+      "model": "X Max S",
+      "variant": "X Max S",
+      "stage": "Produkt",
+      "primary_robot_type_research_id": "rf180",
+      "related_robot_type_research_ids": [],
+      "manufacturer_url": "https://eu.hypershell.tech/de-de/products/new-hypershell-x-series",
+      "source_checked": "2026-11-15",
+      "specific_specs": [],
+      "facts_and_limits": "Outdoor-Exoskelett; Hersteller: kein zertifiziertes Medizinprodukt.",
+      "model_role": "CORE_16_FACHNACHTRAG",
+      "publication_status": "DATENSATZ_VORBEREITET_NICHT_WORDPRESS_PUBLIZIERT",
+      "pricing_or_delivery": "NICHT_PAUSCHAL_NACHGEWIESEN",
+      "independent_test": false
+    },
+    {
+      "model_id": "model-v84-enabot-ebo-air-2-plus",
+      "manufacturer": "Enabot",
+      "model": "EBO Air 2 Plus",
+      "variant": "EBO Air 2 Plus",
+      "stage": "Produkt",
+      "primary_robot_type_research_id": "rf143",
+      "related_robot_type_research_ids": [],
+      "manufacturer_url": "https://www.enabot.com/de/home-robot/ebo-air-2-plus",
+      "source_checked": "2026-11-15",
+      "specific_specs": [],
+      "facts_and_limits": "Mobiler Haustier- und Heimüberwachungsroboter; ein Modell, mehrere Anwendungen.",
+      "model_role": "CORE_16_FACHNACHTRAG",
+      "publication_status": "DATENSATZ_VORBEREITET_NICHT_WORDPRESS_PUBLIZIERT",
+      "pricing_or_delivery": "NICHT_PAUSCHAL_NACHGEWIESEN",
+      "independent_test": false
+    },
+    {
+      "model_id": "model-v84-tenbeauty-fullservice",
+      "manufacturer": "10Beauty",
+      "model": "Full Service Robotic Manicure",
+      "variant": "Full Service Robotic Manicure",
+      "stage": "Produkt",
+      "primary_robot_type_research_id": "rf159",
+      "related_robot_type_research_ids": [],
+      "manufacturer_url": "https://www.10beauty.co/",
+      "source_checked": "2026-11-15",
+      "specific_specs": [],
+      "facts_and_limits": "Robotische Maniküre als Salonangebot, nicht als privat gelieferter Heimroboter.",
+      "model_role": "CORE_16_FACHNACHTRAG",
+      "publication_status": "DATENSATZ_VORBEREITET_NICHT_WORDPRESS_PUBLIZIERT",
+      "pricing_or_delivery": "NICHT_PAUSCHAL_NACHGEWIESEN",
+      "independent_test": false
+    },
+    {
+      "model_id": "model-v84-aescape-massage",
+      "manufacturer": "Aescape",
+      "model": "Robotic Massage System",
+      "variant": "Robotic Massage System",
+      "stage": "Produkt",
+      "primary_robot_type_research_id": "rf158",
+      "related_robot_type_research_ids": [],
+      "manufacturer_url": "https://www.aescape.com/about",
+      "source_checked": "2026-11-15",
+      "specific_specs": [],
+      "facts_and_limits": "Robotische Wellnessmassage, kein Therapieversprechen; Standorte und Angebot getrennt.",
+      "model_role": "CORE_16_FACHNACHTRAG",
+      "publication_status": "DATENSATZ_VORBEREITET_NICHT_WORDPRESS_PUBLIZIERT",
+      "pricing_or_delivery": "NICHT_PAUSCHAL_NACHGEWIESEN",
+      "independent_test": false
+    },
+    {
+      "model_id": "model-v84-aoyama-cosmetic-dresser",
+      "manufacturer": "Aoyama Gakuin University",
+      "model": "Cosmetic Dresser Robot",
+      "variant": "Cosmetic Dresser Robot",
+      "stage": "Projekt",
+      "primary_robot_type_research_id": "rf178",
+      "related_robot_type_research_ids": [],
+      "manufacturer_url": "https://www.aoyama.ac.jp/center104/2025/event_20250930_01",
+      "source_checked": "2026-11-15",
+      "specific_specs": [],
+      "facts_and_limits": "Forschungsprototyp; keine verfügbare kosmetische Kaufware.",
+      "model_role": "REGISTER_STATT_CORE",
+      "publication_status": "DATENSATZ_VORBEREITET_NICHT_WORDPRESS_PUBLIZIERT",
+      "pricing_or_delivery": "NICHT_PAUSCHAL_NACHGEWIESEN",
+      "independent_test": false
+    },
+    {
+      "model_id": "model-v84-yukai-fufuly",
+      "manufacturer": "Yukai Engineering",
+      "model": "fufuly",
+      "variant": "fufuly",
+      "stage": "Produkt",
+      "primary_robot_type_research_id": "rf179",
+      "related_robot_type_research_ids": [],
+      "manufacturer_url": "https://globalstore.ux-xu.com/products/fufuly",
+      "source_checked": "2026-11-15",
+      "specific_specs": [],
+      "facts_and_limits": "Atmungsähnliches Kissen; kein Beleg für eigenständige allgemeine Servicerobotik-Kategorie.",
+      "model_role": "REGISTER_STATT_CORE",
+      "publication_status": "DATENSATZ_VORBEREITET_NICHT_WORDPRESS_PUBLIZIERT",
+      "pricing_or_delivery": "NICHT_PAUSCHAL_NACHGEWIESEN",
+      "independent_test": false
+    },
+    {
+      "model_id": "model-v84-basically-sorter-v2",
+      "manufacturer": "basically",
+      "model": "Sorter V2",
+      "variant": "Sorter V2",
+      "stage": "Projekt",
+      "primary_robot_type_research_id": "rf189",
+      "related_robot_type_research_ids": [],
+      "manufacturer_url": "https://basically.website/sorter-v2",
+      "source_checked": "2026-11-15",
+      "specific_specs": [],
+      "facts_and_limits": "Gebautes Klemmbausteinsortierprojekt; noch kein regulär ausgeliefertes Kit.",
+      "model_role": "REGISTER_STATT_CORE",
+      "publication_status": "DATENSATZ_VORBEREITET_NICHT_WORDPRESS_PUBLIZIERT",
+      "pricing_or_delivery": "NICHT_PAUSCHAL_NACHGEWIESEN",
+      "independent_test": false
+    },
+    {
+      "model_id": "model-v84-vaonis-vespera-3",
+      "manufacturer": "Vaonis",
+      "model": "Vespera 3",
+      "variant": "Vespera 3",
+      "stage": "Produkt",
+      "primary_robot_type_research_id": "rf184",
+      "related_robot_type_research_ids": [],
+      "manufacturer_url": "https://vaonis.com/products/vespera-3",
+      "source_checked": "2026-11-15",
+      "specific_specs": [],
+      "facts_and_limits": "Automatische Nachführung und Himmelsobjektauswahl; Robotik-Randbereich.",
+      "model_role": "CORE_16_FACHNACHTRAG",
+      "publication_status": "DATENSATZ_VORBEREITET_NICHT_WORDPRESS_PUBLIZIERT",
+      "pricing_or_delivery": "NICHT_PAUSCHAL_NACHGEWIESEN",
+      "independent_test": false
+    },
+    {
+      "model_id": "model-v84-robosen-grimlock",
+      "manufacturer": "Robosen",
+      "model": "Grimlock G1 Flagship",
+      "variant": "Grimlock G1 Flagship",
+      "stage": "Produkt",
+      "primary_robot_type_research_id": "rf183",
+      "related_robot_type_research_ids": [],
+      "manufacturer_url": "https://www.robosen.com/de/grimlock-g1-flagship",
+      "source_checked": "2026-11-15",
+      "specific_specs": [],
+      "facts_and_limits": "Motorische Eigenverwandlung; deutsche Herstellerseite meldete zeitweise ausverkauft.",
+      "model_role": "CORE_16_FACHNACHTRAG",
+      "publication_status": "DATENSATZ_VORBEREITET_NICHT_WORDPRESS_PUBLIZIERT",
+      "pricing_or_delivery": "NICHT_PAUSCHAL_NACHGEWIESEN",
+      "independent_test": false
+    },
+    {
+      "model_id": "model-v84-sportsattack-smash",
+      "manufacturer": "Sports Attack",
+      "model": "Smash Attack Volleyball Machine",
+      "variant": "Smash Attack Volleyball Machine",
+      "stage": "Produkt",
+      "primary_robot_type_research_id": "rf185",
+      "related_robot_type_research_ids": [],
+      "manufacturer_url": "https://sportsattack.com/product/smash-attack-volleyball-machine/",
+      "source_checked": "2026-11-15",
+      "specific_specs": [],
+      "facts_and_limits": "Stationäre motorisierte Volleyball-Zuspielmaschine, kein autonomes freifahrendes Gerät.",
+      "model_role": "CORE_16_FACHNACHTRAG",
+      "publication_status": "DATENSATZ_VORBEREITET_NICHT_WORDPRESS_PUBLIZIERT",
+      "pricing_or_delivery": "NICHT_PAUSCHAL_NACHGEWIESEN",
+      "independent_test": false
+    },
+    {
+      "model_id": "model-v84-bola-professional",
+      "manufacturer": "BOLA",
+      "model": "Professional Bowling Machine",
+      "variant": "Professional Bowling Machine",
+      "stage": "Produkt",
+      "primary_robot_type_research_id": "rf186",
+      "related_robot_type_research_ids": [],
+      "manufacturer_url": "https://www.bola.co.uk/shop/bola-professional-bowling-machine",
+      "source_checked": "2026-11-15",
+      "specific_specs": [],
+      "facts_and_limits": "Cricket-Wurfmaschine; separate Ballzufuhr nicht pauschal im Grundgerät enthalten.",
+      "model_role": "CORE_16_FACHNACHTRAG",
+      "publication_status": "DATENSATZ_VORBEREITET_NICHT_WORDPRESS_PUBLIZIERT",
+      "pricing_or_delivery": "NICHT_PAUSCHAL_NACHGEWIESEN",
+      "independent_test": false
+    },
+    {
+      "model_id": "model-v84-footbot-trainer",
+      "manufacturer": "FOOTBOT",
+      "model": "FOOTBOT Football Training System",
+      "variant": "FOOTBOT Football Training System",
+      "stage": "Produkt",
+      "primary_robot_type_research_id": "rf187",
+      "related_robot_type_research_ids": [],
+      "manufacturer_url": "https://footbot.eu/",
+      "source_checked": "2026-11-15",
+      "specific_specs": [],
+      "facts_and_limits": "Feste Fußball-Trainingsanlage, nicht privat lieferbarer Heimroboter.",
+      "model_role": "CORE_16_FACHNACHTRAG",
+      "publication_status": "DATENSATZ_VORBEREITET_NICHT_WORDPRESS_PUBLIZIERT",
+      "pricing_or_delivery": "NICHT_PAUSCHAL_NACHGEWIESEN",
+      "independent_test": false
+    }
+  ]
+}
