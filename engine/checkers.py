@@ -225,6 +225,14 @@ def fact_receipts(article):
     v=load_values(); legacy=v['ppm_parity']; html=article['html']; typ=article['article_type']; cfg=v['types'][typ]
     trace_cfg=v['global']['source_trace']; traces=_trace_tags(html,trace_cfg['class']); claims=article.get('research_claims') or {}
     attrs_ok=True; binding_find=[]; real_ok=True; real_find=[]
+    # The same existing fact-trace binding check also enforces invisible
+    # evidence markers; source names belong in prose only when meaningful.
+    if trace_cfg['marker_visible_content_forbidden']:
+        for m in re.finditer(r'(?is)<span\\b([^>]*)>(.*?)</span>',html):
+            a=_attrs('<span '+m.group(1)+'>')
+            if trace_cfg['class'] in a.get('class','').split() and m.group(2).strip():
+                attrs_ok=False
+                binding_find.append('visible_source_marker:'+a.get('data-fact-id',''))
     for t in traces:
         for attr in trace_cfg['required_attributes']:
             if not t.get(attr): attrs_ok=False; binding_find.append('missing:'+attr)
