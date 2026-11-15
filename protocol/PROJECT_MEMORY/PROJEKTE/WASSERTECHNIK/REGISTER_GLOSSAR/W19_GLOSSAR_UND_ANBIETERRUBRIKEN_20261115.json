@@ -1,0 +1,252 @@
+{
+  "version": "W19_20261115",
+  "status": "GLOSSAR_UND_ANBIETER_RUBRIKEN_VORSCHLAEGE_NOCH_NICHT_WP_VEROEFFENTLICHT",
+  "glossary": [
+    {
+      "name": "Rohrnetz-Kombinationsentlüftung",
+      "definition": "Bauteilprinzip, das Luft beim Befüllen aus Leitungen abführt und bei Entleerung je nach Ausführung Luft einlässt.",
+      "source_url": "https://www.bermad.com/products/air-valves/",
+      "related_product": "Wasserrohrnetz-Kombinationsentlüftungsventil",
+      "funktionen": [
+        "verteilen",
+        "schuetzen"
+      ],
+      "wasserarten": [
+        "trinkwasser"
+      ]
+    },
+    {
+      "name": "Wasserschlag",
+      "definition": "Schnelle Druckänderung im Rohrnetz, etwa durch plötzliches Abbremsen oder Umlenken der Wassersäule.",
+      "source_url": "https://www.bermad.com/product/mn-735/",
+      "related_product": "Hydraulisches Druckstoß-Vorwarnventil",
+      "funktionen": [
+        "schuetzen"
+      ],
+      "wasserarten": [
+        "trinkwasser"
+      ]
+    },
+    {
+      "name": "Druckstoßvorwarnung",
+      "definition": "Hydraulische Schutzfunktion, die ein Ventil bereits auf einen Druckeinbruch hin öffnet, bevor die rücklaufende Druckwelle eintrifft.",
+      "source_url": "https://www.bermad.com/product/mn-735/",
+      "related_product": "Hydraulisches Druckstoß-Vorwarnventil",
+      "funktionen": [
+        "schuetzen"
+      ],
+      "wasserarten": [
+        "trinkwasser"
+      ]
+    },
+    {
+      "name": "Druckhaltung im Wassernetz",
+      "definition": "Aufrechterhaltung eines geforderten Mindestdrucks in einem Wasserleitungsabschnitt.",
+      "source_url": "https://www.bermad.com/product/730-2/",
+      "related_product": "Hydraulisches Druckhalteventil",
+      "funktionen": [
+        "steuern"
+      ],
+      "wasserarten": [
+        "trinkwasser"
+      ]
+    },
+    {
+      "name": "Ballastwasser",
+      "definition": "An Bord aufgenommene Wassermenge, mit der Schiffe Stabilität und Trimmung beeinflussen.",
+      "source_url": "https://www.alfalaval.com/products/process-solutions/ballast-water-management-system/pureballast-3/",
+      "related_product": "Schiffs-Ballastwasseraufbereitungsanlage",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "ballastwasser",
+        "meerwasser"
+      ]
+    },
+    {
+      "name": "Bilgenwasser",
+      "definition": "Im tief liegenden Schiffsrumpfbereich angesammeltes Wasser, das unter anderem Ölreste enthalten kann.",
+      "source_url": "https://www.alfalaval.com/de/products/separation/centrifugal-separators/separators/purebilge/",
+      "related_product": "Schiffs-Bilgenwasser-Zentrifugalabscheider",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "bilgenwasser"
+      ]
+    },
+    {
+      "name": "Umwelt-DNA (eDNA)",
+      "definition": "DNA-Spuren von Lebewesen, die aus Umweltproben wie Wasser gewonnen werden können.",
+      "source_url": "https://www.nxinnovation.com/samplers",
+      "related_product": "Automatischer eDNA-Wasserprobenehmer",
+      "funktionen": [
+        "messen"
+      ],
+      "wasserarten": [
+        "oberflaechenwasser"
+      ]
+    },
+    {
+      "name": "Deponiesickerwasser",
+      "definition": "Belastetes Wasser, das durch Abfallkörper einer Deponie sickert und aufgefangen werden muss.",
+      "source_url": "https://www.rts-rochem.de/our-products/water-treatment-systems/landfill-leachate-systems/",
+      "related_product": "Deponiesickerwasser-Membranaufbereitungsanlage",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "deponiesickerwasser"
+      ]
+    },
+    {
+      "name": "Vakuumverdampfung",
+      "definition": "Verdampfungsverfahren unter vermindertem Druck, mit dem Wasser aus belasteten Flüssigkeiten abgetrennt wird.",
+      "source_url": "https://www.veoliawatertechnologies.com/en/solutions/technologies/evaled",
+      "related_product": "Industrie-Abwasser-Vakuumverdampfer",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "abwasser",
+        "prozesswasser"
+      ]
+    },
+    {
+      "name": "Zero Liquid Discharge",
+      "definition": "Anlagenkonzept, bei dem möglichst kein flüssiger Abwasserstrom als Abfall aus dem Prozess abgegeben wird.",
+      "source_url": "https://www.veoliawatertechnologies.com/en/solutions/technologies/hpd-evaporation-and-crystallization",
+      "related_product": "Industrie-Solekristallisator",
+      "funktionen": [
+        "wiederverwenden"
+      ],
+      "wasserarten": [
+        "prozesswasser"
+      ]
+    },
+    {
+      "name": "Membranentgasung",
+      "definition": "Austausch gelöster Gase zwischen Wasser und Gas-/Vakuumseite über eine geeignete Membran.",
+      "source_url": "https://www.3m.com.au/3M/en_AU/liquicel-au/",
+      "related_product": "Membranentgasungsmodul für Wasser",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "prozesswasser"
+      ]
+    },
+    {
+      "name": "Kapazitive Membran-Deionisation (MCDI)",
+      "definition": "Elektrochemisches Verfahren, bei dem gelöste Ionen zeitweise an Elektroden gebunden und bei Regeneration wieder abgegeben werden.",
+      "source_url": "https://www.gruenbeck.de/produkte-loesungen/gruenbeck-fuer-gewerbe/membrantechnik/mcdi-entsalzung",
+      "related_product": "MCDI-Entsalzungsanlage",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "prozesswasser"
+      ]
+    },
+    {
+      "name": "Beschneiungswasserfiltration",
+      "definition": "Vorfiltration von Rohwasser, damit Partikel Pumpen und Düsen von Beschneiungsanlagen weniger belasten.",
+      "source_url": "https://www.bollfilter.com/de/anwendungen/behandlung-von-wassersystemen/schneemaschinen",
+      "related_product": "Automatikfilter für Beschneiungswasser",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "oberflaechenwasser"
+      ]
+    },
+    {
+      "name": "Hydrodynamischer Regenwasserabscheider",
+      "definition": "Bauteil zur Abtrennung mitgeführter Partikel im Regenwasserabfluss durch gezielte Strömungsführung und Sedimentation.",
+      "source_url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P1000ZRK.TXT",
+      "related_product": "Hydrodynamischer Regenwasser-Partikelabscheider",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "regenwasser"
+      ]
+    },
+    {
+      "name": "Kammerfilterpresse",
+      "definition": "Anlage zur mechanischen Entwässerung von Schlamm durch Filtration unter Druck über Filtertücher.",
+      "source_url": "https://www.arieschem.com/about-us/markets-served/commercial-laundries-industry/",
+      "related_product": "Abwasserschlamm-Kammerfilterpresse",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "abwasser"
+      ]
+    }
+  ],
+  "provider_rubrics": [
+    {
+      "name": "Rohrnetz-Druckschutz und Entlüftungsservice",
+      "functions": [
+        "schuetzen",
+        "steuern"
+      ],
+      "water_types": [
+        "trinkwasser",
+        "brauchwasser"
+      ],
+      "audiences": [
+        "kommune",
+        "industrie"
+      ]
+    },
+    {
+      "name": "Maritime Ballast- und Bilgenwassertechnik",
+      "functions": [
+        "aufbereiten"
+      ],
+      "water_types": [
+        "ballastwasser",
+        "bilgenwasser"
+      ],
+      "audiences": [
+        "industrie"
+      ]
+    },
+    {
+      "name": "Deponie- und Industrieabwasserbehandlung",
+      "functions": [
+        "aufbereiten",
+        "wiederverwenden"
+      ],
+      "water_types": [
+        "deponiesickerwasser",
+        "abwasser"
+      ],
+      "audiences": [
+        "industrie",
+        "kommune"
+      ]
+    },
+    {
+      "name": "Umwelt-DNA-Probenahme",
+      "functions": [
+        "messen"
+      ],
+      "water_types": [
+        "oberflaechenwasser"
+      ],
+      "audiences": [
+        "kommune",
+        "industrie"
+      ]
+    }
+  ],
+  "counts": {
+    "new_glossary": 15,
+    "new_provider_rubrics": 4
+  },
+  "note": "Fachbegriffe sind keine Produktseiten, Anbieter-Rubriken keine echten Firmen. Alle neuen Datensätze bekommen dieselben kontrollierten Filtermerkmale und stabile IDs."
+}
