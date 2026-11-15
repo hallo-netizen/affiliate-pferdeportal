@@ -413,23 +413,460 @@
     }
   ],
   "next_workstreams": [
-    "Prüfe 16 alte SEO-HOLD-Kollisionen anhand belastbarer echter SERP-Zieladressen, nur freigegebene Kosten; die bisherige V61-Auswertung ist dafür unbrauchbar",
-    "Fachliche 11 Ergänzungen erst im bestehenden Kategorie-Plugin nach ausdrücklicher Freigabe im Gesamtsoll ergänzen, nicht als zweite Liste/zweites Plugin",
-    "Alten V63-Importzustand real in WP fertig lesen, nicht aus GitHub-Plan auf abgeschlossen schließen",
-    "Magazin, Glossar, Finder, Register einmalig mit demselben Roboterbüro verknüpfen; keine Parallelveröffentlichung"
+    "Gespeicherten V63-Import 227/227 einmalig nachlesen beziehungsweise fortsetzen; kein Neustart",
+    "Einen gebuendelten Nachtrag 16 Typseiten + 48 flache Rubriken nach ausdruecklicher WP-Freigabe ueber denselben Kategorie-Writer; OHNE Google-Adressen-Sperre",
+    "11 zusaetzliche V76-Entwuerfe spaeter an demselben Fachplan entscheiden; Gewerbe/Industrie nicht anfassen"
   ],
   "scope_caveat": "100 sind eine strukturelle sieben-Welten-Zahl, keine exakt bereinigte reine Privatwelt-Zahl. Humanoide Arbeitsseiten sind ausdrücklich außerhalb dieser neuen Recherche; keine neuen Arbeits- oder Gewerbetypen.",
   "seo_hold_readonly_review_date": "2026-11-15",
   "seo_hold_source": "RECHERCHE/V61_SEO_GESAMTAUSWERTUNG_20261114.md",
   "seo_hold_review_summary": {
-    "all_holds": 16,
-    "editorially_distinct": 10,
-    "editorial_overlap_open": 5,
-    "possible_duplicate": 1,
-    "seo_cleared": 0,
-    "paid_api_calls": 0
+    "total": 16,
+    "redaktionell_entschieden": 16,
+    "google_sperren": 0,
+    "zugelassene_unterschiedliche_typseiten": 16,
+    "unterschiedliche_wp_rubriken": 48,
+    "wp_importiert": 0,
+    "api_kosten": 0
   },
   "seo_hold_review": [
+    {
+      "id": "v46_h03",
+      "world": "Haushalt",
+      "status": "FACHLICH_FREI_OHNE_GOOGLE_URLS",
+      "wp_written": false,
+      "wordpress_release_pending": true,
+      "site_id": "v46_h03",
+      "path": [
+        "Haushalt",
+        "Kommunikation",
+        "Telepräsenzroboter"
+      ],
+      "facet_ids": [
+        "v46_h03_facet_1",
+        "v46_h03_facet_2",
+        "v46_h03_facet_3"
+      ],
+      "name": "Telepräsenzroboter",
+      "source_urls": [
+        "https://www.robotemi.com/product/temi-sales-contact/",
+        "https://www.robotemi.com/faq/"
+      ],
+      "reason": "Private Telepräsenz vs Pflegeeinrichtung; unterschiedliche Nutzersuche, gleicher Hersteller nur einmal im Modellregister",
+      "google_vergleich_noetig": false,
+      "seo_volume_unbekannt": true,
+      "model_claim": "temi V3"
+    },
+    {
+      "id": "v46_h06",
+      "world": "Haushalt",
+      "status": "FACHLICH_FREI_OHNE_GOOGLE_URLS",
+      "wp_written": false,
+      "wordpress_release_pending": true,
+      "site_id": "v46_h06",
+      "path": [
+        "Haushalt",
+        "Alltagshilfe",
+        "Aufräumroboter"
+      ],
+      "facet_ids": [
+        "v46_h06_facet_1",
+        "v46_h06_facet_2",
+        "v46_h06_facet_3"
+      ],
+      "name": "Aufräumroboter",
+      "source_urls": [
+        "https://src.stanford.edu/demo/house-heroes-the-tidy-taskforce",
+        "https://www.1x.tech/discover/neo-home-robot"
+      ],
+      "reason": "Aufräumen als Funktion von humanoider Bauform trennen; Querverweise statt zweiter Modellkopie",
+      "google_vergleich_noetig": false,
+      "seo_volume_unbekannt": true,
+      "model_claim": "Stanford TidyBot Entwicklungsbeleg"
+    },
+    {
+      "id": "v46_h07",
+      "world": "Haushalt",
+      "status": "FACHLICH_FREI_OHNE_GOOGLE_URLS",
+      "wp_written": false,
+      "wordpress_release_pending": true,
+      "site_id": "v46_h07",
+      "path": [
+        "Haushalt",
+        "Reinigung",
+        "Nasswischroboter"
+      ],
+      "facet_ids": [
+        "v46_h07_facet_1",
+        "v46_h07_facet_2",
+        "v46_h07_facet_3"
+      ],
+      "name": "Nasswischroboter",
+      "source_urls": [
+        "https://www.karcher.com/de/de/home-and-garden/produkte/rcf-3-p12696600"
+      ],
+      "reason": "Nur reine Nasswischroboter; Kombi-Saugwischer separat behandeln",
+      "google_vergleich_noetig": false,
+      "seo_volume_unbekannt": true,
+      "model_claim": "Kärcher RCF 3"
+    },
+    {
+      "id": "v46_h10",
+      "world": "Haushalt",
+      "status": "FACHLICH_FREI_OHNE_GOOGLE_URLS",
+      "wp_written": false,
+      "wordpress_release_pending": true,
+      "site_id": "v46_h10",
+      "path": [
+        "Haushalt",
+        "Alltagshilfe",
+        "Servierroboter"
+      ],
+      "facet_ids": [
+        "v46_h10_facet_1",
+        "v46_h10_facet_2",
+        "v46_h10_facet_3"
+      ],
+      "name": "Servierroboter",
+      "source_urls": [
+        "https://www.ipa.fraunhofer.de/de/aktuelle-forschung/roboter--und-assistenzsysteme/haushalts--und-assistenzrobotik/entertainmentroboter.html",
+        "https://www.ipa.fraunhofer.de/de/ueber_uns/labore-und-versuchsfelder/robotik-versuchsfelder.html",
+        "https://www.pudurobotics.com/en/products/bellabotpro"
+      ],
+      "reason": "Privates Servieren vs Gewerbe, eigenständige Nutzerfragen",
+      "google_vergleich_noetig": false,
+      "seo_volume_unbekannt": true,
+      "model_claim": "Fraunhofer Care-O-bot demonstrierter Service; KEIN Serien-Privatverkauf behauptet"
+    },
+    {
+      "id": "v46_h12",
+      "world": "Haushalt",
+      "status": "FACHLICH_FREI_OHNE_GOOGLE_URLS",
+      "wp_written": false,
+      "wordpress_release_pending": true,
+      "site_id": "v46_h12",
+      "path": [
+        "Haushalt",
+        "Kommunikation",
+        "Begleitroboter"
+      ],
+      "facet_ids": [
+        "v46_h12_facet_1",
+        "v46_h12_facet_2",
+        "v46_h12_facet_3"
+      ],
+      "name": "Begleitroboter",
+      "source_urls": [
+        "https://elliq.com/pages/faqs",
+        "https://elliq.com/pages/caregivers"
+      ],
+      "reason": "Sozialer Begleitroboter als Funktion, humanoide Gesprächsgeräte als Bauform, keine doppelte Modellanlage",
+      "google_vergleich_noetig": false,
+      "seo_volume_unbekannt": true,
+      "model_claim": "ElliQ US/Englisch; interaktives stationäres Gerät, nicht mobiler Roboter"
+    },
+    {
+      "id": "v46_ga04",
+      "world": "Garten",
+      "status": "FACHLICH_FREI_OHNE_GOOGLE_URLS",
+      "wp_written": false,
+      "wordpress_release_pending": true,
+      "site_id": "v46_ga04",
+      "path": [
+        "Garten",
+        "Grillreinigungsroboter"
+      ],
+      "facet_ids": [
+        "v46_ga04_facet_1",
+        "v46_ga04_facet_2",
+        "v46_ga04_facet_3"
+      ],
+      "name": "Grillreinigungsroboter",
+      "source_urls": [
+        "https://grillbots.com/",
+        "https://grillbots.com/products/robot-grill-cleaner"
+      ],
+      "reason": "Motorisch selbst reinigender Grillroboter, keine elektrische Handbürste",
+      "google_vergleich_noetig": false,
+      "seo_volume_unbekannt": true,
+      "model_claim": "Kaufangebot; einfach automatischer kleiner Reinigungsroboter, Funktionsgrenze zu normaler Bürste kenntlich"
+    },
+    {
+      "id": "v46_f01",
+      "world": "Freizeit",
+      "status": "FACHLICH_FREI_OHNE_GOOGLE_URLS",
+      "wp_written": false,
+      "wordpress_release_pending": true,
+      "site_id": "v46_f01",
+      "path": [
+        "Freizeit",
+        "Outdoor",
+        "Unterwasserroboter"
+      ],
+      "facet_ids": [
+        "v46_f01_facet_1",
+        "v46_f01_facet_2",
+        "v46_f01_facet_3"
+      ],
+      "name": "Unterwasserroboter",
+      "source_urls": [
+        "https://www.chasing.com/de/mini-s.html",
+        "https://www.chasing.com/en/mini-s-overview.html"
+      ],
+      "reason": "Unterwasser-Erkundungsroboter vs Bootsrumpfreiniger",
+      "google_vergleich_noetig": false,
+      "seo_volume_unbekannt": true,
+      "model_claim": "Verkaufener Hobby-ROV, fernbedient, nicht als vollautonom behauptet"
+    },
+    {
+      "id": "v46_f02",
+      "world": "Freizeit",
+      "status": "FACHLICH_FREI_OHNE_GOOGLE_URLS",
+      "wp_written": false,
+      "wordpress_release_pending": true,
+      "site_id": "v46_f02",
+      "path": [
+        "Freizeit",
+        "Filmen",
+        "Kamerabewegungsroboter"
+      ],
+      "facet_ids": [
+        "v46_f02_facet_1",
+        "v46_f02_facet_2",
+        "v46_f02_facet_3"
+      ],
+      "name": "Kamerabewegungsroboter",
+      "source_urls": [
+        "https://edelkrone.com/products/headplus",
+        "https://edelkrone.com/products/headone"
+      ],
+      "reason": "Motorische Kamerafahrten für Hobbyfilmer; keine doppelte Allgemeinseite",
+      "google_vergleich_noetig": false,
+      "seo_volume_unbekannt": true,
+      "model_claim": "Käufliche programmierbare Motorköpfe; prüfen ob bestimmtes Produkt echte autonome Motorsteuerung erfüllt"
+    },
+    {
+      "id": "v46_f03",
+      "world": "Freizeit",
+      "status": "FACHLICH_FREI_OHNE_GOOGLE_URLS",
+      "wp_written": false,
+      "wordpress_release_pending": true,
+      "site_id": "v46_f03",
+      "path": [
+        "Freizeit",
+        "Filmen",
+        "Folgedrohnen"
+      ],
+      "facet_ids": [
+        "v46_f03_facet_1",
+        "v46_f03_facet_2",
+        "v46_f03_facet_3"
+      ],
+      "name": "Folgedrohnen",
+      "source_urls": [
+        "https://dl.djicdn.com/downloads/DJI_Neo_2/UM/20251110/DJI_Neo_2_User_Manual_v1.0_de.pdf"
+      ],
+      "reason": "Folgedrohne mit Tracking statt Lerndrohne",
+      "google_vergleich_noetig": false,
+      "seo_volume_unbekannt": true,
+      "model_claim": "DJI Flugmodus-Betrieb belegt; Drohne ist fliegender Robotertyp mit bedingter Autonomie, keine Vollautonomie voraussetzen"
+    },
+    {
+      "id": "v46_s03",
+      "world": "Sport",
+      "status": "FACHLICH_FREI_OHNE_GOOGLE_URLS",
+      "wp_written": false,
+      "wordpress_release_pending": true,
+      "site_id": "v46_s03",
+      "path": [
+        "Sport",
+        "Ballsport",
+        "Badmintonroboter"
+      ],
+      "facet_ids": [
+        "v46_s03_facet_1",
+        "v46_s03_facet_2",
+        "v46_s03_facet_3"
+      ],
+      "name": "Badmintonroboter",
+      "source_urls": [
+        "https://badminton-shop.de/produkt/trainbot-badminton-shuttlecock-feeder/",
+        "https://pusun.com/products/pusun-pb-6001-badminton-shuttlecock-machine?variant=491447"
+      ],
+      "reason": "Genau EINE Badmintonroboter-Seite: Badminton-Ballmaschine und Zuspielroboter sind Synonyme, keine zweite Produktseite",
+      "google_vergleich_noetig": false,
+      "seo_volume_unbekannt": true,
+      "model_claim": "Trainingsmaschine erhältlich; robotische Autonomie teils begrenzt, analog Tennis-Ballmaschinen behandeln"
+    },
+    {
+      "id": "v46_s07",
+      "world": "Sport",
+      "status": "FACHLICH_FREI_OHNE_GOOGLE_URLS",
+      "wp_written": false,
+      "wordpress_release_pending": true,
+      "site_id": "v46_s07",
+      "path": [
+        "Sport",
+        "Sportkameraroboter"
+      ],
+      "facet_ids": [
+        "v46_s07_facet_1",
+        "v46_s07_facet_2",
+        "v46_s07_facet_3"
+      ],
+      "name": "Sportkameraroboter",
+      "source_urls": [
+        "https://shop.movensee.com/de/produkte/pix4team-2.html",
+        "https://shop.movensee.com/de/produkte/pix4team-2/pix4team-2-auto-follow-kamera-fur-teamsportarten.html"
+      ],
+      "reason": "Sport-/Spielverfolgung vs allgemeine Kamerabewegung",
+      "google_vergleich_noetig": false,
+      "seo_volume_unbekannt": true,
+      "model_claim": "Vereinsprodukt real käuflich; tatsächliche automatische Schwenk-/Zielverfolgung laut Hersteller"
+    },
+    {
+      "id": "v46_b01",
+      "world": "Bildung",
+      "status": "FACHLICH_FREI_OHNE_GOOGLE_URLS",
+      "wp_written": false,
+      "wordpress_release_pending": true,
+      "site_id": "v46_b01",
+      "path": [
+        "Bildung",
+        "Roboterbaukästen"
+      ],
+      "facet_ids": [
+        "v46_b01_facet_1",
+        "v46_b01_facet_2",
+        "v46_b01_facet_3"
+      ],
+      "name": "Roboterbaukästen",
+      "source_urls": [
+        "https://support.makeblock.com/hc/en-us/articles/1500006183021-What-is-mBot-Neo-mBot2",
+        "https://www.makeblock.com/pages/mbot2-coding-robot"
+      ],
+      "reason": "Selbstbau-Roboterbaukasten vs fertiger Lernroboter",
+      "google_vergleich_noetig": false,
+      "seo_volume_unbekannt": true,
+      "model_claim": "Realer Bildungsbausatz auf dem Markt"
+    },
+    {
+      "id": "v46_b02",
+      "world": "Bildung",
+      "status": "FACHLICH_FREI_OHNE_GOOGLE_URLS",
+      "wp_written": false,
+      "wordpress_release_pending": true,
+      "site_id": "v46_b02",
+      "path": [
+        "Bildung",
+        "Forschung",
+        "ROS-Roboter"
+      ],
+      "facet_ids": [
+        "v46_b02_facet_1",
+        "v46_b02_facet_2",
+        "v46_b02_facet_3"
+      ],
+      "name": "ROS-Roboter",
+      "source_urls": [
+        "https://www.turtlebot.com/turtlebot3/",
+        "https://www.mybotshop.de/Research-Education"
+      ],
+      "reason": "ROS-Lehr-/Forschungsplattform vs Anfänger-Lernroboter; keine Industriekategorie",
+      "google_vergleich_noetig": false,
+      "seo_volume_unbekannt": true,
+      "model_claim": "Käufliche ROS-Plattformen, Deutschlandvertrieb bestätigt"
+    },
+    {
+      "id": "v46_b04",
+      "world": "Bildung",
+      "status": "FACHLICH_FREI_OHNE_GOOGLE_URLS",
+      "wp_written": false,
+      "wordpress_release_pending": true,
+      "site_id": "v46_b04",
+      "path": [
+        "Bildung",
+        "Forschung",
+        "Lehrroboterarme"
+      ],
+      "facet_ids": [
+        "v46_b04_facet_1",
+        "v46_b04_facet_2",
+        "v46_b04_facet_3"
+      ],
+      "name": "Lehrroboterarme",
+      "source_urls": [
+        "https://dobotcn.com/products/education/magician-e6.html",
+        "https://www.teq.com/product-and-service/dobot/"
+      ],
+      "reason": "Didaktischer Lehrroboterarm mit anderem Lerninhalt als Hobby-Tischarm, Querlinks",
+      "google_vergleich_noetig": false,
+      "seo_volume_unbekannt": true,
+      "model_claim": "Marktfähige Education-Roboterarmmodelle; dasselbe Modell darf beiden Seiten dienen, aber Didaktik/Modelle deutlich trennen"
+    },
+    {
+      "id": "v46_b05",
+      "world": "Bildung",
+      "status": "FACHLICH_FREI_OHNE_GOOGLE_URLS",
+      "wp_written": false,
+      "wordpress_release_pending": true,
+      "site_id": "v46_b05",
+      "path": [
+        "Bildung",
+        "Lernhilfe",
+        "Leselernroboter"
+      ],
+      "facet_ids": [
+        "v46_b05_facet_1",
+        "v46_b05_facet_2",
+        "v46_b05_facet_3"
+      ],
+      "name": "Leselernroboter",
+      "source_urls": [
+        "https://sarai.iar.kit.edu/289.php"
+      ],
+      "reason": "Leseförderungs-Roboter als konkrete Aufgabe; Forschungsstatus kenntlich",
+      "google_vergleich_noetig": false,
+      "seo_volume_unbekannt": true,
+      "model_claim": "KIT Projekt Wintersemester 2026/27, in Entwicklung; keine belegte Wirksamkeit der geplanten Unterrichtsfunktionen behaupten"
+    },
+    {
+      "id": "v46_b07",
+      "world": "Bildung",
+      "status": "FACHLICH_FREI_OHNE_GOOGLE_URLS",
+      "wp_written": false,
+      "wordpress_release_pending": true,
+      "site_id": "v46_b07",
+      "path": [
+        "Bildung",
+        "Forschung",
+        "Chemielaborroboter"
+      ],
+      "facet_ids": [
+        "v46_b07_facet_1",
+        "v46_b07_facet_2",
+        "v46_b07_facet_3"
+      ],
+      "name": "Chemielaborroboter",
+      "source_urls": [
+        "https://www.nist.gov/programs-projects/low-cost-robot-science-kit-education",
+        "https://www.jbnu.ac.kr/en/Board/213511/detailView.do?menu=3086"
+      ],
+      "reason": "Chemie-Versuche in Bildung und Hochschule, keine Industrie-Laborautomation",
+      "google_vergleich_noetig": false,
+      "seo_volume_unbekannt": true,
+      "model_claim": "NIST LEGOLAS in Hochschulkursen belegt, keine generelle Laborzulassung behaupten"
+    }
+  ],
+  "wordpress_readback_attempt": {
+    "date": "2026-11-15",
+    "public_home": "https://robotik.oliver-beil.de/",
+    "result": "In dieser Umgebung weder per Webabruf noch direkter Adressauflösung zugänglich; kein Beweis dass Website global offline ist.",
+    "last_verified_live_progress": "16/227 aus früherem V63-Bericht",
+    "current_live_progress": "UNBESTAETIGT",
+    "needed_once": "Ein aktueller WordPress-Gesamtbericht aus bestehendem Robotik-Kategorie-Plugin, erst falls der Live-Stand ohne Zugang nicht belegbar bleibt."
+  },
+  "seo_hold_review_previous_20261115": [
     {
       "id": "v46_h03",
       "world": "Haushalt",
@@ -591,12 +1028,352 @@
       "wp_publish_authorized": false
     }
   ],
-  "wordpress_readback_attempt": {
-    "date": "2026-11-15",
-    "public_home": "https://robotik.oliver-beil.de/",
-    "result": "In dieser Umgebung weder per Webabruf noch direkter Adressauflösung zugänglich; kein Beweis dass Website global offline ist.",
-    "last_verified_live_progress": "16/227 aus früherem V63-Bericht",
-    "current_live_progress": "UNBESTAETIGT",
-    "needed_once": "Ein aktueller WordPress-Gesamtbericht aus bestehendem Robotik-Kategorie-Plugin, erst falls der Live-Stand ohne Zugang nicht belegbar bleibt."
+  "seo_hold_review_summary_previous": {
+    "all_holds": 16,
+    "editorially_distinct": 10,
+    "editorial_overlap_open": 5,
+    "possible_duplicate": 1,
+    "seo_cleared": 0,
+    "paid_api_calls": 0
+  },
+  "release_plan_16": {
+    "status": "FACHFREIGABE_NICHT_WP_FREIGABE",
+    "old_safe_import_first": "227/227 real nachlesen/gespeicherten Lauf fortsetzen",
+    "new_followup": {
+      "pages": [
+        {
+          "id": "v46_h03",
+          "path": [
+            "Haushalt",
+            "Kommunikation",
+            "Telepräsenzroboter"
+          ]
+        },
+        {
+          "id": "v46_h06",
+          "path": [
+            "Haushalt",
+            "Alltagshilfe",
+            "Aufräumroboter"
+          ]
+        },
+        {
+          "id": "v46_h07",
+          "path": [
+            "Haushalt",
+            "Reinigung",
+            "Nasswischroboter"
+          ]
+        },
+        {
+          "id": "v46_h10",
+          "path": [
+            "Haushalt",
+            "Alltagshilfe",
+            "Servierroboter"
+          ]
+        },
+        {
+          "id": "v46_h12",
+          "path": [
+            "Haushalt",
+            "Kommunikation",
+            "Begleitroboter"
+          ]
+        },
+        {
+          "id": "v46_ga04",
+          "path": [
+            "Garten",
+            "Grillreinigungsroboter"
+          ]
+        },
+        {
+          "id": "v46_f01",
+          "path": [
+            "Freizeit",
+            "Outdoor",
+            "Unterwasserroboter"
+          ]
+        },
+        {
+          "id": "v46_f02",
+          "path": [
+            "Freizeit",
+            "Filmen",
+            "Kamerabewegungsroboter"
+          ]
+        },
+        {
+          "id": "v46_f03",
+          "path": [
+            "Freizeit",
+            "Filmen",
+            "Folgedrohnen"
+          ]
+        },
+        {
+          "id": "v46_s03",
+          "path": [
+            "Sport",
+            "Ballsport",
+            "Badmintonroboter"
+          ]
+        },
+        {
+          "id": "v46_s07",
+          "path": [
+            "Sport",
+            "Sportkameraroboter"
+          ]
+        },
+        {
+          "id": "v46_b01",
+          "path": [
+            "Bildung",
+            "Roboterbaukästen"
+          ]
+        },
+        {
+          "id": "v46_b02",
+          "path": [
+            "Bildung",
+            "Forschung",
+            "ROS-Roboter"
+          ]
+        },
+        {
+          "id": "v46_b04",
+          "path": [
+            "Bildung",
+            "Forschung",
+            "Lehrroboterarme"
+          ]
+        },
+        {
+          "id": "v46_b05",
+          "path": [
+            "Bildung",
+            "Lernhilfe",
+            "Leselernroboter"
+          ]
+        },
+        {
+          "id": "v46_b07",
+          "path": [
+            "Bildung",
+            "Forschung",
+            "Chemielaborroboter"
+          ]
+        }
+      ],
+      "categories": [
+        {
+          "id": "v46_h03_facet_1",
+          "owner": "v46_h03"
+        },
+        {
+          "id": "v46_h03_facet_2",
+          "owner": "v46_h03"
+        },
+        {
+          "id": "v46_h03_facet_3",
+          "owner": "v46_h03"
+        },
+        {
+          "id": "v46_h06_facet_1",
+          "owner": "v46_h06"
+        },
+        {
+          "id": "v46_h06_facet_2",
+          "owner": "v46_h06"
+        },
+        {
+          "id": "v46_h06_facet_3",
+          "owner": "v46_h06"
+        },
+        {
+          "id": "v46_h07_facet_1",
+          "owner": "v46_h07"
+        },
+        {
+          "id": "v46_h07_facet_2",
+          "owner": "v46_h07"
+        },
+        {
+          "id": "v46_h07_facet_3",
+          "owner": "v46_h07"
+        },
+        {
+          "id": "v46_h10_facet_1",
+          "owner": "v46_h10"
+        },
+        {
+          "id": "v46_h10_facet_2",
+          "owner": "v46_h10"
+        },
+        {
+          "id": "v46_h10_facet_3",
+          "owner": "v46_h10"
+        },
+        {
+          "id": "v46_h12_facet_1",
+          "owner": "v46_h12"
+        },
+        {
+          "id": "v46_h12_facet_2",
+          "owner": "v46_h12"
+        },
+        {
+          "id": "v46_h12_facet_3",
+          "owner": "v46_h12"
+        },
+        {
+          "id": "v46_ga04_facet_1",
+          "owner": "v46_ga04"
+        },
+        {
+          "id": "v46_ga04_facet_2",
+          "owner": "v46_ga04"
+        },
+        {
+          "id": "v46_ga04_facet_3",
+          "owner": "v46_ga04"
+        },
+        {
+          "id": "v46_f01_facet_1",
+          "owner": "v46_f01"
+        },
+        {
+          "id": "v46_f01_facet_2",
+          "owner": "v46_f01"
+        },
+        {
+          "id": "v46_f01_facet_3",
+          "owner": "v46_f01"
+        },
+        {
+          "id": "v46_f02_facet_1",
+          "owner": "v46_f02"
+        },
+        {
+          "id": "v46_f02_facet_2",
+          "owner": "v46_f02"
+        },
+        {
+          "id": "v46_f02_facet_3",
+          "owner": "v46_f02"
+        },
+        {
+          "id": "v46_f03_facet_1",
+          "owner": "v46_f03"
+        },
+        {
+          "id": "v46_f03_facet_2",
+          "owner": "v46_f03"
+        },
+        {
+          "id": "v46_f03_facet_3",
+          "owner": "v46_f03"
+        },
+        {
+          "id": "v46_s03_facet_1",
+          "owner": "v46_s03"
+        },
+        {
+          "id": "v46_s03_facet_2",
+          "owner": "v46_s03"
+        },
+        {
+          "id": "v46_s03_facet_3",
+          "owner": "v46_s03"
+        },
+        {
+          "id": "v46_s07_facet_1",
+          "owner": "v46_s07"
+        },
+        {
+          "id": "v46_s07_facet_2",
+          "owner": "v46_s07"
+        },
+        {
+          "id": "v46_s07_facet_3",
+          "owner": "v46_s07"
+        },
+        {
+          "id": "v46_b01_facet_1",
+          "owner": "v46_b01"
+        },
+        {
+          "id": "v46_b01_facet_2",
+          "owner": "v46_b01"
+        },
+        {
+          "id": "v46_b01_facet_3",
+          "owner": "v46_b01"
+        },
+        {
+          "id": "v46_b02_facet_1",
+          "owner": "v46_b02"
+        },
+        {
+          "id": "v46_b02_facet_2",
+          "owner": "v46_b02"
+        },
+        {
+          "id": "v46_b02_facet_3",
+          "owner": "v46_b02"
+        },
+        {
+          "id": "v46_b04_facet_1",
+          "owner": "v46_b04"
+        },
+        {
+          "id": "v46_b04_facet_2",
+          "owner": "v46_b04"
+        },
+        {
+          "id": "v46_b04_facet_3",
+          "owner": "v46_b04"
+        },
+        {
+          "id": "v46_b05_facet_1",
+          "owner": "v46_b05"
+        },
+        {
+          "id": "v46_b05_facet_2",
+          "owner": "v46_b05"
+        },
+        {
+          "id": "v46_b05_facet_3",
+          "owner": "v46_b05"
+        },
+        {
+          "id": "v46_b07_facet_1",
+          "owner": "v46_b07"
+        },
+        {
+          "id": "v46_b07_facet_2",
+          "owner": "v46_b07"
+        },
+        {
+          "id": "v46_b07_facet_3",
+          "owner": "v46_b07"
+        }
+      ],
+      "task_count": 64
+    },
+    "all_after_original": {
+      "original_safe_pages": 68,
+      "original_safe_facets": 159,
+      "further_pages": 16,
+      "further_facets": 48,
+      "sum_new_pages": 84,
+      "sum_new_facets": 207
+    },
+    "google_search_never_required": true,
+    "only_existing_robotik_category_writer": true,
+    "no_industry_business_work": true,
+    "eleven_v76_new_cand_not_in_this_delta": true
   }
 }
