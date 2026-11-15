@@ -1,0 +1,576 @@
+{
+  "version": "W12_20261115",
+  "authoritative_w4_products": 79,
+  "read_only": true,
+  "product_candidates": 26,
+  "proposed_article_categories": 37,
+  "proposed_article_directions": 111,
+  "wording": "Only researched product-type candidates. Neither organic traffic nor separate SERP is proven. Some overlaps need review. Pool & Teich is optional eighth main area.",
+  "areas": {
+    "Brunnen & Bewässerung": 6,
+    "Pumpen & Druck": 3,
+    "Wasseraufbereitung": 2,
+    "Abwassertechnik": 3,
+    "Regenwasser & Wassertanks": 2,
+    "Wasseranalyse": 2,
+    "Pool & Teich (optionaler 8. Hauptbereich)": 8
+  },
+  "candidates": [
+    {
+      "area": "Brunnen & Bewässerung",
+      "product": "Brunnenkopf",
+      "source_url": "https://www.stuewa.de/de/produkte/brunnenabschluesse/brunnenkoepfe",
+      "overlap_with_existing": "Brunnenfilterrohr ist Filterkomponente, kein dichtender Brunnenabschluss",
+      "article_categories": [
+        {
+          "name": "Ausführung",
+          "article_ideas": [
+            "Brunnenkopf aus Edelstahl oder PVC auswählen",
+            "Brunnenkopf und Rohrdurchmesser passend kombinieren",
+            "Kabel- und Peildurchführungen am Brunnenkopf unterscheiden"
+          ]
+        },
+        {
+          "name": "Brunnenschutz",
+          "article_ideas": [
+            "Brunnenkopf gegen Oberflächenwasser abdichten",
+            "Be- und Entlüftung am Brunnenabschluss planen",
+            "Dichtungen und Schraubverbindungen kontrollieren"
+          ]
+        }
+      ],
+      "priority": "A",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Brunnen & Bewässerung",
+      "product": "Brunnen-Vollwandrohr",
+      "source_url": "https://www.stuewa.de/de/produkte/pvc-brunnenfilter-und-aufsatzrohre/pvc-filter/vollwandrohre",
+      "overlap_with_existing": "Vollwandrohr gegenüber vorhandenem Brunnenfilterrohr nur bei eigenständigen Ausbaufragen",
+      "article_categories": [
+        {
+          "name": "Brunnenausbau",
+          "article_ideas": [
+            "Vollwandrohr und Filterrohr funktional abgrenzen",
+            "Rohrwerkstoff und Nenndurchmesser auswählen",
+            "Gewinde- und Dichtverbindungen beim Brunnenausbau prüfen"
+          ]
+        }
+      ],
+      "priority": "B",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Brunnen & Bewässerung",
+      "product": "Viereckregner",
+      "source_url": "https://www.gardena.com/de/produkte/bewaesserung/regner/viereckregner-aqua-m/967976301.html",
+      "overlap_with_existing": "Vorhandener Versenkregner ist fest installiert; mobiler Viereckregner hat andere Auswahlfragen",
+      "article_categories": [
+        {
+          "name": "Flächenberegnung",
+          "article_ideas": [
+            "Rechteckige Rasenflächen mit Viereckregnern abdecken",
+            "Reichweite und Sprengbreite richtig einstellen",
+            "Erforderlichen Leitungsdruck für Viereckregner abschätzen"
+          ]
+        }
+      ],
+      "priority": "A",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Brunnen & Bewässerung",
+      "product": "Bewässerungs-Magnetventil",
+      "source_url": "https://www.gardena.com/de/produkte/bewaesserung/bewaesserungssteuerung",
+      "overlap_with_existing": "Vorhandener Bewässerungscomputer steuert; ein Magnetventil ist das ausführende Bauteil",
+      "article_categories": [
+        {
+          "name": "Ventilwahl",
+          "article_ideas": [
+            "9-V- und 24-V-Bewässerungsventile unterscheiden",
+            "Ventilgröße und Durchfluss passend auswählen",
+            "Ventile für mehrere Bewässerungszonen planen"
+          ]
+        },
+        {
+          "name": "Ventilbetrieb",
+          "article_ideas": [
+            "Magnetventile in Ventilboxen anordnen",
+            "Ventile manuell betätigen und auf Störungen prüfen",
+            "Bewässerungsventile winterfest machen"
+          ]
+        }
+      ],
+      "priority": "A",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Brunnen & Bewässerung",
+      "product": "Tropfrohr",
+      "source_url": "https://www.gardena.com/de/produkte/bewaesserung/micro-drip-system",
+      "overlap_with_existing": "Vorhandenes Tropfbewässerungsset ist Gesamtsystem; Tropfrohr ist separat kaufbares Rohrprodukt mit eigenem Einbau",
+      "article_categories": [
+        {
+          "name": "Rohrverlegung",
+          "article_ideas": [
+            "Oberirdische und unterirdische Tropfrohre vergleichen",
+            "Tropferabstände für Hecken und Pflanzreihen auswählen",
+            "Druckverteilung bei langen Tropfrohrstrecken planen"
+          ]
+        }
+      ],
+      "priority": "B",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Brunnen & Bewässerung",
+      "product": "Solar-Bewässerungsset",
+      "source_url": "https://www.gardena.com/de/produkte/bewaesserung/bewaesserung-ohne-wasseranschluss-urlaubsbewaesserung/solar-bewaesserungs-aquabloom-set/967999001.html",
+      "overlap_with_existing": "Abgrenzung zu Tropfbewässerungsset durch autarke Pumpe+Solarstrom+Behälter ohne Wasseranschluss",
+      "article_categories": [
+        {
+          "name": "Autarke Versorgung",
+          "article_ideas": [
+            "Solar-Bewässerungsset für Balkon und Hochbeet auswählen",
+            "Wasserbehälter und Tropferzahl auf Urlaubszeit abstimmen",
+            "Solarmodul und Akkuleistung für Bewässerungsintervalle beurteilen"
+          ]
+        }
+      ],
+      "priority": "A",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Pumpen & Druck",
+      "product": "Trinkwasser-Druckminderer",
+      "source_url": "https://www.dvgw.de/themen/wasser/verbraucherinformationen/trinkwasser-installation/",
+      "overlap_with_existing": "Bestehende Druckerhöhungsanlage erhöht Druck; Druckminderer reduziert zu hohen Netzdruck",
+      "article_categories": [
+        {
+          "name": "Druckregelung",
+          "article_ideas": [
+            "Passenden Ausgangsdruck am Trinkwasser-Druckminderer wählen",
+            "Anschlussgröße und Durchflussleistung dimensionieren",
+            "Schwankenden Hauswasserdruck richtig beurteilen"
+          ]
+        },
+        {
+          "name": "Wartung",
+          "article_ideas": [
+            "Druckminderer auf Druckabweichungen kontrollieren",
+            "Geräusche und Druckschläge an Druckminderern erkennen",
+            "Wartungsbedarf von Hausdruckminderern einschätzen"
+          ]
+        }
+      ],
+      "priority": "A",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Pumpen & Druck",
+      "product": "Warmwasser-Zirkulationspumpe",
+      "source_url": "https://www.grundfos.com/de/support/faq/what-are-the-requirements-for-the-hot-water-recirculation-pump",
+      "overlap_with_existing": "Nicht Garten-/Tiefbrunnenpumpe: eigener hygienischer Warmwasser-Zirkulationskreis",
+      "article_categories": [
+        {
+          "name": "Pumpenauswahl",
+          "article_ideas": [
+            "Zirkulationspumpe nach Leitungsnetz und Förderbedarf auswählen",
+            "Geeignete Materialien für Trinkwarmwasserpumpen unterscheiden",
+            "Temperaturgeführte Pumpenvarianten vergleichen"
+          ]
+        },
+        {
+          "name": "Energie & Betrieb",
+          "article_ideas": [
+            "Zirkulationszeiten und Wärmeverluste aufeinander abstimmen",
+            "Wasserhygiene bei unterbrochener Zirkulation berücksichtigen",
+            "Geräusche und Luft in der Zirkulationsleitung erkennen"
+          ]
+        }
+      ],
+      "priority": "A",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Pumpen & Druck",
+      "product": "Automatisches Leckageschutzventil",
+      "source_url": "https://www.syr.de/de/Produkte/BB120F93-73D2-4AD2-B362-5307DCC3866A/ISI-Home-Connect-System",
+      "overlap_with_existing": "Schnittmenge Hab & Bewahr: dort Risikovermeidung, hier Wassermesstechnik/Absperrprodukt; nur ein technischer Produkt-Owner",
+      "article_categories": [
+        {
+          "name": "Leckagemessung",
+          "article_ideas": [
+            "Druckabfall und Verbrauchsmessung zur Leckageerkennung vergleichen",
+            "Grenzwerte für kleine Lecks und große Wasserentnahmen festlegen",
+            "Zentrale und zonenweise Wasserabsperrung unterscheiden"
+          ]
+        },
+        {
+          "name": "Steuerung",
+          "article_ideas": [
+            "Leckageschutzventil mit Smart Home verbinden",
+            "Abwesenheitsmodus und automatische Absperrung nutzen",
+            "Betrieb des Wasserschutzventils bei Netzwerkausfall prüfen"
+          ]
+        }
+      ],
+      "priority": "B",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Wasseraufbereitung",
+      "product": "Trinkwasser-Hygienespülstation",
+      "source_url": "https://www.kemper-group.com/de-de/gebaeudetechnik/produkte/hygienesystem-khs/khs-hygienespuelungen/index.html",
+      "overlap_with_existing": "Bestehende UV-Desinfektionsanlage behandelt Wasser; Hygienespülung tauscht stagnierendes Leitungswasser aus",
+      "article_categories": [
+        {
+          "name": "Spültechnik",
+          "article_ideas": [
+            "Zeit- und volumengesteuerte Hygienespülung vergleichen",
+            "Kalt- und Warmwasserstränge bei Hygienespülstationen berücksichtigen",
+            "Einsatz in Schulen, Vereinen und zeitweise genutzten Räumen abgrenzen"
+          ]
+        },
+        {
+          "name": "Kontrolle",
+          "article_ideas": [
+            "Spülintervalle für unregelmäßig genutzte Leitungen festlegen",
+            "Spülereignisse und Wasserwechsel dokumentieren",
+            "Freien Auslauf und Ableitung einer Hygienespülstation prüfen"
+          ]
+        }
+      ],
+      "priority": "A",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Wasseraufbereitung",
+      "product": "Wasserspar-Strahlregler",
+      "source_url": "https://www.neoperl.com/de/de/handel/produkte/strahlregler/wasserspartechnologien",
+      "overlap_with_existing": "Nicht mit vorhandenem Wasserfilter-Anschlussadapter verwechseln: Durchflusssteuerung statt Filteranschluss",
+      "article_categories": [
+        {
+          "name": "Durchfluss",
+          "article_ideas": [
+            "Strahlregler mit festem Durchflussbegrenzer vergleichen",
+            "Druckabhängige und druckunabhängige Mengenregelung unterscheiden",
+            "Passende Strahlregler für Niederdruckarmaturen auswählen"
+          ]
+        }
+      ],
+      "priority": "A",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Abwassertechnik",
+      "product": "Duschwasser-Wärmetauscher",
+      "source_url": "https://www.co2online.de/energie-sparen/wasser-sparen/warmwasserbereitung/warmwasser-waermerueckgewinnung/",
+      "overlap_with_existing": "Bestehende Grauwasseranlage bereitet Wasser zur Wiederverwendung auf; Wärmetauscher gewinnt Wärme aus Abwasser zurück",
+      "article_categories": [
+        {
+          "name": "Bauarten",
+          "article_ideas": [
+            "Duschrinne und Fallrohrwärmetauscher vergleichen",
+            "Duschwasser-Wärmetauscher für Neubau oder Nachrüstung auswählen",
+            "Einsatz im Privathaus gegenüber Sportstätte beurteilen"
+          ]
+        },
+        {
+          "name": "Wirtschaftlichkeit",
+          "article_ideas": [
+            "Wärmerückgewinnung anhand von Duschdauer und Warmwasserbedarf bewerten",
+            "Duschwasser-Wärmerückgewinnung mit Warmwasserbereitung kombinieren",
+            "Hygienische Trennung von Frisch- und Duschabwasser beachten"
+          ]
+        }
+      ],
+      "priority": "A",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Regenwasser & Wassertanks",
+      "product": "Regenwasser-Ablaufdrossel",
+      "source_url": "https://www.intewa.com/de/intewa-produkte/ablaufdrosseln/",
+      "overlap_with_existing": "Bestehende Retentionszisterne speichert; separate Drossel regelt Abgabe in den Abfluss",
+      "article_categories": [
+        {
+          "name": "Abflussregelung",
+          "article_ideas": [
+            "Ablaufdrossel nach zulässiger Abflussmenge wählen",
+            "Schlauchdrossel und Edelstahldrossel unterscheiden",
+            "Einbauposition und Wartung einer Zisternendrossel planen"
+          ]
+        }
+      ],
+      "priority": "A",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Regenwasser & Wassertanks",
+      "product": "Regenwasser-Sedimentationsanlage",
+      "source_url": "https://www.aco.de/anwendungen/regenwasserbewirtschaftung/regenwasserbehandlung",
+      "overlap_with_existing": "Bestehende Fallrohr- und Zisternenfilter dienen anderen Einbauorten; Sedimentationsanlage behandelt belasteten Oberflächenabfluss",
+      "article_categories": [
+        {
+          "name": "Niederschlagsreinigung",
+          "article_ideas": [
+            "Sedimentation vor Versickerung oder Einleitung auswählen",
+            "Dachflächenabfluss von Verkehrsflächenabfluss abgrenzen",
+            "Abscheidung von Schwebstoffen in Sedimentationsanlagen beurteilen"
+          ]
+        },
+        {
+          "name": "Anlagenbetrieb",
+          "article_ideas": [
+            "Schlammanfall und Inspektionsintervalle abschätzen",
+            "Hydrodynamischen Abscheider gegenüber einfachen Absetzschächten vergleichen",
+            "Reinigung und Schlammabfuhr einer Sedimentationsanlage planen"
+          ]
+        }
+      ],
+      "priority": "B",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Abwassertechnik",
+      "product": "Fettabscheider",
+      "source_url": "https://www.aco.de/anwendungen/gewaesserschutz/fetthaltiges-abwasser",
+      "overlap_with_existing": "Vorhandene Kleinkläranlage behandelt häusliches Abwasser; Fettabscheider hält Küchenfett in kleinen Betrieben zurück",
+      "article_categories": [
+        {
+          "name": "Bemessung",
+          "article_ideas": [
+            "Fettabscheider für kleine Gastronomieküchen dimensionieren",
+            "Unterirdischen und innen aufgestellten Fettabscheider vergleichen",
+            "Nenngröße und Schlammfangvolumen wählen"
+          ]
+        },
+        {
+          "name": "Betrieb & Pflege",
+          "article_ideas": [
+            "Entleerung und Reinigung eines Fettabscheiders organisieren",
+            "Geruchs- und Ablagerungsprobleme früh erkennen",
+            "Wartung und Prüfung von Fettabscheidern einplanen"
+          ]
+        }
+      ],
+      "priority": "A",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Abwassertechnik",
+      "product": "Leichtflüssigkeitsabscheider",
+      "source_url": "https://www.aco.de/produktfinderuebersicht/leichtfluessigkeitsabscheider",
+      "overlap_with_existing": "Nicht Fettabscheider: Trennung mineralischer Öle/Kraftstoffe an Werkstätten, Waschplätzen etc.",
+      "article_categories": [
+        {
+          "name": "Ölabscheidung",
+          "article_ideas": [
+            "Koaleszenzabscheider und andere Ölabscheider unterscheiden",
+            "Schlammfang und Nennleistung eines Ölabscheiders auslegen",
+            "Warnanlage und selbsttätigen Verschluss bei Ölabscheidern bewerten"
+          ]
+        }
+      ],
+      "priority": "B",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Wasseranalyse",
+      "product": "Gelöstsauerstoff-Messgerät",
+      "source_url": "https://www.xylemanalytics.com/de/produkte/messgeraete/sauerstoff-messgeraete",
+      "overlap_with_existing": "Vergleich mit bestehendem Wasser-Multimessgerät: getrennte Messaufgabe Gewässer/Teich/Abwasser; SEO-Abgrenzung offen",
+      "article_categories": [
+        {
+          "name": "Sauerstoffmessung",
+          "article_ideas": [
+            "Optische und elektrochemische Sauerstoffmessgeräte vergleichen",
+            "Gelöstsauerstoff im Teich oder Abwasser richtig messen",
+            "Sauerstoffsonde kalibrieren und pflegen"
+          ]
+        }
+      ],
+      "priority": "B",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Wasseranalyse",
+      "product": "Leitfähigkeitsmessgerät",
+      "source_url": "https://www.xylemanalytics.com/de/produkte/messgeraete/leitfaehigkeits-messgeraete",
+      "overlap_with_existing": "Einzelmessgerät gegenüber vorhandenem Wasser-Multimessgerät: SEO-Intent-Kollision zwingend prüfen",
+      "article_categories": [
+        {
+          "name": "Leitwertmessung",
+          "article_ideas": [
+            "Leitfähigkeitsmessgerät nach Messbereich auswählen",
+            "Temperaturkompensation bei Leitfähigkeitsmessungen verstehen",
+            "Leitfähigkeitssonde reinigen und kalibrieren"
+          ]
+        }
+      ],
+      "priority": "C",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Pool & Teich (optionaler 8. Hauptbereich)",
+      "product": "Pool-Sandfilteranlage",
+      "source_url": "https://www.steinbach-group.com/de/040385-filteranlage-classic-250n-de/",
+      "overlap_with_existing": "Abgrenzung zu Hauswasserfeinfilter über Poolkreislauf, Rückspülung und Filtermedium",
+      "article_categories": [
+        {
+          "name": "Filtration",
+          "article_ideas": [
+            "Sandfilteranlage nach Beckenvolumen dimensionieren",
+            "Sand und alternative Filtermedien vergleichen",
+            "Umwälzleistung und Filterkessel aufeinander abstimmen"
+          ]
+        },
+        {
+          "name": "Filterbetrieb",
+          "article_ideas": [
+            "Mehrwegeventil und Rückspülstellung richtig verstehen",
+            "Filterdruck und Rückspülbedarf bewerten",
+            "Sandfilteranlage für den Winter außer Betrieb nehmen"
+          ]
+        }
+      ],
+      "priority": "A",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Pool & Teich (optionaler 8. Hauptbereich)",
+      "product": "Pool-Dosieranlage",
+      "source_url": "https://www.bayrol.de/bayrol-technik-dosieranlagen",
+      "overlap_with_existing": "Bestehende Wasser-Dosieranlage betrifft Wasseraufbereitung allgemein; Pool-pH-/Desinfektionsregelung unterscheidet sich chemisch und fachlich",
+      "article_categories": [
+        {
+          "name": "Dosiersteuerung",
+          "article_ideas": [
+            "pH- und Redox-geregelte Pool-Dosieranlagen vergleichen",
+            "Dosieranlage für Beckenvolumen und Desinfektionsmethode auswählen",
+            "Messsonden und Dosierpumpen aufeinander abstimmen"
+          ]
+        },
+        {
+          "name": "Messbetrieb",
+          "article_ideas": [
+            "pH- und Redoxsensoren einer Pool-Dosieranlage kontrollieren",
+            "Kalibrierung von Poolsensoren richtig einplanen",
+            "Fernsteuerung und Störmeldungen bei Pool-Dosieranlagen bewerten"
+          ]
+        }
+      ],
+      "priority": "A",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Pool & Teich (optionaler 8. Hauptbereich)",
+      "product": "Pool-Salzelektrolyseanlage",
+      "source_url": "https://www.bayrol.de/produkte/automatische-wasserpflege/salt-relax-power",
+      "overlap_with_existing": "Eigenständige Chlorerzeugung aus Salzwasser; ggf. SEO-Abgrenzung zur kompletten Pool-Dosieranlage prüfen",
+      "article_categories": [
+        {
+          "name": "Elektrolysetechnik",
+          "article_ideas": [
+            "Salzelektrolyseanlage nach Poolvolumen auswählen",
+            "Zellleistung und Salzkonzentration zusammen beurteilen",
+            "pH-Regelung bei der Salzelektrolyse berücksichtigen"
+          ]
+        }
+      ],
+      "priority": "B",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Pool & Teich (optionaler 8. Hauptbereich)",
+      "product": "Pool-Umwälzpumpe",
+      "source_url": "https://www.steinbach-group.com/de/041063-filterpumpe-wp-7000-de/",
+      "overlap_with_existing": "Andere Betriebs- und Mediumsanforderungen als vorhandene Garten-, Tauch- und Schmutzwasserpumpen",
+      "article_categories": [
+        {
+          "name": "Poolförderung",
+          "article_ideas": [
+            "Pool-Umwälzpumpe nach Beckenvolumen auswählen",
+            "Selbstansaugende Poolpumpen und einfache Förderpumpen vergleichen",
+            "Strombedarf und Förderleistung im Poolkreislauf abstimmen"
+          ]
+        }
+      ],
+      "priority": "A",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Pool & Teich (optionaler 8. Hauptbereich)",
+      "product": "Teichfilter",
+      "source_url": "https://www.sera.de/de/gartenteich/Produkte/gartenteich-technik",
+      "overlap_with_existing": "Eigenständige biologische/mechanische Teichfiltration, nicht bestehender Hauswasserfilter",
+      "article_categories": [
+        {
+          "name": "Teichfiltration",
+          "article_ideas": [
+            "Teichfilter nach Wasservolumen und Fischbesatz auswählen",
+            "Druckfilter und Durchlauffilter unterscheiden",
+            "Filtermaterial und Reinigungsintervalle für Teichfilter bestimmen"
+          ]
+        }
+      ],
+      "priority": "A",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Pool & Teich (optionaler 8. Hauptbereich)",
+      "product": "Teich-UVC-Klärer",
+      "source_url": "https://www.sera.de/de/gartenteich/Produkte/gartenteich-technik",
+      "overlap_with_existing": "Teich-UVC-Wasserklärer unterscheiden sich durch Medium und Einsatz von vorhandenem Trinkwasser-UV-Gerät",
+      "article_categories": [
+        {
+          "name": "UV-Klärung",
+          "article_ideas": [
+            "UVC-Klärer anhand von Teichvolumen und Durchfluss auswählen",
+            "Betriebsstunden und Ersatzintervall der UVC-Lampe bestimmen",
+            "Quarzglas am Teich-UVC-Klärer reinigen und kontrollieren"
+          ]
+        }
+      ],
+      "priority": "B",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Pool & Teich (optionaler 8. Hauptbereich)",
+      "product": "Teichpumpe",
+      "source_url": "https://www.sera.de/de/gartenteich/Produkte/gartenteich-technik",
+      "overlap_with_existing": "Fischteichfilter/Bachlauf unterscheiden sich von Gartenpumpe und Zisternenpumpe",
+      "article_categories": [
+        {
+          "name": "Teichförderung",
+          "article_ideas": [
+            "Teichpumpe für Filter oder Bachlauf auswählen",
+            "Förderhöhe und Teichumwälzung zusammen berechnen",
+            "Teichpumpen gegen Schmutz und Trockenlauf schützen"
+          ]
+        }
+      ],
+      "priority": "A",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    },
+    {
+      "area": "Pool & Teich (optionaler 8. Hauptbereich)",
+      "product": "Teichbelüfter",
+      "source_url": "https://www.sera.de/de/gartenteich/Produkte/gartenteich-technik",
+      "overlap_with_existing": "Belüftung/Luftzufuhr ist keine Wasserförderpumpe",
+      "article_categories": [
+        {
+          "name": "Sauerstoffversorgung",
+          "article_ideas": [
+            "Teichbelüfter nach Wasservolumen und Fischbesatz auswählen",
+            "Membranbelüfter und Luftausströmer vergleichen",
+            "Belüftung im Sommer und Winter richtig einsetzen"
+          ]
+        }
+      ],
+      "priority": "A",
+      "status": "FACHLICH_BELEGTER_PRODUKTTYP_VORSCHLAG_KEINE_SEO_FREIGABE"
+    }
+  ]
+}
