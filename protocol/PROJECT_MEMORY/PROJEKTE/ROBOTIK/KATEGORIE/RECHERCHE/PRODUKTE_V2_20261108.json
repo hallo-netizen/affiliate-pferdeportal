@@ -5019,7 +5019,7 @@
     }
   ],
   "canonical_source": true,
-  "revision": 15,
+  "revision": 16,
   "research_state": "UNAPPROVED",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
@@ -11856,5 +11856,1412 @@
     "source_plan": "V80_11_TYPEN_ABGLEICH_ARTIKELPLAN_20261115.json",
     "model_dedup": "PONGBOT Aura einmal, Links auf Tennis/Padel/Pickleball; Katzenklo bereits rf142",
     "previous_revisions_are_historical": true
+  },
+  "editorial_queue_v81": {
+    "status": "EINZIGE_REDAKTIONELLE_ARBEITSLISTE_NICHT_WORDPRESS",
+    "date": "2026-11-15",
+    "basis": "V80, 11 Kandidaten, 22 Artikelrubriken, 88 Ursprungsansätze",
+    "selection_rule": "Je Typ 4 konkrete, eindeutige Artikelaufträge; je Rubrik 2. Nicht pauschal 88 Beitragsseiten produzieren.",
+    "article_count": 44,
+    "first_priority": 11,
+    "second_priority": 11,
+    "reserve": 22,
+    "distinct_wp_category_proposals": 22,
+    "original_68_master_types_preserved": true,
+    "wordpress_writes": 0,
+    "google_urls_required": false,
+    "no_paid_api": true,
+    "industrial_tree_untouched": true,
+    "disclaimer": "Quellen sind Hersteller-/Hochschulnachweise und keine unabhängig getesteten Produkte; keine Nutzer-Erfahrung oder Preis-Leistungs-Tests fingieren",
+    "articles": [
+      {
+        "id": "RB-ED-001",
+        "source_master_id": "rf142",
+        "source_v80_id": "FIN-01",
+        "owner_path": [
+          "Haushalt",
+          "Reinigung",
+          "Katzenkloroboter"
+        ],
+        "proposed_wp_category_id": "fin-01_facet_1",
+        "wp_category_name": "Auswahl",
+        "title": "Katzenkloroboter kaufen: Worauf es bei Größe, Sensoren und Streu ankommt",
+        "search_intention_as_editorial_hypothesis": "katzenkloroboter kaufen worauf es bei größe, sensoren und streu ankommt",
+        "editorial_priority": "A_erste_Runde",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Eignung für große Katzen",
+          "Sicherheitssensoren beim Reinigungslauf"
+        ],
+        "headings": [
+          "Eignung für große Katzen",
+          "Sicherheitssensoren beim Reinigungslauf",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://www.litter-robot.com/eu/de/litter-robot/litter-robot-4.html",
+        "duplicate_and_safety_rule": "Keine tiermedizinische Diagnose, App-Überwachung nicht als Gesundheitsgutachten ausgeben",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-002",
+        "source_master_id": "rf142",
+        "source_v80_id": "FIN-01",
+        "owner_path": [
+          "Haushalt",
+          "Reinigung",
+          "Katzenkloroboter"
+        ],
+        "proposed_wp_category_id": "fin-01_facet_1",
+        "wp_category_name": "Auswahl",
+        "title": "Katzenkloroboter für mehrere Katzen: Welche Unterschiede sind wichtig?",
+        "search_intention_as_editorial_hypothesis": "katzenkloroboter für mehrere katzen welche unterschiede sind wichtig",
+        "editorial_priority": "B_zweite_Runde",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Welche Katzenstreu funktioniert?",
+          "Was gilt im Mehrkatzenhaushalt?"
+        ],
+        "headings": [
+          "Welche Katzenstreu funktioniert?",
+          "Was gilt im Mehrkatzenhaushalt?",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://www.litter-robot.com/eu/de/litter-robot/litter-robot-4.html",
+        "duplicate_and_safety_rule": "Keine tiermedizinische Diagnose, App-Überwachung nicht als Gesundheitsgutachten ausgeben",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-003",
+        "source_master_id": "rf142",
+        "source_v80_id": "FIN-01",
+        "owner_path": [
+          "Haushalt",
+          "Reinigung",
+          "Katzenkloroboter"
+        ],
+        "proposed_wp_category_id": "fin-01_facet_2",
+        "wp_category_name": "Betrieb",
+        "title": "Katzenkloroboter reinigen: So pflegt man Sensoren und Abfallbehälter",
+        "search_intention_as_editorial_hypothesis": "katzenkloroboter reinigen so pflegt man sensoren und abfallbehälter",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Abfallbehälter und Entleerung",
+          "Gerüche und Filter"
+        ],
+        "headings": [
+          "Abfallbehälter und Entleerung",
+          "Gerüche und Filter",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://www.litter-robot.com/eu/de/litter-robot/litter-robot-4.html",
+        "duplicate_and_safety_rule": "Keine tiermedizinische Diagnose, App-Überwachung nicht als Gesundheitsgutachten ausgeben",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-004",
+        "source_master_id": "rf142",
+        "source_v80_id": "FIN-01",
+        "owner_path": [
+          "Haushalt",
+          "Reinigung",
+          "Katzenkloroboter"
+        ],
+        "proposed_wp_category_id": "fin-01_facet_2",
+        "wp_category_name": "Betrieb",
+        "title": "Katzenkloroboter im Alltag: Welche Verbrauchsmaterialien fallen an?",
+        "search_intention_as_editorial_hypothesis": "katzenkloroboter im alltag welche verbrauchsmaterialien fallen an",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Reinigung der Mechanik",
+          "Strombedarf und Stellfläche"
+        ],
+        "headings": [
+          "Reinigung der Mechanik",
+          "Strombedarf und Stellfläche",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://www.litter-robot.com/eu/de/litter-robot/litter-robot-4.html",
+        "duplicate_and_safety_rule": "Keine tiermedizinische Diagnose, App-Überwachung nicht als Gesundheitsgutachten ausgeben",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-005",
+        "source_master_id": "rf148",
+        "source_v80_id": "FIN-02",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Padel-Trainingsroboter"
+        ],
+        "proposed_wp_category_id": "fin-02_facet_1",
+        "wp_category_name": "Training",
+        "title": "Padel-Trainingsroboter: Welche Schläge lassen sich allein üben?",
+        "search_intention_as_editorial_hypothesis": "padel-trainingsroboter welche schläge lassen sich allein üben",
+        "editorial_priority": "A_erste_Runde",
+        "editorial_type": "Forschungsstand_erklären",
+        "editorial_scope": [
+          "Grundschläge und Volleys beim Padel",
+          "Solo-Training auf dem Padelplatz"
+        ],
+        "headings": [
+          "Grundschläge und Volleys beim Padel",
+          "Solo-Training auf dem Padelplatz",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://store.pongbotsports.com/products/aura",
+        "duplicate_and_safety_rule": "PONGBOT Aura ist EIN Mehrsportgerät; eine Sportart inklusive, weitere gegen Freischaltung; Lieferstatus prüfen",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-006",
+        "source_master_id": "rf148",
+        "source_v80_id": "FIN-02",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Padel-Trainingsroboter"
+        ],
+        "proposed_wp_category_id": "fin-02_facet_1",
+        "wp_category_name": "Training",
+        "title": "Padel mit einer Ballmaschine trainieren: Übungen und Grenzen",
+        "search_intention_as_editorial_hypothesis": "padel mit einer ballmaschine trainieren übungen und grenzen",
+        "editorial_priority": "B_zweite_Runde",
+        "editorial_type": "Forschungsstand_erklären",
+        "editorial_scope": [
+          "Bande im Padeltraining sinnvoll berücksichtigen",
+          "Zuspieltempo für Einsteiger"
+        ],
+        "headings": [
+          "Bande im Padeltraining sinnvoll berücksichtigen",
+          "Zuspieltempo für Einsteiger",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://store.pongbotsports.com/products/aura",
+        "duplicate_and_safety_rule": "PONGBOT Aura ist EIN Mehrsportgerät; eine Sportart inklusive, weitere gegen Freischaltung; Lieferstatus prüfen",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-007",
+        "source_master_id": "rf148",
+        "source_v80_id": "FIN-02",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Padel-Trainingsroboter"
+        ],
+        "proposed_wp_category_id": "fin-02_facet_2",
+        "wp_category_name": "Geräte",
+        "title": "PONGBOT Aura für Padel: Sportfreischaltung, Zubehör und Funktionen",
+        "search_intention_as_editorial_hypothesis": "pongbot aura für padel sportfreischaltung, zubehör und funktionen",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Forschungsstand_erklären",
+        "editorial_scope": [
+          "Welche Ballmaschinen können Padel?",
+          "Platzbedarf und Akkulaufzeit"
+        ],
+        "headings": [
+          "Welche Ballmaschinen können Padel?",
+          "Platzbedarf und Akkulaufzeit",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://store.pongbotsports.com/products/aura",
+        "duplicate_and_safety_rule": "PONGBOT Aura ist EIN Mehrsportgerät; eine Sportart inklusive, weitere gegen Freischaltung; Lieferstatus prüfen",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-008",
+        "source_master_id": "rf148",
+        "source_v80_id": "FIN-02",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Padel-Trainingsroboter"
+        ],
+        "proposed_wp_category_id": "fin-02_facet_2",
+        "wp_category_name": "Geräte",
+        "title": "Padel-Ballmaschine auswählen: Aufstellung, Akku und Transport",
+        "search_intention_as_editorial_hypothesis": "padel-ballmaschine auswählen aufstellung, akku und transport",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Forschungsstand_erklären",
+        "editorial_scope": [
+          "Padel-Funktion bei Mehrsportgeräten freischalten",
+          "Grenzen bei Banden- und Doppeltraining"
+        ],
+        "headings": [
+          "Padel-Funktion bei Mehrsportgeräten freischalten",
+          "Grenzen bei Banden- und Doppeltraining",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://store.pongbotsports.com/products/aura",
+        "duplicate_and_safety_rule": "PONGBOT Aura ist EIN Mehrsportgerät; eine Sportart inklusive, weitere gegen Freischaltung; Lieferstatus prüfen",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-009",
+        "source_master_id": "rf175",
+        "source_v80_id": "FIN-03",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Pickleball-Trainingsroboter"
+        ],
+        "proposed_wp_category_id": "fin-03_facet_1",
+        "wp_category_name": "Training",
+        "title": "Pickleball-Ballmaschine: Welche Funktionen brauchen Einsteiger?",
+        "search_intention_as_editorial_hypothesis": "pickleball-ballmaschine welche funktionen brauchen einsteiger",
+        "editorial_priority": "A_erste_Runde",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Dink-Training am Netz",
+          "Volley-Übungen allein"
+        ],
+        "headings": [
+          "Dink-Training am Netz",
+          "Volley-Übungen allein",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://spinshotsports.de/de/products/spinshot-player-pickleball-machine",
+        "duplicate_and_safety_rule": "Tennis-, Padel- und Pickleball-Drills sind unterschiedliche Sportarten, nicht unterschiedliche PONGBOT-Modelle",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-010",
+        "source_master_id": "rf175",
+        "source_v80_id": "FIN-03",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Pickleball-Trainingsroboter"
+        ],
+        "proposed_wp_category_id": "fin-03_facet_1",
+        "wp_category_name": "Training",
+        "title": "Pickleball-Dinktraining mit einer Ballmaschine: Was lässt sich üben?",
+        "search_intention_as_editorial_hypothesis": "pickleball-dinktraining mit einer ballmaschine was lässt sich üben",
+        "editorial_priority": "B_zweite_Runde",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Rückschläge gezielt wiederholen",
+          "Übungsfolgen für verschiedene Spielstärken"
+        ],
+        "headings": [
+          "Rückschläge gezielt wiederholen",
+          "Übungsfolgen für verschiedene Spielstärken",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://spinshotsports.de/de/products/spinshot-player-pickleball-machine",
+        "duplicate_and_safety_rule": "Tennis-, Padel- und Pickleball-Drills sind unterschiedliche Sportarten, nicht unterschiedliche PONGBOT-Modelle",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-011",
+        "source_master_id": "rf175",
+        "source_v80_id": "FIN-03",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Pickleball-Trainingsroboter"
+        ],
+        "proposed_wp_category_id": "fin-03_facet_2",
+        "wp_category_name": "Auswahl",
+        "title": "Spinshot Player Pickleball: Trainingsprogramme und Steuerung erklärt",
+        "search_intention_as_editorial_hypothesis": "spinshot player pickleball trainingsprogramme und steuerung erklärt",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Welche Ballgrößen unterstützt die Maschine?",
+          "Wurfrichtung und Spin einstellen"
+        ],
+        "headings": [
+          "Welche Ballgrößen unterstützt die Maschine?",
+          "Wurfrichtung und Spin einstellen",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://spinshotsports.de/de/products/spinshot-player-pickleball-machine",
+        "duplicate_and_safety_rule": "Tennis-, Padel- und Pickleball-Drills sind unterschiedliche Sportarten, nicht unterschiedliche PONGBOT-Modelle",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-012",
+        "source_master_id": "rf175",
+        "source_v80_id": "FIN-03",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Pickleball-Trainingsroboter"
+        ],
+        "proposed_wp_category_id": "fin-03_facet_2",
+        "wp_category_name": "Auswahl",
+        "title": "Pickleball-Maschinen auswählen: Passende Bälle, Akku und Gewicht",
+        "search_intention_as_editorial_hypothesis": "pickleball-maschinen auswählen passende bälle, akku und gewicht",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Akku und Tragbarkeit vergleichen",
+          "App-Steuerung und Trainingsprogramme"
+        ],
+        "headings": [
+          "Akku und Tragbarkeit vergleichen",
+          "App-Steuerung und Trainingsprogramme",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://spinshotsports.de/de/products/spinshot-player-pickleball-machine",
+        "duplicate_and_safety_rule": "Tennis-, Padel- und Pickleball-Drills sind unterschiedliche Sportarten, nicht unterschiedliche PONGBOT-Modelle",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-013",
+        "source_master_id": "rf176",
+        "source_v80_id": "FIN-04",
+        "owner_path": [
+          "Pflege",
+          "Handrehabilitationsroboter"
+        ],
+        "proposed_wp_category_id": "fin-04_facet_1",
+        "wp_category_name": "Therapieformen",
+        "title": "Handrehabilitationsroboter: Passive und aktive Fingerübungen erklärt",
+        "search_intention_as_editorial_hypothesis": "handrehabilitationsroboter passive und aktive fingerübungen erklärt",
+        "editorial_priority": "A_erste_Runde",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Passive Fingermobilisierung",
+          "Bewegung der gesunden auf die betroffene Hand übertragen"
+        ],
+        "headings": [
+          "Passive Fingermobilisierung",
+          "Bewegung der gesunden auf die betroffene Hand übertragen",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://www.gloreha.de/r-touch-pro-sinfonia/",
+        "duplicate_and_safety_rule": "Keine Selbsttherapieanleitung oder unbewiesene Behandlungserfolge; Therapiegeräte gehören in fachliche Hände",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-014",
+        "source_master_id": "rf176",
+        "source_v80_id": "FIN-04",
+        "owner_path": [
+          "Pflege",
+          "Handrehabilitationsroboter"
+        ],
+        "proposed_wp_category_id": "fin-04_facet_1",
+        "wp_category_name": "Therapieformen",
+        "title": "Roboterhandschuh in der Handtherapie: So funktioniert Spiegeltraining",
+        "search_intention_as_editorial_hypothesis": "roboterhandschuh in der handtherapie so funktioniert spiegeltraining",
+        "editorial_priority": "B_zweite_Runde",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Aktiv unterstützte Bewegungsübungen",
+          "Für welche Therapieziele sind Robotikhandschuhe gedacht?"
+        ],
+        "headings": [
+          "Aktiv unterstützte Bewegungsübungen",
+          "Für welche Therapieziele sind Robotikhandschuhe gedacht?",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://www.gloreha.de/r-touch-pro-sinfonia/",
+        "duplicate_and_safety_rule": "Keine Selbsttherapieanleitung oder unbewiesene Behandlungserfolge; Therapiegeräte gehören in fachliche Hände",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-015",
+        "source_master_id": "rf176",
+        "source_v80_id": "FIN-04",
+        "owner_path": [
+          "Pflege",
+          "Handrehabilitationsroboter"
+        ],
+        "proposed_wp_category_id": "fin-04_facet_2",
+        "wp_category_name": "Anwendung",
+        "title": "Handrehabilitationsroboter: Welche Fragen gehören vor die Anwendung?",
+        "search_intention_as_editorial_hypothesis": "handrehabilitationsroboter welche fragen gehören vor die anwendung",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Handgröße und Passform",
+          "Therapie unter Aufsicht"
+        ],
+        "headings": [
+          "Handgröße und Passform",
+          "Therapie unter Aufsicht",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://www.gloreha.de/r-touch-pro-sinfonia/",
+        "duplicate_and_safety_rule": "Keine Selbsttherapieanleitung oder unbewiesene Behandlungserfolge; Therapiegeräte gehören in fachliche Hände",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-016",
+        "source_master_id": "rf176",
+        "source_v80_id": "FIN-04",
+        "owner_path": [
+          "Pflege",
+          "Handrehabilitationsroboter"
+        ],
+        "proposed_wp_category_id": "fin-04_facet_2",
+        "wp_category_name": "Anwendung",
+        "title": "Roboterhandschuh im Therapiealltag: Betreuung und Hygiene",
+        "search_intention_as_editorial_hypothesis": "roboterhandschuh im therapiealltag betreuung und hygiene",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Hygiene und Reinigung",
+          "Grenzen gegenüber manueller Handtherapie"
+        ],
+        "headings": [
+          "Hygiene und Reinigung",
+          "Grenzen gegenüber manueller Handtherapie",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://www.gloreha.de/r-touch-pro-sinfonia/",
+        "duplicate_and_safety_rule": "Keine Selbsttherapieanleitung oder unbewiesene Behandlungserfolge; Therapiegeräte gehören in fachliche Hände",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-017",
+        "source_master_id": "rf177",
+        "source_v80_id": "FIN-05",
+        "owner_path": [
+          "Pflege",
+          "Zahnpflegeroboter"
+        ],
+        "proposed_wp_category_id": "fin-05_facet_1",
+        "wp_category_name": "Funktionsweise",
+        "title": "Zahnpflegeroboter g.eN: Wie funktioniert automatisches Zähneputzen?",
+        "search_intention_as_editorial_hypothesis": "zahnpflegeroboter g.en wie funktioniert automatisches zähneputzen",
+        "editorial_priority": "A_erste_Runde",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Bürstenbewegung ohne Handführung",
+          "Anpassung an unterschiedliche Zahnreihen"
+        ],
+        "headings": [
+          "Bürstenbewegung ohne Handführung",
+          "Anpassung an unterschiedliche Zahnreihen",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://www.waseda.jp/inst/entrepreneur/news/2026/10/16/9376/",
+        "duplicate_and_safety_rule": "g.eN wurde in Japan verkauft; keine nachgewiesene deutsche Verfügbarkeit oder klinische Überlegenheit behaupten",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-018",
+        "source_master_id": "rf177",
+        "source_v80_id": "FIN-05",
+        "owner_path": [
+          "Pflege",
+          "Zahnpflegeroboter"
+        ],
+        "proposed_wp_category_id": "fin-05_facet_1",
+        "wp_category_name": "Funktionsweise",
+        "title": "Zahnpflegeroboter und elektrische Zahnbürste: Was unterscheidet sie?",
+        "search_intention_as_editorial_hypothesis": "zahnpflegeroboter und elektrische zahnbürste was unterscheidet sie",
+        "editorial_priority": "B_zweite_Runde",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Reinigung des Geräts nach der Nutzung",
+          "Was unterscheidet es von einer elektrischen Zahnbürste?"
+        ],
+        "headings": [
+          "Reinigung des Geräts nach der Nutzung",
+          "Was unterscheidet es von einer elektrischen Zahnbürste?",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://www.waseda.jp/inst/entrepreneur/news/2026/10/16/9376/",
+        "duplicate_and_safety_rule": "g.eN wurde in Japan verkauft; keine nachgewiesene deutsche Verfügbarkeit oder klinische Überlegenheit behaupten",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-019",
+        "source_master_id": "rf177",
+        "source_v80_id": "FIN-05",
+        "owner_path": [
+          "Pflege",
+          "Zahnpflegeroboter"
+        ],
+        "proposed_wp_category_id": "fin-05_facet_2",
+        "wp_category_name": "Marktstand",
+        "title": "Genics g.eN: Was ist über den Verkaufsstart in Japan bekannt?",
+        "search_intention_as_editorial_hypothesis": "genics g.en was ist über den verkaufsstart in japan bekannt",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Genics g.eN und Verkaufsstart Japan",
+          "Verfügbarkeit und Sprachen außerhalb Japans"
+        ],
+        "headings": [
+          "Genics g.eN und Verkaufsstart Japan",
+          "Verfügbarkeit und Sprachen außerhalb Japans",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://www.waseda.jp/inst/entrepreneur/news/2026/10/16/9376/",
+        "duplicate_and_safety_rule": "g.eN wurde in Japan verkauft; keine nachgewiesene deutsche Verfügbarkeit oder klinische Überlegenheit behaupten",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-020",
+        "source_master_id": "rf177",
+        "source_v80_id": "FIN-05",
+        "owner_path": [
+          "Pflege",
+          "Zahnpflegeroboter"
+        ],
+        "proposed_wp_category_id": "fin-05_facet_2",
+        "wp_category_name": "Marktstand",
+        "title": "Zahnpflegeroboter im Alltag: Hygiene und offene Nutzungsfragen",
+        "search_intention_as_editorial_hypothesis": "zahnpflegeroboter im alltag hygiene und offene nutzungsfragen",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Mundhygiene und individuelle Einschränkungen",
+          "Ersatzteile, Pflege und Betriebskosten"
+        ],
+        "headings": [
+          "Mundhygiene und individuelle Einschränkungen",
+          "Ersatzteile, Pflege und Betriebskosten",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://www.waseda.jp/inst/entrepreneur/news/2026/10/16/9376/",
+        "duplicate_and_safety_rule": "g.eN wurde in Japan verkauft; keine nachgewiesene deutsche Verfügbarkeit oder klinische Überlegenheit behaupten",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-021",
+        "source_master_id": "rf178",
+        "source_v80_id": "FIN-21",
+        "owner_path": [
+          "Pflege",
+          "Schminkroboter"
+        ],
+        "proposed_wp_category_id": "fin-21_facet_1",
+        "wp_category_name": "Forschung",
+        "title": "Schminkroboter: Was der Forschungsprototyp aus Japan tatsächlich kann",
+        "search_intention_as_editorial_hypothesis": "schminkroboter was der forschungsprototyp aus japan tatsächlich kann",
+        "editorial_priority": "A_erste_Runde",
+        "editorial_type": "Forschungsstand_erklären",
+        "editorial_scope": [
+          "Gesichts- und Hautanalyse",
+          "Pinseldruck und Bewegung steuern"
+        ],
+        "headings": [
+          "Gesichts- und Hautanalyse",
+          "Pinseldruck und Bewegung steuern",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://www.aoyama.ac.jp/center104/2025/event_20250930_01",
+        "duplicate_and_safety_rule": "Nur Hochschulprototyp; keine lieferbare Kaufware, keine Eigenbau-Anleitung für einen Roboter am Gesicht",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-022",
+        "source_master_id": "rf178",
+        "source_v80_id": "FIN-21",
+        "owner_path": [
+          "Pflege",
+          "Schminkroboter"
+        ],
+        "proposed_wp_category_id": "fin-21_facet_1",
+        "wp_category_name": "Forschung",
+        "title": "Automatisches Schminken: Welche Aufgaben versucht die Forschung zu lösen?",
+        "search_intention_as_editorial_hypothesis": "automatisches schminken welche aufgaben versucht die forschung zu lösen",
+        "editorial_priority": "B_zweite_Runde",
+        "editorial_type": "Forschungsstand_erklären",
+        "editorial_scope": [
+          "Unterschied zwischen Demo und selbstständiger Anwendung",
+          "Forschungsstand des Aoyama-Prototyps"
+        ],
+        "headings": [
+          "Unterschied zwischen Demo und selbstständiger Anwendung",
+          "Forschungsstand des Aoyama-Prototyps",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://www.aoyama.ac.jp/center104/2025/event_20250930_01",
+        "duplicate_and_safety_rule": "Nur Hochschulprototyp; keine lieferbare Kaufware, keine Eigenbau-Anleitung für einen Roboter am Gesicht",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-023",
+        "source_master_id": "rf178",
+        "source_v80_id": "FIN-21",
+        "owner_path": [
+          "Pflege",
+          "Schminkroboter"
+        ],
+        "proposed_wp_category_id": "fin-21_facet_2",
+        "wp_category_name": "Sicherheit",
+        "title": "Schminkroboter und Hautkontakt: Was die Forschung zur Sicherheit untersucht",
+        "search_intention_as_editorial_hypothesis": "schminkroboter und hautkontakt was die forschung zur sicherheit untersucht",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Forschungsstand_erklären",
+        "editorial_scope": [
+          "Hygiene von Kosmetikwerkzeugen",
+          "Arbeiten in Augennähe"
+        ],
+        "headings": [
+          "Hygiene von Kosmetikwerkzeugen",
+          "Arbeiten in Augennähe",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://www.aoyama.ac.jp/center104/2025/event_20250930_01",
+        "duplicate_and_safety_rule": "Nur Hochschulprototyp; keine lieferbare Kaufware, keine Eigenbau-Anleitung für einen Roboter am Gesicht",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-024",
+        "source_master_id": "rf178",
+        "source_v80_id": "FIN-21",
+        "owner_path": [
+          "Pflege",
+          "Schminkroboter"
+        ],
+        "proposed_wp_category_id": "fin-21_facet_2",
+        "wp_category_name": "Sicherheit",
+        "title": "Schminkroboter kaufen? Warum es noch keine belegte Serienlösung gibt",
+        "search_intention_as_editorial_hypothesis": "schminkroboter kaufen warum es noch keine belegte serienlösung gibt",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Forschungsstand_erklären",
+        "editorial_scope": [
+          "Persönliche Hautunterschiede",
+          "Was bis zur Alltagstauglichkeit fehlt"
+        ],
+        "headings": [
+          "Persönliche Hautunterschiede",
+          "Was bis zur Alltagstauglichkeit fehlt",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://www.aoyama.ac.jp/center104/2025/event_20250930_01",
+        "duplicate_and_safety_rule": "Nur Hochschulprototyp; keine lieferbare Kaufware, keine Eigenbau-Anleitung für einen Roboter am Gesicht",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-025",
+        "source_master_id": "rf179",
+        "source_v80_id": "FIN-22",
+        "owner_path": [
+          "Haushalt",
+          "Alltagshilfe",
+          "Roboterkissen"
+        ],
+        "proposed_wp_category_id": "fin-22_facet_1",
+        "wp_category_name": "Funktionen",
+        "title": "Roboterkissen: Atemkissen und verstellbare Kissen unterscheiden",
+        "search_intention_as_editorial_hypothesis": "roboterkissen atemkissen und verstellbare kissen unterscheiden",
+        "editorial_priority": "A_erste_Runde",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Schlafposition dynamisch anpassen",
+          "Kissenhöhe motorisch verändern"
+        ],
+        "headings": [
+          "Schlafposition dynamisch anpassen",
+          "Kissenhöhe motorisch verändern",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://globalstore.ux-xu.com/products/fufuly",
+        "duplicate_and_safety_rule": "fufuly ist bewegliches Atemkissen, keine gesicherte Schlaftherapie; weitere Roboterkissen funktionell trennen",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-026",
+        "source_master_id": "rf179",
+        "source_v80_id": "FIN-22",
+        "owner_path": [
+          "Haushalt",
+          "Alltagshilfe",
+          "Roboterkissen"
+        ],
+        "proposed_wp_category_id": "fin-22_facet_1",
+        "wp_category_name": "Funktionen",
+        "title": "fufuly: Wie funktioniert das atmende Roboterkissen?",
+        "search_intention_as_editorial_hypothesis": "fufuly wie funktioniert das atmende roboterkissen",
+        "editorial_priority": "B_zweite_Runde",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Atmungsähnliche Kissenbewegungen",
+          "Steuerung und Sensorik der Modelle"
+        ],
+        "headings": [
+          "Atmungsähnliche Kissenbewegungen",
+          "Steuerung und Sensorik der Modelle",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://globalstore.ux-xu.com/products/fufuly",
+        "duplicate_and_safety_rule": "fufuly ist bewegliches Atemkissen, keine gesicherte Schlaftherapie; weitere Roboterkissen funktionell trennen",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-027",
+        "source_master_id": "rf179",
+        "source_v80_id": "FIN-22",
+        "owner_path": [
+          "Haushalt",
+          "Alltagshilfe",
+          "Roboterkissen"
+        ],
+        "proposed_wp_category_id": "fin-22_facet_2",
+        "wp_category_name": "Nutzung",
+        "title": "Roboterkissen im Alltag: Bedienung, Akku und Pflege",
+        "search_intention_as_editorial_hypothesis": "roboterkissen im alltag bedienung, akku und pflege",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Lautstärke und Bettkomfort",
+          "Reinigung und Hygiene"
+        ],
+        "headings": [
+          "Lautstärke und Bettkomfort",
+          "Reinigung und Hygiene",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://globalstore.ux-xu.com/products/fufuly",
+        "duplicate_and_safety_rule": "fufuly ist bewegliches Atemkissen, keine gesicherte Schlaftherapie; weitere Roboterkissen funktionell trennen",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-028",
+        "source_master_id": "rf179",
+        "source_v80_id": "FIN-22",
+        "owner_path": [
+          "Haushalt",
+          "Alltagshilfe",
+          "Roboterkissen"
+        ],
+        "proposed_wp_category_id": "fin-22_facet_2",
+        "wp_category_name": "Nutzung",
+        "title": "Roboterkissen und Entspannung: Welche Wirkungen sind tatsächlich belegt?",
+        "search_intention_as_editorial_hypothesis": "roboterkissen und entspannung welche wirkungen sind tatsächlich belegt",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Unterschiede zwischen Ax Robotix und fufuly",
+          "Welche Wirkversprechen sind tatsächlich belegt?"
+        ],
+        "headings": [
+          "Unterschiede zwischen Ax Robotix und fufuly",
+          "Welche Wirkversprechen sind tatsächlich belegt?",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://globalstore.ux-xu.com/products/fufuly",
+        "duplicate_and_safety_rule": "fufuly ist bewegliches Atemkissen, keine gesicherte Schlaftherapie; weitere Roboterkissen funktionell trennen",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-029",
+        "source_master_id": "rf180",
+        "source_v80_id": "FIN-26",
+        "owner_path": [
+          "Sport",
+          "Wander-Exoskelette"
+        ],
+        "proposed_wp_category_id": "fin-26_facet_1",
+        "wp_category_name": "Einsatz",
+        "title": "Exoskelett zum Wandern: Wie die motorische Gehhilfe arbeitet",
+        "search_intention_as_editorial_hypothesis": "exoskelett zum wandern wie die motorische gehhilfe arbeitet",
+        "editorial_priority": "A_erste_Runde",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Steigungen beim Wandern",
+          "Abstiege und Treppen"
+        ],
+        "headings": [
+          "Steigungen beim Wandern",
+          "Abstiege und Treppen",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://eu.hypershell.tech/en-de/products/new-hypershell-x-series",
+        "duplicate_and_safety_rule": "Hersteller: kein zertifiziertes Medizinprodukt, nur für selbstständig gehende Menschen; keine Heilversprechen",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-030",
+        "source_master_id": "rf180",
+        "source_v80_id": "FIN-26",
+        "owner_path": [
+          "Sport",
+          "Wander-Exoskelette"
+        ],
+        "proposed_wp_category_id": "fin-26_facet_1",
+        "wp_category_name": "Einsatz",
+        "title": "Wander-Exoskelett für Anstiege und Gefälle: Welche Modi gibt es?",
+        "search_intention_as_editorial_hypothesis": "wander-exoskelett für anstiege und gefälle welche modi gibt es",
+        "editorial_priority": "B_zweite_Runde",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Lange Gehstrecken und Pausen",
+          "Grenzen bei unebenem Gelände"
+        ],
+        "headings": [
+          "Lange Gehstrecken und Pausen",
+          "Grenzen bei unebenem Gelände",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://eu.hypershell.tech/en-de/products/new-hypershell-x-series",
+        "duplicate_and_safety_rule": "Hersteller: kein zertifiziertes Medizinprodukt, nur für selbstständig gehende Menschen; keine Heilversprechen",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-031",
+        "source_master_id": "rf180",
+        "source_v80_id": "FIN-26",
+        "owner_path": [
+          "Sport",
+          "Wander-Exoskelette"
+        ],
+        "proposed_wp_category_id": "fin-26_facet_2",
+        "wp_category_name": "Auswahl",
+        "title": "Hypershell X vor dem Kauf: Passform, Gewicht und Akkufragen",
+        "search_intention_as_editorial_hypothesis": "hypershell x vor dem kauf passform, gewicht und akkufragen",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Passform und Tragesystem",
+          "Akkureichweite realistisch einschätzen"
+        ],
+        "headings": [
+          "Passform und Tragesystem",
+          "Akkureichweite realistisch einschätzen",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://eu.hypershell.tech/en-de/products/new-hypershell-x-series",
+        "duplicate_and_safety_rule": "Hersteller: kein zertifiziertes Medizinprodukt, nur für selbstständig gehende Menschen; keine Heilversprechen",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-032",
+        "source_master_id": "rf180",
+        "source_v80_id": "FIN-26",
+        "owner_path": [
+          "Sport",
+          "Wander-Exoskelette"
+        ],
+        "proposed_wp_category_id": "fin-26_facet_2",
+        "wp_category_name": "Auswahl",
+        "title": "Sport-Exoskelett oder medizinische Gehhilfe: Der entscheidende Unterschied",
+        "search_intention_as_editorial_hypothesis": "sport-exoskelett oder medizinische gehhilfe der entscheidende unterschied",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Gewicht und Transport",
+          "Sportgerät oder medizinisches Hilfsmittel?"
+        ],
+        "headings": [
+          "Gewicht und Transport",
+          "Sportgerät oder medizinisches Hilfsmittel?",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://eu.hypershell.tech/en-de/products/new-hypershell-x-series",
+        "duplicate_and_safety_rule": "Hersteller: kein zertifiziertes Medizinprodukt, nur für selbstständig gehende Menschen; keine Heilversprechen",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-033",
+        "source_master_id": "rf181",
+        "source_v80_id": "FIN-27",
+        "owner_path": [
+          "Freizeit",
+          "Sandmalroboter"
+        ],
+        "proposed_wp_category_id": "fin-27_facet_1",
+        "wp_category_name": "Technik",
+        "title": "Sandmalroboter: Wie ein Magnet Sandmuster zeichnet",
+        "search_intention_as_editorial_hypothesis": "sandmalroboter wie ein magnet sandmuster zeichnet",
+        "editorial_priority": "A_erste_Runde",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Magnetisch bewegte Stahlkugel",
+          "Muster programmieren"
+        ],
+        "headings": [
+          "Magnetisch bewegte Stahlkugel",
+          "Muster programmieren",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://sisyphus-industries.com/product/essential/",
+        "duplicate_and_safety_rule": "Mechanischer Sandtisch mit Magnet/Stahlkugel, kein Pinselmalroboter und kein eigener Langzeittest",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-034",
+        "source_master_id": "rf181",
+        "source_v80_id": "FIN-27",
+        "owner_path": [
+          "Freizeit",
+          "Sandmalroboter"
+        ],
+        "proposed_wp_category_id": "fin-27_facet_1",
+        "wp_category_name": "Technik",
+        "title": "Sisyphus-Sandtisch: Wie Muster und Geschwindigkeit gesteuert werden",
+        "search_intention_as_editorial_hypothesis": "sisyphus-sandtisch wie muster und geschwindigkeit gesteuert werden",
+        "editorial_priority": "B_zweite_Runde",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Antriebe und Steuerung",
+          "Geräuschpegel bei langsamer Bewegung"
+        ],
+        "headings": [
+          "Antriebe und Steuerung",
+          "Geräuschpegel bei langsamer Bewegung",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://sisyphus-industries.com/product/essential/",
+        "duplicate_and_safety_rule": "Mechanischer Sandtisch mit Magnet/Stahlkugel, kein Pinselmalroboter und kein eigener Langzeittest",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-035",
+        "source_master_id": "rf181",
+        "source_v80_id": "FIN-27",
+        "owner_path": [
+          "Freizeit",
+          "Sandmalroboter"
+        ],
+        "proposed_wp_category_id": "fin-27_facet_2",
+        "wp_category_name": "Aufstellung",
+        "title": "Sandmalroboter aufstellen: Platz, Strombedarf und Geräusch",
+        "search_intention_as_editorial_hypothesis": "sandmalroboter aufstellen platz, strombedarf und geräusch",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Tischfläche und Raumgröße",
+          "Wartung von Sand und Kugel"
+        ],
+        "headings": [
+          "Tischfläche und Raumgröße",
+          "Wartung von Sand und Kugel",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://sisyphus-industries.com/product/essential/",
+        "duplicate_and_safety_rule": "Mechanischer Sandtisch mit Magnet/Stahlkugel, kein Pinselmalroboter und kein eigener Langzeittest",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-036",
+        "source_master_id": "rf181",
+        "source_v80_id": "FIN-27",
+        "owner_path": [
+          "Freizeit",
+          "Sandmalroboter"
+        ],
+        "proposed_wp_category_id": "fin-27_facet_2",
+        "wp_category_name": "Aufstellung",
+        "title": "Sandmalroboter pflegen: Was bei Kugel, Sand und Oberfläche zählt",
+        "search_intention_as_editorial_hypothesis": "sandmalroboter pflegen was bei kugel, sand und oberfläche zählt",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Strom und Zeitsteuerung",
+          "Musterbibliotheken und eigene Vorlagen"
+        ],
+        "headings": [
+          "Strom und Zeitsteuerung",
+          "Musterbibliotheken und eigene Vorlagen",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://sisyphus-industries.com/product/essential/",
+        "duplicate_and_safety_rule": "Mechanischer Sandtisch mit Magnet/Stahlkugel, kein Pinselmalroboter und kein eigener Langzeittest",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-037",
+        "source_master_id": "rf182",
+        "source_v80_id": "FIN-28",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Baseball-Wurfroboter"
+        ],
+        "proposed_wp_category_id": "fin-28_facet_1",
+        "wp_category_name": "Training",
+        "title": "Baseball-Wurfroboter: Welche Pitches kann die Maschine zuspielen?",
+        "search_intention_as_editorial_hypothesis": "baseball-wurfroboter welche pitches kann die maschine zuspielen",
+        "editorial_priority": "A_erste_Runde",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Fastball und Tempowechsel",
+          "Spin und Flugkurven üben"
+        ],
+        "headings": [
+          "Fastball und Tempowechsel",
+          "Spin und Flugkurven üben",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://sportsattack.com/i-hack-attack-2-baseball-pitching-machine/",
+        "duplicate_and_safety_rule": "Programmierte Pitching Machine, kein autonomes Feldsport-Humanoid; keine erfundenen Sicherheitsabstände",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-038",
+        "source_master_id": "rf182",
+        "source_v80_id": "FIN-28",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Baseball-Wurfroboter"
+        ],
+        "proposed_wp_category_id": "fin-28_facet_1",
+        "wp_category_name": "Training",
+        "title": "Pitching Machine im Baseballtraining: Welche Wurfabfolgen sind möglich?",
+        "search_intention_as_editorial_hypothesis": "pitching machine im baseballtraining welche wurfabfolgen sind möglich",
+        "editorial_priority": "B_zweite_Runde",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Trefferzone wiederholt anspielen",
+          "Abläufe für unterschiedliche Spielstärken"
+        ],
+        "headings": [
+          "Trefferzone wiederholt anspielen",
+          "Abläufe für unterschiedliche Spielstärken",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://sportsattack.com/i-hack-attack-2-baseball-pitching-machine/",
+        "duplicate_and_safety_rule": "Programmierte Pitching Machine, kein autonomes Feldsport-Humanoid; keine erfundenen Sicherheitsabstände",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-039",
+        "source_master_id": "rf182",
+        "source_v80_id": "FIN-28",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Baseball-Wurfroboter"
+        ],
+        "proposed_wp_category_id": "fin-28_facet_2",
+        "wp_category_name": "Geräte",
+        "title": "I-Hack Attack: Welche Einstellungen bietet der Touchscreen?",
+        "search_intention_as_editorial_hypothesis": "i-hack attack welche einstellungen bietet der touchscreen",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Bedienung programmierter Wurfsequenzen",
+          "Welche Trainingsbälle geeignet sind"
+        ],
+        "headings": [
+          "Bedienung programmierter Wurfsequenzen",
+          "Welche Trainingsbälle geeignet sind",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://sportsattack.com/i-hack-attack-2-baseball-pitching-machine/",
+        "duplicate_and_safety_rule": "Programmierte Pitching Machine, kein autonomes Feldsport-Humanoid; keine erfundenen Sicherheitsabstände",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-040",
+        "source_master_id": "rf182",
+        "source_v80_id": "FIN-28",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Baseball-Wurfroboter"
+        ],
+        "proposed_wp_category_id": "fin-28_facet_2",
+        "wp_category_name": "Geräte",
+        "title": "Baseball-Wurfmaschine aufstellen: Ballart, Strom und Sicherheit",
+        "search_intention_as_editorial_hypothesis": "baseball-wurfmaschine aufstellen ballart, strom und sicherheit",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Aufstellabstand und Platzsicherheit",
+          "Transport, Stromversorgung und Wartung"
+        ],
+        "headings": [
+          "Aufstellabstand und Platzsicherheit",
+          "Transport, Stromversorgung und Wartung",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://sportsattack.com/i-hack-attack-2-baseball-pitching-machine/",
+        "duplicate_and_safety_rule": "Programmierte Pitching Machine, kein autonomes Feldsport-Humanoid; keine erfundenen Sicherheitsabstände",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-041",
+        "source_master_id": "rf183",
+        "source_v80_id": "FIN-29",
+        "owner_path": [
+          "Freizeit",
+          "Spielzeug",
+          "Transformationsroboter"
+        ],
+        "proposed_wp_category_id": "fin-29_facet_1",
+        "wp_category_name": "Modelle",
+        "title": "Transformationsroboter: Worin sie sich von Actionfiguren unterscheiden",
+        "search_intention_as_editorial_hypothesis": "transformationsroboter worin sie sich von actionfiguren unterscheiden",
+        "editorial_priority": "A_erste_Runde",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Robosen Grimlock und die Transformation",
+          "Andere selbst transformierende Robosen-Modelle"
+        ],
+        "headings": [
+          "Robosen Grimlock und die Transformation",
+          "Andere selbst transformierende Robosen-Modelle",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://www.robosen.com/de/grimlock-g1-flagship",
+        "duplicate_and_safety_rule": "Hersteller-Spezifikationen als solche kennzeichnen, Grimlock teils ausverkauft; kein Liefer-Versprechen",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-042",
+        "source_master_id": "rf183",
+        "source_v80_id": "FIN-29",
+        "owner_path": [
+          "Freizeit",
+          "Spielzeug",
+          "Transformationsroboter"
+        ],
+        "proposed_wp_category_id": "fin-29_facet_1",
+        "wp_category_name": "Modelle",
+        "title": "Robosen Grimlock: So funktionieren Transformation und Steuerung",
+        "search_intention_as_editorial_hypothesis": "robosen grimlock so funktionieren transformation und steuerung",
+        "editorial_priority": "B_zweite_Runde",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Sprachbefehle und App-Steuerung",
+          "Unterschied zu manuell verwandelbaren Figuren"
+        ],
+        "headings": [
+          "Sprachbefehle und App-Steuerung",
+          "Unterschied zu manuell verwandelbaren Figuren",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://www.robosen.com/de/grimlock-g1-flagship",
+        "duplicate_and_safety_rule": "Hersteller-Spezifikationen als solche kennzeichnen, Grimlock teils ausverkauft; kein Liefer-Versprechen",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-043",
+        "source_master_id": "rf183",
+        "source_v80_id": "FIN-29",
+        "owner_path": [
+          "Freizeit",
+          "Spielzeug",
+          "Transformationsroboter"
+        ],
+        "proposed_wp_category_id": "fin-29_facet_2",
+        "wp_category_name": "Betrieb",
+        "title": "Transformationsroboter programmieren: App und Sprachsteuerung",
+        "search_intention_as_editorial_hypothesis": "transformationsroboter programmieren app und sprachsteuerung",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Bewegungsraum im Haushalt",
+          "Laden und Akkulaufzeit"
+        ],
+        "headings": [
+          "Bewegungsraum im Haushalt",
+          "Laden und Akkulaufzeit",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://www.robosen.com/de/grimlock-g1-flagship",
+        "duplicate_and_safety_rule": "Hersteller-Spezifikationen als solche kennzeichnen, Grimlock teils ausverkauft; kein Liefer-Versprechen",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      },
+      {
+        "id": "RB-ED-044",
+        "source_master_id": "rf183",
+        "source_v80_id": "FIN-29",
+        "owner_path": [
+          "Freizeit",
+          "Spielzeug",
+          "Transformationsroboter"
+        ],
+        "proposed_wp_category_id": "fin-29_facet_2",
+        "wp_category_name": "Betrieb",
+        "title": "Transformationsroboter im Alltag: Aufstellen, Laden und Ersatzteile",
+        "search_intention_as_editorial_hypothesis": "transformationsroboter im alltag aufstellen, laden und ersatzteile",
+        "editorial_priority": "C_Reserve",
+        "editorial_type": "Nachweisbasierter_Ratgeber",
+        "editorial_scope": [
+          "Möglichkeiten der Programmierung",
+          "Verfügbarkeit und Ersatzteilversorgung"
+        ],
+        "headings": [
+          "Möglichkeiten der Programmierung",
+          "Verfügbarkeit und Ersatzteilversorgung",
+          "Grenzen und belegter Entwicklungsstand"
+        ],
+        "primary_official_source": "https://www.robosen.com/de/grimlock-g1-flagship",
+        "duplicate_and_safety_rule": "Hersteller-Spezifikationen als solche kennzeichnen, Grimlock teils ausverkauft; kein Liefer-Versprechen",
+        "is_actual_hands_on_test": false,
+        "is_factual_seo_volume_known": false,
+        "work_status": "REDAKTIONSBRIEFING_NOT_WRITTEN",
+        "wp_post_id": null,
+        "wp_publish_authorized": false
+      }
+    ]
   }
 }
