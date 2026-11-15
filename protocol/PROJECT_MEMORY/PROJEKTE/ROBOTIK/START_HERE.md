@@ -1,11 +1,16 @@
 # ROBOTIK – CAMPUS-BÜROGEBÄUDE
 
+## AKTUELL V86 (15.11.2026) – EIN FORTLAUFENDER STAND
+- **Einzige aktuelle Kategorien-/SEO-Fassung:** [KATEGORIEN_AKTUELL.md](KATEGORIE/KATEGORIEN_AKTUELL.md). Enthält Baum mit 204 Seiten/328 Inhaltsrubriken, Industrie-Verweise und konkrete Altrubriknamen sowie den kostenfreien Abgleich des DataForSEO-V61-Exports.
+- **Einziger Robotik-Fachmaster** `KATEGORIE/RECHERCHE/PRODUKTE_V2_20261108.json` jetzt **Revision 21**, bereits gespeicherte 26 Keyword-Zuordnungen. Neue SEO-Besitzer 485 (157+328), davon 46 alte mit Messwert, 439 ohne belegte Direktmessung oder nicht im alten Lauf; keine kostenpflichtige Wiederholung gestartet.
+- Technisch noch offen: alleinige V84-WordPress-Sammelfreigabe **16+32**. Industrie-Verweise und 63 neue Kurzlabels noch nicht live. Die ältere V85-Datei ist nur noch historischer Link, keine zweite aktuelle Version.
+
 ## KATEGORIEN GEBÜNDELT FACHLICH NACHGEARBEITET – 15.11.2026
-- Vollständige Übersicht `KATEGORIE/KATEGORIEN_ABSCHLUSS_V85_20261115.md`: 204 Soll-Seiten, 328 Rubriken, Industrie-Zielseiten für 4 vorhandene Landingpages (28 eindeutige Querverweise), 63 alte generische Rubrik-Kurzlabels samt 1 geklärtem Konflikt.
+- Vollständige Übersicht `KATEGORIE/KATEGORIEN_AKTUELL.md`: 204 Soll-Seiten, 328 Rubriken, Industrie-Zielseiten für 4 vorhandene Landingpages (28 eindeutige Querverweise), 63 alte generische Rubrik-Kurzlabels samt 1 geklärtem Konflikt.
 - **V78 alt abgeschlossen; V84 zusätzlich 16+32 live noch nicht belegt.** 0.4.14 ist der bestehende Installer. Die 28 Querverweise und 63 Kurzlabels sind **nur konzeptionell zugeordnet**, nicht auf der Website umgesetzt. Keine doppelte Installation, keine WordPress-Schreibänderung und kein neues Kategorienplugin durch diese Dokumentation.
 
 ## FINALER FACHABSCHLUSS KATEGORIEN – V85 / 15.11.2026
-- **Komplette überprüfte Baumübersicht:** [KATEGORIE/KATEGORIEN_ABSCHLUSS_V85_20261115.md](KATEGORIE/KATEGORIEN_ABSCHLUSS_V85_20261115.md). 8 Hauptbereiche, 47 Gruppen-/Zwischenseiten, 157 Robotertypen, 328 untergeordnete Inhaltsrubriken. Im fachlichen Soll ohne offene Strukturfehler.
+- **Komplette überprüfte Baumübersicht:** [KATEGORIE/KATEGORIEN_AKTUELL.md](KATEGORIE/KATEGORIEN_AKTUELL.md). 8 Hauptbereiche, 47 Gruppen-/Zwischenseiten, 157 Robotertypen, 328 untergeordnete Inhaltsrubriken. Im fachlichen Soll ohne offene Strukturfehler.
 - **Letzter WordPress-Schritt separat:** Nur V84 16 zusätzliche Typseiten/32 Kategorien im vorhandenen 0.4.14-Kategorieplugin; V78-Altabschluss ist gemäß Nutzer-JSON bereits durchgeführt. Keine neue Grundlagenrecherche, kein alter Reimport, kein weiteres Fachkonzept nötig.
 
 ## AKTUELL 15.11.2026 – LIVEBERICHT V78 ABGEGLICHEN, V84 NOCH OFFEN
