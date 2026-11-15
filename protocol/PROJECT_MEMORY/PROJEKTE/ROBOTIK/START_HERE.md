@@ -1,5 +1,11 @@
 # ROBOTIK – CAMPUS-BÜROGEBÄUDE
 
+## AKTUELL V88 (15.11.2026) – SEO-PLUGIN 0.4.15 GETESTET UND BEREIT
+- **Fortlaufender Robotik-Fachstand:** [KATEGORIEN_AKTUELL.md](KATEGORIE/KATEGORIEN_AKTUELL.md) (V88) und einziger maschinenlesbarer Fachmaster `KATEGORIE/RECHERCHE/PRODUKTE_V2_20261108.json` (Rev24).
+- **Fertige bestehende Pluginidentität:** `robotik-kategorie-workflow` **0.4.15** mit 532er Google-Ads-Suchvolumen-Sammellauf und 17er Freizeit-Ideenlauf. Ein Admin-Freigabeklick, maximal 0,20 USD; historische 437er-/38er-Ausgaben geschützt, alter Bezahllauf für Neustart gesperrt. Alle 12 PHP-Dateien und WordPress-Mocktests PASS, kein echter API-Aufruf und keine WordPress-Live-Änderung.
+- **Download aufbewahrt:** persönliche Library `/robotik/Plugin-Buero/robotik-kategorie-workflow-0.4.15.zip` (SHA256 `64a6b9127ce1bfd50bf0dc5db8e20f13a73e65d43617a4958dfc0a70c1661c30`); verifizierte Chat-Datei `sandbox:/mnt/data/robotik-kategorie-workflow-0.4.15.zip`. GitHub `PLUGIN/CURRENT.zip` ist noch **0.4.14** und darf nicht als neue ZIP ausgegeben werden.
+- **Einziger nächster Nutzerschritt:** 0.4.15 aktualisieren → WordPress `Robotik Kategorie → SEO-Nachlauf` → bewusst einmalige Kostenfreigabe bis 0,20 USD → **einen** JSON-Abschlussbericht hochladen. Das ist keine V84-Seitenübernahme; 16+32 WordPress-Inhalte weiterhin nicht live bestätigt.
+
 ## AKTUELL V87 (15.11.2026) – EIN FORTLAUFENDER KATEGORIEN-/SEO-STAND
 - **Nur ein fortlaufender fachlicher Stand:** [KATEGORIEN_AKTUELL.md](KATEGORIE/KATEGORIEN_AKTUELL.md) jetzt V87; derselbe einzige Fachmaster `KATEGORIE/RECHERCHE/PRODUKTE_V2_20261108.json` jetzt Rev23.
 - **Vorbereitung abgeschlossen:** 532 eindeutige Suchbegriffe (47 Überblicksseiten, 157 Robotertypen, 328 Rubriken) + 17 Freizeit-Startbegriffe. 2 gebündelte DataForSEO-Abfragen kalkuliert mit insgesamt bis zu ca. 0,14 USD, maximal angestrebtes Freigabebudget 0,20 USD. **Keine neuen API-Kosten angefallen.**
