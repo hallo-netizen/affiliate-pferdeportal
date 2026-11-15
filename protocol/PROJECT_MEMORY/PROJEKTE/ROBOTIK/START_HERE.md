@@ -1,5 +1,10 @@
 # ROBOTIK – CAMPUS-BÜROGEBÄUDE
 
+## AKTUELL V87 (15.11.2026) – EIN FORTLAUFENDER KATEGORIEN-/SEO-STAND
+- **Nur ein fortlaufender fachlicher Stand:** [KATEGORIEN_AKTUELL.md](KATEGORIE/KATEGORIEN_AKTUELL.md) jetzt V87; derselbe einzige Fachmaster `KATEGORIE/RECHERCHE/PRODUKTE_V2_20261108.json` jetzt Rev22.
+- **Vorbereitung abgeschlossen:** 532 eindeutige Suchbegriffe (47 Überblicksseiten, 157 Robotertypen, 328 Rubriken) + 17 Freizeit-Startbegriffe. 2 gebündelte DataForSEO-Abfragen kalkuliert mit insgesamt bis zu ca. 0,14 USD, maximal angestrebtes Freigabebudget 0,20 USD. **Keine neuen API-Kosten angefallen.**
+- **Nur Plan:** Kategorieplugin 0.4.14 kann diesen Nachlauf noch nicht ausführen (es enthält den alten 437er/38-Schritte-SEO-Lauf). Vor Freigabe braucht es EIN getestetes Update derselben Pluginidentität. Der V84-WordPress-Nachtrag 16+32 ist weiter separat noch nicht durch Live-Bericht belegt. Niemals alten SEO-Lauf oder Kategorie-Import erneut starten.
+
 ## AKTUELL V86 (15.11.2026) – EIN FORTLAUFENDER STAND
 - **Einzige aktuelle Kategorien-/SEO-Fassung:** [KATEGORIEN_AKTUELL.md](KATEGORIE/KATEGORIEN_AKTUELL.md). Enthält Baum mit 204 Seiten/328 Inhaltsrubriken, Industrie-Verweise und konkrete Altrubriknamen sowie den kostenfreien Abgleich des DataForSEO-V61-Exports.
 - **Einziger Robotik-Fachmaster** `KATEGORIE/RECHERCHE/PRODUKTE_V2_20261108.json` jetzt **Revision 21**, bereits gespeicherte 26 Keyword-Zuordnungen. Neue SEO-Besitzer 485 (157+328), davon 46 alte mit Messwert, 439 ohne belegte Direktmessung oder nicht im alten Lauf; keine kostenpflichtige Wiederholung gestartet.
