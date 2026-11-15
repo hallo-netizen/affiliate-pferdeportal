@@ -1,0 +1,441 @@
+{
+  "version": "W19_20261115",
+  "state": "NEUE_PRODUKTKANDIDATEN_KEIN_WP_IMPORT",
+  "items": [
+    {
+      "name": "Wasserrohrnetz-Kombinationsentlüftungsventil",
+      "fachbereich": "Öffentliche Wassernetze",
+      "funktionen": [
+        "verteilen",
+        "schuetzen"
+      ],
+      "wasserarten": [
+        "trinkwasser",
+        "brauchwasser"
+      ],
+      "einsatzorte": [
+        "wasserwerk",
+        "kommune"
+      ],
+      "zielgruppen": [
+        "kommune",
+        "industrie"
+      ],
+      "source_url": "https://www.bermad.com/products/air-valves/",
+      "artikelkategorie": "Luftführung im Rohrnetz",
+      "artikelideen": [
+        "Automatisches Entlüften und Vakuumschutz bei Kombinationsentlüftern unterscheiden",
+        "Entlüftungsventile an Hochpunkten der Wasserleitung sinnvoll einordnen",
+        "Einlassquerschnitt und Luftmenge eines Wassernetzentlüfters auswählen"
+      ],
+      "abgrenzung": "W4 Rückschlagventil stoppt Rückfluss, dieses Ventil entlüftet Leitungen; andere Aufgabe.",
+      "bearbeitungsstand": "recherche_offen",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Hydraulisches Druckstoß-Vorwarnventil",
+      "fachbereich": "Wassernetz-Druckschutz",
+      "funktionen": [
+        "schuetzen",
+        "steuern"
+      ],
+      "wasserarten": [
+        "trinkwasser",
+        "brauchwasser"
+      ],
+      "einsatzorte": [
+        "wasserwerk",
+        "kommune"
+      ],
+      "zielgruppen": [
+        "kommune",
+        "industrie"
+      ],
+      "source_url": "https://www.bermad.com/product/mn-735/",
+      "artikelkategorie": "Druckstoßschutz",
+      "artikelideen": [
+        "Vorwarnventil und Druckminderer bei Pumpenstopp abgrenzen",
+        "Druckstoß-Vorwarnventil mit Pumpen- und Leitungsdruck abstimmen",
+        "Überspannungswelle und Ventilöffnungsprinzip im Rohrnetz verstehen"
+      ],
+      "abgrenzung": "W4 Pumpensteuergerät und W12 Druckminderer schützen anders; Wasserhammer-Vorwarnung ist eigene technische Funktion.",
+      "bearbeitungsstand": "recherche_offen",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Hydraulisches Druckhalteventil",
+      "fachbereich": "Wassernetz-Druckschutz",
+      "funktionen": [
+        "steuern",
+        "schuetzen"
+      ],
+      "wasserarten": [
+        "trinkwasser",
+        "brauchwasser"
+      ],
+      "einsatzorte": [
+        "wasserwerk",
+        "kommune"
+      ],
+      "zielgruppen": [
+        "kommune",
+        "industrie"
+      ],
+      "source_url": "https://www.bermad.com/product/730-2/",
+      "artikelkategorie": "Mindestdruck halten",
+      "artikelideen": [
+        "Druckhalteventil und Druckminderventil funktional unterscheiden",
+        "Hydraulisches Druckhalteventil bei wechselndem Verbrauch auslegen",
+        "Druckhaltesicherung an Pumpstationen und Druckzonen einordnen"
+      ],
+      "abgrenzung": "W12 Druckminderer regelt nachgelagerten Druck, dieses Ventil sichert primär vorgelagerten Mindestdruck.",
+      "bearbeitungsstand": "recherche_offen",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Schiffs-Ballastwasseraufbereitungsanlage",
+      "fachbereich": "Maritime Wassertechnik",
+      "funktionen": [
+        "aufbereiten",
+        "desinfizieren"
+      ],
+      "wasserarten": [
+        "meerwasser",
+        "ballastwasser"
+      ],
+      "einsatzorte": [
+        "schifffahrt"
+      ],
+      "zielgruppen": [
+        "industrie"
+      ],
+      "source_url": "https://www.alfalaval.com/products/process-solutions/ballast-water-treatment-system/pureballast-3/",
+      "artikelkategorie": "Ballastwasser behandeln",
+      "artikelideen": [
+        "Ballastwasser-Filtration und UV-Desinfektion als Kombinationssystem vergleichen",
+        "Ballastwasseranlage nach Wassermenge und Schiffsinstallation auswählen",
+        "Bioorganismen-Rückhalt und UV-Behandlung als getrennte Stufen verstehen"
+      ],
+      "abgrenzung": "W4 UV-Trinkwasserdesinfektion behandelt andere Anforderungen; das maritime System enthält Filtration, UV und Schiffssteuerung.",
+      "bearbeitungsstand": "grenzfall",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Schiffs-Bilgenwasser-Zentrifugalabscheider",
+      "fachbereich": "Maritime Abwassertechnik",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "bilgenwasser",
+        "abwasser"
+      ],
+      "einsatzorte": [
+        "schifffahrt"
+      ],
+      "zielgruppen": [
+        "industrie"
+      ],
+      "source_url": "https://www.alfalaval.com/de/products/separation/centrifugal-separators/separators/purebilge/",
+      "artikelkategorie": "Öliges Bilgenwasser trennen",
+      "artikelideen": [
+        "Zentrifugaltrennung von Bilgenwasser und Koaleszenz-Ölabscheider vergleichen",
+        "Bilgenwasser-Zentrifugalabscheider nach Wassermenge dimensionieren",
+        "Überwachung des Restölgehalts in einem Bilgenwasserabscheider verstehen"
+      ],
+      "abgrenzung": "W12 Leichtflüssigkeitsabscheider für Grundstücke nutzt andere Trennverfahren; maritime Zentrifugaltechnik getrennt betrachten.",
+      "bearbeitungsstand": "recherche_offen",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Automatischer eDNA-Wasserprobenehmer",
+      "fachbereich": "Umwelt- und Gewässermonitoring",
+      "funktionen": [
+        "messen"
+      ],
+      "wasserarten": [
+        "oberflaechenwasser"
+      ],
+      "einsatzorte": [
+        "kommune",
+        "labor"
+      ],
+      "zielgruppen": [
+        "kommune",
+        "industrie"
+      ],
+      "source_url": "https://www.nxinnovation.com/samplers",
+      "artikelkategorie": "Umwelt-DNA beproben",
+      "artikelideen": [
+        "eDNA-Probenahmegerät und normalen automatischen Wasserprobenehmer abgrenzen",
+        "Filtermembranen und Probemengen für Umwelt-DNA-Probenahme vergleichen",
+        "Tragbaren eDNA-Probenehmer für Gewässermessstellen beurteilen"
+      ],
+      "abgrenzung": "W14 Wasser-Probenehmer untersucht übliche chemische Proben, eDNA-System konzentriert biologische Spuren auf Membranen; spezifische Kaufabsicht offen.",
+      "bearbeitungsstand": "grenzfall",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Wäscherei-Abwasserrecyclinganlage",
+      "fachbereich": "Gewerbliches Wasserrecycling",
+      "funktionen": [
+        "aufbereiten",
+        "wiederverwenden"
+      ],
+      "wasserarten": [
+        "abwasser",
+        "brauchwasser"
+      ],
+      "einsatzorte": [
+        "waescherei",
+        "kleingewerbe"
+      ],
+      "zielgruppen": [
+        "kleinbetrieb",
+        "industrie"
+      ],
+      "source_url": "https://www.xylem.com/en-150/markets/general-industry/commercial-laundry/",
+      "artikelkategorie": "Wäschereiwasser wiederverwenden",
+      "artikelideen": [
+        "Wäscheabwasserkreislauf gegenüber Fahrzeugwaschwasser-Recycling abgrenzen",
+        "Textilfusseln und Tenside in der Wäscherei-Wasseraufbereitung berücksichtigen",
+        "Wasserverbrauch und Rückführquote einer Wäscherei-Recyclinganlage vergleichen"
+      ],
+      "abgrenzung": "W17 Fahrzeugwaschwasser-Recyclinganlage anderer Schmutzstoffmix; W14 Flotationsanlage ist Einzelstufe. Komplettsystem bislang nicht gesondert belegt.",
+      "bearbeitungsstand": "grenzfall",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Deponiesickerwasser-Membranaufbereitungsanlage",
+      "fachbereich": "Spezial-Abwasseraufbereitung",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "deponiesickerwasser",
+        "abwasser"
+      ],
+      "einsatzorte": [
+        "deponie",
+        "industrie"
+      ],
+      "zielgruppen": [
+        "industrie",
+        "kommune"
+      ],
+      "source_url": "https://www.rts-rochem.de/our-products/water-treatment-systems/landfill-leachate-systems/",
+      "artikelkategorie": "Deponiesickerwasser behandeln",
+      "artikelideen": [
+        "Deponiesickerwasser-Membrananlage gegenüber Industrieumkehrosmose vergleichen",
+        "Vorfilter und Membranstufen bei belastetem Sickerwasser abgrenzen",
+        "Konzentratmenge und Nachbehandlungsbedarf einer Sickerwasseranlage einordnen"
+      ],
+      "abgrenzung": "W4 gewerbliche Umkehrosmoseanlage ist generell ähnlich; stark belastetes Deponiesickerwasser kann technisch besondere Vorbehandlung verlangen.",
+      "bearbeitungsstand": "grenzfall",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Industrie-Abwasser-Vakuumverdampfer",
+      "fachbereich": "Industrielles Wasserrecycling",
+      "funktionen": [
+        "aufbereiten",
+        "wiederverwenden"
+      ],
+      "wasserarten": [
+        "abwasser",
+        "prozesswasser"
+      ],
+      "einsatzorte": [
+        "industrie"
+      ],
+      "zielgruppen": [
+        "industrie"
+      ],
+      "source_url": "https://www.veoliawatertechnologies.com/en/solutions/technologies/evaled",
+      "artikelkategorie": "Abwasser durch Verdampfung reinigen",
+      "artikelideen": [
+        "Vakuumverdampfer und Membranfiltration im Industrieabwasser vergleichen",
+        "Abwärmenutzung und Verdampfungsleistung für Prozessabwasser bewerten",
+        "Destillat und Konzentrat beim Vakuumverdampfer getrennt verwenden"
+      ],
+      "abgrenzung": "W14 Industrie-Verdampfungskristallisator kombiniert zusätzlich Kristallbildung; eigenständige Verdampfung ohne Kristallisation kann andere Aufgabe haben.",
+      "bearbeitungsstand": "grenzfall",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Industrie-Solekristallisator",
+      "fachbereich": "Industrielles Wasserrecycling",
+      "funktionen": [
+        "aufbereiten",
+        "wiederverwenden"
+      ],
+      "wasserarten": [
+        "prozesswasser",
+        "abwasser"
+      ],
+      "einsatzorte": [
+        "industrie"
+      ],
+      "zielgruppen": [
+        "industrie"
+      ],
+      "source_url": "https://www.veoliawatertechnologies.com/en/solutions/technologies/hpd-evaporation-and-crystallization",
+      "artikelkategorie": "Solekonzentrat behandeln",
+      "artikelideen": [
+        "Kristallisator und reinen Abwasserverdampfer abgrenzen",
+        "Salzkristallgewinnung und Restabfallmenge bei ZLD beurteilen",
+        "Kristallisationsanlage für salzreiche Prozessabwässer auswählen"
+      ],
+      "abgrenzung": "W14 Industrie-Verdampfungskristallisator ist oft dieselbe integrierte Funktionsfamilie; vorläufig Fachgrenzfall, vermutlich Alias/Variante statt eigene SEO-Seite.",
+      "bearbeitungsstand": "grenzfall",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Membranentgasungsmodul für Wasser",
+      "fachbereich": "Industrielle Wasseraufbereitung",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "prozesswasser"
+      ],
+      "einsatzorte": [
+        "labor",
+        "industrie"
+      ],
+      "zielgruppen": [
+        "kleinbetrieb",
+        "industrie"
+      ],
+      "source_url": "https://www.solventum.com/en-au/home/purification-filtration/manufacturing/advanced-dissolved-gas-control/",
+      "artikelkategorie": "Gelöste Gase entfernen",
+      "artikelideen": [
+        "Membranentgasung und thermischen Kessel-Speisewasserentgaser unterscheiden",
+        "Sauerstoff und Kohlendioxid mit Membrankontaktor getrennt behandeln",
+        "Membranentgasungsmodul zwischen RO und EDI einordnen"
+      ],
+      "abgrenzung": "W17 Kesselspeisewasser-Entgaser und W16 Brauwasser-Entgaser gleiche Zielgröße Gas, aber Membrankontaktor ist eigenständiges Modul mit anderer Bauweise.",
+      "bearbeitungsstand": "grenzfall",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "MCDI-Entsalzungsanlage",
+      "fachbereich": "Industrielle Wasseraufbereitung",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "prozesswasser",
+        "brauchwasser"
+      ],
+      "einsatzorte": [
+        "industrie",
+        "kleingewerbe"
+      ],
+      "zielgruppen": [
+        "kleinbetrieb",
+        "industrie"
+      ],
+      "source_url": "https://www.gruenbeck.de/produkte-loesungen/gruenbeck-fuer-gewerbe/membrantechnik/mcdi-entsalzung",
+      "artikelkategorie": "Kapazitive Entsalzung",
+      "artikelideen": [
+        "MCDI-Entsalzung und Umkehrosmose technisch vergleichen",
+        "Selektive Ionenentfernung mit kapazitiver Deionisation erläutern",
+        "Energiebedarf und Einsatzwasser für MCDI einordnen"
+      ],
+      "abgrenzung": "W4 Elektrodeionisationsanlage EDI und Umkehrosmose haben andere Antriebs-/Regenerationsverfahren; Fachabgrenzung bei elektrochemischen Verfahren erforderlich.",
+      "bearbeitungsstand": "recherche_offen",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Automatikfilter für Beschneiungswasser",
+      "fachbereich": "Spezial-Wasserfiltration",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "oberflaechenwasser"
+      ],
+      "einsatzorte": [
+        "wintertourismus"
+      ],
+      "zielgruppen": [
+        "industrie"
+      ],
+      "source_url": "https://www.bollfilter.com/de/anwendungen/behandlung-von-wassersystemen/schneemaschinen",
+      "artikelkategorie": "Beschneiungswasser vorfiltern",
+      "artikelideen": [
+        "Automatikfilter für Beschneiungsanlagen nach Partikelgröße auswählen",
+        "Beschneiungsfilter und allgemeinen Pumpenvorfilter unterscheiden",
+        "Rückspülung eines Beschneiungswasserfilters bei hoher Förderung vergleichen"
+      ],
+      "abgrenzung": "W4 Automatischer Rückspülfilter im Hauswasser und W14 Industriefilter verwenden ähnliches Prinzip; Wintersport-Kontext allein nicht neue Produktseite.",
+      "bearbeitungsstand": "grenzfall",
+      "technikstand": "marktprodukt"
+    },
+    {
+      "name": "Hydrodynamischer Regenwasser-Partikelabscheider",
+      "fachbereich": "Regenwasserbehandlung",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "regenwasser"
+      ],
+      "einsatzorte": [
+        "kommune",
+        "kleingewerbe"
+      ],
+      "zielgruppen": [
+        "kommune",
+        "kleinbetrieb"
+      ],
+      "source_url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P1000ZRK.TXT",
+      "artikelkategorie": "Wirbelabscheidung im Regenabfluss",
+      "artikelideen": [
+        "Hydrodynamische Abscheidung und Regenwasser-Sedimentationsanlage vergleichen",
+        "Wirbelabscheider im Regenwasserkanal nach Durchfluss bewerten",
+        "Sedimententnahme und Wartung eines Regenwasser-Wirbelabscheiders planen"
+      ],
+      "abgrenzung": "W12 Regenwasser-Sedimentationsanlage und W17 Hydrozyklon sind funktional verwandt; EPA belegt das Prinzip, keine separate SERP-Nachfrage. Bisher nur Verfahrensquelle, kein separater konkreter Herstellerartikel belegt; kein Marktproduktstatus.",
+      "bearbeitungsstand": "grenzfall",
+      "technikstand": "ungeklaert"
+    },
+    {
+      "name": "Abwasserschlamm-Kammerfilterpresse",
+      "fachbereich": "Industrie- und Gewerbeabwasser",
+      "funktionen": [
+        "aufbereiten"
+      ],
+      "wasserarten": [
+        "abwasser"
+      ],
+      "einsatzorte": [
+        "waescherei",
+        "industrie"
+      ],
+      "zielgruppen": [
+        "kleinbetrieb",
+        "industrie"
+      ],
+      "source_url": "https://www.andritz.com/products-en/separation/filter-presses/filter-press-side-bar-overhead",
+      "artikelkategorie": "Schlamm pressen",
+      "artikelideen": [
+        "Kammerfilterpresse und Schneckenpresse zur Schlammentwässerung vergleichen",
+        "Filtrationsdruck und Kuchentrockenheit bei Abwasserfilterpressen beurteilen",
+        "Filtertücher und Entleerungsablauf einer Kammerfilterpresse einordnen"
+      ],
+      "abgrenzung": "W14 Klärschlamm-Schneckenpresse entzieht Wasser durch andere Mechanik; eine Filterpresse ist eine eigenständige Gerätebauart. Herstellerquelle nun direkt zu industriellen Filterpressen einschliesslich Abwasser-/Schlammentwässerung geprüft.",
+      "bearbeitungsstand": "recherche_offen",
+      "technikstand": "marktprodukt"
+    }
+  ],
+  "counts": {
+    "new_research_product_labels": 15,
+    "proposed_article_categories": 15,
+    "article_ideas": 45,
+    "marked_intent_boundary": 9,
+    "distinct_names_from_W18": 15
+  },
+  "caveat": "Die Hersteller belegen Techniktypen und Anwendungsfälle, nicht gesonderte SEO-Suchintentionen. Bauteil/Gesamtsystem, Industrieanwendung und Branchenvarianteneinträge werden vor einer Freigabe funktionsbezogen kanonisiert. Ursprünglich unpassende Kammerfilterpressen-Belegseite durch ANDRITZ Produktseite ersetzt; für hydrodynamischen Regenwasserabscheider nur Prinzip, kein Serienproduktstatus. Frühere 3M Liqui-Cel-URL leitet auf Solventum um; Direktquelle angepasst."
+}
