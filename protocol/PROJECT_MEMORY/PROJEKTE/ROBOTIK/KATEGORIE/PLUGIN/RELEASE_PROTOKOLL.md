@@ -1,5 +1,10 @@
 # Robotik-Pluginbüro – einziges Release-/Prüfprotokoll
 
+## AKTUELL 15.11.2026 – 0.4.13 löst 0.4.12 ab
+- `PLUGIN/CURRENT.zip` = `PLUGIN/VERSIONEN/0.4.13.zip`, GitHub-Dateikennung `a8149236e98debdb93f6657d9e07447700aecf54`. Das Paket ist PHP- und ZIP-geprüft, kein echter WordPress-Live-PASS.
+- V79 ergänzt **einmalig und ohne neuen Worker** die im vorherigen Sammelablauf vergessene **104er Originalseiten-Veröffentlichung**, bevor die 68 neuen Seiten an die Reihe kommen. Bestehende 227er und 64er Aufgaben bleiben unverändert; keine doppelte Zustimmung, keine Google-Adressen-Sperre. Auch unter 0.4.12 gespeicherte Zwischenzustände werden korrigiert.
+- **GitHub CI PASS:** https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43704446763. Releasebeleg: `V79_104_ALTSEITEN_SICHTBARKEIT_20261115.md`. Frühere Angaben zu 0.4.12 sind historisch.
+
 ## Aktuelle installierbare Version 15.11.2026 – 0.4.12 (V78)
 - **`CURRENT.zip` ist identisch mit `VERSIONEN/0.4.12.zip`**, GitHub-Blob `6f55d9890a77e38e908f8c002396129d685f3a4f`, 180.769 Bytes. **Nicht mehr 0.4.11 installieren**.
 - 0.4.12 bündelt V63 (gespeicherte 227 Aufgaben), V65 (68 Veröffentlichungen) und V77 (16+48 Nachtrag = 64 Aufgaben) in **einer einzigen ausdrücklich genehmigten Ausführung** und einem einzigen Abschlussbericht. Kein neuer Writer, kein doppelter Import, keine Google-URL-Sperre, kein API-Aufruf.
