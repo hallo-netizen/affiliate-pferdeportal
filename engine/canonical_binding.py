@@ -20,6 +20,15 @@ def _slot_from_article_id(article_id:str)->str:
     return hashlib.sha256(("pserc-plan-slot-v2|"+article_id).encode("utf-8")).hexdigest()
 
 def resolve(intake_path:Path, ppm_zip:Path, pserc_zip:Path)->dict:
+    # Current WordPress-owned K0 jobs use their own immutable order receipt.
+    # This is a technical identity binding, not an alternative planning decision.
+    # Historical K0 runs without this receipt retain their unchanged legacy path.
+    receipt_path=intake_path.with_name("PSERC_SOURCE_MANIFEST.json")
+    if receipt_path.is_file():
+        receipt=_load(receipt_path)
+        if receipt.get("contract")=="WP_K0_SOURCE_RECEIPT_V1":
+            from .wp_order_identity_receipt import resolve_current_intake
+            return resolve_current_intake(_load(intake_path),receipt)
     if _sha(ppm_zip)!=PPM_SHA256: raise Blocked("PPM679_PACKAGE_HASH_MISMATCH")
     if _sha(pserc_zip)!=PSERC_SHA256: raise Blocked("PSERC_PACKAGE_HASH_MISMATCH")
     intake=_load(intake_path)
