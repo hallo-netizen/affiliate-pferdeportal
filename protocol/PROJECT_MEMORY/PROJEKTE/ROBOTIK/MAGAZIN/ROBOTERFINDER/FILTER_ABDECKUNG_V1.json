@@ -2,7 +2,7 @@
   "schema": "ROBOTIK_FINDER_FILTER_IDEA_V1",
   "status": "KONZEPT_NOT_LIVE",
   "source_of_truth": "../../KATEGORIE/RECHERCHE/PRODUKTE_V2_20261108.json",
-  "date": "2026-11-09",
+  "date": "2026-11-15",
   "task_groups": [
     {
       "task": "Transportieren",
@@ -30,7 +30,8 @@
         "rb060",
         "rb061",
         "rb063",
-        "rb064"
+        "rb064",
+        "rf142"
       ]
     },
     {
@@ -104,14 +105,18 @@
       ]
     },
     {
-      "task": "Gesundheit und Rehabilitation",
+      "task": "Gesundheit, Pflege und Rehabilitation",
       "owner_candidates": [
         "rb041",
         "rb042",
         "rb043",
         "rb044",
         "rb045",
-        "rb046"
+        "rb046",
+        "rf176",
+        "rf177",
+        "rf158",
+        "rf159"
       ]
     },
     {
@@ -119,7 +124,8 @@
       "owner_candidates": [
         "rb056",
         "rb057",
-        "rb058"
+        "rb058",
+        "rf143"
       ]
     },
     {
@@ -130,7 +136,9 @@
         "rb062",
         "rb063",
         "rb064",
-        "rb065"
+        "rb065",
+        "rf142",
+        "rf143"
       ]
     },
     {
@@ -139,6 +147,26 @@
         "rb066",
         "rb067",
         "rb068"
+      ]
+    },
+    {
+      "task": "Sport und Training",
+      "owner_candidates": [
+        "rf148",
+        "rf175",
+        "rf180",
+        "rf182",
+        "rf185",
+        "rf186",
+        "rf187"
+      ]
+    },
+    {
+      "task": "Freizeit und Kreativität",
+      "owner_candidates": [
+        "rf181",
+        "rf183",
+        "rf184"
       ]
     }
   ],
@@ -151,5 +179,20 @@
   ],
   "wp_publish": false,
   "affiliate_connected": false,
-  "trait_coverage_checked": 0
+  "trait_coverage_checked": 0,
+  "updated_v84": {
+    "date": "2026-11-15",
+    "status": "FINDER_IDEEN_TEILWEISE_BELEGT_NICHT_LIVE",
+    "task_groups_count": 14,
+    "partially_sourced_new_types": 16,
+    "fully_suitable_types": 0,
+    "prior_original12_preserved": true,
+    "one_finder_all_worlds": true,
+    "source_of_traits": "KATEGORIE/RECHERCHE/PRODUKTE_V2_20261108.json revision 20",
+    "no_filter_url_seo_index": true,
+    "show_unknown_as_unknown": true,
+    "allowed_result": "Only verified matching features, direct CORE link exists and is published; otherwise no false result.",
+    "industry_and_private_shared": true,
+    "wp_plugin_changes": 0
+  }
 }
