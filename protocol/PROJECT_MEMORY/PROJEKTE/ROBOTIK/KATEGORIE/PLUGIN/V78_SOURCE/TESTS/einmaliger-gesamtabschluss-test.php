@@ -52,4 +52,11 @@ check(Robotik_V63_Delta::$write===$previous,'completed flow cannot run twice');
 $options['robotik_v78_gesamtabschluss_state']=['status'=>'RUNNING','phase'=>'uebernehmen','authorized_once'=>true,'manifest'=>'NOT_THE_MANIFEST','error'=>''];
 Robotik_V78_Gesamtabschluss::advance();
 check($options['robotik_v78_gesamtabschluss_state']['status']==='BLOCKED','manifest change blocks instead of writing');
+// A paused V63 import continues from the saved index with the same consent.
+$options['robotik_v78_gesamtabschluss_state']=['status'=>'RUNNING','phase'=>'uebernehmen','authorized_once'=>true,'manifest'=>$manifest,'error'=>''];
+$options['robotik_v63_delta_state']=['status'=>'BLOCKED','index'=>16,'total'=>227];
+unset($options['robotik_v65_publication_state'],$options['robotik_v77_fachnachtrag_state']);
+Robotik_V78_Gesamtabschluss::advance();
+check($options['robotik_v78_gesamtabschluss_state']['status']==='RUNNING','blocked original resumed without renewed approval');
+check($options['robotik_v63_delta_state']['index']===48,'blocked original preserves 16 completed steps');
 echo "V78 ONE_APPROVAL FULL_FLOW MOCK PASS\n";
