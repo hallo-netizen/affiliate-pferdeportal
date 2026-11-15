@@ -248,22 +248,25 @@ final class Robotik_V63_Delta {
             'error'=>'','started'=>gmdate('c')];
         update_option(self::STATE,$state,false);self::location();
     }
-    public static function resume():void {
-        self::authorized();check_admin_referer('robotik_v63_delta_resume');
+    public static function resumeSaved():void {
         $s=get_option(self::STATE,[]);
         if(!is_array($s)||($s['status']??'')!=='BLOCKED' ||
            (int)($s['total']??0)!==227 || !isset($s['index']))
-            wp_die('Kein unterbrochener 227er-Originalauftrag zum Fortsetzen.');
-        try{$p=self::prepare();}catch(Throwable $e){wp_die('Keine Fortsetzung: '.$e->getMessage());}
+            throw new RuntimeException('Kein unterbrochener 227er-Originalauftrag.');
+        $p=self::prepare();
         if($p['errors'] || (int)$p['task_count']!==227 || (int)$p['task_done']<(int)$s['index'] ||
            !hash_equals((string)($s['manifest_sha256']??''),(string)hash_file('sha256',__DIR__.'/../assets/robotik-v62-sollvorschau.json')))
-            wp_die('Bestehender Importstand weicht ab; kein Neustart und kein doppelter Import.');
+            throw new RuntimeException('Alter Importstand oder Sollprofil weicht ab, keine Verdoppelung.');
         $existingPages=array_flip($p['prior_wp_page_ids']);$existingTerms=array_flip($p['prior_wp_term_ids']);
         foreach((array)($s['existing_pages_preserved']??[]) as $id)
-            if(!isset($existingPages[$id]))wp_die('Eine urspruengliche Seite fehlt. Lauf nicht fortsetzen.');
+            if(!isset($existingPages[$id]))throw new RuntimeException('Urspruengliche WordPress-Seite fehlt.');
         foreach((array)($s['existing_terms_preserved']??[]) as $id)
-            if(!isset($existingTerms[$id]))wp_die('Eine urspruengliche Rubrik fehlt. Lauf nicht fortsetzen.');
+            if(!isset($existingTerms[$id]))throw new RuntimeException('Urspruengliche WordPress-Rubrik fehlt.');
         $s['status']='WRITING';$s['error']='';update_option(self::STATE,$s,false);
+    }
+    public static function resume():void {
+        self::authorized();check_admin_referer('robotik_v63_delta_resume');
+        try{self::resumeSaved();}catch(Throwable $e){wp_die(esc_html($e->getMessage()));}
         self::location();
     }
     public static function createOne(array $task,array &$pages,array &$terms):string {
