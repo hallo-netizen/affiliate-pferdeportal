@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Robotik Kategorie-Workflow (Neutralstart)
  * Description: Eigenstaendige Robotik-Planungsoberflaeche mit Produktseiten- und Inhaltskategorie-Pruefung; mit kontrolliertem Erstimport fuer Entwurfsseiten und Produktkategorien.
- * Version: 0.4.13
+ * Version: 0.4.14
  * Requires at least: 6.4
  * Requires PHP: 8.1
  * Text Domain: robotik-kategorie-workflow
@@ -17,10 +17,11 @@ require_once __DIR__ . '/includes/class-robotik-v63-delta.php';
 require_once __DIR__ . '/includes/class-robotik-v65-publication.php';
 require_once __DIR__ . '/includes/class-robotik-v77-fachnachtrag.php';
 require_once __DIR__ . '/includes/class-robotik-v78-gesamtabschluss.php';
+require_once __DIR__ . '/includes/class-robotik-v84-kategorien-nachtrag.php';
 
 final class Robotik_Kategorie_Workflow {
     private const OPTION = 'robotik_kategorie_entwurf_v1'; // Bestehende Entwuerfe bei Update erhalten.
-    public const VERSION = '0.4.13';
+    public const VERSION = '0.4.14';
 
     public static function boot(): void {
         add_action('admin_menu', [self::class, 'menu']);
@@ -33,6 +34,7 @@ final class Robotik_Kategorie_Workflow {
         Robotik_V65_Publication::boot();
         Robotik_V77_Fachnachtrag::boot();
         Robotik_V78_Gesamtabschluss::boot();
+        Robotik_V84_Kategorien_Nachtrag::boot();
     }
 
     public static function menu(): void {
