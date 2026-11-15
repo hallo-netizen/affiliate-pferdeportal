@@ -47,7 +47,9 @@
         "data-fact-id",
         "data-source-hash",
         "data-source-title"
-      ]
+      ],
+      "authoring_rule": "Quellen bleiben nachweisbar. Der Quellenmarker selbst enthält niemals sichtbaren Text. Quellen- und Markennamen dürfen im lesbaren Artikel nur als sinnvoller Bestandteil eines vollständigen Satzes stehen, nicht lose angehängt.",
+      "marker_visible_content_forbidden": true
     },
     "visible_links_exact": 3
   },
