@@ -5019,7 +5019,7 @@
     }
   ],
   "canonical_source": true,
-  "revision": 22,
+  "revision": 23,
   "research_state": "GRUNDLAGENRECHERCHE_ABGESCHLOSSEN_V84_SEO_BESTAND_ABGEGLICHEN_V86",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
@@ -17081,9 +17081,9 @@
           "owner_type": "robot_type",
           "world": "Gewerbe",
           "path": "Gewerbe › Landwirtschaft › Sä-/Jätroboter",
-          "keyword": "sä-/jätroboter",
+          "keyword": "säroboter jätroboter",
           "phase": "v78",
-          "rule": "TYPE_TITLE"
+          "rule": "PUNCTUATION_SAFE_ROBOTIC_SEARCH_KEYWORD"
         },
         {
           "owner_id": "rbt_product_0487",
@@ -18737,18 +18737,18 @@
           "owner_type": "facet",
           "world": "Gewerbe",
           "path": "Gewerbe › Landwirtschaft › Sä-/Jätroboter",
-          "keyword": "sä-/jätroboter aussaat",
+          "keyword": "säroboter aussaat",
           "phase": "v78",
-          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+          "rule": "PUNCTUATION_SAFE_ROBOTIC_SEARCH_KEYWORD"
         },
         {
           "owner_id": "rbt_0eb4cf74ddd6c77e",
           "owner_type": "facet",
           "world": "Gewerbe",
           "path": "Gewerbe › Landwirtschaft › Sä-/Jätroboter",
-          "keyword": "sä-/jätroboter betrieb",
+          "keyword": "jätroboter betrieb",
           "phase": "v78",
-          "rule": "ROBOT_TYPE_PLUS_CONTENT_FACET"
+          "rule": "PUNCTUATION_SAFE_ROBOTIC_SEARCH_KEYWORD"
         },
         {
           "owner_id": "rbt_fe88183166b05ee8",
@@ -21368,6 +21368,8 @@
     ],
     "new_provider_calls": 0,
     "wordpress_writes": 0,
-    "keyword_results": 0
+    "keyword_results": 0,
+    "sanitization_verified": true,
+    "sanitization_note": "3 Samen-/Jaetroboter-Suchbegriffe ohne Schraegstrich, keine WordPress-Titel umbenannt"
   }
 }
