@@ -1,5 +1,5 @@
 <?php
-/** V78 fixture: one approval, preexisting index 16, automatic 227 -> 68 -> 64. */
+/** V78 fixture: one approval, preexisting index 16, automatic 227 -> 104 published -> 68 published -> 64. */
 declare(strict_types=1);
 define('ABSPATH','/test/');
 $options=[];$changes=[];
@@ -16,9 +16,30 @@ class Robotik_V63_Delta {
     public static function resumeSaved():void {global $options;$s=$options['robotik_v63_delta_state'];if($s['status']!=='BLOCKED')throw new Exception('resume only blocked');$s['status']='WRITING';$options['robotik_v63_delta_state']=$s;}
     public static function advance():array {global $options;$s=$options['robotik_v63_delta_state'];if($s['status']!=='WRITING')throw new Exception('wrong import state');$s['index']=min(227,$s['index']+32);self::$write++;if($s['index']===227){$s['status']='COMPLETE_SAFE_DELTA_WITH_16_HOLDS';$s['verified']=227;} $options['robotik_v63_delta_state']=$s;return $s;}
 }
+class Robotik_Publish {
+    public static int $write=0;
+    public static int $oldPublished=0;
+    public static function preview():array {
+        return ['valid'=>true,'expected'=>104,'errors'=>[],
+            'ids'=>array_combine(array_map('strval',range(1,104)),range(1,104)),
+            'token'=>'old-104-preview',
+            'counts'=>['draft'=>104-self::$oldPublished,'publish'=>self::$oldPublished]];
+    }
+    public static function advance():array {
+        global $options;
+        $s=$options['robotik_first_publish_state_v1'];
+        if($s['status']!=='WRITING')throw new Exception('wrong legacy publish status');
+        $s['index']=min(104,$s['index']+20);
+        self::$oldPublished=$s['index'];
+        self::$write++;
+        if($s['index']===104){$s['status']='COMPLETE';$s['verified']=104;}
+        $options['robotik_first_publish_state_v1']=$s;
+        return $s;
+    }
+}
 class Robotik_V65_Publication {
     public static int $write=0;
-    public static function preview():array{return ['ready'=>true,'items'=>array_fill(0,68,['id'=>1]),'drafts'=>68,'published'=>0];}
+    public static function preview():array{if(Robotik_Publish::$oldPublished!==104)throw new Exception('104 original pages are not public');return ['ready'=>true,'items'=>array_fill(0,68,['id'=>1]),'drafts'=>68,'published'=>0];}
     public static function resumeSaved():void {global $options;$s=$options['robotik_v65_publication_state'];if($s['status']!=='BLOCKED')throw new Exception('resume only blocked');$s['status']='WRITING';$options['robotik_v65_publication_state']=$s;}
     public static function advance():array {global $options;$s=$options['robotik_v65_publication_state'];if($s['status']!=='WRITING')throw new Exception('wrong publish state');$s['index']=min(68,$s['index']+22);self::$write++;if($s['index']===68){$s['status']='COMPLETE';$s['verified']=68;} $options['robotik_v65_publication_state']=$s;return $s;}
 }
@@ -36,15 +57,17 @@ check((Robotik_V78_Gesamtabschluss::advance()['status']??'')!=='COMPLETE','no un
 $options['robotik_v78_gesamtabschluss_state']=['status'=>'RUNNING','phase'=>'uebernehmen','authorized_once'=>true,'manifest'=>$manifest,'error'=>''];
 $options['robotik_v63_delta_state']=['status'=>'WRITING','index'=>16,'total'=>227];
 $loops=0;
-while(($options['robotik_v78_gesamtabschluss_state']['status']??'')==='RUNNING'&&$loops++<32){
+while(($options['robotik_v78_gesamtabschluss_state']['status']??'')==='RUNNING'&&$loops++<45){
     Robotik_V78_Gesamtabschluss::advance();
 }
-check($loops<32,'single workflow terminates');
+check($loops<45,'single workflow terminates');
 check($options['robotik_v78_gesamtabschluss_state']['status']==='COMPLETE','global final status complete');
 check($options['robotik_v63_delta_state']['index']===227,'original resumed from 16 of 227');
+check(Robotik_Publish::$oldPublished===104,'104 original pages published before the 68 new pages');
+check($options['robotik_first_publish_state_v1']['verified']===104,'104 old page owner verified');
 check($options['robotik_v65_publication_state']['index']===68,'68 published in same flow');
 check($options['robotik_v77_fachnachtrag_state']['index']===64,'64 followup actions in same flow');
-check(Robotik_V63_Delta::$write===7 && Robotik_V65_Publication::$write===4 && Robotik_V77_Fachnachtrag::$write===4,'single phase order without restart');
+check(Robotik_V63_Delta::$write===7 && Robotik_Publish::$write===6 && Robotik_V65_Publication::$write===4 && Robotik_V77_Fachnachtrag::$write===4,'single phase order without restart');
 check($options['robotik_v78_gesamtabschluss_state']['authorized_once']===true,'one approval persisted');
 $previous=Robotik_V63_Delta::$write;Robotik_V78_Gesamtabschluss::advance();
 check(Robotik_V63_Delta::$write===$previous,'completed flow cannot run twice');
@@ -59,4 +82,12 @@ unset($options['robotik_v65_publication_state'],$options['robotik_v77_fachnachtr
 Robotik_V78_Gesamtabschluss::advance();
 check($options['robotik_v78_gesamtabschluss_state']['status']==='RUNNING','blocked original resumed without renewed approval');
 check($options['robotik_v63_delta_state']['index']===48,'blocked original preserves 16 completed steps');
-echo "V78 ONE_APPROVAL FULL_FLOW MOCK PASS\n";
+// Upgrading 0.4.12 with a saved phase at V65: recover the omitted old 104 first.
+Robotik_Publish::$oldPublished=0;
+unset($options['robotik_first_publish_state_v1'],$options['robotik_v65_publication_state']);
+$options['robotik_v78_gesamtabschluss_state']=['status'=>'RUNNING','phase'=>'veroeffentlichen','authorized_once'=>true,'manifest'=>$manifest,'error'=>''];
+$options['robotik_v63_delta_state']=['status'=>'COMPLETE_SAFE_DELTA_WITH_16_HOLDS','index'=>227,'total'=>227,'verified'=>227];
+Robotik_V78_Gesamtabschluss::advance();
+check($options['robotik_v78_gesamtabschluss_state']['status']==='RUNNING' &&
+    $options['robotik_v78_gesamtabschluss_state']['phase']==='altseiten','0.4.12 running state recovers old 104 step');
+echo "V79 ONE_APPROVAL 227-104-68-64 FULL_FLOW MOCK PASS\n";
