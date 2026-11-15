@@ -2,16 +2,16 @@
 **Datum: 15.11.2026 · Abschluss der Recherche, NICHT WordPress-/SEO-/Plugin-Freigabe.**
 
 ## 1. Wo stehen wir?
-Der unveränderte V52/V67-Basisplan umfasst **100 unterschiedliche private Robotertyp-Seiten** in sieben Hauptwelten. Die Gewerbe-/Industriewelt wird weder recherchiert noch geändert. Aus V67–V75 wurden **29 zusätzliche Robotertyp-Kandidaten** aus echten Produktbelegen, Forschungsprojekten und Patenten abgeglichen; V68 ist in bestehenden Kandidatenreferenzen enthalten, aber keine eigenständige nummerierte Kandidatenliste dieser Auswertung. Neue Einzelquellen aus V74/V75 sind zum großen Teil **zusätzliche Hersteller-Modelle für bereits vorhandene Typen**, keine neuen Typseiten.
+Der unveränderte V52/V67-Basisplan umfasst **100 Robotertyp-Seiten in sieben Kategorien außerhalb der Gewerbe-Hauptwelt** in sieben Hauptwelten. Die Gewerbe-/Industriewelt wird weder recherchiert noch geändert. **Wichtige Abgrenzung:** In den 12 bestehenden Humanoiden-Typseiten stehen auch vier gewerbliche/industrielle Arbeitsfunktionen (Lager, Produktion, Empfang, Werkstatt). Sie wurden **nur als unveränderter Planbestand mitgezählt und ausdrücklich NICHT nachrecherchiert**. Die Zahl 100 ist daher eine **strukturelle Sieben-Welten-Zahl**, keine genaue reine Privatmarkt-Zahl. Aus V67–V75 wurden **29 zusätzliche Robotertyp-Kandidaten** aus echten Produktbelegen, Forschungsprojekten und Patenten abgeglichen; V68 ist in bestehenden Kandidatenreferenzen enthalten, aber keine eigenständige nummerierte Kandidatenliste dieser Auswertung. Neue Einzelquellen aus V74/V75 sind zum großen Teil **zusätzliche Hersteller-Modelle für bereits vorhandene Typen**, keine neuen Typseiten.
 
 ## 2. Schlussentscheidung
 - **11 eigenständige neue Typ-Fachkandidaten**, vorzugsweise bereits reale Produkte, mit klar abweichender Funktion oder Zielgruppe. Die 11 sind **redaktionelle Vorschläge**, keine importierte oder SEO-freigegebene Seiten.
 - **18 weitere Kandidaten als Projekte, Ideen oder Varianten im zentralen Recherche-/Roboterregister weiterführen**. Das ist **keine Löschung und kein thematischer Ausschluss**: Magazin-Artikel, Modelle, Patente, Studien und Glossar bleiben möglich. Nicht jeder Studienentwurf erzwingt eine Kategorienseite.
 - Folgende grobe Balance gilt weiterhin: **konkrete existierende Roboter klar in der Mehrheit**, zwei Drittel bis drei Viertel nur als unverbindliches Orientierungsbild; kein hartes Limit, keine 70,0005%-Entscheidung.
-- **Die tatsächliche Gesamtquote Produkt/Projekt/Idee kann seriös NICHT numerisch angegeben werden.** Die 100 Typseiten entsprechen nicht 100 deduplizierten Geräten; ältere Forschungsdaten (581er V52-Quellensatz) und neue Einzeldeltas sind nicht einheitlich als ein zentrales Modellstatusregister bereinigt. Die 116 Quellen V69–V73 (5 Produkt / 39 Projekt / 72 Idee) stammen aus einer gezielt ideenlastigen Recherche und sind **kein Anteil des gesamten geplanten Portals**. V74/V75 ergänzen 36 Produktbelege, aber diese Quelleinträge dürfen nicht blind aufaddiert werden.
+- **Die tatsächliche Gesamtquote Produkt/Projekt/Idee kann seriös NICHT numerisch angegeben werden.** Die 100 Typseiten entsprechen weder 100 eindeutig privaten Anwendungen noch 100 deduplizierten Geräten; ältere Forschungsdaten (581er V52-Quellensatz) und neue Einzeldeltas sind nicht einheitlich als ein zentrales Modellstatusregister bereinigt. Die 116 Quellen V69–V73 (5 Produkt / 39 Projekt / 72 Idee) stammen aus einer gezielt ideenlastigen Recherche und sind **kein Anteil des gesamten geplanten Portals**. V74/V75 ergänzen 36 Produktbelege, aber diese Quelleinträge dürfen nicht blind aufaddiert werden.
 
 ## 3. Finale private Welten – Fachbasis und Ergänzungen
-| Hauptwelt | Vorhandene Typseiten | Vorgeschlagen | Fachlich möglich danach | Weitere Registerkandidaten |
+| Hauptwelt | Typseiten im vorhandenen Fachplan | Vorgeschlagen | Fachlich möglich danach | Weitere Registerkandidaten |
 |---|---:|---:|---:|---:|
 | Haushalt | 18 | +2 | 20 | 10 |
 | Sport | 17 | +4 | 21 | 0 |
@@ -22,7 +22,7 @@ Der unveränderte V52/V67-Basisplan umfasst **100 unterschiedliche private Robot
 | Humanoide | 12 | +0 | 12 | 0 |
 | **Summe** | **100** | **11** | **111** | **18** |
 
-**111 ist ausdrücklich KEIN WordPress-Livebestand, keine neue Freigabe und kein exakter Marktbestand.** Die 18 Registerkandidaten stehen daneben als dokumentierte Inhalte, keine zusätzlichen Seiten. Keine künstliche Füllung von Garten, Bildung oder Humanoiden nur zur optischen Zahlengleichheit.
+**111 ist ausdrücklich KEIN WordPress-Livebestand, keine neue Freigabe und kein exakter Marktbestand.** Die Humanoiden-Arbeitstypen im alten Plan sind nicht Teil der neuen Recherche. Die 18 Registerkandidaten stehen daneben als dokumentierte Inhalte, keine zusätzlichen Seiten. Keine künstliche Füllung von Garten, Bildung oder Humanoiden nur zur optischen Zahlengleichheit.
 
 ## 4. Alle 29 Kandidaten – eine Entscheidung pro Eintrag
 | ID | Hauptwelt | Funktion | Fundstand | Fachliche Einordnung |
