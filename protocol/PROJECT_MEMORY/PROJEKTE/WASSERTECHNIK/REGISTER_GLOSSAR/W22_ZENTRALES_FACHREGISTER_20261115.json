@@ -2,7 +2,7 @@
   "version": "W22_2026-11-15_v1",
   "stand": "2026-11-15",
   "status": "W22_EINZIGER_FORSCHUNGSMASTER_KEINE_WP_SEO_FREIGABE",
-  "hinweis": "W22: sechs Restpaare technisch eingeordnet, zwei neue Funktionsaliase; weitere Fachrecherche folgt im gleichen Master.",
+  "hinweis": "Einziger aktueller Forschungsstand W22. 50 W19-Vergleiche: 44 fachlich verschieden, 1 bauliche Unterart, 3 Alias, 2 SEO-Überlappungen; 8 neue Produkttyp-Kandidaten, 4 Glossar- und 2 Dienstleisterrubriken. Keine WP-/SEO-Freigabe.",
   "quelle": {
     "w16_master": "protocol/PROJECT_MEMORY/PROJEKTE/WASSERTECHNIK/KATEGORIEKONZEPT/W16_GEMEINSAMER_PRODUKTFORSCHUNGSMASTER_20261115.json",
     "w16_sha": "00b2faf1a8aafe4d4558fd3037b7d6b02e1156a1",
@@ -118,10 +118,10 @@
     ]
   },
   "zaehlung": {
-    "gesamt": 414,
+    "gesamt": 420,
     "produkt": 314,
-    "glossar": 76,
-    "anbieterrubrik": 24,
+    "glossar": 80,
+    "anbieterrubrik": 26,
     "alte_w4_fachprodukte": 79,
     "alte_bis_w16": 230,
     "neue_w17_fachkandidaten": 28,
@@ -154,7 +154,13 @@
     "w21_vergleichspaare_alias": 1,
     "w21_vergleichspaare_offen": 6,
     "w21_neu_geklärt": 9,
-    "neue_w22_fachkandidaten": 8
+    "neue_w22_fachkandidaten": 8,
+    "neue_w22_glossarbegriffe": 4,
+    "neue_w22_anbieterrubriken": 2,
+    "w22_50_fachlich_unterschiedlich": 44,
+    "w22_50_bauform_unterart": 1,
+    "w22_50_alias": 3,
+    "w22_50_ueberlappung_offen": 2
   },
   "regeln": {
     "wp_seitenebene": "Letzte WP-Seitenebene ist konkrete Produktart oder System.",
@@ -167,7 +173,8 @@
     "w18": "17 neue recherchierte Produktbezeichnungen mit Quell-URL, 1 vertiefende Kategorie und jeweils mindestens drei unterschiedlichen Artikelideen; 14 zusätzliche Glossarbegriffe mit stabilen bidirektionalen Referenzen. 5 offensichtliche Doppelungen verworfen. Neue Kandidaten noch nicht nach SERP/SEO freigegeben.",
     "funktionsentscheidung": "Alle 275 vorherigen Produktlabels haben nun einen Funktionsscreening-Status. Nur 50 konkrete Konkurrenzpaare explizit diskutiert, sechs eindeutige Aliasbeziehungen im Gesamtbestand; 176 Altlabels ohne notierten Konflikt sind NICHT endgültig als selbstständige SEO-Produkte freigegeben. Unentschiedene Funktionsnachbarn bleiben getrennt markiert.",
     "vokabular_erweiterung": "Für neue tatsächlich recherchierte Einsatzkontexte und Wasserarten exakt 3 neue Wasserarten sowie 5 Einsatzfelder zentral ergänzt; keine ad hoc Tags in Einzeldateien.",
-    "entscheidungsvergleich_w21": "Die einzige aktuelle Entscheidung je Paar steht in funktionsvergleiche_50_aktuell, in den Produktdatensätzen nur Referenz. Keine weitere nachgelagerte Entscheidung."
+    "entscheidungsvergleich_w21": "Die einzige aktuelle Entscheidung je Paar steht in funktionsvergleiche_50_aktuell, in den Produktdatensätzen nur Referenz. Keine weitere nachgelagerte Entscheidung.",
+    "w22_einmalentscheidung": "Ein Vergleich, eine Entscheidung im Feld funktionsvergleiche_50_aktuell. Produktdaten verweisen nur auf die Entscheidung; kein zweiter Prüfschritt."
   },
   "eintraege": [
     {
@@ -26172,7 +26179,12 @@
           ]
         }
       ],
-      "verknuepfungen": [],
+      "verknuepfungen": [
+        {
+          "id": "W22-G001",
+          "art": "erklaert_durch_glossar"
+        }
+      ],
       "herkunft": "W22_BREITRECHERCHE_20261115",
       "hinweis": "Herstellerprodukt belegt; fachlich von W4-001 abzugrenzen. Eigener SEO-Owner nicht freigegeben.",
       "aktualisiert": "2026-11-15",
@@ -26246,7 +26258,12 @@
           ]
         }
       ],
-      "verknuepfungen": [],
+      "verknuepfungen": [
+        {
+          "id": "W22-G002",
+          "art": "erklaert_durch_glossar"
+        }
+      ],
       "herkunft": "W22_BREITRECHERCHE_20261115",
       "hinweis": "Herstellerprodukt belegt; fachlich von W22-P001 abzugrenzen. Eigener SEO-Owner nicht freigegeben.",
       "aktualisiert": "2026-11-15",
@@ -26465,7 +26482,12 @@
           ]
         }
       ],
-      "verknuepfungen": [],
+      "verknuepfungen": [
+        {
+          "id": "W22-G003",
+          "art": "erklaert_durch_glossar"
+        }
+      ],
       "herkunft": "W22_BREITRECHERCHE_20261115",
       "hinweis": "Herstellerprodukt belegt; fachlich von W4-077 abzugrenzen. Eigener SEO-Owner nicht freigegeben.",
       "aktualisiert": "2026-11-15",
@@ -26615,7 +26637,12 @@
           ]
         }
       ],
-      "verknuepfungen": [],
+      "verknuepfungen": [
+        {
+          "id": "W22-G004",
+          "art": "erklaert_durch_glossar"
+        }
+      ],
       "herkunft": "W22_BREITRECHERCHE_20261115",
       "hinweis": "Herstellerprodukt belegt; fachlich von W15-003 abzugrenzen. Eigener SEO-Owner nicht freigegeben.",
       "aktualisiert": "2026-11-15",
@@ -26700,6 +26727,350 @@
         "begruendung": "Gegen W14-064 abgegrenzt; unabhängige Kaufabsicht/SEO noch zu prüfen.",
         "pruefdatum": "2026-11-15",
         "hinweis": "Keine WordPress-Freigabe."
+      }
+    },
+    {
+      "id": "W22-G001",
+      "typ": "glossar",
+      "name": "Magnetit im Heizungswasser",
+      "definition": "Magnetische Korrosionspartikel in Heizungs- und Kühlkreisläufen.",
+      "synonyme": [],
+      "kanonisch_id": "W22-G001",
+      "fachbereich": "Fachbegriffe",
+      "merkmale": {
+        "funktionen": [
+          "aufbereiten",
+          "schuetzen"
+        ],
+        "wasserarten": [
+          "prozesswasser"
+        ],
+        "einsatzorte": [],
+        "zielgruppen": [],
+        "technologien": []
+      },
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
+      "technikstand": "nicht_anwendbar",
+      "bearbeitungsstand": "glossar_entwurf",
+      "freigabe": "nicht_freigegeben",
+      "quellen": [
+        {
+          "url": "https://www.spirotech.de/produkte/spirotrap/spirotrap-mb3mbl--messing--magnet--uni-118/",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W22_2026-11-15"
+        }
+      ],
+      "seo": {
+        "owner_id": null,
+        "status": "ungeprueft",
+        "suchvolumen": null,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
+      },
+      "artikelkategorien": [],
+      "verknuepfungen": [
+        {
+          "id": "W22-P001",
+          "art": "erklaert_produkt"
+        }
+      ],
+      "herkunft": "W22_BREITRECHERCHE_20261115",
+      "hinweis": "Glossarbegriff, keine Produktseite.",
+      "aktualisiert": "2026-11-15",
+      "funktionspruefung": {
+        "stand": "NICHT_ANWENDBAR",
+        "vergleichs_ids": [],
+        "begruendung": null,
+        "pruefdatum": "2026-11-15",
+        "hinweis": null
+      }
+    },
+    {
+      "id": "W22-G002",
+      "typ": "glossar",
+      "name": "Mikroblasenabscheidung",
+      "definition": "Abtrennung zirkulierender Luftblasen aus geschlossenem Heizungs- oder Kühlwasser.",
+      "synonyme": [],
+      "kanonisch_id": "W22-G002",
+      "fachbereich": "Fachbegriffe",
+      "merkmale": {
+        "funktionen": [
+          "aufbereiten"
+        ],
+        "wasserarten": [
+          "prozesswasser"
+        ],
+        "einsatzorte": [],
+        "zielgruppen": [],
+        "technologien": []
+      },
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
+      "technikstand": "nicht_anwendbar",
+      "bearbeitungsstand": "glossar_entwurf",
+      "freigabe": "nicht_freigegeben",
+      "quellen": [
+        {
+          "url": "https://www.spirotech.de/produkte/spirovent/",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W22_2026-11-15"
+        }
+      ],
+      "seo": {
+        "owner_id": null,
+        "status": "ungeprueft",
+        "suchvolumen": null,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
+      },
+      "artikelkategorien": [],
+      "verknuepfungen": [
+        {
+          "id": "W22-P002",
+          "art": "erklaert_produkt"
+        }
+      ],
+      "herkunft": "W22_BREITRECHERCHE_20261115",
+      "hinweis": "Glossarbegriff, keine Produktseite.",
+      "aktualisiert": "2026-11-15",
+      "funktionspruefung": {
+        "stand": "NICHT_ANWENDBAR",
+        "vergleichs_ids": [],
+        "begruendung": null,
+        "pruefdatum": "2026-11-15",
+        "hinweis": null
+      }
+    },
+    {
+      "id": "W22-G003",
+      "typ": "glossar",
+      "name": "Wasserkraftschnecke",
+      "definition": "Rotierende Schnecke, die Wassergefälle zur Stromerzeugung nutzt.",
+      "synonyme": [],
+      "kanonisch_id": "W22-G003",
+      "fachbereich": "Fachbegriffe",
+      "merkmale": {
+        "funktionen": [
+          "energie_erzeugen"
+        ],
+        "wasserarten": [
+          "oberflaechenwasser"
+        ],
+        "einsatzorte": [],
+        "zielgruppen": [],
+        "technologien": []
+      },
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
+      "technikstand": "nicht_anwendbar",
+      "bearbeitungsstand": "glossar_entwurf",
+      "freigabe": "nicht_freigegeben",
+      "quellen": [
+        {
+          "url": "https://www.wlw.de/de/firma/wam-gmbh-389542/produkte/wasserkraftschnecken-pae-68869",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W22_2026-11-15"
+        }
+      ],
+      "seo": {
+        "owner_id": null,
+        "status": "ungeprueft",
+        "suchvolumen": null,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
+      },
+      "artikelkategorien": [],
+      "verknuepfungen": [
+        {
+          "id": "W22-P005",
+          "art": "erklaert_produkt"
+        }
+      ],
+      "herkunft": "W22_BREITRECHERCHE_20261115",
+      "hinweis": "Glossarbegriff, keine Produktseite.",
+      "aktualisiert": "2026-11-15",
+      "funktionspruefung": {
+        "stand": "NICHT_ANWENDBAR",
+        "vergleichs_ids": [],
+        "begruendung": null,
+        "pruefdatum": "2026-11-15",
+        "hinweis": null
+      }
+    },
+    {
+      "id": "W22-G004",
+      "typ": "glossar",
+      "name": "Wassernebel-Löschtechnik",
+      "definition": "Brandschutz mit Wasser, das unter Druck durch Düsen fein zerstäubt wird.",
+      "synonyme": [],
+      "kanonisch_id": "W22-G004",
+      "fachbereich": "Fachbegriffe",
+      "merkmale": {
+        "funktionen": [
+          "schuetzen",
+          "foerdern"
+        ],
+        "wasserarten": [
+          "trinkwasser",
+          "brauchwasser"
+        ],
+        "einsatzorte": [],
+        "zielgruppen": [],
+        "technologien": []
+      },
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
+      "technikstand": "nicht_anwendbar",
+      "bearbeitungsstand": "glossar_entwurf",
+      "freigabe": "nicht_freigegeben",
+      "quellen": [
+        {
+          "url": "https://www.danfoss.com/de-de/industries/marine-and-offshore/dcs/fire-fighting/",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W22_2026-11-15"
+        }
+      ],
+      "seo": {
+        "owner_id": null,
+        "status": "ungeprueft",
+        "suchvolumen": null,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
+      },
+      "artikelkategorien": [],
+      "verknuepfungen": [
+        {
+          "id": "W22-P007",
+          "art": "erklaert_produkt"
+        }
+      ],
+      "herkunft": "W22_BREITRECHERCHE_20261115",
+      "hinweis": "Glossarbegriff, keine Produktseite.",
+      "aktualisiert": "2026-11-15",
+      "funktionspruefung": {
+        "stand": "NICHT_ANWENDBAR",
+        "vergleichs_ids": [],
+        "begruendung": null,
+        "pruefdatum": "2026-11-15",
+        "hinweis": null
+      }
+    },
+    {
+      "id": "W22-R001",
+      "typ": "anbieterrubrik",
+      "name": "Heizungswasser-Entgasung und Schlammabscheidung",
+      "definition": "Geplante Anbieter-Rubrik: Heizungswasser-Entgasung und Schlammabscheidung",
+      "synonyme": [],
+      "kanonisch_id": "W22-R001",
+      "fachbereich": "Anbieterregister",
+      "merkmale": {
+        "funktionen": [
+          "aufbereiten",
+          "schuetzen"
+        ],
+        "wasserarten": [
+          "prozesswasser"
+        ],
+        "einsatzorte": [],
+        "zielgruppen": [
+          "privat",
+          "kleinbetrieb"
+        ],
+        "technologien": []
+      },
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
+      "technikstand": "nicht_anwendbar",
+      "bearbeitungsstand": "anbieterrubrik_entwurf",
+      "freigabe": "nicht_freigegeben",
+      "quellen": [],
+      "seo": {
+        "owner_id": null,
+        "status": "ungeprueft",
+        "suchvolumen": null,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
+      },
+      "artikelkategorien": [],
+      "verknuepfungen": [],
+      "herkunft": "W22_BREITRECHERCHE_20261115",
+      "hinweis": "Nur Anbieterrubrik, keine Firma.",
+      "aktualisiert": "2026-11-15",
+      "funktionspruefung": {
+        "stand": "NICHT_ANWENDBAR",
+        "vergleichs_ids": [],
+        "begruendung": null,
+        "pruefdatum": "2026-11-15",
+        "hinweis": null
+      }
+    },
+    {
+      "id": "W22-R002",
+      "typ": "anbieterrubrik",
+      "name": "Kleinwasserkraft und Wasserenergie",
+      "definition": "Geplante Anbieter-Rubrik: Kleinwasserkraft und Wasserenergie",
+      "synonyme": [],
+      "kanonisch_id": "W22-R002",
+      "fachbereich": "Anbieterregister",
+      "merkmale": {
+        "funktionen": [
+          "energie_erzeugen",
+          "reinigen"
+        ],
+        "wasserarten": [
+          "oberflaechenwasser"
+        ],
+        "einsatzorte": [],
+        "zielgruppen": [
+          "kleinbetrieb",
+          "kommune",
+          "industrie"
+        ],
+        "technologien": []
+      },
+      "merkmale_status": "nach_quellbereich_vorlaeufig",
+      "technikstand": "nicht_anwendbar",
+      "bearbeitungsstand": "anbieterrubrik_entwurf",
+      "freigabe": "nicht_freigegeben",
+      "quellen": [],
+      "seo": {
+        "owner_id": null,
+        "status": "ungeprueft",
+        "suchvolumen": null,
+        "serp_abgleich": "nicht_geprueft",
+        "w5_owner_id": null,
+        "keyword": null,
+        "w5_suchintention": null,
+        "w5_intent_wahrscheinlichkeit": null,
+        "organic_keyword_difficulty": null
+      },
+      "artikelkategorien": [],
+      "verknuepfungen": [],
+      "herkunft": "W22_BREITRECHERCHE_20261115",
+      "hinweis": "Nur Anbieterrubrik, keine Firma.",
+      "aktualisiert": "2026-11-15",
+      "funktionspruefung": {
+        "stand": "NICHT_ANWENDBAR",
+        "vergleichs_ids": [],
+        "begruendung": null,
+        "pruefdatum": "2026-11-15",
+        "hinweis": null
       }
     }
   ],
