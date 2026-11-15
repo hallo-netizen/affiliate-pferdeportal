@@ -71,3 +71,7 @@ Der gesamte W18-Forschungsbestand von **275** Produktbezeichnungen wurde nun in 
 **Einziger aktueller Registerstand** `../REGISTER_GLOSSAR/W19_ZENTRALES_FACHREGISTER_20261115.json`: **378** gleichförmig strukturierte Einträge, **290 Produkte/68 Glossar/20 Rubriken**; sechs gültige kanonische Aliasverweise und gültige Glossarproduktverbindungen; neue 3 Wasserarten + 5 Einsätze im gemeinsamen Filtervokabular. **327** Kategorieideen, **1.022** Artikelideen inkl. ungeprüfter Forschungsnamen, unverändert W4 79 Produktowner und 105 Fachkategorien. 79/79 W5-SEO-Owner vorhanden, 59 Volumina/20 unbekannt. Hauptquellen/Belege im `../REGISTER_GLOSSAR/W19_FORSCHUNG_UND_FUNKTIONSBEREINIGUNG_GESAMTSTAND_20261115.md`.
 
 **NICHT als abgeschlossen markieren:** alle 275 fachlich abschließend dedupliziert oder neues Menü abgenommen. **Keine** WP-/WT001-/Frontend-/bezahlt-SEO-Schreibaktion. Nachfolgende Arbeit ist die gemeinsame fachliche Entscheidung offener 50 Vergleiche und weitere Marktquellenrecherche.
+
+
+## W20 – 15.11.2026: Register und Funktionsgrenzen
+W20-Einzelmaster 392 Datensätze (298/72/22) und 50 fortgeschriebene W19-Funktionsvergleichspaare (34 begründet getrennt, 1 Alias, 15 offen) vor dem Speichern kontrolliert; eindeutige IDs, gültiges kontrolliertes Vokabular, vorhandene Verweise und 3 unterschiedliche Beitragsideen für alle 8 neuen Produkttypkandidaten. W4 79 WordPress-Owner und W5-Suchvolumen nicht geändert. W20-Bericht unter `../REGISTER_GLOSSAR/W20_FUNKTIONSCHECK_UND_PRODUKTLUECKEN_GESAMTSTAND_20261115.md`. Keine WordPress-/Plugin-/SEO-API-Aktion.
