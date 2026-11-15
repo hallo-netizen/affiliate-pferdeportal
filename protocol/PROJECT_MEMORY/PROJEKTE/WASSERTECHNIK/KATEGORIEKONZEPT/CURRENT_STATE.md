@@ -84,3 +84,7 @@ Aktuelle Ideen aus der Forschungsdatei: **327** mögliche Produktartikelkategori
 
 ## W20 – 15.11.2026: Produktfunktionen weiter abgegrenzt
 Einziger aktiver Register-Master jetzt `../REGISTER_GLOSSAR/W20_ZENTRALES_FACHREGISTER_20261115.json` mit 392 Einträgen (298 Produktnamen inkl. Alias/Grenzfälle, 72 Glossar, 22 Anbieter). 50 W19-Vergleichspaare: 34 fachlich unterschieden ohne SEO-Freigabe, 1 Alias, 15 offen. 8 neue Fachproduktkandidaten mit je 3 Artikelideen und belegter Quelle. **Erst weitere offene Technik-/Suchintent-Abgrenzung, dann endgültiger 6–8-Kategorienbaum.** WordPress/WT001/Frontend unverändert.
+
+
+## W21 – 15.11.2026: Forschungsstand
+W21 jetzt alleiniger Master `../REGISTER_GLOSSAR/W21_ZENTRALES_FACHREGISTER_20261115.json` (**406 = 306 Produktbezeichnungen inkl. Grenzfälle, 76 Glossar, 24 Anbieter-Rubriken**). 50 Vergleiche: 43 fachlich differenziert, 1 kanonischer Alias, 6 offen; keine neue SEO-Ownerfreigabe. 8 Herstellerkandidaten je mit mindestens 3 Artikelideen, 4 Glossar-, 2 Anbieter-Rubriken. Weitere Randbereiche und 6 Konflikte vor 6–8 finalen Hauptbereichen. WordPress/WT001/W5 unverändert.

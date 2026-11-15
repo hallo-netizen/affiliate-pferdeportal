@@ -2220,3 +2220,11 @@ Kein Ruleset-/Security-Bypass, keine Fachlogikänderung, keine zweite Current-Wa
 - Einziger aktueller Forschungsregistermaster `PROJEKTE/WASSERTECHNIK/REGISTER_GLOSSAR/W20_ZENTRALES_FACHREGISTER_20261115.json`, **392 = 298 Produkttypbezeichnungen inklusive Grenzfällen/alias + 72 Glossar + 22 Anbieter-Rubriken**. W19 bleibt historische Version.
 - **50 Funktionspaare:** 34 fachlich unterscheidbar, 1 zusätzlicher Funktionsalias Yacht-RO → kompakte Meerwasser-RO, 15 offen. Die Fachtrennung stellt keine SEO-/WP-Freigabe dar. Neu: 8 Hersteller/Fachquellen-Produktbezeichnungen samt jeweils 3 Artikelideen, 4 Glossareinträge, 2 Anbieter-Rubriken.
 - W20-Bericht `PROJEKTE/WASSERTECHNIK/REGISTER_GLOSSAR/W20_FUNKTIONSCHECK_UND_PRODUKTLUECKEN_GESAMTSTAND_20261115.md`; Büro- und Prüfstati aktualisiert. W4-79 Produktseiten, W5-SEO-Werte, WordPress, WT001, Frontend und bezahlte SEO-API **unverändert**. Noch **15** Funktions-/Kaufgrenzfälle und Marktlücken vor 6–8 finalen Hauptkategorien klären.
+
+
+## 15.11.2026 – WASSERTECHNIK W21: 50 Funktionspaare und 8 neue Quellenprodukte
+<!-- WASSERTECHNIK_W21_20261115 -->
+- Einziger aktiver Forschungsregistermaster `PROJEKTE/WASSERTECHNIK/REGISTER_GLOSSAR/W21_ZENTRALES_FACHREGISTER_20261115.json` = **406 Einträge (306 Forschungsprodukte inkl. Alias/Grenzfälle, 76 Glossar, 24 Anbieterrubriken)**. W20 bleibt unveränderliche Historie.
+- Von 15 offen gebliebenen Funktionspaaren 9 durch Herstellerquellen fachlich differenziert; von insgesamt 50 nun 43 fachlich getrennt, 1 Alias, 6 offen. Zentrale Entscheidung im einzigen Paarverzeichnis, Produktdaten nur Verweise; keine widersprüchliche Parallelentscheidung.
+- 8 Produktfunde aus Klimakondensat, Bewässerungsregensensor, Venturi-Injektor, maritimer Notentsalzung, Dammbalken, Trinkwasser-Ausdehnungsgefäß, Kondensatneutralisation, Spurengas-Leckortung; je 3 Artikelideen, 4 Glossarentwürfe, 2 Anbieterrubriken. Gesamt 343 Rubrikideen, 1070 Artikelideen incl. ungeklärter Forschungsgrenzfälle. Keine 306 freigegebenen SEO-/WP-Seiten.
+- Forschungsbericht `PROJEKTE/WASSERTECHNIK/REGISTER_GLOSSAR/W21_BREITRECHERCHE_FUNKTIONSKLAERUNG_GESAMTSTAND_20261115.md`. W4-79, W5-Werte, WordPress, Plugin, Frontend und SEO-API unverändert. Nächste Fachprüfung 6 offene Vergleiche und Marktlücken, danach endgültige 6–8 Hauptbereiche.
