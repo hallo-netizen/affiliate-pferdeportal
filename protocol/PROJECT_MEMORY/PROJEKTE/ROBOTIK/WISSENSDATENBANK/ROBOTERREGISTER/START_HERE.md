@@ -1,5 +1,9 @@
 # Büro Roboterregister / einheitliche Eigenschaften
 
+## AKTUELL 15.11.2026 – DATENQUELLE REVISION 18, WISSENSREGISTER BLEIBT EINE ANSICHT
+- Der **einzige bestehende Robotertyp-Fachmaster** `../../KATEGORIE/RECHERCHE/PRODUKTE_V2_20261108.json` hat **Revision 18**, weiterhin 68 ursprüngliche Robotertypkandidaten, Forschungsrandbestand jetzt **189** statt 183. Neue V82/V83-Themen nutzen bestehende Forschungskennungen, soweit passend (Enabot `rf143`, Massage `rf158`, Nagelpflege `rf159`), statt doppelte Hersteller- und Produktlisten anzulegen.
+- Acht mögliche neue Typseiten in der Kategorie-Fachplanung, **noch nicht WordPress oder Finder**; Stand in `../../KATEGORIE/CURRENT_STATE.md`, Detailbelege in `../../KATEGORIE/RECHERCHE/V82_FUENF_NISCHEN_BESTANDSABGLEICH_20261115.md`. Alles Folgende ist ältere Projekthistorie.
+
 ## AKTUALISIERUNG 15.11.2026 – EIN MASTER, KEIN ZWEITES REGISTER
 - Der einzige gültige Robotertypen-Forschungsmaster `../../KATEGORIE/RECHERCHE/PRODUKTE_V2_20261108.json` steht auf **Revision 15: 68 unverschobene Basiskandidaten + 183 Forschungsrandkandidaten**. Zwei V80-Vorschläge referenzieren bestehende Typ-IDs `rf142` und `rf148`; neun Forschungsidentitäten `rf175–rf183` neu. **Nicht** in einer zweiten Produktliste ablegen.
 - V80 hat die 11 Kandidaten gegen den vorhandenen 188er WordPress-Sollbaum verknüpft und 22 fachliche Rubriken / 88 mögliche Artikelrichtungen dokumentiert. Quelle `../../KATEGORIE/RECHERCHE/V80_11_TYPEN_ABGLEICH_ARTIKELPLAN_20261115.md`; die Such- und Findermerkmale sind **nicht automatisch voll erhoben**. Keine neuen WordPress-Objekte oder Produktkarten als bereits publiziert ausgeben.
