@@ -83,3 +83,44 @@ Der unveränderte V52/V67-Basisplan umfasst **100 Robotertyp-Seiten in sieben Ka
 5. Magazin, Glossar, Roboterfinder, Register und Anzeigenmarkt teilen weiterhin den einen Fachbestand; keine doppelte Robotertyp-Seite.
 
 **Quellenbasis:** V52/V61–V63 und V67–V75; vollständige Zuordnung und Quellen je Eintrag in `V76_FACHABSCHLUSS_29_KANDIDATEN.json`. **Keine WordPress-, Plugin-, Design- oder API-Änderung in V76.**
+
+
+## 8. Technischer Nachlauf vom 15.11.2026 – 16 SEO-Sperren und WordPress-Stand
+
+**Nachgeprüft aus V61, keinem neuen Bezahl-API-Lauf:** 16 bisherige SEO-Konflikte. **10 Paare fachlich plausibel unterscheidbar, 5 fachlich zu überlappend für eine sichere Trennung, 1 Verdacht auf denselben Typ (Badminton-Zuspielroboter/Ballmaschine).** Alle 16 bleiben **SEO-HOLD**. Fachliche Trennbarkeit ist **keine Google-SERP-Freigabe und kein Importbefehl**. Der Fehler des alten SEO-Ergebnisses ist mit den gespeicherten `google.com/goto`-Weiterleitungen bereits nachgewiesen; es liegen keine echten Vergleichs-Zieladressen vor.
+
+| ID | Welt | Vergleich | Redaktionelle Vorprüfung (SEO bleibt HOLD) |
+|---|---|---|---|
+| v46_h03 | Haushalt | Familien-Telepräsenz zuhause / Angehörigenkontakt im Pflegeheim | Unterschied fachlich belegt |
+| v46_h06 | Haushalt | Aufräumroboter / humanoider Haushaltsroboter | Abgrenzung offen |
+| v46_h07 | Haushalt | Reiner Nasswischroboter / Saugroboter | Abgrenzung offen |
+| v46_h10 | Haushalt | Servierroboter zuhause / allgemeiner Servierroboter | Unterschied fachlich belegt |
+| v46_h12 | Haushalt | Sozialer Begleitroboter / humanoider Gesprächsroboter | Abgrenzung offen |
+| v46_ga04 | Garten | Fahrender Grillreinigungsroboter / elektrische Hand-Grillbürste | Unterschied fachlich belegt |
+| v46_f01 | Freizeit | Unterwasser-Hobby-ROV / Bootsreinigungsroboter | Unterschied fachlich belegt |
+| v46_f02 | Freizeit | Kamerabewegungsroboter für Timelapse / Kameraroboter | Abgrenzung offen |
+| v46_f03 | Freizeit | Automatische Folgedrohne / Lerndrohne | Unterschied fachlich belegt |
+| v46_s03 | Sport | Badminton-Zuspielroboter / Badminton-Ballmaschine | Doppelung möglich |
+| v46_s07 | Sport | Sportkameraroboter / allgemeiner Kameraroboter | Unterschied fachlich belegt |
+| v46_b01 | Bildung | Mechanischer Roboterbaukasten / fertiger Lernroboter | Unterschied fachlich belegt |
+| v46_b02 | Bildung | Mobile ROS-Forschungsplattform / Lernroboter | Unterschied fachlich belegt |
+| v46_b04 | Bildung | Lehrroboterarm / Tischroboterarm | Abgrenzung offen |
+| v46_b05 | Bildung | Leselernroboter / Lernroboter | Unterschied fachlich belegt |
+| v46_b07 | Bildung | Chemie-Experimentierroboter für Unterricht / Laboraustomatisierung | Unterschied fachlich belegt |
+
+**Quellenbeispiele für sachliche Funktionsunterschiede (keine SERP-Überschneidungsmessungen):**
+- `v46_h03`: https://ohmnilabs.com/seniorcare/ – Unterschiedliche Umgebung/Nutzergruppe; gleicher Hardwaretyp möglich. Keine Gewerbe-/Pflegeheim-Baumarbeit jetzt.
+- `v46_h06`: https://epoch.ai/publications/where-autonomy-works-evaluating-robot-capabilities-in-2026 – Aufräumen ist eine Aufgabe, humanoid eine Bauform. Gleiches Modell kann beides erfüllen; Doppelseite nur bei eigenständiger Nutzersuche.
+- `v46_h07`: https://www.test.de/Saugroboter-im-Test-4806685-0 – Reiner Wischer ist technisch unterscheidbar, aktueller Markt enthält zahlreiche Saug-Wisch-Kombigeräte. Keine klare SEO-Seitenentscheidung.
+- `v46_ga04`: https://www.grillfuerst.de/magazin/ratgeber/tests-vergleiche/elektrische-grillbuersten-test/ – Roboter fährt/reinigt eigenständig, Handbürste wird geführt; nicht als derselbe Gerätetyp behandeln.
+- `v46_s03`: https://www.ijeedu.com/index.php/ijeedu/article/view/335 – Beide Formulierungen können dieselbe programmierbare Federball-Zuspielmaschine meinen; keine zweite Seite ohne echten Geräte-/Suchabsichtsunterschied.
+- `v46_s07`: https://shop.movensee.com/de/produkte/pix4team-2.html – Automatische Spiel-/Ballverfolgung mit eigenem Sportbedarf statt allgemeine Filmbewegung; echte Sportkamerahardware belegt.
+- `v46_b01`: https://www.nist.gov/programs-projects/low-cost-robot-science-kit-education – Zusammenbauen/Mechanik lernen gegen fertigen Lernroboter; gleicher Hersteller möglich, aber unterschiedliches Lernziel.
+- `v46_b02`: https://pmc.ncbi.nlm.nih.gov/articles/PMC7248833/ – ROS-Forschungsplattform und Kinder-Lernroboter unterscheiden sich im Niveau und Projektziel.
+- `v46_b07`: https://www.nist.gov/programs-projects/low-cost-robot-science-kit-education – Nachgewiesene robotische Lehrexperimente, ausdrücklich kein großgewerblicher/industrieller Laborzweig.
+
+**Live-WordPress:** `https://robotik.oliver-beil.de/` sowie die öffentliche WordPress-REST-Abfrage waren über die verfügbaren Webzugriffe am 15.11.2026 **nicht erreichbar/auflösbar**. Daraus folgt **nicht**, dass die Website für Besucher offline ist. Der einzige früher authentisch dokumentierte Schreibfortschritt bleibt **16/227**; eine aktuelle Behauptung `227/227` wäre unbelegt.
+
+**KISS-Folgeaktion:** Nur im bestehenden WordPress-Kategorie-Plugin den **laufenden geschützten Gesamtübernahme-Auftrag** nachlesen beziehungsweise am bestehenden Zwischenstand fortsetzen; **keinen neuen Import starten und keine Sperren aufheben**. Ist kein aktueller Live-Bericht anders zugänglich, benötigt diese einmalige Ist-Bestätigung genau den **einen** dort vorgesehenen Gesamtbericht, nicht Einzeldateien. Die Version 0.4.10 liegt in GitHub als `KATEGORIE/PLUGIN/CURRENT.zip`, aber der aktuelle Installationsstand im WordPress-Backend ist **nicht** nachgewiesen; **kein Installationsauftrag aus dieser Notiz**. Die elf neuen V76-Kandidaten sind nicht Teil des alten 227-Auftrags; sie bleiben bis nach Live-Abgleich und Freigabe nur im Fachkonzept.
+
+**Wichtig:** Gewerbe/Industrie/Humanoiden-Arbeit weiterhin nicht verändern; fachlicher Privatkontext in bisherigen 16 SEO-HOLDs ist keine Einladung zum Industriezweig.
