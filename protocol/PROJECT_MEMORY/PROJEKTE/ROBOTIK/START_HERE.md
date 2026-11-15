@@ -1,5 +1,10 @@
 # ROBOTIK – CAMPUS-BÜROGEBÄUDE
 
+## AKTUELL 15.11.2026 – LIVEBERICHT V78 ABGEGLICHEN, V84 NOCH OFFEN
+- **Belegter V78-Altabschluss:** vom Nutzer eingereichte WordPress-JSON meldet `COMPLETE` für 227 Importpositionen, 104 alte veröffentlichte Seiten, 68 neu veröffentlichte Seiten und 64 alte Nachtragsobjekte. Die **64** bestehen aus 16 alten Seiten + 48 alten Kategorien.
+- **Separat offen:** Plugin **0.4.14** enthält den letzten V84-Nachtrag **16 zusätzliche Robotertypseiten + 32 neue Inhaltsrubriken**. Dessen Live-Ausführung ist mit der V78-JSON **nicht bestätigt**. Keine zweite Durchführung des Altabschlusses.
+- **Einziger verbindlicher Stand für diesen Unterschied:** [KATEGORIE/CURRENT_STATE.md](KATEGORIE/CURRENT_STATE.md). Recherche beendet, Portalbereiche fachlich vorbereitet. Nächste Sammelphase: V84-Nachtrag einmalig live abschließen, sichtbaren Bestand abnehmen, vorhandene Magazin-/HivePress-Module lesen und gemeinsam anbinden, keine erfundenen Live-Funktionen, keine K0-Texte vor K0.
+
 ## AKTUELL 15.11.2026 – ROBOTIK GRUNDLAGEN ERLEDIGT, ALLE DREI SÄULEN FACHLICH GEKLÄRT
 - **Hauptportal:** Acht Hauptwelten; vorhandene Kategorien laut Nutzer live. **19 neue Robotertypvorschläge einmalig entschieden:** 16 eigene neue Typseiten/32 individuelle Kategorien, drei Sonderthemen gehören ins Magazin/Register. **Die breite Grundlagenrecherche ist geschlossen**, keine nächste offene Randthemensuche als Voraussetzung.
 - **Installierbares aktuelles Kategorieplugin nur `KATEGORIE/PLUGIN/CURRENT.zip` 0.4.14** (exakte Versionsdatei `KATEGORIE/PLUGIN/VERSIONEN/0.4.14.zip`): nach altem 227/104/68/64-Komplettabschluss eine einzige neue Freigabe für 48 weitere Objekte. Vollständige Tests bestanden, **WordPress-Liveausführung der neuen 48 noch nicht belegt**. Alle Details im `KATEGORIE/CURRENT_STATE.md`.
