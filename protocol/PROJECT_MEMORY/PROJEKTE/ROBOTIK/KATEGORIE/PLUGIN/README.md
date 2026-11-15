@@ -1,5 +1,10 @@
 # Robotik – Pluginbüro / Kategorie-Workflow
 
+## AKTUELL 15.11.2026 – NUR DIE EINZIGE GEPRÜFTE VERSION 0.4.14 INSTALLIEREN
+- **`PLUGIN/CURRENT.zip` = `PLUGIN/VERSIONEN/0.4.14.zip`**. Dieselbe bestehende Pluginidentität. **0.4.13 ist abgelöst**; vollständiger ursprünglicher Import und 104er-Veröffentlichung bleiben erhalten.
+- Nach vollständig gespeichertem alten Robotik-Gesamtabschluss: **Robotik Kategorie → Gesamtabschluss (einmalig) → Einmalige 16 Robotertypen + 32 Rubriken**. Der einzige neue Sammellauf 16 neue veröffentlichte Typseiten + 32 flache Beitragsrubriken; eine ausdrückliche Freigabe und gespeicherte Fortsetzung bei Unterbrechung. Keine 16 getrennten Plugins oder Freigaben. Die 3 nicht als CORE zugelassenen Forschungs-/Produkt-Sonderthemen werden nur im Magazin/Roboterregister behandelt.
+- CI-PASS `https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43712225606`, 11 PHP ohne Fehler, beide ZIP bytegleich, 48/48 Gesamttest inklusive alter Programme und Schutz originaler WP-IDs. **Noch kein echter WordPress-Live-Erfolg belegt**. Details `V84_GRUNDLAGENFACHABSCHLUSS_UND_ONECLICK_20261115.md`. Kein neues Google-URL-Gate, keine Paid-Calls, keine neue Datenbank/Frontend-Komponente.
+
 ## AKTUELL 15.11.2026 – EINZIGES KATEGORIEPLUGIN 0.4.13
 `CURRENT.zip` = `VERSIONEN/0.4.13.zip`: Vollständiges geprüftes Update. **0.4.12 hatte eine nachgewiesene Lücke:** Vor 68 neu veröffentlichten Seiten verlangt das Plugin **104 bereits veröffentlichte Altseiten**, führte diese aber im Einmalablauf selbst nicht aus. **0.4.13 integriert den schon vorhandenen alten 104er-Veröffentlichungsworker.** Ablauf: 227 (fortsetzen) → 104 veröffentlichen → 68 veröffentlichen → 16 Typseiten/48 Rubriken, alles mit **einer** Gesamtfreigabe. Keine Änderung an Design/Frontend, keine neue Google-Abfrage. CI mit ZIP, PHP-Lint und Gesamtsimulation PASS: https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43704446763. Echter WordPress-Liveabschluss weiterhin offen. Details `V79_104_ALTSEITEN_SICHTBARKEIT_20261115.md`. Ältere Versionsempfehlungen sind historisch.
 
