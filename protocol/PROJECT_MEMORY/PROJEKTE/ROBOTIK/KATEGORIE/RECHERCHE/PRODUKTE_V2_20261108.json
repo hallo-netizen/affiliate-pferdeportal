@@ -5019,8 +5019,8 @@
     }
   ],
   "canonical_source": true,
-  "revision": 18,
-  "research_state": "UNAPPROVED",
+  "revision": 19,
+  "research_state": "GRUNDLAGENRECHERCHE_ABGESCHLOSSEN_V84",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
   "legacy_term_reconciliation": [
@@ -13718,6 +13718,18 @@
         "wp_post_id": null,
         "wp_publish_authorized": false
       }
+    ],
+    "core_exclusion_pending": [
+      {
+        "proposal_id": "FIN-21",
+        "decision": "MAGAZIN_ODER_REGISTER_STATT_NEUER_TYPSEITE",
+        "production_gate": "K0_NICHT_ALS_CORE_ARTIKEL"
+      },
+      {
+        "proposal_id": "FIN-22",
+        "decision": "MAGAZIN_ODER_REGISTER_STATT_NEUER_TYPSEITE",
+        "production_gate": "K0_NICHT_ALS_CORE_ARTIKEL"
+      }
     ]
   },
   "research_round_v82": {
@@ -14156,6 +14168,1625 @@
         "market_note": "Dokumentation 2026: funktionierende Aufbauten existieren, aber kein fertiges Kit/Preis und unvollständige Bauanleitungen; ausdrücklich kein kaufbares Seriengerät.",
         "duplicate": "Keine Wiederholung von Bildung > Roboterbaukästen (dort Roboter selbst bauen), hier Sortiermaschine für vorhandene Bausteine im Hobby/Modellbau."
       }
+    ]
+  },
+  "category_release_v84": {
+    "schema": "robotik_v84_editorial_decision_v1",
+    "date": "2026-11-15",
+    "status": "FACHLICH_ENTSCHIEDEN_TECHNISCH_NOCH_NICHT_IN_WORDPRESS",
+    "completed_broad_research": true,
+    "base_v62_wp_pages": 188,
+    "base_v62_wp_categories": 296,
+    "final_decision": {
+      "reviewed": 19,
+      "accept_new_type_pages": 16,
+      "hold_for_magazine_register": 3,
+      "possible_flat_categories": 32,
+      "no_new_main_or_intermediate_wp_pages": true,
+      "historic_v76_16_not_repeated": true
+    },
+    "accepted": [
+      {
+        "code": "FIN-01",
+        "id": "rf142",
+        "path": [
+          "Haushalt",
+          "Reinigung",
+          "Katzenkloroboter"
+        ],
+        "facets": [
+          {
+            "label": "Auswahl",
+            "topics": [
+              "Eignung für große Katzen",
+              "Sicherheitssensoren beim Reinigungslauf",
+              "Welche Katzenstreu funktioniert?",
+              "Was gilt im Mehrkatzenhaushalt?"
+            ]
+          },
+          {
+            "label": "Betrieb",
+            "topics": [
+              "Abfallbehälter und Entleerung",
+              "Gerüche und Filter",
+              "Reinigung der Mechanik",
+              "Strombedarf und Stellfläche"
+            ]
+          }
+        ],
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Whisker Litter-Robot 4",
+            "url": "https://www.litter-robot.com/eu/de/litter-robot-4.html"
+          },
+          {
+            "name": "PETKIT Purobot Max Pro 2",
+            "url": "https://www.petkit.com/products/purobot-max-pro-2-automatic-cat-litter-box-with-ai-camera"
+          }
+        ],
+        "why": "Automatische Reinigung der Katzentoilette; Haustierroboter bleiben Begleit-/Interaktionsgeräte."
+      },
+      {
+        "code": "FIN-02",
+        "id": "rf148",
+        "path": [
+          "Sport",
+          "Ballsport",
+          "Padel-Trainingsroboter"
+        ],
+        "facets": [
+          {
+            "label": "Training",
+            "topics": [
+              "Grundschläge und Volleys beim Padel",
+              "Solo-Training auf dem Padelplatz",
+              "Bande im Padeltraining sinnvoll berücksichtigen",
+              "Zuspieltempo für Einsteiger"
+            ]
+          },
+          {
+            "label": "Geräte",
+            "topics": [
+              "Welche Ballmaschinen können Padel?",
+              "Platzbedarf und Akkulaufzeit",
+              "Padel-Funktion bei Mehrsportgeräten freischalten",
+              "Grenzen bei Banden- und Doppeltraining"
+            ]
+          }
+        ],
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "PONGBOT Aura – Mehrsportgerät",
+            "url": "https://store.pongbotsports.com/products/aura"
+          }
+        ],
+        "why": "Padel-spezifische Trainingsfragen; Tennis, Padel und Pickleball sind Sportarten, kein Anlass, Aura mehrfach als Produkt anzulegen."
+      },
+      {
+        "code": "FIN-03",
+        "id": "rf175",
+        "path": [
+          "Sport",
+          "Ballsport",
+          "Pickleball-Trainingsroboter"
+        ],
+        "facets": [
+          {
+            "label": "Training",
+            "topics": [
+              "Dink-Training am Netz",
+              "Volley-Übungen allein",
+              "Rückschläge gezielt wiederholen",
+              "Übungsfolgen für verschiedene Spielstärken"
+            ]
+          },
+          {
+            "label": "Auswahl",
+            "topics": [
+              "Welche Ballgrößen unterstützt die Maschine?",
+              "Wurfrichtung und Spin einstellen",
+              "Akku und Tragbarkeit vergleichen",
+              "App-Steuerung und Trainingsprogramme"
+            ]
+          }
+        ],
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Spinshot Player Pickleball",
+            "url": "https://spinshotsports.de/de/products/spinshot-player-pickleball-machine"
+          },
+          {
+            "name": "PONGBOT Aura – Mehrsportgerät",
+            "url": "https://store.pongbotsports.com/products/aura"
+          }
+        ],
+        "why": "Pickleball als eigene Sportart mit eigenen Bällen und Übungsfragen; Sportgerät im Modellregister trotzdem nur einmal."
+      },
+      {
+        "code": "FIN-04",
+        "id": "rf176",
+        "path": [
+          "Pflege",
+          "Handrehabilitationsroboter"
+        ],
+        "facets": [
+          {
+            "label": "Therapieformen",
+            "topics": [
+              "Passive Fingermobilisierung",
+              "Bewegung der gesunden auf die betroffene Hand übertragen",
+              "Aktiv unterstützte Bewegungsübungen",
+              "Für welche Therapieziele sind Robotikhandschuhe gedacht?"
+            ]
+          },
+          {
+            "label": "Anwendung",
+            "topics": [
+              "Handgröße und Passform",
+              "Therapie unter Aufsicht",
+              "Hygiene und Reinigung",
+              "Grenzen gegenüber manueller Handtherapie"
+            ]
+          }
+        ],
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Gloreha R-TOUCH PRO Sinfonia",
+            "url": "https://www.gloreha.de/r-touch-pro-sinfonia/"
+          }
+        ],
+        "why": "Motorisierte Finger-/Handtherapie unter fachlicher Anleitung; kein allgemeiner Therapieroboter und keine Handprothese."
+      },
+      {
+        "code": "FIN-05",
+        "id": "rf177",
+        "path": [
+          "Pflege",
+          "Zahnpflegeroboter"
+        ],
+        "facets": [
+          {
+            "label": "Funktionsweise",
+            "topics": [
+              "Bürstenbewegung ohne Handführung",
+              "Anpassung an unterschiedliche Zahnreihen",
+              "Reinigung des Geräts nach der Nutzung",
+              "Was unterscheidet es von einer elektrischen Zahnbürste?"
+            ]
+          },
+          {
+            "label": "Marktstand",
+            "topics": [
+              "Genics g.eN und Verkaufsstart Japan",
+              "Verfügbarkeit und Sprachen außerhalb Japans",
+              "Mundhygiene und individuelle Einschränkungen",
+              "Ersatzteile, Pflege und Betriebskosten"
+            ]
+          }
+        ],
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Genics g.eN – automatisches Zähneputzen",
+            "url": "https://www.waseda.jp/inst/entrepreneur/news/2026/10/16/9376/"
+          }
+        ],
+        "why": "Mechanisch geführte Zahnpflege; nicht mit gewöhnlicher elektrischer Zahnbürste oder professioneller Dentalrobotik gleichsetzen."
+      },
+      {
+        "code": "FIN-26",
+        "id": "rf180",
+        "path": [
+          "Sport",
+          "Wander-Exoskelette"
+        ],
+        "facets": [
+          {
+            "label": "Einsatz",
+            "topics": [
+              "Steigungen beim Wandern",
+              "Abstiege und Treppen",
+              "Lange Gehstrecken und Pausen",
+              "Grenzen bei unebenem Gelände"
+            ]
+          },
+          {
+            "label": "Auswahl",
+            "topics": [
+              "Passform und Tragesystem",
+              "Akkureichweite realistisch einschätzen",
+              "Gewicht und Transport",
+              "Sportgerät oder medizinisches Hilfsmittel?"
+            ]
+          }
+        ],
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Hypershell X Serie",
+            "url": "https://eu.hypershell.tech/de-de/products/new-hypershell-x-series"
+          }
+        ],
+        "why": "Outdoor-Gehunterstützung für Wandern/Sport; Pflege > Mobilität > Geh-Exoskelette behandelt Rehabilitation und Hilfsmittel, kein doppelter Modell-Owner."
+      },
+      {
+        "code": "FIN-27",
+        "id": "rf181",
+        "path": [
+          "Freizeit",
+          "Sandmalroboter"
+        ],
+        "facets": [
+          {
+            "label": "Technik",
+            "topics": [
+              "Magnetisch bewegte Stahlkugel",
+              "Muster programmieren",
+              "Antriebe und Steuerung",
+              "Geräuschpegel bei langsamer Bewegung"
+            ]
+          },
+          {
+            "label": "Aufstellung",
+            "topics": [
+              "Tischfläche und Raumgröße",
+              "Wartung von Sand und Kugel",
+              "Strom und Zeitsteuerung",
+              "Musterbibliotheken und eigene Vorlagen"
+            ]
+          }
+        ],
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Sisyphus Essential Mini Sand Table",
+            "url": "https://sisyphus-industries.com/product/essential/"
+          }
+        ],
+        "why": "Mechanische Musterzeichnung mit Kugel im Sand; nicht Pinselmalroboter, nicht handgeführtes Sandbild."
+      },
+      {
+        "code": "FIN-28",
+        "id": "rf182",
+        "path": [
+          "Sport",
+          "Ballsport",
+          "Baseball-Wurfroboter"
+        ],
+        "facets": [
+          {
+            "label": "Training",
+            "topics": [
+              "Fastball und Tempowechsel",
+              "Spin und Flugkurven üben",
+              "Trefferzone wiederholt anspielen",
+              "Abläufe für unterschiedliche Spielstärken"
+            ]
+          },
+          {
+            "label": "Geräte",
+            "topics": [
+              "Bedienung programmierter Wurfsequenzen",
+              "Welche Trainingsbälle geeignet sind",
+              "Aufstellabstand und Platzsicherheit",
+              "Transport, Stromversorgung und Wartung"
+            ]
+          }
+        ],
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Sports Attack I-Hack Attack Pitching Machine",
+            "url": "https://sportsattack.com/i-hack-attack-2-baseball-pitching-machine/"
+          }
+        ],
+        "why": "Programmierbare automatische Baseball-Wurfmaschine; nur robotische Trainingsautomatik, keine frei fahrende/spielende humanoide Maschine."
+      },
+      {
+        "code": "FIN-29",
+        "id": "rf183",
+        "path": [
+          "Freizeit",
+          "Spielzeug",
+          "Transformationsroboter"
+        ],
+        "facets": [
+          {
+            "label": "Modelle",
+            "topics": [
+              "Robosen Grimlock und die Transformation",
+              "Andere selbst transformierende Robosen-Modelle",
+              "Sprachbefehle und App-Steuerung",
+              "Unterschied zu manuell verwandelbaren Figuren"
+            ]
+          },
+          {
+            "label": "Betrieb",
+            "topics": [
+              "Bewegungsraum im Haushalt",
+              "Laden und Akkulaufzeit",
+              "Möglichkeiten der Programmierung",
+              "Verfügbarkeit und Ersatzteilversorgung"
+            ]
+          }
+        ],
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Robosen Grimlock Flagship",
+            "url": "https://www.robosen.com/de/grimlock-g1-flagship"
+          },
+          {
+            "name": "Robosen Flagship Series",
+            "url": "https://eu.robosen.com/collections/flagship-series"
+          }
+        ],
+        "why": "Motorisch selbst veränderliche Spielfiguren; keine zweite Seite unter allgemeine Robotertiere/Showroboter und kein gewöhnliches Transformers-Spielzeug ohne Motoren."
+      },
+      {
+        "code": "V82-01",
+        "id": "rf143",
+        "path": [
+          "Haushalt",
+          "Hausüberwachungsroboter"
+        ],
+        "facets": [
+          {
+            "label": "Überwachung",
+            "topics": [
+              "Wohnräume auf Patrouillenrouten prüfen",
+              "Ereignisse erkennen und aufzeichnen",
+              "Hausüberwachung gegenüber Haustierbeobachtung abgrenzen"
+            ]
+          },
+          {
+            "label": "Datenschutz",
+            "topics": [
+              "Familienkonten und Kamera-Zugriffsrechte",
+              "App-Benachrichtigungen und Aufzeichnung",
+              "Nutzung bei Besuch und gemeinsam genutzten Wohnräumen"
+            ]
+          }
+        ],
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Enabot EBO Air 2 Plus",
+            "url": "https://www.enabot.com/de/home-robot/ebo-air-2-plus"
+          }
+        ],
+        "why": "Bewegliche Hauspatrouille mit Kameras und Routen, nicht nur statische Überwachungskamera und nicht einfach Haustierspielzeug."
+      },
+      {
+        "code": "V82-02",
+        "id": "rf184",
+        "path": [
+          "Freizeit",
+          "Robotische Teleskope"
+        ],
+        "facets": [
+          {
+            "label": "Beobachtung",
+            "topics": [
+              "Ziel automatisch am Nachthimmel finden",
+              "Sterne und Nebel motorisch nachführen",
+              "Beobachtungssequenzen planen"
+            ]
+          },
+          {
+            "label": "Ausstattung",
+            "topics": [
+              "Optik und Sensorauflösung vergleichen",
+              "Aufstellung und Himmelsausrichtung",
+              "Akkulaufzeit und Steuer-App"
+            ]
+          }
+        ],
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Vaonis Vespera 3",
+            "url": "https://vaonis.com/products/vespera-3"
+          },
+          {
+            "name": "Vaonis Vespera II",
+            "url": "https://vaonis.com/products/vespera-2"
+          }
+        ],
+        "why": "Teleskope mit motorischer Himmelsobjekt-Suche, automatischer Nachführung und geplanter Beobachtungsfolge; kein normaler Foto-Tripod und kein Kamerabewegungsroboter für Filmsets."
+      },
+      {
+        "code": "V82-03",
+        "id": "rf185",
+        "path": [
+          "Sport",
+          "Ballsport",
+          "Volleyball-Ballmaschinen"
+        ],
+        "facets": [
+          {
+            "label": "Training",
+            "topics": [
+              "Aufschlagannahme systematisch wiederholen",
+              "Volleyball-Spins und Ballhöhen",
+              "Zuspiel für Angriffs- und Abwehrübungen"
+            ]
+          },
+          {
+            "label": "Geräte",
+            "topics": [
+              "Aufstellhöhe und Wurfrichtung vergleichen",
+              "Antrieb und Ballzufuhr verstehen",
+              "Transport und Nutzung in Vereinshallen"
+            ]
+          }
+        ],
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Sports Attack Smash Attack",
+            "url": "https://sportsattack.com/product/smash-attack-volleyball-machine/"
+          },
+          {
+            "name": "Sports Attack Skill Attack",
+            "url": "https://sportsattack.com/product-category/volleyball/volleyball-machines/?wc_view_mode=list"
+          }
+        ],
+        "why": "Motorisierte Volleyball-Zuspieltechnik für Aufschlagannahme, Block-/Schlagtraining und Volley; unterscheidet sich vom Tennis-/Badminton-/Baseballzuspiel."
+      },
+      {
+        "code": "V82-04",
+        "id": "rf186",
+        "path": [
+          "Sport",
+          "Ballsport",
+          "Cricket-Ballmaschinen"
+        ],
+        "facets": [
+          {
+            "label": "Training",
+            "topics": [
+              "Wurfarten und Swing/Spin üben",
+              "Geschwindigkeit und Zielbereich einstellen",
+              "Training ohne menschlichen Bowler planen"
+            ]
+          },
+          {
+            "label": "Betrieb",
+            "topics": [
+              "Optionalen automatischen Ballzuführer abgrenzen",
+              "Akkubetrieb gegenüber Netzbetrieb",
+              "Ballkompatibilität und Aufstellplatz"
+            ]
+          }
+        ],
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "BOLA Professional Bowling Machine",
+            "url": "https://www.bola.co.uk/shop/bola-professional-bowling-machine"
+          }
+        ],
+        "why": "Cricket-Bowlingmaschinen für unterschiedliche Geschwindigkeiten, Spin/Swing und Trainingssequenzen; keine Baseball-Pitching-Maschine."
+      },
+      {
+        "code": "V82-05",
+        "id": "rf187",
+        "path": [
+          "Sport",
+          "Ballsport",
+          "Fußball-Trainingsroboter"
+        ],
+        "facets": [
+          {
+            "label": "Training",
+            "topics": [
+              "Fußball aus mehreren Richtungen zuspielen",
+              "Reaktion und Ballannahme mit Zielwänden",
+              "Schwierigkeit und Trainingsfolge einstellen"
+            ]
+          },
+          {
+            "label": "Anlagen",
+            "topics": [
+              "Feste Trainingsanlage gegenüber mobiler Ballmaschine",
+              "Ballrückführung und Zielbereich",
+              "Einsatz in Verein und Trainingszentrum"
+            ]
+          }
+        ],
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "FOOTBOT Fußball-Trainingssystem",
+            "url": "https://footbot.eu/"
+          }
+        ],
+        "why": "Automatisiertes Ballzuspiel und interaktive Reaktionsübungen; nicht der Torwartroboter, der Schüsse hält."
+      },
+      {
+        "code": "V83-01",
+        "id": "rf158",
+        "path": [
+          "Pflege",
+          "Massageroboter"
+        ],
+        "facets": [
+          {
+            "label": "Anwendung",
+            "topics": [
+              "Bedienbare Massageprogramme und Druckeinstellungen",
+              "Abgrenzung Wellness gegen therapeutische Behandlung",
+              "Ablauf, Kleidung und Nutzersteuerung"
+            ]
+          },
+          {
+            "label": "Betrieb",
+            "topics": [
+              "Standortbetrieb im Studio und Hotel",
+              "Zutritts- und Datenschutzfragen",
+              "Reinigung, Betreuung und fachliche Grenzen"
+            ]
+          }
+        ],
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Aescape Robotic Massage",
+            "url": "https://www.aescape.com/about"
+          },
+          {
+            "name": "Aescape Buchung und neue Massagen seit 2026",
+            "url": "https://www.aescape.com/in-the-news/create-your-aescape"
+          }
+        ],
+        "why": "Roboterarme zur körperlichen Massage als Wellnessleistung in Studios/Hotels; nicht medizinische Therapieroboter, keine Massagegerät-Matratze ohne bewegliche Robotermechanik."
+      },
+      {
+        "code": "V83-02",
+        "id": "rf159",
+        "path": [
+          "Pflege",
+          "Nagelpflegeroboter"
+        ],
+        "facets": [
+          {
+            "label": "Behandlung",
+            "topics": [
+              "Nagelbild und Steuerung der Werkzeuge",
+              "Umfang der maschinellen Maniküre",
+              "Hygiene bei Kontakt an Händen"
+            ]
+          },
+          {
+            "label": "Marktstand",
+            "topics": [
+              "10Beauty US-Standorte gegenüber Deutschland",
+              "Clockwork/Nimble-Übernahme als Historie",
+              "Kapseln und Verbrauchsmaterial der Systeme"
+            ]
+          }
+        ],
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "10Beauty Full Service Robotic Manicure",
+            "url": "https://www.10beauty.co/"
+          },
+          {
+            "name": "10Beauty Akquisition Clockwork 2025",
+            "url": "https://www.prnewswire.com/news-releases/10beauty-acquires-clockwork-bringing-together-the-two-leading-innovators-in-autonomous-manicures-302384172.html"
+          }
+        ],
+        "why": "Motorische, bildgestützt gesteuerte Nagelpflege in Salons; nicht einzelne alte Patentidee oder gewöhnlicher Nagellack-Drucker. Eigenständiger Funktionsraum gegenüber Schminkroboter für das Gesicht."
+      }
+    ],
+    "retained_for_magazine_register": [
+      {
+        "id": "FIN-21",
+        "name": "Schminkroboter",
+        "stage": "Projekt",
+        "owner": "Magazin > Forschung / Roboterregister",
+        "reason": "Ein universitärer Prototyp; keine ausreichend eigenständige etablierte Robotertyp-Landschaft für einen dauerhaft sinnvollen Kategorienzweig.",
+        "refs": [
+          "https://www.aoyama.ac.jp/center104/2025/event_20250930_01"
+        ]
+      },
+      {
+        "id": "FIN-22",
+        "name": "Roboterkissen",
+        "stage": "Produkt",
+        "owner": "Magazin > Ungewöhnliche Roboter / Roboterregister",
+        "reason": "Fufuly und motorisch verstellbare Kissen sind unterschiedliche Sondergeräte; keine belastbare gemeinsame Robotertyp-Funktion, um eine Kanonische CORE-Kategorie zu rechtfertigen.",
+        "refs": [
+          "https://globalstore.ux-xu.com/products/fufuly"
+        ]
+      },
+      {
+        "id": "V83-03",
+        "name": "Baustein-Sortierroboter",
+        "stage": "Projekt",
+        "owner": "Magazin > Forschung/Hobbyprojekte / Roboterregister",
+        "reason": "Reales Entwicklerprojekt, aber noch kein ausgereiftes, allgemein reproduzierbares Serien- oder Baukastenangebot; eine Typseite wäre im laufenden CORE-Baum überzogen.",
+        "refs": [
+          "https://basically.website/sorter-v2",
+          "https://docs.basically.website/"
+        ]
+      }
+    ],
+    "planned_tasks": [
+      {
+        "kind": "page",
+        "source_id": "v84_fin_01",
+        "source_ref": "rf142",
+        "proposal_id": "FIN-01",
+        "title": "Katzenkloroboter",
+        "role": "product",
+        "path": [
+          "Haushalt",
+          "Reinigung",
+          "Katzenkloroboter"
+        ],
+        "parent_source_id": "V52_HUB_Haushalt_Reinigung",
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Whisker Litter-Robot 4",
+            "url": "https://www.litter-robot.com/eu/de/litter-robot-4.html"
+          },
+          {
+            "name": "PETKIT Purobot Max Pro 2",
+            "url": "https://www.petkit.com/products/purobot-max-pro-2-automatic-cat-litter-box-with-ai-camera"
+          }
+        ],
+        "reason": "Automatische Reinigung der Katzentoilette; Haustierroboter bleiben Begleit-/Interaktionsgeräte."
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_fin_01_facet_1",
+        "parent_source_id": "v84_fin_01",
+        "source_ref": "rf142",
+        "proposal_id": "FIN-01",
+        "short_label": "Auswahl",
+        "owner_path": [
+          "Haushalt",
+          "Reinigung",
+          "Katzenkloroboter"
+        ],
+        "topics": [
+          "Eignung für große Katzen",
+          "Sicherheitssensoren beim Reinigungslauf",
+          "Welche Katzenstreu funktioniert?",
+          "Was gilt im Mehrkatzenhaushalt?"
+        ]
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_fin_01_facet_2",
+        "parent_source_id": "v84_fin_01",
+        "source_ref": "rf142",
+        "proposal_id": "FIN-01",
+        "short_label": "Betrieb",
+        "owner_path": [
+          "Haushalt",
+          "Reinigung",
+          "Katzenkloroboter"
+        ],
+        "topics": [
+          "Abfallbehälter und Entleerung",
+          "Gerüche und Filter",
+          "Reinigung der Mechanik",
+          "Strombedarf und Stellfläche"
+        ]
+      },
+      {
+        "kind": "page",
+        "source_id": "v84_fin_02",
+        "source_ref": "rf148",
+        "proposal_id": "FIN-02",
+        "title": "Padel-Trainingsroboter",
+        "role": "product",
+        "path": [
+          "Sport",
+          "Ballsport",
+          "Padel-Trainingsroboter"
+        ],
+        "parent_source_id": "rbt_c921e3a524a4ad2a",
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "PONGBOT Aura – Mehrsportgerät",
+            "url": "https://store.pongbotsports.com/products/aura"
+          }
+        ],
+        "reason": "Padel-spezifische Trainingsfragen; Tennis, Padel und Pickleball sind Sportarten, kein Anlass, Aura mehrfach als Produkt anzulegen."
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_fin_02_facet_1",
+        "parent_source_id": "v84_fin_02",
+        "source_ref": "rf148",
+        "proposal_id": "FIN-02",
+        "short_label": "Training",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Padel-Trainingsroboter"
+        ],
+        "topics": [
+          "Grundschläge und Volleys beim Padel",
+          "Solo-Training auf dem Padelplatz",
+          "Bande im Padeltraining sinnvoll berücksichtigen",
+          "Zuspieltempo für Einsteiger"
+        ]
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_fin_02_facet_2",
+        "parent_source_id": "v84_fin_02",
+        "source_ref": "rf148",
+        "proposal_id": "FIN-02",
+        "short_label": "Geräte",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Padel-Trainingsroboter"
+        ],
+        "topics": [
+          "Welche Ballmaschinen können Padel?",
+          "Platzbedarf und Akkulaufzeit",
+          "Padel-Funktion bei Mehrsportgeräten freischalten",
+          "Grenzen bei Banden- und Doppeltraining"
+        ]
+      },
+      {
+        "kind": "page",
+        "source_id": "v84_fin_03",
+        "source_ref": "rf175",
+        "proposal_id": "FIN-03",
+        "title": "Pickleball-Trainingsroboter",
+        "role": "product",
+        "path": [
+          "Sport",
+          "Ballsport",
+          "Pickleball-Trainingsroboter"
+        ],
+        "parent_source_id": "rbt_c921e3a524a4ad2a",
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Spinshot Player Pickleball",
+            "url": "https://spinshotsports.de/de/products/spinshot-player-pickleball-machine"
+          },
+          {
+            "name": "PONGBOT Aura – Mehrsportgerät",
+            "url": "https://store.pongbotsports.com/products/aura"
+          }
+        ],
+        "reason": "Pickleball als eigene Sportart mit eigenen Bällen und Übungsfragen; Sportgerät im Modellregister trotzdem nur einmal."
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_fin_03_facet_1",
+        "parent_source_id": "v84_fin_03",
+        "source_ref": "rf175",
+        "proposal_id": "FIN-03",
+        "short_label": "Training",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Pickleball-Trainingsroboter"
+        ],
+        "topics": [
+          "Dink-Training am Netz",
+          "Volley-Übungen allein",
+          "Rückschläge gezielt wiederholen",
+          "Übungsfolgen für verschiedene Spielstärken"
+        ]
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_fin_03_facet_2",
+        "parent_source_id": "v84_fin_03",
+        "source_ref": "rf175",
+        "proposal_id": "FIN-03",
+        "short_label": "Auswahl",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Pickleball-Trainingsroboter"
+        ],
+        "topics": [
+          "Welche Ballgrößen unterstützt die Maschine?",
+          "Wurfrichtung und Spin einstellen",
+          "Akku und Tragbarkeit vergleichen",
+          "App-Steuerung und Trainingsprogramme"
+        ]
+      },
+      {
+        "kind": "page",
+        "source_id": "v84_fin_04",
+        "source_ref": "rf176",
+        "proposal_id": "FIN-04",
+        "title": "Handrehabilitationsroboter",
+        "role": "product",
+        "path": [
+          "Pflege",
+          "Handrehabilitationsroboter"
+        ],
+        "parent_source_id": "rbt_e764c403a44632be",
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Gloreha R-TOUCH PRO Sinfonia",
+            "url": "https://www.gloreha.de/r-touch-pro-sinfonia/"
+          }
+        ],
+        "reason": "Motorisierte Finger-/Handtherapie unter fachlicher Anleitung; kein allgemeiner Therapieroboter und keine Handprothese."
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_fin_04_facet_1",
+        "parent_source_id": "v84_fin_04",
+        "source_ref": "rf176",
+        "proposal_id": "FIN-04",
+        "short_label": "Therapieformen",
+        "owner_path": [
+          "Pflege",
+          "Handrehabilitationsroboter"
+        ],
+        "topics": [
+          "Passive Fingermobilisierung",
+          "Bewegung der gesunden auf die betroffene Hand übertragen",
+          "Aktiv unterstützte Bewegungsübungen",
+          "Für welche Therapieziele sind Robotikhandschuhe gedacht?"
+        ]
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_fin_04_facet_2",
+        "parent_source_id": "v84_fin_04",
+        "source_ref": "rf176",
+        "proposal_id": "FIN-04",
+        "short_label": "Anwendung",
+        "owner_path": [
+          "Pflege",
+          "Handrehabilitationsroboter"
+        ],
+        "topics": [
+          "Handgröße und Passform",
+          "Therapie unter Aufsicht",
+          "Hygiene und Reinigung",
+          "Grenzen gegenüber manueller Handtherapie"
+        ]
+      },
+      {
+        "kind": "page",
+        "source_id": "v84_fin_05",
+        "source_ref": "rf177",
+        "proposal_id": "FIN-05",
+        "title": "Zahnpflegeroboter",
+        "role": "product",
+        "path": [
+          "Pflege",
+          "Zahnpflegeroboter"
+        ],
+        "parent_source_id": "rbt_e764c403a44632be",
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Genics g.eN – automatisches Zähneputzen",
+            "url": "https://www.waseda.jp/inst/entrepreneur/news/2026/10/16/9376/"
+          }
+        ],
+        "reason": "Mechanisch geführte Zahnpflege; nicht mit gewöhnlicher elektrischer Zahnbürste oder professioneller Dentalrobotik gleichsetzen."
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_fin_05_facet_1",
+        "parent_source_id": "v84_fin_05",
+        "source_ref": "rf177",
+        "proposal_id": "FIN-05",
+        "short_label": "Funktionsweise",
+        "owner_path": [
+          "Pflege",
+          "Zahnpflegeroboter"
+        ],
+        "topics": [
+          "Bürstenbewegung ohne Handführung",
+          "Anpassung an unterschiedliche Zahnreihen",
+          "Reinigung des Geräts nach der Nutzung",
+          "Was unterscheidet es von einer elektrischen Zahnbürste?"
+        ]
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_fin_05_facet_2",
+        "parent_source_id": "v84_fin_05",
+        "source_ref": "rf177",
+        "proposal_id": "FIN-05",
+        "short_label": "Marktstand",
+        "owner_path": [
+          "Pflege",
+          "Zahnpflegeroboter"
+        ],
+        "topics": [
+          "Genics g.eN und Verkaufsstart Japan",
+          "Verfügbarkeit und Sprachen außerhalb Japans",
+          "Mundhygiene und individuelle Einschränkungen",
+          "Ersatzteile, Pflege und Betriebskosten"
+        ]
+      },
+      {
+        "kind": "page",
+        "source_id": "v84_fin_26",
+        "source_ref": "rf180",
+        "proposal_id": "FIN-26",
+        "title": "Wander-Exoskelette",
+        "role": "product",
+        "path": [
+          "Sport",
+          "Wander-Exoskelette"
+        ],
+        "parent_source_id": "rbt_dcb31e217c9ac890",
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Hypershell X Serie",
+            "url": "https://eu.hypershell.tech/de-de/products/new-hypershell-x-series"
+          }
+        ],
+        "reason": "Outdoor-Gehunterstützung für Wandern/Sport; Pflege > Mobilität > Geh-Exoskelette behandelt Rehabilitation und Hilfsmittel, kein doppelter Modell-Owner."
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_fin_26_facet_1",
+        "parent_source_id": "v84_fin_26",
+        "source_ref": "rf180",
+        "proposal_id": "FIN-26",
+        "short_label": "Einsatz",
+        "owner_path": [
+          "Sport",
+          "Wander-Exoskelette"
+        ],
+        "topics": [
+          "Steigungen beim Wandern",
+          "Abstiege und Treppen",
+          "Lange Gehstrecken und Pausen",
+          "Grenzen bei unebenem Gelände"
+        ]
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_fin_26_facet_2",
+        "parent_source_id": "v84_fin_26",
+        "source_ref": "rf180",
+        "proposal_id": "FIN-26",
+        "short_label": "Auswahl",
+        "owner_path": [
+          "Sport",
+          "Wander-Exoskelette"
+        ],
+        "topics": [
+          "Passform und Tragesystem",
+          "Akkureichweite realistisch einschätzen",
+          "Gewicht und Transport",
+          "Sportgerät oder medizinisches Hilfsmittel?"
+        ]
+      },
+      {
+        "kind": "page",
+        "source_id": "v84_fin_27",
+        "source_ref": "rf181",
+        "proposal_id": "FIN-27",
+        "title": "Sandmalroboter",
+        "role": "product",
+        "path": [
+          "Freizeit",
+          "Sandmalroboter"
+        ],
+        "parent_source_id": "rbt_4c3b60b5f506ff47",
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Sisyphus Essential Mini Sand Table",
+            "url": "https://sisyphus-industries.com/product/essential/"
+          }
+        ],
+        "reason": "Mechanische Musterzeichnung mit Kugel im Sand; nicht Pinselmalroboter, nicht handgeführtes Sandbild."
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_fin_27_facet_1",
+        "parent_source_id": "v84_fin_27",
+        "source_ref": "rf181",
+        "proposal_id": "FIN-27",
+        "short_label": "Technik",
+        "owner_path": [
+          "Freizeit",
+          "Sandmalroboter"
+        ],
+        "topics": [
+          "Magnetisch bewegte Stahlkugel",
+          "Muster programmieren",
+          "Antriebe und Steuerung",
+          "Geräuschpegel bei langsamer Bewegung"
+        ]
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_fin_27_facet_2",
+        "parent_source_id": "v84_fin_27",
+        "source_ref": "rf181",
+        "proposal_id": "FIN-27",
+        "short_label": "Aufstellung",
+        "owner_path": [
+          "Freizeit",
+          "Sandmalroboter"
+        ],
+        "topics": [
+          "Tischfläche und Raumgröße",
+          "Wartung von Sand und Kugel",
+          "Strom und Zeitsteuerung",
+          "Musterbibliotheken und eigene Vorlagen"
+        ]
+      },
+      {
+        "kind": "page",
+        "source_id": "v84_fin_28",
+        "source_ref": "rf182",
+        "proposal_id": "FIN-28",
+        "title": "Baseball-Wurfroboter",
+        "role": "product",
+        "path": [
+          "Sport",
+          "Ballsport",
+          "Baseball-Wurfroboter"
+        ],
+        "parent_source_id": "rbt_c921e3a524a4ad2a",
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Sports Attack I-Hack Attack Pitching Machine",
+            "url": "https://sportsattack.com/i-hack-attack-2-baseball-pitching-machine/"
+          }
+        ],
+        "reason": "Programmierbare automatische Baseball-Wurfmaschine; nur robotische Trainingsautomatik, keine frei fahrende/spielende humanoide Maschine."
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_fin_28_facet_1",
+        "parent_source_id": "v84_fin_28",
+        "source_ref": "rf182",
+        "proposal_id": "FIN-28",
+        "short_label": "Training",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Baseball-Wurfroboter"
+        ],
+        "topics": [
+          "Fastball und Tempowechsel",
+          "Spin und Flugkurven üben",
+          "Trefferzone wiederholt anspielen",
+          "Abläufe für unterschiedliche Spielstärken"
+        ]
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_fin_28_facet_2",
+        "parent_source_id": "v84_fin_28",
+        "source_ref": "rf182",
+        "proposal_id": "FIN-28",
+        "short_label": "Geräte",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Baseball-Wurfroboter"
+        ],
+        "topics": [
+          "Bedienung programmierter Wurfsequenzen",
+          "Welche Trainingsbälle geeignet sind",
+          "Aufstellabstand und Platzsicherheit",
+          "Transport, Stromversorgung und Wartung"
+        ]
+      },
+      {
+        "kind": "page",
+        "source_id": "v84_fin_29",
+        "source_ref": "rf183",
+        "proposal_id": "FIN-29",
+        "title": "Transformationsroboter",
+        "role": "product",
+        "path": [
+          "Freizeit",
+          "Spielzeug",
+          "Transformationsroboter"
+        ],
+        "parent_source_id": "rbt_2a9f15b10b6f0ff1",
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Robosen Grimlock Flagship",
+            "url": "https://www.robosen.com/de/grimlock-g1-flagship"
+          },
+          {
+            "name": "Robosen Flagship Series",
+            "url": "https://eu.robosen.com/collections/flagship-series"
+          }
+        ],
+        "reason": "Motorisch selbst veränderliche Spielfiguren; keine zweite Seite unter allgemeine Robotertiere/Showroboter und kein gewöhnliches Transformers-Spielzeug ohne Motoren."
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_fin_29_facet_1",
+        "parent_source_id": "v84_fin_29",
+        "source_ref": "rf183",
+        "proposal_id": "FIN-29",
+        "short_label": "Modelle",
+        "owner_path": [
+          "Freizeit",
+          "Spielzeug",
+          "Transformationsroboter"
+        ],
+        "topics": [
+          "Robosen Grimlock und die Transformation",
+          "Andere selbst transformierende Robosen-Modelle",
+          "Sprachbefehle und App-Steuerung",
+          "Unterschied zu manuell verwandelbaren Figuren"
+        ]
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_fin_29_facet_2",
+        "parent_source_id": "v84_fin_29",
+        "source_ref": "rf183",
+        "proposal_id": "FIN-29",
+        "short_label": "Betrieb",
+        "owner_path": [
+          "Freizeit",
+          "Spielzeug",
+          "Transformationsroboter"
+        ],
+        "topics": [
+          "Bewegungsraum im Haushalt",
+          "Laden und Akkulaufzeit",
+          "Möglichkeiten der Programmierung",
+          "Verfügbarkeit und Ersatzteilversorgung"
+        ]
+      },
+      {
+        "kind": "page",
+        "source_id": "v84_v82_01",
+        "source_ref": "rf143",
+        "proposal_id": "V82-01",
+        "title": "Hausüberwachungsroboter",
+        "role": "product",
+        "path": [
+          "Haushalt",
+          "Hausüberwachungsroboter"
+        ],
+        "parent_source_id": "rbt_a7b82adfb00b8fd4",
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Enabot EBO Air 2 Plus",
+            "url": "https://www.enabot.com/de/home-robot/ebo-air-2-plus"
+          }
+        ],
+        "reason": "Bewegliche Hauspatrouille mit Kameras und Routen, nicht nur statische Überwachungskamera und nicht einfach Haustierspielzeug."
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_v82_01_facet_1",
+        "parent_source_id": "v84_v82_01",
+        "source_ref": "rf143",
+        "proposal_id": "V82-01",
+        "short_label": "Überwachung",
+        "owner_path": [
+          "Haushalt",
+          "Hausüberwachungsroboter"
+        ],
+        "topics": [
+          "Wohnräume auf Patrouillenrouten prüfen",
+          "Ereignisse erkennen und aufzeichnen",
+          "Hausüberwachung gegenüber Haustierbeobachtung abgrenzen"
+        ]
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_v82_01_facet_2",
+        "parent_source_id": "v84_v82_01",
+        "source_ref": "rf143",
+        "proposal_id": "V82-01",
+        "short_label": "Datenschutz",
+        "owner_path": [
+          "Haushalt",
+          "Hausüberwachungsroboter"
+        ],
+        "topics": [
+          "Familienkonten und Kamera-Zugriffsrechte",
+          "App-Benachrichtigungen und Aufzeichnung",
+          "Nutzung bei Besuch und gemeinsam genutzten Wohnräumen"
+        ]
+      },
+      {
+        "kind": "page",
+        "source_id": "v84_v82_02",
+        "source_ref": "rf184",
+        "proposal_id": "V82-02",
+        "title": "Robotische Teleskope",
+        "role": "product",
+        "path": [
+          "Freizeit",
+          "Robotische Teleskope"
+        ],
+        "parent_source_id": "rbt_4c3b60b5f506ff47",
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Vaonis Vespera 3",
+            "url": "https://vaonis.com/products/vespera-3"
+          },
+          {
+            "name": "Vaonis Vespera II",
+            "url": "https://vaonis.com/products/vespera-2"
+          }
+        ],
+        "reason": "Teleskope mit motorischer Himmelsobjekt-Suche, automatischer Nachführung und geplanter Beobachtungsfolge; kein normaler Foto-Tripod und kein Kamerabewegungsroboter für Filmsets."
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_v82_02_facet_1",
+        "parent_source_id": "v84_v82_02",
+        "source_ref": "rf184",
+        "proposal_id": "V82-02",
+        "short_label": "Beobachtung",
+        "owner_path": [
+          "Freizeit",
+          "Robotische Teleskope"
+        ],
+        "topics": [
+          "Ziel automatisch am Nachthimmel finden",
+          "Sterne und Nebel motorisch nachführen",
+          "Beobachtungssequenzen planen"
+        ]
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_v82_02_facet_2",
+        "parent_source_id": "v84_v82_02",
+        "source_ref": "rf184",
+        "proposal_id": "V82-02",
+        "short_label": "Ausstattung",
+        "owner_path": [
+          "Freizeit",
+          "Robotische Teleskope"
+        ],
+        "topics": [
+          "Optik und Sensorauflösung vergleichen",
+          "Aufstellung und Himmelsausrichtung",
+          "Akkulaufzeit und Steuer-App"
+        ]
+      },
+      {
+        "kind": "page",
+        "source_id": "v84_v82_03",
+        "source_ref": "rf185",
+        "proposal_id": "V82-03",
+        "title": "Volleyball-Ballmaschinen",
+        "role": "product",
+        "path": [
+          "Sport",
+          "Ballsport",
+          "Volleyball-Ballmaschinen"
+        ],
+        "parent_source_id": "rbt_c921e3a524a4ad2a",
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Sports Attack Smash Attack",
+            "url": "https://sportsattack.com/product/smash-attack-volleyball-machine/"
+          },
+          {
+            "name": "Sports Attack Skill Attack",
+            "url": "https://sportsattack.com/product-category/volleyball/volleyball-machines/?wc_view_mode=list"
+          }
+        ],
+        "reason": "Motorisierte Volleyball-Zuspieltechnik für Aufschlagannahme, Block-/Schlagtraining und Volley; unterscheidet sich vom Tennis-/Badminton-/Baseballzuspiel."
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_v82_03_facet_1",
+        "parent_source_id": "v84_v82_03",
+        "source_ref": "rf185",
+        "proposal_id": "V82-03",
+        "short_label": "Training",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Volleyball-Ballmaschinen"
+        ],
+        "topics": [
+          "Aufschlagannahme systematisch wiederholen",
+          "Volleyball-Spins und Ballhöhen",
+          "Zuspiel für Angriffs- und Abwehrübungen"
+        ]
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_v82_03_facet_2",
+        "parent_source_id": "v84_v82_03",
+        "source_ref": "rf185",
+        "proposal_id": "V82-03",
+        "short_label": "Geräte",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Volleyball-Ballmaschinen"
+        ],
+        "topics": [
+          "Aufstellhöhe und Wurfrichtung vergleichen",
+          "Antrieb und Ballzufuhr verstehen",
+          "Transport und Nutzung in Vereinshallen"
+        ]
+      },
+      {
+        "kind": "page",
+        "source_id": "v84_v82_04",
+        "source_ref": "rf186",
+        "proposal_id": "V82-04",
+        "title": "Cricket-Ballmaschinen",
+        "role": "product",
+        "path": [
+          "Sport",
+          "Ballsport",
+          "Cricket-Ballmaschinen"
+        ],
+        "parent_source_id": "rbt_c921e3a524a4ad2a",
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "BOLA Professional Bowling Machine",
+            "url": "https://www.bola.co.uk/shop/bola-professional-bowling-machine"
+          }
+        ],
+        "reason": "Cricket-Bowlingmaschinen für unterschiedliche Geschwindigkeiten, Spin/Swing und Trainingssequenzen; keine Baseball-Pitching-Maschine."
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_v82_04_facet_1",
+        "parent_source_id": "v84_v82_04",
+        "source_ref": "rf186",
+        "proposal_id": "V82-04",
+        "short_label": "Training",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Cricket-Ballmaschinen"
+        ],
+        "topics": [
+          "Wurfarten und Swing/Spin üben",
+          "Geschwindigkeit und Zielbereich einstellen",
+          "Training ohne menschlichen Bowler planen"
+        ]
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_v82_04_facet_2",
+        "parent_source_id": "v84_v82_04",
+        "source_ref": "rf186",
+        "proposal_id": "V82-04",
+        "short_label": "Betrieb",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Cricket-Ballmaschinen"
+        ],
+        "topics": [
+          "Optionalen automatischen Ballzuführer abgrenzen",
+          "Akkubetrieb gegenüber Netzbetrieb",
+          "Ballkompatibilität und Aufstellplatz"
+        ]
+      },
+      {
+        "kind": "page",
+        "source_id": "v84_v82_05",
+        "source_ref": "rf187",
+        "proposal_id": "V82-05",
+        "title": "Fußball-Trainingsroboter",
+        "role": "product",
+        "path": [
+          "Sport",
+          "Ballsport",
+          "Fußball-Trainingsroboter"
+        ],
+        "parent_source_id": "rbt_c921e3a524a4ad2a",
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "FOOTBOT Fußball-Trainingssystem",
+            "url": "https://footbot.eu/"
+          }
+        ],
+        "reason": "Automatisiertes Ballzuspiel und interaktive Reaktionsübungen; nicht der Torwartroboter, der Schüsse hält."
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_v82_05_facet_1",
+        "parent_source_id": "v84_v82_05",
+        "source_ref": "rf187",
+        "proposal_id": "V82-05",
+        "short_label": "Training",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Fußball-Trainingsroboter"
+        ],
+        "topics": [
+          "Fußball aus mehreren Richtungen zuspielen",
+          "Reaktion und Ballannahme mit Zielwänden",
+          "Schwierigkeit und Trainingsfolge einstellen"
+        ]
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_v82_05_facet_2",
+        "parent_source_id": "v84_v82_05",
+        "source_ref": "rf187",
+        "proposal_id": "V82-05",
+        "short_label": "Anlagen",
+        "owner_path": [
+          "Sport",
+          "Ballsport",
+          "Fußball-Trainingsroboter"
+        ],
+        "topics": [
+          "Feste Trainingsanlage gegenüber mobiler Ballmaschine",
+          "Ballrückführung und Zielbereich",
+          "Einsatz in Verein und Trainingszentrum"
+        ]
+      },
+      {
+        "kind": "page",
+        "source_id": "v84_v83_01",
+        "source_ref": "rf158",
+        "proposal_id": "V83-01",
+        "title": "Massageroboter",
+        "role": "product",
+        "path": [
+          "Pflege",
+          "Massageroboter"
+        ],
+        "parent_source_id": "rbt_e764c403a44632be",
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "Aescape Robotic Massage",
+            "url": "https://www.aescape.com/about"
+          },
+          {
+            "name": "Aescape Buchung und neue Massagen seit 2026",
+            "url": "https://www.aescape.com/in-the-news/create-your-aescape"
+          }
+        ],
+        "reason": "Roboterarme zur körperlichen Massage als Wellnessleistung in Studios/Hotels; nicht medizinische Therapieroboter, keine Massagegerät-Matratze ohne bewegliche Robotermechanik."
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_v83_01_facet_1",
+        "parent_source_id": "v84_v83_01",
+        "source_ref": "rf158",
+        "proposal_id": "V83-01",
+        "short_label": "Anwendung",
+        "owner_path": [
+          "Pflege",
+          "Massageroboter"
+        ],
+        "topics": [
+          "Bedienbare Massageprogramme und Druckeinstellungen",
+          "Abgrenzung Wellness gegen therapeutische Behandlung",
+          "Ablauf, Kleidung und Nutzersteuerung"
+        ]
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_v83_01_facet_2",
+        "parent_source_id": "v84_v83_01",
+        "source_ref": "rf158",
+        "proposal_id": "V83-01",
+        "short_label": "Betrieb",
+        "owner_path": [
+          "Pflege",
+          "Massageroboter"
+        ],
+        "topics": [
+          "Standortbetrieb im Studio und Hotel",
+          "Zutritts- und Datenschutzfragen",
+          "Reinigung, Betreuung und fachliche Grenzen"
+        ]
+      },
+      {
+        "kind": "page",
+        "source_id": "v84_v83_02",
+        "source_ref": "rf159",
+        "proposal_id": "V83-02",
+        "title": "Nagelpflegeroboter",
+        "role": "product",
+        "path": [
+          "Pflege",
+          "Nagelpflegeroboter"
+        ],
+        "parent_source_id": "rbt_e764c403a44632be",
+        "stage": "Produkt",
+        "models": [
+          {
+            "name": "10Beauty Full Service Robotic Manicure",
+            "url": "https://www.10beauty.co/"
+          },
+          {
+            "name": "10Beauty Akquisition Clockwork 2025",
+            "url": "https://www.prnewswire.com/news-releases/10beauty-acquires-clockwork-bringing-together-the-two-leading-innovators-in-autonomous-manicures-302384172.html"
+          }
+        ],
+        "reason": "Motorische, bildgestützt gesteuerte Nagelpflege in Salons; nicht einzelne alte Patentidee oder gewöhnlicher Nagellack-Drucker. Eigenständiger Funktionsraum gegenüber Schminkroboter für das Gesicht."
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_v83_02_facet_1",
+        "parent_source_id": "v84_v83_02",
+        "source_ref": "rf159",
+        "proposal_id": "V83-02",
+        "short_label": "Behandlung",
+        "owner_path": [
+          "Pflege",
+          "Nagelpflegeroboter"
+        ],
+        "topics": [
+          "Nagelbild und Steuerung der Werkzeuge",
+          "Umfang der maschinellen Maniküre",
+          "Hygiene bei Kontakt an Händen"
+        ]
+      },
+      {
+        "kind": "category",
+        "source_id": "v84_v83_02_facet_2",
+        "parent_source_id": "v84_v83_02",
+        "source_ref": "rf159",
+        "proposal_id": "V83-02",
+        "short_label": "Marktstand",
+        "owner_path": [
+          "Pflege",
+          "Nagelpflegeroboter"
+        ],
+        "topics": [
+          "10Beauty US-Standorte gegenüber Deutschland",
+          "Clockwork/Nimble-Übernahme als Historie",
+          "Kapseln und Verbrauchsmaterial der Systeme"
+        ]
+      }
+    ],
+    "possible_wp_total_after_import": {
+      "pages": 204,
+      "categories": 328
+    },
+    "explicit_wp_run_required": true,
+    "live_wp_readback_available": false,
+    "source_file_precondition": "V62 188 pages + 296 terms and completed V78/V77 statuses readback from WordPress, keep old IDs",
+    "single_authorized_writer": "Robotik_V63_Delta::createOne; existing category workflow only",
+    "no_paid_google_serp_required": true,
+    "no_new_plugin_identity": true,
+    "stop_new_broad_research": true,
+    "model_registry_one_model_id": true,
+    "notes": [
+      "Randautomatik in den 16 Fällen transparent als Motor-/Automatisierungsgerät beschreiben (Ballmaschinen und Teleskope).",
+      "V80 44 Artikelbriefings bleiben; 8 Briefings der 2 nicht akzeptierten V80-Typen sind Magazine-/Registerstoff, nicht CORE-K0-Ausgabe.",
+      "Die 3 zurückgestellten Typen werden im Forschungsspeicher belassen, nicht gelöscht.",
+      "Keine 16 WP-Seiten als bereits publiziert behaupten; Nutzer hat aktuell nur allgemeine bestehende Kategorien live bestätigt."
     ]
   }
 }
