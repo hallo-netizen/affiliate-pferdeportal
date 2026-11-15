@@ -83,6 +83,9 @@ final class Robotik_V63_Delta {
             $existingTermNames[function_exists('mb_strtolower')?mb_strtolower((string)$t['name'],'UTF-8'):strtolower((string)$t['name'])][]=(int)$t['id'];
         }
         $pageIds=[];$termIds=[];$held=[];$heldTermIds=[];$tasks=[];$newSiblings=[];$newCatSlugs=[];$newCatNames=[];
+        // V77 only after explicit start: historical hold IDs may have verified WP objects.
+        $followup=get_option('robotik_v77_fachnachtrag_state',[]);
+        $followupActive=is_array($followup) && isset($followup['status']);
         foreach($source['pages'] as $p){
             $id=(string)$p['source_id'];$result=$prow[$id]??null;
             if(!$result){$errors[]='Seitenidentitaet fehlt: '.$id;continue;}
@@ -92,7 +95,19 @@ final class Robotik_V63_Delta {
             }
             if(!empty($p['review_hold'])){
                 $held[]=$id;
-                if(($result['status']??'')!=='NEW_PAGE_PROPOSAL_NOT_WRITTEN')$errors[]='Gesperrte Seite bereits veraendert: '.$id;
+                $status=$result['status']??'';
+                if($status==='CONFIRMED_META_AND_PATH' && $followupActive){
+                    $wpid=(int)($result['wp_id_confirmed']??0);
+                    $live=$wpPages[$wpid]??null;
+                    $slug=sanitize_title((string)$p['title']);
+                    if(!$live || $live['slug']!==$slug ||
+                       !in_array($live['status'],['draft','publish'],true) ||
+                       (string)get_post_meta($wpid,self::MARKER,true)!==$id ||
+                       (string)get_post_meta($wpid,'_robotik_page_role',true)!==(string)$p['role']){
+                        $errors[]='Nachtragsseite nicht unveraendert: '.$id;
+                    } else $pageIds[$id]=$wpid;
+                }elseif($status!=='NEW_PAGE_PROPOSAL_NOT_WRITTEN')
+                    $errors[]='Fachnachtragsseite ungeprueft vorhanden: '.$id;
                 continue;
             }
             $parentPath=array_slice($p['path'],0,-1);
@@ -105,7 +120,7 @@ final class Robotik_V63_Delta {
             $status=$result['status']??'';
             if($status==='CONFIRMED_META_AND_PATH'){
                 $wpid=(int)$result['wp_id_confirmed'];$live=$wpPages[$wpid]??null;
-                if(!$live || $live['slug']!==$slug || $live['status']!=='draft')$errors[]='Bereits angelegte neue Seite abweichend: '.$id;
+                if(!$live || $live['slug']!==$slug || !in_array($live['status'],['draft','publish'],true))$errors[]='Bereits angelegte neue Seite abweichend: '.$id;
                 else $pageIds[$id]=$wpid;
             }elseif($status!=='NEW_PAGE_PROPOSAL_NOT_WRITTEN')$errors[]='Neue Seite hat Konflikt: '.$id.' '.$status;
             if($status==='NEW_PAGE_PROPOSAL_NOT_WRITTEN'){
@@ -136,7 +151,21 @@ final class Robotik_V63_Delta {
             }
             if(!empty($cat['review_hold'])){
                 $heldTermIds[]=$id;
-                if(($r['status']??'')!=='NEW_TERM_PROPOSAL_NOT_WRITTEN')$errors[]='Gesperrte Rubrik bereits veraendert: '.$id;
+                $status=$r['status']??'';
+                if($status==='CONFIRMED_TERM_META' && $followupActive){
+                    $wpid=(int)($r['wp_id_confirmed']??0);
+                    $term=$wpTerms[$wpid]??null;
+                    $owner=(string)$cat['owner_id'];
+                    $name=implode(' / ',$cat['owner_path']).' – '.$cat['short_label'];
+                    $slug=sanitize_title(implode(' ',$cat['owner_path']).' '.$cat['short_label']);
+                    if(!$term || $term['slug']!==$slug || $term['name']!==$name ||
+                       (int)$term['parent_id']!==0 || !isset($pageIds[$owner]) ||
+                       (string)get_term_meta($wpid,self::MARKER,true)!==$id ||
+                       (int)get_term_meta($wpid,'_robotik_product_page_id',true)!==(int)$pageIds[$owner]){
+                        $errors[]='Nachtragsrubrik nicht unveraendert: '.$id;
+                    }else $termIds[$id]=$wpid;
+                }elseif($status!=='NEW_TERM_PROPOSAL_NOT_WRITTEN')
+                    $errors[]='Fachnachtragsrubrik ungeprueft vorhanden: '.$id;
                 continue;
             }
             $owner=(string)$cat['owner_id'];
@@ -195,6 +224,7 @@ final class Robotik_V63_Delta {
             'new_pages'=>self::EXPECTED_PAGES,'new_terms'=>self::EXPECTED_TERMS,
             'hold_pages'=>self::EXPECTED_HOLDS,'hold_terms'=>self::EXPECTED_HELD_TERMS,
             'tasks'=>$tasks,
+            'inventory'=>$inventory,'page_rows'=>$prow,'term_rows'=>$trow,
             'prior_wp_page_ids'=>array_column($inventory['pages']['items'],'id'),
             'prior_wp_term_ids'=>array_column($inventory['categories']['items'],'id'),
         ];
@@ -217,7 +247,7 @@ final class Robotik_V63_Delta {
             'error'=>'','started'=>gmdate('c')];
         update_option(self::STATE,$state,false);self::location();
     }
-    private static function createOne(array $task,array &$pages,array &$terms):string {
+    public static function createOne(array $task,array &$pages,array &$terms):string {
         $id=$task['source_id'];
         if($task['kind']==='page'){
             if(isset($pages[$id]))return 'existing';
@@ -315,7 +345,8 @@ final class Robotik_V63_Delta {
                 'preexisting_categories_preserved'=>count((array)($state['existing_terms_preserved']??[]))],
             'new_page_ids'=>array_intersect_key($p['page_ids'],array_flip(array_column(array_filter($p['tasks'],static fn($t)=>$t['kind']==='page'),'source_id'))),
             'new_category_ids'=>array_intersect_key($p['term_ids'],array_flip(array_column(array_filter($p['tasks'],static fn($t)=>$t['kind']==='category'),'source_id'))),
-            'seo_hold_page_ids'=>$p['held_ids'],'seo_hold_category_ids'=>$p['held_term_ids']];
+            'seo_hold_page_ids'=>$p['held_ids'],'seo_hold_category_ids'=>$p['held_term_ids'],
+            'v77_fachnachtrag_state'=>get_option('robotik_v77_fachnachtrag_state',[])];
         nocache_headers();header('Content-Type: application/json; charset=UTF-8');
         header('Content-Disposition: attachment; filename="robotik-v63-gesamtreadback-'.gmdate('Ymd-His').'.json"');
         echo wp_json_encode($report,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);exit;
@@ -326,21 +357,21 @@ final class Robotik_V63_Delta {
         echo '<p>Einmalige geschuetzte Uebernahme aus dem bereits abgeglichenen Acht-Welten-Plan. Bestehende Seiten und Kategorien bleiben unveraendert; neue Seiten nur als Entwurf. Keine Veroeffentlichung, keine SEO-Gebuehren, keine Magazin-/HivePress-Aenderungen.</p>';
         try{$p=self::prepare();}catch(Throwable $e){$p=['errors'=>[$e->getMessage()],'task_remaining'=>0,'task_done'=>0];}
         if(!empty($p['errors']))echo '<div class="notice notice-error"><p>'.esc_html(implode(' | ',array_slice($p['errors'],0,5))).'</p></div>';
-        echo '<p><strong>Neue Seiten:</strong> 68 sicher freigegeben · <strong>Inhaltsrubriken:</strong> 159 · <strong>SEO-geschuetzt:</strong> 16 Seiten und 48 Rubriken. Die alte Importfunktion 104/89 nicht verwenden.</p>';
+        echo '<p><strong>Neue Seiten:</strong> 68 sicher freigegeben · <strong>Inhaltsrubriken:</strong> 159 · <strong>Fachnachtrag:</strong> 16 Seiten und 48 Rubriken (redaktionell entschieden). Die alte Importfunktion 104/89 nicht verwenden.</p>';
         echo '<p><strong>Aktueller Live-Abgleich:</strong> '.(int)($p['task_done']??0).' / 227 erfuellt; '.(int)($p['task_remaining']??0).' / 227 noch offen.</p>';
         if(!is_array($state)||!isset($state['status'])){
             if(empty($p['errors']) && ($p['task_remaining']??-1)===227){
                 echo '<form action="'.esc_url(admin_url('admin-post.php')).'" method="post">';wp_nonce_field('robotik_v63_delta_start');
                 echo '<input type="hidden" name="action" value="robotik_v63_delta_start">';
                 echo '<input type="hidden" name="robotik_v63_token" value="'.esc_attr($p['token']).'">';
-                echo '<p><label><input type="checkbox" name="robotik_v63_approve" value="1" required> Ich gebe ausschliesslich die 68 sicheren Entwurfsseiten und 159 Kategorien zur Anlage frei. Die 16 HOLD-Seiten und 48 Rubriken bleiben gesperrt.</label></p>';
+                echo '<p><label><input type="checkbox" name="robotik_v63_approve" value="1" required> Ich gebe ausschliesslich die 68 sicheren Entwurfsseiten und 159 Kategorien zur Anlage frei. 16 Fachnachtragseiten und 48 Rubriken folgen im gleichen Workflow.</label></p>';
                 submit_button('Gesamten sicheren Block EINMAL uebernehmen','primary');echo '</form>';
             }
         }else{
             $status=(string)($state['status']??'BLOCKED');
             echo '<p><strong>Importstatus:</strong> <span id="robotik-v63-state">'.esc_html($status).' · '.(int)($state['index']??0).' / 227 · Seiten angelegt '.(int)($state['created_pages']??0).' · Kategorien angelegt '.(int)($state['created_categories']??0).'</span></p>';
             if(!empty($state['error']))echo '<div class="notice notice-error"><p>'.esc_html($state['error']).'</p></div>';
-            if($status==='COMPLETE_SAFE_DELTA_WITH_16_HOLDS')echo '<div class="notice notice-success"><p>227 von 227 sicheren Aenderungen erstellt und zurueckgelesen. 16 SEO-HOLDs und 48 Rubriken weiterhin nicht importiert.</p></div>';
+            if($status==='COMPLETE_SAFE_DELTA_WITH_16_HOLDS')echo '<div class="notice notice-success"><p>227 von 227 sicheren Aenderungen erstellt und zurueckgelesen. Die 16 fachlich freigegebenen Seiten und 48 Rubriken koennen jetzt gesammelt nachgetragen werden.</p></div>';
             if($status==='WRITING'){
                 $nonce=wp_create_nonce('robotik_v63_delta_tick');
                 echo '<script>(function(){var n='.wp_json_encode($nonce).',i=document.getElementById("robotik-v63-state");function go(){var d=new FormData();d.append("action","robotik_v63_delta_tick");d.append("_ajax_nonce",n);fetch(ajaxurl,{method:"POST",credentials:"same-origin",body:d}).then(r=>r.json()).then(j=>{if(!j.success)throw Error("WP verweigert Anfrage");var a=j.data;i.textContent=a.status+" · "+a.index+" / "+a.total+" · Seiten "+a.created_pages+" · Kategorien "+a.created_categories+(a.error?" · "+a.error:"");if(a.status==="WRITING")setTimeout(go,a.busy?800:0);else location.reload();}).catch(e=>{i.textContent="Verbindung unterbrochen: "+e.message+". Seite neu laden setzt gespeicherten Lauf fort.";});}go();})();</script>';
@@ -349,6 +380,7 @@ final class Robotik_V63_Delta {
         echo '<form action="'.esc_url(admin_url('admin-post.php')).'" method="post">';wp_nonce_field('robotik_v63_delta_result');
         echo '<input type="hidden" name="action" value="robotik_v63_delta_result">';
         submit_button('EINEN Gesamtbericht als JSON herunterladen','secondary');echo '</form>';
+        Robotik_V77_Fachnachtrag::screenPart();
         echo '</div>';
     }
 }
