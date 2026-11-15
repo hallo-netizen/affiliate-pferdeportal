@@ -575,7 +575,7 @@
       "name": "Trinkwasserinstallation",
       "functions": [
         "verteilen",
-        "sichern"
+        "schuetzen"
       ],
       "water_types": [
         "trinkwasser"
