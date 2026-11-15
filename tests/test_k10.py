@@ -156,7 +156,18 @@ class K10Tests(unittest.TestCase):
         source=Path('real_runs/k0')
         old=json.loads((source/'k0-20261110-42619ca7-01-r2'/'SEALED_WRITER_PRODUCT.json').read_text(encoding='utf-8'))
         broken=json.loads((source/'k0-20261115-horseware-9221a640'/'SEALED_WRITER_PRODUCT.json').read_text(encoding='utf-8'))
-        for a,expected in ((old,'PASS'),(broken,'FAIL')):
+        for product,expected in ((old,'PASS'),(broken,'FAIL')):
+            # The archived sealed product stores these fields in identity/rule_context.
+            context=product['rule_context']
+            a={
+                'article_id':'source-marker-regression',
+                'article_type':product['identity']['article_type'],
+                'html':product['html'],
+                'research_claims':context['research_claims'],
+                'required_fact_ids':context['required_fact_ids'],
+                'allowed_fact_ids':context['allowed_fact_ids'],
+                'comparison_source_bindings':context.get('comparison_source_bindings') or [],
+            }
             receipt={r['rule_id']:r for r in fact_receipts(a)}['facts.trace_binding']
             self.assertEqual(receipt['status'],expected)
 
