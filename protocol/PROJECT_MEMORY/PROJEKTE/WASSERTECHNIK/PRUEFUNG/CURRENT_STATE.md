@@ -37,3 +37,6 @@ WT001 0.1.4 GitHub-ZIP mit sechs Einträgen untersucht; PHP-Code enthält Invent
 
 ## W9 – gebündelte Offline-Importabnahme (14.11.2026)
 Vorhandene WT001 0.1.4 um einen einzigen Import-Hauptfunktionsblock auf Testversion 0.1.5 erweitert. 8-Dateien-ZIP mit 218 W6-Ownern (113 Seiten, 105 Kategorien). PHP-Lint und sechs gebündelte lokale WordPress-Mock-Szenarien bestanden: Erfolg, Wiederholung ohne Dubletten, Fehler-Rücknahme ausschließlich neu angelegter Objekte, falsche Website, vorhandener Pfadkonflikt, geänderter Plan. **Kein WordPress-Live-Test und keine Importfreigabe.** Details `../PLUGINS/W9_IMPORT_PLUGIN_OFFLINE_ABNAHME_20261114.md`.
+
+## W13 – 15.11.2026: fehlende externe Vollständigkeitsprüfung als Ursache
+Die vorherigen W4-/W5-/W6-/W7-/W12-Prüfungen belegten vor allem **innere Konsistenz** (Owner/Slug/Zuordnung/Kategorien), **nicht**, dass alle relevanten Wassertechnik-Fachgebiete recherchiert wurden. Verbindlich neuer unabhängiger methodischer Gesamtcheck aus `../KATEGORIEKONZEPT/W13_VERBINDLICHES_VOLLRECHERCHE_KONZEPT_20261115.md`: 18 Suchfelder, Querachsen Wasserart/Funktion/Verwendung, echte Hersteller-/Verbandsbelege, ein Produkt-Master, ein Abdeckungsbericht mit auch offen markierten Bereichen; vollständige fachliche Tiefe vor neuem WP-Import. **Noch keine externe Marktabdeckung als fertig bezeichnen; kein Live-/Plugin-/SEO-Schreibvorgang.**
