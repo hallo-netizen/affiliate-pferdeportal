@@ -1,4 +1,40 @@
-# Robotik – Kategorienkonzept und SEO: fortlaufender Hauptstand V86 (15.11.2026)
+# Robotik – Kategorienkonzept und SEO: fortlaufender Hauptstand V87 (15.11.2026)
+
+## V87 – Preisgeprüfter einmaliger DataForSEO-Nachlauf vorbereitet (15.11.2026)
+
+**Einmaliger Nachlauf als fachlich fertige Freigabevorlage, aber noch nicht kostenpflichtig ausgeführt.** Alle Aufgaben sind im **einzigen** Fachmaster `RECHERCHE/PRODUKTE_V2_20261108.json` Revision **22**, Feld `seo_nachlauf_v87`, gespeichert. Die Datei hier ist nur die lesbare, fortlaufend gepflegte Auswertung, **kein weiterer Master**.
+
+### Gesamte Suchabdeckung statt nur Robotertypen
+
+| Ebene | Eindeutige Suchbegriffe | Bisherige V61-Abdeckung |
+|---|---:|---|
+| Haupt- und Zwischen-/Landingpages | **47** | V61 hatte hierfür keinen eigenständigen Suchbegriffsauftrag |
+| Robotertypen | **157** | 141 alte Teilkandidaten, 16 neue V84-Typen |
+| Inhaltsrubriken | **328** | 296 alte Teilkandidaten, 32 neue V84-Rubriken |
+| **Gesamt** | **532** | 437 alte Typ-/Rubrikziele, plus 48 neue und 47 zuvor nicht betrachtete Übersichten |
+
+Ein sauberer Begriff wurde jeder Position mit **festem Owner und eindeutiger Herkunft** zugeordnet. Einfache, aber irreführende Begriffe wurden konkretisiert, z. B. **`robotische knieprothese`** statt `knieprothesen`, **`servierroboter zuhause`** statt allgemeinem `servierroboter` für die private Seite und **`industrieroboter logistik`** für die betreffende Industrie-Landingpage. Bei den 63 alten generischen `Kaufberatung`-Rubriken wurden die bereits erarbeiteten konkreten Kategorievorschläge verwendet; **keine Live-Umbenennung**. Die 532 Begriffe sind **Startpunkte für Messungen**, noch keine nachgewiesenen Suchvolumina und keine Garantie passender Suchabsicht.
+
+**Validiert:** 47/47 Gruppenbegriffe, 157/157 Robotertypbegriffe und 328/328 Rubrikbegriffe; **0 doppelte Suchbegriffe**, **0 Verletzungen des Limits von 80 Zeichen oder zehn Wörtern**. Jede Wortfolge bleibt ihrem ursprünglichen, eindeutig belegten Seiteneigentümer zugeordnet. Die 16+32 V84-Objekte sind vollständig enthalten.
+
+### Der einzige kostenpflichtige Nachlauf – erst mit ausdrücklicher Freigabe
+
+1. **Google Ads Search Volume Live:** Die **532 Begriffe gemeinsam in EINER Anfrage**, Zielland Deutschland, Sprache Deutsch. DataForSEO erlaubt bis zu 1.000 Begriffe pro Live-Anfrage; der veröffentlichte Preis liegt derzeit bei **0,09 USD je Auftrag** (nicht je Begriff). Kein erneuter getrennter Aufruf der 391 alten, ungemessenen Keywords.
+2. **Google Labs Keyword Ideas:** **17** bereits vorhandene Freizeit-Robotertypen als Suchbegriff-Saat, maximal **300** neue Ideen, ohne zusätzliche kostenpflichtige SERP-Daten. Formel nach Preisblatt: **0,012 USD + 0,00012 USD pro zurückgelieferter Idee**, maximal bei 300 Ergebnissen **0,048 USD**. Dadurch wird die damals durch Anbieterfehler fehlende Freizeit-Welt gezielt nachgeholt.
+
+**Summe kalkuliert:** 0,09 + maximal 0,048 = **0,138 USD**, gerundet **0,14 USD**. **Freigabedeckel: 0,20 USD** als vorsichtiger Rahmen; Änderungen der Anbieterpreise vor dem Versand prüfen. Dies ist **kein Rechnungsbetrag und keine erteilte Kostenfreigabe**. Kein Timeout-Retry und kein zweiter Auftrag bei unklarem Antwortstatus. **Die 16 alten SERP-URL-Vergleiche werden absichtlich nicht wiederholt**, weil sie redaktionell geklärt sind und die fraglichen Google-Weiterleitungs-URLs keine belastbare Messung ergaben.
+
+**Offizielle Quellen:** [Google Ads Preise](https://dataforseo.com/pricing/keywords-data/google-ads) · [Google Ads 1.000 Begriffe/Anfrage](https://docs.dataforseo.com/v3/keywords_data/google_ads/search_volume/live/) · [Labs Keyword Ideas Preise](https://dataforseo.com/pricing/dataforseo-labs/dataforseo-google-api) · [Labs maximal 200 Seeds und bis 1.000 Ergebnisse](https://docs.dataforseo.com/v3/dataforseo_labs-google-keyword_ideas-live/).
+
+**Technisch wichtige Grenze:** Das bestehende Kategorieplugin **0.4.14** enthält nach Original-ZIP-Prüfung **noch den alten festverdrahteten V52-SEO-Gesamtplan mit 437 Suchbegriffen und bis zu 38 Anbieteraufträgen**. Es bietet **noch nicht** den hier vorbereiteten Google-Ads-532er-Sammelauftrag. Den **alten 38er-Kostenknopf nicht erneut drücken**. Für die Ausführung muss zuerst **die vorhandene Pluginidentität in EINEM gezielten Update** um genau diesen 2er-Ablauf erweitert und getestet werden. Keine neue Pluginidentität, kein Reimport des Kategorienbaums, keine automatische Bezahlabfrage. Dieses Update ist **nicht bereits als fertig ausgegeben**.
+
+### Reihenfolge und Status
+
+**Jetzt erledigt:** 532 eindeutige Startbegriffe, 17 Freizeit-Seeds, Anbieter-Preis-/Grenzprüfung, Zuordnung im zentralen Master Rev22 und kostenfreie Gesamtabnahme des Suchplans. **Noch offen:** Kostenfreigabe durch den Nutzer, fertig getestete vorhandene Plugin-Weiterentwicklung für diese zwei Aufgaben, tatsächlicher DataForSEO-Bericht, fachlicher Soll-/Ist-SEO-Abgleich anhand der echten Messwerte. Die WordPress-Seiten und V84-Veröffentlichung bleiben vollständig getrennt.
+
+**Versionsregel:** V87 ist eine Fortschreibung **dieser selben Datei**, keine weitere `ABSCHLUSS_V87`-Datei. Der einzige Fachmaster bleibt das genannte JSON; frühere V85/V86-Zeilen dienen der nachvollziehbaren Historie.
+
+---
 
 ## V86 – DataForSEO gegen den vollständigen Soll-Kategoriebaum (15.11.2026)
 
