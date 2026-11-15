@@ -228,7 +228,7 @@ def fact_receipts(article):
     # The same existing fact-trace binding check also enforces invisible
     # evidence markers; source names belong in prose only when meaningful.
     if trace_cfg['marker_visible_content_forbidden']:
-        for m in re.finditer(r'(?is)<span\\b([^>]*)>(.*?)</span>',html):
+        for m in re.finditer(r'(?is)<span\b([^>]*)>(.*?)</span>',html):
             a=_attrs('<span '+m.group(1)+'>')
             if trace_cfg['class'] in a.get('class','').split() and m.group(2).strip():
                 attrs_ok=False
