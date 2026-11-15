@@ -5019,7 +5019,7 @@
     }
   ],
   "canonical_source": true,
-  "revision": 19,
+  "revision": 20,
   "research_state": "GRUNDLAGENRECHERCHE_ABGESCHLOSSEN_V84",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
@@ -9160,6 +9160,24 @@
         "wp_release": "NICHT_FREIGEGEBEN",
         "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
         "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
+      },
+      "finder_traits_v1": {
+        "task": "Katzentoilette automatisch reinigen",
+        "work_environment": "Wohnung",
+        "user_group": "Privat",
+        "mobility": "stationär",
+        "control_mode": "automatisch",
+        "human_interaction": "NICHT_RECHERCHIERT",
+        "operational_requirements": "NICHT_RECHERCHIERT",
+        "safety_context": "NICHT_RECHERCHIERT",
+        "acquisition_options": "Herstellerbeleg; konkrete Lieferung und Preis lokal offen",
+        "fact_sources": [
+          "https://www.litter-robot.com/eu/de/litter-robot-4.html"
+        ],
+        "status": "V84_TEILWEISE_HERSTELLERBELEGT_NICHT_LIVE",
+        "source_checked": "2026-11-15",
+        "no_inference_of_suitability": true,
+        "robotics_borderline": false
       }
     },
     {
@@ -9220,6 +9238,24 @@
         "stage": "Produkt",
         "site_publish": "NICHT_FREIGEGEBEN",
         "verification": "HERSTELLER_OFFIZIELL"
+      },
+      "finder_traits_v1": {
+        "task": "Wohnung mobil mit Kamera überwachen",
+        "work_environment": "Wohnung",
+        "user_group": "Privat",
+        "mobility": "mobil, eigene Patrouillenroute",
+        "control_mode": "automatische Patrouille und App",
+        "human_interaction": "NICHT_RECHERCHIERT",
+        "operational_requirements": "NICHT_RECHERCHIERT",
+        "safety_context": "NICHT_RECHERCHIERT",
+        "acquisition_options": "Herstellerbeleg; konkrete Lieferung und Preis lokal offen",
+        "fact_sources": [
+          "https://www.enabot.com/de/home-robot/ebo-air-2-plus"
+        ],
+        "status": "V84_TEILWEISE_HERSTELLERBELEGT_NICHT_LIVE",
+        "source_checked": "2026-11-15",
+        "no_inference_of_suitability": true,
+        "robotics_borderline": false
       }
     },
     {
@@ -9485,6 +9521,24 @@
         "wp_release": "NICHT_FREIGEGEBEN",
         "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
         "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
+      },
+      "finder_traits_v1": {
+        "task": "Padel-Bälle zum Training zuspielen",
+        "work_environment": "Sportplatz",
+        "user_group": "Privat, Verein",
+        "mobility": "stationär während Training",
+        "control_mode": "programmierte Ballzufuhr",
+        "human_interaction": "NICHT_RECHERCHIERT",
+        "operational_requirements": "NICHT_RECHERCHIERT",
+        "safety_context": "NICHT_RECHERCHIERT",
+        "acquisition_options": "Herstellerbeleg; konkrete Lieferung und Preis lokal offen",
+        "fact_sources": [
+          "https://store.pongbotsports.com/products/aura"
+        ],
+        "status": "V84_TEILWEISE_HERSTELLERBELEGT_NICHT_LIVE",
+        "source_checked": "2026-11-15",
+        "no_inference_of_suitability": true,
+        "robotics_borderline": true
       }
     },
     {
@@ -9875,6 +9929,24 @@
         "wordpress_created": false,
         "category_publish_status": "NICHT_FREIGEGEBEN",
         "google_url_gate": false
+      },
+      "finder_traits_v1": {
+        "task": "Wellnessmassage mit Robotik durchführen",
+        "work_environment": "Spa, Hotel, Studio",
+        "user_group": "Wellness-Betrieb",
+        "mobility": "stationäre Anlage",
+        "control_mode": "programmierte Massage",
+        "human_interaction": "NICHT_RECHERCHIERT",
+        "operational_requirements": "NICHT_RECHERCHIERT",
+        "safety_context": "NICHT_RECHERCHIERT",
+        "acquisition_options": "Herstellerbeleg; konkrete Lieferung und Preis lokal offen",
+        "fact_sources": [
+          "https://www.aescape.com/about"
+        ],
+        "status": "V84_TEILWEISE_HERSTELLERBELEGT_NICHT_LIVE",
+        "source_checked": "2026-11-15",
+        "no_inference_of_suitability": true,
+        "robotics_borderline": false
       }
     },
     {
@@ -9940,6 +10012,24 @@
         "wordpress_created": false,
         "category_publish_status": "NICHT_FREIGEGEBEN",
         "google_url_gate": false
+      },
+      "finder_traits_v1": {
+        "task": "Maniküre robotisch ausführen",
+        "work_environment": "Nagelstudio",
+        "user_group": "Fachbetrieb, Studio",
+        "mobility": "stationäre Anlage",
+        "control_mode": "robotische Nagelpflege",
+        "human_interaction": "NICHT_RECHERCHIERT",
+        "operational_requirements": "NICHT_RECHERCHIERT",
+        "safety_context": "NICHT_RECHERCHIERT",
+        "acquisition_options": "Herstellerbeleg; konkrete Lieferung und Preis lokal offen",
+        "fact_sources": [
+          "https://www.10beauty.co/"
+        ],
+        "status": "V84_TEILWEISE_HERSTELLERBELEGT_NICHT_LIVE",
+        "source_checked": "2026-11-15",
+        "no_inference_of_suitability": true,
+        "robotics_borderline": false
       }
     },
     {
@@ -10781,6 +10871,24 @@
         "wp_release": "NICHT_FREIGEGEBEN",
         "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
         "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
+      },
+      "finder_traits_v1": {
+        "task": "Pickleball-Bälle zum Training zuspielen",
+        "work_environment": "Sportplatz",
+        "user_group": "Privat, Verein",
+        "mobility": "stationär während Training",
+        "control_mode": "programmierte Ballzufuhr",
+        "human_interaction": "NICHT_RECHERCHIERT",
+        "operational_requirements": "NICHT_RECHERCHIERT",
+        "safety_context": "NICHT_RECHERCHIERT",
+        "acquisition_options": "Herstellerbeleg; konkrete Lieferung und Preis lokal offen",
+        "fact_sources": [
+          "https://spinshotsports.de/de/products/spinshot-player-pickleball-machine"
+        ],
+        "status": "V84_TEILWEISE_HERSTELLERBELEGT_NICHT_LIVE",
+        "source_checked": "2026-11-15",
+        "no_inference_of_suitability": true,
+        "robotics_borderline": true
       }
     },
     {
@@ -10844,6 +10952,24 @@
         "wp_release": "NICHT_FREIGEGEBEN",
         "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
         "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
+      },
+      "finder_traits_v1": {
+        "task": "Finger und Hand bei fachlicher Rehabilitation bewegen",
+        "work_environment": "Therapie, Klinik",
+        "user_group": "Fachpersonal",
+        "mobility": "stationär am Therapiegerät",
+        "control_mode": "therapeutisch unterstützt",
+        "human_interaction": "NICHT_RECHERCHIERT",
+        "operational_requirements": "NICHT_RECHERCHIERT",
+        "safety_context": "Therapeutische Fachbegleitung erforderlich",
+        "acquisition_options": "Herstellerbeleg; konkrete Lieferung und Preis lokal offen",
+        "fact_sources": [
+          "https://www.gloreha.de/r-touch-pro-sinfonia/"
+        ],
+        "status": "V84_TEILWEISE_HERSTELLERBELEGT_NICHT_LIVE",
+        "source_checked": "2026-11-15",
+        "no_inference_of_suitability": true,
+        "robotics_borderline": false
       }
     },
     {
@@ -10905,6 +11031,24 @@
         "wp_release": "NICHT_FREIGEGEBEN",
         "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
         "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
+      },
+      "finder_traits_v1": {
+        "task": "Zähne mit motorisiertem Mundstück putzen",
+        "work_environment": "Badezimmer",
+        "user_group": "Privat",
+        "mobility": "tragbares Gerät",
+        "control_mode": "automatische Bürstenbewegung",
+        "human_interaction": "NICHT_RECHERCHIERT",
+        "operational_requirements": "NICHT_RECHERCHIERT",
+        "safety_context": "NICHT_RECHERCHIERT",
+        "acquisition_options": "Herstellerbeleg; konkrete Lieferung und Preis lokal offen",
+        "fact_sources": [
+          "https://www.waseda.jp/inst/entrepreneur/news/2026/10/16/9376/"
+        ],
+        "status": "V84_TEILWEISE_HERSTELLERBELEGT_NICHT_LIVE",
+        "source_checked": "2026-11-15",
+        "no_inference_of_suitability": true,
+        "robotics_borderline": false
       }
     },
     {
@@ -11095,6 +11239,24 @@
         "wp_release": "NICHT_FREIGEGEBEN",
         "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
         "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
+      },
+      "finder_traits_v1": {
+        "task": "Beinbewegung beim Wandern unterstützen",
+        "work_environment": "Wanderweg, draußen",
+        "user_group": "selbstständig gehende Menschen",
+        "mobility": "am Körper tragbar",
+        "control_mode": "bewegungsunterstützend",
+        "human_interaction": "NICHT_RECHERCHIERT",
+        "operational_requirements": "NICHT_RECHERCHIERT",
+        "safety_context": "Kein Medizinprodukt; Nutzer muss selbstständig gehen können",
+        "acquisition_options": "Herstellerbeleg; konkrete Lieferung und Preis lokal offen",
+        "fact_sources": [
+          "https://eu.hypershell.tech/de-de/products/new-hypershell-x-series"
+        ],
+        "status": "V84_TEILWEISE_HERSTELLERBELEGT_NICHT_LIVE",
+        "source_checked": "2026-11-15",
+        "no_inference_of_suitability": true,
+        "robotics_borderline": false
       }
     },
     {
@@ -11156,6 +11318,24 @@
         "wp_release": "NICHT_FREIGEGEBEN",
         "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
         "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
+      },
+      "finder_traits_v1": {
+        "task": "Sandmuster automatisch zeichnen",
+        "work_environment": "Innenraum",
+        "user_group": "Privat, Ausstellung",
+        "mobility": "stationär",
+        "control_mode": "automatische Musterbewegung",
+        "human_interaction": "NICHT_RECHERCHIERT",
+        "operational_requirements": "NICHT_RECHERCHIERT",
+        "safety_context": "NICHT_RECHERCHIERT",
+        "acquisition_options": "Herstellerbeleg; konkrete Lieferung und Preis lokal offen",
+        "fact_sources": [
+          "https://sisyphus-industries.com/product/essential/"
+        ],
+        "status": "V84_TEILWEISE_HERSTELLERBELEGT_NICHT_LIVE",
+        "source_checked": "2026-11-15",
+        "no_inference_of_suitability": true,
+        "robotics_borderline": false
       }
     },
     {
@@ -11218,6 +11398,24 @@
         "wp_release": "NICHT_FREIGEGEBEN",
         "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
         "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
+      },
+      "finder_traits_v1": {
+        "task": "Baseball-Trainingsbälle gezielt werfen",
+        "work_environment": "Sportplatz",
+        "user_group": "Sport, Verein",
+        "mobility": "stationär während Training",
+        "control_mode": "programmierte Wurffolge",
+        "human_interaction": "NICHT_RECHERCHIERT",
+        "operational_requirements": "NICHT_RECHERCHIERT",
+        "safety_context": "NICHT_RECHERCHIERT",
+        "acquisition_options": "Herstellerbeleg; konkrete Lieferung und Preis lokal offen",
+        "fact_sources": [
+          "https://sportsattack.com/i-hack-attack-2-baseball-pitching-machine/"
+        ],
+        "status": "V84_TEILWEISE_HERSTELLERBELEGT_NICHT_LIVE",
+        "source_checked": "2026-11-15",
+        "no_inference_of_suitability": true,
+        "robotics_borderline": true
       }
     },
     {
@@ -11284,6 +11482,24 @@
         "wp_release": "NICHT_FREIGEGEBEN",
         "model_product_owner_rule": "Konkretes Hersteller-Modell nur einmal; Mehrfachbezug zwischen Sportarten per Verweis",
         "status": "V80_EDITORIAL_RESEARCH_NOT_WP_IMPORTED"
+      },
+      "finder_traits_v1": {
+        "task": "Roboterspielfigur motorisch verwandeln",
+        "work_environment": "Innenraum",
+        "user_group": "Privat, Freizeit",
+        "mobility": "bewegt sich auf dem Boden",
+        "control_mode": "App und Sprachbefehle",
+        "human_interaction": "NICHT_RECHERCHIERT",
+        "operational_requirements": "NICHT_RECHERCHIERT",
+        "safety_context": "NICHT_RECHERCHIERT",
+        "acquisition_options": "Herstellerbeleg; konkrete Lieferung und Preis lokal offen",
+        "fact_sources": [
+          "https://www.robosen.com/de/grimlock-g1-flagship"
+        ],
+        "status": "V84_TEILWEISE_HERSTELLERBELEGT_NICHT_LIVE",
+        "source_checked": "2026-11-15",
+        "no_inference_of_suitability": true,
+        "robotics_borderline": false
       }
     },
     {
@@ -11344,6 +11560,24 @@
         "keyword_status": "NICHT_GEMESSEN_KEINE_URL_SPERRPFLICHT",
         "site_status": "FACHKANDIDAT_UNVEROEFFENTLICHT",
         "no_model_duplicate": true
+      },
+      "finder_traits_v1": {
+        "task": "Himmelsobjekte motorisch suchen und nachführen",
+        "work_environment": "Draußen, Astronomie",
+        "user_group": "Privat, Astronomie",
+        "mobility": "stationär aufgestellt",
+        "control_mode": "automatische Zielwahl und Nachführung",
+        "human_interaction": "NICHT_RECHERCHIERT",
+        "operational_requirements": "NICHT_RECHERCHIERT",
+        "safety_context": "NICHT_RECHERCHIERT",
+        "acquisition_options": "Herstellerbeleg; konkrete Lieferung und Preis lokal offen",
+        "fact_sources": [
+          "https://vaonis.com/products/vespera-3"
+        ],
+        "status": "V84_TEILWEISE_HERSTELLERBELEGT_NICHT_LIVE",
+        "source_checked": "2026-11-15",
+        "no_inference_of_suitability": true,
+        "robotics_borderline": true
       }
     },
     {
@@ -11405,6 +11639,24 @@
         "keyword_status": "NICHT_GEMESSEN_KEINE_URL_SPERRPFLICHT",
         "site_status": "FACHKANDIDAT_UNVEROEFFENTLICHT",
         "no_model_duplicate": true
+      },
+      "finder_traits_v1": {
+        "task": "Volleyball-Bälle wiederholt zuspielen",
+        "work_environment": "Sporthalle, Sportplatz",
+        "user_group": "Verein, Sport",
+        "mobility": "stationär im Training",
+        "control_mode": "motorisiertes Zuspiel",
+        "human_interaction": "NICHT_RECHERCHIERT",
+        "operational_requirements": "NICHT_RECHERCHIERT",
+        "safety_context": "NICHT_RECHERCHIERT",
+        "acquisition_options": "Herstellerbeleg; konkrete Lieferung und Preis lokal offen",
+        "fact_sources": [
+          "https://sportsattack.com/product/smash-attack-volleyball-machine/"
+        ],
+        "status": "V84_TEILWEISE_HERSTELLERBELEGT_NICHT_LIVE",
+        "source_checked": "2026-11-15",
+        "no_inference_of_suitability": true,
+        "robotics_borderline": true
       }
     },
     {
@@ -11462,6 +11714,24 @@
         "keyword_status": "NICHT_GEMESSEN_KEINE_URL_SPERRPFLICHT",
         "site_status": "FACHKANDIDAT_UNVEROEFFENTLICHT",
         "no_model_duplicate": true
+      },
+      "finder_traits_v1": {
+        "task": "Cricket-Bälle automatisiert zuspielen",
+        "work_environment": "Cricket-Trainingsplatz",
+        "user_group": "Verein, Sport",
+        "mobility": "stationär im Training",
+        "control_mode": "automatischer Wurf",
+        "human_interaction": "NICHT_RECHERCHIERT",
+        "operational_requirements": "NICHT_RECHERCHIERT",
+        "safety_context": "NICHT_RECHERCHIERT",
+        "acquisition_options": "Herstellerbeleg; konkrete Lieferung und Preis lokal offen",
+        "fact_sources": [
+          "https://www.bola.co.uk/shop/bola-professional-bowling-machine"
+        ],
+        "status": "V84_TEILWEISE_HERSTELLERBELEGT_NICHT_LIVE",
+        "source_checked": "2026-11-15",
+        "no_inference_of_suitability": true,
+        "robotics_borderline": true
       }
     },
     {
@@ -11519,6 +11789,24 @@
         "keyword_status": "NICHT_GEMESSEN_KEINE_URL_SPERRPFLICHT",
         "site_status": "FACHKANDIDAT_UNVEROEFFENTLICHT",
         "no_model_duplicate": true
+      },
+      "finder_traits_v1": {
+        "task": "Fußbälle aus einer Trainingsanlage zuspielen",
+        "work_environment": "Fußball-Trainingszentrum",
+        "user_group": "Verein, Trainingsanbieter",
+        "mobility": "ortsfeste Anlage",
+        "control_mode": "automatisches Zuspiel",
+        "human_interaction": "NICHT_RECHERCHIERT",
+        "operational_requirements": "NICHT_RECHERCHIERT",
+        "safety_context": "NICHT_RECHERCHIERT",
+        "acquisition_options": "Herstellerbeleg; konkrete Lieferung und Preis lokal offen",
+        "fact_sources": [
+          "https://footbot.eu/"
+        ],
+        "status": "V84_TEILWEISE_HERSTELLERBELEGT_NICHT_LIVE",
+        "source_checked": "2026-11-15",
+        "no_inference_of_suitability": true,
+        "robotics_borderline": true
       }
     },
     {
@@ -15788,5 +16076,33 @@
       "Die 3 zurückgestellten Typen werden im Forschungsspeicher belassen, nicht gelöscht.",
       "Keine 16 WP-Seiten als bereits publiziert behaupten; Nutzer hat aktuell nur allgemeine bestehende Kategorien live bestätigt."
     ]
+  },
+  "finder_pilot_v84": {
+    "source": "MAGAZIN/ROBOTERFINDER/FILTER_ABDECKUNG_V1.json",
+    "date": "2026-11-15",
+    "status": "16_TEILWEISE_GEPRUEFTE_FILTERPROFILE_IM_EINEN_ROBOTERTYPMASTER_NICHT_LIVE",
+    "total": 16,
+    "ids": [
+      "rf142",
+      "rf148",
+      "rf175",
+      "rf176",
+      "rf177",
+      "rf180",
+      "rf181",
+      "rf182",
+      "rf183",
+      "rf143",
+      "rf184",
+      "rf185",
+      "rf186",
+      "rf187",
+      "rf158",
+      "rf159"
+    ],
+    "filter_rule": "unknown traits never produce yes/passt; no price/affiliate ranking",
+    "no_duplicated_types": true,
+    "no_wp_writes": true,
+    "one_finder_for_all_audiences": true
   }
 }
