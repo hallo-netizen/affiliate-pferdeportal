@@ -357,6 +357,8 @@ final class Robotik_V78_Gesamtabschluss {
                 submit_button('EINEN Gesamtabschlussbericht als JSON herunterladen','secondary');echo '</form>';
             }
         }
+        if(is_array($s) && ($s['status']??'')==='COMPLETE')
+            Robotik_V84_Kategorien_Nachtrag::screenPart();
         echo '</div>';
     }
 }
