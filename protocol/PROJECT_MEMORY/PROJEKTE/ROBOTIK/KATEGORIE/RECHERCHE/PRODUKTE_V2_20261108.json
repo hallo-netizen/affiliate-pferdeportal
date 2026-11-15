@@ -5019,7 +5019,7 @@
     }
   ],
   "canonical_source": true,
-  "revision": 25,
+  "revision": 26,
   "research_state": "GRUNDLAGENRECHERCHE_ABGESCHLOSSEN_V84_SEO_BESTAND_ABGEGLICHEN_V86",
   "wp_import_allowed": false,
   "previous_register": "RECHERCHE/PRODUKTKANDIDATEN_20261108.json",
@@ -26569,8 +26569,8 @@
       },
       "new_v84_types": {
         "total": 16,
-        "numeric": 4,
-        "unknown": 12
+        "numeric": 3,
+        "unknown": 13
       },
       "top_robot_type_keywords": [
         {
@@ -26865,7 +26865,7 @@
         "Freizeit-Spielzeug und Roboterhunde als weiteren Nachfrageschwerpunkt redaktionell vorschlagen; keine neue Core-Seite ohne Funktionsabgrenzung.",
         "Fuer 326 Rubrik-Keywords ohne Zahl bleiben alle Rubriken bestehen; Suchintent durch Themen/Longtails pruefen statt Struktur streichen.",
         "300 Freizeit-Ideen enthalten Fremdthemen, Kino- und Softwaretreffer sowie Suchbegriffe anderer Welten; Herkunft 'Freizeit' ist keine fachliche Besitzerfreigabe.",
-        "Fuer 16 V84-Neutypen liegt eine direkte Zahl nur bei vier Keywords vor, aber alle 16 fachlich autorisiert; kein Entfernen wegen fehlenden Messwerten.",
+        "Fuer 16 V84-Neutypen liegt eine direkte Zahl nur bei drei Keywords vor, aber alle 16 fachlich autorisiert; kein Entfernen wegen fehlenden Messwerten.",
         "Zahl 0 ist nur die providerseitige 0 fuer genau zwei Begriffe; kein Nullwert fuer missing erfinden.",
         "Keine neue bezahlte DataForSEO-Abfrage vor redaktionellem Intentabgleich noetig.",
         "WordPress live unveraendert, V84-Nachtrag nicht aus SEO-Bericht bestaetigt."
