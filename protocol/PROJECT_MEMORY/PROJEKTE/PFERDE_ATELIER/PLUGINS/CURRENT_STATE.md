@@ -2,6 +2,14 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
+<!-- TEXTERSTELLUNG_KISS_HARD_RULE_049_20261115 -->
+**15.11.2026 – 0.4.8 ZURÜCKGEZOGEN / 0.4.9 einziger neuer Teststand nach HARD RULE.**
+Verbindlich: Alles alte nicht nur abschalten, sondern physisch löschen; ein WP-Regal, eine Fachentscheidung pro Schritt, 61 Alttitel gesichert, kein alter PSERC-Redaktionsplan, kein Parallelimport/Title/Category/Quick. Codebereinigung im vorhandenen Quellstand: **173→96 ZIP-Dateien (79 physisch entfernt, 2 reine Zentral-Leser neu), 18 alte PSERC-Klassen und Plan-Speicherklasse raus, 70 ungebrauchte Methoden im technischen Teil raus, weiterer toter Prebook-Zweig gelöscht, alter K0-als-Freigabeweg, alte Admin-Oberfläche und Cron/Gap-Watch raus**. Technisch nötig bleiben **7 ursprüngliche K0/PPM-Slot-/Draft-Import-Klassen**, die keine neue Artikelentscheidung treffen; die Original-Keywordrecherche bleibt aktiv.
+**105/105** tatsächlich ausgeführte lokale Funktions-/Strukturprüfungen und **84/84** Syntaxchecks: leerer und gefüllter Start mit exakt 61 Alt-Titeln, 1.034 simulierte WP-Posts, vorhandenes MINI Kategorie→Redaktion→Titel, Wiederaufnahme/Fehlerisolation, echtes original Draft-Importer-Methodenverhalten, realer PSERC technischer Allocator mit simulierten PPM-Slots, tatsächlicher simulierte WP HTTP-Download (JSON/20 Themen), veralteter/fehlender/beschädigter PSERC-Plan darf MINI nicht blockieren. **Kein echter WP-/MySQL-/PPM-/DataForSEO-End-to-End-Test bislang**.
+TEST-ZIP `Texterstellung_KISS_0.4.9_TEST_HARD_RULE_BEREINIGT.zip`, SHA256 `f9b328d9fe4bc97fd30409e383d6e4f572f206474716d56d5e5fec9c0a32ee09`; bestehendes privates Plugin-Büro `/pferdeatelier/PLUGINS/ARBEITSRAUM_PSTE_KISS/`, Upload byteidentisch zurückgeprüft, TESTBERICHT, GESAMTSIMULATION und DATEI_AUDIT dort.
+[Vollständiger Quell-/QA-Beleg](TEXTERSTELLUNG_KISS_049_HARD_RULE_PHYISCH_BEREINIGT_20261115.md). **NEXT:** NUR isolierte Testsite oliver-beil.de, vorher Backup, altes Plugin durch 0.4.9 ERSETZEN (nicht löschen), Texterstellung→Redaktionsplan→MINI-Gesamtauftrag herunterladen (20), heruntergeladenes JSON prüfen. Keine Live-/K0-Produktionsfreigabe. `production_release_allowed=false`.
+
+
 <!-- TEXTERSTELLUNG_KISS_048_ONE_WAY_20261115 -->
 **15.11.2026 – nach Zielvertragsaudit: KISS 0.4.8 TEST gesamtbereinigt und simuliert.**
 Die frühere 0.4.7 wurde auf der echten WP-Testsite durch historischen PSERC-Planstatus geblockt; der KISS-Reader prüft nun für MINI nur WordPress-Bestand + originale PSTE-Keyworddaten + das eine WP-Auftragsregal. Historische PSERC-/Editorial-/PPM-PLAN-Quellen werden weder gelesen noch als zusätzliche Freigabe verlangt. Die originale technische K0-Platzzuweisung und originale PSERC-Draft-Importfunktion bleiben vorhanden, ohne inhaltliche Zweitentscheidung.
