@@ -9,7 +9,7 @@
     "outside_scope": "Pflege erhält einen vorhandenen Zustand wiederkehrend; Beratung wählt eine Lösung aus; Vergleich wägt Alternativen gegeneinander ab; FAQ beantwortet eine einzelne Frage. Bei mehrdeutiger Absicht entscheidet MINI vor K0 einmalig oder stellt zurück."
   },
   "rules": {
-    "conclusion_min_ratio": 0.09,
+    "conclusion_min_ratio": 0.1,
     "fact_trace_required_blocks": [
       "intro",
       "preparation",
