@@ -1,6 +1,7 @@
 from __future__ import annotations
 import hashlib, html, json, re, sys
 from pathlib import Path
+from .core import load_values
 
 from .ppm_parity_guard import verify as verify_ppm
 from .writer_contract_guard import verify_package as verify_writer_contract
@@ -144,9 +145,14 @@ def verify(package, portal, category_payload):
     table_present=bool(re.search(r'(?is)<table\b',body))
     typ=str(ident['article_type'])
     table_decision=package.get('table_decision') or {}
-    if typ in {'Vergleich',PROPERTY_WINNER_TYPE} and not table_present:
+    # Same existing check, table requirement comes from the bound type rules.
+    # No local type list or downstream article-type decision.
+    policy=load_values(typ)['table']['presence_policy'].get(typ)
+    if policy not in ('REQUIRED','REQUIRED_UNLESS_EXCEPTION','OPTIONAL'):
+        raise Blocked('K0_TYPE_TABLE_POLICY_UNDEFINED:'+typ)
+    if (policy=='REQUIRED' or typ==PROPERTY_WINNER_TYPE) and not table_present:
         raise Blocked('K0_TABLE_REQUIRED_FOR_PRODUCT_COMPARISON_TYPE')
-    if typ in {'Beratung','FAQ','Pflege'} and not table_present:
+    if policy=='REQUIRED_UNLESS_EXCEPTION' and not table_present:
         if table_decision.get('exception_code') not in ALLOWED_TABLE_EXCEPTIONS:
             raise Blocked('K0_TABLE_REQUIRED_UNLESS_DEFINED_EXCEPTION')
     if table_present:

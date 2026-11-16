@@ -86,12 +86,12 @@ def main():
     if pre_receipts_path is not None:
         pre_receipts=load(pre_receipts_path)
         if not isinstance(pre_receipts,list): raise Blocked('PREFLIGHT_RECEIPTS_NOT_LIST')
-        prever=verify_article_pre_lt68(article['article_id'],ah,pre_receipts)
+        prever=verify_article_pre_lt68(article['article_id'],ah,pre_receipts,article['article_type'])
         if prever['status']!='READY_FOR_LT68': raise Blocked('PREFLIGHT_RECEIPTS_INVALID:'+json.dumps(prever['findings'],ensure_ascii=False))
         arec=list(pre_receipts)+adapter_receipts(article)
     else:
         arec=run_article_checks(article)
-    aver=verify_article(article['article_id'],ah,arec)
+    aver=verify_article(article['article_id'],ah,arec,article['article_type'])
     sid,ssha,srec=run_system_checks(); sver=verify_system(sid,ssha,srec)
     if aver['status']!='PASS': raise Blocked('ARTICLE_RULES_NOT_PASS:'+json.dumps(aver['findings'],ensure_ascii=False))
     if sver['status']!='PASS': raise Blocked('SYSTEM_RULES_NOT_PASS:'+json.dumps(sver['findings'],ensure_ascii=False))
@@ -99,8 +99,8 @@ def main():
     wp=build_wordpress(article,research,snapshot,lt)
     wp_row=wp['articles'][0] if isinstance(wp.get('articles'),list) and len(wp['articles'])==1 else {}
     wp_verify=(wp['contract']=='SYSTEM4_WORDPRESS_HANDOFF_V1' and wp['article_count']==1 and wp['publish_allowed'] is False and wp_row.get('body')==article['html'] and wp_row.get('plan_slot')==plan_slot and re.fullmatch(r'article:[0-9a-f]{24}',str(wp_row.get('article_id') or '')) is not None and sha_text('pserc-plan-slot-v2|'+str(wp_row.get('article_id')))==plan_slot)
-    section_requirements={'article_type':article['article_type'],'required_blocks':load_values()['types'][article['article_type']]['required_blocks'],'required_lists':load_values()['types'][article['article_type']]['required_lists']}
-    quality_binding={'catalog_sha256':catalog_hash(),'rule_values_sha256':values_hash(),'article_receipts_sha256':stable(arec),'system_receipts_sha256':stable(srec),'wordpress_category':article['wordpress_category']}
+    section_requirements={'article_type':article['article_type'],'required_blocks':load_values(article['article_type'])['types'][article['article_type']]['required_blocks'],'required_lists':load_values(article['article_type'])['types'][article['article_type']]['required_lists']}
+    quality_binding={'catalog_sha256':catalog_hash(),'rule_values_sha256':values_hash(article['article_type']),'article_receipts_sha256':stable(arec),'system_receipts_sha256':stable(srec),'wordpress_category':article['wordpress_category']}
     package_core={'contract':'K10_REAL_ARTICLE_PACKAGE_V1','status':'CONTENT_AND_SYSTEM_PASS','article_id':article['article_id'],'article_sha256':ah,'plan_slot':plan_slot,'metadata':{k:article['planning_binding'][k] for k in ('title','target_keyword','category','article_type','plan_slot')},'research_sha256':stable(research),'section_requirements':section_requirements,'section_requirements_sha256':stable(section_requirements),'quality_binding':quality_binding,'quality_binding_sha256':stable(quality_binding),'link_registry_sha256':stable(article['link_registry']),'language_evidence_sha256':stable(lt),'wordpress_import_sha256':stable(wp),'publish_allowed':False}
     key=load_private(); endstamp='FAIL'; signature={}
     if key is not None:
@@ -113,11 +113,11 @@ def main():
     external.update({
       'PSERC':'PASS','ENDSTEMPEL':endstamp,'WORDPRESS_VERIFY':'PASS' if wp_verify else 'FAIL',
       'WORDPRESS_RENDERED_H1':'PENDING_NO_WRITE_RENDER','WORDPRESS_RENDERED_DUPLICATE_HEADINGS':'PENDING_NO_WRITE_RENDER','WORDPRESS_RENDERED_ADJACENT_HEADINGS':'PENDING_NO_WRITE_RENDER','WORDPRESS_RENDERED_EVIDENCE_CLASS':'PENDING_NO_WRITE_RENDER',
-      'ARTICLE_TYPE_DEFINITION_BOUND':'PASS' if article['article_type'] in load_values()['types'] else 'FAIL',
+      'ARTICLE_TYPE_DEFINITION_BOUND':'PASS' if article['article_type'] in load_values(article['article_type'])['types'] else 'FAIL',
       'ARTICLE_CONTENT_HASH_BOUND':'PASS' if package['article_sha256']==ah else 'FAIL',
       'SECTION_REQUIREMENTS_PRESENT':'PASS' if bool(section_requirements) else 'FAIL',
       'SECTION_REQUIREMENTS_HASH':'PASS' if package['section_requirements_sha256']==stable(section_requirements) else 'FAIL',
-      'CANONICAL_VALIDATION_BINDING':'PASS' if quality_binding['catalog_sha256']==catalog_hash() and quality_binding['rule_values_sha256']==values_hash() else 'FAIL',
+      'CANONICAL_VALIDATION_BINDING':'PASS' if quality_binding['catalog_sha256']==catalog_hash() and quality_binding['rule_values_sha256']==values_hash(article['article_type']) else 'FAIL',
       'WAVE2_CONTRACT':'PASS','QUALITY_BINDING_PRESENT':'PASS','QUALITY_BINDING_HASH':'PASS' if package['quality_binding_sha256']==stable(quality_binding) else 'FAIL',
       'INTERNAL_MARKER_BOUND':'PASS','LINK_REGISTRY_HASH':'PASS' if package['link_registry_sha256']==stable(article['link_registry']) else 'FAIL',
       'LANGUAGE_DELTA_EVIDENCE':'PASS' if no_mutation else 'FAIL','LANGUAGE_EVIDENCE':'PASS' if lt.get('finding_count')==0 else 'FAIL','KNOWN_ERROR_CONTRACT':'PASS',

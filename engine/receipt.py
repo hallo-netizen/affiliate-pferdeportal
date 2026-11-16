@@ -1,6 +1,6 @@
 from .core import stable, catalog_hash, values_hash
 
-def make_receipt(rule_id, owner, scope, subject_id, subject_sha256, status, evidence=None):
+def make_receipt(rule_id, owner, scope, subject_id, subject_sha256, status, evidence=None, rule_values_digest=None):
     if status not in ('PASS','FAIL'):
         raise ValueError('K10_RECEIPT_STATUS_INVALID')
     core={
@@ -11,7 +11,7 @@ def make_receipt(rule_id, owner, scope, subject_id, subject_sha256, status, evid
         'subject_id':subject_id,
         'subject_sha256':subject_sha256,
         'catalog_sha256':catalog_hash(),
-        'rule_values_sha256':values_hash(),
+        'rule_values_sha256':rule_values_digest or values_hash(),
         'status':status,
         'evidence':evidence or {}
     }

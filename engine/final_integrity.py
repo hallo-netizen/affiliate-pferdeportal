@@ -2,7 +2,7 @@ from collections import Counter
 from .core import hard_rules, catalog_hash, values_hash
 from .receipt import verify_receipt
 
-def _verify_required(scope, subject_id, subject_sha256, receipts, required_rows):
+def _verify_required(scope, subject_id, subject_sha256, receipts, required_rows, article_type=None):
     findings=[]
     required={r['id']:r for r in required_rows}
     all_scope={r['id']:r for r in hard_rules(scope)}
@@ -27,7 +27,7 @@ def _verify_required(scope, subject_id, subject_sha256, receipts, required_rows)
             findings.append('RECEIPT_SUBJECT_HASH_MISMATCH:'+rid)
         if rec.get('catalog_sha256')!=catalog_hash():
             findings.append('RECEIPT_CATALOG_HASH_MISMATCH:'+rid)
-        if rec.get('rule_values_sha256')!=values_hash():
+        if rec.get('rule_values_sha256')!=values_hash(article_type):
             findings.append('RECEIPT_RULE_VALUES_HASH_MISMATCH:'+rid)
         if rec.get('status')!='PASS':
             findings.append('HARD_RULE_NOT_PASS:'+rid)
@@ -39,22 +39,22 @@ def _verify_required(scope, subject_id, subject_sha256, receipts, required_rows)
             findings.append('DUPLICATE_HARD_RULE_RECEIPT:'+rid)
     return {'status':'PASS' if not findings else 'BLOCKED','findings':findings,'publish_allowed':False}
 
-def verify_scope(scope, subject_id, subject_sha256, receipts):
-    return _verify_required(scope,subject_id,subject_sha256,receipts,hard_rules(scope))
+def verify_scope(scope, subject_id, subject_sha256, receipts, article_type=None):
+    return _verify_required(scope,subject_id,subject_sha256,receipts,hard_rules(scope),article_type)
 
 ARTICLE_LT68_RULE_ID='lt68.language_zero_unresolved'
 
-def verify_article_pre_lt68(article_id, article_sha256, receipts):
+def verify_article_pre_lt68(article_id, article_sha256, receipts, article_type=None):
     rows=[r for r in hard_rules('ARTICLE') if r['id']!=ARTICLE_LT68_RULE_ID]
-    out=_verify_required('ARTICLE',article_id,article_sha256,receipts,rows)
+    out=_verify_required('ARTICLE',article_id,article_sha256,receipts,rows,article_type)
     out['required_receipt_count']=len(rows)
     out['pending_rule_ids']=[ARTICLE_LT68_RULE_ID]
     if out['status']=='PASS':
         out['status']='READY_FOR_LT68'
     return out
 
-def verify_article(article_id, article_sha256, receipts):
-    return verify_scope('ARTICLE',article_id,article_sha256,receipts)
+def verify_article(article_id, article_sha256, receipts, article_type=None):
+    return verify_scope('ARTICLE',article_id,article_sha256,receipts,article_type)
 
 def verify_system(system_id, system_sha256, receipts):
     return verify_scope('SYSTEM',system_id,system_sha256,receipts)

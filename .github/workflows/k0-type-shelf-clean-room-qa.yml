@@ -1,0 +1,30 @@
+name: K0 Typregal isolated clean-room QA
+on:
+  push:
+    branches:
+      - work/k0-typregal-einmalentscheidung-20261116
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  clean-room-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Confirm existing legacy rule ledger is unchanged
+        run: |
+          git fetch origin konzept0-portal-neutral-20261002 --depth=1
+          git diff --exit-code origin/konzept0-portal-neutral-20261002 HEAD -- RULE_VALUES.json RULE_CATALOG.json FIELD_POLICY.json
+      - name: Compile actual Python source
+        run: |
+          python3 -m compileall -q engine tests
+      - name: Isolated positive and negative type-shelf tests
+        run: |
+          python3 -m unittest tests.test_k0_type_shelf_20261116 -v
+      - name: Regression of unchanged original K0 workflows
+        run: |
+          python3 -m unittest discover -s tests -p 'test_*.py' -v
