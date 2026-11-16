@@ -1,0 +1,264 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Einen sicheren Wassertrog für Pferde selber bauen",
+    "target_keyword": "wassertröge selber bauen",
+    "category": "wassertroege-fuer-weiden-installation",
+    "article_type": "Anleitung",
+    "plan_slot": "1b60069d26ce9f6a70de15852e683a57262282acdead981d9b73742185ef5aeb"
+  },
+  "content_profile": {
+    "search_intent": "Anleitung – Pferdetränke"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+          "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/"
+        },
+        {
+          "source_title": "DLG – Merkblatt 419: Das Tier im Blick – Pferde",
+          "source_url": "https://www.dlg.org/mediacenter/dlg-merkblaetter/dlg-merkblatt-419-das-tier-im-blick-pferde"
+        },
+        {
+          "source_title": "World Horse Welfare – Handbuch gute Tierwohlpraxis",
+          "source_url": "https://storage.googleapis.com/worldhorsewelfare-cloud/2024/12/df279909-german-version-eu-horse-guide.pdf"
+        },
+        {
+          "source_title": "Umweltbundesamt – Tränkwasserversorgung im Stall",
+          "source_url": "https://www.umweltbundesamt.de/traenkwasserversorgung-im-stall"
+        }
+      ],
+      "claims": [
+        "Pferde benötigen ständig Zugang zu frischem Wasser; ein erwachsenes Warmblut braucht bei leichter Arbeit durchschnittlich täglich 30 bis 50 Liter, abhängig von Futter, Temperatur und Bewegung.",
+        "Pferdetränken gehören an übersichtliche, gut erreichbare Stellen, damit Pferde beim Trinken keine Verletzungen erleiden. Die Wasseroberfläche sollte eine natürliche Kopfhaltung ermöglichen.",
+        "Tränkestellen sollen sauber gehalten werden; automatische Tränksysteme erfordern tägliche Funktionskontrolle. Im Winter muss verhindert werden, dass Tränken einfrieren.",
+        "Wasserbehälter und Selbsttränken müssen jederzeit funktionsfähig bleiben und regelmäßig frisches Wasser anbieten; Verschmutzung und Frost müssen verhindert werden.",
+        "Offene Wasseroberflächen sind für Pferde gut geeignet. Tränken sollten getrennt von Futterplätzen liegen und eine ungehinderte Trinkhaltung ermöglichen.",
+        "Tränkwasser muss hygienisch geeignet sein. Tägliche Funktionskontrollen und ausreichend zugängliche Tränken sind für eine sichere Versorgung der Tiere wichtig.",
+        "Auf Weiden muss die Wasserstelle für alle Tiere erreichbar bleiben, ohne dass Gedränge oder Aggression entsteht; Verschmutzung der Tränkebecken ist zu vermeiden."
+      ],
+      "fresh_research_reference_date": "2026-11-16"
+    },
+    "production_plan_item": {
+      "article_type": "Anleitung",
+      "target_keyword": "wassertröge selber bauen",
+      "topic": "Einen sicheren Wassertrog für Pferde selber bauen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "wassertroege-fuer-weiden-installation",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Einen standsicheren Wasserbehälter für Pferde aufstellen, gefahrlos zugänglich machen und die Versorgung zuverlässig kontrollieren.",
+      "preparation_items": [
+        "Für Pferde geeigneten Tränkebehälter auswählen",
+        "Ebenen tragfähigen und gut entwässerten Aufstellplatz vorbereiten",
+        "Abgerundete Kanten und geeignetes Befestigungsmaterial prüfen",
+        "Saubere Wasserzufuhr und Reinigung einplanen"
+      ],
+      "procedure_steps": [
+        "Standort und Boden mit Blick auf Pferdewege und Hygiene vorbereiten",
+        "Behälter ohne scharfe Kanten und ohne zugängliche gefährliche Befestigungen standsicher aufstellen",
+        "Nur für das konkrete Tränkebecken geeignete Sicherungen nach Herstellerangaben anbringen",
+        "Wasser einfüllen und über Standfestigkeit und hygienischen Zugang entscheiden",
+        "Nachfüllen und täglichen Sicht- und Funktionstest organisieren"
+      ],
+      "safety_controls": [
+        "Keine improvisierten elektrischen Heizungen oder Stromkabel im Tierbereich",
+        "Befestigungen ohne spitze Haken und frei zugängliche Fangstellen",
+        "Standfestigkeit auch bei leerem Trog prüfen",
+        "Bei Frost sichere Ersatzwasserversorgung vorhalten"
+      ],
+      "common_errors": [
+        "Trog auf nachgiebigem Boden ohne Schutz gegen Kippen aufstellen",
+        "Scharfe Metallkanten und Halteschlaufen in Reichweite belassen",
+        "Wasserbehälter zu nahe an Futterstellen aufstellen",
+        "Schwimmerventil oder Vorratsmenge nicht kontrollieren"
+      ],
+      "result_checks": [
+        "Trog verrutscht weder leer noch gefüllt",
+        "Kopf und Maul können ohne Anstoßen eintauchen",
+        "Wasser bleibt sauber und wird rechtzeitig ersetzt",
+        "Alle Tiere erreichen die Trinkstelle",
+        "Bei Frost ist eine sichere Wasserreserve vorhanden"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "evidence_text_sha256": "ca657bfc4a7952eb7bc716e56175cbe01fa7f04e48aea29808dbd3e15453fada",
+        "statement": "Pferde benötigen ständig Zugang zu frischem Wasser; ein erwachsenes Warmblut braucht bei leichter Arbeit durchschnittlich täglich 30 bis 50 Liter, abhängig von Futter, Temperatur und Bewegung.",
+        "evidence_text": "Pferde benötigen ständig Zugang zu frischem Wasser; ein erwachsenes Warmblut braucht bei leichter Arbeit durchschnittlich täglich 30 bis 50 Liter, abhängig von Futter, Temperatur und Bewegung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F2": {
+        "source_title": "DLG – Merkblatt 419: Das Tier im Blick – Pferde",
+        "source_url": "https://www.dlg.org/mediacenter/dlg-merkblaetter/dlg-merkblatt-419-das-tier-im-blick-pferde",
+        "evidence_text_sha256": "98db8f91619f56271a782a852ecd5dd978cdcf56657fb1cd80a8a6b249fd1728",
+        "statement": "Pferdetränken gehören an übersichtliche, gut erreichbare Stellen, damit Pferde beim Trinken keine Verletzungen erleiden. Die Wasseroberfläche sollte eine natürliche Kopfhaltung ermöglichen.",
+        "evidence_text": "Pferdetränken gehören an übersichtliche, gut erreichbare Stellen, damit Pferde beim Trinken keine Verletzungen erleiden. Die Wasseroberfläche sollte eine natürliche Kopfhaltung ermöglichen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F3": {
+        "source_title": "World Horse Welfare – Handbuch gute Tierwohlpraxis",
+        "source_url": "https://storage.googleapis.com/worldhorsewelfare-cloud/2024/12/df279909-german-version-eu-horse-guide.pdf",
+        "evidence_text_sha256": "30ed8da76f8b151bef074662e5683dc5d210a210a55f5df0d6d392fff012b64f",
+        "statement": "Tränkestellen sollen sauber gehalten werden; automatische Tränksysteme erfordern tägliche Funktionskontrolle. Im Winter muss verhindert werden, dass Tränken einfrieren.",
+        "evidence_text": "Tränkestellen sollen sauber gehalten werden; automatische Tränksysteme erfordern tägliche Funktionskontrolle. Im Winter muss verhindert werden, dass Tränken einfrieren.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F4": {
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "evidence_text_sha256": "958f888ed0f0dc5dffbc4815e25494c95af8a45493946947e60e4786ae7ed507",
+        "statement": "Wasserbehälter und Selbsttränken müssen jederzeit funktionsfähig bleiben und regelmäßig frisches Wasser anbieten; Verschmutzung und Frost müssen verhindert werden.",
+        "evidence_text": "Wasserbehälter und Selbsttränken müssen jederzeit funktionsfähig bleiben und regelmäßig frisches Wasser anbieten; Verschmutzung und Frost müssen verhindert werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F5": {
+        "source_title": "DLG – Merkblatt 419: Das Tier im Blick – Pferde",
+        "source_url": "https://www.dlg.org/mediacenter/dlg-merkblaetter/dlg-merkblatt-419-das-tier-im-blick-pferde",
+        "evidence_text_sha256": "ff12cc9b6187543e8e050eeb3a53593ae38ad1045e964e880ce2f9df97d17888",
+        "statement": "Offene Wasseroberflächen sind für Pferde gut geeignet. Tränken sollten getrennt von Futterplätzen liegen und eine ungehinderte Trinkhaltung ermöglichen.",
+        "evidence_text": "Offene Wasseroberflächen sind für Pferde gut geeignet. Tränken sollten getrennt von Futterplätzen liegen und eine ungehinderte Trinkhaltung ermöglichen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F6": {
+        "source_title": "Umweltbundesamt – Tränkwasserversorgung im Stall",
+        "source_url": "https://www.umweltbundesamt.de/traenkwasserversorgung-im-stall",
+        "evidence_text_sha256": "7ab8956e0c16038c3d83c6820868a0093f6433ebdb8ec4a2a6eeeb1881596ec1",
+        "statement": "Tränkwasser muss hygienisch geeignet sein. Tägliche Funktionskontrollen und ausreichend zugängliche Tränken sind für eine sichere Versorgung der Tiere wichtig.",
+        "evidence_text": "Tränkwasser muss hygienisch geeignet sein. Tägliche Funktionskontrollen und ausreichend zugängliche Tränken sind für eine sichere Versorgung der Tiere wichtig.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F7": {
+        "source_title": "World Horse Welfare – Handbuch gute Tierwohlpraxis",
+        "source_url": "https://storage.googleapis.com/worldhorsewelfare-cloud/2024/12/df279909-german-version-eu-horse-guide.pdf",
+        "evidence_text_sha256": "189e745b8312d3239b11855042d34f4c2212d9f6ba09ef2726994140e7f72227",
+        "statement": "Auf Weiden muss die Wasserstelle für alle Tiere erreichbar bleiben, ohne dass Gedränge oder Aggression entsteht; Verschmutzung der Tränkebecken ist zu vermeiden.",
+        "evidence_text": "Auf Weiden muss die Wasserstelle für alle Tiere erreichbar bleiben, ohne dass Gedränge oder Aggression entsteht; Verschmutzung der Tränkebecken ist zu vermeiden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/wassertroege-fuer-weiden-installation/",
+        "anchor": "Wassertröge auf der Weide sicher aufstellen",
+        "block": "preparation"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/wie-kann-ich-selbst-eine-frostsichere-pferdetraenke-bauen/",
+        "anchor": "Frostschutz für Pferdetränken richtig planen",
+        "block": "risks"
+      },
+      {
+        "role": "further_information",
+        "href": "/fuetterung/fuetterung-wasser/",
+        "anchor": "Wasserversorgung und Trinkbedarf von Pferden",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/wassertroege-fuer-weiden-installation/",
+        "active": true
+      },
+      {
+        "href": "/wie-kann-ich-selbst-eine-frostsichere-pferdetraenke-bauen/",
+        "active": true
+      },
+      {
+        "href": "/fuetterung/fuetterung-wasser/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "wassertroege-fuer-weiden-installation",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Wassertrog",
+      "Pferde",
+      "Wasser",
+      "Weide",
+      "Tränke",
+      "Befestigung",
+      "Boden",
+      "Vorbereitung",
+      "Standort",
+      "Sicherheit",
+      "Aufbau",
+      "Standfestigkeit",
+      "Prüfung",
+      "Frost",
+      "Tränkebehälter"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "LINEAR_SEQUENCE",
+      "rationale": "Die Arbeit lässt sich klarer und sicherer als Schrittfolge mit Einzelkontrollen darstellen; eine zusätzliche Tabelle hätte keinen eigenen Nutzen."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
