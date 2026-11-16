@@ -1,0 +1,616 @@
+{
+  "version": "W32_2026-11-16_v1",
+  "status": "READ_ONLY_NAVIGATION_FROM_W6_W27_W28",
+  "hauptbereiche": [
+    {
+      "id": "PUMPEN",
+      "name": "Pumpen & Drucktechnik",
+      "pos": 1,
+      "existing_menu": 12,
+      "new_not_approved": 0
+    },
+    {
+      "id": "BRUNNEN",
+      "name": "Brunnen & Bewässerung",
+      "pos": 2,
+      "existing_menu": 9,
+      "new_not_approved": 21
+    },
+    {
+      "id": "REGEN",
+      "name": "Regenwasser & Wasserspeicher",
+      "pos": 3,
+      "existing_menu": 15,
+      "new_not_approved": 8
+    },
+    {
+      "id": "TRINK",
+      "name": "Trinkwasser & Hausinstallation",
+      "pos": 4,
+      "existing_menu": 19,
+      "new_not_approved": 23
+    },
+    {
+      "id": "MESSEN",
+      "name": "Wasseranalyse & Steuerung",
+      "pos": 5,
+      "existing_menu": 8,
+      "new_not_approved": 6
+    },
+    {
+      "id": "ABWASSER",
+      "name": "Abwasser & Entwässerung",
+      "pos": 6,
+      "existing_menu": 8,
+      "new_not_approved": 11
+    },
+    {
+      "id": "POOL",
+      "name": "Pool & Teichtechnik",
+      "pos": 7,
+      "existing_menu": 0,
+      "new_not_approved": 12
+    }
+  ],
+  "existing_w4_pages": [
+    {
+      "owner_id": "wt_product_0001",
+      "product_name": "Feinfilter",
+      "wordpress_path": "wasseraufbereitung/hauswasserfilter/feinfilter",
+      "bereich": "TRINK",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0002",
+      "product_name": "Manueller Rückspülfilter",
+      "wordpress_path": "wasseraufbereitung/hauswasserfilter/manueller-rueckspuelfilter",
+      "bereich": "TRINK",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0003",
+      "product_name": "Automatischer Rückspülfilter",
+      "wordpress_path": "wasseraufbereitung/hauswasserfilter/automatischer-rueckspuelfilter",
+      "bereich": "TRINK",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0004",
+      "product_name": "Tischwasserfilter",
+      "wordpress_path": "wasseraufbereitung/trinkwasserfilter/tischwasserfilter",
+      "bereich": "TRINK",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0005",
+      "product_name": "Wasserhahnfilter",
+      "wordpress_path": "wasseraufbereitung/trinkwasserfilter/wasserhahnfilter",
+      "bereich": "TRINK",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0006",
+      "product_name": "Untertischfilter",
+      "wordpress_path": "wasseraufbereitung/trinkwasserfilter/untertischfilter",
+      "bereich": "TRINK",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0007",
+      "product_name": "Outdoor-Wasserfilter",
+      "wordpress_path": "wasseraufbereitung/trinkwasserfilter/outdoor-wasserfilter",
+      "bereich": "TRINK",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0008",
+      "product_name": "Auftisch-Osmoseanlage",
+      "wordpress_path": "wasseraufbereitung/osmoseanlagen/auftisch-osmoseanlage",
+      "bereich": "TRINK",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0009",
+      "product_name": "Untertisch-Osmoseanlage",
+      "wordpress_path": "wasseraufbereitung/osmoseanlagen/untertisch-osmoseanlage",
+      "bereich": "TRINK",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0010",
+      "product_name": "Direct-Flow-Osmoseanlage",
+      "wordpress_path": "wasseraufbereitung/osmoseanlagen/direct-flow-osmoseanlage",
+      "bereich": "TRINK",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0011",
+      "product_name": "Osmoseanlage mit Drucktank",
+      "wordpress_path": "wasseraufbereitung/osmoseanlagen/osmoseanlage-mit-drucktank",
+      "bereich": "TRINK",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0012",
+      "product_name": "Enthärtungsanlage",
+      "wordpress_path": "wasseraufbereitung/aufbereitungsanlagen/enthaertungsanlage",
+      "bereich": "TRINK",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0013",
+      "product_name": "UV-Desinfektionsanlage",
+      "wordpress_path": "wasseraufbereitung/aufbereitungsanlagen/uv-desinfektionsanlage",
+      "bereich": "TRINK",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0014",
+      "product_name": "Wasser-Dosieranlage",
+      "wordpress_path": "wasseraufbereitung/aufbereitungsanlagen/wasser-dosieranlage",
+      "bereich": "TRINK",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0015",
+      "product_name": "Wasserfilter-Ersatzkartusche",
+      "wordpress_path": "wasseraufbereitung/filterzubehoer/wasserfilter-ersatzkartusche",
+      "bereich": "TRINK",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0016",
+      "product_name": "Filtergehäuse",
+      "wordpress_path": "wasseraufbereitung/filterzubehoer/filtergehaeuse",
+      "bereich": "TRINK",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0017",
+      "product_name": "Wasserfilter-Anschlussadapter",
+      "wordpress_path": "wasseraufbereitung/filterzubehoer/wasserfilter-anschlussadapter",
+      "bereich": "TRINK",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0018",
+      "product_name": "Trinkwasser-Labortestset",
+      "wordpress_path": "wasseranalyse/testsets/trinkwasser-labortestset",
+      "bereich": "MESSEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0019",
+      "product_name": "Brunnenwasser-Testset",
+      "wordpress_path": "wasseranalyse/testsets/brunnenwasser-testset",
+      "bereich": "MESSEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0020",
+      "product_name": "Schadstoff-Labortestset",
+      "wordpress_path": "wasseranalyse/testsets/schadstoff-labortestset",
+      "bereich": "MESSEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0021",
+      "product_name": "Wasserteststreifen",
+      "wordpress_path": "wasseranalyse/testsets/wasserteststreifen",
+      "bereich": "MESSEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0022",
+      "product_name": "Wasser-Multimessgerät",
+      "wordpress_path": "wasseranalyse/messgeraete/wasser-multimessgeraet",
+      "bereich": "MESSEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0023",
+      "product_name": "Wasser-Probenahmeset",
+      "wordpress_path": "wasseranalyse/testsets/wasser-probenahmeset",
+      "bereich": "MESSEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0024",
+      "product_name": "Gartenbrunnen-Bausatz",
+      "wordpress_path": "brunnen/brunnenbauteile/gartenbrunnen-bausatz",
+      "bereich": "BRUNNEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0025",
+      "product_name": "Schlagbrunnen-Set",
+      "wordpress_path": "brunnen/brunnenbauteile/schlagbrunnen-set",
+      "bereich": "BRUNNEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0026",
+      "product_name": "Brunnenfilterrohr",
+      "wordpress_path": "brunnen/brunnenbauteile/brunnenfilterrohr",
+      "bereich": "BRUNNEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0027",
+      "product_name": "Gartenpumpe",
+      "wordpress_path": "pumpen-druck/pumpen/gartenpumpe",
+      "bereich": "PUMPEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0028",
+      "product_name": "Tauchpumpe",
+      "wordpress_path": "pumpen-druck/pumpen/tauchpumpe",
+      "bereich": "PUMPEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0029",
+      "product_name": "Tiefbrunnenpumpe",
+      "wordpress_path": "pumpen-druck/pumpen/tiefbrunnenpumpe",
+      "bereich": "PUMPEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0030",
+      "product_name": "Schmutzwasserpumpe",
+      "wordpress_path": "pumpen-druck/pumpen/schmutzwasserpumpe",
+      "bereich": "PUMPEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0031",
+      "product_name": "Klarwasserpumpe",
+      "wordpress_path": "pumpen-druck/pumpen/klarwasserpumpe",
+      "bereich": "PUMPEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0032",
+      "product_name": "Hauswasserwerk",
+      "wordpress_path": "pumpen-druck/druckversorgung/hauswasserwerk",
+      "bereich": "PUMPEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0033",
+      "product_name": "Druckerhöhungsanlage",
+      "wordpress_path": "pumpen-druck/druckversorgung/druckerhoehungsanlage",
+      "bereich": "PUMPEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0034",
+      "product_name": "Pumpensteuergerät",
+      "wordpress_path": "pumpen-druck/steuerung-zubehoer/pumpensteuergeraet",
+      "bereich": "PUMPEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0035",
+      "product_name": "Regentonne",
+      "wordpress_path": "regenwasser/regenspeicher/regentonne",
+      "bereich": "REGEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0036",
+      "product_name": "Regenwasser-Erdtank",
+      "wordpress_path": "regenwasser/regenspeicher/regenwasser-erdtank",
+      "bereich": "REGEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0037",
+      "product_name": "Regenwasser-Kellertank",
+      "wordpress_path": "regenwasser/regenspeicher/regenwasser-kellertank",
+      "bereich": "REGEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0038",
+      "product_name": "Fallrohrfilter",
+      "wordpress_path": "regenwasser/filter-foerderung/fallrohrfilter",
+      "bereich": "REGEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0039",
+      "product_name": "Zisternenpumpe",
+      "wordpress_path": "regenwasser/filter-foerderung/zisternenpumpe",
+      "bereich": "REGEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0040",
+      "product_name": "Regenwasser-Hauszentrale",
+      "wordpress_path": "regenwasser/nutzung-rueckhalt/regenwasser-hauszentrale",
+      "bereich": "REGEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0041",
+      "product_name": "Rigolensystem",
+      "wordpress_path": "regenwasser/nutzung-rueckhalt/rigolensystem",
+      "bereich": "REGEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0042",
+      "product_name": "Retentionszisterne",
+      "wordpress_path": "regenwasser/nutzung-rueckhalt/retentionszisterne",
+      "bereich": "REGEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0043",
+      "product_name": "Tropfbewässerungsset",
+      "wordpress_path": "bewaesserung/bewaesserungssysteme/tropfbewaesserungsset",
+      "bereich": "BRUNNEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0044",
+      "product_name": "Versenkregner",
+      "wordpress_path": "bewaesserung/bewaesserungssysteme/versenkregner",
+      "bereich": "BRUNNEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0045",
+      "product_name": "Bewässerungscomputer",
+      "wordpress_path": "bewaesserung/steuerung/bewaesserungscomputer",
+      "bereich": "BRUNNEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0046",
+      "product_name": "Bodenfeuchtesensor",
+      "wordpress_path": "bewaesserung/steuerung/bodenfeuchtesensor",
+      "bereich": "BRUNNEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0047",
+      "product_name": "Gartenschlauch",
+      "wordpress_path": "bewaesserung/gartenschlauch",
+      "bereich": "BRUNNEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0048",
+      "product_name": "Trinkwassertank",
+      "wordpress_path": "wassertanks/tankarten/trinkwassertank",
+      "bereich": "REGEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0049",
+      "product_name": "IBC-Wassertank",
+      "wordpress_path": "wassertanks/tankarten/ibc-wassertank",
+      "bereich": "REGEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0050",
+      "product_name": "Mobiler Wassertank",
+      "wordpress_path": "wassertanks/tankarten/mobiler-wassertank",
+      "bereich": "REGEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0051",
+      "product_name": "Nutzwassertank",
+      "wordpress_path": "wassertanks/tankarten/nutzwassertank",
+      "bereich": "REGEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0052",
+      "product_name": "Hebeanlage",
+      "wordpress_path": "abwassertechnik/entwaesserung/hebeanlage",
+      "bereich": "ABWASSER",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0053",
+      "product_name": "Rückstauverschluss",
+      "wordpress_path": "abwassertechnik/entwaesserung/rueckstauverschluss",
+      "bereich": "ABWASSER",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0054",
+      "product_name": "Grauwasseranlage",
+      "wordpress_path": "abwassertechnik/aufbereitung-speicherung/grauwasseranlage",
+      "bereich": "ABWASSER",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0055",
+      "product_name": "Kleinkläranlage",
+      "wordpress_path": "abwassertechnik/aufbereitung-speicherung/kleinklaeranlage",
+      "bereich": "ABWASSER",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0056",
+      "product_name": "Abwassertank",
+      "wordpress_path": "abwassertechnik/aufbereitung-speicherung/abwassertank",
+      "bereich": "ABWASSER",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0057",
+      "product_name": "Bodenablauf",
+      "wordpress_path": "abwassertechnik/entwaesserung/bodenablauf",
+      "bereich": "ABWASSER",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0058",
+      "product_name": "Revisionsschacht",
+      "wordpress_path": "abwassertechnik/entwaesserung/revisionsschacht",
+      "bereich": "ABWASSER",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0059",
+      "product_name": "Abwasserrohr",
+      "wordpress_path": "abwassertechnik/entwaesserung/abwasserrohr",
+      "bereich": "ABWASSER",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0060",
+      "product_name": "Enteisenungsanlage",
+      "wordpress_path": "wasseraufbereitung/aufbereitungsanlagen/enteisenungsanlage",
+      "bereich": "TRINK",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0061",
+      "product_name": "Systemtrenner",
+      "wordpress_path": "wasseraufbereitung/aufbereitungsanlagen/systemtrenner",
+      "bereich": "TRINK",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0062",
+      "product_name": "pH-Messgerät",
+      "wordpress_path": "wasseranalyse/messgeraete/ph-messgeraet",
+      "bereich": "MESSEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0063",
+      "product_name": "Wasser-Photometer",
+      "wordpress_path": "wasseranalyse/messgeraete/wasser-photometer",
+      "bereich": "MESSEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0064",
+      "product_name": "Rückschlagventil",
+      "wordpress_path": "pumpen-druck/steuerung-zubehoer/rueckschlagventil",
+      "bereich": "PUMPEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0065",
+      "product_name": "Pumpen-Saugschlauchset",
+      "wordpress_path": "pumpen-druck/steuerung-zubehoer/pumpen-saugschlauchset",
+      "bereich": "PUMPEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0066",
+      "product_name": "Druckbehälter",
+      "wordpress_path": "pumpen-druck/druckversorgung/druckbehaelter",
+      "bereich": "PUMPEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0067",
+      "product_name": "Pumpenvorfilter",
+      "wordpress_path": "pumpen-druck/steuerung-zubehoer/pumpenvorfilter",
+      "bereich": "PUMPEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0068",
+      "product_name": "Tank-Füllstandsanzeige",
+      "wordpress_path": "wassertanks/tank-fuellstandsanzeige",
+      "bereich": "REGEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0069",
+      "product_name": "Tankdurchführung",
+      "wordpress_path": "wassertanks/tankdurchfuehrung",
+      "bereich": "REGEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0070",
+      "product_name": "Zisternenfilter",
+      "wordpress_path": "regenwasser/filter-foerderung/zisternenfilter",
+      "bereich": "REGEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0071",
+      "product_name": "Bewässerungs-Wasserzähler",
+      "wordpress_path": "bewaesserung/steuerung/bewaesserungs-wasserzaehler",
+      "bereich": "BRUNNEN",
+      "menu": true
+    },
+    {
+      "owner_id": "wt_product_0072",
+      "product_name": "Gewerbliche Umkehrosmoseanlage",
+      "wordpress_path": "industrie-grossanlagen/industrielle-wasseraufbereitung/gewerbliche-umkehrosmoseanlage",
+      "bereich": "TRINK",
+      "menu": false
+    },
+    {
+      "owner_id": "wt_product_0073",
+      "product_name": "Mehrschichtfilteranlage",
+      "wordpress_path": "industrie-grossanlagen/industrielle-wasseraufbereitung/mehrschichtfilteranlage",
+      "bereich": "TRINK",
+      "menu": false
+    },
+    {
+      "owner_id": "wt_product_0074",
+      "product_name": "Elektrodeionisationsanlage",
+      "wordpress_path": "industrie-grossanlagen/industrielle-wasseraufbereitung/elektrodeionisationsanlage",
+      "bereich": "TRINK",
+      "menu": false
+    },
+    {
+      "owner_id": "wt_product_0075",
+      "product_name": "Chemikalien-Dosierpumpe",
+      "wordpress_path": "industrie-grossanlagen/messung-regelung-dosierung/chemikalien-dosierpumpe",
+      "bereich": "PUMPEN",
+      "menu": false
+    },
+    {
+      "owner_id": "wt_product_0076",
+      "product_name": "Industrielle Hochdruckpumpe",
+      "wordpress_path": "industrie-grossanlagen/industrie-pumpen/industrielle-hochdruckpumpe",
+      "bereich": "PUMPEN",
+      "menu": false
+    },
+    {
+      "owner_id": "wt_product_0077",
+      "product_name": "Industrielle Feststoffpumpe",
+      "wordpress_path": "industrie-grossanlagen/industrie-pumpen/industrielle-feststoffpumpe",
+      "bereich": "PUMPEN",
+      "menu": false
+    },
+    {
+      "owner_id": "wt_product_0078",
+      "product_name": "Online-Wasseranalysestation",
+      "wordpress_path": "industrie-grossanlagen/messung-regelung-dosierung/online-wasseranalysestation",
+      "bereich": "MESSEN",
+      "menu": false
+    },
+    {
+      "owner_id": "wt_product_0079",
+      "product_name": "Kühlwasser-Dosierstation",
+      "wordpress_path": "industrie-grossanlagen/kuehl-kreislaufwasser/kuehlwasser-dosierstation",
+      "bereich": "MESSEN",
+      "menu": false
+    }
+  ],
+  "wp_owner_count": 79,
+  "wp_buy_menu_count": 71,
+  "wp_industry_count": 8,
+  "wp_new_pages_released": 0,
+  "wp_url_changes": 0,
+  "notes": "Nur Anzeige vorhandener und veroeffentlichter korrekt owner-identischer WP-Produktseiten. Pool mit null alten WP-Seiten noch nicht als leerer Menuepunkt. W11 ehemaliges Siebener-Layout enthielt stattdessen Industrie; WP/SEO-Eigentuermer und URLs bleiben erhalten."
+}
