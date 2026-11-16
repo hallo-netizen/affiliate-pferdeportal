@@ -393,12 +393,6 @@
           "decision_goal",
           "decision_criteria"
         ]
-      },
-      "production_status": "READY",
-      "intent_key": "select_suitable_solution",
-      "intent_boundary": {
-        "primary_goal": "Auswahlentscheidung für eine passende Lösung",
-        "outside_scope": "nicht systematisch Alternativen gegeneinander vermessen und nicht praktische Durchführung"
       }
     },
     "FAQ": {
@@ -430,12 +424,6 @@
         "required": [
           "primary_question"
         ]
-      },
-      "production_status": "READY",
-      "intent_key": "answer_specific_question",
-      "intent_boundary": {
-        "primary_goal": "Eine klar umrissene Frage direkt beantworten",
-        "outside_scope": "nicht eine umfassende Arbeitsfolge ersetzen"
       }
     },
     "Pflege": {
@@ -480,12 +468,6 @@
           "procedure_steps",
           "risk_controls"
         ]
-      },
-      "production_status": "READY",
-      "intent_key": "maintain_existing_condition",
-      "intent_boundary": {
-        "primary_goal": "Wiederkehrend reinigen, pflegen, warten oder Zustand erhalten",
-        "outside_scope": "nicht einmalig aufbauen, umbauen, reparieren oder abbauen"
       }
     },
     "Vergleich": {
@@ -525,85 +507,6 @@
         "required": [
           "comparison_targets",
           "comparison_criteria"
-        ]
-      },
-      "production_status": "READY",
-      "intent_key": "compare_alternatives",
-      "intent_boundary": {
-        "primary_goal": "Alternativen anhand gemeinsamer Kriterien gegenüberstellen",
-        "outside_scope": "nicht eine einzelne Arbeit schrittweise ausführen"
-      }
-    },
-    "Anleitung": {
-      "production_status": "READY",
-      "intent_key": "perform_concrete_change",
-      "intent_boundary": {
-        "primary_goal": "Eine konkrete einmalige Arbeit schrittweise ausführen: aufbauen, einrichten, montieren, anschließen, reparieren, umbauen, austauschen oder abbauen",
-        "outside_scope": "Nicht bloß regelmäßig pflegen oder warten; nicht Produkte auswählen, Alternativen vergleichen oder nur eine kurze Frage beantworten"
-      },
-      "conclusion_min_ratio": 0.09,
-      "fact_trace_required_blocks": [
-        "intro",
-        "preparation",
-        "steps",
-        "risks",
-        "verification",
-        "conclusion",
-        "table"
-      ],
-      "required_blocks": [
-        "intro",
-        "preparation",
-        "steps",
-        "risks",
-        "verification",
-        "conclusion",
-        "further_information"
-      ],
-      "required_lists": [
-        "steps",
-        "mistakes"
-      ],
-      "table_policy": "REQUIRED_UNLESS_EXCEPTION",
-      "type_meta_schema": {
-        "fields": {
-          "procedure_goal": {
-            "type": "string",
-            "min_length": 8
-          },
-          "preparation_items": {
-            "type": "list",
-            "min_items": 1,
-            "unique_items": true
-          },
-          "procedure_steps": {
-            "type": "list",
-            "min_items": 2,
-            "unique_items": true
-          },
-          "safety_controls": {
-            "type": "list",
-            "min_items": 1,
-            "unique_items": true
-          },
-          "common_errors": {
-            "type": "list",
-            "min_items": 1,
-            "unique_items": true
-          },
-          "result_checks": {
-            "type": "list",
-            "min_items": 1,
-            "unique_items": true
-          }
-        },
-        "required": [
-          "procedure_goal",
-          "preparation_items",
-          "procedure_steps",
-          "safety_controls",
-          "common_errors",
-          "result_checks"
         ]
       }
     }
