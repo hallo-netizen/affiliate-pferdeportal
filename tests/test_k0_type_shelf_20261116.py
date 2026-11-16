@@ -6,6 +6,7 @@ import copy
 import hashlib
 import json
 import tempfile
+import zipfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -183,6 +184,25 @@ class TypeShelfVirginTests(unittest.TestCase):
         for row in rows:
             self.assertEqual(row["rule_values_sha256"],core.values_hash("Anleitung"))
         self.assertEqual(core.values_hash("Pflege"),core.values_hash())
+
+    def test_17_existing_ppm_package_can_resolve_anleitung(self):
+        # Read the actual original PPM archive, not a mocked article-type set.
+        package=core.ROOT/"k0_canonical_assets"/"PPM_6.7.9.zip"
+        self.assertTrue(package.is_file(),"PPM_6_7_9_ARCHIVE_MISSING")
+        with zipfile.ZipFile(package) as z:
+            root="portal-production-machine/contracts/"
+            templates=json.loads(z.read(root+"article-type-templates.json").decode("utf-8"))
+            manifest=json.loads(z.read(root+"article-type-extension-manifest-v1.json").decode("utf-8"))
+        standard=templates.get("types") if isinstance(templates,dict) else {}
+        extensions=manifest.get("extensions") if isinstance(manifest,dict) else {}
+        aliases=[]
+        for entry in extensions.values():
+            if isinstance(entry,dict):
+                aliases.extend(entry.get("aliases") or [])
+        self.assertTrue(
+            "Anleitung" in standard or "Anleitung" in aliases,
+            "K0_PPM_TYPE_UNDEFINED:Anleitung; existing="+repr(sorted(standard))+
+            "; extensions="+repr(sorted(set(aliases))))
 
     def test_16_no_old_run_files_are_used_by_any_acceptance_test(self):
         self.assertTrue((core.TYPE_SHELF/"Anleitung.json").is_file())
