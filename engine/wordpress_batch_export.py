@@ -109,16 +109,20 @@ def combine(intake: dict, singles: list[dict]) -> dict:
 def main():
     if len(sys.argv)<4:
         raise SystemExit("usage: wordpress_batch_export.py INTAKE OUT SINGLE1 [SINGLE2 ...]")
+    # The output owner repairs a wrong name/extension itself. No extra gate,
+    # retry station, or downstream file-format decision is introduced.
+    requested_output=Path(sys.argv[2])
+    output_path=requested_output.with_name("WORDPRESS_BATCH.json")
     try:
-        if Path(sys.argv[2]).name!="WORDPRESS_BATCH.json":
-            raise BatchBlocked("BATCH_OUTPUT_FILENAME_INVALID")
         intake=_load(sys.argv[1]); singles=[_load(p) for p in sys.argv[3:]]
         out=combine(intake,singles)
     except (BatchBlocked,DesignBlocked) as exc:
         print(json.dumps({"contract":"K0_WORDPRESS_BATCH_EXPORT_V3","status":"BLOCKED","reason":str(exc),"publish_allowed":False},ensure_ascii=False))
         raise SystemExit(2)
-    Path(sys.argv[2]).write_text(json.dumps(out,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-    print(json.dumps({"contract":"K0_WORDPRESS_BATCH_EXPORT_V3","status":"PASS","article_count":out["article_count"],"batch_sha256":out["batch_sha256"],"publish_allowed":False},ensure_ascii=False))
+    # Always regenerate the sole canonical JSON file from the already accepted
+    # inputs. This also repairs an existing wrong-format file in place.
+    output_path.write_text(json.dumps(out,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    print(json.dumps({"contract":"K0_WORDPRESS_BATCH_EXPORT_V3","status":"PASS","article_count":out["article_count"],"batch_sha256":out["batch_sha256"],"output_file":str(output_path),"output_format":"JSON","output_name_repaired":requested_output!=output_path,"publish_allowed":False},ensure_ascii=False))
 
 if __name__=="__main__":
     main()
