@@ -1,0 +1,181 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welches Pferd gilt als das teuerste Deutschlands?",
+    "target_keyword": "teuerstes pferd deutschland",
+    "category": "pferdewissen-grundlagen",
+    "article_type": "FAQ",
+    "plan_slot": "7ef097950eaf095bbe7452cc974db5be28fd573e6c0d876534a2dffc6d262cfb"
+  },
+  "content_profile": {
+    "search_intent": "Pferdemarkt – Spitzenpreise"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "SRF: Millionenpferd Totilas",
+          "source_url": "https://www.srf.ch/sport/mehr-sport/reiten/reiten-millionenpferd-totilas-muss-in-pension"
+        },
+        {
+          "source_title": "taz: Totilas und Olympia",
+          "source_url": "https://taz.de/Totilas-und-die-Olympischen-Spiele/!5088650/"
+        },
+        {
+          "source_title": "Die Presse: Totilas",
+          "source_url": "https://www.diepresse.com/5890576/als-der-pferdesport-einen-popstar-hatte"
+        },
+        {
+          "source_title": "Der Tagesspiegel: Palloubet",
+          "source_url": "https://www.tagesspiegel.de/sport/teuerstes-pferd-der-welt-6643132.html"
+        }
+      ],
+      "claims": [
+        "Totilas gewann mit Edward Gal drei Goldmedaillen bei der Dressur-WM 2010.",
+        "Der 2010 gemeldete Kaufpreis von Totilas lag laut Medien bei etwa zehn Millionen Euro.",
+        "Der berichtete Preis von Totilas wurde vom Käufer nicht offiziell bestätigt.",
+        "2013 wurde Totilas' Rekord für Pferde in olympischen Disziplinen von Palloubet d'Halong übertroffen."
+      ],
+      "fresh_research_reference_date": "2026-11-16"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "teuerstes pferd deutschland",
+      "topic": "Welches Pferd gilt als das teuerste Deutschlands?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdewissen-grundlagen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welches Pferd gilt als das teuerste Deutschlands?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "SRF: Millionenpferd Totilas",
+        "source_url": "https://www.srf.ch/sport/mehr-sport/reiten/reiten-millionenpferd-totilas-muss-in-pension",
+        "evidence_text_sha256": "547899dd5c6e55c94444d8f9486a4d372acc343f471649a4fa8a251ac3b0d820",
+        "statement": "Totilas gewann mit Edward Gal drei Goldmedaillen bei der Dressur-WM 2010.",
+        "evidence_text": "Der niederländische Reiter Edward Gal hatte 2010 mit Totilas dreimal Gold bei der Dressur-WM gewonnen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "taz: Totilas und Olympia",
+        "source_url": "https://taz.de/Totilas-und-die-Olympischen-Spiele/!5088650/",
+        "evidence_text_sha256": "78cd5faaf34926665e538701120cccf5405d539c06eb827d9d8b135df907c604",
+        "statement": "Der 2010 gemeldete Kaufpreis von Totilas lag laut Medien bei etwa zehn Millionen Euro.",
+        "evidence_text": "Zehn Millionen Euro soll er den holländischen Besitzern 2010 bezahlt haben.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Die Presse: Totilas",
+        "source_url": "https://www.diepresse.com/5890576/als-der-pferdesport-einen-popstar-hatte",
+        "evidence_text_sha256": "0e1760735c14c79477ac1668295771bba24b4b3eee0819c0220a25f5673a4883",
+        "statement": "Der berichtete Preis von Totilas wurde vom Käufer nicht offiziell bestätigt.",
+        "evidence_text": "Den rekordträchtigen Preis – kolportierte zehn Millionen Euro – hat Schockemöhle nie offiziell gemacht",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Der Tagesspiegel: Palloubet",
+        "source_url": "https://www.tagesspiegel.de/sport/teuerstes-pferd-der-welt-6643132.html",
+        "evidence_text_sha256": "320f9886716594177e9ca426a9f05ac2e3d8a59b349cb67dc475065464bf6893",
+        "statement": "2013 wurde Totilas' Rekord für Pferde in olympischen Disziplinen von Palloubet d'Halong übertroffen.",
+        "evidence_text": "Den Rekord hält jetzt das Springpferd Palloubet d'Halong.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdewissen-grundlagen/",
+        "anchor": "Grundlagen und Begriffe rund um Pferde verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/journal/",
+        "anchor": "Hintergründe zu Pferdesport und Pferdewissen im Journal",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/",
+        "anchor": "Wissen und Ratgeber für Pferdehalter",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdewissen-grundlagen/",
+        "active": true
+      },
+      {
+        "href": "/journal/",
+        "active": true
+      },
+      {
+        "href": "/wissen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdewissen-grundlagen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Totilas",
+      "teuerstes Pferd",
+      "Deutschland",
+      "Kaufpreis",
+      "Dressur",
+      "Rekord"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "NUANCE_LOSS",
+      "rationale": "Bei privaten Pferdeverkäufen würde eine Vergleichstabelle die Ungewissheit der Preise und die unterschiedlichen Rekordarten zu stark vereinfachen."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
