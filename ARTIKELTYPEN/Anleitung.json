@@ -1,0 +1,78 @@
+{
+  "contract": "K0_ARTICLE_TYPE_RULE_PACKAGE_V1",
+  "article_type": "Anleitung",
+  "status": "READY",
+  "inherit_global_rules": true,
+  "intent_boundary": {
+    "primary_goal_code": "DO_CONCRETE_WORK",
+    "primary_goal": "Der Leser möchte eine konkrete Tätigkeit selbst schrittweise ausführen: aufbauen, montieren, einrichten, anschließen, reparieren, umbauen, austauschen oder abbauen.",
+    "outside_scope": "Pflege erhält einen vorhandenen Zustand wiederkehrend; Beratung wählt eine Lösung aus; Vergleich wägt Alternativen gegeneinander ab; FAQ beantwortet eine einzelne Frage. Bei mehrdeutiger Absicht entscheidet MINI vor K0 einmalig oder stellt zurück."
+  },
+  "rules": {
+    "conclusion_min_ratio": 0.09,
+    "fact_trace_required_blocks": [
+      "intro",
+      "preparation",
+      "steps",
+      "risks",
+      "verification",
+      "conclusion",
+      "table"
+    ],
+    "required_blocks": [
+      "intro",
+      "preparation",
+      "steps",
+      "risks",
+      "verification",
+      "conclusion",
+      "further_information"
+    ],
+    "required_lists": [
+      "steps",
+      "mistakes"
+    ],
+    "type_meta_schema": {
+      "fields": {
+        "procedure_goal": {
+          "type": "string",
+          "min_length": 8
+        },
+        "preparation_items": {
+          "type": "list",
+          "min_items": 1,
+          "unique_items": true
+        },
+        "procedure_steps": {
+          "type": "list",
+          "min_items": 2,
+          "unique_items": true
+        },
+        "safety_controls": {
+          "type": "list",
+          "min_items": 1,
+          "unique_items": true
+        },
+        "common_errors": {
+          "type": "list",
+          "min_items": 1,
+          "unique_items": true
+        },
+        "result_checks": {
+          "type": "list",
+          "min_items": 1,
+          "unique_items": true
+        }
+      },
+      "required": [
+        "procedure_goal",
+        "preparation_items",
+        "procedure_steps",
+        "safety_controls",
+        "common_errors",
+        "result_checks"
+      ]
+    },
+    "table_policy": "REQUIRED_UNLESS_EXCEPTION"
+  }
+}
