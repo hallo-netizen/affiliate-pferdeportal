@@ -1,0 +1,57 @@
+--- qa81/includes/trait-ppar-ebay-run.php
++++ qa82/includes/trait-ppar-ebay-run.php
+@@ -1250,7 +1250,9 @@
+         $now = time();
+         $sync = is_array($settings['last_sync'] ?? null) ? $settings['last_sync'] : array();
+         $refresh = is_array($settings['last_refresh'] ?? null) ? $settings['last_refresh'] : array();
+-        $last_sync = absint($sync['finished_at'] ?? 0);
++        // One cadence clock for both successful full syncs and deferred
++        // terminal attempts. The public shelf's proven date stays separate.
++        $last_sync = max(absint($sync['finished_at'] ?? 0), absint($sync['last_attempt_finished_at'] ?? 0));
+         $last_refresh = absint($refresh['finished_at'] ?? 0);
+         $saved = $this->ebay_run_load();
+         if (is_array($saved) && (string)($saved['schema']??'')==='1.0'
+@@ -1833,22 +1835,31 @@
+         // Reuse the existing settings record; never create another scheduler.
+         $operation = sanitize_key((string)($saved['operation'] ?? ''));
+         if (in_array($operation, array('sync','refresh'), true)) {
++            // One already-decided post-commit proof controls the public family
++            // record. A deferred sync is a finished ATTEMPT, not a new proven
++            // publication. Keep the attempt clock in this existing record so
++            // a later refresh run cannot trigger another immediate full search.
++            $verified_manifest = is_array($saved['checkpoint_verified_manifest'] ?? null)
++                ? $saved['checkpoint_verified_manifest'] : array();
++            $published_sync = $operation === 'sync'
++                && empty($saved['checkpoint_deferred'])
++                && $this->ebay_public_checkpoint_is_safe($checkpoint)
++                && sanitize_text_field((string)($verified_manifest['run_uuid'] ?? '')) === sanitize_text_field((string)($saved['run_uuid'] ?? ''))
++                && sanitize_text_field((string)($verified_manifest['checkpoint_id'] ?? '')) === sanitize_text_field((string)($checkpoint['checkpoint_id'] ?? ''))
++                && absint($business['required'] ?? 0) > 0
++                && isset($business['missing']) && is_array($business['missing'])
++                && isset($business['counts']) && is_array($business['counts']);
+             $settings = get_option(self::OPTION_NETWORK_EBAY, array());
+             $settings = is_array($settings) ? $settings : array();
+             $key = $operation === 'sync' ? 'last_sync' : 'last_refresh';
+             $previous = is_array($settings[$key] ?? null) ? $settings[$key] : array();
+-            $previous['finished_at'] = absint($saved['finished_at']);
+-            // One completed public shelf report, kept alongside the existing
+-            // last_sync timestamp so the NEXT run cannot erase the last real
+-            // family outcome. This is a VIEW of the already-decided public gate:
+-            // no new classification, no DB query and no provider request.
+-            // A deferred/failed public commit MUST NOT replace the last proof.
+-            if ($operation === 'sync'
+-                && empty($saved['checkpoint_deferred'])
+-                && $this->ebay_public_checkpoint_is_safe($checkpoint)
+-                && absint($business['required'] ?? 0) > 0
+-                && isset($business['missing']) && is_array($business['missing'])
+-                && isset($business['counts']) && is_array($business['counts'])) {
++            if ($operation === 'sync') {
++                $previous['last_attempt_finished_at'] = absint($saved['finished_at']);
++            }
++            if ($operation === 'refresh' || $published_sync) {
++                $previous['finished_at'] = absint($saved['finished_at']);
++            }
++            if ($published_sync) {
+                 $previous['last_public_family_result'] = array(
+                     'run_uuid'=>sanitize_text_field((string)($saved['run_uuid'] ?? '')),
+                     'finished_at'=>absint($saved['finished_at']),
