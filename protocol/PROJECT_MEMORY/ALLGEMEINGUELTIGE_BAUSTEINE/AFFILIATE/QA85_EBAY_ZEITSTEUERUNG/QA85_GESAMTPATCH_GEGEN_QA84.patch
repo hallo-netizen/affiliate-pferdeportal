@@ -1,0 +1,126 @@
+--- a/affiliate-portal-router/includes/trait-ppar-ebay-run.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+@@ -1361,19 +1361,10 @@
+             return new WP_Error('ebay_run_state_inconsistent',
+                 'Gespeicherter eBay-Laufzustand widersprüchlich. Kein Neustart und kein Überschreiben bestehender Produkte.');
+         }
+-        if ($saved_state==='operator_paused') {
+-            $out=array_merge(array('status'=>'idle','reason'=>'operator_paused',
+-                'transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2',
+-                'reason_code'=>'manual_stop'),$this->ebay_external_tick_run_context($run));
+-            return function_exists('rest_ensure_response') ? rest_ensure_response($out) : $out;
+-        }
+-        if ($saved_state==='failed') {
+-            $out=array_merge(array('status'=>'failed','restart_required'=>1,
+-                'transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2',
+-                'error_code'=>sanitize_key((string)($run['error_code']??''))),
+-                $this->ebay_external_tick_run_context($run));
+-            return function_exists('rest_ensure_response') ? rest_ensure_response($out) : $out;
+-        }
++        // QA16 / QA69: stop or failure of RESEARCH never stops the independently
++        // persisted public source-freshness lane. Both use this ONE existing
++        // heartbeat; no extra scheduler or product-choice operation is created.
++        // The saved research state remains untouched.
+         // Existing public availability worker shares the one GitHub clock.
+         // No extra cron, scheduler or product-rank decision is introduced.
+         $availability_state=get_option('ppar_ebay_public_availability_state_v1',array());
+@@ -1399,6 +1390,36 @@
+             $availability_state['canonical_next']=0;
+             update_option('ppar_ebay_public_availability_state_v1',$availability_state,false);
+         }
++        // GitHub must not interpret a finished / paused / failed research run as
++        // the end of a separate still-running availability pass. Continue the
++        // SAME persisted availability cursor at its due time. This also covers
++        // the 90-second gap between batches; no second clock is introduced.
++        $availability_state=get_option('ppar_ebay_public_availability_state_v1',array());
++        $availability_state=is_array($availability_state)?$availability_state:array();
++        $availability_pending=!empty($settings['inventory_refresh_enabled'])
++            && !empty($settings['business_enabled'])
++            && !empty($availability_state['running']);
++        if ($saved_state!=='active' && $availability_pending) {
++            $out=array_merge(array('status'=>'advanced','reason'=>'availability_tick',
++                'transport'=>'external_tick','server_time'=>time(),
++                'contract'=>'external_tick_v2','availability_running'=>1,
++                'availability_next_due_at'=>absint($availability_state['next_due_at']??0)),
++                $this->ebay_external_tick_run_context($run));
++            return function_exists('rest_ensure_response')?rest_ensure_response($out):$out;
++        }
++        if ($saved_state==='operator_paused') {
++            $out=array_merge(array('status'=>'idle','reason'=>'operator_paused',
++                'transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2',
++                'reason_code'=>'manual_stop'),$this->ebay_external_tick_run_context($run));
++            return function_exists('rest_ensure_response') ? rest_ensure_response($out) : $out;
++        }
++        if ($saved_state==='failed') {
++            $out=array_merge(array('status'=>'failed','restart_required'=>1,
++                'transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2',
++                'error_code'=>sanitize_key((string)($run['error_code']??''))),
++                $this->ebay_external_tick_run_context($run));
++            return function_exists('rest_ensure_response') ? rest_ensure_response($out) : $out;
++        }
+         if ($saved_state!=='active') {
+             $operation=$this->ebay_external_tick_due_operation($settings);
+             if ($operation==='') {
+@@ -1438,7 +1459,14 @@
+                 $tick_result='busy';
+             }
+         } elseif ($after_state==='completed') {
+-            $tick_result='completed';
++            // Existing availability work is independent of research completion.
++            // Do not send a terminal response while its saved cursor is open;
++            // the same GitHub heartbeat continues it at the stored due time.
++            $availability_after=get_option('ppar_ebay_public_availability_state_v1',array());
++            $availability_after=is_array($availability_after)?$availability_after:array();
++            $tick_result=!empty($settings['business_enabled'])
++                && !empty($settings['inventory_refresh_enabled'])
++                && !empty($availability_after['running']) ? 'advanced' : 'completed';
+         } else {
+             $tick_result='failed';
+         }
+--- a/affiliate-portal-router/includes/trait-ppar-ebay.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay.php
+@@ -9423,6 +9423,31 @@
+             $cursor=absint($state['cursor']??0);
+             $table=$this->ebay_items_table();$output=$this->output_objects_table();
+             $due=$now+2*HOUR_IN_SECONDS;
++            // QA69: only the existing, already approved public BUSINESS shelf
++            // needs availability refresh. Historical output records that are
++            // no longer in the single SAFE checkpoint must not consume getItem
++            // time. This merely reuses the saved publication decision.
++            $checkpoint=$this->ebay_public_checkpoint_load();
++            $safe_ids=$this->ebay_public_checkpoint_business_ids($checkpoint);
++            $safe_checkpoint_id=sanitize_text_field((string)($checkpoint['checkpoint_id']??''));
++            // The old availability cursor covered a much broader source set.
++            // Begin one safe-shelf pass at its first source when the verified
++            // checkpoint changes. This never resets the RESEARCH run/cursor.
++            if (sanitize_text_field((string)($state['safe_checkpoint_id']??''))!==$safe_checkpoint_id) {
++                $cursor=0;
++                $state['cursor']=0;
++                $state['safe_checkpoint_id']=$safe_checkpoint_id;
++            }
++            if (!$safe_ids) {
++                $state['running']=0;$state['cursor']=0;
++                $state['completed_at']=$now;
++                $state['next_due_at']=$now+2*HOUR_IN_SECONDS;
++                if (!$this->ebay_public_availability_state_save($key,$state)) {
++                    return array('status'=>'storage_error');
++                }
++                return array('status'=>'complete','checked'=>0);
++            }
++            $safe_in=implode(',',array_fill(0,count($safe_ids),'%d'));
+             // Work only on real previously published BUSINESS campaigns. A paused
+             // or failed discovery run never hides or blocks this independent pass.
+             $wpdb->last_error='';
+@@ -9434,9 +9459,10 @@
+                  AND (e.source_checked_at=0 OR e.source_checked_at<=%d)
+                  AND EXISTS (SELECT 1 FROM {$output} o WHERE o.provider='ebay'
+                    AND o.output_type='product_campaign' AND o.status='published'
+-                   AND o.campaign_post_id>0 AND o.creative_identity_hash=e.creative_identity_hash)
++                   AND o.campaign_post_id IN ({$safe_in})
++                   AND o.creative_identity_hash=e.creative_identity_hash)
+                  ORDER BY e.id ASC LIMIT 20",
+-                $cursor,$now,$due,$now-15*MINUTE_IN_SECONDS);
++                array_merge(array($cursor,$now,$due,$now-15*MINUTE_IN_SECONDS),$safe_ids));
+             $rows=(array)$wpdb->get_results($sql,ARRAY_A);
+             if(trim((string)($wpdb->last_error??''))!=='') { return array('status'=>'storage_error'); }
+             $limit=20;
