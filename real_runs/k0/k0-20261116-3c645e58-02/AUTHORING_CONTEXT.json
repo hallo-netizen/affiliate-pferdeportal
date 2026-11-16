@@ -1,0 +1,206 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wasserführanlagen für Pferde und ihre Einsatzmöglichkeiten",
+    "target_keyword": "wasserführanlage pferd",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "Beratung",
+    "plan_slot": "517b5cf27b2521ac13004a52b690224c2d0dce36b2a2f859e0325b5a9cd46cd7"
+  },
+  "content_profile": {
+    "search_intent": "Gesundheit und Training – Wasserführanlage"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Pferdeklinik Burg Müggenhausen: Aquatrainer",
+          "source_url": "https://www.pferde-klinik.de/infothek/infos-rund-um-das-pferd/rehabilitation-aquatrainer.html"
+        },
+        {
+          "source_title": "Pferdeklinik Burg Müggenhausen: Aquatrainer",
+          "source_url": "https://www.pferde-klinik.de/infothek/infos-rund-um-das-pferd/rehabilitation-aquatrainer.html"
+        },
+        {
+          "source_title": "Konsenspapier Wasserlaufband – Animals",
+          "source_url": "https://pubmed.ncbi.nlm.nih.gov/33530300/"
+        },
+        {
+          "source_title": "Studie Rückenschmerz – BMC Veterinary Research",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12305931/"
+        },
+        {
+          "source_title": "Pferdeklinik Burg Müggenhausen: Dosierung",
+          "source_url": "https://www.pferde-klinik.de/infothek/infos-rund-um-das-pferd/rehabilitation-aquatrainer.html"
+        }
+      ],
+      "claims": [
+        "Ein Aquatrainer ist ein Unterwasser-Laufband, das bei Pferden im Training und in der Rehabilitation eingesetzt wird.",
+        "Wasserauftrieb kann die Last auf Gelenke, Bänder und Sehnen während der Bewegung verringern.",
+        "Fachleute haben allgemeine Empfehlungen zur Verwendung von Wasserlaufbändern bei gesunden Pferden veröffentlicht.",
+        "Eine kleine Studie zeigte bei Rückenschmerzen nicht in allen Messgrößen Vorteile des Wasserlaufbands gegenüber Longieren oder trockenem Laufband.",
+        "Wassertiefe, Geschwindigkeit und Dauer sollten dem Zustand des Pferdes angepasst werden."
+      ],
+      "fresh_research_reference_date": "2026-11-16"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "wasserführanlage pferd",
+      "topic": "Wasserführanlagen für Pferde und ihre Einsatzmöglichkeiten",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Den geeigneten Einsatz einer Wasserführanlage für Training oder Rehabilitation nach Befund, Belastung und fachlicher Begleitung beurteilen.",
+      "decision_criteria": [
+        "Zweck und Gesundheitszustand des Pferdes",
+        "Wasserstand und Laufbandtempo",
+        "Aufsicht und Gewöhnung",
+        "Tierärztliche Begleitung bei Rehabilitation",
+        "Erwartbare Grenzen des Nutzens"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Pferdeklinik Burg Müggenhausen: Aquatrainer",
+        "source_url": "https://www.pferde-klinik.de/infothek/infos-rund-um-das-pferd/rehabilitation-aquatrainer.html",
+        "evidence_text_sha256": "d1b2094e8a01854ca319eb19bbd730413da0bdd43450bd6c830f7563787568b4",
+        "statement": "Ein Aquatrainer ist ein Unterwasser-Laufband, das bei Pferden im Training und in der Rehabilitation eingesetzt wird.",
+        "evidence_text": "Bei einem Aquatrainer handelt es sich um ein Unterwasser-Laufband, das sowohl zu Rehabilitationszwecken als auch Trainingsmöglichkeit für ihr Pferd eingesetzt werden kann.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "Pferdeklinik Burg Müggenhausen: Aquatrainer",
+        "source_url": "https://www.pferde-klinik.de/infothek/infos-rund-um-das-pferd/rehabilitation-aquatrainer.html",
+        "evidence_text_sha256": "ffceeebfc1988010b9436ea2d3f65bc42249d944b4eba924ea90a746a005d827",
+        "statement": "Wasserauftrieb kann die Last auf Gelenke, Bänder und Sehnen während der Bewegung verringern.",
+        "evidence_text": "Zum einen werden durch den Wasserauftrieb die Gelenke, Bänder und Sehnen weniger belastet.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "Konsenspapier Wasserlaufband – Animals",
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/33530300/",
+        "evidence_text_sha256": "6aac313d829d242e284db1a1a4b9e2419f7813ae7157b2a89fc7cfdb2578790b",
+        "statement": "Fachleute haben allgemeine Empfehlungen zur Verwendung von Wasserlaufbändern bei gesunden Pferden veröffentlicht.",
+        "evidence_text": "The guidelines describe the consensus reached to date on (1) the potential benefits of water treadmill exercise",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_title": "Studie Rückenschmerz – BMC Veterinary Research",
+        "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12305931/",
+        "evidence_text_sha256": "50b2de68c3bddd6047561aaa42045abd23f1c30796320531f87ff505b58c231a",
+        "statement": "Eine kleine Studie zeigte bei Rückenschmerzen nicht in allen Messgrößen Vorteile des Wasserlaufbands gegenüber Longieren oder trockenem Laufband.",
+        "evidence_text": "No differences in mechanical nociceptive thresholds were detected between water treadmill training, lunging and dry treadmill training at any time-point",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_title": "Pferdeklinik Burg Müggenhausen: Dosierung",
+        "source_url": "https://www.pferde-klinik.de/infothek/infos-rund-um-das-pferd/rehabilitation-aquatrainer.html",
+        "evidence_text_sha256": "f1f7028732b43fdcf6280c696f6db95a472a79e2bd171f9066822f8719e1366a",
+        "statement": "Wassertiefe, Geschwindigkeit und Dauer sollten dem Zustand des Pferdes angepasst werden.",
+        "evidence_text": "Dabei werden die Trainingseinheiten, die Trainingsdauer pro Einheit, die Wasserstandshöhe im Aquatrainer sowie das Tempo des Laufbandes auf das Krankheitsbild Ihres Pferdes angepasst.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "Grundlagen zur Gesundheit von Pferden verstehen",
+        "block": "criteria"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/gesundheit/gesundheit-regeneration/",
+        "anchor": "Weitere Hilfen zur Regeneration des Pferdes",
+        "block": "decision"
+      },
+      {
+        "role": "further_information",
+        "href": "/journal/",
+        "anchor": "Fachthemen zur Pferdegesundheit im Journal",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/gesundheit/gesundheit-regeneration/",
+        "active": true
+      },
+      {
+        "href": "/journal/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Wasserführanlage",
+      "Aquatrainer",
+      "Wasserlaufband",
+      "Training",
+      "Rehabilitation",
+      "Belastung",
+      "Wassertiefe"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "NUANCE_LOSS",
+      "rationale": "Ein stark verkürzter Tabellenvergleich könnte die unterschiedlichen Krankheitsbilder und die notwendige individuelle Einstellung medizinisch irreführend darstellen."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
