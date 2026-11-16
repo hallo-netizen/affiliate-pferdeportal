@@ -1,0 +1,103 @@
+{
+  "binding_contract": "QA69",
+  "date": "2026-11-16",
+  "plugin": "6.72.356",
+  "sha256": "07514e89a721de5a96bd070d83917495352df3b358a86ca62838694052dacdac",
+  "baseline": "6.72.355 QA89, 66 files",
+  "file_count": 66,
+  "changed_files": [
+    "includes/trait-ppar-ebay-run.php",
+    "includes/trait-ppar-ebay.php",
+    "pferdeportal-affiliate-router.php",
+    "readme.txt"
+  ],
+  "php_lint": "23/23 pass",
+  "javascript_syntax": "node --check pass",
+  "archive_crc": "pass",
+  "old_contract_keepalive": "14/19 pass",
+  "new_contract_keepalive": "19/19 pass",
+  "previous_status_tests": "15/15 pass",
+  "full_controller_scenarios": [
+    {
+      "case": "normal",
+      "actual": "completed",
+      "expected": "completed",
+      "one_discovery": true
+    },
+    {
+      "case": "old_blocked",
+      "actual": "completed",
+      "expected": "completed",
+      "one_discovery": true
+    },
+    {
+      "case": "new_blocked",
+      "actual": "completed",
+      "expected": "completed",
+      "one_discovery": true
+    },
+    {
+      "case": "db_down",
+      "actual": "failed",
+      "expected": "failed",
+      "one_discovery": true
+    },
+    {
+      "case": "churn",
+      "actual": "completed",
+      "expected": "completed",
+      "one_discovery": true
+    },
+    {
+      "case": "no_new",
+      "actual": "completed",
+      "expected": "completed",
+      "one_discovery": true
+    },
+    {
+      "case": "save_fail",
+      "actual": "failed",
+      "expected": "failed",
+      "one_discovery": true
+    },
+    {
+      "case": "post_commit_state_save_fail",
+      "actual": "failed",
+      "expected": "failed",
+      "one_discovery": true
+    },
+    {
+      "case": "collision_retry_state_save_fail",
+      "actual": "failed",
+      "expected": "failed",
+      "one_discovery": true
+    }
+  ],
+  "model_safe_campaigns": {
+    "309_published_campaigns_checked": 309,
+    "model_batches": 16,
+    "other_campaigns_checked": 0,
+    "new_searches": 0,
+    "same_public_checkpoint": true,
+    "same_research_run": true
+  },
+  "empty_shelf_behavior": "0 provider calls, terminal run not kept alive",
+  "historical_95_item_ids": {
+    "ids": 95,
+    "status": "MOCK_PASS_ONLY_NOT_LIVE",
+    "live_replies": false
+  },
+  "one_scheduler": "existing main GitHub workflow, no change",
+  "continuous_keepalive": "yes, only when SAFE BUSINESS campaigns and availability enabled; makes existing self-chain work despite missed 15-minute schedule starts",
+  "true_simultaneous_remote_jobs": "no, one admitted request/one bounded provider-or-canonical package, logically independent queues",
+  "no_new_worker": true,
+  "no_new_wp_cron": true,
+  "no_new_db": true,
+  "no_data_migration": true,
+  "no_autosearch_reset": true,
+  "real_wp_eBay_live_test": "NOT RUN",
+  "frontend_public_product_visibility": "NOT VERIFIED",
+  "real_sync_eBay_LATENCY": "NOT MEASURED",
+  "QA69_live_acceptance": "OPEN",
+  "action_required": "One in-place WordPress upgrade and observe existing dashboard/public products; no GitHub/hoster changes"
+}
