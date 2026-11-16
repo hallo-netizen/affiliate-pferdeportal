@@ -29,3 +29,19 @@ Der tatsächlich vorhandene GitHub-91Heartbeat92 auf `main` beendete bei `idle
 Ablage im Pferdeatelier-Pluginbüro. **Vor Live-Einsatz WordPress-Datenbank sichern.** Plugin-Aktualisierung selbst startet **keine** neue Suche, löscht/ändert **keine** gespeicherte SAFE-Freigabe oder Produktliste, legt **keine** zusätzlichen Zeitgeber an. Bereits laufende Arbeit wird nicht brutal abgebrochen. Keinerlei GitHub-/Hosting-Handaktion erforderlich.
 
 **QA69-LIVE noch offen:** Nach tatsächlicher Installation ist anhand der vorhandenen Leseseite und der öffentlichen eBay-Karten zu bestätigen, dass die Ausgabegates echte frische Produkte freigeben, die laufende Nachprüfung innerhalb der Frist bleibt, und der 283er-Familienabschluss mit gespeicherter Publikationsliste vorliegt. Weder Simulation noch 91busy92 sind dafür ausreichender Beleg.
+
+## Live-Zwischenstand vom 16.11.2026, Screenshot 16:07 MEZ (gesichert)
+
+**Nutzer bestätigt ausdrücklich:** Ein Produkt ist auf der echten Pferdeatelier-Website **im Frontend sichtbar**. Dies ist der erste ausdrücklich bestätigte öffentliche Sichtbarkeitsnachweis des aktuellen Durchgangs, **nicht** der Nachweis für sämtliche Produktfamilien oder dauerhafte Frische.
+
+WordPress-eBay-Screenshot zeigt:
+- **Status „Fertig“, Phase `completed`**, neuer Lauf beendet und **als sicherer Frontend-Checkpoint übernommen**.
+- **309 gespeicherte BUSINESS-Freigaben** weiterhin erhalten.
+- **110** Arbeitsaufrufe; letzter echter Fortschritt laut Backend **16.11.2026 13:41:32**.
+- Unabhängige Anbieterprüfung derzeit **„wartet“**, letzte Prüfung **16.11.2026 13:36**, nächste Prüfung **16.11.2026 15:36**, kumulativ **562** überprüft, **35** bisherige Prüfprobleme. Diese Zähler sind keine Anzahl öffentlicher Karten.
+- Die Protokollwarnung steht jetzt als **historische** Lücke vom 12.11.2026 14:26, nicht als Behauptung eines aktuellen Fehlers.
+- **Weiterhin offen:** Im Screenshot steht, dass der **letzte bestätigte öffentliche 283er-Familienabschluss noch nicht gespeichert** ist. Der sichere technische Checkpoint ist nicht dasselbe wie die vollständig nachgewiesene 283er-Bilanz.
+
+**Das tatsächlich im privaten Plugin-Büro archivierte Vollplugin 6.72.356 wurde unverändert wieder geöffnet und geprüft:** Original-Header 6.72.356; Archiv-CRC gültig; SHA256 `07514e89a721de5a96bd070d83917495352df3b358a86ca62838694052dacdac` stimmt mit dem ursprünglichen QA90-Bericht überein. Verifiziert abgelegt unter `/pferdeatelier/PLUGINS/QA/QA90_EIN_TAKT_ZWEI_UNABHAENGIGE_LAEUFE/QA90_PFERDEATELIER_AFFILIATE_ZENTRALE_6.72.356_EIN_TAKT_ZWEI_UNABHAENGIGE_LAEUFE_STAGING.zip`. Original-Screenshot und ausführlicher Zwischenstandsbericht sind **nur in der privaten Projektbibliothek** in demselben Verzeichnis archiviert.
+
+**Kein neuer Plugin-Build, keine Liveänderung, keine neue Suche, keine zusätzliche Arbeit auf Verdacht.** Stand: öffentlicher Produkttreffer vom Nutzer bestätigt; Auftrag QA69 weiterhin nicht vollständig abgenommen (283er-Status und durchgängig pünktliche Frische noch offen).
