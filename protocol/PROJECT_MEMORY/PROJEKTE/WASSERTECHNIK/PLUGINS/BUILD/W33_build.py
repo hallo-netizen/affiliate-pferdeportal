@@ -183,6 +183,12 @@ def main() -> None:
         r=subprocess.run(["php",str(w35qa),str(pkg),case],capture_output=True,text=True,timeout=30)
         print("[W35 "+case+"]\n"+r.stdout,end="")
         require(r.returncode==0,"W35 "+case+" ERROR: "+r.stderr+"\n"+r.stdout)
+    # W36: one consolidated read-only contract/SEO/WP-source consistency audit.
+    audit = PROJECT/"PRUEFUNG"/"W36_GESAMTABGLEICH_OFFLINE.py"
+    require(audit.is_file(), "W36 combined read-only consistency audit missing")
+    result = subprocess.run([sys.executable,str(audit)], capture_output=True,text=True,timeout=30)
+    print(result.stdout,end="")
+    require(result.returncode==0,"W36 audit failed: "+result.stderr+" "+result.stdout)
     members=sorted(p for p in pkg.rglob("*") if p.is_file())
     with zipfile.ZipFile(OUT,"w",compression=zipfile.ZIP_DEFLATED,compresslevel=9) as zipped:
         for f in members:
