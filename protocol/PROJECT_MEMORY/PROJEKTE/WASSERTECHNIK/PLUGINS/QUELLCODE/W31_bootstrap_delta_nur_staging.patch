@@ -1,0 +1,17 @@
+--- a/wassertechnik-kategorie-workflow/wassertechnik-kategorie-workflow.php
++++ b/wassertechnik-kategorie-workflow/wassertechnik-kategorie-workflow.php
+@@ -11,6 +11,8 @@
+ require_once __DIR__ . '/includes/class-wassertechnik-inventory.php';
+ require_once __DIR__ . '/includes/class-wassertechnik-dataforseo.php';
+ require_once __DIR__ . '/includes/class-wassertechnik-paid-research.php';
++require_once __DIR__ . '/includes/class-wassertechnik-seo-handoff.php';
++require_once __DIR__ . '/includes/class-wassertechnik-seo81-preview.php';
+ 
+ final class Wassertechnik_Kategorie_Workflow {
+     public const VERSION = '0.1.4';
+@@ -19,6 +21,7 @@
+         add_action('admin_post_wassertechnik_inventory_export',[self::class,'export_inventory']);
+         Wassertechnik_DataForSEO::boot();
+         Wassertechnik_PaidResearch::boot();
++        Wassertechnik_Seo81_Preview::boot();
+     }
