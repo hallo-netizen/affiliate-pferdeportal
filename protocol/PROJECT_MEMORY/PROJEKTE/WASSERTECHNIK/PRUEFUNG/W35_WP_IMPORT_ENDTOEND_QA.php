@@ -14,7 +14,7 @@ $GLOBALS['pages']=[];$GLOBALS['posts']=[];$GLOBALS['terms']=[];
 $GLOBALS['meta_p']=[];$GLOBALS['meta_c']=[];
 $GLOBALS['actions']=[];$GLOBALS['transients']=[];$GLOBALS['options']=[];
 $GLOBALS['posts_next']=5;$GLOBALS['cats_next']=5;
-$GLOBALS['writes']=0;$GLOBALS['paid_calls']=0;$GLOBALS['fail_at']='';$GLOBALS['status_404']=true;
+$GLOBALS['writes']=0;$GLOBALS['paid_calls']=0;$GLOBALS['fail_at']='';$GLOBALS['update_attempts']=0;$GLOBALS['status_404']=true;
 $GLOBALS['redirect']=null;$GLOBALS['test_case']=$scenario;
 class WP_Error {function get_error_message(){return 'forced WP mock error';}}
 function add_action($x,$fn,$priority=10){$GLOBALS['actions'][$x][]=$fn;}
@@ -70,7 +70,12 @@ function wp_insert_post($p,$wp_error=true){
     $GLOBALS['writes']++;return $id;
 }
 function wp_update_post($p,$wp_error=true){
+    ++$GLOBALS['update_attempts'];
     if($GLOBALS['fail_at']==='update-page')return new WP_Error();
+    if($GLOBALS['fail_at']==='update-page-second' && $GLOBALS['update_attempts']===2){
+        $GLOBALS['fail_at']=''; // one transient failure, rollback calls are allowed
+        return new WP_Error();
+    }
     $id=$p['ID'];if(!isset($GLOBALS['pages'][$id]))return new WP_Error();
     foreach($p as $k=>$v)if($k!=='ID')$GLOBALS['pages'][$id]->$k=$v;
     $GLOBALS['writes']++;return $id;
@@ -169,6 +174,47 @@ if($scenario==='rollback'){
     catch(RuntimeException $e){assertW(str_starts_with($e->getMessage(),'BLOCKED'),'first category failure aborts all');}
     assertW(count($GLOBALS['pages'])===2 && count($GLOBALS['terms'])===1,'entire 114 page insert rolled back');
     assertW(!get_transient('wassertechnik_w35_single_apply_lock'),'import lock cleared after error');
+    exit(0);
+}
+if($scenario==='update-rollback'){
+    seedOld9($plan);
+    $state=verifyTarget($plan,1,23);
+    $beforePages=[];
+    foreach($GLOBALS['pages'] as $id=>$p)$beforePages[$id]=[get_page_uri($p),$p->post_parent,$p->post_title];
+    $beforeTerms=count($GLOBALS['terms']);$beforeIds=array_keys($GLOBALS['pages']);
+    $GLOBALS['fail_at']='update-page-second';
+    try{submitApply($plan,$state);throw new RuntimeException('INVALID unexpected success');}
+    catch(RuntimeException $e){assertW(str_starts_with($e->getMessage(),'BLOCKED'),'second page update failure blocks complete import');}
+    assertW(count($GLOBALS['terms'])===$beforeTerms,'existing 105 category owners unchanged after failed migration');
+    assertW(array_keys($GLOBALS['pages'])===$beforeIds,'only new pool page removed after failed migration');
+    foreach($beforePages as $id=>$old)assertW(
+        get_page_uri($GLOBALS['pages'][$id])===$old[0] &&
+        $GLOBALS['pages'][$id]->post_parent===$old[1] &&
+        $GLOBALS['pages'][$id]->post_title===$old[2],
+        'all existing page addresses/parents/titles restored: '.$id);
+    assertW(!get_transient('wassertechnik_w35_single_apply_lock'),'failed migration lock cleared');
+    assertW($GLOBALS['paid_calls']===0,'0 paid SEO after failed migration');
+    exit(0);
+}
+if($scenario==='idempotent'){
+    seedOld9($plan);
+    $ids=[];
+    foreach($GLOBALS['meta_p'] as $id=>$meta)if(!empty($meta['_wt_owner_id']))$ids[$meta['_wt_owner_id']]=$id;
+    foreach($plan['wp_targets'] as $r)if($r['kind']==='page'&&$r['w6_original']){
+        $id=$ids[$r['owner_id']];
+        $GLOBALS['pages'][$id]->post_parent=$r['parent_owner_id']===null?0:$ids[$r['parent_owner_id']];
+        $GLOBALS['pages'][$id]->post_title=$r['title'];
+    }
+    $pool=$GLOBALS['posts_next']++;
+    $GLOBALS['pages'][$pool]=(object)['ID'=>$pool,'post_name'=>'pool-teichtechnik','post_parent'=>0,
+        'post_title'=>'Pool & Teichtechnik','post_status'=>'draft'];
+    $GLOBALS['meta_p'][$pool]['_wt_owner_id']='wt_main_pool_w27';
+    $state=verifyTarget($plan,0,0);
+    assertW(count($state['missing_categories'])===0,'no missing category after successful prior import');
+    ob_start();Wassertechnik_Kategorie_Importer::screen();$html=ob_get_clean();
+    assertW(str_contains($html,'Alle Zielobjekte vorhanden'),'second run shows complete without a new import button');
+    assertW(!str_contains($html,'admin-post.php'),'second run cannot start a duplicate import');
+    assertW($GLOBALS['writes']===0 && $GLOBALS['paid_calls']===0,'idempotent second run 0 writes/0 SEO calls');
     exit(0);
 }
 if($scenario==='redirect'){
