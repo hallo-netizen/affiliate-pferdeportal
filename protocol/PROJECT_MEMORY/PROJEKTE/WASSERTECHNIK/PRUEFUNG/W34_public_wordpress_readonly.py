@@ -41,7 +41,13 @@ def get(relative:str)->tuple[list[dict],dict]:
     with CLIENT.open(r,timeout=12) as resp:
         check(urllib.parse.urlparse(resp.url).hostname==HOST,"unexpected final location")
         raw=resp.read(3_000_000)
-        v=json.loads(raw)
+        try:
+            v=json.loads(raw)
+        except json.JSONDecodeError as exc:
+            import re
+            first=re.sub(r"\\s+"," ",raw[:150].decode("utf-8","replace"))
+            content_type=resp.headers.get("Content-Type","unknown")
+            raise RuntimeError("WP REST GET response was not JSON: HTTP "+str(resp.status)+", type="+content_type+", first="+first) from exc
         check(isinstance(v,list),"WP REST endpoint returned no record list")
         return v,dict(resp.headers)
 
