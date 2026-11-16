@@ -63,3 +63,27 @@ WordPress-eBay-Screenshot zeigt:
 - **Ein einziger maßgeblicher Praxistest:** die bestehende, schreibgeschützte Sichtbarkeitsdiagnose **nach 16:36 MEZ**, sinnvoll gegen 16:45–17:00, prüfen: `freshness_worker.last_batch_at_utc` muss **später als 13:36:18 UTC** (= 14:36:18 MEZ) sein; `next_due_at` weitergerückt; abgelaufene aktuelle SAFE-Freigaben zurückgegangen und Frontendkarte sichtbar. Falls nein, die tatsächliche REST-Antwortversion/SAFE-Watch-Entscheidung im bestehenden Plugin ermitteln, **kein neuer Suchlauf und keine zweite Uhr**.
 
 **Status:** laufende Availability-Option speichert korrekt; der regelmäßige automatische Aufruf nach Gesamtabschluss bleibt ungeklärt. QA69 nicht vollständig abgenommen.
+
+
+## Echte Sichtbarkeitsdiagnose 16.11.2026, 19:32 MEZ – keine Live-Abnahme
+
+Verbindlicher neuer, schreibgeschützter Nutzerdatenexport: pferdeatelier-ebay-sichtbarkeit-20261116-183237.json, 16.11.2026 18:32:37 UTC. Gegenprobe: pferdeatelier-ebay-sichtbarkeit-20261116-102018.json, 10:20:18 UTC.
+
+| Kriterium | Vorher | 19:32 MEZ |
+|---|---:|---:|
+| SAFE-BUSINESS-Kampagnen | 309 | 309 |
+| Quelle zeitlich abgelaufen | 293 | 10 |
+| Diagnose source_not_available | 8 | **290** |
+| Diagnose common_gates_passed_not_frontend_proof | 8 | 9 |
+| Kumulative Verfügbarkeitsprüfungen | 448 | 562 |
+| Kumulative Prüfprobleme | 24 | 35 |
+
+**Nicht als Verbesserung verkaufen:** Zwar weniger abgelaufene Frische, aber **290/309** sind inzwischen unter der Diagnose-Kategorie nicht im Zustand available. Neun bestehen die grundlegenden Lieferbedingungen; kein vollständiger Live-Frontendbeweis.
+
+**Belegter Diagnose-Semantikfehler:** Die separate Diagnosefunktion pa_ev_reason() schreibt source_not_available, sobald source_state !== available. Sie unterscheidet **nicht** die tatsächlich beendete eBay-Quelle ended von needs_review. Letzteres entsteht im echten Plugin ebay_public_availability_refresh_one(), wenn nach einem positiven getItem-Eingang Item-ID, Verkäufername, normalisierter Titel, Bild-URL oder Artikelzustand nicht exakt mit dem gespeicherten Wert übereinstimmt. Dann werden source_state=needs_review, source_checked_at=now und fresh_until=now gesetzt. Alle fünf Diagnosebeispiele für source_not_available zeigen sekundengenau gleiche Werte für source_checked_at und fresh_until. Das ist **mit needs_review vereinbar**, aber die Rohwerte und einzelnen Abweichungsfelder fehlen im JSON. Nicht behaupten, alle 290 Artikel seien wirklich beendet.
+
+**Gegenbeleg zur voreiligen Ended-Interpretation:** Im bereits gelieferten echten CSV pferdeatelier-ebay-lauf-3221f8324c99.csv beträgt der kumulative ended-Zähler der unabhängigen Frischeprüfung um 14:36 MEZ **8**, available **312**, errors **35**, checked **562**. Also keine belegten 290 expliziten Endsignale in dieser Frischerunde.
+
+**Zeitgeber:** Der letzte durch GitHub Actions nachgewiesene eBay-Run endete am 16.11. 13:42:52 UTC (14:42:52 MEZ) mit completed. Bis zum Vergleich gegen den neuen Export kein neuerer eBay-Run nachgewiesen. Frischeoption am Abend: running=0, last_batch_at=13:36:18 UTC (14:36 MEZ), next_due_at=15:36:18 UTC (16:36 MEZ), also ~2h56min überfällig. Die behauptete dauerhafte Aufrufbereitschaft der Version 6.72.356 ist damit im realen Betrieb weiterhin nicht erfüllt.
+
+**QA69: LIVE NICHT BESTANDEN.** Zwei offene Sachverhalte: (A) kein zuverlässiger Folgeaufruf nach completed; (B) 290 SAFE-Quellen durch source_state != available gesperrt, Status ended versus needs_review **nicht aufgeschlüsselt**. Weder eine pauschale Vollsuche noch das Aufheben der sicheren Quellenidentitätsprüfung ist gerechtfertigt. Vor Codeeingriff tatsächliche Verteilung der gespeicherten source_state-Werte und die pro Quelle abweichenden Identitätsfelder im bestehenden Bestand nachweisen. Keine neue Pluginversion oder Abnahme auf Verdacht.
