@@ -131,3 +131,7 @@ Einmalig alle 81 neuen W28-Kaufkandidaten mit den tatsächlichen **218 W5-Ownern
 
 ## W30 – 16.11.2026: W28-Einmalhandoff technisch schreibfrei einlesbar gemacht
 Für die 81/90 W28-Übergabe eine einzige reine PHP-Einlesefunktion separat testbar; 13/13 positive/negative lokale Prüffälle und 81/81 Originaldaten-Strukturabgleich bestanden. Fachmaster W27, SEO-Altmessung W5 und Import-Pfad bleiben unverändert; keine neuen SEO-Owner, API-Abfragen oder WP-Schreibaktionen. W30 ist noch **keine eingebaute WT001-Version**; kompletter letzter 0.1.7-Pluginquellstand im GitHub-Büro noch nicht verfügbar. Bericht `../PRUEFUNG/W30_81ER_EINLESUNG_SOURCE_QA_20261116.md`.
+
+
+## W31 – 16.11.2026: Kein ungesicherter Wechsel der WordPress-Version
+W30-Einleser unverändert. Exakte ältere 0.1.4-Originalquelle gesichert und deren 218-SEO-Workflow bei rein lokaler Probe gegen die W31-81er-Adminvorschau getestet: 218/218 und identischer Plan-Fingerprint, 0 API/0 WP-Schreiben; alle Guardfälle PASS. Die späteren sieben Hauptbereiche in WT001 0.1.7 dürfen nicht durch dieses ältere Basisarchiv ersetzt werden. Nächster Arbeitsschritt **eine einzige Integration auf dem echten 0.1.7-Original**, danach in einem Durchgang alle Regressionen und die tatsächliche 81er-SEO-Aufnahme, kein unnötiges zweites Importmodul. Bericht `../PRUEFUNG/W31_ORIGINAL14_REGRESSION_UND_INTEGRATION_20261116.md`.
