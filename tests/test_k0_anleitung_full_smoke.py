@@ -26,8 +26,17 @@ def fresh_anleitung():
       "common_errors":["Verbindungen unzureichend prüfen"],
       "result_checks":["Sicheren Halt kontrollieren"],
     }
+    import hashlib
     for c in a["research_claims"].values():
         c["article_types"].append("Anleitung")
+        # This is a synthetic positive test: keep separate example source
+        # excerpt and statement, while preserving the HTML trace binding.
+        if c["evidence_text"].strip().casefold()==c["statement"].strip().casefold():
+            previous=c["evidence_text_sha256"]
+            excerpt="Eigenständiger Test-Quellenauszug: "+c["evidence_text"]
+            c["evidence_text"]=excerpt
+            c["evidence_text_sha256"]=hashlib.sha256(excerpt.encode("utf-8")).hexdigest()
+            a["html"]=a["html"].replace(previous,c["evidence_text_sha256"])
     # The test must be a coherent article with a genuine fact-to-paragraph
     # binding, not a mismatched FAQ topic with invented numeric claims.
     import hashlib

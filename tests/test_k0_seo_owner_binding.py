@@ -86,6 +86,14 @@ class SeoOwnerSourceBindingTests(unittest.TestCase):
                 "EDITORIAL_INFORMATION")
             portal=resolve(intake,registry)
             self.assertEqual(portal["status"],"PASS")
+            # Historic 2026-11-10 source contexts use identical statement
+            # and evidence text. For SEO-only QA, use explicit SIMULATED
+            # independent excerpts: no claim of live source verification.
+            for claim in context["rule_context"]["research_claims"].values():
+                if str(claim.get("evidence_text") or "").strip()==str(claim.get("statement") or "").strip():
+                    excerpt="Eigenständiger Testbeleg: "+claim["statement"]
+                    claim["evidence_text"]=excerpt
+                    claim["evidence_text_sha256"]=hashlib.sha256(excerpt.encode("utf-8")).hexdigest()
             job=prepare(intake,portal,context)
             self.assertEqual(job["writer_rule_binding"]["article_hard_rule_count"],81)
             self.assertEqual(job["identity"],context["identity"])
