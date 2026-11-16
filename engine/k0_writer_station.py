@@ -22,6 +22,45 @@ def _load(path):
         raise Blocked('JSON_OBJECT_REQUIRED:'+str(path))
     return x
 
+
+def research_owner_decision(context, identity, run_instance_id):
+    """Single research-owner decision at existing K0 intake.
+
+    A claim restated as its own evidence is not an independently recorded
+    original-source excerpt.  Repair stays with the SAME research owner.
+    """
+    import hashlib
+    import unicodedata
+
+    claims=(context.get('rule_context') or {}).get('research_claims')
+    if not isinstance(claims,dict):
+        return None  # Existing schema owns missing/malformed claim objects.
+    problems=[]
+    def normal(s):
+        return ' '.join(unicodedata.normalize('NFKC',str(s or '')).casefold().split())
+    for fact_id, claim in sorted(claims.items()):
+        if not isinstance(claim,dict):
+            continue
+        excerpt=str(claim.get('evidence_text') or '')
+        statement=str(claim.get('statement') or '')
+        if not excerpt.strip() or not statement.strip() or normal(excerpt)==normal(statement):
+            problems.append({'fact_id':fact_id,'reason':'INDEPENDENT_ORIGINAL_SOURCE_EXCERPT_REQUIRED'})
+        elif hashlib.sha256(excerpt.encode('utf-8')).hexdigest()!=str(claim.get('evidence_text_sha256') or ''):
+            problems.append({'fact_id':fact_id,'reason':'SOURCE_EXCERPT_DIGEST_MISMATCH'})
+    if not problems:
+        return None
+    return {
+      'contract':'K0_RESEARCH_RETURN_V1',
+      'status':'REPAIR_REQUIRED',
+      'owner':'SAME_RESEARCH_OWNER',
+      'identity':identity,
+      'run_instance_id':run_instance_id,
+      'return_to':'AUTHORING_CONTEXT.json',
+      'issues':problems,
+      'next_action':'RESEARCH_AGAIN_OR_PROVE_ORIGINAL_SOURCE_AND_RESUBMIT_SAME_RUN',
+      'publish_allowed':False,
+    }
+
 def _job_core(intake, portal, ctx):
     rows=validate_intake(intake)
     if len(rows)!=1:
@@ -48,6 +87,9 @@ def _job_core(intake, portal, ctx):
     pc=ctx.get('production_context')
     if not isinstance(pc,dict) or not isinstance(pc.get('fact_pack'),dict) or not isinstance(pc.get('production_plan_item'),dict):
         raise Blocked('K0_AUTHORING_CONTEXT_RESEARCH_MISSING')
+    research_return=research_owner_decision(ctx,ident,run_instance_id)
+    if research_return is not None:
+        return research_return
     if ident.get('article_type')==PROPERTY_WINNER_TYPE:
         try:
             property_result=validate_property_packet(ident,pc.get('property_research'))
@@ -79,6 +121,8 @@ def _job_core(intake, portal, ctx):
 
 def prepare(intake, portal, ctx):
     core=_job_core(intake,portal,ctx)
+    if core.get('status')=='REPAIR_REQUIRED':
+        return core
     job_seed=stable(core)
     job_id='k0w-'+job_seed[:24]
     core['job_id']=job_id
@@ -217,7 +261,10 @@ def main():
         if len(sys.argv)==6 and sys.argv[1]=='prepare':
             out=prepare(_load(sys.argv[2]),_load(sys.argv[3]),_load(sys.argv[4]))
             Path(sys.argv[5]).write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-            print(json.dumps({'contract':JOB_CONTRACT,'status':'PASS','job_id':out['job_id'],'job_sha256':out['job_sha256'],'publish_allowed':False},ensure_ascii=False))
+            if out.get('status')=='REPAIR_REQUIRED':
+                print(json.dumps({'contract':out['contract'],'status':'REPAIR_REQUIRED','owner':out['owner'],'issues':out['issues'],'publish_allowed':False},ensure_ascii=False))
+            else:
+                print(json.dumps({'contract':JOB_CONTRACT,'status':'PASS','job_id':out['job_id'],'job_sha256':out['job_sha256'],'publish_allowed':False},ensure_ascii=False))
             return
         if len(sys.argv)==5 and sys.argv[1]=='seal':
             out=seal(_load(sys.argv[2]),_load(sys.argv[3]))

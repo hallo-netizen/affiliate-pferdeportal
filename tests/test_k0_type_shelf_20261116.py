@@ -233,9 +233,9 @@ class TypeShelfVirginTests(unittest.TestCase):
             claims["F"+str(i)]={
               "source_title":"Fiktive Testquelle "+str(i),
               "source_url":"https://example.org/test/"+str(i),
-              "evidence_text_sha256":str(i)*64,
+              "evidence_text_sha256":hashlib.sha256(("Fachbeleg aus Testquelle "+str(i)+": Schritte und Werkzeuge kontrollieren.").encode("utf-8")).hexdigest(),
               "statement":"Eine fachliche Testaussage zur schrittweisen Anleitung.",
-              "evidence_text":"Eine fachliche Testaussage zur schrittweisen Anleitung.",
+              "evidence_text":"Fachbeleg aus Testquelle "+str(i)+": Schritte und Werkzeuge kontrollieren.",
               "claim_status":"FULLY_SUPPORTED",
               "article_types":["Anleitung"]
             }

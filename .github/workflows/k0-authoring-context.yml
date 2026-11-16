@@ -103,6 +103,12 @@ jobs:
           python3 - <<'PY'
           import json,os
           j=json.load(open('/tmp/WRITER_JOB.json'))
+          if j.get('contract')=='K0_RESEARCH_RETURN_V1':
+              assert j['status']=='REPAIR_REQUIRED' and j['owner']=='SAME_RESEARCH_OWNER'
+              with open(os.environ['GITHUB_ENV'],'a') as env:
+                  env.write('K0_RETURN_TO_RESEARCH=1\n')
+              print('K0_RESEARCH_REPAIR_AT_SAME_OWNER')
+              raise SystemExit(0)
           assert j['contract']=='K0_WRITER_JOB_V1'
           assert j['status']=='OPEN'
           assert j['publish_allowed'] is False
@@ -116,14 +122,23 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cp /tmp/WRITER_JOB.json "$RUN_DIR/WRITER_JOB.json"
-          if ! cmp -s K0_PRODUCT_PROPERTY_STORE.json /tmp/K0_PRODUCT_PROPERTY_STORE_NEXT.json; then
-            cp /tmp/K0_PRODUCT_PROPERTY_STORE_NEXT.json K0_PRODUCT_PROPERTY_STORE.json
-          fi
           git config user.name 'k0-authoring-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add "$RUN_DIR/WRITER_JOB.json" K0_PRODUCT_PROPERTY_STORE.json
-          git commit -m "K0: prepare canonical writer job"
+          if [ "${K0_RETURN_TO_RESEARCH:-0}" = "1" ]; then
+            cp /tmp/WRITER_JOB.json "$RUN_DIR/RESEARCH_RETURN.json"
+            git add "$RUN_DIR/RESEARCH_RETURN.json"
+            git commit -m "K0: return unsupported source evidence to same research owner"
+          else
+            cp /tmp/WRITER_JOB.json "$RUN_DIR/WRITER_JOB.json"
+            if ! cmp -s K0_PRODUCT_PROPERTY_STORE.json /tmp/K0_PRODUCT_PROPERTY_STORE_NEXT.json; then
+              cp /tmp/K0_PRODUCT_PROPERTY_STORE_NEXT.json K0_PRODUCT_PROPERTY_STORE.json
+            fi
+            git add "$RUN_DIR/WRITER_JOB.json" K0_PRODUCT_PROPERTY_STORE.json
+            if [ -f "$RUN_DIR/RESEARCH_RETURN.json" ]; then
+              git rm "$RUN_DIR/RESEARCH_RETURN.json"
+            fi
+            git commit -m "K0: prepare canonical writer job"
+          fi
           # Separate events may arrive together; never drop an event or overwrite another job.
           # Retry only clean, conflict-free rebases. A changed same-path payload blocks.
           for attempt in $(seq 1 24); do

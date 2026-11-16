@@ -1,3 +1,5 @@
+import hashlib
+
 def rule_context(identity):
     typ=identity['article_type']
     if typ=='Beratung':
@@ -26,9 +28,9 @@ def rule_context(identity):
         claims[fid]={
           'source_title':f'Quelle {n}',
           'source_url':f'https://example.test/{n}',
-          'evidence_text_sha256':('%064x'%n),
+          'evidence_text_sha256':hashlib.sha256(f'Quelle {n}: neutraler Originaltext zur Versuchsaussage {n}.'.encode('utf-8')).hexdigest(),
           'statement':f'Belastbare Aussage {n}',
-          'evidence_text':f'Belastbare Aussage {n}',
+          'evidence_text':f'Quelle {n}: neutraler Originaltext zur Versuchsaussage {n}.',
           'claim_status':'FULLY_SUPPORTED',
           'article_types':[typ],
         }

@@ -166,6 +166,14 @@ class K0LinkRegressionTests(unittest.TestCase):
         context=load('AUTHORING_CONTEXT.json')
         context['run_instance_id']=archived_job['run_instance_id']
         job=prepare(intake,portal,context)
+        # Archived source packs from 2026-10-26 may lack original-source
+        # excerpts. They now return to the SAME research owner, rather than
+        # being re-sealed as newly approved articles.
+        if job.get('status')=='REPAIR_REQUIRED':
+            self.assertEqual(job['owner'],'SAME_RESEARCH_OWNER')
+            self.assertEqual(job['identity'],ident)
+            self.assertTrue(job['issues'])
+            return
         draft={
             'contract':'K0_WRITER_DRAFT_V1',
             'job_id':job['job_id'],

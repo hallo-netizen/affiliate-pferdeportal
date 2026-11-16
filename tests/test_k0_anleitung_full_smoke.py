@@ -39,8 +39,9 @@ def fresh_anleitung():
     for fid,statement in source_statements.items():
         claim=a["research_claims"][fid]
         claim["statement"]=statement
-        claim["evidence_text"]=statement
-        claim["evidence_text_sha256"]=hashlib.sha256(statement.encode("utf-8")).hexdigest()
+        quote="Fachlicher Beispiel-Quellentext: "+statement
+        claim["evidence_text"]=quote
+        claim["evidence_text_sha256"]=hashlib.sha256(quote.encode("utf-8")).hexdigest()
     a["heading_intent_terms"]=["Montage","Teile","Montagefehler","Verbindung","Aufbau","Standfestigkeit","Kontrolle"]
     a["bound_links"][0]["block"]="preparation"
     a["bound_links"][1]["block"]="steps"
