@@ -65,6 +65,8 @@ class AnleitungSmoke(unittest.TestCase):
     def test_positive_all_pre_language_tool_rules(self):
         a=fresh_anleitung()
         pkg,cat=package_from_article(a)
+        failed={x["rule_id"]:x["evidence"] for x in run_article_content_checks(a) if x["status"]=="FAIL"}
+        self.assertFalse(failed,failed)
         result=verify_pre_lt68(pkg,cat)
         self.assertEqual(result["status"],"READY_FOR_LT68",result)
         self.assertGreaterEqual(result["required_receipt_count"],75)
@@ -82,7 +84,7 @@ class AnleitungSmoke(unittest.TestCase):
         a=fresh_anleitung()
         a["article_type"]="Pflege"
         pkg,cat=package_from_article(a)
-        with self.assertRaisesRegex(Blocked,"K0_RULE_CONTEXT_RESEARCH_CLAIM_NOT_USABLE"):
+        with self.assertRaisesRegex(Blocked,"K0_RULE_CONTEXT_TYPE_META_REQUIRED:risk_controls"):
             verify_pre_lt68(pkg,cat)
 
 
