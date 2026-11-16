@@ -306,6 +306,32 @@ class TypeShelfVirginTests(unittest.TestCase):
         with self.assertRaisesRegex(k0_writer_station.Blocked,"K0_TYPE_NOT_DEFINED:Installation"):
             k0_writer_station.prepare(intake,portal,context)
 
+    def test_21_new_type_goal_codes_must_be_unique_at_registration(self):
+        # One structural registration check in QA, never an article decision.
+        packages=[]
+        for path in sorted(core.TYPE_SHELF.glob("*.json")):
+            value=json.loads(path.read_text(encoding="utf-8"))
+            if value.get("contract")!=core.TYPE_PACKAGE_CONTRACT:
+                continue
+            if value.get("status")!="READY":
+                continue
+            code=value.get("intent_boundary",{}).get("primary_goal_code")
+            self.assertTrue(code,"K0_TYPE_GOAL_CODE_MISSING:"+path.stem)
+            packages.append((code,path.stem))
+        self.assertTrue(packages)
+        seen={}
+        for code,name in packages:
+            self.assertNotIn(code,seen,"K0_TYPE_INTENT_CODE_DUPLICATE:"+code)
+            seen[code]=name
+
+    def test_22_anleitung_explicitly_excludes_other_core_types(self):
+        data=json.loads((core.TYPE_SHELF/"Anleitung.json").read_text(encoding="utf-8"))
+        exclusion=data["intent_boundary"]["outside_scope"]
+        for other in ("Pflege","Beratung","Vergleich","FAQ"):
+            self.assertIn(other,exclusion,"K0_TYPE_BOUNDARY_INCOMPLETE:"+other)
+        self.assertIn("reparieren",data["intent_boundary"]["primary_goal"])
+        self.assertIn("aufbauen",data["intent_boundary"]["primary_goal"])
+
     def test_16_no_old_run_files_are_used_by_any_acceptance_test(self):
         self.assertTrue((core.TYPE_SHELF/"Anleitung.json").is_file())
         self.assertNotIn("real_runs",str(core.TYPE_SHELF))
