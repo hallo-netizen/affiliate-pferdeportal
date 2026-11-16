@@ -1,0 +1,38 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "oliver-beil.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 1,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Einen sicheren Wassertrog für Pferde selber bauen",
+        "target_keyword": "wassertröge selber bauen",
+        "category": "wassertroege-fuer-weiden-installation",
+        "article_type": "Anleitung",
+        "plan_slot": "1b60069d26ce9f6a70de15852e683a57262282acdead981d9b73742185ef5aeb"
+      }
+    ],
+    "batch_sha256": "734dee682bb85bf73d72c84992cde56660c4614e0047cce6e54cd248b74a5c9d"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Einen sicheren Wassertrog für Pferde selber bauen",
+        "target_keyword": "wassertröge selber bauen",
+        "category": "wassertroege-fuer-weiden-installation",
+        "article_type": "Anleitung",
+        "plan_slot": "1b60069d26ce9f6a70de15852e683a57262282acdead981d9b73742185ef5aeb"
+      },
+      "order_id": "TXE-a9f38e1223177d409b48e29fb63014ac",
+      "article_id": "article:7e55abd7914406c78cab1bc9",
+      "search_intent": "Anleitung – Pferdetränke"
+    }
+  ],
+  "manifest_sha256": "0bb8c3fa7b8f58b4925da5e31d1600f9fdcf340613b0f04f972e4a5cb716f75d"
+}
