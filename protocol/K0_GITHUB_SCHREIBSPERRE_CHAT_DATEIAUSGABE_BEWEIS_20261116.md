@@ -31,3 +31,21 @@ Vor einem technischen Eingriff muss die tatsächlich damals genutzte Sperre *fü
 ## 4. Ablage
 
 Dieses Protokoll dokumentiert die Nachweise einmalig im Original-K0-Büro. Es ist keine produktive Änderung und stellt keinen bestandenen Endausgabe-Test dar.
+
+## 5. Umsetzung am 16.11. – nur fehlende Absicherung, vorhandene Worker-Gates unverändert
+
+- **Start/Upload, Portalzuordnung, SEO-Owner:** bestehende technische Gates unverändert.
+- **Recherche → Writer:** Die bestehende einmalige Rechercheentscheidung in engine/k0_writer_station.py wurde verstärkt. Jetzt muss jeder behauptete Quellenbeleg im tatsächlich abgerufenen Originalwebseitentext stehen. Ein selbst erfundener Beleg mit rechnerisch richtigem SHA darf nicht passieren. Diese strikte Prüfung ist nur im ursprünglichen Authoring-Workflow aktiviert (Variable K0_REQUIRE_ORIGINAL_SOURCE_PROOF=1).
+- **Fehler in Recherche:** K0_RESEARCH_RETURN_V1 / REPAIR_REQUIRED / SAME_RESEARCH_OWNER. Kein Writer-Job bei fehlendem Beleg, aber erneuter Einstieg derselben Recherche nach Korrektur über die bereits vorhandene AUTHORING_CONTEXT-Triggerstrecke möglich. Keine zweite Rechercheentscheidung.
+- **Writer / Seal / LanguageTool / PPM / Abschluss:** Die bereits vorhandenen technischen Prüfungen und der gesamte Writer-Workflow sind unverändert.
+- **Einzelartikel → Sammeldatei:** Die bereits vorhandene Kombinationsfunktion einschließlich Originalreihenfolge, Artikeleindeutigkeit und gebundener Artikelidentität ist byteidentisch unverändert.
+- **Sammeldatei → sichtbarer Chat-Dateianhang: TECHNISCHE LÜCKE BLEIBT.** K0_START_HERE.md schreibt die richtige Datei ausdrücklich vor; GitHub-Code kann die finale ChatGPT-Antwort aber nicht sperren und keinen alternativen Dateianhang verhindern. Die alte Main/STARTMASTER-Ausgabeprüfung ist nicht der K0-Chat-Host und kann ohne Inkompatibilitäten nicht einfach aktiviert werden. Daher KEIN fingierter Fix und keine Behauptung eines vollständig technischen Endausgabe-Schutzes.
+
+### Belege
+
+- Verstärkung am bestehenden Recherche-Owner: https://github.com/hallo-netizen/affiliate-pferdeportal/commit/49277f40aeee79d1c79a15a64539b1169d81d6cf
+- Aktivierung im bestehenden Authoring-Workflow: https://github.com/hallo-netizen/affiliate-pferdeportal/commit/b7263d55ee6bd04e3d69ed4e4e67a687523ed810
+- Negative und positive Regressionen: https://github.com/hallo-netizen/affiliate-pferdeportal/commit/eaf4d7f852fa445d0a633e145cf2791ac2561c87
+- Gesamter GitHub-K0-Selbsttest PASS: https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/43923866916
+
+**Grenze des Nachweises:** Die Tests simulieren die Originalseiten-Abrufe. Eine erfolgreiche echte neue Quellen-Abfrage und eine echte Endausgabe im Chat sind nicht nachgewiesen. Eine Chat-Ausgabesperre erfordert Durchsetzung an der tatsächlichen Chat-/Tool-Schnittstelle; die hierfür nötigen Einstellungen stehen über die GitHub-Verbindung nicht zur Verfügung. Kein Ersatz durch zusätzliche Regeltexte.
