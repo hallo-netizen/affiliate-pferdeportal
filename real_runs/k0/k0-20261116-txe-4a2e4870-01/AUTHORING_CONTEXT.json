@@ -1,0 +1,240 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Günstige Regendecken für Pferde und worauf es beim Kauf ankommt",
+    "target_keyword": "günstige regendecken für pferde",
+    "category": "pferdedecken-regendecken-kosten",
+    "article_type": "Beratung",
+    "plan_slot": "5e28d78d17ef4bad6dd8d5508886575a4524ec7256a162a87db05704a4bf67ed"
+  },
+  "content_profile": {
+    "search_intent": "Preisberatung"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Types of rugs and rugging a horse – British Horse Society",
+          "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/seasonal-care/types-of-rugs-and-rugging-a-horse"
+        },
+        {
+          "source_title": "Horseware Ireland FAQ",
+          "source_url": "https://www.horseware.com/en-eu/faqs"
+        },
+        {
+          "source_title": "How to choose the best turnout rug for your horse – Horse & Hound",
+          "source_url": "https://www.horseandhound.co.uk/buyers-guides/buy-best-turnout-rug-horse-598125"
+        },
+        {
+          "source_title": "Horse Rugging Guide – Houghton Country",
+          "source_url": "https://www.houghtoncountry.co.uk/help-and-advice/horse-rugging-guide"
+        },
+        {
+          "source_title": "Rugging horses – World Horse Welfare",
+          "source_url": "https://int.worldhorsewelfare.org/advice/rugging-horses-when-does-your-horse-need-a-rug"
+        },
+        {
+          "source_title": "Guide to good animal welfare practice for horses",
+          "source_url": "https://www.eurogroupforanimals.org/files/eurogroupforanimals/2021-12/Guidelines_goodanimalwelfare_horses%20.pdf"
+        },
+        {
+          "source_title": "Kosten Regendecken – Pferde Atelier",
+          "source_url": "https://pferde-atelier.de/category/pferdedecken-regendecken-kosten/"
+        }
+      ],
+      "claims": [
+        "Die Größenangabe muss zur tatsächlichen Körperform und zur Größentabelle des Herstellers passen.",
+        "Die Fadenstärke des Außenmaterials liefert einen Hinweis auf die Widerstandsfähigkeit der Decke, ist allein aber kein Beweis für Haltbarkeit.",
+        "Der Nässeschutz kann durch Nutzung und Alter nachlassen; nötige Pflege oder Nachimprägnierung gehört zur Kostenabwägung.",
+        "Die Materialwahl beeinflusst die Reißfestigkeit und kann bei stark beanspruchten Weidedecken einen Aufpreis rechtfertigen.",
+        "Der Wärmebedarf des Pferdes darf nicht aus dem Kältegefühl des Menschen abgeleitet werden; zu dicke Decken sind nicht automatisch besser.",
+        "Eine korrekte Passform und tägliche Kontrolle sind wichtig, unabhängig von der Preisklasse der Regendecke.",
+        "Auch der Pferdeatelier-Kostenbereich hebt hervor, dass Nutzungsdauer und Folgekosten bei der Kaufentscheidung zählen."
+      ],
+      "fresh_research_reference_date": "2026-11-16"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "günstige regendecken für pferde",
+      "topic": "Günstige Regendecken für Pferde und worauf es beim Kauf ankommt",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdedecken-regendecken-kosten",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Eine günstige und langfristig geeignete Regendecke nach Bedarf, Passform, Haltbarkeit und Gesamtkosten auswählen.",
+      "decision_criteria": [
+        "Passform an Brust und Schultern",
+        "Wasserschutz und Atmungsaktivität",
+        "Belastbarkeit des Außenmaterials",
+        "Wärmebedarf des Pferdes",
+        "Pflege und Reparaturkosten"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Types of rugs and rugging a horse – British Horse Society",
+        "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/seasonal-care/types-of-rugs-and-rugging-a-horse",
+        "evidence_text_sha256": "baf81412f8e6d63c4f7597fcadd6d83cdf9c937ee547561711a5ca8b4c09ec3b",
+        "statement": "Die Größenangabe muss zur tatsächlichen Körperform und zur Größentabelle des Herstellers passen.",
+        "evidence_text": "Compare this measurement with the manufacturer's size guide, as sizing may vary between brands.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "Horseware Ireland FAQ",
+        "source_url": "https://www.horseware.com/en-eu/faqs",
+        "evidence_text_sha256": "d39fd5d5ee1ec3b7fb371899509af5aff643637e6aca8cd21079d607f3209745",
+        "statement": "Die Fadenstärke des Außenmaterials liefert einen Hinweis auf die Widerstandsfähigkeit der Decke, ist allein aber kein Beweis für Haltbarkeit.",
+        "evidence_text": "The higher a denier count is, the thicker and more durable a fabric will be.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "How to choose the best turnout rug for your horse – Horse & Hound",
+        "source_url": "https://www.horseandhound.co.uk/buyers-guides/buy-best-turnout-rug-horse-598125",
+        "evidence_text_sha256": "a38ee231032797cc70c2fcce83e91c129f38ef55023d7a9d937dec7c0ba48f5e",
+        "statement": "Der Nässeschutz kann durch Nutzung und Alter nachlassen; nötige Pflege oder Nachimprägnierung gehört zur Kostenabwägung.",
+        "evidence_text": "waterproofing can diminish with age and wear, so be prepared to re-treat rugs when necessary.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_title": "Horse Rugging Guide – Houghton Country",
+        "source_url": "https://www.houghtoncountry.co.uk/help-and-advice/horse-rugging-guide",
+        "evidence_text_sha256": "75a13b9684fd0422c722d3ec7e006972b33fd665a71cee51e6f18a08515ae7ea",
+        "statement": "Die Materialwahl beeinflusst die Reißfestigkeit und kann bei stark beanspruchten Weidedecken einen Aufpreis rechtfertigen.",
+        "evidence_text": "Some turnout rugs are made from nylon which is favoured over polyester for its strength",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_title": "Rugging horses – World Horse Welfare",
+        "source_url": "https://int.worldhorsewelfare.org/advice/rugging-horses-when-does-your-horse-need-a-rug",
+        "evidence_text_sha256": "c6f1c3ea29d1b4522bc7ac438cc70293d83480f16739b8151cab12b438590a87",
+        "statement": "Der Wärmebedarf des Pferdes darf nicht aus dem Kältegefühl des Menschen abgeleitet werden; zu dicke Decken sind nicht automatisch besser.",
+        "evidence_text": "It is important to remember that just because we may be cold, our horses don’t feel the cold in the same way.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F6": {
+        "source_title": "Guide to good animal welfare practice for horses",
+        "source_url": "https://www.eurogroupforanimals.org/files/eurogroupforanimals/2021-12/Guidelines_goodanimalwelfare_horses%20.pdf",
+        "evidence_text_sha256": "bdc276e85f71ac5469d01c6799fe678f645505f2ea52036c4a2f5f804794c0d6",
+        "statement": "Eine korrekte Passform und tägliche Kontrolle sind wichtig, unabhängig von der Preisklasse der Regendecke.",
+        "evidence_text": "If rugs are used, they should be well fitted, checked daily",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F7": {
+        "source_title": "Kosten Regendecken – Pferde Atelier",
+        "source_url": "https://pferde-atelier.de/category/pferdedecken-regendecken-kosten/",
+        "evidence_text_sha256": "dbe7e751c3696e462522df9bbbfc06ac60ad56f7e7a21a2918246062ac899b42",
+        "statement": "Auch der Pferdeatelier-Kostenbereich hebt hervor, dass Nutzungsdauer und Folgekosten bei der Kaufentscheidung zählen.",
+        "evidence_text": "Ein günstiges Modell ist nicht automatisch preiswert, wenn es schnell undicht oder unbrauchbar wird.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdedecken-regendecken-kosten/",
+        "anchor": "Kosten und Haltbarkeit von Regendecken abwägen",
+        "block": "criteria"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/pferdedecken-regendecken-beratung/",
+        "anchor": "Die passende Regendecke für Wetter und Pferd auswählen",
+        "block": "decision"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "anchor": "Regendecken reinigen, imprägnieren und reparieren",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdedecken-regendecken-kosten/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-regendecken-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdedecken-regendecken-kosten",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "günstige Regendecken",
+      "Kaufpreis",
+      "Passform",
+      "Material",
+      "Folgekosten"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die kompakte Matrix zeigt verschiedene Einkaufskriterien, Prüfmerkmale und mögliche Kostenfolgen direkt nebeneinander."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
