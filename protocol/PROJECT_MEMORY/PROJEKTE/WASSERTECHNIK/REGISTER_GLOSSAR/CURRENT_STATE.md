@@ -1,10 +1,10 @@
 # WASSERTECHNIK – EINZIGER AKTUELLER FACHREGISTERSTAND
-**16.11.2026 · W26 · ausschließlich Forschungsregister, noch keine SEO-/WordPress-Freigabe**
+**16.11.2026 · W27 · acht Hauptbereiche fachlich konsolidiert; kein WordPress-/SEO-Import**
 
-**Aktiver Master ausschließlich** `W26_ZENTRALES_FACHREGISTER_20261116.json`. W25 und älter sind Historie, keine zweite Datenquelle.
-**426 Einträge** = 318 Produktbezeichnungen einschließlich 9 Aliasnamen + 82 Glossar + 26 Anbieterrubriken. In W26 19 weitere konkrete Herstellerproduktarten geprüft. Käufergruppen offen **65**, Markt-/Technikstatus offen **145**, als Hersteller-Marktproduktarten belegt **172**. Marktproduktart ist keine Echtzeit-/Affiliate-Lieferbarkeit.
-**Quelle je Produkt einmal:** `w24_evidenz` (Schemafeld wird trotz W26 weiterverwendet), Käufergruppen in `merkmale.zielgruppen`, Marktstand in `technikstand`. 9 Alt-Aliase und 50 Vergleiche unverändert.
-**Geschützte W4/W5-Basis:** 79 bestehende WordPress-Produktowner, 105 Kategorien und 356 Artikelideen, 59 W5-Suchvolumina und 20 fehlende; WP, WT001, Plugins, Frontend, DataForSEO nicht angerührt.
-**Bericht:** `W26_HERSTELLERQUELLEN_FACHKAUFTECHNIK_20261116.md`.
-**NEXT W27:** Offene Nicht-Alias-Produktarten nach Fach- vs Endkundenmarkt und SEO-Funktion einmalig konsolidieren; final 6–8 Hauptkategorien aus geeigneten Produkt-Endseiten bestimmen. Acht frühere Menüpunkte sind nur Forschungsentwurf.
-**Historie:** `W25_HERSTELLERBELEGE_KAUFGRUPPEN_GESAMTSTAND_20261116.md` und `W24_MARKTSTATUS_UND_ZIELGRUPPEN_QUELLENBERICHT_20261115.md`.
+**Nur aktiver Master:** `W27_ZENTRALES_FACHREGISTER_20261116.json`. W26 und älter bleiben Historie, nicht fortschreiben.
+**426 Registereinträge** = 318 Produktbezeichnungen (79 bestehende W4-Fachowner, 171 neue konkrete kanonische Marktproduktarten, 58 ungeklärte kanonische Produktforschungen, 9 Aliase, 1 Prototyp) + 82 Glossar + 26 Anbieter-Rubriken. Die W26-Marktmarkierung 172 enthält einen Alias; echte zusätzliche kanonische Marktproduktarten 171.
+**Einmalige W27-Produktrolle:** `w27_entscheidung` je Produktname. 8 fachliche Hauptbereiche im einzigen `w27_fachbaum`. Fach- und Industrietechnik fachlich zugänglich, aber keine Spiegelnavigation oder neunter Hauptmenüpunkt. Kein automatischer neuer SEO-Owner.
+**Hauptkategorien:** Pumpen & Drucktechnik; Brunnen & Wassergewinnung; Regenwasser & Wasserspeicher; Garten & Bewässerung; Trinkwasser & Hausinstallation; Wasseranalyse & Steuerung; Abwasser & Entwässerung; Pool & Teichtechnik.
+**Bericht/Prüfzahlen:** `../KATEGORIEKONZEPT/W27_ACHT_HAUPTBEREICHE_FACHBAUM_GESAMTENTSCHEID_20261116.md`.
+**Geschützte Grundlagen:** W4 79 Produktowner/105 Rubriken/356 Beitragsideen; W5 59 gemessene und 20 unbekannte Produkt-Suchvolumina; 9 kanonische Aliasbeziehungen, 50 Funktionsvergleiche. WP, WT001, Design, Frontend, neue SEO-API unverändert.
+**NEXT:** Kein weiterer Produktzahl-Blindlauf. Einmalige fachliche Abnahme des achtteiligen Baums; anschließend nur SEO-eigenständige Neuowner und kontrollierter WP-Import samt Weiterleitungen. Bis dahin W27 ist Konzept, nicht Live-Webseite.
