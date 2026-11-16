@@ -87,6 +87,81 @@ class AnleitungSmoke(unittest.TestCase):
         final=verify_final(pkg,cat,{"status":"PASS","finding_count":0})
         self.assertEqual(final["status"],"PASS",final)
 
+    def test_full_fresh_writer_to_wordpress_export_contract(self):
+        # Synthetic draft; real LT 6.8 and live WordPress import are outside
+        # this isolated test and must never be claimed as completed.
+        import hashlib
+        from engine.html_design import materialize_canonical_root
+        from engine.k0_portal_resolver import stable as stable_json
+        from engine.k0_writer_station import prepare, seal, verify as verify_writer
+        from engine.k0_production_gate import verify as verify_gate
+        from engine.k0_wordpress_export import build, verify_export
+        from engine.wordpress_batch_export import combine
+
+        a,_=materialize_canonical_root(fresh_anleitung())
+        proposal,categories=package_from_article(a)
+        ident=dict(proposal["identity"])
+        aid="article:"+"c"*24
+        ident["plan_slot"]=hashlib.sha256(("pserc-plan-slot-v2|"+aid).encode()).hexdigest()
+        intake={
+          "contract":"PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+          "status":"READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+          "item_count":1,
+          "publish_allowed":False,
+          "content_or_format_payload_present":False,
+          "items":[ident]
+        }
+        intake["batch_sha256"]=hashlib.sha256(stable_json(intake).encode()).hexdigest()
+        portal={
+          "contract":"K0_PORTAL_ASSIGNMENT_V1",
+          "status":"PASS",
+          "items":[{"portal_id":"pferdeatelier","status":"AUTO_DETECTED","job_identity":ident}]
+        }
+        context={
+          "contract":"K0_AUTHORING_CONTEXT_V1",
+          "publish_allowed":False,
+          "run_instance_id":"run:"+"a"*24,
+          "identity":ident,
+          "content_profile":{"search_intent":"PROCEDURAL_APPROVED_UPSTREAM"},
+          "production_context":{
+            "fact_pack":{"contract":"canonical_fact_pack_v1","status":"SOURCE_VERIFIED_PRODUCTION_READY",
+                         "sources":[],"claims":[]},
+            "production_plan_item":{"article_type":"Anleitung","target_keyword":ident["target_keyword"],
+                                    "topic":ident["title"],"allowed_fact_ids":list(a["research_claims"])}
+          },
+          "rule_context":proposal["rule_context"]
+        }
+        job=prepare(intake,portal,context)
+        draft={
+          "contract":"K0_WRITER_DRAFT_V1",
+          "job_id":job["job_id"],
+          "title":ident["title"],
+          "content_html":a["html"],
+          "table_decision":context["rule_context"]["table_decision"],
+          "lt_authoritative_terms":[],
+          "revision_count":1,
+          "publish_allowed":False
+        }
+        product=seal(job,draft)
+        self.assertEqual(verify_writer(job,product)["status"],"PASS")
+        self.assertEqual(verify_pre_lt68(product,categories)["status"],"READY_FOR_LT68")
+        gates=verify_gate(product,portal,categories)
+        self.assertEqual(gates["status"],"PASS",gates)
+        # Exactly a simulated external LT PASS; no real LanguageTool execution.
+        lt={"status":"PASS","finding_count":0,
+            "html_sha256":hashlib.sha256(product["html"].encode()).hexdigest()}
+        final=verify_final(product,categories,lt)
+        self.assertEqual(final["status"],"PASS",final)
+        binding={"contract":"K10_CANONICAL_ARTICLE_BINDINGS_V1","status":"PASS",
+                 "bindings":{ident["plan_slot"]:aid}}
+        doc=build(intake,product,portal,gates,lt,final,binding,categories)
+        self.assertEqual(verify_export(doc,intake)["status"],"PASS")
+        batch=combine(intake,[doc])
+        self.assertEqual(batch["article_count"],1)
+        self.assertEqual(batch["articles"][0]["article_type"],"Anleitung")
+        self.assertEqual(batch["articles"][0]["body"],product["html"])
+        self.assertFalse(batch["publish_allowed"])
+
     def test_missing_steps_is_rejected_by_existing_gate(self):
         a=fresh_anleitung()
         a["html"]=a["html"].replace('data-list="steps"','data-list="hints"')
