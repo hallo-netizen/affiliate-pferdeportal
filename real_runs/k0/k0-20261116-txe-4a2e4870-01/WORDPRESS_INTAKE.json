@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Günstige Regendecken für Pferde und worauf es beim Kauf ankommt",
+      "target_keyword": "günstige regendecken für pferde",
+      "category": "pferdedecken-regendecken-kosten",
+      "article_type": "Beratung",
+      "plan_slot": "5e28d78d17ef4bad6dd8d5508886575a4524ec7256a162a87db05704a4bf67ed"
+    }
+  ],
+  "batch_sha256": "1703edc41a4d83bfe223c93cc63213589bc17e9f9f74142776422e8b6db1cc3d"
+}
