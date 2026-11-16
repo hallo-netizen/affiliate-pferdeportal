@@ -1,7 +1,10 @@
 import hashlib
+import json
 import subprocess
 import sys
+import tempfile
 import unittest
+from pathlib import Path
 from engine.wordpress_batch_export import combine, BatchBlocked
 
 def single(idx,title,keyword,category,article_type,article_id):
@@ -76,14 +79,39 @@ class BatchExportTests(unittest.TestCase):
         with self.assertRaisesRegex(BatchBlocked,"BATCH_ARTICLE_MISSING"):
             combine(i,docs[:2])
 
-    def test_wrong_batch_filename_is_rejected_at_final_output(self):
-        result=subprocess.run(
-            [sys.executable,"-m","engine.wordpress_batch_export",
-             "missing-intake.json","WRONG_NAME.json","missing-single.json"],
-            capture_output=True,text=True,
-        )
-        self.assertEqual(result.returncode,2,result.stderr)
-        self.assertIn("BATCH_OUTPUT_FILENAME_INVALID",result.stdout)
+    def test_wrong_output_name_or_file_type_repairs_at_same_export_owner(self):
+        i,docs=self.make_three()
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder)
+            intake_path=root/"WORDPRESS_INTAKE.json"
+            intake_path.write_text(json.dumps(i,ensure_ascii=False),encoding="utf-8")
+            singles=[]
+            for idx,doc in enumerate(docs):
+                path=root/f"single-{idx}.json"
+                path.write_text(json.dumps(doc,ensure_ascii=False),encoding="utf-8")
+                singles.append(str(path))
+            canonical=root/"WORDPRESS_BATCH.json"
+            for requested_name in ("WRONG_NAME.json","WRONG_TYPE.zip","WORDPRESS_BATCH.json"):
+                with self.subTest(requested_name=requested_name):
+                    # Simulate an existing file of the wrong type before repair.
+                    canonical.write_bytes(b"PK\\x03\\x04not-json")
+                    requested=root/requested_name
+                    run=subprocess.run(
+                        [sys.executable,"-m","engine.wordpress_batch_export",
+                         str(intake_path),str(requested),*singles],
+                        capture_output=True,text=True,
+                    )
+                    self.assertEqual(run.returncode,0,run.stdout+run.stderr)
+                    receipt=json.loads(run.stdout)
+                    self.assertEqual(receipt["status"],"PASS")
+                    self.assertEqual(receipt["output_file"],str(canonical))
+                    self.assertEqual(receipt["output_format"],"JSON")
+                    self.assertEqual(receipt["output_name_repaired"],requested!=canonical)
+                    self.assertFalse(requested.exists() if requested!=canonical else False)
+                    emitted=json.loads(canonical.read_text(encoding="utf-8"))
+                    self.assertEqual(emitted["contract"],"SYSTEM4_WORDPRESS_HANDOFF_V1")
+                    self.assertEqual(emitted["article_count"],3)
+                    self.assertEqual([row["title"] for row in emitted["articles"]],["A?","B?","C?"])
 
 if __name__=="__main__":
     unittest.main()
