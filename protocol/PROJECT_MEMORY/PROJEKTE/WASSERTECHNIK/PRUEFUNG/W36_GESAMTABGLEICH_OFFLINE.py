@@ -86,25 +86,25 @@ def audit():
         "real paid SEO provider class exists in original plugin")
     req(any("Wassertechnik_DataForSEO" in v["classes"] for v in discovered.values()),
         "real DataForSEO preflight class exists in original plugin")
-    preview = (L/"QUELLCODE"/"W38_class-wassertechnik-seo81-preview.php").read_text(encoding="utf-8")
-    shared_paid = (L/"QUELLCODE"/"W38_seo81_paid_trait.php").read_text(encoding="utf-8")
+    preview = (L/"QUELLCODE"/"W39_class-wassertechnik-seo81-preview.php").read_text(encoding="utf-8")
+    shared_paid = (L/"QUELLCODE"/"W39_seo81_paid_trait.php").read_text(encoding="utf-8")
     req("Wassertechnik_W30_Seo_Handoff::read" in preview
-        and "Wassertechnik_PaidResearch::panel81()" in preview
+        and "Wassertechnik_PaidResearch::panel81()" in preview and "Wassertechnik_PaidResearch::read81()" in preview
         and "admin_post_wassertechnik_dfs_w38_81_paid" in preview,
         "81 original W28 candidates have one explicit WT001 paid-action intake")
     req("self::planned()" in shared_paid and "self::fetch(" in shared_paid
         and "self::apply(" in shared_paid and "self::W38_LOCK" in shared_paid
-        and "self::W38_REPORT" in shared_paid,
+        and "self::W38_REPORT" in shared_paid and "unique_matched_rows" in shared_paid,
         "new 81 paid job reuses original 218 engine; separate locks and results")
     # Never call a paid endpoint or write to WordPress during this audit.
-    report = {"status":"PASS_W38_81_SEO_BRIDGE_OFFLINE_LIVE_WP_UNKNOWN",
+    report = {"status":"PASS_W39_81_SEO_DATA_INTEGRITY_OFFLINE_LIVE_WP_UNKNOWN",
         "legacy_wp_owners":218,"wp_targets":219,"wp_pages":114,"wp_categories":105,
         "consumer_roots":7,"industry_information_roots":1,"legacy_redirects":17,
         "existing_product_owners":79,"existing_buy_links":71,"existing_industry_owners":8,
         "new_products_unapproved":81,"candidate_content_categories":90,
         "seo_provider_original_version":"0.1.4","seo_old_keywords":218,
         "live_wp_admin_parity":"NICHT_GEPRUEFT","plugin_0_1_7_parity":"NICHT_GEPRUEFT",
-        "provider_intake_for_81":"W38_OFFLINE_ANGEBUNDEN_LIVE_NICHT_AUSGEFUEHRT",
+        "provider_intake_for_81":"W39_KORREKTE_MESSERGEBNISSE_OHNE_SEITENFREIGABE",
         "original_plugin_functions":discovered,
         "wordpress_writes":0,"paid_api_requests":0,"installation_release":False}
     out = R / "_w36_gesamtpruefung_offline.json"
