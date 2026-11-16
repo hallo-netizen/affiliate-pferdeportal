@@ -24,3 +24,7 @@
 
 ## W12 – 15.11.2026: Produkt- und Menürecherche, **keine Pluginänderung**
 Benutzerwunsch zur Entschlackung doppelter Menütexte und Prüfung von Smart Home/Umweltschutz/Randbereichen wurde **nur als fachliches W12-Konzept** mit 26 neuen Gerätefamilien, 37 fachlichen Unterkategorien und 111 Artikelideen recherchiert und im `../KATEGORIEKONZEPT/`-Büro gespeichert. Bestehende WT001-Version und WordPress unverändert. Erst nach einmaliger Fachentscheidung: Menü-Labels und zusätzliche tatsächliche Produkt-Owner in **einem** gemeinsamen bestehenden WT001-Update, nach eigener Freigabe. Die vorhandene Plugin-Version 0.1.7 bleibt laut Nutzer aktueller sichtbarer Teststand; keine neuerliche Datei angeboten.
+
+
+## W30 – 16.11.2026: isolierter schreibfreier SEO-81-Einleser, KEIN PLUGIN-UPDATE
+Aus den vorhandenen Pluginarchiven geht **keine belegte 81er-Verarbeitung** hervor: GitHub-ZIPs nur bis 0.1.5, W11 0.1.7 wurde laut Originalprotokoll ausschließlich im Chat geliefert. Neuer **reiner Quellbaustein** `QUELLCODE/W30_seo_handoff_readonly.php`, exakt eine schreibfreie Einlesefunktion für die W28-81-Übergabe. 13/13 lokale Prüffälle und zusätzlicher Struktureingabecheck aller echten 81/90 W28-Zeilen bestanden; Originalcode WT001 nicht verändert, noch nicht ins 0.1.7-Plugin integriert. Kein ZIP zur Installation angeboten, kein WP-/Frontend-/DataForSEO-Schreiben. Bericht `../PRUEFUNG/W30_81ER_EINLESUNG_SOURCE_QA_20261116.md`.
