@@ -1,0 +1,28 @@
+name: Wassertechnik W33 single offline full QA build
+on:
+  pull_request:
+    paths:
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/WASSERTECHNIK/**'
+      - '.github/workflows/wassertechnik-w33-gesamtbuild.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build_and_qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify local runtime
+        run: |
+          php -v
+          python3 --version
+      - name: Build from original plugin and run all local regression tests
+        run: python3 protocol/PROJECT_MEMORY/PROJEKTE/WASSERTECHNIK/PLUGINS/BUILD/W33_build.py
+      - name: Upload verified technical QA archive (NOT for installation)
+        uses: actions/upload-artifact@v4
+        with:
+          name: wassertechnik-w33-qa-archive-NICHT-INSTALLIEREN
+          path: protocol/PROJECT_MEMORY/PROJEKTE/WASSERTECHNIK/PRUEFUNG/_w33_offline_build/*.zip
+          if-no-files-found: error
+          retention-days: 7
