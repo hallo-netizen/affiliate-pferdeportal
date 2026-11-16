@@ -11,7 +11,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from engine import core, checkers, k0_full_rules
+from engine import core, checkers, k0_full_rules, k0_writer_station
 from engine.k0_portal_resolver import validate_intake, stable
 
 
@@ -205,6 +205,106 @@ class TypeShelfVirginTests(unittest.TestCase):
         self.assertEqual(result["legacy_rule_count"],104)
         self.assertIn("Anleitung",core.load_values("Anleitung")["types"])
         self.assertNotEqual(core.values_hash("Anleitung"),core.values_hash())
+
+    def synthetic_job(self):
+        identity={
+          "title":"Einen sicheren Wassertrog für Pferde selber bauen",
+          "target_keyword":"wassertröge selber bauen",
+          "category":"wassertroege-fuer-weiden-installation",
+          "article_type":"Anleitung",
+          "plan_slot":"1b60069d26ce9f6a70de15852e683a57262282acdead981d9b73742185ef5aeb"
+        }
+        intake={
+          "contract":"PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+          "status":"READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+          "item_count":1,
+          "publish_allowed":False,
+          "content_or_format_payload_present":False,
+          "items":[identity]
+        }
+        intake["batch_sha256"]=hashlib.sha256(stable(intake).encode("utf-8")).hexdigest()
+        portal={
+          "contract":"K0_PORTAL_ASSIGNMENT_V1",
+          "status":"PASS",
+          "items":[{"status":"AUTO_DETECTED","portal_id":"pferdeatelier","job_identity":identity}]
+        }
+        claims={}
+        for i in range(1,4):
+            claims["F"+str(i)]={
+              "source_title":"Fiktive Testquelle "+str(i),
+              "source_url":"https://example.org/test/"+str(i),
+              "evidence_text_sha256":str(i)*64,
+              "statement":"Eine fachliche Testaussage zur schrittweisen Anleitung.",
+              "evidence_text":"Eine fachliche Testaussage zur schrittweisen Anleitung.",
+              "claim_status":"FULLY_SUPPORTED",
+              "article_types":["Anleitung"]
+            }
+        links=[
+          {"role":"parent_category","href":"/category/wassertroege-fuer-weiden-installation/",
+           "anchor":"Wassertröge sicher aufstellen","block":"preparation"},
+          {"role":"semantic_related","href":"/category/wassertroege-fuer-weiden-beratung/",
+           "anchor":"Material und Größe passend wählen","block":"steps"},
+          {"role":"further_information","href":"/category/wassertroege-fuer-weiden-faq/",
+           "anchor":"Antworten zu Pferdetränken","block":"further_information"}
+        ]
+        rules={
+          "contract":"K0_AUTHORING_RULE_CONTEXT_V1",
+          "type_meta":valid_article()["type_meta"],
+          "research_claims":claims,
+          "required_fact_ids":["F1","F2","F3"],
+          "allowed_fact_ids":["F1","F2","F3"],
+          "bound_links":links,
+          "link_registry":[{"href":x["href"],"active":True} for x in links],
+          "runtime_link_roles":[x["role"] for x in links],
+          "wordpress_category":{"slug":identity["category"],"taxonomy":"category"},
+          "heading_intent_terms":["Wassertrog","Sicherheit","Montage"],
+          "comparison_source_bindings":[],
+          "table_decision":{
+             "decision":"OMIT_NO_ADDED_VALUE",
+             "exception_code":"LINEAR_SEQUENCE",
+             "rationale":"Eine lineare Schrittfolge ist hier besser als eine Vergleichstabelle."
+          },
+          "semantic_rule_results":{}
+        }
+        context={
+          "contract":"K0_AUTHORING_CONTEXT_V1",
+          "publish_allowed":False,
+          "run_instance_id":"run:"+"0"*24,
+          "identity":identity,
+          "content_profile":{"search_intent":"Anleitung – Pferdetränke"},
+          "production_context":{
+            "fact_pack":{"contract":"canonical_fact_pack_v1","status":"SOURCE_VERIFIED_PRODUCTION_READY"},
+            "production_plan_item":{"article_type":"Anleitung"}
+          },
+          "rule_context":rules
+        }
+        return intake,portal,context
+
+    def test_18_fresh_authoring_intake_builds_bound_writer_job(self):
+        intake,portal,context=self.synthetic_job()
+        job=k0_writer_station.prepare(intake,portal,context)
+        self.assertEqual(job["status"],"OPEN")
+        self.assertEqual(job["identity"],intake["items"][0])
+        self.assertEqual(job["writer_rule_binding"]["rule_values_sha256"],
+                         core.values_hash("Anleitung"))
+        self.assertEqual(job["writer_rule_bundle"]["article_type"],"Anleitung")
+        self.assertFalse(job["publish_allowed"])
+        self.assertNotIn("html",job)
+
+    def test_19_missing_mandatory_anleitung_input_stops_before_worker(self):
+        intake,portal,context=self.synthetic_job()
+        del context["rule_context"]["type_meta"]["common_errors"]
+        with self.assertRaisesRegex(k0_writer_station.Blocked,
+                                   "K0_RULE_CONTEXT_TYPE_META_REQUIRED:common_errors"):
+            k0_writer_station.prepare(intake,portal,context)
+
+    def test_20_unapproved_unknown_article_type_cannot_be_auto_corrected(self):
+        intake,portal,context=self.synthetic_job()
+        for row in (intake["items"][0],portal["items"][0]["job_identity"],context["identity"]):
+            row["article_type"]="Installation"
+        intake["batch_sha256"]=hashlib.sha256(stable({k:v for k,v in intake.items() if k!="batch_sha256"}).encode("utf-8")).hexdigest()
+        with self.assertRaisesRegex(k0_writer_station.Blocked,"K0_TYPE_NOT_DEFINED:Installation"):
+            k0_writer_station.prepare(intake,portal,context)
 
     def test_16_no_old_run_files_are_used_by_any_acceptance_test(self):
         self.assertTrue((core.TYPE_SHELF/"Anleitung.json").is_file())
