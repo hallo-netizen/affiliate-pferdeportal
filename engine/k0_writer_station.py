@@ -1,5 +1,5 @@
 from __future__ import annotations
-import hashlib, json, re, sys
+import hashlib, json, os, re, sys
 from pathlib import Path
 
 from .k0_portal_resolver import validate_intake
@@ -23,6 +23,104 @@ def _load(path):
     return x
 
 
+def _k0_original_normalize(value):
+    """Compare what the original source actually says, ignoring HTML punctuation."""
+    import unicodedata
+    return ' '.join(''.join(
+        c if (c.isalnum() or c.isspace()) else ' '
+        for c in unicodedata.normalize('NFKC', str(value or '')).casefold()
+    ).split())
+
+
+def _k0_fetch_original_source_text(url):
+    """Read original HTTPS web content, not a claim or an assistant-made excerpt."""
+    import ipaddress
+    import shutil
+    import socket
+    import subprocess
+    import urllib.parse
+    import urllib.request
+    from html.parser import HTMLParser
+
+    class SourceReadError(RuntimeError):
+        pass
+
+    def safe_url(value):
+        p = urllib.parse.urlsplit(value)
+        host = p.hostname
+        if (p.scheme != 'https' or not host or p.username or p.password
+                or p.port not in (None, 443) or host == 'localhost'
+                or host.endswith(('.localhost', '.local', '.internal'))):
+            raise SourceReadError('UNSAFE_SOURCE_URL')
+        try:
+            ipaddress.ip_address(host)
+            raise SourceReadError('SOURCE_LITERAL_IP_DENIED')
+        except ValueError:
+            pass
+        for item in socket.getaddrinfo(host, 443, type=socket.SOCK_STREAM):
+            if not ipaddress.ip_address(item[4][0]).is_global:
+                raise SourceReadError('SOURCE_PRIVATE_IP_DENIED')
+        return value
+
+    class SafeRedirect(urllib.request.HTTPRedirectHandler):
+        def redirect_request(self, req, fp, code, msg, headers, newurl):
+            safe_url(newurl)
+            return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+    class ReadableHTML(HTMLParser):
+        def __init__(self):
+            super().__init__(convert_charrefs=True)
+            self.parts = []
+            self.hidden = 0
+        def handle_starttag(self, tag, attrs):
+            if tag in ('script', 'style', 'noscript', 'svg'):
+                self.hidden += 1
+            if tag in ('br', 'p', 'div', 'li', 'td', 'h1', 'h2', 'h3'):
+                self.parts.append(' ')
+        def handle_endtag(self, tag):
+            if tag in ('script', 'style', 'noscript', 'svg') and self.hidden:
+                self.hidden -= 1
+            self.parts.append(' ')
+        def handle_data(self, data):
+            if not self.hidden:
+                self.parts.append(data)
+
+    safe_url(url)
+    opener = urllib.request.build_opener(SafeRedirect())
+    request = urllib.request.Request(url, headers={
+        'User-Agent': 'Pferdeatelier-K0-Originalquellenbeleg/1.0',
+        'Accept': 'text/html, text/plain, application/pdf, application/xhtml+xml',
+        'Accept-Encoding': 'identity',
+    })
+    with opener.open(request, timeout=12) as response:
+        if response.status != 200:
+            raise SourceReadError('SOURCE_HTTP_NOT_OK')
+        data = response.read(5_000_001)
+        if len(data) > 5_000_000:
+            raise SourceReadError('SOURCE_TOO_LARGE')
+        mime = response.headers.get_content_type()
+        charset = response.headers.get_content_charset() or 'utf-8'
+    if mime == 'application/pdf' or data.startswith(b'%PDF'):
+        if not shutil.which('pdftotext'):
+            raise SourceReadError('PDF_TEXT_EXTRACTION_UNAVAILABLE')
+        result = subprocess.run(
+            ['pdftotext', '-layout', '-', '-'],
+            input=data, capture_output=True, timeout=20, check=False,
+        )
+        if result.returncode != 0:
+            raise SourceReadError('PDF_TEXT_EXTRACTION_FAILED')
+        return result.stdout.decode('utf-8', errors='replace')
+    if mime not in ('text/html', 'text/plain', 'text/xml', 'application/xml',
+                    'application/xhtml+xml'):
+        raise SourceReadError('SOURCE_FORMAT_NOT_READABLE')
+    decoded = data.decode(charset, errors='replace')
+    if mime == 'text/plain':
+        return decoded
+    parser = ReadableHTML()
+    parser.feed(decoded)
+    return ' '.join(parser.parts)
+
+
 def research_owner_decision(context, identity, run_instance_id):
     """Single research-owner decision at existing K0 intake.
 
@@ -36,6 +134,8 @@ def research_owner_decision(context, identity, run_instance_id):
     if not isinstance(claims,dict):
         return None  # Existing schema owns missing/malformed claim objects.
     problems=[]
+    require_original=os.environ.get('K0_REQUIRE_ORIGINAL_SOURCE_PROOF')=='1'
+    original_cache={}
     def normal(s):
         return ' '.join(unicodedata.normalize('NFKC',str(s or '')).casefold().split())
     for fact_id, claim in sorted(claims.items()):
@@ -47,6 +147,17 @@ def research_owner_decision(context, identity, run_instance_id):
             problems.append({'fact_id':fact_id,'reason':'INDEPENDENT_ORIGINAL_SOURCE_EXCERPT_REQUIRED'})
         elif hashlib.sha256(excerpt.encode('utf-8')).hexdigest()!=str(claim.get('evidence_text_sha256') or ''):
             problems.append({'fact_id':fact_id,'reason':'SOURCE_EXCERPT_DIGEST_MISMATCH'})
+        elif require_original:
+            url=str(claim.get('source_url') or '').strip()
+            try:
+                if url not in original_cache:
+                    original_cache[url]=_k0_original_normalize(_k0_fetch_original_source_text(url))
+                original_text=original_cache[url]
+            except Exception:
+                problems.append({'fact_id':fact_id,'reason':'ORIGINAL_SOURCE_NOT_RETRIEVABLE'})
+                continue
+            if not _k0_original_normalize(excerpt) in original_text:
+                problems.append({'fact_id':fact_id,'reason':'ORIGINAL_SOURCE_EXCERPT_NOT_PROVEN'})
     if not problems:
         return None
     return {
