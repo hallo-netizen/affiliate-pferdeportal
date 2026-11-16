@@ -3,6 +3,7 @@
 No WordPress access, publish, stale run reuse, new worker, or metadata redecision.
 """
 import copy
+import hashlib
 import json
 import tempfile
 import unittest
@@ -90,7 +91,7 @@ class TypeShelfVirginTests(unittest.TestCase):
                "status":"READY_FOR_TEXTMACHINE_METADATA_INTAKE",
                "item_count":1,"publish_allowed":False,"content_or_format_payload_present":False,
                "items":[ident]}
-        batch["batch_sha256"]=stable(batch)
+        batch["batch_sha256"]=hashlib.sha256(stable(batch).encode("utf-8")).hexdigest()
         self.assertEqual(validate_intake(batch),[ident])
         self.assertEqual(ident["article_type"],"Anleitung")
         self.assertNotEqual(ident["category"],ident["article_type"])
