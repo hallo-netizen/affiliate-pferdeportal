@@ -53,10 +53,10 @@ def main() -> None:
     require(len(original_classes) == 3, "Original 0.1.4 has unexpected number of PHP classes")
 
     additions = {
-        "class-wassertechnik-import.php": "W9_class-wassertechnik-import.php",
+        "class-wassertechnik-import.php": "W35_class-wassertechnik-import.php",
         "class-wassertechnik-seo-handoff.php": "W30_seo_handoff_readonly.php",
         "class-wassertechnik-seo81-preview.php": "W31_class-wassertechnik-seo81-preview.php",
-        "class-wassertechnik-navigation.php": "W32_class-wassertechnik-navigation.php",
+        "class-wassertechnik-navigation.php": "W35_class-wassertechnik-navigation.php",
         "class-wassertechnik-inventory-readback.php": "W34_class-wassertechnik-inventory-readback.php",
     }
     for dest, src in additions.items():
@@ -65,9 +65,21 @@ def main() -> None:
         shutil.copyfile(file, pkg/"includes"/dest)
     shutil.copyfile(W28, pkg/"assets"/"wassertechnik-w28-seo-handoff.json")
     shutil.copyfile(W32, pkg/"ASSETS"/"W32_wassertechnik-navigation.json")
+    w35_src=PLUGINS/"ASSETS"/"W35_wordpress_importplan_219.json"
+    require(w35_src.is_file(),"Missing single W27 current 7-root WP target plan")
+    shutil.copyfile(w35_src,pkg/"ASSETS"/"W35_wordpress_importplan_219.json")
+    w35=json.loads(w35_src.read_text(encoding="utf-8"))
+    require(w35["schema"]=="wassertechnik-w35-one-time-wp-import-v1"
+            and len(w35["wp_targets"])==219 and len(w35["redirects"])==17,
+            "W35 import manifest not 219 owners / 17 redirects")
+    require(sum(1 for x in w35["wp_targets"] if x["kind"]=="page")==114
+            and sum(1 for x in w35["wp_targets"] if x["kind"]=="category")==105,
+            "W35 must have 114 pages and 105 categories, pool hub draft included")
 
     w6=json.loads(W6.read_text(encoding="utf-8"))
     rows=w6["proposed_owner_targets"]
+    require({x["owner_id"] for x in w35["wp_targets"]}.issuperset({x["owner_id"] for x in rows}),
+            "W35 must preserve all 218 W6 original owners")
     require(len(rows)==218, "W6 not 218")
     require(len({p["owner_id"] for p in rows})==218, "W6 duplicate owner")
     oldpages={p["proposed_page_path"] for p in rows if p["wp_object"]=="page"}
@@ -108,19 +120,21 @@ def main() -> None:
     content=content.replace(original_boot, original_boot+"\n"+
         "        Wassertechnik_Seo81_Preview::boot();\n"+
         "        Wassertechnik_W32_Navigation::boot();\n"+
-        "        Wassertechnik_W34_Inventory_Readback::boot();\n"+
-        "        // Import remains NOT booted: W6 has 9 old roots, W27 mandates a different 7-group target.\n"+
-        "        // Do not activate W9 before a separately approved new 7-root manifest and WP readback.")
+        "        // Exactly one active WordPress import/preflight owner, W35.\n"+
+        "        // Historic W34 and W6 import sources are only archived/readable, not separate admin stations.\n"+
+        "        Wassertechnik_Kategorie_Importer::boot();")
     require(content.count("Version: 0.1.4")==1 and content.count("VERSION = '0.1.4'")==1,
             "Original version expected")
     content=content.replace("Aktueller Fachplan W4:</strong> 8 Hauptbereiche, 19 Zwischenbereiche, 1 Industrieeinstieg, 6 Industrie-Landingvorschlaege, 79 Produktseiten, 105 Inhaltskategorien und 356 grobe Artikelideen. Kostenloser SEO-Pruefplan: 218 Begriffe.", "Fachplan W27:</strong> sieben kaufnahe Hauptbereiche (einschliesslich Pool und Teich), 71 vorhandene Kauf-Produktseiten, acht Industrie-Produktseiten und 81 neue noch SEO-ungepruefte Produkttypen. Der bisherige W4-SEO-Plan mit 218 Begriffen bleibt erhalten.")
     require("Aktueller Fachplan W4:" not in content, "Old contradictory eight-item homepage retained")
-    (pkg/"README.txt").write_text("WT001 0.1.8 - W33 REKONSTRUKTION / NICHT INSTALLIEREN\n"
-        "Zusammengefuehrter schreibfreier Probeaufbau. 218 alte SEO Owner unveraendert, "
-        "81 weitere SEO Kandidaten nur Vorschau, W27 Navigation sieben Hauptbereiche.\n"
-        "W6 Altimporter mit 9 alten WordPress Hauptseiten bleibt bewusst NICHT aktiv. "
-        "Keine neue SEO-/WordPress-Freigabe, keine kostenpflichtigen Abfragen.\n"
-        "Original 0.1.7 fehlt; keine Live- oder verlustfreie Updateabnahme vorhanden.\n", encoding="utf-8")
+    (pkg/"README.txt").write_text("WT001 0.1.8 - W35 REKONSTRUKTION / NICHT INSTALLIEREN\n"
+        "218 alte SEO Owner unveraendert; 81 weitere SEO Kandidaten nur Vorschau. "
+        "W27 sieben Kaeufer-Hauptbereiche plus separater Industrie-Fachzugang.\n"
+        "Nur EIN W35-WordPress-Importer fuer 219 Owner (218 alte plus Pool-Hub als Entwurf). "
+        "17 Altpfade nur nach einmaliger ausdruecklicher Adminfreigabe mit 301. "
+        "Der alte W6-Neuner-Importer ist ausgetauscht, nicht parallel aktiv.\n"
+        "Keine automatische WP-Schreibaktion oder kostenpflichtige SEO-Abfrage. "
+        "Original 0.1.7 fehlt; deshalb NICHT installieren.\n", encoding="utf-8")
     content=content.replace("Version: 0.1.4", "Version: 0.1.8")
     content=content.replace("VERSION = '0.1.4'", "VERSION = '0.1.8'")
     content=content.replace("Kein Import oder Veroeffentlichen.", "Nur Vorschau, Import und Veroeffentlichung gesperrt.")
@@ -134,9 +148,13 @@ def main() -> None:
         src=(pkg/"includes"/name).read_text(encoding="utf-8")
         require(not any(x in src for x in ("wp_insert_post","wp_insert_term","wp_update_post","wp_update_term","wp_remote_post","update_option(")),
                 "Unexpected writer in read-only module "+name)
-    # The old W9 importer source exists inside the ZIP but is intentionally never hooked.
-    require("Wassertechnik_Kategorie_Importer::boot();" not in content,
-            "Old 9-root importer must never be activated")
+    # W35 is the ONLY WP writer. Original W6-9-root importer is gone, not a second station.
+    importer=(pkg/"includes"/"class-wassertechnik-import.php").read_text(encoding="utf-8")
+    require("wassertechnik-w35-one-time-wp-import-v1" in importer
+            and "wassertechnik-w6-import-v1" not in importer
+            and content.count("Wassertechnik_Kategorie_Importer::boot();")==1
+            and "Wassertechnik_W34_Inventory_Readback::boot();" not in content,
+            "Exactly one current W27 import source; no old 9-root writer")
 
     h=json.loads(W28.read_text(encoding="utf-8"))
     require(len(h["produkte"])==81 and h["anzahl"]==81
@@ -156,6 +174,15 @@ def main() -> None:
     res=subprocess.run(["php",str(test),str(pkg)],capture_output=True,text=True)
     print(res.stdout, end="")
     require(res.returncode==0,"QA FAILURE: "+res.stderr+" "+res.stdout)
+
+    # Genuine end-to-end simulation of one explicit approved W35 import. Every
+    # scenario runs in its own PHP process; no live WordPress or paid API requests.
+    w35qa=PROJECT/"PRUEFUNG"/"W35_WP_IMPORT_ENDTOEND_QA.php"
+    require(w35qa.is_file(),"W35 complete WP import regression missing")
+    for case in ("blank","old9","idempotent","collision","rollback","update-rollback","stale","wrongsite","nonadmin","redirect"):
+        r=subprocess.run(["php",str(w35qa),str(pkg),case],capture_output=True,text=True,timeout=30)
+        print("[W35 "+case+"]\n"+r.stdout,end="")
+        require(r.returncode==0,"W35 "+case+" ERROR: "+r.stderr+"\n"+r.stdout)
     members=sorted(p for p in pkg.rglob("*") if p.is_file())
     with zipfile.ZipFile(OUT,"w",compression=zipfile.ZIP_DEFLATED,compresslevel=9) as zipped:
         for f in members:
@@ -166,6 +193,7 @@ def main() -> None:
                       "sha256":sha(OUT.read_bytes()),"zip_files":len(members),
                       "old_w4_seo_owners":218,"old_w4_products":79,"new_seo_pending":81,
                       "seven_menu_areas":7,"legacy_w6_importer_exposed":False,
+                      "w35_new_import_source_prepared":True,"w35_wp_approval_executed":False,
                       "wordpress_live_test":False,"php_lint":"PASS","full_mock":"PASS"},
                      ensure_ascii=False,indent=2))
 
