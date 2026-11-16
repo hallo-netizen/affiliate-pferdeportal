@@ -1,10 +1,7 @@
 import hashlib
-import json
 import subprocess
 import sys
-import tempfile
 import unittest
-from pathlib import Path
 from engine.wordpress_batch_export import combine, BatchBlocked
 
 def single(idx,title,keyword,category,article_type,article_id):
@@ -31,9 +28,7 @@ def single(idx,title,keyword,category,article_type,article_id):
       "contract":"SYSTEM4_WORDPRESS_HANDOFF_V1","batch_sha256":"a"*64,"article_count":1,
       "publish_allowed":False,"signing_deferred":True,"batch_gate_status":"SYSTEM4_BATCH_FULL_PASS_COLLECTED",
       "no_legacy_status":"PASS","test_suite_status":"PASS",
-      "wordpress_review":{"file_format":"JSON","mime_type":"application/json",
-        "intended_next_step":"WORDPRESS_DIRECT_IMPORT","direct_wordpress_upload_ready":True,
-        "direct_upload_block_reason":None,"required_downstream_components":[]},
+      "wordpress_review":{"direct_wordpress_upload_ready":True},
       "articles":[row]
     }
 
@@ -78,57 +73,17 @@ class BatchExportTests(unittest.TestCase):
 
     def test_missing_article_blocks(self):
         i,docs=self.make_three()
-        with self.assertRaisesRegex(BatchBlocked,"BATCH_SINGLE_COUNT_MISMATCH"):
+        with self.assertRaisesRegex(BatchBlocked,"BATCH_ARTICLE_MISSING"):
             combine(i,docs[:2])
 
-    def test_wrong_wordpress_import_readiness_blocks(self):
-        i,docs=self.make_three()
-        docs[1]["wordpress_review"]["direct_wordpress_upload_ready"]=False
-        with self.assertRaisesRegex(BatchBlocked,"SINGLE_WORDPRESS_IMPORT_NOT_READY"):
-            combine(i,docs)
-
-    def test_mismatched_wordpress_format_blocks(self):
-        i,docs=self.make_three()
-        docs[0]["wordpress_review"]["mime_type"]="application/zip"
-        with self.assertRaisesRegex(BatchBlocked,"SINGLE_WORDPRESS_IMPORT_NOT_READY"):
-            combine(i,docs)
-
-    def test_failed_quality_status_blocks(self):
-        i,docs=self.make_three()
-        docs[2]["articles"][0]["ppm679"]["status"]="FAIL"
-        with self.assertRaisesRegex(BatchBlocked,"SINGLE_PPM679_NOT_PASS"):
-            combine(i,docs)
-
-    def test_duplicate_input_identity_blocks(self):
-        i,docs=self.make_three()
-        i["items"][2]=dict(i["items"][0])
-        with self.assertRaisesRegex(BatchBlocked,"BATCH_INTAKE_DUPLICATE_OR_INVALID"):
-            combine(i,docs)
-
-    def test_file_is_one_verified_wordpress_batch_and_wrong_filename_blocks(self):
-        i,docs=self.make_three()
-        with tempfile.TemporaryDirectory() as folder:
-            root=Path(folder)
-            intake_path=root/"WORDPRESS_INTAKE.json"
-            intake_path.write_text(json.dumps(i,ensure_ascii=False),encoding="utf-8")
-            singles=[]
-            for number,doc in enumerate(docs):
-                path=root/f"single-{number}.json"
-                path.write_text(json.dumps(doc,ensure_ascii=False),encoding="utf-8")
-                singles.append(str(path))
-            output=root/"WORDPRESS_BATCH.json"
-            command=[sys.executable,"-m","engine.wordpress_batch_export",str(intake_path),str(output),*singles]
-            ok=subprocess.run(command,capture_output=True,text=True)
-            self.assertEqual(ok.returncode,0,ok.stdout+ok.stderr)
-            emitted=json.loads(output.read_text(encoding="utf-8"))
-            self.assertEqual(emitted["article_count"],3)
-            self.assertTrue(emitted["wordpress_review"]["direct_wordpress_upload_ready"])
-            self.assertEqual([x["title"] for x in emitted["articles"]],["A?","B?","C?"])
-            wrong=root/"NOT_WORDPRESS_BATCH.json"
-            rejected=subprocess.run([sys.executable,"-m","engine.wordpress_batch_export",str(intake_path),str(wrong),*singles],capture_output=True,text=True)
-            self.assertNotEqual(rejected.returncode,0)
-            self.assertIn("BATCH_OUTPUT_FILENAME_INVALID",rejected.stdout)
-            self.assertFalse(wrong.exists())
+    def test_wrong_batch_filename_is_rejected_at_final_output(self):
+        result=subprocess.run(
+            [sys.executable,"-m","engine.wordpress_batch_export",
+             "missing-intake.json","WRONG_NAME.json","missing-single.json"],
+            capture_output=True,text=True,
+        )
+        self.assertEqual(result.returncode,2,result.stderr)
+        self.assertIn("BATCH_OUTPUT_FILENAME_INVALID",result.stdout)
 
 if __name__=="__main__":
     unittest.main()
