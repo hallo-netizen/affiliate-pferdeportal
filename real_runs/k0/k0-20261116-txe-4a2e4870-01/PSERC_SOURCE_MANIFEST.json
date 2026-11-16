@@ -1,0 +1,57 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "oliver-beil.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 2,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Günstige Regendecken für Pferde und worauf es beim Kauf ankommt",
+        "target_keyword": "günstige regendecken für pferde",
+        "category": "pferdedecken-regendecken-kosten",
+        "article_type": "Beratung",
+        "plan_slot": "5e28d78d17ef4bad6dd8d5508886575a4524ec7256a162a87db05704a4bf67ed"
+      },
+      {
+        "title": "Magnetfeld-Gamaschen für Pferde und was über ihre Wirkung bekannt ist",
+        "target_keyword": "magnetfeld gamasche pferd",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Beratung",
+        "plan_slot": "fc0df9a19f7b36915477e616ee60403fb756c5bdf1fd61a1282f91b79a6af823"
+      }
+    ],
+    "batch_sha256": "4a2e487083a021d392a45fb8a9ec12bc7945dc6389be232a658950ee149ba573"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Günstige Regendecken für Pferde und worauf es beim Kauf ankommt",
+        "target_keyword": "günstige regendecken für pferde",
+        "category": "pferdedecken-regendecken-kosten",
+        "article_type": "Beratung",
+        "plan_slot": "5e28d78d17ef4bad6dd8d5508886575a4524ec7256a162a87db05704a4bf67ed"
+      },
+      "order_id": "TXE-b2a12fbb6f31d28228204922cd2fcb64",
+      "article_id": "article:52e8eb597960c84a98c699fa",
+      "search_intent": "Preisberatung"
+    },
+    {
+      "metadata_binding": {
+        "title": "Magnetfeld-Gamaschen für Pferde und was über ihre Wirkung bekannt ist",
+        "target_keyword": "magnetfeld gamasche pferd",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Beratung",
+        "plan_slot": "fc0df9a19f7b36915477e616ee60403fb756c5bdf1fd61a1282f91b79a6af823"
+      },
+      "order_id": "TXE-59d5f1d3ce2f7ceab0faad86fdddb099",
+      "article_id": "article:40c79221f21fe76ff3057d6c",
+      "search_intent": "Produktberatung mit Evidenzeinordnung"
+    }
+  ],
+  "manifest_sha256": "2ae20daee7a97c7e7495e649bd8f69e1ee245c5e6007ca921dab56180b93d2d8"
+}
