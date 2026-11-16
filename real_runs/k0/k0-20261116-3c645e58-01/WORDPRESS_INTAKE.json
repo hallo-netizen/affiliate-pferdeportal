@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welches Pferd gilt als das teuerste Deutschlands?",
+      "target_keyword": "teuerstes pferd deutschland",
+      "category": "pferdewissen-grundlagen",
+      "article_type": "FAQ",
+      "plan_slot": "7ef097950eaf095bbe7452cc974db5be28fd573e6c0d876534a2dffc6d262cfb"
+    }
+  ],
+  "batch_sha256": "4a744cd43d2e693e43303b689c383266d8b78dbad9704002ea6e94eea62decdc"
+}
