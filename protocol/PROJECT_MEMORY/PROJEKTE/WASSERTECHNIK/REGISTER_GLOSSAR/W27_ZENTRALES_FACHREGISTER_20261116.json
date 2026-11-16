@@ -1,8 +1,8 @@
 {
   "version": "W27_2026-11-16_v1",
   "stand": "2026-11-16",
-  "status": "EINZIGER_AKTUELLER_FACHREGISTERMASTER_W27_FACHBAUM_ENTWURF_NICHT_WP_SEO_IMPORT",
-  "hinweis": "W27 konsolidiert alle 318 Produktbezeichnungen: 79 alte WP-Owner, 171 neue herstellerbelegte kanonische Produkttypen, 58 ungeklärte Forschungsprodukte, 9 Aliase, 1 Prototyp. Die historische W26-Marktproduktzahl 172 beinhaltet 1 Alias. W27-Entscheidung je Produkt nur in w27_entscheidung. Kein SEO-/WP-Import.",
+  "status": "EINZIGER_AKTUELLER_FACHREGISTERMASTER_W27_SIEBEN_FACHHAUPTBEREICHE_KEIN_WP_IMPORT",
+  "hinweis": "W27: sieben fachlich passende Hauptbereiche, Brunnen und Bewässerung gemeinsam für ausgewogene Menüstruktur. 79 bestehende W4-Owner, 171 neue kanonische Marktprodukte, 58 unklare, 9 Aliase, 1 Prototyp. W26 172 Marktmarker enthalten 1 Alias. Kein WP-/SEO-Import.",
   "quelle": {
     "w16_master": "protocol/PROJECT_MEMORY/PROJEKTE/WASSERTECHNIK/KATEGORIEKONZEPT/W16_GEMEINSAMER_PRODUKTFORSCHUNGSMASTER_20261115.json",
     "w16_sha": "00b2faf1a8aafe4d4558fd3037b7d6b02e1156a1",
@@ -3911,7 +3911,7 @@
       },
       "w27_entscheidung": {
         "rolle": "BESTEHENDER_W4_OWNER",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Bestehender WP-Fachowner unverändert, bei reiner Industrie ausschließlich über Fachzugang.",
         "seo_neu_freigegeben": false,
@@ -4001,7 +4001,7 @@
       },
       "w27_entscheidung": {
         "rolle": "BESTEHENDER_W4_OWNER",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Bestehender WP-Fachowner unverändert, bei reiner Industrie ausschließlich über Fachzugang.",
         "seo_neu_freigegeben": false,
@@ -4084,7 +4084,7 @@
       },
       "w27_entscheidung": {
         "rolle": "BESTEHENDER_W4_OWNER",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Bestehender WP-Fachowner unverändert, bei reiner Industrie ausschließlich über Fachzugang.",
         "seo_neu_freigegeben": false,
@@ -4167,7 +4167,7 @@
       },
       "w27_entscheidung": {
         "rolle": "BESTEHENDER_W4_OWNER",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Bestehender WP-Fachowner unverändert, bei reiner Industrie ausschließlich über Fachzugang.",
         "seo_neu_freigegeben": false,
@@ -4250,7 +4250,7 @@
       },
       "w27_entscheidung": {
         "rolle": "BESTEHENDER_W4_OWNER",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Bestehender WP-Fachowner unverändert, bei reiner Industrie ausschließlich über Fachzugang.",
         "seo_neu_freigegeben": false,
@@ -6302,7 +6302,7 @@
       },
       "w27_entscheidung": {
         "rolle": "BESTEHENDER_W4_OWNER",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Bestehender WP-Fachowner unverändert, bei reiner Industrie ausschließlich über Fachzugang.",
         "seo_neu_freigegeben": false,
@@ -7332,7 +7332,7 @@
       },
       "w27_entscheidung": {
         "rolle": "NEUER_PRODUKTKANDIDAT_KAUFNAH",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Hersteller-Produktart und Privat-/Vereins- oder kleine reine Gewerbenutzung belegt. Eigenständiger SEO-Owner noch nicht freigegeben.",
         "seo_neu_freigegeben": false,
@@ -7430,7 +7430,7 @@
       },
       "w27_entscheidung": {
         "rolle": "NEUER_PRODUKTKANDIDAT_KAUFNAH",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Hersteller-Produktart und Privat-/Vereins- oder kleine reine Gewerbenutzung belegt. Eigenständiger SEO-Owner noch nicht freigegeben.",
         "seo_neu_freigegeben": false,
@@ -7528,7 +7528,7 @@
       },
       "w27_entscheidung": {
         "rolle": "NEUER_PRODUKTKANDIDAT_KAUFNAH",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Hersteller-Produktart und Privat-/Vereins- oder kleine reine Gewerbenutzung belegt. Eigenständiger SEO-Owner noch nicht freigegeben.",
         "seo_neu_freigegeben": false,
@@ -7618,7 +7618,7 @@
       },
       "w27_entscheidung": {
         "rolle": "NEUER_PRODUKTKANDIDAT_KAUFNAH",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Hersteller-Produktart und Privat-/Vereins- oder kleine reine Gewerbenutzung belegt. Eigenständiger SEO-Owner noch nicht freigegeben.",
         "seo_neu_freigegeben": false,
@@ -13711,7 +13711,7 @@
       },
       "w27_entscheidung": {
         "rolle": "NEUER_PRODUKTKANDIDAT_KAUFNAH",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Hersteller-Produktart und Privat-/Vereins- oder kleine reine Gewerbenutzung belegt. Eigenständiger SEO-Owner noch nicht freigegeben.",
         "seo_neu_freigegeben": false,
@@ -13803,7 +13803,7 @@
       },
       "w27_entscheidung": {
         "rolle": "NEUER_PRODUKTKANDIDAT_KAUFNAH",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Hersteller-Produktart und Privat-/Vereins- oder kleine reine Gewerbenutzung belegt. Eigenständiger SEO-Owner noch nicht freigegeben.",
         "seo_neu_freigegeben": false,
@@ -13893,7 +13893,7 @@
       },
       "w27_entscheidung": {
         "rolle": "NEUER_PRODUKTKANDIDAT_KAUFNAH",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Hersteller-Produktart und Privat-/Vereins- oder kleine reine Gewerbenutzung belegt. Eigenständiger SEO-Owner noch nicht freigegeben.",
         "seo_neu_freigegeben": false,
@@ -13986,7 +13986,7 @@
       },
       "w27_entscheidung": {
         "rolle": "NEUER_PRODUKTKANDIDAT_KAUFNAH",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Hersteller-Produktart und Privat-/Vereins- oder kleine reine Gewerbenutzung belegt. Eigenständiger SEO-Owner noch nicht freigegeben.",
         "seo_neu_freigegeben": false,
@@ -14073,7 +14073,7 @@
       },
       "w27_entscheidung": {
         "rolle": "NEUER_PRODUKTKANDIDAT_KAUFNAH",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Hersteller-Produktart und Privat-/Vereins- oder kleine reine Gewerbenutzung belegt. Eigenständiger SEO-Owner noch nicht freigegeben.",
         "seo_neu_freigegeben": false,
@@ -14163,7 +14163,7 @@
       },
       "w27_entscheidung": {
         "rolle": "NEUER_PRODUKTKANDIDAT_KAUFNAH",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Hersteller-Produktart und Privat-/Vereins- oder kleine reine Gewerbenutzung belegt. Eigenständiger SEO-Owner noch nicht freigegeben.",
         "seo_neu_freigegeben": false,
@@ -14253,7 +14253,7 @@
       },
       "w27_entscheidung": {
         "rolle": "NEUER_PRODUKTKANDIDAT_KAUFNAH",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Hersteller-Produktart und Privat-/Vereins- oder kleine reine Gewerbenutzung belegt. Eigenständiger SEO-Owner noch nicht freigegeben.",
         "seo_neu_freigegeben": false,
@@ -14340,7 +14340,7 @@
       },
       "w27_entscheidung": {
         "rolle": "NEUER_PRODUKTKANDIDAT_KAUFNAH",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Hersteller-Produktart und Privat-/Vereins- oder kleine reine Gewerbenutzung belegt. Eigenständiger SEO-Owner noch nicht freigegeben.",
         "seo_neu_freigegeben": false,
@@ -14428,7 +14428,7 @@
       },
       "w27_entscheidung": {
         "rolle": "NEUER_PRODUKTKANDIDAT_KAUFNAH",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Hersteller-Produktart und Privat-/Vereins- oder kleine reine Gewerbenutzung belegt. Eigenständiger SEO-Owner noch nicht freigegeben.",
         "seo_neu_freigegeben": false,
@@ -26954,7 +26954,7 @@
       },
       "w27_entscheidung": {
         "rolle": "NEUER_PRODUKTKANDIDAT_KAUFNAH",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Hersteller-Produktart und Privat-/Vereins- oder kleine reine Gewerbenutzung belegt. Eigenständiger SEO-Owner noch nicht freigegeben.",
         "seo_neu_freigegeben": false,
@@ -27050,7 +27050,7 @@
       },
       "w27_entscheidung": {
         "rolle": "NEUER_PRODUKTKANDIDAT_KAUFNAH",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Hersteller-Produktart und Privat-/Vereins- oder kleine reine Gewerbenutzung belegt. Eigenständiger SEO-Owner noch nicht freigegeben.",
         "seo_neu_freigegeben": false,
@@ -27151,7 +27151,7 @@
       },
       "w27_entscheidung": {
         "rolle": "NEUER_PRODUKTKANDIDAT_KAUFNAH",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Hersteller-Produktart und Privat-/Vereins- oder kleine reine Gewerbenutzung belegt. Eigenständiger SEO-Owner noch nicht freigegeben.",
         "seo_neu_freigegeben": false,
@@ -27243,7 +27243,7 @@
       },
       "w27_entscheidung": {
         "rolle": "NEUER_PRODUKTKANDIDAT_KAUFNAH",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Hersteller-Produktart und Privat-/Vereins- oder kleine reine Gewerbenutzung belegt. Eigenständiger SEO-Owner noch nicht freigegeben.",
         "seo_neu_freigegeben": false,
@@ -32683,7 +32683,7 @@
       },
       "w27_entscheidung": {
         "rolle": "NEUER_PRODUKTKANDIDAT_KAUFNAH",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Hersteller-Produktart und Privat-/Vereins- oder kleine reine Gewerbenutzung belegt. Eigenständiger SEO-Owner noch nicht freigegeben.",
         "seo_neu_freigegeben": false,
@@ -32783,7 +32783,7 @@
       },
       "w27_entscheidung": {
         "rolle": "NEUER_PRODUKTKANDIDAT_KAUFNAH",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Hersteller-Produktart und Privat-/Vereins- oder kleine reine Gewerbenutzung belegt. Eigenständiger SEO-Owner noch nicht freigegeben.",
         "seo_neu_freigegeben": false,
@@ -33911,7 +33911,7 @@
       },
       "w27_entscheidung": {
         "rolle": "NEUER_PRODUKTKANDIDAT_KAUFNAH",
-        "hauptbereich": "GARTEN",
+        "hauptbereich": "BRUNNEN",
         "menue_kandidat": true,
         "begruendung": "Hersteller-Produktart und Privat-/Vereins- oder kleine reine Gewerbenutzung belegt. Eigenständiger SEO-Owner noch nicht freigegeben.",
         "seo_neu_freigegeben": false,
@@ -36780,7 +36780,7 @@
   },
   "w27_fachbaum": {
     "datum": "2026-11-16",
-    "status": "einmalig_fachlich_abgeleitet_nicht_live_freigegeben",
+    "status": "einmaliger_sieben_bereiche_fachbaum_entwurf_nicht_live",
     "hauptkategorien": [
       {
         "id": "PUMPEN",
@@ -36789,7 +36789,7 @@
       },
       {
         "id": "BRUNNEN",
-        "name": "Brunnen & Wassergewinnung",
+        "name": "Brunnen & Bewässerung",
         "position": 2
       },
       {
@@ -36798,29 +36798,24 @@
         "position": 3
       },
       {
-        "id": "GARTEN",
-        "name": "Garten & Bewässerung",
-        "position": 4
-      },
-      {
         "id": "TRINK",
         "name": "Trinkwasser & Hausinstallation",
-        "position": 5
+        "position": 4
       },
       {
         "id": "MESSEN",
         "name": "Wasseranalyse & Steuerung",
-        "position": 6
+        "position": 5
       },
       {
         "id": "ABWASSER",
         "name": "Abwasser & Entwässerung",
-        "position": 7
+        "position": 6
       },
       {
         "id": "POOL",
         "name": "Pool & Teichtechnik",
-        "position": 8
+        "position": 7
       }
     ],
     "rollenzahlen": {
@@ -36841,9 +36836,9 @@
       },
       {
         "id": "BRUNNEN",
-        "name": "Brunnen & Wassergewinnung",
-        "existing": 3,
-        "new_menu": 1,
+        "name": "Brunnen & Bewässerung",
+        "existing": 9,
+        "new_menu": 21,
         "fach": 9
       },
       {
@@ -36852,13 +36847,6 @@
         "existing": 15,
         "new_menu": 8,
         "fach": 2
-      },
-      {
-        "id": "GARTEN",
-        "name": "Garten & Bewässerung",
-        "existing": 6,
-        "new_menu": 20,
-        "fach": 0
       },
       {
         "id": "TRINK",
@@ -36891,6 +36879,12 @@
     ],
     "klare_grenze": "Nur bisherige 79 WP-Owner sind Seitenbestand. Neue 171 belegte Produktarten erhalten keine automatische Website- oder SEO-Freigabe. Die 8 Hauptkategorien sind ein Konzept; URL-Migration, WP-Freigabe, vollständiger SEO-SERP-Abgleich getrennt erst nach fachlicher Endabnahme.",
     "einmalentscheidung_feld": "eintraege[].w27_entscheidung",
-    "historische_kauf_statuszaehlung": "W26: 172 Marktstatus-Marker, darunter 1 Alias; W27: 171 eigenstaendige zusaetzliche belegte Produktarten."
+    "historische_kauf_statuszaehlung": "W26: 172 Marktstatus-Marker, darunter 1 Alias; W27: 171 eigenstaendige zusaetzliche belegte Produktarten.",
+    "sieben_statt_acht": "Brunnen und Gartenbewässerung fachlich konsolidiert: ursprünglich vier vs 42 kaufnahe Links bei separaten Bereichen. Visualisierung nutzt nur Gruppenüberschriften; keine zusätzlichen WP-Seiten.",
+    "fach_ohne_kaufbereich": [
+      "W22-P005",
+      "W22-P006",
+      "W22-P008"
+    ]
   }
 }
