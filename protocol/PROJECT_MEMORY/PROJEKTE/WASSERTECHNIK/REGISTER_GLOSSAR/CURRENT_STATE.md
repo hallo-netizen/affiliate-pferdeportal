@@ -8,3 +8,6 @@
 **Bericht/Prüfzahlen:** `../KATEGORIEKONZEPT/W27_SIEBEN_HAUPTBEREICHE_FACHBAUM_GESAMTENTSCHEID_20261116.md`.
 **Geschützte Grundlagen:** W4 79 Produktowner/105 Rubriken/356 Beitragsideen; W5 59 gemessene und 20 unbekannte Produkt-Suchvolumina; 9 kanonische Aliasbeziehungen, 50 Funktionsvergleiche. WP, WT001, Design, Frontend, neue SEO-API unverändert.
 **NEXT:** Kein weiterer Produktzahl-Blindlauf. Einmalige fachliche Abnahme des siebenteiligen Baums; anschließend nur SEO-eigenständige Neuowner und kontrollierter WP-Import samt Weiterleitungen. Bis dahin W27 ist Konzept, nicht Live-Webseite.
+
+
+**W28 – SEO-Einmalhandoff (16.11.2026):** 81 kaufnahe neue Produktanwärter aus dem **unveränderten** W27-Master in eine schreibfreie Übergabe exportiert; kein neuer Produktmaster. 81 mit Quellen, 90 passenden Artikelrubriken (je mindestens drei unterschiedliche Ideen); 45 mit altem fachlichem Vergleichsverweis, 36 ohne notierten Vergleich – alle 81 SEO noch ungeprüft. Siehe `../PRUEFUNG/W28_GEBUENDELTER_SEO_VORLAUF_81_20261116.md` und `../PRUEFUNG/W28_SEO_EINMALHANDOFF_81_20261116.json`. Keine SEO-API-/WP-/Plugin-/Frontend-Aktion.
