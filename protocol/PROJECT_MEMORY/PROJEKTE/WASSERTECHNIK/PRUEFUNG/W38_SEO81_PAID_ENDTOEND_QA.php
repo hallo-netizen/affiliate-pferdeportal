@@ -77,21 +77,15 @@ if($case==='wrongsite')$GLOBALS['site']='other.example';
 if($case==='noapproval')$_POST['explicit_paid_approval']='0';
 
 if(in_array($case,['stale','locked','nonadmin','wrongsite','noapproval'],true)){
-    try{Wassertechnik_PaidResearch::paid81();}
-    catch(Throwable $e) {
-        if($GLOBALS['calls']!==[])throw new RuntimeException('Guard made a paid provider call');
-        if($GLOBALS['options'][$oldReportName]['sentinel']!=='PRESERVE_218_RESULTS')
-            throw new RuntimeException('Guard changed old data');
-        echo 'PASS W38 negative '.$case.' provider_calls=0 old218=preserved'.PHP_EOL;
-        exit(0);
-    }
-    // For stale or locked, the guarded method catches internally, then exits via redirect.
+    // Shutdown assertions are registered BEFORE the WP handler, which calls exit().
     register_shutdown_function(function()use($case,$oldReportName){
         if($GLOBALS['calls']!==[]) {fwrite(STDERR,'FAIL '.$case.' paid unexpectedly'.PHP_EOL);exit(5);}
         if($GLOBALS['options'][$oldReportName]['sentinel']!=='PRESERVE_218_RESULTS')
             {fwrite(STDERR,'FAIL old218 mutated'.PHP_EOL);exit(6);}
         echo 'PASS W38 negative '.$case.' provider_calls=0 old218=preserved'.PHP_EOL;
     });
+    try{Wassertechnik_PaidResearch::paid81();}
+    catch(Throwable $e){exit(0);}
 } else {
     register_shutdown_function(function()use($case,$oldReportName){
         $report=$GLOBALS['options']['wassertechnik_dfs_w38_81_paid_report']??[];
