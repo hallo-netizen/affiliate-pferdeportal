@@ -89,7 +89,7 @@ trait Wassertechnik_W38_Seo81_Trait {
             submit_button('81er-SEO-Bericht herunterladen','secondary','submit',false);
             echo '</form>';
         }
-        if($lock!==false){
+        if($lock!==false || (is_array($report)&&!empty($report["request_id"]))){
             echo '<p><strong>Dieser 81er-Auftrag ist bereits gesperrt oder ausgeführt. Keine zweite kostenpflichtige Anfrage.</strong></p>';
             return;
         }
@@ -122,8 +122,12 @@ trait Wassertechnik_W38_Seo81_Trait {
             if(is_array($legacyReport) && !empty($legacyReport['source_fingerprint']) &&
                 !hash_equals((string)$legacyReport['source_fingerprint'],(string)$pre['legacy_fingerprint']))
                 throw new RuntimeException('Alter 218er-Bericht stimmt nicht mit Originalplanung überein.');
-            if(get_option(self::W38_LOCK,false)!==false)
-                throw new RuntimeException('81er-Auftrag bereits begonnen. Keine Wiederholung.');
+            // A present report is a permanent deduplication receipt even if an
+            // administrator accidentally deleted the separate start lock.
+            $existing81=get_option(self::W38_REPORT,[]);
+            if((is_array($existing81)&&!empty($existing81['request_id']))
+                ||get_option(self::W38_LOCK,false)!==false)
+                throw new RuntimeException('81er-Auftrag bereits begonnen oder abgeschlossen. Keine zweite Berechnung.');
             $requestId=hash('sha256','wt38:81:'.$pre['fingerprint'].':Germany:de');
             if(!add_option(self::W38_LOCK,['request_id'=>$requestId,'utc'=>gmdate('c'),'fingerprint'=>$pre['fingerprint']],'',false))
                 throw new RuntimeException('81er-Lauf bereits reserviert. Keine doppelte Abrechnung.');
