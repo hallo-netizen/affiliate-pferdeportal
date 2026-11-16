@@ -1,0 +1,20 @@
+# QA89 – Gesamtprüfung der Affiliate-Zentrale gegen den verbindlichen QA69-Zielvertrag (16.11.2026)
+
+## Stand
+**Nur lokale Original-PHP-Gesamttests bestanden; nicht als Live-Erfolg freigegeben.** Ausgangszip: 6.72.354 mit genau 66 Dateien. Paketkandidat 6.72.355: genau vier Dateien unterschiedlich (zwei vorhandene eBay-Traits, Pluginversion, Readme). Keine neue Uhr, kein anderer Worker, keine zweite Produktentscheidung, keine Migration, keine erneute Suche.
+
+## Warum die früheren Fehler nicht früher auffielen
+- Der als „nicht bestandener Gesamttest“ geführte QA75-Lauf hatte **zwei fehlende WordPress-Elemente in seiner Testkopie** (`get_option`, `FullPipeline50::OPTION_NETWORK_EBAY`). Der Plugin-Abbruch `canonical_worker_runtime_error` mit `Call to undefined function get_option()` war **kein belastbarer Pluginbefund**. Nach Ergänzung ausschließlich der Testumgebung laufen alle neun echten PHP-Controller-Lebenszyklen durch: **5 korrekt abgeschlossen** (Normalfall, altes/neues Angebot gesperrt, Quellenwechsel, keine neuen Artikel), **4 korrekt als Fehler gestoppt** (Datenbank, Commit, Übergangsspeicher, Commitkollision). SAFE-Altbestand bleibt in Fehlerszenarien erhalten; bewusst ungültige Produkte bleiben gesperrt.
+- Der bisherige 15-Fälle-Test erwartete **fälschlich einen terminalen Gesamtstatus `failed`**, wenn die Produktsuche **innerhalb desselben Arbeitsschritts** scheiterte, obwohl der unabhängige Verfügbarkeitscursor weiter `running=1` war. Das ließ die GitHub-Kette terminieren. Mit **korrigiertem verbindlichem Testerwartungswert** war der alte Originalcode 6.72.354 nur **14/15**. Der neue 6.72.355-Code liefert für diesen Fall `advanced`, lässt den Such-Fehler **im gespeicherten Zustand** stehen und führt bei nächstem Takt nur den bestehenden Frischecursor weiter. **15/15** direkt am echten PHP-Handler.
+- Der rote alte Audit-Hinweis blieb auch nach späterer ordentlicher Protokollierung für immer bestehen: `ppar_ebay_audit_write_error_v1` wird bei Fehler gesetzt, aber nie zurückgenommen. Die alte Lücke wird nicht unterschlagen oder gelöscht; nur der Backend-Text erklärt sie eindeutig als **historische** Lücke und nicht als aktuellen Laufstopp. Es wurde **kein zusätzliches Protokoll** gebaut.
+
+## Vollständige lokale gemeinsame Prüfung direkt aus fertig gepacktem Kandidaten
+- **283 Familien:** Originalcontroller nach den neun Szenarien mit simulierten WordPress-/eBay-Daten, fünf gewollte Abschlüsse und vier gewollte Sicherheitsstopps.
+- **309 SAFE-Kampagnen** mit 496 synthetischen historischen veröffentlichten Ausgaben und 9.792 synthetischen Quellen: 309/309 genau einmal im bisherigen SAFE-Aktualitätsweg, keine Fremdquelle, kein neuer Suchlauf, bisheriger öffentlicher SAFE-Checkpoint unverändert. 16 Arbeitspakete unter **simuliertem** Zeitpunkt.
+- **95 echte historische Artikelkennungen** am echten Materialisierungs-PHP mit ausdrücklich nachgestellten eBay-Antworten: 95/95, keine Doppelprüfungen.
+- **15/15** gekoppelte Statusübergänge, **16** REST-Gegenfälle, **9/9** Sieben-Tage-/Fälligkeitsregeln; PHP-Syntax **23/23**; ZIP-Integrität und Dateivergleich geprüft.
+
+## Tatsächliche, unverändert offene Livegrenze
+Die aktuellen echten 309 SAFE-Produkte waren am 16.11. vormittags zu 293 abgelaufen; der alte Frischeworker hatte 448 historisch kumulative Prüfungen. **Der echte eBay-Quellenverbrauch pro Heartbeat, die realen Zeitabstände, der 283er verifizierte öffentliche Endbestand und die Frontend-Karten sind weiterhin nicht aus den simulierten Tests beweisbar.** Es wäre falsch, wegen bestandener Quelltests „fertig“ zu melden.
+
+**Betriebliche Folgerung:** Keine neue Vollsuche, keine Datenlöschung, kein GitHub-/Hoster-Umbau. EINE bereits existierende Affiliate-Zentrale mit ihrer einen Uhr und zwei unabhängig gespeicherten Arbeitsteilen. Live-Abnahme ist erst die reale Bestätigung über den bereits vorhandenen Bericht/Frontend nach zulässiger Übernahme, nicht eine erneute lokale Testwiederholung.
