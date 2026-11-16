@@ -137,7 +137,7 @@ def main() -> None:
             "Original version expected")
     content=content.replace("Aktueller Fachplan W4:</strong> 8 Hauptbereiche, 19 Zwischenbereiche, 1 Industrieeinstieg, 6 Industrie-Landingvorschlaege, 79 Produktseiten, 105 Inhaltskategorien und 356 grobe Artikelideen. Kostenloser SEO-Pruefplan: 218 Begriffe.", "Fachplan W27:</strong> sieben kaufnahe Hauptbereiche (einschliesslich Pool und Teich), 71 vorhandene Kauf-Produktseiten, acht Industrie-Produktseiten und 81 neue noch SEO-ungepruefte Produkttypen. Der bisherige W4-SEO-Plan mit 218 Begriffen bleibt erhalten.")
     require("Aktueller Fachplan W4:" not in content, "Old contradictory eight-item homepage retained")
-    (pkg/"README.txt").write_text("WT001 0.1.10 - W38 GESAMT-REKONSTRUKTION / NICHT INSTALLIEREN\n"
+    (pkg/"README.txt").write_text("WT001 0.1.10 - W39 GESAMT-REKONSTRUKTION / NICHT INSTALLIEREN\n"
         "218 alte SEO Owner unveraendert; 81 neue Keywords nur nach expliziter SEO-Kostenfreigabe. "
         "W27 sieben Kaeufer-Hauptbereiche plus separater Industrie-Fachzugang.\n"
         "Nur EIN W35-WordPress-Importer fuer 219 Owner (218 alte plus Pool-Hub als Entwurf). "
@@ -145,8 +145,8 @@ def main() -> None:
         "Der alte W6-Neuner-Importer ist ausgetauscht, nicht parallel aktiv.\n"
         "Keine automatische WP-Schreibaktion oder kostenpflichtige SEO-Abfrage. "
         "Original 0.1.7 fehlt; deshalb NICHT installieren.\n", encoding="utf-8")
-    content=content.replace("Version: 0.1.4", "Version: 0.1.9")
-    content=content.replace("VERSION = '0.1.4'", "VERSION = '0.1.9'")
+    content=content.replace("Version: 0.1.4", "Version: 0.1.10")
+    content=content.replace("VERSION = '0.1.4'", "VERSION = '0.1.10'")
     content=content.replace("Kein Import oder Veroeffentlichen.", "Nur Vorschau, Import und Veroeffentlichung gesperrt.")
     # Keep original SEO logic literally unmodified, including 218 owner lock, budget and persisted report keys.
     main_php.write_text(content,encoding="utf-8")
