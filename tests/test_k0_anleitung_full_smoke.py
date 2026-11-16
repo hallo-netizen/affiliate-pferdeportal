@@ -28,6 +28,20 @@ def fresh_anleitung():
     }
     for c in a["research_claims"].values():
         c["article_types"].append("Anleitung")
+    # The test must be a coherent article with a genuine fact-to-paragraph
+    # binding, not a mismatched FAQ topic with invented numeric claims.
+    import hashlib
+    source_statements={
+      "F2":"Teile vorbereiten und Beschädigungen erkennen. Benötigte Teile vor der Montage prüfen und sichere Bauteile kontrollieren.",
+      "F3":"Montage, Verbindung und Bauteile schrittweise prüfen. Schritte und Reihenfolge müssen die sichere Funktion unterstützen.",
+      "F4":"Montagefehler, beschädigte Teile, ungeeignete Hilfsmittel und Sicherheitsabstand beachten. Verbindung nach dem Aufbau kontrollieren, Ergebnis, Standfestigkeit und Funktion prüfen.",
+    }
+    for fid,statement in source_statements.items():
+        claim=a["research_claims"][fid]
+        claim["statement"]=statement
+        claim["evidence_text"]=statement
+        claim["evidence_text_sha256"]=hashlib.sha256(statement.encode("utf-8")).hexdigest()
+    a["heading_intent_terms"]=["Montage","Teile","Montagefehler","Verbindung","Aufbau","Standfestigkeit","Kontrolle"]
     a["bound_links"][0]["block"]="preparation"
     a["bound_links"][1]["block"]="steps"
     intro=a["html"].split('<section data-block="intro">',1)[1].split("</section>",1)[0]
@@ -36,7 +50,7 @@ def fresh_anleitung():
     hashes={fid:c["evidence_text_sha256"] for fid,c in a["research_claims"].items()}
     def para(fid,subject,number,n,link=""):
         marker=trace(fid,"Fachquelle "+fid,hashes[fid]) if number==1 else ""
-        return '<p data-fact-ids="'+fid+'">'+marker+' '+words(subject+" "+str(number),n)+' '+link+'</p>'
+        return '<p data-fact-ids="'+fid+'">'+marker+' '+words(subject+" "+("eins","zwei","drei","vier")[number-1],n)+' '+link+'</p>'
     def block(name,title,fid,subject,role="",href="",anchor="",lists=""):
         text="<section data-block='"+name+"'><h2>"+title+"</h2>"
         for i in range(1,5):
@@ -50,8 +64,8 @@ def fresh_anleitung():
     steps=block("steps","Montage in sinnvoller Reihenfolge","F3","Montage Verbindung Bauteile Schrittfolge prüfen",
                 "semantic_related","/training/longieren/","Longieren",steps_list)
     risk_list='<ul data-list="mistakes"><li data-fact-ids="F4">Beschädigte Teile weiterverwenden</li><li data-fact-ids="F4">Verbindung nicht ausreichend prüfen</li><li data-fact-ids="F4">Ungeeignete Hilfsmittel einsetzen</li><li data-fact-ids="F4">Sicherheitsabstand unterschätzen</li></ul>'
-    risks=block("risks","Typische Montagefehler vermeiden","F4","Fehler Sicherheit Abstände Bauteile beachten",lists=risk_list)
-    verification=block("verification","Verbindung nach dem Aufbau kontrollieren","F4","Ergebnis Kontrolle Standfestigkeit Funktion prüfen")
+    risks=block("risks","Typische Montagefehler vermeiden","F4","Montagefehler Sicherheit Abstände Bauteile beachten",lists=risk_list)
+    verification=block("verification","Verbindung nach dem Aufbau kontrollieren","F4","Verbindung Aufbau Ergebnis Kontrolle Standfestigkeit Funktion prüfen")
     a["html"]="<article><section data-block=\"intro\">"+intro+"</section>"+preparation+steps+risks+verification+'<section data-block="conclusion">'+conclusion+'</section><section data-block="further_information">'+further+"</section></article>"
     a["table_decision"]={
       "decision":"OMIT_NO_ADDED_VALUE",
