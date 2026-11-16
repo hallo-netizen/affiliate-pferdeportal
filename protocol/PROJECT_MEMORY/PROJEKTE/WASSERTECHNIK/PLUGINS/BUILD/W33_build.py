@@ -207,6 +207,15 @@ def main() -> None:
     result = subprocess.run([sys.executable,str(audit)], capture_output=True,text=True,timeout=30)
     print(result.stdout,end="")
     require(result.returncode==0,"W36 audit failed: "+result.stderr+" "+result.stdout)
+    # W38: one end-to-end test suite for the real PaidResearch methods with a mocked API,
+    # including positive provider results, real non-retry failure handling, version isolation.
+    paidqa=PROJECT/"PRUEFUNG"/"W38_SEO81_PAID_ENDTOEND_QA.php"
+    require(paidqa.is_file(),"W38 real 81 paid-flow QA missing")
+    for scenario in ("success","provider","network","budget","stale","locked","nonadmin","wrongsite","noapproval"):
+        qa=subprocess.run(["php",str(paidqa),str(pkg),scenario],capture_output=True,text=True,timeout=30)
+        print("[W38 "+scenario+"] "+qa.stdout,end="")
+        require(qa.returncode==0 and "PASS W38" in qa.stdout,
+                "W38 "+scenario+" paid-flow simulation FAILED: "+qa.stderr+" "+qa.stdout)
     members=sorted(p for p in pkg.rglob("*") if p.is_file())
     with zipfile.ZipFile(OUT,"w",compression=zipfile.ZIP_DEFLATED,compresslevel=9) as zipped:
         for f in members:
