@@ -1,7 +1,7 @@
 import hashlib, html as htmlmod, re
 from collections import Counter
 from html.parser import HTMLParser
-from .core import load_values, stable
+from .core import load_values, values_hash, stable
 from .receipt import make_receipt
 
 SPECIAL_HEADINGS={'fazit','weiterführende informationen','weiterfuehrende informationen'}
@@ -71,7 +71,7 @@ def _sentences(text):
     return [x.strip() for x in re.split(r'(?<=[.!?])\s+',_plain(text)) if x.strip()]
 
 def _receipt(rule_id,owner,article,status,evidence=None):
-    return make_receipt(rule_id,owner,'ARTICLE',article['article_id'],article_hash(article),status,evidence)
+    return make_receipt(rule_id,owner,'ARTICLE',article['article_id'],article_hash(article),status,evidence,values_hash(article['article_type']))
 
 def _html_balanced(html):
     p=_BalanceParser()
@@ -106,7 +106,7 @@ def _max_pair_similarity(texts):
     return best
 
 def structural_receipts(article):
-    v=load_values(); legacy=v['ppm_parity']; cfg=v['types'].get(article.get('article_type')) or {}
+    v=load_values(article['article_type']); legacy=v['ppm_parity']; cfg=v['types'].get(article.get('article_type')) or {}
     html=article['html']; title=str(article.get('title') or '')
     sections=_sections(html); blocks=[x['block'] for x in sections if x['block']]
     block_map={s['block']:s for s in sections if s['block']}
@@ -222,7 +222,7 @@ def structural_receipts(article):
     return [_receipt(rid,'structural_checker',article,'PASS' if ok else 'FAIL',ev) for rid,ok,ev in rows]
 
 def fact_receipts(article):
-    v=load_values(); legacy=v['ppm_parity']; html=article['html']; typ=article['article_type']; cfg=v['types'][typ]
+    v=load_values(article['article_type']); legacy=v['ppm_parity']; html=article['html']; typ=article['article_type']; cfg=v['types'][typ]
     trace_cfg=v['global']['source_trace']; traces=_trace_tags(html,trace_cfg['class']); claims=article.get('research_claims') or {}
     attrs_ok=True; binding_find=[]; real_ok=True; real_find=[]
     # The same existing fact-trace binding check also enforces invisible
@@ -314,7 +314,7 @@ def _heading_missing_enumeration_separator(value):
     return bool(re.search(r'^\s*[A-ZÄÖÜ][\wÄÖÜäöüß-]+\s+[A-ZÄÖÜ][\wÄÖÜäöüß-]+\s+(?:und|oder)\s+[A-ZÄÖÜ][\wÄÖÜäöüß-]+\b',str(value or '')))
 
 def editorial_receipts(article):
-    v=load_values(); cfg=v['heading']; legacy=v['ppm_parity']; html=article['html']; sections=_sections(html)
+    v=load_values(article['article_type']); cfg=v['heading']; legacy=v['ppm_parity']; html=article['html']; sections=_sections(html)
     headings=[s['heading'] for s in sections if s['heading']]; norm=[_norm(x) for x in headings]
     target=_norm(article.get('target_keyword'))
     stop=set(cfg['significant_keyword_stop_tokens']); sig=[x for x in target.split() if len(x)>=4 and x not in stop]
@@ -392,7 +392,7 @@ def _strip_blocks(html,blocks):
     return out
 
 def balance_receipts(article):
-    v=load_values(); cfg=v['balance']; typ=v['types'][article['article_type']]; html=article['html']; sections=_sections(html); total=len(_words(html))
+    v=load_values(article['article_type']); cfg=v['balance']; typ=v['types'][article['article_type']]; html=article['html']; sections=_sections(html); total=len(_words(html))
     normal=[s for s in sections if s['block'] not in set(cfg['exempt_blocks']) and s['heading']]; counts=[len(_words(s['content'])) for s in normal]
     section_ok=all(int(cfg['normal_h2_section_min_words'])<=n<=int(cfg['normal_h2_section_max_words']) for n in counts)
     ratio_ok=(not counts or min(counts)>0 and max(counts)/min(counts)<=float(cfg['normal_h2_longest_to_shortest_max_ratio']))
@@ -432,7 +432,7 @@ def _table_tautological_action_rows(rows):
     return bad
 
 def table_receipts(article):
-    v=load_values(); cfg=v['table']; legacy=v['ppm_parity']['table']; html=article['html']; typ=article['article_type']; tables=re.findall(r'(?is)<table\b[^>]*>.*?</table>',html)
+    v=load_values(article['article_type']); cfg=v['table']; legacy=v['ppm_parity']['table']; html=article['html']; typ=article['article_type']; tables=re.findall(r'(?is)<table\b[^>]*>.*?</table>',html)
     count=len(tables); policy=cfg['presence_policy'][typ]
     omission_cfg=cfg.get('omission_exception') or {}
     decision=article.get('table_decision') or {}
