@@ -51,7 +51,7 @@ def _insert_into_first_factual_unit(body, trace_markup):
 def materialize_trace_bindings(article):
     out=copy.deepcopy(article)
     claims=out.get('research_claims') or {}
-    cfg=load_values()
+    cfg=load_values(out.get('article_type'))
     required=set((cfg['types'].get(out.get('article_type')) or {}).get('fact_trace_required_blocks') or [])
     minimum=int(cfg['global']['source_trace']['minimum_count'])
     inserted=[]
@@ -109,7 +109,7 @@ def preflight_article(article):
     prepared,binding=materialize_trace_bindings(designed)
     design_validation=validate_canonical_html(prepared)
     receipts=run_article_content_checks(prepared)
-    verification=verify_article_pre_lt68(prepared['article_id'],article_hash(prepared),receipts)
+    verification=verify_article_pre_lt68(prepared['article_id'],article_hash(prepared),receipts,prepared['article_type'])
     report={
       'contract':'K10_ARTICLE_PREFLIGHT_V1',
       'status':verification['status'],
