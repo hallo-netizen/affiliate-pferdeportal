@@ -84,6 +84,30 @@ $assert(($old['fingerprint']??null)==='9570a11250f6d3684f52af69239a9af2090a292ba
 $h=Wassertechnik_W30_Seo_Handoff::read($root.'/assets/wassertechnik-w28-seo-handoff.json');
 $assert($h['anzahl']===81 && $h['rubriken']===90,'real W28: 81 new, 90 rubrics');
 $assert(count(array_unique(array_column($h['produkte'],'register_id')))==81,'81 distinct canonical IDs');
+
+/* W36: prove that all 81 candidate search terms are accepted by the actual,
+ * retained DataForSEO/paid-research normalizer, not a second invented SEO rule.
+ * No API call, no WP write and no candidate receives an SEO-owner approval. */
+$paidNormal=new ReflectionMethod(Wassertechnik_PaidResearch::class,'normal');
+$dfsNormal=new ReflectionMethod(Wassertechnik_DataForSEO::class,'normal');
+$seo81=[];$crossOld=[];$invalid=[];$duplicates=[];
+$old218=array_fill_keys($keywords,true);
+foreach($h['produkte'] as $candidate){
+    $raw=(string)$candidate['keyword_vorschlag_ungeprueft'];
+    $term=$paidNormal->invoke(null,$raw);
+    $term2=$dfsNormal->invoke(null,$raw);
+    if($term!==$term2 || $term==='' || strlen($term)>80 || count(preg_split('/\s+/u',$term))>10)
+        $invalid[]=$candidate['register_id'];
+    if(isset($seo81[$term]))$duplicates[]=$candidate['register_id'];
+    $seo81[$term]=$candidate['register_id'];
+    if(isset($old218[$term]))$crossOld[]=$candidate['register_id'];
+}
+$assert($invalid===[],'W36 all 81 W28 terms pass original DataForSEO/paid normalizers and provider input limits');
+$assert($duplicates===[] && count($seo81)===81,'W36 81 provider-normalized keywords are unique');
+$assert($crossOld===[],'W36 81 provider-normalized keywords have no exact collisions with existing 218');
+$assert(($paidNormal->invoke(null,'Viereckregner'))==='viereckregner','W36 positive SEO normalization example');
+$assert($GLOBALS['writes']===0 && $GLOBALS['http']===0,'W36 negative safety: real SEO handoff causes no WP writes or paid calls');
+
 $assert(count(array_filter($h['produkte'],fn($x)=>($x['wp_seitenfreigabe']??null)!==false))===0,'no new WordPress page approvals');
 ob_start();Wassertechnik_Seo81_Preview::screen();$html=ob_get_clean();
 $assert(substr_count($html,'<tr>')===82,'81 rows in original WP admin preview');
