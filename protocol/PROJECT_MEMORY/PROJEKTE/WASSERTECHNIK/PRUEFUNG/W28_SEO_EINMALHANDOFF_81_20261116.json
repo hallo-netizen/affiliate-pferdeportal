@@ -1,0 +1,2993 @@
+{
+  "version": "W28_2026-11-16",
+  "datum": "2026-11-16",
+  "status": "ABGELEITETER_EINMAL_HANDOFF_NICHT_AKTIVER_MASTER_KEINE_SEO_WP_FREIGABE",
+  "einzige_masterquelle": "protocol/PROJECT_MEMORY/PROJEKTE/WASSERTECHNIK/REGISTER_GLOSSAR/W27_ZENTRALES_FACHREGISTER_20261116.json",
+  "notiz": "Nur einmal aus dem W27-Register abgeleitete schreibfreie Übergabe. W27 bleibt einzige Produktentscheidung; keine Nachbearbeitung in dieser Kopie. Keine bezahlten API-Aufrufe.",
+  "anzahl": 81,
+  "mit_bekanntem_funktionsvergleich": 45,
+  "ohne_notierten_funktionsvergleich": 36,
+  "alle_quellen_und_artikeltiefen_geprueft": true,
+  "seo_w5_volumina_fuer_diese_neuowner": "nicht_vorhanden",
+  "produktansprechpartner": "WordPress-Kategorie-Plugin WT001, nur SEO-Preflight nach Genehmigung; kein Import",
+  "produkte": [
+    {
+      "register_id": "W12-003",
+      "kanonisch_id": "W12-003",
+      "produktname": "Viereckregner",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "viereckregner",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.gardena.com/de/produkte/bewaesserung/regner/viereckregner-aqua-m/967976301.html",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Flächenberegnung",
+          "article_ideas": [
+            "Rechteckige Rasenflächen mit Viereckregnern abdecken",
+            "Reichweite und Sprengbreite richtig einstellen",
+            "Erforderlichen Leitungsdruck für Viereckregner abschätzen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-004",
+      "kanonisch_id": "W12-004",
+      "produktname": "Bewässerungs-Magnetventil",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "bewässerungs-magnetventil",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.gardena.com/de/produkte/bewaesserung/bewaesserungssteuerung",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Ventilwahl",
+          "article_ideas": [
+            "9-V- und 24-V-Bewässerungsventile unterscheiden",
+            "Ventilgröße und Durchfluss passend auswählen",
+            "Ventile für mehrere Bewässerungszonen planen"
+          ]
+        },
+        {
+          "name": "Ventilbetrieb",
+          "article_ideas": [
+            "Magnetventile in Ventilboxen anordnen",
+            "Ventile manuell betätigen und auf Störungen prüfen",
+            "Bewässerungsventile winterfest machen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-005",
+      "kanonisch_id": "W12-005",
+      "produktname": "Tropfrohr",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "tropfrohr",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W18-P009"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.gardena.com/de/produkte/bewaesserung/micro-drip-system",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        },
+        {
+          "url": "https://www.gardena.com/de/produkte/bewaesserung/micro-drip-system?start=0&sz=111",
+          "art": "Herstellerquelle_Fachbeleg",
+          "pruefung": "W24_Nachrecherche_20261115"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Rohrverlegung",
+          "article_ideas": [
+            "Oberirdische und unterirdische Tropfrohre vergleichen",
+            "Tropferabstände für Hecken und Pflanzreihen auswählen",
+            "Druckverteilung bei langen Tropfrohrstrecken planen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-006",
+      "kanonisch_id": "W12-006",
+      "produktname": "Solar-Bewässerungsset",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "solar-bewässerungsset",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.gardena.com/de/produkte/bewaesserung/bewaesserung-ohne-wasseranschluss-urlaubsbewaesserung/solar-bewaesserungs-aquabloom-set/967999001.html",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Autarke Versorgung",
+          "article_ideas": [
+            "Solar-Bewässerungsset für Balkon und Hochbeet auswählen",
+            "Wasserbehälter und Tropferzahl auf Urlaubszeit abstimmen",
+            "Solarmodul und Akkuleistung für Bewässerungsintervalle beurteilen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-007",
+      "kanonisch_id": "W12-007",
+      "produktname": "Trinkwasser-Druckminderer",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "trinkwasser-druckminderer",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.dvgw.de/themen/wasser/verbraucherinformationen/trinkwasser-installation/",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Druckregelung",
+          "article_ideas": [
+            "Passenden Ausgangsdruck am Trinkwasser-Druckminderer wählen",
+            "Anschlussgröße und Durchflussleistung dimensionieren",
+            "Schwankenden Hauswasserdruck richtig beurteilen"
+          ]
+        },
+        {
+          "name": "Wartung",
+          "article_ideas": [
+            "Druckminderer auf Druckabweichungen kontrollieren",
+            "Geräusche und Druckschläge an Druckminderern erkennen",
+            "Wartungsbedarf von Hausdruckminderern einschätzen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-008",
+      "kanonisch_id": "W12-008",
+      "produktname": "Warmwasser-Zirkulationspumpe",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "warmwasser-zirkulationspumpe",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.grundfos.com/de/support/faq/what-are-the-requirements-for-the-hot-water-recirculation-pump",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        },
+        {
+          "url": "https://www.grundfos.com/de/learn/ecademy/all-courses/the-comfort-hot-water-recirculation-course/comfort-mechanical-installation",
+          "art": "Herstellerquelle_Fachbeleg",
+          "pruefung": "W24_Nachrecherche_20261115"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Pumpenauswahl",
+          "article_ideas": [
+            "Zirkulationspumpe nach Leitungsnetz und Förderbedarf auswählen",
+            "Geeignete Materialien für Trinkwarmwasserpumpen unterscheiden",
+            "Temperaturgeführte Pumpenvarianten vergleichen"
+          ]
+        },
+        {
+          "name": "Energie & Betrieb",
+          "article_ideas": [
+            "Zirkulationszeiten und Wärmeverluste aufeinander abstimmen",
+            "Wasserhygiene bei unterbrochener Zirkulation berücksichtigen",
+            "Geräusche und Luft in der Zirkulationsleitung erkennen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-009",
+      "kanonisch_id": "W12-009",
+      "produktname": "Automatisches Leckageschutzventil",
+      "geplanter_hauptbereich": "MESSEN",
+      "keyword_vorschlag_ungeprueft": "automatisches leckageschutzventil",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.syr.de/de/Produkte/BB120F93-73D2-4AD2-B362-5307DCC3866A/ISI-Home-Connect-System",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Leckagemessung",
+          "article_ideas": [
+            "Druckabfall und Verbrauchsmessung zur Leckageerkennung vergleichen",
+            "Grenzwerte für kleine Lecks und große Wasserentnahmen festlegen",
+            "Zentrale und zonenweise Wasserabsperrung unterscheiden"
+          ]
+        },
+        {
+          "name": "Steuerung",
+          "article_ideas": [
+            "Leckageschutzventil mit Smart Home verbinden",
+            "Abwesenheitsmodus und automatische Absperrung nutzen",
+            "Betrieb des Wasserschutzventils bei Netzwerkausfall prüfen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-010",
+      "kanonisch_id": "W12-010",
+      "produktname": "Trinkwasser-Hygienespülstation",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "trinkwasser-hygienespülstation",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "kleinbetrieb",
+        "verein",
+        "kommune"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.kemper-group.com/de-de/gebaeudetechnik/produkte/hygienesystem-khs/khs-hygienespuelungen/index.html",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        },
+        {
+          "url": "https://www.kemper-group.com/de-de/gebaeudetechnik/produkte/hygienesystem-khs/khs-hygienespuelungen/",
+          "art": "Herstellerquelle_Fachbeleg",
+          "pruefung": "W24_Nachrecherche_20261115"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Spültechnik",
+          "article_ideas": [
+            "Zeit- und volumengesteuerte Hygienespülung vergleichen",
+            "Kalt- und Warmwasserstränge bei Hygienespülstationen berücksichtigen",
+            "Einsatz in Schulen, Vereinen und zeitweise genutzten Räumen abgrenzen"
+          ]
+        },
+        {
+          "name": "Kontrolle",
+          "article_ideas": [
+            "Spülintervalle für unregelmäßig genutzte Leitungen festlegen",
+            "Spülereignisse und Wasserwechsel dokumentieren",
+            "Freien Auslauf und Ableitung einer Hygienespülstation prüfen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-011",
+      "kanonisch_id": "W12-011",
+      "produktname": "Wasserspar-Strahlregler",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "wasserspar-strahlregler",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W18-P011"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.neoperl.com/de/de/handel/produkte/strahlregler/wasserspartechnologien",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        },
+        {
+          "url": "https://www.neoperl.com/global/de/handel/produkte/strahlregler/wasserspartechnologien",
+          "art": "Herstellerquelle_Fachbeleg",
+          "pruefung": "W24_Nachrecherche_20261115"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Durchfluss",
+          "article_ideas": [
+            "Strahlregler mit festem Durchflussbegrenzer vergleichen",
+            "Druckabhängige und druckunabhängige Mengenregelung unterscheiden",
+            "Passende Strahlregler für Niederdruckarmaturen auswählen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-012",
+      "kanonisch_id": "W12-012",
+      "produktname": "Duschwasser-Wärmetauscher",
+      "geplanter_hauptbereich": "ABWASSER",
+      "keyword_vorschlag_ungeprueft": "duschwasser-wärmetauscher",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W17-P025"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.co2online.de/energie-sparen/wasser-sparen/warmwasserbereitung/warmwasser-waermerueckgewinnung/",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Bauarten",
+          "article_ideas": [
+            "Duschrinne und Fallrohrwärmetauscher vergleichen",
+            "Duschwasser-Wärmetauscher für Neubau oder Nachrüstung auswählen",
+            "Einsatz im Privathaus gegenüber Sportstätte beurteilen"
+          ]
+        },
+        {
+          "name": "Wirtschaftlichkeit",
+          "article_ideas": [
+            "Wärmerückgewinnung anhand von Duschdauer und Warmwasserbedarf bewerten",
+            "Duschwasser-Wärmerückgewinnung mit Warmwasserbereitung kombinieren",
+            "Hygienische Trennung von Frisch- und Duschabwasser beachten"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-013",
+      "kanonisch_id": "W12-013",
+      "produktname": "Regenwasser-Ablaufdrossel",
+      "geplanter_hauptbereich": "REGEN",
+      "keyword_vorschlag_ungeprueft": "regenwasser-ablaufdrossel",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb",
+        "kommune"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.intewa.com/de/intewa-produkte/ablaufdrosseln/",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        },
+        {
+          "url": "https://stage.intewa.com/de/intewa-produkte/ablaufdrosseln/",
+          "art": "Herstellerquelle_Fachbeleg",
+          "pruefung": "W24_Nachrecherche_20261115"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Abflussregelung",
+          "article_ideas": [
+            "Ablaufdrossel nach zulässiger Abflussmenge wählen",
+            "Schlauchdrossel und Edelstahldrossel unterscheiden",
+            "Einbauposition und Wartung einer Zisternendrossel planen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-015",
+      "kanonisch_id": "W12-015",
+      "produktname": "Fettabscheider",
+      "geplanter_hauptbereich": "ABWASSER",
+      "keyword_vorschlag_ungeprueft": "fettabscheider",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.aco.de/anwendungen/gewaesserschutz/fetthaltiges-abwasser",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Bemessung",
+          "article_ideas": [
+            "Fettabscheider für kleine Gastronomieküchen dimensionieren",
+            "Unterirdischen und innen aufgestellten Fettabscheider vergleichen",
+            "Nenngröße und Schlammfangvolumen wählen"
+          ]
+        },
+        {
+          "name": "Betrieb & Pflege",
+          "article_ideas": [
+            "Entleerung und Reinigung eines Fettabscheiders organisieren",
+            "Geruchs- und Ablagerungsprobleme früh erkennen",
+            "Wartung und Prüfung von Fettabscheidern einplanen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-017",
+      "kanonisch_id": "W12-017",
+      "produktname": "Gelöstsauerstoff-Messgerät",
+      "geplanter_hauptbereich": "MESSEN",
+      "keyword_vorschlag_ungeprueft": "gelöstsauerstoff-messgerät",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.xylemanalytics.com/de/produkte/messgeraete/sauerstoff-messgeraete",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        },
+        {
+          "url": "https://www.xylemanalytics.com/de/produkte/messgeraete/alle-messgeraete",
+          "art": "Herstellerquelle_Fachbeleg",
+          "pruefung": "W24_Nachrecherche_20261115"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Sauerstoffmessung",
+          "article_ideas": [
+            "Optische und elektrochemische Sauerstoffmessgeräte vergleichen",
+            "Gelöstsauerstoff im Teich oder Abwasser richtig messen",
+            "Sauerstoffsonde kalibrieren und pflegen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-018",
+      "kanonisch_id": "W12-018",
+      "produktname": "Leitfähigkeitsmessgerät",
+      "geplanter_hauptbereich": "MESSEN",
+      "keyword_vorschlag_ungeprueft": "leitfähigkeitsmessgerät",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W17-P004"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.xylemanalytics.com/de/produkte/messgeraete/leitfaehigkeits-messgeraete",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        },
+        {
+          "url": "https://www.xylemanalytics.com/de/produkte/messgeraete/alle-messgeraete",
+          "art": "Herstellerquelle_Fachbeleg",
+          "pruefung": "W24_Nachrecherche_20261115"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Leitwertmessung",
+          "article_ideas": [
+            "Leitfähigkeitsmessgerät nach Messbereich auswählen",
+            "Temperaturkompensation bei Leitfähigkeitsmessungen verstehen",
+            "Leitfähigkeitssonde reinigen und kalibrieren"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-019",
+      "kanonisch_id": "W12-019",
+      "produktname": "Pool-Sandfilteranlage",
+      "geplanter_hauptbereich": "POOL",
+      "keyword_vorschlag_ungeprueft": "pool-sandfilteranlage",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W16-011"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "verein"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.steinbach-group.com/de/040385-filteranlage-classic-250n-de/",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Filtration",
+          "article_ideas": [
+            "Sandfilteranlage nach Beckenvolumen dimensionieren",
+            "Sand und alternative Filtermedien vergleichen",
+            "Umwälzleistung und Filterkessel aufeinander abstimmen"
+          ]
+        },
+        {
+          "name": "Filterbetrieb",
+          "article_ideas": [
+            "Mehrwegeventil und Rückspülstellung richtig verstehen",
+            "Filterdruck und Rückspülbedarf bewerten",
+            "Sandfilteranlage für den Winter außer Betrieb nehmen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-020",
+      "kanonisch_id": "W12-020",
+      "produktname": "Pool-Dosieranlage",
+      "geplanter_hauptbereich": "POOL",
+      "keyword_vorschlag_ungeprueft": "pool-dosieranlage",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W14-075"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "verein"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.bayrol.de/bayrol-technik-dosieranlagen",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        },
+        {
+          "url": "https://www.bayrol.de/produkte/automatische-wasserpflege/automatic-cl-ph",
+          "art": "Herstellerquelle_Fachbeleg",
+          "pruefung": "W24_Nachrecherche_20261115"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Dosiersteuerung",
+          "article_ideas": [
+            "pH- und Redox-geregelte Pool-Dosieranlagen vergleichen",
+            "Dosieranlage für Beckenvolumen und Desinfektionsmethode auswählen",
+            "Messsonden und Dosierpumpen aufeinander abstimmen"
+          ]
+        },
+        {
+          "name": "Messbetrieb",
+          "article_ideas": [
+            "pH- und Redoxsensoren einer Pool-Dosieranlage kontrollieren",
+            "Kalibrierung von Poolsensoren richtig einplanen",
+            "Fernsteuerung und Störmeldungen bei Pool-Dosieranlagen bewerten"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-021",
+      "kanonisch_id": "W12-021",
+      "produktname": "Pool-Salzelektrolyseanlage",
+      "geplanter_hauptbereich": "POOL",
+      "keyword_vorschlag_ungeprueft": "pool-salzelektrolyseanlage",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "verein"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.bayrol.de/produkte/automatische-wasserpflege/salt-relax-power",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Elektrolysetechnik",
+          "article_ideas": [
+            "Salzelektrolyseanlage nach Poolvolumen auswählen",
+            "Zellleistung und Salzkonzentration zusammen beurteilen",
+            "pH-Regelung bei der Salzelektrolyse berücksichtigen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-022",
+      "kanonisch_id": "W12-022",
+      "produktname": "Pool-Umwälzpumpe",
+      "geplanter_hauptbereich": "POOL",
+      "keyword_vorschlag_ungeprueft": "pool-umwälzpumpe",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "verein"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.steinbach-group.com/de/041063-filterpumpe-wp-7000-de/",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Poolförderung",
+          "article_ideas": [
+            "Pool-Umwälzpumpe nach Beckenvolumen auswählen",
+            "Selbstansaugende Poolpumpen und einfache Förderpumpen vergleichen",
+            "Strombedarf und Förderleistung im Poolkreislauf abstimmen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-023",
+      "kanonisch_id": "W12-023",
+      "produktname": "Teichfilter",
+      "geplanter_hauptbereich": "POOL",
+      "keyword_vorschlag_ungeprueft": "teichfilter",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W14-073"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "verein"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.sera.de/de/gartenteich/Produkte/gartenteich-technik",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Teichfiltration",
+          "article_ideas": [
+            "Teichfilter nach Wasservolumen und Fischbesatz auswählen",
+            "Druckfilter und Durchlauffilter unterscheiden",
+            "Filtermaterial und Reinigungsintervalle für Teichfilter bestimmen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-024",
+      "kanonisch_id": "W12-024",
+      "produktname": "Teich-UVC-Klärer",
+      "geplanter_hauptbereich": "POOL",
+      "keyword_vorschlag_ungeprueft": "teich-uvc-klärer",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "verein"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.sera.de/de/gartenteich/Produkte/gartenteich-technik",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "UV-Klärung",
+          "article_ideas": [
+            "UVC-Klärer anhand von Teichvolumen und Durchfluss auswählen",
+            "Betriebsstunden und Ersatzintervall der UVC-Lampe bestimmen",
+            "Quarzglas am Teich-UVC-Klärer reinigen und kontrollieren"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-025",
+      "kanonisch_id": "W12-025",
+      "produktname": "Teichpumpe",
+      "geplanter_hauptbereich": "POOL",
+      "keyword_vorschlag_ungeprueft": "teichpumpe",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "verein"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.sera.de/de/gartenteich/Produkte/gartenteich-technik",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Teichförderung",
+          "article_ideas": [
+            "Teichpumpe für Filter oder Bachlauf auswählen",
+            "Förderhöhe und Teichumwälzung zusammen berechnen",
+            "Teichpumpen gegen Schmutz und Trockenlauf schützen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W12-026",
+      "kanonisch_id": "W12-026",
+      "produktname": "Teichbelüfter",
+      "geplanter_hauptbereich": "POOL",
+      "keyword_vorschlag_ungeprueft": "teichbelüfter",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "verein"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.sera.de/de/gartenteich/Produkte/gartenteich-technik",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Sauerstoffversorgung",
+          "article_ideas": [
+            "Teichbelüfter nach Wasservolumen und Fischbesatz auswählen",
+            "Membranbelüfter und Luftausströmer vergleichen",
+            "Belüftung im Sommer und Winter richtig einsetzen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-006",
+      "kanonisch_id": "W14-006",
+      "produktname": "Schwimmende Tankentnahme",
+      "geplanter_hauptbereich": "REGEN",
+      "keyword_vorschlag_ungeprueft": "schwimmende tankentnahme",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.intewa.com/de/produkte-fuer-wasseraufbereitung-und-wiederverwendung-sowie-regenwasser-management/",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Wasserentnahme aus Speichern",
+          "article_ideas": [
+            "Schwimmende Entnahme gegen feste Bodenentnahme vergleichen",
+            "Entnahmetiefe bei Zisternen mit Sediment beachten",
+            "Schwimmende Tankentnahme an Pumpe und Tank anschließen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-007",
+      "kanonisch_id": "W14-007",
+      "produktname": "Regenwasser-Überlaufsiphon",
+      "geplanter_hauptbereich": "REGEN",
+      "keyword_vorschlag_ungeprueft": "regenwasser-überlaufsiphon",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.intewa.com/de/produkte-fuer-wasseraufbereitung-und-wiederverwendung-sowie-regenwasser-management/",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Tanküberlauf",
+          "article_ideas": [
+            "Überlaufsiphon mit einfachem Tanküberlauf vergleichen",
+            "Geruchs- und Kleintierschutz bei Tanküberläufen beurteilen",
+            "Ablaufhöhe und Rohrquerschnitt an Regenwassertanks festlegen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-015",
+      "kanonisch_id": "W14-015",
+      "produktname": "Trinkwasser-Rohrverbinder",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "trinkwasser-rohrverbinder",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb",
+        "industrie"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.dvgw-cert.com/leistungen/zertifizierung-von-produkten/produktgruppen",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Rohrverbindungen",
+          "article_ideas": [
+            "Press-, Klemm- und Schraubverbindungen unterscheiden",
+            "Trinkwassergeeignete Fittings nach Rohrmaterial auswählen",
+            "Übergangsverbinder zwischen Metall und Kunststoff beurteilen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-017",
+      "kanonisch_id": "W14-017",
+      "produktname": "Heizungsfüllstation mit Systemtrenner",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "heizungsfüllstation mit systemtrenner",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.dvgw-cert.com/leistungen/zertifizierung-von-produkten/produktgruppen",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Sicheres Nachfüllen von Heizungswasser",
+          "article_ideas": [
+            "Füllstation von einfachem Systemtrenner unterscheiden",
+            "Druckminderer und Absicherung an Heizungsfüllstationen auswählen",
+            "Wasserbehandlung beim Befüllen der Heizung beurteilen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-018",
+      "kanonisch_id": "W14-018",
+      "produktname": "Thermostatisches Trinkwasser-Mischventil",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "thermostatisches trinkwasser-mischventil",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.dvgw-cert.com/leistungen/zertifizierung-von-produkten/produktgruppen",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Temperaturbegrenzung",
+          "article_ideas": [
+            "Mischventil für Trinkwarmwasser nach Durchfluss auswählen",
+            "Verbrühschutz und Mischtemperatur bewerten",
+            "Thermostatmischer zentral oder dezentral einsetzen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-019",
+      "kanonisch_id": "W14-019",
+      "produktname": "Trinkwasser-Sicherheitsgruppe",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "trinkwasser-sicherheitsgruppe",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.dvgw-cert.com/leistungen/zertifizierung-von-produkten/produktgruppen",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Sicherungsarmaturen",
+          "article_ideas": [
+            "Sicherheitsgruppe am Trinkwassererwärmer richtig einordnen",
+            "Sicherheitsventil und Rückflussverhinderer unterscheiden",
+            "Anschlussdimension und Ablauf einer Sicherheitsgruppe planen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-020",
+      "kanonisch_id": "W14-020",
+      "produktname": "Frostsicheres Außen-Auslaufventil",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "frostsicheres außen-auslaufventil",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.dvgw-cert.com/leistungen/zertifizierung-von-produkten/produktgruppen",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Wasserentnahme im Außenbereich",
+          "article_ideas": [
+            "Frostsicheres Garten-Auslaufventil gegenüber Standardhahn vergleichen",
+            "Einbautiefe und Gefälle von Außenarmaturen beurteilen",
+            "Außen-Auslaufventil mit Schlauch und Sicherungsarmatur kombinieren"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-028",
+      "kanonisch_id": "W14-028",
+      "produktname": "Warmwasser-Zirkulationsregulierventil",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "warmwasser-zirkulationsregulierventil",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb",
+        "kommune"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.dvgw.de/themen/wasser/verbraucherinformationen/trinkwasser-installation",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Hydraulischer Abgleich",
+          "article_ideas": [
+            "Thermostatisches Zirkulationsventil von Absperrventil unterscheiden",
+            "Zirkulationsstränge hydraulisch ausgleichen",
+            "Ventiltemperatur und Hygienefunktion beurteilen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-030",
+      "kanonisch_id": "W14-030",
+      "produktname": "Frischwasserstation",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "frischwasserstation",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.dvgw.de/themen/wasser/verbraucherinformationen/trinkwasser-installation",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Frischwasser über Wärmetauscher",
+          "article_ideas": [
+            "Frischwasserstation mit Trinkwarmwasserspeicher vergleichen",
+            "Zapfleistung einer Frischwasserstation dimensionieren",
+            "Plattenwärmetauscher und Zirkulationsanschluss beurteilen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-043",
+      "kanonisch_id": "W14-043",
+      "produktname": "Regenwasser-Sickerschacht",
+      "geplanter_hauptbereich": "REGEN",
+      "keyword_vorschlag_ungeprueft": "regenwasser-sickerschacht",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.hauraton.com/de/produkte/regenwasserbehandlung/",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Punktuelle Versickerung",
+          "article_ideas": [
+            "Sickerschacht gegen Rigolenversickerung vergleichen",
+            "Sickerschacht nach Regenmenge und Boden beurteilen",
+            "Filterung vor der Sickerschacht-Einleitung vorsehen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-044",
+      "kanonisch_id": "W14-044",
+      "produktname": "Entwässerungsrinne",
+      "geplanter_hauptbereich": "REGEN",
+      "keyword_vorschlag_ungeprueft": "entwässerungsrinne",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.hauraton.com/de/produkte/regenwasserbehandlung/",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Oberflächenentwässerung",
+          "article_ideas": [
+            "Entwässerungsrinne nach Belastungsklasse auswählen",
+            "Gefälle und Anschluss an den Ablauf planen",
+            "Linienentwässerung gegenüber Punktablauf abgrenzen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-046",
+      "kanonisch_id": "W14-046",
+      "produktname": "Absetzfilterschacht",
+      "geplanter_hauptbereich": "REGEN",
+      "keyword_vorschlag_ungeprueft": "absetzfilterschacht",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W12-014"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.graf.info/de/retention/filter.html",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        },
+        {
+          "url": "https://www.graf.info/de/retention/filter/absetzfilterschacht/absetzfilterschacht-begehbar.html",
+          "art": "Herstellerquelle_Fachbeleg",
+          "pruefung": "W24_Nachrecherche_20261115"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Sedimentfilterung",
+          "article_ideas": [
+            "Absetzfilterschacht vor einer Rigole einplanen",
+            "Absetzschacht und Korbfilter vergleichen",
+            "Schlammvolumen und Wartungszugang dimensionieren"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-047",
+      "kanonisch_id": "W14-047",
+      "produktname": "Mikrosprinkler",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "mikrosprinkler",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.netafim.de/Produkte-und-Loesungen/Produkte/",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        },
+        {
+          "url": "https://www.netafim.de/Produkte-und-Loesungen/Produkte/Sprinkler-und-Mikrosprinkler/",
+          "art": "Herstellerquelle_Fachbeleg",
+          "pruefung": "W24_Nachrecherche_20261115"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Feinberegnung",
+          "article_ideas": [
+            "Mikrosprinkler für Pflanzreihen und Gewächshaus auswählen",
+            "Tropf- und Mikrosprinklertechnik vergleichen",
+            "Druck und Filterfeinheit bei Mikrosprinklern abstimmen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-048",
+      "kanonisch_id": "W14-048",
+      "produktname": "Bewässerungs-Druckregler",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "bewässerungs-druckregler",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.netafim.de/Produkte-und-Loesungen/Produkte/",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        },
+        {
+          "url": "https://www.netafim.de/Produkte-und-Loesungen/Produkte/Zubehoer/",
+          "art": "Herstellerquelle_Fachbeleg",
+          "pruefung": "W24_Nachrecherche_20261115"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Druckstabilisierung in Bewässerungsnetzen",
+          "article_ideas": [
+            "Druckregler für Tropfrohre und Regner einstellen",
+            "Druckverlust langer Bewässerungsleitungen berechnen",
+            "Druckregler mit Ventilen in Zonen kombinieren"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-049",
+      "kanonisch_id": "W14-049",
+      "produktname": "Bewässerungs-Verlegerohr",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "bewässerungs-verlegerohr",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W14-016"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.netafim.de/Produkte-und-Loesungen/Produkte/",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Leitungen im Garten",
+          "article_ideas": [
+            "PE-Verlegerohr nach Durchmesser und Druckstufe wählen",
+            "Verlegerohr im Rasen und Beet verlegen",
+            "Abzweigverbinder und Frostentleerung planen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-050",
+      "kanonisch_id": "W14-050",
+      "produktname": "Bewässerungs-Ventilbox",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "bewässerungs-ventilbox",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.netafim.de/Produkte-und-Loesungen/Produkte/",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        },
+        {
+          "url": "https://www.gardena.com/de/produkte/bewaesserung/bewaesserungssteuerung",
+          "art": "Herstellerquelle_Fachbeleg",
+          "pruefung": "W24_Nachrecherche_20261115"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Ventilgruppen schützen",
+          "article_ideas": [
+            "Ventilbox für mehrere Bewässerungskreise auswählen",
+            "Ventilbox mit Ablauf und Wartungszugang planen",
+            "Magnetventile in einer Ventilbox anordnen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-051",
+      "kanonisch_id": "W14-051",
+      "produktname": "Beregnungsmaschine",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "beregnungsmaschine",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.bauer-at.com/de/produkte/",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Mobile Feldberegnung",
+          "article_ideas": [
+            "Schlauchtrommel-Beregnungsmaschine nach Flächenbedarf auswählen",
+            "Beregnungsmaschine mit mobilen Regnern vergleichen",
+            "Zuggeschwindigkeit und Wassermenge abstimmen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-052",
+      "kanonisch_id": "W14-052",
+      "produktname": "Pivot-Kreisberegnungsanlage",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "pivot-kreisberegnungsanlage",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W14-053"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.bauer-at.com/de/produkte/",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Großflächenberegnung",
+          "article_ideas": [
+            "Pivot-Kreisregner und mobile Beregnungsmaschinen vergleichen",
+            "Wassermenge und Feldgeometrie für Pivot-Beregnung planen",
+            "Düsen und Fahrgeschwindigkeit auf Wasserverteilung abstimmen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-053",
+      "kanonisch_id": "W14-053",
+      "produktname": "Lineare Feldberegnungsanlage",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "lineare feldberegnungsanlage",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W14-052"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.bauer-at.com/de/produkte/",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Reihenberegnung",
+          "article_ideas": [
+            "Lineare Beregnung und Pivot-Anlage vergleichen",
+            "Wasserzufuhr und Fahrspur für Linearberegnung planen",
+            "Regnerwahl und Druckverteilung auf Feldlänge optimieren"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-054",
+      "kanonisch_id": "W14-054",
+      "produktname": "Fertigations-Dosiereinheit",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "fertigations-dosiereinheit",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.netafim.de/Produkte-und-Loesungen/Werkzeuge/Fertigation/",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Wasser-Dünger-Zugabe",
+          "article_ideas": [
+            "Fertigation für Gewächshaus und Freiland unterscheiden",
+            "Dosierung anhand von pH und Leitfähigkeit regeln",
+            "Düngetanks und Dosierkanäle bei Fertigation vergleichen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-055",
+      "kanonisch_id": "W14-055",
+      "produktname": "Beheizbares Tiertränkebecken",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "beheizbares tiertränkebecken",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.averde.de/catalog/traenken-traenkebecken-heizkabel/traenkebecken-fuer-den-stall",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Winterfeste Viehtränken",
+          "article_ideas": [
+            "Beheizte Tränkebecken nach Tierart auswählen",
+            "Ventilbetrieb bei Frost und Wasserdruck prüfen",
+            "Energieversorgung und Hygiene einer Tränke planen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-060",
+      "kanonisch_id": "W14-060",
+      "produktname": "Flachdachablauf",
+      "geplanter_hauptbereich": "ABWASSER",
+      "keyword_vorschlag_ungeprueft": "flachdachablauf",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W18-P006"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.aco-haustechnik.de/produkte/",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Dachentwässerung",
+          "article_ideas": [
+            "Flachdachablauf nach Dachaufbau und Abfluss auswählen",
+            "Ablaufheizung und Laubschutz beurteilen",
+            "Notentwässerung für Flachdächer zusätzlich planen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-072",
+      "kanonisch_id": "W14-072",
+      "produktname": "Teich-Oberflächenskimmer",
+      "geplanter_hauptbereich": "POOL",
+      "keyword_vorschlag_ungeprueft": "teich-oberflächenskimmer",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "verein"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.oase.com/de-DE/teich-wassergarten/uvc-clarifiers-filters-and-aerators",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Schwimmschmutz entfernen",
+          "article_ideas": [
+            "Oberflächenskimmer gegenüber Teichfilter vergleichen",
+            "Schwimmschmutz und Einbauort bei Teichskimmern beurteilen",
+            "Skimmerpumpe und Wasserstand aufeinander abstimmen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-073",
+      "kanonisch_id": "W14-073",
+      "produktname": "Teich-Trommelfilter",
+      "geplanter_hauptbereich": "POOL",
+      "keyword_vorschlag_ungeprueft": "teich-trommelfilter",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W12-023"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "verein"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.oase.com/de-DE/teich-wassergarten/uvc-clarifiers-filters-and-aerators",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Automatische Teichsiebung",
+          "article_ideas": [
+            "Trommelfilter nach Teichvolumen und Belastung auswählen",
+            "Automatische Siebspülung und Wasserverbrauch beurteilen",
+            "Trommelfilter und Durchlauffilter unterscheiden"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-074",
+      "kanonisch_id": "W14-074",
+      "produktname": "Teich-Schlammsauger",
+      "geplanter_hauptbereich": "POOL",
+      "keyword_vorschlag_ungeprueft": "teich-schlammsauger",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "verein"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.oase.com/de-DE/teich-wassergarten/uvc-clarifiers-filters-and-aerators",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Teichbodenreinigung",
+          "article_ideas": [
+            "Teichschlammsauger nach Saugtechnik auswählen",
+            "Rückführung und Entsorgung abgesaugten Teichwassers unterscheiden",
+            "Schlammabsaugung bei empfindlichem Fischbestand planen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-075",
+      "kanonisch_id": "W14-075",
+      "produktname": "Pool-Wasserpflegecontroller",
+      "geplanter_hauptbereich": "POOL",
+      "keyword_vorschlag_ungeprueft": "pool-wasserpflegecontroller",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W12-020"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "verein"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.bayrol.de/bayrol-technik-dosieranlagen",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Zentrale Poolautomatisierung",
+          "article_ideas": [
+            "Poolcontroller gegenüber reiner Dosieranlage vergleichen",
+            "pH-/Redoxregelung und Pumpensteuerung integrieren",
+            "Fernüberwachung und Fehlermeldung beim Poolcontroller beurteilen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-077",
+      "kanonisch_id": "W14-077",
+      "produktname": "Wohnmobil-Tauchpumpe 12 V",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "wohnmobil-tauchpumpe 12 v",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W4-028"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat"
+      ],
+      "quellen": [
+        {
+          "url": "https://presse.reich-web.com/pressemeldungen/wasserversorgung-in-freizeitfahrzeugen-1",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Mobile Wasserförderung",
+          "article_ideas": [
+            "12-V-Tauchpumpe gegen Wohnmobil-Druckpumpe vergleichen",
+            "Förderdruck und Zapfstellenzahl abstimmen",
+            "Elektrische Versorgung bei mobilen Tauchpumpen prüfen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W14-078",
+      "kanonisch_id": "W14-078",
+      "produktname": "Wohnmobil-Trinkwasserdruckpumpe",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "wohnmobil-trinkwasserdruckpumpe",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W4-027"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat"
+      ],
+      "quellen": [
+        {
+          "url": "https://presse.reich-web.com/pressemeldungen/wasserversorgung-in-freizeitfahrzeugen-1",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Mobile Druckwasserversorgung",
+          "article_ideas": [
+            "Wohnmobil-Membranpumpe nach Förderleistung auswählen",
+            "Trockenlaufschutz und Druckschalter beurteilen",
+            "Geräuschentwicklung von mobilen Druckpumpen vergleichen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W15-012",
+      "kanonisch_id": "W15-012",
+      "produktname": "Mobile Flutpumpenbox",
+      "geplanter_hauptbereich": "ABWASSER",
+      "keyword_vorschlag_ungeprueft": "mobile flutpumpenbox",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W4-030"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.zehnder-pumpen.de/Flutset/16916",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        },
+        {
+          "url": "https://www.jung-pumpen.de/produkte/pumpen/flutbox",
+          "art": "Herstellerquelle_Fachbeleg",
+          "pruefung": "W24_Nachrecherche_20261115"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Schnelle Wasserabfuhr",
+          "article_ideas": [
+            "Flutpumpenbox gegenüber einer Schmutzwasserpumpe als Einzelgerät vergleichen",
+            "Förderhöhe und Schlauchlänge eines Flutpumpensets beurteilen",
+            "Transportbox und Grobschmutzschutz bei Notentwässerung nutzen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W15-019",
+      "kanonisch_id": "W15-019",
+      "produktname": "Leitungsgebundener Wasserspender",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "leitungsgebundener wasserspender",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "verein",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.waterlogic.de/branchen/oeffentlicher-raum-verein/",
+          "art": "fruehere_fachquelle",
+          "pruefung": "aus_vorbestand"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Trinkwasserausgabe in Einrichtungen",
+          "article_ideas": [
+            "Leitungsgebundenen Wasserspender und Gallonensystem vergleichen",
+            "Wasserspender für Vereine und kleine Betriebe dimensionieren",
+            "Hygienemaßnahmen und Filterung an Wasserspendern beurteilen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W17-P012",
+      "kanonisch_id": "W17-P012",
+      "produktname": "Akustisches Wasserleckortungsgerät",
+      "geplanter_hauptbereich": "MESSEN",
+      "keyword_vorschlag_ungeprueft": "akustisches wasserleckortungsgerät",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W17-P013"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb",
+        "kommune"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.sewerin.com/produkte/wasser",
+          "art": "aktuelle_fachquelle",
+          "pruefung": "web_recherche_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Akustische Leckortung",
+          "article_ideas": [
+            "Wasserleckortungsgerät für Innenraum und Erdleitung wählen",
+            "Geräuschfilter und Bodenmikrofone vergleichen",
+            "Messung bei Leitungen aus Kunststoff und Metall beurteilen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W18-P006",
+      "kanonisch_id": "W18-P006",
+      "produktname": "Retentionsdach-Drosselablauf",
+      "geplanter_hauptbereich": "REGEN",
+      "keyword_vorschlag_ungeprueft": "retentionsdach-drosselablauf",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W14-060"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.zinco.de/p/rds28",
+          "art": "hersteller_oder_produktseite",
+          "pruefung": "web_fachrecherche_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Dachentwässerung mit Rückhalt",
+          "article_ideas": [
+            "Retentionsdachablauf und normalen Flachdachablauf vergleichen",
+            "Drosselung und Anstauhöhe von Retentionsdachabläufen abstimmen",
+            "Notüberlauf bei geplantem Dachwasseranstau berücksichtigen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W18-P007",
+      "kanonisch_id": "W18-P007",
+      "produktname": "Bewässerungs-Scheibenfilter",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "bewässerungs-scheibenfilter",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W15-016",
+        "W18-P008"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.netafim.de/tropfbewasserung-im-garten-und-landschaftsbau/product/filter/scheibenfilter/",
+          "art": "hersteller_oder_produktseite",
+          "pruefung": "web_fachrecherche_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Tropfbewässerungs-Filtertechnik",
+          "article_ideas": [
+            "Scheibenfilter und Siebfilter für Tropfbewässerung vergleichen",
+            "Filterfeinheit und Durchfluss eines Bewässerungsfilters abstimmen",
+            "Scheibenfilter zum Reinigen öffnen und pflegen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W18-P008",
+      "kanonisch_id": "W18-P008",
+      "produktname": "Bewässerungs-Siebfilter",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "bewässerungs-siebfilter",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W18-P007"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.netafim.de/Produkte-und-Loesungen/Produkte/",
+          "art": "hersteller_oder_produktseite",
+          "pruefung": "web_fachrecherche_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Bewässerungs-Siebtechnik",
+          "article_ideas": [
+            "Siebfilter vor Tropfleitungen und Mikrosprinklern einsetzen",
+            "Siebfeinheit nach Regnertyp und Wasserquelle wählen",
+            "Manuelle und automatische Siebfilterreinigung unterscheiden"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W18-P009",
+      "kanonisch_id": "W18-P009",
+      "produktname": "Einzeltropfer für Bewässerung",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "einzeltropfer für bewässerung",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W12-005"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.netafim.de/Produkte-und-Loesungen/Produkte/",
+          "art": "hersteller_oder_produktseite",
+          "pruefung": "web_fachrecherche_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Einzeltropfer",
+          "article_ideas": [
+            "Einzeltropfer mit fest integrierten Tropfrohren vergleichen",
+            "Tropferabstand und Wassermenge für Pflanzengefäße bestimmen",
+            "Verstopfung und Druckausgleich bei einzelnen Tropfern beurteilen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W18-P010",
+      "kanonisch_id": "W18-P010",
+      "produktname": "Bewässerungs-Flachschlauch",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "bewässerungs-flachschlauch",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.netafim.de/Produkte-und-Loesungen/Produkte/",
+          "art": "hersteller_oder_produktseite",
+          "pruefung": "web_fachrecherche_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Flache Transportleitungen",
+          "article_ideas": [
+            "Flachschlauch und normaler Gartenschlauch für Bewässerung vergleichen",
+            "Durchmesser und Druckbelastung von Bewässerungs-Flachschläuchen wählen",
+            "Flachschlauch in Feldbewässerung verlegen und aufrollen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W18-P011",
+      "kanonisch_id": "W18-P011",
+      "produktname": "Trinkwasser-Durchflussmengenregler",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "trinkwasser-durchflussmengenregler",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W12-011"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.neoperl.com/global/de/handel/produkte/mengenregler",
+          "art": "hersteller_oder_produktseite",
+          "pruefung": "web_fachrecherche_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Durchfluss konstant halten",
+          "article_ideas": [
+            "Eigenständigen Mengenregler und Wasserspar-Strahlregler vergleichen",
+            "Durchflussklasse bei wechselndem Wasserdruck auswählen",
+            "Mengenregler für mehrere Entnahmestellen dimensionieren"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W18-P012",
+      "kanonisch_id": "W18-P012",
+      "produktname": "Trinkwasser-Rückflussverhinderer-Patrone",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "trinkwasser-rückflussverhinderer-patrone",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W4-064"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.neoperl.com/de/de/handel/produkte/rueckflussverhinderer",
+          "art": "hersteller_oder_produktseite",
+          "pruefung": "web_fachrecherche_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Rückfluss in Armaturen verhindern",
+          "article_ideas": [
+            "Rückflussverhinderer-Patrone und allgemeines Rückschlagventil unterscheiden",
+            "Öffnungsdruck und Dichtwerkstoff einer Trinkwasser-Patrone wählen",
+            "Einbaurichtung und Wartung einer Rückflussverhinderer-Patrone beurteilen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W20-P001",
+      "kanonisch_id": "W20-P001",
+      "produktname": "Regenwasser-Erstspülumleiter",
+      "geplanter_hauptbereich": "REGEN",
+      "keyword_vorschlag_ungeprueft": "regenwasser-erstspülumleiter",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W4-038"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://rainharvesting.com.au/eu/products/first-flush-diverters/",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W20_Webquelle_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Erste Regenwasserspülung abtrennen",
+          "article_ideas": [
+            "First-Flush-Umleiter und Fallrohrfilter unterscheiden",
+            "Erstspülvolumen nach Dachfläche wählen",
+            "Erstspülumleiter warten und entleeren"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W20-P002",
+      "kanonisch_id": "W20-P002",
+      "produktname": "Rohr- und Kanalinspektionskamera",
+      "geplanter_hauptbereich": "ABWASSER",
+      "keyword_vorschlag_ungeprueft": "rohr- und kanalinspektionskamera",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W17-P015"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb",
+        "kommune"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.rems.de/rohr-und-kanalinspektion-rohr-und-kanalreinigung/elektronisches-kamera-inspektionssystem/rems-camsys-2.aspx",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W20_Webquelle_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Rohre mit Kamera prüfen",
+          "article_ideas": [
+            "Kamerakopf nach Rohrdurchmesser wählen",
+            "Ortungssender und Kabellänge vergleichen",
+            "Rohrschäden per Inspektionskamera dokumentieren"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W20-P003",
+      "kanonisch_id": "W20-P003",
+      "produktname": "Elektrische Rohrreinigungsmaschine",
+      "geplanter_hauptbereich": "ABWASSER",
+      "keyword_vorschlag_ungeprueft": "elektrische rohrreinigungsmaschine",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W20-P004"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb",
+        "kommune"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.rems.de/rohr-und-kanalinspektion-rohr-und-kanalreinigung/elektrische-rohrreinigungsmaschinen/rems-cobra-22.aspx",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W20_Webquelle_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Verstopfungen mechanisch beseitigen",
+          "article_ideas": [
+            "Rohrreinigungsmaschine nach Rohrdurchmesser wählen",
+            "Rohrreinigungsspiralen und Schneidwerkzeuge unterscheiden",
+            "Spiralreinigung und Hochdruckspülung vergleichen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W20-P004",
+      "kanonisch_id": "W20-P004",
+      "produktname": "Hochdruck-Rohrreinigungsset",
+      "geplanter_hauptbereich": "ABWASSER",
+      "keyword_vorschlag_ungeprueft": "hochdruck-rohrreinigungsset",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W20-P003"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.kaercher.com/int/accessory/pc-7-5-26444910.html",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W20_Webquelle_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Rohre mit Wasserhochdruck reinigen",
+          "article_ideas": [
+            "Hochdruckschlauch und mechanische Spirale vergleichen",
+            "Rotationsdüse und Rückstrahldüse unterscheiden",
+            "Rohrreinigungsschlauch passend zum Gerät kaufen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W20-P005",
+      "kanonisch_id": "W20-P005",
+      "produktname": "Wasserschlagdämpfer für Hauswasserleitungen",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "wasserschlagdämpfer für hauswasserleitungen",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W19-P002"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.siouxchief.com/Customers/SpecSheets/660%20SERIES%20-%20MINIRESTER%20WATER%20HAMMER%20ARRESTER%20-%20SPEC%20SHEET.PDF",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W20_Webquelle_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Druckstöße in Hausleitungen dämpfen",
+          "article_ideas": [
+            "Druckstoßdämpfer und Druckminderer unterscheiden",
+            "Druckstoßdämpfer an schnell schließenden Ventilen platzieren",
+            "Anschlussart und Dämpfergröße wählen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W20-P006",
+      "kanonisch_id": "W20-P006",
+      "produktname": "Solarbetriebenes Tiefbrunnenpumpensystem",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "solarbetriebenes tiefbrunnenpumpensystem",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W4-029"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.grundfos.com/solutions/learn/ecademy/all-courses/solar-pumping-systems/features-and-benefits-of-selected-grundfos-pumps-in-solar-water-pumping-systems",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W20_Webquelle_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Solare Brunnenförderung",
+          "article_ideas": [
+            "Solare Tiefbrunnenpumpe und Netzpumpe vergleichen",
+            "Solarmodule zur Förderhöhe passend auslegen",
+            "Wassertank und Trockenlaufschutz für autarke Förderung wählen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W20-P008",
+      "kanonisch_id": "W20-P008",
+      "produktname": "Smarter Wasserlecksensor",
+      "geplanter_hauptbereich": "MESSEN",
+      "keyword_vorschlag_ungeprueft": "smarter wasserlecksensor",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W12-009"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.bosch-smarthome.com/de/de/produkte/sicherheit/wassermelder?preselectedProduct=8750001291",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W20_Webquelle_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Wasserlecks automatisch melden",
+          "article_ideas": [
+            "Wassersensor und automatisches Absperrventil vergleichen",
+            "Funkreichweite und Alarmwege bei Wassermeldern beachten",
+            "Wassersensor an gefährdeten Stellen platzieren"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W21-P001",
+      "kanonisch_id": "W21-P001",
+      "produktname": "Klimaanlagen-Kondensatpumpe",
+      "geplanter_hauptbereich": "ABWASSER",
+      "keyword_vorschlag_ungeprueft": "klimaanlagen-kondensatpumpe",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W4-052"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://aspenpumps.com/en-GB/products/FP3577",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W21_Webquelle_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Klimakondensat abpumpen",
+          "article_ideas": [
+            "Kondensatpumpe nach Förderhöhe wählen",
+            "Mini-Kondensatpumpe und Tankpumpe unterscheiden",
+            "Kondensatpumpe leise und wartungsfreundlich einbauen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W21-P002",
+      "kanonisch_id": "W21-P002",
+      "produktname": "Bewässerungs-Regensensor",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "bewässerungs-regensensor",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W4-046"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.hunterirrigation.com/de/irrigation-product/sensoren/rain-cliktm-sensor",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W21_Webquelle_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Bei Regen die Bewässerung stoppen",
+          "article_ideas": [
+            "Regensensor und Bodenfeuchtesensor vergleichen",
+            "Regensensor mit Bewässerungscomputer verbinden",
+            "Kabelsensor und Funksensor auswählen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W21-P003",
+      "kanonisch_id": "W21-P003",
+      "produktname": "Venturi-Düngerinjektor für Bewässerung",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "venturi-düngerinjektor für bewässerung",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W14-054"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://mazzei.net/products/venturi-injectors/",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W21_Webquelle_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Dünger mittels Wasserströmung dosieren",
+          "article_ideas": [
+            "Venturi-Injektor und Dosierstation abgrenzen",
+            "Druckdifferenz und Dosiermenge beurteilen",
+            "Venturi-Injektor in Tropfsystem integrieren"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W21-P004",
+      "kanonisch_id": "W21-P004",
+      "produktname": "Handbetriebener Meerwasser-Notentsalzer",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "handbetriebener meerwasser-notentsalzer",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W14-087"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://katadyn.com/products/8019948-katadyn-survivor-35",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W21_Webquelle_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Trinkwasser auf See ohne Strom gewinnen",
+          "article_ideas": [
+            "Handentsalzer und elektrische Meerwasser-RO vergleichen",
+            "Förderleistung und Kraftaufwand einschätzen",
+            "Membranpflege und Lagerung des Handentsalzers"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W21-P005",
+      "kanonisch_id": "W21-P005",
+      "produktname": "Mobiles Hochwasser-Dammbalkensystem",
+      "geplanter_hauptbereich": "ABWASSER",
+      "keyword_vorschlag_ungeprueft": "mobiles hochwasser-dammbalkensystem",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W15-021"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb",
+        "kommune"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.hochwassersicherheit.com/mobile-systeme/",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W21_Webquelle_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Eindringendes Hochwasser fernhalten",
+          "article_ideas": [
+            "Dammbalken und Flutpumpe unterscheiden",
+            "Türöffnung für Dammbalkensystem auswählen",
+            "Dichtungen und Lagerung mobiler Sperren prüfen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W21-P006",
+      "kanonisch_id": "W21-P006",
+      "produktname": "Durchströmtes Trinkwasser-Ausdehnungsgefäß",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "durchströmtes trinkwasser-ausdehnungsgefäß",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W4-066"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://reflex-winkelmann.com/de/produkte/7380400",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W21_Webquelle_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Druckausdehnung im Trinkwassersystem",
+          "article_ideas": [
+            "Trinkwasser-Ausdehnungsgefäß und Druckbehälter unterscheiden",
+            "Durchströmtes Gefäß hygienisch auswählen",
+            "Vordruck und Einbauort beurteilen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W21-P007",
+      "kanonisch_id": "W21-P007",
+      "produktname": "Brennwert-Kondensat-Neutralisationsanlage",
+      "geplanter_hauptbereich": "ABWASSER",
+      "keyword_vorschlag_ungeprueft": "brennwert-kondensat-neutralisationsanlage",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W21-P001"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.gruenbeck.de/produkte-loesungen/gruenbeck-fuer-zuhause/heizung-und-energie/kondensat-neutralisation/neutra-kw",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W21_Webquelle_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Saures Brennwert-Kondensat neutralisieren",
+          "article_ideas": [
+            "Neutralisation und Kondensatpumpe unterscheiden",
+            "Neutralisationsgranulat passend wählen",
+            "Wartung und pH-Kontrolle planen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W21-P008",
+      "kanonisch_id": "W21-P008",
+      "produktname": "Spurengas-Wasserleckortungsgerät",
+      "geplanter_hauptbereich": "MESSEN",
+      "keyword_vorschlag_ungeprueft": "spurengas-wasserleckortungsgerät",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W17-P012"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb",
+        "kommune"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.danthermgroup.com/de/produkte/trotec-ld6000",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W21_Webquelle_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Wasserlecks mit Spurengas orten",
+          "article_ideas": [
+            "Spurengas-Leckortung und akustische Ortung unterscheiden",
+            "Spurengasverfahren an verdeckten Leitungen einordnen",
+            "Leckmessgerät nach Rohrmaterial auswählen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W22-P001",
+      "kanonisch_id": "W22-P001",
+      "produktname": "Magnetit-Schlammabscheider für Heizungswasser",
+      "geplanter_hauptbereich": "ABWASSER",
+      "keyword_vorschlag_ungeprueft": "magnetit-schlammabscheider für heizungswasser",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W4-001"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb",
+        "industrie"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.spirotech.de/produkte/spirotrap/spirotrap-mb3mbl--messing--magnet--uni-118/",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W22_Webquelle_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Magnetit aus Heizungswasser entfernen",
+          "article_ideas": [
+            "Schlammabscheider und Hauswasserfilter unterscheiden",
+            "Magnetitabscheider passend zur Wärmepumpe wählen",
+            "Magnetitabscheider im Rücklauf warten"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W22-P002",
+      "kanonisch_id": "W22-P002",
+      "produktname": "Mikroblasenabscheider für Heizungswasser",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "mikroblasenabscheider für heizungswasser",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W22-P001"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb",
+        "industrie"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.spirotech.de/produkte/spirovent/",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W22_Webquelle_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Luft aus Heizungswasser trennen",
+          "article_ideas": [
+            "Mikroblasenabscheider und Entlüftungsventil vergleichen",
+            "Luftabscheider im Heizkreis richtig platzieren",
+            "Mikroblasenabscheider und Schlammabscheider kombinieren"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W22-P003",
+      "kanonisch_id": "W22-P003",
+      "produktname": "Automatisches Spülventil für Tropfbewässerung",
+      "geplanter_hauptbereich": "BRUNNEN",
+      "keyword_vorschlag_ungeprueft": "automatisches spülventil für tropfbewässerung",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W12-004"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.hunterirrigation.com/de/irrigation-product/micro-irrigation/automatisches-spuelventil",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W22_Webquelle_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Tropfleitungen automatisch spülen",
+          "article_ideas": [
+            "Spülventil und Magnetventil unterscheiden",
+            "Spülventil in Tropfleitungen einbauen",
+            "Spülwassermenge und Wartung planen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W23-P001",
+      "kanonisch_id": "W23-P001",
+      "produktname": "Salzfreies Kalkschutzgerät für Trinkwasser",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "salzfreies kalkschutzgerät für trinkwasser",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W4-012"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.bwt.com/de-de/shop/BWT-AQA-nano-XP/023301",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W23_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Kalkablagerungen ohne Enthärtung begrenzen",
+          "article_ideas": [
+            "Kalkschutzgerät und Ionenaustauscher-Enthärtungsanlage unterscheiden",
+            "Einbaubedingungen für ein salzfreies Kalkschutzgerät prüfen",
+            "Wartung und Verbrauchseinheiten von Kalkschutzanlagen vergleichen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W23-P002",
+      "kanonisch_id": "W23-P002",
+      "produktname": "Wasserzählerschacht für Außenanlagen",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "wasserzählerschacht für außenanlagen",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W4-058"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb",
+        "kommune"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.hawle.de/produkte/infos/product-group/298-00/",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W23_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Wasserzähler unterirdisch zugänglich einbauen",
+          "article_ideas": [
+            "Wasserzählerschacht und Revisionsschacht nach Funktion vergleichen",
+            "Frostsicherheit und Schachttiefe beim Wasserzählerschacht wählen",
+            "Wasserzählergarnitur und Schachtabdeckung aufeinander abstimmen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    },
+    {
+      "register_id": "W23-P003",
+      "kanonisch_id": "W23-P003",
+      "produktname": "Selbstregulierendes Wasserrohr-Frostschutzheizkabel",
+      "geplanter_hauptbereich": "TRINK",
+      "keyword_vorschlag_ungeprueft": "selbstregulierendes wasserrohr-frostschutzheizkabel",
+      "seo_status": "ungeprueft",
+      "w5_suchvolumen": "nicht_gemessen",
+      "referenzierte_funktionsvergleiche": [
+        "W14-020"
+      ],
+      "fachstatus": "marktprodukt",
+      "gruppen": [
+        "privat",
+        "kleinbetrieb"
+      ],
+      "quellen": [
+        {
+          "url": "https://www.ebeco.com/de/produkte/frostschutz-von-rohren/f-10",
+          "art": "hersteller_oder_fachquelle",
+          "pruefung": "W23_2026-11-15"
+        }
+      ],
+      "artikelkategorien": [
+        {
+          "name": "Wasserleitungen vor Frost schützen",
+          "article_ideas": [
+            "Heizkabel außen am Rohr und im Trinkwasserrohr unterscheiden",
+            "Heizkabel-Leistung und Dämmung für Wasserleitungen abstimmen",
+            "Frostschutz-Heizband und frostsichere Außenarmatur vergleichen"
+          ]
+        }
+      ],
+      "seo_owner_freigabe": false,
+      "wp_seitenfreigabe": false
+    }
+  ]
+}
