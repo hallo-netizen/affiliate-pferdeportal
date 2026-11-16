@@ -185,8 +185,11 @@ class TypeShelfVirginTests(unittest.TestCase):
             self.assertEqual(row["rule_values_sha256"],core.values_hash("Anleitung"))
         self.assertEqual(core.values_hash("Pflege"),core.values_hash())
 
-    def test_17_existing_ppm_package_can_resolve_anleitung(self):
-        # Read the actual original PPM archive, not a mocked article-type set.
+    def test_17_no_change_to_ppm_104_baseline_or_existing_types(self):
+        # K0's PPM gate verifies the pinned global 104-rule baseline. The
+        # Anleitung-specific blocks are enforced by K0's existing type checks.
+        # System 4 itself also has no fixed article-type whitelist.
+        from engine.ppm_parity_guard import verify
         package=core.ROOT/"k0_canonical_assets"/"PPM_6.7.9.zip"
         self.assertTrue(package.is_file(),"PPM_6_7_9_ARCHIVE_MISSING")
         with zipfile.ZipFile(package) as z:
@@ -195,14 +198,13 @@ class TypeShelfVirginTests(unittest.TestCase):
             manifest=json.loads(z.read(root+"article-type-extension-manifest-v1.json").decode("utf-8"))
         standard=templates.get("types") if isinstance(templates,dict) else {}
         extensions=manifest.get("extensions") if isinstance(manifest,dict) else {}
-        aliases=[]
-        for entry in extensions.values():
-            if isinstance(entry,dict):
-                aliases.extend(entry.get("aliases") or [])
-        self.assertTrue(
-            "Anleitung" in standard or "Anleitung" in aliases,
-            "K0_PPM_TYPE_UNDEFINED:Anleitung; existing="+repr(sorted(standard))+
-            "; extensions="+repr(sorted(set(aliases))))
+        self.assertEqual(set(standard),{"Beratung","Vergleich","FAQ","Pflege"})
+        self.assertTrue("Journal" in [x for e in extensions.values() if isinstance(e,dict) for x in e.get("aliases",[])])
+        result=verify()
+        self.assertEqual(result["status"],"PASS",result)
+        self.assertEqual(result["legacy_rule_count"],104)
+        self.assertIn("Anleitung",core.load_values("Anleitung")["types"])
+        self.assertNotEqual(core.values_hash("Anleitung"),core.values_hash())
 
     def test_16_no_old_run_files_are_used_by_any_acceptance_test(self):
         self.assertTrue((core.TYPE_SHELF/"Anleitung.json").is_file())
