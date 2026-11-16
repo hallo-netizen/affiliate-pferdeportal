@@ -1,0 +1,15 @@
+{
+  "status": "LOCAL_CODE_GREEN",
+  "previous": "QA84 6/12",
+  "corrected": "12/12",
+  "original_16_rest": "PASS",
+  "nine_due": "PASS",
+  "nine_model": "5 COMPLETED / 4 EXPECTED FAILED",
+  "php_files_syntax_valid": 23,
+  "changes": [
+    "includes/trait-ppar-ebay-run.php"
+  ],
+  "safe_data_untouched": true,
+  "github_pr759": "BLOCKED_UNMERGED",
+  "live_release": false
+}
