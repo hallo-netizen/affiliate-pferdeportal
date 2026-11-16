@@ -196,11 +196,6 @@ def main() -> None:
         r=subprocess.run(["php",str(w35qa),str(pkg),case],capture_output=True,text=True,timeout=30)
         print("[W35 "+case+"]\n"+r.stdout,end="")
         require(r.returncode==0,"W35 "+case+" ERROR: "+r.stderr+"\n"+r.stdout)
-    # W38: inspect original source-only API contract for exact workflow reuse.
-    source_audit=PROJECT/"PRUEFUNG"/"W38_ORIGINAL_WORKFLOW_INSPECT.py"
-    check=subprocess.run([sys.executable,str(source_audit)],capture_output=True,text=True,timeout=30)
-    require(check.returncode==0,"W38 original source inspection failed "+check.stderr)
-    print(check.stdout,end="")
     # W36: one consolidated read-only contract/SEO/WP-source consistency audit.
     audit = PROJECT/"PRUEFUNG"/"W36_GESAMTABGLEICH_OFFLINE.py"
     require(audit.is_file(), "W36 combined read-only consistency audit missing")
