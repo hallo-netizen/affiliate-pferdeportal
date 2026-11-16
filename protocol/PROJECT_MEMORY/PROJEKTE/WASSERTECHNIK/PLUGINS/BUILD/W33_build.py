@@ -55,7 +55,8 @@ def main() -> None:
     additions = {
         "class-wassertechnik-import.php": "W35_class-wassertechnik-import.php",
         "class-wassertechnik-seo-handoff.php": "W30_seo_handoff_readonly.php",
-        "class-wassertechnik-seo81-preview.php": "W31_class-wassertechnik-seo81-preview.php",
+        "class-wassertechnik-seo81-preview.php": "W38_class-wassertechnik-seo81-preview.php",
+        "class-wassertechnik-seo81-paid-trait.php": "W38_seo81_paid_trait.php",
         "class-wassertechnik-navigation.php": "W35_class-wassertechnik-navigation.php",
         "class-wassertechnik-inventory-readback.php": "W34_class-wassertechnik-inventory-readback.php",
     }
@@ -63,6 +64,15 @@ def main() -> None:
         file = PLUGINS/"QUELLCODE"/src
         require(file.is_file(), "Missing vetted module "+str(file))
         shutil.copyfile(file, pkg/"includes"/dest)
+    # Inject ONE 81-only orchestration trait into the ORIGINAL PaidResearch class.
+    # Existing 218-keyword functionality and provider parsers remain byte-identical
+    # after removing this single trait line. No separate research plugin.
+    original_paid=pkg/"includes"/"class-wassertechnik-paid-research.php"
+    paid_source=original_paid.read_text(encoding="utf-8")
+    paid_header="final class Wassertechnik_PaidResearch {"
+    require(paid_source.count(paid_header)==1, "Original PaidResearch class changed")
+    paid_trait_line="\n    use Wassertechnik_W38_Seo81_Trait;"
+    original_paid.write_text(paid_source.replace(paid_header,paid_header+paid_trait_line,1),encoding="utf-8")
     shutil.copyfile(W28, pkg/"assets"/"wassertechnik-w28-seo-handoff.json")
     shutil.copyfile(W32, pkg/"ASSETS"/"W32_wassertechnik-navigation.json")
     w35_src=PLUGINS/"ASSETS"/"W35_wordpress_importplan_219.json"
@@ -109,7 +119,7 @@ def main() -> None:
     content = main_php.read_text(encoding="utf-8")
     expected="require_once __DIR__ . '/includes/class-wassertechnik-paid-research.php';"
     require(content.count(expected)==1, "WP bootstrap version not original")
-    content = content.replace(expected, expected+"\n"+
+    content = content.replace(expected, "require_once __DIR__ . '/includes/class-wassertechnik-seo81-paid-trait.php';\n"+expected+"\n"+
         "require_once __DIR__ . '/includes/class-wassertechnik-import.php';\n"+
         "require_once __DIR__ . '/includes/class-wassertechnik-seo-handoff.php';\n"+
         "require_once __DIR__ . '/includes/class-wassertechnik-seo81-preview.php';\n"+
@@ -127,21 +137,24 @@ def main() -> None:
             "Original version expected")
     content=content.replace("Aktueller Fachplan W4:</strong> 8 Hauptbereiche, 19 Zwischenbereiche, 1 Industrieeinstieg, 6 Industrie-Landingvorschlaege, 79 Produktseiten, 105 Inhaltskategorien und 356 grobe Artikelideen. Kostenloser SEO-Pruefplan: 218 Begriffe.", "Fachplan W27:</strong> sieben kaufnahe Hauptbereiche (einschliesslich Pool und Teich), 71 vorhandene Kauf-Produktseiten, acht Industrie-Produktseiten und 81 neue noch SEO-ungepruefte Produkttypen. Der bisherige W4-SEO-Plan mit 218 Begriffen bleibt erhalten.")
     require("Aktueller Fachplan W4:" not in content, "Old contradictory eight-item homepage retained")
-    (pkg/"README.txt").write_text("WT001 0.1.8 - W35 REKONSTRUKTION / NICHT INSTALLIEREN\n"
-        "218 alte SEO Owner unveraendert; 81 weitere SEO Kandidaten nur Vorschau. "
+    (pkg/"README.txt").write_text("WT001 0.1.9 - W38 GESAMT-REKONSTRUKTION / NICHT INSTALLIEREN\n"
+        "218 alte SEO Owner unveraendert; 81 neue Keywords nur nach expliziter SEO-Kostenfreigabe. "
         "W27 sieben Kaeufer-Hauptbereiche plus separater Industrie-Fachzugang.\n"
         "Nur EIN W35-WordPress-Importer fuer 219 Owner (218 alte plus Pool-Hub als Entwurf). "
         "17 Altpfade nur nach einmaliger ausdruecklicher Adminfreigabe mit 301. "
         "Der alte W6-Neuner-Importer ist ausgetauscht, nicht parallel aktiv.\n"
         "Keine automatische WP-Schreibaktion oder kostenpflichtige SEO-Abfrage. "
         "Original 0.1.7 fehlt; deshalb NICHT installieren.\n", encoding="utf-8")
-    content=content.replace("Version: 0.1.4", "Version: 0.1.8")
-    content=content.replace("VERSION = '0.1.4'", "VERSION = '0.1.8'")
+    content=content.replace("Version: 0.1.4", "Version: 0.1.9")
+    content=content.replace("VERSION = '0.1.4'", "VERSION = '0.1.9'")
     content=content.replace("Kein Import oder Veroeffentlichen.", "Nur Vorschau, Import und Veroeffentlichung gesperrt.")
     # Keep original SEO logic literally unmodified, including 218 owner lock, budget and persisted report keys.
     main_php.write_text(content,encoding="utf-8")
     for file in original_classes:
-        require(sha(file.read_bytes())==original_checksums[file.name], "Original class changed "+file.name)
+        original_bytes=file.read_bytes()
+        if file.name=="class-wassertechnik-paid-research.php":
+            original_bytes=original_bytes.replace(paid_trait_line.encode("utf-8"),b"",1)
+        require(sha(original_bytes)==original_checksums[file.name], "Original class changed "+file.name)
 
     # Ensure candidate preview and final navigation have no forbidden WordPress mutators.
     for name in ("class-wassertechnik-seo-handoff.php","class-wassertechnik-seo81-preview.php","class-wassertechnik-navigation.php","class-wassertechnik-inventory-readback.php"):
@@ -189,6 +202,15 @@ def main() -> None:
     result = subprocess.run([sys.executable,str(audit)], capture_output=True,text=True,timeout=30)
     print(result.stdout,end="")
     require(result.returncode==0,"W36 audit failed: "+result.stderr+" "+result.stdout)
+    # W38: one end-to-end test suite for the real PaidResearch methods with a mocked API,
+    # including positive provider results, real non-retry failure handling, version isolation.
+    paidqa=PROJECT/"PRUEFUNG"/"W38_SEO81_PAID_ENDTOEND_QA.php"
+    require(paidqa.is_file(),"W38 real 81 paid-flow QA missing")
+    for scenario in ("success","provider","network","budget","stale","locked","nonadmin","wrongsite","noapproval"):
+        qa=subprocess.run(["php",str(paidqa),str(pkg),scenario],capture_output=True,text=True,timeout=30)
+        print("[W38 "+scenario+"] "+qa.stdout,end="")
+        require(qa.returncode==0 and "PASS W38" in qa.stdout,
+                "W38 "+scenario+" paid-flow simulation FAILED: "+qa.stderr+" "+qa.stdout)
     members=sorted(p for p in pkg.rglob("*") if p.is_file())
     with zipfile.ZipFile(OUT,"w",compression=zipfile.ZIP_DEFLATED,compresslevel=9) as zipped:
         for f in members:

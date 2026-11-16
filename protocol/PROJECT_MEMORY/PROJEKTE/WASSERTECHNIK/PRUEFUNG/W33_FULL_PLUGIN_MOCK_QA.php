@@ -42,11 +42,11 @@ function get_option(...$x){return false;}
 function wp_is_post_revision(...$x){return false;}
 $assert=function($ok,$msg){if(!$ok)throw new RuntimeException("FAILED: ".$msg);echo "PASS ".$msg.PHP_EOL;};
 require $root.'/wassertechnik-kategorie-workflow.php';
-$assert(Wassertechnik_Kategorie_Workflow::VERSION==='0.1.8','same plugin identity, updated version');
+$assert(Wassertechnik_Kategorie_Workflow::VERSION==='0.1.9','same plugin identity, updated version');
 $homepage=file_get_contents($root.'/wassertechnik-kategorie-workflow.php');
 $assert(str_contains($homepage,'Fachplan W27:') && !str_contains($homepage,'Aktueller Fachplan W4:'),'one current 7-area homepage, no old 8-area claim');
 $readme=file_get_contents($root.'/README.txt');
-$assert(str_contains($readme,'NICHT INSTALLIEREN') && str_contains($readme,'0.1.8'),'README status and version match real source');
+$assert(str_contains($readme,'NICHT INSTALLIEREN') && str_contains($readme,'0.1.9'),'README status and version match real source');
 $assert(class_exists('Wassertechnik_Kategorie_Importer'),'old importer source retained');
 $assert(!isset($GLOBALS['actions']['admin_post_wassertechnik_import_apply']),
         'old 9-root importer DISABLED by default');
@@ -84,6 +84,16 @@ $assert(($old['fingerprint']??null)==='9570a11250f6d3684f52af69239a9af2090a292ba
 $h=Wassertechnik_W30_Seo_Handoff::read($root.'/assets/wassertechnik-w28-seo-handoff.json');
 $assert($h['anzahl']===81 && $h['rubriken']===90,'real W28: 81 new, 90 rubrics');
 $assert(count(array_unique(array_column($h['produkte'],'register_id')))==81,'81 distinct canonical IDs');
+[$prep81,$newTerms,$newOwners]=Wassertechnik_PaidResearch::planned81();
+$assert(($prep81['unique_keywords']??null)===81 && count($newTerms)===81 && count($newOwners)===81,
+        'W38 single original PaidResearch engine generates 81 independent new terms');
+$assert(count(array_unique($newTerms))===81 && count(array_intersect($newTerms,$keywords))===0,
+        'W38 new plan never duplicates or mixes old 218 keywords');
+$assert(isset($GLOBALS['actions']['admin_post_wassertechnik_dfs_w38_81_paid']),
+        'W38 explicit one-time 81-paid action registered in the SAME plugin');
+$assert(isset($GLOBALS['actions']['admin_post_wassertechnik_dfs_w38_81_export']),
+        'W38 reports export without touching 218er results');
+
 
 /* W36: prove that all 81 candidate search terms are accepted by the actual,
  * retained DataForSEO/paid-research normalizer, not a second invented SEO rule.
