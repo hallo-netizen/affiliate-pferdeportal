@@ -110,6 +110,14 @@ def main() -> None:
         "        // Do not activate W9 before a separately approved new 7-root manifest and WP readback.")
     require(content.count("Version: 0.1.4")==1 and content.count("VERSION = '0.1.4'")==1,
             "Original version expected")
+    content=content.replace("Aktueller Fachplan W4:</strong> 8 Hauptbereiche, 19 Zwischenbereiche, 1 Industrieeinstieg, 6 Industrie-Landingvorschlaege, 79 Produktseiten, 105 Inhaltskategorien und 356 grobe Artikelideen. Kostenloser SEO-Pruefplan: 218 Begriffe.", "Fachplan W27:</strong> sieben kaufnahe Hauptbereiche (einschliesslich Pool und Teich), 71 vorhandene Kauf-Produktseiten, acht Industrie-Produktseiten und 81 neue noch SEO-ungepruefte Produkttypen. Der bisherige W4-SEO-Plan mit 218 Begriffen bleibt erhalten.")
+    require("Aktueller Fachplan W4:" not in content, "Old contradictory eight-item homepage retained")
+    (pkg/"README.txt").write_text("WT001 0.1.8 - W33 REKONSTRUKTION / NICHT INSTALLIEREN\\n"
+        "Zusammengefuehrter schreibfreier Probeaufbau. 218 alte SEO Owner unveraendert, "
+        "81 weitere SEO Kandidaten nur Vorschau, W27 Navigation sieben Hauptbereiche.\\n"
+        "W6 Altimporter mit 9 alten WordPress Hauptseiten bleibt bewusst NICHT aktiv. "
+        "Keine neue SEO-/WordPress-Freigabe, keine kostenpflichtigen Abfragen.\\n"
+        "Original 0.1.7 fehlt; keine Live- oder verlustfreie Updateabnahme vorhanden.\\n", encoding="utf-8")
     content=content.replace("Version: 0.1.4", "Version: 0.1.8")
     content=content.replace("VERSION = '0.1.4'", "VERSION = '0.1.8'")
     content=content.replace("Kein Import oder Veroeffentlichen.", "Nur Vorschau, Import und Veroeffentlichung gesperrt.")
