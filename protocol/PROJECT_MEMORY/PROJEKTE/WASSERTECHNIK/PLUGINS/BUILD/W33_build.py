@@ -179,7 +179,7 @@ def main() -> None:
     # scenario runs in its own PHP process; no live WordPress or paid API requests.
     w35qa=PROJECT/"PRUEFUNG"/"W35_WP_IMPORT_ENDTOEND_QA.php"
     require(w35qa.is_file(),"W35 complete WP import regression missing")
-    for case in ("blank","old9","collision","rollback","stale","wrongsite","nonadmin","redirect"):
+    for case in ("blank","old9","idempotent","collision","rollback","update-rollback","stale","wrongsite","nonadmin","redirect"):
         r=subprocess.run(["php",str(w35qa),str(pkg),case],capture_output=True,text=True,timeout=30)
         print("[W35 "+case+"]\n"+r.stdout,end="")
         require(r.returncode==0,"W35 "+case+" ERROR: "+r.stderr+"\n"+r.stdout)
