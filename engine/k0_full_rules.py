@@ -27,8 +27,8 @@ def _scope_reference():
 
 def writer_rule_bundle(article_type):
     catalog=load_catalog()
-    values=load_values()
     typ=str(article_type or '')
+    values=load_values(typ)
     if typ not in values.get('types',{}):
         raise Blocked('K0_FULL_RULE_ARTICLE_TYPE_VALUES_MISSING:'+typ)
     article_rules=[r for r in catalog.get('rules',[]) if r.get('scope')=='ARTICLE']
@@ -40,7 +40,7 @@ def writer_rule_bundle(article_type):
       'contract':CONTRACT,
       'article_type':typ,
       'catalog_sha256':catalog_hash(),
-      'rule_values_sha256':values_hash(),
+      'rule_values_sha256':values_hash(typ),
       'field_policy_sha256':stable(field_policy),
       'scope_reference_sha256':stable(scope),
       'article_hard_rule_count':len(hard),
@@ -118,8 +118,8 @@ def verify_live_link_targets(ctx,base_url,fetch_json=None,fetch_html=None):
 def validate_rule_context(ctx,identity):
     if not isinstance(ctx,dict) or ctx.get('contract')!=RULE_CONTEXT_CONTRACT:
         raise Blocked('K0_RULE_CONTEXT_CONTRACT_INVALID')
-    values=load_values()
     typ=str(identity.get('article_type') or '')
+    values=load_values(typ)
     cfg=(values.get('types') or {}).get(typ)
     if not isinstance(cfg,dict):
         raise Blocked('K0_FULL_RULE_ARTICLE_TYPE_VALUES_MISSING:'+typ)
@@ -233,7 +233,7 @@ def validate_rule_context(ctx,identity):
     out=copy.deepcopy(ctx)
     out['identity_sha256']=stable(identity)
     out['catalog_sha256']=catalog_hash()
-    out['rule_values_sha256']=values_hash()
+    out['rule_values_sha256']=values_hash(typ)
     return out
 
 def rule_binding(bundle):
@@ -295,7 +295,7 @@ def build_check_article(package,category_payload,lt_status=None):
 def verify_pre_lt68(package,category_payload):
     article=build_check_article(package,category_payload)
     receipts=run_article_content_checks(article)
-    report=verify_article_pre_lt68(article['article_id'],article_hash(article),receipts)
+    report=verify_article_pre_lt68(article['article_id'],article_hash(article),receipts,article['article_type'])
     if report.get('status')!='READY_FOR_LT68':
         failed=[r['rule_id'] for r in receipts if r.get('status')!='PASS']
         raise Blocked('K0_FULL_RULE_PRE_LT68_BLOCKED:'+','.join(failed or report.get('findings') or []))
@@ -307,7 +307,7 @@ def verify_pre_lt68(package,category_payload):
       'hard_rule_receipts':len(receipts),
       'required_receipt_count':report.get('required_receipt_count'),
       'catalog_sha256':catalog_hash(),
-      'rule_values_sha256':values_hash(),
+      'rule_values_sha256':values_hash(article['article_type']),
       'body_sha256':stable(str(package.get('html') or '')),
       'publish_allowed':False,
     }
@@ -317,7 +317,7 @@ def verify_final(package,category_payload,lt):
         raise Blocked('K0_FULL_RULE_LT68_NOT_PASS')
     article=build_check_article(package,category_payload,'PASS')
     receipts=run_article_checks(article)
-    report=verify_article(article['article_id'],article_hash(article),receipts)
+    report=verify_article(article['article_id'],article_hash(article),receipts,article['article_type'])
     if report.get('status')!='PASS':
         failed=[r['rule_id'] for r in receipts if r.get('status')!='PASS']
         raise Blocked('K0_FULL_RULE_FINAL_BLOCKED:'+','.join(failed or report.get('findings') or []))
@@ -329,7 +329,7 @@ def verify_final(package,category_payload,lt):
       'hard_rule_receipts':len(receipts),
       'article_hard_rule_count':len([r for r in load_catalog()['rules'] if r.get('scope')=='ARTICLE' and r.get('classification')=='HARD']),
       'catalog_sha256':catalog_hash(),
-      'rule_values_sha256':values_hash(),
+      'rule_values_sha256':values_hash(article['article_type']),
       'html_sha256':__import__('hashlib').sha256(str(package.get('html') or '').encode('utf-8')).hexdigest(),
       'publish_allowed':False,
     }
