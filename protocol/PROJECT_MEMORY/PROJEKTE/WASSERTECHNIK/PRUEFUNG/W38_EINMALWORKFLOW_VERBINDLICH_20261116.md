@@ -20,3 +20,9 @@
 **KISS-Regel:** eine zentrale Fachentscheidung; ein vorhandener SEO-Motor mit getrennten alten und neuen Auftragsdaten; ein Importer; keine zweifache Prüfung/Entscheidung derselben Daten.
 
 **Aktuelle Grenze:** An WordPress wurde nichts geändert; keine DataForSEO-Recherche wurde ausgelöst. Es gibt noch keine freigegebene Installations-ZIP. Keine weitere Nutzer-Datei zur 81er-Übergabe verlangen.
+
+## W38 tatsächlicher Entwicklungs-/Gesamttest – 16.11.2026
+- In derselben WT001-Pluginidentität die ursprüngliche PaidResearch-Klasse erhalten und ausschließlich um den neuen 81er-Auftrag ergänzt. Bestehende originalen API-Abfrage-/Antwort-/Kosten-Funktionen werden wiederverwendet, alte 218er-Planung und Optionen bleiben unverändert. Die neue SEO-Ansicht ist ein Untermenü **im vorhandenen** Plugin.
+- Der gebündelte W33-W38-GitHub-Workflow prüft die tatsächlichen 81 W28-Suchbegriffe mit den ursprünglichen DataForSEO-Regeln und **die 81er-Anbieterstrecke in neun getrennten simulierten WordPress-/API-Szenarien**: drei erfolgreiche Antwortpakete, Anbieterfehler ohne Wiederholung, Netzwerkfehler ohne Wiederholung, zu hohe Kosten gestoppt, veraltete Freigabe, bereits laufender Auftrag, fehlende Adminrechte, falsche Zielwebsite, fehlende Kostenfreigabe. **9/9 PASS.** Der alte 218er-Datenbestand wurde in allen Szenarien unverändert gelassen.
+- Die W35 zehn WordPress-Import-/Rollback-Fälle, die W36 218/81/7/219/17-Konzeptregression, PHP-Syntax, ZIP-Integrität und Original-0.1.4-Quellidentität sind ebenfalls im selben Gesamtworkflow **PASS**. Beleg: GitHub Actions **43893054361**, zuvor Funktionstest 43892268549.
+- Keine aktuelle WordPress-Admin-Inventur und kein binärer Nachweis einer neueren installierten Version: daher **WT001-0.1.9 weiterhin nur interner NICHT-INSTALLIEREN-Bau**. Insbesondere wurde kein Live-SEO-Lauf ausgeführt. Keine Nutzerinstallation anfordern, bevor die Gesamtversion installationssicher freigegeben wird.
