@@ -1,0 +1,194 @@
+--- a/affiliate-portal-router/includes/trait-ppar-ebay-run.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+@@ -1307,6 +1307,20 @@
+         return is_array($state) && !empty($state['running']);
+     }
+ 
++    /** A genuinely published SAFE shelf needs periodic provider freshness even
++     * after the one-off research has completed or been manually stopped.
++     * This is a read-only VIEW of the one prior public decision. It does not
++     * select a product, reopen research, start a second worker or alter data.
++     * Returning busy for the existing external clock prevents a 15-minute
++     * schedule gap from interrupting the next independently due freshness pass. */
++    private function ebay_external_tick_public_freshness_watch($settings) {
++        if (empty($settings['enabled']) || empty($settings['business_enabled'])
++            || empty($settings['inventory_refresh_enabled'])) { return false; }
++        $checkpoint=$this->ebay_public_checkpoint_load();
++        return $this->ebay_public_checkpoint_is_safe($checkpoint)
++            && count($this->ebay_public_checkpoint_business_ids($checkpoint)) > 0;
++    }
++
+     /** Read-only transport status. Never vetoes a valid winner, ranks products,
+      * evaluates coverage or performs any second editorial decision. */
+     private function ebay_external_tick_run_context($run) {
+@@ -1419,6 +1433,20 @@
+                 $this->ebay_external_tick_run_context($run));
+             return function_exists('rest_ensure_response')?rest_ensure_response($out):$out;
+         }
++        // One already-existing heartbeat stays alive between source checks.
++        // A completed/paused/failed research run is never the end of the
++        // independently scheduled SAFE provider-freshness obligation.
++        // The original GitHub worker understands busy and self-continues;
++        // no GitHub, hosting or WordPress scheduling change is required.
++        // NO external provider request is made in this waiting branch.
++        if ($saved_state!=='active' && $this->ebay_external_tick_public_freshness_watch($settings)) {
++            $out=array_merge(array('status'=>'busy','reason'=>'public_freshness_waiting',
++                'transport'=>'external_tick','server_time'=>time(),
++                'contract'=>'external_tick_v2',
++                'availability_next_due_at'=>absint($availability_state['next_due_at']??0)),
++                $this->ebay_external_tick_run_context($run));
++            return function_exists('rest_ensure_response') ? rest_ensure_response($out) : $out;
++        }
+         if ($saved_state==='operator_paused') {
+             $out=array_merge(array('status'=>'idle','reason'=>'operator_paused',
+                 'transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2',
+@@ -1458,8 +1486,12 @@
+                 'eBay-Arbeitsstand nach dem Paket widersprüchlich. Alte Freigaben bleiben erhalten.');
+         }
+         $availability_pending_after=$this->ebay_external_tick_availability_pending($settings);
++        // A completed availability BATCH/pass is not a final end of perpetual
++        // source freshness. Only use the existing public SAFE checkpoint here.
++        $freshness_watch=$availability_pending_after
++            || $this->ebay_external_tick_public_freshness_watch($settings);
+         if ($after_state==='operator_paused') {
+-            $tick_result=$availability_pending_after ? 'advanced' : 'idle';
++            $tick_result=$availability_pending_after ? 'advanced' : ($freshness_watch ? 'busy' : 'idle');
+         } elseif ($after_state==='active') {
+             // A worker claiming terminal success/failure without persisting that
+             // transition is a storage/ownership conflict, NOT normal progress.
+@@ -1473,12 +1505,12 @@
+             }
+         } elseif ($after_state==='completed') {
+             // A completed research pass is NOT a completed availability pass.
+-            $tick_result=$availability_pending_after ? 'advanced' : 'completed';
++            $tick_result=$availability_pending_after ? 'advanced' : ($freshness_watch ? 'busy' : 'completed');
+         } elseif ($after_state==='failed') {
+             // Keep the saved research failure and its reason, but do not stop
+             // the independent availability cursor. The existing next heartbeat
+             // resumes exactly that cursor, without restarting research.
+-            $tick_result=$availability_pending_after ? 'advanced' : 'failed';
++            $tick_result=$availability_pending_after ? 'advanced' : ($freshness_watch ? 'busy' : 'failed');
+         } else {
+             $tick_result='failed';
+         }
+--- a/affiliate-portal-router/includes/trait-ppar-ebay.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay.php
+@@ -11128,8 +11128,10 @@
+         }
+         $run = method_exists($this,'ebay_run_load') ? $this->ebay_run_load() : array();
+         $open = method_exists($this,'ebay_run_is_active') ? $this->ebay_run_is_active($run) : false;
+-        // Read only: snapshot captured by the existing canonical worker.
+-        // No database scan, extra eBay call, or additional worker.
++        // Read only: the TWO independently saved lane states in ONE existing
++        // status response. Neither a second probe nor a provider request.
++        $availability_snapshot=get_option('ppar_ebay_public_availability_state_v1',array());
++        $availability_snapshot=is_array($availability_snapshot)?$availability_snapshot:array();
+         $selection_snapshot=is_array($run['phase_state']['selection']??null)?$run['phase_state']['selection']:array();
+         wp_send_json_success(array(
+             'transport'=>'external_tick',
+@@ -11148,6 +11150,12 @@
+             'transport_tick_count'=>absint($run['transport_tick_count'] ?? 0),
+             'no_progress_count'=>absint($run['no_progress_count'] ?? 0),
+             'error_code'=>sanitize_key((string)($run['error_code'] ?? '')),
++            'availability_running'=>empty($availability_snapshot['running'])?0:1,
++            'availability_checked'=>absint($availability_snapshot['checked']??0),
++            'availability_last_batch_at'=>absint($availability_snapshot['last_batch_at']??0),
++            'availability_next_due_at'=>absint($availability_snapshot['next_due_at']??0),
++            'availability_errors'=>absint($availability_snapshot['errors']??0),
++            'last_external_heartbeat_at'=>absint(get_option(self::OPTION_EBAY_EXTERNAL_TICK_RATE_LOCK,0)),
+         ));
+     }
+ 
+@@ -11300,7 +11308,7 @@
+                         <tr><th>Zentraler Zugang</th><td><?php echo !empty($settings['enabled']) ? '<strong>aktiviert</strong>' : '<strong>deaktiviert</strong>'; ?> · Umgebung: <strong><?php echo esc_html((string)$settings['environment']); ?></strong><p class="description">Client-ID, Client-Secret, EPN-Campaign-ID, Aktivierung und OAuth-Test werden ausschließlich unter <a href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-networks')); ?>">Netzwerke &amp; API</a> verwaltet.</p></td></tr>
+                         <tr><th>Liefer-PLZ</th><td><input class="small-text" name="ppar_ebay[delivery_postal_code]" value="<?php echo esc_attr((string) $settings['delivery_postal_code']); ?>"><p class="description">Optional für präzisere Versandinformationen.</p></td></tr>
+                         <tr><th>Bestandsabgleich</th><td><label><input type="checkbox" name="ppar_ebay[inventory_refresh_enabled]" value="1" <?php checked(!empty($settings['inventory_refresh_enabled'])); ?>> Vor Ablauf der 6-Stunden-Frist vorhandene eBay-Angebote gezielt per Browse <code>getItem</code> nachprüfen</label><p class="description">Unauffindbar/verkauft/beendet → Frontend aus. Temporärer API-Fehler → keine Löschung; der Datensatz bleibt intern erhalten und wird später erneut geprüft.</p></td></tr>
+-                        <tr><th>Bestandschecks je Lauf</th><td><input class="small-text" type="number" min="1200" max="2000" name="ppar_ebay[inventory_refresh_max_per_run]" value="<?php echo absint($settings['inventory_refresh_max_per_run']); ?>"><p class="description">Automatisch mindestens 1.200 Checks; der Bestandsabgleich läuft stündlich, Discovery weiterhin alle drei Stunden. Keine Änderung erforderlich.</p></td></tr>
++                        <tr><th>Bestandschecks je Lauf</th><td><input class="small-text" type="number" min="1200" max="2000" name="ppar_ebay[inventory_refresh_max_per_run]" value="<?php echo absint($settings['inventory_refresh_max_per_run']); ?>"><p class="description">Nur für ausdrücklich manuelle Bestandsabgleiche. Automatisch werden bereits freigegebene Angebote gezielt aktuell gehalten; eine vollständige Produktsuche wird höchstens alle sieben Tage fällig.</p></td></tr>
+                         <tr><th>Gewerbliche Verkäufer</th><td><label><input type="checkbox" name="ppar_ebay[business_enabled]" value="1" <?php checked(!empty($settings['business_enabled'])); ?>> BUSINESS als Produkt-Creatives übernehmen</label></td></tr>
+                         <tr><th>BUSINESS-Auswahl</th><td><input class="small-text" type="number" min="30" max="1000" name="ppar_ebay[business_active_cap]" value="<?php echo absint($settings['business_active_cap']); ?>"> aktiv gesamt · <strong>max. 3 je passender Seite</strong><br><input class="small-text" type="number" min="5" max="20" name="ppar_ebay[business_candidate_pool_per_concept]" value="<?php echo absint($settings['business_candidate_pool_per_concept']); ?>"> Kandidaten je Produktkonzept · <input class="small-text" type="number" min="0" max="5" name="ppar_ebay[business_reserve_per_concept]" value="<?php echo absint($settings['business_reserve_per_concept']); ?>"> Reserven<p class="description">Harte Sicherheitsgrenze: 1000 aktive BUSINESS-Produkte portalweit; durch max. 3 je Produktkonzept liegt der aktuelle Katalog rechnerisch bei höchstens 933. Top 10 je Produktkonzept, 2 interne Nachrücker. Verkäuferdiversität wird bevorzugt; freie Plätze dürfen mit weiteren unterschiedlichen qualifizierten Angeboten desselben Verkäufers gefüllt werden.</p></td></tr>
+                         <tr><th>Vertragsbestätigung</th><td><label><input type="checkbox" name="ppar_ebay[api_terms_confirmed]" value="1" <?php checked(!empty($settings['api_terms_confirmed'])); ?>> Aktuelle eBay-API-, Buy-API- und EPN-Verträge sind akzeptiert und das Portal ist als Anwendung/Media Property angegeben.</label></td></tr>
+@@ -11418,10 +11426,23 @@
+                             ?' · Bearbeitete Quellen bis Nr. '+Number(d.selection_cursor):'';
+                         var extra=d.recovery==='advanced'?' · vorhandener Lauf fortgesetzt':'';
+                         var err=status==='failed'&&d.error_code?' · Fehler '+d.error_code:'';
+-                        return 'Live-Status: '+state+' · Phase '+phase+(sub?' / '+sub:'')+
++                        var clockAt=Number(d.last_external_heartbeat_at)||0;
++                        var clockAge=clockAt?Math.max(0,now-clockAt):null;
++                        var availabilityAt=Number(d.availability_last_batch_at)||0;
++                        var availabilityDue=Number(d.availability_next_due_at)||0;
++                        var availabilityAge=availabilityAt?Math.max(0,now-availabilityAt):null;
++                        var availabilityDelay=availabilityDue?Math.max(0,availabilityDue-now):null;
++                        var availabilityLabel=Number(d.availability_running)?'Prüfung läuft':'Wartet';
++                        var freshness=' · eBay-Aktualität: '+availabilityLabel+
++                          ' · zuletzt vor '+fmt(availabilityAge)+
++                          ' · nächste Prüfung '+(availabilityDelay===null?'unbekannt':(availabilityDelay?'in '+fmt(availabilityDelay):'fällig'))+
++                          ' · bisher geprüft '+(Number(d.availability_checked)||0)+
++                          ' · bisherige Prüffehler '+(Number(d.availability_errors)||0);
++                        return 'Recherche: '+state+' · Phase '+phase+(sub?' / '+sub:'')+
+                           ' · echter Fortschritt Schritt '+(Number(d.progress_seq)||0)+' vor '+fmt(progressAge)+
+                           cursor+' · Arbeitsaufrufe '+(Number(d.transport_tick_count)||0)+
+-                          ' · letzter Aufruf vor '+fmt(tickAge)+extra+err;
++                          ' · letzter Rechercheaufruf vor '+fmt(tickAge)+
++                          ' · letzter Automatikaufruf vor '+fmt(clockAge)+extra+err+freshness;
+                     }
+                     function check(){
+                         if(busy) return; busy=true;
+@@ -11451,11 +11472,17 @@
+                 ?>
+                 <p><strong>Getrennte Arbeit:</strong> Recherche <?php echo esc_html($canonical_status); ?>
+                     · gespeicherte eBay-Freigaben <?php echo absint($stored_public_count); ?>
+-                    · Produktverfuegbarkeit <?php echo !empty($availability_state['last_batch_at'])
++                    · letzter Automatikaufruf <?php $last_clock=absint(get_option(self::OPTION_EBAY_EXTERNAL_TICK_RATE_LOCK,0)); echo $last_clock ? esc_html(wp_date('d.m.Y H:i:s',$last_clock)) : 'noch nicht erfolgt'; ?>
++                    · Anbieterprüfung <?php echo !empty($availability_state['running'])?'läuft':'wartet'; ?>
++                    · zuletzt <?php echo !empty($availability_state['last_batch_at'])
+                         ? esc_html(wp_date('d.m.Y H:i',absint($availability_state['last_batch_at'])))
+-                        : 'noch nicht geprueft'; ?>
+-                    <?php if (!empty($availability_state['errors'])) : ?> · Prüfprobleme <?php echo absint($availability_state['errors']); ?><?php endif; ?>
+-                    <small>(gespeicherte Freigabe ist kein Nachweis, dass jede Kachel gerade sichtbar ist)</small>
++                        : 'noch nicht geprüft'; ?>
++                    · nächste Prüfung <?php echo !empty($availability_state['next_due_at'])
++                        ? esc_html(wp_date('d.m.Y H:i',absint($availability_state['next_due_at'])))
++                        : 'noch nicht festgelegt'; ?>
++                    · insgesamt geprüft <?php echo absint($availability_state['checked']??0); ?>
++                    <?php if (!empty($availability_state['errors'])) : ?> · bisherige Prüfprobleme <?php echo absint($availability_state['errors']); ?><?php endif; ?>
++                    <small>(Gespeicherte Freigabe und erfolgte Prüfung sind kein Nachweis, dass gerade jede Kachel sichtbar ist.)</small>
+                 </p>
+                 <?php if (!empty($canonical_routes['business']) && !array_key_exists('required', $canonical_coverage)) : ?>
+                 <p><strong>Abdeckung:</strong> Der neue Lauf hat noch keinen eigenen Gesamtstand berechnet. Vorherige eBay-Freigaben bleiben separat gespeichert; <strong>Die 283 Produktfamilien erhalten erst nach bestätigtem öffentlichem Abschluss ein neues Gesamtergebnis; die bisherigen eBay-Freigaben bleiben erhalten.</strong></p>
+--- a/affiliate-portal-router/pferdeportal-affiliate-router.php
++++ b/affiliate-portal-router/pferdeportal-affiliate-router.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
+  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
+- * Version: 6.72.355
++ * Version: 6.72.356
+  * Author: OpenAI
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -120,7 +120,7 @@
+     use PPAR_DFS_Amazon_Trait;
+     use PPAR_Digistore24_Trait;
+     use PPAR_Housekeeping_Trait;
+-    const VERSION = '6.72.355';
++    const VERSION = '6.72.356';
+     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
+     const CONTRACT_VERSION = '1.0';
+     const PROVIDER_CONTRACT_VERSION = '2.0';
+--- a/affiliate-portal-router/readme.txt
++++ b/affiliate-portal-router/readme.txt
+@@ -1,3 +1,4 @@
++V6.72.356 QA69 EINER VORHANDENER TAKT: bestehender GitHub-Heartbeat bleibt nach Abschluss/Pause/Fehler der Recherche bei vorhandenen SAFE-Freigaben als read-only 'busy' aktiv und fuehrt im bisherigen 60s-Takt die reine Verfuegbarkeit fort, auch wenn der naechste Anbietercheck erst in zwei Stunden faellig wird. Nur eine gespeicherte Fachentscheidung, keine neue Suche, Tabelle, Cron-Engine, Quelle, Regel oder neuer Uhr/Arbeiter. Gezielt im bestehenden Quellcode getestet, echte Anbieter-/Frontend-Abnahme bleibt offen.
+ V6.72.355 QA69-Gesamtabnahme: Ein gespeicherter FEHLER der Produktsuche stoppt nicht mehr die unabhaengige SAFE-Verfuegbarkeitsarbeit im bestehenden einen Heartbeat. Einziger persistierter Availability-Cursor und Suchstatus bleiben unveraendert. Vorher faelschlich fehlgeschlagener alter Gesamttest wurde mit ergaenzter WordPress-Mockumgebung wiederhergestellt (5 erwuenschte Endabschluesse, 4 geplante Fehlerstopps); 309 SAFE-Quellen, 95 historische Item-IDs, 15 Statusfaelle und 9 Zeitfaelle lokal bestanden. Alte dauerhafte Auditwarnung als historische Luecke statt aktueller Fehler beschriftet. Keine neue Zeitsteuerung, Suche, Tabelle, Datenmigration, Freigabeentscheidung oder Partneraenderung. Keine echte Live-Endabnahme.
+ V6.72.354 QA69 KISS: Der automatische GitHub-Takt startet keinen stuendlichen vollstaendigen Inventory-Refresh mehr. Die bestehende unabhaengige SAFE-Produktverfuegbarkeitspruefung bleibt die einzige laufende Frischekontrolle; eine schon gespeicherte aktive Refresh-/Sync-UUID und deren Cursor sowie ausdruecklich manuelle Refreshs bleiben unveraendert. Keine Aenderung an fachlicher Auswahl, Quelle/Policy/Frische-Sperren, Produktlisten, SAFE-Checkpoint, Zeitgeber, Datenbanken, K0 oder anderen Partnern. Lokaler Quelltest, kein Live-Erfolgsnachweis.
+ V6.72.353: QA85 verbindliche QA69-KISS-Gesamtkorrektur: dieselbe bestehende Heartbeat-Route fuehrt Quellenaktualitaet auch bei abgeschlossener, pausierter oder fehlgeschlagener Recherche weiter, nur bisherige SAFE-Produkte, alter Verfuegbarkeits-Cursor angepasst; keine weitere Produktentscheidung, kein neuer Cron oder Worker, kein Such-Neustart. Nur Testkandidat ohne reale Anbieter-/Frontend-Abnahme.
+@@ -96,7 +97,7 @@
+ V6.72.236 TEST: Backend-Portalabdeckung hat bisher 329 Ziele x 3 LIVE-Router-Auswahlen synchron ausgefuehrt; jetzt acht Ziele pro Request und vollstaendiger JSON-Export in begrenzten Lesebloecken. PRIVATE-HivePress-Stale-Filter kehrt auf normalen Seiten sofort zurueck; BUSINESS-Checkpoint scannt bei abgeschaltetem PRIVATE keine alten PRIVATE-HivePress-Importe mehr. Kein neuer Worker, keine DB-Tabelle, keine Provider-/Ranking-/BUSINESS-Aenderung. Lokale PHP-/JavaScript-/Mock-Pruefungen, KEINE WP/MariaDB-Host-Abnahme.
+ V6.72.234 TEST: Direkter Rueckbau eBay-PRIVATE aus Affiliate-Zentrale 6.72.233: alte automatische Admin-Init-Loeschung, PRIVATE-HivePress-Backendfunktionen, PRIVATE-Kategorieanlage, PRIVATE-Discovery und PRIVATE-Bedienfelder entfernt. Angehende INDIVIDUAL-Datensaetze werden auch aus alten Laufplaenen hart abgewiesen. BUSINESS/Idealo/Artikel/Banner unveraendert. Bestehende PRIVATE-DB-Altlasten werden durch das Installieren NICHT automatisch geloescht; keine unkontrollierten Datenbankaktionen. Nur Testinstallation; kein behaupteter WordPress-/MariaDB-Livepass.
+ V6.72.233: PRIVATE-only Aufraeumweg ueber admin_init reaktiviert (kein Frontend/AJAX); alter falscher Complete-Marker wird nachverarbeitet; Abschluss erst bei tatsaechlich geleerter Unterkategorie-Struktur. PRIVATE-Neuanlage gesperrt. BUSINESS/idealo/Artikelunveraendert.
+-Stable tag: 6.72.355
++Stable tag: 6.72.356
+ V6.72.232 SICHERHEITSSTOPP: Automatischer PHP-init-Loeschlauf der 6.72.231 entfernt; PRIVAT-eBay bleibt abgeschaltet und im oeffentlichen HivePress-Filter gesperrt; keine eigenstaendige Datenbankbereinigung, keine Datenrestauration.
+ V6.72.230 PRIVATE-EBAY-ENTFERNUNG: PRIVATE-Verkaeuferroute bleibt zwingend aus; auf Adminaufrufen werden ausschliesslich eBay-markierte HivePress-Importanzeigen kontrolliert in den Papierkorb verschoben, manuelle Anzeigen vor Entfernung der Unterkategorien der Hauptkategorie Private Anzeigen zugeordnet. Alle Unterkategorien werden geloescht, Stammkategorie und native Anzeigen bleiben. Die PRIVAT-HivePress-Frontend-/Preview-Hooks und Einrichtungsoberflaeche sind abgekoppelt; BUSINESS, idealo, Artikel, Banner, Kategorien der Redaktion, CSS/JS bleiben unveraendert. Idempotente, zeitbegrenzte Bereinigung ohne neuen Cron/Runner; Fortschritt in der eBay-Fachseite.
+ V6.72.226 PRODUKTAUSGABE KISS (LOKALER TESTKANDIDAT): Stellt die vertragliche Reihenfolge exakt -> weiterer Themenkreis -> zuletzt nur bestaetigt freigegebene Pferdeprodukte wieder her. Kategorie-/Hub-/Journal-Produktplaetze werden bei zu wenigen Treffern nur aus dem vorhandenen indexierten Kampagnenbestand ergaenzt. Auf normalen Einzelbeitraegen bleibt exakt verlangte Produktidentitaet strikt; fuer allgemeine Beitraege werden zuletzt gepruefte eBay-/idealo-Angebote zugelassen. Anbieter koennen innerhalb derselben Relevanzstufe gemischt werden; spaetere Amazon-Einbindung bleibt getrennt. Bestehende Sperren fuer eBay-BUSINESS-Quelle, private Anzeigen, Quelle, Health, Veto, Bild, Partner und idealo-48h-Grenze bleiben aktiv. Der vorhandene idealo-Hintergrundrefresh muss veraltete unveraenderte Feeds vollstaendig neu pruefen, statt dauerhaft per Hash abzubrechen. Kein Umbau von Imports, Renderer, Kategorien, Bannern, Provideradaptern, Tracking, Datenbanktabellen oder Template. Keine neue Frontend-Providerabfrage. Tests sind lokale Funktionssimulation; kein behaupteter Live-/WP-/MariaDB-PASS.
