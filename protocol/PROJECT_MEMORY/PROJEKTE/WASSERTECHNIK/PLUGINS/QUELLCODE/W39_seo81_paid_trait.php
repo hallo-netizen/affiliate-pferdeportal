@@ -139,7 +139,7 @@ trait Wassertechnik_W38_Seo81_Trait {
                 'search_intent'=>null,'search_intent_probability'=>null,'secondary_intents'=>null
             ];
             $report=[
-                'schema'=>'wassertechnik-dfs-w38-81-research-v1','plugin_version'=>'0.1.9',
+                'schema'=>'wassertechnik-dfs-w38-81-research-v1','plugin_version'=>'0.1.10',
                 'request_id'=>$requestId,'source_fingerprint'=>$pre['fingerprint'],
                 'legacy_fingerprint'=>$pre['legacy_fingerprint'],'source_sha256'=>$pre['source_sha256'],
                 'state'=>'RUNNING','cost_usd'=>0.0,'max_usd'=>self::W38_MAX_USD,
