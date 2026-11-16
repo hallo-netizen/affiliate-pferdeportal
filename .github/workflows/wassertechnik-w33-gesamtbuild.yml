@@ -1,4 +1,5 @@
 name: Wassertechnik W33 single offline full QA build
+# W38: same total QA now covers additional 81-only provider flow without WP access.
 on:
   pull_request:
     paths:
