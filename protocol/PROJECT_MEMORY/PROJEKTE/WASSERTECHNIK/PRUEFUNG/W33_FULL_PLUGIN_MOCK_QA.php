@@ -42,7 +42,7 @@ function get_option(...$x){return false;}
 function wp_is_post_revision(...$x){return false;}
 $assert=function($ok,$msg){if(!$ok)throw new RuntimeException("FAILED: ".$msg);echo "PASS ".$msg.PHP_EOL;};
 require $root.'/wassertechnik-kategorie-workflow.php';
-$assert(Wassertechnik_Kategorie_Workflow::VERSION==='0.1.9','same plugin identity, updated version');
+$assert(Wassertechnik_Kategorie_Workflow::VERSION==='0.1.10','same plugin identity, updated version');
 $homepage=file_get_contents($root.'/wassertechnik-kategorie-workflow.php');
 $assert(str_contains($homepage,'Fachplan W27:') && !str_contains($homepage,'Aktueller Fachplan W4:'),'one current 7-area homepage, no old 8-area claim');
 $readme=file_get_contents($root.'/README.txt');
