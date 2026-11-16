@@ -72,6 +72,8 @@ jobs:
 
       - name: Bind unique run instance and prepare canonical writer job
         shell: bash
+        env:
+          K0_REQUIRE_ORIGINAL_SOURCE_PROOF: '1'
         run: |
           set -euo pipefail
           python3 - <<'PY'
