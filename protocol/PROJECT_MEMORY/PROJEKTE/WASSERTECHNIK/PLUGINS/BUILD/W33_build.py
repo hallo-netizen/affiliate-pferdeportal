@@ -57,6 +57,7 @@ def main() -> None:
         "class-wassertechnik-seo-handoff.php": "W30_seo_handoff_readonly.php",
         "class-wassertechnik-seo81-preview.php": "W31_class-wassertechnik-seo81-preview.php",
         "class-wassertechnik-navigation.php": "W32_class-wassertechnik-navigation.php",
+        "class-wassertechnik-inventory-readback.php": "W34_class-wassertechnik-inventory-readback.php",
     }
     for dest, src in additions.items():
         file = PLUGINS/"QUELLCODE"/src
@@ -100,12 +101,14 @@ def main() -> None:
         "require_once __DIR__ . '/includes/class-wassertechnik-import.php';\n"+
         "require_once __DIR__ . '/includes/class-wassertechnik-seo-handoff.php';\n"+
         "require_once __DIR__ . '/includes/class-wassertechnik-seo81-preview.php';\n"+
-        "require_once __DIR__ . '/includes/class-wassertechnik-navigation.php';")
+        "require_once __DIR__ . '/includes/class-wassertechnik-navigation.php';\n"+
+        "require_once __DIR__ . '/includes/class-wassertechnik-inventory-readback.php';")
     original_boot="        Wassertechnik_PaidResearch::boot();"
     require(content.count(original_boot)==1, "Original boot changed")
     content=content.replace(original_boot, original_boot+"\n"+
         "        Wassertechnik_Seo81_Preview::boot();\n"+
         "        Wassertechnik_W32_Navigation::boot();\n"+
+        "        Wassertechnik_W34_Inventory_Readback::boot();\n"+
         "        // Import remains NOT booted: W6 has 9 old roots, W27 mandates a different 7-group target.\n"+
         "        // Do not activate W9 before a separately approved new 7-root manifest and WP readback.")
     require(content.count("Version: 0.1.4")==1 and content.count("VERSION = '0.1.4'")==1,
@@ -127,7 +130,7 @@ def main() -> None:
         require(sha(file.read_bytes())==original_checksums[file.name], "Original class changed "+file.name)
 
     # Ensure candidate preview and final navigation have no forbidden WordPress mutators.
-    for name in ("class-wassertechnik-seo-handoff.php","class-wassertechnik-seo81-preview.php","class-wassertechnik-navigation.php"):
+    for name in ("class-wassertechnik-seo-handoff.php","class-wassertechnik-seo81-preview.php","class-wassertechnik-navigation.php","class-wassertechnik-inventory-readback.php"):
         src=(pkg/"includes"/name).read_text(encoding="utf-8")
         require(not any(x in src for x in ("wp_insert_post","wp_insert_term","wp_update_post","wp_update_term","wp_remote_post","update_option(")),
                 "Unexpected writer in read-only module "+name)
