@@ -1,0 +1,101 @@
+{
+  "contract": "QA69_VERBINDLICH",
+  "baseline": "6.72.354",
+  "source_archive_sha256": "15980cfd0e0e5e2179ed889b045404e10857a164beb42dcb9d76224a84bd251e",
+  "candidate": "6.72.355",
+  "candidate_sha256": "13075e31c87d5ebd3a8c84064e4bfbf253e607bef149ff75b6411a2c970c2464",
+  "candidate_type": "STAGING_NOT_LIVE_RELEASE",
+  "changes": [
+    "Existing run trait: one pending-availability decision handles canonical post-worker failed/paused/completed",
+    "Existing eBay admin: historical audit warning no longer masquerades as current error",
+    "Plugin header and readme version only"
+  ],
+  "no_data_migration": true,
+  "new_clock": false,
+  "new_worker": false,
+  "new_product_search": false,
+  "new_edict": false,
+  "files_total": 66,
+  "php_syntax_pass": 23,
+  "changed_archive_entries": 4,
+  "old_heartbeat_15_pass": 14,
+  "new_heartbeat_15_pass": 15,
+  "fixed_wrong_old_expectation": "worker_finishes_failed_availability_pending",
+  "saved_309_check_count": 309,
+  "saved_309_unique": 309,
+  "saved_309_outside_safe": 0,
+  "saved_309_new_canonical_search_calls": 0,
+  "original_95_item_ids": true,
+  "due9": "RESULT PASS 9 cases",
+  "rest_status_case_count": 16,
+  "full_lifecycle_scenarios": {
+    "normal": {
+      "status": "completed",
+      "code": null,
+      "safe_old_preserved": true,
+      "checks": 23,
+      "families_covered": 259
+    },
+    "old_blocked": {
+      "status": "completed",
+      "code": null,
+      "safe_old_preserved": true,
+      "checks": 23,
+      "families_covered": 258
+    },
+    "new_blocked": {
+      "status": "completed",
+      "code": null,
+      "safe_old_preserved": true,
+      "checks": 11,
+      "families_covered": 258
+    },
+    "db_down": {
+      "status": "failed",
+      "code": "business_public_storage_read_failed",
+      "safe_old_preserved": true,
+      "checks": 11,
+      "families_covered": 259
+    },
+    "churn": {
+      "status": "completed",
+      "code": null,
+      "safe_old_preserved": true,
+      "checks": 27,
+      "families_covered": 258
+    },
+    "no_new": {
+      "status": "completed",
+      "code": null,
+      "safe_old_preserved": true,
+      "checks": 23,
+      "families_covered": 257
+    },
+    "save_fail": {
+      "status": "failed",
+      "code": "public_checkpoint_commit_failed",
+      "safe_old_preserved": true,
+      "checks": 11,
+      "families_covered": 259
+    },
+    "post_commit_state_save_fail": {
+      "status": "failed",
+      "code": "public_checkpoint_cleanup_handoff_save_failed",
+      "safe_old_preserved": true,
+      "checks": 11,
+      "families_covered": 259
+    },
+    "collision_retry_state_save_fail": {
+      "status": "failed",
+      "code": "public_checkpoint_collision_state_save_failed",
+      "safe_old_preserved": true,
+      "checks": 11,
+      "families_covered": 259
+    }
+  },
+  "provider_calls": "MOCK",
+  "wordpress_database": "MOCK",
+  "frontend_live": "NOT_PROVEN",
+  "github_schedule_change": "NONE",
+  "live_QA69": "NOT_ACCEPTED"
+}
