@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Einen sicheren Wassertrog für Pferde selber bauen",
+      "target_keyword": "wassertröge selber bauen",
+      "category": "wassertroege-fuer-weiden-installation",
+      "article_type": "Anleitung",
+      "plan_slot": "1b60069d26ce9f6a70de15852e683a57262282acdead981d9b73742185ef5aeb"
+    }
+  ],
+  "batch_sha256": "734dee682bb85bf73d72c84992cde56660c4614e0047cce6e54cd248b74a5c9d"
+}
