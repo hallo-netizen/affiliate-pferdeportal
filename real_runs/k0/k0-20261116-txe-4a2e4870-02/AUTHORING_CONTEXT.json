@@ -1,0 +1,205 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Magnetfeld-Gamaschen für Pferde und was über ihre Wirkung bekannt ist",
+    "target_keyword": "magnetfeld gamasche pferd",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "Beratung",
+    "plan_slot": "fc0df9a19f7b36915477e616ee60403fb756c5bdf1fd61a1282f91b79a6af823"
+  },
+  "content_profile": {
+    "search_intent": "Produktberatung mit Evidenzeinordnung"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Systematic review of complementary veterinary electrotherapies – Animals",
+          "source_url": "https://pubmed.ncbi.nlm.nih.gov/36611674/"
+        },
+        {
+          "source_title": "Effect of a static magnetic field on blood flow to the metacarpus in horses",
+          "source_url": "https://pubmed.ncbi.nlm.nih.gov/10997160/"
+        },
+        {
+          "source_title": "Does a magnetic blanket induce changes in horses? – Equine Veterinary Journal",
+          "source_url": "https://pubmed.ncbi.nlm.nih.gov/24779912/"
+        },
+        {
+          "source_title": "Types of rugs and rugging a horse – British Horse Society",
+          "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/seasonal-care/types-of-rugs-and-rugging-a-horse"
+        },
+        {
+          "source_title": "Guide to good animal welfare practice for horses",
+          "source_url": "https://www.eurogroupforanimals.org/files/eurogroupforanimals/2021-12/Guidelines_goodanimalwelfare_horses%20.pdf"
+        }
+      ],
+      "claims": [
+        "Eine systematische Übersichtsarbeit sieht keine ausreichenden klinischen Wirksamkeitsbelege für Elektrotherapien bei Pferden; beworbene Wirkungen sind kritisch einzuordnen.",
+        "Eine Untersuchung mit statischen Magnetbandagen an Pferdebeinen fand keinen erhöhten Blutfluss an der untersuchten Stelle gegenüber der Kontrolle.",
+        "Eine kontrollierte Studie an gesunden Pferden fand bei statischen Magnetdecken keine messbaren Vorteile gegenüber einer Placebodecke.",
+        "Auch Pferdewohlfahrtsorganisationen weisen auf schwankende Nachweise für beworbene Wirkungen von Therapiedecken hin.",
+        "Bei zusätzlich angelegter Pferdeausrüstung bleiben Passform, Hautkontrolle und tägliche Überprüfung wesentlich."
+      ],
+      "fresh_research_reference_date": "2026-11-16"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "magnetfeld gamasche pferd",
+      "topic": "Magnetfeld-Gamaschen für Pferde und was über ihre Wirkung bekannt ist",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Magnetfeld-Gamaschen anhand ihrer Technik, belegten Wirkung, Passform und Sicherheit kritisch beurteilen.",
+      "decision_criteria": [
+        "Statische Magnete und aktive Magnetfeldgeräte unterscheiden",
+        "Klinische Wirksamkeitsbelege prüfen",
+        "Passform und Hautzustand kontrollieren",
+        "Therapieversprechen von Tierarztberatung trennen",
+        "Kosten gegen nachgewiesenen Nutzen abwägen"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Systematic review of complementary veterinary electrotherapies – Animals",
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/36611674/",
+        "evidence_text_sha256": "52ef0c395e45fa3673021dbc97c77deb710e137ef44245cf1d274ad8b93acaed",
+        "statement": "Eine systematische Übersichtsarbeit sieht keine ausreichenden klinischen Wirksamkeitsbelege für Elektrotherapien bei Pferden; beworbene Wirkungen sind kritisch einzuordnen.",
+        "evidence_text": "The current scientific evidence is not sufficient to support the clinical effects of electrotherapies for any clinical indication in horses",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "Effect of a static magnetic field on blood flow to the metacarpus in horses",
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/10997160/",
+        "evidence_text_sha256": "d317c407a89e518ca621a5ad78304eea9a06515075603295e01f5c9d6af0ec11",
+        "statement": "Eine Untersuchung mit statischen Magnetbandagen an Pferdebeinen fand keinen erhöhten Blutfluss an der untersuchten Stelle gegenüber der Kontrolle.",
+        "evidence_text": "does not increase blood flow to the portion of the metacarpus underneath the wrap.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "Does a magnetic blanket induce changes in horses? – Equine Veterinary Journal",
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/24779912/",
+        "evidence_text_sha256": "2a8f609a034b7c737764809829f3362bfc31fa5b7a1b679ba15f71b79a6b177c",
+        "statement": "Eine kontrollierte Studie an gesunden Pferden fand bei statischen Magnetdecken keine messbaren Vorteile gegenüber einer Placebodecke.",
+        "evidence_text": "Blood flow in muscle, skin temperatures, MNTs and behavioural traits did not differ between active and placebo magnetic blankets.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_title": "Types of rugs and rugging a horse – British Horse Society",
+        "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/seasonal-care/types-of-rugs-and-rugging-a-horse",
+        "evidence_text_sha256": "bd86d69d1b5cb216d0df1f35b4910b3a079230d005564830654c808aff34322b",
+        "statement": "Auch Pferdewohlfahrtsorganisationen weisen auf schwankende Nachweise für beworbene Wirkungen von Therapiedecken hin.",
+        "evidence_text": "Some therapy rugs are marketed as supporting comfort, circulation or recovery, although evidence for different products varies.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_title": "Guide to good animal welfare practice for horses",
+        "source_url": "https://www.eurogroupforanimals.org/files/eurogroupforanimals/2021-12/Guidelines_goodanimalwelfare_horses%20.pdf",
+        "evidence_text_sha256": "bdc276e85f71ac5469d01c6799fe678f645505f2ea52036c4a2f5f804794c0d6",
+        "statement": "Bei zusätzlich angelegter Pferdeausrüstung bleiben Passform, Hautkontrolle und tägliche Überprüfung wesentlich.",
+        "evidence_text": "If rugs are used, they should be well fitted, checked daily",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "Pferdegesundheit und den Umgang mit Behandlungsaussagen verstehen",
+        "block": "criteria"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/gesundheit/gesundheit-regeneration/",
+        "anchor": "Regeneration nach Belastung richtig beurteilen",
+        "block": "decision"
+      },
+      {
+        "role": "further_information",
+        "href": "/journal/",
+        "anchor": "Wissenschaftliche und praktische Pferdethemen im Journal",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/gesundheit/gesundheit-regeneration/",
+        "active": true
+      },
+      {
+        "href": "/journal/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Magnetfeld-Gamaschen",
+      "Belege",
+      "statische Magnete",
+      "Wirksamkeit",
+      "Pferdegesundheit"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Gegenüberstellung von Werbeaussagen, vorhandenen Studien und sachgerechten Entscheidungen erleichtert eine kritische Kaufabwägung."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
