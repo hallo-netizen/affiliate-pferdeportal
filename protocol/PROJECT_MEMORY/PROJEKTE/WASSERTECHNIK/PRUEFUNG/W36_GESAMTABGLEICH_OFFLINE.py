@@ -92,7 +92,7 @@ def audit():
             php=z.read(name).decode("utf-8")
             methods=("planned","panel","resume","apply","paid","items") if "paid-research" in filename else ("seo_manifest","build_preflight")
             for method in methods:
-                matches=list(re.finditer(r"function\\s+"+method+r"\\s*\\(",php))
+                matches=list(re.finditer(r"function\s+"+method+r"\s*\(",php))
                 if not matches:
                     continue
                 start=matches[0].start()
