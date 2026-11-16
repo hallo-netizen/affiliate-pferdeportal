@@ -1,0 +1,57 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "oliver-beil.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 2,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Welches Pferd gilt als das teuerste Deutschlands?",
+        "target_keyword": "teuerstes pferd deutschland",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "FAQ",
+        "plan_slot": "7ef097950eaf095bbe7452cc974db5be28fd573e6c0d876534a2dffc6d262cfb"
+      },
+      {
+        "title": "Wasserführanlagen für Pferde und ihre Einsatzmöglichkeiten",
+        "target_keyword": "wasserführanlage pferd",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Beratung",
+        "plan_slot": "517b5cf27b2521ac13004a52b690224c2d0dce36b2a2f859e0325b5a9cd46cd7"
+      }
+    ],
+    "batch_sha256": "3c645e586c49b5ba1f38f525c47c7d60973bb37267ff5e90069776530b81b700"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Welches Pferd gilt als das teuerste Deutschlands?",
+        "target_keyword": "teuerstes pferd deutschland",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "FAQ",
+        "plan_slot": "7ef097950eaf095bbe7452cc974db5be28fd573e6c0d876534a2dffc6d262cfb"
+      },
+      "order_id": "TXE-118f738b9a042db523863dd4bef9a740",
+      "article_id": "article:7540f3dfab7707ec25f14427",
+      "search_intent": "Pferdemarkt – Spitzenpreise"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wasserführanlagen für Pferde und ihre Einsatzmöglichkeiten",
+        "target_keyword": "wasserführanlage pferd",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Beratung",
+        "plan_slot": "517b5cf27b2521ac13004a52b690224c2d0dce36b2a2f859e0325b5a9cd46cd7"
+      },
+      "order_id": "TXE-5997bbefd4b567cef7b8ba9642ff590d",
+      "article_id": "article:c0e9a6e802db1bc1c0fd3f99",
+      "search_intent": "Gesundheit und Training – Wasserführanlage"
+    }
+  ],
+  "manifest_sha256": "f39163f89b8274913e90be163c9482915d5cd7e2b29c9d913dfabf57e585e18b"
+}
