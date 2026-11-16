@@ -1,4 +1,16 @@
 # WASSERTECHNIK – EINZIGER AKTUELLER FORSCHUNGS-, PRODUKT- UND FACHREGISTERSTAND
+**16.11.2026 · W25 · 19 zusätzliche Herstellerbelege; noch keine SEO-/WP-Freigabe**
+
+**Nur aktueller Master:** `W25_ZENTRALES_FACHREGISTER_20261116.json`. W24 und älter sind Historie, keine zweite Datenquelle.
+
+**426 Einträge** (318 Produktbezeichnungen inkl. 9 Aliase, 82 Glossar, 26 Anbieter-Rubriken). W25: **19** zuvor unbelegte Produktfamilien an Herstellerquellen bestätigt; Zielgruppen offen **84**, Technik-/Marktstatus offen **164**, Marktproduktarten **153**. Käufergruppe und Technikstatus nur einmal je Produkt, Beleg im bisherigen einzigen Feld `w24_evidenz`, auch wenn W25-geprüft. 9 Aliase und 50 Funktionsentscheidungen unverändert; keine Produktseitengenehmigung.
+
+**Forschungsbericht:** `W25_HERSTELLERBELEGE_KAUFGRUPPEN_GESAMTSTAND_20261116.md`. 8 frühere Menü-Arbeitsgruppen bleiben Entwurf; endgültiger 6–8-Kategorienbaum noch offen. W4 79/105/356 und W5 59/20 unverändert. Keine WP-/Plugin-/Frontend- oder bezahlte SEO-Änderung.
+
+**NEXT W26:** 84 Käufergruppenlücken / 164 Technikstatuslücken anhand konkreter Herstellerfamilien weiter klären, dann eine gemeinsame SEO-/Produktowner-Abgrenzung und einmaliger Kategoriebaum.
+
+## W24-Historie
+# WASSERTECHNIK – EINZIGER AKTUELLER FORSCHUNGS-, PRODUKT- UND FACHREGISTERSTAND
 **15.11.2026 · W24 · Markt-/Käuferbeleg-Screening, noch keine SEO-/WordPress-Freigabe**
 
 **Aktiver Master nur:** `W24_ZENTRALES_FACHREGISTER_20261115.json`. W23 und älter sind Historie und keine zweite fortzuschreibende Datenquelle.
