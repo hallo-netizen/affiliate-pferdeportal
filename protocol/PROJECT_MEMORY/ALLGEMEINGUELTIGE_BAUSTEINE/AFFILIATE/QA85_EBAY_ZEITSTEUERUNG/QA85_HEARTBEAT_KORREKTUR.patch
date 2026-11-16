@@ -1,0 +1,63 @@
+--- qa84/includes/trait-ppar-ebay-run.php
++++ qa85/includes/trait-ppar-ebay-run.php
+@@ -1361,19 +1361,10 @@
+             return new WP_Error('ebay_run_state_inconsistent',
+                 'Gespeicherter eBay-Laufzustand widersprüchlich. Kein Neustart und kein Überschreiben bestehender Produkte.');
+         }
+-        if ($saved_state==='operator_paused') {
+-            $out=array_merge(array('status'=>'idle','reason'=>'operator_paused',
+-                'transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2',
+-                'reason_code'=>'manual_stop'),$this->ebay_external_tick_run_context($run));
+-            return function_exists('rest_ensure_response') ? rest_ensure_response($out) : $out;
+-        }
+-        if ($saved_state==='failed') {
+-            $out=array_merge(array('status'=>'failed','restart_required'=>1,
+-                'transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2',
+-                'error_code'=>sanitize_key((string)($run['error_code']??''))),
+-                $this->ebay_external_tick_run_context($run));
+-            return function_exists('rest_ensure_response') ? rest_ensure_response($out) : $out;
+-        }
++        // QA16 / QA69: stop or failure of RESEARCH never stops the independently
++        // persisted public source-freshness lane. Both use this ONE existing
++        // heartbeat; no extra scheduler or product-choice operation is created.
++        // The saved research state remains untouched.
+         // Existing public availability worker shares the one GitHub clock.
+         // No extra cron, scheduler or product-rank decision is introduced.
+         $availability_state=get_option('ppar_ebay_public_availability_state_v1',array());
+@@ -1398,6 +1389,36 @@
+         } elseif($saved_state==='active' && !empty($availability_state['canonical_next'])) {
+             $availability_state['canonical_next']=0;
+             update_option('ppar_ebay_public_availability_state_v1',$availability_state,false);
++        }
++        // GitHub must not interpret a finished / paused / failed research run as
++        // the end of a separate still-running availability pass. Continue the
++        // SAME persisted availability cursor at its due time. This also covers
++        // the 90-second gap between batches; no second clock is introduced.
++        $availability_state=get_option('ppar_ebay_public_availability_state_v1',array());
++        $availability_state=is_array($availability_state)?$availability_state:array();
++        $availability_pending=!empty($settings['inventory_refresh_enabled'])
++            && !empty($settings['business_enabled'])
++            && !empty($availability_state['running']);
++        if ($saved_state!=='active' && $availability_pending) {
++            $out=array_merge(array('status'=>'advanced','reason'=>'availability_tick',
++                'transport'=>'external_tick','server_time'=>time(),
++                'contract'=>'external_tick_v2','availability_running'=>1,
++                'availability_next_due_at'=>absint($availability_state['next_due_at']??0)),
++                $this->ebay_external_tick_run_context($run));
++            return function_exists('rest_ensure_response')?rest_ensure_response($out):$out;
++        }
++        if ($saved_state==='operator_paused') {
++            $out=array_merge(array('status'=>'idle','reason'=>'operator_paused',
++                'transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2',
++                'reason_code'=>'manual_stop'),$this->ebay_external_tick_run_context($run));
++            return function_exists('rest_ensure_response') ? rest_ensure_response($out) : $out;
++        }
++        if ($saved_state==='failed') {
++            $out=array_merge(array('status'=>'failed','restart_required'=>1,
++                'transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2',
++                'error_code'=>sanitize_key((string)($run['error_code']??''))),
++                $this->ebay_external_tick_run_context($run));
++            return function_exists('rest_ensure_response') ? rest_ensure_response($out) : $out;
+         }
+         if ($saved_state!=='active') {
+             $operation=$this->ebay_external_tick_due_operation($settings);
