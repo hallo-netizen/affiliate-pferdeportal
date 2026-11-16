@@ -24,8 +24,8 @@
           "source_url": "https://www.pferde-klinik.de/infothek/infos-rund-um-das-pferd/rehabilitation-aquatrainer.html"
         },
         {
-          "source_title": "Konsenspapier Wasserlaufband – Animals",
-          "source_url": "https://pubmed.ncbi.nlm.nih.gov/33530300/"
+          "source_title": "Pferdeklinik Burg Müggenhausen: Aquatrainer",
+          "source_url": "https://www.pferde-klinik.de/infothek/infos-rund-um-das-pferd/rehabilitation-aquatrainer.html"
         },
         {
           "source_title": "Studie Rückenschmerz – BMC Veterinary Research",
@@ -39,7 +39,7 @@
       "claims": [
         "Ein Aquatrainer ist ein Unterwasser-Laufband, das bei Pferden im Training und in der Rehabilitation eingesetzt wird.",
         "Wasserauftrieb kann die Last auf Gelenke, Bänder und Sehnen während der Bewegung verringern.",
-        "Fachleute haben allgemeine Empfehlungen zur Verwendung von Wasserlaufbändern bei gesunden Pferden veröffentlicht.",
+        "Der Wasserwiderstand erhöht den Kraftaufwand beim Gehen auf dem Unterwasserlaufband.",
         "Eine kleine Studie zeigte bei Rückenschmerzen nicht in allen Messgrößen Vorteile des Wasserlaufbands gegenüber Longieren oder trockenem Laufband.",
         "Wassertiefe, Geschwindigkeit und Dauer sollten dem Zustand des Pferdes angepasst werden."
       ],
@@ -93,11 +93,11 @@
         ]
       },
       "F3": {
-        "source_title": "Konsenspapier Wasserlaufband – Animals",
-        "source_url": "https://pubmed.ncbi.nlm.nih.gov/33530300/",
-        "evidence_text_sha256": "6aac313d829d242e284db1a1a4b9e2419f7813ae7157b2a89fc7cfdb2578790b",
-        "statement": "Fachleute haben allgemeine Empfehlungen zur Verwendung von Wasserlaufbändern bei gesunden Pferden veröffentlicht.",
-        "evidence_text": "The guidelines describe the consensus reached to date on (1) the potential benefits of water treadmill exercise",
+        "source_title": "Pferdeklinik Burg Müggenhausen: Aquatrainer",
+        "source_url": "https://www.pferde-klinik.de/infothek/infos-rund-um-das-pferd/rehabilitation-aquatrainer.html",
+        "evidence_text_sha256": "7f03477821ca784d540e6bdf68ec9711a303d16f07a0e668614eee2836477458",
+        "statement": "Der Wasserwiderstand erhöht den Kraftaufwand beim Gehen auf dem Unterwasserlaufband.",
+        "evidence_text": "Zum anderen wird durch den Wasserwiderstand ein erhöhter Kraftaufwand benötigt.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
