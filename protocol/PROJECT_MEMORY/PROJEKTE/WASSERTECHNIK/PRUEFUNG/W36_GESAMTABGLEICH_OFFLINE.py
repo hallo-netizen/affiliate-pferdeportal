@@ -60,7 +60,7 @@ def audit():
     req(len(products) == w28["anzahl"] == 81 and len({x["register_id"] for x in products}) == 81,
         "81 independent new canonical candidates")
     req(sum(len(p["artikelkategorien"]) for p in products) == 90
-        and all(len(c["article_ideas"]) >= 3 for p in products for c in p["artikelkategorien"]),
+        and all(len(c["article_ideas"]) >= 3 and len(set(c["article_ideas"])) == len(c["article_ideas"]) for p in products for c in p["artikelkategorien"]),
         "90 real product-specific category ideas, min. 3 distinct article angles")
     req(all(p["seo_status"] == "ungeprueft" and p["seo_owner_freigabe"] is False
                 and p["wp_seitenfreigabe"] is False and p["quellen"] for p in products),
@@ -79,8 +79,8 @@ def audit():
             if not name.endswith(".php"):
                 continue
             src = z.read(name).decode("utf-8")
-            funcs = re.findall(r"\\bfunction\\s+([A-Za-z0-9_]+)\\s*\\(", src)
-            classes = re.findall(r"\\bclass\\s+([A-Za-z0-9_]+)", src)
+            funcs = re.findall(r"\bfunction\s+([A-Za-z0-9_]+)\s*\(", src)
+            classes = re.findall(r"\bclass\s+([A-Za-z0-9_]+)", src)
             discovered[name.rsplit("/",1)[-1]] = {"classes": classes, "methods": funcs}
     req(any("Wassertechnik_PaidResearch" in v["classes"] for v in discovered.values()),
         "real paid SEO provider class exists in original plugin")
