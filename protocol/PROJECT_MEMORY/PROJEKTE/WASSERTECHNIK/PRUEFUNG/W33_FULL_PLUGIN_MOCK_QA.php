@@ -46,7 +46,7 @@ $assert(Wassertechnik_Kategorie_Workflow::VERSION==='0.1.10','same plugin identi
 $homepage=file_get_contents($root.'/wassertechnik-kategorie-workflow.php');
 $assert(str_contains($homepage,'Fachplan W27:') && !str_contains($homepage,'Aktueller Fachplan W4:'),'one current 7-area homepage, no old 8-area claim');
 $readme=file_get_contents($root.'/README.txt');
-$assert(str_contains($readme,'NICHT INSTALLIEREN') && str_contains($readme,'0.1.9'),'README status and version match real source');
+$assert(str_contains($readme,'NICHT INSTALLIEREN') && str_contains($readme,'0.1.10'),'README status and version match real source');
 $assert(class_exists('Wassertechnik_Kategorie_Importer'),'old importer source retained');
 $assert(!isset($GLOBALS['actions']['admin_post_wassertechnik_import_apply']),
         'old 9-root importer DISABLED by default');
