@@ -1,7 +1,10 @@
 """Original 2026-11-15/16 K0 data: one research decision, same-owner repair."""
 import copy
+import hashlib
 import json
+import os
 import unittest
+from unittest import mock
 from pathlib import Path
 
 from engine.k0_writer_station import research_owner_decision, prepare
@@ -65,6 +68,56 @@ class SourceOwnerOriginalDataTests(unittest.TestCase):
         ticket=research_owner_decision(good,good['identity'],RUN)
         self.assertEqual(ticket['status'],'REPAIR_REQUIRED')
         self.assertEqual(ticket['issues'][0]['reason'],'SOURCE_EXCERPT_DIGEST_MISMATCH')
+
+    def _real_source_texts(self, ctx):
+        originals={}
+        for claim in ctx['rule_context']['research_claims'].values():
+            originals.setdefault(claim['source_url'], []).append(claim['evidence_text'])
+        return {url:'\n'.join(excerpts) for url,excerpts in originals.items()}
+
+    def test_original_source_proof_uses_same_research_owner(self):
+        ctx=original_context(POS)
+        originals=self._real_source_texts(ctx)
+        with mock.patch.dict(os.environ, {'K0_REQUIRE_ORIGINAL_SOURCE_PROOF':'1'}):
+            with mock.patch('engine.k0_writer_station._k0_fetch_original_source_text',
+                            side_effect=lambda url:originals[url]) as fetch:
+                result=prepare(read(POS,'WORDPRESS_INTAKE.json'),portal_for(ctx['identity']),ctx)
+        self.assertEqual(result['status'],'OPEN')
+        self.assertEqual(fetch.call_count,len(originals))
+
+    def test_forged_sha_consistent_but_unverified_excerpt_returns_to_same_researcher(self):
+        ctx=original_context(POS)
+        originals=self._real_source_texts(ctx)
+        claim=ctx['rule_context']['research_claims']['F1']
+        claim['evidence_text']='An invented fragment that does not appear in the actual original.'
+        claim['evidence_text_sha256']=hashlib.sha256(claim['evidence_text'].encode()).hexdigest()
+        with mock.patch.dict(os.environ, {'K0_REQUIRE_ORIGINAL_SOURCE_PROOF':'1'}):
+            with mock.patch('engine.k0_writer_station._k0_fetch_original_source_text',
+                            side_effect=lambda url:originals[url]):
+                ticket=prepare(read(POS,'WORDPRESS_INTAKE.json'),portal_for(ctx['identity']),ctx)
+        self.assertEqual(ticket['status'],'REPAIR_REQUIRED')
+        self.assertEqual(ticket['owner'],'SAME_RESEARCH_OWNER')
+        self.assertNotIn('job_id',ticket)
+        self.assertTrue(any(x['reason']=='ORIGINAL_SOURCE_EXCERPT_NOT_PROVEN' for x in ticket['issues']))
+
+    def test_original_source_unavailable_is_repairable_not_writer_entry(self):
+        ctx=original_context(POS)
+        with mock.patch.dict(os.environ, {'K0_REQUIRE_ORIGINAL_SOURCE_PROOF':'1'}):
+            with mock.patch('engine.k0_writer_station._k0_fetch_original_source_text',
+                            side_effect=OSError('source offline')):
+                ticket=prepare(read(POS,'WORDPRESS_INTAKE.json'),portal_for(ctx['identity']),ctx)
+        self.assertEqual(ticket['status'],'REPAIR_REQUIRED')
+        self.assertEqual(ticket['owner'],'SAME_RESEARCH_OWNER')
+        self.assertNotIn('job_id',ticket)
+        self.assertEqual(len(ticket['issues']),8)
+        self.assertTrue(all(x['reason']=='ORIGINAL_SOURCE_NOT_RETRIEVABLE' for x in ticket['issues']))
+
+    def test_live_source_proof_is_mandatory_in_canonical_authoring_workflow(self):
+        workflow=(ROOT/'.github/workflows/k0-authoring-context.yml').read_text(encoding='utf-8')
+        self.assertIn("K0_REQUIRE_ORIGINAL_SOURCE_PROOF: '1'",workflow)
+        self.assertIn('python3 -m engine.k0_writer_station prepare',workflow)
+        self.assertIn("j['status']=='REPAIR_REQUIRED'",workflow)
+        self.assertIn("j['owner']=='SAME_RESEARCH_OWNER'",workflow)
 
 if __name__=='__main__':
     unittest.main()
