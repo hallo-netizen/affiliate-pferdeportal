@@ -82,6 +82,22 @@ def audit():
             funcs = re.findall(r"\bfunction\s+([A-Za-z0-9_]+)\s*\(", src)
             classes = re.findall(r"\bclass\s+([A-Za-z0-9_]+)", src)
             discovered[name.rsplit("/",1)[-1]] = {"classes": classes, "methods": funcs}
+    # Source audit: show only method headers and bounded code of the original approved
+    # SEO provider path, never credentials, accounts or request secrets.
+    with zipfile.ZipFile(source) as z:
+        for name in z.namelist():
+            filename=name.rsplit("/",1)[-1]
+            if filename not in ("class-wassertechnik-paid-research.php","class-wassertechnik-dataforseo.php"):
+                continue
+            php=z.read(name).decode("utf-8")
+            methods=("planned","panel","resume","apply","paid","items") if "paid-research" in filename else ("seo_manifest","build_preflight")
+            for method in methods:
+                matches=list(re.finditer(r"function\\s+"+method+r"\\s*\\(",php))
+                if not matches:
+                    continue
+                start=matches[0].start()
+                # bounded excerpt is sufficient to verify method argument/return shape
+                print("W36 SEO SOURCE",filename,method,repr(php[start:start+2300]))
     req(any("Wassertechnik_PaidResearch" in v["classes"] for v in discovered.values()),
         "real paid SEO provider class exists in original plugin")
     req(any("Wassertechnik_DataForSEO" in v["classes"] for v in discovered.values()),
