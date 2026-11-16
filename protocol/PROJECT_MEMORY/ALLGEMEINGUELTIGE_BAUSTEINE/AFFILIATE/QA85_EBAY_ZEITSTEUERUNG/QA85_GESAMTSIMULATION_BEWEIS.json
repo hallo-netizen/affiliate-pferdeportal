@@ -1,0 +1,113 @@
+{
+  "contract": "QA69_VERBINDLICH",
+  "outcome": "KISS_LOCAL_MODEL_PASSED; QA69_REAL_SYSTEM_NOT_ACCEPTED",
+  "input": {
+    "original_archive": "QA84_AFFILIATE_ZENTRALE_6.72.352_STAGING_INSTALLATION.zip",
+    "archive_sha256": "acf8aedb1c21c75742107f07eb8b9e8c2964a5faebabc52e72d331c05cea9ce3",
+    "live_snapshot": "pferdeatelier-ebay-sichtbarkeit-20261116-102018.json",
+    "live_snapshot_time": "2026-11-16T10:20:18+00:00",
+    "checkpoint_safe": true,
+    "published_checkpoint_business_campaigns": 309,
+    "freshness_stale": 293,
+    "nonavailable": 8,
+    "freshness_worker_still_running": 1,
+    "freshness_worker_old_cursor": 12568,
+    "old_checked": 448,
+    "global_source_total": 9792,
+    "published_output_rows": 496
+  },
+  "patch": {
+    "relative_to": "QA84 installed archive source",
+    "files_changed": [
+      "affiliate-portal-router/includes/trait-ppar-ebay-run.php",
+      "affiliate-portal-router/includes/trait-ppar-ebay.php"
+    ],
+    "files_unchanged": 64,
+    "sha256": "437674fb6c139944873c40a5793617ea64b8c1e7d3b73aba3a06c4d9e68efdb5",
+    "exact_replay": "PASS"
+  },
+  "checks": {
+    "heartbeat_transition_qa84": {
+      "pass": 8,
+      "of": 15
+    },
+    "heartbeat_transition_qa85_original": {
+      "pass": 14,
+      "of": 15
+    },
+    "heartbeat_transition_corrected": {
+      "pass": 15,
+      "of": 15
+    },
+    "full_309_due_sources_on_old_code": {
+      "status": "FAIL",
+      "checked": 0
+    },
+    "full_309_due_sources_corrected": {
+      "status": "PASS",
+      "checked": 309,
+      "heartbeats": 16,
+      "outside_safe": 0,
+      "run_cursor_preserved": true,
+      "public_checkpoint_preserved": true,
+      "original_checked": 448,
+      "new_checked": 757
+    },
+    "empty_safe_case": {
+      "status": "PASS",
+      "checked": 0
+    },
+    "283_original_family_model": {
+      "cases": 9,
+      "completed": 5,
+      "failed_as_expected": 4,
+      "family_count_in_completed": [
+        283,
+        283,
+        283,
+        283,
+        283
+      ],
+      "one_search_each": true
+    },
+    "old_rest_cases": 16,
+    "due_cases": 9,
+    "historical_item_ids_mock": 95,
+    "php_lint_pass": 23
+  },
+  "capacity_model_not_live_measurement": {
+    "five_minute_clock_is_blocked_pr759": true,
+    "business_products": 309,
+    "due_two_hours_before_expiry": true,
+    "minimum_products_per_5m_for_2h_window": 13,
+    "per_tick_php_max": 20,
+    "per_tick_php_budget_seconds": 22,
+    "possible_time_minutes_by_batch_size": {
+      "20": 80,
+      "15": 105,
+      "13": 120,
+      "10": 155,
+      "5": 310
+    },
+    "provider_latency_actual": "UNKNOWN"
+  },
+  "live_acceptance": {
+    "status": "FAIL_NOT_VERIFIED",
+    "github_pr_759": "BLOCKED_UNMERGED",
+    "actual_wp_plugin_version": "NOT_VERIFIED",
+    "actual_live_getItem_responses": "NOT_AVAILABLE",
+    "public_283_family_evidence": "NOT_AVAILABLE",
+    "frontend_current_cards": "NOT_RECHECKED_POST_PATCH",
+    "install_allowed": false
+  },
+  "confirmed_safety": {
+    "new_plugin": false,
+    "new_cron": false,
+    "new_worker": false,
+    "new_product_decider": false,
+    "new_search_trigger": false,
+    "reset_discovery_cursor": false,
+    "new_DB_table": false,
+    "code_changes_scope": "existing 2 eBay traits"
+  }
+}
