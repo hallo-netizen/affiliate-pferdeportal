@@ -44,3 +44,16 @@ Einziger geänderter Produktionscode: `includes/trait-ppar-ebay-run.php`.
 3. Nach zulässiger Freigabe **nur die gespeicherten Quellen des bestehenden SAFE-Bestands** frisch bestätigen; in einem einzigen realen Durchlauf messen, dass 293 abgelaufene und andere noch gültige Produktslots wieder aktuell/korrekt gesperrt sind, ohne Katalog-Vollsuche oder neue Fachentscheidung.
 
 **Wichtig:** Der Screenshot/Export beweist den aktuellen Live-Stau, nicht die genau installierte Versionsidentität. Kein neues Plugin oder Produktionsstart aus nur einem Mock-Ergebnis.
+
+
+## Verbindliche zusammengefasste Anschlussprüfung – nicht erneut separate Fixes bauen
+
+Der vollständige QA69-Gesamtabgleich gegen das echte QA84-Archiv, die alte QA9/QA16/QA24/QA77–QA85-Fehlerkette und den WordPress-Sichtbarkeitsexport liegt **im selben Ordner** unter `QA85_GESAMTABGLEICH_ZIELVERTRAG.md`.
+
+**Einziger gesamte Quelländerung gegenüber 6.72.352:** `QA85_GESAMTPATCH_GEGEN_QA84.patch` (zwei vorhandene eBay-Traits; keine weiteren 64 Originaldateien). Ergänzt gegenüber dem ersten QA85-Einzeldiff sind: (1) terminaler Workerabschluss darf offene Verfügbarkeitsarbeit nicht beenden; (2) Quellepakete nur aus der **bestehenden** SAFE-Kampagnenliste statt aus historischen veröffentlichten Datensätzen; (3) nur der unabhängige Quellenprüf-Cursor wird beim Wechsel auf diesen bestehenden SAFE-Checkpoint ausgerichtet.
+
+**Lokal originale PHP-Funktionen mit simulierten WP/eBay-Daten:** 15/15 gekoppelte Laufstatusübergänge PASS (QA84 8/15, QA85-Vorversion 14/15); bei aus dem Export abgeleitetem Lastmodell 309 aktuelle SAFE-Produkte, 496 historische veröffentlichte Objektzeilen und 9.792 historische Quellen: 309/309 gültige SAFE-Quellen in 16 simulierten Paketen, 0 weitere, 0 neue Produktsuchen, SAFE/Recherchecursor unverändert; einfacher öffentlicher PHP-Lieferfilter vor Verfügbarkeit BLOCK, nach frischer Verfügbarkeit ALLOW (kein Beweis für reale Frontend-Rangfolge); 283 Originalfamilien in neun vorhandenen Controller-Modellszenarien, fünf erwartete Endabschlüsse/vier kontrollierte Fehler; neun Fälligkeitsfälle, 16 REST-Statusfälle, 95 historische Artikel-IDs mit nachgestellten Antworten, 23 PHP-Syntaxdateien PASS. Komplett reproduzierbare Beweise und die zwei direkten Testskripte sind im selben Ordner.
+
+**QA69 LIVE weiterhin NICHT BESTANDEN:** echte GetItem-Dauern und öffentliche 283er-Endbilanz fehlen; der einzige neue externe 5-Minuten-Takt [PR #759](https://github.com/hallo-netizen/affiliate-pferdeportal/pull/759) ist unmerged und blockiert. Bei 309 gleichzeitig fälligen SAFE-Quellen wären im 2h-Vorlauf mindestens 13 erfolgreiche Prüfpunkte pro 5-Minuten-Takt nötig. Keine Installationsfreigabe allein aus den Modellresultaten, kein Liveeingriff, kein Hardlock-Bypass, keine neue Vollsuche.
+
+**Dieses Protokoll verweist auf EIN konsolidiertes QA85-Gesamtergebnis. Der frühere schmale QA85-Patch ist Historie, nicht die nun zu installierende Gesamtversion.**
