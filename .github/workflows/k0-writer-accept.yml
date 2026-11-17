@@ -78,6 +78,12 @@ jobs:
           python3 -m engine.k0_writer_station seal "$JOB_PATH" "$DRAFT_PATH" /tmp/K0_SEALED_WRITER_PRODUCT.json
           python3 -m engine.k0_writer_station verify "$JOB_PATH" /tmp/K0_SEALED_WRITER_PRODUCT.json
 
+      - name: Fetch only canonical category source branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --depth=1 origin '+refs/heads/affiliate-release-current:refs/remotes/origin/affiliate-release-current'
+
       - name: Automatic portal assignment
         shell: bash
         run: |
