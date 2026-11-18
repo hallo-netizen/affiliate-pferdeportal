@@ -161,13 +161,13 @@
       },
       {
         "role": "semantic_related",
-        "href": "/gesundheit-insekten-und-schutz/",
+        "href": "/gesundheit/gesundheit-insekten-und-schutz/",
         "anchor": "Insekten & Schutz",
         "block": "decision"
       },
       {
         "role": "further_information",
-        "href": "/insektenschutz-fuers-pferd/",
+        "href": "/gesundheit/gesundheit-insekten-und-schutz/insektenschutz-fuers-pferd/",
         "anchor": "Insektenschutz fürs Pferd",
         "block": "further_information"
       }
@@ -178,11 +178,11 @@
         "active": true
       },
       {
-        "href": "/gesundheit-insekten-und-schutz/",
+        "href": "/gesundheit/gesundheit-insekten-und-schutz/",
         "active": true
       },
       {
-        "href": "/insektenschutz-fuers-pferd/",
+        "href": "/gesundheit/gesundheit-insekten-und-schutz/insektenschutz-fuers-pferd/",
         "active": true
       }
     ],
