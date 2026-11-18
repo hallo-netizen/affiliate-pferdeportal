@@ -1,3 +1,9 @@
+# VERBINDLICHE KURSKORREKTUR 18.11.2026: KEINE NEUENTWICKLUNG
+
+Original-Pferdeatelier-Texterstellung als technische Vorlage **unverändert in der Funktionsweise** übernehmen. Nur zwei separate Kopien (jungfräulich/universal und Hab & Bewahr); ausschließlich Pferde-Portalbezüge und Portaldaten entfernen/auskommentieren. **Keine neue Architektur, keine Fixes, keine neuen Adapter/Klassen/Prüfstationen.** Die zuvor entwickelten 0.5.x-Universal-Erweiterungen sind als Entwicklungsweg ausdrücklich verworfen, nicht als nächstes Release verwenden. Nur fertige installierbare Plugins zum Download; Protokolle ausschließlich im Büro. Einzelheiten in `KURSKORREKTUR_NUR_MINIMALE_PORTALKOPIEN_20261118.md`.
+
+---
+
 # Aktueller Stand 18.11.2026 – Gemeinsame Texterstellung 0.5.2-dev.1 (intern)
 
 **Hab 62/62 und Universal 51/51 lokale Funktionstests bestanden**, je 82/82 PHP und 9/9 JSON; zwei ZIPs aus identischer Codebasis. Reale WordPress-Kategorien liefern jetzt portalfreie Recherche-Ausgangspunkte ohne voreilige Artikelart- oder SEO-Entscheidung. Original-K0-Fünffeldprüfer: korrektes Paket angenommen, verbotene Erweiterungen abgewiesen. Historisches GitHub-K0-Register ohne Hab/Robotik/Wasser; echter K0/DataForSEO/WordPress-Lauf ausstehend. Daher KEIN Installationsdownload und Produktionssperre bleibt aktiv. Alle Artefakte im jeweiligen Library-Büro `V052` gespeichert; genaue Nachweise in `UNIVERSAL_CORE_V052_QA_STAND_20261118.md`.
