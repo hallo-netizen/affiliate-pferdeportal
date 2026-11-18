@@ -112,7 +112,7 @@ def write_final_tests(package):
       "'105 W27 category owners":" '195 W27/W44 category owners",
       "'complete 219-owner WP readback":" 'complete 390-owner WP readback",
       "'entire 114 page insert rolled back'":"'entire 195 page insert rolled back'",
-      "'existing 105 category owners unchanged":"'existing 105 old category owners unchanged'",
+      "'existing 105 category owners unchanged":"'existing 105 old category owners unchanged",
     }
     for a,b in mapping.items():
         must(a in test,"W35-Regressionstoken fehlt "+a)
