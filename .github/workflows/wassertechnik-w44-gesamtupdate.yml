@@ -1,0 +1,26 @@
+name: Wassertechnik W44 kompletter SEO-81+WordPress-390-Einmalimport
+on:
+  pull_request:
+    paths:
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/WASSERTECHNIK/**'
+      - '.github/workflows/wassertechnik-w44-gesamtupdate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build_all_once:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - name: Original 218 + 81 DataForSEO and W35 WordPress 390 entire offline regression
+        run: python3 protocol/PROJECT_MEMORY/PROJEKTE/WASSERTECHNIK/PLUGINS/BUILD/W44_install_build.py
+      - name: Publish only one completely tested WordPress update
+        uses: actions/upload-artifact@v4
+        with:
+          name: WT001_0_1_14_W44_GESAMTUPDATE_INSTALLIEREN
+          path: |
+            protocol/PROJECT_MEMORY/PROJEKTE/WASSERTECHNIK/PRUEFUNG/_w44_install_build/*.zip
+            protocol/PROJECT_MEMORY/PROJEKTE/WASSERTECHNIK/PRUEFUNG/_w44_install_build/W44_ABNAHME_ZUSAMMENFASSUNG.json
+          if-no-files-found: error
+          retention-days: 30
