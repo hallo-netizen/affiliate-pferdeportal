@@ -1,3 +1,9 @@
+## 18.11.2026 – NACHTRAG zur 0.4.23 Funktionsprüfung (MAßGEBLICH)
+- **32/33 lokale Tests PASS**, 1 Diagnose-Funktionsfehler, Original-WP-Entwurfsimport in Simulation funktionierte. Keine Pluginänderung.
+- Das echte K0-Current `konzept0-portal-neutral-20261002` ist `READY_FOR_FRESH_K0_START`, inklusive 4 Typen und `Anleitung=READY` (nicht mehr pauschal „K0-Regeln unbekannt“ behaupten).
+- **Belegter Portalblocker:** K0-Hobbyprofil ordnet nur `discgolf-beratung` zu; alle anderen Hobby-Kategorien sind in diesem K0-Profil nicht verzeichnet. Der bestehende K0-Router versucht dann den früheren Pferdeatelier-Kategorienbestand. **Keine flächendeckende Hobbydepot-Freigabe**, ohne Original-K0-Paket zu verändern oder eine zweite Zuordnung zu erfinden.
+- **Keine neue Entwicklung:** Verbindlicher Nutzer-Scope bleibt ausschließlich Pferdeatelier-Bereinigung; der Rest ist als nachgewiesene Grenze erfasst. Bericht `ERWEITERTE_FUNKTIONSPRUEFUNG_0423_20261118.md` und Dateienbüro aktualisiert.
+---
 ## 18.11.2026 – AKTUELL: Erweiterte Funktionsprüfung, **KEINE neue Pluginversion**
 
 - Maßgebliche ZIP unverändert: `Texterstellung_Hobbydepot_0.4.23_BEREINIGT_TEST.zip` SHA256 `c50caa2ed263fb1f42f4cd485ecb2d23bbece6df072d9cf8f55774161aa6e715`.
