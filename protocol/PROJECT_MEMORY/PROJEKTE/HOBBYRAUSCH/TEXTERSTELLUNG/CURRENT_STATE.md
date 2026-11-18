@@ -1,3 +1,14 @@
+## 18.11.2026 – MASSGEBLICHER LETZTER STAND (unveränderte ZIP; nur Pferdeatelier bereinigt)
+
+- **Kein neuer Plugin-Build.** Maßgeblich bleibt `Texterstellung_Hobbydepot_0.4.23_BEREINIGT_TEST.zip`, SHA256 `c50caa2ed263fb1f42f4cd485ecb2d23bbece6df072d9cf8f55774161aa6e715`. Original-PSTE/K0, HD004 und WP-Daten unangetastet.
+- Direkt auf der gespeicherten ZIP wiederholt: **87/87 ZIP**, **78/78 PHP**, **8/8 JSON**, **3/3 Boots**, **24/25 Funktionschecks**, **5/5 PSERC-Importchecks**. 71 identische + 16 gereinigte Quelldateien; keine Pferde-Fachregeln, zwei technische Importnamen.
+- **Belegter Blocker 1:** Die Diagnoseseite scheitert an `K0_PORTAL_ADAPTER_PENDING` (Ausgangs-Hobby-Kopie). Regulärer K0-Export nicht freigegeben.
+- **Belegter Blocker 2:** Beide ursprünglichen Publish-Schutzfilter halten einen importierten Beitrag auch bei manueller Veröffentlichung oder Planung auf Entwurf. Andere WordPress-Beiträge unbeeinflusst. Test-Modus, keine Live-Freigabe.
+- K0-Hobby-Kategorien nur `discgolf-beratung` autorisiert; kein echter WordPress-/DataForSEO-/MINI-/K0-Echtlauf. **Nicht auf Live installieren.**
+- Unter enger Benutzeranweisung KEINE weiteren eigenmächtigen Änderungen am Plugin; konkrete Nachweise: `ABNAHME_BESTEHENDER_CODE_0423_20261118.md` und `PRUEFBERICHTE/HOBBYDEPOT_0423_ECHTE_ABNAHMEGRENZEN_20261118.{md,json}` im Hobbydepot-Büro.
+
+---
+
 ## 18.11.2026 – AKTUELLER STAND: FINALE QUELL- UND FUNKTIONSPRÜFUNG OHNE CODEÄNDERUNG
 
 - **Nur fachliche Pferdeatelier-Bereinigung** bleibt maßgeblich. ZIP: `Texterstellung_Hobbydepot_0.4.23_BEREINIGT_TEST.zip`, SHA256 `c50caa2ed263fb1f42f4cd485ecb2d23bbece6df072d9cf8f55774161aa6e715`. Keine neuere Codebasis/Architektur/Pluginversion.
