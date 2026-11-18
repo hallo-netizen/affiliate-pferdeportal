@@ -1,3 +1,9 @@
+# Neuester verbindlicher Stand – Minimal-Klone aus Original 0.4.31 (18.11.2026)
+
+**Kein 0.5.x-Universal-Neubau.** Aus der ORIGINAL-0.4.31 wurden ausschließlich die Portalbezüge für Hab & Bewahr und eine leere Kopie deaktiviert/entfernt. Beide Quellpakete mit identischem altem Workflow gebaut, keine neue Klasse/Funktion/Architektur; jeweils 78 PHP/8 JSON geprüft, 68 Quelldateien unverändert, 20 Änderungen/Löschung der Original-Signatur, 87 ZIP-Einträge. Beide Entwicklungs-ZIPs samt vollständigen Berichten und Bauskript **tatsächlich in den beiden Library-Büros unter MINIMAL_ORIGINAL_0431 archiviert**. Original-Kategorie-Map lehnt den leeren Bestand korrekt ab; Hab-Kategorien und K0-Registrierung noch nicht funktionsfertig, **nicht installieren oder downloaden**. Vollständiges Protokoll: `MINIMAL_0431_QUELLKOPIEN_PRUEFSTAND_20261118.md`. Die zuvor dokumentierten 0.5.x-Kandidaten sind als Quelle/Entwicklungsrichtung abgelöst.
+
+---
+
 # VERBINDLICHE KURSKORREKTUR 18.11.2026: KEINE NEUENTWICKLUNG
 
 Original-Pferdeatelier-Texterstellung als technische Vorlage **unverändert in der Funktionsweise** übernehmen. Nur zwei separate Kopien (jungfräulich/universal und Hab & Bewahr); ausschließlich Pferde-Portalbezüge und Portaldaten entfernen/auskommentieren. **Keine neue Architektur, keine Fixes, keine neuen Adapter/Klassen/Prüfstationen.** Die zuvor entwickelten 0.5.x-Universal-Erweiterungen sind als Entwicklungsweg ausdrücklich verworfen, nicht als nächstes Release verwenden. Nur fertige installierbare Plugins zum Download; Protokolle ausschließlich im Büro. Einzelheiten in `KURSKORREKTUR_NUR_MINIMALE_PORTALKOPIEN_20261118.md`.
