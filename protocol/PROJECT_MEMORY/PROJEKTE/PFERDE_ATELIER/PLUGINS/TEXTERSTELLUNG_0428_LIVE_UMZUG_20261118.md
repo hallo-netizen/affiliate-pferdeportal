@@ -32,3 +32,10 @@ Isolierte GitHub-Korrektur auf Branch `work/k0-canonical-c-links-writer-return-2
 Prüfbericht und Quell-Exportangaben im persönlichen Pferdeatelier-Büro: `/pferdeatelier/UMZUG-TEST-LIVE/PFERDEATELIER-LIVE-UMZUG-PRUEFBERICHT-20261118.md`.
 
 **Nächster echter Schritt:** Sicherung der Live-Datenbank und Recherchebestände; gezielter Import der drei Entwürfe; kontrollierter Pluginwechsel und einmaliger K0-Entwurfsimport mit Live-Bestandsabgleich, keine Publikation ohne Linkkorrektur.
+
+## Abschluss / nachträgliche technische Freigaben
+- K0-Korrektur PR #824 mit SHA `8ef0532e2afb3265fbbae5a26346222aceaa360e` erfolgreich nach `konzept0-portal-neutral-20261002` übernommen. Abschließender vollständiger K0-Selftest-Lauf `44294760802`: **SUCCESS**.
+- Texterstellung 0.4.28 gegen vorhandene 0.4.27-Regressionssuite mit beiden echten K0-Artikeln und simuliertem WordPress erneut geprüft: **38/38 PASS**. Drei isolierte Smoke-Checks bestätigten, dass die Live-Seite ohne ausdrückliche Livebestätigung nicht freigeschaltet wird, selbst bei vorhandener alter Testbestätigung.
+- Die 16 unterschiedlichen gemeinsamen Artikelinhalte wurden vollständig nach Ersetzung der absoluten Domain geprüft: **16/16 ausschließlich Domain-Unterschiede**.
+- Drei-Artikel-WXR nach Erstellung korrigiert: GUIDs und Links der drei neuen Drafts zeigen auf öffentliche Domain, nicht mehr auf Test-URL. XML validiert, SHA256 `b1074308f0b79e416c29c742d9486064dfb5b6ac15c1ffed270a2dd374014714`.
+- Kein WordPress-Livezugriff bzw. echter K0-Ende-zu-Ende-Lauf durchgeführt. KEINE Live-Freigabe oder Publikation ohne Bestandsmigration und C-Linkkorrektur.
