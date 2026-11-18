@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Aufbau und Funktion der Eierstöcke bei der Stute",
+      "target_keyword": "eierstöcke pferd",
+      "category": "pferdewissen-grundlagen",
+      "article_type": "Beratung",
+      "plan_slot": "c37c7137fee51d105bf01da8fca32c3bbdb27023126a5fe1f62d764c6d36384a"
+    }
+  ],
+  "batch_sha256": "d6e7c248967909164d437bcc6b3f2a29de58a245f73aa6bf408c2d6c92afe9d9"
+}
