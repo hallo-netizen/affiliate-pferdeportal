@@ -1,3 +1,11 @@
+## 18.11.2026 – Ersetzen-Dialog tatsächlich NICHT vorhanden (Betreiberangabe)
+
+- ZIP-Inhalt **erneut direkt geöffnet**: Original 0.4.23 und bereinigtes 0.4.23 besitzen beide dasselbe WordPress-Hauptverzeichnis `texterstellung/` und Hauptdatei `texterstellung/texterstellung.php`. Eine Reparatur des Paketordnernamens wäre hier **nicht begründet**.
+- Gesicherte WordPress-Pluginliste vom 01.11.2026 enthält keine Texterstellung; über die heutige Installation gibt es keinen direkten Live-Beleg. Betreiber meldet wiederholt ausdrücklich, dass der WordPress-Button „Ersetzen“ nicht erscheint.
+- Korrektur: Nie wieder den nicht vorhandenen Button anwählen lassen. WordPress zeigt ihn nur, wenn das Zielverzeichnis tatsächlich schon existiert. Bei nicht vorhandener Installation normale Installation; bei anderer Alt-Installation deren Plugin-Eintrag zuerst per vorhandenem WordPress-Deaktivieren/Löschen behandeln, nur nach Sicherung – keine gefährliche direkte Dateisubstitution, kein Neubau oder K0-Eingriff.
+- Die bereinigte Test-ZIP und alle Fachsperren bleiben unverändert. Keine Livefreigabe.
+
+---
 ## 18.11.2026 – KORREKTUR WORDPRESS-ERSETZEN-ANWEISUNG
 
 - Tatsächliche ZIP `Texterstellung_Hobbydepot_0.4.23_BEREINIGT_DIAGNOSE_TEST.zip` lokal geöffnet: oberster Pluginordner `texterstellung/`, Hauptdatei `texterstellung/texterstellung.php`, Pluginname `Texterstellung – Hobbydepot`, Version `0.4.23-hobbydepot-bereinigung.2`.
