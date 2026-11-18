@@ -46,8 +46,8 @@ def main():
     update_once(main_php,"Version: 0.1.12","Version: "+VERSION)
     update_once(main_php,"public const VERSION = '0.1.12';","public const VERSION = '"+VERSION+"';")
     update_once(trait,"'plugin_version'=>'0.1.10'","'plugin_version'=>Wassertechnik_Kategorie_Workflow::VERSION")
-    update_once(main_php,'echo \'<p>Die Keywordliste findest du unter „Wassertechnik Kategorie → DataForSEO“.</p></div>\';',
-        'echo \'<p><strong>Nächster Schritt:</strong> Unter „81 neue SEO-Kandidaten“ den einmaligen DataForSEO-Auftrag nach Kostenfreigabe starten. Die bisherigen 218 Begriffe nicht wiederholen. Erst danach über die neuen Produkte entscheiden. Die 219 bisherigen WordPress-Ziele bleiben separat geschützt.</p></div>\';')
+    update_once(main_php,'Die Keywordliste findest du unter „Wassertechnik Kategorie → DataForSEO“.',
+        '<strong>Nächster Schritt:</strong> Unter „81 neue SEO-Kandidaten“ den einmaligen DataForSEO-Auftrag nach Kostenfreigabe starten. Die bisherigen 218 Begriffe nicht wiederholen. Erst danach über die neuen Produkte entscheiden. Die 219 bisherigen WordPress-Ziele bleiben separat geschützt.')
     readme.write_text(
         "Wassertechnik Kategorie-Workflow WT001 "+VERSION+" – ein einziges Installationsupdate\n"
         "Pluginverzeichnis: wassertechnik-kategorie-workflow; selbe WordPress-Pluginidentität wie 0.1.7.\n"
