@@ -1,0 +1,206 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Hilft Lebermoos tatsächlich gegen Pilzprobleme beim Pferd?",
+    "target_keyword": "lebermoos pferd pilz",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "0720555d0b82abaf1b58f8af493bba52e9d03b6a7f0dc9b1098d811d7336e056"
+  },
+  "content_profile": {
+    "search_intent": "Gesundheit – Wirksamkeit kritisch einordnen"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Review Marchantia polymorpha 2025",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11820628/"
+        },
+        {
+          "source_title": "UC Davis Ringworm in Horses",
+          "source_url": "https://ceh.vetmed.ucdavis.edu/health-topics/ringworm-horses-dermatophytosis"
+        },
+        {
+          "source_title": "MSD Veterinary Manual Dermatophytosis in Horses",
+          "source_url": "https://www.msdvetmanual.com/integumentary-system/dermatophytosis/dermatophytosis-in-horses"
+        }
+      ],
+      "claims": [
+        "Bestimmte Inhaltsstoffe von Lebermoos zeigen in Laborstudien eine pilzhemmende Aktivität. Das ist noch kein Wirksamkeitsnachweis als Behandlung am Pferd.",
+        "Lebermoos-Extrakte wurden in Laboruntersuchungen unter anderem gegenüber bestimmten Pilzen untersucht. Daraus folgt nicht, dass ein Pflegespray Hautpilz beim Pferd sicher heilt.",
+        "Hautpilz kann beim Pferd unter anderem mit kreisförmigen kahlen Stellen und Juckreiz auffallen; andere Erkrankungen können ähnlich aussehen.",
+        "Eine äußerliche Hautveränderung allein beweist keine Pilzerkrankung. Der Verdacht muss tierärztlich abgeklärt werden.",
+        "Bei Verdacht auf Dermatophytose können Haar- und Hautproben unter dem Mikroskop und mit Pilzkultur untersucht werden.",
+        "Bestätigter Hautpilz erfordert neben tierärztlicher Behandlung auch Maßnahmen gegen die Übertragung über Geräte und Kontakt."
+      ],
+      "fresh_research_reference_date": "2026-11-18"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "lebermoos pferd pilz",
+      "topic": "Hilft Lebermoos tatsächlich gegen Pilzprobleme beim Pferd?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Hilft Lebermoos tatsächlich gegen Pilzprobleme beim Pferd?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Review Marchantia polymorpha 2025",
+        "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11820628/",
+        "evidence_text": "liverwort secondary metabolites show antibacterial, antifungal, cytotoxic, insect repellant, enzyme inhibitory, and proapoptotic activities",
+        "statement": "Bestimmte Inhaltsstoffe von Lebermoos zeigen in Laborstudien eine pilzhemmende Aktivität. Das ist noch kein Wirksamkeitsnachweis als Behandlung am Pferd.",
+        "evidence_text_sha256": "dcf45cbdc575338b8fcfed9a8be37ad41cd2916dfff0f04d01cbe293743f0421",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Review Marchantia polymorpha 2025",
+        "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11820628/",
+        "evidence_text": "Many fungi are susceptible to growth inhibition when subjected to these extracts, including Candida albicans",
+        "statement": "Lebermoos-Extrakte wurden in Laboruntersuchungen unter anderem gegenüber bestimmten Pilzen untersucht. Daraus folgt nicht, dass ein Pflegespray Hautpilz beim Pferd sicher heilt.",
+        "evidence_text_sha256": "8159e3c35abea009c6529c87a746a5744a5d9865fd9942448aa6074f1c22133d",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "UC Davis Ringworm in Horses",
+        "source_url": "https://ceh.vetmed.ucdavis.edu/health-topics/ringworm-horses-dermatophytosis",
+        "evidence_text": "The clinical signs of ringworm usually include an itchy, circular pattern of hair loss",
+        "statement": "Hautpilz kann beim Pferd unter anderem mit kreisförmigen kahlen Stellen und Juckreiz auffallen; andere Erkrankungen können ähnlich aussehen.",
+        "evidence_text_sha256": "c659b2d61995406707eaaa0a2d3ec2a35dd43fabc0afff6162fe447b5f8a0d9b",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "UC Davis Ringworm in Horses",
+        "source_url": "https://ceh.vetmed.ucdavis.edu/health-topics/ringworm-horses-dermatophytosis",
+        "evidence_text": "It is important to confirm the diagnosis as other conditions can mimic ringworm in appearance",
+        "statement": "Eine äußerliche Hautveränderung allein beweist keine Pilzerkrankung. Der Verdacht muss tierärztlich abgeklärt werden.",
+        "evidence_text_sha256": "730aaf596cc3f9496ba92ab3b0f2a150af7a754f1ecea4a0ecd35e0081f47ebf",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "MSD Veterinary Manual Dermatophytosis in Horses",
+        "source_url": "https://www.msdvetmanual.com/integumentary-system/dermatophytosis/dermatophytosis-in-horses",
+        "evidence_text": "Diagnosis can be rapidly confirmed by direct microscopic examination of hairs and scales or by fungal culture",
+        "statement": "Bei Verdacht auf Dermatophytose können Haar- und Hautproben unter dem Mikroskop und mit Pilzkultur untersucht werden.",
+        "evidence_text_sha256": "88730711ddd3086a4322cc4274a8a845f61f8bc2820dea340352cf775b856a4a",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_title": "MSD Veterinary Manual Dermatophytosis in Horses",
+        "source_url": "https://www.msdvetmanual.com/integumentary-system/dermatophytosis/dermatophytosis-in-horses",
+        "evidence_text": "Infected animals should be isolated. Tack should be thoroughly cleaned",
+        "statement": "Bestätigter Hautpilz erfordert neben tierärztlicher Behandlung auch Maßnahmen gegen die Übertragung über Geräte und Kontakt.",
+        "evidence_text_sha256": "ab4116895df2c916d0d37d9b2435d8706590275772586ecd8e861263cc2b58d0",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "Pferdegesundheit verstehen",
+        "block": "details"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/pferdewissen-grundlagen/",
+        "anchor": "Pferdewissen & Grundlagen",
+        "block": "checklist"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/gesundheit-regeneration-kuehlgamaschen-faq/",
+        "anchor": "FAQ Kühlgamaschen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdewissen-grundlagen/",
+        "active": true
+      },
+      {
+        "href": "/category/gesundheit-regeneration-kuehlgamaschen-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Lebermoos",
+      "Pilzprobleme",
+      "Hautpilz",
+      "Pferd",
+      "Wirksamkeit"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine Matrix stellt Beobachtung, mögliche Aussagekraft und nächsten sicheren Schritt sachlich gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
