@@ -1,0 +1,285 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Weidehaltung für das eigene Pferd Schritt für Schritt organisieren",
+    "target_keyword": "Wie kann ich die Weidehaltung meines Pferdes organisieren?",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "Anleitung",
+    "plan_slot": "c5ab76c2500572af65b473e4fb464774fdd77393d76aa12802a93bf8f845d5ba"
+  },
+  "content_profile": {
+    "search_intent": "Praktische Schritt-für-Schritt-Anleitung zur Organisation der Weidehaltung eines eigenen Pferdes: Weidefläche, sichere Einzäunung, Wasser und Futter, Sozialkontakte, tägliche Kontrollen sowie Pflege und Wetter berücksichtigen."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "British Horse Society – Pasture Management",
+          "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/pasture-management/"
+        },
+        {
+          "source_title": "British Horse Society – Fencing",
+          "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/pasture-management/fencing"
+        },
+        {
+          "source_title": "World Horse Welfare – Horse management essentials",
+          "source_url": "https://www.worldhorsewelfare.org/advice/horse-management-essentials"
+        },
+        {
+          "source_title": "RSPCA – Creating the Right Environment for Horses",
+          "source_url": "https://www.rspca.org.uk/adviceandwelfare/pets/horses/environment"
+        },
+        {
+          "source_title": "World Horse Welfare – Pasture management for horse paddocks",
+          "source_url": "https://eu.worldhorsewelfare.org/advice/pasture-management-for-horse-paddocks"
+        }
+      ],
+      "claims": [
+        "Für jedes Pferd muss jederzeit ausreichend frisches sauberes Trinkwasser auf der Weide verfügbar sein.",
+        "Pferde auf der Weide müssen regelmäßig auf Verletzungen und Veränderungen des Körpergewichts kontrolliert werden.",
+        "Pferde benötigen auf der Weide Schutz vor Winterwetter und ebenso vor sommerlicher Sonne und Insekten.",
+        "Weidezäune sollten möglichst täglich auf Beschädigungen und sichere Begrenzung überprüft werden.",
+        "Eine pferdegerechte Haltung braucht Sozialkontakte zu anderen Pferden, Raufutter und Bewegungsfreiheit.",
+        "Ein festgelegter Plan für Pflege, Nutzung und Kontrolle der Weide ist für die laufende Haltung sinnvoll.",
+        "Weidezäune müssen in gutem Zustand sein und das Ausbrechen der Pferde verhindern.",
+        "Pferdeäpfel sollten auf der Weide mindestens zweimal wöchentlich, nach Möglichkeit häufiger, abgesammelt werden.",
+        "Gras kann einen großen Teil der Energieaufnahme liefern; die Weidezeit und Grasmenge müssen zum einzelnen Pferd passen."
+      ],
+      "fresh_research_reference_date": "2026-11-18"
+    },
+    "production_plan_item": {
+      "article_type": "Anleitung",
+      "target_keyword": "Wie kann ich die Weidehaltung meines Pferdes organisieren?",
+      "topic": "Weidehaltung für das eigene Pferd Schritt für Schritt organisieren",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Die Weidehaltung des eigenen Pferdes dauerhaft sicher, versorgungsgerecht und praktikabel organisieren.",
+      "preparation_items": [
+        "Weidefläche und Zugänge erfassen",
+        "Wasserstelle, Unterstand und Zaun prüfen",
+        "Geeignete Pferdegruppe und Verantwortliche abstimmen"
+      ],
+      "procedure_steps": [
+        "Weide und Sicherheitsrisiken prüfen",
+        "Einzäunung und Wasser absichern",
+        "Schutz vor Wetter und Sozialkontakte organisieren",
+        "Futterangebot und tägliche Kontrolle planen",
+        "Weidepflege und Vertretung festlegen"
+      ],
+      "safety_controls": [
+        "Täglich sichere Zäune und Wasserversorgung prüfen",
+        "Giftpflanzen und gefährliche Gegenstände beseitigen",
+        "Bei Krankheit oder Verletzung tierärztliche Hilfe organisieren"
+      ],
+      "common_errors": [
+        "Wasserstellen nicht täglich kontrollieren",
+        "Zaunschäden übersehen",
+        "Keine Vertretung und keinen festen Weidepflegeplan haben"
+      ],
+      "result_checks": [
+        "Pferde sind versorgt und geschützt",
+        "Alle täglichen Kontrollen sind verbindlich zugeteilt"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "British Horse Society – Pasture Management",
+        "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/pasture-management/",
+        "evidence_text": "Provide an adequate supply of fresh clean water",
+        "statement": "Für jedes Pferd muss jederzeit ausreichend frisches sauberes Trinkwasser auf der Weide verfügbar sein.",
+        "evidence_text_sha256": "2cfe00ad44cbe65943026421ce92c9c7b17d31743b84c98c698d361b244d2927",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F2": {
+        "source_title": "British Horse Society – Pasture Management",
+        "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/pasture-management/",
+        "evidence_text": "Check horses for injuries and monitor weight closely",
+        "statement": "Pferde auf der Weide müssen regelmäßig auf Verletzungen und Veränderungen des Körpergewichts kontrolliert werden.",
+        "evidence_text_sha256": "af74f3671bdb593dcc2aa633cebed86a110f4f7554eb28ef24e5429ec33dfbf0",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F3": {
+        "source_title": "British Horse Society – Pasture Management",
+        "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/pasture-management/",
+        "evidence_text": "Horses need access to shelter not just from the winter weather but also during the summer from the sun and flies.",
+        "statement": "Pferde benötigen auf der Weide Schutz vor Winterwetter und ebenso vor sommerlicher Sonne und Insekten.",
+        "evidence_text_sha256": "cc9aa0f7c6bb785bbe3cba0671f5d67b73c9174dfa5bb7be1400ade3ca316527",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F4": {
+        "source_title": "British Horse Society – Fencing",
+        "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/pasture-management/fencing",
+        "evidence_text": "Ideally, fencing should be inspected daily.",
+        "statement": "Weidezäune sollten möglichst täglich auf Beschädigungen und sichere Begrenzung überprüft werden.",
+        "evidence_text_sha256": "f8fff03cd23628e13341aa648688abd21254b1bb1ff334b85b7a60cc96aeb43c",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F5": {
+        "source_title": "World Horse Welfare – Horse management essentials",
+        "source_url": "https://www.worldhorsewelfare.org/advice/horse-management-essentials",
+        "evidence_text": "All horses should have access to friends, forage and freedom.",
+        "statement": "Eine pferdegerechte Haltung braucht Sozialkontakte zu anderen Pferden, Raufutter und Bewegungsfreiheit.",
+        "evidence_text_sha256": "48238fa3f8b5a87e0beb45cbc1ebeb67d8af4706d6c24d231954e50d8f29ad23",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F6": {
+        "source_title": "World Horse Welfare – Horse management essentials",
+        "source_url": "https://www.worldhorsewelfare.org/advice/horse-management-essentials",
+        "evidence_text": "All yards should have a pasture management plan.",
+        "statement": "Ein festgelegter Plan für Pflege, Nutzung und Kontrolle der Weide ist für die laufende Haltung sinnvoll.",
+        "evidence_text_sha256": "548a4c295580998870812287447ad82127fb07efec4b83e3612b453b1db97587",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F7": {
+        "source_title": "RSPCA – Creating the Right Environment for Horses",
+        "source_url": "https://www.rspca.org.uk/adviceandwelfare/pets/horses/environment",
+        "evidence_text": "Check fences are in good condition and escape-proof.",
+        "statement": "Weidezäune müssen in gutem Zustand sein und das Ausbrechen der Pferde verhindern.",
+        "evidence_text_sha256": "7ec85810fb1cd0afd017ecb1d83632bad3afa709b8d27a976abbae16483916bc",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F8": {
+        "source_title": "World Horse Welfare – Pasture management for horse paddocks",
+        "source_url": "https://eu.worldhorsewelfare.org/advice/pasture-management-for-horse-paddocks",
+        "evidence_text": "Try and poo-pick at least twice a week, ideally more often than that.",
+        "statement": "Pferdeäpfel sollten auf der Weide mindestens zweimal wöchentlich, nach Möglichkeit häufiger, abgesammelt werden.",
+        "evidence_text_sha256": "3f8182e9fa9030d365aa5fe7d7e472c8336e55045e5bcafe421d69efbf3ed851",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F9": {
+        "source_title": "British Horse Society – Pasture Management",
+        "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/pasture-management/",
+        "evidence_text": "Grass is a major contributor of calories in a horse’s diet so managing its intake is fundamental in maintaining good health and welfare.",
+        "statement": "Gras kann einen großen Teil der Energieaufnahme liefern; die Weidezeit und Grasmenge müssen zum einzelnen Pferd passen.",
+        "evidence_text_sha256": "6d89afac4f9d016a13e0802d170cf1992f472bf428306925ebcb308b8f73f8ba",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8",
+      "F9"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8",
+      "F9"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "Pferdehaltung & Stallaltag",
+        "block": "preparation"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/pferdewissen-grundlagen/",
+        "anchor": "Pferdewissen & Grundlagen",
+        "block": "risks"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/gesundheit-regeneration-kuehlgamaschen-faq/",
+        "anchor": "FAQ Kühlgamaschen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdewissen-grundlagen/",
+        "active": true
+      },
+      {
+        "href": "/category/gesundheit-regeneration-kuehlgamaschen-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Weidehaltung",
+      "Weide",
+      "Wasser",
+      "Zaun",
+      "Pferde",
+      "Wetter",
+      "Weidepflege",
+      "Kontrolle"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "LINEAR_SEQUENCE",
+      "rationale": "Die Weidehaltung wird als Schrittfolge mit konkreter Kontrollliste organisiert; eine Tabelle würde diesen Ablauf nur wiederholen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
