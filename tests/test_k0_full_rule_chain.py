@@ -125,6 +125,70 @@ class K0LinkRegressionTests(unittest.TestCase):
         self.assertEqual([x['official_name'] for x in report['canonical_links']],['Kategorie zuegel-faq','Kategorie zuegel-beratung','Lenken'])
         self.assertEqual(len(calls),4)
 
+
+    def _topic_link_category_lookup(self, url):
+        from urllib.parse import unquote
+        slug=unquote(url.rsplit('=',1)[-1])
+        names={
+            'pferdegesundheit-verstehen':'Pferdegesundheit verstehen',
+            'pferdewissen-grundlagen':'Pferdewissen & Grundlagen',
+            'gesundheit-regeneration-kuehlgamaschen-faq':'FAQ Kühlgamaschen',
+            'hautpilz-pferd':'Hautpilz beim Pferd',
+            'pilzinfektionen-pferd':'Pilzinfektionen beim Pferd',
+            'parasiten-beim-pferd':'Parasiten beim Pferd',
+            'pfriemenschwanz-eier':'Pfriemenschwanz-Eier erkennen',
+        }
+        if slug not in names:
+            return []
+        return [{'slug':slug,'name':names[slug],'count':3,
+                 'link':'https://example.org/category/'+slug+'/'}]
+
+    def _topic_link_context(self, related, further, statement):
+        return {'bound_links':[
+            {'role':'parent_category','href':'/category/pferdegesundheit-verstehen/','block':'details'},
+            {'role':'semantic_related','href':'/category/'+related+'/','block':'research'},
+            {'role':'further_information','href':'/category/'+further+'/','block':'further_information'},
+            ],'research_claims':{'F1':{'statement':statement}},'heading_intent_terms':[]}
+
+    def test_real_lebermoos_unrelated_link_targets_block_before_writer(self):
+        # Both real wrong links from the 18.11.2026 2-article handoff.
+        subject={'title':'Hilft Lebermoos tatsächlich gegen Pilzprobleme beim Pferd?',
+                 'target_keyword':'lebermoos pferd pilz'}
+        ctx=self._topic_link_context(
+            'pferdewissen-grundlagen','gesundheit-regeneration-kuehlgamaschen-faq',
+            'Lebermoos wirkt im Labor gegen Pilze, aber Hautpilz ist am Pferd nicht bewiesen.')
+        with self.assertRaisesRegex(Blocked,'K0_LINK_TARGET_TOPIC_UNRELATED:semantic_related'):
+            verify_live_link_targets(ctx,'https://example.org',
+                                     self._topic_link_category_lookup,topic=subject)
+        ctx['bound_links'][1]['href']='/category/hautpilz-pferd/'
+        with self.assertRaisesRegex(Blocked,'K0_LINK_TARGET_TOPIC_UNRELATED:further_information'):
+            verify_live_link_targets(ctx,'https://example.org',
+                                     self._topic_link_category_lookup,topic=subject)
+        ctx['bound_links'][2]['href']='/category/pilzinfektionen-pferd/'
+        result=verify_live_link_targets(ctx,'https://example.org',
+                                        self._topic_link_category_lookup,topic=subject)
+        self.assertEqual(result['checked'],3)
+        self.assertEqual(result['canonical_links'][1]['official_name'],'Hautpilz beim Pferd')
+
+    def test_real_pfriemenschwanz_unrelated_link_targets_block_before_writer(self):
+        subject={'title':'Pfriemenschwanz-Eier beim Pferd erkennen und einen Befall abklären',
+                 'target_keyword':'pfriemenschwanz pferd eier'}
+        ctx=self._topic_link_context(
+            'pferdewissen-grundlagen','gesundheit-regeneration-kuehlgamaschen-faq',
+            'Pfriemenschwanz ist ein Parasit, der Eier am After ablegt.')
+        with self.assertRaisesRegex(Blocked,'K0_LINK_TARGET_TOPIC_UNRELATED:semantic_related'):
+            verify_live_link_targets(ctx,'https://example.org',
+                                     self._topic_link_category_lookup,topic=subject)
+        ctx['bound_links'][1]['href']='/category/parasiten-beim-pferd/'
+        with self.assertRaisesRegex(Blocked,'K0_LINK_TARGET_TOPIC_UNRELATED:further_information'):
+            verify_live_link_targets(ctx,'https://example.org',
+                                     self._topic_link_category_lookup,topic=subject)
+        ctx['bound_links'][2]['href']='/category/pfriemenschwanz-eier/'
+        result=verify_live_link_targets(ctx,'https://example.org',
+                                        self._topic_link_category_lookup,topic=subject)
+        self.assertEqual([x['role'] for x in result['canonical_links']],
+                         ['parent_category','semantic_related','further_information'])
+
     def test_live_target_missing_category_blocks_before_writer(self):
         p,_=package_from_article(make_base())
         p['rule_context']['bound_links'][0]['href']='/category/training/'
