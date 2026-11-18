@@ -1,3 +1,16 @@
+## 18.11.2026 – AKTUELL: Texterstellung 0.4.24.3, Recherche-Einrichtung in EINEM Bedienvorgang
+
+- **Neue einzige aktuelle Ersatz-ZIP** `Texterstellung_Hobbydepot_0.4.24.3_RECHERCHE_EINRICHTUNG.zip`, SHA256 `e5674fb897cc9ca4d4594d7c8ca2a1621d92535a8651815535040005fecb78d4`, 503882 Bytes. WordPress-Pfad unverändert `texterstellung-hobbydepot/texterstellung.php`; gültige höhere Version als 0.4.24.2.
+- **Büroablage erfolgreich:** `/Hobby Depot/Plugin-Büro/` sowie `/hobbydepot/TEXTERSTELLUNG/INSTALLATIONSKANDIDATEN/`; auch `Texterstellung-CURRENT.md` und Prüfbericht im zentralen Pluginbüro neu gespeichert. Alte ZIPs Archiv.
+- **Exakt 3 bestehende Dateien geändert, 84/87 byteidentisch, keine Architekturänderung.** Vorhandene sichere PSTE-Migration, vorhandener Kontextjob, vorhandener WordPress-Kategoriesnapshot werden per 1 Admin-Klick `Texterstellung → Recherche → Recherche-Einrichtung abschließen` nacheinander ausgeführt. Fortsetzen/Rechenfortschritt vorhanden, keine DataForSEO-Kosten bei Einrichtung, K0-/PSERC-/Entwurfsschutz unverändert.
+- Die bisher ungebundene 0-Einträge-Pferde-Schutzkarte war nicht validierbar; jetzt nur für ausdrücklich signiertes Hobby-Nullschutz-Profil zulässig. Die Originalfunktion entscheidet weiterhin allein auf Basis der echten WordPress-Kategorien. Wenn keine eindeutigen Kategorien erkennbar: **harte Sperre vor Migration**, keine erfundenen Entscheidungen.
+- **54/54 lokale Tests PASS**: 3 Boot, 25 Funktion, 5 PSERC, 13 UI, 7 Migration Negativ, 1 positiver langlebiger Migrationsstart; PHP 78/78, JSON 8/8, ZIP 87/87, JS Syntax. **Noch kein authentifizierter WordPress-E2E-PASS**.
+- Credentials nach Nutzerangabe gespeichert, keine erneute Aufforderung; alte Diagnose bereits bekannt. Externe K0-Artikelarten weiterhin **BLOCKED** (separater K0-Vertrag nicht ändern/freigeben).
+- Nächste konkrete Aktion: vor DB-Migration WPvivid-Backup, 0.4.24.3 mit WordPress-„Ersetzen“ installieren, dann **einen Klick „Recherche-Einrichtung abschließen“**. Webseite geöffnet lassen. Kostenpflichtige Suche nur mit bereits vorhandenem Kostenhaken später. Kein weiterer Testplugin-Zwischenstopp.
+- Beleg `RECHERCHE_EINRICHTUNG_0_4_24_3_20261118.md` und `/Hobby Depot/Plugin-Büro/Texterstellung_0.4.24.3_PRUEFBERICHT.md`.
+
+---
+
 ## 18.11.2026 – DataForSEO-Zugangsdaten vom Betreiber eingetragen; nächster echter Blocker PSTE-Migration
 
 - Betreiber hat die DataForSEO-Zugangsdaten im bestehenden Plugin **nach eigenen Angaben gespeichert**. Nicht nochmals nach Login/Passwort oder Diagnose fragen. Tatsächliches Speichergebnis noch nicht durch neue Live-Diagnose bestätigt.
