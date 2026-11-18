@@ -75,7 +75,11 @@ def _validate_type_meta(meta,schema):
                 raise Blocked('K0_RULE_CONTEXT_TYPE_META_DUPLICATE:'+name)
 
 def verify_live_link_targets(ctx,base_url,fetch_json=None,fetch_html=None):
-    """Fail closed on missing targets and empty *related* category archives."""
+    """Resolve each C-category or published C-article to its ONE official WordPress label.
+    This is the EXISTING pre-writer target lookup, not a second editorial link gate.
+    The writer receives these immutable labels and writes natural sentences AROUND them.
+    """
+    import html
     import urllib.parse
     import urllib.request
     if not isinstance(base_url,str) or not base_url.startswith('https://'):
@@ -88,31 +92,59 @@ def verify_live_link_targets(ctx,base_url,fetch_json=None,fetch_html=None):
         def fetch_html(url):
             with urllib.request.urlopen(url,timeout=15) as response:
                 return response.read().decode('utf-8')
+    def official_name(value):
+        return re.sub(r'\s+',' ',html.unescape(re.sub(r'<[^>]*>','',str(value or '')))).strip()
+    def same_public_path(url,href):
+        return urllib.parse.urlsplit(str(url or '')).path.rstrip('/')==urllib.parse.urlsplit(href).path.rstrip('/')
+    bound=[]
     for link in (ctx.get('bound_links') or []):
         role=str(link.get('role') or '')
         href=str(link.get('href') or '')
-        if not href.startswith('/') or href.startswith('//'):
+        if not href.startswith('/') or href.startswith('//') or '://' in href or '?' in href:
             raise Blocked('K0_LINK_TARGET_PATH_INVALID')
-        if href.startswith('/category/'):
-            slug=href.strip('/').split('/')[-1]
-            url=base_url.rstrip('/')+'/wp-json/wp/v2/categories?slug='+urllib.parse.quote(slug)
-            try:
-                rows=fetch_json(url)
-            except Exception as exc:
-                raise Blocked('K0_LINK_TARGET_CATEGORY_UNVERIFIED:'+slug) from exc
-            hits=[row for row in rows if isinstance(row,dict) and row.get('slug')==slug] if isinstance(rows,list) else []
-            if len(hits)!=1:
-                raise Blocked('K0_LINK_TARGET_CATEGORY_MISSING:'+slug)
-            if role!='parent_category' and int(hits[0].get('count') or 0)<1:
+        slug=urllib.parse.unquote(urllib.parse.urlsplit(href).path.rstrip('/').split('/')[-1])
+        if not slug:
+            raise Blocked('K0_LINK_TARGET_NOT_C_CATEGORY_OR_ARTICLE:'+href)
+        category_url=base_url.rstrip('/')+'/wp-json/wp/v2/categories?slug='+urllib.parse.quote(slug)
+        try:
+            categories=fetch_json(category_url)
+        except Exception as exc:
+            raise Blocked('K0_LINK_TARGET_CATEGORY_UNVERIFIED:'+slug) from exc
+        direct_category=href.startswith('/category/')
+        hits=[x for x in categories if isinstance(x,dict) and x.get('slug')==slug and
+              (direct_category or same_public_path(x.get('link'),href))] if isinstance(categories,list) else []
+        if direct_category and len(hits)!=1:
+            raise Blocked('K0_LINK_TARGET_CATEGORY_MISSING:'+slug)
+        if len(hits)==1:
+            item=hits[0]
+            if role!='parent_category' and int(item.get('count') or 0)<1:
                 raise Blocked('K0_LINK_TARGET_CATEGORY_EMPTY:'+slug)
-        else:
+            label=official_name(item.get('name'))
+            target_type='C_CATEGORY'
+        elif not direct_category:
+            post_url=base_url.rstrip('/')+'/wp-json/wp/v2/posts?slug='+urllib.parse.quote(slug)
+            try:
+                posts=fetch_json(post_url)
+            except Exception as exc:
+                raise Blocked('K0_LINK_TARGET_ARTICLE_UNVERIFIED:'+slug) from exc
+            matches=[x for x in posts if isinstance(x,dict) and x.get('slug')==slug and
+                     x.get('status')=='publish' and same_public_path(x.get('link'),href)] if isinstance(posts,list) else []
+            if len(matches)!=1:
+                raise Blocked('K0_LINK_TARGET_NOT_C_CATEGORY_OR_PUBLISHED_ARTICLE:'+href)
+            label=official_name((matches[0].get('title') or {}).get('rendered'))
+            target_type='C_ARTICLE'
             try:
                 page=fetch_html(base_url.rstrip('/')+href)
             except Exception as exc:
                 raise Blocked('K0_LINK_TARGET_PAGE_UNVERIFIED:'+href) from exc
             if not isinstance(page,str) or '<html' not in page.lower():
                 raise Blocked('K0_LINK_TARGET_PAGE_INVALID:'+href)
-    return {'status':'PASS','checked':len(ctx.get('bound_links') or [])}
+        else:
+            raise Blocked('K0_LINK_TARGET_CATEGORY_NOT_UNIQUE:'+slug)
+        if not label:
+            raise Blocked('K0_LINK_TARGET_CANONICAL_LABEL_EMPTY:'+href)
+        bound.append({'role':role,'href':href,'official_name':label,'target_type':target_type})
+    return {'status':'PASS','checked':len(bound),'canonical_links':bound}
 
 
 def validate_rule_context(ctx,identity):
