@@ -1,0 +1,38 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 1,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Die Verbreitung des West-Nil-Virus bei Pferden in Deutschland",
+        "target_keyword": "west nil virus pferd verbreitung deutschland",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Beratung",
+        "plan_slot": "91b96241974591936b18435a9c4acd1b374c09011642cf1e8c6c68a2cb96fe41"
+      }
+    ],
+    "batch_sha256": "21b0bda856a4f0fc25310aa61454c257f58a8d70dfa832ef38ef27d94b61f930"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Die Verbreitung des West-Nil-Virus bei Pferden in Deutschland",
+        "target_keyword": "west nil virus pferd verbreitung deutschland",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Beratung",
+        "plan_slot": "91b96241974591936b18435a9c4acd1b374c09011642cf1e8c6c68a2cb96fe41"
+      },
+      "order_id": "TXE-068768ce6ae591c5c53c4e8ecd616adb",
+      "article_id": "article:a8bab50591affd2622dd90a1",
+      "search_intent": "Tiergesundheit – Verbreitung"
+    }
+  ],
+  "manifest_sha256": "4b7bb3a739090a20a8de62eb6d02f43b70603e2e14678a531ea559ee5a56d866"
+}
