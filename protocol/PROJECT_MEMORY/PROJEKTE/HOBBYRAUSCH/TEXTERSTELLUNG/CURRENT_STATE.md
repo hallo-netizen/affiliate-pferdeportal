@@ -1,3 +1,13 @@
+## 18.11.2026 – AKTUELL: WORDPRESS ERSETZEN – NUR ZIP-ORDNERNAME BERICHTIGT
+
+- Nutzer bestätigt, dass die **erste Hobbydepot-Texterstellung bereits installiert ist**. „Ersetzen“ erschien bei bisheriger ZIP nicht. Eigene vorherige Aussage „noch nicht installiert“ war falsch.
+- Nachgewiesener ZIP-Unterschied: erstes Hobbydepot-Installationspaket 0.4.24 `texterstellung-hobbydepot/texterstellung.php`; bisheriges gereinigtes 0.4.23 `texterstellung/texterstellung.php`. **Jetzt Paketpfad zurück auf `texterstellung-hobbydepot/` gebracht.**
+- Korrigierte ZIP `/hobbydepot/TEXTERSTELLUNG/INSTALLATIONSKANDIDATEN/Texterstellung_Hobbydepot_0.4.23_BEREINIGT_DIAGNOSE_ERSETZEN.zip` SHA256 `a4356ec3db1263179a8aa12397418ea4efddab138f1abbe80ccfe8417f586a67`. **87/87 Dateiinhalte unverändert**, 78/78 PHP PASS, ZIP CRC PASS. Keine Code-/Workflow-/K0-Änderung.
+- Installation: ZIP hochladen, WordPress sollte bei installiertem identischem `texterstellung-hobbydepot` den Ersatz anbieten. **Keine vorherige Deinstallation anweisen.** Tatsächliche Live-Verzeichnisidentität nicht unabhängig geprüft, keine unbedingte Gewissheit.
+- Detailprotokoll: `ERSETZEN_ZIP_ORDNERKORREKTUR_20261118.md`.
+
+---
+
 ## 18.11.2026 – Ersetzen-Dialog tatsächlich NICHT vorhanden (Betreiberangabe)
 
 - ZIP-Inhalt **erneut direkt geöffnet**: Original 0.4.23 und bereinigtes 0.4.23 besitzen beide dasselbe WordPress-Hauptverzeichnis `texterstellung/` und Hauptdatei `texterstellung/texterstellung.php`. Eine Reparatur des Paketordnernamens wäre hier **nicht begründet**.
