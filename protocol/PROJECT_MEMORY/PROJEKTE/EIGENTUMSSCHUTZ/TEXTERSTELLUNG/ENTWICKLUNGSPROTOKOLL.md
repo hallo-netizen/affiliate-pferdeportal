@@ -57,3 +57,21 @@
 Jede spätere Änderung im zuständigen Portalchat erhält **eine neue Zeile** mit Datum, Ausgangsdatei/Version, geänderten Dateien, Ursache, konkreter Änderung, Prüfbeleg, Ergebnis, offenen Punkten und Freigabestatus. Kein weiterer Fortschritt ist damit bereits behauptet.
 
 **Nicht verändert:** K0, WordPress-Live-Inhalte, veröffentlichte Beiträge, Redaktionsplan, Original-Plugin-Datei 0.4.23. Das Zurücksetzen des Redaktionsplans erfolgt gesondert anhand des aktuellen Exports.
+
+## 5. Nachtrag zur Diagnose (18.11.2026)
+
+| Schritt | Beweis / Ergebnis |
+|---|---|
+| 15 | Live-Diagnose vom Pferdeatelier-Testserver gelesen: dort ist Texterstellung **0.4.24** installiert, nicht 0.4.23. |
+| 16 | Zwei K0-Artikel wurden am 18.11. zweimal abgelehnt; die Diagnose speichert nur `ORIGINAL_PSERC_IMPORT_BLOCKED`, nicht den konkreten Originalgrund. Kein Rücksetzen oder Import durchgeführt. |
+| 17 | Quellweg geprüft: `texterstellung.php` kürzt die Original-Importer-Antwort auf den ersten Fehlercode und `class-txe-diagnose.php::errorCode()` verliert den Teil nach dem Doppelpunkt. |
+| 18 | Eine **nur diagnostische** Reparatur im isolierten Quell-Test vorbereitet: bestehende Diagnose übernimmt die ursprünglichen Fehlercodes samt erlaubten Angaben zu Kategorie, vorhandenem Beitrag, Beitragstatus und Import-Lesergebnis. |
+| 19 | Vier Fehlerfälle mit einem isolierten PHP-Test erfolgreich protokolliert: Kategorie fehlt, Konflikt mit vorhandenem Beitrag, Abweichung beim erneuten Lesen, unzulässiger Kurzname; kein Artikeltext/Passwort in Ereignissen. |
+| 20 | Diese Änderung auf isolierten **0.4.24-Folgekopien beider Portale** nur in temporären Kopien erfolgreich angewendet und auf PHP-Syntax geprüft. Die offiziellen Hab & Bewahr-0.4.24-Dateien in der Ablage **nicht überschrieben**. |
+| 21 | Das tatsächlich installierte Pferdeatelier-0.4.24-Quellarchiv ist noch nicht vorhanden. Ein Update für oliver-beil.de wurde deshalb **nicht** freigegeben oder behauptet. |
+
+**F08 – Verlust des echten Importfehlers:** Die bisherige Diagnose verliert den genauen Originalgrund. Ein Diagnose-Code-Fix ist lokal mit vier Fällen geprüft, aber noch nicht im laufenden Pferdeatelier-Plugin 0.4.24 installiert.
+
+**F09 – Versionsgrenze:** Die separaten Versionen 0.4.24 für Hobbydepot/Hab & Bewahr sind weiterzuentwickelnde Fremdarbeitsstände. Sie dürfen weder automatisch durch die 0.4.23-Kopie ersetzt noch als Quellpaket der Pferdeatelier-Live-Version ausgegeben werden.
+
+**Freigabe:** Weiterhin **NICHT INSTALLIEREN**. Für alle künftigen Änderungen: gleiche Chronologie, Einzeldateien, Fehlerbelege und Testergebnisse im jeweiligen Büro fortschreiben.
