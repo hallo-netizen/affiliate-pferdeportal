@@ -1,3 +1,9 @@
+# Fortsetzung 18.11.2026 – v0.5.1-dev.1 nur im Büro
+
+**Gemeinsame Quelle weiterentwickelt und zwei intern gespeicherte ZIP-Kandidaten gebaut; noch KEIN Installationsdownload.** Hab-Kategoriebindung mit aktivem WordPress-Snapshot geprüft, ungebundene Kategorien ausgeschlossen; Pferdeatelier-Auftrags-/Diagnoseoptionen getrennt, leeres neues Universal-Regal. PHP-Syntax 80/80 und JSON 9/9 je Version, Hab 36 und Universal 25 lokale Funktionschecks bestanden. Alte Recherche-/K0-Verträge bleiben noch offen; Produktionssperre bleibt. Einzelheiten: `UNIVERSAL_CORE_V051_QA_STAND_20261118.md`. Alle Unterlagen dauerhaft in den beiden Library-Büros unter `V051`.
+
+---
+
 # Verbindliche Ausgaberegel: nur freigegebene Plugin-ZIPs im Chat
 
 Ab 18.11.2026 nur **installationsfähige, abgenommene** Plugin-ZIP-Dateien zum Download ausgeben. Alle QA-ZIPs, Entwicklungsarchive, Test-JSON und Protokolle **ausschließlich im Büro ablegen**, nicht im Chat verlinken. Kleine Arbeitsschritte bündeln, fortlaufend Quelle, Fehler, Korrektur, Tests und Freigabestatus protokollieren. Der aktuelle 0.5.0-qa.1-Stand ist NICHT installierbar; K0 und Recherche noch offen. Näheres: `AUSGABEREGEL_NUR_INSTALLIERBARE_PLUGINS_20261118.md`.
