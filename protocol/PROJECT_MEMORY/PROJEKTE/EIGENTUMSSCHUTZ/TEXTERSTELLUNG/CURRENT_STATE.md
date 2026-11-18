@@ -1,3 +1,9 @@
+# Standprüfung 18.11.2026 (verbindlicher neuer QA-Status)
+
+**Die Hab-Texterstellung 0.4.24 ist NICHT für WordPress freigegeben.** Nachgewiesen: Historische Hab-Kategorien passen nicht zur alten Pferde-Kategorieerkennung (0/285), aktueller WP-Bestand und K0-Bindung ungeklärt. Drei nachweisliche Fehler in einer getrennten Quell-QA korrigiert; **kein installierbares Release**. Kompletter Nachweis: PRUEFUNG_20261118_NICHT_INSTALLIEREN.md und Hab-Dateibüro /hab-und-bewahr/TEXTERSTELLUNG/PRUEFUNG_20261118/. Keine Veränderung am Original-K0, Pferdeatelier oder Live-WordPress. PR #819 bleibt offen als Entwurf.
+
+---
+
 # Hab & Bewahr – Texterstellung: aktueller Stand
 
 **Status:** ARBEITSKOPIE ERSTELLT, NICHT INSTALLIEREN. Stand: 16.11.2026.
