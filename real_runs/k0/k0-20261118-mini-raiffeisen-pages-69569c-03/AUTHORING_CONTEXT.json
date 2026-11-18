@@ -1,0 +1,225 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Dünger für Pferdeweiden bei Raiffeisen auswählen",
+    "target_keyword": "pferdeweiden dünger raiffeisen",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "Beratung",
+    "plan_slot": "7405002082246d96607eb1b135fc8c9c198f7bdc0f306b6533843a768811c127"
+  },
+  "content_profile": {
+    "search_intent": "Einkauf und Weidedüngung"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "DLG-Merkblatt 433 – Düngung von Wiesen, Weiden und Feldfutter",
+          "source_url": "https://www.dlg.org/mediacenter/dlg-merkblaetter/dlg-merkblatt-433-duengung-von-wiesen-weiden-und-feldfutter"
+        },
+        {
+          "source_title": "DLG-Merkblatt 510 – Verwertung von Pferdemist auf Grünland",
+          "source_url": "https://www.dlg.org/mediacenter/dlg-merkblaetter/dlg-merkblatt-510-verwertung-von-strohbasiertem-pferdemist-auf-gruenland"
+        }
+      ],
+      "claims": [
+        "Die Auswahl eines Weidedüngers sollte sich an Bodenuntersuchung und tatsächlichem Nährstoffbedarf orientieren.",
+        "Eine Bodenprobe kann Kalium, Magnesium, pH-Wert und Humusgehalt für die Düngeplanung erfassen.",
+        "Auf Pferdeweiden werden Nährstoffe durch die Tiere zurückgeführt; die Düngung darf diesen Anteil nicht ignorieren.",
+        "Die ausgebrachte Nährstoffmenge darf den festgestellten Düngebedarf nicht überschreiten.",
+        "Neben organischen Düngern können auch mineralische Grünlanddünger eine Rolle spielen.",
+        "Regelmäßige Bodenuntersuchungen helfen, Überdüngung auf Pferdeweiden zu vermeiden.",
+        "Vor der mechanischen Weidepflege sollten Pferdeäpfel entfernt werden."
+      ],
+      "fresh_research_reference_date": "2026-11-18"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "pferdeweiden dünger raiffeisen",
+      "topic": "Dünger für Pferdeweiden bei Raiffeisen auswählen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Dünger für Pferdeweiden bei Raiffeisen nach Bodenbefund und Nährstoffbedarf auswählen, ohne ungeprüfte konkrete Handelsprodukte zu empfehlen.",
+      "decision_criteria": [
+        "Bodenprobe und pH-Wert",
+        "Festgestellter Nährstoffbedarf",
+        "Nährstoffrückführung durch Weidetiere",
+        "Organische oder mineralische Zusammensetzung",
+        "Anwendung und Wartehinweise laut Produktetikett"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.dlg.org/mediacenter/dlg-merkblaetter/dlg-merkblatt-433-duengung-von-wiesen-weiden-und-feldfutter",
+        "source_title": "DLG-Merkblatt 433 – Düngung von Wiesen, Weiden und Feldfutter",
+        "evidence_text": "Die Gehaltsklassen für die Grundnährstoffe geben Anhaltswerte für die erforderlichen Düngermengen",
+        "statement": "Die Auswahl eines Weidedüngers sollte sich an Bodenuntersuchung und tatsächlichem Nährstoffbedarf orientieren.",
+        "evidence_text_sha256": "861b3940a3c1f600f350d392b11de9e63ea7fa814a7bcc94066b948956275d81",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.dlg.org/mediacenter/dlg-merkblaetter/dlg-merkblatt-433-duengung-von-wiesen-weiden-und-feldfutter",
+        "source_title": "DLG-Merkblatt 433 – Düngung von Wiesen, Weiden und Feldfutter",
+        "evidence_text": "Die Bodenprobe sollte zusätzlich auf Kalium, Magnesium, den pH-Wert und den Humusgehalt untersucht werden.",
+        "statement": "Eine Bodenprobe kann Kalium, Magnesium, pH-Wert und Humusgehalt für die Düngeplanung erfassen.",
+        "evidence_text_sha256": "b1eeedb7104a41fff016a7759fe70b2fb8f354cc9edeef32998e5848e978e4c2",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.dlg.org/mediacenter/dlg-merkblaetter/dlg-merkblatt-433-duengung-von-wiesen-weiden-und-feldfutter",
+        "source_title": "DLG-Merkblatt 433 – Düngung von Wiesen, Weiden und Feldfutter",
+        "evidence_text": "Rückführungen von Nährstoffen",
+        "statement": "Auf Pferdeweiden werden Nährstoffe durch die Tiere zurückgeführt; die Düngung darf diesen Anteil nicht ignorieren.",
+        "evidence_text_sha256": "8cf89078b860f74c9538066119bef37b3675e44bc6df00d60f4e0453c71db4ce",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.dlg.org/mediacenter/dlg-merkblaetter/dlg-merkblatt-433-duengung-von-wiesen-weiden-und-feldfutter",
+        "source_title": "DLG-Merkblatt 433 – Düngung von Wiesen, Weiden und Feldfutter",
+        "evidence_text": "Auch hier sollen die zugeführten Nährstoffmengen aus der Düngung keinesfalls den Düngebedarf übersteigen.",
+        "statement": "Die ausgebrachte Nährstoffmenge darf den festgestellten Düngebedarf nicht überschreiten.",
+        "evidence_text_sha256": "0ff3d43409af4dcdb6168bbd5cd4d4eb505b09578c36f9b222f2244a3ac82d81",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.dlg.org/mediacenter/dlg-merkblaetter/dlg-merkblatt-510-verwertung-von-strohbasiertem-pferdemist-auf-gruenland",
+        "source_title": "DLG-Merkblatt 510 – Verwertung von Pferdemist auf Grünland",
+        "evidence_text": "Viele Betriebe setzen zusätzlich Mineraldünger ein, um ihre Grünlandflächen mit Nährstoffen zu versorgen.",
+        "statement": "Neben organischen Düngern können auch mineralische Grünlanddünger eine Rolle spielen.",
+        "evidence_text_sha256": "66338b703e856045f1dbcbddfbcc8176833063030ff0ace7e8631e40e6f3af47",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F6": {
+        "source_url": "https://www.dlg.org/mediacenter/dlg-merkblaetter/dlg-merkblatt-510-verwertung-von-strohbasiertem-pferdemist-auf-gruenland",
+        "source_title": "DLG-Merkblatt 510 – Verwertung von Pferdemist auf Grünland",
+        "evidence_text": "Für eine angepasste Versorgung des Bodens mit Grundnährstoffen und zur Vermeidung von Überdüngung sind Bodenuntersuchungen in regelmäßigen Abständen",
+        "statement": "Regelmäßige Bodenuntersuchungen helfen, Überdüngung auf Pferdeweiden zu vermeiden.",
+        "evidence_text_sha256": "aa775f370815cbc249fddc4d14e151722f7b0b745754c58930d3ef8f5cb3eb8e",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F7": {
+        "source_url": "https://www.dlg.org/mediacenter/dlg-merkblaetter/dlg-merkblatt-510-verwertung-von-strohbasiertem-pferdemist-auf-gruenland",
+        "source_title": "DLG-Merkblatt 510 – Verwertung von Pferdemist auf Grünland",
+        "evidence_text": "Auf Weideflächen sollten vor allen mechanischen Maßnahmen zunächst die Pferdeäpfel abgesammelt werden",
+        "statement": "Vor der mechanischen Weidepflege sollten Pferdeäpfel entfernt werden.",
+        "evidence_text_sha256": "abd4ad0ef51d9e8bfa1772fcfa553b96917be8c479835c93531bbb77323d18dc",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "Pferdehaltung & Stallaltag",
+        "block": "preparation"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/weide/weide-weideausstattung/weidepflegegeraete/",
+        "anchor": "Weidepflegegeräte",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-buecher-und-ratgeber/weidemanagement-grundlagen/",
+        "anchor": "Weidemanagement Grundlagen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      },
+      {
+        "href": "/weide/weide-weideausstattung/weidepflegegeraete/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-buecher-und-ratgeber/weidemanagement-grundlagen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferdeweide",
+      "Dünger",
+      "Weidedüngung",
+      "Raiffeisen",
+      "Bodenprobe",
+      "Nährstoff",
+      "Weidepflege"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine Kriterienmatrix hilft, einen bei Raiffeisen angebotenen Grünlanddünger anhand Bodenbedarf und Etikett zu prüfen, ohne aktuelle Produkte zu erfinden."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
