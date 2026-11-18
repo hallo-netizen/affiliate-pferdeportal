@@ -45,6 +45,7 @@ require $root.'/wassertechnik-kategorie-workflow.php';
 $assert(Wassertechnik_Kategorie_Workflow::VERSION==='0.1.11','same plugin identity, updated version');
 $homepage=file_get_contents($root.'/wassertechnik-kategorie-workflow.php');
 $assert(str_contains($homepage,'Fachplan W27:') && !str_contains($homepage,'Aktueller Fachplan W4:'),'one current 7-area homepage, no old 8-area claim');
+$assert(!str_contains($homepage,'Import technisch deaktiviert.') && !str_contains($homepage,'Der WordPress-Import bleibt technisch gesperrt.'),'home screen describes explicitly approved one-time import, not a permanent import lock');
 $readme=file_get_contents($root.'/README.txt');
 $assert(str_contains($readme,'NICHT INSTALLIEREN') && str_contains($readme,'0.1.11'),'README status and version match real source');
 $assert(class_exists('Wassertechnik_Kategorie_Importer'),'old importer source retained');
