@@ -1,3 +1,9 @@
+# Live-Screenshot 18.11.2026 18:15 – tatsächlicher Installationsstatus noch prüfen
+
+**Wichtig:** Screenshot `Texterstellung 0.4.31 KISS` ist KEIN Beleg für falsche Pluginversion, da dieser Text im Hab-0.4.31.2-PHP weiterhin fest steht. Pluginheader der echten ZIP meldet 0.4.31.2. Screenshot zeigt `PLUGIN_ACTIVATED_MANUAL_START_REQUIRED` (nach Originalaktivierung gewollte Recherche-Sperre), `originale PSTE-Migration ... nicht abgeschlossen`, Auftragsregal 0. Das Status-Aktualisieren ist nur Seiten-Neuladen; bis PSTE READY ist kein Live-Kategorien-Readback und keine Recherche-Freigabe gezeigt. **Nächster Nutzerklick: Plugins → Installierte Plugins → Texterstellung – Hab & Bewahr, Version 0.4.31.2 ablesen.** Erst danach Originaldiagnose der Migrationsphase, keine bezahlte Recherche. Keine neue ZIP, keine Programmänderung, keine K0-Änderung. Vollständiger Nachweis in `HAB_04312_SCREENSHOT_WP_AKTIVIERUNG_STATUS_20261118.md` und in beiden Library-Büros gespeichert.
+
+---
+
 # 18.11.2026 – NEUER AKTUELLER STAND: Hab-Plugin 0.4.31.2 mit Kategorienanbindung
 
 **Autorisierte minimale KATEGORIENZUORDNUNG umgesetzt.** Original 0.4.31 und Hab 0.4.31.1 bleiben unangetastet; neue Hab-Version 0.4.31.2. Zwei alte Quelldateien an schon vorhandene APKW-WP-R3-Bindung angepasst, kein Neubau, keine neuen Klassen/Kategorien, keine MINI-/K0-Änderung. 83/87 Dateien bytegleich, 78 PHP und 8 JSON geprüft, ZIP CRC PASS. WP-Mocks: zwei bekannte Hab-Kategorien, 5 Suchabsichten auf denselben Term, 285/93 synthetischer Mengentest, inaktive/verwaiste Kategorie als Negativfälle, 7/7 Original-MINI-Prüfungen. **ZIP ist lokal WordPress-installationsfähig; echter WordPress-/DataForSEO-/K0-Lauf steht noch aus.** Voller Nachweis: HAB_04312_KATEGORIENANBINDUNG_PRUEFSTAND_20261118.md; ZIP, Build und Prüfbericht tatsächlich in Hab-Library /hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEKANDIDATEN/04312 gespeichert. Pferdeatelier und Universal-Blanko unverändert.
