@@ -151,8 +151,10 @@ def main() -> None:
     # W41: W35 is the single import writer; the home screen must never say imports are impossible.
     content=content.replace("Es importiert oder veraendert keine Seiten und Kategorien.",
       "Eine WordPress-Strukturuebernahme ist nur im bestehenden W35-Untermenue nach ausdruecklicher Adminfreigabe moeglich.")
-    content=content.replace("Import technisch deaktiviert. Kostenpflichtige DataForSEO-Recherche nur nach einmaliger ausdruecklicher Admin-Freigabe und Kostenkontrolle. Der WordPress-Import bleibt technisch gesperrt.",
-      "Kein automatischer Import und keine automatische Veroeffentlichung. Ein Strukturimport erfordert eine eigene ausdrueckliche Adminfreigabe; kostenpflichtige SEO-Recherche eine separate einmalige Kostenfreigabe.")
+    content=content.replace("Import technisch deaktiviert.",
+        "Kein automatischer WordPress-Import.")
+    content=content.replace("Der WordPress-Import bleibt technisch gesperrt.",
+        "Der Strukturimport ist nur nach eigener ausdruecklicher Freigabe im W35-Untermenue moeglich.")
     # Keep original SEO logic literally unmodified, including 218 owner lock, budget and persisted report keys.
     main_php.write_text(content,encoding="utf-8")
     for file in original_classes:
