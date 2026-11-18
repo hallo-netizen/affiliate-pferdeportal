@@ -127,15 +127,25 @@ class K0LinkRegressionTests(unittest.TestCase):
 
     def test_live_target_missing_category_blocks_before_writer(self):
         p,_=package_from_article(make_base())
+        p['rule_context']['bound_links'][0]['href']='/category/training/'
         p['rule_context']['bound_links'][1]['href']='/category/absent/'
+        p['rule_context']['bound_links'][2]['href']='/category/longierpeitschen/'
+        def category_lookup(url):
+            slug=url.rsplit('=',1)[-1]
+            return [] if slug=='absent' else [{'slug':slug,'name':'Kategorie '+slug,'count':2}]
         with self.assertRaisesRegex(Blocked,'K0_LINK_TARGET_CATEGORY_MISSING'):
-            verify_live_link_targets(p['rule_context'],'https://example.org',lambda url: [],lambda url:'<html></html>')
+            verify_live_link_targets(p['rule_context'],'https://example.org',category_lookup,lambda url:'<html></html>')
 
     def test_live_target_empty_related_category_blocks_before_writer(self):
         p,_=package_from_article(make_base())
+        p['rule_context']['bound_links'][0]['href']='/category/training/'
         p['rule_context']['bound_links'][1]['href']='/category/empty-beratung/'
+        p['rule_context']['bound_links'][2]['href']='/category/longierpeitschen/'
+        def category_lookup(url):
+            slug=url.rsplit('=',1)[-1]
+            return [{'slug':slug,'name':'Kategorie '+slug,'count':0 if slug=='empty-beratung' else 2}]
         with self.assertRaisesRegex(Blocked,'K0_LINK_TARGET_CATEGORY_EMPTY'):
-            verify_live_link_targets(p['rule_context'],'https://example.org',lambda url:[{'slug':'empty-beratung','count':0}],lambda url:'<html></html>')
+            verify_live_link_targets(p['rule_context'],'https://example.org',category_lookup,lambda url:'<html></html>')
 
     def test_official_c_title_uses_existing_bound_pair_rule_only(self):
         a=make_base()
