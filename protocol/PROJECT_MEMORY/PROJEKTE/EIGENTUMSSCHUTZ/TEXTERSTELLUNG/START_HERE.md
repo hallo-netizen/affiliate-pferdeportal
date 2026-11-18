@@ -13,7 +13,7 @@
 - 7 Quell-/Konfigurationsdateien für Portaldaten bereinigt (inkl. Test-README), originale Pferde-Kategoriedaten und Familienlisten entfernt.
 - Keine erfundenen Hab & Bewahr-Kategorien/Keywords eingefügt; fehlende Portaldaten bleiben absichtlich ungebunden.
 - Alte Signatur für die nicht mehr identischen Portalregeln entfernt, keine falsche Freigabe.
-- 78 PHP-Quelldateien vollständig erhalten; 15 davon enthalten noch zu prüfende portalspezifische Textregeln/Beispiele.
+- 78 PHP-Quelldateien vollständig erhalten; 74 davon enthalten Pferde-/PSTE-Suchbegriffe; fachliche Bedeutung der einzelnen Treffer ist noch nicht geprüft.
 - Keine Excel-XLS/XLSX-Datei im Ausgangspaket gefunden.
 
 ## Für den zuständigen Nachfolgechat
