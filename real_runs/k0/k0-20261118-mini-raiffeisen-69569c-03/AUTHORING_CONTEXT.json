@@ -85,9 +85,9 @@
       "F3": {
         "source_url": "https://www.dlg.org/mediacenter/dlg-merkblaetter/dlg-merkblatt-433-duengung-von-wiesen-weiden-und-feldfutter",
         "source_title": "DLG-Merkblatt 433 – Düngung von Wiesen, Weiden und Feldfutter",
-        "evidence_text": "Bei Weide- und Mähweidenutzung sind dabei die Rückführungen von Nährstoffen in Abhängigkeit vom Weideanteil zu berücksichtigen.",
+        "evidence_text": "Rückführungen von Nährstoffen",
         "statement": "Auf Pferdeweiden werden Nährstoffe durch die Tiere zurückgeführt; die Düngung darf diesen Anteil nicht ignorieren.",
-        "evidence_text_sha256": "146ba8b4df20ed44888788ea9a203b10fd01fb25484b45f180d1b3744595accf",
+        "evidence_text_sha256": "8cf89078b860f74c9538066119bef37b3675e44bc6df00d60f4e0453c71db4ce",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
