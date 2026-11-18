@@ -42,11 +42,12 @@ function get_option(...$x){return false;}
 function wp_is_post_revision(...$x){return false;}
 $assert=function($ok,$msg){if(!$ok)throw new RuntimeException("FAILED: ".$msg);echo "PASS ".$msg.PHP_EOL;};
 require $root.'/wassertechnik-kategorie-workflow.php';
-$assert(Wassertechnik_Kategorie_Workflow::VERSION==='0.1.10','same plugin identity, updated version');
+$assert(Wassertechnik_Kategorie_Workflow::VERSION==='0.1.11','same plugin identity, updated version');
 $homepage=file_get_contents($root.'/wassertechnik-kategorie-workflow.php');
 $assert(str_contains($homepage,'Fachplan W27:') && !str_contains($homepage,'Aktueller Fachplan W4:'),'one current 7-area homepage, no old 8-area claim');
+$assert(!str_contains($homepage,'Import technisch deaktiviert.') && !str_contains($homepage,'Der WordPress-Import bleibt technisch gesperrt.'),'home screen describes explicitly approved one-time import, not a permanent import lock');
 $readme=file_get_contents($root.'/README.txt');
-$assert(str_contains($readme,'NICHT INSTALLIEREN') && str_contains($readme,'0.1.10'),'README status and version match real source');
+$assert(str_contains($readme,'NICHT INSTALLIEREN') && str_contains($readme,'0.1.11'),'README status and version match real source');
 $assert(class_exists('Wassertechnik_Kategorie_Importer'),'old importer source retained');
 $assert(!isset($GLOBALS['actions']['admin_post_wassertechnik_import_apply']),
         'old 9-root importer DISABLED by default');
@@ -140,14 +141,15 @@ foreach($nav['existing_w4_pages'] as $p){
     $GLOBALS['owners'][$idx]=$p['owner_id'];++$idx;
 }
 $menu=Wassertechnik_W32_Navigation::render();
-$assert(substr_count($menu,'<li>')===71,'71 real owner-matching published links');
+$assert(substr_count($menu,'<a href=')===79,'71 buyer links plus 8 specialist links, owner-matching and published');
+$assert(substr_count($menu,'<summary>')===8,'7 buyer menu roots and one specialist entry, including planned pool');
 $assert(!str_contains($menu,'<h3>Pool & Teichtechnik</h3>'),'no fake empty Pool landing');
 $first=$nav['existing_w4_pages'][0];
 $GLOBALS['pages'][$first['wordpress_path']]->post_status='draft';
-$assert(substr_count(Wassertechnik_W32_Navigation::render(),'<li>')===70,'draft page never linked');
+$assert(substr_count(Wassertechnik_W32_Navigation::render(),'<a href=')===78,'draft page never linked');
 $GLOBALS['pages'][$first['wordpress_path']]->post_status='publish';
 $GLOBALS['owners'][1]='NOT_THE_OWNER';
-$assert(substr_count(Wassertechnik_W32_Navigation::render(),'<li>')===70,'wrong owner never linked');
+$assert(substr_count(Wassertechnik_W32_Navigation::render(),'<a href=')===78,'wrong owner never linked');
 $GLOBALS['owners'][1]=$first['owner_id'];
 $manifest=json_decode(file_get_contents($root.'/assets/wassertechnik-wp-import-plan.json'),true,512,JSON_THROW_ON_ERROR);
 $assert($manifest['schema']==='wassertechnik-w6-import-v1','old W6 manifest labeled as legacy');
