@@ -60,3 +60,25 @@ jobs:
           grep -F 'NICHT ANTWORTEN. SOFORT INTERN PRODUZIEREN.' /tmp/K0_MAIN_START_HERE.md
           grep -F 'Keine Zwischenmeldung.' /tmp/K0_MAIN_START_HERE.md
           echo 'K0_MAIN_FRESH_CHAT_ROUTER_PASS'
+
+      - name: Parse existing K0 shell steps for syntax (including same-writer return)
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+          for name in ('.github/workflows/k0-authoring-context.yml','.github/workflows/k0-writer-accept.yml'):
+              lines=Path(name).read_text(encoding='utf-8').splitlines()
+              count=0
+              for i,line in enumerate(lines):
+                  if line!='        run: |': continue
+                  body=[]
+                  for text in lines[i+1:]:
+                      if text and not text.startswith('          '): break
+                      body.append(text[10:] if text else '')
+                  if not body: continue
+                  script='\n'.join(body)+'\n'
+                  subprocess.run(['bash','-n'],input=script,text=True,check=True)
+                  count+=1
+              assert count>=3,(name,count)
+              print(name,'BASH_SYNTAX_PASS',count)
+          PY

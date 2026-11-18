@@ -121,8 +121,41 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m engine.k0_production_gate /tmp/K0_SEALED_WRITER_PRODUCT.json /tmp/k0-portal.json /tmp/k0-category.json /tmp/k0-gates.json
-          python3 - <<'PY'
+          if ! python3 -m engine.k0_production_gate /tmp/K0_SEALED_WRITER_PRODUCT.json /tmp/k0-portal.json /tmp/k0-category.json /tmp/k0-gates.json > /tmp/k0-gate-result.txt 2>&1; then
+            cat /tmp/k0-gate-result.txt
+            # Only a WRITER-controlled text-link mismatch is repairable here.
+            # Preserve the SAME writer job and return to its original writer.
+            if ! grep -Fq 'links.bound_pairs_exact' /tmp/k0-gate-result.txt; then
+              exit 2
+            fi
+            python3 - <<'PY'
+          import json,os,pathlib
+          job=json.load(open(os.environ['JOB_PATH'],encoding='utf-8'))
+          rd=pathlib.Path(os.environ['RUN_DIR'])
+          links=job['rule_context']['bound_links']
+          receipt={
+              'contract':'K0_WRITER_REVISION_REQUEST_V1',
+              'status':'RETURN_TO_SAME_WRITER',
+              'job_id':job['job_id'],
+              'writer_job_sha256':job['job_sha256'],
+              'rule_id':'links.bound_pairs_exact',
+              'instruction':'Rewrite the SAME draft: each C-link label must be identical to the immutable official C target name. Rewrite surrounding sentence grammatically; do not change href, keyword, article type, categories, article ID, or K0 rules.',
+              'required_links':[{'role':x['role'],'href':x['href'],'exact_text':x['anchor']} for x in links],
+              'publish_allowed':False,
+          }
+          (rd/'WRITER_REWRITE_REQUEST.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')
+          print('K0_SAME_WRITER_REVISION_REQUEST_CREATED',job['job_id'])
+          PY
+            git config user.name 'k0-writer-station-bot'
+            git config user.email 'actions@users.noreply.github.com'
+            git add "$RUN_DIR/WRITER_REWRITE_REQUEST.json"
+            git commit -m "K0: return invalid canonical link text to same writer"
+            git push
+            echo 'K0_REWRITE_REQUIRED=1' >> "$GITHUB_ENV"
+            echo 'K0_WRITER_RETURN_INSTEAD_OF_TERMINAL_BLOCK'
+          else
+            cat /tmp/k0-gate-result.txt
+            python3 - <<'PY'
           import json
           x=json.load(open('/tmp/k0-gates.json'))
           assert x['status']=='PASS',x
@@ -135,8 +168,10 @@ jobs:
           assert int(x['all_rules_required_receipt_count'])>0,x
           print('K0_ALL_RULES_PRE_LT68_PASS')
           PY
+          fi
 
       - name: Download exact LanguageTool 6.8
+        if: env.K0_REWRITE_REQUIRED != '1'
         shell: bash
         run: |
           set -euo pipefail
@@ -147,6 +182,7 @@ jobs:
           echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/k0-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
 
       - name: Real LanguageTool 6.8 gate
+        if: env.K0_REWRITE_REQUIRED != '1'
         shell: bash
         run: |
           set -euo pipefail
@@ -159,6 +195,7 @@ jobs:
           PY
 
       - name: Full all-rules final gate after LanguageTool
+        if: env.K0_REWRITE_REQUIRED != '1'
         shell: bash
         run: |
           set -euo pipefail
@@ -172,6 +209,7 @@ jobs:
           PY
 
       - name: Resolve canonical article id from exact K0 runtime registry
+        if: env.K0_REWRITE_REQUIRED != '1'
         shell: bash
         run: |
           set -euo pipefail
@@ -189,6 +227,7 @@ jobs:
           PY
 
       - name: Build and reverify canonical WordPress handoff
+        if: env.K0_REWRITE_REQUIRED != '1'
         shell: bash
         run: |
           set -euo pipefail
@@ -212,6 +251,7 @@ jobs:
           PY
 
       - name: Persist only fully verified canonical outputs
+        if: env.K0_REWRITE_REQUIRED != '1'
         shell: bash
         run: |
           set -euo pipefail
@@ -221,6 +261,7 @@ jobs:
           cp /tmp/WORDPRESS_SINGLE.json "$RUN_DIR/WORDPRESS_SINGLE.json"
           cp /tmp/K0_WORDPRESS_VERIFY.json "$RUN_DIR/WORDPRESS_VERIFY.json"
           git rm "$DRAFT_PATH"
+          if test -f "$RUN_DIR/WRITER_REWRITE_REQUEST.json"; then git rm "$RUN_DIR/WRITER_REWRITE_REQUEST.json"; fi
           git config user.name 'k0-writer-station-bot'
           git config user.email 'actions@users.noreply.github.com'
           git add "$RUN_DIR/SEALED_WRITER_PRODUCT.json" "$RUN_DIR/WORDPRESS_SINGLE.json" "$RUN_DIR/WORDPRESS_VERIFY.json"
@@ -228,6 +269,7 @@ jobs:
           git push
 
       - name: Upload canonical single delivery
+        if: env.K0_REWRITE_REQUIRED != '1'
         uses: actions/upload-artifact@v4
         with:
           name: k0-wordpress-single-${{ github.run_id }}

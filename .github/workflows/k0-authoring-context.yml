@@ -64,8 +64,10 @@ jobs:
           if pid=='pferdeatelier':
               ctx=json.load(open(os.environ['RUN_DIR']+'/AUTHORING_CONTEXT.json'))
               result=verify_live_link_targets(ctx['rule_context'],'https://pferde-atelier.de')
-              assert result['status']=='PASS' and result['checked']==3,result
-              print('K0_LIVE_LINK_TARGETS_PASS')
+              assert result['status']=='PASS' and result['checked']==3 and len(result['canonical_links'])==3,result
+              from pathlib import Path
+              Path('/tmp/k0-canonical-links.json').write_text(json.dumps(result,ensure_ascii=False),encoding='utf-8')
+              print('K0_LIVE_LINK_TARGETS_AND_OFFICIAL_NAMES_PASS')
           else:
               print('K0_LIVE_LINK_TARGETS_NOT_PFERDEATELIER')
           PY
@@ -82,6 +84,22 @@ jobs:
           p=pathlib.Path(rd)/'AUTHORING_CONTEXT.json'
           x=json.loads(p.read_text())
           x['run_instance_id']='run:'+hashlib.sha256(rd.encode()).hexdigest()[:24]
+          # A single upstream resolution fixes the exact C-title BEFORE the writer.
+          # The original K0 bound-pairs check then owns any returned text correction.
+          canonical=pathlib.Path('/tmp/k0-canonical-links.json')
+          if canonical.exists():
+              resolved=json.loads(canonical.read_text(encoding='utf-8'))['canonical_links']
+              links=x['rule_context']['bound_links']
+              registry=x['rule_context']['link_registry']
+              assert len(links)==len(resolved)==3
+              for link,target in zip(links,resolved):
+                  assert link['href']==target['href'] and link['role']==target['role']
+                  label=target['official_name']
+                  assert isinstance(label,str) and label.strip()
+                  link['anchor']=label
+                  matches=[row for row in registry if row.get('href')==link['href'] and row.get('active') is True]
+                  assert len(matches)==1
+                  matches[0]['official_name']=label
           pathlib.Path('/tmp/K0_AUTHORING_CONTEXT_BOUND.json').write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
           print(x['run_instance_id'])
           PY
