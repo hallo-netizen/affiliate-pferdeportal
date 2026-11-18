@@ -1,3 +1,13 @@
+## 18.11.2026 – MASSGEBLICHES ZIP-RELEASE FÜR ERSETZEN: 0.4.24.1
+
+- Nutzer-Screenshot bestätigt: installiert `0.4.24`, zuvor hochgeladen `0.4.23-hobbydepot-bereinigung.2` → WordPress meldet niedrigere Versionsnummer. **Behoben** durch genau eine Änderung im vorhandenen ZIP: Pluginheader `Version: 0.4.24.1`. Keine Architektur-/Funktionsänderung.
+- **Aktuelle Ersatz-ZIP:** `Texterstellung_Hobbydepot_0.4.24.1_ERSETZEN.zip`, SHA256 `55eeeb3beabeac2c316617cdb67e3934d51ae75b6d3568e0e3fb0a1147426b36`, 503435 Bytes. Root `texterstellung-hobbydepot/` weiterhin identisch zur ursprünglichen installierten 0.4.24.
+- **Ablagen** erfolgreich geschrieben: `/Hobby Depot/Plugin-Büro/Texterstellung_Hobbydepot_0.4.24.1_ERSETZEN.zip` UND `/hobbydepot/TEXTERSTELLUNG/INSTALLATIONSKANDIDATEN/Texterstellung_Hobbydepot_0.4.24.1_ERSETZEN.zip`.
+- 86/87 Inhalte unverändert, 87/87 ZIP-CRC, 78/78 PHP-Lint, 8/8 JSON gültig, `version_compare` PASS. Details `VERSIONSKORREKTUR_0_4_24_1_20261118.md`.
+- **Nächster Schritt** ausschließlich: Plugin 0.4.24 per WordPress-Ersetzen durch 0.4.24.1 aktualisieren, danach vorhandenen Diagnosebericht unter `Texterstellung → Diagnose` als JSON herunterladen und hier hochladen. Bis dahin KEINE bezahlte Recherche oder K0-Produktion; keine WordPress-Installation als bereits erfolgt behaupten.
+
+---
+
 ## 18.11.2026 – AKTUELL: WORDPRESS ERSETZEN – NUR ZIP-ORDNERNAME BERICHTIGT
 
 - Nutzer bestätigt, dass die **erste Hobbydepot-Texterstellung bereits installiert ist**. „Ersetzen“ erschien bei bisheriger ZIP nicht. Eigene vorherige Aussage „noch nicht installiert“ war falsch.
