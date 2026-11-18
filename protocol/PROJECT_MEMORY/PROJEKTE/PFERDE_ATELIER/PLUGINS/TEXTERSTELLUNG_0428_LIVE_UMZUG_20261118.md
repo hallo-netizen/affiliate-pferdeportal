@@ -39,3 +39,9 @@ Prüfbericht und Quell-Exportangaben im persönlichen Pferdeatelier-Büro: `/pfe
 - Die 16 unterschiedlichen gemeinsamen Artikelinhalte wurden vollständig nach Ersetzung der absoluten Domain geprüft: **16/16 ausschließlich Domain-Unterschiede**.
 - Drei-Artikel-WXR nach Erstellung korrigiert: GUIDs und Links der drei neuen Drafts zeigen auf öffentliche Domain, nicht mehr auf Test-URL. XML validiert, SHA256 `b1074308f0b79e416c29c742d9486064dfb5b6ac15c1ffed270a2dd374014714`.
 - Kein WordPress-Livezugriff bzw. echter K0-Ende-zu-Ende-Lauf durchgeführt. KEINE Live-Freigabe oder Publikation ohne Bestandsmigration und C-Linkkorrektur.
+
+## KISS-Klarstellung: 3 Testentwürfe und Redaktionsbüro
+- **Keine manuelle Zuordnung als Pflichtschritt** nach dem WordPress-XML-Import. Die neue Texterstellung liest in `TXE_Inventory_Reader::read()` veröffentlichte und nicht veröffentlichte WordPress-Posts direkt in den einzigen Bestands-Snapshot ein, einschließlich `_ppm679_canonical_article_id` und `_ppm679_plan_slot_sha256`. Diese Metadaten stehen in der 3-Artikel-XML.
+- Die drei Artikel daher genau einmal als Entwürfe importieren; keine separaten K0-Aufträge anlegen oder Texte neu produzieren.
+- Strikte Aussagegrenze: Dieser WordPress-Bestandsabgleich setzt einen etwaigen schon bestehenden Auftrag im Auftragsregal `texterstellung_orders_v1` **nicht automatisch** auf erledigt. Das alte Regal wird als separate Quelle gelesen. Mangels geprüftem Live-Regalbestand darf weder seine vollständige Synchronität noch ein nötiger manueller Zuordnungsschritt behauptet werden.
+- Keine ungeprüfte automatische Auftragsänderung und keine zusätzliche Prüfstation.
