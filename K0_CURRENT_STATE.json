@@ -110,5 +110,19 @@
     "repair_owner": "SAME_K0_WRITER_JOB"
   },
   "old_chat_or_archive_authority": false,
-  "publish_allowed": false
+  "publish_allowed": false,
+  "wordpress_k0_ingress": {
+    "accepted_package_contract": "WP_K0_UPLOAD_PACKAGE_V1",
+    "original_batch_key": "k0_intake",
+    "original_receipt_key": "word_press_order_receipt",
+    "receipt_contract": "WP_K0_SOURCE_RECEIPT_V1",
+    "existing_unpacker": "engine.k0_wp_upload",
+    "existing_k0_proof_slot": "PSERC_SOURCE_MANIFEST.json",
+    "existing_owner_binder": "engine.k0_seo_owner_binding.inspect",
+    "old_pserc_source_export_additionally_required": false,
+    "metadata_redecision_allowed": false,
+    "no_extra_user_upload": true,
+    "same_writer_and_quality_rules": true,
+    "downstream_route_unchanged": true
+  }
 }
