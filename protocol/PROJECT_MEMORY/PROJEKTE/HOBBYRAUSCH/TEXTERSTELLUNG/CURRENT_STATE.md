@@ -1,3 +1,12 @@
+## 18.11.2026 – KORREKTUR WORDPRESS-ERSETZEN-ANWEISUNG
+
+- Tatsächliche ZIP `Texterstellung_Hobbydepot_0.4.23_BEREINIGT_DIAGNOSE_TEST.zip` lokal geöffnet: oberster Pluginordner `texterstellung/`, Hauptdatei `texterstellung/texterstellung.php`, Pluginname `Texterstellung – Hobbydepot`, Version `0.4.23-hobbydepot-bereinigung.2`.
+- WordPress bietet "Ersetzen" nur bei einer bereits vorhandenen Installation im **selben Pluginverzeichnis**. Die letzte vollständige Hobbydepot-Live-Pluginliste vom **01.11.2026** enthält KEIN Plugin `Texterstellung`; sie ist historisch und beweist nicht den aktuellen Bestand.
+- Betreiber meldet aktuell ausdrücklich **keinen Ersetzen-Dialog**. Daraus folgt nicht automatisch, dass die ZIP defekt ist; tatsächlicher aktuell installierter Pluginordner ist weiterhin UNBEKANNT. Keinen weiteren Installer/Neubau/Architekturumbau und keinen blind gestarteten parallelen Installationsweg empfehlen.
+- **Einzige erforderliche Information für exakte Korrektur:** tatsächliche derzeitige WordPress-Pluginzeile/Verzeichnis des zu ersetzenden Plugins (Screenshot der Pluginliste), dann ZIP-Verzeichnisidentität prüfen. Keine Änderungen an K0, Recherche, Kategorien.
+
+---
+
 ## 18.11.2026 – AKTUELL: minimale Diagnosekorrektur ohne Neubau / nur Testinstallation
 
 - Basis bleibt **reine Pferdeatelier-Bereinigung** 0.4.23; einzig `TXE_Diagnose::snapshot()` behandelt den bestehenden gesperrten K0-Zustand nun lesend als BLOCKED statt abzubrechen. Zweite Änderung nur Pluginheader-Versionsangabe `0.4.23-hobbydepot-bereinigung.2`. **Kein** neuer Workflow, keine Architektur, keine Kategorie-/K0-/Import-/Recherchemethode.
