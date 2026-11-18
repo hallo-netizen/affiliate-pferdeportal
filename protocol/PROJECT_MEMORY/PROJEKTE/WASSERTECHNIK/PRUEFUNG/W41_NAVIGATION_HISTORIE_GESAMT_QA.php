@@ -1,13 +1,24 @@
 <?php
 declare(strict_types=1);
 define('ABSPATH','/'); define('OBJECT','OBJECT');
-$GLOBALS['items']=[]; $GLOBALS['owners']=[]; $GLOBALS['writes']=0;
+$GLOBALS['items']=[]; $GLOBALS['owners']=[]; $GLOBALS['writes']=0;$GLOBALS['reads']=0;$GLOBALS['point_reads']=0;
 function add_shortcode(...$args){} function add_action(...$args){} function add_submenu_page(...$args){}
 function current_user_can($cap){return true;} function is_admin(){return false;}
 function esc_html($s){return htmlspecialchars((string)$s,ENT_QUOTES,'UTF-8');}
 function esc_url($s){return htmlspecialchars((string)$s,ENT_QUOTES,'UTF-8');}
 function wp_die($s){throw new RuntimeException((string)$s);}
-function get_page_by_path($path,$obj,$type){return $GLOBALS['items'][$path]??null;}
+function get_page_by_path($path,$obj,$type){$GLOBALS['point_reads']++;return $GLOBALS['items'][$path]??null;}
+function get_posts($opts=[]){
+    $GLOBALS['reads']++;$out=[];
+    foreach($GLOBALS['items'] as $uri=>$row){
+        if(isset($out[(int)$row->ID]))continue;
+        $p=clone $row;$p->mock_uri=$uri;
+        $out[(int)$row->ID]=$p;
+    }
+    return array_values($out);
+}
+function get_page_uri($p){return (string)($p->mock_uri??'');}
+function is_wp_error($x){return false;}
 function get_post_meta($id,$key,$single){return $GLOBALS['owners'][$id]??'';}
 function get_permalink($id){return 'https://wasser.oliver-beil.de/produkt-'.$id.'/';}
 function has_shortcode($content,$tag){return str_contains((string)$content,'['.$tag.']');}
@@ -29,7 +40,10 @@ function assert_w41($good,$name){
  if(!$good)throw new RuntimeException('W41 FAIL: '.$name);
  echo 'PASS W41 '.$name.PHP_EOL;
 }
+$beforeReads=$GLOBALS['reads'];
 $menu=Wassertechnik_W32_Navigation::render();
+assert_w41($GLOBALS['reads']===$beforeReads+1 && $GLOBALS['point_reads']===0,
+    'W42 one published-page read for 79 original products, zero per-product lookups');
 assert_w41(substr_count($menu,'<summary>')===8,'seven consumer menu roots plus specialist');
 assert_w41(substr_count($menu,'<a href=')===79,'all 79 actual original owners linked exactly once');
 assert_w41(str_contains($menu,'Pool &amp; Teichtechnik'),'pool root persists without invented product links');
@@ -42,6 +56,11 @@ $GLOBALS['items'][$paths[$first['owner_id']]]->post_status='publish';
 $GLOBALS['owners'][1]='FOREIGN';
 assert_w41(substr_count(Wassertechnik_W32_Navigation::render(),'<a href=')===78,'wrong owner never linked');
 $GLOBALS['owners'][1]=$first['owner_id'];
+$GLOBALS['items']['foreign-other-product']=(object)['ID'=>900,'post_status'=>'publish'];
+$GLOBALS['owners'][900]=$first['owner_id'];
+assert_w41(substr_count(Wassertechnik_W32_Navigation::render(),'<a href=')===78,
+    'W42 duplicate owner never linked even if duplicate page is foreign');
+unset($GLOBALS['items']['foreign-other-product'],$GLOBALS['owners'][900]);
 $GLOBALS['post']=(object)['post_content'=>'[wassertechnik_fachnavigation]'];
 ob_start();Wassertechnik_W32_Navigation::auto_render();$dup=ob_get_clean();
 assert_w41($dup==='','page shortcode prevents automatic duplicate');
