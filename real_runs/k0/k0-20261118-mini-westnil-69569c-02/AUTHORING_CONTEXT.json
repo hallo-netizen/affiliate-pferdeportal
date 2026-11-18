@@ -1,0 +1,223 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Die Verbreitung des West-Nil-Virus bei Pferden in Deutschland",
+    "target_keyword": "west nil virus pferd verbreitung deutschland",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "Beratung",
+    "plan_slot": "91b96241974591936b18435a9c4acd1b374c09011642cf1e8c6c68a2cb96fe41"
+  },
+  "content_profile": {
+    "search_intent": "Tiergesundheit – Verbreitung"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "ECDC – West Nile virus monthly surveillance 12 November 2026",
+          "source_url": "https://www.ecdc.europa.eu/en/public-health-events/2026-evd-00025/2026-11-12"
+        }
+      ],
+      "claims": [
+        "Der ECDC-Bericht vom November 2026 nennt für Deutschland 15 Ausbrüche bei Equiden bis zum 4. November 2026.",
+        "Die europäische Überwachung erfasst West-Nil-Virus-Ausbrüche bei Vögeln und Equiden getrennt.",
+        "Die gemeldeten Equiden-Ausbrüche sind nicht immer ausdrücklich als Pferdefälle ausgewiesen.",
+        "Klima, Lebensräume und Unterschiede in der Überwachung beeinflussen das erfasste Verbreitungsmuster des West-Nil-Virus.",
+        "Die Viruszirkulation hängt unter anderem von Stechmücken, Vogelwirten, Wetter und Lebensräumen ab.",
+        "Ausbruchszahlen für 2026 sind vorläufig und können wegen Nachmeldungen noch steigen.",
+        "Die Ausbreitung in Europa betrifft viele Regionen und lässt sich anhand von Tiermeldungen regional verfolgen."
+      ],
+      "fresh_research_reference_date": "2026-11-18"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "west nil virus pferd verbreitung deutschland",
+      "topic": "Die Verbreitung des West-Nil-Virus bei Pferden in Deutschland",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Die gemeldete Verbreitung des West-Nil-Virus bei Equiden in Deutschland anhand des ECDC-Berichts vom 12. November 2026 korrekt und ohne Überinterpretation einordnen.",
+      "decision_criteria": [
+        "Deutsche Meldungen und Berichtsdatum",
+        "Equiden-Meldungen gegenüber Pferdefällen",
+        "Europäische Verbreitung und Vergleichbarkeit",
+        "Einfluss von Stechmücken und Vogelwirten",
+        "Vorläufige Zahlen und Nachmeldungen"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "ECDC – West Nile virus monthly surveillance 12 November 2026",
+        "source_url": "https://www.ecdc.europa.eu/en/public-health-events/2026-evd-00025/2026-11-12",
+        "evidence_text": "Outbreaks among equids have been reported by France (440 outbreaks), Italy (90 outbreaks), Belgium (45 outbreaks), Spain (26 outbreaks), the Netherlands (24 outbreaks), Germany (15 outbreaks)",
+        "statement": "Der ECDC-Bericht vom November 2026 nennt für Deutschland 15 Ausbrüche bei Equiden bis zum 4. November 2026.",
+        "evidence_text_sha256": "92f9717eaa2133b18355c712189694acfc9ca8ecd98530195c6f9922e3fcd033",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "ECDC – West Nile virus monthly surveillance 12 November 2026",
+        "source_url": "https://www.ecdc.europa.eu/en/public-health-events/2026-evd-00025/2026-11-12",
+        "evidence_text": "Among birds, the earliest reported WNV outbreak had a suspected start date of 31 March 2026 in Italy",
+        "statement": "Die europäische Überwachung erfasst West-Nil-Virus-Ausbrüche bei Vögeln und Equiden getrennt.",
+        "evidence_text_sha256": "dab6803a3928d2c4340e917e4bf84dea780a8d49e0dc2955dbae014f2c5cbb28",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "ECDC – West Nile virus monthly surveillance 12 November 2026",
+        "source_url": "https://www.ecdc.europa.eu/en/public-health-events/2026-evd-00025/2026-11-12",
+        "evidence_text": "No information was available on the equid species involved in the outbreaks reported in the Animal Disease Information System (ADIS).",
+        "statement": "Die gemeldeten Equiden-Ausbrüche sind nicht immer ausdrücklich als Pferdefälle ausgewiesen.",
+        "evidence_text_sha256": "1813423b25017f6d11d5fd4a7b3a05a2944baea5b4e559fa7ec4d9cd1dd1144a",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_title": "ECDC – West Nile virus monthly surveillance 12 November 2026",
+        "source_url": "https://www.ecdc.europa.eu/en/public-health-events/2026-evd-00025/2026-11-12",
+        "evidence_text": "Differences in WNV patterns across European countries may reflect a combination of ecological, climatic and surveillance-related factors.",
+        "statement": "Klima, Lebensräume und Unterschiede in der Überwachung beeinflussen das erfasste Verbreitungsmuster des West-Nil-Virus.",
+        "evidence_text_sha256": "bed3fe8978fa38b1f711a26e8c390572dbee002bd683dcbf79e5bee614fc6349",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_title": "ECDC – West Nile virus monthly surveillance 12 November 2026",
+        "source_url": "https://www.ecdc.europa.eu/en/public-health-events/2026-evd-00025/2026-11-12",
+        "evidence_text": "Climatic conditions, habitat characteristics and the local abundance and distribution of competent mosquito vectors and bird hosts can influence WNV circulation.",
+        "statement": "Die Viruszirkulation hängt unter anderem von Stechmücken, Vogelwirten, Wetter und Lebensräumen ab.",
+        "evidence_text_sha256": "c0baa837e9eff5b58065af1b84bb195d86233379d308b45527215a918795274a",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F6": {
+        "source_title": "ECDC – West Nile virus monthly surveillance 12 November 2026",
+        "source_url": "https://www.ecdc.europa.eu/en/public-health-events/2026-evd-00025/2026-11-12",
+        "evidence_text": "the reported numbers of human cases and animal outbreaks, particularly for October, should be considered provisional",
+        "statement": "Ausbruchszahlen für 2026 sind vorläufig und können wegen Nachmeldungen noch steigen.",
+        "evidence_text_sha256": "bf14533dbfe911290da37527bc1a41c5a1efaceb20511dce77f875a03ed41049",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F7": {
+        "source_title": "ECDC – West Nile virus monthly surveillance 12 November 2026",
+        "source_url": "https://www.ecdc.europa.eu/en/public-health-events/2026-evd-00025/2026-11-12",
+        "evidence_text": "So far in 2026, outbreaks in birds and/or equids have been reported in 198 NUTS 3 regions across 13 EU/EEA countries.",
+        "statement": "Die Ausbreitung in Europa betrifft viele Regionen und lässt sich anhand von Tiermeldungen regional verfolgen.",
+        "evidence_text_sha256": "387ba157d1d515affe5aa36ee8eecc9074bd4fa9f0be5e416b3849348b3db051",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "Pferdegesundheit verstehen",
+        "block": "criteria"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/gesundheit-insekten-und-schutz/",
+        "anchor": "Insekten & Schutz",
+        "block": "decision"
+      },
+      {
+        "role": "further_information",
+        "href": "/insektenschutz-fuers-pferd/",
+        "anchor": "Insektenschutz fürs Pferd",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/gesundheit-insekten-und-schutz/",
+        "active": true
+      },
+      {
+        "href": "/insektenschutz-fuers-pferd/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "West-Nil-Virus",
+      "Deutschland",
+      "Equiden",
+      "Stechmücken",
+      "Vögel",
+      "Insekten",
+      "Insektenschutz",
+      "Überwachung",
+      "Ausbrüche"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine Tabelle trennt die gemeldeten Equiden-Ausbrüche nach Ländern und verhindert eine Verwechslung mit bestätigten Pferdefällen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
