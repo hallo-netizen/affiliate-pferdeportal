@@ -1,3 +1,14 @@
+## VERBINDLICHE AUFTRAGSKORREKTUR 18.11.2026 – GILT VOR ALLEN ÄLTEREN EINTRÄGEN
+
+**NUR BESTEHENDE TEXTERSTELLUNG VOM PFERDEATELIER SÄUBERN. KEIN UMBAU, KEINE EIGENENTWICKLUNG, KEINE NEUE ARCHITEKTUR.**
+- **0.4.26–0.4.28 nicht weiterentwickeln und nicht installieren:** dort zusätzlich eingebaute HD004-Bindungs- und Diagnosefunktionen überschreiten diesen Auftrag. Sie bleiben nur historische Zwischenstände.
+- Funktionsgrundlage Original-Texterstellung **0.4.23** und ihre bestehende Hobbydepot-Quell-Arbeitskopie 0.4.23; keine neue Recherche-/Kategoriesystematik und keine erdachte Artikelart.
+- Ausschließlich Pferdeatelier-spezifische Fachdaten, Texte, Beispielbegriffe und Sonderregeln neutralisieren; K0-Original, vorhandene Schnittstellen, Entscheidungspunkte und Workflow erhalten.
+- Die Historie enthält noch **keine** vollständig geprüfte, verbindlich installierbare Hobbydepot-Reinigungsfassung. **Nutzer: jetzt nichts installieren.**
+- Einzelbeleg und maßgebliche Abgrenzung: `AUFTRAGSKORREKTUR_NUR_PFERDEATELIER_BEREINIGEN_20261118.md`.
+
+---
+
 # Hobbydepot – Texterstellung: aktueller Stand
 
 **Status:** ARBEITSKOPIE 0.4.23 ERHALTEN; INSTALLATIONSKANDIDAT 0.4.24 GEPRÜFT, ABER NICHT FÜR LIVE FREIGEGEBEN. Stand: 16.11.2026.
