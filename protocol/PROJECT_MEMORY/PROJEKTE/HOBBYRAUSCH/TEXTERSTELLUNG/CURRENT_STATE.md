@@ -50,3 +50,10 @@
 - Arbeits-ZIP `/hobbydepot/TEXTERSTELLUNG/ARBEITSKOPIEN/HOBBYDEPOT_TEXTERSTELLUNG_0.4.27_QUELLE_NICHT_INSTALLIEREN.zip`, SHA256 `e4183bbc4da2e3516644b42923110380131b3c328295b8419c4467bc1ef9280a`.
 - **Restauftrag gebündelt:** gesamter PSTE-Recherchepfad muss die HD004-Struktur als alleinige Quelle benutzen; aktive WordPress-Zuordnung fehlt als Echtnachweis. K0-Multiportal-Repo ist Quarantäne, KEINE Typen- oder Portal-Freigabe. Nicht installieren.
 - Einzelprotokoll: `HD004_KATEGORIEBINDUNG_0427_20261118.md`; Prüfbericht in Hobbydepot-Dateienbüro.
+
+## 18.11.2026 – 0.4.28 (geprüfte Arbeitskopie, NICHT INSTALLIEREN)
+- Bestehende Diagnose repariert: fehlende produktive K0-Typenregel wird als BLOCKED beobachtet statt Fatal; K0-Produktionssperre bleibt erhalten.
+- Bestehende HD004-Diagnose erkennt zusätzlich doppelte Kategoriemappings, Parent-Schleifen und fehlende Seitenvorfahren. Keine zweite Autorität.
+- 81/81 PHP-Lint, 90/90 ZIP-CRC, 16/16 PHP-Funktionstests bestanden; Original-PSTE und vier Original-PSERC-Importer bytegleich zu 0.4.27.
+- **Nicht übersehener Kern-Blocker:** PSTE_Snapshot::dynamicResolution() enthält weiterhin `count($path)!==3`; die alte Pferde-3-Seiten-Annahme muss in der einzigen Kategorie-Quelle durch HD004 ersetzt werden. Aktueller Live-HD004-Snapshot und bestätigte aktuelle K0-Typautorität fehlen.
+- Arbeitskopie: `/hobbydepot/TEXTERSTELLUNG/ARBEITSKOPIEN/HOBBYDEPOT_TEXTERSTELLUNG_0.4.28_QUELLE_NICHT_INSTALLIEREN.zip` SHA256 `74a0c7e9db498ca9c21f0709e7c43e05b253e89341c154ebfdae0f8b94d63cdd`; kompletter Nachweis `PSTE_HD004_K0_PRUEFUNG_0428_20261118.md` und im Dateienbüro `PRUEFBERICHTE`.
