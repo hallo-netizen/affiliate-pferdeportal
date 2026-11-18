@@ -63,7 +63,7 @@ jobs:
           pid=portal['items'][0]['portal_id']
           if pid=='pferdeatelier':
               ctx=json.load(open(os.environ['RUN_DIR']+'/AUTHORING_CONTEXT.json'))
-              result=verify_live_link_targets(ctx['rule_context'],'https://pferde-atelier.de')
+              result=verify_live_link_targets(ctx['rule_context'],'https://pferde-atelier.de',topic=ctx['identity'])
               assert result['status']=='PASS' and result['checked']==3 and len(result['canonical_links'])==3,result
               from pathlib import Path
               Path('/tmp/k0-canonical-links.json').write_text(json.dumps(result,ensure_ascii=False),encoding='utf-8')
