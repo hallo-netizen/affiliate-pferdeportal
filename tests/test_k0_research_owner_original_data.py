@@ -120,6 +120,8 @@ class SourceOwnerOriginalDataTests(unittest.TestCase):
             'https://www.tierschutzbund.de/ueber-uns/',
             'https://www.dlg.org/mediacenter/',
             'https://www.umweltbundesamt.de/themen/',
+            'https://www.msdvetmanual.com/integumentary-system/dermatophytosis/dermatophytosis-in-horses',
+            'https://wcvm.usask.ca/learnaboutparasites/parasites/oxyuris-equi.php',
             'https://storage.googleapis.com/worldhorsewelfare-cloud/2024/12/horse.pdf',
             'https://de.wikipedia.org/wiki/Pferd',
             'https://en.wikipedia.org/wiki/Horse',
@@ -151,6 +153,17 @@ class SourceOwnerOriginalDataTests(unittest.TestCase):
         for url,reason in rejected.items():
             with self.subTest(url=url):
                 self.assertEqual(_k0_research_source_quality_reason(url),reason)
+
+    def test_real_two_article_batch_official_veterinary_sources_pass(self):
+        for suffix in ('01','02'):
+            directory=ROOT/('real_runs/k0/k0-20261118-txe-01a689f8-'+suffix)
+            ctx=read(directory,'AUTHORING_CONTEXT.json')
+            urls={row['source_url'] for row in ctx['rule_context']['research_claims'].values()}
+            urls.update(row['source_url'] for row in ctx['production_context']['fact_pack']['sources'])
+            self.assertTrue(urls)
+            for url in urls:
+                with self.subTest(article=suffix,url=url):
+                    self.assertIsNone(_k0_research_source_quality_reason(url))
 
     def test_approved_wikipedia_original_excerpt_flows_through_existing_owner(self):
         ctx=original_context(POS)
