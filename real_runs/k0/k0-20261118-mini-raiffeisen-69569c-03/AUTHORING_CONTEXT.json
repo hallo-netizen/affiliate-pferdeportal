@@ -50,7 +50,7 @@
   "rule_context": {
     "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
     "type_meta": {
-      "decision_goal": "Beim Kauf eines Düngers für die Pferdeweide bei Raiffeisen bedarfsgerechte Nährstoffe, Bodenbefund, Sicherheit und Produktangaben berücksichtigen, ohne unbestätigte Handelsprodukte zu behaupten.",
+      "decision_goal": "Dünger für Pferdeweiden bei Raiffeisen nach Bodenbefund und Nährstoffbedarf auswählen, ohne ungeprüfte konkrete Handelsprodukte zu empfehlen.",
       "decision_criteria": [
         "Bodenprobe und pH-Wert",
         "Festgestellter Nährstoffbedarf",
