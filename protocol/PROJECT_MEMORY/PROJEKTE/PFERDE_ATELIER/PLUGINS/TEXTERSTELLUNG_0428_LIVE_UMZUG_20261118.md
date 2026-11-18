@@ -45,3 +45,22 @@ Prüfbericht und Quell-Exportangaben im persönlichen Pferdeatelier-Büro: `/pfe
 - Die drei Artikel daher genau einmal als Entwürfe importieren; keine separaten K0-Aufträge anlegen oder Texte neu produzieren.
 - Strikte Aussagegrenze: Dieser WordPress-Bestandsabgleich setzt einen etwaigen schon bestehenden Auftrag im Auftragsregal `texterstellung_orders_v1` **nicht automatisch** auf erledigt. Das alte Regal wird als separate Quelle gelesen. Mangels geprüftem Live-Regalbestand darf weder seine vollständige Synchronität noch ein nötiger manueller Zuordnungsschritt behauptet werden.
 - Keine ungeprüfte automatische Auftragsänderung und keine zusätzliche Prüfstation.
+
+## Aktuelle Version ab 18.11.2026, 12:54 Uhr – Texterstellung **0.4.29 KISS ohne Website-Freigabe**
+**Die bisherige 0.4.28 ist durch 0.4.29 als Installationskandidat abgelöst.**
+Der Nutzer zeigte einen Screenshot des live installierten Plugins 0.4.28 auf `pferde-atelier.de`: Die Seite zeigte ausschließlich `Live-Seite bewusst freigeben` statt des Redaktionsbüros. Das ursprüngliche 0.4.28-Paket wurde hier vollständig geöffnet und geprüft; im Haupt-Plugin waren die zusätzliche Domain-/Checkbox-Bestätigung, der Site-Fingerprint-Check, ein Bootstrap-Boot-Gate, Admin-POST-Gates, eine AJAX-Zugangssperre und ein UI-Return vorhanden.
+
+**Umgesetzt:** Diese *zusätzliche* Website-Bestätigung einschließlich ihrer unbenutzten Funktionen wurde aus der 0.4.29 vollständig entfernt. Der PSTE-Kern lädt bei normalen WordPress-Requests, sofern die vorhandene Altplugin-Konfliktprüfung erfolgreich ist. Das Redaktionsbüro ist für WordPress-Administratoren direkt zugänglich.
+
+**Unverändert** bleiben: bestehende PSTE-/PSERC-Originale, sämtliche K0-Texte und K0-Tests, bestehende Auftragsregale, DataForSEO-Kostenfreigabe je bewusst gestartetem kostenpflichtigem Lauf, WordPress-Adminschutz und Nonces, der Entwurfsimport und die Regel `keine automatische Veröffentlichung`, bestehende Diagnosen. **Keine Datenbank-/Content-Löschung**, keine Änderung an Hobbydepot oder Hab & Bewahr.
+
+**Dateien im Pferdeatelier-Pluginbüro** `/pferdeatelier/PLUGINS/ARBEITSRAUM_PSTE_KISS/`:
+- `Texterstellung-0.4.29-KISS-OHNE-LIVE-SPERRE-PFERDEATELIER.zip` – vollständiges Installationspaket
+- `Texterstellung-0.4.29-KISS-SPERRFREI-PRUEFBERICHT-20261118.md`
+- `Texterstellung-0.4.29-PRUEFRESULTATE.json`
+
+**SHA-256:** `0b11e9f52f86c27d08c1b534909ed1c78a163d0788a3bbc4b523c22dff9c935e`. Gegenüber 0.4.28 genau drei Dateien geändert, 85/88 bytegleich. 78/78 PHP-Syntaxprüfungen, ZIP-CRC und 38/38 vorhandene echte K0-Importregressionen in simulierter WordPress-Umgebung bestanden. Zusätzliche Smoke-Tests: Dashboard auf Test und Live ohne Freigabe sichtbar, unveränderte gespeicherte Aufträge, Schutz vor Nicht-Administratoren, Schutz vor paralleler Legacy-PSTE-Bootstrap, draft-only.
+
+**Statusgrenze:** Keine echte Live-WordPress-Installation oder echter DataForSEO-Lauf durch Entwickler ausgeführt. Nutzer muss die 0.4.28 auf `pferde-atelier.de` unter `Plugins > Plugin hinzufügen > Plugin hochladen > Installieren > bestehendes Plugin ersetzen` durch 0.4.29 aktualisieren; kein Deinstallieren oder Datenreset. Der Warnhinweis `PSTE-Migration fehlt` kann bei noch nicht migrierter alter Datenstruktur legitim weiter bestehen und ist NICHT dieselbe Zusatz-Freigabesperre.
+
+Die Original-0.4.28 bleibt dokumentiert als vormals installierte fehlerhafte Zusatz-Gate-Version. Von einem tatsächlichen 0.4.29-Liveerfolg erst sprechen, wenn WP-Seite den neuen Stand zeigt.
