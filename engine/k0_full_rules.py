@@ -74,7 +74,63 @@ def _validate_type_meta(meta,schema):
             if spec.get('unique_items') and len({str(x) for x in val})!=len(val):
                 raise Blocked('K0_RULE_CONTEXT_TYPE_META_DUPLICATE:'+name)
 
-def verify_live_link_targets(ctx,base_url,fetch_json=None,fetch_html=None):
+# Link relevance belongs to the EXISTING one-time pre-writer target choice.
+# Parent-category links may be broad by contract. Other two links must mention
+# a real, specific subject from the already approved title/keyword/facts.
+_LINK_GENERIC_WORDS = frozenset({
+    'pferd','pferde','pferden','pferdewissen','pferdegesundheit',
+    'gesundheit','gesundheitsvorsorge','wissen','grundlage','grundlagen',
+    'allgemein','allgemeines','basis','tipps','fragen','antworten',
+    'faq','ratgeber','beratung','anleitung','vergleich','einordnung',
+    'information','informationen','weitere','weiterführende','thema',
+    'themen','hilfe','hilfen','verstehen','pflege','stall','haltung',
+    'kaufen','produkte','produkte','artikel','rat','tiere','tier',
+    'richtig','wichtige','wichtig','einfach','mehr','und','beim',
+    'fuer','über','oder','gegen','mit','zum','zur','eine','einen',
+    'bei','die','das','der','des','werden','kann','erkennen',
+    'diagnose','behandlung','untersuchung','ursache','ursachen',
+})
+_LINK_GENERIC_PREFIXES = ('pferd','gesund','grundlag','wissens','allgemein')
+
+
+def _k0_topic_link_roots(value):
+    import unicodedata
+    text=unicodedata.normalize('NFKC',str(value or '')).casefold()
+    text=text.replace('ä','ae').replace('ö','oe').replace('ü','ue').replace('ß','ss')
+    tokens=re.findall(r'[a-z]{4,}',text)
+    roots=set()
+    for tok in tokens:
+        if tok in _LINK_GENERIC_WORDS or tok.startswith(_LINK_GENERIC_PREFIXES):
+            continue
+        if tok.startswith(('pilz','haut','wurm')):
+            roots.add(tok[:4])
+        elif tok.startswith(('paras','leber','pfriem')):
+            roots.add(tok[:5])
+        elif len(tok)>=5:
+            roots.add(tok[:5])
+        else:
+            roots.add(tok)
+    return roots
+
+
+def _k0_link_has_specific_topic(target_label, ctx, topic):
+    # Topic and factual claims were already chosen by the upstream research
+    # owner. This function makes no new SEO/keyword/category decision.
+    if not isinstance(topic,dict):
+        return False
+    subject=' '.join(str(topic.get(k) or '') for k in ('target_keyword','title'))
+    # Source-backed factual statements allow relevant related concepts:
+    # e.g. Pfriemenschwanz -> Parasiten, Lebermoos -> Hautpilz.
+    subject+=' '+' '.join(str(x) for x in (ctx.get('heading_intent_terms') or []))
+    subject+=' '+' '.join(str(row.get('statement') or '')
+                           for row in (ctx.get('research_claims') or {}).values()
+                           if isinstance(row,dict))
+    roots=_k0_topic_link_roots(subject)
+    target_roots=_k0_topic_link_roots(target_label)
+    return bool(roots and target_roots and (roots & target_roots))
+
+
+def verify_live_link_targets(ctx,base_url,fetch_json=None,fetch_html=None,topic=None):
     """Resolve each C-category or published C-article to its ONE official WordPress label.
     This is the EXISTING pre-writer target lookup, not a second editorial link gate.
     The writer receives these immutable labels and writes natural sentences AROUND them.
@@ -143,6 +199,11 @@ def verify_live_link_targets(ctx,base_url,fetch_json=None,fetch_html=None):
             raise Blocked('K0_LINK_TARGET_CATEGORY_NOT_UNIQUE:'+slug)
         if not label:
             raise Blocked('K0_LINK_TARGET_CANONICAL_LABEL_EMPTY:'+href)
+        # ONE source/target decision at the existing pre-writer lookup.
+        # No later checker and no unrelated generic category as a fallback.
+        if (topic is not None and role in ('semantic_related','further_information')
+                and not _k0_link_has_specific_topic(label,ctx,topic)):
+            raise Blocked('K0_LINK_TARGET_TOPIC_UNRELATED:'+role+':'+slug)
         bound.append({'role':role,'href':href,'official_name':label,'target_type':target_type})
     return {'status':'PASS','checked':len(bound),'canonical_links':bound}
 
