@@ -18,14 +18,14 @@
 ## Reproduzierbare lokale QA
 - Zwei WordPress-konforme internen ZIPs, ein gemeinsamer Kern; der Dateivergleich zeigt ausschließlich eigene `portal-distribution.json` und Plugin-Header-Zeile als Unterschiede.
 - Je ZIP **80/80 PHP-Syntax und 9/9 JSON**, ZIP-CRC PASS, keine doppelten Dateinamen.
-- **Hab 36 Funktionschecks PASS**, einschließlich stale snapshot, falsche Term-ID, unverknüpfte WP-Kategorie, andere gültige Kategorie bleibt verfügbar, leere Neuinitialisierung, keine Übernahme von Pferdeatelier-Aufträgen.
-- **Universal 25 Funktionschecks PASS**, einschließlich generischer Robotik-/Wasser-Beispielkategorien, Website-Bindung, leeres eigenes Regal, kein alter WP-Optionswrite.
+- **Hab 39 Funktionschecks PASS**, einschließlich stale snapshot, falsche Term-ID, unverknüpfte WP-Kategorie, andere gültige Kategorie bleibt verfügbar, leere Neuinitialisierung, keine Übernahme von Pferdeatelier-Aufträgen.
+- **Universal 28 Funktionschecks PASS**, einschließlich generischer Robotik-/Wasser-Beispielkategorien, Website-Bindung, leeres eigenes Regal, kein alter WP-Optionswrite.
 - Zwei technische `PFERDE_ATELIER_WORDPRESS_IMPORT_V1`-Kennungen im noch inaktiven historischen Importvertrag vorhanden; keine aktiven Pferde-Fachregeln.
-- Hash Hab ZIP `54ae1d4dd9286246d64e4fcf094ed62d11ed6f1e3fddf79700df2665c3874d05`; Universal `2688bdc6618469d95dc9e66721e78a7e92a327b86f5afc1204534f9482ce033b`.
+- Hash Hab ZIP `e1333dfec47f755a7a2516234dad376524b472cb1e42435de790ec5706b76eec`; Universal `a27a07d2501f38200c25f27274a457517175a0775f37c919047cf9e7d59a1e79`. ZIP-Bau reproduzierbar: zwei unabhängige Builds ergaben identische SHA256.
 
 ## Gesicherte tatsächliche Artefakte
 - `/hab-und-bewahr/TEXTERSTELLUNG/UNIVERSAL_ENTWICKLUNG_20261118/V051/` enthält Hab 0.5.1 Entwicklungs-ZIP, denselben QA-Bericht und Protokoll.
-- `/texterstellung-universal/ENTWICKLUNG_20261118/V051/` enthält Universal 0.5.1 Entwicklungs-ZIP, QA-Bericht und Protokoll.
+- `/texterstellung-universal/ENTWICKLUNG_20261118/V051/` enthält Universal 0.5.1 Entwicklungs-ZIP, QA-Bericht und Protokoll. In **beiden** Büros ist jetzt zusätzlich dieselbe vollständige gemeinsame Quelle samt Build-Skript und ausführbaren Tests archiviert (`TEXTERSTELLUNG_0.5.1_GEMEINSAME_QUELLE_UND_TESTS_NICHT_INSTALLIEREN.zip`), SHA256 `1a96fa1d9e618ebd2cf8988fec1a748c372624aa2bcc129adbea388e4c9a28fe`.
 - Persönliche Dateiablagen erfolgreich hochgeladen, beide Originalpakete 0.5.0 bleiben unverändert.
 
 ## Offene technische Blockaden / nächste Arbeit
@@ -35,3 +35,7 @@
 - Danach **eine gemeinsame Codeänderung**, zwei Varianten durch denselben Build; nur nach vollständiger Abnahme installierbare Releases.
 
 **Nicht verändert:** Pferdeatelier, K0-Repository, Webserver und Live-WordPress, veröffentlichte Artikel oder bisherige Redaktionspläne.
+## Nachtrag: Portalwechsel dauerhaft abgesichert
+- Das einmal eingerichtete eigene Universal-Auftragsregal trägt `portal_id`, Website-Fingerprint und Vertragskennung. Ein Portalwechsel auf derselben WP-Installation ohne gesonderte Migration wird verweigert, auch bei Wechsel zwischen Hab- und Blanko-Paket. Keine stillen Übernahmen, keine stillen Löschungen.
+- Aufruf des Inventur-Lesers prüft dieselbe Bindung, nicht nur die Anzeige im Einrichtungsmenü.
+- Beide Pakete erneut lokal getestet; Hab 39 und Blanko 28 Funktionschecks PASS. Zwei deterministische ZIP-Builds bytegleich.
