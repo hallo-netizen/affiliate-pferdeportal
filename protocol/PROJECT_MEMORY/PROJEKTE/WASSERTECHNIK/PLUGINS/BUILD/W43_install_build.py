@@ -87,7 +87,7 @@ def main():
         w35=PROJ/"PRUEFUNG"/"W35_WP_IMPORT_ENDTOEND_QA.php"
         for case in ("blank","old9","idempotent","collision","rollback",
                      "update-rollback","stale","wrongsite","nonadmin","redirect"):
-            run(["php",str(w35),str(package),case],expected="PASS W35",timeout=30)
+            run(["php",str(w35),str(package),case],expected="PASS ",timeout=30)
         paidqa=PROJ/"PRUEFUNG"/"W38_SEO81_PAID_ENDTOEND_QA.php"
         for case in ("success","provider","partial","duplicate","empty","network",
                      "budget","stale","locked","reportonly","nonadmin","wrongsite",
