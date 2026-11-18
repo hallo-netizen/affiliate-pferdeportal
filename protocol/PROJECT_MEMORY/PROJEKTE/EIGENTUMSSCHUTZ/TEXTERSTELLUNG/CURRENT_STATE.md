@@ -1,3 +1,9 @@
+# Geprüfter 0.5.1-Quellstand (fortgeschrieben 18.11.2026)
+
+**Nicht installierbares internes Entwicklungsarchiv, kein Plugin-Download.** Hab 39/39 und Universal 28/28 lokale Funktionstests, je 80/80 PHP und 9/9 JSON, deterministische ZIPs. Hab mit bestätigtem aktiven WP-Kategorie-Snapshot; Portalwechsel und alte Pferdeatelier-Auftragsdaten sicher isoliert. Beide vollständigen ZIPs, Tests und gemeinsamer Quellcode in den Library-Büros unter `V051`. Recherche- und K0-Echtfreigabe weiter OFFEN. Details: `UNIVERSAL_CORE_V051_QA_STAND_20261118.md`.
+
+---
+
 # Fortsetzung 18.11.2026 – v0.5.1-dev.1 nur im Büro
 
 **Gemeinsame Quelle weiterentwickelt und zwei intern gespeicherte ZIP-Kandidaten gebaut; noch KEIN Installationsdownload.** Hab-Kategoriebindung mit aktivem WordPress-Snapshot geprüft, ungebundene Kategorien ausgeschlossen; Pferdeatelier-Auftrags-/Diagnoseoptionen getrennt, leeres neues Universal-Regal. PHP-Syntax 80/80 und JSON 9/9 je Version, Hab 36 und Universal 25 lokale Funktionschecks bestanden. Alte Recherche-/K0-Verträge bleiben noch offen; Produktionssperre bleibt. Einzelheiten: `UNIVERSAL_CORE_V051_QA_STAND_20261118.md`. Alle Unterlagen dauerhaft in den beiden Library-Büros unter `V051`.
