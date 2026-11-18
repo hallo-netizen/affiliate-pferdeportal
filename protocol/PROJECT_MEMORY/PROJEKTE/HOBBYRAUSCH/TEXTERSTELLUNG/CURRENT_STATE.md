@@ -1,3 +1,14 @@
+## 18.11.2026 – AKTUELL: minimale Diagnosekorrektur ohne Neubau / nur Testinstallation
+
+- Basis bleibt **reine Pferdeatelier-Bereinigung** 0.4.23; einzig `TXE_Diagnose::snapshot()` behandelt den bestehenden gesperrten K0-Zustand nun lesend als BLOCKED statt abzubrechen. Zweite Änderung nur Pluginheader-Versionsangabe `0.4.23-hobbydepot-bereinigung.2`. **Kein** neuer Workflow, keine Architektur, keine Kategorie-/K0-/Import-/Recherchemethode.
+- Getrennter geprüfter **Staging-Testkandidat** im Dateienbüro: `/hobbydepot/TEXTERSTELLUNG/INSTALLATIONSKANDIDATEN/Texterstellung_Hobbydepot_0.4.23_BEREINIGT_DIAGNOSE_TEST.zip`. SHA256 `86779493f975588520fe82148ee601568916fe69f1d0884207d5d6296781bc15`.
+- 85/87 Dateien bytegleich zur Bereinigung, genau zwei geändert; PHP 78/78, JSON 8/8, ZIP 87/87, 3/3 Starts, 25/25 Bedien-/Funktionstests, 5/5 Original-Rückimporttests. Keine echten WP-/Provider-/K0-End-to-End-Läufe.
+- **Sperren absichtlich erhalten:** `K0_PORTAL_ADAPTER_PENDING` im ursprünglichen Hobby-Manifest, nur `discgolf-beratung` als K0-Hobbyportalzuordnung belegt, importierte Artikel im Testmodus Draft. Nicht für Live freigegeben.
+- Bericht `MINIMALE_DIAGNOSEKORREKTUR_0423_20261118.md` und MD+JSON im Dateienbüro `PRUEFBERICHTE`. Original-0.4.23 und alle späteren Umbauversuche unverändert archiviert.
+- **Nächster Schritt:** eine isolierte WordPress-Testinstallation und einmaliger lesender Diagnoseexport. Keine zusätzliche Diagnose-Pluginversion.
+
+---
+
 ## 18.11.2026 – MASSGEBLICHER LETZTER STAND (unveränderte ZIP; nur Pferdeatelier bereinigt)
 
 - **Kein neuer Plugin-Build.** Maßgeblich bleibt `Texterstellung_Hobbydepot_0.4.23_BEREINIGT_TEST.zip`, SHA256 `c50caa2ed263fb1f42f4cd485ecb2d23bbece6df072d9cf8f55774161aa6e715`. Original-PSTE/K0, HD004 und WP-Daten unangetastet.
