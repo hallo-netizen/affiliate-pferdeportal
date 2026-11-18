@@ -1,0 +1,38 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 1,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Dünger für Pferdeweiden bei Raiffeisen auswählen",
+        "target_keyword": "pferdeweiden dünger raiffeisen",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "Beratung",
+        "plan_slot": "7405002082246d96607eb1b135fc8c9c198f7bdc0f306b6533843a768811c127"
+      }
+    ],
+    "batch_sha256": "35c3438e11848765af6cdeb71e48d56c3d1e75f1f721ce9a52c4f12e095ccf61"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Dünger für Pferdeweiden bei Raiffeisen auswählen",
+        "target_keyword": "pferdeweiden dünger raiffeisen",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "Beratung",
+        "plan_slot": "7405002082246d96607eb1b135fc8c9c198f7bdc0f306b6533843a768811c127"
+      },
+      "order_id": "TXE-c25c680b0de34d7ed40a5eacfff51d51",
+      "article_id": "article:334c8e137fa550f6631e6645",
+      "search_intent": "Einkauf und Weidedüngung"
+    }
+  ],
+  "manifest_sha256": "4b7bb3a739090a20a8de62eb6d02f43b70603e2e14678a531ea559ee5a56d866"
+}
