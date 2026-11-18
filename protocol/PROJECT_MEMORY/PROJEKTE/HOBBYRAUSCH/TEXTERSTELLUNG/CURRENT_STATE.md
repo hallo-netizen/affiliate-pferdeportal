@@ -1,3 +1,13 @@
+## 18.11.2026 – ERLEDIGT: REINE PFERDEATELIER-BEREINIGUNG (verbindlicher Scope)
+
+- **Aktuelles, maßgebliches Bereinigungsartefakt:** `Texterstellung_Hobbydepot_0.4.23_BEREINIGT_TEST.zip` im Hobbydepot-Dateienbüro `/hobbydepot/TEXTERSTELLUNG/ARBEITSKOPIEN/`. Original 0.4.23 bleibt unangetastet.
+- Ausdrücklich **KEIN** Aufbau auf Zusatzfassungen 0.4.25–0.4.28, keine HD004-Anbindung, keine neue Architektur/Entscheidung/Funktion.
+- 87 Dateien; 71 byteidentisch; 16 ausschließlich bereinigt; 78/78 PHP-Lint, 8/8 JSON, ZIP-CRC PASS; vier Original-PSERC/K0 PHP-Dateien unverändert.
+- Nur zwei historische technische Pferde-Importkennungen im ausführbaren Code; keine fachlichen Pferdebegriffe. WordPress-Testseiten-Schutz weiterhin aktiv.
+- **KEINE LIVE-FREIGABE, NICHT INSTALLIEREN.** Kein echter WordPress-/MINI-/DataForSEO-/K0-Abnahmelauf und keine bestätigte aktuelle Hobbydepot-Kategorietauglichkeit; K0-Artikelarten-Status bleibt pending.
+- Belege: `REINE_PFERDEATELIER_BEREINIGUNG_0423_20261118.md` und `/hobbydepot/TEXTERSTELLUNG/PRUEFBERICHTE/BEREINIGUNG_NUR_PFERDEATELIER_0.4.23_PRUEFBERICHT.md`.
+---
+
 ## VERBINDLICHE AUFTRAGSKORREKTUR 18.11.2026 – GILT VOR ALLEN ÄLTEREN EINTRÄGEN
 
 **NUR BESTEHENDE TEXTERSTELLUNG VOM PFERDEATELIER SÄUBERN. KEIN UMBAU, KEINE EIGENENTWICKLUNG, KEINE NEUE ARCHITEKTUR.**
