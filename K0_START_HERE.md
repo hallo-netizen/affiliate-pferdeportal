@@ -33,7 +33,7 @@ Die erste sichtbare Antwort ist ausschließlich:
 
 Portalzuordnung automatisch.
 
-Interne Links: exakt 3; `parent_category` und `semantic_related` liegen in zwei verschiedenen Haupttextblöcken, `further_information` ausschließlich im Block `further_information`. Intro, Fazit und Tabelle zählen nicht als Haupttext.
+Interne Links: exakt 3; **ausschließlich auf bestehende WordPress-Kategorien oder veröffentlichte WordPress-Seiten, niemals auf einzelne Beiträge/Artikel**. Die eine bestehende Link-Zielentscheidung vor dem Writer prüft Zieltyp, Erreichbarkeit und Themenbezug. `parent_category` und `semantic_related` liegen in zwei verschiedenen Haupttextblöcken, `further_information` ausschließlich im Block `further_information`. Intro, Fazit und Tabelle zählen nicht als Haupttext.
 
 Repository: `hallo-netizen/affiliate-pferdeportal`
 
