@@ -1,3 +1,14 @@
+## 18.11.2026 – AKTUELL: Erweiterte Funktionsprüfung, **KEINE neue Pluginversion**
+
+- Maßgebliche ZIP unverändert: `Texterstellung_Hobbydepot_0.4.23_BEREINIGT_TEST.zip` SHA256 `c50caa2ed263fb1f42f4cd485ecb2d23bbece6df072d9cf8f55774161aa6e715`.
+- **32/33 lokale PHP-WordPress-Mock-Tests erfolgreich**; 1 bestätigter Funktionsfehler: Diagnoseseite bricht bei der schon vorhandenen `K0_PORTAL_ADAPTER_PENDING`-Sperre ab. 5/6 Backendseiten darstellbar.
+- Echte MINI-Auftragsregal-Prüfung: speichern, wiederholen, Konflikte und unbekannte Kategorie; unveränderter Original-PSERC-Importer erstellt im Mock den Entwurf und bindet den als exportiert simulierten TXE-Auftrag korrekt. **Keine reale K0-Textproduktion, kein vollständiger Export → K0 → Rückgabe-Durchlauf**.
+- ZIP 87/87, PHP 78/78, JSON 8/8. Alte Konfliktsperren aktiv. Keine echten Provider-/WordPress-Schreibzugriffe. Keine Datei im Plugin verändert, keine neue Architekturschicht.
+- **Aktueller Blocker für vollständige Nutzbarkeit:** K0-Artikelartenquelle im ursprünglichen Hobbydepot-Arbeitsstand steht auf `K0_PORTAL_ADAPTER_PENDING` und Diagnose behandelt den Zustand nicht. Nach verbindlicher Nutzerweisung sind diese Funktionsänderungen ohne gesonderten Auftrag NICHT vorzunehmen. Nicht für Live installieren.
+- Vollbeleg: `ERWEITERTE_FUNKTIONSPRUEFUNG_0423_20261118.md` sowie MD/JSON im `/hobbydepot/TEXTERSTELLUNG/PRUEFBERICHTE/`.
+
+---
+
 ## 18.11.2026 – AKTUELLER STAND: Zusatzabnahme der REINEN 0.4.23-Bereinigung
 
 - **Keine neue Pluginversion.** Maßgeblich bleibt `Texterstellung_Hobbydepot_0.4.23_BEREINIGT_TEST.zip` in `/hobbydepot/TEXTERSTELLUNG/ARBEITSKOPIEN/`. Keine Architekturänderung, keine extra Plugins.
