@@ -2,7 +2,7 @@ name: K0 portal-neutral selftest
 
 on:
   push:
-    branches: [konzept0-portal-neutral-20261002, work/k0-canonical-c-links-writer-return-20261118]
+    branches: [konzept0-portal-neutral-20261002]
   workflow_dispatch:
 
 permissions:
