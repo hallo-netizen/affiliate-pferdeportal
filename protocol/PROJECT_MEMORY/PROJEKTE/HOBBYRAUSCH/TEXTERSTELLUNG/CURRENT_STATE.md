@@ -1,3 +1,12 @@
+## 18.11.2026 – SCREENSHOT RECHERCHE (18:19): NÄCHSTER KLICK KLARGESTELLT
+
+- Betreiber ist sichtbar unter **Texterstellung → Recherche** und sieht `RECHERCHE GESTOPPT / PLUGIN_ACTIVATED_MANUAL_START_REQUIRED` sowie den vorhandenen Hinweis `PSTE-Migration noch nicht abgeschlossen`. Dies ist ein sicherer Aktualisierungsstopp, keine automatisch startende Recherche.
+- **Quellcode der geprüften 0.4.24.2-ZIP:** DataForSEO Login/Passwort befinden sich **nicht auf „Recherche“**, sondern **Texterstellung → Diagnose** im Abschnitt `DataForSEO Zugangsdaten`, Button `Zugangsdaten der Originalengine speichern`. Keine Kosten durch Speichern.
+- Weitere Bedienung: Login/Passwort dort eintragen, speichern, **keinen Recherchestart** auslösen; vorher PSTE-Migration/Kategoriebestand klären. K0-Sperre bleibt.
+- Versionsstand und Pluginbüro bleiben **0.4.24.2** unverändert. Beleg `SCREENSHOT_RECHERCHE_CREDENTIALS_KLICKPFAD_20261118.md`.
+
+---
+
 ## 18.11.2026 – AKTUELL UND MAßGEBLICH: Texterstellung 0.4.24.2, echte Diagnose liegt vor
 
 - **Neue Ersatz-ZIP** `Texterstellung_Hobbydepot_0.4.24.2_TESTOBERFLAECHE_BEREINIGT.zip`; WordPress-Pfad unverändert `texterstellung-hobbydepot/texterstellung.php`. SHA256 `63812431443f8de47a04cbcf3879e3b5fb524c88fb21541562eb28c159ee9293`, **503056 Bytes**. Hauptablage `/Hobby Depot/Plugin-Büro/`, Fachablage `/hobbydepot/TEXTERSTELLUNG/INSTALLATIONSKANDIDATEN/`; beides hochgeladen.
