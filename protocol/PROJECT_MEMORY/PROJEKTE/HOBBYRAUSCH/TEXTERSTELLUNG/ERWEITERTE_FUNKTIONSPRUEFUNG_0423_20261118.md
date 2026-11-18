@@ -25,3 +25,11 @@ Die Bereinigung ist erledigt, die technischen Zusatztests sind protokolliert; **
   - `/hobbydepot/TEXTERSTELLUNG/PRUEFBERICHTE/HOBBYDEPOT_0423_ERWEITERTE_FUNKTIONSPRUEFUNG.md`
   - `/hobbydepot/TEXTERSTELLUNG/PRUEFBERICHTE/HOBBYDEPOT_0423_ERWEITERTE_FUNKTIONSPRUEFUNG.json`
 - **Kein produktiver Lauf und keine Liveinstallation.** Für eine echte WordPress-Endabnahme brauchen die bestehende K0-Freigabe und der Diagnosetest zuerst einen definierten zulässigen Stand. Keine neue Arbeit in WordPress oder GitHub nach dieser Dokumentation angenommen.
+
+## Zusätzlicher Beleg: tatsächlich gültige K0-Quelle (18.11.2026)
+
+- K0-Sole-Current `konzept0-portal-neutral-20261002:K0_CURRENT_STATE.json` tatsächlich gelesen: `READY_FOR_FRESH_K0_START`. K0-Regelquellen vorhanden, keine Behauptung mehr, die K0-Regeln fehlten insgesamt.
+- `RULE_VALUES.json`: Beratung, FAQ, Pflege, Vergleich; `ARTIKELTYPEN/Anleitung.json`: `status=READY`. Originalregelpaket nicht geändert.
+- `K0_PORTAL_REGISTRY.json` hat für Profil `portal_id=hobby` ausschließlich `category_exact=["discgolf-beratung"]`, `category_prefixes=[]`. `engine/k0_portal_resolver.py` überprüft genau diese Listen und verweist für übrige Kategorien auf die Kategorieliste des **Pferdeatelier**. Keine belegte Hobbydepot-weite Kategoriezuordnung.
+- Also: Ein blindes Freigeben von `K0_PORTAL_ADAPTER_PENDING` würde zwar die lokale Sperre umgehen, aber eine **portalweit sichere K0-Zuordnung nicht nachweisen**. Nicht vornehmen. Das ist kein Auftrag für Neuentwicklung, nur ein belegter Blocker der vorhandenen Herkunftsdaten.
+- Konkrete Grenzen bleiben: reine Fachbereinigung erledigt, Plugin unverändert; K0-Portalzuordnung, vorhandene Diagnose und echter WP-/MINI-Endlauf nicht freigegeben.
