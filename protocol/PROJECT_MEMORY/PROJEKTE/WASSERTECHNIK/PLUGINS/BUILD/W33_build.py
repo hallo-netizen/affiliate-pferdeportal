@@ -193,6 +193,13 @@ def main() -> None:
     print(res.stdout, end="")
     require(res.returncode==0,"QA FAILURE: "+res.stderr+" "+res.stdout)
 
+    # W41: one documented frontend/menu compatibility regression (no WP or API writes).
+    navqa=PROJECT/"PRUEFUNG"/"W41_NAVIGATION_HISTORIE_GESAMT_QA.php"
+    require(navqa.is_file(),"W41 frontend/nav regression missing")
+    nav_result=subprocess.run(["php",str(navqa),str(pkg)],capture_output=True,text=True,timeout=30)
+    print(nav_result.stdout,end="")
+    require(nav_result.returncode==0 and "PASS W41 NAVIGATION: 10/10" in nav_result.stdout,
+            "W41 frontend/nav compatibility FAILED: "+nav_result.stderr+nav_result.stdout)
     # Genuine end-to-end simulation of one explicit approved W35 import. Every
     # scenario runs in its own PHP process; no live WordPress or paid API requests.
     w35qa=PROJECT/"PRUEFUNG"/"W35_WP_IMPORT_ENDTOEND_QA.php"
