@@ -52,7 +52,7 @@ final class Wassertechnik_W32_Navigation {
     }
     /**
      * One owner list read per actual menu render. This replaces the former
-     * up to 79+ per-product get_page_by_path() database lookups.
+     * repeated per-product database lookups.
      * No new admin decision, no writes, and no cache invalidation policy.
      */
     private static function published_owner_links(array $plan, array $paths): array {
