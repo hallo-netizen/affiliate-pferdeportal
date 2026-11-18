@@ -1,3 +1,9 @@
+# Aktueller Stand 18.11.2026 – Gemeinsame Texterstellung 0.5.2-dev.1 (intern)
+
+**Hab 62/62 und Universal 51/51 lokale Funktionstests bestanden**, je 82/82 PHP und 9/9 JSON; zwei ZIPs aus identischer Codebasis. Reale WordPress-Kategorien liefern jetzt portalfreie Recherche-Ausgangspunkte ohne voreilige Artikelart- oder SEO-Entscheidung. Original-K0-Fünffeldprüfer: korrektes Paket angenommen, verbotene Erweiterungen abgewiesen. Historisches GitHub-K0-Register ohne Hab/Robotik/Wasser; echter K0/DataForSEO/WordPress-Lauf ausstehend. Daher KEIN Installationsdownload und Produktionssperre bleibt aktiv. Alle Artefakte im jeweiligen Library-Büro `V052` gespeichert; genaue Nachweise in `UNIVERSAL_CORE_V052_QA_STAND_20261118.md`.
+
+---
+
 # Geprüfter 0.5.1-Quellstand (fortgeschrieben 18.11.2026)
 
 **Nicht installierbares internes Entwicklungsarchiv, kein Plugin-Download.** Hab 39/39 und Universal 28/28 lokale Funktionstests, je 80/80 PHP und 9/9 JSON, deterministische ZIPs. Hab mit bestätigtem aktiven WP-Kategorie-Snapshot; Portalwechsel und alte Pferdeatelier-Auftragsdaten sicher isoliert. Beide vollständigen ZIPs, Tests und gemeinsamer Quellcode in den Library-Büros unter `V051`. Recherche- und K0-Echtfreigabe weiter OFFEN. Details: `UNIVERSAL_CORE_V051_QA_STAND_20261118.md`.
