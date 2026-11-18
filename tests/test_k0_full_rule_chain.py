@@ -111,13 +111,19 @@ class K0LinkRegressionTests(unittest.TestCase):
         links[1]['href']='/category/zuegel-beratung/'
         links[2]['href']='/artikel/lenken/'
         calls=[]
-        def categories(url):
+        def wordpress(url):
             calls.append(url)
             slug=url.rsplit('=',1)[-1]
-            return [{'slug':slug,'count':2}]
-        report=verify_live_link_targets(p['rule_context'],'https://example.org',categories,lambda url:'<html><body>Artikel</body></html>')
-        self.assertEqual(report,{'status':'PASS','checked':3})
-        self.assertEqual(len(calls),2)
+            if '/categories?' in url:
+                return [] if slug=='lenken' else [{'slug':slug,'name':'Kategorie '+slug,'count':2,'link':'https://example.org/category/'+slug+'/'}]
+            if '/posts?' in url:
+                return [{'slug':'lenken','status':'publish','link':'https://example.org/artikel/lenken/','title':{'rendered':'Lenken'}}]
+            return []
+        report=verify_live_link_targets(p['rule_context'],'https://example.org',wordpress,lambda url:'<html><body>Artikel</body></html>')
+        self.assertEqual(report['status'],'PASS')
+        self.assertEqual(report['checked'],3)
+        self.assertEqual([x['official_name'] for x in report['canonical_links']],['Kategorie zuegel-faq','Kategorie zuegel-beratung','Lenken'])
+        self.assertEqual(len(calls),4)
 
     def test_live_target_missing_category_blocks_before_writer(self):
         p,_=package_from_article(make_base())
@@ -130,6 +136,16 @@ class K0LinkRegressionTests(unittest.TestCase):
         p['rule_context']['bound_links'][1]['href']='/category/empty-beratung/'
         with self.assertRaisesRegex(Blocked,'K0_LINK_TARGET_CATEGORY_EMPTY'):
             verify_live_link_targets(p['rule_context'],'https://example.org',lambda url:[{'slug':'empty-beratung','count':0}],lambda url:'<html></html>')
+
+    def test_official_c_title_uses_existing_bound_pair_rule_only(self):
+        a=make_base()
+        a['link_registry'][0]['official_name']=a['bound_links'][0]['anchor']
+        good={x['rule_id']:x for x in structural_receipts(a)}
+        self.assertEqual(good['links.bound_pairs_exact']['status'],'PASS')
+        a['link_registry'][0]['official_name']='Ein anderer offizieller C-Name'
+        bad={x['rule_id']:x for x in structural_receipts(a)}
+        self.assertEqual(bad['links.bound_pairs_exact']['status'],'FAIL')
+        self.assertNotIn('links.canonical_name_second_gate',bad)
 
     def test_existing_section_placement_rejects_detached_nav_links(self):
         a=make_base()
