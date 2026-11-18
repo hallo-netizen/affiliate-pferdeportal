@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Weidehaltung für das eigene Pferd Schritt für Schritt organisieren",
+      "target_keyword": "Wie kann ich die Weidehaltung meines Pferdes organisieren?",
+      "category": "alltags-pferde-haltungsformen",
+      "article_type": "Anleitung",
+      "plan_slot": "c5ab76c2500572af65b473e4fb464774fdd77393d76aa12802a93bf8f845d5ba"
+    }
+  ],
+  "batch_sha256": "2f8a63061f9ed76ed2162701764d3862e44ef117ce13fed04768632e61eb8013"
+}
