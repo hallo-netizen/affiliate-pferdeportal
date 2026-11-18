@@ -18,3 +18,12 @@
 - Pferde-Kategorie- und Seed-Daten sind entfernt; die alten Pferde-Journal-/Tarif-Sonderrouten für Hobbydepot stillgelegt. Nur auf hobbydepot.de administrativ aktivierbar.
 - **Noch keine Produktionsfreigabe:** Kategorieabgleich HD-004 → Recherche-/MINI-Vertrag nicht fertig; kein WordPress-DataForSEO-K0-Endtest. Automatischer fachlicher Start bleibt gesperrt.
 - Vollständiger Einzelbeleg: `PORTIERUNG_0.4.24_INSTALLATIONSKANDIDAT_20261116.md` im gleichen Büro.
+
+## 18.11.2026 – vollständiger Quellaudit 0.4.25
+
+- **Neue getrennte Arbeitskopie 0.4.25 im Hobbydepot-Dateienbüro; NICHT INSTALLIEREN.** SHA-256 `d16f0950de6792313a1e9894740a51f15e92b20644d7584d04a06d75b8e2cde7`.
+- Pferde-Spezialfälle im redaktionellen Programmcode entfernt. Der historische K0-Rückimportname bleibt genau zweimal als notwendige externe technische Kennung bestehen. Original-PSERC-Importer unverändert.
+- Fehlerhafte Sperre gegen nachträgliches manuelles Veröffentlichen entfernt; Diagnose bereinigt. Stale-Research-Bootstrap und sämtliche manuellen Forschungs-/MINI-/K0-Produktionsaktionen technisch gesperrt, solange HD004→PSTE nicht **echt** verifiziert ist.
+- **79/79 PHP-Lint; 16/16 lokale Vertragstests; 4/4 Bootstrap-Tests; 88/88 ZIP-Dateien PASS.** Das sind keine realen WordPress-/DataForSEO-/K0-Echtläufe.
+- **Genau eine offene fachliche Arbeit:** HD004 read-only Kategorieabbildung aus dem echten WordPress nachweisen, dann einmaliger vollständiger Durchlauf. Keine Produktionsfreigabe und keine Benutzerinstallation bis dahin.
+- Beleg im gleichen Büro: `QUELLENAUDIT_KISS_0425_20261118.md`. Ausführlicher Bericht und ZIP in `/hobbydepot/TEXTERSTELLUNG/`.
