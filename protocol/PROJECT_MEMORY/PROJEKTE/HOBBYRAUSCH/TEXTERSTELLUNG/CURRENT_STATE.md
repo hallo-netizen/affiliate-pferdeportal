@@ -27,3 +27,12 @@
 - **79/79 PHP-Lint; 16/16 lokale Vertragstests; 4/4 Bootstrap-Tests; 88/88 ZIP-Dateien PASS.** Das sind keine realen WordPress-/DataForSEO-/K0-Echtläufe.
 - **Genau eine offene fachliche Arbeit:** HD004 read-only Kategorieabbildung aus dem echten WordPress nachweisen, dann einmaliger vollständiger Durchlauf. Keine Produktionsfreigabe und keine Benutzerinstallation bis dahin.
 - Beleg im gleichen Büro: `QUELLENAUDIT_KISS_0425_20261118.md`. Ausführlicher Bericht und ZIP in `/hobbydepot/TEXTERSTELLUNG/`.
+
+## 18.11.2026 – HD004-Originalcode und 0.4.26-Arbeitsstand
+
+- Letzter überprüfter Source: `HOBBYDEPOT_TEXTERSTELLUNG_0.4.26_QUELLE_NICHT_INSTALLIEREN.zip` im Hobbydepot-Dateienbüro; vorherige 0.4.25 unverändert archiviert.
+- Original-HD004 1.0.0 aus GitHub-ZIP **tatsächlich geöffnet und geprüft**; vorhandene Runtime-API belegt, aktuelle Live-Werte noch nicht geprüft.
+- Die vorhandene Texterstellungs-Diagnose liest künftig eine reine HD004-Kategorieübersicht: keine neue Kategorieentscheidung und kein weiteres Diagnose-Plugin.
+- Tests: 80/80 PHP-Lint, 89/89 ZIP, 16/16 Bestand, 4/4 Start, 10/10 neue HD004-Simulationen. Original-PSERC-K0 unverändert.
+- Keine Livefreigabe, keine WordPress-/DataForSEO-/K0-Echtprüfung. Keine Benutzerinstallation. Fachliche Kategorie-/Artikelart-Anbindung bleibt die EINZIGE offene Entwicklungsaufgabe.
+- Einzelbeleg: `HD004_BINDUNG_ARBEITSSTAND_0426_20261118.md` in diesem Büro; Dateienbericht `/hobbydepot/TEXTERSTELLUNG/PRUEFBERICHTE/HOBBYDEPOT_TEXTERSTELLUNG_0.4.26_ZWISCHENSTAND.md`.
