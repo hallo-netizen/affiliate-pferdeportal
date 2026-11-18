@@ -224,14 +224,14 @@
       },
       {
         "role": "semantic_related",
-        "href": "/category/pferdewissen-grundlagen/",
-        "anchor": "Pferdewissen & Grundlagen",
+        "href": "/weidepflegegeraete-im-vergleich-wichtige-bauarten-und-unterschiede/",
+        "anchor": "Geräte für die Weidepflege im Vergleich – Bauarten und Unterschiede",
         "block": "risks"
       },
       {
         "role": "further_information",
-        "href": "/category/gesundheit-regeneration-kuehlgamaschen-faq/",
-        "anchor": "FAQ Kühlgamaschen",
+        "href": "/brauche-ich-eine-genehmigung-fuer-ein-weidezelt-fuer-pferde/",
+        "anchor": "Brauche ich eine Genehmigung für ein Weidezelt für Pferde?",
         "block": "further_information"
       }
     ],
@@ -241,11 +241,11 @@
         "active": true
       },
       {
-        "href": "/category/pferdewissen-grundlagen/",
+        "href": "/weidepflegegeraete-im-vergleich-wichtige-bauarten-und-unterschiede/",
         "active": true
       },
       {
-        "href": "/category/gesundheit-regeneration-kuehlgamaschen-faq/",
+        "href": "/brauche-ich-eine-genehmigung-fuer-ein-weidezelt-fuer-pferde/",
         "active": true
       }
     ],
