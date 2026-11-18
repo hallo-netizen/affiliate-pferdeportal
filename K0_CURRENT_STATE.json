@@ -104,10 +104,11 @@
     "owner_single_decision_20261110": "SEARCH_INTENT_TITLE_KEYWORD_ARTICLE_TYPE_CATEGORY_DECIDED_UPSTREAM_ONCE; K0_VERIFIES_UNCHANGED_BINDING_AND_WRITTEN_ARTICLE_ONLY"
   },
   "link_distribution": {
-    "rule": "EXACTLY_3_INTERNAL_LINKS; parent_category + semantic_related in distinct main-text blocks, further_information in further_information only; each target must be authoritative existing C-category or published C-article, and each visible link text must be the exact official WordPress C name/title; the writer makes surrounding German prose grammatical; original links.bound_pairs_exact returns mismatches to same writer job without creating a second checker.",
+    "rule": "EXACTLY_3_INTERNAL_LINKS; parent_category + semantic_related in distinct main-text blocks, further_information in further_information only; each target must be authoritative existing C-category or published C-article, and each visible link text must be the exact official WordPress C name/title; the writer makes surrounding German prose grammatical; original links.bound_pairs_exact returns mismatches to same writer job without creating a second checker. semantic_related and further_information MUST match the current article's specific topic according to the existing pre-writer target resolution; broad or unrelated fallback destinations are forbidden, even if published and link-count correct.",
     "canonical_names_bound_pre_writer": true,
     "single_checker_rule_id": "links.bound_pairs_exact",
-    "repair_owner": "SAME_K0_WRITER_JOB"
+    "repair_owner": "SAME_K0_WRITER_JOB",
+    "topic_match_owner": "EXISTING_PRE_WRITER_C_TARGET_RESOLUTION"
   },
   "old_chat_or_archive_authority": false,
   "publish_allowed": false,
