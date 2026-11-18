@@ -168,6 +168,7 @@ jobs:
           assert int(x['all_rules_required_receipt_count'])>0,x
           print('K0_ALL_RULES_PRE_LT68_PASS')
           PY
+          fi
 
       - name: Download exact LanguageTool 6.8
         if: env.K0_REWRITE_REQUIRED != '1'
