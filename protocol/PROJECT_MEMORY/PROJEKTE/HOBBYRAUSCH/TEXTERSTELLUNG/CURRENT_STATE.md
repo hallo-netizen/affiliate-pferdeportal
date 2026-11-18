@@ -1,3 +1,13 @@
+## 18.11.2026 – AKTUELLER NUTZERSTAND: Plugin 0.4.24.1 gesichert, Test-UI für nächstes Update notiert
+
+- **Aktuelle ZIP** `Texterstellung_Hobbydepot_0.4.24.1_ERSETZEN.zip` im echten Pluginbüro `/Hobby Depot/Plugin-Büro/` erneut geprüft: SHA256 `55eeeb3beabeac2c316617cdb67e3934d51ae75b6d3568e0e3fb0a1147426b36`, 503435 Bytes, 87 ZIP-Einträge, 0 CRC-Fehler, Hauptdatei `texterstellung-hobbydepot/texterstellung.php` Version 0.4.24.1. **Keine Codeänderung dieser Runde.**
+- Büro-eigene Akte `/Hobby Depot/Plugin-Büro/Texterstellung-CURRENT.md` erstellt; bestehendes globales `CURRENT.md` der Bildzentrale bewusst unverändert.
+- Neuer Betreiber-Screenshot: `Texterstellung 0.4.20 KISS – TEST`, Testinstallations-Checkbox + Freischaltbutton auf normaler Domain `hobby-depot.de`. **Nicht anklicken.**
+- **Nächste angeforderte Änderung:** unnötige alte Testmaske und KISS–TEST-Überschrift entfernen, **nur bestehende UI bereinigen**, keine Architektur/Eigenentwicklung. Der alte Test-Gate-Code und fachliche K0-/Recherche-/Import-/Publish-Sperren dürfen dabei nicht unbemerkt aufgehoben werden. K0-Produktionsfreigabe ist nicht nachgewiesen.
+- Bildschirmbeleg und Arbeitsumfang: `PLUGINBUERO_SCREENSHOT_TESTUI_20261118.md`. Keine aktualisierte Installations-ZIP in dieser Runde, **0.4.24.1 bleibt CURRENT**.
+
+---
+
 ## 18.11.2026 – MASSGEBLICHES ZIP-RELEASE FÜR ERSETZEN: 0.4.24.1
 
 - Nutzer-Screenshot bestätigt: installiert `0.4.24`, zuvor hochgeladen `0.4.23-hobbydepot-bereinigung.2` → WordPress meldet niedrigere Versionsnummer. **Behoben** durch genau eine Änderung im vorhandenen ZIP: Pluginheader `Version: 0.4.24.1`. Keine Architektur-/Funktionsänderung.
