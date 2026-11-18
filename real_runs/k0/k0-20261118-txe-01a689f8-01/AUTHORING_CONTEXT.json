@@ -20,10 +20,6 @@
           "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11820628/"
         },
         {
-          "source_title": "UC Davis Ringworm in Horses",
-          "source_url": "https://ceh.vetmed.ucdavis.edu/health-topics/ringworm-horses-dermatophytosis"
-        },
-        {
           "source_title": "MSD Veterinary Manual Dermatophytosis in Horses",
           "source_url": "https://www.msdvetmanual.com/integumentary-system/dermatophytosis/dermatophytosis-in-horses"
         }
@@ -31,8 +27,8 @@
       "claims": [
         "Bestimmte Inhaltsstoffe von Lebermoos zeigen in Laborstudien eine pilzhemmende Aktivität. Das ist noch kein Wirksamkeitsnachweis als Behandlung am Pferd.",
         "Lebermoos-Extrakte wurden in Laboruntersuchungen unter anderem gegenüber bestimmten Pilzen untersucht. Daraus folgt nicht, dass ein Pflegespray Hautpilz beim Pferd sicher heilt.",
-        "Hautpilz kann beim Pferd unter anderem mit kreisförmigen kahlen Stellen und Juckreiz auffallen; andere Erkrankungen können ähnlich aussehen.",
-        "Eine äußerliche Hautveränderung allein beweist keine Pilzerkrankung. Der Verdacht muss tierärztlich abgeklärt werden.",
+        "Bei einer Dermatophytose des Pferdes können Krusten, Haarverlust und Hautrötung entstehen.",
+        "Ähnliche Hautveränderungen können auch andere Erkrankungen verursachen, darunter bakterielle Haarbalgentzündung oder Dermatophilose.",
         "Bei Verdacht auf Dermatophytose können Haar- und Hautproben unter dem Mikroskop und mit Pilzkultur untersucht werden.",
         "Bestätigter Hautpilz erfordert neben tierärztlicher Behandlung auch Maßnahmen gegen die Übertragung über Geräte und Kontakt."
       ],
@@ -79,22 +75,22 @@
         ]
       },
       "F3": {
-        "source_title": "UC Davis Ringworm in Horses",
-        "source_url": "https://ceh.vetmed.ucdavis.edu/health-topics/ringworm-horses-dermatophytosis",
-        "evidence_text": "The clinical signs of ringworm usually include an itchy, circular pattern of hair loss",
-        "statement": "Hautpilz kann beim Pferd unter anderem mit kreisförmigen kahlen Stellen und Juckreiz auffallen; andere Erkrankungen können ähnlich aussehen.",
-        "evidence_text_sha256": "c659b2d61995406707eaaa0a2d3ec2a35dd43fabc0afff6162fe447b5f8a0d9b",
+        "source_title": "MSD Veterinary Manual Dermatophytosis in Horses",
+        "source_url": "https://www.msdvetmanual.com/integumentary-system/dermatophytosis/dermatophytosis-in-horses",
+        "evidence_text": "Clinical signs often start as a papular eruption, followed by crusts, alopecia, and erythema.",
+        "statement": "Bei einer Dermatophytose des Pferdes können Krusten, Haarverlust und Hautrötung entstehen.",
+        "evidence_text_sha256": "e5b7a8701d6209bc0c761fe3468e2707cf7408b0182c8a76e3bd589feda23d23",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F4": {
-        "source_title": "UC Davis Ringworm in Horses",
-        "source_url": "https://ceh.vetmed.ucdavis.edu/health-topics/ringworm-horses-dermatophytosis",
-        "evidence_text": "It is important to confirm the diagnosis as other conditions can mimic ringworm in appearance",
-        "statement": "Eine äußerliche Hautveränderung allein beweist keine Pilzerkrankung. Der Verdacht muss tierärztlich abgeklärt werden.",
-        "evidence_text_sha256": "730aaf596cc3f9496ba92ab3b0f2a150af7a754f1ecea4a0ecd35e0081f47ebf",
+        "source_title": "MSD Veterinary Manual Dermatophytosis in Horses",
+        "source_url": "https://www.msdvetmanual.com/integumentary-system/dermatophytosis/dermatophytosis-in-horses",
+        "evidence_text": "Differential diagnoses include dermatophilosis, pemphigus foliaceus (rarely), and bacterial folliculitis.",
+        "statement": "Ähnliche Hautveränderungen können auch andere Erkrankungen verursachen, darunter bakterielle Haarbalgentzündung oder Dermatophilose.",
+        "evidence_text_sha256": "33dafc39b30ed6c0f2ffa849632f5676f5c817c779204571c478b9b69e058e2b",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
