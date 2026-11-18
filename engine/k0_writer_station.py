@@ -13,6 +13,66 @@ PACKAGE_CONTRACT='K0_ARTICLE_PACKAGE_V1'
 SEAL_CONTRACT='K0_WRITER_SEAL_V1'
 AUTHORING_CONTEXT_CONTRACT='K0_AUTHORING_CONTEXT_V1'
 
+
+# The existing research owner alone approves the original publication site.
+# Official institutions/providers are intentionally curated, never inferred
+# from arbitrary self-declared source labels, domains ending in .org, or blogs.
+K0_OFFICIAL_SOURCE_HOSTS = frozenset({
+    'horseware.com',             # official manufacturer
+    'tierschutzbund.de',         # official animal-welfare association
+    'dlg.org',                   # official agricultural association
+    'worldhorsewelfare.org',     # official animal-welfare organisation
+    'umweltbundesamt.de',        # German federal authority
+    'tiho-hannover.de',          # veterinary university
+    'vetmeduni.ac.at',          # veterinary university
+})
+K0_OWN_PORTAL_SOURCE_HOSTS = frozenset({
+    'pferde-atelier.de', 'hobbydepot.de', 'hab-und-bewahr.de',
+})
+# One verified association document is published from its own dedicated
+# cloud bucket; never allow the whole shared hosting provider.
+K0_OFFICIAL_HOSTED_PATHS = {
+    'storage.googleapis.com': ('/worldhorsewelfare-cloud/',),
+}
+K0_GOVERNMENT_HOST_SUFFIXES = (
+    '.gov', '.gov.uk', '.bund.de', '.europa.eu', '.gouv.fr',
+    '.admin.ch', '.gov.au',
+)
+
+
+def _k0_research_source_quality_reason(url):
+    """Return None only for an official original publisher or Wikipedia article.
+
+    One source decision by the existing research owner, not a new workflow gate.
+    Official new domains must be explicitly approved here after verification.
+    """
+    from urllib.parse import urlsplit
+
+    try:
+        p = urlsplit(str(url or '').strip())
+        host = (p.hostname or '').lower().rstrip('.')
+        port = p.port
+    except ValueError:
+        return 'RESEARCH_SOURCE_URL_INVALID'
+    if (p.scheme != 'https' or not host or p.username or p.password
+            or port not in (None, 443)):
+        return 'RESEARCH_SOURCE_HTTPS_REQUIRED'
+    if any(host == own or host.endswith('.' + own)
+           for own in K0_OWN_PORTAL_SOURCE_HOSTS):
+        return 'RESEARCH_OWN_PORTAL_SOURCE_FORBIDDEN'
+    if host == 'wikipedia.org' or host.endswith('.wikipedia.org'):
+        return None if p.path.startswith('/wiki/') else 'RESEARCH_WIKIPEDIA_ARTICLE_REQUIRED'
+    if any(host == approved or host.endswith('.' + approved)
+           for approved in K0_OFFICIAL_SOURCE_HOSTS):
+        return None
+    if any(host.endswith(suffix) and len(host) > len(suffix)
+           for suffix in K0_GOVERNMENT_HOST_SUFFIXES):
+        return None
+    if any(p.path.startswith(prefix)
+           for prefix in K0_OFFICIAL_HOSTED_PATHS.get(host, ())):
+        return None
+    return 'RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL'
+
 class Blocked(RuntimeError):
     pass
 
@@ -46,6 +106,9 @@ def _k0_fetch_original_source_text(url):
         pass
 
     def safe_url(value):
+        # Redirects must not quietly leave the approved official publisher.
+        if _k0_research_source_quality_reason(value) is not None:
+            raise SourceReadError('SOURCE_REDIRECT_NOT_APPROVED_OFFICIAL')
         p = urllib.parse.urlsplit(value)
         host = p.hostname
         if (p.scheme != 'https' or not host or p.username or p.password
@@ -136,6 +199,17 @@ def research_owner_decision(context, identity, run_instance_id):
     problems=[]
     require_original=os.environ.get('K0_REQUIRE_ORIGINAL_SOURCE_PROOF')=='1'
     original_cache={}
+    source_quality_cache={}
+    source_quality_reported=set()
+    def check_source(url, fact_id):
+        # Cached per original URL: one domain decision, even with many claims.
+        if url not in source_quality_cache:
+            source_quality_cache[url]=_k0_research_source_quality_reason(url)
+        reason=source_quality_cache[url]
+        if reason is not None and url not in source_quality_reported:
+            problems.append({'fact_id':fact_id,'reason':reason,'source_url':url})
+            source_quality_reported.add(url)
+        return reason is None
     def normal(s):
         return ' '.join(unicodedata.normalize('NFKC',str(s or '')).casefold().split())
     for fact_id, claim in sorted(claims.items()):
@@ -143,6 +217,9 @@ def research_owner_decision(context, identity, run_instance_id):
             continue
         excerpt=str(claim.get('evidence_text') or '')
         statement=str(claim.get('statement') or '')
+        url=str(claim.get('source_url') or '').strip()
+        if require_original and not check_source(url, str(fact_id)):
+            continue
         if not excerpt.strip() or not statement.strip() or normal(excerpt)==normal(statement):
             problems.append({'fact_id':fact_id,'reason':'INDEPENDENT_ORIGINAL_SOURCE_EXCERPT_REQUIRED'})
         elif hashlib.sha256(excerpt.encode('utf-8')).hexdigest()!=str(claim.get('evidence_text_sha256') or ''):
@@ -158,6 +235,25 @@ def research_owner_decision(context, identity, run_instance_id):
                 continue
             if not _k0_original_normalize(excerpt) in original_text:
                 problems.append({'fact_id':fact_id,'reason':'ORIGINAL_SOURCE_EXCERPT_NOT_PROVEN'})
+    if require_original:
+        # The same research-owner decision covers all research inputs, not
+        # only facts later quoted in the article.
+        pc=context.get('production_context') or {}
+        fact_pack=pc.get('fact_pack') or {}
+        rc=context.get('rule_context') or {}
+        extra_groups=(
+            ('fact_pack', fact_pack.get('sources')),
+            ('comparison', rc.get('comparison_source_bindings')),
+            ('product', (pc.get('property_research') or {}).get('candidates')),
+            ('winner', [(pc.get('property_research') or {}).get('winner')]),
+        )
+        for label, rows in extra_groups:
+            if not isinstance(rows, list):
+                continue
+            for index, source in enumerate(rows):
+                if isinstance(source, dict) and source:
+                    check_source(str(source.get('source_url') or '').strip(),
+                                 label + ':' + str(index))
     if not problems:
         return None
     return {
