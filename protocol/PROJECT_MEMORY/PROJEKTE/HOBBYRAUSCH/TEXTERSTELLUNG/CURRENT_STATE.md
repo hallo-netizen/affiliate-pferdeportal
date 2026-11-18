@@ -42,3 +42,11 @@
 - Hobbydepot-Kopie nennt `authority=K0_PORTAL_ADAPTER_PENDING`; `TXE_K0_Article_Types::all()` verlangt aber zurecht `K0_RULE_VALUES_JSON` und meldet im lokalen Realcode-Aufruf `K0_ARTICLE_TYPE_AUTHORITY_UNAVAILABLE`. **Nicht freigeben und nicht durch bloßes Umbenennen reparieren.**
 - Im vorhandenen historischen Repo `hallo-netizen/k0-multiportal/quarantine/k0_sources/RULE_VALUES.json.source` stehen nur vier Arten mit Regeldefinitionen: Beratung, FAQ, Pflege, Vergleich. Die Hobbydepot-Vorliste mit zusätzlich Anleitung ist **nicht** als heutige produktive Regelquelle bestätigt. Die aktuelle K0-Typquelle muss vor Freigabe geprüft werden.
 - Die offen gebliebene Integration umfasst nun ausdrücklich sowohl (a) HD004→PSTE-Livekategorie-/Artikelartenbindung als auch (b) Abgleich mit der aktuellen K0-Regelautorität, beides innerhalb eines Sammelreleases; keine zusätzliche nachgelagerte Fachentscheidung.
+
+## 18.11.2026 – NEUER STAND 0.4.27 (Arbeitskopie, NICHT INSTALLIEREN)
+
+- Quelle 0.4.26; genau eine bisher zu schwache WordPress-Kategorieprüfung durch HD004-lesende Kategorie-/Hobbyseitenbindung ersetzt, keine zweite Entscheidung.
+- 20/20 synthetische Funktionstests; 81/81 PHP-Syntax; 90/90 ZIP; vier PSERC/K0-Importerdateien unverändert.
+- Arbeits-ZIP `/hobbydepot/TEXTERSTELLUNG/ARBEITSKOPIEN/HOBBYDEPOT_TEXTERSTELLUNG_0.4.27_QUELLE_NICHT_INSTALLIEREN.zip`, SHA256 `e4183bbc4da2e3516644b42923110380131b3c328295b8419c4467bc1ef9280a`.
+- **Restauftrag gebündelt:** gesamter PSTE-Recherchepfad muss die HD004-Struktur als alleinige Quelle benutzen; aktive WordPress-Zuordnung fehlt als Echtnachweis. K0-Multiportal-Repo ist Quarantäne, KEINE Typen- oder Portal-Freigabe. Nicht installieren.
+- Einzelprotokoll: `HD004_KATEGORIEBINDUNG_0427_20261118.md`; Prüfbericht in Hobbydepot-Dateienbüro.
