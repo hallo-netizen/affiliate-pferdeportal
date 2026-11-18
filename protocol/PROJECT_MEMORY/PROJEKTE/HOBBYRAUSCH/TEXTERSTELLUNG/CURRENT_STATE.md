@@ -1,3 +1,13 @@
+## 18.11.2026 – AKTUELLER STAND: FINALE QUELL- UND FUNKTIONSPRÜFUNG OHNE CODEÄNDERUNG
+
+- **Nur fachliche Pferdeatelier-Bereinigung** bleibt maßgeblich. ZIP: `Texterstellung_Hobbydepot_0.4.23_BEREINIGT_TEST.zip`, SHA256 `c50caa2ed263fb1f42f4cd485ecb2d23bbece6df072d9cf8f55774161aa6e715`. Keine neuere Codebasis/Architektur/Pluginversion.
+- Im aktuellen Lauf direkt erneut geprüft: 87 ZIP-CRC, 78 PHP-Syntax, 8 JSON, 3 Startsimulationen, 24/25 WP-Funktionssimulationen und 5/5 Original-PSERC-Importerfälle. **32/33 PASS; Diagnose FAIL: K0_ARTICLE_TYPE_AUTHORITY_UNAVAILABLE**.
+- Pferdeatelier-Volltextscan: nur 2 historische technische Rückimport-Vertragskennungen in PHP (plus 1 Hinweis in README). Alle anderen fachlichen Pferde-Bezüge entfernt.
+- K0-Hobbyprofil ist nur für `discgolf-beratung` bekannt; produktive Registrierung anderer Hobbydepot-Kategorien nicht belegt. Staging-/Echt-K0-Test noch offen. Keine Livefreigabe.
+- Neuer Bericht: `ABNAHME_READONLY_0423_20261118.md`, ausführliche MD/JSON-Nachweise im Hobbydepot-Dateienbüro `PRUEFBERICHTE`. **Ohne Änderung des Plugins.**
+
+---
+
 ## 18.11.2026 – NACHTRAG zur 0.4.23 Funktionsprüfung (MAßGEBLICH)
 - **32/33 lokale Tests PASS**, 1 Diagnose-Funktionsfehler, Original-WP-Entwurfsimport in Simulation funktionierte. Keine Pluginänderung.
 - Das echte K0-Current `konzept0-portal-neutral-20261002` ist `READY_FOR_FRESH_K0_START`, inklusive 4 Typen und `Anleitung=READY` (nicht mehr pauschal „K0-Regeln unbekannt“ behaupten).
