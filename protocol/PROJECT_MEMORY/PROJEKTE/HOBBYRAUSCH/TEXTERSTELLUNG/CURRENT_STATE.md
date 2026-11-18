@@ -1,3 +1,14 @@
+## 18.11.2026 – AKTUELL UND MAßGEBLICH: Texterstellung 0.4.24.2, echte Diagnose liegt vor
+
+- **Neue Ersatz-ZIP** `Texterstellung_Hobbydepot_0.4.24.2_TESTOBERFLAECHE_BEREINIGT.zip`; WordPress-Pfad unverändert `texterstellung-hobbydepot/texterstellung.php`. SHA256 `63812431443f8de47a04cbcf3879e3b5fb524c88fb21541562eb28c159ee9293`, **503056 Bytes**. Hauptablage `/Hobby Depot/Plugin-Büro/`, Fachablage `/hobbydepot/TEXTERSTELLUNG/INSTALLATIONSKANDIDATEN/`; beides hochgeladen.
+- 0.4.24.2: **nur Hauptdatei geändert**, **86/87 Dateien bytegleich**; alte `0.4.20 KISS – TEST`-Überschrift, Testmaske/Checkbox/Bestätigungsbutton und störende Testmeldungen aus sichtbarem Backend entfernt. **Keine** neuen PHP-Dateien, Hooks, Architektur, K0-/Recherche-/MINI-/PSERC-/Publish-Regeländerungen. Sicherheitsgates bleiben; nicht bestätigte Installationen erhalten Sperrmeldung.
+- Reale Nutzerdiagnose `texterstellung-diagnose-20261118-165236.json`, plugin=0.4.24.1, im Fachbüro archiviert: `site_host=www.hobby-depot.de`, `wp_environment=production`, **aber alte Testbestätigung=true** (kein Staging-Beweis); 0 Aufträge, 0 Recherchen, DataForSEO-Zugangsdaten fehlen, K0-Artikelarten `BLOCKED: K0_ARTICLE_TYPE_AUTHORITY_UNAVAILABLE`. Diagnose bereits vorhanden – **nicht erneut anfordern**.
+- PHP-Lint **78/78**, JSON **8/8**, ZIP **87/87**, lokale Tests **46/46 PASS**: 3 Boot, 25 Funktion, 5 Originalimport, 13 UI/Sperren. Noch **KEIN Live-/Provider-/K0-End-to-End-PASS**. WordPress-Installation der 0.4.24.2 noch nicht bestätigt.
+- Neue eigene Current-Akte `/Hobby Depot/Plugin-Büro/Texterstellung-CURRENT.md` überschrieben, globales Pluginbüro-CURRENT anderer Plugins unangetastet. Vollbeleg: `DIAGNOSE_UND_TESTOBERFLAECHE_04242_20261118.md`.
+- **Nutzer-Schritt:** 0.4.24.2 via WordPress-„Ersetzen“ einspielen und Übersicht einmal ansehen, ob Maske weg und 6 Bereiche vorhanden. Keine kostenpflichtige Recherche / K0-Produktion beginnen. Kein zusätzlicher Diagnoseexport.
+
+---
+
 ## 18.11.2026 – AKTUELLER NUTZERSTAND: Plugin 0.4.24.1 gesichert, Test-UI für nächstes Update notiert
 
 - **Aktuelle ZIP** `Texterstellung_Hobbydepot_0.4.24.1_ERSETZEN.zip` im echten Pluginbüro `/Hobby Depot/Plugin-Büro/` erneut geprüft: SHA256 `55eeeb3beabeac2c316617cdb67e3934d51ae75b6d3568e0e3fb0a1147426b36`, 503435 Bytes, 87 ZIP-Einträge, 0 CRC-Fehler, Hauptdatei `texterstellung-hobbydepot/texterstellung.php` Version 0.4.24.1. **Keine Codeänderung dieser Runde.**
