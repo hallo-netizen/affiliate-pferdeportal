@@ -22,7 +22,7 @@ W6 = PROJECT / "KATEGORIEKONZEPT" / "W6_WORDPRESS_IMPORTVORSCHAU_218_20261114.js
 W28 = PROJECT / "PRUEFUNG" / "W28_SEO_EINMALHANDOFF_81_20261116.json"
 W32 = PLUGINS / "ASSETS" / "W32_wassertechnik-navigation.json"
 BUILD_DIR = Path(os.environ.get("W33_BUILD_DIR", str(PROJECT / "PRUEFUNG" / "_w33_offline_build")))
-OUT = BUILD_DIR / "WASSERTECHNIK_WT001_0.1.11_W41_GESAMTPRUEFUNG_NICHT_INSTALLIEREN.zip"
+OUT = BUILD_DIR / "WASSERTECHNIK_WT001_0.1.12_W41_GESAMTPRUEFUNG_NICHT_INSTALLIEREN.zip"
 ROOT = "wassertechnik-kategorie-workflow"
 
 def require(test: bool, msg: str) -> None:
@@ -57,13 +57,18 @@ def main() -> None:
         "class-wassertechnik-seo-handoff.php": "W30_seo_handoff_readonly.php",
         "class-wassertechnik-seo81-preview.php": "W39_class-wassertechnik-seo81-preview.php",
         "class-wassertechnik-seo81-paid-trait.php": "W39_seo81_paid_trait.php",
-        "class-wassertechnik-navigation.php": "W41_class-wassertechnik-navigation.php",
+        "class-wassertechnik-navigation.php": "W42_class-wassertechnik-navigation.php",
         "class-wassertechnik-inventory-readback.php": "W34_class-wassertechnik-inventory-readback.php",
     }
     for dest, src in additions.items():
         file = PLUGINS/"QUELLCODE"/src
         require(file.is_file(), "Missing vetted module "+str(file))
         shutil.copyfile(file, pkg/"includes"/dest)
+    # Hard gate: no repeating 79 product-by-product database lookups on frontend.
+    nav_source=(pkg/"includes"/"class-wassertechnik-navigation.php").read_text(encoding="utf-8")
+    require("get_page_by_path(" not in nav_source
+            and "get_posts([" in nav_source,
+            "W42 menu must use one list read, not individual product-page queries")
     # Inject ONE 81-only orchestration trait into the ORIGINAL PaidResearch class.
     # Existing 218-keyword functionality and provider parsers remain byte-identical
     # after removing this single trait line. No separate research plugin.
@@ -137,7 +142,7 @@ def main() -> None:
             "Original version expected")
     content=content.replace("Aktueller Fachplan W4:</strong> 8 Hauptbereiche, 19 Zwischenbereiche, 1 Industrieeinstieg, 6 Industrie-Landingvorschlaege, 79 Produktseiten, 105 Inhaltskategorien und 356 grobe Artikelideen. Kostenloser SEO-Pruefplan: 218 Begriffe.", "Fachplan W27:</strong> sieben kaufnahe Hauptbereiche (einschliesslich Pool und Teich), 71 vorhandene Kauf-Produktseiten, acht Industrie-Produktseiten und 81 neue noch SEO-ungepruefte Produkttypen. Der bisherige W4-SEO-Plan mit 218 Begriffen bleibt erhalten.")
     require("Aktueller Fachplan W4:" not in content, "Old contradictory eight-item homepage retained")
-    (pkg/"README.txt").write_text("WT001 0.1.11 - W41 GESAMT-REKONSTRUKTION / NICHT INSTALLIEREN\n"
+    (pkg/"README.txt").write_text("WT001 0.1.12 - W42 GESAMT-REKONSTRUKTION / NICHT INSTALLIEREN\n"
         "218 alte SEO Owner unveraendert; 81 neue Keywords nur nach expliziter SEO-Kostenfreigabe. "
         "W27 sieben Kaeufer-Hauptbereiche plus separater Industrie-Fachzugang.\n"
         "Nur EIN W35-WordPress-Importer fuer 219 Owner (218 alte plus Pool-Hub als Entwurf). "
@@ -145,8 +150,8 @@ def main() -> None:
         "Der alte W6-Neuner-Importer ist ausgetauscht, nicht parallel aktiv.\n"
         "Keine automatische WP-Schreibaktion oder kostenpflichtige SEO-Abfrage. "
         "Original 0.1.7 fehlt; deshalb NICHT installieren.\n", encoding="utf-8")
-    content=content.replace("Version: 0.1.4", "Version: 0.1.11")
-    content=content.replace("VERSION = '0.1.4'", "VERSION = '0.1.11'")
+    content=content.replace("Version: 0.1.4", "Version: 0.1.12")
+    content=content.replace("VERSION = '0.1.4'", "VERSION = '0.1.12'")
     content=content.replace("Kein Import oder Veroeffentlichen.", "Kein automatischer Import und keine automatische Veroeffentlichung.")
     # W41: W35 is the single import writer; the home screen must never say imports are impossible.
     content=content.replace("Es importiert oder veraendert keine Seiten und Kategorien.",
