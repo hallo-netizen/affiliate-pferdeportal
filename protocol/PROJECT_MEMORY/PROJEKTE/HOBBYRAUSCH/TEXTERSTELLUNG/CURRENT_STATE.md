@@ -1,3 +1,14 @@
+## 18.11.2026 – DataForSEO-Zugangsdaten vom Betreiber eingetragen; nächster echter Blocker PSTE-Migration
+
+- Betreiber hat die DataForSEO-Zugangsdaten im bestehenden Plugin **nach eigenen Angaben gespeichert**. Nicht nochmals nach Login/Passwort oder Diagnose fragen. Tatsächliches Speichergebnis noch nicht durch neue Live-Diagnose bestätigt.
+- Verbindliche 0.4.24.2-Quellprüfung: `txe_credentials_save` speichert nur die Schlüssel über `PSTE_Credentials::saveFromAdmin`; es startet keine kostenpflichtige Recherche. `TXE_Workshop::activate()` legt den bewusst manuell gestoppten Zustand `PLUGIN_ACTIVATED_MANUAL_START_REQUIRED` an. Der „Status einmal aktualisieren“-Link ist nur eine GET-Aktualisierung, **kein** Migrations- oder Freigabeknopf.
+- Das aktuelle echte WordPress-Screenshot zeigt **„Die originale PSTE-Migration ist noch nicht abgeschlossen“**. Laut Source verhindert `PSTE_Plugin::isReady()===false` die Kategorie-Recherche, und `txe_research_next` würde bei manuellem Start `ORIGINAL_PSTE_MIGRATION_REQUIRED` zurückgeben.
+- Die unveränderte Original-PSTE besitzt bereits `PSTE_Safe_Migration_Job::start()` und `::advance()`, aber die aktuelle TXE-Adminoberfläche registriert nur `txe_research*`, `credentials_save` und weitere vorhandene Aktionen – **keine Bedien-/POST-Verbindung zur bestehenden sicheren Migration**. Bloßer Seitenreload ist keine Lösung. Keine kostenpflichtige Recherche auslösen.
+- Nächster sachlich notwendiger Schritt: Die vorhandene sichere PSTE-Migration über den minimalen zulässigen Originalweg ausführbar machen, nach Datensicherung und mit eindeutiger Benutzerfreigabe, ohne neue Architektur oder zweite fachliche Entscheidungsstelle. Erst bei `PSTE_Plugin::isReady()` die Research-Kategorien und Kostenkontrolle prüfen. K0-Artikelarten weiter BLOCKED.
+- Maßgebliche ZIP unverändert `Texterstellung_Hobbydepot_0.4.24.2_TESTOBERFLAECHE_BEREINIGT.zip` im Hobbydepot-Pluginbüro. Diese Protokollierung hat KEIN Plugin gebaut und KEINE WordPress-/Datenbank-Migration gestartet.
+
+---
+
 ## 18.11.2026 – SCREENSHOT RECHERCHE (18:19): NÄCHSTER KLICK KLARGESTELLT
 
 - Betreiber ist sichtbar unter **Texterstellung → Recherche** und sieht `RECHERCHE GESTOPPT / PLUGIN_ACTIVATED_MANUAL_START_REQUIRED` sowie den vorhandenen Hinweis `PSTE-Migration noch nicht abgeschlossen`. Dies ist ein sicherer Aktualisierungsstopp, keine automatisch startende Recherche.
