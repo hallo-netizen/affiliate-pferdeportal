@@ -1,3 +1,9 @@
+# Verbindliche Ausgaberegel: nur freigegebene Plugin-ZIPs im Chat
+
+Ab 18.11.2026 nur **installationsfähige, abgenommene** Plugin-ZIP-Dateien zum Download ausgeben. Alle QA-ZIPs, Entwicklungsarchive, Test-JSON und Protokolle **ausschließlich im Büro ablegen**, nicht im Chat verlinken. Kleine Arbeitsschritte bündeln, fortlaufend Quelle, Fehler, Korrektur, Tests und Freigabestatus protokollieren. Der aktuelle 0.5.0-qa.1-Stand ist NICHT installierbar; K0 und Recherche noch offen. Näheres: `AUSGABEREGEL_NUR_INSTALLIERBARE_PLUGINS_20261118.md`.
+
+---
+
 # Aktueller Entwicklungsstand 18.11.2026: Texterstellung Universal 0.5.0-QA
 
 **Zwei QA-ZIP-Kandidaten aus derselben Quelle erzeugt und im Hab-/Universal-Dateibüro dauerhaft gespeichert.** 80 PHP und 9 JSON pro Paket geprueft; Hab 28/28 und Blanko 22/22 lokale Funktionstests bestanden. Kategorien aus WP gelesen, Artikelart getrennt, Produktionen gesperrt. **Nicht installieren, keine echte WordPress/K0-Freigabe.** Einzelheiten und genaue Library-Ablagen in `UNIVERSAL_CORE_V050_QA_STAND_20261118.md`.
