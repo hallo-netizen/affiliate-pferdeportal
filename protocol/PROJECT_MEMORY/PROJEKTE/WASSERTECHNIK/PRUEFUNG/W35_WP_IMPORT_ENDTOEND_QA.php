@@ -254,7 +254,7 @@ if($scenario==='blank'||$scenario==='old9'){
             assertW(count(array_filter($GLOBALS['pages'],fn($x)=>$x->post_status==='draft'))===2,
                 'only pool hub and original privacy draft are draft; old 113 published pages untouched');
             $nav=Wassertechnik_W32_Navigation::render();
-            assertW(substr_count($nav,'<li>')===71,'71 menu product links still work after moving 17 URLs');
+            assertW(substr_count($nav,'<a href=')===79,'71 buyer plus 8 specialist product links still work after moving 17 URLs');
         }
         assertW(isset($GLOBALS['options']['wassertechnik_w35_single_apply_report']),
             'single import report stored after verified readback');
