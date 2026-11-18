@@ -1,3 +1,9 @@
+# Aktueller Entwicklungsstand 18.11.2026: Texterstellung Universal 0.5.0-QA
+
+**Zwei QA-ZIP-Kandidaten aus derselben Quelle erzeugt und im Hab-/Universal-Dateibüro dauerhaft gespeichert.** 80 PHP und 9 JSON pro Paket geprueft; Hab 28/28 und Blanko 22/22 lokale Funktionstests bestanden. Kategorien aus WP gelesen, Artikelart getrennt, Produktionen gesperrt. **Nicht installieren, keine echte WordPress/K0-Freigabe.** Einzelheiten und genaue Library-Ablagen in `UNIVERSAL_CORE_V050_QA_STAND_20261118.md`.
+
+---
+
 # Beschlossene Ergänzung: universelles Plugin
 
 **Ein Quellcode, zwei Pakete:** Hab & Bewahr konfiguriert + universelle Blanko-Version für künftig Robotik, Wassertechnik und weitere Portale. Kein mehrfacher Umbau des Originalplugins; Kategorien aus dem aktuellen Portal lesen, Artikelart getrennt entscheiden, bestehendes K0 unverändert anbinden und vor Freigabe portalecht testen. Verbindliche Einzelheiten in `ZIELVERTRAG_UNIVERSELLE_TEXTERSTELLUNG_20261118.md`. **Dies ist ein Entwicklungsauftrag, noch kein fertig gebautes Plugin.**
