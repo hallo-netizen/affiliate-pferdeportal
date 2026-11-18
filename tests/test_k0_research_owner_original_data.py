@@ -7,7 +7,9 @@ import unittest
 from unittest import mock
 from pathlib import Path
 
-from engine.k0_writer_station import research_owner_decision, prepare
+from engine.k0_writer_station import (
+    research_owner_decision, prepare, _k0_research_source_quality_reason,
+)
 
 ROOT=Path(__file__).resolve().parents[1]
 POS=ROOT/'real_runs/k0/k0-20261115-horseware-neu-quellenregel-9221a640'
@@ -111,6 +113,104 @@ class SourceOwnerOriginalDataTests(unittest.TestCase):
         self.assertNotIn('job_id',ticket)
         self.assertEqual(len(ticket['issues']),8)
         self.assertTrue(all(x['reason']=='ORIGINAL_SOURCE_NOT_RETRIEVABLE' for x in ticket['issues']))
+
+    def test_only_verified_official_hosts_and_real_wikipedia_articles_pass(self):
+        allowed=(
+            'https://www.horseware.com/de-de/faqs',
+            'https://www.tierschutzbund.de/ueber-uns/',
+            'https://www.dlg.org/mediacenter/',
+            'https://www.umweltbundesamt.de/themen/',
+            'https://storage.googleapis.com/worldhorsewelfare-cloud/2024/12/horse.pdf',
+            'https://de.wikipedia.org/wiki/Pferd',
+            'https://en.wikipedia.org/wiki/Horse',
+            'https://www.bund.de/verwaltung',
+            'https://www.cdc.gov/disease',
+            'https://commission.europa.eu/index_en',
+        )
+        for url in allowed:
+            with self.subTest(url=url):
+                self.assertIsNone(_k0_research_source_quality_reason(url))
+        rejected={
+            'https://pferde-atelier.de/reiten/':'RESEARCH_OWN_PORTAL_SOURCE_FORBIDDEN',
+            'https://www.pferde-atelier.de/thema/':'RESEARCH_OWN_PORTAL_SOURCE_FORBIDDEN',
+            'https://cdn.pferde-atelier.de/seite/':'RESEARCH_OWN_PORTAL_SOURCE_FORBIDDEN',
+            'https://hobbydepot.de/thema/':'RESEARCH_OWN_PORTAL_SOURCE_FORBIDDEN',
+            'https://privateblog.de/pferde/':'RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL',
+            'https://www.pferdeforum.de/fragen/':'RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL',
+            'https://www.horseware.com.privateblog.de/':'RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL',
+            'https://de.wikipedia.org.privateblog.de/wiki/Pferd':'RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL',
+            'https://de.wikipedia.org/':'RESEARCH_WIKIPEDIA_ARTICLE_REQUIRED',
+            'https://storage.googleapis.com/private-person/brochure.pdf':'RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL',
+            'http://de.wikipedia.org/wiki/Pferd':'RESEARCH_SOURCE_HTTPS_REQUIRED',
+            'https://pferde-atelier.de@www.horseware.com/faqs':'RESEARCH_SOURCE_HTTPS_REQUIRED',
+        }
+        for url,reason in rejected.items():
+            with self.subTest(url=url):
+                self.assertEqual(_k0_research_source_quality_reason(url),reason)
+
+    def test_approved_wikipedia_original_excerpt_flows_through_existing_owner(self):
+        ctx=original_context(POS)
+        article_url='https://de.wikipedia.org/wiki/Pferd'
+        ctx['rule_context']['research_claims']['F1']['source_url']=article_url
+        originals=self._real_source_texts(ctx)
+        with mock.patch.dict(os.environ, {'K0_REQUIRE_ORIGINAL_SOURCE_PROOF':'1'}):
+            with mock.patch('engine.k0_writer_station._k0_fetch_original_source_text',
+                            side_effect=lambda url: originals[url]) as fetch:
+                result=research_owner_decision(ctx,ctx['identity'],RUN)
+        self.assertIsNone(result)
+        self.assertIn(article_url,[c.args[0] for c in fetch.call_args_list])
+
+    def test_private_source_and_own_portal_return_to_same_research_owner(self):
+        for bad_url in ('https://privateblog.de/pferde/',
+                        'https://pferde-atelier.de/ausruestung/'):
+            with self.subTest(url=bad_url):
+                ctx=original_context(POS)
+                ctx['rule_context']['research_claims']['F1']['source_url']=bad_url
+                originals=self._real_source_texts(original_context(POS))
+                with mock.patch.dict(os.environ, {'K0_REQUIRE_ORIGINAL_SOURCE_PROOF':'1'}):
+                    with mock.patch('engine.k0_writer_station._k0_fetch_original_source_text',
+                                    side_effect=lambda url: originals[url]) as fetch:
+                        ticket=research_owner_decision(ctx,ctx['identity'],RUN)
+                self.assertEqual(ticket['owner'],'SAME_RESEARCH_OWNER')
+                self.assertEqual(ticket['status'],'REPAIR_REQUIRED')
+                self.assertNotIn(bad_url,[c.args[0] for c in fetch.call_args_list])
+                self.assertEqual(len(ticket['issues']),1)
+                self.assertIn(ticket['issues'][0]['reason'],
+                              ('RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL',
+                               'RESEARCH_OWN_PORTAL_SOURCE_FORBIDDEN'))
+
+    def test_private_fact_pack_or_comparison_source_cannot_hide_beyond_claims(self):
+        for target in ('fact_pack','comparison'):
+            with self.subTest(target=target):
+                ctx=original_context(POS)
+                if target=='fact_pack':
+                    ctx['production_context']['fact_pack']['sources'][0]['source_url']='https://privateblog.de/blog/'
+                else:
+                    ctx['rule_context']['comparison_source_bindings'][0]['source_url']='https://privateblog.de/blog/'
+                originals=self._real_source_texts(original_context(POS))
+                with mock.patch.dict(os.environ, {'K0_REQUIRE_ORIGINAL_SOURCE_PROOF':'1'}):
+                    with mock.patch('engine.k0_writer_station._k0_fetch_original_source_text',
+                                    side_effect=lambda url: originals[url]):
+                        ticket=research_owner_decision(ctx,ctx['identity'],RUN)
+                self.assertEqual(ticket['status'],'REPAIR_REQUIRED')
+                self.assertEqual(len(ticket['issues']),1)
+                self.assertEqual(ticket['issues'][0]['reason'],
+                                 'RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL')
+
+    def test_private_product_candidate_is_rejected_in_same_owner_decision(self):
+        ctx=original_context(POS)
+        ctx['production_context']['property_research']={
+            'candidates':[{'source_url':'https://privateblog.de/ranking'}],
+            'winner':{'source_url':'https://privateblog.de/ranking'},
+        }
+        originals=self._real_source_texts(original_context(POS))
+        with mock.patch.dict(os.environ, {'K0_REQUIRE_ORIGINAL_SOURCE_PROOF':'1'}):
+            with mock.patch('engine.k0_writer_station._k0_fetch_original_source_text',
+                            side_effect=lambda url: originals[url]):
+                ticket=research_owner_decision(ctx,ctx['identity'],RUN)
+        self.assertEqual(ticket['status'],'REPAIR_REQUIRED')
+        self.assertEqual(len(ticket['issues']),1)
+        self.assertEqual(ticket['issues'][0]['reason'],'RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL')
 
     def test_live_source_proof_is_mandatory_in_canonical_authoring_workflow(self):
         workflow=(ROOT/'.github/workflows/k0-authoring-context.yml').read_text(encoding='utf-8')
