@@ -61,7 +61,20 @@ def _k0_research_source_quality_reason(url):
            for own in K0_OWN_PORTAL_SOURCE_HOSTS):
         return 'RESEARCH_OWN_PORTAL_SOURCE_FORBIDDEN'
     if host == 'wikipedia.org' or host.endswith('.wikipedia.org'):
-        return None if p.path.startswith('/wiki/') else 'RESEARCH_WIKIPEDIA_ARTICLE_REQUIRED'
+        # Wikipedia encyclopedia articles are allowed; personal user pages,
+        # discussion, search and administrative pages are not official sources.
+        from urllib.parse import unquote
+        wiki_path=unquote(p.path)
+        if not wiki_path.startswith('/wiki/'):
+            return 'RESEARCH_WIKIPEDIA_ARTICLE_REQUIRED'
+        article=wiki_path[len('/wiki/'):].casefold()
+        if not article or article.startswith((
+                'benutzer:', 'benutzer_diskussion:', 'user:', 'user_talk:',
+                'diskussion:', 'talk:', 'spezial:', 'special:',
+                'wikipedia:', 'datei:', 'file:', 'vorlage:', 'template:',
+                'kategorie:', 'category:', 'portal:')):
+            return 'RESEARCH_WIKIPEDIA_ARTICLE_REQUIRED'
+        return None
     if any(host == approved or host.endswith('.' + approved)
            for approved in K0_OFFICIAL_SOURCE_HOSTS):
         return None
