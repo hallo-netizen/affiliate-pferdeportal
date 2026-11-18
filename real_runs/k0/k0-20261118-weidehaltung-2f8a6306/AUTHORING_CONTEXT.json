@@ -16,20 +16,12 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_title": "British Horse Society – Pasture Management",
-          "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/pasture-management/"
-        },
-        {
-          "source_title": "British Horse Society – Fencing",
-          "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/pasture-management/fencing"
+          "source_title": "Deutscher Tierschutzbund – Keeping horses properly",
+          "source_url": "https://www.tierschutzbund.de/en/animals-topics/pets/horses/"
         },
         {
           "source_title": "World Horse Welfare – Horse management essentials",
           "source_url": "https://www.worldhorsewelfare.org/advice/horse-management-essentials"
-        },
-        {
-          "source_title": "RSPCA – Creating the Right Environment for Horses",
-          "source_url": "https://www.rspca.org.uk/adviceandwelfare/pets/horses/environment"
         },
         {
           "source_title": "World Horse Welfare – Pasture management for horse paddocks",
@@ -37,15 +29,15 @@
         }
       ],
       "claims": [
-        "Für jedes Pferd muss jederzeit ausreichend frisches sauberes Trinkwasser auf der Weide verfügbar sein.",
-        "Pferde auf der Weide müssen regelmäßig auf Verletzungen und Veränderungen des Körpergewichts kontrolliert werden.",
-        "Pferde benötigen auf der Weide Schutz vor Winterwetter und ebenso vor sommerlicher Sonne und Insekten.",
-        "Weidezäune sollten möglichst täglich auf Beschädigungen und sichere Begrenzung überprüft werden.",
+        "Für Pferde ist jederzeitiger Zugang zu frischem Wasser ebenso wichtig wie bedarfsgerechtes Raufutter.",
+        "Die tägliche Fell- und Hufpflege unterstützt die Beobachtung des Gesundheitszustands der Pferde.",
+        "Pferde müssen Schutz vor Nässe, Kälte, Sonne und Insekten suchen können.",
+        "Zu einem Weidemanagementplan gehören auch regelmäßige Zaunkontrollen, die Pflege des Bodens und die Entfernung gefährlicher Pflanzen.",
         "Eine pferdegerechte Haltung braucht Sozialkontakte zu anderen Pferden, Raufutter und Bewegungsfreiheit.",
         "Ein festgelegter Plan für Pflege, Nutzung und Kontrolle der Weide ist für die laufende Haltung sinnvoll.",
-        "Weidezäune müssen in gutem Zustand sein und das Ausbrechen der Pferde verhindern.",
+        "Pferde sollten täglich mehrere Stunden Möglichkeiten zur freien Bewegung erhalten.",
         "Pferdeäpfel sollten auf der Weide mindestens zweimal wöchentlich, nach Möglichkeit häufiger, abgesammelt werden.",
-        "Gras kann einen großen Teil der Energieaufnahme liefern; die Weidezeit und Grasmenge müssen zum einzelnen Pferd passen."
+        "Die Futterration richtet sich nach Körpergewicht, Ernährungszustand, Rasse und Leistungsbedarf des Pferdes."
       ],
       "fresh_research_reference_date": "2026-11-18"
     },
@@ -94,44 +86,44 @@
     },
     "research_claims": {
       "F1": {
-        "source_title": "British Horse Society – Pasture Management",
-        "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/pasture-management/",
-        "evidence_text": "Provide an adequate supply of fresh clean water",
-        "statement": "Für jedes Pferd muss jederzeit ausreichend frisches sauberes Trinkwasser auf der Weide verfügbar sein.",
-        "evidence_text_sha256": "2cfe00ad44cbe65943026421ce92c9c7b17d31743b84c98c698d361b244d2927",
+        "source_title": "Deutscher Tierschutzbund – Keeping horses properly",
+        "source_url": "https://www.tierschutzbund.de/en/animals-topics/pets/horses/",
+        "evidence_text": "Constant access to fresh water is just as important for horses.",
+        "statement": "Für Pferde ist jederzeitiger Zugang zu frischem Wasser ebenso wichtig wie bedarfsgerechtes Raufutter.",
+        "evidence_text_sha256": "7c675c0954d47cd5831f27ad759aa4ab6ec8d97bd6fefed579d2bf73a4edbbb2",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Anleitung"
         ]
       },
       "F2": {
-        "source_title": "British Horse Society – Pasture Management",
-        "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/pasture-management/",
-        "evidence_text": "Check horses for injuries and monitor weight closely",
-        "statement": "Pferde auf der Weide müssen regelmäßig auf Verletzungen und Veränderungen des Körpergewichts kontrolliert werden.",
-        "evidence_text_sha256": "af74f3671bdb593dcc2aa633cebed86a110f4f7554eb28ef24e5429ec33dfbf0",
+        "source_title": "Deutscher Tierschutzbund – Keeping horses properly",
+        "source_url": "https://www.tierschutzbund.de/en/animals-topics/pets/horses/",
+        "evidence_text": "Daily coat and hoof care is also extremely important, as this allows you to keep a better eye on your animals' health.",
+        "statement": "Die tägliche Fell- und Hufpflege unterstützt die Beobachtung des Gesundheitszustands der Pferde.",
+        "evidence_text_sha256": "b63c59358d99df637222b07555068bc3de60f86d48688529de825482da9e89bf",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Anleitung"
         ]
       },
       "F3": {
-        "source_title": "British Horse Society – Pasture Management",
-        "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/pasture-management/",
-        "evidence_text": "Horses need access to shelter not just from the winter weather but also during the summer from the sun and flies.",
-        "statement": "Pferde benötigen auf der Weide Schutz vor Winterwetter und ebenso vor sommerlicher Sonne und Insekten.",
-        "evidence_text_sha256": "cc9aa0f7c6bb785bbe3cba0671f5d67b73c9174dfa5bb7be1400ade3ca316527",
+        "source_title": "Deutscher Tierschutzbund – Keeping horses properly",
+        "source_url": "https://www.tierschutzbund.de/en/animals-topics/pets/horses/",
+        "evidence_text": "The animals must be able to seek shelter from the wet, cold, sun and insects.",
+        "statement": "Pferde müssen Schutz vor Nässe, Kälte, Sonne und Insekten suchen können.",
+        "evidence_text_sha256": "4b6adbbe83d3a9ee84a7fde64f643ce703e0fbf7300249b77beb96f173e45ed6",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Anleitung"
         ]
       },
       "F4": {
-        "source_title": "British Horse Society – Fencing",
-        "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/pasture-management/fencing",
-        "evidence_text": "Ideally, fencing should be inspected daily.",
-        "statement": "Weidezäune sollten möglichst täglich auf Beschädigungen und sichere Begrenzung überprüft werden.",
-        "evidence_text_sha256": "f8fff03cd23628e13341aa648688abd21254b1bb1ff334b85b7a60cc96aeb43c",
+        "source_title": "World Horse Welfare – Horse management essentials",
+        "source_url": "https://www.worldhorsewelfare.org/advice/horse-management-essentials",
+        "evidence_text": "The plan can cover paddock rotation, fencing maintenance, harrowing, rolling and aerating, overseeding or re-seeding, poisonous plant management, de-worming protocols and poo picking schedules.",
+        "statement": "Zu einem Weidemanagementplan gehören auch regelmäßige Zaunkontrollen, die Pflege des Bodens und die Entfernung gefährlicher Pflanzen.",
+        "evidence_text_sha256": "f448268e4946a10379808d69992cc9d8f658d0bee7e5fd7341367b59aa4f34e1",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Anleitung"
@@ -160,11 +152,11 @@
         ]
       },
       "F7": {
-        "source_title": "RSPCA – Creating the Right Environment for Horses",
-        "source_url": "https://www.rspca.org.uk/adviceandwelfare/pets/horses/environment",
-        "evidence_text": "Check fences are in good condition and escape-proof.",
-        "statement": "Weidezäune müssen in gutem Zustand sein und das Ausbrechen der Pferde verhindern.",
-        "evidence_text_sha256": "7ec85810fb1cd0afd017ecb1d83632bad3afa709b8d27a976abbae16483916bc",
+        "source_title": "Deutscher Tierschutzbund – Keeping horses properly",
+        "source_url": "https://www.tierschutzbund.de/en/animals-topics/pets/horses/",
+        "evidence_text": "In general, horses in human care should be able to move freely for several hours a day.",
+        "statement": "Pferde sollten täglich mehrere Stunden Möglichkeiten zur freien Bewegung erhalten.",
+        "evidence_text_sha256": "2394f48196815d2776a50c2bc0037d6773ac34a1e03cc346c255bb53528f5d75",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Anleitung"
@@ -182,11 +174,11 @@
         ]
       },
       "F9": {
-        "source_title": "British Horse Society – Pasture Management",
-        "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/pasture-management/",
-        "evidence_text": "Grass is a major contributor of calories in a horse’s diet so managing its intake is fundamental in maintaining good health and welfare.",
-        "statement": "Gras kann einen großen Teil der Energieaufnahme liefern; die Weidezeit und Grasmenge müssen zum einzelnen Pferd passen.",
-        "evidence_text_sha256": "6d89afac4f9d016a13e0802d170cf1992f472bf428306925ebcb308b8f73f8ba",
+        "source_title": "Deutscher Tierschutzbund – Keeping horses properly",
+        "source_url": "https://www.tierschutzbund.de/en/animals-topics/pets/horses/",
+        "evidence_text": "The feed ration depends on the horse's body weight, nutritional status, breed and performance requirements.",
+        "statement": "Die Futterration richtet sich nach Körpergewicht, Ernährungszustand, Rasse und Leistungsbedarf des Pferdes.",
+        "evidence_text_sha256": "3ea2b154122cf14e482a16abc3191c40b35fc78594a00ad36c0893c41aa2842b",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Anleitung"
