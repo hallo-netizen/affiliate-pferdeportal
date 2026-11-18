@@ -1,0 +1,237 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Pfriemenschwanz-Eier beim Pferd erkennen und einen Befall abklären",
+    "target_keyword": "pfriemenschwanz pferd eier",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "Anleitung",
+    "plan_slot": "a4e4581e3c43211e803d26a26270313245113141371e9403a8f43cfaa57275d1"
+  },
+  "content_profile": {
+    "search_intent": "Parasiten – Pfriemenschwanz"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "MSD Veterinary Manual Oxyuris equi",
+          "source_url": "https://www.msdvetmanual.com/digestive-system/gastrointestinal-parasites-of-horses/gastrointestinal-parasites-of-minor-clinical-importance-in-horses"
+        },
+        {
+          "source_title": "Western College of Veterinary Medicine Oxyuris equi",
+          "source_url": "https://wcvm.usask.ca/learnaboutparasites/parasites/oxyuris-equi.php"
+        }
+      ],
+      "claims": [
+        "Pfriemenschwanz-Weibchen legen ihre Eier in klebrigen Paketen an der Haut um den After ab, nicht überwiegend in den Kot.",
+        "Die Eiablage kann die Haut reizen und starken Juckreiz verursachen, sodass das Pferd seine Schweifrübe scheuert.",
+        "Die Weibchen wandern zur Eiablage in Richtung Enddarm und setzen ihre Eier außen am After ab.",
+        "Pferde infizieren sich durch die Aufnahme ansteckungsfähiger Eier aus ihrer Umgebung, daher ist Stallhygiene wichtig.",
+        "Für die Diagnostik kann die Tierarztpraxis eine Probe mittels Klebestreifen an der Haut um den After gewinnen und mikroskopisch beurteilen.",
+        "Eine gewöhnliche Kotprobe kann einen Pfriemenschwanz-Befall nicht zuverlässig ausschließen, weil die Eier meist nicht mit dem Kot abgegeben werden.",
+        "Schweifscheuern hat unterschiedliche mögliche Ursachen; die Beobachtung allein ist kein sicherer Beweis für Pfriemenschwanz."
+      ],
+      "fresh_research_reference_date": "2026-11-18"
+    },
+    "production_plan_item": {
+      "article_type": "Anleitung",
+      "target_keyword": "pfriemenschwanz pferd eier",
+      "topic": "Pfriemenschwanz-Eier beim Pferd erkennen und einen Befall abklären",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Verdacht auf Pfriemenschwanz-Befall systematisch und sicher erkennen sowie tierärztlich abklären.",
+      "preparation_items": [
+        "Beobachtungen notieren",
+        "Tierarztpraxis zu Probenentnahme befragen"
+      ],
+      "procedure_steps": [
+        "Schweif und Haut um den After äußerlich beobachten",
+        "Auffällige Eiablagerungen dokumentieren",
+        "Mit der Tierarztpraxis einen Klebestreifentest abstimmen",
+        "Ergebnis und weiteres Vorgehen tierärztlich auswerten"
+      ],
+      "safety_controls": [
+        "Haut nicht gewaltsam reinigen",
+        "Entwurmung nicht ohne tierärztliche Rücksprache ansetzen"
+      ],
+      "common_errors": [
+        "Nur Kotprobe verwenden",
+        "Jedes Schweifscheuern für Pfriemenschwanz halten"
+      ],
+      "result_checks": [
+        "Laborbefund oder tierärztliche Einschätzung vorhanden"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "MSD Veterinary Manual Oxyuris equi",
+        "source_url": "https://www.msdvetmanual.com/digestive-system/gastrointestinal-parasites-of-horses/gastrointestinal-parasites-of-minor-clinical-importance-in-horses",
+        "evidence_text": "Gravid females migrate through the descending colon and rectum to deposit their eggs in packets onto perianal skin",
+        "statement": "Pfriemenschwanz-Weibchen legen ihre Eier in klebrigen Paketen an der Haut um den After ab, nicht überwiegend in den Kot.",
+        "evidence_text_sha256": "2df15af4c6920cfbe26298028bb568f33e904786dfba2eafbb08413201664452",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F2": {
+        "source_title": "MSD Veterinary Manual Oxyuris equi",
+        "source_url": "https://www.msdvetmanual.com/digestive-system/gastrointestinal-parasites-of-horses/gastrointestinal-parasites-of-minor-clinical-importance-in-horses",
+        "evidence_text": "Egg masses can produce local perianal irritation and pruritus that can progress to tail rubbing",
+        "statement": "Die Eiablage kann die Haut reizen und starken Juckreiz verursachen, sodass das Pferd seine Schweifrübe scheuert.",
+        "evidence_text_sha256": "f47d370bb3376131a311ccfbf3367578ca43be7ff00bcef792400ea3dae1ffc2",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F3": {
+        "source_title": "Western College of Veterinary Medicine Oxyuris equi",
+        "source_url": "https://wcvm.usask.ca/learnaboutparasites/parasites/oxyuris-equi.php",
+        "evidence_text": "The females then migrate to the terminal rectum",
+        "statement": "Die Weibchen wandern zur Eiablage in Richtung Enddarm und setzen ihre Eier außen am After ab.",
+        "evidence_text_sha256": "d44fb1e4150e8c934101d888e5dd9b4a5c79064fa22eb896cd1c15286abc5772",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F4": {
+        "source_title": "Western College of Veterinary Medicine Oxyuris equi",
+        "source_url": "https://wcvm.usask.ca/learnaboutparasites/parasites/oxyuris-equi.php",
+        "evidence_text": "infection of the horse is by ingestion of the infective eggs",
+        "statement": "Pferde infizieren sich durch die Aufnahme ansteckungsfähiger Eier aus ihrer Umgebung, daher ist Stallhygiene wichtig.",
+        "evidence_text_sha256": "5fce32e5e482dc111f5150adc4ab6b0b57f74b6f15d7408adf6c65b45bfa00d3",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F5": {
+        "source_title": "MSD Veterinary Manual Oxyuris equi",
+        "source_url": "https://www.msdvetmanual.com/digestive-system/gastrointestinal-parasites-of-horses/gastrointestinal-parasites-of-minor-clinical-importance-in-horses",
+        "evidence_text": "A sample of O equi eggs can be collected by pressing the sticky side of a piece of cellophane tape onto the perianal skin",
+        "statement": "Für die Diagnostik kann die Tierarztpraxis eine Probe mittels Klebestreifen an der Haut um den After gewinnen und mikroskopisch beurteilen.",
+        "evidence_text_sha256": "e31b50f191c176fb5dfe890f76fa5482b2d395e76cb31c227b0f7b8f92c0baad",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F6": {
+        "source_title": "MSD Veterinary Manual Oxyuris equi",
+        "source_url": "https://www.msdvetmanual.com/digestive-system/gastrointestinal-parasites-of-horses/gastrointestinal-parasites-of-minor-clinical-importance-in-horses",
+        "evidence_text": "Fecal flotation and egg counts are not useful in diagnosing O equi infection",
+        "statement": "Eine gewöhnliche Kotprobe kann einen Pfriemenschwanz-Befall nicht zuverlässig ausschließen, weil die Eier meist nicht mit dem Kot abgegeben werden.",
+        "evidence_text_sha256": "37b40cd4e18ff92d5abfeb9a02595059cbc55964562770de13c4aa218a071bc4",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F7": {
+        "source_title": "MSD Veterinary Manual Oxyuris equi",
+        "source_url": "https://www.msdvetmanual.com/digestive-system/gastrointestinal-parasites-of-horses/gastrointestinal-parasites-of-minor-clinical-importance-in-horses",
+        "evidence_text": "Because tail rubbing can be due to multiple factors",
+        "statement": "Schweifscheuern hat unterschiedliche mögliche Ursachen; die Beobachtung allein ist kein sicherer Beweis für Pfriemenschwanz.",
+        "evidence_text_sha256": "455b99792c789670ccc351118848ae8ba2d9011095e0afc5068fdaf7822ed78b",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "Pferdegesundheit verstehen",
+        "block": "preparation"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/pferdewissen-grundlagen/",
+        "anchor": "Pferdewissen & Grundlagen",
+        "block": "risks"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/gesundheit-regeneration-kuehlgamaschen-faq/",
+        "anchor": "FAQ Kühlgamaschen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdewissen-grundlagen/",
+        "active": true
+      },
+      {
+        "href": "/category/gesundheit-regeneration-kuehlgamaschen-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pfriemenschwanz",
+      "Eier",
+      "After",
+      "Klebestreifentest",
+      "Schweifscheuern"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "LINEAR_SEQUENCE",
+      "rationale": "Die Untersuchung ist eine zeitlich geordnete Folge aus Beobachten, Probengewinnung und Auswertung; eine Tabelle bringt keinen Zusatznutzen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
