@@ -1,3 +1,14 @@
+## 18.11.2026 – AKTUELLER STAND: Zusatzabnahme der REINEN 0.4.23-Bereinigung
+
+- **Keine neue Pluginversion.** Maßgeblich bleibt `Texterstellung_Hobbydepot_0.4.23_BEREINIGT_TEST.zip` in `/hobbydepot/TEXTERSTELLUNG/ARBEITSKOPIEN/`. Keine Architekturänderung, keine extra Plugins.
+- Reale ZIP- und Source-Nachprüfung: 87 ZIP-Einträge, 78/78 PHP-Lint, 8/8 JSON, 71 unverändert / 16 bereinigt, 4/4 original K0-Importer-PHP byteidentisch. Library-ZIP exakt gleich.
+- **3/3 lokale WordPress-Mock-Startfälle** bestanden: ohne Bestätigung, mit simuliert bestätigter Testsite, bei Konflikt mit altem PSTE. Kein PHP-Startfehler, im Test keine DB-Writes oder Netzaufrufe. KEIN echter WordPress-Test.
+- Offen und unverändert: K0-Typquelle aus vorheriger Hobby-Arbeitskopie `K0_PORTAL_ADAPTER_PENDING` blockiert die produktive Typverwendung und kann Diagnosefehler auslösen. Ex-Pferde-Journal-Auto-Zielzuordnung kann keine Hobby-Kategorie auswählen. Kein Live-/DataForSEO-/MINI-/K0-Echtlauf. **Keine Produktionsfreigabe, nicht auf Live installieren.**
+- Detailbeleg: `0423_QUELL_UND_STARTTEST_ZUSATZABNAHME_20261118.md` und `/hobbydepot/TEXTERSTELLUNG/PRUEFBERICHTE/HOBBYDEPOT_TEXTERSTELLUNG_0423_ZUSATZABNAHME_20261118.md`.
+- **Verbindlicher Scope beibehalten:** Nur Pferdeatelier bereinigen; keine HD004-/K0-/Recherche-Eigenentwicklung.
+
+---
+
 ## 18.11.2026 – ERLEDIGT: REINE PFERDEATELIER-BEREINIGUNG (verbindlicher Scope)
 
 - **Aktuelles, maßgebliches Bereinigungsartefakt:** `Texterstellung_Hobbydepot_0.4.23_BEREINIGT_TEST.zip` im Hobbydepot-Dateienbüro `/hobbydepot/TEXTERSTELLUNG/ARBEITSKOPIEN/`. Original 0.4.23 bleibt unangetastet.
