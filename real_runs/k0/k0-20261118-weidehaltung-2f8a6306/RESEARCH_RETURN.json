@@ -1,0 +1,33 @@
+{
+  "contract": "K0_RESEARCH_RETURN_V1",
+  "status": "REPAIR_REQUIRED",
+  "owner": "SAME_RESEARCH_OWNER",
+  "identity": {
+    "title": "Weidehaltung für das eigene Pferd Schritt für Schritt organisieren",
+    "target_keyword": "Wie kann ich die Weidehaltung meines Pferdes organisieren?",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "Anleitung",
+    "plan_slot": "c5ab76c2500572af65b473e4fb464774fdd77393d76aa12802a93bf8f845d5ba"
+  },
+  "run_instance_id": "run:b10a309cc8b59d40dd2ded1f",
+  "return_to": "AUTHORING_CONTEXT.json",
+  "issues": [
+    {
+      "fact_id": "F1",
+      "reason": "RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL",
+      "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/pasture-management/"
+    },
+    {
+      "fact_id": "F4",
+      "reason": "RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL",
+      "source_url": "https://www.bhs.org.uk/horse-care-and-welfare/health-care-management/pasture-management/fencing"
+    },
+    {
+      "fact_id": "F7",
+      "reason": "RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL",
+      "source_url": "https://www.rspca.org.uk/adviceandwelfare/pets/horses/environment"
+    }
+  ],
+  "next_action": "RESEARCH_AGAIN_OR_PROVE_ORIGINAL_SOURCE_AND_RESUBMIT_SAME_RUN",
+  "publish_allowed": false
+}
