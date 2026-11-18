@@ -1,0 +1,26 @@
+name: Wassertechnik W43 ein installierbares WT001 Gesamtupdate
+on:
+  pull_request:
+    paths:
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/WASSERTECHNIK/**'
+      - '.github/workflows/wassertechnik-w43-installationsabnahme.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build_test_package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run complete existing 218 / 81 DataForSEO, W35 import and W42 menu regression
+        run: python3 protocol/PROJECT_MEMORY/PROJEKTE/WASSERTECHNIK/PLUGINS/BUILD/W43_install_build.py
+      - name: Upload ONE tested WordPress plugin ZIP for installation
+        uses: actions/upload-artifact@v4
+        with:
+          name: WASSERTECHNIK_WT001_0_1_13_EINMALUPDATE_INSTALLIEREN
+          path: |
+            protocol/PROJECT_MEMORY/PROJEKTE/WASSERTECHNIK/PRUEFUNG/_w43_release/*.zip
+            protocol/PROJECT_MEMORY/PROJEKTE/WASSERTECHNIK/PRUEFUNG/_w43_release/*.json
+          if-no-files-found: error
+          retention-days: 30
