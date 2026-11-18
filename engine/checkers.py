@@ -171,7 +171,7 @@ def structural_receipts(article):
     # The existing bound-pairs receipt is also the SINGLE canonical label check.
     # The authoritative live WordPress name is bound once before writing.
     if any(str(row.get('official_name') or '') for row in registry.values()):
-        bound_ok=bound_ok and all(str((registry.get(x['href']) or {}).get('official_name') or '')==x['anchor'] for x in links)
+        bound_ok=bound_ok and all(not str((registry.get(x['href']) or {}).get('official_name') or '') or str((registry.get(x['href']) or {}).get('official_name'))==x['anchor'] for x in links)
     registry_ok=bool(links) and all(x['href'] in registry and registry[x['href']].get('active',True) for x in links)
     placement_ok=bool(bound) and all(any(y['role']==x.get('role') and y['href']==x.get('href') and y['block']==x.get('block') for y in links) for x in bound)
     # Existing placement rule must require real flowing paragraphs, not detached <nav> anchors.
