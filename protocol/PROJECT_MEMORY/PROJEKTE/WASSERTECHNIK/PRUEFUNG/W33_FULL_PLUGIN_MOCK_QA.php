@@ -32,9 +32,9 @@ function wp_insert_post(...$x){$GLOBALS['writes']++;throw new RuntimeException('
 function wp_insert_term(...$x){$GLOBALS['writes']++;throw new RuntimeException('WordPress category write');}
 function wp_remote_post(...$x){$GLOBALS['http']++;throw new RuntimeException('Paid SEO network request');}
 function plugin_dir_path($file){return dirname($file).DIRECTORY_SEPARATOR;}
-function get_posts(...$x){$opts=$x[0]??[];return ($opts['post_type']??'')==='page'?$GLOBALS['wp_snapshot_pages']:$GLOBALS['wp_snapshot_posts'];}
+function get_posts(...$x){$opts=$x[0]??[];if(($opts['post_type']??'')==='page' && !empty($GLOBALS['nav_mock_mode']))return array_values($GLOBALS['pages']);return ($opts['post_type']??'')==='page'?$GLOBALS['wp_snapshot_pages']:$GLOBALS['wp_snapshot_posts'];}
 function get_terms(...$x){return $GLOBALS['wp_snapshot_categories'];}
-function get_page_uri($p){return $p->post_name;}
+function get_page_uri($p){return $p->mock_uri??$p->post_name;}
 function get_term_meta($id,$key,$single){return '';}
 function is_wp_error($x){return false;}
 function get_transient(...$x){return false;}
@@ -42,12 +42,12 @@ function get_option(...$x){return false;}
 function wp_is_post_revision(...$x){return false;}
 $assert=function($ok,$msg){if(!$ok)throw new RuntimeException("FAILED: ".$msg);echo "PASS ".$msg.PHP_EOL;};
 require $root.'/wassertechnik-kategorie-workflow.php';
-$assert(Wassertechnik_Kategorie_Workflow::VERSION==='0.1.11','same plugin identity, updated version');
+$assert(Wassertechnik_Kategorie_Workflow::VERSION==='0.1.12','same plugin identity, updated version');
 $homepage=file_get_contents($root.'/wassertechnik-kategorie-workflow.php');
 $assert(str_contains($homepage,'Fachplan W27:') && !str_contains($homepage,'Aktueller Fachplan W4:'),'one current 7-area homepage, no old 8-area claim');
 $assert(!str_contains($homepage,'Import technisch deaktiviert.') && !str_contains($homepage,'Der WordPress-Import bleibt technisch gesperrt.'),'home screen describes explicitly approved one-time import, not a permanent import lock');
 $readme=file_get_contents($root.'/README.txt');
-$assert(str_contains($readme,'NICHT INSTALLIEREN') && str_contains($readme,'0.1.11'),'README status and version match real source');
+$assert(str_contains($readme,'NICHT INSTALLIEREN') && str_contains($readme,'0.1.12'),'README status and version match real source');
 $assert(class_exists('Wassertechnik_Kategorie_Importer'),'old importer source retained');
 $assert(!isset($GLOBALS['actions']['admin_post_wassertechnik_import_apply']),
         'old 9-root importer DISABLED by default');
@@ -137,9 +137,10 @@ $assert(array_sum(array_column($nav['hauptbereiche'],'new_not_approved'))===81,'
 $assert(count(array_filter($nav['existing_w4_pages'],fn($x)=>!$x['menu']))===8,'8 industry owners excluded from buyer navigation');
 $idx=1;
 foreach($nav['existing_w4_pages'] as $p){
-    $GLOBALS['pages'][$p['wordpress_path']]=(object)['ID'=>$idx,'post_status'=>'publish'];
+    $GLOBALS['pages'][$p['wordpress_path']]=(object)['ID'=>$idx,'post_status'=>'publish','mock_uri'=>$p['wordpress_path']];
     $GLOBALS['owners'][$idx]=$p['owner_id'];++$idx;
 }
+$GLOBALS['nav_mock_mode']=true;
 $menu=Wassertechnik_W32_Navigation::render();
 $assert(substr_count($menu,'<a href=')===79,'71 buyer links plus 8 specialist links, owner-matching and published');
 $assert(substr_count($menu,'<summary>')===8,'7 buyer menu roots and one specialist entry, including planned pool');
