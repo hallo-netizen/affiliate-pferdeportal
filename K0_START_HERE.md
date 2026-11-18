@@ -29,6 +29,8 @@ Die erste sichtbare Antwort ist ausschließlich:
 
 `Upload -> K0:start -> Recherche -> Writer -> vollständige Regeln -> LanguageTool 6.8 -> finale Regeln -> SYSTEM4_WORDPRESS_HANDOFF_V1 -> Verifikation -> Datei`
 
+**Recherchequellen (verbindlich):** Vor dem Writer akzeptiert die *bestehende* Rechercheentscheidung nur freigegebene offizielle Behörden-, Hochschul-, Fachverbands- und Herstellerseiten sowie echte Wikipedia-Artikel. Private Webseiten, Blogs, Foren, fremde Affiliate-/Testseiten und eigene Portaldomains sind ausgeschlossen. Neue offizielle Domains werden erst nach Überprüfung in der zentralen Quellenfreigabe der bestehenden Recherche ergänzt; bloße Domainendung `.org` oder eine behauptete Quellenbezeichnung reichen nicht. Textstellen müssen weiterhin auf der echten Originalseite belegbar sein. Unzulässige Quellen gehen ohne zusätzliche Prüfstelle zum selben Rechercheverantwortlichen zurück; die nachgelagerten K0-Regeln bleiben unverändert.
+
 Portalzuordnung automatisch.
 
 Interne Links: exakt 3; `parent_category` und `semantic_related` liegen in zwei verschiedenen Haupttextblöcken, `further_information` ausschließlich im Block `further_information`. Intro, Fazit und Tabelle zählen nicht als Haupttext.
