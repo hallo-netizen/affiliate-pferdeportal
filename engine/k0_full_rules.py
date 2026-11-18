@@ -131,7 +131,7 @@ def _k0_link_has_specific_topic(target_label, ctx, topic):
 
 
 def verify_live_link_targets(ctx,base_url,fetch_json=None,fetch_html=None,topic=None):
-    """Resolve each C-category or published C-article to its ONE official WordPress label.
+    """Resolve each C-category or published WordPress page to its ONE official label.
     This is the EXISTING pre-writer target lookup, not a second editorial link gate.
     The writer receives these immutable labels and writes natural sentences AROUND them.
     """
@@ -160,7 +160,7 @@ def verify_live_link_targets(ctx,base_url,fetch_json=None,fetch_html=None,topic=
             raise Blocked('K0_LINK_TARGET_PATH_INVALID')
         slug=urllib.parse.unquote(urllib.parse.urlsplit(href).path.rstrip('/').split('/')[-1])
         if not slug:
-            raise Blocked('K0_LINK_TARGET_NOT_C_CATEGORY_OR_ARTICLE:'+href)
+            raise Blocked('K0_LINK_TARGET_NOT_C_CATEGORY_OR_PAGE:'+href)
         category_url=base_url.rstrip('/')+'/wp-json/wp/v2/categories?slug='+urllib.parse.quote(slug)
         try:
             categories=fetch_json(category_url)
@@ -178,17 +178,17 @@ def verify_live_link_targets(ctx,base_url,fetch_json=None,fetch_html=None,topic=
             label=official_name(item.get('name'))
             target_type='C_CATEGORY'
         elif not direct_category:
-            post_url=base_url.rstrip('/')+'/wp-json/wp/v2/posts?slug='+urllib.parse.quote(slug)
+            page_url=base_url.rstrip('/')+'/wp-json/wp/v2/pages?slug='+urllib.parse.quote(slug)
             try:
-                posts=fetch_json(post_url)
+                pages=fetch_json(page_url)
             except Exception as exc:
-                raise Blocked('K0_LINK_TARGET_ARTICLE_UNVERIFIED:'+slug) from exc
-            matches=[x for x in posts if isinstance(x,dict) and x.get('slug')==slug and
-                     x.get('status')=='publish' and same_public_path(x.get('link'),href)] if isinstance(posts,list) else []
+                raise Blocked('K0_LINK_TARGET_PAGE_UNVERIFIED:'+slug) from exc
+            matches=[x for x in pages if isinstance(x,dict) and x.get('slug')==slug and
+                     x.get('status')=='publish' and same_public_path(x.get('link'),href)] if isinstance(pages,list) else []
             if len(matches)!=1:
-                raise Blocked('K0_LINK_TARGET_NOT_C_CATEGORY_OR_PUBLISHED_ARTICLE:'+href)
+                raise Blocked('K0_LINK_TARGET_NOT_C_CATEGORY_OR_PUBLISHED_PAGE:'+href)
             label=official_name((matches[0].get('title') or {}).get('rendered'))
-            target_type='C_ARTICLE'
+            target_type='C_PAGE'
             try:
                 page=fetch_html(base_url.rstrip('/')+href)
             except Exception as exc:
