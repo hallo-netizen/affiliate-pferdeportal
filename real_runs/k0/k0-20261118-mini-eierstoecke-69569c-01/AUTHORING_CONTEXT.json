@@ -1,0 +1,226 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Aufbau und Funktion der Eierstöcke bei der Stute",
+    "target_keyword": "eierstöcke pferd",
+    "category": "pferdewissen-grundlagen",
+    "article_type": "Beratung",
+    "plan_slot": "c37c7137fee51d105bf01da8fca32c3bbdb27023126a5fe1f62d764c6d36384a"
+  },
+  "content_profile": {
+    "search_intent": "Anatomie und Fortpflanzung"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "MSD Veterinary Manual – The Gonads and Genital Tract of Horses",
+          "source_url": "https://www.msdvetmanual.com/horse-owners/reproductive-disorders-of-horses/the-gonads-and-genital-tract-of-horses"
+        },
+        {
+          "source_title": "MSD Veterinary Manual – The Reproductive Cycle of Horses",
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/management-of-reproduction-horses/the-reproductive-cycle-of-horses"
+        }
+      ],
+      "claims": [
+        "Die Eierstöcke der Stute bilden Eizellen sowie die Geschlechtshormone Östrogen und Progesteron.",
+        "In den Eierstöcken umschließen Follikel die heranreifenden Eizellen.",
+        "Nach dem Eisprung bildet sich aus dem Follikel ein Gelbkörper, der Progesteron produziert.",
+        "Die Eileiter verbinden die Eierstöcke mit der Gebärmutter.",
+        "Der Zyklus der Stute ist saisonal geprägt und wird durch längeres Tageslicht angeregt.",
+        "Vor dem Eisprung vergrößert sich der dominante Follikel und wird weicher.",
+        "Störungen der Fortpflanzung können tierärztlich unter anderem mit Ultraschall und Hormonuntersuchungen abgeklärt werden."
+      ],
+      "fresh_research_reference_date": "2026-11-18"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "eierstöcke pferd",
+      "topic": "Aufbau und Funktion der Eierstöcke bei der Stute",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdewissen-grundlagen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Aufbau und Funktion der Eierstöcke der Stute fachlich anhand Follikel, Eisprung, Gelbkörper und Zyklus erläutern.",
+      "decision_criteria": [
+        "Anatomische Lage und Eileiter",
+        "Follikel und Eizelle",
+        "Gelbkörper und Hormone",
+        "Saisonaler Zyklus",
+        "Tierärztliche Untersuchung bei Auffälligkeiten"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "MSD Veterinary Manual – The Gonads and Genital Tract of Horses",
+        "source_url": "https://www.msdvetmanual.com/horse-owners/reproductive-disorders-of-horses/the-gonads-and-genital-tract-of-horses",
+        "evidence_text": "Ovaries are female gonads that produce eggs and female sex hormones, including estrogen and progesterone.",
+        "statement": "Die Eierstöcke der Stute bilden Eizellen sowie die Geschlechtshormone Östrogen und Progesteron.",
+        "evidence_text_sha256": "610f52a7ff6bd6d38780f705cb9bd9b4ccb373460cd1e9351befd98de3d114a9",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "MSD Veterinary Manual – The Gonads and Genital Tract of Horses",
+        "source_url": "https://www.msdvetmanual.com/horse-owners/reproductive-disorders-of-horses/the-gonads-and-genital-tract-of-horses",
+        "evidence_text": "Within the ovary, a group of special cells form a follicle, which surrounds each egg.",
+        "statement": "In den Eierstöcken umschließen Follikel die heranreifenden Eizellen.",
+        "evidence_text_sha256": "4b04d0cf0fce5287468539a8a11d42618d40b5fd13234957cd8b0fb4de2e541b",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "MSD Veterinary Manual – The Gonads and Genital Tract of Horses",
+        "source_url": "https://www.msdvetmanual.com/horse-owners/reproductive-disorders-of-horses/the-gonads-and-genital-tract-of-horses",
+        "evidence_text": "After ovulation, the follicle becomes a corpus luteum, which produces progesterone.",
+        "statement": "Nach dem Eisprung bildet sich aus dem Follikel ein Gelbkörper, der Progesteron produziert.",
+        "evidence_text_sha256": "5fedfc75d7fbbdfbb241aa22e61f681fd82cf82198ffa81a6ba06878282d2232",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_title": "MSD Veterinary Manual – The Gonads and Genital Tract of Horses",
+        "source_url": "https://www.msdvetmanual.com/horse-owners/reproductive-disorders-of-horses/the-gonads-and-genital-tract-of-horses",
+        "evidence_text": "The oviducts are small tubes that connect the ovaries to the uterus.",
+        "statement": "Die Eileiter verbinden die Eierstöcke mit der Gebärmutter.",
+        "evidence_text_sha256": "1fe58fa7ca7bdd2445e0b3e9b5577d44c673c4d31202c2fe5d499ef633b8fdef",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_title": "MSD Veterinary Manual – The Reproductive Cycle of Horses",
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/management-of-reproduction-horses/the-reproductive-cycle-of-horses",
+        "evidence_text": "Most mares are seasonally polyestrous and cycle when the length of daylight is long.",
+        "statement": "Der Zyklus der Stute ist saisonal geprägt und wird durch längeres Tageslicht angeregt.",
+        "evidence_text_sha256": "922091889878826dc2c03ca1a9d7723a8819948161c866f35eb57134cad3e1db",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F6": {
+        "source_title": "MSD Veterinary Manual – The Reproductive Cycle of Horses",
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/management-of-reproduction-horses/the-reproductive-cycle-of-horses",
+        "evidence_text": "The dominant follicle enlarges and then softens just before ovulation.",
+        "statement": "Vor dem Eisprung vergrößert sich der dominante Follikel und wird weicher.",
+        "evidence_text_sha256": "5ae3cd07d5d17c2917b21dcb44fee9d1455a2589b64df360c6cd513c4d4eac39",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F7": {
+        "source_title": "MSD Veterinary Manual – The Gonads and Genital Tract of Horses",
+        "source_url": "https://www.msdvetmanual.com/horse-owners/reproductive-disorders-of-horses/the-gonads-and-genital-tract-of-horses",
+        "evidence_text": "Infertility in females can be diagnosed through various means, including physical examination, ultrasonography, hormonal tests, uterine culture, and biopsy of the uterine lining.",
+        "statement": "Störungen der Fortpflanzung können tierärztlich unter anderem mit Ultraschall und Hormonuntersuchungen abgeklärt werden.",
+        "evidence_text_sha256": "84ed9633ce76aa21d68f6cd9a7bff2816132e20eac971e950425eb467a16ee12",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdewissen-grundlagen/",
+        "anchor": "Pferdewissen & Grundlagen",
+        "block": "criteria"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/wissen/wissen-buecher-und-ratgeber/gesundheitsvorsorge-grundlagen/",
+        "anchor": "Gesundheitsvorsorge Grundlagen",
+        "block": "decision"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-buecher-und-ratgeber/pferdehaltung-grundlagen/",
+        "anchor": "Pferdehaltung Grundlagen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdewissen-grundlagen/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-buecher-und-ratgeber/gesundheitsvorsorge-grundlagen/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-buecher-und-ratgeber/pferdehaltung-grundlagen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdewissen-grundlagen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Eierstöcke",
+      "Stute",
+      "Follikel",
+      "Eisprung",
+      "Gelbkörper",
+      "Eileiter",
+      "Hormone",
+      "Fortpflanzung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine kurze Übersicht trennt die Funktionen von Follikel, Gelbkörper und Eileiter bei der Stute voneinander."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
