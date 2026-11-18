@@ -104,27 +104,65 @@ class K0LinkRegressionTests(unittest.TestCase):
         with self.assertRaisesRegex(Blocked,'K0_RULE_CONTEXT_LINK_REGISTRY_INACTIVE'):
             validate_rule_context(p['rule_context'],p['identity'])
 
-    def test_live_target_positive_with_published_related_content(self):
+    def test_live_target_positive_with_category_and_published_page(self):
         p,_=package_from_article(make_base())
         links=p['rule_context']['bound_links']
         links[0]['href']='/category/zuegel-faq/'
         links[1]['href']='/category/zuegel-beratung/'
-        links[2]['href']='/artikel/lenken/'
+        links[2]['href']='/wissen/lenken/'
         calls=[]
         def wordpress(url):
             calls.append(url)
             slug=url.rsplit('=',1)[-1]
             if '/categories?' in url:
                 return [] if slug=='lenken' else [{'slug':slug,'name':'Kategorie '+slug,'count':2,'link':'https://example.org/category/'+slug+'/'}]
-            if '/posts?' in url:
-                return [{'slug':'lenken','status':'publish','link':'https://example.org/artikel/lenken/','title':{'rendered':'Lenken'}}]
-            return []
-        report=verify_live_link_targets(p['rule_context'],'https://example.org',wordpress,lambda url:'<html><body>Artikel</body></html>')
+            if '/pages?' in url:
+                return [{'slug':'lenken','status':'publish','link':'https://example.org/wissen/lenken/','title':{'rendered':'Lenken'}}]
+            raise AssertionError('Unexpected API lookup: '+url)
+        report=verify_live_link_targets(p['rule_context'],'https://example.org',wordpress,lambda url:'<html><body>Seite</body></html>')
         self.assertEqual(report['status'],'PASS')
         self.assertEqual(report['checked'],3)
         self.assertEqual([x['official_name'] for x in report['canonical_links']],['Kategorie zuegel-faq','Kategorie zuegel-beratung','Lenken'])
+        self.assertEqual([x['target_type'] for x in report['canonical_links']],['C_CATEGORY','C_CATEGORY','C_PAGE'])
         self.assertEqual(len(calls),4)
 
+    def test_published_post_never_allowed_as_link_target(self):
+        p,_=package_from_article(make_base())
+        p['rule_context']['bound_links']=[
+            {'role':'parent_category','href':'/category/zuegel-faq/','block':'details'},
+            {'role':'semantic_related','href':'/category/zuegel-beratung/','block':'checklist'},
+            {'role':'further_information','href':'/artikel/lenken/','block':'further_information'},
+        ]
+        calls=[]
+        def wordpress(url):
+            calls.append(url)
+            slug=url.rsplit('=',1)[-1]
+            if '/categories?' in url:
+                return [] if slug=='lenken' else [{'slug':slug,'name':'Kategorie '+slug,'count':2,'link':'https://example.org/category/'+slug+'/'}]
+            if '/pages?' in url:
+                return []
+            if '/posts?' in url:
+                raise AssertionError('Article lookup must not happen')
+            return []
+        with self.assertRaisesRegex(Blocked,'K0_LINK_TARGET_NOT_C_CATEGORY_OR_PUBLISHED_PAGE'):
+            verify_live_link_targets(p['rule_context'],'https://example.org',wordpress,lambda url:'<html></html>')
+        self.assertFalse(any('/posts?' in call for call in calls))
+
+    def test_draft_or_wrong_path_page_rejected(self):
+        p,_=package_from_article(make_base())
+        p['rule_context']['bound_links'][0]['href']='/category/zuegel-faq/'
+        p['rule_context']['bound_links'][1]['href']='/category/zuegel-beratung/'
+        p['rule_context']['bound_links'][2]['href']='/wissen/lenken/'
+        for status,link in [('draft','https://example.org/wissen/lenken/'),('publish','https://example.org/artikel/lenken/')]:
+            def wordpress(url):
+                slug=url.rsplit('=',1)[-1]
+                if '/categories?' in url:
+                    return [] if slug=='lenken' else [{'slug':slug,'name':'Kategorie '+slug,'count':2,'link':'https://example.org/category/'+slug+'/'}]
+                if '/pages?' in url:
+                    return [{'slug':'lenken','status':status,'link':link,'title':{'rendered':'Lenken'}}]
+                raise AssertionError(url)
+            with self.assertRaisesRegex(Blocked,'K0_LINK_TARGET_NOT_C_CATEGORY_OR_PUBLISHED_PAGE'):
+                verify_live_link_targets(p['rule_context'],'https://example.org',wordpress,lambda url:'<html></html>')
 
     def _topic_link_category_lookup(self, url):
         from urllib.parse import unquote
