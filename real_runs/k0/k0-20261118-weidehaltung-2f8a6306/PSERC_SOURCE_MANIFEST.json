@@ -1,0 +1,38 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 1,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Weidehaltung für das eigene Pferd Schritt für Schritt organisieren",
+        "target_keyword": "Wie kann ich die Weidehaltung meines Pferdes organisieren?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "Anleitung",
+        "plan_slot": "c5ab76c2500572af65b473e4fb464774fdd77393d76aa12802a93bf8f845d5ba"
+      }
+    ],
+    "batch_sha256": "2f8a63061f9ed76ed2162701764d3862e44ef117ce13fed04768632e61eb8013"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Weidehaltung für das eigene Pferd Schritt für Schritt organisieren",
+        "target_keyword": "Wie kann ich die Weidehaltung meines Pferdes organisieren?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "Anleitung",
+        "plan_slot": "c5ab76c2500572af65b473e4fb464774fdd77393d76aa12802a93bf8f845d5ba"
+      },
+      "order_id": "TXE-6c8fd9b30963ab363f08f2a10054384e",
+      "article_id": "article:efd7c3bdadabc65f39cdd9be",
+      "search_intent": "Praktische Schritt-für-Schritt-Anleitung zur Organisation der Weidehaltung eines eigenen Pferdes: Weidefläche, sichere Einzäunung, Wasser und Futter, Sozialkontakte, tägliche Kontrollen sowie Pflege und Wetter berücksichtigen."
+    }
+  ],
+  "manifest_sha256": "a10f5d182541ccbf48e59ed28c966db52cc47444839d6eb50473995ebc7ea381"
+}
