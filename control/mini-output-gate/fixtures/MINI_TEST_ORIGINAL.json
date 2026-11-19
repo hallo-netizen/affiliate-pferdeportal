@@ -1,0 +1,180 @@
+{
+  "contract": "TEXTERSTELLUNG_SINGLE_EDITOR_BATCH_V1",
+  "batch_id": "mini-20261119145601-8805d0573b96",
+  "checkpoint_contract": "TEXTERSTELLUNG_MINI_CHECKPOINT_V1",
+  "source_sha256": "cc7f4849e29ba268ac72fea89ba95961f042b9e041b95e359519b13e42c5d4a5",
+  "items": [
+    {
+      "pool_key": "f405539c-5fe1-49f2-9f0c-d542e0210520",
+      "raw_query": "Ist ein Mineral- oder Salzleckstein für Pferde besser?",
+      "decision": "JA",
+      "source_sha256": "22ce068a49786294dd953ecf65f81df57498a4f3813014e745300ec21e98f3c1",
+      "relevance_owner": "ORIGINAL_PSTE_PROVEN_JA",
+      "relevance_source": "CURRENT_PORTAL_CONTEXT"
+    },
+    {
+      "pool_key": "59085fc8-c28c-4186-b4cd-df135426c01c",
+      "raw_query": "Ist ein Salzleckstein gut oder schlecht für Pferde?",
+      "decision": "JA",
+      "source_sha256": "440c10e5e0805b77baa8896a590f557e023356dcfafd0f3eb08da0b56c776aa9",
+      "relevance_owner": "ORIGINAL_PSTE_PROVEN_JA",
+      "relevance_source": "CURRENT_PORTAL_CONTEXT"
+    },
+    {
+      "pool_key": "55f3c28d-cb3a-447b-82d5-6ba973bbb74f",
+      "raw_query": "minerallecksteine für pferde",
+      "decision": "JA",
+      "source_sha256": "06a809b780ed4636f936b0a9099dd76ba018868c40b0ab2fe811a075bf09c297",
+      "relevance_owner": "ORIGINAL_PSTE_PROVEN_JA",
+      "relevance_source": "CURRENT_PORTAL_CONTEXT"
+    },
+    {
+      "pool_key": "edec1e97-6862-4464-8a84-798214696fee",
+      "raw_query": "Was machen Pferde, wenn sie traurig sind?",
+      "decision": "JA",
+      "source_sha256": "6aab54989009328987483d7927abfe6351fde2b6da4a24721c3b7673a226bef0",
+      "relevance_owner": "ORIGINAL_PSTE_PROVEN_JA",
+      "relevance_source": "CURRENT_PORTAL_CONTEXT"
+    },
+    {
+      "pool_key": "9d0b1bf9-bffb-4e6f-b379-979fa005f9d7",
+      "raw_query": "Ist es schlimm, wenn Pferde im Regen stehen?",
+      "decision": "JA",
+      "source_sha256": "a93ce7d8c0b05203657a6e84d527c491d060bc848f6c5baf50fd0af7de5e7494",
+      "relevance_owner": "ORIGINAL_PSTE_PROVEN_JA",
+      "relevance_source": "CURRENT_PORTAL_CONTEXT"
+    },
+    {
+      "pool_key": "750169e6-06b8-444c-8068-e81568241163",
+      "raw_query": "Ab welchem Alter gilt ein Pferd als alt?",
+      "decision": "JA",
+      "source_sha256": "b866ba18776d435e08b11f7295c7188cf138d424e4c6aca6ed1a58807dabf7d8",
+      "relevance_owner": "ORIGINAL_PSTE_PROVEN_JA",
+      "relevance_source": "CURRENT_PORTAL_CONTEXT"
+    },
+    {
+      "pool_key": "edf5daeb-4d65-42de-a0fe-17846e6de98e",
+      "raw_query": "Wie lange erinnern sich Pferde an ihre Besitzer?",
+      "decision": "JA",
+      "source_sha256": "7bd1d973fc53ac4e067e4551c407aa9ecd1a95fdd77b4d3db922d68e25b675ef",
+      "relevance_owner": "ORIGINAL_PSTE_PROVEN_JA",
+      "relevance_source": "CURRENT_PORTAL_CONTEXT"
+    },
+    {
+      "pool_key": "543df5de-7b1a-4752-90f9-f3c2c4b4047b",
+      "raw_query": "In welchem Alter sind Pferde am schwierigsten?",
+      "decision": "JA",
+      "source_sha256": "50419f40e3cd3b27d490ec33d0a243fc8c807aa572d3490f44fae605795af7cf",
+      "relevance_owner": "ORIGINAL_PSTE_PROVEN_JA",
+      "relevance_source": "CURRENT_PORTAL_CONTEXT"
+    },
+    {
+      "pool_key": "a2660ad6-58a1-40cf-b57f-a96ce53c641f",
+      "raw_query": "Wie sagen Pferde „Ich liebe dich“?",
+      "decision": "JA",
+      "source_sha256": "d0f4a02cbd816e3577efec9aa10e3e2c1cfb81f41bdd744661266cd4a1c7c43d",
+      "relevance_owner": "ORIGINAL_PSTE_PROVEN_JA",
+      "relevance_source": "CURRENT_PORTAL_CONTEXT"
+    },
+    {
+      "pool_key": "206d533e-fae3-4f89-9bb3-45c813846fc0",
+      "raw_query": "Wann Decke ich mein Pferd ein?",
+      "decision": "JA",
+      "source_sha256": "b381e6cb7a18b32daa8d6f91ee904cbe671d27dd373bc3c8e57f81cd4107e2ba",
+      "relevance_owner": "ORIGINAL_PSTE_PROVEN_JA",
+      "relevance_source": "CURRENT_PORTAL_CONTEXT"
+    }
+  ],
+  "resume_checkpoints": [
+    {
+      "item_index": 0,
+      "next": "CATEGORY",
+      "category": null,
+      "editorial": null,
+      "title": null,
+      "worker_errors": [],
+      "final_receipt": []
+    },
+    {
+      "item_index": 1,
+      "next": "CATEGORY",
+      "category": null,
+      "editorial": null,
+      "title": null,
+      "worker_errors": [],
+      "final_receipt": []
+    },
+    {
+      "item_index": 2,
+      "next": "CATEGORY",
+      "category": null,
+      "editorial": null,
+      "title": null,
+      "worker_errors": [],
+      "final_receipt": []
+    },
+    {
+      "item_index": 3,
+      "next": "CATEGORY",
+      "category": null,
+      "editorial": null,
+      "title": null,
+      "worker_errors": [],
+      "final_receipt": []
+    },
+    {
+      "item_index": 4,
+      "next": "CATEGORY",
+      "category": null,
+      "editorial": null,
+      "title": null,
+      "worker_errors": [],
+      "final_receipt": []
+    },
+    {
+      "item_index": 5,
+      "next": "CATEGORY",
+      "category": null,
+      "editorial": null,
+      "title": null,
+      "worker_errors": [],
+      "final_receipt": []
+    },
+    {
+      "item_index": 6,
+      "next": "CATEGORY",
+      "category": null,
+      "editorial": null,
+      "title": null,
+      "worker_errors": [],
+      "final_receipt": []
+    },
+    {
+      "item_index": 7,
+      "next": "CATEGORY",
+      "category": null,
+      "editorial": null,
+      "title": null,
+      "worker_errors": [],
+      "final_receipt": []
+    },
+    {
+      "item_index": 8,
+      "next": "CATEGORY",
+      "category": null,
+      "editorial": null,
+      "title": null,
+      "worker_errors": [],
+      "final_receipt": []
+    },
+    {
+      "item_index": 9,
+      "next": "CATEGORY",
+      "category": null,
+      "editorial": null,
+      "title": null,
+      "worker_errors": [],
+      "final_receipt": []
+    }
+  ]
+}
