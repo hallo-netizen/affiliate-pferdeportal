@@ -78,7 +78,10 @@ def _resolve_signed_wordpress(intake,registry,receipt):
     The five K0 metadata fields and all downstream rules remain unchanged."""
     from .wp_order_identity_receipt import resolve_current_intake
     try:
-        bindings=resolve_current_intake(intake,receipt)
+        identity_result=resolve_current_intake(intake,receipt)
+        if identity_result.get('status')!='PASS':
+            raise Blocked('WP_SOURCE_IDENTITY_NOT_PASS')
+        bindings=identity_result['bindings']
     except Exception as exc:
         raise Blocked('WP_SOURCE_RECEIPT_INVALID:'+str(exc)) from exc
     host=str(receipt.get('site_host') or '').strip().lower()
