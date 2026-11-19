@@ -1,0 +1,38 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 1,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Geeignete Bäume als Schattenspender auf Pferdeweiden",
+        "target_keyword": "bäume für pferdeweiden",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "Beratung",
+        "plan_slot": "d1df78939b9d9a54c7c98ab5ca2d6a487da520076aa778716dae3c72856807cf"
+      }
+    ],
+    "batch_sha256": "6db8450d6d3bbca7d3b756adc282c30ec3eab8e6c1fe07e7d3989f1b64667863"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Geeignete Bäume als Schattenspender auf Pferdeweiden",
+        "target_keyword": "bäume für pferdeweiden",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "Beratung",
+        "plan_slot": "d1df78939b9d9a54c7c98ab5ca2d6a487da520076aa778716dae3c72856807cf"
+      },
+      "order_id": "TXE-810e1421dc04787c071cb7ecc7761be5",
+      "article_id": "article:7f2a8584ea5d8b108f18f366",
+      "search_intent": "Weidegestaltung – Bäume"
+    }
+  ],
+  "manifest_sha256": "5e3be6392ea323fd87d28d3bf18647fb411d59fe2f6e575427f0087532da096f"
+}
