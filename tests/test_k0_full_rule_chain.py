@@ -227,6 +227,72 @@ class K0LinkRegressionTests(unittest.TestCase):
         self.assertEqual([x['role'] for x in result['canonical_links']],
                          ['parent_category','semantic_related','further_information'])
 
+    def test_actual_page_content_can_match_when_page_title_is_broad(self):
+        topic={'title':'Aufbau und Funktion der Eierstöcke bei der Stute',
+               'target_keyword':'eierstöcke pferd'}
+        ctx={'bound_links':[
+            {'role':'parent_category','href':'/category/pferdewissen-grundlagen/'},
+            {'role':'semantic_related','href':'/wissen/gesundheitsvorsorge-grundlagen/'},
+            {'role':'further_information','href':'/wissen/fortpflanzung/'},
+        ],'heading_intent_terms':['Eierstöcke','Follikel','Fortpflanzung'],
+        'research_claims':{'F1':{'statement':'Die Eierstöcke der Stute enthalten Follikel.'}}}
+        def wordpress(url):
+            from urllib.parse import unquote
+            slug=unquote(url.rsplit('=',1)[-1])
+            if '/categories?' in url:
+                if slug=='pferdewissen-grundlagen':
+                    return [{'slug':slug,'name':'Pferdewissen & Grundlagen',
+                             'count':2,'link':'https://example.org/category/'+slug+'/'}]
+                return []
+            if '/pages?' in url:
+                content={'gesundheitsvorsorge-grundlagen':'Bei der Stute zeigen Follikel und Fortpflanzung gesundheitliche Veränderungen.',
+                         'fortpflanzung':'Der Eisprung der Stute folgt auf die Entwicklung der Follikel.'}
+                return [{'slug':slug,'status':'publish',
+                         'link':'https://example.org/wissen/'+slug+'/',
+                         'title':{'rendered':('Gesundheitsvorsorge Grundlagen' if slug=='gesundheitsvorsorge-grundlagen' else 'Fortpflanzung')},
+                         'content':{'rendered':content[slug]}}]
+            raise AssertionError('Only categories and pages allowed: '+url)
+        out=verify_live_link_targets(ctx,'https://example.org',
+                                     wordpress,lambda url:'<html><body>Seite</body></html>',topic=topic)
+        self.assertEqual(out['status'],'PASS')
+        self.assertEqual([r['target_type'] for r in out['canonical_links']],
+                         ['C_CATEGORY','C_PAGE','C_PAGE'])
+
+    def test_generic_word_only_page_is_not_a_topic_match(self):
+        topic={'title':'Eierstöcke bei der Stute','target_keyword':'eierstöcke pferd'}
+        ctx={'bound_links':[
+            {'role':'semantic_related','href':'/wissen/gesundheitsvorsorge-grundlagen/'}
+        ],'heading_intent_terms':['Eierstöcke','Fortpflanzung'],
+        'research_claims':{'F1':{'statement':'Eierstöcke sind Organe der Stute.'}}}
+        def wordpress(url):
+            if '/categories?' in url:
+                return []
+            if '/pages?' in url:
+                return [{'slug':'gesundheitsvorsorge-grundlagen','status':'publish',
+                         'link':'https://example.org/wissen/gesundheitsvorsorge-grundlagen/',
+                         'title':{'rendered':'Gesundheitsvorsorge Grundlagen'},
+                         'content':{'rendered':'Hier geht es um allgemeine Grundlagen und Pferdewissen.'}}]
+            raise AssertionError(url)
+        with self.assertRaisesRegex(Blocked,'K0_LINK_TARGET_TOPIC_UNRELATED'):
+            verify_live_link_targets(ctx,'https://example.org',wordpress,
+                                     lambda url:'<html></html>',topic=topic)
+
+    def test_category_description_binds_topic_without_exact_title_words(self):
+        topic={'title':'Pfriemenschwanz-Eier beim Pferd erkennen',
+               'target_keyword':'pfriemenschwanz pferd eier'}
+        ctx={'bound_links':[{'role':'semantic_related','href':'/category/parasitenkunde/'}],
+             'heading_intent_terms':['Pfriemenschwanz','Parasiten'],
+             'research_claims':{'F1':{'statement':'Pfriemenschwanz ist ein Parasit, der Eier am After ablegt.'}}}
+        def wordpress(url):
+            if '/categories?' in url:
+                return [{'slug':'parasitenkunde','count':2,'name':'Parasitenkunde',
+                         'link':'https://example.org/category/parasitenkunde/',
+                         'description':'Pfriemenschwanz: Eier und Parasiten beim Pferd.'}]
+            raise AssertionError('No page/post query expected')
+        out=verify_live_link_targets(ctx,'https://example.org',wordpress,topic=topic)
+        self.assertEqual(out['status'],'PASS')
+        self.assertEqual(out['canonical_links'][0]['target_type'],'C_CATEGORY')
+
     def test_live_target_missing_category_blocks_before_writer(self):
         p,_=package_from_article(make_base())
         p['rule_context']['bound_links'][0]['href']='/category/training/'
