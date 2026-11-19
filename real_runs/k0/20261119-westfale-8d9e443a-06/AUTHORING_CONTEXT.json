@@ -1,0 +1,169 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Herkunft und Eigenschaften des Westfälischen Warmbluts",
+    "target_keyword": "westfale pferd",
+    "category": "pferderassen-pferdetypen",
+    "article_type": "Beratung",
+    "plan_slot": "45b010f3c934ecf035ea6f901fb5e983014c326652649ed853094273bf56151e"
+  },
+  "content_profile": {
+    "search_intent": "Pferderassen – Westfale"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Westfale",
+          "source_title": "Wikipedia – Westfale Pferderasse"
+        }
+      ],
+      "claims": [
+        "Der Westfale ist eine deutsche Warmblut-Pferderasse.",
+        "Der Westfale ist im Körperbau durch den Hannoveraner beeinflusst.",
+        "Westfalen gelten als Sportpferde mit vergleichsweise ruhigem Temperament.",
+        "Das Westfälische Pferdestammbuch wurde 1904 gegründet.",
+        "Nach dem Zweiten Weltkrieg verlagerte sich die westfälische Pferdezucht zum Reit- und Sportpferd."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "westfale pferd",
+      "topic": "Herkunft und Eigenschaften des Westfälischen Warmbluts",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferderassen-pferdetypen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Herkunft, Eigenschaften und Verwendung des Westfälischen Warmbluts verständlich beurteilen.",
+      "decision_criteria": [
+        "Zuchtgeschichte und Ursprung",
+        "Exterieur des Sportpferdes",
+        "Temperament und Einsatz",
+        "Historischer Wandel des Zuchtziels"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Westfale",
+        "source_title": "Wikipedia – Westfale Pferderasse",
+        "evidence_text": "Der Westfale ist eine Pferderasse",
+        "evidence_text_sha256": "774db18e5014b18d1e9e5e31145513708050a19916ae6cc504aa343d3053c052",
+        "statement": "Der Westfale ist eine deutsche Warmblut-Pferderasse.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Westfale",
+        "source_title": "Wikipedia – Westfale Pferderasse",
+        "evidence_text": "Er ist dem Hannoveraner, von dem er stark beeinflusst wurde, sehr ähnlich",
+        "evidence_text_sha256": "204879ef453259c14f5c6611676d7f53fe4142343ad584a4e595359527eac274",
+        "statement": "Der Westfale ist im Körperbau durch den Hannoveraner beeinflusst.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Westfale",
+        "source_title": "Wikipedia – Westfale Pferderasse",
+        "evidence_text": "Der Westfale gilt als verhältnismäßig ruhiges Sportpferd",
+        "evidence_text_sha256": "2316c384e7b47ed54a9a9c1e69f1c2f8e3b6d46aa5cf989715752aca40bfaa88",
+        "statement": "Westfalen gelten als Sportpferde mit vergleichsweise ruhigem Temperament.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://de.wikipedia.org/wiki/Westfale",
+        "source_title": "Wikipedia – Westfale Pferderasse",
+        "evidence_text": "1904 wurde das Westfälische Pferdestammbuch gegründet",
+        "evidence_text_sha256": "ffc170209ed1e6ba1a0ad86effd4fee2dce9d6029fc48069907cc9e7e06b80b5",
+        "statement": "Das Westfälische Pferdestammbuch wurde 1904 gegründet.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://de.wikipedia.org/wiki/Westfale",
+        "source_title": "Wikipedia – Westfale Pferderasse",
+        "evidence_text": "Mit dem Ende des Zweiten Weltkrieges ging der Bedarf an diesen Rassen durch die aufkommende Motorisierung stark zurück",
+        "evidence_text_sha256": "5d13077ec1a3ab9ec4808b70ce4625093e6d850ebe281757167d746a352bb80b",
+        "statement": "Nach dem Zweiten Weltkrieg verlagerte sich die westfälische Pferdezucht zum Reit- und Sportpferd.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferderassen-pferdetypen/",
+        "anchor": "pferderassen-pferdetypen",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferderassen-pferdetypen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferderassen-pferdetypen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Westfale",
+      "Warmblut",
+      "Herkunft",
+      "Zucht",
+      "Sportpferd",
+      "Pferderasse"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Tabelle stellt die relevanten Prüf- und Entscheidungskriterien für westfale pferd gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
