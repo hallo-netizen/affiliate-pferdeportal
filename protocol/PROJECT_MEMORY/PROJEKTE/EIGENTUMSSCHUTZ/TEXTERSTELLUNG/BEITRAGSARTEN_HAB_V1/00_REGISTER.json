@@ -110,6 +110,18 @@
     "hab_sync_commit": "862023cc92805a16e3af25d66f2148a35fd8b1bd",
     "regeln_vergleich": "5/5 separate Hab-Regelbücher nachweislich identisch gespiegelt",
     "technische_freigabe": false,
-    "keine_aenderung_am_altworkflow": true
+    "keine_aenderung_am_altworkflow": true,
+    "k_multi_bridge_commit": "32e4f47a5671a2cc137ae44042d3d848a9ee9394",
+    "hab_plugin_original_version": "0.4.31.6",
+    "original_php_tests": "31/31 PASS (offline)",
+    "bridge_tests": "8/8 PASS (offline, historisches und synthetisches Testmaterial)",
+    "fachbuecher_erreichbar_aus_originalplugin": [
+      "HAB_FAQ",
+      "HAB_RATGEBER",
+      "HAB_VERGLEICH",
+      "HAB_ANLEITUNG"
+    ],
+    "bericht_nicht_erreichbar": "Kein Artikeltyp Bericht im unveränderten Plugin – Sperre, keine Ersatzzuteilung",
+    "writer_e2e": false
   }
 }
