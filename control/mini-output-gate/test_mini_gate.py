@@ -118,6 +118,30 @@ class TestMiniGate(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'Original ist nicht unverändert'):
             gate(self.ws)
 
+    def test_locked_category_cannot_be_decided_twice(self):
+        resume = json.loads((self.ws / ORIGINAL).read_text())
+        resume['resume_checkpoints'][0]['next'] = 'EDITORIAL'
+        resume['resume_checkpoints'][0]['category'] = {
+            k: self.cat['items'][0][k] for k in ('route', 'category_slug', 'article_type')}
+        write(self.ws / ORIGINAL, resume)
+        import hashlib
+        (self.ws/'ORIGINAL_SHA256.txt').write_text(hashlib.sha256((self.ws/ORIGINAL).read_bytes()).hexdigest()+'\n')
+        result = gate(self.ws)
+        self.assertEqual(result['status'], 'REPARATUR')
+        self.assertTrue(any(x['code'] == 'ABGESCHLOSSENE_KATEGORIE_ERNEUT_ENTSCHIEDEN'
+                            and x['item_index'] == 0 for x in result['fix_only']))
+
+    def test_done_topic_cannot_be_redecided(self):
+        resume = json.loads((self.ws / ORIGINAL).read_text())
+        resume['resume_checkpoints'][0]['next'] = 'DONE'
+        write(self.ws / ORIGINAL, resume)
+        import hashlib
+        (self.ws/'ORIGINAL_SHA256.txt').write_text(hashlib.sha256((self.ws/ORIGINAL).read_bytes()).hexdigest()+'\n')
+        result = gate(self.ws)
+        self.assertTrue(any(x['code'] == 'BEREITS_ABGESCHLOSSENE_ENTSCHEIDUNG_WIEDERHOLT'
+                            and x['item_index'] == 0 for x in result['fix_only']))
+        self.assertFalse((self.ws/RELEASE).exists())
+
     def test_no_second_domain_review_and_legacy_only_category(self):
         with tempfile.TemporaryDirectory() as p:
             w=Path(p)
