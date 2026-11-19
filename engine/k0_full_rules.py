@@ -163,6 +163,7 @@ def verify_live_link_targets(ctx,base_url,fetch_json=None,fetch_html=None,topic=
     def same_public_path(url,href):
         return urllib.parse.urlsplit(str(url or '')).path.rstrip('/')==urllib.parse.urlsplit(href).path.rstrip('/')
     bound=[]
+    omitted=[]
     for link in (ctx.get('bound_links') or []):
         role=str(link.get('role') or '')
         href=str(link.get('href') or '')
@@ -218,9 +219,14 @@ def verify_live_link_targets(ctx,base_url,fetch_json=None,fetch_html=None,topic=
         # No later checker and no unrelated generic category as a fallback.
         if (topic is not None and role in ('semantic_related','further_information')
                 and not _k0_link_has_specific_topic(label,ctx,topic,target_content)):
-            raise Blocked('K0_LINK_TARGET_TOPIC_UNRELATED:'+role+':'+slug)
+            # Same existing link owner: omit an unhelpful optional link instead
+            # of forcing a generic link or starting another decision stage.
+            omitted.append({'role':role,'href':href,'reason':'NO_MEANINGFUL_TOPIC_MATCH'})
+            continue
         bound.append({'role':role,'href':href,'official_name':label,'target_type':target_type})
-    return {'status':'PASS','checked':len(bound),'canonical_links':bound}
+    if not any(x['role']=='parent_category' for x in bound):
+        raise Blocked('K0_LINK_TARGET_PARENT_CATEGORY_MISSING')
+    return {'status':'PASS','checked':len(bound),'canonical_links':bound,'omitted_links':omitted}
 
 
 def validate_rule_context(ctx,identity):
@@ -258,11 +264,14 @@ def validate_rule_context(ctx,identity):
         raise Blocked('K0_RULE_CONTEXT_REQUIRED_FACT_NOT_ALLOWED')
 
     links=ctx.get('bound_links')
-    roles=set(values['global']['required_link_roles'])
-    if not isinstance(links,list) or len(links)!=int(values['global']['visible_links_exact']):
+    allowed_roles=set(values['global']['required_link_roles'])
+    mandatory_roles=set(values['global'].get('mandatory_link_roles') or ['parent_category'])
+    min_links=int(values['global'].get('visible_links_min',1))
+    max_links=int(values['global'].get('visible_links_max',values['global']['visible_links_exact']))
+    if not isinstance(links,list) or not min_links<=len(links)<=max_links:
         raise Blocked('K0_RULE_CONTEXT_LINK_COUNT_INVALID')
     actual_roles={str(x.get('role') or '') for x in links if isinstance(x,dict)}
-    if actual_roles!=roles:
+    if len(actual_roles)!=len(links) or not mandatory_roles.issubset(actual_roles) or not actual_roles.issubset(allowed_roles):
         raise Blocked('K0_RULE_CONTEXT_LINK_ROLES_INVALID')
     blocks=[]
     for x in links:
@@ -284,11 +293,11 @@ def validate_rule_context(ctx,identity):
     if len(set(blocks))!=len(blocks):
         raise Blocked('K0_RULE_CONTEXT_LINK_BLOCKS_NOT_DISTINCT')
     by_role={str(x.get('role') or ''):x for x in links if isinstance(x,dict)}
-    if str((by_role.get('further_information') or {}).get('block') or '')!='further_information':
+    if 'further_information' in by_role and str(by_role['further_information'].get('block') or '')!='further_information':
         raise Blocked('K0_RULE_CONTEXT_FURTHER_LINK_POSITION_INVALID')
     non_main={'intro','conclusion','further_information','table'}
     for role in ('parent_category','semantic_related'):
-        if str((by_role.get(role) or {}).get('block') or '') in non_main:
+        if role in by_role and str(by_role[role].get('block') or '') in non_main:
             raise Blocked('K0_RULE_CONTEXT_MAIN_LINK_DISTRIBUTION_INVALID:'+role)
 
     registry=ctx.get('link_registry')
@@ -298,7 +307,7 @@ def validate_rule_context(ctx,identity):
     if any(str(x.get('href') or '') not in reg or reg[str(x.get('href') or '')].get('active') is not True for x in links):
         raise Blocked('K0_RULE_CONTEXT_LINK_REGISTRY_INACTIVE')
     runtime_roles=set(ctx.get('runtime_link_roles') or [])
-    if runtime_roles!=roles:
+    if runtime_roles!=actual_roles:
         raise Blocked('K0_RULE_CONTEXT_RUNTIME_LINK_ROLES_INVALID')
 
     wc=ctx.get('wordpress_category')
