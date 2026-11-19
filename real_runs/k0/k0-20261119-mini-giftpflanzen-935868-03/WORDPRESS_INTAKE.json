@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Gefährliche Giftpflanzen auf Pferdeweiden erkennen",
+      "target_keyword": "giftpflanzen auf pferdeweiden",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "Beratung",
+      "plan_slot": "da6fdf4127588c8addd08fd27327a2c058cfb91c7675a750b8df36cb71295d14"
+    }
+  ],
+  "batch_sha256": "d62dd1c223aa9deb590c07636a9d0e29be9cc6adfcc12f62deb5719d6f9c0948"
+}
