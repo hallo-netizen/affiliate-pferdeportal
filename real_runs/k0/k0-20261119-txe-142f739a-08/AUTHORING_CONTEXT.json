@@ -1,0 +1,136 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Ist Gurke gut für Pferde?",
+    "target_keyword": "Ist Gurke gut für Pferde?",
+    "category": "pferdeernaehrung-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "09e645519d1a1787c51c6daf99740df590b463ad87078d3d94832d3fc4620a18"
+  },
+  "content_profile": {
+    "search_intent": "Gurke als wasserreiches Leckerli für Pferde einordnen"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://en.wikipedia.org/wiki/Cucumber",
+          "source_title": "Wikipedia – Gurke"
+        }
+      ],
+      "claims": [
+        "Gurken sind Früchte einer rankenden Kulturpflanze.",
+        "Gurken gehören zu den Kürbisgewächsen.",
+        "Frische Gurken bestehen zu einem sehr hohen Anteil aus Wasser."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Ist Gurke gut für Pferde?",
+      "topic": "Ist Gurke gut für Pferde?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Ist Gurke gut für Pferde?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://en.wikipedia.org/wiki/Cucumber",
+        "source_title": "Wikipedia – Gurke",
+        "evidence_text": "Cucumber is a creeping vine plant",
+        "evidence_text_sha256": "1d8feabbff859e0c9404d8b6d6d898d983467c5c56df0cff8a674da186f3d167",
+        "statement": "Gurken sind Früchte einer rankenden Kulturpflanze.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://en.wikipedia.org/wiki/Cucumber",
+        "source_title": "Wikipedia – Gurke",
+        "evidence_text": "in the family Cucurbitaceae",
+        "evidence_text_sha256": "7e018d6533ecd64171c57d6e4e76176b3952872ea08c3926b89a046f68749879",
+        "statement": "Gurken gehören zu den Kürbisgewächsen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://en.wikipedia.org/wiki/Cucumber",
+        "source_title": "Wikipedia – Gurke",
+        "evidence_text": "raw cucumber (with peel) is 95% water",
+        "evidence_text_sha256": "baf0e8cfd03622ee769ad1687fdfce62218bc95dd6710bddaa9b34d328b2ca6f",
+        "statement": "Frische Gurken bestehen zu einem sehr hohen Anteil aus Wasser.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "anchor": "pferdeernaehrung-verstehen",
+        "block": "details"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Gurke",
+      "Pferde",
+      "Fütterung",
+      "Gemüse",
+      "Wasser",
+      "Menge",
+      "Leckerli"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine kompakte Tabelle ergänzt die thematisch unterschiedlichen Prüfungskriterien und Maßnahmen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
