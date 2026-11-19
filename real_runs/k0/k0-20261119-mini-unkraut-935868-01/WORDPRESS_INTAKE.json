@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Unkraut auf Pferdeweiden erkennen und zurückdrängen",
+      "target_keyword": "unkraut auf pferdeweiden",
+      "category": "alltags-pferde-haltungsformen",
+      "article_type": "Pflege",
+      "plan_slot": "853c32893eab5d4d5ea59db2494be535d929781ef2f5790af5ecaec36e3fffbf"
+    }
+  ],
+  "batch_sha256": "506457acd300fec51db88c66993d9888fe5d5b86fea1ab7c94a5661235043c9f"
+}
