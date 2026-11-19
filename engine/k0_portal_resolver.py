@@ -73,10 +73,36 @@ def match_profile(category,profiles):
         raise Blocked('PORTAL_ASSIGNMENT_NOT_UNIQUE:'+category+':'+str(len(hits)))
     return hits[0]
 
-def resolve(intake,registry):
+def _resolve_signed_wordpress(intake,registry,receipt):
+    """Only portal identity from the already verified original WordPress receipt.
+    The five K0 metadata fields and all downstream rules remain unchanged."""
+    from .wp_order_identity_receipt import resolve_current_intake
+    bindings=resolve_current_intake(intake,receipt)
+    host=str(receipt.get('site_host') or '').strip().lower()
+    profiles=registry.get('profiles') or []
+    hits=[p for p in profiles if host in (p.get('site_hosts') or [])]
+    if len(hits)!=1:
+        raise Blocked('WP_SOURCE_PORTAL_HOST_NOT_UNIQUE:'+host+':'+str(len(hits)))
+    p=hits[0]
+    rows=validate_intake(intake)
+    for row in rows:
+        if row['plan_slot'] not in bindings:
+            raise Blocked('WP_SOURCE_BINDING_MISSING')
+    return {
+      'contract':'K0_PORTAL_ASSIGNMENT_V1','status':'PASS',
+      'source_batch_sha256':intake['batch_sha256'],'item_count':len(rows),
+      'items':[{'portal_id':p['portal_id'],'portal_name':p['display_name'],
+        'status':'AUTO_DETECTED','basis':'verified_wp_source_host:'+host,
+        'job_identity':{k:row[k] for k in FIVE_FIELDS}} for row in rows],
+      'publish_allowed':False
+    }
+
+def resolve(intake,registry,receipt=None):
     rows=validate_intake(intake)
     if registry.get('contract')!='K0_PORTAL_REGISTRY_V1':
         raise Blocked('PORTAL_REGISTRY_CONTRACT_INVALID')
+    if receipt is not None and receipt.get('contract')=='WP_K0_SOURCE_RECEIPT_V1':
+        return _resolve_signed_wordpress(intake,registry,receipt)
     profiles=[dict(p) for p in registry.get('profiles') or []]
     static_profiles=[p for p in profiles if not p.get('category_git_source')]
     central_loaded=False
@@ -114,7 +140,8 @@ def resolve(intake,registry):
 
 def main():
     try:
-        out=resolve(load(sys.argv[1]),load(sys.argv[2]))
+        receipt=load(sys.argv[3]) if len(sys.argv)>3 else None
+        out=resolve(load(sys.argv[1]),load(sys.argv[2]),receipt)
         print(json.dumps(out,ensure_ascii=False,indent=2))
     except Blocked as exc:
         print(json.dumps({'contract':'K0_PORTAL_ASSIGNMENT_V1','status':'BLOCKED','reason':str(exc),'publish_allowed':False},ensure_ascii=False,indent=2))
