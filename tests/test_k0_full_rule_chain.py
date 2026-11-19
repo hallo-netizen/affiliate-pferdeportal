@@ -304,11 +304,16 @@ class K0LinkRegressionTests(unittest.TestCase):
     def test_category_description_binds_topic_without_exact_title_words(self):
         topic={'title':'Pfriemenschwanz-Eier beim Pferd erkennen',
                'target_keyword':'pfriemenschwanz pferd eier'}
-        ctx={'bound_links':[{'role':'semantic_related','href':'/category/parasitenkunde/'}],
+        ctx={'bound_links':[{'role':'parent_category','href':'/category/pferdewissen-grundlagen/'},
+                            {'role':'semantic_related','href':'/category/parasitenkunde/'}],
              'heading_intent_terms':['Pfriemenschwanz','Parasiten'],
              'research_claims':{'F1':{'statement':'Pfriemenschwanz ist ein Parasit, der Eier am After ablegt.'}}}
         def wordpress(url):
             if '/categories?' in url:
+                slug=url.rsplit('=',1)[-1]
+                if slug=='pferdewissen-grundlagen':
+                    return [{'slug':slug,'count':0,'name':'Pferdewissen & Grundlagen',
+                             'link':'https://example.org/category/'+slug+'/'}]
                 return [{'slug':'parasitenkunde','count':2,'name':'Parasitenkunde',
                          'link':'https://example.org/category/parasitenkunde/',
                          'description':'Pfriemenschwanz: Eier und Parasiten beim Pferd.'}]
