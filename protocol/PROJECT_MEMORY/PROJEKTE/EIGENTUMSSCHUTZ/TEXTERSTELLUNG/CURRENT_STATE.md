@@ -1,3 +1,15 @@
+# AKTUELL 19.11.2026 – Hab Texte: Kategorie-/Magazin-/K-Multi-Gesamtanalyse abgeschlossen
+
+**Ohne Nutzer-Zwischenstopp bearbeitet:** 1.323 C23-Kategorien zu 265 Themenseiten einzeln in sechs vollständigen GitHub-Dateien unter `ARTIKELARTEN_BESTAND_20261119/` erfasst, 285 historische WordPress-IDs exakt C22 zugeordnet, 1.038 spätere Kategorien ohne erfundene aktuelle WordPress-IDs. Vollständiger Rücklese-Zähltest: 1.323/285/1.038 PASS. 471 C23-Vorschläge + 138 C25 + 185 C26 Versicherungskategorien streng getrennt als **nicht live verifiziert** katalogisiert. 14 echte WordPress-Magazin-SEITEN vom 14.11. nachgewiesen, aber **keine konkrete WordPress-Beitragskategorie**; in Texterstellung 0.4.31.6 ist `journal_categories.categories=[]` und Magazin-Routing nicht konfiguriert. Magazin-MINI muss daher bis zum Kategorienachweis gesperrt bleiben.
+
+**Artikelarten-Minimalvorschlag:** Fünf bestehende Schreibarten Beratung, FAQ, Vergleich, Pflege, Anleitung; keine neue Art; keine Artikelart fest pro Kategorie; endgültige `route/category_slug/article_type`-Entscheidung im MINI einmalig je Text. Hab-spezifische Sonderregeln sind konzipiert, **nicht** im produktiven K0 eingebaut.
+
+**K-Multi echter Abgleich:** `k0-offline-rule-bindings-20261027` hat 177 Offline-Tests, Hab-Profil `NO_VALUES_BLOCKED`, keine produktive Writer-Freigabe; es kennt vier Originalarten, Hab zusätzlich Anleitung. Bestehende Hab-0.4.31.6-Fünffeld-Exportgrenze unverändert. Nächste Folge: vorhandenen WP-Magazin-Term und C23-Readback prüfen → je Welt MINI-Test → originalen K-Multi-Writer mit Hab-Profil/5. Art offline abnehmen → einen geprüften Artikel als WP-Entwurf importieren. Kein K0-, MINI-, WordPress- oder Plugin-Update, keine kostenpflichtige Recherche.
+
+**Dauerablagen:** GitHub `HAB_TEXTERSTELLUNG_KATEGORIEN_KMULTI_GESAMTSTAND_20261119.md` + 11 Einzelakten unter `ARTIKELARTEN_BESTAND_20261119/`; Library `/hab-und-bewahr/TEXTERSTELLUNG/ARTIKELARTEN_KMULTI_20261119/HAB_TEXTERSTELLUNG_KATEGORIEN_KMULTI_GESAMTSTAND_20261119.md`. Hab-Plugin `0.4.31.6` bleibt maßgeblich unverändert.
+
+---
+
 # PASS – 19.11.2026: Hab Texterstellung 0.4.31.6 gesichert
 
 Nutzer meldet **PASS** und verlangt Protokoll/Büroablage. **Verifiziert:** unveränderte ZIP 0.4.31.6 im Hab-Büro `/hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEN/04316/`, SHA256 `29769acb82fc6aef9bee68de87248ed70d2af51fe454d1218af887f5b501a7eb`; QA/Diff/Tests liegen dort. Zusätzlich `PASS_UND_ABLAGE_20261119.md` erfolgreich archiviert. GitHub-Protokoll `HAB_04316_PASS_ABLAGE_BESTAETIGT_20261119.md`. **Keine neue Version/Änderung.** Nutzer-PASS ist protokolliert; echte Serverantwortzeit bleibt nicht separat gemessen. Maßgeblicher letzter Hab-Stand 0.4.31.6. Original-K0, MINI, Universal, Pferdeatelier, Robotik, Wassertechnik unverändert.
