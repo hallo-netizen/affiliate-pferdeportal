@@ -1,0 +1,208 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Mineraldünger für Pferdeweiden bedarfsgerecht einsetzen",
+    "target_keyword": "mineraldünger für pferdeweiden",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "Anleitung",
+    "plan_slot": "c41b5178aa3a349cb433aea77de92320d8dedd4f4464f26a38a52db4a81de8c2"
+  },
+  "content_profile": {
+    "search_intent": "Weidepflege – Mineraldünger"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "LUFA NRW – Pferdeweiden",
+          "source_url": "https://www.landwirtschaftskammer.de/lufa/analysen/boden/pferdeweiden.htm"
+        },
+        {
+          "source_title": "University of Minnesota Extension – Managing established horse pastures",
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/managing-established-horse-pastures"
+        }
+      ],
+      "claims": [
+        "Auch Mineraldünger darf nur nach dem tatsächlichen Bedarf eingesetzt werden.",
+        "Die Bodenprobe ermöglicht die Auswahl geeigneter Düngemittel und Mengen.",
+        "Für die Planung werden pH-Wert und wichtige Grundnährstoffe analysiert.",
+        "Phosphor und Kalium werden nur bei nachgewiesenem Bedarf gedüngt.",
+        "Vor starkem Regen sollte Mineraldünger wegen Abschwemmungsgefahr nicht ausgebracht werden.",
+        "Pferde dürfen nicht auf frisch bestreute Flächen mit sichtbarem Düngergranulat."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Anleitung",
+      "target_keyword": "mineraldünger für pferdeweiden",
+      "topic": "Mineraldünger für Pferdeweiden bedarfsgerecht einsetzen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Mineraldünger auf Pferdeweiden bedarfsgerecht auswählen und unter Beachtung der Weidesicherheit einsetzen.",
+      "preparation_items": [
+        "Aktuelle Bodenuntersuchung beschaffen",
+        "Nährstoffbedarf und Flächennutzung klären",
+        "Geeignetes und zulässiges Düngemittel prüfen"
+      ],
+      "procedure_steps": [
+        "Bodenproben auswerten und Bedarfsmenge festlegen",
+        "Produktzusammensetzung mit Düngeempfehlung vergleichen",
+        "Wetter, Bodenbedingungen und gesetzlichen Rahmen prüfen",
+        "Mineraldünger gleichmäßig und gemäß Vorgaben ausbringen",
+        "Pferde erst nach ausreichender Wartezeit und vollständiger Auflösung sichtbarer Granulate zurücklassen"
+      ],
+      "safety_controls": [
+        "Pferde vor Ausbringung von der Fläche nehmen",
+        "Nicht bei drohendem Starkregen ausbringen",
+        "Sperrfristen und Gebrauchshinweise beachten"
+      ],
+      "common_errors": [
+        "Ohne Bodenprobe pauschal einen Volldünger wählen",
+        "Überhöhte Düngermengen einsetzen",
+        "Pferde zu früh auf frisch gedüngte Fläche lassen"
+      ],
+      "result_checks": [
+        "Düngung entspricht dem festgestellten Bedarf",
+        "Granulate sind nicht mehr sichtbar",
+        "Freigabe zur Beweidung erfolgt nach Hersteller- und Fachhinweisen"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.landwirtschaftskammer.de/lufa/analysen/boden/pferdeweiden.htm",
+        "source_title": "LUFA NRW – Pferdeweiden",
+        "evidence_text": "Wichtiger Bestandteil einer ausgewogenen pflanzen- und pferdegerechten Weideführung ist die bedarfsgerechte Düngung.",
+        "evidence_text_sha256": "49ebee93697db5d2c44a3e292d475fcd330981e62a4389b7677b06a2ba868eed",
+        "statement": "Auch Mineraldünger darf nur nach dem tatsächlichen Bedarf eingesetzt werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.landwirtschaftskammer.de/lufa/analysen/boden/pferdeweiden.htm",
+        "source_title": "LUFA NRW – Pferdeweiden",
+        "evidence_text": "Die Düngeempfehlung ist speziell für Pferdehalter aufbereitet und enthält konkrete Vorschläge zu Düngemitteln und Düngermengen für die beprobten Flächen.",
+        "evidence_text_sha256": "d3c5935ce9f1ace93be5fe1267aca792925fdb34f50856a8f8ca7acfa72b96bc",
+        "statement": "Die Bodenprobe ermöglicht die Auswahl geeigneter Düngemittel und Mengen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.landwirtschaftskammer.de/lufa/analysen/boden/pferdeweiden.htm",
+        "source_title": "LUFA NRW – Pferdeweiden",
+        "evidence_text": "pH-Wert, Phosphor, Kalium, Magnesium",
+        "evidence_text_sha256": "1b25bfdb6e026ed14b686c1c20087ce51c429c8553e2ded4aed9a12709da56f4",
+        "statement": "Für die Planung werden pH-Wert und wichtige Grundnährstoffe analysiert.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/managing-established-horse-pastures",
+        "source_title": "University of Minnesota Extension – Managing established horse pastures",
+        "evidence_text": "Apply phosphorus (P) and potassium (K) if needed, based on the soil sample.",
+        "evidence_text_sha256": "2615b5818357d5b18a7af4730874cc1150c43a24a0d2039cb7f05953765a77d6",
+        "statement": "Phosphor und Kalium werden nur bei nachgewiesenem Bedarf gedüngt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/managing-established-horse-pastures",
+        "source_title": "University of Minnesota Extension – Managing established horse pastures",
+        "evidence_text": "Avoid fertilizing right before a large storm event to prevent the fertilizer from washing away.",
+        "evidence_text_sha256": "b6b652060e417182b66480ba7b41ed94fc6fa067604bef40d6ee7e7ec60443a6",
+        "statement": "Vor starkem Regen sollte Mineraldünger wegen Abschwemmungsgefahr nicht ausgebracht werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F6": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/managing-established-horse-pastures",
+        "source_title": "University of Minnesota Extension – Managing established horse pastures",
+        "evidence_text": "Keep horses off the pasture until the fertilizer is no longer visible.",
+        "evidence_text_sha256": "2bb4f65a3a0a3316daa89340f8b284e15016086c6505ec5538bfb96f408124a1",
+        "statement": "Pferde dürfen nicht auf frisch bestreute Flächen mit sichtbarem Düngergranulat.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "alltags-pferde-haltungsformen",
+        "block": "steps"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Mineraldünger",
+      "Pferdeweiden",
+      "Bodenprobe",
+      "Nährstoffe",
+      "Düngemenge",
+      "Weidesicherheit"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine vierzeilige Übersicht bietet konkreten Mehrwert bei den praktischen Entscheidungen zu mineraldünger für pferdeweiden."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
