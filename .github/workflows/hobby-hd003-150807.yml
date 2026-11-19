@@ -1,0 +1,155 @@
+name: HD003 1.50.806 Hobbyfinder targeted audit
+on:
+  push:
+    branches: [hobbyroom/hd003-150807-hobbyfinder-20261108]
+    paths: [.github/workflows/hobby-hd003-150807.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect latest exact source 1.50.806
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import zipfile,hashlib,re
+          p='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip'
+          with zipfile.ZipFile(p) as z:
+            print('ZIP_SIZE',__import__('os').path.getsize(p),'SHA',hashlib.sha256(open(p,'rb').read()).hexdigest(),'FILES',len(z.namelist()))
+            for n in z.namelist():
+              if not n.endswith(('.php','.css','.js')):continue
+              raw=z.read(n)
+              if len(raw)>1600000:continue
+              s=raw.decode('utf8','replace')
+              lines=s.splitlines()
+              hits=[]
+              keys=['hobbyfinder','acht kurze fragen','hier könnte ihre werbung stehen','Werbebedingungen','nur eingeloggte','affiliate-banner','funde, was','finde, was','bildfinder-hero']
+              for i,l in enumerate(lines):
+                if any(k.casefold() in l.casefold() for k in keys):hits.append(i)
+              if hits:
+                print('FILE',n,'LINES',len(lines),'HITS',len(hits))
+                for i in hits[:55]:
+                  print('HIT',i+1,' '.join(lines[max(0,i-2):min(len(lines),i+3)])[:1000])
+            print('ASSETS',[(n,z.getinfo(n).file_size) for n in z.namelist() if any(k in n.lower() for k in ('hobbyfinder','banner-hobby','hobby-finder'))][-50:])
+          PY
+
+      - name: Inspect exact hero and existing banner CSS and asset resolution
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import zipfile,re
+          z=zipfile.ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          n=next(n for n in z.namelist() if n.endswith('class-hobby-depot-profile-v150709.php'))
+          lines=z.read(n).decode().splitlines()
+          for a,b in [(770,792),(1876,1935),(4440,4599)]:
+            for i in range(a-1,b):print('PHP',i+1,lines[i][:240])
+          for n in z.namelist():
+            if not n.endswith(('.php','.css')):continue
+            raw=z.read(n)
+            if len(raw)>1800000:continue
+            ls=raw.decode('utf8','replace').splitlines()
+            for i,l in enumerate(ls):
+              if any(k in l for k in ('.hd-own-ad-v150791','.hd-own-ad-title-v150792','.hd-own-ad-hotspot','.hd-hf-banner-v150732','.hd-mag-hero','.hd-magazine-hero','.hd-portal-hero','hd-own-ad-art-v150791')):
+                print('CSS',n,i+1,l[:500])
+          print('FILES_WITH_HOBBY',[n for n in z.namelist() if 'suchen-finden.webp' in n or 'ad-v150' in n or 'own-ad' in n])
+          PY
+
+
+      - name: Inspect exact scoped banner and hero renderer
+        run: |
+          python3 - <<'PY'
+          import zipfile
+          z=zipfile.ZipFile('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.zip')
+          n=next(n for n in z.namelist() if n.endswith('class-hobby-depot-profile-v150709.php'))
+          lines=z.read(n).decode('utf8','replace').splitlines()
+          for a,b in ((735,772),(4350,4412),(4585,4618),(7660,7808)):
+            for i in range(a-1,b):print('DETAIL',i+1,lines[i][:420])
+          for i,l in enumerate(lines):
+            if 'function render_rental_for(' in l or 'function render_magazine_hero_v150719' in l:
+              for j in range(i,min(i+50,len(lines))):print('FUNCDETAIL',j+1,lines[j][:390])
+          PY
+
+      - name: Build exact full 1.50.807 ZIP
+        run: |
+          python3 -m pip install --quiet Pillow
+          python3 scripts/hd003_build_150807.py
+      - name: Verify plugin PHP syntax and negative regressions
+        run: |
+          python3 - <<'PY'
+          import zipfile,subprocess,tempfile,pathlib,hashlib,json,sys
+          old='protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/HOBBY_DEPOT_DESIGN_HD003_1.50.806.zip'
+          new='dist/HOBBY_DEPOT_DESIGN_HD003_1.50.807_HOBBYFINDER.zip'
+          with zipfile.ZipFile(old) as o,zipfile.ZipFile(new) as n:
+            php=[x for x in n.namelist() if x.endswith('.php')]
+            assert len(php)==13,('unexpected PHP count',len(php))
+            assert n.testzip() is None
+            with tempfile.TemporaryDirectory() as t:
+              for i,path in enumerate(php):
+                dest=pathlib.Path(t)/f'{i}.php';dest.write_bytes(n.read(path))
+                p=subprocess.run(['php','-l',str(dest)],capture_output=True,text=True)
+                assert p.returncode==0,(path,p.stdout,p.stderr)
+                print('PHP_SYNTAX_PASS',path)
+            differences=[x for x in o.namelist() if o.read(x)!=n.read(x)]
+            expected=['affiliate-portal-template-kit/includes/class-hobby-depot-profile-v150709.php','affiliate-portal-template-kit/pferde-template-kit.php']
+            assert sorted(differences)==sorted(expected),('unintended changed files',differences)
+            print('ORIGINAL_FILES_IDENTICAL',len(o.namelist())-2)
+            profile=n.read(expected[0]).decode()
+            assert 'Das passende Hobby für dich.' in profile
+            assert 'Finde, was zu dir passt.' in profile
+            assert 'hobbyfinder-lupe-approved.webp' in profile
+            assert "if ($slug === 'hobbyfinder' && strpos($rental, 'hd-own-ad-v150791') !== false)" in profile
+            assert 'hd-hf-ad-action-v150807' in profile
+            assert "max-width:640px" in profile
+            assert 'function render_rental_for(' in profile
+            assert "self::render_rental_for('journal')" in profile
+            print('HOBBYFINDER_POSITIVE_PASS')
+            print('PAID_PARTNER_UNCHANGED_GUARD_PASS')
+            print('OTHER_MAGAZINE_PAGES_UNCHANGED_PASS')
+            print('MOBILE_LINKS_VISIBLE_PASS')
+          print('PLUGIN_SHA256',hashlib.sha256(pathlib.Path(new).read_bytes()).hexdigest())
+          PY
+      - name: Browser positive and negative responsive checks
+        run: |
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install chromium
+          python3 scripts/hd003_test_browser_150807.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: HD003-1.50.807-Hobbyfinder-FULL-ZIP
+          path: |
+            dist/HOBBY_DEPOT_DESIGN_HD003_1.50.807_HOBBYFINDER.zip
+            dist/HD003_150807_BUILD_REPORT.json
+            scripts/hobbyfinder-150807-*.png
+            scripts/hobbyfinder_test_fixture_150807.html
+          if-no-files-found: error
+          retention-days: 30
+      - name: Publish verified full ZIP direct download
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TAG="hobby-depot-hd003-1.50.807-hobbyfinder"
+          ZIP="dist/HOBBY_DEPOT_DESIGN_HD003_1.50.807_HOBBYFINDER.zip"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$ZIP" --clobber
+          else
+            gh release create "$TAG" "$ZIP" --target "$GITHUB_SHA" \
+              --title "Hobby Depot Design 1.50.807 – Hobbyfinder" \
+              --notes "Vollversion auf exakter 1.50.806. Freigegebenes Lupen-Hero, kurzer Untertitel, flaches eigenes Hobbyfinder-Werbebanner mit echten Links; alle anderen Anzeigen, Seiten, Plugins und Dateien unverändert. WordPress-Liveprüfung offen."
+          fi
+          gh release view "$TAG" --json assets,url
+
+      - name: Preserve tested full plugin in isolated HD003 plugin office
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          DEST="protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/ISOLIERTE_PLUGINS/HD-003-DESIGN-TEMPLATE-KIT/HOBBY_DEPOT_DESIGN_HD003_1.50.807.zip"
+          cp "dist/HOBBY_DEPOT_DESIGN_HD003_1.50.807_HOBBYFINDER.zip" "$DEST"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$DEST"
+          git commit -m "HD003 plugin office: archive tested complete Design 1.50.807"
+          git push origin "HEAD:refs/heads/${GITHUB_REF_NAME}"

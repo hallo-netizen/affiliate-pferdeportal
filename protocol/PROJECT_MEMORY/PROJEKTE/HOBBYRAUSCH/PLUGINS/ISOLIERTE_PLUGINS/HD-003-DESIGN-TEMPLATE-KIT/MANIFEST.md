@@ -1,3 +1,20 @@
+# HD003 DESIGN-PLUGIN – PLUGINBÜRO / CURRENT
+
+**Stand 08.11.2026: 1.50.808 ist der aktuell archivierte Installationskandidat.**  
+**Büro-Voll-ZIP und `CURRENT.zip` sind auf diesem GitHub-Branch identisch**, beide verweisen auf Blob `3403ec7ad32a2fcec5a5bff0f21186d86d0d1909` (65.763.366 Byte, SHA256 `cbf03e54dd7bf4ae44ea6beac66f1ee53d188732d6da4b6c1c92df1b9b5b8f15`).
+
+**Änderung gegenüber 1.50.806:** Nur der Hobbyfinder erhält das freigegebene Lupen-Hero und den Untertitel **„Das passende Hobby für dich.“**. Nach Ablehnung der zu flachen 1.50.807-Werbung gilt wieder das **unveränderte Originalwerbebanner aus 1.50.806**, inklusive Bildgröße, beider Buttons und Klickbereiche. Andere Seiten, Beiträge und Plugins unverändert.
+
+**Nachweise:** [Design-Pluginakte CURRENT](../../PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/CURRENT.md), [EVIDENCE_1.50.808](../../PLUGIN_AKTEN/HD-003-DESIGN-TEMPLATE-KIT/EVIDENCE_1.50.808.md), GitHub Actions `42506740141`: 13/13 PHP-Syntax, 1291/1291 ZIP-CRC, 1288 unveränderte Originaldateien, Werbe- und Linkregressionen PASS. **Livetest 1.50.808 noch nicht belegt.**
+
+**GitHub-Änderung:** [PR #724](https://github.com/hallo-netizen/affiliate-pferdeportal/pull/724) → Projekt-Campus-Hauptbranch; noch nicht als übernommen behaupten.
+
+**Original-Vollversion im Release:** https://github.com/hallo-netizen/affiliate-pferdeportal/releases/download/hobby-depot-hd003-1.50.808-original-banner/HOBBY_DEPOT_DESIGN_HD003_1.50.808_HOBBYFINDER_BANNER_ORIGINAL.zip
+
+---
+
+## Historische Manifest-Angaben – 1.50.806 (nicht mehr Current)
+
 # HD003 – Hobbydepot Design – gültige Current-Version
 
 **Sichtabnahme des Nutzers, 08.11.2026:** HD003 **1.50.806** für das Hobbydepot-Beitragsdesign **„erst einmal okay, bis auf Kleinigkeiten“**. Dies ist eine **vorläufige Freigabe des erreichten Testartikel-Designs**, keine Detail-Vollabnahme und insbesondere **keine Freigabe einer produktiven Amazon-Artikelbox**. Gesicherter aktueller Vollinstaller `HOBBY_DEPOT_DESIGN_HD003_1.50.806.zip` plus byteidentisches `CURRENT.zip` (Git-Blob `e3496adbc4524da0c6375d198d9010e2cc30d9f4`, SHA-256 `665a71d705ae80891ca43d56aca851c006608fcfcb61185381e3f96033635358`). Nichts am Plugin geändert, **keine Versionsänderung**. Ein Hero, kein wiederholtes Hero-Foto, kein bildloser Amazon-Suchbanner im Artikel, keine zweite Bildkachel rechts. Hab-&-Bewahr-inspirierter Lesestil bleibt zunächst **nur auf dem markierten Testartikel**; Detailkleinigkeiten bleiben offen, aber keine neue Designrunde ohne Anlass. **Nächster Arbeitsbereich ist die echte Amazon-Produktbox auf Artikelebene in der HD009 Affiliate-Zentrale**, einschließlich DataForSEO-Recherche, Freigabe, korrekter Zuordnung und erlaubtem Produktbild. HD003, HD006 (Bildzentrale), HD007 und die bestehende HD009 0.1.28 bleiben durch diese Dokumentation unangetastet.
