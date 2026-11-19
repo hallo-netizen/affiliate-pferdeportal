@@ -1,0 +1,150 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Warum wehrt sich mein Pferd in der Herde?",
+    "target_keyword": "Warum wehrt sich mein Pferd in der Herde?",
+    "category": "pferde-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "bf992fd673e23d6ce5a461cebc3dece62d2c957b33f0c351c772793480777078"
+  },
+  "content_profile": {
+    "search_intent": "Ursachen von Abwehrverhalten im Herdenverband erkennen und richtig einordnen"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/behavior/behavior-of-horses/behavior-problems-of-horses",
+          "source_title": "MSD Veterinary Manual – Behavior Problems of Horses"
+        }
+      ],
+      "claims": [
+        "Bei neu zusammengesetzten Gruppen kämpfen manche Pferde um ihre Position.",
+        "Abwehr in einer Herde kann sich durch Drohen, Treiben, Beißen oder Treten zeigen.",
+        "Ausreichend Platz, Futter und Wasser helfen, Konflikte zu verringern.",
+        "Nicht jedes Tritt- oder Beißspiel ist ernsthafte Aggression; auch junge Pferde spielen so."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Warum wehrt sich mein Pferd in der Herde?",
+      "topic": "Warum wehrt sich mein Pferd in der Herde?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Warum wehrt sich mein Pferd in der Herde?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/behavior/behavior-of-horses/behavior-problems-of-horses",
+        "source_title": "MSD Veterinary Manual – Behavior Problems of Horses",
+        "evidence_text": "Aggression by horses toward other horses is associated mainly with mixing unfamiliar horses that are establishing a new dominance hierarchy.",
+        "evidence_text_sha256": "75ba4ad2bd6ebf505e0febef914e7919f38c0068c2d66d5b0fe84577f6a62ecf",
+        "statement": "Bei neu zusammengesetzten Gruppen kämpfen manche Pferde um ihre Position.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/behavior/behavior-of-horses/behavior-problems-of-horses",
+        "source_title": "MSD Veterinary Manual – Behavior Problems of Horses",
+        "evidence_text": "Aggressive behavior is a common problem in horses and includes chasing, neck wrestling, kicks and bites, and other threats.",
+        "evidence_text_sha256": "97d383113016781650bb2849e8b583b84158734cb3068c40c26596a94cef7a1c",
+        "statement": "Abwehr in einer Herde kann sich durch Drohen, Treiben, Beißen oder Treten zeigen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/behavior/behavior-of-horses/behavior-problems-of-horses",
+        "source_title": "MSD Veterinary Manual – Behavior Problems of Horses",
+        "evidence_text": "Horses should have sufficient resources.",
+        "evidence_text_sha256": "203bb09a7a5b82ea7b30494e6782c34e857724fd13d46dfa3ff01be8d9ba81a8",
+        "statement": "Ausreichend Platz, Futter und Wasser helfen, Konflikte zu verringern.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.msdvetmanual.com/behavior/behavior-of-horses/behavior-problems-of-horses",
+        "source_title": "MSD Veterinary Manual – Behavior Problems of Horses",
+        "evidence_text": "Some horses, especially young ones, play with each other while showing signs of aggression such as kicking and biting.",
+        "evidence_text_sha256": "a7b73053cb1fb0ca64ed65d6c668ae6d3d81ee2a82efd6cea7f2b5a452e8f6dc",
+        "statement": "Nicht jedes Tritt- oder Beißspiel ist ernsthafte Aggression; auch junge Pferde spielen so.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-verstehen/",
+        "anchor": "pferde-verstehen",
+        "block": "details"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Herde",
+      "Abwehrverhalten",
+      "Rangordnung",
+      "Konflikte",
+      "Futter",
+      "Platz"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine Übersicht über Auslöser und passende Maßnahmen verbessert das Verständnis des Herdenverhaltens."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
