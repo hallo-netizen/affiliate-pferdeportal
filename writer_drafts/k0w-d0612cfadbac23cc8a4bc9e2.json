@@ -8,7 +8,9 @@
     "exception_code": "",
     "rationale": "Eine vierzeilige Übersicht bietet konkreten Mehrwert bei den praktischen Entscheidungen zu rasensaat für pferdeweiden."
   },
-  "lt_authoritative_terms": [],
-  "revision_count": 4,
+  "lt_authoritative_terms": [
+    "Neuansaat"
+  ],
+  "revision_count": 5,
   "publish_allowed": false
 }
