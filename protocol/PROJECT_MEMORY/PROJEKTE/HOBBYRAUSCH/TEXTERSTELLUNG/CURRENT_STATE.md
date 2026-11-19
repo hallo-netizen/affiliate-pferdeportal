@@ -1,3 +1,13 @@
+## 19.11.2026 – AKTUELLES KISS-PLUGIN 0.4.24.11: BEIDE FEHLRECHERCHEN EINMALIG ZURÜCKNEHMEN
+
+- Nutzer möchte **3D-Bogenschießen** (9 BLOCKED/Sandbox) und **Automodellbau** (89 BLOCKED, 100 Rohkeywords/Production) als **noch nicht recherchiert** wieder auswählen können. Live 0.4.24.10 zeigt 377 offen/2 recherchiert, 0 geeignete Kandidaten bei beiden.
+- **Kausal belegt**: alte zentrale `PSTE_Category_Context::researchContext()` bildet `Automodellbau Hobby` aus Hobbydepot-Sitename; neuer 0.4.24.11-Datensuchbegriff exakt `Automodellbau`, keinerlei Portal-Suffix. Alter Archivjob bleibt unverändert.
+- **Einziger aktueller Installationskandidat im Büro:** `Texterstellung_Hobbydepot_0.4.24.11_ZWEI_RECHERCHEN_ZURUECKNEHMEN.zip`; SHA256 `f7e5a5e03100af5dc7c7921886716c584b429fd303202fc9112869323b9e0280`, 509989 B, Root unverändert, Version höher. **84/87 Dateien unverändert**, drei PHP-Dateien minimal geändert.
+- `Texterstellung → Recherche → Die beiden Fehlrecherchen zurücknehmen → Beide Fehlrecherchen zurücknehmen (kostenlos)` führt eine **einzige atomare Status-Rücknahme** im vorhandenen Research-Repository aus; nur für genau 2 eindeutige Originalfamilien / genau 1 abgeschlossener Run pro Familie mit unveränderten 9/89 BLOCKED; kein aktiver Job. Originaldaten/Kosten/Topicpool/Queue **nicht gelöscht**; nur Research-Run-Status auf `RETRACTED_NO_ELIGIBLE_CANDIDATE`. Erwartet dann 379 offen/0 analysiert, andere Kategorien unverändert. UI bezeichnet Archivstatus; späterer Neustart braucht unveränderten bestehenden `cost_ack`.
+- **156 lokale Tests PASS (47 Rücknahme +20 Suchkontext +20 Produktivmodus/UI +38 DataForSEO +31 Archiv)**; 78 PHP, 8 JSON, 87 ZIP CRC PASS. **Noch keine Live-WP-Ausführung.** Bei Live-Abweichungen verweigert Plugin den gesamten Rollback. Genauer Bericht `ZWEI_FEHLRECHERCHEN_RUECKNAHME_042411_20261119.md`. In **beiden Library-Büros** ZIP, MD/JSON und CURRENT gespeichert; 0.4.24.10 archiviert.
+- **Einziger Nutzerweg:** Backup → 0.4.24.11 in WordPress bestehendes Plugin **ersetzen** → genannter EIN Button. **Noch keine neue kostenpflichtige Recherche starten.**
+---
+
 ## 19.11.2026 – KORREKTUR ANWEISUNG: „3D-Bogenschießen erneut recherchieren“ IN 0.4.24.10 NICHT ALS KLICKWEG BEWIESEN
 
 - Nutzer sagt eindeutig: vorher angegebener Klickweg `Alternativ: Einzelnes Thema recherchieren → 3D-Bogenschießen → Originalrecherche starten` funktioniert auf seiner WordPress-Instanz **nicht**. Diese Aussage respektieren; nicht erneut denselben Klickweg behaupten.
