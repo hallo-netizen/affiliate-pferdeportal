@@ -16,14 +16,14 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_title": "Horseware Ireland – Rambo Summer Series Turnout 0g",
-          "source_url": "https://www.horseware.com/en-eu/rambo-summer-series-turnout-0g"
+          "source_title": "Wikipedia – Horse blanket",
+          "source_url": "https://en.wikipedia.org/wiki/Horse_blanket"
         }
       ],
       "claims": [
-        "Kombinationsdecken können einen wasserdichten Rückenbereich gegen Regenschauer besitzen.",
-        "Netzgewebe an den Seiten kann Luftzirkulation und Wärmeabgabe fördern.",
-        "Ein Hersteller gibt für sein kombiniertes Sommerdeckenmodell UV-Schutz an."
+        "Leichte Sommerdecken können Pferde vor Fliegen schützen.",
+        "Fliegendecken sollen Luftaustausch ermöglichen, damit das Pferd nicht überhitzt.",
+        "Eine ungefütterte Regendecke bietet Wasserschutz mit wenig zusätzlicher Wärme."
       ],
       "fresh_research_reference_date": "2026-11-19"
     },
@@ -51,33 +51,33 @@
     },
     "research_claims": {
       "F1": {
-        "source_title": "Horseware Ireland – Rambo Summer Series Turnout 0g",
-        "source_url": "https://www.horseware.com/en-eu/rambo-summer-series-turnout-0g",
-        "evidence_text_sha256": "75e60a4fb18570afba7f2e6bbd1ded11a230b71c8fbbe52e83e5894a7f73b353",
-        "statement": "Kombinationsdecken können einen wasserdichten Rückenbereich gegen Regenschauer besitzen.",
-        "evidence_text": "A waterproof, breathable softshell top section keeps your horse dry through sudden rain showers",
+        "source_title": "Wikipedia – Horse blanket",
+        "source_url": "https://en.wikipedia.org/wiki/Horse_blanket",
+        "evidence_text_sha256": "dc939da1846426cf409c02ae8b6f79a73c117e3098706775c9975d3109758eee",
+        "statement": "Leichte Sommerdecken können Pferde vor Fliegen schützen.",
+        "evidence_text": "Lightweight blankets may be used in the summer to help the animal ward off flies",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F2": {
-        "source_title": "Horseware Ireland – Rambo Summer Series Turnout 0g",
-        "source_url": "https://www.horseware.com/en-eu/rambo-summer-series-turnout-0g",
-        "evidence_text_sha256": "e84f70f69b5650f915fbe3bf5b18475b71c9a40b425a090600f187a5f89105f6",
-        "statement": "Netzgewebe an den Seiten kann Luftzirkulation und Wärmeabgabe fördern.",
-        "evidence_text": "600D polyester mesh side panels vent heat and allow air flow",
+        "source_title": "Wikipedia – Horse blanket",
+        "source_url": "https://en.wikipedia.org/wiki/Horse_blanket",
+        "evidence_text_sha256": "3cbf9c0487176278335ec1685e10ae1e80c4103062d2daad5b5c9142f1c527d1",
+        "statement": "Fliegendecken sollen Luftaustausch ermöglichen, damit das Pferd nicht überhitzt.",
+        "evidence_text": "They are usually made of some type of nylon or strong synthetic fiber, but with the capacity to \"breathe\" so that the animal remains cool.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F3": {
-        "source_title": "Horseware Ireland – Rambo Summer Series Turnout 0g",
-        "source_url": "https://www.horseware.com/en-eu/rambo-summer-series-turnout-0g",
-        "evidence_text_sha256": "4f81abdbfae5c55d1f95184124107acaa6b1e136fcbe872841d4dc610b486d58",
-        "statement": "Ein Hersteller gibt für sein kombiniertes Sommerdeckenmodell UV-Schutz an.",
-        "evidence_text": "75% UV Protection.",
+        "source_title": "Wikipedia – Horse blanket",
+        "source_url": "https://en.wikipedia.org/wiki/Horse_blanket",
+        "evidence_text_sha256": "2e10c200c140b5ad901215b4e99077de067eb7e285d0d8101d622dec71189d6a",
+        "statement": "Eine ungefütterte Regendecke bietet Wasserschutz mit wenig zusätzlicher Wärme.",
+        "evidence_text": "Rain sheets are blankets with no fill, and are waterproof.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
