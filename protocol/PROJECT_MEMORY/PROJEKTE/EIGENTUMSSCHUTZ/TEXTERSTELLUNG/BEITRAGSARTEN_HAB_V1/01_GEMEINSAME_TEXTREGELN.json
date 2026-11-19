@@ -1,0 +1,122 @@
+{
+  "schema": "HAB_GEMEINSAME_TEXTREGELN_V1",
+  "status": "GEPRUEFTER_FACHENTWURF_KEINE_PRODUKTIVE_AENDERUNG",
+  "originalquelle": {
+    "repository": "hallo-netizen/affiliate-pferdeportal",
+    "branch": "konzept0-portal-neutral-20261002",
+    "regeldateien": [
+      "RULE_CATALOG.json",
+      "RULE_VALUES.json",
+      "FIELD_POLICY.json",
+      "K0_CURRENT_STATE.json",
+      "K0_GOAL_CONTRACT.json",
+      "ARTIKELTYPEN/Anleitung.json"
+    ],
+    "wissensquelle": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/WISSENSDATENBANK/RECHERCHE_STANDARD.md"
+  },
+  "wiederverwenden_ohne_doppelpruefung": [
+    {
+      "id": "G01",
+      "regel": "Eine präzise Leserabsicht und ein konkretes Thema; Titel, Keyword, Kategorie und Typ einmalig vor K0 entscheiden.",
+      "beleg": "K0_CURRENT_STATE.full_rule_chain.owner_single_decision_20261110"
+    },
+    {
+      "id": "G02",
+      "regel": "Einfaches, natürliches, fehlerfreies Deutsch; kein Floskeltext, keine Wiederholung und keine aufgeblähten Absätze.",
+      "beleg": "RULE_CATALOG surface/heading; LT 6.8"
+    },
+    {
+      "id": "G03",
+      "regel": "Nachprüfbare Fakten und zugehörige Primärquellen; Zahlen, Normen und konkrete Aussagen dürfen nicht erfunden werden.",
+      "beleg": "RULE_CATALOG facts.*; Quellenstandard"
+    },
+    {
+      "id": "G04",
+      "regel": "Greifbare, natürliche Zwischenüberschriften, nicht bloß Keyword-Ketten oder künstliche Schemaüberschriften.",
+      "beleg": "RULE_CATALOG heading.*"
+    },
+    {
+      "id": "G05",
+      "regel": "Sinnvolle, tatsächlich existierende interne Ziele mit exakten WP-Titeln; nur thematisch passende Verlinkung.",
+      "beleg": "K0_CURRENT_STATE.link_distribution"
+    },
+    {
+      "id": "G06",
+      "regel": "Sinnvolle Tabellen, Listen und Zusammenfassungen, wo sie das Verständnis verbessern. Keine Füllzeilen oder doppelten Übersichten.",
+      "beleg": "RULE_VALUES.table.selection_guidance"
+    },
+    {
+      "id": "G07",
+      "regel": "Klare Trennung von Fakt, Einordnung, Empfehlung und nicht gesicherter Aussage.",
+      "beleg": "RECHERCHE_STANDARD.md"
+    },
+    {
+      "id": "G08",
+      "regel": "Kein unbelegtes Ranking, keine erfundenen Tests, keine unbelegten Erfolgs-, Sicherheits- oder Preisversprechen.",
+      "beleg": "Quellpflicht + redaktionelle Hab-Ergänzung"
+    },
+    {
+      "id": "G09",
+      "regel": "Bei veränderlichen Aussagen konkreter Geltungsbereich, Datenstand und zuständige Quelle; keine Scheingenauigkeit.",
+      "beleg": "RECHERCHE_STANDARD.md"
+    },
+    {
+      "id": "G10",
+      "regel": "Interne Qualitätsprüfungen nur durch vorhandenen zuständigen K0-Eigentümer; kein nachgelagerter Zweitprüfer.",
+      "beleg": "RULE_CATALOG.principle"
+    }
+  ],
+  "nachgebesserte_ziele_nicht_aktiv": [
+    {
+      "id": "A01",
+      "thema": "Textlänge",
+      "original": "Harte 750 bis 900 Wörter, mindestens vier H2 und 16 Absätze",
+      "vorschlag": "Länge nach Leserabsicht; FAQ häufig deutlich kürzer, vertiefender Ratgeber länger möglich. Keine Zahl festsetzen, bevor vorhandener K0-Längenwächter kompatibel angepasst und getestet wird.",
+      "prioritaet": "hoch"
+    },
+    {
+      "id": "A02",
+      "thema": "Interne Links",
+      "original": "K0_CURRENT_STATE verlangt genau drei thematisch passende interne Links; RULE_VALUES enthält zusätzlich Min/Max 1–3",
+      "vorschlag": "Bis zu einer echten einzigen Regelentscheidung Originalbindung nicht ändern. Fachlich 1–3 sinnvolle Links je nach Text sinnvoll; 3 unpassende Links niemals erzwingen.",
+      "prioritaet": "hoch"
+    },
+    {
+      "id": "A03",
+      "thema": "Tabellen",
+      "original": "K0 Vergleich zwingend, andere häufig nur per definierter Ausnahme; Mindestformat 4x3",
+      "vorschlag": "Vergleich bei echter Gegenüberstellung; FAQ, Schrittfolge und Bericht nur wenn echte Zusatzinformation. Ausnahmeentscheidung an bestehendem Owner, nicht doppelt.",
+      "prioritaet": "hoch"
+    },
+    {
+      "id": "A04",
+      "thema": "Pflichtlisten/Blöcke",
+      "original": "FAQ u.a. checklist, Beratung decision, Pflege steps, Anleitung preparation/steps/risks/verification",
+      "vorschlag": "Keine künstliche Checkliste für reine Faktenfrage und kein Schein-Entscheidungsteil in Grundlagenwissen. Technischen Konflikt vor Typfreigabe mit Original-Validator klären.",
+      "prioritaet": "hoch"
+    },
+    {
+      "id": "A05",
+      "thema": "Quellenzahl",
+      "original": "Mindestens drei technische Quellenmarker im K0-Regelwertbestand",
+      "vorschlag": "Quellen für jede wesentliche Behauptung, nicht drei künstlich unterschiedliche Quellen. Verbindliche Markerzahl derzeit nicht eigenmächtig ändern.",
+      "prioritaet": "mittel"
+    },
+    {
+      "id": "A06",
+      "thema": "Absatz- und Abschnittslängen",
+      "original": "100–220 Wörter je regulärem H2-Block; strenge Ausgewogenheit",
+      "vorschlag": "Priorität für schnelle eindeutige Antwort, verständliche Absätze und tatsächlich benötigte Abschnitte; keine Blindübernahme in Kurz-FAQ oder Meldung.",
+      "prioritaet": "mittel"
+    },
+    {
+      "id": "A07",
+      "thema": "Bild/Medien",
+      "original": "Kein allgemein für Hab vorliegendes eigenständiges Bildformat nachgewiesen",
+      "vorschlag": "Bild nur wenn es Handlung/Orientierung sicher verbessert; kein täuschend echtes Schadens-, Täter- oder Testszenario; Bildfrage bleibt bestehender Bild-/Designzuständigkeit.",
+      "prioritaet": "mittel"
+    }
+  ],
+  "rechercheregel": "Original-K0-Produktionsrecherche verlangt offizielle Quellen und erlaubt echte Wikipedia-Artikel; keine eigenen Portaltexte, privaten Blogs, Foren oder Affiliate-Quellen als Faktenbasis. Wikipedia für sensible Sicherheits-/Rechtsdetails nicht als alleinigen belastbaren Nachweis nutzen; diese fachliche Verschärfung ist ein Vorschlag, kein neu eingefügtes Recherche-Gate.",
+  "export": "K0-Fünffelderexport, WordPress-Entwurf und alle originalen Freigaben unverändert."
+}

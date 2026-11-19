@@ -1,0 +1,63 @@
+{
+  "schema": "HAB_ARTIKELARTEN_REGISTER_V1",
+  "portal": "hab_und_bewahr",
+  "status": "GETRENNT_ABGELEGT_FACHENTWURF_NICHT_PRODUKTIV_FREIGEGEBEN",
+  "quelle": "Gespeicherte C23-Analyse von 1323 Kategorien und Magazin-Konzept; fünf fachliche Typen aus HAB_BEITRAGSARTEN_SEO_KRITISCHE_PRUEFUNG_VORSCHLAG_20261119.md",
+  "trigger": {
+    "owner": "MINI_EINMALIGE_REDAKTIONELLE_ENTSCHEIDUNG",
+    "feld": "article_type",
+    "auswahl": "Nach beabsichtigter Leserhandlung, nicht Fragezeichen oder Kategoriename",
+    "mehrdeutig": "Vor K0 zurückstellen; keine automatische Neuzuordnung",
+    "unbekannter_typ": "Sperren statt Ersatztyp",
+    "keine_neue_startsyntax": true,
+    "keine_veraenderung_des_fuenffelder_exports": true
+  },
+  "gemeinsame_regeln": "01_GEMEINSAME_TEXTREGELN.json",
+  "hab_querschnitt": "02_HAB_QUERSCHNITT_SICHERHEIT.json",
+  "beitragsarten": [
+    {
+      "id": "HAB_FAQ",
+      "name": "FAQ",
+      "datei": "10_FAQ.json",
+      "k0_original": "FAQ",
+      "status": "Fachentwurf; Originaltyp vorhanden, Hab-Regeln noch nicht angebunden"
+    },
+    {
+      "id": "HAB_RATGEBER",
+      "name": "Ratgeber & Wissen",
+      "datei": "20_RATGEBER_WISSEN.json",
+      "k0_original": "Beratung nur bei echter Auswahlentscheidung",
+      "status": "Nicht pauschal identisch mit K0 Beratung"
+    },
+    {
+      "id": "HAB_VERGLEICH",
+      "name": "Vergleich",
+      "datei": "30_VERGLEICH.json",
+      "k0_original": "Vergleich",
+      "status": "Fachentwurf; Originaltyp vorhanden"
+    },
+    {
+      "id": "HAB_ANLEITUNG",
+      "name": "Anleitung & Checkliste",
+      "datei": "40_ANLEITUNG_CHECKLISTE.json",
+      "k0_original": "Anleitung für einmalige Arbeit; Pflege für wiederkehrende Tätigkeit",
+      "status": "Nicht automatisch ein einziger bestehender K0-Typ"
+    },
+    {
+      "id": "HAB_BERICHT",
+      "name": "Bericht & Praxisfall",
+      "datei": "50_BERICHT_PRAXISFALL.json",
+      "k0_original": null,
+      "status": "Neues Regelfach nötig; Magazin-WP-Term bisher nicht belegt"
+    }
+  ],
+  "bestandsschutz": "Originale K0-Typen Beratung, FAQ, Pflege, Vergleich und vorhandenes Anleitung-Regelfach vollständig erhalten. Weder Originaltypen noch deren Regeln umbenennen oder löschen.",
+  "freigabe_gates": [
+    "Fachentwurf final beschließen",
+    "Bestehende K0-Bindungen gegen Originalregeln und QA testen",
+    "Typenregel-Metadaten und Loader ohne neue Prüfstation abnehmen",
+    "Originalen K-Multi-Writer und LanguageTool 6.8 samt WordPress-Entwurfsformat real durchtesten",
+    "Aktuelle Hab-WP-Kategorie- und Magazin-Zuordnung read-only bestätigen",
+    "Erst danach Typ technisch READY und einen echten Entwurf erzeugen"
+  ]
+}
