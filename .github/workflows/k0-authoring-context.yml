@@ -43,7 +43,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m engine.k0_portal_resolver "$RUN_DIR/WORDPRESS_INTAKE.json" K0_PORTAL_REGISTRY.json > /tmp/k0-portal.json
+          test -f "$RUN_DIR/PSERC_SOURCE_MANIFEST.json" || { echo "K0_UPSTREAM_SEO_SOURCE_MANIFEST_MISSING" >&2; exit 2; }
+          python3 -m engine.k0_portal_resolver "$RUN_DIR/WORDPRESS_INTAKE.json" K0_PORTAL_REGISTRY.json "$RUN_DIR/PSERC_SOURCE_MANIFEST.json" > /tmp/k0-portal.json
           python3 - <<'PY'
           import json
           x=json.load(open('/tmp/k0-portal.json'))
