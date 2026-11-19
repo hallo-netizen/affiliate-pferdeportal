@@ -1,0 +1,176 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Was sollte ich beachten, wenn ich einen Pferdeanhänger miete?",
+    "target_keyword": "pferdeanhänger mieten",
+    "category": "recht-finanzen-organisation",
+    "article_type": "FAQ",
+    "plan_slot": "039994f93cf0dcd05f0c9e8d59121f328318466493a471da07280bd0392b798f"
+  },
+  "content_profile": {
+    "search_intent": "Mietberatung – Pferdeanhänger"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Mietvertrag_(Deutschland)",
+          "source_title": "Wikipedia – Mietvertrag (Deutschland)"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Pferdeanh%C3%A4nger",
+          "source_title": "Wikipedia – Pferdeanhänger"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Anh%C3%A4nger",
+          "source_title": "Wikipedia – Anhänger"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Anh%C3%A4ngelast",
+          "source_title": "Wikipedia – Anhängelast"
+        }
+      ],
+      "claims": [
+        "Ein Mietvertrag regelt die zeitweise Überlassung einer Sache gegen Bezahlung.",
+        "Der Mieter muss die vertraglich vereinbarte Miete bezahlen.",
+        "Ein Pferdeanhänger wird als Anhänger an ein Kraftfahrzeug angehängt.",
+        "Die Massen von Zugfahrzeug und Anhänger müssen zueinander passen und rechtliche Vorgaben einhalten.",
+        "Die zulässige Anhängelast begrenzt, welche Last ein Zugfahrzeug ziehen darf."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "pferdeanhänger mieten",
+      "topic": "Was sollte ich beachten, wenn ich einen Pferdeanhänger miete?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "recht-finanzen-organisation",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was sollte ich beachten, wenn ich einen Pferdeanhänger miete?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Mietvertrag_(Deutschland)",
+        "source_title": "Wikipedia – Mietvertrag (Deutschland)",
+        "evidence_text": "In Deutschland ist ein Mietvertrag ein gegenseitiger schuldrechtlicher Vertrag zur zeitweisen Gebrauchsüberlassung gegen Entgelt",
+        "evidence_text_sha256": "706ac627d6b4d55af3607cfe6f5bd3266fa83f7a15b8e8d5e05cc74f40d7dff0",
+        "statement": "Ein Mietvertrag regelt die zeitweise Überlassung einer Sache gegen Bezahlung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Mietvertrag_(Deutschland)",
+        "source_title": "Wikipedia – Mietvertrag (Deutschland)",
+        "evidence_text": "Der Mieter verpflichtet sich, dem Vermieter die vereinbarte Miete zu entrichten",
+        "evidence_text_sha256": "883c6d2a2030e8c90234ec5a81351e467af3ff00b61b02f55a9609ddb792ddeb",
+        "statement": "Der Mieter muss die vertraglich vereinbarte Miete bezahlen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Pferdeanh%C3%A4nger",
+        "source_title": "Wikipedia – Pferdeanhänger",
+        "evidence_text": "Unter einem Pferdeanhänger wird ein Fahrzeugtyp verstanden, der als Anhänger an ein Kraftfahrzeug angehängt wird.",
+        "evidence_text_sha256": "4647c3e449eb9b200d69d636e5a3e6ad06c3817923124fb828a377df74b00dba",
+        "statement": "Ein Pferdeanhänger wird als Anhänger an ein Kraftfahrzeug angehängt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://de.wikipedia.org/wiki/Anh%C3%A4nger",
+        "source_title": "Wikipedia – Anhänger",
+        "evidence_text": "Grundsätzlich ist bei allen Anhängern zu beachten, dass die Masse des Anhängers und die des Zugfahrzeuges aufeinander abgestimmt sind und den Gesetzen entsprechen.",
+        "evidence_text_sha256": "150f0f4194edb93c0749ef3f7abebec6f3abb7cb161122420d5e086be8941c3d",
+        "statement": "Die Massen von Zugfahrzeug und Anhänger müssen zueinander passen und rechtliche Vorgaben einhalten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://de.wikipedia.org/wiki/Anh%C3%A4ngelast",
+        "source_title": "Wikipedia – Anhängelast",
+        "evidence_text": "Die zulässige Anhängelast ist die maximal zulässige Last, die ein Kraftfahrzeug (PKW, LKW, Zugmaschine etc.) mittels eines (oder selten mehrerer) Anhänger hinter sich her ziehen darf.",
+        "evidence_text_sha256": "80c3c62d25e0fd2fe71786c15bd4686b6519ece8e17c38641eaf0a304942da21",
+        "statement": "Die zulässige Anhängelast begrenzt, welche Last ein Zugfahrzeug ziehen darf.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/recht-finanzen-organisation/",
+        "anchor": "Recht Finanzen Organisation",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/recht-finanzen-organisation/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "recht-finanzen-organisation",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferdeanhänger",
+      "Miete",
+      "Mietvertrag",
+      "Anhänger",
+      "Zugfahrzeug",
+      "Führerschein",
+      "Anhängelast"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine Übersicht ordnet die entscheidenden Kriterien mit eigenem Mehrwert."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
