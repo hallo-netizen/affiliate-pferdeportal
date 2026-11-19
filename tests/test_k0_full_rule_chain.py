@@ -85,7 +85,7 @@ class K0LinkRegressionTests(unittest.TestCase):
         retained=a['bound_links'][0]
         removed=a['bound_links'][1:]
         for item in removed:
-            m=re.search(r'(?is)<a\\b[^>]*data-link-role=["\\']'+re.escape(item['role'])+r'["\\'][^>]*>(.*?)</a>',a['html'])
+            m=re.search(r'(?is)<a\b[^>]*data-link-role="'+re.escape(item['role'])+r'"[^>]*>(.*?)</a>',a['html'])
             self.assertIsNotNone(m)
             a['html']=a['html'][:m.start()]+m.group(1)+a['html'][m.end():]
         a['bound_links']=[retained]
