@@ -1,0 +1,191 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Unkraut auf Pferdeweiden erkennen und zurückdrängen",
+    "target_keyword": "unkraut auf pferdeweiden",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "Pflege",
+    "plan_slot": "853c32893eab5d4d5ea59db2494be535d929781ef2f5790af5ecaec36e3fffbf"
+  },
+  "content_profile": {
+    "search_intent": "Weidepflege – Unkraut"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "University of Minnesota Extension – Grass pasture weed control",
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/grass-pasture-weed-control"
+        },
+        {
+          "source_title": "Landwirtschaftskammer NRW – Vorsicht vor dem Jakobskreuzkraut",
+          "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/ackerbau/gruenland/jakobskreuzkraut.htm"
+        }
+      ],
+      "claims": [
+        "Unkräuter sollten vor einer Maßnahme nach ihrer Lebensdauer bestimmt werden.",
+        "Unkraut lässt sich mit mechanischen, pflanzenbaulichen und nötigenfalls chemischen Methoden regulieren.",
+        "Gute Weideführung verhindert neue Verunkrautung.",
+        "Nachmahd vor der Samenbildung kann die Vermehrung begrenzen.",
+        "Einzelne Jakobskreuzkrautpflanzen können gezielt ausgestochen oder herausgezogen werden.",
+        "Die Samenbildung des giftigen Jakobskreuzkrauts muss verhindert werden."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Pflege",
+      "target_keyword": "unkraut auf pferdeweiden",
+      "topic": "Unkraut auf Pferdeweiden erkennen und zurückdrängen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Unkraut auf Pferdeweiden sachgerecht erkennen und zurückdrängen.",
+      "procedure_steps": [
+        "Unkrautarten erkennen",
+        "Nachmahd rechtzeitig ausführen",
+        "Weidelücken schließen",
+        "Giftige Einzelpflanzen gezielt entfernen"
+      ],
+      "risk_controls": [
+        "Giftpflanzen nicht verfüttern",
+        "Pflanzenschutzmittel nur nach Zulassung und Etikett verwenden"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "University of Minnesota Extension – Grass pasture weed control",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/grass-pasture-weed-control",
+        "evidence_text": "Identify what type of weeds are in your pasture",
+        "statement": "Unkräuter sollten vor einer Maßnahme nach ihrer Lebensdauer bestimmt werden.",
+        "evidence_text_sha256": "697bf061c99e2529e73468631bb5a224af812cbfef3f59630a64cf826dbd1e7c",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Pflege"
+        ]
+      },
+      "F2": {
+        "source_title": "University of Minnesota Extension – Grass pasture weed control",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/grass-pasture-weed-control",
+        "evidence_text": "Control consists of mechanical",
+        "statement": "Unkraut lässt sich mit mechanischen, pflanzenbaulichen und nötigenfalls chemischen Methoden regulieren.",
+        "evidence_text_sha256": "9efc4777d61a35204c808db4d7258150e131c33325919c6c2b9e984feeec00a1",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Pflege"
+        ]
+      },
+      "F3": {
+        "source_title": "University of Minnesota Extension – Grass pasture weed control",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/grass-pasture-weed-control",
+        "evidence_text": "Pasture management is the best way",
+        "statement": "Gute Weideführung verhindert neue Verunkrautung.",
+        "evidence_text_sha256": "2a1fe144cefd9cb3995ce592609fd41f8c2537501a377af9f388d4a1e7d2911f",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Pflege"
+        ]
+      },
+      "F4": {
+        "source_title": "University of Minnesota Extension – Grass pasture weed control",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/grass-pasture-weed-control",
+        "evidence_text": "Mowing prior to seeding is effective",
+        "statement": "Nachmahd vor der Samenbildung kann die Vermehrung begrenzen.",
+        "evidence_text_sha256": "d63936385ecbf61db496612a64dd1f610810e6bd4f01a961d4c7a8e6df0db869",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Pflege"
+        ]
+      },
+      "F5": {
+        "source_title": "Landwirtschaftskammer NRW – Vorsicht vor dem Jakobskreuzkraut",
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/ackerbau/gruenland/jakobskreuzkraut.htm",
+        "evidence_text": "durch Ausreißen oder Ausstechen",
+        "statement": "Einzelne Jakobskreuzkrautpflanzen können gezielt ausgestochen oder herausgezogen werden.",
+        "evidence_text_sha256": "a42b5a13750dc4b3b5995db54ec087e4c091391bd62bb5a98b9b90357fb784fc",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Pflege"
+        ]
+      },
+      "F6": {
+        "source_title": "Landwirtschaftskammer NRW – Vorsicht vor dem Jakobskreuzkraut",
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/ackerbau/gruenland/jakobskreuzkraut.htm",
+        "evidence_text": "Die Samenbildung der Pflanze verhindert werden",
+        "statement": "Die Samenbildung des giftigen Jakobskreuzkrauts muss verhindert werden.",
+        "evidence_text_sha256": "b53b4e62969b6bb64d4b0ce6049beebd977460deac60d236cdb71f54787ede42",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Pflege"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "alltags-pferde-haltungsformen",
+        "block": "steps"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Unkraut",
+      "Pferdeweiden",
+      "Weidepflege",
+      "Nachmahd",
+      "Jakobskreuzkraut",
+      "Samenbildung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Übersicht ordnet vier konkrete Unterschiede den Entscheidungen bei unkraut auf pferdeweiden zu."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
