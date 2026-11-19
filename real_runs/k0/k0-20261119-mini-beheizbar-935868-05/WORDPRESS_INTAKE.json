@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Beheizbare Wassertröge für Pferde sicher auswählen",
+      "target_keyword": "beheizbare wassertröge",
+      "category": "traenken-und-wasser-frostsichere-pferdetraenken-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "8f7f632fae1857db2c3a71c79bc3d72cdc04941bebce772076ef303819bb8997"
+    }
+  ],
+  "batch_sha256": "530564f9fe7c9fc8f52fe79d68146a92a48ccfa0bb265a3e467c2a236e6b0f87"
+}
