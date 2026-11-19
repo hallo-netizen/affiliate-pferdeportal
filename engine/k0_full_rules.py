@@ -113,21 +113,31 @@ def _k0_topic_link_roots(value):
     return roots
 
 
-def _k0_link_has_specific_topic(target_label, ctx, topic):
-    # Topic and factual claims were already chosen by the upstream research
-    # owner. This function makes no new SEO/keyword/category decision.
+def _k0_link_has_specific_topic(target_label, ctx, topic, target_content=''):
+    # One existing pre-writer link decision: compare the saved article intent
+    # with the real WordPress target, never just its short title.
+    # No new SEO decision, no extra check, and no post/article links.
+    import html as htmlmod
     if not isinstance(topic,dict):
         return False
     subject=' '.join(str(topic.get(k) or '') for k in ('target_keyword','title'))
-    # Source-backed factual statements allow relevant related concepts:
-    # e.g. Pfriemenschwanz -> Parasiten, Lebermoos -> Hautpilz.
     subject+=' '+' '.join(str(x) for x in (ctx.get('heading_intent_terms') or []))
     subject+=' '+' '.join(str(row.get('statement') or '')
                            for row in (ctx.get('research_claims') or {}).values()
                            if isinstance(row,dict))
+    meta=ctx.get('type_meta') or {}
+    subject+=' '+' '.join(str(x) for x in (meta.get('decision_criteria') or []))
     roots=_k0_topic_link_roots(subject)
-    target_roots=_k0_topic_link_roots(target_label)
-    return bool(roots and target_roots and (roots & target_roots))
+    # Exact topic match in the official title still has priority.
+    if roots & _k0_topic_link_roots(target_label):
+        return True
+    # Use WordPress category description or page's actual content (not header,
+    # menu, footer or other site-wide words). At least two independent topic
+    # words must match; a shared generic word alone never suffices.
+    content=htmlmod.unescape(re.sub(r'<[^>]+>', ' ', str(target_content or '')))
+    content=re.sub(r'\\s+',' ',content)[:12000]
+    shared=roots & _k0_topic_link_roots(content)
+    return len(shared)>=2
 
 
 def verify_live_link_targets(ctx,base_url,fetch_json=None,fetch_html=None,topic=None):
@@ -176,6 +186,7 @@ def verify_live_link_targets(ctx,base_url,fetch_json=None,fetch_html=None,topic=
             if role!='parent_category' and int(item.get('count') or 0)<1:
                 raise Blocked('K0_LINK_TARGET_CATEGORY_EMPTY:'+slug)
             label=official_name(item.get('name'))
+            target_content=item.get('description') or ''
             target_type='C_CATEGORY'
         elif not direct_category:
             page_url=base_url.rstrip('/')+'/wp-json/wp/v2/pages?slug='+urllib.parse.quote(slug)
@@ -188,6 +199,10 @@ def verify_live_link_targets(ctx,base_url,fetch_json=None,fetch_html=None,topic=
             if len(matches)!=1:
                 raise Blocked('K0_LINK_TARGET_NOT_C_CATEGORY_OR_PUBLISHED_PAGE:'+href)
             label=official_name((matches[0].get('title') or {}).get('rendered'))
+            target_content=' '.join(
+                str((matches[0].get(key) or {}).get('rendered') or '')
+                for key in ('excerpt','content')
+            )
             target_type='C_PAGE'
             try:
                 page=fetch_html(base_url.rstrip('/')+href)
@@ -202,7 +217,7 @@ def verify_live_link_targets(ctx,base_url,fetch_json=None,fetch_html=None,topic=
         # ONE source/target decision at the existing pre-writer lookup.
         # No later checker and no unrelated generic category as a fallback.
         if (topic is not None and role in ('semantic_related','further_information')
-                and not _k0_link_has_specific_topic(label,ctx,topic)):
+                and not _k0_link_has_specific_topic(label,ctx,topic,target_content)):
             raise Blocked('K0_LINK_TARGET_TOPIC_UNRELATED:'+role+':'+slug)
         bound.append({'role':role,'href':href,'official_name':label,'target_type':target_type})
     return {'status':'PASS','checked':len(bound),'canonical_links':bound}
