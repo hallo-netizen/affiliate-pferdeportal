@@ -80,6 +80,25 @@ def with_valid_table(a):
 
 
 class K0LinkRegressionTests(unittest.TestCase):
+    def test_flexible_one_parent_link_still_passes_existing_structural_rules(self):
+        a=make_base()
+        retained=a['bound_links'][0]
+        removed=a['bound_links'][1:]
+        for item in removed:
+            m=re.search(r'(?is)<a\\b[^>]*data-link-role=["\\']'+re.escape(item['role'])+r'["\\'][^>]*>(.*?)</a>',a['html'])
+            self.assertIsNotNone(m)
+            a['html']=a['html'][:m.start()]+m.group(1)+a['html'][m.end():]
+        a['bound_links']=[retained]
+        a['link_registry']=[x for x in a['link_registry'] if x['href']==retained['href']]
+        a['runtime_link_roles']=['parent_category']
+        p,cat=package_from_article(a)
+        out=validate_rule_context(p['rule_context'],p['identity'])
+        self.assertEqual(len(out['bound_links']),1)
+        receipts={x['rule_id']:x for x in structural_receipts(a)}
+        for name in ('links.visible_exact','links.required_roles','links.runtime_roles_bound',
+                     'links.further_information_position','links.bound_pairs_exact'):
+            self.assertEqual(receipts[name]['status'],'PASS',name)
+
     def test_good_links_still_pass_existing_rule_context(self):
         p,_=package_from_article(make_base())
         out=validate_rule_context(p['rule_context'],p['identity'])
@@ -195,13 +214,15 @@ class K0LinkRegressionTests(unittest.TestCase):
         ctx=self._topic_link_context(
             'pferdewissen-grundlagen','gesundheit-regeneration-kuehlgamaschen-faq',
             'Lebermoos wirkt im Labor gegen Pilze, aber Hautpilz ist am Pferd nicht bewiesen.')
-        with self.assertRaisesRegex(Blocked,'K0_LINK_TARGET_TOPIC_UNRELATED:semantic_related'):
-            verify_live_link_targets(ctx,'https://example.org',
+        filtered=verify_live_link_targets(ctx,'https://example.org',
                                      self._topic_link_category_lookup,topic=subject)
+        self.assertEqual(filtered['checked'],1)
+        self.assertEqual(len(filtered['omitted_links']),2)
         ctx['bound_links'][1]['href']='/category/hautpilz-pferd/'
-        with self.assertRaisesRegex(Blocked,'K0_LINK_TARGET_TOPIC_UNRELATED:further_information'):
-            verify_live_link_targets(ctx,'https://example.org',
+        filtered=verify_live_link_targets(ctx,'https://example.org',
                                      self._topic_link_category_lookup,topic=subject)
+        self.assertEqual(filtered['checked'],2)
+        self.assertEqual(filtered['omitted_links'][0]['role'],'further_information')
         ctx['bound_links'][2]['href']='/category/pilzinfektionen-pferd/'
         result=verify_live_link_targets(ctx,'https://example.org',
                                         self._topic_link_category_lookup,topic=subject)
@@ -214,13 +235,13 @@ class K0LinkRegressionTests(unittest.TestCase):
         ctx=self._topic_link_context(
             'pferdewissen-grundlagen','gesundheit-regeneration-kuehlgamaschen-faq',
             'Pfriemenschwanz ist ein Parasit, der Eier am After ablegt.')
-        with self.assertRaisesRegex(Blocked,'K0_LINK_TARGET_TOPIC_UNRELATED:semantic_related'):
-            verify_live_link_targets(ctx,'https://example.org',
+        filtered=verify_live_link_targets(ctx,'https://example.org',
                                      self._topic_link_category_lookup,topic=subject)
+        self.assertEqual(filtered['checked'],1)
         ctx['bound_links'][1]['href']='/category/parasiten-beim-pferd/'
-        with self.assertRaisesRegex(Blocked,'K0_LINK_TARGET_TOPIC_UNRELATED:further_information'):
-            verify_live_link_targets(ctx,'https://example.org',
+        filtered=verify_live_link_targets(ctx,'https://example.org',
                                      self._topic_link_category_lookup,topic=subject)
+        self.assertEqual(filtered['checked'],2)
         ctx['bound_links'][2]['href']='/category/pfriemenschwanz-eier/'
         result=verify_live_link_targets(ctx,'https://example.org',
                                         self._topic_link_category_lookup,topic=subject)
@@ -261,21 +282,24 @@ class K0LinkRegressionTests(unittest.TestCase):
     def test_generic_word_only_page_is_not_a_topic_match(self):
         topic={'title':'Eierstöcke bei der Stute','target_keyword':'eierstöcke pferd'}
         ctx={'bound_links':[
+            {'role':'parent_category','href':'/category/pferdewissen-grundlagen/'},
             {'role':'semantic_related','href':'/wissen/gesundheitsvorsorge-grundlagen/'}
         ],'heading_intent_terms':['Eierstöcke','Fortpflanzung'],
         'research_claims':{'F1':{'statement':'Eierstöcke sind Organe der Stute.'}}}
         def wordpress(url):
             if '/categories?' in url:
-                return []
+                return [{'slug':'pferdewissen-grundlagen','name':'Pferdewissen & Grundlagen','count':0,
+                         'link':'https://example.org/category/pferdewissen-grundlagen/'}] if 'pferdewissen-grundlagen' in url else []
             if '/pages?' in url:
                 return [{'slug':'gesundheitsvorsorge-grundlagen','status':'publish',
                          'link':'https://example.org/wissen/gesundheitsvorsorge-grundlagen/',
                          'title':{'rendered':'Gesundheitsvorsorge Grundlagen'},
                          'content':{'rendered':'Hier geht es um allgemeine Grundlagen und Pferdewissen.'}}]
             raise AssertionError(url)
-        with self.assertRaisesRegex(Blocked,'K0_LINK_TARGET_TOPIC_UNRELATED'):
-            verify_live_link_targets(ctx,'https://example.org',wordpress,
+        filtered=verify_live_link_targets(ctx,'https://example.org',wordpress,
                                      lambda url:'<html></html>',topic=topic)
+        self.assertEqual(filtered['checked'],1)
+        self.assertEqual(filtered['omitted_links'][0]['reason'],'NO_MEANINGFUL_TOPIC_MATCH')
 
     def test_category_description_binds_topic_without_exact_title_words(self):
         topic={'title':'Pfriemenschwanz-Eier beim Pferd erkennen',
