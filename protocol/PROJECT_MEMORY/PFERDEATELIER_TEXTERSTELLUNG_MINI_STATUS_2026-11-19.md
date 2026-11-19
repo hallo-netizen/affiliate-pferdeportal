@@ -53,3 +53,11 @@ Erwartetes Ergebnis bei komplettem Ablauf: 5 neue FREI-Aufträge, ein BELEGT, ei
 - **Wichtig:** Es liegt noch **kein** neuer WordPress-Nachweis über vollständige Annahme oder 0 offene Themen vor; daher Status „20/20 DONE“ **nicht** behaupten.
 - Angeordneter nächster Schritt: WordPress → Texterstellung → MINI-Export; prüfen, ob „MINI-Gesamtauftrag herunterladen“ wieder sichtbar ist. Falls weiterhin nur Wiederdownload: aktuellen gespeicherten MINI-Auftrag herunterladen und als JSON hier vorlegen.
 - Kein erneuter Import oder Pluginwechsel bis zur Prüfung. Pferdeanhänger-Kategorien bleiben separat offen.
+
+
+## Nutzer-Screenshot 19.11.2026 15:54 Europe/Berlin – MINI Sperre aufgehoben (visuell bestätigt)
+- WordPress Texterstellung **0.4.33 KISS**.
+- Unter `Texterstellung → MINI-Export` ist wieder der Button **„MINI-Gesamtauftrag herunterladen“** sichtbar; keine Auswahl für gesicherten MINI-Auftrag mehr. Damit nach zwei wiederholten Imports vorheriger MINI-Batch nach UI abgeschlossen, neue Exportfunktion verfügbar.
+- Auftragsregal 72: **IMPORTIERT 37, METADATEN_OFFEN 25, FREI 10**. Davor 67: importiert 37, metadata offen25, frei5. **+5 FREI** durch erfolgreich vervollständigten MINI-Auftrag.
+- KEINE zusätzliche Plugin-Installation für diese Korrektur. Alte Importdateien nicht erneut importieren.
+- Noch offen: Zwei bereits importierte Pferdeanhängerbeiträge 974848 und 974849 fachlich richtige Kategorie (aktuell `recht-finanzen-organisation`) mit Redaktionsplan und Meta synchron abgleichen. NICHT in den Papierkorb verschieben, K0 nicht ändern, kein ungetesteter Eingriff.
