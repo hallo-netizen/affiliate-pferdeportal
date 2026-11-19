@@ -1,3 +1,12 @@
+## 19.11.2026 09:45 – NEUER LIVE-SICHTSTAND: RECHERCHEOBERFLÄCHE VERFÜGBAR
+
+- Echter Screenshot der Hobbydepot-WP-Rechercheoberfläche: **keine Einrichtungs-Blockermeldung mehr sichtbar**; **379 offene Themenbereiche**, **0 recherchiert**, **0 Fehler/gesperrt**; **2.241 von 2.241 Artikelkategorien zugeordnet**, WordPress insgesamt **3.520 Kategorien**; **0 gespeicherte Originalthemen**, **0 Aufträge**. Nächstes Thema **3D-Bogenschießen**, Anzahl **5**.
+- Recherche aktuell **GESTOPPT / PLUGIN_ACTIVATED_MANUAL_START_REQUIRED**, keine automatische Wiederaufnahme, kostenpflichtige DataForSEO-Checkbox **nicht aktiviert**. Kein Providerlauf/keine K0-Produktion gestartet. Alte bestätigte Credentials nicht erneut anfordern.
+- **Maßgebliches Plugin unverändert 0.4.24.5** `Texterstellung_Hobbydepot_0.4.24.5_SANDBOX_LEERBESTAND_FIX.zip` im zentralen Pluginbüro und Fachbüro. Archivkopie aus Büro geöffnet: **506.541 Bytes**, SHA256 `42f648b59a99fda0b1684c0e174a9430f4d9d131eaa8d98548157c5d8e09e2ba`, **87/87 ZIP-CRC**, 78 PHP, 8 JSON, WP-Ordner `texterstellung-hobbydepot`, Header **0.4.24.5**. Keine neue Version/Änderung.
+- Büro-eigene `Texterstellung-CURRENT.md` aktualisiert, neue Standakte `Texterstellung_Stand_20261119_0945.md` in beiden Dateibüros gespeichert. Ausführliche GitHub-Akte `SCREENSHOT_RECHERCHE_379_OFFEN_20261119_0945.md`.
+- **Grenzen:** Screenshot beweist keine exakte laufende Pluginheader-Version oder komplette DB-Integritätsabnahme; K0-Artikelarten weiterhin bisher BLOCKED, keine automatisch angenommene Freigabe. Nächste mögliche Arbeit ist die kontrollierte Kategorien-Recherche nach ausdrücklicher Kostenfreigabe; keine blind gestartet.
+---
+
 ## 19.11.2026 – AKTUELL UND MAẞGEBLICH: 0.4.24.5, realen Sandbox-Migrationsfehler gezielt korrigiert
 
 - **Live-Screenshot:** `PSTE_CONTEXT_BLOCKED_PSTE_SANDBOX_RECORD_STORE_LEGACY_OPTION_MISSING`. Direkter Fehler im Original `PSTE_Sandbox_Record_Store::sourceMetaCheap()`; fehlende Altoption bei frischem Portal, obwohl Original-`PSTE_Semantic_Review_Sandbox::stored()` leeren Ausgangszustand kennt. Zusätzlich blockierte TXE-AJAX bereits `BLOCKED` vor erlaubter Original-Fortsetzung.
