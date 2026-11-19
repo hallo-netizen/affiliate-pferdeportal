@@ -18,7 +18,7 @@
         "plan_slot": "853c32893eab5d4d5ea59db2494be535d929781ef2f5790af5ecaec36e3fffbf"
       }
     ],
-    "batch_sha256": "506457acd300fec51db88c66993d9888fe5d5b86fea1ab7c94a5661235043c9f"
+    "batch_sha256": "8bf7b42214bab4b0d83569a0cce1ffa3cb04e59dbc97c1a7c689176f0a13304d"
   },
   "items": [
     {
@@ -34,5 +34,5 @@
       "search_intent": "Weidepflege – Unkraut"
     }
   ],
-  "manifest_sha256": "5f35764eed1d180887975b85d6381d65080790af18c5147bbde370d06c560a4d"
+  "manifest_sha256": "b5ca454c74cb68a14203cc6c79bfa41d5ab571ccf03542b1e60f4b60230fccee"
 }
