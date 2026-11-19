@@ -1,0 +1,160 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Regendecken ohne Füllung für Pferde richtig einsetzen",
+    "target_keyword": "regendecke pferd 0g",
+    "category": "pferdedecken-regendecken-beratung",
+    "article_type": "Anleitung",
+    "plan_slot": "d5a417435dae029e5afc521ad43e9a011534031f34871dcaf81ba440a7252739"
+  },
+  "content_profile": {
+    "search_intent": "Deckenberatung – 0 g"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Horseware Ireland – Rambo Summer Series Turnout 0g",
+          "source_url": "https://www.horseware.com/en-eu/rambo-summer-series-turnout-0g"
+        },
+        {
+          "source_title": "University of Minnesota Extension – Caring for your horse in the winter",
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horse-in-the-winter"
+        }
+      ],
+      "claims": [
+        "Eine ungefütterte Außendecke kann vor Regenschauern schützen, wenn das Material wasserdicht ist.",
+        "Eine passende Deckengröße ist wichtig, um Scheuerstellen zu vermeiden.",
+        "Eine Decke sollte erst auf ein trockenes Pferd aufgelegt werden."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Anleitung",
+      "target_keyword": "regendecke pferd 0g",
+      "topic": "Regendecken ohne Füllung für Pferde richtig einsetzen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdedecken-regendecken-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Eine ungefütterte Regendecke bedarfsgerecht und ohne Scheuerstellen verwenden.",
+      "preparation_items": [
+        "Passende wasserdichte 0g-Regendecke",
+        "Trockenes Pferd",
+        "Kontrolle der Gurte und Verschlüsse"
+      ],
+      "procedure_steps": [
+        "Wetter und individuellen Schutzbedarf beurteilen",
+        "Decke passend auflegen und Gurte prüfen",
+        "Unter der Decke täglich Haut und Fell kontrollieren"
+      ],
+      "safety_controls": [
+        "Decke nicht auf nassem Fell anlegen",
+        "Auf Scheuerstellen und Überhitzung achten"
+      ],
+      "common_errors": [
+        "Ungeprüfte Passform",
+        "Eine nasse Decke am Pferd lassen"
+      ],
+      "result_checks": [
+        "Pferd bleibt trocken und frei beweglich",
+        "Keine Druck- oder Scheuerstellen an den Verschlüssen"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Horseware Ireland – Rambo Summer Series Turnout 0g",
+        "source_url": "https://www.horseware.com/en-eu/rambo-summer-series-turnout-0g",
+        "evidence_text_sha256": "75e60a4fb18570afba7f2e6bbd1ded11a230b71c8fbbe52e83e5894a7f73b353",
+        "statement": "Eine ungefütterte Außendecke kann vor Regenschauern schützen, wenn das Material wasserdicht ist.",
+        "evidence_text": "A waterproof, breathable softshell top section keeps your horse dry through sudden rain showers",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F2": {
+        "source_title": "University of Minnesota Extension – Caring for your horse in the winter",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horse-in-the-winter",
+        "evidence_text_sha256": "c7583e9eaba2e3b5af0e7109dc731e6f6959514700e22de66c4ff6130cc1af932",
+        "statement": "Eine passende Deckengröße ist wichtig, um Scheuerstellen zu vermeiden.",
+        "evidence_text": "Make sure the blanket fits. Poorly fitted blankets can cause sores and rub marks along the straps.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F3": {
+        "source_title": "University of Minnesota Extension – Caring for your horse in the winter",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horse-in-the-winter",
+        "evidence_text_sha256": "bddc4d0b1a6fd886cb096ed31db2cd7c5f01b378d37d908db05d2bfc441a6f821",
+        "statement": "Eine Decke sollte erst auf ein trockenes Pferd aufgelegt werden.",
+        "evidence_text": "Don’t put a blanket on a wet horse. Wait until the horse is dry before blanketing.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdedecken-regendecken-beratung/",
+        "anchor": "pferdedecken regendecken beratung",
+        "block": "steps"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdedecken-regendecken-beratung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdedecken-regendecken-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Regendecke",
+      "0g",
+      "ungefüttert",
+      "Passform",
+      "wasserdicht"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine strukturierte Übersicht der Eigenschaften und Kriterien verbessert die Orientierung im Artikel."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
