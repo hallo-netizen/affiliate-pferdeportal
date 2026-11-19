@@ -119,11 +119,14 @@ def gate(workspace):
     for i, (original, cp) in enumerate(zip(items, source['resume_checkpoints'])):
         next_step = cp.get('next')
         if next_step == 'DONE':
+            for st in STAGES:
+                if st in loaded and any(val(loaded[st][i].get(k)) for k in STAGE_FIELDS[st]):
+                    issue(st, i, 'locked_decision', 'BEREITS_ABGESCHLOSSENE_ENTSCHEIDUNG_WIEDERHOLT')
             continue
         cat = cp.get('category')
         if cat and 'CATEGORY' in loaded:
-            if any(loaded['CATEGORY'][i].get(k) not in (None, '', cat.get(k)) for k in STAGE_FIELDS['CATEGORY']):
-                issue('CATEGORY', i, 'locked_category', 'ABGESCHLOSSENE_KATEGORIE_VERAENDERT')
+            if any(val(loaded['CATEGORY'][i].get(k)) for k in STAGE_FIELDS['CATEGORY']):
+                issue('CATEGORY', i, 'locked_category', 'ABGESCHLOSSENE_KATEGORIE_ERNEUT_ENTSCHIEDEN')
         if not cat:
             if 'CATEGORY' not in loaded:
                 issue('CATEGORY', i, 'file', 'KATEGORIE_DATEI_FEHLT')
@@ -140,8 +143,8 @@ def gate(workspace):
 
         editorial = cp.get('editorial')
         if editorial and 'EDITORIAL' in loaded:
-            if any(loaded['EDITORIAL'][i].get(k) not in (None, '', editorial.get(k)) for k in STAGE_FIELDS['EDITORIAL']):
-                issue('EDITORIAL', i, 'locked_editorial', 'ABGESCHLOSSENE_REDAKTION_VERAENDERT')
+            if any(val(loaded['EDITORIAL'][i].get(k)) for k in STAGE_FIELDS['EDITORIAL']):
+                issue('EDITORIAL', i, 'locked_editorial', 'ABGESCHLOSSENE_REDAKTION_ERNEUT_ENTSCHIEDEN')
         if not editorial:
             if 'EDITORIAL' not in loaded:
                 issue('EDITORIAL', i, 'file', 'REDAKTION_DATEI_FEHLT')
@@ -161,9 +164,8 @@ def gate(workspace):
                 issue('EDITORIAL', i, 'reason', 'KLÄRUNGSGRUND_FEHLT')
                 continue
         if cp.get('title') and 'TITLE' in loaded:
-            approved = loaded['TITLE'][i].get('approved_title')
-            if approved not in ('', None, cp['title'].get('approved_title', cp['title'].get('title'))):
-                issue('TITLE', i, 'locked_title', 'ABGESCHLOSSENER_TITEL_VERAENDERT')
+            if val(loaded['TITLE'][i].get('approved_title')):
+                issue('TITLE', i, 'locked_title', 'ABGESCHLOSSENER_TITEL_ERNEUT_ENTSCHIEDEN')
         if editorial.get('box') == 'FREI' and not cp.get('title'):
             if 'TITLE' not in loaded:
                 issue('TITLE', i, 'file', 'TITEL_DATEI_FEHLT')
