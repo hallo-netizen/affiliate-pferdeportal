@@ -1,0 +1,150 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Sind Äpfel gut für Pferde?",
+    "target_keyword": "Sind Äpfel gut für Pferde?",
+    "category": "pferdeernaehrung-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "0ab619ab850f1f1154bd139b5abce55a1da9b6f958d3a7aa6bf066403a7916b3"
+  },
+  "content_profile": {
+    "search_intent": "Eignung und angemessene Menge von Äpfeln als Pferdeleckerli"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.worldhorsewelfare.org/advice/feeding-horses",
+          "source_title": "World Horse Welfare – Pferde füttern"
+        }
+      ],
+      "claims": [
+        "Äpfel können als saftige Ergänzung das Futter für Pferde abwechslungsreicher machen.",
+        "Die Grundfütterung von Pferden beruht überwiegend auf Gras und Raufutter.",
+        "Futterumstellungen sollten nicht plötzlich erfolgen.",
+        "Auch Äpfel und anderes Zusatzfutter müssen hygienisch einwandfrei sein."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Sind Äpfel gut für Pferde?",
+      "topic": "Sind Äpfel gut für Pferde?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Sind Äpfel gut für Pferde?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/feeding-horses",
+        "source_title": "World Horse Welfare – Pferde füttern",
+        "evidence_text": "succulents like apples and carrots help to maintain the horse’s interest",
+        "evidence_text_sha256": "43505dc2b0566d0ae0a093acca11ae83adecdaf57708934a91253890bec723d6",
+        "statement": "Äpfel können als saftige Ergänzung das Futter für Pferde abwechslungsreicher machen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/feeding-horses",
+        "source_title": "World Horse Welfare – Pferde füttern",
+        "evidence_text": "The horse is predominantly a grazing animal",
+        "evidence_text_sha256": "ababb52311fece082f462ab3b32852605668a572ed0a648c8e65619a7dd416e8",
+        "statement": "Die Grundfütterung von Pferden beruht überwiegend auf Gras und Raufutter.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/feeding-horses",
+        "source_title": "World Horse Welfare – Pferde füttern",
+        "evidence_text": "Do not make sudden changes to the diet",
+        "evidence_text_sha256": "4f5f01d68bebad1a617905435a79cb0b49a2ed5f4c462c4231156ecc4504c4d2",
+        "statement": "Futterumstellungen sollten nicht plötzlich erfolgen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/feeding-horses",
+        "source_title": "World Horse Welfare – Pferde füttern",
+        "evidence_text": "All feeds should be checked for hygienic quality",
+        "evidence_text_sha256": "4845568cb1707ad68a92134fdb4faaf6d3e28662d43e68ad210628cd8325353e",
+        "statement": "Auch Äpfel und anderes Zusatzfutter müssen hygienisch einwandfrei sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "anchor": "pferdeernaehrung-verstehen",
+        "block": "details"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Äpfel",
+      "Fütterung",
+      "Leckerli",
+      "Menge",
+      "Raufutter",
+      "Wasser"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine kompakte Tabelle ergänzt die thematisch unterschiedlichen Prüfungskriterien und Maßnahmen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
