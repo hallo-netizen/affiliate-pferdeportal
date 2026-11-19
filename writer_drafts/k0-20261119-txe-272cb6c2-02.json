@@ -8,7 +8,10 @@
     "exception_code": "",
     "rationale": "Eine strukturierte Übersicht der Eigenschaften und Kriterien verbessert die Orientierung im Artikel."
   },
-  "lt_authoritative_terms": [],
-  "revision_count": 3,
+  "lt_authoritative_terms": [
+    "Grey-Gen",
+    "Ausschimmeln"
+  ],
+  "revision_count": 4,
   "publish_allowed": false
 }
