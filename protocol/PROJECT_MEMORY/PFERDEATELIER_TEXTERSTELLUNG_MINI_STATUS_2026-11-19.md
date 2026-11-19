@@ -46,3 +46,10 @@ Erwartetes Ergebnis bei komplettem Ablauf: 5 neue FREI-Aufträge, ein BELEGT, ei
 - Beide durch frühere Chat-Kategoriewahl in `recht-finanzen-organisation` eingeordnet; diese Entscheidung ist fachlich zu korrigieren. **Nichts in den Papierkorb verschieben oder rein manuell die Kategorie ändern**, weil WordPress-Beitrag, K0-Auftrag und gespeicherte Metadaten auseinanderlaufen können. Gesondert sicher prüfen, keine Doppelproduktion.
 
 **Verbindliche Grenzen:** Kein Pluginwechsel, keine neuen Plugins, K0 nicht verändern, keine neue SEO-Recherche, aktiven Batch nicht löschen/zurücksetzen. Erfolg nur nach echten WordPress-Abschlussmeldungen/neuester Diagnose behaupten.
+
+
+## Nutzer-Fortsetzung (19.11.2026, nach MINI-Import)
+- Nutzer bestätigt: **beide empfohlenen Dateien erneut importiert („erledigt“) **.
+- **Wichtig:** Es liegt noch **kein** neuer WordPress-Nachweis über vollständige Annahme oder 0 offene Themen vor; daher Status „20/20 DONE“ **nicht** behaupten.
+- Angeordneter nächster Schritt: WordPress → Texterstellung → MINI-Export; prüfen, ob „MINI-Gesamtauftrag herunterladen“ wieder sichtbar ist. Falls weiterhin nur Wiederdownload: aktuellen gespeicherten MINI-Auftrag herunterladen und als JSON hier vorlegen.
+- Kein erneuter Import oder Pluginwechsel bis zur Prüfung. Pferdeanhänger-Kategorien bleiben separat offen.
