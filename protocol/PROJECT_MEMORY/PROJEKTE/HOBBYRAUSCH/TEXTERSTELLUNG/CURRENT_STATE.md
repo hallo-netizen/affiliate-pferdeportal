@@ -1,3 +1,15 @@
+## 19.11.2026 – AKTUELL: 0.4.24.4 gegen LIVE-MIGRATIONSFEHLER (vorgeprüft, noch nicht auf Live abgenommen)
+
+- **Vom Betreiber real gemeldeter Stop:** `PSTE_EDITORIAL_RULESET_RAW_KEYWORD_INVARIANT_FAILED`. Das war trotz vorheriger „54 Tests“ NICHT mit echtem PSTE-Nullthemenbestand getestet worden. Diese vorherige Test-/Freigabeaussage war zu weitgehend.
+- **Reproduzierbarer Originalbug:** 0.4.24.3 überspringt `EDITORIAL_RAW_BASELINE_BATCH` bei 0 Themen, verlangt aber genau diese Baseline später. Original PHP wirft exakt gemeldeten Fehler. **Ob die echte WP-Tabelle 0 Themen enthält, ist nicht aus dem Server bestätigt; dieser Fehlercode kann auch Daten-Drift bedeuten.**
+- **Version 0.4.24.4** (ZIP `Texterstellung_Hobbydepot_0.4.24.4_MIGRATION_NULLBESTAND_FIX.zip` SHA256 `8ee94512c7b8e9dc84d82bdc65b9641aea7057825528709b1546f369eb7e8e69` / 504008 Bytes) repariert nur zwei Originalfunktionen: Baseline auch bei 0 Themen; streng begrenzte Altjob-Fortsetzung ohne Umgehen anderer Datenintegritätschecks. Dritte Datei: Versionsheader. 84/87 bytegleich, keine Architektur, kein K0-/Import-/Recherche-Umbau.
+- **Tests:** 12 gezielte Original-PHP-Funktionstests PASS einschließlich bestehendem `PAUSED_ERROR` bis `COMPLETE` mit derselben UUID in WP-Datenbank-Mocks, falsche Werte weiterhin BLOCKED; 2 gerenderte JS/AJAX-Tests; PHP 78/78, JSON 8/8, ZIP 87/87. **Keine Live-DB-Verifikation, keine überzogene 100%-Behauptung.**
+- **Pluginbüro erfolgreich gespeichert:** `/Hobby Depot/Plugin-Büro/Texterstellung_Hobbydepot_0.4.24.4_MIGRATION_NULLBESTAND_FIX.zip` sowie Fachbüro `/hobbydepot/TEXTERSTELLUNG/INSTALLATIONSKANDIDATEN/`. `Texterstellung-CURRENT.md` im echten Pluginbüro aktualisiert, Bericht dort und im Fachbüro; alte 0.4.24.3 archiviert.
+- **Einziger nächster Schritt:** WP-Datenbanksicherung prüfen, 0.4.24.4 über **Ersetzen** installieren und `Texterstellung → Recherche → Vorhandene Einrichtung fortsetzen` einmal ausführen. Bei Abbruch ohne Wiederholungsversuche die echte Migrationsphase und Themenzahl auslesen; keine neue Recherche starten.
+- Ausführlicher Beleg: `LIVE_FEHLER_NULLTHEMEN_MIGRATION_0_4_24_4_20261119.md`.
+
+---
+
 ## 19.11.2026 – AKTUELL: BUTTON-KLICKWEG 0.4.24.3 GEPRÜFT, KEIN NEUER BUILD
 
 - Nutzer verlangt wegen des Hab-&-Bewahr-Fehlers am Button `Recherche-Einrichtung abschließen` eine erneute SIMULATION vor Liveeinsatz. Bei Hab war ein JavaScript-Syntaxfehler im tatsächlich ausgegebenen Seitencode nachgewiesen; **das ist kein Beleg für denselben Fehler in Hobbydepot**.
