@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Regendecken ohne Füllung für Pferde richtig einsetzen",
+      "target_keyword": "regendecke pferd 0g",
+      "category": "pferdedecken-regendecken-beratung",
+      "article_type": "Anleitung",
+      "plan_slot": "d5a417435dae029e5afc521ad43e9a011534031f34871dcaf81ba440a7252739"
+    }
+  ],
+  "batch_sha256": "5bf61b1298fbc8a107c6a1b7d5eb67070e9c6ff25e5fbaa766cebbe5015c4adb"
+}
