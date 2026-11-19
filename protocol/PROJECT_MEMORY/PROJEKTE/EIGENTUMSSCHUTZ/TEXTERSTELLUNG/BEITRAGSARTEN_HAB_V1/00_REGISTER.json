@@ -1,7 +1,7 @@
 {
   "schema": "HAB_ARTIKELARTEN_REGISTER_V1",
   "portal": "hab_und_bewahr",
-  "status": "FÜNF_AUTARKE_REGELKOPIEN_AKTUELLES_K0_GESICHERT_UND_5_VON_5_GEPRUEFT_NO_RUNTIME",
+  "status": "5_HAB_BEITRAGSARTEN_FACHREGELN_FREIGEGEBEN_TECHNISCHE_E2E_ABNAHME_OFFEN",
   "quelle": "Gespeicherte C23-Analyse von 1323 Kategorien und Magazin-Konzept; fünf fachliche Typen aus HAB_BEITRAGSARTEN_SEO_KRITISCHE_PRUEFUNG_VORSCHLAG_20261119.md",
   "trigger": {
     "owner": "MINI_EINMALIGE_REDAKTIONELLE_ENTSCHEIDUNG",
@@ -12,8 +12,8 @@
     "keine_neue_startsyntax": true,
     "keine_veraenderung_des_fuenffelder_exports": true
   },
-  "gemeinsame_regeln": "01_GEMEINSAME_TEXTREGELN.json (nur Entwicklungs-Kopiervorlage, nach Fertigstellung keine Laufzeitabhängigkeit)",
-  "hab_querschnitt": "02_HAB_QUERSCHNITT_SICHERHEIT.json (nur Entwicklungs-Kopiervorlage, nach Fertigstellung keine Laufzeitabhängigkeit)",
+  "gemeinsame_regeln": "01_GEMEINSAME_TEXTREGELN.json: alte Entwicklungs-Kopiervorlage, nicht Laufzeitregel",
+  "hab_querschnitt": "02_HAB_QUERSCHNITT_SICHERHEIT.json: ALTES ARCHIV mit zwölf unverbindlichen Einzelmodulideen; jetzt ersetzt durch zwei eigenständig in jeder Beitragsart enthaltene verbindliche Hab-Regeln",
   "beitragsarten": [
     {
       "id": "HAB_FAQ",
@@ -53,10 +53,9 @@
   ],
   "bestandsschutz": "Originale K0-Typen Beratung, FAQ, Pflege, Vergleich und vorhandenes Anleitung-Regelfach vollständig erhalten. Weder Originaltypen noch deren Regeln umbenennen oder löschen.",
   "freigabe_gates": [
-    "Fachentwurf final beschließen",
-    "Bestehende K0-Bindungen gegen Originalregeln und QA testen",
+    "Unabhängige vollständige Hab-Regeln und ihr Format im neuen K-Multi-Weg technisch testen",
     "Typenregel-Metadaten und Loader ohne neue Prüfstation abnehmen",
-    "Originalen K-Multi-Writer und LanguageTool 6.8 samt WordPress-Entwurfsformat real durchtesten",
+    "Neuen K-Multi-Writer samt vorhandener Sprachprüfung und WordPress-Entwurfsformat real durchtesten",
     "Aktuelle Hab-WP-Kategorie- und Magazin-Zuordnung read-only bestätigen",
     "Erst danach Typ technisch READY und einen echten Entwurf erzeugen"
   ],
@@ -70,13 +69,13 @@
     "gemeinsamer_technikweg": "Gemeinsame K0-/K-Multi-Schreib- und Prüfmaschine möglich; unveränderte gemeinsame Kontrolltechnik ist KEINE gemeinsam referenzierte Textregeldatei.",
     "versionen": "Nach ausdrücklicher Nutzerfreigabe werden Änderungen an allgemein gültigen Textregeln kontrolliert und inhaltsgleich in den eigenständigen Pferdeatelier- und Hab-Regelständen nachgeführt. Reine Portal-Sonderregeln nur im jeweils betreffenden Regelbuch. Keine automatische stille Vererbung; keine Änderung der bestehenden Original-K0-Regel ohne gesonderten Beschluss.",
     "zentralregister": "Register nur zum Finden und einmaligen Auswählen der passenden Datei; keine verteilte Laufzeitabhängigkeit und keine doppelte Regelentscheidung.",
-    "noch_zu_tun": "Die fünf autarken K0-Regelkopien sind nun als Arbeitsfassungen vollständig und 5/5 inhaltlich gegen Original verglichen. Hab-spezifische Zusätze sind noch Vorschläge; die drei Typabgrenzungen und K-Multi-Runtime sind noch nicht genehmigt/funktionsgeprüft.",
+    "noch_zu_tun": "Fachliche Hab-Beitragsarten und KISS-Regeln sind jetzt freigegeben; verbleiben technische K-Multi-Anbindung, optionaler Behördenlink in Writer-Ausgabe, Sprachprüf- und WP-Entwurfstests.",
     "bestehende_technik_geschuetzt": "Keine Änderung der Original-K0-Hardchecks, Originaltypen, K-Multi, MINI oder Hab 0.4.31.6 durch diesen Konzeptbeschluss."
   },
   "autarke_kopien": {
     "ordner": "AUTARKE_REGELBUECHER_K0_STAND_20261119",
     "basis_k0": "konzept0-portal-neutral-20261002",
-    "umfang": "117 unveränderte aktuelle Originalkatalogregeln und allgemeine Textwerte in JEDEM eigenständigen Paket; jeweils passende Original-Beitragsart sowie vorhandene Hab-Sonderregelvorschläge enthalten",
+    "umfang": "Jedes Regelbuch mit 117 unveränderten ursprünglichen Katalogregeln und allen alten Formatwerten sowie exakt 2 Hab-KISS-Grundregeln und genau einer eigenen Beitragsartausrichtung.",
     "dateien": [
       "10_FAQ.json",
       "20_RATGEBER_WISSEN.json",
@@ -85,7 +84,7 @@
       "50_BERICHT_PRAXISFALL.json"
     ],
     "qa": "AUTARKE_REGELBUECHER_K0_STAND_20261119/99_KOPIE_QUALITAETSABNAHME_20261119.json",
-    "status": "FACHARBEITSFASSUNG; NO_GO für K0/K-Multi und WordPress",
+    "status": "5 FACHLICH_FREIGEGEBENE_REGELBUECHER; WRITER_E2E_NOCH_NICHT_GEPRUEFT",
     "originaltextlaenge": "750-900 Wörter unverändert",
     "erkennbare_grenzen": [
       "Ratgeber-Wissen ohne Kaufentscheidung noch ohne fertigen Originaltyp",
@@ -93,5 +92,16 @@
       "Bericht neu und nicht technisch READY"
     ],
     "technik": "K-Multi-Offline V9 besitzt weiterhin alten 121-Regelstand. Kein automatischer Produktionsanschluss."
+  },
+  "fachfreigabe": {
+    "datum": "2026-11-19",
+    "gilt_fuer": "Alle fünf vollständig autarken Hab-Beitragsregelbücher",
+    "gemeinsame_hab_regel_ids": [
+      "HAB_SACHLICHE_SICHERHEIT",
+      "HAB_OPTIONALE_AMTLICHE_FUSSNOTENLINKS"
+    ],
+    "externe_links": "Nur freiwillig bei echtem Mehrwert, Fußnote am Ende, offizielle staatliche Stellen/Portale, Start-/Hauptseiten erlaubt, rel=nofollow immer; keine Pflicht",
+    "kein_rueckbau": "Alle ursprünglichen Formalregeln in den fünf originalkopierten Teilbäumen unverändert",
+    "alter_modulentwurf": "12 Hab-Fachmodule ausschließlich Archiv/Entwicklung, nicht in fünf aktiven Hab-Fachregeln"
   }
 }
