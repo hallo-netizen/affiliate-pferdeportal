@@ -1,0 +1,163 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welches Pferd war das teuerste der Welt?",
+    "target_keyword": "teuerste pferd der welt",
+    "category": "recht-finanzen-organisation",
+    "article_type": "FAQ",
+    "plan_slot": "896b605b54e3aba5b5e9ba2d5267a0ac717910c27bc8ea4bae48c26c917ddf07"
+  },
+  "content_profile": {
+    "search_intent": "Pferdemarkt – Rekordpreise"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://en.wikipedia.org/wiki/Fusaichi_Pegasus",
+          "source_title": "Wikipedia – Fusaichi Pegasus"
+        }
+      ],
+      "claims": [
+        "Für Fusaichi Pegasus wurde im Jahr 2000 ein Verkaufspreis von über 70 Millionen US-Dollar berichtet.",
+        "Der zuvor gemeldete Höchstwert für einen Zuchthengstanwärter betrug 40 Millionen US-Dollar.",
+        "Fusaichi Pegasus gewann das Kentucky Derby im Jahr 2000.",
+        "Fusaichi Pegasus wurde 1998 als Jährling für vier Millionen US-Dollar gekauft.",
+        "Fusaichi Pegasus starb 2023 im Alter von 26 Jahren."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "teuerste pferd der welt",
+      "topic": "Welches Pferd war das teuerste der Welt?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "recht-finanzen-organisation",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welches Pferd war das teuerste der Welt?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://en.wikipedia.org/wiki/Fusaichi_Pegasus",
+        "source_title": "Wikipedia – Fusaichi Pegasus",
+        "evidence_text": "In 2000, he was sold to Irish breeder Coolmore Stud for a reported price of more than US$70,000,000",
+        "evidence_text_sha256": "1bc31440f71b6b235e6534ed91443ab29c9b83d819546d73bb7cc81e3a3c99c6",
+        "statement": "Für Fusaichi Pegasus wurde im Jahr 2000 ein Verkaufspreis von über 70 Millionen US-Dollar berichtet.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://en.wikipedia.org/wiki/Fusaichi_Pegasus",
+        "source_title": "Wikipedia – Fusaichi Pegasus",
+        "evidence_text": "The previous record for a stallion prospect was US$40m",
+        "evidence_text_sha256": "29e81c9b448be286d49ee46f216021182c19b8a507b9170783607ebe699ea939",
+        "statement": "Der zuvor gemeldete Höchstwert für einen Zuchthengstanwärter betrug 40 Millionen US-Dollar.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://en.wikipedia.org/wiki/Fusaichi_Pegasus",
+        "source_title": "Wikipedia – Fusaichi Pegasus",
+        "evidence_text": "Fusaichi Pegasus won the 2000 Kentucky Derby",
+        "evidence_text_sha256": "d22be195cf743784e58fb96c74f3828d0149e84ac276c2097210ee4817084699",
+        "statement": "Fusaichi Pegasus gewann das Kentucky Derby im Jahr 2000.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://en.wikipedia.org/wiki/Fusaichi_Pegasus",
+        "source_title": "Wikipedia – Fusaichi Pegasus",
+        "evidence_text": "In July 1998, the colt was purchased as a yearling at the Keeneland sale by Fusao Sekiguchi for $4 million",
+        "evidence_text_sha256": "d116701960daba3c4e1e48f6bda07b53a6c656026447aa7361f10e0fb055f1b5",
+        "statement": "Fusaichi Pegasus wurde 1998 als Jährling für vier Millionen US-Dollar gekauft.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://en.wikipedia.org/wiki/Fusaichi_Pegasus",
+        "source_title": "Wikipedia – Fusaichi Pegasus",
+        "evidence_text": "At age 26, Fusaichi Pegasus was euthanized on May 23, 2023",
+        "evidence_text_sha256": "2f5e481563891e8d7182430c88f8c4c35b5ba88eec4c761179246422706e9283",
+        "statement": "Fusaichi Pegasus starb 2023 im Alter von 26 Jahren.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/recht-finanzen-organisation/",
+        "anchor": "recht-finanzen-organisation",
+        "block": "details"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/recht-finanzen-organisation/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "recht-finanzen-organisation",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Fusaichi Pegasus",
+      "Pferd",
+      "Rekordpreis",
+      "Millionen",
+      "Verkauf",
+      "Kentucky"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Tabelle stellt die relevanten Prüf- und Entscheidungskriterien für teuerste pferd der welt gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
