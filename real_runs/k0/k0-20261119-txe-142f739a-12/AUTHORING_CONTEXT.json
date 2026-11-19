@@ -1,0 +1,150 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Ist es schlimm, wenn Pferde im Regen stehen?",
+    "target_keyword": "Ist es schlimm, wenn Pferde im Regen stehen?",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "FAQ",
+    "plan_slot": "211401ddb55918bd9982c73ecf56d67b7054d73b272b793623d6796e850d17f5"
+  },
+  "content_profile": {
+    "search_intent": "Einordnen, wann Regen für ein Pferd unproblematisch oder belastend ist"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.worldhorsewelfare.org/advice/rugging-horses-when-does-your-horse-need-a-rug",
+          "source_title": "World Horse Welfare – Pferdedecken"
+        }
+      ],
+      "claims": [
+        "Manche Pferde bleiben freiwillig auch bei starkem Regen draußen.",
+        "Zugang zu einem Unterstand beeinflusst die Wetterwahl.",
+        "Die Beschaffenheit des Fells beeinflusst den Schutz gegen Kälte.",
+        "Gesundheitliche Einschränkungen beeinflussen den Wetter- und Deckenbedarf."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Ist es schlimm, wenn Pferde im Regen stehen?",
+      "topic": "Ist es schlimm, wenn Pferde im Regen stehen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Ist es schlimm, wenn Pferde im Regen stehen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/rugging-horses-when-does-your-horse-need-a-rug",
+        "source_title": "World Horse Welfare – Pferdedecken",
+        "evidence_text": "many horse owners report horses choosing to stay out in heavy rain",
+        "evidence_text_sha256": "7c8b933f29cb9a80bd1c8440ada835bd4d4444972d2fd382e959e8d67b4542e9",
+        "statement": "Manche Pferde bleiben freiwillig auch bei starkem Regen draußen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/rugging-horses-when-does-your-horse-need-a-rug",
+        "source_title": "World Horse Welfare – Pferdedecken",
+        "evidence_text": "The availability of shelter",
+        "evidence_text_sha256": "f6d4f03eb4c964d4149e7da3d048ada4d7b0a0675d271e5b73e5c17dd93103c5",
+        "statement": "Zugang zu einem Unterstand beeinflusst die Wetterwahl.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/rugging-horses-when-does-your-horse-need-a-rug",
+        "source_title": "World Horse Welfare – Pferdedecken",
+        "evidence_text": "Your horse’s natural coat type",
+        "evidence_text_sha256": "352642242f9bc05012530f8abfa4a2ffafacb4dc104fecc3ec292ace723c4cf5",
+        "statement": "Die Beschaffenheit des Fells beeinflusst den Schutz gegen Kälte.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/rugging-horses-when-does-your-horse-need-a-rug",
+        "source_title": "World Horse Welfare – Pferdedecken",
+        "evidence_text": "Your horse’s health and whether they have any medical conditions",
+        "evidence_text_sha256": "38830cfb8556d3b9cc4290dd99cf6d6ca07e65d6a116f9782372829c4b868b56",
+        "statement": "Gesundheitliche Einschränkungen beeinflussen den Wetter- und Deckenbedarf.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "alltags-pferde-haltungsformen",
+        "block": "details"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Regen",
+      "Nässe",
+      "Fell",
+      "Schutz",
+      "Kälte",
+      "Unterstand"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine kompakte Tabelle ergänzt die thematisch unterschiedlichen Prüfungskriterien und Maßnahmen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
