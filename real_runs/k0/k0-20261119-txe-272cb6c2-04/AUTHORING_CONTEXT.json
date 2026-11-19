@@ -1,0 +1,139 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Spat beim Pferd erkennen und tierärztlich abklären lassen",
+    "target_keyword": "spat beim pferd",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "Beratung",
+    "plan_slot": "ede62cb429ae361fca9282656a516762ff25c4cd6a31bf87147bd0f4f037566b"
+  },
+  "content_profile": {
+    "search_intent": "Pferdegesundheit – Spat"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "MSD Veterinary Manual – Disorders of the Tarsus",
+          "source_url": "https://www.msdvetmanual.com/horse-owners/bone-joint-and-muscle-disorders-in-horses/disorders-of-the-tarsus-in-horses"
+        }
+      ],
+      "claims": [
+        "Spat bezeichnet eine degenerative Gelenkerkrankung im Sprunggelenkbereich.",
+        "Spat kann Lahmheit verursachen, die im Anfangsstadium schwer erkennbar ist.",
+        "Die tierärztliche Diagnose umfasst Vorgeschichte, Untersuchung und gegebenenfalls Röntgenaufnahmen."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "spat beim pferd",
+      "topic": "Spat beim Pferd erkennen und tierärztlich abklären lassen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Frühe Anzeichen von Spat erkennen und eine tierärztliche Untersuchung sachgerecht einordnen.",
+      "decision_criteria": [
+        "Gangbild und Lahmheitszeichen",
+        "Untersuchung durch den Tierarzt",
+        "Aussagekraft bildgebender Diagnostik"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "MSD Veterinary Manual – Disorders of the Tarsus",
+        "source_url": "https://www.msdvetmanual.com/horse-owners/bone-joint-and-muscle-disorders-in-horses/disorders-of-the-tarsus-in-horses",
+        "evidence_text_sha256": "07ff82263dd8b7f205e3f948f337f6f66298c159b72b4a965a9d3a231764a406",
+        "statement": "Spat bezeichnet eine degenerative Gelenkerkrankung im Sprunggelenkbereich.",
+        "evidence_text": "Bone spavin is osteoarthritis (bone arthritis), a degenerative condition of bone and joint cartilage",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "MSD Veterinary Manual – Disorders of the Tarsus",
+        "source_url": "https://www.msdvetmanual.com/horse-owners/bone-joint-and-muscle-disorders-in-horses/disorders-of-the-tarsus-in-horses",
+        "evidence_text_sha256": "51159c3c8f3c90352a963ac8de634195f4944ea5bd3b10ed7adcf746fffd9c04",
+        "statement": "Spat kann Lahmheit verursachen, die im Anfangsstadium schwer erkennbar ist.",
+        "evidence_text": "Although bone spavin usually causes lameness, this may not always be obvious, especially early on.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "MSD Veterinary Manual – Disorders of the Tarsus",
+        "source_url": "https://www.msdvetmanual.com/horse-owners/bone-joint-and-muscle-disorders-in-horses/disorders-of-the-tarsus-in-horses",
+        "evidence_text_sha256": "dc12be5ea7ec44153e2278ba561fbcef730169d2f4ef05f1d276a858633e1d65",
+        "statement": "Die tierärztliche Diagnose umfasst Vorgeschichte, Untersuchung und gegebenenfalls Röntgenaufnahmen.",
+        "evidence_text": "Diagnosis of bone spavin is based on the horse’s history, a physical examination, and x-rays",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "pferdegesundheit verstehen",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Spat",
+      "Sprunggelenk",
+      "Arthrose",
+      "Lahmheit",
+      "Röntgen"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine strukturierte Übersicht der Eigenschaften und Kriterien verbessert die Orientierung im Artikel."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
