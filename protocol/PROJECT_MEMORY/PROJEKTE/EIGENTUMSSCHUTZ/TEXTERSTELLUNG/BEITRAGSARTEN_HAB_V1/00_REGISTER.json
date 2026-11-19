@@ -1,7 +1,7 @@
 {
   "schema": "HAB_ARTIKELARTEN_REGISTER_V1",
   "portal": "hab_und_bewahr",
-  "status": "GETRENNT_ABGELEGT_FACHENTWURF_NICHT_PRODUKTIV_FREIGEGEBEN",
+  "status": "FÜNF_AUTARKE_REGELKOPIEN_AKTUELLES_K0_GESICHERT_UND_5_VON_5_GEPRUEFT_NO_RUNTIME",
   "quelle": "Gespeicherte C23-Analyse von 1323 Kategorien und Magazin-Konzept; fünf fachliche Typen aus HAB_BEITRAGSARTEN_SEO_KRITISCHE_PRUEFUNG_VORSCHLAG_20261119.md",
   "trigger": {
     "owner": "MINI_EINMALIGE_REDAKTIONELLE_ENTSCHEIDUNG",
@@ -68,9 +68,30 @@
     "zur_laufzeit": "Jede Hab-Beitragsart muss nach Fertigstellung ALLE für sie geltenden Text- und Hab-Sonderregeln selbst enthalten; keine Pflicht, andere Beitragsartdateien oder Pferdeatelier-Regelwerte nachzuladen.",
     "identitaet": "Eigene unverwechselbare Hab-Typkennung und eigenständig abrufbarer Regeldateipfad, auch wenn Typname wie FAQ identisch ist.",
     "gemeinsamer_technikweg": "Gemeinsame K0-/K-Multi-Schreib- und Prüfmaschine möglich; unveränderte gemeinsame Kontrolltechnik ist KEINE gemeinsam referenzierte Textregeldatei.",
-    "versionen": "Spätere Änderungen am Pferdeatelier werden nicht automatisch nach Hab übernommen; nur bewusst übernommene und getestete Anpassungen.",
+    "versionen": "Nach ausdrücklicher Nutzerfreigabe werden Änderungen an allgemein gültigen Textregeln kontrolliert und inhaltsgleich in den eigenständigen Pferdeatelier- und Hab-Regelständen nachgeführt. Reine Portal-Sonderregeln nur im jeweils betreffenden Regelbuch. Keine automatische stille Vererbung; keine Änderung der bestehenden Original-K0-Regel ohne gesonderten Beschluss.",
     "zentralregister": "Register nur zum Finden und einmaligen Auswählen der passenden Datei; keine verteilte Laufzeitabhängigkeit und keine doppelte Regelentscheidung.",
-    "noch_zu_tun": "Die vorhandenen fünf JSONs sind Vorentwürfe und verweisen derzeit für gemeinsame Regeln auf zwei separate Hilfsdateien. Sie müssen erst in fünf vollständige, autarke Pakete überführt werden. Nicht als schon abgeschlossen behaupten.",
+    "noch_zu_tun": "Die fünf autarken K0-Regelkopien sind nun als Arbeitsfassungen vollständig und 5/5 inhaltlich gegen Original verglichen. Hab-spezifische Zusätze sind noch Vorschläge; die drei Typabgrenzungen und K-Multi-Runtime sind noch nicht genehmigt/funktionsgeprüft.",
     "bestehende_technik_geschuetzt": "Keine Änderung der Original-K0-Hardchecks, Originaltypen, K-Multi, MINI oder Hab 0.4.31.6 durch diesen Konzeptbeschluss."
+  },
+  "autarke_kopien": {
+    "ordner": "AUTARKE_REGELBUECHER_K0_STAND_20261119",
+    "basis_k0": "konzept0-portal-neutral-20261002",
+    "umfang": "117 unveränderte aktuelle Originalkatalogregeln und allgemeine Textwerte in JEDEM eigenständigen Paket; jeweils passende Original-Beitragsart sowie vorhandene Hab-Sonderregelvorschläge enthalten",
+    "dateien": [
+      "10_FAQ.json",
+      "20_RATGEBER_WISSEN.json",
+      "30_VERGLEICH.json",
+      "40_ANLEITUNG_CHECKLISTE.json",
+      "50_BERICHT_PRAXISFALL.json"
+    ],
+    "qa": "AUTARKE_REGELBUECHER_K0_STAND_20261119/99_KOPIE_QUALITAETSABNAHME_20261119.json",
+    "status": "FACHARBEITSFASSUNG; NO_GO für K0/K-Multi und WordPress",
+    "originaltextlaenge": "750-900 Wörter unverändert",
+    "erkennbare_grenzen": [
+      "Ratgeber-Wissen ohne Kaufentscheidung noch ohne fertigen Originaltyp",
+      "Kombityp Anleitung und Kontrolle noch ohne kompatible K0-Typabbildung",
+      "Bericht neu und nicht technisch READY"
+    ],
+    "technik": "K-Multi-Offline V9 besitzt weiterhin alten 121-Regelstand. Kein automatischer Produktionsanschluss."
   }
 }
