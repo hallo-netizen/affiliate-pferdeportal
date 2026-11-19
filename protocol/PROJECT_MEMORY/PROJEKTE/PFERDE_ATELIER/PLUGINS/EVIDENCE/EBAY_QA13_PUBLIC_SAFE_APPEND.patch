@@ -1,0 +1,95 @@
+--- QA12/includes/trait-ppar-ebay-run.php
++++ QA13/includes/trait-ppar-ebay-run.php
+@@ -2668,7 +2668,11 @@
+         // Bounded, *per tick* details for the independent private audit.
+         // Do not inflate the canonical run with unlimited item error history.
+         $state['audit_recent_errors']=array();
+-        if(!empty($state['complete'])){$state['cursor']=0;$state['complete']=0;}
++        if(!empty($state['complete'])){
++            $state['cursor']=0;$state['complete']=0;
++            $state['provider_errors']=0;$state['failed_campaign_ids']=array();
++            $state['provider_error_samples']=array();
++        }
+         global $wpdb;
+         if(!is_object($wpdb)||!method_exists($wpdb,'get_row')||!method_exists($wpdb,'prepare')
+             ||!function_exists('get_post_meta')){
+@@ -2755,6 +2759,13 @@
+                     // request cap and then defer the unverified public commit.
+                     $state['retry_attempts']=0;
+                     $state['provider_errors']=absint($state['provider_errors']??0)+1;
++                    // The final gate must know ALL individually unverified campaign
++                    // IDs, not only the first 12 human-readable error samples.
++                    // One bad getItem may never veto unrelated verified stock.
++                    if(!isset($state['failed_campaign_ids'])||!is_array($state['failed_campaign_ids'])){
++                        $state['failed_campaign_ids']=array();
++                    }
++                    $state['failed_campaign_ids'][$id]=1;
+                     $state['audit_recent_errors'][]=array('post_id'=>$id,
+                         'code'=>$code!==''?$code:'source_unverified','retry'=>0);
+                     if(!isset($state['provider_error_samples']) || !is_array($state['provider_error_samples'])){
+@@ -2812,6 +2823,28 @@
+             // catalog or withdraw last-good products. Existing per-product
+             // expiry and out-of-stock checks remain effective.
+             $previous=$this->ebay_public_checkpoint_load();
++            // QA13: isolate provider failures at the PUBLICATION boundary too.
++            // The pre-existing verified-append route already proves each source,
++            // published campaign and public safety gate. Exclude every candidate
++            // whose final getItem failed (not just the 12 sample errors). Never
++            // replace/withdraw last-good stock or approve an unverified item.
++            $failed_ids=array_fill_keys(array_map('absint',array_keys(
++                (array)($after_refresh['public_source_refresh']['failed_campaign_ids']??array()))),true);
++            // A QA12 run resumed mid-refresh may already have failures but no
++            // per-item identity list. In that legacy state we cannot prove the
++            // safe subset: do NOT auto-approve any new candidate.
++            $unknown_failures=absint($after_refresh['public_source_refresh']['provider_errors']??0)>count($failed_ids);
++            $safe_candidates=array();
++            if(!$unknown_failures){
++                foreach((array)($candidate['business_campaign_ids']??array()) as $campaign_id){
++                    $campaign_id=absint($campaign_id);
++                    if($campaign_id>0 && !isset($failed_ids[$campaign_id])){$safe_candidates[]=$campaign_id;}
++                }
++            }
++            $appended=$safe_candidates
++                ?$this->ebay_public_checkpoint_add_verified_business_ids($safe_candidates,'public_verify_partial')
++                :false;
++            $after_refresh['public_source_refresh_partial_added']=max(0,(int)$appended);
+             $after_refresh['checkpoint_deferred']=1;
+             $after_refresh['checkpoint_deferred_reason']='public_source_refresh_unverified';
+             if(!$this->ebay_run_save($after_refresh)){
+--- QA12/pferdeportal-affiliate-router.php
++++ QA13/pferdeportal-affiliate-router.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
+  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
+- * Version: 6.72.323
++ * Version: 6.72.324
+  * Author: OpenAI
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -120,7 +120,7 @@
+     use PPAR_DFS_Amazon_Trait;
+     use PPAR_Digistore24_Trait;
+     use PPAR_Housekeeping_Trait;
+-    const VERSION = '6.72.323';
++    const VERSION = '6.72.324';
+     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
+     const CONTRACT_VERSION = '1.0';
+     const PROVIDER_CONTRACT_VERSION = '2.0';
+--- QA12/readme.txt
++++ QA13/readme.txt
+@@ -1,4 +1,4 @@
+-V6.72.323 QA12 KISS - Admin schlank, eBay-Protokoll als Admin-Download (NUR TEST).
++V6.72.324 QA13 KISS - Öffentliche Teilfreigabe trotz einzelner fehlerhafter eBay-Quellen: nur sicher bestätigte Angebote werden zum bestehenden Checkpoint ergänzt; keine neue Suche, keine Datenlöschung, eBay Deutschland und 6-Stunden-Regel unverändert. QA12 Admin und Protokoll bleiben enthalten. NUR TEST, noch kein echter WordPress-Endtest.
+ V6.72.322 QA11 NUR TEST (11.11.2026): QA10 Berichts-/Backend-Verschlankung plus korrigierte Schlusspruefung: Einzelne nicht bestaetigbare eBay-Quellen stoppen den gesamten Lauf nicht; die anderen Kandidaten werden weiter kontrolliert, keine unbelegte Veroeffentlichung, letzter guter Checkpoint bleibt geschuetzt. Bei exakt diesem alten Abbruch denselben Lauf mit unveraendertem Cursor fortsetzen statt erneut alle Produkte zu recherchieren. Backend-AJAX ist nur lesend und startet keinen Worker. Kein Live-End-to-End-Beweis.
+ V6.72.321 QA9 NUR TEST: KISS - Recherche, inkrementelle Freigabe und periodische Verfuegbarkeitspruefung getrennt. Vorhandene eBay-Produkte bleiben gespeichert; keine neue Suche, kein Tabellenumbau. Noch keine WordPress-Abnahme.
+ V6.72.318 NUR TEST: Admin-Knoepfe "eBay-Lauf sicher anhalten" und "Diesen Lauf am gespeicherten Stand fortsetzen" im bestehenden eBay-Gesamtworkflow. Stoppsignal bleibt getrennt von laufenden Cursor-Speicherungen erhalten. Aktuell laufendes Arbeitspaket darf zu Ende schreiben; vor dem naechsten Arbeitspaket wird er manuell pausiert (ohne Loeschung). Vorhandene Produktdaten, gespeicherte Coverage und sicherer oeffentlicher Checkpoint bleiben unangetastet. Keine automatische Wiederaufnahme; Fortsetzen verwendet denselben Lauf samt Cursor, ohne Neubeginn. Keine neue Tabelle, kein neuer Worker, keine API. Lokal pruefen; nicht live getestet.
+@@ -74,7 +74,7 @@
+ V6.72.236 TEST: Backend-Portalabdeckung hat bisher 329 Ziele x 3 LIVE-Router-Auswahlen synchron ausgefuehrt; jetzt acht Ziele pro Request und vollstaendiger JSON-Export in begrenzten Lesebloecken. PRIVATE-HivePress-Stale-Filter kehrt auf normalen Seiten sofort zurueck; BUSINESS-Checkpoint scannt bei abgeschaltetem PRIVATE keine alten PRIVATE-HivePress-Importe mehr. Kein neuer Worker, keine DB-Tabelle, keine Provider-/Ranking-/BUSINESS-Aenderung. Lokale PHP-/JavaScript-/Mock-Pruefungen, KEINE WP/MariaDB-Host-Abnahme.
+ V6.72.234 TEST: Direkter Rueckbau eBay-PRIVATE aus Affiliate-Zentrale 6.72.233: alte automatische Admin-Init-Loeschung, PRIVATE-HivePress-Backendfunktionen, PRIVATE-Kategorieanlage, PRIVATE-Discovery und PRIVATE-Bedienfelder entfernt. Angehende INDIVIDUAL-Datensaetze werden auch aus alten Laufplaenen hart abgewiesen. BUSINESS/Idealo/Artikel/Banner unveraendert. Bestehende PRIVATE-DB-Altlasten werden durch das Installieren NICHT automatisch geloescht; keine unkontrollierten Datenbankaktionen. Nur Testinstallation; kein behaupteter WordPress-/MariaDB-Livepass.
+ V6.72.233: PRIVATE-only Aufraeumweg ueber admin_init reaktiviert (kein Frontend/AJAX); alter falscher Complete-Marker wird nachverarbeitet; Abschluss erst bei tatsaechlich geleerter Unterkategorie-Struktur. PRIVATE-Neuanlage gesperrt. BUSINESS/idealo/Artikelunveraendert.
+-Stable tag: 6.72.323
++Stable tag: 6.72.324
+ V6.72.232 SICHERHEITSSTOPP: Automatischer PHP-init-Loeschlauf der 6.72.231 entfernt; PRIVAT-eBay bleibt abgeschaltet und im oeffentlichen HivePress-Filter gesperrt; keine eigenstaendige Datenbankbereinigung, keine Datenrestauration.
+ V6.72.230 PRIVATE-EBAY-ENTFERNUNG: PRIVATE-Verkaeuferroute bleibt zwingend aus; auf Adminaufrufen werden ausschliesslich eBay-markierte HivePress-Importanzeigen kontrolliert in den Papierkorb verschoben, manuelle Anzeigen vor Entfernung der Unterkategorien der Hauptkategorie Private Anzeigen zugeordnet. Alle Unterkategorien werden geloescht, Stammkategorie und native Anzeigen bleiben. Die PRIVAT-HivePress-Frontend-/Preview-Hooks und Einrichtungsoberflaeche sind abgekoppelt; BUSINESS, idealo, Artikel, Banner, Kategorien der Redaktion, CSS/JS bleiben unveraendert. Idempotente, zeitbegrenzte Bereinigung ohne neuen Cron/Runner; Fortschritt in der eBay-Fachseite.
+ V6.72.226 PRODUKTAUSGABE KISS (LOKALER TESTKANDIDAT): Stellt die vertragliche Reihenfolge exakt -> weiterer Themenkreis -> zuletzt nur bestaetigt freigegebene Pferdeprodukte wieder her. Kategorie-/Hub-/Journal-Produktplaetze werden bei zu wenigen Treffern nur aus dem vorhandenen indexierten Kampagnenbestand ergaenzt. Auf normalen Einzelbeitraegen bleibt exakt verlangte Produktidentitaet strikt; fuer allgemeine Beitraege werden zuletzt gepruefte eBay-/idealo-Angebote zugelassen. Anbieter koennen innerhalb derselben Relevanzstufe gemischt werden; spaetere Amazon-Einbindung bleibt getrennt. Bestehende Sperren fuer eBay-BUSINESS-Quelle, private Anzeigen, Quelle, Health, Veto, Bild, Partner und idealo-48h-Grenze bleiben aktiv. Der vorhandene idealo-Hintergrundrefresh muss veraltete unveraenderte Feeds vollstaendig neu pruefen, statt dauerhaft per Hash abzubrechen. Kein Umbau von Imports, Renderer, Kategorien, Bannern, Provideradaptern, Tracking, Datenbanktabellen oder Template. Keine neue Frontend-Providerabfrage. Tests sind lokale Funktionssimulation; kein behaupteter Live-/WP-/MariaDB-PASS.

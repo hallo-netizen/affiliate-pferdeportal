@@ -1,0 +1,8 @@
+QA10 KISS report: local isolated PHP results, 2026-11-11
+PASS QA9 baseline: real existing report method, source=298, 2 missing; skips/review/capacity ABSENT in report
+PASS invalid family fail-closed
+PASS QA10: real existing report method, source=298, 2 missing, duplicate=13, review=4, capacity=2, unfinished=true, all previous fields identical
+PASS invalid family fail-closed
+PASS 6 real extracted PHP calls: no expensive report work for normal backend page, explicit report request only; bad array query ignored
+PASS PHP LINT 23/23
+PASS 66/66 files; one file changed, 65 byte-identical; no provider search, worker, data change

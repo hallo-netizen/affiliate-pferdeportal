@@ -1,0 +1,571 @@
+--- QA11/affiliate-portal-router/includes/trait-ppar-ebay-run.php
++++ QA12/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+@@ -56,7 +56,15 @@
+         }
+         update_option($this->ebay_public_checkpoint_option_key(), $checkpoint, false);
+         $verify = $this->ebay_public_checkpoint_load();
+-        return serialize($verify) === serialize($checkpoint) ? $checkpoint : false;
++        if (serialize($verify) !== serialize($checkpoint)) { return false; }
++        // Record every real verified published-checkpoint change in the same
++        // private run audit. Never record a merely attempted publication.
++        $current = $this->ebay_run_load();
++        if (!$this->ebay_audit_note_state($current, array(), 'public_checkpoint_saved', array(
++            'checkpoint_id'=>substr(sanitize_text_field((string)($checkpoint['checkpoint_id']??'')),0,80),
++            'business_count'=>count((array)($checkpoint['business_campaign_ids']??array()))
++        ))) { update_option('ppar_ebay_audit_write_error_v1',time(),false); }
++        return $checkpoint;
+     }
+ 
+     private function ebay_public_checkpoint_business_ids($checkpoint = null) {
+@@ -744,8 +752,270 @@
+         return is_array($run) ? $run : array();
+     }
+ 
++    /** Persistent, private eBay run audit. No new table, public file or extra worker.
++     * Each run has its own non-autoloaded 100-event chunks. No deletion, no overwrite
++     * of prior run logs; failed writes are visible through the dashboard indicator.
++     */
++    private function ebay_audit_key($uuid) {
++        return 'ppar_ebay_audit_r_' . substr(hash('sha256', sanitize_text_field((string)$uuid)), 0, 24);
++    }
++
++    private function ebay_audit_snapshot($run, $kind = 'state') {
++        $run = is_array($run) ? $run : array();
++        $phase_state = is_array($run['phase_state'] ?? null) ? $run['phase_state'] : array();
++        $selection = is_array($phase_state['selection'] ?? null) ? $phase_state['selection'] : array();
++        $discovery = is_array($phase_state['discovery'] ?? null) ? $phase_state['discovery'] : array();
++        $summary = is_array($discovery['summary'] ?? null) ? $discovery['summary'] : array();
++        $coverage = is_array($run['coverage'] ?? null) ? $run['coverage'] : array();
++        $sources = is_array($run['public_source_refresh'] ?? null) ? $run['public_source_refresh'] : array();
++        $errors = is_array($run['errors'] ?? null) ? $run['errors'] : array();
++        $last = $errors ? end($errors) : array();
++        $last = is_array($last) ? $last : array();
++        $safe_rejections = array();
++        foreach (array('hard_reasons','review_reasons','technical_reasons') as $bucket) {
++            $reasons = is_array($summary[$bucket] ?? null) ? $summary[$bucket] : array();
++            arsort($reasons, SORT_NUMERIC);
++            $safe_rejections[$bucket] = array();
++            foreach (array_slice($reasons, 0, 30, true) as $code => $number) {
++                $safe_rejections[$bucket][sanitize_key((string)$code)] = absint($number);
++            }
++        }
++        $safe_codes = array();
++        foreach (array_slice((array)($sources['provider_error_samples'] ?? array()), -25) as $error) {
++            if (!is_array($error)) { continue; }
++            $safe_codes[] = array('code'=>sanitize_key((string)($error['code'] ?? '')),
++                'post_id'=>absint($error['post_id'] ?? 0));
++        }
++        $skips = array();
++        foreach (array_slice((array)($run['skipped_item_errors'] ?? array()), -30) as $error) {
++            if (!is_array($error)) { continue; }
++            $skips[] = array('code'=>sanitize_key((string)($error['code'] ?? '')),
++                'concept'=>sanitize_key((string)($error['concept'] ?? '')),
++                'row_id'=>absint($error['row_id'] ?? 0),
++                'item_id'=>substr(sanitize_text_field((string)($error['item_id'] ?? '')),0,90));
++        }
++        // Only nonsecret, short diagnostic fields. Do not log credentials, tokens,
++        // provider URLs, raw API responses, user inputs or private candidate data.
++        return array(
++            'at'=>time(), 'kind'=>sanitize_key((string)$kind),
++            'run_uuid'=>sanitize_text_field((string)($run['run_uuid'] ?? '')),
++            'status'=>sanitize_key((string)($run['status'] ?? '')),
++            'phase'=>sanitize_key((string)($run['phase'] ?? '')),
++            'resume_reason'=>sanitize_key((string)($run['resume_reason'] ?? '')),
++            'progress_seq'=>absint($run['progress_seq'] ?? 0),
++            'transport_ticks'=>absint($run['transport_tick_count'] ?? 0),
++            'last_progress_at'=>absint($run['last_progress_at'] ?? 0),
++            'last_transport_tick_at'=>absint($run['last_transport_tick_at'] ?? 0),
++            'no_progress_count'=>absint($run['no_progress_count'] ?? 0),
++            'resume_at'=>absint($run['resume_at'] ?? 0),
++            'phase_status'=>sanitize_key((string)($selection['phase'] ?? '')),
++            'selection_scanned'=>absint($selection['stats']['business']['scanned'] ?? 0),
++            'selection_materialized'=>absint($selection['stats']['business']['materialized'] ?? 0),
++            'search_requests'=>absint($summary['requests'] ?? 0),
++            'search_found'=>absint($summary['received'] ?? 0),
++            'search_accepted'=>absint($summary['accepted'] ?? 0),
++            'search_blocked'=>absint($summary['hard_blocked'] ?? 0) + absint($summary['technical_blocked'] ?? 0),
++            'search_rejection_reasons'=>$safe_rejections,
++            'covered'=>array_key_exists('covered',$coverage) ? absint($coverage['covered']) : null,
++            'required'=>array_key_exists('required',$coverage) ? absint($coverage['required']) : null,
++            'error_code'=>sanitize_key((string)(!empty($run['error_code']) ? $run['error_code'] : ($last['code'] ?? ''))),
++            'error_count'=>count($errors),
++            'source_provider_errors'=>absint($sources['provider_errors'] ?? 0),
++            'source_error_examples'=>$safe_codes,
++            'source_errors_this_tick'=>array_values(array_map(static function($entry){
++                return array('post_id'=>absint($entry['post_id']??0),
++                    'code'=>sanitize_key((string)($entry['code']??'')),
++                    'retry'=>absint($entry['retry']??0));
++            }, (array)($sources['audit_recent_errors']??array()))),
++            'skipped_item_errors_count'=>absint($run['skipped_item_errors_count'] ?? 0),
++            'skipped_item_examples'=>$skips,
++            'completion_warning'=>sanitize_key((string)($run['completion_warning'] ?? '')),
++            'checkpoint_deferred'=>empty($run['checkpoint_deferred']) ? 0 : 1,
++            'checkpoint_id'=>substr(sanitize_text_field((string)($run['checkpoint_id'] ?? $run['checkpoint_base_id'] ?? '')),0,80),
++        );
++    }
++
++    private function ebay_audit_note_state($current, $previous = array(), $kind = 'state', $activity = array()) {
++        $current = is_array($current) ? $current : array();
++        $uuid = sanitize_text_field((string)($current['run_uuid'] ?? ''));
++        if ($uuid === '' || (string)($current['schema'] ?? '') !== '1.0') { return true; }
++        $event = $this->ebay_audit_snapshot($current, $kind);
++        $previous = is_array($previous) ? $previous : array();
++        // Compact audit: record changed per-item errors, not the same last 30
++        // offers in every one of hundreds of later worker snapshots.
++        $old_skips = absint($previous['skipped_item_errors_count'] ?? 0);
++        $new_skips = absint($current['skipped_item_errors_count'] ?? 0);
++        if ($new_skips <= $old_skips) { $event['skipped_item_examples'] = array(); }
++        else {
++            $delta = $new_skips - $old_skips;
++            $event['skipped_item_examples'] = array_slice((array)$event['skipped_item_examples'], -min(30,$delta));
++            if ($delta > 30) { $event['skipped_item_overflow'] = $delta - 30; }
++        }
++        $old_sources = absint($previous['public_source_refresh']['provider_errors'] ?? 0);
++        $new_sources = absint($current['public_source_refresh']['provider_errors'] ?? 0);
++        if ($new_sources <= $old_sources) { $event['source_error_examples'] = array(); }
++        if ($new_sources > $old_sources) {
++            // New per-tick errors are separately persisted (including beyond
++            // the earlier 12-item state sample cap). For an upgraded existing
++            // run that has no tick-only fields yet, preserve the old samples.
++            $event['source_error_examples'] = empty($event['source_errors_this_tick'])
++                ? array_slice((array)$this->ebay_audit_snapshot($current,$kind)['source_error_examples'],-min(12,$new_sources-$old_sources))
++                : array();
++        }
++        $old_summary = (array)($previous['phase_state']['discovery']['summary'] ?? array());
++        $new_summary = (array)($current['phase_state']['discovery']['summary'] ?? array());
++        if (serialize(array($old_summary['hard_reasons']??array(),$old_summary['review_reasons']??array(),$old_summary['technical_reasons']??array()))
++            === serialize(array($new_summary['hard_reasons']??array(),$new_summary['review_reasons']??array(),$new_summary['technical_reasons']??array()))) {
++            $event['search_rejection_reasons'] = array();
++        }
++        if (is_array($activity) && $activity) { $event['activity'] = $activity; }
++        $key = $this->ebay_audit_key($uuid);
++        $meta_key = $key . '_meta';
++        $meta = get_option($meta_key, array());
++        $meta = is_array($meta) ? $meta : array();
++        if (absint($meta['count'] ?? 0) === 0) {
++            // First observed snapshot of an existing run. Label this as a
++            // snapshot, not an invented complete history before installation.
++            $event['source_error_examples'] = array_slice((array)$this->ebay_audit_snapshot($current, $kind)['source_error_examples'], -12);
++            $event['skipped_item_examples'] = array_slice((array)$this->ebay_audit_snapshot($current, $kind)['skipped_item_examples'], -30);
++            $event['kind'] = $kind === 'state' ? 'first_observed_snapshot' : $kind;
++        }
++        // Skip identical state saves. The timestamp is not a change in the run.
++        $signature_payload = $event;
++        if ($signature_payload['kind']==='first_observed_snapshot') { $signature_payload['kind'] = $kind; }
++        unset($signature_payload['at'], $signature_payload['source_error_examples'], $signature_payload['skipped_item_examples'], $signature_payload['search_rejection_reasons'], $signature_payload['source_errors_this_tick']);
++        $signature = hash('sha256', wp_json_encode($signature_payload));
++        if (hash_equals((string)($meta['last_signature'] ?? ''), $signature)) { return true; }
++        $count = absint($meta['count'] ?? 0);
++        $chunk_no = (int)floor($count / 100);
++        $chunk_key = $key . '_c' . $chunk_no;
++        $rows = get_option($chunk_key, array());
++        $rows = is_array($rows) ? $rows : array();
++        $event['event_number'] = $count + 1;
++        $at_index = $count % 100;
++        if (isset($rows[$at_index])) {
++            // Recovery after a chunk write succeeded but meta write failed.
++            // Never silently replace an earlier event.
++            if (!is_array($rows[$at_index]) ||
++                absint($rows[$at_index]['event_number'] ?? 0) !== $count + 1) { return false; }
++            $old = $rows[$at_index];
++            unset($old['at'],$old['event_number']);
++            $new = $event;
++            unset($new['at'],$new['event_number']);
++            if (serialize($old) !== serialize($new)) { return false; }
++        } else {
++            $rows[] = $event;
++        }
++        if (count($rows) > 100) { return false; } // never overwrite previous chunk
++        update_option($chunk_key, $rows, false);
++        if (serialize(get_option($chunk_key, array())) !== serialize($rows)) { return false; }
++        $new_meta = array('run_uuid'=>$uuid,'count'=>$count+1,'last_signature'=>$signature,
++            'updated_at'=>time(),'last_status'=>$event['status'],'last_phase'=>$event['phase']);
++        update_option($meta_key, $new_meta, false);
++        if (serialize(get_option($meta_key, array())) !== serialize($new_meta)) { return false; }
++        if ($count === 0) {
++            $index = get_option('ppar_ebay_audit_run_index_v1', array());
++            $index = is_array($index) ? $index : array();
++            if (!in_array($uuid, $index, true)) { $index[] = $uuid; }
++            update_option('ppar_ebay_audit_run_index_v1', $index, false);
++            if (!in_array($uuid, (array)get_option('ppar_ebay_audit_run_index_v1',array()), true)) { return false; }
++        }
++        return true;
++    }
++
++    /** Private read-only export; historical runs are never deleted by rotation. */
++    public function handle_ebay_audit_export() {
++        if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.',403); }
++        check_admin_referer('ppar_ebay_audit_export', 'ppar_ebay_nonce');
++        $uuid = isset($_POST['run_uuid']) && is_scalar($_POST['run_uuid'])
++            ? sanitize_text_field((string)wp_unslash($_POST['run_uuid'])) : '';
++        $format = isset($_POST['format']) && is_scalar($_POST['format'])
++            ? sanitize_key((string)wp_unslash($_POST['format'])) : 'csv';
++        if (!in_array($format,array('csv','json'),true)) { wp_die('Format unbekannt.',400); }
++        $index = get_option('ppar_ebay_audit_run_index_v1', array());
++        $index = is_array($index) ? $index : array();
++        $current = $this->ebay_run_load();
++        if ($uuid === '' || $uuid === 'current') {
++            $uuid = sanitize_text_field((string)($current['run_uuid'] ?? ''));
++        }
++        if ($uuid !== 'all' && !in_array($uuid, $index, true) && $uuid !== (string)($current['run_uuid'] ?? '')) {
++            wp_die('Kein gespeicherter eBay-Lauf für diesen Export.',404);
++        }
++        $runs = $uuid === 'all' ? $index : array($uuid);
++        $now_uuid = sanitize_text_field((string)($current['run_uuid'] ?? ''));
++        if ($uuid === 'all' && $now_uuid !== '' && !in_array($now_uuid,$runs,true)) { $runs[] = $now_uuid; }
++        $runs = array_values(array_unique($runs));
++        if (function_exists('nocache_headers')) { nocache_headers(); }
++        header('Content-Type: '.($format==='json'?'application/x-ndjson':'text/csv').'; charset=utf-8');
++        header('Content-Disposition: attachment; filename="pferdeatelier-ebay-lauf-'.($uuid==='all'?'alle':substr(hash('sha256',$uuid),0,12)).'.'.$format.'"');
++        header('X-Content-Type-Options: nosniff');
++        $out = fopen('php://output','w');
++        if (!$out) { exit; }
++        $columns = array('event_number','at','kind','run_uuid','status','phase','progress_seq',
++            'transport_ticks','phase_status','search_requests','search_found','search_accepted','search_blocked','search_rejection_reasons',
++            'selection_scanned','selection_materialized','covered','required','error_code','error_count',
++            'source_provider_errors','source_error_examples','source_errors_this_tick','activity','skipped_item_errors_count','skipped_item_examples',
++            'resume_reason','completion_warning','checkpoint_deferred','checkpoint_id');
++        if ($format === 'csv') { fwrite($out, "\xEF\xBB\xBF"); fputcsv($out, $columns, ';', '"', ''); }
++        foreach ($runs as $one_uuid) {
++            $key = $this->ebay_audit_key($one_uuid);
++            $meta = get_option($key.'_meta', array());
++            $count = absint(is_array($meta) ? ($meta['count'] ?? 0) : 0);
++            if ($count === 0 && (string)($current['run_uuid'] ?? '') === $one_uuid) {
++                // Honest fallback for the active run before audit was installed.
++                $fallback=$this->ebay_audit_snapshot($current,'live_snapshot_no_earlier_log');
++                $fallback['event_number']=0;
++                $this->ebay_audit_export_row($out,$fallback,$columns,$format);
++            }
++            for ($i = 0; $i < (int)ceil($count/100); $i++) {
++                $chunk = get_option($key.'_c'.$i, array());
++                if (!is_array($chunk) || !$chunk) {
++                    $this->ebay_audit_export_row($out,array('run_uuid'=>$one_uuid,
++                        'kind'=>'audit_chunk_missing','error_code'=>'audit_missing_chunk','event_number'=>$i*100+1),$columns,$format);
++                    continue;
++                }
++                foreach ($chunk as $row) {
++                    if (is_array($row)) { $this->ebay_audit_export_row($out,$row,$columns,$format); }
++                }
++            }
++        }
++        // Historical runs from before installation: only short legacy summaries.
++        // They are explicitly labelled, never misrepresented as full audit events.
++        if ($uuid === 'all') {
++            $history = get_option($this->ebay_run_history_option_key(),array());
++            foreach ((array)$history as $prior) {
++                if (!is_array($prior)) { continue; }
++                $id=sanitize_text_field((string)($prior['run_uuid']??''));
++                if ($id==='' || in_array($id,$runs,true)) { continue; }
++                $this->ebay_audit_export_row($out,array('run_uuid'=>$id,
++                    'kind'=>'old_short_summary_no_detailed_log',
++                    'status'=>sanitize_key((string)($prior['status']??'')),
++                    'phase'=>sanitize_key((string)($prior['phase']??'')),
++                    'error_code'=>sanitize_key((string)($prior['error_code']??'')),
++                    'at'=>absint($prior['finished_at']??0)), $columns, $format);
++            }
++        }
++        fclose($out);
++        exit;
++    }
++
++    private function ebay_audit_export_row($out, $row, $columns, $format) {
++        if ($format === 'json') { fwrite($out,wp_json_encode($row,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)."\n"); return; }
++        $cells = array();
++        foreach ($columns as $key) {
++            $value = $row[$key] ?? '';
++            if (is_array($value)) { $value = wp_json_encode($value,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES); }
++            $value = (string)$value;
++            // Prevent spreadsheet formula injection in downloaded diagnostics.
++            if (preg_match('/^[=+@\-\t\r]/u',$value)) { $value = "'".$value; }
++            $cells[] = $value;
++        }
++        fputcsv($out,$cells,';', '"', '');
++    }
++
+     private function ebay_run_save($run) {
+         $run = is_array($run) ? $run : array();
++        $before = $this->ebay_run_load();
+         $run['schema'] = '1.0';
+         $run['build'] = self::EBAY_RUNTIME_BUILD;
+         $run['updated_at'] = time();
+@@ -757,6 +1027,14 @@
+         if (serialize($actual)!==serialize($run)) {
+             $this->ebay_run_last_storage_failure=true;
+             return false;
++        }
++        if (!empty($before['run_uuid']) && (string)$before['run_uuid'] !== (string)($run['run_uuid'] ?? '')) {
++            $this->ebay_audit_note_state($before,array(),'superseded_by_new_run');
++        }
++        // Audit is a separate private sidecar. Never falsify business success
++        // if its own write fails: expose the audit warning on the admin screen.
++        if (!$this->ebay_audit_note_state($run,$before)) {
++            update_option('ppar_ebay_audit_write_error_v1',time(),false);
+         }
+         return $run;
+     }
+@@ -793,6 +1071,9 @@
+                 wp_cache_delete($key, 'options');
+                 wp_cache_delete('alloptions', 'options');
+             }
++            if (!$this->ebay_audit_note_state($after,$before,'resume_or_state_transition')) {
++                update_option('ppar_ebay_audit_write_error_v1',time(),false);
++            }
+             return $after;
+         }
+ 
+@@ -802,7 +1083,11 @@
+         if (serialize($current) !== serialize($before)) { return false; }
+         update_option($key, $after, false);
+         $verify = $this->ebay_run_load();
+-        return serialize($verify) === serialize($after) ? $after : false;
++        if (serialize($verify) !== serialize($after)) { return false; }
++        if (!$this->ebay_audit_note_state($after,$before,'resume_or_state_transition')) {
++            update_option('ppar_ebay_audit_write_error_v1',time(),false);
++        }
++        return $after;
+     }
+ 
+     private function ebay_run_is_open($run = null) {
+@@ -2380,6 +2665,9 @@
+             $state=array('fingerprint'=>$fingerprint,'cursor'=>0,'checked'=>0,'refreshed'=>0,'complete'=>0);
+         }
+         if(!empty($state['complete']) && time()-absint($state['completed_at']??0)<15*MINUTE_IN_SECONDS){return true;}
++        // Bounded, *per tick* details for the independent private audit.
++        // Do not inflate the canonical run with unlimited item error history.
++        $state['audit_recent_errors']=array();
+         if(!empty($state['complete'])){$state['cursor']=0;$state['complete']=0;}
+         global $wpdb;
+         if(!is_object($wpdb)||!method_exists($wpdb,'get_row')||!method_exists($wpdb,'prepare')
+@@ -2444,6 +2732,8 @@
+                     $temporary=in_array($code,array('ebay_refresh_transport','ebay_refresh_transient_http'),true);
+                     $attempts=absint($state['retry_attempts']??0);
+                     if($temporary && $attempts<2){
++                        $state['audit_recent_errors'][]=array('post_id'=>$id,
++                            'code'=>$code!==''?$code:'source_unverified', 'retry'=>$attempts+1);
+                         // A provider timeout is not a reason to fail the whole run.
+                         // Resume this SAME selected offer and cursor in one of the
+                         // next two canonical worker ticks. No new worker or API path.
+@@ -2465,6 +2755,8 @@
+                     // request cap and then defer the unverified public commit.
+                     $state['retry_attempts']=0;
+                     $state['provider_errors']=absint($state['provider_errors']??0)+1;
++                    $state['audit_recent_errors'][]=array('post_id'=>$id,
++                        'code'=>$code!==''?$code:'source_unverified','retry'=>0);
+                     if(!isset($state['provider_error_samples']) || !is_array($state['provider_error_samples'])){
+                         $state['provider_error_samples']=array();
+                     }
+--- QA11/affiliate-portal-router/includes/trait-ppar-ebay.php
++++ QA12/affiliate-portal-router/includes/trait-ppar-ebay.php
+@@ -9023,7 +9023,23 @@
+ 
+     private function ebay_public_availability_state_save($key, $state) {
+         update_option($key,$state,false);
+-        return serialize(get_option($key,array()))===serialize($state);
++        if (serialize(get_option($key,array()))!==serialize($state)) { return false; }
++        // Availability is independent of research, but the operator must be
++        // able to audit its actual, *saved* checks too. No new scheduler.
++        if (method_exists($this,'ebay_run_load') && method_exists($this,'ebay_audit_note_state')) {
++            $run=$this->ebay_run_load();
++            $activity=array('checked'=>absint($state['checked']??0),
++                'available'=>absint($state['available']??0),'ended'=>absint($state['ended']??0),
++                'errors'=>absint($state['errors']??0),'cursor'=>absint($state['cursor']??0),
++                'last_batch_at'=>absint($state['last_batch_at']??0),
++                'next_due_at'=>absint($state['next_due_at']??0),
++                'running'=>empty($state['running'])?0:1,
++                'last_error'=>sanitize_key((string)($state['last_error']??'')));
++            if (!$this->ebay_audit_note_state($run,array(),'availability_saved',$activity)) {
++                update_option('ppar_ebay_audit_write_error_v1',time(),false);
++            }
++        }
++        return true;
+     }
+ 
+     /** KISS availability pass: source of truth is the already-published BUSINESS
+@@ -10816,10 +10832,26 @@
+         // Page-performance invariant: normal rendering reads only bounded status
+         // options. Do not rescan thousands of source rows (the old Reitstiefel
+         // live snapshot alone read up to 5,000 rows on every page view).
+-        $review_candidates = array_values(array_filter((array)$this->ebay_review_candidates(100), function($candidate) { return strtoupper((string)($candidate['seller_account_type'] ?? '')) === 'BUSINESS'; }));
++        $ppar_review_requested = isset($_GET['ppar_ebay_review']) && is_scalar($_GET['ppar_ebay_review'])
++            && (string)$_GET['ppar_ebay_review'] === '1';
++        $ppar_advanced_requested = isset($_GET['ppar_ebay_advanced']) && is_scalar($_GET['ppar_ebay_advanced'])
++            && (string)$_GET['ppar_ebay_advanced'] === '1';
++        $ppar_diagnostics_requested = isset($_GET['ppar_ebay_diagnostics']) && is_scalar($_GET['ppar_ebay_diagnostics'])
++            && (string)$_GET['ppar_ebay_diagnostics'] === '1';
++        $review_candidates = $ppar_review_requested
++            ? array_values(array_filter((array)$this->ebay_review_candidates(100), function($candidate) { return strtoupper((string)($candidate['seller_account_type'] ?? '')) === 'BUSINESS'; }))
++            : array();
+         ?>
+         <div class="wrap ppar-ebay">
+             <h1>eBay</h1>
++            <p><strong>Übersicht:</strong> Lauf, Fortschritt, Produktabdeckung und Verfügbarkeit. Alle Einstellungen und Prüfdetails sind nur bei Bedarf sichtbar.</p>
++            <p style="display:flex;gap:8px;flex-wrap:wrap">
++              <a class="button" href="<?php echo esc_url(add_query_arg('ppar_ebay_advanced','1',admin_url('admin.php?page=affiliate-portal-ebay'))); ?>">Einstellungen / Werkzeuge</a>
++              <a class="button" href="<?php echo esc_url(add_query_arg('ppar_ebay_diagnostics','1',admin_url('admin.php?page=affiliate-portal-ebay'))); ?>">Technische Details</a>
++              <a class="button" href="<?php echo esc_url(add_query_arg('ppar_ebay_review','1',admin_url('admin.php?page=affiliate-portal-ebay'))); ?>">Prüfkandidaten bei Bedarf</a>
++              <?php if ($ppar_advanced_requested || $ppar_diagnostics_requested || $ppar_review_requested) : ?><a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-ebay')); ?>">Zurück zur Übersicht</a><?php endif; ?>
++            </p>
++            <?php if ($ppar_advanced_requested) : ?>
+             <p><strong>Runtime:</strong> <code><?php echo esc_html(self::VERSION); ?></code> · Build <code><?php echo esc_html(self::EBAY_RUNTIME_BUILD); ?></code></p>
+             <p><strong>Provider-Seite: Status und Steuerung.</strong> Der Seitenaufruf führt keine eBay-Produktverarbeitung aus. Der Gesamtlauf wird ausschließlich paketweise über den Heartbeat fortgesetzt; Browser und WordPress-Cron sind dafür nicht erforderlich.</p>
+             <p><strong>Automatischer Heartbeat:</strong> Für Pferde Atelier wird die vorhandene GitHub-Infrastruktur als Taktgeber verwendet; kein zusätzlicher externer Account ist erforderlich. Die Heartbeat-URL enthält keinen Geheimschlüssel und akzeptiert ausschließlich begrenzte POST-Ticks. <input type="text" class="large-text code" readonly value="<?php echo esc_attr($external_tick_url); ?>" onclick="this.select();"></p>
+@@ -10827,11 +10859,13 @@
+             <p><strong>Provider-Fachseite.</strong> Zugangsdaten und OAuth-Test liegen zentral unter <a href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-networks')); ?>">Netzwerke &amp; API</a>. <?php echo $this->provider_control_badge('ebay'); ?> <a class="button button-small" href="<?php echo esc_url($this->provider_control_url('ebay')); ?>">Chefsteuerung &amp; Veto</a></p>
+             <p><strong>Produktschiene:</strong> BUSINESS → Werbemittelbibliothek und passende Produktzonen. Es werden ausschließlich gewerbliche Produkte verarbeitet.</p>
+             
++            <?php endif; // advanced preamble ?>
+             <?php if ($notice === 'saved') : ?><div class="notice notice-success inline"><p>Einstellungen gespeichert.</p></div><?php endif; ?>
+             <?php if (in_array($notice, array('error','test_failed','sync_failed','refresh_failed','review_failed'), true)) : ?><div class="notice notice-error inline"><p><?php echo esc_html($message ?: 'Vorgang fehlgeschlagen.'); ?></p></div><?php endif; ?>
+             <?php if (in_array($notice, array('sync_started','refresh_started','stop_requested'), true)) : ?><div class="notice notice-info inline"><p><?php echo esc_html($message ?: 'Hintergrundvorgang gestartet.'); ?></p></div><?php endif; ?>
+             <?php if (in_array($notice, array('categories','catalog_passed','test_passed','sync_passed','review_saved'), true)) : ?><div class="notice notice-success inline"><p><?php echo esc_html($message ?: 'Vorgang abgeschlossen.'); ?></p></div><?php endif; ?>
+ 
++            <?php if ($ppar_advanced_requested) : ?>
+             <section class="postbox" style="padding:18px;max-width:1180px">
+                 <h2>1. Portal- und Themenabgleich prüfen</h2>
+                 <p>Prüft den fest mitgelieferten vollständigen Pferde-Atelier-Zielkatalog: 8 Hauptbereiche, 59 Bereichsseiten, 329 Produktseiten und 1.124 WordPress-Kategorien. Ohne positiven Abgleich bleiben Provider-Fachtest und Abruf fail-closed.</p>
+@@ -10863,16 +10897,40 @@
+                         <tr><th>Max. Seiten je Abrufprofil</th><td><input class="small-text" type="number" min="1" max="20" name="ppar_ebay[max_pages_per_profile]" value="<?php echo absint($settings['max_pages_per_profile']); ?>"></td></tr>
+                         <tr><th>Max. Requests je Arbeitspaket</th><td><input class="small-text" type="number" min="1" max="40" name="ppar_ebay[max_requests_per_run]" value="<?php echo absint($settings['max_requests_per_run']); ?>"><p class="description">Harte Hintergrundgrenze pro Arbeitspaket. Ein vollständiger Discovery-Lauf setzt danach automatisch am nächsten Profil fort, bis der komplette Katalog einmal abgedeckt ist.</p></td></tr>
+                         <tr><th>Zeitbudget je Hintergrundpaket</th><td><input class="small-text" type="number" min="10" max="30" name="ppar_ebay[run_time_budget_seconds]" value="<?php echo absint($settings['run_time_budget_seconds']); ?>"> Sekunden<p class="description">Der Gesamtlauf hat kein synchrones Browser-Zeitlimit mehr. Dieses Budget begrenzt nur ein einzelnes fortsetzbares Arbeitspaket.</p></td></tr>
+-                        <tr><th>Automatische Abrufprofile</th><td><textarea rows="28" class="large-text code" readonly><?php echo esc_textarea((string) $rules_json); ?></textarea><p class="description">Nur lesbar. Die fachliche Annahme und Zielzuordnung erfolgt automatisch gegen den vollständigen Pferde-Atelier-Zielkatalog; Suchbegriffe allein reichen niemals zur Freigabe.</p></td></tr>
++                        <tr><th>Automatische Abrufprofile</th><td><textarea rows="7" class="large-text code" readonly><?php echo esc_textarea((string) $rules_json); ?></textarea><p class="description">Nur lesbar. Die fachliche Annahme und Zielzuordnung erfolgt automatisch gegen den vollständigen Pferde-Atelier-Zielkatalog; Suchbegriffe allein reichen niemals zur Freigabe.</p></td></tr>
+                     </tbody></table>
+                     <?php submit_button('eBay-Betriebsprofil speichern'); ?>
+                 </form>
+             </section>
+ 
++            <?php endif; // advanced sections 1+2 ?>
+             <?php if ((string)($canonical_run['schema'] ?? '') === '1.0') : ?>
+             <section class="postbox" style="padding:18px;max-width:1180px;border-left:4px solid <?php echo $canonical_status==='completed' && array_key_exists('completed_with_skips',$canonical_run) && empty($canonical_run['completed_with_skips'])?'#46b450':($canonical_status==='failed'?'#d63638':'#dba617'); ?>">
+-                <h2>Kanonischer Gesamtworkflow</h2>
++                <h2>eBay – Laufstatus und Produkte</h2>
++                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="display:inline-flex;gap:8px;flex-wrap:wrap;margin:8px 0">
++                  <input type="hidden" name="action" value="ppar_ebay_audit_export">
++                  <input type="hidden" name="run_uuid" value="<?php echo esc_attr((string)($canonical_run['run_uuid'] ?? '')); ?>">
++                  <?php wp_nonce_field('ppar_ebay_audit_export','ppar_ebay_nonce'); ?>
++                  <button class="button button-primary" name="format" value="csv">Lauf- und Fehlerprotokoll (CSV)</button>
++                  <button class="button" name="format" value="json">Vollprotokoll (JSON)</button>
++                </form>
++                <?php $ppar_audit_write_error=absint(get_option('ppar_ebay_audit_write_error_v1',0)); ?>
++                <?php if ($ppar_audit_write_error) : ?><p class="notice notice-error inline"><strong>Achtung:</strong> Ein Protokoll-Speichervorgang ist fehlgeschlagen. Historische Einträge bitte nicht als vollständig betrachten.</p><?php endif; ?>
++                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="display:inline-block;margin:2px 0 10px">
++                    <input type="hidden" name="action" value="ppar_ebay_audit_export">
++                    <input type="hidden" name="run_uuid" value="all">
++                    <?php wp_nonce_field('ppar_ebay_audit_export','ppar_ebay_nonce'); ?>
++                    <button class="button" name="format" value="csv">Alle bisherigen Laufprotokolle herunterladen</button>
++                </form>
++                <p class="description">Gespeicherte Laufänderungen ab Installation dieser Version. Ältere Kurzberichte bleiben erhalten, können aber nicht rückwirkend vollständig rekonstruiert werden.</p>
+                 <?php $canonical_label=$canonical_status==='running'?'Läuft':($canonical_status==='paused'?'Pausiert':($canonical_status==='failed'?'Fehlgeschlagen':($canonical_status==='completed'?(!array_key_exists('completed_with_skips',$canonical_run)||!empty($canonical_run['completed_with_skips'])?'Fertig (mit offenen Prüfungen)':'Fertig'):($canonical_status==='local_checked'?'Lokal geprüft (noch nicht freigegeben)':'Wartet')))); ?>
++                <?php $ppar_progress_age = !empty($canonical_run['last_progress_at']) ? max(0,time()-absint($canonical_run['last_progress_at'])) : 0; ?>
++                <?php $ppar_tick_age = $worker_last_tick_at ? max(0,time()-$worker_last_tick_at) : 0; ?>
++                <?php if ($canonical_status === 'running' && $ppar_progress_age > 180 && $ppar_tick_age > 180) : ?>
++                  <p class="notice notice-error inline"><strong>Stillstand:</strong> Seit <?php echo absint(ceil($ppar_progress_age/60)); ?> Minuten kein echter Fortschritt und seit <?php echo absint(ceil($ppar_tick_age/60)); ?> Minuten kein neuer Worker-Aufruf. Bitte nicht blind neu starten.</p>
++                <?php elseif ($canonical_status === 'running' && $ppar_progress_age > 180) : ?>
++                  <p class="notice notice-warning inline"><strong>Prüfen:</strong> Der Worker wird aufgerufen, aber seit <?php echo absint(ceil($ppar_progress_age/60)); ?> Minuten kein echter Fortschritt.</p>
++                <?php endif; ?>
+                 <p><strong>Status:</strong> <strong><?php echo esc_html($canonical_label); ?></strong> · Run <code><?php echo esc_html(substr((string)($canonical_run['run_uuid'] ?? ''),0,12)); ?></code>
+                 · Etage <code><?php echo esc_html($canonical_phase ?: 'idle'); ?></code>
+                 · letzter echter Fortschritt <?php echo !empty($canonical_run['last_progress_at']) ? esc_html(wp_date('d.m.Y H:i:s',absint($canonical_run['last_progress_at']))) : '—'; ?>.</p>
+@@ -10904,11 +10962,13 @@
+                     <?php endif; ?>
+                 <?php endif; ?>
+                 <?php if($canonical_status==='paused' && sanitize_key((string)($canonical_run['resume_reason']??''))!=='operator_stop'): ?><p><strong>Sauber pausiert.</strong> Der sichere Frontend-Stand bleibt aktiv. Automatische Fortsetzung <?php echo !empty($canonical_run['resume_at'])?esc_html(wp_date('d.m.Y H:i:s',absint($canonical_run['resume_at']))):'in Kürze'; ?>.</p><?php endif; ?>
++                <?php if ($ppar_diagnostics_requested) : ?>
+                 <p><strong>Lease:</strong> <?php echo !empty($canonical_run['owner']) ? '<code>'.esc_html((string)$canonical_run['owner']).'</code>' : 'frei'; ?>
+                 · Ablauf <?php echo !empty($canonical_run['lease_expires_at']) ? esc_html(wp_date('d.m.Y H:i:s',absint($canonical_run['lease_expires_at']))) : '—'; ?>
+                 · Nullfortschritt <?php echo absint($canonical_run['no_progress_count'] ?? 0); ?>/3
+                 <?php if (!empty($canonical_run['resume_reason'])) : ?>· Checkpoint <code><?php echo esc_html((string)$canonical_run['resume_reason']); ?></code><?php endif; ?>.</p>
+                 <p><strong>Worker-Transport:</strong> <code><?php echo esc_html((string)($canonical_run['worker_transport'] ?? 'external_tick')); ?></code> · letzter Tick <?php echo $worker_last_tick_at ? esc_html(wp_date('d.m.Y H:i:s',$worker_last_tick_at)) : '—'; ?> · Pakete <?php echo absint($worker_tick_count); ?>.</p>
++                <?php endif; // diagnostic lease/worker details ?>
+                 <p id="ppar-ebay-live-status" role="status" aria-live="polite"><strong>Live-Status:</strong> Wird automatisch geprüft. Kein Neuladen nötig.</p>
+                 <script>
+                 (function(){
+@@ -10984,7 +11044,9 @@
+                     <?php if (!empty($availability_state['errors'])) : ?> · Prüfprobleme <?php echo absint($availability_state['errors']); ?><?php endif; ?>
+                     <small>(gespeicherte Freigabe ist kein Nachweis, dass jede Kachel gerade sichtbar ist)</small>
+                 </p>
+-                <?php if (!empty($canonical_routes['business'])) : ?><p><strong>BUSINESS-Abdeckung im gespeicherten Gesamtlauf:</strong> <?php echo absint($canonical_coverage['covered'] ?? 0); ?>/<?php echo absint($canonical_coverage['required'] ?? $ebay_current_required_count); ?> · fehlend <?php echo count((array)($canonical_coverage['missing'] ?? array())); ?>.<?php if (isset($canonical_coverage['required']) && absint($canonical_coverage['required']) !== $ebay_current_required_count) : ?> <em>Gespeicherter Lauf mit alter Pflichtgruppenliste; aktueller Sollstand: <?php echo absint($ebay_current_required_count); ?>.</em><?php endif; ?><?php if ($canonical_status === 'local_checked') : ?> <em>Nur lokaler Prüflauf: keine neue Veröffentlichung. Diese Zahl beweist nicht, dass ältere öffentliche Produkte gelöscht wurden.</em><?php endif; ?></p><?php endif; ?>
++                <?php if (!empty($canonical_routes['business']) && !array_key_exists('required', $canonical_coverage)) : ?>
++                <p><strong>Abdeckung:</strong> Der neue Lauf hat noch keinen eigenen Gesamtstand berechnet. Vorherige eBay-Freigaben bleiben separat gespeichert; <strong>0/298 ist hier kein Lösch- oder Gesamtergebnis.</strong></p>
++                <?php elseif (!empty($canonical_routes['business'])) : ?><p><strong>BUSINESS-Abdeckung im gespeicherten Gesamtlauf:</strong> <?php echo absint($canonical_coverage['covered'] ?? 0); ?>/<?php echo absint($canonical_coverage['required'] ?? $ebay_current_required_count); ?> · fehlend <?php echo count((array)($canonical_coverage['missing'] ?? array())); ?>.<?php if (isset($canonical_coverage['required']) && absint($canonical_coverage['required']) !== $ebay_current_required_count) : ?> <em>Gespeicherter Lauf mit alter Pflichtgruppenliste; aktueller Sollstand: <?php echo absint($ebay_current_required_count); ?>.</em><?php endif; ?><?php if ($canonical_status === 'local_checked') : ?> <em>Nur lokaler Prüflauf: keine neue Veröffentlichung. Diese Zahl beweist nicht, dass ältere öffentliche Produkte gelöscht wurden.</em><?php endif; ?></p><?php endif; ?>
+                 <?php
+                     // One-click report of the EXISTING canonical missing-ID list.
+                     // No provider call, no write, no worker and no extra admin endpoint.
+@@ -11083,7 +11145,7 @@
+             </section>
+             <?php endif; ?>
+ 
+-            <?php if (!empty($selection_state)) : $selection_status=sanitize_key((string)($selection_state['status'] ?? '')); $business_stats=is_array($selection_state['stats']['business']??null)?$selection_state['stats']['business']:array(); ?>
++            <?php if ($ppar_diagnostics_requested && !empty($selection_state)) : $selection_status=sanitize_key((string)($selection_state['status'] ?? '')); $business_stats=is_array($selection_state['stats']['business']??null)?$selection_state['stats']['business']:array(); ?>
+             <section class="postbox" style="padding:18px;max-width:1180px;border-left:4px solid <?php echo $selection_status==='complete'?'#46b450':($selection_status==='failed'?'#d63638':'#dba617'); ?>">
+                 <h2>Auswahl-/Materialisierungs-Teilstatus</h2>
+                 <p><strong>Auswahlstatus:</strong> <?php echo esc_html((string)($selection_state['status'] ?? 'wartet')); ?> · Phase <code><?php echo esc_html((string)($selection_state['phase'] ?? '')); ?></code></p>
+@@ -11126,6 +11188,7 @@
+             </section>
+             <?php endif; ?>
+ 
++            <?php if ($ppar_advanced_requested || $ppar_diagnostics_requested) : ?>
+             <section class="postbox" style="padding:18px;max-width:1180px">
+                 <h2>3. Provider-Fachtest und Abruf</h2>
+                 <p>Der reine OAuth-Zugangstest liegt zentral unter „Netzwerke &amp; API“. Dieser Fachtest prüft zusätzlich EBAY_DE, itemAffiliateWebUrl, ausschließlich BUSINESS-Verkäufer und den Portalfilter. Der vollständige Abruf folgt eBays Pagination über <code>next</code> und läuft seit V5.6.0 ausschließlich als fortsetzbarer Hintergrundjob; der Admin-Klick wartet nicht mehr auf den Gesamtlauf.</p>
+@@ -11193,6 +11256,8 @@
+                 <?php endif; ?>
+             </section>
+ 
++            <?php endif; // provider advanced details ?>
++            <?php if ($ppar_review_requested) : ?>
+             <section class="postbox" style="padding:18px;max-width:1180px">
+                 <h2>4. eBay-Prüfbestand / Chef-Veto</h2>
+                 <p>Nur <strong>weiche fachliche Unsicherheiten</strong> erscheinen hier. Hard-Safety-, Provider-, Affiliate-, Ablauf- und technische Sperren bleiben nicht übersteuerbar. Ein Kandidat muss innerhalb der Sechs-Stunden-Frist entschieden werden.</p>
+@@ -11213,6 +11278,7 @@
+                     </tbody></table>
+                 <?php endif; ?>
+             </section>
++            <?php endif; // review detail ?>
+         </div>
+         <?php
+     }
+--- QA11/affiliate-portal-router/pferdeportal-affiliate-router.php
++++ QA12/affiliate-portal-router/pferdeportal-affiliate-router.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
+  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
+- * Version: 6.72.322
++ * Version: 6.72.323
+  * Author: OpenAI
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -120,7 +120,7 @@
+     use PPAR_DFS_Amazon_Trait;
+     use PPAR_Digistore24_Trait;
+     use PPAR_Housekeeping_Trait;
+-    const VERSION = '6.72.322';
++    const VERSION = '6.72.323';
+     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
+     const CONTRACT_VERSION = '1.0';
+     const PROVIDER_CONTRACT_VERSION = '2.0';
+@@ -486,6 +486,7 @@
+             add_action('admin_post_ppar_ebay_run_resume_stop', array($this, 'handle_ebay_run_resume_stop'));
+             add_action('admin_post_ppar_ebay_run_refresh', array($this, 'handle_ebay_run_refresh'));
+             add_action('admin_post_ppar_ebay_run_restart', array($this, 'handle_ebay_run_restart'));
++            add_action('admin_post_ppar_ebay_audit_export', array($this, 'handle_ebay_audit_export'));
+             add_action('admin_post_ppar_ebay_business_curation', array($this, 'handle_ebay_business_curation'));
+ 
+             add_action('admin_init', array($this, 'maybe_install_network_sync_schema'));
+--- QA11/affiliate-portal-router/readme.txt
++++ QA12/affiliate-portal-router/readme.txt
+@@ -1,3 +1,4 @@
++V6.72.323 QA12 KISS - Admin schlank, eBay-Protokoll als Admin-Download (NUR TEST).
+ V6.72.322 QA11 NUR TEST (11.11.2026): QA10 Berichts-/Backend-Verschlankung plus korrigierte Schlusspruefung: Einzelne nicht bestaetigbare eBay-Quellen stoppen den gesamten Lauf nicht; die anderen Kandidaten werden weiter kontrolliert, keine unbelegte Veroeffentlichung, letzter guter Checkpoint bleibt geschuetzt. Bei exakt diesem alten Abbruch denselben Lauf mit unveraendertem Cursor fortsetzen statt erneut alle Produkte zu recherchieren. Backend-AJAX ist nur lesend und startet keinen Worker. Kein Live-End-to-End-Beweis.
+ V6.72.321 QA9 NUR TEST: KISS - Recherche, inkrementelle Freigabe und periodische Verfuegbarkeitspruefung getrennt. Vorhandene eBay-Produkte bleiben gespeichert; keine neue Suche, kein Tabellenumbau. Noch keine WordPress-Abnahme.
+ V6.72.318 NUR TEST: Admin-Knoepfe "eBay-Lauf sicher anhalten" und "Diesen Lauf am gespeicherten Stand fortsetzen" im bestehenden eBay-Gesamtworkflow. Stoppsignal bleibt getrennt von laufenden Cursor-Speicherungen erhalten. Aktuell laufendes Arbeitspaket darf zu Ende schreiben; vor dem naechsten Arbeitspaket wird er manuell pausiert (ohne Loeschung). Vorhandene Produktdaten, gespeicherte Coverage und sicherer oeffentlicher Checkpoint bleiben unangetastet. Keine automatische Wiederaufnahme; Fortsetzen verwendet denselben Lauf samt Cursor, ohne Neubeginn. Keine neue Tabelle, kein neuer Worker, keine API. Lokal pruefen; nicht live getestet.
+@@ -73,7 +74,7 @@
+ V6.72.236 TEST: Backend-Portalabdeckung hat bisher 329 Ziele x 3 LIVE-Router-Auswahlen synchron ausgefuehrt; jetzt acht Ziele pro Request und vollstaendiger JSON-Export in begrenzten Lesebloecken. PRIVATE-HivePress-Stale-Filter kehrt auf normalen Seiten sofort zurueck; BUSINESS-Checkpoint scannt bei abgeschaltetem PRIVATE keine alten PRIVATE-HivePress-Importe mehr. Kein neuer Worker, keine DB-Tabelle, keine Provider-/Ranking-/BUSINESS-Aenderung. Lokale PHP-/JavaScript-/Mock-Pruefungen, KEINE WP/MariaDB-Host-Abnahme.
+ V6.72.234 TEST: Direkter Rueckbau eBay-PRIVATE aus Affiliate-Zentrale 6.72.233: alte automatische Admin-Init-Loeschung, PRIVATE-HivePress-Backendfunktionen, PRIVATE-Kategorieanlage, PRIVATE-Discovery und PRIVATE-Bedienfelder entfernt. Angehende INDIVIDUAL-Datensaetze werden auch aus alten Laufplaenen hart abgewiesen. BUSINESS/Idealo/Artikel/Banner unveraendert. Bestehende PRIVATE-DB-Altlasten werden durch das Installieren NICHT automatisch geloescht; keine unkontrollierten Datenbankaktionen. Nur Testinstallation; kein behaupteter WordPress-/MariaDB-Livepass.
+ V6.72.233: PRIVATE-only Aufraeumweg ueber admin_init reaktiviert (kein Frontend/AJAX); alter falscher Complete-Marker wird nachverarbeitet; Abschluss erst bei tatsaechlich geleerter Unterkategorie-Struktur. PRIVATE-Neuanlage gesperrt. BUSINESS/idealo/Artikelunveraendert.
+-Stable tag: 6.72.322
++Stable tag: 6.72.323
+ V6.72.232 SICHERHEITSSTOPP: Automatischer PHP-init-Loeschlauf der 6.72.231 entfernt; PRIVAT-eBay bleibt abgeschaltet und im oeffentlichen HivePress-Filter gesperrt; keine eigenstaendige Datenbankbereinigung, keine Datenrestauration.
+ V6.72.230 PRIVATE-EBAY-ENTFERNUNG: PRIVATE-Verkaeuferroute bleibt zwingend aus; auf Adminaufrufen werden ausschliesslich eBay-markierte HivePress-Importanzeigen kontrolliert in den Papierkorb verschoben, manuelle Anzeigen vor Entfernung der Unterkategorien der Hauptkategorie Private Anzeigen zugeordnet. Alle Unterkategorien werden geloescht, Stammkategorie und native Anzeigen bleiben. Die PRIVAT-HivePress-Frontend-/Preview-Hooks und Einrichtungsoberflaeche sind abgekoppelt; BUSINESS, idealo, Artikel, Banner, Kategorien der Redaktion, CSS/JS bleiben unveraendert. Idempotente, zeitbegrenzte Bereinigung ohne neuen Cron/Runner; Fortschritt in der eBay-Fachseite.
+ V6.72.226 PRODUKTAUSGABE KISS (LOKALER TESTKANDIDAT): Stellt die vertragliche Reihenfolge exakt -> weiterer Themenkreis -> zuletzt nur bestaetigt freigegebene Pferdeprodukte wieder her. Kategorie-/Hub-/Journal-Produktplaetze werden bei zu wenigen Treffern nur aus dem vorhandenen indexierten Kampagnenbestand ergaenzt. Auf normalen Einzelbeitraegen bleibt exakt verlangte Produktidentitaet strikt; fuer allgemeine Beitraege werden zuletzt gepruefte eBay-/idealo-Angebote zugelassen. Anbieter koennen innerhalb derselben Relevanzstufe gemischt werden; spaetere Amazon-Einbindung bleibt getrennt. Bestehende Sperren fuer eBay-BUSINESS-Quelle, private Anzeigen, Quelle, Health, Veto, Bild, Partner und idealo-48h-Grenze bleiben aktiv. Der vorhandene idealo-Hintergrundrefresh muss veraltete unveraenderte Feeds vollstaendig neu pruefen, statt dauerhaft per Hash abzubrechen. Kein Umbau von Imports, Renderer, Kategorien, Bannern, Provideradaptern, Tracking, Datenbanktabellen oder Template. Keine neue Frontend-Providerabfrage. Tests sind lokale Funktionssimulation; kein behaupteter Live-/WP-/MariaDB-PASS.

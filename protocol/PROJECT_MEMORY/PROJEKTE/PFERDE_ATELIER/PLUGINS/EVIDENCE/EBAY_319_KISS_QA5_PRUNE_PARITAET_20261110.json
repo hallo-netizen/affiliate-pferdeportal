@@ -1,0 +1,83 @@
+[
+  {
+    "case": "gapfill",
+    "parity": true,
+    "old_queries": 41,
+    "new_queries": 1,
+    "old_scanned_rows": 2000,
+    "new_scanned_rows": 29,
+    "actions": 13
+  },
+  {
+    "case": "gapfill_empty",
+    "parity": true,
+    "old_queries": 41,
+    "new_queries": 41,
+    "old_scanned_rows": 2000,
+    "new_scanned_rows": 2000,
+    "actions": 0
+  },
+  {
+    "case": "gapfill_resume",
+    "parity": true,
+    "old_queries": 21,
+    "new_queries": 1,
+    "old_scanned_rows": 1000,
+    "new_scanned_rows": 15,
+    "actions": 6
+  },
+  {
+    "case": "gapfill_single",
+    "parity": true,
+    "old_queries": 41,
+    "new_queries": 1,
+    "old_scanned_rows": 2000,
+    "new_scanned_rows": 9,
+    "actions": 9
+  },
+  {
+    "case": "gapfill_sparse_tail",
+    "parity": true,
+    "old_queries": 41,
+    "new_queries": 1,
+    "old_scanned_rows": 2000,
+    "new_scanned_rows": 19,
+    "actions": 9
+  },
+  {
+    "case": "checkpoint_gapfill",
+    "parity": true,
+    "old_queries": 41,
+    "new_queries": 1,
+    "old_scanned_rows": 2000,
+    "new_scanned_rows": 29,
+    "actions": 13
+  },
+  {
+    "case": "full",
+    "parity": true,
+    "old_queries": 41,
+    "new_queries": 41,
+    "old_scanned_rows": 2000,
+    "new_scanned_rows": 2000,
+    "actions": 287
+  },
+  {
+    "case": "checkpoint",
+    "parity": true,
+    "old_queries": 41,
+    "new_queries": 41,
+    "old_scanned_rows": 2000,
+    "new_scanned_rows": 2000,
+    "actions": 287
+  },
+  {
+    "case": "error",
+    "parity": true,
+    "old_queries": 1,
+    "new_queries": 1,
+    "old_scanned_rows": 0,
+    "new_scanned_rows": 0,
+    "actions": 0
+  }
+]

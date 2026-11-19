@@ -1,0 +1,8 @@
+running status=advanced availability=1 worker=1 dispatch=1 expected=1/1 PASS
+paused status=idle availability=1 worker=0 dispatch=0 expected=1/0 PASS
+failed status=failed availability=1 worker=0 dispatch=0 expected=1/0 PASS
+completed status=idle availability=1 worker=0 dispatch=0 expected=1/0 PASS
+fresh_idle status=idle availability=1 worker=0 dispatch=0 expected=1/0 PASS
+stale_recovery status=idle availability=0 worker=0 dispatch=0 expected=0/0 PASS
+disabled availability=0 PASS
+TOTAL 7 FAILED 0

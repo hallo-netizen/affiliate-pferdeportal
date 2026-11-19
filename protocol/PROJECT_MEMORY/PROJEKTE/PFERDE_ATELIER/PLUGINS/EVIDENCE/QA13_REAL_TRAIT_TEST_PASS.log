@@ -1,0 +1,46 @@
+PASS isolated item fails, next independent item still checked
+PASS one item failure ends with WARN, not global FAIL
+PASS unsafe final publication deferred
+PASS single item cause recorded in durable state
+PASS last-good kept and only successful 102 added; failed 101 not approved
+PASS two-remote cap enforced including errors
+PASS first transient retries same source without losing cursor
+PASS second transient preserves source and cursor
+PASS after two retries the next unrelated item is checked
+PASS exhausted item retries create WARN, no global failure
+PASS two failed remote requests do not bypass two-request cap
+PASS third independent item processed in next bounded tick
+PASS 401 global authorization still hard-fails (never forged as product miss)
+PASS global auth fault does not continue unauthorized requests
+PASS all-success source refresh follows original successful commit path
+PASS normal verified source replaces last-good checkpoint
+PASS without old checkpoint error still does not forge a new public checkpoint
+PASS without prior checkpoint only proven campaign 102 seeds public set
+PASS token creation failure remains a global fail-closed error
+ALL QA11 REAL TRAIT CONTRACT CASES PASS
+PASS exact old failed final-source error is resumable
+PASS resume reuses UUID and final-source cursor exactly
+PASS resumes ONLY final verification; no new discovery or gapfill
+PASS preserves verified source and previous 571 progress steps
+PASS source candidates and last-good checkpoint unchanged
+PASS all gap-search state preserved, exactly one existing background worker scheduled
+PASS old terminal cause kept in audit but not shown as current failure
+PASS cannot resume an already running run twice
+PASS global auth failure is never auto-qualified for same-run resume
+PASS wrong failure status kept intact, no new worker scheduled
+PASS first-item failure safely resumable even without initial refresh fingerprint
+PASS first-item resume recomputes source plan, not discovery
+PASS local-only operation can never use remote public resume
+PASS backend shows genuine stall without triggering a worker
+PASS admin status read is side-effect-free and did not schedule a job
+ALL QA11 PUBLIC SOURCE, SAFE RESUME & READ-ONLY UI TESTS PASS
+PASS 16 individually failed sources never hard-stop a 17-item public verification
+PASS existing diagnostic limit remains 12 display examples
+PASS all 16 failed identities are tracked, not merely the 12 display samples
+PASS safe published set includes old last-good and verified 17, excludes every failed campaign
+PASS successful partial append count is persisted on the same canonical run
+PASS partial release never invokes unsafe full replacement commit
+ALL QA13 17-SOURCE REAL-TRAIT PARTIAL-PUBLISH TESTS PASS
+PASS pre-QA13 failures without complete IDs never trigger guessed public approval
+PASS old safe checkpoint retained when a legacy run has unmapped failures
+ALL QA13 LEGACY-STATE SAFETY TESTS PASS

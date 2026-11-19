@@ -1,0 +1,28 @@
+== regression/EBAY_319_KISS_16_KANONISCHE_TESTS_20261110.php
+PASS Reuse stops after three accepted offers, not unbounded
+KISS_CENTRAL_BUSINESS_QA 16/16 PASS
+== regression/EBAY_319_KISS_QA2_TEST_EINZELFEHLER_20261110.php
+PASS safe-vs-technical gap separated
+CANONICAL_FAILURE_ISOLATION 13/13 PASS
+== regression/EBAY_319_KISS_QA3_TEST_EFFIZIENZ_20261110.php
+PASS empty selection may continue to coverage without forcing products
+SELECTED_ONLY_MATERIALIZE 11/11 PASS
+== regression/EBAY_KISS_TEST_END_TO_END_MOCK_20261110.php
+PASS State persisted after each phase through one save method
+KISS_SINGLE_FLOW 10/10 PASS
+== regression/EBAY_KISS_TEST_PERSISTENZ_20261110.php
+PASS Unknown previous run fields preserved during checkpoint update
+KISS_DURABLE_SAVE 11/11 PASS
+== QA12_AUDIT_REAL_METHOD_TEST.php
+PASS audit never stores API secrets/settings
+ALL QA12 REAL PHP AUDIT TESTS PASS
+== QA13_PUBLIC_APPEND_REAL_TRAIT_TEST.php
+PASS old safe checkpoint retained when a legacy run has unmapped failures
+ALL QA13 LEGACY-STATE SAFETY TESTS PASS
+== QA14_POST_ARTICLE_REFRESH_REAL_TRAIT_TEST.php
+PASS revision supersession resets to new revision and resumes first batch
+ALL QA14 ARTICLE REFRESH CASES PASS
+== QA14_ENDED_REPLACEMENT_REAL_TRAIT_TEST.php
+PASS no duplicate public append worker when second reserve succeeds
+ALL QA14 ENDED-REPLACEMENT ORIGINAL-TRAIT TESTS PASS
+PHP syntax: PASS

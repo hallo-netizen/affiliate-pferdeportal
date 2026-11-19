@@ -1,0 +1,162 @@
+{
+  "archive": {
+    "file": "Pferdeatelier_Affiliate_6.72.322_QA11_KISS_SCHLUSSPRUEFUNG_NUR_TEST.zip",
+    "bytes": 5361052,
+    "sha256": "c86fc0f46a0b69b1c8041453caf7a3665775ff53b92bc9fef373f65500889666",
+    "entries": 66,
+    "zip_crc": "PASS",
+    "changed_files": [
+      "affiliate-portal-router/includes/trait-ppar-ebay-run.php",
+      "affiliate-portal-router/includes/trait-ppar-ebay.php",
+      "affiliate-portal-router/pferdeportal-affiliate-router.php",
+      "affiliate-portal-router/readme.txt"
+    ],
+    "unchanged_files": 62
+  },
+  "version": "6.72.322",
+  "version_fields_check": "PASS",
+  "php_lint": "23/23 PASS",
+  "baseline_original": [
+    "PASS QA9 original: one per-item failure aborts entire run",
+    "PASS QA9 original: healthy second item never checked",
+    "PASS QA9 original: old public checkpoint stays safe",
+    "BASELINE QA9 REPRODUCED ACTUAL ORIGINAL BUG"
+  ],
+  "qa11_cases": {
+    "pass_lines": 34,
+    "output": [
+      "PASS isolated item fails, next independent item still checked",
+      "PASS one item failure ends with WARN, not global FAIL",
+      "PASS unsafe final publication deferred",
+      "PASS single item cause recorded in durable state",
+      "PASS old safe checkpoint preserved, unverified item never approved",
+      "PASS two-remote cap enforced including errors",
+      "PASS first transient retries same source without losing cursor",
+      "PASS second transient preserves source and cursor",
+      "PASS after two retries the next unrelated item is checked",
+      "PASS exhausted item retries create WARN, no global failure",
+      "PASS two failed remote requests do not bypass two-request cap",
+      "PASS third independent item processed in next bounded tick",
+      "PASS 401 global authorization still hard-fails (never forged as product miss)",
+      "PASS global auth fault does not continue unauthorized requests",
+      "PASS all-success source refresh follows original successful commit path",
+      "PASS normal verified source replaces last-good checkpoint",
+      "PASS without old checkpoint error still does not forge a new public checkpoint",
+      "PASS without old checkpoint no fake safe public set is created",
+      "PASS token creation failure remains a global fail-closed error",
+      "ALL QA11 REAL TRAIT CONTRACT CASES PASS",
+      "PASS exact old failed final-source error is resumable",
+      "PASS resume reuses UUID and final-source cursor exactly",
+      "PASS resumes ONLY final verification; no new discovery or gapfill",
+      "PASS preserves verified source and previous 571 progress steps",
+      "PASS source candidates and last-good checkpoint unchanged",
+      "PASS all gap-search state preserved, exactly one existing background worker scheduled",
+      "PASS old terminal cause kept in audit but not shown as current failure",
+      "PASS cannot resume an already running run twice",
+      "PASS global auth failure is never auto-qualified for same-run resume",
+      "PASS wrong failure status kept intact, no new worker scheduled",
+      "PASS first-item failure safely resumable even without initial refresh fingerprint",
+      "PASS first-item resume recomputes source plan, not discovery",
+      "PASS local-only operation can never use remote public resume",
+      "PASS backend shows genuine stall without triggering a worker",
+      "PASS admin status read is side-effect-free and did not schedule a job",
+      "ALL QA11 PUBLIC SOURCE, SAFE RESUME & READ-ONLY UI TESTS PASS"
+    ]
+  },
+  "qa10_reports": [
+    "PASS QA10: real existing report method, source=298, 2 missing, duplicate=13, review=4, capacity=2, unfinished=true, all previous fields identical",
+    "PASS invalid family fail-closed",
+    "PASS 6 real extracted PHP calls: no expensive report work for normal backend page, explicit report request only; bad array query ignored"
+  ],
+  "legacy_pass": 61,
+  "legacy_suites": [
+    {
+      "script": "EBAY_319_KISS_16_KANONISCHE_TESTS_20261110.php",
+      "result": "KISS_CENTRAL_BUSINESS_QA 16/16 PASS"
+    },
+    {
+      "script": "EBAY_319_KISS_QA2_TEST_EINZELFEHLER_20261110.php",
+      "result": "CANONICAL_FAILURE_ISOLATION 13/13 PASS"
+    },
+    {
+      "script": "EBAY_319_KISS_QA3_TEST_EFFIZIENZ_20261110.php",
+      "result": "SELECTED_ONLY_MATERIALIZE 11/11 PASS"
+    },
+    {
+      "script": "EBAY_KISS_TEST_END_TO_END_MOCK_20261110.php",
+      "result": "KISS_SINGLE_FLOW 10/10 PASS"
+    },
+    {
+      "script": "EBAY_KISS_TEST_PERSISTENZ_20261110.php",
+      "result": "KISS_DURABLE_SAVE 11/11 PASS"
+    }
+  ],
+  "parity": [
+    {
+      "script": "EBAY_319_KISS_QA5_TEST_PRUNE_PARITAET_20261110.php",
+      "case": "gapfill",
+      "equal": true
+    },
+    {
+      "script": "EBAY_319_KISS_QA5_TEST_PRUNE_PARITAET_20261110.php",
+      "case": "gapfill_resume",
+      "equal": true
+    },
+    {
+      "script": "EBAY_319_KISS_QA5_TEST_PRUNE_PARITAET_20261110.php",
+      "case": "gapfill_empty",
+      "equal": true
+    },
+    {
+      "script": "EBAY_319_KISS_QA5_TEST_PRUNE_PARITAET_20261110.php",
+      "case": "gapfill_single",
+      "equal": true
+    },
+    {
+      "script": "EBAY_319_KISS_QA5_TEST_PRUNE_PARITAET_20261110.php",
+      "case": "checkpoint_gapfill",
+      "equal": true
+    },
+    {
+      "script": "EBAY_319_KISS_QA5_TEST_PRUNE_PARITAET_20261110.php",
+      "case": "full",
+      "equal": true
+    },
+    {
+      "script": "EBAY_319_KISS_QA5_TEST_PRUNE_PARITAET_20261110.php",
+      "case": "error",
+      "equal": true
+    },
+    {
+      "script": "EBAY_KISS_QA4_TEST_PARITAET_20261110.php",
+      "case": "normal",
+      "equal": true
+    },
+    {
+      "script": "EBAY_KISS_QA4_TEST_PARITAET_20261110.php",
+      "case": "multi",
+      "equal": true
+    },
+    {
+      "script": "EBAY_KISS_QA4_TEST_PARITAET_20261110.php",
+      "case": "missing_source",
+      "equal": true
+    },
+    {
+      "script": "EBAY_KISS_QA4_TEST_PARITAET_20261110.php",
+      "case": "missing_creative",
+      "equal": true
+    },
+    {
+      "script": "EBAY_KISS_QA4_TEST_PARITAET_20261110.php",
+      "case": "bad_identity",
+      "equal": true
+    }
+  ],
+  "parity_pass": 12,
+  "patch": {
+    "file": "EBAY_QA11_GESAMT_KISS_FIX_GEGEN_QA9.patch",
+    "bytes": 32027,
+    "sha256": "03bcd28858122f34f549cbdf67d2f2164d49e85728b518b885c2aec82f98cec5"
+  }
+}

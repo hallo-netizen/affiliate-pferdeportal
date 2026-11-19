@@ -1,0 +1,121 @@
+--- QA14/affiliate-portal-router/includes/trait-ppar-ebay-run.php
++++ QA15/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+@@ -60,10 +60,10 @@
+         // Record every real verified published-checkpoint change in the same
+         // private run audit. Never record a merely attempted publication.
+         $current = $this->ebay_run_load();
+-        if (!$this->ebay_audit_note_state($current, array(), 'public_checkpoint_saved', array(
++        $this->ebay_audit_record_durable_change($current, array(), 'public_checkpoint_saved', array(
+             'checkpoint_id'=>substr(sanitize_text_field((string)($checkpoint['checkpoint_id']??'')),0,80),
+             'business_count'=>count((array)($checkpoint['business_campaign_ids']??array()))
+-        ))) { update_option('ppar_ebay_audit_write_error_v1',time(),false); }
++        ));
+         return $checkpoint;
+     }
+ 
+@@ -873,6 +873,33 @@
+         $meta_key = $key . '_meta';
+         $meta = get_option($meta_key, array());
+         $meta = is_array($meta) ? $meta : array();
++        // Repair the precise partial-write window: a chunk was committed but
++        // the matching metadata update failed. Existing events are immutable;
++        // advance the index only after verifying each durable event in order.
++        // This avoids a permanent audit deadlock on the next changed run state.
++        for ($repair = 0; $repair < 100; $repair++) {
++            $done = absint($meta['count'] ?? 0);
++            $orphan_rows = get_option($key . '_c' . (int)floor($done / 100), array());
++            $orphan = is_array($orphan_rows) ? ($orphan_rows[$done % 100] ?? null) : null;
++            if ($orphan === null) { break; }
++            if (!is_array($orphan) || absint($orphan['event_number'] ?? 0) !== $done + 1) {
++                return false; // Never overwrite a conflicting journal entry.
++            }
++            $last_event = $orphan;
++            unset($last_event['at'], $last_event['event_number'],
++                $last_event['source_error_examples'], $last_event['skipped_item_examples'],
++                $last_event['search_rejection_reasons'], $last_event['source_errors_this_tick']);
++            if (($last_event['kind'] ?? '') === 'first_observed_snapshot') {
++                $last_event['kind'] = 'state';
++            }
++            $fixed_meta = array('run_uuid'=>$uuid,'count'=>$done+1,
++                'last_signature'=>hash('sha256',wp_json_encode($last_event)),
++                'updated_at'=>time(),'last_status'=>sanitize_key((string)($orphan['status']??'')),
++                'last_phase'=>sanitize_key((string)($orphan['phase']??'')));
++            update_option($meta_key, $fixed_meta, false);
++            if (serialize(get_option($meta_key, array())) !== serialize($fixed_meta)) { return false; }
++            $meta = $fixed_meta;
++        }
+         if (absint($meta['count'] ?? 0) === 0) {
+             // First observed snapshot of an existing run. Label this as a
+             // snapshot, not an invented complete history before installation.
+@@ -923,6 +950,20 @@
+         return true;
+     }
+ 
++    /** One audit write path for ALL already-durable changes. A transient
++     * partial options write gets exactly one bounded retry on the same event.
++     * Metadata-only failures are repaired by ebay_audit_note_state; never
++     * overwrite previously persisted event rows. Audit failure does not
++     * invalidate a separately verified product or run-state write. */
++    private function ebay_audit_record_durable_change($current, $previous = array(), $kind = 'state', $activity = array()) {
++        if ($this->ebay_audit_note_state($current, $previous, $kind, $activity)
++            || $this->ebay_audit_note_state($current, $previous, $kind, $activity)) {
++            return true;
++        }
++        update_option('ppar_ebay_audit_write_error_v1', time(), false);
++        return false;
++    }
++
+     /** Private read-only export; historical runs are never deleted by rotation. */
+     public function handle_ebay_audit_export() {
+         if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.',403); }
+@@ -1029,13 +1070,11 @@
+             return false;
+         }
+         if (!empty($before['run_uuid']) && (string)$before['run_uuid'] !== (string)($run['run_uuid'] ?? '')) {
+-            $this->ebay_audit_note_state($before,array(),'superseded_by_new_run');
++            $this->ebay_audit_record_durable_change($before,array(),'superseded_by_new_run');
+         }
+         // Audit is a separate private sidecar. Never falsify business success
+         // if its own write fails: expose the audit warning on the admin screen.
+-        if (!$this->ebay_audit_note_state($run,$before)) {
+-            update_option('ppar_ebay_audit_write_error_v1',time(),false);
+-        }
++        $this->ebay_audit_record_durable_change($run,$before);
+         return $run;
+     }
+ 
+@@ -1071,9 +1110,7 @@
+                 wp_cache_delete($key, 'options');
+                 wp_cache_delete('alloptions', 'options');
+             }
+-            if (!$this->ebay_audit_note_state($after,$before,'resume_or_state_transition')) {
+-                update_option('ppar_ebay_audit_write_error_v1',time(),false);
+-            }
++            $this->ebay_audit_record_durable_change($after,$before,'resume_or_state_transition');
+             return $after;
+         }
+ 
+@@ -1084,9 +1121,7 @@
+         update_option($key, $after, false);
+         $verify = $this->ebay_run_load();
+         if (serialize($verify) !== serialize($after)) { return false; }
+-        if (!$this->ebay_audit_note_state($after,$before,'resume_or_state_transition')) {
+-            update_option('ppar_ebay_audit_write_error_v1',time(),false);
+-        }
++        $this->ebay_audit_record_durable_change($after,$before,'resume_or_state_transition');
+         return $after;
+     }
+ 
+--- QA14/affiliate-portal-router/includes/trait-ppar-ebay.php
++++ QA15/affiliate-portal-router/includes/trait-ppar-ebay.php
+@@ -9035,9 +9035,7 @@
+                 'next_due_at'=>absint($state['next_due_at']??0),
+                 'running'=>empty($state['running'])?0:1,
+                 'last_error'=>sanitize_key((string)($state['last_error']??'')));
+-            if (!$this->ebay_audit_note_state($run,array(),'availability_saved',$activity)) {
+-                update_option('ppar_ebay_audit_write_error_v1',time(),false);
+-            }
++            $this->ebay_audit_record_durable_change($run,array(),'availability_saved',$activity);
+         }
+         return true;
+     }

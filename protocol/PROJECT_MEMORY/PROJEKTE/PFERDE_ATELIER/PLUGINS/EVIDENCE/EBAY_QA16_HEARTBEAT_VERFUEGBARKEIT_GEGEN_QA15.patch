@@ -1,0 +1,27 @@
+--- QA15/includes/trait-ppar-ebay-run.php
++++ QA16-WIP/includes/trait-ppar-ebay-run.php
+@@ -1399,11 +1399,13 @@
+             }
+         }
+         $stored_status = sanitize_key((string)($run['status'] ?? ''));
+-        // Stopping research cannot stop availability checks for prior published
+-        // products. The heartbeat is the low-traffic fallback for WP-Cron.
++        // The same admitted heartbeat advances independent public availability
++        // regardless of the research state. The existing availability function
++        // checks its due time and processes at most two remote items per tick.
++        // WP-Cron remains a fallback, not a prerequisite for active research.
++        $availability=$this->ebay_public_availability_tick('heartbeat');
+         if ($stored_status === 'paused'
+             && sanitize_key((string)($run['resume_reason']??'')) === 'operator_stop') {
+-            $availability=$this->ebay_public_availability_tick('heartbeat');
+             $out=array('status'=>'idle','run_status'=>'paused','reason'=>'operator_paused',
+                 'transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2',
+                 'run_uuid'=>sanitize_text_field((string)($run['run_uuid']??'')),
+@@ -1411,7 +1413,6 @@
+             return function_exists('rest_ensure_response') ? rest_ensure_response($out) : $out;
+         }
+         if ((string)($run['schema'] ?? '') === '1.0' && $stored_status === 'failed') {
+-            $this->ebay_public_availability_tick('heartbeat');
+             $out=array(
+                 'status'=>'failed','transport'=>'external_tick','restart_required'=>1,'server_time'=>time(),'contract'=>'external_tick_v2',
+                 'run_uuid'=>sanitize_text_field((string)($run['run_uuid']??'')),

@@ -1,0 +1,662 @@
+{
+  "run_uuid": "3e9e9207-d82f-4223-943b-5df8d0d6feb8",
+  "source": "user CSV, state snapshot; not current live data",
+  "total": 138,
+  "triage": {
+    "keine_treffer": 43,
+    "nur_deutschland_filter": 39,
+    "technisch": 1,
+    "fachlich_zu_pruefen": 55
+  },
+  "potentially_relevant_families": [
+    {
+      "familien_id": "concept-anhangerbeleuchtung",
+      "produktfamilie": "Anhängerbeleuchtung",
+      "angebote_im_teilabschnitt": 60,
+      "blockiert": "1",
+      "reason_counts": {
+        "ebay_portal_topic_negative": 59,
+        "ebay_business_reference_only_match": 1
+      },
+      "suche": "LED Rückleuchte Pferdeanhänger | Anhängerbeleuchtung"
+    },
+    {
+      "familien_id": "concept-bande-spiegel",
+      "produktfamilie": "Bande & Spiegel",
+      "angebote_im_teilabschnitt": 60,
+      "blockiert": "18",
+      "reason_counts": {
+        "ebay_toy_item_blocked": 18,
+        "ebay_business_concept_missing": 9,
+        "ebay_portal_topic_missing": 7
+      },
+      "suche": "Bande & Spiegel Pferd | Bande & Spiegel"
+    },
+    {
+      "familien_id": "concept-boxenturen",
+      "produktfamilie": "Boxentüren",
+      "angebote_im_teilabschnitt": 60,
+      "blockiert": "59",
+      "reason_counts": {
+        "ebay_marketplace_mismatch": 57,
+        "ebay_toy_item_blocked": 2,
+        "ebay_portal_topic_missing": 1
+      },
+      "suche": "Boxentüren Pferd | Boxentüren"
+    },
+    {
+      "familien_id": "concept-hufbursten",
+      "produktfamilie": "Hufbürsten",
+      "angebote_im_teilabschnitt": 60,
+      "blockiert": "39",
+      "reason_counts": {
+        "ebay_marketplace_mismatch": 38,
+        "ebay_business_concept_missing": 10,
+        "ebay_portal_topic_negative": 2,
+        "ebay_business_seller_feedback_low": 1
+      },
+      "suche": "Hufbürsten Pferd | Hufbürsten"
+    },
+    {
+      "familien_id": "concept-pferdesattel",
+      "produktfamilie": "Pferdesättel",
+      "angebote_im_teilabschnitt": 60,
+      "blockiert": "45",
+      "reason_counts": {
+        "ebay_toy_item_blocked": 29,
+        "ebay_business_concept_missing": 12,
+        "ebay_business_seller_feedback_count_low": 8,
+        "ebay_business_seller_feedback_low": 7,
+        "ebay_portal_topic_negative": 3,
+        "ebay_business_relevance_unconfirmed": 1
+      },
+      "suche": "Dressursattel Pferd | Pferdesättel"
+    },
+    {
+      "familien_id": "concept-dosierer-fur-futter",
+      "produktfamilie": "Dosierer für Futter",
+      "angebote_im_teilabschnitt": 57,
+      "blockiert": "5",
+      "reason_counts": {
+        "ebay_business_concept_missing": 28,
+        "ebay_portal_topic_negative": 8,
+        "ebay_portal_topic_missing": 6,
+        "ebay_marketplace_mismatch": 2,
+        "ebay_business_seller_feedback_count_low": 2,
+        "ebay_business_seller_feedback_low": 1
+      },
+      "suche": "Dosierer für Futter Pferd | Dosierer für Futter"
+    },
+    {
+      "familien_id": "concept-spurenelemente",
+      "produktfamilie": "Spurenelemente",
+      "angebote_im_teilabschnitt": 55,
+      "blockiert": "12",
+      "reason_counts": {
+        "ebay_portal_topic_missing": 19,
+        "ebay_business_concept_missing": 14,
+        "ebay_portal_topic_negative": 10,
+        "ebay_business_reference_only_match": 8,
+        "ebay_business_seller_feedback_count_low": 2,
+        "ebay_business_seller_feedback_low": 1,
+        "ebay_marketplace_mismatch": 1
+      },
+      "suche": "Spurenelemente Pferd | Spurenelemente"
+    },
+    {
+      "familien_id": "concept-futterstationen",
+      "produktfamilie": "Futterstationen",
+      "angebote_im_teilabschnitt": 40,
+      "blockiert": "11",
+      "reason_counts": {
+        "ebay_portal_topic_negative": 26,
+        "ebay_business_seller_feedback_low": 6,
+        "ebay_marketplace_mismatch": 2,
+        "ebay_toy_item_blocked": 2,
+        "ebay_business_concept_missing": 2,
+        "ebay_business_seller_feedback_count_low": 1,
+        "ebay_portal_topic_missing": 1
+      },
+      "suche": "Futterstationen Pferd | Futterstationen"
+    },
+    {
+      "familien_id": "concept-boxengitter",
+      "produktfamilie": "Boxengitter",
+      "angebote_im_teilabschnitt": 37,
+      "blockiert": "6",
+      "reason_counts": {
+        "ebay_portal_topic_negative": 20,
+        "ebay_portal_topic_missing": 7,
+        "ebay_business_concept_missing": 4,
+        "ebay_business_seller_feedback_low": 3,
+        "ebay_image_missing": 1,
+        "ebay_business_seller_feedback_count_low": 1,
+        "ebay_toy_item_blocked": 1
+      },
+      "suche": "Boxengitter Pferd | Boxengitter"
+    },
+    {
+      "familien_id": "concept-paddockzaune",
+      "produktfamilie": "Paddockzäune",
+      "angebote_im_teilabschnitt": 32,
+      "blockiert": "32",
+      "reason_counts": {
+        "ebay_marketplace_mismatch": 30,
+        "ebay_toy_item_blocked": 2
+      },
+      "suche": "Paddockzäune Pferd | Paddockzäune"
+    },
+    {
+      "familien_id": "concept-anbindebalken",
+      "produktfamilie": "Anbindebalken",
+      "angebote_im_teilabschnitt": 30,
+      "blockiert": "27",
+      "reason_counts": {
+        "ebay_marketplace_mismatch": 27,
+        "ebay_portal_topic_negative": 3
+      },
+      "suche": "Anbindebalken Pferd | Anbindebalken"
+    },
+    {
+      "familien_id": "concept-magenfutter",
+      "produktfamilie": "Magenfutter",
+      "angebote_im_teilabschnitt": 30,
+      "blockiert": "22",
+      "reason_counts": {
+        "ebay_marketplace_mismatch": 22,
+        "ebay_portal_topic_missing": 8
+      },
+      "suche": "Magenfutter Pferd | Magenfutter"
+    },
+    {
+      "familien_id": "concept-reifendruckprufer",
+      "produktfamilie": "Reifendruckprüfer",
+      "angebote_im_teilabschnitt": 30,
+      "blockiert": "0",
+      "reason_counts": {
+        "ebay_portal_topic_negative": 27,
+        "ebay_portal_topic_missing": 3
+      },
+      "suche": "Reifendruckprüfer Pferd | Reifendruckprüfer"
+    },
+    {
+      "familien_id": "concept-reitplatzboden",
+      "produktfamilie": "Reitplatzboden",
+      "angebote_im_teilabschnitt": 30,
+      "blockiert": "4",
+      "reason_counts": {
+        "ebay_business_concept_missing": 17,
+        "ebay_portal_topic_missing": 8,
+        "ebay_marketplace_mismatch": 2,
+        "ebay_business_seller_feedback_low": 1,
+        "ebay_toy_item_blocked": 1,
+        "ebay_portal_topic_negative": 1
+      },
+      "suche": "Reitplatzboden Pferd | Reitplatzboden"
+    },
+    {
+      "familien_id": "concept-reitplatzschleppe",
+      "produktfamilie": "Reitplatzschleppe",
+      "angebote_im_teilabschnitt": 30,
+      "blockiert": "1",
+      "reason_counts": {
+        "ebay_business_concept_missing": 27,
+        "ebay_portal_topic_negative": 2,
+        "ebay_marketplace_mismatch": 1
+      },
+      "suche": "Reitplatzschleppe Pferd | Reitplatzschleppe"
+    },
+    {
+      "familien_id": "concept-unterstand-beleuchtung",
+      "produktfamilie": "Unterstand-Beleuchtung",
+      "angebote_im_teilabschnitt": 30,
+      "blockiert": "22",
+      "reason_counts": {
+        "ebay_marketplace_mismatch": 22,
+        "ebay_portal_topic_missing": 8
+      },
+      "suche": "Unterstand-Beleuchtung Pferd | Unterstand-Beleuchtung"
+    },
+    {
+      "familien_id": "concept-windschutz-fur-pferde",
+      "produktfamilie": "Windschutz für Pferde",
+      "angebote_im_teilabschnitt": 30,
+      "blockiert": "1",
+      "reason_counts": {
+        "ebay_portal_topic_negative": 18,
+        "ebay_business_concept_missing": 11,
+        "ebay_business_reference_only_match": 1
+      },
+      "suche": "Windschutz für Pferde"
+    },
+    {
+      "familien_id": "concept-ole-fur-pferde",
+      "produktfamilie": "Öle für Pferde",
+      "angebote_im_teilabschnitt": 30,
+      "blockiert": "0",
+      "reason_counts": {
+        "ebay_business_concept_missing": 20,
+        "ebay_portal_topic_negative": 10
+      },
+      "suche": "Öle für Pferde"
+    },
+    {
+      "familien_id": "concept-2er-pferdeanhanger",
+      "produktfamilie": "2er Pferdeanhänger",
+      "angebote_im_teilabschnitt": 27,
+      "blockiert": "10",
+      "reason_counts": {
+        "ebay_portal_topic_negative": 15,
+        "ebay_toy_item_blocked": 10,
+        "ebay_business_concept_missing": 2
+      },
+      "suche": "2er Pferdeanhänger"
+    },
+    {
+      "familien_id": "concept-brustverschlusse",
+      "produktfamilie": "Brustverschlüsse",
+      "angebote_im_teilabschnitt": 20,
+      "blockiert": "15",
+      "reason_counts": {
+        "ebay_marketplace_mismatch": 15,
+        "ebay_business_concept_missing": 4
+      },
+      "suche": "Brustverschlüsse Pferd | Brustverschlüsse"
+    },
+    {
+      "familien_id": "concept-kunststoffzaune-fur-pferde",
+      "produktfamilie": "Kunststoffzäune für Pferde",
+      "angebote_im_teilabschnitt": 19,
+      "blockiert": "19",
+      "reason_counts": {
+        "ebay_marketplace_mismatch": 18,
+        "ebay_toy_item_blocked": 1
+      },
+      "suche": "Kunststoffzäune für Pferde"
+    },
+    {
+      "familien_id": "concept-waschplatz-fur-pferde",
+      "produktfamilie": "Waschplatz für Pferde",
+      "angebote_im_teilabschnitt": 18,
+      "blockiert": "14",
+      "reason_counts": {
+        "ebay_toy_item_blocked": 11,
+        "ebay_portal_topic_negative": 3,
+        "ebay_marketplace_mismatch": 2,
+        "ebay_business_reference_only_match": 1,
+        "ebay_business_concept_missing": 1
+      },
+      "suche": "Waschplatz für Pferde"
+    },
+    {
+      "familien_id": "concept-springstander",
+      "produktfamilie": "Springständer",
+      "angebote_im_teilabschnitt": 17,
+      "blockiert": "11",
+      "reason_counts": {
+        "ebay_marketplace_mismatch": 8,
+        "ebay_business_seller_feedback_low": 1,
+        "ebay_image_missing": 1,
+        "ebay_toy_item_blocked": 1,
+        "ebay_portal_topic_missing": 1,
+        "ebay_portal_topic_negative": 1,
+        "ebay_business_concept_missing": 1
+      },
+      "suche": "Springständer Pferd | Springständer"
+    },
+    {
+      "familien_id": "concept-weidelitze",
+      "produktfamilie": "Weidelitze",
+      "angebote_im_teilabschnitt": 17,
+      "blockiert": "15",
+      "reason_counts": {
+        "ebay_marketplace_mismatch": 8,
+        "ebay_business_reference_only_match": 6,
+        "ebay_business_seller_feedback_low": 1
+      },
+      "suche": "Weidelitze Pferd | Weidelitze"
+    },
+    {
+      "familien_id": "concept-alu-pferdeanhanger",
+      "produktfamilie": "Alu-Pferdeanhänger",
+      "angebote_im_teilabschnitt": 15,
+      "blockiert": "5",
+      "reason_counts": {
+        "ebay_portal_topic_negative": 10,
+        "ebay_business_seller_feedback_low": 3,
+        "ebay_marketplace_mismatch": 2
+      },
+      "suche": "Alu-Pferdeanhänger"
+    },
+    {
+      "familien_id": "concept-bodenstangen",
+      "produktfamilie": "Bodenstangen",
+      "angebote_im_teilabschnitt": 13,
+      "blockiert": "7",
+      "reason_counts": {
+        "ebay_marketplace_mismatch": 6,
+        "ebay_portal_topic_missing": 4,
+        "ebay_business_concept_missing": 2,
+        "ebay_business_reference_only_match": 1
+      },
+      "suche": "Bodenstangen Pferd | Bodenstangen"
+    },
+    {
+      "familien_id": "concept-anti-scheuer-schutz",
+      "produktfamilie": "Anti-Scheuer-Schutz",
+      "angebote_im_teilabschnitt": 11,
+      "blockiert": "10",
+      "reason_counts": {
+        "ebay_marketplace_mismatch": 9,
+        "ebay_business_seller_feedback_low": 1,
+        "ebay_portal_topic_negative": 1
+      },
+      "suche": "Anti-Scheuer-Schutz Pferd | Anti-Scheuer-Schutz"
+    },
+    {
+      "familien_id": "concept-sandverteiler",
+      "produktfamilie": "Sandverteiler",
+      "angebote_im_teilabschnitt": 11,
+      "blockiert": "2",
+      "reason_counts": {
+        "ebay_portal_topic_missing": 7,
+        "ebay_business_concept_missing": 2,
+        "ebay_business_seller_feedback_low": 1,
+        "ebay_business_reference_only_match": 1
+      },
+      "suche": "Sandverteiler Pferd | Sandverteiler"
+    },
+    {
+      "familien_id": "concept-unterstand-boden",
+      "produktfamilie": "Unterstand-Boden",
+      "angebote_im_teilabschnitt": 8,
+      "blockiert": "6",
+      "reason_counts": {
+        "ebay_marketplace_mismatch": 5,
+        "ebay_business_seller_feedback_low": 1,
+        "ebay_portal_topic_missing": 1,
+        "ebay_portal_topic_negative": 1
+      },
+      "suche": "Unterstand-Boden Pferd | Unterstand-Boden"
+    },
+    {
+      "familien_id": "concept-weidetranken",
+      "produktfamilie": "Weidetränken",
+      "angebote_im_teilabschnitt": 8,
+      "blockiert": "1",
+      "reason_counts": {
+        "ebay_portal_topic_missing": 4,
+        "ebay_business_concept_missing": 3,
+        "ebay_image_missing": 1
+      },
+      "suche": "Weidetränken Pferd | Weidetränken"
+    },
+    {
+      "familien_id": "concept-zeitschalt-futterautomaten",
+      "produktfamilie": "Zeitschalt-Futterautomaten",
+      "angebote_im_teilabschnitt": 7,
+      "blockiert": "7",
+      "reason_counts": {
+        "ebay_marketplace_mismatch": 5,
+        "ebay_business_seller_feedback_low": 2
+      },
+      "suche": "Zeitschalt-Futterautomaten Pferd | Zeitschalt-Futterautomaten"
+    },
+    {
+      "familien_id": "concept-1-5er-pferdeanhanger",
+      "produktfamilie": "1,5er Pferdeanhänger",
+      "angebote_im_teilabschnitt": 6,
+      "blockiert": "2",
+      "reason_counts": {
+        "ebay_portal_topic_negative": 4,
+        "ebay_business_seller_feedback_low": 2
+      },
+      "suche": "1,5er Pferdeanhänger"
+    },
+    {
+      "familien_id": "concept-verladehilfen",
+      "produktfamilie": "Verladehilfen",
+      "angebote_im_teilabschnitt": 6,
+      "blockiert": "4",
+      "reason_counts": {
+        "ebay_marketplace_mismatch": 4,
+        "ebay_portal_topic_missing": 2
+      },
+      "suche": "Verladehilfen Pferd | Verladehilfen"
+    },
+    {
+      "familien_id": "concept-bandagen-zur-regeneration",
+      "produktfamilie": "Bandagen zur Regeneration",
+      "angebote_im_teilabschnitt": 4,
+      "blockiert": "1",
+      "reason_counts": {
+        "ebay_portal_topic_missing": 2,
+        "ebay_business_reference_only_match": 1
+      },
+      "suche": "Bandagen zur Regeneration Pferd | Bandagen zur Regeneration"
+    },
+    {
+      "familien_id": "concept-gassen-fur-bodenarbeit",
+      "produktfamilie": "Gassen für Bodenarbeit",
+      "angebote_im_teilabschnitt": 4,
+      "blockiert": "1",
+      "reason_counts": {
+        "ebay_portal_topic_negative": 2,
+        "ebay_business_reference_only_match": 1
+      },
+      "suche": "Gassen für Bodenarbeit Pferd | Gassen für Bodenarbeit"
+    },
+    {
+      "familien_id": "concept-anhangerkameras",
+      "produktfamilie": "Anhängerkameras",
+      "angebote_im_teilabschnitt": 3,
+      "blockiert": "1",
+      "reason_counts": {
+        "ebay_portal_topic_negative": 2,
+        "ebay_marketplace_mismatch": 1
+      },
+      "suche": "Anhängerkameras Pferd | Anhängerkameras"
+    },
+    {
+      "familien_id": "concept-lufter-im-stall",
+      "produktfamilie": "Lüfter im Stall",
+      "angebote_im_teilabschnitt": 3,
+      "blockiert": "0",
+      "reason_counts": {
+        "ebay_portal_topic_missing": 3
+      },
+      "suche": "Lüfter im Stall Pferd | Lüfter im Stall"
+    },
+    {
+      "familien_id": "concept-seniorenfutter",
+      "produktfamilie": "Seniorenfutter",
+      "angebote_im_teilabschnitt": 3,
+      "blockiert": "1",
+      "reason_counts": {
+        "ebay_portal_topic_negative": 2,
+        "ebay_marketplace_mismatch": 1
+      },
+      "suche": "Seniorenfutter Pferd | Seniorenfutter"
+    },
+    {
+      "familien_id": "concept-weidetimer",
+      "produktfamilie": "Weidetimer",
+      "angebote_im_teilabschnitt": 3,
+      "blockiert": "0",
+      "reason_counts": {
+        "ebay_business_concept_missing": 2,
+        "ebay_portal_topic_missing": 1
+      },
+      "suche": "Weidetimer Pferd | Weidetimer"
+    },
+    {
+      "familien_id": "concept-futtertonnen-luftdicht",
+      "produktfamilie": "Futtertonnen luftdicht",
+      "angebote_im_teilabschnitt": 2,
+      "blockiert": "1",
+      "reason_counts": {
+        "ebay_marketplace_mismatch": 1,
+        "ebay_portal_topic_negative": 1
+      },
+      "suche": "Futtertonnen luftdicht Pferd | Futtertonnen luftdicht"
+    },
+    {
+      "familien_id": "concept-fuhrtraining-zubehor",
+      "produktfamilie": "Führtraining-Zubehör",
+      "angebote_im_teilabschnitt": 2,
+      "blockiert": "1",
+      "reason_counts": {
+        "ebay_business_seller_feedback_low": 1,
+        "ebay_business_concept_missing": 1
+      },
+      "suche": "Führtraining-Zubehör Pferd | Führtraining-Zubehör"
+    },
+    {
+      "familien_id": "concept-minerallecksteine",
+      "produktfamilie": "Minerallecksteine",
+      "angebote_im_teilabschnitt": 2,
+      "blockiert": "1",
+      "reason_counts": {
+        "ebay_marketplace_mismatch": 1,
+        "ebay_business_concept_missing": 1
+      },
+      "suche": "Minerallecksteine Pferd | Minerallecksteine"
+    },
+    {
+      "familien_id": "concept-parasitenmittel-stall",
+      "produktfamilie": "Parasitenmittel Stall",
+      "angebote_im_teilabschnitt": 2,
+      "blockiert": "0",
+      "reason_counts": {
+        "ebay_portal_topic_negative": 1,
+        "ebay_portal_topic_missing": 1
+      },
+      "suche": "Parasitenmittel Stall Pferd | Parasitenmittel Stall"
+    },
+    {
+      "familien_id": "concept-putzplatzmatten",
+      "produktfamilie": "Putzplatzmatten",
+      "angebote_im_teilabschnitt": 2,
+      "blockiert": "1",
+      "reason_counts": {
+        "ebay_marketplace_mismatch": 1,
+        "ebay_business_concept_missing": 1
+      },
+      "suche": "Putzplatzmatten Pferd | Putzplatzmatten"
+    },
+    {
+      "familien_id": "concept-reithallenbau",
+      "produktfamilie": "Reithallenbau",
+      "angebote_im_teilabschnitt": 2,
+      "blockiert": "1",
+      "reason_counts": {
+        "ebay_marketplace_mismatch": 1,
+        "ebay_business_concept_missing": 1
+      },
+      "suche": "Reithallenbau Pferd | Reithallenbau"
+    },
+    {
+      "familien_id": "concept-rutschfeste-stallmatten-fur-senioren",
+      "produktfamilie": "Rutschfeste Stallmatten für Senioren",
+      "angebote_im_teilabschnitt": 2,
+      "blockiert": "0",
+      "reason_counts": {
+        "ebay_business_concept_missing": 1
+      },
+      "suche": "Rutschfeste Stallmatten für Senioren Pferd | Rutschfeste Stallmatten für Senioren"
+    },
+    {
+      "familien_id": "concept-warnschilder-und-sicherheitszubehor",
+      "produktfamilie": "Warnschilder und Sicherheitszubehör",
+      "angebote_im_teilabschnitt": 2,
+      "blockiert": "0",
+      "reason_counts": {
+        "ebay_portal_topic_missing": 1,
+        "ebay_portal_topic_negative": 1
+      },
+      "suche": "Warnschilder und Sicherheitszubehör Pferd | Warnschilder und Sicherheitszubehör"
+    },
+    {
+      "familien_id": "concept-weide-wassertanks",
+      "produktfamilie": "Weide-Wassertanks",
+      "angebote_im_teilabschnitt": 2,
+      "blockiert": "1",
+      "reason_counts": {
+        "ebay_marketplace_mismatch": 1,
+        "ebay_portal_topic_missing": 1
+      },
+      "suche": "Weide-Wassertanks Pferd | Weide-Wassertanks"
+    },
+    {
+      "familien_id": "concept-elektrozaune-fur-pferde",
+      "produktfamilie": "Elektrozäune für Pferde",
+      "angebote_im_teilabschnitt": 1,
+      "blockiert": "0",
+      "reason_counts": {
+        "ebay_business_concept_missing": 1
+      },
+      "suche": "Elektrozäune für Pferde"
+    },
+    {
+      "familien_id": "concept-heulagerung",
+      "produktfamilie": "Heulagerung",
+      "angebote_im_teilabschnitt": 1,
+      "blockiert": "0",
+      "reason_counts": {
+        "ebay_portal_topic_negative": 1
+      },
+      "suche": "Heulagerung Pferd | Heulagerung"
+    },
+    {
+      "familien_id": "concept-holz-poly-pferdeanhanger",
+      "produktfamilie": "Holz-Poly-Pferdeanhänger",
+      "angebote_im_teilabschnitt": 1,
+      "blockiert": "1",
+      "reason_counts": {
+        "ebay_toy_item_blocked": 1
+      },
+      "suche": "Holz-Poly-Pferdeanhänger"
+    },
+    {
+      "familien_id": "concept-holzzaune-fur-pferde",
+      "produktfamilie": "Holzzäune für Pferde",
+      "angebote_im_teilabschnitt": 1,
+      "blockiert": "1",
+      "reason_counts": {
+        "ebay_toy_item_blocked": 1
+      },
+      "suche": "Holzzäune für Pferde"
+    },
+    {
+      "familien_id": "concept-hufzusatze",
+      "produktfamilie": "Hufzusätze",
+      "angebote_im_teilabschnitt": 1,
+      "blockiert": "0",
+      "reason_counts": {
+        "ebay_business_concept_missing": 1
+      },
+      "suche": "Hufzusätze Pferd | Hufzusätze"
+    },
+    {
+      "familien_id": "concept-stallmatten-reiniger",
+      "produktfamilie": "Stallmatten-Reiniger",
+      "angebote_im_teilabschnitt": 1,
+      "blockiert": "0",
+      "reason_counts": {
+        "ebay_business_concept_missing": 1
+      },
+      "suche": "Stallmatten-Reiniger Pferd | Stallmatten-Reiniger"
+    },
+    {
+      "familien_id": "concept-wasserleitungen-im-stall",
+      "produktfamilie": "Wasserleitungen im Stall",
+      "angebote_im_teilabschnitt": 1,
+      "blockiert": "1",
+      "reason_counts": {
+        "ebay_business_seller_feedback_count_low": 1
+      },
+      "suche": "Wasserleitungen im Stall Pferd | Wasserleitungen im Stall"
+    }
+  ],
+  "no_live_api_revalidation": true
+}

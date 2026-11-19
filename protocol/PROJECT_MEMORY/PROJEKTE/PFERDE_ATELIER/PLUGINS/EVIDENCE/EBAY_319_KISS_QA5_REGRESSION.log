@@ -1,0 +1,90 @@
+REGRESSION qa_kiss_business_canonical.php: PASS
+xtra stored scan in ordinary full selection
+PASS Already verified families do not trigger new scans
+PASS Expired offer is not examined
+PASS Only independently verified stored offers accepted
+PASS Unrelated offer is not attached
+PASS Database read problem remains explicit error, not false market absence
+PASS Reuse stops after three accepted offers, not unbounded
+KISS_CENTRAL_BUSINESS_QA 16/16 PASS
+
+
+REGRESSION qa_kiss_business_single.php: PASS
+xtra stored scan in ordinary full selection
+PASS Already verified families do not trigger new scans
+PASS Expired offer is not examined
+PASS Only independently verified stored offers accepted
+PASS Unrelated offer is not attached
+PASS Database read problem remains explicit error, not false market absence
+PASS Reuse stops after three accepted offers, not unbounded
+KISS_CENTRAL_BUSINESS_QA 16/16 PASS
+
+
+REGRESSION qa_kiss_one_flow_resume.php: PASS
+SS No alternate publication during reuse pass
+PASS Previous selected product remains
+PASS Verified additional product enters existing plan
+PASS Exactly one canonical materialisation step
+PASS Existing canonical final cleanup completes
+PASS No repeated stored-source screening
+PASS No discovery API job invoked
+PASS State persisted after each phase through one save method
+KISS_SINGLE_FLOW 10/10 PASS
+
+
+REGRESSION qa_kiss_resume_canonical.php: PASS
+S: One family error does not stop batch
+PASS: Errors do not stall run
+PASS: Per-family error recorded
+PASS: Correct family error code retained
+PASS: No unnecessary repeat materialisation when none added
+PASS: Existing prune cursor retained if no new rows
+PASS: Mismatch scope fails closed rather than treating unknown as absent
+PASS: Bad manifest never triggers classification
+KISS_REPLAY 22/22 PASS
+
+
+REGRESSION qa_kiss_resume_progress.php: PASS
+PASS Cursor 1 visible to stalled-work guard
+PASS Cursor 2 visible to stalled-work guard
+PASS Cursor 3 visible to stalled-work guard
+PASS Cursor 4 visible to stalled-work guard
+PASS Completion marker counts as progress
+PASS Isolated failure count visible to diagnostics
+PASS Added valid source changes selection proof
+PASS Transport and timestamp are NOT false progress
+KISS_PROGRESS 8/8 PASS
+
+
+REGRESSION qa_kiss_run_durable_save.php: PASS
+ flags worker for safe non-acknowledgement
+PASS Failed phase checkpoint cannot report success
+PASS No selection mutation leaked on rejected update
+PASS Phase checkpoint persisted and read back
+PASS Phase cursor persisted exactly
+PASS WordPress unchanged-update false is not mistaken for storage failure
+PASS Unknown previous run fields preserved during checkpoint update
+KISS_DURABLE_SAVE 11/11 PASS
+
+
+REGRESSION qa_kiss_single_technical_failure.php: PASS
+apfill selection checkpoint saved
+PASS final public protection receives selection read failure
+PASS no-result classification cannot conceal read error
+PASS read back full secondary-family proof
+PASS family gap state passes with explicit technical exception
+PASS technical read error never becomes proven marketplace absence
+PASS safe-vs-technical gap separated
+CANONICAL_FAILURE_ISOLATION 13/13 PASS
+
+
+REGRESSION test_rebased_311.php: PASS
+URL28 Browse timeout returns retry-classifiable original error
+PASS Mixed temporary and permanent unfinished profiles never marked completed
+PASS Skipped item errors prevent green complete result
+PASS Technical gaps and unverified search profiles cannot look like full success
+PASS Only fully checked business run gets unqualified success
+LOCAL_ORIGINAL_308_REBASED_311_EBAY_CAUSAL_TESTS 49/49 PASS\n
+
+CHANGED:['includes/trait-ppar-ebay-run.php', 'includes/trait-ppar-ebay.php']
+LINT:23

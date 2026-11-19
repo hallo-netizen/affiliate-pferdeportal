@@ -1,0 +1,429 @@
+{
+  "date": "2026-11-10",
+  "status": "isolierte Arbeitskopie; kein Live-Release",
+  "version": "6.72.321",
+  "zip_file": "Pferdeatelier_Affiliate_6.72.321_QA9_KISS_NUR_STAGING_TEST.zip",
+  "zip_bytes": 5370718,
+  "sha256": "4a84696bdd10d5c32f3ab5d4e4583fc9029ef673403f43eebfe2217ffd72e47a",
+  "base_sha256": "e54018da41f23d3cbeba462e60c0abfdb540bb4e294f8bf43a02418e80b4a637",
+  "zip_entries": 66,
+  "unchanged_files": 62,
+  "changed_files": [
+    "affiliate-portal-router/includes/trait-ppar-ebay-run.php",
+    "affiliate-portal-router/includes/trait-ppar-ebay.php",
+    "affiliate-portal-router/pferdeportal-affiliate-router.php",
+    "affiliate-portal-router/readme.txt"
+  ],
+  "php_syntax_pass": 23,
+  "regression_php_pass": 61,
+  "new_qa9_php_pass": 19,
+  "php_tests_executed_against_actual_qa9_source": true,
+  "release_restriction": "NUR auf getrennte WP-Testseite; WordPress/MariaDB eBay-E2E nicht ausgeführt",
+  "run_not_reset": true,
+  "retrieved_source_rows_not_deleted": true,
+  "eBay_six_hour_fresh_until_policy": "unverändert",
+  "availability_refresh_interval_sec": 7200,
+  "availability_refresh_items_per_cron_tick": 5,
+  "availability_refresh_items_per_heartbeat": 2,
+  "new_source_search_by_availability": "nein",
+  "public_checkpoint_first_safe_bootstrap": "nur wenn vorher leer und einzelnes Produkt verifiziert/published",
+  "existing_unsafe_checkpoint_overwrite": "nein",
+  "source_inventory": [
+    {
+      "name": "affiliate-portal-router/assets/amazon-logo-official.png",
+      "changed": false,
+      "sha256": "62fdc9bf068cda3c2a9732f6b8d66a7f0daf14a111cc0e7d1ff9892f38a561fa",
+      "bytes": 17294
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-allgemein-mobile.jpg",
+      "changed": false,
+      "sha256": "71c9629efd072902ee1d319ce1666e98f426b6101a23bd78de8f703ca6ea1f2a",
+      "bytes": 68575
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-allgemein-square.jpg",
+      "changed": false,
+      "sha256": "e5ef6ee565b638a6ac2c5248dbb188921864394b97f88b4e5fad78fb61903b72",
+      "bytes": 56098
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-allgemein-wide.jpg",
+      "changed": false,
+      "sha256": "31d5485edd1cd159d0e774c12d83e0c40c5ae26366e73234ab2169b87bd2faa3",
+      "bytes": 48842
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-decken-mobile.jpg",
+      "changed": false,
+      "sha256": "0852e026770a2abdf147186570c6c2c173f31945c24f20d74c87baeb74d5808a",
+      "bytes": 61288
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-decken-square.jpg",
+      "changed": false,
+      "sha256": "984efb865285b2441285126f17c5def78ae582f8ef3b1cc9d062f58532a50c89",
+      "bytes": 53983
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-decken-wide.jpg",
+      "changed": false,
+      "sha256": "63628f76dd835267acd6296aad129dafb8c024bfe4a8832f82caf4539011a105",
+      "bytes": 44664
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-fuetterung-mobile.jpg",
+      "changed": false,
+      "sha256": "a7f03e48689bb17fa568887cef1829e26f7cd20265147a4b9bed6e4508e60e9b",
+      "bytes": 70057
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-fuetterung-square.jpg",
+      "changed": false,
+      "sha256": "c574e5c13994b04dcedf2df19888055b335bf7887a5f95accc0da78fbf8f6412",
+      "bytes": 61774
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-fuetterung-wide.jpg",
+      "changed": false,
+      "sha256": "7001fd2379ed9969c1759cca335ea614cf347210136b1bc04b09703fe1277a73",
+      "bytes": 47903
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-logo.png",
+      "changed": false,
+      "sha256": "2f7d1ff661fdb0797da1ab3d5e74e1f655295db941ae030027349f7bfeb03125",
+      "bytes": 5259
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-pferdeanhaenger-mobile.jpg",
+      "changed": false,
+      "sha256": "e20a9b8c772ff72c646a578c2388f331bc927ac0094d113b1aebd5b53ef43360",
+      "bytes": 89029
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-pferdeanhaenger-square.jpg",
+      "changed": false,
+      "sha256": "76e818197eb1c19a93b13881f034bc909fbd99066a4df7cda6a716b898b7a8f3",
+      "bytes": 88921
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-pferdeanhaenger-wide.jpg",
+      "changed": false,
+      "sha256": "57bc10af09ed072246bead1d9845feb008562dfc261f7a6f94152c555a448c09",
+      "bytes": 59583
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-pflege-mobile.jpg",
+      "changed": false,
+      "sha256": "8d7557f475c9c58759d29c2ac458bed28b5747e6cb966b812290dd35d48cf4e1",
+      "bytes": 86386
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-pflege-square.jpg",
+      "changed": false,
+      "sha256": "5abf050a2acb645f5dc79abdf50517f5c4420da0520434157f71876e3475bd29",
+      "bytes": 68448
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-pflege-wide.jpg",
+      "changed": false,
+      "sha256": "1bc7ab23594785158ab59d99a4c647b08111b9a2945bfc82041af5e6c00ef374",
+      "bytes": 62353
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-sattel-mobile.jpg",
+      "changed": false,
+      "sha256": "953fe5344713657504a2d920cf6081932f77372c49bcf354edad07212bd2aee4",
+      "bytes": 84208
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-sattel-square.jpg",
+      "changed": false,
+      "sha256": "7810d53f97b4e6361678b3e70e0fc3bb97e6239a0f810788f8d8e43370394779",
+      "bytes": 66591
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-sattel-wide.jpg",
+      "changed": false,
+      "sha256": "70fba30df91e09a0d2e6ef77df9baa12842281835607e60ddf548b13c47ef689",
+      "bytes": 61722
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-stallweide-mobile.jpg",
+      "changed": false,
+      "sha256": "142777ac0cbc3daf4b55c744cefae8f625c40359d04d68cecdb3f631dea2a7f2",
+      "bytes": 69461
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-stallweide-square.jpg",
+      "changed": false,
+      "sha256": "667916b69e8f3061230b1328a697f8d5dd42038898fd726b9942e867877ca136",
+      "bytes": 63651
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-stallweide-wide.jpg",
+      "changed": false,
+      "sha256": "9912d7b747f2c11300355150e20f8061d33a47b580b988761edbbbd5e8f6b3b5",
+      "bytes": 48177
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-training-mobile.jpg",
+      "changed": false,
+      "sha256": "778b5dfa64d26483fb22c9faad62d5d48848fc2d539571f4f6a663b1b014ed7d",
+      "bytes": 73195
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-training-square.jpg",
+      "changed": false,
+      "sha256": "87365b20b4dbc88c83fc3ab5c4135742fe5cd91a8bdcba4da1c327e5589b8cbd",
+      "bytes": 55047
+    },
+    {
+      "name": "affiliate-portal-router/assets/amazon-partner-training-wide.jpg",
+      "changed": false,
+      "sha256": "9326d07526b9adc9223b83a443d65cbd76f3129a2c4a11081fd646470393e22c",
+      "bytes": 58576
+    },
+    {
+      "name": "affiliate-portal-router/assets/banner-photo-allgemein.jpg",
+      "changed": false,
+      "sha256": "b68fb6910b66d3bfe68e55109a798540b746eb14c16fb4517a2385505c67777b",
+      "bytes": 221676
+    },
+    {
+      "name": "affiliate-portal-router/assets/banner-photo-decken.jpg",
+      "changed": false,
+      "sha256": "f3a24d44406e5c87da28e21c6fd7a93db7c55dfd378d04004e7ada3995eefa0b",
+      "bytes": 201892
+    },
+    {
+      "name": "affiliate-portal-router/assets/banner-photo-fuetterung.jpg",
+      "changed": false,
+      "sha256": "70f7b54d8be584a20eab133141b7e5bb8e9fc5f7f61f3673844b56e3a9a4f039",
+      "bytes": 245119
+    },
+    {
+      "name": "affiliate-portal-router/assets/banner-photo-pferdeanhaenger.jpg",
+      "changed": false,
+      "sha256": "c4defd8d3f8e194b70f372d24427b6cfffbdd9f86715233633c68eb103b6dea0",
+      "bytes": 479856
+    },
+    {
+      "name": "affiliate-portal-router/assets/banner-photo-pflege.jpg",
+      "changed": false,
+      "sha256": "8893c3623f14f01bee9662929ed31a4c5d1d4d352418c3cd7358d8adecc5297d",
+      "bytes": 347943
+    },
+    {
+      "name": "affiliate-portal-router/assets/banner-photo-sattel.jpg",
+      "changed": false,
+      "sha256": "feb16d62bc4a70896debcc12fd0e94ce437ec9f83d2d0e0903393e195559decf",
+      "bytes": 348746
+    },
+    {
+      "name": "affiliate-portal-router/assets/banner-photo-schabracken.jpg",
+      "changed": false,
+      "sha256": "ad19abaa53fe0e819f3fd2ad7c165bfec3ded0076e5ce98e98f00e046335366f",
+      "bytes": 74913
+    },
+    {
+      "name": "affiliate-portal-router/assets/banner-photo-stallweide.jpg",
+      "changed": false,
+      "sha256": "f8d6fa80f69903663a3dacd0df91d4262c3902c380c741083f1077d67da3ce03",
+      "bytes": 246806
+    },
+    {
+      "name": "affiliate-portal-router/assets/banner-photo-training-sidebar-full-v272.jpg",
+      "changed": false,
+      "sha256": "3316c794a5a531d65c6fb17fc2d323313fa482d837b940a574f18635e30e245e",
+      "bytes": 359692
+    },
+    {
+      "name": "affiliate-portal-router/assets/banner-photo-training-sidebar.jpg",
+      "changed": false,
+      "sha256": "c2aa51fddc69878988cd473f28b2fbf2ddf6d3475d98dc467270f90105685bc5",
+      "bytes": 163764
+    },
+    {
+      "name": "affiliate-portal-router/assets/banner-photo-training.jpg",
+      "changed": false,
+      "sha256": "c8cfa3bd6d7afcf4bffc36e6c6b119432cbbd2b71aabbe17ed5dc682b3c2b7df",
+      "bytes": 219749
+    },
+    {
+      "name": "affiliate-portal-router/assets/ebay-portal-catalog-v2.json",
+      "changed": false,
+      "sha256": "95c3348315f83f769984a175d758c5b419651f0af63fe916adff5dd4fa4c7bba",
+      "bytes": 1048819
+    },
+    {
+      "name": "affiliate-portal-router/assets/frontend.css",
+      "changed": false,
+      "sha256": "1d62e887d63107e815893dcfe4c2b362a81959c6c118375f6ced716f5e03f00e",
+      "bytes": 128662
+    },
+    {
+      "name": "affiliate-portal-router/assets/frontend.js",
+      "changed": false,
+      "sha256": "203acdc463075c90d307c6bc7798d4ce56c5d0c4ab9d2a090c7197dcc4b50ae6",
+      "bytes": 9346
+    },
+    {
+      "name": "affiliate-portal-router/assets/portal-structure-v279.json",
+      "changed": false,
+      "sha256": "bfb0cc90fdfdf1e6a3741a8d6bb978113e7c306a59d02fd7e5a5ade1550b5621",
+      "bytes": 1499087
+    },
+    {
+      "name": "affiliate-portal-router/includes/class-ppar-admin-kiss.php",
+      "changed": false,
+      "sha256": "d0e6763aed316cc9f6af63401722c223b18ee2eaf378457d4cbcb0f4b33b2a40",
+      "bytes": 55893
+    },
+    {
+      "name": "affiliate-portal-router/includes/class-ppar-deal-radar.php",
+      "changed": false,
+      "sha256": "1ea801d99d2146916602ec2db78488b2a85d2a0bc56d75731639373eb2b64679",
+      "bytes": 28957
+    },
+    {
+      "name": "affiliate-portal-router/includes/class-ppar-ds24-manual-downstream.php",
+      "changed": false,
+      "sha256": "669b204ca2b0c745f4dc433f11faabc65dc6fcd31565c58c1813bc1284998ea4",
+      "bytes": 12192
+    },
+    {
+      "name": "affiliate-portal-router/includes/class-ppar-partner-analytics.php",
+      "changed": false,
+      "sha256": "b170d2f1c6dbbfdf7e5f1960761ab103c2ee632e4f2df12cdf1e47578df08d61",
+      "bytes": 18560
+    },
+    {
+      "name": "affiliate-portal-router/includes/class-ppar-product-source-plan.php",
+      "changed": false,
+      "sha256": "22c00c85b2e3d0ba11a0740638dce6e028d0352b64d249e777ea203d1b6d3a7c",
+      "bytes": 12986
+    },
+    {
+      "name": "affiliate-portal-router/includes/trait-ppar-article-plans.php",
+      "changed": false,
+      "sha256": "a06f72477380fe609729d29a084f0529511251d5a4841560788f29d2af8d9bb3",
+      "bytes": 79035
+    },
+    {
+      "name": "affiliate-portal-router/includes/trait-ppar-automation-suite.php",
+      "changed": false,
+      "sha256": "152f5481a011c7108f23be7b6e6a18d2c9507e30b658293237d6d2e10e16356f",
+      "bytes": 247647
+    },
+    {
+      "name": "affiliate-portal-router/includes/trait-ppar-awin-programme-gate.php",
+      "changed": false,
+      "sha256": "5434720e72d97895bbef3ec475ba4e159965e13493989371cd8db23180c30f9d",
+      "bytes": 19208
+    },
+    {
+      "name": "affiliate-portal-router/includes/trait-ppar-control-contract.php",
+      "changed": false,
+      "sha256": "f32753a18cbf2083461bb9270b59e2b202e5f488a266c478a74bb60378a49a63",
+      "bytes": 37119
+    },
+    {
+      "name": "affiliate-portal-router/includes/trait-ppar-creative-library.php",
+      "changed": false,
+      "sha256": "eabf23c2bf1c071fefe793bdfba0047a5755d315d14d30ca09d8cc68db13d132",
+      "bytes": 122937
+    },
+    {
+      "name": "affiliate-portal-router/includes/trait-ppar-dfs-amazon.php",
+      "changed": false,
+      "sha256": "a161cd75ad596a3488668cffc05add1dc731eaad153df512b93775880359db0f",
+      "bytes": 22853
+    },
+    {
+      "name": "affiliate-portal-router/includes/trait-ppar-digistore24.php",
+      "changed": false,
+      "sha256": "a89f81d7960074a7b8eaf97fbc3dfe65e7cae673d13e4094c21109570c5d730a",
+      "bytes": 96779
+    },
+    {
+      "name": "affiliate-portal-router/includes/trait-ppar-ebay-account-deletion.php",
+      "changed": false,
+      "sha256": "65265a0dfb611936f4f5457d997ae018c65bffdd24e71d979875215a108a02fc",
+      "bytes": 44119
+    },
+    {
+      "name": "affiliate-portal-router/includes/trait-ppar-ebay-run.php",
+      "changed": true,
+      "sha256": "84656bc036ee243dd8d97800cd63f9af261b99e5b69cf46d8f347af44f350b08",
+      "bytes": 194908
+    },
+    {
+      "name": "affiliate-portal-router/includes/trait-ppar-ebay.php",
+      "changed": true,
+      "sha256": "2b4d31371fd853761527b52c4c1741d8ee13c652afa62db0bfd918b6cdf8ac79",
+      "bytes": 745532
+    },
+    {
+      "name": "affiliate-portal-router/includes/trait-ppar-housekeeping.php",
+      "changed": false,
+      "sha256": "0216897c626953919a5adf51f6b7622b2236f88935dde5de26fc79d8eb80b551",
+      "bytes": 15492
+    },
+    {
+      "name": "affiliate-portal-router/includes/trait-ppar-idealo.php",
+      "changed": false,
+      "sha256": "c22d486ae611d41dd0f68d899434403f516f1eb806250e12818af92e87a93a2c",
+      "bytes": 127848
+    },
+    {
+      "name": "affiliate-portal-router/includes/trait-ppar-network-sync.php",
+      "changed": false,
+      "sha256": "b396b6ec5367522733e4d30f38b8027eb0065267a23ea9036a2a71a7b94faf00",
+      "bytes": 78130
+    },
+    {
+      "name": "affiliate-portal-router/includes/trait-ppar-output-objects.php",
+      "changed": false,
+      "sha256": "d9b1cc6e21b176197f4890639fba52a2401a86aaca1ed9706b1a166ef1e5ef68",
+      "bytes": 243404
+    },
+    {
+      "name": "affiliate-portal-router/includes/trait-ppar-provider-intake.php",
+      "changed": false,
+      "sha256": "99cf318e4399eb92ff00234350ec568f9d258bfb383da8c15edf092498638a49",
+      "bytes": 42112
+    },
+    {
+      "name": "affiliate-portal-router/includes/trait-ppar-provider-registry.php",
+      "changed": false,
+      "sha256": "fa7c6bf25f354fcdf42b6f54310cc179a27d7b0e391919f22e3a7d246995c9d7",
+      "bytes": 44278
+    },
+    {
+      "name": "affiliate-portal-router/includes/trait-ppar-tariff-tools.php",
+      "changed": false,
+      "sha256": "3089ad93a5f7ae5767211cc6b8b3beed6fdd49e9cf1b973dbb2bfe831c1b65d1",
+      "bytes": 30482
+    },
+    {
+      "name": "affiliate-portal-router/pferdeportal-affiliate-router.php",
+      "changed": true,
+      "sha256": "6cc7db733a4b1cdb81489d52ff174d47e118f636f9313f3c4b3d8db43d8679c5",
+      "bytes": 838645
+    },
+    {
+      "name": "affiliate-portal-router/readme.txt",
+      "changed": true,
+      "sha256": "5c736fbd49bdd8c18ae75d84c6571ed639a31d204a971b35ad9cbf5af874e3a7",
+      "bytes": 70635
+    },
+    {
+      "name": "affiliate-portal-router/recovery/aff043-historical-product-state-20260915.json",
+      "changed": false,
+      "sha256": "72bfd3ff58c9389c839b272a4bd86ec842c086937d84f0530b6de53d5f469db8",
+      "bytes": 1392218
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+--- QA13/includes/trait-ppar-article-plans.php
++++ QA14/includes/trait-ppar-article-plans.php
+@@ -87,6 +87,7 @@
+             'reason' => '',
+             'started_at' => 0,
+             'completed_at' => 0,
++            'pending_ebay_product_pass' => 0,
+         );
+     }
+ 
+@@ -103,6 +104,29 @@
+ 
+     private function article_plan_rebuild_request($reason, $revision = 0, $mode = 'full') {
+         $revision = $revision > 0 ? absint($revision) : $this->article_plan_campaign_revision();
++        // New individually verified eBay campaigns must not repeatedly reset an
++        // already running article-product refresh to cursor zero. Keep the one
++        // existing worker and request ONE final product pass instead. Other
++        // rebuilds (including revision supersession) retain their old behavior.
++        $new_ebay_products = in_array((string)$reason, array(
++            'ebay_verified_business_incremental', 'ebay_public_checkpoint_changed',
++            'ebay_ended_public_product'
++        ), true) && $mode === 'products_only';
++        if ($new_ebay_products) {
++            $existing = $this->article_plan_rebuild_state_load();
++            if ($this->article_plan_rebuild_is_open($existing)
++                && absint($existing['revision'] ?? 0) === $revision) {
++                $existing['pending_ebay_product_pass'] = 1;
++                $this->article_plan_rebuild_state_save($existing);
++                // A stale scheduled-event marker must not strand this one
++                // existing worker when its WP-Cron event was lost.
++                if (function_exists('wp_next_scheduled') && function_exists('wp_schedule_single_event')
++                    && !wp_next_scheduled(self::ARTICLE_REBUILD_HOOK)) {
++                    wp_schedule_single_event(time() + 10, self::ARTICLE_REBUILD_HOOK);
++                }
++                return $existing;
++            }
++        }
+         $state = array(
+             'status' => 'running',
+             'revision' => $revision,
+@@ -176,8 +200,29 @@
+             else { $state['no_output'] = absint($state['no_output'] ?? 0) + 1; }
+         }
+         if (count($ids) < $limit) {
++            // A newly published eBay product may have arrived after an early
++            // article was scanned. Finish the first pass, then rerun products
++            // ONCE using the same scheduled worker; never starve later posts.
++            $latest = $this->article_plan_rebuild_state_load();
++            if (!empty($latest['pending_ebay_product_pass'])
++                && $this->article_plan_rebuild_is_open($latest)
++                && absint($latest['revision'] ?? 0) === absint($state['revision'] ?? 0)) {
++                $state = $this->article_plan_rebuild_request(
++                    'ebay_checkpoint_tail_refresh', absint($state['revision'] ?? 0), 'products_only'
++                );
++                return $state;
++            }
+             $state['status'] = absint($state['errors'] ?? 0) > 0 ? 'failed' : 'complete';
+             $state['completed_at'] = time();
++        } else {
++            // A concurrent eBay append only adds a pending flag; never allow a
++            // worker batch with an older state snapshot to erase that flag.
++            $latest = $this->article_plan_rebuild_state_load();
++            if (!empty($latest['pending_ebay_product_pass'])
++                && $this->article_plan_rebuild_is_open($latest)
++                && absint($latest['revision'] ?? 0) === absint($state['revision'] ?? 0)) {
++                $state['pending_ebay_product_pass'] = 1;
++            }
+         }
+         return $this->article_plan_rebuild_state_save($state);
+     }
+--- QA13/includes/trait-ppar-ebay.php
++++ QA14/includes/trait-ppar-ebay.php
+@@ -9318,9 +9318,35 @@
+             $this->ebay_business_persist_quality_on_source_row($row,$candidate['quality'],'active_selected',3);
+             $candidate['item']['business_selection']=array('role'=>'active_selected','rank'=>3);
+             $result=$this->ebay_route_business($row,$candidate['item'],$candidate['rule'],'ended-replacement-'.time(),$candidate['classification']);
+-            if(!is_wp_error($result)){
+-                return array('promoted'=>1,'status'=>'promoted','item_id'=>$item_id,'concept_id'=>$concept,'from'=>sanitize_key((string)($row['output_state']??'')));
+-            }
++            // A soft review may return a *non-error* result named
++            // last_good_preserved. It is NOT a successfully published reserve.
++            if(is_wp_error($result) || !is_array($result)
++                || !empty($result['last_good_preserved'])
++                || absint($result['plan']['active']??0)<1) {continue;}
++            // The old product has ended. Its fresh, independently selected
++            // successor must also enter the EXISTING public checkpoint; a new
++            // campaign row alone is not a publicly visible eBay product.
++            $hash=strtolower(sanitize_text_field((string)($result['creative_identity_hash']??'')));
++            if(!preg_match('/^[a-f0-9]{64}$/',$hash)
++                || !method_exists($this,'ebay_public_checkpoint_add_verified_business_ids')
++                || !method_exists($this,'output_objects_table')
++                || !method_exists($wpdb,'get_col')) {
++                return array('promoted'=>0,'status'=>'public_link_unavailable','concept_id'=>$concept,'item_id'=>$item_id);
++            }
++            $wpdb->last_error='';
++            $ids=(array)$wpdb->get_col($wpdb->prepare(
++                "SELECT DISTINCT campaign_post_id FROM {$this->output_objects_table()}
++                 WHERE provider='ebay' AND output_type='product_campaign'
++                   AND status='published' AND campaign_post_id>0
++                   AND creative_identity_hash=%s",$hash));
++            if(trim((string)($wpdb->last_error??''))!=='') {
++                return array('promoted'=>0,'status'=>'public_link_storage_error','concept_id'=>$concept,'item_id'=>$item_id);
++            }
++            $added=$ids ? $this->ebay_public_checkpoint_add_verified_business_ids($ids,'ended_replacement') : false;
++            if($added===false || absint($added)<1){
++                return array('promoted'=>0,'status'=>'public_checkpoint_pending','concept_id'=>$concept,'item_id'=>$item_id);
++            }
++            return array('promoted'=>1,'status'=>'promoted','item_id'=>$item_id,'concept_id'=>$concept,'from'=>sanitize_key((string)($row['output_state']??'')));
+         }
+         return array('promoted'=>0,'status'=>'no_qualified_replacement','concept_id'=>$concept);
+     }
+@@ -9366,6 +9392,18 @@
+             ? $this->ebay_business_promote_ended_replacement($row,$settings)
+             : ($seller_type==='INDIVIDUAL' ? $this->ebay_private_promote_ended_replacement($row,$settings) : array('promoted'=>0,'status'=>'unsupported_seller_type'));
+         $purged=$this->ebay_purge_item_content($row, 'purged_ended', $reason);
++        // Article plans store chosen campaign IDs. When an old public winner
++        // ends, live source checks hide it immediately, but the saved plan
++        // needs the SAME existing bounded product-only rebuild to choose a
++        // remaining eligible offer or its already planned banner fallback.
++        if($seller_type==='BUSINESS'
++            && sanitize_key((string)($row['output_state']??''))==='creative_ready'
++            && method_exists($this,'article_hybrid_enabled')
++            && $this->article_hybrid_enabled()
++            && method_exists($this,'article_plan_rebuild_request')) {
++            $this->article_plan_rebuild_request('ebay_ended_public_product',
++                $this->article_plan_campaign_revision(),'products_only');
++        }
+         $purged['replacement']=$replacement;
+         return $purged;
+     }
+--- QA13/pferdeportal-affiliate-router.php
++++ QA14/pferdeportal-affiliate-router.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
+  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
+- * Version: 6.72.324
++ * Version: 6.72.325
+  * Author: OpenAI
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -120,7 +120,7 @@
+     use PPAR_DFS_Amazon_Trait;
+     use PPAR_Digistore24_Trait;
+     use PPAR_Housekeeping_Trait;
+-    const VERSION = '6.72.324';
++    const VERSION = '6.72.325';
+     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
+     const CONTRACT_VERSION = '1.0';
+     const PROVIDER_CONTRACT_VERSION = '2.0';
+--- QA13/readme.txt
++++ QA14/readme.txt
+@@ -1,4 +1,4 @@
+-V6.72.324 QA13 KISS - Öffentliche Teilfreigabe trotz einzelner fehlerhafter eBay-Quellen: nur sicher bestätigte Angebote werden zum bestehenden Checkpoint ergänzt; keine neue Suche, keine Datenlöschung, eBay Deutschland und 6-Stunden-Regel unverändert. QA12 Admin und Protokoll bleiben enthalten. NUR TEST, noch kein echter WordPress-Endtest.
++V6.72.325 QA14 KISS - Gebündelte Ausspielungsreparatur: sichere Teilfreigabe, fortsetzbare Beitrags-Produktaktualisierung, korrekt bestätigte Nachrücker nach Ausverkauf. Früher: nur sicher bestätigte Angebote werden zum bestehenden Checkpoint ergänzt; keine neue Suche, keine Datenlöschung, eBay Deutschland und 6-Stunden-Regel unverändert. QA12 Admin und Protokoll bleiben enthalten. NUR TEST, noch kein echter WordPress-Endtest.
+ V6.72.322 QA11 NUR TEST (11.11.2026): QA10 Berichts-/Backend-Verschlankung plus korrigierte Schlusspruefung: Einzelne nicht bestaetigbare eBay-Quellen stoppen den gesamten Lauf nicht; die anderen Kandidaten werden weiter kontrolliert, keine unbelegte Veroeffentlichung, letzter guter Checkpoint bleibt geschuetzt. Bei exakt diesem alten Abbruch denselben Lauf mit unveraendertem Cursor fortsetzen statt erneut alle Produkte zu recherchieren. Backend-AJAX ist nur lesend und startet keinen Worker. Kein Live-End-to-End-Beweis.
+ V6.72.321 QA9 NUR TEST: KISS - Recherche, inkrementelle Freigabe und periodische Verfuegbarkeitspruefung getrennt. Vorhandene eBay-Produkte bleiben gespeichert; keine neue Suche, kein Tabellenumbau. Noch keine WordPress-Abnahme.
+ V6.72.318 NUR TEST: Admin-Knoepfe "eBay-Lauf sicher anhalten" und "Diesen Lauf am gespeicherten Stand fortsetzen" im bestehenden eBay-Gesamtworkflow. Stoppsignal bleibt getrennt von laufenden Cursor-Speicherungen erhalten. Aktuell laufendes Arbeitspaket darf zu Ende schreiben; vor dem naechsten Arbeitspaket wird er manuell pausiert (ohne Loeschung). Vorhandene Produktdaten, gespeicherte Coverage und sicherer oeffentlicher Checkpoint bleiben unangetastet. Keine automatische Wiederaufnahme; Fortsetzen verwendet denselben Lauf samt Cursor, ohne Neubeginn. Keine neue Tabelle, kein neuer Worker, keine API. Lokal pruefen; nicht live getestet.
+@@ -74,7 +74,7 @@
+ V6.72.236 TEST: Backend-Portalabdeckung hat bisher 329 Ziele x 3 LIVE-Router-Auswahlen synchron ausgefuehrt; jetzt acht Ziele pro Request und vollstaendiger JSON-Export in begrenzten Lesebloecken. PRIVATE-HivePress-Stale-Filter kehrt auf normalen Seiten sofort zurueck; BUSINESS-Checkpoint scannt bei abgeschaltetem PRIVATE keine alten PRIVATE-HivePress-Importe mehr. Kein neuer Worker, keine DB-Tabelle, keine Provider-/Ranking-/BUSINESS-Aenderung. Lokale PHP-/JavaScript-/Mock-Pruefungen, KEINE WP/MariaDB-Host-Abnahme.
+ V6.72.234 TEST: Direkter Rueckbau eBay-PRIVATE aus Affiliate-Zentrale 6.72.233: alte automatische Admin-Init-Loeschung, PRIVATE-HivePress-Backendfunktionen, PRIVATE-Kategorieanlage, PRIVATE-Discovery und PRIVATE-Bedienfelder entfernt. Angehende INDIVIDUAL-Datensaetze werden auch aus alten Laufplaenen hart abgewiesen. BUSINESS/Idealo/Artikel/Banner unveraendert. Bestehende PRIVATE-DB-Altlasten werden durch das Installieren NICHT automatisch geloescht; keine unkontrollierten Datenbankaktionen. Nur Testinstallation; kein behaupteter WordPress-/MariaDB-Livepass.
+ V6.72.233: PRIVATE-only Aufraeumweg ueber admin_init reaktiviert (kein Frontend/AJAX); alter falscher Complete-Marker wird nachverarbeitet; Abschluss erst bei tatsaechlich geleerter Unterkategorie-Struktur. PRIVATE-Neuanlage gesperrt. BUSINESS/idealo/Artikelunveraendert.
+-Stable tag: 6.72.324
++Stable tag: 6.72.325
+ V6.72.232 SICHERHEITSSTOPP: Automatischer PHP-init-Loeschlauf der 6.72.231 entfernt; PRIVAT-eBay bleibt abgeschaltet und im oeffentlichen HivePress-Filter gesperrt; keine eigenstaendige Datenbankbereinigung, keine Datenrestauration.
+ V6.72.230 PRIVATE-EBAY-ENTFERNUNG: PRIVATE-Verkaeuferroute bleibt zwingend aus; auf Adminaufrufen werden ausschliesslich eBay-markierte HivePress-Importanzeigen kontrolliert in den Papierkorb verschoben, manuelle Anzeigen vor Entfernung der Unterkategorien der Hauptkategorie Private Anzeigen zugeordnet. Alle Unterkategorien werden geloescht, Stammkategorie und native Anzeigen bleiben. Die PRIVAT-HivePress-Frontend-/Preview-Hooks und Einrichtungsoberflaeche sind abgekoppelt; BUSINESS, idealo, Artikel, Banner, Kategorien der Redaktion, CSS/JS bleiben unveraendert. Idempotente, zeitbegrenzte Bereinigung ohne neuen Cron/Runner; Fortschritt in der eBay-Fachseite.
+ V6.72.226 PRODUKTAUSGABE KISS (LOKALER TESTKANDIDAT): Stellt die vertragliche Reihenfolge exakt -> weiterer Themenkreis -> zuletzt nur bestaetigt freigegebene Pferdeprodukte wieder her. Kategorie-/Hub-/Journal-Produktplaetze werden bei zu wenigen Treffern nur aus dem vorhandenen indexierten Kampagnenbestand ergaenzt. Auf normalen Einzelbeitraegen bleibt exakt verlangte Produktidentitaet strikt; fuer allgemeine Beitraege werden zuletzt gepruefte eBay-/idealo-Angebote zugelassen. Anbieter koennen innerhalb derselben Relevanzstufe gemischt werden; spaetere Amazon-Einbindung bleibt getrennt. Bestehende Sperren fuer eBay-BUSINESS-Quelle, private Anzeigen, Quelle, Health, Veto, Bild, Partner und idealo-48h-Grenze bleiben aktiv. Der vorhandene idealo-Hintergrundrefresh muss veraltete unveraenderte Feeds vollstaendig neu pruefen, statt dauerhaft per Hash abzubrechen. Kein Umbau von Imports, Renderer, Kategorien, Bannern, Provideradaptern, Tracking, Datenbanktabellen oder Template. Keine neue Frontend-Providerabfrage. Tests sind lokale Funktionssimulation; kein behaupteter Live-/WP-/MariaDB-PASS.

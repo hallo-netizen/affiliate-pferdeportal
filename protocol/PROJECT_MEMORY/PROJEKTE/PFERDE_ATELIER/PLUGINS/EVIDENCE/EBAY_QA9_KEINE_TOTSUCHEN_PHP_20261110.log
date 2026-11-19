@@ -1,0 +1,14 @@
+PASS 298 actual required product families
+PASS excluded: concept-pferde-op-versicherung
+PASS excluded: concept-pferdekrankenversicherung
+PASS excluded: concept-pferdehaftpflicht
+PASS excluded: concept-haltungsberatung
+PASS excluded: concept-einstellvertrag-vorlagen
+PASS real camera goods must remain
+PASS already-searched family does not restart inside run
+PASS no background job scheduled for already-searched family
+PASS only genuinely newly-missing family may trigger bounded delta search
+PASS only one new family is searched
+PASS previous missing scope preserved
+PASS no repeat when coverage unchanged after delta search
+PASS no errors in normal safety cases

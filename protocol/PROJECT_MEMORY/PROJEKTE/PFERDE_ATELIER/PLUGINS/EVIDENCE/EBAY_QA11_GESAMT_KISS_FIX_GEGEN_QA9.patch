@@ -1,0 +1,360 @@
+--- QA9/affiliate-portal-router/includes/trait-ppar-ebay-run.php
++++ QA11/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+@@ -1204,30 +1204,11 @@
+         return true;
+     }
+ 
+-    /** Existing authenticated status endpoint; on a proven stalled open run,
+-     * execute ONE existing bounded worker tick. Everything remains on the same
+-     * durable run UUID and checkpoint. Never create a new run from status. */
++    /** Read-only backend status. Worker recovery belongs to the existing
++     * scheduled self-drive / external heartbeat, never a 45-second page poll.
++     * A slow admin screen must not trigger eBay API work or alter a run cursor. */
+     public function run_ebay_admin_ajax_tick() {
+         $run = $this->ebay_run_load();
+-        $recovery = 'none';
+-        if ($this->ebay_run_stop_requested($run) && $this->ebay_run_is_open($run)) {
+-            $this->run_ebay_canonical_worker(); // Stop-only: the worker checks the durable signal before phase work.
+-            $run = $this->ebay_run_load();
+-            $recovery = 'stop_checked';
+-        }
+-        if ($this->ebay_run_stalled($run)) {
+-            $uuid = sanitize_text_field((string)($run['run_uuid']??''));
+-            $result = $this->run_ebay_canonical_worker();
+-            $fresh = $this->ebay_run_load();
+-            $tick = sanitize_key((string)($result['tick_result']??''));
+-            if ($this->ebay_run_is_open($fresh)
+-                && hash_equals($uuid,sanitize_text_field((string)($fresh['run_uuid']??'')))
+-                && in_array($tick,array('advanced','retryable_error'),true)) {
+-                $this->ebay_run_schedule_worker(1);
+-            }
+-            $recovery = $tick === 'advanced' ? 'advanced' : ($tick === 'busy' ? 'busy' : ($tick === 'failed' ? 'failed' : 'checked'));
+-            $run = $this->ebay_run_load();
+-        }
+         return array(
+             'status'=>sanitize_key((string)($run['status']??'idle')),
+             'phase'=>sanitize_key((string)($run['phase']??'idle')),
+@@ -1236,8 +1217,60 @@
+             'last_tick_at'=>absint($run['last_transport_tick_at']??0),
+             'last_progress_at'=>absint($run['last_progress_at']??0),
+             'stalled'=>$this->ebay_run_stalled($run)?1:0,
+-            'recovery'=>$recovery,
++            'recovery'=>'none',
+         );
++    }
++
++    /** Only the known per-item FINAL source error may resume the SAME run.
++     * Preserve the 500+ saved worker steps, all researched offers, selection
++     * proof, public checkpoint and exact unprocessed final-source cursor.
++     * This is not a second run and never restarts discovery or gap-fill. */
++    public function ebay_run_failed_public_refresh_resumable($run = null) {
++        $run=is_array($run)?$run:$this->ebay_run_load();
++        $errors=(array)($run['errors']??array());
++        $last=$errors?end($errors):array();
++        return (string)($run['schema']??'')==='1.0'
++            && sanitize_key((string)($run['status']??''))==='failed'
++            && sanitize_key((string)($run['error_code']??''))==='public_source_refresh_provider_failed'
++            && sanitize_key((string)($last['details']['phase']??''))==='public_verify'
++            && sanitize_key((string)($run['orchestrator_contract']??''))==='self_drive_v1'
++            && in_array(sanitize_key((string)($run['operation']??'')),array('sync','gaps','refresh'),true)
++            && sanitize_text_field((string)($run['run_uuid']??''))!==''
++            && !empty($run['checkpoint_candidate']['business_campaign_ids'])
++            // The first failed getItem can precede the first saved refresh
++            // cursor. In that case safely resume at cursor zero, without
++            // repeating discovery or the product selection.
++            && (!isset($run['public_source_refresh']) || is_array($run['public_source_refresh']));
++    }
++
++    public function ebay_run_resume_failed_public_refresh() {
++        $before=$this->ebay_run_load();
++        if(!$this->ebay_run_failed_public_refresh_resumable($before)){
++            return new WP_Error('ebay_failed_public_resume_unavailable',
++                'Nur der gespeicherte eBay-Schlusspruefungsfehler kann ohne Neubeginn fortgesetzt werden.');
++        }
++        $after=$before;
++        $after['status']='running';
++        $after['phase']='public_verify';
++        $after['finished_at']=0;
++        $after['owner']='';$after['lease_expires_at']=0;
++        $after['resume_at']=0;
++        $after['no_progress_count']=0;
++        $after['restart_available']=0;
++        $after['resume_reason']='failed_public_refresh_same_cursor';
++        $after['error_code']='';$after['error_message']='';
++        $after['progress_seq']=absint($after['progress_seq']??0)+1;
++        $after['last_progress_at']=time();
++        // Preserve the original terminal error in 'errors' for auditing, but
++        // never show it as the error of the newly resumed status.
++        $saved=$this->ebay_run_compare_and_swap($before,$after);
++        if(!is_array($saved)){
++            return new WP_Error('ebay_failed_public_resume_conflict',
++                'Gespeicherter Lauf wurde inzwischen veraendert; nichts ueberschrieben.');
++        }
++        $this->ebay_run_schedule_worker(1);
++        return array('status'=>'resumed','run_uuid'=>(string)$after['run_uuid'],
++            'phase'=>'public_verify','cursor'=>absint($after['public_source_refresh']['cursor']??0));
+     }
+ 
+     /** Snapshot only operational values. Provider credentials are intentionally
+@@ -2390,11 +2423,24 @@
+                     'technical_errors'=>0,'excluded'=>0,'available'=>0,
+                     'ended'=>0,'updated'=>0,'revived'=>0,'errors'=>array()));
+                 $this->ebay_refresh_process_row($task,$row,$settings,$token);
++                // Count real getItem attempts (including failures) against
++                // the existing two-request limit. A locally ended offer makes
++                // no eBay request and must not waste the remote budget.
++                if(absint($task['summary']['requests']??0)>0){$remotes++;}
+                 $errors=(array)($task['summary']['errors']??array());
+                 if($errors || absint($task['summary']['technical_errors']??0)>0
+                     || absint($task['summary']['transient_errors']??0)>0){
+                     $last=$errors?end($errors):array();
+                     $code=sanitize_key((string)($last['code']??''));
++                    // Account authorization is not an item-specific miss.
++                    // Keep the existing hard stop for global 401/403; do not
++                    // silently turn an invalid eBay account into an empty shop.
++                    if($code==='ebay_refresh_http' && preg_match('/HTTP\s+(401|403)\b/i',(string)($last['error']??''))){
++                        $this->ebay_run_fail('public_source_refresh_auth_failed',
++                            'eBay-Autorisierung der abschliessenden Quellenpruefung gescheitert.',
++                            array('seller_type'=>$kind,'post_id'=>$id,'provider_error_code'=>$code));
++                        return false;
++                    }
+                     $temporary=in_array($code,array('ebay_refresh_transport','ebay_refresh_transient_http'),true);
+                     $attempts=absint($state['retry_attempts']??0);
+                     if($temporary && $attempts<2){
+@@ -2411,35 +2457,24 @@
+                         $this->ebay_run_save($current);
+                         return false;
+                     }
+-                    if($temporary){
+-                        $previous=$this->ebay_public_checkpoint_load();
+-                        if($this->ebay_public_checkpoint_is_safe($previous)){
+-                            // The old public set remains unchanged; never approve
+-                            // products whose final source verification failed.
+-                            // Existing per-product freshness still hides stale
+-                            // offers. Mark the run WARNING, never green.
+-                            $current=$this->ebay_run_load();
+-                            $state['retry_attempts']=0;
+-                            $state['provider_error_code']=$code;
+-                            $current['public_source_refresh']=$state;
+-                            $current['public_source_refresh_warning']=1;
+-                            $current['checkpoint_deferred']=1;
+-                            $current['checkpoint_deferred_reason']='public_source_refresh_unverified';
+-                            $this->ebay_run_save($current);
+-                            $this->ebay_run_complete(array('checkpoint_id'=>(string)($previous['checkpoint_id']??''),
+-                                'public_source_refresh'=>'unverified_deferred_last_good'));
+-                            return false;
+-                        }
++                    // KISS: a single unavailable/invalid eBay item must not
++                    // fail or prematurely finish the ENTIRE otherwise verified
++                    // catalog. Do not approve the item, extend freshness,
++                    // delete its stored source, or overwrite the last-good set.
++                    // Finish refreshing unrelated candidates under the existing
++                    // request cap and then defer the unverified public commit.
++                    $state['retry_attempts']=0;
++                    $state['provider_errors']=absint($state['provider_errors']??0)+1;
++                    if(!isset($state['provider_error_samples']) || !is_array($state['provider_error_samples'])){
++                        $state['provider_error_samples']=array();
+                     }
+-                    // Permanent errors and missing last-good protection must
+-                    // fail closed instead of inventing source/availability proof.
+-                    $this->ebay_run_fail('public_source_refresh_provider_failed',
+-                        'eBay konnte einen ausgewaehlten Kandidaten vor der Veroeffentlichung nicht bestaetigen.',
+-                        array('seller_type'=>$kind,'post_id'=>$id,
+-                              'provider_error_code'=>$code!==''?$code:'source_unverified'));
+-                    return false;
++                    if(count($state['provider_error_samples'])<12){
++                        $state['provider_error_samples'][]=array(
++                            'post_id'=>$id,'code'=>$code!==''?$code:'source_unverified');
++                    }
++                    $cursor++;$checked++;
++                    continue;
+                 }
+-                $remotes++;
+             }
+             $state['retry_attempts']=0;
+             $cursor++;$checked++;
+@@ -2451,6 +2486,11 @@
+         $state['complete']=$cursor>=$n?1:0;
+         $state['completed_at']=!empty($state['complete'])?time():0;
+         $current['public_source_refresh']=$state;
++        if(absint($state['provider_errors']??0)>0){
++            // No global FAIL and no false green checkpoint: the old verified
++            // public set remains authoritative. Freshness gates still apply.
++            $current['public_source_refresh_warning']=1;
++        }
+         $current['progress_seq']=absint($current['progress_seq']??0)+1;
+         $current['last_progress_at']=time();
+         $this->ebay_run_save($current);
+@@ -2473,6 +2513,27 @@
+         }
+         $candidate=is_array($run['checkpoint_candidate']??null)?$run['checkpoint_candidate']:array();
+         if(!$this->ebay_run_public_source_refresh_tick($run,$settings)){return;}
++        $after_refresh=$this->ebay_run_load();
++        if(!empty($after_refresh['public_source_refresh_warning'])){
++            // Individual provider failures were isolated and other candidates
++            // were still refreshed. Do NOT publish a partly unverified new
++            // catalog or withdraw last-good products. Existing per-product
++            // expiry and out-of-stock checks remain effective.
++            $previous=$this->ebay_public_checkpoint_load();
++            $after_refresh['checkpoint_deferred']=1;
++            $after_refresh['checkpoint_deferred_reason']='public_source_refresh_unverified';
++            if(!$this->ebay_run_save($after_refresh)){
++                $this->ebay_run_fail('public_source_refresh_state_save_failed',
++                    'Unverifizierte Quellen konnten nicht sicher protokolliert werden.');return;
++            }
++            $this->ebay_run_complete(array(
++                'checkpoint_id'=>$this->ebay_public_checkpoint_is_safe($previous)
++                    ?(string)($previous['checkpoint_id']??''):'',
++                'public_source_refresh'=>'unverified_deferred_last_good',
++                'public_source_refresh_failed_items'=>absint($after_refresh['public_source_refresh']['provider_errors']??0),
++                'public_checkpoint_written'=>0));
++            return;
++        }
+         $business=empty($settings['business_enabled'])?array('required'=>0,'covered'=>0,'missing'=>array(),'counts'=>array()):$this->ebay_run_public_business_coverage((array)($candidate['business_campaign_ids']??array()));
+         if(!empty($business['error_code'])){$this->ebay_run_fail((string)$business['error_code'],'BUSINESS-Public-Gate ist technisch oder fachlich fehlgeschlagen.',array('business'=>$business));return;}
+         if(!empty($settings['business_enabled']) && !empty($business['missing'])){
+--- QA9/affiliate-portal-router/includes/trait-ppar-ebay.php
++++ QA11/affiliate-portal-router/includes/trait-ppar-ebay.php
+@@ -4407,6 +4407,7 @@
+             $concept = (array)($lookup[$id] ?? array());
+             $stats = (array)($by_concept[$id] ?? array());
+             $requests = 0; $found = 0; $accepted = 0; $blocked = 0;
++            $duplicates = 0; $review_pending = 0; $capacity_skipped = 0;
+             $unfinished = false; $technical = false; $queries = array(); $reasons = array();
+             foreach ($stats as $stat) {
+                 foreach (array('hard_reasons','technical_reasons','review_reasons') as $reason_field) {
+@@ -4419,6 +4420,9 @@
+                 $found += absint($stat['received'] ?? 0);
+                 $accepted += absint($stat['accepted'] ?? 0);
+                 $blocked += absint($stat['hard_blocked'] ?? 0) + absint($stat['technical_blocked'] ?? 0);
++                $duplicates += absint($stat['duplicates_skipped'] ?? 0);
++                $review_pending += absint($stat['review_pending'] ?? 0);
++                $capacity_skipped += absint($stat['capacity_skipped'] ?? 0);
+                 if (empty($stat['complete'])) { $unfinished = true; }
+                 if (absint($stat['technical_blocked'] ?? 0) > 0 || in_array(sanitize_key((string)($stat['stopped_reason'] ?? '')), array('request_error','transient_retry_exhausted'), true)) { $technical = true; }
+                 $q = sanitize_text_field((string)($stat['query'] ?? ''));
+@@ -4434,6 +4438,10 @@
+                 'id'=>$id,'title'=>sanitize_text_field((string)($concept['title'] ?? $id)),
+                 'query'=>implode(' | ',array_keys($queries)),
+                 'requests'=>$requests,'found'=>$found,'accepted'=>$accepted,'blocked'=>$blocked,
++                // Expose the EXISTING per-profile accounting. The counters may
++                // overlap; do not subtract them as if every listing were unique.
++                'duplicates_skipped'=>$duplicates,'review_pending'=>$review_pending,
++                'capacity_skipped'=>$capacity_skipped,'search_incomplete'=>$unfinished,
+                 'assessment'=>$assessment, 'rejection_reasons'=>$reasons,
+             );
+         }
+@@ -10613,9 +10621,12 @@
+             wp_safe_redirect(add_query_arg(array('page'=>'affiliate-portal-ebay','ppar_ebay'=>'error','message'=>rawurlencode('Neu starten ist nur nach einem fehlgeschlagenen Gesamtlauf möglich.')),admin_url('admin.php')));exit;
+         }
+         $operation=sanitize_key((string)($run['operation']??'sync'));if(!in_array($operation,array('sync','refresh'),true)){$operation='sync';}
+-        $result=$this->ebay_run_start(true,$operation);
++        $resume_final=$this->ebay_run_failed_public_refresh_resumable($run);
++        $result=$resume_final?$this->ebay_run_resume_failed_public_refresh():$this->ebay_run_start(true,$operation);
+         if(is_wp_error($result)){$notice='sync_failed';$message=$result->get_error_message();}
+-        else{$notice='sync_started';$message='Neuer Lauf gestartet. Der letzte sichere Frontend-Checkpoint bleibt aktiv, bis der neue Lauf vollständig geprüft ist.';}
++        else{$notice='sync_started';$message=$resume_final
++            ?'Gespeicherte eBay-Schlussprüfung im SELBEN Lauf fortgesetzt. Keine neue Recherche und kein Verlust bisheriger Produkte.'
++            :'Neuer Lauf gestartet. Der letzte sichere Frontend-Checkpoint bleibt aktiv, bis der neue Lauf vollständig geprüft ist.';}
+         wp_safe_redirect(add_query_arg(array('page'=>'affiliate-portal-ebay','ppar_ebay'=>$notice,'message'=>rawurlencode($message)),admin_url('admin.php')));exit;
+     }
+ 
+@@ -10977,11 +10988,23 @@
+                 <?php
+                     // One-click report of the EXISTING canonical missing-ID list.
+                     // No provider call, no write, no worker and no extra admin endpoint.
+-                    $ppar_missing_report = $this->ebay_missing_family_diagnostic_rows($canonical_run, $selection_state, $job_summary);
++                    // A closed report must never perform its full catalog
++                    // aggregation on every slow admin-page request.
++                    // Same admin page, same read-only report; no new AJAX/worker.
++                    $ppar_missing_requested = isset($_GET['ppar_ebay_report'])
++                        && is_scalar($_GET['ppar_ebay_report'])
++                        && (string) $_GET['ppar_ebay_report'] === '1';
++                    $ppar_missing_report = $ppar_missing_requested
++                        ? $this->ebay_missing_family_diagnostic_rows($canonical_run, $selection_state, $job_summary)
++                        : array();
+                     $ppar_missing_rows = (array)($ppar_missing_report['rows'] ?? array());
+                 ?>
+-                <details id="ppar-ebay-missing-report" style="margin:12px 0">
++                <details id="ppar-ebay-missing-report" style="margin:12px 0" <?php if ($ppar_missing_requested) { echo 'open'; } ?>>
+                     <summary><strong>Fehlende Produktfamilien einzeln anzeigen und CSV herunterladen</strong> (gespeicherter Stand – kein neuer Abruf)</summary>
++                    <?php if (!$ppar_missing_requested) : ?>
++                        <p><a class="button" href="<?php echo esc_url(add_query_arg('ppar_ebay_report', '1', admin_url('admin.php?page=affiliate-portal-ebay'))); ?>">Gespeicherten Bericht bei Bedarf laden</a></p>
++                        <p class="description">Keine eBay-Abfrage; nur vorhandene Suchdaten.</p>
++                    <?php else : ?>
+                     <p><strong>Quelle:</strong> <?php echo esc_html((string)($ppar_missing_report['origin'] ?? '')); ?> · <strong>Stand:</strong> <?php echo absint(count($ppar_missing_rows)); ?> fehlende von <?php echo absint($ppar_missing_report['required'] ?? 0); ?> Produktfamilien.</p>
+                     <p class="description"><?php echo esc_html((string)($ppar_missing_report['message'] ?? '')); ?> Keine Kategorie wird aufgrund fehlender Suchtreffer als auf eBay nicht erhältlich bezeichnet.</p>
+                     <?php if (empty($ppar_missing_report['valid'])) : ?>
+@@ -11002,10 +11025,10 @@
+                             if(!btn||!data) return;
+                             btn.addEventListener('click',function(){
+                                 var payload;try{payload=JSON.parse(data.textContent);}catch(e){document.getElementById('ppar-ebay-missing-download-result').textContent='Gespeicherte Liste konnte nicht gelesen werden.';return;}
+-                                var headers=['run_uuid','quelle','familien_id','produktfamilie','suche','anfragen','angebote_im_teilabschnitt','davon_angenommen','blockiert','bewertung','ablehnungsgruende'];
++                                var headers=['run_uuid','quelle','familien_id','produktfamilie','suche','anfragen','angebote_im_teilabschnitt','davon_angenommen','blockiert','bewertung','ablehnungsgruende','duplikate_uebersprungen','zur_pruefung','kapazitaet_uebersprungen','suchprofil_unvollstaendig'];
+                                 function csv(v){v=String(v==null?'':v);if(/^[=+@\-\t\r]/.test(v))v="'"+v;return '"'+v.replace(/"/g,'""')+'"';}
+                                 var rows=[headers];
+-                                (payload.rows||[]).forEach(function(r){rows.push([payload.run_uuid||'',payload.origin||'',r.id||'',r.title||'',r.query||'',r.requests||0,r.found||0,r.accepted||0,r.blocked||0,r.assessment||'',Object.entries(r.rejection_reasons||{}).sort(function(a,b){return b[1]-a[1];}).map(function(e){return e[0]+': '+e[1];}).join(' | ')]);});
++                                (payload.rows||[]).forEach(function(r){rows.push([payload.run_uuid||'',payload.origin||'',r.id||'',r.title||'',r.query||'',r.requests||0,r.found||0,r.accepted||0,r.blocked||0,r.assessment||'',Object.entries(r.rejection_reasons||{}).sort(function(a,b){return b[1]-a[1];}).map(function(e){return e[0]+': '+e[1];}).join(' | '),r.duplicates_skipped||0,r.review_pending||0,r.capacity_skipped||0,r.search_incomplete?'ja':'nein']);});
+                                 var contents='\ufeff'+rows.map(function(a){return a.map(csv).join(';');}).join('\r\n');
+                                 var blob=new Blob([contents],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+                                 a.href=url;a.download='Pferdeatelier_eBay_fehlende_Produktfamilien_'+(payload.run_uuid||'stand').slice(0,12)+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);
+@@ -11014,6 +11037,7 @@
+                         })();
+                         </script>
+                     <?php endif; ?>
++                    <?php endif; // requested report only ?>
+                 </details>
+ 
+                 <?php if ($canonical_status === 'failed') : ?><div class="notice notice-error inline"><p><strong>Gesamtlauf FEHLER:</strong> <code><?php echo esc_html($canonical_error_code ?: 'error_code_missing'); ?></code> · <?php echo esc_html($canonical_error_message ?: 'Fehlertext fehlt im persistenten Run-State.'); ?></p>
+@@ -11040,9 +11064,13 @@
+ 
+                 <?php endif; ?></p>
+                 <?php if(!empty($canonical_run['checkpoint_safe'])): ?><p><strong>Sicherer Frontend-Stand:</strong> bleibt unverändert aktiv.</p><?php endif; ?>
+-                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="margin-top:10px"><input type="hidden" name="action" value="ppar_ebay_run_restart"><?php wp_nonce_field('ppar_ebay_run_restart','ppar_ebay_nonce'); ?><button class="button button-primary">Lauf neu starten</button></form>
++                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="margin-top:10px"><input type="hidden" name="action" value="ppar_ebay_run_restart"><?php wp_nonce_field('ppar_ebay_run_restart','ppar_ebay_nonce'); ?><button class="button button-primary"><?php echo $this->ebay_run_failed_public_refresh_resumable($canonical_run)?'Gespeicherte Schlussprüfung fortsetzen':'Lauf neu starten'; ?></button></form>
+                 </div><?php endif; ?>
+-                <?php if ($canonical_status === 'completed' && (!empty($canonical_run['technical_gap_count']) || !empty($canonical_run['technical_unverified_search_profile_count']))) : ?>
++                <?php if ($canonical_status === 'completed' && !empty($canonical_run['public_source_refresh_warning'])) : ?>
++                    <div class="notice notice-warning inline"><p><strong>Gesamtlauf mit offenen Quellenpruefungen abgeschlossen:</strong>
++                    <?php echo absint($canonical_run['public_source_refresh']['provider_errors']??0); ?> einzelne eBay-Angebote konnten vor der abschliessenden Freigabe nicht bestaetigt werden.
++                    <strong>Der letzte sichere Frontend-Stand bleibt erhalten.</strong> Nicht verifizierte Produkte wurden nicht neu freigegeben; die regulaere Verfuegbarkeitspruefung laeuft unabhaengig weiter.</p></div>
++                <?php elseif ($canonical_status === 'completed' && (!empty($canonical_run['technical_gap_count']) || !empty($canonical_run['technical_unverified_search_profile_count']))) : ?>
+                     <div class="notice notice-warning inline"><p><strong>eBay-Gesamtlauf mit technischen Suchlücken abgeschlossen:</strong>
+                     <?php echo absint($canonical_run['technical_unverified_search_profile_count'] ?? 0); ?> eBay-Suchprofile blieben nach wiederholten Verbindungsfehlern unvollständig; davon sind <?php echo absint($canonical_run['technical_gap_count'] ?? 0); ?> bisher unversorgte Warenbereiche unmittelbar betroffen.
+                     <strong>Diese Bereiche gelten NICHT als angebotslos und wurden nicht ungeprüft freigegeben.</strong>
+--- QA9/affiliate-portal-router/pferdeportal-affiliate-router.php
++++ QA11/affiliate-portal-router/pferdeportal-affiliate-router.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
+  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
+- * Version: 6.72.321
++ * Version: 6.72.322
+  * Author: OpenAI
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -120,7 +120,7 @@
+     use PPAR_DFS_Amazon_Trait;
+     use PPAR_Digistore24_Trait;
+     use PPAR_Housekeeping_Trait;
+-    const VERSION = '6.72.321';
++    const VERSION = '6.72.322';
+     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
+     const CONTRACT_VERSION = '1.0';
+     const PROVIDER_CONTRACT_VERSION = '2.0';
+--- QA9/affiliate-portal-router/readme.txt
++++ QA11/affiliate-portal-router/readme.txt
+@@ -1,3 +1,4 @@
++V6.72.322 QA11 NUR TEST (11.11.2026): QA10 Berichts-/Backend-Verschlankung plus korrigierte Schlusspruefung: Einzelne nicht bestaetigbare eBay-Quellen stoppen den gesamten Lauf nicht; die anderen Kandidaten werden weiter kontrolliert, keine unbelegte Veroeffentlichung, letzter guter Checkpoint bleibt geschuetzt. Bei exakt diesem alten Abbruch denselben Lauf mit unveraendertem Cursor fortsetzen statt erneut alle Produkte zu recherchieren. Backend-AJAX ist nur lesend und startet keinen Worker. Kein Live-End-to-End-Beweis.
+ V6.72.321 QA9 NUR TEST: KISS - Recherche, inkrementelle Freigabe und periodische Verfuegbarkeitspruefung getrennt. Vorhandene eBay-Produkte bleiben gespeichert; keine neue Suche, kein Tabellenumbau. Noch keine WordPress-Abnahme.
+ V6.72.318 NUR TEST: Admin-Knoepfe "eBay-Lauf sicher anhalten" und "Diesen Lauf am gespeicherten Stand fortsetzen" im bestehenden eBay-Gesamtworkflow. Stoppsignal bleibt getrennt von laufenden Cursor-Speicherungen erhalten. Aktuell laufendes Arbeitspaket darf zu Ende schreiben; vor dem naechsten Arbeitspaket wird er manuell pausiert (ohne Loeschung). Vorhandene Produktdaten, gespeicherte Coverage und sicherer oeffentlicher Checkpoint bleiben unangetastet. Keine automatische Wiederaufnahme; Fortsetzen verwendet denselben Lauf samt Cursor, ohne Neubeginn. Keine neue Tabelle, kein neuer Worker, keine API. Lokal pruefen; nicht live getestet.
+ V6.72.317 NUR TEST: eBay-BUSINESS Mehrfachzuordnung je Originalangebot: Eine Artikelnummer bleibt ein Quell-Datensatz, weitere separat verifizierte Produktfamilien werden am bestehenden Datensatz gespeichert und in derselben Werbemittel-/Kampagnen-Zuordnung gezielt ausgegeben. Doppelte Treffer werden erst pro Artikelnummer UND Produktfamilie verworfen. Gespeicherte eBay-Treffer werden vor weiteren Abrufen zur Auswahl herangezogen. Im Frontend zaehlt eine Familie nur mit echter, passender Produktseite. Ein Update mit veraendertem Artikel entfernt veraltete Zusatzzuordnungen. Vorhandene Sichtbarkeit und Auswahl werden bei Aktualisierungen erhalten, solange die fachliche Pruefung weiterhin besteht. Keine neue Tabelle, kein neuer Worker oder Cron, keine zusaetzliche Frontend-Datenbank-Abfrage. Ergaenzt den gezielten Luecken-Nachlauf aus 6.72.316; keine Garantie fuer fehlende eBay-Angebote. Nur lokal simuliert, nicht auf Produktions-WordPress abgenommen.
+@@ -72,7 +73,7 @@
+ V6.72.236 TEST: Backend-Portalabdeckung hat bisher 329 Ziele x 3 LIVE-Router-Auswahlen synchron ausgefuehrt; jetzt acht Ziele pro Request und vollstaendiger JSON-Export in begrenzten Lesebloecken. PRIVATE-HivePress-Stale-Filter kehrt auf normalen Seiten sofort zurueck; BUSINESS-Checkpoint scannt bei abgeschaltetem PRIVATE keine alten PRIVATE-HivePress-Importe mehr. Kein neuer Worker, keine DB-Tabelle, keine Provider-/Ranking-/BUSINESS-Aenderung. Lokale PHP-/JavaScript-/Mock-Pruefungen, KEINE WP/MariaDB-Host-Abnahme.
+ V6.72.234 TEST: Direkter Rueckbau eBay-PRIVATE aus Affiliate-Zentrale 6.72.233: alte automatische Admin-Init-Loeschung, PRIVATE-HivePress-Backendfunktionen, PRIVATE-Kategorieanlage, PRIVATE-Discovery und PRIVATE-Bedienfelder entfernt. Angehende INDIVIDUAL-Datensaetze werden auch aus alten Laufplaenen hart abgewiesen. BUSINESS/Idealo/Artikel/Banner unveraendert. Bestehende PRIVATE-DB-Altlasten werden durch das Installieren NICHT automatisch geloescht; keine unkontrollierten Datenbankaktionen. Nur Testinstallation; kein behaupteter WordPress-/MariaDB-Livepass.
+ V6.72.233: PRIVATE-only Aufraeumweg ueber admin_init reaktiviert (kein Frontend/AJAX); alter falscher Complete-Marker wird nachverarbeitet; Abschluss erst bei tatsaechlich geleerter Unterkategorie-Struktur. PRIVATE-Neuanlage gesperrt. BUSINESS/idealo/Artikelunveraendert.
+-Stable tag: 6.72.321
++Stable tag: 6.72.322
+ V6.72.232 SICHERHEITSSTOPP: Automatischer PHP-init-Loeschlauf der 6.72.231 entfernt; PRIVAT-eBay bleibt abgeschaltet und im oeffentlichen HivePress-Filter gesperrt; keine eigenstaendige Datenbankbereinigung, keine Datenrestauration.
+ V6.72.230 PRIVATE-EBAY-ENTFERNUNG: PRIVATE-Verkaeuferroute bleibt zwingend aus; auf Adminaufrufen werden ausschliesslich eBay-markierte HivePress-Importanzeigen kontrolliert in den Papierkorb verschoben, manuelle Anzeigen vor Entfernung der Unterkategorien der Hauptkategorie Private Anzeigen zugeordnet. Alle Unterkategorien werden geloescht, Stammkategorie und native Anzeigen bleiben. Die PRIVAT-HivePress-Frontend-/Preview-Hooks und Einrichtungsoberflaeche sind abgekoppelt; BUSINESS, idealo, Artikel, Banner, Kategorien der Redaktion, CSS/JS bleiben unveraendert. Idempotente, zeitbegrenzte Bereinigung ohne neuen Cron/Runner; Fortschritt in der eBay-Fachseite.
+ V6.72.226 PRODUKTAUSGABE KISS (LOKALER TESTKANDIDAT): Stellt die vertragliche Reihenfolge exakt -> weiterer Themenkreis -> zuletzt nur bestaetigt freigegebene Pferdeprodukte wieder her. Kategorie-/Hub-/Journal-Produktplaetze werden bei zu wenigen Treffern nur aus dem vorhandenen indexierten Kampagnenbestand ergaenzt. Auf normalen Einzelbeitraegen bleibt exakt verlangte Produktidentitaet strikt; fuer allgemeine Beitraege werden zuletzt gepruefte eBay-/idealo-Angebote zugelassen. Anbieter koennen innerhalb derselben Relevanzstufe gemischt werden; spaetere Amazon-Einbindung bleibt getrennt. Bestehende Sperren fuer eBay-BUSINESS-Quelle, private Anzeigen, Quelle, Health, Veto, Bild, Partner und idealo-48h-Grenze bleiben aktiv. Der vorhandene idealo-Hintergrundrefresh muss veraltete unveraenderte Feeds vollstaendig neu pruefen, statt dauerhaft per Hash abzubrechen. Kein Umbau von Imports, Renderer, Kategorien, Bannern, Provideradaptern, Tracking, Datenbanktabellen oder Template. Keine neue Frontend-Providerabfrage. Tests sind lokale Funktionssimulation; kein behaupteter Live-/WP-/MariaDB-PASS.

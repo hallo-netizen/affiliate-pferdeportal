@@ -1,0 +1,394 @@
+--- a/affiliate-portal-router/includes/trait-ppar-ebay-run.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+@@ -398,7 +398,7 @@
+         foreach ($rows as $row) {
+             $hash = strtolower(sanitize_text_field((string)($row['creative_identity_hash'] ?? '')));
+             if (!preg_match('/^[a-f0-9]{64}$/', $hash) || !method_exists($this, 'output_objects_table')) { continue; }
+-            $objects = (array)$wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->output_objects_table()} WHERE provider='ebay' AND output_type='product_campaign' AND creative_identity_hash=%s AND campaign_post_id>0 ORDER BY id ASC", $hash), ARRAY_A);
++            $objects = (array)$wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->output_objects_table()} WHERE provider='ebay' AND output_type='product_campaign' AND status='published' AND creative_identity_hash=%s AND campaign_post_id>0 ORDER BY id ASC", $hash), ARRAY_A);
+             foreach ($objects as $object) {
+                 $campaign_id = absint($object['campaign_post_id'] ?? 0); if ($campaign_id <= 0) { continue; }
+                 $campaign = method_exists($this, 'output_campaign_by_post_id') ? $this->output_campaign_by_post_id($campaign_id) : null;
+@@ -471,6 +471,76 @@
+             'technical_concepts'=>$this->ebay_run_selection_technical_concepts($selection),
+             'captured_at'=>time(),
+         );
++    }
++
++    /** A single safe append path for fresh individual selections AND saved
++     * published inventory. This is not a second checkpoint publisher: it only
++     * adds verified eBay products to the existing last-good set, never deletes.
++     */
++    private function ebay_public_checkpoint_add_verified_business_ids($campaign_ids,$reason) {
++        $campaign_ids=array_values(array_unique(array_filter(array_map('absint',(array)$campaign_ids))));
++        if(!$campaign_ids){return false;}
++        $checkpoint=$this->ebay_public_checkpoint_load();
++        // The FIRST published product can establish a genuinely verified safe
++        // checkpoint. Never overwrite an existing but invalid legacy checkpoint:
++        // that could conceal a storage problem or lose researched inventory.
++        if (!$checkpoint) {
++            $checkpoint=array('schema'=>'1.0','status'=>'safe',
++                'checkpoint_id'=>'','business_campaign_ids'=>array(),
++                'private_listing_ids'=>array());
++            $before=array();
++        } else {
++            if(!$this->ebay_public_checkpoint_is_safe($checkpoint)){return false;}
++            $before=$this->ebay_public_checkpoint_business_ids($checkpoint);
++        }
++        $existing=array_fill_keys($before,1);
++        $ready=array();
++        global $wpdb;
++        if(!is_object($wpdb)||!method_exists($wpdb,'get_var')||!method_exists($wpdb,'prepare')){return false;}
++        foreach(array_slice($campaign_ids,0,1200) as $id){
++            if(isset($existing[$id])){continue;}
++            $wpdb->last_error='';
++            $published=$wpdb->get_var($wpdb->prepare(
++                "SELECT id FROM {$this->output_objects_table()} WHERE provider='ebay'
++                 AND output_type='product_campaign' AND status='published'
++                 AND campaign_post_id=%d LIMIT 1",$id));
++            if(trim((string)($wpdb->last_error??''))!==''){return false;}
++            if(absint($published)<=0){continue;}
++            $campaign=$this->output_campaign_by_post_id($id);
++            if(!is_array($campaign) || empty($campaign['active'])
++                || !$this->ebay_business_campaign_source_allows_delivery_base($campaign)) {continue;}
++            $ready[]=$id;
++        }
++        if(!$ready){return false;}
++        $next=array_values(array_unique(array_merge($before,$ready)));
++        sort($next,SORT_NUMERIC);
++        if(count($next)>1200){return false;}
++        $checkpoint['business_campaign_ids']=$next;
++        $checkpoint['checkpoint_id']=substr(hash('sha256',
++            'ebay_public_append|'.wp_json_encode($next)),0,24);
++        $checkpoint['source']='incremental_verified_business';
++        if(!is_array($checkpoint['verification']??null)){$checkpoint['verification']=array();}
++        $checkpoint['verification']['last_incremental_source']=sanitize_key((string)$reason);
++        $saved=$this->ebay_public_checkpoint_save($checkpoint);
++        if($saved===false){return false;}
++        if($this->article_hybrid_enabled()){
++            $this->article_plan_rebuild_request('ebay_verified_business_incremental',
++                $this->article_plan_campaign_revision(),'products_only');
++        }
++        return count($ready);
++    }
++
++    /** Incremental public release of ONLY individually proven, materialized
++     * BUSINESS winners. Never remove any last-good campaign; missing/technical
++     * families and remaining discovery have no veto over unrelated new cards.
++     */
++    private function ebay_run_publish_ready_business_subset($selection) {
++        $run=$this->ebay_run_load();
++        if(!$this->ebay_run_is_open($run)
++            || sanitize_key((string)($run['operation']??'sync'))==='local') { return false; }
++        $strict=array('business_active'=>(array)($selection['business_active']??array()));
++        $ready=$this->ebay_run_checkpoint_business_ids_from_selection($strict,array(),'full');
++        return $this->ebay_public_checkpoint_add_verified_business_ids($ready,'selection');
+     }
+ 
+     private function ebay_run_checkpoint_capture_selection($selection, $mode = 'full') {
+@@ -1009,7 +1079,19 @@
+             }
+         }
+         $stored_status = sanitize_key((string)($run['status'] ?? ''));
++        // Stopping research cannot stop availability checks for prior published
++        // products. The heartbeat is the low-traffic fallback for WP-Cron.
++        if ($stored_status === 'paused'
++            && sanitize_key((string)($run['resume_reason']??'')) === 'operator_stop') {
++            $availability=$this->ebay_public_availability_tick('heartbeat');
++            $out=array('status'=>'idle','run_status'=>'paused','reason'=>'operator_paused',
++                'transport'=>'external_tick','server_time'=>time(),'contract'=>'external_tick_v2',
++                'run_uuid'=>sanitize_text_field((string)($run['run_uuid']??'')),
++                'availability_status'=>sanitize_key((string)($availability['status']??'unknown')));
++            return function_exists('rest_ensure_response') ? rest_ensure_response($out) : $out;
++        }
+         if ((string)($run['schema'] ?? '') === '1.0' && $stored_status === 'failed') {
++            $this->ebay_public_availability_tick('heartbeat');
+             $out=array(
+                 'status'=>'failed','transport'=>'external_tick','restart_required'=>1,'server_time'=>time(),'contract'=>'external_tick_v2',
+                 'run_uuid'=>sanitize_text_field((string)($run['run_uuid']??'')),
+@@ -1035,7 +1117,16 @@
+         }
+         $fresh = $this->ebay_run_load();
+         $tick_result=sanitize_key((string)($result['tick_result']??'retryable_error'));
+-        if(!in_array($tick_result,array('advanced','busy','retryable_error','completed','local_checked','failed'),true)){$tick_result='retryable_error';}
++        // Manual stop is not a provider failure. The canonical worker correctly
++        // returns "paused"; tell the external watchdog "idle" so it does not
++        // start another useless self-drive loop. Keep run_status="paused" and
++        // the stored cursor unchanged until an explicit operator resume.
++        if ($tick_result==='paused'
++            && sanitize_key((string)($fresh['status']??''))==='paused'
++            && sanitize_key((string)($fresh['resume_reason']??''))==='operator_stop') {
++            $tick_result='idle';
++        }
++        if(!in_array($tick_result,array('advanced','busy','retryable_error','completed','local_checked','failed','idle'),true)){$tick_result='retryable_error';}
+         $self_drive_handoff=false;
+         if($this->ebay_run_is_active($fresh) && in_array($tick_result,array('advanced','retryable_error'),true)){
+             $self_drive_handoff=$this->ebay_run_dispatch_self_drive((string)($fresh['run_uuid']??''),'external_watchdog');
+@@ -1585,6 +1676,10 @@
+         }
+         $selection=$this->ebay_selection_process_tick($settings,$selection);
+         $this->ebay_run_capture_component_state(null,array('selection'));
++        if(in_array($canonical_phase,array('business_materialize','private_materialize'),true)
++            || sanitize_key((string)($selection['status']??''))==='complete') {
++            $this->ebay_run_publish_ready_business_subset($selection);
++        }
+         if(sanitize_key((string)($selection['status']??''))==='failed'){
+             $this->ebay_run_fail(sanitize_key((string)($selection['failure_reason']??'selection_failed')),sanitize_text_field((string)($selection['error']??$selection['failure_reason']??'Bestandsauswahl ist fehlgeschlagen.')));return;
+         }
+@@ -2222,6 +2317,9 @@
+         }
+         if(sanitize_key((string)($selection['status']??''))==='failed'){$this->ebay_run_fail(sanitize_key((string)($selection['failure_reason']??'gapfill_selection_failed')),sanitize_text_field((string)($selection['error']??'Gap-Fill-Auswahl ist fehlgeschlagen.')));return;}
+         if(sanitize_key((string)($selection['status']??''))!=='complete'){$selection=$this->ebay_selection_process_tick($settings,$selection);$this->ebay_run_capture_component_state(null,array('selection'));}
++        // The already-paused canonical gap-fill is an ordinary source of newly
++        // materialised BUSINESS products: release each independently safe item.
++        $this->ebay_run_publish_ready_business_subset($selection);
+         if(sanitize_key((string)($selection['status']??''))==='complete'){
+             $this->ebay_run_checkpoint_capture_selection($selection,'gapfill');
+             $this->ebay_run_set_phase('coverage_verify','');
+--- a/affiliate-portal-router/includes/trait-ppar-ebay.php
++++ b/affiliate-portal-router/includes/trait-ppar-ebay.php
+@@ -1936,6 +1936,9 @@
+         if (!isset($schedules['ppar_three_hours'])) {
+             $schedules['ppar_three_hours'] = array('interval'=>3 * HOUR_IN_SECONDS, 'display'=>'Alle drei Stunden');
+         }
++        if (!isset($schedules['ppar_two_hours'])) {
++            $schedules['ppar_two_hours'] = array('interval'=>2 * HOUR_IN_SECONDS, 'display'=>'Alle zwei Stunden');
++        }
+         return $schedules;
+     }
+ 
+@@ -1944,7 +1947,7 @@
+      * eBay transport hook so host cron behaviour can no longer affect correctness. */
+     public function retire_ebay_legacy_cron_transport() {
+         if (!function_exists('wp_clear_scheduled_hook')) { return; }
+-        $hooks=array(self::EBAY_CRON_HOOK,self::EBAY_REFRESH_CRON_HOOK,self::EBAY_REFRESH_WORKER_HOOK,self::EBAY_WORKER_HOOK);
++        $hooks=array(self::EBAY_CRON_HOOK,self::EBAY_REFRESH_WORKER_HOOK,self::EBAY_WORKER_HOOK);
+         foreach($hooks as $hook){
+             if (!function_exists('wp_next_scheduled') || wp_next_scheduled($hook)) { wp_clear_scheduled_hook($hook); }
+         }
+@@ -1952,7 +1955,14 @@
+ 
+     public function ensure_ebay_schedule() { $this->retire_ebay_legacy_cron_transport(); }
+     public function reschedule_ebay_cron($force = false) { $this->retire_ebay_legacy_cron_transport(); }
+-    public function ensure_ebay_refresh_schedule() { $this->retire_ebay_legacy_cron_transport(); }
++    /** Independent availability refresh for existing public eBay items.
++     * Discovery still belongs exclusively to the canonical worker. */
++    public function ensure_ebay_refresh_schedule() {
++        if (!function_exists('wp_next_scheduled') || !function_exists('wp_schedule_event')) { return; }
++        if (!wp_next_scheduled(self::EBAY_REFRESH_CRON_HOOK)) {
++            wp_schedule_event(time() + 60, 'ppar_two_hours', self::EBAY_REFRESH_CRON_HOOK);
++        }
++    }
+     public function reschedule_ebay_refresh_cron($force = false) { $this->retire_ebay_legacy_cron_transport(); }
+ 
+     public function ensure_ebay_maintenance_schedule() {
+@@ -9001,6 +9011,139 @@
+ 
+     public function run_ebay_inventory_refresh($manual = false) {
+         return $this->ebay_run_start($manual, 'refresh');
++    }
++
++    private function ebay_public_availability_state_save($key, $state) {
++        update_option($key,$state,false);
++        return serialize(get_option($key,array()))===serialize($state);
++    }
++
++    /** KISS availability pass: source of truth is the already-published BUSINESS
++     * set, not the discovery cursor. Uses the existing getItem and eBay source
++     * methods, no search, no new table, no update to the canonical run state.
++     * Bounded work; extra batches use this SAME WP-Cron hook.
++     */
++    public function ebay_public_availability_tick($continuation = '') {
++        $lock='ppar_ebay_public_availability_lock_v1';
++        if (function_exists('get_transient') && get_transient($lock)) { return array('status'=>'busy'); }
++        if (function_exists('set_transient')) { set_transient($lock,1,90); }
++        try {
++            $settings=$this->ebay_settings();
++            if (empty($settings['enabled']) || empty($settings['business_enabled'])) { return array('status'=>'disabled'); }
++            if((string)($settings['environment']??'production')==='production'
++                && !$this->ebay_deletion_compliance_complete()) {
++                return array('status'=>'compliance_pending');
++            }
++            $key='ppar_ebay_public_availability_state_v1';
++            $state=get_option($key,array());
++            $state=is_array($state)?$state:array();
++            $now=time();
++            if (absint($state['next_due_at']??0)>$now && $continuation!=='continuation') {
++                return array('status'=>'not_due');
++            }
++            global $wpdb;
++            if(!is_object($wpdb) || !method_exists($wpdb,'get_results') || !method_exists($wpdb,'prepare')
++                || !method_exists($this,'ebay_items_table') || !method_exists($this,'output_objects_table')) {
++                return array('status'=>'storage_unavailable');
++            }
++            $cursor=absint($state['cursor']??0);
++            $table=$this->ebay_items_table();$output=$this->output_objects_table();
++            $due=$now+2*HOUR_IN_SECONDS;
++            // Work only on real previously published BUSINESS campaigns. A paused
++            // or failed discovery run never hides or blocks this independent pass.
++            $wpdb->last_error='';
++            $sql=$wpdb->prepare(
++                "SELECT e.* FROM {$table} e WHERE e.id>%d AND e.seller_account_type='BUSINESS'
++                 AND e.source_state='available' AND e.policy_state='allowed'
++                 AND e.status NOT IN ('blocked_manual','blocked_content')
++                 AND (e.item_end_at>0 AND e.item_end_at<=%d OR e.fresh_until<=%d)
++                 AND (e.source_checked_at=0 OR e.source_checked_at<=%d)
++                 AND EXISTS (SELECT 1 FROM {$output} o WHERE o.provider='ebay'
++                   AND o.output_type='product_campaign' AND o.status='published'
++                   AND o.campaign_post_id>0 AND o.creative_identity_hash=e.creative_identity_hash)
++                 ORDER BY e.id ASC LIMIT 5",
++                $cursor,$now,$due,$now-15*MINUTE_IN_SECONDS);
++            $rows=(array)$wpdb->get_results($sql,ARRAY_A);
++            if(trim((string)($wpdb->last_error??''))!=='') { return array('status'=>'storage_error'); }
++            $limit=$continuation==='heartbeat'?2:5;
++            $rows=array_slice($rows,0,$limit);
++            $token=null;$counts=array('checked'=>0,'available'=>0,'ended'=>0,'errors'=>0);
++            $confirmed_hashes=array();
++            foreach($rows as $row){
++                if(absint($row['item_end_at']??0)<=0 || absint($row['item_end_at']??0)>$now){
++                    if($token===null){$token=$this->ebay_access_token($settings);}
++                    if(is_wp_error($token)){
++                        $state['last_error']='auth_unavailable';
++                        $state['running']=1;
++                        $state['next_due_at']=$now+15*MINUTE_IN_SECONDS;
++                        if (!$this->ebay_public_availability_state_save($key,$state)) {
++                            return array('status'=>'storage_error');
++                        }
++                        $this->ebay_public_availability_continue(15*MINUTE_IN_SECONDS);
++                        return array('status'=>'auth_unavailable','checked'=>$counts['checked']);
++                    }
++                }
++                $job=array('last_id'=>0,'summary'=>array('checked'=>0,'requests'=>0,
++                    'transient_errors'=>0,'technical_errors'=>0,'excluded'=>0,'available'=>0,
++                    'ended'=>0,'updated'=>0,'revived'=>0,'replaced'=>0,'errors'=>array()));
++                $this->ebay_refresh_process_row($job,$row,$settings,$token);
++                $counts['checked']++;
++                foreach(array('available','ended') as $field){$counts[$field]+=absint($job['summary'][$field]??0);}
++                $counts['errors']+=absint($job['summary']['transient_errors']??0)+absint($job['summary']['technical_errors']??0);
++                if(absint($job['summary']['available']??0)>0){
++                    $hash=strtolower(sanitize_text_field((string)($row['creative_identity_hash']??'')));
++                    if(preg_match('/^[a-f0-9]{64}$/',$hash)){$confirmed_hashes[$hash]=1;}
++                }
++                // A single unavailable listing never blocks other listed items.
++                $cursor=max($cursor,absint($row['id']??0));
++            }
++            if($confirmed_hashes){
++                $hashes=array_keys($confirmed_hashes);
++                $marks=implode(',',array_fill(0,count($hashes),'%s'));
++                $wpdb->last_error='';
++                $sql=$wpdb->prepare("SELECT DISTINCT campaign_post_id FROM {$output}
++                    WHERE provider='ebay' AND output_type='product_campaign' AND status='published'
++                      AND campaign_post_id>0 AND creative_identity_hash IN ({$marks})",...$hashes);
++                $ids=(array)$wpdb->get_col($sql);
++                if(trim((string)($wpdb->last_error??''))===''){
++                    $this->ebay_public_checkpoint_add_verified_business_ids($ids,'availability_refresh');
++                }
++            }
++            $state['cursor']=$cursor;
++            foreach(array('checked','available','ended','errors') as $field){
++                $state[$field]=absint($state[$field]??0)+$counts[$field];
++            }
++            $state['last_batch_at']=$now;
++            if(count($rows)===$limit){
++                $state['running']=1;
++                $state['next_due_at']=$now+90;
++                if (!$this->ebay_public_availability_state_save($key,$state)) {
++                    return array('status'=>'storage_error');
++                }
++                $this->ebay_public_availability_continue(90);
++                return array('status'=>'continuing','checked'=>$counts['checked']);
++            }
++            // A completed pass does NOT restart discovery, replace checkpoint,
++            // discard source rows, or rewrite the paused run's cursor.
++            $state['running']=0;$state['cursor']=0;
++            $state['completed_at']=$now;
++            $state['next_due_at']=$now+2*HOUR_IN_SECONDS;
++            if (!$this->ebay_public_availability_state_save($key,$state)) {
++                return array('status'=>'storage_error');
++            }
++            return array('status'=>'complete','checked'=>$counts['checked']);
++        } finally {
++            if(function_exists('delete_transient')){delete_transient($lock);}
++        }
++    }
++
++    /** Continue the same availability job after a bounded five-item batch. */
++    private function ebay_public_availability_continue($delay) {
++        if (!function_exists('wp_schedule_single_event') || !function_exists('wp_next_scheduled')) { return; }
++        $args=array('continuation');
++        if (!wp_next_scheduled(self::EBAY_REFRESH_CRON_HOOK,$args)) {
++            wp_schedule_single_event(time()+max(30,absint($delay)),self::EBAY_REFRESH_CRON_HOOK,$args);
++        }
+     }
+ 
+     private function ebay_refresh_due_rows($job, $limit = 10, $settings = null) {
+@@ -10813,6 +10956,23 @@
+                 })();
+                 </script>
+                 <p><strong>BUSINESS:</strong> <?php echo !empty($canonical_routes['business'])?'aktiv':'deaktiviert'; ?>.</p>
++                <?php
++                    // KISS: three existing responsibilities, one read-only status
++                    // line; never claim stored candidates are public cards.
++                    $availability_state=get_option('ppar_ebay_public_availability_state_v1',array());
++                    $availability_state=is_array($availability_state)?$availability_state:array();
++                    $public_checkpoint=$this->ebay_public_checkpoint_load();
++                    $stored_public_count=$this->ebay_public_checkpoint_is_safe($public_checkpoint)
++                        ?count($this->ebay_public_checkpoint_business_ids($public_checkpoint)):0;
++                ?>
++                <p><strong>Getrennte Arbeit:</strong> Recherche <?php echo esc_html($canonical_status); ?>
++                    · gespeicherte eBay-Freigaben <?php echo absint($stored_public_count); ?>
++                    · Produktverfuegbarkeit <?php echo !empty($availability_state['last_batch_at'])
++                        ? esc_html(wp_date('d.m.Y H:i',absint($availability_state['last_batch_at'])))
++                        : 'noch nicht geprueft'; ?>
++                    <?php if (!empty($availability_state['errors'])) : ?> · Prüfprobleme <?php echo absint($availability_state['errors']); ?><?php endif; ?>
++                    <small>(gespeicherte Freigabe ist kein Nachweis, dass jede Kachel gerade sichtbar ist)</small>
++                </p>
+                 <?php if (!empty($canonical_routes['business'])) : ?><p><strong>BUSINESS-Abdeckung im gespeicherten Gesamtlauf:</strong> <?php echo absint($canonical_coverage['covered'] ?? 0); ?>/<?php echo absint($canonical_coverage['required'] ?? $ebay_current_required_count); ?> · fehlend <?php echo count((array)($canonical_coverage['missing'] ?? array())); ?>.<?php if (isset($canonical_coverage['required']) && absint($canonical_coverage['required']) !== $ebay_current_required_count) : ?> <em>Gespeicherter Lauf mit alter Pflichtgruppenliste; aktueller Sollstand: <?php echo absint($ebay_current_required_count); ?>.</em><?php endif; ?><?php if ($canonical_status === 'local_checked') : ?> <em>Nur lokaler Prüflauf: keine neue Veröffentlichung. Diese Zahl beweist nicht, dass ältere öffentliche Produkte gelöscht wurden.</em><?php endif; ?></p><?php endif; ?>
+                 <?php
+                     // One-click report of the EXISTING canonical missing-ID list.
+--- a/affiliate-portal-router/pferdeportal-affiliate-router.php
++++ b/affiliate-portal-router/pferdeportal-affiliate-router.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
+  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
+- * Version: 6.72.320
++ * Version: 6.72.321
+  * Author: OpenAI
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -120,7 +120,7 @@
+     use PPAR_DFS_Amazon_Trait;
+     use PPAR_Digistore24_Trait;
+     use PPAR_Housekeeping_Trait;
+-    const VERSION = '6.72.320';
++    const VERSION = '6.72.321';
+     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
+     const CONTRACT_VERSION = '1.0';
+     const PROVIDER_CONTRACT_VERSION = '2.0';
+@@ -409,6 +409,8 @@
+         // No destructive eBay option rewrite during init; runtime work is gated independently.
+         if (!$is_ajax_request) { add_action('init', array($this, 'ensure_automation_schedule'), 21); }
+         if (!$is_ajax_request) { add_action('init', array($this, 'retire_ebay_legacy_cron_transport'), 22); }
++        if (!$is_ajax_request) { add_action('init', array($this, 'ensure_ebay_refresh_schedule'), 23); }
++        add_action(self::EBAY_REFRESH_CRON_HOOK, array($this, 'ebay_public_availability_tick'), 10, 1);
+         if (!$is_ajax_request) { add_action('init', array($this, 'ensure_ebay_maintenance_schedule'), 24); }
+         // Controlled rebuild: normal page requests must never migrate inventory or
+         // start/continue PRIVATE/BUSINESS recovery. Legacy worker-state adoption is
+--- a/affiliate-portal-router/readme.txt
++++ b/affiliate-portal-router/readme.txt
+@@ -1,4 +1,4 @@
+-V6.72.320 QA7 NUR TEST: Nur manuell pausierter kanonischer eBay-Lauf, nur gespeicherte und aktuell frische BUSINESS-Originalangebote. Bearbeitet die laut gespeichertem Lauf fehlenden Produktfamilien einzeln mit echtem strengen Produktnachweis, ergänzt ggf. bestätigte Mehrfachzuordnungen und verwendet vorhandene Auswahl-/Creative-/Output-Routen. Keine neue eBay-Suche, kein neuer Worker, keine Tabelle. Je ein Produktziel pro Admin-AJAX-Schritt; Fortschritt und Pause in vorhandener WordPress-Option. Keine Erfolgsgarantie bei fehlenden/abgelaufenen Rohdaten; laufender Kanonischer Lauf bleibt pausiert. Erst lokal getestet, nicht in Produktion abgenommen.
++V6.72.321 QA9 NUR TEST: KISS - Recherche, inkrementelle Freigabe und periodische Verfuegbarkeitspruefung getrennt. Vorhandene eBay-Produkte bleiben gespeichert; keine neue Suche, kein Tabellenumbau. Noch keine WordPress-Abnahme.
+ V6.72.318 NUR TEST: Admin-Knoepfe "eBay-Lauf sicher anhalten" und "Diesen Lauf am gespeicherten Stand fortsetzen" im bestehenden eBay-Gesamtworkflow. Stoppsignal bleibt getrennt von laufenden Cursor-Speicherungen erhalten. Aktuell laufendes Arbeitspaket darf zu Ende schreiben; vor dem naechsten Arbeitspaket wird er manuell pausiert (ohne Loeschung). Vorhandene Produktdaten, gespeicherte Coverage und sicherer oeffentlicher Checkpoint bleiben unangetastet. Keine automatische Wiederaufnahme; Fortsetzen verwendet denselben Lauf samt Cursor, ohne Neubeginn. Keine neue Tabelle, kein neuer Worker, keine API. Lokal pruefen; nicht live getestet.
+ V6.72.317 NUR TEST: eBay-BUSINESS Mehrfachzuordnung je Originalangebot: Eine Artikelnummer bleibt ein Quell-Datensatz, weitere separat verifizierte Produktfamilien werden am bestehenden Datensatz gespeichert und in derselben Werbemittel-/Kampagnen-Zuordnung gezielt ausgegeben. Doppelte Treffer werden erst pro Artikelnummer UND Produktfamilie verworfen. Gespeicherte eBay-Treffer werden vor weiteren Abrufen zur Auswahl herangezogen. Im Frontend zaehlt eine Familie nur mit echter, passender Produktseite. Ein Update mit veraendertem Artikel entfernt veraltete Zusatzzuordnungen. Vorhandene Sichtbarkeit und Auswahl werden bei Aktualisierungen erhalten, solange die fachliche Pruefung weiterhin besteht. Keine neue Tabelle, kein neuer Worker oder Cron, keine zusaetzliche Frontend-Datenbank-Abfrage. Ergaenzt den gezielten Luecken-Nachlauf aus 6.72.316; keine Garantie fuer fehlende eBay-Angebote. Nur lokal simuliert, nicht auf Produktions-WordPress abgenommen.
+ V6.72.315 NUR TEST (09.11.2026): Getrennte Anzeige von gezieltem Nachsuchzähler und letztem gespeichertem Gesamtstand, damit kein irreführendes 0/298 nach grün abgeschlossener Erstauswahl erscheint. EINZIGER read-only Bericht im bestehenden eBay-Backend; zeigt die im kanonischen Lauf gespeicherten fehlenden physischen Produktfamilien einzeln samt derzeitigem, ausdrücklich nur abschnittsweisem Suchbefund. CSV-Download im Browser, kein neuer Backend-Endpunkt, keine neue Tabelle, keine Anfrage bei eBay, kein neuer Lauf. Kein Nachweis, dass in eBay keine weiteren Produkte vorhanden sind. Waehrend eines laufenden produktiven Gesamtlaufs kein ungetestetes Pluginwechsel.
+@@ -72,7 +72,7 @@
+ V6.72.236 TEST: Backend-Portalabdeckung hat bisher 329 Ziele x 3 LIVE-Router-Auswahlen synchron ausgefuehrt; jetzt acht Ziele pro Request und vollstaendiger JSON-Export in begrenzten Lesebloecken. PRIVATE-HivePress-Stale-Filter kehrt auf normalen Seiten sofort zurueck; BUSINESS-Checkpoint scannt bei abgeschaltetem PRIVATE keine alten PRIVATE-HivePress-Importe mehr. Kein neuer Worker, keine DB-Tabelle, keine Provider-/Ranking-/BUSINESS-Aenderung. Lokale PHP-/JavaScript-/Mock-Pruefungen, KEINE WP/MariaDB-Host-Abnahme.
+ V6.72.234 TEST: Direkter Rueckbau eBay-PRIVATE aus Affiliate-Zentrale 6.72.233: alte automatische Admin-Init-Loeschung, PRIVATE-HivePress-Backendfunktionen, PRIVATE-Kategorieanlage, PRIVATE-Discovery und PRIVATE-Bedienfelder entfernt. Angehende INDIVIDUAL-Datensaetze werden auch aus alten Laufplaenen hart abgewiesen. BUSINESS/Idealo/Artikel/Banner unveraendert. Bestehende PRIVATE-DB-Altlasten werden durch das Installieren NICHT automatisch geloescht; keine unkontrollierten Datenbankaktionen. Nur Testinstallation; kein behaupteter WordPress-/MariaDB-Livepass.
+ V6.72.233: PRIVATE-only Aufraeumweg ueber admin_init reaktiviert (kein Frontend/AJAX); alter falscher Complete-Marker wird nachverarbeitet; Abschluss erst bei tatsaechlich geleerter Unterkategorie-Struktur. PRIVATE-Neuanlage gesperrt. BUSINESS/idealo/Artikelunveraendert.
+-Stable tag: 6.72.320
++Stable tag: 6.72.321
+ V6.72.232 SICHERHEITSSTOPP: Automatischer PHP-init-Loeschlauf der 6.72.231 entfernt; PRIVAT-eBay bleibt abgeschaltet und im oeffentlichen HivePress-Filter gesperrt; keine eigenstaendige Datenbankbereinigung, keine Datenrestauration.
+ V6.72.230 PRIVATE-EBAY-ENTFERNUNG: PRIVATE-Verkaeuferroute bleibt zwingend aus; auf Adminaufrufen werden ausschliesslich eBay-markierte HivePress-Importanzeigen kontrolliert in den Papierkorb verschoben, manuelle Anzeigen vor Entfernung der Unterkategorien der Hauptkategorie Private Anzeigen zugeordnet. Alle Unterkategorien werden geloescht, Stammkategorie und native Anzeigen bleiben. Die PRIVAT-HivePress-Frontend-/Preview-Hooks und Einrichtungsoberflaeche sind abgekoppelt; BUSINESS, idealo, Artikel, Banner, Kategorien der Redaktion, CSS/JS bleiben unveraendert. Idempotente, zeitbegrenzte Bereinigung ohne neuen Cron/Runner; Fortschritt in der eBay-Fachseite.
+ V6.72.226 PRODUKTAUSGABE KISS (LOKALER TESTKANDIDAT): Stellt die vertragliche Reihenfolge exakt -> weiterer Themenkreis -> zuletzt nur bestaetigt freigegebene Pferdeprodukte wieder her. Kategorie-/Hub-/Journal-Produktplaetze werden bei zu wenigen Treffern nur aus dem vorhandenen indexierten Kampagnenbestand ergaenzt. Auf normalen Einzelbeitraegen bleibt exakt verlangte Produktidentitaet strikt; fuer allgemeine Beitraege werden zuletzt gepruefte eBay-/idealo-Angebote zugelassen. Anbieter koennen innerhalb derselben Relevanzstufe gemischt werden; spaetere Amazon-Einbindung bleibt getrennt. Bestehende Sperren fuer eBay-BUSINESS-Quelle, private Anzeigen, Quelle, Health, Veto, Bild, Partner und idealo-48h-Grenze bleiben aktiv. Der vorhandene idealo-Hintergrundrefresh muss veraltete unveraenderte Feeds vollstaendig neu pruefen, statt dauerhaft per Hash abzubrechen. Kein Umbau von Imports, Renderer, Kategorien, Bannern, Provideradaptern, Tracking, Datenbanktabellen oder Template. Keine neue Frontend-Providerabfrage. Tests sind lokale Funktionssimulation; kein behaupteter Live-/WP-/MariaDB-PASS.
