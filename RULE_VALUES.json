@@ -51,7 +51,13 @@
       "authoring_rule": "Quellen bleiben nachweisbar. Der Quellenmarker selbst enthält niemals sichtbaren Text. Quellen- und Markennamen dürfen im lesbaren Artikel nur als sinnvoller Bestandteil eines vollständigen Satzes stehen, nicht lose angehängt.",
       "marker_visible_content_forbidden": true
     },
-    "visible_links_exact": 3
+    "visible_links_exact": 3,
+    "visible_links_min": 1,
+    "visible_links_max": 3,
+    "mandatory_link_roles": [
+      "parent_category"
+    ],
+    "link_count_policy": "MEANINGFUL_1_TO_3_SINGLE_PREWRITER_DECISION"
   },
   "heading": {
     "abstract_meta_patterns": [
@@ -231,7 +237,9 @@
         "parent_category",
         "semantic_related",
         "further_information"
-      ]
+      ],
+      "minimum_required_count": 1,
+      "maximum_allowed_count": 3
     },
     "lists": {
       "minimum_items_in_one_list": 4,
