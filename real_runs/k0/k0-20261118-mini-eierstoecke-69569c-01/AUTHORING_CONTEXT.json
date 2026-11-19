@@ -171,8 +171,8 @@
       },
       {
         "role": "further_information",
-        "href": "/wissen/wissen-buecher-und-ratgeber/pferdehaltung-grundlagen/",
-        "anchor": "Pferdehaltung Grundlagen",
+        "href": "/gesundheit/",
+        "anchor": "Gesundheit",
         "block": "further_information"
       }
     ],
@@ -186,7 +186,7 @@
         "active": true
       },
       {
-        "href": "/wissen/wissen-buecher-und-ratgeber/pferdehaltung-grundlagen/",
+        "href": "/gesundheit/",
         "active": true
       }
     ],
