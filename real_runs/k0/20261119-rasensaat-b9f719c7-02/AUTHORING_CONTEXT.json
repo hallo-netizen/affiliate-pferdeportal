@@ -1,0 +1,173 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Geeignete Rasensaat für die Nachsaat von Pferdeweiden",
+    "target_keyword": "rasensaat für pferdeweiden",
+    "category": "nachsaat-fuer-pferdeweiden-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "6aaa1c49db5b9b2c1eb536170adf525cbfea2ef9cb5ba54bf9e99cc79560277e"
+  },
+  "content_profile": {
+    "search_intent": "Saatgut – Weideanlage"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Landwirtschaftskammer NRW – Qualitätsstandardmischungen für Pferdegrünland",
+          "source_url": "https://www.landwirtschaftskammer.de/riswick/versuche/pflanzenbau/gruenland/veroeffentlichungen/qsm-pferdeweiden.htm"
+        },
+        {
+          "source_title": "University of Minnesota Extension – Managing established horse pastures",
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/managing-established-horse-pastures"
+        }
+      ],
+      "claims": [
+        "Nutzung und Nachsaat verändern die Zusammensetzung der Pferdeweide.",
+        "Zur Nachsaat gibt es spezielle Qualitätsstandardmischungen.",
+        "Saatgut muss mit tiefem Verbiss und selektivem Fressen von Pferden zurechtkommen.",
+        "Stark genutzte Auslaufflächen benötigen häufig wiederholte Reparatursaat und Pflege.",
+        "Neu eingesäte Weiden müssen vor einer erneuten Beweidung erst anwachsen."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "rasensaat für pferdeweiden",
+      "topic": "Geeignete Rasensaat für die Nachsaat von Pferdeweiden",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "nachsaat-fuer-pferdeweiden-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Eine für Nachsaat auf Pferdeweiden geeignete Gras-Saatgutmischung nach Nutzung und Zustand der Grasnarbe auswählen.",
+      "decision_criteria": [
+        "Nachsaat statt vollständiger Neuansaat",
+        "Pferdegerechte Arten und tiefen Verbiss berücksichtigen",
+        "Lücken und Belastung der Fläche bewerten",
+        "Anwachsen vor Wiederbeweidung sicherstellen"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.landwirtschaftskammer.de/riswick/versuche/pflanzenbau/gruenland/veroeffentlichungen/qsm-pferdeweiden.htm",
+        "source_title": "Landwirtschaftskammer NRW – Qualitätsstandardmischungen für Pferdegrünland",
+        "evidence_text": "Später beeinflussen Nutzung und Pflege, zu der auch die Nachsaat gehört, die Bestandsentwicklung.",
+        "evidence_text_sha256": "0f573eaa4e561c9a9fe2ae7c30224fba3b443d193df82538329aef6480dd9102",
+        "statement": "Nutzung und Nachsaat verändern die Zusammensetzung der Pferdeweide.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.landwirtschaftskammer.de/riswick/versuche/pflanzenbau/gruenland/veroeffentlichungen/qsm-pferdeweiden.htm",
+        "source_title": "Landwirtschaftskammer NRW – Qualitätsstandardmischungen für Pferdegrünland",
+        "evidence_text": "Für die häufigsten Einsatzbereiche - Schnittnutzung, Mähweide, Intensivweide, Nachsaat - haben sich langjährig empfohlene Qualitätsstandardmischungen bewährt",
+        "evidence_text_sha256": "c6f66be9974d7c371f481e42373deb4756b60d85e1241ef1d34f97048bb3436c",
+        "statement": "Zur Nachsaat gibt es spezielle Qualitätsstandardmischungen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.landwirtschaftskammer.de/riswick/versuche/pflanzenbau/gruenland/veroeffentlichungen/qsm-pferdeweiden.htm",
+        "source_title": "Landwirtschaftskammer NRW – Qualitätsstandardmischungen für Pferdegrünland",
+        "evidence_text": "Saatgutmischungen für Pferdegrünland müssen die speziellen Nutzungseigenheiten der Tiere wie das stark selektierende Graseverhalten und den tiefen Verbiss der Pferde bei Weidehaltung berücksichtigen.",
+        "evidence_text_sha256": "a960db9de466999bbcc3211ec9a1e2ca0d283b00c6efd84dadf070a48be3da5e",
+        "statement": "Saatgut muss mit tiefem Verbiss und selektivem Fressen von Pferden zurechtkommen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.landwirtschaftskammer.de/riswick/versuche/pflanzenbau/gruenland/veroeffentlichungen/qsm-pferdeweiden.htm",
+        "source_title": "Landwirtschaftskammer NRW – Qualitätsstandardmischungen für Pferdegrünland",
+        "evidence_text": "Diese Flächen können nur durch wiederholte Reparatursaaten in Verbindung mit weiteren Pflegemaßnahmen im akzeptablen Zustand gehalten werden.",
+        "evidence_text_sha256": "8ac902433568c78c3ea8a82720160d31c1b63fec28aaefd9f9d69c66fb738af6",
+        "statement": "Stark genutzte Auslaufflächen benötigen häufig wiederholte Reparatursaat und Pflege.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/managing-established-horse-pastures",
+        "source_title": "University of Minnesota Extension – Managing established horse pastures",
+        "evidence_text": "Keep your horses off newly seeded pastures until the grasses have established and you have mowed two to three times.",
+        "evidence_text_sha256": "5dec58d6855e3ab1e98cd3c1a13f3e8308606978a1d593b1837d911d0cb7ed48",
+        "statement": "Neu eingesäte Weiden müssen vor einer erneuten Beweidung erst anwachsen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/nachsaat-fuer-pferdeweiden-beratung/",
+        "anchor": "nachsaat-fuer-pferdeweiden-beratung",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/nachsaat-fuer-pferdeweiden-beratung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "nachsaat-fuer-pferdeweiden-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Rasensaat",
+      "Nachsaat",
+      "Pferdeweiden",
+      "Saatgutmischung",
+      "Grasnarbe",
+      "Aussaat"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine vierzeilige Übersicht bietet konkreten Mehrwert bei den praktischen Entscheidungen zu rasensaat für pferdeweiden."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
