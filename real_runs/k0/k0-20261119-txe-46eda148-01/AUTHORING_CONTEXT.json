@@ -1,0 +1,166 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Leergewicht und Zuladung beim Pferdeanhänger verstehen",
+    "target_keyword": "pferdeanhänger gewicht",
+    "category": "recht-finanzen-organisation",
+    "article_type": "Beratung",
+    "plan_slot": "6dbb36aeb4e7ec842ef6dc154ad26cfab10c4857a0ce0c695e18104bdfc00666"
+  },
+  "content_profile": {
+    "search_intent": "Zulassung – Gewicht"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Zul%C3%A4ssige_Gesamtmasse",
+          "source_title": "Wikipedia – Zulässige Gesamtmasse"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Nutzlast",
+          "source_title": "Wikipedia – Nutzlast"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Anh%C3%A4ngelast",
+          "source_title": "Wikipedia – Anhängelast"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Pferdeanh%C3%A4nger",
+          "source_title": "Wikipedia – Pferdeanhänger"
+        }
+      ],
+      "claims": [
+        "Die zulässige Gesamtmasse ergibt sich aus dem Leergewicht und der maximalen Zuladung.",
+        "Die Nutzlast bezeichnet das maximal zulässige Gewicht der Ladung eines Transportmittels.",
+        "Die zulässige Anhängelast begrenzt die Last, die ein Zugfahrzeug ziehen darf.",
+        "Das Leergewicht eines Pferdeanhängers hängt unter anderem von Modell und Aufbau ab."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "pferdeanhänger gewicht",
+      "topic": "Leergewicht und Zuladung beim Pferdeanhänger verstehen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "recht-finanzen-organisation",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Leergewicht, zulässige Gesamtmasse, Zuladung und zulässige Anhängelast eines Pferdeanhängers verständlich unterscheiden.",
+      "decision_criteria": [
+        "Leergewicht und mögliche Abweichung von Ausstattungsangaben",
+        "Zuladung aus zulässiger Gesamtmasse und Leermasse einordnen",
+        "Grenze der zulässigen Anhängelast des Zugfahrzeugs berücksichtigen"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Zul%C3%A4ssige_Gesamtmasse",
+        "source_title": "Wikipedia – Zulässige Gesamtmasse",
+        "evidence_text": "Die zulässige Gesamtmasse (zGM) bezeichnet die Summe aus Leergewicht und maximaler Zuladung eines Kraftfahrzeuges oder einer Fahrzeugkombination.",
+        "evidence_text_sha256": "41e7c87d47e2058d286f7ce9853b2d895f4d6bad8a90de121a41963ecf34d041",
+        "statement": "Die zulässige Gesamtmasse ergibt sich aus dem Leergewicht und der maximalen Zuladung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Nutzlast",
+        "source_title": "Wikipedia – Nutzlast",
+        "evidence_text": "Die Nutzlast entspricht dem maximal zulässigen Gewicht der Ladung eines Transportmittels oder dem aktuellen Ladungsgewicht eines Transportmittels.",
+        "evidence_text_sha256": "a3c38708971b55650d297599464b49fcf0df00ddf9f9bf854a15461492f8cbad",
+        "statement": "Die Nutzlast bezeichnet das maximal zulässige Gewicht der Ladung eines Transportmittels.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Anh%C3%A4ngelast",
+        "source_title": "Wikipedia – Anhängelast",
+        "evidence_text": "Die zulässige Anhängelast ist die maximal zulässige Last, die ein Kraftfahrzeug (PKW, LKW, Zugmaschine etc.) mittels eines (oder selten mehrerer) Anhänger hinter sich her ziehen darf.",
+        "evidence_text_sha256": "80c3c62d25e0fd2fe71786c15bd4686b6519ece8e17c38641eaf0a304942da21",
+        "statement": "Die zulässige Anhängelast begrenzt die Last, die ein Zugfahrzeug ziehen darf.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://de.wikipedia.org/wiki/Pferdeanh%C3%A4nger",
+        "source_title": "Wikipedia – Pferdeanhänger",
+        "evidence_text": "Das Leergewicht von Pferdeanhängern liegt zwischen ca. 600 kg bei Leichtbaumodellen und etwa 800 kg bei 2-Pferdeanhängern mit Polyester- oder Aluaufbau.",
+        "evidence_text_sha256": "5b611a3cd3940a1f4b9235d5aa27f16e7f5ca79355056581361215d0afe61951",
+        "statement": "Das Leergewicht eines Pferdeanhängers hängt unter anderem von Modell und Aufbau ab.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/recht-finanzen-organisation/",
+        "anchor": "Recht Finanzen Organisation",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/recht-finanzen-organisation/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "recht-finanzen-organisation",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Leergewicht",
+      "Zuladung",
+      "Gesamtmasse",
+      "Pferdeanhänger",
+      "Anhängelast",
+      "Gewicht"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine Übersicht ordnet die entscheidenden Kriterien mit eigenem Mehrwert."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
