@@ -1,0 +1,39 @@
+{
+  "build": "0.4.5-wip",
+  "installer_released": false,
+  "wp_end_to_end_passed": false,
+  "zip_sha256": "3f89a9d81fc9e9982e701667affd80066b2b324ae0b0a40807c5621e115ae603",
+  "zip_files": 173,
+  "php_files": 117,
+  "total_qa_assertions_technical": 89,
+  "real_61_ready": 0,
+  "modified_from_0_4_4": [
+    {
+      "path": "texterstellung/README-TESTINSTALLATION.txt",
+      "old_sha256": "08591ba4c60c23d8e56aacc8dea3cb571bafdbc4a678a19eac8ced8ed8c65838",
+      "new_sha256": "cf6d6ca4f0c244239c88d03bc3d7c24b589c0a938c8429276794bb2828401cdc"
+    },
+    {
+      "path": "texterstellung/includes/class-txe-legacy-source-bridge.php",
+      "old_sha256": "fa539b3649c04646d8f1342b21c6d2df0e23da072f879bc771f847d85d192784",
+      "new_sha256": "64528146078694449f693701cacb5c31e483d7affb979d38fa9ed588cdb0219f"
+    },
+    {
+      "path": "texterstellung/texterstellung.php",
+      "old_sha256": "1278c76762bcf58943c1f5d55e9b053cd31bbb61b3a8e6093c1ba8647226bd34",
+      "new_sha256": "531cd14db2c80a54cd12e360ae57695da9250d7ded18257021af15ade7b18232"
+    }
+  ],
+  "preexisting_modified_pste_original_since_0_4_3": [
+    "texterstellung/original/pste/includes/class-pste-admin.php"
+  ],
+  "category_monitor": "read-only frozen proposals, no category creation",
+  "category_owner": "one-time per source as recorded in existing TXE order; new source gets first turn; daily cron no editorial judgement",
+  "not_proven": [
+    "actual test WordPress with original raw 61 topic rows",
+    "full automatic orig SEO/PAA parity",
+    "actual K0 81-rule text generation",
+    "actual WP draft import from real text",
+    "category additions + technical binding of waiting items"
+  ]
+}

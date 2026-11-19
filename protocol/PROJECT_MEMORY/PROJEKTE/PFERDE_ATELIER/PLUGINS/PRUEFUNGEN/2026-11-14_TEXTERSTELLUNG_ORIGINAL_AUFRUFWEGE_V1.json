@@ -1,0 +1,508 @@
+{
+  "purpose": "STATIC_CALLSITE_EVIDENCE_NOT_RUNTIME_OR_FULL_PRESERVATION_PROOF",
+  "source": "unchanged QA archives from project library, extracted locally",
+  "checks": [
+    {
+      "section": "bootstrap",
+      "original": "PSTE",
+      "file": "portal-seo-topic-engine.php",
+      "file_sha256": "220ba276b3d1d77dba607e7ee7ffaa12f92dc1d1440bbf45b5cc544f63dd1d16",
+      "pattern": "PSTE_Plugin::init\\(\\);",
+      "lines": [
+        169
+      ],
+      "count": 1,
+      "meaning": "Original-PSTE startet den bestehenden Pluginablauf"
+    },
+    {
+      "section": "bootstrap",
+      "original": "PSERC",
+      "file": "portal-seo-editorial-plan-compiler.php",
+      "file_sha256": "1c94e9fcf9473d997510ef169e0559cbafca4d4ffd99e885830f9064e00e183d",
+      "pattern": "PSERC_Plugin::init\\(\\);",
+      "lines": [
+        62
+      ],
+      "count": 1,
+      "meaning": "Original-PSERC startet seinen Ablauf"
+    },
+    {
+      "section": "automatic",
+      "original": "PSTE",
+      "file": "includes/class-pste-plugin.php",
+      "file_sha256": "c09de5e04303a5d51343e6fe4dd3aa6d4ad3873797672680d291c8d515de8055",
+      "pattern": "PSTE_Research_Driver::register\\(\\);",
+      "lines": [
+        28
+      ],
+      "count": 1,
+      "meaning": "PSTE registriert Research-Driver"
+    },
+    {
+      "section": "automatic",
+      "original": "PSTE",
+      "file": "includes/class-pste-research-driver.php",
+      "file_sha256": "c85fd3e2d38394e2bbd9e4c98042a3777acbd39574337777a9f6382efe07807e",
+      "pattern": "add_action\\(PSTE_RESEARCH_DRIVER_CRON_HOOK,\\[self::class,\\'tick\\'\\]\\)",
+      "lines": [
+        19
+      ],
+      "count": 1,
+      "meaning": "Verbindung zum WP-Auftragssystem"
+    },
+    {
+      "section": "automatic",
+      "original": "PSTE",
+      "file": "includes/class-pste-research-driver.php",
+      "file_sha256": "c85fd3e2d38394e2bbd9e4c98042a3777acbd39574337777a9f6382efe07807e",
+      "pattern": "add_action\\('init',\\[self::class,'maybeKickExisting'\\],50\\)",
+      "lines": [
+        22
+      ],
+      "count": 1,
+      "meaning": "Wiederaufnahme/Anstoß bei eingehender WP-Anfrage"
+    },
+    {
+      "section": "automatic",
+      "original": "PSTE",
+      "file": "includes/class-pste-research-driver.php",
+      "file_sha256": "c85fd3e2d38394e2bbd9e4c98042a3777acbd39574337777a9f6382efe07807e",
+      "pattern": "PSTE_Breadth_Research_Queue::advance\\(",
+      "lines": [
+        170
+      ],
+      "count": 1,
+      "meaning": "Server arbeitet Themenstapel fort"
+    },
+    {
+      "section": "automatic",
+      "original": "PSTE",
+      "file": "includes/class-pste-research-driver.php",
+      "file_sha256": "c85fd3e2d38394e2bbd9e4c98042a3777acbd39574337777a9f6382efe07807e",
+      "pattern": "PSTE_Research_Job::advance\\(",
+      "lines": [
+        183
+      ],
+      "count": 1,
+      "meaning": "Server arbeitet Einzelrecherche fort"
+    },
+    {
+      "section": "automatic",
+      "original": "PSTE",
+      "file": "includes/class-pste-breadth-research-queue.php",
+      "file_sha256": "e0d36d01eb316285bf632b3b5fe2f3e459b2c10fe40cf4372eee852e01c9d1af",
+      "pattern": "PSTE_Research_Job::advance\\(",
+      "lines": [
+        500
+      ],
+      "count": 1,
+      "meaning": "Stapel delegiert an Originalrecherche"
+    },
+    {
+      "section": "automatic",
+      "original": "PSTE",
+      "file": "includes/class-pste-research-job.php",
+      "file_sha256": "aed246c645c630b447caa24ce8bf51257ec033c6a53906527b9a13944498afac",
+      "pattern": "if\\(\\$phase==='QUESTIONS'\\)return self::advanceQuestionsTask\\(",
+      "lines": [
+        120
+      ],
+      "count": 1,
+      "meaning": "Google-Fragen sind normale Phase der Recherche"
+    },
+    {
+      "section": "paa",
+      "original": "PSTE",
+      "file": "includes/class-pste-research-job.php",
+      "file_sha256": "aed246c645c630b447caa24ce8bf51257ec033c6a53906527b9a13944498afac",
+      "pattern": "postPeopleAlsoAskTask\\(",
+      "lines": [
+        214
+      ],
+      "count": 1,
+      "meaning": "PAA-API-Job wird erstellt"
+    },
+    {
+      "section": "paa",
+      "original": "PSTE",
+      "file": "includes/class-pste-research-job.php",
+      "file_sha256": "aed246c645c630b447caa24ce8bf51257ec033c6a53906527b9a13944498afac",
+      "pattern": "peopleAlsoAskTaskReady\\(",
+      "lines": [
+        216
+      ],
+      "count": 1,
+      "meaning": "PAA-Status wird abgefragt"
+    },
+    {
+      "section": "paa",
+      "original": "PSTE",
+      "file": "includes/class-pste-research-job.php",
+      "file_sha256": "aed246c645c630b447caa24ce8bf51257ec033c6a53906527b9a13944498afac",
+      "pattern": "getPeopleAlsoAskTask\\(",
+      "lines": [
+        217
+      ],
+      "count": 1,
+      "meaning": "PAA-Ergebnis wird abgerufen"
+    },
+    {
+      "section": "paa",
+      "original": "PSTE",
+      "file": "includes/class-pste-research-job.php",
+      "file_sha256": "aed246c645c630b447caa24ce8bf51257ec033c6a53906527b9a13944498afac",
+      "pattern": "PSTE_Repository::recordCostOnce\\(",
+      "lines": [
+        225,
+        241
+      ],
+      "count": 2,
+      "meaning": "PAA-Kosten werden gegen doppelte Erfassung abgesichert"
+    },
+    {
+      "section": "automatic",
+      "original": "PSTE",
+      "file": "includes/class-pste-research-job.php",
+      "file_sha256": "aed246c645c630b447caa24ce8bf51257ec033c6a53906527b9a13944498afac",
+      "pattern": "PSTE_Runner::researchFinalizePrepareCandidateBatch\\(",
+      "lines": [
+        345
+      ],
+      "count": 1,
+      "meaning": "Fertigstellung/Redaktion arbeitet chargenweise"
+    },
+    {
+      "section": "automatic",
+      "original": "PSTE",
+      "file": "includes/class-pste-research-job.php",
+      "file_sha256": "aed246c645c630b447caa24ce8bf51257ec033c6a53906527b9a13944498afac",
+      "pattern": "PSTE_Runner::completeResearchFinalizeJob\\(",
+      "lines": [
+        391
+      ],
+      "count": 1,
+      "meaning": "Abschluss wird im alten Bestand verbucht"
+    },
+    {
+      "section": "stock",
+      "original": "PSTE",
+      "file": "includes/class-pste-repository.php",
+      "file_sha256": "9584264a8f692c7b69a92894bd2b7a7d8ce01f263d5f1cc0c3d7413c2d0cd80a",
+      "pattern": "self::table\\('topic_pool'\\)",
+      "lines": [
+        37,
+        83,
+        153,
+        165,
+        218,
+        277,
+        293,
+        315,
+        318,
+        344,
+        386,
+        482,
+        538,
+        603,
+        674,
+        691,
+        749,
+        757,
+        1216,
+        1265
+      ],
+      "count": 70,
+      "meaning": "Original speichert Keyword- und Themenpool"
+    },
+    {
+      "section": "stock",
+      "original": "PSTE",
+      "file": "includes/class-pste-repository.php",
+      "file_sha256": "9584264a8f692c7b69a92894bd2b7a7d8ce01f263d5f1cc0c3d7413c2d0cd80a",
+      "pattern": "self::table\\('topic_assignments'\\)",
+      "lines": [
+        61,
+        165,
+        232,
+        366,
+        605,
+        1208,
+        1891,
+        2090,
+        2284,
+        2298,
+        2353,
+        2421,
+        3312,
+        3425,
+        3437,
+        3706
+      ],
+      "count": 16,
+      "meaning": "Original speichert Themenzuordnungen"
+    },
+    {
+      "section": "stock",
+      "original": "PSTE",
+      "file": "includes/class-pste-repository.php",
+      "file_sha256": "9584264a8f692c7b69a92894bd2b7a7d8ce01f263d5f1cc0c3d7413c2d0cd80a",
+      "pattern": "self::table\\('topic_identity'\\)",
+      "lines": [
+        68,
+        230,
+        231,
+        272,
+        293,
+        356,
+        359,
+        538,
+        932
+      ],
+      "count": 9,
+      "meaning": "Original speichert Themenidentitäten"
+    },
+    {
+      "section": "stock",
+      "original": "PSTE",
+      "file": "includes/class-pste-repository.php",
+      "file_sha256": "9584264a8f692c7b69a92894bd2b7a7d8ce01f263d5f1cc0c3d7413c2d0cd80a",
+      "pattern": "self::table\\('topic_occurrences'\\)",
+      "lines": [
+        53,
+        165,
+        232,
+        293,
+        365,
+        538,
+        604,
+        738,
+        1176,
+        1181,
+        1201,
+        2086,
+        2295,
+        2349,
+        2418,
+        3425,
+        3437
+      ],
+      "count": 17,
+      "meaning": "Original speichert Fundstellen/Wiederholungen"
+    },
+    {
+      "section": "stock",
+      "original": "PSTE",
+      "file": "includes/class-pste-breadth-research-queue.php",
+      "file_sha256": "e0d36d01eb316285bf632b3b5fe2f3e459b2c10fe40cf4372eee852e01c9d1af",
+      "pattern": "PSTE_Repository::reanalyzeRetainedBacklogBatch\\(",
+      "lines": [
+        646,
+        667
+      ],
+      "count": 2,
+      "meaning": "Stapel kann vorhandenen Datenbestand erneut aufgreifen"
+    },
+    {
+      "section": "title",
+      "original": "PSTE",
+      "file": "includes/class-pste-mini-workflow.php",
+      "file_sha256": "c59d1957305d735e7870875f07340b5e831d467e2fd9dd0b76dd5fedf6402637",
+      "pattern": "add_action\\('admin_post_pste_mini_title_repair_import', \\[self::class, 'importTitleCorrections'\\]\\)",
+      "lines": [
+        17
+      ],
+      "count": 1,
+      "meaning": "Original-Titelrücklauf ist als WP-Aktion gebunden"
+    },
+    {
+      "section": "title",
+      "original": "PSTE",
+      "file": "includes/class-pste-mini-workflow.php",
+      "file_sha256": "c59d1957305d735e7870875f07340b5e831d467e2fd9dd0b76dd5fedf6402637",
+      "pattern": "PSTE_Repository::table\\(\\'topic_pool\\'\\)",
+      "lines": [
+        54,
+        531,
+        550,
+        725,
+        764,
+        876,
+        1144,
+        1936
+      ],
+      "count": 8,
+      "meaning": "Titelworkflow greift auf Altbestand zu"
+    },
+    {
+      "section": "title",
+      "original": "PSTE",
+      "file": "includes/class-pste-mini-workflow.php",
+      "file_sha256": "c59d1957305d735e7870875f07340b5e831d467e2fd9dd0b76dd5fedf6402637",
+      "pattern": "PSERC_Production_Reader::snapshot\\(",
+      "lines": [
+        740
+      ],
+      "count": 1,
+      "meaning": "Titelrücklauf hat PSERC-Abhängigkeit"
+    },
+    {
+      "section": "k0",
+      "original": "PSERC",
+      "file": "includes/class-pserc-plugin.php",
+      "file_sha256": "58228e57526dc561e542dc6b654aca3f58e28204bec4552090c82d9ceb40e801",
+      "pattern": "PSERC_Admin::init\\(\\);",
+      "lines": [
+        9
+      ],
+      "count": 1,
+      "meaning": "Original-PSERC meldet Adminbereich an"
+    },
+    {
+      "section": "k0",
+      "original": "PSERC",
+      "file": "includes/class-pserc-admin.php",
+      "file_sha256": "cb489f2797f31da24d2a539313330f33be349a262cdd0db5cbf4f02c401be0ec",
+      "pattern": "PSERC_Plan_Snapshot_Store::materializeReadyBatch\\(",
+      "lines": [
+        93,
+        108
+      ],
+      "count": 2,
+      "meaning": "K0-Manifest basiert auf gebundenem Originalbestand"
+    },
+    {
+      "section": "k0",
+      "original": "PSERC",
+      "file": "includes/class-pserc-admin.php",
+      "file_sha256": "cb489f2797f31da24d2a539313330f33be349a262cdd0db5cbf4f02c401be0ec",
+      "pattern": "PSERC_Metadata_Boundary::validateBatch\\(",
+      "lines": [
+        93,
+        109
+      ],
+      "count": 2,
+      "meaning": "K0-Manifest wird technisch kontrolliert"
+    },
+    {
+      "section": "k0",
+      "original": "PSERC",
+      "file": "includes/class-pserc-admin.php",
+      "file_sha256": "cb489f2797f31da24d2a539313330f33be349a262cdd0db5cbf4f02c401be0ec",
+      "pattern": "PSERC_Plan_Snapshot_Store::manifestForSelectedBatch\\(",
+      "lines": [
+        111
+      ],
+      "count": 1,
+      "meaning": "K0-Manifest erfasst Originalmetadaten und Herkunft"
+    },
+    {
+      "section": "k0",
+      "original": "PSERC",
+      "file": "includes/class-pserc-admin.php",
+      "file_sha256": "cb489f2797f31da24d2a539313330f33be349a262cdd0db5cbf4f02c401be0ec",
+      "pattern": "PSERC_Stable_Json::hash\\(",
+      "lines": [
+        114,
+        120
+      ],
+      "count": 2,
+      "meaning": "K0-Manifest besitzt Original-Integreitätsnachweis"
+    },
+    {
+      "section": "import",
+      "original": "PSERC",
+      "file": "includes/class-pserc-plugin.php",
+      "file_sha256": "58228e57526dc561e542dc6b654aca3f58e28204bec4552090c82d9ceb40e801",
+      "pattern": "PSERC_System4_Import::init\\(\\);",
+      "lines": [
+        12
+      ],
+      "count": 1,
+      "meaning": "Originalimport wird im Backend eingebunden"
+    },
+    {
+      "section": "import",
+      "original": "PSERC",
+      "file": "includes/class-pserc-system4-import.php",
+      "file_sha256": "05a521d9caf5ac94e5c1a940c9e9f76d48ed09ca7bbb2694cad2d5c87f3e9878",
+      "pattern": "PPM679_Editorial_Plan_Runtime_Gate::record_readback\\(",
+      "lines": [
+        101
+      ],
+      "count": 1,
+      "meaning": "Original-WordPress-Import bindet PPM fest ein"
+    },
+    {
+      "section": "import",
+      "original": "PSERC",
+      "file": "includes/class-pserc-system4-import.php",
+      "file_sha256": "05a521d9caf5ac94e5c1a940c9e9f76d48ed09ca7bbb2694cad2d5c87f3e9878",
+      "pattern": "'post_status'=>'draft'",
+      "lines": [
+        87,
+        98,
+        257
+      ],
+      "count": 3,
+      "meaning": "Originalimport erstellt Entwürfe"
+    },
+    {
+      "section": "txe",
+      "original": "TXE",
+      "file": "texterstellung.php",
+      "file_sha256": "ea7693ce37b95870497b885d00708ad81b39d1a7931aba00bfea1d836902eb3d",
+      "pattern": "->keywordSuggestionsDriverStep\\(",
+      "lines": [
+        348
+      ],
+      "count": 1,
+      "meaning": "0.4.1 führt Keywordvorschläge per eigenem Routinepfad aus"
+    },
+    {
+      "section": "txe",
+      "original": "TXE",
+      "file": "texterstellung.php",
+      "file_sha256": "ea7693ce37b95870497b885d00708ad81b39d1a7931aba00bfea1d836902eb3d",
+      "pattern": "function approveResearch\\(",
+      "lines": [
+        372
+      ],
+      "count": 1,
+      "meaning": "0.4.1 verwendet eigene manuelle Freigabemethode"
+    },
+    {
+      "section": "txe",
+      "original": "TXE",
+      "file": "texterstellung.php",
+      "file_sha256": "ea7693ce37b95870497b885d00708ad81b39d1a7931aba00bfea1d836902eb3d",
+      "pattern": "get_option\\('pste_mini_keyword_roundtrip_v1'",
+      "lines": [
+        516
+      ],
+      "count": 1,
+      "meaning": "0.4.1 liest nur ältere SEO-Freigaben"
+    },
+    {
+      "section": "txe",
+      "original": "TXE",
+      "file": "texterstellung.php",
+      "file_sha256": "ea7693ce37b95870497b885d00708ad81b39d1a7931aba00bfea1d836902eb3d",
+      "pattern": "function importDrafts\\(",
+      "lines": [
+        286
+      ],
+      "count": 1,
+      "meaning": "0.4.1 implementiert einen eigenen Import"
+    }
+  ],
+  "required_source_checks_pass": true,
+  "unproven_or_missing_0_4_1_direct_calls": {
+    "TXE_original_cron_driver_bound": false,
+    "TXE_calls_original_PAA_task": false,
+    "TXE_calls_original_automatic_editor": false,
+    "TXE_queries_original_topic_pool": false,
+    "TXE_calls_original_psERC_import": false,
+    "TXE_calls_original_ppm_sync": false
+  },
+  "note": "No plugin ZIP, PHP source or WordPress data modified. Regex checks do not prove dynamic calls, all dependencies, or runtime behavior. PPM archive indexed on GitHub but contents not readable; PPM gate remains unverified."
+}

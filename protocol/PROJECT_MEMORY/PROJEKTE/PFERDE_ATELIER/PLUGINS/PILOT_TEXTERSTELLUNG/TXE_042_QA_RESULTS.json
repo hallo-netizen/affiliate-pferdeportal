@@ -1,0 +1,54 @@
+{
+  "plugin": "Texterstellung 0.4.2 Test",
+  "status": "TEST_ONLY_NOT_LIVE",
+  "zip_sha256": "788271f4ff0d2596d7fa1dabb142973caa55205261cac065c1231bce444be9b7",
+  "unchanged_original_pste_pserc_php_and_contract_files": 164,
+  "php_syntax_pass": 117,
+  "checks_passed": 94,
+  "checks_total": 94,
+  "cases": {
+    "61_diagnostic_and_authorized_stored_metadata": {
+      "passed": 24,
+      "total": 24,
+      "failures": {}
+    },
+    "old_20_editorial_titles_k0_draft_import": {
+      "passed": 25,
+      "total": 25,
+      "failures": {}
+    },
+    "original_seo_owner_20": {
+      "passed": 27,
+      "total": 27,
+      "failures": {}
+    },
+    "no_secondary_plan_hooks": {
+      "passed": 15,
+      "total": 15,
+      "failures": {}
+    },
+    "start_unconfirmed": {
+      "passed": 1,
+      "total": 1
+    },
+    "start_confirmed": {
+      "passed": 1,
+      "total": 1
+    },
+    "start_old-active": {
+      "passed": 1,
+      "total": 1
+    }
+  },
+  "real_user_diagnostic": {
+    "61_historical_frei_recognized": 61,
+    "source_rows_missing": "61 remain held, no invented values",
+    "12_confirmed_source_rows_injected_in_mock": "12 ready, 49 held",
+    "61_confirmed_source_rows_injected_in_mock": "61 ready, 61 mock drafts; data hypothetical, not on the live WP site"
+  },
+  "actual_WP_DB_validated": false,
+  "actual_K0_81_rules_executed": false,
+  "actual_DataForSEO_request_run": false,
+  "no_real_site_changes": true,
+  "required_followup": "Upload ZIP to existing separate WP testsite, replace 0.4.1, click existing old FREI import, inspect readiness/diagnosis. Do not run new research."
+}

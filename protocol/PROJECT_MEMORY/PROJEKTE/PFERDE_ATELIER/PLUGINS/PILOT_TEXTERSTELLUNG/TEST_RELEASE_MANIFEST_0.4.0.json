@@ -1,0 +1,36 @@
+{
+  "name": "Texterstellung",
+  "version": "0.4.0-test",
+  "release_scope": "ISOLATED_WORDPRESS_TEST_ONLY_NOT_LIVE",
+  "zip_filename": "Texterstellung_0.4.0_VOLLER_WORKFLOW_NUR_TEST.zip",
+  "zip_size_bytes": 34346,
+  "zip_sha256": "8a5c2faf39081e05d5610bb4757e9d4f6d8eaaa8f52ca0771007be0ab6c8c3c5",
+  "wordPress_menu": "top-level Texterstellung with submenu stations",
+  "workflow": [
+    "Recherche",
+    "Redaktionsplan / externe einmalige Entscheidung",
+    "Sofortartikel",
+    "externe Titelerstellung",
+    "K0 Export",
+    "K0 Rückimport als Entwurf",
+    "Entwicklerdiagnose"
+  ],
+  "complete_wp_or_k0_live_test": false,
+  "automatic_full_pste_editorial_classification_parity": false,
+  "test_note": "151 unique local PHP stage checks, plus separate fatal/admin action & download verification; no actual WordPress execution",
+  "source_files": {
+    "README-TESTINSTALLATION.txt": "2adffa9c903d38f1ceb9874af8287e1e73473de2e271f9635c70c33fc34b3598",
+    "contracts/intent-first-title-governance-v1.json": "437d27e2619b1a2e29c5a771f604d0c01bb8496e45b00aaaa5813f67a2544008",
+    "includes/class-txe-credentials.php": "a1ee15dd4cd9b5ee186d7e4a6bc894a9485e992db25001d2eb4745ab2dce7fa6",
+    "includes/class-txe-dataforseo-client.php": "136b2122e5df4225500b08bae66d7aa2b53e4506cc5cff2081b4507e00dd49d7",
+    "includes/class-txe-diagnose.php": "bee60f1e1dd376f71e419e6c05a3aaa1e804571106fba119bc1bfc46457e1670",
+    "includes/class-txe-normalizer.php": "d886f0228b8381b63bd01ca38efb6bf812f6b48a662113203965e7206d299e5a",
+    "includes/class-txe-secret-store.php": "d732c9e1c43b87fec4cc4a20987f1d6856067d80f2b0b6f813d66d338483177a",
+    "texterstellung.php": "cca201541de839b40a664726161d617d3b50ae3554c836edcfaba14cf8c73ec4"
+  },
+  "original_untouched": {
+    "PSTE_0.57.144.50_QA": "7fc98a17e4c2319a66afd23c0ad944a07b4492e7a9982933205f29069fdcd121",
+    "PSERC_0.28.71_QA": "fd80f7ec3451b437be0eaeedabf2142c5eb1b5130939f7b8dba3b3a2f9d2b59f",
+    "Texterstellung_0.3.0_TEST": "9fe7d4a3e4f168bace01f014ff4f358db2f01b6b8b9e532734f2085bfbb91974"
+  }
+}

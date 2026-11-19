@@ -1,0 +1,205 @@
+{
+  "date": "2026-11-14",
+  "kind": "ORIGINAL_FUNCTION_RUN_AND_SOURCE_CONTRACT_CHECK__NO_PLUGIN_BUILD",
+  "scope": "unchanged original PSERC 0.28.71 QA PHP modules, isolated WP and PPM mocks, never live, not actual PPM code",
+  "source_versions": {
+    "PSERC": "0.28.71 QA not live verified",
+    "TXE": "0.4.1 test"
+  },
+  "archive_sha256": {
+    "PSERC": "fd80f7ec3451b437be0eaeedabf2142c5eb1b5130939f7b8dba3b3a2f9d2b59f",
+    "TXE": "f34fe278eaca382ca99c7f537463644dbd1508b9fb4198980e173df59edae280"
+  },
+  "source_files_and_qa_sha256": {
+    "psERC_import": {
+      "relative_path": "source/pserc/portal-seo-editorial-plan-compiler/includes/class-pserc-system4-import.php",
+      "sha256": "05a521d9caf5ac94e5c1a940c9e9f76d48ed09ca7bbb2694cad2d5c87f3e9878",
+      "size": 24957
+    },
+    "psERC_identity": {
+      "relative_path": "source/pserc/portal-seo-editorial-plan-compiler/includes/class-pserc-plan-slot-identity.php",
+      "sha256": "be879535a391e588570954b72a4ba6bf7fd4015c0c249e9899843d102376df5b",
+      "size": 1637
+    },
+    "psERC_stable_json": {
+      "relative_path": "source/pserc/portal-seo-editorial-plan-compiler/includes/class-pserc-stable-json.php",
+      "sha256": "16ed006846395a486d8fa5250bd398df3d53060ac5bfd8e95f92ddfd6cf46a8d",
+      "size": 1238
+    },
+    "txe_independent_import": {
+      "relative_path": "source/txe/texterstellung/texterstellung.php",
+      "sha256": "ea7693ce37b95870497b885d00708ad81b39d1a7931aba00bfea1d836902eb3d",
+      "size": 66222
+    },
+    "qa_import_case_script": {
+      "relative_path": "tests/QA_ORIGINAL_PSERC_IMPORT_20261114.php",
+      "sha256": "200cb299896c4d6725a3d58271e1ac7dce6f31f84e6fea9754f5fb83442403af",
+      "size": 6469
+    },
+    "qa_batch20_case_script": {
+      "relative_path": "tests/QA_ORIGINAL_PSERC_IMPORT_BATCH20_20261114.php",
+      "sha256": "f5538616ea2e9330337bf4039e54cfefd5837511eb020cbfac0b95b21e4ecbe6",
+      "size": 6621
+    }
+  },
+  "tests": [
+    {
+      "file": "QA_ORIGINAL_PSERC_IMPORT_with_mock_PPM.json",
+      "run_mode": "normal",
+      "pass": 11,
+      "total": 11,
+      "results": [
+        {
+          "test": "compact_original_valid",
+          "pass": true
+        },
+        {
+          "test": "wrong_contract_rejected",
+          "pass": true
+        },
+        {
+          "test": "missing_keyword_rejected",
+          "pass": true
+        },
+        {
+          "test": "invalid_slot_rejected",
+          "pass": true
+        },
+        {
+          "test": "wrong_article_identity_rejected",
+          "pass": true
+        },
+        {
+          "test": "unsafe_slug_rejected",
+          "pass": true
+        },
+        {
+          "test": "duplicate_batch_slot_rejected",
+          "pass": true
+        },
+        {
+          "test": "unknown_category_blocks_before_write",
+          "pass": true
+        },
+        {
+          "test": "draft_created_only_and_ppm_synced",
+          "pass": true
+        },
+        {
+          "test": "same_payload_no_second_post_reuse",
+          "pass": true
+        },
+        {
+          "test": "ppm_failure_rolls_back_new_draft",
+          "pass": true
+        }
+      ],
+      "no_wordpress_live": true,
+      "no_real_ppm_code": true
+    },
+    {
+      "file": "QA_ORIGINAL_PSERC_IMPORT_without_PPM.json",
+      "run_mode": "no-ppm",
+      "pass": 8,
+      "total": 8,
+      "results": [
+        {
+          "test": "compact_original_valid",
+          "pass": true
+        },
+        {
+          "test": "wrong_contract_rejected",
+          "pass": true
+        },
+        {
+          "test": "missing_keyword_rejected",
+          "pass": true
+        },
+        {
+          "test": "invalid_slot_rejected",
+          "pass": true
+        },
+        {
+          "test": "wrong_article_identity_rejected",
+          "pass": true
+        },
+        {
+          "test": "unsafe_slug_rejected",
+          "pass": true
+        },
+        {
+          "test": "duplicate_batch_slot_rejected",
+          "pass": true
+        },
+        {
+          "test": "missing_ppm_blocks_no_wp_writes",
+          "pass": true
+        }
+      ],
+      "no_wordpress_live": true,
+      "no_real_ppm_code": true
+    },
+    {
+      "file": "QA_ORIGINAL_PSERC_IMPORT_BATCH20_20261114.json",
+      "run_mode": "20_rows_13_plus_7_replay_conflicts_rollback",
+      "pass": 8,
+      "total": 8,
+      "results": [
+        {
+          "test": "original_13_of_20_as_drafts",
+          "pass": true
+        },
+        {
+          "test": "original_remaining_7_import_without_dup",
+          "pass": true
+        },
+        {
+          "test": "original_twenty_draft_status_not_public",
+          "pass": true
+        },
+        {
+          "test": "original_full_replay_reuses_all_twenty",
+          "pass": true
+        },
+        {
+          "test": "original_replay_changed_content_blocks",
+          "pass": true
+        },
+        {
+          "test": "original_replay_title_drift_blocks",
+          "pass": true
+        },
+        {
+          "test": "original_new_slug_collision_blocks",
+          "pass": true
+        },
+        {
+          "test": "original_ppm_failure_rolls_back_21st",
+          "pass": true
+        }
+      ],
+      "no_wordpress_live": true,
+      "no_real_ppm_code": true
+    }
+  ],
+  "total_pass": 27,
+  "static_original_vs_txe_contract_checks": {
+    "legacy_import_calls_ppm_record_readback": true,
+    "legacy_import_blocks_absent_ppm": true,
+    "legacy_import_sets_publish_blocked": true,
+    "legacy_import_creates_draft": true,
+    "legacy_import_has_global_collision_preflight": true,
+    "legacy_import_rolls_back_on_ppm_sync_failure": true,
+    "txe_calls_legacy_import": false,
+    "txe_calls_ppm_readback": false,
+    "txe_writes_legacy_ppm_meta": false,
+    "txe_writes_own_meta": true
+  },
+  "conclusion": "Original importer has important original safety behavior that TXE does not invoke. Existing method must be reused unchanged, not rewritten. PPM binary is in GitHub but was not decoded/reviewed. Real WordPress+PPM+K0 end-to-end remains missing; release blocked.",
+  "explicit_limits": [
+    "Original PHP methods executed with synthetic WordPress and PPM functions, not real web server",
+    "One PHP process simulates separate requests by resetting only original importer static collision cache between calls",
+    "No original ZIP or plugin PHP modified",
+    "No user data, website, live WordPress, GitHub plugin packages modified"
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "base": "Texterstellung_0.4.1_TEST_INSTALLIEREN.zip",
+  "base_sha256": "f34fe278eaca382ca99c7f537463644dbd1508b9fb4198980e173df59edae280",
+  "status": "QA_SOURCE_NOT_INSTALL_APPROVED",
+  "changed_existing_files": [
+    "texterstellung/texterstellung.php"
+  ],
+  "unmodified_existing_files": [
+    "texterstellung/README-TESTINSTALLATION.txt",
+    "texterstellung/includes/class-txe-dataforseo-client.php",
+    "texterstellung/includes/class-txe-diagnose.php",
+    "texterstellung/includes/class-txe-normalizer.php",
+    "texterstellung/includes/class-txe-secret-store.php",
+    "texterstellung/includes/class-txe-credentials.php",
+    "texterstellung/contracts/intent-first-title-governance-v1.json"
+  ],
+  "unmodified_original_files": {
+    "class-pserc-stable-json.php": "16ed006846395a486d8fa5250bd398df3d53060ac5bfd8e95f92ddfd6cf46a8d",
+    "class-pserc-plan-slot-identity.php": "be879535a391e588570954b72a4ba6bf7fd4015c0c249e9899843d102376df5b",
+    "class-pserc-system4-import.php": "05a521d9caf5ac94e5c1a940c9e9f76d48ed09ca7bbb2694cad2d5c87f3e9878"
+  },
+  "technical_adapter": "TXE order state -> unchanged PSERC importPayload -> TXE readback",
+  "not_approved_for_release": [
+    "PPM real runtime unavailable",
+    "WP E2E not executed",
+    "SEO and research unchanged and incomplete"
+  ],
+  "changed_main_diff": "stored as unified diff in adjacent file",
+  "source_zip_sha256": "f866f0e14eaf44ccfee9c4695b818c14734957a65ae9c556c8031e2e9aad4adc",
+  "zip_crc_ok": true,
+  "php_syntax_all_ok": true,
+  "qa_tests": [
+    {
+      "mode": "ppm",
+      "passed": 8,
+      "tests": [
+        {
+          "name": "original_import_creates_exactly_one_draft",
+          "pass": true
+        },
+        {
+          "name": "original_import_preserves_txe_state",
+          "pass": true
+        },
+        {
+          "name": "reimport_uses_original_dedup",
+          "pass": true
+        },
+        {
+          "name": "unknown_order_never_writes",
+          "pass": true
+        },
+        {
+          "name": "changed_keyword_never_writes",
+          "pass": true
+        },
+        {
+          "name": "ppm_failure_rolls_back_new_draft",
+          "pass": true
+        },
+        {
+          "name": "twenty_unique_and_one_duplicate_independent_import",
+          "pass": true
+        },
+        {
+          "name": "batch_all_original_publish_blocks_preserved",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "mode": "no-ppm",
+      "passed": 1,
+      "tests": [
+        {
+          "name": "missing_original_ppm_blocks_all_writes",
+          "pass": true
+        }
+      ]
+    }
+  ],
+  "changes": "Starts from 0.4.1. Original import re-used; no change to Recherche, Keyword, Titel, Sofort, K0 or Diagnose. One new TXE technical adapter for unchanged original PSERC import, plus repeated upload batch collision check.",
+  "known_incomplete": "Automatic PSTE SEO/PAA/legacy topic pool not yet restored; real PPM and WordPress E2E not verified.",
+  "release_allowed": false
+}

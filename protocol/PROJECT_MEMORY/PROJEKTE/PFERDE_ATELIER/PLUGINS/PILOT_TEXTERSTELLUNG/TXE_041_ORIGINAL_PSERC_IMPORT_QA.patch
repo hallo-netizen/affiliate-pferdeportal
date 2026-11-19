@@ -1,0 +1,170 @@
+--- Texterstellung_0.4.1/texterstellung.php
++++ Texterstellung_Originalimport_QA/texterstellung.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Texterstellung
+  * Description: Portalneutrale Texterstellung mit integrierter Fehlerdiagnose: Recherche, Freigaberegal, Sofortartikel, Titeldateien, K0-Export, Entwurfsimport. Isolierte Testinstallation.
+- * Version: 0.4.1-test
++ * Version: 0.4.1-originalimport-qa
+  * Requires PHP: 8.1
+  */
+ if (!defined('ABSPATH')) { exit; }
+@@ -11,6 +11,10 @@
+ require_once __DIR__.'/includes/class-txe-credentials.php';
+ require_once __DIR__.'/includes/class-txe-dataforseo-client.php';
+ require_once __DIR__.'/includes/class-txe-diagnose.php';
++// Existing PSERC import functions: unchanged originals. No second importer implementation.
++require_once __DIR__.'/original/pserc/class-pserc-stable-json.php';
++require_once __DIR__.'/original/pserc/class-pserc-plan-slot-identity.php';
++require_once __DIR__.'/original/pserc/class-pserc-system4-import.php';
+ 
+ 
+ final class TXE_Workshop {
+@@ -261,81 +265,49 @@
+     }
+     public static function lastBatch(): array {self::access();$s=self::state();if(!is_array($s['last_batch']??null))throw new RuntimeException('NO_PREVIOUS_BATCH');return $s['last_batch'];}
+ 
+-    private static function normalizedArticles(array $json): array {
+-        $contract=self::text($json['contract']??'');
+-        if(!in_array($contract,[self::IMPORT_CONTRACT,'SYSTEM4_WORDPRESS_HANDOFF_V1','SYSTEM4_7_ARTICLE_CHAT_HANDOFF_V1'],true))throw new RuntimeException('RETURN_CONTRACT_CHANGED');
+-        $raw=$json['articles']??null;if(!is_array($raw)||!count($raw)||count($raw)>50)throw new RuntimeException('RETURN_ARTICLES_INVALID');
+-        $out=[];$seen=[];$seenSlugs=[];$seenTitles=[];
+-        foreach($raw as $r){if(!is_array($r))throw new RuntimeException('RETURN_ROW_INVALID');
+-            $pc=(array)($r['production_context']??[]);$pi=(array)($pc['production_plan_item']??[]);$runtime=(array)($pi['runtime_order']??[]);
+-            $v=['article_id'=>self::text($r['article_id']??$pi['canonical_article_id']??''),
+-                'slug'=>self::text($r['slug']??$runtime['slug']??''),
+-                'title'=>self::text($r['title']??''),'target_keyword'=>self::text($r['target_keyword']??''),
+-                'article_type'=>self::text($r['article_type']??''),'category'=>self::text($r['category']??''),
+-                'plan_slot'=>self::text($r['plan_slot']??''),'body'=>(string)($r['body']??'')];
+-            foreach($v as $k=>$val)if(trim($val)==='')throw new RuntimeException('RETURN_FIELD_MISSING:'.$k);
+-            if(!hash_equals(self::slot($v['article_id']),$v['plan_slot']))throw new RuntimeException('RETURN_ARTICLE_SLOT_MISMATCH');
+-            if(!preg_match('/^[a-f0-9]{64}$/D',$v['plan_slot'])||isset($seen[$v['plan_slot']]))throw new RuntimeException('RETURN_DUPLICATE_SLOT');
+-            if(sanitize_title($v['slug'])!==$v['slug'])throw new RuntimeException('RETURN_SLUG_NOT_CANONICAL');
+-            $titleKey=function_exists('mb_strtolower')?mb_strtolower($v['title'],'UTF-8'):strtolower($v['title']);
+-            if(isset($seenSlugs[$v['slug']])||isset($seenTitles[$titleKey]))throw new RuntimeException('RETURN_DUPLICATE_SLUG_OR_TITLE');
+-            $seen[$v['plan_slot']]=true;$seenSlugs[$v['slug']]=true;$seenTitles[$titleKey]=true;$out[]=$v;
+-        }
+-        return $out;
+-    }
++    /** Keep the existing TXE order reservation, but delegate WordPress writes
++     *  to the unchanged PSERC importer and its original PPM publish protection.
++     *  No own content assessment, no own replacement importer.
++     */
+     public static function importDrafts(array $json): array {
+-        $rows=self::normalizedArticles($json);
+-        return self::mutate(static function(array $s)use($rows){
+-            $prepared=[];
++        $verified=PSERC_System4_Import::normalizePayload($json);
++        if(empty($verified['ok']))throw new RuntimeException('ORIGINAL_PSERC_IMPORT_BLOCKED:'.(string)($verified['reason_codes'][0]??$verified['status']??'UNKNOWN'));
++        $rows=(array)$verified['rows'];
++        return self::mutate(static function(array $s)use($rows,$json){
++            $orderBySlot=[];
++            foreach($s['orders'] as $id=>$o){
++                $slot=(string)($o['plan_slot']??'');
++                if($slot!=='' && isset($orderBySlot[$slot]))throw new RuntimeException('ORDER_SLOT_DUPLICATE');
++                if($slot!=='')$orderBySlot[$slot]=(string)$id;
++            }
+             foreach($rows as $v){
+-                $found=null;
+-                foreach($s['orders'] as $id=>$o)if(hash_equals((string)($o['plan_slot']??''),$v['plan_slot'])){$found=$id;break;}
+-                if($found===null)throw new RuntimeException('RETURN_NOT_IN_THIS_QUEUE');
+-                $o=$s['orders'][$found];
+-                if(!in_array((string)$o['status'],['EXPORTIERT','IMPORTIERT'],true))throw new RuntimeException('RETURN_NOT_EXPORTED');
+-                foreach(['title','target_keyword','category','article_type'] as $k)if((string)$o[$k]!==$v[$k])throw new RuntimeException('RETURN_APPROVAL_MISMATCH:'.$k);
+-                if(($o['article_id']??'')!=='' && !hash_equals((string)$o['article_id'],$v['article_id']))throw new RuntimeException('RETURN_ARTICLE_ID_MISMATCH');
+-                $term=get_term_by('slug',$v['category'],'category');
+-                if(!is_object($term)||!isset($term->term_id))throw new RuntimeException('RETURN_CATEGORY_MISSING');
+-                $existing=get_posts(['post_type'=>'post','post_status'=>'any','posts_per_page'=>2,'fields'=>'ids','meta_key'=>'_texterstellung_order_id','meta_value'=>$found]);
+-                $postId=$existing?(int)$existing[0]:0;
+-                if($postId){
+-                    $post=get_post($postId);
+-                    if(!$post||$post->post_status!=='draft'||$post->post_title!==$v['title']||$post->post_name!==$v['slug']||hash('sha256',(string)$post->post_content)!==hash('sha256',$v['body'])
+-                        ||(string)get_post_meta($postId,'_texterstellung_plan_slot',true)!==$v['plan_slot']
+-                        ||array_values(array_map('intval',(array)wp_get_post_categories($postId)))!==[(int)$term->term_id])throw new RuntimeException('RETURN_EXISTING_DRAFT_CHANGED');
+-                    if((int)($o['post_id']??0)>0 && (int)$o['post_id']!==$postId)throw new RuntimeException('RETURN_POST_ID_MISMATCH');
+-                }else{
+-                    $collision=get_page_by_path($v['slug'],OBJECT,'post');
+-                    if(is_object($collision))throw new RuntimeException('RETURN_SLUG_COLLIDES_WITH_OTHER_POST');
++                $slot=$v['plan_slot'];
++                if(!isset($orderBySlot[$slot]))throw new RuntimeException('RETURN_NOT_IN_THIS_QUEUE');
++                $o=$s['orders'][$orderBySlot[$slot]];
++                if(!in_array((string)($o['status']??''),['EXPORTIERT','IMPORTIERT'],true))throw new RuntimeException('RETURN_NOT_EXPORTED');
++                foreach(['title','target_keyword','category','article_type'] as $key){
++                    if((string)($o[$key]??'')!==$v[$key])throw new RuntimeException('RETURN_APPROVAL_MISMATCH:'.$key);
+                 }
+-                $prepared[]=['id'=>$found,'row'=>$v,'term_id'=>(int)$term->term_id,'post_id'=>$postId];
+-            }
+-            $new=[];$result=[];
+-            try{
+-                foreach($prepared as $p){
+-                    $id=$p['id'];$v=$p['row'];$postId=$p['post_id'];
+-                    if(!$postId){
+-                        $newPost=['post_type'=>'post','post_status'=>'draft','post_title'=>$v['title'],
+-                            'post_name'=>$v['slug'],'post_content'=>$v['body'],'post_category'=>[$p['term_id']],
+-                            'meta_input'=>['_texterstellung_order_id'=>$id,'_texterstellung_plan_slot'=>$v['plan_slot'],
+-                                '_texterstellung_publish_blocked'=>'1','_texterstellung_article_type'=>$v['article_type'],
+-                                '_texterstellung_target_keyword'=>$v['target_keyword']]];
+-                        $postId=wp_insert_post(function_exists('wp_slash')?wp_slash($newPost):$newPost,true);
+-                        if(is_wp_error($postId)||!(int)$postId)throw new RuntimeException('DRAFT_INSERT_FAILED');
+-                        $postId=(int)$postId;$new[]=$postId;
+-                    }
+-                    $post=get_post($postId);
+-                    if(!$post||$post->post_status!=='draft'||$post->post_name!==$v['slug']||$post->post_title!==$v['title']
+-                        ||hash('sha256',(string)$post->post_content)!==hash('sha256',$v['body'])
+-                        ||(string)get_post_meta($postId,'_texterstellung_order_id',true)!==$id
+-                        ||(string)get_post_meta($postId,'_texterstellung_plan_slot',true)!==$v['plan_slot']
+-                        ||array_values(array_map('intval',(array)wp_get_post_categories($postId)))!==[(int)$p['term_id']])throw new RuntimeException('DRAFT_READBACK_FAILED');
+-                    $s['orders'][$id]['status']='IMPORTIERT';$s['orders'][$id]['post_id']=$postId;
+-                    $result[]=$postId;
+-                }
+-                self::changed($s);return ['state'=>$s,'result'=>['imported'=>count($result),'draft_ids'=>$result,'created'=>count($new)]];
+-            }catch(Throwable $e){foreach(array_reverse($new) as $postId)wp_delete_post($postId,true);throw $e;}
++                if(($o['article_id']??'')!==''&&!hash_equals((string)$o['article_id'],$v['article_id']))throw new RuntimeException('RETURN_ARTICLE_ID_MISMATCH');
++            }
++            $result=PSERC_System4_Import::importPayload($json);
++            if(empty($result['ok'])){
++                $codes=(array)($result['reason_codes']??[]);
++                throw new RuntimeException('ORIGINAL_PSERC_IMPORT_BLOCKED:'.(string)($codes[0]??$result['status']??'UNKNOWN'));
++            }
++            $readback=[];
++            foreach((array)($result['readback']??[]) as $rb){
++                if(!empty($rb['ok']))$readback[(string)($rb['plan_slot']??'')]=(int)($rb['post_id']??0);
++            }
++            foreach($rows as $v){
++                $postId=$readback[$v['plan_slot']]??0;
++                if($postId<=0)throw new RuntimeException('ORIGINAL_IMPORT_READBACK_MISSING');
++                $id=$orderBySlot[$v['plan_slot']];
++                $s['orders'][$id]['status']='IMPORTIERT';
++                $s['orders'][$id]['post_id']=$postId;
++            }
++            self::changed($s);
++            return ['state'=>$s,'result'=>['imported'=>count($rows),'draft_ids'=>array_values($readback),'created'=>count((array)($result['created_post_ids']??[]))]];
+         });
+     }
+     /** One external research provider request. No downstream editor or forced automatic approval. */
+@@ -632,9 +604,16 @@
+         $rows=$payload['articles']??null;
+         if(!is_array($rows)||!array_is_list($rows)||!count($rows)||count($rows)>50)throw new RuntimeException('RETURN_ARTICLES_INVALID');
+         $out=['imported'=>0,'created'=>0,'draft_ids'=>[],'held'=>[]];
++        $seenSlots=[];$seenSlugs=[];$seenTitles=[];
+         foreach($rows as $i=>$row){
+             try{
++                $validated=PSERC_System4_Import::normalizePayload(['contract'=>$contract,'articles'=>[$row]]);
++                if(empty($validated['ok']))throw new RuntimeException('ORIGINAL_PSERC_IMPORT_BLOCKED:'.(string)($validated['reason_codes'][0]??$validated['status']??'UNKNOWN'));
++                $item=$validated['rows'][0];
++                $slot=$item['plan_slot'];$slug=$item['slug'];$titleKey=sanitize_title($item['title']);
++                if(isset($seenSlots[$slot])||isset($seenSlugs[$slug])||isset($seenTitles[$titleKey]))throw new RuntimeException('DUPLICATE_IN_RETURN_BATCH');
+                 $one=self::importDrafts(['contract'=>$contract,'articles'=>[$row]]);
++                $seenSlots[$slot]=true;$seenSlugs[$slug]=true;$seenTitles[$titleKey]=true;
+                 $out['imported']+=(int)$one['imported'];$out['created']+=(int)$one['created'];
+                 $out['draft_ids']=array_merge($out['draft_ids'],(array)$one['draft_ids']);
+             }catch(Throwable $e){
+@@ -772,7 +751,7 @@
+     public static function page(): void {
+         if(!current_user_can('manage_options'))wp_die('Nicht erlaubt');
+         $view=self::view();
+-        echo '<div class="wrap"><h1>Texterstellung <small style="font-size:13px">0.4.1 – Testinstallation</small></h1>';
++        echo '<div class="wrap"><h1>Texterstellung <small style="font-size:13px">0.4.1 Originalimport – QA</small></h1>';
+         if (!self::permitted()) {
+             echo '<div class="notice notice-warning"><p><strong>Testmodus noch nicht freigeschaltet.</strong> Das Plugin ist installiert, aber es wird nichts recherchiert, exportiert oder importiert. Es sind keine WordPress-Konfigurationsänderungen erforderlich.</p></div>';
+             echo '<h2>Diese Testinstallation einmalig bestätigen</h2><p>Prüfe die Adresse: <strong>'.esc_html(home_url('/')).'</strong>. Bestätige ausschließlich, wenn es sich um eine <strong>getrennte Testinstallation</strong> handelt. <strong>Niemals auf der Live-Website bestätigen.</strong></p>';

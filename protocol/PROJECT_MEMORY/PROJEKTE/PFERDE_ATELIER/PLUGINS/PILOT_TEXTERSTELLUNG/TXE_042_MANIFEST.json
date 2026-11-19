@@ -1,0 +1,45 @@
+{
+  "name": "Texterstellung 0.4.2 TEST",
+  "status": "TEST_WORDPRESS_ONLY_NOT_LIVE_APPROVED",
+  "baseline_zip": "Texterstellung_0.4.1_Planfrei_NUR_TESTWORDPRESS.zip",
+  "baseline_sha256": "6dd3033029b4c49f0bb277ffba28e949c82fc1f52f73a15af13e31f809a6bcf1",
+  "output_zip": "Texterstellung_0.4.2_Altfreigaben_Korrektur_NUR_TESTWORDPRESS.zip",
+  "output_sha256": "788271f4ff0d2596d7fa1dabb142973caa55205261cac065c1231bce444be9b7",
+  "zip_bytes": 837691,
+  "original_file_count": 172,
+  "new_file_count": 173,
+  "unchanged_count": 169,
+  "original_pste_pserc_files_unchanged": 164,
+  "changed_files": [
+    "texterstellung/README-TESTINSTALLATION.txt",
+    "texterstellung/includes/class-txe-diagnose.php",
+    "texterstellung/texterstellung.php"
+  ],
+  "new_files": [
+    "texterstellung/includes/class-txe-legacy-source-bridge.php"
+  ],
+  "removed_files": [],
+  "php_files": 117,
+  "php_syntax_pass": 117,
+  "php_syntax_fail": [],
+  "source_sha256": {
+    "texterstellung/README-TESTINSTALLATION.txt": "d55f53b1cd55e6a9f0119fb658cfbf31ca51aaef4399a54507abc1ed92a40ad0",
+    "texterstellung/includes/class-txe-diagnose.php": "4ec8475c6e9fcfa7161d4cb43c67058230a81b9e77d568cfc9f409967d63d81f",
+    "texterstellung/texterstellung.php": "db3c1009a2c310d77cb4ee61a08dc37018ced0ef6bb108a284275c3c9c9070de",
+    "texterstellung/includes/class-txe-legacy-source-bridge.php": "ba8572a5d9c8f4118f4369c150b4d96b1068da90fe2698bfc7dc0fdab67529b0"
+  },
+  "old_sha256": {
+    "texterstellung/README-TESTINSTALLATION.txt": "e90e236339db1c7bdcbf13b5aef3c1ffed9a7a51826c785906348223e1fd1ffa",
+    "texterstellung/includes/class-txe-diagnose.php": "d5a77c3a52c763ae27bebb2c44fb04ecdc61b75f0a8e95412c7355315694a299",
+    "texterstellung/texterstellung.php": "1230db28c113d5831374637e1d1c0b6bca0a85ac3a32413f9da4f33336cba309"
+  },
+  "constraints": [
+    "Original PSTE+PSERC unchanged",
+    "No SEO redecision",
+    "No invented category or type",
+    "No previous WP data deletion",
+    "No background research triggered by installation",
+    "No K0 real provider test",
+    "Real 61 saved authorizations may remain held if no approved category/type source exists"
+  ]
+}

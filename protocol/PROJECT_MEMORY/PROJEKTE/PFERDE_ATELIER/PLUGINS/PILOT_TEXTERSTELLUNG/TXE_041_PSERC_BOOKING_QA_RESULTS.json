@@ -1,0 +1,52 @@
+{
+  "test_scope": "LOCAL_PHP_QA_NOT_WORDPRESS_E2E",
+  "archive": "Texterstellung_0.4.1_PSERC_Originalplatz_QA_NICHT_INSTALLIEREN.zip",
+  "sha256": "f7812d7e56f043717712d017eefcec51e229d83f95e13537ac26a3cd4d41f959",
+  "preserved_existing_files": 133,
+  "unchanged_original_modules_added": 6,
+  "php_syntax_pass": 97,
+  "tests": [
+    {
+      "check": "original_slot_allocator",
+      "exit_code": 0,
+      "pass": 8,
+      "total": 8,
+      "sha256": "06c53505d539863957cf3a86a5aa0bf0561cc77f75b14eb3ddaf2eee99b5b60d",
+      "passed": true
+    },
+    {
+      "check": "wordpress_drafts_20",
+      "exit_code": 0,
+      "pass": 14,
+      "total": 14,
+      "sha256": "7d0ddd8a292ef7d308d1bab38db694021710d2de53fd1061821a7011182dbd1c",
+      "passed": true
+    },
+    {
+      "check": "safe_start_unconfirmed",
+      "exit_code": 0,
+      "pass": true,
+      "total": null,
+      "sha256": "8bd94c89cc5a26ed8188dd5df644ceff4b6e434b960ed0cf5dae7f664ca40228",
+      "passed": true
+    },
+    {
+      "check": "safe_start_confirmed",
+      "exit_code": 0,
+      "pass": true,
+      "total": null,
+      "sha256": "8bd94c89cc5a26ed8188dd5df644ceff4b6e434b960ed0cf5dae7f664ca40228",
+      "passed": true
+    },
+    {
+      "check": "old_plugin_conflict",
+      "exit_code": 0,
+      "pass": true,
+      "total": null,
+      "sha256": "8bd94c89cc5a26ed8188dd5df644ceff4b6e434b960ed0cf5dae7f664ca40228",
+      "passed": true
+    }
+  ],
+  "release_allowed": false,
+  "open": "Actual PPM 6.7.9 runtime and real WP/K0 end-to-end missing"
+}
