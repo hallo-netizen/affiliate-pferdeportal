@@ -1,0 +1,209 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 10,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Darf man Pferdeweiden mit Gülle düngen?",
+        "target_keyword": "darf man pferdeweiden mit gülle düngen",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "37ec17fd7283ea8dfa1b08c6de8627d54c9c7c980fc86102134e2d3d85b7c76d"
+      },
+      {
+        "title": "Die passende Gräsermischung für eine Pferdeweide finden",
+        "target_keyword": "gräsermischung für pferdeweiden",
+        "category": "nachsaat-fuer-pferdeweiden-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "ad9d554e17f2b21e17ff381014c895d0b63c6c0b7861bc083bea0f2f6a20f505"
+      },
+      {
+        "title": "Worauf sollte ich achten, bevor ich ein Pferd kaufe?",
+        "target_keyword": "pferd kaufen",
+        "category": "recht-finanzen-organisation",
+        "article_type": "Beratung",
+        "plan_slot": "3f3bcbdd48f3d91bfa02330fb5ac6d34595c80836b5a688b85fcb24350c7c386"
+      },
+      {
+        "title": "Ein Pferd mit stimmigen Proportionen Schritt für Schritt zeichnen",
+        "target_keyword": "pferd zeichnen",
+        "category": "reiterleben-community",
+        "article_type": "Anleitung",
+        "plan_slot": "589bb0e785b4199d9a2898711bc5cc6e961cf70302be84212ce151e4af4f92e5"
+      },
+      {
+        "title": "Fellfarben und Bewegung beim Malen von Pferden darstellen",
+        "target_keyword": "pferd malen",
+        "category": "reiterleben-community",
+        "article_type": "Anleitung",
+        "plan_slot": "a533201026235df1a146847c922e7909eb6b5fc880755b9eec9e295350d66458"
+      },
+      {
+        "title": "Herkunft und Eigenschaften des Westfälischen Warmbluts",
+        "target_keyword": "westfale pferd",
+        "category": "pferderassen-pferdetypen",
+        "article_type": "Beratung",
+        "plan_slot": "45b010f3c934ecf035ea6f901fb5e983014c326652649ed853094273bf56151e"
+      },
+      {
+        "title": "Pferde-Malvorlagen für Kinder auswählen und nutzen",
+        "target_keyword": "pferd ausmalen",
+        "category": "reiterleben-community",
+        "article_type": "Beratung",
+        "plan_slot": "7a73a4099885cc61a87de23bc7b32644a90af0aab7dbdc52ab05df815db5adf2"
+      },
+      {
+        "title": "Gamaschen fürs Pferd sicher anpassen und sinnvoll einsetzen",
+        "target_keyword": "pferd gamaschen",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "Beratung",
+        "plan_slot": "a1d0d31b8c12d1cacc430358b5af33dce3dda4cbfe90a70bdaad317e1c86c883"
+      },
+      {
+        "title": "Welches Pferd war das teuerste der Welt?",
+        "target_keyword": "teuerste pferd der welt",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "896b605b54e3aba5b5e9ba2d5267a0ac717910c27bc8ea4bae48c26c917ddf07"
+      },
+      {
+        "title": "Das Gewicht eines Pferdes ohne Waage einschätzen",
+        "target_keyword": "pferd gewicht",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Anleitung",
+        "plan_slot": "bed53dde5ff67d82d1ee6b2e6225a1e410128e9561df70589f8cb709d2dbe77d"
+      }
+    ],
+    "batch_sha256": "b0295eed436772561cb98a4f14b6af24d98ac7851a93bd3fb68d8ac27150dfc3"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Darf man Pferdeweiden mit Gülle düngen?",
+        "target_keyword": "darf man pferdeweiden mit gülle düngen",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "37ec17fd7283ea8dfa1b08c6de8627d54c9c7c980fc86102134e2d3d85b7c76d"
+      },
+      "order_id": "TXE-85d39e5810c5a340925682a46239e747",
+      "article_id": "article:7acd62bf801d221a17231bab",
+      "search_intent": "Weiderecht und Hygiene"
+    },
+    {
+      "metadata_binding": {
+        "title": "Die passende Gräsermischung für eine Pferdeweide finden",
+        "target_keyword": "gräsermischung für pferdeweiden",
+        "category": "nachsaat-fuer-pferdeweiden-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "ad9d554e17f2b21e17ff381014c895d0b63c6c0b7861bc083bea0f2f6a20f505"
+      },
+      "order_id": "TXE-4970ff1b3531d59eec2c930e70a5a40c",
+      "article_id": "article:a29e7b5a2b4c3c1483165e77",
+      "search_intent": "Saatgut – Mischung"
+    },
+    {
+      "metadata_binding": {
+        "title": "Worauf sollte ich achten, bevor ich ein Pferd kaufe?",
+        "target_keyword": "pferd kaufen",
+        "category": "recht-finanzen-organisation",
+        "article_type": "Beratung",
+        "plan_slot": "3f3bcbdd48f3d91bfa02330fb5ac6d34595c80836b5a688b85fcb24350c7c386"
+      },
+      "order_id": "TXE-9aa09777fcb8712f88f7d95ac9d4e97a",
+      "article_id": "article:5dadb52daf4a28f74102e8c0",
+      "search_intent": "Kaufberatung – eigenes Pferd"
+    },
+    {
+      "metadata_binding": {
+        "title": "Ein Pferd mit stimmigen Proportionen Schritt für Schritt zeichnen",
+        "target_keyword": "pferd zeichnen",
+        "category": "reiterleben-community",
+        "article_type": "Anleitung",
+        "plan_slot": "589bb0e785b4199d9a2898711bc5cc6e961cf70302be84212ce151e4af4f92e5"
+      },
+      "order_id": "TXE-869e4c1245276290e4ee00c81eeeb23f",
+      "article_id": "article:c63b6d58c95df70c77da9b4b",
+      "search_intent": "Zeichenanleitung – Pferd"
+    },
+    {
+      "metadata_binding": {
+        "title": "Fellfarben und Bewegung beim Malen von Pferden darstellen",
+        "target_keyword": "pferd malen",
+        "category": "reiterleben-community",
+        "article_type": "Anleitung",
+        "plan_slot": "a533201026235df1a146847c922e7909eb6b5fc880755b9eec9e295350d66458"
+      },
+      "order_id": "TXE-b500e979705d11aa092756c55c335ea0",
+      "article_id": "article:db803d41ae86bcd00ea17fdc",
+      "search_intent": "Malen – Pferdemotive"
+    },
+    {
+      "metadata_binding": {
+        "title": "Herkunft und Eigenschaften des Westfälischen Warmbluts",
+        "target_keyword": "westfale pferd",
+        "category": "pferderassen-pferdetypen",
+        "article_type": "Beratung",
+        "plan_slot": "45b010f3c934ecf035ea6f901fb5e983014c326652649ed853094273bf56151e"
+      },
+      "order_id": "TXE-8d9e443a678708629763c598315a98bd",
+      "article_id": "article:07bb653e3dfffcb2d216dcf9",
+      "search_intent": "Pferderassen – Westfale"
+    },
+    {
+      "metadata_binding": {
+        "title": "Pferde-Malvorlagen für Kinder auswählen und nutzen",
+        "target_keyword": "pferd ausmalen",
+        "category": "reiterleben-community",
+        "article_type": "Beratung",
+        "plan_slot": "7a73a4099885cc61a87de23bc7b32644a90af0aab7dbdc52ab05df815db5adf2"
+      },
+      "order_id": "TXE-4249a09da190f8772f684dfd725ed1a6",
+      "article_id": "article:318218c468196ad733103975",
+      "search_intent": "Malvorlagen – Pferde"
+    },
+    {
+      "metadata_binding": {
+        "title": "Gamaschen fürs Pferd sicher anpassen und sinnvoll einsetzen",
+        "target_keyword": "pferd gamaschen",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "Beratung",
+        "plan_slot": "a1d0d31b8c12d1cacc430358b5af33dce3dda4cbfe90a70bdaad317e1c86c883"
+      },
+      "order_id": "TXE-64a7dee3e8d84392e7278b7af2231ba8",
+      "article_id": "article:cdfb185f44382d17dd7d80a4",
+      "search_intent": "Kaufberatung – Gamaschen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Welches Pferd war das teuerste der Welt?",
+        "target_keyword": "teuerste pferd der welt",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "896b605b54e3aba5b5e9ba2d5267a0ac717910c27bc8ea4bae48c26c917ddf07"
+      },
+      "order_id": "TXE-cfaca0c8b48a3198aa3608e5074ca82a",
+      "article_id": "article:84c76df442cca0ceb8841e1e",
+      "search_intent": "Pferdemarkt – Rekordpreise"
+    },
+    {
+      "metadata_binding": {
+        "title": "Das Gewicht eines Pferdes ohne Waage einschätzen",
+        "target_keyword": "pferd gewicht",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Anleitung",
+        "plan_slot": "bed53dde5ff67d82d1ee6b2e6225a1e410128e9561df70589f8cb709d2dbe77d"
+      },
+      "order_id": "TXE-41bdb8626eb401611fba3717d1ef4f77",
+      "article_id": "article:e7d3377c12df3e078bc9e948",
+      "search_intent": "Gewicht – Pferdegesundheit"
+    }
+  ],
+  "manifest_sha256": "f5a3796f77e6bef716fe23df9c6fe9733dd063f479031afe06c0e127e45f9857"
+}

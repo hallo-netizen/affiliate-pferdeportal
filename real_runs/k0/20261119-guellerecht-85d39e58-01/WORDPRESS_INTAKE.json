@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Darf man Pferdeweiden mit Gülle düngen?",
+      "target_keyword": "darf man pferdeweiden mit gülle düngen",
+      "category": "recht-finanzen-organisation",
+      "article_type": "FAQ",
+      "plan_slot": "37ec17fd7283ea8dfa1b08c6de8627d54c9c7c980fc86102134e2d3d85b7c76d"
+    }
+  ],
+  "batch_sha256": "c7f3c78db88cdce4ff0188c7eef060a9234c2d250d4a3886698731cfb20d7339"
+}

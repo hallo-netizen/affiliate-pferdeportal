@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welches Pferd war das teuerste der Welt?",
+      "target_keyword": "teuerste pferd der welt",
+      "category": "recht-finanzen-organisation",
+      "article_type": "FAQ",
+      "plan_slot": "896b605b54e3aba5b5e9ba2d5267a0ac717910c27bc8ea4bae48c26c917ddf07"
+    }
+  ],
+  "batch_sha256": "0d317b196a58e522d580fc894e985a6ded13a3bc902df04b775f9e5c749044d7"
+}

@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Das Gewicht eines Pferdes ohne Waage einschätzen",
+      "target_keyword": "pferd gewicht",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "Anleitung",
+      "plan_slot": "bed53dde5ff67d82d1ee6b2e6225a1e410128e9561df70589f8cb709d2dbe77d"
+    }
+  ],
+  "batch_sha256": "8369c87ecf45729fd338f38d41369ce09932bd35e0fcda3e852824d5a1cc90a5"
+}

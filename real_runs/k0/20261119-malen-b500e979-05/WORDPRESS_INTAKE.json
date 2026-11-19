@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Fellfarben und Bewegung beim Malen von Pferden darstellen",
+      "target_keyword": "pferd malen",
+      "category": "reiterleben-community",
+      "article_type": "Anleitung",
+      "plan_slot": "a533201026235df1a146847c922e7909eb6b5fc880755b9eec9e295350d66458"
+    }
+  ],
+  "batch_sha256": "f07dcfe508cec3c43b7f1476f6df4fb11888a7ea357017a994792fa2e354664b"
+}

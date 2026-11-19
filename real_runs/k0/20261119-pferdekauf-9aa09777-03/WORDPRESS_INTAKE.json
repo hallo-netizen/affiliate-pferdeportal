@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Worauf sollte ich achten, bevor ich ein Pferd kaufe?",
+      "target_keyword": "pferd kaufen",
+      "category": "recht-finanzen-organisation",
+      "article_type": "Beratung",
+      "plan_slot": "3f3bcbdd48f3d91bfa02330fb5ac6d34595c80836b5a688b85fcb24350c7c386"
+    }
+  ],
+  "batch_sha256": "aeab6444f8ac7451bbe1a803c8dd4b26f130870d8b1ad0908be6dcaed45ebfb7"
+}

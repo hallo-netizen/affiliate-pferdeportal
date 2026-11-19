@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Die passende Gräsermischung für eine Pferdeweide finden",
+      "target_keyword": "gräsermischung für pferdeweiden",
+      "category": "nachsaat-fuer-pferdeweiden-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "ad9d554e17f2b21e17ff381014c895d0b63c6c0b7861bc083bea0f2f6a20f505"
+    }
+  ],
+  "batch_sha256": "f0f3a1c629bcc31fad16c470c76d9a493a435685886e427a83fbbdd706e91136"
+}
