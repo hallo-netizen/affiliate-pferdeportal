@@ -1,0 +1,150 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wann sollte ich mein Pferd eindecken?",
+    "target_keyword": "Wann Decke ich mein Pferd ein?",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "FAQ",
+    "plan_slot": "13ff04b1e053bcf1d65cddaf23fee938c73066504ae932d6bc0dd12aa15536a0"
+  },
+  "content_profile": {
+    "search_intent": "Wann ein Pferd eingedeckt werden sollte und welche Bedingungen wichtig sind"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.worldhorsewelfare.org/advice/rugging-horses-when-does-your-horse-need-a-rug",
+          "source_title": "World Horse Welfare – Pferdedecken"
+        }
+      ],
+      "claims": [
+        "Eine Pferdedecke muss zum einzelnen Pferd passen.",
+        "Ob ein Pferd geschoren ist, beeinflusst den Deckenbedarf.",
+        "Junge und ältere Pferde benötigen unter bestimmten Bedingungen häufiger eine Decke.",
+        "Zu starkes Eindecken kann die Pferdegesundheit beeinträchtigen."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wann Decke ich mein Pferd ein?",
+      "topic": "Wann sollte ich mein Pferd eindecken?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wann sollte ich mein Pferd eindecken?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/rugging-horses-when-does-your-horse-need-a-rug",
+        "source_title": "World Horse Welfare – Pferdedecken",
+        "evidence_text": "It is important to always consider your horse’s individual needs",
+        "evidence_text_sha256": "c9ac48be79f85f942c6a437e020211df095ddbb0688e2bc926cb2205cd8db3b0",
+        "statement": "Eine Pferdedecke muss zum einzelnen Pferd passen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/rugging-horses-when-does-your-horse-need-a-rug",
+        "source_title": "World Horse Welfare – Pferdedecken",
+        "evidence_text": "Whether your horse is clipped or unclipped",
+        "evidence_text_sha256": "a549c60148ed2722dd9941191172249cbe1f197e104d08fee431a708e7d8ceab",
+        "statement": "Ob ein Pferd geschoren ist, beeinflusst den Deckenbedarf.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/rugging-horses-when-does-your-horse-need-a-rug",
+        "source_title": "World Horse Welfare – Pferdedecken",
+        "evidence_text": "Very young horses and older horses may be more likely to need rugs",
+        "evidence_text_sha256": "08293037d2f92b2c5bd39f5cbc7c5abc97add10b097c1300c28697f783fb3222",
+        "statement": "Junge und ältere Pferde benötigen unter bestimmten Bedingungen häufiger eine Decke.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/rugging-horses-when-does-your-horse-need-a-rug",
+        "source_title": "World Horse Welfare – Pferdedecken",
+        "evidence_text": "avoid over-rugging which can be detrimental your horses’ health and welfare",
+        "evidence_text_sha256": "4938ba4420eb6cd4e66d0b32df69fa73e0fbdec0a64076d84e32e942f070f4ac",
+        "statement": "Zu starkes Eindecken kann die Pferdegesundheit beeinträchtigen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "alltags-pferde-haltungsformen",
+        "block": "details"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Eindecken",
+      "Decke",
+      "Temperatur",
+      "Wetter",
+      "Fell",
+      "Schutz"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine kompakte Tabelle ergänzt die thematisch unterschiedlichen Prüfungskriterien und Maßnahmen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
