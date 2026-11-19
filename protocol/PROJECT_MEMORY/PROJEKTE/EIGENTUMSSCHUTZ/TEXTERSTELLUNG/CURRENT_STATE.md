@@ -1,3 +1,15 @@
+# AKTUELLE TECHNISCHE HAB-ANBINDUNG 19.11.2026
+
+**Neu nachgewiesen:** Hab-Original-Plugin 0.4.31.6 erneut lokal 31/31 PHP-Tests PASS. Dessen unverändertes Fünffelder-Batch auf die eigenständigen fünf Hab-Regelbücher per **isolierter K-Multi-Bridge** abgebildet; acht lokale Bridge-Testfälle PASS, u. a. Duplikat-/Fremdportal-/Hash-Sperren. Kein Plugin und kein bestehender Produktionsablauf verändert.
+
+**Zentraler K-Multi-Stand:** `hallo-netizen/k0-multiportal`, branch `k0-offline-rule-bindings-20261027`, commit `32e4f47a5671a2cc137ae44042d3d848a9ee9394`, Datei `offline_rules/portal_bindings/hab_und_bewahr/CURRENT_STATE.md`. Dort Code, unverändertes originales Test-Batch, vollständige Historien-Testkategorien, 5 Fachregeln, QA abgelegt.
+
+**Wichtige technische Grenze:** Das aktuelle Hab-Plugin kann nur Beratung/FAQ/Pflege/Vergleich/Anleitung ausgeben. Dadurch sind 4 der 5 neuen Hab-Fachbücher per fester, vorher entschiedener Typabbildung erreichbar; `Bericht & Praxisfall` NICHT erreichbar. Keine stille Ersatzzuordnung. Historische Kategorien sind kein Live-Nachweis; Writer, LanguageTool, WordPress-Entwurf fehlen nachweislich weiterhin in der getrennten K-Multi-Ablage.
+
+**Nächster Schritt:** Echten neuen K-Multi-Writereingang beschaffen/prüfen und *nur* dort an die bestehende K-Multi-Bridge anschließen. Die fehlende Bericht-Auswahl zusammen mit anderen notwendigen Änderungen in einer späteren gebündelten, geprüften Pluginversion vorsehen; kein Schnellschuss-Plugin.
+
+---
+
 # 19.11.2026 – FACHAUSRICHTUNGEN UND ZWEI KISS-REGELN FREIGEGEBEN
 
 Alle fünf autonomen Hab-Regelbücher enthalten ab jetzt die konkret vom Nutzer genehmigte Ausrichtung (FAQ, Ratgeber/Wissen, Vergleich, Anleitung/Checkliste, Bericht/Praxisfall) und zwei verbindliche Hab-Grundregeln: fachliche Sicherheit ohne unbelegte Garantien oder riskante Tipps; freiwillige staatliche Informationslinks nur bei echtem Zusatznutzen am Artikelende und **zwingend mit nofollow**, niemals als Pflicht.
