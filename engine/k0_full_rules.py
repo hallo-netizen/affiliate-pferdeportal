@@ -135,7 +135,7 @@ def _k0_link_has_specific_topic(target_label, ctx, topic, target_content=''):
     # menu, footer or other site-wide words). At least two independent topic
     # words must match; a shared generic word alone never suffices.
     content=htmlmod.unescape(re.sub(r'<[^>]+>', ' ', str(target_content or '')))
-    content=re.sub(r'\\s+',' ',content)[:12000]
+    content=re.sub(r'\s+',' ',content)[:12000]
     shared=roots & _k0_topic_link_roots(content)
     return len(shared)>=2
 
