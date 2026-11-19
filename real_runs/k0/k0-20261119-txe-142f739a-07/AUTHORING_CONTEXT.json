@@ -1,0 +1,150 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welche Fütterungsfehler kommen bei Pferden häufig vor?",
+    "target_keyword": "Welche Fehler werden bei der Fütterung von Pferden am häufigsten gemacht?",
+    "category": "pferdeernaehrung-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "822aead685621327f283bf64df8d4089b60a3534cb1c8598a51f20329c7775c2"
+  },
+  "content_profile": {
+    "search_intent": "Häufige Fehler bei Raufutter, Kraftfutter, Mengen und Futterwechsel erklären"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.worldhorsewelfare.org/advice/feeding-horses",
+          "source_title": "World Horse Welfare – Pferde füttern"
+        }
+      ],
+      "claims": [
+        "Abrupte Futterwechsel können die Verdauung belasten.",
+        "Raufutter muss einen bedeutenden Anteil der Pferdefütterung ausmachen.",
+        "Fehler bei der Energiemenge können zu Über- oder Untergewicht führen.",
+        "Schimmeliges Futter gehört nicht in die Pferderation."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welche Fehler werden bei der Fütterung von Pferden am häufigsten gemacht?",
+      "topic": "Welche Fütterungsfehler kommen bei Pferden häufig vor?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Fütterungsfehler kommen bei Pferden häufig vor?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/feeding-horses",
+        "source_title": "World Horse Welfare – Pferde füttern",
+        "evidence_text": "do not make sudden changes to the diet",
+        "evidence_text_sha256": "922208135a80111b12d8f2096f6e2f0439b73ee92f4a83869a632f53bdc16d51",
+        "statement": "Abrupte Futterwechsel können die Verdauung belasten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/feeding-horses",
+        "source_title": "World Horse Welfare – Pferde füttern",
+        "evidence_text": "Feed plenty of bulk and roughage",
+        "evidence_text_sha256": "c24d91d36799b25d0348af4e06378e3f5ea2d063a3e71ed4b3e3d47bcabb86d1",
+        "statement": "Raufutter muss einen bedeutenden Anteil der Pferdefütterung ausmachen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/feeding-horses",
+        "source_title": "World Horse Welfare – Pferde füttern",
+        "evidence_text": "Too much or too few calories will result in the animal being over or under weight",
+        "evidence_text_sha256": "8cd04ac868f28d42e2402512409db247768659be7ac669b882994e14e335a4c6",
+        "statement": "Fehler bei der Energiemenge können zu Über- oder Untergewicht führen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/feeding-horses",
+        "source_title": "World Horse Welfare – Pferde füttern",
+        "evidence_text": "mouldy feed or forage should not be fed",
+        "evidence_text_sha256": "9327ea1fb4bfc77a1d4e64e97df703736adca6cc813b2d4ff5fb02fcd5561322",
+        "statement": "Schimmeliges Futter gehört nicht in die Pferderation.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "anchor": "pferdeernaehrung-verstehen",
+        "block": "details"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Fütterung",
+      "Futter",
+      "Fehler",
+      "Raufutter",
+      "Wasser",
+      "Umstellung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine kompakte Tabelle ergänzt die thematisch unterschiedlichen Prüfungskriterien und Maßnahmen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
