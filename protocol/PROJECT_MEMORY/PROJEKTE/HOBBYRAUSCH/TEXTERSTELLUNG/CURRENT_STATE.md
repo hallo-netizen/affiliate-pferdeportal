@@ -1,3 +1,11 @@
+## 19.11.2026 10:48 – Erster Kategorien-Rechercheauftrag RUNNING, TASK_PENDING (Screenshot + Originalcode)
+- ECHTER WordPress-Screenshot: Batch 1/1 Kategorie `3D-Bogenschießen`, `RECHERCHE LÄUFT · BREADTH:0:QUESTIONS:TASK_PENDING`, Einzelrecherche `QUESTIONS` **Schritt 3 von 3**, **5 empfangene Roh-Keywords**. `0 abgeschlossen / 1 insgesamt`, `0 recherchiert / 1 mit Fehler/gesperrt` in den Kategorien; 378 noch offen; Auftragsregal 0; kein nachgewiesener Abschluss. Keine neue Recherche starten oder Abbruch auslösen.
+- Exakt aus dem installierbaren 0.4.24.5-ZIP geprüft: `PSTE_Research_Driver::tick()` löst die jeweils nächste Serverstufe selbst per loopback aus, mit WordPress-Cron als Sicherung; `TASK_PENDING` wird bei offenen Fragen-Provideraufträgen in ca. 2000 ms pro Versuch erneut geprüft, soweit Serverrequests tatsächlich durchgehen. **Die Backendseite selbst aktualisiert nicht automatisch**, `Status einmal aktualisieren` ist nur ein Seitenreload. Providerfrage-Task nach >1800 s seit `paa_task_posted_at_utc` wird auf `PSTE_PAA_TASK_TIMEOUT` gestellt und kann zu PAUSED_ERROR/Parken führen. Nicht garantieren, dass in 2s oder 30min alles fertig ist. Der Screenshot enthält keine beweiskräftige Serverjob-Timestamp-/Loopback-Diagnose.
+- Empfehlung: einmal `Status einmal aktualisieren` nach kurzer Pause, auf `ABGESCHLOSSEN` / neue Keywords / `Fehler` achten; bleibt `TASK_PENDING` nach deutlich längerer Wartezeit (ca. 30 min seit Posten) unverändert, echten Drive-/Provider-Status prüfen, nicht wiederholt starten.
+- Plugin CURRENT bleibt `Texterstellung_Hobbydepot_0.4.24.5_SANDBOX_LEERBESTAND_FIX.zip`, SHA256 `42f648b59a99fda0b1684c0e174a9430f4d9d131eaa8d98548157c5d8e09e2ba`, ohne Änderung und gesichert in `/Hobby Depot/Plugin-Büro/`. Quelle: user screenshot und Originalcode, keine Live-Admin-Aktion durch Assistent.
+
+---
+
 ## 19.11.2026 – GESAMTWORKFLOW-PLAN GESICHERT, KEINE CODE-ÄNDERUNG
 - Detaillierter Quellenabgleich K-Multi ↔ K0 ↔ Hobbydepot-Kategorien/Magazin ↔ fünf bewährte Arten + mögliche `Inspiration` sowie Testreihenfolge in `K_MULTI_TESTREIHENFOLGE_BEITRAGSARTEN_20261119.md`.
 - **K-Multi aktuelles GitHub-Repo in Quarantäne** (nur Offline-Regelbindung, Hobby nicht freigegeben); früherer KISS-1.2-Test 48/48 ersetzt keinen Produktionsnachweis. K0-Original unverändert.
