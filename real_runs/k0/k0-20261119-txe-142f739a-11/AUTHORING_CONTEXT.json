@@ -1,0 +1,150 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Was machen Pferde, wenn sie traurig sind?",
+    "target_keyword": "Was machen Pferde, wenn sie traurig sind?",
+    "category": "pferde-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "eb7a1cff7e2ba11f01efc343ad4c5ae1e008a1819f4a9dedebe134acd3d97cd2"
+  },
+  "content_profile": {
+    "search_intent": "Verhalten von Pferden bei Traurigkeit oder Belastung erkennen und einordnen"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.worldhorsewelfare.org/advice/the-3fs-friends-forage-and-freedom",
+          "source_title": "World Horse Welfare – Freunde, Raufutter und Freiheit"
+        }
+      ],
+      "claims": [
+        "Pferde sind soziale Herdentiere.",
+        "Sozialkontakt gehört zu den wichtigen Bedürfnissen von Pferden.",
+        "Gegenseitige Fellpflege kann soziale Beziehungen von Pferden stärken.",
+        "Bewegungsmöglichkeiten beeinflussen das Wohlbefinden von Pferden."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was machen Pferde, wenn sie traurig sind?",
+      "topic": "Was machen Pferde, wenn sie traurig sind?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was machen Pferde, wenn sie traurig sind?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/the-3fs-friends-forage-and-freedom",
+        "source_title": "World Horse Welfare – Freunde, Raufutter und Freiheit",
+        "evidence_text": "Horses are highly social prey animals",
+        "evidence_text_sha256": "aa9156820562035502966edfc326bbde75a13137e72734d93dca06cefb866bba",
+        "statement": "Pferde sind soziale Herdentiere.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/the-3fs-friends-forage-and-freedom",
+        "source_title": "World Horse Welfare – Freunde, Raufutter und Freiheit",
+        "evidence_text": "socialisation with other horses is a vital part of their day-to-day life",
+        "evidence_text_sha256": "01fcdcd258d632f9aa8f7b74780a4e5d977d379b9175c2e883a10332a727ec0d",
+        "statement": "Sozialkontakt gehört zu den wichtigen Bedürfnissen von Pferden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/the-3fs-friends-forage-and-freedom",
+        "source_title": "World Horse Welfare – Freunde, Raufutter und Freiheit",
+        "evidence_text": "build social bonds through behaviours such as mutual grooming",
+        "evidence_text_sha256": "2d5099bf493123b22f310f56243d2ae55e3becb046edc04ca66e2638b29407b4",
+        "statement": "Gegenseitige Fellpflege kann soziale Beziehungen von Pferden stärken.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/the-3fs-friends-forage-and-freedom",
+        "source_title": "World Horse Welfare – Freunde, Raufutter und Freiheit",
+        "evidence_text": "Freedom of movement is important for horses’ physical and mental well-being",
+        "evidence_text_sha256": "3120080e9a7a237322288e7c08d27e7f12a6e1c396863584fca6bd1708e8399c",
+        "statement": "Bewegungsmöglichkeiten beeinflussen das Wohlbefinden von Pferden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-verstehen/",
+        "anchor": "pferde-verstehen",
+        "block": "details"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Traurigkeit",
+      "Verhalten",
+      "Freunde",
+      "Stress",
+      "Herde",
+      "Wohlbefinden"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine kompakte Tabelle ergänzt die thematisch unterschiedlichen Prüfungskriterien und Maßnahmen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
