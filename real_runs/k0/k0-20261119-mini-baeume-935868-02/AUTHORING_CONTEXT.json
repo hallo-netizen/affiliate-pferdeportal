@@ -1,0 +1,192 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Geeignete Bäume als Schattenspender auf Pferdeweiden",
+    "target_keyword": "bäume für pferdeweiden",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "Beratung",
+    "plan_slot": "d1df78939b9d9a54c7c98ab5ca2d6a487da520076aa778716dae3c72856807cf"
+  },
+  "content_profile": {
+    "search_intent": "Weidegestaltung – Bäume"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "University of Minnesota Extension – Planning your horse pasture site",
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/pasture-site-planning"
+        },
+        {
+          "source_title": "University of Minnesota Extension – Caring for horses in hot weather",
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-horses-during-hot-weather"
+        },
+        {
+          "source_title": "University of Minnesota Extension – Caring for your horse in the winter",
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horse-in-the-winter"
+        }
+      ],
+      "claims": [
+        "Baumarten für eine Pferdeweide müssen auf mögliche Giftigkeit geprüft werden.",
+        "Einige Baumarten haben für Pferde giftige Blätter, Samen oder andere Pflanzenteile.",
+        "Die Weidegestaltung sollte nasse Standorte und steile Hänge meiden.",
+        "Bäume oder Gebäude können Pferden an heißen Tagen Schatten bieten.",
+        "Bäume können neben offenen Unterständen auch Wind- und Wetterschutz geben.",
+        "Eine gut geplante Pferdeweide braucht jederzeit sauberes Trinkwasser."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "bäume für pferdeweiden",
+      "topic": "Geeignete Bäume als Schattenspender auf Pferdeweiden",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Bäume als Schattenspender auf Pferdeweiden unter Berücksichtigung von Giftigkeit und Standort auswählen.",
+      "decision_criteria": [
+        "Giftigkeit von Blättern und Samen",
+        "Standort und Kronenentwicklung",
+        "Schattenangebot",
+        "Pferdesicherer Zugang und Wasserangebot"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "University of Minnesota Extension – Planning your horse pasture site",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/pasture-site-planning",
+        "evidence_text": "Be mindful of trees or shrubs",
+        "statement": "Baumarten für eine Pferdeweide müssen auf mögliche Giftigkeit geprüft werden.",
+        "evidence_text_sha256": "85ecf548881ccd30b88855eae4d330540d9db041ff8ef3804be9b2711ecc6ddb",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "University of Minnesota Extension – Planning your horse pasture site",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/pasture-site-planning",
+        "evidence_text": "Chokecherry, boxelder and red maple",
+        "statement": "Einige Baumarten haben für Pferde giftige Blätter, Samen oder andere Pflanzenteile.",
+        "evidence_text_sha256": "649e1f22cf7ba31c018f01ec1dcd4b1f8d800e29421d55b838a2e4f06ea0ca07",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "University of Minnesota Extension – Planning your horse pasture site",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/pasture-site-planning",
+        "evidence_text": "Avoid placing pastures in wet areas",
+        "statement": "Die Weidegestaltung sollte nasse Standorte und steile Hänge meiden.",
+        "evidence_text_sha256": "53d38cafab57aa6ab7d56a72776c4e1893b0453122ba4d497803876df5152165",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_title": "University of Minnesota Extension – Caring for horses in hot weather",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-horses-during-hot-weather",
+        "evidence_text": "Shade from trees or buildings",
+        "statement": "Bäume oder Gebäude können Pferden an heißen Tagen Schatten bieten.",
+        "evidence_text_sha256": "614b40d891e7a6ab304a17c39d0ba5da404e5e56cf0fd2f59cbc4f1930902808",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_title": "University of Minnesota Extension – Caring for your horse in the winter",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horse-in-the-winter",
+        "evidence_text": "as do trees if a building is not available",
+        "statement": "Bäume können neben offenen Unterständen auch Wind- und Wetterschutz geben.",
+        "evidence_text_sha256": "8c44420551396a53b9677aad459795abbfe138fe921534cc8a91ed51fef9b6f8",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F6": {
+        "source_title": "University of Minnesota Extension – Planning your horse pasture site",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/pasture-site-planning",
+        "evidence_text": "free access to clean, fresh water",
+        "statement": "Eine gut geplante Pferdeweide braucht jederzeit sauberes Trinkwasser.",
+        "evidence_text_sha256": "fe330baaa068081f8d4c01afb663524f217f27692e5964065cbc88f34b6e4a5f",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "alltags-pferde-haltungsformen",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Bäume",
+      "Pferdeweiden",
+      "Schattenspender",
+      "Giftigkeit",
+      "Standort",
+      "Schatten",
+      "Pferde"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Übersicht ordnet vier konkrete Unterschiede den Entscheidungen bei bäume für pferdeweiden zu."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
