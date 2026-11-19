@@ -1,3 +1,13 @@
+## 19.11.2026 – Aktuelles überinstallierbares ZIP 0.4.24.10 (WordPress-Verzeichnisidentität)
+
+- Nutzer meldet: bei Upload von 0.4.24.9 kein Ersetzen-Dialog; verlangt genau eine ZIP mit eindeutig höherer Version.
+- Paketvergleich beweist: 0.4.24.8 **und** 0.4.24.9 haben beide Root `texterstellung-hobbydepot/`, WP-Hauptdatei `texterstellung-hobbydepot/texterstellung.php`; 0.4.24.9 ist höher als 0.4.24.8. Daher lässt sich das Fehlen des Dialogs nicht eindeutig mit diesen Werten erklären. Live-WP-Installationszustand/-meldung noch unbekannt. Keine falsche Ursachenzusage.
+- Neue reine Header-Version `0.4.24.10` erstellt, Vergleich `version_compare('0.4.24.10','0.4.24.9','>')` bestanden. Genau **eine** Änderung ggü. `0.4.24.9`: `* Version: 0.4.24.9` → `* Version: 0.4.24.10`. Keine sonstige PHP-/Konfigurations-/K0-/Research-Veränderung. 86/87 Dateiinhalte byteidentisch.
+- **Alle 87 ZIP-Einträge gültig**, PHP Lint 78/78, JSON 8/8, WordPress Pluginhauptdatei exakt, ZIP Root identisch zu installierten Vorversionen.
+- **Einzige aktuelle Ersatz-ZIP:** `Texterstellung_Hobbydepot_0.4.24.10_ERSETZEN.zip`, SHA256 `6a47eedc6279e7ad46350be6f1fde02dfa09fa62752765e6180f1083502630a2`, ca. 510 KB. Archiviert im `/Hobby Depot/Plugin-Büro/` und `/hobbydepot/TEXTERSTELLUNG/INSTALLATIONSKANDIDATEN/`; eigene `Texterstellung-CURRENT.md` im Büro überschrieben, alter 0.4.24.9 weiterhin archiviert.
+- **Nutzerweg:** WP `Plugins → Plugin hinzufügen → Plugin hochladen → ZIP wählen → Jetzt installieren` und dann falls WP dieselbe Pluginidentität erkennt `Aktuelles durch hochgeladenes ersetzen`. Der Dialog kommt ggf. **erst nach „Jetzt installieren“**; niemals vorher deinstallieren. Wenn weiterhin kein Dialog, brauchen wir die konkret angezeigte WP-Meldung, nicht blind weitere Versionen erfinden. Kein Liveupdate hier ausgeführt.
+---
+
 ## 19.11.2026 – AKTUELL: 0.4.24.9 KISS, DataForSEO IMMER PRODUCTION, KEIN MODUS-WAHLSCHALTER
 
 - Nutzer verlangt **immer Productivmodus, keine zusätzliche Einstellungsauswahl, kein Neubau**. Echte Originalquellen zeigen, dass Pferdeatelier-Vorlage 0.4.31.1 **ebenfalls Standard=sandbox** enthielt; welchen Wert deren Live-Portal gespeichert hat, ist hier unbekannt. Alte Sandbox-Default-Übernahme war die Hobby-Ursache.
