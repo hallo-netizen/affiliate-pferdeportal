@@ -1,0 +1,133 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 6,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Heucobs für Pferde richtig einweichen und füttern",
+        "target_keyword": "heucobs pferd",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "Anleitung",
+        "plan_slot": "987fe63264ac535df1e00418131e1470d1c15e8c3cbb01899f15aace11f6d06d"
+      },
+      {
+        "title": "Wie entwickelt sich die Fellfarbe eines Apfelschimmels?",
+        "target_keyword": "apfelschimmel pferd",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "FAQ",
+        "plan_slot": "07294733a3eb667a8134690b8267c7f8a4b847db7036211156be5cacc79e8d75"
+      },
+      {
+        "title": "Körperbau und Anatomie des Pferdes verständlich erklärt",
+        "target_keyword": "pferd anatomie",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "Beratung",
+        "plan_slot": "9e9be3a7329e98532e59c70eb8b918a991f5a0cd044de62ca28b04dbaa5d868c"
+      },
+      {
+        "title": "Spat beim Pferd erkennen und tierärztlich abklären lassen",
+        "target_keyword": "spat beim pferd",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Beratung",
+        "plan_slot": "ede62cb429ae361fca9282656a516762ff25c4cd6a31bf87147bd0f4f037566b"
+      },
+      {
+        "title": "Regendecken ohne Füllung für Pferde richtig einsetzen",
+        "target_keyword": "regendecke pferd 0g",
+        "category": "pferdedecken-regendecken-beratung",
+        "article_type": "Anleitung",
+        "plan_slot": "d5a417435dae029e5afc521ad43e9a011534031f34871dcaf81ba440a7252739"
+      },
+      {
+        "title": "Kombinierte Fliegen- und Regendecken für Pferde sinnvoll nutzen",
+        "target_keyword": "fliegen regendecke pferd",
+        "category": "pferdedecken-regendecken-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "316b708211721cfd8cb6ff69c9f59d6ea49c46b26aff4cc41a09e20a9521a4bb"
+      }
+    ],
+    "batch_sha256": "272cb6c2675b35138e2988cb461c50450ad116731cf4d10b4db3cc9dcd2da73a"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Heucobs für Pferde richtig einweichen und füttern",
+        "target_keyword": "heucobs pferd",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "Anleitung",
+        "plan_slot": "987fe63264ac535df1e00418131e1470d1c15e8c3cbb01899f15aace11f6d06d"
+      },
+      "order_id": "TXE-43ee2b2350e5fd45240b3beace12a215",
+      "article_id": "article:ad1044f2cc2a9154028ee1b1",
+      "search_intent": "Fütterung – Heucobs"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie entwickelt sich die Fellfarbe eines Apfelschimmels?",
+        "target_keyword": "apfelschimmel pferd",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "FAQ",
+        "plan_slot": "07294733a3eb667a8134690b8267c7f8a4b847db7036211156be5cacc79e8d75"
+      },
+      "order_id": "TXE-686ee6103d9fc145963b2824cce3655e",
+      "article_id": "article:6b0abf07c28b591c0d3fff8e",
+      "search_intent": "Fellfarbe – Apfelschimmel"
+    },
+    {
+      "metadata_binding": {
+        "title": "Körperbau und Anatomie des Pferdes verständlich erklärt",
+        "target_keyword": "pferd anatomie",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "Beratung",
+        "plan_slot": "9e9be3a7329e98532e59c70eb8b918a991f5a0cd044de62ca28b04dbaa5d868c"
+      },
+      "order_id": "TXE-927c5f8ab2581b59a9dbdc5bc1ed2de1",
+      "article_id": "article:f299032c92257d87156a79fd",
+      "search_intent": "Anatomie – Körperbau"
+    },
+    {
+      "metadata_binding": {
+        "title": "Spat beim Pferd erkennen und tierärztlich abklären lassen",
+        "target_keyword": "spat beim pferd",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Beratung",
+        "plan_slot": "ede62cb429ae361fca9282656a516762ff25c4cd6a31bf87147bd0f4f037566b"
+      },
+      "order_id": "TXE-504a7259c0130dd86db4eef26f47178f",
+      "article_id": "article:83a3f120101b1e92464a6a0c",
+      "search_intent": "Pferdegesundheit – Spat"
+    },
+    {
+      "metadata_binding": {
+        "title": "Regendecken ohne Füllung für Pferde richtig einsetzen",
+        "target_keyword": "regendecke pferd 0g",
+        "category": "pferdedecken-regendecken-beratung",
+        "article_type": "Anleitung",
+        "plan_slot": "d5a417435dae029e5afc521ad43e9a011534031f34871dcaf81ba440a7252739"
+      },
+      "order_id": "TXE-24edaeea3ff5f26fa1325e49feb8fd8d",
+      "article_id": "article:1db2fc2bafff277a35269017",
+      "search_intent": "Deckenberatung – 0 g"
+    },
+    {
+      "metadata_binding": {
+        "title": "Kombinierte Fliegen- und Regendecken für Pferde sinnvoll nutzen",
+        "target_keyword": "fliegen regendecke pferd",
+        "category": "pferdedecken-regendecken-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "316b708211721cfd8cb6ff69c9f59d6ea49c46b26aff4cc41a09e20a9521a4bb"
+      },
+      "order_id": "TXE-58bae6ffbe6839d2ba990d4b6b3bbc42",
+      "article_id": "article:2c519961a974894957214c23",
+      "search_intent": "Deckenberatung – Regen und Fliegen"
+    }
+  ],
+  "manifest_sha256": "fd6347ef913affca4373516492ae1044069ee5d99af1d09f64e2aad94988a9c5"
+}
