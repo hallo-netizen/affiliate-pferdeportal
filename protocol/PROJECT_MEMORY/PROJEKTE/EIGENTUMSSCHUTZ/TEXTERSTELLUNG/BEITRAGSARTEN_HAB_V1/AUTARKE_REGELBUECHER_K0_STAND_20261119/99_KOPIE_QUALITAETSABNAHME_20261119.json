@@ -72,7 +72,9 @@
     "writer_ausgeführt": false,
     "lt_68_echt_geprüft": false,
     "k_multi_aktiviert": false,
-    "wordpress_entwurf_geschrieben": false
+    "wordpress_entwurf_geschrieben": false,
+    "gezielte_neue_fachtests": 15,
+    "gezielte_aufgedeckte_luecken": 15
   },
   "kritische_punkte": [
     "Ratgeber: K0-Beratung nur falls echter Auswahlentscheid; Wissenstyp nicht bereit",
@@ -81,5 +83,144 @@
     "K-Multi ist weiter nicht auf aktuellen Regelstand umgestellt, alter V9-Wertestand separat prüfen",
     "Ergänzte Hab-Sicherheitsregelvorschläge noch nicht als produktive Regeln freigegeben"
   ],
-  "zukunft": "Allgemeine Änderungen nach Freigabe gezielt identisch kopieren, Spezialregeln nur an betroffenen Portalen; Quellenbindung bei jeder neuen Kopie erneut prüfen."
+  "zukunft": "Allgemeine Änderungen nach Freigabe gezielt identisch kopieren, Spezialregeln nur an betroffenen Portalen; Quellenbindung bei jeder neuen Kopie erneut prüfen.",
+  "kritische_gezielte_abdeckung_20261119": {
+    "testart": "Gezielt ausgewählte negative fachliche Szenarien gegen vorliegende Regelentwürfe, KEIN K0-Writer-/Artikel- oder Laufzeittest",
+    "anzahl_gezielte_szenarien": 15,
+    "anzahl_vollstaendig_abgedeckt": 0,
+    "anzahl_entdeckter_luecken": 15,
+    "einzelne_faelle": [
+      {
+        "beitragsart": "FAQ",
+        "thema": "Was tun bei Gasgeruch?",
+        "notwendiges_hab_modul": "HAB03",
+        "ausloeser": "Strom, Gas, Feuer, Rauch, Bau-/Statik, Hochwasser, Lithium-Akkus, gefährliche Installation",
+        "im_aktuellen_vollpaket_enthalten": false,
+        "befund": "NICHT_ABGEDECKT"
+      },
+      {
+        "beitragsart": "FAQ",
+        "thema": "Wie häufig sind Einbrüche in NRW?",
+        "notwendiges_hab_modul": "HAB09",
+        "ausloeser": "Statistiken, Polizeimeldungen, Zahlen, Schadensfälle",
+        "im_aktuellen_vollpaket_enthalten": false,
+        "befund": "NICHT_ABGEDECKT"
+      },
+      {
+        "beitragsart": "FAQ",
+        "thema": "Was kostet ein Funkalarm inklusive Wartung?",
+        "notwendiges_hab_modul": "HAB07",
+        "ausloeser": "Produkt-/Maßnahmenwahl und Vergleich",
+        "im_aktuellen_vollpaket_enthalten": false,
+        "befund": "NICHT_ABGEDECKT"
+      },
+      {
+        "beitragsart": "FAQ",
+        "thema": "Was muss ich beim Wohnmobil beachten?",
+        "notwendiges_hab_modul": "HAB08",
+        "ausloeser": "alle Texte mit konkreten Adressaten",
+        "im_aktuellen_vollpaket_enthalten": false,
+        "befund": "NICHT_ABGEDECKT"
+      },
+      {
+        "beitragsart": "Ratgeber & Wissen",
+        "thema": "Kriminalstatistiken und ihre Aussagegrenzen erklären",
+        "notwendiges_hab_modul": "HAB09",
+        "ausloeser": "Statistiken, Polizeimeldungen, Zahlen, Schadensfälle",
+        "im_aktuellen_vollpaket_enthalten": false,
+        "befund": "NICHT_ABGEDECKT"
+      },
+      {
+        "beitragsart": "Ratgeber & Wissen",
+        "thema": "Aus einem realen Einbruchsfall lernen",
+        "notwendiges_hab_modul": "HAB12",
+        "ausloeser": "Bericht, Fallbeispiel, Fotos, Tatort, personenbezogene Daten",
+        "im_aktuellen_vollpaket_enthalten": false,
+        "befund": "NICHT_ABGEDECKT"
+      },
+      {
+        "beitragsart": "Vergleich",
+        "thema": "Präventiver Schutz gegen Einbruch: Maßnahmen vergleichen",
+        "notwendiges_hab_modul": "HAB02",
+        "ausloeser": "Einbruch, Diebstahl, Gewalt, Konflikt, Vandalismus, akute Gefahr",
+        "im_aktuellen_vollpaket_enthalten": false,
+        "befund": "NICHT_ABGEDECKT"
+      },
+      {
+        "beitragsart": "Vergleich",
+        "thema": "Sicherheitslösungen nach Kriminalitätszahlen bewerten",
+        "notwendiges_hab_modul": "HAB09",
+        "ausloeser": "Statistiken, Polizeimeldungen, Zahlen, Schadensfälle",
+        "im_aktuellen_vollpaket_enthalten": false,
+        "befund": "NICHT_ABGEDECKT"
+      },
+      {
+        "beitragsart": "Vergleich",
+        "thema": "Maßnahmen im laufenden Gefahrenereignis gegenüberstellen",
+        "notwendiges_hab_modul": "HAB11",
+        "ausloeser": "Notfälle, laufender Schaden, Brand, Gas, Überflutung, Einbruch",
+        "im_aktuellen_vollpaket_enthalten": false,
+        "befund": "NICHT_ABGEDECKT"
+      },
+      {
+        "beitragsart": "Anleitung & Checkliste",
+        "thema": "Checkliste für die Versicherungs-Schadenmeldung",
+        "notwendiges_hab_modul": "HAB05",
+        "ausloeser": "Versicherung, Schadensdeckung, Vertragsbedingungen, Erstattung, Versicherungspflicht",
+        "im_aktuellen_vollpaket_enthalten": false,
+        "befund": "NICHT_ABGEDECKT"
+      },
+      {
+        "beitragsart": "Anleitung & Checkliste",
+        "thema": "Wartungskontrolle zweier Sicherungssysteme",
+        "notwendiges_hab_modul": "HAB07",
+        "ausloeser": "Produkt-/Maßnahmenwahl und Vergleich",
+        "im_aktuellen_vollpaket_enthalten": false,
+        "befund": "NICHT_ABGEDECKT"
+      },
+      {
+        "beitragsart": "Anleitung & Checkliste",
+        "thema": "Checkliste zur datensparsamen Vorfallsdokumentation",
+        "notwendiges_hab_modul": "HAB12",
+        "ausloeser": "Bericht, Fallbeispiel, Fotos, Tatort, personenbezogene Daten",
+        "im_aktuellen_vollpaket_enthalten": false,
+        "befund": "NICHT_ABGEDECKT"
+      },
+      {
+        "beitragsart": "Bericht & Praxisfall",
+        "thema": "Amtlicher Bericht zu Gasexplosion",
+        "notwendiges_hab_modul": "HAB03",
+        "ausloeser": "Strom, Gas, Feuer, Rauch, Bau-/Statik, Hochwasser, Lithium-Akkus, gefährliche Installation",
+        "im_aktuellen_vollpaket_enthalten": false,
+        "befund": "NICHT_ABGEDECKT"
+      },
+      {
+        "beitragsart": "Bericht & Praxisfall",
+        "thema": "Videoüberwachung eines kleinen Geschäfts im Gerichtsfall",
+        "notwendiges_hab_modul": "HAB06",
+        "ausloeser": "Kamera, Mikrofon, Aufzeichnungen, smarte Sensorik, Zutrittsdaten",
+        "im_aktuellen_vollpaket_enthalten": false,
+        "befund": "NICHT_ABGEDECKT"
+      },
+      {
+        "beitragsart": "Bericht & Praxisfall",
+        "thema": "Unabhängig belegter Produktausfall mit Käuferhinweisen",
+        "notwendiges_hab_modul": "HAB07",
+        "ausloeser": "Produkt-/Maßnahmenwahl und Vergleich",
+        "im_aktuellen_vollpaket_enthalten": false,
+        "befund": "NICHT_ABGEDECKT"
+      }
+    ],
+    "empfehlung_zur_entscheidung": "Alle zwölf schon vorliegenden Hab-Fachregeln als bedingt geltende, vollständig in jede autarke Typdatei kopierte Regeln behandeln. Nur auslösen, wenn das konkrete Thema sie berührt; keine pauschalen Warnabsätze und keine neue Prüfstation.",
+    "wichtige_einschraenkung": "Die Fälle wurden gezielt für potentiell fehlende Module konstruiert. 15/15 Lücken ist KEINE gemessene durchschnittliche Fehlerquote der Artikelproduktion.",
+    "weitere_grenze": "HAB01 gilt laut Entwurf für alle Texte, verlangt aber pauschal Schutzobjekt, Gefahr, Maßnahme und Restgefahr. Bei reinem Grundlagenwissen/Bericht darf das keine künstliche Handlungsempfehlung erzwingen. Ebenfalls erst fachlich abstimmen.",
+    "entscheidungsstatus": "VORSCHLAG_NICHT_GENEHMIGT",
+    "regeldateien_unveraendert": true
+  },
+  "aktualitaetsgegenprobe_20261119": {
+    "prüfung": "Sämtliche sieben Originalregel-Quelldateien des K0-Zweigs erneut gelesen und inhaltlich mit gespeicherter Quelle abgeglichen",
+    "dateiabweichungen": 0,
+    "bedeutung": "Die fünf Hab-Regelkopien sind hinsichtlich dieser sieben Quelldateien weiterhin auf demselben fachlichen K0-Stand, auch wenn sich der Kopf-Commit des Originalzweigs geändert hat.",
+    "einschränkung": "Nicht alle anderen K0-Dateien / ausführbaren Worker geprüft."
+  }
 }
