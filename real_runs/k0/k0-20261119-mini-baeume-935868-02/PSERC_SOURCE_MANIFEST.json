@@ -18,7 +18,7 @@
         "plan_slot": "d1df78939b9d9a54c7c98ab5ca2d6a487da520076aa778716dae3c72856807cf"
       }
     ],
-    "batch_sha256": "6db8450d6d3bbca7d3b756adc282c30ec3eab8e6c1fe07e7d3989f1b64667863"
+    "batch_sha256": "05910aba86d53962c5660fd75af1e02553bd87d90c7687b0478bbe86ed2c2adc"
   },
   "items": [
     {
@@ -34,5 +34,5 @@
       "search_intent": "Weidegestaltung – Bäume"
     }
   ],
-  "manifest_sha256": "5e3be6392ea323fd87d28d3bf18647fb411d59fe2f6e575427f0087532da096f"
+  "manifest_sha256": "7864d9edd4e279d2e9cd1b51f2186d9e24ddbc25b8a5356d981613af656f20d0"
 }
