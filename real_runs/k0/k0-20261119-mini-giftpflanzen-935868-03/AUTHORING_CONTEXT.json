@@ -21,11 +21,11 @@
         },
         {
           "source_title": "Merck Veterinary Manual – Plants Poisonous to Animals",
-          "source_url": "https://www.merckvetmanual.com/special-pet-topics/poisoning/plants-poisonous-to-animals"
+          "source_url": "https://www.msdvetmanual.com/special-pet-topics/poisoning/plants-poisonous-to-animals"
         },
         {
           "source_title": "Merck Veterinary Manual – Pyrrolizidine Alkaloidosis",
-          "source_url": "https://www.merckvetmanual.com/toxicology/pyrrolizidine-alkaloidosis/pyrrolizidine-alkaloidosis-in-animals"
+          "source_url": "https://www.msdvetmanual.com/toxicology/pyrrolizidine-alkaloidosis/pyrrolizidine-alkaloidosis-in-animals"
         },
         {
           "source_title": "University of Minnesota Extension – Planning your horse pasture site",
@@ -101,7 +101,7 @@
       },
       "F4": {
         "source_title": "Merck Veterinary Manual – Plants Poisonous to Animals",
-        "source_url": "https://www.merckvetmanual.com/special-pet-topics/poisoning/plants-poisonous-to-animals",
+        "source_url": "https://www.msdvetmanual.com/special-pet-topics/poisoning/plants-poisonous-to-animals",
         "evidence_text": "Yew; Taxus species",
         "statement": "Eiben zählen zu den für Tiere giftigen Gehölzen.",
         "evidence_text_sha256": "04e724d2f0994778d55cd6c940008444cfdbcfb12e3e32e87a1b55fe05253009",
@@ -112,7 +112,7 @@
       },
       "F5": {
         "source_title": "Merck Veterinary Manual – Pyrrolizidine Alkaloidosis",
-        "source_url": "https://www.merckvetmanual.com/toxicology/pyrrolizidine-alkaloidosis/pyrrolizidine-alkaloidosis-in-animals",
+        "source_url": "https://www.msdvetmanual.com/toxicology/pyrrolizidine-alkaloidosis/pyrrolizidine-alkaloidosis-in-animals",
         "evidence_text": "The plants most often implicated include ragwort",
         "statement": "Kreuzkrautarten können durch Pyrrolizidinalkaloide Vergiftungen verursachen.",
         "evidence_text_sha256": "75ff90b89b7fad88656235a72773ad50f518470f8b663ffdc97359714a0d71a4",
@@ -194,4 +194,3 @@
   },
   "publish_allowed": false
 }
-
