@@ -16,8 +16,8 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_title": "Horseware Ireland – Rambo Summer Series Turnout 0g",
-          "source_url": "https://www.horseware.com/en-eu/rambo-summer-series-turnout-0g"
+          "source_title": "Wikipedia – Horse blanket",
+          "source_url": "https://en.wikipedia.org/wiki/Horse_blanket"
         },
         {
           "source_title": "University of Minnesota Extension – Caring for your horse in the winter",
@@ -25,9 +25,9 @@
         }
       ],
       "claims": [
-        "Eine ungefütterte Außendecke kann vor Regenschauern schützen, wenn das Material wasserdicht ist.",
-        "Eine passende Deckengröße ist wichtig, um Scheuerstellen zu vermeiden.",
-        "Eine Decke sollte erst auf ein trockenes Pferd aufgelegt werden."
+        "Regendecken ohne Füllung können vor Nässe schützen, ohne viel zusätzliche Wärme zu liefern.",
+        "Eine schlecht sitzende Decke kann Scheuer- und Druckstellen verursachen.",
+        "Die Regendecke sollte erst auf trockenem Fell aufgelegt werden."
       ],
       "fresh_research_reference_date": "2026-11-19"
     },
@@ -72,11 +72,11 @@
     },
     "research_claims": {
       "F1": {
-        "source_title": "Horseware Ireland – Rambo Summer Series Turnout 0g",
-        "source_url": "https://www.horseware.com/en-eu/rambo-summer-series-turnout-0g",
-        "evidence_text_sha256": "75e60a4fb18570afba7f2e6bbd1ded11a230b71c8fbbe52e83e5894a7f73b353",
-        "statement": "Eine ungefütterte Außendecke kann vor Regenschauern schützen, wenn das Material wasserdicht ist.",
-        "evidence_text": "A waterproof, breathable softshell top section keeps your horse dry through sudden rain showers",
+        "source_title": "Wikipedia – Horse blanket",
+        "source_url": "https://en.wikipedia.org/wiki/Horse_blanket",
+        "evidence_text_sha256": "2e10c200c140b5ad901215b4e99077de067eb7e285d0d8101d622dec71189d6a",
+        "statement": "Regendecken ohne Füllung können vor Nässe schützen, ohne viel zusätzliche Wärme zu liefern.",
+        "evidence_text": "Rain sheets are blankets with no fill, and are waterproof.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Anleitung"
@@ -85,8 +85,8 @@
       "F2": {
         "source_title": "University of Minnesota Extension – Caring for your horse in the winter",
         "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horse-in-the-winter",
-        "evidence_text_sha256": "c7583e9eaba2e3b5af0e7109dc731e6f6959514700e22de66c4ff6130cc1af932",
-        "statement": "Eine passende Deckengröße ist wichtig, um Scheuerstellen zu vermeiden.",
+        "evidence_text_sha256": "5b13af05674b4ada4cb0c4646aa573f1cca1532bcd4f0a67e01f4722d3326bdd",
+        "statement": "Eine schlecht sitzende Decke kann Scheuer- und Druckstellen verursachen.",
         "evidence_text": "Make sure the blanket fits. Poorly fitted blankets can cause sores and rub marks along the straps.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
@@ -96,8 +96,8 @@
       "F3": {
         "source_title": "University of Minnesota Extension – Caring for your horse in the winter",
         "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horse-in-the-winter",
-        "evidence_text_sha256": "bddc4d0b1a6fd886cb096ed31db2cd7c5f01b378d37d908db05d2bfc441a6f821",
-        "statement": "Eine Decke sollte erst auf ein trockenes Pferd aufgelegt werden.",
+        "evidence_text_sha256": "3dfeb98e871c09f9b80e4847bf9e5b333561d5d4f6badeace4bd65beb69fa8af",
+        "statement": "Die Regendecke sollte erst auf trockenem Fell aufgelegt werden.",
         "evidence_text": "Don’t put a blanket on a wet horse. Wait until the horse is dry before blanketing.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
