@@ -1,0 +1,174 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Fellfarben und Bewegung beim Malen von Pferden darstellen",
+    "target_keyword": "pferd malen",
+    "category": "reiterleben-community",
+    "article_type": "Anleitung",
+    "plan_slot": "a533201026235df1a146847c922e7909eb6b5fc880755b9eec9e295350d66458"
+  },
+  "content_profile": {
+    "search_intent": "Malen – Pferdemotive"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Fellfarben_der_Pferde",
+          "source_title": "Wikipedia – Fellfarben der Pferde"
+        }
+      ],
+      "claims": [
+        "Pferdefarben werden nach ihrem sichtbaren Aussehen benannt.",
+        "Die Falbfarbe ist eine wichtige ursprüngliche Fellfarbe.",
+        "Pferde besitzen heute vielfältige Fellfarben.",
+        "Viele Fellfarben kommen bei zahlreichen Pferderassen vor."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Anleitung",
+      "target_keyword": "pferd malen",
+      "topic": "Fellfarben und Bewegung beim Malen von Pferden darstellen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "reiterleben-community",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Fellfarben und Bewegung in einem gemalten Pferdemotiv nachvollziehbar gestalten.",
+      "preparation_items": [
+        "Vorlage mit klarer Pferdehaltung auswählen",
+        "Farbpalette für Fell und Umgebung festlegen",
+        "Zeichen- und Malmaterial vorbereiten"
+      ],
+      "procedure_steps": [
+        "Pferdesilhouette mit Blick auf die Bewegungsrichtung skizzieren",
+        "Fellfarbe an der Vorlage orientieren",
+        "Helle und dunkle Bereiche für Körperform unterscheiden",
+        "Hals, Beine und Schweif in die Bewegung einbeziehen",
+        "Farben schrittweise ergänzen und Übergänge prüfen"
+      ],
+      "safety_controls": [
+        "Farben nicht als Beleg für eine Pferderasse interpretieren",
+        "Keine anatomisch unmöglichen Gelenkwinkel ungeprüft übernehmen"
+      ],
+      "common_errors": [
+        "Fell auf allen Körperstellen gleich dunkel malen",
+        "Beine ohne Bezug zur Bewegungsrichtung setzen"
+      ],
+      "result_checks": [
+        "Fellfarbe wirkt innerhalb des Motivs stimmig",
+        "Bewegungsrichtung der Pferdesilhouette erkennbar",
+        "Licht- und Schattenbereiche plausibel verteilt"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Fellfarben_der_Pferde",
+        "source_title": "Wikipedia – Fellfarben der Pferde",
+        "evidence_text": "Die historisch gewachsenen Namen benennen die Farben anhand des Aussehens.",
+        "evidence_text_sha256": "d04b1bc2b5bbe1de073dfbd7565f7032064c9cec1ec2e3aa4ddc345a29128f4a",
+        "statement": "Pferdefarben werden nach ihrem sichtbaren Aussehen benannt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Fellfarben_der_Pferde",
+        "source_title": "Wikipedia – Fellfarben der Pferde",
+        "evidence_text": "Als die ursprüngliche Pferdefarbe wird die Falbfarbe angenommen.",
+        "evidence_text_sha256": "692ff12b878c37525cd0bd166365941bce8c9eab013359b0aeac999438feea8b",
+        "statement": "Die Falbfarbe ist eine wichtige ursprüngliche Fellfarbe.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Fellfarben_der_Pferde",
+        "source_title": "Wikipedia – Fellfarben der Pferde",
+        "evidence_text": "Aufgrund der züchterischen Leistung gibt es heute eine ganze Reihe an Farben bei Pferden.",
+        "evidence_text_sha256": "e2124bede711d917ebd368a8aecd4aff2ab0e5dbe66b26108d68eb1c28855865",
+        "statement": "Pferde besitzen heute vielfältige Fellfarben.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://de.wikipedia.org/wiki/Fellfarben_der_Pferde",
+        "source_title": "Wikipedia – Fellfarben der Pferde",
+        "evidence_text": "Viele davon sind in fast allen Rassen",
+        "evidence_text_sha256": "479596c91b4fc07f202720f3dbf5f3dacbac0d4ad1ee6e0264ea85a395a3b5f9",
+        "statement": "Viele Fellfarben kommen bei zahlreichen Pferderassen vor.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/reiterleben-community/",
+        "anchor": "reiterleben-community",
+        "block": "steps"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/reiterleben-community/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "reiterleben-community",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferd",
+      "Fellfarben",
+      "Fell",
+      "Bewegung",
+      "Malen",
+      "Farben"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Tabelle stellt die relevanten Prüf- und Entscheidungskriterien für pferd malen gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
