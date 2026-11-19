@@ -1,0 +1,172 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Zuckerfreien Leckstein für Pferde selber machen",
+    "target_keyword": "Wie kann ich zuckerfreien Leckstein für Pferde selber machen?",
+    "category": "pferdeernaehrung-verstehen",
+    "article_type": "Anleitung",
+    "plan_slot": "3035e6683641b5aca050acc2ac648f568d5e0460d2064a8704eb98d9bab7eae5"
+  },
+  "content_profile": {
+    "search_intent": "Zuckerfreien Leckstein für Pferde selbst herstellen und geeignete Zutaten auswählen"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/feeding-your-horse-a-ration-balancer",
+          "source_title": "University of Minnesota – Vitamine und Mineralstoffe"
+        }
+      ],
+      "claims": [
+        "Pferde benötigen Vitamine und Mineralstoffe.",
+        "Rationsausgleich kann fehlende Spurenelemente ergänzen.",
+        "Bei Ergänzungsfutter sind die Herstellerangaben wichtig.",
+        "Ein reiner Salzleckstein enthält keine zusätzlichen Spurenelemente."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Anleitung",
+      "target_keyword": "Wie kann ich zuckerfreien Leckstein für Pferde selber machen?",
+      "topic": "Zuckerfreien Leckstein für Pferde selber machen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Einen zuckerfreien Leckblock als Pferdebeschäftigung nur mit sicheren Zutaten und ohne unkontrollierte Mineralstoffzusätze vorbereiten.",
+      "preparation_items": [
+        "Sauberes Wasser",
+        "Hygienischer Behälter",
+        "Geeignete zuckerfreie Futterkomponenten nach fachlicher Abstimmung"
+      ],
+      "procedure_steps": [
+        "Bedarf und geeignete Zutaten vorab prüfen",
+        "Sauberen Behälter und Wasser bereitstellen",
+        "Leckblock vorbereitet anbieten und Verträglichkeit beobachten"
+      ],
+      "safety_controls": [
+        "Keine Mineralstoffmischungen nach Augenmaß dosieren",
+        "Zuckerfreie Angaben bedeuten nicht automatisch bedarfsgerecht"
+      ],
+      "common_errors": [
+        "Leckblock mit medizinischem Mineralfutter verwechseln",
+        "Hygiene und individuelle Futterbedürfnisse übersehen"
+      ],
+      "result_checks": [
+        "Das Pferd nimmt Futter freiwillig an",
+        "Die tägliche Ration bleibt bedarfsgerecht"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/feeding-your-horse-a-ration-balancer",
+        "source_title": "University of Minnesota – Vitamine und Mineralstoffe",
+        "evidence_text": "Vitamins and minerals are nutrients that horses need",
+        "evidence_text_sha256": "e673c63e463f9fe034900970cbc28014e77daee554d6829844e3d6834387e82d",
+        "statement": "Pferde benötigen Vitamine und Mineralstoffe.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/feeding-your-horse-a-ration-balancer",
+        "source_title": "University of Minnesota – Vitamine und Mineralstoffe",
+        "evidence_text": "Ration balancers provide your horse with the vitamins and trace minerals most forages lack",
+        "evidence_text_sha256": "13a00ce7bd8a9556db7df23ce920c921a069d5e91d96b08ea3dbcc950f0ac6a0",
+        "statement": "Rationsausgleich kann fehlende Spurenelemente ergänzen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/feeding-your-horse-a-ration-balancer",
+        "source_title": "University of Minnesota – Vitamine und Mineralstoffe",
+        "evidence_text": "Always follow the manufacturer’s feed directions when feeding commercial feeds",
+        "evidence_text_sha256": "2c604ee4568a61e25c82a499992e3a287738f61d7eb499eec04adf60926cfaae",
+        "statement": "Bei Ergänzungsfutter sind die Herstellerangaben wichtig.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/feeding-your-horse-a-ration-balancer",
+        "source_title": "University of Minnesota – Vitamine und Mineralstoffe",
+        "evidence_text": "Allow horses access to a white salt block that doesn’t contain trace minerals",
+        "evidence_text_sha256": "20e8d52aeac49abeb14a8255224242a716977989eb4896586c2429193672f041",
+        "statement": "Ein reiner Salzleckstein enthält keine zusätzlichen Spurenelemente.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "anchor": "pferdeernaehrung-verstehen",
+        "block": "details"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Leckstein",
+      "Salz",
+      "Zucker",
+      "Wasser",
+      "Herstellung",
+      "Fütterung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine kompakte Tabelle ergänzt die thematisch unterschiedlichen Prüfungskriterien und Maßnahmen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
