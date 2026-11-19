@@ -1,0 +1,188 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Den passenden Wassertrog für Pferde kaufen",
+    "target_keyword": "wassertröge kaufen",
+    "category": "wassertroege-fuer-weiden-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "10dabca2e9d1861e941f967b315e05f30a4bc7bc04359b2e16cbdd443103a032"
+  },
+  "content_profile": {
+    "search_intent": "Kaufberatung – Tränke"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "University of Minnesota Extension – Encouraging your horse to drink",
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/encouraging-your-horse-to-drink"
+        },
+        {
+          "source_title": "University of Minnesota Extension – Cleaning your horse's water tank",
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/cleaning-animal-water-tanks"
+        }
+      ],
+      "claims": [
+        "Pferde brauchen jederzeit frisches, sauberes Wasser.",
+        "Tröge und andere Trinkgefäße müssen regelmäßig gereinigt werden.",
+        "Ein Wassertrog soll einfach zu reinigen sein, damit Algen und Verschmutzungen nicht überhandnehmen.",
+        "Wassertröge können durch Schmutz, Mist und Futterreste verunreinigt werden.",
+        "Der Wasserbedarf steigt bei Bewegung und heißem Wetter.",
+        "Auch die Wassertemperatur beeinflusst, ob Pferde ausreichend trinken."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "wassertröge kaufen",
+      "topic": "Den passenden Wassertrog für Pferde kaufen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "wassertroege-fuer-weiden-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Einen passenden Wassertrog für Pferde nach Wasserangebot, Reinigung und Standort auswählen.",
+      "decision_criteria": [
+        "Leicht zu reinigende Oberflächen",
+        "Ausreichendes Angebot an Frischwasser",
+        "Standort und Verschmutzungsrisiko",
+        "Größe und Wasserbedarf"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "University of Minnesota Extension – Encouraging your horse to drink",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/encouraging-your-horse-to-drink",
+        "evidence_text": "free access to fresh, clean water",
+        "statement": "Pferde brauchen jederzeit frisches, sauberes Wasser.",
+        "evidence_text_sha256": "2a374eec36b006d4d82616e8135180842048997633fde178fcbd5793492b9c6e",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "University of Minnesota Extension – Encouraging your horse to drink",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/encouraging-your-horse-to-drink",
+        "evidence_text": "Frequently clean water buckets, troughs",
+        "statement": "Tröge und andere Trinkgefäße müssen regelmäßig gereinigt werden.",
+        "evidence_text_sha256": "f37983068b5bd1e7fd33bc15aea7df4b037769238b9126838675db0ae5fb9ea5",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "University of Minnesota Extension – Cleaning your horse's water tank",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/cleaning-animal-water-tanks",
+        "evidence_text": "prevent algae growth and unclean conditions",
+        "statement": "Ein Wassertrog soll einfach zu reinigen sein, damit Algen und Verschmutzungen nicht überhandnehmen.",
+        "evidence_text_sha256": "879f6c3c2f422f1025c8e04a22f1d9e62636f6083126b83bbee827c9bd46391d",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_title": "University of Minnesota Extension – Cleaning your horse's water tank",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/cleaning-animal-water-tanks",
+        "evidence_text": "Dirt, manure, feed droppings",
+        "statement": "Wassertröge können durch Schmutz, Mist und Futterreste verunreinigt werden.",
+        "evidence_text_sha256": "e8ed72512a4068597d5a349dc06d4328aa0032a7a5cea529029268747b71e839",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_title": "University of Minnesota Extension – Encouraging your horse to drink",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/encouraging-your-horse-to-drink",
+        "evidence_text": "more water when they are exercising",
+        "statement": "Der Wasserbedarf steigt bei Bewegung und heißem Wetter.",
+        "evidence_text_sha256": "824c1f4a0a999dab84443e3a3bb04ad0398f0da40ffdee6e2e4b4c4ff3bca4e7",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F6": {
+        "source_title": "University of Minnesota Extension – Cleaning your horse's water tank",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/cleaning-animal-water-tanks",
+        "evidence_text": "temperature can greatly affect horse water intake",
+        "statement": "Auch die Wassertemperatur beeinflusst, ob Pferde ausreichend trinken.",
+        "evidence_text_sha256": "f470c39f305d0589845a26b0a9716d5b055bb4b9ba0c3a11b67a52a216f192c0",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/wassertroege-fuer-weiden-beratung/",
+        "anchor": "wassertroege-fuer-weiden-beratung",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/wassertroege-fuer-weiden-beratung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "wassertroege-fuer-weiden-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Wassertrog",
+      "Wassertröge",
+      "Pferde",
+      "Kauf",
+      "Wasser",
+      "Reinigung",
+      "Tränke"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Übersicht ordnet vier konkrete Unterschiede den Entscheidungen bei wassertröge kaufen zu."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
