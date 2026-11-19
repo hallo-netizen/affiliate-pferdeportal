@@ -1,0 +1,180 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Darf man Pferdeweiden mit Gülle düngen?",
+    "target_keyword": "darf man pferdeweiden mit gülle düngen",
+    "category": "recht-finanzen-organisation",
+    "article_type": "FAQ",
+    "plan_slot": "37ec17fd7283ea8dfa1b08c6de8627d54c9c7c980fc86102134e2d3d85b7c76d"
+  },
+  "content_profile": {
+    "search_intent": "Weiderecht und Hygiene"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Landwirtschaftskammer NRW – Düngeverordnung zur Gülledüngung",
+          "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/ackerbau/duengung/guelle/verordnung/index.htm"
+        },
+        {
+          "source_title": "LUFA NRW – Allgemeine Hinweise zur Düngung von Pferdeweiden",
+          "source_url": "https://www.landwirtschaftskammer.de/lufa/download/fachinfo/boden/pferde_duengeempfehlung.pdf"
+        }
+      ],
+      "claims": [
+        "Die Düngeverordnung bildet den rechtlichen Rahmen für das Ausbringen von Gülle auf landwirtschaftlich genutzten Flächen.",
+        "Auch auf Grünland sind die gesetzlichen Sperrfristen für Gülle einzuhalten.",
+        "Eine Gülledüngung muss sich am Bedarf der Pflanzen orientieren.",
+        "Pferde müssen vor der Ausbringung von der betroffenen Fläche genommen werden.",
+        "Gülle enthält mehrere Nährstoffe und muss in die Nährstoffplanung einbezogen werden.",
+        "Ausbringungsverbote, Mengenobergrenzen und Sperrfristen sind verbindlich zu berücksichtigen."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "darf man pferdeweiden mit gülle düngen",
+      "topic": "Darf man Pferdeweiden mit Gülle düngen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "recht-finanzen-organisation",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Darf man Pferdeweiden mit Gülle düngen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/ackerbau/duengung/guelle/verordnung/index.htm",
+        "source_title": "Landwirtschaftskammer NRW – Düngeverordnung zur Gülledüngung",
+        "evidence_text": "Rechtsgrundlage für die Anwendung von Düngemitteln, dazu gehört auch Gülle, ist die Düngeverordnung (DüV) aus dem Jahr 2020.",
+        "evidence_text_sha256": "3928ab5f32259342dd17b726c10ca26ea3f38b40bc9d3c5ffb2f9584c95f8aa0",
+        "statement": "Die Düngeverordnung bildet den rechtlichen Rahmen für das Ausbringen von Gülle auf landwirtschaftlich genutzten Flächen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/ackerbau/duengung/guelle/verordnung/index.htm",
+        "source_title": "Landwirtschaftskammer NRW – Düngeverordnung zur Gülledüngung",
+        "evidence_text": "Der Gesetzgeber hat deshalb eine „Sperrfrist“ für Ackerland und Grünland bestimmt",
+        "evidence_text_sha256": "04120c07d25ef64780134bdeadcd666758deabea4b2a4c5c3c041e0beb824415",
+        "statement": "Auch auf Grünland sind die gesetzlichen Sperrfristen für Gülle einzuhalten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/ackerbau/duengung/guelle/verordnung/index.htm",
+        "source_title": "Landwirtschaftskammer NRW – Düngeverordnung zur Gülledüngung",
+        "evidence_text": "Gülle darf den Pflanzen nur dann zur Verfügung gestellt werden, wenn die Pflanzen tatsächlich einen Bedarf haben",
+        "evidence_text_sha256": "5500eeb531dc8910b61271afd67f64d713a26c322a7fd7bdecf5ce5e16e9495f",
+        "statement": "Eine Gülledüngung muss sich am Bedarf der Pflanzen orientieren.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.landwirtschaftskammer.de/lufa/download/fachinfo/boden/pferde_duengeempfehlung.pdf",
+        "source_title": "LUFA NRW – Allgemeine Hinweise zur Düngung von Pferdeweiden",
+        "evidence_text": "Die Pferde sind vor der Düngung von der Weide zu nehmen.",
+        "evidence_text_sha256": "499ee5722113943477f1d39c67b794e946ac6b8e9789d33deb4dc736603c94c1",
+        "statement": "Pferde müssen vor der Ausbringung von der betroffenen Fläche genommen werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.landwirtschaftskammer.de/lufa/download/fachinfo/boden/pferde_duengeempfehlung.pdf",
+        "source_title": "LUFA NRW – Allgemeine Hinweise zur Düngung von Pferdeweiden",
+        "evidence_text": "Organischer Dünger (Festmist, Gülle) enthält neben Stickstoff auch Phosphor, Kalium und Magnesium.",
+        "evidence_text_sha256": "853b27ac84854c7962e87e1f8102be248f2757bafaf48a928a30a74ed51374f7",
+        "statement": "Gülle enthält mehrere Nährstoffe und muss in die Nährstoffplanung einbezogen werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_url": "https://www.landwirtschaftskammer.de/lufa/download/fachinfo/boden/pferde_duengeempfehlung.pdf",
+        "source_title": "LUFA NRW – Allgemeine Hinweise zur Düngung von Pferdeweiden",
+        "evidence_text": "Im Rahmen der verbindlichen Düngeverordnung sind die gesetzlichen Ausbringungsverbote, Ausbringungsobergrenzen und Sperrfristen zu beachten.",
+        "evidence_text_sha256": "5931bdb72570b53a68356e642ced732724a24eaa96c3deda4cc2be1c16c8a1f1",
+        "statement": "Ausbringungsverbote, Mengenobergrenzen und Sperrfristen sind verbindlich zu berücksichtigen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/recht-finanzen-organisation/",
+        "anchor": "Recht, Finanzen & Organisation",
+        "block": "details"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/recht-finanzen-organisation/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "recht-finanzen-organisation",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Gülle",
+      "Pferdeweiden",
+      "Düngeverordnung",
+      "Sperrfristen",
+      "Weidepflege"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Ein Vergleich der rechtlichen Bedingungen und praktischen Weidesicherheit ergänzt die FAQ."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
