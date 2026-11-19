@@ -1,0 +1,150 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wie lange erinnern sich Pferde an ihre Besitzer?",
+    "target_keyword": "Wie lange erinnern sich Pferde an ihre Besitzer?",
+    "category": "pferde-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "46241ae2e7598bd955a7dbaa1d99a7c65793bca8e1781cfa1efae2c4473a5b17"
+  },
+  "content_profile": {
+    "search_intent": "Erinnerungsvermögen von Pferden gegenüber früheren Besitzern erklären"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/behavior/behavior-of-production-animals/herd-behaviors-and-moving-herd-animals",
+          "source_title": "MSD Veterinary Manual – Herdenverhalten"
+        }
+      ],
+      "claims": [
+        "Pferde können sich langfristig an einzelne Menschen erinnern.",
+        "Pferde können Hinweise auf frühere negative Erfahrungen meiden.",
+        "Frühere Erfahrungen prägen das Verhalten beim späteren Umgang.",
+        "Körpersprache hilft dabei, die Reaktion eines Pferdes zu beobachten."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie lange erinnern sich Pferde an ihre Besitzer?",
+      "topic": "Wie lange erinnern sich Pferde an ihre Besitzer?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie lange erinnern sich Pferde an ihre Besitzer?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/behavior/behavior-of-production-animals/herd-behaviors-and-moving-herd-animals",
+        "source_title": "MSD Veterinary Manual – Herdenverhalten",
+        "evidence_text": "horses, have long-term memories of individuals",
+        "evidence_text_sha256": "f49654a0ed20963a35e4b7469401aff69cc85bc76eb6ef88ddcc2d97a6541cc3",
+        "statement": "Pferde können sich langfristig an einzelne Menschen erinnern.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/behavior/behavior-of-production-animals/herd-behaviors-and-moving-herd-animals",
+        "source_title": "MSD Veterinary Manual – Herdenverhalten",
+        "evidence_text": "avoid cues associated with negative handling experiences",
+        "evidence_text_sha256": "74e9f429e248202eb80b22eeebdcc3516424889092c24a26ac925eec1e0c824a",
+        "statement": "Pferde können Hinweise auf frühere negative Erfahrungen meiden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/behavior/behavior-of-production-animals/herd-behaviors-and-moving-herd-animals",
+        "source_title": "MSD Veterinary Manual – Herdenverhalten",
+        "evidence_text": "Animals' emotional and mental states in response to handling are greatly influenced by their previous experiences",
+        "evidence_text_sha256": "cd75223ba72e40bc28520fc8b708331703f1886934409ddda5b57389bd1f409b",
+        "statement": "Frühere Erfahrungen prägen das Verhalten beim späteren Umgang.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.msdvetmanual.com/behavior/behavior-of-production-animals/herd-behaviors-and-moving-herd-animals",
+        "source_title": "MSD Veterinary Manual – Herdenverhalten",
+        "evidence_text": "Handlers should pay attention to animals' body language",
+        "evidence_text_sha256": "f7acbbfdc6ca838a21ea179782651be18130449506572645f08129c518607822",
+        "statement": "Körpersprache hilft dabei, die Reaktion eines Pferdes zu beobachten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-verstehen/",
+        "anchor": "pferde-verstehen",
+        "block": "details"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Erinnerung",
+      "Besitzer",
+      "Menschen",
+      "Verhalten",
+      "Vertrauen",
+      "Zeit"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine kompakte Tabelle ergänzt die thematisch unterschiedlichen Prüfungskriterien und Maßnahmen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
