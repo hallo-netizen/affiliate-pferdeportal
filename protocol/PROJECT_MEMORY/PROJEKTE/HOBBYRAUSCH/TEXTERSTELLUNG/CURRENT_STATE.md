@@ -1,3 +1,15 @@
+## 19.11.2026 – AKTUELL UND MAẞGEBLICH: 0.4.24.5, realen Sandbox-Migrationsfehler gezielt korrigiert
+
+- **Live-Screenshot:** `PSTE_CONTEXT_BLOCKED_PSTE_SANDBOX_RECORD_STORE_LEGACY_OPTION_MISSING`. Direkter Fehler im Original `PSTE_Sandbox_Record_Store::sourceMetaCheap()`; fehlende Altoption bei frischem Portal, obwohl Original-`PSTE_Semantic_Review_Sandbox::stored()` leeren Ausgangszustand kennt. Zusätzlich blockierte TXE-AJAX bereits `BLOCKED` vor erlaubter Original-Fortsetzung.
+- **Aktuelle einzige Ersatz-ZIP** `Texterstellung_Hobbydepot_0.4.24.5_SANDBOX_LEERBESTAND_FIX.zip`, SHA256 `42f648b59a99fda0b1684c0e174a9430f4d9d131eaa8d98548157c5d8e09e2ba` / 506541 Bytes, Wurzelordner `texterstellung-hobbydepot`, Version `0.4.24.5`.
+- Exakt **4 vorhandene Dateien verändert, 83/87 identisch** zu 0.4.24.4: signierten Original-Leerbestand nur beim tatsächlichen Fehlen einmalig anlegen, Original-Streammigration, eng erlaubte BLOCKED-Job-Fortsetzung und AJAX-Weiterleitung. **Keine neue Architektur und kein K0-/Recherche-/Datenspeicher-Schutzabbau**.
+- Belege: Originalsource-Tests (9/9), echte leere Original-Sandbox-Migration bis COMPLETE, 12 echte Kontext-`processBatch`-Aufrufe mit unveränderter UUID bis COMPLETE (nachgelagerte WP-/Indexdaten simuliert), gerendertes Browser-JS → PHP-AJAX → COMPLETE, alter Nullthemen-Test 12/12, bestehender 1-Datensatz-Speicher unverändert, beschädigter Speicher gesperrt; PHP 78/78, JSON 8/8, ZIP 87/87. **KEIN Live-WP-E2E-Test**.
+- Zentrales Pluginbüro `/Hobby Depot/Plugin-Büro/` und Fachbüro `/hobbydepot/TEXTERSTELLUNG/INSTALLATIONSKANDIDATEN/` **erfolgreich gespeichert und unveränderte ZIP aus Library zurückgelesen**; eigene `Texterstellung-CURRENT.md` und Prüfbericht aktualisiert. Vorherige 0.4.24.4 archiviert.
+- **Nächster Klick:** Sicherung prüfen, **0.4.24.5** hochladen und vorhandenes Plugin ERSETZEN, `Texterstellung → Recherche → Vorhandene Einrichtung fortsetzen` einmal; keine neue kostenpflichtige Recherche, kein neuer K0-Lauf, keine Credentials oder Diagnose erneut anfordern.
+- Vollständige Beweise `LIVE_SANDBOX_LEGACY_OPTION_MISSING_FIX_0_4_24_5_20261119.md` und `/Hobby Depot/Plugin-Büro/Texterstellung_0.4.24.5_PRUEFBERICHT.md`.
+
+---
+
 ## 19.11.2026 – AKTUELL: 0.4.24.4 gegen LIVE-MIGRATIONSFEHLER (vorgeprüft, noch nicht auf Live abgenommen)
 
 - **Vom Betreiber real gemeldeter Stop:** `PSTE_EDITORIAL_RULESET_RAW_KEYWORD_INVARIANT_FAILED`. Das war trotz vorheriger „54 Tests“ NICHT mit echtem PSTE-Nullthemenbestand getestet worden. Diese vorherige Test-/Freigabeaussage war zu weitgehend.
