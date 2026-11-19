@@ -1,0 +1,150 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Soll man Pferde jeden Tag reiten?",
+    "target_keyword": "Soll man Pferde jeden Tag reiten?",
+    "category": "ausbildung-reitweisen",
+    "article_type": "FAQ",
+    "plan_slot": "2a39799a05c21d63d883a8e4c3df8ed20319cac3eddcd59c9ed9f1f7844e6bce"
+  },
+  "content_profile": {
+    "search_intent": "Tägliches Reiten nach Gesundheitszustand und Trainingsbedarf einschätzen"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.worldhorsewelfare.org/advice/the-3fs-friends-forage-and-freedom",
+          "source_title": "World Horse Welfare – Freunde, Raufutter und Freiheit"
+        }
+      ],
+      "claims": [
+        "Freie Bewegung ist für das körperliche und seelische Wohlbefinden von Pferden wichtig.",
+        "Reiten fördert Bewegung, ersetzt aber nicht deren selbstbestimmte Form.",
+        "Bewegung auf abwechslungsreichen Flächen in der Herde ist vorteilhaft.",
+        "Wahlmöglichkeiten gehören zur artgerechten Bewegung."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Soll man Pferde jeden Tag reiten?",
+      "topic": "Soll man Pferde jeden Tag reiten?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "ausbildung-reitweisen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Soll man Pferde jeden Tag reiten?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/the-3fs-friends-forage-and-freedom",
+        "source_title": "World Horse Welfare – Freunde, Raufutter und Freiheit",
+        "evidence_text": "Freedom of movement is important for horses’ physical and mental well-being",
+        "evidence_text_sha256": "3120080e9a7a237322288e7c08d27e7f12a6e1c396863584fca6bd1708e8399c",
+        "statement": "Freie Bewegung ist für das körperliche und seelische Wohlbefinden von Pferden wichtig.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/the-3fs-friends-forage-and-freedom",
+        "source_title": "World Horse Welfare – Freunde, Raufutter und Freiheit",
+        "evidence_text": "Riding and groundwork also encourage movement, but this is not normally within the horse’s control",
+        "evidence_text_sha256": "1b838e9678e5ba0b34c70288a63ae9d7e7a7380a03a83f84e9dee1dfa6132067",
+        "statement": "Reiten fördert Bewegung, ersetzt aber nicht deren selbstbestimmte Form.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/the-3fs-friends-forage-and-freedom",
+        "source_title": "World Horse Welfare – Freunde, Raufutter und Freiheit",
+        "evidence_text": "Herd turnout in varied terrain is the best option",
+        "evidence_text_sha256": "6ff337cfc4a7c10abe409dc5475628d6efbc853565ea901ca34934be66d55432",
+        "statement": "Bewegung auf abwechslungsreichen Flächen in der Herde ist vorteilhaft.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/the-3fs-friends-forage-and-freedom",
+        "source_title": "World Horse Welfare – Freunde, Raufutter und Freiheit",
+        "evidence_text": "Freedom doesn’t just mean freedom to move",
+        "evidence_text_sha256": "12e0b31b016a5a5d334872c8e8df0278455d6b97d80e2c3be5d9c00966276fc5",
+        "statement": "Wahlmöglichkeiten gehören zur artgerechten Bewegung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/ausbildung-reitweisen/",
+        "anchor": "ausbildung-reitweisen",
+        "block": "details"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/ausbildung-reitweisen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "ausbildung-reitweisen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Reiten",
+      "Bewegung",
+      "Training",
+      "Ruhe",
+      "Auslauf",
+      "Belastung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine kompakte Tabelle ergänzt die thematisch unterschiedlichen Prüfungskriterien und Maßnahmen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
