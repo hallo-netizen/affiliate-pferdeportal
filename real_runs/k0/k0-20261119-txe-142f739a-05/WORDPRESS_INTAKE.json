@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welches Futter ist für Pferde am gesündesten?",
+      "target_keyword": "Was ist das gesündeste Futter für Pferde?",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "46f85321f9ab712d341cfc640f05c974967b94f2898c9d7167d966045a64f067"
+    }
+  ],
+  "batch_sha256": "089f8dd5a6e2290f986648d9d044e96f7ad873b11d9c63601805fe51ec0f7186"
+}

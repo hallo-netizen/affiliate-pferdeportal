@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Ab welchem Alter gilt ein Pferd als alt?",
+      "target_keyword": "Ab welchem Alter gilt ein Pferd als alt?",
+      "category": "pferdewissen-grundlagen",
+      "article_type": "FAQ",
+      "plan_slot": "72597ab2773932caaa2e604507329899649751a65ca60f019249d96cf4142e1e"
+    }
+  ],
+  "batch_sha256": "6a30e48e5ee84d106458cc75ec99df0a60b769b5f62e202ac6cdfe5154aca6df"
+}

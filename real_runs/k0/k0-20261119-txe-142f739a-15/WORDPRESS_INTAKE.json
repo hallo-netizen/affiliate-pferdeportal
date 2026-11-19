@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "In welchem Alter sind Pferde am schwierigsten?",
+      "target_keyword": "In welchem Alter sind Pferde am schwierigsten?",
+      "category": "pferde-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "c905a7fa5ba476f7f946201e56cd244a7bf1253fbc0cf7f51f749db189182490"
+    }
+  ],
+  "batch_sha256": "443c806fb65774e1c0f078f8b37c2595179b1cf5bb2f0e89fd646c62c5c07ad7"
+}

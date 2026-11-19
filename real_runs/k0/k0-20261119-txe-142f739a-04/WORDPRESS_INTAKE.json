@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Sind Äpfel gut für Pferde?",
+      "target_keyword": "Sind Äpfel gut für Pferde?",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "0ab619ab850f1f1154bd139b5abce55a1da9b6f958d3a7aa6bf066403a7916b3"
+    }
+  ],
+  "batch_sha256": "6e3477cc9b9c1994c024cf4cce141e2af75bf46682b645530eead2e344471d5a"
+}

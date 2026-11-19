@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Minerallecksteine von Krämer für Pferde auswählen",
+      "target_keyword": "mineralleckstein pferd krämer",
+      "category": "minerallecksteine-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "1f02ce47f611ec88d9c773e76700a821a07cc1d342db4a6a9b209291361df73c"
+    }
+  ],
+  "batch_sha256": "baae2f54227d4ab205d76d3f9c3b0c221aa9328fea582a916f4dfb9263f82bbb"
+}

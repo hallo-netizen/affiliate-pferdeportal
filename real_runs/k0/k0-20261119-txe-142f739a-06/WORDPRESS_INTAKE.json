@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Soll man Pferde jeden Tag reiten?",
+      "target_keyword": "Soll man Pferde jeden Tag reiten?",
+      "category": "ausbildung-reitweisen",
+      "article_type": "FAQ",
+      "plan_slot": "2a39799a05c21d63d883a8e4c3df8ed20319cac3eddcd59c9ed9f1f7844e6bce"
+    }
+  ],
+  "batch_sha256": "f424665883740fdf69cb7dca0fab12313c1d6d9c099531770166197ed3287698"
+}

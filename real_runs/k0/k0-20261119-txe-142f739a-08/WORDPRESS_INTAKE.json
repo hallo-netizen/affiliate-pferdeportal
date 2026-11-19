@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Ist Gurke gut für Pferde?",
+      "target_keyword": "Ist Gurke gut für Pferde?",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "09e645519d1a1787c51c6daf99740df590b463ad87078d3d94832d3fc4620a18"
+    }
+  ],
+  "batch_sha256": "5205b2a106de0bdaf91ca5e8a29c431b7e18106d7a461352d1d8ee7a667ec5b3"
+}

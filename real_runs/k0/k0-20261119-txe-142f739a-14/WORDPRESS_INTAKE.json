@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie lange erinnern sich Pferde an ihre Besitzer?",
+      "target_keyword": "Wie lange erinnern sich Pferde an ihre Besitzer?",
+      "category": "pferde-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "46241ae2e7598bd955a7dbaa1d99a7c65793bca8e1781cfa1efae2c4473a5b17"
+    }
+  ],
+  "batch_sha256": "7ebd6fdc27bc5ed60d98a059fbddf7e6a62cd195398d179df489c53ba088d45c"
+}

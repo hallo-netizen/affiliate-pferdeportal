@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche Fütterungsfehler kommen bei Pferden häufig vor?",
+      "target_keyword": "Welche Fehler werden bei der Fütterung von Pferden am häufigsten gemacht?",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "822aead685621327f283bf64df8d4089b60a3534cb1c8598a51f20329c7775c2"
+    }
+  ],
+  "batch_sha256": "0a24f4b1f4086f9c3a745e13db308cc66c2fa4f09f2d421f4b7d0651ac10f5d8"
+}

@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Zuckerfreien Leckstein für Pferde selber machen",
+      "target_keyword": "Wie kann ich zuckerfreien Leckstein für Pferde selber machen?",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "Anleitung",
+      "plan_slot": "3035e6683641b5aca050acc2ac648f568d5e0460d2064a8704eb98d9bab7eae5"
+    }
+  ],
+  "batch_sha256": "f45c4ab53cb769ffb25a0a6a5551e4cb734601c079588b00b2f20fe91d126145"
+}

@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Was machen Pferde, wenn sie traurig sind?",
+      "target_keyword": "Was machen Pferde, wenn sie traurig sind?",
+      "category": "pferde-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "eb7a1cff7e2ba11f01efc343ad4c5ae1e008a1819f4a9dedebe134acd3d97cd2"
+    }
+  ],
+  "batch_sha256": "e8b73178eb6c8b9fe3b9c50c99f50ab2e489fe95f3fba38a69cd3078a668b60a"
+}

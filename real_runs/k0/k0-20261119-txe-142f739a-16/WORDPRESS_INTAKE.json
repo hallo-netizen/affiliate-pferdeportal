@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie zeigen Pferde, dass sie einen Menschen mögen?",
+      "target_keyword": "Wie sagen Pferde „Ich liebe dich“?",
+      "category": "pferde-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "fd4142be2b466f984319db363df82e4c262f0679d080b036e8aac16dfa0dbcb2"
+    }
+  ],
+  "batch_sha256": "6c0825a50c7bc86671e4afaf230c9d4c13be058d6cfbc825e849789d101519bf"
+}

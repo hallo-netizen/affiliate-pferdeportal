@@ -1,0 +1,342 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 17,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Warum wehrt sich mein Pferd in der Herde?",
+        "target_keyword": "Warum wehrt sich mein Pferd in der Herde?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "bf992fd673e23d6ce5a461cebc3dece62d2c957b33f0c351c772793480777078"
+      },
+      {
+        "title": "Welche Symptome zeigen Pferde bei Mineralstoffmangel?",
+        "target_keyword": "Welche Symptome zeigen Pferde bei Mineralstoffmangel?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "78575ecb4de7ce8e8311d4f7750ed4e452ca38801802aba6f8407366560305fe"
+      },
+      {
+        "title": "Zuckerfreien Leckstein für Pferde selber machen",
+        "target_keyword": "Wie kann ich zuckerfreien Leckstein für Pferde selber machen?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "Anleitung",
+        "plan_slot": "3035e6683641b5aca050acc2ac648f568d5e0460d2064a8704eb98d9bab7eae5"
+      },
+      {
+        "title": "Sind Äpfel gut für Pferde?",
+        "target_keyword": "Sind Äpfel gut für Pferde?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "0ab619ab850f1f1154bd139b5abce55a1da9b6f958d3a7aa6bf066403a7916b3"
+      },
+      {
+        "title": "Welches Futter ist für Pferde am gesündesten?",
+        "target_keyword": "Was ist das gesündeste Futter für Pferde?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "46f85321f9ab712d341cfc640f05c974967b94f2898c9d7167d966045a64f067"
+      },
+      {
+        "title": "Soll man Pferde jeden Tag reiten?",
+        "target_keyword": "Soll man Pferde jeden Tag reiten?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "2a39799a05c21d63d883a8e4c3df8ed20319cac3eddcd59c9ed9f1f7844e6bce"
+      },
+      {
+        "title": "Welche Fütterungsfehler kommen bei Pferden häufig vor?",
+        "target_keyword": "Welche Fehler werden bei der Fütterung von Pferden am häufigsten gemacht?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "822aead685621327f283bf64df8d4089b60a3534cb1c8598a51f20329c7775c2"
+      },
+      {
+        "title": "Ist Gurke gut für Pferde?",
+        "target_keyword": "Ist Gurke gut für Pferde?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "09e645519d1a1787c51c6daf99740df590b463ad87078d3d94832d3fc4620a18"
+      },
+      {
+        "title": "Minerallecksteine von Krämer für Pferde auswählen",
+        "target_keyword": "mineralleckstein pferd krämer",
+        "category": "minerallecksteine-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "1f02ce47f611ec88d9c773e76700a821a07cc1d342db4a6a9b209291361df73c"
+      },
+      {
+        "title": "Sind Minerallecksteine für Pferde sinnvoll?",
+        "target_keyword": "Sind Minerallecksteine für Pferde sinnvoll?",
+        "category": "minerallecksteine-faq",
+        "article_type": "FAQ",
+        "plan_slot": "7bf8fb840968ce3e9249ecab92c9e562230f969110b5a48dc121ff776ac1cee8"
+      },
+      {
+        "title": "Was machen Pferde, wenn sie traurig sind?",
+        "target_keyword": "Was machen Pferde, wenn sie traurig sind?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "eb7a1cff7e2ba11f01efc343ad4c5ae1e008a1819f4a9dedebe134acd3d97cd2"
+      },
+      {
+        "title": "Ist es schlimm, wenn Pferde im Regen stehen?",
+        "target_keyword": "Ist es schlimm, wenn Pferde im Regen stehen?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "211401ddb55918bd9982c73ecf56d67b7054d73b272b793623d6796e850d17f5"
+      },
+      {
+        "title": "Ab welchem Alter gilt ein Pferd als alt?",
+        "target_keyword": "Ab welchem Alter gilt ein Pferd als alt?",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "FAQ",
+        "plan_slot": "72597ab2773932caaa2e604507329899649751a65ca60f019249d96cf4142e1e"
+      },
+      {
+        "title": "Wie lange erinnern sich Pferde an ihre Besitzer?",
+        "target_keyword": "Wie lange erinnern sich Pferde an ihre Besitzer?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "46241ae2e7598bd955a7dbaa1d99a7c65793bca8e1781cfa1efae2c4473a5b17"
+      },
+      {
+        "title": "In welchem Alter sind Pferde am schwierigsten?",
+        "target_keyword": "In welchem Alter sind Pferde am schwierigsten?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "c905a7fa5ba476f7f946201e56cd244a7bf1253fbc0cf7f51f749db189182490"
+      },
+      {
+        "title": "Wie zeigen Pferde, dass sie einen Menschen mögen?",
+        "target_keyword": "Wie sagen Pferde „Ich liebe dich“?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "fd4142be2b466f984319db363df82e4c262f0679d080b036e8aac16dfa0dbcb2"
+      },
+      {
+        "title": "Wann sollte ich mein Pferd eindecken?",
+        "target_keyword": "Wann Decke ich mein Pferd ein?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "13ff04b1e053bcf1d65cddaf23fee938c73066504ae932d6bc0dd12aa15536a0"
+      }
+    ],
+    "batch_sha256": "142f739a677fbae6db0b7fd1b1a83e362852c435fbbf93e54d5751b407a45a00"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Warum wehrt sich mein Pferd in der Herde?",
+        "target_keyword": "Warum wehrt sich mein Pferd in der Herde?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "bf992fd673e23d6ce5a461cebc3dece62d2c957b33f0c351c772793480777078"
+      },
+      "order_id": "TXE-3913d0483429dcda627cfae6cbd2522d",
+      "article_id": "article:c4ee93aee205b1f8fa4e58aa",
+      "search_intent": "Ursachen von Abwehrverhalten im Herdenverband erkennen und richtig einordnen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Symptome zeigen Pferde bei Mineralstoffmangel?",
+        "target_keyword": "Welche Symptome zeigen Pferde bei Mineralstoffmangel?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "78575ecb4de7ce8e8311d4f7750ed4e452ca38801802aba6f8407366560305fe"
+      },
+      "order_id": "TXE-c12fdf60400151e82b3c344a334558e9",
+      "article_id": "article:ee8616a49411c783b5b3bc0e",
+      "search_intent": "Typische Anzeichen eines Mineralstoffmangels bei Pferden unterscheiden und tierärztlich abklären"
+    },
+    {
+      "metadata_binding": {
+        "title": "Zuckerfreien Leckstein für Pferde selber machen",
+        "target_keyword": "Wie kann ich zuckerfreien Leckstein für Pferde selber machen?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "Anleitung",
+        "plan_slot": "3035e6683641b5aca050acc2ac648f568d5e0460d2064a8704eb98d9bab7eae5"
+      },
+      "order_id": "TXE-19c66a8160654c61aba3a95ad4e81c0d",
+      "article_id": "article:7bdf8ba822585ac35a797a44",
+      "search_intent": "Zuckerfreien Leckstein für Pferde selbst herstellen und geeignete Zutaten auswählen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Sind Äpfel gut für Pferde?",
+        "target_keyword": "Sind Äpfel gut für Pferde?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "0ab619ab850f1f1154bd139b5abce55a1da9b6f958d3a7aa6bf066403a7916b3"
+      },
+      "order_id": "TXE-74a758efd25e571b5cb681ce20598d27",
+      "article_id": "article:45358efe31fcf38a8b9ced06",
+      "search_intent": "Eignung und angemessene Menge von Äpfeln als Pferdeleckerli"
+    },
+    {
+      "metadata_binding": {
+        "title": "Welches Futter ist für Pferde am gesündesten?",
+        "target_keyword": "Was ist das gesündeste Futter für Pferde?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "46f85321f9ab712d341cfc640f05c974967b94f2898c9d7167d966045a64f067"
+      },
+      "order_id": "TXE-8dbcf052d1e91c885ba74cd795dd1e3d",
+      "article_id": "article:29e2584db9d9005f5dcd6830",
+      "search_intent": "Gesunde Pferdefütterung nach Raufutterbedarf und individueller Versorgung erklären"
+    },
+    {
+      "metadata_binding": {
+        "title": "Soll man Pferde jeden Tag reiten?",
+        "target_keyword": "Soll man Pferde jeden Tag reiten?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "2a39799a05c21d63d883a8e4c3df8ed20319cac3eddcd59c9ed9f1f7844e6bce"
+      },
+      "order_id": "TXE-3c218cf8a717034cc892cf68250ab997",
+      "article_id": "article:d08113fb0368cf8e4603055c",
+      "search_intent": "Tägliches Reiten nach Gesundheitszustand und Trainingsbedarf einschätzen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Fütterungsfehler kommen bei Pferden häufig vor?",
+        "target_keyword": "Welche Fehler werden bei der Fütterung von Pferden am häufigsten gemacht?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "822aead685621327f283bf64df8d4089b60a3534cb1c8598a51f20329c7775c2"
+      },
+      "order_id": "TXE-c74ee9d46716114ad025b38542ca9ce3",
+      "article_id": "article:b29a6696fca96f1fe8278b54",
+      "search_intent": "Häufige Fehler bei Raufutter, Kraftfutter, Mengen und Futterwechsel erklären"
+    },
+    {
+      "metadata_binding": {
+        "title": "Ist Gurke gut für Pferde?",
+        "target_keyword": "Ist Gurke gut für Pferde?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "09e645519d1a1787c51c6daf99740df590b463ad87078d3d94832d3fc4620a18"
+      },
+      "order_id": "TXE-b716596fb5c23300c4ce535567cc16ed",
+      "article_id": "article:3505cdb0063effd4de3fdf0e",
+      "search_intent": "Gurke als wasserreiches Leckerli für Pferde einordnen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Minerallecksteine von Krämer für Pferde auswählen",
+        "target_keyword": "mineralleckstein pferd krämer",
+        "category": "minerallecksteine-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "1f02ce47f611ec88d9c773e76700a821a07cc1d342db4a6a9b209291361df73c"
+      },
+      "order_id": "TXE-8b1a43f30127a8e12feefcb79a2e88d3",
+      "article_id": "article:8006c735a44d20cddc574172",
+      "search_intent": "Minerallecksteine des Händlers Krämer nach Bedarf und Inhaltsstoffen auswählen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Sind Minerallecksteine für Pferde sinnvoll?",
+        "target_keyword": "Sind Minerallecksteine für Pferde sinnvoll?",
+        "category": "minerallecksteine-faq",
+        "article_type": "FAQ",
+        "plan_slot": "7bf8fb840968ce3e9249ecab92c9e562230f969110b5a48dc121ff776ac1cee8"
+      },
+      "order_id": "TXE-79837ebe94980a5519c824d81441c0af",
+      "article_id": "article:3415e625c6bcb9cd504bcdf8",
+      "search_intent": "Nutzen und Grenzen von Minerallecksteinen für Pferde erklären"
+    },
+    {
+      "metadata_binding": {
+        "title": "Was machen Pferde, wenn sie traurig sind?",
+        "target_keyword": "Was machen Pferde, wenn sie traurig sind?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "eb7a1cff7e2ba11f01efc343ad4c5ae1e008a1819f4a9dedebe134acd3d97cd2"
+      },
+      "order_id": "TXE-a006f29cf5b73c30c8544cb7d2b5a87b",
+      "article_id": "article:bf23d1a74698b77c3cf2be0f",
+      "search_intent": "Verhalten von Pferden bei Traurigkeit oder Belastung erkennen und einordnen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Ist es schlimm, wenn Pferde im Regen stehen?",
+        "target_keyword": "Ist es schlimm, wenn Pferde im Regen stehen?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "211401ddb55918bd9982c73ecf56d67b7054d73b272b793623d6796e850d17f5"
+      },
+      "order_id": "TXE-6061c33e73e0c02ea2004b683963ff7f",
+      "article_id": "article:650a854f9ed825923cb1bab0",
+      "search_intent": "Einordnen, wann Regen für ein Pferd unproblematisch oder belastend ist"
+    },
+    {
+      "metadata_binding": {
+        "title": "Ab welchem Alter gilt ein Pferd als alt?",
+        "target_keyword": "Ab welchem Alter gilt ein Pferd als alt?",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "FAQ",
+        "plan_slot": "72597ab2773932caaa2e604507329899649751a65ca60f019249d96cf4142e1e"
+      },
+      "order_id": "TXE-c8df868e0dad5e24554f4cfeea149eba",
+      "article_id": "article:9c136888f540b1912b22bdbf",
+      "search_intent": "Altersgrenzen und individuelle Merkmale eines älteren Pferdes erklären"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie lange erinnern sich Pferde an ihre Besitzer?",
+        "target_keyword": "Wie lange erinnern sich Pferde an ihre Besitzer?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "46241ae2e7598bd955a7dbaa1d99a7c65793bca8e1781cfa1efae2c4473a5b17"
+      },
+      "order_id": "TXE-418a588869625972c2caa4225ff83033",
+      "article_id": "article:b25064314d8f9f605b57c91e",
+      "search_intent": "Erinnerungsvermögen von Pferden gegenüber früheren Besitzern erklären"
+    },
+    {
+      "metadata_binding": {
+        "title": "In welchem Alter sind Pferde am schwierigsten?",
+        "target_keyword": "In welchem Alter sind Pferde am schwierigsten?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "c905a7fa5ba476f7f946201e56cd244a7bf1253fbc0cf7f51f749db189182490"
+      },
+      "order_id": "TXE-7d0d8f8c185320a1cf99c738bedae3db",
+      "article_id": "article:79fa30c895a251f8264527e1",
+      "search_intent": "Schwierige Verhaltensphasen im Lebensalter von Pferden einordnen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie zeigen Pferde, dass sie einen Menschen mögen?",
+        "target_keyword": "Wie sagen Pferde „Ich liebe dich“?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "fd4142be2b466f984319db363df82e4c262f0679d080b036e8aac16dfa0dbcb2"
+      },
+      "order_id": "TXE-08e0244288f8a5392dd326fa1ef4f136",
+      "article_id": "article:a610e4e350157f78476f8a62",
+      "search_intent": "Anzeichen von Zuneigung und Vertrauen bei Pferden erkennen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wann sollte ich mein Pferd eindecken?",
+        "target_keyword": "Wann Decke ich mein Pferd ein?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "13ff04b1e053bcf1d65cddaf23fee938c73066504ae932d6bc0dd12aa15536a0"
+      },
+      "order_id": "TXE-effe7ab627c8e4fb5d189193c79a4d35",
+      "article_id": "article:71a286d8849dfcac37dc8b7b",
+      "search_intent": "Wann ein Pferd eingedeckt werden sollte und welche Bedingungen wichtig sind"
+    }
+  ],
+  "manifest_sha256": "5e1d0a03f3bd4ca2a0453e1cc5198d9ca16dcf7c931ba0dd00a961ac7fddd200"
+}

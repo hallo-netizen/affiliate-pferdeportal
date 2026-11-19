@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wann sollte ich mein Pferd eindecken?",
+      "target_keyword": "Wann Decke ich mein Pferd ein?",
+      "category": "alltags-pferde-haltungsformen",
+      "article_type": "FAQ",
+      "plan_slot": "13ff04b1e053bcf1d65cddaf23fee938c73066504ae932d6bc0dd12aa15536a0"
+    }
+  ],
+  "batch_sha256": "57ac2dd16f7fad5bce41d9d54cde74f66df135d7907447afd6419ba3cd6638c6"
+}

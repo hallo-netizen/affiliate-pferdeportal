@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Sind Minerallecksteine für Pferde sinnvoll?",
+      "target_keyword": "Sind Minerallecksteine für Pferde sinnvoll?",
+      "category": "minerallecksteine-faq",
+      "article_type": "FAQ",
+      "plan_slot": "7bf8fb840968ce3e9249ecab92c9e562230f969110b5a48dc121ff776ac1cee8"
+    }
+  ],
+  "batch_sha256": "fe3cf5b0fb28fc72b62964d99f8f8e2290aeb5ba85e7681090e388a613ae6b50"
+}
