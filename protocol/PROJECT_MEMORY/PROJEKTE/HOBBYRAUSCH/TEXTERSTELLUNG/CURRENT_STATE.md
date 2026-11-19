@@ -1,3 +1,14 @@
+## 19.11.2026 – AKTUELL: PRODUKT-KANDIDAT TEXTERSTELLUNG 0.4.24.6 / PAA ARCHIV-FORTSETZUNG
+
+- Reale Diagnose `texterstellung-diagnose-20261119-100006.json`: `3D-Bogenschießen` `BLOCKED_PARKED` / `PSTE_PAA_TASK_TIMEOUT`, 5 Rohkeywords, Provider-Task-ID im signierten Originalarchiv. Früherer Fehler `TASK_PENDING` nach 1800s ist im Pferdeatelier-Originalcode identisch vorhanden.
+- **Jetzt einzig maßgebliche ZIP `Texterstellung_Hobbydepot_0.4.24.6_PAA_ARCHIV_FORTSETZUNG.zip`**, SHA256 `89fec4d67623116b764a2a9581a1871550b3529ef5f53d556707d12e42708fb8`, 506709 Bytes. Installation mit **gleichem WordPress-Wurzelordner `texterstellung-hobbydepot`**; Version höher als 0.4.24.5.
+- **Nur 3 alte Dateien geändert**, 84/87 unverändert, 0 neue PHP-Klassen/Dateien. GET-Auftragsstatus VOR 1800s-Timeout; per einzelner Schaltfläche nur den signierten und tatsächlich READY zurückgegebenen geparkten Auftrag mit **ursprünglicher UUID** im Original-FINALIZE fortsetzen. Kein weiterer Task-POST, kein K0-/K-Multi-/MINI-/PSERC-/Portal-/Publish-Umbau.
+- **28/28 lokale PHP-WP-Originalfunktionstests**, ZIP 87/87, PHP 78/78, JSON 8/8 PASS, negative Eigentümer-/Queue-/Hash-/Ready-/Fehler- und doppelte Starttests. Kein Live-Task-/Provider-/WordPress-Endtest, nicht als produktiv fertig melden, bis Original-FINALIZE tatsächlich durch ist.
+- Zentrales **`/Hobby Depot/Plugin-Büro/`** und Fachbüro `/hobbydepot/TEXTERSTELLUNG/INSTALLATIONSKANDIDATEN/` erfolgreich mit ZIP, CURRENT und Prüfbericht gespeichert. Beleg `PAA_TIMEOUT_ARCHIV_FORTSETZUNG_04246_20261119.md`. 0.4.24.5 im Archiv.
+- **Nächster einzelner Schritt für Nutzer:** Sicherung prüfen → 0.4.24.6 über „Ersetzen“ aktualisieren → in `Texterstellung → Recherche` nur **„Gesperrten Auftrag prüfen und falls fertig fortsetzen“** anklicken. Datenanbieter-Status via bereits gespeicherter Task-ID per GET, keine neuen kostenpflichtigen Aufgaben. NOT_READY bleibt geparkt, nicht neu starten. Keine Diagnose-/Credential-Rückfrage.
+
+---
+
 ## 19.11.2026 11:00 – NEUER ECHTER LIVE-FEHLER, ORIGINALCODE VERGLICHEN
 
 - Benutzer-Screenshot + Diagnose `texterstellung-diagnose-20261119-100006.json`: `3D-Bogenschießen`, `BLOCKED_PARKED`, `PSTE_PAA_TASK_TIMEOUT` nach `QUESTIONS/TASK_PENDING`, 5 Rohkeywords, 0 Kandidaten. Batch `COMPLETE` ist nur Verwahrungs-/Queue-Endstatus, KEIN Rechercheerfolg. Gespeicherte Provider-Task-ID **vorhanden**, nicht im Bericht offengelegt.
