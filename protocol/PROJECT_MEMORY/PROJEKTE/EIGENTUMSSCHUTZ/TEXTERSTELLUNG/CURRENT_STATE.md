@@ -1,3 +1,13 @@
+# 19.11.2026 – Hab-Typregeln: K0-Gleichstand bestätigt, 15 gezielte Fachlücken dokumentiert
+
+**Unverändert:** fünf vollständige autarke Hab-Arbeitskopien auf Basis der aktuell geprüften K0-Regeln, 750–900 Wörter, Original-K0/K-Multi/WordPress-Installation und alle fünf Textregeldateien. Die sieben maßgeblichen Original-K0-Quelldateien wurden gegen die gespeicherte Kopiervorlage erneut abgeglichen: **0 inhaltliche Abweichungen**.
+
+**Neuer dokumentierter Prüfbefund:** In 15 bewusst als negative Grenzfälle ausgewählten Themenbeispielen fehlen in einzelnen eigenständigen Hab-Typdateien die bereits früher entwickelten passenden Fachregelmodule. Dies ist kein repräsentativer Artikel-Fehleranteil und kein Writer-Test. Beispiel: Gasgefahr in FAQ, Kameradatenschutz in einem Bericht. **Vorschlag, noch NICHT genehmigt:** Alle 12 bereits erarbeiteten Fachmodule bedingt in jedem der fünf autarken Bücher vorsehen, bei konkretem Thema anwenden; keine pauschalen Warnkästen und keine neuen Prüfstationen. Zusatzfrage: Allgemeine Schutzobjekt-/Maßnahmenregel nicht zu künstlicher Kauf- oder Handlungsempfehlung im reinen Wissen bzw. Bericht werden lassen. Alle Textregeländerungen benötigen ausdrückliche Absprache.
+
+**Exakter QA-Nachweis:** `BEITRAGSARTEN_HAB_V1/AUTARKE_REGELBUECHER_K0_STAND_20261119/99_KOPIE_QUALITAETSABNAHME_20261119.json` (5/5 Kopien PASS, 15 gezielte Negativfälle mit Lücke). **NO-GO** für produktive K-Multi-/WP-Anbindung, bis neue Typen, Hab-Zusätze, aktuelle K-Multi-Engine und Magazin-WP-Term wirklich abgenommen sind.
+
+---
+
 # VERBINDLICHER BESCHLUSS – Hab-Beitragsarten vollständig autark (19.11.2026)
 
 Fünf eigene Typregelpakete, jeweils getrennt abrufbar; bewährte Pferdeatelier-Regeln prüfen, kopieren und passend anpassen; relevante Hab-Spezialregeln pro Paket integrieren. Die fünf bestehenden JSON-Dateien sind **noch nicht autark**, da sie auf getrennte Entwicklungsregeln verweisen. Nächste Arbeit: Originalregel-Mapping → fünf vollständige autarke Typdateien → echte K0-/K-Multi-Regression und WP-Entwurfstest. **Keine Plugin-/K0-/K-Multi-Änderung durch den Beschluss.** Protokoll: `BEITRAGSARTEN_HAB_V1/94_BESCHLUSS_AUTARKE_BEITRAGSARTEN_20261119.md`.
