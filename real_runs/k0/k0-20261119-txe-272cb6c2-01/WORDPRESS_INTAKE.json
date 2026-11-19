@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Heucobs für Pferde richtig einweichen und füttern",
+      "target_keyword": "heucobs pferd",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "Anleitung",
+      "plan_slot": "987fe63264ac535df1e00418131e1470d1c15e8c3cbb01899f15aace11f6d06d"
+    }
+  ],
+  "batch_sha256": "4284fe95f571241b57eab4908033d4b2d743251ccdadee1458b9d19376e2286d"
+}
