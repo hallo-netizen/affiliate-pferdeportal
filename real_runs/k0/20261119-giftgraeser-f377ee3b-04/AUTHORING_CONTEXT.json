@@ -1,0 +1,207 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Giftige Gräser auf Pferdeweiden erkennen und Risiken einschätzen",
+    "target_keyword": "giftige gräser auf pferdeweiden",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "Anleitung",
+    "plan_slot": "915c22a26a2740f5d1d3d3d009f2a3dc291c56dcc739c1dfd4226b49ba4277ba"
+  },
+  "content_profile": {
+    "search_intent": "Weidesicherheit – Giftgräser"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "MSD Veterinary Manual – Feeding Practices in Horses and Other Equids",
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/feeding-practices-in-horses-and-other-equids"
+        },
+        {
+          "source_title": "University of Minnesota Extension – Horse pasture drought and frost concerns",
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/horse-pasture-drought-and-frost-concerns"
+        }
+      ],
+      "claims": [
+        "Bestimmte Sorghumgräser enthalten cyanogene Pflanzenstoffe.",
+        "Endophytenbefallener Rohrschwingel kann tragende Stuten gefährden.",
+        "Bei Futterknappheit nehmen Pferde auch schädliche Pflanzen auf.",
+        "Überweidung und Futterknappheit müssen vermieden werden.",
+        "Sorghum-Sudangras muss bei Verdacht auf problematische Inhaltsstoffe untersucht werden.",
+        "Problematische Futtergräser sollten nicht gezielt für Pferdeweiden ausgesät werden."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Anleitung",
+      "target_keyword": "giftige gräser auf pferdeweiden",
+      "topic": "Giftige Gräser auf Pferdeweiden erkennen und Risiken einschätzen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Problematische Grasarten auf Pferdeweiden erkennen, den Zugang sichern und fachlich abklären.",
+      "preparation_items": [
+        "Grasbestand systematisch kontrollieren",
+        "Verdächtige Pflanzenteile dokumentieren",
+        "Bei Bedarf Bestimmung durch Fachstelle veranlassen"
+      ],
+      "procedure_steps": [
+        "Verdächtige Gräser von normalen Futtergräsern unterscheiden",
+        "Betroffene Flächen vorläufig sperren",
+        "Bei Verdacht auf Sorghum-Arten und Endophyten beraten lassen",
+        "Gesundheit der Pferde beobachten und bei Symptomen Tierarzt einschalten",
+        "Grasnarbe und Futterangebot langfristig stabilisieren"
+      ],
+      "safety_controls": [
+        "Pflanzen ohne gesicherte Bestimmung nicht verfüttern",
+        "Tragende Stuten besonders schützen",
+        "Bei Vergiftungsverdacht sofort tierärztlichen Rat einholen"
+      ],
+      "common_errors": [
+        "Jedes Gras pauschal als ungefährlich einstufen",
+        "Bei Futterknappheit unbekannte Pflanzen stehen lassen"
+      ],
+      "result_checks": [
+        "Problematische Pflanzen sind bestimmt",
+        "Betroffene Fläche ist für Pferde sicher abgegrenzt",
+        "Weitere Pflege oder Nachsaat ist geplant"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/feeding-practices-in-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Feeding Practices in Horses and Other Equids",
+        "evidence_text": "Johnson grass (Sorghum halepense) and Sudan grass (S sudanense) contain cyanogenic glycosides.",
+        "evidence_text_sha256": "4691bfa038989ff01034f536bf22ac50ffbf6da94ae3087c7b1b61c8711a19b6",
+        "statement": "Bestimmte Sorghumgräser enthalten cyanogene Pflanzenstoffe.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/feeding-practices-in-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Feeding Practices in Horses and Other Equids",
+        "evidence_text": "Endophyte-infected tall fescue has been documented to cause abortion, dystocia, and poor milk production in pregnant mares",
+        "evidence_text_sha256": "b318b158449df4625179a5f23cb95cc91931909bc0df8ec8afd9c6a768f47956",
+        "statement": "Endophytenbefallener Rohrschwingel kann tragende Stuten gefährden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/horse-pasture-drought-and-frost-concerns",
+        "source_title": "University of Minnesota Extension – Horse pasture drought and frost concerns",
+        "evidence_text": "Horses may graze harmful, undesirable weeds simply because that’s what’s available.",
+        "evidence_text_sha256": "f763a449fac367f648d224b9fcadc0e0cbe1f3757e77bbe17f3eca59ef66b210",
+        "statement": "Bei Futterknappheit nehmen Pferde auch schädliche Pflanzen auf.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/horse-pasture-drought-and-frost-concerns",
+        "source_title": "University of Minnesota Extension – Horse pasture drought and frost concerns",
+        "evidence_text": "Avoid overgrazing or grazing horses during periods of sparse forage.",
+        "evidence_text_sha256": "a5d3de0bac2511e0c02f2aec7819549fdfee49ba93ffdb4e9d29bc9b79a99e6e",
+        "statement": "Überweidung und Futterknappheit müssen vermieden werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/horse-pasture-drought-and-frost-concerns",
+        "source_title": "University of Minnesota Extension – Horse pasture drought and frost concerns",
+        "evidence_text": "If buying sorghum-sudangrass during a drought year, test the forage for cyanide and nitrate content before feeding it.",
+        "evidence_text_sha256": "3aca1ea57ed7a9afb3d84e00347216b02889ac759c194c6327b53dacd76d3b31",
+        "statement": "Sorghum-Sudangras muss bei Verdacht auf problematische Inhaltsstoffe untersucht werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F6": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/feeding-practices-in-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Feeding Practices in Horses and Other Equids",
+        "evidence_text": "None of these forage species should be used for horse pastures if possible",
+        "evidence_text_sha256": "9e715137f50e32ce2ae7f2d7c61b5b702720711a35e3285369a54d796cc03b42",
+        "statement": "Problematische Futtergräser sollten nicht gezielt für Pferdeweiden ausgesät werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "pferdegesundheit-verstehen",
+        "block": "steps"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Giftige Gräser",
+      "Pferdeweiden",
+      "Sorghum",
+      "Rohrschwingel",
+      "Futterknappheit",
+      "Pflanzenbestimmung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine vierzeilige Übersicht bietet konkreten Mehrwert bei den praktischen Entscheidungen zu giftige gräser auf pferdeweiden."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
