@@ -1,0 +1,320 @@
+{
+  "contract": "K0_ARTICLE_PACKAGE_V1",
+  "identity": {
+    "title": "Das Gewicht eines Pferdes ohne Waage einschätzen",
+    "target_keyword": "pferd gewicht",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "Anleitung",
+    "plan_slot": "bed53dde5ff67d82d1ee6b2e6225a1e410128e9561df70589f8cb709d2dbe77d"
+  },
+  "html": "<article class=\"ppm-generated ppm-type-anleitung\" data-article-type=\"Anleitung\"><section data-block=\"intro\"><p data-fact-ids=\"F1\"><span class=\"ppm-source-trace\" data-fact-id=\"F1\" data-source-hash=\"a52b3a8d85c5424259f129063be84da8a649504656db60361b1be870dbe0b241\" data-source-title=\"University of Minnesota Extension – Estimating horse bodyweight\"></span>Das Gewicht eines Pferdes ist für seine Ernährung und Gesundheit wichtig. Wenn keine geeignete Waage verfügbar ist, können Körpermaße helfen, das Gewicht näherungsweise einzuschätzen. Dafür werden bestimmte Umfänge und Längen gemessen und anschließend mit einer passenden Schätzformel ausgewertet. Der errechnete Wert bleibt eine Annäherung und ersetzt keine genaue Waagenmessung. Diese Anleitung erklärt, wie die Körpermaße sorgfältig erfasst werden.</p></section><section data-block=\"preparation\"><h2>Körpermaße für das Pferdegewicht vorbereiten</h2><p data-fact-ids=\"F2\"><span class=\"ppm-source-trace\" data-fact-id=\"F2\" data-source-hash=\"4e7808d017a7dfe1bbf7fad196fb7680980d81cf5fda83c958c66dee04e51e4e\" data-source-title=\"University of Minnesota Extension – Estimating horse bodyweight\"></span>Lege ein weiches Maßband bereit und suche einen ruhigen Platz, an dem das Pferd gerade stehen kann. Für eine Gewichtsschätzung ohne Waage benötigt man verlässliche Körpermaße. Bitte bei Bedarf eine zweite Person um Unterstützung, damit das Maßband sorgfältig geführt werden kann. Schreibe die Werte sofort auf und notiere, an welchen Stellen gemessen wurde.</p><p data-fact-ids=\"F4\"><span class=\"ppm-source-trace\" data-fact-id=\"F4\" data-source-hash=\"253296a2c09c81658386f7b2d3afa56df3fc2ed25bdd6eb2dbe5136f0749a61c\" data-source-title=\"University of Minnesota Extension – Estimating horse bodyweight\"></span>Der Brustumfang gehört zu den wichtigen Messgrößen bei der Gewichtsschätzung. Überlege vor der Messung, wo das Maßband verlaufen soll, und halte es so, dass es nicht schräg über den Körper rutscht. Eine ungenaue Lage kann den späteren Schätzwert verändern. Die Messung sollte ruhig durchgeführt werden, ohne das Pferd zu bedrängen.</p><p data-fact-ids=\"F5\"><span class=\"ppm-source-trace\" data-fact-id=\"F5\" data-source-hash=\"e8f263d15deb641da9aa54544ddd06296577dff360bfe590e2e208cce392754a\" data-source-title=\"University of Minnesota Extension – Estimating horse bodyweight\"></span>Auch die Körperlänge muss für geeignete Formeln bestimmt werden. Sie wird vom Schulterpunkt bis zum Bereich der Hinterhand erfasst. Es ist wichtig, die dafür vorgesehene Strecke zu messen und nicht etwa bis zum Ende des Schweifs. Bereite deshalb eine eindeutige Messlinie vor. So lassen sich die aufgenommenen Körpermaße später sinnvoll zusammen verwenden.</p></section><section data-block=\"steps\"><h2>Brustumfang und Körperlänge messen</h2><p data-fact-ids=\"F4\"><span class=\"ppm-source-trace\" data-fact-id=\"F4\" data-source-hash=\"253296a2c09c81658386f7b2d3afa56df3fc2ed25bdd6eb2dbe5136f0749a61c\" data-source-title=\"University of Minnesota Extension – Estimating horse bodyweight\"></span>Beginne mit dem Brustumfang. Führe das Maßband in der vorgesehenen Höhe um den Körper und kontrolliere, ob es gleichmäßig anliegt. Lies den Umfang erst ab, wenn das Pferd ruhig steht. Wiederhole die Messung bei Unsicherheit, bevor du das Ergebnis notierst. Eine sorgfältige Messung ist wichtiger als ein möglichst schnelles Ergebnis.</p><p data-fact-ids=\"F5\"><span class=\"ppm-source-trace\" data-fact-id=\"F5\" data-source-hash=\"e8f263d15deb641da9aa54544ddd06296577dff360bfe590e2e208cce392754a\" data-source-title=\"University of Minnesota Extension – Estimating horse bodyweight\"></span>Bestimme danach die Körperlänge zwischen dem Schulterpunkt und der Hinterhand. Achte auf einen geraden Verlauf der gedachten Messstrecke. Das Maßband darf nicht einfach entlang des gekrümmten Körpers geführt werden, wenn die gewählte Formel eine gerade Länge verlangt. Notiere auch diesen Wert getrennt vom Brustumfang.</p><p data-fact-ids=\"F3\"><span class=\"ppm-source-trace\" data-fact-id=\"F3\" data-source-hash=\"66d7e4ef21331d1267351141e91bc255d9a41bd60aad4a722b30de56432dd139\" data-source-title=\"University of Minnesota Extension – Estimating horse bodyweight\"></span>Je nach verwendeter Gewichtsschätzung kann zusätzlich der Halsumfang relevant sein. Miss den Umfang sorgfältig an der dafür vorgesehenen Stelle. Prüfe vor dem Rechnen, welche Körpermaße die konkrete Formel benötigt. Die Kategorie <a data-link-role=\"parent_category\" href=\"/category/pferdegesundheit-verstehen/\">Pferdegesundheit verstehen</a> bietet weitere Informationen zur Einschätzung der körperlichen Verfassung.</p><ol data-list=\"steps\"><li data-fact-ids=\"F2\">Pferd ohne Waage ruhig aufstellen</li><li data-fact-ids=\"F4\">Brustumfang mit Maßband messen</li><li data-fact-ids=\"F5\">Körperlänge bis zur Hinterhand erfassen</li><li data-fact-ids=\"F3\">Halsumfang bei Bedarf ergänzen</li></ol></section><section data-block=\"risks\"><h2>Messung ohne Fehler durchführen</h2><p data-fact-ids=\"F2\"><span class=\"ppm-source-trace\" data-fact-id=\"F2\" data-source-hash=\"4e7808d017a7dfe1bbf7fad196fb7680980d81cf5fda83c958c66dee04e51e4e\" data-source-title=\"University of Minnesota Extension – Estimating horse bodyweight\"></span>Eine Gewichtsschätzung aus Körpermaßen bleibt immer eine Näherung. Selbst sorgfältig aufgenommene Werte ersetzen keine präzise Messung auf einer Waage. Das ist besonders wichtig, wenn das Gewicht für eine medizinische Entscheidung verwendet werden soll. Nutze den Schätzwert daher nicht ungeprüft als exaktes Körpergewicht und hole bei Unsicherheit fachlichen Rat ein.</p><p data-fact-ids=\"F4\"><span class=\"ppm-source-trace\" data-fact-id=\"F4\" data-source-hash=\"253296a2c09c81658386f7b2d3afa56df3fc2ed25bdd6eb2dbe5136f0749a61c\" data-source-title=\"University of Minnesota Extension – Estimating horse bodyweight\"></span>Ein häufiges Problem ist ein ungenauer Brustumfang. Wenn das Maßband verrutscht oder schräg anliegt, kann der abgelesene Wert vom tatsächlichen Umfang abweichen. Kontrolliere daher die Lage des Bandes und wiederhole die Messung bei Bedarf. So erhältst du eine zuverlässigere Grundlage für die spätere Gewichtsschätzung.</p><p data-fact-ids=\"F5\"><span class=\"ppm-source-trace\" data-fact-id=\"F5\" data-source-hash=\"e8f263d15deb641da9aa54544ddd06296577dff360bfe590e2e208cce392754a\" data-source-title=\"University of Minnesota Extension – Estimating horse bodyweight\"></span>Auch die Körperlänge kann falsch gemessen werden, wenn unklare Bezugspunkte verwendet werden. Orientiere dich deshalb am Schulterpunkt und an der vorgesehenen Stelle der Hinterhand. Notiere die Messstrecke möglichst eindeutig, damit du sie bei einer Wiederholung gleich erfassen kannst. So werden verschiedene Messungen besser vergleichbar.</p><ul data-list=\"mistakes\"><li data-fact-ids=\"F2\">Gewicht ohne Waage als exakt ansehen</li><li data-fact-ids=\"F4\">Brustumfang mit schrägem Band messen</li><li data-fact-ids=\"F5\">Körperlänge bis zum Schweif messen</li><li data-fact-ids=\"F3\">Halsumfang bei benötigter Formel übersehen</li></ul></section><section data-block=\"verification\"><h2>Gewicht durch Messung einschätzen</h2><p data-fact-ids=\"F2\"><span class=\"ppm-source-trace\" data-fact-id=\"F2\" data-source-hash=\"4e7808d017a7dfe1bbf7fad196fb7680980d81cf5fda83c958c66dee04e51e4e\" data-source-title=\"University of Minnesota Extension – Estimating horse bodyweight\"></span>Prüfe zunächst, ob die gewählte Formel zum Pferdetyp und zu deinen erfassten Körpermaßen passt. Für eine Schätzung ohne Waage werden je nach Verfahren verschiedene Maße genutzt. Setze nicht wahllos Werte in eine beliebige Rechnung ein. Die Formel muss für die Art der Messung vorgesehen sein. Vermerke anschließend, dass es sich um ein geschätztes Gewicht handelt.</p><p data-fact-ids=\"F4\"><span class=\"ppm-source-trace\" data-fact-id=\"F4\" data-source-hash=\"253296a2c09c81658386f7b2d3afa56df3fc2ed25bdd6eb2dbe5136f0749a61c\" data-source-title=\"University of Minnesota Extension – Estimating horse bodyweight\"></span>Kontrolliere den Brustumfang noch einmal, bevor du das Ergebnis verwendest. Ein falsch abgelesener Umfang kann die Gewichtsschätzung beeinflussen. Wenn mehrere Personen messen, sollten sie dieselbe Stelle und dasselbe Vorgehen nutzen. Halte den Wert und das Datum schriftlich fest. Das erleichtert einen späteren Vergleich.</p><p data-fact-ids=\"F1\"><span class=\"ppm-source-trace\" data-fact-id=\"F1\" data-source-hash=\"a52b3a8d85c5424259f129063be84da8a649504656db60361b1be870dbe0b241\" data-source-title=\"University of Minnesota Extension – Estimating horse bodyweight\"></span>Das Körpergewicht ist wichtig für die Ernährung und allgemeine Gesundheit des Pferdes. Ein Schätzwert kann helfen, Veränderungen im Blick zu behalten, sollte aber mit Vorsicht interpretiert werden. Für Entscheidungen, bei denen es auf Genauigkeit ankommt, ist eine richtige Messung mit einer Waage sinnvoll. Verwechsle die Annäherung nicht mit einer exakten Messung.</p></section><section data-block=\"table\"><h2>Körpermaße bei der Gewichtsschätzung prüfen</h2><table class=\"system-129-table comparison-table\"><thead><tr><th>Messgröße</th><th>Stelle</th><th>Zweck</th></tr></thead><tbody><tr><td data-fact-ids=\"F4\">Brustumfang</td><td data-fact-ids=\"F4\">Brustumfang</td><td data-fact-ids=\"F4\">Brustumfang messen</td></tr><tr><td data-fact-ids=\"F5\">Körperlänge</td><td data-fact-ids=\"F5\">Schulter bis Hinterhand</td><td data-fact-ids=\"F5\">Körperlänge erfassen</td></tr><tr><td data-fact-ids=\"F3\">Halsumfang</td><td data-fact-ids=\"F3\">Halsumfang</td><td data-fact-ids=\"F3\">Halsumfang messen</td></tr><tr><td data-fact-ids=\"F2\">Pferdegewicht schätzen</td><td data-fact-ids=\"F2\">Körpermaße für Pferdegewicht</td><td data-fact-ids=\"F2\">Pferdegewicht schätzen</td></tr></tbody></table><p data-fact-ids=\"F2\"><span class=\"ppm-source-trace\" data-fact-id=\"F2\" data-source-hash=\"4e7808d017a7dfe1bbf7fad196fb7680980d81cf5fda83c958c66dee04e51e4e\" data-source-title=\"University of Minnesota Extension – Estimating horse bodyweight\"></span>Die Gewichtsschätzung ohne Waage nutzt passende Körpermaße. Kontrolliere die Messstellen und kennzeichne den berechneten Wert als Näherung.</p></section><section data-block=\"conclusion\"><h2>Fazit</h2><p data-fact-ids=\"F1\"><span class=\"ppm-source-trace\" data-fact-id=\"F1\" data-source-hash=\"a52b3a8d85c5424259f129063be84da8a649504656db60361b1be870dbe0b241\" data-source-title=\"University of Minnesota Extension – Estimating horse bodyweight\"></span>Das Gewicht eines Pferdes lässt sich auch ohne Waage näherungsweise einschätzen. Dafür werden wichtige Körpermaße wie Brustumfang und Körperlänge sorgfältig aufgenommen. Je nach Verfahren kann zusätzlich der Halsumfang verwendet werden. Entscheidend ist, dass die Maße zur ausgewählten Formel passen und nachvollziehbar erfasst werden. So entsteht eine bessere Grundlage als beim bloßen Schätzen nach Augenmaß.</p><p data-fact-ids=\"F2\"><span class=\"ppm-source-trace\" data-fact-id=\"F2\" data-source-hash=\"4e7808d017a7dfe1bbf7fad196fb7680980d81cf5fda83c958c66dee04e51e4e\" data-source-title=\"University of Minnesota Extension – Estimating horse bodyweight\"></span>Das ohne Waage aus Körpermaßen errechnete Pferdegewicht bleibt trotzdem eine Annäherung und darf nicht mit einer exakten Waagenmessung verwechselt werden. Besonders für Gesundheit und Ernährung muss diese Unsicherheit berücksichtigt werden. Dokumentiere die Messwerte und wiederhole sie bei Bedarf an denselben Stellen. Wenn eine präzise Angabe nötig ist, sollte das Pferd tatsächlich gewogen werden.</p></section><section data-block=\"further_information\"><h2>Weiterführende Informationen</h2><p data-fact-ids=\"F4\"><span class=\"ppm-source-trace\" data-fact-id=\"F4\" data-source-hash=\"253296a2c09c81658386f7b2d3afa56df3fc2ed25bdd6eb2dbe5136f0749a61c\" data-source-title=\"University of Minnesota Extension – Estimating horse bodyweight\"></span>Der Brustumfang gehört zu den wesentlichen Körpermaßen bei der Gewichtsschätzung. Für vergleichbare Ergebnisse sollten Messungen stets sorgfältig und an derselben Stelle durchgeführt werden.</p></section></article>",
+  "final_draft_sha256": "a9c48f51018698dcb51953c13072a5664051d0508c15ea37bc1fe7ecbc194bb5",
+  "content_profile": {
+    "search_intent": "Gewicht – Pferdegesundheit",
+    "seo_owner_manifest_sha256": "f5a3796f77e6bef716fe23df9c6fe9733dd063f479031afe06c0e127e45f9857",
+    "seo_owner_profile_sha256": "0ee7d17a45bb1bcac4fd79733e4ca39886568747226a65b425f92131ea2f51dd",
+    "seo_owner_original_batch_sha256": "b0295eed436772561cb98a4f14b6af24d98ac7851a93bd3fb68d8ac27150dfc3"
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Das Gewicht eines Pferdes ohne Waage durch systematische Körpermessungen abschätzen.",
+      "preparation_items": [
+        "Weiches Maßband bereitlegen",
+        "Ruhigen Standplatz mit Hilfe wählen",
+        "Körpermaße und Pferdetyp notieren"
+      ],
+      "procedure_steps": [
+        "Pferd ruhig und gerade aufstellen",
+        "Brustumfang an der geeigneten Messlinie abnehmen",
+        "Körperlänge zwischen Schulter und Hinterhand erfassen",
+        "Halsumfang und weitere erforderliche Maße ergänzen",
+        "Messwerte mit einer für den Pferdetyp passenden Formel auswerten"
+      ],
+      "safety_controls": [
+        "Messung nur bei ruhigem Pferd durchführen",
+        "Schätzwert nicht als genaue Waagenmessung ausgeben",
+        "Für medizinische Dosierungen fachlich genaue Werte einholen"
+      ],
+      "common_errors": [
+        "Maßband schräg anlegen",
+        "Ungenaue Länge vom Schweifende verwenden",
+        "Nur nach Augenmaß schätzen"
+      ],
+      "result_checks": [
+        "Messwerte dokumentiert",
+        "Pferdetyp berücksichtigt",
+        "Geschätztes Gewicht als Näherung gekennzeichnet"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/estimating-horse-bodyweight",
+        "source_title": "University of Minnesota Extension – Estimating horse bodyweight",
+        "evidence_text": "Determining a horse’s bodyweight is important for managing bodyweight, nutrition and health.",
+        "evidence_text_sha256": "a52b3a8d85c5424259f129063be84da8a649504656db60361b1be870dbe0b241",
+        "statement": "Das Körpergewicht eines Pferdes ist wichtig für Ernährung und Gesundheit.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/estimating-horse-bodyweight",
+        "source_title": "University of Minnesota Extension – Estimating horse bodyweight",
+        "evidence_text": "In the absence of a scale, horse owners can use equations to predict their horse’s bodyweight based on their height and body length.",
+        "evidence_text_sha256": "4e7808d017a7dfe1bbf7fad196fb7680980d81cf5fda83c958c66dee04e51e4e",
+        "statement": "Ohne Waage lässt sich das Pferdegewicht aus Körpermaßen näherungsweise schätzen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/estimating-horse-bodyweight",
+        "source_title": "University of Minnesota Extension – Estimating horse bodyweight",
+        "evidence_text": "Neck circumference",
+        "evidence_text_sha256": "66d7e4ef21331d1267351141e91bc255d9a41bd60aad4a722b30de56432dd139",
+        "statement": "Der Halsumfang gehört zu den Messgrößen bei Gewichtsschätzungen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/estimating-horse-bodyweight",
+        "source_title": "University of Minnesota Extension – Estimating horse bodyweight",
+        "evidence_text": "Girth circumference",
+        "evidence_text_sha256": "253296a2c09c81658386f7b2d3afa56df3fc2ed25bdd6eb2dbe5136f0749a61c",
+        "statement": "Der Brustumfang wird für genauere Gewichtsschätzungen gemessen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/estimating-horse-bodyweight",
+        "source_title": "University of Minnesota Extension – Estimating horse bodyweight",
+        "evidence_text": "Body length from the point of the shoulder to a point perpendicular to the point of the buttock (L).",
+        "evidence_text_sha256": "e8f263d15deb641da9aa54544ddd06296577dff360bfe590e2e208cce392754a",
+        "statement": "Die Körperlänge wird vom Schulterpunkt bis zur Hinterhand erfasst.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "Pferdegesundheit verstehen",
+        "block": "steps"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true,
+        "official_name": "Pferdegesundheit verstehen"
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Gewicht",
+      "Pferd",
+      "Körpermaße",
+      "Brustumfang",
+      "Körperlänge",
+      "Messung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Tabelle stellt die relevanten Prüf- und Entscheidungskriterien für pferd gewicht gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "identity_sha256": "9e6beb7e3832e9d8cafd74d0f86898444e20fe0bb86f14fba1d87d8512f83022",
+    "catalog_sha256": "dd590becddd0a9d931480532e189b49488a688f38af7f9c729204a73f911d773",
+    "rule_values_sha256": "0f21f89d394686e78267f03a593ecbda9b70452cd7932fb9b1f26ea66303d5de"
+  },
+  "writer_rule_binding": {
+    "contract": "K0_WRITER_RULE_BINDING_V1",
+    "catalog_sha256": "dd590becddd0a9d931480532e189b49488a688f38af7f9c729204a73f911d773",
+    "rule_values_sha256": "0f21f89d394686e78267f03a593ecbda9b70452cd7932fb9b1f26ea66303d5de",
+    "bundle_sha256": "860b527e6929d47d4fba4fe1363bd71ced997670db005efdf7ca8ca3df8517b8",
+    "article_hard_rule_count": 81,
+    "article_hard_rule_ids": [
+      "lt68.language_zero_unresolved",
+      "conclusion.hard_limits",
+      "conclusion.type_minimum_ratio",
+      "facts.conclusion_no_new_untraced_facts",
+      "facts.trace_binding",
+      "facts.trace_required",
+      "facts.trace_required_blocks",
+      "heading.duplicate_normalized_forbidden",
+      "heading.grammatical_variety",
+      "heading.hard_length",
+      "heading.keyword_staccato_forbidden",
+      "heading.natural_concrete_section_language",
+      "heading.phrase_family_repetition_forbidden",
+      "links.required_roles",
+      "links.visible_exact",
+      "structure.duplicate_block_names_forbidden",
+      "structure.required_blocks",
+      "structure.required_lists",
+      "surface.non_template_language",
+      "surface.repetition_forbidden",
+      "table.canonical_classes",
+      "table.compact_cells",
+      "table.compact_labels",
+      "table.post_summary_policy",
+      "table.required_for_comparison",
+      "table.value_required_if_present",
+      "type.metadata_schema",
+      "words.further_information_maximum",
+      "words.hard_total_range",
+      "words.main_text_minimum_ratio",
+      "words.section_balance_ratio",
+      "words.section_range",
+      "structure.body_h1_forbidden",
+      "structure.title_not_repeated_in_body",
+      "structure.visible_test_marker_forbidden",
+      "structure.machine_status_word_forbidden",
+      "structure.paragraph_floor",
+      "structure.h2_floor",
+      "structure.required_blocks_nonempty",
+      "structure.section_ids_unique",
+      "structure.section_order",
+      "structure.section_h2_exact_one",
+      "structure.section_paragraph_required",
+      "structure.list_minimum_items",
+      "structure.intro_first",
+      "structure.intro_structure",
+      "structure.adjacent_headings_forbidden",
+      "structure.faq_direct_answer",
+      "structure.text_between_headings_minimum",
+      "structure.html_balanced",
+      "heading.intent_binding",
+      "heading.semantic_duplicate_forbidden",
+      "surface.known_regression_patterns_forbidden",
+      "surface.known_unnatural_language_forbidden",
+      "surface.duplicate_sentence_ratio",
+      "surface.intro_similarity",
+      "facts.real_source_trace",
+      "facts.source_label_option_match",
+      "facts.visible_unit_fact_refs",
+      "facts.referenced_fact_exists",
+      "facts.referenced_fact_verified",
+      "facts.referenced_fact_type_allowed",
+      "facts.numeric_claim_supported",
+      "facts.fact_pack_coverage",
+      "facts.trace_lexical_support",
+      "facts.runtime_fact_allowlist",
+      "links.bound_pairs_exact",
+      "links.registry_active",
+      "links.section_placement",
+      "links.relative_internal_only",
+      "links.further_information_position",
+      "links.distributed_across_blocks",
+      "links.runtime_roles_bound",
+      "links.not_clustered_at_end",
+      "table.presence_policy",
+      "table.minimum_rows",
+      "table.structure",
+      "conclusion.minimum_paragraphs",
+      "wordpress.semantic_category_binding",
+      "intro.orientation_sentence",
+      "table.optional_decision_documented"
+    ],
+    "publish_allowed": false
+  },
+  "table_decision": {
+    "decision": "INCLUDE_ADDED_VALUE",
+    "exception_code": "",
+    "rationale": "Die Tabelle stellt die relevanten Prüf- und Entscheidungskriterien für pferd gewicht gegenüber."
+  },
+  "lt_authoritative_terms": [],
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/estimating-horse-bodyweight",
+          "source_title": "University of Minnesota Extension – Estimating horse bodyweight"
+        }
+      ],
+      "claims": [
+        "Das Körpergewicht eines Pferdes ist wichtig für Ernährung und Gesundheit.",
+        "Ohne Waage lässt sich das Pferdegewicht aus Körpermaßen näherungsweise schätzen.",
+        "Der Halsumfang gehört zu den Messgrößen bei Gewichtsschätzungen.",
+        "Der Brustumfang wird für genauere Gewichtsschätzungen gemessen.",
+        "Die Körperlänge wird vom Schulterpunkt bis zur Hinterhand erfasst."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Anleitung",
+      "target_keyword": "pferd gewicht",
+      "topic": "Das Gewicht eines Pferdes ohne Waage einschätzen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "revision_count": 4,
+  "writer_provenance": {
+    "contract": "K0_WRITER_SEAL_V1",
+    "status": "PASS",
+    "route": "K0_WRITER_DRAFT_ONLY",
+    "job_id": "k0w-ce680e9442301b6f982f3fc6",
+    "job_sha256": "1f713bb3704c92b8ee2635c5045bb1778061f977a1c7d5a6d0919b57eecd72cb",
+    "draft_sha256": "a9ad1064658336a77fb958b6f6c02d93e5b5646c6f4e8eb65624dbccd65a5e2e",
+    "identity_sha256": "9e6beb7e3832e9d8cafd74d0f86898444e20fe0bb86f14fba1d87d8512f83022",
+    "visible_text_sha256": "f7c0b22dedcacc759b91b09cfcf801373490af45c73cd78642a377501e983279",
+    "section_structure_sha256": "227e3ced495b1ba7dbb0521605a4c340e95bd9cc0801925465d4fe89447f9875",
+    "policy_sha256": "083ebdf7730e7b7fb1ee69368310ba5d74597da3c185aef5b5942cf7918f8aad",
+    "full_rule_bundle_sha256": "860b527e6929d47d4fba4fe1363bd71ced997670db005efdf7ca8ca3df8517b8",
+    "full_rule_catalog_sha256": "dd590becddd0a9d931480532e189b49488a688f38af7f9c729204a73f911d773",
+    "full_rule_values_sha256": "0f21f89d394686e78267f03a593ecbda9b70452cd7932fb9b1f26ea66303d5de",
+    "full_rule_hard_count": 81,
+    "total_words": 869,
+    "conclusion_ratio": 0.12313,
+    "section_balance_status": "PASS",
+    "conclusion_status": "PASS",
+    "further_information_status": "PASS",
+    "publish_allowed": false,
+    "seal_sha256": "c08d57ad8bad659026a067978ad741c0cfd5ffd37074eeda1007bd66ec94a540"
+  },
+  "publish_allowed": false
+}
