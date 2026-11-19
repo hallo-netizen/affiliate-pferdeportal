@@ -1,0 +1,139 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Kombinierte Fliegen- und Regendecken für Pferde sinnvoll nutzen",
+    "target_keyword": "fliegen regendecke pferd",
+    "category": "pferdedecken-regendecken-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "316b708211721cfd8cb6ff69c9f59d6ea49c46b26aff4cc41a09e20a9521a4bb"
+  },
+  "content_profile": {
+    "search_intent": "Deckenberatung – Regen und Fliegen"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Horseware Ireland – Rambo Summer Series Turnout 0g",
+          "source_url": "https://www.horseware.com/en-eu/rambo-summer-series-turnout-0g"
+        }
+      ],
+      "claims": [
+        "Kombinationsdecken können einen wasserdichten Rückenbereich gegen Regenschauer besitzen.",
+        "Netzgewebe an den Seiten kann Luftzirkulation und Wärmeabgabe fördern.",
+        "Ein Hersteller gibt für sein kombiniertes Sommerdeckenmodell UV-Schutz an."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "fliegen regendecke pferd",
+      "topic": "Kombinierte Fliegen- und Regendecken für Pferde sinnvoll nutzen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdedecken-regendecken-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Kombinierte Fliegen- und Regendecken passend zu Wetter und Pferd auswählen und einsetzen.",
+      "decision_criteria": [
+        "Wasserdichter Rückenbereich",
+        "Atmungsaktive Netzbereiche",
+        "Passform und Witterungsverhältnisse"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Horseware Ireland – Rambo Summer Series Turnout 0g",
+        "source_url": "https://www.horseware.com/en-eu/rambo-summer-series-turnout-0g",
+        "evidence_text_sha256": "75e60a4fb18570afba7f2e6bbd1ded11a230b71c8fbbe52e83e5894a7f73b353",
+        "statement": "Kombinationsdecken können einen wasserdichten Rückenbereich gegen Regenschauer besitzen.",
+        "evidence_text": "A waterproof, breathable softshell top section keeps your horse dry through sudden rain showers",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "Horseware Ireland – Rambo Summer Series Turnout 0g",
+        "source_url": "https://www.horseware.com/en-eu/rambo-summer-series-turnout-0g",
+        "evidence_text_sha256": "e84f70f69b5650f915fbe3bf5b18475b71c9a40b425a090600f187a5f89105f6",
+        "statement": "Netzgewebe an den Seiten kann Luftzirkulation und Wärmeabgabe fördern.",
+        "evidence_text": "600D polyester mesh side panels vent heat and allow air flow",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "Horseware Ireland – Rambo Summer Series Turnout 0g",
+        "source_url": "https://www.horseware.com/en-eu/rambo-summer-series-turnout-0g",
+        "evidence_text_sha256": "4f81abdbfae5c55d1f95184124107acaa6b1e136fcbe872841d4dc610b486d58",
+        "statement": "Ein Hersteller gibt für sein kombiniertes Sommerdeckenmodell UV-Schutz an.",
+        "evidence_text": "75% UV Protection.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdedecken-regendecken-beratung/",
+        "anchor": "pferdedecken regendecken beratung",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdedecken-regendecken-beratung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdedecken-regendecken-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Fliegendecke",
+      "Regendecke",
+      "Sommerdecke",
+      "Netzgewebe",
+      "Regenschutz"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine strukturierte Übersicht der Eigenschaften und Kriterien verbessert die Orientierung im Artikel."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
