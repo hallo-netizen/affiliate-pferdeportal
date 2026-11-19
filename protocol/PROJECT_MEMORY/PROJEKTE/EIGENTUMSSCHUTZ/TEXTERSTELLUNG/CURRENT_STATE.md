@@ -1,3 +1,15 @@
+# 19.11.2026 – HAB: OFFIZIELLE EXTERNE FUSSNOTENLINKS TECHNISCH OFFLINE ABGESICHERT
+
+**Fachliche Regeln:** Fünf Hab-Regelbücher fachlich freigegeben und unverändert. Externe amtliche Links **niemals Pflicht**; nur bei echter Relevanz am Textende, zwingend `nofollow`, ausschließlich nachgewiesene staatliche Stellen.
+
+**Neue technische Vorbereitung in K-Multi:** Die zentrale staatliche Quellenliste (zunächst vier Originalstellen), optionale Ausgabe und **9/9 real ausgeführte negative/positive Tests** sind auf K-Multi `k0-offline-rule-bindings-20261027`, Commit `bbfa196d2e15a9627b9b211d841b711464933174` hinterlegt; vollständige Übergabe unter `offline_rules/portal_bindings/hab_und_bewahr/CURRENT_STATE.md`. Testnachweise und exakt ausgeführte Programmdateien anhand Git-Dateiprüfsummen geprüft. Andere K-Multi- und Plugin-Dateien im Commit nicht verändert.
+
+**Nicht produktiv:** Kein neuer vollständiger Writer gefunden; die beiden K-Multi-Zweige sind weiterhin nur Quarantäne/Offline-Kopien. Hab 0.4.31.6 ist unverändert, Journal-Vorbereitung im Plugin vorhanden, aber ohne aktivierte Laufzeit-/Magazinbindung. Kein K-Multi-LanguageTool-/WordPress-Entwurfs-Endtest.
+
+**Konkreter nächster Schritt:** In der eigenständigen neuen K-Multi-Writer-Runtime die vorhandene Hab-Fünffeldbrücke und die optionale Fußnoten-Ausgabe in **einer** Ausgabestelle anbinden, dann echte Qualität/WordPress-Entwurf testen. Kein Umbau der bestehenden Produktion oder neues Plugin ohne gesicherte Ursache.
+
+---
+
 # AKTUELLE TECHNISCHE HAB-ANBINDUNG 19.11.2026
 
 **Neu nachgewiesen:** Hab-Original-Plugin 0.4.31.6 erneut lokal 31/31 PHP-Tests PASS. Dessen unverändertes Fünffelder-Batch auf die eigenständigen fünf Hab-Regelbücher per **isolierter K-Multi-Bridge** abgebildet; acht lokale Bridge-Testfälle PASS, u. a. Duplikat-/Fremdportal-/Hash-Sperren. Kein Plugin und kein bestehender Produktionsablauf verändert.
