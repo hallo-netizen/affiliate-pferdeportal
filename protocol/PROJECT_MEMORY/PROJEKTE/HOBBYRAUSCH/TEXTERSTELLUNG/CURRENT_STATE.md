@@ -1,3 +1,11 @@
+## 19.11.2026 – MAẞGEBLICH 0.4.24.7: PFERDEATELIER-FEHLERHISTORIE ABGEGLICHEN, EIN GESAMTFIX
+
+- Nutzer verlangt Fehlerhistorie Pferdeatelier ohne kleinteilige Zwischen-Plugins, nur bereits belegte fehlende Fixes in einem Paket. **0.4.24.7** korrigiert die ursprüngliche DataForSEO-PAA-Einzelstatus-Fehldeutung: `tasks_ready` ist nur eine Liste noch nicht abgeholter fertiger Jobs; kein Einzelstatus. Direkte `GET task_get/advanced/{gespeicherte_id}`-Prüfung: 40601/40602 = pending, 20000+exakte ID+Result = ready, andere Codes = Providerfehler. Vorhandener Timeout-Fix/Archividentität/Kostenschutz und früher bekannte Relevanz-/K0-Sperren unverändert.
+- **Aktuelle ZIP:** `Texterstellung_Hobbydepot_0.4.24.7_PAA_BESTANDSFIX_GESAMTPRUEFUNG.zip`, SHA256 `1889f9137bba40c0eaf130c47d2866bdfea0ed33850f63a43f0b3e9eb5848d2e`, 509239 Bytes. **83/87 byteidentisch** mit 0.4.24.6, vier bestehende PHP-Dateien geändert, keine Neuentwicklung. 69/69 lokale PHP-Tests, ZIP 87, Lint 78, JSON 8 bestanden. **Kein Live-API-/WP-Endtest**; Anbieterstatus unbekannt.
+- **Aktuelle Version im zentralen Büro und Fachbüro tatsächlich geschrieben:** `/Hobby Depot/Plugin-Büro/` und `/hobbydepot/TEXTERSTELLUNG/INSTALLATIONSKANDIDATEN/`. `Texterstellung-CURRENT.md` in beiden Büros auf 0.4.24.7 aktualisiert. Vorgänger bleibt archiviert. Gesamtbericht `PFERDEATELIER_FEHLERHISTORIE_GESAMTFIX_04247_20261119.md`.
+- **Nächster einzelner Nutzerklick:** Backup → WP-Plugin 0.4.24.7 ERSETZEN → `Texterstellung → Recherche → Gesperrten Auftrag prüfen und falls fertig fortsetzen` einmal. Keinen neuen Kategorie-Research starten; gesperrten Altauftrag mit identischer ID prüfen, NICHT neu bezahlen.
+---
+
 ## 19.11.2026 – AKTUELL: PRODUKT-KANDIDAT TEXTERSTELLUNG 0.4.24.6 / PAA ARCHIV-FORTSETZUNG
 
 - Reale Diagnose `texterstellung-diagnose-20261119-100006.json`: `3D-Bogenschießen` `BLOCKED_PARKED` / `PSTE_PAA_TASK_TIMEOUT`, 5 Rohkeywords, Provider-Task-ID im signierten Originalarchiv. Früherer Fehler `TASK_PENDING` nach 1800s ist im Pferdeatelier-Originalcode identisch vorhanden.
