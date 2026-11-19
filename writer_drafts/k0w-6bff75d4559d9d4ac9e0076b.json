@@ -8,7 +8,12 @@
     "exception_code": "",
     "rationale": "Eine Tabelle ordnet die wichtigsten Entscheidungen zu Bodenprobe, Düngermenge, Zeitpunkt und Weideruhe zu."
   },
-  "lt_authoritative_terms": [],
-  "revision_count": 3,
+  "lt_authoritative_terms": [
+    "Stallaltag",
+    "abschwemmen",
+    "eingewaschen",
+    "LUFA"
+  ],
+  "revision_count": 4,
   "publish_allowed": false
 }
