@@ -27,6 +27,8 @@ K0_OFFICIAL_SOURCE_HOSTS = frozenset({
     'vetmeduni.ac.at',          # veterinary university
     'msdvetmanual.com',        # official MSD Veterinary Manual
     'usask.ca',                 # University of Saskatchewan / WCVM
+    'umn.edu',                  # University of Minnesota Extension, official university service
+    'landwirtschaftskammer.de', # Official Landwirtschaftskammer Nordrhein-Westfalen
 })
 K0_OWN_PORTAL_SOURCE_HOSTS = frozenset({
     'pferde-atelier.de', 'hobbydepot.de', 'hab-und-bewahr.de',
