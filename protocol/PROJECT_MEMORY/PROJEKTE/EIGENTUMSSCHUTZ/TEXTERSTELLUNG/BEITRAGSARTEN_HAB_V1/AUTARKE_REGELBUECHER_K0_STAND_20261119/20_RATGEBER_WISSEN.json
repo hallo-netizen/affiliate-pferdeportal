@@ -1,6 +1,6 @@
 {
-  "schema": "HAB_AUTARKES_BEITRAGSREGELBUCH_AKTUELLE_K0_KOPIE_V1",
-  "status": "AUTARKER_FACHENTWURF_NICHT_K0_KMULTI_READY",
+  "schema": "HAB_AUTARKES_BEITRAGSREGELBUCH_FREIGEGEBEN_V2",
+  "status": "FACHREGELN_FREIGEGEBEN_WRITER_NOCH_NICHT_GETESTET",
   "hab_bei": true,
   "portal": "hab_und_bewahr",
   "typ_id": "HAB_RATGEBER",
@@ -2074,64 +2074,29 @@
       }
     }
   },
-  "eigene_hab_regeln_als_entwurf": [
+  "fachliche_freigabe": "19.11.2026 – Nutzerfreigabe aller fünf Ausrichtungen sowie zweier allgemeiner Hab-Regeln; KEINE Freigabe des Schreibworkflows",
+  "hab_verbindliche_regeln": [
     {
-      "id": "HAB01",
-      "ausloeser": "alle Texte",
-      "regel": "Klar benennen: Schutzobjekt, relevante Gefahr, Maßnahme, Eignungsbereich und Restgefahr. Menschenleben und Gesundheit vor Sachwerten. Keine absolute Sicherheitsgarantie."
+      "id": "HAB_SACHLICHE_SICHERHEIT",
+      "status": "VERBINDLICH",
+      "regel": "Jede wichtige Aussage und jede Empfehlung muss fachlich korrekt, durch zuverlässige Recherche belegbar und konkret themenbezogen sein. Keine gefährlichen Handlungsempfehlungen, unbelegten Schutzversprechen, pauschalen rechtlichen Erlaubnisse oder Versicherungs-Leistungszusagen. Relevante Grenzen durch Recht, individuelle Bedingungen oder Technik nennen und darauf hinweisen, die aktuell für den eigenen Fall gültigen Bestimmungen zu prüfen. Menschensicherheit hat Vorrang vor Sachen; keine Warnblöcke ohne echten Bezug.",
+      "beispiele": "Keine Waffen-/Fallen-/Konfrontations- oder gefährlichen Heimwerker-Anleitungen; Überwachung Dritter nicht pauschal erlauben; nur reale und nachweisbare Ereignisse als Bericht ausgeben.",
+      "anwendung": "Gilt für alle Hab-Typen, aber Einzelhinweise nur bei tatsächlicher Relevanz. Keine zusätzliche Prüfstation."
     },
     {
-      "id": "HAB02",
-      "ausloeser": "Einbruch, Diebstahl, Gewalt, Konflikt, Vandalismus, akute Gefahr",
-      "regel": "Prävention, sichere Reaktion und Maßnahmen nach dem Ereignis trennen. Keine Selbstgefährdung, Verfolgung, Konfrontation, Waffen- oder Fallenempfehlungen; keine operative Anleitung zum Überwinden von Sicherheitssystemen."
-    },
-    {
-      "id": "HAB03",
-      "ausloeser": "Strom, Gas, Feuer, Rauch, Bau-/Statik, Hochwasser, Lithium-Akkus, gefährliche Installation",
-      "regel": "Sichere Laienmaßnahmen von Facharbeiten trennen; Stoppsignale und zuständige Fachleute klar nennen. Gefährliche Arbeit nicht durch detaillierte Heimwerker-Schrittfolge normalisieren."
-    },
-    {
-      "id": "HAB04",
-      "ausloeser": "Recht, Genehmigungen, Normen, Miete, Nachbarschaft, Hausrecht, Haftung",
-      "regel": "Land/Jurisdiktion, Zeitpunkt und Besonderheiten nennen, amtliche oder ursprüngliche Regelquelle nutzen. Keine pauschale Rechtsberatung, Norm als Gesetz oder allgemeine Erlaubnis darstellen."
-    },
-    {
-      "id": "HAB05",
-      "ausloeser": "Versicherung, Schadensdeckung, Vertragsbedingungen, Erstattung, Versicherungspflicht",
-      "regel": "Vertragsart, versicherte Gefahr, Ausschlüsse, Selbstbehalt, Obliegenheiten, Warte- und Meldefristen nur mit aktueller Originalquelle konkret erklären. Keine verbindliche Leistungszusage oder erfundene Tarifmerkmale."
-    },
-    {
-      "id": "HAB06",
-      "ausloeser": "Kamera, Mikrofon, Aufzeichnungen, smarte Sensorik, Zutrittsdaten",
-      "regel": "Privatsphäre, Nachbarn, Besucher, Beschäftigte, Aufnahme-/Speichergrenzen und Datenrisiken ansprechen; keine pauschale Erlaubnis zur Überwachung Dritter."
-    },
-    {
-      "id": "HAB07",
-      "ausloeser": "Produkt-/Maßnahmenwahl und Vergleich",
-      "regel": "Schutzwirkung, Einsatzort, Strom/Internet-Ausfall, Fehlalarm, Wartung, Folgekosten, Fehlbedienung und Grenzen nach konkreter Evidenz; unabhängig von Affiliate-Verfügbarkeit."
-    },
-    {
-      "id": "HAB08",
-      "ausloeser": "alle Texte mit konkreten Adressaten",
-      "regel": "Privathaushalte, Mieter/Eigentümer, Ferienhaus, Garten, Boot, Camping/Wohnmobil und persönlich geführte kleine Betriebe differenzieren, wenn die Unterschiede bedeutsam sind. Keine Großbetriebs-/Industrieperspektive erzwingen."
-    },
-    {
-      "id": "HAB10",
-      "ausloeser": "Preis, Produkt, Affiliate, Empfehlungslink",
-      "regel": "Werbliche Interessen dürfen Fakten, Kriterien, Gewinner oder Quellenwahl nicht bestimmen; sachliche Alternative ohne Kauf und Kostenstand nennen, soweit zur Leserfrage passend."
-    },
-    {
-      "id": "HAB11",
-      "ausloeser": "Notfälle, laufender Schaden, Brand, Gas, Überflutung, Einbruch",
-      "regel": "Sofortige sichere Prioritäten klar von späterer Vorsorge abgrenzen. Keine riskanten Rückkehr-, Reparatur-, Rettungs- oder Beweissicherungsanweisungen."
+      "id": "HAB_OPTIONALE_AMTLICHE_FUSSNOTENLINKS",
+      "status": "VERBINDLICH",
+      "regel": "Externe weiterführende Links sind KEINE Pflicht. Nur bei echtem Mehrwert für genau dieses Thema darf am Artikelende die freiwillige Fußnote 'Weiterführende amtliche Informationen' mit passendem Link stehen. Zulässig sind ausschließlich zuvor als echt staatlich geprüfte offizielle Websites von Bundes-, Landes- oder Kommunalbehörden, Polizei sowie staatliche Gesetzesportale. Offizielle Startseite oder Hauptkategorie ist ausreichend. Ausgeschlossen: Versicherer, Unternehmen, Verbände, private Webseiten und nichtstaatliche Organisationen. Jeder externe Link zwingend mit rel='nofollow'. Keine künstliche Linkquote. Ohne Link wird auch die Fußnote weggelassen. Amtlicher Weiterführungslink ersetzt niemals die eigene Faktenprüfung.",
+      "technischer_hinweis": "Externe zusätzliche Links werden NICHT auf die drei bisherigen internen Links angerechnet. Umsetzung im neuen Writer noch nicht bestätigt; alte formale Linkregeln bleiben als vollständige Ausgangskopie unverändert."
     }
   ],
-  "redaktioneller_hab_entwurf_ohne_altdatei_abhaengigkeit": {
+  "verbindliche_typausrichtung": "Ein Thema verständlich erklären und bei echtem Entscheidungsbedarf praktische Auswahlkriterien bieten. Reines Erklärwissen verlangt weder Kauf noch erfundene Auswahlentscheidung. Kein künstliches Produkteranking.",
+  "verbindliche_typregeln": {
     "schema": "HAB_EIGENSTAENDIGE_ARTIKELART_V1",
     "portal": "hab_und_bewahr",
-    "status": "FACHENTWURF_NICHT_AKTIV_NICHT_K0_READY",
-    "aktionsregel": "Nur die im MINI einmalig beschlossene Beitragsart laden. Keine zweite Entscheidung, kein Fallback oder automatische Umbenennung. Bestehende K0-Prüfungen niemals duplizieren.",
-    "technik": "Eigenständiges Regelpaket zur späteren K-Multi-Prüfung; NICHT als bereits ausführbare Original-K0-Typdatei ausgeben.",
+    "status": "FACHLICH_FREIGEGEBEN_WRITER_NOCH_NICHT_GETESTET",
+    "aktionsregel": "Portal und Beitragsart bereits vor dem Schreiben genau einmal festlegen; nur dieses Hab-Regelbuch gilt. Keine Regeln anderer Portale.",
+    "technik": "Hab-spezifisches fachlich freigegebenes Regelpaket; technische Ausführung und WordPress-Import müssen separat getestet werden.",
     "id": "HAB_RATGEBER",
     "article_type": "Ratgeber & Wissen",
     "datei": "20_RATGEBER_WISSEN.json",
@@ -2158,7 +2123,7 @@
     "kritisch_anpassen": [
       "Kein obligatorisches Kauf- oder Empfehlungsmodul",
       "Kein erzwungenes Kriterien-Raster bei reinem Hintergrundwissen",
-      "Bei komplexen Gefahren Nutzbarkeit vor Gleichlänge aller Abschnitte",
+      "Bei komplexen Gefahren gute Lesbarkeit und unveränderte Abschnitts- und Umfangsregeln einhalten.",
       "Mieter, Eigentümer, Ferienhaus oder kleines Geschäft nur differenzieren, wenn das die Empfehlung ändert"
     ],
     "beispiele": {
@@ -2177,8 +2142,8 @@
       "Sind Risiko, Kosten und Grenzen realistisch beschrieben?",
       "Wird informierendes Wissen nicht künstlich als Kaufberatung geschrieben?"
     ],
-    "integrationskonflikt": "Nicht pauschal als K0-Beratung übergeben: dessen Pflichtfeld decision_goal/decision_criteria ist für reines Wissen nicht immer sinnvoll. Fachlich eigenen Typ oder explizit kompatible Unterform freigeben."
+    "offener_technischer_nachweis": "Nicht pauschal als K0-Beratung übergeben: dessen Pflichtfeld decision_goal/decision_criteria ist für reines Wissen nicht immer sinnvoll. Fachlich eigenen Typ oder explizit kompatible Unterform freigeben."
   },
-  "offene_entscheidung": "Reines Erklärwissen darf nicht mit künstlichen Beratungs-Kriterien gleichgesetzt werden. Es existiert noch kein genehmigter eigener K0-Typ.",
-  "nicht_genehmigt": "Keine Textregeländerungen, keine neuen Umfangsgrenzen, keine Aktivierung der Entwurfs-Ergänzungen, bevor Zustimmung und K0-Regression vorliegen."
+  "offener_technischer_nachweis": "Reines Erklärwissen darf nicht mit künstlichen Beratungs-Kriterien gleichgesetzt werden. Es existiert noch kein genehmigter eigener K0-Typ.",
+  "formale_bestandsgarantie": "Alle enthaltenen Originalfelder, Regelkatalog, Werte, Typregeln bleiben vollständig und unverändert: Wörter 750–900, H2, Absätze, Tabellen, Listen, Rechtschreibung, Quellen, drei interne Links. Nur neue separate Hab-spezifische Regeln ergänzt; keine Aktivierung von Fremdportalkontrollen."
 }
