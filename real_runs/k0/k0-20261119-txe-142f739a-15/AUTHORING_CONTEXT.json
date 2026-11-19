@@ -1,0 +1,136 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "In welchem Alter sind Pferde am schwierigsten?",
+    "target_keyword": "In welchem Alter sind Pferde am schwierigsten?",
+    "category": "pferde-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "c905a7fa5ba476f7f946201e56cd244a7bf1253fbc0cf7f51f749db189182490"
+  },
+  "content_profile": {
+    "search_intent": "Schwierige Verhaltensphasen im Lebensalter von Pferden einordnen"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/behavior/behavior-of-horses/behavior-problems-of-horses",
+          "source_title": "MSD Veterinary Manual – Pferdeverhalten"
+        }
+      ],
+      "claims": [
+        "Junge Pferde können beim Spielen aggressiv wirkende Bewegungen zeigen.",
+        "Gruppenzusammensetzung beeinflusst Auseinandersetzungen zwischen Pferden.",
+        "Treiben und Verfolgen sind mögliche Formen von Konfliktverhalten."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "In welchem Alter sind Pferde am schwierigsten?",
+      "topic": "In welchem Alter sind Pferde am schwierigsten?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "In welchem Alter sind Pferde am schwierigsten?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/behavior/behavior-of-horses/behavior-problems-of-horses",
+        "source_title": "MSD Veterinary Manual – Pferdeverhalten",
+        "evidence_text": "Some horses, especially young ones, play with each other while showing signs of aggression",
+        "evidence_text_sha256": "055b3f518535354bb6deb9d0420aba931fe63782e25a16cffcae8430074348d2",
+        "statement": "Junge Pferde können beim Spielen aggressiv wirkende Bewegungen zeigen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/behavior/behavior-of-horses/behavior-problems-of-horses",
+        "source_title": "MSD Veterinary Manual – Pferdeverhalten",
+        "evidence_text": "Aggression by horses toward other horses is associated mainly with mixing unfamiliar horses",
+        "evidence_text_sha256": "7fb655c7c33bc0453861581c22f54bb2dc5f4a7681ad522d3fbd751dd2f1c44f",
+        "statement": "Gruppenzusammensetzung beeinflusst Auseinandersetzungen zwischen Pferden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/behavior/behavior-of-horses/behavior-problems-of-horses",
+        "source_title": "MSD Veterinary Manual – Pferdeverhalten",
+        "evidence_text": "Aggressive behavior is a common problem in horses and includes chasing",
+        "evidence_text_sha256": "8d05d14ff8a8fe02b4c79e8bf8402a0d5d5850f66a65949efcab0be245eb015f",
+        "statement": "Treiben und Verfolgen sind mögliche Formen von Konfliktverhalten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-verstehen/",
+        "anchor": "pferde-verstehen",
+        "block": "details"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Alter",
+      "Jungpferde",
+      "Verhalten",
+      "Training",
+      "Herde",
+      "Entwicklung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine kompakte Tabelle ergänzt die thematisch unterschiedlichen Prüfungskriterien und Maßnahmen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
