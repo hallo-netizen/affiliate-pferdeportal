@@ -1,3 +1,9 @@
+# AKTUELLE KONZEPTENTSCHEIDUNG 19.11.2026 – VOLLSTÄNDIG AUTARKE HAB-TYPPAKETE
+
+**Verbindlich beschlossen:** Fünf getrennt abrufbare, jeweils vollständig eigenständige Hab-Beitragsregeldateien. Pferdeatelier-Regeln nur einmal als geprüfte Kopiervorlage übernehmen/anpassen; relevante Hab-Spezialregeln in jede passende eigene Datei integrieren. Keine fachliche Laufzeitabhängigkeit zu Pferdeatelier oder zu den bisher separaten gemeinsamen Regeldateien. Die fünf vorhandenen JSONs sind **noch Entwürfe mit Verweisen** und müssen erst vervollständigt werden; K0 und K-Multi unverändert. Voller Beschluss: `94_BESCHLUSS_AUTARKE_BEITRAGSARTEN_20261119.md`.
+
+---
+
 # Beitragsarten Hab & Bewahr – aktueller Fachstand (19.11.2026)
 
 **Gesichert:** 5 getrennte Typdateien + 2 gemeinsame Regeldateien + 1 exaktes Register + Quell-/Kritikabgleich + Abnahmeplan + Protokoll. 

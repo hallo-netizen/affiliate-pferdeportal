@@ -12,8 +12,8 @@
     "keine_neue_startsyntax": true,
     "keine_veraenderung_des_fuenffelder_exports": true
   },
-  "gemeinsame_regeln": "01_GEMEINSAME_TEXTREGELN.json",
-  "hab_querschnitt": "02_HAB_QUERSCHNITT_SICHERHEIT.json",
+  "gemeinsame_regeln": "01_GEMEINSAME_TEXTREGELN.json (nur Entwicklungs-Kopiervorlage, nach Fertigstellung keine Laufzeitabhängigkeit)",
+  "hab_querschnitt": "02_HAB_QUERSCHNITT_SICHERHEIT.json (nur Entwicklungs-Kopiervorlage, nach Fertigstellung keine Laufzeitabhängigkeit)",
   "beitragsarten": [
     {
       "id": "HAB_FAQ",
@@ -59,5 +59,18 @@
     "Originalen K-Multi-Writer und LanguageTool 6.8 samt WordPress-Entwurfsformat real durchtesten",
     "Aktuelle Hab-WP-Kategorie- und Magazin-Zuordnung read-only bestätigen",
     "Erst danach Typ technisch READY und einen echten Entwurf erzeugen"
-  ]
+  ],
+  "verbindliche_konzeptentscheidung": {
+    "beschlossen_am": "2026-11-19",
+    "modell": "FÜNF_VOLLSTAENDIG_AUTARKE_HAB_BEITRAGSREGELPAKETE",
+    "verbindlich": true,
+    "zur_entwicklung": "Geeignete allgemeine und spezielle Pferdeatelier-Regeln einmal kopieren, einzeln kritisch auf Hab prüfen, anpassen und durch relevante Hab-Fachregeln im jeweiligen vollständigen Paket ergänzen.",
+    "zur_laufzeit": "Jede Hab-Beitragsart muss nach Fertigstellung ALLE für sie geltenden Text- und Hab-Sonderregeln selbst enthalten; keine Pflicht, andere Beitragsartdateien oder Pferdeatelier-Regelwerte nachzuladen.",
+    "identitaet": "Eigene unverwechselbare Hab-Typkennung und eigenständig abrufbarer Regeldateipfad, auch wenn Typname wie FAQ identisch ist.",
+    "gemeinsamer_technikweg": "Gemeinsame K0-/K-Multi-Schreib- und Prüfmaschine möglich; unveränderte gemeinsame Kontrolltechnik ist KEINE gemeinsam referenzierte Textregeldatei.",
+    "versionen": "Spätere Änderungen am Pferdeatelier werden nicht automatisch nach Hab übernommen; nur bewusst übernommene und getestete Anpassungen.",
+    "zentralregister": "Register nur zum Finden und einmaligen Auswählen der passenden Datei; keine verteilte Laufzeitabhängigkeit und keine doppelte Regelentscheidung.",
+    "noch_zu_tun": "Die vorhandenen fünf JSONs sind Vorentwürfe und verweisen derzeit für gemeinsame Regeln auf zwei separate Hilfsdateien. Sie müssen erst in fünf vollständige, autarke Pakete überführt werden. Nicht als schon abgeschlossen behaupten.",
+    "bestehende_technik_geschuetzt": "Keine Änderung der Original-K0-Hardchecks, Originaltypen, K-Multi, MINI oder Hab 0.4.31.6 durch diesen Konzeptbeschluss."
+  }
 }

@@ -1,3 +1,9 @@
+# VERBINDLICHER BESCHLUSS – Hab-Beitragsarten vollständig autark (19.11.2026)
+
+Fünf eigene Typregelpakete, jeweils getrennt abrufbar; bewährte Pferdeatelier-Regeln prüfen, kopieren und passend anpassen; relevante Hab-Spezialregeln pro Paket integrieren. Die fünf bestehenden JSON-Dateien sind **noch nicht autark**, da sie auf getrennte Entwicklungsregeln verweisen. Nächste Arbeit: Originalregel-Mapping → fünf vollständige autarke Typdateien → echte K0-/K-Multi-Regression und WP-Entwurfstest. **Keine Plugin-/K0-/K-Multi-Änderung durch den Beschluss.** Protokoll: `BEITRAGSARTEN_HAB_V1/94_BESCHLUSS_AUTARKE_BEITRAGSARTEN_20261119.md`.
+
+---
+
 # FACHLICHER NEUSTAND 19.11.2026 – Fünf Hab-Beitragsarten gesondert abgelegt, NOCH KEINE K0-/K-MULTI-FREIGABE
 
 Alle fünf eigenständigen Regeldateien und der originale Pferdeatelier-Abgleich sind in `BEITRAGSARTEN_HAB_V1/93_CURRENT_STATE.md` registriert. Gemeinsame Regeln und Hab-Querschnittsregeln separat, jeweils nur bei Bedarf; unveränderte Original-K0-Regeln, keine Pluginänderung. Bericht neu und nicht technisch READY; Anleitung/Checkliste und Ratgeber/Wissen noch nicht pauschal 1:1 mit alten technischen Typen kompatibel. Abnahme und Testplan in diesem Ordner.
