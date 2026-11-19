@@ -1,0 +1,10 @@
+--- 6.72.361/includes/trait-ppar-idealo.php
++++ 6.72.362/includes/trait-ppar-idealo.php
+@@ multiprovider_reorder_candidates()
+-                if ($gtins && array_intersect($gtins,array_keys($seen_gtins))) { continue; }
++                if ($gtins) { $already_seen=false; foreach ($gtins as $gtin) { if (array_key_exists($gtin,$seen_gtins)) { $already_seen=true; break; } } if ($already_seen) { continue; } }
+
+# Semantik
+# alt: Kandidat überspringen, wenn irgendeine GTIN in der bereits gesehenen GTIN-Menge enthalten ist.
+# neu: exakt dieselbe Existenzprüfung direkt auf dem bereits aufgebauten assoziativen Set.
+# Keine Änderung an GTIN-Werten, Reihenfolge, Kandidaten, Provider-Mix oder Folgeentscheidungen.
