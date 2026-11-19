@@ -1,0 +1,155 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Gamaschen fürs Pferd sicher anpassen und sinnvoll einsetzen",
+    "target_keyword": "pferd gamaschen",
+    "category": "pferdewissen-grundlagen",
+    "article_type": "Beratung",
+    "plan_slot": "a1d0d31b8c12d1cacc430358b5af33dce3dda4cbfe90a70bdaad317e1c86c883"
+  },
+  "content_profile": {
+    "search_intent": "Kaufberatung – Gamaschen"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Gamasche",
+          "source_title": "Wikipedia – Gamasche Pferdeausrüstung"
+        }
+      ],
+      "claims": [
+        "Gamaschen sollen das Pferdebein beim Reiten oder Fahren schützen.",
+        "Gamaschen sollen insbesondere Röhrbein, Fesselkopf und Sehnen schützen.",
+        "Im Spring- und Geländesport werden häufig Gamaschen verwendet.",
+        "Gamaschen können aus Leder, Fell oder Kunststoff bestehen."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "pferd gamaschen",
+      "topic": "Gamaschen fürs Pferd sicher anpassen und sinnvoll einsetzen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdewissen-grundlagen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Passende Gamaschen für ein Pferd nach Schutzfunktion, Material und sicheren Sitz auswählen.",
+      "decision_criteria": [
+        "Schutz von Röhrbein und Sehnen",
+        "Einsatzzweck im Sport",
+        "Material und Pflege",
+        "Passform am Pferdebein"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Gamasche",
+        "source_title": "Wikipedia – Gamasche Pferdeausrüstung",
+        "evidence_text": "Gamaschen werden in verschiedenen Bauarten auch zum Schutz des Pferdebeins",
+        "evidence_text_sha256": "9ebc1f63cf3f4731e6dcb7a68785897e8218decd23f0a503d53ba7e4f8011d5d",
+        "statement": "Gamaschen sollen das Pferdebein beim Reiten oder Fahren schützen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Gamasche",
+        "source_title": "Wikipedia – Gamasche Pferdeausrüstung",
+        "evidence_text": "insbesondere des Röhrbeins, des Fesselkopfs und der Sehnen",
+        "evidence_text_sha256": "9ff2263e7aae80329a3de22e2b46345ca6a20b30354690e2c929c6a105c54637",
+        "statement": "Gamaschen sollen insbesondere Röhrbein, Fesselkopf und Sehnen schützen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Gamasche",
+        "source_title": "Wikipedia – Gamasche Pferdeausrüstung",
+        "evidence_text": "Besonders im Spring- und Geländesport sind Gamaschen weit verbreitet",
+        "evidence_text_sha256": "0f80b7d37de89ff93344aeda8c741ac9708777a96de880fdf75a9077ac59d329",
+        "statement": "Im Spring- und Geländesport werden häufig Gamaschen verwendet.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://de.wikipedia.org/wiki/Gamasche",
+        "source_title": "Wikipedia – Gamasche Pferdeausrüstung",
+        "evidence_text": "Dabei kommen als Materialien Leder, Fell und zunehmend verschiedene Kunststoffe, vor allem Neopren zum Einsatz.",
+        "evidence_text_sha256": "b2ad2db5521343de4f5f11bcf48c3871cd54f9bb5443518c4442f5fd0f5ea25c",
+        "statement": "Gamaschen können aus Leder, Fell oder Kunststoff bestehen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdewissen-grundlagen/",
+        "anchor": "pferdewissen-grundlagen",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdewissen-grundlagen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdewissen-grundlagen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Gamaschen",
+      "Pferd",
+      "Schutz",
+      "Beine",
+      "Material",
+      "Passform"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Tabelle stellt die relevanten Prüf- und Entscheidungskriterien für pferd gamaschen gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
