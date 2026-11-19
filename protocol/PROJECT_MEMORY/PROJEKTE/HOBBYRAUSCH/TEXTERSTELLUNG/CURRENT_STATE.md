@@ -1,3 +1,14 @@
+## 19.11.2026 – AKTUELL: BUTTON-KLICKWEG 0.4.24.3 GEPRÜFT, KEIN NEUER BUILD
+
+- Nutzer verlangt wegen des Hab-&-Bewahr-Fehlers am Button `Recherche-Einrichtung abschließen` eine erneute SIMULATION vor Liveeinsatz. Bei Hab war ein JavaScript-Syntaxfehler im tatsächlich ausgegebenen Seitencode nachgewiesen; **das ist kein Beleg für denselben Fehler in Hobbydepot**.
+- Aktuelle Hobbydepot-ZIP `Texterstellung_Hobbydepot_0.4.24.3_RECHERCHE_EINRICHTUNG.zip` im Pluginbüro **bytegenau überprüft**, SHA256 `e5674fb897cc9ca4d4594d7c8ca2a1621d92535a8651815535040005fecb78d4`, 87 valide ZIP-Dateien. **Keine Codeänderung/keine neue Version.**
+- Echter PHP-UI-Render + JS-Syntax, Klick-Event, Fetch an `admin-ajax.php`, Fortschritt/Weiterleitung, Serverfehlerdarstellung und Netzwerkfehler: alle lokalen Tests PASS. AJAX-Handler `TXE_Workshop::ajaxSafeMigration()` mit PSTE-/WordPress-Mocks inklusive Baseline/Kontext/Fehlersperren getestet, Browser ↔ AJAX Kopplung 3 Requests PASS. **Nicht** als echter WordPress-/MySQL-E2E-Nachweis ausgeben.
+- Ergebnis: der konkret in Hab aufgetretene Nichtreaktionsfehler ist in der aktuellen Hobbydepot-Version **nicht reproduzierbar**. Datengesteuerte Blocker der tatsächlichen WordPress-Kategorien bleiben ungeklärt; kontrolliertes Stoppen statt willkürlicher Freigabe.
+- Bericht im zentralen Pluginbüro `Texterstellung_0.4.24.3_KLICKWEG_PRUEFBERICHT_20261119.md`, Fachbüro `HOBBYDEPOT_04243_KLICKWEG_BROWSERSIMULATION_20261119.md`, GitHub `KLICK_SIMULATION_0_4_24_3_20261119.md`. **Aktuelles Plugin bleibt unverändert 0.4.24.3.**
+- Nutzer-Klickpfad (falls 0.4.24.3 schon installiert): `Texterstellung → Recherche → Recherche-Einrichtung abschließen`, einmal; darunter muss `Einrichtung gestartet …` erscheinen und danach Fortschritt/Blockermeldung. Kein echter WordPress-Klick wurde hier ausgelöst.
+
+---
+
 ## 18.11.2026 – AKTUELL: Texterstellung 0.4.24.3, Recherche-Einrichtung in EINEM Bedienvorgang
 
 - **Neue einzige aktuelle Ersatz-ZIP** `Texterstellung_Hobbydepot_0.4.24.3_RECHERCHE_EINRICHTUNG.zip`, SHA256 `e5674fb897cc9ca4d4594d7c8ca2a1621d92535a8651815535040005fecb78d4`, 503882 Bytes. WordPress-Pfad unverändert `texterstellung-hobbydepot/texterstellung.php`; gültige höhere Version als 0.4.24.2.
