@@ -1,0 +1,170 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Gülle auf Pferdeweiden und mögliche Risiken für Pferde",
+    "target_keyword": "gülle für pferdeweiden",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "Beratung",
+    "plan_slot": "61f8814503791db5938f736f3356c624acc2473e546ba1c2d562e245bb3e0976"
+  },
+  "content_profile": {
+    "search_intent": "Weidepflege – Gülledüngung"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "DLG-Merkblatt 510 – Verwertung von strohbasiertem Pferdemist auf Grünland",
+          "source_url": "https://www.dlg.org/mediacenter/dlg-merkblaetter/dlg-merkblatt-510-verwertung-von-strohbasiertem-pferdemist-auf-gruenland"
+        }
+      ],
+      "claims": [
+        "Gülle kann grundsätzlich auch auf Pferdeweiden ausgebracht werden.",
+        "Eine Ausbringung vor Beginn der Weidesaison auf ausreichend trockenem Boden ist vorzuziehen.",
+        "Rindergülle kann Risiken durch Botulismus und E.-coli-Infektionen erhöhen.",
+        "Schweinegülle ist für Pferdeweiden weniger geeignet.",
+        "Regelmäßige Bodenuntersuchungen helfen, Überdüngung zu vermeiden."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "gülle für pferdeweiden",
+      "topic": "Gülle auf Pferdeweiden und mögliche Risiken für Pferde",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Den Einsatz von Gülle auf Pferdeweiden unter hygienischen Risiken, Gülleart und Weidepausen beurteilen.",
+      "decision_criteria": [
+        "Art der Gülle und Infektionsrisiken",
+        "Ausbringung vor dem Weidestart",
+        "Ausreichende Weidepause",
+        "Bodenbedingungen und Nährstoffbedarf",
+        "Rechtskonforme Anwendung"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.dlg.org/mediacenter/dlg-merkblaetter/dlg-merkblatt-510-verwertung-von-strohbasiertem-pferdemist-auf-gruenland",
+        "source_title": "DLG-Merkblatt 510 – Verwertung von strohbasiertem Pferdemist auf Grünland",
+        "evidence_text": "Organische Düngemittel wie Rindergülle oder Schweinegülle können grundsätzlich auch auf Pferdeweiden eingesetzt werden",
+        "evidence_text_sha256": "4187f49ca911c54bb9233bbcda8bff936bb6b33b632dabf22225eb62a65c9ece",
+        "statement": "Gülle kann grundsätzlich auch auf Pferdeweiden ausgebracht werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.dlg.org/mediacenter/dlg-merkblaetter/dlg-merkblatt-510-verwertung-von-strohbasiertem-pferdemist-auf-gruenland",
+        "source_title": "DLG-Merkblatt 510 – Verwertung von strohbasiertem Pferdemist auf Grünland",
+        "evidence_text": "Am besten erfolgt die Ausbringung im Frühjahr, noch vor dem Weidebeginn, und nur auf ausreichend abgetrocknetem Boden.",
+        "evidence_text_sha256": "6216580749f230005b3d4c99be87d61f3a214cb891b9bdd14419c40ee18aa177",
+        "statement": "Eine Ausbringung vor Beginn der Weidesaison auf ausreichend trockenem Boden ist vorzuziehen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.dlg.org/mediacenter/dlg-merkblaetter/dlg-merkblatt-510-verwertung-von-strohbasiertem-pferdemist-auf-gruenland",
+        "source_title": "DLG-Merkblatt 510 – Verwertung von strohbasiertem Pferdemist auf Grünland",
+        "evidence_text": "Rindergülle ist grundsätzlich einsetzbar, bringt jedoch ein erhöhtes Risiko für Erkrankungen wie Botulismus oder Infektionen mit E. coli mit sich.",
+        "evidence_text_sha256": "8d236c5c9bdeeab9771ef7b0637231a92642d308f01fff9c6098a02e060698e0",
+        "statement": "Rindergülle kann Risiken durch Botulismus und E.-coli-Infektionen erhöhen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.dlg.org/mediacenter/dlg-merkblaetter/dlg-merkblatt-510-verwertung-von-strohbasiertem-pferdemist-auf-gruenland",
+        "source_title": "DLG-Merkblatt 510 – Verwertung von strohbasiertem Pferdemist auf Grünland",
+        "evidence_text": "Schweinegülle gilt aufgrund ihres hohen Anteils an schnell verfügbarem Stickstoff und des intensiven Geruchs als weniger geeignet für Pferdeweiden.",
+        "evidence_text_sha256": "5d3ab21559bf4111db47775883120622ca5a59a69801c850d3b2f1aa089b4826",
+        "statement": "Schweinegülle ist für Pferdeweiden weniger geeignet.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.dlg.org/mediacenter/dlg-merkblaetter/dlg-merkblatt-510-verwertung-von-strohbasiertem-pferdemist-auf-gruenland",
+        "source_title": "DLG-Merkblatt 510 – Verwertung von strohbasiertem Pferdemist auf Grünland",
+        "evidence_text": "Für eine angepasste Versorgung des Bodens mit Grundnährstoffen und zur Vermeidung von Überdüngung sind Bodenuntersuchungen in regelmäßigen Abständen",
+        "evidence_text_sha256": "aa775f370815cbc249fddc4d14e151722f7b0b745754c58930d3ef8f5cb3eb8e",
+        "statement": "Regelmäßige Bodenuntersuchungen helfen, Überdüngung zu vermeiden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "pferdegesundheit-verstehen",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Gülle",
+      "Pferdeweide",
+      "Weidehygiene",
+      "Weidepause",
+      "Rindergülle",
+      "Risiken"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine vierzeilige Übersicht bietet konkreten Mehrwert bei den praktischen Entscheidungen zu gülle für pferdeweiden."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
