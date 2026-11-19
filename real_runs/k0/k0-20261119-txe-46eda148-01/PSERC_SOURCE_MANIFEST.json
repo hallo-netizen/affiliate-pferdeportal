@@ -1,0 +1,57 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 2,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Leergewicht und Zuladung beim Pferdeanhänger verstehen",
+        "target_keyword": "pferdeanhänger gewicht",
+        "category": "recht-finanzen-organisation",
+        "article_type": "Beratung",
+        "plan_slot": "6dbb36aeb4e7ec842ef6dc154ad26cfab10c4857a0ce0c695e18104bdfc00666"
+      },
+      {
+        "title": "Was sollte ich beachten, wenn ich einen Pferdeanhänger miete?",
+        "target_keyword": "pferdeanhänger mieten",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "039994f93cf0dcd05f0c9e8d59121f328318466493a471da07280bd0392b798f"
+      }
+    ],
+    "batch_sha256": "46eda1487a05e583e4014248094b9c4863f89473270eea723609ff10c4bd01ab"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Leergewicht und Zuladung beim Pferdeanhänger verstehen",
+        "target_keyword": "pferdeanhänger gewicht",
+        "category": "recht-finanzen-organisation",
+        "article_type": "Beratung",
+        "plan_slot": "6dbb36aeb4e7ec842ef6dc154ad26cfab10c4857a0ce0c695e18104bdfc00666"
+      },
+      "order_id": "TXE-8eeb5564e187fde4c46da94aa1e1356a",
+      "article_id": "article:32e6e2eed8c341c319c140ad",
+      "search_intent": "Zulassung – Gewicht"
+    },
+    {
+      "metadata_binding": {
+        "title": "Was sollte ich beachten, wenn ich einen Pferdeanhänger miete?",
+        "target_keyword": "pferdeanhänger mieten",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "039994f93cf0dcd05f0c9e8d59121f328318466493a471da07280bd0392b798f"
+      },
+      "order_id": "TXE-dc7605311b37516a63a92ccec9713162",
+      "article_id": "article:164d3211b9d06680aaadce66",
+      "search_intent": "Mietberatung – Pferdeanhänger"
+    }
+  ],
+  "manifest_sha256": "6701686db7cbb714a480a19790b366f411d44f2dd659586912e0cf826eebce0c"
+}
