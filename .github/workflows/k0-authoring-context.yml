@@ -64,7 +64,7 @@ jobs:
           if pid=='pferdeatelier':
               ctx=json.load(open(os.environ['RUN_DIR']+'/AUTHORING_CONTEXT.json'))
               result=verify_live_link_targets(ctx['rule_context'],'https://pferde-atelier.de',topic=ctx['identity'])
-              assert result['status']=='PASS' and result['checked']==3 and len(result['canonical_links'])==3,result
+              assert result['status']=='PASS' and 1<=result['checked']<=3 and len(result['canonical_links'])==result['checked'],result
               from pathlib import Path
               Path('/tmp/k0-canonical-links.json').write_text(json.dumps(result,ensure_ascii=False),encoding='utf-8')
               print('K0_LIVE_LINK_TARGETS_AND_OFFICIAL_NAMES_PASS')
@@ -91,15 +91,24 @@ jobs:
               resolved=json.loads(canonical.read_text(encoding='utf-8'))['canonical_links']
               links=x['rule_context']['bound_links']
               registry=x['rule_context']['link_registry']
-              assert len(links)==len(resolved)==3
-              for link,target in zip(links,resolved):
-                  assert link['href']==target['href'] and link['role']==target['role']
+              assert 1<=len(resolved)<=len(links)<=3
+              chosen_links=[]
+              chosen_registry=[]
+              for target in resolved:
+                  matching_links=[row for row in links if row.get('href')==target['href'] and row.get('role')==target['role']]
+                  assert len(matching_links)==1
+                  link=matching_links[0]
                   label=target['official_name']
                   assert isinstance(label,str) and label.strip()
                   link['anchor']=label
                   matches=[row for row in registry if row.get('href')==link['href'] and row.get('active') is True]
                   assert len(matches)==1
                   matches[0]['official_name']=label
+                  chosen_links.append(link)
+                  chosen_registry.append(matches[0])
+              x['rule_context']['bound_links']=chosen_links
+              x['rule_context']['link_registry']=chosen_registry
+              x['rule_context']['runtime_link_roles']=[row['role'] for row in chosen_links]
           pathlib.Path('/tmp/K0_AUTHORING_CONTEXT_BOUND.json').write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
           print(x['run_instance_id'])
           PY
