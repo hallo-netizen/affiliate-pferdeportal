@@ -1,0 +1,196 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Gefährliche Giftpflanzen auf Pferdeweiden erkennen",
+    "target_keyword": "giftpflanzen auf pferdeweiden",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "Beratung",
+    "plan_slot": "da6fdf4127588c8addd08fd27327a2c058cfb91c7675a750b8df36cb71295d14"
+  },
+  "content_profile": {
+    "search_intent": "Weidesicherheit – Giftpflanzen"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Landwirtschaftskammer NRW – Vorsicht vor dem Jakobskreuzkraut",
+          "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/ackerbau/gruenland/jakobskreuzkraut.htm"
+        },
+        {
+          "source_title": "Merck Veterinary Manual – Plants Poisonous to Animals",
+          "source_url": "https://www.merckvetmanual.com/special-pet-topics/poisoning/plants-poisonous-to-animals"
+        },
+        {
+          "source_title": "Merck Veterinary Manual – Pyrrolizidine Alkaloidosis",
+          "source_url": "https://www.merckvetmanual.com/toxicology/pyrrolizidine-alkaloidosis/pyrrolizidine-alkaloidosis-in-animals"
+        },
+        {
+          "source_title": "University of Minnesota Extension – Planning your horse pasture site",
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/pasture-site-planning"
+        }
+      ],
+      "claims": [
+        "Jakobskreuzkraut ist auf Pferdeweiden ein wichtiges Giftpflanzenrisiko.",
+        "Einzelpflanzen sollten gezielt entfernt werden, ehe sie aussamen.",
+        "Beim Entfernen von Jakobskreuzkraut wird das Tragen von Handschuhen empfohlen.",
+        "Eiben zählen zu den für Tiere giftigen Gehölzen.",
+        "Kreuzkrautarten können durch Pyrrolizidinalkaloide Vergiftungen verursachen.",
+        "Bei Baumarten und Sträuchern muss der Zugang zu giftigen Pflanzenteilen ausgeschlossen werden."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "giftpflanzen auf pferdeweiden",
+      "topic": "Gefährliche Giftpflanzen auf Pferdeweiden erkennen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Giftpflanzen auf Pferdeweiden früh erkennen und den Zugang der Pferde zu gefährlichen Pflanzen verhindern.",
+      "decision_criteria": [
+        "Jakobskreuzkraut vor Samenbildung entfernen",
+        "Giftige Gehölze und Eiben prüfen",
+        "Handschuhe beim Entfernen",
+        "Bei Verdacht Tiere fernhalten und tierärztlich abklären"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Landwirtschaftskammer NRW – Vorsicht vor dem Jakobskreuzkraut",
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/ackerbau/gruenland/jakobskreuzkraut.htm",
+        "evidence_text": "Das Jakobskreuzkraut auf Weiden",
+        "statement": "Jakobskreuzkraut ist auf Pferdeweiden ein wichtiges Giftpflanzenrisiko.",
+        "evidence_text_sha256": "92bf8119989f7cd79351068b6715c59c3891cd974976574603e2c03065ff1a07",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "Landwirtschaftskammer NRW – Vorsicht vor dem Jakobskreuzkraut",
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/ackerbau/gruenland/jakobskreuzkraut.htm",
+        "evidence_text": "Ausreißen oder Ausstechen die sicherste",
+        "statement": "Einzelpflanzen sollten gezielt entfernt werden, ehe sie aussamen.",
+        "evidence_text_sha256": "bb72748ca87b67d7f5a07fb3dc658146d21fb1069066c14a96bf1f672550088f",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "Landwirtschaftskammer NRW – Vorsicht vor dem Jakobskreuzkraut",
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/ackerbau/gruenland/jakobskreuzkraut.htm",
+        "evidence_text": "Schutzhandschuhe getragen werden",
+        "statement": "Beim Entfernen von Jakobskreuzkraut wird das Tragen von Handschuhen empfohlen.",
+        "evidence_text_sha256": "d4504a5e8eff35b487382022eea1e25349bcc6bf4885575cf71580c74c8b88be",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_title": "Merck Veterinary Manual – Plants Poisonous to Animals",
+        "source_url": "https://www.merckvetmanual.com/special-pet-topics/poisoning/plants-poisonous-to-animals",
+        "evidence_text": "Yew; Taxus species",
+        "statement": "Eiben zählen zu den für Tiere giftigen Gehölzen.",
+        "evidence_text_sha256": "04e724d2f0994778d55cd6c940008444cfdbcfb12e3e32e87a1b55fe05253009",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_title": "Merck Veterinary Manual – Pyrrolizidine Alkaloidosis",
+        "source_url": "https://www.merckvetmanual.com/toxicology/pyrrolizidine-alkaloidosis/pyrrolizidine-alkaloidosis-in-animals",
+        "evidence_text": "The plants most often implicated include ragwort",
+        "statement": "Kreuzkrautarten können durch Pyrrolizidinalkaloide Vergiftungen verursachen.",
+        "evidence_text_sha256": "75ff90b89b7fad88656235a72773ad50f518470f8b663ffdc97359714a0d71a4",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F6": {
+        "source_title": "University of Minnesota Extension – Planning your horse pasture site",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/pasture-site-planning",
+        "evidence_text": "poisonous to horses",
+        "statement": "Bei Baumarten und Sträuchern muss der Zugang zu giftigen Pflanzenteilen ausgeschlossen werden.",
+        "evidence_text_sha256": "a24fc48959c9c83aec99e8bb0bbe2e101e86d13dd03c45bce33de78ea3d2466e",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "pferdegesundheit-verstehen",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Giftpflanzen",
+      "Pferdeweiden",
+      "Jakobskreuzkraut",
+      "Eiben",
+      "Pflanzen",
+      "Weidesicherheit",
+      "Pferde"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Übersicht ordnet vier konkrete Unterschiede den Entscheidungen bei giftpflanzen auf pferdeweiden zu."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
