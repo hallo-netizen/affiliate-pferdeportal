@@ -1,0 +1,12 @@
+test_category_only_fails_without_release (test_mini_gate.TestMiniGate.test_category_only_fails_without_release) ... ok
+test_missing_title_repair_without_retry_others (test_mini_gate.TestMiniGate.test_missing_title_repair_without_retry_others) ... ok
+test_no_second_domain_review_and_legacy_only_category (test_mini_gate.TestMiniGate.test_no_second_domain_review_and_legacy_only_category) ... ok
+test_original_immutable (test_mini_gate.TestMiniGate.test_original_immutable) ... ok
+test_same_batch_repair_then_success_and_no_extra_decision (test_mini_gate.TestMiniGate.test_same_batch_repair_then_success_and_no_extra_decision) ... ok
+test_tamper_source_is_rejected (test_mini_gate.TestMiniGate.test_tamper_source_is_rejected) ... ok
+test_wrong_batch_and_stale_release_removed (test_mini_gate.TestMiniGate.test_wrong_batch_and_stale_release_removed) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 1.444s
+
+OK
