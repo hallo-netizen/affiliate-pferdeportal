@@ -1,0 +1,35 @@
+name: Hab & Bewahr RC23 direct downloadable test ZIP
+on:
+  push:
+    branches: [hab-rc23-installable-test-20261112]
+    paths: [.github/workflows/hab-rc23-direct-download-release.yml]
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify binary and publish one-click downloadable release asset
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          FILE="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/HAB_AFFILIATE_RC23_0.1.20-rc23_TEST.zip"
+          test -s "$FILE"
+          echo "c51f6517637a1db5fc4bf7e96613a697e79f8d70031ac48228d47659e86351f4  $FILE" | sha256sum --check -
+          python3 - "$FILE" <<'PY'
+          import sys,zipfile
+          with zipfile.ZipFile(sys.argv[1]) as z:
+            assert z.testzip() is None and len(z.namelist())==36
+            assert b'Version: 0.1.20-rc23' in z.read('affiliate-portal-router/affiliate-portal-router.php')
+            print('INSTALLABLE ZIP VERIFIED')
+          PY
+          TAG="hab-affiliate-rc23-test-20261112"
+          gh release create "$TAG" "$FILE#Hab_Bewahr_Affiliate_RC23_TEST.zip" \
+            --target "$GITHUB_SHA" \
+            --title "Hab & Bewahr Affiliate RC23 – installierbares Testplugin" \
+            --notes "Vollständiges Affiliate-Plugin als Testversion für Hab & Bewahr. 42 PHP-Funktionstests bestanden. Echter Idealo-Feedimport und Live-Sichtprüfung folgen nach Installation. Nur Test, kein behaupteter Live-PASS." \
+            --prerelease
+          gh release view "$TAG" --json assets,url --jq '{url,assets:[.assets[]|{name,url,size}]}'

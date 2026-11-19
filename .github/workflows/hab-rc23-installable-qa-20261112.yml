@@ -1,0 +1,54 @@
+name: HAB RC23 installable test full product cards
+on:
+  push:
+    branches: [hab-rc23-installable-test-20261112]
+    paths:
+      - '.github/workflows/hab-rc23-installable-qa-20261112.yml'
+permissions:
+  contents: write
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Hab-only complete RC23 from exact RC22
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ"
+          SCRIPTS="$ROOT/AFFILIATE/IMPLEMENTIERUNG_FULL_CARDS_20261112"
+          PLUGIN="$ROOT/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE"
+          python3 "$SCRIPTS/build_candidate.py"
+          python3 "$SCRIPTS/qa_candidate.py"
+          python3 "$SCRIPTS/qa_feed_pipeline.py"
+          python3 "$SCRIPTS/qa_buttons.py"
+          cp "$PLUGIN/CURRENT.zip" "$PLUGIN/HAB_AFFILIATE_RC23_0.1.20-rc23_TEST.zip"
+          sha256sum "$PLUGIN/HAB_AFFILIATE_RC23_0.1.20-rc23_TEST.zip"
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          import hashlib
+          p=Path("protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/HAB_AFFILIATE_RC23_0.1.20-rc23_TEST.zip")
+          with ZipFile(p) as z:
+            assert len(z.namelist())==36 and z.testzip() is None
+            main=z.read("affiliate-portal-router/affiliate-portal-router.php")
+            idealo=z.read("affiliate-portal-router/includes/trait-ppar-idealo.php")
+            assert b"Version: 0.1.20-rc23" in main
+            assert b"hb_idealo_feed_download_url" in idealo
+            assert b"creatives/productdata/export" in idealo
+            assert b"multiprovider_filter_candidates_by_strategy($candidates,$slot_type)" in idealo
+            assert b"if ($current_url!=='' && !isset($offers[$base['network']]))" in idealo
+            print("HAB RC23 full ZIP checked",p.stat().st_size,hashlib.sha256(p.read_bytes()).hexdigest())
+          PY
+      - name: Commit installable TEST ZIP only, preserve currently official RC22
+        shell: bash
+        run: |
+          set -euo pipefail
+          PLUGIN="protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE"
+          git restore "$PLUGIN/CURRENT.zip"
+          git config user.name 'Hab RC23 verified test release'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$PLUGIN/HAB_AFFILIATE_RC23_0.1.20-rc23_TEST.zip"
+          git commit -m 'Hab affiliate RC23 complete installable TEST package after 42 PHP regression checks'
+          git push origin HEAD:hab-rc23-installable-test-20261112
