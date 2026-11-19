@@ -1,0 +1,134 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wie entwickelt sich die Fellfarbe eines Apfelschimmels?",
+    "target_keyword": "apfelschimmel pferd",
+    "category": "pferdewissen-grundlagen",
+    "article_type": "FAQ",
+    "plan_slot": "07294733a3eb667a8134690b8267c7f8a4b847db7036211156be5cacc79e8d75"
+  },
+  "content_profile": {
+    "search_intent": "Fellfarbe – Apfelschimmel"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Wikipedia – Schimmel (Pferd)",
+          "source_url": "https://de.wikipedia.org/wiki/Schimmel_(Pferd)"
+        }
+      ],
+      "claims": [
+        "Schimmel werden mit einer Grundfellfarbe geboren und hellen durch das Grey-Gen im Laufe der Jahre auf.",
+        "Das Ausschimmeln ist eine allmähliche Zunahme weißer Haare.",
+        "Apfelschimmel haben dunklere kreisförmige Bereiche im Fell."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "apfelschimmel pferd",
+      "topic": "Wie entwickelt sich die Fellfarbe eines Apfelschimmels?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdewissen-grundlagen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie verändert sich die Fellfarbe eines Apfelschimmels vom jungen zum älteren Pferd?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Wikipedia – Schimmel (Pferd)",
+        "source_url": "https://de.wikipedia.org/wiki/Schimmel_(Pferd)",
+        "evidence_text_sha256": "b76cdc1074ab81a58af54f99ee0e7ed8fc1c16fe95fd1fe5a250ec20c0f6f948",
+        "statement": "Schimmel werden mit einer Grundfellfarbe geboren und hellen durch das Grey-Gen im Laufe der Jahre auf.",
+        "evidence_text": "Ein echter Schimmel ist ein Pferd, das mit beliebiger Fellfarbe geboren wird und aufgrund des Grey-Gens im Lauf der Jahre weiß wird",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Wikipedia – Schimmel (Pferd)",
+        "source_url": "https://de.wikipedia.org/wiki/Schimmel_(Pferd)",
+        "evidence_text_sha256": "33620d3175c97df1b8df7895631ae76aa0cae0f70c9dc4067db6c3d4f1e00f1a",
+        "statement": "Das Ausschimmeln ist eine allmähliche Zunahme weißer Haare.",
+        "evidence_text": "Im Laufe der Jahre bekommt das Pferd dann immer mehr weiße Haare, es schimmelt aus.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Wikipedia – Schimmel (Pferd)",
+        "source_url": "https://de.wikipedia.org/wiki/Schimmel_(Pferd)",
+        "evidence_text_sha256": "45a4c2b562c487a82f776137ebc710ca88e4a2e310aa6e05dec9881f3a514670",
+        "statement": "Apfelschimmel haben dunklere kreisförmige Bereiche im Fell.",
+        "evidence_text": "bei einem Apfelschimmel sind die dunkleren Bereiche in (Halb-)Kreisen angeordnet.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdewissen-grundlagen/",
+        "anchor": "pferdewissen grundlagen",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdewissen-grundlagen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdewissen-grundlagen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Apfelschimmel",
+      "Fellfarbe",
+      "Grey-Gen",
+      "Ausschimmeln",
+      "Kreise"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine strukturierte Übersicht der Eigenschaften und Kriterien verbessert die Orientierung im Artikel."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
