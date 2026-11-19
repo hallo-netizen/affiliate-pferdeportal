@@ -1,0 +1,169 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Worauf sollte ich achten, bevor ich ein Pferd kaufe?",
+    "target_keyword": "pferd kaufen",
+    "category": "recht-finanzen-organisation",
+    "article_type": "Beratung",
+    "plan_slot": "3f3bcbdd48f3d91bfa02330fb5ac6d34595c80836b5a688b85fcb24350c7c386"
+  },
+  "content_profile": {
+    "search_intent": "Kaufberatung – eigenes Pferd"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+          "source_title": "Deutscher Tierschutzbund – Haltung von Pferden"
+        }
+      ],
+      "claims": [
+        "Vor einem Pferdekauf ist täglicher Auslauf in der Haltung zu berücksichtigen.",
+        "Gruppenhaltung kann die Bedürfnisse nach Sozialkontakt und Bewegung erfüllen.",
+        "Gruppenhaltung braucht passende Raufutterstellen für Pferde unterschiedlichen Rangs.",
+        "Auch rangniedrige Pferde müssen sichere Ruheplätze nutzen können.",
+        "Die Weide benötigt regelmäßig Pflege und Kontrolle."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "pferd kaufen",
+      "topic": "Worauf sollte ich achten, bevor ich ein Pferd kaufe?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "recht-finanzen-organisation",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Vor dem Kauf eines eigenen Pferdes Haltung, Versorgung, Sozialkontakt und langfristige Verantwortung prüfen.",
+      "decision_criteria": [
+        "Geeigneter Platz und täglicher Auslauf",
+        "Gesellschaft anderer Pferde",
+        "Raufutter und Ruheplätze",
+        "Weidepflege und tägliche Betreuung"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "täglichem Auslauf",
+        "evidence_text_sha256": "f25dd87750b7f5edc083ec65925708061cca092c4bd9d29cf29c8d3a28da7d0d",
+        "statement": "Vor einem Pferdekauf ist täglicher Auslauf in der Haltung zu berücksichtigen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "In der Gruppenhaltung können gesellige Tiere wie Pferde ihre Bedürfnisse nach sozialem Kontakt, Bewegung und Beschäftigung ausleben.",
+        "evidence_text_sha256": "45e9a0832c6f0bc722ab6fd97a6d7507ba4eba451882554b4749bcd051abfbed",
+        "statement": "Gruppenhaltung kann die Bedürfnisse nach Sozialkontakt und Bewegung erfüllen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "mehrere Raufutterstellen",
+        "evidence_text_sha256": "e359c81d57adb5f6486044e74106f0d853d795d6e06138ab916c66fb84d0971d",
+        "statement": "Gruppenhaltung braucht passende Raufutterstellen für Pferde unterschiedlichen Rangs.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "alle Pferde",
+        "evidence_text_sha256": "6e471041049c97ca4d009b2eed89d6a13491a7439b26184e197170449dcdca0c",
+        "statement": "Auch rangniedrige Pferde müssen sichere Ruheplätze nutzen können.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "die Weide regelmäßig vorbeugend pflegen",
+        "evidence_text_sha256": "a09d2c805aef9d6e4fb97fbe64b947e0a95a863e2e8c436c50d4f5d874aa7cb8",
+        "statement": "Die Weide benötigt regelmäßig Pflege und Kontrolle.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/recht-finanzen-organisation/",
+        "anchor": "recht-finanzen-organisation",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/recht-finanzen-organisation/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "recht-finanzen-organisation",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferdekauf",
+      "Pferde",
+      "Haltung",
+      "Auslauf",
+      "Fütterung",
+      "Kauf"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Tabelle stellt die relevanten Prüf- und Entscheidungskriterien für pferd kaufen gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
