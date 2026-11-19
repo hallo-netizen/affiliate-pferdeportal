@@ -1,0 +1,188 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Beheizbare Wassertröge für Pferde sicher auswählen",
+    "target_keyword": "beheizbare wassertröge",
+    "category": "traenken-und-wasser-frostsichere-pferdetraenken-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "8f7f632fae1857db2c3a71c79bc3d72cdc04941bebce772076ef303819bb8997"
+  },
+  "content_profile": {
+    "search_intent": "Kaufberatung – Frostschutz"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "University of Minnesota Extension – Caring for your horse in the winter",
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horse-in-the-winter"
+        },
+        {
+          "source_title": "University of Minnesota Extension – Cleaning your horse's water tank",
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/cleaning-animal-water-tanks"
+        }
+      ],
+      "claims": [
+        "Trinkwasser muss im Winter vor dem Einfrieren geschützt werden.",
+        "Frostschutz und Wasserzugang müssen regelmäßig kontrolliert werden.",
+        "Bei beheizten Trögen müssen Kabel und Anschlüsse regelmäßig auf Schäden geprüft werden.",
+        "Schnee und Eis ersetzen keine sichere Trinkwasserversorgung.",
+        "Sauberes Wasser bleibt auch im Winter zwingend erforderlich.",
+        "Auch beheizte Wassertröge müssen regelmäßig gereinigt werden."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "beheizbare wassertröge",
+      "topic": "Beheizbare Wassertröge für Pferde sicher auswählen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "traenken-und-wasser-frostsichere-pferdetraenken-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Beheizbare Wassertröge für Pferde nach zuverlässigem Frostschutz, Elektrosicherheit und Pflege auswählen.",
+      "decision_criteria": [
+        "Sicherer Frostschutz im Winter",
+        "Kabel und elektrische Anschlüsse kontrollieren",
+        "Wasser frei zugänglich halten",
+        "Regelmäßige Reinigung"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "University of Minnesota Extension – Caring for your horse in the winter",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horse-in-the-winter",
+        "evidence_text": "keep your horse’s water from freezing",
+        "statement": "Trinkwasser muss im Winter vor dem Einfrieren geschützt werden.",
+        "evidence_text_sha256": "94016d3adf88bbc8b73ab781c946c3ba195d10d83c5a129790d3d5ce88963cd8",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "University of Minnesota Extension – Caring for your horse in the winter",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horse-in-the-winter",
+        "evidence_text": "routinely check it",
+        "statement": "Frostschutz und Wasserzugang müssen regelmäßig kontrolliert werden.",
+        "evidence_text_sha256": "a1b12bb0a6485f774daa5f515386e8aff82e46025993b308eabe5ae1a3670dbd",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "University of Minnesota Extension – Caring for your horse in the winter",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horse-in-the-winter",
+        "evidence_text": "check for worn wires or damage",
+        "statement": "Bei beheizten Trögen müssen Kabel und Anschlüsse regelmäßig auf Schäden geprüft werden.",
+        "evidence_text_sha256": "27df9e63349b7af2faefd1670d819033a40153aa6e549af53f6da378bdb9567b",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_title": "University of Minnesota Extension – Caring for your horse in the winter",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horse-in-the-winter",
+        "evidence_text": "Snow and ice are not adequate water sources",
+        "statement": "Schnee und Eis ersetzen keine sichere Trinkwasserversorgung.",
+        "evidence_text_sha256": "7944627c175328440fb78ccb626bce2bde53a7a1b9d4f974059227d15f59afff",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_title": "University of Minnesota Extension – Caring for your horse in the winter",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horse-in-the-winter",
+        "evidence_text": "Always provide clean, fresh water regardless of temperature",
+        "statement": "Sauberes Wasser bleibt auch im Winter zwingend erforderlich.",
+        "evidence_text_sha256": "55e71cc771b2d84fdd133db42844fa06d6c8e664370a3af3ee9a2072d776018c",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F6": {
+        "source_title": "University of Minnesota Extension – Cleaning your horse's water tank",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/cleaning-animal-water-tanks",
+        "evidence_text": "clean your water tank often, even in the winter",
+        "statement": "Auch beheizte Wassertröge müssen regelmäßig gereinigt werden.",
+        "evidence_text_sha256": "b5cfd202f3cfba10ba728fa056fd43c2ace79bb205035cd655a0958b88fcfa83",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/traenken-und-wasser-frostsichere-pferdetraenken-beratung/",
+        "anchor": "traenken-und-wasser-frostsichere-pferdetraenken-beratung",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/traenken-und-wasser-frostsichere-pferdetraenken-beratung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "traenken-und-wasser-frostsichere-pferdetraenken-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Wassertröge",
+      "Frostschutz",
+      "Pferde",
+      "Winter",
+      "Kabel",
+      "Heizung",
+      "Tränke"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Übersicht ordnet vier konkrete Unterschiede den Entscheidungen bei beheizbare wassertröge zu."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
