@@ -1,0 +1,150 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welches Futter ist für Pferde am gesündesten?",
+    "target_keyword": "Was ist das gesündeste Futter für Pferde?",
+    "category": "pferdeernaehrung-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "46f85321f9ab712d341cfc640f05c974967b94f2898c9d7167d966045a64f067"
+  },
+  "content_profile": {
+    "search_intent": "Gesunde Pferdefütterung nach Raufutterbedarf und individueller Versorgung erklären"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.worldhorsewelfare.org/advice/feeding-horses",
+          "source_title": "World Horse Welfare – Pferde füttern"
+        }
+      ],
+      "claims": [
+        "Pferde sind überwiegend auf Gras und Raufutter ausgerichtet.",
+        "Die Ration muss zu Größe und Arbeitsbelastung des Pferdes passen.",
+        "Genügend geeignetes Raufutter unterstützt die Verdauungsgesundheit.",
+        "Pferde brauchen ständig Zugang zu sauberem Wasser."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was ist das gesündeste Futter für Pferde?",
+      "topic": "Welches Futter ist für Pferde am gesündesten?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welches Futter ist für Pferde am gesündesten?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/feeding-horses",
+        "source_title": "World Horse Welfare – Pferde füttern",
+        "evidence_text": "The horse is predominantly a grazing animal",
+        "evidence_text_sha256": "ababb52311fece082f462ab3b32852605668a572ed0a648c8e65619a7dd416e8",
+        "statement": "Pferde sind überwiegend auf Gras und Raufutter ausgerichtet.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/feeding-horses",
+        "source_title": "World Horse Welfare – Pferde füttern",
+        "evidence_text": "Feed according to size of horse and workload",
+        "evidence_text_sha256": "09e37e9a057fc1eb117ac4f2fba5e165756ba02d44ae278e7a433fb85ce53eb1",
+        "statement": "Die Ration muss zu Größe und Arbeitsbelastung des Pferdes passen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/feeding-horses",
+        "source_title": "World Horse Welfare – Pferde füttern",
+        "evidence_text": "Ensuring your horse has suitable access to forage can help prevent colic and gastric ulcers",
+        "evidence_text_sha256": "1a4c5614bd13c88d4f5dfe1f36eb403e16cfa25cba9ec8e65df912fa7c7ca668",
+        "statement": "Genügend geeignetes Raufutter unterstützt die Verdauungsgesundheit.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/feeding-horses",
+        "source_title": "World Horse Welfare – Pferde füttern",
+        "evidence_text": "All horses should have access to clean, fresh water",
+        "evidence_text_sha256": "257a212c1d3b21ab3e9412cad728c2a3e8dbe1c5a15794abc6ab301da2161450",
+        "statement": "Pferde brauchen ständig Zugang zu sauberem Wasser.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "anchor": "pferdeernaehrung-verstehen",
+        "block": "details"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Futter",
+      "Raufutter",
+      "Gesundheit",
+      "Energie",
+      "Wasser",
+      "Fütterung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine kompakte Tabelle ergänzt die thematisch unterschiedlichen Prüfungskriterien und Maßnahmen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
