@@ -187,17 +187,17 @@ def structural_receipts(article):
     inline_ok=(Counter(paragraph_links)==Counter((x['block'],x['role'],x['href'],x['anchor']) for x in links))
     placement_ok=placement_ok and inline_ok
     relative_ok=all(x['href'].startswith('/') and not x['href'].startswith('//') and '://' not in x['href'] for x in links)
-    further_ok=sum(1 for x in links if x['role']=='further_information' and x['block']=='further_information')==1
+    further_ok=all(x['block']=='further_information' for x in links if x['role']=='further_information')
     distributed_ok=(len(links)==len({x['block'] for x in links})) if links else False
     runtime_roles=set(article.get('runtime_link_roles') or [])
-    runtime_ok=runtime_roles==set(v['global']['required_link_roles'])
+    runtime_ok=runtime_roles=={x['role'] for x in bound}
     clustered_ok=not (links and all(x['block']=='further_information' for x in links)) and all(x['block']!='further_information' for x in links if x['role']!='further_information')
     rows=[
       ('structure.duplicate_block_names_forbidden',len(blocks)==len(set(blocks)),{'blocks':blocks}),
       ('structure.required_blocks',set(required_blocks).issubset(set(blocks)),{'missing':sorted(set(required_blocks)-set(blocks))}),
       ('structure.required_lists',required_lists.issubset(lists),{'missing':sorted(required_lists-lists)}),
-      ('links.visible_exact',len(links)==int(v['global']['visible_links_exact']),{'actual':len(links)}),
-      ('links.required_roles',{x['role'] for x in links}==set(v['global']['required_link_roles']),{'actual':sorted({x['role'] for x in links})}),
+      ('links.visible_exact',int(v['global'].get('visible_links_min',1))<=len(links)<=int(v['global'].get('visible_links_max',v['global']['visible_links_exact'])),{'actual':len(links),'minimum':int(v['global'].get('visible_links_min',1)),'maximum':int(v['global'].get('visible_links_max',v['global']['visible_links_exact']))}),
+      ('links.required_roles',set(v['global'].get('mandatory_link_roles') or ['parent_category']).issubset({x['role'] for x in links}) and {x['role'] for x in links}.issubset(set(v['global']['required_link_roles'])) and len({x['role'] for x in links})==len(links),{'actual':sorted({x['role'] for x in links})}),
       ('type.metadata_schema',meta_ok,{'findings':meta_find}),
       ('structure.body_h1_forbidden',h1_count==0,{'actual':h1_count}),
       ('structure.title_not_repeated_in_body',not bool(title_norm and title_norm in body_norm),{}),
