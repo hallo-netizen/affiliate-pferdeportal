@@ -22,8 +22,12 @@
 7. Falsche Batchkennung nach früherem PASS → alte Freigabe sofort entfernt.
 8. Veränderung des gebundenen Originalexports → hart zurückgewiesen.
 9. LEGACY_CATEGORY_ONLY mit gesperrten Titeln und Freigaben → nur CATEGORY nötig, kein zweites SEO- oder Titelurteil.
+10. Bereits gespeicherte Kategorie darf nicht erneut als Entscheidung eingereicht werden → REPARATUR.
+11. Vollständig abgeschlossenes Thema darf keine neue Entscheidung enthalten → REPARATUR.
 
 ## Grenzen / Ehrlichkeit
 - Der bestandene technische Test **beweist nicht**, dass die zehn aktuellen fachlichen Redaktionsentscheidungen/Titel bereits erstellt wurden: **NEIN**.
 - Der bestandene technische Test **beweist nicht** einen WordPress-Live-Import: **NEIN**.
 - Eine echte 100-prozentige globale Unterbindung falscher Datei-Links benötigt, dass die Dateiausgabe über diesen Freigabepfad erzwungen wird. Der Code stellt keine interne ChatGPT-Ausgabe-Sperre dar; er kann nur die von ihm freigegebenen Artefakte garantieren.
+
+**Endstand:** 9/9 Python-Regressionstests mit Testfixture und 9/9 mit vollständigen echten 10-Themen-Dateien bestanden. Die Tests benutzen nur synthetische Redaktions-/Titelentscheidungen, keine produktiven Freigaben.
