@@ -1,0 +1,190 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Das Gewicht eines Pferdes ohne Waage einschätzen",
+    "target_keyword": "pferd gewicht",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "Anleitung",
+    "plan_slot": "bed53dde5ff67d82d1ee6b2e6225a1e410128e9561df70589f8cb709d2dbe77d"
+  },
+  "content_profile": {
+    "search_intent": "Gewicht – Pferdegesundheit"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/estimating-horse-bodyweight",
+          "source_title": "University of Minnesota Extension – Estimating horse bodyweight"
+        }
+      ],
+      "claims": [
+        "Das Körpergewicht eines Pferdes ist wichtig für Ernährung und Gesundheit.",
+        "Ohne Waage lässt sich das Pferdegewicht aus Körpermaßen näherungsweise schätzen.",
+        "Der Halsumfang gehört zu den Messgrößen bei Gewichtsschätzungen.",
+        "Der Brustumfang wird für genauere Gewichtsschätzungen gemessen.",
+        "Die Körperlänge wird vom Schulterpunkt bis zur Hinterhand erfasst."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Anleitung",
+      "target_keyword": "pferd gewicht",
+      "topic": "Das Gewicht eines Pferdes ohne Waage einschätzen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Das Gewicht eines Pferdes ohne Waage durch systematische Körpermessungen abschätzen.",
+      "preparation_items": [
+        "Weiches Maßband bereitlegen",
+        "Ruhigen Standplatz mit Hilfe wählen",
+        "Körpermaße und Pferdetyp notieren"
+      ],
+      "procedure_steps": [
+        "Pferd ruhig und gerade aufstellen",
+        "Brustumfang an der geeigneten Messlinie abnehmen",
+        "Körperlänge zwischen Schulter und Hinterhand erfassen",
+        "Halsumfang und weitere erforderliche Maße ergänzen",
+        "Messwerte mit einer für den Pferdetyp passenden Formel auswerten"
+      ],
+      "safety_controls": [
+        "Messung nur bei ruhigem Pferd durchführen",
+        "Schätzwert nicht als genaue Waagenmessung ausgeben",
+        "Für medizinische Dosierungen fachlich genaue Werte einholen"
+      ],
+      "common_errors": [
+        "Maßband schräg anlegen",
+        "Ungenaue Länge vom Schweifende verwenden",
+        "Nur nach Augenmaß schätzen"
+      ],
+      "result_checks": [
+        "Messwerte dokumentiert",
+        "Pferdetyp berücksichtigt",
+        "Geschätztes Gewicht als Näherung gekennzeichnet"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/estimating-horse-bodyweight",
+        "source_title": "University of Minnesota Extension – Estimating horse bodyweight",
+        "evidence_text": "Determining a horse’s bodyweight is important for managing bodyweight, nutrition and health.",
+        "evidence_text_sha256": "a52b3a8d85c5424259f129063be84da8a649504656db60361b1be870dbe0b241",
+        "statement": "Das Körpergewicht eines Pferdes ist wichtig für Ernährung und Gesundheit.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/estimating-horse-bodyweight",
+        "source_title": "University of Minnesota Extension – Estimating horse bodyweight",
+        "evidence_text": "In the absence of a scale, horse owners can use equations to predict their horse’s bodyweight based on their height and body length.",
+        "evidence_text_sha256": "4e7808d017a7dfe1bbf7fad196fb7680980d81cf5fda83c958c66dee04e51e4e",
+        "statement": "Ohne Waage lässt sich das Pferdegewicht aus Körpermaßen näherungsweise schätzen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/estimating-horse-bodyweight",
+        "source_title": "University of Minnesota Extension – Estimating horse bodyweight",
+        "evidence_text": "Neck circumference",
+        "evidence_text_sha256": "66d7e4ef21331d1267351141e91bc255d9a41bd60aad4a722b30de56432dd139",
+        "statement": "Der Halsumfang gehört zu den Messgrößen bei Gewichtsschätzungen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/estimating-horse-bodyweight",
+        "source_title": "University of Minnesota Extension – Estimating horse bodyweight",
+        "evidence_text": "Girth circumference",
+        "evidence_text_sha256": "253296a2c09c81658386f7b2d3afa56df3fc2ed25bdd6eb2dbe5136f0749a61c",
+        "statement": "Der Brustumfang wird für genauere Gewichtsschätzungen gemessen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/estimating-horse-bodyweight",
+        "source_title": "University of Minnesota Extension – Estimating horse bodyweight",
+        "evidence_text": "Body length from the point of the shoulder to a point perpendicular to the point of the buttock (L).",
+        "evidence_text_sha256": "e8f263d15deb641da9aa54544ddd06296577dff360bfe590e2e208cce392754a",
+        "statement": "Die Körperlänge wird vom Schulterpunkt bis zur Hinterhand erfasst.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "pferdegesundheit-verstehen",
+        "block": "steps"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Gewicht",
+      "Pferd",
+      "Körpermaße",
+      "Brustumfang",
+      "Körperlänge",
+      "Messung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Tabelle stellt die relevanten Prüf- und Entscheidungskriterien für pferd gewicht gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
