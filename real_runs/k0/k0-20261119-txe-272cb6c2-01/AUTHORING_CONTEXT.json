@@ -1,0 +1,164 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Heucobs für Pferde richtig einweichen und füttern",
+    "target_keyword": "heucobs pferd",
+    "category": "pferdeernaehrung-verstehen",
+    "article_type": "Anleitung",
+    "plan_slot": "987fe63264ac535df1e00418131e1470d1c15e8c3cbb01899f15aace11f6d06d"
+  },
+  "content_profile": {
+    "search_intent": "Fütterung – Heucobs"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "World Horse Welfare – The senior horse",
+          "source_url": "https://eu.worldhorsewelfare.org/index.php/blog/the-senior-horse-nutrition-in-sickness-and-in-health"
+        },
+        {
+          "source_title": "MSD Veterinary Manual – Feeding the Aged Horse",
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/feeding-the-aged-horse-and-the-orphan-foal"
+        },
+        {
+          "source_title": "World Horse Welfare – What should I feed my horse",
+          "source_url": "https://www.worldhorsewelfare.org/advice/what-should-i-feed-my-horse"
+        }
+      ],
+      "claims": [
+        "Eingeweichte faserhaltige Futtermittel senken das Risiko einer Schlundverstopfung und unterstützen die Wasseraufnahme.",
+        "Bei Zahnproblemen können eingeweichte Heucobs als Raufutteralternative hilfreich sein.",
+        "Die Futtermenge soll sich an den Herstellerangaben und der Gesamtration orientieren."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Anleitung",
+      "target_keyword": "heucobs pferd",
+      "topic": "Heucobs für Pferde richtig einweichen und füttern",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Heucobs für Pferde sicher einweichen und in die Futterration einbinden.",
+      "preparation_items": [
+        "Geeignete Heucobs und sauberes Wasser",
+        "Sauberer Eimer und Futtertrog",
+        "Herstellerangaben zur Fütterung"
+      ],
+      "procedure_steps": [
+        "Heucobs entsprechend der vorgesehenen Ration abwiegen",
+        "Mit Wasser vollständig aufquellen lassen",
+        "Konsistenz prüfen und frisch verfüttern"
+      ],
+      "safety_controls": [
+        "Kein unvollständig aufgeweichtes Futter an Pferde mit Schlundverstopfungsrisiko verfüttern",
+        "Futterumstellung schrittweise vornehmen"
+      ],
+      "common_errors": [
+        "Zu wenig Quellzeit einplanen",
+        "Futtermenge ohne Blick auf die Gesamtration bestimmen"
+      ],
+      "result_checks": [
+        "Keine festen trockenen Cobs sichtbar",
+        "Futter ist frisch und zum Verfüttern geeignet"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "World Horse Welfare – The senior horse",
+        "source_url": "https://eu.worldhorsewelfare.org/index.php/blog/the-senior-horse-nutrition-in-sickness-and-in-health",
+        "evidence_text_sha256": "85f30df058d5939fd256117e8514d027f47bc566f6151eb636ab6c09a35f6588",
+        "statement": "Eingeweichte faserhaltige Futtermittel senken das Risiko einer Schlundverstopfung und unterstützen die Wasseraufnahme.",
+        "evidence_text": "Processed fibre sources can be soaked in water to reduce the risk of choke and increase water intake.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F2": {
+        "source_title": "MSD Veterinary Manual – Feeding the Aged Horse",
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/feeding-the-aged-horse-and-the-orphan-foal",
+        "evidence_text_sha256": "cb2f9d9eeb3853533c21600e056d2667c9d1058acc1aacf305833cb0e48874b5",
+        "statement": "Bei Zahnproblemen können eingeweichte Heucobs als Raufutteralternative hilfreich sein.",
+        "evidence_text": "providing soaked feeds and soaked forage substitutes, such as soaked hay cubes and/or beet pulp",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F3": {
+        "source_title": "World Horse Welfare – What should I feed my horse",
+        "source_url": "https://www.worldhorsewelfare.org/advice/what-should-i-feed-my-horse",
+        "evidence_text_sha256": "b0d893c584adc30047212e48bb5c973b43f5621360a2c95b321e54047e355091",
+        "statement": "Die Futtermenge soll sich an den Herstellerangaben und der Gesamtration orientieren.",
+        "evidence_text": "All mixes, cubes and balancers are formulated to be fed at recommended rates",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "anchor": "pferdeernaehrung verstehen",
+        "block": "steps"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Heucobs",
+      "Pferdefütterung",
+      "Einweichen",
+      "Schlundverstopfung",
+      "Futterration"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine strukturierte Übersicht der Eigenschaften und Kriterien verbessert die Orientierung im Artikel."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
