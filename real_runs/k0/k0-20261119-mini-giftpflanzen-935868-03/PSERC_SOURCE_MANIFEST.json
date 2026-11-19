@@ -1,0 +1,38 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 1,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Gefährliche Giftpflanzen auf Pferdeweiden erkennen",
+        "target_keyword": "giftpflanzen auf pferdeweiden",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Beratung",
+        "plan_slot": "da6fdf4127588c8addd08fd27327a2c058cfb91c7675a750b8df36cb71295d14"
+      }
+    ],
+    "batch_sha256": "d62dd1c223aa9deb590c07636a9d0e29be9cc6adfcc12f62deb5719d6f9c0948"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Gefährliche Giftpflanzen auf Pferdeweiden erkennen",
+        "target_keyword": "giftpflanzen auf pferdeweiden",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Beratung",
+        "plan_slot": "da6fdf4127588c8addd08fd27327a2c058cfb91c7675a750b8df36cb71295d14"
+      },
+      "order_id": "TXE-b69c5360095f2d372f8e31657a17ca30",
+      "article_id": "article:9d82457d3b99ce25f9608e66",
+      "search_intent": "Weidesicherheit – Giftpflanzen"
+    }
+  ],
+  "manifest_sha256": "e5134de789919b627c1436b04e367cc4939f0b535b416bd96e127471a0b83dfd"
+}
