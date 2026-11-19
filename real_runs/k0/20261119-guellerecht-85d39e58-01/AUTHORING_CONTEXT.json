@@ -16,21 +16,25 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_title": "Landwirtschaftskammer NRW – Düngeverordnung zur Gülledüngung",
-          "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/ackerbau/duengung/guelle/verordnung/index.htm"
+          "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/ackerbau/duengung/guelle/verordnung/index.htm",
+          "source_title": "Landwirtschaftskammer NRW – Düngeverordnung zur Gülledüngung"
         },
         {
-          "source_title": "LUFA NRW – Allgemeine Hinweise zur Düngung von Pferdeweiden",
-          "source_url": "https://www.landwirtschaftskammer.de/lufa/download/fachinfo/boden/pferde_duengeempfehlung.pdf"
+          "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/ackerbau/duengung/guelle/verordnung/guelle-ja.htm",
+          "source_title": "Landwirtschaftskammer NRW – Wann und wie Gülle ausbringen"
+        },
+        {
+          "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/ackerbau/duengung/guelle/verordnung/guelle-nein.htm",
+          "source_title": "Landwirtschaftskammer NRW – Wann keine Gülle ausbringen"
         }
       ],
       "claims": [
         "Die Düngeverordnung bildet den rechtlichen Rahmen für das Ausbringen von Gülle auf landwirtschaftlich genutzten Flächen.",
         "Auch auf Grünland sind die gesetzlichen Sperrfristen für Gülle einzuhalten.",
         "Eine Gülledüngung muss sich am Bedarf der Pflanzen orientieren.",
-        "Pferde müssen vor der Ausbringung von der betroffenen Fläche genommen werden.",
-        "Gülle enthält mehrere Nährstoffe und muss in die Nährstoffplanung einbezogen werden.",
-        "Ausbringungsverbote, Mengenobergrenzen und Sperrfristen sind verbindlich zu berücksichtigen."
+        "Zusätzliche örtliche Vorschriften zur Gülleausbringung können gelten.",
+        "Auf gefrorenem Boden darf Gülle nicht ausgebracht werden.",
+        "Auf schneebedecktem Boden darf Gülle nicht ausgebracht werden."
       ],
       "fresh_research_reference_date": "2026-11-19"
     },
@@ -86,33 +90,33 @@
         ]
       },
       "F4": {
-        "source_url": "https://www.landwirtschaftskammer.de/lufa/download/fachinfo/boden/pferde_duengeempfehlung.pdf",
-        "source_title": "LUFA NRW – Allgemeine Hinweise zur Düngung von Pferdeweiden",
-        "evidence_text": "Die Pferde sind vor der Düngung von der Weide zu nehmen.",
-        "evidence_text_sha256": "499ee5722113943477f1d39c67b794e946ac6b8e9789d33deb4dc736603c94c1",
-        "statement": "Pferde müssen vor der Ausbringung von der betroffenen Fläche genommen werden.",
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/ackerbau/duengung/guelle/verordnung/guelle-ja.htm",
+        "source_title": "Landwirtschaftskammer NRW – Wann und wie Gülle ausbringen",
+        "evidence_text": "Gegebenenfalls kann durch Ortssatzungen ein zusätzlicher Rahmen geschaffen werden",
+        "evidence_text_sha256": "ba7677f579f38fe20458396f74e541d147bec9311a591ccfc46511de389a450f",
+        "statement": "Zusätzliche örtliche Vorschriften zur Gülleausbringung können gelten.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F5": {
-        "source_url": "https://www.landwirtschaftskammer.de/lufa/download/fachinfo/boden/pferde_duengeempfehlung.pdf",
-        "source_title": "LUFA NRW – Allgemeine Hinweise zur Düngung von Pferdeweiden",
-        "evidence_text": "Organischer Dünger (Festmist, Gülle) enthält neben Stickstoff auch Phosphor, Kalium und Magnesium.",
-        "evidence_text_sha256": "853b27ac84854c7962e87e1f8102be248f2757bafaf48a928a30a74ed51374f7",
-        "statement": "Gülle enthält mehrere Nährstoffe und muss in die Nährstoffplanung einbezogen werden.",
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/ackerbau/duengung/guelle/verordnung/guelle-nein.htm",
+        "source_title": "Landwirtschaftskammer NRW – Wann keine Gülle ausbringen",
+        "evidence_text": "Der Boden darf nicht gefroren sein.",
+        "evidence_text_sha256": "420fb94710fb16121ac39976ff5966cc19b24c9dd90042ec796f6e8259ef91d9",
+        "statement": "Auf gefrorenem Boden darf Gülle nicht ausgebracht werden.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F6": {
-        "source_url": "https://www.landwirtschaftskammer.de/lufa/download/fachinfo/boden/pferde_duengeempfehlung.pdf",
-        "source_title": "LUFA NRW – Allgemeine Hinweise zur Düngung von Pferdeweiden",
-        "evidence_text": "Im Rahmen der verbindlichen Düngeverordnung sind die gesetzlichen Ausbringungsverbote, Ausbringungsobergrenzen und Sperrfristen zu beachten.",
-        "evidence_text_sha256": "5931bdb72570b53a68356e642ced732724a24eaa96c3deda4cc2be1c16c8a1f1",
-        "statement": "Ausbringungsverbote, Mengenobergrenzen und Sperrfristen sind verbindlich zu berücksichtigen.",
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/ackerbau/duengung/guelle/verordnung/guelle-nein.htm",
+        "source_title": "Landwirtschaftskammer NRW – Wann keine Gülle ausbringen",
+        "evidence_text": "Der Boden darf nicht schneebedeckt sein.",
+        "evidence_text_sha256": "8a76db60dad8f0d72bb6a1630ddfcde43fb9df530edd72027855c92ab0881d71",
+        "statement": "Auf schneebedecktem Boden darf Gülle nicht ausgebracht werden.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
