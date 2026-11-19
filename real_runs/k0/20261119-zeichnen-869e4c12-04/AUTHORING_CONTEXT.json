@@ -1,0 +1,189 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Ein Pferd mit stimmigen Proportionen Schritt für Schritt zeichnen",
+    "target_keyword": "pferd zeichnen",
+    "category": "reiterleben-community",
+    "article_type": "Anleitung",
+    "plan_slot": "589bb0e785b4199d9a2898711bc5cc6e961cf70302be84212ce151e4af4f92e5"
+  },
+  "content_profile": {
+    "search_intent": "Zeichenanleitung – Pferd"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Exterieur_(Pferd)",
+          "source_title": "Wikipedia – Exterieur des Pferdes"
+        }
+      ],
+      "claims": [
+        "Der Körper des Pferdes gliedert sich in Vorhand, Mittelhand und Hinterhand.",
+        "Beim Zeichnen kann das äußere Erscheinungsbild des Pferdes als Orientierung dienen.",
+        "Kopf, Hals und Vorderbeine bilden Teile der Vorhand.",
+        "Der Rumpf bildet die Mittelhand des Pferdes.",
+        "Kruppe und Hinterbeine gehören zur Hinterhand."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Anleitung",
+      "target_keyword": "pferd zeichnen",
+      "topic": "Ein Pferd mit stimmigen Proportionen Schritt für Schritt zeichnen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "reiterleben-community",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Eine Pferdezeichnung anhand der grundlegenden Körperabschnitte mit stimmigen Proportionen anlegen.",
+      "preparation_items": [
+        "Papier und Bleistift bereitlegen",
+        "Eine geeignete Seitenansicht als Vorlage auswählen",
+        "Mit leichten Hilfslinien beginnen"
+      ],
+      "procedure_steps": [
+        "Gesamtsilhouette aus einfachen Grundformen aufbauen",
+        "Vorhand mit Kopf, Hals und Vorderbeinen anlegen",
+        "Rumpf und Hinterhand in passenden Verhältnissen skizzieren",
+        "Übergänge, Gelenke und Konturen korrigieren",
+        "Hilfslinien ausradieren und Details ausarbeiten"
+      ],
+      "safety_controls": [
+        "Keine festen Proportionszahlen ohne Bezug zur Vorlage übernehmen",
+        "Bei unklarer Haltung zur Beobachtung zurückkehren"
+      ],
+      "common_errors": [
+        "Kopf isoliert ohne Halsführung zeichnen",
+        "Vorderbeine und Hinterbeine verwechseln",
+        "Rumpf ohne Bezug zur Kruppe setzen"
+      ],
+      "result_checks": [
+        "Vorhand, Mittelhand und Hinterhand erkennbar",
+        "Kopf, Hals und Beine harmonisch verbunden",
+        "Silhouette entspricht der gewählten Vorlage"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Exterieur_(Pferd)",
+        "source_title": "Wikipedia – Exterieur des Pferdes",
+        "evidence_text": "Das Exterieur des Pferdes wird grob in Vorhand (Kopf, Hals und Vorderbeine), Mittelhand (Rumpf) und Hinterhand (Kruppe und Hinterbeine) eingeteilt.",
+        "evidence_text_sha256": "8cf57e9bf23f9f8e34130334691b34e235cf731e999f30d4952ae50c11d83ef4",
+        "statement": "Der Körper des Pferdes gliedert sich in Vorhand, Mittelhand und Hinterhand.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Exterieur_(Pferd)",
+        "source_title": "Wikipedia – Exterieur des Pferdes",
+        "evidence_text": "Das Exterieur des Pferdes",
+        "evidence_text_sha256": "b0a5fd08e05f9e5ed520cacce616a810ae70e3cbca655d2c4cf9c3d33299f498",
+        "statement": "Beim Zeichnen kann das äußere Erscheinungsbild des Pferdes als Orientierung dienen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Exterieur_(Pferd)",
+        "source_title": "Wikipedia – Exterieur des Pferdes",
+        "evidence_text": "Kopf, Hals und Vorderbeine",
+        "evidence_text_sha256": "bddfdb0f95dd828c5ea57d0ca141ffb5111596a066707e86c8f823dfb3bbaef3",
+        "statement": "Kopf, Hals und Vorderbeine bilden Teile der Vorhand.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://de.wikipedia.org/wiki/Exterieur_(Pferd)",
+        "source_title": "Wikipedia – Exterieur des Pferdes",
+        "evidence_text": "Rumpf",
+        "evidence_text_sha256": "b09d48143b624431d98677f45beff6db0c4a4b97e2da5930a779098dc93157e7",
+        "statement": "Der Rumpf bildet die Mittelhand des Pferdes.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://de.wikipedia.org/wiki/Exterieur_(Pferd)",
+        "source_title": "Wikipedia – Exterieur des Pferdes",
+        "evidence_text": "Kruppe und Hinterbeine",
+        "evidence_text_sha256": "8bba7b5b0143e7494990d769e1daa6ebc6b4c286134b00358717a0e54f75f030",
+        "statement": "Kruppe und Hinterbeine gehören zur Hinterhand.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/reiterleben-community/",
+        "anchor": "reiterleben-community",
+        "block": "steps"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/reiterleben-community/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "reiterleben-community",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferd",
+      "Zeichnung",
+      "Proportionen",
+      "Vorhand",
+      "Rumpf",
+      "Hinterhand"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Tabelle stellt die relevanten Prüf- und Entscheidungskriterien für pferd zeichnen gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
