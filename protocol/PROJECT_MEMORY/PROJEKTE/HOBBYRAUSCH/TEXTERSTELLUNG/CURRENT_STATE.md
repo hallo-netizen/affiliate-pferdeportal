@@ -1,3 +1,11 @@
+## 19.11.2026 12:54 – AKTUELL 0.4.24.8: ORIGINAL-PROVIDER-EINSTELLUNG UND HISTORISCHER RUN-MODUS SICHTBAR
+
+- **Nur zwei vorhandene Dateien geändert**, 85/87 inhaltsgleich, kein Neubau, keine K0-/MINI-/PSERC-/Research-Architekturänderung. `texterstellung.php` 0.4.24.8: zentraler Modusreadback aus `pste_settings_v1.environment` (Standard Sandbox), Formular in vorhandener Recherche/Diagnose, einziger admin/nonce/explicit-confirm-geschützter Moduswechsel zu Production. **Speichern allein = keine Providerabfrage**. Vor echtem Research bleiben alter `cost_ack` und neuer Sandbox-Schutz wirksam. `includes/class-txe-diagnose.php`: aktueller Modus samt Anbieterhost und Original-Altauftrag-Modus read-only nachgewiesen; keine Neuprüfung von Keywords.
+- Neue einzig maßgebliche ZIP `Texterstellung_Hobbydepot_0.4.24.8_DATAFORSEO_ECHTDATEN_MODUS.zip`, SHA256 `0f7cb6e8d35653fcf46aa7d03438d646e9c9f8ea79dbd29d95287f269d44510b`, **508854 Bytes**, Root `texterstellung-hobbydepot`. **96 lokale Funktionstests**, 78 PHP, 8 JSON, 87 ZIP CRC PASS. **KEINE WordPress-/DataForSEO-Live-Abnahme**, tatsächlicher alter und aktueller Provider-Modus bis Installation weiterhin unbekannt.
+- Haupt-Büro `/Hobby Depot/Plugin-Büro/` und Fachbüro `/hobbydepot/TEXTERSTELLUNG/INSTALLATIONSKANDIDATEN/` ZIP **erfolgreich geschrieben**. `Texterstellung-CURRENT.md` und MD+JSON Prüfbericht/Testlog ebenfalls aktualisiert. Vollbericht `DATAFORSEO_ECHTDATEN_MODUS_04248_20261119.md`. Alte Version 0.4.24.7 archiviert.
+- **Einziger nächster Nutzerweg:** Backup → neue ZIP per WordPress **Ersetzen** → `Texterstellung → Recherche` tatsächlichen DataForSEO-Modus ablesen → nur falls Testbetrieb `Production` auswählen und ausdrücklich speichern. Kein neuer Anbieterauftrag beim Speichern. **Noch keine 378-Kategorien-Welle**. Die alte 3D-Bogenschießen-Dummy-Recherche bleibt unverändert, wird nicht automatisch wiederholt.
+---
+
 ## 19.11.2026 12:43 – NEUE DIAGNOSE: 9/9 fachlich falsche DataForSEO-Keywords; Sandbox-Default bewiesen
 
 - Echte Diagnose `texterstellung-diagnose-20261119-114324.json`: 3D-Bogenschießen ist **COMPLETE, 9 Rohkeywords/Kandidaten, 0 geeignet**, alle 9 `NO_MATCH` und Relevanz-blockiert. Belege sind echte fremde Stichwörter `phone`, `seo marketing tool`, `nothing phone` und vier Pizza-Fragen. Das ist kein Ergebnis echter brauchbarer 3D-Bogenschieß-Recherche.
