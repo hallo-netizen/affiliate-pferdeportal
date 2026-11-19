@@ -1,0 +1,38 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 1,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Den passenden Wassertrog für Pferde kaufen",
+        "target_keyword": "wassertröge kaufen",
+        "category": "wassertroege-fuer-weiden-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "10dabca2e9d1861e941f967b315e05f30a4bc7bc04359b2e16cbdd443103a032"
+      }
+    ],
+    "batch_sha256": "8efde988583844e57186330fd6c892d80bc1ae6ce0da23f37aa624f27d5d5425"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Den passenden Wassertrog für Pferde kaufen",
+        "target_keyword": "wassertröge kaufen",
+        "category": "wassertroege-fuer-weiden-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "10dabca2e9d1861e941f967b315e05f30a4bc7bc04359b2e16cbdd443103a032"
+      },
+      "order_id": "TXE-72f274d1803f72b751af57b3944491a2",
+      "article_id": "article:e3681189804b061d83b2e99c",
+      "search_intent": "Kaufberatung – Tränke"
+    }
+  ],
+  "manifest_sha256": "223ffb9256feaff1b0f9544dbae604f0ba71eae9c282d1f3af993236c604fbde"
+}
