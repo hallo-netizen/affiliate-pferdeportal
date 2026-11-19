@@ -18,7 +18,7 @@
         "plan_slot": "8f7f632fae1857db2c3a71c79bc3d72cdc04941bebce772076ef303819bb8997"
       }
     ],
-    "batch_sha256": "530564f9fe7c9fc8f52fe79d68146a92a48ccfa0bb265a3e467c2a236e6b0f87"
+    "batch_sha256": "2091f41f23765181c59d2faaedc662f553ee59421450d438a17e81dd1c843ca6"
   },
   "items": [
     {
@@ -34,5 +34,5 @@
       "search_intent": "Kaufberatung – Frostschutz"
     }
   ],
-  "manifest_sha256": "9c2041cc1a77de68347b1ca26fda41c4d368fc2fe7cce04b5739441ce32a6459"
+  "manifest_sha256": "fc46923ddbf5b35f47a87462bd83bda0b82b96318b820f519539dfe356b38ae0"
 }
