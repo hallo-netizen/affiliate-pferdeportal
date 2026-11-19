@@ -9,14 +9,22 @@
       "category_exact": [
         "discgolf-beratung"
       ],
-      "category_prefixes": []
+      "category_prefixes": [],
+      "site_hosts": [
+        "hobby-depot.de",
+        "www.hobby-depot.de"
+      ]
     },
     {
       "portal_id": "pferdeatelier",
       "display_name": "Pferdeatelier",
       "category_exact": [],
       "category_prefixes": [],
-      "category_git_source": "refs/remotes/origin/affiliate-release-current:CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv"
+      "category_git_source": "refs/remotes/origin/affiliate-release-current:CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv",
+      "site_hosts": [
+        "pferde-atelier.de",
+        "www.pferde-atelier.de"
+      ]
     }
   ]
 }
