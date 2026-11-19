@@ -122,6 +122,10 @@
       "HAB_ANLEITUNG"
     ],
     "bericht_nicht_erreichbar": "Kein Artikeltyp Bericht im unveränderten Plugin – Sperre, keine Ersatzzuteilung",
-    "writer_e2e": false
+    "writer_e2e": false,
+    "amtliche_linkausgabe_k_multi_commit": "bbfa196d2e15a9627b9b211d841b711464933174",
+    "amtliche_nofollow_links_qa": "9/9 Offline-Tests bestanden, Quell- und Testdateien SHA-identisch geprüft",
+    "amtliche_linkausgabe_writer_e2e": false,
+    "bericht_journal_status": "Plugin enthält Journal-Vorbereitung mit NOT_CONFIGURED; Bericht technisch nicht freigeschaltet"
   }
 }
