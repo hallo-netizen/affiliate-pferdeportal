@@ -1,0 +1,150 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wie zeigen Pferde, dass sie einen Menschen mögen?",
+    "target_keyword": "Wie sagen Pferde „Ich liebe dich“?",
+    "category": "pferde-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "fd4142be2b466f984319db363df82e4c262f0679d080b036e8aac16dfa0dbcb2"
+  },
+  "content_profile": {
+    "search_intent": "Anzeichen von Zuneigung und Vertrauen bei Pferden erkennen"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.worldhorsewelfare.org/advice/the-3fs-friends-forage-and-freedom",
+          "source_title": "World Horse Welfare – Freunde, Raufutter und Freiheit"
+        }
+      ],
+      "claims": [
+        "Gegenseitige Fellpflege stärkt soziale Beziehungen zwischen Pferden.",
+        "Gemeinsames Spielen und Ruhen sind soziale Verhaltensweisen.",
+        "Pferde sind soziale Herdentiere, deren Bindung nicht mit menschlichen Worten gleichgesetzt werden sollte.",
+        "Die freie Wahl sozialer Kontakte gehört zum Wohlbefinden."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie sagen Pferde „Ich liebe dich“?",
+      "topic": "Wie zeigen Pferde, dass sie einen Menschen mögen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie zeigen Pferde, dass sie einen Menschen mögen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/the-3fs-friends-forage-and-freedom",
+        "source_title": "World Horse Welfare – Freunde, Raufutter und Freiheit",
+        "evidence_text": "build social bonds through behaviours such as mutual grooming",
+        "evidence_text_sha256": "2d5099bf493123b22f310f56243d2ae55e3becb046edc04ca66e2638b29407b4",
+        "statement": "Gegenseitige Fellpflege stärkt soziale Beziehungen zwischen Pferden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/the-3fs-friends-forage-and-freedom",
+        "source_title": "World Horse Welfare – Freunde, Raufutter und Freiheit",
+        "evidence_text": "playing and having fun, and resting with one another",
+        "evidence_text_sha256": "bf5abad014a4ccf1a7b6929c6dc6dfbf8827aee26eece8235abd7a0942aff11b",
+        "statement": "Gemeinsames Spielen und Ruhen sind soziale Verhaltensweisen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/the-3fs-friends-forage-and-freedom",
+        "source_title": "World Horse Welfare – Freunde, Raufutter und Freiheit",
+        "evidence_text": "Horses are highly social prey animals",
+        "evidence_text_sha256": "aa9156820562035502966edfc326bbde75a13137e72734d93dca06cefb866bba",
+        "statement": "Pferde sind soziale Herdentiere, deren Bindung nicht mit menschlichen Worten gleichgesetzt werden sollte.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/the-3fs-friends-forage-and-freedom",
+        "source_title": "World Horse Welfare – Freunde, Raufutter und Freiheit",
+        "evidence_text": "Freedom doesn’t just mean freedom to move",
+        "evidence_text_sha256": "12e0b31b016a5a5d334872c8e8df0278455d6b97d80e2c3be5d9c00966276fc5",
+        "statement": "Die freie Wahl sozialer Kontakte gehört zum Wohlbefinden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-verstehen/",
+        "anchor": "pferde-verstehen",
+        "block": "details"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Zuneigung",
+      "Mensch",
+      "Vertrauen",
+      "Verhalten",
+      "Fellpflege",
+      "Bindung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine kompakte Tabelle ergänzt die thematisch unterschiedlichen Prüfungskriterien und Maßnahmen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
