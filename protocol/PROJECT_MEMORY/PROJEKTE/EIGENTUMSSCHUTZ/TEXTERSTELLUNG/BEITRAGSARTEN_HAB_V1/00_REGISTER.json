@@ -20,35 +20,35 @@
       "name": "FAQ",
       "datei": "10_FAQ.json",
       "k0_original": "FAQ",
-      "status": "Fachentwurf; Originaltyp vorhanden, Hab-Regeln noch nicht angebunden"
+      "status": "FACHLICH_FREIGEGEBEN – TECHNISCHE_BINDUNG_NOCH_NICHT_E2E_GEPRUEFT"
     },
     {
       "id": "HAB_RATGEBER",
       "name": "Ratgeber & Wissen",
       "datei": "20_RATGEBER_WISSEN.json",
       "k0_original": "Beratung nur bei echter Auswahlentscheidung",
-      "status": "Nicht pauschal identisch mit K0 Beratung"
+      "status": "FACHLICH_FREIGEGEBEN – TECHNISCHE_BINDUNG_NOCH_NICHT_E2E_GEPRUEFT"
     },
     {
       "id": "HAB_VERGLEICH",
       "name": "Vergleich",
       "datei": "30_VERGLEICH.json",
       "k0_original": "Vergleich",
-      "status": "Fachentwurf; Originaltyp vorhanden"
+      "status": "FACHLICH_FREIGEGEBEN – TECHNISCHE_BINDUNG_NOCH_NICHT_E2E_GEPRUEFT"
     },
     {
       "id": "HAB_ANLEITUNG",
       "name": "Anleitung & Checkliste",
       "datei": "40_ANLEITUNG_CHECKLISTE.json",
       "k0_original": "Anleitung für einmalige Arbeit; Pflege für wiederkehrende Tätigkeit",
-      "status": "Nicht automatisch ein einziger bestehender K0-Typ"
+      "status": "FACHLICH_FREIGEGEBEN – TECHNISCHE_BINDUNG_NOCH_NICHT_E2E_GEPRUEFT"
     },
     {
       "id": "HAB_BERICHT",
       "name": "Bericht & Praxisfall",
       "datei": "50_BERICHT_PRAXISFALL.json",
       "k0_original": null,
-      "status": "Neues Regelfach nötig; Magazin-WP-Term bisher nicht belegt"
+      "status": "FACHLICH_FREIGEGEBEN – TECHNISCHE_BINDUNG_NOCH_NICHT_E2E_GEPRUEFT"
     }
   ],
   "bestandsschutz": "Originale K0-Typen Beratung, FAQ, Pflege, Vergleich und vorhandenes Anleitung-Regelfach vollständig erhalten. Weder Originaltypen noch deren Regeln umbenennen oder löschen.",
@@ -103,5 +103,13 @@
     "externe_links": "Nur freiwillig bei echtem Mehrwert, Fußnote am Ende, offizielle staatliche Stellen/Portale, Start-/Hauptseiten erlaubt, rel=nofollow immer; keine Pflicht",
     "kein_rueckbau": "Alle ursprünglichen Formalregeln in den fünf originalkopierten Teilbäumen unverändert",
     "alter_modulentwurf": "12 Hab-Fachmodule ausschließlich Archiv/Entwicklung, nicht in fünf aktiven Hab-Fachregeln"
+  },
+  "technischer_nachweis": {
+    "k_multi_repo": "hallo-netizen/k0-multiportal",
+    "k_multi_branch": "k0-offline-rule-bindings-20261027",
+    "hab_sync_commit": "862023cc92805a16e3af25d66f2148a35fd8b1bd",
+    "regeln_vergleich": "5/5 separate Hab-Regelbücher nachweislich identisch gespiegelt",
+    "technische_freigabe": false,
+    "keine_aenderung_am_altworkflow": true
   }
 }
