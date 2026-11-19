@@ -1,0 +1,159 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Pferde-Malvorlagen für Kinder auswählen und nutzen",
+    "target_keyword": "pferd ausmalen",
+    "category": "reiterleben-community",
+    "article_type": "Beratung",
+    "plan_slot": "7a73a4099885cc61a87de23bc7b32644a90af0aab7dbdc52ab05df815db5adf2"
+  },
+  "content_profile": {
+    "search_intent": "Malvorlagen – Pferde"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Malbuch",
+          "source_title": "Wikipedia – Malbuch"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Ausmalbild",
+          "source_title": "Wikipedia – Ausmalbild"
+        }
+      ],
+      "claims": [
+        "Malbücher nutzen Umrisszeichnungen, die Kinder ausmalen können.",
+        "Für Kinder eignen sich große Ausmalflächen mit deutlichen Begrenzungslinien.",
+        "Komplexe Motive eignen sich eher für fortgeschrittene Malende.",
+        "Ausmalbilder sind Strichzeichnungen, die auf Papier farbig gestaltet werden können."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "pferd ausmalen",
+      "topic": "Pferde-Malvorlagen für Kinder auswählen und nutzen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "reiterleben-community",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Altersgerechte Pferde-Malvorlagen auswählen und Kindern sinnvoll zum Ausmalen anbieten.",
+      "decision_criteria": [
+        "Große übersichtliche Pferdemotive",
+        "Deutliche Konturen",
+        "Geeignete Stifte und Papier",
+        "Schwierigkeitsgrad nach Alter"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Malbuch",
+        "source_title": "Wikipedia – Malbuch",
+        "evidence_text": "Ein Malbuch ist ein Buch mit Umrisszeichnungen",
+        "evidence_text_sha256": "700077dc6c396014c0dcd4f2e28b95fabbea83fb72c553c8be52c97ad6350025",
+        "statement": "Malbücher nutzen Umrisszeichnungen, die Kinder ausmalen können.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Malbuch",
+        "source_title": "Wikipedia – Malbuch",
+        "evidence_text": "Malbücher für Kinder zeichnen sich durch vergleichsweise große Einzelflächen und dicke Begrenzungsstriche aus.",
+        "evidence_text_sha256": "ffc525bc8604678b6c1f3aed713025fa33e43a8e0cdb1799a5f0383348b24112",
+        "statement": "Für Kinder eignen sich große Ausmalflächen mit deutlichen Begrenzungslinien.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Malbuch",
+        "source_title": "Wikipedia – Malbuch",
+        "evidence_text": "Ausmalbücher mit Umrisszeichnungen, die sich an Jugendliche und Erwachsene wenden, zeichnen sich meist durch komplexere Motive",
+        "evidence_text_sha256": "834d3da645df6441c978bb3ef9f10dcc5f756ef441863bd2f091df754a1eea66",
+        "statement": "Komplexe Motive eignen sich eher für fortgeschrittene Malende.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://de.wikipedia.org/wiki/Ausmalbild",
+        "source_title": "Wikipedia – Ausmalbild",
+        "evidence_text": "Ein Ausmalbild ist eine markante Strichzeichnung auf Papier",
+        "evidence_text_sha256": "0e3518a258c7ef6587b0db93d2757eaf88cfb3c78f3821796aaa00291ab5217d",
+        "statement": "Ausmalbilder sind Strichzeichnungen, die auf Papier farbig gestaltet werden können.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/reiterleben-community/",
+        "anchor": "reiterleben-community",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/reiterleben-community/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "reiterleben-community",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Malvorlagen",
+      "Kinder",
+      "Pferde",
+      "Ausmalen",
+      "Umrisszeichnungen",
+      "Motive"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Tabelle stellt die relevanten Prüf- und Entscheidungskriterien für pferd ausmalen gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
