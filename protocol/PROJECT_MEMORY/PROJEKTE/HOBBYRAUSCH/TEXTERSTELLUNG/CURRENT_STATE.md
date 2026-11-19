@@ -1,3 +1,10 @@
+## 19.11.2026 14:46 – NEUER PRODUKTIVTEST 0.4.24.11: RESEARCH LIVE ABGESCHLOSSEN, 180 CANDIDATES ALLE BLOCKED
+
+- Nutzerbeleg Screenshot + `texterstellung-diagnose-20261119-134647.json`: **0.4.24.11 aktiv; echter DataForSEO-Modus production**, Reopen beider alten Null-Kategorien erfolgreich (Event 13:25 UTC), dann neue `3D-Bogenschießen`-Recherche (Event 13:27 UTC). 378 offen/1 recherchiert (Automodellbau wieder offen). **223 Rohkeywords, 180 Kandidaten, 0 nutzbar.**
+- **164** benötigen internen Portal-Relevanznachweis `SANDBOX_REQUIRED` (NICHT mit DataForSEO Sandbox verwechseln); **16** warten auf externen Titel-Desk `PSTE_LANGUAGE_TITLE_REQUIRED`. 75 Family-MATCH/105 NO_MATCH; 91 origin_family_NO_MATCH bei Keyword Ideas. Vorhandene Produktivdaten enthalten passende 3D-Parcours-/Regeln-Themen, aber werden durch Gate vor MINI gehalten. `planning_suitability.NOT_RUN=180`. Hier fehlt nachweislich die Ausführung/Reentry-Integration für vorhandene Prüfstationen, nicht eine neue Keywordbestellung.
+- Quelle, Beweise und Scope `PRODUKTIONSLAUF_3D_BOGENSCHIESSEN_223_180_0_DIAGNOSE_20261119.md`. **Keine weitere bezahlte Recherche**, keinen zweiten Reopen; Original/RAW-Daten erhalten, aus ursprünglichen Schutzregeln kein Fake-PASS.
+- **Keine neue ZIP** aus diesem Diagnoseschritt; `0.4.24.11` bleibt der einzige im Hobby-Pluginbüro gespeicherte aktuelle Kandidat. Gesamtes Original-Sandbox-, Titel-, MINI- und K0-Handoff vor EINEM künftigen überprüften KISS-Fix untersuchen.
+---
 ## 19.11.2026 – AKTUELLES KISS-PLUGIN 0.4.24.11: BEIDE FEHLRECHERCHEN EINMALIG ZURÜCKNEHMEN
 
 - Nutzer möchte **3D-Bogenschießen** (9 BLOCKED/Sandbox) und **Automodellbau** (89 BLOCKED, 100 Rohkeywords/Production) als **noch nicht recherchiert** wieder auswählen können. Live 0.4.24.10 zeigt 377 offen/2 recherchiert, 0 geeignete Kandidaten bei beiden.
