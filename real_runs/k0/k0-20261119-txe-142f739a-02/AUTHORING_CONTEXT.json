@@ -1,0 +1,150 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welche Symptome zeigen Pferde bei Mineralstoffmangel?",
+    "target_keyword": "Welche Symptome zeigen Pferde bei Mineralstoffmangel?",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "78575ecb4de7ce8e8311d4f7750ed4e452ca38801802aba6f8407366560305fe"
+  },
+  "content_profile": {
+    "search_intent": "Typische Anzeichen eines Mineralstoffmangels bei Pferden unterscheiden und tierärztlich abklären"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-diseases-of-horses-and-other-equids",
+          "source_title": "MSD Veterinary Manual – Ernährungskrankheiten"
+        }
+      ],
+      "claims": [
+        "Bei Pferden sind die Beschwerden eines Nährstoffmangels häufig unspezifisch.",
+        "Calcium, Phosphor, Kupfer, Salz und Selen sind mögliche Engpässe in der Ernährung.",
+        "Gewichtsverlust kann bei unzureichender Energieaufnahme auftreten und ist nicht mineralstoffspezifisch.",
+        "Die Mineralstoffgehalte im Raufutter lassen sich mit einer Analyse bestimmen."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welche Symptome zeigen Pferde bei Mineralstoffmangel?",
+      "topic": "Welche Symptome zeigen Pferde bei Mineralstoffmangel?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Symptome zeigen Pferde bei Mineralstoffmangel?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-diseases-of-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Ernährungskrankheiten",
+        "evidence_text": "Clinical signs of deficiency are frequently nonspecific",
+        "evidence_text_sha256": "6ce46936f2b2d29167ceb2f2832766921694944dd8fa68345e41acbb3b2bfed1",
+        "statement": "Bei Pferden sind die Beschwerden eines Nährstoffmangels häufig unspezifisch.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-diseases-of-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Ernährungskrankheiten",
+        "evidence_text": "calcium, phosphorus, copper, sodium chloride, and selenium",
+        "evidence_text_sha256": "38bd20b6ab11509a4268c995bb209adc8d687be0236533a3a0b8966e66c83331",
+        "statement": "Calcium, Phosphor, Kupfer, Salz und Selen sind mögliche Engpässe in der Ernährung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-diseases-of-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Ernährungskrankheiten",
+        "evidence_text": "Weight loss is the cardinal clinical sign of inadequate energy intake",
+        "evidence_text_sha256": "7f9c513cc76da36678d876cde984f4b1efedc6f30eb43ecbdd5870cac6ad10de",
+        "statement": "Gewichtsverlust kann bei unzureichender Energieaufnahme auftreten und ist nicht mineralstoffspezifisch.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-diseases-of-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Ernährungskrankheiten",
+        "evidence_text": "the only way to know the mineral content of a forage is to have it tested",
+        "evidence_text_sha256": "f1f675da76f026ce894d17f4156baf344218d9cd2bd875ca3f2ef27ed5c7c6d0",
+        "statement": "Die Mineralstoffgehalte im Raufutter lassen sich mit einer Analyse bestimmen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "pferdegesundheit-verstehen",
+        "block": "details"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Mineralstoffmangel",
+      "Symptome",
+      "Fütterung",
+      "Fell",
+      "Gewicht",
+      "Untersuchung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine kompakte Tabelle ergänzt die thematisch unterschiedlichen Prüfungskriterien und Maßnahmen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
