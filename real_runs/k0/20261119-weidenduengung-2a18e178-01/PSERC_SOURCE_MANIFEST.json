@@ -1,0 +1,114 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 5,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Wann und womit sollte man eine Pferdeweide düngen?",
+        "target_keyword": "dünger auf pferdeweiden",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "1f6c70a0e9cee760e81570f326fa0bb6530a9697727fae7690e81a67d858501e"
+      },
+      {
+        "title": "Geeignete Rasensaat für die Nachsaat von Pferdeweiden",
+        "target_keyword": "rasensaat für pferdeweiden",
+        "category": "nachsaat-fuer-pferdeweiden-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "6aaa1c49db5b9b2c1eb536170adf525cbfea2ef9cb5ba54bf9e99cc79560277e"
+      },
+      {
+        "title": "Gülle auf Pferdeweiden und mögliche Risiken für Pferde",
+        "target_keyword": "gülle für pferdeweiden",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Beratung",
+        "plan_slot": "61f8814503791db5938f736f3356c624acc2473e546ba1c2d562e245bb3e0976"
+      },
+      {
+        "title": "Giftige Gräser auf Pferdeweiden erkennen und Risiken einschätzen",
+        "target_keyword": "giftige gräser auf pferdeweiden",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Anleitung",
+        "plan_slot": "915c22a26a2740f5d1d3d3d009f2a3dc291c56dcc739c1dfd4226b49ba4277ba"
+      },
+      {
+        "title": "Mineraldünger für Pferdeweiden bedarfsgerecht einsetzen",
+        "target_keyword": "mineraldünger für pferdeweiden",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "Anleitung",
+        "plan_slot": "c41b5178aa3a349cb433aea77de92320d8dedd4f4464f26a38a52db4a81de8c2"
+      }
+    ],
+    "batch_sha256": "d5f9e3db6b50442d03dc473b7e1b781cbd3553af1a4a4ab9637b5e7343bd291d"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Wann und womit sollte man eine Pferdeweide düngen?",
+        "target_keyword": "dünger auf pferdeweiden",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "1f6c70a0e9cee760e81570f326fa0bb6530a9697727fae7690e81a67d858501e"
+      },
+      "order_id": "TXE-2a18e1789fae34b124aa33748c90700a",
+      "article_id": "article:b5f43d0a6c324d2be08f9f23",
+      "search_intent": "Weidepflege – Düngung"
+    },
+    {
+      "metadata_binding": {
+        "title": "Geeignete Rasensaat für die Nachsaat von Pferdeweiden",
+        "target_keyword": "rasensaat für pferdeweiden",
+        "category": "nachsaat-fuer-pferdeweiden-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "6aaa1c49db5b9b2c1eb536170adf525cbfea2ef9cb5ba54bf9e99cc79560277e"
+      },
+      "order_id": "TXE-b9f719c7c2f700899ca0a57156437ed5",
+      "article_id": "article:81229651f80a07ae7b19b783",
+      "search_intent": "Saatgut – Weideanlage"
+    },
+    {
+      "metadata_binding": {
+        "title": "Gülle auf Pferdeweiden und mögliche Risiken für Pferde",
+        "target_keyword": "gülle für pferdeweiden",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Beratung",
+        "plan_slot": "61f8814503791db5938f736f3356c624acc2473e546ba1c2d562e245bb3e0976"
+      },
+      "order_id": "TXE-8213aa4975203d8363a4f41650a419bc",
+      "article_id": "article:34a674b3a2ed5939a6052e2f",
+      "search_intent": "Weidepflege – Gülledüngung"
+    },
+    {
+      "metadata_binding": {
+        "title": "Giftige Gräser auf Pferdeweiden erkennen und Risiken einschätzen",
+        "target_keyword": "giftige gräser auf pferdeweiden",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "Anleitung",
+        "plan_slot": "915c22a26a2740f5d1d3d3d009f2a3dc291c56dcc739c1dfd4226b49ba4277ba"
+      },
+      "order_id": "TXE-f377ee3b3570ae84466fcfdc5415e29b",
+      "article_id": "article:7f0d1857ebe02d0aaf18651e",
+      "search_intent": "Weidesicherheit – Giftgräser"
+    },
+    {
+      "metadata_binding": {
+        "title": "Mineraldünger für Pferdeweiden bedarfsgerecht einsetzen",
+        "target_keyword": "mineraldünger für pferdeweiden",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "Anleitung",
+        "plan_slot": "c41b5178aa3a349cb433aea77de92320d8dedd4f4464f26a38a52db4a81de8c2"
+      },
+      "order_id": "TXE-ad200c89f3872ba1f66e7928e77b9359",
+      "article_id": "article:b271b9e67dd292919e8f6370",
+      "search_intent": "Weidepflege – Mineraldünger"
+    }
+  ],
+  "manifest_sha256": "f9f71da9a7f91cfb9462224f839839dc078486c57dfc78b374b0dc5f2955dce5"
+}

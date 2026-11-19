@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wann und womit sollte man eine Pferdeweide düngen?",
+      "target_keyword": "dünger auf pferdeweiden",
+      "category": "alltags-pferde-haltungsformen",
+      "article_type": "FAQ",
+      "plan_slot": "1f6c70a0e9cee760e81570f326fa0bb6530a9697727fae7690e81a67d858501e"
+    }
+  ],
+  "batch_sha256": "1d01654105423202b8fcec52fb312e93f761ffde277753409b2de43174b66174"
+}

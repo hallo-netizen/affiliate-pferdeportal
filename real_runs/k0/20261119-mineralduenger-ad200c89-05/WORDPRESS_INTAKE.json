@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Mineraldünger für Pferdeweiden bedarfsgerecht einsetzen",
+      "target_keyword": "mineraldünger für pferdeweiden",
+      "category": "alltags-pferde-haltungsformen",
+      "article_type": "Anleitung",
+      "plan_slot": "c41b5178aa3a349cb433aea77de92320d8dedd4f4464f26a38a52db4a81de8c2"
+    }
+  ],
+  "batch_sha256": "d3a75e6938986ee7f55ee16b86710acb2e04142a489e66158d005f73fd152f1e"
+}

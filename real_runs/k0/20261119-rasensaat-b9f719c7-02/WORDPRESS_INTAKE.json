@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Geeignete Rasensaat für die Nachsaat von Pferdeweiden",
+      "target_keyword": "rasensaat für pferdeweiden",
+      "category": "nachsaat-fuer-pferdeweiden-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "6aaa1c49db5b9b2c1eb536170adf525cbfea2ef9cb5ba54bf9e99cc79560277e"
+    }
+  ],
+  "batch_sha256": "d03d6b3f358adcdfdf3cf3ea2e228229944b2d6569d4ee093b45764dab392cad"
+}
