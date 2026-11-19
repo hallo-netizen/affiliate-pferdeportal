@@ -33,7 +33,7 @@ Die erste sichtbare Antwort ist ausschließlich:
 
 Portalzuordnung automatisch.
 
-Interne Links: exakt 3; **ausschließlich auf bestehende WordPress-Kategorien oder veröffentlichte WordPress-Seiten, niemals auf einzelne Beiträge/Artikel**. Die eine bestehende Link-Zielentscheidung vor dem Writer prüft Zieltyp, Erreichbarkeit und Themenbezug. `parent_category` und `semantic_related` liegen in zwei verschiedenen Haupttextblöcken, `further_information` ausschließlich im Block `further_information`. Intro, Fazit und Tabelle zählen nicht als Haupttext.
+Interne Links: **1 bis 3 sinnvolle Links**, ausschließlich auf bestehende WordPress-Kategorien oder veröffentlichte WordPress-Seiten, **niemals einzelne Beiträge/Artikel**. Die eine vorhandene Linkentscheidung vor dem Writer prüft die echte Seitenbeschreibung bzw. den Seiteninhalt, bevorzugt konkrete Themenziele und lässt unpassende optionale Links automatisch weg. Die übergeordnete Kategorie (`parent_category`) bleibt Pflicht; `semantic_related` und `further_information` sind nur bei nachgewiesenem Bezug erlaubt. Haupttextlinks stehen in verschiedenen Abschnitten; ein `further_information`-Link steht ausschließlich im Abschnitt `further_information`. Kein Ersatzlink auf die allgemeine Magazin-Startseite, keine zusätzliche Prüfstation.
 
 Repository: `hallo-netizen/affiliate-pferdeportal`
 
