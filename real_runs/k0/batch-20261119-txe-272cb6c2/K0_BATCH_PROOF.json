@@ -1,0 +1,84 @@
+{
+  "contract": "K0_BATCH_PROOF_COLLECTION_V1",
+  "status": "PASS",
+  "source": "SIX_EXISTING_ORIGINAL_K0_VERIFIED_SINGLES",
+  "publish_allowed": false,
+  "article_count": 6,
+  "original_batch_sha256": "272cb6c2675b35138e2988cb461c50450ad116731cf4d10b4db3cc9dcd2da73a",
+  "final_file": "real_runs/k0/batch-20261119-txe-272cb6c2/WORDPRESS_BATCH.json",
+  "note": "Collected existing original K0 writer seals and WordPress verification receipts; no replacement quality gate.",
+  "items": [
+    {
+      "item": 1,
+      "article_id": "article:ad1044f2cc2a9154028ee1b1",
+      "title": "Heucobs für Pferde richtig einweichen und füttern",
+      "writer_seal_status": "PASS",
+      "original_k0_hard_rules_bound": 81,
+      "wordpress_verification_status": "PASS",
+      "canonical_binding_status": "PASS",
+      "wordpress_single_test_suite_status": "PASS",
+      "original_wordpress_single_source": "real_runs/k0/k0-20261119-txe-272cb6c2-01/WORDPRESS_SINGLE.json",
+      "original_wordpress_verification_source": "real_runs/k0/k0-20261119-txe-272cb6c2-01/WORDPRESS_VERIFY.json"
+    },
+    {
+      "item": 2,
+      "article_id": "article:6b0abf07c28b591c0d3fff8e",
+      "title": "Wie entwickelt sich die Fellfarbe eines Apfelschimmels?",
+      "writer_seal_status": "PASS",
+      "original_k0_hard_rules_bound": 81,
+      "wordpress_verification_status": "PASS",
+      "canonical_binding_status": "PASS",
+      "wordpress_single_test_suite_status": "PASS",
+      "original_wordpress_single_source": "real_runs/k0/k0-20261119-txe-272cb6c2-02/WORDPRESS_SINGLE.json",
+      "original_wordpress_verification_source": "real_runs/k0/k0-20261119-txe-272cb6c2-02/WORDPRESS_VERIFY.json"
+    },
+    {
+      "item": 3,
+      "article_id": "article:f299032c92257d87156a79fd",
+      "title": "Körperbau und Anatomie des Pferdes verständlich erklärt",
+      "writer_seal_status": "PASS",
+      "original_k0_hard_rules_bound": 81,
+      "wordpress_verification_status": "PASS",
+      "canonical_binding_status": "PASS",
+      "wordpress_single_test_suite_status": "PASS",
+      "original_wordpress_single_source": "real_runs/k0/k0-20261119-txe-272cb6c2-03/WORDPRESS_SINGLE.json",
+      "original_wordpress_verification_source": "real_runs/k0/k0-20261119-txe-272cb6c2-03/WORDPRESS_VERIFY.json"
+    },
+    {
+      "item": 4,
+      "article_id": "article:83a3f120101b1e92464a6a0c",
+      "title": "Spat beim Pferd erkennen und tierärztlich abklären lassen",
+      "writer_seal_status": "PASS",
+      "original_k0_hard_rules_bound": 81,
+      "wordpress_verification_status": "PASS",
+      "canonical_binding_status": "PASS",
+      "wordpress_single_test_suite_status": "PASS",
+      "original_wordpress_single_source": "real_runs/k0/k0-20261119-txe-272cb6c2-04/WORDPRESS_SINGLE.json",
+      "original_wordpress_verification_source": "real_runs/k0/k0-20261119-txe-272cb6c2-04/WORDPRESS_VERIFY.json"
+    },
+    {
+      "item": 5,
+      "article_id": "article:1db2fc2bafff277a35269017",
+      "title": "Regendecken ohne Füllung für Pferde richtig einsetzen",
+      "writer_seal_status": "PASS",
+      "original_k0_hard_rules_bound": 81,
+      "wordpress_verification_status": "PASS",
+      "canonical_binding_status": "PASS",
+      "wordpress_single_test_suite_status": "PASS",
+      "original_wordpress_single_source": "real_runs/k0/k0-20261119-txe-272cb6c2-05/WORDPRESS_SINGLE.json",
+      "original_wordpress_verification_source": "real_runs/k0/k0-20261119-txe-272cb6c2-05/WORDPRESS_VERIFY.json"
+    },
+    {
+      "item": 6,
+      "article_id": "article:2c519961a974894957214c23",
+      "title": "Kombinierte Fliegen- und Regendecken für Pferde sinnvoll nutzen",
+      "writer_seal_status": "PASS",
+      "original_k0_hard_rules_bound": 81,
+      "wordpress_verification_status": "PASS",
+      "canonical_binding_status": "PASS",
+      "wordpress_single_test_suite_status": "PASS",
+      "original_wordpress_single_source": "real_runs/k0/k0-20261119-txe-272cb6c2-06/WORDPRESS_SINGLE.json",
+      "original_wordpress_verification_source": "real_runs/k0/k0-20261119-txe-272cb6c2-06/WORDPRESS_VERIFY.json"
+    }
+  ]
+}
