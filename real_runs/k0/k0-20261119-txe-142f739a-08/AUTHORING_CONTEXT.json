@@ -48,8 +48,8 @@
       "F1": {
         "source_url": "https://en.wikipedia.org/wiki/Cucumber",
         "source_title": "Wikipedia – Gurke",
-        "evidence_text": "Cucumber is a creeping vine plant",
-        "evidence_text_sha256": "1d8feabbff859e0c9404d8b6d6d898d983467c5c56df0cff8a674da186f3d167",
+        "evidence_text": "a widely-cultivated creeping vine plant",
+        "evidence_text_sha256": "3100af0bbf555a9111057c8708457d00398fdd217119c1dd719d9b4806a22720",
         "statement": "Gurken sind Früchte einer rankenden Kulturpflanze.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
