@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Leergewicht und Zuladung beim Pferdeanhänger verstehen",
+      "target_keyword": "pferdeanhänger gewicht",
+      "category": "recht-finanzen-organisation",
+      "article_type": "Beratung",
+      "plan_slot": "6dbb36aeb4e7ec842ef6dc154ad26cfab10c4857a0ce0c695e18104bdfc00666"
+    }
+  ],
+  "batch_sha256": "46eda1487a05e583e4014248094b9c4863f89473270eea723609ff10c4bd01ab"
+}
