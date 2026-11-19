@@ -1,3 +1,10 @@
+## 19.11.2026 – GESAMTWORKFLOW-PLAN GESICHERT, KEINE CODE-ÄNDERUNG
+- Detaillierter Quellenabgleich K-Multi ↔ K0 ↔ Hobbydepot-Kategorien/Magazin ↔ fünf bewährte Arten + mögliche `Inspiration` sowie Testreihenfolge in `K_MULTI_TESTREIHENFOLGE_BEITRAGSARTEN_20261119.md`.
+- **K-Multi aktuelles GitHub-Repo in Quarantäne** (nur Offline-Regelbindung, Hobby nicht freigegeben); früherer KISS-1.2-Test 48/48 ersetzt keinen Produktionsnachweis. K0-Original unverändert.
+- Fachlich geplanter Umfang: acht Hobbywelten + Magazin mit vier Gruppen; aktueller Screenshot 379 offene Themenbereiche/2241 zugeordnete Artikelkategorien/3520 WP-Kategorien. Vollständiger **aktueller Live-Kategorie-Snapshot inkl. journal_cat** fehlt noch für Endabnahme; ältere Zielprofile nicht als aktuelle Term-Einzelinventur ausgeben.
+- **Keine neue ZIP**: Texterstellung 0.4.24.5 bleibt unverändert CURRENT und im Hobbydepot-Pluginbüro gespeichert. Erster Test nur 1 kostenlose Kategorien-Recherche, kostenpflichtige Checkbox AUS, danach separater Magazin-Probelauf. Keine Produktions-K-Multi-Anbindung ohne komplette Qualitäts-/Rückimportfreigabe.
+---
+
 ## 19.11.2026 09:45 – NEUER LIVE-SICHTSTAND: RECHERCHEOBERFLÄCHE VERFÜGBAR
 
 - Echter Screenshot der Hobbydepot-WP-Rechercheoberfläche: **keine Einrichtungs-Blockermeldung mehr sichtbar**; **379 offene Themenbereiche**, **0 recherchiert**, **0 Fehler/gesperrt**; **2.241 von 2.241 Artikelkategorien zugeordnet**, WordPress insgesamt **3.520 Kategorien**; **0 gespeicherte Originalthemen**, **0 Aufträge**. Nächstes Thema **3D-Bogenschießen**, Anzahl **5**.
