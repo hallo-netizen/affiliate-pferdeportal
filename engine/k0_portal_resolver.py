@@ -77,7 +77,10 @@ def _resolve_signed_wordpress(intake,registry,receipt):
     """Only portal identity from the already verified original WordPress receipt.
     The five K0 metadata fields and all downstream rules remain unchanged."""
     from .wp_order_identity_receipt import resolve_current_intake
-    bindings=resolve_current_intake(intake,receipt)
+    try:
+        bindings=resolve_current_intake(intake,receipt)
+    except Exception as exc:
+        raise Blocked('WP_SOURCE_RECEIPT_INVALID:'+str(exc)) from exc
     host=str(receipt.get('site_host') or '').strip().lower()
     profiles=registry.get('profiles') or []
     hits=[p for p in profiles if host in (p.get('site_hosts') or [])]
