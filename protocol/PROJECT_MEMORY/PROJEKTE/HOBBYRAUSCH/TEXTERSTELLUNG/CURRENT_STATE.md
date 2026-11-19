@@ -1,3 +1,13 @@
+## 19.11.2026 – AKTUELL: 0.4.24.9 KISS, DataForSEO IMMER PRODUCTION, KEIN MODUS-WAHLSCHALTER
+
+- Nutzer verlangt **immer Productivmodus, keine zusätzliche Einstellungsauswahl, kein Neubau**. Echte Originalquellen zeigen, dass Pferdeatelier-Vorlage 0.4.31.1 **ebenfalls Standard=sandbox** enthielt; welchen Wert deren Live-Portal gespeichert hat, ist hier unbekannt. Alte Sandbox-Default-Übernahme war die Hobby-Ursache.
+- **Neuer unverwechselbarer CURRENT-Kandidat:** `Texterstellung_Hobbydepot_0.4.24.9_FEST_PRODUKTIVMODUS.zip`, SHA256 `b5894c2f2942a117a6c53a2452922a508cb24f44b38f210a39c5583d761bf500`, 507896 Bytes. Root exakt `texterstellung-hobbydepot/`. 85/87 Dateien byteidentisch zur 0.4.24.8; nur `PSTE_Plugin::defaults/migrateSettings` für **neue Recherchen production** und `texterstellung.php` Version/Modusauswahl-Rückbau geändert.
+- Originale Kostenbestätigung beim Start einer neuen DataForSEO-Recherche und alle Budget-/Schutzregeln bleiben. **Keine automatische kostenpflichtige Recherche** beim Update. Effektiver Modus production trotz altem gespeicherten sandbox; Altjobs sind unverändert und dürfen nicht als Echtdaten umetikettiert werden.
+- **89/89 gezielte Funktionstests** (20 Modus-/WordPress-UI + 38 Provider +31 Archiv), **78/78 PHP**, **8/8 JSON**, **87/87 ZIP-CRC PASS**. Noch kein echter WordPress-Endtest/Anbieter-API-Abruf.
+- **Erfolgreich gespeichert** in `/Hobby Depot/Plugin-Büro/` sowie `/hobbydepot/TEXTERSTELLUNG/INSTALLATIONSKANDIDATEN/`, eigene Büro-`Texterstellung-CURRENT.md` aktualisiert, Bericht im Büro; alter 0.4.24.8 bleibt archiviert. Detailbeleg `KISS_PRODUKTIVMODUS_FIX_0_4_24_9_20261119.md`.
+- **Nächster Nutzerklick:** Backup → 0.4.24.9 per WordPress **Ersetzen** → `Texterstellung → Recherche`: **Echtdaten (Production)** steht fest, kein Schalter. NICHT automatisch alle 378 Kategorien recherchieren; zuerst ggf. eine bewusst kostenpflichtig bestätigte Pilot-Recherche.
+---
+
 ## 19.11.2026 12:54 – AKTUELL 0.4.24.8: ORIGINAL-PROVIDER-EINSTELLUNG UND HISTORISCHER RUN-MODUS SICHTBAR
 
 - **Nur zwei vorhandene Dateien geändert**, 85/87 inhaltsgleich, kein Neubau, keine K0-/MINI-/PSERC-/Research-Architekturänderung. `texterstellung.php` 0.4.24.8: zentraler Modusreadback aus `pste_settings_v1.environment` (Standard Sandbox), Formular in vorhandener Recherche/Diagnose, einziger admin/nonce/explicit-confirm-geschützter Moduswechsel zu Production. **Speichern allein = keine Providerabfrage**. Vor echtem Research bleiben alter `cost_ack` und neuer Sandbox-Schutz wirksam. `includes/class-txe-diagnose.php`: aktueller Modus samt Anbieterhost und Original-Altauftrag-Modus read-only nachgewiesen; keine Neuprüfung von Keywords.
