@@ -1,3 +1,13 @@
+## 19.11.2026 – KORREKTUR ANWEISUNG: „3D-Bogenschießen erneut recherchieren“ IN 0.4.24.10 NICHT ALS KLICKWEG BEWIESEN
+
+- Nutzer sagt eindeutig: vorher angegebener Klickweg `Alternativ: Einzelnes Thema recherchieren → 3D-Bogenschießen → Originalrecherche starten` funktioniert auf seiner WordPress-Instanz **nicht**. Diese Aussage respektieren; nicht erneut denselben Klickweg behaupten.
+- **Original-Installer-ZIP 0.4.24.10 lokal vollständig geöffnet und Quellcode geprüft.** Die Menüpunkte `Nächste offene Kategorien` und `Bestimmte offene Kategorien auswählen` beruhen auf `PSTE_Breadth_Research_Queue::openFamilies()`, das explizit **nur `NOT_ANALYZED`** nimmt. `PSTE_Repository::categoryProgress()` kennzeichnet das abgeschlossene `ANALYZED_NO_ELIGIBLE_CANDIDATE` für 3D-Bogenschießen als `ANALYZED`. Also Kategorie **aus beiden Standardlisten ausgeschlossen**; in `startSelectedOpen` sogar mit `PSTE_CATEGORY_ALREADY_RESEARCHED_OR_NOT_OPEN` gesperrt.
+- Die alternative Einzelrecherche-UI existiert zwar im PHP (Zeile ~1978) und ruft `TXE_Workshop::runResearch()` (Zeile ~573) mit einem ungeprüften String auf; der Submitbutton wird bei vorhandenem Einzeljob **deaktiviert** (`$singleStartBlocked`), und die Live-Erfolgsfähigkeit dieses Weges ist nicht durch die Quellenprüfung oder Nutzerbefund bewiesen. Man darf ihn daher **NICHT** als sichere Wiederholung eines abgeschlossenen **Kategorie**-Recherchelaufs ausgeben. Kein besonderer Button für den gezielten Wiederlauf des ausgewählten abgeschlossenen Familienauftrags vorhanden.
+- **Nächster Entwicklungsumfang** (nur nach belastbarer Live-Zustandsprüfung, kein blindes Plugin): eindeutige bestehende Kategorie-ID, gesicherter abgeschlossener Altauftrag, unverändertes Ergebnis als Archiv, genau ein bewusst kostenpflichtig bestätigter **neuer** DataForSEO-Job über die bestehende originale Recherche (Production), ohne andere Kategorien zu beeinflussen und ohne den alten Lauf zu löschen. Kein pauschales Zurücksetzen der Kategorie-Progress-Tabelle und keine zweite Entscheidungsstelle. Alle Fälle vollständig testen vor erneutem Download.
+- **KEINE NEUE ZIP und KEINE WordPress-Änderung in diesem Schritt.** Zentral gespeicherter Stand 0.4.24.10 bleibt unverändert; nicht als funktionierende gezielte Kategorie-Wiederholung ausgeben.
+
+---
+
 ## 19.11.2026 – Aktuelles überinstallierbares ZIP 0.4.24.10 (WordPress-Verzeichnisidentität)
 
 - Nutzer meldet: bei Upload von 0.4.24.9 kein Ersetzen-Dialog; verlangt genau eine ZIP mit eindeutig höherer Version.
