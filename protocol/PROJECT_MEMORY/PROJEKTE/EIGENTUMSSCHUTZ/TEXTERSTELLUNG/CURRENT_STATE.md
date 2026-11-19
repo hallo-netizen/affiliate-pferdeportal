@@ -1,3 +1,12 @@
+# 19.11.2026 – FACHAUSRICHTUNGEN UND ZWEI KISS-REGELN FREIGEGEBEN
+
+Alle fünf autonomen Hab-Regelbücher enthalten ab jetzt die konkret vom Nutzer genehmigte Ausrichtung (FAQ, Ratgeber/Wissen, Vergleich, Anleitung/Checkliste, Bericht/Praxisfall) und zwei verbindliche Hab-Grundregeln: fachliche Sicherheit ohne unbelegte Garantien oder riskante Tipps; freiwillige staatliche Informationslinks nur bei echtem Zusatznutzen am Artikelende und **zwingend mit nofollow**, niemals als Pflicht.
+
+**Bestandsschutz geprüft:** Alle fünf vollständigen Original-Regelteilbäume sind unverändert; 750–900 Wörter, Überschriften, Absätze, Tabellen, Aufzählungen, Rechtschreibung/Grammatik, Quellen, interne Verlinkung bleiben. Die alten zwölf Hab-Entwurfsmodule sind im `02_HAB_QUERSCHNITT_SICHERHEIT.json` archiviert, aber nicht parallel verbindlich.
+
+**Noch offen:** Aktualisierung des separaten K-Multi-Kopiebestands und End-to-End-Anbindung des neuen Writers. Hier kein WordPress-Plugin, kein Originalworkflow verändert. Die fachliche Freigabe bedeutet NICHT technische Produktionsfreigabe.
+
+---
 # 19.11.2026 – Hab-Typregeln: K0-Gleichstand bestätigt, 15 gezielte Fachlücken dokumentiert
 
 **Unverändert:** fünf vollständige autarke Hab-Arbeitskopien auf Basis der aktuell geprüften K0-Regeln, 750–900 Wörter, Original-K0/K-Multi/WordPress-Installation und alle fünf Textregeldateien. Die sieben maßgeblichen Original-K0-Quelldateien wurden gegen die gespeicherte Kopiervorlage erneut abgeglichen: **0 inhaltliche Abweichungen**.
