@@ -1,0 +1,150 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Sind Minerallecksteine für Pferde sinnvoll?",
+    "target_keyword": "Sind Minerallecksteine für Pferde sinnvoll?",
+    "category": "minerallecksteine-faq",
+    "article_type": "FAQ",
+    "plan_slot": "7bf8fb840968ce3e9249ecab92c9e562230f969110b5a48dc121ff776ac1cee8"
+  },
+  "content_profile": {
+    "search_intent": "Nutzen und Grenzen von Minerallecksteinen für Pferde erklären"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/feeding-your-horse-a-ration-balancer",
+          "source_title": "University of Minnesota – Vitamine und Mineralstoffe"
+        }
+      ],
+      "claims": [
+        "Vitamine und Mineralstoffe gehören zur bedarfsgerechten Fütterung.",
+        "Ein Rationsausgleich kann fehlende Spurenelemente ergänzen.",
+        "Die Art des gefütterten Heus beeinflusst den Ergänzungsbedarf.",
+        "Ein reiner Salzleckstein unterscheidet sich von mineralhaltigen Produkten."
+      ],
+      "fresh_research_reference_date": "2026-11-19"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Sind Minerallecksteine für Pferde sinnvoll?",
+      "topic": "Sind Minerallecksteine für Pferde sinnvoll?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "minerallecksteine-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Sind Minerallecksteine für Pferde sinnvoll?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/feeding-your-horse-a-ration-balancer",
+        "source_title": "University of Minnesota – Vitamine und Mineralstoffe",
+        "evidence_text": "Vitamins and minerals are nutrients that horses need",
+        "evidence_text_sha256": "e673c63e463f9fe034900970cbc28014e77daee554d6829844e3d6834387e82d",
+        "statement": "Vitamine und Mineralstoffe gehören zur bedarfsgerechten Fütterung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/feeding-your-horse-a-ration-balancer",
+        "source_title": "University of Minnesota – Vitamine und Mineralstoffe",
+        "evidence_text": "Ration balancers provide your horse with the vitamins and trace minerals most forages lack",
+        "evidence_text_sha256": "13a00ce7bd8a9556db7df23ce920c921a069d5e91d96b08ea3dbcc950f0ac6a0",
+        "statement": "Ein Rationsausgleich kann fehlende Spurenelemente ergänzen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/feeding-your-horse-a-ration-balancer",
+        "source_title": "University of Minnesota – Vitamine und Mineralstoffe",
+        "evidence_text": "You can choose a ration balancer based on the type of hay you feed your horse",
+        "evidence_text_sha256": "021224a52878e942c46c7b43a33850d401fa6450f8ee3da7ee070a0001a2baf7",
+        "statement": "Die Art des gefütterten Heus beeinflusst den Ergänzungsbedarf.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/feeding-your-horse-a-ration-balancer",
+        "source_title": "University of Minnesota – Vitamine und Mineralstoffe",
+        "evidence_text": "Allow horses access to a white salt block that doesn’t contain trace minerals",
+        "evidence_text_sha256": "20e8d52aeac49abeb14a8255224242a716977989eb4896586c2429193672f041",
+        "statement": "Ein reiner Salzleckstein unterscheidet sich von mineralhaltigen Produkten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/minerallecksteine-faq/",
+        "anchor": "minerallecksteine-faq",
+        "block": "details"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/minerallecksteine-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "minerallecksteine-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Minerallecksteine",
+      "Pferde",
+      "Mineralien",
+      "Salz",
+      "Bedarf",
+      "Raufutter",
+      "Sinn"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine kompakte Tabelle ergänzt die thematisch unterschiedlichen Prüfungskriterien und Maßnahmen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
