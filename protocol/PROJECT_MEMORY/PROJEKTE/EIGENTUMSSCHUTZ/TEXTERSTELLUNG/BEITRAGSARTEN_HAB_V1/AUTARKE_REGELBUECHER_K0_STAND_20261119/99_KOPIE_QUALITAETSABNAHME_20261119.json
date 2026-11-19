@@ -1,0 +1,85 @@
+{
+  "status": "DATEIKOPIE_UND_SEMANTISCHE_GRENZEN_PASS_NICHT_RUNTIME_READY",
+  "datum": "2026-11-19",
+  "quelle": "Original-K0 aus aktuellem branch konzept0-portal-neutral-20261002",
+  "original_commit": "0376274b3f0601035fe4d223c18d77bc1bfa86c6",
+  "prüfmethode": "Je fünf tatsächlich gespeicherte GitHub-Dateien zurückgelesen und vollständige originale Teilbäume gegen die im selben Büro gespeicherte Originalkopie verglichen.",
+  "ergebnisse": [
+    {
+      "name": "10_FAQ.json",
+      "status": "PASS",
+      "errors": [],
+      "source_rules": 117,
+      "original_types": [
+        "FAQ"
+      ],
+      "hab_rules": 6,
+      "wordmin": 750,
+      "wordmax": 900
+    },
+    {
+      "name": "20_RATGEBER_WISSEN.json",
+      "status": "PASS",
+      "errors": [],
+      "source_rules": 117,
+      "original_types": [
+        "Beratung"
+      ],
+      "hab_rules": 10,
+      "wordmin": 750,
+      "wordmax": 900
+    },
+    {
+      "name": "30_VERGLEICH.json",
+      "status": "PASS",
+      "errors": [],
+      "source_rules": 117,
+      "original_types": [
+        "Vergleich"
+      ],
+      "hab_rules": 8,
+      "wordmin": 750,
+      "wordmax": 900
+    },
+    {
+      "name": "40_ANLEITUNG_CHECKLISTE.json",
+      "status": "PASS",
+      "errors": [],
+      "source_rules": 117,
+      "original_types": [
+        "Pflege",
+        "Anleitung"
+      ],
+      "hab_rules": 7,
+      "wordmin": 750,
+      "wordmax": 900
+    },
+    {
+      "name": "50_BERICHT_PRAXISFALL.json",
+      "status": "PASS",
+      "errors": [],
+      "source_rules": 117,
+      "original_types": [],
+      "hab_rules": 8,
+      "wordmin": 750,
+      "wordmax": 900
+    }
+  ],
+  "summe": {
+    "getestete_beitragsarten": 5,
+    "bestandene_kopietests": 5,
+    "geänderte_originalregeln": 0,
+    "writer_ausgeführt": false,
+    "lt_68_echt_geprüft": false,
+    "k_multi_aktiviert": false,
+    "wordpress_entwurf_geschrieben": false
+  },
+  "kritische_punkte": [
+    "Ratgeber: K0-Beratung nur falls echter Auswahlentscheid; Wissenstyp nicht bereit",
+    "Anleitung und Pflege: getrennte Ursprungsstrukturen; Kombi-Typ nicht technisch bereit",
+    "Bericht: kein originaler Typ; nur globale Regelübernahme",
+    "K-Multi ist weiter nicht auf aktuellen Regelstand umgestellt, alter V9-Wertestand separat prüfen",
+    "Ergänzte Hab-Sicherheitsregelvorschläge noch nicht als produktive Regeln freigegeben"
+  ],
+  "zukunft": "Allgemeine Änderungen nach Freigabe gezielt identisch kopieren, Spezialregeln nur an betroffenen Portalen; Quellenbindung bei jeder neuen Kopie erneut prüfen."
+}
