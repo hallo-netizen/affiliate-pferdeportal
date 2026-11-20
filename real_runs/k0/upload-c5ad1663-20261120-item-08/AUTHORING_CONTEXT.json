@@ -1,0 +1,180 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Was kostet ein Reitplatz mit 20 mal 40 Metern?",
+    "target_keyword": "Wie viel kostet ein Reitplatz mit den Maßen 20x40 Meter?",
+    "category": "reitplatzbau-kosten",
+    "article_type": "FAQ",
+    "plan_slot": "0556512b8b44a7d86ec3bbc729cc7f2f0fdbd3807d2905a4a3a2dbc4c51cc892"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+          "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/"
+        }
+      ],
+      "claims": [
+        "Eine Fläche von 20 mal 40 Metern wird als Beispiel für einen sandbasierten Auslauf genannt, nicht als Preisangabe für einen Reitplatz.",
+        "Die Bodengestaltung hängt vom Untergrund ab.",
+        "Auf undurchlässigem Untergrund ist eine Regenwasserableitung relevant.",
+        "Auch die Tretschicht beeinflusst Planung und Kosten."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie viel kostet ein Reitplatz mit den Maßen 20x40 Meter?",
+      "topic": "Was kostet ein Reitplatz mit 20 mal 40 Metern?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "reitplatzbau-kosten",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was kostet ein Reitplatz mit 20 mal 40 Metern?"
+    },
+    "research_claims": {
+      "F1": {
+        "statement": "Eine Fläche von 20 mal 40 Metern wird als Beispiel für einen sandbasierten Auslauf genannt, nicht als Preisangabe für einen Reitplatz.",
+        "evidence_text": "Der Deutsche Tierschutzbund empfiehlt für zwei bis drei Pferde eine Fläche von 20 mal 40 Metern.",
+        "evidence_text_sha256": "747974e98f1b612c96881f23f77b648fd741471903242357d3422447ef25045a",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "statement": "Die Bodengestaltung hängt vom Untergrund ab.",
+        "evidence_text": "Die Gestaltung des Auslaufbodens richtet sich nach der Qualität des gewachsenen Untergrundes:",
+        "evidence_text_sha256": "8d69e5e4dfa7e21c5e9601316130ea8ab0c9288726d3f80d49e2e541a432e3e3",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "statement": "Auf undurchlässigem Untergrund ist eine Regenwasserableitung relevant.",
+        "evidence_text": "Bei undurchlässigen Lehm- oder Tonböden sind unmittelbar unter dem Sand und dem Kunststoffvlies Drainagerohre nötig, die das Regenwasser ableiten.",
+        "evidence_text_sha256": "f79b5ce0b31c3bd3f186b359f47a556907360527d4c7d9d90db0247376b18131",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "statement": "Auch die Tretschicht beeinflusst Planung und Kosten.",
+        "evidence_text": "Bei einem durchlässigen Boden wie Sand, Kies oder Schotter empfiehlt es sich, einen Teil des Mutterbodens abzutragen",
+        "evidence_text_sha256": "638921983e1f436b2387915b848f232edee6226ace39a02009842f1cfaa78441",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/reitplatzbau-kosten/",
+        "anchor": "Pferdehaltung Grundlagen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/reitplatzboden-kosten/",
+        "anchor": "Kosten Reitplatzboden",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/reitplatzbau-kosten/",
+        "active": true
+      },
+      {
+        "href": "/category/reitplatzboden-kosten/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "reitplatzbau-kosten",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Weide",
+      "Haltung",
+      "Kosten",
+      "Wetter",
+      "Größe",
+      "Weidegang",
+      "Reitplatz",
+      "Stall",
+      "Futter",
+      "Tierbesatz",
+      "Boden",
+      "Schutz",
+      "Miete",
+      "Grundstück",
+      "Recht",
+      "Organisation",
+      "Beratung",
+      "Auslauf",
+      "Sicherheit",
+      "Bedingungen",
+      "Regen",
+      "Winter",
+      "Pflege",
+      "Wasser",
+      "Genehmigung",
+      "Tierseuchenkasse"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die Tabelle ordnet belegte Tatsachen konkreten Situationen und sinnvollen Maßnahmen gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
