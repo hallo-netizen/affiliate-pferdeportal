@@ -1,3 +1,19 @@
+# 20.11.2026 – NEUERSTER BEFUNDBLOCK: HAB-SUCHPHRASE UND 3-PORTALE-ORIGINALVERGLEICH
+
+**Zentraler vollständiger technischer Bericht:** `QA_RECHERCHE_PHRASE_ORIGINAL_PFERD_HOBBY_KMULTI_20261120.md` im selben Ordner. Echter ZIP-/Original-PHP-Vergleich Pferdeatelier 0.4.34, Hab 0.4.31.6, Hobbydepot 0.4.24.13 und neuestes Hobby 0.4.24.15; isolierte positive und negative Tests samt K0- bzw. K-Multi-Grenzen dokumentiert.
+
+**Hab-Root-Cause 1:** Bestehende Original-PSTE-Queue verwendet `topic_family_name` als DataForSEO-Ausgangs-Seed. Hab belegt dieses Feld mit einer kompletten C23-Satzüberschrift statt kurzem Suchthema; nach Kontext kann zusätzlicher Portalname angehängt werden. Lange Phrase nicht sinnvoll für Keyword-Discovery.
+
+**Hab-Root-Cause 2:** Original `PSTE_Family_Identity_V2` erzwingt im Beispielsatz `passend`, `zugangsrecht`, `schutz`, `ausstatt`; natürliche Begriffe `abholbox schloss` usw. werden trotz passenden Themas abgewiesen. Die einfache Substitution durch vorhandenes R3 `Abholbox-Diebstahlschutz` ist **kein** vollständiger Fix und verursacht ggf. Familien-/Artikeltyp-Kollisionen und Kategorienverlust. Nur bestehende PSTE-Zuordnungsstelle isoliert und gebündelt korrigieren, nach regressionstauglichem Test.
+
+**Hobby-Nachbarchat:** V0.4.24.13 reproduziert Fehler bei MINI-Abschluss/gespeichertem Download. Vorhandene geprüfte V0.4.24.15 repariert die Originalmethoden, vollständige PHP-MINI→K0-Paket→SIMULIERTEN WP-Import-Tests PASS. Kein bestätigter Live-Installationsnachweis oder neu geschriebener echter Hobby-K0-Artikel. Hobby-Fachprotokoll `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/TEXTERSTELLUNG/QA_ORIGINAL_WORKFLOW_VERGLEICH_HAB_PFERD_20261120.md`.
+
+**K-Multi:** Fünffelder-Übergabe 15/15 Python-Tests; noch kein vollständig ausführbarer unabhängiger K-Multi-Writer/LanguageTool/WordPress-Draft. Original K0 vollständig unangetastet. K-Multi-Detail `hallo-netizen/k0-multiportal:offline_writer_dev/QA_PFERD_HOBBY_HAB_KMULTI_DREI_PORTALE_20261120.md`.
+
+**Kosten-/Betriebsschutz:** Neuester Benutzerscreenshot 09:27 lokal `RUNNING` 1 ausstehende Hab-Recherche, 0 Themen gespeichert. *Keinen neuen kostenpflichtigen Lauf starten und nicht in laufendem Job Plugin austauschen.* Erst fertigen Lauf und die neue Ist-Diagnose ansehen, dann **eine** gebündelte Hab-Reparatur mit vollständigen Positiv-/Negativfällen und Freigabe. **Kein Fix installiert, kein neuer Pluginrelease.**
+
+---
+
 # 19.11.2026 – HAB: OFFIZIELLE EXTERNE FUSSNOTENLINKS TECHNISCH OFFLINE ABGESICHERT
 
 **Fachliche Regeln:** Fünf Hab-Regelbücher fachlich freigegeben und unverändert. Externe amtliche Links **niemals Pflicht**; nur bei echter Relevanz am Textende, zwingend `nofollow`, ausschließlich nachgewiesene staatliche Stellen.
