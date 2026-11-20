@@ -1,0 +1,180 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wie groß muss ein Grundstück für private Pferdehaltung sein?",
+    "target_keyword": "Wie groß muss ein Grundstück für Pferdehaltung sein?",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "FAQ",
+    "plan_slot": "45dcd50390b5377bfd815a0bc570463fad5b71771142f25fb96f7ddbac94257c"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+          "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/"
+        }
+      ],
+      "claims": [
+        "Weidehaltung ist aus verschiedenen Gründen nicht überall umsetzbar.",
+        "Gruppenhaltung braucht ausreichend strukturierte Ausweichflächen.",
+        "Bei Pferden ist eine geeignete Liegefläche wichtig.",
+        "Auch die Außenflächen sind für die Pferdehaltung entscheidend."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie groß muss ein Grundstück für Pferdehaltung sein?",
+      "topic": "Wie groß muss ein Grundstück für private Pferdehaltung sein?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie groß muss ein Grundstück für private Pferdehaltung sein?"
+    },
+    "research_claims": {
+      "F1": {
+        "statement": "Weidehaltung ist aus verschiedenen Gründen nicht überall umsetzbar.",
+        "evidence_text": "Das ist generell gesehen die natürlichste Form der Pferdehaltung, jedoch aus verschiedenen Gründen wie Grundstücksgröße, Weidezusammensetzung oder Pferderasse nicht immer umsetzbar.",
+        "evidence_text_sha256": "e660d27d9c8857b9be5531276a27a21b376442cbcc493efc2c1cd839084695fb",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "statement": "Gruppenhaltung braucht ausreichend strukturierte Ausweichflächen.",
+        "evidence_text": "Je größer und strukturierter das Gelände und die Ausweichmöglichkeiten sind, desto einfacher verläuft erfahrungsgemäß die Gruppenhaltung.",
+        "evidence_text_sha256": "95091bd7504474bddefc05a49f0d4d85324ea80caf917aa04788c07f61f22d2b",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "statement": "Bei Pferden ist eine geeignete Liegefläche wichtig.",
+        "evidence_text": "Bei Pferden mittlerer Größe sind etwa neun Quadratmeter Liegefläche je Pferd ausreichend.",
+        "evidence_text_sha256": "5ec364051a5af0cffb61879de1726f7a11b5762bcaa11bf3064dd1998f65ecde",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "statement": "Auch die Außenflächen sind für die Pferdehaltung entscheidend.",
+        "evidence_text": "Auch in der Gruppenhaltung, selbst der mit ständigem Zugang zum Auslauf, können die Tiere erst all ihre Bedürfnisse erfüllen, wenn sie gemeinsam täglichen Zugang zur Weide erhalten.",
+        "evidence_text_sha256": "19af196f3ef7999d3885d2752085c6a7daaed665610ac0e2f2106be597087e14",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "Pferdehaltung Grundlagen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/recht-finanzen-organisation/",
+        "anchor": "Recht Finanzen und Organisation",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      },
+      {
+        "href": "/category/recht-finanzen-organisation/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Weide",
+      "Haltung",
+      "Kosten",
+      "Wetter",
+      "Größe",
+      "Weidegang",
+      "Reitplatz",
+      "Stall",
+      "Futter",
+      "Tierbesatz",
+      "Boden",
+      "Schutz",
+      "Miete",
+      "Grundstück",
+      "Recht",
+      "Organisation",
+      "Beratung",
+      "Auslauf",
+      "Sicherheit",
+      "Bedingungen",
+      "Regen",
+      "Winter",
+      "Pflege",
+      "Wasser",
+      "Genehmigung",
+      "Tierseuchenkasse"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die Tabelle ordnet belegte Tatsachen konkreten Situationen und sinnvollen Maßnahmen gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
