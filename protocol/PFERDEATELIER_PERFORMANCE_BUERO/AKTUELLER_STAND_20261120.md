@@ -286,3 +286,80 @@ Vor einer installierbaren Version zwingend:
 6. danach erst eine Testversion und ein Live-Messlauf.
 
 Dieser Ansatz geht an die bewiesene Hauptursachenfamilie statt weitere einzelne Symptome zu reparieren.
+
+
+## Rootfix-Kandidat 6.72.363 – wiederholte Frontend-Lesezugriffe – 20.11.2026
+
+### Exakter Ursachenbeweis
+Auf Basis des exakt installierten 6.72.362-Codes (6.72.361-Paket + dokumentierter einzelner GTIN-Set-Patch) wurde der Kategorie-Produktpfad lokal mit 709 Produktkandidaten nachgestellt. Die Größenordnung 709 entspricht dem bereits dokumentierten breiten historischen Pferdesättel-Kandidatenband.
+
+6.72.362 erzeugte in diesem echten Codepfad über category_product_1..3:
+- get_option: 2.339
+- get_post_meta: 4.936
+- home_url: 2.024
+- current_time: 709
+- ausgewählte Kampagnen: camp-20000 / camp-20011 / camp-20022
+
+Die mehrfach gelesenen Werte sind innerhalb eines normalen Frontend-Requests invariant:
+- Control-Settings
+- Provider-Channel-State
+- Provider-Access-State
+- idealo-Settings
+- Amazon-Settings
+- lokale Portal-ID
+- eBay SAFE-Checkpoint-Mitgliedschaft
+- bereits aufgelöste Produkt-GTINs
+- aktuelles Datum für Kampagnenlaufzeit
+
+Zusätzlich primte der eBay-Source-Cache in Slot 2/3 erneut Post-Metadaten, obwohl die bestehende Source-Allow-Entscheidung für dieselbe Kampagne bereits request-lokal vorlag.
+
+### Lokaler KISS-Kandidat 6.72.363
+Eine zentrale Cache-Erlaubnis entscheidet einmalig, ob request-lokale Wiederverwendung sicher ist. Sie ist nur auf normalen Frontend-Requests aktiv. Bei Admin, AJAX, REST, Cron, WP-CLI, externem Object-Cache oder dynamischen Option-/Cache-/Shortcode-Filtern bleibt der historische ungecachte Pfad.
+
+Nach der Änderung im identischen 709-Kandidaten-Test:
+- get_option: 2.339 -> 6
+- get_post_meta: 4.936 -> 3.710
+- home_url: 2.024 -> 1
+- current_time: 709 -> 1
+- ausgewählte Kampagnen unverändert: camp-20000 / camp-20011 / camp-20022
+
+Reduktion:
+- direkte Optionslesungen ca. -99,7 %
+- Meta-Lesungen ca. -24,8 %
+- wiederholte Portal-URL-Lesungen praktisch vollständig entfernt
+- wiederholte Tagesauflösung praktisch vollständig entfernt
+
+Diese Zahlen sind lokale Originalcode-Aufrufzahlen, keine Behauptung über die spätere Live-Millisekundenersparnis.
+
+### Verhaltensprüfung
+- 50 normale Matrixfälle über alle fünf Provider-Modi, Hybrid/Produktstrategie, unterschiedliche Slot-Belegung, doppelte GTINs und Partnerfälle: 0 Auswahlabweichungen.
+- 20 dynamische Filterfälle: 0 Auswahlabweichungen; Cache fällt wie vorgesehen auf Altweg zurück.
+- 9 künstliche Zustandsänderungen zwischen Slot 1/2/3 bei aktivem Dynamic-Fail-safe: 0 Auswahlabweichungen.
+- 31 wiederholte breite Originalcode-Läufe vor der finalen Sicherheitsrefaktorierung: identische Auswahl; lokale Medianzeit im Stub-Harness ca. 151,5 -> 115,9 ms. Diese Zeit ist nur ein isolierter lokaler Größenordnungswert.
+- frisches finales ZIP: repräsentative Alt/Neu-Abnahme über sechs Provider-/Slot-Kombinationen PASS.
+
+### Strukturschutz finales ZIP
+Paket: PFERDEATELIER_AFFILIATE_6.72.363_PERFORMANCE_KISS_TEST.zip
+SHA-256: e63a5a6138857dc9e210f64204144ae0da6abde63bd343c620434afb120273cc
+- Dateien 66 -> 66
+- PHP-Lint 23/23 PASS
+- Funktionen 1.562 -> 1.563
+- entfernt 0
+- neu genau 1: category_product_static_read_cache_allowed_v672363
+- statisch gezählte Hook-Registrierungen 194 -> 194
+- entfernte Hooks 0
+- hinzugefügte Hooks 0
+- keine neue Datenbank-/Post-/Option-Schreiblogik
+- funktional geänderte Dateien: Control, eBay-Checkpoint/Source-Prime, idealo/GTIN, Output-Portal-ID, Provider-State und Hauptdatei; Readme nur Version/Dokumentation.
+
+### Entscheidung
+6.72.363 ist ein TESTKANDIDAT, kein bewiesener Live-Performance-Erfolg.
+Der Kandidat darf als nächster einzelner KISS-Schritt über 6.72.362 installiert werden.
+Danach exakt dieselbe Performance-Gesamtanalyse ausführen und besonders vergleichen:
+- Pferdesättel Wall/CPU
+- Cache-Hits
+- Satteldecken als Referenz
+- p95/TTFB/LCP
+- Produktausgabe Slot 1/2/3
+
+Nur bei identischer Funktion und realer Verbesserung wird 6.72.363 als neuer Stand behalten.
