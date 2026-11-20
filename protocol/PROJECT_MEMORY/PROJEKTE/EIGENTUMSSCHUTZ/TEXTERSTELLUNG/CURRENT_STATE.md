@@ -1,3 +1,19 @@
+# 20.11.2026 – AKTUELLSTE HAB-TEXTERSTELLUNG 0.4.31.9 / HOBBY-GESAMTFEHLERLISTE
+
+**WICHTIG:** Installierter Betreiberstand laut 12:00-Screenshot 0.4.31.8; neuer *nur lokal getesteter* Kandidat v0.4.31.9. Zip `Texterstellung_HAB_UND_BEWAHR_0.4.31.9_HOBBY_FEHLERLISTE_ORIGINAL_GEPRUEFT.zip` im Hab-Büro `/hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEKANDIDATEN`; SHA256 `c6565150120d2f493d811e2e2185f92cce3a6d46d41f8199bce4d9b4086e222e`; maschinenlesbare QA und originaler Quell-Diff in `/hab-und-bewahr/TEXTERSTELLUNG/PRUEFUNG_VOLLWORKFLOW_20261120/`.
+
+**PRIMÄRBEWEIS:** `HAB_04319_HOBBY_GESAMTFEHLERLISTE_PFERDEATELIER_ORIGINALTEST_20261120.md`; gesamter kritischer Originalcodevergleich Horse 0.4.34, Hobby 0.4.24.13/15 und Hab 0.4.31.8/19. Echter Live-Hab-Fehler `PSTE_SANDBOX_RECORD_STORE_LEGACY_OPTION_MISSING` nach 9 rohen Keywords. Derselbe Originalaufruf scheitert **auch mit Pferdeatelier 0.4.34** auf *jungfräulicher* Testdatenbank. In Hobby15 existiert sicherer Leerinitialisierungs-Fix – übernommen in Hab19, **15/15 Original-PHP-Sandbox-Tests inklusive originaler fünffacher Migration PASS**.
+
+**ZUSÄTZLICH 0.4.31.9:** Fehlerliste Hobby04/05/13/15 gegen alten Hab-Quellstand geprüft und vorhandene spätere Korrekturen ohne neuen Workflow übernommen: Null-Rohdaten-Migration, exakte Wiederaufnahme gesperrten Kontextjobs, Original-Audit 15 echte Dateien statt Phantomdateien (**92/92 PASS**), vorhandener PAA-Task-ID-Recovery aus Hab18 unverändert, gespeicherter MINI-Download und -Wiederaufnahme nach Horse-Originalmethoden, beide Originalschutzstellen für manuelles Veröffentlichen. Die vier originalen Keywordproviderwege und Hab-C23-Seedfix unverändert.
+
+**Gesamttest am tatsächlich FINAL neu entpackten ZIP:** 11 Original-PHP-Testprogramme PASS (228 belegte Checks), 78/78 PHP-Lint, 87/87 ZIP-CRC, 80/87 Dateien bitidentisch zur 0.4.31.8. Die originalen Import- und DataForSEO-Dateien, der gesamte ursprüngliche K0 und die neue unabhängige KMulti-Arbeitskopie unangetastet. Horse: zwei tatsächlich früher K0-geprüfte Artikel erfolgreich in zwei simulierte WP-Entwürfe geladen; Hobby15: komplette Original-MINI/Fünffelder/K0-Paket/**MOCK**-WP-Entwurfs-Kette PASS; echte Hab-Provider-/Artikel-Freigabe fehlt.
+
+**Ehrliche Lücke:** Der Versuch eines einzige durchgehenden Hab-Recherche→MINI→K0→WP-Mock-Laufs scheiterte noch am Original-Portalrelevanz-Gate ohne aktuellen WP-Beleg (`EXTERNAL_REVIEW_REQUIRED`), danach am nicht vollständigen WP-Mock (`get_posts`). **KEINE tatsächliche positive komplette Hab-End-to-End-Simulation und kein Live-Erfolg nachgewiesen.** Es fehlt auch immer noch der unabhängige KMulti-Writer/LT68; die nachträgliche Hab-Familien-/Synonymrelevanz kann 'Paketbox' zurückweisen. Keinen künstlichen PASS aus isolierten Teiltests ableiten.
+
+**Nächster Schritt:** Bestehende Hab-Pluginversion 0.4.31.8 nur NACH Backup durch 0.4.31.9 *ersetzen, nicht deinstallieren*. **Alte Recherche fortsetzen**, keinen neuen kostenpflichtigen DataForSEO-Auftrag. Erst mit tatsächlichem positive FINALIZE und neuer Diagnose zum MINI-Export. Original-K0 nicht anfassen. Keine weiteren Pluginversionen wegen Einzelprüfungen.
+
+---
+
 # 20.11.2026 – HAB 0.4.31.8 PAA-TIMEOUT-RETTUNG, REPRODUZIERBAR ABGENOMMEN
 
 **Gültiges nächstes Hab-Release:** `Texterstellung_HAB_UND_BEWAHR_0.4.31.8_ORIGINAL_PAA_RETTUNG.zip`, SHA256 `386f303f97c117ad639f2ceeaafe26c86045705b33d810fe4667c615c50ec24a`, 522842 Bytes, abgelegt `/hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEKANDIDATEN/`. Tests + vollständiger Originaldiff im Hab-Büro `/hab-und-bewahr/TEXTERSTELLUNG/PRUEFUNG_PAA_20261120/`. GitHub-Bericht `HAB_04318_ORIGINAL_PAA_TIMEOUT_RETTUNG_GESAMTPRUEFUNG_20261120.md`.
