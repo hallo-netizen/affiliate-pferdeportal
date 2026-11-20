@@ -1,3 +1,15 @@
+# 20.11.2026 – HAB KEYWORDRECHERCHE AUS PFERDEATELIER 1:1 VERWENDET, GEBÜNDELTER SEED-FIX
+
+**Aktuelle Entwicklungskopie (NICHT live installiert):** Hab-Texterstellung **0.4.31.7**, Original-Release-Kandidat im Büro `/hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEKANDIDATEN/Texterstellung_HAB_UND_BEWAHR_0.4.31.7_BREITE_ORIGINALRECHERCHE.zip`. SHA256 `974cc101c52f274a1abf0a4777ada114e08610a5f08b10f386c3da1ff0760459`. Vollständiger Prüfbericht `HAB_04317_ORIGINAL_BREITE_RECHERCHE_4_STATIONEN_QA_20261120.md`.
+
+**Pferdeatelier-Konzept exakt übernommen:** Vier bereits vorhandene Forschungswege in PSTE 2.6: Keyword Suggestions, Related Keywords, Keyword Ideas und People Also Ask. **Nicht erneut nachgebaut.** NUR im Hab-Startseed liest die originale Queue statt ganzer C23-Redaktionssatzüberschrift die bestehende R3-Themenseite und wo sicher belegbar das darin enthaltene Produkt-Stammwort (Abholbox). Originale Category-/K0-/KMulti-Identität und der Original-Fünffelder-Auftrag unverändert. 'Hab' wird nicht mehr an Abholbox angehängt.
+
+**Tests:** 48/48 echte originale PHP-Methoden/Recherche-Routen, 17/17 Original-Hab-MINI, 14/14 Original-K0-Übergabe/Entwurfsimport-Simulation, 78/78 PHP-Lints, 87/87 ZIP CRC; 83/87 Archivdateien bytegleich zu 0.4.31.6. **Keine** DataForSEO-Abfrage / WP-Schreiboperation / neue K0-Ausführung.
+
+**Noch offene bewiesene Grenze:** Der nachgelagerte originale Familienfilter verwendet weiter C23-Satzwörter und kann 'Paketbox' oder 'Abholbox Schloss' abweisen/auf REVIEW setzen. **Diese Korrektur behebt zuerst die BREITE RECHERCHE, nicht die gesamte Textproduktion**; keine End-to-End-Freigabe behaupten. Nicht während aktivem paid Job installieren; alten Job mit alter Seedversion beenden/Diagnose sichern, dann erst Ersatz-Plugin und gezielten echten Lauf prüfen. Original K0 und selbständiger KMulti unangetastet.
+
+---
+
 # 20.11.2026 – NEUERSTER BEFUNDBLOCK: HAB-SUCHPHRASE UND 3-PORTALE-ORIGINALVERGLEICH
 
 **Zentraler vollständiger technischer Bericht:** `QA_RECHERCHE_PHRASE_ORIGINAL_PFERD_HOBBY_KMULTI_20261120.md` im selben Ordner. Echter ZIP-/Original-PHP-Vergleich Pferdeatelier 0.4.34, Hab 0.4.31.6, Hobbydepot 0.4.24.13 und neuestes Hobby 0.4.24.15; isolierte positive und negative Tests samt K0- bzw. K-Multi-Grenzen dokumentiert.
