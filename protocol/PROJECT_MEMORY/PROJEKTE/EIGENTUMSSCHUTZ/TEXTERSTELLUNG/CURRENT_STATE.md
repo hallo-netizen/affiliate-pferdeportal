@@ -1,3 +1,20 @@
+# 20.11.2026 13:41 MEZ – NEUER LIVE-NACHWEIS: HAB 0.4.31.9 IST INSTALLIERT, ALTER AUFTRAG BLEIBT HÄNGEN
+
+**Bildbeleg direkt vom Benutzer:** WordPress `Texterstellung 0.4.31.9 KISS`, Anzeige `RECHERCHE LÄUFT · BREADTH:0:FINALIZE:SANDBOX_STORE_READY`, letzter abgeschlossener Schritt ca. 11:00 +0100, `FINALIZE Schritt 3 von 3`, 9 Rohkeywords, 0 fertige Keywordkandidaten, 0 von 1 fertig, Item `BLOCKED_PENDING_PARK`, Originalfehler `PSTE_SANDBOX_RECORD_STORE_LEGACY_OPTION_MISSING`, Einzelforschung `PAUSED_ERROR`. Diese Anzeige ist **kein erfolgreicher Fortsetzungsnachweis**.
+
+**Beleg aus tatsächlich erneut geöffnetem finalem ZIP 0.4.31.9:**
+- `texterstellung.php`, Bereich `view==='recherche'`: Statuszeile `RECHERCHE LÄUFT` wird schon bei Queue `RUNNING` oder vorhandener Jobquelle dargestellt; **sie beweist keinen arbeitenden Worker**. Link `Status einmal aktualisieren` ist ausschließlich derselbe GET-/Anzeigelink und ruft keine eigene Wiederaufnahme-Aktion auf.
+- `class-pste-research-job.php`, `REPLAY_SAFE_LOCAL_FINALIZE_CODES` enthält genau vier Fehlercodes, **nicht** `PSTE_SANDBOX_RECORD_STORE_LEGACY_OPTION_MISSING`. `current()` stellt einen `PAUSED_ERROR`-Job nur bei autorisierten Wiederaufnahmecodes auf RUNNING. Der alte Speicherfehler bleibt im signierten Job gespeichert, auch nach erfolgreichem Pluginupdate.
+- `class-pste-research-driver.php::executeOneStep()` behandelt eine Queue mit `BLOCKED_PENDING_PARK` **vor** einem erneuten `PSTE_Research_Job::advance` und archiviert den blockierten Auftrag; das ist keine Wiederaufnahme. Auch `maybeKickExisting()` ist kein Beweis einer Wiederaufnahme.
+- Daher ist die in 0.4.31.9 korrigierte *Initialisierung bei einem noch laufenden Finalize* **nicht automatisch** auf den alten bereits signiert blockierten Finalize-Zustand wirksam. Das war in der bisherigen Release-Zusicherung nicht geprüft.
+- Die vorherige Diagnose `texterstellung-diagnose-20261120-110147.json` dokumentiert dieselbe ältere Pause auf 0.4.31.8, inklusive `phase=FINALIZE`, `finalize_stage=SANDBOX_STORE_READY`, `status=PAUSED_ERROR`, `BLOCKED_PENDING_PARK`; der neue Screenshot zeigt, dass genau dieser Zustand nach 0.4.31.9 noch vorhanden ist.
+
+**Nächster technischer Reparaturauftrag:** Die **bereits vorhandene**, gesicherte Research-Job-/Queue-Wiederaufnahme für genau diesen lokalen, vollständig abgeschlossenen Anbieterabschnitt erweitern, so dass der vorhandene signierte Auftrag unter Erhalt aller Daten, `job_uuid`, `category_id`, Child-/Queue-Besitzeridentität und der 9 Rohkeywords nach Behebung der lokalen Speicheroption einmalig autorisiert fortgesetzt wird, **ohne** neue DataForSEO-POSTs und ohne neue Redaktion/Kategorieentscheidung. Positiv/negativ simulieren: alter realer `PAUSED_ERROR` plus Queue `BLOCKED_PENDING_PARK`, fehlender/gefüllter Altspeicher, Fremdjob, manipulierte Signatur, leerer Job, andere Pausencodes, doppelte Wiederaufnahme, Fehler bei initialem Archivpark. **Bis zur bestandenen Simulation kein neues ZIP und kein behaupteter E2E-PASS.** Eventuell bereits archivierte/fehlende Daten niemals löschen.
+
+**Keine sichere Benutzeraktion zum automatischen Freigeben im aktuellen 0.4.31.9:** Nicht `Recherche abbrechen`, keine neue bezahlte Kategorie starten. `Status einmal aktualisieren` zeigt nur den Zustand, es ist kein Reparaturknopf.
+
+---
+
 # 20.11.2026 – AKTUELLSTE HAB-TEXTERSTELLUNG 0.4.31.9 / HOBBY-GESAMTFEHLERLISTE
 
 **WICHTIG:** Installierter Betreiberstand laut 12:00-Screenshot 0.4.31.8; neuer *nur lokal getesteter* Kandidat v0.4.31.9. Zip `Texterstellung_HAB_UND_BEWAHR_0.4.31.9_HOBBY_FEHLERLISTE_ORIGINAL_GEPRUEFT.zip` im Hab-Büro `/hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEKANDIDATEN`; SHA256 `c6565150120d2f493d811e2e2185f92cce3a6d46d41f8199bce4d9b4086e222e`; maschinenlesbare QA und originaler Quell-Diff in `/hab-und-bewahr/TEXTERSTELLUNG/PRUEFUNG_VOLLWORKFLOW_20261120/`.
