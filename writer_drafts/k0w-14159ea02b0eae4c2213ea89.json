@@ -7,7 +7,9 @@
     "decision": "INCLUDE_ADDED_VALUE",
     "rationale": "Die Tabelle ordnet belegte Tatsachen konkreten Situationen und sinnvollen Maßnahmen gegenüber."
   },
-  "lt_authoritative_terms": [],
-  "revision_count": 4,
+  "lt_authoritative_terms": [
+    "Stallaltag"
+  ],
+  "revision_count": 5,
   "publish_allowed": false
 }
