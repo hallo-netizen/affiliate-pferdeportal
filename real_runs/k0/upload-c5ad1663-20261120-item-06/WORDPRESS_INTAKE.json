@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Können Pferde bei Regen auf die Weide?",
+      "target_keyword": "Können Pferde bei Regen auf die Weide?",
+      "category": "alltags-pferde-haltungsformen",
+      "article_type": "FAQ",
+      "plan_slot": "edbb8d6c0cd40ee5b051f36da417687003f8404e7df6f87955dbc41dba5a848e"
+    }
+  ],
+  "batch_sha256": "76f3b2e0fddcfa4e0796dda62c54bc8214ef5431f1c8a805e669402aa222a274"
+}
