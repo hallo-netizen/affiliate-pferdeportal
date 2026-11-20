@@ -1,0 +1,180 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Können Pferde bei Regen auf die Weide?",
+    "target_keyword": "Können Pferde bei Regen auf die Weide?",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "FAQ",
+    "plan_slot": "edbb8d6c0cd40ee5b051f36da417687003f8404e7df6f87955dbc41dba5a848e"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+          "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/"
+        }
+      ],
+      "claims": [
+        "Pferde benötigen auf der Weide geeigneten Wetterschutz.",
+        "Weidegang ist auch bei schwierigen Bedingungen nur mit passender Infrastruktur sinnvoll.",
+        "Pferdeweiden können zeitweise geschont oder gesperrt werden.",
+        "Bei undurchlässigen Böden müssen Regenwasserableitungen berücksichtigt werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Können Pferde bei Regen auf die Weide?",
+      "topic": "Können Pferde bei Regen auf die Weide?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Können Pferde bei Regen auf die Weide?"
+    },
+    "research_claims": {
+      "F1": {
+        "statement": "Pferde benötigen auf der Weide geeigneten Wetterschutz.",
+        "evidence_text": "Damit sich die Pferde zurückziehen können, ist eine dreiseitig geschlossene Schutzhütte Pflicht.",
+        "evidence_text_sha256": "d38ae98a60b4921e9384d1099cb0ef60fe068d707c2b2f4ada425946aa49142e",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "statement": "Weidegang ist auch bei schwierigen Bedingungen nur mit passender Infrastruktur sinnvoll.",
+        "evidence_text": "Auch auf der Weide sollten Pferde immer Zugang zu Wasser und Schatten haben.",
+        "evidence_text_sha256": "bf36bd3f7fcb5c76bd5653145090ca86bd5b8bf2d5a3752cd05f6ed3214b9621",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "statement": "Pferdeweiden können zeitweise geschont oder gesperrt werden.",
+        "evidence_text": "In Phasen, in denen die Weidefläche geschont und gesperrt wird, ist der sandaufgeschüttete Auslauf mit ständig zugänglichem Raufutter eine gute vorübergehende Alternative.",
+        "evidence_text_sha256": "8d990726e731eebf6ce5512f49da8f14f29383f45eab14b9af8ee262b6dfdce2",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "statement": "Bei undurchlässigen Böden müssen Regenwasserableitungen berücksichtigt werden.",
+        "evidence_text": "Bei undurchlässigen Lehm- oder Tonböden sind unmittelbar unter dem Sand und dem Kunststoffvlies Drainagerohre nötig, die das Regenwasser ableiten.",
+        "evidence_text_sha256": "f79b5ce0b31c3bd3f186b359f47a556907360527d4c7d9d90db0247376b18131",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "Pferdehaltung Grundlagen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdedecken-regendecken-faq/",
+        "anchor": "FAQ Regendecken",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-regendecken-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Weide",
+      "Haltung",
+      "Kosten",
+      "Wetter",
+      "Größe",
+      "Weidegang",
+      "Reitplatz",
+      "Stall",
+      "Futter",
+      "Tierbesatz",
+      "Boden",
+      "Schutz",
+      "Miete",
+      "Grundstück",
+      "Recht",
+      "Organisation",
+      "Beratung",
+      "Auslauf",
+      "Sicherheit",
+      "Bedingungen",
+      "Regen",
+      "Winter",
+      "Pflege",
+      "Wasser",
+      "Genehmigung",
+      "Tierseuchenkasse"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die Tabelle ordnet belegte Tatsachen konkreten Situationen und sinnvollen Maßnahmen gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
