@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie groß muss ein Grundstück für private Pferdehaltung sein?",
+      "target_keyword": "Wie groß muss ein Grundstück für Pferdehaltung sein?",
+      "category": "alltags-pferde-haltungsformen",
+      "article_type": "FAQ",
+      "plan_slot": "45dcd50390b5377bfd815a0bc570463fad5b71771142f25fb96f7ddbac94257c"
+    }
+  ],
+  "batch_sha256": "5fc496cafffb978e8ffaf41dc5a5535cdb74489d4d1c56f8d9c7ca528f644efb"
+}
