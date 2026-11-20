@@ -183,3 +183,106 @@ Nächster KISS-Schritt:
 - keine weitere Diagnose-Plugin-Runde;
 - als nächstes kleine Design-/Frontend-Helfer auf Zusammenführung bzw. Doppelung prüfen, beginnend mit `Canonical Table Contract V1` und `Pferde Atelier – Anzeigenmarkt & Journal Breadcrumbs`;
 - erst Quell-/Funktionsprüfung, dann Änderung.
+
+
+## Ursachenanalyse nach Referenzlauf 20.11.2026 – Hauptursache eingegrenzt
+
+### 1. Bewiesene Hauptursachenfamilie
+Die tiefe Kategorie-Langsamkeit sitzt weiterhin im serverseitigen Kategorie-Produktpfad innerhalb von `the_content`.
+
+Beweis aus dem Profil:
+- `/ausruestung/`: Ø 3.120,78 ms, davon `the_content` Ø 958,917 ms.
+- `/ausruestung/ausruestung-sattel/`: Ø 5.365,90 ms, davon `the_content` Ø 2.326,703 ms.
+- `/ausruestung/ausruestung-sattel/pferdesaettel/`: Ø 7.373,52 ms, davon `the_content` Ø 5.394,826 ms = 73,1 %.
+- Pferdesättel hatte dabei weniger DB-Zeit als die Ebene Sattel, aber deutlich mehr CPU- und interne Cachearbeit.
+- externe HTTP-Zeit auf diesen Zielrequests: 0 ms.
+
+Aktueller Lauf nach Deaktivierung der vier Diagnoseplugins bestätigt denselben Strukturunterschied:
+- Pferdesättel: 4.925,27 ms / CPU 3.116,02 ms / 327 Queries / 138.943 Cache-Hits / 10.530 Misses.
+- Satteldecken: 2.960,25 ms / CPU 2.240,42 ms / 318 Queries / 85.599 Cache-Hits / 10.526 Misses.
+- Differenz: nur 4 zusätzliche Cache-Misses und 9 Queries, aber 53.344 zusätzliche Cache-Hits und rund 876 ms zusätzliche CPU.
+- Beide Requests laden denselben Plugin-/Theme-Dateibestand sowie 36 Scripts / 30 Styles.
+
+Schluss:
+Die tiefe Seite braucht nicht wesentlich mehr verschiedene Daten. Sie verarbeitet/liest bereits geladene Daten wesentlich häufiger. Das ist ein CPU-/Wiederholungsproblem im Inhalts-/Produktauswahlpfad, kein primärer Netzwerk-, Asset- oder DB-Miss-Fehler.
+
+### 2. Exakter Quellpfad
+Template 1.50.616:
+`auto_append_category_tiles_to_content()` -> `render_category_level_v150269()` -> drei Shortcodes:
+- `category_product_1`
+- `category_product_2`
+- `category_product_3`
+
+Affiliate 6.72.362:
+`pp_affiliate_slot` -> `shortcode_affiliate_slot` -> `render_affiliate_slot` -> `render_affiliate_slot_for_context` -> `select_campaign_for_slot` -> `select_category_product_campaign_fast_v672171`.
+
+Der gemeinsame Kandidatenaufbau `category_product_shared_rank_base()` wird bereits einmal request-lokal gebaut. Danach läuft für jeden der drei Slots erneut ein eigener Auswahlpfad über die breite Kandidatenbasis:
+- slot-spezifische Placement-Prüfung,
+- Relevanzband-Bildung,
+- Control/Health,
+- Provider-Cohort,
+- Providerstrategie,
+- Bildprüfung,
+- strikte Relevanz,
+- Shared-Offer/GTIN-Bewertung,
+- Provider-Mix,
+- bei Bedarf Portal-Fallback.
+
+Mehrere einzelne Gates besitzen bereits request-lokale Ergebnis-Caches. Trotzdem werden die Kandidatenlisten und die nachgelagerten Auswahlstufen pro Slot erneut durchlaufen.
+
+### 3. Historischer Gegenbeweis / gleiche Ursachenfamilie
+6.72.171 hatte exakt diesen Problemtyp bereits adressiert:
+- historischer Snapshot: 2.012 Produktzeilen, 710 Kandidaten je Slot.
+- Shared-Ranking/Wiederverwendung reduzierte isolierte Gesamtarbeit von 1.248,595 auf 249,597 ms (-80,01 %).
+- Leaf-Pfad 587,812 -> 59,572 ms (-89,87 %).
+- ausgewählte Kampagnen, Reihenfolge, Kandidatenzahl und HTML-Hashes blieben identisch.
+
+Spätere fachlich notwendige Erweiterungen ab 6.72.226/237 haben hinter dem Shared-Base wieder zusätzliche Mehranbieter-, Relevanzband-, Fallback- und Providerarbeit ergänzt. Diese Funktionen bleiben fachlich erforderlich; die Lösung darf sie nicht entfernen.
+
+### 4. Bereits behobene Teilursachen – nicht erneut anfassen
+- Template 1.50.616: Child-Page-N+1 bereits beseitigt (813 -> 0 identische Query-Familie).
+- Affiliate 6.72.361: verlorene Cross-Slot-Wiederverwendung im eBay Provider-Cohort wiederhergestellt; gleicher Output.
+- Affiliate 6.72.362: quadratische GTIN-Prüfung in `multiprovider_reorder_candidates()` auf Set-Lookup umgestellt; isolierter Pfad deutlich schneller, Ausgabe identisch.
+Diese Fixes sind real, aber die aktuellen ~139.000 Cache-Hits beweisen, dass weitere Restarbeit im breiten Kategorie-Produktpfad bleibt.
+
+### 5. Gefundene echte Neben-Doppelungen – nicht mit Hauptursache verwechseln
+Im aktuellen Quellstand wurden weitere echte Wiederholungen gefunden:
+- `campaign_control_base_allows_delivery()` prüft den Provider direkt und `control_partner_gate()` prüft denselben Provider bei vorhandener Partner-ID nochmals.
+- der historische Incident-Pfad `category_product_incident_inactive_auto_allowed()` liest für inaktive Kandidaten wiederholt dieselben Incident-Optionen; der 2.012-Zeilen-Historien-Snapshot selbst wird nur einmal pro Request aufgebaut.
+- `ebay_public_checkpoint_allows_business_campaign()` normalisiert/sortiert die vollständige BUSINESS-ID-Liste pro erstmals geprüftem eBay-Kandidaten erneut.
+- GTIN-Metadaten werden in mehreren späteren Mehranbieter-Stufen erneut abgefragt; die zugrundeliegenden Daten sind im WordPress-Request meist schon im Cache.
+
+Diese Punkte sind real, aber lokale Größenordnungsprüfungen zeigen für einzelne dieser Teilstücke nur Millisekunden bis niedrige zweistellige Millisekunden. Sie werden deshalb nicht als mehrsekündiger Root Cause verkauft und nicht einzeln mit neuen Pluginversionen abgearbeitet.
+
+### 6. Harte Ausschlüsse
+Nicht als Hauptursache der tiefen Kategorie belegt:
+- externe Provider-HTTP-Aufrufe,
+- Footer/Shutdown,
+- fehlende Designassets,
+- Template-Child-N+1,
+- reine Queryanzahl,
+- fehlender persistenter Object Cache,
+- die vier deaktivierten Diagnoseplugins,
+- Astra allein.
+
+Server-/Hostlast kann absolute Zeiten schwanken lassen, erklärt aber nicht den reproduzierbaren URL-/Kandidaten-abhängigen CPU-/Cacheunterschied.
+
+### 7. Zulässiger nächster Rootfix-Ansatz
+Kein weiterer Mikrofix.
+
+Nächster technischer Kandidat ist ein gemeinsamer request-lokaler **Kategorie-Produkt-Bundle-Pfad** für `category_product_1..3`:
+- Shared Base weiterhin einmal.
+- slot-unabhängige Kandidatenarbeit einmal je Kandidat.
+- slot-spezifische Placement-/Veto-/Positionsregeln bleiben getrennt.
+- alle drei Endergebnisse werden in einem gemeinsamen Durchlauf berechnet und danach nur noch Slot 1/2/3 entnommen.
+- keine Freigabe-, Source-, Health-, Bild-, Provider-, GTIN-, Relevanz- oder Fallbackregel entfernen.
+
+Vor einer installierbaren Version zwingend:
+1. exakter Alt/Neu-Funktionsdiff,
+2. historischer 2.012-Zeilen-/710-Kandidaten-Snapshot A/B,
+3. Outputidentität für alle drei Slots und alle Provider-Modi,
+4. Positiv-/Negativfälle für unterschiedliche Slot-Placements,
+5. Veto/Health/Source/Bild/Fallback identisch,
+6. danach erst eine Testversion und ein Live-Messlauf.
+
+Dieser Ansatz geht an die bewiesene Hauptursachenfamilie statt weitere einzelne Symptome zu reparieren.
