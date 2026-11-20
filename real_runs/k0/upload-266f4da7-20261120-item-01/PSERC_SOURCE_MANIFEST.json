@@ -1,0 +1,114 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 5,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Wie verabschieden sich Pferde?",
+        "target_keyword": "Wie verabschieden sich Pferde?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "45b52547d85cf112b90ff3d0faf050534d65349d9f07782b54ee5c0045322cec"
+      },
+      {
+        "title": "Vermissen Pferde ihre Besitzer?",
+        "target_keyword": "Vermissen Pferde ihre Besitzer?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "18e4fda5de2c0ea4e99b9e238ee0c680390680fd1e55aab6b572fa95af241d9e"
+      },
+      {
+        "title": "Dürfen Pferde Regenwasser trinken?",
+        "target_keyword": "Dürfen Pferde Regenwasser Trinken?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "6caf3438dc292eeb904eca309767c8e55b28802e49f4696a60894a9457f7788e"
+      },
+      {
+        "title": "Welche Wirkung hat Weidenrinde auf Pferde?",
+        "target_keyword": "Welche Wirkung hat Weidenrinde auf Pferde?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "0dda322212762d6c04f36653c9b5b5ec5b6338dee56b5e98497bb68b643b4c94"
+      },
+      {
+        "title": "Kann man ein 30 Jahre altes Pferd noch reiten?",
+        "target_keyword": "Kann man ein 30 Jahre altes Pferd noch reiten?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "74851e633cf66b77d4e78a092e5baff55a8d9c7b2de07bf539081fdfa38a3897"
+      }
+    ],
+    "batch_sha256": "266f4da7ff2c64e0b7671384b50516d7ddd28f3ee1dad95fdd791efc4f92f9d7"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Wie verabschieden sich Pferde?",
+        "target_keyword": "Wie verabschieden sich Pferde?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "45b52547d85cf112b90ff3d0faf050534d65349d9f07782b54ee5c0045322cec"
+      },
+      "order_id": "TXE-eae683cfc002a56521b50675c4798c90",
+      "article_id": "article:9804f8435d4a6a5b31ce4be6",
+      "search_intent": "Woran erkennt man bei Pferden ein Abschiedsverhalten gegenüber Artgenossen oder vertrauten Menschen und wie lässt es sich vorsichtig deuten?"
+    },
+    {
+      "metadata_binding": {
+        "title": "Vermissen Pferde ihre Besitzer?",
+        "target_keyword": "Vermissen Pferde ihre Besitzer?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "18e4fda5de2c0ea4e99b9e238ee0c680390680fd1e55aab6b572fa95af241d9e"
+      },
+      "order_id": "TXE-e9901f8790bdcc8d2042e23c2780783d",
+      "article_id": "article:2d45e6c9761c6e1a5147828b",
+      "search_intent": "Können Pferde die Abwesenheit vertrauter Bezugspersonen vermissen und welche Verhaltenszeichen sind aussagekräftig?"
+    },
+    {
+      "metadata_binding": {
+        "title": "Dürfen Pferde Regenwasser trinken?",
+        "target_keyword": "Dürfen Pferde Regenwasser Trinken?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "6caf3438dc292eeb904eca309767c8e55b28802e49f4696a60894a9457f7788e"
+      },
+      "order_id": "TXE-a4ea0824ee4360c974ca2047908a5be4",
+      "article_id": "article:a0a14cd1723081ce2aca6960",
+      "search_intent": "Unter welchen hygienischen Voraussetzungen können Pferde aufgefangenes Regenwasser trinken und wann ist es ungeeignet?"
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Wirkung hat Weidenrinde auf Pferde?",
+        "target_keyword": "Welche Wirkung hat Weidenrinde auf Pferde?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "0dda322212762d6c04f36653c9b5b5ec5b6338dee56b5e98497bb68b643b4c94"
+      },
+      "order_id": "TXE-13b990fc6ec1b05d07df4015c8924603",
+      "article_id": "article:f62bf566029a2947943454ab",
+      "search_intent": "Welche pflanzlichen Inhaltsstoffe enthält Weidenrinde und welche belegten Wirkungen und Risiken gibt es für Pferde?"
+    },
+    {
+      "metadata_binding": {
+        "title": "Kann man ein 30 Jahre altes Pferd noch reiten?",
+        "target_keyword": "Kann man ein 30 Jahre altes Pferd noch reiten?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "74851e633cf66b77d4e78a092e5baff55a8d9c7b2de07bf539081fdfa38a3897"
+      },
+      "order_id": "TXE-ba555ee0d5982a64564950d9b65b77ad",
+      "article_id": "article:6000e66cf1588c5431529d90",
+      "search_intent": "Unter welchen gesundheitlichen und körperlichen Voraussetzungen kann ein 30 Jahre altes Pferd noch schonend geritten werden?"
+    }
+  ],
+  "manifest_sha256": "b6bd051093203ec6c98b1eb0e435b20e97c1210fad6a8b8268b3df8d5d568e4c"
+}
