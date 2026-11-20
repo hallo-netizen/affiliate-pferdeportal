@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Kann man ein 30 Jahre altes Pferd noch reiten?",
+      "target_keyword": "Kann man ein 30 Jahre altes Pferd noch reiten?",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "74851e633cf66b77d4e78a092e5baff55a8d9c7b2de07bf539081fdfa38a3897"
+    }
+  ],
+  "batch_sha256": "ecf343b2e92387470c31388307914f74a669db890923761a10b4f3f55f303c6a"
+}
