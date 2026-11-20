@@ -719,3 +719,107 @@ Ziel dieses einen Laufs:
 - dadurch Beweis, ob Restlast aus Fallback, eBay-Cohort-Key-Aufbau, GTIN-Metadaten, Source-/Provider-Gates oder einem anderen konkreten Zweig stammt.
 
 Der Tiefenlauf ist KEIN Wall-Time-Benchmark; die 7.0-Diagnose dokumentiert selbst, dass Deep-Observer Zusatzlast erzeugen. Für absolute Zeiten bleibt PROFILE/PASSIV maßgeblich. Der Deep-Lauf dient ausschließlich der Ursachenattribution.
+
+
+## Rootfix-Kandidat 6.72.365 – Kategorieprodukt-Bundle – 20.11.2026
+
+### Ausgangsbeweis / Ursache
+Maßgeblich bleibt der saubere PROFILE-Lauf 7.0:
+- Pferdesättel: category_product_1/2/3 zusammen 2998,124 ms.
+- Satteldecken: dieselben drei Slots zusammen 724,945 ms.
+- Differenz der drei Slots: 2273,179 ms = ca. 76,9 % der gesamten Routendifferenz.
+- Slot 2/3 Pferdesättel bleiben mit 622/691 ms teuer, während Satteldecken nach Slot 1 auf 66/62 ms fällt.
+Damit ist die wiederholte Kategorieprodukt-Nachbearbeitung direkt als Ursachenfamilie gemessen.
+
+Wichtige Korrektur zum DEEP-Lauf 16:32:
+- DEEP hängt selbst Beobachter an sanitize_key/get_post_metadata usw.
+- 6.72.362 deaktiviert bei solchen dynamischen Filtern bewusst bestimmte Request-Caches.
+- Die dort gemessenen absoluten sanitize_key-/Meta-Zahlen sind deshalb kein sauberer Produktions-Wall-Time-Beweis.
+- DEEP bleibt für Callsite-/Breitenhinweise nutzbar; PROFILE bleibt Kausal-/Zeitreferenz.
+
+### Exakter Quellstand
+6.72.362 wurde aus dem gesicherten 6.72.361-Paket + ausschließlich dem dokumentierten 6.72.362-GTIN-Set-Patch rekonstruiert.
+Fingerprints stimmen mit Live überein; Änderungen werden gegen diesen Stand geprüft.
+
+### Was 6.72.365 ändert
+Ausschließlich category_product_1..3:
+- Die historische Nachbearbeitungssequenz bleibt identisch:
+  eBay/Provider-Cohort
+  -> Providerstrategie
+  -> Bildfreigabe
+  -> Strict-Relevance-Guard
+  -> Shared-Offer/GTIN
+  -> Provider-Mix.
+- Wenn Slot 2/3 mit dem exakt gleichen vollständigen Kandidatenzustand und unveränderten Provider-/Amazon-Einstellungen kommen, wird nicht die komplette Nachbearbeitung erneut ausgeführt.
+- Wiederverwendet wird nur ein Auswahlplan:
+  geordnete Post-IDs + bestehende _ppar_product_provider_count-Markierung.
+- Kandidaten selbst werden auf Cache-Treffer aus dem aktuellen Slot-Input neu zusammengesetzt.
+- Schon eine beliebige Änderung im vollständigen Kandidatenarray erzeugt einen anderen Schlüssel und erzwingt den alten 6.72.362-Weg.
+- Bei dynamischen Meta-/Option-/Shortcode-/Sanitizer-/Image-Filtern, externem Object Cache, Admin/AJAX/REST/Cron/CLI, fehlender Runtime-Normalisierung, fehlender/duplizierter Post-ID oder Nicht-Kategorie-Slot wird der historische Weg benutzt.
+
+### Inhaltlicher Funktionsbeweis
+- Die sechs wiederverwendeten Nachbearbeitungsschritte behandeln category_product_1, _2 und _3 in ihrem ausführbaren Code als dieselbe Slotfamilie; keine Sonderentscheidung nur für 1, 2 oder 3.
+- Transitive Quellprüfung ab diesen sechs Schritten: 62 erreichbare Funktionen bis Tiefe 7.
+- In diesem erreichbaren Auswahlbaum: 0 WordPress-Schreiboperationen (keine Option-/Meta-/Post-/Transient-/Cron-/direkte DB-Schreibung).
+- Kandidatenmutation im alten Nachbearbeitungsweg: ausschließlich bestehende Request-Markierung _ppar_product_provider_count; kein Kampagneninhalt wird verändert.
+- Genau diese Markierung wird im Auswahlplan erhalten; alle übrigen Felder stammen stets aus dem aktuellen Kandidatenarray.
+
+Semantiktests:
+- Auswahlplan-Mechanismus auf echtem 6.72.365-Code: 12.000 Zufallsfälle, 0 Abweichungen.
+- Jede zufällige inhaltliche Änderung eines Kandidaten invalidierte den Schlüssel.
+- Dynamic-filter / unnormalisiert / doppelte Post-ID / Nicht-Kategorie: Fastpath jeweils korrekt gesperrt.
+- Provider-/GTIN-/Mix-Matrix mit den unveränderten historischen Funktionskörpern: 2.266 Fälle, 0 Ausgabeabweichungen.
+- enthalten: alle fünf Provider-Modi, kleine/mittlere/breite Mengen bis 710 Kandidaten, veränderte Slot-Inputs, GTIN-/Amazon-/Providerzustände.
+
+### Struktureller Funktionsschutz 6.72.362 -> 6.72.365
+- Dateien 66 -> 66; entfernt 0; hinzugefügt 0.
+- Geänderte Dateien nur Hauptdatei + readme.
+- Benannte Funktionen 1552 -> 1555.
+- bestehende Funktionen entfernt: 0.
+- neu exakt 3 interne Performance-Helfer.
+- bestehende Funktionskörper geändert: exakt 1, select_category_product_campaign_fast_v672171; dort wird die unveränderte historische Mittelsequenz lediglich an den neuen Helper delegiert.
+- Gate-Reihenfolge Alt/Neu identisch:
+  Control -> Health -> Cohort -> Providerstrategie -> Bild -> Relevanz -> Shared Offer -> Provider-Mix -> Fallback.
+- Shared Base, Control, Health, Bild, Fallback, Strict Relevance, Provider Mix vollständig unverändert.
+- sämtliche eBay-/idealo-/Amazon-Traits unverändert.
+- 6.72.362-GTIN-Set-Fix bleibt unverändert erhalten.
+- Hooks/Filter/Shortcodes 214 -> 214, Multimenge identisch.
+- alle gezählten Produktions-Schreibwege identisch:
+  update_option 290, add_option 7, delete_option 37,
+  update_post_meta 80, add_post_meta 1, delete_post_meta 9,
+  wp_insert_post 3, wp_update_post 12, wp_delete_post 1,
+  set_transient 11, delete_transient 12,
+  wp_schedule_event 9, wp_schedule_single_event 36, wp_clear_scheduled_hook 34.
+- kein Schreib-Callsite hinzugefügt/entfernt.
+
+### Kausaler lokaler Performance-A/B
+Gleicher Postprocessing-Block dreimal (Alt) gegen einmal + Auswahlplan-Wiederverwendung (Neu), mit vollständigem Kandidaten-Hash und Planrekonstruktion:
+- 43 Kandidaten: 0,675 -> 0,292 ms, -56,7 %.
+- 196 Kandidaten: 15,123 -> 5,345 ms, -64,66 %.
+- 710 Kandidaten: 283,821 -> 94,575 ms, -66,68 %.
+Diese lokale Messung beweist die Wirkung exakt in dem geänderten Wiederholungsblock; sie ist keine Vorhersage der gesamten Live-Seitenzeit.
+
+### Finales Paket
+PFERDEATELIER_AFFILIATE_6.72.365_CATEGORY_PRODUCT_BUNDLE_ROOTFIX_TEST.zip
+SHA-256: c4e84a067c11bc239e65502ec1ead75abc1aef71bbd3e6cf6a477e785b2e9902
+- ZIP-Test PASS
+- 66/66 Dateien nach Entpacken byteidentisch zum geprüften Kandidaten
+- PHP-Lint 23/23 PASS
+- exakt aus finaler ZIP erneut 12.000 Auswahlplan-Fälle: 0 Abweichungen.
+
+### Bewusst NICHT aufgenommen
+- 6.72.363 Read-Cache: gesperrt, Semantikrisiko idealo-Upgrade und zu kleiner Effekt.
+- verworfener 6.72.364 Shared-Offer-GTIN-Mikrofix: isoliert schnell, aber im realen Kategoriepfad nicht ausreichend ursächlich.
+- Provider-Mix array_shift: <1 ms / nicht relevant.
+- doppelte Strategieprüfung: <1 ms / nicht relevant.
+- eBay-Titel-Prefilter: wenige ms / nicht stabil besser.
+- Designplugin-Zusammenlegung: kein spürbarer Performancebeweis.
+- Astra/Kubio: nicht Ursache des routeabhängigen Hauptdeltas.
+
+### Freigabevertrag
+6.72.365 ist der erste installierbare Produktions-Testkandidat nach 6.72.362.
+Nach Installation genau ein sauberer PROFILE/PASSIV-Vergleich gegen die bestehende Referenz.
+Behalten nur wenn:
+1. Produktausgabe/Provider/Fallback/Veto/Health/Bilder/Tracking unverändert,
+2. category_product_2/3 und Gesamtroute real schneller,
+3. keine neue Regression auf Satteldecken/anderen Referenzseiten.
