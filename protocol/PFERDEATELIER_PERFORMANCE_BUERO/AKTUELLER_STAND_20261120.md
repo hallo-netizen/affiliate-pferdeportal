@@ -426,3 +426,60 @@ Die hohe Hostlast kann absolute Zeiten stark verstärken; sie erklärt aber nich
   3. 6.72.362-GTIN-Rootfix erhalten bleibt,
   4. Funktions-/Hook-/Schreib-/Provider-/Fallback-/Veto-/Health-/Bild-/Tracking-Verhalten inhaltlich identisch nachgewiesen ist,
   5. erst danach eine einzige Installationsdatei entsteht.
+
+
+## Kubio/Astra-Prüfung – 20.11.2026
+
+### Kubio
+Belegt:
+- Auf den normalen Kategorie-/Unterseiten des letzten PASSIV-Laufs werden keine Kubio-Frontend-CSS/JS-Assets ausgeliefert.
+- Trotzdem werden im PHP-Request ca. 294 Kubio-Dateien geladen.
+- Pferdesättel und Satteldecken laden denselben Kubio-Grundbestand, unterscheiden sich aber stark:
+  - Pferdesättel 4.925 ms / CPU 3.116 ms / 138.943 Cache-Hits
+  - Satteldecken 2.960 ms / CPU 2.240 ms / 85.599 Cache-Hits
+- Damit ist Kubio als Ursache des route-/kandidatenabhängigen Mehrverbrauchs ausgeschlossen. Kubio kann nur Teil einer gemeinsamen Grundlast sein.
+- Die Startseite lädt zusätzlich Kubio-Frontendassets, liegt mit CPU ca. 1.814 ms aber nicht über /ausruestung/ mit ca. 1.880 ms CPU.
+- WXR-Stand: 13 saved_in_kubio-Marker, davon 12 mit Wert 1; 98 echte wp:kubio-Blöcke. Unter den betroffenen Seiten sind Start, Impressum, AGB, Datenschutz, Disclaimer, Werbebedingungen und weitere Seiten.
+Entscheidung:
+- Kubio NICHT jetzt auf Live deaktivieren.
+- Permanente Entfernung nur nach Migration der verbleibenden Kubio-Blöcke.
+- Ein A/B-Test durch temporäre Deaktivierung auf einer zweiten echten Testkopie ist sinnvoll, um die gemeinsame Grundlast zu quantifizieren. Er ist aber kein Rootfix-Test für Pferdesättel.
+
+### Astra
+Belegt:
+- Astra ist aktives Theme; auf normalen Seiten werden astra-theme-css, astra-theme-js und astra-live-search geladen.
+- Pferdesättel und Satteldecken laden denselben Astra-PHP-Grundbestand (ca. 244 Dateien) und dieselben Astra-Assets, unterscheiden sich trotzdem um ca. 1.965 ms Wall und 876 ms CPU.
+- Astra ist damit nicht Ursache des route-/kandidatenabhängigen Hauptunterschieds.
+- Das aktuelle Template-Kit ist fachlich stark an Astra gekoppelt. Exakte 1.50.616-Vorgängerstruktur enthält u.a. direkte Astra-Hooks/Filter für:
+  - astra_content_before
+  - astra_entry_top
+  - astra_post_featured_image_condition
+  - astra_featured_image_enabled
+  - astra_primary_content_top
+  - astra_related_posts_query_args / related posts
+  - astra_footer_copyright
+  - Header/Footer-Builder-Entkopplung
+- Quellkommentar des Template-Kits: eigener Pferde-Atelier-Header ersetzt Astra-Header, Astra bleibt aber als Theme für Layout/Content aktiv.
+Entscheidung:
+- Astra jetzt NICHT deaktivieren/auskommentieren.
+- Ein Themewechsel wäre kein sauberer Performance-A/B-Test, sondern verändert den Renderingvertrag und erfordert Design-/Hook-Umbau.
+- Astra bleibt, solange kein eigener Theme-Ersatz mit identischer Ausgabe existiert.
+
+### Kategorie-Renderer
+Exakter Template-Kit-1.50.616-Code geprüft:
+- auto_append_category_tiles_to_content -> render_category_level_v150269
+- Template baut Seitentext/Kacheln und ruft dann category_affiliate_layout_v150341.
+- category_real_affiliate_products_only_v150341 ruft exakt drei Shortcodes:
+  category_product_1, category_product_2, category_product_3.
+- Affiliate get_content_context() besitzt bereits request-lokalen Cache; die drei Shortcodes bauen den Seitenkontext daher nicht dreimal vollständig neu.
+- Der genaue Anteil der pp_affiliate_slot-Callbacks am mehrsekündigen the_content-Block ist mit Diagnose 6.0 noch nicht direkt gemessen.
+
+### Nächster einzelner KISS-Messschritt
+Performance Diagnose Safe 6.1.0 existiert bereits und wurde genau für diese offene Attribution gebaut.
+Es verändert keine Produktionsplugins/-daten und ergänzt:
+- tatsächliche Laufzeit jedes Shortcodes inkl. pp_affiliate_slot mit type/intent,
+- the_content-Prioritätsbänder,
+- the_content-Callback-Inventar.
+QA: keine neuen Post-/Meta-/Cron-/DB-Schreibwege; Shortcode- und the_content-Rückgabewerte in Sicherheitssimulation unverändert.
+
+Damit soll genau EIN Profillauf die noch offene Frage entscheiden, bevor ein weiterer Produktionsplugin-Kandidat gebaut wird.
