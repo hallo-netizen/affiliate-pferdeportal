@@ -1,0 +1,139 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "pferdegesundheit-verstehen",
+    "plan_slot": "0dda322212762d6c04f36653c9b5b5ec5b6338dee56b5e98497bb68b643b4c94",
+    "target_keyword": "Welche Wirkung hat Weidenrinde auf Pferde?",
+    "title": "Welche Wirkung hat Weidenrinde auf Pferde?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "University of Saskatchewan – Willow bark and salicin",
+          "source_url": "https://research.usask.ca/tedx/2025.php"
+        },
+        {
+          "source_title": "MSD Veterinary Manual – Nonsteroidal Anti-inflammatory Drugs",
+          "source_url": "https://www.msdvetmanual.com/pharmacology/inflammation/nonsteroidal-anti-inflammatory-drugs-in-animals"
+        }
+      ],
+      "claims": [
+        "Weidenrinde enthält Salicin; Aussagen zur Schmerzhemmung stammen unter anderem aus dem allgemeinen pflanzenmedizinischen Kontext.",
+        "Weidenrinde wird traditionell auch wegen entzündungshemmender Eigenschaften geschätzt; eine für Pferde gesicherte Dosierung folgt daraus nicht.",
+        "Überdosierungen von Salicylaten und verwandten Arzneimitteln sind mit ernsthaften Risiken verbunden; deshalb muss ein Tierarzt die Behandlung beurteilen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welche Wirkung hat Weidenrinde auf Pferde?",
+      "topic": "Welche Wirkung hat Weidenrinde auf Pferde?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Wirkung hat Weidenrinde auf Pferde?"
+    },
+    "research_claims": {
+      "F1": {
+        "statement": "Weidenrinde enthält Salicin; Aussagen zur Schmerzhemmung stammen unter anderem aus dem allgemeinen pflanzenmedizinischen Kontext.",
+        "evidence_text": "The active ingredient in willow bark is salicin, which was the precursor to acetylsalicylic acid (ASA), or Aspirin, used widely in modern medicine.",
+        "evidence_text_sha256": "a978c32d8a8bcd1b535d03f80b263c4c6f5a02b4354e29c3964de1b5345503a6",
+        "source_title": "University of Saskatchewan – Willow bark and salicin",
+        "source_url": "https://research.usask.ca/tedx/2025.php",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "statement": "Weidenrinde wird traditionell auch wegen entzündungshemmender Eigenschaften geschätzt; eine für Pferde gesicherte Dosierung folgt daraus nicht.",
+        "evidence_text": "Beyond its pain-relieving properties, willow bark is also valued for its anti-inflammatory effects.",
+        "evidence_text_sha256": "dcfc32e0d737ee7d9d1cb5b23729f9eabd762856382d2b03fe5c171f66c2bdd8",
+        "source_title": "University of Saskatchewan – Willow bark and salicin",
+        "source_url": "https://research.usask.ca/tedx/2025.php",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "statement": "Überdosierungen von Salicylaten und verwandten Arzneimitteln sind mit ernsthaften Risiken verbunden; deshalb muss ein Tierarzt die Behandlung beurteilen.",
+        "evidence_text": "Aspirin overdose in any species can result in salicylate poisoning",
+        "evidence_text_sha256": "88e814244a4e4327247bfbe450df222882637988e7c123a9ecfcc7154a824302",
+        "source_title": "MSD Veterinary Manual – Nonsteroidal Anti-inflammatory Drugs",
+        "source_url": "https://www.msdvetmanual.com/pharmacology/inflammation/nonsteroidal-anti-inflammatory-drugs-in-animals",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "Pferdegesundheit und Heilpflanzen",
+        "block": "answer"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Weidenrinde",
+      "Salicin",
+      "Salicylate",
+      "Schmerzen",
+      "Risiken",
+      "Tierarzt"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die Tabelle erläutert nachvollziehbar unterschiedliche Situationen, ihre Bedeutung und sinnvolle Maßnahmen im Pferdealltag."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
