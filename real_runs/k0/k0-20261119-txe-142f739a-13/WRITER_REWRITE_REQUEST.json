@@ -1,0 +1,16 @@
+{
+  "contract": "K0_WRITER_REVISION_REQUEST_V1",
+  "status": "RETURN_TO_SAME_WRITER",
+  "job_id": "k0w-37da8bf953ec928ad5edb82d",
+  "writer_job_sha256": "ae4fa148d5a20e8107d839476d14362c6f4d5846e1815b9a2cf041855abacc1e",
+  "rule_id": "links.bound_pairs_exact",
+  "instruction": "Rewrite the SAME draft: each C-link label must be identical to the immutable official C target name. Rewrite surrounding sentence grammatically; do not change href, keyword, article type, categories, article ID, or K0 rules.",
+  "required_links": [
+    {
+      "role": "parent_category",
+      "href": "/category/pferdewissen-grundlagen/",
+      "exact_text": "Pferdewissen & Grundlagen"
+    }
+  ],
+  "publish_allowed": false
+}\n
