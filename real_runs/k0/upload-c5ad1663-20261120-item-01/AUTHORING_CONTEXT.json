@@ -1,0 +1,170 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wie alt ist das älteste Pferd in Deutschland?",
+    "target_keyword": "Wie alt ist das älteste Pferd in Deutschland?",
+    "category": "pferdewissen-grundlagen",
+    "article_type": "FAQ",
+    "plan_slot": "e2c13a84830306ad1518ea8bfc5766033dffa15a698d01c99673400c0ad34519"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Wikipedia – Old Billy",
+          "source_url": "https://de.wikipedia.org/wiki/Old_Billy"
+        },
+        {
+          "source_title": "University of Minnesota Extension – Senior horse care",
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-senior-horse"
+        }
+      ],
+      "claims": [
+        "Das weltweit bekannte Alter von Old Billy ist kein deutscher Altersrekord.",
+        "Old Billy erreichte das außergewöhnliche Alter von 62 Jahren.",
+        "Das Sterbedatum von Old Billy war im November 1822.",
+        "Auch ein Alter bis in die Dreißiger ist bei guter Pflege für Pferde möglich."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie alt ist das älteste Pferd in Deutschland?",
+      "topic": "Wie alt ist das älteste Pferd in Deutschland?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdewissen-grundlagen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie alt ist das älteste Pferd in Deutschland?"
+    },
+    "research_claims": {
+      "F1": {
+        "statement": "Das weltweit bekannte Alter von Old Billy ist kein deutscher Altersrekord.",
+        "evidence_text": "Old Billy (auch Billy Boy oder Billy) war das am längsten lebende Pferd, von dem Kenntnis besteht.",
+        "evidence_text_sha256": "2eddb59362cdbe96bc2863f3f61eb680c3a0117dade7d3269000a39a416ed586",
+        "source_title": "Wikipedia – Old Billy",
+        "source_url": "https://de.wikipedia.org/wiki/Old_Billy",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "statement": "Old Billy erreichte das außergewöhnliche Alter von 62 Jahren.",
+        "evidence_text": "Er wurde 62 Jahre alt.",
+        "evidence_text_sha256": "fbb68896de5d1673ddfcc43c7485365916a79b1fb91fdfbc2ea46916ef1ed7de",
+        "source_title": "Wikipedia – Old Billy",
+        "source_url": "https://de.wikipedia.org/wiki/Old_Billy",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "statement": "Das Sterbedatum von Old Billy war im November 1822.",
+        "evidence_text": "Billy starb am 27. November 1822.",
+        "evidence_text_sha256": "fd0e8b98a86ad19f1d4ce0946014957427921103144cb2865d280df7c4b22d62",
+        "source_title": "Wikipedia – Old Billy",
+        "source_url": "https://de.wikipedia.org/wiki/Old_Billy",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "statement": "Auch ein Alter bis in die Dreißiger ist bei guter Pflege für Pferde möglich.",
+        "evidence_text": "Many horses and ponies can live into their 20s or 30s with good health care.",
+        "evidence_text_sha256": "68aded4a4a0ffc623a4cd548b8890ae506676ffc4c4d0459478a276d3b13c164",
+        "source_title": "University of Minnesota Extension – Senior horse care",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-senior-horse",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdewissen-grundlagen/",
+        "anchor": "Pferdewissen Grundlagen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "Pferdegesundheit verstehen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdewissen-grundlagen/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdewissen-grundlagen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Alter",
+      "Lebensjahre",
+      "Lebensdauer",
+      "Lebenserwartung",
+      "Deutschland",
+      "Gesundheit",
+      "Rekord",
+      "Jahre",
+      "Seniorenpferde",
+      "Menschenjahre",
+      "Umrechnung",
+      "Pflege"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Der Vergleich ordnet die dokumentierte Lebensdauer und die individuelle gesundheitliche Entwicklung altersbezogen ein."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
