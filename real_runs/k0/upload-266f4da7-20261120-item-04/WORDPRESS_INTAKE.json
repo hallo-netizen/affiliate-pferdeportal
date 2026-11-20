@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche Wirkung hat Weidenrinde auf Pferde?",
+      "target_keyword": "Welche Wirkung hat Weidenrinde auf Pferde?",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "0dda322212762d6c04f36653c9b5b5ec5b6338dee56b5e98497bb68b643b4c94"
+    }
+  ],
+  "batch_sha256": "a6372974fca1a3998567bf2cf86c31f5694b82eda7f73c0b6999b6c5bff215c6"
+}
