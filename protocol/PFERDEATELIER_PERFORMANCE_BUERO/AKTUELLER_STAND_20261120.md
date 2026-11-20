@@ -135,3 +135,51 @@ Verbindliche Entscheidung:
 - Die vier oben genannten Plugins dürfen als erster KISS-Schritt deaktiviert werden.
 - Nicht löschen, solange ihre erneute Diagnosefunktion noch nützlich sein kann.
 - Nach Deaktivierung nur Funktionsgleichheit und Messwerte prüfen; keine weiteren Änderungen gleichzeitig.
+
+
+## Messung nach Deaktivierung der vier Diagnose-/Analyseplugins – 20.11.2026 12:27
+
+Datei: `pferdeatelier-performance-gesamtanalyse-20261120-122703.json`
+
+Bestätigt:
+- aktive Plugins jetzt: 36
+- die vier deaktivierten Plugins sind nicht mehr in der aktiven Pluginliste
+- Performance Diagnose Safe 6.0.0 bleibt aktiv
+- Affiliate-Zentrale 6.72.362 und Template Kit 1.50.616 unverändert aktiv
+
+Vorheriger dokumentierter Stand (08:06):
+- p95 ca. 10.039 ms
+- Browser-TTFB Ø ca. 5.679 ms
+- LCP Ø ca. 6.152 ms
+- Peak Memory ca. 212 MB
+- maximale interne Cache-Hits 138.483
+- Pferdesättel ca. 11.576 ms Wall / ca. 3.690 ms CPU / 320 Queries
+
+Nach Deaktivierung:
+- p95 6.267 ms
+- Browser-TTFB Ø 4.154 ms
+- LCP Ø 4.575 ms
+- Peak Memory 214 MB
+- maximale interne Cache-Hits 138.943
+- Pferdesättel 4.925 ms Wall / 3.116 ms CPU / 327 Queries
+
+Delta des Messblocks:
+- p95 ca. -37,6 %
+- TTFB ca. -26,9 %
+- LCP ca. -25,6 %
+- Pferdesättel Wall-Time ca. -57,5 %
+- Pferdesättel CPU ca. -15,6 %
+- Peak Memory praktisch unverändert
+- Cache-Hits praktisch unverändert
+- Queryzahl auf Pferdesättel praktisch unverändert
+
+Bewertung:
+- Die vier Plugins bleiben deaktiviert. Es ist kein Performance-Nachteil sichtbar; der gemessene Lauf ist deutlich besser.
+- Weil vier Plugins gleichzeitig deaktiviert wurden und Server-/Requestzeiten schwanken, ist damit NICHT bewiesen, welches einzelne Plugin welchen Anteil verursacht hat.
+- Die unverändert extrem hohen Cache-Hits zeigen: die große wiederholte interne Arbeit im Kategorie-/Produktpfad ist weiterhin vorhanden. Der Hauptengpass ist damit nicht beseitigt.
+- Kein Rückbau der vier Plugins nötig.
+
+Nächster KISS-Schritt:
+- keine weitere Diagnose-Plugin-Runde;
+- als nächstes kleine Design-/Frontend-Helfer auf Zusammenführung bzw. Doppelung prüfen, beginnend mit `Canonical Table Contract V1` und `Pferde Atelier – Anzeigenmarkt & Journal Breadcrumbs`;
+- erst Quell-/Funktionsprüfung, dann Änderung.
