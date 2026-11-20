@@ -1,0 +1,163 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Werden Pferde gerne gestreichelt?",
+    "target_keyword": "Werden Pferde gerne gestreichelt?",
+    "category": "pferde-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "288638e7fde8dce0b0195a243ad30201f500c989515240533f0ea0053d7109b0"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "MSD Veterinary Manual – Normal Social Behavior in Horses",
+          "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/normal-social-behavior-in-horses"
+        }
+      ],
+      "claims": [
+        "Pferde sind soziale Tiere, deren Kontaktverhalten auch bei Berührungen zu beachten ist.",
+        "Gegenseitige Fellpflege kommt im Sozialverhalten von Pferden vor.",
+        "Pferde können sich von einer Berührung oder Annäherung wegbewegen, wenn sie keinen Kontakt möchten.",
+        "Bei jungen Fohlen wird ein sanfter Umgang in den ersten Lebenswochen empfohlen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Werden Pferde gerne gestreichelt?",
+      "topic": "Werden Pferde gerne gestreichelt?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Werden Pferde gerne gestreichelt?"
+    },
+    "research_claims": {
+      "F1": {
+        "statement": "Pferde sind soziale Tiere, deren Kontaktverhalten auch bei Berührungen zu beachten ist.",
+        "evidence_text": "Domestic horses are social animals.",
+        "evidence_text_sha256": "9f606af85c00b120a01dc1306933f2e0fd49085ff1ddc43c00856ddb2fe0e9f1",
+        "source_title": "MSD Veterinary Manual – Normal Social Behavior in Horses",
+        "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/normal-social-behavior-in-horses",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "statement": "Gegenseitige Fellpflege kommt im Sozialverhalten von Pferden vor.",
+        "evidence_text": "Mares form friendships and are more likely to groom each other.",
+        "evidence_text_sha256": "eaeaac7a0f2437bb94a94cdffaab48f1a8a7f8833eaf2317d85f71b291f17692",
+        "source_title": "MSD Veterinary Manual – Normal Social Behavior in Horses",
+        "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/normal-social-behavior-in-horses",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "statement": "Pferde können sich von einer Berührung oder Annäherung wegbewegen, wenn sie keinen Kontakt möchten.",
+        "evidence_text": "The mare may squeal, kick, or move away to show the stallion she is not ready.",
+        "evidence_text_sha256": "500923bd8ee19f6a0d18996b38cebc96ae1af2f24ca29f4de9b3ca3746fd92f9",
+        "source_title": "MSD Veterinary Manual – Normal Social Behavior in Horses",
+        "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/normal-social-behavior-in-horses",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "statement": "Bei jungen Fohlen wird ein sanfter Umgang in den ersten Lebenswochen empfohlen.",
+        "evidence_text": "It is important that caregivers provide gentle handling during the first 42 days of life.",
+        "evidence_text_sha256": "9640062b31e68ebc9e0683479c45927f4dbd178a71e87bee4de9465e6d66edf3",
+        "source_title": "MSD Veterinary Manual – Normal Social Behavior in Horses",
+        "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/normal-social-behavior-in-horses",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-verstehen/",
+        "anchor": "Pferde verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/gewoehnungssachen-uebungen/",
+        "anchor": "Übungen Gewöhnungssachen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/category/gewoehnungssachen-uebungen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Streicheln",
+      "Berührung",
+      "Fellpflege",
+      "Sozialverhalten",
+      "Kontakt",
+      "Körperhaltung",
+      "Verhalten",
+      "Entspannung",
+      "Abwehr"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Konkrete Berührungssignale und die Reaktion des Pferdes werden miteinander verglichen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
