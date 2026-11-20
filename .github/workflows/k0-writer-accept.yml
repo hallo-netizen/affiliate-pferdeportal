@@ -75,16 +75,44 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m engine.k0_writer_station seal "$JOB_PATH" "$DRAFT_PATH" /tmp/K0_SEALED_WRITER_PRODUCT.json
-          python3 -m engine.k0_writer_station verify "$JOB_PATH" /tmp/K0_SEALED_WRITER_PRODUCT.json
+          if python3 -m engine.k0_writer_station seal "$JOB_PATH" "$DRAFT_PATH" /tmp/K0_SEALED_WRITER_PRODUCT.json > /tmp/k0-writer-seal-result.txt 2>&1; then
+            cat /tmp/k0-writer-seal-result.txt
+            python3 -m engine.k0_writer_station verify "$JOB_PATH" /tmp/K0_SEALED_WRITER_PRODUCT.json
+          else
+            cat /tmp/k0-writer-seal-result.txt
+            # Only this exact WRITER-owned heading fault returns here;
+            # every other seal fault remains a real blocker.
+            if ! grep -Fq 'WRITER_CONCLUSION_HEADING_INVALID' /tmp/k0-writer-seal-result.txt; then
+              exit 2
+            fi
+            python3 - <<'PY'
+          import json,os,pathlib
+          from engine.k0_writer_station import conclusion_heading_repair_request
+          job=json.load(open(os.environ['JOB_PATH'],encoding='utf-8'))
+          draft=json.load(open(os.environ['DRAFT_PATH'],encoding='utf-8'))
+          receipt=conclusion_heading_repair_request(job,draft)
+          rd=pathlib.Path(os.environ['RUN_DIR'])
+          (rd/'WRITER_REWRITE_REQUEST.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print('K0_SAME_WRITER_CONCLUSION_REPAIR_REQUIRED',job['job_id'])
+          PY
+            git config user.name 'k0-writer-station-bot'
+            git config user.email 'actions@users.noreply.github.com'
+            git add "$RUN_DIR/WRITER_REWRITE_REQUEST.json"
+            git commit -m "K0: return invalid Fazit heading to same writer"
+            git push
+            echo 'K0_REWRITE_REQUIRED=1' >> "$GITHUB_ENV"
+            echo 'K0_WRITER_RETURN_INSTEAD_OF_TERMINAL_BLOCK'
+          fi
 
       - name: Fetch only canonical category source branch
+        if: env.K0_REWRITE_REQUIRED != '1'
         shell: bash
         run: |
           set -euo pipefail
           git fetch --depth=1 origin '+refs/heads/affiliate-release-current:refs/remotes/origin/affiliate-release-current'
 
       - name: Automatic portal assignment
+        if: env.K0_REWRITE_REQUIRED != '1'
         shell: bash
         run: |
           set -euo pipefail
@@ -100,6 +128,7 @@ jobs:
           PY
 
       - name: Resolve live WordPress category before full content checks
+        if: env.K0_REWRITE_REQUIRED != '1'
         shell: bash
         run: |
           set -euo pipefail
@@ -118,6 +147,7 @@ jobs:
           PY
 
       - name: K0 structure semantic writer and PPM 6.7.9 gates
+        if: env.K0_REWRITE_REQUIRED != '1'
         shell: bash
         run: |
           set -euo pipefail
