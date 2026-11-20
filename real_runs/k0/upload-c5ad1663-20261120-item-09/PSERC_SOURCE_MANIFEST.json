@@ -1,0 +1,209 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 10,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Wie alt ist das älteste Pferd in Deutschland?",
+        "target_keyword": "Wie alt ist das älteste Pferd in Deutschland?",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "FAQ",
+        "plan_slot": "e2c13a84830306ad1518ea8bfc5766033dffa15a698d01c99673400c0ad34519"
+      },
+      {
+        "title": "Wie alt ist ein elfjähriges Pferd in Menschenjahren?",
+        "target_keyword": "Wie alt ist ein 11-jähriges Pferd in Menschenjahren?",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "FAQ",
+        "plan_slot": "d265d3be705299794247e68322d2040623bd5d97a35e9cb6e347234336e0f1bc"
+      },
+      {
+        "title": "Werden Pferde gerne gestreichelt?",
+        "target_keyword": "Werden Pferde gerne gestreichelt?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "288638e7fde8dce0b0195a243ad30201f500c989515240533f0ea0053d7109b0"
+      },
+      {
+        "title": "Warum ist der Weidegang für Pferde im Winter manchmal eingeschränkt?",
+        "target_keyword": "Warum dürfen Pferde im Winter nicht auf die Weide?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "7a0e8b3717efc89bbb7c388594f254599625a388896bd46ed2552a3cda88a013"
+      },
+      {
+        "title": "Wie viele Hektar Weidefläche braucht ein Pferd?",
+        "target_keyword": "Wie viel ha pro Pferd?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "6c740fab26ef856d7d2862f9d37e7c4b66f28c27c669356fd828291e9791d5eb"
+      },
+      {
+        "title": "Können Pferde bei Regen auf die Weide?",
+        "target_keyword": "Können Pferde bei Regen auf die Weide?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "edbb8d6c0cd40ee5b051f36da417687003f8404e7df6f87955dbc41dba5a848e"
+      },
+      {
+        "title": "Was kostet die Miete einer Pferdebox?",
+        "target_keyword": "Wie viel kostet eine Pferdebox Miete?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "009aefa35c3a5dcabb4c0a6fa2ccd993a9fb4007888e0f853605bf2212c8336e"
+      },
+      {
+        "title": "Was kostet ein Reitplatz mit 20 mal 40 Metern?",
+        "target_keyword": "Wie viel kostet ein Reitplatz mit den Maßen 20x40 Meter?",
+        "category": "reitplatzbau-kosten",
+        "article_type": "FAQ",
+        "plan_slot": "0556512b8b44a7d86ec3bbc729cc7f2f0fdbd3807d2905a4a3a2dbc4c51cc892"
+      },
+      {
+        "title": "Wie groß muss ein Grundstück für private Pferdehaltung sein?",
+        "target_keyword": "Wie groß muss ein Grundstück für Pferdehaltung sein?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "45dcd50390b5377bfd815a0bc570463fad5b71771142f25fb96f7ddbac94257c"
+      },
+      {
+        "title": "Wie viele Pferde darf man privat halten?",
+        "target_keyword": "Wie viele Pferde darf man privat halten?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "a37e786a14ee262787e3e1c38feaea3f78455f697824ff01925b977376b702de"
+      }
+    ],
+    "batch_sha256": "c5ad16631a1033353d7c965beb8d400dc5a012c97b9e3a2af163dc4cf74b4de9"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Wie alt ist das älteste Pferd in Deutschland?",
+        "target_keyword": "Wie alt ist das älteste Pferd in Deutschland?",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "FAQ",
+        "plan_slot": "e2c13a84830306ad1518ea8bfc5766033dffa15a698d01c99673400c0ad34519"
+      },
+      "order_id": "TXE-c1d2b6373f6c75a3fd3d6553c32006ff",
+      "article_id": "article:ebe1d00116a97a282100deb6",
+      "search_intent": "Rekordalter und Identität des ältesten dokumentierten Pferdes in Deutschland, nicht das teuerste Pferd und nicht die allgemeine Lebenserwartung."
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie alt ist ein elfjähriges Pferd in Menschenjahren?",
+        "target_keyword": "Wie alt ist ein 11-jähriges Pferd in Menschenjahren?",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "FAQ",
+        "plan_slot": "d265d3be705299794247e68322d2040623bd5d97a35e9cb6e347234336e0f1bc"
+      },
+      "order_id": "TXE-0e53ef0c79b3e1536602392b0fa2bb45",
+      "article_id": "article:9ad38df97c6cef5e2998fda4",
+      "search_intent": "Bedeutung von elf Pferdejahren im Vergleich zu Menschenjahren und warum eine feste Umrechnungsformel Grenzen hat."
+    },
+    {
+      "metadata_binding": {
+        "title": "Werden Pferde gerne gestreichelt?",
+        "target_keyword": "Werden Pferde gerne gestreichelt?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "288638e7fde8dce0b0195a243ad30201f500c989515240533f0ea0053d7109b0"
+      },
+      "order_id": "TXE-1221e43cd72f37729fc48cbbfb8775e8",
+      "article_id": "article:c3091b2da1f94f47911f204c",
+      "search_intent": "Ob Pferde Streicheleinheiten mögen, welche Berührungen sie akzeptieren und woran Halter ihr Wohlbefinden erkennen."
+    },
+    {
+      "metadata_binding": {
+        "title": "Warum ist der Weidegang für Pferde im Winter manchmal eingeschränkt?",
+        "target_keyword": "Warum dürfen Pferde im Winter nicht auf die Weide?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "7a0e8b3717efc89bbb7c388594f254599625a388896bd46ed2552a3cda88a013"
+      },
+      "order_id": "TXE-57e0174b7c34a5f8e4b1716762a9796a",
+      "article_id": "article:7fa33f305598892470e9f453",
+      "search_intent": "Warum Weidegang im Winter durch Boden, Witterung und Haltung eingeschränkt sein kann, statt eines generellen Winterverbots."
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie viele Hektar Weidefläche braucht ein Pferd?",
+        "target_keyword": "Wie viel ha pro Pferd?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "6c740fab26ef856d7d2862f9d37e7c4b66f28c27c669356fd828291e9791d5eb"
+      },
+      "order_id": "TXE-734fba728e7046adb48f38c29c568f96",
+      "article_id": "article:682bc367bb6cc7a2a807a918",
+      "search_intent": "Benötigte Hektar Weidefläche je Pferd unter Berücksichtigung der Nutzung, ausdrücklich keine Grundstücks- oder Baurechtsfrage."
+    },
+    {
+      "metadata_binding": {
+        "title": "Können Pferde bei Regen auf die Weide?",
+        "target_keyword": "Können Pferde bei Regen auf die Weide?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "edbb8d6c0cd40ee5b051f36da417687003f8404e7df6f87955dbc41dba5a848e"
+      },
+      "order_id": "TXE-f5bac64982a278c1695bb0f89506338d",
+      "article_id": "article:f6927eef64ff1c0bf62dbc80",
+      "search_intent": "Ob Pferde bei Regen auf die Weide können und welche Wetter- und Bodenbedingungen zu berücksichtigen sind."
+    },
+    {
+      "metadata_binding": {
+        "title": "Was kostet die Miete einer Pferdebox?",
+        "target_keyword": "Wie viel kostet eine Pferdebox Miete?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "009aefa35c3a5dcabb4c0a6fa2ccd993a9fb4007888e0f853605bf2212c8336e"
+      },
+      "order_id": "TXE-3ed73eae82df6ad43e7b34b66c740a5b",
+      "article_id": "article:d4070b6338927c0d730735f4",
+      "search_intent": "Monatliche Miete einer Pferdebox einschließlich Leistungsumfang und regionaler Kostenfaktoren."
+    },
+    {
+      "metadata_binding": {
+        "title": "Was kostet ein Reitplatz mit 20 mal 40 Metern?",
+        "target_keyword": "Wie viel kostet ein Reitplatz mit den Maßen 20x40 Meter?",
+        "category": "reitplatzbau-kosten",
+        "article_type": "FAQ",
+        "plan_slot": "0556512b8b44a7d86ec3bbc729cc7f2f0fdbd3807d2905a4a3a2dbc4c51cc892"
+      },
+      "order_id": "TXE-7af59f2d941d3ea545f2b3cf34692d0e",
+      "article_id": "article:f10382c67fa2aa28e240b9cd",
+      "search_intent": "Gesamte Baukosten für einen Reitplatz mit 20 mal 40 Metern, nicht allgemein die Finanzierung des Reitplatzbaus."
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie groß muss ein Grundstück für private Pferdehaltung sein?",
+        "target_keyword": "Wie groß muss ein Grundstück für Pferdehaltung sein?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "45dcd50390b5377bfd815a0bc570463fad5b71771142f25fb96f7ddbac94257c"
+      },
+      "order_id": "TXE-39d4ec6f55f9c6a859482da79669409e",
+      "article_id": "article:584097459e45f239e4342666",
+      "search_intent": "Grundstücksgröße für private Pferdehaltung unter Bedingungen von Haltung und Genehmigung, nicht bloß die Hektarzahl der Weidefläche."
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie viele Pferde darf man privat halten?",
+        "target_keyword": "Wie viele Pferde darf man privat halten?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "a37e786a14ee262787e3e1c38feaea3f78455f697824ff01925b977376b702de"
+      },
+      "order_id": "TXE-9a98dd75c15fb2c4216a425e61f43e51",
+      "article_id": "article:f95f709a9e8d18d9073deb46",
+      "search_intent": "Ob es für private Pferdehaltung eine pauschale Höchstzahl gibt und welche örtlichen Vorgaben maßgeblich sein können."
+    }
+  ],
+  "manifest_sha256": "c38c1c43aea2478f367d446e9943c9304412fff56e1f9bdf14e2035bd1b0da1c"
+}
