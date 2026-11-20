@@ -483,3 +483,56 @@ Es verändert keine Produktionsplugins/-daten und ergänzt:
 QA: keine neuen Post-/Meta-/Cron-/DB-Schreibwege; Shortcode- und the_content-Rückgabewerte in Sicherheitssimulation unverändert.
 
 Damit soll genau EIN Profillauf die noch offene Frage entscheiden, bevor ein weiterer Produktionsplugin-Kandidat gebaut wird.
+
+
+## Dauerhafte Diagnose-Version 7.0.0 – 20.11.2026
+
+### Anlass
+Die bisherige 6.1 deckte bereits den Großteil der WordPress-Performanceanalyse ab, hatte aber fünf Lücken, die zu erneuten Diagnose-Erweiterungen geführt hätten:
+1. eingeloggte/Admin-Bar-Frontendrequests wurden nicht getrennt von anonymen Requests ausgewertet;
+2. Astra/Kubio wurden nur als Datei-/Hook-Fußabdruck erfasst, nicht als Routenvergleich;
+3. es gab keinen dauerhaft gespeicherten Vorher/Nachher-Referenzlauf;
+4. Host-Load wurde nicht gegen sichtbare CPU-Kapazität normalisiert;
+5. aktive Plugin-/Theme-Quellen wurden nicht vollständig als SHA-256-Fingerprints festgehalten.
+
+### 7.0.0 ergänzt
+- Frontendstatus: logged-in / anonymous / Admin-Bar / private-no-cache.
+- Komponenten-Routenvergleich für Astra, Kubio, Affiliate, Template-Kit, HivePress, WPForms, Site Kit, Yoast.
+- Komponenten-Asset-Zusammenfassung und Hook-Inventar in Profil-/Tiefenmodi.
+- vollständige Fingerprints der Hauptdateien aller aktiven Plugins plus aktives Theme.
+- sichtbare logische CPU-Anzahl und Load-per-CPU, sofern PHP diese Informationen lesen kann.
+- eigener gespeicherter Referenzlauf und automatischer Vergleich identischer Routen: Dauer, CPU, Cache-Hits, Queries.
+- expliziter Coverage-Vertrag: Für abgedeckte WordPress-Level-Fragen wird künftig dieselbe Diagnose weiterverwendet.
+- Server-Level-Grenzen werden ausdrücklich ausgewiesen und dürfen NICHT zu einem weiteren WordPress-Diagnoseplugin führen.
+
+### Sicherheitsbeweis 6.1 -> 7.0
+- Klassenmethoden: 146 -> 157.
+- entfernt: 0.
+- bestehende Methoden vollständig unverändert: 137.
+- geänderte bestehende Methoden: ausschließlich Diagnose-Session/Export/Snapshot/Auswertung/Adminoberfläche/Request-Kontext.
+- Hook-/Filter-/Shortcode-Registrierungen: 34 -> 36.
+- entfernt: 0.
+- neu ausschließlich zwei eigene Admin-Aktionen für Referenz speichern/löschen.
+- keine Post-, Postmeta-, Term-, Cron-, Cache-, Theme- oder Plugin-Aktivierungs-/Deaktivierungs-Schreibwege.
+- neue Schreiboperation ausschließlich eigene Diagnose-Referenzoption.
+- PASSIV liest für Kubio keinen zusätzlichen Seiteninhalt/Meta; Kubio-Inhaltsbeweis nur Profil/Tiefenanalyse, damit PASSIV sauber bleibt.
+- lokaler Hilfsfunktions-Harness PASS: Komponenten-Routenvergleich, logged-in/private Gruppierung, Baseline-Deltas, Coverage-Vertrag.
+- PHP-Lint PASS.
+- ZIP-Test PASS.
+
+### Paket
+- Datei: PERFORMANCE_DIAGNOSE_SAFE_7.0.0_DAUERHAFT_ALL_IN_ONE.zip
+- SHA-256: f90de7be50b886af631923673ab77d098cf5c5b4d964a6a447974794dab532d2
+- gleicher Plugin-Ordner: pa-performance-diagnose-safe
+- ersetzt die bisherige Diagnose; erzeugt kein zusätzliches paralleles Plugin.
+
+### Verbindlicher Dauervertrag
+Keine neue Diagnose-Pluginversion nur wegen einer neuen Performancefrage, solange die Frage innerhalb des dokumentierten WordPress-Level-Coverage-Vertrags liegt.
+
+Harte Grenzen, die ein WordPress-Plugin nicht sicher vollständig messen kann:
+- exakte CPU-Zeit jedes beliebigen fremden PHP-Callbacks ohne invasives Wrapping,
+- PHP-FPM-Worker-Queue/Sättigung ohne Status-Endpunkt/Serverzugriff,
+- Host-/Container-Throttling und Nachbarlast außerhalb des PHP-Prozesses,
+- Kernel-/Paket-Netzwerkprofiling.
+
+Für diese Punkte ist bei Bedarf Serverzugriff/Profiler nötig, NICHT ein weiteres Diagnoseplugin.
