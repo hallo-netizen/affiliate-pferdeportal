@@ -356,6 +356,27 @@ def prepare(intake, portal, ctx):
 def _draft_sha(draft):
     return stable(draft)
 
+def conclusion_heading_repair_request(job, draft):
+    """Return a failed Fazit heading to the SAME original writer job."""
+    if job.get('contract')!=JOB_CONTRACT or job.get('status')!='OPEN' or job.get('publish_allowed') is not False:
+        raise Blocked('K0_WRITER_JOB_INVALID')
+    if job.get('job_sha256')!=stable({k:v for k,v in job.items() if k!='job_sha256'}):
+        raise Blocked('K0_WRITER_JOB_HASH_INVALID')
+    if draft.get('contract')!=DRAFT_CONTRACT or draft.get('job_id')!=job.get('job_id') or draft.get('publish_allowed') is not False:
+        raise Blocked('K0_WRITER_DRAFT_JOB_MISMATCH')
+    return {
+      'contract':'K0_WRITER_REVISION_REQUEST_V1',
+      'status':'RETURN_TO_SAME_WRITER',
+      'job_id':job['job_id'],
+      'writer_job_sha256':job['job_sha256'],
+      'draft_sha256':_draft_sha(draft),
+      'rule_id':'writer.conclusion_heading_exact',
+      'reason':'WRITER_CONCLUSION_HEADING_INVALID',
+      'required_heading':'Fazit',
+      'instruction':'Rewrite the SAME draft: the conclusion section must have an exact visible <h2>Fazit</h2>. Preserve the original writer job, all other content, facts, links, identity and K0 rules. Resubmit the revised draft to the same original writer acceptance workflow.',
+      'publish_allowed':False,
+    }
+
 def seal(job, draft):
     if job.get('contract')!=JOB_CONTRACT or job.get('status')!='OPEN' or job.get('publish_allowed') is not False:
         raise Blocked('K0_WRITER_JOB_INVALID')
