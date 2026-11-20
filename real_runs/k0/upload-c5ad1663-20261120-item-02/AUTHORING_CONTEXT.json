@@ -1,0 +1,166 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wie alt ist ein elfjähriges Pferd in Menschenjahren?",
+    "target_keyword": "Wie alt ist ein 11-jähriges Pferd in Menschenjahren?",
+    "category": "pferdewissen-grundlagen",
+    "article_type": "FAQ",
+    "plan_slot": "d265d3be705299794247e68322d2040623bd5d97a35e9cb6e347234336e0f1bc"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "University of Minnesota Extension – Senior horse care",
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-senior-horse"
+        }
+      ],
+      "claims": [
+        "Viele Pferde erreichen mit guter Versorgung zwanzig oder dreißig Lebensjahre.",
+        "Mit fortschreitendem Alter verändert sich der Pflegebedarf.",
+        "Regelmäßige tierärztliche Kontrollen sind für die Gesundheit älterer Pferde wichtig.",
+        "Ältere Pferde können mit der Zeit an Koordination verlieren."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie alt ist ein 11-jähriges Pferd in Menschenjahren?",
+      "topic": "Wie alt ist ein elfjähriges Pferd in Menschenjahren?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdewissen-grundlagen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie alt ist ein elfjähriges Pferd in Menschenjahren?"
+    },
+    "research_claims": {
+      "F1": {
+        "statement": "Viele Pferde erreichen mit guter Versorgung zwanzig oder dreißig Lebensjahre.",
+        "evidence_text": "Many horses and ponies can live into their 20s or 30s with good health care.",
+        "evidence_text_sha256": "68aded4a4a0ffc623a4cd548b8890ae506676ffc4c4d0459478a276d3b13c164",
+        "source_title": "University of Minnesota Extension – Senior horse care",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-senior-horse",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "statement": "Mit fortschreitendem Alter verändert sich der Pflegebedarf.",
+        "evidence_text": "As horses age, their health needs change.",
+        "evidence_text_sha256": "8b962fe350a563e995a2ee3e35c1141e4fe5e92a325b39266986f184442c5092",
+        "source_title": "University of Minnesota Extension – Senior horse care",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-senior-horse",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "statement": "Regelmäßige tierärztliche Kontrollen sind für die Gesundheit älterer Pferde wichtig.",
+        "evidence_text": "Schedule routine dental and physical exams with your veterinarian to detect problems early.",
+        "evidence_text_sha256": "5fd91e016f3802f7bd1c3a09d98222b3a8d43a99b5a162be7c4ed2bf8d7ecbed",
+        "source_title": "University of Minnesota Extension – Senior horse care",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-senior-horse",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "statement": "Ältere Pferde können mit der Zeit an Koordination verlieren.",
+        "evidence_text": "Slightly decreased coordination in older horses can reduce agility.",
+        "evidence_text_sha256": "87a6074b4ad0149340755886215edb3bfe4fd5e461d7f60da6443115d2457354",
+        "source_title": "University of Minnesota Extension – Senior horse care",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-senior-horse",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdewissen-grundlagen/",
+        "anchor": "Pferdewissen Grundlagen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "Pferdegesundheit verstehen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdewissen-grundlagen/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdewissen-grundlagen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Alter",
+      "Lebensjahre",
+      "Lebensdauer",
+      "Lebenserwartung",
+      "Deutschland",
+      "Gesundheit",
+      "Rekord",
+      "Jahre",
+      "Seniorenpferde",
+      "Menschenjahre",
+      "Umrechnung",
+      "Pflege"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Der Vergleich ordnet die dokumentierte Lebensdauer und die individuelle gesundheitliche Entwicklung altersbezogen ein."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
