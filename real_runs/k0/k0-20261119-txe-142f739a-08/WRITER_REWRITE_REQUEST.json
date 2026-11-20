@@ -1,0 +1,16 @@
+{
+  "contract": "K0_WRITER_REVISION_REQUEST_V1",
+  "status": "RETURN_TO_SAME_WRITER",
+  "job_id": "k0w-92f76131e6e7d0d6e7fb48c4",
+  "writer_job_sha256": "3256fc4c969dfaefde0568715b558bfe0ee4b2b803549979a5913fc76cab77c4",
+  "rule_id": "links.bound_pairs_exact",
+  "instruction": "Rewrite the SAME draft: each C-link label must be identical to the immutable official C target name. Rewrite surrounding sentence grammatically; do not change href, keyword, article type, categories, article ID, or K0 rules.",
+  "required_links": [
+    {
+      "role": "parent_category",
+      "href": "/category/pferdeernaehrung-verstehen/",
+      "exact_text": "Pferdeernährung verstehen"
+    }
+  ],
+  "publish_allowed": false
+}\n
