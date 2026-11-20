@@ -1,0 +1,180 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Was kostet die Miete einer Pferdebox?",
+    "target_keyword": "Wie viel kostet eine Pferdebox Miete?",
+    "category": "recht-finanzen-organisation",
+    "article_type": "FAQ",
+    "plan_slot": "009aefa35c3a5dcabb4c0a6fa2ccd993a9fb4007888e0f853605bf2212c8336e"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+          "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/"
+        }
+      ],
+      "claims": [
+        "Die Boxenform und der Auslauf prägen den Leistungsumfang einer Pferdeunterbringung.",
+        "Außenboxen mit Paddock bieten zusätzliche Möglichkeiten.",
+        "Pferde müssen täglich die Gelegenheit zu Kontakt und Bewegung erhalten.",
+        "Gruppenställe brauchen geeignete Futter- und Ruhebereiche."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie viel kostet eine Pferdebox Miete?",
+      "topic": "Was kostet die Miete einer Pferdebox?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "recht-finanzen-organisation",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was kostet die Miete einer Pferdebox?"
+    },
+    "research_claims": {
+      "F1": {
+        "statement": "Die Boxenform und der Auslauf prägen den Leistungsumfang einer Pferdeunterbringung.",
+        "evidence_text": "Je nach Stall stehen Innen- und/oder Außenboxen zur Verfügung.",
+        "evidence_text_sha256": "1cd898bc025ac5a461ae23af6196d9ce7d68e1aff8b6458dc2e59cf6c82f9fb1",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "statement": "Außenboxen mit Paddock bieten zusätzliche Möglichkeiten.",
+        "evidence_text": "Das Pferd hat dadurch immer Zugang zur frischen Luft und kann von der Box in den Paddock und zurück wechseln.",
+        "evidence_text_sha256": "6111a5bd2c3a64926831a2d81c739d377918736655523babfafc8d106d2236a3",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "statement": "Pferde müssen täglich die Gelegenheit zu Kontakt und Bewegung erhalten.",
+        "evidence_text": "Weil die Pferde ihre arttypischen Verhaltensweisen nicht ausleben können, ist die ganztägige Boxenhaltung ohne Weidegang oder Auslauf mit anderen Pferden keine tiergerechte Haltungsform.",
+        "evidence_text_sha256": "4fd9a6d43d688942c394e1dcee9c5aaf8393073cc1240a6f286df8e734869de9",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "statement": "Gruppenställe brauchen geeignete Futter- und Ruhebereiche.",
+        "evidence_text": "Alle Pferde – auch das rangniedrigste Tier der Gruppe – müssen im Innenraum Witterungsschutz und genügend Ruheplätze finden können.",
+        "evidence_text_sha256": "3cb19649e97f6cbee88d473372fe0c38f69c039e8331d6443b9d44434f60ff7b",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/recht-finanzen-organisation/",
+        "anchor": "Pferdehaltung Grundlagen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "Pferdehaltung & Stallaltag",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/recht-finanzen-organisation/",
+        "active": true
+      },
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "recht-finanzen-organisation",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Weide",
+      "Haltung",
+      "Kosten",
+      "Wetter",
+      "Größe",
+      "Weidegang",
+      "Reitplatz",
+      "Stall",
+      "Futter",
+      "Tierbesatz",
+      "Boden",
+      "Schutz",
+      "Miete",
+      "Grundstück",
+      "Recht",
+      "Organisation",
+      "Beratung",
+      "Auslauf",
+      "Sicherheit",
+      "Bedingungen",
+      "Regen",
+      "Winter",
+      "Pflege",
+      "Wasser",
+      "Genehmigung",
+      "Tierseuchenkasse"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die Tabelle ordnet belegte Tatsachen konkreten Situationen und sinnvollen Maßnahmen gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
