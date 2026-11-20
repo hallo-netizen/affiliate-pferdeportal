@@ -1,0 +1,180 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wie viele Pferde darf man privat halten?",
+    "target_keyword": "Wie viele Pferde darf man privat halten?",
+    "category": "recht-finanzen-organisation",
+    "article_type": "FAQ",
+    "plan_slot": "a37e786a14ee262787e3e1c38feaea3f78455f697824ff01925b977376b702de"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Landwirtschaftskammer NRW – Meldung der Tierzahlen",
+          "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/tierseuchenkasse/meldung/index.htm"
+        }
+      ],
+      "claims": [
+        "Die Meldepflicht gilt auch für private Pferdehaltungen.",
+        "Für die Meldepflicht spielt weder der Verwendungszweck noch die Zahl der Tiere eine Rolle.",
+        "Die Meldung setzt ab dem ersten Pferd an.",
+        "Die NRW-Meldefrist für Pferdehalter orientiert sich am Jahresbeginn."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie viele Pferde darf man privat halten?",
+      "topic": "Wie viele Pferde darf man privat halten?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "recht-finanzen-organisation",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie viele Pferde darf man privat halten?"
+    },
+    "research_claims": {
+      "F1": {
+        "statement": "Die Meldepflicht gilt auch für private Pferdehaltungen.",
+        "evidence_text": "Jeder Besitzer von Pferden, Schweinen, Schafen, Ziegen, Geflügel, Gehegewild und Bienen ist verpflichtet, seinen Tierbestand schriftlich der Tierseuchenkasse NRW zu melden.",
+        "evidence_text_sha256": "e2f3b1ec0dbe480a2ac6198ddefd197cb6e679ce9db5efe9180f64c5d112641f",
+        "source_title": "Landwirtschaftskammer NRW – Meldung der Tierzahlen",
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/tierseuchenkasse/meldung/index.htm",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "statement": "Für die Meldepflicht spielt weder der Verwendungszweck noch die Zahl der Tiere eine Rolle.",
+        "evidence_text": "Es ist unerheblich, zu welchem Zweck (gewerbliche Tierhaltung, landwirtschaftliche Nutztierhaltung, Pensionstierhaltung, Reitställe oder auch Hobbyhaltung) oder in welcher Stückzahl die Tiere gehalten werden.",
+        "evidence_text_sha256": "412d5d8bcf276a39a58dc53026615e5d32530a1bf09fef5bcb99db0877482f42",
+        "source_title": "Landwirtschaftskammer NRW – Meldung der Tierzahlen",
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/tierseuchenkasse/meldung/index.htm",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "statement": "Die Meldung setzt ab dem ersten Pferd an.",
+        "evidence_text": "Maßgeblich ist allein die Tatsache der Haltung mindestens eines Tieres einer der oben genannten Tierarten am Stichtag bzw. Jahreshöchstbesatz.",
+        "evidence_text_sha256": "b30dec69ecfcb78b123fe21f27c160aaf2b41208da001c96027b38b0172dce12",
+        "source_title": "Landwirtschaftskammer NRW – Meldung der Tierzahlen",
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/tierseuchenkasse/meldung/index.htm",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "statement": "Die NRW-Meldefrist für Pferdehalter orientiert sich am Jahresbeginn.",
+        "evidence_text": "Stichtag für die Tierbestandsmeldung (Pferde und Gehegewild) ist jeweils der 1. Januar.",
+        "evidence_text_sha256": "7df0612704bdf1368c6933d71dc1ed69c1f7ad730baada1d91412507eda31f5c",
+        "source_title": "Landwirtschaftskammer NRW – Meldung der Tierzahlen",
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/tierseuchenkasse/meldung/index.htm",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/recht-finanzen-organisation/",
+        "anchor": "Pferdehaltung Grundlagen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "Pferdehaltung & Stallaltag",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/recht-finanzen-organisation/",
+        "active": true
+      },
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "recht-finanzen-organisation",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Weide",
+      "Haltung",
+      "Kosten",
+      "Wetter",
+      "Größe",
+      "Weidegang",
+      "Reitplatz",
+      "Stall",
+      "Futter",
+      "Tierbesatz",
+      "Boden",
+      "Schutz",
+      "Miete",
+      "Grundstück",
+      "Recht",
+      "Organisation",
+      "Beratung",
+      "Auslauf",
+      "Sicherheit",
+      "Bedingungen",
+      "Regen",
+      "Winter",
+      "Pflege",
+      "Wasser",
+      "Genehmigung",
+      "Tierseuchenkasse"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die Tabelle ordnet belegte Tatsachen konkreten Situationen und sinnvollen Maßnahmen gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
