@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie alt ist ein elfjähriges Pferd in Menschenjahren?",
+      "target_keyword": "Wie alt ist ein 11-jähriges Pferd in Menschenjahren?",
+      "category": "pferdewissen-grundlagen",
+      "article_type": "FAQ",
+      "plan_slot": "d265d3be705299794247e68322d2040623bd5d97a35e9cb6e347234336e0f1bc"
+    }
+  ],
+  "batch_sha256": "b0696eedeb56ab276b45968573a5c44d2bbe6edbe30394c737b8bf008c594c3e"
+}
