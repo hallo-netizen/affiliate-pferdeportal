@@ -111,8 +111,8 @@
       },
       {
         "role": "further_information",
-        "href": "/category/gewoehnungssachen-uebungen/",
-        "anchor": "Übungen Gewöhnungssachen",
+        "href": "/category/striegel-faq/",
+        "anchor": "FAQ Striegel",
         "block": "further_information"
       }
     ],
@@ -122,7 +122,7 @@
         "active": true
       },
       {
-        "href": "/category/gewoehnungssachen-uebungen/",
+        "href": "/category/striegel-faq/",
         "active": true
       }
     ],
@@ -146,7 +146,8 @@
       "Körperhaltung",
       "Verhalten",
       "Entspannung",
-      "Abwehr"
+      "Abwehr",
+      "Striegel"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
