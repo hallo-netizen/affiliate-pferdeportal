@@ -1,0 +1,149 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "pferdegesundheit-verstehen",
+    "plan_slot": "74851e633cf66b77d4e78a092e5baff55a8d9c7b2de07bf539081fdfa38a3897",
+    "target_keyword": "Kann man ein 30 Jahre altes Pferd noch reiten?",
+    "title": "Kann man ein 30 Jahre altes Pferd noch reiten?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "University of Minnesota – Caring for your senior horse",
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-senior-horse"
+        }
+      ],
+      "claims": [
+        "Viele Pferde können bei guter Versorgung bis in ihre Zwanziger oder Dreißiger gesund leben.",
+        "Auch wenn ein älteres Pferd noch geritten wird, muss die Sattelpassform regelmäßig überprüft werden.",
+        "Leichte, angepasste Bewegung kann bei älteren Pferden zum Erhalt von Mobilität und zur Unterstützung bei Arthritis beitragen.",
+        "Mit zunehmendem Alter kann die Koordination abnehmen; dies muss bei der Belastbarkeit berücksichtigt werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Kann man ein 30 Jahre altes Pferd noch reiten?",
+      "topic": "Kann man ein 30 Jahre altes Pferd noch reiten?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Kann man ein 30 Jahre altes Pferd noch reiten?"
+    },
+    "research_claims": {
+      "F1": {
+        "statement": "Viele Pferde können bei guter Versorgung bis in ihre Zwanziger oder Dreißiger gesund leben.",
+        "evidence_text": "Many horses and ponies can live into their 20s or 30s with good health care.",
+        "evidence_text_sha256": "68aded4a4a0ffc623a4cd548b8890ae506676ffc4c4d0459478a276d3b13c164",
+        "source_title": "University of Minnesota – Caring for your senior horse",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-senior-horse",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "statement": "Auch wenn ein älteres Pferd noch geritten wird, muss die Sattelpassform regelmäßig überprüft werden.",
+        "evidence_text": "If you still ride your senior horse or pony, check their saddle fit.",
+        "evidence_text_sha256": "f8d7b9bd3f9280f245f5ae2bed96db62ad305322e8b0e002524b311da40373ff",
+        "source_title": "University of Minnesota – Caring for your senior horse",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-senior-horse",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "statement": "Leichte, angepasste Bewegung kann bei älteren Pferden zum Erhalt von Mobilität und zur Unterstützung bei Arthritis beitragen.",
+        "evidence_text": "Managing weight, keeping horses in light work, and stretching are all good ways to help manage arthritis.",
+        "evidence_text_sha256": "b1e2c48213586a703554a59b74b9249ced93e479b23bba613ec3675f71f0af68",
+        "source_title": "University of Minnesota – Caring for your senior horse",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-senior-horse",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "statement": "Mit zunehmendem Alter kann die Koordination abnehmen; dies muss bei der Belastbarkeit berücksichtigt werden.",
+        "evidence_text": "Slightly decreased coordination in older horses can reduce agility.",
+        "evidence_text_sha256": "87a6074b4ad0149340755886215edb3bfe4fd5e461d7f60da6443115d2457354",
+        "source_title": "University of Minnesota – Caring for your senior horse",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-senior-horse",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "Pferdegesundheit und ältere Pferde",
+        "block": "answer"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Seniorenpferd",
+      "Reiten",
+      "Alter",
+      "Körperzustand",
+      "Belastbarkeit",
+      "Sattel"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die Tabelle erläutert nachvollziehbar unterschiedliche Situationen, ihre Bedeutung und sinnvolle Maßnahmen im Pferdealltag."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
