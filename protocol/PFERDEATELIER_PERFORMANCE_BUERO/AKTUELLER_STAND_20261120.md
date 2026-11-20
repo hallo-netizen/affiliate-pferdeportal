@@ -627,3 +627,95 @@ Sie können Grundlast erzeugen, erklären aber nicht das bewiesene Kandidaten-/S
 - Nächster Produktionskandidat darf nur den direkt bewiesenen category_product_1..3-Restpfad optimieren.
 - Fachlogik für Placement, Control, Health, Bilder, Provider, GTIN, Relevanzbänder, Mix und Fallback darf nicht reduziert werden.
 - Vor Installation: Alt/Neu gegen breiten 709/710-Kandidaten-Bestand und mehrere Provider-/Fallback-/Placement-Zustände, 0 Ausgabeabweichungen.
+
+
+## Fortsetzung nach Ursachenprofil 7.0 – exakter Live-6.72.362-Pfad – 20.11.2026
+
+### Live-Quellstand exakt rekonstruiert
+Basis war das gesicherte Paket `PFERDEATELIER_AFFILIATE_6.72.361_PERFORMANCE_ROOTFIX_FINAL_TEST.zip` plus ausschließlich der dokumentierte 6.72.362-GTIN-Set-Patch.
+
+Die Rekonstruktion trifft die Fingerprints des aktuellen Live-Berichts exakt:
+- Hauptdatei 839887 Byte / SHA-256 `173ca294b3c90621daa8a95d674bbdcb6c42e1cf6e5da55a52610c40ea16b040`
+- eBay-Trait `d97756b0c73c791dfa10be636bebcbf1220d9c35f43f648e79638ac9b0ac2e83`
+- eBay-Run `bac0dd05a8f128778b9c7e6e69634b51e3abcaaddcd23155b5050e48fd99fa0d`
+- eBay-Deletion `65265a0dfb611936f4f5457d997ae018c65bffdd24e71d979875215a108a02fc`
+- Digistore `f6f6e9ea787de07ee709c3da6fc4c9764d6993d53b6e33c4b5f102d706e3d488`
+
+Damit beziehen sich die folgenden Aussagen auf den tatsächlich installierten 6.72.362-Code, nicht auf den veralteten release/current-Arbeitsstand.
+
+### Direkt bewiesener Slotpfad
+`select_category_product_campaign_fast_v672171`:
+1. Shared Rank Base einmal request-lokal.
+2. pro Slot Placement/Bands.
+3. Control/Health.
+4. eBay Provider Cohort.
+5. Providerstrategie.
+6. Bild.
+7. Strict-Relevance-Guard.
+8. Shared-Offer/GTIN.
+9. Provider-Mix.
+10. bei <3 Treffern Portal-Fallback.
+
+Bereits request-lokal gecacht:
+- Shared Rank Base
+- Control-Basis und slotweites Control-Veto
+- Health
+- Bildfreigabe
+- eBay Provider-Cohort-Ergebnis seit 6.72.361
+
+### Verworfen: lokaler 6.72.364-GTIN-Kandidat
+In `multiprovider_prefer_shared_offer_cards()` existiert zwar formal noch eine quadratische Zeile:
+`array_intersect($gtins, array_keys($shown))`.
+
+Isolierter Test:
+- 4430 Alt/Neu-Semantikfälle, 0 Abweichungen.
+- 710 Kandidaten: isolierter Funktionsblock ca. 96–248 ms alt vs. ca. 3–6 ms mit direktem Set-Lookup, je nach GTIN-Verteilung.
+
+ABER der exakte Kategorie-Aufrufweg widerlegt die Live-Ursächlichkeit:
+- Vor `multiprovider_prefer_shared_offer_cards()` läuft im eBay-Cohort bereits `multiprovider_reorder_candidates()`.
+- In den einzigen Modi, in denen Shared-Offer die GTIN-Bewertung aktiviert (`combined`/`automatic`), setzt `multiprovider_reorder_candidates()` für die zurückgegebenen Kandidaten bereits `_ppar_product_provider_count`.
+- Shared-Offer überspringt dann per `isset($candidate['_ppar_product_provider_count'])` seinen erneuten GTIN-Identitätsaufbau.
+- Damit ist der isolierte quadratische Block im relevanten schnellen Kategoriepfad nicht als Hauptursache bewiesen.
+
+Entscheidung:
+- 6.72.364 NICHT ausgeben / NICHT installieren.
+- Kein Produktionsfix aus einem isoliert schnellen, aber im Livepfad nicht nachgewiesenen Block.
+
+### Ebenfalls geprüft und ausgeschlossen
+`category_product_provider_mix_v672133`:
+- sichere Index- statt array_shift-Variante über 1065 Fälle outputidentisch.
+- bei 710 Kandidaten nur ca. 0,16 ms absoluter lokaler Gewinn.
+=> nicht ursächlich genug, bleibt unverändert.
+
+eBay-Titel-Dubletten-Vorfilterung:
+- sichere Längenbucket-Variante auf 100/200/300 Kandidaten gemessen.
+- nur wenige Prozent / wenige Millisekunden, teils sogar langsamer.
+=> nicht anfassen.
+
+### Was der 7.0-PROFILE-Lauf noch beweist
+Pferdesättel vs. Satteldecken:
+- gleiche Astra-/Kubio-Grundkomponenten.
+- DB-Unterschied nur ca. 106 ms.
+- externe HTTP 0 ms auf beiden.
+- drei category_product-Slots erklären ca. 2273 ms bzw. 76,9 % der gesamten Routendifferenz.
+- Pferdesättel: 139002 Cache-Hits.
+- Satteldecken: 85590 Cache-Hits.
+- Differenz: 53412 Cache-Hits bei nur geringem Query-/DB-Unterschied.
+
+PROFILE hängt absichtlich keine cache-sensiblen Deep-Observer an. Deshalb stehen `targeted_trace.get_post_metadata` usw. im Profil auf 0; die 53412 zusätzlichen Cache-Hits können damit noch nicht einem internen Callsite-Zweig zugeordnet werden.
+
+### Nächster EINZIGER Messschritt – vorhandenes Plugin, keine Neuinstallation
+Mit der bereits installierten Performance Diagnose Safe 7.0:
+- Modus `Frontend-Tiefenbeweis` / `deep_frontend`
+- ausschließlich zwei Frontendseiten je einmal:
+  1. /ausruestung/ausruestung-sattel/pferdesaettel/
+  2. /ausruestung/ausruestung-sattel/satteldecken/
+- danach stoppen und Gesamtanalyse JSON exportieren.
+
+Ziel dieses einen Laufs:
+- exakte Zahl `get_post_metadata`, `get_term`, `sanitize_key`
+- gesampelte Top-Callsites mit Plugin + Datei + Funktion
+- Querypattern-Attribution
+- dadurch Beweis, ob Restlast aus Fallback, eBay-Cohort-Key-Aufbau, GTIN-Metadaten, Source-/Provider-Gates oder einem anderen konkreten Zweig stammt.
+
+Der Tiefenlauf ist KEIN Wall-Time-Benchmark; die 7.0-Diagnose dokumentiert selbst, dass Deep-Observer Zusatzlast erzeugen. Für absolute Zeiten bleibt PROFILE/PASSIV maßgeblich. Der Deep-Lauf dient ausschließlich der Ursachenattribution.
