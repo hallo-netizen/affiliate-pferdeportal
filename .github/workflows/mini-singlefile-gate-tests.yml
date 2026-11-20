@@ -1,0 +1,22 @@
+name: MINI Single File Gate - Code Tests
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - 'control/mini-output-gate/**'
+      - '.github/workflows/mini-singlefile-gate-tests.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  prove-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: MINI gate, repair loop, one-file fail-closed tests
+        run: |
+          cd control/mini-output-gate
+          python -m unittest -v test_mini_gate.py test_mini_single_release.py
