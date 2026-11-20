@@ -88,7 +88,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m engine.k0_portal_resolver "$RUN_DIR/WORDPRESS_INTAKE.json" K0_PORTAL_REGISTRY.json > /tmp/k0-portal.json
+          test -f "$RUN_DIR/PSERC_SOURCE_MANIFEST.json" || { echo "K0_UPSTREAM_SEO_SOURCE_MANIFEST_MISSING" >&2; exit 2; }
+          python3 -m engine.k0_portal_resolver "$RUN_DIR/WORDPRESS_INTAKE.json" K0_PORTAL_REGISTRY.json "$RUN_DIR/PSERC_SOURCE_MANIFEST.json" > /tmp/k0-portal.json
           python3 - <<'PY'
           import json,os
           x=json.load(open('/tmp/k0-portal.json'))
@@ -103,13 +104,30 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          category_slug="$(python3 - <<'PY'
+          category_lookup="$(python3 - <<'PY'
           import json,os
+          from urllib.parse import quote
+          x=json.load(open('/tmp/k0-portal.json'))
+          assert x['status']=='PASS' and x['item_count']==1,x
+          item=x['items'][0]
+          reg=json.load(open('K0_PORTAL_REGISTRY.json'))
+          profiles=[p for p in reg['profiles'] if p['portal_id']==item['portal_id']]
+          assert len(profiles)==1,(item,profiles)
+          basis=str(item['basis'])
+          if basis.startswith('verified_wp_source_host:'):
+              host=basis.split(':',1)[1]
+              assert host in profiles[0]['site_hosts'],(host,profiles[0])
+          else:
+              # Preserve the original legacy category path, which is Pferdeatelier only.
+              assert item['portal_id']=='pferdeatelier',item
+              host=profiles[0]['site_hosts'][0]
           d=json.load(open(os.environ['RUN_DIR']+'/WORDPRESS_INTAKE.json'))
-          print(d['items'][0]['category'])
+          slug=d['items'][0]['category']
+          assert slug==item['job_identity']['category'],(slug,item)
+          print('https://'+host+'/wp-json/wp/v2/categories?slug='+quote(slug,safe=''))
           PY
           )"
-          curl --fail --location --retry 3 --silent --show-error "https://pferde-atelier.de/wp-json/wp/v2/categories?slug=$category_slug" -o /tmp/k0-category.json
+          curl --fail --location --retry 3 --silent --show-error "$category_lookup" -o /tmp/k0-category.json
           python3 - <<'PY'
           import json
           rows=json.load(open('/tmp/k0-category.json'))
