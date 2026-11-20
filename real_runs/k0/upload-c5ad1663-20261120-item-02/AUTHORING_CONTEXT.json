@@ -111,8 +111,8 @@
       },
       {
         "role": "further_information",
-        "href": "/category/pferdegesundheit-verstehen/",
-        "anchor": "Pferdegesundheit verstehen",
+        "href": "/gesundheit/gesundheit-senioren/",
+        "anchor": "Senioren",
         "block": "further_information"
       }
     ],
@@ -122,7 +122,7 @@
         "active": true
       },
       {
-        "href": "/category/pferdegesundheit-verstehen/",
+        "href": "/gesundheit/gesundheit-senioren/",
         "active": true
       }
     ],
