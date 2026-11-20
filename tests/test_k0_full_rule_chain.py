@@ -80,20 +80,36 @@ def with_valid_table(a):
 
 
 class K0LinkRegressionTests(unittest.TestCase):
-    def test_flexible_one_parent_link_still_passes_existing_structural_rules(self):
+    def test_one_parent_link_without_further_information_is_blocked(self):
         a=make_base()
         retained=a['bound_links'][0]
-        removed=a['bound_links'][1:]
-        for item in removed:
+        for item in a['bound_links'][1:]:
             m=re.search(r'(?is)<a\b[^>]*data-link-role="'+re.escape(item['role'])+r'"[^>]*>(.*?)</a>',a['html'])
             self.assertIsNotNone(m)
             a['html']=a['html'][:m.start()]+m.group(1)+a['html'][m.end():]
         a['bound_links']=[retained]
         a['link_registry']=[x for x in a['link_registry'] if x['href']==retained['href']]
         a['runtime_link_roles']=['parent_category']
-        p,cat=package_from_article(a)
+        p,_=package_from_article(a)
+        with self.assertRaisesRegex(Blocked,'K0_RULE_CONTEXT_LINK_COUNT_INVALID'):
+            validate_rule_context(p['rule_context'],p['identity'])
+        receipts={x['rule_id']:x for x in structural_receipts(a)}
+        self.assertEqual(receipts['links.visible_exact']['status'],'FAIL')
+        self.assertEqual(receipts['links.required_roles']['status'],'FAIL')
+        self.assertEqual(receipts['links.further_information_position']['status'],'FAIL')
+
+    def test_parent_and_further_link_without_semantic_related_is_valid(self):
+        a=make_base()
+        removed=a['bound_links'][1]
+        m=re.search(r'(?is)<a\b[^>]*data-link-role="'+re.escape(removed['role'])+r'"[^>]*>(.*?)</a>',a['html'])
+        self.assertIsNotNone(m)
+        a['html']=a['html'][:m.start()]+m.group(1)+a['html'][m.end():]
+        a['bound_links']=[a['bound_links'][0],a['bound_links'][2]]
+        a['link_registry']=[x for x in a['link_registry'] if x['href']!=removed['href']]
+        a['runtime_link_roles']=['parent_category','further_information']
+        p,_=package_from_article(a)
         out=validate_rule_context(p['rule_context'],p['identity'])
-        self.assertEqual(len(out['bound_links']),1)
+        self.assertEqual(len(out['bound_links']),2)
         receipts={x['rule_id']:x for x in structural_receipts(a)}
         for name in ('links.visible_exact','links.required_roles','links.runtime_roles_bound',
                      'links.further_information_position','links.bound_pairs_exact'):
