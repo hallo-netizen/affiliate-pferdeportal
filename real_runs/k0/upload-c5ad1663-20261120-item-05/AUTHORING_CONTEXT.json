@@ -163,7 +163,11 @@
       "Pflege",
       "Wasser",
       "Genehmigung",
-      "Tierseuchenkasse"
+      "Tierseuchenkasse",
+      "Nachsaat",
+      "Pferdeweiden",
+      "Grünland",
+      "Futterfläche"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
