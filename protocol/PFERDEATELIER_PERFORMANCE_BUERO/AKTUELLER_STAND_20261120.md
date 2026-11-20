@@ -102,3 +102,36 @@ Bestehende Performance-Nachweise bleiben gültig und werden nicht dupliziert, in
 - `release/affiliate-zentrale/evidence/PFERDEATELIER_PERFORMANCE_GESAMTBEWEIS_20261119.md`
 - `release/affiliate-zentrale/evidence/PFERDEATELIER_PERFORMANCE_VOLLAUDIT_20261119.md`
 - `release/affiliate-zentrale/evidence/PFERDEATELIER_PERFORMANCE_STAND_20261119_1504.md`
+
+
+## Prüfung der vier kleinen Plugin-Kandidaten – 20.11.2026
+
+Ergebnis: Keines der vier Plugins ist für die öffentliche Frontend-Funktion des Pferdeateliers erforderlich. Alle vier sind Diagnose-, Analyse- oder Exportwerkzeuge.
+
+1. Pferdeatelier eBay – Ein-Klick-Sichtbarkeitsdiagnose 1.0.0
+- Zweck laut Pluginbeschreibung: nur lesender Gesamtabgleich bestehender eBay-Freigaben mit Quellenfrische, Ausgabeobjekten und WordPress-Kampagnen.
+- Keine Suche, keine Änderungen.
+- Einstufung: Backend-Diagnosewerkzeug; keine Frontend-Funktion.
+- Maßnahme: kann deaktiviert bleiben und nur bei einer gezielten eBay-Diagnose wieder aktiviert werden.
+
+2. WordPress Speicheranalyse 1.1.0
+- Zweck: Speicher-/Dateianalyse; read-only, optional bestätigte Löschung einzelner Dateien ausschließlich im WPvivid-Backupordner.
+- Einstufung: Wartungs-/Analysewerkzeug; keine Frontend-Funktion.
+- Maßnahme: deaktivierbar; bei Bedarf für Speicherprüfung wieder aktivieren.
+
+3. SEO-Quellpaket Exporter 1.0.0
+- Zweck: exportiert ausschließlich installierte Quellverzeichnisse von SEO-Themenengine und SEO-Redaktionsplan-Compiler als read-only ZIP mit SHA-256-Manifest.
+- Einstufung: reiner Entwickler-/Exporthelfer; keine Frontend-Funktion.
+- Maßnahme: deaktivierbar; nur für einen erneuten Quellpaket-Export wieder aktivieren.
+
+4. DBStorage Insights 1.2.0
+- Zweck: analysiert Datenbankgröße, Autoload-Optionen, Transients, verwaiste Daten, Tabellen-Overhead, Uploads sowie Plugin-/Theme-Speichernutzung.
+- Einstufung: Backend-Analysewerkzeug; keine Frontend-Funktion.
+- Besonderheit: Im Performance-Bericht ist das Plugin trotz reinem Analysezweck mit 17 registrierten Hooks und 28 geladenen Dateien im Request-Footprint sichtbar. Das beweist nicht, dass es Hauptursache der Langsamkeit ist, aber es läuft im aktiven Stack mit.
+- Maßnahme: deaktivierbar; nur bei Datenbank-/Speicheranalyse wieder aktivieren.
+
+Verbindliche Entscheidung:
+- Performance Diagnose Safe bleibt als Messwerkzeug aktiv.
+- Die vier oben genannten Plugins dürfen als erster KISS-Schritt deaktiviert werden.
+- Nicht löschen, solange ihre erneute Diagnosefunktion noch nützlich sein kann.
+- Nach Deaktivierung nur Funktionsgleichheit und Messwerte prüfen; keine weiteren Änderungen gleichzeitig.
