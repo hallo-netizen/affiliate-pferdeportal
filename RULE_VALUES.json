@@ -52,12 +52,13 @@
       "marker_visible_content_forbidden": true
     },
     "visible_links_exact": 3,
-    "visible_links_min": 1,
+    "visible_links_min": 2,
     "visible_links_max": 3,
     "mandatory_link_roles": [
-      "parent_category"
+      "parent_category",
+      "further_information"
     ],
-    "link_count_policy": "MEANINGFUL_1_TO_3_SINGLE_PREWRITER_DECISION"
+    "link_count_policy": "MEANINGFUL_2_TO_3_PARENT_AND_FURTHER_MANDATORY_SINGLE_PREWRITER_DECISION"
   },
   "heading": {
     "abstract_meta_patterns": [
@@ -238,7 +239,7 @@
         "semantic_related",
         "further_information"
       ],
-      "minimum_required_count": 1,
+      "minimum_required_count": 2,
       "maximum_allowed_count": 3
     },
     "lists": {
