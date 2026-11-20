@@ -1,0 +1,165 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Warum ist der Weidegang für Pferde im Winter manchmal eingeschränkt?",
+    "target_keyword": "Warum dürfen Pferde im Winter nicht auf die Weide?",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "FAQ",
+    "plan_slot": "7a0e8b3717efc89bbb7c388594f254599625a388896bd46ed2552a3cda88a013"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+          "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/"
+        }
+      ],
+      "claims": [
+        "Im Winter muss bei Weidehaltung zusätzlich gefüttert werden.",
+        "Für die zeitweise Schonung gesperrter Weideflächen kann ein Sand-Auslauf genutzt werden.",
+        "Auch auf der Weide muss für Pferde jederzeit Wasser erreichbar sein.",
+        "Teilflächen sollten vorübergehend geschont werden, damit das Gras nachwächst."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Warum dürfen Pferde im Winter nicht auf die Weide?",
+      "topic": "Warum ist der Weidegang für Pferde im Winter manchmal eingeschränkt?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Warum ist der Weidegang für Pferde im Winter manchmal eingeschränkt?"
+    },
+    "research_claims": {
+      "F1": {
+        "statement": "Im Winter muss bei Weidehaltung zusätzlich gefüttert werden.",
+        "evidence_text": "Die Pferde ernähren sich in den Sommermonaten fast ausschließlich von der Weide, im Winter müssen die Halter*innen zufüttern.",
+        "evidence_text_sha256": "b618ac74d2c5ffcc14adcbf7fd62e0be8808b7136734b9bbdd8a590df4fd0464",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "statement": "Für die zeitweise Schonung gesperrter Weideflächen kann ein Sand-Auslauf genutzt werden.",
+        "evidence_text": "In Phasen, in denen die Weidefläche geschont und gesperrt wird, ist der sandaufgeschüttete Auslauf mit ständig zugänglichem Raufutter eine gute vorübergehende Alternative.",
+        "evidence_text_sha256": "a2fca837b99ecc26a7e9c818d5c0a51eef95f1bd4bd4f2244cf8935297ce6ccb",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "statement": "Auch auf der Weide muss für Pferde jederzeit Wasser erreichbar sein.",
+        "evidence_text": "Auch auf der Weide sollten Pferde immer Zugang zu Wasser und Schatten haben.",
+        "evidence_text_sha256": "c94bb8511ef75aef0c7197224ea79da3e508a78a008430f31c67d61720fa72d4",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "statement": "Teilflächen sollten vorübergehend geschont werden, damit das Gras nachwächst.",
+        "evidence_text": "Damit die Qualität des Weidebodens erhalten bleibt und das Gras nachwachsen kann, sollten sie Teilflächen zudem immer wieder für vier bis sechs Wochen zur Schonung absperren",
+        "evidence_text_sha256": "082e09696ce0d5328460645d3f2dcab774d5daa8247a9d89eb59c7c09b25bd56",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "Pferdehaltung im Alltag",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/weidezelt-faq/",
+        "anchor": "FAQ Weidezelt",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      },
+      {
+        "href": "/category/weidezelt-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Weide",
+      "Winter",
+      "Weidegang",
+      "Gras",
+      "Raufutter",
+      "Fütterung",
+      "Boden",
+      "Schutz",
+      "Wasser",
+      "Witterung",
+      "Pferdehaltung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Ein sachlicher Vergleich von Boden- und Witterungsbedingungen zeigt konkrete Möglichkeiten für sichere Winterbewegung."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
