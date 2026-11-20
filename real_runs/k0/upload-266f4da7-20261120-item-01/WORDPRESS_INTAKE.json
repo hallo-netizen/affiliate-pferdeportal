@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie verabschieden sich Pferde?",
+      "target_keyword": "Wie verabschieden sich Pferde?",
+      "category": "pferde-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "45b52547d85cf112b90ff3d0faf050534d65349d9f07782b54ee5c0045322cec"
+    }
+  ],
+  "batch_sha256": "736f0338a5a44634eb1c453f7e87bbba3aad70f1c7f91306e441e8466f927817"
+}
