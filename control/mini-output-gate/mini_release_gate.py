@@ -138,7 +138,7 @@ def gate(workspace):
             if cat['route'] in ('FACH', 'MAGAZIN') and not (val(cat['category_slug']) and val(cat['article_type'])):
                 issue('CATEGORY', i, 'category_slug/article_type', 'KATEGORIE_UNVOLLSTAENDIG')
                 continue
-        if original.get('mode') == 'LEGACY_CATEGORY_ONLY' or cat['route'] == 'REDAKTIONSBUERO':
+        if original.get('mode') == 'LEGACY_CATEGORY_ONLY':
             continue  # genuine final stage; no re-decision
 
         editorial = cp.get('editorial')
