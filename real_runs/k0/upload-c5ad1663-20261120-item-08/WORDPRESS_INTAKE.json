@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Was kostet ein Reitplatz mit 20 mal 40 Metern?",
+      "target_keyword": "Wie viel kostet ein Reitplatz mit den Maßen 20x40 Meter?",
+      "category": "reitplatzbau-kosten",
+      "article_type": "FAQ",
+      "plan_slot": "0556512b8b44a7d86ec3bbc729cc7f2f0fdbd3807d2905a4a3a2dbc4c51cc892"
+    }
+  ],
+  "batch_sha256": "605f26b908335af1b58ebc8adad144e892e85fd05681fc13f6bcebdd90168d20"
+}
