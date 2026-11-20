@@ -187,7 +187,7 @@ def structural_receipts(article):
     inline_ok=(Counter(paragraph_links)==Counter((x['block'],x['role'],x['href'],x['anchor']) for x in links))
     placement_ok=placement_ok and inline_ok
     relative_ok=all(x['href'].startswith('/') and not x['href'].startswith('//') and '://' not in x['href'] for x in links)
-    further_ok=all(x['block']=='further_information' for x in links if x['role']=='further_information')
+    further_ok=sum(1 for x in links if x['role']=='further_information' and x['block']=='further_information')==1
     distributed_ok=(len(links)==len({x['block'] for x in links})) if links else False
     runtime_roles=set(article.get('runtime_link_roles') or [])
     runtime_ok=runtime_roles=={x['role'] for x in bound}
