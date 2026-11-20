@@ -1,3 +1,14 @@
+# 20.11.2026 – AKTUELL HAB 0.4.31.10: ALTEN LOCAL FINALIZE WIEDER AUFNEHMEN (NICHT 0.4.31.9 INSTALLIEREN)
+
+**Live-Befund Benutzer 13:41:** installierte 0.4.31.9 zeigt originalen Child `PAUSED_ERROR`, Warteschlange `RUNNING/BLOCKED_PENDING_PARK`, Phase `FINALIZE:SANDBOX_STORE_READY`, alter Speicherfehler `PSTE_SANDBOX_RECORD_STORE_LEGACY_OPTION_MISSING`, 9 Rohkeywords, 0 fertige. `Status aktualisieren` repariert diesen gespeicherten Halt nicht.
+
+**Neue einzige getestete Reparatur:** v0.4.31.10, `Texterstellung_HAB_UND_BEWAHR_0.4.31.10_BESTEHENDEN_ABSCHLUSS_FORTSETZEN.zip`, SHA256 `a63bd75a9a4d2a127299477bf2c78742a156da63932bab4574f050c233a27b99`, im Hab-Plugin-Büro `/hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEKANDIDATEN/`. Vollständige Fehlerkette, echter Originalcode, alle Testquellen und Diff: `HAB_043110_SICHERE_WIEDERAUFNAHME_ALTEN_FINALIZE_20261120.md` und persönliche Library `/hab-und-bewahr/TEXTERSTELLUNG/PRUEFUNG_ALTABSCHLUSS_20261120/`.
+
+**Technischer Nachweis nach Extraktion finaler ZIP:** 134/134 lokale Tests: 9/9 ORIGINAL Research-Job, 11/11 Original-Queue, **5/5 beide originalen Klassen gemeinsam** genau mit 9 erhaltenen Rohkeywords, weitere 48/48 Keyword-Providerwege, 11+8+11 PAA, 17+14 MINI/K0-Import. 78/78 PHP-Lint, 87/87 ZIP-CRC, 83/87 unverändert. Original-K0 und unabhängiger K-Multi-Code nicht geändert, keine echten API-/WP-Schreibkosten. **KEIN** live nachgewiesener vollständiger Abschluss, kein fertiger KMulti-Artikel.
+
+**Genau nächster WP-Klick:** Backup, 0.4.31.10 **über 0.4.31.9 installieren**, `Texterstellung → Recherche → Vorhandenen Abschluss ohne neue Kosten fortsetzen` **einmal**, dann aktuelle Diagnose herunterladen. Keinen neuen bezahlten Keywordlauf, nicht deinstallieren. Falls Knopf fehlt oder Status abweicht, Diagnose statt neuen Auftrag.
+
+---
 # 20.11.2026 13:41 MEZ – NEUER LIVE-NACHWEIS: HAB 0.4.31.9 IST INSTALLIERT, ALTER AUFTRAG BLEIBT HÄNGEN
 
 **Bildbeleg direkt vom Benutzer:** WordPress `Texterstellung 0.4.31.9 KISS`, Anzeige `RECHERCHE LÄUFT · BREADTH:0:FINALIZE:SANDBOX_STORE_READY`, letzter abgeschlossener Schritt ca. 11:00 +0100, `FINALIZE Schritt 3 von 3`, 9 Rohkeywords, 0 fertige Keywordkandidaten, 0 von 1 fertig, Item `BLOCKED_PENDING_PARK`, Originalfehler `PSTE_SANDBOX_RECORD_STORE_LEGACY_OPTION_MISSING`, Einzelforschung `PAUSED_ERROR`. Diese Anzeige ist **kein erfolgreicher Fortsetzungsnachweis**.
