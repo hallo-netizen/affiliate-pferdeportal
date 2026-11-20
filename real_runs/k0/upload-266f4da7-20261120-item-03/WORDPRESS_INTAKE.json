@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Dürfen Pferde Regenwasser trinken?",
+      "target_keyword": "Dürfen Pferde Regenwasser Trinken?",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "6caf3438dc292eeb904eca309767c8e55b28802e49f4696a60894a9457f7788e"
+    }
+  ],
+  "batch_sha256": "0b64d002e468c2c29b8deff6ec35b7b4fc1f1dedd351deb408dbba19425f3105"
+}
