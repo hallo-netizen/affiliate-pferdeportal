@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Was kostet die Miete einer Pferdebox?",
+      "target_keyword": "Wie viel kostet eine Pferdebox Miete?",
+      "category": "recht-finanzen-organisation",
+      "article_type": "FAQ",
+      "plan_slot": "009aefa35c3a5dcabb4c0a6fa2ccd993a9fb4007888e0f853605bf2212c8336e"
+    }
+  ],
+  "batch_sha256": "6ba218197153c4f47d44b223bd17e970bf465302203fa78ea8d2b0dddf8e71c0"
+}
