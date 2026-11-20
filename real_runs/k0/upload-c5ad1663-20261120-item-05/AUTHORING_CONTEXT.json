@@ -1,0 +1,180 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wie viele Hektar Weidefläche braucht ein Pferd?",
+    "target_keyword": "Wie viel ha pro Pferd?",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "FAQ",
+    "plan_slot": "6c740fab26ef856d7d2862f9d37e7c4b66f28c27c669356fd828291e9791d5eb"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Landwirtschaftskammer NRW – Blick für Pferdeweiden schärfen",
+          "source_url": "https://landwirtschaftskammer.de/landwirtschaft/ackerbau/gruenland/pferdeweiden.htm"
+        }
+      ],
+      "claims": [
+        "Für die Pferdeweide gibt es keine allgemein ideale Ausgestaltung.",
+        "Weideansprüche hängen von Nutzung, Haltung, Tierbesatz und Rasse ab.",
+        "Weiden sollen Futter und Bewegung ermöglichen.",
+        "Weidepflege soll schädlichen Entwicklungen des Pflanzenbestands vorbeugen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie viel ha pro Pferd?",
+      "topic": "Wie viele Hektar Weidefläche braucht ein Pferd?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie viele Hektar Weidefläche braucht ein Pferd?"
+    },
+    "research_claims": {
+      "F1": {
+        "statement": "Für die Pferdeweide gibt es keine allgemein ideale Ausgestaltung.",
+        "evidence_text": "Es gibt nicht „die Pferdeweide“ oder eine „ideale Pferdeweide“.",
+        "evidence_text_sha256": "882171ebc8c03e5054dbee6f6889375193c1360d01933b15f8fe6de11e294079",
+        "source_title": "Landwirtschaftskammer NRW – Blick für Pferdeweiden schärfen",
+        "source_url": "https://landwirtschaftskammer.de/landwirtschaft/ackerbau/gruenland/pferdeweiden.htm",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "statement": "Weideansprüche hängen von Nutzung, Haltung, Tierbesatz und Rasse ab.",
+        "evidence_text": "Je nach Art der Weidenutzung, Haltungsverfahren, Tierbesatz und Rasse haben Pferde unterschiedliche Ansprüche an die Weide und die Weideaufwüchse als wichtige Futterquelle.",
+        "evidence_text_sha256": "e4b6393050c39fd0e0020e1a40977be47c94110afed3fb548846213133d5b7db",
+        "source_title": "Landwirtschaftskammer NRW – Blick für Pferdeweiden schärfen",
+        "source_url": "https://landwirtschaftskammer.de/landwirtschaft/ackerbau/gruenland/pferdeweiden.htm",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "statement": "Weiden sollen Futter und Bewegung ermöglichen.",
+        "evidence_text": "Die Weide hat für das Pferd genauso wie für andere Weidetiere drei wesentliche Funktionen zu erfüllen:",
+        "evidence_text_sha256": "c4905305f6a0148867ec665006e9907e758142efcf6732f49091c8f0d070d789",
+        "source_title": "Landwirtschaftskammer NRW – Blick für Pferdeweiden schärfen",
+        "source_url": "https://landwirtschaftskammer.de/landwirtschaft/ackerbau/gruenland/pferdeweiden.htm",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "statement": "Weidepflege soll schädlichen Entwicklungen des Pflanzenbestands vorbeugen.",
+        "evidence_text": "Dennoch sollte auf Pferdeweiden in besonderer Weise auch Pflegemaßnahmen durchgeführt werden, um negativen Bestandesentwicklungen vorzubeugen.",
+        "evidence_text_sha256": "299aaa619effe4b08f09dc2118f9a4baeecded4c7216be02544ab2ade4084e15",
+        "source_title": "Landwirtschaftskammer NRW – Blick für Pferdeweiden schärfen",
+        "source_url": "https://landwirtschaftskammer.de/landwirtschaft/ackerbau/gruenland/pferdeweiden.htm",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "Pferdehaltung Grundlagen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/nachsaat-fuer-pferdeweiden-beratung/",
+        "anchor": "Beratung Nachsaat für Pferdeweiden",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      },
+      {
+        "href": "/category/nachsaat-fuer-pferdeweiden-beratung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Weide",
+      "Haltung",
+      "Kosten",
+      "Wetter",
+      "Größe",
+      "Weidegang",
+      "Reitplatz",
+      "Stall",
+      "Futter",
+      "Tierbesatz",
+      "Boden",
+      "Schutz",
+      "Miete",
+      "Grundstück",
+      "Recht",
+      "Organisation",
+      "Beratung",
+      "Auslauf",
+      "Sicherheit",
+      "Bedingungen",
+      "Regen",
+      "Winter",
+      "Pflege",
+      "Wasser",
+      "Genehmigung",
+      "Tierseuchenkasse"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die Tabelle ordnet belegte Tatsachen konkreten Situationen und sinnvollen Maßnahmen gegenüber."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
