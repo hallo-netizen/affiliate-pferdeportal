@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Warum ist der Weidegang für Pferde im Winter manchmal eingeschränkt?",
+      "target_keyword": "Warum dürfen Pferde im Winter nicht auf die Weide?",
+      "category": "alltags-pferde-haltungsformen",
+      "article_type": "FAQ",
+      "plan_slot": "7a0e8b3717efc89bbb7c388594f254599625a388896bd46ed2552a3cda88a013"
+    }
+  ],
+  "batch_sha256": "2d6fe1fefdf19020697f1e62f08e4ba1fc7a0391a52dc67f85ed4e081e1992f9"
+}
