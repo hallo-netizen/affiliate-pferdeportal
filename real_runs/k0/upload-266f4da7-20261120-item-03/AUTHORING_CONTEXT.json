@@ -1,0 +1,139 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "pferdeernaehrung-verstehen",
+    "plan_slot": "6caf3438dc292eeb904eca309767c8e55b28802e49f4696a60894a9457f7788e",
+    "target_keyword": "Dürfen Pferde Regenwasser Trinken?",
+    "title": "Dürfen Pferde Regenwasser trinken?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "University of Minnesota – Cleaning water and tanks",
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/cleaning-animal-water-tanks"
+        },
+        {
+          "source_title": "University of Minnesota – Caring for horses in hot weather",
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-horses-during-hot-weather"
+        }
+      ],
+      "claims": [
+        "Pferde brauchen jederzeit hygienisch einwandfreies und ausreichend verfügbares Trinkwasser.",
+        "In Tanks können Schmutz, Mist, Futterreste und Algen die Trinkwasserqualität vermindern.",
+        "Bei Wärme müssen Tränken häufiger gereinigt werden, damit sich Algen und Bakterien nicht vermehren."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Dürfen Pferde Regenwasser Trinken?",
+      "topic": "Dürfen Pferde Regenwasser trinken?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Dürfen Pferde Regenwasser trinken?"
+    },
+    "research_claims": {
+      "F1": {
+        "statement": "Pferde brauchen jederzeit hygienisch einwandfreies und ausreichend verfügbares Trinkwasser.",
+        "evidence_text": "Horses should always have access to good quality water.",
+        "evidence_text_sha256": "94bd6c52e9a3ed985c7710127e52a51cd23816f4794205614bffe6c1e3cbe3f2",
+        "source_title": "University of Minnesota – Cleaning water and tanks",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/cleaning-animal-water-tanks",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "statement": "In Tanks können Schmutz, Mist, Futterreste und Algen die Trinkwasserqualität vermindern.",
+        "evidence_text": "Dirt, manure, feed droppings and algae can all contaminate tank water.",
+        "evidence_text_sha256": "d28e91505c0d2abe0ba4beaa849045a1c94df56e6ec2406972403ba3b8dcf367",
+        "source_title": "University of Minnesota – Cleaning water and tanks",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/cleaning-animal-water-tanks",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "statement": "Bei Wärme müssen Tränken häufiger gereinigt werden, damit sich Algen und Bakterien nicht vermehren.",
+        "evidence_text": "Clean water buckets and tanks more often in hot weather to prevent algae and bacteria from growing.",
+        "evidence_text_sha256": "5263a2e44a9e85255eaf969330ca8f9b4edfcc0ffe23a58f7a5b736361007dd6",
+        "source_title": "University of Minnesota – Caring for horses in hot weather",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-horses-during-hot-weather",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "anchor": "Pferdeernährung und Wasserhygiene",
+        "block": "answer"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Regenwasser",
+      "Trinkwasser",
+      "Hygiene",
+      "Auffangbehälter",
+      "Algen",
+      "Belastung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "rationale": "Die Tabelle erläutert nachvollziehbar unterschiedliche Situationen, ihre Bedeutung und sinnvolle Maßnahmen im Pferdealltag."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
