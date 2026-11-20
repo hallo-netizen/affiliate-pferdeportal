@@ -22,7 +22,7 @@ Kein K0-Code wird verändert. Keine neue Recherche, keine neu erfundene Fachents
 
 ## Technische Grenzen – nicht als erledigt behaupten
 
-- **WordPress 0.4.38 kann diesen neuen einzelnen Dateivertrag noch nicht importieren.** Das WordPress-Plugin benötigt hierfür eine reine Einmal-Importaufnahme; bisherige Mini-Worker-Entscheidungen dürfen nicht fachlich nachgeprüft oder doppelt entschieden werden.
+- **WordPress 0.4.39 kann die einzelne Importdatei jetzt technisch übernehmen (lokal getestet, noch nicht live bestätigt).** Version 0.4.38 konnte das nicht. Das neue Plugin liegt im Pferdeatelier-Büro; alte MINI-Zwischenstände bleiben erhalten.
 - Ein GitHub-Repositorieskript kann **nicht** die ChatGPT-Ausgabe beliebiger lokaler Dateien technisch verbieten. Eine nicht umgehbare Zustellung erfordert, dass die Dateien ausschließlich von einem vertrauenswürdigen externen Auslieferungsdienst (z. B. einem privaten GitHub Actions-Lauf) ausgegeben werden und der Benutzer keine beliebigen Chat-Dateien als MINI-Import verwendet. Hier wurde der Produktionsdienst noch nicht aktiviert.
 - Das bestehende Repo `hallo-netizen/affiliate-pferdeportal` ist öffentlich. WordPress-Exportdaten daher niemals dort committen oder als öffentliche Actions-Artefakte speichern. GitHub enthält nur den ausführbaren Prüfcode und anonymisierte Tests.
 - Erst eine getestete *gesamte* Kette einschließlich echter WordPress-Einmalaufnahme würde den Zielvertrag nachweisbar erfüllen. Ein lokaler `PASS` ist kein Live-Importbeweis.
@@ -32,3 +32,6 @@ Kein K0-Code wird verändert. Keine neue Recherche, keine neu erfundene Fachents
 `python -m unittest -v test_mini_single_release.py test_mini_gate.py`
 
 Zusätzlich wurde der konkrete gespeicherte 10-Themen-Export (4) geprüft: Der Freigabedienst meldete `REPARATUR` für 9 noch offene Redaktionsentscheidungen; keine Datei wurde ausgegeben. (Ein Thema ist bereits in die Redaktion geroutet.)
+## Stand 20.11.2026 – WordPress 0.4.39
+
+Plugin-ZIP und Prüfbericht: `/pferdeatelier/PLUGINS/ARBEITSRAUM_PSTE_KISS/Texterstellung-0.4.39-MINI-EINMALIMPORT.zip` und `Texterstellung-0.4.39-MINI-PRUEFNACHWEIS.json` in der Dateibibliothek. Ein WordPress-Einmalimport mit dem echten 10-Themen-Snapshot wurde lokal mit synthetischen Redaktion-/Titeltestdaten durchgeführt: 10/10 abgeschlossen, 1 Speichervorgang, wiederholter Import ohne Doppelauftrag, ungültige Dateien ohne Speicherung. 14/14 Freigabetests bestanden. **Weder echter GitHub-Produktionslauf noch Live-WordPress-Test bestätigt**. Keine Testtitel als reale Freigabe ausgeben.
