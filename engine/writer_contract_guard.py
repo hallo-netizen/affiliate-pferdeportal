@@ -84,6 +84,10 @@ def inspect_html(article_html):
         raise WriterContractBlocked(f'WRITER_H2_IMBALANCE:{lo}:{hi}:{POLICY["normal_h2_max_ratio"]:.2f}')
 
     conclusion=[r for r in rows if r['block_id']=='conclusion'][0]
+    # Existing writer owns this check once, before any seal, rule gate or WordPress output.
+    # A semantic conclusion block alone is not a visible heading named 'Fazit'.
+    if not conclusion['has_h2'] or conclusion['heading']!='Fazit':
+        raise WriterContractBlocked('WRITER_CONCLUSION_HEADING_INVALID')
     cr=conclusion['word_count']/total
     if cr<POLICY['conclusion_ratio_min']:
         raise WriterContractBlocked(f'WRITER_CONCLUSION_TOO_SHORT:{cr:.6f}:{POLICY["conclusion_ratio_min"]:.6f}')
