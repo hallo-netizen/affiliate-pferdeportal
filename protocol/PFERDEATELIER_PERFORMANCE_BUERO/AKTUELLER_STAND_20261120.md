@@ -536,3 +536,94 @@ Harte Grenzen, die ein WordPress-Plugin nicht sicher vollständig messen kann:
 - Kernel-/Paket-Netzwerkprofiling.
 
 Für diese Punkte ist bei Bedarf Serverzugriff/Profiler nötig, NICHT ein weiteres Diagnoseplugin.
+
+
+## Ursachenprofil 7.0.0 – 20.11.2026 15:53
+
+Quelle: `pferdeatelier-performance-gesamtanalyse-20261120-155347.json`
+Modus: PROFILE
+Diagnose: 7.0.0
+Affiliate: 6.72.362
+Template Kit: 1.50.616
+Astra: 4.14.3
+Kubio: 2.9.5
+
+### Direkter Hauptursachenbeweis
+Pferdesättel:
+- Gesamt 5967,34 ms
+- CPU 3462,75 ms
+- DB 730,03 ms
+- 320 Queries
+- 139002 Cache-Hits
+- externe HTTP 0 ms
+
+Satteldecken:
+- Gesamt 3009,60 ms
+- CPU 2126,22 ms
+- DB 623,81 ms
+- 311 Queries
+- 85590 Cache-Hits
+- externe HTTP 0 ms
+
+Direkt gemessene Kategorie-Produktshortcodes:
+Pferdesättel:
+- category_product_1: 1684,421 ms
+- category_product_2: 622,356 ms
+- category_product_3: 691,347 ms
+- Summe: 2998,124 ms
+
+Satteldecken:
+- category_product_1: 596,619 ms
+- category_product_2: 66,034 ms
+- category_product_3: 62,292 ms
+- Summe: 724,945 ms
+
+Differenz der drei Produktplätze: 2273,179 ms.
+Gesamtdifferenz Pferdesättel vs. Satteldecken: 2957,74 ms.
+Damit erklären die drei Kategorie-Produktplätze ca. 76,9 % des gesamten Seitenunterschieds direkt.
+
+Zusätzlicher Slot `product_after_category_tiles`:
+- Pferdesättel 447,486 ms
+- Satteldecken 450,942 ms
+=> praktisch identisch und damit kein Erklärer des Differenzproblems.
+
+### Bedeutung
+Der Hauptunterschied ist jetzt nicht mehr nur über `the_content` indirekt eingegrenzt, sondern direkt auf die Affiliate-Shortcodes `category_product_1..3` gemessen.
+Besonders:
+- Slot 1 trägt bei Pferdesättel 1684 ms.
+- Slots 2/3 bleiben mit 622/691 ms ebenfalls sehr teuer.
+- Bei Satteldecken fallen Slots 2/3 nach dem ersten Slot auf nur 66/62 ms.
+
+Das beweist:
+1. Slot 1 enthält teure gemeinsame Erstberechnung.
+2. Die gemeinsame Wiederverwendung funktioniert bei kleinerem Kandidatenbestand weitgehend.
+3. Bei breitem Pferdesättel-Bestand bleibt nach der gemeinsamen Erstberechnung weiterhin umfangreiche slotabhängige Kandidatenarbeit.
+4. Der nächste Rootfix muss exakt diese Restarbeit hinter dem Shared-Base treffen; kein allgemeiner Plugin-/Theme-Fix.
+
+### Astra/Kubio
+Pferdesättel und Satteldecken laden denselben Grundbestand:
+- Kubio ca. 294 inkludierte PHP-Dateien
+- Astra ca. 244 inkludierte PHP-Dateien
+- auf beiden Zielseiten keine Kubio-Frontendassets
+- Astra-Assets auf beiden gleich
+
+Damit sind Astra/Kubio als Ursache des ca. 2,96-s-Routenunterschieds ausgeschlossen.
+Sie können Grundlast erzeugen, erklären aber nicht das bewiesene Kandidaten-/Slot-Skalierungsproblem.
+
+### Weitere Systembefunde
+- p95 5189 ms
+- Browser-TTFB Ø 3796 ms
+- LCP Ø 4165 ms
+- Peak Memory 228 MB
+- kein persistenter Object Cache
+- Host-Load während Profil sehr hoch: ca. 145/145/151; CPU-Anzahl aus PHP nicht sichtbar
+- OPcache kurz vor Messung neu gestartet; Messung deshalb nicht als saubere absolute Produktionsbenchmark behandeln.
+- PROFILE liefert Ursachenattribution; PASSIV bleibt maßgeblich für saubere Wall-Time-Benchmarks.
+
+### Entscheidung
+- Kein neues Diagnoseplugin.
+- Kein Astra-/Kubio-Umbau als nächster Schritt.
+- Kein 6.72.363-Read-Cache-Ansatz.
+- Nächster Produktionskandidat darf nur den direkt bewiesenen category_product_1..3-Restpfad optimieren.
+- Fachlogik für Placement, Control, Health, Bilder, Provider, GTIN, Relevanzbänder, Mix und Fallback darf nicht reduziert werden.
+- Vor Installation: Alt/Neu gegen breiten 709/710-Kandidaten-Bestand und mehrere Provider-/Fallback-/Placement-Zustände, 0 Ausgabeabweichungen.
