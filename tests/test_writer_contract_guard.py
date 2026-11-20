@@ -1,6 +1,6 @@
 import hashlib, json, unittest
 from engine.writer_contract_guard import WriterContractBlocked, verify_package
-from engine.k0_writer_station import prepare, seal, verify, Blocked as StationBlocked
+from engine.k0_writer_station import prepare, seal, verify, conclusion_heading_repair_request, Blocked as StationBlocked
 from tests.k0_rule_context_fixture import rule_context
 
 def stable_json(x):
@@ -107,6 +107,32 @@ class WriterContractGuardTests(unittest.TestCase):
         body=good_html().replace(words(88,'Fazitwort'),words(20,'Fazitwort')).replace(words(75,'Einleitung'),words(150,'Einleitung'))
         with self.assertRaisesRegex(WriterContractBlocked,'WRITER_CONCLUSION_TOO_SHORT'):
             seal(self.job,draft(self.job,body))
+
+    def test_fazit_heading_is_exact_hard_writer_requirement(self):
+        # Negative: each still contains a valid conclusion SECTION, but no exact visible Fazit H2.
+        for replacement in ('<h2>Zusammenfassung</h2>', '<h2>Fazit:</h2>', ''):
+            with self.subTest(heading=replacement):
+                body=good_html().replace('<h2>Fazit</h2>',replacement)
+                with self.assertRaisesRegex(WriterContractBlocked,'WRITER_CONCLUSION_HEADING_INVALID'):
+                    seal(self.job,draft(self.job,body))
+
+    def test_same_writer_fazit_repair_and_resubmit_positive(self):
+        original=draft(self.job,good_html().replace('<h2>Fazit</h2>','<h2>Schlussgedanken</h2>'))
+        with self.assertRaisesRegex(WriterContractBlocked,'WRITER_CONCLUSION_HEADING_INVALID'):
+            seal(self.job,original)
+        receipt=conclusion_heading_repair_request(self.job,original)
+        self.assertEqual(receipt['status'],'RETURN_TO_SAME_WRITER')
+        self.assertEqual(receipt['job_id'],self.job['job_id'])
+        self.assertEqual(receipt['writer_job_sha256'],self.job['job_sha256'])
+        self.assertEqual(receipt['rule_id'],'writer.conclusion_heading_exact')
+        self.assertEqual(receipt['required_heading'],'Fazit')
+        self.assertFalse(receipt['publish_allowed'])
+        corrected=draft(self.job,original['content_html'].replace('<h2>Schlussgedanken</h2>','<h2>Fazit</h2>'))
+        corrected['revision_count']=2
+        self.assertNotEqual(receipt['draft_sha256'],conclusion_heading_repair_request(self.job,corrected)['draft_sha256'])
+        product=seal(self.job,corrected)
+        self.assertEqual(verify(self.job,product)['status'],'PASS')
+        self.assertEqual(verify_package(product)['status'],'PASS')
 
     def test_missing_further_information_is_blocked(self):
         body=good_html()
