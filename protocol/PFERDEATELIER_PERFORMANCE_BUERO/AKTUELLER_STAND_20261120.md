@@ -363,3 +363,66 @@ Danach exakt dieselbe Performance-Gesamtanalyse ausführen und besonders verglei
 - Produktausgabe Slot 1/2/3
 
 Nur bei identischer Funktion und realer Verbesserung wird 6.72.363 als neuer Stand behalten.
+
+
+## KORREKTUR / SPERRE 6.72.363 – Inhaltsprüfung nach Nutzerforderung – 20.11.2026
+
+Die zuvor als Testkandidat bezeichnete 6.72.363 wird ausdrücklich **NICHT installiert**.
+
+### Grund der Sperre
+Die vertiefte inhaltliche Prüfung hat einen echten Semantik-Risikofall gefunden:
+- `idealo_maybe_upgrade_materialization()` liest `idealo_settings()`,
+- schreibt danach `OPTION_NETWORK_IDEALO`,
+- und verarbeitet im selben Request anschließend erneut idealo-Zustand.
+Eine request-lokale Zwischenspeicherung über diese Schreibgrenze kann einen alten Wert weiterreichen. Damit ist der geforderte Beweis „keine Funktionsänderung“ für die bisherige 6.72.363 nicht erfüllt.
+
+Zusätzlich ist der lokal gemessene Zeitgewinn des breiten 709-Kandidaten-Read-Cache-Ansatzes nur ca. 36 ms Median (ca. 151,5 -> 115,9 ms im isolierten Harness). Das ist real, erklärt aber die mehrsekündige Live-Restlast nicht ausreichend.
+
+### Was trotz Sperre bewiesen wurde
+Vergleich rekonstruierter exakter 6.72.362-Funktionsstand gegen 6.72.363:
+- 1.562 -> 1.563 benannte Funktionen; entfernt 0.
+- 212 -> 212 Hook-/Filter-/Shortcode-Registrierungen; Multimenge identisch.
+- Schreibprimitive identisch in Anzahl: update_option 292, add_option 11, delete_option 41, update_post_meta 91, add_post_meta 2, delete_post_meta 14, wp_insert_post 3, wp_update_post 19, wp_delete_post 2, wpdb insert/update/delete/query unverändert.
+- Kritische Fachfunktionen byte-/körperidentisch, u.a.:
+  - multiprovider_reorder_candidates (6.72.362-GTIN-Set-Fix erhalten),
+  - select_category_product_campaign_fast_v672171,
+  - product_fill_verified_portal_fallback_v672226,
+  - category_product_provider_mix_v672133,
+  - ebay_filter_ranked_product_candidates_provider_cohort,
+  - campaign_control_allows_delivery,
+  - campaign_health_allows_delivery,
+  - product_campaign_public_image_ready,
+  - campaign_match_rank,
+  - render_affiliate_slot_for_context,
+  - select_campaign_for_slot.
+Diese Belege zeigen, dass kein großer Fachblock entfernt wurde, reichen aber wegen des gefundenen Lese-Schreib-Lese-Risikos NICHT zur Freigabe der Version.
+
+### Ursacheneinordnung aus echter Tiefendiagnose
+Pferdesättel Profil:
+- Request ca. 7.343 ms,
+- CPU ca. 4.220 ms,
+- gemessene DB ca. 781 ms,
+- 320 Queries,
+- 138.129 Object-Cache-Hits,
+- 0 ms externe HTTP-Aufrufe.
+- 124 gleiche Options-Einzelqueries zusammen ca. 176 ms.
+- gesamte options-DB-Zeit ca. 237 ms.
+- gesamte postmeta-DB-Zeit ca. 255 ms.
+Damit kann das Entfernen wiederholter Options-/Meta-Lesungen allein den mehrsekündigen Rest nicht erklären.
+
+Host-Snapshot im selben Diagnoseblock:
+- Load Average ca. 205 / 200 / 223.
+- OPcache aktiv, Hit Rate ca. 99,1 %.
+Die hohe Hostlast kann absolute Zeiten stark verstärken; sie erklärt aber nicht allein den reproduzierbaren hierarchie-/kandidatenabhängigen Unterschied. Sie ist als zusätzlicher Verstärker, nicht als alleinige Ursache zu behandeln.
+
+### Verbindliche Entscheidung
+- 6.72.363: GESPERRT / NICHT INSTALLIEREN.
+- Keine neue Pluginversion für diesen kleinen Read-Cache-Block.
+- Keine Miniversionen nacheinander.
+- Weitere Arbeit wird zu einem größeren, belegten Ursachenblock zusammengefasst.
+- Nächster Kandidat erst, wenn:
+  1. mehrsekündige Ursachenwirkung quantitativ plausibel ist,
+  2. alle 6.72.361-Sicherheitsverträge inklusive Zustandswechsel zwischen Slots erhalten bleiben,
+  3. 6.72.362-GTIN-Rootfix erhalten bleibt,
+  4. Funktions-/Hook-/Schreib-/Provider-/Fallback-/Veto-/Health-/Bild-/Tracking-Verhalten inhaltlich identisch nachgewiesen ist,
+  5. erst danach eine einzige Installationsdatei entsteht.
