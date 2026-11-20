@@ -1,3 +1,19 @@
+# 20.11.2026 – HAB 0.4.31.8 PAA-TIMEOUT-RETTUNG, REPRODUZIERBAR ABGENOMMEN
+
+**Gültiges nächstes Hab-Release:** `Texterstellung_HAB_UND_BEWAHR_0.4.31.8_ORIGINAL_PAA_RETTUNG.zip`, SHA256 `386f303f97c117ad639f2ceeaafe26c86045705b33d810fe4667c615c50ec24a`, 522842 Bytes, abgelegt `/hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEKANDIDATEN/`. Tests + vollständiger Originaldiff im Hab-Büro `/hab-und-bewahr/TEXTERSTELLUNG/PRUEFUNG_PAA_20261120/`. GitHub-Bericht `HAB_04318_ORIGINAL_PAA_TIMEOUT_RETTUNG_GESAMTPRUEFUNG_20261120.md`.
+
+**Diagnose vom 20.11.2026 09:41:48 UTC:** Live 0.4.31.7, ursprünglicher Auftrag `COMPLETE/BLOCKED_PARKED`, Grund `PSTE_PAA_TASK_TIMEOUT`, drei vorherige Original-Rechercheabschnitte erledigt, 5 Rohkeywords, 0 Artikelkandidaten, bezahlte PAA-Task-ID archiviert. Original Pferdeatelier 0.4.34 UND Hab 0.4.31.7 nutzten vor dem >1800-s-Timeout eine nicht autoritative `tasks_ready`-Liste. **Hobbydepot 0.4.24.15 hat bereits einen getesteten direkten GET nach vorhandener ID und eine sichere Archiv-Reaktivierung.** Diese PAA-Funktionen 1:1 in das alte Hab-Plugin übernommen, keine neue Recherchelogik, keine neue kostenpflichtige Anfrage.
+
+**Nachweis direkt am endgültigen ZIP (erneut entpackt und PHP-Originalfunktionen ausgeführt):** 48/48 Vierwege-/Kategorie-Tests; 11/11 Task-GET-Statusfälle; 8/8 Queue/Archiv-Identitätsfälle; 11/11 signierte Original-PAA-Job→FINALIZE-Fälle; 17/17 Original-Hab-MINI-Tests; 14/14 K0-Fünffelder/PSERC-Mock-Import; **gesamt 109/109**; 78/78 PHP-Lint; 87/87 ZIP-CRC. **82/87 Dateien bitidentisch**, die einzigen fünf Änderungen sind die drei Original-PAA-Klassen, Hab-Hauptdatei (Action/Anzeige/Version) und README. Original-K0, K-Multi, Keywordfilter und vier Originalprovider-Wege unverändert.
+
+**Parallel nochmals simuliert:** Hobby 0.4.24.13 bricht beim MINI-TITLE-Finalisierungsschritt ab, 0.4.24.15 ist bis K0-Export + simulierten WP-Import PASS. Original Pferdeatelier: 2 wirklich früher durch K0 verifizierte Artikel bestehen WordPress-Import in isoliertem **WP-Mock**, inklusive Idempotenz/Negativfällen. Neuer **K-Multi-Writer** bleibt trotz 15/15 Übergabetests unvollständig und GESPERRT.
+
+**Präzise Nutzeraktion:** Bei gesicherter WordPress-Sicherung bestehendes Hab Plugin 0.4.31.7 durch 0.4.31.8 als **Ersetzung** installieren. `Texterstellung → Recherche → Letzte Kategorien-Recherche → Gesperrten Auftrag prüfen und falls fertig fortsetzen` **einmalig** anklicken. Dann aktualisierte Diagnose exportieren. **Keinen** neuen bezahlten Kategorienlauf starten. Bei PENDING/PROVIDER_ERROR altes Archiv unverändert und keine Erfolgsbehauptung. Der Button kann nur sichtbar sein, wenn Archiv/Originalwarteschlange tatsächlich konsistent sind; sonst Diagnose, keine Raterei.
+
+**Grenze:** Live DataForSEO-/WP-Endabnahme noch offen. Hab-Originalfamilienfilter kann Synonyme (z.B. Paketbox) weiter einschränken. Keine neue echte K-Multi-Artikeldatei oder LT68-Freigabe. Keine K0-Veränderung. **Keine falsche Aussage, gesamte Texterstellung sei fertig.**
+
+---
+
 # 20.11.2026 – HAB KEYWORDRECHERCHE AUS PFERDEATELIER 1:1 VERWENDET, GEBÜNDELTER SEED-FIX
 
 **Aktuelle Entwicklungskopie (NICHT live installiert):** Hab-Texterstellung **0.4.31.7**, Original-Release-Kandidat im Büro `/hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEKANDIDATEN/Texterstellung_HAB_UND_BEWAHR_0.4.31.7_BREITE_ORIGINALRECHERCHE.zip`. SHA256 `974cc101c52f274a1abf0a4777ada114e08610a5f08b10f386c3da1ff0760459`. Vollständiger Prüfbericht `HAB_04317_ORIGINAL_BREITE_RECHERCHE_4_STATIONEN_QA_20261120.md`.
