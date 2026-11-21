@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Was kostet die Pferdedeckenwäsche bei Equiva?",
+      "target_keyword": "Wie viel kostet es, Pferdedecken bei Equiva zu Waschen?",
+      "category": "recht-finanzen-organisation",
+      "article_type": "FAQ",
+      "plan_slot": "6250d88951b01a27db6810656af2d56b6888001a682308c63a7939c22024a8e1"
+    }
+  ],
+  "batch_sha256": "4edc0a2b6566b3212efd36f6f8d0b8deed3962da0dc57600fcb7d117bb8ffd04"
+}
