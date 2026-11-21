@@ -1,0 +1,230 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welche Arten von Trensen gibt es für Pferde?",
+    "target_keyword": "Welche Arten von Trensen gibt es für Pferde?",
+    "category": "trensen-vergleich",
+    "article_type": "Vergleich",
+    "plan_slot": "ec61c574a0c784322ec62b4e52fbffe1b2ee05bbb0bce58f9cfde0845307d375"
+  },
+  "content_profile": {
+    "search_intent": "Arten und Bauweisen von Trensen sachlich vergleichen und ihre Unterschiede für den Einsatz erklären."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Trense",
+          "source_title": "Wikipedia – Trense"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Zaumzeug",
+          "source_title": "Wikipedia – Zaumzeug"
+        }
+      ],
+      "claims": [
+        "Die Wassertrense ist eine einfach gebrochene Gebissform.",
+        "Eine doppelt gebrochene Trense besteht aus drei verbundenen Teilen.",
+        "Die Unterlegtrense wird gemeinsam mit einer Kandare verwendet.",
+        "Ein Stangengebiss besitzt ein nicht gebrochenes Mundstück.",
+        "Eine Trense im engeren Sinn bezeichnet ein gebrochenes Gebiss.",
+        "Eine korrekte Verschnallung des Zaums ist wichtig für Atmung und Kauen."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "Vergleich",
+      "target_keyword": "Welche Arten von Trensen gibt es für Pferde?",
+      "topic": "Welche Arten von Trensen gibt es für Pferde?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "trensen-vergleich",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "comparison_targets": [
+        "Einfach gebrochene Wassertrense",
+        "Doppelt gebrochene Trense",
+        "Stangengebiss"
+      ],
+      "comparison_criteria": [
+        "Aufbau des Mundstücks",
+        "Beweglichkeit der Teile",
+        "Wirkung am Pferd",
+        "Einsatz und Passform"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Trense",
+        "source_title": "Wikipedia – Trense",
+        "evidence_text": "Die Wassertrense ist einfach gebrochen.",
+        "evidence_text_sha256": "3508f0940de68e3903547c310d7865d44ffc879c70b18230eea1d1d7369c6871",
+        "statement": "Die Wassertrense ist eine einfach gebrochene Gebissform.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Trense",
+        "source_title": "Wikipedia – Trense",
+        "evidence_text": "Die doppelt gebrochene Trense hat drei Teile, die beweglich miteinander verbunden sind.",
+        "evidence_text_sha256": "e64f578debbb901462edb68522de3d60e1aa5b27c05afd8cbffdb4de6091cb2c",
+        "statement": "Eine doppelt gebrochene Trense besteht aus drei verbundenen Teilen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Trense",
+        "source_title": "Wikipedia – Trense",
+        "evidence_text": "Die Unterlegtrense, auch Filet genannt, wird zusammen mit einer Kandare verwendet.",
+        "evidence_text_sha256": "571cd450961db29fe5502e3e76a7af292953b289ed78ae11fb165a7697e294cc",
+        "statement": "Die Unterlegtrense wird gemeinsam mit einer Kandare verwendet.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F4": {
+        "source_url": "https://de.wikipedia.org/wiki/Trense",
+        "source_title": "Wikipedia – Trense",
+        "evidence_text": "Das Stangengebiss hat ein ungebrochenes Mundstück.",
+        "evidence_text_sha256": "1e3b1e8403d4553d26fe428a9c2c1817740366e4279d5afa0d67b38e13fe61ec",
+        "statement": "Ein Stangengebiss besitzt ein nicht gebrochenes Mundstück.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F5": {
+        "source_url": "https://de.wikipedia.org/wiki/Trense",
+        "source_title": "Wikipedia – Trense",
+        "evidence_text": "Eine Trense ist ein gebrochenes Gebiss.",
+        "evidence_text_sha256": "b3269d8788fdc67d38446f69cb726e6b9883d83ee517ca8f62288c2c05d421ef",
+        "statement": "Eine Trense im engeren Sinn bezeichnet ein gebrochenes Gebiss.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F6": {
+        "source_url": "https://de.wikipedia.org/wiki/Zaumzeug",
+        "source_title": "Wikipedia – Zaumzeug",
+        "evidence_text": "Der Zaum muss korrekt verschnallt sein (Zwei-Finger-Methode), damit er nicht unbeabsichtigt drückt und das Pferd frei atmen und kauen kann.",
+        "evidence_text_sha256": "fe9a916025afaeba9d685048edc03b307791a25210a514c3d9cc9e900c27ba62",
+        "statement": "Eine korrekte Verschnallung des Zaums ist wichtig für Atmung und Kauen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/trensen-vergleich/",
+        "anchor": "trensen-vergleich",
+        "block": "options"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/gebisse-faq/",
+        "anchor": "gebisse-faq",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/trensen-vergleich/",
+        "active": true
+      },
+      {
+        "href": "/category/gebisse-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "trensen-vergleich",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Trensen",
+      "Gebisse",
+      "Vergleich",
+      "Wassertrense",
+      "Kandare",
+      "Stangengebiss",
+      "Pferd"
+    ],
+    "comparison_source_bindings": [
+      {
+        "source_url": "https://de.wikipedia.org/wiki/Trense",
+        "source_title": "Wikipedia – Trense",
+        "fact_ids": [
+          "F1",
+          "F2",
+          "F3",
+          "F4"
+        ]
+      }
+    ],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die unterschiedlichen Trensenbauweisen lassen sich mit baulichen Eigenschaften und Gebisswirkung sachlich nebeneinanderstellen.",
+      "reader_question": "Welche Arten von Trensen gibt es für Pferde?",
+      "reader_benefit": "Die Leser vergleichen Bauweise, Beweglichkeit, Wirkung und typische Verwendung der unterschiedlichen Trensen auf einen Blick.",
+      "why_not_prose": "Im Fließtext lassen sich die parallel wirkenden Gebissmerkmale weniger schnell zwischen den einzelnen Varianten vergleichen.",
+      "comparison_axes": [
+        "Mundstückaufbau",
+        "Beweglichkeit",
+        "Wirkung am Pferd",
+        "Einsatzbereich"
+      ],
+      "source_fact_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4"
+      ]
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
