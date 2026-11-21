@@ -903,3 +903,76 @@ Nach Installation auf Test und Live:
 - jeweils PASSIV auf identischen Routen messen,
 - absolute Test-vs-Live-Zeiten nicht gegeneinander werten,
 - jeweils nur Vorher-vs-Nachher innerhalb derselben Umgebung vergleichen.
+
+
+## Live-Abnahme 6.72.365 – Diagnose 21.11.2026 08:28
+
+Quelle: pferdeatelier-performance-gesamtanalyse-20261121-082829.json
+Modus: PASSIV
+Live: pferde-atelier.de
+Affiliate-Zentrale aktiv: 6.72.365
+Template Kit: 1.50.616
+Aktive Plugins: 36
+
+### Harte Vorher-/Nachher-Werte auf Pferdesättel
+
+Vorher 6.72.362:
+- Wall 4925,27 ms
+- CPU 3116,02 ms
+- Cache-Hits 138943
+- Queries 327
+
+Nachher 6.72.365:
+- Wall 5721,16 ms
+- CPU 3264,16 ms
+- Cache-Hits 139257
+- Queries 320
+
+Differenz:
+- Wall +16,16 %
+- CPU +4,75 %
+- Cache-Hits +0,23 % = praktisch unverändert
+- Queries -2,14 %
+
+Der vertraglich erwartete Rückgang der extremen internen Cachezugriffe ist NICHT eingetreten. 6.72.365 ist damit als Performance-Rootfix live nicht bestätigt.
+
+### Gesamtwerte nicht als Plugin-Erfolg wertbar
+6.72.365-Lauf:
+- p95 3930 ms
+- TTFB Ø 3339 ms
+- LCP Ø 3720 ms
+- Peak 230 MB
+
+Vorheriger 6.72.362-Lauf:
+- p95 6267 ms
+- TTFB Ø 4154 ms
+- LCP Ø 4575 ms
+- Peak 214 MB
+
+Diese Gesamtverbesserung ist nicht dem Plugin zurechenbar:
+- Server-Load war im neuen Lauf deutlich niedriger (ca. 90-141 statt ca. 263-340 im alten Referenzlauf).
+- Der neue Lauf lag nur 122 Sekunden nach einem OPcache-Neustart.
+- Zielseite Pferdesättel wurde trotz besserer Host-Situation langsamer.
+
+### Nachgewiesener Versionskettenfehler
+
+Lokaler Quellvergleich der vorhandenen Testpakete:
+- 6.72.363 enthält category_product_static_read_cache_allowed_v672363 und die dazugehörigen request-lokalen Caches für unveränderte Options-/Meta-/Portal-/Datumszustände.
+- 6.72.364 enthält diesen 6.72.363-Block NICHT mehr.
+- 6.72.365 baut auf 6.72.364 auf und enthält ihn ebenfalls NICHT.
+- 6.72.365 unterscheidet sich von 6.72.364 nur in drei Dateien: Hauptdatei, trait-ppar-idealo.php, readme.txt.
+- Damit wurde die 6.72.363-Wiederholungsbremse beim Übergang zu 6.72.364 verloren und in 6.72.365 nicht wieder aufgenommen.
+
+Zusätzlicher nachgewiesener Performance-Rückschritt:
+- 6.72.363/6.72.364 prüfen bereits gesehene GTINs per direktem Set-Lookup.
+- 6.72.365 stellt diese Stelle wieder auf array_intersect($gtins, array_keys($shown)) um.
+- Semantik gleich, aber der bereits beseitigte lineare/Listen-Aufwand wurde wieder eingeführt.
+
+### Entscheidung
+Keine weitere Diagnose mit 6.72.365 nötig.
+Nächster zulässiger Fix muss kumulativ sein:
+1. 6.72.365 als Funktionsbasis behalten.
+2. 6.72.363 request-lokale Invariant-Read-Caches vollständig wieder integrieren.
+3. 6.72.364 direkten GTIN-Set-Lookup beibehalten.
+4. 6.72.365 Bundle-Plan nur zusätzlich behalten; keine bestehende Funktion entfernen.
+5. Vor Ausgabe Struktur-, Funktions-, Auswahl- und Mutationsregressionen gegen alle drei Vorgänger prüfen.
