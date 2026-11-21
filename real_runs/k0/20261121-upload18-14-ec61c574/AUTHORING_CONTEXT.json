@@ -190,14 +190,28 @@
     ],
     "comparison_source_bindings": [
       {
+        "source_label": "Einfach gebrochene Wassertrense",
+        "nearest_option_heading": "Einfach gebrochene Wassertrense",
         "source_url": "https://de.wikipedia.org/wiki/Trense",
-        "source_title": "Wikipedia – Trense",
-        "fact_ids": [
-          "F1",
-          "F2",
-          "F3",
-          "F4"
-        ]
+        "source_fact_id": "F1"
+      },
+      {
+        "source_label": "Doppelt gebrochene Trense",
+        "nearest_option_heading": "Doppelt gebrochene Trense",
+        "source_url": "https://de.wikipedia.org/wiki/Trense",
+        "source_fact_id": "F2"
+      },
+      {
+        "source_label": "Unterlegtrense",
+        "nearest_option_heading": "Unterlegtrense",
+        "source_url": "https://de.wikipedia.org/wiki/Trense",
+        "source_fact_id": "F3"
+      },
+      {
+        "source_label": "Stangengebiss",
+        "nearest_option_heading": "Stangengebiss",
+        "source_url": "https://de.wikipedia.org/wiki/Trense",
+        "source_fact_id": "F4"
       }
     ],
     "table_decision": {
