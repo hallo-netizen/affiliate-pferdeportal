@@ -16,15 +16,15 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.lk-nienburg.de/formulare/fs.php?id=21500-901000385-21500",
-          "source_title": "Landkreis Nienburg – Bauvorhaben für Pferdebetriebe im Außenbereich"
+          "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354972/index.php",
+          "source_title": "Amt für Ernährung, Landwirtschaft und Forsten – Baurecht"
         }
       ],
       "claims": [
-        "Die Abgrenzung zwischen Hobbytierhaltung und Gewerbebetrieb erfordert eine Einzelfallbetrachtung.",
-        "Eine baurechtliche Einordnung lässt sich nicht unmittelbar aus dem Steuerrecht übernehmen.",
-        "Pferdezucht mit überwiegend eigener Futtergrundlage kann baurechtlich landwirtschaftlich eingeordnet werden.",
-        "Pferdehaltung ohne überwiegend eigene Futtergrundlage wird nach diesem Merkblatt nicht allein dadurch landwirtschaftliche Betätigung."
+        "Die baurechtliche Privilegierung wird für das konkrete Vorhaben geprüft und nicht pauschal für einen Tierhalter vergeben.",
+        "Die bloße Vermietung von Stallabteilen ohne weitere Dienstleistungen zählt nach der bayerischen Bauplanungshilfe nicht zur Landwirtschaft.",
+        "Die Prüfung einer baurechtlichen Privilegierung fragt nach Landwirtschaft im Sinne von § 201 BauGB.",
+        "Ein spürbarer Einkommensbeitrag gehört zu den Anhaltspunkten für einen landwirtschaftlichen Betrieb."
       ],
       "fresh_research_reference_date": "2026-11-21"
     },
@@ -47,44 +47,44 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.lk-nienburg.de/formulare/fs.php?id=21500-901000385-21500",
-        "source_title": "Landkreis Nienburg – Bauvorhaben für Pferdebetriebe im Außenbereich",
-        "evidence_text": "Die Abgrenzung zu Gewerbebetrieben und Hobbytierhaltung ist oft schwierig;",
-        "evidence_text_sha256": "145f134a9df6d2fc81223ac9284bd659e8e17609bece967c6a37575fedcbd18d",
-        "statement": "Die Abgrenzung zwischen Hobbytierhaltung und Gewerbebetrieb erfordert eine Einzelfallbetrachtung.",
+        "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354972/index.php",
+        "source_title": "Amt für Ernährung, Landwirtschaft und Forsten – Baurecht",
+        "evidence_text": "Privilegiert ist immer nur das einzelne Vorhaben – nie eine Person oder ein Betrieb!",
+        "evidence_text_sha256": "a2ac18b18db1249f0d9299848f461c914e83dba9135fdbd03140e289374335dc",
+        "statement": "Die baurechtliche Privilegierung wird für das konkrete Vorhaben geprüft und nicht pauschal für einen Tierhalter vergeben.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F2": {
-        "source_url": "https://www.lk-nienburg.de/formulare/fs.php?id=21500-901000385-21500",
-        "source_title": "Landkreis Nienburg – Bauvorhaben für Pferdebetriebe im Außenbereich",
-        "evidence_text": "eine Übertragung aus anderen Rechtsgebieten, z.B. Steuerrecht, ist nicht möglich",
-        "evidence_text_sha256": "48c687155638d0c69ac055bcd0cbd7e8e36e294416d01b9022e0437291bf98b1",
-        "statement": "Eine baurechtliche Einordnung lässt sich nicht unmittelbar aus dem Steuerrecht übernehmen.",
+        "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354972/index.php",
+        "source_title": "Amt für Ernährung, Landwirtschaft und Forsten – Baurecht",
+        "evidence_text": "Vermietung von Stallabteilen / Ställen ohne weitere Dienstleistungen (Selbstversorger)",
+        "evidence_text_sha256": "d7aa5e6f892b9d2bcb201c3220ccf6a8d82bc79e1f11aa5711faa2c363baa08a",
+        "statement": "Die bloße Vermietung von Stallabteilen ohne weitere Dienstleistungen zählt nach der bayerischen Bauplanungshilfe nicht zur Landwirtschaft.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F3": {
-        "source_url": "https://www.lk-nienburg.de/formulare/fs.php?id=21500-901000385-21500",
-        "source_title": "Landkreis Nienburg – Bauvorhaben für Pferdebetriebe im Außenbereich",
-        "evidence_text": "Pferdezucht auf überwiegend eigener Futtergrundlage",
-        "evidence_text_sha256": "689686f4508622ce7b2be63664d084762245dd8a509778167f537441ebd30755",
-        "statement": "Pferdezucht mit überwiegend eigener Futtergrundlage kann baurechtlich landwirtschaftlich eingeordnet werden.",
+        "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354972/index.php",
+        "source_title": "Amt für Ernährung, Landwirtschaft und Forsten – Baurecht",
+        "evidence_text": "Handelt es sich um Landwirtschaft nach § 201 Baugesetzbuch (BauGB)?",
+        "evidence_text_sha256": "977399b2855bf25ce8a4702c959a0f49f24e59436d00251c5dc92abded4237d9",
+        "statement": "Die Prüfung einer baurechtlichen Privilegierung fragt nach Landwirtschaft im Sinne von § 201 BauGB.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F4": {
-        "source_url": "https://www.lk-nienburg.de/formulare/fs.php?id=21500-901000385-21500",
-        "source_title": "Landkreis Nienburg – Bauvorhaben für Pferdebetriebe im Außenbereich",
-        "evidence_text": "Pferdehaltung ohne überwiegend eigene Futtergrundlage",
-        "evidence_text_sha256": "5101089143b44f7d4ec6844c1e8f9d66d4df8be1ffd9590ecae4e1e473f20be9",
-        "statement": "Pferdehaltung ohne überwiegend eigene Futtergrundlage wird nach diesem Merkblatt nicht allein dadurch landwirtschaftliche Betätigung.",
+        "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354972/index.php",
+        "source_title": "Amt für Ernährung, Landwirtschaft und Forsten – Baurecht",
+        "evidence_text": "ein spürbarer Einkommensbeitrag (Gewinn) erzielt wird",
+        "evidence_text_sha256": "0e081877bc7a6b2a3a14c480963b0e09a5dc68f5a45c3468886f8ba9b4fa4fd5",
+        "statement": "Ein spürbarer Einkommensbeitrag gehört zu den Anhaltspunkten für einen landwirtschaftlichen Betrieb.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
@@ -146,5 +146,5 @@
     "table_multiword_exceptions": []
   },
   "publish_allowed": false,
-  "source_approval_provenance": "Official Landkreis Nienburg publisher verified by 2026-11-21 Impressum; K0 original research-owner allowlist approved."
+  "source_approval_provenance": "Fresh original Bavarian government AELF source verified; previous government PDF was not accessible from GitHub K0 runtime."
 }
