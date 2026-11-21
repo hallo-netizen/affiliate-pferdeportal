@@ -95,16 +95,27 @@
         "href": "/category/recht-finanzen-organisation/",
         "anchor": "Recht, Finanzen & Organisation",
         "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/offenstallbau-kosten/",
+        "anchor": "Kosten Offenstallbau",
+        "block": "further_information"
       }
     ],
     "link_registry": [
       {
         "href": "/category/recht-finanzen-organisation/",
         "active": true
+      },
+      {
+        "href": "/category/offenstallbau-kosten/",
+        "active": true
       }
     ],
     "runtime_link_roles": [
-      "parent_category"
+      "parent_category",
+      "further_information"
     ],
     "wordpress_category": {
       "id": 0,
@@ -119,7 +130,8 @@
       "Bauweise",
       "Bauausstattung",
       "Baunebenkosten",
-      "Gewässerschutz"
+      "Gewässerschutz",
+      "Offenstallbau"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
