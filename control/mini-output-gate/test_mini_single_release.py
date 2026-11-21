@@ -201,6 +201,89 @@ class MiniOneFileGate(unittest.TestCase):
         self.assertFalse((self.ws/RELEASE_DIR).exists())
 
 
+    def test_15_topic_batch_only_one_complete_json_and_no_archive(self):
+        """End-to-end synthetic 15-topic batch; no user data or fake live success."""
+        with tempfile.TemporaryDirectory() as temp:
+            ws = Path(temp) / 'batch'
+            original = Path(temp) / 'original.json'
+            src = base_source()
+            src['batch_id'] = 'QA-15-MINI-1DATEI'
+            src['items'] = [
+                {'pool_key': f'QA-{i}', 'raw_query': f'Synthetic query {i}',
+                 'mode': 'NEW', 'decision': 'JA', 'source_sha256': f'qa-{i}'}
+                for i in range(15)
+            ]
+            src['resume_checkpoints'] = [
+                {'item_index': i, 'next': 'CATEGORY',
+                 'category': None, 'editorial': None, 'title': None}
+                for i in range(15)
+            ]
+            write(original, src)
+            init(original, ws)
+            write(ws / 'CATEGORY.json', stage(src, 'CATEGORY', [
+                {'route': 'FACH', 'category_slug': 'qa-test', 'article_type': 'FAQ'}
+                for _ in range(15)
+            ]))
+            output = Path(temp) / 'MINI-1DATEI.json'
+            self.assertEqual(deliver(ws, output)['status'], 'GESPERRT')
+            self.assertFalse(output.exists())
+            write(ws / 'EDITORIAL.json', stage(src, 'EDITORIAL', [
+                ({'box': 'FREI', 'intent_summary': 'Synthetic specific intent',
+                  'matched_ref': '', 'reason': ''} if i < 10 else
+                 {'box': 'BELEGT', 'intent_summary': '',
+                  'matched_ref': 'QA-EXISTING-REFERENCE', 'reason': ''} if i < 13 else
+                 {'box': 'KLAERUNG', 'intent_summary': '',
+                  'matched_ref': '', 'reason': 'Synthetic ambiguity'})
+                for i in range(15)
+            ]))
+            self.assertEqual(deliver(ws, output)['status'], 'GESPERRT')
+            self.assertFalse(output.exists())
+            write(ws / 'TITLE.json', stage(src, 'TITLE', [
+                {'approved_title': f'Synthetic FAQ {i}?'} if i < 10
+                else {'approved_title': ''}
+                for i in range(15)
+            ]))
+            result = deliver(ws, output)
+            self.assertEqual(result['status'], 'FREIGEGEBEN')
+            self.assertTrue(output.is_file())
+            payload = read_json(output)
+            self.assertEqual(payload['contract'], CONTRACT)
+            self.assertEqual(payload['item_count'], 15)
+            self.assertEqual(len(payload['decisions']), 15)
+            self.assertEqual(sum(x['editorial']['box'] == 'FREI' for x in payload['decisions']), 10)
+            self.assertEqual(sum(x['editorial']['box'] == 'BELEGT' for x in payload['decisions']), 3)
+            self.assertEqual(sum(x['editorial']['box'] == 'KLAERUNG' for x in payload['decisions']), 2)
+            self.assertEqual(sum(x['title'] is not None for x in payload['decisions']), 10)
+            self.assertEqual(
+                sorted(x.name for x in (ws / RELEASE_DIR).iterdir()),
+                ['MINI_EINMAL_REIMPORT.json', 'NACHWEIS.json']
+            )
+            self.assertFalse(any(x.suffix == '.zip' for x in Path(temp).rglob('*') if x.is_file()))
+            self.assertEqual(read_json(ws / RELEASE_DIR / 'NACHWEIS.json')['user_import_file_count'], 1)
+
+    def test_zip_or_separate_checkpoint_is_never_reimport_output(self):
+        self._complete()
+        output = Path(self.tmp.name) / 'THREE_FILES.zip'
+        with self.assertRaisesRegex(ValueError, 'MINI_OUTPUT_DESTINATION_INVALID'):
+            deliver(self.ws, output)
+        self.assertFalse(output.exists())
+        step = self.ws / 'CATEGORY.json'
+        public = Path(self.tmp.name) / 'SINGLE.json'
+        result = deliver(self.ws, public, step)
+        self.assertEqual(result['status'], 'GESPERRT')
+        self.assertFalse(public.exists())
+
+    def test_missing_single_payload_field_fail_closed(self):
+        self._complete()
+        # The public contract itself is validated independently of the worker decisions.
+        from mini_single_release import _published_file, assert_single_import_contract, read
+        original = read(self.ws / 'ORIGINAL_MINI.json')
+        payload = _published_file(self.ws, original)
+        payload['decisions'][1].pop('editorial')
+        with self.assertRaisesRegex(ValueError, 'MINI_ONE_JSON_ITEM_INCOMPLETE'):
+            assert_single_import_contract(payload, original)
+
+
 def read_json(path):
     return json.loads(path.read_text())
 
