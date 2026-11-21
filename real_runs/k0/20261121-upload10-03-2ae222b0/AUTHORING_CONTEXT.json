@@ -1,0 +1,162 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wie oft sollte man Pferdedecken waschen?",
+    "target_keyword": "Wie oft sollte man Pferdedecken Waschen?",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "FAQ",
+    "plan_slot": "2ae222b09281bd42c24433d401685e42f92b1f975dd72a9e196a87e65eca7f20"
+  },
+  "content_profile": {
+    "search_intent": "Sinnvolle Häufigkeit der Reinigung von Pferdedecken abhängig von Nutzung und Verschmutzung; keine vollständige Waschanleitung."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+          "source_title": "Horseware Ireland – Pferdedecken pflegen"
+        }
+      ],
+      "claims": [
+        "Pferdedecken können auf unterschiedliche Weise gereinigt werden.",
+        "Ein professioneller Pferdedecken-Waschservice ist eine mögliche Reinigungsmethode.",
+        "Vor dem Einlagern sollen Decken sauber und vollständig trocken sein.",
+        "Reinigung und Lagerung dienen der längeren Verwendbarkeit von Pferdedecken."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie oft sollte man Pferdedecken Waschen?",
+      "topic": "Wie oft sollte man Pferdedecken waschen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie oft sollte man Pferdedecken waschen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+        "source_title": "Horseware Ireland – Pferdedecken pflegen",
+        "evidence_text": "There are a few different options when it comes to washing your horse’s blankets.",
+        "evidence_text_sha256": "fd7d1824e6005bad24910fc20adde04385af5917f9a6624f490e95bbc381a213",
+        "statement": "Pferdedecken können auf unterschiedliche Weise gereinigt werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+        "source_title": "Horseware Ireland – Pferdedecken pflegen",
+        "evidence_text": "The easiest way is to take them to a professional blanket repair and washing service.",
+        "evidence_text_sha256": "327c2f5e516b52e76bef0ccf1b92cc9a75309c32ac39bd7c75d42f9717aa353d",
+        "statement": "Ein professioneller Pferdedecken-Waschservice ist eine mögliche Reinigungsmethode.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+        "source_title": "Horseware Ireland – Pferdedecken pflegen",
+        "evidence_text": "Once your blankets have been washed, re-proofed if necessary, and are dry it’s time to store them away until next season.",
+        "evidence_text_sha256": "0ca929c894ed520a258379ec66f874716c76bc6b659f4b22a7a6bbc6b852554a",
+        "statement": "Vor dem Einlagern sollen Decken sauber und vollständig trocken sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+        "source_title": "Horseware Ireland – Pferdedecken pflegen",
+        "evidence_text": "Washing and storing horse blankets isn’t just great for saving space but it maximizes the life of your horse’s blankets too.",
+        "evidence_text_sha256": "2edfbb98c701237f8a7c8fa580ddeacfa9c74cad98490401d420ba0e55bf7197",
+        "statement": "Reinigung und Lagerung dienen der längeren Verwendbarkeit von Pferdedecken.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "alltags-pferde-haltungsformen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "anchor": "pferdedecken-regendecken-pflege",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Regendecken",
+      "Pferdedecken",
+      "Waschen",
+      "Reinigungsintervall",
+      "Verschmutzung",
+      "Fell",
+      "Waschservice"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine Tabelle würde ohne eigenständigen Vergleich der Bedingungen nur den Fließtext wiederholen und keinen zusätzlichen Nutzen bringen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
