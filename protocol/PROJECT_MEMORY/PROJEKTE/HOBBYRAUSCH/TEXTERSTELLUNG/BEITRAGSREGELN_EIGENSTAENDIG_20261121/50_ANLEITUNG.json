@@ -9,69 +9,7 @@
   "no_automatic_publication": true,
   "new_wordpress_plugin_required": false,
   "source": "Hobbydepot MINI Original 0.4.24.18; Hobby-Entwürfe vom 20.11.2026; K0 vom 21.11.2026 nur fachlich gelesen, keine kopierten Formalwerte",
-  "common_editorial_rules": [
-    {
-      "id": "H01_PORTAL_EINMALIG",
-      "owner": "WORDPRESS_MINI",
-      "rule": "Nur die bereits festgelegte Hobbydepot-Portalidentität aus dem unveränderten WordPress-Beleg übernehmen; keine zusätzliche Portalentscheidung oder neue Datei."
-    },
-    {
-      "id": "H02_TYP_EINMALIG",
-      "owner": "WORDPRESS_MINI",
-      "rule": "Kategorie, Keyword, Titel und Beitragsart vor der Übergabe einmalig festlegen; Kategoriebezeichnung oder Menü-Rubrik bestimmen nicht automatisch die Beitragsart."
-    },
-    {
-      "id": "H03_FAKTEN_EINMALIG",
-      "owner": "SHARED_RESEARCH",
-      "rule": "Veränderliche Preise, Bestimmungen, Sicherheitsangaben und Leistungsversprechen mit aktuellen geeigneten Originalquellen prüfen; ungeklärte Angaben offenlassen statt erfinden."
-    },
-    {
-      "id": "H04_SPRACHE_EINMALIG",
-      "owner": "SINGLE_QUALITY",
-      "rule": "Korrektes, verständliches Deutsch; Tätigkeitsnamen natürlich beugen, etwa 'Münzen sammeln' statt 'Münzen ausüben'; keine Keyword-Ketten."
-    },
-    {
-      "id": "H05_KONKRETER_NUTZEN",
-      "owner": "ARTICLE_AUTHOR",
-      "rule": "Absätze beantworten die jeweilige Leserabsicht konkret. Keine Wiederholungen, Füllabschnitte oder frei erfundenen Beispiele."
-    },
-    {
-      "id": "H06_SICHERHEIT",
-      "owner": "ARTICLE_AUTHOR",
-      "rule": "Bei Werkzeugen, Elektrik, Chemie, Feuer, Bewegung, Tieren und Umwelt passende reale Risiken und sichere Grenzen erläutern; keine gefährliche Anleitung."
-    },
-    {
-      "id": "H07_KEINE_ERFINDUNGEN",
-      "owner": "SHARED_RESEARCH",
-      "rule": "Keine erfundenen eigenen Tests, Vereinsangebote, Kurse, Ortsangaben, Ereignisse, Zitate, Bewertungen oder Erfahrungsberichte."
-    },
-    {
-      "id": "H08_LINKS_EXISTIEREND",
-      "owner": "ARTICLE_AUTHOR",
-      "rule": "Interne Links nur auf wirklich existierende, thematisch passende WordPress-Ziele mit korrektem sichtbarem Titel; keine künstliche Linkanzahl."
-    },
-    {
-      "id": "H09_WERBUNG_GETRENNT",
-      "owner": "ARTICLE_AUTHOR",
-      "rule": "Affiliate-Links und Produktangebote sind keine fachlichen Beweise, keine erkauften Sieger und keine Grundlage für unbelegte Preise."
-    },
-    {
-      "id": "H10_ABSCHLUSS",
-      "owner": "ARTICLE_AUTHOR",
-      "rule": "Schluss fasst die geprüften Aussagen und praktische Konsequenzen zusammen und enthält keine neuen unbewiesenen Tatsachen."
-    },
-    {
-      "id": "H11_QUALITAET_NUR_EINMAL",
-      "owner": "SINGLE_QUALITY",
-      "rule": "Die zuständige gemeinsame Qualitätsstelle prüft jeden Inhaltspunkt einmal; Korrekturen gehen an dieselbe Schreibstelle, keine nachgeschaltete zweite Redaktion."
-    },
-    {
-      "id": "H12_NUR_ENTWURF",
-      "owner": "WORDPRESS_IMPORT",
-      "rule": "Nur freigegebene Entwurfsdatei für die originale WordPress-Zielkategorie; keine automatische Veröffentlichung, kein Fantasie-Magazin-Ziel."
-    }
-  ],
-  "rule_owner_policy": "Jede Regel hat genau eine zuständige Station. Wiederholung des Datentextes in den fünf selbstständigen Büchern bedeutet keine wiederholte Prüfung.",
+  "rule_owner_policy": "Zwölf gemeinsame Regeln nur in 05_GEMEINSAME_REGELN.json; hier ausschließlich die fachlichen Zusatzregeln dieser Beitragsart. Keine zweite Prüfung.",
   "links": "Inhaltlich begründete Links auf überprüfbar bestehende WordPress-Seiten oder Beiträge; kein Pflichtersatz, keine pauschale Anzahl.",
   "facts": "Einmalige Originalquellenrecherche vor der Artikelart-Anwendung. Recherche- und Schreibentscheidungen nicht wiederholen.",
   "deliver": "WordPress-Entwurf, keine automatische Veröffentlichung. Original-Auftragsidentität und fünf Felder unverändert.",
@@ -146,5 +84,7 @@
   "examples_from_hobby_topics": [
     "Einfache Häkelmaschen lernen",
     "Ein Papiermodell sauber zusammensetzen"
-  ]
+  ],
+  "shared_hobby_policy_ref": "05_GEMEINSAME_REGELN.json",
+  "common_editorial_rules_source": "ONE_HOBBY_OFFICE_FILE_READ_ONLY"
 }
