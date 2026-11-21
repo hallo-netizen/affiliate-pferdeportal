@@ -1,0 +1,179 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Bei wie viel Grad darf man eine Pferdedecke waschen?",
+    "target_keyword": "Wie viel Grad muss man eine Pferdedecke Waschen?",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "FAQ",
+    "plan_slot": "f203aeeaab74dada363e0030b53fdf152d0b57552d5d6c6521162c303f2d5f29"
+  },
+  "content_profile": {
+    "search_intent": "Welche Waschtemperatur für Pferdedecken zulässig ist und warum die Textilpflegekennzeichnung vor allgemeinen Gradangaben steht."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Textilpflegesymbol",
+          "source_title": "Wikipedia – Textilpflegesymbol"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Pferdedecke",
+          "source_title": "Wikipedia – Pferdedecke"
+        }
+      ],
+      "claims": [
+        "Das Waschsymbol zeigt die maximal erlaubte Waschtemperatur.",
+        "Die Pflegekennzeichnung legt die erlaubte Textilbehandlung fest.",
+        "Eine zulässige Pflegebehandlung ist nicht automatisch bei jeder Wäsche erforderlich.",
+        "Pferdedecken bestehen je nach Einsatzzweck aus unterschiedlichen Geweben.",
+        "Ein durchgestrichenes Trocknersymbol verbietet maschinelles Trocknen."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie viel Grad muss man eine Pferdedecke Waschen?",
+      "topic": "Bei wie viel Grad darf man eine Pferdedecke waschen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Bei wie viel Grad darf man eine Pferdedecke waschen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Textilpflegesymbol",
+        "source_title": "Wikipedia – Textilpflegesymbol",
+        "evidence_text": "Das Waschen wird durch einen stilisierten Waschzuber dargestellt; die Zahl im Zuber bedeutet die höchstzulässige Waschtemperatur (in Grad Celsius).",
+        "evidence_text_sha256": "6fcd734040f7a34479dc929d68b1dcbbae15d3c83053b42f3ff5746e7877cf7e",
+        "statement": "Das Waschsymbol zeigt die maximal erlaubte Waschtemperatur.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Textilpflegesymbol",
+        "source_title": "Wikipedia – Textilpflegesymbol",
+        "evidence_text": "Die Pflegekennzeichnung gibt die maximal zulässige Behandlungsart an, die unter praxisnahen Bedingungen auf Dauer möglich ist, ohne das Textil zu schädigen.",
+        "evidence_text_sha256": "a254601df45df48583b5db0fb29a5ad2ea60b3bdc7818cd717df4c3e22137201",
+        "statement": "Die Pflegekennzeichnung legt die erlaubte Textilbehandlung fest.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Textilpflegesymbol",
+        "source_title": "Wikipedia – Textilpflegesymbol",
+        "evidence_text": "Ob diese Behandlung erforderlich oder ausreichend ist, ist damit nicht ausgesagt.",
+        "evidence_text_sha256": "cda2e9b8890ee8eedf9a997d28c3111730540eeb372659f2242e0fe11f90d6b0",
+        "statement": "Eine zulässige Pflegebehandlung ist nicht automatisch bei jeder Wäsche erforderlich.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://de.wikipedia.org/wiki/Pferdedecke",
+        "source_title": "Wikipedia – Pferdedecke",
+        "evidence_text": "In der Pferdepflege werden je nach Verwendungszweck Decken aus sehr verschiedenen Geweben verwendet.",
+        "evidence_text_sha256": "5c94a2f646fe9df546aa4d18141f27e375b4be79261ef94bc4ecb82867545af7",
+        "statement": "Pferdedecken bestehen je nach Einsatzzweck aus unterschiedlichen Geweben.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://de.wikipedia.org/wiki/Textilpflegesymbol",
+        "source_title": "Wikipedia – Textilpflegesymbol",
+        "evidence_text": "Das diagonal durchkreuzte Zeichen bedeutet, dass der Artikel keine maschinelle Trocknung verträgt.",
+        "evidence_text_sha256": "30c16e54d0136b558fae7c51e9c8714db1f965eadf7223b64623f3e692d26748",
+        "statement": "Ein durchgestrichenes Trocknersymbol verbietet maschinelles Trocknen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "alltags-pferde-haltungsformen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "anchor": "pferdedecken-regendecken-pflege",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferdedecken",
+      "Waschtemperatur",
+      "Waschsymbol",
+      "Grad",
+      "Wäsche",
+      "Pflegeetikett"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die sachgerechte Material- und Pflegeentscheidung verlangt individuelle Prüfung; eine Tabelle mit vier künstlichen Zeilen und drei Spalten würde die Unterschiede ohne Zusatznutzen vereinfachen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
