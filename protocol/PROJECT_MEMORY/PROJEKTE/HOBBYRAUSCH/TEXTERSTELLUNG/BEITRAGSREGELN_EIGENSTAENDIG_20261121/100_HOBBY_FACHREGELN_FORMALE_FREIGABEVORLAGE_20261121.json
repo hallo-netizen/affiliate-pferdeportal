@@ -1,0 +1,172 @@
+{
+  "contract": "HOBBYDEPOT_FACHREGELN_FORMALE_FREIGABEVORLAGE_V1",
+  "date": "2026-11-21",
+  "status": "ONE_HOBBY_EDITORIAL_REVIEW_CANDIDATE_NOT_RUNTIME_APPROVED",
+  "portal_id": "hobby_depot",
+  "original_wordpress_types": [
+    "Beratung",
+    "FAQ",
+    "Pflege",
+    "Vergleich",
+    "Anleitung"
+  ],
+  "selection_authority": "Existing original MINI once only; current manifest.books is only Hobby editorial candidate mapping",
+  "common_editorial_book": "05_GEMEINSAME_REGELN.json",
+  "source_of_truth": "00_MANIFEST.json",
+  "type_profiles": [
+    {
+      "original_wp_type": "Beratung",
+      "book_file": "10_BERATUNG.json",
+      "own_id": "HOBBY_RATGEBER_WISSEN",
+      "common_book": "05_GEMEINSAME_REGELN.json",
+      "own_rule_ids": [
+        "B01_BEDARF",
+        "B02_EIGNUNG",
+        "B03_KOSTEN",
+        "B04_KEIN_SIEGER"
+      ],
+      "word_target": [
+        800,
+        1100
+      ],
+      "H2_target": [
+        3,
+        5
+      ],
+      "table_policy": "Nur wenn eine echte Übersicht der Entscheidung dient.",
+      "conclusion_policy": "Kurzes H2 'Fazit' als fachlicher Standard; kein neuer Sachverhalt.",
+      "links_policy": "Keine feste Mindestzahl. Höchstens drei als unverbindliche Lesbarkeitsorientierung.",
+      "status": "TYPE_SPECIFIC_HOBBY_PROPOSAL_UNAPPROVED",
+      "current_kmulti_reference": "HOBBY_RATGEBER_WISSEN",
+      "kmulti_mapping_equal": true
+    },
+    {
+      "original_wp_type": "FAQ",
+      "book_file": "20_FAQ.json",
+      "own_id": "HOBBY_FAQ",
+      "common_book": "05_GEMEINSAME_REGELN.json",
+      "own_rule_ids": [
+        "F01_ANTWORT_DIREKT",
+        "F02_EINE_FRAGE",
+        "F03_REGELN_STAND",
+        "F04_KEINE_FAKE_WERTE",
+        "F05_KURZE_HANDLUNG"
+      ],
+      "word_target": [
+        500,
+        800
+      ],
+      "H2_target": [
+        2,
+        4
+      ],
+      "table_policy": "Keine Pflichttabelle.",
+      "conclusion_policy": "Kurzer Abschluss; H2 'Fazit' nur bei echtem Informationsmehrwert.",
+      "links_policy": "Nur passende, existierende Ziele, kein Linkfüllstoff.",
+      "status": "TYPE_SPECIFIC_HOBBY_PROPOSAL_UNAPPROVED",
+      "current_kmulti_reference": "HOBBY_FAQ",
+      "kmulti_mapping_equal": true
+    },
+    {
+      "original_wp_type": "Pflege",
+      "book_file": "30_PFLEGE.json",
+      "own_id": "HOBBY_PFLEGE",
+      "common_book": "05_GEMEINSAME_REGELN.json",
+      "own_rule_ids": [
+        "P01_BESTAND",
+        "P02_MATERIAL",
+        "P03_SUBSTANZERHALT",
+        "P04_WIEDERHOLBAR",
+        "P05_GRENZEN"
+      ],
+      "word_target": [
+        650,
+        950
+      ],
+      "H2_target": [
+        3,
+        5
+      ],
+      "table_policy": "Nur wenn Materialunterschiede wirklich übersichtlich werden.",
+      "conclusion_policy": "Kurzes H2 'Fazit' mit der zentralen Erhaltungsempfehlung.",
+      "links_policy": "Nur überprüfte, relevante bestehende WordPress-Ziele.",
+      "status": "TYPE_SPECIFIC_HOBBY_PROPOSAL_UNAPPROVED",
+      "current_kmulti_reference": "HOBBY_ANLEITUNG_PFLEGE",
+      "kmulti_mapping_equal": false
+    },
+    {
+      "original_wp_type": "Vergleich",
+      "book_file": "40_VERGLEICH.json",
+      "own_id": "HOBBY_VERGLEICH",
+      "common_book": "05_GEMEINSAME_REGELN.json",
+      "own_rule_ids": [
+        "V01_ZWEI_OPTIONEN",
+        "V02_GLEICHE_MASSSTAEBE",
+        "V03_PREISE_STAND",
+        "V04_FAIRE_EINORDNUNG",
+        "V05_VERGLEICHSTABELLE"
+      ],
+      "word_target": [
+        850,
+        1100
+      ],
+      "H2_target": [
+        3,
+        5
+      ],
+      "table_policy": "Eine sinnvolle Tabelle empfohlen, aber nicht bei fehlender Vergleichbarkeit erzwingen.",
+      "conclusion_policy": "H2 'Fazit' mit bedingter Entscheidungshilfe.",
+      "links_policy": "Keine pauschale Linkquote.",
+      "status": "TYPE_SPECIFIC_HOBBY_PROPOSAL_UNAPPROVED",
+      "current_kmulti_reference": "HOBBY_VERGLEICH",
+      "kmulti_mapping_equal": true
+    },
+    {
+      "original_wp_type": "Anleitung",
+      "book_file": "50_ANLEITUNG.json",
+      "own_id": "HOBBY_ANLEITUNG",
+      "common_book": "05_GEMEINSAME_REGELN.json",
+      "own_rule_ids": [
+        "A01_ECHTE_AUFGABE",
+        "A02_VORBEREITUNG",
+        "A03_LOGISCHE_SCHRITTE",
+        "A04_ERGEBNISKONTROLLE",
+        "A05_SICHERHEIT",
+        "A06_FEHLERBEHEBUNG"
+      ],
+      "word_target": [
+        700,
+        1100
+      ],
+      "H2_target": [
+        3,
+        6
+      ],
+      "table_policy": "Keine Pflichttabelle; Arbeitsschritte stehen im Vordergrund.",
+      "conclusion_policy": "H2 'Fazit' mit Ergebnischeck, ohne neue unbewiesene Aussagen.",
+      "links_policy": "Nur geprüfte bestehende WordPress-Ziele.",
+      "status": "TYPE_SPECIFIC_HOBBY_PROPOSAL_UNAPPROVED",
+      "current_kmulti_reference": "HOBBY_ANLEITUNG_PFLEGE",
+      "kmulti_mapping_equal": false
+    }
+  ],
+  "never_import_foreign_formal_values": {
+    "source": "Existing unapproved K-Multi source copy, not authorized Hobby values",
+    "baseline_min_words": 750,
+    "baseline_max_words": 900,
+    "baseline_min_H2": 4,
+    "baseline_min_paragraphs": 16,
+    "baseline_FAQ_table_policy": "REQUIRED_UNLESS_EXCEPTION",
+    "collision_for_all_three_real_Hobby_FAQs": true,
+    "decision": "Keep preexisting Hobby editorial targets, do not pad text or silently activate foreign hard constraints; confirm and validate separate Hobby-specific full checkers under separately authorized K-Multi approval."
+  },
+  "known_not_active": {
+    "production_enabled": false,
+    "portal_binding_state": "NO_VALUES_BLOCKED",
+    "independent_signed_shared_research_proof": false,
+    "compiled_121_rule_hobby_checks_executed": false,
+    "trustworthy_full_qa_signature": false,
+    "wordpress_import_allowed": false
+  },
+  "user_action": "No new plugin. A future specifically authorized K-Multi rule activation and real end-to-end proof is necessary; do not treat this document as that authorization."
+}
