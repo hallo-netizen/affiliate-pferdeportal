@@ -1307,3 +1307,93 @@ Finales ZIP:
 
 6.72.369 ist widerrufen und darf nicht weiterverwendet werden.
 Nächster Schritt: nur 6.72.370 installieren; danach genau ein vollständiger PASSIV-Gesamtlauf. Harter Kontrollwert sind zuerst die Query-Zahlen der vier gleichen Produktseiten, nicht die Wall-Time allein.
+
+
+## 2026-11-21 – 6.72.371 gebündelte Ursachenoptimierung
+
+### Status
+- 6.72.369 bleibt widerrufen.
+- 6.72.370 ist der geprüfte Korrektur-/Sicherheitsstand, wurde aber vor dem nächsten Live-Lauf durch 6.72.371 als Installationskandidat supersediert.
+- 6.72.371 baut auf 6.72.370 auf. Design 1.50.616 und Performance Diagnose Safe 7.0.0 bleiben unverändert.
+- 6.72.371 ist lokal kausal + semantisch geprüft; ein Live-Gesamt-Speedup wird ausdrücklich erst nach PASSIV-Lauf behauptet.
+
+### Root cause 1 – automatische Banner werden zu spät verworfen
+Der allgemeine Rankingpfad normalisierte automatische Banner vollständig, bevor technische Ausschlussgründe griffen. 6.72.371 verwendet vor der Vollnormalisierung ausschließlich dieselben bereits existierenden zwingenden Ausschlussregeln:
+- automatische, nicht erzwungene Banner: raw source muss output_object_v4 sein;
+- exakter bestehender technischer Slotvertrag muss auf den gespeicherten Rohdaten erfüllt sein.
+Forced/fixed Banner umgehen den Frühfilter wie historisch.
+
+Beweise:
+- 300000 zufällige Einzelfälle: 0 Alt/Neu-Abweichungen.
+- 5000 Listen à 213 Kandidaten: 0 Ergebnislisten-Abweichungen.
+- 500000 Source+Format-Fälle inkl. forced path: 0 Abweichungen.
+- synthetische Vollnormalisierungen 500000 -> 26597 (-94,68 %) im Source+Format-Harness.
+Diese Prozentzahl beweist nur die entfernte Arbeit des Blocks, nicht die Live-Seitenzeit.
+
+### Root cause 2 – gleiche Control/Health-Basisprüfung pro Kampagne mehrfach je Slot
+Die allgemeine öffentliche Slotverarbeitung prüfte dieselbe Kampagne in Hub/Journal/anderen Slots wiederholt gegen dieselbe Basis-Control- und Health-Entscheidung. Das bestehende sichere Request-Reuse-Prinzip war nur auf Kategorie-Produkte begrenzt.
+
+6.72.371:
+- Basis-Control einmal je stabile Kampagne/Request;
+- Health einmal je stabile Kampagne/Request;
+- Slot-Veto separat je Slot;
+- dynamische Filter/Meta/Option/Cache/Sanitizer/Shortcode/URL/Redirect/Host-Zustände => exakter historischer Weg.
+
+Breiter Harness:
+- 100000 stabile Fälle: 0 Ausgabeabweichungen.
+- Basisprüfungen -77,31 %, Health -76,39 %, Slotprüfungen -95,64 % im synthetischen Mix.
+- 50000 dynamische Fälle: 0 Ausgabe- und Aufruffolgeabweichungen.
+
+Realer eingebetteter Pferdeatelier-Historienbestand:
+- 2012 Produktkampagnen im Snapshot, 1518 aktiv.
+- 1985 Kampagnen liegen gleichzeitig auf hub_product_1/2/3.
+- 895 Kampagnen liegen gleichzeitig auf journal_product_1/2/3.
+- 5000 reale Zielkontexte / echte Placements:
+  - Hub: 0 Ergebnisabweichungen; Basis -66,67 %, Health -65,67 %, Slot-Veto -94,11 %.
+  - Journal: 0 Ergebnisabweichungen; Basis -66,67 %, Health -65,76 %, Slot-Veto -80,20 %.
+Der historische Snapshot wird nur als Struktur-/Wiederholungsbeleg verwendet, nicht als Behauptung über aktuelle Live-Kampagnenzahlen.
+
+### Beibehaltener 6.72.370-Bildcache
+Exakte Methoden 6.72.370 -> 6.72.371 unverändert. Kein neuer Bildcache-Umbau.
+
+### Query-Regression technisch ausgeschlossen
+Die drei Metadatenmethoden, deren Änderung in 6.72.369 die Query-Explosion ausgelöst hatte, sind 6.72.370 -> 6.72.371 exakt unverändert:
+- ranked_campaign_posts_snapshot()
+- ranked_campaign_raw_records_snapshot()
+- campaign_from_post()
+Kein update_post_meta_cache=false, keine Narrow-Meta-Helfer.
+
+### Gesamt-Funktionsschutz 6.72.370 -> 6.72.371
+- PHP-Dateien 23 -> 23
+- Dateien entfernt 0 / hinzugefügt 0
+- vorhandene benannte Funktionen entfernt 0
+- neu nur 2 interne Performance-/Sicherheitshelfer
+- bestehende Funktionskörper geändert nur ranked_campaign_candidate_pool und ranked_campaigns_for_slot_uncached
+- Actions 176 -> 176
+- Filter 30 -> 30
+- Shortcodes 6 -> 6
+- Produktions-Schreibprimitive vollständig identisch
+- 23/23 PHP-Lint PASS
+- finales ZIP: 66/66 Dateien, 0 Hash-Abweichungen zum geprüften Arbeitsstand
+
+### Paket
+PFERDEATELIER_AFFILIATE_6.72.371_KONSOLIDIERT_ROOTCAUSE_PERFORMANCE.zip
+SHA-256: 832b7b82f1b190e06250cab922b4e9ab6ee0abb7661097991ae7eca7ce87a456
+Prüfnachweis: PFERDEATELIER_6.72.371_PRUEFNACHWEIS.md
+
+### Bewusst nicht eingebaut
+- persistenter Kampagnencache: vorhandene Revision nicht universell genug;
+- erneuter schmaler Meta-Leser: wegen 6.72.369-Regression ausgeschlossen;
+- gemeinsamer Hub-/Journal-Rankinglauf: fachlich möglich, aber vor Live-Nachweis nicht nötig;
+- the_content-Rekursion: nicht bewiesen;
+- Menücache-Umbau: nicht bewiesen;
+- Options/init/Cron: ohne exakte Attribution nicht geändert;
+- Relevanssi Core: nicht Hauptbottleneck.
+
+### Nächster Live-Schritt
+Nur 6.72.371 installieren. Danach genau ein vollständiger PASSIV-Gesamtlauf.
+Harte Prüfungen zuerst:
+1. Produktseiten-Queries dürfen nicht wieder in den 734–1421-Bereich der 6.72.369 zurückspringen.
+2. Gleiche Routen: Queries, CPU, interne Cache-Hits und Inhaltsphase vergleichen.
+3. Hub/Journal/Banner-Produktpfade müssen weniger feste Affiliate-Arbeit zeigen.
+4. Wall-Time wegen schwankender Serverlast nur zusammen mit CPU/Queries/Cache/Phasen bewerten.
