@@ -976,3 +976,90 @@ Nächster zulässiger Fix muss kumulativ sein:
 3. 6.72.364 direkten GTIN-Set-Lookup beibehalten.
 4. 6.72.365 Bundle-Plan nur zusätzlich behalten; keine bestehende Funktion entfernen.
 5. Vor Ausgabe Struktur-, Funktions-, Auswahl- und Mutationsregressionen gegen alle drei Vorgänger prüfen.
+
+
+## 6.72.366 – bewiesener WordPress-Standardfilter-Rootfix – 21.11.2026
+
+### Harte Ursache des 6.72.365-Live-Fehlschlags
+6.72.365 sperrt seinen neuen category_product-Postprocess-Plan-Cache, sobald
+`has_filter('http_request_host_is_external')` wahr ist.
+Dieselbe Bedingung sperrt auch den vorhandenen request-lokalen Bildfreigabe-Cache.
+
+WordPress registriert im Core standardmäßig:
+`add_filter('http_request_host_is_external', 'allowed_http_request_hosts', 10, 2)`.
+Die Live-Diagnose weist `multisite=false` aus.
+Damit war die Sperrbedingung auf jeder normalen Live-Anfrage bereits durch WordPress selbst erfüllt – auch ohne Fremdplugin.
+Folge: Der in 6.72.365 lokal bewiesene Bundle-Fastpath konnte auf Live nicht aktiv werden. Dies erklärt, warum Pferdesättel nach 6.72.365 weiterhin 139257 Cache-Hits hatte gegenüber 138943 auf 6.72.362.
+
+### Korrektur
+6.72.366 unterscheidet WordPress-Standardcallback von echten Fremd-/dynamischen Eingriffen:
+- erlaubt: kein Callback
+- erlaubt: ausschließlich `allowed_http_request_hosts`
+- auf Multisite zusätzlich erlaubt: `ms_allowed_http_request_hosts`
+- sobald irgendein weiterer/unbekannter Callback registriert ist: alter 6.72.365-Sicherheitsweg, kein Cache.
+
+Dies gilt an beiden Stellen derselben Ursache:
+1. category_product_postprocess_plan_cache_allowed_v672365
+2. category_product_public_image_ready
+
+Keine Ranking-, Auswahl-, Provider-, GTIN-, Fallback-, Control-, Health-, Bild-, Tracking- oder Renderingregel wird geändert.
+
+### Kausale Simulation
+WordPress-ähnlicher Hook-Harness:
+- kein Hostfilter: Alt erlaubt / Neu erlaubt
+- WordPress-Standardfilter allein: Alt sperrt / Neu erlaubt
+- Standard + Fremdfilter: Alt sperrt / Neu sperrt
+- Standard + Closure: Alt sperrt / Neu sperrt
+
+710-Kandidaten-Simulation, 3 Kategorie-Slots:
+- 6.72.365 unter WordPress-Standardhook: vollständiger Postprocess 3x
+- 6.72.366: vollständiger Postprocess 1x + bestehender Auswahlplan 2x
+- Ausgabe-Hash identisch
+- Bildprüfungen 2130 -> 710
+- lokaler Harness dieses Aktivierungsfehlers: 9,380 -> 4,721 ms (-49,67 %) bei identischer Ausgabe.
+Dieser Harness misst die Aktivierung/Mehrfacharbeit, nicht die komplette Live-Seitenzeit.
+
+Bereits bestehender und unveränderter 6.72.365-Postprocess-Beweis, der nun erstmals unter WordPress-Standardhook aktiv werden kann:
+- 43 Kandidaten: 0,675 -> 0,292 ms (-56,7 %)
+- 196 Kandidaten: 15,123 -> 5,345 ms (-64,66 %)
+- 710 Kandidaten: 283,821 -> 94,575 ms (-66,68 %)
+
+### Inhaltlicher Sicherheitsbeweis
+12.000 randomisierte Guard-/Plan-Fälle:
+- 0 Ausgabeabweichungen
+- 0 Guard-Abweichungen
+- wechselnde Slotinputs enthalten
+- bei Fremdcallback bleibt der historische 3x-Weg erhalten.
+
+### Byte-/Strukturschutz 6.72.365 -> 6.72.366
+Finales, frisch entpacktes ZIP gegen exaktes Live-6.72.365-Paket:
+- Dateien 66 -> 66
+- entfernt 0
+- hinzugefügt 0
+- geänderte Dateien nur:
+  - pferdeportal-affiliate-router.php
+  - readme.txt
+- benannte Funktionen: entfernt 0
+- neu exakt 1:
+  - category_product_http_host_filter_default_only_v672366
+- geänderte bestehende Funktionen exakt 2:
+  - category_product_postprocess_plan_cache_allowed_v672365
+  - category_product_public_image_ready
+- Hooks/Filter/Shortcodes 212 -> 212, exakt identisch
+- Produktions-Schreibprimitive vollständig identisch:
+  update_option 290, add_option 7, delete_option 37,
+  update_post_meta 85, add_post_meta 2, delete_post_meta 10,
+  wp_insert_post 3, wp_update_post 12, wp_delete_post 1,
+  set_transient 11, delete_transient 12,
+  wp_schedule_event 9, wp_schedule_single_event 36, wp_clear_scheduled_hook 34
+- 23/23 PHP-Dateien Lint PASS
+- ZIP 66/66 Dateien byteidentisch zum geprüften Arbeitsstand
+
+### Paket
+PFERDEATELIER_AFFILIATE_6.72.366_DEFAULT_HOST_FILTER_ROOTFIX_TEST.zip
+SHA-256: f6da2e572c558b0126c2fe237d1ef832a8a1ce49e2c62123fb9f82dd4ad02b2f
+
+### Entscheidung
+6.72.366 ist installierbar.
+Es repariert ausschließlich den bewiesenen, auf jeder WordPress-Anfrage wirksamen Fehlstopper von 6.72.365.
+Keine 6.72.363-Rückkopie, kein verworfener 6.72.364-Mikrofix, keine zusätzliche Fachänderung.
