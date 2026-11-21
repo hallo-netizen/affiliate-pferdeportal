@@ -16,16 +16,25 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://de.wikipedia.org/wiki/Tier%C3%A4rztegeb%C3%BChrenordnung",
-          "source_title": "Wikipedia – Tierärztegebührenordnung"
+          "source_url": "https://www.gesetze-im-internet.de/got_2022/__1.html",
+          "source_title": "Bundesministerium der Justiz – GOT § 1"
+        },
+        {
+          "source_url": "https://www.gesetze-im-internet.de/got_2022/__2.html",
+          "source_title": "Bundesministerium der Justiz – GOT § 2"
+        },
+        {
+          "source_url": "https://www.msdvetmanual.com/horse-owners/routine-care-of-horses/dental-coat-and-hoof-care-of-horses",
+          "source_title": "MSD Veterinary Manual – Pferdezahnpflege"
         }
       ],
       "claims": [
-        "Die Tierärztegebührenordnung regelt die Vergütung tierärztlicher Leistungen.",
-        "Die GOT hat einen Gebührenrahmen zwischen einfachem und dreifachem Satz.",
-        "Neben Gebühren können Entschädigungen für den Tierarzt anfallen.",
-        "Die GOT unterscheidet Grundleistungen und weitere Behandlungen.",
-        "Die GOT wurde 2022 neu gefasst und bildet den Rahmen für spätere Rechnungen."
+        "Die Gebührenordnung der Tierärzte enthält für Leistungen den einfachen Gebührensatz.",
+        "Die Tierarztrechnung berücksichtigt einen Rahmen von einfachem bis dreifachem Gebührensatz.",
+        "Der Schwierigkeitsgrad der Behandlung fließt in die tierärztliche Gebühr ein.",
+        "Die benötigte Zeit gehört zu den tierärztlichen Abrechnungskriterien.",
+        "Die Umsatzsteuer ist in den Gebühren der GOT nicht bereits enthalten.",
+        "Veränderte Gebissannahme kann ein Anlass sein, die Zähne des Pferdes untersuchen zu lassen."
       ],
       "fresh_research_reference_date": "2026-11-21"
     },
@@ -48,55 +57,66 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://de.wikipedia.org/wiki/Tier%C3%A4rztegeb%C3%BChrenordnung",
-        "source_title": "Wikipedia – Tierärztegebührenordnung",
-        "evidence_text": "Die Tierärztegebührenordnung (GOT) bestimmt die Vergütungen der Tierärzte für ihre Leistungen",
-        "evidence_text_sha256": "66d842bf617cadfa5683849801094c62e47d3c1926bf1dc9fc54d810f3d50b16",
-        "statement": "Die Tierärztegebührenordnung regelt die Vergütung tierärztlicher Leistungen.",
+        "source_url": "https://www.gesetze-im-internet.de/got_2022/__1.html",
+        "source_title": "Bundesministerium der Justiz – GOT",
+        "evidence_text": "Die im Gebührenverzeichnis aufgeführten Gebührensätze entsprechen dem einfachen Satz.",
+        "evidence_text_sha256": "e1d6ad93e2dda7833345b4ad8f390c2edb0ee74dacf007bc132fbd18535266eb",
+        "statement": "Die Gebührenordnung der Tierärzte enthält für Leistungen den einfachen Gebührensatz.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F2": {
-        "source_url": "https://de.wikipedia.org/wiki/Tier%C3%A4rztegeb%C3%BChrenordnung",
-        "source_title": "Wikipedia – Tierärztegebührenordnung",
-        "evidence_text": "Die GOT setzt den Gebührenrahmen vom mindestens einfachen bis maximal dreifachen Satz fest, der nur unter ganz besonderen Umständen verlassen werden darf.",
-        "evidence_text_sha256": "9ed7b5b33f6ff175764785666169cd4653a1290a35c425a981c7ac0421b3fd81",
-        "statement": "Die GOT hat einen Gebührenrahmen zwischen einfachem und dreifachem Satz.",
+        "source_url": "https://www.gesetze-im-internet.de/got_2022/__2.html",
+        "source_title": "Bundesministerium der Justiz – GOT",
+        "evidence_text": "Die Höhe der einzelnen Gebühr bemisst sich, soweit nichts anderes bestimmt ist, nach dem Einfachen bis Dreifachen des Gebührensatzes.",
+        "evidence_text_sha256": "9676625f9bcb77eb35dd9f41d226ba55d689903d93a4071f44001d4e0dab7f83",
+        "statement": "Die Tierarztrechnung berücksichtigt einen Rahmen von einfachem bis dreifachem Gebührensatz.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F3": {
-        "source_url": "https://de.wikipedia.org/wiki/Tier%C3%A4rztegeb%C3%BChrenordnung",
-        "source_title": "Wikipedia – Tierärztegebührenordnung",
-        "evidence_text": "Weiterhin stehen dem Tierarzt Entschädigungen",
-        "evidence_text_sha256": "36b93d04930e1ec119dc8c691b4cf5f6374dcfda81449af82a4637dc291fdb54",
-        "statement": "Neben Gebühren können Entschädigungen für den Tierarzt anfallen.",
+        "source_url": "https://www.gesetze-im-internet.de/got_2022/__2.html",
+        "source_title": "Bundesministerium der Justiz – GOT",
+        "evidence_text": "der Schwierigkeit der Leistungen,",
+        "evidence_text_sha256": "d240e2be01f1d4e4d744b802363939d396b5730e56ff0314166a6f7b776ce9b6",
+        "statement": "Der Schwierigkeitsgrad der Behandlung fließt in die tierärztliche Gebühr ein.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F4": {
-        "source_url": "https://de.wikipedia.org/wiki/Tier%C3%A4rztegeb%C3%BChrenordnung",
-        "source_title": "Wikipedia – Tierärztegebührenordnung",
-        "evidence_text": "Die GOT gliedert sich in die Grundleistungen",
-        "evidence_text_sha256": "de6d01cdc3a89cdf2589d88c04a662f62a96ae44e18a7366c3490ea67d647eb5",
-        "statement": "Die GOT unterscheidet Grundleistungen und weitere Behandlungen.",
+        "source_url": "https://www.gesetze-im-internet.de/got_2022/__2.html",
+        "source_title": "Bundesministerium der Justiz – GOT",
+        "evidence_text": "des Zeitaufwandes,",
+        "evidence_text_sha256": "e2592ccd282da8c4e53991ca0bf830c30a9b9f9701a18ff31d09899086084c91",
+        "statement": "Die benötigte Zeit gehört zu den tierärztlichen Abrechnungskriterien.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F5": {
-        "source_url": "https://de.wikipedia.org/wiki/Tier%C3%A4rztegeb%C3%BChrenordnung",
-        "source_title": "Wikipedia – Tierärztegebührenordnung",
-        "evidence_text": "Sie wurde zuletzt mit Wirkung vom 22. November 2022 neu gefasst.",
-        "evidence_text_sha256": "2fb690da4da45c56e7ca364e7be89ce20dacb2eab1bb5171993d2805db464b7d",
-        "statement": "Die GOT wurde 2022 neu gefasst und bildet den Rahmen für spätere Rechnungen.",
+        "source_url": "https://www.gesetze-im-internet.de/got_2022/__1.html",
+        "source_title": "Bundesministerium der Justiz – GOT",
+        "evidence_text": "In den im Gebührenverzeichnis aufgeführten Gebührensätzen ist die Umsatzsteuer nicht enthalten.",
+        "evidence_text_sha256": "deb0e94a481ce832836d8a2acf7372e7e74dc3a4bf05e5597d4bba7b47a09b87",
+        "statement": "Die Umsatzsteuer ist in den Gebühren der GOT nicht bereits enthalten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/routine-care-of-horses/dental-coat-and-hoof-care-of-horses",
+        "source_title": "MSD Veterinary Manual – Pferdezahnpflege",
+        "evidence_text": "Hesitating to take a bit in the mouth",
+        "evidence_text_sha256": "63e435928e63962823afd2e6f3484e317b096b5a64b3f9607623d4a10984d6ae",
+        "statement": "Veränderte Gebissannahme kann ein Anlass sein, die Zähne des Pferdes untersuchen zu lassen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
@@ -108,14 +128,16 @@
       "F2",
       "F3",
       "F4",
-      "F5"
+      "F5",
+      "F6"
     ],
     "allowed_fact_ids": [
       "F1",
       "F2",
       "F3",
       "F4",
-      "F5"
+      "F5",
+      "F6"
     ],
     "bound_links": [
       {
@@ -126,8 +148,8 @@
       },
       {
         "role": "further_information",
-        "href": "/category/pferdegesundheit-verstehen/",
-        "anchor": "pferdegesundheit-verstehen",
+        "href": "/category/gebisse-faq/",
+        "anchor": "FAQ Gebisse",
         "block": "further_information"
       }
     ],
@@ -137,7 +159,7 @@
         "active": true
       },
       {
-        "href": "/category/pferdegesundheit-verstehen/",
+        "href": "/category/gebisse-faq/",
         "active": true
       }
     ],
@@ -154,19 +176,16 @@
     "heading_intent_terms": [
       "Zahnbehandlung",
       "Pferd",
-      "2026",
       "Tierarzt",
-      "GOT",
       "Kosten",
+      "GOT",
       "Gebühren",
-      "Pferdegesundheit",
-      "Gebührenordnung",
-      "Tierarzt",
-      "2022",
+      "Zeitaufwand",
+      "Schwierigkeit",
+      "Gebisse",
+      "Gebissannahme",
       "Pferdezähne",
-      "Pferdegesundheit",
-      "Gesundheit",
-      "Zahnprobleme"
+      "Untersuchung"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
