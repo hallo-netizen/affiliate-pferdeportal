@@ -1,0 +1,175 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welche Maße sind bei Reithallen üblich?",
+    "target_keyword": "Wie groß sind Reithallen?",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "FAQ",
+    "plan_slot": "8c98615d2f6fadb96e9b10665e559897a520d1ebe912f9f84bcc3d8ab215e5ed"
+  },
+  "content_profile": {
+    "search_intent": "Welche Größen und Maße bei Reithallen üblich sind und wie sich Maße nach Nutzungszweck unterscheiden."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Reithalle",
+          "source_title": "Wikipedia – Reithalle"
+        }
+      ],
+      "claims": [
+        "Eine Reithalle ist ein Gebäude für den Reitsport.",
+        "Reithallen ermöglichen Reiten und Bewegung unabhängig vom Wetter.",
+        "Häufige Reithallenmaße sind 20 mal 40 und 20 mal 60 Meter; weitere Größen sind möglich.",
+        "Bei der Planung einer Reithalle ist neben den Maßen auch der Boden wichtig."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie groß sind Reithallen?",
+      "topic": "Welche Maße sind bei Reithallen üblich?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Maße sind bei Reithallen üblich?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Reithalle",
+        "source_title": "Wikipedia – Reithalle",
+        "evidence_text": "Eine Reithalle bezeichnet ein Gebäude (ein Teil einer Pferdesportanlage), das speziell für den Reitsport konzipiert ist.",
+        "evidence_text_sha256": "db6a79c7901046251aa362bbbed0da36b62ae6d05add1afc4f90ad0c9a44d339",
+        "statement": "Eine Reithalle ist ein Gebäude für den Reitsport.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Reithalle",
+        "source_title": "Wikipedia – Reithalle",
+        "evidence_text": "Reithallen dienen der wetterunabhängigen Bewegungsmöglichkeit für Reiter und Pferde.",
+        "evidence_text_sha256": "f489ecebab85f9cf3c71bc56583c2aab78a480ba2d7c85fdf2cb995e3f63be9f",
+        "statement": "Reithallen ermöglichen Reiten und Bewegung unabhängig vom Wetter.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Reithalle",
+        "source_title": "Wikipedia – Reithalle",
+        "evidence_text": "Reithallen sind in aller Regel ungeheizt, da dies für die Pferde gesünder ist, und haben meist Turniermaße von 20 m × 60 m oder von 20 m × 40 m und 25 m × 65 m.",
+        "evidence_text_sha256": "d7d62e392ce056856f981f9207c43e173face55c37e10a8f61c9abe282882efb",
+        "statement": "Häufige Reithallenmaße sind 20 mal 40 und 20 mal 60 Meter; weitere Größen sind möglich.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://de.wikipedia.org/wiki/Reithalle",
+        "source_title": "Wikipedia – Reithalle",
+        "evidence_text": "Von großer Bedeutung ist in Reithallen die Bodenqualität.",
+        "evidence_text_sha256": "0e2fce49e2fa61a13df8bf9eeb59f7c1e2705b154569ee08ce67f13d0536ab8d",
+        "statement": "Bei der Planung einer Reithalle ist neben den Maßen auch der Boden wichtig.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "Pferdehaltung & Stallalltag",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-buecher-und-ratgeber/pferdehaltung-grundlagen/",
+        "anchor": "Pferdehaltung Grundlagen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-buecher-und-ratgeber/pferdehaltung-grundlagen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Reithalle",
+      "Reitbahn",
+      "Reitsport",
+      "Turniermaße",
+      "Boden",
+      "Bewegung",
+      "Platzangebot",
+      "Beleuchtung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die kompakte Übersicht ordnet belegte Merkmale nach Anwendungsfall und lässt die wichtigsten Unterschiede unmittelbar vergleichen.",
+      "reader_question": "Wie groß sind Reithallen?",
+      "reader_benefit": "Mehrere unterschiedliche belegte Einzelaspekte lassen sich schneller als zusammenhängender Vergleich prüfen.",
+      "why_not_prose": "Eine sachliche Vergleichstabelle ordnet die belegten Unterschiede klarer als wiederholte lange Absätze.",
+      "comparison_axes": [
+        "Unterschiedliche Ausstattungsformen und Einsatzzwecke",
+        "Typische Voraussetzungen und Grenzen"
+      ],
+      "source_fact_ids": [
+        "F1",
+        "F2",
+        "F3"
+      ]
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
