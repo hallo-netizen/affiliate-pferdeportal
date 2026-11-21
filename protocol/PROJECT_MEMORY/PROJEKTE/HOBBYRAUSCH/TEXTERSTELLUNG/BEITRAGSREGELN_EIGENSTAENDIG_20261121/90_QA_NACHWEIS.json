@@ -1,110 +1,62 @@
 {
-  "contract": "HOBBY_EDITORIAL_TYPE_RULEBOOK_STATIC_QA_V1",
+  "contract": "HOBBYDEPOT_COMMON_AND_FIVE_TYPES_QA_V2",
   "date": "2026-11-21",
-  "result": "PASS_REVIEW_READY_NOT_PRODUCTION_APPROVAL",
-  "tests": [
-    {
-      "check": "five_exact_wp_types",
-      "passed": true
-    },
-    {
-      "check": "all_unique_books",
-      "passed": true
-    },
-    {
-      "check": "all_rulebook_json_self_contained",
-      "passed": true
-    },
-    {
-      "check": "common_rules_same_in_all",
-      "passed": true
-    },
-    {
-      "check": "one_owner_per_common_rule",
-      "passed": true
-    },
-    {
-      "check": "type_specific_rules_unique",
-      "passed": true
-    },
-    {
-      "check": "only_hobby_rulebooks",
-      "passed": true
-    },
-    {
-      "check": "never_auto_publish",
-      "passed": true
-    },
-    {
-      "check": "no_hard_format_copy",
-      "passed": true
-    },
-    {
-      "check": "no_new_type",
-      "passed": true
-    },
-    {
-      "check": "existing_transport_mismatch_explicit",
-      "passed": true
-    },
-    {
-      "check": "no_writer_or_kmulti_change",
-      "passed": true
-    },
-    {
-      "check": "no_portal_redecision",
-      "passed": true
-    },
-    {
-      "check": "all_book_values_valid",
-      "passed": true
-    },
-    {
-      "check": "faq_only_single_question",
-      "passed": true
-    },
-    {
-      "check": "pflege_anleitung_separate",
-      "passed": true
-    },
-    {
-      "check": "no_report_type_in_wp_manifest",
-      "passed": true
-    }
-  ],
-  "passes": 17,
-  "failures": 0,
-  "books": [
-    {
-      "file": "10_BERATUNG.json",
-      "type": "Beratung",
-      "common_rules": 12,
-      "own_rules": 4
-    },
-    {
-      "file": "20_FAQ.json",
-      "type": "FAQ",
-      "common_rules": 12,
-      "own_rules": 5
-    },
-    {
-      "file": "30_PFLEGE.json",
-      "type": "Pflege",
-      "common_rules": 12,
-      "own_rules": 5
-    },
-    {
-      "file": "40_VERGLEICH.json",
-      "type": "Vergleich",
-      "common_rules": 12,
-      "own_rules": 5
-    },
-    {
-      "file": "50_ANLEITUNG.json",
-      "type": "Anleitung",
-      "common_rules": 12,
-      "own_rules": 6
-    }
-  ],
-  "limit": "Nur statischer redaktioneller Bestands- und Konsistenztest: keine originale K-Multi-Textprüfung, keine Änderung am Produktionsworkflow, keine WordPress-Freigabe."
+  "status": "PASS_EDITORIAL_PREPARATION_NOT_RUNTIME_APPROVAL",
+  "static_readback": {
+    "passes": 18,
+    "failures": 0,
+    "checked": [
+      "Fünf WordPress-Beitragsarten exakt",
+      "Eine gemeinsame Hobbydepot-Regelquelle",
+      "Zwölf Grundregeln genau einmal",
+      "Grundregel-IDs eindeutig",
+      "Jede Grundregel hat Zuständigkeit",
+      "Keine Grundregel-Kopien in den fünf Artbüchern",
+      "Alle fünf Artbücher referenzieren dieselbe Grundregelquelle",
+      "Fünf eigenständige Artikelart-IDs",
+      "Fachregelanzahlen [4,5,5,5,6]",
+      "Eigene Fachregel-IDs eindeutig",
+      "Alle fünf Artbücher weiterhin Entwurf",
+      "Bestehende WordPress-Artikelart bleibt alleinige Entscheidung",
+      "Kein sechster eigenmächtiger Magazin-/Inspirationstyp",
+      "Pflege und Anleitung getrennte Fachbücher",
+      "Zwei abweichende alte K-Multi-Referenzen offen dokumentiert",
+      "Keine automatische Aktivierung",
+      "Keine Veröffentlichung",
+      "Längen- und Gliederungszahlen nur unverbindliche Redaktionsziele"
+    ]
+  },
+  "executed_original_wordpress_php": {
+    "real_code": "Texterstellung_Hobbydepot_0.4.24.18_PFERDEATELIER_ORIGINAL_MINI_EINMALIMPORT.zip:texterstellung-hobbydepot/includes/class-txe-k0-article-types.php",
+    "runtime": "PHP 8.4.24 CLI read-only",
+    "supported": [
+      "Beratung",
+      "FAQ",
+      "Pflege",
+      "Vergleich",
+      "Anleitung"
+    ],
+    "rejected": [
+      "Inspiration",
+      "Porträt & Bericht"
+    ],
+    "status": "PASS",
+    "executed_environment": "lokale isolierte Prüfung der unveränderten Originalklassen- und Original-Vertragsdatei; keine WordPress-Live-Installation"
+  },
+  "changes": {
+    "identical_shared_rule_instances_before": 60,
+    "after": 12,
+    "duplicate_instances_eliminated": 48,
+    "common_rule_text_changed": false,
+    "specific_type_rule_text_changed": false,
+    "wordpress_plugin_changed": false,
+    "kmulti_runtime_changed": false,
+    "k0_changed": false
+  },
+  "limitations": [
+    "Keine komplette WordPress→K-Multi→WordPress-Produktionsprobe",
+    "Keine echte 121-Regel- oder Writer-Freigabe",
+    "K-Multi-Verweise Pflege/Anleitung sind unverändert und bislang nicht auf neue eigenständige Hobby-Bücher umgestellt",
+    "Redaktionelle Entwürfe sind nicht produktiv aktiv; kein Plugin installieren"
+  ]
 }
