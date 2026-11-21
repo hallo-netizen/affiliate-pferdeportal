@@ -16,16 +16,16 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.gesetze-im-internet.de/got_2022/BJNR140100022.html",
-          "source_title": "Bundesjustizministerium – Gebührenordnung Tierärzte"
+          "source_url": "https://de.wikipedia.org/wiki/Tierärztegebührenordnung",
+          "source_title": "Wikipedia – Tierärztegebührenordnung"
         }
       ],
       "claims": [
-        "Die GOT enthält für Pferde eine eigene Position zur Entfernung scharfer Zahnkanten.",
-        "Eine umfangreichere Okklusionskorrektur ist eine gesonderte tierärztliche Leistung.",
-        "Die GOT nennt Gebührensätze auf Grundlage des einfachen Satzes.",
-        "Die allgemeine Untersuchung mit Beratung des Pferdes ist in der GOT gesondert aufgeführt.",
-        "Eine Zahnextraktion bei Pferden ist eine andere tierärztliche Leistung als bloßes Abschleifen."
+        "Die Tierärztegebührenordnung regelt die Vergütung tierärztlicher Leistungen.",
+        "Die GOT hat einen Gebührenrahmen zwischen einfachem und dreifachem Satz.",
+        "Neben Gebühren können Entschädigungen für den Tierarzt anfallen.",
+        "Die GOT unterscheidet Grundleistungen und weitere Behandlungen.",
+        "Die GOT wurde 2022 neu gefasst und bildet den Rahmen für spätere Rechnungen."
       ],
       "fresh_research_reference_date": "2026-11-21"
     },
@@ -48,55 +48,55 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.gesetze-im-internet.de/got_2022/BJNR140100022.html",
-        "source_title": "Bundesjustizministerium – Gebührenordnung Tierärzte",
-        "evidence_text": "Okklusionskorrektur, Entfernung scharfer Kanten, Pferd, Hausequiden, Kameliden",
-        "evidence_text_sha256": "9457cdad89b09ab59e1960f6deaec8339cee8ad3fa5fa7aa7561707cc516eb06",
-        "statement": "Die GOT enthält für Pferde eine eigene Position zur Entfernung scharfer Zahnkanten.",
+        "source_url": "https://de.wikipedia.org/wiki/Tierärztegebührenordnung",
+        "source_title": "Wikipedia – Tierärztegebührenordnung",
+        "evidence_text": "Die Tierärztegebührenordnung (GOT) bestimmt die Vergütungen der Tierärzte für ihre Leistungen",
+        "evidence_text_sha256": "66d842bf617cadfa5683849801094c62e47d3c1926bf1dc9fc54d810f3d50b16",
+        "statement": "Die Tierärztegebührenordnung regelt die Vergütung tierärztlicher Leistungen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F2": {
-        "source_url": "https://www.gesetze-im-internet.de/got_2022/BJNR140100022.html",
-        "source_title": "Bundesjustizministerium – Gebührenordnung Tierärzte",
-        "evidence_text": "Okklusionskorrektur, systematische Beseitigung von Okklusionshindernissen, Einschleifen, Pferd, Hausequiden, Kameliden",
-        "evidence_text_sha256": "839085aaf48f9ae24a977276d503a8c72231c5cc4ce7957852c13c0ec0a862c7",
-        "statement": "Eine umfangreichere Okklusionskorrektur ist eine gesonderte tierärztliche Leistung.",
+        "source_url": "https://de.wikipedia.org/wiki/Tierärztegebührenordnung",
+        "source_title": "Wikipedia – Tierärztegebührenordnung",
+        "evidence_text": "Die GOT setzt den Gebührenrahmen vom mindestens einfachen bis maximal dreifachen Satz fest, der nur unter ganz besonderen Umständen verlassen werden darf.",
+        "evidence_text_sha256": "9ed7b5b33f6ff175764785666169cd4653a1290a35c425a981c7ac0421b3fd81",
+        "statement": "Die GOT hat einen Gebührenrahmen zwischen einfachem und dreifachem Satz.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F3": {
-        "source_url": "https://www.gesetze-im-internet.de/got_2022/BJNR140100022.html",
-        "source_title": "Bundesjustizministerium – Gebührenordnung Tierärzte",
-        "evidence_text": "Die im Gebührenverzeichnis aufgeführten Gebührensätze entsprechen dem einfachen Satz.",
-        "evidence_text_sha256": "e1d6ad93e2dda7833345b4ad8f390c2edb0ee74dacf007bc132fbd18535266eb",
-        "statement": "Die GOT nennt Gebührensätze auf Grundlage des einfachen Satzes.",
+        "source_url": "https://de.wikipedia.org/wiki/Tierärztegebührenordnung",
+        "source_title": "Wikipedia – Tierärztegebührenordnung",
+        "evidence_text": "Weiterhin stehen dem Tierarzt Entschädigungen",
+        "evidence_text_sha256": "36b93d04930e1ec119dc8c691b4cf5f6374dcfda81449af82a4637dc291fdb54",
+        "statement": "Neben Gebühren können Entschädigungen für den Tierarzt anfallen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F4": {
-        "source_url": "https://www.gesetze-im-internet.de/got_2022/BJNR140100022.html",
-        "source_title": "Bundesjustizministerium – Gebührenordnung Tierärzte",
-        "evidence_text": "Allgemeine Untersuchung mit Beratung, Pferd, Hausequiden, Kameliden",
-        "evidence_text_sha256": "196006edf13e6d7da7232198e7478618e2fa6695ada25edbc6a440cc994df9a7",
-        "statement": "Die allgemeine Untersuchung mit Beratung des Pferdes ist in der GOT gesondert aufgeführt.",
+        "source_url": "https://de.wikipedia.org/wiki/Tierärztegebührenordnung",
+        "source_title": "Wikipedia – Tierärztegebührenordnung",
+        "evidence_text": "Die GOT gliedert sich in die Grundleistungen",
+        "evidence_text_sha256": "de6d01cdc3a89cdf2589d88c04a662f62a96ae44e18a7366c3490ea67d647eb5",
+        "statement": "Die GOT unterscheidet Grundleistungen und weitere Behandlungen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F5": {
-        "source_url": "https://www.gesetze-im-internet.de/got_2022/BJNR140100022.html",
-        "source_title": "Bundesjustizministerium – Gebührenordnung Tierärzte",
-        "evidence_text": "Zahnextraktion Pferd, Equiden, Kameliden",
-        "evidence_text_sha256": "fc22e31fd3c5808c5d02883b1e7b241f266b70b815525c2570fefe54a93e05f5",
-        "statement": "Eine Zahnextraktion bei Pferden ist eine andere tierärztliche Leistung als bloßes Abschleifen.",
+        "source_url": "https://de.wikipedia.org/wiki/Tierärztegebührenordnung",
+        "source_title": "Wikipedia – Tierärztegebührenordnung",
+        "evidence_text": "Sie wurde zuletzt mit Wirkung vom 22. November 2022 neu gefasst.",
+        "evidence_text_sha256": "2fb690da4da45c56e7ca364e7be89ce20dacb2eab1bb5171993d2805db464b7d",
+        "statement": "Die GOT wurde 2022 neu gefasst und bildet den Rahmen für spätere Rechnungen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
@@ -159,7 +159,11 @@
       "GOT",
       "Kosten",
       "Gebühren",
-      "Pferdegesundheit"
+      "Pferdegesundheit",
+      "Gebührenordnung",
+      "Tierarzt",
+      "2022",
+      "Pferdezähne"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
