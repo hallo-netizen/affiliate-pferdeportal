@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Was kontrolliert das Veterinäramt bei der Pferdehaltung?",
+      "target_keyword": "Was prüft das Veterinäramt Pferdehaltung?",
+      "category": "recht-finanzen-organisation",
+      "article_type": "FAQ",
+      "plan_slot": "5547705b734c8c4961b43af252f5081e511ff56aad31562aa1886da20bea1c42"
+    }
+  ],
+  "batch_sha256": "f00adfa66ac7e93b9acb9cfbf4b4ac6933d147be63cab3752655edfc13379447"
+}
