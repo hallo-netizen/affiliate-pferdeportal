@@ -130,8 +130,8 @@
       },
       {
         "role": "further_information",
-        "href": "/category/alltags-pferde-haltungsformen/",
-        "anchor": "alltags-pferde-haltungsformen",
+        "href": "/category/pferdedecken-winterdecken-faq/",
+        "anchor": "Pferdedecken Winterdecken FAQ",
         "block": "further_information"
       }
     ],
@@ -141,7 +141,7 @@
         "active": true
       },
       {
-        "href": "/category/alltags-pferde-haltungsformen/",
+        "href": "/category/pferdedecken-winterdecken-faq/",
         "active": true
       }
     ],
@@ -161,7 +161,8 @@
       "Nässeschutz",
       "Wäsche",
       "Pflegeetikett",
-      "Regendecken"
+      "Regendecken",
+      "Winterdecken"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
