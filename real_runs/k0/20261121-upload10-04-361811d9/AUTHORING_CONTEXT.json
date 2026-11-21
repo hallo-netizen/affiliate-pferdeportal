@@ -1,0 +1,210 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Pferdedecken richtig waschen und trocknen",
+    "target_keyword": "pferdedecken waschen",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "Anleitung",
+    "plan_slot": "361811d9ae2ebe4ceaf7bb918574a772923d6de07018f814af0898b13de525ee"
+  },
+  "content_profile": {
+    "search_intent": "Pferdedecken selbst waschen und trocknen, einschließlich geeigneter Waschmethoden; nicht nur die Waschhäufigkeit."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+          "source_title": "Horseware Ireland – Pferdedecken pflegen"
+        }
+      ],
+      "claims": [
+        "Für Maschinenwäsche wird eine geeignete große gewerbliche Waschmaschine und niedrige Temperatur empfohlen.",
+        "Bei Reinigung mit Wasserstrahl ist sanfter Druck zu verwenden.",
+        "Für Pferdedecken sollte ein geeignetes Waschmittel verwendet werden.",
+        "Pferdedecken sollen aufgehängt an der Luft und nicht im Trockner trocknen.",
+        "Vor dem Einlagern sollen Decken sauber und vollständig trocken sein.",
+        "Vor der Reinigung sollten Decken auf Beschädigungen geprüft werden."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "Anleitung",
+      "target_keyword": "pferdedecken waschen",
+      "topic": "Pferdedecken richtig waschen und trocknen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Pferdedecken materialschonend reinigen und danach trocknen",
+      "preparation_items": [
+        "Geeignete Waschmaschine oder Wasseranschluss",
+        "Pferdedeckenwaschmittel",
+        "Trocknungsplatz"
+      ],
+      "procedure_steps": [
+        "Verschmutzungen und Pferdehaare abbürsten",
+        "Verschlüsse sichern und Decke nach Pflegeetikett waschen",
+        "Decke vollständig an der Luft trocknen"
+      ],
+      "safety_controls": [
+        "Pflegeetikett und Maschinenkapazität beachten"
+      ],
+      "common_errors": [
+        "Überladen der Waschmaschine oder Trockner verwenden"
+      ],
+      "result_checks": [
+        "Decke vollständig trocken und funktionsfähig"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+        "source_title": "Horseware Ireland – Pferdedecken pflegen",
+        "evidence_text": "For machine washing: use a cool setting and ideally a commercial washing machine that can cope with heavy-duty washing.",
+        "evidence_text_sha256": "bda60aab46171a96c0066380cf41f42754129569ff9ade4ea8d0144aa69f5179",
+        "statement": "Für Maschinenwäsche wird eine geeignete große gewerbliche Waschmaschine und niedrige Temperatur empfohlen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+        "source_title": "Horseware Ireland – Pferdedecken pflegen",
+        "evidence_text": "For hosing: use gentle pressure.",
+        "evidence_text_sha256": "2191c4a3e73d82abfafbb548bbeb136c8eaacb7578139c235fadaba7e44cb34c",
+        "statement": "Bei Reinigung mit Wasserstrahl ist sanfter Druck zu verwenden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+        "source_title": "Horseware Ireland – Pferdedecken pflegen",
+        "evidence_text": "Use a wash formulated for blankets.",
+        "evidence_text_sha256": "d526345e3c9b1dda9b000ee2d6a5fa70363a1ed2cd9bc7571f925e15089b8bfe",
+        "statement": "Für Pferdedecken sollte ein geeignetes Waschmittel verwendet werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+        "source_title": "Horseware Ireland – Pferdedecken pflegen",
+        "evidence_text": "Hang the blanket to drip dry naturally. Don’t tumble dry your blanket.",
+        "evidence_text_sha256": "9c87dd9fc6b078e7b81f448c464eef1608a56a95a12b908ca2e95570ee6c315a",
+        "statement": "Pferdedecken sollen aufgehängt an der Luft und nicht im Trockner trocknen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+        "source_title": "Horseware Ireland – Pferdedecken pflegen",
+        "evidence_text": "Once your blankets have been washed, re-proofed if necessary, and are dry it’s time to store them away until next season.",
+        "evidence_text_sha256": "0ca929c894ed520a258379ec66f874716c76bc6b659f4b22a7a6bbc6b852554a",
+        "statement": "Vor dem Einlagern sollen Decken sauber und vollständig trocken sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F6": {
+        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+        "source_title": "Horseware Ireland – Pferdedecken pflegen",
+        "evidence_text": "Checking for any rips or tears is a good habit to get into.",
+        "evidence_text_sha256": "7f29c8b57f55e2fdab59022811acf36832b69f1ea98be219816374a69b360081",
+        "statement": "Vor der Reinigung sollten Decken auf Beschädigungen geprüft werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "alltags-pferde-haltungsformen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "anchor": "pferdedecken-regendecken-pflege",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Regendecken",
+      "Pferdedecken",
+      "Waschmaschine",
+      "Reinigung",
+      "Trocknen",
+      "Waschmittel",
+      "Verschmutzung",
+      "Wäsche"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "LINEAR_SEQUENCE",
+      "rationale": "Der praktische Ablauf ist eine Folge einzelner Handlungen; eine Tabelle wäre deutlich weniger hilfreich als eine präzise Schrittfolge."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
