@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche Strafen drohen bei der Nutzung eines Reitplatzes ohne Genehmigung?",
+      "target_keyword": "Welche Strafe droht, wenn man einen Reitplatz ohne Genehmigung nutzt?",
+      "category": "recht-finanzen-organisation",
+      "article_type": "FAQ",
+      "plan_slot": "e96dcb440d506242a2d3fa47fc1562e57cc54e0be2fc4f41c4ac22b11b11ebbc"
+    }
+  ],
+  "batch_sha256": "dc4f0f524e953e545f32ff006d37094674921048cef8b7589280f2118ddd58ff"
+}
