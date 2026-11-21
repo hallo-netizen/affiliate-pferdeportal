@@ -58,5 +58,21 @@
     "Keine echte 121-Regel- oder Writer-Freigabe",
     "K-Multi-Verweise Pflege/Anleitung sind unverändert und bislang nicht auf neue eigenständige Hobby-Bücher umgestellt",
     "Redaktionelle Entwürfe sind nicht produktiv aktiv; kein Plugin installieren"
-  ]
+  ],
+  "latest_rulebook_normalization": {
+    "status": "PASS",
+    "readback_condition": "Each of 12 formerly duplicated common metadata fields matched exactly across 5 books prior to extraction. Five own rules, outlines and format policy objects preserved verbatim.",
+    "common_metadata_fields_removed_per_type": 12,
+    "duplicate_metadata_copies_eliminated": 48,
+    "common_rule_count_still": 12,
+    "own_type_rule_counts": [
+      4,
+      5,
+      5,
+      5,
+      6
+    ],
+    "word_press_original_five_type_contract_unchanged": true,
+    "kmulti_registry_unchanged": true
+  }
 }

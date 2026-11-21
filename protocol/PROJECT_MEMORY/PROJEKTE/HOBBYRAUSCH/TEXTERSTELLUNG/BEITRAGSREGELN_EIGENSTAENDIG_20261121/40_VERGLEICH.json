@@ -3,25 +3,8 @@
   "status": "HOBBY_EDITORIAL_DRAFT_COMPLETE_NOT_ACTIVATED",
   "portal_id": "hobby_depot",
   "original_wordpress_type_is_authority": true,
-  "shared_facts_first": true,
-  "one_quality_owner_only": true,
-  "no_runtime_dependency_on_k0_or_other_portals": true,
-  "no_automatic_publication": true,
-  "new_wordpress_plugin_required": false,
-  "source": "Hobbydepot MINI Original 0.4.24.18; Hobby-Entwürfe vom 20.11.2026; K0 vom 21.11.2026 nur fachlich gelesen, keine kopierten Formalwerte",
-  "rule_owner_policy": "Zwölf gemeinsame Regeln nur in 05_GEMEINSAME_REGELN.json; hier ausschließlich die fachlichen Zusatzregeln dieser Beitragsart. Keine zweite Prüfung.",
-  "links": "Inhaltlich begründete Links auf überprüfbar bestehende WordPress-Seiten oder Beiträge; kein Pflichtersatz, keine pauschale Anzahl.",
-  "facts": "Einmalige Originalquellenrecherche vor der Artikelart-Anwendung. Recherche- und Schreibentscheidungen nicht wiederholen.",
-  "deliver": "WordPress-Entwurf, keine automatische Veröffentlichung. Original-Auftragsidentität und fünf Felder unverändert.",
   "wordpress_article_type": "Vergleich",
   "hobby_rulebook_id": "HOBBY_VERGLEICH",
-  "source_wp_type_capabilities": [
-    "Beratung",
-    "FAQ",
-    "Pflege",
-    "Vergleich",
-    "Anleitung"
-  ],
   "intent": "Mindestens zwei reale Alternativen anhand derselben für den Leser wichtigen Kriterien vergleichen.",
   "not_this_type": "Nur eine Option erläutern (Beratung), kurze einzelne Frage (FAQ), rein nacheinander ausführbare Tätigkeit (Anleitung).",
   "article_structure": [
@@ -79,6 +62,5 @@
     "Filament- und Harzdruck für Hobbyprojekte vergleichen",
     "Airbrush-Kompressoren nach Einsatzbedarf vergleichen"
   ],
-  "shared_hobby_policy_ref": "05_GEMEINSAME_REGELN.json",
-  "common_editorial_rules_source": "ONE_HOBBY_OFFICE_FILE_READ_ONLY"
+  "shared_hobby_policy_ref": "05_GEMEINSAME_REGELN.json"
 }

@@ -74,5 +74,22 @@
       "rule": "Nur freigegebene Entwurfsdatei für die originale WordPress-Zielkategorie; keine automatische Veröffentlichung, kein Fantasie-Magazin-Ziel."
     }
   ],
-  "scope": "Hobbydepot-Büro; nur Redaktionsvorschlag, nicht produktiv aktiv"
+  "scope": "Hobbydepot-Büro; nur Redaktionsvorschlag, nicht produktiv aktiv",
+  "single_owner_nonrule_context": {
+    "common_status": "HOBBY_EDITORIAL_DRAFT_NOT_RUNTIME_APPROVED",
+    "original_wordpress_type_capabilities": [
+      "Beratung",
+      "FAQ",
+      "Pflege",
+      "Vergleich",
+      "Anleitung"
+    ],
+    "no_runtime_dependency_on_k0_or_other_portals": true,
+    "source_read_only": "Hobbydepot plugin 0.4.24.18; actual WP package contract; K0 only reference, no copying",
+    "no_wordpress_plugin_change": true,
+    "no_auto_publication": true,
+    "single_quality_owner_only": true,
+    "read_once_at_hobby_rulebook_owner": true,
+    "no_duplicate_checkers": true
+  }
 }

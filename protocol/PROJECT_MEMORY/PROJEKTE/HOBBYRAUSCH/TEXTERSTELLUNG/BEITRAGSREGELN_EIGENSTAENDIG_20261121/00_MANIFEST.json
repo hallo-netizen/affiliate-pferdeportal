@@ -71,5 +71,8 @@
   "single_shared_rule_owner": true,
   "self_contained_type_specific_rules": true,
   "no_automatic_runtime_injection": true,
-  "unverified_values_stay_nonbinding": true
+  "unverified_values_stay_nonbinding": true,
+  "redudant_common_policies_normalized": true,
+  "five_type_books_only_contain_type_specific_guidance": true,
+  "current_standard": "one 12-rule shared owner + one common editorial context + five minimal article type books"
 }
