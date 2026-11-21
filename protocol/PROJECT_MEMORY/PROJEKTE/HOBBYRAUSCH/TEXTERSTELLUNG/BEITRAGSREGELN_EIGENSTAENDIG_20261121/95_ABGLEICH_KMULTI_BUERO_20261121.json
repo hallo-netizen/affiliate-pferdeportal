@@ -73,7 +73,7 @@
   "no_runtime_changes": true,
   "latest_editorial_handoff": {
     "date": "2026-11-21",
-    "kmulti_office_commit": "2e10b0691daebbd17307b7c14bad18485343c5d1",
+    "kmulti_office_commit": "63ee4fbedf03e772465e6ee6ff27b2bc58795aac",
     "kmulti_office_file": "offline_rules/portal_bindings/hobby_depot/HOBBYDEPOT_5_EIGENE_BEITRAGSREGELN_EINGANG_20261121.md",
     "status": "DOCUMENTED_NOT_ACTIVATED",
     "unique_common_rule_source": "05_GEMEINSAME_REGELN.json",
@@ -81,6 +81,7 @@
     "typebooks": 5,
     "type_specific_rules_total": 25,
     "duplicate_general_rule_copies_removed": 48,
+    "common_context_metadata_fields_centralized_from_each_book": 12,
     "readback_checks_passed": 18,
     "original_wp_php_types_all_supported": true,
     "original_wp_php_unsupported_types_rejected": [
@@ -97,5 +98,29 @@
       "Pflege",
       "Anleitung"
     ]
-  }
+  },
+  "hobby_wp_original_php_end_to_end_handoff": {
+    "date": "2026-11-21",
+    "result": "PASS",
+    "test_count": 15,
+    "passed": 15,
+    "failed": 0,
+    "plugin_version": "0.4.24.18",
+    "plugin_sha256": "03f21ca678f003ab55a2a3a86ccd44c0cceb1ed59b2cb1e6a758b6bb129de19b",
+    "source": "96_ORIGINAL_PLUGIN_5_TYPEN_PHP_ECHTTEST_20261121.json",
+    "input_character": "five synthetic local orders; original WordPress PHP unchanged",
+    "all_wp_types": [
+      "Beratung",
+      "FAQ",
+      "Pflege",
+      "Vergleich",
+      "Anleitung"
+    ],
+    "host_in_original_receipt": "www.hobby-depot.de",
+    "file_delivery_one_original_wp_package": true,
+    "original_five_fields_and_order_identity_unchanged": true,
+    "negative_tests_block_invalid_type_and_tampering": true,
+    "no_portal_field_added": true
+  },
+  "final_hobby_state": "HOBBY_SIDE_DOCS_AND_ORIGINAL_PHP_TRANSFER_VERIFIED; KMULTI_RUNTIME_ACTIVATION_OUT_OF_SCOPE"
 }
