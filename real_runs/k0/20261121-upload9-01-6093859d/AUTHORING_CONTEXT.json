@@ -112,8 +112,8 @@
       },
       {
         "role": "further_information",
-        "href": "/wissen/wissen-versicherungen-und-recht/pferdehaftpflicht/",
-        "anchor": "Pferdehaftpflicht",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
         "block": "further_information"
       }
     ],
@@ -123,7 +123,7 @@
         "active": true
       },
       {
-        "href": "/wissen/wissen-versicherungen-und-recht/pferdehaftpflicht/",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
         "active": true
       }
     ],
