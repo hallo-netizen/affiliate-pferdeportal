@@ -1063,3 +1063,42 @@ SHA-256: f6da2e572c558b0126c2fe237d1ef832a8a1ce49e2c62123fb9f82dd4ad02b2f
 6.72.366 ist installierbar.
 Es repariert ausschließlich den bewiesenen, auf jeder WordPress-Anfrage wirksamen Fehlstopper von 6.72.365.
 Keine 6.72.363-Rückkopie, kein verworfener 6.72.364-Mikrofix, keine zusätzliche Fachänderung.
+
+
+## 2026-11-21 – Konsolidierung vor Live-Test 6.72.366
+
+### Verbindliche Freigaberegel
+- Keine neue Pluginversion wegen einzelner Vermutungen.
+- Änderungen werden soweit sinnvoll gebündelt.
+- Jede Performanceänderung braucht einen Kausalitätsbeweis.
+- Byte-/Dateivergleiche allein reichen nicht. Zwingend ist zusätzlich ein inhaltlicher Alt/Neu-Funktionsnachweis.
+- Kein vorhandener Funktionsweg darf zur Beschleunigung entfernt oder semantisch verändert werden.
+
+### Bestehender Live-Datensatz 6.72.365 weiter ausgewertet
+Quelle: pferdeatelier-performance-gesamtanalyse-20261121-082829.json, Performance Diagnose Safe 7.0.0 PASSIV.
+- Pferdesättel: 5721,16 ms Wall, 3264,16 ms CPU, 139257 interne Cache-Hits, 320 Queries, 0 externe HTTP-Aufrufe.
+- Ausrüstung/Sattel: 3942,33 ms Wall, 2563,55 ms CPU, 82101 Cache-Hits, 298 Queries.
+- Schabracken: 3703,25 ms Wall, 2346,28 ms CPU, 87991 Cache-Hits, 320 Queries.
+- Über die Frontend-Routen: Korrelation Cache-Hits↔CPU 0,857; Cache-Hits↔Wall 0,904; Queries↔CPU nur 0,442. Das ist ein starker Skalierungsbeleg, aber allein noch kein Kausalitätsbeweis.
+- Dominante PASSIV-Phase ist loop_start→wp_footer: Pferdesättel 3977,27 ms; Ausrüstung/Sattel 2316,24 ms; Schabracken 1931,24 ms. Damit liegt die Hauptmehrarbeit im Inhalts-/Produktpfad, nicht in externen HTTP-Aufrufen.
+
+### Kausalitätsbeweis 6.72.366
+- 6.72.365 sperrt den bereits vorhandenen category_product-Postprocess-Plan und den Bildprüfungs-Cache, sobald irgendein Callback auf http_request_host_is_external registriert ist.
+- WordPress registriert regulär allowed_http_request_hosts auf genau diesem Filter. Dadurch war der 6.72.365-Schnellweg auf normalen WordPress-Seiten faktisch blockiert.
+- 6.72.366 ändert ausschließlich diese Freigabeentscheidung: WordPress-Standardcallback erlaubt; zusätzliche/unklare Callbacks behalten den historischen sicheren Pfad.
+- Reproduktionsharness PASS: kein Filter, WordPress-Standard allein, Standard+Fremdcallback, Closure, Multisite-Fälle.
+- 710-Kandidaten-Harness: Bildprüfungen 2130→710; Lauf 9,380→4,721 ms (-49,67 %), identischer Output.
+- Bereits vorhandener 6.72.365-Postprocess-Beweis kann dadurch erstmals unter normalem WordPress aktiv werden: 710 Kandidaten 283,821→94,575 ms (-66,68 %) im isolierten Block.
+
+### Inhaltlicher Funktionsschutz 6.72.365→6.72.366
+- Auswahl-/Ranking-/Provider-/GTIN-/Fallback-/Veto-/Health-/Tracking-/Renderingregeln unverändert.
+- category_product_shared_rank_base(), select_category_product_campaign_fast_v672171(), der eigentliche Postprocess-Ablauf und die Control-/Health-Regeln sind fachlich unverändert.
+- Geändert ist nur, wann der bereits bestehende request-lokale Plan-/Bildcache verwendet werden darf.
+- Bei unbekanntem oder zusätzlichem Filtercallback fällt 6.72.366 automatisch auf den historischen vollständigen Pfad zurück.
+- 12000 randomisierte Guard-/Plan-Fälle: 0 Outputabweichungen, 0 Guard-Abweichungen außerhalb der gezielt korrigierten WordPress-Standardfilter-Erkennung.
+- Hooks/Filter/Shortcodes unverändert 212→212; Produktions-Schreibwege unverändert; 23/23 PHP-Lint PASS. Diese Strukturbelege sind nur Zusatzbelege, nicht der alleinige Funktionsnachweis.
+
+### Entscheidung
+Nach Ausschöpfung des vorhandenen Diagnosedatensatzes gibt es derzeit keinen zweiten, gleich stark kausal belegten und funktionssicher belegten Produktionsfix, der seriös mit 6.72.366 gebündelt werden kann. Ein weiterer Codeeingriff wäre aktuell wieder Vermutung und ist deshalb gesperrt.
+
+Nächster Schritt: genau einen Live-Test mit 6.72.366 und danach einen identischen PASSIV-Lauf für Pferdesättel. Erst dieser Live-A/B entscheidet, ob der belegte Schnellweg die reale Zielseite messbar entlastet. Vor diesem Ergebnis keine 6.72.367.
