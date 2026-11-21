@@ -16,16 +16,16 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
-          "source_title": "Horseware Ireland – Pferdedecken pflegen"
+          "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
+          "source_title": "Horseware Ireland – Horse Rug Care Guide"
         }
       ],
       "claims": [
-        "Ein professioneller Pferdedecken-Waschservice ist eine mögliche Reinigungsmethode.",
-        "Ein professioneller Dienst kann Decken waschen, reparieren und bei Bedarf nachimprägnieren.",
-        "Bei fachgerechter Pflege ist eine erneute Imprägnierung nicht immer erforderlich.",
-        "Die wasserabweisende Schutzschicht einer Decke kann nach längerer Verwendung nachlassen.",
-        "Reinigung und Lagerung dienen der längeren Verwendbarkeit von Pferdedecken."
+        "Nach Ablauf einer Garantie kann eine professionelle Nachimprägnierung infrage kommen.",
+        "Reparatur kleiner Schäden kann die Nutzungsdauer einer Pferdedecke verlängern.",
+        "Die wasserabweisende Schicht einer Pferdedecke kann mit der Zeit nachlassen.",
+        "Pferdedecken sollen bei Maschinenwäsche mit niedriger Temperatur gereinigt werden.",
+        "Saubere Pferdedecken sollten trocken und möglichst luftig gelagert werden."
       ],
       "fresh_research_reference_date": "2026-11-21"
     },
@@ -48,55 +48,55 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
-        "source_title": "Horseware Ireland – Pferdedecken pflegen",
-        "evidence_text": "The easiest way is to take them to a professional blanket repair and washing service.",
-        "evidence_text_sha256": "327c2f5e516b52e76bef0ccf1b92cc9a75309c32ac39bd7c75d42f9717aa353d",
-        "statement": "Ein professioneller Pferdedecken-Waschservice ist eine mögliche Reinigungsmethode.",
+        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
+        "source_title": "Horseware Ireland – Horse Rug Care Guide",
+        "evidence_text": "After the waterproof guarantee of your rug has ended, you may want to use a professional service to reproof it.",
+        "evidence_text_sha256": "2509a2e741533ebb96d19c6476eec9c7ab09832999ff086fb4c3d670570321d0",
+        "statement": "Nach Ablauf einer Garantie kann eine professionelle Nachimprägnierung infrage kommen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F2": {
-        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
-        "source_title": "Horseware Ireland – Pferdedecken pflegen",
-        "evidence_text": "They can fix any damage, wash the blanket, and re-proof it if required.",
-        "evidence_text_sha256": "b4f70c45a0fc85324bdfd647211b05ce16b8158420740cce29b8b2033d1b7bd4",
-        "statement": "Ein professioneller Dienst kann Decken waschen, reparieren und bei Bedarf nachimprägnieren.",
+        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
+        "source_title": "Horseware Ireland – Horse Rug Care Guide",
+        "evidence_text": "Repairing the rips to seal and waterproof them with something like the Rambo Rug Repair Kit can increase the life of your rug and save you having to purchase a new one.",
+        "evidence_text_sha256": "a3a44f66f61b5a095a1c4f38c309f10df33d8232c6ef234565f7158e1b69cb60",
+        "statement": "Reparatur kleiner Schäden kann die Nutzungsdauer einer Pferdedecke verlängern.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F3": {
-        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
-        "source_title": "Horseware Ireland – Pferdedecken pflegen",
-        "evidence_text": "If you care for your turnouts properly, you should not need to re-proof them during the guarantee period.",
-        "evidence_text_sha256": "329f73d9ef666c0d15798e35a7bfffed3fe675a490d5652a7a26054cd0414f13",
-        "statement": "Bei fachgerechter Pflege ist eine erneute Imprägnierung nicht immer erforderlich.",
+        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
+        "source_title": "Horseware Ireland – Horse Rug Care Guide",
+        "evidence_text": "It is inevitable that the waterproof coating will begin to break down over time.",
+        "evidence_text_sha256": "35f23dc1f678cf02771641b47f185f8ac9b38b71cacedd9a43402733f7dc455e",
+        "statement": "Die wasserabweisende Schicht einer Pferdedecke kann mit der Zeit nachlassen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F4": {
-        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
-        "source_title": "Horseware Ireland – Pferdedecken pflegen",
-        "evidence_text": "After the guarantee period, you may begin to notice the waterproof layer becoming less effective.",
-        "evidence_text_sha256": "d4fa204277b35c73abfa6d7a27a7a566a6b882fc6db04c6ec655553e853c8191",
-        "statement": "Die wasserabweisende Schutzschicht einer Decke kann nach längerer Verwendung nachlassen.",
+        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
+        "source_title": "Horseware Ireland – Horse Rug Care Guide",
+        "evidence_text": "Wash on a cool setting if using a washing machine",
+        "evidence_text_sha256": "a65ff2fe29af551839f896e28a461351b51427318e462059eb52c0d94d859539",
+        "statement": "Pferdedecken sollen bei Maschinenwäsche mit niedriger Temperatur gereinigt werden.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F5": {
-        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
-        "source_title": "Horseware Ireland – Pferdedecken pflegen",
-        "evidence_text": "Washing and storing horse blankets isn’t just great for saving space but it maximizes the life of your horse’s blankets too.",
-        "evidence_text_sha256": "2edfbb98c701237f8a7c8fa580ddeacfa9c74cad98490401d420ba0e55bf7197",
-        "statement": "Reinigung und Lagerung dienen der längeren Verwendbarkeit von Pferdedecken.",
+        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
+        "source_title": "Horseware Ireland – Horse Rug Care Guide",
+        "evidence_text": "Store the rug in a cool, dry area, preferably in a breathable storage bag",
+        "evidence_text_sha256": "d7a6baf3e63651763c7f943ccd9384ca35bc3a9a3a38dbdc6dea832a8b4974f7",
+        "statement": "Saubere Pferdedecken sollten trocken und möglichst luftig gelagert werden.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
