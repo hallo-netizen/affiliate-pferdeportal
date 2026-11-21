@@ -1,3 +1,9 @@
+# ÜBERHOLT DURCH DEN BENUTZERKORRIGIERTEN 2.8.10-MENÜVERTRAG
+
+[**Aktuelle verbindliche Regel hier**](./BILDZENTRALE_VERTRAG_2.8.10_20261108.md): Das eigentliche HD-006-Bilderzeugungsplugin heißt **Bildzentrale**; das andere Plugin heißt **Bilder zuordnen**. Die technischen URLs bleiben getrennt. Die umgekehrten Namensregeln im folgenden älteren 2.8.8-Dokument dürfen NICHT mehr verwendet werden.
+
+---
+
 # HD-006 – verbindlicher Menüvertrag | 08.11.2026
 
 **Problemursache, nicht noch einmal nur Titel umbenennen!**
