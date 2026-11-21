@@ -1,0 +1,70 @@
+{
+  "contract": "HOBBYDEPOT_BEITRAGSREGELN_FUENF_ORIGINALTYPEN_V1",
+  "created": "2026-11-21",
+  "status": "FIVE_HOBBY_RULEBOOKS_EDITORIALLY_PREPARED_NOT_RUNTIME_APPROVED",
+  "portal_id": "hobby_depot",
+  "original_wp_types": [
+    "Beratung",
+    "FAQ",
+    "Pflege",
+    "Vergleich",
+    "Anleitung"
+  ],
+  "source_wp_plugin": "Texterstellung Hobbydepot 0.4.24.18 original contracts/k0-article-type-capabilities-v1.json",
+  "one_original_wp_export": true,
+  "portal_from_existing_wordpress_host_receipt": true,
+  "mini_selects_type_once": true,
+  "books": [
+    {
+      "wordpress_article_type": "Beratung",
+      "own_hobby_rulebook_id": "HOBBY_RATGEBER_WISSEN",
+      "file": "10_BERATUNG.json",
+      "existing_kmulti_transport_reference": "HOBBY_RATGEBER_WISSEN",
+      "existing_transport_matches_new_own_book": true
+    },
+    {
+      "wordpress_article_type": "FAQ",
+      "own_hobby_rulebook_id": "HOBBY_FAQ",
+      "file": "20_FAQ.json",
+      "existing_kmulti_transport_reference": "HOBBY_FAQ",
+      "existing_transport_matches_new_own_book": true
+    },
+    {
+      "wordpress_article_type": "Pflege",
+      "own_hobby_rulebook_id": "HOBBY_PFLEGE",
+      "file": "30_PFLEGE.json",
+      "existing_kmulti_transport_reference": "HOBBY_ANLEITUNG_PFLEGE",
+      "existing_transport_matches_new_own_book": false
+    },
+    {
+      "wordpress_article_type": "Vergleich",
+      "own_hobby_rulebook_id": "HOBBY_VERGLEICH",
+      "file": "40_VERGLEICH.json",
+      "existing_kmulti_transport_reference": "HOBBY_VERGLEICH",
+      "existing_transport_matches_new_own_book": true
+    },
+    {
+      "wordpress_article_type": "Anleitung",
+      "own_hobby_rulebook_id": "HOBBY_ANLEITUNG",
+      "file": "50_ANLEITUNG.json",
+      "existing_kmulti_transport_reference": "HOBBY_ANLEITUNG_PFLEGE",
+      "existing_transport_matches_new_own_book": false
+    }
+  ],
+  "books_are_self_contained": true,
+  "common_rules_in_each_book": 12,
+  "copy_of_k0_rule_values": false,
+  "k0_only_read_as_general_guidance": true,
+  "extra_portal_types_created": false,
+  "magazine": "MAGAZIN ist nur Route; keine bestehende Magazin-Beitragskategorie belegt, deshalb keine neue Magazin-Art oder Auto-Zuordnung.",
+  "notes": [
+    "Pflege und Anleitung sind fachlich verschieden. Die derzeitige technische K-Multi-Referenz zeigt bei beiden noch auf dasselbe ältere Kandidatenbuch; ohne ausdrücklichen separaten Integrationsauftrag weder diese Referenz noch K-Multi ändern.",
+    "Bestehende identitätsgebundene fünf WordPress-Felder bleiben in jedem Fall unverändert.",
+    "Wortzahlen und H2 sind redaktionelle Hobby-Ziele, keine automatisch verbindlichen Laufzeitsperren.",
+    "Die fünf Regelbücher sind nur im Hobbydepot-Büro abgelegt und werden nicht durch bloßes Speichern in WordPress oder K-Multi aktiviert."
+  ],
+  "changes_outside_hobby_office": false,
+  "requires_activation_after_approval": true,
+  "authoring_active": false,
+  "publish_allowed": false
+}

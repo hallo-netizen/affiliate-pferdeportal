@@ -1,0 +1,110 @@
+{
+  "contract": "HOBBY_EDITORIAL_TYPE_RULEBOOK_STATIC_QA_V1",
+  "date": "2026-11-21",
+  "result": "PASS_REVIEW_READY_NOT_PRODUCTION_APPROVAL",
+  "tests": [
+    {
+      "check": "five_exact_wp_types",
+      "passed": true
+    },
+    {
+      "check": "all_unique_books",
+      "passed": true
+    },
+    {
+      "check": "all_rulebook_json_self_contained",
+      "passed": true
+    },
+    {
+      "check": "common_rules_same_in_all",
+      "passed": true
+    },
+    {
+      "check": "one_owner_per_common_rule",
+      "passed": true
+    },
+    {
+      "check": "type_specific_rules_unique",
+      "passed": true
+    },
+    {
+      "check": "only_hobby_rulebooks",
+      "passed": true
+    },
+    {
+      "check": "never_auto_publish",
+      "passed": true
+    },
+    {
+      "check": "no_hard_format_copy",
+      "passed": true
+    },
+    {
+      "check": "no_new_type",
+      "passed": true
+    },
+    {
+      "check": "existing_transport_mismatch_explicit",
+      "passed": true
+    },
+    {
+      "check": "no_writer_or_kmulti_change",
+      "passed": true
+    },
+    {
+      "check": "no_portal_redecision",
+      "passed": true
+    },
+    {
+      "check": "all_book_values_valid",
+      "passed": true
+    },
+    {
+      "check": "faq_only_single_question",
+      "passed": true
+    },
+    {
+      "check": "pflege_anleitung_separate",
+      "passed": true
+    },
+    {
+      "check": "no_report_type_in_wp_manifest",
+      "passed": true
+    }
+  ],
+  "passes": 17,
+  "failures": 0,
+  "books": [
+    {
+      "file": "10_BERATUNG.json",
+      "type": "Beratung",
+      "common_rules": 12,
+      "own_rules": 4
+    },
+    {
+      "file": "20_FAQ.json",
+      "type": "FAQ",
+      "common_rules": 12,
+      "own_rules": 5
+    },
+    {
+      "file": "30_PFLEGE.json",
+      "type": "Pflege",
+      "common_rules": 12,
+      "own_rules": 5
+    },
+    {
+      "file": "40_VERGLEICH.json",
+      "type": "Vergleich",
+      "common_rules": 12,
+      "own_rules": 5
+    },
+    {
+      "file": "50_ANLEITUNG.json",
+      "type": "Anleitung",
+      "common_rules": 12,
+      "own_rules": 6
+    }
+  ],
+  "limit": "Nur statischer redaktioneller Bestands- und Konsistenztest: keine originale K-Multi-Textprüfung, keine Änderung am Produktionsworkflow, keine WordPress-Freigabe."
+}
