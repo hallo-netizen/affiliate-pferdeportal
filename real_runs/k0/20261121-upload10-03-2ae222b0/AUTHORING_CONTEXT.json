@@ -16,15 +16,19 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.horseware.com/en-us/blog/breaking-down-the-horse-blanket",
-          "source_title": "Horseware Ireland – Complete Guide to Horse Blankets"
+          "source_url": "https://de.wikipedia.org/wiki/Pferdedecke",
+          "source_title": "Wikipedia – Pferdedecke"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Textilpflegesymbol",
+          "source_title": "Wikipedia – Textilpflegesymbol"
         }
       ],
       "claims": [
-        "Pferdedecken lassen sich teilweise in der Maschine waschen, dabei sind Pflegehinweise und Lufttrocknung wichtig.",
-        "Regelmäßige Pflege vermindert Fett und Haare an der Pferdedecke.",
-        "Die wasserabweisende Schutzschicht einer Pferdedecke kann mit der Zeit nachlassen.",
-        "Regelmäßige Sichtkontrollen auf Risse können dauerhaften Schäden an Pferdedecken vorbeugen."
+        "Pferdedecken bestehen je nach Einsatzzweck aus unterschiedlichen Geweben.",
+        "Weidedecken können die Verschmutzung des Pferdes durch Schlamm mindern.",
+        "Die Pflegekennzeichnung beschreibt die für ein Textil zulässige Reinigungsbehandlung.",
+        "Ein Pflegesymbol legt nicht fest, wann eine bestimmte Reinigung tatsächlich erforderlich ist."
       ],
       "fresh_research_reference_date": "2026-11-21"
     },
@@ -47,44 +51,44 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.horseware.com/en-us/blog/breaking-down-the-horse-blanket",
-        "source_title": "Horseware Ireland – Complete Guide to Horse Blankets",
-        "evidence_text": "Proper care will extend the life of your horse's blanket. Most blankets can be machine washed, but always follow the care instructions. After washing, allow blankets to drip dry to avoid damage to waterproof coatings.",
-        "evidence_text_sha256": "3bd1bffedf8b0aa23a620be6a9bbd025dc93a5ff7595fc7a7a6b1f71ff11e5e3",
-        "statement": "Pferdedecken lassen sich teilweise in der Maschine waschen, dabei sind Pflegehinweise und Lufttrocknung wichtig.",
+        "source_url": "https://de.wikipedia.org/wiki/Pferdedecke",
+        "source_title": "Wikipedia – Pferdedecke",
+        "evidence_text": "In der Pferdepflege werden je nach Verwendungszweck Decken aus sehr verschiedenen Geweben verwendet.",
+        "evidence_text_sha256": "5c94a2f646fe9df546aa4d18141f27e375b4be79261ef94bc4ecb82867545af7",
+        "statement": "Pferdedecken bestehen je nach Einsatzzweck aus unterschiedlichen Geweben.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F2": {
-        "source_url": "https://www.horseware.com/en-us/blog/breaking-down-the-horse-blanket",
-        "source_title": "Horseware Ireland – Complete Guide to Horse Blankets",
-        "evidence_text": "Reduce the build-up of grease and hair with daily grooming.",
-        "evidence_text_sha256": "c8bb1b6cfa6309efee4f0e5292f892c9550e55ead60fccf3b307a1f38f76ce7f",
-        "statement": "Regelmäßige Pflege vermindert Fett und Haare an der Pferdedecke.",
+        "source_url": "https://de.wikipedia.org/wiki/Pferdedecke",
+        "source_title": "Wikipedia – Pferdedecke",
+        "evidence_text": "Ein für den Pferdehalter vorteilhafter Nebeneffekt ist, dass das Pferd weniger schmutzig wird, wenn es sich im Schlamm wälzt.",
+        "evidence_text_sha256": "7a7bf8dd40d2a762f7d5fc4426debe094661117385940e8da0fb7d869571d0ca",
+        "statement": "Weidedecken können die Verschmutzung des Pferdes durch Schlamm mindern.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F3": {
-        "source_url": "https://www.horseware.com/en-us/blog/breaking-down-the-horse-blanket",
-        "source_title": "Horseware Ireland – Complete Guide to Horse Blankets",
-        "evidence_text": "It is inevitable that the waterproof coating will begin to break down over time.",
-        "evidence_text_sha256": "35f23dc1f678cf02771641b47f185f8ac9b38b71cacedd9a43402733f7dc455e",
-        "statement": "Die wasserabweisende Schutzschicht einer Pferdedecke kann mit der Zeit nachlassen.",
+        "source_url": "https://de.wikipedia.org/wiki/Textilpflegesymbol",
+        "source_title": "Wikipedia – Textilpflegesymbol",
+        "evidence_text": "Die Pflegekennzeichnung gibt die maximal zulässige Behandlungsart an, die unter praxisnahen Bedingungen auf Dauer möglich ist, ohne das Textil zu schädigen.",
+        "evidence_text_sha256": "a254601df45df48583b5db0fb29a5ad2ea60b3bdc7818cd717df4c3e22137201",
+        "statement": "Die Pflegekennzeichnung beschreibt die für ein Textil zulässige Reinigungsbehandlung.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F4": {
-        "source_url": "https://www.horseware.com/en-us/blog/breaking-down-the-horse-blanket",
-        "source_title": "Horseware Ireland – Complete Guide to Horse Blankets",
-        "evidence_text": "Checking regularly for any tears can help prevent permanent damage to the rug.",
-        "evidence_text_sha256": "893eeb83aa85be626c44ea2f5d9daa4aabf6360d315de6cf76e7cd4d4f1d019d",
-        "statement": "Regelmäßige Sichtkontrollen auf Risse können dauerhaften Schäden an Pferdedecken vorbeugen.",
+        "source_url": "https://de.wikipedia.org/wiki/Textilpflegesymbol",
+        "source_title": "Wikipedia – Textilpflegesymbol",
+        "evidence_text": "Ob diese Behandlung erforderlich oder ausreichend ist, ist damit nicht ausgesagt.",
+        "evidence_text_sha256": "cda2e9b8890ee8eedf9a997d28c3111730540eeb372659f2242e0fe11f90d6b0",
+        "statement": "Ein Pflegesymbol legt nicht fest, wann eine bestimmte Reinigung tatsächlich erforderlich ist.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
