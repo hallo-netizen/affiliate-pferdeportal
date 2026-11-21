@@ -1,0 +1,178 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welche Waschmaschinengröße braucht man für Pferdedecken?",
+    "target_keyword": "Wie groß muss eine Waschmaschine für Pferdedecken sein?",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "FAQ",
+    "plan_slot": "1b26a1dbf12831204645ab6ad9cb3e4d9e31a1a7758ce1d7cdd4dfc6c97765fc"
+  },
+  "content_profile": {
+    "search_intent": "Welches Trommelvolumen und welche Kapazität eine Waschmaschine für große Pferdedecken benötigt und wann ein professioneller Waschservice sinnvoll ist."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Pferdedecke",
+          "source_title": "Wikipedia – Pferdedecke"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Textilpflegesymbol",
+          "source_title": "Wikipedia – Textilpflegesymbol"
+        }
+      ],
+      "claims": [
+        "Pferdedecken bestehen je nach Einsatzzweck aus unterschiedlichen Geweben.",
+        "Weidedecken gibt es als ungefütterte Regendecken und gefütterte Winterdecken.",
+        "Die Pflegekennzeichnung legt die erlaubte Textilbehandlung fest.",
+        "Weidedecken bestehen aus robustem, wasserdichtem Material.",
+        "Das Waschsymbol zeigt die maximal erlaubte Waschtemperatur."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie groß muss eine Waschmaschine für Pferdedecken sein?",
+      "topic": "Welche Waschmaschinengröße braucht man für Pferdedecken?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Waschmaschinengröße braucht man für Pferdedecken?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Pferdedecke",
+        "source_title": "Wikipedia – Pferdedecke",
+        "evidence_text": "In der Pferdepflege werden je nach Verwendungszweck Decken aus sehr verschiedenen Geweben verwendet.",
+        "evidence_text_sha256": "5c94a2f646fe9df546aa4d18141f27e375b4be79261ef94bc4ecb82867545af7",
+        "statement": "Pferdedecken bestehen je nach Einsatzzweck aus unterschiedlichen Geweben.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Pferdedecke",
+        "source_title": "Wikipedia – Pferdedecke",
+        "evidence_text": "Weidedecken gibt es als ungefütterte Regendecken oder als dicke Weide-Winterdecken.",
+        "evidence_text_sha256": "fd99d56feb8e5ece4e93bcae2030ab586d7842aeb7059a72e61e53b8656c2e6e",
+        "statement": "Weidedecken gibt es als ungefütterte Regendecken und gefütterte Winterdecken.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Textilpflegesymbol",
+        "source_title": "Wikipedia – Textilpflegesymbol",
+        "evidence_text": "Die Pflegekennzeichnung gibt die maximal zulässige Behandlungsart an, die unter praxisnahen Bedingungen auf Dauer möglich ist, ohne das Textil zu schädigen.",
+        "evidence_text_sha256": "a254601df45df48583b5db0fb29a5ad2ea60b3bdc7818cd717df4c3e22137201",
+        "statement": "Die Pflegekennzeichnung legt die erlaubte Textilbehandlung fest.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://de.wikipedia.org/wiki/Pferdedecke",
+        "source_title": "Wikipedia – Pferdedecke",
+        "evidence_text": "Weidedecken sind aus robustem und wasserdichtem Material (z. B. 1000 Denier Nylonmaterial).",
+        "evidence_text_sha256": "8356a36b04bd17a0b0119a48a41c6042e7ff932fcac12ba51acaaef44c4855b0",
+        "statement": "Weidedecken bestehen aus robustem, wasserdichtem Material.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://de.wikipedia.org/wiki/Textilpflegesymbol",
+        "source_title": "Wikipedia – Textilpflegesymbol",
+        "evidence_text": "Das Waschen wird durch einen stilisierten Waschzuber dargestellt; die Zahl im Zuber bedeutet die höchstzulässige Waschtemperatur (in Grad Celsius).",
+        "evidence_text_sha256": "6fcd734040f7a34479dc929d68b1dcbbae15d3c83053b42f3ff5746e7877cf7e",
+        "statement": "Das Waschsymbol zeigt die maximal erlaubte Waschtemperatur.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "alltags-pferde-haltungsformen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "anchor": "pferdedecken-regendecken-pflege",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferdedecken",
+      "Waschmaschine",
+      "Kapazität",
+      "Waschtrommel",
+      "Deckengröße"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die sachgerechte Material- und Pflegeentscheidung verlangt individuelle Prüfung; eine Tabelle mit vier künstlichen Zeilen und drei Spalten würde die Unterschiede ohne Zusatznutzen vereinfachen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
