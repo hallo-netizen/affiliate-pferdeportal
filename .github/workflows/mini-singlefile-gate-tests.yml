@@ -20,3 +20,14 @@ jobs:
         run: |
           cd control/mini-output-gate
           python -m unittest -v test_mini_gate.py test_mini_single_release.py
+      - name: Export only tested public gate code for local repeatability
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mini-1datei-tested-gate-source
+          path: |
+            control/mini-output-gate/mini_release_gate.py
+            control/mini-output-gate/mini_single_release.py
+            control/mini-output-gate/test_mini_gate.py
+            control/mini-output-gate/test_mini_single_release.py
+          retention-days: 1
