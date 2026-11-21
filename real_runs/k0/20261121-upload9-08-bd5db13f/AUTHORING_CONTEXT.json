@@ -1,0 +1,163 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Ist eine Pferdebox genehmigungsfrei?",
+    "target_keyword": "Ist eine Pferdebox genehmigungsfrei?",
+    "category": "recht-finanzen-organisation",
+    "article_type": "FAQ",
+    "plan_slot": "60ba3dfd268b890b070cec19e66dd9d7b09bbc667dd1ff52dedda53b78b8fd7d"
+  },
+  "content_profile": {
+    "search_intent": "Ob die Errichtung beziehungsweise Nutzung einer Pferdebox genehmigungsfrei sein kann und warum die Antwort von örtlichem Baurecht abhängt."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://bauportal.nrw/verfahrensfreie-bauvorhaben-nach-ss-62-bauo-nrw-2018",
+          "source_title": "Bauportal NRW – Verfahrensfreie Bauvorhaben"
+        }
+      ],
+      "claims": [
+        "Nur gesetzlich bestimmte Bauvorhaben sind in NRW verfahrensfrei.",
+        "Verfahrensfreiheit entbindet nicht von öffentlich-rechtlichen Bauvorschriften.",
+        "Die nordrhein-westfälische Regel für kleinere verfahrensfreie Gebäude schließt Ställe ausdrücklich aus.",
+        "Verfahrensfreiheit und Genehmigungsfreistellung sind unterschiedliche baurechtliche Verfahren."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Ist eine Pferdebox genehmigungsfrei?",
+      "topic": "Ist eine Pferdebox genehmigungsfrei?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "recht-finanzen-organisation",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Ist eine Pferdebox genehmigungsfrei?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://bauportal.nrw/verfahrensfreie-bauvorhaben-nach-ss-62-bauo-nrw-2018",
+        "source_title": "Bauportal NRW – Verfahrensfreie Bauvorhaben",
+        "evidence_text": "Für die Errichtung von bestimmten Gebäuden, Anlagen und für die Durchführung weiterer ausgewählter Bauvorhaben muss keine Baugenehmigung beantragt werden.",
+        "evidence_text_sha256": "f42d01957767613a44c43eb016d2211430f16394a8cc8952b96060cd0d202f89",
+        "statement": "Nur gesetzlich bestimmte Bauvorhaben sind in NRW verfahrensfrei.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://bauportal.nrw/verfahrensfreie-bauvorhaben-nach-ss-62-bauo-nrw-2018",
+        "source_title": "Bauportal NRW – Verfahrensfreie Bauvorhaben",
+        "evidence_text": "Bei der Errichtung von verfahrensfreien Bauvorhaben sind die öffentlich-rechtlichen Vorschriften, die vorgeben wie, wo, und was man bauen darf, einzuhalten.",
+        "evidence_text_sha256": "cf0c7b34e6543fad246b6ae512393fa2fb68b48e98634bfc2830866d5a0d76cb",
+        "statement": "Verfahrensfreiheit entbindet nicht von öffentlich-rechtlichen Bauvorschriften.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://bauportal.nrw/verfahrensfreie-bauvorhaben-nach-ss-62-bauo-nrw-2018",
+        "source_title": "Bauportal NRW – Verfahrensfreie Bauvorhaben",
+        "evidence_text": "Gebäude bis zu 75 m3 Brutto-Rauminhalt ohne Aufenthaltsräume, Ställe, Toiletten oder Feuerstätten",
+        "evidence_text_sha256": "cdcfd359bc810fd6f2644d5c6603f1a159a42a4018f11f9943db88c9183999e3",
+        "statement": "Die nordrhein-westfälische Regel für kleinere verfahrensfreie Gebäude schließt Ställe ausdrücklich aus.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://bauportal.nrw/verfahrensfreie-bauvorhaben-nach-ss-62-bauo-nrw-2018",
+        "source_title": "Bauportal NRW – Verfahrensfreie Bauvorhaben",
+        "evidence_text": "Die Verfahrensfreiheit ist dabei nicht zu verwechseln mit der Genehmigungsfreistellung",
+        "evidence_text_sha256": "48cf4c7bd0f9047bd4583306f404fd063af3a6e7b9886807fb372d95498b8680",
+        "statement": "Verfahrensfreiheit und Genehmigungsfreistellung sind unterschiedliche baurechtliche Verfahren.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/recht-finanzen-organisation/",
+        "anchor": "Recht, Finanzen & Organisation",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/recht-finanzen-organisation/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "recht-finanzen-organisation",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferdebox",
+      "Baugenehmigung",
+      "Stall",
+      "Baurecht",
+      "Verfahrensfreiheit",
+      "Recht",
+      "Versicherung",
+      "Bauvorschriften"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "NUANCE_LOSS",
+      "rationale": "Bei dieser Rechtsfrage hängen die Folgen von mehreren Umständen ab; eine schematische Tabelle könnte den Einzelfall unzulässig vereinfachen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
