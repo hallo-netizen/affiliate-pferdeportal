@@ -252,5 +252,32 @@
     "kmulti_runtime_unchanged": true,
     "wordpress_plugin_unchanged": true,
     "next_required_integrator_action": "Only if separately approved: authorize independent formal Hobby profile, bind previously separate Pflege/Anleitung references and perform full signed source/121-rule/LT68/WordPress-draft QA. No new plugin or portal redecision."
+  },
+  "latest_20261121_cumulative_hobby_to_kmulti_real_contract_tests": {
+    "performed": "2026-11-21",
+    "first": "Original PHP WordPress all 5 known types passed in isolated sandbox",
+    "second": "K-Multi original three existing FAQ entry and research-handoff passed",
+    "third": "Original PHP importer with 3 complete current FAQ texts passed 14/14, real LT68 3/3",
+    "fourth": "Original K-Multi GitHub Actions regressions 84/84, reject unsigned final WP import",
+    "fifth": "Hobby own three FAQ editorial targets 54/54 static positive checks (not real full 121 QA)",
+    "sixth": "Hobby manifest five-type contract readback 30/30 current GitHub sources",
+    "seventh": "Exact original K-Multi Python and Registry executed with real original 3 FAQ, real foreign Pferdeatelier WP export and synthetic five types, 16/16 PASS",
+    "source_proof": "102_KMULTI_FUENF_TYPEN_ECHTTEST_FREMDPORTAL_20261121.json",
+    "KMulti_office_commit": "79c36d941ede4d96401eff393d2f70db3900eb63",
+    "automated_hobby_regression_script": "test_hobby_contract.py",
+    "automated_hobby_regression_workflow": ".github/workflows/hobbydepot-editorial-contract.yml",
+    "github_action_specific_new_python_run_confirmed": false,
+    "no_new_plugin": true,
+    "original_three_faq_still_research_not_signed": true,
+    "no_real_hobby_121_regeln_pass": true,
+    "no_final_wordpress_import_release": true,
+    "KMulti_unchanged": true,
+    "K0_unchanged": true,
+    "original_wordpress_plugin_unchanged": true,
+    "exact_remaining_KMulti_type_differences": [
+      "Pflege",
+      "Anleitung"
+    ],
+    "explicit_authorization_required_for_KMulti_registry_and_binding_change": true
   }
 }
