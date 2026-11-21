@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Was passiert, wenn ein Pferd zu kalt eingedeckt ist?",
+      "target_keyword": "Was passiert, wenn ein Pferd zu kalt eingedeckt ist?",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "4961ad144f5b3b00bef5ad6fbd9ddfc831ebd3dc91567d1673cb5bfb79ced66f"
+    }
+  ],
+  "batch_sha256": "26629fcbc5faa912045c71f3b31a4b94cd502043a6ea50d16170c4f5a0342867"
+}
