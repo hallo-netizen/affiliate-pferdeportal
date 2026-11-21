@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Was kostet eine Zahnbehandlung beim Pferd im Jahr 2026?",
+      "target_keyword": "Wie viel kostet eine Zahnbehandlung für Pferde im Jahr 2026?",
+      "category": "recht-finanzen-organisation",
+      "article_type": "FAQ",
+      "plan_slot": "2365174c5aa23e8ed87af6f1480c01a79749e067d9c4c7c4115b5e79a9ddbd87"
+    }
+  ],
+  "batch_sha256": "10ff91f8f94e1e943216b4da1908db93452151a2a75fc5bfeb9fa60b963a11e0"
+}
