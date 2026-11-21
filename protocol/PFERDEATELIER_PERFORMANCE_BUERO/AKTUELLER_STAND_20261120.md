@@ -1144,3 +1144,61 @@ Damit wird exakt die nachgewiesene wiederholte Arbeit reduziert.
 
 ### Nächster Live-Schritt
 Nur 6.72.367 installieren. Danach keinen Ein-Seiten-Sondertest, sondern den vorhandenen Performance Diagnose Safe 7.0.0 als vollständigen PASSIV-Gesamtlauf über den bestehenden repräsentativen Seitenmix verwenden. Vor diesem Gesamtlauf keine weitere Affiliate-Version.
+
+
+## 2026-11-21 – Live 6.72.367 ausgewertet / 6.72.368 gebündelter Kandidat
+
+### Live-Befund 6.72.367
+Quelle: pferdeatelier-performance-gesamtanalyse-20261121-101158.json, Performance Diagnose Safe 7.0.0 PASSIV.
+- Affiliate 6.72.367 aktiv; Template Kit 1.50.616.
+- Pferdesättel: 7307,94 ms Wall, 3567,25 ms CPU, 139257 Cache-Hits, 320 Queries, 0 externe HTTP-Aufrufe.
+- 6.72.365 hatte auf derselben Route ebenfalls 139257 Cache-Hits und 320 Queries. Damit hat 6.72.367 den dominanten Wiederholungsblock live nicht reduziert.
+- Wall-Time ist in diesem Lauf wegen hoher Serverlast und OPcache-Neustartnähe nicht als reine Pluginwirkung verwertbar. Der unveränderte Cache-Hit-/Query-Fingerabdruck ist dagegen robust.
+- Dominante Phase bleibt loop_start→wp_footer; der Affiliate-/Produktpfad bleibt Ziel.
+
+### Bereits gemessener Slot-Ursachenbeleg
+Früherer Tiefenlauf:
+- category_product_1 bis 1684,421 ms
+- category_product_2 bis 622,356 ms
+- category_product_3 bis 691,347 ms
+- product_after_category_tiles 447,486 ms
+Damit ist der wiederholte Produktpfad direkt gemessen.
+
+### 6.72.368 – Ursachenfix
+6.72.367 kann den kompletten Postprocess-Plan nur wiederverwenden, wenn die vollständige Kandidatenidentität gleich ist. Unterschiedliche Slot-Kandidatenlisten verhindern den Plan-Hit.
+6.72.368 verwendet deshalb zusätzlich ausschließlich das slot-unabhängige Bild-Prüfergebnis je unveränderter Kampagne request-lokal wieder – hinter demselben strengen Dynamik-/Filter-Sicherheitsgate.
+Jeder dynamische Meta-/Option-/Cache-/Sanitizer-/Shortcode-/URL-/Redirect-/Hostzustand fällt auf den historischen vollständigen Weg zurück.
+
+### Kausalitätsbeweis
+Absichtlich unterschiedliche Slotlisten aus einem 710er-Basispool:
+- Größen 710 / 568 / 533
+- Bildprüfungen 1811 → 710
+- Reduktion 60,8 %
+- Alt/Neu-Ergebnis identisch
+
+Breite Zufallsmatrix:
+- 60000 stabile Drei-Slot-Fälle: 0 Ausgabeabweichungen
+- Bildprüfungen 2308885 → 1166642 (-49,47 %)
+- 60000 dynamische Fälle: 0 Ausgabe- oder Aufruffolgeabweichungen; Cache dort aus
+- bestehendes Postprocess-Gate: 100000 Alt/Neu-Gate-Fälle, 0 Abweichungen
+
+### Inhaltlicher Funktionsschutz
+- Named functions 1556 → 1557; entfernt 0; nur neue private Sicherheitsfunktion.
+- Geänderte bestehende Funktionen nur:
+  - category_product_postprocess_plan_cache_allowed_v672365
+  - category_product_public_image_ready
+- Auswahl, Ranking, Provider, Fallback, Veto, Health, Tracking, Rendering und Schreibregeln unverändert.
+- Actions 176→176, Filter 30→30, Shortcodes 6→6.
+- Alle Produktions-Schreibprimitive identisch.
+- 23/23 PHP-Lint PASS.
+- finales ZIP 66/66 Dateien identisch zum geprüften Arbeitsstand.
+
+### Paket
+- PFERDEATELIER_AFFILIATE_6.72.368_CATEGORY_IMAGE_REUSE_ROOTFIX_TEST.zip
+- SHA-256: f81f5c0a2deee1775d6ee70ebea2ae6ca1ebc62e2ee0fc2a4daf621b22c64de8
+- Library: /pferdeatelier/PLUGINS/PERFORMANCE/
+- Prüfnachweis: PFERDEATELIER_6.72.368_PRUEFNACHWEIS.md
+
+Relevanssi Live Ajax Search 2.6 wurde nach dem 6.72.367-Diagnoselauf separat vom Nutzer deaktiviert. Diese Änderung ist nicht Ursache oder Bestandteil des Affiliate-Fixes und wird erst im nächsten Gesamtlauf mitgemessen.
+
+Nächster Schritt: nur 6.72.368 installieren; anschließend ein vollständiger PASSIV-Gesamtlauf über den bestehenden Seitenmix. Keine weitere Affiliate-Version davor.
