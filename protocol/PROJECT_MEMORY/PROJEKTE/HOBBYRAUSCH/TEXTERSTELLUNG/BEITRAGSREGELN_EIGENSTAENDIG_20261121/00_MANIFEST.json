@@ -1,7 +1,7 @@
 {
   "contract": "HOBBYDEPOT_BEITRAGSREGELN_FUENF_ORIGINALTYPEN_V1",
   "created": "2026-11-21",
-  "status": "FIVE_HOBBY_RULEBOOKS_EDITORIALLY_PREPARED_NOT_RUNTIME_APPROVED",
+  "status": "FIVE_EDITORIAL_TYPE_BOOKS_WITH_SINGLE_COMMON_RULESET_NOT_RUNTIME_APPROVED",
   "portal_id": "hobby_depot",
   "original_wp_types": [
     "Beratung",
@@ -51,8 +51,6 @@
       "existing_transport_matches_new_own_book": false
     }
   ],
-  "books_are_self_contained": true,
-  "common_rules_in_each_book": 12,
   "copy_of_k0_rule_values": false,
   "k0_only_read_as_general_guidance": true,
   "extra_portal_types_created": false,
@@ -61,10 +59,17 @@
     "Pflege und Anleitung sind fachlich verschieden. Die derzeitige technische K-Multi-Referenz zeigt bei beiden noch auf dasselbe ältere Kandidatenbuch; ohne ausdrücklichen separaten Integrationsauftrag weder diese Referenz noch K-Multi ändern.",
     "Bestehende identitätsgebundene fünf WordPress-Felder bleiben in jedem Fall unverändert.",
     "Wortzahlen und H2 sind redaktionelle Hobby-Ziele, keine automatisch verbindlichen Laufzeitsperren.",
-    "Die fünf Regelbücher sind nur im Hobbydepot-Büro abgelegt und werden nicht durch bloßes Speichern in WordPress oder K-Multi aktiviert."
+    "Die fünf Regelbücher sind nur im Hobbydepot-Büro abgelegt und werden nicht durch bloßes Speichern in WordPress oder K-Multi aktiviert.",
+    "KISS-Korrektur: 12 identische Grundregeln aus fünf Büchern zentralisiert (60 Textkopien → 12); Typregeln, Hobbynamen und ursprüngliche WordPress-Fünffelderdatei unverändert. Keine Regelaktivierung."
   ],
   "changes_outside_hobby_office": false,
   "requires_activation_after_approval": true,
   "authoring_active": false,
-  "publish_allowed": false
+  "publish_allowed": false,
+  "shared_rulebook_filename": "05_GEMEINSAME_REGELN.json",
+  "shared_rulebook_rule_count": 12,
+  "single_shared_rule_owner": true,
+  "self_contained_type_specific_rules": true,
+  "no_automatic_runtime_injection": true,
+  "unverified_values_stay_nonbinding": true
 }
