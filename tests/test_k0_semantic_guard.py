@@ -29,7 +29,7 @@ def package(identity, body, intent, table_exception='NUANCE_LOSS'):
         'html':body,
         'final_draft_sha256':sha(body),
         'content_profile':{'search_intent':intent},
-        'table_decision':{'exception_code':table_exception},
+        'table_decision':{'k0_policy':'K0_TABLE_MEANINGFUL_ONLY_V1','exception_code':table_exception},
         'publish_allowed':False,
     }
 
