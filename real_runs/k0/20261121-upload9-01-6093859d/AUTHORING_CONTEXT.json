@@ -1,0 +1,149 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Ab wann gilt eine Pferdehaltung als gewerblich?",
+    "target_keyword": "Ab wann gilt eine Pferdehaltung als gewerblich?",
+    "category": "recht-finanzen-organisation",
+    "article_type": "FAQ",
+    "plan_slot": "57af25ca86f8080ce93a932efae83f3832f66f675d22e60c104d08a8cf2231ac"
+  },
+  "content_profile": {
+    "search_intent": "Abgrenzung einer privaten von einer gewerblichen Pferdehaltung mit den entscheidenden Umständen und Zuständigkeiten; keine feste Pferdezahl als allgemeine Grenze."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.lk-nienburg.de/formulare/fs.php?id=21500-901000385-21500",
+          "source_title": "Landkreis Nienburg – Bauvorhaben für Pferdebetriebe im Außenbereich"
+        }
+      ],
+      "claims": [
+        "Die Abgrenzung zwischen Hobbytierhaltung und Gewerbebetrieb erfordert eine Einzelfallbetrachtung.",
+        "Eine baurechtliche Einordnung lässt sich nicht unmittelbar aus dem Steuerrecht übernehmen.",
+        "Pferdezucht mit überwiegend eigener Futtergrundlage kann baurechtlich landwirtschaftlich eingeordnet werden.",
+        "Pferdehaltung ohne überwiegend eigene Futtergrundlage wird nach diesem Merkblatt nicht allein dadurch landwirtschaftliche Betätigung."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Ab wann gilt eine Pferdehaltung als gewerblich?",
+      "topic": "Ab wann gilt eine Pferdehaltung als gewerblich?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "recht-finanzen-organisation",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Ab wann gilt eine Pferdehaltung als gewerblich?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.lk-nienburg.de/formulare/fs.php?id=21500-901000385-21500",
+        "source_title": "Landkreis Nienburg – Bauvorhaben für Pferdebetriebe im Außenbereich",
+        "evidence_text": "Die Abgrenzung zu Gewerbebetrieben und Hobbytierhaltung ist oft schwierig;",
+        "evidence_text_sha256": "145f134a9df6d2fc81223ac9284bd659e8e17609bece967c6a37575fedcbd18d",
+        "statement": "Die Abgrenzung zwischen Hobbytierhaltung und Gewerbebetrieb erfordert eine Einzelfallbetrachtung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.lk-nienburg.de/formulare/fs.php?id=21500-901000385-21500",
+        "source_title": "Landkreis Nienburg – Bauvorhaben für Pferdebetriebe im Außenbereich",
+        "evidence_text": "eine Übertragung aus anderen Rechtsgebieten, z.B. Steuerrecht, ist nicht möglich",
+        "evidence_text_sha256": "48c687155638d0c69ac055bcd0cbd7e8e36e294416d01b9022e0437291bf98b1",
+        "statement": "Eine baurechtliche Einordnung lässt sich nicht unmittelbar aus dem Steuerrecht übernehmen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.lk-nienburg.de/formulare/fs.php?id=21500-901000385-21500",
+        "source_title": "Landkreis Nienburg – Bauvorhaben für Pferdebetriebe im Außenbereich",
+        "evidence_text": "Pferdezucht auf überwiegend eigener Futtergrundlage",
+        "evidence_text_sha256": "689686f4508622ce7b2be63664d084762245dd8a509778167f537441ebd30755",
+        "statement": "Pferdezucht mit überwiegend eigener Futtergrundlage kann baurechtlich landwirtschaftlich eingeordnet werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.lk-nienburg.de/formulare/fs.php?id=21500-901000385-21500",
+        "source_title": "Landkreis Nienburg – Bauvorhaben für Pferdebetriebe im Außenbereich",
+        "evidence_text": "Pferdehaltung ohne überwiegend eigene Futtergrundlage",
+        "evidence_text_sha256": "5101089143b44f7d4ec6844c1e8f9d66d4df8be1ffd9590ecae4e1e473f20be9",
+        "statement": "Pferdehaltung ohne überwiegend eigene Futtergrundlage wird nach diesem Merkblatt nicht allein dadurch landwirtschaftliche Betätigung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/recht-finanzen-organisation/",
+        "anchor": "Recht, Finanzen & Organisation",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/recht-finanzen-organisation/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "recht-finanzen-organisation",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferdehaltung",
+      "gewerblich",
+      "privat",
+      "Landwirtschaft",
+      "Baurecht"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Unterscheidung ergibt sich aus Einzelfallumständen und lässt sich ohne künstliche Matrix im Fließtext klarer erklären."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
