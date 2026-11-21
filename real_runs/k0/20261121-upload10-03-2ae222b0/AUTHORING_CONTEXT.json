@@ -16,15 +16,15 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
-          "source_title": "Horseware Ireland – Pferdedecken pflegen"
+          "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
+          "source_title": "Horseware Ireland – Horse Rug Care Guide"
         }
       ],
       "claims": [
-        "Pferdedecken können auf unterschiedliche Weise gereinigt werden.",
-        "Ein professioneller Pferdedecken-Waschservice ist eine mögliche Reinigungsmethode.",
-        "Vor dem Einlagern sollen Decken sauber und vollständig trocken sein.",
-        "Reinigung und Lagerung dienen der längeren Verwendbarkeit von Pferdedecken."
+        "Regelmäßige Fellpflege reduziert Fett und Haare an Pferdedecken.",
+        "Vor der Wäsche sollten Pferdedecken vorsichtig abgebürstet werden.",
+        "Saubere Pferdedecken sollten trocken und möglichst luftig gelagert werden.",
+        "Regelmäßige Kontrolle des Pferdes und seiner Decke ist bei wechselndem Wetter sinnvoll."
       ],
       "fresh_research_reference_date": "2026-11-21"
     },
@@ -47,44 +47,44 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
-        "source_title": "Horseware Ireland – Pferdedecken pflegen",
-        "evidence_text": "There are a few different options when it comes to washing your horse’s blankets.",
-        "evidence_text_sha256": "fd7d1824e6005bad24910fc20adde04385af5917f9a6624f490e95bbc381a213",
-        "statement": "Pferdedecken können auf unterschiedliche Weise gereinigt werden.",
+        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
+        "source_title": "Horseware Ireland – Horse Rug Care Guide",
+        "evidence_text": "Reduce the build-up of grease and hair with daily grooming.",
+        "evidence_text_sha256": "c8bb1b6cfa6309efee4f0e5292f892c9550e55ead60fccf3b307a1f38f76ce7f",
+        "statement": "Regelmäßige Fellpflege reduziert Fett und Haare an Pferdedecken.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F2": {
-        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
-        "source_title": "Horseware Ireland – Pferdedecken pflegen",
-        "evidence_text": "The easiest way is to take them to a professional blanket repair and washing service.",
-        "evidence_text_sha256": "327c2f5e516b52e76bef0ccf1b92cc9a75309c32ac39bd7c75d42f9717aa353d",
-        "statement": "Ein professioneller Pferdedecken-Waschservice ist eine mögliche Reinigungsmethode.",
+        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
+        "source_title": "Horseware Ireland – Horse Rug Care Guide",
+        "evidence_text": "Gently brush off any dirt",
+        "evidence_text_sha256": "35e556d7b803206e3a72ec64f4dae8375d5b3b1e4f0eb4fd030e758d70be28fd",
+        "statement": "Vor der Wäsche sollten Pferdedecken vorsichtig abgebürstet werden.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F3": {
-        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
-        "source_title": "Horseware Ireland – Pferdedecken pflegen",
-        "evidence_text": "Once your blankets have been washed, re-proofed if necessary, and are dry it’s time to store them away until next season.",
-        "evidence_text_sha256": "0ca929c894ed520a258379ec66f874716c76bc6b659f4b22a7a6bbc6b852554a",
-        "statement": "Vor dem Einlagern sollen Decken sauber und vollständig trocken sein.",
+        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
+        "source_title": "Horseware Ireland – Horse Rug Care Guide",
+        "evidence_text": "Store the rug in a cool, dry area, preferably in a breathable storage bag",
+        "evidence_text_sha256": "d7a6baf3e63651763c7f943ccd9384ca35bc3a9a3a38dbdc6dea832a8b4974f7",
+        "statement": "Saubere Pferdedecken sollten trocken und möglichst luftig gelagert werden.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F4": {
-        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
-        "source_title": "Horseware Ireland – Pferdedecken pflegen",
-        "evidence_text": "Washing and storing horse blankets isn’t just great for saving space but it maximizes the life of your horse’s blankets too.",
-        "evidence_text_sha256": "2edfbb98c701237f8a7c8fa580ddeacfa9c74cad98490401d420ba0e55bf7197",
-        "statement": "Reinigung und Lagerung dienen der längeren Verwendbarkeit von Pferdedecken.",
+        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
+        "source_title": "Horseware Ireland – Horse Rug Care Guide",
+        "evidence_text": "Regularly checking your horse will ensure they are comfortable in their rug despite changing weather conditions.",
+        "evidence_text_sha256": "8d0350fb27c003a7f0e1f2f473b2d653d00228ac718c5e92c655cccb2cff4b1f",
+        "statement": "Regelmäßige Kontrolle des Pferdes und seiner Decke ist bei wechselndem Wetter sinnvoll.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
