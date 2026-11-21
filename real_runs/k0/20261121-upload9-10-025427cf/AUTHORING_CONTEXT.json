@@ -112,8 +112,8 @@
       },
       {
         "role": "further_information",
-        "href": "/wissen/wissen-buecher-und-ratgeber/pferdehaltung-grundlagen/",
-        "anchor": "Pferdehaltung Grundlagen",
+        "href": "/category/reithallen-beregnung-bewaesserung-anwendung/",
+        "anchor": "Anwendung Beregnung & Bewässerung",
         "block": "further_information"
       }
     ],
@@ -123,7 +123,7 @@
         "active": true
       },
       {
-        "href": "/wissen/wissen-buecher-und-ratgeber/pferdehaltung-grundlagen/",
+        "href": "/category/reithallen-beregnung-bewaesserung-anwendung/",
         "active": true
       }
     ],
@@ -145,7 +145,11 @@
       "Boden",
       "Bewegung",
       "Platzangebot",
-      "Beleuchtung"
+      "Beleuchtung",
+      "Beregnung",
+      "Bewässerung",
+      "Reitboden",
+      "Reithallenbau"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
