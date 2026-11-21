@@ -361,5 +361,88 @@
       "Other portal type decisions",
       "Global blocked writer/publish policy"
     ]
+  },
+  "latest_full_hobby_121_research_and_release_state_20261121": {
+    "date": "2026-11-21",
+    "code_repo": "hallo-netizen/k0-multiportal",
+    "branch": "k0-offline-rule-bindings-20261027",
+    "kmulti_current_release_fix_commit": "d1dd925a6424d1a7f408cfd723f69884463122c5",
+    "separate_five_type_qa_release_integration": {
+      "original_types": [
+        "Beratung",
+        "FAQ",
+        "Pflege",
+        "Vergleich",
+        "Anleitung"
+      ],
+      "all_five_supported_for_signed_single_file_output": true,
+      "existing_FAQ_output_preserved": true,
+      "one_shared_121_catalog_not_copied_per_type": true,
+      "original_type_selected_once_only": true,
+      "fake_test_certificate_never_prod": true,
+      "original_signed_gate_still_requires_complete_121_and_factual_authoring_language_proofs": true,
+      "github_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/44931567652",
+      "test_groups": {
+        "original_Hobby_bridge": 31,
+        "single_file_release_including_26_new_five_type_cases": 51,
+        "LT68_adapter": 12,
+        "safe_delivery": 16,
+        "total": 110,
+        "failed": 0
+      }
+    },
+    "updated_live_original_source_audit": {
+      "DSB_safety_primary_web_html": "https://dsb.de/fileadmin/dsb/sportordnung/16/",
+      "two_cost_excerpts_replaced_with_detailed_original_Heidelberg_Freising_quotes": true,
+      "article_html_byteidentical_all_three": true,
+      "WordPress_five_original_fields_unchanged_all_three": true,
+      "github_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/44931906892",
+      "original_sources_fetched_once": 10,
+      "paragraphs_checked": 30,
+      "exact_quotes_matched": 16,
+      "complete_fact_semantics_approved": false
+    },
+    "current_language": {
+      "github_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/44931783156",
+      "actual_jar_version": "LanguageTool 6.8",
+      "articles": 3,
+      "passed": 3,
+      "unresolved_findings": 0
+    },
+    "current_five_type_routing_and_post_research_regressions": {
+      "run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/44931906731",
+      "result": "SUCCESS"
+    },
+    "current_wordpress_original_samples": {
+      "three_original_FAQ_orders": true,
+      "original_MINI_editorial_checkpoint_topics": 20,
+      "original_MINI_topics_FREI": 3,
+      "original_MINI_topics_KLAERUNG": 17,
+      "note": "Never invent category/type for 17 pending items; only the original WordPress MINI owner may finalize them. Four other types have been technically tested with conspicuously synthetic cases."
+    },
+    "current_canonical_rule_catalog": {
+      "total": 121,
+      "hard": 114,
+      "target": 7
+    },
+    "exact_release_blockers": {
+      "current_portal_rule_binding_state": "NO_VALUES_BLOCKED",
+      "approved_hobby_rule_values_path": null,
+      "approved_hobby_article_types": [],
+      "production_enabled": false,
+      "true_research_owner_semantic_fact_approval": false,
+      "real_hobby_121_rule_execution_on_exact_html": false,
+      "independent_signed_QA_receipt": false,
+      "real_approved_wordpress_import_file": false
+    },
+    "unchanged": [
+      "Original K0 runtime/rules",
+      "Hobbydepot WordPress plugin",
+      "Other portals registry entries",
+      "three current FAQ HTML bytes"
+    ],
+    "saved_kmulti_office_commit": "ef55a1d2d1b4f5208bcafb3f6a1edfa71ff9d47d",
+    "kmulti_office": "https://github.com/hallo-netizen/k0-multiportal/blob/k0-offline-rule-bindings-20261027/offline_rules/portal_bindings/hobby_depot/HOBBYDEPOT_5_EIGENE_BEITRAGSREGELN_EINGANG_20261121.md",
+    "next_non_fabricated_step": "Approve five distinct Hobby-specific formal values, execute actual 121 QA with verified semantic research for each original article, then obtain trusted external QA signer and produce only a WordPress draft JSON. This cannot be bypassed by synthetic approval/unsigned receipts."
   }
 }
