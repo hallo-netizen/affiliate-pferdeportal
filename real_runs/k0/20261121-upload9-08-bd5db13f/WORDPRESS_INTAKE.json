@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Ist eine Pferdebox genehmigungsfrei?",
+      "target_keyword": "Ist eine Pferdebox genehmigungsfrei?",
+      "category": "recht-finanzen-organisation",
+      "article_type": "FAQ",
+      "plan_slot": "60ba3dfd268b890b070cec19e66dd9d7b09bbc667dd1ff52dedda53b78b8fd7d"
+    }
+  ],
+  "batch_sha256": "1477c348ba5355005bf8ffdac4b4918bad114b11d4f69329e213035fc59c9bd0"
+}
