@@ -16,12 +16,8 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.gesetze-im-internet.de/got_2022/__1.html",
-          "source_title": "Bundesministerium der Justiz – GOT § 1"
-        },
-        {
-          "source_url": "https://www.gesetze-im-internet.de/got_2022/__2.html",
-          "source_title": "Bundesministerium der Justiz – GOT § 2"
+          "source_url": "https://de.wikipedia.org/wiki/Tierarzt",
+          "source_title": "Wikipedia – Tierarzt"
         },
         {
           "source_url": "https://www.msdvetmanual.com/horse-owners/routine-care-of-horses/dental-coat-and-hoof-care-of-horses",
@@ -29,11 +25,12 @@
         }
       ],
       "claims": [
-        "Die Gebührenordnung der Tierärzte enthält für Leistungen den einfachen Gebührensatz.",
-        "Die Tierarztrechnung berücksichtigt einen Rahmen von einfachem bis dreifachem Gebührensatz.",
-        "Der Schwierigkeitsgrad der Behandlung fließt in die tierärztliche Gebühr ein.",
-        "Die benötigte Zeit gehört zu den tierärztlichen Abrechnungskriterien.",
-        "Die Umsatzsteuer ist in den Gebühren der GOT nicht bereits enthalten.",
+        "Tierärzte berechnen den Tierhaltern ein Honorar für tierärztliche Leistungen.",
+        "In Deutschland werden Mindestgebühren für Tierärzte durch die GOT geregelt.",
+        "Die GOT-Gebühren wurden zuletzt 2022 angehoben.",
+        "Umfangreiche tierärztliche Behandlungen können hohe Kosten verursachen.",
+        "Neben tierärztlichen Gebühren können Auslagen und Arzneimittel abgerechnet werden.",
+        "Tierärztliche Leistungen unterliegen grundsätzlich der Umsatzsteuer.",
         "Veränderte Gebissannahme kann ein Anlass sein, die Zähne des Pferdes untersuchen zu lassen."
       ],
       "fresh_research_reference_date": "2026-11-21"
@@ -57,61 +54,72 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.gesetze-im-internet.de/got_2022/__1.html",
-        "source_title": "Bundesministerium der Justiz – GOT",
-        "evidence_text": "Die im Gebührenverzeichnis aufgeführten Gebührensätze entsprechen dem einfachen Satz.",
-        "evidence_text_sha256": "e1d6ad93e2dda7833345b4ad8f390c2edb0ee74dacf007bc132fbd18535266eb",
-        "statement": "Die Gebührenordnung der Tierärzte enthält für Leistungen den einfachen Gebührensatz.",
+        "source_url": "https://de.wikipedia.org/wiki/Tierarzt",
+        "source_title": "Wikipedia – Tierarzt",
+        "evidence_text": "Tierärzte erheben für ihre Leistungen Honorare von den Tierbesitzern",
+        "evidence_text_sha256": "4d44cb1341cbc8f95afcc04640129313385af99546682bddff15026b675d0514",
+        "statement": "Tierärzte berechnen den Tierhaltern ein Honorar für tierärztliche Leistungen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F2": {
-        "source_url": "https://www.gesetze-im-internet.de/got_2022/__2.html",
-        "source_title": "Bundesministerium der Justiz – GOT",
-        "evidence_text": "Die Höhe der einzelnen Gebühr bemisst sich, soweit nichts anderes bestimmt ist, nach dem Einfachen bis Dreifachen des Gebührensatzes.",
-        "evidence_text_sha256": "9676625f9bcb77eb35dd9f41d226ba55d689903d93a4071f44001d4e0dab7f83",
-        "statement": "Die Tierarztrechnung berücksichtigt einen Rahmen von einfachem bis dreifachem Gebührensatz.",
+        "source_url": "https://de.wikipedia.org/wiki/Tierarzt",
+        "source_title": "Wikipedia – Tierarzt",
+        "evidence_text": "in Deutschland sind in der Gebührenordnung für Tierärzte (GOT) Mindestsätze festgelegt.",
+        "evidence_text_sha256": "1985b2259ded4f4fb09054f0e9c17850fa875ccef5b08e573d5e48871f5776df",
+        "statement": "In Deutschland werden Mindestgebühren für Tierärzte durch die GOT geregelt.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F3": {
-        "source_url": "https://www.gesetze-im-internet.de/got_2022/__2.html",
-        "source_title": "Bundesministerium der Justiz – GOT",
-        "evidence_text": "der Schwierigkeit der Leistungen,",
-        "evidence_text_sha256": "d240e2be01f1d4e4d744b802363939d396b5730e56ff0314166a6f7b776ce9b6",
-        "statement": "Der Schwierigkeitsgrad der Behandlung fließt in die tierärztliche Gebühr ein.",
+        "source_url": "https://de.wikipedia.org/wiki/Tierarzt",
+        "source_title": "Wikipedia – Tierarzt",
+        "evidence_text": "Zuletzt wurden die Gebühren am 22. November 2022 angehoben.",
+        "evidence_text_sha256": "5c0737df3b07216a7ff38a8a2400a1a5140de4664a9b3a40217400245c0ddbb7",
+        "statement": "Die GOT-Gebühren wurden zuletzt 2022 angehoben.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F4": {
-        "source_url": "https://www.gesetze-im-internet.de/got_2022/__2.html",
-        "source_title": "Bundesministerium der Justiz – GOT",
-        "evidence_text": "des Zeitaufwandes,",
-        "evidence_text_sha256": "e2592ccd282da8c4e53991ca0bf830c30a9b9f9701a18ff31d09899086084c91",
-        "statement": "Die benötigte Zeit gehört zu den tierärztlichen Abrechnungskriterien.",
+        "source_url": "https://de.wikipedia.org/wiki/Tierarzt",
+        "source_title": "Wikipedia – Tierarzt",
+        "evidence_text": "Eine schwere Erkrankung des Tieres kann daher eine erhebliche finanzielle Belastung darstellen",
+        "evidence_text_sha256": "51f8a532b55ac15bf307b0e3eecbc4064cef2404ad87870b8e885bd4136a9c70",
+        "statement": "Umfangreiche tierärztliche Behandlungen können hohe Kosten verursachen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F5": {
-        "source_url": "https://www.gesetze-im-internet.de/got_2022/__1.html",
-        "source_title": "Bundesministerium der Justiz – GOT",
-        "evidence_text": "In den im Gebührenverzeichnis aufgeführten Gebührensätzen ist die Umsatzsteuer nicht enthalten.",
-        "evidence_text_sha256": "deb0e94a481ce832836d8a2acf7372e7e74dc3a4bf05e5597d4bba7b47a09b87",
-        "statement": "Die Umsatzsteuer ist in den Gebühren der GOT nicht bereits enthalten.",
+        "source_url": "https://de.wikipedia.org/wiki/Tierarzt",
+        "source_title": "Wikipedia – Tierarzt",
+        "evidence_text": "Den Tierärzten stehen für ihre Berufstätigkeit Vergütungen (Gebühren, Entschädigungen, Barauslagen sowie Entgelte für Arzneimittel und Verbrauchsmaterialien) zu.",
+        "evidence_text_sha256": "597856201c539345a62d60b604e100d83d111c2d8309dfc0dc3f13857b9a05a1",
+        "statement": "Neben tierärztlichen Gebühren können Auslagen und Arzneimittel abgerechnet werden.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F6": {
+        "source_url": "https://de.wikipedia.org/wiki/Tierarzt",
+        "source_title": "Wikipedia – Tierarzt",
+        "evidence_text": "Die tierärztlichen Leistungen sind, anders als Heilbehandlungen im Bereich der Humanmedizin, nicht von der Umsatzsteuer befreit",
+        "evidence_text_sha256": "b24ee4bce69ea0bd36024b6f6fd0fbe2c611e292dc394ea1c67b6ad94f20c113",
+        "statement": "Tierärztliche Leistungen unterliegen grundsätzlich der Umsatzsteuer.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F7": {
         "source_url": "https://www.msdvetmanual.com/horse-owners/routine-care-of-horses/dental-coat-and-hoof-care-of-horses",
         "source_title": "MSD Veterinary Manual – Pferdezahnpflege",
         "evidence_text": "Hesitating to take a bit in the mouth",
@@ -129,7 +137,8 @@
       "F3",
       "F4",
       "F5",
-      "F6"
+      "F6",
+      "F7"
     ],
     "allowed_fact_ids": [
       "F1",
@@ -137,7 +146,8 @@
       "F3",
       "F4",
       "F5",
-      "F6"
+      "F6",
+      "F7"
     ],
     "bound_links": [
       {
