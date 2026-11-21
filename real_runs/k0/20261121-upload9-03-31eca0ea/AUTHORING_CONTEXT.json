@@ -112,8 +112,8 @@
       },
       {
         "role": "further_information",
-        "href": "/wissen/wissen-buecher-und-ratgeber/pferdehaltung-grundlagen/",
-        "anchor": "Pferdehaltung Grundlagen",
+        "href": "/category/gesundheitsvorsorge-grundlagen-faq/",
+        "anchor": "FAQ Gesundheitsvorsorge Grundlagen",
         "block": "further_information"
       }
     ],
@@ -123,7 +123,7 @@
         "active": true
       },
       {
-        "href": "/wissen/wissen-buecher-und-ratgeber/pferdehaltung-grundlagen/",
+        "href": "/category/gesundheitsvorsorge-grundlagen-faq/",
         "active": true
       }
     ],
@@ -145,7 +145,12 @@
       "Pflege",
       "Stallklima",
       "Sozialkontakt",
-      "Platzangebot"
+      "Platzangebot",
+      "Gesundheitsvorsorge",
+      "Grundlagen",
+      "Vorsorge",
+      "Impfungen",
+      "Tierarzt"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
