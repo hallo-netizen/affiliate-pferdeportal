@@ -74,7 +74,16 @@ def with_valid_table(a):
 </tbody></table>
 <p data-fact-ids="F2">{tr} Die Tabelle verbindet Aufgabe, Hilfe und sicheren Einsatz, damit die wichtigsten Unterschiede beim Longieren direkt erkennbar bleiben.</p></section>'''
     a['html']=a['html'].replace('<section data-block="conclusion">',table+'<section data-block="conclusion">')
-    a['table_decision']={'decision':'INCLUDE_ADDED_VALUE','exception_code':None,'rationale':'Die Tabelle verbindet Hilfsmittel mit eigenständigen Auswahl- und Kontrollpunkten.'}
+    a['table_decision']={
+        'k0_policy':'K0_TABLE_MEANINGFUL_ONLY_V1',
+        'decision':'INCLUDE_ADDED_VALUE','exception_code':None,
+        'rationale':'Die Tabelle verbindet Hilfsmittel mit eigenständigen Auswahl- und Kontrollpunkten.',
+        'reader_question':a['target_keyword'],
+        'reader_benefit':'Leser können die Hilfsmittel nach Zweck und Einsatz direkt gegenüberstellen.',
+        'why_not_prose':'Ein Fließtext vermittelt die Beziehungen zwischen den praktischen Hilfen deutlich schlechter.',
+        'comparison_axes':['Eingesetztes Hilfsmittel','Praktischer Nutzen'],
+        'source_fact_ids':['F2','F3'],
+    }
     a['semantic_rule_results']={'table.value_required_if_present':'PASS'}
     return a
 
