@@ -154,5 +154,35 @@
       "K0 code and rules",
       "K-Multi code, registry and rule bindings"
     ]
+  },
+  "first_actual_kmulti_input_test_20261121": {
+    "result": "PASS",
+    "total": 15,
+    "passed": 15,
+    "failed": 0,
+    "source_record": "97_ERSTER_ECHTER_KMULTI_EINGANGSTEST_20261121.json",
+    "original_executable_git_blob": "be4cd4884b82b324453624a4897f4763e09a778f",
+    "original_registry_git_blob": "811abd6063796369320ecdb8ff953a3467d31ae0",
+    "input": "existing 3-FAQ metadata source reconstructed from original K-Multi GitHub fixture; original content checksums verified, fixture raw bytes not asserted identical",
+    "portal": "hobby_depot",
+    "article_count": 3,
+    "routed_ids": [
+      "HOBBY_FAQ",
+      "HOBBY_FAQ",
+      "HOBBY_FAQ"
+    ],
+    "worker_stage": "WAITING_FOR_SHARED_RESEARCH_OWNER",
+    "k0_called": false,
+    "writer_allowed": false,
+    "publish_allowed": false,
+    "negative_tests_blocked": 6,
+    "kmulti_office_commit": "a785219c6ce5ac83b30a33af2adaaa1450599b21",
+    "kmulti_central_qa_commit": "b7b7cc4dd1d2e19298b82973b660b5809ca273ce",
+    "untouched": [
+      "K0",
+      "K-Multi code/registry/binding",
+      "WordPress plugin"
+    ],
+    "no_runtime_release": true
   }
 }
