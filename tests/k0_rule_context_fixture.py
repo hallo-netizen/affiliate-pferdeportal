@@ -65,3 +65,22 @@ def rule_context(identity):
       'table_multiword_exceptions':[],
       'expected_list_name':list_name,
     }
+
+def adapt_historical_table_context_for_current_k0(ctx):
+    """QA-only table policy adaptation; source claims and identity unchanged."""
+    import copy
+    ctx=copy.deepcopy(ctx)
+    identity=ctx['identity']
+    decision=ctx['rule_context']['table_decision']
+    if decision.get('k0_policy')=='K0_TABLE_MEANINGFUL_ONLY_V1':
+        return ctx
+    decision['k0_policy']='K0_TABLE_MEANINGFUL_ONLY_V1'
+    if decision.get('decision')=='INCLUDE_ADDED_VALUE':
+        decision['reader_question']=identity['target_keyword']
+        decision['reader_benefit']=decision.get('rationale') or 'Leser vergleichen unabhängige Eigenschaften für ihre konkrete Frage.'
+        if len(decision['reader_benefit'])<30:
+            decision['reader_benefit']='Leser vergleichen unabhängige Eigenschaften für ihre konkrete Frage.'
+        decision['why_not_prose']='Mehrere eigenständige Kriterien lassen sich direkt vergleichen und sind im Fließtext schwerer zu überblicken.'
+        decision['comparison_axes']=['Eigenschaften und Einordnung','Unterschiedliche Nutzungssituationen']
+        decision['source_fact_ids']=ctx['rule_context']['allowed_fact_ids'][:2]
+    return ctx
