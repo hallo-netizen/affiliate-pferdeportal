@@ -1,3 +1,15 @@
+# MINI-1DATEI – verbindlicher Einmal-Reimport
+
+**Einziger Startbefehl:** `MINI:1DATEI` (vollständiger Prompt: `STARTPROMPT_MINI-1DATEI.txt`).
+
+**Einziger zulässiger Nutzerausgang:** exakt **eine normale .json-Datei** mit allen Themen und den Ergebnissen der drei vorhandenen Worker **CATEGORY → EDITORIAL → TITLE**. **Nie ZIP, niemals drei einzelne Dateien**, nie CATEGORY als Endergebnis. Freigabe ausschließlich durch `mini_single_release.py --deliver`; der bereits bestehende technische MINI-Finalcheck wird wiederverwendet. Fehlendes Ergebnis heißt `GESPERRT` und Reparatur beim zuständigen ursprünglichen Worker, nicht Chatdatei.
+
+**Technische Freigabeprüfung:** Original unverändert; alle Zeilen vollständig und in Reihenfolge; alle offenen Worker abgeschlossen und gesperrte Entscheidungen nicht wiederholt; in der einzigen Reimport-JSON hat jeder Eintrag Kategorie-, Redaktion- und Titel-Felder entsprechend den vorhandenen Workern; exakt eine Reimport-JSON und ein ausschließlich interner Nachweis. Keine zweite SEO-, Kategorie- oder Titelentscheidung im Finalcheck.
+
+**Wichtige Grenze:** Der bestehende GitHub-Ausgabeweg sperrt nur von ihm erzeugte Dateien. Er kann einen Chatbot technisch nicht daran hindern, eine andere, ungeprüfte Datei zu verlinken. Keine absolute ChatGPT-Garantie und kein Live-WordPress-Import ohne separaten Beleg.
+
+---
+
 # MINI – verbindliche Ausgabesperre vor dem Chat
 
 ## Vertrag (KISS, kein neues Plugin)
