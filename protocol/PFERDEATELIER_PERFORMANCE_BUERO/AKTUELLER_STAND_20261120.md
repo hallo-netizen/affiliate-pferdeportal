@@ -823,3 +823,83 @@ Behalten nur wenn:
 1. Produktausgabe/Provider/Fallback/Veto/Health/Bilder/Tracking unverändert,
 2. category_product_2/3 und Gesamtroute real schneller,
 3. keine neue Regression auf Satteldecken/anderen Referenzseiten.
+
+
+## Zusatzvergleich Testumgebung vor 6.72.365 – Diagnose 21.11.2026 08:23
+
+Quelle: pferdeatelier-performance-gesamtanalyse-20261121-082340.json
+Modus: PASSIV
+Testumgebung: oliver-beil.de
+Affiliate: 6.72.362
+Template Kit: 1.50.616
+Astra: 4.14.3
+Kubio: 2.9.5
+
+### Codegleichheit
+Die relevanten Produktionsquellen sind zwischen Test und Live identisch:
+- Affiliate-Hauptdatei SHA-256 173ca294b3c90621daa8a95d674bbdcb6c42e1cf6e5da55a52610c40ea16b040
+- Template Kit SHA-256 4daf54d7911833e29a60d9397ec824cd0c24232b3e927d3af2ebd65a754389aa
+Damit ist der getestete 6.72.362-Codepfad derselbe.
+
+### Testwerte
+Pferdesättel Test:
+- 3523,56 ms Wall
+- 2804 ms CPU
+- 117537 Cache-Hits
+- 277 Queries
+- 0 externe HTTP-Aufrufe
+
+Live-Referenz vor 6.72.365:
+- 4925,27 ms Wall
+- 3116,02 ms CPU
+- 138943 Cache-Hits
+- 327 Queries
+
+Differenz Test zu Live:
+- Wall ca. 28,5 % niedriger
+- CPU ca. 10,0 % niedriger
+- Cache-Hits ca. 15,4 % niedriger
+- Queries ca. 15,3 % niedriger
+
+### Wichtig: kein 1:1-Benchmark
+Die Umgebungen sind nicht identisch:
+Test:
+- WordPress 7.1.3
+- WP_DEBUG aktiv
+- WP-Cron aktiv
+- kein Zend OPcache
+- 48 aktive Plugins
+- 64 sichtbare logische CPUs
+- Load ca. 26-28, load_per_cpu ca. 0,41-0,44
+- Datenbestand u.a.: wp_posts 7338, wp_postmeta 43802, ppar_ebay_items 6077, ppar_output_objects 3613, ppar_creative_library 1627
+
+Live-Referenz:
+- WordPress 7.1.5
+- WP_DEBUG aus
+- WP-Cron deaktiviert
+- Zend OPcache aktiv, Hit Rate ca. 99,9 %
+- 36 aktive Plugins
+- rohe Host-Load im Referenzlauf ca. 263-309+ (CPU-Anzahl in der alten Diagnose nicht erfasst)
+- Datenbestand größer: posts 10028, postmeta 90254, ppar_ebay_items 8114, ppar_output_objects 4389, ppar_creative_library 2356
+
+Daher sind absolute Sekundenwerte zwischen Test und Live nicht als A/B-Beweis zulässig.
+
+### Robuster gemeinsamer Befund
+Trotz kleinerem Datenbestand und anderer Serverumgebung ist Pferdesättel auch auf Test der Request mit maximalen Cache-Hits:
+- 117537 Hits.
+Die Breiten-/Wiederholungsproblematik des Affiliate-Kandidatenpfads bleibt damit sichtbar.
+
+Auf Test:
+- Pferdesättel 117537 Cache-Hits
+- Ausrüstung/Sattel 68155
+- Ausrüstung 49999
+
+Das stützt die bereits live bewiesene Skalierung mit breiterem Kategorieproduktbestand.
+
+### Entscheidung
+6.72.365 bleibt als nächster Produktions-Testkandidat freigegeben.
+Der Testumgebungs-Lauf ändert den Funktionsvertrag nicht und liefert keinen Gegenbeweis.
+Nach Installation auf Test und Live:
+- jeweils PASSIV auf identischen Routen messen,
+- absolute Test-vs-Live-Zeiten nicht gegeneinander werten,
+- jeweils nur Vorher-vs-Nachher innerhalb derselben Umgebung vergleichen.
