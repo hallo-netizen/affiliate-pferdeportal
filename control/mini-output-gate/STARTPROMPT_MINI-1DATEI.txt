@@ -1,0 +1,13 @@
+MINI:1DATEI
+
+VERBINDLICHER WORKFLOW: MINI-1DATEI
+Bearbeite den angehängten originalen MINI-Gesamtauftrag vollständig in EINER Bearbeitung.
+
+1. Beginne exakt beim laut Originaldatei nächsten offenen Schritt. Verwende ausschließlich den eingefrorenen Export, seine Vorlage, die bestehenden WordPress-Kategorien, die konkrete Magazin-Unterkategorie aus magazine_categories und die bereits gebundenen Entscheidungen. Keine neue Recherche, keine Änderung der Ausgangsdaten, keine Doppelentscheidung.
+2. Führe alle offenen bestehenden Worker in der verbindlichen Reihenfolge bis zum Ende aus: CATEGORY -> EDITORIAL -> TITLE. MAGAZIN ist nur die Route, niemals der Kategorie-Slug. Artikelarten ausschließlich aus der vorhandenen K0-Liste. Gesperrte Entscheidungen unverändert übernehmen. BELEGT/KLAERUNG erhalten keinen erfundenen Titel.
+3. Wenn etwas fehlschlägt: Nur die betroffene Stelle an denselben Worker zurückgeben, dort reparieren und dann mit demselben Auftrag fortsetzen. Nicht neu anfangen, nicht bei CATEGORY aufhören, nicht nach Zwischenständen stoppen.
+4. Verbindliche Freigabe: Benutze den im Originalrepository vorhandenen MINI-1DATEI-Ausgabeweg (mini_single_release.py mit --deliver). Die eine technische Abschlussprüfung muss Original-Identität, alle Originalthemen, die erforderlichen drei Worker-Schritte, die unveränderte Reihenfolge und GENAU EINE vollständige JSON-Reimportdatei bestätigen. Bei fehlendem PASS KEIN Ergebnis als fertige Datei ausgeben, sondern Fehler im zuständigen Worker reparieren.
+5. ZWINGENDES ENDERGEBNIS HIER IM CHAT: GENAU EINE .json-Datei für den EINMALIGEN WordPress-MINI-Reimport, einschließlich aller offenen Entscheidungen für alle ursprünglichen Themen. KEINE ZIP, KEINE CATEGORY-/EDITORIAL-/TITLE-Einzeldateien, KEIN zweiter Import, KEIN zweites Dateiartefakt. Den Prüfnachweis mit Original-Batch-ID, Itemzahl, Worker-Abdeckung, Freigabestatus und SHA256 als kurzen Text im Chat nennen.
+6. Keine falschen Erfolgsmeldungen: Eine erfolgreiche lokale Freigabe ist nicht automatisch ein bestätigter WordPress-Live-Import. Nicht behaupten, WordPress hätte importiert, bevor dies nachgewiesen wurde.
+
+STOPPVERBOT: Arbeite ohne freiwilligen Zwischenstopp bis zur vollständigen Freigabe und der EINEN herunterladbaren JSON-Datei. Nur ein wirklich nachgewiesener, nicht behebbarer technischer Blocker darf einen Abbruch begründen; dann kein falsches PASS.
