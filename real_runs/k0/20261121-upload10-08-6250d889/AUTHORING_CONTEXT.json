@@ -1,0 +1,180 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Was kostet die Pferdedeckenwäsche bei Equiva?",
+    "target_keyword": "Wie viel kostet es, Pferdedecken bei Equiva zu Waschen?",
+    "category": "recht-finanzen-organisation",
+    "article_type": "FAQ",
+    "plan_slot": "6250d88951b01a27db6810656af2d56b6888001a682308c63a7939c22024a8e1"
+  },
+  "content_profile": {
+    "search_intent": "Kosten und Bedingungen der Pferdedeckenwäsche beim ausdrücklich genannten Anbieter Equiva; keine allgemeine Preisübersicht."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.equiva.com/stores/braunschweig",
+          "source_title": "EQUIVA – Store Braunschweig"
+        },
+        {
+          "source_url": "https://www.equiva.com/ratgeber/pferdeausruestung/pferdedecken",
+          "source_title": "EQUIVA – Pferdedecken-Ratgeber"
+        }
+      ],
+      "claims": [
+        "EQUIVA führt Deckenwäsche als Service im Standort Braunschweig auf.",
+        "EQUIVA empfiehlt bei Pferdedecken vielfach eine professionelle Wäsche und Imprägnierung von Regendecken.",
+        "EQUIVA empfiehlt Pferdedecken vor der saisonalen Lagerung gründlich zu reinigen.",
+        "Vor der Deckenwäsche sollen Haare und loser Schmutz entfernt werden.",
+        "EQUIVA empfiehlt Pferdedecken nicht heiß zu waschen und an der Luft zu trocknen."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie viel kostet es, Pferdedecken bei Equiva zu Waschen?",
+      "topic": "Was kostet die Pferdedeckenwäsche bei Equiva?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "recht-finanzen-organisation",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was kostet die Pferdedeckenwäsche bei Equiva?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.equiva.com/stores/braunschweig",
+        "source_title": "EQUIVA – Store Braunschweig",
+        "evidence_text": "Deckenwäsche",
+        "evidence_text_sha256": "4fd43db2c774f9596cc4736cecd936bc0eb50950646e14db8cd079d284215525",
+        "statement": "EQUIVA führt Deckenwäsche als Service im Standort Braunschweig auf.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.equiva.com/ratgeber/pferdeausruestung/pferdedecken",
+        "source_title": "EQUIVA – Pferdedecken-Ratgeber",
+        "evidence_text": "Es empfiehlt sich in den meisten Fällen, Pferdedecken in einer professionellen Reinigung reinigen und vor allem Outdoordecken und Regendecken imprägnieren zu lassen.",
+        "evidence_text_sha256": "a6e61a4f3d7bda5fb24eb140a7d689effd5bff5e1ff04e12807a4cce01ecc46d",
+        "statement": "EQUIVA empfiehlt bei Pferdedecken vielfach eine professionelle Wäsche und Imprägnierung von Regendecken.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.equiva.com/ratgeber/pferdeausruestung/pferdedecken",
+        "source_title": "EQUIVA – Pferdedecken-Ratgeber",
+        "evidence_text": "Nach einer Saison sollte die Pferdedecke gründlich gereinigt werden, bevor man sie für das nächste Jahr einlagert.",
+        "evidence_text_sha256": "6214713da65b51777a3c3e6343cb7771b4185e86c0880f87c0b7fd45aec24dbe",
+        "statement": "EQUIVA empfiehlt Pferdedecken vor der saisonalen Lagerung gründlich zu reinigen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.equiva.com/ratgeber/pferdeausruestung/pferdedecken",
+        "source_title": "EQUIVA – Pferdedecken-Ratgeber",
+        "evidence_text": "Vor der Wäsche gründlich ausbürsten und die Haare entfernen",
+        "evidence_text_sha256": "04496305c54fd7b9b86fd586d1dfef99b96f299eb4c74a66ed65b5b492da5243",
+        "statement": "Vor der Deckenwäsche sollen Haare und loser Schmutz entfernt werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.equiva.com/ratgeber/pferdeausruestung/pferdedecken",
+        "source_title": "EQUIVA – Pferdedecken-Ratgeber",
+        "evidence_text": "Pferdedecken nicht heiß waschen und an der Luft trocknen lassen",
+        "evidence_text_sha256": "8370b848df967261eb42199d4fdb0b2133d55c42c91cd47abc5e3df17d21882f",
+        "statement": "EQUIVA empfiehlt Pferdedecken nicht heiß zu waschen und an der Luft zu trocknen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/recht-finanzen-organisation/",
+        "anchor": "Recht, Finanzen & Organisation",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "anchor": "Pflege Regendecken",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/recht-finanzen-organisation/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "recht-finanzen-organisation",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "EQUIVA",
+      "Deckenwäsche",
+      "Pferdedecken",
+      "Waschservice",
+      "Servicekosten",
+      "Reinigung",
+      "Regendecken"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Der Anbieter nennt keine allgemeine verbindliche Preistabelle; die konkreten Kosten hängen vom gewählten Store und Reinigungsumfang ab."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
