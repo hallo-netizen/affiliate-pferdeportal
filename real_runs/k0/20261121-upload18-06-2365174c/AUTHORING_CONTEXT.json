@@ -16,7 +16,7 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://de.wikipedia.org/wiki/Tierärztegebührenordnung",
+          "source_url": "https://de.wikipedia.org/wiki/Tier%C3%A4rztegeb%C3%BChrenordnung",
           "source_title": "Wikipedia – Tierärztegebührenordnung"
         }
       ],
@@ -48,7 +48,7 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://de.wikipedia.org/wiki/Tierärztegebührenordnung",
+        "source_url": "https://de.wikipedia.org/wiki/Tier%C3%A4rztegeb%C3%BChrenordnung",
         "source_title": "Wikipedia – Tierärztegebührenordnung",
         "evidence_text": "Die Tierärztegebührenordnung (GOT) bestimmt die Vergütungen der Tierärzte für ihre Leistungen",
         "evidence_text_sha256": "66d842bf617cadfa5683849801094c62e47d3c1926bf1dc9fc54d810f3d50b16",
@@ -59,7 +59,7 @@
         ]
       },
       "F2": {
-        "source_url": "https://de.wikipedia.org/wiki/Tierärztegebührenordnung",
+        "source_url": "https://de.wikipedia.org/wiki/Tier%C3%A4rztegeb%C3%BChrenordnung",
         "source_title": "Wikipedia – Tierärztegebührenordnung",
         "evidence_text": "Die GOT setzt den Gebührenrahmen vom mindestens einfachen bis maximal dreifachen Satz fest, der nur unter ganz besonderen Umständen verlassen werden darf.",
         "evidence_text_sha256": "9ed7b5b33f6ff175764785666169cd4653a1290a35c425a981c7ac0421b3fd81",
@@ -70,7 +70,7 @@
         ]
       },
       "F3": {
-        "source_url": "https://de.wikipedia.org/wiki/Tierärztegebührenordnung",
+        "source_url": "https://de.wikipedia.org/wiki/Tier%C3%A4rztegeb%C3%BChrenordnung",
         "source_title": "Wikipedia – Tierärztegebührenordnung",
         "evidence_text": "Weiterhin stehen dem Tierarzt Entschädigungen",
         "evidence_text_sha256": "36b93d04930e1ec119dc8c691b4cf5f6374dcfda81449af82a4637dc291fdb54",
@@ -81,7 +81,7 @@
         ]
       },
       "F4": {
-        "source_url": "https://de.wikipedia.org/wiki/Tierärztegebührenordnung",
+        "source_url": "https://de.wikipedia.org/wiki/Tier%C3%A4rztegeb%C3%BChrenordnung",
         "source_title": "Wikipedia – Tierärztegebührenordnung",
         "evidence_text": "Die GOT gliedert sich in die Grundleistungen",
         "evidence_text_sha256": "de6d01cdc3a89cdf2589d88c04a662f62a96ae44e18a7366c3490ea67d647eb5",
@@ -92,7 +92,7 @@
         ]
       },
       "F5": {
-        "source_url": "https://de.wikipedia.org/wiki/Tierärztegebührenordnung",
+        "source_url": "https://de.wikipedia.org/wiki/Tier%C3%A4rztegeb%C3%BChrenordnung",
         "source_title": "Wikipedia – Tierärztegebührenordnung",
         "evidence_text": "Sie wurde zuletzt mit Wirkung vom 22. November 2022 neu gefasst.",
         "evidence_text_sha256": "2fb690da4da45c56e7ca364e7be89ce20dacb2eab1bb5171993d2805db464b7d",
