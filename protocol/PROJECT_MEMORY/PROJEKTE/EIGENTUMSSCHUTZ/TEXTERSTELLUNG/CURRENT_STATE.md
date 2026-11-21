@@ -1,0 +1,316 @@
+# 20.11.2026 – AKTUELL HAB 0.4.31.10: ALTEN LOCAL FINALIZE WIEDER AUFNEHMEN (NICHT 0.4.31.9 INSTALLIEREN)
+
+**Live-Befund Benutzer 13:41:** installierte 0.4.31.9 zeigt originalen Child `PAUSED_ERROR`, Warteschlange `RUNNING/BLOCKED_PENDING_PARK`, Phase `FINALIZE:SANDBOX_STORE_READY`, alter Speicherfehler `PSTE_SANDBOX_RECORD_STORE_LEGACY_OPTION_MISSING`, 9 Rohkeywords, 0 fertige. `Status aktualisieren` repariert diesen gespeicherten Halt nicht.
+
+**Neue einzige getestete Reparatur:** v0.4.31.10, `Texterstellung_HAB_UND_BEWAHR_0.4.31.10_BESTEHENDEN_ABSCHLUSS_FORTSETZEN.zip`, SHA256 `a63bd75a9a4d2a127299477bf2c78742a156da63932bab4574f050c233a27b99`, im Hab-Plugin-Büro `/hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEKANDIDATEN/`. Vollständige Fehlerkette, echter Originalcode, alle Testquellen und Diff: `HAB_043110_SICHERE_WIEDERAUFNAHME_ALTEN_FINALIZE_20261120.md` und persönliche Library `/hab-und-bewahr/TEXTERSTELLUNG/PRUEFUNG_ALTABSCHLUSS_20261120/`.
+
+**Technischer Nachweis nach Extraktion finaler ZIP:** 134/134 lokale Tests: 9/9 ORIGINAL Research-Job, 11/11 Original-Queue, **5/5 beide originalen Klassen gemeinsam** genau mit 9 erhaltenen Rohkeywords, weitere 48/48 Keyword-Providerwege, 11+8+11 PAA, 17+14 MINI/K0-Import. 78/78 PHP-Lint, 87/87 ZIP-CRC, 83/87 unverändert. Original-K0 und unabhängiger K-Multi-Code nicht geändert, keine echten API-/WP-Schreibkosten. **KEIN** live nachgewiesener vollständiger Abschluss, kein fertiger KMulti-Artikel.
+
+**Genau nächster WP-Klick:** Backup, 0.4.31.10 **über 0.4.31.9 installieren**, `Texterstellung → Recherche → Vorhandenen Abschluss ohne neue Kosten fortsetzen` **einmal**, dann aktuelle Diagnose herunterladen. Keinen neuen bezahlten Keywordlauf, nicht deinstallieren. Falls Knopf fehlt oder Status abweicht, Diagnose statt neuen Auftrag.
+
+---
+# 20.11.2026 13:41 MEZ – NEUER LIVE-NACHWEIS: HAB 0.4.31.9 IST INSTALLIERT, ALTER AUFTRAG BLEIBT HÄNGEN
+
+**Bildbeleg direkt vom Benutzer:** WordPress `Texterstellung 0.4.31.9 KISS`, Anzeige `RECHERCHE LÄUFT · BREADTH:0:FINALIZE:SANDBOX_STORE_READY`, letzter abgeschlossener Schritt ca. 11:00 +0100, `FINALIZE Schritt 3 von 3`, 9 Rohkeywords, 0 fertige Keywordkandidaten, 0 von 1 fertig, Item `BLOCKED_PENDING_PARK`, Originalfehler `PSTE_SANDBOX_RECORD_STORE_LEGACY_OPTION_MISSING`, Einzelforschung `PAUSED_ERROR`. Diese Anzeige ist **kein erfolgreicher Fortsetzungsnachweis**.
+
+**Beleg aus tatsächlich erneut geöffnetem finalem ZIP 0.4.31.9:**
+- `texterstellung.php`, Bereich `view==='recherche'`: Statuszeile `RECHERCHE LÄUFT` wird schon bei Queue `RUNNING` oder vorhandener Jobquelle dargestellt; **sie beweist keinen arbeitenden Worker**. Link `Status einmal aktualisieren` ist ausschließlich derselbe GET-/Anzeigelink und ruft keine eigene Wiederaufnahme-Aktion auf.
+- `class-pste-research-job.php`, `REPLAY_SAFE_LOCAL_FINALIZE_CODES` enthält genau vier Fehlercodes, **nicht** `PSTE_SANDBOX_RECORD_STORE_LEGACY_OPTION_MISSING`. `current()` stellt einen `PAUSED_ERROR`-Job nur bei autorisierten Wiederaufnahmecodes auf RUNNING. Der alte Speicherfehler bleibt im signierten Job gespeichert, auch nach erfolgreichem Pluginupdate.
+- `class-pste-research-driver.php::executeOneStep()` behandelt eine Queue mit `BLOCKED_PENDING_PARK` **vor** einem erneuten `PSTE_Research_Job::advance` und archiviert den blockierten Auftrag; das ist keine Wiederaufnahme. Auch `maybeKickExisting()` ist kein Beweis einer Wiederaufnahme.
+- Daher ist die in 0.4.31.9 korrigierte *Initialisierung bei einem noch laufenden Finalize* **nicht automatisch** auf den alten bereits signiert blockierten Finalize-Zustand wirksam. Das war in der bisherigen Release-Zusicherung nicht geprüft.
+- Die vorherige Diagnose `texterstellung-diagnose-20261120-110147.json` dokumentiert dieselbe ältere Pause auf 0.4.31.8, inklusive `phase=FINALIZE`, `finalize_stage=SANDBOX_STORE_READY`, `status=PAUSED_ERROR`, `BLOCKED_PENDING_PARK`; der neue Screenshot zeigt, dass genau dieser Zustand nach 0.4.31.9 noch vorhanden ist.
+
+**Nächster technischer Reparaturauftrag:** Die **bereits vorhandene**, gesicherte Research-Job-/Queue-Wiederaufnahme für genau diesen lokalen, vollständig abgeschlossenen Anbieterabschnitt erweitern, so dass der vorhandene signierte Auftrag unter Erhalt aller Daten, `job_uuid`, `category_id`, Child-/Queue-Besitzeridentität und der 9 Rohkeywords nach Behebung der lokalen Speicheroption einmalig autorisiert fortgesetzt wird, **ohne** neue DataForSEO-POSTs und ohne neue Redaktion/Kategorieentscheidung. Positiv/negativ simulieren: alter realer `PAUSED_ERROR` plus Queue `BLOCKED_PENDING_PARK`, fehlender/gefüllter Altspeicher, Fremdjob, manipulierte Signatur, leerer Job, andere Pausencodes, doppelte Wiederaufnahme, Fehler bei initialem Archivpark. **Bis zur bestandenen Simulation kein neues ZIP und kein behaupteter E2E-PASS.** Eventuell bereits archivierte/fehlende Daten niemals löschen.
+
+**Keine sichere Benutzeraktion zum automatischen Freigeben im aktuellen 0.4.31.9:** Nicht `Recherche abbrechen`, keine neue bezahlte Kategorie starten. `Status einmal aktualisieren` zeigt nur den Zustand, es ist kein Reparaturknopf.
+
+---
+
+# 20.11.2026 – AKTUELLSTE HAB-TEXTERSTELLUNG 0.4.31.9 / HOBBY-GESAMTFEHLERLISTE
+
+**WICHTIG:** Installierter Betreiberstand laut 12:00-Screenshot 0.4.31.8; neuer *nur lokal getesteter* Kandidat v0.4.31.9. Zip `Texterstellung_HAB_UND_BEWAHR_0.4.31.9_HOBBY_FEHLERLISTE_ORIGINAL_GEPRUEFT.zip` im Hab-Büro `/hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEKANDIDATEN`; SHA256 `c6565150120d2f493d811e2e2185f92cce3a6d46d41f8199bce4d9b4086e222e`; maschinenlesbare QA und originaler Quell-Diff in `/hab-und-bewahr/TEXTERSTELLUNG/PRUEFUNG_VOLLWORKFLOW_20261120/`.
+
+**PRIMÄRBEWEIS:** `HAB_04319_HOBBY_GESAMTFEHLERLISTE_PFERDEATELIER_ORIGINALTEST_20261120.md`; gesamter kritischer Originalcodevergleich Horse 0.4.34, Hobby 0.4.24.13/15 und Hab 0.4.31.8/19. Echter Live-Hab-Fehler `PSTE_SANDBOX_RECORD_STORE_LEGACY_OPTION_MISSING` nach 9 rohen Keywords. Derselbe Originalaufruf scheitert **auch mit Pferdeatelier 0.4.34** auf *jungfräulicher* Testdatenbank. In Hobby15 existiert sicherer Leerinitialisierungs-Fix – übernommen in Hab19, **15/15 Original-PHP-Sandbox-Tests inklusive originaler fünffacher Migration PASS**.
+
+**ZUSÄTZLICH 0.4.31.9:** Fehlerliste Hobby04/05/13/15 gegen alten Hab-Quellstand geprüft und vorhandene spätere Korrekturen ohne neuen Workflow übernommen: Null-Rohdaten-Migration, exakte Wiederaufnahme gesperrten Kontextjobs, Original-Audit 15 echte Dateien statt Phantomdateien (**92/92 PASS**), vorhandener PAA-Task-ID-Recovery aus Hab18 unverändert, gespeicherter MINI-Download und -Wiederaufnahme nach Horse-Originalmethoden, beide Originalschutzstellen für manuelles Veröffentlichen. Die vier originalen Keywordproviderwege und Hab-C23-Seedfix unverändert.
+
+**Gesamttest am tatsächlich FINAL neu entpackten ZIP:** 11 Original-PHP-Testprogramme PASS (228 belegte Checks), 78/78 PHP-Lint, 87/87 ZIP-CRC, 80/87 Dateien bitidentisch zur 0.4.31.8. Die originalen Import- und DataForSEO-Dateien, der gesamte ursprüngliche K0 und die neue unabhängige KMulti-Arbeitskopie unangetastet. Horse: zwei tatsächlich früher K0-geprüfte Artikel erfolgreich in zwei simulierte WP-Entwürfe geladen; Hobby15: komplette Original-MINI/Fünffelder/K0-Paket/**MOCK**-WP-Entwurfs-Kette PASS; echte Hab-Provider-/Artikel-Freigabe fehlt.
+
+**Ehrliche Lücke:** Der Versuch eines einzige durchgehenden Hab-Recherche→MINI→K0→WP-Mock-Laufs scheiterte noch am Original-Portalrelevanz-Gate ohne aktuellen WP-Beleg (`EXTERNAL_REVIEW_REQUIRED`), danach am nicht vollständigen WP-Mock (`get_posts`). **KEINE tatsächliche positive komplette Hab-End-to-End-Simulation und kein Live-Erfolg nachgewiesen.** Es fehlt auch immer noch der unabhängige KMulti-Writer/LT68; die nachträgliche Hab-Familien-/Synonymrelevanz kann 'Paketbox' zurückweisen. Keinen künstlichen PASS aus isolierten Teiltests ableiten.
+
+**Nächster Schritt:** Bestehende Hab-Pluginversion 0.4.31.8 nur NACH Backup durch 0.4.31.9 *ersetzen, nicht deinstallieren*. **Alte Recherche fortsetzen**, keinen neuen kostenpflichtigen DataForSEO-Auftrag. Erst mit tatsächlichem positive FINALIZE und neuer Diagnose zum MINI-Export. Original-K0 nicht anfassen. Keine weiteren Pluginversionen wegen Einzelprüfungen.
+
+---
+
+# 20.11.2026 – HAB 0.4.31.8 PAA-TIMEOUT-RETTUNG, REPRODUZIERBAR ABGENOMMEN
+
+**Gültiges nächstes Hab-Release:** `Texterstellung_HAB_UND_BEWAHR_0.4.31.8_ORIGINAL_PAA_RETTUNG.zip`, SHA256 `386f303f97c117ad639f2ceeaafe26c86045705b33d810fe4667c615c50ec24a`, 522842 Bytes, abgelegt `/hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEKANDIDATEN/`. Tests + vollständiger Originaldiff im Hab-Büro `/hab-und-bewahr/TEXTERSTELLUNG/PRUEFUNG_PAA_20261120/`. GitHub-Bericht `HAB_04318_ORIGINAL_PAA_TIMEOUT_RETTUNG_GESAMTPRUEFUNG_20261120.md`.
+
+**Diagnose vom 20.11.2026 09:41:48 UTC:** Live 0.4.31.7, ursprünglicher Auftrag `COMPLETE/BLOCKED_PARKED`, Grund `PSTE_PAA_TASK_TIMEOUT`, drei vorherige Original-Rechercheabschnitte erledigt, 5 Rohkeywords, 0 Artikelkandidaten, bezahlte PAA-Task-ID archiviert. Original Pferdeatelier 0.4.34 UND Hab 0.4.31.7 nutzten vor dem >1800-s-Timeout eine nicht autoritative `tasks_ready`-Liste. **Hobbydepot 0.4.24.15 hat bereits einen getesteten direkten GET nach vorhandener ID und eine sichere Archiv-Reaktivierung.** Diese PAA-Funktionen 1:1 in das alte Hab-Plugin übernommen, keine neue Recherchelogik, keine neue kostenpflichtige Anfrage.
+
+**Nachweis direkt am endgültigen ZIP (erneut entpackt und PHP-Originalfunktionen ausgeführt):** 48/48 Vierwege-/Kategorie-Tests; 11/11 Task-GET-Statusfälle; 8/8 Queue/Archiv-Identitätsfälle; 11/11 signierte Original-PAA-Job→FINALIZE-Fälle; 17/17 Original-Hab-MINI-Tests; 14/14 K0-Fünffelder/PSERC-Mock-Import; **gesamt 109/109**; 78/78 PHP-Lint; 87/87 ZIP-CRC. **82/87 Dateien bitidentisch**, die einzigen fünf Änderungen sind die drei Original-PAA-Klassen, Hab-Hauptdatei (Action/Anzeige/Version) und README. Original-K0, K-Multi, Keywordfilter und vier Originalprovider-Wege unverändert.
+
+**Parallel nochmals simuliert:** Hobby 0.4.24.13 bricht beim MINI-TITLE-Finalisierungsschritt ab, 0.4.24.15 ist bis K0-Export + simulierten WP-Import PASS. Original Pferdeatelier: 2 wirklich früher durch K0 verifizierte Artikel bestehen WordPress-Import in isoliertem **WP-Mock**, inklusive Idempotenz/Negativfällen. Neuer **K-Multi-Writer** bleibt trotz 15/15 Übergabetests unvollständig und GESPERRT.
+
+**Präzise Nutzeraktion:** Bei gesicherter WordPress-Sicherung bestehendes Hab Plugin 0.4.31.7 durch 0.4.31.8 als **Ersetzung** installieren. `Texterstellung → Recherche → Letzte Kategorien-Recherche → Gesperrten Auftrag prüfen und falls fertig fortsetzen` **einmalig** anklicken. Dann aktualisierte Diagnose exportieren. **Keinen** neuen bezahlten Kategorienlauf starten. Bei PENDING/PROVIDER_ERROR altes Archiv unverändert und keine Erfolgsbehauptung. Der Button kann nur sichtbar sein, wenn Archiv/Originalwarteschlange tatsächlich konsistent sind; sonst Diagnose, keine Raterei.
+
+**Grenze:** Live DataForSEO-/WP-Endabnahme noch offen. Hab-Originalfamilienfilter kann Synonyme (z.B. Paketbox) weiter einschränken. Keine neue echte K-Multi-Artikeldatei oder LT68-Freigabe. Keine K0-Veränderung. **Keine falsche Aussage, gesamte Texterstellung sei fertig.**
+
+---
+
+# 20.11.2026 – HAB KEYWORDRECHERCHE AUS PFERDEATELIER 1:1 VERWENDET, GEBÜNDELTER SEED-FIX
+
+**Aktuelle Entwicklungskopie (NICHT live installiert):** Hab-Texterstellung **0.4.31.7**, Original-Release-Kandidat im Büro `/hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEKANDIDATEN/Texterstellung_HAB_UND_BEWAHR_0.4.31.7_BREITE_ORIGINALRECHERCHE.zip`. SHA256 `974cc101c52f274a1abf0a4777ada114e08610a5f08b10f386c3da1ff0760459`. Vollständiger Prüfbericht `HAB_04317_ORIGINAL_BREITE_RECHERCHE_4_STATIONEN_QA_20261120.md`.
+
+**Pferdeatelier-Konzept exakt übernommen:** Vier bereits vorhandene Forschungswege in PSTE 2.6: Keyword Suggestions, Related Keywords, Keyword Ideas und People Also Ask. **Nicht erneut nachgebaut.** NUR im Hab-Startseed liest die originale Queue statt ganzer C23-Redaktionssatzüberschrift die bestehende R3-Themenseite und wo sicher belegbar das darin enthaltene Produkt-Stammwort (Abholbox). Originale Category-/K0-/KMulti-Identität und der Original-Fünffelder-Auftrag unverändert. 'Hab' wird nicht mehr an Abholbox angehängt.
+
+**Tests:** 48/48 echte originale PHP-Methoden/Recherche-Routen, 17/17 Original-Hab-MINI, 14/14 Original-K0-Übergabe/Entwurfsimport-Simulation, 78/78 PHP-Lints, 87/87 ZIP CRC; 83/87 Archivdateien bytegleich zu 0.4.31.6. **Keine** DataForSEO-Abfrage / WP-Schreiboperation / neue K0-Ausführung.
+
+**Noch offene bewiesene Grenze:** Der nachgelagerte originale Familienfilter verwendet weiter C23-Satzwörter und kann 'Paketbox' oder 'Abholbox Schloss' abweisen/auf REVIEW setzen. **Diese Korrektur behebt zuerst die BREITE RECHERCHE, nicht die gesamte Textproduktion**; keine End-to-End-Freigabe behaupten. Nicht während aktivem paid Job installieren; alten Job mit alter Seedversion beenden/Diagnose sichern, dann erst Ersatz-Plugin und gezielten echten Lauf prüfen. Original K0 und selbständiger KMulti unangetastet.
+
+---
+
+# 20.11.2026 – NEUERSTER BEFUNDBLOCK: HAB-SUCHPHRASE UND 3-PORTALE-ORIGINALVERGLEICH
+
+**Zentraler vollständiger technischer Bericht:** `QA_RECHERCHE_PHRASE_ORIGINAL_PFERD_HOBBY_KMULTI_20261120.md` im selben Ordner. Echter ZIP-/Original-PHP-Vergleich Pferdeatelier 0.4.34, Hab 0.4.31.6, Hobbydepot 0.4.24.13 und neuestes Hobby 0.4.24.15; isolierte positive und negative Tests samt K0- bzw. K-Multi-Grenzen dokumentiert.
+
+**Hab-Root-Cause 1:** Bestehende Original-PSTE-Queue verwendet `topic_family_name` als DataForSEO-Ausgangs-Seed. Hab belegt dieses Feld mit einer kompletten C23-Satzüberschrift statt kurzem Suchthema; nach Kontext kann zusätzlicher Portalname angehängt werden. Lange Phrase nicht sinnvoll für Keyword-Discovery.
+
+**Hab-Root-Cause 2:** Original `PSTE_Family_Identity_V2` erzwingt im Beispielsatz `passend`, `zugangsrecht`, `schutz`, `ausstatt`; natürliche Begriffe `abholbox schloss` usw. werden trotz passenden Themas abgewiesen. Die einfache Substitution durch vorhandenes R3 `Abholbox-Diebstahlschutz` ist **kein** vollständiger Fix und verursacht ggf. Familien-/Artikeltyp-Kollisionen und Kategorienverlust. Nur bestehende PSTE-Zuordnungsstelle isoliert und gebündelt korrigieren, nach regressionstauglichem Test.
+
+**Hobby-Nachbarchat:** V0.4.24.13 reproduziert Fehler bei MINI-Abschluss/gespeichertem Download. Vorhandene geprüfte V0.4.24.15 repariert die Originalmethoden, vollständige PHP-MINI→K0-Paket→SIMULIERTEN WP-Import-Tests PASS. Kein bestätigter Live-Installationsnachweis oder neu geschriebener echter Hobby-K0-Artikel. Hobby-Fachprotokoll `protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/TEXTERSTELLUNG/QA_ORIGINAL_WORKFLOW_VERGLEICH_HAB_PFERD_20261120.md`.
+
+**K-Multi:** Fünffelder-Übergabe 15/15 Python-Tests; noch kein vollständig ausführbarer unabhängiger K-Multi-Writer/LanguageTool/WordPress-Draft. Original K0 vollständig unangetastet. K-Multi-Detail `hallo-netizen/k0-multiportal:offline_writer_dev/QA_PFERD_HOBBY_HAB_KMULTI_DREI_PORTALE_20261120.md`.
+
+**Kosten-/Betriebsschutz:** Neuester Benutzerscreenshot 09:27 lokal `RUNNING` 1 ausstehende Hab-Recherche, 0 Themen gespeichert. *Keinen neuen kostenpflichtigen Lauf starten und nicht in laufendem Job Plugin austauschen.* Erst fertigen Lauf und die neue Ist-Diagnose ansehen, dann **eine** gebündelte Hab-Reparatur mit vollständigen Positiv-/Negativfällen und Freigabe. **Kein Fix installiert, kein neuer Pluginrelease.**
+
+---
+
+# 19.11.2026 – HAB: OFFIZIELLE EXTERNE FUSSNOTENLINKS TECHNISCH OFFLINE ABGESICHERT
+
+**Fachliche Regeln:** Fünf Hab-Regelbücher fachlich freigegeben und unverändert. Externe amtliche Links **niemals Pflicht**; nur bei echter Relevanz am Textende, zwingend `nofollow`, ausschließlich nachgewiesene staatliche Stellen.
+
+**Neue technische Vorbereitung in K-Multi:** Die zentrale staatliche Quellenliste (zunächst vier Originalstellen), optionale Ausgabe und **9/9 real ausgeführte negative/positive Tests** sind auf K-Multi `k0-offline-rule-bindings-20261027`, Commit `bbfa196d2e15a9627b9b211d841b711464933174` hinterlegt; vollständige Übergabe unter `offline_rules/portal_bindings/hab_und_bewahr/CURRENT_STATE.md`. Testnachweise und exakt ausgeführte Programmdateien anhand Git-Dateiprüfsummen geprüft. Andere K-Multi- und Plugin-Dateien im Commit nicht verändert.
+
+**Nicht produktiv:** Kein neuer vollständiger Writer gefunden; die beiden K-Multi-Zweige sind weiterhin nur Quarantäne/Offline-Kopien. Hab 0.4.31.6 ist unverändert, Journal-Vorbereitung im Plugin vorhanden, aber ohne aktivierte Laufzeit-/Magazinbindung. Kein K-Multi-LanguageTool-/WordPress-Entwurfs-Endtest.
+
+**Konkreter nächster Schritt:** In der eigenständigen neuen K-Multi-Writer-Runtime die vorhandene Hab-Fünffeldbrücke und die optionale Fußnoten-Ausgabe in **einer** Ausgabestelle anbinden, dann echte Qualität/WordPress-Entwurf testen. Kein Umbau der bestehenden Produktion oder neues Plugin ohne gesicherte Ursache.
+
+---
+
+# AKTUELLE TECHNISCHE HAB-ANBINDUNG 19.11.2026
+
+**Neu nachgewiesen:** Hab-Original-Plugin 0.4.31.6 erneut lokal 31/31 PHP-Tests PASS. Dessen unverändertes Fünffelder-Batch auf die eigenständigen fünf Hab-Regelbücher per **isolierter K-Multi-Bridge** abgebildet; acht lokale Bridge-Testfälle PASS, u. a. Duplikat-/Fremdportal-/Hash-Sperren. Kein Plugin und kein bestehender Produktionsablauf verändert.
+
+**Zentraler K-Multi-Stand:** `hallo-netizen/k0-multiportal`, branch `k0-offline-rule-bindings-20261027`, commit `32e4f47a5671a2cc137ae44042d3d848a9ee9394`, Datei `offline_rules/portal_bindings/hab_und_bewahr/CURRENT_STATE.md`. Dort Code, unverändertes originales Test-Batch, vollständige Historien-Testkategorien, 5 Fachregeln, QA abgelegt.
+
+**Wichtige technische Grenze:** Das aktuelle Hab-Plugin kann nur Beratung/FAQ/Pflege/Vergleich/Anleitung ausgeben. Dadurch sind 4 der 5 neuen Hab-Fachbücher per fester, vorher entschiedener Typabbildung erreichbar; `Bericht & Praxisfall` NICHT erreichbar. Keine stille Ersatzzuordnung. Historische Kategorien sind kein Live-Nachweis; Writer, LanguageTool, WordPress-Entwurf fehlen nachweislich weiterhin in der getrennten K-Multi-Ablage.
+
+**Nächster Schritt:** Echten neuen K-Multi-Writereingang beschaffen/prüfen und *nur* dort an die bestehende K-Multi-Bridge anschließen. Die fehlende Bericht-Auswahl zusammen mit anderen notwendigen Änderungen in einer späteren gebündelten, geprüften Pluginversion vorsehen; kein Schnellschuss-Plugin.
+
+---
+
+# 19.11.2026 – FACHAUSRICHTUNGEN UND ZWEI KISS-REGELN FREIGEGEBEN
+
+Alle fünf autonomen Hab-Regelbücher enthalten ab jetzt die konkret vom Nutzer genehmigte Ausrichtung (FAQ, Ratgeber/Wissen, Vergleich, Anleitung/Checkliste, Bericht/Praxisfall) und zwei verbindliche Hab-Grundregeln: fachliche Sicherheit ohne unbelegte Garantien oder riskante Tipps; freiwillige staatliche Informationslinks nur bei echtem Zusatznutzen am Artikelende und **zwingend mit nofollow**, niemals als Pflicht.
+
+**Bestandsschutz geprüft:** Alle fünf vollständigen Original-Regelteilbäume sind unverändert; 750–900 Wörter, Überschriften, Absätze, Tabellen, Aufzählungen, Rechtschreibung/Grammatik, Quellen, interne Verlinkung bleiben. Die alten zwölf Hab-Entwurfsmodule sind im `02_HAB_QUERSCHNITT_SICHERHEIT.json` archiviert, aber nicht parallel verbindlich.
+
+**Noch offen:** Aktualisierung des separaten K-Multi-Kopiebestands und End-to-End-Anbindung des neuen Writers. Hier kein WordPress-Plugin, kein Originalworkflow verändert. Die fachliche Freigabe bedeutet NICHT technische Produktionsfreigabe.
+
+---
+# 19.11.2026 – Hab-Typregeln: K0-Gleichstand bestätigt, 15 gezielte Fachlücken dokumentiert
+
+**Unverändert:** fünf vollständige autarke Hab-Arbeitskopien auf Basis der aktuell geprüften K0-Regeln, 750–900 Wörter, Original-K0/K-Multi/WordPress-Installation und alle fünf Textregeldateien. Die sieben maßgeblichen Original-K0-Quelldateien wurden gegen die gespeicherte Kopiervorlage erneut abgeglichen: **0 inhaltliche Abweichungen**.
+
+**Neuer dokumentierter Prüfbefund:** In 15 bewusst als negative Grenzfälle ausgewählten Themenbeispielen fehlen in einzelnen eigenständigen Hab-Typdateien die bereits früher entwickelten passenden Fachregelmodule. Dies ist kein repräsentativer Artikel-Fehleranteil und kein Writer-Test. Beispiel: Gasgefahr in FAQ, Kameradatenschutz in einem Bericht. **Vorschlag, noch NICHT genehmigt:** Alle 12 bereits erarbeiteten Fachmodule bedingt in jedem der fünf autarken Bücher vorsehen, bei konkretem Thema anwenden; keine pauschalen Warnkästen und keine neuen Prüfstationen. Zusatzfrage: Allgemeine Schutzobjekt-/Maßnahmenregel nicht zu künstlicher Kauf- oder Handlungsempfehlung im reinen Wissen bzw. Bericht werden lassen. Alle Textregeländerungen benötigen ausdrückliche Absprache.
+
+**Exakter QA-Nachweis:** `BEITRAGSARTEN_HAB_V1/AUTARKE_REGELBUECHER_K0_STAND_20261119/99_KOPIE_QUALITAETSABNAHME_20261119.json` (5/5 Kopien PASS, 15 gezielte Negativfälle mit Lücke). **NO-GO** für produktive K-Multi-/WP-Anbindung, bis neue Typen, Hab-Zusätze, aktuelle K-Multi-Engine und Magazin-WP-Term wirklich abgenommen sind.
+
+---
+
+# VERBINDLICHER BESCHLUSS – Hab-Beitragsarten vollständig autark (19.11.2026)
+
+Fünf eigene Typregelpakete, jeweils getrennt abrufbar; bewährte Pferdeatelier-Regeln prüfen, kopieren und passend anpassen; relevante Hab-Spezialregeln pro Paket integrieren. Die fünf bestehenden JSON-Dateien sind **noch nicht autark**, da sie auf getrennte Entwicklungsregeln verweisen. Nächste Arbeit: Originalregel-Mapping → fünf vollständige autarke Typdateien → echte K0-/K-Multi-Regression und WP-Entwurfstest. **Keine Plugin-/K0-/K-Multi-Änderung durch den Beschluss.** Protokoll: `BEITRAGSARTEN_HAB_V1/94_BESCHLUSS_AUTARKE_BEITRAGSARTEN_20261119.md`.
+
+---
+
+# FACHLICHER NEUSTAND 19.11.2026 – Fünf Hab-Beitragsarten gesondert abgelegt, NOCH KEINE K0-/K-MULTI-FREIGABE
+
+Alle fünf eigenständigen Regeldateien und der originale Pferdeatelier-Abgleich sind in `BEITRAGSARTEN_HAB_V1/93_CURRENT_STATE.md` registriert. Gemeinsame Regeln und Hab-Querschnittsregeln separat, jeweils nur bei Bedarf; unveränderte Original-K0-Regeln, keine Pluginänderung. Bericht neu und nicht technisch READY; Anleitung/Checkliste und Ratgeber/Wissen noch nicht pauschal 1:1 mit alten technischen Typen kompatibel. Abnahme und Testplan in diesem Ordner.
+
+---
+
+# AKTUELL: K-MULTI-ANSCHLUSSPRÜFUNG 19.11.2026 – 31/31 ORIGINAL-HAB-PHP-TESTS PASS
+
+**Ohne Zwischenstopp durchgeführt:** echte unveränderte Hab-0.4.31.6-Quellen in PHP isoliert ausgeführt (17 Mini-/Metadaten-/Magazin-Negativtests + 14 Paket-/Rückgabe-/Entwurfsimport-Vorprüfungen = **31/31 bestanden**). `WP_K0_UPLOAD_PACKAGE_V1` und `WP_K0_SOURCE_RECEIPT_V1` aus originalem `TXE_Workshop::k0Package`, `PSERC_System4_Import::normalizePayload` akzeptiert gültige fiktive Rückgabe, Fehlbindung wird blockiert. **Kein K-Multi-Originalwriter, kein WP-Draft-Write getestet.** 285 echte **historische** Hab-Slugs gegen 1160 originale Pferdeatelier-Slugs plus Hobby-Slug abgeglichen: 0 Dubletten/Kollisionen; **nur als nicht aktivierte historische Exact-Registry-Vorlage** in `KMULTI_ANBINDUNG_20261119/HAB_285_HISTORISCHE_WP_SLUGS_REGISTER_NUR_TEST.json`. Original-K0 `ARTIKELTYPEN/Anleitung.json` existiert READY; K-Multi Offlinezweig derzeit 4 Typen und Hab NO_VALUES_BLOCKED. Bestehender K0-Originalempfänger unterstützt schon das Hab-Gesamtpaket inklusive ID-Formel; keine neue Hab-ZIP nötig. Sieben spezielle Hab-Fachvorgaben **nur als Konzept** abgelegt. Vollprotokoll `HAB_04316_KMULTI_31_ORIGINAL_PHP_TESTS_UND_PORTALIDENTITAETEN_20261119.md`; Script/QA-Berichte in Library `/hab-und-bewahr/TEXTERSTELLUNG/KMULTI_ANBINDUNG_20261119/`. Weiterer Gate: echte vollständige K-Multi-Writer-Runtime mit allen Originalregeln/LT68 offline ausführbar machen und E2E testen; aktuelles WP-Term-Readback inkl. Magazin, danach erst Hab anbinden und einen WP-Entwurf importieren. **K0, K-Multi, WP, Hab 0.4.31.6 bleiben unverändert.**
+
+---
+
+# AKTUELL 19.11.2026 – Hab Texte: Kategorie-/Magazin-/K-Multi-Gesamtanalyse abgeschlossen
+
+**Ohne Nutzer-Zwischenstopp bearbeitet:** 1.323 C23-Kategorien zu 265 Themenseiten einzeln in sechs vollständigen GitHub-Dateien unter `ARTIKELARTEN_BESTAND_20261119/` erfasst, 285 historische WordPress-IDs exakt C22 zugeordnet, 1.038 spätere Kategorien ohne erfundene aktuelle WordPress-IDs. Vollständiger Rücklese-Zähltest: 1.323/285/1.038 PASS. 471 C23-Vorschläge + 138 C25 + 185 C26 Versicherungskategorien streng getrennt als **nicht live verifiziert** katalogisiert. 14 echte WordPress-Magazin-SEITEN vom 14.11. nachgewiesen, aber **keine konkrete WordPress-Beitragskategorie**; in Texterstellung 0.4.31.6 ist `journal_categories.categories=[]` und Magazin-Routing nicht konfiguriert. Magazin-MINI muss daher bis zum Kategorienachweis gesperrt bleiben.
+
+**Artikelarten-Minimalvorschlag:** Fünf bestehende Schreibarten Beratung, FAQ, Vergleich, Pflege, Anleitung; keine neue Art; keine Artikelart fest pro Kategorie; endgültige `route/category_slug/article_type`-Entscheidung im MINI einmalig je Text. Hab-spezifische Sonderregeln sind konzipiert, **nicht** im produktiven K0 eingebaut.
+
+**K-Multi echter Abgleich:** `k0-offline-rule-bindings-20261027` hat 177 Offline-Tests, Hab-Profil `NO_VALUES_BLOCKED`, keine produktive Writer-Freigabe; es kennt vier Originalarten, Hab zusätzlich Anleitung. Bestehende Hab-0.4.31.6-Fünffeld-Exportgrenze unverändert. Nächste Folge: vorhandenen WP-Magazin-Term und C23-Readback prüfen → je Welt MINI-Test → originalen K-Multi-Writer mit Hab-Profil/5. Art offline abnehmen → einen geprüften Artikel als WP-Entwurf importieren. Kein K0-, MINI-, WordPress- oder Plugin-Update, keine kostenpflichtige Recherche.
+
+**Dauerablagen:** GitHub `HAB_TEXTERSTELLUNG_KATEGORIEN_KMULTI_GESAMTSTAND_20261119.md` + 11 Einzelakten unter `ARTIKELARTEN_BESTAND_20261119/`; Library `/hab-und-bewahr/TEXTERSTELLUNG/ARTIKELARTEN_KMULTI_20261119/HAB_TEXTERSTELLUNG_KATEGORIEN_KMULTI_GESAMTSTAND_20261119.md`. Hab-Plugin `0.4.31.6` bleibt maßgeblich unverändert.
+
+---
+
+# PASS – 19.11.2026: Hab Texterstellung 0.4.31.6 gesichert
+
+Nutzer meldet **PASS** und verlangt Protokoll/Büroablage. **Verifiziert:** unveränderte ZIP 0.4.31.6 im Hab-Büro `/hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEN/04316/`, SHA256 `29769acb82fc6aef9bee68de87248ed70d2af51fe454d1218af887f5b501a7eb`; QA/Diff/Tests liegen dort. Zusätzlich `PASS_UND_ABLAGE_20261119.md` erfolgreich archiviert. GitHub-Protokoll `HAB_04316_PASS_ABLAGE_BESTAETIGT_20261119.md`. **Keine neue Version/Änderung.** Nutzer-PASS ist protokolliert; echte Serverantwortzeit bleibt nicht separat gemessen. Maßgeblicher letzter Hab-Stand 0.4.31.6. Original-K0, MINI, Universal, Pferdeatelier, Robotik, Wassertechnik unverändert.
+
+---
+
+# AKTUELL 19.11.2026 – Hab Texterstellung 0.4.31.6 Performance-Release erstellt
+
+Nutzer verlangt eigenständige Prüfung ohne Chrome-Screenshots. **Installationsfähige 0.4.31.6 ZIP fertig lokal geprüft und in Library `/hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEN/04316/` mit vollständigem Quellbestand, Patch, Tests und QA erfolgreich gespeichert**. Autorisierte reine Performance-Korrektur in bisheriger Originalarchitektur: Recherche-Familien + Run-Status nur einmal lesen, vorhandene Registry bei `selectedCategory` wiederverwenden statt je Kategorie neu bauen. **83/87 Dateien identisch** mit installierter 0.4.31.5, **0 neue/gelöschte**; PHP 78/78, JSON 8/8, ZIP 87/87 PASS. **7/7 Backendansichten vollständiges HTML unverändert**, **16/16 Statusmuster** und **16/16 direkte Original-vs.-Korrektur-Familien-/Kategorienhashes gleich**. 5 lokale Cold-PHP-Läufe 285/93: Median **622,25 ms → 57,69 ms**; eine redundante SQL-Leseabfrage entfällt. Keine Fachentscheidung, MINI/K0, Pferdeatelier, Universal-Blanko oder Website geändert. **Server-Minuten-Timeout noch nicht remote gemessen/als gelöst bewiesen.** Kein extra Diagnose-Plugin oder Screenshot verlangt. SHA ZIP `29769acb82fc6aef9bee68de87248ed70d2af51fe454d1218af887f5b501a7eb`. Vollprotokoll `HAB_04316_PERFORMANCE_ORIGINAL_AUSGABE_IDENTISCH_20261119.md`. Nächster Nutzerweg: nur Hab 0.4.31.5 durch 0.4.31.6 via WP Plugin-Upload ersetzen, dann Recherche öffnen.
+
+---
+
+# PERFORMANCE-STAND 19.11.2026 – Hab Texterstellung 0.4.31.5 UNVERÄNDERT
+
+Nachbarprojekt Pferdeatelier nur als Inspiration (dort 2.218 option_value-Reads in 17 Seiten), **nichts übernommen**. Original-Hab-Recherche-GET mit echten 0.4.31.5 PHP-Klassen und 285/93 **synthetischem** WordPress-Datenbestand lokal simuliert. **7/7 Admin-Bereiche PASS**, Recherche 49.608 HTML-Bytes/285 offene Kategorien. **Konkret bewiesene Doppelarbeit:** `familyAnchors` zweimal + `categoryProgress`-SQL-SELECT zweimal, neben 1.140 get_term_meta + 114 get_post_meta Aufrufen für dynamische Kategoriekarte (WordPress-API-Aufrufe, nicht SQL-Zahl). Beim GET 74 Optionleseaufrufe. Fünf lokale PHP-Vergleiche: Original Median **587,5 ms**, isolierte NUR-TEST-Fassung Median **298,6 ms**, SQL-Abfragen 4→3, **HTML bytegenau identisch**, 16/16 Statusmusterparität; bisherige 16 Migration-/19 AJAX-/28 Button-Prüfungen erneut PASS. **Kein neuer Installationsdownload**, kein Funktionsabbau, keinerlei Live-Pluginänderung. Reale Hab-Server-/SQL-/Cache-Zeiten noch nicht gemessen; lokaler Gewinn allein beweist NICHT Grund minutenlangen Hängers. Kompletter Verlauf `HAB_04315_RECHERCHE_BACKEND_PERFORMANCE_LOKALTEST_20261119.md`, alle QA-Dateien tatsächlich in Library `/hab-und-bewahr/TEXTERSTELLUNG/PRUEFUNG_PERFORMANCE_20261119/` archiviert. Original-K0, Pferdeatelier und jungfräuliche Universal-Kopien unangetastet.
+
+---
+
+# NEUER LIVE-STAND 19.11.2026 09:16 – Hab 0.4.31.5 meldet EINRICHTUNG ERFOLGREICH
+
+Echter WordPress-Screenshot: Einrichtung erfolgreich abgeschlossen. Kategorien können jetzt angezeigt werden. Ausgeliefertes JavaScript meldet dies nur bei job.status=COMPLETE plus result.ready=true, dann automatisches Neuladen. Der noch sichtbare Button Einrichtung fortsetzen ist ein Übergangstext aus finally, nicht Beleg für einen gescheiterten Job. **Keine weitere Pluginversion!** Nächster Nutzerweg: Recherche-Seite vollständig neu laden und **erst dann** die offene Kategorie-/Themenzählung prüfen. Noch nicht belegt: richtige Kategorieübersicht, DataForSEO-Echtlauf, MINI/K0-E2E. Live-Screenshot-Status in HAB_04315_LIVE_MIGRATION_COMPLETE_SCREENSHOT_20261119.md und Library PLUGIN_FREIGABEN/04315/HAB_TEXTERSTELLUNG_LIVE_ERFOLG_20261119_0916.md protokolliert. Universal, Robotik, Wassertechnik und Original-K0 unverändert.
+
+---
+
+# AKTUELLSTER STAND 19.11.2026 – Hab Texterstellung 0.4.31.5
+
+**Fehler nach erfolgreichem Klick in 0.4.31.4:** `PSTE_EDITORIAL_RULESET_RAW_KEYWORD_INVARIANT_FAILED`, PSTE-Safe-Migration bei gespeichertem fortsetzbarem Job angehalten. **Konkrete Originalcodeursache reproduziert für leeren `topic_pool`:** Null-Themenphase überspringt Raw-Baseline-Scan, gespeicherte Chain leer, alte Abschlussprüfung vergleicht fälschlich mit zulässigem Seed. Minimale Korrektur in **vorhandener** Originalmethode `editorialMigrationVerifyComplete`, nur für `expected=0`, `cursor=0`, `savedChain=''` den ursprünglichen Seed verwenden. Alle strengen Prüfungen für nichtleere Daten und abweichende Tabellen unverändert. **0.4.31.5-ZIP** bereit, SHA256 `7e80f7f08f5ca628d9cf803d6d805b0848437230ae4438d131ca280976db742a`, 516790 Bytes; 84/87 Quelldateien unverändert, PHP 78/78, JSON 8/8, ZIP 87/87. Reproduktion alt PASS; 16 gezielte Fehler-/Fortsetzungsprüfungen, 19 WordPress-AJAX- und 28 Browser-Klick-Prüfungen PASS. **Bestehenden PAUSED_ERROR-Job in Test ohne Reset über CORE_VERIFY_FINAL, FINAL_TOPIC_VERIFY_BATCH und FINAL_VERIFY fortgesetzt.** Vollständige ZIP samt Diff/Build/QA/Testskripten **im Hab-Plugin-Büro `PLUGIN_FREIGABEN/04315` tatsächlich gespeichert**. Keine Live-Datenbank/Produktiv-K0-Überprüfung; reale PSTE-Themenzahl vom Nutzer bislang unbekannt. 0.4.31.4 durch 0.4.31.5 **ersetzen, nicht vorher löschen**, dann denselben Vorgang fortsetzen. Bei weiterem Fehler erst echte read-only Phasen-/Zählungsevidenz statt Blindfix. **Pferdeatelier, Universal-Blanko, Robotik/Wasser, MINI und K0 unverändert.** Volles Protokoll: `HAB_04315_LEERER_THEMENBESTAND_ORIGINAL_INVARIANT_FORTSETZUNG_20261119.md`.
+
+---
+# NEUER AKTUELLER STAND 19.11.2026 – Hab Texterstellung 0.4.31.4 Klickkorrektur
+
+**0.4.31.3 ist nachweislich installiert, aber der Einrichtungsknopf reagierte nicht** (Screenshot 08:36, `NOT_STARTED`). Echte Ursache reproduziert: nicht abgeschlossenes Inline-JavaScript-IIFE aus `TXE_Workshop::migrationSetupHtml`, SyntaxError `Unexpected end of input` → kein Klick-Handler/kein AJAX. **0.4.31.4** mit einziger fehlender `})();`-Zeile, Versionskopf und README gebaut. **85/87 Dateien bytegleich** zur 0.4.31.3, keine neuen Klassen/Architektur/Recherche-/MINI-/K0-Änderungen. Tatsächlich ausgegebenes PHP/JS getestet; **28 Browser-Klick-Tests + 19 echte Original-PSTE-Backend-AJAX-Prüfungen**, PHP 78/78, JSON 8/8, ZIP CRC 87/87 bestanden. ZIP SHA256 `42f9d4e11c0d5f0080428a1693bdb4e01ff81fd16005819bde76f5b6212d7e89`. **Plugin/Quellen/Testberichte mit Upload-Status succeeded in Library `/hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEN/04314/` gesichert**. Vollbericht `HAB_04314_BUTTON_AJAX_JS_ROOT_CAUSE_20261119.md`. Nächster Nutzerweg: 0.4.31.4 **über** 0.4.31.3 installieren, dann Einrichtungsbutton; reale Vollmigration in WordPress noch nicht als bestanden nachgewiesen. Universal Blanko und Pferdeatelier unangetastet. **0.4.31.3 nicht mehr empfehlen.**
+
+---
+
+# AKTUELLER INSTALLATIONSSTAND 18.11.2026 – Hab Texterstellung 0.4.31.3
+
+**0.4.31.3 – neue Hab-Ersatzversion lokal gebaut, getestet und im Büro archiviert.** Screenshot bestätigte installierte 0.4.31.2, aber ursprüngliche PSTE-Migration ohne Startfunktion (Aktivierungsstopp `PLUGIN_ACTIVATED_MANUAL_START_REQUIRED`). Nun in bestehendem `TXE_Workshop` einziger Einrichtungsbutton mit altem PSTE-Safe-Migration-Job (start/advance und Wiederaufnahme), einmalige bestehende PSTE-Baseline aus gebundenen Hab-Kategorien, bestehender Original-Rechercheschalter und korrekter Versionstext. **Nur Hauptdatei plus README geändert, 85/87 Dateien byteidentisch** zu 0.4.31.2; kein Architekturumbau, keine neuen Klassen, keine MINI/K0/Pferdeatelier/Universal-Änderung. ZIP `Texterstellung_HAB_UND_BEWAHR_0.4.31.3_VOLLSTAENDIGE_EINRICHTUNG.zip` SHA256 `a86a9dafbaf7e6604dd1217c428098ec54387d2763165bff47ce41a606a8bafd`, 516355 Bytes; **78 PHP / 8 JSON / ZIP CRC PASS**, migrationsbezogene Original-PHP-Simulation, 285/93 synthetische Kategorienprobe und MINI-Regression bestanden. **WordPress-Live-Migration und DataForSEO-Echtdurchlauf nicht durchgeführt**. ZIP, Build, Testskripte, Protokoll und QA **gespeichert im Hab-Büro unter `/hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEN/04313/`**. Vollständiges Protokoll: `HAB_04313_ORIGINALMIGRATION_FREIGABE_20261118.md`. Nächster Nutzerklick: bestehendes Plugin mit 0.4.31.3 ersetzen → Texterstellung → Recherche → `Einrichtung vollständig durchführen`. Keine extra Versionskontrolle, kein neues Plugin bis zu echten Fehlerbelegen.
+
+---
+
+# Live-Screenshot 18.11.2026 18:15 – tatsächlicher Installationsstatus noch prüfen
+
+**Wichtig:** Screenshot `Texterstellung 0.4.31 KISS` ist KEIN Beleg für falsche Pluginversion, da dieser Text im Hab-0.4.31.2-PHP weiterhin fest steht. Pluginheader der echten ZIP meldet 0.4.31.2. Screenshot zeigt `PLUGIN_ACTIVATED_MANUAL_START_REQUIRED` (nach Originalaktivierung gewollte Recherche-Sperre), `originale PSTE-Migration ... nicht abgeschlossen`, Auftragsregal 0. Das Status-Aktualisieren ist nur Seiten-Neuladen; bis PSTE READY ist kein Live-Kategorien-Readback und keine Recherche-Freigabe gezeigt. **Nächster Nutzerklick: Plugins → Installierte Plugins → Texterstellung – Hab & Bewahr, Version 0.4.31.2 ablesen.** Erst danach Originaldiagnose der Migrationsphase, keine bezahlte Recherche. Keine neue ZIP, keine Programmänderung, keine K0-Änderung. Vollständiger Nachweis in `HAB_04312_SCREENSHOT_WP_AKTIVIERUNG_STATUS_20261118.md` und in beiden Library-Büros gespeichert.
+
+---
+
+# 18.11.2026 – NEUER AKTUELLER STAND: Hab-Plugin 0.4.31.2 mit Kategorienanbindung
+
+**Autorisierte minimale KATEGORIENZUORDNUNG umgesetzt.** Original 0.4.31 und Hab 0.4.31.1 bleiben unangetastet; neue Hab-Version 0.4.31.2. Zwei alte Quelldateien an schon vorhandene APKW-WP-R3-Bindung angepasst, kein Neubau, keine neuen Klassen/Kategorien, keine MINI-/K0-Änderung. 83/87 Dateien bytegleich, 78 PHP und 8 JSON geprüft, ZIP CRC PASS. WP-Mocks: zwei bekannte Hab-Kategorien, 5 Suchabsichten auf denselben Term, 285/93 synthetischer Mengentest, inaktive/verwaiste Kategorie als Negativfälle, 7/7 Original-MINI-Prüfungen. **ZIP ist lokal WordPress-installationsfähig; echter WordPress-/DataForSEO-/K0-Lauf steht noch aus.** Voller Nachweis: HAB_04312_KATEGORIENANBINDUNG_PRUEFSTAND_20261118.md; ZIP, Build und Prüfbericht tatsächlich in Hab-Library /hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEKANDIDATEN/04312 gespeichert. Pferdeatelier und Universal-Blanko unverändert.
+
+---
+
+# AKTUELLSTER PRÜFSTAND 18.11.2026 – Originalsemantik 30/30, kein Neubau
+
+**Ohne Programmänderung** originale PSTE-Recherche-Semantik mit 10 Fällen auf je **Original 0.4.31, Hab 0.4.31.1, Blanko 0.4.31.1** getestet: **30/30 PASS**. Konfigurationsabkürzung `article_type = Hab-Themen-Kategoriename` wurde ausgeschlossen, weil z.B. `Fensterschloss` bei Artikeltyp `Beratung` erkannt, bei `Türen & Fenster` als Artikeltyp aber zurückgewiesen wird. Fragestellungen und Kosten ebenso an echte Artikelart gebunden. Keine neuen Funktionen, keine Fixes, keine K0/WordPress/DataForSEO-Änderung, bestehende drei ZIP-SHA und CRC unverändert. **Keine Produktionsfreigabe** für die minimalen Hab-/Blanko-Kopien, da die Original-Recherche eine fachlich andere Kategorie-Typ-Zuordnung voraussetzt. Prüfbericht/Testergebnisse/Test-PHP **in beiden Library-Büros unter `PRUEFUNG_SEMANTIK_OHNE_UMBAU_20261118` gespeichert**. Volles Protokoll `ORIGINAL_RECHERCHE_SEMANTIK_30_TESTS_OHNE_UMBAU_20261118.md`. Nur vollständig geprüfte installierbare ZIPs als Chat-Downloads.
+
+---
+
+# Stand 18.11.2026 – Abschlussprüfung OHNE Umbau/Neubau
+
+**Nur originalgetreue Bestandsprüfung, alle drei Plugin-ZIPs unverändert.** Original/Hab/Blanko ZIP-CRC, je 78 PHP/8 JSON und 7/7 unveränderte MINI-Funktionstests PASS. Hab/Blanko: Pferde-Magazin-Automatik korrekt deaktiviert, allgemeine Notfall-Sperre aktiv, die leere originale PSTE-Recherche-Karte korrekt blockiert. Vorhandener Hab-Readback und Magazin-Seiten geprüft; Seiten sind keine Magazin-`category`-Terme. 11 PHP-Dateien enthalten noch Pferde-Worttreffer (überwiegend Altvertrag/Kommentare/inaktive Logik; vereinzelte alte Wort-Sondermuster bleiben), daher keine Null-Treffer-Aussage. **Reines Auskommentieren ist eine gute Blankokopie, aber keine voll funktionsfähige Hab-Artikelproduktion**, weil Original-Recherche eine verbindliche nichtleere Artikeltyp-/R3-Kategoriekarte benötigt. Keine Fantasietypen, keine Programmänderungen, keine neue ZIP, keine Installationsfreigabe. Vollbeleg: `ABSCHLUSSPRUEFUNG_REINE_KOPIE_OHNE_UMBAU_20261118.md`; vollständige Prüfdateien in **beiden** Library-Büros unter `ABSCHLUSSPRUEFUNG_OHNE_UMBAU` tatsächlich abgelegt.
+
+---
+
+# Aktuellster Originalcode-Nachweis 18.11.2026 – KEIN neues Plugin / KEIN Download
+
+**Weiterarbeit ohne Zwischenstopp durchgeführt.** Die erhaltenen minimalen 0.4.31.1 Hab-/Universal-Kopien und das 0.4.31 Pferdeatelier-Original sind unverändert und erneut CRC+SHA-geprüft. **6/6 unabhängige Original-PHP-Tests** beweisen: Unter echter Hab-R3-Seite führt pauschal derselbe PSTE-Kategorieartikeltyp zu Kategorieverlust (Original quarantänisiert ein Fachthema). Die Hab-Daten liefern keine feste Typenvariante, MINI darf später die K0-Schreibart separat entscheiden. Zudem `PSTE_Journal_Article_Type` in den Kopien ohne pferdespezifische Magazin-Kategoriedefinition (0 statt vormals 9). Ein funktionsfertiges Hab-Plugin lässt sich somit NICHT durch ausschließlich Auskommentieren produzieren; Portaldaten erfinden oder neue Architektur bauen ist verboten. Kein Pluginfreigabestatus vortäuschen. Vollständiges aktuelles Protokoll `MINIMAL_0431_ORIGINAL_RECHERCHE_GRENZE_20261118.md`, nachweislich in **beiden Library-Büros** unter `PRUEFUNG_ORIGINAL_RECHERCHE_20261118` abgelegt. Nur fertig freigegebene Installations-ZIPs als Downloads. Keine Original-/Live-/K0-Änderung.
+
+---
+
+# KORRIGIERTER AKTUELLER STAND – 18.11.2026: MINI bereits richtig, NICHT umbauen
+
+**Neu am Originalcode mit Hab- und Blanko-Kopie 21/21 lokale Tests bestanden:** Der bestehende MINI-CATEGORY-Worker wählt bereits genau einmal Kategorie und **separat** K0-Artikelart (Beratung, FAQ, Pflege, Vergleich, Anleitung). Die bisherige pauschale Behauptung, eine feste Hab-K0-Schreibartikelart je WP-Kategorie sei zum MINI-Betrieb notwendig, ist korrigiert. **Nichts an MINI/K0 ändern.** Der verbleibende Engpass ist ausschließlich der FRÜHERE alte PSTE-Kategorien-Snapshot für SEO/Recherche: Er verlangt eine befüllte `PSTE_Portal_Category_Map` mit ihrem eigenen `article_type`-Feld; Pferdekarte wurde bei Minimal-Klon bewusst entfernt. Eine begrenzte Hab-WP-Bestandsprüfung vom 14.11. belegt echte Kategorien/R3, aber keine fixierten PSTE-Typen. **Keine neuen Kategorien, keine neue Architektur, keine Fixes, kein installierbares Release.** Vollständiger Bericht und Testskript in beiden Büroablagen: `PRUEFUNG_MINI_ORIGINAL_20261118`; GitHub-Protokoll `MINI_ORIGINAL_UNABHAENGIGE_ARTIKELARTEN_VERIFIZIERT_20261118.md`. ZIPs 0.4.31/0.4.31.1 unverändert, CRC+Hashes PASS.
+
+---
+
+# Stand 18.11.2026: KEIN neuer Kategorienbestand erforderlich
+
+**Nutzer bestätigt: Keine weiteren Kategorien hinzugekommen.** Bestehenden Hab-Kategorienbestand ohne neue Abfragen nutzen. Erneut anhand des Originalcodes und der gespeicherten Daten überprüft: 285 historisch eindeutig gebundene WP-Kategorien und 93 R3-Seiten; keine nachgewiesene feste `article_type` pro Sachkategorie. C25/C26-Versicherungskategorien sind gespeicherte Konzepte, nicht ohne WordPress-Readback als importiert behaupten. **Das ist ein Unterschied der bestehenden Abläufe** (Original-PSTE erzwingt Typ pro Kategorie vor Recherche; Hab sieht spätere einmalige MINI-Artikelart vor), kein fehlender Kategorieexport. Keine Neuentwicklung / Fixes erlaubt, daher keine erfundene Zuordnung und keine Freigabe. Bestehende Original-/Hab-/Blanko-ZIPs 0.4.31/0.4.31.1 SHA und CRC erneut unverändert bestätigt. Volles Prüfprotokoll: `KATEGORIENBESTAND_UNVERAENDERT_WIRKLICHE_GRENZE_20261118.md`. Bericht in beiden Library-Büros gespeichert.
+
+---
+
+# Fortsetzung 18.11.2026: unveränderte Original-Karte erfolgreich getestet
+
+**Keine Code-/Plugin-Änderung.** 0.4.31 ORIGINAL sowie Hab-/Blanko-Minimal-ZIPs 0.4.31.1 unverändert. Historischer Hab-Readback vom 13.10.: 285 Kategorien unter 93 R3-Seiten, aber 0 Artikelart-Zuordnungen. Original-PSTE-Map mit synthetischem Hab-Kategorien-Testfall: **5/5 positive Original-PHP-Tests (Beratung/FAQ/Pflege/Vergleich/Anleitung) und 1/1 Negativprobe ohne Typ PASS**. Ergebnis: bestehendes Map-Format KANN Hab-Kategorien aufnehmen, **aber es existiert in den geprüften Quellen noch keine autoritative reale Kategorie->feste Artikelart-Zuordnung**; die erdachte Testart darf nicht produktiv übernommen werden. Aktueller WP-Livebestand/K0-Registrierung nicht nachgewiesen. Daher **kein Installationsrelease**. Vollständiger Beleg: `MINIMAL_0431_ORIGINAL_MAP_HAB_GEPRUEFT_20261118.md`, Originaltests und Berichte dauerhaft in beiden Library-Büros unter `PRUEFUNG_ORIGINAL_MAP_20261118`. Nutzerregel: keine Neuentwicklung, keine Fixes, nur minimaler Original-Klon.
+
+---
+
+# Neuester verbindlicher Stand – Minimal-Klone aus Original 0.4.31 (18.11.2026)
+
+**Kein 0.5.x-Universal-Neubau.** Aus der ORIGINAL-0.4.31 wurden ausschließlich die Portalbezüge für Hab & Bewahr und eine leere Kopie deaktiviert/entfernt. Beide Quellpakete mit identischem altem Workflow gebaut, keine neue Klasse/Funktion/Architektur; jeweils 78 PHP/8 JSON geprüft, 68 Quelldateien unverändert, 20 Änderungen/Löschung der Original-Signatur, 87 ZIP-Einträge. Beide Entwicklungs-ZIPs samt vollständigen Berichten und Bauskript **tatsächlich in den beiden Library-Büros unter MINIMAL_ORIGINAL_0431 archiviert**. Original-Kategorie-Map lehnt den leeren Bestand korrekt ab; Hab-Kategorien und K0-Registrierung noch nicht funktionsfertig, **nicht installieren oder downloaden**. Vollständiges Protokoll: `MINIMAL_0431_QUELLKOPIEN_PRUEFSTAND_20261118.md`. Die zuvor dokumentierten 0.5.x-Kandidaten sind als Quelle/Entwicklungsrichtung abgelöst.
+
+---
+
+# VERBINDLICHE KURSKORREKTUR 18.11.2026: KEINE NEUENTWICKLUNG
+
+Original-Pferdeatelier-Texterstellung als technische Vorlage **unverändert in der Funktionsweise** übernehmen. Nur zwei separate Kopien (jungfräulich/universal und Hab & Bewahr); ausschließlich Pferde-Portalbezüge und Portaldaten entfernen/auskommentieren. **Keine neue Architektur, keine Fixes, keine neuen Adapter/Klassen/Prüfstationen.** Die zuvor entwickelten 0.5.x-Universal-Erweiterungen sind als Entwicklungsweg ausdrücklich verworfen, nicht als nächstes Release verwenden. Nur fertige installierbare Plugins zum Download; Protokolle ausschließlich im Büro. Einzelheiten in `KURSKORREKTUR_NUR_MINIMALE_PORTALKOPIEN_20261118.md`.
+
+---
+
+# Aktueller Stand 18.11.2026 – Gemeinsame Texterstellung 0.5.2-dev.1 (intern)
+
+**Hab 62/62 und Universal 51/51 lokale Funktionstests bestanden**, je 82/82 PHP und 9/9 JSON; zwei ZIPs aus identischer Codebasis. Reale WordPress-Kategorien liefern jetzt portalfreie Recherche-Ausgangspunkte ohne voreilige Artikelart- oder SEO-Entscheidung. Original-K0-Fünffeldprüfer: korrektes Paket angenommen, verbotene Erweiterungen abgewiesen. Historisches GitHub-K0-Register ohne Hab/Robotik/Wasser; echter K0/DataForSEO/WordPress-Lauf ausstehend. Daher KEIN Installationsdownload und Produktionssperre bleibt aktiv. Alle Artefakte im jeweiligen Library-Büro `V052` gespeichert; genaue Nachweise in `UNIVERSAL_CORE_V052_QA_STAND_20261118.md`.
+
+---
+
+# Geprüfter 0.5.1-Quellstand (fortgeschrieben 18.11.2026)
+
+**Nicht installierbares internes Entwicklungsarchiv, kein Plugin-Download.** Hab 39/39 und Universal 28/28 lokale Funktionstests, je 80/80 PHP und 9/9 JSON, deterministische ZIPs. Hab mit bestätigtem aktiven WP-Kategorie-Snapshot; Portalwechsel und alte Pferdeatelier-Auftragsdaten sicher isoliert. Beide vollständigen ZIPs, Tests und gemeinsamer Quellcode in den Library-Büros unter `V051`. Recherche- und K0-Echtfreigabe weiter OFFEN. Details: `UNIVERSAL_CORE_V051_QA_STAND_20261118.md`.
+
+---
+
+# Fortsetzung 18.11.2026 – v0.5.1-dev.1 nur im Büro
+
+**Gemeinsame Quelle weiterentwickelt und zwei intern gespeicherte ZIP-Kandidaten gebaut; noch KEIN Installationsdownload.** Hab-Kategoriebindung mit aktivem WordPress-Snapshot geprüft, ungebundene Kategorien ausgeschlossen; Pferdeatelier-Auftrags-/Diagnoseoptionen getrennt, leeres neues Universal-Regal. PHP-Syntax 80/80 und JSON 9/9 je Version, Hab 36 und Universal 25 lokale Funktionschecks bestanden. Alte Recherche-/K0-Verträge bleiben noch offen; Produktionssperre bleibt. Einzelheiten: `UNIVERSAL_CORE_V051_QA_STAND_20261118.md`. Alle Unterlagen dauerhaft in den beiden Library-Büros unter `V051`.
+
+---
+
+# Verbindliche Ausgaberegel: nur freigegebene Plugin-ZIPs im Chat
+
+Ab 18.11.2026 nur **installationsfähige, abgenommene** Plugin-ZIP-Dateien zum Download ausgeben. Alle QA-ZIPs, Entwicklungsarchive, Test-JSON und Protokolle **ausschließlich im Büro ablegen**, nicht im Chat verlinken. Kleine Arbeitsschritte bündeln, fortlaufend Quelle, Fehler, Korrektur, Tests und Freigabestatus protokollieren. Der aktuelle 0.5.0-qa.1-Stand ist NICHT installierbar; K0 und Recherche noch offen. Näheres: `AUSGABEREGEL_NUR_INSTALLIERBARE_PLUGINS_20261118.md`.
+
+---
+
+# Aktueller Entwicklungsstand 18.11.2026: Texterstellung Universal 0.5.0-QA
+
+**Zwei QA-ZIP-Kandidaten aus derselben Quelle erzeugt und im Hab-/Universal-Dateibüro dauerhaft gespeichert.** 80 PHP und 9 JSON pro Paket geprueft; Hab 28/28 und Blanko 22/22 lokale Funktionstests bestanden. Kategorien aus WP gelesen, Artikelart getrennt, Produktionen gesperrt. **Nicht installieren, keine echte WordPress/K0-Freigabe.** Einzelheiten und genaue Library-Ablagen in `UNIVERSAL_CORE_V050_QA_STAND_20261118.md`.
+
+---
+
+# Beschlossene Ergänzung: universelles Plugin
+
+**Ein Quellcode, zwei Pakete:** Hab & Bewahr konfiguriert + universelle Blanko-Version für künftig Robotik, Wassertechnik und weitere Portale. Kein mehrfacher Umbau des Originalplugins; Kategorien aus dem aktuellen Portal lesen, Artikelart getrennt entscheiden, bestehendes K0 unverändert anbinden und vor Freigabe portalecht testen. Verbindliche Einzelheiten in `ZIELVERTRAG_UNIVERSELLE_TEXTERSTELLUNG_20261118.md`. **Dies ist ein Entwicklungsauftrag, noch kein fertig gebautes Plugin.**
+
+---
+
+# Standprüfung 18.11.2026 (verbindlicher neuer QA-Status)
+
+**Die Hab-Texterstellung 0.4.24 ist NICHT für WordPress freigegeben.** Nachgewiesen: Historische Hab-Kategorien passen nicht zur alten Pferde-Kategorieerkennung (0/285), aktueller WP-Bestand und K0-Bindung ungeklärt. Drei nachweisliche Fehler in einer getrennten Quell-QA korrigiert; **kein installierbares Release**. Kompletter Nachweis: PRUEFUNG_20261118_NICHT_INSTALLIEREN.md und Hab-Dateibüro /hab-und-bewahr/TEXTERSTELLUNG/PRUEFUNG_20261118/. Keine Veränderung am Original-K0, Pferdeatelier oder Live-WordPress. PR #819 bleibt offen als Entwurf.
+
+---
+
+# Hab & Bewahr – Texterstellung: aktueller Stand
+
+**Status:** ARBEITSKOPIE ERSTELLT, NICHT INSTALLIEREN. Stand: 16.11.2026.
+
+- Source: Texterstellung 0.4.23; eigene ZIP: `/hab-und-bewahr/TEXTERSTELLUNG/ARBEITSKOPIEN/Texterstellung_HAB_UND_BEWAHR_ARBEITSKOPIE_0.4.23.zip`.
+- Identität der ZIP (SHA-256): `9081d5bf5546d3d8d2035e7d0e2b773adb4cacaa330c3f61036b96306d5bcc70`.
+- WordPress-Live-Abnahme: **NEIN**.
+- Portaleigene Fachregeln vollständig: **NEIN** (74 von 78 PHP-Dateien mit Pferde-/PSTE-Suchtreffern; Anzahl der tatsächlich fachlich zu ändernden Stellen noch nicht bewertet).
+- Alte Pferde-Kategoriekarte und Familien-Overrides: **entfernt, nicht durch Schätzwerte ersetzt**.
+- K0-Änderungen: **0**.
+- Redaktionsplan zurückgesetzt: **NEIN**, gesonderter aktueller Export steht aus.
+- Nächste Aufgabe: Portalanpassung im jeweiligen eigenen Chat, danach eigenständige Installationsfreigabe.

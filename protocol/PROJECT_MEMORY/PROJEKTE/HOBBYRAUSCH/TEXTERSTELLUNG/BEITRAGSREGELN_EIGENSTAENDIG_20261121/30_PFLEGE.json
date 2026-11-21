@@ -1,0 +1,66 @@
+{
+  "contract": "HOBBYDEPOT_EIGENSTAENDIGES_BEITRAGSREGELBUCH_V1",
+  "status": "HOBBY_EDITORIAL_DRAFT_COMPLETE_NOT_ACTIVATED",
+  "portal_id": "hobby_depot",
+  "original_wordpress_type_is_authority": true,
+  "wordpress_article_type": "Pflege",
+  "hobby_rulebook_id": "HOBBY_PFLEGE",
+  "intent": "Vorhandene Gegenstände, Sammlungen, Werkzeuge, Pflanzen oder Ausrüstung regelmäßig erhalten, reinigen, lagern, prüfen oder schonend warten.",
+  "not_this_type": "Neue Gegenstände aufbauen oder einmalige Projekte anfertigen (Anleitung), Kaufwahl (Beratung), Einzelfrage ohne Wartungsablauf (FAQ).",
+  "article_structure": [
+    "Zustand und konkretes Erhaltungsziel beschreiben.",
+    "Material-/Gerätetyp und benötigte Hilfsmittel nur wenn wichtig unterscheiden.",
+    "Schonende, wiederholbare Pflegeschritte und sinnvolle Kontrollen erläutern.",
+    "Fehler, Schäden, ungeeignete Mittel und Grenzen der eigenen Pflege.",
+    "Fazit: Wie lässt sich der gute Zustand erhalten?"
+  ],
+  "additional_type_rules": [
+    {
+      "id": "P01_BESTAND",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Es geht um die Erhaltung eines bereits vorhandenen Gegenstands oder einer laufenden Pflegeaufgabe, nicht um einen Neubau."
+    },
+    {
+      "id": "P02_MATERIAL",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Pflegemittel und Häufigkeit nach nachgewiesenem Material bzw. Herstellerhinweis differenzieren; nie dieselbe Methode für alle Materialien behaupten."
+    },
+    {
+      "id": "P03_SUBSTANZERHALT",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Wertvolle Sammlerstücke, empfindliche Materialien und Tiere/Pflanzen nicht durch pauschale Reinigungs- oder Pflegeanweisungen gefährden."
+    },
+    {
+      "id": "P04_WIEDERHOLBAR",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Handgriffe und Kontrollzeichen so erklären, dass der Leser erkennen kann, wann etwas regelmäßig zu tun oder zu unterlassen ist."
+    },
+    {
+      "id": "P05_GRENZEN",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Bei Schäden, Chemikalien oder elektrischer Ausrüstung sichere Grenzen benennen und ggf. Fachperson empfehlen."
+    }
+  ],
+  "format_guidance": {
+    "words": [
+      650,
+      950
+    ],
+    "h2": [
+      3,
+      5
+    ],
+    "conclusion": "Kurzes H2 'Fazit' mit der zentralen Erhaltungsempfehlung.",
+    "tables": "Nur wenn Materialunterschiede wirklich übersichtlich werden.",
+    "lists": "Schritte bei Bedarf in zeitlicher Reihenfolge.",
+    "links": "Nur überprüfte, relevante bestehende WordPress-Ziele.",
+    "values_are": "HOBBY_EDITORIAL_TARGETS_NOT_AUTOMATIC_RUNTIME_HARD_LIMITS",
+    "words_basis": "Sichtbarer sinnvoller Fließtext ohne Tabellen, Navigation, Quellenliste und reine Fülltexte",
+    "h2_basis": "Natürliche echte Zwischenüberschriften; kein Zwang zu Leerabschnitten"
+  },
+  "examples_from_hobby_topics": [
+    "Pinsel nach dem Malen schonend reinigen",
+    "Briefmarkensammlung trocken und materialgerecht lagern"
+  ],
+  "shared_hobby_policy_ref": "05_GEMEINSAME_REGELN.json"
+}

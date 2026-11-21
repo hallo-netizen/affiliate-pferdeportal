@@ -1,0 +1,64 @@
+{
+  "schema": "HAB_EIGENSTAENDIGE_ARTIKELART_V1",
+  "portal": "hab_und_bewahr",
+  "status": "FACHENTWURF_NICHT_AKTIV_NICHT_K0_READY",
+  "gemeinsame_regeln": "01_GEMEINSAME_TEXTREGELN.json",
+  "hab_querschnitt": "02_HAB_QUERSCHNITT_SICHERHEIT.json",
+  "aktionsregel": "Nur die im MINI einmalig beschlossene Beitragsart laden. Keine zweite Entscheidung, kein Fallback oder automatische Umbenennung. Bestehende K0-Prüfungen niemals duplizieren.",
+  "technik": "Eigenständiges Regelpaket zur späteren K-Multi-Prüfung; NICHT als bereits ausführbare Original-K0-Typdatei ausgeben.",
+  "id": "HAB_FAQ",
+  "article_type": "FAQ",
+  "datei": "10_FAQ.json",
+  "k0_ausgang": "RULE_VALUES.types.FAQ",
+  "leserziel": "Eine klar abgegrenzte Frage rasch und zuverlässig beantwortet bekommen.",
+  "nur_dann": "Eine einzelne Frage dominiert, nicht mehrere Lösungen umfassend abwägen oder eine längere Arbeit anleiten.",
+  "nicht_dann": [
+    "Produktentscheidung mit vielen Kriterien -> Ratgeber",
+    "Mindestens zwei Alternativen systematisch bewerten -> Vergleich",
+    "Tätigkeit Schritt für Schritt -> Anleitung",
+    "Aktuelles Ereignis erklären -> Bericht, sofern Zeitbezug zentral ist"
+  ],
+  "aufbau": [
+    "Frage als klare redaktionelle Überschrift; erste sichtbare Sätze enthalten die direkte Antwort",
+    "Unmittelbar nötige Bedingung/Einschränkung, Geltungsbereich und Sachgrund nennen",
+    "Nur bei Bedarf 1–3 sinnvolle Vertiefungen, Ausnahmefälle oder nächste Schritte",
+    "Bei offenem Sachverhalt Grenzen oder Abhängigkeit vom Einzelfall deutlich benennen"
+  ],
+  "k0_uebernahme": [
+    "Direct-answer-Pflicht",
+    "Primärquellen, Faktenbelege und natürliche Sprache",
+    "Fragenmetadatum primary_question",
+    "Verbot austauschbarer generischer Einstiegssätze"
+  ],
+  "kritisch_anpassen": [
+    "K0 verlangt FAQ-checklist und festes Textumfang-/Abschnittsschema: bei kurzer Faktenfrage zu viel; nur sachlich nötige Checkliste",
+    "Nicht künstlich verwandte Fragen anhängen; eine Frage = eine eindeutige Antwort",
+    "Keine Tabellenpflicht bei bloßer Ja-/Nein- oder Definitionsfrage",
+    "Antwort nicht mit Sicherheitsvorrede verdecken; notwendige Warnung unmittelbar danach"
+  ],
+  "hab_regeln": [
+    "HAB01",
+    "HAB02 nur falls Gefahr/Einbruch",
+    "HAB04 bei Recht",
+    "HAB05 bei Versicherung",
+    "HAB06 bei Kamera/Datenschutz",
+    "HAB11 bei akuter Gefahr"
+  ],
+  "beispiele": {
+    "geeignet": [
+      "Was bedeutet Widerstandsklasse RC2?",
+      "Zahlt die Hausratversicherung bei Fahrraddiebstahl außerhalb des Hauses? (nur mit Bedingungen/Stand)"
+    ],
+    "ungeeignet": [
+      "Welche Alarmanlage ist für mein Haus die beste?",
+      "Wie montiere ich einen Bewegungsmelder?"
+    ]
+  },
+  "prueffragen": [
+    "Ist die konkrete Frage bereits im ersten Absatz beantwortet?",
+    "Sind Ausnahmen wirklich relevant statt pauschal?",
+    "Ist die Behauptung für Ort/Vertrag/Stand gültig?",
+    "Sind unnötige Checklisten/Tabellen vermieden?"
+  ],
+  "integrationskonflikt": "FAQ ist in K0 vorhanden; dessen harte Mindestwörter, Absatzanzahl und Checkliste dürfen nicht still umgangen werden."
+}

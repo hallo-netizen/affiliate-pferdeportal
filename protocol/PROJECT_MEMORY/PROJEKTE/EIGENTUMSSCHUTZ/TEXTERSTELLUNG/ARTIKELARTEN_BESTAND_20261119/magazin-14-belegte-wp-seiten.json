@@ -1,0 +1,148 @@
+{
+  "schema": "HAB_EDITORIAL_PAGE_INVENTORY",
+  "source": "hab-tarifcheck-bestandspruefung-20261114-130255.json / category_tree 160 stored WordPress rows",
+  "magazine_page_count": 14,
+  "magazine_category_terms": "NICHT_AUS_DIESEM_READBACK_BELEGT",
+  "pages": [
+    {
+      "key": "editorial:hub",
+      "parent": "",
+      "wp_id": 106,
+      "name": "Magazin",
+      "slug": "magazin",
+      "wp_type": "page",
+      "required_next_binding": "EXACT_EXISTING_WP_CATEGORY_TERM",
+      "route": "MAGAZIN"
+    },
+    {
+      "key": "editorial:hub:schutzobjekte",
+      "parent": "editorial:hub",
+      "wp_id": 186,
+      "name": "Schutzobjekte",
+      "slug": "magazin-schutzobjekte",
+      "wp_type": "page",
+      "required_next_binding": "EXACT_EXISTING_WP_CATEGORY_TERM",
+      "route": "MAGAZIN"
+    },
+    {
+      "key": "editorial:hub:situationen",
+      "parent": "editorial:hub",
+      "wp_id": 187,
+      "name": "Situationen & Lebenslagen",
+      "slug": "magazin-situationen-lebenslagen",
+      "wp_type": "page",
+      "required_next_binding": "EXACT_EXISTING_WP_CATEGORY_TERM",
+      "route": "MAGAZIN"
+    },
+    {
+      "key": "editorial:hub:praxis",
+      "parent": "editorial:hub",
+      "wp_id": 185,
+      "name": "Praxis & Checklisten",
+      "slug": "magazin-praxis-checklisten",
+      "wp_type": "page",
+      "required_next_binding": "EXACT_EXISTING_WP_CATEGORY_TERM",
+      "route": "MAGAZIN"
+    },
+    {
+      "key": "editorial:hub:wissen",
+      "parent": "editorial:hub",
+      "wp_id": 188,
+      "name": "Wissen & Hintergründe",
+      "slug": "magazin-wissen-hintergrunde",
+      "wp_type": "page",
+      "required_next_binding": "EXACT_EXISTING_WP_CATEGORY_TERM",
+      "route": "MAGAZIN"
+    },
+    {
+      "key": "editorial:group:obj:1",
+      "parent": "editorial:hub:schutzobjekte",
+      "wp_id": 189,
+      "name": "Wohnen",
+      "slug": "magazin-objektgruppe-wohnen",
+      "wp_type": "page",
+      "required_next_binding": "EXACT_EXISTING_WP_CATEGORY_TERM",
+      "route": "MAGAZIN"
+    },
+    {
+      "key": "editorial:group:obj:2",
+      "parent": "editorial:hub:schutzobjekte",
+      "wp_id": 190,
+      "name": "Nebenräume",
+      "slug": "magazin-objektgruppe-nebenraume",
+      "wp_type": "page",
+      "required_next_binding": "EXACT_EXISTING_WP_CATEGORY_TERM",
+      "route": "MAGAZIN"
+    },
+    {
+      "key": "editorial:group:obj:3",
+      "parent": "editorial:hub:schutzobjekte",
+      "wp_id": 191,
+      "name": "Garten & Grundstück",
+      "slug": "magazin-objektgruppe-garten-grundstuck",
+      "wp_type": "page",
+      "required_next_binding": "EXACT_EXISTING_WP_CATEGORY_TERM",
+      "route": "MAGAZIN"
+    },
+    {
+      "key": "editorial:group:obj:4",
+      "parent": "editorial:hub:schutzobjekte",
+      "wp_id": 192,
+      "name": "Camping & Reisen",
+      "slug": "magazin-objektgruppe-camping-reisen",
+      "wp_type": "page",
+      "required_next_binding": "EXACT_EXISTING_WP_CATEGORY_TERM",
+      "route": "MAGAZIN"
+    },
+    {
+      "key": "editorial:group:obj:5",
+      "parent": "editorial:hub:schutzobjekte",
+      "wp_id": 193,
+      "name": "Boote & Liegeplätze",
+      "slug": "magazin-objektgruppe-wasser-freizeit",
+      "wp_type": "page",
+      "required_next_binding": "EXACT_EXISTING_WP_CATEGORY_TERM",
+      "route": "MAGAZIN"
+    },
+    {
+      "key": "editorial:group:obj:6",
+      "parent": "editorial:hub:schutzobjekte",
+      "wp_id": 194,
+      "name": "Fahrzeuge & Dinge",
+      "slug": "magazin-objektgruppe-fahrzeuge-dinge",
+      "wp_type": "page",
+      "required_next_binding": "EXACT_EXISTING_WP_CATEGORY_TERM",
+      "route": "MAGAZIN"
+    },
+    {
+      "key": "editorial:group:obj:7",
+      "parent": "editorial:hub:schutzobjekte",
+      "wp_id": 195,
+      "name": "Vereine & Sport",
+      "slug": "magazin-objektgruppe-vereine",
+      "wp_type": "page",
+      "required_next_binding": "EXACT_EXISTING_WP_CATEGORY_TERM",
+      "route": "MAGAZIN"
+    },
+    {
+      "key": "editorial:group:obj:8",
+      "parent": "editorial:hub:schutzobjekte",
+      "wp_id": 196,
+      "name": "Kleinbetriebe",
+      "slug": "magazin-objektgruppe-kleinbetriebe",
+      "wp_type": "page",
+      "required_next_binding": "EXACT_EXISTING_WP_CATEGORY_TERM",
+      "route": "MAGAZIN"
+    },
+    {
+      "key": "editorial:glossar",
+      "parent": "editorial:hub",
+      "wp_id": 184,
+      "name": "Glossar A–Z",
+      "slug": "magazin-glossar-a-z",
+      "wp_type": "page",
+      "required_next_binding": "EXACT_EXISTING_WP_CATEGORY_TERM",
+      "route": "MAGAZIN"
+    }
+  ]
+}

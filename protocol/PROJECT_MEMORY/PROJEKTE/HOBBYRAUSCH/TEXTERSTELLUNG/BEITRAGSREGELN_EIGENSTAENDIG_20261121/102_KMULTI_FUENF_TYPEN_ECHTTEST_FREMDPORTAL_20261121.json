@@ -1,0 +1,122 @@
+{
+  "contract": "HOBBYDEPOT_KMULTI_ORIGINAL_CODE_FIVE_TYPES_CROSS_PORTAL_TEST_V1",
+  "date": "2026-11-21",
+  "result": "PASS_CONTRACT_AND_SAFETY_NOT_WRITER_RELEASE",
+  "test_method": "Python functions verify_source() and build_worker_handoff() ACTUALLY CALLED against local files that were checked for exact Git blob equality against GitHub",
+  "git_source": {
+    "repo": "hallo-netizen/k0-multiportal",
+    "branch": "k0-offline-rule-bindings-20261027",
+    "original_program": "offline_writer_dev/portal_auto/kmulti_portal_entry.py",
+    "original_program_git_blob_exact": "be4cd4884b82b324453624a4897f4763e09a778f",
+    "original_registry": "offline_writer_dev/portal_auto/KMULTI_PORTAL_REGISTRY.json",
+    "original_registry_git_blob_exact": "811abd6063796369320ecdb8ff953a3467d31ae0",
+    "verified_local_files_match_blob_exactly": true,
+    "archived_original_wp_three_FAQ_blob": "3ff40ab0dca739283b5b642c2f32b0deb5c77418",
+    "wp_source": "offline_writer_dev/portal_auto/fixtures/original_wordpress_hobby_3.json"
+  },
+  "tests": {
+    "passed": 16,
+    "total": 16,
+    "failed": 0,
+    "actual_3_FAQ_original_metadata": {
+      "portal": "hobby_depot",
+      "host": "www.hobby-depot.de",
+      "articles": 3,
+      "routing": [
+        "HOBBY_FAQ",
+        "HOBBY_FAQ",
+        "HOBBY_FAQ"
+      ],
+      "worker_status": "WAITING_FOR_SHARED_RESEARCH_OWNER",
+      "writer_allowed": false,
+      "publish_allowed": false,
+      "k0_called": false
+    },
+    "actual_foreign_wp_file": {
+      "file_title": "texterstellung-k0-export-mit-zuordnung.json",
+      "user_library_source": true,
+      "site_host": "oliver-beil.de",
+      "article_count": 2,
+      "expected_denial": "PORTAL_FROM_FILE_NOT_UNIQUE_OR_NOT_REGISTERED",
+      "actual_result": "BLOCKED",
+      "content_not_embedded": true
+    },
+    "synthetic_five_type_regression": {
+      "reason": "No real existing WordPress order for all five types was found; therefore deliberately generated synthetic original-format records for code-route test only",
+      "pseudo_article_count": 5,
+      "original_types": [
+        "Beratung",
+        "FAQ",
+        "Pflege",
+        "Vergleich",
+        "Anleitung"
+      ],
+      "actual_original_kmulti_route": [
+        "HOBBY_RATGEBER_WISSEN",
+        "HOBBY_FAQ",
+        "HOBBY_ANLEITUNG_PFLEGE",
+        "HOBBY_VERGLEICH",
+        "HOBBY_ANLEITUNG_PFLEGE"
+      ],
+      "distinct_hobby_books_prepared": [
+        "HOBBY_RATGEBER_WISSEN",
+        "HOBBY_FAQ",
+        "HOBBY_PFLEGE",
+        "HOBBY_VERGLEICH",
+        "HOBBY_ANLEITUNG"
+      ],
+      "discrepancy_exact": [
+        "Pflege",
+        "Anleitung"
+      ],
+      "generated_synthetic_categories_are_NOT_evidence_of_WP_category_existence": true,
+      "no_type_redetermination": true,
+      "writer_allowed": false,
+      "publish_allowed": false
+    },
+    "blocked_negative_trials": [
+      "extra_envelope_field_rejected",
+      "unknown_type_with_valid_recomputed_hashes_rejected",
+      "tampered_original_title_rejected",
+      "unknown_portal_with_valid_recomputed_hash_rejected",
+      "canonical_slot_binding_cannot_be_forged",
+      "sixth_field_rejected"
+    ],
+    "local_complete_machine_report": {
+      "name": "HOBBY_REAL_SOURCE_FOREIGN_PORTAL_5_TYPES_TEST_20261121.json",
+      "sandbox_path": "/mnt/data/hobbydepot_exact_original_kmulti_test/HOBBY_REAL_SOURCE_FOREIGN_PORTAL_5_TYPES_TEST_20261121.json",
+      "file_sha256": "56ef80ff31a7c4a3ede51e7cfb7640d892abea9e1a20b617a1d97bbcec83704c"
+    }
+  },
+  "separate_hobby_editorial_contract_checks": {
+    "pass": 30,
+    "total": 30,
+    "method": "Executed 30 deterministic assertions against exact current GitHub file contents through connected GitHub readback; negative mutated copies included",
+    "repeatable_python_file": "test_hobby_contract.py",
+    "github_actions_workflow_file": ".github/workflows/hobbydepot-editorial-contract.yml",
+    "independently_confirmed_github_actions_run": false,
+    "github_script_is_a_test_only_component_not_runtime_router": true,
+    "no_write_of_original_wp_k0_kmulti": true
+  },
+  "blocking_state": {
+    "current_KMulti": "NO_VALUES_BLOCKED",
+    "formal_Hobby_rules_approved": false,
+    "independent_research_signoff": false,
+    "actual_all_121_rule_pass": false,
+    "trusted_signed_QA_release": false,
+    "final_wp_import_release": false
+  },
+  "no_changes": [
+    "K-Multi Python modules",
+    "K-Multi registry",
+    "K-Multi binding values",
+    "K0 runtime and rules",
+    "original Hobbydepot WordPress plugin",
+    "original WordPress orders"
+  ],
+  "next_technical_change_requires_separate_authorization": "Correct K-Multi two type references and connect verified Hobby books plus owner-signed research and 121-rule QA; do not create another WP plugin or a fake quality PASS.",
+  "notes": [
+    "A Library filename alone does not establish the portal. Two similarly named MINI files in Library were from Pferdeatelier, correctly excluded from Hobby tests.",
+    "An unkeyed source checksum is not a proof of the WordPress sender's identity."
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "schema": "HAB_EIGENSTAENDIGE_ARTIKELART_V1",
+  "portal": "hab_und_bewahr",
+  "status": "FACHENTWURF_NICHT_AKTIV_NICHT_K0_READY",
+  "gemeinsame_regeln": "01_GEMEINSAME_TEXTREGELN.json",
+  "hab_querschnitt": "02_HAB_QUERSCHNITT_SICHERHEIT.json",
+  "aktionsregel": "Nur die im MINI einmalig beschlossene Beitragsart laden. Keine zweite Entscheidung, kein Fallback oder automatische Umbenennung. Bestehende K0-Prüfungen niemals duplizieren.",
+  "technik": "Eigenständiges Regelpaket zur späteren K-Multi-Prüfung; NICHT als bereits ausführbare Original-K0-Typdatei ausgeben.",
+  "id": "HAB_RATGEBER",
+  "article_type": "Ratgeber & Wissen",
+  "datei": "20_RATGEBER_WISSEN.json",
+  "k0_ausgang": "RULE_VALUES.types.Beratung nur bei echter Entscheidung; reines Erklärwissen derzeit kein identischer Originaltyp",
+  "leserziel": "Ein Schutzproblem verstehen und die passende Vorsorge oder nächste Entscheidung nachvollziehbar treffen.",
+  "nur_dann": "Die Leserfrage verlangt Zusammenhang, Ursachen, Auswahlhilfe, Kosten, Schutzgrenzen oder eine Kombination davon.",
+  "nicht_dann": [
+    "Eine kurze isolierte Frage -> FAQ",
+    "Gleichartige Optionen gegeneinander bewerten -> Vergleich",
+    "Konkrete Tätigkeit ausführen -> Anleitung",
+    "Datierter Vorfall als Hauptthema -> Bericht"
+  ],
+  "aufbau": [
+    "Ausgangsfrage und konkreten Nutzen/Schutzbedarf gleich zu Beginn nennen",
+    "Gefahr/Schadensweg und betroffene Lebenssituation verständlich erklären",
+    "Mögliche Maßnahmen/Alternativen mit Eignung, Grenzen und Voraussetzungen erläutern",
+    "Kosten, Aufwand, Fehlalarme, Ausfälle, Versicherungsfragen nur soweit relevant",
+    "Eine nachvollziehbare praktische Empfehlung oder Entscheidungsgrundlage abschließen; kein Kaufzwang"
+  ],
+  "k0_uebernahme": [
+    "Beratung: decision_goal und sinnvolle Entscheidungskriterien, aber nur bei tatsächlicher Auswahlabsicht",
+    "Faktenbindung, gut verteilte relevante Links, natürliche Überschriften",
+    "Nachweisbare Kriterien statt unbegründeter pauschaler Empfehlung"
+  ],
+  "kritisch_anpassen": [
+    "Kein obligatorisches Kauf- oder Empfehlungsmodul",
+    "Kein erzwungenes Kriterien-Raster bei reinem Hintergrundwissen",
+    "Bei komplexen Gefahren Nutzbarkeit vor Gleichlänge aller Abschnitte",
+    "Mieter, Eigentümer, Ferienhaus oder kleines Geschäft nur differenzieren, wenn das die Empfehlung ändert"
+  ],
+  "hab_regeln": [
+    "HAB01",
+    "HAB02 falls Sicherheit/Eskalation",
+    "HAB03 bei gefährlicher Technik",
+    "HAB04 bei Rechtsfragen",
+    "HAB05 bei Versicherung",
+    "HAB06 bei Kameras",
+    "HAB07 bei Produktempfehlungen",
+    "HAB08",
+    "HAB10",
+    "HAB11 bei akuter Gefahr"
+  ],
+  "beispiele": {
+    "geeignet": [
+      "Ferienhaus während langer Abwesenheit gegen Einbruch schützen",
+      "Was kostet ein wirksames Schutzkonzept für eine Mietwohnung? (mit belegtem Preisstand)"
+    ],
+    "ungeeignet": [
+      "Funk oder Kabel bei Alarmanlagen?",
+      "Wie wechsle ich einen Rauchmelder?"
+    ]
+  },
+  "prueffragen": [
+    "Versteht die Zielgruppe was wirklich geschützt wird und was nicht?",
+    "Ist die Empfehlung an konkrete Situation statt Affiliate-Angebote gebunden?",
+    "Sind Risiko, Kosten und Grenzen realistisch beschrieben?",
+    "Wird informierendes Wissen nicht künstlich als Kaufberatung geschrieben?"
+  ],
+  "integrationskonflikt": "Nicht pauschal als K0-Beratung übergeben: dessen Pflichtfeld decision_goal/decision_criteria ist für reines Wissen nicht immer sinnvoll. Fachlich eigenen Typ oder explizit kompatible Unterform freigeben."
+}

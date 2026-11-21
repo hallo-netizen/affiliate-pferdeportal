@@ -1,0 +1,72 @@
+{
+  "contract": "HOBBYDEPOT_EIGENSTAENDIGES_BEITRAGSREGELBUCH_V1",
+  "status": "HOBBY_EDITORIAL_DRAFT_COMPLETE_NOT_ACTIVATED",
+  "portal_id": "hobby_depot",
+  "original_wordpress_type_is_authority": true,
+  "wordpress_article_type": "Anleitung",
+  "hobby_rulebook_id": "HOBBY_ANLEITUNG",
+  "intent": "Der Leser will eine konkrete einzelne Tätigkeit selbst Schritt für Schritt erstmals ausführen oder ein Ergebnis herstellen.",
+  "not_this_type": "Wiederkehrende Pflege/Wartung (Pflege), reine Entscheidungsberatung (Beratung), bloße Einzelfrage (FAQ).",
+  "article_structure": [
+    "Ziel und erwartbares Ergebnis nennen.",
+    "Material, Werkzeuge, Voraussetzungen und Sicherheitsvorkehrungen vorbereiten.",
+    "Machbare Schritte in prüfbarer zeitlicher Reihenfolge erklären.",
+    "Typische Fehler, Abbruchkriterien und Sicherheitsgrenzen angeben.",
+    "Ergebnis kontrollieren und praktische Varianten nur wenn gesichert.",
+    "Fazit: Woran erkennt man, dass das Ziel erreicht ist?"
+  ],
+  "additional_type_rules": [
+    {
+      "id": "A01_ECHTE_AUFGABE",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Eine klar beschreibbare Handlung mit erkennbarem Ergebnis; kein allgemeiner Ratgeber in nummerierten Sätzen."
+    },
+    {
+      "id": "A02_VORBEREITUNG",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Nur tatsächlich notwendige Werkzeuge und Materialien nennen; Mengen, Maße und Zeiten nicht erfinden."
+    },
+    {
+      "id": "A03_LOGISCHE_SCHRITTE",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Anweisungen chronologisch, einzeln machbar und ohne fehlende Voraussetzungen darstellen."
+    },
+    {
+      "id": "A04_ERGEBNISKONTROLLE",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Leser soll erkennen können, ob der Vorgang sicher und richtig abgeschlossen wurde."
+    },
+    {
+      "id": "A05_SICHERHEIT",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Bei Maschinen, Strom, Hitze, Chemikalien, Pfeil/Bogen, Tieren oder gefährlichen Werkzeugen Sicherheitsgrenzen vor den Schritten benennen."
+    },
+    {
+      "id": "A06_FEHLERBEHEBUNG",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Häufige typische Fehler nur aufnehmen, wenn sie fachlich begründet sind; keine riskanten Reparaturanleitungen."
+    }
+  ],
+  "format_guidance": {
+    "words": [
+      700,
+      1100
+    ],
+    "h2": [
+      3,
+      6
+    ],
+    "conclusion": "H2 'Fazit' mit Ergebnischeck, ohne neue unbewiesene Aussagen.",
+    "tables": "Keine Pflichttabelle; Arbeitsschritte stehen im Vordergrund.",
+    "lists": "Nummerierte Schritte, wenn die Aufgabe mehrere Schritte hat.",
+    "links": "Nur geprüfte bestehende WordPress-Ziele.",
+    "values_are": "HOBBY_EDITORIAL_TARGETS_NOT_AUTOMATIC_RUNTIME_HARD_LIMITS",
+    "words_basis": "Sichtbarer sinnvoller Fließtext ohne Tabellen, Navigation, Quellenliste und reine Fülltexte",
+    "h2_basis": "Natürliche echte Zwischenüberschriften; kein Zwang zu Leerabschnitten"
+  },
+  "examples_from_hobby_topics": [
+    "Einfache Häkelmaschen lernen",
+    "Ein Papiermodell sauber zusammensetzen"
+  ],
+  "shared_hobby_policy_ref": "05_GEMEINSAME_REGELN.json"
+}

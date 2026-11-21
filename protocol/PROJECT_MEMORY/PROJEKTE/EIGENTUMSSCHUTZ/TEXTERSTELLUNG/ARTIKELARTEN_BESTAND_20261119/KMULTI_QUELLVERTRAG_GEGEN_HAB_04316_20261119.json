@@ -1,0 +1,44 @@
+{
+  "checked_at": "2026-11-19",
+  "hab_multi_binding_state": "NO_VALUES_BLOCKED",
+  "hab_values_path": null,
+  "hab_categories_bound": null,
+  "hab_article_types_approved": [],
+  "production_enabled": false,
+  "publish_allowed": false,
+  "k0_original_unmodified": true,
+  "offline_writer_status": "OFFLINE_PROBE_ONLY_NOT_PRODUCTION",
+  "offline_tests": 177,
+  "real_full_writer_tested": false,
+  "orig_canonical_types": [
+    "Beratung",
+    "FAQ",
+    "Pflege",
+    "Vergleich"
+  ],
+  "hab_texterstellung_04316_types": [
+    "Beratung",
+    "FAQ",
+    "Pflege",
+    "Vergleich",
+    "Anleitung"
+  ],
+  "compatible_types": [
+    "Beratung",
+    "FAQ",
+    "Pflege",
+    "Vergleich"
+  ],
+  "not_confirmed_type": [
+    "Anleitung"
+  ],
+  "missing_fields_or_adapters": [
+    "Portal-Identität einmalig an K-Multi binden",
+    "K-Multi eigene Hab-Regelwerte freigeben",
+    "5 Metadatenfelder von PSERC_TEXTMACHINE_METADATA_BATCH_V2 ohne Änderung übernehmen",
+    "K-Multi prüft nur seine ursprüngliche Regelstation ohne Dopplung",
+    "Rückgabeformat WordPress-Entwurfsimport in isolierter Probe prüfen",
+    "Magazin konkrete WordPress-Beitragskategorie nachweisen"
+  ],
+  "conclusion": "JETZT_KEIN_SICHERER_K_MULTI_SWAP__ISOLIERTEN_WRITER_UND_FACHWERTE_ZUERST_ZU_ENDE_TESTEN"
+}

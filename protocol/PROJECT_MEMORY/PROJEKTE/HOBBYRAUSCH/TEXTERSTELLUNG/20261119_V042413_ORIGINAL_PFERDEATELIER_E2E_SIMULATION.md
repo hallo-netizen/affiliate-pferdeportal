@@ -1,0 +1,20 @@
+# Hobbydepot Texterstellung 0.4.24.13 — nachgewiesener Originalvergleich (19.11.2026)
+
+**Ziel:** Nutzer verlangt vollständige lokale Simulation Recherche → MINI → K0 → Artikel, keine ausgedachten Verträge oder neue Systeme; keine Pluginfreigabe ohne Beweise.
+
+## Korrekturen am einzigen WordPress-Plugin
+- Aktive Version laut Nutzerscreenshot 0.4.24.12. In deren Originalkopf prüfen die MINI-Rückgabezeilen 1229–1231 die Projektionsspalten im sonst eingefrorenen Kopf und werfen `MINI_FROZEN_HEADER_CHANGED`. Genau den Original-Projektionsabgleich aus Pferdeatelier 0.4.34 (Original-Hauptdatei Zeilen 1621–1624) übernommen. Realer PHP-E2E prüft Original-"FINAL" erfolgreich.
+- PHP-Seitenansicht prüfte `$currentQueue` vor dem Laden; Seite mit kostenloser Queue zeigte kein Weiterlaufskript. Behoben durch Wiederverwendung des bereits geladenen Originalqueuesnapshots `$queueForStatus`. Tatsächlich erzeugte HTML-Seite in vier Zuständen lokal getestet.
+- Der live auf Screenshot noch RUNNING zeigende alte Rechercheauftrag konnte Gratisbutton nicht auslösen. Neuer EINER bewusster Benutzerklick nutzt ausschließlich bereits vorhandene `PSTE_Research_Driver::halt()`, `settleHalt()`, `PSTE_Breadth_Research_Queue::startExistingOnly(...)` oder `requestExistingOnlyResume(...)` und `advance(...,false)`; kein zweiter SEO-Entscheider, kein Anbieter-POST. Bei aktivem fremdem Kind, unklarem Abbruch, fehlendem Kontext oder zweitem Gratis-Queue-Start: keine neue kostenpflichtige/zweite Queue.
+
+## Tatsächliche Tests
+- 23 PASS Testgruppen, **302 Einzelprüfungen**. Davon 44 unmittelbare Originalmethoden-/PHP-Aktions-/Ajax-/UI-Prüfungen. Separat 78 PHP-Lints, 87 CRC+ZIP-Bytes, 87 Quellenversions-Checks und ursprüngliche Byteidentität an vier unabhängigen zentralen Import-/Driver-Bausteinen.
+- Echte PHP-Methodenkette (isolierte WordPress-/Datenbank-Mocks): original `PSTE_Portal_Relevance_Gate::evaluate` → original `TXE_Workshop::seoExport` → original `seoImport` CATEGORY, EDITORIAL, TITLE → FINAL → `export` → `k0Package` → `importDrafts` → WordPress-Entwurfsreadback. Negative: erfundene Kategorie/Beitragsart, manipulierter unveränderbarer Kopf, andere Quell-ID, verfälschter Titel, gefälschter K0-Slot.
+- Echte zwei **vollständig bereits geschriebene Pferdeatelier-K0-Artikel**, per Nutzerfile `K0_Pferdeanhaenger_WordPress_2_Artikel_VERIFIZIERT_2026-11-19.json`: Import über Original-PSERC erstellt genau zwei WordPress-Entwürfe; keine Dubletten beim Wiederimport. Original K0 Writersiegel 81/81, PPM 104/104, LT 6.8 0 Fehler aus gesonderten originalen Proofdateien und GitHub Actions Writersitzungen `44531141630` und `44530980615`, beide GitHub SUCCESS.
+- Vergleich K0-Host/Originalrouten: GitHub original K0-Selbsttest `44545937102` und Hobby-Regression `44545937080`, beide SUCCESS.
+- **Ehrliche Grenze:** DataForSEO-Anbieterantworten und Hobby-K0-Schreibinhalt in dieser Simulation ersetzt, da kein Live-/Writerzugang; **kein neuer vollständig originalverfasster Hobby-Artikel / keine abgeschlossene live 223-Keyword-Diagnose**. Nicht als solche behaupten.
+
+## Ablage und exakte Version
+- Persönliche Bibliothek `/Hobby Depot/Plugin-Büro/`: `Texterstellung_Hobbydepot_0.4.24.13_ORIGINALWORKFLOW_GESAMTTEST.zip` (512519 Bytes, SHA256 `71447b3d31f758d292153695971845d13e035f60932244bfe3f5e499a9d887b5`), `Hobbydepot_0.4.24.13_ORIGINALWORKFLOW_PRUEFBEWEIS.json`, `Hobbydepot_0.4.24.13_GESAMTPRUEFUNG.md`, `Hobbydepot_0.4.24.13_SIMULATIONSQUELLEN.zip`; `Texterstellung-CURRENT.md` aktualisiert.
+- ZIP ersetzt exakt die bisherige WordPress-Pluginwurzel `texterstellung-hobbydepot/`, keine Neuinstallation parallel. **86 von 87 Originaldateien** byteidentisch zu 0.4.24.12; nur `texterstellung.php` korrigiert. Keine Änderungen am getrennten K0-Textautor.
+- Nach WP-Backup: Version 0.4.24.13 über bestehendes WP-Plugin ersetzen; unter `Texterstellung → Recherche` nur bei aktivem Altauftrag `Lauf sicher beenden und gespeicherte Keywords kostenfrei pruefen` einmal klicken. Keine kostenpflichtige Recherche starten. Falls Originalkontext/Cancel nicht bereit: STOP, ohne neue Queue/Kosten. Danach Live-Diagnose nachweisen; kein automatischer Erfolg behauptet.

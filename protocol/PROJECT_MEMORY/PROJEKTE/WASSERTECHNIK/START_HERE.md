@@ -30,3 +30,6 @@
 **Pflichtweg:** `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` → genau eine Current-Autorität → Frischecheck → dortige NEXT ACTION.
 
 Vor technischen Aktionen: `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`, `protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md`, `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md` und die zuständigen Zielverträge prüfen. Archiv/Tresor/Backup niemals als Werkbank verwenden.
+
+## Neu: eigenständiges Büro Texterstellung (19.11.2026)
+- [TEXTERSTELLUNG/START_HERE.md](TEXTERSTELLUNG/START_HERE.md) – jungfräuliche, **nicht freigegebene** Universal-Originalkopie 0.4.31.1, physische ZIP in Library `/Wassertechnik/Texterstellung/`. Keine Installation. Artikelarten/K0-Multi-Anbindung noch zu testen; Original-K0 unangetastet.

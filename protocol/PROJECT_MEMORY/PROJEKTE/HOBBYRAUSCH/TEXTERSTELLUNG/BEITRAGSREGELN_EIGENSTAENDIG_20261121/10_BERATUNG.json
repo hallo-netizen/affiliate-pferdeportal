@@ -1,0 +1,61 @@
+{
+  "contract": "HOBBYDEPOT_EIGENSTAENDIGES_BEITRAGSREGELBUCH_V1",
+  "status": "HOBBY_EDITORIAL_DRAFT_COMPLETE_NOT_ACTIVATED",
+  "portal_id": "hobby_depot",
+  "original_wordpress_type_is_authority": true,
+  "wordpress_article_type": "Beratung",
+  "hobby_rulebook_id": "HOBBY_RATGEBER_WISSEN",
+  "intent": "Der Leser will entscheiden, ob und wie ein Hobby, eine Ausrüstung oder ein Einstieg zu ihm passt.",
+  "not_this_type": "Keine isolierte Einzelfrage (FAQ), keine Arbeitsfolge (Anleitung), keine fortlaufende Wartung (Pflege), kein gleichkriterieller Zwei-Optionen-Vergleich (Vergleich).",
+  "article_structure": [
+    "Direkte Orientierung: Welche Entscheidung steht an?",
+    "Eignung: Interesse, Platz, Zeit, Vorkenntnisse und Sicherheitsanforderungen nur bei Relevanz.",
+    "Ausstattung und realistische Kosten mit Umfang und Zeitpunkt, soweit belastbar.",
+    "Typische Fehlentscheidungen und verständliche Auswahlkriterien.",
+    "Fazit: bedingte, nicht werbliche Empfehlung passend zur Leserfrage."
+  ],
+  "additional_type_rules": [
+    {
+      "id": "B01_BEDARF",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Ziel, Rahmen und tatsächliche Leserfrage zuerst klären; nicht automatisch ein Produkt verkaufen."
+    },
+    {
+      "id": "B02_EIGNUNG",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Geeignete Zielgruppen nur nach überprüfbaren Voraussetzungen beschreiben; keine psychologischen Eignungsversprechen."
+    },
+    {
+      "id": "B03_KOSTEN",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Kostenarten unterscheiden (Anschaffung, Zubehör, Verbrauch, Kurs, Mitgliedschaft), nur belegte Zahlen nennen."
+    },
+    {
+      "id": "B04_KEIN_SIEGER",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Kein allgemeiner 'Testsieger' oder Pflichtkauf ohne vergleichbare verifizierte Daten."
+    }
+  ],
+  "format_guidance": {
+    "words": [
+      800,
+      1100
+    ],
+    "h2": [
+      3,
+      5
+    ],
+    "conclusion": "Kurzes H2 'Fazit' als fachlicher Standard; kein neuer Sachverhalt.",
+    "tables": "Nur wenn eine echte Übersicht der Entscheidung dient.",
+    "lists": "Nur für echte Kriterien oder Arbeitsschritte.",
+    "links": "Keine feste Mindestzahl. Höchstens drei als unverbindliche Lesbarkeitsorientierung.",
+    "values_are": "HOBBY_EDITORIAL_TARGETS_NOT_AUTOMATIC_RUNTIME_HARD_LIMITS",
+    "words_basis": "Sichtbarer sinnvoller Fließtext ohne Tabellen, Navigation, Quellenliste und reine Fülltexte",
+    "h2_basis": "Natürliche echte Zwischenüberschriften; kein Zwang zu Leerabschnitten"
+  },
+  "examples_from_hobby_topics": [
+    "Bogenschießen als Hobby: Kosten und Einstieg",
+    "Airbrush lernen: sinnvoller Einstieg"
+  ],
+  "shared_hobby_policy_ref": "05_GEMEINSAME_REGELN.json"
+}

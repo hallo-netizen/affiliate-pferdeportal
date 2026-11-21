@@ -1,0 +1,95 @@
+{
+  "contract": "HOBBYDEPOT_EINMALIGE_GEMEINSAME_REDAKTIONSREGELN_V1",
+  "status": "EDITORIAL_DRAFT_ONLY_NOT_RUNTIME_APPROVED",
+  "portal_id": "hobby_depot",
+  "applies_to_exact_original_types": [
+    "Beratung",
+    "FAQ",
+    "Pflege",
+    "Vergleich",
+    "Anleitung"
+  ],
+  "owner": "HOBBYDEPOT_EDITORIAL_RULES_ONCE",
+  "application": "EINMAL je Inhaltspunkt durch zuständige vorhandene Station, keine zusätzliche Prüfstation oder Entscheidung",
+  "origin": "Zwölf in fünf Hobbydepot-Arbeitsentwürfen identische Regeln ohne Textänderung zentralisiert; K0/K-Multi bleibt unberührt",
+  "shared_rules": [
+    {
+      "id": "H01_PORTAL_EINMALIG",
+      "owner": "WORDPRESS_MINI",
+      "rule": "Nur die bereits festgelegte Hobbydepot-Portalidentität aus dem unveränderten WordPress-Beleg übernehmen; keine zusätzliche Portalentscheidung oder neue Datei."
+    },
+    {
+      "id": "H02_TYP_EINMALIG",
+      "owner": "WORDPRESS_MINI",
+      "rule": "Kategorie, Keyword, Titel und Beitragsart vor der Übergabe einmalig festlegen; Kategoriebezeichnung oder Menü-Rubrik bestimmen nicht automatisch die Beitragsart."
+    },
+    {
+      "id": "H03_FAKTEN_EINMALIG",
+      "owner": "SHARED_RESEARCH",
+      "rule": "Veränderliche Preise, Bestimmungen, Sicherheitsangaben und Leistungsversprechen mit aktuellen geeigneten Originalquellen prüfen; ungeklärte Angaben offenlassen statt erfinden."
+    },
+    {
+      "id": "H04_SPRACHE_EINMALIG",
+      "owner": "SINGLE_QUALITY",
+      "rule": "Korrektes, verständliches Deutsch; Tätigkeitsnamen natürlich beugen, etwa 'Münzen sammeln' statt 'Münzen ausüben'; keine Keyword-Ketten."
+    },
+    {
+      "id": "H05_KONKRETER_NUTZEN",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Absätze beantworten die jeweilige Leserabsicht konkret. Keine Wiederholungen, Füllabschnitte oder frei erfundenen Beispiele."
+    },
+    {
+      "id": "H06_SICHERHEIT",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Bei Werkzeugen, Elektrik, Chemie, Feuer, Bewegung, Tieren und Umwelt passende reale Risiken und sichere Grenzen erläutern; keine gefährliche Anleitung."
+    },
+    {
+      "id": "H07_KEINE_ERFINDUNGEN",
+      "owner": "SHARED_RESEARCH",
+      "rule": "Keine erfundenen eigenen Tests, Vereinsangebote, Kurse, Ortsangaben, Ereignisse, Zitate, Bewertungen oder Erfahrungsberichte."
+    },
+    {
+      "id": "H08_LINKS_EXISTIEREND",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Interne Links nur auf wirklich existierende, thematisch passende WordPress-Ziele mit korrektem sichtbarem Titel; keine künstliche Linkanzahl."
+    },
+    {
+      "id": "H09_WERBUNG_GETRENNT",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Affiliate-Links und Produktangebote sind keine fachlichen Beweise, keine erkauften Sieger und keine Grundlage für unbelegte Preise."
+    },
+    {
+      "id": "H10_ABSCHLUSS",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Schluss fasst die geprüften Aussagen und praktische Konsequenzen zusammen und enthält keine neuen unbewiesenen Tatsachen."
+    },
+    {
+      "id": "H11_QUALITAET_NUR_EINMAL",
+      "owner": "SINGLE_QUALITY",
+      "rule": "Die zuständige gemeinsame Qualitätsstelle prüft jeden Inhaltspunkt einmal; Korrekturen gehen an dieselbe Schreibstelle, keine nachgeschaltete zweite Redaktion."
+    },
+    {
+      "id": "H12_NUR_ENTWURF",
+      "owner": "WORDPRESS_IMPORT",
+      "rule": "Nur freigegebene Entwurfsdatei für die originale WordPress-Zielkategorie; keine automatische Veröffentlichung, kein Fantasie-Magazin-Ziel."
+    }
+  ],
+  "scope": "Hobbydepot-Büro; nur Redaktionsvorschlag, nicht produktiv aktiv",
+  "single_owner_nonrule_context": {
+    "common_status": "HOBBY_EDITORIAL_DRAFT_NOT_RUNTIME_APPROVED",
+    "original_wordpress_type_capabilities": [
+      "Beratung",
+      "FAQ",
+      "Pflege",
+      "Vergleich",
+      "Anleitung"
+    ],
+    "no_runtime_dependency_on_k0_or_other_portals": true,
+    "source_read_only": "Hobbydepot plugin 0.4.24.18; actual WP package contract; K0 only reference, no copying",
+    "no_wordpress_plugin_change": true,
+    "no_auto_publication": true,
+    "single_quality_owner_only": true,
+    "read_once_at_hobby_rulebook_owner": true,
+    "no_duplicate_checkers": true
+  }
+}

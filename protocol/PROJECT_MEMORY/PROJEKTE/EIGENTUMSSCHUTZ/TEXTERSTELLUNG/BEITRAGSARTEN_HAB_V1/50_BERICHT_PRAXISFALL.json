@@ -1,0 +1,68 @@
+{
+  "schema": "HAB_EIGENSTAENDIGE_ARTIKELART_V1",
+  "portal": "hab_und_bewahr",
+  "status": "FACHENTWURF_NICHT_AKTIV_NICHT_K0_READY",
+  "gemeinsame_regeln": "01_GEMEINSAME_TEXTREGELN.json",
+  "hab_querschnitt": "02_HAB_QUERSCHNITT_SICHERHEIT.json",
+  "aktionsregel": "Nur die im MINI einmalig beschlossene Beitragsart laden. Keine zweite Entscheidung, kein Fallback oder automatische Umbenennung. Bestehende K0-Prüfungen niemals duplizieren.",
+  "technik": "Eigenständiges Regelpaket zur späteren K-Multi-Prüfung; NICHT als bereits ausführbare Original-K0-Typdatei ausgeben.",
+  "id": "HAB_BERICHT",
+  "article_type": "Bericht & Praxisfall",
+  "datei": "50_BERICHT_PRAXISFALL.json",
+  "k0_ausgang": "KEIN fertiges Original-K0-Regelfach für Bericht nachgewiesen",
+  "leserziel": "Ein belegtes Ereignis, eine Entwicklung, einen Sicherheitsfall oder eine Studie sachlich einordnen.",
+  "nur_dann": "Ein tatsächlich nachgewiesener konkreter Anlass mit Datum/Ort/Urheber oder überprüfbarer Datengrundlage im Mittelpunkt steht.",
+  "nicht_dann": [
+    "Allgemeines Dauerwissen -> Ratgeber",
+    "Eine kurze zeitlose Einzelfrage -> FAQ",
+    "Konkrete Eigenarbeit -> Anleitung",
+    "Alternativen fair abwägen -> Vergleich"
+  ],
+  "aufbau": [
+    "Ereignis/Befund in den ersten Sätzen klar benennen, mit Datum und Zuständigkeit",
+    "Belegte Hauptfakten in sachlicher zeitlicher oder logischer Folge",
+    "Quelle, Stand, Ort und Untersuchungs-/Statistikgrenzen transparent machen",
+    "Gesicherte Tatsachen von Aussagen Dritter, Vermutungen und redaktioneller Einordnung trennen",
+    "Praktische Bedeutung für private und kleine Schutzobjekte nur soweit seriös ableitbar",
+    "Bei neuer Datenlage Korrektur-/Updatevermerk und Ursprungsstand nachvollziehbar machen"
+  ],
+  "k0_uebernahme": [
+    "Faktenbelege, sachlicher Ton, natürliche Sprache, stabile Qualitätszuständigkeit",
+    "Sinnvolle interne Links, keine Textbausteinwiederholung",
+    "Keine Veröffentlichung ohne vollständige Original-K0-Qualitäts- und WordPress-Freigaben"
+  ],
+  "kritisch_anpassen": [
+    "Keine künstliche Kaufentscheidung, Vergleichstabelle oder Checkliste",
+    "Textumfang richtet sich nach belegbaren Fakten und Nachrichtenwert statt Mindestwort-Fülltext",
+    "Kein erfundener Praxisfall, kein fiktives Interview oder Expertenzitat",
+    "Hypothetische Illustration nur als eindeutig gekennzeichnetes Beispiel, nicht als reale Meldung",
+    "Schadens- und Täterdetails nicht so erzählen, dass eine Umgehungsanleitung entsteht"
+  ],
+  "hab_regeln": [
+    "HAB01",
+    "HAB02 bei Taten",
+    "HAB04 bei Gericht/Recht",
+    "HAB05 bei Versicherung",
+    "HAB09",
+    "HAB11 bei Gefahrenlage",
+    "HAB12",
+    "HAB08"
+  ],
+  "beispiele": {
+    "geeignet": [
+      "Polizei veröffentlicht Jahreszahlen zu Wohnungseinbrüchen: Was ist tatsächlich belegt?",
+      "Dokumentierter Starkregenfall: Welche Schäden sind offiziell nachgewiesen?"
+    ],
+    "ungeeignet": [
+      "Eine ausgedachte Familie berichtet von ihrem Einbruch",
+      "Welche Alarmanlage schützt am besten?"
+    ]
+  },
+  "prueffragen": [
+    "Ist Ereignis/Fall wirklich durch Originalquelle belegt?",
+    "Sind Zeitpunkt, Raum und Zahlenbezug korrekt?",
+    "Sind offene Fragen und Ungewissheit sichtbar?",
+    "Bleiben Betroffene anonym und wird keine unbelegte Ursache behauptet?"
+  ],
+  "integrationskonflikt": "Kein READY-K0-Typ; darf nicht automatisch als Beratung getarnt werden. Zusätzlich fehlt der nachgewiesene reale WordPress-Magazin-Category-Term. Beides vor produktivem Abruf zwingend abklären."
+}
