@@ -1,0 +1,129 @@
+{
+  "contract": "HOBBYDEPOT_FIRST_ACTUAL_ORIGINAL_KMULTI_PYTHON_ENTRY_TEST_V1",
+  "test_date": "2026-11-21",
+  "status": "PASS",
+  "test_count": 15,
+  "passed": 15,
+  "failed": 0,
+  "execution": "Python 3, actually invoked original K-Multi functions verify_source and build_worker_handoff locally, not a simulated routing algorithm",
+  "original_k_multi_entry": {
+    "repo": "hallo-netizen/k0-multiportal",
+    "branch": "k0-offline-rule-bindings-20261027",
+    "path": "offline_writer_dev/portal_auto/kmulti_portal_entry.py",
+    "git_blob_sha1": "be4cd4884b82b324453624a4897f4763e09a778f",
+    "git_blob_sha1_rechecked_equal": true
+  },
+  "original_k_multi_registry": {
+    "path": "offline_writer_dev/portal_auto/KMULTI_PORTAL_REGISTRY.json",
+    "git_blob_sha1": "811abd6063796369320ecdb8ff953a3467d31ae0",
+    "git_blob_sha1_rechecked_equal": true
+  },
+  "source_batch": {
+    "repository_path": "offline_writer_dev/portal_auto/fixtures/original_wordpress_hobby_3.json",
+    "original_three_faq_orders_reconstructed_from_repo": true,
+    "original_fixture_git_blob_byteidentical": false,
+    "note": "Reproduced exact canonical metadata and receipt: both stored original SHA256 checksums were validated by untouched K-Multi code; source file whitespace is not claimed byte-identical.",
+    "original_batch_sha256": "c6d9773481f0652f10db4711c0d882d88ffc73d6d65ed5437bf09914cefed9de",
+    "original_manifest_sha256": "208dbf523da3c71f489b67808b3848d1c5ddc1a9860199796b5ef44d5a9a84e2"
+  },
+  "positive_result": {
+    "portal": "hobby_depot",
+    "host": "www.hobby-depot.de",
+    "article_count": 3,
+    "article_type_per_row": [
+      "FAQ",
+      "FAQ",
+      "FAQ"
+    ],
+    "mapped_rulebook_id_per_row": [
+      "HOBBY_FAQ",
+      "HOBBY_FAQ",
+      "HOBBY_FAQ"
+    ],
+    "five_existing_fields_preserved": true,
+    "article_type_redecided": false,
+    "status": "VALIDATED_WAITING_SHARED_RESEARCH",
+    "worker_handoff_status": "WAITING_FOR_SHARED_RESEARCH_OWNER",
+    "rulebooks_loaded": false,
+    "writer_allowed": false,
+    "publish_allowed": false,
+    "legacy_K0_called": false
+  },
+  "assertions": [
+    {
+      "test": "original_Kmulti_engine_git_blob_exact",
+      "passed": true
+    },
+    {
+      "test": "original_Kmulti_registry_git_blob_exact",
+      "passed": true
+    },
+    {
+      "test": "original_3_faq_batch_and_receipt_accepted",
+      "passed": true
+    },
+    {
+      "test": "hobby_depot_resolved_from_original_WP_receipt",
+      "passed": true
+    },
+    {
+      "test": "all_3_faq_types_routed_with_no_redecision",
+      "passed": true
+    },
+    {
+      "test": "all_original_five_fields_unchanged",
+      "passed": true
+    },
+    {
+      "test": "worker_handoff_research_only",
+      "passed": true
+    },
+    {
+      "test": "no_K0_writer_publication_or_auto_rulebook",
+      "passed": true
+    },
+    {
+      "test": "only_checksum_not_digital_issuer_signature",
+      "passed": true
+    },
+    {
+      "test": "reject_extra_portal_field",
+      "passed": true
+    },
+    {
+      "test": "reject_tampered_article_without_valid_digest",
+      "passed": true
+    },
+    {
+      "test": "reject_unknown_portal_even_with_valid_checksums",
+      "passed": true
+    },
+    {
+      "test": "reject_sixth_nonoriginal_type_even_with_valid_checksums",
+      "passed": true
+    },
+    {
+      "test": "reject_auto_publish",
+      "passed": true
+    },
+    {
+      "test": "reject_receipt_disagreeing_with_original_five_fields",
+      "passed": true
+    }
+  ],
+  "evidence_local_file": "/mnt/data/hobby_kmulti_first_test/erster_kmulti_echttest_hobbydepot_20261121.json",
+  "evidence_local_sha256": "00f42f65654a77bae0f747d87a29831eeb5e916e9c25979fdf748790bdbb96b8",
+  "limitations": [
+    "The actual K-Multi intake and worker handoff have been executed, but no research or article writer has been run.",
+    "Existing fixture has only three FAQ orders; not four other original WP types.",
+    "K-Multi production state NO_VALUES_BLOCKED. Pflege and Anleitung registry still both use HOBBY_ANLEITUNG_PFLEGE.",
+    "The unkeyed checksums confirm integrity only, not cryptographic provenance from WordPress issuer.",
+    "No live WordPress test and no publication."
+  ],
+  "unchanged": [
+    "Original WP plugin",
+    "K-Multi core code, registry and runtime bindings",
+    "K0 code and rules"
+  ],
+  "next_without_unauthorized_modifications": "No extra plugin or WP format change necessary for valid 3-FAQ intake; any real writer enablement and divergent Pflege/Anleitung binding requires separately authorized K-Multi scope."
+}
