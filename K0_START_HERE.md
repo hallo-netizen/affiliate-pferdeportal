@@ -59,3 +59,12 @@ Die vorhandene Eingangs-Funktion `engine.k0_wp_upload.unpack` beziehungsweise `w
 **Niemals** einen `WP_K0_UPLOAD_PACKAGE_V1`-Upload wegen `K0_UPSTREAM_SEO_SOURCE_MANIFEST_MISSING` blockieren, wenn sein vorhandener `word_press_order_receipt` durch den bestehenden Binder akzeptiert wird. Ebenso **niemals** aus dem Dokument eine neue fachliche Entscheidung berechnen, neue SEO-Recherche vor MINI starten, zusätzliche Nutzerdateien anfordern oder eine andere K0-Route bauen. Bei ungültigem Beleg meldet der **bestehende** Binder den tatsächlichen Identitäts-/Intentfehler; keine Umgehung.
 
 Dieser Eingang gilt für **alle** künftigen gültigen WordPress-Pakete mit beliebiger Artikelanzahl. MINI → WordPress-Regal, Writer, 81 Regeln, exakte C-Linktexte, LanguageTool 6.8, PPM und Import als Entwurf **unverändert**.
+
+
+## K0-Tabellen – maßgeblich ab 21.11.2026 (nur Original-K0)
+
+Keine Zwangstabelle bei FAQ, Beratung oder Pflege. Es gibt keine Tabellenquote. Die einzige bestehende Entscheidung vor dem Writer legt eine Tabelle nur bei **echtem, auf die Ziel-Suchfrage bezogenem Vergleichs- oder Entscheidungsnutzen** fest. Eine bloße 4×3-Matrix ohne eigenständigen Mehrwert ist ausdrücklich unzulässig; keine Füllzeilen, keine künstlichen Zahlen, keine bloße Wiederholung des Fließtextes. Für echte Artikel des Typs Vergleich bleibt eine fachlich sinnvolle Tabelle Pflicht.
+
+`table_decision.k0_policy` ist `K0_TABLE_MEANINGFUL_ONLY_V1`. Bei INCLUDE verlangt die vorhandene Regelkontextprüfung: `reader_question` = Zielkeyword, `reader_benefit`, `why_not_prose`, `comparison_axes` (mindestens zwei) und `source_fact_ids` (mindestens zwei aus freigegebener Faktenrecherche, tatsächlich in der Tabelle verwendet). Das bisherige pauschale `INCLUDE_ADDED_VALUE` mit einer bloßen allgemeinen Begründung reicht **nicht** mehr. Bei OMIT genügt eine konkrete fachliche Begründung ohne vorgeschobenen Ausnahmegrund.
+
+Negativbeispiel: „Wie alt ist das älteste Pferd in Deutschland?“ hat keinen sinnvoll belegten deutschlandbezogenen Vergleich. Eine Tabelle aus Old Billy, seinem Todesjahr und allgemeiner Pferdelebenserwartung ist keine passende Antwort; sie muss entfallen. Prüf- und Reparaturrücklauf bleiben im **gleichen bestehenden K0-Schritt**, kein zusätzliches Redaktionsgremium, keine Änderung anderer Beitrags- oder Linkregeln. Die getrennten historischen K10-Regeln werden nicht verändert.
