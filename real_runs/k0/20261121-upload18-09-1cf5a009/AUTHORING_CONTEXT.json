@@ -1,0 +1,194 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Was gehört zum Zaumzeug eines Pferdes?",
+    "target_keyword": "Was gehört zum Zaumzeug Pferd?",
+    "category": "trensen-faq",
+    "article_type": "FAQ",
+    "plan_slot": "1cf5a0095acb9a5aef43df6e8f98cf0c0fab93a842ae301d129bd0665e8f0306"
+  },
+  "content_profile": {
+    "search_intent": "Bestandteile des Zaumzeugs am Pferdekopf benennen und ihren grundsätzlichen Zweck erklären."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Zaumzeug",
+          "source_title": "Wikipedia – Zaumzeug"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Trense",
+          "source_title": "Wikipedia – Trense"
+        }
+      ],
+      "claims": [
+        "Trensenzäume bestehen aus Genickstück, Backenstücken, Kehlriemen und Stirnriemen.",
+        "Der Nasenriemen gehört zur Reithalfterausstattung.",
+        "Ein Stirnriemen trägt zur Lage des Genickstücks am Pferdekopf bei.",
+        "Backenstücke verlaufen seitlich am Pferdekopf und halten das Gebiss.",
+        "Zügel werden zur Lenkung und zum Führen des Pferdes verwendet.",
+        "Eine Trense im engeren Sinn bezeichnet ein gebrochenes Gebiss."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was gehört zum Zaumzeug Pferd?",
+      "topic": "Was gehört zum Zaumzeug eines Pferdes?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "trensen-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was gehört zum Zaumzeug eines Pferdes?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Zaumzeug",
+        "source_title": "Wikipedia – Zaumzeug",
+        "evidence_text": "Trensenzäume bestehen in den meisten Fällen aus einem Genickstück, den beiden Backenstücken rechts und links, dem Kehlriemen und dem Stirnriemen.",
+        "evidence_text_sha256": "968c2083a9ce76dae699780cb342d2fdaa98bc708913fb8c6b8b74ef99a76dc8",
+        "statement": "Trensenzäume bestehen aus Genickstück, Backenstücken, Kehlriemen und Stirnriemen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Zaumzeug",
+        "source_title": "Wikipedia – Zaumzeug",
+        "evidence_text": "Der Nasenriemen gehört zum Reithalfter.",
+        "evidence_text_sha256": "f43e12f9ea544f55eb18825461dbddcf917e708217009a29bf596044d4356c8a",
+        "statement": "Der Nasenriemen gehört zur Reithalfterausstattung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Zaumzeug",
+        "source_title": "Wikipedia – Zaumzeug",
+        "evidence_text": "Der Stirnriemen hält das Genickstück am richtigen Platz und verhindert ein Verrutschen nach hinten.",
+        "evidence_text_sha256": "ae8606527e6a69246974459b50b5051515e5e77dd081da0873dfa0fb3464b684",
+        "statement": "Ein Stirnriemen trägt zur Lage des Genickstücks am Pferdekopf bei.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://de.wikipedia.org/wiki/Zaumzeug",
+        "source_title": "Wikipedia – Zaumzeug",
+        "evidence_text": "Die Backenstücke werden links und rechts am Genickstück eingeschnallt und verlaufen senkrecht am Pferdekopf unter dem Jochbein entlang.",
+        "evidence_text_sha256": "4770b738dba2ee66fde84a206b0a05672f6793ae3247fa5a1f90fec0406bbb3b",
+        "statement": "Backenstücke verlaufen seitlich am Pferdekopf und halten das Gebiss.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://de.wikipedia.org/wiki/Zaumzeug",
+        "source_title": "Wikipedia – Zaumzeug",
+        "evidence_text": "Die Zügel dienen zum Aktivieren der Druckpunkte sowie einfach zum Führen des Tieres.",
+        "evidence_text_sha256": "a939f1a304e53302e4c46d1468296a541b39b252d09dd4c5da071e5912b644a9",
+        "statement": "Zügel werden zur Lenkung und zum Führen des Pferdes verwendet.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_url": "https://de.wikipedia.org/wiki/Trense",
+        "source_title": "Wikipedia – Trense",
+        "evidence_text": "Eine Trense ist ein gebrochenes Gebiss.",
+        "evidence_text_sha256": "b3269d8788fdc67d38446f69cb726e6b9883d83ee517ca8f62288c2c05d421ef",
+        "statement": "Eine Trense im engeren Sinn bezeichnet ein gebrochenes Gebiss.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/trensen-faq/",
+        "anchor": "trensen-faq",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/gebisse-faq/",
+        "anchor": "gebisse-faq",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/trensen-faq/",
+        "active": true
+      },
+      {
+        "href": "/category/gebisse-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "trensen-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Zaumzeug",
+      "Trense",
+      "Gebisse",
+      "Gebiss",
+      "Zügel",
+      "Kopfgestell",
+      "Pferdekopf"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Der konkrete Auswahlprozess braucht eine nachvollziehbare individuelle Passform- und Sicherheitsprüfung, bei der eine Tabelle ohne zusätzliche belastbare Kriterien keinen Mehrwert bietet."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
