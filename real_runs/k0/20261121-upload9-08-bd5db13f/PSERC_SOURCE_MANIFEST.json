@@ -1,0 +1,209 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 10,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Ab wann gilt eine Pferdehaltung als gewerblich?",
+        "target_keyword": "Ab wann gilt eine Pferdehaltung als gewerblich?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "57af25ca86f8080ce93a932efae83f3832f66f675d22e60c104d08a8cf2231ac"
+      },
+      {
+        "title": "Darf man ein Pferd im eigenen Garten halten?",
+        "target_keyword": "Darf ich ein Pferd in meinem Garten halten?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "0aa9c6cd5c875a1e1a17b8f0476ceaa6ce768d60a8c051c6eebe0c1d0c3095fa"
+      },
+      {
+        "title": "Was kontrolliert das Veterinäramt bei der Pferdehaltung?",
+        "target_keyword": "Was prüft das Veterinäramt Pferdehaltung?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "5547705b734c8c4961b43af252f5081e511ff56aad31562aa1886da20bea1c42"
+      },
+      {
+        "title": "Was kostet ein Pferd im Monat mit Stallmiete?",
+        "target_keyword": "Wie viel kostet ein Pferd im Monat mit Stallmiete?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "c7ff6c7dae82903cd9da5bc1a97c6b553f8bb6acb069daf3a84d434ed8ac9a2b"
+      },
+      {
+        "title": "Welche Strafen drohen bei der Nutzung eines Reitplatzes ohne Genehmigung?",
+        "target_keyword": "Welche Strafe droht, wenn man einen Reitplatz ohne Genehmigung nutzt?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "e96dcb440d506242a2d3fa47fc1562e57cc54e0be2fc4f41c4ac22b11b11ebbc"
+      },
+      {
+        "title": "Kann ein Nachbar die Pferdehaltung verbieten?",
+        "target_keyword": "Kann Nachbar Pferdehaltung verbieten?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "103516cc8e8975e5c879edbba997fab71470bd297f048851aedf504396eaebdd"
+      },
+      {
+        "title": "Muss man Einnahmen aus der Vermietung von Pferdeboxen versteuern?",
+        "target_keyword": "Muss ich Steuern auf die Vermietung von Pferdeboxen zahlen?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "07140304e922f09897f864b32500520b6b16e554ba0f79e02a877ad33750573d"
+      },
+      {
+        "title": "Ist eine Pferdebox genehmigungsfrei?",
+        "target_keyword": "Ist eine Pferdebox genehmigungsfrei?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "60ba3dfd268b890b070cec19e66dd9d7b09bbc667dd1ff52dedda53b78b8fd7d"
+      },
+      {
+        "title": "Wie hoch sind die monatlichen Unterhaltskosten für ein Pferd?",
+        "target_keyword": "Wie viel Unterhalt braucht man monatlich für ein Pferd?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "95d8204d9ede14ba3a501790b3fe6f7af45239000340ea3386ef85be246d3db8"
+      },
+      {
+        "title": "Welche Maße sind bei Reithallen üblich?",
+        "target_keyword": "Wie groß sind Reithallen?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "8c98615d2f6fadb96e9b10665e559897a520d1ebe912f9f84bcc3d8ab215e5ed"
+      }
+    ],
+    "batch_sha256": "ad66d04b439d583cca0ed9bbcdcf858f0c2add1493f2b68043ae7ea2daada7fa"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Ab wann gilt eine Pferdehaltung als gewerblich?",
+        "target_keyword": "Ab wann gilt eine Pferdehaltung als gewerblich?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "57af25ca86f8080ce93a932efae83f3832f66f675d22e60c104d08a8cf2231ac"
+      },
+      "order_id": "TXE-6093859d8a2d52c241de9db7c2518358",
+      "article_id": "article:e48e4bd7d5a51af04c379893",
+      "search_intent": "Abgrenzung einer privaten von einer gewerblichen Pferdehaltung mit den entscheidenden Umständen und Zuständigkeiten; keine feste Pferdezahl als allgemeine Grenze."
+    },
+    {
+      "metadata_binding": {
+        "title": "Darf man ein Pferd im eigenen Garten halten?",
+        "target_keyword": "Darf ich ein Pferd in meinem Garten halten?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "0aa9c6cd5c875a1e1a17b8f0476ceaa6ce768d60a8c051c6eebe0c1d0c3095fa"
+      },
+      "order_id": "TXE-468c771d92f81ef1846dfa37a2c46f43",
+      "article_id": "article:a82b0108a7d3aba7044986ee",
+      "search_intent": "Ob die Pferdehaltung im eigenen Garten rechtlich erlaubt sein kann und welche örtlichen Regeln und Nutzungsvorgaben entscheidend sind."
+    },
+    {
+      "metadata_binding": {
+        "title": "Was kontrolliert das Veterinäramt bei der Pferdehaltung?",
+        "target_keyword": "Was prüft das Veterinäramt Pferdehaltung?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "5547705b734c8c4961b43af252f5081e511ff56aad31562aa1886da20bea1c42"
+      },
+      "order_id": "TXE-31eca0ea60e677f4a3bf7896bb09f793",
+      "article_id": "article:842b64ba15b0d0bd7428799e",
+      "search_intent": "Welche Punkte das Veterinäramt bei einer Pferdehaltung überprüfen kann, mit Fokus auf Haltung und Tierwohl sowie Grenzen pauschaler Prüflisten."
+    },
+    {
+      "metadata_binding": {
+        "title": "Was kostet ein Pferd im Monat mit Stallmiete?",
+        "target_keyword": "Wie viel kostet ein Pferd im Monat mit Stallmiete?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "c7ff6c7dae82903cd9da5bc1a97c6b553f8bb6acb069daf3a84d434ed8ac9a2b"
+      },
+      "order_id": "TXE-1cbedfd2852ded46a7d64ce489c1d211",
+      "article_id": "article:97c81e48d6ad3aa63786cb41",
+      "search_intent": "Monatliche Gesamtkosten der Pferdehaltung ausdrücklich mit Stallmiete, laufenden Einzelposten und variablen Kostenfaktoren."
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Strafen drohen bei der Nutzung eines Reitplatzes ohne Genehmigung?",
+        "target_keyword": "Welche Strafe droht, wenn man einen Reitplatz ohne Genehmigung nutzt?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "e96dcb440d506242a2d3fa47fc1562e57cc54e0be2fc4f41c4ac22b11b11ebbc"
+      },
+      "order_id": "TXE-e17c3645481be98bba1678930c87c03f",
+      "article_id": "article:de965b71f16e3c691e4cc1db",
+      "search_intent": "Mögliche rechtliche Folgen der Nutzung eines Reitplatzes ohne erforderliche Genehmigung; Einordnung abhängig von Bundesland und Einzelfall."
+    },
+    {
+      "metadata_binding": {
+        "title": "Kann ein Nachbar die Pferdehaltung verbieten?",
+        "target_keyword": "Kann Nachbar Pferdehaltung verbieten?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "103516cc8e8975e5c879edbba997fab71470bd297f048851aedf504396eaebdd"
+      },
+      "order_id": "TXE-bd4160cb9c301c4555eae362ff296c26",
+      "article_id": "article:917a5634cf5c65ac1efbfc9a",
+      "search_intent": "Ob und unter welchen rechtlichen Voraussetzungen Nachbarn gegen eine Pferdehaltung vorgehen können, einschließlich möglicher Nutzungskonflikte."
+    },
+    {
+      "metadata_binding": {
+        "title": "Muss man Einnahmen aus der Vermietung von Pferdeboxen versteuern?",
+        "target_keyword": "Muss ich Steuern auf die Vermietung von Pferdeboxen zahlen?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "07140304e922f09897f864b32500520b6b16e554ba0f79e02a877ad33750573d"
+      },
+      "order_id": "TXE-70b11d8ded81bd289adb5f7d0bd06768",
+      "article_id": "article:581b285929f58584762c6b9f",
+      "search_intent": "Wie Einnahmen aus der Vermietung von Pferdeboxen steuerlich eingeordnet werden können und welche Umstände die Steuerpflicht bestimmen."
+    },
+    {
+      "metadata_binding": {
+        "title": "Ist eine Pferdebox genehmigungsfrei?",
+        "target_keyword": "Ist eine Pferdebox genehmigungsfrei?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "60ba3dfd268b890b070cec19e66dd9d7b09bbc667dd1ff52dedda53b78b8fd7d"
+      },
+      "order_id": "TXE-bd5db13f6fcd116dbeeeb24297006a6b",
+      "article_id": "article:2077f5cffb8659aafc62f18b",
+      "search_intent": "Ob die Errichtung beziehungsweise Nutzung einer Pferdebox genehmigungsfrei sein kann und warum die Antwort von örtlichem Baurecht abhängt."
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie hoch sind die monatlichen Unterhaltskosten für ein Pferd?",
+        "target_keyword": "Wie viel Unterhalt braucht man monatlich für ein Pferd?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "95d8204d9ede14ba3a501790b3fe6f7af45239000340ea3386ef85be246d3db8"
+      },
+      "order_id": "TXE-23b3797c3537ab5288fbcd23d293836b",
+      "article_id": "article:d1992cf162c2abd34b4ce9e6",
+      "search_intent": "Allgemeine monatliche Unterhaltskosten eines Pferdes über alle Haltungsformen hinweg; Abgrenzung zum gesonderten Beitrag speziell mit Stallmiete."
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Maße sind bei Reithallen üblich?",
+        "target_keyword": "Wie groß sind Reithallen?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "8c98615d2f6fadb96e9b10665e559897a520d1ebe912f9f84bcc3d8ab215e5ed"
+      },
+      "order_id": "TXE-025427cf6f26c480ae3597c89bf8f26d",
+      "article_id": "article:f6529d94b602c957e62b4c27",
+      "search_intent": "Welche Größen und Maße bei Reithallen üblich sind und wie sich Maße nach Nutzungszweck unterscheiden."
+    }
+  ],
+  "manifest_sha256": "4665c68bde1bfa42c87d0c73430ee792150ab02254f8d4957f59161956b7aa5c"
+}
