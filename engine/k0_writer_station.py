@@ -30,6 +30,7 @@ K0_OFFICIAL_SOURCE_HOSTS = frozenset({
     'umn.edu',                  # University of Minnesota Extension, official university service
     'landwirtschaftskammer.de', # Official Landwirtschaftskammer Nordrhein-Westfalen
     'lk-nienburg.de',          # Verified official Landkreis Nienburg government website (impressum 2026-11-21)
+    'aelf-al.bayern.de',       # Official Bavarian agriculture and forestry authority AELF (verified 2026-11-21)
 })
 K0_OWN_PORTAL_SOURCE_HOSTS = frozenset({
     'pferde-atelier.de', 'hobbydepot.de', 'hab-und-bewahr.de',
