@@ -1,0 +1,30 @@
+{
+  "contract": "K0_RESEARCH_RETURN_V1",
+  "status": "REPAIR_REQUIRED",
+  "owner": "SAME_RESEARCH_OWNER",
+  "identity": {
+    "title": "Kann ein Nachbar die Pferdehaltung verbieten?",
+    "target_keyword": "Kann Nachbar Pferdehaltung verbieten?",
+    "category": "recht-finanzen-organisation",
+    "article_type": "FAQ",
+    "plan_slot": "103516cc8e8975e5c879edbba997fab71470bd297f048851aedf504396eaebdd"
+  },
+  "run_instance_id": "run:a8a81d6a70f95b65207f2685",
+  "return_to": "AUTHORING_CONTEXT.json",
+  "issues": [
+    {
+      "fact_id": "F1",
+      "reason": "ORIGINAL_SOURCE_NOT_RETRIEVABLE"
+    },
+    {
+      "fact_id": "F2",
+      "reason": "ORIGINAL_SOURCE_NOT_RETRIEVABLE"
+    },
+    {
+      "fact_id": "F3",
+      "reason": "ORIGINAL_SOURCE_NOT_RETRIEVABLE"
+    }
+  ],
+  "next_action": "RESEARCH_AGAIN_OR_PROVE_ORIGINAL_SOURCE_AND_RESUBMIT_SAME_RUN",
+  "publish_allowed": false
+}
