@@ -19,6 +19,8 @@ AUTHORING_CONTEXT_CONTRACT='K0_AUTHORING_CONTEXT_V1'
 # from arbitrary self-declared source labels, domains ending in .org, or blogs.
 K0_OFFICIAL_SOURCE_HOSTS = frozenset({
     'horseware.com',             # official manufacturer
+    'equiva.com',               # verified official equestrian retailer and own-brand source
+    'simprax.com',              # verified official manufacturer of blanket impregnation
     'tierschutzbund.de',         # official animal-welfare association
     'dlg.org',                   # official agricultural association
     'worldhorsewelfare.org',     # official animal-welfare organisation
