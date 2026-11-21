@@ -184,5 +184,34 @@
       "WordPress plugin"
     ],
     "no_runtime_release": true
+  },
+  "first_three_complete_articles_original_php_format_test": {
+    "test_date": "2026-11-21",
+    "result": "PASS_FOR_ORIGINAL_PHP_DRY_RUN_ONLY",
+    "test_checks_passed": 14,
+    "test_checks_total": 14,
+    "fully_reconstructed_html_matches_real_lt68_exact_hashes": true,
+    "original_php_importer": "PSERC_System4_Import::normalizePayload from original Hobbydepot 0.4.24.18 unchanged ZIP",
+    "original_importer_result": "PSERC_SYSTEM4_PAYLOAD_VALID",
+    "articles": 3,
+    "negative_php_tests_blocked": 6,
+    "publish_allowed": false,
+    "latest_real_lt68_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/44889447704",
+    "latest_real_lt68_artifact": 14701297107,
+    "real_lt68_current_status": "PASS 3/3, 0 unresolved",
+    "real_research_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/44889232903",
+    "real_research_artifact": 14701621025,
+    "paragraphs_reviewed": 30,
+    "original_sources_checked": 10,
+    "source_excerpts_matched": 16,
+    "research_approved": false,
+    "source_report": "98_ERSTER_DREI_ARTIKEL_WP_IMPORT_FORMAT_PHP_TEST_20261121.md",
+    "local_report_name": "HOBBYDEPOT_ERSTER_ARTIKEL_FORMATTEST_ERGEBNIS_20261121.json",
+    "local_report_sha256": "979f0b1c0b8e66f5ee35cea9a94551a624e1b1fd13ac70983c13b1bb510509a9",
+    "kmulti_office_commit": "b6c3397f8402058b0c7e7883fbf391676d9ebfe1",
+    "reason_no_final_import": "Separate complete research-owner/authoring signoff and actual 121-rule QA unproven; hobby_depot NO_VALUES_BLOCKED and K-Multi production_enabled false",
+    "changed_code_or_wp_zip": false,
+    "actual_wp_live_import_performed": false,
+    "safe_user_action": "Kein Plugin installieren und keine Test-Importdatei in WordPress hochladen"
   }
 }
