@@ -1,0 +1,176 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Was kostet es, eine Pferdedecke waschen zu lassen?",
+    "target_keyword": "Was kostet es, eine Pferdedecke Waschen zu lassen?",
+    "category": "recht-finanzen-organisation",
+    "article_type": "FAQ",
+    "plan_slot": "4f910d3b25fa4f3df565b85ea0ce963f614ed0bbadd2a2223b756bce020f61bf"
+  },
+  "content_profile": {
+    "search_intent": "Typische Kosten für das professionelle Waschenlassen einer Pferdedecke und preisbestimmende Faktoren; unabhängig von einem einzelnen Anbieter."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+          "source_title": "Horseware Ireland – Pferdedecken pflegen"
+        }
+      ],
+      "claims": [
+        "Ein professioneller Pferdedecken-Waschservice ist eine mögliche Reinigungsmethode.",
+        "Ein professioneller Dienst kann Decken waschen, reparieren und bei Bedarf nachimprägnieren.",
+        "Bei fachgerechter Pflege ist eine erneute Imprägnierung nicht immer erforderlich.",
+        "Die wasserabweisende Schutzschicht einer Decke kann nach längerer Verwendung nachlassen.",
+        "Reinigung und Lagerung dienen der längeren Verwendbarkeit von Pferdedecken."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was kostet es, eine Pferdedecke Waschen zu lassen?",
+      "topic": "Was kostet es, eine Pferdedecke waschen zu lassen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "recht-finanzen-organisation",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was kostet es, eine Pferdedecke waschen zu lassen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+        "source_title": "Horseware Ireland – Pferdedecken pflegen",
+        "evidence_text": "The easiest way is to take them to a professional blanket repair and washing service.",
+        "evidence_text_sha256": "327c2f5e516b52e76bef0ccf1b92cc9a75309c32ac39bd7c75d42f9717aa353d",
+        "statement": "Ein professioneller Pferdedecken-Waschservice ist eine mögliche Reinigungsmethode.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+        "source_title": "Horseware Ireland – Pferdedecken pflegen",
+        "evidence_text": "They can fix any damage, wash the blanket, and re-proof it if required.",
+        "evidence_text_sha256": "b4f70c45a0fc85324bdfd647211b05ce16b8158420740cce29b8b2033d1b7bd4",
+        "statement": "Ein professioneller Dienst kann Decken waschen, reparieren und bei Bedarf nachimprägnieren.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+        "source_title": "Horseware Ireland – Pferdedecken pflegen",
+        "evidence_text": "If you care for your turnouts properly, you should not need to re-proof them during the guarantee period.",
+        "evidence_text_sha256": "329f73d9ef666c0d15798e35a7bfffed3fe675a490d5652a7a26054cd0414f13",
+        "statement": "Bei fachgerechter Pflege ist eine erneute Imprägnierung nicht immer erforderlich.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+        "source_title": "Horseware Ireland – Pferdedecken pflegen",
+        "evidence_text": "After the guarantee period, you may begin to notice the waterproof layer becoming less effective.",
+        "evidence_text_sha256": "d4fa204277b35c73abfa6d7a27a7a566a6b882fc6db04c6ec655553e853c8191",
+        "statement": "Die wasserabweisende Schutzschicht einer Decke kann nach längerer Verwendung nachlassen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+        "source_title": "Horseware Ireland – Pferdedecken pflegen",
+        "evidence_text": "Washing and storing horse blankets isn’t just great for saving space but it maximizes the life of your horse’s blankets too.",
+        "evidence_text_sha256": "2edfbb98c701237f8a7c8fa580ddeacfa9c74cad98490401d420ba0e55bf7197",
+        "statement": "Reinigung und Lagerung dienen der längeren Verwendbarkeit von Pferdedecken.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/recht-finanzen-organisation/",
+        "anchor": "recht-finanzen-organisation",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "anchor": "pferdedecken-regendecken-pflege",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/recht-finanzen-organisation/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "recht-finanzen-organisation",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Regendecken",
+      "Pferdedecken",
+      "Kosten",
+      "Waschservice",
+      "Reinigung",
+      "Imprägnierung",
+      "Preisfaktoren"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine Tabelle würde ohne eigenständigen Vergleich der Bedingungen nur den Fließtext wiederholen und keinen zusätzlichen Nutzen bringen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
