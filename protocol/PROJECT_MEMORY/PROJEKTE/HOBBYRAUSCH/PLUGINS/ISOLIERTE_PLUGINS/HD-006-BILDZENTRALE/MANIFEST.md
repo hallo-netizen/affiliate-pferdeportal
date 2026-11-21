@@ -1,3 +1,18 @@
+# HD006 BILDZENTRALE – PLUGINBÜRO / CURRENT
+
+**Stand 08.11.2026: 2.8.14 ist die aktuelle lokal geprüfte vollständige Installationsfassung.**  
+**Die vollständige `Bildzentrale-2.8.14.zip` und `CURRENT.zip` sind hier auf GitHub byteidentisch gespeichert**, Git-Blob `9d9fc40369ae738a6e1324ddc9c4d65564727eda`, je 86.568 Byte, SHA256 `06ffeac81f37d5d20a424e1d93dd74c597b0bf1cb7d472da391337d5c49c529e`.
+
+**Aktueller Funktionsstand:** HD006 heißt im WordPress-Menü **Bildzentrale**; das getrennte Zuordnungsplugin heißt **Bilder zuordnen**. Verbesserter Hero-Grundprompt für neue Hobbyregisterfotos mit deutlich größerem Kameraabstand und erkennbarer Tätigkeit im breiten Zuschnitt. Vorhandene zugewiesene Fotos und Bewertungen bleiben geschützt; neue Bilder nur auf Bestellung und erst nach Zustimmung übernehmen.
+
+**Prüfstand:** vollständiges ZIP, 2/2 PHP-Syntax, 149/149 Backend-, 27/27 Menü- und 39/39 Chromium-Prüfungen lokal PASS. **Kein echter WordPress-/Magnific-Live-PASS für 2.8.14**. [Aktuelle HD006-Akte](../../PLUGIN_AKTEN/HD-006-BILDZENTRALE/CURRENT.md) und [2.8.14-Prüfvertrag](../../PLUGIN_AKTEN/HD-006-BILDZENTRALE/BILDZENTRALE_2.8.14_HERO_PROMPT_UND_FREIGABE_20261108.md).
+
+**GitHub-Änderung:** [PR #709](https://github.com/hallo-netizen/affiliate-pferdeportal/pull/709) → Projekt-Campus-Hauptbranch; noch nicht als übernommen behaupten.
+
+---
+
+## Historische Manifest-Angaben – 2.7.8 (nicht mehr Current)
+
 # HD-006 – ISOLIERTER PLUGINSTAND – MANIFEST
 
 STAND: 2026-10-20

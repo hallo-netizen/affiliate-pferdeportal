@@ -1,3 +1,17 @@
+# AKTUELLE ERGÄNZUNG 2.8.10 – MENÜNAMEN (08.11.2026)
+
+**Diese Ergänzung hat Vorrang vor der folgenden historischen 2.8.8-Tabelle.**
+
+- **Bildzentrale** = das ORIGINAL-Plugin zur Bilderzeugung (HD-006) unter `/wp-admin/admin.php?page=hdbz-bilder-erstellen`.
+- **Bilder zuordnen** = das andere vorhandene Plugin unter `/wp-admin/admin.php?page=hobby-depot-bildzentrale`.
+- **Beide Einträge haben getrennte Klickwege, unterschiedliche Namen und getrennte Callbacks.**
+- Niemals die beiden Namen vertauschen, beide gleich nennen oder die alte fremde Zuordnungs-URL für die Erzeugung verwenden.
+- Der Menütitel des ursprünglichen HD-006 lautet ausdrücklich **„Bildzentrale“**, wie vom Betreiber festgelegt.
+- Verbindlicher aktueller Installationskandidat: **2.8.10**, nicht 2.8.8/2.8.9.
+- Admin-Menü-Regression **27/27 PASS** im lokalen Simulator; WordPress-Liveabnahme offen.
+
+---
+
 # HD-006 – verbindlicher Menüvertrag | 08.11.2026
 
 **Problemursache, nicht noch einmal nur Titel umbenennen!**
