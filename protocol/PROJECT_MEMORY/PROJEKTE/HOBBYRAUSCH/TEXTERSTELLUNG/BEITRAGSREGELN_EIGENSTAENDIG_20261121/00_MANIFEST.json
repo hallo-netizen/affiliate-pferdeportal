@@ -33,8 +33,8 @@
       "wordpress_article_type": "Pflege",
       "own_hobby_rulebook_id": "HOBBY_PFLEGE",
       "file": "30_PFLEGE.json",
-      "existing_kmulti_transport_reference": "HOBBY_ANLEITUNG_PFLEGE",
-      "existing_transport_matches_new_own_book": false
+      "existing_kmulti_transport_reference": "HOBBY_PFLEGE",
+      "existing_transport_matches_new_own_book": true
     },
     {
       "wordpress_article_type": "Vergleich",
@@ -47,8 +47,8 @@
       "wordpress_article_type": "Anleitung",
       "own_hobby_rulebook_id": "HOBBY_ANLEITUNG",
       "file": "50_ANLEITUNG.json",
-      "existing_kmulti_transport_reference": "HOBBY_ANLEITUNG_PFLEGE",
-      "existing_transport_matches_new_own_book": false
+      "existing_kmulti_transport_reference": "HOBBY_ANLEITUNG",
+      "existing_transport_matches_new_own_book": true
     }
   ],
   "copy_of_k0_rule_values": false,
@@ -56,13 +56,13 @@
   "extra_portal_types_created": false,
   "magazine": "MAGAZIN ist nur Route; keine bestehende Magazin-Beitragskategorie belegt, deshalb keine neue Magazin-Art oder Auto-Zuordnung.",
   "notes": [
-    "Pflege und Anleitung sind fachlich verschieden. Die derzeitige technische K-Multi-Referenz zeigt bei beiden noch auf dasselbe ältere Kandidatenbuch; ohne ausdrücklichen separaten Integrationsauftrag weder diese Referenz noch K-Multi ändern.",
+    "Die bislang zusammengelegten K-Multi-Altverweise für Pflege und Anleitung sind nach ausdrücklichem Nutzerauftrag vom 21.11.2026 auf HOBBY_PFLEGE bzw. HOBBY_ANLEITUNG korrigiert. Keine nachträgliche MINI-Entscheidung; die Original-WordPress-Aufträge bleiben unverändert.",
     "Bestehende identitätsgebundene fünf WordPress-Felder bleiben in jedem Fall unverändert.",
     "Wortzahlen und H2 sind redaktionelle Hobby-Ziele, keine automatisch verbindlichen Laufzeitsperren.",
-    "Die fünf Regelbücher sind nur im Hobbydepot-Büro abgelegt und werden nicht durch bloßes Speichern in WordPress oder K-Multi aktiviert.",
+    "Die fünf eigenen Regelbücher und die zentrale Grundregeldatei liegen jetzt bytegleich auch im K-Multi-Eingangsbereich. Das ist die technische Anbindung, noch keine Freigabe zum Schreiben/Veröffentlichen.",
     "KISS-Korrektur: 12 identische Grundregeln aus fünf Büchern zentralisiert (60 Textkopien → 12); Typregeln, Hobbynamen und ursprüngliche WordPress-Fünffelderdatei unverändert. Keine Regelaktivierung."
   ],
-  "changes_outside_hobby_office": false,
+  "changes_outside_hobby_office": true,
   "requires_activation_after_approval": true,
   "authoring_active": false,
   "publish_allowed": false,
@@ -117,13 +117,17 @@
       "three_existing_FAQ_orders_source_verified": true,
       "four_other_types_real_original_order_samples_available": false,
       "five_types_original_php_acceptance_checked": true,
-      "same_existing_kmulti_type_registry_for_pflege_and_anleitung": true,
-      "those_two_unresolved": true,
+      "same_existing_kmulti_type_registry_for_pflege_and_anleitung": false,
+      "those_two_unresolved": false,
       "inactive_rule_state": "NO_VALUES_BLOCKED",
       "current_production_enabled": false,
       "automatic_article_writing_allowed": false,
       "automatic_publication_allowed": false,
-      "requires_separately_authorized_kmulti_core_integration": true
+      "requires_separately_authorized_kmulti_core_integration": false,
+      "all_five_types_attached_to_unique_books": true,
+      "six_rule_files_byteidentical_to_hobby_source": true,
+      "entry_references_future_rulebook_after_research": true,
+      "full_research_and_writer_signoff_still_required": true
     },
     "proof": {
       "source_wordpress_plugin": "Texterstellung Hobbydepot 0.4.24.18",
@@ -134,6 +138,42 @@
       "no_original_wordpress_import_or_kmulti_writer_run_claimed": true
     }
   },
-  "handoff_readiness": "HOBBY_PREPARED_READ_ONLY; K_MULTI_RUNTIME_NOT_AUTHORIZED",
-  "no_second_editorial_owner": true
+  "handoff_readiness": "ALL_FIVE_HOBBY_WP_TYPES_ATTACHED_TO_DISTINCT_KMULTI_BOOK_PATHS; RESEARCH_AND_WRITER_QA_NOT_APPROVED",
+  "no_second_editorial_owner": true,
+  "kmulti_attachment_20261121": {
+    "authorization": "User expressly requested all five contribution types be connected in K-Multi",
+    "source_of_article_type": "Original WordPress MINI",
+    "k_multi_repository": "hallo-netizen/k0-multiportal",
+    "branch": "k0-offline-rule-bindings-20261027",
+    "commit": "9a47be27c103d9436f5ec813b23a790be579b5a3",
+    "registry": "offline_writer_dev/portal_auto/KMULTI_PORTAL_REGISTRY.json",
+    "handoff": "offline_writer_dev/portal_auto/kmulti_portal_entry.py",
+    "book_directory": "offline_rules/portal_bindings/hobby_depot/regelbuecher",
+    "type_to_book": {
+      "Beratung": "HOBBY_RATGEBER_WISSEN",
+      "FAQ": "HOBBY_FAQ",
+      "Pflege": "HOBBY_PFLEGE",
+      "Vergleich": "HOBBY_VERGLEICH",
+      "Anleitung": "HOBBY_ANLEITUNG"
+    },
+    "shared_file": "05_GEMEINSAME_REGELN.json",
+    "no_further_type_decision": true,
+    "books_byteidentical_to_hobby": true,
+    "test_from_exact_original_code": {
+      "pass": 19,
+      "total": 19
+    },
+    "prior_regression": {
+      "pass": 22,
+      "total": 22
+    },
+    "no_K0_change": true,
+    "no_WP_plugin_change": true,
+    "global_release_state": "NO_VALUES_BLOCKED",
+    "production_enabled": false,
+    "research_approval": false,
+    "writer_approval": false,
+    "formal_121_rule_release": false,
+    "metadata_five_fields_unchanged": true
+  }
 }

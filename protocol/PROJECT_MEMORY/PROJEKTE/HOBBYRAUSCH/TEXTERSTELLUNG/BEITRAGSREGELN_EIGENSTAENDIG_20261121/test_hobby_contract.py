@@ -161,14 +161,20 @@ class HobbydepotOriginalFiveTypeContract(unittest.TestCase):
                          ("HOBBY_PFLEGE", "HOBBY_ANLEITUNG"))
         self.assertNotEqual(p["additional_type_rules"], a["additional_type_rules"])
 
-    def test_21_legacy_kmulti_two_mismatches_not_secretly_approved(self):
-        mismatches = [r["wordpress_article_type"] for r in self.manifest["books"]
-                      if not r["existing_transport_matches_new_own_book"]]
-        self.assertEqual(mismatches, ["Pflege", "Anleitung"])
-        for r in self.manifest["books"]:
-            if r["wordpress_article_type"] in mismatches:
-                self.assertEqual(r["existing_kmulti_transport_reference"],
-                                 "HOBBY_ANLEITUNG_PFLEGE")
+    def test_21_all_five_kmulti_types_now_attached_separately(self):
+        expected = {
+            "Beratung": "HOBBY_RATGEBER_WISSEN", "FAQ": "HOBBY_FAQ",
+            "Pflege": "HOBBY_PFLEGE", "Vergleich": "HOBBY_VERGLEICH",
+            "Anleitung": "HOBBY_ANLEITUNG",
+        }
+        self.assertEqual(
+            {r["wordpress_article_type"]: r["existing_kmulti_transport_reference"]
+             for r in self.manifest["books"]}, expected)
+        self.assertTrue(all(r["existing_transport_matches_new_own_book"]
+                            for r in self.manifest["books"]))
+        self.assertEqual(len(set(expected.values())), 5)
+        self.assertTrue(self.manifest["handoff_contract"]
+                        ["current_integration"]["all_five_types_attached_to_unique_books"])
 
     def test_22_unknown_type_must_fail_without_guessing(self):
         for t in ("Porträt & Bericht", "Inspiration", "Münzen", "", "faq", None):

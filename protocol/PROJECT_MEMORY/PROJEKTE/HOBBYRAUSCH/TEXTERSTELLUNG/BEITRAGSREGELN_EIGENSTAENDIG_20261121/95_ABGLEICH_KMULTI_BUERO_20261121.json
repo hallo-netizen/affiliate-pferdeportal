@@ -279,5 +279,28 @@
       "Anleitung"
     ],
     "explicit_authorization_required_for_KMulti_registry_and_binding_change": true
+  },
+  "latest_five_type_actual_binding_20261121": {
+    "status": "CONNECTED_NOT_CONTENT_APPROVED",
+    "KMulti_git_commit": "9a47be27c103d9436f5ec813b23a790be579b5a3",
+    "corrected_types": [
+      "Pflege",
+      "Anleitung"
+    ],
+    "five_distinct_bindings": {
+      "Beratung": "HOBBY_RATGEBER_WISSEN",
+      "FAQ": "HOBBY_FAQ",
+      "Pflege": "HOBBY_PFLEGE",
+      "Vergleich": "HOBBY_VERGLEICH",
+      "Anleitung": "HOBBY_ANLEITUNG"
+    },
+    "all_six_rule_files_byteidentical": true,
+    "original_python_route_actual_pass": 19,
+    "original_existing_python_regression_actual_pass": 22,
+    "new_official_KMulti_gha_run_not_yet_verified": true,
+    "K0_unmodified": true,
+    "wordpress_plugin_unmodified": true,
+    "production_enabled": false,
+    "full_writer_release": false
   }
 }

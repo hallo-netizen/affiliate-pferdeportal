@@ -91,8 +91,8 @@
       "conclusion_policy": "Kurzes H2 'Fazit' mit der zentralen Erhaltungsempfehlung.",
       "links_policy": "Nur überprüfte, relevante bestehende WordPress-Ziele.",
       "status": "TYPE_SPECIFIC_HOBBY_PROPOSAL_UNAPPROVED",
-      "current_kmulti_reference": "HOBBY_ANLEITUNG_PFLEGE",
-      "kmulti_mapping_equal": false
+      "current_kmulti_reference": "HOBBY_PFLEGE",
+      "kmulti_mapping_equal": true
     },
     {
       "original_wp_type": "Vergleich",
@@ -146,8 +146,8 @@
       "conclusion_policy": "H2 'Fazit' mit Ergebnischeck, ohne neue unbewiesene Aussagen.",
       "links_policy": "Nur geprüfte bestehende WordPress-Ziele.",
       "status": "TYPE_SPECIFIC_HOBBY_PROPOSAL_UNAPPROVED",
-      "current_kmulti_reference": "HOBBY_ANLEITUNG_PFLEGE",
-      "kmulti_mapping_equal": false
+      "current_kmulti_reference": "HOBBY_ANLEITUNG",
+      "kmulti_mapping_equal": true
     }
   ],
   "never_import_foreign_formal_values": {
@@ -168,5 +168,13 @@
     "trustworthy_full_qa_signature": false,
     "wordpress_import_allowed": false
   },
-  "user_action": "No new plugin. A future specifically authorized K-Multi rule activation and real end-to-end proof is necessary; do not treat this document as that authorization."
+  "user_action": "No new plugin. A future specifically authorized K-Multi rule activation and real end-to-end proof is necessary; do not treat this document as that authorization.",
+  "k_multi_type_binding_update_20261121": {
+    "status": "FIVE_DISTINCT_TYPEBOOK_PATHS_ATTACHED_IN_REAL_KMULTI_ENTRY",
+    "git_commit": "9a47be27c103d9436f5ec813b23a790be579b5a3",
+    "number_of_distinct_types": 5,
+    "shared_rules_once": 12,
+    "type_specific_rules": 25,
+    "still_not_authorized_for_article_writer": true
+  }
 }
