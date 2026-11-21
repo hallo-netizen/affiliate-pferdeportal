@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche Arten von Trensen gibt es für Pferde?",
+      "target_keyword": "Welche Arten von Trensen gibt es für Pferde?",
+      "category": "trensen-vergleich",
+      "article_type": "Vergleich",
+      "plan_slot": "ec61c574a0c784322ec62b4e52fbffe1b2ee05bbb0bce58f9cfde0845307d375"
+    }
+  ],
+  "batch_sha256": "d08c26f328062511d2fb7d9f2513e4384f05b2a8fbf11a283783bf0cf3422f0c"
+}
