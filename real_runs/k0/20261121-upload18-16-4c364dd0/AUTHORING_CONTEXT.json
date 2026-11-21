@@ -1,0 +1,200 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Trensengebisse passend zum Pferd auswählen",
+    "target_keyword": "pferde trense gebiss",
+    "category": "gebisse-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "4c364dd09341ed4b414554425e139c01dbe1ddcbfd44145a73ac8982aa6e0f99"
+  },
+  "content_profile": {
+    "search_intent": "Das passende Gebiss im Zusammenhang mit der Trense und der individuellen Passform des Pferdes auswählen, statt allgemeine Gebissarten erneut vollständig zu erklären."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Trense",
+          "source_title": "Wikipedia – Trense"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Zaumzeug",
+          "source_title": "Wikipedia – Zaumzeug"
+        }
+      ],
+      "claims": [
+        "Eine Trense kann ein gebrochenes Gebiss bezeichnen.",
+        "Eine Wassertrense ist einfach gebrochen.",
+        "Doppelt gebrochene Trensen bestehen aus drei beweglich verbundenen Teilen.",
+        "Stangengebisse besitzen ein ungebrochenes Mundstück.",
+        "Richtig angepasste Zäumung lässt dem Pferd Raum zum Atmen und Kauen.",
+        "Zügel dienen der Einwirkung und dem Führen des Pferdes."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "pferde trense gebiss",
+      "topic": "Trensengebisse passend zum Pferd auswählen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "gebisse-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Passendes Zubehör für die Trense und das individuelle Pferd auswählen",
+      "decision_criteria": [
+        "Passform des Kopfstücks",
+        "Befestigung der Zügel",
+        "Gebisskompatibilität",
+        "Pflege und Zustand"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Trense",
+        "source_title": "Wikipedia – Trense",
+        "evidence_text": "Eine Trense ist ein gebrochenes Gebiss.",
+        "evidence_text_sha256": "b3269d8788fdc67d38446f69cb726e6b9883d83ee517ca8f62288c2c05d421ef",
+        "statement": "Eine Trense kann ein gebrochenes Gebiss bezeichnen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Trense",
+        "source_title": "Wikipedia – Trense",
+        "evidence_text": "Die Wassertrense ist einfach gebrochen.",
+        "evidence_text_sha256": "3508f0940de68e3903547c310d7865d44ffc879c70b18230eea1d1d7369c6871",
+        "statement": "Eine Wassertrense ist einfach gebrochen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Trense",
+        "source_title": "Wikipedia – Trense",
+        "evidence_text": "Die doppelt gebrochene Trense hat drei Teile, die beweglich miteinander verbunden sind.",
+        "evidence_text_sha256": "e64f578debbb901462edb68522de3d60e1aa5b27c05afd8cbffdb4de6091cb2c",
+        "statement": "Doppelt gebrochene Trensen bestehen aus drei beweglich verbundenen Teilen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://de.wikipedia.org/wiki/Trense",
+        "source_title": "Wikipedia – Trense",
+        "evidence_text": "Das Stangengebiss hat ein ungebrochenes Mundstück.",
+        "evidence_text_sha256": "1e3b1e8403d4553d26fe428a9c2c1817740366e4279d5afa0d67b38e13fe61ec",
+        "statement": "Stangengebisse besitzen ein ungebrochenes Mundstück.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://de.wikipedia.org/wiki/Zaumzeug",
+        "source_title": "Wikipedia – Zaumzeug",
+        "evidence_text": "Der Zaum muss korrekt verschnallt sein (Zwei-Finger-Methode), damit er nicht unbeabsichtigt drückt und das Pferd frei atmen und kauen kann.",
+        "evidence_text_sha256": "fe9a916025afaeba9d685048edc03b307791a25210a514c3d9cc9e900c27ba62",
+        "statement": "Richtig angepasste Zäumung lässt dem Pferd Raum zum Atmen und Kauen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F6": {
+        "source_url": "https://de.wikipedia.org/wiki/Zaumzeug",
+        "source_title": "Wikipedia – Zaumzeug",
+        "evidence_text": "Die Zügel dienen zum Aktivieren der Druckpunkte sowie einfach zum Führen des Tieres.",
+        "evidence_text_sha256": "a939f1a304e53302e4c46d1468296a541b39b252d09dd4c5da071e5912b644a9",
+        "statement": "Zügel dienen der Einwirkung und dem Führen des Pferdes.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/gebisse-beratung/",
+        "anchor": "gebisse-beratung",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/gebisse-faq/",
+        "anchor": "gebisse-faq",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/gebisse-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/gebisse-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "gebisse-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Trensengebisse",
+      "Pferd",
+      "Gebiss",
+      "Wassertrense",
+      "Passform",
+      "Reiten",
+      "Trensen"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Eine Schrittfolge und Einordnung konkreter Kriterien ist aussagekräftiger als eine Vergleichsmatrix mit künstlichen Füllzeilen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
