@@ -444,5 +444,99 @@
     "saved_kmulti_office_commit": "ef55a1d2d1b4f5208bcafb3f6a1edfa71ff9d47d",
     "kmulti_office": "https://github.com/hallo-netizen/k0-multiportal/blob/k0-offline-rule-bindings-20261027/offline_rules/portal_bindings/hobby_depot/HOBBYDEPOT_5_EIGENE_BEITRAGSREGELN_EINGANG_20261121.md",
     "next_non_fabricated_step": "Approve five distinct Hobby-specific formal values, execute actual 121 QA with verified semantic research for each original article, then obtain trusted external QA signer and produce only a WordPress draft JSON. This cannot be bypassed by synthetic approval/unsigned receipts."
+  },
+  "hobby_five_profileready_121_catalog_LT_actual_20261121": {
+    "date": "2026-11-21",
+    "status": "ACTUAL_103_OF_103_KMULTI_GITHUB_TESTS_PASS__FULL_121_QA_NOT_PERFORMED",
+    "verified_github_actions_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/44938516552",
+    "test_groups": {
+      "original_entry": 22,
+      "five_types_and_shared_research": 21,
+      "post_research_author_handoff": 18,
+      "new_five_profiles_and_negative_tests": 42,
+      "total": 103,
+      "failed": 0
+    },
+    "current_machine_readable_candidate": "HOBBY_RULE_PROFILE_121_PENDING_NOT_APPROVED.json",
+    "candidate_sha256": "f1d2ba01c4bcd26a5010ab463675a3223b2f0159a1ce37643b5de16cb2c70d3b",
+    "current_original_wordpress_types": [
+      "Beratung",
+      "FAQ",
+      "Pflege",
+      "Vergleich",
+      "Anleitung"
+    ],
+    "five_specific_book_word_targets_only": [
+      [
+        800,
+        1100
+      ],
+      [
+        500,
+        800
+      ],
+      [
+        650,
+        950
+      ],
+      [
+        850,
+        1100
+      ],
+      [
+        700,
+        1100
+      ]
+    ],
+    "own_type_rule_count": 25,
+    "common_hobby_rule_count_once": 12,
+    "one_shared_catalog_rules": 121,
+    "hard_rule_ids": 114,
+    "soft_target_rule_ids": 7,
+    "actual_3_real_original_FAQ_editorial_preview": {
+      "articles": 3,
+      "words": [
+        561,
+        545,
+        593
+      ],
+      "h2": [
+        3,
+        3,
+        3
+      ],
+      "html_identity_unchanged": true
+    },
+    "actual_language_owner_evidence": {
+      "actual_Java_LanguageTool_6_8_github_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/44931783156",
+      "original_artifact_sha256": "9aa0241a3c7b7627c77460342c4ea6d878e32b2b50ca22b3d0b238f6ebbb78c9",
+      "exact_Git_blob_copy": "dadd46d11c7157393585e5868a04d9c1425b5d39",
+      "identical_all_three_actual_HTML_hashes": true,
+      "three_original_texts_passed": 3,
+      "unresolved_language_findings": 0,
+      "not_a_signed_complete_121_QA_certificate": true
+    },
+    "concrete_cross_portal_conflict_rules": [
+      "words.hard_total_range",
+      "structure.h2_floor",
+      "structure.paragraph_floor",
+      "links.visible_exact",
+      "structure.required_blocks",
+      "facts.trace_required",
+      "table.presence_policy"
+    ],
+    "foreign_horse_values_are_only_read_only_comparison": true,
+    "last_original_research_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/44931906892",
+    "ten_original_sources_retrieved": true,
+    "sixteen_original_quotes_confirmed": true,
+    "thirty_paragraphs_evidenced": true,
+    "actual_research_semantics_signoff": false,
+    "original_K0_modified": false,
+    "hobby_WP_plugin_modified": false,
+    "all_114_hard_rules_real_QA_owner_approved": false,
+    "final_wordpress_import_created": false,
+    "current_production_state": "NO_VALUES_BLOCKED",
+    "next_owner_step": "Approve portal-specific Hobby interpretations for seven proven baseline collisions through the existing one K-Multi QA owner; run complete real 121 and signed research + language + article QA; no auto-publish.",
+    "current_kmulti_office_commit": "544cc6c8884c640c946838af84ea3618617205b3"
   }
 }
