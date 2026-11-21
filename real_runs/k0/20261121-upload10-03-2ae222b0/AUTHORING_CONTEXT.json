@@ -26,7 +26,7 @@
       ],
       "claims": [
         "Pferdedecken bestehen je nach Einsatzzweck aus unterschiedlichen Geweben.",
-        "Weidedecken können die Verschmutzung des Pferdes durch Schlamm mindern.",
+        "Regendecken und Winterdecken sind unterschiedliche Pferdedeckenarten.",
         "Die Pflegekennzeichnung beschreibt die für ein Textil zulässige Reinigungsbehandlung.",
         "Ein Pflegesymbol legt nicht fest, wann eine bestimmte Reinigung tatsächlich erforderlich ist."
       ],
@@ -64,9 +64,9 @@
       "F2": {
         "source_url": "https://de.wikipedia.org/wiki/Pferdedecke",
         "source_title": "Wikipedia – Pferdedecke",
-        "evidence_text": "Ein für den Pferdehalter vorteilhafter Nebeneffekt ist, dass das Pferd weniger schmutzig wird, wenn es sich im Schlamm wälzt.",
-        "evidence_text_sha256": "7a7bf8dd40d2a762f7d5fc4426debe094661117385940e8da0fb7d869571d0ca",
-        "statement": "Weidedecken können die Verschmutzung des Pferdes durch Schlamm mindern.",
+        "evidence_text": "Weidedecken gibt es als ungefütterte Regendecken oder als dicke Weide-Winterdecken.",
+        "evidence_text_sha256": "fd99d56feb8e5ece4e93bcae2030ab586d7842aeb7059a72e61e53b8656c2e6e",
+        "statement": "Regendecken und Winterdecken sind unterschiedliche Pferdedeckenarten.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
