@@ -538,5 +538,68 @@
     "current_production_state": "NO_VALUES_BLOCKED",
     "next_owner_step": "Approve portal-specific Hobby interpretations for seven proven baseline collisions through the existing one K-Multi QA owner; run complete real 121 and signed research + language + article QA; no auto-publish.",
     "current_kmulti_office_commit": "544cc6c8884c640c946838af84ea3618617205b3"
+  },
+  "hobby_fact_qa_119_verified_20261121": {
+    "date": "2026-11-21",
+    "result": "PASS_119_OF_119_REAL_GITHUB_TESTS; NOT_FULL_121_RULE_QA",
+    "github_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/44941902890",
+    "test_groups": {
+      "original_kmulti_intake": 22,
+      "five_original_types_and_common_research": 21,
+      "post_research_author_station": 18,
+      "current_5_type_rule_profiles_and_negative_tests": 58,
+      "total": 119,
+      "failed": 0
+    },
+    "one_machine_report": {
+      "filename": "HOBBY_RULE_PROFILE_121_PENDING_NOT_APPROVED.json",
+      "sha256": "4d54ad935598f099d99300b8476acdc42e27e61f562af83bb0f6ca63925a6f72",
+      "location": "GitHub Actions run 44941902890, artifact HOBBY-FIVE-RULE-PROFILES-121-PENDING-NOT-APPROVED",
+      "word_press_import_file": false
+    },
+    "genuine_research_receipt": {
+      "repo_path": "offline_writer_dev/hobby_trial/fixtures/KMULTI_REAL_ORIGINAL_SOURCE_AUDIT_20261121.json",
+      "source_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/44931906892",
+      "git_blob_sha": "6b596442ca52185206c881d7b1ce95aed596f026",
+      "original_file_sha256": "301cac754dc9c510c1eed29b5ad995752e46ad1f60d582143aae7b4da3732d72",
+      "byte_identical_original": true,
+      "actual_source_fetches": 10,
+      "actual_exact_source_excerpts": 16,
+      "article_paragraphs_with_exact_text_alignment": 30,
+      "per_original_source_count_matches": true,
+      "semantic_owner_research_approved": false
+    },
+    "real_language_tool": {
+      "actual_GitHub_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/44931783156",
+      "original_language_exceptions_not_expanded": true,
+      "three_current_FAQ_HTML_hashes_exact": true,
+      "three_passed": 3,
+      "zero_unresolved": true
+    },
+    "original_121_rule_single_owner_audit": {
+      "original_catalog": 121,
+      "original_hard": 114,
+      "original_guidance_targets": 7,
+      "real_language_owner_evidence_for_three_FAQ_only": 1,
+      "unresolved_old_cross_portal_rule_semantics": 7,
+      "other_hobby_full_qa_owner_rules_not_performed": 106,
+      "complete_signed_121_QA_on_real_Hobby_articles": false,
+      "original_K0_read_only_engine_py_references_scanned": 30,
+      "rule_ids_found_as_exact_literals_in_old_verified_K0_reference": 110,
+      "rule_ids_missing_exact_literals_in_old_verified_K0_reference": 11,
+      "interpretation": "Lack of exact literal is not proof that code is missing; a reference is not a functioning Hobby check."
+    },
+    "unchanged_original_wp_five_fields": true,
+    "unchanged_original_three_article_HTML": true,
+    "original_K0_unchanged": true,
+    "wordpress_plugin_unchanged": true,
+    "unrelated_portals_unchanged": true,
+    "current_global_hobby_binding_state": "NO_VALUES_BLOCKED",
+    "production_enabled": false,
+    "publish_allowed": false,
+    "real_finished_WordPress_import_approved": false,
+    "next_actual_owner_work": "Implement and sign real Hobby hard-rule methods at same existing K-Multi QA owner; resolve seven portal conflicts without accidentally activating old horse K0 values; obtain independent facts approval and trusted signer, then produce verified draft import.",
+    "kmulti_office_commit": "c638e886896d81e8f34fd1df7288284f85dcc1c8",
+    "kmulti_office_link": "https://github.com/hallo-netizen/k0-multiportal/blob/k0-offline-rule-bindings-20261027/offline_rules/portal_bindings/hobby_depot/HOBBYDEPOT_5_EIGENE_BEITRAGSREGELN_EINGANG_20261121.md"
   }
 }
