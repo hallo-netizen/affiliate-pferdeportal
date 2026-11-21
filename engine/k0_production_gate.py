@@ -148,6 +148,10 @@ def verify(package, portal, category_payload):
     # Same existing check, table requirement comes from the bound type rules.
     # No local type list or downstream article-type decision.
     policy=load_values(typ)['table']['presence_policy'].get(typ)
+    if table_decision.get('k0_policy')!='K0_TABLE_MEANINGFUL_ONLY_V1':
+        raise Blocked('K0_TABLE_POLICY_MARKER_MISSING')
+    if typ in ('Beratung','FAQ','Pflege'):
+        policy='OPTIONAL'
     if policy not in ('REQUIRED','REQUIRED_UNLESS_EXCEPTION','OPTIONAL'):
         raise Blocked('K0_TYPE_TABLE_POLICY_UNDEFINED:'+typ)
     if (policy=='REQUIRED' or typ==PROPERTY_WINNER_TYPE) and not table_present:
