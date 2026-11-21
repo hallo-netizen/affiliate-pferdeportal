@@ -145,5 +145,6 @@
     },
     "table_multiword_exceptions": []
   },
-  "publish_allowed": false
+  "publish_allowed": false,
+  "source_approval_provenance": "Official Landkreis Nienburg publisher verified by 2026-11-21 Impressum; K0 original research-owner allowlist approved."
 }
