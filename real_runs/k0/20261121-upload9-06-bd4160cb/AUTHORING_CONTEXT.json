@@ -1,0 +1,167 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Kann ein Nachbar die Pferdehaltung verbieten?",
+    "target_keyword": "Kann Nachbar Pferdehaltung verbieten?",
+    "category": "recht-finanzen-organisation",
+    "article_type": "FAQ",
+    "plan_slot": "103516cc8e8975e5c879edbba997fab71470bd297f048851aedf504396eaebdd"
+  },
+  "content_profile": {
+    "search_intent": "Ob und unter welchen rechtlichen Voraussetzungen Nachbarn gegen eine Pferdehaltung vorgehen können, einschließlich möglicher Nutzungskonflikte."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.gesetze-im-internet.de/bgb/__906.html",
+          "source_title": "Bürgerliches Gesetzbuch – § 906"
+        },
+        {
+          "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354972/index.php",
+          "source_title": "Amt für Ernährung, Landwirtschaft und Forsten – Baurecht"
+        }
+      ],
+      "claims": [
+        "Nicht jede unwesentliche Geruchs- oder Geräuschbelastung vom Nachbargrundstück kann untersagt werden.",
+        "Bei der Beurteilung nachbarlicher Beeinträchtigungen können gesetzliche Grenz- und Richtwerte maßgeblich sein.",
+        "Auch Ortsüblichkeit und wirtschaftlich zumutbare Schutzmaßnahmen spielen bei Nachbarbelastungen eine Rolle.",
+        "Baurechtliche Zulässigkeit und private nachbarrechtliche Ansprüche sind gesondert zu prüfen."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Kann Nachbar Pferdehaltung verbieten?",
+      "topic": "Kann ein Nachbar die Pferdehaltung verbieten?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "recht-finanzen-organisation",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Kann ein Nachbar die Pferdehaltung verbieten?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.gesetze-im-internet.de/bgb/__906.html",
+        "source_title": "Bürgerliches Gesetzbuch – § 906",
+        "evidence_text": "Der Eigentümer eines Grundstücks kann die Zuführung von Gasen, Dämpfen, Gerüchen, Rauch, Ruß, Wärme, Geräusch, Erschütterungen und ähnliche von einem anderen Grundstück ausgehende Einwirkungen insoweit nicht verbieten, als die Einwirkung die Benutzung seines Grundstücks nicht oder nur unwesentlich beeinträchtigt.",
+        "evidence_text_sha256": "5f45e132d93aa9935cd3a11b7038f1c62f15236d14cefbe09c14b6e94231c719",
+        "statement": "Nicht jede unwesentliche Geruchs- oder Geräuschbelastung vom Nachbargrundstück kann untersagt werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.gesetze-im-internet.de/bgb/__906.html",
+        "source_title": "Bürgerliches Gesetzbuch – § 906",
+        "evidence_text": "Eine unwesentliche Beeinträchtigung liegt in der Regel vor, wenn die in Gesetzen oder Rechtsverordnungen festgelegten Grenz- oder Richtwerte von den nach diesen Vorschriften ermittelten und bewerteten Einwirkungen nicht überschritten werden.",
+        "evidence_text_sha256": "705532e1168a94723b23f40bc2f487ea377252b06d670118d8ba8993b08532b6",
+        "statement": "Bei der Beurteilung nachbarlicher Beeinträchtigungen können gesetzliche Grenz- und Richtwerte maßgeblich sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.gesetze-im-internet.de/bgb/__906.html",
+        "source_title": "Bürgerliches Gesetzbuch – § 906",
+        "evidence_text": "Das Gleiche gilt insoweit, als eine wesentliche Beeinträchtigung durch eine ortsübliche Benutzung des anderen Grundstücks herbeigeführt wird und nicht durch Maßnahmen verhindert werden kann, die Benutzern dieser Art wirtschaftlich zumutbar sind.",
+        "evidence_text_sha256": "854a3e033542dbe75a8b34b6084fcf7d6b39ee572c8006b49ecbcfcc827ef74a",
+        "statement": "Auch Ortsüblichkeit und wirtschaftlich zumutbare Schutzmaßnahmen spielen bei Nachbarbelastungen eine Rolle.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354972/index.php",
+        "source_title": "Amt für Ernährung, Landwirtschaft und Forsten – Baurecht",
+        "evidence_text": "Privilegiert ist immer nur das einzelne Vorhaben – nie eine Person oder ein Betrieb!",
+        "evidence_text_sha256": "a2ac18b18db1249f0d9299848f461c914e83dba9135fdbd03140e289374335dc",
+        "statement": "Baurechtliche Zulässigkeit und private nachbarrechtliche Ansprüche sind gesondert zu prüfen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/recht-finanzen-organisation/",
+        "anchor": "Recht, Finanzen & Organisation",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/recht-finanzen-organisation/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "recht-finanzen-organisation",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Nachbar",
+      "Pferdehaltung",
+      "Gerüche",
+      "Geräusche",
+      "Recht",
+      "Baurecht",
+      "Beeinträchtigung",
+      "Versicherung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "NUANCE_LOSS",
+      "rationale": "Bei dieser Rechtsfrage hängen die Folgen von mehreren Umständen ab; eine schematische Tabelle könnte den Einzelfall unzulässig vereinfachen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
