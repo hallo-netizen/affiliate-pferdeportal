@@ -74,5 +74,66 @@
   "unverified_values_stay_nonbinding": true,
   "redudant_common_policies_normalized": true,
   "five_type_books_only_contain_type_specific_guidance": true,
-  "current_standard": "one 12-rule shared owner + one common editorial context + five minimal article type books"
+  "current_standard": "one 12-rule shared owner + one common editorial context + five minimal article type books",
+  "handoff_contract": {
+    "contract": "HOBBYDEPOT_EXISTING_WORDPRESS_FILE_TO_EDITORIAL_BOOKS_V1",
+    "scope": "HOBBYDEPOT_READ_ONLY_PREPARATION_NOT_KMULTI_RUNTIME_CHANGE",
+    "input": {
+      "same_original_wordpress_json_only": true,
+      "package_contract": "WP_K0_UPLOAD_PACKAGE_V1",
+      "site_host_location": "word_press_order_receipt.site_host",
+      "accepted_hobby_hosts": [
+        "hobby-depot.de",
+        "www.hobby-depot.de"
+      ],
+      "recognized_portal": "hobby_depot",
+      "article_type_location": "k0_intake.items[*].article_type",
+      "exact_existing_five_fields": [
+        "title",
+        "target_keyword",
+        "category",
+        "article_type",
+        "plan_slot"
+      ],
+      "original_five_fields_and_article_identity_immutable": true,
+      "no_added_portal_field": true,
+      "no_sidecar": true,
+      "no_user_second_upload": true
+    },
+    "editor_source": {
+      "article_type_is_only_decided_by": "ORIGINAL_WORDPRESS_MINI",
+      "rule_selection_once": "Look up the exact original article_type in this manifest's existing books array; never infer by keyword, category or topic, and never change type during writing.",
+      "selection_table_authority": "THIS_MANIFEST.books",
+      "shared_hobby_rulebook": "05_GEMEINSAME_REGELN.json",
+      "shared_rule_application_once": true,
+      "own_rulebook_path_from": "THIS_MANIFEST.books[*].file",
+      "same_wp_type_must_match_exactly": true,
+      "no_fallback_on_missing_or_conflicting_book": true,
+      "no_external_original_rulebook_value_copy": true,
+      "editorial_book_status": "PREPARED_FOR_HANDOFF_NOT_RUNTIME_APPROVED"
+    },
+    "current_integration": {
+      "technical_portal_routing_readonly_verified": true,
+      "three_existing_FAQ_orders_source_verified": true,
+      "four_other_types_real_original_order_samples_available": false,
+      "five_types_original_php_acceptance_checked": true,
+      "same_existing_kmulti_type_registry_for_pflege_and_anleitung": true,
+      "those_two_unresolved": true,
+      "inactive_rule_state": "NO_VALUES_BLOCKED",
+      "current_production_enabled": false,
+      "automatic_article_writing_allowed": false,
+      "automatic_publication_allowed": false,
+      "requires_separately_authorized_kmulti_core_integration": true
+    },
+    "proof": {
+      "source_wordpress_plugin": "Texterstellung Hobbydepot 0.4.24.18",
+      "package_real_3_faq_source": "hallo-netizen/k0-multiportal:offline_writer_dev/portal_auto/fixtures/original_wordpress_hobby_3.json",
+      "original_15_php_readonly_report": "96_ORIGINAL_PLUGIN_5_TYPEN_PHP_ECHTTEST_20261121.json",
+      "kmulti_registry_readonly": "hallo-netizen/k0-multiportal:offline_writer_dev/portal_auto/KMULTI_PORTAL_REGISTRY.json",
+      "final_hobby_categories_not_asserted_from_offline_fixture": true,
+      "no_original_wordpress_import_or_kmulti_writer_run_claimed": true
+    }
+  },
+  "handoff_readiness": "HOBBY_PREPARED_READ_ONLY; K_MULTI_RUNTIME_NOT_AUTHORIZED",
+  "no_second_editorial_owner": true
 }
