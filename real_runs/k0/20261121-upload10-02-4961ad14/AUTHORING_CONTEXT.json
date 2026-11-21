@@ -1,0 +1,162 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Was passiert, wenn ein Pferd zu kalt eingedeckt ist?",
+    "target_keyword": "Was passiert, wenn ein Pferd zu kalt eingedeckt ist?",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "4961ad144f5b3b00bef5ad6fbd9ddfc831ebd3dc91567d1673cb5bfb79ced66f"
+  },
+  "content_profile": {
+    "search_intent": "Folgen einer zu schwachen Eindeckung und Anzeichen, dass ein Pferd trotz Decke friert; nicht speziell Regen- oder Winterdecken vergleichen."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Pferdedecke",
+          "source_title": "Wikipedia – Pferdedecke"
+        }
+      ],
+      "claims": [
+        "Pferdedecken schützen je nach Typ vor Kälte und Witterung.",
+        "Regendecken und gefütterte Winterdecken haben unterschiedliche Schutzaufgaben.",
+        "Wärmeleistung einer Thermodecke hängt unter anderem von ihrer Wattierung ab.",
+        "Geschorene Pferde brauchen im Winter besonderen Deckenschutz."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was passiert, wenn ein Pferd zu kalt eingedeckt ist?",
+      "topic": "Was passiert, wenn ein Pferd zu kalt eingedeckt ist?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was passiert, wenn ein Pferd zu kalt eingedeckt ist?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Pferdedecke",
+        "source_title": "Wikipedia – Pferdedecke",
+        "evidence_text": "Eine Pferdedecke ist eine Decke für ein Pferd, die es vor Kälte, Nässe, Insekten und anderem schützt.",
+        "evidence_text_sha256": "4c215dff000e9f273883cafb1a90e47e07f47bb8e0be3b01da00f9b74f62ab46",
+        "statement": "Pferdedecken schützen je nach Typ vor Kälte und Witterung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Pferdedecke",
+        "source_title": "Wikipedia – Pferdedecke",
+        "evidence_text": "Weidedecken gibt es als ungefütterte Regendecken oder als dicke Weide-Winterdecken.",
+        "evidence_text_sha256": "fd99d56feb8e5ece4e93bcae2030ab586d7842aeb7059a72e61e53b8656c2e6e",
+        "statement": "Regendecken und gefütterte Winterdecken haben unterschiedliche Schutzaufgaben.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Pferdedecke",
+        "source_title": "Wikipedia – Pferdedecke",
+        "evidence_text": "Thermodecken sind gepolsterte Decken, die durch die dicke Wattierung wärmer sind.",
+        "evidence_text_sha256": "9da8ae1582d98781cd4717be427c3f7c643d5f6f6323dfb5f624324bd44b1c32",
+        "statement": "Wärmeleistung einer Thermodecke hängt unter anderem von ihrer Wattierung ab.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://de.wikipedia.org/wiki/Pferdedecke",
+        "source_title": "Wikipedia – Pferdedecke",
+        "evidence_text": "Auch geschorene Pferde müssen eingedeckt werden.",
+        "evidence_text_sha256": "584af24c66f6ae6918cdeb145df29154da2ab2aea1b884fbb16558fbcf51ef63",
+        "statement": "Geschorene Pferde brauchen im Winter besonderen Deckenschutz.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "pferdegesundheit-verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdedecken-winterdecken-faq/",
+        "anchor": "pferdedecken-winterdecken-faq",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-winterdecken-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Winterdecken",
+      "Wärme",
+      "Wattierung",
+      "Eindecken",
+      "Winterfell",
+      "Kälteschutz",
+      "Frieren"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine Tabelle würde ohne eigenständigen Vergleich der Bedingungen nur den Fließtext wiederholen und keinen zusätzlichen Nutzen bringen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
