@@ -1,6 +1,6 @@
 import hashlib, json, unittest
-from engine.writer_contract_guard import WriterContractBlocked, verify_package
-from engine.k0_writer_station import prepare, seal, verify, conclusion_heading_repair_request, Blocked as StationBlocked
+from engine.writer_contract_guard import WriterContractBlocked, verify_package, inspect_html
+from engine.k0_writer_station import prepare, seal, verify, conclusion_heading_repair_request, list_bridge_repair_request, Blocked as StationBlocked
 from tests.k0_rule_context_fixture import rule_context
 
 def stable_json(x):
@@ -58,6 +58,21 @@ def good_html():
 <section data-block="conclusion"><h2>Fazit</h2><p>{words(88,'Fazitwort')}</p></section>
 <section data-block="further_information"><h2>Weiterführende Informationen</h2><p>{words(38,'Hinweis')}</p></section>
 </article>"""
+
+def list_before_fazit_html(bridge=None):
+    """Valid legacy writer fixture, with a list at the very end before Fazit."""
+    body=good_html()
+    table=f'<section data-block="table"><h2>Übersicht</h2><p>{words(30,"Tabelle")}</p></section>'
+    # Keep the table and all existing type rules, but it is not directly before Fazit.
+    assert table in body
+    body=body.replace(table,'')
+    old=f'<section data-block="practical"><h2>Praxis verständlich zusammenführen</h2><p>{words(135,"Praxis")}</p></section>'
+    bullets='<ul data-list="key_answers"><li>Erster Punkt der praktischen Prüfung</li><li>Zweiter Punkt der sachlichen Planung</li><li>Dritter Punkt zur weiteren Auswahl</li><li>Vierter Punkt zur abschließenden Kontrolle</li></ul>'
+    replacement=(f'<section data-block="practical"><h2>Praxis verständlich zusammenführen</h2>'
+                 f'<p>{words(112,"Praxis")}</p>{bullets}{bridge or ""}</section>')
+    assert old in body
+    return body.replace(old,table+replacement)
+
 
 def draft(job, body=None):
     return {
@@ -133,6 +148,49 @@ class WriterContractGuardTests(unittest.TestCase):
         product=seal(self.job,corrected)
         self.assertEqual(verify(self.job,product)['status'],'PASS')
         self.assertEqual(verify_package(product)['status'],'PASS')
+
+    def test_last_list_without_paragraph_before_fazit_fails_original_writer(self):
+        original=draft(self.job,list_before_fazit_html())
+        with self.assertRaisesRegex(WriterContractBlocked,'WRITER_LIST_BEFORE_FAZIT_BRIDGE_REQUIRED'):
+            seal(self.job,original)
+
+    def test_short_or_incomplete_bridge_fails(self):
+        for bridge in ('<p>Kurzer Übergang.</p>',
+                       '<p>Diese wichtigen Schritte müssen nun im Gesamtzusammenhang betrachtet und für den tatsächlichen Einsatzzweck sinnvoll eingeordnet werden</p>',
+                       '<div>Ein langer Übergangstext außerhalb eines normalen Absatzes sollte für diese Regel nicht ausreichen, auch wenn er mehrere Wörter enthält.</div>'):
+            with self.subTest(bridge=bridge[:30]):
+                with self.assertRaisesRegex(WriterContractBlocked,'WRITER_LIST_BEFORE_FAZIT_BRIDGE_REQUIRED'):
+                    inspect_html(list_before_fazit_html(bridge))
+
+    def test_same_original_writer_repairs_and_resubmits_list_before_fazit(self):
+        original=draft(self.job,list_before_fazit_html())
+        with self.assertRaisesRegex(WriterContractBlocked,'WRITER_LIST_BEFORE_FAZIT_BRIDGE_REQUIRED'):
+            seal(self.job,original)
+        receipt=list_bridge_repair_request(self.job,original)
+        self.assertEqual(receipt['status'],'RETURN_TO_SAME_WRITER')
+        self.assertEqual(receipt['job_id'],self.job['job_id'])
+        self.assertEqual(receipt['writer_job_sha256'],self.job['job_sha256'])
+        self.assertEqual(receipt['rule_id'],'writer.list_before_fazit_bridge')
+        self.assertEqual(receipt['minimum_bridge_words'],18)
+        self.assertFalse(receipt['publish_allowed'])
+        bridge='<p>Die genannten Prüfschritte helfen, die passende Variante anhand der bereits erklärten Kriterien einzuordnen. Entscheidend bleibt, wie sie unter den tatsächlichen Bedingungen zusammenspielen.</p>'
+        corrected=draft(self.job,list_before_fazit_html(bridge))
+        corrected['revision_count']=2
+        self.assertNotEqual(receipt['draft_sha256'],list_bridge_repair_request(self.job,corrected)['draft_sha256'])
+        product=seal(self.job,corrected)
+        self.assertEqual(verify(self.job,product)['status'],'PASS')
+        self.assertEqual(verify_package(product)['status'],'PASS')
+
+    def test_table_directly_before_fazit_retains_original_behavior(self):
+        # A table with its own summary has separate K0 rules, not this list rule.
+        body=good_html().replace(
+            f'<section data-block="practical"><h2>Praxis verständlich zusammenführen</h2><p>{words(135,"Praxis")}</p></section>',
+            f'<section data-block="practical"><h2>Praxis verständlich zusammenführen</h2><p>{words(112,"Praxis")}</p><ul><li>Erster Punkt</li><li>Zweiter Punkt</li><li>Dritter Punkt</li><li>Vierter Punkt</li></ul></section>'
+        )
+        self.assertEqual(inspect_html(body)['status'],'PASS')
+
+    def test_no_final_list_passes_without_extra_paragraph(self):
+        self.assertEqual(inspect_html(good_html())['status'],'PASS')
 
     def test_missing_further_information_is_blocked(self):
         body=good_html()
