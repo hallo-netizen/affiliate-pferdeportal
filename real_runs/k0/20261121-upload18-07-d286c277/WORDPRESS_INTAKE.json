@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Woran erkennt man Zahnprobleme bei Pferden?",
+      "target_keyword": "Welche Symptome zeigen Pferde mit Zahnproblemen?",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "d286c277a8d056f7ebfc9fa748e08bc0bb84e2a551ea0317adeac635d6df70f9"
+    }
+  ],
+  "batch_sha256": "07578958684547f73164130f8b9beebd66450e99d23696115eabb969cad994dd"
+}
