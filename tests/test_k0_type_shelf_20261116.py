@@ -260,7 +260,8 @@ class TypeShelfVirginTests(unittest.TestCase):
           "heading_intent_terms":["Wassertrog","Sicherheit","Montage"],
           "comparison_source_bindings":[],
           "table_decision":{
-             "decision":"OMIT_NO_ADDED_VALUE",
+             "k0_policy":"K0_TABLE_MEANINGFUL_ONLY_V1",
+              "decision":"OMIT_NO_ADDED_VALUE",
              "exception_code":"LINEAR_SEQUENCE",
              "rationale":"Eine lineare Schrittfolge ist hier besser als eine Vergleichstabelle."
           },
