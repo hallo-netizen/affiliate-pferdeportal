@@ -1,0 +1,35 @@
+name: Hobbydepot five original article types - read-only contract tests
+on:
+  push:
+    branches:
+      - work/texterstellung-hobby-hab-arbeitskopien-20261116
+    paths:
+      - 'protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/TEXTERSTELLUNG/BEITRAGSREGELN_EIGENSTAENDIG_20261121/**'
+      - '.github/workflows/hobbydepot-editorial-contract.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test-editorial-contract-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Execute all original five-type Hobby rulebook regressions (NEVER releases)
+        run: |
+          python protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/TEXTERSTELLUNG/BEITRAGSREGELN_EIGENSTAENDIG_20261121/test_hobby_contract.py
+      - name: Confirm that this is NOT article release
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          d=pathlib.Path('protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/TEXTERSTELLUNG/BEITRAGSREGELN_EIGENSTAENDIG_20261121')
+          m=json.loads((d/'00_MANIFEST.json').read_text())
+          assert not m['authoring_active'] and not m['publish_allowed']
+          assert m['handoff_contract']['current_integration']['inactive_rule_state']=='NO_VALUES_BLOCKED'
+          print('PASS: editorial handoff intact; no original K0, K-Multi or WordPress runtime touched')
+          PY
