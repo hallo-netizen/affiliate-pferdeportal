@@ -1,0 +1,163 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Was kontrolliert das Veterinäramt bei der Pferdehaltung?",
+    "target_keyword": "Was prüft das Veterinäramt Pferdehaltung?",
+    "category": "recht-finanzen-organisation",
+    "article_type": "FAQ",
+    "plan_slot": "5547705b734c8c4961b43af252f5081e511ff56aad31562aa1886da20bea1c42"
+  },
+  "content_profile": {
+    "search_intent": "Welche Punkte das Veterinäramt bei einer Pferdehaltung überprüfen kann, mit Fokus auf Haltung und Tierwohl sowie Grenzen pauschaler Prüflisten."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354970/index.php",
+          "source_title": "Amt für Ernährung, Landwirtschaft und Forsten – Haltung von Pferden"
+        }
+      ],
+      "claims": [
+        "Das Tierschutzgesetz verlangt bedarfsgerechte Ernährung, Pflege und Unterbringung.",
+        "Artgemäße Bewegung gehört zu den Anforderungen der Pferdehaltung.",
+        "Verantwortliche müssen ausreichende Kenntnisse und Fähigkeiten für die Pferdehaltung besitzen.",
+        "Die Leitlinien enthalten Mindestmaße und praktische Empfehlungen für Stallanlagen."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was prüft das Veterinäramt Pferdehaltung?",
+      "topic": "Was kontrolliert das Veterinäramt bei der Pferdehaltung?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "recht-finanzen-organisation",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was kontrolliert das Veterinäramt bei der Pferdehaltung?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354970/index.php",
+        "source_title": "Amt für Ernährung, Landwirtschaft und Forsten – Haltung von Pferden",
+        "evidence_text": "muss das Tier seiner Art und seinen Bedürfnissen entsprechend angemessen ernähren, pflegen und verhaltensgerecht unterbringen",
+        "evidence_text_sha256": "a2eda43913c498a56da25d6b95832bad23a200535484630ef572c2ff3d6eb8b0",
+        "statement": "Das Tierschutzgesetz verlangt bedarfsgerechte Ernährung, Pflege und Unterbringung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354970/index.php",
+        "source_title": "Amt für Ernährung, Landwirtschaft und Forsten – Haltung von Pferden",
+        "evidence_text": "darf die Möglichkeit des Tieres zu artgemäßer Bewegung nicht so einschränken, dass ihm Schmerzen oder vermeidbare Leiden oder Schäden zugefügt werden",
+        "evidence_text_sha256": "09b45b212b0202e24c2d7530268c04cb041dc5ba425c1906f43467e5e03010fe",
+        "statement": "Artgemäße Bewegung gehört zu den Anforderungen der Pferdehaltung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354970/index.php",
+        "source_title": "Amt für Ernährung, Landwirtschaft und Forsten – Haltung von Pferden",
+        "evidence_text": "muss über die für eine angemessene Ernährung, Pflege und verhaltensgerechte Unterbringung des Tieres erforderlichen Kenntnisse und Fähigkeiten verfügen",
+        "evidence_text_sha256": "773255ad4e1ca437f0c3799b7ede4d494d70cade529a7d2383af5089b6625fcc",
+        "statement": "Verantwortliche müssen ausreichende Kenntnisse und Fähigkeiten für die Pferdehaltung besitzen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354970/index.php",
+        "source_title": "Amt für Ernährung, Landwirtschaft und Forsten – Haltung von Pferden",
+        "evidence_text": "Die in den Leitlinien genannten Empfehlungen und Maße sind Mindestanforderungen",
+        "evidence_text_sha256": "87f47978599cdc794f20133910b4c4ef5d165d21adbc149710133e9b644b65e2",
+        "statement": "Die Leitlinien enthalten Mindestmaße und praktische Empfehlungen für Stallanlagen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/recht-finanzen-organisation/",
+        "anchor": "Pferdehaltung & Stallalltag",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-buecher-und-ratgeber/pferdehaltung-grundlagen/",
+        "anchor": "Pferdehaltung Grundlagen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/recht-finanzen-organisation/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-buecher-und-ratgeber/pferdehaltung-grundlagen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "recht-finanzen-organisation",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Veterinäramt",
+      "Pferdehaltung",
+      "Ernährung",
+      "Bewegung",
+      "Pflege",
+      "Stallklima",
+      "Sozialkontakt",
+      "Platzangebot"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "NUANCE_LOSS",
+      "rationale": "Bei dieser Rechtsfrage hängen die Folgen von mehreren Umständen ab; eine schematische Tabelle könnte den Einzelfall unzulässig vereinfachen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
