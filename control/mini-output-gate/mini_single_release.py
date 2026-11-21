@@ -193,11 +193,80 @@ def _fail(workspace, state, why):
     return ticket
 
 
+
+def deliver(workspace: Path, output_file: Path, candidate: Path | None = None):
+    """The ONLY supported chat-file emission: revalidate the whole MINI batch.
+
+    Reject a directly created CATEGORY/EDITORIAL/TITLE checkpoint even if its
+    WordPress MINI-Import accepts it as a legitimate intermediate stage. Never
+    expose partial files, and remove an older output if the gate now fails.
+    """
+    workspace = workspace.resolve()
+    output_file = output_file.resolve()
+    reserved = {workspace / ORIGINAL, workspace / HASH}
+    reserved.update(workspace / (stage + ".json") for stage in STAGES)
+    reserved.update({workspace / REPAIR_NAME, workspace / STATUS_NAME,
+                     workspace / RELEASE_DIR / RELEASE_NAME,
+                     workspace / RELEASE_DIR / "NACHWEIS.json"})
+    if output_file.suffix.lower() != ".json" or output_file in reserved:
+        raise ValueError("MINI_OUTPUT_DESTINATION_INVALID")
+    if candidate is not None and candidate.resolve() == output_file:
+        raise ValueError("MINI_OUTPUT_CANDIDATE_MUST_DIFFER")
+    # A stale success must never remain downloadable after a failed repeat.
+    output_file.unlink(missing_ok=True)
+    result = run(workspace)
+    if result.get("status") != "FREIGEGEBEN":
+        return {"status": "GESPERRT", "release_available": False,
+                "reason": "MINI_NOT_COMPLETE", "next_worker": result.get("next_worker")}
+
+    approved = workspace / RELEASE_DIR / RELEASE_NAME
+    receipt = workspace / RELEASE_DIR / "NACHWEIS.json"
+    if not approved.is_file() or not receipt.is_file():
+        return {"status": "GESPERRT", "release_available": False,
+                "reason": "MINI_RELEASE_PROOF_MISSING"}
+    binary = approved.read_bytes()
+    report = read(receipt)
+    if (report.get("status") != "FREIGEGEBEN"
+            or report.get("contract") != CONTRACT
+            or report.get("import_sha256") != digest(binary)
+            or report.get("release_count") != 1):
+        return {"status": "GESPERRT", "release_available": False,
+                "reason": "MINI_RELEASE_PROOF_INVALID"}
+    if candidate is not None:
+        # This is the path that blocked the real 2026-11-21 CATEGORY-only file.
+        if not candidate.is_file() or candidate.read_bytes() != binary:
+            return {"status": "GESPERRT", "release_available": False,
+                    "reason": "MINI_DIRECT_FILE_NOT_APPROVED"}
+    # No user-visible JSON is written before the final verification.
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+    temporary = output_file.with_name("." + output_file.name + ".tmp")
+    try:
+        temporary.write_bytes(binary)
+        os.replace(temporary, output_file)
+    finally:
+        temporary.unlink(missing_ok=True)
+    return {"status": "FREIGEGEBEN", "release_available": True,
+            "filename": str(output_file), "import_sha256": digest(binary),
+            "batch_id": report["batch_id"], "topic_count": report["topic_count"],
+            "verification": str(receipt)}
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--workspace", type=Path, required=True)
+    ap.add_argument("--deliver", type=Path,
+                    help="Chat output path: only the full verified MINI file may be emitted")
+    ap.add_argument("--candidate", type=Path,
+                    help="Optional candidate file; rejected unless byte-identical to full release")
     args = ap.parse_args(argv)
-    outcome = run(args.workspace)
+    if args.candidate is not None and args.deliver is None:
+        ap.error("--candidate requires --deliver")
+    try:
+        outcome = (deliver(args.workspace, args.deliver, args.candidate)
+                   if args.deliver is not None else run(args.workspace))
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        outcome = {"status": "GESPERRT", "release_available": False,
+                   "reason": "MINI_OUTPUT_ERROR", "detail": str(exc)}
     print(json.dumps(outcome, ensure_ascii=False))
     return 0 if outcome.get("status") == "FREIGEGEBEN" else 2
 
