@@ -328,13 +328,18 @@ def validate_rule_context(ctx,identity):
     if not isinstance(table,dict):
         raise Blocked('K0_RULE_CONTEXT_TABLE_DECISION_MISSING')
     tcfg=values['table']; policy=tcfg['presence_policy'][typ]
+    # K0-only reader-value rule. The historical K10 rules stay unchanged.
+    if table.get('k0_policy')!='K0_TABLE_MEANINGFUL_ONLY_V1':
+        raise Blocked('K0_TABLE_POLICY_MARKER_MISSING')
+    if typ in ('Beratung','FAQ','Pflege'):
+        policy='OPTIONAL'
     decision=str(table.get('decision') or '')
     if policy=='REQUIRED' and decision!=tcfg['optional_decision']['include_value']:
         raise Blocked('K0_RULE_CONTEXT_TABLE_REQUIRED')
     if policy in ('REQUIRED_UNLESS_EXCEPTION','OPTIONAL'):
         if decision not in {tcfg['optional_decision']['include_value'],tcfg['optional_decision']['omit_value']}:
             raise Blocked('K0_RULE_CONTEXT_TABLE_DECISION_INVALID')
-        if decision==tcfg['optional_decision']['omit_value']:
+        if policy=='REQUIRED_UNLESS_EXCEPTION' and decision==tcfg['optional_decision']['omit_value']:
             allowed=set((tcfg.get('omission_exception') or {}).get('allowed_codes') or [])
             if str(table.get('exception_code') or '') not in allowed:
                 raise Blocked('K0_RULE_CONTEXT_TABLE_EXCEPTION_INVALID')
@@ -344,8 +349,25 @@ def validate_rule_context(ctx,identity):
     semantic=ctx.get('semantic_rule_results')
     if not isinstance(semantic,dict):
         raise Blocked('K0_RULE_CONTEXT_SEMANTIC_RESULTS_MISSING')
-    if decision==tcfg['optional_decision']['include_value'] and semantic.get('table.value_required_if_present')!='PASS':
-        raise Blocked('K0_RULE_CONTEXT_TABLE_VALUE_NOT_PREBOUND_PASS')
+    if decision==tcfg['optional_decision']['include_value']:
+        if semantic.get('table.value_required_if_present')!='PASS':
+            raise Blocked('K0_RULE_CONTEXT_TABLE_VALUE_NOT_PREBOUND_PASS')
+        # Require question-specific, source-bound benefit in the SAME original decision.
+        if str(table.get('reader_question') or '')!=str(identity.get('target_keyword') or ''):
+            raise Blocked('K0_TABLE_QUESTION_BINDING_MISSING')
+        if len(str(table.get('reader_benefit') or '').strip())<30:
+            raise Blocked('K0_TABLE_READER_BENEFIT_MISSING')
+        if len(str(table.get('why_not_prose') or '').strip())<30:
+            raise Blocked('K0_TABLE_BETTER_THAN_PROSE_NOT_SHOWN')
+        axes=table.get('comparison_axes')
+        if not isinstance(axes,list) or len(axes)<2 or any(len(str(x).strip())<5 for x in axes):
+            raise Blocked('K0_TABLE_REAL_COMPARISON_AXES_MISSING')
+        if len(set(str(x).strip().casefold() for x in axes))!=len(axes):
+            raise Blocked('K0_TABLE_COMPARISON_AXES_DUPLICATE')
+        facts=table.get('source_fact_ids')
+        allowed=set(ctx.get('allowed_fact_ids') or [])
+        if not isinstance(facts,list) or len(set(facts))<2 or not set(facts).issubset(allowed):
+            raise Blocked('K0_TABLE_SOURCE_FACTS_INSUFFICIENT')
 
     out=copy.deepcopy(ctx)
     out['identity_sha256']=stable(identity)
