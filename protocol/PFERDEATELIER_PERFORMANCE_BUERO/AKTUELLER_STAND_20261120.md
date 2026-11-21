@@ -1102,3 +1102,45 @@ Quelle: pferdeatelier-performance-gesamtanalyse-20261121-082829.json, Performanc
 Nach Ausschöpfung des vorhandenen Diagnosedatensatzes gibt es derzeit keinen zweiten, gleich stark kausal belegten und funktionssicher belegten Produktionsfix, der seriös mit 6.72.366 gebündelt werden kann. Ein weiterer Codeeingriff wäre aktuell wieder Vermutung und ist deshalb gesperrt.
 
 Nächster Schritt: genau einen Live-Test mit 6.72.366 und danach einen identischen PASSIV-Lauf für Pferdesättel. Erst dieser Live-A/B entscheidet, ob der belegte Schnellweg die reale Zielseite messbar entlastet. Vor diesem Ergebnis keine 6.72.367.
+
+
+## 2026-11-21 – 6.72.367 konsolidierter semantisch abgesicherter Performance-Rootfix
+
+6.72.366 ist widerrufen / NICHT INSTALLIEREN. Die breitere Inhaltsprüfung zeigte, dass die dort zusätzlich aktivierte request-lokale Bildresultat-Wiederverwendung für den geforderten semantischen Nachweis zu breit war, weil der WordPress-Standardpfad transitiv weitere filterbare URL-/Redirect-/Option-Zustände berührt.
+
+### Finaler Kandidat 6.72.367
+- Paket: PFERDEATELIER_AFFILIATE_6.72.367_KONSOLIDIERT_SEMANTIC_SAFE_PERFORMANCE_ROOTFIX.zip
+- Library: /pferdeatelier/PLUGINS/PERFORMANCE/PFERDEATELIER_AFFILIATE_6.72.367_KONSOLIDIERT_SEMANTIC_SAFE_PERFORMANCE_ROOTFIX.zip
+- SHA-256: 88deb31196e7ed3134e5ff11654c4d522c09949cd21189eb44f52c332ee2e14e
+- Prüfnachweis: /pferdeatelier/PLUGINS/PERFORMANCE/PFERDEATELIER_6.72.367_PRUEFNACHWEIS.md
+
+### Kausalitätsbeweis
+Live 6.72.365: Pferdesättel 5721,16 ms Wall, 3264,16 ms CPU, 139257 interne Cache-Hits; loop_start→wp_footer 3977,27 ms. 6.72.365 blockiert seinen vorhandenen category_product-Postprocess-Plan auf einer normalen WordPress-Single-Site, weil WordPress standardmäßig allowed_http_request_hosts auf http_request_host_is_external registriert.
+
+Gezielter 710-Kandidaten-/3-Slot-Harness mit normalem WordPress-Standardfilter:
+- 6.72.365: 3 vollständige Postprocess-Durchläufe.
+- 6.72.367: 1 vollständiger Durchlauf + 2 exakt gebundene Plan-Replays.
+- Bildprüfungen innerhalb dieses Testpfads: 1332 → 444.
+- Alt/Neu-Ausgabehash identisch: b775de9f0e950581b56350ff0e374948b3ce16865351cfea8820c765620630b4.
+Damit wird exakt die nachgewiesene wiederholte Arbeit reduziert.
+
+### Inhaltlicher Funktionsbeweis
+- 353 vorhandene Methoden in 6.72.365; 0 entfernt.
+- 6.72.367 fügt 1 private Sicherheits-Hilfsmethode hinzu.
+- Inhaltlich geändert wird ausschließlich die interne Freigabeentscheidung category_product_postprocess_plan_cache_allowed_v672365.
+- category_product_public_image_ready ist wieder exakt 6.72.365-Semantik; kein zusätzlicher Bildresultat-Cache im WordPress-Standardfall.
+- Auswahl, Control/Veto, Health, Fallback, eigentliche Bildentscheidung, Slot-Auswahl und Kampagnenauswahl sind inhaltlich unverändert.
+- 12960 Gate-Kombinationen: 0 unerwartete Abweichungen.
+- 60000 Alt/Neu-Ausgaben des betroffenen Postprocess-Pfads: 0 Ausgabeabweichungen.
+- 30 dynamische Zustandswechsel-Fälle zwischen category_product_1/2/3 unter abgesicherten Sonderfiltern: 0 Abweichungen.
+- Multisite, fremde Host-Callbacks sowie dynamische URL-/Redirect-/Option-/Meta-/Cache-/Sanitizer-/Shortcode-Filter fallen auf den historischen vollständigen Pfad zurück.
+
+### Zusätzlicher Struktur-/Schreibschutz
+- Dateien 66→66; entfernt 0; hinzugefügt 0; geändert nur Hauptdatei + readme.
+- Actions 176→176, Filter 30→30, Shortcodes 6→6.
+- Produktions-Schreibprimitive vollständig identisch.
+- 23/23 PHP-Lint PASS.
+- Finales ZIP erneut entpackt: 66/66 Dateien identisch zum geprüften Arbeitsstand.
+
+### Nächster Live-Schritt
+Nur 6.72.367 installieren. Danach keinen Ein-Seiten-Sondertest, sondern den vorhandenen Performance Diagnose Safe 7.0.0 als vollständigen PASSIV-Gesamtlauf über den bestehenden repräsentativen Seitenmix verwenden. Vor diesem Gesamtlauf keine weitere Affiliate-Version.
