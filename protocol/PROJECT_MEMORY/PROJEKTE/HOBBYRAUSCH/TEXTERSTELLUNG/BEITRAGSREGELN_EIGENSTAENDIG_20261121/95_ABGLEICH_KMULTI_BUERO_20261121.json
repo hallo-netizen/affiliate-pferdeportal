@@ -122,5 +122,37 @@
     "negative_tests_block_invalid_type_and_tampering": true,
     "no_portal_field_added": true
   },
-  "final_hobby_state": "HOBBY_SIDE_DOCS_AND_ORIGINAL_PHP_TRANSFER_VERIFIED; KMULTI_RUNTIME_ACTIVATION_OUT_OF_SCOPE"
+  "final_hobby_state": "HOBBY_SIDE_DOCS_AND_ORIGINAL_PHP_TRANSFER_VERIFIED; KMULTI_RUNTIME_ACTIVATION_OUT_OF_SCOPE",
+  "final_hobby_handoff_receipt_20261121": {
+    "source": "00_MANIFEST.json#handoff_contract",
+    "original_wp_package": "WP_K0_UPLOAD_PACKAGE_V1",
+    "original_wp_zip_sha256": "03f21ca678f003ab55a2a3a86ccd44c0cceb1ed59b2cb1e6a758b6bb129de19b",
+    "only_original_wp_file": true,
+    "portal_identity": "word_press_order_receipt.site_host",
+    "selected_article_type": "k0_intake.items[*].article_type",
+    "owner": "ORIGINAL_WORDPRESS_MINI_ONCE",
+    "own_type_book_source": "00_MANIFEST.json.books",
+    "shared_hobby_rule_source": "05_GEMEINSAME_REGELN.json",
+    "test_report": "90_QA_NACHWEIS.json#final_original_wp_to_hobby_rules_handoff",
+    "cross_repository_checks": {
+      "passed": 18,
+      "total": 18
+    },
+    "three_original_faq_orders_verified": true,
+    "other_four_types_original_wordpress_live_orders_not_verified": true,
+    "actual_article_writer_full_pipeline_performed": false,
+    "kmulti_office_log_commit": "42ac2b61617120401e9d35743030d92584291938",
+    "kmulti_office_document": "https://github.com/hallo-netizen/k0-multiportal/blob/k0-offline-rule-bindings-20261027/offline_rules/portal_bindings/hobby_depot/HOBBYDEPOT_5_EIGENE_BEITRAGSREGELN_EINGANG_20261121.md",
+    "current_only_unresolved_registry_mappings": [
+      "Pflege",
+      "Anleitung"
+    ],
+    "production_release": "BLOCKED_UNTIL_EXPLICIT_SEPARATE_KMULTI_INTEGRATION",
+    "unchanged": [
+      "Original WordPress plugin",
+      "Original WP input JSON format",
+      "K0 code and rules",
+      "K-Multi code, registry and rule bindings"
+    ]
+  }
 }
