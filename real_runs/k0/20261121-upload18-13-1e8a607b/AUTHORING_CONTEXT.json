@@ -1,0 +1,200 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Anatomische Trensen für Pferde passend auswählen",
+    "target_keyword": "trense pferd anatomisch",
+    "category": "trensen-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "1e8a607b43c5de0e9d661ecd305574eca305efcb619f34a8a8d35740bad478f9"
+  },
+  "content_profile": {
+    "search_intent": "Anatomisch geformte Trensen nach Druckverteilung und tatsächlicher Passform am Pferdekopf beurteilen."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Zaumzeug",
+          "source_title": "Wikipedia – Zaumzeug"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Trense",
+          "source_title": "Wikipedia – Trense"
+        }
+      ],
+      "claims": [
+        "Eine korrekte Verschnallung des Zaums ist wichtig für Atmung und Kauen.",
+        "Ein Stirnriemen trägt zur Lage des Genickstücks am Pferdekopf bei.",
+        "Backenstücke verlaufen seitlich am Pferdekopf und halten das Gebiss.",
+        "Eine Trense im engeren Sinn bezeichnet ein gebrochenes Gebiss.",
+        "Eine doppelt gebrochene Trense besteht aus drei verbundenen Teilen.",
+        "Zügel werden zur Lenkung und zum Führen des Pferdes verwendet."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "trense pferd anatomisch",
+      "topic": "Anatomische Trensen für Pferde passend auswählen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "trensen-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Passende Pferdeausrüstung für die vorliegende Reitsituation auswählen",
+      "decision_criteria": [
+        "Passform am Pferd",
+        "Wirkung von Trensen und Gebissen",
+        "Einsatzbereich",
+        "Komfort und sichere Bedienung"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Zaumzeug",
+        "source_title": "Wikipedia – Zaumzeug",
+        "evidence_text": "Der Zaum muss korrekt verschnallt sein (Zwei-Finger-Methode), damit er nicht unbeabsichtigt drückt und das Pferd frei atmen und kauen kann.",
+        "evidence_text_sha256": "fe9a916025afaeba9d685048edc03b307791a25210a514c3d9cc9e900c27ba62",
+        "statement": "Eine korrekte Verschnallung des Zaums ist wichtig für Atmung und Kauen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Zaumzeug",
+        "source_title": "Wikipedia – Zaumzeug",
+        "evidence_text": "Der Stirnriemen hält das Genickstück am richtigen Platz und verhindert ein Verrutschen nach hinten.",
+        "evidence_text_sha256": "ae8606527e6a69246974459b50b5051515e5e77dd081da0873dfa0fb3464b684",
+        "statement": "Ein Stirnriemen trägt zur Lage des Genickstücks am Pferdekopf bei.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Zaumzeug",
+        "source_title": "Wikipedia – Zaumzeug",
+        "evidence_text": "Die Backenstücke werden links und rechts am Genickstück eingeschnallt und verlaufen senkrecht am Pferdekopf unter dem Jochbein entlang.",
+        "evidence_text_sha256": "4770b738dba2ee66fde84a206b0a05672f6793ae3247fa5a1f90fec0406bbb3b",
+        "statement": "Backenstücke verlaufen seitlich am Pferdekopf und halten das Gebiss.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://de.wikipedia.org/wiki/Trense",
+        "source_title": "Wikipedia – Trense",
+        "evidence_text": "Eine Trense ist ein gebrochenes Gebiss.",
+        "evidence_text_sha256": "b3269d8788fdc67d38446f69cb726e6b9883d83ee517ca8f62288c2c05d421ef",
+        "statement": "Eine Trense im engeren Sinn bezeichnet ein gebrochenes Gebiss.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://de.wikipedia.org/wiki/Trense",
+        "source_title": "Wikipedia – Trense",
+        "evidence_text": "Die doppelt gebrochene Trense hat drei Teile, die beweglich miteinander verbunden sind.",
+        "evidence_text_sha256": "e64f578debbb901462edb68522de3d60e1aa5b27c05afd8cbffdb4de6091cb2c",
+        "statement": "Eine doppelt gebrochene Trense besteht aus drei verbundenen Teilen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F6": {
+        "source_url": "https://de.wikipedia.org/wiki/Zaumzeug",
+        "source_title": "Wikipedia – Zaumzeug",
+        "evidence_text": "Die Zügel dienen zum Aktivieren der Druckpunkte sowie einfach zum Führen des Tieres.",
+        "evidence_text_sha256": "a939f1a304e53302e4c46d1468296a541b39b252d09dd4c5da071e5912b644a9",
+        "statement": "Zügel werden zur Lenkung und zum Führen des Pferdes verwendet.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/trensen-beratung/",
+        "anchor": "trensen-beratung",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/gebisse-beratung/",
+        "anchor": "gebisse-beratung",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/trensen-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/gebisse-beratung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "trensen-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Anatomische Trensen",
+      "Anatomie",
+      "Passform",
+      "Genickstück",
+      "Gebisse",
+      "Druck",
+      "Pferdekopf"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Der konkrete Auswahlprozess braucht eine nachvollziehbare individuelle Passform- und Sicherheitsprüfung, bei der eine Tabelle ohne zusätzliche belastbare Kriterien keinen Mehrwert bietet."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
