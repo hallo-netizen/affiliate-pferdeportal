@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Ab wann gilt eine Pferdehaltung als gewerblich?",
+      "target_keyword": "Ab wann gilt eine Pferdehaltung als gewerblich?",
+      "category": "recht-finanzen-organisation",
+      "article_type": "FAQ",
+      "plan_slot": "57af25ca86f8080ce93a932efae83f3832f66f675d22e60c104d08a8cf2231ac"
+    }
+  ],
+  "batch_sha256": "579fb625035f17a1b91c39d84436f359d1693b506b2ff4ab43672e99c6866ee3"
+}
