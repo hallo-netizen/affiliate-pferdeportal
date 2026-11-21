@@ -1,0 +1,184 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Was ist die häufigste Todesursache beim Pferd?",
+    "target_keyword": "Was ist die häufigste Todesursache beim Pferd?",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "dd69c20bfcadd30b224c368c4cf926562799ec411f33c5aad62c0a2d80f74870"
+  },
+  "content_profile": {
+    "search_intent": "Die Frage nach häufigen Todesursachen bei Pferden anhand des Begriffs Todesursache und seiner möglichen statistischen Bezugsgruppen sachlich beantworten, ohne eine unbelegte Nummer eins vorwegzunehmen."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/emergency-medicine-and-critical-care/emergency-medicine-in-horses/emergency-procedures-in-horses",
+          "source_title": "MSD Veterinary Manual – Pferdenotfälle"
+        },
+        {
+          "source_url": "https://www.msdvetmanual.com/horse-owners/digestive-disorders-of-horses/colic-in-horses",
+          "source_title": "MSD Veterinary Manual – Colic in Horses"
+        },
+        {
+          "source_url": "https://www.msdvetmanual.com/digestive-system/colic-in-horses/overview-of-colic-in-horses",
+          "source_title": "MSD Veterinary Manual – Overview of Colic"
+        }
+      ],
+      "claims": [
+        "Koliken zählen zu den häufigen Anlässen tierärztlicher Notfallbehandlung bei Pferden.",
+        "Ein schwerer Kreislaufschock erhöht bei Pferden das Sterberisiko.",
+        "Der Begriff Kolik bezeichnet unterschiedliche Erkrankungen mit Bauchschmerzen und nicht eine einzelne Todesursache.",
+        "Bestimmte Darmverschlüsse können ohne schnelle Operation tödlich verlaufen.",
+        "Bei schweren Koliken kann Kreislaufschock die unmittelbare Todesursache sein."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was ist die häufigste Todesursache beim Pferd?",
+      "topic": "Was ist die häufigste Todesursache beim Pferd?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was ist die häufigste Todesursache beim Pferd?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/emergency-medicine-and-critical-care/emergency-medicine-in-horses/emergency-procedures-in-horses",
+        "source_title": "MSD Veterinary Manual – Pferdenotfälle",
+        "evidence_text": "Colic is one of the most common problems presented to equine veterinarians.",
+        "evidence_text_sha256": "a0f3abf435fbaf9c170a576a36c3b7a5e66b9893b70c2319b81be7b1594c86b6",
+        "statement": "Koliken zählen zu den häufigen Anlässen tierärztlicher Notfallbehandlung bei Pferden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/emergency-medicine-and-critical-care/emergency-medicine-in-horses/emergency-procedures-in-horses",
+        "source_title": "MSD Veterinary Manual – Pferdenotfälle",
+        "evidence_text": "Lack of adequate circulating volume can lead to multiorgan dysfunction and greater likelihood of death in horses with hypovolemic shock.",
+        "evidence_text_sha256": "0f5b6a55d56f1af1759f8a08d0453ceac28079d9ee2150351d5c98b16544ff83",
+        "statement": "Ein schwerer Kreislaufschock erhöht bei Pferden das Sterberisiko.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/digestive-disorders-of-horses/colic-in-horses",
+        "source_title": "MSD Veterinary Manual – Colic in Horses",
+        "evidence_text": "Over the years, colic has become a broad term for a variety of conditions that cause horses to experience abdominal pain.",
+        "evidence_text_sha256": "1209ac657712db2bbaad499c268702ebc8a4e6159fd84dc59c3f79a03965abe2",
+        "statement": "Der Begriff Kolik bezeichnet unterschiedliche Erkrankungen mit Bauchschmerzen und nicht eine einzelne Todesursache.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/digestive-disorders-of-horses/colic-in-horses",
+        "source_title": "MSD Veterinary Manual – Colic in Horses",
+        "evidence_text": "The latter condition causes death of the horse unless surgery is performed quickly.",
+        "evidence_text_sha256": "90a435124688eaf681cb02e97f1b0628560f5f8442ecc1add39a36edda79f8aa",
+        "statement": "Bestimmte Darmverschlüsse können ohne schnelle Operation tödlich verlaufen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.msdvetmanual.com/digestive-system/colic-in-horses/overview-of-colic-in-horses",
+        "source_title": "MSD Veterinary Manual – Overview of Colic",
+        "evidence_text": "This abnormal movement of body fluids into the intestine contributes to the development of circulatory shock, which is often the ultimate cause of death.",
+        "evidence_text_sha256": "9e9d4f8a0c2b05f64d41d4ef4e32ec237b38e4569e09b864212c227463c857ee",
+        "statement": "Bei schweren Koliken kann Kreislaufschock die unmittelbare Todesursache sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "pferdegesundheit-verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "pferdegesundheit-verstehen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Todesursache",
+      "Kolik",
+      "Pferdegesundheit",
+      "Darmverschluss",
+      "Kreislaufschock",
+      "Notfall"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine Schrittfolge und Einordnung konkreter Kriterien ist aussagekräftiger als eine Vergleichsmatrix mit künstlichen Füllzeilen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
