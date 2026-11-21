@@ -1,0 +1,177 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wie oft brauchen Pferde eine Zahnbehandlung?",
+    "target_keyword": "Wie oft sollten Pferde Zähne machen lassen?",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "2a7c5578bd1c7b2e99cf1c21d173e6247e0b61885f4c87fefe75d2e404d8d716"
+  },
+  "content_profile": {
+    "search_intent": "In welchen Abständen die Zähne eines Pferdes kontrolliert und bei Bedarf fachkundig behandelt werden sollten; keine pauschale Pflichtbehandlung."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/horse-owners/routine-care-of-horses/dental-coat-and-hoof-care-of-horses",
+          "source_title": "MSD Veterinary Manual – Pferdezahnpflege"
+        }
+      ],
+      "claims": [
+        "Die Pferdezähne wachsen über das Leben kontinuierlich weiter.",
+        "Ungleichmäßige Abnutzung kann scharfe Zahnkanten verursachen.",
+        "Mindestens jährliche tierärztliche Zahnkontrolle wird empfohlen; ältere Pferde benötigen eventuell häufigere Kontrollen.",
+        "Futter fallen lassen kann auf Zahnprobleme hindeuten.",
+        "Zögern bei der Gebissannahme kann ein Warnzeichen für Pferdezahnprobleme sein."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie oft sollten Pferde Zähne machen lassen?",
+      "topic": "Wie oft brauchen Pferde eine Zahnbehandlung?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie oft brauchen Pferde eine Zahnbehandlung?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/routine-care-of-horses/dental-coat-and-hoof-care-of-horses",
+        "source_title": "MSD Veterinary Manual – Pferdezahnpflege",
+        "evidence_text": "Horses' teeth grow continuously throughout their lives.",
+        "evidence_text_sha256": "26f0409cfb33e6093a309addb85856f1b438b8c6e3b452220a5cfcd99ab2dc45",
+        "statement": "Die Pferdezähne wachsen über das Leben kontinuierlich weiter.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/routine-care-of-horses/dental-coat-and-hoof-care-of-horses",
+        "source_title": "MSD Veterinary Manual – Pferdezahnpflege",
+        "evidence_text": "Sometimes teeth wear unevenly, which can cause sharp edges that need to be smoothed out with a rasp.",
+        "evidence_text_sha256": "2d87a6bc7fd12d06d2fac59ad426dd46c165c6d1092f77ed54886bf4014fb521",
+        "statement": "Ungleichmäßige Abnutzung kann scharfe Zahnkanten verursachen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/routine-care-of-horses/dental-coat-and-hoof-care-of-horses",
+        "source_title": "MSD Veterinary Manual – Pferdezahnpflege",
+        "evidence_text": "Horses should have their teeth checked by a vet at least once a year, and older horses might need more frequent checkups.",
+        "evidence_text_sha256": "7aa89e98ca5412e1755594e992eaf0c16d1938b8f9a36200c58516b35865a2d6",
+        "statement": "Mindestens jährliche tierärztliche Zahnkontrolle wird empfohlen; ältere Pferde benötigen eventuell häufigere Kontrollen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/routine-care-of-horses/dental-coat-and-hoof-care-of-horses",
+        "source_title": "MSD Veterinary Manual – Pferdezahnpflege",
+        "evidence_text": "Dropping food while eating",
+        "evidence_text_sha256": "2b3afa36f5c8b64c19e9632425903f294fa30db480b06dfdb4bfb28e7a614ed7",
+        "statement": "Futter fallen lassen kann auf Zahnprobleme hindeuten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/routine-care-of-horses/dental-coat-and-hoof-care-of-horses",
+        "source_title": "MSD Veterinary Manual – Pferdezahnpflege",
+        "evidence_text": "Hesitating to take a bit in the mouth",
+        "evidence_text_sha256": "63e435928e63962823afd2e6f3484e317b096b5a64b3f9607623d4a10984d6ae",
+        "statement": "Zögern bei der Gebissannahme kann ein Warnzeichen für Pferdezahnprobleme sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "pferdegesundheit-verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/gebisse-faq/",
+        "anchor": "gebisse-faq",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/category/gebisse-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Zahnkontrolle",
+      "Pferde",
+      "Zahnbehandlung",
+      "Intervall",
+      "Gebisse",
+      "Gebiss",
+      "Tierarzt",
+      "Zähne"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die fachliche Antwort umfasst voneinander abhängige Bedingungen, die eine standardisierte Tabelle ohne unzulässige Pauschalisierung nicht aussagekräftig wiedergeben könnte."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
