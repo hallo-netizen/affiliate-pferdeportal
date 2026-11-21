@@ -16,16 +16,20 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
-          "source_title": "Horseware Ireland – Horse Rug Care Guide"
+          "source_url": "https://de.wikipedia.org/wiki/Waschsalon",
+          "source_title": "Wikipedia – Waschsalon"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Textilpflegesymbol",
+          "source_title": "Wikipedia – Textilpflegesymbol"
         }
       ],
       "claims": [
-        "Nach Ablauf einer Garantie kann eine professionelle Nachimprägnierung infrage kommen.",
-        "Reparatur kleiner Schäden kann die Nutzungsdauer einer Pferdedecke verlängern.",
-        "Die wasserabweisende Schicht einer Pferdedecke kann mit der Zeit nachlassen.",
-        "Pferdedecken sollen bei Maschinenwäsche mit niedriger Temperatur gereinigt werden.",
-        "Saubere Pferdedecken sollten trocken und möglichst luftig gelagert werden."
+        "Die Nutzung eines Waschsalons ist eine kostenpflichtige Dienstleistung.",
+        "Im Selbstbedienungswaschsalon wäscht der Kunde die Textilien normalerweise selbst.",
+        "Eine professionelle Nassreinigung arbeitet mit wässrigen Laugen.",
+        "Der Anbieter muss die zulässige Reinigungsbehandlung des Textils beachten.",
+        "Waschsalons werden auch bei zu kleinen privaten Waschmaschinen genutzt."
       ],
       "fresh_research_reference_date": "2026-11-21"
     },
@@ -48,55 +52,55 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
-        "source_title": "Horseware Ireland – Horse Rug Care Guide",
-        "evidence_text": "After the waterproof guarantee of your rug has ended, you may want to use a professional service to reproof it.",
-        "evidence_text_sha256": "2509a2e741533ebb96d19c6476eec9c7ab09832999ff086fb4c3d670570321d0",
-        "statement": "Nach Ablauf einer Garantie kann eine professionelle Nachimprägnierung infrage kommen.",
+        "source_url": "https://de.wikipedia.org/wiki/Waschsalon",
+        "source_title": "Wikipedia – Waschsalon",
+        "evidence_text": "Ein Waschsalon ist ein Wirtschaftsbetrieb, der seinen Kunden gegen Bezahlung die Räumlichkeiten und die Maschinen zum Waschen, Schleudern, Trocknen und teilweise auch Glätten von Kleidung zur Verfügung stellt.",
+        "evidence_text_sha256": "43e9f4071d8909c9dd6a0e32b988aaf0dc735af5a50b0759ceaa0312f527e270",
+        "statement": "Die Nutzung eines Waschsalons ist eine kostenpflichtige Dienstleistung.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F2": {
-        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
-        "source_title": "Horseware Ireland – Horse Rug Care Guide",
-        "evidence_text": "Repairing the rips to seal and waterproof them with something like the Rambo Rug Repair Kit can increase the life of your rug and save you having to purchase a new one.",
-        "evidence_text_sha256": "a3a44f66f61b5a095a1c4f38c309f10df33d8232c6ef234565f7158e1b69cb60",
-        "statement": "Reparatur kleiner Schäden kann die Nutzungsdauer einer Pferdedecke verlängern.",
+        "source_url": "https://de.wikipedia.org/wiki/Waschsalon",
+        "source_title": "Wikipedia – Waschsalon",
+        "evidence_text": "In Waschsalons wird in der Regel nicht bedient, der Kunde befüllt und startet den Waschautomaten selbst.",
+        "evidence_text_sha256": "13b0d6858940f72d541f57f54083307f76255e8cd0764a0fa21e517368d2d2ce",
+        "statement": "Im Selbstbedienungswaschsalon wäscht der Kunde die Textilien normalerweise selbst.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F3": {
-        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
-        "source_title": "Horseware Ireland – Horse Rug Care Guide",
-        "evidence_text": "It is inevitable that the waterproof coating will begin to break down over time.",
-        "evidence_text_sha256": "35f23dc1f678cf02771641b47f185f8ac9b38b71cacedd9a43402733f7dc455e",
-        "statement": "Die wasserabweisende Schicht einer Pferdedecke kann mit der Zeit nachlassen.",
+        "source_url": "https://de.wikipedia.org/wiki/Textilpflegesymbol",
+        "source_title": "Wikipedia – Textilpflegesymbol",
+        "evidence_text": "Die professionelle Nassreinigung ist ein Verfahren, bei dem mit Laugen auf wässriger Basis gereinigt wird.",
+        "evidence_text_sha256": "18732de455afb23eaceb1eb83c0ef95b4fdbe1c849a84728185c77d6252c187b",
+        "statement": "Eine professionelle Nassreinigung arbeitet mit wässrigen Laugen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F4": {
-        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
-        "source_title": "Horseware Ireland – Horse Rug Care Guide",
-        "evidence_text": "Wash on a cool setting if using a washing machine",
-        "evidence_text_sha256": "a65ff2fe29af551839f896e28a461351b51427318e462059eb52c0d94d859539",
-        "statement": "Pferdedecken sollen bei Maschinenwäsche mit niedriger Temperatur gereinigt werden.",
+        "source_url": "https://de.wikipedia.org/wiki/Textilpflegesymbol",
+        "source_title": "Wikipedia – Textilpflegesymbol",
+        "evidence_text": "Die Pflegekennzeichnung gibt die maximal zulässige Behandlungsart an, die unter praxisnahen Bedingungen auf Dauer möglich ist, ohne das Textil zu schädigen.",
+        "evidence_text_sha256": "a254601df45df48583b5db0fb29a5ad2ea60b3bdc7818cd717df4c3e22137201",
+        "statement": "Der Anbieter muss die zulässige Reinigungsbehandlung des Textils beachten.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F5": {
-        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
-        "source_title": "Horseware Ireland – Horse Rug Care Guide",
-        "evidence_text": "Store the rug in a cool, dry area, preferably in a breathable storage bag",
-        "evidence_text_sha256": "d7a6baf3e63651763c7f943ccd9384ca35bc3a9a3a38dbdc6dea832a8b4974f7",
-        "statement": "Saubere Pferdedecken sollten trocken und möglichst luftig gelagert werden.",
+        "source_url": "https://de.wikipedia.org/wiki/Waschsalon",
+        "source_title": "Wikipedia – Waschsalon",
+        "evidence_text": "Benutzer der Einrichtungen sind Personen, die keine eigene Maschine besitzen, deren Waschmaschine defekt oder für bestimmte Textilien zu klein ist bzw. die große Mengen Wäsche in kurzer Zeit waschen möchten.",
+        "evidence_text_sha256": "bad710abe1ca849c547bd4f70cbffd4ed5f67826c0bfc860888a7bcd3ad6b1b6",
+        "statement": "Waschsalons werden auch bei zu kleinen privaten Waschmaschinen genutzt.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
