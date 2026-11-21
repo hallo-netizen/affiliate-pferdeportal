@@ -21,7 +21,9 @@
       "F3"
     ]
   },
-  "lt_authoritative_terms": [],
+  "lt_authoritative_terms": [
+    "Stallaltag"
+  ],
   "revision_count": 1,
   "publish_allowed": false
 }
