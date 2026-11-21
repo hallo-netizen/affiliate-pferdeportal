@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie hoch sind die monatlichen Unterhaltskosten für ein Pferd?",
+      "target_keyword": "Wie viel Unterhalt braucht man monatlich für ein Pferd?",
+      "category": "recht-finanzen-organisation",
+      "article_type": "FAQ",
+      "plan_slot": "95d8204d9ede14ba3a501790b3fe6f7af45239000340ea3386ef85be246d3db8"
+    }
+  ],
+  "batch_sha256": "cfd378dbbb08db5aaf7f42f7424a85fc48e156bb36af45d21ee01a13467441f2"
+}
