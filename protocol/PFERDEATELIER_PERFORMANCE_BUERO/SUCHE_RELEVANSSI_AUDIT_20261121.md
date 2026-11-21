@@ -78,3 +78,16 @@ Entfernung nur, wenn ein breiter semantischer Alt/Neu-Treffertest 0 relevante Fu
 
 ## KISS-Folge
 Kein neues Einzelplugin für diese Prüfung. Relevanssi-Aufräumen wird in den bestehenden gebündelten Performance-/Aufräumablauf aufgenommen. Zuerst Funktionsgleichheit, dann Entfernung; danach vollständiger PASSIV-Gesamtlauf.
+
+
+## Live-Änderung nach Diagnose 2026-11-21
+
+- Relevanssi Live Ajax Search 2.6 wurde vom Nutzer auf der Live-Seite deaktiviert.
+- Relevanssi Core 4.28.8 bleibt aktiv.
+- Wichtig: Der Performance-Gesamtlauf pferdeatelier-performance-gesamtanalyse-20261121-101158.json wurde noch MIT aktivem Relevanssi Live Ajax Search erzeugt. Die Deaktivierung erfolgte danach.
+- Deshalb gilt der nächste PASSIV-Gesamtlauf zugleich als Funktions- und Performance-Nachweis für die Entfernung:
+  - Hauptsuche
+  - Glossar
+  - Pferderassen
+  - Anzeigenmarkt
+- Keine weitere Such- oder Performanceänderung vor diesem Vergleich.
