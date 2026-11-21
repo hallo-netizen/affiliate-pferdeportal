@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 
 from mini_release_gate import init, write
-from mini_single_release import run, RELEASE_DIR, RELEASE_NAME
+from mini_single_release import run, deliver, RELEASE_DIR, RELEASE_NAME, CONTRACT
 
 
 def base_source(already_category=False):
@@ -116,6 +116,80 @@ class MiniOneFileGate(unittest.TestCase):
             self.assertEqual(bad['status'],'REPARATUR')
             self.assertEqual(bad['next_worker'],'CATEGORY')
             self.assertFalse((ws/RELEASE_DIR).exists())
+
+    def test_category_only_never_escapes_chat_delivery_gate(self):
+        write(self.ws/'CATEGORY.json',stage(self.src,'CATEGORY',[
+            {'route':'FACH','category_slug':'test-cat','article_type':'FAQ'}]*3))
+        out=Path(self.tmp.name)/'CHAT_OUTPUT.json'
+        out.write_text('STALE_PREVIOUS_SUCCESS')
+        result=deliver(self.ws,out,self.ws/'CATEGORY.json')
+        self.assertEqual(result['status'],'GESPERRT')
+        self.assertEqual(result['next_worker'],'EDITORIAL')
+        self.assertFalse(out.exists())
+        self.assertFalse((self.ws/RELEASE_DIR).exists())
+
+    def test_only_category_and_editorial_cannot_escape(self):
+        write(self.ws/'CATEGORY.json',stage(self.src,'CATEGORY',[
+            {'route':'FACH','category_slug':'test-cat','article_type':'FAQ'}]*3))
+        write(self.ws/'EDITORIAL.json',stage(self.src,'EDITORIAL',[
+            {'box':'FREI','intent_summary':'QA','matched_ref':'','reason':''}]*3))
+        out=Path(self.tmp.name)/'CHAT_OUTPUT.json'
+        result=deliver(self.ws,out)
+        self.assertEqual(result['status'],'GESPERRT')
+        self.assertEqual(result['next_worker'],'TITLE')
+        self.assertFalse(out.exists())
+
+    def test_forged_success_marker_is_not_enough(self):
+        out=Path(self.tmp.name)/'CHAT_OUTPUT.json'
+        fake=Path(self.tmp.name)/'FAKE_PASS.json'
+        write(fake,{'contract':CONTRACT, 'release':{'state':'PASS','finished':True},
+                    'decisions':[{'category':{'route':'FACH'}}]*3})
+        result=deliver(self.ws,out,fake)
+        self.assertEqual(result['status'],'GESPERRT')
+        self.assertFalse(out.exists())
+
+    def test_complete_batch_can_be_emitted_exactly_once(self):
+        self._complete()
+        out=Path(self.tmp.name)/'CHAT_OUTPUT.json'
+        result=deliver(self.ws,out)
+        self.assertEqual(result['status'],'FREIGEGEBEN')
+        self.assertTrue(result['release_available'])
+        self.assertTrue(out.exists())
+        self.assertEqual(out.read_bytes(),(self.ws/RELEASE_DIR/RELEASE_NAME).read_bytes())
+        self.assertEqual(result['import_sha256'],hashlib.sha256(out.read_bytes()).hexdigest())
+        self.assertEqual(read_json(out)['release']['finished'], True)
+        self.assertEqual(len(read_json(out)['decisions']),3)
+
+    def test_complete_batch_rejects_any_different_direct_chat_file(self):
+        self._complete()
+        category=Path(self.tmp.name)/'CAT_ONLY.json'
+        write(category,stage(self.src,'CATEGORY',[
+            {'route':'FACH','category_slug':'test-cat','article_type':'FAQ'}]*3))
+        output=Path(self.tmp.name)/'CHAT_OUTPUT.json'
+        result=deliver(self.ws,output,category)
+        self.assertEqual(result['status'],'GESPERRT')
+        self.assertEqual(result['reason'],'MINI_DIRECT_FILE_NOT_APPROVED')
+        self.assertFalse(output.exists())
+
+    def test_revalidation_revokes_stale_output_when_title_is_removed(self):
+        self._complete()
+        output=Path(self.tmp.name)/'CHAT_OUTPUT.json'
+        self.assertEqual(deliver(self.ws,output)['status'],'FREIGEGEBEN')
+        title=read_json(self.ws/'TITLE.json')
+        title['items'][0]['approved_title']=''
+        write(self.ws/'TITLE.json',title)
+        result=deliver(self.ws,output)
+        self.assertEqual(result['status'],'GESPERRT')
+        self.assertEqual(result['next_worker'],'TITLE')
+        self.assertFalse(output.exists())
+
+    def test_complete_batch_accepts_only_byte_identical_candidate(self):
+        self._complete()
+        self.assertEqual(run(self.ws)['status'],'FREIGEGEBEN')
+        output=Path(self.tmp.name)/'CHAT_OUTPUT.json'
+        result=deliver(self.ws,output,self.ws/RELEASE_DIR/RELEASE_NAME)
+        self.assertEqual(result['status'],'FREIGEGEBEN')
+        self.assertTrue(output.exists())
 
     def test_source_mutation_is_fail_closed(self):
         self._complete()
