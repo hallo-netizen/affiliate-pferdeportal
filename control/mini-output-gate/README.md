@@ -1,29 +1,48 @@
-# MINI – genau eine Ausgabesperre mit Reparaturschleife
+# MINI – verbindliche Ausgabesperre vor dem Chat
 
-## Ziel
+## Vertrag (KISS, kein neues Plugin)
 
-Kein verfrüht ausgegebener Einzel-Checkpoint. **Ein Original-MINI-Export → sämtliche fehlenden Entscheidungen einmalig bearbeiten → eine einzige technische Abschlussprüfung → alle erforderlichen WordPress-Importdateien freigeben.**
+**Ein MINI-Gesamtexport → CATEGORY → EDITORIAL → TITLE → bestehende Abschlussprüfung → genau eine JSON-Datei für den Chat.**
 
-Bei Fehlern bleibt der Originalauftrag erhalten; der Gate-Status wird **REPARATUR**. Der Gate-Ausgang `REPARATUR.json` benennt die betroffene Stufe und das konkrete Thema. **Nur diese Felder werden durch den jeweiligen bereits zuständigen Worker repariert**, dann läuft **derselbe** `mini_release_gate.py` erneut. Kein Reset, keine Neurecherche, keine doppelte Entscheidung, keine zweite Fachprüfung.
+Das WordPress-MINI-Importieren einer CATEGORY-Zwischendatei kann technisch erfolgreich sein; das bedeutet ausdrücklich **nicht**, dass der gesamte MINI-Auftrag abgeschlossen ist. Der Chat darf eine solche Datei nicht als Gesamtrückgabe ausgeben.
 
-## Anwendung für den MINI-Chat
+## Existierender Freigabeweg (unverändert)
 
-1. `python mini_release_gate.py --original /pfad/texterstellung-mini-gesamtauftrag.json --workspace /pfad/mini-arbeitsraum` (kopiert und bindet das Original unveränderlich; zunächst Reparaturstatus, weil Ergebnisse fehlen).
-2. Bestehende MINI-Worker erzeugen **nur die für diesen Auftrag offenen** Stufendateien `CATEGORY.json`, `EDITORIAL.json`, `TITLE.json` im Arbeitsraum – anhand derselben Originaldatei und der jeweiligen Worker-Vorlage. Abgeschlossene Entscheidungen bleiben unangetastet.
-3. `python mini_release_gate.py --workspace /pfad/mini-arbeitsraum`.
-4. Falls **REPARATUR**: `REPARATUR.json` lesen, nur den dort genannten vorhandenen Worker mit der Korrektur der genannten Themen beauftragen und **Schritt 3 erneut ausführen**. Keine Dateien an den Nutzer ausgeben, solange `FREIGABE/NACHWEIS.json` fehlt.
-5. Erst bei **FREIGEGEBEN_FUER_WP_IMPORTE** ausschließlich die nummerierten Dateien aus `FREIGABE/` in einem Chat weitergeben. WordPress importiert sie anschließend **in der vom Plugin unverändert vorgegebenen Reihenfolge**.
+- `mini_release_gate.py` kontrolliert die Vollständigkeit, Identität und gesperrte Entscheidungen. Fehler werden als `REPARATUR.json` an den betroffenen ursprünglichen Worker gegeben.
+- `mini_single_release.py` erzeugt bei PASS das finale `FREIGABE/MINI_EINMAL_REIMPORT.json` mit gesondertem `NACHWEIS.json`.
+- Die private GitHub-Aktion nutzt denselben Code, prüft ihn vor der Ausgabe und lädt **nur** die freigegebene Datei des aktuell bearbeiteten Batches hoch. Keine Änderungen an K0 oder am WordPress-Plugin.
 
-## Kein Architekturumbau und keine Doppelprüfung
+## Zusätzliche Sperre genau am Ausgabepunkt
 
-- `mini_release_gate.py` entscheidet nicht, ob Keyword, Kategorie oder Titel fachlich richtig sind. Das bleibt allein bei den vorhandenen Workern beziehungsweise WordPress. Das Gate prüft **einmal an der Ausgabestelle** nur die Vollständigkeit, Hashbindung, Ursprungsdaten-Unverändertheit und die nötigen Entscheidungen.
-- Keine neue WordPress-Plugin-Version, kein K0-Umbau, keine zusätzliche WordPress-Prüfstufe, keine geänderten MINI-Entscheidungen.
-- Beim Prüffehler wird die alte Freigabe entfernt, die Arbeitsdateien und der genaue Korrekturauftrag bleiben bestehen.
-- **Grenze:** Diese Sperre ist technisch wirksam, wenn MINI-Dateien ausschließlich über den Gate-Freigabeordner verteilt werden. Sie ist keine systemweite Sperre für beliebige, manuell verlinkte Dateien in ChatGPT. Eine solche plattformweite Verhinderung kann ein Repository-Skript allein nicht erzwingen.
-- WordPress-Import wurde nicht auf der Live-Website ausgeführt; die Freigabe bestätigt ausschließlich die vorab lokal getestete technische Lieferfähigkeit.
+Statt eine selbst erzeugte CATEGORY-/EDITORIAL-/TITLE-JSON direkt in den Chat zu verlinken, muss zur Ausgabedatei der **bestehende** Freigabebefehl verwendet werden:
 
-## Test
+```bash
+python mini_single_release.py --workspace /pfad/zum/mini-batch \
+    --deliver /mnt/data/MINI_EINMAL_REIMPORT.json
+```
 
-`python -m unittest -v test_mini_gate.py`
+Bei einer bereits vorhandenen Kandidatendatei zusätzlich:
 
-Die Tests laufen mit einer auf die erforderlichen Felder gekürzten 10-Themen-Testkopie und einer aus der echten Kategorie-Rückgabedatei abgeleiteten Testdatei. Wahlweise können die beiden vollständigen echten Dateien per `MINI_TEST_ORIGINAL` und `MINI_TEST_CATEGORY` angegeben werden. Die zur Prüfung künstlich erzeugten Redaktions- und Titelentscheidungen sind **reine Testdaten** und werden niemals als produktive MINI-Rückgaben freigegeben.
+```bash
+python mini_single_release.py --workspace /pfad/zum/mini-batch \
+    --candidate /pfad/zur/vorliegenden-datei.json \
+    --deliver /mnt/data/MINI_EINMAL_REIMPORT.json
+```
+
+Die freizugebende Kandidatendatei muss **byteidentisch** zur vom Originalgate erzeugten Gesamtrückgabe sein. Eine CATEGORY-Zwischendatei wird selbst dann abgewiesen, wenn ihr WordPress-MINI-Import technisch erfolgreich war.
+
+**Vollständiger Auftrag fehlt:** Status `GESPERRT`, Ausgabedatei wird nicht erstellt (eine frühere gleichnamige Ausgabedatei wird entfernt), `REPARATUR.json` enthält die noch offene Station. **Vollständiger Auftrag:** Status `FREIGEGEBEN` mit Dateipfad und Prüfsumme, genau eine Chatdatei.
+
+Niemals vor dem PASS dieser Ausgabeprüfung eine MINI-JSON als fertigen Importlink anbieten; kein paralleler direkter Dateierzeugungsweg und keine Zwischenfreigabe.
+
+## Tests / echter Fehlerfall
+
+`python -m unittest -v test_mini_gate.py test_mini_single_release.py`
+
+Negative Tests: nur Kategorie, Kategorie plus Redaktion ohne Titel, manipulierte Ausgangsdaten, vorgetäuschte Freigabe, abweichende Kandidatendatei und bereits vorhandene veraltete Ausgabedatei. Positive Tests: vollständiger Auftrag erzeugt genau eine Datei; Datei ist byteidentisch zur geprüften Freigabe.
+
+Am 21.11.2026 wurde zusätzlich der **tatsächlich fehlgeschlagene 20-Themen-Vorgang** mit Original-MINI-Export und der im Chat ausgegebenen `MINI_KATEGORIE_RUECKGABE_2026-11-21.json` erneut durch den Ausgabebefehl geführt: Ergebnis `GESPERRT`, nächster Worker `EDITORIAL`, **keine Chatdatei erzeugt**.
+
+## Grenze, die nicht als Garantie ausgegeben werden darf
+
+Der Code sperrt die Ausgaben **über diesen verbindlichen Freigabeweg**. Ein Repository-Skript kann aber technisch weder ChatGPT selbst noch das manuelle Verlinken einer anderen Datei plattformweit unterbinden. Deshalb ist eine absolute Aussage wie „ChatGPT kann niemals eine falsche Datei verlinken“ **nicht nachgewiesen**. Als MINI-Enddatei gilt ausschließlich die nachweislich aus diesem Gate ausgegebene Datei.
