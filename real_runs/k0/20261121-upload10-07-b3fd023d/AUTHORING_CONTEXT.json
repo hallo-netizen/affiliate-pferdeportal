@@ -1,0 +1,175 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Kann man Pferdedecken im Waschsalon waschen?",
+    "target_keyword": "Kann ich Pferdedecken im Waschsalon Waschen?",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "FAQ",
+    "plan_slot": "b3fd023de34533f47dcf928bbe8983013f461b4827a0b35fa0b90dcbd3a3e42e"
+  },
+  "content_profile": {
+    "search_intent": "Ob sich Pferdedecken in einem normalen Waschsalon reinigen lassen und worauf bei Größe, Maschine und Regeln zu achten ist."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+          "source_title": "Horseware Ireland – Pferdedecken pflegen"
+        }
+      ],
+      "claims": [
+        "Ein professioneller Pferdedecken-Waschservice ist eine mögliche Reinigungsmethode.",
+        "Ein professioneller Dienst kann Decken waschen, reparieren und bei Bedarf nachimprägnieren.",
+        "Für Maschinenwäsche wird eine geeignete große gewerbliche Waschmaschine und niedrige Temperatur empfohlen.",
+        "Für Pferdedecken sollte ein geeignetes Waschmittel verwendet werden.",
+        "Vor der Reinigung sollten Decken auf Beschädigungen geprüft werden."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Kann ich Pferdedecken im Waschsalon Waschen?",
+      "topic": "Kann man Pferdedecken im Waschsalon waschen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Kann man Pferdedecken im Waschsalon waschen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+        "source_title": "Horseware Ireland – Pferdedecken pflegen",
+        "evidence_text": "The easiest way is to take them to a professional blanket repair and washing service.",
+        "evidence_text_sha256": "327c2f5e516b52e76bef0ccf1b92cc9a75309c32ac39bd7c75d42f9717aa353d",
+        "statement": "Ein professioneller Pferdedecken-Waschservice ist eine mögliche Reinigungsmethode.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+        "source_title": "Horseware Ireland – Pferdedecken pflegen",
+        "evidence_text": "They can fix any damage, wash the blanket, and re-proof it if required.",
+        "evidence_text_sha256": "b4f70c45a0fc85324bdfd647211b05ce16b8158420740cce29b8b2033d1b7bd4",
+        "statement": "Ein professioneller Dienst kann Decken waschen, reparieren und bei Bedarf nachimprägnieren.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+        "source_title": "Horseware Ireland – Pferdedecken pflegen",
+        "evidence_text": "For machine washing: use a cool setting and ideally a commercial washing machine that can cope with heavy-duty washing.",
+        "evidence_text_sha256": "bda60aab46171a96c0066380cf41f42754129569ff9ade4ea8d0144aa69f5179",
+        "statement": "Für Maschinenwäsche wird eine geeignete große gewerbliche Waschmaschine und niedrige Temperatur empfohlen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+        "source_title": "Horseware Ireland – Pferdedecken pflegen",
+        "evidence_text": "Use a wash formulated for blankets.",
+        "evidence_text_sha256": "d526345e3c9b1dda9b000ee2d6a5fa70363a1ed2cd9bc7571f925e15089b8bfe",
+        "statement": "Für Pferdedecken sollte ein geeignetes Waschmittel verwendet werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
+        "source_title": "Horseware Ireland – Pferdedecken pflegen",
+        "evidence_text": "Checking for any rips or tears is a good habit to get into.",
+        "evidence_text_sha256": "7f29c8b57f55e2fdab59022811acf36832b69f1ea98be219816374a69b360081",
+        "statement": "Vor der Reinigung sollten Decken auf Beschädigungen geprüft werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "alltags-pferde-haltungsformen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "anchor": "pferdedecken-regendecken-pflege",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Regendecken",
+      "Pferdedecken",
+      "Waschsalon",
+      "Gewerbliche Waschmaschine",
+      "Wäsche",
+      "Reinigung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine Tabelle würde ohne eigenständigen Vergleich der Bedingungen nur den Fließtext wiederholen und keinen zusätzlichen Nutzen bringen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
