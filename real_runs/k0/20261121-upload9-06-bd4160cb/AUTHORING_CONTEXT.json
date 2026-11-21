@@ -16,8 +16,8 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.gesetze-im-internet.de/bgb/__906.html",
-          "source_title": "Bürgerliches Gesetzbuch – § 906"
+          "source_url": "https://de.wikipedia.org/wiki/Nachbarrecht",
+          "source_title": "Wikipedia – Nachbarrecht"
         },
         {
           "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354972/index.php",
@@ -25,9 +25,9 @@
         }
       ],
       "claims": [
-        "Nicht jede unwesentliche Geruchs- oder Geräuschbelastung vom Nachbargrundstück kann untersagt werden.",
-        "Bei der Beurteilung nachbarlicher Beeinträchtigungen können gesetzliche Grenz- und Richtwerte maßgeblich sein.",
-        "Auch Ortsüblichkeit und wirtschaftlich zumutbare Schutzmaßnahmen spielen bei Nachbarbelastungen eine Rolle.",
+        "Das Nachbarrecht regelt die Rechtsbeziehungen von Grundstücksnachbarn.",
+        "Nachbarrechtliche Regelungen versuchen unterschiedliche Interessen von Nachbarn auszugleichen.",
+        "Nachbarn können gegen bestimmte rechtswidrige Bauvorhaben öffentlich-rechtlichen Rechtsschutz suchen.",
         "Baurechtliche Zulässigkeit und private nachbarrechtliche Ansprüche sind gesondert zu prüfen."
       ],
       "fresh_research_reference_date": "2026-11-21"
@@ -51,33 +51,33 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.gesetze-im-internet.de/bgb/__906.html",
-        "source_title": "Bürgerliches Gesetzbuch – § 906",
-        "evidence_text": "Der Eigentümer eines Grundstücks kann die Zuführung von Gasen, Dämpfen, Gerüchen, Rauch, Ruß, Wärme, Geräusch, Erschütterungen und ähnliche von einem anderen Grundstück ausgehende Einwirkungen insoweit nicht verbieten, als die Einwirkung die Benutzung seines Grundstücks nicht oder nur unwesentlich beeinträchtigt.",
-        "evidence_text_sha256": "5f45e132d93aa9935cd3a11b7038f1c62f15236d14cefbe09c14b6e94231c719",
-        "statement": "Nicht jede unwesentliche Geruchs- oder Geräuschbelastung vom Nachbargrundstück kann untersagt werden.",
+        "source_url": "https://de.wikipedia.org/wiki/Nachbarrecht",
+        "source_title": "Wikipedia – Nachbarrecht",
+        "evidence_text": "Das Nachbarrecht ist ein Rechtsgebiet, das die Rechtsbeziehungen zwischen Nachbarn und/oder Dritten regelt.",
+        "evidence_text_sha256": "bfa0ddc82e0fb0bba311d896435b993d061db63b8a589e7876e0423d4e51032f",
+        "statement": "Das Nachbarrecht regelt die Rechtsbeziehungen von Grundstücksnachbarn.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F2": {
-        "source_url": "https://www.gesetze-im-internet.de/bgb/__906.html",
-        "source_title": "Bürgerliches Gesetzbuch – § 906",
-        "evidence_text": "Eine unwesentliche Beeinträchtigung liegt in der Regel vor, wenn die in Gesetzen oder Rechtsverordnungen festgelegten Grenz- oder Richtwerte von den nach diesen Vorschriften ermittelten und bewerteten Einwirkungen nicht überschritten werden.",
-        "evidence_text_sha256": "705532e1168a94723b23f40bc2f487ea377252b06d670118d8ba8993b08532b6",
-        "statement": "Bei der Beurteilung nachbarlicher Beeinträchtigungen können gesetzliche Grenz- und Richtwerte maßgeblich sein.",
+        "source_url": "https://de.wikipedia.org/wiki/Nachbarrecht",
+        "source_title": "Wikipedia – Nachbarrecht",
+        "evidence_text": "Durch Nachbarschaft treffen häufig unterschiedliche Interessen der Nachbarn aufeinander, die durch Rechtsnormen zum Ausgleich gebracht werden sollen.",
+        "evidence_text_sha256": "184c743fadab3befa896be6f040a0120bf60943d68ca12b2a37a59592608fe07",
+        "statement": "Nachbarrechtliche Regelungen versuchen unterschiedliche Interessen von Nachbarn auszugleichen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F3": {
-        "source_url": "https://www.gesetze-im-internet.de/bgb/__906.html",
-        "source_title": "Bürgerliches Gesetzbuch – § 906",
-        "evidence_text": "Das Gleiche gilt insoweit, als eine wesentliche Beeinträchtigung durch eine ortsübliche Benutzung des anderen Grundstücks herbeigeführt wird und nicht durch Maßnahmen verhindert werden kann, die Benutzern dieser Art wirtschaftlich zumutbar sind.",
-        "evidence_text_sha256": "854a3e033542dbe75a8b34b6084fcf7d6b39ee572c8006b49ecbcfcc827ef74a",
-        "statement": "Auch Ortsüblichkeit und wirtschaftlich zumutbare Schutzmaßnahmen spielen bei Nachbarbelastungen eine Rolle.",
+        "source_url": "https://de.wikipedia.org/wiki/Nachbarrecht",
+        "source_title": "Wikipedia – Nachbarrecht",
+        "evidence_text": "Das öffentliche Baunachbarrecht befasst sich mit dem Rechtsschutz eines Nachbarn, der sich gegen ein Bauvorhaben auf einem benachbarten Grundstück wendet.",
+        "evidence_text_sha256": "4f8f099dea5eef3d2acf1b07645fc1a051abeb1b02dd5520abc02c43924fa07b",
+        "statement": "Nachbarn können gegen bestimmte rechtswidrige Bauvorhaben öffentlich-rechtlichen Rechtsschutz suchen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
