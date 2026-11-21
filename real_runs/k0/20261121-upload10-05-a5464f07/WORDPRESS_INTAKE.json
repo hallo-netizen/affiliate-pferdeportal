@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Sollte man Pferde nachts eindecken?",
+      "target_keyword": "Sollte man Pferde nachts eindecken?",
+      "category": "alltags-pferde-haltungsformen",
+      "article_type": "FAQ",
+      "plan_slot": "a5464f07df098b1c06cb0e6efc56aa21b2f04c4eb23e71de6323ad2179dfc7a3"
+    }
+  ],
+  "batch_sha256": "ba7c37bc0e8921675be873649ee9f759fa3aa9b3af2ff36c223dc87e35d17973"
+}
