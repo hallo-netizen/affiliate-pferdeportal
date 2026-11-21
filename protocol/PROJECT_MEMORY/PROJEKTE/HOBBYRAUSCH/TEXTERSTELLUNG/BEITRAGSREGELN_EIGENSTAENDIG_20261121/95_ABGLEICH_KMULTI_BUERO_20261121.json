@@ -302,5 +302,64 @@
     "wordpress_plugin_unmodified": true,
     "production_enabled": false,
     "full_writer_release": false
+  },
+  "full_hobby_five_type_research_to_authoring_handoff_20261121": {
+    "result": "PASS_REAL_GITHUB_ACTIONS_AND_VERIFIED_ORIGINAL_SOURCE_HISTORY__NO_AUTHORING_RELEASE",
+    "original_wordpress_types": [
+      "Beratung",
+      "FAQ",
+      "Pflege",
+      "Vergleich",
+      "Anleitung"
+    ],
+    "all_five_rulebooks_exist_in_k_multi": true,
+    "original_wordpress_five_fields_unchanged": true,
+    "original_wordpress_plugin_unchanged": true,
+    "K0_unchanged": true,
+    "pipeline_stations": [
+      "original_wordpress_intake",
+      "original_kmulti_portal_type_routing",
+      "existing_common_research_entry",
+      "existing_research_receipt_handoff",
+      "existing_kmulti_authoring_station__no_write"
+    ],
+    "github_workflow_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/44930553906",
+    "test_results": {
+      "original_entry": 22,
+      "all_five_own_books_and_common_research": 21,
+      "research_to_authoring_station": 18,
+      "total": 61,
+      "failed": 0
+    },
+    "real_original_FAQ_articles": 3,
+    "real_researched_paragraphs_audited": 30,
+    "real_distinct_official_sources_retrieved": 10,
+    "real_quote_matches": 16,
+    "real_excerpt_audit_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/44889232903",
+    "real_LanguageTool_6_8_success_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/44889447704",
+    "existing_review_to_K10_transport_wrapper": "TEST_ONLY_NOT_SIGNED_NOT_FACT_APPROVED",
+    "exact_local_KMulti_downloaded_proof": "KMULTI_HOBBY_3_REAL_REVIEWED_FAQ_POST_RESEARCH_QUEUE_NOT_IMPORT.json",
+    "local_JSON_SHA256": "cb9b4de5f01c86a515def2eb11177135ab3baf0f1b1976da4d5f563dfb993bdd",
+    "local_verified_path": "/mnt/data/hobby_kmulti_verified/KMULTI_HOBBY_3_REAL_REVIEWED_FAQ_POST_RESEARCH_QUEUE_NOT_IMPORT.json",
+    "github_artifact_ID": 14717352840,
+    "latest_kmulti_office_commit": "c2bc5c18109542e9301ea551da5c51937dc3baa2",
+    "actual_writer_can_run": false,
+    "content_research_complete": false,
+    "formal_121_rule_full_qa_ran": false,
+    "production_enabled": false,
+    "final_wordpress_file_approved": false,
+    "remaining_real_required_conditions": [
+      "Authorized and complete common research-fact owner signoff, not merely source URL reachability or quote presence",
+      "Own Hobby editorial hard values approved and compiled for original 121-rule QA owner",
+      "Actual complete 121-rule per-article QA on exact current bodies, zero hard failures",
+      "Trusted signed final K-Multi QA release certificate binding exact unchanged WordPress original source, text and quality proof"
+    ],
+    "unchanged": [
+      "K0 and its 121 rules",
+      "WordPress Hobbydepot plugin",
+      "Existing WordPress metadata files",
+      "Other portal type decisions",
+      "Global blocked writer/publish policy"
+    ]
   }
 }
