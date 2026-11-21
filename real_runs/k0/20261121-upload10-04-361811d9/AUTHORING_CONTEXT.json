@@ -16,17 +16,17 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
-          "source_title": "Horseware Ireland – Pferdedecken pflegen"
+          "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
+          "source_title": "Horseware Ireland – Horse Rug Care Guide"
         }
       ],
       "claims": [
-        "Für Maschinenwäsche wird eine geeignete große gewerbliche Waschmaschine und niedrige Temperatur empfohlen.",
-        "Bei Reinigung mit Wasserstrahl ist sanfter Druck zu verwenden.",
-        "Für Pferdedecken sollte ein geeignetes Waschmittel verwendet werden.",
-        "Pferdedecken sollen aufgehängt an der Luft und nicht im Trockner trocknen.",
-        "Vor dem Einlagern sollen Decken sauber und vollständig trocken sein.",
-        "Vor der Reinigung sollten Decken auf Beschädigungen geprüft werden."
+        "Vor der Wäsche sollten Pferdedecken vorsichtig abgebürstet werden.",
+        "Zum Waschen wird ein geeignetes Pferdedeckenwaschmittel empfohlen.",
+        "Pferdedecken sollen bei Maschinenwäsche mit niedriger Temperatur gereinigt werden.",
+        "Pferdedecken sollten ohne direkte Hitze an der Luft trocknen.",
+        "Saubere Pferdedecken sollten trocken und möglichst luftig gelagert werden.",
+        "Reparatur kleiner Schäden kann die Nutzungsdauer einer Pferdedecke verlängern."
       ],
       "fresh_research_reference_date": "2026-11-21"
     },
@@ -68,66 +68,66 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
-        "source_title": "Horseware Ireland – Pferdedecken pflegen",
-        "evidence_text": "For machine washing: use a cool setting and ideally a commercial washing machine that can cope with heavy-duty washing.",
-        "evidence_text_sha256": "bda60aab46171a96c0066380cf41f42754129569ff9ade4ea8d0144aa69f5179",
-        "statement": "Für Maschinenwäsche wird eine geeignete große gewerbliche Waschmaschine und niedrige Temperatur empfohlen.",
+        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
+        "source_title": "Horseware Ireland – Horse Rug Care Guide",
+        "evidence_text": "Gently brush off any dirt",
+        "evidence_text_sha256": "35e556d7b803206e3a72ec64f4dae8375d5b3b1e4f0eb4fd030e758d70be28fd",
+        "statement": "Vor der Wäsche sollten Pferdedecken vorsichtig abgebürstet werden.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Anleitung"
         ]
       },
       "F2": {
-        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
-        "source_title": "Horseware Ireland – Pferdedecken pflegen",
-        "evidence_text": "For hosing: use gentle pressure.",
-        "evidence_text_sha256": "2191c4a3e73d82abfafbb548bbeb136c8eaacb7578139c235fadaba7e44cb34c",
-        "statement": "Bei Reinigung mit Wasserstrahl ist sanfter Druck zu verwenden.",
+        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
+        "source_title": "Horseware Ireland – Horse Rug Care Guide",
+        "evidence_text": "Use a non-biological wash, or one formulated for rugs e.g. Rambo Wash",
+        "evidence_text_sha256": "58802f86ac690ebee77a812c7739404ddf42030b13fd1b560beeb41e5089070c",
+        "statement": "Zum Waschen wird ein geeignetes Pferdedeckenwaschmittel empfohlen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Anleitung"
         ]
       },
       "F3": {
-        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
-        "source_title": "Horseware Ireland – Pferdedecken pflegen",
-        "evidence_text": "Use a wash formulated for blankets.",
-        "evidence_text_sha256": "d526345e3c9b1dda9b000ee2d6a5fa70363a1ed2cd9bc7571f925e15089b8bfe",
-        "statement": "Für Pferdedecken sollte ein geeignetes Waschmittel verwendet werden.",
+        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
+        "source_title": "Horseware Ireland – Horse Rug Care Guide",
+        "evidence_text": "Wash on a cool setting if using a washing machine",
+        "evidence_text_sha256": "a65ff2fe29af551839f896e28a461351b51427318e462059eb52c0d94d859539",
+        "statement": "Pferdedecken sollen bei Maschinenwäsche mit niedriger Temperatur gereinigt werden.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Anleitung"
         ]
       },
       "F4": {
-        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
-        "source_title": "Horseware Ireland – Pferdedecken pflegen",
-        "evidence_text": "Hang the blanket to drip dry naturally. Don’t tumble dry your blanket.",
-        "evidence_text_sha256": "9c87dd9fc6b078e7b81f448c464eef1608a56a95a12b908ca2e95570ee6c315a",
-        "statement": "Pferdedecken sollen aufgehängt an der Luft und nicht im Trockner trocknen.",
+        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
+        "source_title": "Horseware Ireland – Horse Rug Care Guide",
+        "evidence_text": "Allow the rug to drip dry away from heat",
+        "evidence_text_sha256": "7da37f98cc170acfc60f642c3f27068b35739da2237627dd4b0e2ca7d1080d85",
+        "statement": "Pferdedecken sollten ohne direkte Hitze an der Luft trocknen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Anleitung"
         ]
       },
       "F5": {
-        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
-        "source_title": "Horseware Ireland – Pferdedecken pflegen",
-        "evidence_text": "Once your blankets have been washed, re-proofed if necessary, and are dry it’s time to store them away until next season.",
-        "evidence_text_sha256": "0ca929c894ed520a258379ec66f874716c76bc6b659f4b22a7a6bbc6b852554a",
-        "statement": "Vor dem Einlagern sollen Decken sauber und vollständig trocken sein.",
+        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
+        "source_title": "Horseware Ireland – Horse Rug Care Guide",
+        "evidence_text": "Store the rug in a cool, dry area, preferably in a breathable storage bag",
+        "evidence_text_sha256": "d7a6baf3e63651763c7f943ccd9384ca35bc3a9a3a38dbdc6dea832a8b4974f7",
+        "statement": "Saubere Pferdedecken sollten trocken und möglichst luftig gelagert werden.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Anleitung"
         ]
       },
       "F6": {
-        "source_url": "https://www.horseware.com/en-gb/blog/washing-packing-your-horses-blanket",
-        "source_title": "Horseware Ireland – Pferdedecken pflegen",
-        "evidence_text": "Checking for any rips or tears is a good habit to get into.",
-        "evidence_text_sha256": "7f29c8b57f55e2fdab59022811acf36832b69f1ea98be219816374a69b360081",
-        "statement": "Vor der Reinigung sollten Decken auf Beschädigungen geprüft werden.",
+        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
+        "source_title": "Horseware Ireland – Horse Rug Care Guide",
+        "evidence_text": "Repairing the rips to seal and waterproof them with something like the Rambo Rug Repair Kit can increase the life of your rug and save you having to purchase a new one.",
+        "evidence_text_sha256": "a3a44f66f61b5a095a1c4f38c309f10df33d8232c6ef234565f7158e1b69cb60",
+        "statement": "Reparatur kleiner Schäden kann die Nutzungsdauer einer Pferdedecke verlängern.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Anleitung"
