@@ -1,0 +1,209 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 10,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Was kostet es, einen Pferdestall zu bauen?",
+        "target_keyword": "Wie hoch sind die Kosten für den Bau eines Pferde stalls?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "3aef2adb4501bab18c35b12482332f3445fa1d8c22fa33af1f0bf98363168841"
+      },
+      {
+        "title": "Was passiert, wenn ein Pferd zu kalt eingedeckt ist?",
+        "target_keyword": "Was passiert, wenn ein Pferd zu kalt eingedeckt ist?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "4961ad144f5b3b00bef5ad6fbd9ddfc831ebd3dc91567d1673cb5bfb79ced66f"
+      },
+      {
+        "title": "Wie oft sollte man Pferdedecken waschen?",
+        "target_keyword": "Wie oft sollte man Pferdedecken Waschen?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "2ae222b09281bd42c24433d401685e42f92b1f975dd72a9e196a87e65eca7f20"
+      },
+      {
+        "title": "Pferdedecken richtig waschen und trocknen",
+        "target_keyword": "pferdedecken waschen",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "Anleitung",
+        "plan_slot": "361811d9ae2ebe4ceaf7bb918574a772923d6de07018f814af0898b13de525ee"
+      },
+      {
+        "title": "Sollte man Pferde nachts eindecken?",
+        "target_keyword": "Sollte man Pferde nachts eindecken?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "a5464f07df098b1c06cb0e6efc56aa21b2f04c4eb23e71de6323ad2179dfc7a3"
+      },
+      {
+        "title": "Ab welcher Temperatur frieren Pferde?",
+        "target_keyword": "Ab welcher Temperatur frieren Pferde?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "6f88559f20cbdfbc0b983b4f6682f1205b7897e73ceb624acc492047faf31a16"
+      },
+      {
+        "title": "Kann man Pferdedecken im Waschsalon waschen?",
+        "target_keyword": "Kann ich Pferdedecken im Waschsalon Waschen?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "b3fd023de34533f47dcf928bbe8983013f461b4827a0b35fa0b90dcbd3a3e42e"
+      },
+      {
+        "title": "Was kostet die Pferdedeckenwäsche bei Equiva?",
+        "target_keyword": "Wie viel kostet es, Pferdedecken bei Equiva zu Waschen?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "6250d88951b01a27db6810656af2d56b6888001a682308c63a7939c22024a8e1"
+      },
+      {
+        "title": "Was kostet es, eine Pferdedecke waschen zu lassen?",
+        "target_keyword": "Was kostet es, eine Pferdedecke Waschen zu lassen?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "4f910d3b25fa4f3df565b85ea0ce963f614ed0bbadd2a2223b756bce020f61bf"
+      },
+      {
+        "title": "Simprax zur Imprägnierung von Pferdedecken richtig anwenden",
+        "target_keyword": "simprax pferdedecken imprägnierung",
+        "category": "pferdedecken-regendecken-pflege",
+        "article_type": "Anleitung",
+        "plan_slot": "91b1acd3514ff96e9a805f1c6847c2bac47b2aa1f2805f2ed6bf486291ec5595"
+      }
+    ],
+    "batch_sha256": "b5ecc9edcbb32769583df68336182fbf6f1287f31ce3ff735bf16c9e4b1985c0"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Was kostet es, einen Pferdestall zu bauen?",
+        "target_keyword": "Wie hoch sind die Kosten für den Bau eines Pferde stalls?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "3aef2adb4501bab18c35b12482332f3445fa1d8c22fa33af1f0bf98363168841"
+      },
+      "order_id": "TXE-e1ccd5bf28308474a7ccd2c7932257d7",
+      "article_id": "article:0338203ef122e2d91de727d6",
+      "search_intent": "Kosten für den Bau eines Pferdestalls einschließlich Bauweise, Ausstattung und Nebenkosten; nicht laufende Stallmiete."
+    },
+    {
+      "metadata_binding": {
+        "title": "Was passiert, wenn ein Pferd zu kalt eingedeckt ist?",
+        "target_keyword": "Was passiert, wenn ein Pferd zu kalt eingedeckt ist?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "4961ad144f5b3b00bef5ad6fbd9ddfc831ebd3dc91567d1673cb5bfb79ced66f"
+      },
+      "order_id": "TXE-f2a7ef989b5c783c0f9f623de280eb42",
+      "article_id": "article:215bcc5eafea2a2398d025e1",
+      "search_intent": "Folgen einer zu schwachen Eindeckung und Anzeichen, dass ein Pferd trotz Decke friert; nicht speziell Regen- oder Winterdecken vergleichen."
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie oft sollte man Pferdedecken waschen?",
+        "target_keyword": "Wie oft sollte man Pferdedecken Waschen?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "2ae222b09281bd42c24433d401685e42f92b1f975dd72a9e196a87e65eca7f20"
+      },
+      "order_id": "TXE-bda8af5efd4a74f16394caaf603e5e68",
+      "article_id": "article:01096bdd2f006c659a4f0f29",
+      "search_intent": "Sinnvolle Häufigkeit der Reinigung von Pferdedecken abhängig von Nutzung und Verschmutzung; keine vollständige Waschanleitung."
+    },
+    {
+      "metadata_binding": {
+        "title": "Pferdedecken richtig waschen und trocknen",
+        "target_keyword": "pferdedecken waschen",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "Anleitung",
+        "plan_slot": "361811d9ae2ebe4ceaf7bb918574a772923d6de07018f814af0898b13de525ee"
+      },
+      "order_id": "TXE-3d860037be958143c0c72b1799de1bff",
+      "article_id": "article:08624784e9c56458f57537c9",
+      "search_intent": "Pferdedecken selbst waschen und trocknen, einschließlich geeigneter Waschmethoden; nicht nur die Waschhäufigkeit."
+    },
+    {
+      "metadata_binding": {
+        "title": "Sollte man Pferde nachts eindecken?",
+        "target_keyword": "Sollte man Pferde nachts eindecken?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "a5464f07df098b1c06cb0e6efc56aa21b2f04c4eb23e71de6323ad2179dfc7a3"
+      },
+      "order_id": "TXE-a89bc44d9ee0a8bbb5b6c56b772511c7",
+      "article_id": "article:85d22a0807c4eed1358757b7",
+      "search_intent": "Ob und unter welchen Bedingungen Pferde nachts eine Decke brauchen; Schwerpunkt Nacht und Temperaturwechsel, nicht Eindecken allgemein."
+    },
+    {
+      "metadata_binding": {
+        "title": "Ab welcher Temperatur frieren Pferde?",
+        "target_keyword": "Ab welcher Temperatur frieren Pferde?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "6f88559f20cbdfbc0b983b4f6682f1205b7897e73ceb624acc492047faf31a16"
+      },
+      "order_id": "TXE-396b144a520b739e2f3f5386e7f0317b",
+      "article_id": "article:10a071fb4625e996ffa60bb2",
+      "search_intent": "Ab welcher Temperatur Pferde Kälte empfinden oder frieren können und warum keine einheitliche Temperaturgrenze gilt; nicht nur Regendecken."
+    },
+    {
+      "metadata_binding": {
+        "title": "Kann man Pferdedecken im Waschsalon waschen?",
+        "target_keyword": "Kann ich Pferdedecken im Waschsalon Waschen?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "b3fd023de34533f47dcf928bbe8983013f461b4827a0b35fa0b90dcbd3a3e42e"
+      },
+      "order_id": "TXE-a064b16c4b1bbb81ccb5ae2937561ed2",
+      "article_id": "article:e802c73c5882d266c1dc8c72",
+      "search_intent": "Ob sich Pferdedecken in einem normalen Waschsalon reinigen lassen und worauf bei Größe, Maschine und Regeln zu achten ist."
+    },
+    {
+      "metadata_binding": {
+        "title": "Was kostet die Pferdedeckenwäsche bei Equiva?",
+        "target_keyword": "Wie viel kostet es, Pferdedecken bei Equiva zu Waschen?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "6250d88951b01a27db6810656af2d56b6888001a682308c63a7939c22024a8e1"
+      },
+      "order_id": "TXE-d1650f29035d816359fa659842dfc57b",
+      "article_id": "article:905850a970084dad89cea15c",
+      "search_intent": "Kosten und Bedingungen der Pferdedeckenwäsche beim ausdrücklich genannten Anbieter Equiva; keine allgemeine Preisübersicht."
+    },
+    {
+      "metadata_binding": {
+        "title": "Was kostet es, eine Pferdedecke waschen zu lassen?",
+        "target_keyword": "Was kostet es, eine Pferdedecke Waschen zu lassen?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "4f910d3b25fa4f3df565b85ea0ce963f614ed0bbadd2a2223b756bce020f61bf"
+      },
+      "order_id": "TXE-3e1cea02c6f494c491172c009e37173a",
+      "article_id": "article:069be420edcc56cd74ea60b5",
+      "search_intent": "Typische Kosten für das professionelle Waschenlassen einer Pferdedecke und preisbestimmende Faktoren; unabhängig von einem einzelnen Anbieter."
+    },
+    {
+      "metadata_binding": {
+        "title": "Simprax zur Imprägnierung von Pferdedecken richtig anwenden",
+        "target_keyword": "simprax pferdedecken imprägnierung",
+        "category": "pferdedecken-regendecken-pflege",
+        "article_type": "Anleitung",
+        "plan_slot": "91b1acd3514ff96e9a805f1c6847c2bac47b2aa1f2805f2ed6bf486291ec5595"
+      },
+      "order_id": "TXE-40e18eed4ff167385cc49519485203ac",
+      "article_id": "article:3142be1dc581b950af6bf2fc",
+      "search_intent": "Wie das genannte Simprax-Imprägniermittel für geeignete Pferdedecken, insbesondere Regendecken, angewendet wird; markenspezifische Anleitung statt allgemeine Imprägnierung."
+    }
+  ],
+  "manifest_sha256": "ef0b5b8ee89f59f32637265a5d6d903ac085bb840bda69a5c7d50957a34b23ee"
+}
