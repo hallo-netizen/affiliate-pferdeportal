@@ -31,6 +31,11 @@ K0_OFFICIAL_SOURCE_HOSTS = frozenset({
     'landwirtschaftskammer.de', # Official Landwirtschaftskammer Nordrhein-Westfalen
     'lk-nienburg.de',          # Verified official Landkreis Nienburg government website (impressum 2026-11-21)
     'aelf-al.bayern.de',       # Official Bavarian agriculture and forestry authority AELF (verified 2026-11-21)
+    'tierschutz.hessen.de',    # Official state Hesse animal-welfare portal
+    'recht.nrw.de',           # Official North Rhine-Westphalia law portal
+    'bauportal.nrw',          # Official North Rhine-Westphalia building portal
+    'bundesfinanzhof.de',     # Official German Federal Fiscal Court
+    'gesetze-im-internet.de', # Official German federal law text portal
 })
 K0_OWN_PORTAL_SOURCE_HOSTS = frozenset({
     'pferde-atelier.de', 'hobbydepot.de', 'hab-und-bewahr.de',
