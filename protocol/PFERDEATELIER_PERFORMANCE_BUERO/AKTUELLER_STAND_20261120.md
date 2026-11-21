@@ -1245,3 +1245,65 @@ Der alte öffentliche Kampagnen-Snapshot ließ WordPress sämtliche Metafelder d
 
 ### Nächster Live-Schritt
 Nur 6.72.369 installieren. Danach genau ein vollständiger PASSIV-Gesamtlauf über den bestehenden Seitenmix. Dieser Lauf misst zugleich den bereits separat deaktivierten Relevanssi Live Ajax Search mit. Vor diesem Gesamtlauf keine weitere Affiliate-Version.
+
+
+## 2026-11-21 – 6.72.369 widerrufen / 6.72.370 Query-Regression korrigiert
+
+### Live-Beweis gegen 6.72.369
+PASSIV-Lauf pferdeatelier-performance-gesamtanalyse-20261121-163945.json mit Affiliate-Zentrale 6.72.369:
+- Pferdesättel: 1421 Queries statt 320 unter 6.72.367
+- Ausrüstung/Sattel: 838 statt 298
+- Trensen & Gebisse: 828 statt 296
+- Satteldecken: 734 statt 311
+Damit ist 6.72.369 als Gesamtfix widerlegt.
+
+Gleichzeitig sinken bei Pferdesättel die internen Cache-Hits 139257 -> 131116. Der Bildcache reduziert also Wiederholungsarbeit, während der in 6.72.369 neu eingeführte schmale Kampagnen-Metadatenweg die Query-Explosion verursacht.
+
+### Bewiesene Ursache
+6.72.369 setzte im öffentlichen Kampagnen-Snapshot update_post_meta_cache=false und las anschließend ausschließlich ppar_campaign_data direkt. Diese Teilmenge wurde nicht als partieller WordPress-post_meta-Cache gespeichert. Spätere normale get_post_meta()-Zugriffe mussten deshalb pro Kampagnenpost den vollständigen Meta-Cache einzeln nachladen.
+
+Exakter Methoden-Harness mit 710 Kampagnenposts:
+- 25 % Folge-Metazugriffe: 6.72.369 = 187 Queries, 6.72.370 = 2
+- 50 %: 362 vs. 2
+- 75 %: 537 vs. 2
+- 100 %: 712 vs. 2
+- Kampagnenrecords in allen Fällen identisch
+
+### 6.72.370
+Der komplette Narrow-Meta-Fix aus 6.72.369 ist entfernt. Die drei relevanten Metadatenfunktionen sind wieder byte-identisch zu 6.72.367/6.72.368:
+- ranked_campaign_posts_snapshot()
+- ranked_campaign_raw_records_snapshot()
+- campaign_from_post()
+
+Es existiert in 6.72.370 kein update_post_meta_cache=false und kein Narrow-Meta-Helfer mehr.
+
+Beibehalten wird nur die separat erneut getestete slotübergreifende Bildprüfung:
+- exakte Methode aus 6.72.370 im Harness
+- 100000 stabile Fälle: 0 Abweichungen
+- 600000 historische Aufrufe -> 100000 reale Aufrufe (-83,33 % im Sechsfachmodell)
+- 100000 dynamische Fälle: 0 Abweichungen, Cache vollständig aus
+- 100000 Signatur-Mutationen: jede Änderung erzwingt Neuprüfung
+- Sicherheitsgate 100000 Kombinationen gegen 6.72.367-Semantik: 0 Abweichungen
+
+### Funktionsschutz
+- benannte vorhandene PHP-Funktionen entfernt: 0
+- neu gegenüber 6.72.367: nur 2 interne Performance-/Sicherheitshelfer
+- PHP-Dateien 23 -> 23
+- Actions 176 -> 176
+- Filter 30 -> 30
+- Shortcodes 6 -> 6
+- Produktions-Schreibprimitive vollständig identisch
+- Auswahl, Ranking, Provider, Placement, Fallback, Veto/Control, Health, Tracking, Produktinhalt und Rendering nicht entfernt
+- Design 1.50.616 und Diagnose 7.0.0 unverändert
+
+### Paket
+PFERDEATELIER_AFFILIATE_6.72.370_QUERY_REGRESSION_CORRECTION.zip
+SHA-256: 5c3f7b68479b2a8f2ab30b800602ac6242210f506437ac5dffc045b2c73eeecc
+
+Finales ZIP:
+- 66/66 Dateien identisch zum geprüften Arbeitsstand
+- 23/23 PHP-Lint PASS
+- Stable Tag 6.72.370
+
+6.72.369 ist widerrufen und darf nicht weiterverwendet werden.
+Nächster Schritt: nur 6.72.370 installieren; danach genau ein vollständiger PASSIV-Gesamtlauf. Harter Kontrollwert sind zuerst die Query-Zahlen der vier gleichen Produktseiten, nicht die Wall-Time allein.
