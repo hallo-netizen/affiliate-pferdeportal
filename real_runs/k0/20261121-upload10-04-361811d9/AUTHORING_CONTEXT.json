@@ -16,17 +16,20 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
-          "source_title": "Horseware Ireland – Horse Rug Care Guide"
+          "source_url": "https://de.wikipedia.org/wiki/Pferdedecke",
+          "source_title": "Wikipedia – Pferdedecke"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Textilpflegesymbol",
+          "source_title": "Wikipedia – Textilpflegesymbol"
         }
       ],
       "claims": [
-        "Vor der Wäsche sollten Pferdedecken vorsichtig abgebürstet werden.",
-        "Zum Waschen wird ein geeignetes Pferdedeckenwaschmittel empfohlen.",
-        "Pferdedecken sollen bei Maschinenwäsche mit niedriger Temperatur gereinigt werden.",
-        "Pferdedecken sollten ohne direkte Hitze an der Luft trocknen.",
-        "Saubere Pferdedecken sollten trocken und möglichst luftig gelagert werden.",
-        "Reparatur kleiner Schäden kann die Nutzungsdauer einer Pferdedecke verlängern."
+        "Pferdedecken bestehen je nach Zweck aus unterschiedlichen Geweben und benötigen materialgerechte Pflege.",
+        "Die Pflegekennzeichnung legt die zulässige Textilbehandlung fest.",
+        "Die Zahl im Waschsymbol bezeichnet die höchste zulässige Waschtemperatur.",
+        "Ein durchgestrichenes Trocknersymbol verbietet maschinelles Trocknen.",
+        "Regendecken und gefütterte Winterdecken sind unterschiedliche Deckenarten."
       ],
       "fresh_research_reference_date": "2026-11-21"
     },
@@ -68,66 +71,55 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
-        "source_title": "Horseware Ireland – Horse Rug Care Guide",
-        "evidence_text": "Gently brush off any dirt",
-        "evidence_text_sha256": "35e556d7b803206e3a72ec64f4dae8375d5b3b1e4f0eb4fd030e758d70be28fd",
-        "statement": "Vor der Wäsche sollten Pferdedecken vorsichtig abgebürstet werden.",
+        "source_url": "https://de.wikipedia.org/wiki/Pferdedecke",
+        "source_title": "Wikipedia – Pferdedecke",
+        "evidence_text": "In der Pferdepflege werden je nach Verwendungszweck Decken aus sehr verschiedenen Geweben verwendet.",
+        "evidence_text_sha256": "5c94a2f646fe9df546aa4d18141f27e375b4be79261ef94bc4ecb82867545af7",
+        "statement": "Pferdedecken bestehen je nach Zweck aus unterschiedlichen Geweben und benötigen materialgerechte Pflege.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Anleitung"
         ]
       },
       "F2": {
-        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
-        "source_title": "Horseware Ireland – Horse Rug Care Guide",
-        "evidence_text": "Use a non-biological wash, or one formulated for rugs e.g. Rambo Wash",
-        "evidence_text_sha256": "58802f86ac690ebee77a812c7739404ddf42030b13fd1b560beeb41e5089070c",
-        "statement": "Zum Waschen wird ein geeignetes Pferdedeckenwaschmittel empfohlen.",
+        "source_url": "https://de.wikipedia.org/wiki/Textilpflegesymbol",
+        "source_title": "Wikipedia – Textilpflegesymbol",
+        "evidence_text": "Die Pflegekennzeichnung gibt die maximal zulässige Behandlungsart an, die unter praxisnahen Bedingungen auf Dauer möglich ist, ohne das Textil zu schädigen.",
+        "evidence_text_sha256": "a254601df45df48583b5db0fb29a5ad2ea60b3bdc7818cd717df4c3e22137201",
+        "statement": "Die Pflegekennzeichnung legt die zulässige Textilbehandlung fest.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Anleitung"
         ]
       },
       "F3": {
-        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
-        "source_title": "Horseware Ireland – Horse Rug Care Guide",
-        "evidence_text": "Wash on a cool setting if using a washing machine",
-        "evidence_text_sha256": "a65ff2fe29af551839f896e28a461351b51427318e462059eb52c0d94d859539",
-        "statement": "Pferdedecken sollen bei Maschinenwäsche mit niedriger Temperatur gereinigt werden.",
+        "source_url": "https://de.wikipedia.org/wiki/Textilpflegesymbol",
+        "source_title": "Wikipedia – Textilpflegesymbol",
+        "evidence_text": "Das Waschen wird durch einen stilisierten Waschzuber dargestellt; die Zahl im Zuber bedeutet die höchstzulässige Waschtemperatur (in Grad Celsius).",
+        "evidence_text_sha256": "6fcd734040f7a34479dc929d68b1dcbbae15d3c83053b42f3ff5746e7877cf7e",
+        "statement": "Die Zahl im Waschsymbol bezeichnet die höchste zulässige Waschtemperatur.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Anleitung"
         ]
       },
       "F4": {
-        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
-        "source_title": "Horseware Ireland – Horse Rug Care Guide",
-        "evidence_text": "Allow the rug to drip dry away from heat",
-        "evidence_text_sha256": "7da37f98cc170acfc60f642c3f27068b35739da2237627dd4b0e2ca7d1080d85",
-        "statement": "Pferdedecken sollten ohne direkte Hitze an der Luft trocknen.",
+        "source_url": "https://de.wikipedia.org/wiki/Textilpflegesymbol",
+        "source_title": "Wikipedia – Textilpflegesymbol",
+        "evidence_text": "Das diagonal durchkreuzte Zeichen bedeutet, dass der Artikel keine maschinelle Trocknung verträgt.",
+        "evidence_text_sha256": "30c16e54d0136b558fae7c51e9c8714db1f965eadf7223b64623f3e692d26748",
+        "statement": "Ein durchgestrichenes Trocknersymbol verbietet maschinelles Trocknen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Anleitung"
         ]
       },
       "F5": {
-        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
-        "source_title": "Horseware Ireland – Horse Rug Care Guide",
-        "evidence_text": "Store the rug in a cool, dry area, preferably in a breathable storage bag",
-        "evidence_text_sha256": "d7a6baf3e63651763c7f943ccd9384ca35bc3a9a3a38dbdc6dea832a8b4974f7",
-        "statement": "Saubere Pferdedecken sollten trocken und möglichst luftig gelagert werden.",
-        "claim_status": "FULLY_SUPPORTED",
-        "article_types": [
-          "Anleitung"
-        ]
-      },
-      "F6": {
-        "source_url": "https://www.horseware.com/en-eu/blog/rug-guide-part-three-keeping-your-horse-comfortable",
-        "source_title": "Horseware Ireland – Horse Rug Care Guide",
-        "evidence_text": "Repairing the rips to seal and waterproof them with something like the Rambo Rug Repair Kit can increase the life of your rug and save you having to purchase a new one.",
-        "evidence_text_sha256": "a3a44f66f61b5a095a1c4f38c309f10df33d8232c6ef234565f7158e1b69cb60",
-        "statement": "Reparatur kleiner Schäden kann die Nutzungsdauer einer Pferdedecke verlängern.",
+        "source_url": "https://de.wikipedia.org/wiki/Pferdedecke",
+        "source_title": "Wikipedia – Pferdedecke",
+        "evidence_text": "Weidedecken gibt es als ungefütterte Regendecken oder als dicke Weide-Winterdecken.",
+        "evidence_text_sha256": "fd99d56feb8e5ece4e93bcae2030ab586d7842aeb7059a72e61e53b8656c2e6e",
+        "statement": "Regendecken und gefütterte Winterdecken sind unterschiedliche Deckenarten.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Anleitung"
@@ -139,16 +131,14 @@
       "F2",
       "F3",
       "F4",
-      "F5",
-      "F6"
+      "F5"
     ],
     "allowed_fact_ids": [
       "F1",
       "F2",
       "F3",
       "F4",
-      "F5",
-      "F6"
+      "F5"
     ],
     "bound_links": [
       {
