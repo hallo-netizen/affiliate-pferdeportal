@@ -1,0 +1,177 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Was kostet eine Zahnbehandlung beim Pferd im Jahr 2026?",
+    "target_keyword": "Wie viel kostet eine Zahnbehandlung für Pferde im Jahr 2026?",
+    "category": "recht-finanzen-organisation",
+    "article_type": "FAQ",
+    "plan_slot": "2365174c5aa23e8ed87af6f1480c01a79749e067d9c4c7c4115b5e79a9ddbd87"
+  },
+  "content_profile": {
+    "search_intent": "Kosten einer Zahnbehandlung beim Pferd im Bezugsjahr 2026 mit Faktoren wie Untersuchungsumfang, Leistung und tierärztlicher Abrechnung; keine erfundenen Festpreise."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.gesetze-im-internet.de/got_2022/BJNR140100022.html",
+          "source_title": "Bundesjustizministerium – Gebührenordnung Tierärzte"
+        }
+      ],
+      "claims": [
+        "Die GOT enthält für Pferde eine eigene Position zur Entfernung scharfer Zahnkanten.",
+        "Eine umfangreichere Okklusionskorrektur ist eine gesonderte tierärztliche Leistung.",
+        "Die GOT nennt Gebührensätze auf Grundlage des einfachen Satzes.",
+        "Die allgemeine Untersuchung mit Beratung des Pferdes ist in der GOT gesondert aufgeführt.",
+        "Eine Zahnextraktion bei Pferden ist eine andere tierärztliche Leistung als bloßes Abschleifen."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie viel kostet eine Zahnbehandlung für Pferde im Jahr 2026?",
+      "topic": "Was kostet eine Zahnbehandlung beim Pferd im Jahr 2026?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "recht-finanzen-organisation",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was kostet eine Zahnbehandlung beim Pferd im Jahr 2026?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.gesetze-im-internet.de/got_2022/BJNR140100022.html",
+        "source_title": "Bundesjustizministerium – Gebührenordnung Tierärzte",
+        "evidence_text": "Okklusionskorrektur, Entfernung scharfer Kanten, Pferd, Hausequiden, Kameliden",
+        "evidence_text_sha256": "9457cdad89b09ab59e1960f6deaec8339cee8ad3fa5fa7aa7561707cc516eb06",
+        "statement": "Die GOT enthält für Pferde eine eigene Position zur Entfernung scharfer Zahnkanten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.gesetze-im-internet.de/got_2022/BJNR140100022.html",
+        "source_title": "Bundesjustizministerium – Gebührenordnung Tierärzte",
+        "evidence_text": "Okklusionskorrektur, systematische Beseitigung von Okklusionshindernissen, Einschleifen, Pferd, Hausequiden, Kameliden",
+        "evidence_text_sha256": "839085aaf48f9ae24a977276d503a8c72231c5cc4ce7957852c13c0ec0a862c7",
+        "statement": "Eine umfangreichere Okklusionskorrektur ist eine gesonderte tierärztliche Leistung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.gesetze-im-internet.de/got_2022/BJNR140100022.html",
+        "source_title": "Bundesjustizministerium – Gebührenordnung Tierärzte",
+        "evidence_text": "Die im Gebührenverzeichnis aufgeführten Gebührensätze entsprechen dem einfachen Satz.",
+        "evidence_text_sha256": "e1d6ad93e2dda7833345b4ad8f390c2edb0ee74dacf007bc132fbd18535266eb",
+        "statement": "Die GOT nennt Gebührensätze auf Grundlage des einfachen Satzes.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.gesetze-im-internet.de/got_2022/BJNR140100022.html",
+        "source_title": "Bundesjustizministerium – Gebührenordnung Tierärzte",
+        "evidence_text": "Allgemeine Untersuchung mit Beratung, Pferd, Hausequiden, Kameliden",
+        "evidence_text_sha256": "196006edf13e6d7da7232198e7478618e2fa6695ada25edbc6a440cc994df9a7",
+        "statement": "Die allgemeine Untersuchung mit Beratung des Pferdes ist in der GOT gesondert aufgeführt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.gesetze-im-internet.de/got_2022/BJNR140100022.html",
+        "source_title": "Bundesjustizministerium – Gebührenordnung Tierärzte",
+        "evidence_text": "Zahnextraktion Pferd, Equiden, Kameliden",
+        "evidence_text_sha256": "fc22e31fd3c5808c5d02883b1e7b241f266b70b815525c2570fefe54a93e05f5",
+        "statement": "Eine Zahnextraktion bei Pferden ist eine andere tierärztliche Leistung als bloßes Abschleifen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/recht-finanzen-organisation/",
+        "anchor": "recht-finanzen-organisation",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "pferdegesundheit-verstehen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/recht-finanzen-organisation/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "recht-finanzen-organisation",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Zahnbehandlung",
+      "Pferd",
+      "2026",
+      "Tierarzt",
+      "GOT",
+      "Kosten",
+      "Gebühren",
+      "Pferdegesundheit"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die fachliche Antwort umfasst voneinander abhängige Bedingungen, die eine standardisierte Tabelle ohne unzulässige Pauschalisierung nicht aussagekräftig wiedergeben könnte."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
