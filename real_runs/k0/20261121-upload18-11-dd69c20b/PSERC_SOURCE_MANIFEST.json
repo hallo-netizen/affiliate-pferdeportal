@@ -1,0 +1,361 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 18,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Müssen Pferdedecken nach dem Waschen imprägniert werden?",
+        "target_keyword": "Muss ich Pferdedecken beim Waschen imprägnieren?",
+        "category": "pferdedecken-regendecken-pflege",
+        "article_type": "FAQ",
+        "plan_slot": "0e188805d485d9735536c828430ff8d927d28df6450d4d691343e4e9f6a32f6b"
+      },
+      {
+        "title": "Ist normales Waschmittel für Pferdedecken geeignet?",
+        "target_keyword": "Kann man Pferdedecken mit normalem Waschmittel Waschen?",
+        "category": "waschmittel-fuer-pferdedecken-faq",
+        "article_type": "FAQ",
+        "plan_slot": "c807b1a991d31fea5a6b8672def50f76475224f644207ebf22eae9d4b06c1d41"
+      },
+      {
+        "title": "Bei wie viel Grad darf man eine Pferdedecke waschen?",
+        "target_keyword": "Wie viel Grad muss man eine Pferdedecke Waschen?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "f203aeeaab74dada363e0030b53fdf152d0b57552d5d6c6521162c303f2d5f29"
+      },
+      {
+        "title": "Welche Waschmaschinengröße braucht man für Pferdedecken?",
+        "target_keyword": "Wie groß muss eine Waschmaschine für Pferdedecken sein?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "1b26a1dbf12831204645ab6ad9cb3e4d9e31a1a7758ce1d7cdd4dfc6c97765fc"
+      },
+      {
+        "title": "Imprägnierspray für Pferdedecken richtig auswählen",
+        "target_keyword": "imprägnierung pferdedecken spray",
+        "category": "pferdedecken-regendecken-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "bb5a55966bdaea23825d5473b3dfaddfe1097816c91275dc7fa377931b047826"
+      },
+      {
+        "title": "Was kostet eine Zahnbehandlung beim Pferd im Jahr 2026?",
+        "target_keyword": "Wie viel kostet eine Zahnbehandlung für Pferde im Jahr 2026?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "2365174c5aa23e8ed87af6f1480c01a79749e067d9c4c7c4115b5e79a9ddbd87"
+      },
+      {
+        "title": "Woran erkennt man Zahnprobleme bei Pferden?",
+        "target_keyword": "Welche Symptome zeigen Pferde mit Zahnproblemen?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "d286c277a8d056f7ebfc9fa748e08bc0bb84e2a551ea0317adeac635d6df70f9"
+      },
+      {
+        "title": "Welche Grundausrüstung braucht ein Reiter wirklich?",
+        "target_keyword": "Was braucht ein Reiter unbedingt?",
+        "category": "ausruestung-grundlagen-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "3d51eb02a197a34aac7448f6beb6137f06cfb7187df55bae1a0b7becef27c7f4"
+      },
+      {
+        "title": "Was gehört zum Zaumzeug eines Pferdes?",
+        "target_keyword": "Was gehört zum Zaumzeug Pferd?",
+        "category": "trensen-faq",
+        "article_type": "FAQ",
+        "plan_slot": "1cf5a0095acb9a5aef43df6e8f98cf0c0fab93a842ae301d129bd0665e8f0306"
+      },
+      {
+        "title": "Wie oft brauchen Pferde eine Zahnbehandlung?",
+        "target_keyword": "Wie oft sollten Pferde Zähne machen lassen?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "2a7c5578bd1c7b2e99cf1c21d173e6247e0b61885f4c87fefe75d2e404d8d716"
+      },
+      {
+        "title": "Was ist die häufigste Todesursache beim Pferd?",
+        "target_keyword": "Was ist die häufigste Todesursache beim Pferd?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "dd69c20bfcadd30b224c368c4cf926562799ec411f33c5aad62c0a2d80f74870"
+      },
+      {
+        "title": "Trensen für Pferde nach Einsatz und Passform auswählen",
+        "target_keyword": "trensen pferde",
+        "category": "trensen-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "7688e213c43c5b3a87c2a318ab2dd4e52739c3b2a32ae0884ea101f4710d1b8d"
+      },
+      {
+        "title": "Anatomische Trensen für Pferde passend auswählen",
+        "target_keyword": "trense pferd anatomisch",
+        "category": "trensen-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "1e8a607b43c5de0e9d661ecd305574eca305efcb619f34a8a8d35740bad478f9"
+      },
+      {
+        "title": "Welche Arten von Trensen gibt es für Pferde?",
+        "target_keyword": "Welche Arten von Trensen gibt es für Pferde?",
+        "category": "trensen-vergleich",
+        "article_type": "Vergleich",
+        "plan_slot": "ec61c574a0c784322ec62b4e52fbffe1b2ee05bbb0bce58f9cfde0845307d375"
+      },
+      {
+        "title": "Ein Pferd Schritt für Schritt richtig trensen",
+        "target_keyword": "pferde trensen anleitung",
+        "category": "trensen-faq",
+        "article_type": "Anleitung",
+        "plan_slot": "eb0a35b46a6df65ace170e686ea955da5cd3fea984bd6551a095a21453bdd061"
+      },
+      {
+        "title": "Trensengebisse passend zum Pferd auswählen",
+        "target_keyword": "pferde trense gebiss",
+        "category": "gebisse-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "4c364dd09341ed4b414554425e139c01dbe1ddcbfd44145a73ac8982aa6e0f99"
+      },
+      {
+        "title": "Ein Pferd Schritt für Schritt richtig satteln und trensen",
+        "target_keyword": "pferde richtig satteln und trensen",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "Anleitung",
+        "plan_slot": "44109a52dac7044b628b0a466fd838c9c806a84a54985f4eaf023843e7ea758d"
+      },
+      {
+        "title": "Passendes Trensenzubehör für Pferde auswählen",
+        "target_keyword": "trensen pferde zubehör",
+        "category": "trensen-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "aa7bfc6e5c17cd3a997178243b50201a0ba2d84283af18326a51cb7953b2477b"
+      }
+    ],
+    "batch_sha256": "c1dcb939f8afb2404545f9f20df8c50862ce19d166421dc7c3c0710b8b45cf6b"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Müssen Pferdedecken nach dem Waschen imprägniert werden?",
+        "target_keyword": "Muss ich Pferdedecken beim Waschen imprägnieren?",
+        "category": "pferdedecken-regendecken-pflege",
+        "article_type": "FAQ",
+        "plan_slot": "0e188805d485d9735536c828430ff8d927d28df6450d4d691343e4e9f6a32f6b"
+      },
+      "order_id": "TXE-1c5391e1352d42b0b2f57438ce103621",
+      "article_id": "article:7b6570ace4250434ba5cedb7",
+      "search_intent": "Ob Pferdedecken nach einer Wäsche tatsächlich erneut imprägniert werden müssen und wann das aufgrund nachlassenden Nässeschutzes sinnvoll ist."
+    },
+    {
+      "metadata_binding": {
+        "title": "Ist normales Waschmittel für Pferdedecken geeignet?",
+        "target_keyword": "Kann man Pferdedecken mit normalem Waschmittel Waschen?",
+        "category": "waschmittel-fuer-pferdedecken-faq",
+        "article_type": "FAQ",
+        "plan_slot": "c807b1a991d31fea5a6b8672def50f76475224f644207ebf22eae9d4b06c1d41"
+      },
+      "order_id": "TXE-40e360f234e5025ff3f996e1cad683a0",
+      "article_id": "article:62edd42896d920f83f8a5a62",
+      "search_intent": "Ob normales Haushaltswaschmittel für Pferdedecken geeignet ist, insbesondere bei wasserabweisenden Materialien und nach Pflegeetikett."
+    },
+    {
+      "metadata_binding": {
+        "title": "Bei wie viel Grad darf man eine Pferdedecke waschen?",
+        "target_keyword": "Wie viel Grad muss man eine Pferdedecke Waschen?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "f203aeeaab74dada363e0030b53fdf152d0b57552d5d6c6521162c303f2d5f29"
+      },
+      "order_id": "TXE-49171c5227aa6da1f55cf170eb7b5a31",
+      "article_id": "article:febca939eff7ffa673f8fb35",
+      "search_intent": "Welche Waschtemperatur für Pferdedecken zulässig ist und warum die Textilpflegekennzeichnung vor allgemeinen Gradangaben steht."
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Waschmaschinengröße braucht man für Pferdedecken?",
+        "target_keyword": "Wie groß muss eine Waschmaschine für Pferdedecken sein?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "1b26a1dbf12831204645ab6ad9cb3e4d9e31a1a7758ce1d7cdd4dfc6c97765fc"
+      },
+      "order_id": "TXE-49a82fcdeceeed9691839f65becda4a5",
+      "article_id": "article:faf8cb607beb34743394f88e",
+      "search_intent": "Welches Trommelvolumen und welche Kapazität eine Waschmaschine für große Pferdedecken benötigt und wann ein professioneller Waschservice sinnvoll ist."
+    },
+    {
+      "metadata_binding": {
+        "title": "Imprägnierspray für Pferdedecken richtig auswählen",
+        "target_keyword": "imprägnierung pferdedecken spray",
+        "category": "pferdedecken-regendecken-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "bb5a55966bdaea23825d5473b3dfaddfe1097816c91275dc7fa377931b047826"
+      },
+      "order_id": "TXE-faefcbf40ec6fb093f4ad3a32c0e6e7f",
+      "article_id": "article:425babe504ce02174d1c063d",
+      "search_intent": "Imprägnierspray für Pferdedecken passend zu Material und Verwendungszweck auswählen, statt die markenspezifische Wash-In-Anleitung zu wiederholen."
+    },
+    {
+      "metadata_binding": {
+        "title": "Was kostet eine Zahnbehandlung beim Pferd im Jahr 2026?",
+        "target_keyword": "Wie viel kostet eine Zahnbehandlung für Pferde im Jahr 2026?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "2365174c5aa23e8ed87af6f1480c01a79749e067d9c4c7c4115b5e79a9ddbd87"
+      },
+      "order_id": "TXE-d53910ba2c46fd5c544252f5ebac4d96",
+      "article_id": "article:08394980c1a8031cd844833c",
+      "search_intent": "Kosten einer Zahnbehandlung beim Pferd im Bezugsjahr 2026 mit Faktoren wie Untersuchungsumfang, Leistung und tierärztlicher Abrechnung; keine erfundenen Festpreise."
+    },
+    {
+      "metadata_binding": {
+        "title": "Woran erkennt man Zahnprobleme bei Pferden?",
+        "target_keyword": "Welche Symptome zeigen Pferde mit Zahnproblemen?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "d286c277a8d056f7ebfc9fa748e08bc0bb84e2a551ea0317adeac635d6df70f9"
+      },
+      "order_id": "TXE-279de987872b963608183ba8527e83a9",
+      "article_id": "article:1797b32b29f1499ba36e2354",
+      "search_intent": "Typische Warnzeichen von Zahnproblemen bei Pferden erkennen und von fachkundiger Diagnose unterscheiden."
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Grundausrüstung braucht ein Reiter wirklich?",
+        "target_keyword": "Was braucht ein Reiter unbedingt?",
+        "category": "ausruestung-grundlagen-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "3d51eb02a197a34aac7448f6beb6137f06cfb7187df55bae1a0b7becef27c7f4"
+      },
+      "order_id": "TXE-ffda3863aef4c0500201055eb6078a3b",
+      "article_id": "article:e9effeca3fb041c1a612276a",
+      "search_intent": "Wesentliche persönliche Grundausrüstung des Reiters für sicheres und praktisches Reiten auswählen, nicht die komplette Pferdeausstattung."
+    },
+    {
+      "metadata_binding": {
+        "title": "Was gehört zum Zaumzeug eines Pferdes?",
+        "target_keyword": "Was gehört zum Zaumzeug Pferd?",
+        "category": "trensen-faq",
+        "article_type": "FAQ",
+        "plan_slot": "1cf5a0095acb9a5aef43df6e8f98cf0c0fab93a842ae301d129bd0665e8f0306"
+      },
+      "order_id": "TXE-adce4871b8fee2454ded82e7821ccd34",
+      "article_id": "article:f137e94baa0d498b96181797",
+      "search_intent": "Bestandteile des Zaumzeugs am Pferdekopf benennen und ihren grundsätzlichen Zweck erklären."
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie oft brauchen Pferde eine Zahnbehandlung?",
+        "target_keyword": "Wie oft sollten Pferde Zähne machen lassen?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "2a7c5578bd1c7b2e99cf1c21d173e6247e0b61885f4c87fefe75d2e404d8d716"
+      },
+      "order_id": "TXE-b2348cf22e6e84e2e65cf26c609526d1",
+      "article_id": "article:4da06284263d8d747b069069",
+      "search_intent": "In welchen Abständen die Zähne eines Pferdes kontrolliert und bei Bedarf fachkundig behandelt werden sollten; keine pauschale Pflichtbehandlung."
+    },
+    {
+      "metadata_binding": {
+        "title": "Was ist die häufigste Todesursache beim Pferd?",
+        "target_keyword": "Was ist die häufigste Todesursache beim Pferd?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "dd69c20bfcadd30b224c368c4cf926562799ec411f33c5aad62c0a2d80f74870"
+      },
+      "order_id": "TXE-3c3ab28bf9c0ba0866b1c2f99f743fd1",
+      "article_id": "article:c99ad196b313ae5b3883b152",
+      "search_intent": "Die Frage nach häufigen Todesursachen bei Pferden anhand des Begriffs Todesursache und seiner möglichen statistischen Bezugsgruppen sachlich beantworten, ohne eine unbelegte Nummer eins vorwegzunehmen."
+    },
+    {
+      "metadata_binding": {
+        "title": "Trensen für Pferde nach Einsatz und Passform auswählen",
+        "target_keyword": "trensen pferde",
+        "category": "trensen-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "7688e213c43c5b3a87c2a318ab2dd4e52739c3b2a32ae0884ea101f4710d1b8d"
+      },
+      "order_id": "TXE-8b36ca2b5a5057da12c516cd67921888",
+      "article_id": "article:a885a4824d0ce026e4ef1b25",
+      "search_intent": "Allgemeine Auswahl einer passenden Trense für das Pferd nach Einsatz, Größe und Passform; keine Spezialberatung nur zu anatomischen Modellen."
+    },
+    {
+      "metadata_binding": {
+        "title": "Anatomische Trensen für Pferde passend auswählen",
+        "target_keyword": "trense pferd anatomisch",
+        "category": "trensen-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "1e8a607b43c5de0e9d661ecd305574eca305efcb619f34a8a8d35740bad478f9"
+      },
+      "order_id": "TXE-d6167f394ccc17f24182eac22a127d3f",
+      "article_id": "article:8fad8cb8e800c4d017c6536f",
+      "search_intent": "Anatomisch geformte Trensen nach Druckverteilung und tatsächlicher Passform am Pferdekopf beurteilen."
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Arten von Trensen gibt es für Pferde?",
+        "target_keyword": "Welche Arten von Trensen gibt es für Pferde?",
+        "category": "trensen-vergleich",
+        "article_type": "Vergleich",
+        "plan_slot": "ec61c574a0c784322ec62b4e52fbffe1b2ee05bbb0bce58f9cfde0845307d375"
+      },
+      "order_id": "TXE-80efd8c5c89f0f562ecc8bf165505b4c",
+      "article_id": "article:62a799cf913fe03bfda04dab",
+      "search_intent": "Arten und Bauweisen von Trensen sachlich vergleichen und ihre Unterschiede für den Einsatz erklären."
+    },
+    {
+      "metadata_binding": {
+        "title": "Ein Pferd Schritt für Schritt richtig trensen",
+        "target_keyword": "pferde trensen anleitung",
+        "category": "trensen-faq",
+        "article_type": "Anleitung",
+        "plan_slot": "eb0a35b46a6df65ace170e686ea955da5cd3fea984bd6551a095a21453bdd061"
+      },
+      "order_id": "TXE-22584ffc1c2002805ef5789aa7ec294d",
+      "article_id": "article:d0ee5e52b85124db8c88ceb1",
+      "search_intent": "Ein Pferd Schritt für Schritt korrekt und ruhig auftrensen, ohne zusätzlich das Satteln als eigenständigen Teil zu behandeln."
+    },
+    {
+      "metadata_binding": {
+        "title": "Trensengebisse passend zum Pferd auswählen",
+        "target_keyword": "pferde trense gebiss",
+        "category": "gebisse-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "4c364dd09341ed4b414554425e139c01dbe1ddcbfd44145a73ac8982aa6e0f99"
+      },
+      "order_id": "TXE-4660d15934027a5da6070aa7c346fb23",
+      "article_id": "article:b5d9c10d992150efad86143e",
+      "search_intent": "Das passende Gebiss im Zusammenhang mit der Trense und der individuellen Passform des Pferdes auswählen, statt allgemeine Gebissarten erneut vollständig zu erklären."
+    },
+    {
+      "metadata_binding": {
+        "title": "Ein Pferd Schritt für Schritt richtig satteln und trensen",
+        "target_keyword": "pferde richtig satteln und trensen",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "Anleitung",
+        "plan_slot": "44109a52dac7044b628b0a466fd838c9c806a84a54985f4eaf023843e7ea758d"
+      },
+      "order_id": "TXE-1122d54467fd99959309210f90f30e5d",
+      "article_id": "article:6c34ace2f1292622daf74d6b",
+      "search_intent": "Pferd erst richtig satteln und anschließend trensen, mit praktischer Reihenfolge und Sicherheitskontrolle beider Ausrüstungsteile."
+    },
+    {
+      "metadata_binding": {
+        "title": "Passendes Trensenzubehör für Pferde auswählen",
+        "target_keyword": "trensen pferde zubehör",
+        "category": "trensen-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "aa7bfc6e5c17cd3a997178243b50201a0ba2d84283af18326a51cb7953b2477b"
+      },
+      "order_id": "TXE-dda1cff2ba2c6e6a58b1e64e91bf8395",
+      "article_id": "article:9c10560601ad46fe779170a7",
+      "search_intent": "Passendes ergänzendes Zubehör für vorhandene Trensen auswählen, ohne die allgemeine Grundberatung zum Kauf der kompletten Trense zu wiederholen."
+    }
+  ],
+  "manifest_sha256": "22ccbf6c7959eea59e22635ac6ce15b2cd7df50c51d58b9e6eb1eb94a4f702e5"
+}
