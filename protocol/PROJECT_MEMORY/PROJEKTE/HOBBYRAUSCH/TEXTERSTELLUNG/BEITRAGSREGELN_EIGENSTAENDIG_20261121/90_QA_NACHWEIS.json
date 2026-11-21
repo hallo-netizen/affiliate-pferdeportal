@@ -74,5 +74,44 @@
     ],
     "word_press_original_five_type_contract_unchanged": true,
     "kmulti_registry_unchanged": true
+  },
+  "final_original_wp_to_hobby_rules_handoff": {
+    "date": "2026-11-21",
+    "status": "PASS_HANDOFF_PREPARED_READ_ONLY_NOT_RUNTIME_AUTHORIZED",
+    "checks_executed": 18,
+    "checks_passed": 18,
+    "checks_failed": 0,
+    "checked_sources": {
+      "hobby_manifest": "00_MANIFEST.json",
+      "single_shared_rules": "05_GEMEINSAME_REGELN.json",
+      "five_type_books": [
+        "10_BERATUNG.json",
+        "20_FAQ.json",
+        "30_PFLEGE.json",
+        "40_VERGLEICH.json",
+        "50_ANLEITUNG.json"
+      ],
+      "original_wp_3_faq_fixture": "hallo-netizen/k0-multiportal:offline_writer_dev/portal_auto/fixtures/original_wordpress_hobby_3.json",
+      "original_wp_fixture_git_blob": "3ff40ab0dca739283b5b642c2f32b0deb5c77418",
+      "kmulti_registry_git_blob": "811abd6063796369320ecdb8ff953a3467d31ae0",
+      "kmulti_global_bindings_git_blob": "b5bdc176a1a93af430003f91b6760ccd5ade81db"
+    },
+    "proof_scope": "Cross-repository JSON consistency and original-package shape readback. WordPress PHP type-support was tested in previous separate original-PHP report. No new WP-live end-to-end test, not the 121-rule production test.",
+    "original_artifact_not_changed": true,
+    "new_transport_file": false,
+    "new_plugin": false,
+    "matching_types": [
+      "Beratung",
+      "FAQ",
+      "Vergleich"
+    ],
+    "future_type_reference_changes_required_only_if_authorized": [
+      "Pflege",
+      "Anleitung"
+    ],
+    "no_runtime_activation": true,
+    "no_kmulti_code_change": true,
+    "no_k0_change": true,
+    "blocked_production_reason": "Existing K-Multi state NO_VALUES_BLOCKED and original Pflege/Anleitung registry references still combined; prepared Hobby books are not active"
   }
 }
