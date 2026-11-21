@@ -31,7 +31,7 @@ def package_from_article(a):
       'wordpress_category':{'id':0,'slug':identity['category'],'taxonomy':'category','id_source':'WORDPRESS_REST_RESOLVE_AT_RUNTIME'},
       'heading_intent_terms':copy.deepcopy(a['heading_intent_terms']),
       'comparison_source_bindings':copy.deepcopy(a['comparison_source_bindings']),
-      'table_decision':copy.deepcopy(a['table_decision']),
+      'table_decision':{**copy.deepcopy(a['table_decision']), 'k0_policy':'K0_TABLE_MEANINGFUL_ONLY_V1'},
       'semantic_rule_results':copy.deepcopy(a.get('semantic_rule_results') or {}),
       'table_multiword_exceptions':copy.deepcopy(a.get('table_multiword_exceptions') or []),
     }
@@ -522,6 +522,52 @@ class K0FullRuleChainTests(unittest.TestCase):
         p2,cat2=package_from_article(bad)
         with self.assertRaisesRegex(Blocked,'table.post_summary_policy'):
             verify_pre_lt68(p2,cat2)
+
+
+
+class K0TableReaderValueTests(unittest.TestCase):
+    def test_faq_without_meaningful_comparison_needs_no_table_or_exception(self):
+        from engine.checkers import table_receipts
+        a=make_base()
+        a['table_decision']={
+            'k0_policy':'K0_TABLE_MEANINGFUL_ONLY_V1',
+            'decision':'OMIT_NO_ADDED_VALUE',
+            'rationale':'Die konkrete Frage wird ohne künstliche Vergleichsachsen direkt beantwortet.',
+        }
+        p,_=package_from_article(a)
+        validated=validate_rule_context(p['rule_context'],p['identity'])
+        self.assertEqual(validated['table_decision']['decision'],'OMIT_NO_ADDED_VALUE')
+        checks={x['rule_id']:x['status'] for x in table_receipts(a)}
+        self.assertEqual(checks['table.presence_policy'],'PASS')
+        self.assertEqual(checks['table.optional_decision_documented'],'PASS')
+
+    def test_old_horse_record_generic_table_decision_is_rejected(self):
+        a=with_valid_table(make_base())
+        p,_=package_from_article(a)
+        p['rule_context']['table_decision']={
+            'k0_policy':'K0_TABLE_MEANINGFUL_ONLY_V1',
+            'decision':'INCLUDE_ADDED_VALUE',
+            'rationale':'Der Vergleich ordnet Lebensdauer und einzelne Alterswerte ein.',
+        }
+        with self.assertRaisesRegex(Blocked,'K0_TABLE_QUESTION_BINDING_MISSING'):
+            validate_rule_context(p['rule_context'],p['identity'])
+
+    def test_table_evidence_must_match_actual_fact_cells(self):
+        from engine.checkers import table_receipts
+        a=with_valid_table(make_base())
+        a['table_decision']['source_fact_ids']=['F1','F2']
+        receipts={x['rule_id']:x['status'] for x in table_receipts(a)}
+        self.assertEqual(receipts['table.value_required_if_present'],'FAIL')
+
+    def test_meaningful_table_with_proof_can_pass(self):
+        from engine.checkers import table_receipts
+        a=with_valid_table(make_base())
+        p,_=package_from_article(a)
+        validated=validate_rule_context(p['rule_context'],p['identity'])
+        self.assertEqual(validated['table_decision']['k0_policy'],'K0_TABLE_MEANINGFUL_ONLY_V1')
+        receipts={x['rule_id']:x['status'] for x in table_receipts(a)}
+        self.assertEqual(receipts['table.value_required_if_present'],'PASS')
+        self.assertEqual(receipts['table.optional_decision_documented'],'PASS')
 
 
 if __name__=='__main__':
