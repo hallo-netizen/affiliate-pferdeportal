@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Ab welcher Temperatur frieren Pferde?",
+      "target_keyword": "Ab welcher Temperatur frieren Pferde?",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "6f88559f20cbdfbc0b983b4f6682f1205b7897e73ceb624acc492047faf31a16"
+    }
+  ],
+  "batch_sha256": "2d586d922db12db6520388defb75ee4cdecf53bab105f59bc9a1532244d42cc2"
+}
