@@ -10,6 +10,7 @@ from pathlib import Path
 from engine.core import stable
 from engine.k0_portal_resolver import validate_intake
 from engine.k0_seo_owner_binding import inspect,bind_context,verify_context,php_stable,Blocked
+from tests.k0_rule_context_fixture import adapt_historical_table_context_for_current_k0
 
 ROOT=Path(__file__).resolve().parents[1]
 MANIFEST=ROOT/"tests/fixtures/k0_seo_owner_manifest_SYNTHETIC_QA_20261110.json"
@@ -94,7 +95,7 @@ class SeoOwnerSourceBindingTests(unittest.TestCase):
                     excerpt="Eigenständiger Testbeleg: "+claim["statement"]
                     claim["evidence_text"]=excerpt
                     claim["evidence_text_sha256"]=hashlib.sha256(excerpt.encode("utf-8")).hexdigest()
-            job=prepare(intake,portal,context)
+            job=prepare(intake,portal,adapt_historical_table_context_for_current_k0(context))
             self.assertEqual(job["writer_rule_binding"]["article_hard_rule_count"],81)
             self.assertEqual(job["identity"],context["identity"])
             self.assertEqual(job["content_profile"]["search_intent"],
