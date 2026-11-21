@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Bei wie viel Grad darf man eine Pferdedecke waschen?",
+      "target_keyword": "Wie viel Grad muss man eine Pferdedecke Waschen?",
+      "category": "alltags-pferde-haltungsformen",
+      "article_type": "FAQ",
+      "plan_slot": "f203aeeaab74dada363e0030b53fdf152d0b57552d5d6c6521162c303f2d5f29"
+    }
+  ],
+  "batch_sha256": "1657aa70790148a596c6d29d698bb4e7261fcde7f2e26224adfac4f47b3f16d0"
+}
