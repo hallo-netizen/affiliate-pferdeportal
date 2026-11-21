@@ -1,0 +1,175 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Was kostet ein Pferd im Monat mit Stallmiete?",
+    "target_keyword": "Wie viel kostet ein Pferd im Monat mit Stallmiete?",
+    "category": "recht-finanzen-organisation",
+    "article_type": "FAQ",
+    "plan_slot": "c7ff6c7dae82903cd9da5bc1a97c6b553f8bb6acb069daf3a84d434ed8ac9a2b"
+  },
+  "content_profile": {
+    "search_intent": "Monatliche Gesamtkosten der Pferdehaltung ausdrücklich mit Stallmiete, laufenden Einzelposten und variablen Kostenfaktoren."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://tierschutz.hessen.de/mit-dem-kauf-eines-pferdes-ist-es-nicht-getan",
+          "source_title": "Hessischer Tierschutz – Mit dem Kauf eines Pferdes ist es nicht getan"
+        }
+      ],
+      "claims": [
+        "Bei monatlichen Pferdekosten müssen Stallmiete und weitere laufende Posten berücksichtigt werden.",
+        "Eine hessische Informationsseite nennt 500 Euro ohne Ausrüstung als grobe monatliche Untergrenze.",
+        "Die Stallmiete variiert stark und kann nach der hessischen Orientierung 300 bis 600 Euro oder mehr betragen.",
+        "Zusätzliche Stallleistungen können gesonderte Kosten verursachen."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie viel kostet ein Pferd im Monat mit Stallmiete?",
+      "topic": "Was kostet ein Pferd im Monat mit Stallmiete?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "recht-finanzen-organisation",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was kostet ein Pferd im Monat mit Stallmiete?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://tierschutz.hessen.de/mit-dem-kauf-eines-pferdes-ist-es-nicht-getan",
+        "source_title": "Hessischer Tierschutz – Mit dem Kauf eines Pferdes ist es nicht getan",
+        "evidence_text": "Zu den Unterhaltskosten zählen im Wesentlichen Stallmiete, Futter, OP-/Haftpflichtversicherungen, Hufschmied, Tierarztkosten und Ausrüstung für Pferd und Reiter.",
+        "evidence_text_sha256": "72d1f29c6d3d9594247ca2b2cb62a068bc7872f32a9b363ee799686ca09a7226",
+        "statement": "Bei monatlichen Pferdekosten müssen Stallmiete und weitere laufende Posten berücksichtigt werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://tierschutz.hessen.de/mit-dem-kauf-eines-pferdes-ist-es-nicht-getan",
+        "source_title": "Hessischer Tierschutz – Mit dem Kauf eines Pferdes ist es nicht getan",
+        "evidence_text": "Im Durchschnitt kann man von mindestens 500 Euro ohne Ausrüstung monatlich ausgehen.",
+        "evidence_text_sha256": "1b0c2a2b9451633febfa212a5d6d96330403c8fa0beef9e03fe875608344cb4f",
+        "statement": "Eine hessische Informationsseite nennt 500 Euro ohne Ausrüstung als grobe monatliche Untergrenze.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://tierschutz.hessen.de/mit-dem-kauf-eines-pferdes-ist-es-nicht-getan",
+        "source_title": "Hessischer Tierschutz – Mit dem Kauf eines Pferdes ist es nicht getan",
+        "evidence_text": "Abhängig von geographischer Lage und Beschaffenheit schwankt die Stallmiete zwischen 300 und 600 Euro oder kann sogar noch höher ausfallen.",
+        "evidence_text_sha256": "6cf60349262182a402322e0c8b1e7449ecdaad82c8097f6186a71d260b17ac5b",
+        "statement": "Die Stallmiete variiert stark und kann nach der hessischen Orientierung 300 bis 600 Euro oder mehr betragen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://tierschutz.hessen.de/mit-dem-kauf-eines-pferdes-ist-es-nicht-getan",
+        "source_title": "Hessischer Tierschutz – Mit dem Kauf eines Pferdes ist es nicht getan",
+        "evidence_text": "Viele Stallbetreiber*innen lassen sich einzelne Dienstleistungen wie Pferd auf die Koppel bringen, Fliegenmaske aufsetzen o.ä. separat vergüten.",
+        "evidence_text_sha256": "a7df6a0ba39fc7df2f84c7b3e0327287c02ab504cdcac074379693bf3c39de91",
+        "statement": "Zusätzliche Stallleistungen können gesonderte Kosten verursachen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/recht-finanzen-organisation/",
+        "anchor": "Recht, Finanzen & Organisation",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/recht-finanzen-organisation/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "recht-finanzen-organisation",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Stallmiete",
+      "Pferdekosten",
+      "Unterhaltskosten",
+      "Futter",
+      "Versicherung",
+      "Recht",
+      "Hufschmied",
+      "Tierarzt"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die kompakte Übersicht ordnet belegte Merkmale nach Anwendungsfall und lässt die wichtigsten Unterschiede unmittelbar vergleichen.",
+      "reader_question": "Wie viel kostet ein Pferd im Monat mit Stallmiete?",
+      "reader_benefit": "Mehrere unterschiedliche belegte Einzelaspekte lassen sich schneller als zusammenhängender Vergleich prüfen.",
+      "why_not_prose": "Eine sachliche Vergleichstabelle ordnet die belegten Unterschiede klarer als wiederholte lange Absätze.",
+      "comparison_axes": [
+        "Unterschiedliche Ausstattungsformen und Einsatzzwecke",
+        "Typische Voraussetzungen und Grenzen"
+      ],
+      "source_fact_ids": [
+        "F1",
+        "F2",
+        "F3"
+      ]
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
