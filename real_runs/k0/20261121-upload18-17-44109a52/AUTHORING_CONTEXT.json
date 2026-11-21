@@ -1,0 +1,246 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Ein Pferd Schritt für Schritt richtig satteln und trensen",
+    "target_keyword": "pferde richtig satteln und trensen",
+    "category": "pferdewissen-grundlagen",
+    "article_type": "Anleitung",
+    "plan_slot": "44109a52dac7044b628b0a466fd838c9c806a84a54985f4eaf023843e7ea758d"
+  },
+  "content_profile": {
+    "search_intent": "Pferd erst richtig satteln und anschließend trensen, mit praktischer Reihenfolge und Sicherheitskontrolle beider Ausrüstungsteile."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Reitsattel",
+          "source_title": "Wikipedia – Reitsattel"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Zaumzeug",
+          "source_title": "Wikipedia – Zaumzeug"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Trense",
+          "source_title": "Wikipedia – Trense"
+        }
+      ],
+      "claims": [
+        "Reitsättel sollen den Pferderücken schonen und das Reiten sicher machen.",
+        "Der Reitsattel liegt hinter dem Widerrist auf der Sattellage und wird angegurtet.",
+        "Reitsättel besitzen Sattelbaum, Sitzfläche und Sattelblätter.",
+        "Passende Reitsättel unterscheiden sich durch Größen und Kammerweiten.",
+        "Sattelunterlagen schützen Sättel vor Schweiß und können polstern.",
+        "Der Trensenzaum besteht aus Genickstück, Backenstücken, Kehlriemen und Stirnriemen.",
+        "Richtig angepasste Zäumung lässt dem Pferd Raum zum Atmen und Kauen.",
+        "Auftrensen bezeichnet das Anlegen des Zaumzeugs."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "Anleitung",
+      "target_keyword": "pferde richtig satteln und trensen",
+      "topic": "Ein Pferd Schritt für Schritt richtig satteln und trensen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdewissen-grundlagen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Ein Pferd Schritt für Schritt richtig satteln und trensen",
+      "preparation_items": [
+        "Pferd sichern und beruhigen",
+        "Passende Ausrüstung bereitlegen",
+        "Verschlüsse und Riemen prüfen"
+      ],
+      "procedure_steps": [
+        "Pferd für die Ausrüstung vorbereiten",
+        "Sattel beziehungsweise Kopfstück sachgerecht anlegen",
+        "Sitz und Verschnallung sorgfältig prüfen"
+      ],
+      "safety_controls": [
+        "Auf Druckstellen und freie Atmung achten"
+      ],
+      "common_errors": [
+        "Zu enges Zaumzeug",
+        "Unpassender Sattel"
+      ],
+      "result_checks": [
+        "Sattel beziehungsweise Trense korrekt und sicher angelegt"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Reitsattel",
+        "source_title": "Wikipedia – Reitsattel",
+        "evidence_text": "Ein Reitsattel wird bei Reittieren verwendet, um das Reiten sicherer zu machen und den Tierrücken zu schonen.",
+        "evidence_text_sha256": "8bdef64daf82d081bd76df10f04be2666cd9921ec3cee9009404613eb27837f9",
+        "statement": "Reitsättel sollen den Pferderücken schonen und das Reiten sicher machen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Reitsattel",
+        "source_title": "Wikipedia – Reitsattel",
+        "evidence_text": "Der Sattel wird auf die Sattellage, den Bereich hinter dem Widerrist, aufgelegt und mit dem Sattelgurt befestigt.",
+        "evidence_text_sha256": "71c11f4e1ab048a3c0f1bd8428d934f7639e7750b440f91ed795e9cd05ab7850",
+        "statement": "Der Reitsattel liegt hinter dem Widerrist auf der Sattellage und wird angegurtet.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Reitsattel",
+        "source_title": "Wikipedia – Reitsattel",
+        "evidence_text": "Sättel bestehen aus einem Sattelbaum, der dem Sattel die Form gibt, einer Sitzfläche und den Sattelblättern aus Leder oder Kunststoff.",
+        "evidence_text_sha256": "4205952b1c2c730d21b058d19559d62fa819d3a8536a1a4dbad468a63eda6d4f",
+        "statement": "Reitsättel besitzen Sattelbaum, Sitzfläche und Sattelblätter.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://de.wikipedia.org/wiki/Reitsattel",
+        "source_title": "Wikipedia – Reitsattel",
+        "evidence_text": "Für die Passgenauigkeit auf dem Pferderücken werden Sattelbäume in verschiedenen Größen und Kammerweiten angeboten.",
+        "evidence_text_sha256": "0f6ba0cdb8fe4f0814f021005dfe9defa65149a2f9d70543d1f61b16d895c8fb",
+        "statement": "Passende Reitsättel unterscheiden sich durch Größen und Kammerweiten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://de.wikipedia.org/wiki/Reitsattel",
+        "source_title": "Wikipedia – Reitsattel",
+        "evidence_text": "Sattelunterlagen wie Schabracken, Pads oder Woilache schützen den Sattel vor Schweiß und dienen bei Bedarf als Polster.",
+        "evidence_text_sha256": "6d4e3e580697b67a64564f2f47245757ddfa3264b13caa1d2200f1927873236a",
+        "statement": "Sattelunterlagen schützen Sättel vor Schweiß und können polstern.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F6": {
+        "source_url": "https://de.wikipedia.org/wiki/Zaumzeug",
+        "source_title": "Wikipedia – Zaumzeug",
+        "evidence_text": "Trensenzäume bestehen in den meisten Fällen aus einem Genickstück, den beiden Backenstücken rechts und links, dem Kehlriemen und dem Stirnriemen.",
+        "evidence_text_sha256": "968c2083a9ce76dae699780cb342d2fdaa98bc708913fb8c6b8b74ef99a76dc8",
+        "statement": "Der Trensenzaum besteht aus Genickstück, Backenstücken, Kehlriemen und Stirnriemen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F7": {
+        "source_url": "https://de.wikipedia.org/wiki/Zaumzeug",
+        "source_title": "Wikipedia – Zaumzeug",
+        "evidence_text": "Der Zaum muss korrekt verschnallt sein (Zwei-Finger-Methode), damit er nicht unbeabsichtigt drückt und das Pferd frei atmen und kauen kann.",
+        "evidence_text_sha256": "fe9a916025afaeba9d685048edc03b307791a25210a514c3d9cc9e900c27ba62",
+        "statement": "Richtig angepasste Zäumung lässt dem Pferd Raum zum Atmen und Kauen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F8": {
+        "source_url": "https://de.wikipedia.org/wiki/Trense",
+        "source_title": "Wikipedia – Trense",
+        "evidence_text": "Für das Anlegen des Zaumzeugs wird neben „aufzäumen“ auch das Verb „auftrensen“ verwendet.",
+        "evidence_text_sha256": "fa030181ffdbe80deb3c5e62ecac97c7f0e365d9e40b1d47a2216ca733d9fbd5",
+        "statement": "Auftrensen bezeichnet das Anlegen des Zaumzeugs.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdewissen-grundlagen/",
+        "anchor": "pferdewissen-grundlagen",
+        "block": "steps"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/sattelgurte-faq/",
+        "anchor": "sattelgurte-faq",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdewissen-grundlagen/",
+        "active": true
+      },
+      {
+        "href": "/category/sattelgurte-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdewissen-grundlagen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferd",
+      "Satteln",
+      "Trensen",
+      "Reitsattel",
+      "Sattelgurt",
+      "Sattellage",
+      "Sattelgurte"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "LINEAR_SEQUENCE",
+      "rationale": "Eine Schrittfolge und Einordnung konkreter Kriterien ist aussagekräftiger als eine Vergleichsmatrix mit künstlichen Füllzeilen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
