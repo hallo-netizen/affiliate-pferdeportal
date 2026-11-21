@@ -10,6 +10,7 @@ from pathlib import Path
 from engine.k0_writer_station import (
     research_owner_decision, prepare, _k0_research_source_quality_reason,
 )
+from tests.k0_rule_context_fixture import adapt_historical_table_context_for_current_k0
 
 ROOT=Path(__file__).resolve().parents[1]
 POS=ROOT/'real_runs/k0/k0-20261115-horseware-neu-quellenregel-9221a640'
@@ -22,7 +23,7 @@ def read(base,name):
 def original_context(base):
     ctx=read(base,'AUTHORING_CONTEXT.json')
     ctx['run_instance_id']=RUN
-    return ctx
+    return adapt_historical_table_context_for_current_k0(ctx)
 
 def portal_for(ident):
     return {'contract':'K0_PORTAL_ASSIGNMENT_V1','status':'PASS',
