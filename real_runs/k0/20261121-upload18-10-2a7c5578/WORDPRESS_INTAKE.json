@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie oft brauchen Pferde eine Zahnbehandlung?",
+      "target_keyword": "Wie oft sollten Pferde Zähne machen lassen?",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "2a7c5578bd1c7b2e99cf1c21d173e6247e0b61885f4c87fefe75d2e404d8d716"
+    }
+  ],
+  "batch_sha256": "d72040dad54ce3a4d85c8c4a168d63eaaf3624b1039a07459f7bf6c4273e22ee"
+}
