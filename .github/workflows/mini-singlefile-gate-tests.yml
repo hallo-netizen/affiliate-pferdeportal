@@ -1,4 +1,4 @@
-name: MINI Single File Gate - Code Tests
+name: MINI-1DATEI - Ein-Datei-Freigabe (Original-MINI-Worker)
 on:
   push:
     branches: [affiliate-release-current]
