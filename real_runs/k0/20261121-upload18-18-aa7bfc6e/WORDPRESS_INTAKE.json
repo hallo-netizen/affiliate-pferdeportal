@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Passendes Trensenzubehör für Pferde auswählen",
+      "target_keyword": "trensen pferde zubehör",
+      "category": "trensen-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "aa7bfc6e5c17cd3a997178243b50201a0ba2d84283af18326a51cb7953b2477b"
+    }
+  ],
+  "batch_sha256": "b368aed4cd9e9ae586418fb71ded03c74d4d602ea923ced583e54911e3bf439f"
+}
