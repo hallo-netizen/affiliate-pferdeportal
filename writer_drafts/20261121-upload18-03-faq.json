@@ -9,7 +9,9 @@
     "exception_code": "",
     "rationale": "Die sachgerechte Material- und Pflegeentscheidung verlangt individuelle Prüfung; eine Tabelle mit vier künstlichen Zeilen und drei Spalten würde die Unterschiede ohne Zusatznutzen vereinfachen."
   },
-  "lt_authoritative_terms": [],
-  "revision_count": 7,
+  "lt_authoritative_terms": [
+    "Stallaltag"
+  ],
+  "revision_count": 8,
   "publish_allowed": false
 }
