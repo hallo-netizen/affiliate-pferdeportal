@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Muss man Einnahmen aus der Vermietung von Pferdeboxen versteuern?",
+      "target_keyword": "Muss ich Steuern auf die Vermietung von Pferdeboxen zahlen?",
+      "category": "recht-finanzen-organisation",
+      "article_type": "FAQ",
+      "plan_slot": "07140304e922f09897f864b32500520b6b16e554ba0f79e02a877ad33750573d"
+    }
+  ],
+  "batch_sha256": "f7c2e8950ed47c1a8c42f52d0e4e76ed2e9f2a0d5a147d01ad6ff90b65a932fe"
+}
