@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Trensen für Pferde nach Einsatz und Passform auswählen",
+      "target_keyword": "trensen pferde",
+      "category": "trensen-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "7688e213c43c5b3a87c2a318ab2dd4e52739c3b2a32ae0884ea101f4710d1b8d"
+    }
+  ],
+  "batch_sha256": "5667daf8003a07f97f9f40d89bb2dda18ab51283b50868419fccf1136f241cf8"
+}
