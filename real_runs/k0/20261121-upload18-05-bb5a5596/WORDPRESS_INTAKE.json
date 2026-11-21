@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Imprägnierspray für Pferdedecken richtig auswählen",
+      "target_keyword": "imprägnierung pferdedecken spray",
+      "category": "pferdedecken-regendecken-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "bb5a55966bdaea23825d5473b3dfaddfe1097816c91275dc7fa377931b047826"
+    }
+  ],
+  "batch_sha256": "73de44811f2ad687590c3292ddd0b7f907fa6fcd8d4bceb562d79e4bb8c00651"
+}
