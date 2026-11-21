@@ -213,5 +213,44 @@
     "changed_code_or_wp_zip": false,
     "actual_wp_live_import_performed": false,
     "safe_user_action": "Kein Plugin installieren und keine Test-Importdatei in WordPress hochladen"
+  },
+  "editorial_formal_gates_test_20261121": {
+    "date": "2026-11-21",
+    "status": "PASS_STATIC_54_OF_54_NOT_FULL_QUALITY_RELEASE",
+    "single_formal_approval_proposal": "100_HOBBY_FACHREGELN_FORMALE_FREIGABEVORLAGE_20261121.json",
+    "three_real_FAQ_target_tests": "101_HOBBY_FAQ_3_ARTIKEL_KONKRETE_CHECKS_20261121.json",
+    "tests": 54,
+    "passed": 54,
+    "failed": 0,
+    "three_FAQ_original_texts_words": [
+      561,
+      545,
+      593
+    ],
+    "all_H2": 3,
+    "all_paragraphs": 10,
+    "hobby_proposed_target_words": [
+      500,
+      800
+    ],
+    "hobby_proposed_h2": [
+      2,
+      4
+    ],
+    "unapproved_foreign_formal_baseline_conflict": {
+      "minimum_words": 750,
+      "minimum_H2": 4,
+      "minimum_paragraphs": 16,
+      "all_three_rejected": true,
+      "automatic_inheritance_forbidden": true
+    },
+    "no_authoring_approval_or_121_checker_approval": true,
+    "no_active_Hobby_specific_values": true,
+    "kmulti_office_doc": "https://github.com/hallo-netizen/k0-multiportal/blob/k0-offline-rule-bindings-20261027/offline_rules/portal_bindings/hobby_depot/HOBBYDEPOT_5_EIGENE_BEITRAGSREGELN_EINGANG_20261121.md",
+    "kmulti_office_commit": "4c89ec50728c889702cf20c84fb2ddfa9f35c89a",
+    "k0_unchanged": true,
+    "kmulti_runtime_unchanged": true,
+    "wordpress_plugin_unchanged": true,
+    "next_required_integrator_action": "Only if separately approved: authorize independent formal Hobby profile, bind previously separate Pflege/Anleitung references and perform full signed source/121-rule/LT68/WordPress-draft QA. No new plugin or portal redecision."
   }
 }
