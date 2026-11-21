@@ -1,0 +1,167 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Darf man ein Pferd im eigenen Garten halten?",
+    "target_keyword": "Darf ich ein Pferd in meinem Garten halten?",
+    "category": "recht-finanzen-organisation",
+    "article_type": "FAQ",
+    "plan_slot": "0aa9c6cd5c875a1e1a17b8f0476ceaa6ce768d60a8c051c6eebe0c1d0c3095fa"
+  },
+  "content_profile": {
+    "search_intent": "Ob die Pferdehaltung im eigenen Garten rechtlich erlaubt sein kann und welche örtlichen Regeln und Nutzungsvorgaben entscheidend sind."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354972/index.php",
+          "source_title": "Amt für Ernährung, Landwirtschaft und Forsten – Baurecht"
+        },
+        {
+          "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354970/index.php",
+          "source_title": "Amt für Ernährung, Landwirtschaft und Forsten – Haltung von Pferden"
+        }
+      ],
+      "claims": [
+        "Ein Bauvorhaben für Pferdehaltung wird anhand seines konkreten Zwecks geprüft.",
+        "Bei Bauvorhaben kann die Frage nach Landwirtschaft gemäß Baugesetzbuch entscheidend sein.",
+        "Die reine Vermietung von Stallraum ist baurechtlich von landwirtschaftlicher Tätigkeit zu unterscheiden.",
+        "Auch im eigenen Garten müssen die Bedürfnisse eines Pferdes bei Unterbringung und Versorgung erfüllt werden."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Darf ich ein Pferd in meinem Garten halten?",
+      "topic": "Darf man ein Pferd im eigenen Garten halten?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "recht-finanzen-organisation",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Darf man ein Pferd im eigenen Garten halten?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354972/index.php",
+        "source_title": "Amt für Ernährung, Landwirtschaft und Forsten – Baurecht",
+        "evidence_text": "Privilegiert ist immer nur das einzelne Vorhaben – nie eine Person oder ein Betrieb!",
+        "evidence_text_sha256": "a2ac18b18db1249f0d9299848f461c914e83dba9135fdbd03140e289374335dc",
+        "statement": "Ein Bauvorhaben für Pferdehaltung wird anhand seines konkreten Zwecks geprüft.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354972/index.php",
+        "source_title": "Amt für Ernährung, Landwirtschaft und Forsten – Baurecht",
+        "evidence_text": "Handelt es sich um Landwirtschaft nach § 201 Baugesetzbuch (BauGB)?",
+        "evidence_text_sha256": "977399b2855bf25ce8a4702c959a0f49f24e59436d00251c5dc92abded4237d9",
+        "statement": "Bei Bauvorhaben kann die Frage nach Landwirtschaft gemäß Baugesetzbuch entscheidend sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354972/index.php",
+        "source_title": "Amt für Ernährung, Landwirtschaft und Forsten – Baurecht",
+        "evidence_text": "Vermietung von Stallabteilen / Ställen ohne weitere Dienstleistungen (Selbstversorger)",
+        "evidence_text_sha256": "d7aa5e6f892b9d2bcb201c3220ccf6a8d82bc79e1f11aa5711faa2c363baa08a",
+        "statement": "Die reine Vermietung von Stallraum ist baurechtlich von landwirtschaftlicher Tätigkeit zu unterscheiden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.aelf-al.bayern.de/landwirtschaft/tierhaltung/354970/index.php",
+        "source_title": "Amt für Ernährung, Landwirtschaft und Forsten – Haltung von Pferden",
+        "evidence_text": "muss das Tier seiner Art und seinen Bedürfnissen entsprechend angemessen ernähren, pflegen und verhaltensgerecht unterbringen",
+        "evidence_text_sha256": "a2eda43913c498a56da25d6b95832bad23a200535484630ef572c2ff3d6eb8b0",
+        "statement": "Auch im eigenen Garten müssen die Bedürfnisse eines Pferdes bei Unterbringung und Versorgung erfüllt werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/recht-finanzen-organisation/",
+        "anchor": "Recht, Finanzen & Organisation",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/recht-finanzen-organisation/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "recht-finanzen-organisation",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Garten",
+      "Pferdehaltung",
+      "Baurecht",
+      "Privilegierung",
+      "Landwirtschaft",
+      "Genehmigung",
+      "Versicherung",
+      "Recht"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "NUANCE_LOSS",
+      "rationale": "Bei dieser Rechtsfrage hängen die Folgen von mehreren Umständen ab; eine schematische Tabelle könnte den Einzelfall unzulässig vereinfachen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
