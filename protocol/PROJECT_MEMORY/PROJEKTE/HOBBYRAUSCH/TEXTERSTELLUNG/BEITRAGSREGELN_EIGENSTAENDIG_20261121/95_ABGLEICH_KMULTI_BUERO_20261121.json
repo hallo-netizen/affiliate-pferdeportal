@@ -1,0 +1,74 @@
+{
+  "contract": "HOBBYDEPOT_KMULTI_READONLY_HANDOFF_RECEIPT_V1",
+  "date": "2026-11-21",
+  "status": "HANDOFF_OFFICE_DOCUMENTED_NOT_RUNTIME_ACTIVATED",
+  "source_revision": "11e72a945c10fa5e55efd493a316fd2f56e38e44",
+  "k_multi_office_entry": "https://github.com/hallo-netizen/k0-multiportal/blob/k0-offline-rule-bindings-20261027/offline_rules/portal_bindings/hobby_depot/HOBBYDEPOT_5_EIGENE_BEITRAGSREGELN_EINGANG_20261121.md",
+  "kmulti_office_commit": "60d3a78419734ca841e6446274ca08eab4777f1b",
+  "portal": "hobby_depot",
+  "portal_from_original_wp_receipt_site_host": "www.hobby-depot.de",
+  "original_file_has_only_one_batch": true,
+  "original_article_fields": [
+    "title",
+    "target_keyword",
+    "category",
+    "article_type",
+    "plan_slot"
+  ],
+  "current_original_wp_types": [
+    "Beratung",
+    "FAQ",
+    "Pflege",
+    "Vergleich",
+    "Anleitung"
+  ],
+  "type_crossrepo_status": [
+    {
+      "wp_type": "Beratung",
+      "hobby_own_rulebook": "HOBBY_RATGEBER_WISSEN",
+      "kmulti_current_reference": "HOBBY_RATGEBER_WISSEN",
+      "matches": true
+    },
+    {
+      "wp_type": "FAQ",
+      "hobby_own_rulebook": "HOBBY_FAQ",
+      "kmulti_current_reference": "HOBBY_FAQ",
+      "matches": true
+    },
+    {
+      "wp_type": "Pflege",
+      "hobby_own_rulebook": "HOBBY_PFLEGE",
+      "kmulti_current_reference": "HOBBY_ANLEITUNG_PFLEGE",
+      "matches": false
+    },
+    {
+      "wp_type": "Vergleich",
+      "hobby_own_rulebook": "HOBBY_VERGLEICH",
+      "kmulti_current_reference": "HOBBY_VERGLEICH",
+      "matches": true
+    },
+    {
+      "wp_type": "Anleitung",
+      "hobby_own_rulebook": "HOBBY_ANLEITUNG",
+      "kmulti_current_reference": "HOBBY_ANLEITUNG_PFLEGE",
+      "matches": false
+    }
+  ],
+  "checks": {
+    "count": 10,
+    "passed": 10,
+    "description": "Live readback from both GitHub repositories. Proves matching/missing references, not end-to-end publication."
+  },
+  "current_technical_limits": [
+    "No active rulebook approval in K-Multi registry",
+    "Pflege and Anleitung current K-Multi registry both point to one legacy candidate, two independent Hobby books prepared",
+    "No verified post category for additional 'Porträt & Bericht'; not a current WordPress original type",
+    "No modification to K0 or K-Multi code, registry, tests, QA, release pipeline",
+    "No WordPress plugin changes and no extra user uploads"
+  ],
+  "next_authorized_hobby_scope": "Keep existing five-rulebooks and valid original WordPress export ready. Do not change K-Multi registry without separately authorized K-Multi integration.",
+  "files_modified_in_hobby_repo_only": [
+    "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/TEXTERSTELLUNG/BEITRAGSREGELN_EIGENSTAENDIG_20261121/95_ABGLEICH_KMULTI_BUERO_20261121.json"
+  ],
+  "no_runtime_changes": true
+}
