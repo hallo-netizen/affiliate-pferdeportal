@@ -1202,3 +1202,46 @@ Breite Zufallsmatrix:
 Relevanssi Live Ajax Search 2.6 wurde nach dem 6.72.367-Diagnoselauf separat vom Nutzer deaktiviert. Diese Änderung ist nicht Ursache oder Bestandteil des Affiliate-Fixes und wird erst im nächsten Gesamtlauf mitgemessen.
 
 Nächster Schritt: nur 6.72.368 installieren; anschließend ein vollständiger PASSIV-Gesamtlauf über den bestehenden Seitenmix. Keine weitere Affiliate-Version davor.
+
+
+## 2026-11-21 – 6.72.369 konsolidierter Performance-Rootfix
+
+6.72.368 ist nur Zwischenstand und NICHT zu installieren. Finaler gebündelter Kandidat ist `PFERDEATELIER_AFFILIATE_6.72.369_KONSOLIDIERT_IMAGE_META_PERFORMANCE_ROOTFIX.zip`, SHA-256 `d1c99b5bc8b0b73b00ddd12bfa6931d1613094068444e5c5f69aa7e74412e98d`.
+
+### Ausgangslage
+PASSIV 6.72.367: Pferdesättel 7307,94 ms Wall, 3567,25 ms CPU, 139257 Cache-Hits, 320 Queries, 0 HTTP. Der Cache-/Query-Fingerabdruck ist gegen 6.72.365 unverändert; 6.72.367 hat den dominanten Wiederholungsblock live nicht reduziert. Wall-Time wird wegen hoher Serverlast/OPcache-Nähe nicht allein bewertet.
+
+### Fix A – Produktbildprüfung gebündelt
+Die slot-unabhängige strukturelle Bildentscheidung wird auf stabilen normalen Frontend-Requests jetzt über Kategorie-, Hub-, Journal-, feste und Artikel-Produktpfade request-lokal wiederverwendet.
+- 100000 stabile Fälle: 0 Ausgabeabweichungen.
+- 100000 dynamische Fälle: 0 Ausgabe-/Aufruffolgeabweichungen; Cache dort aus.
+- 100000 mutierte Kampagnen: 0 Ausgabeabweichungen.
+- 11 Produktplatz-Familien, 710er-Pool: 5395 → 710 Bildprüfungen (-86,84 %), Ausgabe identisch.
+- Random: 11681501 → 2856178 Prüfungen (-75,55 %).
+- Isolierter provider-/URL-artiger Laufzeittest: Median 3,346 → 1,754 ms (-47,60 %).
+
+### Fix B – Kampagnen-Metadaten schmal lesen
+Der alte öffentliche Kampagnen-Snapshot ließ WordPress sämtliche Metafelder der ausgewählten ap_campaign-Posts hydrieren, obwohl der anschließende Rankingpfad zunächst nur `ppar_campaign_data` benötigt. 6.72.369 deaktiviert die Voll-Hydrierung ausschließlich im sicheren Frontend GET/HEAD und liest exakt diesen Schlüssel. Bestehende WordPress-Cachewerte bleiben autoritativ; bei Filter/Object-Cache/Lesefehler gilt der historische Vollpfad.
+- 100000 randomisierte Bestände: 0 Wertabweichungen; Testmodell 11821987 → 1542421 geladene Meta-Zeilen (-86,95 %).
+- 710er-Modell mit 1 benötigten + 8 fremden Meta-Schlüsseln: 6390 → 710 (-88,89 %), gleiche Kampagnendaten.
+- 100000 Fehler-/Fallbackfälle: 0 Abweichungen.
+- 100000 serialisierte Meta-Werte: 0 Abweichungen.
+- Der Tiefenlauf zeigt passend große Postmeta-Sammelarbeit; eine einzelne 160,82-ms-Sammelquery wird nur als Live-Kontext, nicht als alleiniger Besitzerbeweis verwendet.
+
+### Gesamt-Funktionsschutz
+- Named functions 1556 → 1561; entfernt 0; neu nur 5 private Performance-/Sicherheitshelfer.
+- Dateien 66 → 66; entfernt 0; hinzugefügt 0; geändert nur Hauptdatei, Article-Plans-Trait und readme.
+- Actions 176 → 176; Filter 30 → 30; Shortcodes 6 → 6.
+- Sämtliche geprüften Produktions-Schreibwege exakt gleich.
+- Auswahl, Ranking, Provider, Placement, Fallback, Veto/Control, Health, Tracking, Produktinhalt und Renderingregeln nicht entfernt.
+- Design 1.50.616 und Diagnose 7.0.0 sind nicht Bestandteil des Pakets und unverändert.
+- Arbeitsstand 23/23 PHP-Lint PASS; finales ZIP 66/66 identisch zum geprüften Arbeitsstand und erneut 23/23 PHP-Lint PASS.
+
+### Bewusst nicht eingebaut
+- wp_options-Wiederholungen: gemessen, aber noch nicht eindeutig einem sicheren Änderungsweg zugeordnet.
+- init/Cron-Scheduling: nicht ausreichend pro Callback attribuiert.
+- vollständiger Postprocess-Plan-Hash: isoliert nur ca. 1,6 ms für drei Slots.
+- persistenter Objektcache: keine Infrastrukturänderung ohne eigenen Beweis.
+
+### Nächster Live-Schritt
+Nur 6.72.369 installieren. Danach genau ein vollständiger PASSIV-Gesamtlauf über den bestehenden Seitenmix. Dieser Lauf misst zugleich den bereits separat deaktivierten Relevanssi Live Ajax Search mit. Vor diesem Gesamtlauf keine weitere Affiliate-Version.
