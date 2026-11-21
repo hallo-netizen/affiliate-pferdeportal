@@ -1,0 +1,226 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Simprax zur Imprägnierung von Pferdedecken richtig anwenden",
+    "target_keyword": "simprax pferdedecken imprägnierung",
+    "category": "pferdedecken-regendecken-pflege",
+    "article_type": "Anleitung",
+    "plan_slot": "91b1acd3514ff96e9a805f1c6847c2bac47b2aa1f2805f2ed6bf486291ec5595"
+  },
+  "content_profile": {
+    "search_intent": "Wie das genannte Simprax-Imprägniermittel für geeignete Pferdedecken, insbesondere Regendecken, angewendet wird; markenspezifische Anleitung statt allgemeine Imprägnierung."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://simprax.com/de/produkt/pferdedecken-impraegnierung-wash-in/",
+          "source_title": "simprax – Pferdedecken Imprägnierung Wash-In"
+        }
+      ],
+      "claims": [
+        "Simprax nennt Waschmittel in der Hauptwaschkammer als ersten Anwendungsschritt.",
+        "Simprax dosiert 20 Milliliter Spezialimprägnierung pro 100 Gramm Trockengewicht der Pferdedecke in das Weichspül- beziehungsweise Imprägnierfach.",
+        "Der Hersteller verlangt eine niedrige Schleuderdrehzahl von höchstens 400 Umdrehungen pro Minute.",
+        "Simprax beschreibt das Einlegen der Pferdedecke in die Waschmaschine und den Waschstart.",
+        "Simprax empfiehlt das Trocknen bei Raumtemperatur und nennt einen Trockner als mögliche Alternative, falls das Deckenmaterial dies erlaubt.",
+        "Für das Tauchverfahren nennt Simprax etwa 150 Milliliter Imprägnierung pro Kilogramm Trockengewicht mit zwei Litern Wasser.",
+        "Beim Tauchverfahren nennt Simprax etwa zehn Minuten Einwirkzeit und leichtes Auswringen."
+      ],
+      "fresh_research_reference_date": "2026-11-21"
+    },
+    "production_plan_item": {
+      "article_type": "Anleitung",
+      "target_keyword": "simprax pferdedecken imprägnierung",
+      "topic": "Simprax zur Imprägnierung von Pferdedecken richtig anwenden",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdedecken-regendecken-pflege",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Simprax Wash-In fachgerecht auf Pferdedecken anwenden",
+      "preparation_items": [
+        "Simprax Spezialimprägnierung",
+        "Geeignete Pferdedecke",
+        "Waschmaschine oder Tauchgefäß"
+      ],
+      "procedure_steps": [
+        "Waschmittel in Hauptwaschkammer füllen",
+        "Simprax nach Trockengewicht dosieren",
+        "Niedrige Schleuderdrehzahl wählen",
+        "Pferdedecke trocknen lassen"
+      ],
+      "safety_controls": [
+        "Textilpflegehinweise und Herstellerangaben berücksichtigen"
+      ],
+      "common_errors": [
+        "Zu hohe Schleuderdrehzahl",
+        "Unpassende Dosierung"
+      ],
+      "result_checks": [
+        "Decke nach zulässiger Pflege vollständig trocken"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://simprax.com/de/produkt/pferdedecken-impraegnierung-wash-in/",
+        "source_title": "simprax – Pferdedecken Imprägnierung Wash-In",
+        "evidence_text": "Füllen Sie ein beliebiges Waschmittel in die Hauptwaschkammer Ihrer Waschmaschine",
+        "evidence_text_sha256": "041be6193ff9c51d539cff35b82692d960c1dd8c669b2db09b1d5f4a7af63a8e",
+        "statement": "Simprax nennt Waschmittel in der Hauptwaschkammer als ersten Anwendungsschritt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://simprax.com/de/produkt/pferdedecken-impraegnierung-wash-in/",
+        "source_title": "simprax – Pferdedecken Imprägnierung Wash-In",
+        "evidence_text": "Geben Sie je 100 Gramm Trockengewicht Ihrer Pferdedecke 20ml Spezialimprägnierung in das Weichspül- oder Imprägnierfach Ihrer Waschmaschine.",
+        "evidence_text_sha256": "0d16aecc2425956f7013625abe38b83ba496101757822ce266bddd72a9e6f841",
+        "statement": "Simprax dosiert 20 Milliliter Spezialimprägnierung pro 100 Gramm Trockengewicht der Pferdedecke in das Weichspül- beziehungsweise Imprägnierfach.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://simprax.com/de/produkt/pferdedecken-impraegnierung-wash-in/",
+        "source_title": "simprax – Pferdedecken Imprägnierung Wash-In",
+        "evidence_text": "Wählen Sie die niedrigste Umdrehungszahl im Schleudergang (max. 400 U/min)",
+        "evidence_text_sha256": "a6c50735dbdc399ea38652fe58c3feae9f4c2bf7176beb0a75a21e961ec2b3cd",
+        "statement": "Der Hersteller verlangt eine niedrige Schleuderdrehzahl von höchstens 400 Umdrehungen pro Minute.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://simprax.com/de/produkt/pferdedecken-impraegnierung-wash-in/",
+        "source_title": "simprax – Pferdedecken Imprägnierung Wash-In",
+        "evidence_text": "Geben Sie Ihre Pferdedecke in die Waschtrommel und starten Sie den Waschvorgang",
+        "evidence_text_sha256": "811c54ad7be265e46f3c531826f2fdc336d91b9bde4ec608d3205a2cea61e356",
+        "statement": "Simprax beschreibt das Einlegen der Pferdedecke in die Waschmaschine und den Waschstart.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://simprax.com/de/produkt/pferdedecken-impraegnierung-wash-in/",
+        "source_title": "simprax – Pferdedecken Imprägnierung Wash-In",
+        "evidence_text": "Lassen Sie die Pferdedecke bei Raumtemperatur trocknen. Die Verwendung eines Trockners ist ebenfalls möglich.",
+        "evidence_text_sha256": "02e18a0f3b8da9f8c4aeda4ce404b70c154ab2b5b66e570acc9a2877e94cec6a",
+        "statement": "Simprax empfiehlt das Trocknen bei Raumtemperatur und nennt einen Trockner als mögliche Alternative, falls das Deckenmaterial dies erlaubt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F6": {
+        "source_url": "https://simprax.com/de/produkt/pferdedecken-impraegnierung-wash-in/",
+        "source_title": "simprax – Pferdedecken Imprägnierung Wash-In",
+        "evidence_text": "Vermischen Sie je kg Trockengewicht Textilien ca. 150ml Imprägnierung mit 2 Litern Wasser in einem geeigneten Gefäß.",
+        "evidence_text_sha256": "195f81070a0b0f107d6d9bd8c8eaa12c6f94c391db8167d8aa44bb1058558dc1",
+        "statement": "Für das Tauchverfahren nennt Simprax etwa 150 Milliliter Imprägnierung pro Kilogramm Trockengewicht mit zwei Litern Wasser.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F7": {
+        "source_url": "https://simprax.com/de/produkt/pferdedecken-impraegnierung-wash-in/",
+        "source_title": "simprax – Pferdedecken Imprägnierung Wash-In",
+        "evidence_text": "Lassen Sie die Textilien etwa 10 Minuten einwirken und wringen Sie diese anschließend leicht aus.",
+        "evidence_text_sha256": "04e6585fdfd85c24ae07f9d2afb5682e4d69e620516bf000c519c9696022a7a9",
+        "statement": "Beim Tauchverfahren nennt Simprax etwa zehn Minuten Einwirkzeit und leichtes Auswringen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "anchor": "Pflege Regendecken",
+        "block": "steps"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdedecken-regendecken-faq/",
+        "anchor": "FAQ Regendecken",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-regendecken-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdedecken-regendecken-pflege",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Simprax",
+      "Pferdedecken",
+      "Imprägnierung",
+      "Wash-In",
+      "Waschmaschine",
+      "Dosierung",
+      "Trocknen",
+      "Tauchverfahren"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "LINEAR_SEQUENCE",
+      "rationale": "Die Simprax-Anwendung erfordert aufeinanderfolgende Handgriffe und Dosierung; eine Ablaufbeschreibung erklärt diese zuverlässiger als eine Matrix."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
