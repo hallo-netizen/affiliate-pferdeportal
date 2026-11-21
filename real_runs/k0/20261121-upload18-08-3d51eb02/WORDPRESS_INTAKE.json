@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche Grundausrüstung braucht ein Reiter wirklich?",
+      "target_keyword": "Was braucht ein Reiter unbedingt?",
+      "category": "ausruestung-grundlagen-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "3d51eb02a197a34aac7448f6beb6137f06cfb7187df55bae1a0b7becef27c7f4"
+    }
+  ],
+  "batch_sha256": "95936c494ac6fb87022c9d05beaf18c9415bf1c405e7508b5af81e030553fa76"
+}
