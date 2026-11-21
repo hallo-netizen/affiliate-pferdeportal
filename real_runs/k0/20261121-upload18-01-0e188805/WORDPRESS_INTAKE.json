@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Müssen Pferdedecken nach dem Waschen imprägniert werden?",
+      "target_keyword": "Muss ich Pferdedecken beim Waschen imprägnieren?",
+      "category": "pferdedecken-regendecken-pflege",
+      "article_type": "FAQ",
+      "plan_slot": "0e188805d485d9735536c828430ff8d927d28df6450d4d691343e4e9f6a32f6b"
+    }
+  ],
+  "batch_sha256": "edb5762ef59b5d696d06cc6b9b4662357d0f739618817272476eca58c4155333"
+}
