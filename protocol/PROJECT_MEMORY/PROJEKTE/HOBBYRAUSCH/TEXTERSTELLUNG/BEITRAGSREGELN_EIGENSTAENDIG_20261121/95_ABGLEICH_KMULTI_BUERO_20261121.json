@@ -70,5 +70,32 @@
   "files_modified_in_hobby_repo_only": [
     "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/TEXTERSTELLUNG/BEITRAGSREGELN_EIGENSTAENDIG_20261121/95_ABGLEICH_KMULTI_BUERO_20261121.json"
   ],
-  "no_runtime_changes": true
+  "no_runtime_changes": true,
+  "latest_editorial_handoff": {
+    "date": "2026-11-21",
+    "kmulti_office_commit": "2e10b0691daebbd17307b7c14bad18485343c5d1",
+    "kmulti_office_file": "offline_rules/portal_bindings/hobby_depot/HOBBYDEPOT_5_EIGENE_BEITRAGSREGELN_EINGANG_20261121.md",
+    "status": "DOCUMENTED_NOT_ACTIVATED",
+    "unique_common_rule_source": "05_GEMEINSAME_REGELN.json",
+    "common_rules_once": 12,
+    "typebooks": 5,
+    "type_specific_rules_total": 25,
+    "duplicate_general_rule_copies_removed": 48,
+    "readback_checks_passed": 18,
+    "original_wp_php_types_all_supported": true,
+    "original_wp_php_unsupported_types_rejected": [
+      "Inspiration",
+      "Porträt & Bericht"
+    ],
+    "untouched": [
+      "K0",
+      "K-Multi code and registry",
+      "WordPress original plugin",
+      "WordPress five original fields"
+    ],
+    "remaining_existing_kmulti_type_reference_mismatch": [
+      "Pflege",
+      "Anleitung"
+    ]
+  }
 }
