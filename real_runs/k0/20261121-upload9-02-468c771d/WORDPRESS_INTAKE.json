@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Darf man ein Pferd im eigenen Garten halten?",
+      "target_keyword": "Darf ich ein Pferd in meinem Garten halten?",
+      "category": "recht-finanzen-organisation",
+      "article_type": "FAQ",
+      "plan_slot": "0aa9c6cd5c875a1e1a17b8f0476ceaa6ce768d60a8c051c6eebe0c1d0c3095fa"
+    }
+  ],
+  "batch_sha256": "47840c42997d8001e4b9a3b5ed84d1013af90ea4df86350af5c1ebbbf5f50e01"
+}
