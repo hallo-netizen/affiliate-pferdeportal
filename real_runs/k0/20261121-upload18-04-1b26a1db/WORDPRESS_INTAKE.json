@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche Waschmaschinengröße braucht man für Pferdedecken?",
+      "target_keyword": "Wie groß muss eine Waschmaschine für Pferdedecken sein?",
+      "category": "alltags-pferde-haltungsformen",
+      "article_type": "FAQ",
+      "plan_slot": "1b26a1dbf12831204645ab6ad9cb3e4d9e31a1a7758ce1d7cdd4dfc6c97765fc"
+    }
+  ],
+  "batch_sha256": "a3d816a5ba2e1de92a9d57dc0937f7a12ff50d32901be4cf07a8ebcb5d4ef828"
+}
