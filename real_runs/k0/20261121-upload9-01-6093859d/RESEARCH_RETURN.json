@@ -14,8 +14,19 @@
   "issues": [
     {
       "fact_id": "F1",
-      "reason": "RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL",
-      "source_url": "https://www.lk-nienburg.de/formulare/fs.php?id=21500-901000385-21500"
+      "reason": "ORIGINAL_SOURCE_NOT_RETRIEVABLE"
+    },
+    {
+      "fact_id": "F2",
+      "reason": "ORIGINAL_SOURCE_NOT_RETRIEVABLE"
+    },
+    {
+      "fact_id": "F3",
+      "reason": "ORIGINAL_SOURCE_NOT_RETRIEVABLE"
+    },
+    {
+      "fact_id": "F4",
+      "reason": "ORIGINAL_SOURCE_NOT_RETRIEVABLE"
     }
   ],
   "next_action": "RESEARCH_AGAIN_OR_PROVE_ORIGINAL_SOURCE_AND_RESUBMIT_SAME_RUN",
