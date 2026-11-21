@@ -386,6 +386,28 @@ def conclusion_heading_repair_request(job, draft):
       'publish_allowed':False,
     }
 
+def list_bridge_repair_request(job, draft):
+    """Return the same draft to its writer when a list touches Fazit."""
+    if job.get('contract')!=JOB_CONTRACT or job.get('status')!='OPEN' or job.get('publish_allowed') is not False:
+        raise Blocked('K0_WRITER_JOB_INVALID')
+    if job.get('job_sha256')!=stable({k:v for k,v in job.items() if k!='job_sha256'}):
+        raise Blocked('K0_WRITER_JOB_HASH_INVALID')
+    if draft.get('contract')!=DRAFT_CONTRACT or draft.get('job_id')!=job.get('job_id') or draft.get('publish_allowed') is not False:
+        raise Blocked('K0_WRITER_DRAFT_JOB_MISMATCH')
+    return {
+      'contract':'K0_WRITER_REVISION_REQUEST_V1',
+      'status':'RETURN_TO_SAME_WRITER',
+      'job_id':job['job_id'],
+      'writer_job_sha256':job['job_sha256'],
+      'draft_sha256':_draft_sha(draft),
+      'rule_id':'writer.list_before_fazit_bridge',
+      'reason':'WRITER_LIST_BEFORE_FAZIT_BRIDGE_REQUIRED',
+      'minimum_bridge_words':18,
+      'instruction':'Rewrite the SAME draft: immediately after the final list before Fazit, add a meaningful, source-supported prose paragraph of at least 18 words ending with a complete sentence. Do not repeat the bullets as filler. Keep the original job, facts, links, title, category, article type, keyword and K0 rules. Respect the existing word and section limits, and resubmit this same draft to the original writer workflow.',
+      'publish_allowed':False,
+    }
+
+
 def seal(job, draft):
     if job.get('contract')!=JOB_CONTRACT or job.get('status')!='OPEN' or job.get('publish_allowed') is not False:
         raise Blocked('K0_WRITER_JOB_INVALID')
