@@ -1,0 +1,21 @@
+{
+  "contract": "K0_WRITER_REVISION_REQUEST_V1",
+  "status": "RETURN_TO_SAME_WRITER",
+  "job_id": "k0w-e2ce232447720bc51d336ebb",
+  "writer_job_sha256": "6408d7ad0e5846ec9137cba455a27c8d54d0dbf5bbf2f153d6a8c7739828a569",
+  "rule_id": "links.bound_pairs_exact",
+  "instruction": "Rewrite the SAME draft: each C-link label must be identical to the immutable official C target name. Rewrite surrounding sentence grammatically; do not change href, keyword, article type, categories, article ID, or K0 rules.",
+  "required_links": [
+    {
+      "role": "parent_category",
+      "href": "/category/ausruestung-grundlagen-beratung/",
+      "exact_text": "Beratung Ausrüstung Grundlagen"
+    },
+    {
+      "role": "further_information",
+      "href": "/category/ausbildung-reitweisen/",
+      "exact_text": "Ausbildung & Reitweisen"
+    }
+  ],
+  "publish_allowed": false
+}\n
