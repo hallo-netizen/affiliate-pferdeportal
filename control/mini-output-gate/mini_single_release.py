@@ -31,6 +31,9 @@ RELEASE_NAME = "MINI_EINMAL_REIMPORT.json"
 REPAIR_NAME = "REPARATUR.json"
 STATUS_NAME = "STAND.json"
 CONTRACT = "MINI_SINGLE_FILE_REIMPORT_V1"
+# Stable user-facing workflow ID. Do not change existing WordPress payload contract.
+WORKFLOW_NAME = "MINI-1DATEI"
+START_COMMAND = "MINI:1DATEI"
 
 
 def read(path: Path):
@@ -127,6 +130,33 @@ def _published_file(workspace: Path, original):
     return payload
 
 
+def assert_single_import_contract(payload, original):
+    """Mechanical release guard: ALL original items and stages inside ONE JSON.
+
+    No redecision of SEO intent, categories, article type, or title wording.
+    """
+    if payload.get("contract") != CONTRACT:
+        raise ValueError("MINI_ONE_JSON_CONTRACT_INVALID")
+    items = original.get("items") or []
+    rows = payload.get("decisions")
+    if (not isinstance(rows, list) or len(rows) != len(items)
+            or payload.get("item_count") != len(items)):
+        raise ValueError("MINI_ONE_JSON_ALL_ITEMS_REQUIRED")
+    for i, (item, row) in enumerate(zip(items, rows)):
+        if (not isinstance(row, dict) or row.get("index") != i
+                or row.get("pool_key") != str(item.get("pool_key") or "")
+                or row.get("original_item_sha256") != digest(canonical(item))
+                or not all(stage.lower() in row for stage in STAGES)):
+            raise ValueError(f"MINI_ONE_JSON_ITEM_INCOMPLETE:{i}")
+    release = payload.get("release")
+    if (not isinstance(release, dict)
+            or release.get("state") != "PASS"
+            or release.get("finished") is not True
+            or release.get("workers_in_order") != list(STAGES)):
+        raise ValueError("MINI_ONE_JSON_WORKFLOW_NOT_FINISHED")
+    return True
+
+
 def run(workspace: Path):
     workspace = workspace.resolve()
     output = workspace / RELEASE_DIR
@@ -159,6 +189,7 @@ def run(workspace: Path):
                 })
                 return ticket
             package = _published_file(workspace, original)
+            assert_single_import_contract(package, original)
     except (OSError, KeyError, TypeError, ValueError, json.JSONDecodeError) as exc:
         return _fail(workspace, "UNGUELTIGER_ARBEITSRAUM", str(exc))
     # Never distribute the internal stage files: the public folder has ONLY
@@ -170,7 +201,9 @@ def run(workspace: Path):
         "batch_id": original["batch_id"], "topic_count": len(original["items"]),
         "import_file": RELEASE_NAME,
         "import_sha256": digest((output / RELEASE_NAME).read_bytes()),
-        "release_count": 1, "wordpress_live_verified": False,
+        "release_count": 1, "user_import_file_count": 1,
+        "workflow_name": WORKFLOW_NAME, "start_command": START_COMMAND,
+        "wordpress_live_verified": False,
         "domain_redecision_performed": False,
     }
     write_json(output / "NACHWEIS.json", report)
@@ -229,9 +262,16 @@ def deliver(workspace: Path, output_file: Path, candidate: Path | None = None):
     if (report.get("status") != "FREIGEGEBEN"
             or report.get("contract") != CONTRACT
             or report.get("import_sha256") != digest(binary)
-            or report.get("release_count") != 1):
+            or report.get("release_count") != 1
+            or report.get("user_import_file_count") != 1
+            or report.get("workflow_name") != WORKFLOW_NAME):
         return {"status": "GESPERRT", "release_available": False,
                 "reason": "MINI_RELEASE_PROOF_INVALID"}
+    # Only one user-facing import JSON; NACHWEIS.json stays internal.
+    names = sorted(p.name for p in (workspace / RELEASE_DIR).iterdir())
+    if names != sorted([RELEASE_NAME, "NACHWEIS.json"]):
+        return {"status": "GESPERRT", "release_available": False,
+                "reason": "MINI_NOT_EXACTLY_ONE_IMPORT_JSON"}
     if candidate is not None:
         # This is the path that blocked the real 2026-11-21 CATEGORY-only file.
         if not candidate.is_file() or candidate.read_bytes() != binary:
