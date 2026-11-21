@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Simprax zur Imprägnierung von Pferdedecken richtig anwenden",
+      "target_keyword": "simprax pferdedecken imprägnierung",
+      "category": "pferdedecken-regendecken-pflege",
+      "article_type": "Anleitung",
+      "plan_slot": "91b1acd3514ff96e9a805f1c6847c2bac47b2aa1f2805f2ed6bf486291ec5595"
+    }
+  ],
+  "batch_sha256": "b909e558506dd5f1b2500a443784fe8f0a90b9f19523092612789e308fb6627d"
+}
