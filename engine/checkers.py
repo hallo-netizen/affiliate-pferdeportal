@@ -440,6 +440,9 @@ def table_receipts(article):
     count=len(tables); policy=cfg['presence_policy'][typ]
     omission_cfg=cfg.get('omission_exception') or {}
     decision=article.get('table_decision') or {}
+    k0_meaningful=(decision.get('k0_policy')=='K0_TABLE_MEANINGFUL_ONLY_V1')
+    if k0_meaningful and typ in ('Beratung','FAQ','Pflege'):
+        policy='OPTIONAL'
     exception_code=str(decision.get('exception_code') or '')
     exception_rationale=str(decision.get('rationale') or '').strip()
     allowed_exceptions=set(omission_cfg.get('allowed_codes') or [])
@@ -483,6 +486,14 @@ def table_receipts(article):
         tautological_rows=_table_tautological_action_rows(rows)
         tautology_ok=(not rows or len(tautological_rows)*2<len(rows))
         value_ok=(semantic.get('table.value_required_if_present')=='PASS' and tautology_ok)
+        if k0_meaningful:
+            # The claimed sources must appear on real table cells.
+            declared=set(decision.get('source_fact_ids') or [])
+            used=set()
+            for raw in re.findall(r'data-fact-ids="([^"]+)"',table):
+                used.update(raw.split())
+            value_ok=value_ok and len(declared)>=2 and declared.issubset(used)
+            evidence['k0_table_facts_covered']=sorted(declared.intersection(used))
         evidence['table_value_semantic_result']=semantic.get('table.value_required_if_present')
         evidence['tautological_action_rows']=tautological_rows
     decision_cfg=cfg['optional_decision']; decision=article.get('table_decision') or {}
@@ -497,6 +508,15 @@ def table_receipts(article):
             optional_decision_ok=optional_decision_ok and omission_exception_ok
             decision_evidence['allowed_exception_codes']=sorted(allowed_exceptions)
             decision_evidence['exception_code']=exception_code
+        if k0_meaningful and count==1:
+            optional_decision_ok=optional_decision_ok and (
+                len(str(decision.get('reader_benefit') or '').strip())>=30
+                and len(str(decision.get('why_not_prose') or '').strip())>=30
+                and isinstance(decision.get('comparison_axes'),list)
+                and len(decision['comparison_axes'])>=2
+                and isinstance(decision.get('source_fact_ids'),list)
+                and len(set(decision['source_fact_ids']))>=2
+            )
         decision_evidence['expected_decision']=expected_decision
     comparison_required_ok=(count==1 if typ=='Vergleich' else True)
     rows_out=[('table.required_for_comparison',comparison_required_ok,{'count':count,'policy':policy,'article_type':typ}),('table.presence_policy',presence_ok,{'count':count,'policy':policy}),('table.minimum_rows',min_rows_ok,{}),('table.structure',structure_ok,{}),
