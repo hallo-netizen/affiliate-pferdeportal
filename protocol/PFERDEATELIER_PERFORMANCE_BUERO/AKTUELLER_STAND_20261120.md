@@ -1617,3 +1617,18 @@ Wichtig:
 - Prüfungen: PHP 10/10 PASS, ZIP PASS, Root-Render PASS, Taxonomie-Render PASS, Direktbanner Browser-Render PASS, 505 gemeinsame Dateien byte-identisch; nur `pferde-template-kit.php` geändert, alte 1.50.623-Marktklasse durch 1.50.624-Dispatcher ersetzt.
 - Artefakt: `PFERDE_ATELIER_DESIGN_1.50.624_LIVE_ANZEIGENMARKT_URSACHENFIX.zip`
 - Prüfnachweis: `PFERDE_ATELIER_DESIGN_1.50.624_PRUEFNACHWEIS.json`
+
+
+## 2026-11-22 – Template Kit 1.50.625 bereinigter Design-Ausgangspunkt
+
+- Nutzer hat die Kubio-Gesamtumstellung auf der Testseite wieder vollständig rückgängig gemacht.
+- 1.50.624 bleibt damit inhaltlicher/visueller Ausgangsstand.
+- 1.50.625 entfernt die beiden Kubio-Werkzeuge aus dem Template-Kit: „Kubio Abhängigkeiten“ war in 1.50.624 bereits nicht mehr enthalten; „Kubio Gesamtumstellung“ wurde jetzt vollständig entfernt.
+- Entfernt: `includes/class-pftk-kubio-batch-v150619.php` und dessen einzige Require-Zeile.
+- Keine Migration, keine Datenbankänderung, keine Inhaltsänderung.
+- Gegen 1.50.624: 506 gemeinsame Dateien, davon 505 byte-identisch; einzige gemeinsame geänderte Datei `pferde-template-kit.php` (Version + entfernte Require-Zeile/Altkommentar). Keine neue Datei hinzugefügt.
+- PHP 9/9 PASS, ZIP PASS, keine Management-Page für die beiden Kubio-Werkzeuge mehr vorhanden.
+- Anzeigenmarkt-, Preise-, Footer- und übriger Designcode aus 1.50.624 bleibt unverändert.
+- Artefakt: `PFERDE_ATELIER_DESIGN_1.50.625_BEREINIGT_OHNE_KUBIO_WERKZEUGE.zip`
+- Prüfnachweis: `PFERDE_ATELIER_DESIGN_1.50.625_BEREINIGT_PRUEFNACHWEIS.json`
+- 1.50.625 ist ab jetzt der feste Ausgangspunkt für die nächste gebündelte Designrunde.
