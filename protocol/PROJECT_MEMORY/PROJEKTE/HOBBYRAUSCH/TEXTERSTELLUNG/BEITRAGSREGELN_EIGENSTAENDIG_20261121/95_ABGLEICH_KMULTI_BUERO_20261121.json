@@ -664,5 +664,66 @@
     "KMulti_production_enabled": false,
     "WordPress_import_released": false,
     "visual_callout_rendering_on_new_articles_technically_not_tested": true
+  },
+  "kmulti_actual_original_three_FAQ_full_chain_simulation_20261122": {
+    "date": "2026-11-22",
+    "github_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45005186728",
+    "github_repo": "hallo-netizen/k0-multiportal",
+    "branch": "k0-offline-rule-bindings-20261027",
+    "test_file": "offline_writer_dev/hobby_trial/test_kmulti_hobby_real_three_full_chain_simulation.py",
+    "technical_tests": {
+      "original_entry": 22,
+      "five_types_routing": 23,
+      "research_author_handoff": 18,
+      "rule_preflight": 61,
+      "new_original_entire_workflow_simulation": 10,
+      "total": 134,
+      "failed": 0
+    },
+    "integration_stages_real": [
+      "original WordPress MINI 3 FAQ orders",
+      "K-Multi original portal and type resolver",
+      "original common research order",
+      "existing source-review handoff TEST ONLY REPACKAGED",
+      "original author-queue join",
+      "reuse existing 3 FAQ authored bodies",
+      "original FAQ structural preview",
+      "real source GitHub audit 10 source pages 16 matching quotes in 30 paragraphs",
+      "real LanguageTool 6.8 receipts 3/3 with byte-identical HTML",
+      "121 rule catalog readiness 114 actual hard owner QA NOT CERTIFIED",
+      "real signed final release blocked due to actual unapproved Hobby rules",
+      "real one-file safe-delivery blocked without trusted QA key, stale prior import removed"
+    ],
+    "release_block_reason": "HOBBY_FORMAL_RULEBOOK_NOT_APPROVED",
+    "safe_delivery_block_reason": "TRUSTED_QA_PUBLIC_KEY_NOT_CONFIGURED_IN_RUNNER",
+    "mock_positive_test": "One test-only ephemeral signer with fabricated all-rule QA and fabricated approved books did create three-article WordPress JSON using original safe delivery; exact original article HTML and all five original WordPress fields stayed byte-identical. Test ZIP/form was immediately deleted and does not authorize import.",
+    "synthetic_other_four_types": true,
+    "original_three_articles_unchanged": true,
+    "source_owner_approved": false,
+    "original_114_hard_owner_checks_passed": false,
+    "trusted_real_final_signer_available": false,
+    "actual_import_file_created": false,
+    "release_state": "NO_VALUES_BLOCKED",
+    "publish_allowed": false,
+    "full_json_report_sha256": "ccebb494b6abe1dc0fbde3beac4463e917b381cf3213a0c49bff13f3b67fbe4c",
+    "report_artifact_name": "KMULTI-HOBBY-ORIGINAL-THREE-FAQ-ONE-FULL-CHAIN-REHEARSAL-NOT-IMPORT",
+    "original_PHP_receiver_prior_evidence": {
+      "file": "98_ERSTER_DREI_ARTIKEL_WP_IMPORT_FORMAT_PHP_TEST_20261121.md",
+      "tested_original_plugin_version": "Hobbydepot 0.4.24.18",
+      "actual_original_PHP_method": "PSERC_System4_Import::normalizePayload",
+      "previous_positive_and_negative_tests": 14,
+      "original_three_HTML_sha256_validated": true,
+      "prior_evidence_separate_from_today_simulation": true,
+      "live_WP_database_import_not_performed": true
+    },
+    "source_KMulti_office_document_commit": "9d049df4c9824126d6dd66ed469fab9d31a34f49",
+    "unchanged": [
+      "original K0 code",
+      "WordPress Hobbydepot plugin",
+      "current existing 3 article HTML",
+      "one central 121-rule catalog",
+      "other portal rules"
+    ],
+    "next_actual_work": "One original K-Multi QA owner must run missing semantic/factual research approval and all 114 HARD on each actual Hobby article under approved portal-specific values; trusted final QA certificate must then be produced. Do not turn mock receipts into production or re-run stages already completed."
   }
 }
