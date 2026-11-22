@@ -1,0 +1,209 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 10,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Wie heißt eine Trense für Pferde auf Englisch?",
+        "target_keyword": "trense pferd englisch",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "FAQ",
+        "plan_slot": "166e59dbfbeaed47424ff1e45933a9393805211a612e2dd992a44b72e488e426"
+      },
+      {
+        "title": "Trensen für empfindliche Pferde nach Passform auswählen",
+        "target_keyword": "trensen für empfindliche pferde",
+        "category": "trensen-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "6e44f6baa5da275249947cf4dea75d2ddaa5f6d3fa1f8f897f099d688cda52cf"
+      },
+      {
+        "title": "Westerntrensen für Pferde nach Bauart und Einsatz auswählen",
+        "target_keyword": "pferde trensen western",
+        "category": "trensen-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "6ed75aec05e64b3f4318ebd24214e8eb3cb02b2cb2a67b5596d1ebf85e057679"
+      },
+      {
+        "title": "Warum gähnen Pferde beim Anlegen einer Trense?",
+        "target_keyword": "Warum gähnen pferde beim trensen?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "3c845c92c3d421b55dc3816518fb74a0fd258edfb2ccd062db12704a34c11d47"
+      },
+      {
+        "title": "Merken Pferde, wenn ein anderes Pferd stirbt?",
+        "target_keyword": "Merken Pferde, wenn ein anderes Pferd stirbt?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "6c294356d94a2424852ec2ef051f83043b4c6da12be24c46766ea66406639415"
+      },
+      {
+        "title": "Brauchen Pferde auf der Weide ständig Wasser?",
+        "target_keyword": "Benötigen Pferde auf der Weide Wasser?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "073539bbf8ecfea1869f29558f5dd76087a8966752572775bf3fb8dc1448cb58"
+      },
+      {
+        "title": "Merken Pferde, wenn Menschen sie lieben?",
+        "target_keyword": "Merken Pferde, wenn man sie liebt?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "91d0750952cf65a5d4fad0a0c7e25b1664e9ac4b36974f0a7a25e568d023c7c8"
+      },
+      {
+        "title": "Welche Symptome können bei Pferden auf eine Depression hindeuten?",
+        "target_keyword": "Welche Symptome zeigen Pferde mit Depression?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "618ba5d3c59f1a2beddc7adc994b015f822cb024d00bf04fdbeac11576f63a5c"
+      },
+      {
+        "title": "Sollte man Pferde morgens auf die Weide stellen?",
+        "target_keyword": "Sollte man Pferde morgens auf die Weide stellen?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "ebb5f8d893c17f556f99eb8f74b286bb591fd9fd90a57505e554b51fccf12a9b"
+      },
+      {
+        "title": "Mullwatterollen für Pferdeverbände richtig auswählen und verwenden",
+        "target_keyword": "mullwatterolle pferd",
+        "category": "verbandsmaterial-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "6a09ff98519436441237cd423f0e797ddfcf5e70af856c44a1c3edbaa4df1e70"
+      }
+    ],
+    "batch_sha256": "ccb9f8160b65f749b2cd8a4ee54563d348503bcde8e8f0f7bb43327ce8c88b37"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Wie heißt eine Trense für Pferde auf Englisch?",
+        "target_keyword": "trense pferd englisch",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "FAQ",
+        "plan_slot": "166e59dbfbeaed47424ff1e45933a9393805211a612e2dd992a44b72e488e426"
+      },
+      "order_id": "TXE-e3420db8651ee16e42f278b7ab1cb076",
+      "article_id": "article:371b8e3273945d41eae54aa8",
+      "search_intent": "Englische Bezeichnung einer Trense für Pferde und ihre eindeutige Bedeutung klären."
+    },
+    {
+      "metadata_binding": {
+        "title": "Trensen für empfindliche Pferde nach Passform auswählen",
+        "target_keyword": "trensen für empfindliche pferde",
+        "category": "trensen-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "6e44f6baa5da275249947cf4dea75d2ddaa5f6d3fa1f8f897f099d688cda52cf"
+      },
+      "order_id": "TXE-6e09bdc84f99e9f94013b29256bdd404",
+      "article_id": "article:69aacd0792613f87b8c2b250",
+      "search_intent": "Trensen für besonders empfindliche Pferde anhand geeigneter Passform und möglicher Druckstellen auswählen."
+    },
+    {
+      "metadata_binding": {
+        "title": "Westerntrensen für Pferde nach Bauart und Einsatz auswählen",
+        "target_keyword": "pferde trensen western",
+        "category": "trensen-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "6ed75aec05e64b3f4318ebd24214e8eb3cb02b2cb2a67b5596d1ebf85e057679"
+      },
+      "order_id": "TXE-3a429a495d4535eb6c8ef6dbf5287ce7",
+      "article_id": "article:eefcf581c13afb518d583c6f",
+      "search_intent": "Westerntrensen für Pferde nach Bauart und Westernreiten von anderen Zäumungen unterscheiden."
+    },
+    {
+      "metadata_binding": {
+        "title": "Warum gähnen Pferde beim Anlegen einer Trense?",
+        "target_keyword": "Warum gähnen pferde beim trensen?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "3c845c92c3d421b55dc3816518fb74a0fd258edfb2ccd062db12704a34c11d47"
+      },
+      "order_id": "TXE-ac0c8f1f6980bb9d280d639520d426bb",
+      "article_id": "article:7049310a40b0e7e11b04006d",
+      "search_intent": "Mögliche Ursachen für Gähnen beim Anlegen einer Trense beim Pferd und das vorsichtige Einordnen des Verhaltens verstehen."
+    },
+    {
+      "metadata_binding": {
+        "title": "Merken Pferde, wenn ein anderes Pferd stirbt?",
+        "target_keyword": "Merken Pferde, wenn ein anderes Pferd stirbt?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "6c294356d94a2424852ec2ef051f83043b4c6da12be24c46766ea66406639415"
+      },
+      "order_id": "TXE-edb72c2e526a1f13123eeaeccb1350f1",
+      "article_id": "article:060729493dc12ad47508a297",
+      "search_intent": "Einordnen, wie Pferde auf den Tod eines Artgenossen reagieren können und welche Veränderungen der Herde beobachtbar sind."
+    },
+    {
+      "metadata_binding": {
+        "title": "Brauchen Pferde auf der Weide ständig Wasser?",
+        "target_keyword": "Benötigen Pferde auf der Weide Wasser?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "073539bbf8ecfea1869f29558f5dd76087a8966752572775bf3fb8dc1448cb58"
+      },
+      "order_id": "TXE-006085d34c64943c5c4b275d939a1407",
+      "article_id": "article:e70a00b8eabaccfb0fdf8460",
+      "search_intent": "Wasserversorgung von Pferden auf der Weide erklären und die Notwendigkeit von Trinkwasser klären."
+    },
+    {
+      "metadata_binding": {
+        "title": "Merken Pferde, wenn Menschen sie lieben?",
+        "target_keyword": "Merken Pferde, wenn man sie liebt?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "91d0750952cf65a5d4fad0a0c7e25b1664e9ac4b36974f0a7a25e568d023c7c8"
+      },
+      "order_id": "TXE-4a7fc6286f2c1e78fddc69547350f3e3",
+      "article_id": "article:727a29598ea35bd3e78fb55a",
+      "search_intent": "Verstehen, wie Pferde menschliche Zuwendung wahrnehmen und welche Verhaltenszeichen hierfür relevant sind."
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Symptome können bei Pferden auf eine Depression hindeuten?",
+        "target_keyword": "Welche Symptome zeigen Pferde mit Depression?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "618ba5d3c59f1a2beddc7adc994b015f822cb024d00bf04fdbeac11576f63a5c"
+      },
+      "order_id": "TXE-64ec18243862e96cbffdfdae27bc2fd1",
+      "article_id": "article:6083bf4c4fdb1f537445d2fd",
+      "search_intent": "Mögliche Anzeichen depressionsähnlichen Rückzugs beim Pferd ohne vorschnelle Diagnose einordnen."
+    },
+    {
+      "metadata_binding": {
+        "title": "Sollte man Pferde morgens auf die Weide stellen?",
+        "target_keyword": "Sollte man Pferde morgens auf die Weide stellen?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "ebb5f8d893c17f556f99eb8f74b286bb591fd9fd90a57505e554b51fccf12a9b"
+      },
+      "order_id": "TXE-299f7d35fcb9facdcbafacaa0c427813",
+      "article_id": "article:9c1a988c9e054fb2fce04150",
+      "search_intent": "Vor- und Nachteile des morgendlichen Weidegangs für Pferde unter Berücksichtigung von Bedingungen und Haltung erklären."
+    },
+    {
+      "metadata_binding": {
+        "title": "Mullwatterollen für Pferdeverbände richtig auswählen und verwenden",
+        "target_keyword": "mullwatterolle pferd",
+        "category": "verbandsmaterial-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "6a09ff98519436441237cd423f0e797ddfcf5e70af856c44a1c3edbaa4df1e70"
+      },
+      "order_id": "TXE-e86fc4a799cd020671e81a651da4a2aa",
+      "article_id": "article:bf03b5c0a0c4e1e9f52cf0d3",
+      "search_intent": "Zweck, Auswahl und Anwendung einer Mullwatterolle bei der Versorgung von Pferdebeinen erklären."
+    }
+  ],
+  "manifest_sha256": "4531c6dc3e32ab9994a4968bdcf08c383e2ea87f0eee12dc1853825657985646"
+}
