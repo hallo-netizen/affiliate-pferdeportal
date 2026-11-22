@@ -1583,3 +1583,20 @@ Wichtig:
 - Artefakt: PFERDE_ATELIER_DESIGN_1.50.622_LIVE_KUBIO_MARKT_LAYOUT.zip
 - Prüfnachweis: PFERDE_ATELIER_DESIGN_1.50.622_PRUEFNACHWEIS.json
 - Status: technischer Kandidat PASS. Live-Sichtprüfung von Button und Anzeigenmarkt-Kopf steht noch aus; erst danach Live-PASS.
+
+
+## 2026-11-22 – Template Kit 1.50.623 LIVE – Anzeigenmarkt-Korrektur vor Kubio-Gesamtumstellung
+
+- Live-Sichtprüfung 1.50.622: Kubio-Gesamtumstellungsbutton = PASS/aktiv; Anzeigenmarkt weiterhin fehlerhaft.
+- Ursache fehlender Anzeigenmarkt-Kopf: HivePress-Template 7784 "Listings" enthält noch Kubio-Image + Kubio-Shortcode. Bei deaktiviertem Kubio werden diese beiden Blöcke nicht ausgegeben. Dies ist exakt eines der 11 bereits bewachten Migrationsobjekte.
+- Echte Transformation von Objekt 7784 erneut ausgeführt: Ergebnis-Hash ca664aa01f73e8f2023868b5cb55c61ad6463aba9b2a4b38ad82d090bb1698cd = erwarteter geprüfter Zielhash.
+- Transformiertes Template enthält: Anzeigenmarkt-Bild, [pferde_atelier_anzeigenmarkt_intro], HivePress-Suche, Listings, Listing-Kategorien und [pferde_atelier_anzeigenmarkt_werbeplatz]; keine wp:kubio-Blöcke mehr.
+- 1.50.622-Markt-Top-Hilfsklasse entfernt; sie war kein Ersatz für den echten, im Listings-Template liegenden Anzeigenmarkt-Kopf.
+- Ursache zerschossener Direktwerbeplatz: anzeigenmarkt_werbeplatz_shortcode verschachtelte einen äußeren Link um start_ad_slot(), obwohl start_ad_slot() selbst bereits einen Link ausgibt. Zusätzlich stammte die Overlay-Gestaltung aus Startseiten-CSS, das auf /anzeigenmarkt/ nicht geladen wird. Dadurch wurde das Hintergrundbild korrekt gezeigt, Overlay-Text/Logo aber unformatiert darunter ausgegeben.
+- 1.50.623 rendert den Anzeigenmarkt-Direktwerbeplatz deshalb als genau EIN fertiges Wide-Bannerbild in genau EINEM Link. Keine Overlay-CSS-/JS-Abhängigkeit und keine verschachtelten Links.
+- 1.50.622-Korrekturen bleiben erhalten: genau eine Zeile nach Kurzbedingungen; Kubio-Button disabled nur bei echten Vorprüfungsfehlern.
+- Paketdifferenz 1.50.622 -> 1.50.623: 505 gemeinsame Dateien byte-identisch; nur pferde-template-kit.php geändert; obsolete class-pftk-market-top-v150622.php entfernt.
+- PHP-Syntax 9/9 PASS; ZIP-Integrität PASS.
+- Verbindliche Reihenfolge: 1.50.623 installieren -> Werkzeuge/Kubio Gesamtumstellung Vorprüfung BESTANDEN kontrollieren -> Umstellung SOFORT ausführen, bevor weitere Änderungen an den 11 bewachten Objekten erfolgen -> Frontend prüfen -> erst danach weitere Designänderungen.
+- Artefakt: PFERDE_ATELIER_DESIGN_1.50.623_LIVE_KUBIO_MARKT_KORREKTUR.zip
+- Prüfnachweis: PFERDE_ATELIER_DESIGN_1.50.623_PRUEFNACHWEIS.json
