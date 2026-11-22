@@ -1632,3 +1632,16 @@ Wichtig:
 - Artefakt: `PFERDE_ATELIER_DESIGN_1.50.625_BEREINIGT_OHNE_KUBIO_WERKZEUGE.zip`
 - Prüfnachweis: `PFERDE_ATELIER_DESIGN_1.50.625_BEREINIGT_PRUEFNACHWEIS.json`
 - 1.50.625 ist ab jetzt der feste Ausgangspunkt für die nächste gebündelte Designrunde.
+
+
+## 2026-11-22 – Template Kit 1.50.626 Preise-Hover-Regressionsfix
+
+- Nutzer-Liveprüfung von 1.50.625: Preise-Hover wieder grün statt bestätigtem Ocker.
+- Ursache im bereinigten Paket: Für Seite 7731 fehlte eine explizite seitenbezogene Hover/Fokus-Regel; dadurch konnte die grüne Theme/Kubio-Regel wieder gewinnen.
+- 1.50.626 ergänzt ausschließlich für `body.page-id-7731` eine harte Button-Hover/Fokus-Regel: Hintergrund und Rand `#C89214`, Schrift weiß. Grundzustand bleibt unverändert dunkeloliv.
+- Beide Kubio-Werkzeuge bleiben entfernt.
+- Gegen 1.50.625: 506 gemeinsame Dateien; nur `pferde-template-kit.php` (Version) und `includes/class-pftk-portal-content-layout-v150622.php` (Preise-Hover-Regel) geändert; keine Dateien hinzugefügt oder entfernt.
+- PHP 9/9 PASS, ZIP PASS.
+- Artefakt: `PFERDE_ATELIER_DESIGN_1.50.626_PREISE_HOVER_OCKER_BEREINIGT.zip`
+- Prüfnachweis: `PFERDE_ATELIER_DESIGN_1.50.626_PRUEFNACHWEIS.json`
+- Dieser Ocker-Hover auf Preise ist ab jetzt als Regressionstest zu behandeln und darf bei weiteren Designänderungen nicht zurückfallen.
