@@ -53,3 +53,23 @@ Nach Live-Installation dient 1.50.632 als gemeinsame Basis für Live und Test.
 - Artefakt: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.633_EINZELBEITRAG_SIDEBAR_NUR_TEST.zip`
 - Prüfnachweis: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.633_PRUEFNACHWEIS.json`
 - Status: **NUR TEST**. Visuelle Abnahme Desktop/Tablet steht aus; 1.50.632 bleibt bis dahin LIVE PASS.
+
+
+## 2026-11-22 – 1.50.633 FAIL / 1.50.634 Reparatur – NUR TEST
+
+- 1.50.633 wurde vom Nutzer sichtbar als **FAIL** bewertet: Einzelbeitrag deutlich zerschossen, linke Inhaltsspalte zu schmal, Seitenachse im weiteren Verlauf gebrochen.
+- Nachgewiesene Ursache: 1.50.633 verschob `entry-header` und `entry-content` aus Astras Original-DOM in einen neu erzeugten Layoutcontainer.
+- 1.50.633 ist damit verworfen und darf nicht Live gehen.
+- 1.50.634 wurde **direkt aus 1.50.632 LIVE PASS** gebaut, nicht aus 1.50.633.
+- Reparaturprinzip 1.50.634:
+  - Artikel, Überschrift, Hero und kompletter Fließtext bleiben vollständig in Astras Originalstruktur.
+  - Rechte Spalte wird nur als Geschwister von `#primary` in der bestehenden `.ast-container`-Struktur ergänzt.
+  - Vorhandene Anzeige und vorhandener Produktblock werden nur geklont; die Originale bleiben im DOM und werden nur Desktop/Tablet verborgen.
+  - Weiterführender Beitrag verwendet ausschließlich den bereits von Astra ermittelten gleichkategorischen Link; keine neue Query.
+  - Kein neuer Affiliate-Shortcode, keine neue Produktlogik, keine URL-Neuerzeugung, kein Sticky.
+  - Mobil unter 768 px erzeugt keinen aktiven Sidebar-Zustand und bleibt beim Originalstand.
+- Diff zu 1.50.632: 507 gemeinsame Dateien, 506 byteidentisch; nur `pferde-template-kit.php` geändert.
+- PHP 9/9 PASS, JS-Syntax PASS, ZIP-CRC PASS, statischer Sicherheitsvertrag PASS.
+- Artefakt: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.634_EINZELBEITRAG_SIDEBAR_REPARATUR_NUR_TEST.zip`
+- Prüfnachweis: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.634_PRUEFNACHWEIS.json`
+- **1.50.632 bleibt weiterhin der letzte LIVE-PASS-Fallback.**
