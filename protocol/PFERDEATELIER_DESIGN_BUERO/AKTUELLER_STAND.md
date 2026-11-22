@@ -145,3 +145,25 @@ Nach Live-Installation dient 1.50.632 als gemeinsame Basis für Live und Test.
 - Artefakt: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.638_EINZELBEITRAG_SIDEBAR_RESPONSIVE_NUR_TEST.zip`
 - Prüfnachweis: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.638_PRUEFNACHWEIS.json`
 - Status: **NUR TEST**. Letzter LIVE PASS bleibt 1.50.632.
+
+
+## 2026-11-22 – 1.50.639 Einzelbeitrag: reine Darstellung vorhandener Ausgaben – NUR TEST
+
+- 1.50.638 nicht abgenommen: Responsive weiterhin unzureichend; Nutzer fordert klare Trennung zwischen Design und Affiliate-Zuordnungs-/Verteilungslogik.
+- Verbindliche Grenze ab 1.50.639:
+  - Designplugin darf vorhandene Artikel-Ausgaben nur darstellen/verschieben/klonen.
+  - Keine neuen Produkt-Slots, keine neue Produktauswahl, keine Provider-Mischung, keine Rohmeta-Auswertung.
+  - Affiliate-Zentrale bleibt allein verantwortlich für Produktanzahl, Anbieter, Zuordnung, Verteilung und Tracking.
+  - Weiterführende Ziele muessen echte Einzelbeitraege sein; keine Kategorien oder Portalpfade als Ersatz.
+- Produktdarstellung Desktop/grosse Tablets: Es wird ausschließlich der bereits fertig gerenderte `.ppar-article-product-block` des Artikels geklont. Das Original wird nur solange die Sidebar aktiv ist verborgen.
+- Produktdarstellung Mobil/schmal: Kein Ersatzblock mehr. Der originale `.ppar-article-product-block` bleibt unverändert sichtbar.
+- Related Desktop/grosse Tablets: ausschließlich Astras bereits gerenderter echter Related-Post; keine eigene Query.
+- Related Mobil/schmal: Astras Originalausgabe bleibt sichtbar und wird nur optisch als Bildkarte dargestellt. Der frühere Filter, der das Featured-Image-Markup entfernte, ist nicht mehr aktiv.
+- Amazon-Sidebar: vorhandener echter Amazon-Link/Bild werden wiederverwendet; Text auf `Passende Angebote entdecken` gekürzt; sichtbare Amazon-Wortmarke + Smile; CTA `Bei Amazon ansehen` einzeilig.
+- Responsive: Sidebar-Aktivierung nur bei effektiver Breite >=1000px und Contentbreite >=960px. Effektive Breite = Minimum aus innerWidth, documentElement.clientWidth, visualViewport.width und outerWidth. Dadurch wird auch ein schmal gezogenes Browserfenster trotz Zoom korrekt erkannt.
+- Sicherheitsnachweis aktiver Sidebar-Pfad: 0x `category_product_1/2/3`, 0x `do_shortcode`, 0x `WP_Query`, 0x `get_posts`, 0x `url_to_postid`, 0x `get_term_by`.
+- Diff gegen 1.50.638: 507 gemeinsame Dateien, 506 byteidentisch; nur `pferde-template-kit.php` geändert.
+- PHP 9/9 PASS, JavaScript-Syntax PASS, ZIP-CRC PASS, statischer Vertrag PASS.
+- Artefakt: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.639_EINZELBEITRAG_REINES_DESIGN_NUR_TEST.zip`
+- Prüfnachweis: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.639_PRUEFNACHWEIS.json`
+- Status: **NUR TEST**. Letzter LIVE PASS bleibt 1.50.632.
