@@ -1645,3 +1645,25 @@ Wichtig:
 - Artefakt: `PFERDE_ATELIER_DESIGN_1.50.626_PREISE_HOVER_OCKER_BEREINIGT.zip`
 - Prüfnachweis: `PFERDE_ATELIER_DESIGN_1.50.626_PRUEFNACHWEIS.json`
 - Dieser Ocker-Hover auf Preise ist ab jetzt als Regressionstest zu behandeln und darf bei weiteren Designänderungen nicht zurückfallen.
+
+
+## 2026-11-22 – Template Kit 1.50.627 Kubio vollständig bereinigt + Preise-Hover
+
+- Korrektur der falschen Aussage aus 1.50.625/626: Entfernt waren nur die eigenen Kubio-Werkzeuge; ein verbleibender Kubio-Menü-/Toolbar-Eintrag konnte weiterhin von anderer Quelle registriert werden.
+- 1.50.627 bereinigt deshalb robust statt nur dateibasiert:
+  - die alten eigenen Kubio-Werkzeuge bleiben entfernt;
+  - falls `kubio/plugin.php` noch aktiv ist, wird es im Admin einmalig deaktiviert;
+  - alle Admin-Menü-/Untermenüeinträge, deren Titel oder Slug „kubio“ enthält, werden mit maximal später Priorität entfernt;
+  - alle Adminbar-Knoten, deren ID/Titel/Href „kubio“ enthält, werden ebenfalls entfernt;
+  - der alte Template-Kit-spezifische Kubio-Frontend-Asset-Prune-Pfad wurde als nun überflüssiger Kubio-Sondercode entfernt.
+- Preise-Hover wurde nicht mehr nur auf Buttons beschränkt:
+  - normale Textlinks: Hover/Fokus `#C89214`;
+  - Button-Controls: Hover/Fokus Hintergrund + Rahmen `#C89214`, Text weiß.
+- Browser-Computed-Style-Test PASS: Textlink rgb(200,146,20); Button-Hintergrund rgb(200,146,20); Button-Text rgb(255,255,255).
+- Admin-Kubio-Cleanup-Simulation PASS: Kubio-Menü/Untermenü entfernt, Nicht-Kubio-Werkzeuge bleiben erhalten, Kubio-Deaktivierung wird ausgelöst.
+- Gegen 1.50.626 sind nur zwei Dateien verändert: `pferde-template-kit.php` und `includes/class-pftk-portal-content-layout-v150622.php`. Keine Datei hinzugefügt/gelöscht.
+- PHP 9/9 PASS, ZIP PASS.
+- Anzeigenmarkt-, Footer-/Rechtsseiten-, Preise-Inhalt, Affiliate-Logik und Datenstruktur bleiben unverändert.
+- Artefakt: `PFERDE_ATELIER_DESIGN_1.50.627_BEREINIGT_KUBIO_PREISE_HOVER.zip`
+- Prüfnachweis: `PFERDE_ATELIER_DESIGN_1.50.627_PRUEFNACHWEIS.json`
+- Dieser Stand ersetzt 1.50.625/626 als bereinigte Designbasis.
