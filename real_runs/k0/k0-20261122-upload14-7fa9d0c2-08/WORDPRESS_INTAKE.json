@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Mineralfutter für stoffwechselempfindliche Pferde auswählen",
+      "target_keyword": "mineralfutter für stoffwechsel empfindliche pferde",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "d53bc7b2d3a55187e348a40ec4fe6c65ddfccb65e368a4690bcfcd171c9933ee"
+    }
+  ],
+  "batch_sha256": "46d2b229cf72f19bad4d289c60669526205d98d400d412ee7809e4a19d6b3e8e"
+}
