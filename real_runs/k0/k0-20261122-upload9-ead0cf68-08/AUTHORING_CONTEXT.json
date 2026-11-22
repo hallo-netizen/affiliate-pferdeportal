@@ -98,8 +98,8 @@
       },
       {
         "role": "further_information",
-        "href": "/gesundheit/",
-        "anchor": "Gesundheit",
+        "href": "/category/seniorenfutter-faq/",
+        "anchor": "FAQ Seniorenfutter",
         "block": "further_information"
       }
     ],
@@ -109,7 +109,7 @@
         "active": true
       },
       {
-        "href": "/gesundheit/",
+        "href": "/category/seniorenfutter-faq/",
         "active": true
       }
     ],
@@ -129,8 +129,7 @@
       "Wasserlassen",
       "Gewichtsverlust",
       "Körperzustand",
-      "Fressverhalten",
-      "Verhalten im Alltag"
+      "Fütterung im Krankheitsfall"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
