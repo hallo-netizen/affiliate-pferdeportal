@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Merken Pferde, wenn Menschen sie lieben?",
+      "target_keyword": "Merken Pferde, wenn man sie liebt?",
+      "category": "pferde-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "91d0750952cf65a5d4fad0a0c7e25b1664e9ac4b36974f0a7a25e568d023c7c8"
+    }
+  ],
+  "batch_sha256": "03a3c84e22e9f12303765feaea050eeb4d438b9a5a50ec3c59995b920043fa02"
+}
