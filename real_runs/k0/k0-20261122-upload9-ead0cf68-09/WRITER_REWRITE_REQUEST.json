@@ -3,10 +3,19 @@
   "status": "RETURN_TO_SAME_WRITER",
   "job_id": "k0w-1e80c14c2edb40e5b502ff39",
   "writer_job_sha256": "781beb684009fa8345f837db6df9ab5dc5d02f6f00e571b545cc10899e82cb2a",
-  "draft_sha256": "735e4162d70a417a4430d2bdca7499fa66d8a0e21347871499b7c431047a0d00",
-  "rule_id": "writer.list_before_fazit_bridge",
-  "reason": "WRITER_LIST_BEFORE_FAZIT_BRIDGE_REQUIRED",
-  "minimum_bridge_words": 18,
-  "instruction": "Rewrite the SAME draft: immediately after the final list before Fazit, add a meaningful, source-supported prose paragraph of at least 18 words ending with a complete sentence. Do not repeat the bullets as filler. Keep the original job, facts, links, title, category, article type, keyword and K0 rules. Respect the existing word and section limits, and resubmit this same draft to the original writer workflow.",
+  "rule_id": "links.bound_pairs_exact",
+  "instruction": "Rewrite the SAME draft: each C-link label must be identical to the immutable official C target name. Rewrite surrounding sentence grammatically; do not change href, keyword, article type, categories, article ID, or K0 rules.",
+  "required_links": [
+    {
+      "role": "parent_category",
+      "href": "/category/pferdegesundheit-verstehen/",
+      "exact_text": "Pferdegesundheit verstehen"
+    },
+    {
+      "role": "further_information",
+      "href": "/fuetterung/fuetterung-mineral-und-ergaenzer/mineralfutter-fuer-pferde/",
+      "exact_text": "Mineralfutter für Pferde"
+    }
+  ],
   "publish_allowed": false
-}
+}\n
