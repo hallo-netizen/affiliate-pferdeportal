@@ -1,0 +1,152 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Verbandsmaterial für Pferde bei Krämer auswählen",
+    "target_keyword": "verbandsmaterial pferd krämer",
+    "category": "verbandsmaterial-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "7fa361b7a9dad01b0e0865f308ad7bf55b50521d7dd6140c3d9d4cf2139ee37f"
+  },
+  "content_profile": {
+    "search_intent": "Angebot von Verbandsmaterial für Pferde beim genannten Händler Krämer beurteilen"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/emergency-medicine-and-critical-care/emergency-medicine-in-horses/trauma-and-first-aid-in-horses",
+          "source_title": "MSD Veterinary Manual – Trauma and First Aid in Horses"
+        }
+      ],
+      "claims": [
+        "Auch beim Kauf bei einem bestimmten Händler zählt vor allem eine sterile nicht haftende Wundauflage.",
+        "Für bestimmte tierärztliche Schienenverbände wird nicht elastisches Fixierband beschrieben.",
+        "Eine passende Polsterung ist für die Vermeidung von Druckstellen wichtig."
+      ],
+      "fresh_research_reference_date": "2026-11-22"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "verbandsmaterial pferd krämer",
+      "topic": "Verbandsmaterial für Pferde bei Krämer auswählen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "verbandsmaterial-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Verbandsmaterial im Sortiment des genannten Händlers anhand der medizinischen Eignung beurteilen, ohne ungeprüfte Verfügbarkeit zu behaupten",
+      "decision_criteria": [
+        "sterile Wundabdeckung",
+        "passende Polsterung und Fixierung",
+        "Produktbeschreibung und Lagerzustand"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/emergency-medicine-and-critical-care/emergency-medicine-in-horses/trauma-and-first-aid-in-horses",
+        "source_title": "MSD Veterinary Manual – Trauma and First Aid in Horses",
+        "evidence_text": "The wound should be dressed with a sterile, nonadherent bandage",
+        "evidence_text_sha256": "4c8b5d206ed18103aae4895e8872fab78a67cfedca27af87a9ab9ecf6f7f1eef",
+        "statement": "Auch beim Kauf bei einem bestimmten Händler zählt vor allem eine sterile nicht haftende Wundauflage.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/emergency-medicine-and-critical-care/emergency-medicine-in-horses/trauma-and-first-aid-in-horses",
+        "source_title": "MSD Veterinary Manual – Trauma and First Aid in Horses",
+        "evidence_text": "using four to six layers of overlapping, nonelastic tape",
+        "evidence_text_sha256": "6b40c6e6e449074444db3c226b066ed02909549d6a3efc4562618c812c800176",
+        "statement": "Für bestimmte tierärztliche Schienenverbände wird nicht elastisches Fixierband beschrieben.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/emergency-medicine-and-critical-care/emergency-medicine-in-horses/trauma-and-first-aid-in-horses",
+        "source_title": "MSD Veterinary Manual – Trauma and First Aid in Horses",
+        "evidence_text": "The splint should be padded proximally to prevent skin injury.",
+        "evidence_text_sha256": "1a10f4b13eaf271362d001cc8188457912f8777de7667da877abf132f5ddfc6c",
+        "statement": "Eine passende Polsterung ist für die Vermeidung von Druckstellen wichtig.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/verbandsmaterial-beratung/",
+        "anchor": "verbandsmaterial beratung",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/gesundheit/gesundheit-erste-hilfe/verbandsmaterial/",
+        "anchor": "Verbandsmaterial",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/verbandsmaterial-beratung/",
+        "active": true
+      },
+      {
+        "href": "/gesundheit/gesundheit-erste-hilfe/verbandsmaterial/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "verbandsmaterial-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Krämer",
+      "Verbandsmaterial",
+      "Wundauflage",
+      "Polsterung",
+      "Fixierband",
+      "Kaufentscheidung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Eine fachlich strukturierte Checkliste beantwortet die konkrete Frage besser als eine künstliche Vergleichstabelle ohne neuen Nutzen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
