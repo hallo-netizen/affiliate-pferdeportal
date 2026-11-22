@@ -102,7 +102,7 @@
       },
       {
         "role": "further_information",
-        "href": "/wissen/wissen-buecher-und-ratgeber/pferdehaltung-grundlagen/",
+        "href": "/training/training-hilfsmittel/trainingsplaene-problempferde/",
         "anchor": "/category/pferde-verstehen/",
         "block": "further_information"
       }
@@ -113,7 +113,7 @@
         "active": true
       },
       {
-        "href": "/wissen/wissen-buecher-und-ratgeber/pferdehaltung-grundlagen/",
+        "href": "/training/training-hilfsmittel/trainingsplaene-problempferde/",
         "active": true
       }
     ],
@@ -136,7 +136,12 @@
       "Gesundheit",
       "Beobachtung",
       "Sozialkontakt",
-      "Gruppenzusammensetzung"
+      "Gruppenzusammensetzung",
+      "Verhaltensänderungen",
+      "Auslöser",
+      "Schmerzen",
+      "Verhaltensauffälligkeiten",
+      "Belastung"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
