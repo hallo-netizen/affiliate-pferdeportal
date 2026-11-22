@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie viel Mineralfutter braucht ein Pferd pro Tag?",
+      "target_keyword": "Wie viel Mineralfutter braucht ein Pferd pro Tag?",
+      "category": "mineralfutter-fuer-pferde-faq",
+      "article_type": "FAQ",
+      "plan_slot": "cbfc05c231a4ed70c9ea7804678bd8f32efb97df06e50978eba3288d685d78a0"
+    }
+  ],
+  "batch_sha256": "c0d9def09397a658538a4cf3cb7f5e6b09548857e26d9145248dff497c8cace2"
+}
