@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Mineralfutter für alte Pferde sinnvoll auswählen",
+      "target_keyword": "mineralfutter für alte pferde",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "8f214c96c71baf3f95870f20fd15f7a360bc133e4928fcc372439f9dcb8b4519"
+    }
+  ],
+  "batch_sha256": "7d5b9dbe10522feda71d96a17db3025747828b857bf2bc93f95d1bbd29894078"
+}
