@@ -1,0 +1,152 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welche Symptome können bei Pferden auf eine Depression hindeuten?",
+    "target_keyword": "Welche Symptome zeigen Pferde mit Depression?",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "618ba5d3c59f1a2beddc7adc994b015f822cb024d00bf04fdbeac11576f63a5c"
+  },
+  "content_profile": {
+    "search_intent": "Mögliche Anzeichen depressionsähnlichen Rückzugs beim Pferd ohne vorschnelle Diagnose einordnen."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/diagnosing-behavior-problems-in-horses",
+          "source_title": "MSD Veterinary Manual – Diagnosing Behavior Problems"
+        },
+        {
+          "source_url": "https://www.worldhorsewelfare.org/what-we-do/sport-and-leisure-horses/our-vision-for-the-responsible-involvement-of-horses-in-sport",
+          "source_title": "World Horse Welfare – Responsible Sport"
+        }
+      ],
+      "claims": [
+        "Stress kann das normale Verhalten und die Gesundheit eines Pferdes verändern.",
+        "Verhaltensprobleme und gesundheitliche Ursachen müssen gemeinsam betrachtet werden.",
+        "Regelmäßige positive Sozialkontakte zu anderen Pferden sind wichtig."
+      ],
+      "fresh_research_reference_date": "2026-11-22"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welche Symptome zeigen Pferde mit Depression?",
+      "topic": "Welche Symptome können bei Pferden auf eine Depression hindeuten?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Symptome können bei Pferden auf eine Depression hindeuten?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/diagnosing-behavior-problems-in-horses",
+        "source_title": "MSD Veterinary Manual – Diagnosing Behavior Problems",
+        "evidence_text": "stress, which can alter normal body functions, behavior, and immune responses",
+        "evidence_text_sha256": "12e170c50011f8e8750f621a4225851b1c5b63c2d4386c4ddbd626d15d522dd3",
+        "statement": "Stress kann das normale Verhalten und die Gesundheit eines Pferdes verändern.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/diagnosing-behavior-problems-in-horses",
+        "source_title": "MSD Veterinary Manual – Diagnosing Behavior Problems",
+        "evidence_text": "Some “health” problems faced by horses are associated with behavior problems",
+        "evidence_text_sha256": "5391ef161d05bb53fce00ce3285b60d174fe042c803a06c3a69e68d73f0fa42d",
+        "statement": "Verhaltensprobleme und gesundheitliche Ursachen müssen gemeinsam betrachtet werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.worldhorsewelfare.org/what-we-do/sport-and-leisure-horses/our-vision-for-the-responsible-involvement-of-horses-in-sport",
+        "source_title": "World Horse Welfare – Responsible Sport",
+        "evidence_text": "Have daily positive social interactions with other horses.",
+        "evidence_text_sha256": "d314a1b90af40f7b76ae7117d10d6cd59517fd1ec581a0d1bf199879861b981d",
+        "statement": "Regelmäßige positive Sozialkontakte zu anderen Pferden sind wichtig.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "pferdegesundheit-verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferde-verstehen/",
+        "anchor": "/category/pferde-verstehen/",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/category/pferde-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Depression",
+      "Anzeichen",
+      "Rückzug",
+      "Stress",
+      "Verhalten",
+      "Gesundheit",
+      "Beobachtung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Es gibt keine einzelne allgemeingültige Symptomentabelle für eine Depression bei Pferden; mögliche Zeichen bedürfen fachlicher Abklärung."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
