@@ -238,3 +238,19 @@ Nach Live-Installation dient 1.50.632 als gemeinsame Basis für Live und Test.
 - Artefakt: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.642_WEITERFUEHRENDE_BEITRAEGE_NUR_TEST.zip`
 - Prüfnachweis: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.642_PRUEFNACHWEIS.json`
 - Status: **NUR TEST**. 1.50.641 bleibt der zuletzt sichtbar nahezu abgenommene Teststand; 1.50.632 bleibt letzter vollständiger LIVE PASS.
+
+
+## 2026-11-22 – 1.50.642 Nutzerabnahme PASS / LIVE-Freigabe
+
+- Nutzer hat 1.50.642 sichtbar geprüft und als **PASS** bestätigt.
+- Damit sind im Einzelbeitrag abgenommen:
+  - Responsive-Verhalten,
+  - Amazon-Anzeige,
+  - Produktanzeige,
+  - bis zu zwei weiterführende echte Beiträge mit Bild.
+- 1.50.642 ist ab jetzt die verbindliche Designbasis und für Live freigegeben.
+- Gesichert im Design-Büro als:
+  - `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.642_LIVE_PASS.zip`
+  - `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.642_LIVE_PASS_PRUEFNACHWEIS.json`
+- Verbindliche Sicherheitsgrenze bleibt: keine Änderung an Affiliate-Zuordnung, Produkt-/Provider-/Ranking-/Verteilungsregeln, Tracking oder Kategoriezuordnungen durch das Designplugin.
+- 1.50.632 bleibt historischer Fallback vor dem Einzelbeitragsumbau; 1.50.642 ist nun der aktuelle PASS-Stand.
