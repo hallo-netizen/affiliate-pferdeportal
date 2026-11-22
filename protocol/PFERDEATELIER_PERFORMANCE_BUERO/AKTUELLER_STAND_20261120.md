@@ -1817,3 +1817,11 @@ Wichtig:
 - Originale Artikel-/Affiliate-Elemente bleiben unangetastet und werden nur bei aktiver Sidebar verborgen; unter 1000px Originalzustand.
 - 506/507 Dateien byteidentisch zu 1.50.636; PHP 9/9 PASS; JS PASS; ZIP PASS. Kein visueller Chromium-PASS behauptet, da Browser im Container wegen DBus nicht zuverlässig startet.
 - Design-Büro enthält 1.50.637 ZIP + Prüfnachweis. Letzter LIVE PASS bleibt 1.50.632.
+
+
+## 2026-11-22 – Design 1.50.638 Einzelbeitrag responsive Sidebar
+
+- 1.50.637 noch nicht PASS: Amazon-Bild fehlte, Anbieter wurden falsch auf Amazon reduziert, mobile/Weiterführungs-Ausgabe unvollständig.
+- 1.50.638: Amazon übernimmt vorhandenes Bild; Produkte zeigen vorhandene eBay/idealo/Amazon-Angebotslinks aus zentralem Artikelplan/Router-Slots; Weiterführung fällt bei fehlendem zweitem Post auf den redaktionell gesetzten Portalpfad zurück; unter 1000px Originalquellen sichtbar, fehlende Empfehlungen optional unter dem Artikel.
+- 506/507 Dateien byteidentisch zu 1.50.637; PHP 9/9 PASS; JS PASS; ZIP PASS.
+- Design-Büro enthält ZIP + Prüfnachweis. Letzter LIVE PASS bleibt 1.50.632.
