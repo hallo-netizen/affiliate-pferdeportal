@@ -1752,3 +1752,13 @@ Wichtig:
 - Artefakt: PFERDE_ATELIER_DESIGN_1.50.632_JOURNAL_8_SQL_LIMIT_NUR_TEST.zip
 - Prüfnachweis: PFERDE_ATELIER_DESIGN_1.50.632_PRUEFNACHWEIS.json
 - Status: NUR TEST; sichtbare Nutzerabnahme der 8er-Grenze steht aus.
+
+
+## 2026-11-22 – 1.50.632 Nutzerabnahme PASS / Live-Freigabe
+
+- Nutzer hat 1.50.632 auf der Testseite sichtbar geprüft und als PASS bestätigt.
+- Journal-Design PASS: Hero/Überschrift, Bannerbreite, Amazon-Kachel, Paginierung.
+- Beitragsgrenze PASS: maximal 8 echte Beiträge pro Seite.
+- 1.50.632 ist damit Live-freigegeben und ab jetzt verbindliche Designbasis.
+- Archiviert als `PFERDE_ATELIER_DESIGN_1.50.632_LIVE_PASS.zip` plus Prüfnachweis im Design-Büro.
+- Weitere Designänderungen bauen ausschließlich auf 1.50.632 auf.
