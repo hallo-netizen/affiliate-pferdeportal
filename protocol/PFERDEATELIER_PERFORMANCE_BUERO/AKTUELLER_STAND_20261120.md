@@ -1863,3 +1863,20 @@ Wichtig:
 - Einzelbeitrag: Responsive PASS, Amazon PASS, Produkte PASS, bis zu zwei weiterführende echte Beiträge mit Bild PASS.
 - 1.50.642 ist für Live freigegeben und im Design-Büro als LIVE_PASS ZIP + Prüfnachweis gespeichert.
 - Neue verbindliche Designbasis: 1.50.642. Historischer Fallback vor Einzelbeitragsumbau: 1.50.632.
+
+
+## 2026-11-22 – Performanceaudit nach Plugin-Aufräumung: 6.72.369 als Query-Regression bestätigt
+
+- Aktuell installiert laut Pluginliste: Affiliate-Zentrale 6.72.369, Template Kit 1.50.642, HivePress 1.8.3, Texterstellung 0.4.47; Kubio deaktiviert.
+- Struktur ist tatsächlich schlanker: aktiver Pluginbestand 35 -> 31, Hook-Callbacks 6642 -> 6244, durchschnittliche Queries Gesamtmix 443 -> 394.
+- Trotzdem aktueller Lauf langsamer; Server-Load ca. 150 -> ca. 281 ist ein separater globaler Wartezeitfaktor.
+- Wichtigster belegter lokaler Fehler: 6.72.369 ist bereits durch den eigenen Live-A/B-Nachweis widerlegt. Produktseiten stiegen damals u.a. Pferdesättel 320 -> 1421 Queries, Sattel 298 -> 838, Trensen 296 -> 828, Satteldecken 311 -> 734.
+- Aktueller Lauf reproduziert das Muster: Pferdesättel 1429 Queries, Sattel 846, Trensen 810.
+- Ursache 6.72.369: update_post_meta_cache=false plus schmaler ppar_campaign_data-Leser verhindert die normale WordPress-Sammelbefüllung; spätere get_post_meta-Aufrufe laden Kampagnen-Metadaten einzeln nach.
+- 6.72.370 entfernt ausschließlich diesen fehlerhaften schmalen Metadatenweg und stellt den historischen Sammelcache wieder her. Methoden-Harness 710 Kampagnenposts: 25/50/75/100 % Folgezugriffe 187/362/537/712 Queries -> jeweils 2; Kampagnenrecords identisch.
+- 6.72.371 baut auf 6.72.370 auf und bündelt zusätzlich nachgewiesene redundante Control-/Health-Arbeit und frühe Banner-Aussortierung. Reale Pferdeatelier-Struktur-Simulation: 0 Ergebnisabweichungen; Hub/Journal deutliche Wiederholungsreduktion.
+- Eigene Paketnachprüfung 22.11.: 66 Dateien, 23 PHP, Lint 23/23 PASS, Actions 176, Filter 30, Shortcodes 6. 369 -> 371: 1551 vorhandene Funktionskörper unverändert. Entfernt werden nur drei private Narrow-Meta-Hilfsfunktionen aus dem nachgewiesen fehlerhaften 6.72.369-Lesepfad; hinzu kommen zwei reine Request-Cache-Helfer. User-facing Kernfunktionen render_affiliate_slot_for_context, render_banner, build_click_tracking_url, campaign_slot_allowed, assignment_selection_for_slot, article_plan_apply_to_content, filter_the_content, select_category_product_campaign_fast_v672171 und category_product_postprocess_candidates_v672365 sind exakt unverändert.
+- Produktions-Schreibprimitive 369 -> 371 unverändert; keine Änderung an Design-Plugin, Journal-Layout, HivePress, Texterstellung, Tracking, Auswahl-/Ranking-/Provider-/Placement-/Fallback-/Veto-/Health-/Renderingregeln.
+- Journal-Design 1.50.629-632 betrifft nur acht redaktionelle Kategoriearchive; /journal/ Root fällt aus diesen Guards heraus. Daher aktuell kein Journal-Design-Rückbau.
+- Nächster kontrollierter Schritt: ausschließlich Affiliate-Zentrale 6.72.371 installieren, keine weitere Änderung gleichzeitig; danach genau ein PASSIV-Gesamtlauf. Harte Kontrolle: Produktseiten müssen aus dem 6.72.369-Querybereich zurückfallen; Wall-Time wegen Serverlast nur sekundär bewerten.
+- Freigegebenes Paket: PFERDEATELIER_AFFILIATE_6.72.371_KONSOLIDIERT_ROOTCAUSE_PERFORMANCE.zip, SHA-256 832b7b82f1b190e06250cab922b4e9ab6ee0abb7661097991ae7eca7ce87a456.
