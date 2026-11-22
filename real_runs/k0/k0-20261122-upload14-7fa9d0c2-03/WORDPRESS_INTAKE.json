@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Mineralfutter für Ekzemerpferde gezielt auswählen",
+      "target_keyword": "mineralfutter für ekzemer pferde",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "1a1ced0dc4d21496a90cd5641d2e0f95ce9677514fb5f0cd16f2851bf4bfcda7"
+    }
+  ],
+  "batch_sha256": "38cbcb04cf91e7fb779738790091055ef147f07ea022917a2b6c14892f76225d"
+}
