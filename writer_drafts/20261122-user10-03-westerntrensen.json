@@ -9,7 +9,17 @@
     "exception_code": "",
     "rationale": "Ohne konkret benannte Modelle lassen sich Unterschiede der Westerntrensen besser im erklärenden Text als in einer scheinpräzisen Vergleichstabelle erläutern."
   },
-  "lt_authoritative_terms": [],
-  "revision_count": 4,
+  "lt_authoritative_terms": [
+    "Zäumungen",
+    "Westernreitern",
+    "Rodeodisziplinen",
+    "Westerntrensen",
+    "Rodeoprüfungen",
+    "Westerntrense",
+    "Westernprüfungen",
+    "Rodeosport",
+    "Westerndisziplinen"
+  ],
+  "revision_count": 5,
   "publish_allowed": false
 }
