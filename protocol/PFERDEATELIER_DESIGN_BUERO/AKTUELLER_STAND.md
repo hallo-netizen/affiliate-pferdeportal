@@ -218,3 +218,23 @@ Nach Live-Installation dient 1.50.632 als gemeinsame Basis für Live und Test.
 - Artefakt: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.641_SIDEBAR_PRODUKTE_RESTORE_RESPONSIVE_PASS_NUR_TEST.zip`
 - Prüfnachweis: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.641_PRUEFNACHWEIS.json`
 - Status: **NUR TEST**. Responsive 1.50.640 wurde vom Nutzer bereits als PASS bestätigt; Produkt/Weiterlesen in 1.50.641 noch visuell abzunehmen.
+
+
+## 2026-11-22 – 1.50.642 Weiterführende Beiträge – NUR TEST
+
+- Nutzerprüfung 1.50.641: **fast PASS**. Responsive PASS, Amazon/Produkte sichtbar; einzig weiterführende Beiträge fehlen.
+- 1.50.642 ändert ausschließlich den Weiterführungsbereich. Produktdarstellung, Amazon-Karte und Responsive-Aktivierung sind gegenüber 1.50.641 unverändert.
+- Ursache des leeren Blocks: In der WordPress-Exportdatei enthält z. B. `mueslis-fuer-pferde-faq` nur den aktuellen Beitrag; ebenso `heunetze-faq`. Eine ausschließlich auf die Blattkategorie begrenzte Related-Suche kann dort keinen zweiten Beitrag liefern.
+- Neue Reihenfolge für maximal zwei sichtbare Empfehlungen:
+  1. bereits direkt als echter veröffentlichter Post verlinkter Beitrag,
+  2. anderer veröffentlichter Post aus bereits verlinkter Related-/FAQ-Kategorie bzw. aktueller Beitragskategorie,
+  3. nur wenn dort nichts vorhanden ist: andere veröffentlichte Posts aus demselben bereits im Artikel gesetzten Hauptthema (z. B. /fuetterung/), gewichtet gegen Titel/Inhalt des aktuellen Artikels.
+- Sichtbares Ziel ist immer ein veröffentlichter WordPress-Beitrag; Kategorien und Seiten werden niemals als Weiterführungsziel ausgegeben.
+- Maximal 2 Karten, jeweils Beitragsbild + Titel. Desktop/große Tablets rechts unter den Produkten; schmale/mobile Ansicht unter dem Artikel, falls kein Astra-Related-Block vorhanden ist.
+- Sicherheitsgrenze: keine Änderung an Affiliate-Regeln, Produktzuordnung, Provider-/Ranking-/Verteilung, Tracking oder Kategoriezuordnungen.
+- Diff 1.50.641 -> 1.50.642: 507 Dateien / 507 Dateien; 506 byteidentisch; nur `affiliate-portal-template-kit/pferde-template-kit.php` geändert; keine Datei hinzugefügt/gelöscht.
+- Unverändert nach Hash-/Blockvergleich: Responsive-`viewportWidth/canActivate`, `buildProducts`, `buildAd`.
+- PHP 9/9 PASS, Sidebar-JavaScript-Syntax PASS, ZIP-CRC PASS.
+- Artefakt: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.642_WEITERFUEHRENDE_BEITRAEGE_NUR_TEST.zip`
+- Prüfnachweis: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.642_PRUEFNACHWEIS.json`
+- Status: **NUR TEST**. 1.50.641 bleibt der zuletzt sichtbar nahezu abgenommene Teststand; 1.50.632 bleibt letzter vollständiger LIVE PASS.
