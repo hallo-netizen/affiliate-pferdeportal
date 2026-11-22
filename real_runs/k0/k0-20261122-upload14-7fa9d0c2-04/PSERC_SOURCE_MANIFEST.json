@@ -1,0 +1,285 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 14,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "In welchem Pferdefutter ist besonders viel Eiweiß?",
+        "target_keyword": "In welchem Pferdefutter ist viel Eiweiß?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "ad2cff1ddb483c7bb1d9667df284acbd4e8b1e69169ed707ce61dfc5866d3f4a"
+      },
+      {
+        "title": "Welche Symptome zeigen Pferde bei einem Eiweißüberschuss?",
+        "target_keyword": "Welche Symptome zeigen Pferde bei einem Eiweißüberschuss?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "4193637e3348baa637a4421bf028e135cf1ac70999fbf3dfcfc8ba6de0716d82"
+      },
+      {
+        "title": "Mineralfutter für Ekzemerpferde gezielt auswählen",
+        "target_keyword": "mineralfutter für ekzemer pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "1a1ced0dc4d21496a90cd5641d2e0f95ce9677514fb5f0cd16f2851bf4bfcda7"
+      },
+      {
+        "title": "Mineralfutter für übergewichtige Pferde bedarfsgerecht wählen",
+        "target_keyword": "mineralfutter für dicke pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "7591a4317d4f1f429e5fd8ec1a3520a6bcb1c120dd857672578e286c437873b7"
+      },
+      {
+        "title": "Mineralfutter für spanische Pferde nach Bedarf auswählen",
+        "target_keyword": "mineralfutter für spanische pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "6d7033787b31b8cf11ddd72e84398fcd548eebd1d7ba7bf4f8a8f02bb9883d42"
+      },
+      {
+        "title": "Mineralfutter für Pferde passend zur Futterration wählen",
+        "target_keyword": "mineralfutter für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "fd7655a3db45f8e1b48ff19714833d7fe5138b6f755d1752fc6b7b3f77fd4b79"
+      },
+      {
+        "title": "Mineralfutter für alte Pferde sinnvoll auswählen",
+        "target_keyword": "mineralfutter für alte pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "8f214c96c71baf3f95870f20fd15f7a360bc133e4928fcc372439f9dcb8b4519"
+      },
+      {
+        "title": "Mineralfutter für stoffwechselempfindliche Pferde auswählen",
+        "target_keyword": "mineralfutter für stoffwechsel empfindliche pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "d53bc7b2d3a55187e348a40ec4fe6c65ddfccb65e368a4690bcfcd171c9933ee"
+      },
+      {
+        "title": "Mineralfutter für Pferde mit EMS richtig wählen",
+        "target_keyword": "mineralfutter für ems pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "c02a61edce5b632bc00eeb7f4865955c213f36f7bdaf32aa8c692e89a925ea6e"
+      },
+      {
+        "title": "Mineralfutter für Pferde mit Hufrehe bedarfsgerecht auswählen",
+        "target_keyword": "mineralfutter für hufrehe pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "92493c819f187f62b58c952b6298948e79122e2c1184b9d990c7addbcb48ace5"
+      },
+      {
+        "title": "Mineralfutter für Pferde mit Cushing sorgfältig auswählen",
+        "target_keyword": "mineralfutter für cushing-pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "03d7243c7770e838b74dd0c150aae5330cb7da880d7f7026fd746ec6d92c94fd"
+      },
+      {
+        "title": "Mineralfutter mit Selen für Pferde passend dosiert auswählen",
+        "target_keyword": "mineralfutter mit selen für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "6ab275af929e4d1b518120d1cc7be302d4a3dbf35d284ab32f35910938bfc02f"
+      },
+      {
+        "title": "Mineralfutter für Pferde mit PSSM2 gezielt auswählen",
+        "target_keyword": "mineralfutter für pssm2 pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "0893eedd1224a34bf303cf7881a4f432ffc97d2a0dc2148c744171363f2b3b21"
+      },
+      {
+        "title": "Mineralfutter für Pferde mit PSSM bedarfsgerecht auswählen",
+        "target_keyword": "mineralfutter für pssm pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "9b35029e9dc1fbad329d5661844ddabeeee5ed9cf792c7d767d6828d42a3b859"
+      }
+    ],
+    "batch_sha256": "7fa9d0c2a556d64187a70e4c3e48f0df714da69741865870e0646030684ec013"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "In welchem Pferdefutter ist besonders viel Eiweiß?",
+        "target_keyword": "In welchem Pferdefutter ist viel Eiweiß?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "ad2cff1ddb483c7bb1d9667df284acbd4e8b1e69169ed707ce61dfc5866d3f4a"
+      },
+      "order_id": "TXE-657f8595f7f67054d026d84e05d86ae4",
+      "article_id": "article:e55762ce6d8f0dd066ed9ee3",
+      "search_intent": "Eiweißreiche Pferdefutterarten und Unterschiede im Proteingehalt erklären"
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Symptome zeigen Pferde bei einem Eiweißüberschuss?",
+        "target_keyword": "Welche Symptome zeigen Pferde bei einem Eiweißüberschuss?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "4193637e3348baa637a4421bf028e135cf1ac70999fbf3dfcfc8ba6de0716d82"
+      },
+      "order_id": "TXE-0cae2596fb0504958c26d978ac5bc24f",
+      "article_id": "article:b30ee487e46762cf6ad334fd",
+      "search_intent": "Mögliche Anzeichen einer zu hohen Eiweißaufnahme beim Pferd erklären, ohne aus Symptomen eine Diagnose abzuleiten"
+    },
+    {
+      "metadata_binding": {
+        "title": "Mineralfutter für Ekzemerpferde gezielt auswählen",
+        "target_keyword": "mineralfutter für ekzemer pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "1a1ced0dc4d21496a90cd5641d2e0f95ce9677514fb5f0cd16f2851bf4bfcda7"
+      },
+      "order_id": "TXE-25c6779819bce02092ba402047d0182b",
+      "article_id": "article:4c0c9271708cbf4ed152fcfe",
+      "search_intent": "Kauf- und Auswahlkriterien für Mineralfutter bei Pferden mit Sommerekzem erklären, ohne Heilversprechen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Mineralfutter für übergewichtige Pferde bedarfsgerecht wählen",
+        "target_keyword": "mineralfutter für dicke pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "7591a4317d4f1f429e5fd8ec1a3520a6bcb1c120dd857672578e286c437873b7"
+      },
+      "order_id": "TXE-1e8b3f64660533322e00c8fb176b157b",
+      "article_id": "article:3982f36974ed04f077a48d03",
+      "search_intent": "Auswahl von Mineralfutter für übergewichtige Pferde anhand des Bedarfs und der Gesamtration"
+    },
+    {
+      "metadata_binding": {
+        "title": "Mineralfutter für spanische Pferde nach Bedarf auswählen",
+        "target_keyword": "mineralfutter für spanische pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "6d7033787b31b8cf11ddd72e84398fcd548eebd1d7ba7bf4f8a8f02bb9883d42"
+      },
+      "order_id": "TXE-deaa3d030ff4da85bf3f5abe8958753e",
+      "article_id": "article:07aa137b731aacf1579e98db",
+      "search_intent": "Mineralfutter für spanische Pferde nach individuellem Bedarf statt allein nach Pferdeherkunft auswählen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Mineralfutter für Pferde passend zur Futterration wählen",
+        "target_keyword": "mineralfutter für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "fd7655a3db45f8e1b48ff19714833d7fe5138b6f755d1752fc6b7b3f77fd4b79"
+      },
+      "order_id": "TXE-20a1666b6f1ad8a3fab1952c4fa1e9e8",
+      "article_id": "article:b20da8dc2a651215463bc01c",
+      "search_intent": "Grundlegende Auswahl eines Mineralfutters für Pferde anhand vorhandener Fütterung und Ergänzungsbedarf, unabhängig vom vorhandenen Produktvergleich"
+    },
+    {
+      "metadata_binding": {
+        "title": "Mineralfutter für alte Pferde sinnvoll auswählen",
+        "target_keyword": "mineralfutter für alte pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "8f214c96c71baf3f95870f20fd15f7a360bc133e4928fcc372439f9dcb8b4519"
+      },
+      "order_id": "TXE-677a4f0ef3e06dac265019714cec5ac6",
+      "article_id": "article:0bf3af0e13299324e139b71e",
+      "search_intent": "Mineralfutter für alte Pferde unter Berücksichtigung von Lebensalter und tatsächlichem Bedarf auswählen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Mineralfutter für stoffwechselempfindliche Pferde auswählen",
+        "target_keyword": "mineralfutter für stoffwechsel empfindliche pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "d53bc7b2d3a55187e348a40ec4fe6c65ddfccb65e368a4690bcfcd171c9933ee"
+      },
+      "order_id": "TXE-077158ed2d0ea87e44f2fa93ce875dd8",
+      "article_id": "article:c1c1a3051f9b84df1a56267d",
+      "search_intent": "Auswahl von Mineralfutter für stoffwechselempfindliche Pferde allgemein, ohne eine einzelne Erkrankung gleichzusetzen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Mineralfutter für Pferde mit EMS richtig wählen",
+        "target_keyword": "mineralfutter für ems pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "c02a61edce5b632bc00eeb7f4865955c213f36f7bdaf32aa8c692e89a925ea6e"
+      },
+      "order_id": "TXE-7f6953b6468d2627fbb8992e6a87769c",
+      "article_id": "article:3b17731f830930cee7535d4d",
+      "search_intent": "Bedarfsgerechte Auswahl von Mineralfutter bei Equinem Metabolischem Syndrom EMS"
+    },
+    {
+      "metadata_binding": {
+        "title": "Mineralfutter für Pferde mit Hufrehe bedarfsgerecht auswählen",
+        "target_keyword": "mineralfutter für hufrehe pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "92493c819f187f62b58c952b6298948e79122e2c1184b9d990c7addbcb48ace5"
+      },
+      "order_id": "TXE-de1dc162e45f05ab6de619d0a3ec60ea",
+      "article_id": "article:b3407b3923109a9ae2dc8683",
+      "search_intent": "Mineralfutter für Pferde mit Hufrehe nach tierärztlich abgeklärtem Bedarf auswählen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Mineralfutter für Pferde mit Cushing sorgfältig auswählen",
+        "target_keyword": "mineralfutter für cushing-pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "03d7243c7770e838b74dd0c150aae5330cb7da880d7f7026fd746ec6d92c94fd"
+      },
+      "order_id": "TXE-4d4cd044d03894575350724f0e4f30ea",
+      "article_id": "article:9596a87c7852ba40ff4b6386",
+      "search_intent": "Mineralfutter für Pferde mit Cushing beziehungsweise PPID bedarfsgerecht auswählen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Mineralfutter mit Selen für Pferde passend dosiert auswählen",
+        "target_keyword": "mineralfutter mit selen für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "6ab275af929e4d1b518120d1cc7be302d4a3dbf35d284ab32f35910938bfc02f"
+      },
+      "order_id": "TXE-76f5d84c2233053248ab84562f23cf54",
+      "article_id": "article:a9052d44d3bf4db63dfaf7e9",
+      "search_intent": "Bei der Wahl selenhaltiger Mineralfutter für Pferde auf tatsächlichen Bedarf und Gesamtzufuhr achten"
+    },
+    {
+      "metadata_binding": {
+        "title": "Mineralfutter für Pferde mit PSSM2 gezielt auswählen",
+        "target_keyword": "mineralfutter für pssm2 pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "0893eedd1224a34bf303cf7881a4f432ffc97d2a0dc2148c744171363f2b3b21"
+      },
+      "order_id": "TXE-14ccc2c775d9730fdded85d727a7e9d2",
+      "article_id": "article:b3d876c07e4a327f2e17fd70",
+      "search_intent": "Mineralfutter für Pferde mit PSSM2 gezielt einordnen, ohne PSSM2 automatisch mit PSSM1 gleichzusetzen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Mineralfutter für Pferde mit PSSM bedarfsgerecht auswählen",
+        "target_keyword": "mineralfutter für pssm pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "9b35029e9dc1fbad329d5661844ddabeeee5ed9cf792c7d767d6828d42a3b859"
+      },
+      "order_id": "TXE-7f3fd6d802d08f624ce88230ebf45f81",
+      "article_id": "article:5f5f1333dda97994ce6f076d",
+      "search_intent": "Mineralfutter für Pferde mit PSSM allgemein nach Diagnose und tatsächlichem Bedarf auswählen; PSSM2-Spezialthema getrennt halten"
+    }
+  ],
+  "manifest_sha256": "97b2bc9f4246af6e138aa4608d175a8463f51852a5815032be6d5977749f78ab"
+}
