@@ -1,0 +1,152 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Verbandsmaterial für Pferde richtig zusammenstellen",
+    "target_keyword": "verbandsmaterial pferde",
+    "category": "verbandsmaterial-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "b03704bb8ad100faa28c26e1aa8916610a84656f000d191b31f58bbd4befe0fc"
+  },
+  "content_profile": {
+    "search_intent": "Grundauswahl und Zusammenstellung von Verbandsmaterial für Pferde"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/emergency-medicine-and-critical-care/emergency-medicine-in-horses/trauma-and-first-aid-in-horses",
+          "source_title": "MSD Veterinary Manual – Trauma and First Aid in Horses"
+        }
+      ],
+      "claims": [
+        "Die direkt aufliegende Wundabdeckung sollte steril und möglichst nicht haftend sein.",
+        "Bei gepolsterten Verbänden wird Rollenwatte als Polstermaterial verwendet.",
+        "Erste Wundversorgung zielt auf die Verringerung von Verunreinigungen und die Vermeidung erneuter Kontamination."
+      ],
+      "fresh_research_reference_date": "2026-11-22"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "verbandsmaterial pferde",
+      "topic": "Verbandsmaterial für Pferde richtig zusammenstellen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "verbandsmaterial-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Ein sicheres Grundsortiment an Verbandsmaterial für die Pferdehaltung zusammenstellen",
+      "decision_criteria": [
+        "Sterilität der Wundauflagen",
+        "geeignete Polsterung und Fixierung",
+        "Lagerung und schnelle Verfügbarkeit"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/emergency-medicine-and-critical-care/emergency-medicine-in-horses/trauma-and-first-aid-in-horses",
+        "source_title": "MSD Veterinary Manual – Trauma and First Aid in Horses",
+        "evidence_text": "The wound should be dressed with a sterile, nonadherent bandage",
+        "evidence_text_sha256": "4c8b5d206ed18103aae4895e8872fab78a67cfedca27af87a9ab9ecf6f7f1eef",
+        "statement": "Die direkt aufliegende Wundabdeckung sollte steril und möglichst nicht haftend sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/emergency-medicine-and-critical-care/emergency-medicine-in-horses/trauma-and-first-aid-in-horses",
+        "source_title": "MSD Veterinary Manual – Trauma and First Aid in Horses",
+        "evidence_text": "A modified Robert Jones bandage is placed using roll cotton",
+        "evidence_text_sha256": "7ebb470bf14c33b108bb91912a19c5818423d1289622803286bb2b34a8a94706",
+        "statement": "Bei gepolsterten Verbänden wird Rollenwatte als Polstermaterial verwendet.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/emergency-medicine-and-critical-care/emergency-medicine-in-horses/trauma-and-first-aid-in-horses",
+        "source_title": "MSD Veterinary Manual – Trauma and First Aid in Horses",
+        "evidence_text": "The goals of initial wound care are to decontaminate the wound as much as possible",
+        "evidence_text_sha256": "c33146df5eea32467c5a1166ba279b73efc49a0cbd7bfa0b4995b2a9ea715fd9",
+        "statement": "Erste Wundversorgung zielt auf die Verringerung von Verunreinigungen und die Vermeidung erneuter Kontamination.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/verbandsmaterial-beratung/",
+        "anchor": "verbandsmaterial beratung",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/gesundheit/gesundheit-erste-hilfe/verbandsmaterial/",
+        "anchor": "Verbandsmaterial",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/verbandsmaterial-beratung/",
+        "active": true
+      },
+      {
+        "href": "/gesundheit/gesundheit-erste-hilfe/verbandsmaterial/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "verbandsmaterial-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Verbandsmaterial",
+      "Wundauflage",
+      "Polsterwatte",
+      "Fixierbinde",
+      "Notfallmaterial",
+      "Verbandset"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Eine fachlich strukturierte Checkliste beantwortet die konkrete Frage besser als eine künstliche Vergleichstabelle ohne neuen Nutzen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
