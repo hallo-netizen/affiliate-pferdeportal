@@ -106,3 +106,25 @@ Nach Live-Installation dient 1.50.632 als gemeinsame Basis für Live und Test.
 - Artefakt: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.636_EINZELBEITRAG_SIDEBAR_SICHTBARKEITSFIX_NUR_TEST.zip`
 - Prüfnachweis: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.636_PRUEFNACHWEIS.json`
 - Status: **NUR TEST**. 1.50.632 bleibt letzter LIVE PASS.
+
+
+## 2026-11-22 – 1.50.636 FAIL / 1.50.637 harter Sidebar-Fix – NUR TEST
+
+- 1.50.636 vom Nutzer sichtbar als **FAIL** bewertet: doppelte Werbekennzeichnung, abgeschnittener Text, Amazon-CTA weiterhin umgebrochen, kein weiterführender Artikel, keine Produktkarten.
+- Ursachen jetzt getrennt nachgewiesen:
+  1. Werbekachel wurde als kompletter vorhandener DOM-Block geklont; dadurch kamen interne Werbe-/Layout-Chrome und alte Breitenregeln mit.
+  2. Produktkarten wurden im Designplugin aus Rohmetadaten nachgebaut statt den zentralen Affiliate-Router rendern zu lassen.
+  3. Weiterführungsresolver erkannte nur `/category/...`; echte K0-Verweise im Testartikel zeigen aber auf normale Portalpfade wie `/fuetterung/fuetterung-raufutter/heunetze/`.
+- 1.50.637 repariert diese drei Ursachen:
+  - Amazon-Sidebar-Kachel wird nicht mehr geklont. Verwendet wird nur der vorhandene echte Amazon-Link; Darstellung ist neu und sauber: genau ein Ocker-`WERBUNG`, Text `Passende Angebote zum Thema entdecken`, CTA `Bei Amazon ansehen` ausdrücklich einzeilig, kein innerer Rahmen.
+  - Produktkarten kommen über die bestehenden Shortcodes `pp_affiliate_slot` für `category_product_1`, `category_product_2`, `category_product_3`. Auswahl, Provider-Mix und Tracking bleiben damit vollständig im Affiliate-Router. Das Designplugin extrahiert nur die final gerenderten Links/Bilder/Titel für die kompakte Sidebar-Darstellung.
+  - Weiterführungsresolver unterstützt jetzt Kategoriepfade, direkte Beitragslinks und normale Portal-Seitenpfade. Für einen Portalpfad wird der bestehende Seiten-Slug deterministisch gegen die vorhandenen redaktionellen Kategorie-Suffixe `beratung, vergleich, anwendung, faq, pflege, kosten, lagerung` aufgelöst; daraus genau ein anderer veröffentlichter Beitrag.
+  - Originale Inline-Werbung, Produktblock und Astra-Related werden nur bei aktiver Sidebar verborgen und unter 1000px wieder unverändert eingeblendet.
+  - Der Artikel selbst bleibt vollständig in Astras Original-DOM; Sidebar bleibt Geschwister von `#primary`.
+- Beleg Heunetz-Testartikel: Artikelplan ready; ausgewähltes Produkt 16454; PASS-Produkte u.a. 16458, 16456, 16460; K0-Verweise auf `/fuetterung/fuetterung-raufutter/` und `/fuetterung/fuetterung-raufutter/heunetze/`.
+- Diff gegen 1.50.636: 507 gemeinsame Dateien, 506 byteidentisch; nur `pferde-template-kit.php` geändert.
+- PHP 9/9 PASS, JavaScript-Syntax PASS, ZIP-CRC PASS, statischer Vertragscheck PASS.
+- Lokaler Chromium-Visualtest konnte wegen der Container-/DBus-Umgebung nicht zuverlässig gestartet werden; deshalb ausdrücklich **kein behaupteter visueller Browser-PASS**.
+- Artefakt: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.637_EINZELBEITRAG_SIDEBAR_HARTFIX_NUR_TEST.zip`
+- Prüfnachweis: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.637_PRUEFNACHWEIS.json`
+- Status: **NUR TEST**. Letzter LIVE PASS bleibt 1.50.632.
