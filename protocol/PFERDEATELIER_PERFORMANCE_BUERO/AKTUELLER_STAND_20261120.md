@@ -1667,3 +1667,22 @@ Wichtig:
 - Artefakt: `PFERDE_ATELIER_DESIGN_1.50.627_BEREINIGT_KUBIO_PREISE_HOVER.zip`
 - Prüfnachweis: `PFERDE_ATELIER_DESIGN_1.50.627_PRUEFNACHWEIS.json`
 - Dieser Stand ersetzt 1.50.625/626 als bereinigte Designbasis.
+
+
+## 2026-11-22 – Template Kit 1.50.628 Design-Helfer konsolidiert
+
+- Ausgangspunkt: 1.50.627 = vom Nutzer sichtgeprüfter PASS-Stand.
+- Vollständige aktive Pluginliste gegen reine Design-/Frontend-Helfer geprüft.
+- Konsolidiert werden genau zwei separate Design-Helfer:
+  1. `Pferde Atelier – Anzeigenmarkt & Journal Breadcrumbs` 1.1.1
+  2. `Canonical Table Contract V1` 1.1.0
+- Breadcrumbs: Journal war bereits zentral im Template-Kit. Für `hp_listing_category` ist jetzt die fehlende Anzeigenmarkt-Kette zentral ergänzt: Startseite -> Anzeigenmarkt -> vorhandene Taxonomie-Eltern -> aktueller Term. Keine neue, unbelegte Breadcrumb-Logik für einzelne Listings erfunden.
+- Tabellen: der bereits bindende Template-Kit-Vertrag (dunkeloliv #35422A, 1px Zelltrenner, 2px Headertrenner) wird als zentraler Tabellenvertrag auch im Gutenberg-Editor geladen. Bestehende spezifischere Artikel-/Preise-Regeln behalten Vorrang.
+- Nach Installation deaktiviert das Template-Kit die beiden alten Helfer nur, löscht sie aber nicht.
+- Explizit NICHT zusammengeführt: `Pferde Atelier HivePress Anzeigensuche` 2.1.5-ajax-category-label und `Pferde Atelier – HivePress Anzeigensuche` 1.0.1. Beide enthalten Suchfunktion und sind kein reines Design; ihre mögliche Zusammenlegung gehört in einen separaten Funktions-/Plugin-Aufräumschritt.
+- Weitere reine Design-Helfer wurden in der vollständigen Pluginliste nicht gefunden. Bildzentrale, Glossar, Pferderassen, Affiliate-Zentrale, HivePress, Relevanssi, Shortcodes usw. bleiben getrennte Funktionssysteme.
+- Diff gegen 1.50.627: 506 gemeinsame Dateien, davon 505 byte-identisch. Geändert: nur `pferde-template-kit.php`. Neu: `assets/canonical-table-contract-v150628.css`. Keine bestehende Datei gelöscht.
+- PHP 9/9 PASS, ZIP PASS.
+- Artefakt: `PFERDE_ATELIER_DESIGN_1.50.628_KONSOLIDIERT_BREADCRUMB_TABELLEN.zip`
+- Prüfnachweis: `PFERDE_ATELIER_DESIGN_1.50.628_PRUEFNACHWEIS.json`
+- Wichtig: Die Original-CSS-Datei des alten Canonical-Table-Plugins war nicht als exportierbare Quelle verfügbar. Deshalb wurde keine Bytegleichheit dieser Alt-CSS behauptet; übernommen ist der bereits bindende Tabellenvertrag des aktuellen Template-Kits plus dessen Gutenberg-Ladeweg. Frontend-spezifische Template-Kit-Regeln bleiben unverändert.
