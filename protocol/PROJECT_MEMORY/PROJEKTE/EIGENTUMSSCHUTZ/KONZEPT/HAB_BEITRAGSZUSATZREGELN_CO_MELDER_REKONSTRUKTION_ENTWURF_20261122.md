@@ -53,3 +53,49 @@ Der nachgewiesene Musterartikel „CO-Melder zu Hause – die wichtigsten Fragen
 4. Erst nach Freigabe die Ergänzungen am **zuständigen Original-Hab-K-Multi-Regel-Owner** andocken, vorhandene 110 Prüfungen und die drei Artikel nicht umgehen. Kein neuer K0, keine erneute Keywordrecherche, kein neues WordPress-Plugin.
 
 **Freigabestatus:** OFFEN. Diese Datei ist eine Sicherung der Recherche und der offenen Entscheidungen, **keine wiedergefundene Originalregeldatei**.
+
+## F. Ergänzung 22.11.2026 – Gefahr & Schutz als eigenständiger redaktioneller Schwerpunkt (VORSCHLAG, NICHT FREIGEGEBEN)
+
+**Leitgedanke:** Ein Hab-&-Bewahr-Beitrag hilft Lesern zu erkennen, **welche Gefahr in welcher Situation besteht, wie sie sich sinnvoll schützen und wie sie sich bei einem tatsächlichen Ereignis verhalten**. Keine Dramatisierung oder erfundenen Wahrscheinlichkeiten. Übergreifende vorhandene Originalregeln und alle fünf Hab-Typregelbücher bleiben bestehen.
+
+### F1. Zentrales Merkfeld – Hausstil-Vorschlag
+- Pro vollwertigem Fachbeitrag möglichst **ein zentraler, farblich zurückhaltender Merksatz** als erkennbare Eigenart von Hab & Bewahr. Möglichst kurz, konkret, aus dem Artikel tatsächlich begründet; kein allgemeiner Slogan und keine bloße Wiederholung des Titels.
+- Position: Nach der direkten Einleitung beziehungsweise nach der ersten beantworteten Hauptfrage; im Notfall erst die sofortige Sicherheitsanweisung, dann erst Merksatz.
+- Farbwelt: Salbei/Grau mit gutem Kontrast; **keine Alarmfarbe** für normalen Merksatz. Alternativ „Das Wichtigste“ als zugängliches Textlabel; nicht nur auf Farbe verlassen.
+- Keine starren Wiederholungen, kein zweites Fazit. Bei reinen Nachrichten/Praxisberichten nur einsetzen, wenn es einen fachlich tragfähigen Merksatz gibt.
+- Beispiel zum CO-Melder: „CO- und Rauchmelder schützen vor unterschiedlichen Gefahren; ein Gerät ersetzt das andere nicht.“
+
+### F2. „Achtung“ strikt an echte Gefahr koppeln
+- Separater, deutlicher **Achtung-/Gefahrenhinweis** nur, wenn eine konkrete, belegte und für die Handlung wesentliche Gefährdung oder ein wichtiger Schutzgrenzfall vorliegt.
+- Enthält stets: **Was genau ist gefährlich? Für wen/wann? Was ist die sichere nächste Handlung?** Bei akuter Gefahr Handlung priorisieren, anschließend Begründung.
+- Nicht als dekorativer Standardkasten. Keine unbewiesene „akut“-Einstufung, keine eigenen offiziellen Warnstufen nachahmen; Nichtvorliegen von Angaben bedeutet nicht Gefahrfreiheit.
+- Warnhinweis steht **vor** riskanten Handlungen; Schutz für Menschen vor Eigentum. Keine gefährlichen DIY-/Konfrontationsanleitungen.
+- CO-Alarm nur als Beispiel für fachlich abzusichernde Notfallkommunikation: Gebäude verlassen, 112 von draußen alarmieren; Quelle Deutscher Feuerwehrverband.
+
+### F3. Fünf Leitfragen bei der Redaktionsplanung (nicht fünf Pflichtüberschriften)
+1. **Gefahr:** Was kann tatsächlich passieren und wodurch?
+2. **Betroffenheit:** In welcher Situation ist wer oder was gefährdet? Nicht jede Wohnung oder jeder Standort hat dasselbe Risiko.
+3. **Erkennen:** An welchen verlässlichen Anzeichen erkennt man das Problem, soweit überhaupt möglich?
+4. **Vorbeugen:** Welche erreichbaren Schutzmaßnahmen helfen – und **welche Grenzen** haben sie?
+5. **Handeln:** Was ist im Ereignisfall als Erstes sicher zu tun, falls für den Beitrag relevant?
+Nur Fragen ausgeben, deren Antworten themenspezifisch belegbar und für die Beitragsart nützlich sind.
+
+### F4. Zusätzliche Leserhilfen – nur bei eigenständigem Wert
+- „Häufiger Irrtum“ oder „Nicht verwechseln“ für gefährliche Fehlannahmen.
+- „Das schützt – das schützt nicht“ bei falschen Sicherheitsversprechen.
+- „Für wen ist das relevant?“ (Mieter, Eigentümer, Ferienhaus, Wohnmobil, kleiner Betrieb), nur wenn die Lage sich wirklich unterscheidet.
+- Kurze Schutz-/Kontrollcheckliste nur für sichere, überprüfbare Schritte.
+- „Wann Fachleute einschalten?“ bei Grenzfällen und gefährlichen Eigenarbeiten.
+- Keine Pflicht-Kaufempfehlung, keine erfundenen Zahlen, keine Sicherheit ohne Restgefahr versprechen.
+
+### F5. Keine widersprüchlichen Einheits-Schemata
+- **FAQ:** bestehende Einzel-Hauptfrage sofort beantworten. Ein Artikel „die wichtigsten Fragen“ ist ein möglicher eigenständiger Mehrfragen-Sammeltyp, dessen Zulässigkeit und Umfang vor technischer Andockung fachlich getrennt zu entscheiden sind.
+- **Ratgeber & Wissen:** Gefahr und Prävention zusammenhängend erklären, bei Bedarf Schutzgrenzen und Auswahl.
+- **Vergleich:** Schutzwirkung, Ausfälle und Nachteile fair nach denselben Kriterien prüfen.
+- **Anleitung & Checkliste:** sichere Handlung, Warn-/Abbruchsignal vor kritischen Schritten, Ergebnisprüfung.
+- **Bericht & Praxisfall:** belegter Fall, realer Verlauf, Lehren für Vorsorge; nicht aus Einzelfällen allgemeine Eintrittswahrscheinlichkeiten ableiten.
+
+### F6. Freigabe/Bestandsschutz
+- Diese Fassung ist **ein redaktioneller Vorschlag** und **keine aktive K-Multi-Prüfregel**. Farbgebung, Pflichtgrad, Reihenfolge und der Mehrfragen-FAQ-Typ müssen erst beschlossen werden.
+- Keine Änderung der vorhandenen fünf Regelbücher, der 110 Prüfungen, der drei laufenden Artikel, des Importformats oder des bestehenden K-Multi-Workflows.
+- Externe Grundlage nur zum kritischen Abgleich: BBK Risikokommunikation (Risiko und Vorsorge) https://www.bbk.bund.de/DE/Themen/Risikomanagement/Risikokommunikation/risikokommunikation_node.html ; Deutscher Feuerwehrverband CO https://www.feuerwehrverband.de/co-vergiftungsgefahr-mit-langzeitschaeden-durch-kamine-und-oefen/.
