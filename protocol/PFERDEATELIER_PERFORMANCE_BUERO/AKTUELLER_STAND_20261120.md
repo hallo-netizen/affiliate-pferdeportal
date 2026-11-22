@@ -1825,3 +1825,12 @@ Wichtig:
 - 1.50.638: Amazon übernimmt vorhandenes Bild; Produkte zeigen vorhandene eBay/idealo/Amazon-Angebotslinks aus zentralem Artikelplan/Router-Slots; Weiterführung fällt bei fehlendem zweitem Post auf den redaktionell gesetzten Portalpfad zurück; unter 1000px Originalquellen sichtbar, fehlende Empfehlungen optional unter dem Artikel.
 - 506/507 Dateien byteidentisch zu 1.50.637; PHP 9/9 PASS; JS PASS; ZIP PASS.
 - Design-Büro enthält ZIP + Prüfnachweis. Letzter LIVE PASS bleibt 1.50.632.
+
+
+## 2026-11-22 – Design 1.50.639: reine Darstellung, keine Affiliate-Logik
+
+- 1.50.639 trennt Design und Affiliate-Logik hart: keine category_product-Zusatzslots, keine Shortcode-Nachauswahl, keine Provider-Mischung, keine Rohmeta-Auswertung, keine neue Related-Query.
+- Desktop/grosse Tablets klonen nur bereits ausgegebenen Artikel-Produktblock und Astras bereits ausgewählten echten Related-Post; Mobil zeigt die Originalausgaben.
+- Amazon: vorhandener Link/Bild, kurze Copy `Passende Angebote entdecken`, sichtbare Amazon-Wortmarke, einzeilige CTA.
+- Responsive nutzt zusaetzlich outerWidth, damit schmal gezogene Browserfenster trotz Zoom die Sidebar sicher abschalten.
+- 506/507 Dateien byteidentisch zu 1.50.638; PHP 9/9 PASS; JS PASS; ZIP PASS. Letzter LIVE PASS bleibt 1.50.632.
