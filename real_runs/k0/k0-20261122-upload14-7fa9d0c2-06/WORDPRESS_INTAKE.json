@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Mineralfutter für Pferde passend zur Futterration wählen",
+      "target_keyword": "mineralfutter für pferde",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "fd7655a3db45f8e1b48ff19714833d7fe5138b6f755d1752fc6b7b3f77fd4b79"
+    }
+  ],
+  "batch_sha256": "6d18d3f78670c40bee0615725c09c2ad2e4785e3079f5ee2acc714fdd4e82056"
+}
