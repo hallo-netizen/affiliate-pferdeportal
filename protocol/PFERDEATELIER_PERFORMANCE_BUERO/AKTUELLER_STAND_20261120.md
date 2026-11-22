@@ -1568,3 +1568,18 @@ Artefakte im Pferdeatelier-Designbüro:
 Wichtig:
 - Noch KEIN Live-PASS für die beiden sichtbaren Layoutpunkte.
 - Live-PASS erst nach Sichtprüfung von 1.50.621.
+
+
+## 2026-11-22 – Template Kit 1.50.622 LIVE
+
+- Grundlage: 1.50.621; keine neue Architektur.
+- Preise: unter jeder der drei Überschriften „Kurzbedingungen“ bleibt jetzt exakt ein Zeilenumbruch. Text und Links bleiben unverändert.
+- Kubio Gesamtumstellung: Ursache des ausgegrauten Buttons korrigiert. Das HTML-Attribut disabled wird nur noch ausgegeben, wenn die Vorprüfung tatsächlich Fehler meldet.
+- Aktueller WordPress-Export gegen die 11 fest definierten Kubio-Zielobjekte geprüft: 11/11 Typ, Status und Ausgangs-Hash passend.
+- Read-only Werkzeug „Kubio Abhängigkeiten“ samt Inventory-Datei aus der Live-Fassung entfernt. Die einmalige „Kubio Gesamtumstellung“ bleibt bis zur ausgeführten und geprüften Migration erhalten.
+- Anzeigenmarkt: gemeinsamer oberer Marktbereich für Anzeigenmarkt-Startseite und alle hp_listing_category-Unterseiten ergänzt. Enthält Startseitenlink, dynamische Navigation der obersten Anzeigenkategorien und auf Kategoriearchiven die bestehende Anzeigenmarkt-Banner-Schnittstelle. Der vorhandene Root-Banner wird auf der Anzeigenmarkt-Startseite nicht doppelt ausgegeben.
+- Vorhandene untere Kategorien, Anzeigen und Suchausgabe bleiben unberührt.
+- Paketprüfung: 10/10 PHP-Dateien Syntax PASS, ZIP-Integrität PASS, 503 bestehende Dateien byte-identisch.
+- Artefakt: PFERDE_ATELIER_DESIGN_1.50.622_LIVE_KUBIO_MARKT_LAYOUT.zip
+- Prüfnachweis: PFERDE_ATELIER_DESIGN_1.50.622_PRUEFNACHWEIS.json
+- Status: technischer Kandidat PASS. Live-Sichtprüfung von Button und Anzeigenmarkt-Kopf steht noch aus; erst danach Live-PASS.
