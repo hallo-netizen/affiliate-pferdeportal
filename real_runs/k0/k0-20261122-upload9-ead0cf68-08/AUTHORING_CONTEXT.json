@@ -98,8 +98,8 @@
       },
       {
         "role": "further_information",
-        "href": "/gesundheit/gesundheit-senioren/",
-        "anchor": "Senioren",
+        "href": "/wissen/wissen-buecher-und-ratgeber/gesundheitsvorsorge-grundlagen/",
+        "anchor": "Gesundheitsvorsorge Grundlagen",
         "block": "further_information"
       }
     ],
@@ -109,7 +109,7 @@
         "active": true
       },
       {
-        "href": "/gesundheit/gesundheit-senioren/",
+        "href": "/wissen/wissen-buecher-und-ratgeber/gesundheitsvorsorge-grundlagen/",
         "active": true
       }
     ],
@@ -131,7 +131,9 @@
       "Körperzustand",
       "Fressverhalten",
       "Gewicht",
-      "Trinkverhalten"
+      "Trinkverhalten",
+      "Körpergewicht",
+      "Warnzeichen"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
