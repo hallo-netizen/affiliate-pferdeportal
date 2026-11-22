@@ -1807,3 +1807,13 @@ Wichtig:
 - Müsli-Testartikel belegt: vorhandener ready-Artikelplan mit ausgewähltem Produkt 16615 und weiteren PASS-Produkten; vorhandene semantic_related/further_information-Verknüpfungen.
 - 506/507 Dateien byteidentisch zu 1.50.635; PHP 9/9 PASS; JS PASS; ZIP PASS.
 - Im Design-Büro als 1.50.636 NUR TEST gespeichert; letzter LIVE PASS bleibt 1.50.632.
+
+
+## 2026-11-22 – Design 1.50.637 Sidebar-Hartfix
+
+- 1.50.636 Einzelbeitrags-Sidebar sichtbar FAIL: doppelte Werbung, abgeschnittener Text, CTA-Umbruch, keine Produkte, kein Weiterführungsblock.
+- Ursachen: kompletter Werbe-DOM geklont; Produkte im Design aus Rohmeta nachgebaut; Weiterführungsresolver nur fuer /category/-Links.
+- 1.50.637: saubere Amazon-Karte nur mit vorhandenem Amazon-Link; genau ein WERBUNG-Kicker; CTA nowrap; keine Innenrahmen. Drei Produkte werden direkt ueber zentrale Router-Slots category_product_1/2/3 gerendert und nur visuell kompakt dargestellt. Weiterführungsresolver versteht nun auch normale Portalpfade und leitet daraus bestehende redaktionelle Kategorien ab.
+- Originale Artikel-/Affiliate-Elemente bleiben unangetastet und werden nur bei aktiver Sidebar verborgen; unter 1000px Originalzustand.
+- 506/507 Dateien byteidentisch zu 1.50.636; PHP 9/9 PASS; JS PASS; ZIP PASS. Kein visueller Chromium-PASS behauptet, da Browser im Container wegen DBus nicht zuverlässig startet.
+- Design-Büro enthält 1.50.637 ZIP + Prüfnachweis. Letzter LIVE PASS bleibt 1.50.632.
