@@ -1774,3 +1774,14 @@ Wichtig:
 - 506/507 Dateien byteidentisch zu 1.50.632; PHP 9/9 PASS; JS PASS; ZIP PASS.
 - Im Design-Büro gespeichert als PFERDE_ATELIER_DESIGN_1.50.633_EINZELBEITRAG_SIDEBAR_NUR_TEST.zip plus Prüfnachweis.
 - Visuelle Abnahme steht aus.
+
+
+## 2026-11-22 – Design 1.50.633 FAIL / 1.50.634 Reparatur
+
+- 1.50.633 Einzelbeitrags-Sidebar vom Nutzer sichtbar als FAIL bewertet: Inhaltsspalte/Seitenachse gebrochen.
+- Ursache im Designplugin: Header + Entry-Content wurden aus Astras Originalstruktur in einen neuen Layoutcontainer verschoben.
+- 1.50.633 verworfen, nicht Live.
+- 1.50.634 direkt aus 1.50.632 LIVE PASS neu gebaut: Original-Artikel-DOM bleibt vollständig bestehen; Sidebar nur als Geschwister von #primary; vorhandene Anzeige/Produkte nur geklont; bestehender Astra-Weiterlesen-Link wiederverwendet; Mobil <768px unverändert.
+- Keine Änderung am Affiliate-Router, keine neue Query, keine neue Affiliate-URL, kein Sticky.
+- 506/507 Dateien byteidentisch zu 1.50.632; PHP 9/9 PASS; JS PASS; ZIP PASS.
+- 1.50.632 bleibt bis Nutzerabnahme von 1.50.634 der letzte LIVE-PASS-Fallback.
