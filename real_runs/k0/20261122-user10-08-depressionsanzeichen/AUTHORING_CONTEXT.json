@@ -16,8 +16,12 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/diagnosing-behavior-problems-in-horses",
-          "source_title": "MSD Veterinary Manual – Diagnosing Behavior Problems"
+          "source_url": "https://www.worldhorsewelfare.org/advice/behaviour-checklist-is-your-horse-trying-to-tell-you-something",
+          "source_title": "World Horse Welfare – Behaviour Checklist"
+        },
+        {
+          "source_url": "https://www.worldhorsewelfare.org/advice/horse-health-essentials",
+          "source_title": "World Horse Welfare – Horse Health Essentials"
         },
         {
           "source_url": "https://www.worldhorsewelfare.org/what-we-do/sport-and-leisure-horses/our-vision-for-the-responsible-involvement-of-horses-in-sport",
@@ -25,8 +29,8 @@
         }
       ],
       "claims": [
-        "Stress kann das normale Verhalten und die Gesundheit eines Pferdes verändern.",
-        "Verhaltensprobleme und gesundheitliche Ursachen müssen gemeinsam betrachtet werden.",
+        "Subtile Veränderungen im Verhalten eines Pferdes können auf Stress, Schmerzen oder Unwohlsein hinweisen.",
+        "Verhaltensänderungen können auf Probleme mit der Gesundheit oder der Umgebung des Pferdes hindeuten.",
         "Regelmäßige positive Sozialkontakte zu anderen Pferden sind wichtig."
       ],
       "fresh_research_reference_date": "2026-11-22"
@@ -50,22 +54,22 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/diagnosing-behavior-problems-in-horses",
-        "source_title": "MSD Veterinary Manual – Diagnosing Behavior Problems",
-        "evidence_text": "stress, which can alter normal body functions, behavior, and immune responses",
-        "evidence_text_sha256": "12e170c50011f8e8750f621a4225851b1c5b63c2d4386c4ddbd626d15d522dd3",
-        "statement": "Stress kann das normale Verhalten und die Gesundheit eines Pferdes verändern.",
+        "source_url": "https://www.worldhorsewelfare.org/advice/behaviour-checklist-is-your-horse-trying-to-tell-you-something",
+        "source_title": "World Horse Welfare – Behaviour Checklist",
+        "evidence_text": "Examples of common subtle signs of stress, pain or discomfort",
+        "evidence_text_sha256": "54146090e5e4ed76fd2595401137186136e1c67a8ae447970b21f1c8ca366a3d",
+        "statement": "Subtile Veränderungen im Verhalten eines Pferdes können auf Stress, Schmerzen oder Unwohlsein hinweisen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F2": {
-        "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/diagnosing-behavior-problems-in-horses",
-        "source_title": "MSD Veterinary Manual – Diagnosing Behavior Problems",
-        "evidence_text": "Some “health” problems faced by horses are associated with behavior problems",
-        "evidence_text_sha256": "5391ef161d05bb53fce00ce3285b60d174fe042c803a06c3a69e68d73f0fa42d",
-        "statement": "Verhaltensprobleme und gesundheitliche Ursachen müssen gemeinsam betrachtet werden.",
+        "source_url": "https://www.worldhorsewelfare.org/advice/horse-health-essentials",
+        "source_title": "World Horse Welfare – Horse Health Essentials",
+        "evidence_text": "Monitor them for any behaviour changes that could indicate that something is wrong with your horse’s health or environment.",
+        "evidence_text_sha256": "862930d94a92d3b894189a36f3c39924563ae7bd26b801fa48c5b232490a987e",
+        "statement": "Verhaltensänderungen können auf Probleme mit der Gesundheit oder der Umgebung des Pferdes hindeuten.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
