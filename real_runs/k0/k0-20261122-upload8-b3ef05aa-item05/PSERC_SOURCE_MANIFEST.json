@@ -1,0 +1,171 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 8,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Rein organisches Mineralfutter für Pferde richtig einordnen",
+        "target_keyword": "rein organisches mineralfutter für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "8cf7da2b95182a0b0b62d4514f0fc073bb4a9be6614cf996930b497b8e319d64"
+      },
+      {
+        "title": "Flüssiges Mineralfutter für Pferde gezielt auswählen",
+        "target_keyword": "flüssiges mineralfutter für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "71133899b52365b3b9a45a0736669b32bb6a094171cd4ec9c897a1f2647cbaa3"
+      },
+      {
+        "title": "Wie viel Mineralfutter braucht ein Pferd pro Tag?",
+        "target_keyword": "Wie viel Mineralfutter braucht ein Pferd pro Tag?",
+        "category": "mineralfutter-fuer-pferde-faq",
+        "article_type": "FAQ",
+        "plan_slot": "cbfc05c231a4ed70c9ea7804678bd8f32efb97df06e50978eba3288d685d78a0"
+      },
+      {
+        "title": "Bio-Mineralfutter für Pferde erkennen und auswählen",
+        "target_keyword": "bio mineralfutter für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "f12e00642e53c1f10916b261c716fb3c4afc1a50c320c9a7833d26ae22faaf44"
+      },
+      {
+        "title": "PerNaturam Mineralfutter für Pferde passend auswählen",
+        "target_keyword": "pernaturam mineralfutter für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "07e41a25ffab71e5107eca3dc789bbb1826846e3830cad869cea07c9ba52d3d4"
+      },
+      {
+        "title": "Höveler Mineralfutter für Pferde bedarfsgerecht auswählen",
+        "target_keyword": "höveler mineralfutter für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "9204db144f7dda3feb0ba969b3ddae12be6b1072738428fbb41014a7c2550a66"
+      },
+      {
+        "title": "AGROBS Mineralfutter für Pferde gezielt auswählen",
+        "target_keyword": "mineralfutter pferd agrobs",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "4f6ac8e1ef14ed1325941e639e3ee70b7b932d1843d3dc57068e121a1229bd73"
+      },
+      {
+        "title": "Mineralfutter für Pferde ohne Zucker richtig einordnen",
+        "target_keyword": "mineralfutter für pferde ohne zucker",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "8aa3a4d1712e30f1da3c9bbf7f48843cf0863a8c1e9d281d5fbed8f2e4b1aca3"
+      }
+    ],
+    "batch_sha256": "b3ef05aa4ebc7e72d4ddf04b08ce99ceb9ae6dd58085c1d779bc8c0b0a8630e3"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Rein organisches Mineralfutter für Pferde richtig einordnen",
+        "target_keyword": "rein organisches mineralfutter für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "8cf7da2b95182a0b0b62d4514f0fc073bb4a9be6614cf996930b497b8e319d64"
+      },
+      "order_id": "TXE-68cbbb28b2f120f538452eeada9c6d58",
+      "article_id": "article:dcd702141a9c83bbf266e43b",
+      "search_intent": "Rein organisches Mineralfutter für Pferde als eigene Produktform einordnen und Auswahlkriterien erklären"
+    },
+    {
+      "metadata_binding": {
+        "title": "Flüssiges Mineralfutter für Pferde gezielt auswählen",
+        "target_keyword": "flüssiges mineralfutter für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "71133899b52365b3b9a45a0736669b32bb6a094171cd4ec9c897a1f2647cbaa3"
+      },
+      "order_id": "TXE-48982beb50e418d9c88b881404f7bb0f",
+      "article_id": "article:44c4a0cce9c171f908228b21",
+      "search_intent": "Flüssiges Mineralfutter für Pferde und seine Auswahl gegenüber anderen Darreichungsformen erklären"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie viel Mineralfutter braucht ein Pferd pro Tag?",
+        "target_keyword": "Wie viel Mineralfutter braucht ein Pferd pro Tag?",
+        "category": "mineralfutter-fuer-pferde-faq",
+        "article_type": "FAQ",
+        "plan_slot": "cbfc05c231a4ed70c9ea7804678bd8f32efb97df06e50978eba3288d685d78a0"
+      },
+      "order_id": "TXE-d5c44128c58074dcb4de9bdad9c045d2",
+      "article_id": "article:d1f5498f8fef9fe144edcbb8",
+      "search_intent": "Den täglichen Bedarf an Mineralfutter anhand Produktdosierung und Gesamtration beantworten"
+    },
+    {
+      "metadata_binding": {
+        "title": "Bio-Mineralfutter für Pferde erkennen und auswählen",
+        "target_keyword": "bio mineralfutter für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "f12e00642e53c1f10916b261c716fb3c4afc1a50c320c9a7833d26ae22faaf44"
+      },
+      "order_id": "TXE-358cb24cedba39f84f3dd750dca9497b",
+      "article_id": "article:3c20e3f2ea0dd3e24399e5e8",
+      "search_intent": "Bio-Mineralfutter für Pferde nach Herkunft und Kennzeichnung unterscheiden und sinnvoll auswählen"
+    },
+    {
+      "metadata_binding": {
+        "title": "PerNaturam Mineralfutter für Pferde passend auswählen",
+        "target_keyword": "pernaturam mineralfutter für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "07e41a25ffab71e5107eca3dc789bbb1826846e3830cad869cea07c9ba52d3d4"
+      },
+      "order_id": "TXE-dadde2dc88cf81e1dc6e4fd17abc0bf9",
+      "article_id": "article:09014e3435c69f298a733845",
+      "search_intent": "Mineralfutter der Marke PerNaturam für Pferde gezielt einordnen und auswählen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Höveler Mineralfutter für Pferde bedarfsgerecht auswählen",
+        "target_keyword": "höveler mineralfutter für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "9204db144f7dda3feb0ba969b3ddae12be6b1072738428fbb41014a7c2550a66"
+      },
+      "order_id": "TXE-8fb7c741fddaef86a03d643377c6999d",
+      "article_id": "article:cbb45047f5ff78dd1683b4d5",
+      "search_intent": "Mineralfutter der Marke Höveler für Pferde anhand des konkreten Bedarfs auswählen"
+    },
+    {
+      "metadata_binding": {
+        "title": "AGROBS Mineralfutter für Pferde gezielt auswählen",
+        "target_keyword": "mineralfutter pferd agrobs",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "4f6ac8e1ef14ed1325941e639e3ee70b7b932d1843d3dc57068e121a1229bd73"
+      },
+      "order_id": "TXE-a4373709a0f67aeaa426496d3979bf0b",
+      "article_id": "article:f92b2a256c1d0505ccaa1497",
+      "search_intent": "Mineralfutter der Marke AGROBS für Pferde gezielt auswählen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Mineralfutter für Pferde ohne Zucker richtig einordnen",
+        "target_keyword": "mineralfutter für pferde ohne zucker",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "8aa3a4d1712e30f1da3c9bbf7f48843cf0863a8c1e9d281d5fbed8f2e4b1aca3"
+      },
+      "order_id": "TXE-a13d4d7d933861f36252246f22bbdbc9",
+      "article_id": "article:293c879c3789d1eec85bc4bd",
+      "search_intent": "Mineralfutter für Pferde mit dem ausdrücklich gesuchten Merkmal ohne Zucker einordnen und Etiketten beurteilen"
+    }
+  ],
+  "manifest_sha256": "d4b60427cfbc9c61afe8ca72893d793ab1bf49b00be67028872f9a10b67db412"
+}
