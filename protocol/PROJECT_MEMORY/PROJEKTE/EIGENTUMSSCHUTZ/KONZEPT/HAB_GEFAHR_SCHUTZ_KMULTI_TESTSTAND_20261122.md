@@ -1,28 +1,29 @@
 # Hab & Bewahr – Gefahr & Schutz: praktischer K-Multi-Teststand
 
-## Aktuellster Original-K-Multi-Stand am 22.11.2026 – unabhängige 50-von-110-Echtprüfung
+## Aktuellster verbindlicher Stand – 22.11.2026: 57/110 echte Hab-HARD-Prüfungen
 
-**Diese aktualisierte Lage hat Vorrang vor allen nachstehenden früheren Zwischenständen.**
+**Dieser aktuelle Stand gilt vor allen nachfolgenden früheren Zwischenständen.**
 
-**Tatsächlicher Original-GitHub-Lauf:** https://github.com/hallo-netizen/k0-multiportal/actions/runs/45017351610 — `SUCCESS`.
+- **Jüngster nachweislich erfolgreicher Original-K-Multi-Gesamtlauf:** https://github.com/hallo-netizen/k0-multiportal/actions/runs/45017972662 – **SUCCESS**.
+- **Echte 110-HARD-Einzelprüfung pro Artikel:** **56** unterschiedliche kataloggebundene Original-Hab-Regeln im bestehenden K-Multi-Autoren-Owner technisch durchgeführt und bestanden, **eine** weitere echte unabhängige Sprachprüfung durch den bestehenden einzigen LT68-Owner nach Original-Artikel-HTML-Hash und nachgewiesenem gepinntem LanguageTool 6.8 gebunden. **Resultat 57 PASS / 0 FAIL / 53 NOT_EXECUTED je Artikel**. Vollständige 110/110-Freigabe weiterhin verboten.
+- **262 technische Regressionstests bestanden:** 77 + 98 + 26 + 61. Darin 3 neue Positiv-/Negativtests zu wiederholtem Satz, gleichförmigem Überschriftenanfang und verbotener generischer Generatorphrase. Technische Tests **nicht** als zusätzlich abgenommene Original-HARD-Regeln zählen.
+- **Echtes LanguageTool 6.8 für alle drei aktuellen und alle drei ursprünglichen Hab-Artikel:** zwei unabhängige Original-Owner-Läufe mit jeweils **[0,0,0] offenen Fehlern**. Kein neues Recherche- oder bezahltes Keywordtool.
+- **Prüfbeleg wirklich in GitHub gespeichert:** GitHub-Actions-Artefakt `KMULTI-HAB-REAL-57-OF-110-HARD-RECEIPTS-NOT-IMPORT`; der anfängliche Fehler des alten Upload-Dateinamens wurde ursächlich berichtigt. Der neue Lauf bestätigt Upload **SUCCESS**, Artefakt-ID 14752706616; Inhalt ist eine **nicht importierbare** Prüfquittung, keine WordPress-Datei.
+- **Artikelkorrekturen beibehalten:** 3 vollwertige Hab-Fachtexte mit jeweils einem Merksatz, Abholbox mit genau einem begründeten „Wichtig“-Kasten; nachweislich reparierte Absatz-, Listen-, Fazit-, Wortobergrenzen- und Abschnittslängenregeln. Abholbox 891 Wörter durch genau fünf entfernte Wiederholungssätze, Vergleich durch Umstellen einer vorhandenen Aussage ausbalanciert, keine neuen Tatsachen/Quellen erfunden.
+- **Originale erhalten:** GitHub-Git-Blob-Vergleich der fünf Hab-Originalregelbücher plus ursprünglicher Drei-Artikel-JSON **6/6 byteidentisch**. Ursprüngliche fünf Felder, `plan_slot`, 12 verifizierte Quellenbelege/5 amtliche Seiten, 3 interne Links und 4 Quellenspuren je Artikel im separaten Autoren-Preflight nachgewiesen. Kein alter K0 aufgerufen.
+- **Noch 53 unverrichtete Original-HARD-Regeln:** **25** inhaltlich/redaktionell und strukturell zu klären (**12 fachliche Quelle-/Behauptungsregeln, 3 redaktionelle Bedeutungsprüfungen, 2 Tabellenentscheidungen, 8 Artikel-/Link-/Kategorieprüfungen**); **28** in System-, Integritäts-, WordPress-Echtdarstellungs-, Signatur- und Veröffentlichungskontrolle. Eine automatisch grüne Typ-/Strukturprüfung ist **keine** Beurteilung der Wahrheit einer Gefahrenaussage.
+- **Harte Freigabesicherung:** `full_hab_110_hard_rules_verified=false`, `semantic_fact_approval=false`, `publish_allowed=false`. Weder echte WP-Rendering-/Farbkontrolle noch eigenständige signierte Endfreigabe nachgewiesen, deshalb **KEINE verifizierte WordPress-Importdatei** und kein Publizieren.
 
-- **Drei vollständige Hab-Entwurfsartikel:** Ein Merksatz pro Artikel, ein konkret begründeter „Wichtig“-Hinweis bei der Abholbox. Fachliche Quellenspuren je Artikel 4; Originalmetadaten, 3 Links/Artikel und Autoren-Quellenzuordnung unverändert.
-- **110 Original-Hab-Pflichtregeln:** **49/110** durch den bestehenden K-Multi-Autoren-Owner pro Artikel tatsächlich ausgeführt und bestanden. Weitere **1/110** durch den *eigenen, unabhängigen* realen LanguageTool-6.8-Owner inklusive exakter Artikel-HTML-Summen, Original-Artikel-IDs und überprüftem gepinntem Tool bestätigt. **Ergebnis: 50 PASS / 0 FAIL / 60 NOT_EXECUTED pro Artikel.** Es wurde keine zweite Sprachprüfung und kein alter K0 aufgerufen. Die gesonderten Original-Owner-Quittungen bleiben getrennt; erst nach realer Sprachprüfung wird das Ergebnis zusammengeführt.
-- **259 technische Python-Tests bestanden** (74 Autoren-/Recherchetsts + 98 Portal-/Quellentests + 26 Original-Gesamtprüfungen + 61 Sprach-/Signatur-/Transporttests). Diese 259 Tests sind **nicht** mit den 50 Artikel-Pflichtregeln gleichzusetzen.
-- **Zweimal echtes LanguageTool 6.8 für 3 Artikel:** bisherige Originaltexte und die aktuellen bearbeiteten Texte jeweils **[0,0,0] ungelöste Sprachfehler**.
-- **Erfolgreich reparierte echte Textregeln:** Mindestabsätze, mindestens 4 Punkte in einer Liste, mindestens 2 Fazit-Absätze, max. 900 Wörter, ausgewogene Hauptabschnitte. Abholbox 891 Wörter; Kameravergleich Abschnitte ausgeglichen; Smart-Home-Kamera unverändert gegenüber der letzten Merksatzfassung. Keine neuen Sicherheitsbehauptungen. Originale 6/6 nach früherem Git-Blob-Vergleich unverändert.
-- **Rest 60 nicht ausgeführte echte Pflichtregeln (vollständige, nach Owner sortierte Inventarliste im K-Multi-Gesamtaudit):** **32** für fachlich-semantische Artikel-, Link- und Textprüfung (12 Fact-/Source, 10 Redaktion, 2 Tabelle, 8 Struktur/WordPress-Kategorie); **28** für System-/WordPress-Rendering, Integrität, Signatur und Veröffentlichung. Der eigenständige echte LanguageTool-Owner ist bereits ausgeführt, deshalb nicht mehr als offen gezählt.
-- **Kern-Sperren:** vollständige Prüfung **110/110** nicht erreicht, alle Artikelbehauptungen nicht abschließend faktisch freigegeben, keine echte WordPress-Frontend-Echtdarstellung der neuen Kästen, unabhängige signierte Release-Autorität nicht frei. `publish_allowed=false`, `full_hab_110_hard_rules_verified=false`, WordPress-Importdatei **nicht erstellt**.
-- **Nächste zwingende Original-Arbeit:** 32 fachliche/semantische Artikelregeln beim bestehenden verantwortlichen Owner prüfen und dort reparieren; danach verbliebene 28 System-/WordPress-/Signaturregeln mit echten Ergebnissen schließen. Unvollständige Prüfungen dürfen niemals als PASS erscheinen. Keine neue kostenpflichtige Recherche und kein WordPress-Plugin-Umweg.
+**Nächster zuständiger Original-Arbeitsblock:** Die 25 ausstehenden inhaltlichen Artikel-Owner-Prüfungen nur soweit mit amtlichen Originalfakten und echtem semantischen Nachweis schließen; den realen WordPress-Echtrender und die nachgeschalteten 28 unabhängigen K-Multi-Integritäts-/Signaturprüfungen nicht durch Mocks ersetzen. Keine zweite Typentscheidung, keine neue bezahlte Recherche und kein neues WordPress-Plugin.
 
-**Exakte Beweisdokumente:**
-- [Erfolgreicher K-Multi-Workflow](https://github.com/hallo-netizen/k0-multiportal/actions/runs/45017351610)
-- GitHub-Artefakt im Workflow: `KMULTI-HAB-REAL-50-OF-110-HARD-RECEIPTS-NOT-IMPORT` (alle 3 Artikel, jede Original-HARD-Regel mit tatsächlich erreichtem Status).
-- [K-Multi-Autorenprüfung, 49 reale Einzelregeln](https://github.com/hallo-netizen/k0-multiportal/blob/k0-offline-rule-bindings-20261027/offline_writer_dev/kmulti_authoring_station.py)
-- [Original unabhängiger LanguageTool-Owner, exakter 50. Einzelnachweis](https://github.com/hallo-netizen/k0-multiportal/blob/k0-offline-rule-bindings-20261027/offline_writer_dev/hobby_trial/kmulti_lt68.py)
-- [Aktueller 3er-Entwurf, keine Freigabe](https://github.com/hallo-netizen/k0-multiportal/blob/k0-offline-rule-bindings-20261027/offline_writer_dev/portal_auto/hab_current/hab_3_editorial_safety_style_CANDIDATE_NOT_RELEASED.json)
+**Belegquellen:**
+[GitHub-Gesamtlauf 45017972662](https://github.com/hallo-netizen/k0-multiportal/actions/runs/45017972662),
+[57/110-Safe-Gate K-Multi-Code](https://github.com/hallo-netizen/k0-multiportal/blob/k0-offline-rule-bindings-20261027/offline_writer_dev/kmulti_authoring_station.py),
+[Original-LT68-Owner](https://github.com/hallo-netizen/k0-multiportal/blob/k0-offline-rule-bindings-20261027/offline_writer_dev/hobby_trial/kmulti_lt68.py),
+[3 unreleased Hab-Fachbeiträge](https://github.com/hallo-netizen/k0-multiportal/blob/k0-offline-rule-bindings-20261027/offline_writer_dev/portal_auto/hab_current/hab_3_editorial_safety_style_CANDIDATE_NOT_RELEASED.json).
 
 ---
+
 
 
 
