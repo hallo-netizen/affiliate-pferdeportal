@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Mineralfutter für Pferde mit PSSM2 gezielt auswählen",
+      "target_keyword": "mineralfutter für pssm2 pferde",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "0893eedd1224a34bf303cf7881a4f432ffc97d2a0dc2148c744171363f2b3b21"
+    }
+  ],
+  "batch_sha256": "8d2a52d27599ef85e6cc1fb545277a7e743de85d627b6adf0177d70eaae0ceff"
+}
