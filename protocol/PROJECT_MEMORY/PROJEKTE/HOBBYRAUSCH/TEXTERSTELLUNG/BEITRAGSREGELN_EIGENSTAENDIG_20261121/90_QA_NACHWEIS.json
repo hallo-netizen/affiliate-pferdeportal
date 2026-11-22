@@ -113,5 +113,71 @@
     "no_kmulti_code_change": true,
     "no_k0_change": true,
     "blocked_production_reason": "Existing K-Multi state NO_VALUES_BLOCKED and original Pflege/Anleitung registry references still combined; prepared Hobby books are not active"
+  },
+  "readback_20261122_live_recheck": {
+    "date": "2026-11-22",
+    "status": "PASS_READONLY_45_OF_45_RELEASE_STILL_BLOCKED",
+    "performed_in": "Connected GitHub readback of two existing repositories; independent JSON cross-check assertions; no WP/K0/K-Multi runtime invoked",
+    "repository_sources": [
+      {
+        "repo": "hallo-netizen/affiliate-pferdeportal",
+        "branch": "work/texterstellung-hobby-hab-arbeitskopien-20261116",
+        "files": "00_MANIFEST, 05_GEMEINSAME_REGELN, five original Hobby article books"
+      },
+      {
+        "repo": "hallo-netizen/k0-multiportal",
+        "branch": "k0-offline-rule-bindings-20261027",
+        "files": "KMULTI_PORTAL_REGISTRY, OFFLINE_RULE_BINDINGS, original 121-rule catalog, original WP 3-FAQ fixture, five bound Hobby books, shared rules, LT68 and source-audit receipts"
+      }
+    ],
+    "checks": {
+      "passed": 45,
+      "total": 45,
+      "failed": 0
+    },
+    "readback": {
+      "original_wordpress_types": [
+        "Beratung",
+        "FAQ",
+        "Pflege",
+        "Vergleich",
+        "Anleitung"
+      ],
+      "shared_rule_count": 12,
+      "own_rule_counts": [
+        6,
+        5,
+        6,
+        7,
+        7
+      ],
+      "own_rule_total": 31,
+      "rule_catalog_registered": 121,
+      "all_five_own_rulebooks_cross_repository_json_equal": true,
+      "shared_rulebook_cross_repository_json_equal": true,
+      "new_portal_type_added": false,
+      "existing_wordpress_five_fields_unchanged": true,
+      "original_three_faq_records_present": true,
+      "lt68_receipt_for_three_articles": {
+        "status": "PASS",
+        "open_findings": 0,
+        "article_count": 3,
+        "release_allowed": false
+      },
+      "kmulti_offline_production_enabled": false,
+      "hobby_values_state": "NO_VALUES_BLOCKED",
+      "old_k0_changed": false,
+      "wordpress_plugin_changed": false
+    },
+    "historical_note": "Earlier 2026-11-21 entries in this same document predate the distinct Pflege/Anleitung K-Multi registry mapping. Do not treat their historic 'two unresolved references' as the latest state. This new readback confirms both are now independently mapped.",
+    "not_proved": [
+      "No new productive K-Multi Python writer execution",
+      "No complete independent signed evidence that all article claims are correct",
+      "No 121/121 original rule-owner execution or full approved quality certificate",
+      "No productive trusted QA signer configuration",
+      "No WordPress-live import or final JSON release"
+    ],
+    "decision": "Do not activate Hobby rule values or produce a WordPress import file until the existing original K-Multi owner chain actually completes and signs its quality checks.",
+    "user_impact": "No plugin update and no new input or paid keyword research required by this documentation check."
   }
 }
