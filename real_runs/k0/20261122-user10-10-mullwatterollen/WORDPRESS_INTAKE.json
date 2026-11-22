@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Mullwatterollen für Pferdeverbände richtig auswählen und verwenden",
+      "target_keyword": "mullwatterolle pferd",
+      "category": "verbandsmaterial-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "6a09ff98519436441237cd423f0e797ddfcf5e70af856c44a1c3edbaa4df1e70"
+    }
+  ],
+  "batch_sha256": "3edb6ff28b97c3db5826fde969fa784ec309d1a289f016adb79d0aebf2ba14d5"
+}
