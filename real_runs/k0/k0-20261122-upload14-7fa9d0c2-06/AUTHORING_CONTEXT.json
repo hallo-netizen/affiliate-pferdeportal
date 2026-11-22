@@ -138,7 +138,8 @@
       "Fütterung",
       "Ergänzung",
       "Körperzustand",
-      "Stoffwechsel"
+      "Stoffwechsel",
+      "Proteinqualität"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
