@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Merken Pferde, wenn ein anderes Pferd stirbt?",
+      "target_keyword": "Merken Pferde, wenn ein anderes Pferd stirbt?",
+      "category": "pferde-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "6c294356d94a2424852ec2ef051f83043b4c6da12be24c46766ea66406639415"
+    }
+  ],
+  "batch_sha256": "60b803812173792567f9cbbd7863392e052f1df1010f714e3fd32617bc998be9"
+}
