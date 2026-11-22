@@ -190,6 +190,35 @@
       "actual_independent_fact_owner_approval": false,
       "actual_121_owner_QA_approval": false,
       "no_article_text_or_original_metadata_changed": true
+    },
+    "latest_independent_kmulti_github_action": {
+      "date_utc": "2026-11-22T11:12:41Z",
+      "run_url": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45016194014",
+      "head_commit": "af2fe5128e7f028327a9325c9b235a1915ab658f",
+      "workflow": "K-Multi Hobbydepot all five original types - routing and book contract",
+      "workflow_conclusion": "success",
+      "job_conclusion": "success",
+      "executed_unittest_suites": [
+        22,
+        23,
+        18,
+        61,
+        10
+      ],
+      "total_passed": 134,
+      "total_failed": 0,
+      "tests_are": "technical routing, rulebook preflight, safe release blocking, and actual three-FAQ end-to-end rehearsal, not signed production QA",
+      "real_original_wordpress_faq_count": 3,
+      "official_sources_previous_qa": 10,
+      "official_excerpt_matches_previous_qa": 16,
+      "real_lt68_receipts_match_exact_current_article_html_sha256": 3,
+      "full_121_qa_owner_passed": false,
+      "full_114_hard_qa_passed": false,
+      "actual_wordpress_import_created": false,
+      "production_release_allowed": false,
+      "k0_changed": false,
+      "new_hobby_wordpress_plugin_required": false,
+      "warning": "Successful test of blocked output is not real finished-author approval. Later concurrent Hab-specific failure does not make this Hobby workflow a global K-Multi production release."
     }
   }
 }
