@@ -1,0 +1,160 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Mineralfutter für Pferde mit EMS richtig wählen",
+    "target_keyword": "mineralfutter für ems pferde",
+    "category": "mineralfutter-fuer-pferde-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "c02a61edce5b632bc00eeb7f4865955c213f36f7bdaf32aa8c692e89a925ea6e"
+  },
+  "content_profile": {
+    "search_intent": "Bedarfsgerechte Auswahl von Mineralfutter bei Equinem Metabolischem Syndrom EMS"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+          "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses and Other Equids"
+        },
+        {
+          "source_url": "https://www.msdvetmanual.com/metabolic-disorders/equine-metabolic-syndrome/equine-metabolic-syndrome",
+          "source_title": "MSD Veterinary Manual – Equine Metabolic Syndrome"
+        }
+      ],
+      "claims": [
+        "Die gesamte Mineralversorgung hängt von allen Teilen der Futterration ab.",
+        "Bei Equinem Metabolischem Syndrom ist die Futteranpassung zentral.",
+        "Bei EMS sollte eine gestörte Insulinregulation tierärztlich abgeklärt werden."
+      ],
+      "fresh_research_reference_date": "2026-11-22"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "mineralfutter für ems pferde",
+      "topic": "Mineralfutter für Pferde mit EMS richtig wählen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "mineralfutter-fuer-pferde-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Mineralfutter passend zu Gesundheitszustand, Grundfutter und Mineralversorgung auswählen",
+      "decision_criteria": [
+        "Gesamtration vor Ergänzung prüfen",
+        "Individuelle Fütterung und Bedarf klären",
+        "Doppelte Mineralzugaben vermeiden"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses and Other Equids",
+        "evidence_text": "The total mineral contribution and availability from all parts of the ration (forages and roughages, concentrates, all supplements, and even water, which can be high in iron and other minerals) should be considered when evaluating the mineral intake.",
+        "evidence_text_sha256": "79195c7611d913462af0add6e76c171b7503949e94f5b4964c8cdc4bcdec0af7",
+        "statement": "Die gesamte Mineralversorgung hängt von allen Teilen der Futterration ab.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/metabolic-disorders/equine-metabolic-syndrome/equine-metabolic-syndrome",
+        "source_title": "MSD Veterinary Manual – Equine Metabolic Syndrome",
+        "evidence_text": "Diet is the most important element in the management of equine metabolic syndrome, and dietary adjustment is sufficient to manage most cases.",
+        "evidence_text_sha256": "dd932bbbb0cab4b2c54f62975fcbb33880c37c875d8c0c9daa66b13a5d68afd8",
+        "statement": "Bei Equinem Metabolischem Syndrom ist die Futteranpassung zentral.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/metabolic-disorders/equine-metabolic-syndrome/equine-metabolic-syndrome",
+        "source_title": "MSD Veterinary Manual – Equine Metabolic Syndrome",
+        "evidence_text": "Diagnostic testing for equine metabolic syndrome should focus on documenting insulin dysregulation.",
+        "evidence_text_sha256": "df5382385903c74c80684382a2c00cc6460547bde205af1abf9f475170d3a2fa",
+        "statement": "Bei EMS sollte eine gestörte Insulinregulation tierärztlich abgeklärt werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/mineralfutter-fuer-pferde-beratung/",
+        "anchor": "Beratung Mineralfutter für Pferde",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/fuetterung/fuetterung-mineral-und-ergaenzer/mineralfutter-fuer-pferde/",
+        "anchor": "Mineralfutter für Pferde",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/mineralfutter-fuer-pferde-beratung/",
+        "active": true
+      },
+      {
+        "href": "/fuetterung/fuetterung-mineral-und-ergaenzer/mineralfutter-fuer-pferde/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "mineralfutter-fuer-pferde-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Mineralfutter",
+      "Raufutter",
+      "Futterration",
+      "Spurenelemente",
+      "Bedarf",
+      "Mineralversorgung",
+      "Fütterung",
+      "Ergänzung",
+      "Körperzustand",
+      "Stoffwechsel"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Ohne konkrete Produktvergleiche sind die individuellen Auswahlkriterien und die Rationscheckliste hilfreicher als eine schematische Tabelle."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
