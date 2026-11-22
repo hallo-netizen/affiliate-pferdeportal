@@ -201,3 +201,20 @@ Nach Live-Installation dient 1.50.632 als gemeinsame Basis für Live und Test.
 - Artefakt: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.640_EINZELBEITRAG_SIDEBAR_SICHER_NUR_TEST.zip`
 - Prüfnachweis: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.640_PRUEFNACHWEIS.json`
 - Status: **NUR TEST**. Letzter LIVE PASS bleibt 1.50.632.
+
+
+## 2026-11-22 – 1.50.641: Produktanzeige aus 1.50.638 + Responsive PASS aus 1.50.640
+
+- Nutzerhinweis bestätigt: 1.50.638 zeigte Produkte/Sidebar bereits sichtbar; Fehler entstand erst durch die Überkorrektur in 1.50.639/1.50.640, die zusätzliche Produktausgabe entfernte und nur noch auf bereits im HTML vorhandene Originalblöcke wartete.
+- 1.50.641 kombiniert deshalb bewusst nur zwei bereits getestete Teile:
+  1. Responsive-Verhalten aus 1.50.640 bleibt erhalten: Sidebar erst ab 1180px, Hauptartikel 760px, Sidebar 280px, Gap 32px, reale Fensterbreite inkl. outerWidth berücksichtigt.
+  2. Produktdarstellung aus 1.50.638 wird wiederhergestellt: bestehende zentrale Slots category_product_1..3 werden nur aufgerufen und deren vorhandene Ausgabe dargestellt.
+- Sicherheitsgrenze: Das Designplugin schreibt oder ändert keine Affiliate-Regel, keine Kategoriezuordnung, keine Produktzuordnung, keine Provider-/Ranking-/Verteilungsregel und keine Trackinglogik. Es nutzt nur die vorhandenen zentralen Slot-Ausgaben.
+- Mobil: Wenn kein vorhandener Produktblock im Artikel-HTML steht, werden dieselben zentralen Produkt-Ausgaben unter dem Artikel sichtbar gemacht; kein anderer Auswahlweg.
+- Weiterführend: ausschließlich echte veröffentlichte Posts. Kategorie-Links aus dem Artikel dienen nur als Quelle zum Auffinden eines passenden veröffentlichten Beitrags; das sichtbare Ziel ist immer ein Beitrag, niemals eine Kategorie oder Seite.
+- Amazon: sichtbare Wortmarke + Bild (wenn vorhanden), Text `Passende Angebote entdecken`, CTA einzeilig.
+- Diff 1.50.640 -> 1.50.641: 507 Dateien / 507 Dateien; 506 byteidentisch; nur `affiliate-portal-template-kit/pferde-template-kit.php` geändert; keine Datei hinzugefügt/gelöscht.
+- PHP 9/9 PASS, Sidebar-JavaScript-Syntax PASS, ZIP-CRC PASS.
+- Artefakt: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.641_SIDEBAR_PRODUKTE_RESTORE_RESPONSIVE_PASS_NUR_TEST.zip`
+- Prüfnachweis: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.641_PRUEFNACHWEIS.json`
+- Status: **NUR TEST**. Responsive 1.50.640 wurde vom Nutzer bereits als PASS bestätigt; Produkt/Weiterlesen in 1.50.641 noch visuell abzunehmen.
