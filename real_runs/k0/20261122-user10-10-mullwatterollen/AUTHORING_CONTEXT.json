@@ -102,7 +102,7 @@
       },
       {
         "role": "further_information",
-        "href": "/verbandsmaterial/",
+        "href": "/gesundheit/gesundheit-erste-hilfe/verbandsmaterial/",
         "anchor": "/verbandsmaterial/",
         "block": "further_information"
       }
@@ -113,7 +113,7 @@
         "active": true
       },
       {
-        "href": "/verbandsmaterial/",
+        "href": "/gesundheit/gesundheit-erste-hilfe/verbandsmaterial/",
         "active": true
       }
     ],
