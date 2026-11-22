@@ -1,0 +1,155 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Trensen für empfindliche Pferde nach Passform auswählen",
+    "target_keyword": "trensen für empfindliche pferde",
+    "category": "trensen-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "6e44f6baa5da275249947cf4dea75d2ddaa5f6d3fa1f8f897f099d688cda52cf"
+  },
+  "content_profile": {
+    "search_intent": "Trensen für besonders empfindliche Pferde anhand geeigneter Passform und möglicher Druckstellen auswählen."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://eu.worldhorsewelfare.org/advice/bridles-how-to-choose-and-fit-them-correctly",
+          "source_title": "World Horse Welfare – Bridles"
+        },
+        {
+          "source_url": "https://www.msdvetmanual.com/horse-owners/digestive-disorders-of-horses/dental-disorders-of-horses",
+          "source_title": "MSD Veterinary Manual – Dental Disorders"
+        }
+      ],
+      "claims": [
+        "Eine unpassende Zäumung kann am Pferdekopf übermäßigen Druck verursachen.",
+        "Eine passende Trense kann für das Pferd angenehmer sein.",
+        "Zahnprobleme können dazu führen, dass das Pferd das Gebiss ungern annimmt."
+      ],
+      "fresh_research_reference_date": "2026-11-22"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "trensen für empfindliche pferde",
+      "topic": "Trensen für empfindliche Pferde nach Passform auswählen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "trensen-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Für empfindliche Pferde eine druckarme, passende Trense auswählen",
+      "decision_criteria": [
+        "Druckstellen am empfindlichen Pferdekopf vermeiden",
+        "Gebissannahme und Maulgesundheit berücksichtigen"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://eu.worldhorsewelfare.org/advice/bridles-how-to-choose-and-fit-them-correctly",
+        "source_title": "World Horse Welfare – Bridles",
+        "evidence_text": "the bridle can put excessive pressure on various parts of the head",
+        "evidence_text_sha256": "7c1feccc75d57f257c41c23cc1d98cfeb1477bf7334ed03299ddf039ed5bf41d",
+        "statement": "Eine unpassende Zäumung kann am Pferdekopf übermäßigen Druck verursachen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://eu.worldhorsewelfare.org/advice/bridles-how-to-choose-and-fit-them-correctly",
+        "source_title": "World Horse Welfare – Bridles",
+        "evidence_text": "likely to make horses more comfortable",
+        "evidence_text_sha256": "d793fc5b0558552b47dadf34e712238089605c34b08de549d18cc735f1ac7bbb",
+        "statement": "Eine passende Trense kann für das Pferd angenehmer sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/digestive-disorders-of-horses/dental-disorders-of-horses",
+        "source_title": "MSD Veterinary Manual – Dental Disorders",
+        "evidence_text": "A horse with a dental problem may be reluctant to take the bit",
+        "evidence_text_sha256": "951b286aaad8f0c5fbc3a3f369860740f093b0de0f6c168d0568443f570fab0d",
+        "statement": "Zahnprobleme können dazu führen, dass das Pferd das Gebiss ungern annimmt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/trensen-beratung/",
+        "anchor": "Beratung Trensen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/gebisse-beratung/",
+        "anchor": "Beratung Gebisse",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/trensen-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/gebisse-beratung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "trensen-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Trense",
+      "empfindliche Pferde",
+      "Passform",
+      "Gebiss",
+      "Druckstellen",
+      "Zäumung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine Tabelle ohne individuelle Messwerte für Kopf und Maul wäre keine geeignete Hilfe zur Auswahl der Trense."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
