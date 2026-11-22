@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie heißt eine Trense für Pferde auf Englisch?",
+      "target_keyword": "trense pferd englisch",
+      "category": "pferdewissen-grundlagen",
+      "article_type": "FAQ",
+      "plan_slot": "166e59dbfbeaed47424ff1e45933a9393805211a612e2dd992a44b72e488e426"
+    }
+  ],
+  "batch_sha256": "9e1a43049c8c68eb54d20ff1bf38e99a9d77ba4166898674ae7d132a0c2ce580"
+}
