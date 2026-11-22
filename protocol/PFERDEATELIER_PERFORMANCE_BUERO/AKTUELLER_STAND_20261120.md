@@ -1762,3 +1762,15 @@ Wichtig:
 - 1.50.632 ist damit Live-freigegeben und ab jetzt verbindliche Designbasis.
 - Archiviert als `PFERDE_ATELIER_DESIGN_1.50.632_LIVE_PASS.zip` plus Prüfnachweis im Design-Büro.
 - Weitere Designänderungen bauen ausschließlich auf 1.50.632 auf.
+
+
+## 2026-11-22 – Design 1.50.633 Einzelbeitrag Sidebar – NUR TEST
+
+- Verbindliche Live-Basis bleibt 1.50.632 PASS.
+- Neue Testversion 1.50.633 baut exakt darauf auf und betrifft nur klassische Einzelbeiträge.
+- Desktop/Tablet ab 768 px: rechte Begleitspalte aus bereits vorhandener Anzeige, vorhandenem Produktblock (max. drei bereits geprüfte Produkte) und genau einem vorhandenen gleichkategorischen Astra-Weiterführungslink.
+- Mobil unter 768 px bleibt unverändert; beim Wechsel auf Mobil werden die Originalelemente an ihre Ausgangspositionen zurückgesetzt.
+- Keine neue Affiliate-Auswahl, keine neue URL, keine neue Query, kein neuer Helper, keine Änderung am Affiliate-Router; kein Sticky.
+- 506/507 Dateien byteidentisch zu 1.50.632; PHP 9/9 PASS; JS PASS; ZIP PASS.
+- Im Design-Büro gespeichert als PFERDE_ATELIER_DESIGN_1.50.633_EINZELBEITRAG_SIDEBAR_NUR_TEST.zip plus Prüfnachweis.
+- Visuelle Abnahme steht aus.
