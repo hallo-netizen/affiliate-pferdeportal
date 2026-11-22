@@ -1600,3 +1600,20 @@ Wichtig:
 - Verbindliche Reihenfolge: 1.50.623 installieren -> Werkzeuge/Kubio Gesamtumstellung Vorprüfung BESTANDEN kontrollieren -> Umstellung SOFORT ausführen, bevor weitere Änderungen an den 11 bewachten Objekten erfolgen -> Frontend prüfen -> erst danach weitere Designänderungen.
 - Artefakt: PFERDE_ATELIER_DESIGN_1.50.623_LIVE_KUBIO_MARKT_KORREKTUR.zip
 - Prüfnachweis: PFERDE_ATELIER_DESIGN_1.50.623_PRUEFNACHWEIS.json
+
+
+## 2026-11-22 – Template Kit 1.50.624 Anzeigenmarkt-Ursachenfix
+
+- Live-Screenshots 1.50.623 ausgewertet: oberer Anzeigenmarkt-Bereich war fachlich falsch rekonstruiert (neue Buttonleiste statt vorhandenem Original-Intro); Direktwerbeplatz zeigte korrektes Bild plus Rohtext darunter.
+- Ursache Direktwerbeplatz exakt: `anzeigenmarkt-direkt-01` nutzte zwar den responsiven Renderer, der umgebende Anzeigenmarkt-Block trug aber nicht die vorhandene CSS-Scope-Klasse `pftk-direct-responsive-v150360`. Dadurch blieb der Overlay-Text im normalen Dokumentfluss unter dem Bild.
+- 1.50.624 ergänzt genau diese bestehende Scope-Klasse. Lokaler Browser-Render: Overlay-Bounding-Box liegt vollständig innerhalb des Banner-Canvas; kein Rohtext mehr darunter.
+- Die in 1.50.623 neu erfundene Anzeigenmarkt-Navigation wird vollständig entfernt.
+- Root und alle `hp_listing_category`-Seiten erhalten wieder das bereits vorhandene Original-Intro `pftk-market-intro-v150279`: Seitenbild, Kicker „Finden, anbieten, verbinden“, Titel „Anzeigenmarkt“, Beschreibung, CTA-Bereich und bestehende Partnerbanner-Schnittstelle. Sichtbares Intro-Markup/CSS gegen 1.50.614 geprüft: identisch.
+- Für Unterkategorien werden Seitenbild und Banner jetzt explizit an die echte Anzeigenmarkt-Rootseite gebunden, statt an die Term-ID.
+- Anzeigenmarkt-Breadcrumb wird serverseitig zentral gerendert; der alte spätere JS-Payload des Zusatzplugins wird im Markt-Kontext entfernt. Reihenfolge: Breadcrumb (Priorität 1) -> Original-Intro (Priorität 2) -> bestehender HivePress-Inhalt.
+- Preise/Kurzbedingungen unverändert aus 1.50.622/623: exakt eine Zeile Abstand.
+- Kubio-Gesamtumstellungsbutton unverändert aktiv, wenn die bestehende 11/11-Vorprüfung besteht. Noch NICHT klicken, bis 1.50.624 live optisch geprüft ist.
+- Kubio-Abhängigkeiten-Diagnose bleibt aus der Live-Fassung entfernt.
+- Prüfungen: PHP 10/10 PASS, ZIP PASS, Root-Render PASS, Taxonomie-Render PASS, Direktbanner Browser-Render PASS, 505 gemeinsame Dateien byte-identisch; nur `pferde-template-kit.php` geändert, alte 1.50.623-Marktklasse durch 1.50.624-Dispatcher ersetzt.
+- Artefakt: `PFERDE_ATELIER_DESIGN_1.50.624_LIVE_ANZEIGENMARKT_URSACHENFIX.zip`
+- Prüfnachweis: `PFERDE_ATELIER_DESIGN_1.50.624_PRUEFNACHWEIS.json`
