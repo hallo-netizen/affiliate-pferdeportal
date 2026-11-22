@@ -1797,3 +1797,13 @@ Wichtig:
 - Weiterführender Beitrag folgt expliziten semantic_related/further_information-K0-Verknüpfungen; genau ein Zielbeitrag.
 - 506/507 Dateien byteidentisch zu 1.50.634; PHP 9/9 PASS; JS PASS; ZIP PASS.
 - Im Design-Büro gespeichert als PFERDE_ATELIER_DESIGN_1.50.635_EINZELBEITRAG_SIDEBAR_KORREKTUR_NUR_TEST.zip plus Prüfnachweis.
+
+
+## 2026-11-22 – Design 1.50.636 Sidebar-Sichtbarkeitsfix
+
+- 1.50.635 Einzelbeitrags-Sidebar FAIL: komplett unsichtbar.
+- Nachgewiesene Ursache: falsche Aktivierungsbedingung prüfte den noch auf Lesebreite begrenzten Astra-Container auf >=940px, bevor das Sidebar-Grid diesen Container überhaupt verbreitern konnte.
+- 1.50.636 entfernt nur diese falsche Sperre. Sidebar aktiv ab Browserbreite 1000px; 1024px aktiv, 999px aus.
+- Müsli-Testartikel belegt: vorhandener ready-Artikelplan mit ausgewähltem Produkt 16615 und weiteren PASS-Produkten; vorhandene semantic_related/further_information-Verknüpfungen.
+- 506/507 Dateien byteidentisch zu 1.50.635; PHP 9/9 PASS; JS PASS; ZIP PASS.
+- Im Design-Büro als 1.50.636 NUR TEST gespeichert; letzter LIVE PASS bleibt 1.50.632.
