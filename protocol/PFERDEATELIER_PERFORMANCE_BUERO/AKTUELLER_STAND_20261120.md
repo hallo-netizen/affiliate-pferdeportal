@@ -1721,3 +1721,18 @@ Wichtig:
 - Artefakt: PFERDE_ATELIER_DESIGN_1.50.630_JOURNAL_RASTER_PAGINATION_NUR_TEST.zip
 - Prüfnachweis: PFERDE_ATELIER_DESIGN_1.50.630_PRUEFNACHWEIS.json
 - Status: NUR TEST; visuelle Abnahme auf Testseite steht aus.
+
+
+## 2026-11-22 – Template Kit 1.50.631 Journal 8 Beiträge + reduzierte Paginierung – NUR TEST
+
+- Basis: 1.50.630.
+- Nutzerprüfung 1.50.630: Hero/Banner/Amazon nahezu PASS; Paginierung zu aufwendig; 8-Beitragsgrenze sichtbar nicht wirksam.
+- Ursache Beitragsgrenze: nur `posts_per_page=8` war gesetzt. Auf Archivseiten kann `posts_per_archive_page` anschließend einen anderen Wert wieder darüberlegen.
+- Korrektur: für die acht redaktionellen Journal-Kategoriearchive jetzt `posts_per_page=8`, `posts_per_archive_page=8`, `nopaging=false`; Hook-Priorität auf 9999, damit spätere Standardwerte die Grenze nicht wieder überschreiben.
+- Paginierung reduziert: keine äußere Box, keine Rahmen um Seitenzahlen, normale Links transparent; ausschließlich die aktive Seite erhält Ocker #C89214 mit weißer Schrift. Hover/Fokus nur ockerfarbene Schrift ohne Hintergrundfläche.
+- Hero, Banner und Amazon-Kachel bleiben gegenüber 1.50.630 unverändert.
+- Diff gegen 1.50.630: 507 gemeinsame Dateien, 506 byteidentisch; nur `pferde-template-kit.php` geändert; keine Dateien hinzugefügt/entfernt.
+- PHP 9/9 PASS, JavaScript-Syntax PASS, ZIP-CRC PASS, statischer Vertragstest PASS.
+- Artefakt: `PFERDE_ATELIER_DESIGN_1.50.631_JOURNAL_8_BEITRAEGE_PAGINATION_NUR_TEST.zip`
+- Prüfnachweis: `PFERDE_ATELIER_DESIGN_1.50.631_PRUEFNACHWEIS.json`
+- Status: NUR TEST; visuelle Nutzerabnahme steht aus.
