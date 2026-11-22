@@ -91,3 +91,18 @@ Nach Live-Installation dient 1.50.632 als gemeinsame Basis für Live und Test.
 - Artefakt: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.635_EINZELBEITRAG_SIDEBAR_KORREKTUR_NUR_TEST.zip`
 - Prüfnachweis: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.635_PRUEFNACHWEIS.json`
 - Status: **NUR TEST**. 1.50.632 bleibt bis Nutzerabnahme der sichere Live-Fallback.
+
+
+## 2026-11-22 – 1.50.635 FAIL / 1.50.636 Sichtbarkeitsfix – NUR TEST
+
+- 1.50.635 vom Nutzer als **FAIL** gemeldet: rechte Einzelbeitrags-Sidebar auf der Testseite komplett unsichtbar.
+- Ursache im exakten 1.50.635-Code nachgewiesen: `canActivate()` verlangte neben `window.innerWidth >= 1000` zusätzlich eine Breite des **noch unveränderten** Astra-Containers von mindestens 940px. Dieser Container ist vor Aktivierung weiterhin auf die normale Lesebreite begrenzt; dadurch konnte die Sidebar trotz ausreichend breitem Browser nie aktiviert werden.
+- Beweis im Vertragstest: bei 1200px Browserbreite und 760px Pre-Layout-Astra-Container war 1.50.635 = FALSE; 1.50.636 = TRUE. Bei 1024px = TRUE, bei 999px = FALSE.
+- 1.50.636 entfernt ausschließlich diese falsche Vorab-Containerbreiten-Sperre. Aktivierung jetzt: Browserbreite >=1000px + vorhandener Astra-Zielcontainer.
+- Restliche Sidebar-Korrekturen aus 1.50.635 bleiben erhalten: genau ein Ocker-`WERBUNG`, keine zweite Anzeige-/Disclosure-Zeile, keine inneren Rahmen, Textumbruch ohne Abschneiden, einzeilige CTA, bis zu drei Produktkarten aus vorhandenem Artikelplan, ein weiterführender Beitrag aus vorhandener K0-Verknüpfung.
+- Für den Testartikel `Wie kann ich Müsli für mein Pferd selbst machen?` im Export belegt: Artikelplan `ready`, ausgewähltes Produkt 16615, weitere PASS-Produkte u.a. 16613 und 17057; `semantic_related` verweist auf `mueslis-fuer-pferde-beratung`, `further_information` auf `mueslis-fuer-pferde-faq`.
+- Diff gegen 1.50.635: 507 gemeinsame Dateien, 506 byteidentisch; nur `pferde-template-kit.php` geändert; keine Dateien hinzugefügt/gelöscht.
+- PHP 9/9 PASS, JavaScript-Syntax PASS, ZIP-CRC PASS.
+- Artefakt: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.636_EINZELBEITRAG_SIDEBAR_SICHTBARKEITSFIX_NUR_TEST.zip`
+- Prüfnachweis: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.636_PRUEFNACHWEIS.json`
+- Status: **NUR TEST**. 1.50.632 bleibt letzter LIVE PASS.
