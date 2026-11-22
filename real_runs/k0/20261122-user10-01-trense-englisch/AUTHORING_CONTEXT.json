@@ -22,11 +22,16 @@
         {
           "source_url": "https://de.wikipedia.org/wiki/Trense",
           "source_title": "Wikipedia – Trense"
+        },
+        {
+          "source_url": "https://en.wikipedia.org/wiki/Bit_(horse)",
+          "source_title": "Wikipedia – Bit (horse)"
         }
       ],
       "claims": [
         "Im Englischen bezeichnet bridle eine Zäumung zum Führen des Pferdes.",
-        "Im deutschen fachlichen Sprachgebrauch kann Trense das Mundstück bezeichnen."
+        "Im deutschen fachlichen Sprachgebrauch kann Trense das Mundstück bezeichnen.",
+        "Gebiss, Zäumung und Zügel sind im Englischen unterschiedliche Teile und Begriffe."
       ],
       "fresh_research_reference_date": "2026-11-22"
     },
@@ -69,15 +74,28 @@
         "article_types": [
           "FAQ"
         ]
+      },
+      "F3": {
+        "source_url": "https://en.wikipedia.org/wiki/Bit_(horse)",
+        "source_title": "Wikipedia – Bit (horse)",
+        "evidence_text": "The bit, bridle and reins function together to give control of the horse's head to the rider.",
+        "evidence_text_sha256": "2d04ac86da08e1ab80dcd1d22a7b2ae9c22b44add0f4ee55a4b2eacb4cb95cba",
+        "statement": "Gebiss, Zäumung und Zügel sind im Englischen unterschiedliche Teile und Begriffe.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
       }
     },
     "required_fact_ids": [
       "F1",
-      "F2"
+      "F2",
+      "F3"
     ],
     "allowed_fact_ids": [
       "F1",
-      "F2"
+      "F2",
+      "F3"
     ],
     "bound_links": [
       {
