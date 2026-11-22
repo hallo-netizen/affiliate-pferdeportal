@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Höveler Mineralfutter für Pferde bedarfsgerecht auswählen",
+      "target_keyword": "höveler mineralfutter für pferde",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "9204db144f7dda3feb0ba969b3ddae12be6b1072738428fbb41014a7c2550a66"
+    }
+  ],
+  "batch_sha256": "fedad554c039bb0218f1dae3b3230075671b17e4ab7fc6b000bd934d3e6b108e"
+}
