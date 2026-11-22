@@ -1845,3 +1845,13 @@ Wichtig:
 - Related: ausschließlich vorhandene Astra-Related-Ausgabe; Featured-Images werden wieder sichtbar, Mobil zeigt Originalkarten.
 - Amazon: vorhandener Link/Bild, kurze Copy `Passende Angebote entdecken`, sichtbare Wortmarke/Smile, einzeilige CTA.
 - 506/507 Dateien byteidentisch zu 1.50.632; PHP 9/9 PASS; JS PASS; ZIP PASS. Letzter LIVE PASS bleibt 1.50.632.
+
+
+## 2026-11-22 – Design 1.50.642 Weiterführende Beiträge
+
+- 1.50.641 Nutzerprüfung: Responsive PASS, Amazon/Produkte sichtbar; Related fehlte.
+- 1.50.642 ändert nur Related-Ausgabe: maximal 2 echte veröffentlichte Posts mit Bild. Kategorie-/Seitenziele werden nicht sichtbar ausgegeben.
+- Grund für bisherigen Leerzustand belegt: exakte FAQ-Blattkategorien können nur den aktuellen Beitrag enthalten (Müsli FAQ und Heunetze FAQ im Export jeweils 1 veröffentlichter Post).
+- Fallback bleibt innerhalb desselben bereits im Artikel verlinkten Hauptthemas und bewertet nur vorhandene veröffentlichte Beiträge; keine Kategoriezuordnung wird geändert.
+- Responsive, Produkt- und Amazon-Ausgabe gegenüber 1.50.641 unverändert. 506/507 Dateien byteidentisch; PHP 9/9 PASS; JS PASS; ZIP PASS.
+- Im Design-Büro gespeichert als 1.50.642 ZIP + Prüfnachweis.
