@@ -73,3 +73,21 @@ Nach Live-Installation dient 1.50.632 als gemeinsame Basis für Live und Test.
 - Artefakt: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.634_EINZELBEITRAG_SIDEBAR_REPARATUR_NUR_TEST.zip`
 - Prüfnachweis: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.634_PRUEFNACHWEIS.json`
 - **1.50.632 bleibt weiterhin der letzte LIVE-PASS-Fallback.**
+
+
+## 2026-11-22 – 1.50.635 Einzelbeitrag Sidebar Korrektur – NUR TEST
+
+- 1.50.634 sichtbar noch nicht PASS: beim Verkleinern des Browserfensters blieb die Sidebar zu lange aktiv; Amazon-Box doppelte Werbekennzeichnung/innerer Rahmen; Text/CTA brachen schlecht; Produktkacheln und weiterführender Beitrag fehlten auf dem Testartikel.
+- 1.50.635 baut auf der sicheren Geschwister-Sidebar-Architektur von 1.50.634 auf; 1.50.632 bleibt letzter LIVE PASS.
+- Responsive-Fix: Sidebar nur ab 1000px und nur bei realer Astra-Containerbreite >= 940px. Darunter sofort Original-Einzelbeitrag ohne Sidebar.
+- Amazon/Artikelanzeige: genau ein Ocker-Kicker `WERBUNG`; interne `Anzeige`- und Disclosure-Zeilen im Sidebar-Klon ausgeblendet; keine inneren Rahmen/Boxen; Text darf vollständig umbrechen; CTA bleibt einzeilig.
+- Produkte: bis zu drei Karten aus dem vorhandenen gespeicherten Artikelplan `ppar_article_delivery_plan_v1`. Zuerst finale `campaign_post_ids`; falls weniger als drei vorhanden sind, nur bereits im selben Plan mit `overall=pass` geprüfte Kandidaten. Kein neuer Produktsuchlauf. Kampagnendaten werden nur dargestellt, wenn Produkt, aktiv, Programm aktiv, Bild/URL/Titel vorhanden und nicht als unavailable/ended markiert.
+- Produktkarten zeigen Provider (eBay/Amazon/idealo), Bild, Titel, optional Preis und eine einzeilige CTA. Vorhandene Affiliate-URL wird unverändert verwendet.
+- Weiterführender Beitrag: Priorität auf den im Artikel explizit gesetzten K0-Linkrollen `semantic_related` bzw. `further_information`; daraus wird genau ein veröffentlichter Beitrag der verknüpften Kategorie gewählt. Nur wenn dort nichts gefunden wird, gleiche aktuelle Kategorie. Keine freie Themen-/Keyword-Empfehlungslogik.
+- Originale Werbe-/Produkt-/Astra-Related-Blöcke werden nur bei aktiver Sidebar verborgen; unter 1000px wieder unverändert sichtbar.
+- Kein Sticky, keine Änderung am Affiliate-Router.
+- Diff gegen 1.50.634: 507 gemeinsame Dateien, 506 byteidentisch; nur `pferde-template-kit.php` geändert; keine Dateien hinzugefügt/gelöscht.
+- PHP 9/9 PASS, JavaScript-Syntax PASS, ZIP-CRC PASS, statischer Responsive-/Produktplan-Vertrag PASS.
+- Artefakt: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.635_EINZELBEITRAG_SIDEBAR_KORREKTUR_NUR_TEST.zip`
+- Prüfnachweis: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.635_PRUEFNACHWEIS.json`
+- Status: **NUR TEST**. 1.50.632 bleibt bis Nutzerabnahme der sichere Live-Fallback.
