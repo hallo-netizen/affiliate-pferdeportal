@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Brauchen Pferde auf der Weide ständig Wasser?",
+      "target_keyword": "Benötigen Pferde auf der Weide Wasser?",
+      "category": "alltags-pferde-haltungsformen",
+      "article_type": "FAQ",
+      "plan_slot": "073539bbf8ecfea1869f29558f5dd76087a8966752572775bf3fb8dc1448cb58"
+    }
+  ],
+  "batch_sha256": "9f0913a3797373f7208cb6509042dfa3d084aaf34119681681d37e6251067541"
+}
