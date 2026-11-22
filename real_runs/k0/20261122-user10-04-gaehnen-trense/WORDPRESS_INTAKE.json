@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Warum gähnen Pferde beim Anlegen einer Trense?",
+      "target_keyword": "Warum gähnen pferde beim trensen?",
+      "category": "pferde-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "3c845c92c3d421b55dc3816518fb74a0fd258edfb2ccd062db12704a34c11d47"
+    }
+  ],
+  "batch_sha256": "f5756e448b23751e0a983261d43b9256870d33c0ab721ee7555d081a48ebe1db"
+}
