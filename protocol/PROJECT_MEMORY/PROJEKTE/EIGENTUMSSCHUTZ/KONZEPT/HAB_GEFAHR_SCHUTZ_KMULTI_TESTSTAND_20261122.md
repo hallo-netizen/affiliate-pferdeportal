@@ -1,5 +1,30 @@
 # Hab & Bewahr – Gefahr & Schutz: praktischer K-Multi-Teststand
 
+## Aktuellster Original-K-Multi-Stand am 22.11.2026 – tatsächlich ausgeführter 110-Regel-Ausschnitt
+
+**Dieser Abschnitt hat Vorrang vor unten stehenden älteren Testzahlen (223/234/246) und veralteten „0 von 110“-Meldungen.**
+
+- **GitHub-Gesamttest:** https://github.com/hallo-netizen/k0-multiportal/actions/runs/45016997529 — **SUCCESS**.
+- **Technische Tests:** **251 bestanden** (74 + 98 + 26 + 53). Unabhängige echte LanguageTool-6.8-Prüfung auf den drei ursprünglichen und den drei überarbeiteten Hab-Texten jeweils **[0,0,0] ungelöste Sprachfehler**.
+- **Echter Original-Hab-Regelkatalog:** 110 HARD-Regel-IDs pro Artikel, davon **49 pro Artikel im bestehenden originalen K-Multi-Autoren-Owner tatsächlich ausgeführt und PASS**, **0 FAIL**, **61 explizit NOT_EXECUTED**. Die noch offenen 61 Regeln werden nicht als bestanden ausgegeben. Der jeweils vollständige 110-Regel-Bericht ist im GitHub-Actions-Artefakt `KMULTI-HAB-THREE-ORIGINAL-FULLCHAIN-RECEIPT-NOT-IMPORT` sowie im bestehenden K-Multi-Gesamtaudit enthalten. Die 251 technischen Unit-Tests sind **nicht** 251 Artikel-Regelprüfungen.
+- **Tatsächlich gelöste alte HARD-Probleme:** Absatz-Untergrenze, mindestens vier Punkte in einer Liste, zwei Fazit-Absätze, absolute Wortobergrenze und ausgewogene Länge der Hauptabschnitte. Gegenprobe über Positiv-/Negativtests. Die drei aktuellen Testfassungen erfüllen alle 49 jetzt ausgeführten Regeln. Bereits vorhandene Merksatz- und Warnkastenprüfung integriert.
+- **Gezielte Texterhaltung:** Abholbox-Fassung auf **891 Wörter** (gegenüber vorher 943) durch Entfernen genau fünf repetitiver Sätze, ohne neue Fakten; im Kameravergleich wurde genau eine vorhandene Aussage in den passenden Abschnitt verschoben. Der dritte Artikel unverändert gegenüber der vorherigen Merksatz-Testfassung. Links, Original-Fünffelder, `plan_slot`, Quelle-Faktenkennungen, 4 Quellenspuren je Artikel sowie Überschriften und Tabellen vorhanden.
+- **6/6 Originale bytegleich geblieben:** Alle fünf vorhandenen Hab-Regelbücher und `hab_3_original_authored_drafts_NOT_RELEASED.json` mit den vorher dokumentierten Git-Blob-Werten abgeglichen und unverändert. Original-K0 nicht aufgerufen, kein neues WordPress-Plugin, keine kostenpflichtige neue Recherche.
+- **Original-Quellenprüfung:** 12 konkrete Belege aus fünf amtlichen Quellenseiten vorhanden und im Original-Quellen-Owner inhaltlich abgeglichen, keine Vollfreigabe aller Artikelbehauptungen.
+- **Sperren ausdrücklich aktiv:** `semantic_fact_approval=false`, vollständige **110/110**-Fachprüfung nicht erbracht, kein WordPress-Frontend-Rendering nachgewiesen, keine signierte unabhängige K-Multi-Release-Freigabe und keine importierbare WordPress-Datei. K-Multi meldet **publish_allowed=false**.
+- **Weiterer zulässiger Arbeitsweg:** Die noch **61 nicht ausgeführten Original-HARD-Regeln** nach bestehendem Owner (insbesondere Artikel-Fakten/semantische Prüfung, Links/WordPress-Verifikation, Endintegrität und Signatur) einzeln schließen. Fehlende Beweise dürfen nicht durch synthetische PASS-Quittungen ersetzt werden. Vorhandene Warn-/Merksatz-Boxen erst bei echtem WordPress-Rendering als fertig bezeichnen.
+
+**Beweispfade:**
+https://github.com/hallo-netizen/k0-multiportal/blob/k0-offline-rule-bindings-20261027/offline_writer_dev/kmulti_authoring_station.py
+
+https://github.com/hallo-netizen/k0-multiportal/blob/k0-offline-rule-bindings-20261027/offline_writer_dev/portal_auto/kmulti_hab_fullchain_audit.py
+
+https://github.com/hallo-netizen/k0-multiportal/blob/k0-offline-rule-bindings-20261027/offline_writer_dev/portal_auto/hab_current/hab_3_editorial_safety_style_CANDIDATE_NOT_RELEASED.json
+
+---
+
+
+
 ## Verbindlicher technischer Anschlussstand – 22.11.2026, Fortsetzung nach dem Ersttest
 
 **Dieser Abschnitt hat Vorrang gegenüber älteren, unten weiterhin als Historie erhaltenen Zwischenständen.**
