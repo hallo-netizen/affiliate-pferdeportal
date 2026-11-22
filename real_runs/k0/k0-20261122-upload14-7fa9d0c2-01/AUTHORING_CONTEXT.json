@@ -1,0 +1,149 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "In welchem Pferdefutter ist besonders viel Eiweiß?",
+    "target_keyword": "In welchem Pferdefutter ist viel Eiweiß?",
+    "category": "pferdeernaehrung-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "ad2cff1ddb483c7bb1d9667df284acbd4e8b1e69169ed707ce61dfc5866d3f4a"
+  },
+  "content_profile": {
+    "search_intent": "Eiweißreiche Pferdefutterarten und Unterschiede im Proteingehalt erklären"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+          "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses and Other Equids"
+        }
+      ],
+      "claims": [
+        "Nicht nur die Proteinmenge, auch die Qualität der Eiweißversorgung ist bei Pferden wichtig.",
+        "Luzerne und Sojabohnen liefern im Vergleich zu Getreide und vielen Grasheusorten ein günstigeres Aminosäureprofil.",
+        "Der Eiweißbedarf unterscheidet sich zwischen wachsenden und ausgewachsenen Pferden."
+      ],
+      "fresh_research_reference_date": "2026-11-22"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "In welchem Pferdefutter ist viel Eiweiß?",
+      "topic": "In welchem Pferdefutter ist besonders viel Eiweiß?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "In welchem Pferdefutter ist besonders viel Eiweiß?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses and Other Equids",
+        "evidence_text": "Protein quality of the feed provided to horses is important.",
+        "evidence_text_sha256": "3621d5140c0e9f8697d9a7d36664600e1a1eade712130745daa6a646d7141503",
+        "statement": "Nicht nur die Proteinmenge, auch die Qualität der Eiweißversorgung ist bei Pferden wichtig.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses and Other Equids",
+        "evidence_text": "The amino acid balance in alfalfa and other legumes, such as soybeans, is superior to that found in cereal grains (especially corn) or most grass hays.",
+        "evidence_text_sha256": "f73a95efad6b9237ed67938e1933062084051f44eb0fe262883cdeb523578fd7",
+        "statement": "Luzerne und Sojabohnen liefern im Vergleich zu Getreide und vielen Grasheusorten ein günstigeres Aminosäureprofil.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses and Other Equids",
+        "evidence_text": "Growing horses have a higher need for protein (usually 14–16% of total ration) than mature horses (8–10% of total ration).",
+        "evidence_text_sha256": "37b35ef40d6e5ebecfcd74ff13a672eb9d1355a1450d85499e88f4eb14602cd8",
+        "statement": "Der Eiweißbedarf unterscheidet sich zwischen wachsenden und ausgewachsenen Pferden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "anchor": "Pferdeernährung verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/fuetterung/",
+        "anchor": "Fütterung",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/fuetterung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferdefutter",
+      "Eiweiß",
+      "Protein",
+      "Luzerne",
+      "Soja",
+      "Grasheu",
+      "Aminosäuren",
+      "Ration"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Die Futterunterschiede werden in einer übersichtlichen Erläuterung nach Quellen und Bedarf statt mit erfundenen Zahlen verglichen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
