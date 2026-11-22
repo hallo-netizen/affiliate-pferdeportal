@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Mineralfutter für spanische Pferde nach Bedarf auswählen",
+      "target_keyword": "mineralfutter für spanische pferde",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "6d7033787b31b8cf11ddd72e84398fcd548eebd1d7ba7bf4f8a8f02bb9883d42"
+    }
+  ],
+  "batch_sha256": "edd8f5226018b941b404b30b1ca1a1efe98b3eb70a7b33089340f5a68457ba0e"
+}
