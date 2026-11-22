@@ -167,3 +167,13 @@ Nach Live-Installation dient 1.50.632 als gemeinsame Basis für Live und Test.
 - Artefakt: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.639_EINZELBEITRAG_REINES_DESIGN_NUR_TEST.zip`
 - Prüfnachweis: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.639_PRUEFNACHWEIS.json`
 - Status: **NUR TEST**. Letzter LIVE PASS bleibt 1.50.632.
+
+
+## 2026-11-22 – 1.50.639 FAIL / Sidebar-Umbau gestoppt
+
+- Nutzerprüfung 1.50.639: **FAIL**.
+- Sichtbare Fehler: Sidebar reagiert beim Verkleinern nicht sauber; Produkt-/Weiterführungsblöcke verschwinden erneut bzw. sind nicht stabil sichtbar.
+- Entscheidung: weiterer Sidebar-Umbau **gestoppt**. Keine weitere Reparaturversion auf Basis 1.50.633–1.50.639.
+- Verbindlicher Rücksetzpunkt: **1.50.632 LIVE PASS**.
+- 1.50.632 bleibt der letzte vollständig abgenommene Designstand.
+- Die Versionen 1.50.633 bis 1.50.639 gelten für die Einzelbeitrags-Sidebar als verworfene Testreihe und dürfen nicht Live eingesetzt werden.
