@@ -1,0 +1,155 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Warum gähnen Pferde beim Anlegen einer Trense?",
+    "target_keyword": "Warum gähnen pferde beim trensen?",
+    "category": "pferde-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "3c845c92c3d421b55dc3816518fb74a0fd258edfb2ccd062db12704a34c11d47"
+  },
+  "content_profile": {
+    "search_intent": "Mögliche Ursachen für Gähnen beim Anlegen einer Trense beim Pferd und das vorsichtige Einordnen des Verhaltens verstehen."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://eu.worldhorsewelfare.org/advice/bridles-how-to-choose-and-fit-them-correctly",
+          "source_title": "World Horse Welfare – Bridles"
+        },
+        {
+          "source_url": "https://www.msdvetmanual.com/horse-owners/digestive-disorders-of-horses/dental-disorders-of-horses",
+          "source_title": "MSD Veterinary Manual – Dental Disorders"
+        },
+        {
+          "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/diagnosing-behavior-problems-in-horses",
+          "source_title": "MSD Veterinary Manual – Diagnosing Behavior Problems"
+        }
+      ],
+      "claims": [
+        "Ein schlecht sitzendes Zaumzeug kann Druck am Pferdekopf ausüben.",
+        "Zahnprobleme können die Annahme des Gebisses erschweren.",
+        "Stress kann beim Pferd das Verhalten verändern; Gähnen allein liefert keine sichere Diagnose."
+      ],
+      "fresh_research_reference_date": "2026-11-22"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Warum gähnen pferde beim trensen?",
+      "topic": "Warum gähnen Pferde beim Anlegen einer Trense?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Warum gähnen Pferde beim Anlegen einer Trense?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://eu.worldhorsewelfare.org/advice/bridles-how-to-choose-and-fit-them-correctly",
+        "source_title": "World Horse Welfare – Bridles",
+        "evidence_text": "the bridle can put excessive pressure on various parts of the head",
+        "evidence_text_sha256": "7c1feccc75d57f257c41c23cc1d98cfeb1477bf7334ed03299ddf039ed5bf41d",
+        "statement": "Ein schlecht sitzendes Zaumzeug kann Druck am Pferdekopf ausüben.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/digestive-disorders-of-horses/dental-disorders-of-horses",
+        "source_title": "MSD Veterinary Manual – Dental Disorders",
+        "evidence_text": "A horse with a dental problem may be reluctant to take the bit",
+        "evidence_text_sha256": "951b286aaad8f0c5fbc3a3f369860740f093b0de0f6c168d0568443f570fab0d",
+        "statement": "Zahnprobleme können die Annahme des Gebisses erschweren.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/diagnosing-behavior-problems-in-horses",
+        "source_title": "MSD Veterinary Manual – Diagnosing Behavior Problems",
+        "evidence_text": "stress, which can alter normal body functions, behavior, and immune responses",
+        "evidence_text_sha256": "12e170c50011f8e8750f621a4225851b1c5b63c2d4386c4ddbd626d15d522dd3",
+        "statement": "Stress kann beim Pferd das Verhalten verändern; Gähnen allein liefert keine sichere Diagnose.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-verstehen/",
+        "anchor": "pferde-verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/gebisse-faq/",
+        "anchor": "/category/gebisse-faq/",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/category/gebisse-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Trense",
+      "Gähnen",
+      "Gebiss",
+      "Stress",
+      "Zaumzeug",
+      "Pferd"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die einzelnen möglichen Ursachen für Gähnen lassen sich nicht seriös in einer vermeintlich gewichteten Vergleichstabelle darstellen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
