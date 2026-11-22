@@ -1,0 +1,151 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Sollte man Pferde morgens auf die Weide stellen?",
+    "target_keyword": "Sollte man Pferde morgens auf die Weide stellen?",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "FAQ",
+    "plan_slot": "ebb5f8d893c17f556f99eb8f74b286bb591fd9fd90a57505e554b51fccf12a9b"
+  },
+  "content_profile": {
+    "search_intent": "Vor- und Nachteile des morgendlichen Weidegangs für Pferde unter Berücksichtigung von Bedingungen und Haltung erklären."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/preventative-health-care-and-husbandry-of-horses/nutrition-of-horses?autoredirectid=19924",
+          "source_title": "MSD Veterinary Manual – Nutrition of Horses"
+        },
+        {
+          "source_url": "https://www.worldhorsewelfare.org/advice/laminitis-in-horses",
+          "source_title": "World Horse Welfare – Laminitis"
+        }
+      ],
+      "claims": [
+        "Kühle Bedingungen beeinflussen das Graswachstum und können Fruktane im Gras anreichern.",
+        "Hufrehe ist eine schmerzhafte Erkrankung und bei Weideentscheidungen zu berücksichtigen.",
+        "Pferde benötigen auch beim Weidegang jederzeit ausreichend Trinkwasser."
+      ],
+      "fresh_research_reference_date": "2026-11-22"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Sollte man Pferde morgens auf die Weide stellen?",
+      "topic": "Sollte man Pferde morgens auf die Weide stellen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Sollte man Pferde morgens auf die Weide stellen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/preventative-health-care-and-husbandry-of-horses/nutrition-of-horses?autoredirectid=19924",
+        "source_title": "MSD Veterinary Manual – Nutrition of Horses",
+        "evidence_text": "colder temperatures decrease grass growth and result in concentration of the fructan",
+        "evidence_text_sha256": "a471e5fdd4fe124fb52bc44ba92aa511a32a6c7fbdae8f5c0d37cc3dd7e33d2f",
+        "statement": "Kühle Bedingungen beeinflussen das Graswachstum und können Fruktane im Gras anreichern.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/laminitis-in-horses",
+        "source_title": "World Horse Welfare – Laminitis",
+        "evidence_text": "Laminitis is an extremely painful condition of the feet",
+        "evidence_text_sha256": "db2bd994faaceaf59b9a8ee58cc4557b30668997b8ce1305bd94795e144286a1",
+        "statement": "Hufrehe ist eine schmerzhafte Erkrankung und bei Weideentscheidungen zu berücksichtigen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/preventative-health-care-and-husbandry-of-horses/nutrition-of-horses?autoredirectid=19924",
+        "source_title": "MSD Veterinary Manual – Nutrition of Horses",
+        "evidence_text": "Adequate fresh water intake is essential for every horse.",
+        "evidence_text_sha256": "58844ca0964c5cfff8a8c2e5a5f704d301a4a3ae75028661cf08d62d2ac1a77d",
+        "statement": "Pferde benötigen auch beim Weidegang jederzeit ausreichend Trinkwasser.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "alltags-pferde-haltungsformen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/nachsaat-fuer-pferdeweiden-beratung/",
+        "anchor": "/category/nachsaat-fuer-pferdeweiden-beratung/",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      },
+      {
+        "href": "/category/nachsaat-fuer-pferdeweiden-beratung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Morgens",
+      "Weide",
+      "Fruktane",
+      "Gras",
+      "Hufrehe",
+      "Pferdeweiden"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine feste Morgen-gegen-Abend-Tabelle wäre ohne Wetter, Graszustand und Tiergesundheit eine irreführende Pauschalisierung."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
