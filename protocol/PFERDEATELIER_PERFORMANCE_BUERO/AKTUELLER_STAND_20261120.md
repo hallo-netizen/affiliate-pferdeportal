@@ -1855,3 +1855,11 @@ Wichtig:
 - Fallback bleibt innerhalb desselben bereits im Artikel verlinkten Hauptthemas und bewertet nur vorhandene veröffentlichte Beiträge; keine Kategoriezuordnung wird geändert.
 - Responsive, Produkt- und Amazon-Ausgabe gegenüber 1.50.641 unverändert. 506/507 Dateien byteidentisch; PHP 9/9 PASS; JS PASS; ZIP PASS.
 - Im Design-Büro gespeichert als 1.50.642 ZIP + Prüfnachweis.
+
+
+## 2026-11-22 – Design 1.50.642 LIVE PASS
+
+- Nutzer hat Designplugin 1.50.642 nach Sichtprüfung als PASS bestätigt.
+- Einzelbeitrag: Responsive PASS, Amazon PASS, Produkte PASS, bis zu zwei weiterführende echte Beiträge mit Bild PASS.
+- 1.50.642 ist für Live freigegeben und im Design-Büro als LIVE_PASS ZIP + Prüfnachweis gespeichert.
+- Neue verbindliche Designbasis: 1.50.642. Historischer Fallback vor Einzelbeitragsumbau: 1.50.632.
