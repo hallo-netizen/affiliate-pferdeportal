@@ -177,3 +177,27 @@ Nach Live-Installation dient 1.50.632 als gemeinsame Basis für Live und Test.
 - Verbindlicher Rücksetzpunkt: **1.50.632 LIVE PASS**.
 - 1.50.632 bleibt der letzte vollständig abgenommene Designstand.
 - Die Versionen 1.50.633 bis 1.50.639 gelten für die Einzelbeitrags-Sidebar als verworfene Testreihe und dürfen nicht Live eingesetzt werden.
+
+
+## 2026-11-22 – 1.50.640 Einzelbeitrag Sidebar – sauberer Neuansatz aus 1.50.632 – NUR TEST
+
+- Ausgangsbasis: **1.50.632 LIVE PASS**. Die verworfene Testreihe 1.50.633–1.50.639 wird nicht weiterverwendet.
+- Ziel: Desktop/große Tablets rechte Begleitspalte; schmale Ansichten/Mobil bleiben im originalen einspaltigen Artikel.
+- Harte Breitenregel: Sidebar erst ab 1180px. Hauptartikel bleibt 760px breit; Sidebar 280px; Abstand 32px. Der Artikel wird nicht zusammengedrückt.
+- Affiliate-Sicherheit:
+  - keine `category_product_1/2/3`-Aufrufe,
+  - kein `do_shortcode`,
+  - keine neue Produkt-/Provider-/Kategorieauswahl,
+  - keine `WP_Query`, `get_posts`, `url_to_postid` oder `get_term_by` im Sidebar-Code.
+- Produkte: Desktop/große Tablets klonen ausschließlich den bereits fertig gerenderten `.ppar-article-product-block`. Auswahl, Anzahl, Anbieter und Tracking bleiben damit vollständig in der Affiliate-Zentrale.
+- Mobile/schmal: Original-`.ppar-article-product-block` bleibt sichtbar. Kein Ersatz- oder Zusatzproduktblock.
+- Atomarer Sichtbarkeitsschutz: Originalanzeige, Originalproduktblock und Original-Related-Block werden nur dann in breiter Ansicht verborgen, wenn die entsprechende Kopie rechts erfolgreich erzeugt wurde. Unter 1180px zeigt CSS die Originale sofort wieder.
+- Weiterführende Beiträge: ausschließlich Astras bereits vorhandene echte Related-Post-Ausgabe; keine neue Related-Query und kein Kategorie-/Portalpfad-Fallback. Der erste bereits ausgewählte Beitrag wird rechts gezeigt.
+- Mobile Related: Astras Originalausgabe bleibt sichtbar. Der bisherige Designfilter, der Featured-Images entfernt hat, gibt das vorhandene Astra-Bild wieder frei; Related wird als Beitragskarte mit Bild + Titel dargestellt.
+- Amazon: vorhandener echter Amazon-Link wird wiederverwendet; vorhandenes Quellbild wird übernommen, wenn vorhanden. Zusätzlich sichtbare Amazon-Wortmarke mit Smile, Copy `Passende Angebote entdecken`, CTA `Bei Amazon ansehen` einzeilig.
+- Diff gegen 1.50.632: 507 gemeinsame Dateien, 506 byteidentisch; nur `pferde-template-kit.php` geändert.
+- PHP 9/9 PASS, JavaScript-Syntax PASS, ZIP-CRC PASS.
+- Lokaler Chromium-Visualtest weiterhin wegen Container/DBus nicht zuverlässig ausführbar; deshalb kein behaupteter visueller PASS.
+- Artefakt: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.640_EINZELBEITRAG_SIDEBAR_SICHER_NUR_TEST.zip`
+- Prüfnachweis: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.640_PRUEFNACHWEIS.json`
+- Status: **NUR TEST**. Letzter LIVE PASS bleibt 1.50.632.
