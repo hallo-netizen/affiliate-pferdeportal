@@ -1429,3 +1429,88 @@ Der Tiefenlauf misst die Tabelle `slfo_ppar_control_decisions` jedoch über den 
   2. keine bestehende Funktion zurückgenommen,
   3. Bytegleichheit aller unveränderten Teile + Inhaltsgleichheit der bewusst geänderten Teile.
 - Fokus ab jetzt nur auf Sekundenblöcke des aktuellen Frontend-Ranking-/Provider-/Produktausgabepfads.
+
+
+## 2026-11-22 – Kubio testweise deaktiviert / PASSIV-Auswertung
+
+Quelle: `pferdeatelier-performance-gesamtanalyse-20261122-104555.json`
+
+### Verifizierter Testzustand
+- Kubio ist im neuen Lauf deaktiviert.
+- Affiliate-Zentrale weiterhin 6.72.369.
+- Template Kit 1.50.616 und Performance Diagnose Safe 7.0.0 unverändert.
+- Aktive Plugins 35 -> 33.
+- Zusätzlich gegenüber dem vorherigen Kubio-aktiv-Lauf nicht mehr aktiv: All-in-One WP Migration.
+- Weitere Versionsänderungen: HivePress 1.8.2 -> 1.8.3; Texterstellung 0.4.45 -> 0.4.46.
+- Deshalb ist der Lauf kein reiner Kubio-Allein-A/B-Test. Wall-Time-Deltas dürfen Kubio nicht allein zugerechnet werden.
+
+### Bewiesener Kubio-Fußabdruck
+Vorher mit Kubio:
+- 266 registrierte Kubio-Callbacks.
+- ca. 294 Kubio-Dateieinbindungen je typischer Frontendroute; über den ausgewerteten Messlauf 5.921.
+- Frontend-Assets: 1 Kubio-Script + 2 Kubio-Styles; zusätzlich Kubio-Google-Fonts.
+
+Nach Deaktivierung:
+- Kubio nicht mehr in aktiver Pluginliste.
+- Kubio-Datei-/Hook-/Asset-Fußabdruck entfällt.
+
+Browser Startseite:
+- Ressourcen 122 -> 109.
+- DOM-Scripts 111 -> 99.
+- Stylesheets 59 -> 54.
+- Long Tasks 4 / 312 ms -> 1 / 87 ms.
+- JS Heap ca. 83 MB -> ca. 36 MB.
+- LCP 3409,3 ms -> 2931,8 ms.
+Diese Browserverbesserung ist real, aber wegen weiterer gleichzeitiger Pluginänderungen nicht vollständig Kubio allein zurechenbar.
+
+### Harte Gegenprobe gegen Kubio als Hauptursache
+Pferdesättel:
+- mit Kubio: 1421 Queries / 131116 Cache-Hits / 3585,26 ms CPU.
+- ohne Kubio: 1422 Queries / 131274 Cache-Hits / 3984,08 ms CPU.
+
+Ausrüstung/Sattel:
+- mit Kubio: 838 Queries / 74419 Cache-Hits / 2577,89 ms CPU.
+- ohne Kubio: 839 Queries / 74305 Cache-Hits / 2674,10 ms CPU.
+
+Damit ist belegt:
+- Kubio verursacht nicht die 6.72.369-Query-Explosion.
+- Kubio verursacht nicht den dominanten 74k-131k internen Cachezugriffs-Fingerabdruck der Produktseiten.
+- Die Hauptlast bleibt nach Kubio-Deaktivierung bestehen.
+
+### Phasenvergleich
+Mit Kubio -> ohne Kubio:
+- plugins_loaded Ø 367,69 -> 274,44 ms.
+- init Ø 475,42 -> 415,09 ms.
+- wp_head Ø 350,91 -> 299,96 ms.
+- wp_footer Ø 1823,20 -> 1684,30 ms.
+- loop_start Ø 580,52 -> 614,18 ms.
+
+Bewertung:
+- Deaktivierung reduziert allgemeinen Grundballast.
+- Kein Beweis, dass Kubio die mehrsekündige Hauptbremse verursacht.
+- Serverlast war im Kubio-aus-Lauf deutlich höher (ca. 183-203 statt ca. 138-150), daher Wall-Time nicht isoliert bewertbar.
+
+### Funktionsschutz Kubio
+- Aus den PASSIV-Daten ist nicht bewiesen, dass keine Seite/Funktion auf Kubio-Inhalte angewiesen ist.
+- `queried_object_has_kubio_blocks` und `queried_object_saved_in_kubio` liefern in der Diagnose null.
+- Entscheidung: Kubio auf der Testseite vorerst deaktiviert lassen, aber NICHT löschen. Dauerhafte Entfernung erst nach separatem Inhalts-/Funktionsnachweis.
+
+### Nächster kontrollierter Schritt
+Keine weitere Plugin-Deaktivierung.
+
+Testzustand einfrieren und nur:
+- Affiliate-Zentrale 6.72.369 -> 6.72.370.
+
+Begründung:
+- 6.72.369-Query-Regression bereits live bewiesen.
+- Ursache exakt bewiesen: abgeschaltete Meta-Cache-Vorladung führt zu hunderten Einzel-Nachladungen.
+- 6.72.370 stellt den historischen Sammel-Metacache-Pfad wieder her.
+- die drei betroffenen Metadatenfunktionen sind wieder byte-identisch zum sicheren 6.72.367/6.72.368-Stand.
+- Funktions-/Hook-/Shortcode-/Schreibschutz für 6.72.370 dokumentiert.
+
+Harte Abnahmekriterien nach Installation 6.72.370:
+1. Pferdesättel Queries müssen vom aktuellen Bereich ~1422 deutlich zurück Richtung ~320.
+2. Ausrüstung/Sattel vom aktuellen Bereich ~839 zurück Richtung ~298.
+3. Cache-Hits, CPU und Inhaltsphase separat vergleichen.
+4. Wall-Time nur zusammen mit CPU/Queries/Cache/Phasen bewerten.
+5. Keine weitere Änderung gleichzeitig.
