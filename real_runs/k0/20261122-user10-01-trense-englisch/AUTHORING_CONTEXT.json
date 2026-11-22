@@ -103,16 +103,27 @@
         "href": "/category/pferdewissen-grundlagen/",
         "anchor": "Pferdewissen",
         "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/trensen-beratung/",
+        "anchor": "Beratung Trensen",
+        "block": "details"
       }
     ],
     "link_registry": [
       {
         "href": "/category/pferdewissen-grundlagen/",
         "active": true
+      },
+      {
+        "href": "/category/trensen-beratung/",
+        "active": true
       }
     ],
     "runtime_link_roles": [
-      "parent_category"
+      "parent_category",
+      "semantic_related"
     ],
     "wordpress_category": {
       "id": 0,
