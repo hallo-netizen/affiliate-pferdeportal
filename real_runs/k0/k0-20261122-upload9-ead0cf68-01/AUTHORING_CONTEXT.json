@@ -1,0 +1,153 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Klebepflaster für Pferde richtig auswählen",
+    "target_keyword": "klebepflaster pferd",
+    "category": "verbandsmaterial-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "0dabdfd311442187cfd55982eb29ccd46d04281e0492b2d4c659049b6a8adf6a"
+  },
+  "content_profile": {
+    "search_intent": "Auswahl geeigneter Klebepflaster für den Verband am Pferd"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/emergency-medicine-and-critical-care/emergency-medicine-in-horses/trauma-and-first-aid-in-horses",
+          "source_title": "MSD Veterinary Manual – Trauma and First Aid in Horses"
+        }
+      ],
+      "claims": [
+        "Wunden am Pferd werden mit einer sterilen, nicht haftenden Auflage und einem geeigneten Halte- beziehungsweise Polsterverband abgedeckt.",
+        "Bei der Fixierung einer Beinschiene beschreibt das veterinärmedizinische Handbuch überlappendes, nicht elastisches Tape.",
+        "Bei einer Schienenfixierung muss die Polsterung Verletzungen der Haut an Kontaktstellen vermeiden."
+      ],
+      "fresh_research_reference_date": "2026-11-22"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "klebepflaster pferd",
+      "topic": "Klebepflaster für Pferde richtig auswählen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "verbandsmaterial-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Geeignetes Fixier- und Verbandpflaster für Pferde hinsichtlich Haftung, Verletzungsrisiko und Einsatzgebiet auswählen",
+      "decision_criteria": [
+        "Verwendungszweck und Wundkontakt",
+        "Fixierung ohne übermäßigen Druck",
+        "Hautschutz und sichere Polsterung"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/emergency-medicine-and-critical-care/emergency-medicine-in-horses/trauma-and-first-aid-in-horses",
+        "source_title": "MSD Veterinary Manual – Trauma and First Aid in Horses",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ],
+        "evidence_text": "The wound should be dressed with a sterile, nonadherent bandage and a support wrap or padded bandage.",
+        "evidence_text_sha256": "9007c1157683f3dac5cbb32de01470ed73440838ec519173a170c2ee0fac4cf6",
+        "statement": "Wunden am Pferd werden mit einer sterilen, nicht haftenden Auflage und einem geeigneten Halte- beziehungsweise Polsterverband abgedeckt."
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/emergency-medicine-and-critical-care/emergency-medicine-in-horses/trauma-and-first-aid-in-horses",
+        "source_title": "MSD Veterinary Manual – Trauma and First Aid in Horses",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ],
+        "evidence_text": "using four to six layers of overlapping, nonelastic tape",
+        "evidence_text_sha256": "6b40c6e6e449074444db3c226b066ed02909549d6a3efc4562618c812c800176",
+        "statement": "Bei der Fixierung einer Beinschiene beschreibt das veterinärmedizinische Handbuch überlappendes, nicht elastisches Tape."
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/emergency-medicine-and-critical-care/emergency-medicine-in-horses/trauma-and-first-aid-in-horses",
+        "source_title": "MSD Veterinary Manual – Trauma and First Aid in Horses",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ],
+        "evidence_text": "The splint should be padded proximally to prevent skin injury.",
+        "evidence_text_sha256": "1a10f4b13eaf271362d001cc8188457912f8777de7667da877abf132f5ddfc6c",
+        "statement": "Bei einer Schienenfixierung muss die Polsterung Verletzungen der Haut an Kontaktstellen vermeiden."
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/verbandsmaterial-beratung/",
+        "anchor": "Beratung Verbandsmaterial",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/gesundheit/gesundheit-erste-hilfe/verbandsmaterial/",
+        "anchor": "Verbandsmaterial",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/verbandsmaterial-beratung/",
+        "active": true
+      },
+      {
+        "href": "/gesundheit/gesundheit-erste-hilfe/verbandsmaterial/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "verbandsmaterial-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Klebepflaster",
+      "Verband",
+      "Wundauflage",
+      "Pflasterbreite",
+      "Fixierband",
+      "Polsterung",
+      "Hautschutz"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Eine anwendungsspezifische Checkliste führt klarer zur geeigneten Fixierung, ohne eine künstliche Vergleichsmatrix zu erzwingen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
