@@ -1686,3 +1686,20 @@ Wichtig:
 - Artefakt: `PFERDE_ATELIER_DESIGN_1.50.628_KONSOLIDIERT_BREADCRUMB_TABELLEN.zip`
 - Prüfnachweis: `PFERDE_ATELIER_DESIGN_1.50.628_PRUEFNACHWEIS.json`
 - Wichtig: Die Original-CSS-Datei des alten Canonical-Table-Plugins war nicht als exportierbare Quelle verfügbar. Deshalb wurde keine Bytegleichheit dieser Alt-CSS behauptet; übernommen ist der bereits bindende Tabellenvertrag des aktuellen Template-Kits plus dessen Gutenberg-Ladeweg. Frontend-spezifische Template-Kit-Regeln bleiben unverändert.
+
+
+## 2026-11-22 – Template Kit 1.50.629 Journal-Unterseiten Layout – NUR TEST
+
+- Basis: 1.50.628 (optisch PASS auf Live/Test).
+- Ausschließlich die acht redaktionellen Journal-Kategoriearchive werden geändert: pferde-verstehen, recht-finanzen-und-organisation, reiterleben-und-community, ausbildung-und-reitweisen, pferdeernaehrung-verstehen, pferdegesundheit-verstehen, alltags-pferde-haltungsformen, pferdewissen-grundlagen.
+- Ausdrücklich ausgeschlossen: Pferderassen und Glossar (journal_role=reference).
+- Änderung 1: vorhandener Kategoriename wird als H1 direkt in das vorhandene Hero-/Termbild gelegt; Astras separate Archivüberschrift wird in diesem Scope ausgeblendet.
+- Änderung 2: der bereits vorhandene Affiliate-Banner mit Slot product_after_category_tiles wird nur verschoben: direkt unter das Hero. Es wird kein zweiter Banner erzeugt.
+- Änderung 3: die bestehende untere Archiv-Paginierung bleibt bestehen; eine DOM-Kopie mit identischen Links wird zusätzlich oberhalb der Beiträge eingefügt.
+- Zielreihenfolge geprüft: Hero -> Banner -> Paginierung oben -> Beiträge -> Paginierung unten.
+- DOM-Vertragstest: Banneranzahl 1; Paginierungen 2; Linkziele oben/unten identisch.
+- Diff gegen 1.50.628: 507 gemeinsame Dateien, 506 byte-identisch; ausschließlich pferde-template-kit.php geändert; keine Datei hinzugefügt/gelöscht.
+- PHP 9/9 PASS; ZIP PASS.
+- Artefakt: PFERDE_ATELIER_DESIGN_1.50.629_JOURNAL_UNTERSEITEN_LAYOUT_NUR_TEST.zip
+- Prüfnachweis: PFERDE_ATELIER_DESIGN_1.50.629_PRUEFNACHWEIS.json
+- Status: NUR TEST; visuelle Nutzerabnahme steht aus.
