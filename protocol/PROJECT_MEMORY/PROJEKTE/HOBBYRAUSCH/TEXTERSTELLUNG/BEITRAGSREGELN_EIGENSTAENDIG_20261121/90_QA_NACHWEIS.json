@@ -425,5 +425,52 @@
       "WordPress live state or content"
     ],
     "no_new_automations_or_paid_research": true
+  },
+  "hobby_original_wordpress_import_simulation_20261122": {
+    "date": "2026-11-22",
+    "scope": "EXISTING_HOBBY_PLUGIN_BINDING_AND_ISOLATED_TECHNICAL_SIMULATION_ONLY",
+    "actual_original_wordpress_hobby_faq_order_count": 3,
+    "source_portal": "www.hobby-depot.de",
+    "other_20_topic_file_was_pferdeatelier_not_hobbydepot": true,
+    "original_kmulti_independent_release_tests": {
+      "pass": 24,
+      "total": 24,
+      "real_content_signoff": false
+    },
+    "original_hobby_php_importer_mock_tests": {
+      "pass": 49,
+      "source": "Original 0.4.24.18 TXE_Workshop::importDrafts -> original PSERC_System4_Import::importPayload",
+      "drafts_created": 3,
+      "reimport_new_drafts": 0,
+      "metadata_unchanged": true,
+      "html_unchanged": true,
+      "wrong_category_blocks_before_write": true,
+      "tampered_five_field_order_blocks": true,
+      "publish_allowed": false
+    },
+    "original_hobby_article_types_supported": [
+      "Beratung",
+      "FAQ",
+      "Pflege",
+      "Vergleich",
+      "Anleitung"
+    ],
+    "comparison_to_horse": {
+      "horse_development_zip": "0.4.46",
+      "horse_latest_confirmed_live": "0.4.45",
+      "hobby_zip": "0.4.24.18",
+      "miniSingleImport_unchanged_method": true,
+      "slot_identity_bytes_equal": true,
+      "original_pserc_importer_bytes_equal": false,
+      "difference": "Horse 0.4.46 has newer bounded database scans and import memory/diagnostic support; this was not ported to Hobby since this task is binding only."
+    },
+    "synthetic_signed_test_only_positive": "created solely in temporary local directory then deleted; never a productive WordPress file",
+    "real_production_qa_signed": false,
+    "actual_wordpress_live_import": false,
+    "old_k0_changed": false,
+    "kmulti_code_changed": false,
+    "hobby_plugin_code_changed": false,
+    "horse_plugin_code_changed": false,
+    "decision": "Hobby K-Multi route plus current original WP draft return simulation PASS; no architecture change or plugin release. Original K-Multi content QA remains separately unfrozen."
   }
 }
