@@ -23,7 +23,7 @@
       "claims": [
         "Die gesamte Mineralversorgung hängt von allen Teilen der Futterration ab.",
         "Zu viele Spurenelemente können ebenso schädlich sein wie zu wenige.",
-        "Bei älteren Pferden können sich Nährstoffanforderungen ändern; vor einer stärkeren Eiweißgabe sind Nieren und Leber zu beachten."
+        "Die Qualität des Proteins ist neben der Menge für Pferde wichtig."
       ],
       "fresh_research_reference_date": "2026-11-22"
     },
@@ -75,9 +75,9 @@
       "F3": {
         "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
         "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses and Other Equids",
-        "evidence_text": "Aged horses (> 20 years old) may require protein intakes equivalent to horses in light-moderate work to maintain body condition and muscle mass; however, hepatic and renal function should be assessed before increasing the protein intake of old horses.",
-        "evidence_text_sha256": "f417ccc71ebff21451abb06122331e74f354e7c117aa118e74313e9cdb01601b",
-        "statement": "Bei älteren Pferden können sich Nährstoffanforderungen ändern; vor einer stärkeren Eiweißgabe sind Nieren und Leber zu beachten.",
+        "evidence_text": "Protein quality of the feed provided to horses is important.",
+        "evidence_text_sha256": "3621d5140c0e9f8697d9a7d36664600e1a1eade712130745daa6a646d7141503",
+        "statement": "Die Qualität des Proteins ist neben der Menge für Pferde wichtig.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
