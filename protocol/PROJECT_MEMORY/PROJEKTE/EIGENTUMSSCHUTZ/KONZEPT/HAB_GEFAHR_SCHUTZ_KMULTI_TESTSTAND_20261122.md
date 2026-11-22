@@ -1,5 +1,23 @@
 # Hab & Bewahr – Gefahr & Schutz: praktischer K-Multi-Teststand
 
+## Fortschreibung 22.11.2026 – NUR Workflow-Sicherheit, Ausgabe und Plugin-Speicher (Vorrang)
+
+**Auftrag strikt eingegrenzt:** Keine Beitrags-, Link-, Tabellen- oder Textregeln aus Pferdeatelier übernehmen. Original-K0 und alle alten K0-Workflows **unangetastet**, keine K-Multi-Architektur geändert.
+
+### Originalquellen und gesicherte Tatsachen
+- Neueste im Pferdeatelier-Pluginbüro entdeckte Original-ZIP: **0.4.47 KISS-SAMMELREPARATUR** (nicht die zuvor als neueste angenommene 0.4.46). Der Bürobericht belegt die lokale Fehlerreparatur an Diagnose-Download und MINI-Dublettenbezug; **Live-Installation nicht nachgewiesen**.
+- Original Hab-Plugin 0.4.31.20 mit Archiv-SHA-256 `404090884e80ade8d963859395ebaa5271f062199889d0a955cbfb0f6adc49e7`, 87 Dateien, 78 PHP; ursprünglicher gespeicherter WordPress-Auftragsweg mit wiederholten Option-Leseoperationen und optionalem gigantischen Diagnose-JSON für Log-Hash.
+- **Neue einzelne, lokal getestete Hab-Update-Testfassung 0.4.31.21:** ausschließlich zwei vorhandene PHP-Dateien und README geändert, **84/87 Dateien byteidentisch**; WP-Optionsname, DB-Mutation-Lock, `update_option`/Original-WordPress-Hooks, Entwurfsschutz, gespeicherte Aufträge, MINI-Export/-Import, Wiederdownload und Abbruchzuständigkeit **unverändert**. WordPress-Artikelimport wurde **nicht** umgestellt; Pferdeatelier-MySQL-Streaming oder AJAX-Einzelimport **nicht** vorsorglich kopiert.
+- **Nachgewiesene lokale Testfälle:** 78/78 PHP-Syntaxdateien PASS; altes Diagnosemodul bei 64-MiB-Test mit einem synthetischen großen Auftragsbestand `PHP_MEMORY_EXHAUSTED`, Testfassung bei identischem Eingang PASS; bei 256 MiB weiterhin vollständiger bisheriger Diagnose-Hash, bei weniger Speicher explizit markierter Verzicht auf nur den großen *zusätzlichen* Log-Hash; Diagnoseansicht öffnet ohne großes Auftrags-Option-Lesen und zeigt Button; Speichern/Unverändert/Writes-fehlgeschlagen/Dateninhalt/Lock/Gespeichert-Zustände in PHP-Stubs geprüft. Kein echter Hab-Live-Erfolg, keine behauptete Behebung *aller* 512-MiB-Fälle.
+- Archiviert **nur als nicht freigegebener Update-Kandidat** im EXISTIERENDEN Ordner: `/hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEKANDIDATEN/Hab-Textplugin-0.4.31.21-KISS-SPEICHER-UND-DIAGNOSE-NUR-TEST.zip`; mit `HAB_TEXTPLUGIN_043121_SICHERHEIT_PERFORMANCE_NUR_TEST_20261122.md`, ZIP-SHA-256 `6cf25af769ebbf6b2e164a1106e1128ecdecd5c08f1aa05b01e6f2d1d5814aca`. **Nicht** in `PLUGIN_FREIGABEN`, nicht auf Live installiert.
+- **K-Multi finaler Ausgabe-Owner unverändert**: `offline_writer_dev/hobby_trial/kmulti_safe_delivery.py` und `kmulti_single_release.py`. Der aktuelle Hab-Auftrag kann nicht versehentlich über die Hobbydepot-Freigabe laufen. Zusätzlicher **echter Negativtest** am bereits bestehenden Testfile `test_kmulti_safe_delivery.py` mit originalem Hab-Upload, unfreigegebenem Hab-QA-Kontext, echtem Hab-Binding-Manifest und gefälschtem Zertifikat: **keine finale Datei, alte Datei entfernt, keine unautorisierte Veröffentlichung**. Beide Original-GitHub-Workflows nach dem neuen Test **SUCCESS**: [Hobby Sicherheitstestlauf 45041674058](https://github.com/hallo-netizen/k0-multiportal/actions/runs/45041674058), [Hab Gesamt-QA-Lauf 45041674065](https://github.com/hallo-netizen/k0-multiportal/actions/runs/45041674065). **Kein** neuer Freigabeweg, keine K0-Änderung.
+- **Reale offene Hab-Endanbindung:** bestehender sicherer K-Multi-Endausgang bleibt derzeit Hobbydepot-spezifisch; der Hab-Freigabebeleg darf erst beim Vorliegen **vollständiger echter Hab-QA** und vertrauenswürdig signiertem Freigabebeleg an genau diese Ausgabe gebunden werden. Aktuell 57/110 Original-Hab-HARD-Regeln mit echtem Beleg pro Artikel, 53 weiterhin nicht ausgeführt. Eine verifizierte WordPress-Importdatei existiert deshalb **nicht**.
+
+**Nächste konkrete sichere Arbeit:** 0.4.31.21 als Update **nur im Hab-Testsystem** mit großen echten gespeicherten Aufträgen testen und Rückimport/Abbruch/Wiederaufnahme/Diagnose gegen alte Funktionsliste kontrollieren, bevor eine Liveempfehlung ausgesprochen wird. Hab-K-Multi-Endsignatur erst nach vollständiger echter QA anbinden; kein K0-Aufruf und keine Regelübernahme.
+
+---
+
+
 ## Korrigierter Vergleich: ausschließlich K-Multi-Verfahrenssicherheit, Dateiausgabe, WordPress-Plugin-Performance – 22.11.2026
 
 **GELTUNGSBEREICH:** KEINE Übernahme von Pferdeatelier-K0-Text-/Beitrags-/Link-/Tabellenregeln. KEINE Änderungen an K0. KEIN Umbau von K-Multi, keine neue Station, kein neues Plugin; ausschließlich Quellvergleich und Anschlussbewertung.
