@@ -219,6 +219,97 @@
       "k0_changed": false,
       "new_hobby_wordpress_plugin_required": false,
       "warning": "Successful test of blocked output is not real finished-author approval. Later concurrent Hab-specific failure does not make this Hobby workflow a global K-Multi production release."
+    },
+    "official_source_semantic_sample": {
+      "date": "2026-11-22",
+      "kind": "ADDITIONAL_CURRENT_OFFICIAL_SOURCE_SEMANTIC_SAMPLE_NOT_SIGNED_KMULTI_FACT_PASS",
+      "reviewed_original_faq_titles": [
+        "Ist Bogenschießen ein teures Hobby?",
+        "Welche Regeln gelten beim 3D-Bogenschießen?",
+        "Wie finde ich einen 3D-Bogenschießen-Parcours?"
+      ],
+      "check_scope": "Manual editorial comparison of current drafts against accessible official publisher pages and existing frozen K-Multi source review. Does NOT replace original shared-research owner, prove all 30 paragraph statements independently, or add a second runtime QA owner.",
+      "selected_checks": [
+        {
+          "article": 1,
+          "statement": "Entry via loan equipment without inventing German average costs",
+          "source": "https://www.bsc-heidelberg.de/aktiv-beim-bsc/schnuppertraining-einsteigerkurse.html",
+          "result": "SUPPORTS_CONDITIONAL_CLAIM",
+          "caveat": "Local provider offers/fees are not countrywide prices; check updates"
+        },
+        {
+          "article": 1,
+          "statement": "TSV Jahn Freising publishes differentiated beginner course fees; article does not reproduce volatile sums",
+          "source": "https://www.tsv-jahn-freising.de/abteilungen/bogenschiessen/fragen-und-antworten/",
+          "result": "SUPPORTED_AS_LOCAL_EXAMPLE_ONLY",
+          "caveat": "Website lists older 2019 guidance for some equipment costs; no older cost range used as current"
+        },
+        {
+          "article": 1,
+          "statement": "Karlsruhe association offers beginner rental and advises consultation before buying",
+          "source": "https://www.bsc-karlsruhe.de/einsteiger-faq/",
+          "result": "SUPPORTED_AS_LOCAL_EXAMPLE_ONLY"
+        },
+        {
+          "article": 2,
+          "statement": "DSB 3D competition lists Recurve, Compound, Blank, Lang and Instinktivbogen; competition-specific target rules",
+          "source": "https://www.dsb.de/bogensport/sport/wettkampfformate/modus-3d",
+          "result": "SUPPORTED_FOR_DSB_WA3D_ONLY",
+          "caveat": "Not a universal local leisure-park rule"
+        },
+        {
+          "article": 2,
+          "statement": "No shooting while people occupy danger area in direction of target; supervision and on-site directions",
+          "source": "https://dsb.de/fileadmin/dsb/sportordnung/16/",
+          "result": "SUPPORTED_IN_DSB_SAFETY_RULES",
+          "caveat": "Operator-specific instructions and local requirements remain separate"
+        },
+        {
+          "article": 3,
+          "statement": "DSB provides a club finder with town, postal code and sports offer search, not a guaranteed 3D-parcours inventory",
+          "source": "https://www.dsb.de/der-verband/vereinssuche",
+          "result": "SUPPORTED_AS_CONTACT_SEARCH_ONLY"
+        },
+        {
+          "article": 3,
+          "statement": "Karlsruhe requires a chip key for Hagsfeld facilities; this does not establish blanket key rules for its 3D course or all clubs",
+          "source": "https://www.bsc-karlsruhe.de/einsteiger-faq/",
+          "result": "SUPPORTED_WITH_LOCATION_SCOPE"
+        },
+        {
+          "article": 3,
+          "statement": "DFBV 2020 event report names a local organizer; not an open-to-public parcourt directory",
+          "source": "https://www.dfbv.de/2020/10/der-wettergott-muss-ein-bowhunter-sein/",
+          "result": "SUPPORTED_AS_ORGANIZER_CONTACT_ONLY"
+        }
+      ],
+      "assessed_article_editorial_risks": [
+        {
+          "article": 1,
+          "risk": "Stale course/equipment prices generalized",
+          "current_text_behavior": "Avoids numeric national price claims and tells reader to verify current terms",
+          "status": "NO_REWRITE_NEEDED_FROM_SAMPLE"
+        },
+        {
+          "article": 2,
+          "risk": "DSB WA3D tournament rules misrepresented as mandatory for every leisure park",
+          "current_text_behavior": "Explicitly distinguishes leisure facility rules and event regulations",
+          "status": "NO_REWRITE_NEEDED_FROM_SAMPLE"
+        },
+        {
+          "article": 3,
+          "risk": "Club locator mistaken for comprehensive local 3D parks and open times",
+          "current_text_behavior": "Clearly states club finder is merely a contact starting point; access must be verified",
+          "status": "NO_REWRITE_NEEDED_FROM_SAMPLE"
+        }
+      ],
+      "limitations": [
+        "This check does not provide an issued or signed owner receipt for every factual article claim",
+        "Not a full 121 individual original checker execution; 114 hard catalog owner records still required",
+        "No change to the 3 current article texts; previous exact LanguageTool 6.8 HTML bindings remain valid",
+        "Hobbydepot remains NO_VALUES_BLOCKED, K-Multi production_enabled=false, no WordPress import"
+      ],
+      "next_exact_dependency": "Existing SHARED_RESEARCH_OWNER must produce complete article-claim source context receipt for the exact three unchanged HTML hashes; then single existing quality owner must execute supported bound hobby-specific rule checks and trusted final delivery. Do not duplicate article or source decisions."
     }
   }
 }
