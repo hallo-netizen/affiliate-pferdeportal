@@ -124,7 +124,7 @@
       },
       {
         "role": "further_information",
-        "href": "/category/pferdegesundheit-verstehen/",
+        "href": "/wissen/wissen-buecher-und-ratgeber/pferdehaltung-grundlagen/",
         "anchor": "/category/pferdegesundheit-verstehen/",
         "block": "further_information"
       }
@@ -135,7 +135,7 @@
         "active": true
       },
       {
-        "href": "/category/pferdegesundheit-verstehen/",
+        "href": "/wissen/wissen-buecher-und-ratgeber/pferdehaltung-grundlagen/",
         "active": true
       }
     ],
@@ -156,7 +156,10 @@
       "Verlust",
       "Stress",
       "Verhalten",
-      "Gesundheit"
+      "Gesundheit",
+      "Sozialkontakt",
+      "Gruppenzusammensetzung",
+      "Beobachtung"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
