@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Rein organisches Mineralfutter für Pferde richtig einordnen",
+      "target_keyword": "rein organisches mineralfutter für pferde",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "8cf7da2b95182a0b0b62d4514f0fc073bb4a9be6614cf996930b497b8e319d64"
+    }
+  ],
+  "batch_sha256": "c12005ea29c4496155016404303bf153f81b0464384f9c7c855f4cc9dff2fd24"
+}
