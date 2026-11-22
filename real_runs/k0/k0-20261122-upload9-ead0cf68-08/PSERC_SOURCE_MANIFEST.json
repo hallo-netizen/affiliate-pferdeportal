@@ -1,0 +1,190 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 9,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Klebepflaster für Pferde richtig auswählen",
+        "target_keyword": "klebepflaster pferd",
+        "category": "verbandsmaterial-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "0dabdfd311442187cfd55982eb29ccd46d04281e0492b2d4c659049b6a8adf6a"
+      },
+      {
+        "title": "Hufverband beim Pferd richtig anlegen",
+        "target_keyword": "hufverband pferd",
+        "category": "verbandsmaterial-anwendung",
+        "article_type": "Anleitung",
+        "plan_slot": "b334947878de5ee6ebed4d9f712ba14823fe6f50b0a5bbd8d3fae073f8f27392"
+      },
+      {
+        "title": "Stallapotheke für Pferde sinnvoll ausstatten",
+        "target_keyword": "stallapotheke pferd",
+        "category": "verbandskoffer-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "c295ded6720ff34673bae408b87b22858155ec55ce5ec1aeb51f63c61553b0c8"
+      },
+      {
+        "title": "Verbandwatte für Pferde aus der Apotheke auswählen",
+        "target_keyword": "verbandwatte pferd apotheke",
+        "category": "verbandsmaterial-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "16c5863148af4908a74af8761c0ca908076b46b79313c15f477a9d5d2a9aafb4"
+      },
+      {
+        "title": "Verbandsmaterial für Pferde richtig zusammenstellen",
+        "target_keyword": "verbandsmaterial pferde",
+        "category": "verbandsmaterial-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "b03704bb8ad100faa28c26e1aa8916610a84656f000d191b31f58bbd4befe0fc"
+      },
+      {
+        "title": "Günstiges Verbandsmaterial für Pferde auswählen",
+        "target_keyword": "verbandsmaterial pferde günstig",
+        "category": "verbandsmaterial-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "1c6b61070e2817bfa725c44dda0cd187ff10b31cd9ac9954865aee01af72035d"
+      },
+      {
+        "title": "Verbandsmaterial für Pferde bei Krämer auswählen",
+        "target_keyword": "verbandsmaterial pferd krämer",
+        "category": "verbandsmaterial-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "7fa361b7a9dad01b0e0865f308ad7bf55b50521d7dd6140c3d9d4cf2139ee37f"
+      },
+      {
+        "title": "Welche Anzeichen deuten auf Nierenprobleme bei Pferden hin?",
+        "target_keyword": "Welche Anzeichen deuten auf Nierenprobleme bei Pferden hin?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "b5a7f38cd0494ca64413092377574b1011a7d3f5053df42b6126fe51889cdeff"
+      },
+      {
+        "title": "Welche Symptome zeigen Pferde bei Calciummangel?",
+        "target_keyword": "Welche Symptome zeigen Pferde bei Calciummangel?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "5bd66a95ad831eeecd889807021585c5694bc4ff2977a7bf892d601c90c2d277"
+      }
+    ],
+    "batch_sha256": "ead0cf68156abf3fb3af2fbd8edbb47eb6ef18e4e18bc105edc605452c3127be"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Klebepflaster für Pferde richtig auswählen",
+        "target_keyword": "klebepflaster pferd",
+        "category": "verbandsmaterial-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "0dabdfd311442187cfd55982eb29ccd46d04281e0492b2d4c659049b6a8adf6a"
+      },
+      "order_id": "TXE-220c1ca8a36ce0d7b78144b9fabb7e72",
+      "article_id": "article:5d631960acb888c1b1e61a48",
+      "search_intent": "Auswahl geeigneter Klebepflaster für den Verband am Pferd"
+    },
+    {
+      "metadata_binding": {
+        "title": "Hufverband beim Pferd richtig anlegen",
+        "target_keyword": "hufverband pferd",
+        "category": "verbandsmaterial-anwendung",
+        "article_type": "Anleitung",
+        "plan_slot": "b334947878de5ee6ebed4d9f712ba14823fe6f50b0a5bbd8d3fae073f8f27392"
+      },
+      "order_id": "TXE-203a1e51ff5adfc94012d41695101471",
+      "article_id": "article:192a7bdf50e920d64da670c6",
+      "search_intent": "Anleitung zum fachgerechten Anlegen eines Hufverbands am Pferd"
+    },
+    {
+      "metadata_binding": {
+        "title": "Stallapotheke für Pferde sinnvoll ausstatten",
+        "target_keyword": "stallapotheke pferd",
+        "category": "verbandskoffer-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "c295ded6720ff34673bae408b87b22858155ec55ce5ec1aeb51f63c61553b0c8"
+      },
+      "order_id": "TXE-cad45e984d80495db5c790f768ae26a6",
+      "article_id": "article:102047b55bbf702be03d6b1d",
+      "search_intent": "Auswahl einer sinnvoll ausgestatteten Stallapotheke für Pferde"
+    },
+    {
+      "metadata_binding": {
+        "title": "Verbandwatte für Pferde aus der Apotheke auswählen",
+        "target_keyword": "verbandwatte pferd apotheke",
+        "category": "verbandsmaterial-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "16c5863148af4908a74af8761c0ca908076b46b79313c15f477a9d5d2a9aafb4"
+      },
+      "order_id": "TXE-081c5f8d9f104507d30a9eedcbc20912",
+      "article_id": "article:399a6f69dc7b907e70fe1953",
+      "search_intent": "Geeignete Verbandwatte für Pferde in der Apotheke auswählen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Verbandsmaterial für Pferde richtig zusammenstellen",
+        "target_keyword": "verbandsmaterial pferde",
+        "category": "verbandsmaterial-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "b03704bb8ad100faa28c26e1aa8916610a84656f000d191b31f58bbd4befe0fc"
+      },
+      "order_id": "TXE-ffa2cd2f4efe64ce263cb4c195eb1210",
+      "article_id": "article:91e5c1546b86fad452f6fa2d",
+      "search_intent": "Grundauswahl und Zusammenstellung von Verbandsmaterial für Pferde"
+    },
+    {
+      "metadata_binding": {
+        "title": "Günstiges Verbandsmaterial für Pferde auswählen",
+        "target_keyword": "verbandsmaterial pferde günstig",
+        "category": "verbandsmaterial-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "1c6b61070e2817bfa725c44dda0cd187ff10b31cd9ac9954865aee01af72035d"
+      },
+      "order_id": "TXE-aeedf0286a12de40be905c7ebc1226b8",
+      "article_id": "article:33221db8d2c7bb595481d059",
+      "search_intent": "Kostenbewusste Auswahl von Verbandsmaterial für Pferde mit Fokus auf günstige Angebote"
+    },
+    {
+      "metadata_binding": {
+        "title": "Verbandsmaterial für Pferde bei Krämer auswählen",
+        "target_keyword": "verbandsmaterial pferd krämer",
+        "category": "verbandsmaterial-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "7fa361b7a9dad01b0e0865f308ad7bf55b50521d7dd6140c3d9d4cf2139ee37f"
+      },
+      "order_id": "TXE-66e5d62374d0ffa18763a45e1b3caa8a",
+      "article_id": "article:79f24ca54347a0dada4f4a8a",
+      "search_intent": "Angebot von Verbandsmaterial für Pferde beim genannten Händler Krämer beurteilen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Anzeichen deuten auf Nierenprobleme bei Pferden hin?",
+        "target_keyword": "Welche Anzeichen deuten auf Nierenprobleme bei Pferden hin?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "b5a7f38cd0494ca64413092377574b1011a7d3f5053df42b6126fe51889cdeff"
+      },
+      "order_id": "TXE-264f874217aa8b1452a3b0a6795f34b3",
+      "article_id": "article:e494f627332e5780673c3e8e",
+      "search_intent": "Anzeichen möglicher Nierenprobleme beim Pferd erkennen und ärztliche Abklärung einordnen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Symptome zeigen Pferde bei Calciummangel?",
+        "target_keyword": "Welche Symptome zeigen Pferde bei Calciummangel?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "5bd66a95ad831eeecd889807021585c5694bc4ff2977a7bf892d601c90c2d277"
+      },
+      "order_id": "TXE-a60a35036083354f90a7f4003f9ad0cc",
+      "article_id": "article:6f957b585b882d8c367f7416",
+      "search_intent": "Spezifische Anzeichen eines möglichen Calciummangels bei Pferden erkennen; eigenständig gegenüber allgemeinem Mineralstoffmangel"
+    }
+  ],
+  "manifest_sha256": "d895eaa219153d35e723f4c7e3242e6f3243afc78754a36e406bb600a4862055"
+}

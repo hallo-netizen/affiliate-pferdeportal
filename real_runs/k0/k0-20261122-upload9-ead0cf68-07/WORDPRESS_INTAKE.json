@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Verbandsmaterial für Pferde bei Krämer auswählen",
+      "target_keyword": "verbandsmaterial pferd krämer",
+      "category": "verbandsmaterial-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "7fa361b7a9dad01b0e0865f308ad7bf55b50521d7dd6140c3d9d4cf2139ee37f"
+    }
+  ],
+  "batch_sha256": "b8153c11cbcd6cb495a969e8563dac925dd060685383531d515dc7314c8b2d30"
+}

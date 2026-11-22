@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Klebepflaster für Pferde richtig auswählen",
+      "target_keyword": "klebepflaster pferd",
+      "category": "verbandsmaterial-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "0dabdfd311442187cfd55982eb29ccd46d04281e0492b2d4c659049b6a8adf6a"
+    }
+  ],
+  "batch_sha256": "2f5c478a78ad81089eb357b4aec907c8dfbba388aa61f7566f86e963eeaca9a2"
+}

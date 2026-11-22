@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Hufverband beim Pferd richtig anlegen",
+      "target_keyword": "hufverband pferd",
+      "category": "verbandsmaterial-anwendung",
+      "article_type": "Anleitung",
+      "plan_slot": "b334947878de5ee6ebed4d9f712ba14823fe6f50b0a5bbd8d3fae073f8f27392"
+    }
+  ],
+  "batch_sha256": "54926aa2da7032329f71a4437004a9f9f8fe935545409180a6409de5441ffa32"
+}

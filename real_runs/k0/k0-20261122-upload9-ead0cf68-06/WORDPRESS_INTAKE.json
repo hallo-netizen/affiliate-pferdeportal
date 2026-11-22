@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Günstiges Verbandsmaterial für Pferde auswählen",
+      "target_keyword": "verbandsmaterial pferde günstig",
+      "category": "verbandsmaterial-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "1c6b61070e2817bfa725c44dda0cd187ff10b31cd9ac9954865aee01af72035d"
+    }
+  ],
+  "batch_sha256": "681ef6dba5d97a4df1c42c6f519c0bd89aea25418e9080518796bff863adb83d"
+}

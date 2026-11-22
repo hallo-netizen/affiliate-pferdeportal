@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Stallapotheke für Pferde sinnvoll ausstatten",
+      "target_keyword": "stallapotheke pferd",
+      "category": "verbandskoffer-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "c295ded6720ff34673bae408b87b22858155ec55ce5ec1aeb51f63c61553b0c8"
+    }
+  ],
+  "batch_sha256": "b19f03291f3e6d9b0f3bc528dd29ae94af746afc43b92eae3a7bceb7075e2f28"
+}

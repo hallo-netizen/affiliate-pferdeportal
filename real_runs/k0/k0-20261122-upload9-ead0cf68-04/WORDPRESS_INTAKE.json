@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Verbandwatte für Pferde aus der Apotheke auswählen",
+      "target_keyword": "verbandwatte pferd apotheke",
+      "category": "verbandsmaterial-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "16c5863148af4908a74af8761c0ca908076b46b79313c15f477a9d5d2a9aafb4"
+    }
+  ],
+  "batch_sha256": "823989e737c0a5a37b60363f83786482cf113f208fe813bb043f17f1dfc73eb3"
+}

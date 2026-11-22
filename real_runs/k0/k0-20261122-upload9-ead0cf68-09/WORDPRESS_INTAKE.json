@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche Symptome zeigen Pferde bei Calciummangel?",
+      "target_keyword": "Welche Symptome zeigen Pferde bei Calciummangel?",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "5bd66a95ad831eeecd889807021585c5694bc4ff2977a7bf892d601c90c2d277"
+    }
+  ],
+  "batch_sha256": "34759ff1a15e0522f76f98f4ea22ecc78c7c9eb52d3d1b6de796724137e2c415"
+}
