@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche Symptome können bei Pferden auf eine Depression hindeuten?",
+      "target_keyword": "Welche Symptome zeigen Pferde mit Depression?",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "618ba5d3c59f1a2beddc7adc994b015f822cb024d00bf04fdbeac11576f63a5c"
+    }
+  ],
+  "batch_sha256": "b3215f4423b00155c94e2c35f68320d41b3379e4319247ed92cbac42410a4f88"
+}
