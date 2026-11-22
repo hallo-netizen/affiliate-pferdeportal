@@ -1514,3 +1514,57 @@ Harte Abnahmekriterien nach Installation 6.72.370:
 3. Cache-Hits, CPU und Inhaltsphase separat vergleichen.
 4. Wall-Time nur zusammen mit CPU/Queries/Cache/Phasen bewerten.
 5. Keine weitere Änderung gleichzeitig.
+
+
+## 2026-11-22 – Template Kit 1.50.621: zwei offene Kubio-off-Layoutfehler gezielt korrigiert
+
+Ausgangspunkt:
+- letzter lokal geprüfter Kandidat: 1.50.620
+- Live-Sichtprüfung: Hover ocker = PASS
+- weiterhin offen: linker Inhaltsabstand auf Footer-/Rechtsseiten
+- weiterhin offen: Abstand direkt unter „Kurzbedingungen“ auf Preise
+
+### Bewiesene Ursache Preise
+Der echte WordPress-Export von Seite 7731 enthält dreimal:
+`<strong>Kurzbedingungen</strong><br><br>`
+
+1.50.620 formatierte nur die Überschrift, ließ beide festen BR-Zeilenumbrüche aber bestehen.
+Damit war der verbleibende Abstand technisch erklärt.
+
+1.50.621 entfernt ausschließlich dieses direkt auf „Kurzbedingungen“ folgende BR-Doppel.
+Prüfung gegen echten Exportinhalt:
+- 3/3 Kurzbedingungen erkannt und umgebaut
+- 0/3 BR-Doppel danach vorhanden
+- sichtbarer Text unverändert
+- alle 4 href-Ziele und Reihenfolge unverändert
+
+### Footer-/Rechtsseiten: stabiler Inhaltsrand
+1.50.620 legte den Seitenabstand auf `#content>.ast-container`.
+Dieser äußere Astra/Kubio-Wrapper ist nicht die stabile sichtbare Textachse über alle Viewport-Zustände.
+
+1.50.621 bindet die Breite stattdessen direkt an:
+`article.page>.entry-content`
+
+Für Impressum, AGB, Datenschutz, Disclaimer und Werbebedingungen:
+- bestehende zentrale Inhaltsachse `--pftk-content-axis-width` (Fallback 900px)
+- Mindest-Seitenrand 20px
+- linksbündiger Inhalt
+- unabhängig von wechselnder äußerer Astra/Kubio-Wrapperbreite
+
+### Regressionsschutz
+- Hauptplugin gegenüber 1.50.620 nur geändert: Versionsnummer + Require auf neue Layoutdatei
+- 506 bestehende Dateien byte-identisch
+- neue Datei: `includes/class-pftk-portal-content-layout-v150621.php`
+- alle 11 PHP-Dateien Syntax PASS
+- ZIP-Integrität PASS
+- keine Datenbankoperation ergänzt
+- Kubio-Batch/Rollback nicht verändert
+- Hover-Regeln nicht verändert
+
+Artefakte im Pferdeatelier-Designbüro:
+- `PFERDE_ATELIER_DESIGN_1.50.621_FOOTER_RAND_KURZBEDINGUNGEN_NUR_TEST.zip`
+- `PFERDE_ATELIER_DESIGN_1.50.621_PRUEFNACHWEIS.json`
+
+Wichtig:
+- Noch KEIN Live-PASS für die beiden sichtbaren Layoutpunkte.
+- Live-PASS erst nach Sichtprüfung von 1.50.621.
