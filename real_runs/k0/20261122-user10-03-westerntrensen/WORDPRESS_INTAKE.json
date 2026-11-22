@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Westerntrensen für Pferde nach Bauart und Einsatz auswählen",
+      "target_keyword": "pferde trensen western",
+      "category": "trensen-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "6ed75aec05e64b3f4318ebd24214e8eb3cb02b2cb2a67b5596d1ebf85e057679"
+    }
+  ],
+  "batch_sha256": "a22d98d2d7a13ce2adf6c74037eb72037e15f7fe6c68c80d9462d40e9cf7bf68"
+}
