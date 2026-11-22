@@ -1397,3 +1397,35 @@ Harte Prüfungen zuerst:
 2. Gleiche Routen: Queries, CPU, interne Cache-Hits und Inhaltsphase vergleichen.
 3. Hub/Journal/Banner-Produktpfade müssen weniger feste Affiliate-Arbeit zeigen.
 4. Wall-Time wegen schwankender Serverlast nur zusammen mit CPU/Queries/Cache/Phasen bewerten.
+
+
+## 2026-11-22 – 6.72.371 WIDERRUFEN nach verschärftem Kausalitätstest
+
+6.72.371 ist **NICHT FREIGEGEBEN und NICHT zu installieren**.
+
+### Grund
+Nach dem vom Nutzer geforderten verschärften Einzel-Kausalitätstest bestehen die beiden neuen 6.72.371-Änderungen zwar die Inhaltsgleichheit, aber nicht beide den geforderten Nachweis, dass sie die reale Performancebremse ursächlich und sicher beseitigen.
+
+#### Fix A – Banner-Frühfilter
+Semantik: bestanden, keine Ergebnisabweichungen.
+Isolierter Laufzeittest mit exakter 6.72.370-`campaign_from_post()`-Methode zeigt aber:
+- 0 % sicher aussortierte Banner: neuer Weg ca. 52,9 % langsamer
+- 25 %: ca. 11,7 % langsamer
+- 50 %: ca. 19,1 % schneller
+- 75 %: ca. 51,4 % schneller
+- 90 %: ca. 69,0 % schneller
+
+Der aktuelle Live-Ausschussanteil ist mit den vorhandenen Diagnosedaten nicht bewiesen. Damit ist Fix A nicht universell performancepositiv und erfüllt den Zielvertrag nicht.
+
+#### Fix B – allgemeine Control/Health-Wiederverwendung
+Semantik: bestanden.
+Der Tiefenlauf misst die Tabelle `slfo_ppar_control_decisions` jedoch über den gesamten Profil-Lauf nur mit 15 Queries / 15,72 ms. Das kann die mehrsekündige Frontendbremse nicht erklären. Der Fix reduziert Wiederholungsarbeit, ist aber nicht als relevante Hauptursache bewiesen.
+
+### Konsequenz
+- 6.72.371 widerrufen.
+- 6.72.370 bleibt der query-sichere Korrektur-Ausgangspunkt.
+- Kein neuer Installationskandidat, bis jeder enthaltene Fix einzeln die drei Bedingungen erfüllt:
+  1. ursächlicher Performanceblock direkt bewiesen,
+  2. keine bestehende Funktion zurückgenommen,
+  3. Bytegleichheit aller unveränderten Teile + Inhaltsgleichheit der bewusst geänderten Teile.
+- Fokus ab jetzt nur auf Sekundenblöcke des aktuellen Frontend-Ranking-/Provider-/Produktausgabepfads.
