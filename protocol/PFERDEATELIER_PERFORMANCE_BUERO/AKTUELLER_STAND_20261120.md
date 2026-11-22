@@ -1785,3 +1785,15 @@ Wichtig:
 - Keine Änderung am Affiliate-Router, keine neue Query, keine neue Affiliate-URL, kein Sticky.
 - 506/507 Dateien byteidentisch zu 1.50.632; PHP 9/9 PASS; JS PASS; ZIP PASS.
 - 1.50.632 bleibt bis Nutzerabnahme von 1.50.634 der letzte LIVE-PASS-Fallback.
+
+
+## 2026-11-22 – Design 1.50.635 Einzelbeitrag Sidebar Korrektur
+
+- 1.50.634 war visuell noch nicht PASS: Resize-Grenze zu niedrig, Amazon-Doppelbeschriftung/Innenrahmen, CTA/Text unruhig, Produkte/Weiterlesen fehlten im Test.
+- 1.50.635 korrigiert ausschließlich die Einzelbeitrags-Sidebar. Letzter Live-PASS bleibt 1.50.632.
+- Sidebar nur ab 1000px und realer Containerbreite >=940px; darunter Original-Layout.
+- Werbekachel: nur ein Ocker-WERBUNG, keine zweite Anzeige-/Disclosure-Zeile im Klon, keine Innenrahmen, CTA nowrap.
+- Bis zu 3 Produktkarten werden ausschließlich aus dem vorhandenen Artikelplan bzw. dort bereits PASS-geprüften Kandidaten dargestellt; keine neue Produktsuche, keine Änderung am Affiliate-Router.
+- Weiterführender Beitrag folgt expliziten semantic_related/further_information-K0-Verknüpfungen; genau ein Zielbeitrag.
+- 506/507 Dateien byteidentisch zu 1.50.634; PHP 9/9 PASS; JS PASS; ZIP PASS.
+- Im Design-Büro gespeichert als PFERDE_ATELIER_DESIGN_1.50.635_EINZELBEITRAG_SIDEBAR_KORREKTUR_NUR_TEST.zip plus Prüfnachweis.
