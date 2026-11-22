@@ -105,10 +105,10 @@
         "block": "answer"
       },
       {
-        "role": "semantic_related",
+        "role": "further_information",
         "href": "/category/trensen-beratung/",
         "anchor": "Beratung Trensen",
-        "block": "details"
+        "block": "further_information"
       }
     ],
     "link_registry": [
@@ -123,7 +123,7 @@
     ],
     "runtime_link_roles": [
       "parent_category",
-      "semantic_related"
+      "further_information"
     ],
     "wordpress_category": {
       "id": 0,
