@@ -10,8 +10,10 @@
   "article_structure": [
     "Zustand und konkretes Erhaltungsziel beschreiben.",
     "Material-/Gerätetyp und benötigte Hilfsmittel nur wenn wichtig unterscheiden.",
+    "Bei empfindlicher Ausrüstung oder mehreren nötigen Vorbedingungen optional eine kurze Vorab-Checkliste; Sicherheit und Materialverträglichkeit vor der Pflege klären.",
     "Schonende, wiederholbare Pflegeschritte und sinnvolle Kontrollen erläutern.",
     "Fehler, Schäden, ungeeignete Mittel und Grenzen der eigenen Pflege.",
+    "Optional ein Merksatz zur wichtigsten Schonungsregel und bei echten zusätzlichen Zweifelsfällen kurze Folgefragen; ohne wiederholte Aussagen.",
     "Fazit: Wie lässt sich der gute Zustand erhalten?"
   ],
   "additional_type_rules": [
@@ -33,12 +35,17 @@
     {
       "id": "P04_WIEDERHOLBAR",
       "owner": "ARTICLE_AUTHOR",
-      "rule": "Handgriffe und Kontrollzeichen so erklären, dass der Leser erkennen kann, wann etwas regelmäßig zu tun oder zu unterlassen ist."
+      "rule": "Handgriffe und Kontrollzeichen so erklären, dass der Leser erkennen kann, wann etwas regelmäßig zu tun oder zu unterlassen ist. Bei wiederkehrenden Kontrollen kann eine kurze 'Vor der Pflege prüfen'-Checkliste helfen; nur reale Prüfpunkte, kein fester Abschnitt für jeden Gegenstand."
     },
     {
       "id": "P05_GRENZEN",
       "owner": "ARTICLE_AUTHOR",
       "rule": "Bei Schäden, Chemikalien oder elektrischer Ausrüstung sichere Grenzen benennen und ggf. Fachperson empfehlen."
+    },
+    {
+      "id": "P06_KURZE_FOLGEFRAGEN",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Wenn material- oder pflegebezogene Restfragen nach dem Ablauf wirklich offen sind, höchstens wenige kurze FAQ mit neuen Antworten ergänzen; keine Verdopplung der Schrittfolge."
     }
   ],
   "format_guidance": {

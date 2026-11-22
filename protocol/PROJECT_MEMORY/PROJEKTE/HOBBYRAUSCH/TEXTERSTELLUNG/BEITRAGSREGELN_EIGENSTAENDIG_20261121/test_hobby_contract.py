@@ -117,12 +117,12 @@ class HobbydepotOriginalFiveTypeContract(unittest.TestCase):
                 selected = select_for_test(t, self.manifest, self.books)
                 self.assertEqual(selected["wordpress_article_type"], t)
 
-    def test_14_own_rules_exactly_25_with_distinct_ids(self):
+    def test_14_own_rules_exactly_31_with_distinct_ids(self):
         rules = [r for b in self.books.values() for r in b["additional_type_rules"]]
         self.assertEqual([len(self.books[n]["additional_type_rules"]) for n in FILES],
-                         [4, 5, 5, 5, 6])
-        self.assertEqual(len(rules), 25)
-        self.assertEqual(len({r["id"] for r in rules}), 25)
+                         [6, 5, 6, 7, 7])
+        self.assertEqual(len(rules), 31)
+        self.assertEqual(len({r["id"] for r in rules}), 31)
 
     def test_15_every_specific_rule_has_one_owner(self):
         for b in self.books.values():
@@ -228,6 +228,68 @@ class HobbydepotOriginalFiveTypeContract(unittest.TestCase):
         self.assertTrue(self.manifest["k0_only_read_as_general_guidance"])
         self.assertFalse(self.manifest["copy_of_k0_rule_values"])
 
+
+
+    def test_31_design_muster_meta_not_invented_as_fully_verified_body(self):
+        m=self.manifest["editorial_design_reference_20261122"]
+        self.assertEqual(m["new_specific_rule_counts"],
+                         dict(zip(TYPES,[6,5,6,7,7])))
+        self.assertIn("reported by user",m["evidence"])
+        self.assertTrue(m["not_a_product_release"])
+
+    def test_32_merksatz_is_optional_and_one_content_and_design_owner(self):
+        x=self.shared["single_owner_nonrule_context"]["optional_reader_elements"]
+        self.assertIn("Optional",x["merksatz"])
+        self.assertIn("HD003_DESIGN",x["authority"])
+        self.assertTrue(x["same_single_editorial_owner"])
+        self.assertEqual(len(self.shared["shared_rules"]),12)
+
+    def test_33_for_whom_which_only_advice_and_comparison(self):
+        b=self.books["10_BERATUNG.json"]["additional_type_rules"]
+        v=self.books["40_VERGLEICH.json"]["additional_type_rules"]
+        self.assertIn("Für wen",next(x for x in b if x["id"]=="B02_EIGNUNG")["rule"])
+        self.assertIn("Für wen",next(x for x in v if x["id"]=="V04_FAIRE_EINORDNUNG")["rule"])
+        self.assertNotIn("B02_EIGNUNG",
+                         [x["id"] for x in self.books["20_FAQ.json"]["additional_type_rules"]])
+
+    def test_34_checklist_applies_only_for_real_preparation(self):
+        expected={"Beratung":"B05_STARTCHECK_NACH_WAHL",
+                  "Vergleich":"V06_KURZER_PRAXISCHECK"}
+        for name,rule_id in expected.items():
+            b=next(x for x in self.books.values() if x["wordpress_article_type"]==name)
+            self.assertIn(rule_id,[r["id"] for r in b["additional_type_rules"]])
+        faq=self.books["20_FAQ.json"]
+        self.assertIn("keine künstliche Liste",
+                      next(x for x in faq["additional_type_rules"]
+                           if x["id"]=="F05_KURZE_HANDLUNG")["rule"])
+
+    def test_35_safety_is_existing_shared_rule_not_5_duplicate_rules(self):
+        ids=[r["id"] for r in self.shared["shared_rules"]]
+        self.assertEqual(ids.count("H06_SICHERHEIT"),1)
+        self.assertTrue(all("shared_hobby_policy_ref" in b for b in self.books.values()))
+
+    def test_36_FAQ_type_still_one_question_no_second_FAQ_block(self):
+        f=self.books["20_FAQ.json"]
+        self.assertIn("Keine zusätzlichen",next(x for x in
+                          f["additional_type_rules"] if x["id"]=="F02_EINE_FRAGE")["rule"])
+        self.assertIn("kein",f["article_structure"][-2].lower())
+        self.assertEqual(len(f["additional_type_rules"]),5)
+
+    def test_37_optional_short_followup_questions_not_double_content(self):
+        for name in ("10_BERATUNG.json","30_PFLEGE.json",
+                     "40_VERGLEICH.json","50_ANLEITUNG.json"):
+            own=self.books[name]["additional_type_rules"]
+            last=own[-1]
+            self.assertTrue(any(x in last["rule"].lower() for x in
+                                ("nicht", "keine")))
+        self.assertTrue(self.shared["single_owner_nonrule_context"]
+                        ["optional_reader_elements"]["old_design_plugin_not_modified"])
+
+    def test_38_same_five_types_and_writer_remain_blocked(self):
+        self.assertEqual(self.manifest["original_wp_types"],list(TYPES))
+        self.assertFalse(self.manifest["authoring_active"])
+        self.assertFalse(self.manifest["publish_allowed"])
+        self.assertEqual(self.manifest["editorial_design_reference_20261122"]["total_type_rules"],31)
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

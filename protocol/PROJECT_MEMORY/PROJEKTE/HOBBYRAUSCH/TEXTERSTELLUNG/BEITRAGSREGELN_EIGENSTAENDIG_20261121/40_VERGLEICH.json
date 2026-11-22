@@ -8,11 +8,14 @@
   "intent": "Mindestens zwei reale Alternativen anhand derselben für den Leser wichtigen Kriterien vergleichen.",
   "not_this_type": "Nur eine Option erläutern (Beratung), kurze einzelne Frage (FAQ), rein nacheinander ausführbare Tätigkeit (Anleitung).",
   "article_structure": [
+    "Optional 'Auf einen Blick' mit der echten Kernaussage bei komplexeren Vergleichen.",
     "Vergleichsfrage und Einsatzbereich nennen.",
     "Vergleichbare reale Alternativen und identische Kriterien festlegen.",
     "Jede Alternative nach denselben belegbaren Gesichtspunkten behandeln.",
     "Unterschiede, Nachteile und Grenzen offen darstellen.",
-    "Fazit: Empfehlung ausdrücklich abhängig vom Nutzerziel."
+    "Optional kurzer Merksatz für den wichtigsten Unterschied (gemeinsame Regel H05); ohne zweiten Testsieger.",
+    "Nur bei unmittelbar sinnvoller Handlung eine Start-Checkliste und bei tatsächlich offenen Zusatzfragen ein kurzes FAQ.",
+    "Für wen ist welche Alternative sinnvoll? Mit konkreten Nutzerprofilen und Grenzen, danach Fazit: Empfehlung ausdrücklich abhängig vom Nutzerziel."
   ],
   "additional_type_rules": [
     {
@@ -33,12 +36,22 @@
     {
       "id": "V04_FAIRE_EINORDNUNG",
       "owner": "ARTICLE_AUTHOR",
-      "rule": "Kein unbewiesener Gesamt-Testsieger, wenn sich Eignung nach Bedarf unterscheidet."
+      "rule": "Unterschiede als konkrete bedingte Entscheidungshilfe 'Für wen eignet sich welche Option?' abschließen, einschließlich Grenzen; kein unbelegter Gesamt-Testsieger, wenn sich Eignung nach Bedarf unterscheidet."
     },
     {
       "id": "V05_VERGLEICHSTABELLE",
       "owner": "ARTICLE_AUTHOR",
       "rule": "Tabelle nur wenn zwei oder mehr Varianten mit belastbaren vergleichbaren Merkmalen vorliegen; danach kurze Einordnung."
+    },
+    {
+      "id": "V06_KURZER_PRAXISCHECK",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Wenn eine Option unmittelbar eingesetzt werden soll, nur wenige reale Start- bzw. Kauf-vorbereitungs-Punkte als Checkliste angeben; keine beliebige Standardliste an jeden Vergleich anhängen."
+    },
+    {
+      "id": "V07_ECHTE_RESTFRAGEN",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Optional kurze 'Häufige Fragen' nur zu zusätzlichen nicht bereits durch Tabelle/Empfehlung beantworteten Punkten. Keine doppelte Vergleichstabelle in Frageform."
     }
   ],
   "format_guidance": {

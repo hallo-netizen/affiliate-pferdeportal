@@ -36,12 +36,12 @@
     {
       "id": "H05_KONKRETER_NUTZEN",
       "owner": "ARTICLE_AUTHOR",
-      "rule": "Absätze beantworten die jeweilige Leserabsicht konkret. Keine Wiederholungen, Füllabschnitte oder frei erfundenen Beispiele."
+      "rule": "Absätze beantworten die jeweilige Leserabsicht konkret. Keine Wiederholungen, Füllabschnitte oder frei erfundenen Beispiele. Eine einzelne wichtige Entscheidung oder praktische Erkenntnis darf als kurzer, klarer Merksatz hervorgehoben werden, aber nur bei wirklichem Mehrwert; denselben Satz nicht nochmals im Fließtext wiederholen."
     },
     {
       "id": "H06_SICHERHEIT",
       "owner": "ARTICLE_AUTHOR",
-      "rule": "Bei Werkzeugen, Elektrik, Chemie, Feuer, Bewegung, Tieren und Umwelt passende reale Risiken und sichere Grenzen erläutern; keine gefährliche Anleitung."
+      "rule": "Bei Werkzeugen, Elektrik, Chemie, Feuer, Bewegung, Tieren und Umwelt passende reale Risiken und sichere Grenzen erläutern; keine gefährliche Anleitung. Wenn Leser unmittelbar mit einer Tätigkeit beginnen sollen, die wesentlichen Sicherheitsgrenzen vor den Arbeitsschritten verständlich nennen. Ein eigener Sicherheitsabschnitt ist nur bei echten themenspezifischen Risiken sinnvoll."
     },
     {
       "id": "H07_KEINE_ERFINDUNGEN",
@@ -90,6 +90,28 @@
     "no_auto_publication": true,
     "single_quality_owner_only": true,
     "read_once_at_hobby_rulebook_owner": true,
-    "no_duplicate_checkers": true
+    "no_duplicate_checkers": true,
+    "optional_reader_elements": {
+      "authority": "ARTICLE_AUTHOR for content; HD003_DESIGN_TEMPLATE_KIT exclusively for appearance; SINGLE_QUALITY for once-only QA",
+      "reference_article": "[DESIGNTEST] Zweileiner oder Vierleiner – welcher Lenkdrachen passt zu dir?",
+      "reference_wordpress_post_id": 904015,
+      "reference_confirmed_headings": [
+        "Auf einen Blick",
+        "Für wen ist welcher Drachen sinnvoll?",
+        "Vor dem ersten Flug: kurze Checkliste",
+        "Wichtig für die Sicherheit",
+        "Häufige Fragen"
+      ],
+      "historic_merksatz_colored_box": "USER_REPORTED_VISUAL_EXAMPLE_NOT_INDEPENDENTLY_VERIFIED_FROM_WP_BODY",
+      "merksatz": "Optional 1–2 kurze sachliche Sätze mit eigenständiger Erkenntnis. Redaktionelle Markierung einmalig; dezenter farbiger Kasten ausschließlich aus dem vorhandenen Hobbydepot-Design. Keine Inline-Farben/HTML-Gestaltung aus der Textmaschine.",
+      "summary_at_a_glance": "Optionales 'Auf einen Blick' bei längeren Beratungen, Vergleichen oder Anleitungen, sofern 2–4 konkrete Punkte Orientierung geben. Nicht als neue Pflichtüberschrift für jeden Artikel.",
+      "safety": "Bereits H06_SICHERHEIT; keine duplizierte Sicherheitsregel in jedem Typ.",
+      "checklist": "Nur dort, wo es wirklich eine sinnvolle Vorbereitung, Kontrolle oder Startentscheidung gibt; keine künstlichen Kästchen.",
+      "short_followup_questions": "Optional für Beratung, Vergleich, Anleitung und Pflege: nur neue konkrete Restfragen, nicht die gleichen Sätze noch einmal. Die Beitragsart FAQ bleibt selbst eine einzige Frage; dort kein zweiter FAQ-Fragenblock.",
+      "same_single_editorial_owner": true,
+      "does_not_change_wordpress_type": true,
+      "old_design_plugin_not_modified": true,
+      "does_not_activate_wordpress_publication": true
+    }
   }
 }

@@ -74,7 +74,7 @@
   "unverified_values_stay_nonbinding": true,
   "redudant_common_policies_normalized": true,
   "five_type_books_only_contain_type_specific_guidance": true,
-  "current_standard": "one 12-rule shared owner + one common editorial context + five minimal article type books",
+  "current_standard": "one 12-rule shared owner + five distinct editorial books with 31 type-specific rules (2026-11-22 user-authorized editorial additions; no production activation)",
   "handoff_contract": {
     "contract": "HOBBYDEPOT_EXISTING_WORDPRESS_FILE_TO_EDITORIAL_BOOKS_V1",
     "scope": "HOBBYDEPOT_READ_ONLY_PREPARATION_NOT_KMULTI_RUNTIME_CHANGE",
@@ -175,5 +175,23 @@
     "writer_approval": false,
     "formal_121_rule_release": false,
     "metadata_five_fields_unchanged": true
+  },
+  "editorial_design_reference_20261122": {
+    "source": "WordPress post 904015, [DESIGNTEST] Zweileiner oder Vierleiner – welcher Lenkdrachen passt zu dir?",
+    "evidence": "Article headings verified from original WordPress inventory; colored Merksatz reported by user, original WP body/CSS not independently verified",
+    "new_specific_rule_counts": {
+      "Beratung": 6,
+      "FAQ": 5,
+      "Pflege": 6,
+      "Vergleich": 7,
+      "Anleitung": 7
+    },
+    "shared_count_unchanged": 12,
+    "total_type_rules": 31,
+    "adaptation": "Decision for whom belongs to Beratung/Vergleich; prep list belongs to Beratung/Pflege/Vergleich/Anleitung only when practical; FAQ article stays one question; optional extra common Q&As only if genuinely unanswered; H06 owns safety, H05 owns takeaway, HD003 design owns color",
+    "word_and_H2_targets_untouched": true,
+    "unchanged_WP_original_receipts": true,
+    "not_a_product_release": true,
+    "not_a_design_plugin_change": true
   }
 }

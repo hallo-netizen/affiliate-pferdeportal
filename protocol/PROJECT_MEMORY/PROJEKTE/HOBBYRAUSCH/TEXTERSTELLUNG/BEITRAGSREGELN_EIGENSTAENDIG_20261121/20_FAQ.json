@@ -11,6 +11,7 @@
     "Frage exakt als natürliche Überschrift.",
     "Direkte Antwort bereits im ersten Absatz.",
     "Nur notwendige Gründe, Bedingungen, Verbands-/Ortsunterschiede und passende Praxisbeispiele.",
+    "Bei einer zentralen, leicht missverständlichen Antwort optional ein kurzer Merksatz nach H05; keine künstlichen Kästen und keine zweite Sammlung 'Häufige Fragen'.",
     "Kurzer Abschluss mit praktischer Handlung; H2 'Fazit' nur wenn es für die Länge tatsächlich eine eigenständige Schlusssektion ist."
   ],
   "additional_type_rules": [
@@ -37,7 +38,7 @@
     {
       "id": "F05_KURZE_HANDLUNG",
       "owner": "ARTICLE_AUTHOR",
-      "rule": "Wo sinnvoll, eine unmittelbar hilfreiche nächste Handlung statt einer künstlichen Zusammenfassung."
+      "rule": "Wo sinnvoll, eine unmittelbar hilfreiche nächste Handlung statt einer künstlichen Zusammenfassung. Wenn dafür mehrere konkrete Schritte wirklich erforderlich sind, als sehr kurze Checkliste; ansonsten ein Satz, keine künstliche Liste. Ein weiterer FAQ-Block mit neuen lose verwandten Fragen ist hier ausdrücklich nicht vorgesehen."
     }
   ],
   "format_guidance": {
