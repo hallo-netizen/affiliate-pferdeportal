@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "AGROBS Mineralfutter für Pferde gezielt auswählen",
+      "target_keyword": "mineralfutter pferd agrobs",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "4f6ac8e1ef14ed1325941e639e3ee70b7b932d1843d3dc57068e121a1229bd73"
+    }
+  ],
+  "batch_sha256": "4e943bc77e15efa1f8bd250b61ea6a55391345f927a417d693c0709aae0e409f"
+}
