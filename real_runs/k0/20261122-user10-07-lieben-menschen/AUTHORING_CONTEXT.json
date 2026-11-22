@@ -1,0 +1,157 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Merken Pferde, wenn Menschen sie lieben?",
+    "target_keyword": "Merken Pferde, wenn man sie liebt?",
+    "category": "pferde-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "91d0750952cf65a5d4fad0a0c7e25b1664e9ac4b36974f0a7a25e568d023c7c8"
+  },
+  "content_profile": {
+    "search_intent": "Verstehen, wie Pferde menschliche Zuwendung wahrnehmen und welche Verhaltenszeichen hierfür relevant sind."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.worldhorsewelfare.org/advice/training-how-do-horses-learn",
+          "source_title": "World Horse Welfare – Horse Learning"
+        },
+        {
+          "source_url": "https://www.worldhorsewelfare.org/what-we-do/sport-and-leisure-horses/our-vision-for-the-responsible-involvement-of-horses-in-sport",
+          "source_title": "World Horse Welfare – Responsible Sport"
+        },
+        {
+          "source_url": "https://www.msdvetmanual.com/behavior/behavior-of-horses/social-behavior-of-horses",
+          "source_title": "MSD Veterinary Manual – Social Behavior"
+        }
+      ],
+      "claims": [
+        "Wiederholte menschliche Interaktionen beeinflussen, wie Pferde lernen und reagieren.",
+        "Positive soziale Kontakte sind ein wesentlicher Teil des Pferdealltags.",
+        "Pferde sind sozial und können dauerhafte Bindungen ausbilden."
+      ],
+      "fresh_research_reference_date": "2026-11-22"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Merken Pferde, wenn man sie liebt?",
+      "topic": "Merken Pferde, wenn Menschen sie lieben?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Merken Pferde, wenn Menschen sie lieben?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/training-how-do-horses-learn",
+        "source_title": "World Horse Welfare – Horse Learning",
+        "evidence_text": "every interaction we have with them matters",
+        "evidence_text_sha256": "d6876545c22b44885843c5ca6bd4ba963562b0930552f20981696d3ee6ff8d93",
+        "statement": "Wiederholte menschliche Interaktionen beeinflussen, wie Pferde lernen und reagieren.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.worldhorsewelfare.org/what-we-do/sport-and-leisure-horses/our-vision-for-the-responsible-involvement-of-horses-in-sport",
+        "source_title": "World Horse Welfare – Responsible Sport",
+        "evidence_text": "Have daily positive social interactions with other horses.",
+        "evidence_text_sha256": "d314a1b90af40f7b76ae7117d10d6cd59517fd1ec581a0d1bf199879861b981d",
+        "statement": "Positive soziale Kontakte sind ein wesentlicher Teil des Pferdealltags.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/behavior/behavior-of-horses/social-behavior-of-horses",
+        "source_title": "MSD Veterinary Manual – Social Behavior",
+        "evidence_text": "Mares and foals bond in the first hours after birth.",
+        "evidence_text_sha256": "30274d54ec25a75bcfa04be43e99925944fa83d5ccccefd0e4c8da70c2f1c42d",
+        "statement": "Pferde sind sozial und können dauerhafte Bindungen ausbilden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-verstehen/",
+        "anchor": "pferde-verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/reiterleben-community/",
+        "anchor": "/category/reiterleben-community/",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/category/reiterleben-community/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Menschen",
+      "Zuwendung",
+      "Liebe",
+      "Verhalten",
+      "Interaktion",
+      "Vertrauen",
+      "Reiterleben",
+      "Training"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Innere Gefühle von Pferden lassen sich nicht aus einer schematischen Tabelle ablesen; beobachtbare Interaktionen müssen vorsichtig eingeordnet werden."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
