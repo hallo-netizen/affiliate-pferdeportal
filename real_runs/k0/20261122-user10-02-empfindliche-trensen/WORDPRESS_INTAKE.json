@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Trensen für empfindliche Pferde nach Passform auswählen",
+      "target_keyword": "trensen für empfindliche pferde",
+      "category": "trensen-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "6e44f6baa5da275249947cf4dea75d2ddaa5f6d3fa1f8f897f099d688cda52cf"
+    }
+  ],
+  "batch_sha256": "72fd6c61a129098b67c9f765e52a66c5c810c9f736c6ec87aa4b03487f7b7dec"
+}
