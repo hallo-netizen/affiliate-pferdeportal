@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Mineralfutter für Pferde mit Cushing sorgfältig auswählen",
+      "target_keyword": "mineralfutter für cushing-pferde",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "03d7243c7770e838b74dd0c150aae5330cb7da880d7f7026fd746ec6d92c94fd"
+    }
+  ],
+  "batch_sha256": "806266a85a985884a5773016434c202bdd31f91d8bc5128bfd135777d48f34d9"
+}
