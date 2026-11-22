@@ -1,0 +1,21 @@
+{
+  "contract": "K0_WRITER_REVISION_REQUEST_V1",
+  "status": "RETURN_TO_SAME_WRITER",
+  "job_id": "k0w-bd8845706f0ea01d7876362d",
+  "writer_job_sha256": "c14c2d2ec497d6d1ec2443dfacd0ab8e504e707a9272bf0cc1ba341bdaadacf8",
+  "rule_id": "links.bound_pairs_exact",
+  "instruction": "Rewrite the SAME draft: each C-link label must be identical to the immutable official C target name. Rewrite surrounding sentence grammatically; do not change href, keyword, article type, categories, article ID, or K0 rules.",
+  "required_links": [
+    {
+      "role": "parent_category",
+      "href": "/category/mineralfutter-fuer-pferde-beratung/",
+      "exact_text": "Beratung Mineralfutter für Pferde"
+    },
+    {
+      "role": "further_information",
+      "href": "/fuetterung/fuetterung-mineral-und-ergaenzer/mineralfutter-fuer-pferde/",
+      "exact_text": "Mineralfutter für Pferde"
+    }
+  ],
+  "publish_allowed": false
+}\n
