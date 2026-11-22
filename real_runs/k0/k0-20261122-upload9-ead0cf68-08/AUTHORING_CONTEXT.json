@@ -98,8 +98,8 @@
       },
       {
         "role": "further_information",
-        "href": "/wissen/wissen-buecher-und-ratgeber/gesundheitsvorsorge-grundlagen/",
-        "anchor": "Gesundheitsvorsorge Grundlagen",
+        "href": "/fuetterung/fuetterung-wasser/",
+        "anchor": "Wasser",
         "block": "further_information"
       }
     ],
@@ -109,7 +109,7 @@
         "active": true
       },
       {
-        "href": "/wissen/wissen-buecher-und-ratgeber/gesundheitsvorsorge-grundlagen/",
+        "href": "/fuetterung/fuetterung-wasser/",
         "active": true
       }
     ],
@@ -130,10 +130,9 @@
       "Gewichtsverlust",
       "Körperzustand",
       "Fressverhalten",
-      "Gewicht",
       "Trinkverhalten",
-      "Körpergewicht",
-      "Warnzeichen"
+      "Wasseraufnahme",
+      "Urin"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
