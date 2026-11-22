@@ -99,3 +99,25 @@ Nur Fragen ausgeben, deren Antworten themenspezifisch belegbar und für die Beit
 - Diese Fassung ist **ein redaktioneller Vorschlag** und **keine aktive K-Multi-Prüfregel**. Farbgebung, Pflichtgrad, Reihenfolge und der Mehrfragen-FAQ-Typ müssen erst beschlossen werden.
 - Keine Änderung der vorhandenen fünf Regelbücher, der 110 Prüfungen, der drei laufenden Artikel, des Importformats oder des bestehenden K-Multi-Workflows.
 - Externe Grundlage nur zum kritischen Abgleich: BBK Risikokommunikation (Risiko und Vorsorge) https://www.bbk.bund.de/DE/Themen/Risikomanagement/Risikokommunikation/risikokommunikation_node.html ; Deutscher Feuerwehrverband CO https://www.feuerwehrverband.de/co-vergiftungsgefahr-mit-langzeitschaeden-durch-kamine-und-oefen/.
+
+
+## G. Sichtbarer Frontend-Beleg vom 22.11.2026 – CO-Melder-Testbeitrag (Screenshot-Ausschnitte)
+
+**Quellenart:** vom Nutzer gelieferte Frontend-Bildschirmfotos, nur sichtbare Ausschnitte. Sie beweisen die tatsächliche Gestaltung im Testartikel, **nicht** die damalige formale Regelverabschiedung. Keine Volltext- oder Pluginprüfung daraus ableiten.
+
+### Nachweis in den sichtbaren Artikelausschnitten
+- Titel: **„CO-Melder zu Hause – die wichtigsten Fragen“**.
+- Direkt unter dem Titel-/Hero-Bild folgt **ein orange/beiger Hinweis mit orangefarbener Seitenmarkierung und dem Label „Wichtig“**. Inhalt: bei CO-Alarm/Verdacht Gebäude verlassen, 112 außerhalb verständigen und nicht nach der Ursache suchen. Dies ist bereits eine echte konkrete Gefahr-/Handlungskommunikation.
+- Danach folgt die kurze Einleitung und die erste Frage **„Brauche ich zusätzlich zum Rauchmelder einen CO-Melder?“**.
+- Im späteren Abschnitt **„Was tue ich bei Alarm oder Beschwerden?“** steht die Unterfrage **„Was ist bei einem CO-Alarm zu tun?“**, gefolgt von **drei kurzen, mit Häkchen dargestellten Handlungspunkten**.
+- Vor dem Schlussabschnitt **„Fazit“** steht **ein grün/salbei hinterlegter Merksatz** mit grüner Seitenmarkierung: „CO-Melder, Rauchmelder und Gasmelder erfüllen unterschiedliche Aufgaben. Entscheidend sind die richtige Geräteart, der passende Montageort und das konsequente Handeln bei Alarm.“
+- Das Fazit greift die Unterschiede, den richtigen Montageort und Verhalten bei Alarm teilweise erneut auf. **Mögliche Doppelung:** Merksatz unmittelbar vor Fazit; Stellung und Wiederholungsgrad redaktionell prüfen.
+
+### Konsequenz für das Regelkonzept (VORSCHLAG)
+1. **Bestehende Frontend-Elemente bewahren, nicht doppelt nachbauen.** Warnkasten („Wichtig“) und Merksatz sind bereits sichtbar und visuell getrennt. Keine neue Farb-/CSS-Architektur als Voraussetzung setzen.
+2. **Zwei Rollen sauber trennen:** Warnkasten = konkrete Gefahr und sofortige Handlung (nur bei tatsächlich relevanter Gefahr); Merksatz = zentrale, sachlich belegte Lehre (regelmäßig, aber kein künstlicher Slogan).
+3. **Platzierung flexibel nach Schutzpriorität:** Bei akuter Gefahr zuerst Warnkasten. Merksatz in einem fachlich sinnvollen Abschnitt, nicht zwingend direkt vor dem Fazit; Doppelaussagen vermeiden. Nicht beide Kästen bloß der Vollständigkeit halber unmittelbar hintereinander schalten.
+4. **Checkliste nach Nutzen:** bei konkreten sicheren Handlungen kurz und prüfbar; bei anderen Beitragsarten kein künstlicher Pflichtblock. Der Warnkasten darf eine kompakte Sofortanweisung wiedergeben, die spätere Checkliste kann sie ausführen und absichern – ohne wortgleiche Wiederholung.
+5. **Fachlicher Abgleich:** Das für CO-Alarm sichtbare „Gebäude verlassen und 112 von draußen“ stimmt mit dem Deutschen Feuerwehrverband überein (https://www.feuerwehrverband.de/co-vergiftungsgefahr-mit-langzeitschaeden-durch-kamine-und-oefen/). Weitere Textstellen und das konkrete Melder-Foto sind aus Ausschnitten nicht abschließend geprüft.
+
+**Freigabe:** Diese Beobachtungen und Verbesserungsvorschläge sind noch keine neuen K-Multi-Pflichtregeln; keine Artikel-/Pluginänderung.
