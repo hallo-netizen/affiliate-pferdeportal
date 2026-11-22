@@ -1,0 +1,174 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Merken Pferde, wenn ein anderes Pferd stirbt?",
+    "target_keyword": "Merken Pferde, wenn ein anderes Pferd stirbt?",
+    "category": "pferde-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "6c294356d94a2424852ec2ef051f83043b4c6da12be24c46766ea66406639415"
+  },
+  "content_profile": {
+    "search_intent": "Einordnen, wie Pferde auf den Tod eines Artgenossen reagieren können und welche Veränderungen der Herde beobachtbar sind."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.worldhorsewelfare.org/what-kind-of-situations-should-be-reported",
+          "source_title": "World Horse Welfare – Unexpected death"
+        },
+        {
+          "source_url": "https://www.msdvetmanual.com/behavior/behavior-of-horses/social-behavior-of-horses",
+          "source_title": "MSD Veterinary Manual – Social Behavior"
+        },
+        {
+          "source_url": "https://www.worldhorsewelfare.org/what-we-do/sport-and-leisure-horses/our-vision-for-the-responsible-involvement-of-horses-in-sport",
+          "source_title": "World Horse Welfare – Responsible Sport"
+        },
+        {
+          "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/diagnosing-behavior-problems-in-horses",
+          "source_title": "MSD Veterinary Manual – Diagnosing Behavior Problems"
+        }
+      ],
+      "claims": [
+        "Nach dem Tod eines Pferdes kann die Begegnung der Herdengenossen mit dem Körper eine sinnvolle Option sein.",
+        "Pferde bilden nachweislich soziale Bindungen, etwa zwischen Stute und Fohlen.",
+        "Positive tägliche Kontakte zu anderen Pferden sind für ihr Wohlergehen bedeutsam.",
+        "Stress kann die Gesundheit und das Verhalten des Pferdes beeinflussen."
+      ],
+      "fresh_research_reference_date": "2026-11-22"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Merken Pferde, wenn ein anderes Pferd stirbt?",
+      "topic": "Merken Pferde, wenn ein anderes Pferd stirbt?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Merken Pferde, wenn ein anderes Pferd stirbt?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.worldhorsewelfare.org/what-kind-of-situations-should-be-reported",
+        "source_title": "World Horse Welfare – Unexpected death",
+        "evidence_text": "appropriate to allow other herd members to see the body before removal",
+        "evidence_text_sha256": "fea62350942d40ad2727fa10def88dcba5d5299c3abe03c9bb9d820e6405a7c7",
+        "statement": "Nach dem Tod eines Pferdes kann die Begegnung der Herdengenossen mit dem Körper eine sinnvolle Option sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/behavior/behavior-of-horses/social-behavior-of-horses",
+        "source_title": "MSD Veterinary Manual – Social Behavior",
+        "evidence_text": "Mares and foals bond in the first hours after birth.",
+        "evidence_text_sha256": "30274d54ec25a75bcfa04be43e99925944fa83d5ccccefd0e4c8da70c2f1c42d",
+        "statement": "Pferde bilden nachweislich soziale Bindungen, etwa zwischen Stute und Fohlen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.worldhorsewelfare.org/what-we-do/sport-and-leisure-horses/our-vision-for-the-responsible-involvement-of-horses-in-sport",
+        "source_title": "World Horse Welfare – Responsible Sport",
+        "evidence_text": "Have daily positive social interactions with other horses.",
+        "evidence_text_sha256": "d314a1b90af40f7b76ae7117d10d6cd59517fd1ec581a0d1bf199879861b981d",
+        "statement": "Positive tägliche Kontakte zu anderen Pferden sind für ihr Wohlergehen bedeutsam.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/diagnosing-behavior-problems-in-horses",
+        "source_title": "MSD Veterinary Manual – Diagnosing Behavior Problems",
+        "evidence_text": "stress, which can alter normal body functions, behavior, and immune responses",
+        "evidence_text_sha256": "12e170c50011f8e8750f621a4225851b1c5b63c2d4386c4ddbd626d15d522dd3",
+        "statement": "Stress kann die Gesundheit und das Verhalten des Pferdes beeinflussen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-verstehen/",
+        "anchor": "pferde-verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "/category/pferdegesundheit-verstehen/",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Trauer",
+      "Artgenossen",
+      "Herde",
+      "Verlust",
+      "Stress",
+      "Verhalten",
+      "Gesundheit"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Reaktionen auf den Tod eines Artgenossen lassen sich nicht seriös auf eine einzige allgemeine Tabelle reduzieren."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
