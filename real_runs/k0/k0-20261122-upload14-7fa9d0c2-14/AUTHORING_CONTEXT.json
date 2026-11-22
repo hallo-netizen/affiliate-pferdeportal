@@ -1,0 +1,160 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Mineralfutter für Pferde mit PSSM bedarfsgerecht auswählen",
+    "target_keyword": "mineralfutter für pssm pferde",
+    "category": "mineralfutter-fuer-pferde-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "9b35029e9dc1fbad329d5661844ddabeeee5ed9cf792c7d767d6828d42a3b859"
+  },
+  "content_profile": {
+    "search_intent": "Mineralfutter für Pferde mit PSSM allgemein nach Diagnose und tatsächlichem Bedarf auswählen; PSSM2-Spezialthema getrennt halten"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+          "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses and Other Equids"
+        },
+        {
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/feeding-the-sick-horse-and-other-equids",
+          "source_title": "MSD Veterinary Manual – Feeding the Sick Horse and Other Equids"
+        }
+      ],
+      "claims": [
+        "Die gesamte Mineralversorgung aus allen Futterbestandteilen muss zur Ergänzung passen.",
+        "Bei PSSM Typ 1 ist eine angepasste Fütterung mit reduzierten nichtstrukturellen Kohlenhydraten relevant.",
+        "PSSM2 ist in der Ursache nicht eindeutig geklärt und darf nicht mit PSSM Typ 1 gleichgesetzt werden."
+      ],
+      "fresh_research_reference_date": "2026-11-22"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "mineralfutter für pssm pferde",
+      "topic": "Mineralfutter für Pferde mit PSSM bedarfsgerecht auswählen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "mineralfutter-fuer-pferde-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Geeignetes Mineralfutter nach Futterration, Zustand und sicherem Bedarf auswählen",
+      "decision_criteria": [
+        "Gesamte Futterration und Versorgung analysieren",
+        "Besondere Anforderungen sicher einordnen",
+        "Doppelte Mineralgaben und Überversorgung vermeiden"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses and Other Equids",
+        "evidence_text": "The total mineral contribution and availability from all parts of the ration (forages and roughages, concentrates, all supplements, and even water, which can be high in iron and other minerals) should be considered when evaluating the mineral intake.",
+        "evidence_text_sha256": "79195c7611d913462af0add6e76c171b7503949e94f5b4964c8cdc4bcdec0af7",
+        "statement": "Die gesamte Mineralversorgung aus allen Futterbestandteilen muss zur Ergänzung passen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/feeding-the-sick-horse-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Feeding the Sick Horse and Other Equids",
+        "evidence_text": "Dietary management of PSSM type 1 requires a strict limitation of NSCs, with added dietary fat for energy and buildup of oxidative capacity through training.",
+        "evidence_text_sha256": "3c78211ac43107fa21e499106e00fe83c71fe0164c51b12894ac725e4d5a49bb",
+        "statement": "Bei PSSM Typ 1 ist eine angepasste Fütterung mit reduzierten nichtstrukturellen Kohlenhydraten relevant.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/feeding-the-sick-horse-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Feeding the Sick Horse and Other Equids",
+        "evidence_text": "PSSM type 2 is of unknown cause, but affected animals can develop clinical signs similar to those of PSSM type 1 (ie, muscle soreness, reluctance to move).",
+        "evidence_text_sha256": "e934ced486a237b2d76fdb6a03368aeb476ffbd226482aff7dbfbfe893b0c89d",
+        "statement": "PSSM2 ist in der Ursache nicht eindeutig geklärt und darf nicht mit PSSM Typ 1 gleichgesetzt werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/mineralfutter-fuer-pferde-beratung/",
+        "anchor": "Beratung Mineralfutter für Pferde",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/fuetterung/fuetterung-mineral-und-ergaenzer/mineralfutter-fuer-pferde/",
+        "anchor": "Mineralfutter für Pferde",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/mineralfutter-fuer-pferde-beratung/",
+        "active": true
+      },
+      {
+        "href": "/fuetterung/fuetterung-mineral-und-ergaenzer/mineralfutter-fuer-pferde/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "mineralfutter-fuer-pferde-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Mineralfutter",
+      "Raufutter",
+      "Futterration",
+      "Spurenelemente",
+      "Ergänzung",
+      "Stoffwechsel",
+      "Gesundheit",
+      "Bedarf",
+      "Dosierung",
+      "Pferd"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Die Auswahl nach Futterration, Bedarf und medizinischer Einordnung ist ohne konkrete Produktdaten besser als schrittweise Checkliste aufgebaut."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
