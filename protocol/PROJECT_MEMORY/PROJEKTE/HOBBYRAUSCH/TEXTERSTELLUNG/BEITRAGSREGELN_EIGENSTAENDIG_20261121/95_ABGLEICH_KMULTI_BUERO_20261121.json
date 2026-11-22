@@ -601,5 +601,68 @@
     "next_actual_owner_work": "Implement and sign real Hobby hard-rule methods at same existing K-Multi QA owner; resolve seven portal conflicts without accidentally activating old horse K0 values; obtain independent facts approval and trusted signer, then produce verified draft import.",
     "kmulti_office_commit": "c638e886896d81e8f34fd1df7288284f85dcc1c8",
     "kmulti_office_link": "https://github.com/hallo-netizen/k0-multiportal/blob/k0-offline-rule-bindings-20261027/offline_rules/portal_bindings/hobby_depot/HOBBYDEPOT_5_EIGENE_BEITRAGSREGELN_EINGANG_20261121.md"
+  },
+  "historic_kite_editorial_update_20261122": {
+    "source": {
+      "wp_id": 904015,
+      "title": "[DESIGNTEST] Zweileiner oder Vierleiner – welcher Lenkdrachen passt zu dir?",
+      "exact_headings_verified_in_original_wordpress_inventory": [
+        "Auf einen Blick",
+        "Was unterscheidet Zweileiner und Vierleiner?",
+        "Zweileiner und Vierleiner im direkten Vergleich",
+        "Für wen ist welcher Drachen sinnvoll?",
+        "Vor dem ersten Flug: kurze Checkliste",
+        "Wichtig für die Sicherheit",
+        "Häufige Fragen"
+      ],
+      "coloured_merksatz_seen_only_by_user": true,
+      "exact_merksatz_HTML_colour_and_original_text_not_independently_verified": true
+    },
+    "user_authorization": "Review the old rules and add only meaningful practices to current specific article types",
+    "original_typebooks_unchanged": [
+      "Beratung",
+      "FAQ",
+      "Pflege",
+      "Vergleich",
+      "Anleitung"
+    ],
+    "current_specific_rule_count": {
+      "Beratung": 6,
+      "FAQ": 5,
+      "Pflege": 6,
+      "Vergleich": 7,
+      "Anleitung": 7
+    },
+    "current_shared_rule_count_once": 12,
+    "total_specific_rules": 31,
+    "treatment": {
+      "highlight": "Optional short meaningful Merksatz; ARTICLE_AUTHOR owns content; HD003 DESIGN owns coloring; no new plugin or inline CSS",
+      "reader_at_a_glance": "Optional for longer advice/comparison/tutorial",
+      "decision_for_whom": "Beratung and Vergleich only; type FAQ remains one question",
+      "checklist": "Only real preparation or practical safety needs; Beratung, Vergleich, Pflege, Anleitung; FAQ only if concise answer warrants steps",
+      "safety": "Existing shared H06 once, before risky practices; never duplicate into per-type policy",
+      "short_followup_QA": "Optional when real new questions exist in Beratung, Vergleich, Pflege, Anleitung; no secondary FAQ section for FAQ type",
+      "rejected": "No mandatory block order across all five types; no product demo boxes; no fake Amazon tiles; no ungrounded winners; no repeat in different sections",
+      "table": "Use actual comparative table only when meaningful; FAQ has no compulsory table"
+    },
+    "current_Hobby_commit": "01c450f12130c0a033e8ed1fc742ef588dd017cc",
+    "current_KMulti_commit": "b8c966d8ea71ab390d98a9b564a29e88e7332435",
+    "real_Hobby_contract_GitHub_run": "https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/45003668698",
+    "real_KMulti_124_tests_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45003743957",
+    "extra_original_multiportal_regressions": [
+      "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45003743956",
+      "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45003743998"
+    ],
+    "byte_identical_6_rule_files_between_Hobby_and_KMulti": true,
+    "active_K0_code_modified": false,
+    "WP_plugin_modified": false,
+    "HD003_design_plugin_modified": false,
+    "common_121_catalog_modified": false,
+    "draft_status_preserved": true,
+    "original_Hobby_research_owner_signoff": false,
+    "original_121_hard_QA_completed": false,
+    "KMulti_production_enabled": false,
+    "WordPress_import_released": false,
+    "visual_callout_rendering_on_new_articles_technically_not_tested": true
   }
 }
