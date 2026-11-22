@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Flüssiges Mineralfutter für Pferde gezielt auswählen",
+      "target_keyword": "flüssiges mineralfutter für pferde",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "71133899b52365b3b9a45a0736669b32bb6a094171cd4ec9c897a1f2647cbaa3"
+    }
+  ],
+  "batch_sha256": "317eb54e71ebf5cd5e01d37b52cabff974cf7ebf1153dada324334b24dd5c6ff"
+}
