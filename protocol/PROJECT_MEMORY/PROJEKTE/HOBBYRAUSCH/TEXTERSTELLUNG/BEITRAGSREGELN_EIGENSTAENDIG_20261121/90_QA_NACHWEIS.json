@@ -310,6 +310,36 @@
         "Hobbydepot remains NO_VALUES_BLOCKED, K-Multi production_enabled=false, no WordPress import"
       ],
       "next_exact_dependency": "Existing SHARED_RESEARCH_OWNER must produce complete article-claim source context receipt for the exact three unchanged HTML hashes; then single existing quality owner must execute supported bound hobby-specific rule checks and trusted final delivery. Do not duplicate article or source decisions."
+    },
+    "added_independent_hobby_trial_test_run": {
+      "source_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45017351554",
+      "date": "2026-11-22",
+      "event": "push",
+      "conclusion": "success",
+      "actual_test_suite_counts": [
+        31,
+        51,
+        20,
+        16
+      ],
+      "total": 118,
+      "pass": 118,
+      "fail": 0,
+      "asserts": "K-Multi original FAQ trial, LT68 boundary, one-file safe delivery and fail-closed real release attempt; no signature, actual production release blocked",
+      "real_release_probe_status": "BLOCKED_NO_WORDPRESS_IMPORT_FILE",
+      "real_release_blocker": "HOBBY_FORMAL_RULEBOOK_NOT_APPROVED",
+      "stale_output_deletion_test": "PASS",
+      "publish_allowed": false,
+      "warning": "This is a separate later safety/regression run, not 118 completed 121 content QA checks; not simply to be added to unique QA coverage."
+    },
+    "original_plugin_saved_task_and_cancel_scope": {
+      "source": "QA_ORIGINAL_WORKFLOW_VERGLEICH_HAB_PFERD_20261120.md and 20261120_HOBBY_042418_PFERDEATELIER_0439_SINGLE_IMPORT_VERIFIZIERT.md",
+      "hobby_original_previous_0_4_24_15": "Original PHP mock tests documented saved MINI UI enabled, resume from saved work, 7 queue transitions, no new paid research when safely resuming",
+      "hobby_original_current_candidate_0_4_24_18": "Documented 1-file original MINI reintegration borrowed from Pferdeatelier 0.4.39 and 92/92 local mock checks; 86/87 plugin files unchanged from 0.4.24.17",
+      "online_wp_installation_and_cancel_button_behavior_verified_now": false,
+      "no_restart_no_duplicate_paid_query_policy": true,
+      "no_new_plugin_requested": true,
+      "note": "Older 0.4.24.15 functions cannot be declared live on 0.4.24.18 without an original ZIP readback and current WP evidence. The prior tests are evidence for a historic version, not a fresh live proof."
     }
   }
 }
