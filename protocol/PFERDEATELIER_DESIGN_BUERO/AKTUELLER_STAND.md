@@ -128,3 +128,20 @@ Nach Live-Installation dient 1.50.632 als gemeinsame Basis für Live und Test.
 - Artefakt: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.637_EINZELBEITRAG_SIDEBAR_HARTFIX_NUR_TEST.zip`
 - Prüfnachweis: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.637_PRUEFNACHWEIS.json`
 - Status: **NUR TEST**. Letzter LIVE PASS bleibt 1.50.632.
+
+
+## 2026-11-22 – 1.50.637 nicht abgenommen / 1.50.638 responsive Sidebar – NUR TEST
+
+- 1.50.637 sichtbar nur teilweise verbessert, aber nicht PASS: Amazon-Bild fehlte; Produktkarten zeigten durch fehlerhafte Auswertung nur Amazon statt reale Anbieter; responsive Umschaltung/Mobil unvollständig; kein belastbarer Weiterführungsblock.
+- 1.50.638 korrigiert ausschließlich diese Einzelbeitrags-Sidebar.
+- Amazon: vorhandenes reales Amazon-Bild wird aus dem bestehenden Quellblock übernommen; alter Werbe-Chrome wird nicht geklont. Genau ein Ocker-`WERBUNG`; CTA `Bei Amazon ansehen` bleibt einzeilig.
+- Produkte: zentraler Artikelplan hat Vorrang; danach die drei vorhandenen Router-Slots `category_product_1..3` mit `intent=portal_context`. Pro Produkt werden alle tatsächlich vorhandenen eBay-/idealo-/Amazon-Angebotslinks separat als Buttons dargestellt. Auswahlreihenfolge versucht sichtbaren Provider-Mix eBay → idealo → Amazon, ohne Anbieter zu erfinden.
+- Heunetz-Evidenz aus Export: aktive eBay-Heunetz-Kampagnen und aktive idealo-Heunetz-Kampagnen sind vorhanden; Artikelplan für `Wie hoch muss ein Heunetz hängen?` ist ready.
+- Weiterführung: echter anderer Post bleibt erste Wahl. Wenn für das konkrete Thema noch kein zweiter Post existiert, wird der bereits redaktionell im Artikel gesetzte Portalpfad (z. B. Heunetze/Raufutter) als sichere Weiterführung verwendet; keine erfundene Empfehlung.
+- Responsive: Sidebar weiterhin nur ab 1000px. Unter 1000px Originalquellen werden vollständig freigegeben. Falls im Original mobil kein Produkt-/Related-Block existiert, werden nur diese fehlenden Empfehlungen unter dem Artikel ergänzt; der Artikel selbst bleibt einspaltig und unangetastet.
+- Diff gegen 1.50.637: 507 gemeinsame Dateien, 506 byteidentisch; nur `pferde-template-kit.php` geändert; keine Datei hinzugefügt/gelöscht.
+- PHP 9/9 PASS, JavaScript-Syntax PASS, ZIP-CRC PASS, statischer Vertrag PASS.
+- Chromium-Visualtest in Container weiterhin technisch nicht zuverlässig startbar; daher kein behaupteter visueller Browser-PASS.
+- Artefakt: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.638_EINZELBEITRAG_SIDEBAR_RESPONSIVE_NUR_TEST.zip`
+- Prüfnachweis: `/pferdeatelier/PLUGINS/PPA-002-DESIGN/PFERDE_ATELIER_DESIGN_1.50.638_PRUEFNACHWEIS.json`
+- Status: **NUR TEST**. Letzter LIVE PASS bleibt 1.50.632.
