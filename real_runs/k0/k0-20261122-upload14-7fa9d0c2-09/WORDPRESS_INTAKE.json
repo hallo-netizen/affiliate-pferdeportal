@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Mineralfutter für Pferde mit EMS richtig wählen",
+      "target_keyword": "mineralfutter für ems pferde",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "c02a61edce5b632bc00eeb7f4865955c213f36f7bdaf32aa8c692e89a925ea6e"
+    }
+  ],
+  "batch_sha256": "413287381dabcdea9206b4aa22b6edfebad96166e0e8a330f4fb709dfb7c1c3e"
+}
