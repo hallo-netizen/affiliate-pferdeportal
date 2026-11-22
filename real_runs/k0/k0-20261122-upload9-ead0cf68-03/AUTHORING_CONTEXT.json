@@ -1,0 +1,152 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Stallapotheke für Pferde sinnvoll ausstatten",
+    "target_keyword": "stallapotheke pferd",
+    "category": "verbandskoffer-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "c295ded6720ff34673bae408b87b22858155ec55ce5ec1aeb51f63c61553b0c8"
+  },
+  "content_profile": {
+    "search_intent": "Auswahl einer sinnvoll ausgestatteten Stallapotheke für Pferde"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/special-pet-topics/emergencies/emergency-care-for-horses",
+          "source_title": "MSD Veterinary Manual – Emergency Care for Horses"
+        }
+      ],
+      "claims": [
+        "Ein gut ausgestatteter Erste-Hilfe-Kasten gehört zur Notfallvorbereitung bei der Pferdehaltung.",
+        "Der sichere Umgang mit verletzten oder verängstigten Pferden ist Teil der Erstversorgung.",
+        "Wunden und Hautverletzungen gehören zu den häufigen Notfallsituationen bei Pferden."
+      ],
+      "fresh_research_reference_date": "2026-11-22"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "stallapotheke pferd",
+      "topic": "Stallapotheke für Pferde sinnvoll ausstatten",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "verbandskoffer-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Eine Stallapotheke mit passenden Erstversorgungsmaterialien und klarer Notfallorganisation ausstatten",
+      "decision_criteria": [
+        "sterile Grundausstattung",
+        "geschützte Lagerung und schnelle Erreichbarkeit",
+        "Anleitung und Notfallkontakte"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/special-pet-topics/emergencies/emergency-care-for-horses",
+        "source_title": "MSD Veterinary Manual – Emergency Care for Horses",
+        "evidence_text": "keep a well-stocked first aid kit on hand",
+        "evidence_text_sha256": "d60d1a74dfeb34a4e0909cfbea0671b856216e024367bca141860aa918a92578",
+        "statement": "Ein gut ausgestatteter Erste-Hilfe-Kasten gehört zur Notfallvorbereitung bei der Pferdehaltung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/special-pet-topics/emergencies/emergency-care-for-horses",
+        "source_title": "MSD Veterinary Manual – Emergency Care for Horses",
+        "evidence_text": "Handling horses safely is always important",
+        "evidence_text_sha256": "b9e23d83378611dd0d99fb16351b1fdf74d25b5217a3472168641b44b4b061bd",
+        "statement": "Der sichere Umgang mit verletzten oder verängstigten Pferden ist Teil der Erstversorgung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/special-pet-topics/emergencies/emergency-care-for-horses",
+        "source_title": "MSD Veterinary Manual – Emergency Care for Horses",
+        "evidence_text": "Wounds and lacerations (tears of the skin) are common in horses",
+        "evidence_text_sha256": "ed4a29bf0367e65757cf0e68b972bf78da0b4665fcc23248c30dd24f5cd52169",
+        "statement": "Wunden und Hautverletzungen gehören zu den häufigen Notfallsituationen bei Pferden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/verbandskoffer-beratung/",
+        "anchor": "verbandskoffer beratung",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/gesundheit/gesundheit-erste-hilfe/verbandskoffer/",
+        "anchor": "Verbandskoffer",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/verbandskoffer-beratung/",
+        "active": true
+      },
+      {
+        "href": "/gesundheit/gesundheit-erste-hilfe/verbandskoffer/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "verbandskoffer-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Stallapotheke",
+      "Erste Hilfe",
+      "Verbandmaterial",
+      "Notfallset",
+      "Verbandskoffer",
+      "Aufbewahrung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Eine fachlich strukturierte Checkliste beantwortet die konkrete Frage besser als eine künstliche Vergleichstabelle ohne neuen Nutzen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
