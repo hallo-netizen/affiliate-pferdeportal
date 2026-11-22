@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Mineralfutter mit Selen für Pferde passend dosiert auswählen",
+      "target_keyword": "mineralfutter mit selen für pferde",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "6ab275af929e4d1b518120d1cc7be302d4a3dbf35d284ab32f35910938bfc02f"
+    }
+  ],
+  "batch_sha256": "7bd7025bbb78382fddcbdc952b58998a7c3988df394fe76c45ae27124627e946"
+}
