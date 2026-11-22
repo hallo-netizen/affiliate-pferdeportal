@@ -1703,3 +1703,21 @@ Wichtig:
 - Artefakt: PFERDE_ATELIER_DESIGN_1.50.629_JOURNAL_UNTERSEITEN_LAYOUT_NUR_TEST.zip
 - Prüfnachweis: PFERDE_ATELIER_DESIGN_1.50.629_PRUEFNACHWEIS.json
 - Status: NUR TEST; visuelle Nutzerabnahme steht aus.
+
+
+## 2026-11-22 – Template Kit 1.50.630 Journal Raster/Paginierung – NUR TEST
+
+- Basis: 1.50.629 (Hero + integrierte Überschrift vom Nutzer PASS bestätigt).
+- Scope unverändert: ausschließlich acht redaktionelle Journal-Kategoriearchive; Glossar und Pferderassen bleiben ausgeschlossen.
+- Neu: exakt 8 echte Beiträge pro Archivseite über pre_get_posts. Paginierung erscheint damit nur, wenn tatsächlich mehr als 8 Beiträge vorhanden sind.
+- Zielraster Desktop: 8 Beiträge + bereits vorhandene Amazon-Suchanzeige = 9 Rasterplätze = 3x3. Tablet bleibt 2-spaltig, Mobil 1-spaltig.
+- Amazon: kein neuer Affiliate-Link und keine neue Affiliate-Entscheidung. Es wird ausschließlich der bereits vorhandene Amazon-Link übernommen; die bestehende Suchanzeige wird nur als formatgleiche Journal-Karte dargestellt und ans Rasterende gesetzt.
+- Amazon-Karte: gleiche Bildhöhe 205px, gleiche Kartenbreite/Innenabstände, Kategorie-spezifischer Text, CTA 'Bei Amazon ansehen', vorhandene Disclosure bleibt erhalten.
+- Banner: bestehender Slot product_after_category_tiles wird weiter nur verschoben, jetzt auf max. 1180px/Inhaltsbreite begrenzt; Bild darf nicht über die Body-Achse hinauswachsen.
+- Paginierung: vorhandene untere Navigation wird direkt hinter das Beitragsraster verschoben; daraus wird eine identische obere Navigation direkt vor dem Raster geklont. Mittig, Sand-Hintergrund #F2E8D6, aktive/hover Seite Ocker #C89214.
+- Hero + Überschrift aus 1.50.629 bleiben unverändert.
+- Diff gegen 1.50.629: 507 gemeinsame Dateien, 506 byteidentisch; nur pferde-template-kit.php geändert; keine Datei hinzugefügt/entfernt.
+- PHP 9/9 PASS, JavaScript-Syntax PASS, ZIP-CRC PASS.
+- Artefakt: PFERDE_ATELIER_DESIGN_1.50.630_JOURNAL_RASTER_PAGINATION_NUR_TEST.zip
+- Prüfnachweis: PFERDE_ATELIER_DESIGN_1.50.630_PRUEFNACHWEIS.json
+- Status: NUR TEST; visuelle Abnahme auf Testseite steht aus.
