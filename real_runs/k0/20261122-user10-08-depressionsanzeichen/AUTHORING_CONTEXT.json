@@ -102,7 +102,7 @@
       },
       {
         "role": "further_information",
-        "href": "/category/pferde-verstehen/",
+        "href": "/wissen/wissen-buecher-und-ratgeber/pferdehaltung-grundlagen/",
         "anchor": "/category/pferde-verstehen/",
         "block": "further_information"
       }
@@ -113,7 +113,7 @@
         "active": true
       },
       {
-        "href": "/category/pferde-verstehen/",
+        "href": "/wissen/wissen-buecher-und-ratgeber/pferdehaltung-grundlagen/",
         "active": true
       }
     ],
@@ -134,7 +134,9 @@
       "Stress",
       "Verhalten",
       "Gesundheit",
-      "Beobachtung"
+      "Beobachtung",
+      "Sozialkontakt",
+      "Gruppenzusammensetzung"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
