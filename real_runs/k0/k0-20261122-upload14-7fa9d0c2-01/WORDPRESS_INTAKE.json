@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "In welchem Pferdefutter ist besonders viel Eiweiß?",
+      "target_keyword": "In welchem Pferdefutter ist viel Eiweiß?",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "ad2cff1ddb483c7bb1d9667df284acbd4e8b1e69169ed707ce61dfc5866d3f4a"
+    }
+  ],
+  "batch_sha256": "3a8a5989160747ab7a20cc10b55533a1413516ebcfe7acf8dfa835dd38494ebe"
+}
