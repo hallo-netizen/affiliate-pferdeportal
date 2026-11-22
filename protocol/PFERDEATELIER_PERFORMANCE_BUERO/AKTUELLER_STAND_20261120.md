@@ -1736,3 +1736,19 @@ Wichtig:
 - Artefakt: `PFERDE_ATELIER_DESIGN_1.50.631_JOURNAL_8_BEITRAEGE_PAGINATION_NUR_TEST.zip`
 - Prüfnachweis: `PFERDE_ATELIER_DESIGN_1.50.631_PRUEFNACHWEIS.json`
 - Status: NUR TEST; visuelle Nutzerabnahme steht aus.
+
+
+## 2026-11-22 – Template Kit 1.50.632 Journal 8-Beiträge SQL-Endschutz – NUR TEST
+
+- Basis: 1.50.631; Nutzer bestätigt Design der Journal-Unterseiten als PASS, einzig Beitragsanzahl weiterhin falsch.
+- Ursache der bisherigen Fehlversuche: Begrenzung hing an indirekter Journal-Kategorieauflösung im frühen pre_get_posts-Pfad; sichtbarer Realtest zeigte, dass dieser Scope im echten Archiv nicht wirksam begrenzte.
+- 1.50.632 verwendet deshalb direkte feste Journal-ID/Slug-Erkennung für exakt acht redaktionelle Archive und zusätzlich einen finalen post_limits-Endschutz auf PHP_INT_MAX.
+- SQL-Seitenlänge wird direkt vor der Hauptabfrage auf exakt 8 gesetzt; Offset = (Seite-1)*8. Gleichzeitig bleiben posts_per_page/posts_per_archive_page auf 8 synchron, damit WordPress-Paginierung dieselbe Seitenlänge verwendet.
+- Glossar und Pferderassen sind nicht im erlaubten Scope.
+- Design-Schutz: kompletter Journal-CSS-Block und kompletter Journal-Layout-JavaScript-Block sind byteidentisch zu 1.50.631.
+- Zusätzlich korrigiert: Pluginheader 1.50.631 hatte intern noch const VERSION=1.50.630; 1.50.632 trägt Header und interne Konstante konsistent 1.50.632.
+- Diff gegen 1.50.631: 507 gemeinsame Dateien, 506 byteidentisch; nur pferde-template-kit.php geändert; keine Dateien hinzugefügt/gelöscht.
+- PHP 9/9 PASS, ZIP-CRC PASS, statischer Scope/Offset-Vertrag PASS.
+- Artefakt: PFERDE_ATELIER_DESIGN_1.50.632_JOURNAL_8_SQL_LIMIT_NUR_TEST.zip
+- Prüfnachweis: PFERDE_ATELIER_DESIGN_1.50.632_PRUEFNACHWEIS.json
+- Status: NUR TEST; sichtbare Nutzerabnahme der 8er-Grenze steht aus.
