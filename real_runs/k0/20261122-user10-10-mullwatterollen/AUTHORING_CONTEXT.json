@@ -1,0 +1,151 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Mullwatterollen für Pferdeverbände richtig auswählen und verwenden",
+    "target_keyword": "mullwatterolle pferd",
+    "category": "verbandsmaterial-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "6a09ff98519436441237cd423f0e797ddfcf5e70af856c44a1c3edbaa4df1e70"
+  },
+  "content_profile": {
+    "search_intent": "Zweck, Auswahl und Anwendung einer Mullwatterolle bei der Versorgung von Pferdebeinen erklären."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/emergency-medicine-and-critical-care/emergency-medicine-in-horses/trauma-and-first-aid-in-horses",
+          "source_title": "MSD Veterinary Manual – Trauma and First Aid"
+        }
+      ],
+      "claims": [
+        "Baumwollpolster werden bei der Verbandversorgung eines Pferdebeins eingesetzt.",
+        "Bei einer Schiene ist ausreichendes Polstermaterial an Hautkontaktstellen wichtig.",
+        "Sterile und nicht haftende Verbandsmaterialien können Teil der Wundversorgung sein."
+      ],
+      "fresh_research_reference_date": "2026-11-22"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "mullwatterolle pferd",
+      "topic": "Mullwatterollen für Pferdeverbände richtig auswählen und verwenden",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "verbandsmaterial-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Mullwatterollen für Pferdeverbände sicher auswählen und anwenden",
+      "decision_criteria": [
+        "Polsterung und Kontakt zur Haut beachten",
+        "Sterilität und Befestigung des Verbandes prüfen"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/emergency-medicine-and-critical-care/emergency-medicine-in-horses/trauma-and-first-aid-in-horses",
+        "source_title": "MSD Veterinary Manual – Trauma and First Aid",
+        "evidence_text": "Cotton padding is applied to the entire length",
+        "evidence_text_sha256": "cb1d4e9423cf8c04fd60bfb55dcbf4c3f5f3cc3a80d64e0b1c92c3a3ad3d2c91",
+        "statement": "Baumwollpolster werden bei der Verbandversorgung eines Pferdebeins eingesetzt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/emergency-medicine-and-critical-care/emergency-medicine-in-horses/trauma-and-first-aid-in-horses",
+        "source_title": "MSD Veterinary Manual – Trauma and First Aid",
+        "evidence_text": "Adequate padding should be placed wherever the splint contacts skin",
+        "evidence_text_sha256": "269fc500d8acf6677e5ac722b7e64d119232a8594d789f8efe8f5dcc0321d12c",
+        "statement": "Bei einer Schiene ist ausreichendes Polstermaterial an Hautkontaktstellen wichtig.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/emergency-medicine-and-critical-care/emergency-medicine-in-horses/trauma-and-first-aid-in-horses",
+        "source_title": "MSD Veterinary Manual – Trauma and First Aid",
+        "evidence_text": "sterile, nonadherent bandage",
+        "evidence_text_sha256": "fdaf1a7ccd62cc26c475aa31eaf0741f98d8a5a79835a5e2d725068c64c24fca",
+        "statement": "Sterile und nicht haftende Verbandsmaterialien können Teil der Wundversorgung sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/verbandsmaterial-beratung/",
+        "anchor": "verbandsmaterial-beratung",
+        "block": "decision"
+      },
+      {
+        "role": "further_information",
+        "href": "/verbandsmaterial/",
+        "anchor": "/verbandsmaterial/",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/verbandsmaterial-beratung/",
+        "active": true
+      },
+      {
+        "href": "/verbandsmaterial/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "verbandsmaterial-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Mullwatterollen",
+      "Polsterung",
+      "Verband",
+      "Verbandsmaterial",
+      "Pferdebein",
+      "Wundversorgung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Ohne konkrete Verbandgröße oder Verletzung wäre eine schematische Kaufvergleichstabelle für Mullwatterollen medizinisch ungeeignet."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
