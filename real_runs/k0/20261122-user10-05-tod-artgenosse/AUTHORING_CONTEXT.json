@@ -124,7 +124,7 @@
       },
       {
         "role": "further_information",
-        "href": "/wissen/wissen-buecher-und-ratgeber/pferdehaltung-grundlagen/",
+        "href": "/category/reiterleben-community/",
         "anchor": "/category/pferdegesundheit-verstehen/",
         "block": "further_information"
       }
@@ -135,7 +135,7 @@
         "active": true
       },
       {
-        "href": "/wissen/wissen-buecher-und-ratgeber/pferdehaltung-grundlagen/",
+        "href": "/category/reiterleben-community/",
         "active": true
       }
     ],
@@ -159,7 +159,11 @@
       "Gesundheit",
       "Sozialkontakt",
       "Gruppenzusammensetzung",
-      "Beobachtung"
+      "Beobachtung",
+      "Miteinander",
+      "Beziehungen",
+      "Abschied",
+      "Sozialverhalten"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
