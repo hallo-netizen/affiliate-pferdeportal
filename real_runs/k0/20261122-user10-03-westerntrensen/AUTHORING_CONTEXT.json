@@ -1,0 +1,158 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Westerntrensen für Pferde nach Bauart und Einsatz auswählen",
+    "target_keyword": "pferde trensen western",
+    "category": "trensen-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "6ed75aec05e64b3f4318ebd24214e8eb3cb02b2cb2a67b5596d1ebf85e057679"
+  },
+  "content_profile": {
+    "search_intent": "Westerntrensen für Pferde nach Bauart und Westernreiten von anderen Zäumungen unterscheiden."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://en.wikipedia.org/wiki/Bridle",
+          "source_title": "Wikipedia – Bridle"
+        },
+        {
+          "source_url": "https://en.wikipedia.org/wiki/Rein",
+          "source_title": "Wikipedia – Rein"
+        },
+        {
+          "source_url": "https://en.wikipedia.org/wiki/Horse_tack",
+          "source_title": "Wikipedia – Horse tack"
+        }
+      ],
+      "claims": [
+        "Zäumungen gehören zum Ausrüstungsbereich für die Führung des Pferdes.",
+        "Im Westernreiten werden in bestimmten Disziplinen geschlossene Zügel verwendet.",
+        "Zäumung, Gebiss und Zügel sind zusammenhängende Ausrüstungsteile."
+      ],
+      "fresh_research_reference_date": "2026-11-22"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "pferde trensen western",
+      "topic": "Westerntrensen für Pferde nach Bauart und Einsatz auswählen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "trensen-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Westerntrensen nach Bauart und konkretem Reiteinsatz auswählen",
+      "decision_criteria": [
+        "Unterschiedliche Zügelführung beim Westernreiten beachten",
+        "Zäumung und Gebiss nach Einsatzbereich beurteilen"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://en.wikipedia.org/wiki/Bridle",
+        "source_title": "Wikipedia – Bridle",
+        "evidence_text": "A bridle is a piece of equipment used to direct a horse.",
+        "evidence_text_sha256": "363c9b535ad1294e716e755bd0432ef5b7065d9992fd0de1464d73055d57ded4",
+        "statement": "Zäumungen gehören zum Ausrüstungsbereich für die Führung des Pferdes.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://en.wikipedia.org/wiki/Rein",
+        "source_title": "Wikipedia – Rein",
+        "evidence_text": "Western riders in timed rodeo events use a single closed rein.",
+        "evidence_text_sha256": "6a855d46bc70f6fe4c1bf57981a06b9344ed547b674a72133695f7a885353513",
+        "statement": "Im Westernreiten werden in bestimmten Disziplinen geschlossene Zügel verwendet.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://en.wikipedia.org/wiki/Horse_tack",
+        "source_title": "Wikipedia – Horse tack",
+        "evidence_text": "Bridles usually have a bit attached to reins",
+        "evidence_text_sha256": "03c56eca41fb945547654b0afa9326e1e3ae0429043b4ffd74ca7e692125a5a4",
+        "statement": "Zäumung, Gebiss und Zügel sind zusammenhängende Ausrüstungsteile.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/trensen-beratung/",
+        "anchor": "trensen-beratung",
+        "block": "decision"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/gebisse-beratung/",
+        "anchor": "/category/gebisse-beratung/",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/trensen-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/gebisse-beratung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "trensen-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Westerntrense",
+      "Westernreiten",
+      "Zäumung",
+      "Gebiss",
+      "Zügel"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Ohne konkret benannte Modelle lassen sich Unterschiede der Westerntrensen besser im erklärenden Text als in einer scheinpräzisen Vergleichstabelle erläutern."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
