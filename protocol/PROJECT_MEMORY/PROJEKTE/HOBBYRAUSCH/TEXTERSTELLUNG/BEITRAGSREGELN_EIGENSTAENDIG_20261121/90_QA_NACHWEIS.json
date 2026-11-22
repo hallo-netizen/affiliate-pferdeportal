@@ -472,5 +472,54 @@
     "hobby_plugin_code_changed": false,
     "horse_plugin_code_changed": false,
     "decision": "Hobby K-Multi route plus current original WP draft return simulation PASS; no architecture change or plugin release. Original K-Multi content QA remains separately unfrozen."
+  },
+  "hobby_binding_only_retest_20261122_1657_CET": {
+    "date": "2026-11-22",
+    "scope": "READ_ONLY_HOBBYDEPOT_BINDING_RETEST_NO_ARCHITECTURE_CHANGES",
+    "source_git": [
+      {
+        "repo": "hallo-netizen/k0-multiportal",
+        "ref": "k0-offline-rule-bindings-20261027",
+        "head_at_recheck": "77d706ecaefc817537477fa1c8397ba73599a2c6"
+      },
+      {
+        "repo": "hallo-netizen/affiliate-pferdeportal",
+        "ref": "work/texterstellung-hobby-hab-arbeitskopien-20261116"
+      }
+    ],
+    "production_code_changed": false,
+    "git_diff_since_last_successful_hobby_3faq_run": {
+      "baseline_commit": "1885251bc059d2fb290d522d5d4dcaeb7d42ddef",
+      "head_commit": "77d706ecaefc817537477fa1c8397ba73599a2c6",
+      "commits_ahead": 6,
+      "modified_paths": [
+        ".github/workflows/kmulti-hab-fullchain-qa.yml",
+        "offline_writer_dev/QA_HAB_GEFAHR_SCHUTZ_3_ARTIKEL_WIRKLICHER_LT68_TEST_20261122.md",
+        "offline_writer_dev/test_kmulti_hab_authored_drafts.py"
+      ],
+      "hobby_binding_code_modified": false
+    },
+    "reexecuted_local_tests": {
+      "original_archived_hobby_3faq_bridge_and_onefile_release_tests": 55,
+      "original_0_4_24_18_php_parser_cases": 9,
+      "total": 64,
+      "failed": 0,
+      "original_wordpress_hobby_faq_count": 3,
+      "simulated_qa_certificate_only": true,
+      "true_quality_release": false,
+      "actual_wordpress_live_db_called": false,
+      "unchanged_original_plugin_php_file": true,
+      "valid_single_test_import_has_three_original_unchanged_hobby_faq_bodies": true,
+      "malformed_payloads_blocked_before_wordpress_write": true,
+      "existing_onefile_test_release_had_old_nonproduction_qa_fixtures": true
+    },
+    "historical_full_simulation_confirmed": {
+      "github_five_types_test_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45017698651",
+      "github_three_real_faq_safety_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45017741581",
+      "previous_wp_mock_import_pass": 49,
+      "no_new_real_qa_approval": true
+    },
+    "open_only_outside_technical_binding": "Productive original K-Multi signed full article QA and verified WordPress staging/live integration; neither is claimed by a local simulated approval",
+    "conclusion": "Binding technically proven on original three FAQ, all five article types routed in existing CI. No rebuild, no code modifications, no new plugin, no live website change."
   }
 }
