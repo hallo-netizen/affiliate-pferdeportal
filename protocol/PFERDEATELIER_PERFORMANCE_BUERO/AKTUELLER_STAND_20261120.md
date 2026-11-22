@@ -1834,3 +1834,14 @@ Wichtig:
 - Amazon: vorhandener Link/Bild, kurze Copy `Passende Angebote entdecken`, sichtbare Amazon-Wortmarke, einzeilige CTA.
 - Responsive nutzt zusaetzlich outerWidth, damit schmal gezogene Browserfenster trotz Zoom die Sidebar sicher abschalten.
 - 506/507 Dateien byteidentisch zu 1.50.638; PHP 9/9 PASS; JS PASS; ZIP PASS. Letzter LIVE PASS bleibt 1.50.632.
+
+
+## 2026-11-22 – Design 1.50.640 sauberer Einzelbeitrags-Neuansatz
+
+- 1.50.640 direkt aus 1.50.632 LIVE PASS gebaut; verworfene Sidebar-Testreihe 1.50.633–1.50.639 nicht fortgeführt.
+- Nur Darstellung: Sidebar ab 1180px; Artikel bleibt 760px breit, Sidebar 280px, Gap 32px.
+- Keine neue Affiliate-/Kategorie-/Related-Logik: 0 category_product Zusatzslots, 0 do_shortcode, 0 WP_Query/get_posts/url_to_postid/get_term_by im Sidebar-Code.
+- Produkte: ausschließlich Klon des bereits gerenderten Artikel-Produktblocks; Mobil zeigt das Original. Originale werden nur nach erfolgreichem Klon auf breiter Ansicht verborgen.
+- Related: ausschließlich vorhandene Astra-Related-Ausgabe; Featured-Images werden wieder sichtbar, Mobil zeigt Originalkarten.
+- Amazon: vorhandener Link/Bild, kurze Copy `Passende Angebote entdecken`, sichtbare Wortmarke/Smile, einzeilige CTA.
+- 506/507 Dateien byteidentisch zu 1.50.632; PHP 9/9 PASS; JS PASS; ZIP PASS. Letzter LIVE PASS bleibt 1.50.632.
