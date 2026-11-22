@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Bio-Mineralfutter für Pferde erkennen und auswählen",
+      "target_keyword": "bio mineralfutter für pferde",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "f12e00642e53c1f10916b261c716fb3c4afc1a50c320c9a7833d26ae22faaf44"
+    }
+  ],
+  "batch_sha256": "1a5f54f9709bb9c39be6accf653c46dbc3ffef7b00b269b34dc6e5bbf610727d"
+}
