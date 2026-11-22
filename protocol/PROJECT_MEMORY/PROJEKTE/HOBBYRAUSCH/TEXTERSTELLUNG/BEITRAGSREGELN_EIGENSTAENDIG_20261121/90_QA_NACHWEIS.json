@@ -178,6 +178,18 @@
       "No WordPress-live import or final JSON release"
     ],
     "decision": "Do not activate Hobby rule values or produce a WordPress import file until the existing original K-Multi owner chain actually completes and signs its quality checks.",
-    "user_impact": "No plugin update and no new input or paid keyword research required by this documentation check."
+    "user_impact": "No plugin update and no new input or paid keyword research required by this documentation check.",
+    "article_sha256_binding": {
+      "method": "SHA256 independently recomputed from actual three UTF-8 HTML texts currently in the existing K-Multi GitHub fixture and compared against existing real LanguageTool 6.8 receipt; SHA256 implementation self-tested on standard abc vector",
+      "original_text_count": 3,
+      "exact_html_hash_matches": 3,
+      "mismatches": 0,
+      "real_LT68_report_status": "PASS",
+      "unresolved_language_findings": 0,
+      "article_release_allowed": false,
+      "actual_independent_fact_owner_approval": false,
+      "actual_121_owner_QA_approval": false,
+      "no_article_text_or_original_metadata_changed": true
+    }
   }
 }
