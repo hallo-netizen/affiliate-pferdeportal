@@ -341,5 +341,89 @@
       "no_new_plugin_requested": true,
       "note": "Older 0.4.24.15 functions cannot be declared live on 0.4.24.18 without an original ZIP readback and current WP evidence. The prior tests are evidence for a historic version, not a fresh live proof."
     }
+  },
+  "pferdeatelier_current_readonly_comparison_20261122": {
+    "date": "2026-11-22",
+    "purpose": "READ-ONLY COMPARISON OF LAST REAL PFERDEATELIER K0 WRITER AND HORSE TEXTPLUGIN VS EXISTING HOBBY K-MULTI INTEGRATION",
+    "actual_original_k0": {
+      "repo_branch": "hallo-netizen/affiliate-pferdeportal : konzept0-portal-neutral-20261002",
+      "commit": "00b79716f33d64cbe7fde0dbae0f355eacfeeaab",
+      "last_run_url": "https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/45008261702",
+      "actual_writer_run": "PASS",
+      "actual_language_tool_6_8": "PASS_0_FINDINGS",
+      "original_k0_article_hard_rules_passed": 81,
+      "ppm_6_7_9_rules_passed": 104,
+      "single_wordpress_json": "SYSTEM4_WORDPRESS_HANDOFF_V1, PASS, article_count=1, publish_allowed=false",
+      "complete_package_persisted_and_artifact_uploaded": true,
+      "rejected_or_repairable_faults_return_to_same_writer_not_new_writer": true,
+      "action": "DO_NOT_COPY_K0_WORKER_OR_ITS_RULES_INTO_KMULTI"
+    },
+    "horse_plugin": {
+      "archived_plugin_version": "0.4.46",
+      "last_confirmed_live_version": "0.4.45",
+      "zip_name": "Texterstellung-0.4.46-MINI-UND-K0-SPEICHERWEG.zip",
+      "local_zip_sha256": "2358975027ecb5b30bcd923014a4c24c086688f6d220f07c648cc4b0d3991fd2",
+      "zip_crc_ok": true,
+      "php_lint_79_of_79": true,
+      "changed_files_from_0_4_45": [
+        "texterstellung.php",
+        "README-TESTINSTALLATION.txt"
+      ],
+      "primary_delta": "Stream stored large MINI/K0 data into same WordPress option row to lower memory peak, fallback to prior update path if unsupported",
+      "live_mysql_512mb_fix_verified": false,
+      "k0_core_changed_by_plugin": false
+    },
+    "hobby_plugin": {
+      "archived_plugin_version": "0.4.24.18",
+      "zip_name": "Texterstellung_Hobbydepot_0.4.24.18_PFERDEATELIER_ORIGINAL_MINI_EINMALIMPORT.zip",
+      "zip_sha256": "03f21ca678f003ab55a2a3a86ccd44c0cceb1e6a758b6bb129de19b",
+      "zip_crc_ok": true,
+      "php_lint_78_of_78": true,
+      "exact_miniSingleImport_body_matches_horse_0_4_45_and_0_4_46": true,
+      "horse_0_4_46_memory_optimization_present": false,
+      "production_installed_version_reconfirmed": false,
+      "original_post_import_accepts_both_pferde_legacy_and_system4_contract_shapes": true,
+      "comparison_limit": "Do not infer same memory failure at Hobby site without real load evidence",
+      "action": "NO_NEW_PLUGIN_NO_CODE_COPY_NO_CORE_MODIFICATION"
+    },
+    "current_kmulti": {
+      "repo_branch": "hallo-netizen/k0-multiportal : k0-offline-rule-bindings-20261027",
+      "original_five_types": [
+        "Beratung",
+        "FAQ",
+        "Pflege",
+        "Vergleich",
+        "Anleitung"
+      ],
+      "latest_five_type_rehearsal": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45017698651",
+      "suites_pass": [
+        22,
+        23,
+        18,
+        61,
+        10
+      ],
+      "tests_passed": 134,
+      "current_release_blocked": true,
+      "real_3_faq_used": true,
+      "other_4_types_synthetic_orders_only": true,
+      "hypothetical_final_wordpress_json_is_test_only_deleted": true,
+      "actual_121_catalog_entries_NOT_all_executed": true,
+      "latest_branch_after_test_change_scope": "9 commits; files modified Hab-specific plus hobby_trial/kmulti_lt68.py only Hab 49->56 / 50->57 counters, Hobby typebook, registry, input and final delivery unchanged",
+      "code_changed_in_this_check": false
+    },
+    "excluded_false_local_fixture": {
+      "observed": "A file called texterstellung-mini-gespeicherter-auftrag.json was not the original 20 Hobby batch; it has Pferdeanhaenger metadata and different batch_id",
+      "did_not_treat_as_hobby_success_or_plugin_failure": true,
+      "original_20_hobby_source_not_reconfirmed_here": true
+    },
+    "conclusion": "HOBBYDEPOT_KMULTI_INTEGRATION_SIMULATION_CONFIRMED_WITH_OLD_REGRESSION_AND_CURRENT_PLUGIN_BYTE_PARITY__NO_CODE_CHANGE__NO_PRODUCTION_QA_RELEASE",
+    "no_modifications_to": [
+      "original K0",
+      "K-Multi Python runtime and registry",
+      "Hobbydepot or Pferdeatelier plugin",
+      "WordPress live state or content"
+    ],
+    "no_new_automations_or_paid_research": true
   }
 }
