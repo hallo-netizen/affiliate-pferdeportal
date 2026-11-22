@@ -1,0 +1,169 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Hufverband beim Pferd richtig anlegen",
+    "target_keyword": "hufverband pferd",
+    "category": "verbandsmaterial-anwendung",
+    "article_type": "Anleitung",
+    "plan_slot": "b334947878de5ee6ebed4d9f712ba14823fe6f50b0a5bbd8d3fae073f8f27392"
+  },
+  "content_profile": {
+    "search_intent": "Anleitung zum fachgerechten Anlegen eines Hufverbands am Pferd"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/musculoskeletal-system/disorders-of-the-foot-in-horses/hoof-abscesses-in-horses",
+          "source_title": "MSD Veterinary Manual – Hoof Abscesses in Horses"
+        }
+      ],
+      "claims": [
+        "Bei Hufabszessen ist das Ziel der tierärztlichen Behandlung, die Drainage zu ermöglichen und weitere Probleme zu verhindern.",
+        "Nach der fachlichen Versorgung eines Hufabszesses wird eine zeitlich befristete Hufbandage mit geeigneter Auflage beschrieben.",
+        "Bei ungeklärter starker Huflahmheit können Röntgenaufnahmen zum Ausschluss anderer Ursachen nötig werden."
+      ],
+      "fresh_research_reference_date": "2026-11-22"
+    },
+    "production_plan_item": {
+      "article_type": "Anleitung",
+      "target_keyword": "hufverband pferd",
+      "topic": "Hufverband beim Pferd richtig anlegen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "verbandsmaterial-anwendung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Einen tierärztlich angeordneten, schützenden Hufverband sicher vorbereiten und kontrollieren",
+      "preparation_items": [
+        "geeignete saubere Wundauflage",
+        "Polsterlage",
+        "Fixiermaterial"
+      ],
+      "procedure_steps": [
+        "Huf und Befund nach tierärztlicher Anweisung vorbereiten",
+        "Auflage positionieren und gleichmäßig polstern",
+        "äußere Fixierung fachgerecht anbringen",
+        "Sitz und Sauberkeit kontrollieren"
+      ],
+      "safety_controls": [
+        "keine eigenmächtige Eröffnung oder Manipulation eines Hufabszesses",
+        "tierärztliche Rücksprache bei zunehmender Lahmheit"
+      ],
+      "common_errors": [
+        "zu stramme Fixierung",
+        "durchfeuchteter Verband wird nicht rechtzeitig gewechselt"
+      ],
+      "result_checks": [
+        "keine Druckstellen und kein verrutschter Verband"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/musculoskeletal-system/disorders-of-the-foot-in-horses/hoof-abscesses-in-horses",
+        "source_title": "MSD Veterinary Manual – Hoof Abscesses in Horses",
+        "evidence_text": "The goals in treating hoof abscesses are to facilitate drainage",
+        "evidence_text_sha256": "33c1db16e036c913b7483a4c11f05365303946be1e157f9891a5bb7775c21829",
+        "statement": "Bei Hufabszessen ist das Ziel der tierärztlichen Behandlung, die Drainage zu ermöglichen und weitere Probleme zu verhindern.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/musculoskeletal-system/disorders-of-the-foot-in-horses/hoof-abscesses-in-horses",
+        "source_title": "MSD Veterinary Manual – Hoof Abscesses in Horses",
+        "evidence_text": "The foot should then be bandaged for 3–5 days with a medicated poultice pad",
+        "evidence_text_sha256": "bb9d3357c9dc8b3c6b31589da153971419c4d03587dac1e5253e8aab8f4e0692",
+        "statement": "Nach der fachlichen Versorgung eines Hufabszesses wird eine zeitlich befristete Hufbandage mit geeigneter Auflage beschrieben.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/musculoskeletal-system/disorders-of-the-foot-in-horses/hoof-abscesses-in-horses",
+        "source_title": "MSD Veterinary Manual – Hoof Abscesses in Horses",
+        "evidence_text": "radiography is warranted to exclude other causes of acute foot lameness",
+        "evidence_text_sha256": "853ca99385348bd62a5b8f459236f33c59d6354f95cb98a6791e12b5612ed6b3",
+        "statement": "Bei ungeklärter starker Huflahmheit können Röntgenaufnahmen zum Ausschluss anderer Ursachen nötig werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/verbandsmaterial-anwendung/",
+        "anchor": "verbandsmaterial anwendung",
+        "block": "steps"
+      },
+      {
+        "role": "further_information",
+        "href": "/gesundheit/gesundheit-erste-hilfe/verbandsmaterial/",
+        "anchor": "Verbandsmaterial",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/verbandsmaterial-anwendung/",
+        "active": true
+      },
+      {
+        "href": "/gesundheit/gesundheit-erste-hilfe/verbandsmaterial/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "verbandsmaterial-anwendung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Hufverband",
+      "Hufabszess",
+      "Hufsohle",
+      "Verbandmaterial",
+      "Hufpolsterung",
+      "Schutzverband"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "LINEAR_SEQUENCE",
+      "rationale": "Eine nachvollziehbare Schrittfolge ist hier sicherer als eine komprimierte Matrix mit unvollständigen Anwendungshinweisen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
