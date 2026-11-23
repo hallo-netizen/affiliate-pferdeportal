@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Mineralfutter für Pferde ohne Melasse und Getreide auswählen",
+      "target_keyword": "mineralfutter pferd ohne melasse und getreide",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "6ee6ce94c259828c00efb3bcab9a8b36e29e7d8a08d82cbd663be2614e75ab1e"
+    }
+  ],
+  "batch_sha256": "7236eb138b36037e7617c5f10f11fb469439be5a26c8b8155f73e03dc0023448"
+}
