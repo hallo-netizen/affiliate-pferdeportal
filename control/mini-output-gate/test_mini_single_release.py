@@ -52,7 +52,7 @@ class MiniOneFileGate(unittest.TestCase):
             {'box':'BELEGT','intent_summary':'','matched_ref':'WP-TEST-REFERENCE','reason':''},
             {'box':'KLAERUNG','intent_summary':'','matched_ref':'','reason':'synthetic uncertainty'}]))
         write(self.ws/'TITLE.json',stage(self.src,'TITLE',[
-            {'approved_title':'Synthetic question one?'},
+            {'approved_title':'Was brauchen Pferde im Winter?'},
             {'approved_title':''},
             {'approved_title':''}]))
 
@@ -73,12 +73,30 @@ class MiniOneFileGate(unittest.TestCase):
         self.assertEqual(len(p['decisions']),3)
         self.assertEqual(p['decisions'][0]['category']['article_type'],'FAQ')
         self.assertEqual(p['decisions'][0]['editorial']['box'],'FREI')
-        self.assertEqual(p['decisions'][0]['title']['approved_title'],'Synthetic question one?')
+        self.assertEqual(p['decisions'][0]['title']['approved_title'],'Was brauchen Pferde im Winter?')
         self.assertEqual(p['decisions'][1]['editorial']['box'],'BELEGT')
         self.assertIsNone(p['decisions'][1]['title'])
         self.assertIsNone(p['decisions'][2]['title'])
         self.assertNotIn('categories',p)
         self.assertEqual(run(self.ws)['status'],'FREIGEGEBEN')
+
+    def test_title_repair_does_not_publish_stale_onefile_output(self):
+        self._complete()
+        output=Path(self.tmp.name)/'CHAT_OUTPUT.json'
+        self.assertEqual(deliver(self.ws,output)['status'],'FREIGEGEBEN')
+        titles=read_json(self.ws/'TITLE.json')
+        titles['items'][0]['approved_title']='Pferdehaltung sachlich einordnen'
+        write(self.ws/'TITLE.json',titles)
+        bad=deliver(self.ws,output)
+        self.assertEqual(bad['status'],'GESPERRT')
+        self.assertEqual(bad['next_worker'],'TITLE')
+        self.assertFalse(output.exists())
+        self.assertFalse((self.ws/RELEASE_DIR).exists())
+        report=read_json(self.ws/'REPARATUR.json')
+        self.assertEqual(report['fix_only'][0]['code'],'TITEL_GENERISCHE_ENDFORMEL')
+        titles['items'][0]['approved_title']='Was brauchen Pferde im Winter?'
+        write(self.ws/'TITLE.json',titles)
+        self.assertEqual(deliver(self.ws,output)['status'],'FREIGEGEBEN')
 
     def test_after_success_missing_title_revokes_release_and_repairs_only_owner(self):
         self._complete()
@@ -104,7 +122,7 @@ class MiniOneFileGate(unittest.TestCase):
                 {'box':'BELEGT','intent_summary':'','matched_ref':'WP-TEST','reason':''},
                 {'box':'KLAERUNG','intent_summary':'','matched_ref':'','reason':'QA'}]))
             write(ws/'TITLE.json',stage(src,'TITLE',[
-                {'approved_title':'Synthetic correct title?'},{'approved_title':''},{'approved_title':''}]))
+                {'approved_title':'Wie viel Weidefläche brauchen Pferde?'},{'approved_title':''},{'approved_title':''}]))
             r=run(ws)
             self.assertEqual(r['status'],'FREIGEGEBEN')
             p=read_json(ws/RELEASE_DIR/RELEASE_NAME)
@@ -239,7 +257,7 @@ class MiniOneFileGate(unittest.TestCase):
             self.assertEqual(deliver(ws, output)['status'], 'GESPERRT')
             self.assertFalse(output.exists())
             write(ws / 'TITLE.json', stage(src, 'TITLE', [
-                {'approved_title': f'Synthetic FAQ {i}?'} if i < 10
+                {'approved_title': f'Welche Bedeutung hat Beispiel {i} für Pferde?'} if i < 10
                 else {'approved_title': ''}
                 for i in range(15)
             ]))
