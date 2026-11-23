@@ -6,7 +6,7 @@ import os
 import tempfile
 import unittest
 from pathlib import Path
-from mini_release_gate import gate, init, write, REPAIR, RELEASE, STATUS, ORIGINAL
+from mini_release_gate import gate, init, write, REPAIR, RELEASE, STATUS, ORIGINAL, new_title_rule_error
 
 ROOT = Path(__file__).resolve().parent
 SRC = Path(os.getenv('MINI_TEST_ORIGINAL', str(ROOT/'fixtures'/'MINI_TEST_ORIGINAL.json')))
@@ -58,6 +58,40 @@ class TestMiniGate(unittest.TestCase):
         ]
         write(self.ws/'TITLE.json', mock_stage(self.origin,'TITLE',
              lambda i, item: {'approved_title': natural[i] if i < 8 else ''}))
+
+    def test_title_language_rules_user_examples_and_natural_alternatives(self):
+        bad = [
+            'Mineralfutter richtig einordnen',
+            'Mineralfutter sachlich einordnen',
+            'Mineralfutter korrekt auswählen',
+            'Mineralfutter passend auswählen',
+            'Mineralfutter gezielt auswählen',
+            'Mineralfutter bedarfsgerecht auswählen',
+            'Mineralfutter sorgfältig auswählen',
+            'Mineralfutter passend dosiert auswählen',
+        ]
+        for title in bad:
+            with self.subTest(title=title):
+                self.assertEqual(new_title_rule_error(title,'Beratung'),
+                                 'TITEL_GENERISCHE_ENDFORMEL')
+        for title in [
+            'Mineralfutter für Pferde mit Sommerekzem',
+            'Mineralfutter mit Selen für Pferde',
+            'Welches Mineralfutter braucht mein Pferd?',
+        ]:
+            with self.subTest(title=title):
+                self.assertIsNone(new_title_rule_error(title,'Beratung'))
+        for title in [
+            'Mineralfutter: Das gilt',
+            'Mineralfutter - Das gilt',
+            'Mineralfutter – Das gilt',
+        ]:
+            with self.subTest(title=title):
+                self.assertEqual(new_title_rule_error(title,'Beratung'),
+                                 'TITEL_SONDERZEICHEN_UNZULAESSIG')
+        self.assertIsNone(new_title_rule_error('Was brauchen Pferde im Winter?','FAQ'))
+        self.assertEqual(new_title_rule_error('Was brauchen Pferde im Winter','FAQ'),
+                         'FAQ_TITEL_FRAGEZEICHEN_FEHLT')
 
     def test_category_only_fails_without_release(self):
         result=gate(self.ws)
