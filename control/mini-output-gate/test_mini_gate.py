@@ -207,6 +207,47 @@ class TestMiniGate(unittest.TestCase):
                              for x in result.get('fix_only',[])))
         self.assertEqual(result['status'],'FREIGEGEBEN_FUER_WP_IMPORTE')
 
+    def test_title_series_repair_only_repeated_generic_endings(self):
+        self.insert_mock_editorial()
+        self.insert_mock_title()
+        titles=json.loads((self.ws/'TITLE.json').read_text())
+        titles['items'][0]['approved_title']='Minerallecksteine für die Pferdepflege'
+        titles['items'][2]['approved_title']='Nadelstriegel bei der Pferdepflege'
+        titles['items'][4]['approved_title']='Welche Bürsten eignen sich für die Pferdepflege?'
+        write(self.ws/'TITLE.json', titles)
+        failed=gate(self.ws)
+        self.assertEqual(failed['next_worker'], 'TITLE')
+        self.assertEqual([(p['item_index'],p['code']) for p in failed['fix_only']],
+                         [(2,'TITEL_SERIENFORMEL_WIEDERHOLT'),
+                          (4,'TITEL_SERIENFORMEL_WIEDERHOLT')])
+        self.assertFalse((self.ws/RELEASE).exists())
+        titles['items'][2]['approved_title']='Nadelstriegel für Pferde'
+        titles['items'][4]['approved_title']='Dürfen Pferde im Regen stehen?'
+        write(self.ws/'TITLE.json', titles)
+        self.assertEqual(gate(self.ws)['status'],'FREIGEGEBEN_FUER_WP_IMPORTE')
+
+    def test_title_series_one_generic_ending_allowed(self):
+        self.insert_mock_editorial()
+        self.insert_mock_title()
+        titles=json.loads((self.ws/'TITLE.json').read_text())
+        titles['items'][2]['approved_title']='Nadelstriegel für die Pferdepflege'
+        write(self.ws/'TITLE.json',titles)
+        self.assertEqual(gate(self.ws)['status'],'FREIGEGEBEN_FUER_WP_IMPORTE')
+
+    def test_single_hollow_and_their_usage_ending_repair(self):
+        self.insert_mock_editorial()
+        self.insert_mock_title()
+        titles=json.loads((self.ws/'TITLE.json').read_text())
+        titles['items'][2]['approved_title']='Metallstriegel für Pferde und ihre Verwendung'
+        write(self.ws/'TITLE.json',titles)
+        result=gate(self.ws)
+        self.assertEqual(result['next_worker'],'TITLE')
+        self.assertEqual([(x['item_index'],x['code']) for x in result['fix_only']],
+                         [(2,'TITEL_GENERISCHE_ENDFORMEL')])
+        titles['items'][2]['approved_title']='Metallstriegel beim Pferd sicher verwenden'
+        write(self.ws/'TITLE.json',titles)
+        self.assertEqual(gate(self.ws)['status'],'FREIGEGEBEN_FUER_WP_IMPORTE')
+
     def test_wrong_batch_and_stale_release_removed(self):
         self.insert_mock_editorial()
         self.insert_mock_title()
