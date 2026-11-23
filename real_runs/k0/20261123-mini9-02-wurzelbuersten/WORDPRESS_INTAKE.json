@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wurzelbürsten für die Pferdepflege",
+      "target_keyword": "wurzelbürste pferd",
+      "category": "pferdebuersten-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "797dccd35a081825f04fa4f98fa528ff545c40798669c0125e23c5dbd8e6ca79"
+    }
+  ],
+  "batch_sha256": "a5813abfe4cb06f61e4c8ab39e93c9bc30536edb0da5417be11d28050d08f0ab"
+}
