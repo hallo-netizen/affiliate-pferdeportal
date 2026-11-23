@@ -1,0 +1,158 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Mineralfutter für Pferde und die Hufgesundheit",
+    "target_keyword": "mineralfutter für pferde hufe",
+    "category": "mineralfutter-fuer-pferde-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "9b9fd5f5067c35330ea5a6098d21d1d190707317d00a21a79f3bc2b1610274a8"
+  },
+  "content_profile": {
+    "search_intent": "Mineralfutter für Pferde im Zusammenhang mit Hufgesundheit und Fütterungsbedarf erklären, ohne Heilwirkungen zu behaupten"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+          "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses and Other Equids"
+        }
+      ],
+      "claims": [
+        "Ein Übermaß an Spurenelementen wie Selen oder Zink kann ebenso schaden wie eine Unterversorgung.",
+        "Zur Einschätzung des Mineralstoffbedarfs müssen Raufutter, Kraftfutter, Ergänzungen und gegebenenfalls Wasser gemeinsam berücksichtigt werden.",
+        "Methionin und Biotin spielen für gesundes Hufwachstum eine Rolle.",
+        "Für Pferde mit weichen Hufwänden ist unter bestimmten Bedingungen eine Verbesserung der Hufqualität durch Biotin untersucht worden."
+      ],
+      "fresh_research_reference_date": "2026-11-23"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "mineralfutter für pferde hufe",
+      "topic": "Mineralfutter für Pferde und die Hufgesundheit",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "mineralfutter-fuer-pferde-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Fütterung und Mineralstoffversorgung für Hufgesundheit ohne Heilversprechen sinnvoll einschätzen",
+      "decision_criteria": [
+        "Zusammensetzung der gesamten Ration",
+        "Bedarf an Spurenelementen und Biotin",
+        "Hufzustand und tierärztliche Abklärung"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses and Other Equids",
+        "evidence_text": "Excessive intakes of trace minerals, such as selenium, zinc, and others, can be as harmful as deficiencies.",
+        "evidence_text_sha256": "35e937a37cf186d2d10de90deb72b8b3eedd54f77890e8d032dab0b2bdb058e3",
+        "statement": "Ein Übermaß an Spurenelementen wie Selen oder Zink kann ebenso schaden wie eine Unterversorgung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses and Other Equids",
+        "evidence_text": "The total mineral contribution and availability from all parts of the ration (forages and roughages, concentrates, all supplements, and even water, which can be high in iron and other minerals) should be considered when evaluating the mineral intake.",
+        "evidence_text_sha256": "79195c7611d913462af0add6e76c171b7503949e94f5b4964c8cdc4bcdec0af7",
+        "statement": "Zur Einschätzung des Mineralstoffbedarfs müssen Raufutter, Kraftfutter, Ergänzungen und gegebenenfalls Wasser gemeinsam berücksichtigt werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses and Other Equids",
+        "evidence_text": "However, sulfur-containing amino acids (methionine) and vitamins (biotin) are essential for healthy hoof growth.",
+        "evidence_text_sha256": "9a6f94c04e038a46fb2549b19cc0a0009e603172575fcae81b3c640bd398563e",
+        "statement": "Methionin und Biotin spielen für gesundes Hufwachstum eine Rolle.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses and Other Equids",
+        "evidence_text": "Biotin supplementation (15–25 mg/day to adult horses) has been documented to improve hoof quality in horses with soft hoof walls",
+        "evidence_text_sha256": "1dd62990e5e9a04a2d7698789d62e42005bc6d8cdda9e5b20a5f0d4e194a7545",
+        "statement": "Für Pferde mit weichen Hufwänden ist unter bestimmten Bedingungen eine Verbesserung der Hufqualität durch Biotin untersucht worden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/mineralfutter-fuer-pferde-beratung/",
+        "anchor": "Beratung Mineralfutter für Pferde",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/mineralfutter-fuer-pferde-beratung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "mineralfutter-fuer-pferde-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Mineralfutter",
+      "Pferde",
+      "Hufe",
+      "Hufgesundheit",
+      "Mineralstoffe",
+      "Ration",
+      "Biotin",
+      "Spurenelemente"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die individuellen Fütterungskriterien lassen sich ohne pauschale Vergleichsmatrix sinnvoller erläutern."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false,
+  "source_approval_provenance": "MSD Veterinary Manual: original-source excerpts verified against publisher text on 2026-11-23."
+}
