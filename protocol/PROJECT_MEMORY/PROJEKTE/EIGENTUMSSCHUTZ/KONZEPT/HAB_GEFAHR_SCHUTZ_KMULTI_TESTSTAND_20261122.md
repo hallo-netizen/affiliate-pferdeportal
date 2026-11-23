@@ -1,5 +1,33 @@
 # Hab & Bewahr – Gefahr & Schutz: praktischer K-Multi-Teststand
 
+## KORREKTUR 23.11.2026 – keine neue Pluginversion, Original-K-Multi bleibt unangetastet
+
+**Neuester verifizierter Stand und Korrektur früherer Aussage „Hab-Anbindung vollständig“:** Der **technische Original-Transport** des Hab-Plugins 0.4.31.23 zur K-Multi-Eingabe und zurück zum WP-Entwurfsimport ist für die bestehende 3er-Charge nachweislich kompatibel. Das bedeutet **NICHT**, dass alle fünf Hab-Beitragsarten fachlich richtig verdrahtet oder die 110-HARD-Freigabe abgeschlossen sind.
+
+**Originalquellen (aktuell direkt erneut gelesen):**
+- Aktuelle Hab-Plugin-ZIP 0.4.31.23, Datei `contracts/k0-article-type-capabilities-v1.json` und Originalfunktion `TXE_K0_Article_Types::supports`.
+- K-Multi Original-Registry `offline_writer_dev/portal_auto/KMULTI_PORTAL_REGISTRY.json` (Git-Blob `509bb922042603e3110b6f49188be9142f8653b1`), Original-Hab-Brücke `offline_rules/portal_bindings/hab_und_bewahr/hab_five_field_bridge.py` (Git-Blob `07171dd1f24cf4723a9cdd46a2dd992b5d89843f`), `BINDING_MANIFEST.json` (Git-Blob `9770a64a0787b454cf3d4ea7e3d13c3ff457fdf8`), alle fünf unveränderten Original-Hab-Regelbücher (je 117 Regeln, davon 110 HARD).
+- Erfolgreicher Original-K-Multi-3er-QA-Lauf [45197472834](https://github.com/hallo-netizen/k0-multiportal/actions/runs/45197472834): korrekt **nicht freigegeben**, 57/110 echte HARD-PASS pro Hab-Artikel, 53 noch offen.
+
+**Echte fünf Beitragsarten – notwendige Zuordnung, schon vorhandene Regelbücher:**
+1. FAQ → `HAB_FAQ`: **PASS**.
+2. Ratgeber & Wissen (`Beratung`) → `HAB_RATGEBER`: **PASS**.
+3. Vergleich → `HAB_VERGLEICH`: **PASS**.
+4. Anleitung & Checkliste (`Anleitung`) → `HAB_ANLEITUNG`: **PASS**.
+5. Bericht & Praxisfall (`Bericht`) → `HAB_BERICHT`: **BLOCKED** – WordPress-Plugin erlaubt `Bericht` noch nicht, und die bestehende K-Multi-Portal-Registry sowie die Hab-Brücke haben keinen `Bericht`-Eintrag. Das vollständige Originalregelbuch `HAB_BERICHT` liegt allerdings bereits unverändert bereit. Kein neuer Schreiber und kein neuer Regeltyp nötig.
+- **Gefährliche historische Fehlzuordnung:** Das vom Hab-Plugin noch zugelassene alte `Pflege` wird von K-Multi als `HAB_ANLEITUNG` behandelt. **Nicht als richtige Hab-Fachart akzeptieren.** Alte K0-Artikelauswahl aus dem Plugin darf nicht als eigenständige Hab-Auswahl ausgegeben werden.
+
+**Erneute tatsächliche Original-PHP-Gesamtsimulation, keine Änderungen an den Programmen:** 8/8 vorhandene Plugin-Bridge-Testfälle erfolgreich; originale WordPress-Exportmethode produziert den **exakten** schon gespeicherten 3er-K-Multi-Eingang inklusive Original-IDs und unveränderten Checksummen. Originaler PSERC-WordPress-Import (mit ausdrücklich unsignierten Testkörpern) erstellt im isolierten PHP-Test 3 Entwürfe, bei identischer Wiederholung **0 Dubletten**, manipulierte ID und Titel werden separat gehalten, keine Veröffentlichung. Alle fünf Typbindungen gegen die echten K-Multi-Konfigurationsdateien geprüft: **4/5 richtig, 1/5 fehlt; die alte Pflege-Zuordnung ist nicht fachgerecht**. Kein eigenmächtiger Ersatz über `Pflege`.
+
+**Keine Änderung** am Original-K0, K-Multi-Programm, K-Multi-Registry/Brücke, ursprünglichen Regelbüchern, Hab-Plugin-ZIP oder WordPress. Keine weitere Pluginversion erzeugt.
+
+**Kleinste nötige reine Anschlusskorrektur:** bestehende Hab-Typauswahl statt des K0-Snapshots an die fünf bereits vorhandenen Hab-Facharten binden und `Bericht` sichtbar machen; in den **zwei bestehenden K-Multi-Zuordnungslisten** einzig `Bericht → HAB_BERICHT` ergänzen und die irreführende `Pflege → HAB_ANLEITUNG`-Zuordnung auflösen. Das ist **keine neue Architektur, aber würde die ausdrücklich geschützten bestehenden K-Multi-Konfigurationsdateien ändern**. Solange „K-Multi Finger weg“ gilt, darf dies **nicht** stillschweigend ausgeführt oder fälschlich als fertig behauptet werden. Alle unveränderten Originalartikel (Beratung, Vergleich, Beratung) bleiben weiterhin im richtigen K-Multi-Zweig. Vollständig verifizierter Endimport bleibt durch fehlende 53 Original-Hab-Prüfungen und gültige unabhängige Release-Signatur blockiert.
+
+**Aktueller maschinenlesbarer Simulationsbeleg:** `HAB_KMULTI_ZUORDNUNG_UND_WORKFLOW_SIMULATION_20261123.json` im Chat. Keine Plugininstallation.
+
+---
+
+
 ## 23.11.2026 – Hab-WordPress-Plugin an unveränderten ORIGINAL-K-Multi angebunden / kompletter geschützter Testweg
 
 **Abgrenzung:** KEINE Änderung am Original-K0, K-Multi-Quellcode oder den Beitrags-/Textregeln. Die eigentliche technische Datenverbindung war bereits vorhanden: `WP_K0_UPLOAD_PACKAGE_V1` (mit exakten fünf Artikelfeldern und unveränderlichem WordPress-Herkunftsbeleg) wird vom ursprünglichen K-Multi-Portal-Eingang `kmulti_portal_entry.verify_source` akzeptiert. Der historische Vertrag **wurde nicht umbenannt**, sonst würde K-Multi ihn nicht mehr lesen.
