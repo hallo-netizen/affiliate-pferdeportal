@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Nadelstriegel für die Pferdepflege",
+      "target_keyword": "nadelstriegel pferd",
+      "category": "striegel-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "9c28f25d51d0732feda96bbf5adae25d4292127b40fa8a614b7dbb92b3434f65"
+    }
+  ],
+  "batch_sha256": "3d7c143c04fb34cd7dc8e7d0f693919f7aa0467f084b8d72cef177bf9896a1d3"
+}
