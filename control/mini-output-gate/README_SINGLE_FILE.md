@@ -8,6 +8,23 @@ Ein WordPress-MINI-Gesamtexport wird unverändert gebunden. Die vorhandenen Work
 
 Bei jedem Fehler wird eine zuvor freigegebene Importdatei gelöscht. Der Befund ist `REPARATUR`, keine Erfolgsbehauptung. Auch bei einer wiederholten Freigabe entsteht nur eine Datei.
 
+## TITLE-Regel fuer neue, noch offene Titel (23.11.2026)
+
+Der bestehende TITLE-Worker formuliert Titel in einfachem, natuerlichem Deutsch,
+trifft die gebundene Suchabsicht und erhaelt wichtige Fachmerkmale. Kurze
+Thementitel sind erwuenscht; austauschbare Ausgaenge wie "richtig einordnen",
+"passend auswaehlen" und austauschbare Synonyme sind kein Mehrwert. Keine
+kuenstliche Verlaengerung oder Serien-Schablonen. Keine Doppelpunkte, Binde-
+oder Gedankenstriche; bei echten Fragen genau ein Schlussfragezeichen, bei
+FAQ Pflicht. Der TITLE-Worker prueft das sprachlich, bevor er TITLE.json abgibt.
+
+Die **eine bereits vorhandene Abschlusspruefung** erkennt nur messbare
+Verstoesse (Laenge, Sonderzeichen, Fragezeichen, typische leere Endformeln).
+Sie schreibt Titel niemals um. Bei Verstoessen: REPARATUR.json mit
+next_worker=TITLE und genau den betroffenen Zeilen; kein altes PASS bleibt
+auslieferbar. Bereits gespeicherte Titel und Legacy-Entscheidungen werden
+nicht erneut geprueft oder geaendert. Keine zweite SEO-Pruefung.
+
 ## K0 bleibt unberührt
 
 Kein K0-Code wird verändert. Keine neue Recherche, keine neu erfundene Fachentscheidung, kein nachgelagerter Titelentscheid, keine WordPress-Fachprüfung.
