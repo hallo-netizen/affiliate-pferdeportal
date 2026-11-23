@@ -562,5 +562,46 @@
     "workflow_artifact": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45142003434/artifacts/14803000364",
     "note": "This is a real fresh WordPress upload and real existing GitHub K-Multi ingress, NOT an end-to-end regular writing run. Existing K-Multi entry workflow stops by its current design at shared research order; no automatic full writer/quality/real signed export exists in this connected branch. No unsupported PASS or fake final JSON allowed.",
     "code_changes": false
+  },
+  "k0_research_to_writer_connection_readonly_20261123": {
+    "type": "READONLY_EXACT_CAUSE_COMPARISON_K0_VS_EXISTING_KMULTI",
+    "date": "2026-11-23",
+    "sources": [
+      "hallo-netizen/affiliate-pferdeportal@konzept0-portal-neutral-20261002:.github/workflows/k0-authoring-context.yml",
+      "hallo-netizen/affiliate-pferdeportal@konzept0-portal-neutral-20261002:engine/k0_writer_station.py",
+      "hallo-netizen/affiliate-pferdeportal@konzept0-portal-neutral-20261002:real_runs/k0/20261119-pferdekauf-9aa09777-03/AUTHORING_CONTEXT.json",
+      "hallo-netizen/k0-multiportal@k0-offline-rule-bindings-20261027:.github/workflows/kmulti-portal-auto-intake.yml",
+      "hallo-netizen/k0-multiportal@k0-offline-rule-bindings-20261027:offline_writer_dev/kmulti_common_research_entry.py",
+      "hallo-netizen/k0-multiportal@k0-offline-rule-bindings-20261027:offline_writer_dev/kmulti_existing_research_handoff.py",
+      "hallo-netizen/k0-multiportal@k0-offline-rule-bindings-20261027:offline_writer_dev/kmulti_authoring_station.py",
+      "hallo-netizen/k0-multiportal@k0-offline-rule-bindings-20261027:offline_writer_dev/portal_auto/kmulti_primary_source_capture.py"
+    ],
+    "k0_working_handoff": {
+      "real_source_context_fields": [
+        "production_context.fact_pack",
+        "rule_context.research_claims",
+        "rule_context.research_claims.*.evidence_text_sha256"
+      ],
+      "source_owner_rechecks_original_quote_in_actual_publisher_page": true,
+      "on_pass": "prepare K0_WRITER_JOB_V1 and persist immutable WRITER_JOB.json as GitHub commit; writer-accept runs on real draft and verifies 81 hard rules and LT68",
+      "on_failure": "K0_RESEARCH_RETURN_V1 to SAME_RESEARCH_OWNER, not new decision or new architecture"
+    },
+    "current_kmulti_actual_behavior": {
+      "github_real_new_user_upload_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45142003434",
+      "original_three_hobby_upload_portal_match": true,
+      "source_pages_retrieved": 10,
+      "source_excerpt_match_does_not_establish_semantic_fact_approval": true,
+      "original_portal_auto_intake_ends_at": "KMULTI_SHARED_RESEARCH_ORDER.json with WAITING_SHARED_RESEARCH",
+      "research_handoff_function_status": "EXISTING_RESEARCH_BOUND_NEEDS_UPSTREAM_QA_AUTHORITY",
+      "authoring_handoff_function_status": "RESEARCH_DOCUMENTS_RECEIVED_WAITING_OWNER_FACT_QA_AND_RULEBOOK_APPROVAL",
+      "existing_hobby_autowriter_run_workflow_found": false,
+      "current_kmulti_hobby_rulebooks_approved": false,
+      "normal_production_onefile_export_available": false
+    },
+    "root_cause": "Not merely a missing 'done' flag. Current GitHub K-Multi entry does not persist an approved research-to-writer packet nor start a productive Hobby writer. The 10 retrievable pages/16 matched excerpts from prior Hobby rehearsal are evidence transport, not the K0-like approved article fact context. Existing K-Multi handoff code deliberately holds writer_allowed=false.",
+    "minimal_connection_only_target": "Reuse exact existing Hobby K-Multi source-owner output, bind each original plan_slot to independently verified facts with one owner proof, then continue on existing Hobby post-research authoring interface with original type book. Any actual onward automation cannot be truthfully asserted without code/workflow changes to its existing adapter; do not copy K0 modules, change K0 rules, forge QA, invent writer, create a parallel architecture or re-query paid research.",
+    "changed_code_in_this_check": false,
+    "live_file_created": false,
+    "handoff_fully_functional_now": false
   }
 }
