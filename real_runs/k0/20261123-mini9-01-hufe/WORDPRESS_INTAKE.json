@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Mineralfutter für Pferde und die Hufgesundheit",
+      "target_keyword": "mineralfutter für pferde hufe",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "9b9fd5f5067c35330ea5a6098d21d1d190707317d00a21a79f3bc2b1610274a8"
+    }
+  ],
+  "batch_sha256": "2e0e48827267f11d2baf81cf163dbb6cf54103c1de5d4a06d91aa81273528be3"
+}
