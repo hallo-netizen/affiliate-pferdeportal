@@ -1,5 +1,28 @@
 # Hab & Bewahr – Gefahr & Schutz: praktischer K-Multi-Teststand
 
+## 23.11.2026 – Gesamtaudit aller acht Hab-Upload-/Downloadaktionen (nur Pluginstabilität, keine Regeländerung)
+
+**VORRANG vor dem älteren 0.4.31.21-Stagingstatus.** Version 0.4.31.22 ist **ein einziges gebündeltes Update des EXISTIERENDEN Hab-Textplugins**, keine neue Pluginarchitektur. K0, K-Multi, Pferdeatelier, Beitrags- und Textregeln **unverändert**.
+
+**Acht ursprüngliche Dateiaktionen in Originalcode auf gemeinsame Speicherwege zurückgeführt:** MINI neu herunterladen (seo_export), gespeichertes MINI erneut herunterladen (seo_redownload), MINI-Datei hochladen (seo_import), K0-Aufträge exportieren (export), letzte/festgelegte ältere K0-Charge erneut herunterladen (redownload/redownload_batch), Artikeldatei zur WordPress-Entwurfsübernahme hochladen (import_drafts), Diagnosebericht herunterladen (diagnose_download). Das sind **6 Download- und 2 Uploadaktionen**; insgesamt 18 vorhandene WordPress-Adminaktionen unverändert.
+
+**Zentral repariert, nicht jeden Button extra:** (1) ursprünglicher voller `wp_json_encode`-Ausgabepuffer durch **bytegenau identische, vor HTTP-Headern validierte JSON-Ausgabe** über begrenzte temporäre Dateiströme ersetzt (auch beim Diagnose-Download), (2) beide bestehenden Datei-Uploads vor Dekodierung auf gleiche Original-12-MiB-Grenze, Fehlerzustand, echten Upload, noch verfügbaren Speicher und extrem fragmentiertes JSON abgesichert, (3) bisherige WordPress-Option `texterstellung_orders_v1` behält bei normalem Speicher das originale `update_option`/Readback. **Nur bei knapper Speicherreserve** und Standard-WordPress-mysqli-Treiber wird die original formatidentische PHP-Serialisierung mit Dateistream und Prepared-Statement in derselben Option gespeichert, mit den bisherigen WordPress-Hooks/Cache-Invalidierungen und Datenbank-Hash-/Längenprüfung. Original-MySQL-Import- und Redaktionsregeln bleiben unangetastet. Bei einem anderen DB-Treiber erfolgt ein ausdrücklicher Speicherfehler oder der normale WP-Weg, **keine vorgetäuschte Speicherung**.
+
+**Tatsächliche lokale Regressionstests:**
+- **548/548** JSON-Dokument-Vergleiche **byteidentisch** zu `wp_json_encode` (verschachtelte Objekte, UTF-8, Float, Arrays); **5/5** native `serialize`-Vergleiche inklusive Referenzen/Zyklen byteidentisch.
+- Unter **512 MiB und identischen synthetischen großen Auftragsdaten**: Alte Downloaderzeugung `PHP_MEMORY_EXHAUSTED` / Exit 255, neue Ausgabe **PASS** (189,4 MiB JSON, bei 350 MiB Spitzenverbrauch). Alte Vollserialisierung `PHP_MEMORY_EXHAUSTED` / Exit 255, neue stückweise Serialisierung **PASS** (171.849.007 Bytes, bei 348 MiB Spitzenverbrauch).
+- **6 echte PHP-HTTP-Multipart-Gegenproben**: gültiger MINI-Upload 200; gültiger Entwurfsupload 200; kaputtes JSON, Übergröße, hochfragmentiertes gültiges JSON und absichtlich zu geringe Speicherreserve jeweils mit sauberem Fehler 422 blockiert.
+- Simulierte WordPress-/mysqli-Zustandsprüfungen: alte normale Option, neuer knapper-Speicher-Weg, originale WordPress-Hooks, Cache-Invalidierung, gespeicherter Rücklese-Hash, absichtlich fehlgeschlagener DB-Schreibvorgang und manipulierte DB-Hash-Rücklesung korrekt behandelt.
+- **87 Originaldateien, 84/87 bytegleich; nur `texterstellung.php`, `includes/class-txe-diagnose.php`, `README-TESTINSTALLATION.txt` geändert. Alle ursprünglichen PHP-Methoden vorhanden, 18/18 vorhandenen Aktionen unverändert, gesamte originale Handler-/Admin-UI nachweislich unverändert. 78/78 PHP-Syntaxprüfungen PASS. K0-/PSTE-/PSERC-Originaldateien bytegleich.**
+- Eine einzige ZIP im **vorhandenen, nicht freigegebenen Plugin-Kandidatenbüro**: `/hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEKANDIDATEN/Hab-Textplugin-0.4.31.22-ALLE-DATEIWEGE-SPEICHER-NUR-TEST.zip`. **SHA256 `440431311ba44ef2ca8682f02505b5470a70d75493cfdc0e539e250ad2d9d3e1`**. Daneben `HAB_043122_GESAMTPRUEFUNG_UPLOAD_DOWNLOAD_SPEICHER_20261123.json`; beide **aus der Library zurückgeladen**, ZIP-/Bericht-Hashgleichheit bestätigt. Vorherige 0.4.31.21 bleibt gesicherte Vergleichsbasis, **nicht** die neueste Testfassung.
+
+**Unverändert / ungeprüft:** kein echter Hab-WordPress-Staging- oder Live-Versuch, kein echter WordPress-MySQL-Server-Endtest des neuen knappen-Speicher-Schreibwegs, keine garantierte Hilfe bei zusätzlichen WP-Ausgabepuffern oder Nicht-mysqli-Datenbanken. Der unveränderte WordPress-Artikelimport führt bis zu 50 Artikel in einem HTTP-Aufruf aus; reale Laufzeit/Timeouts sind noch zu prüfen, nicht umgebaut. Keine neue signierte K-Multi-Hab-Endfreigabe und keine genehmigte WordPress-Importdatei. K-Multi-Releasesperren bleiben unverändert.
+
+**Nächster tatsächlicher Originalschritt:** Nur die aktuell abgelegte ZIP **im Hab-Staging als Update derselben Plugininstallation** einspielen (zuerst Backup von WordPress-Datenbank und Pluginordner), alle acht Dateiaktionen auf großen **echten** Beständen, fortgesetzte MINI-Charge, Unterbrechung, Duplicate-Schutz, Diagnose und WordPress-Entwurfsimport prüfen. Bei Problemen echte PHP-/Datenbank-Diagnose nachreichen. Kein K0-Umbau.
+
+---
+
+
 ## Neuester Stand 23.11.2026 – nur Performance, Ablaufsicherheit und Dateiausgabe
 
 **Dieser Abschnitt ist neuer als die darunter dokumentierte 0.4.47-/frühere 0.4.31.21-Zwischenfassung. Kein K0-Code, keine Beitragsregeln, keine K-Multi-Freigabe-Architektur verändert.**
