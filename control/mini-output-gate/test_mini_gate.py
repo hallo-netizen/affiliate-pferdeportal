@@ -45,8 +45,19 @@ class TestMiniGate(unittest.TestCase):
         write(self.ws/'EDITORIAL.json', mock_stage(self.origin,'EDITORIAL',decide))
 
     def insert_mock_title(self):
+        # Existing MINI article types: Vergleich, FAQ, Beratung, then FAQ.
+        natural = [
+            'Minerallecksteine und Salzlecksteine für Pferde',
+            'Sind Salzlecksteine für Pferde sinnvoll?',
+            'Minerallecksteine für Pferde',
+            'Wie zeigen Pferde Traurigkeit?',
+            'Dürfen Pferde im Regen stehen?',
+            'Ab wann sind Pferde alt?',
+            'Wie lange erinnern sich Pferde an ihre Besitzer?',
+            'In welchem Alter sind Pferde besonders schwierig?',
+        ]
         write(self.ws/'TITLE.json', mock_stage(self.origin,'TITLE',
-             lambda i, item: {'approved_title':f'TEST-Titel {i} zur Bearbeitung' if i < 8 else ''}))
+             lambda i, item: {'approved_title': natural[i] if i < 8 else ''}))
 
     def test_category_only_fails_without_release(self):
         result=gate(self.ws)
@@ -96,9 +107,71 @@ class TestMiniGate(unittest.TestCase):
         self.assertEqual(len(res['fix_only']),1)
         self.assertEqual(res['fix_only'][0]['item_index'],3)
         self.assertFalse((self.ws/RELEASE).exists())
-        titles['items'][3]['approved_title']='TEST-Korrigierter Titel'
+        titles['items'][3]['approved_title']='Wie zeigen Pferde ihre Gefühle?'
         write(self.ws/'TITLE.json',titles)
         self.assertEqual(gate(self.ws)['status'],'FREIGEGEBEN_FUER_WP_IMPORTE')
+
+    def test_title_rule_rejects_empty_standard_endings_and_returns_to_title(self):
+        self.insert_mock_editorial()
+        self.insert_mock_title()
+        titles=json.loads((self.ws/'TITLE.json').read_text())
+        titles['items'][2]['approved_title']='Minerallecksteine für Pferde passend auswählen'
+        write(self.ws/'TITLE.json',titles)
+        failed=gate(self.ws)
+        self.assertEqual(failed['next_worker'],'TITLE')
+        self.assertEqual(len(failed['fix_only']),1)
+        self.assertEqual(failed['fix_only'][0]['item_index'],2)
+        self.assertEqual(failed['fix_only'][0]['code'],'TITEL_GENERISCHE_ENDFORMEL')
+        self.assertFalse((self.ws/RELEASE).exists())
+        titles['items'][2]['approved_title']='Minerallecksteine für Pferde'
+        write(self.ws/'TITLE.json',titles)
+        self.assertEqual(gate(self.ws)['status'],'FREIGEGEBEN_FUER_WP_IMPORTE')
+
+    def test_title_rule_rejects_colon_dash_and_hyphen_but_accepts_question(self):
+        self.insert_mock_editorial()
+        self.insert_mock_title()
+        titles=json.loads((self.ws/'TITLE.json').read_text())
+        titles['items'][0]['approved_title']='Minerallecksteine: Vergleich'
+        titles['items'][1]['approved_title']='Sind Salzlecksteine - für Pferde sinnvoll?'
+        titles['items'][3]['approved_title']='Wie zeigen Pferde Traurigkeit?'
+        write(self.ws/'TITLE.json',titles)
+        result=gate(self.ws)
+        self.assertEqual(result['next_worker'],'TITLE')
+        bad=[p for p in result['fix_only'] if p['stage']=='TITLE']
+        self.assertEqual([(x['item_index'],x['code']) for x in bad],[
+            (0,'TITEL_SONDERZEICHEN_UNZULAESSIG'),
+            (1,'TITEL_SONDERZEICHEN_UNZULAESSIG'),
+        ])
+        self.insert_mock_title()
+        self.assertEqual(gate(self.ws)['status'],'FREIGEGEBEN_FUER_WP_IMPORTE')
+
+    def test_new_title_format_error_does_not_redecide_locked_title(self):
+        self.insert_mock_editorial()
+        self.insert_mock_title()
+        source=json.loads((self.ws/ORIGINAL).read_text())
+        source['resume_checkpoints'][0]['title']={'approved_title':'Alttitel: Bestand bleibt'}
+        source['resume_checkpoints'][0]['next']='DONE'
+        import hashlib
+        write(self.ws/ORIGINAL,source)
+        (self.ws/'ORIGINAL_SHA256.txt').write_text(
+            hashlib.sha256((self.ws/ORIGINAL).read_bytes()).hexdigest()+'\n')
+        titles=json.loads((self.ws/'TITLE.json').read_text())
+        titles['items'][0]['approved_title']=''
+        write(self.ws/'TITLE.json',titles)
+        # A locked title is never reassessed; category/editorial must remain locked too.
+        categories=json.loads((self.ws/'CATEGORY.json').read_text())
+        categories['items'][0]['route']=''
+        categories['items'][0]['category_slug']=''
+        categories['items'][0]['article_type']=''
+        write(self.ws/'CATEGORY.json',categories)
+        editorial=json.loads((self.ws/'EDITORIAL.json').read_text())
+        for k in ('box','intent_summary','matched_ref','reason'):
+            editorial['items'][0][k]=''
+        write(self.ws/'EDITORIAL.json',editorial)
+        result=gate(self.ws)
+        self.assertFalse(any(x['item_index']==0 and x['stage']=='TITLE'
+                             for x in result.get('fix_only',[])))
+        self.assertEqual(result['status'],'FREIGEGEBEN_FUER_WP_IMPORTE')
 
     def test_wrong_batch_and_stale_release_removed(self):
         self.insert_mock_editorial()
