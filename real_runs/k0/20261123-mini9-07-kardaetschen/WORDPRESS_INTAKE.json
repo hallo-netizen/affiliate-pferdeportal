@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Kardätschen für die Pferdepflege",
+      "target_keyword": "kardätsche pferd",
+      "category": "kardaetschen-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "c87d62d3e910851a017b26112d86fe5bf960ae0d96402fc84c3095de86fa3d06"
+    }
+  ],
+  "batch_sha256": "8e356c0fd546eaa6bdc6f912aee46df352554e9db79834cec4a2e7a54c686d27"
+}
