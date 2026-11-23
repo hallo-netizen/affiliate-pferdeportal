@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Eggersmann Golden Mineral 25 kg für Pferde richtig einordnen",
+      "target_keyword": "eggersmann golden mineral 25 kg mineralfutter für pferde",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "7e74cba722c5d25644046baf9fe8680cb4a18a11c48993b5664a0f4e031d450c"
+    }
+  ],
+  "batch_sha256": "1db09120127abe0c8d1eb2d147c6aa60a074765bbad2ae10d7ca71f3147b0ee0"
+}
