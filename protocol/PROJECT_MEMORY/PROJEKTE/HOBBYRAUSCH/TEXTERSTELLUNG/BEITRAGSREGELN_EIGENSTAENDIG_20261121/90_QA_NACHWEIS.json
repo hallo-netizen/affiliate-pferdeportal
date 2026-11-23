@@ -521,5 +521,46 @@
     },
     "open_only_outside_technical_binding": "Productive original K-Multi signed full article QA and verified WordPress staging/live integration; neither is claimed by a local simulated approval",
     "conclusion": "Binding technically proven on original three FAQ, all five article types routed in existing CI. No rebuild, no code modifications, no new plugin, no live website change."
+  },
+  "real_new_user_upload_20261123": {
+    "date_local": "2026-11-23",
+    "run_type": "ACTUAL_ORIGINAL_KMULTI_GITHUB_INBOX_PUSH_NOT_SIMULATION",
+    "source_filename": "texterstellung-k0-export-wiederholung-mit-zuordnung.json",
+    "original_upload_git_blob_sha": "3ff40ab0dca739283b5b642c2f32b0deb5c77418",
+    "new_inbox": "kmulti_inbox/20261123-hobby-real-upload-3-faq-0949.json",
+    "commit": "a6295fdb7f2c77492a1fe9a66aac83746f87f34c",
+    "only_changed_git_path": "kmulti_inbox/20261123-hobby-real-upload-3-faq-0949.json",
+    "github_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45142003434",
+    "completed": "2026-11-23T08:52:06Z",
+    "github_run_conclusion": "success",
+    "original_entry_tests": {
+      "passed": 72,
+      "suites": [
+        22,
+        27,
+        12,
+        11
+      ]
+    },
+    "read_live_official_source_pages": 10,
+    "original_portal_detected": "hobby_depot",
+    "original_faq_count": 3,
+    "routed_type_books": [
+      "HOBBY_FAQ",
+      "HOBBY_FAQ",
+      "HOBBY_FAQ"
+    ],
+    "exact_original_metadata_retained": true,
+    "original_research_order_created": true,
+    "actual_workflow_status": "WAITING_FOR_SHARED_RESEARCH_OWNER",
+    "facts_semantically_approved": false,
+    "rulebooks_loaded": false,
+    "writer_allowed": false,
+    "real_full_QA_done": false,
+    "authentic_signed_release": false,
+    "final_wordpress_file_created": false,
+    "workflow_artifact": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45142003434/artifacts/14803000364",
+    "note": "This is a real fresh WordPress upload and real existing GitHub K-Multi ingress, NOT an end-to-end regular writing run. Existing K-Multi entry workflow stops by its current design at shared research order; no automatic full writer/quality/real signed export exists in this connected branch. No unsupported PASS or fake final JSON allowed.",
+    "code_changes": false
   }
 }
