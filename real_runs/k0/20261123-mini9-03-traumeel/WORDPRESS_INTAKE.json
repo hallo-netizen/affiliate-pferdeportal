@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie wird Traumeel bei Pferden dosiert?",
+      "target_keyword": "Wie viel Traumeel darf ein Pferd?",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "d6aaf8b725d7618a7c32a5f86d394225cc82e10a12cf2ebbaa9220bf9fcae5bb"
+    }
+  ],
+  "batch_sha256": "51c5479761d351b459cfa3ccb545f2a07a3b3cd812a22d00810aead446628e7b"
+}
