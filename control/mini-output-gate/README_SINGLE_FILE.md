@@ -18,6 +18,17 @@ kuenstliche Verlaengerung oder Serien-Schablonen. Keine Doppelpunkte, Binde-
 oder Gedankenstriche; bei echten Fragen genau ein Schlussfragezeichen, bei
 FAQ Pflicht. Der TITLE-Worker prueft das sprachlich, bevor er TITLE.json abgibt.
 
+**Serienpruefung ab 23.11.2026:** TITLE vergleicht vor Freigabe auch die
+neuen Titel desselben Auftrags miteinander. Wiederholte austauschbare
+Schlussformeln, auch mit abgewandelter Praeposition wie "fuer die Pferdepflege"
+und "bei der Pferdepflege", fuehren fuer die spaeteren betroffenen Titel
+zu `TITEL_SERIENFORMEL_WIEDERHOLT` und derselben TITLE-Korrekturschleife.
+Einzelne leere Schlussformeln wie "und ihre Verwendung" fuehren ebenfalls
+zur Reparatur. Fachlich notwendige gemeinsame Begriffe wie "fuer Pferde"
+sind ausdruecklich kein alleiniger Fehlergrund. Sprachliche Bedeutung und
+natuerliche Formulierung beurteilt weiterhin allein der TITLE-Worker.
+Bereits abgeschlossene Titel bleiben unveraendert; keine neue Station.
+
 Die **eine bereits vorhandene Abschlusspruefung** erkennt nur messbare
 Verstoesse (Laenge, Sonderzeichen, Fragezeichen, typische leere Endformeln).
 Sie schreibt Titel niemals um. Bei Verstoessen: REPARATUR.json mit
