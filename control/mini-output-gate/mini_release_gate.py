@@ -69,6 +69,34 @@ def new_title_rule_error(title, article_type=''):
         title, re.IGNORECASE,
     ):
         return 'TITEL_GENERISCHE_ENDFORMEL'
+    if re.search(r'\bund (?:seine|ihre|deren) (?:Verwendung|Anwendung)\s*\??$',
+                 title, re.IGNORECASE):
+        return 'TITEL_GENERISCHE_ENDFORMEL'
+    return None
+
+
+def title_series_family(title):
+    """Recognize generic endings, not meaningful title subjects.
+
+    A single ending may be legitimate. Repetition among new titles calls
+    for rework by the original TITLE worker; no automatic rewriting.
+    """
+    if not val(title):
+        return None
+    simple = re.sub(r'\s+', ' ', title.strip().rstrip('?')).casefold()
+    # Equivalent variants must not evade series checking via prepositions.
+    match = re.search(
+        r'\b(?:für die|bei der|zur|in der|während der) '
+        r'(pferdepflege|fellpflege)\Z', simple,
+    )
+    if match:
+        return 'pflege:' + match.group(1)
+    for phrase in ('im überblick', 'einfach erklärt', 'kurz erklärt',
+                   'was wichtig ist', 'was du wissen solltest',
+                   'und ihre verwendung', 'und seine verwendung',
+                   'und ihre anwendung', 'und seine anwendung'):
+        if simple.endswith(' ' + phrase):
+            return 'formel:' + phrase.replace('seine ', 'ihre ')
     return None
 
 
@@ -203,6 +231,27 @@ def gate(workspace):
                 fault = new_title_rule_error(title, str(cat.get('article_type') or ''))
                 if fault:
                     issue('TITLE', i, 'approved_title', fault)
+
+    # Existing TITLE owner reviews the series, not just isolated headings.
+    # Repeated interchangeable endings are repaired selectively; first stays.
+    # DONE/locked decisions remain untouched; no additional editorial pass.
+    if 'TITLE' in loaded:
+        first_by_family = {}
+        for i, cp in enumerate(source['resume_checkpoints']):
+            if cp.get('next') == 'DONE' or cp.get('title'):
+                continue
+            editorial = cp.get('editorial')
+            if not editorial and 'EDITORIAL' in loaded:
+                editorial = loaded['EDITORIAL'][i]
+            if not isinstance(editorial, dict) or editorial.get('box') != 'FREI':
+                continue
+            family = title_series_family(loaded['TITLE'][i].get('approved_title'))
+            if not family:
+                continue
+            if family in first_by_family:
+                issue('TITLE', i, 'approved_title', 'TITEL_SERIENFORMEL_WIEDERHOLT')
+            else:
+                first_by_family[family] = i
 
     release = workspace / RELEASE
     if problems:
