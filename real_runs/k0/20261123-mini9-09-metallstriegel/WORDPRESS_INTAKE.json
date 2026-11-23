@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Metallstriegel für Pferde und ihre Verwendung",
+      "target_keyword": "metallstriegel pferd",
+      "category": "striegel-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "494cb1a78317f67764277f64e3b4acbb4bd5dab54d9726a975e6b773d2310a82"
+    }
+  ],
+  "batch_sha256": "d395c5526e09694ad4ddab4e8c3a683895d82606cbaa807ab81f1d9ee9c1897b"
+}
