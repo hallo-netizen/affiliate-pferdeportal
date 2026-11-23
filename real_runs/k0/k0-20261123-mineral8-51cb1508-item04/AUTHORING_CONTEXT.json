@@ -1,0 +1,185 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Mineralfutter für Pferde ohne Melasse und Getreide auswählen",
+    "target_keyword": "mineralfutter pferd ohne melasse und getreide",
+    "category": "mineralfutter-fuer-pferde-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "6ee6ce94c259828c00efb3bcab9a8b36e29e7d8a08d82cbd663be2614e75ab1e"
+  },
+  "content_profile": {
+    "search_intent": "Mineralfutter ohne Melasse und ohne Getreide anhand der vollständigen Zusammensetzung auswählen."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/feeding-your-horse-a-ration-balancer",
+          "source_title": "University of Minnesota Extension – Providing your horse vitamins and minerals"
+        },
+        {
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+          "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses and Other Equids"
+        }
+      ],
+      "claims": [
+        "Vollständige Mineralergänzer enthalten Mengen- und Spurenelemente.",
+        "Vollständiges Mineralfutter wird täglich nach der produktspezifischen Fütterungsempfehlung dosiert.",
+        "Zu hohe Spurenelementgaben können wie Mangelversorgung schaden.",
+        "Die Mineralstoffversorgung muss unter Einbeziehung der gesamten Tagesration einschließlich Heu, Kraftfutter und Ergänzungen bewertet werden.",
+        "Eine Mineralergänzung muss passend zum übrigen Futter ausgewählt werden."
+      ],
+      "fresh_research_reference_date": "2026-11-23"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "mineralfutter pferd ohne melasse und getreide",
+      "topic": "Mineralfutter für Pferde ohne Melasse und Getreide auswählen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "mineralfutter-fuer-pferde-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Mineralfutter ohne Melasse und Getreide anhand vollständiger Zutatenliste und Nährstoffe auswählen",
+      "decision_criteria": [
+        "Zutatenliste auf Melasse und Getreide prüfen",
+        "Keine pauschalen Aussagen über Zucker und Stärke aus einem Werbewort ableiten",
+        "Mineralstoffe pro Portion und gesamte Ration prüfen"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/feeding-your-horse-a-ration-balancer",
+        "source_title": "University of Minnesota Extension – Providing your horse vitamins and minerals",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ],
+        "evidence_text": "Commercial complete mineral supplements contain major and trace minerals.",
+        "evidence_text_sha256": "81bbd433b4b46e63b53316ef879bc6213985511e6e032bc9dfd2a0f959338bf6",
+        "statement": "Vollständige Mineralergänzer enthalten Mengen- und Spurenelemente."
+      },
+      "F2": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/feeding-your-horse-a-ration-balancer",
+        "source_title": "University of Minnesota Extension – Providing your horse vitamins and minerals",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ],
+        "evidence_text": "Feed the complete mineral supplement daily at the recommended rate to each individual horse.",
+        "evidence_text_sha256": "395ff5efa1338fab80938afe07a28e6580e3906264ee7cce5ec496691e976205",
+        "statement": "Vollständiges Mineralfutter wird täglich nach der produktspezifischen Fütterungsempfehlung dosiert."
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses and Other Equids",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ],
+        "evidence_text": "Excessive intakes of trace minerals, such as selenium, zinc, and others, can be as harmful as deficiencies.",
+        "evidence_text_sha256": "35e937a37cf186d2d10de90deb72b8b3eedd54f77890e8d032dab0b2bdb058e3",
+        "statement": "Zu hohe Spurenelementgaben können wie Mangelversorgung schaden."
+      },
+      "F4": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses and Other Equids",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ],
+        "evidence_text": "The total mineral contribution and availability from all parts of the ration (forages and roughages, concentrates, all supplements, and even water, which can be high in iron and other minerals) should be considered when evaluating the mineral intake.",
+        "evidence_text_sha256": "79195c7611d913462af0add6e76c171b7503949e94f5b4964c8cdc4bcdec0af7",
+        "statement": "Die Mineralstoffversorgung muss unter Einbeziehung der gesamten Tagesration einschließlich Heu, Kraftfutter und Ergänzungen bewertet werden."
+      },
+      "F5": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/feeding-your-horse-a-ration-balancer",
+        "source_title": "University of Minnesota Extension – Providing your horse vitamins and minerals",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ],
+        "evidence_text": "Commercial complete mineral supplements contain major and trace minerals. Choose the supplement that compliments the remainder of your horse’s ration (e.g. hay and concentrate).",
+        "evidence_text_sha256": "d76aac21a74953f703245cf2636ce67b84648f3e2390f15ecdabb340796a1f1b",
+        "statement": "Eine Mineralergänzung muss passend zum übrigen Futter ausgewählt werden."
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/mineralfutter-fuer-pferde-beratung/",
+        "anchor": "Beratung Mineralfutter für Pferde",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/mineralfutter-fuer-pferde-faq/",
+        "anchor": "FAQ Mineralfutter für Pferde",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/mineralfutter-fuer-pferde-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/mineralfutter-fuer-pferde-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "mineralfutter-fuer-pferde-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Mineralfutter",
+      "Pferd",
+      "Melasse",
+      "Getreide",
+      "Zutaten",
+      "Futter",
+      "Mineralstoffe"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Ohne vergleichbare vollständige konkrete Produktdeklarationen wäre eine feste Vergleichstabelle irreführend. Die Entscheidungscheckliste bietet den höheren Nutzen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
