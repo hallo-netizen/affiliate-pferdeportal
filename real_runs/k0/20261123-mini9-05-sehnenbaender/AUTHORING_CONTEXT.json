@@ -1,0 +1,183 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Was unterstützt Sehnen und Bänder beim Pferd?",
+    "target_keyword": "Was stärkt Sehnen und Bänder beim Pferd?",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "ced8c57d0cdc63c70a25467f25287ca3f0bb98afc8866d720ab8d58714b6ce40"
+  },
+  "content_profile": {
+    "search_intent": "Ernährung und Maßnahmen für Sehnen und Bänder beim Pferd erklären, ohne unbelegte Wirksamkeitsversprechen"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/musculoskeletal-system/tendon-and-ligament-disorders-in-horses/tendinitis-in-horses",
+          "source_title": "MSD Veterinary Manual – Tendinitis in Horses"
+        },
+        {
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+          "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses"
+        }
+      ],
+      "claims": [
+        "Bei akuten Sehnenverletzungen beim Pferd können Wärme, Schwellung, Schmerzen und Lahmheit auftreten.",
+        "Mit Ultraschall lassen sich Veränderungen und Verletzungen der Sehnenfasern darstellen.",
+        "Die Beweislage für verschiedene Behandlungen von Sehnenschäden ist unterschiedlich.",
+        "Die Rehabilitation eines Pferdes mit Sehnenschaden erfolgt über eine zunehmend gesteigerte Bewegung.",
+        "Kupfer gehört zu den Mineralstoffen, die an Enzymen für das Bindegewebe beteiligt sind."
+      ],
+      "fresh_research_reference_date": "2026-11-23"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was stärkt Sehnen und Bänder beim Pferd?",
+      "topic": "Was unterstützt Sehnen und Bänder beim Pferd?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was unterstützt Sehnen und Bänder beim Pferd?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/musculoskeletal-system/tendon-and-ligament-disorders-in-horses/tendinitis-in-horses",
+        "source_title": "MSD Veterinary Manual – Tendinitis in Horses",
+        "evidence_text": "Acute tendon injuries are characterized by heat, swelling, pain, and varying degrees of lameness depending on the severity and location of the injury.",
+        "evidence_text_sha256": "4f01179c5a297f5d1571608e1e4f52f97c078cfbcd3290a0635c34fec9dae982",
+        "statement": "Bei akuten Sehnenverletzungen beim Pferd können Wärme, Schwellung, Schmerzen und Lahmheit auftreten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/musculoskeletal-system/tendon-and-ligament-disorders-in-horses/tendinitis-in-horses",
+        "source_title": "MSD Veterinary Manual – Tendinitis in Horses",
+        "evidence_text": "Tendon enlargement, focal or generalized hypoechogenicity, and varying degrees of tendon fiber disruption or remodeling can be visualized.",
+        "evidence_text_sha256": "60d5e230752b6c1079b709cc0e8979f158c15d9d7eebdbb7bb61895fc3c81f40",
+        "statement": "Mit Ultraschall lassen sich Veränderungen und Verletzungen der Sehnenfasern darstellen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/musculoskeletal-system/tendon-and-ligament-disorders-in-horses/tendinitis-in-horses",
+        "source_title": "MSD Veterinary Manual – Tendinitis in Horses",
+        "evidence_text": "The amount of evidence for various treatment modalities varies.",
+        "evidence_text_sha256": "494f84562762c1031de5e7623cbfe576b8b71f5015ab58386a97830aae3d7a08",
+        "statement": "Die Beweislage für verschiedene Behandlungen von Sehnenschäden ist unterschiedlich.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.msdvetmanual.com/musculoskeletal-system/tendon-and-ligament-disorders-in-horses/tendinitis-in-horses",
+        "source_title": "MSD Veterinary Manual – Tendinitis in Horses",
+        "evidence_text": "The horse should be rehabilitated via a regimen of increasing exercise.",
+        "evidence_text_sha256": "a2ab1949668460a6fcc2aea6a22fe74584d8c28bc0e8ac01fd092de4bc2af18d",
+        "statement": "Die Rehabilitation eines Pferdes mit Sehnenschaden erfolgt über eine zunehmend gesteigerte Bewegung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses",
+        "evidence_text": "Copper is an important mineral for enzymes that affect connective tissue, mobilization of iron stores, mitochondrial integrity, melanin, and detoxification of superoxide",
+        "evidence_text_sha256": "6c7eb91bc72bae5bb16db8996e6a8d76654c0cc3ceb0f4378a1251af19be3cb3",
+        "statement": "Kupfer gehört zu den Mineralstoffen, die an Enzymen für das Bindegewebe beteiligt sind.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "Pferdegesundheit verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/gesundheit-regeneration-kuehlgamaschen-beratung/",
+        "anchor": "Beratung Kühlgamaschen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/category/gesundheit-regeneration-kuehlgamaschen-beratung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferd",
+      "Sehnen",
+      "Bänder",
+      "Sehnenschaden",
+      "Regeneration",
+      "Kühlgamaschen",
+      "Kühlung",
+      "Schwellung",
+      "Kupfer"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Unterschiede betreffen individuelle Befunde und Fütterungsfragen, die ohne künstliche Vergleichstabelle verständlicher sind."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false,
+  "source_approval_provenance": "MSD Veterinary Manual source text on tendinitis and horse nutrition, original-source excerpts verified."
+}
