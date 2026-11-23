@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche Anzeichen kann zu viel Mineralfutter beim Pferd verursachen?",
+      "target_keyword": "Welche Symptome können bei einem Pferd mit zu viel Mineralfutter auftreten?",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "a4dd89f081a8a4ca3919eb91ad37b9288720be292de7b820c982c477c8f550fb"
+    }
+  ],
+  "batch_sha256": "b9810aac0144bc79ab06d446217aa3e5c878ede58b15dce92cc88b4d0beb004b"
+}
