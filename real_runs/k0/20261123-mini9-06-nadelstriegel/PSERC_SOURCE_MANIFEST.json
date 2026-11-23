@@ -1,0 +1,190 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 9,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Mineralfutter für Pferde und die Hufgesundheit",
+        "target_keyword": "mineralfutter für pferde hufe",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "9b9fd5f5067c35330ea5a6098d21d1d190707317d00a21a79f3bc2b1610274a8"
+      },
+      {
+        "title": "Wurzelbürsten für die Pferdepflege",
+        "target_keyword": "wurzelbürste pferd",
+        "category": "pferdebuersten-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "797dccd35a081825f04fa4f98fa528ff545c40798669c0125e23c5dbd8e6ca79"
+      },
+      {
+        "title": "Wie wird Traumeel bei Pferden dosiert?",
+        "target_keyword": "Wie viel Traumeel darf ein Pferd?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "d6aaf8b725d7618a7c32a5f86d394225cc82e10a12cf2ebbaa9220bf9fcae5bb"
+      },
+      {
+        "title": "Was darf ein Pferd mit Sehnenschaden fressen?",
+        "target_keyword": "Was füttert man bei Sehnenschaden beim Pferd?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "843ee37efffda082ec052253b2ec71c7ffc27b485ce1e69cc8d77945e69a9b7e"
+      },
+      {
+        "title": "Was unterstützt Sehnen und Bänder beim Pferd?",
+        "target_keyword": "Was stärkt Sehnen und Bänder beim Pferd?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "ced8c57d0cdc63c70a25467f25287ca3f0bb98afc8866d720ab8d58714b6ce40"
+      },
+      {
+        "title": "Nadelstriegel für die Pferdepflege",
+        "target_keyword": "nadelstriegel pferd",
+        "category": "striegel-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "9c28f25d51d0732feda96bbf5adae25d4292127b40fa8a614b7dbb92b3434f65"
+      },
+      {
+        "title": "Kardätschen für die Pferdepflege",
+        "target_keyword": "kardätsche pferd",
+        "category": "kardaetschen-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "c87d62d3e910851a017b26112d86fe5bf960ae0d96402fc84c3095de86fa3d06"
+      },
+      {
+        "title": "Striegel für Kinder bei der Pferdepflege",
+        "target_keyword": "striegel pferd kinder",
+        "category": "striegel-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "5a96660a5eb7acea395b67787f8aa0a1db57cf5b6b4180b1864e60df609bfda7"
+      },
+      {
+        "title": "Metallstriegel für Pferde und ihre Verwendung",
+        "target_keyword": "metallstriegel pferd",
+        "category": "striegel-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "494cb1a78317f67764277f64e3b4acbb4bd5dab54d9726a975e6b773d2310a82"
+      }
+    ],
+    "batch_sha256": "7dd8b4bb99ff4f96ff8a937a87473125f43b4227fdc87fbc070513a462ab7e09"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Mineralfutter für Pferde und die Hufgesundheit",
+        "target_keyword": "mineralfutter für pferde hufe",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "9b9fd5f5067c35330ea5a6098d21d1d190707317d00a21a79f3bc2b1610274a8"
+      },
+      "order_id": "TXE-960b5656f2143f0bba2aad88e62280b0",
+      "article_id": "article:c721d2f5b30a3536b8e2705a",
+      "search_intent": "Mineralfutter für Pferde im Zusammenhang mit Hufgesundheit und Fütterungsbedarf erklären, ohne Heilwirkungen zu behaupten"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wurzelbürsten für die Pferdepflege",
+        "target_keyword": "wurzelbürste pferd",
+        "category": "pferdebuersten-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "797dccd35a081825f04fa4f98fa528ff545c40798669c0125e23c5dbd8e6ca79"
+      },
+      "order_id": "TXE-a979e4c5903e8a544cc10b4cff3d7123",
+      "article_id": "article:852d56e4115ae8a5fd6b2290",
+      "search_intent": "Wurzelbürsten für die Pferdepflege erklären und ihren Einsatz gegenüber anderen Bürsten abgrenzen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie wird Traumeel bei Pferden dosiert?",
+        "target_keyword": "Wie viel Traumeel darf ein Pferd?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "d6aaf8b725d7618a7c32a5f86d394225cc82e10a12cf2ebbaa9220bf9fcae5bb"
+      },
+      "order_id": "TXE-ab8bf08655635f85344683bf2336efa2",
+      "article_id": "article:b69b4a98b09752c10f5c1b09",
+      "search_intent": "Die Frage nach Traumeel bei Pferden und seiner Dosierung ohne pauschale Dosisempfehlung einordnen, tierärztliche Rücksprache erklären"
+    },
+    {
+      "metadata_binding": {
+        "title": "Was darf ein Pferd mit Sehnenschaden fressen?",
+        "target_keyword": "Was füttert man bei Sehnenschaden beim Pferd?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "843ee37efffda082ec052253b2ec71c7ffc27b485ce1e69cc8d77945e69a9b7e"
+      },
+      "order_id": "TXE-fb49c261168036545fbcf70da71c8f6d",
+      "article_id": "article:09c23749acc65a6225ec54b9",
+      "search_intent": "Fütterungsfragen bei einem Pferd mit Sehnenschaden sachgerecht erläutern, keine Heilversprechen oder pauschale Behandlung"
+    },
+    {
+      "metadata_binding": {
+        "title": "Was unterstützt Sehnen und Bänder beim Pferd?",
+        "target_keyword": "Was stärkt Sehnen und Bänder beim Pferd?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "ced8c57d0cdc63c70a25467f25287ca3f0bb98afc8866d720ab8d58714b6ce40"
+      },
+      "order_id": "TXE-8de2e72a37eebce8b61a9a3345bb0871",
+      "article_id": "article:fec16cdc221e731827034a85",
+      "search_intent": "Ernährung und Maßnahmen für Sehnen und Bänder beim Pferd erklären, ohne unbelegte Wirksamkeitsversprechen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Nadelstriegel für die Pferdepflege",
+        "target_keyword": "nadelstriegel pferd",
+        "category": "striegel-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "9c28f25d51d0732feda96bbf5adae25d4292127b40fa8a614b7dbb92b3434f65"
+      },
+      "order_id": "TXE-9e3bf0fdf9e3b60ed1f8681007ae9f7c",
+      "article_id": "article:d521a0ad4bc091f37a8121d5",
+      "search_intent": "Eigenschaften und mögliche Verwendung von Nadelstriegeln bei Pferden erläutern"
+    },
+    {
+      "metadata_binding": {
+        "title": "Kardätschen für die Pferdepflege",
+        "target_keyword": "kardätsche pferd",
+        "category": "kardaetschen-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "c87d62d3e910851a017b26112d86fe5bf960ae0d96402fc84c3095de86fa3d06"
+      },
+      "order_id": "TXE-efe6c48e561a44e8fe5de475242a4904",
+      "article_id": "article:ac8439598cd60fd0bbfec85d",
+      "search_intent": "Kardätschen für Pferde in ihren Merkmalen und bei der Fellpflege erklären"
+    },
+    {
+      "metadata_binding": {
+        "title": "Striegel für Kinder bei der Pferdepflege",
+        "target_keyword": "striegel pferd kinder",
+        "category": "striegel-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "5a96660a5eb7acea395b67787f8aa0a1db57cf5b6b4180b1864e60df609bfda7"
+      },
+      "order_id": "TXE-d86389c4d95fb73ce1e901de31183b0f",
+      "article_id": "article:da0939c5f39a7a965dd736e3",
+      "search_intent": "Striegel und ihre sichere Verwendung durch Kinder bei der Pferdepflege erläutern"
+    },
+    {
+      "metadata_binding": {
+        "title": "Metallstriegel für Pferde und ihre Verwendung",
+        "target_keyword": "metallstriegel pferd",
+        "category": "striegel-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "494cb1a78317f67764277f64e3b4acbb4bd5dab54d9726a975e6b773d2310a82"
+      },
+      "order_id": "TXE-04de80b3156a24d0f430964f1d291e57",
+      "article_id": "article:327915c5472e7dfdab31ff44",
+      "search_intent": "Metallstriegel beim Pferd und Grenzen ihrer sicheren Verwendung erläutern"
+    }
+  ],
+  "manifest_sha256": "83608f580466cdb01de1750ac36641ef1cbbd6cbe7016809d0bd07d019ad4e18"
+}
