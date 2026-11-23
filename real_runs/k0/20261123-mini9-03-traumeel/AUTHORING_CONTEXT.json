@@ -1,0 +1,152 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wie wird Traumeel bei Pferden dosiert?",
+    "target_keyword": "Wie viel Traumeel darf ein Pferd?",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "d6aaf8b725d7618a7c32a5f86d394225cc82e10a12cf2ebbaa9220bf9fcae5bb"
+  },
+  "content_profile": {
+    "search_intent": "Die Frage nach Traumeel bei Pferden und seiner Dosierung ohne pauschale Dosisempfehlung einordnen, tierärztliche Rücksprache erklären"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/therapeutics/integrative-complementary-and-alternative-veterinary-medicine/homeopathy-in-veterinary-patients",
+          "source_title": "MSD Veterinary Manual – Homeopathy in Veterinary Patients"
+        }
+      ],
+      "claims": [
+        "Bei behandlungsbedürftigen Erkrankungen darf Homöopathie eine notwendige medizinische Versorgung nicht verzögern.",
+        "Die vorherrschende Studienlage zeigt für Homöopathie keinen vom Placebo unterscheidbaren Effekt.",
+        "Bei kranken Tieren mit Schmerzen oder Entzündungszeichen ist eine ungetestete homöopathische Behandlung kritisch zu bewerten."
+      ],
+      "fresh_research_reference_date": "2026-11-23"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie viel Traumeel darf ein Pferd?",
+      "topic": "Wie wird Traumeel bei Pferden dosiert?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie wird Traumeel bei Pferden dosiert?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/therapeutics/integrative-complementary-and-alternative-veterinary-medicine/homeopathy-in-veterinary-patients",
+        "source_title": "MSD Veterinary Manual – Homeopathy in Veterinary Patients",
+        "evidence_text": "Conditions for which regular medical treatment would provide a more meaningful diagnosis and effective treatment, and for which delay of proper care could prove injurious, should not be treated by homeopathy.",
+        "evidence_text_sha256": "9e6b447975ca6f446198382180a89d51daf00c4ddb04ac059299c0e68747a7de",
+        "statement": "Bei behandlungsbedürftigen Erkrankungen darf Homöopathie eine notwendige medizinische Versorgung nicht verzögern.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/therapeutics/integrative-complementary-and-alternative-veterinary-medicine/homeopathy-in-veterinary-patients",
+        "source_title": "MSD Veterinary Manual – Homeopathy in Veterinary Patients",
+        "evidence_text": "A preponderance of evidence indicates that effects of homeopathy cannot be distinguished from placebo.",
+        "evidence_text_sha256": "f991438b0eddbe8131b49458a45d0bdbee89cf32c0961a8be4538278e29f2a69",
+        "statement": "Die vorherrschende Studienlage zeigt für Homöopathie keinen vom Placebo unterscheidbaren Effekt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/therapeutics/integrative-complementary-and-alternative-veterinary-medicine/homeopathy-in-veterinary-patients",
+        "source_title": "MSD Veterinary Manual – Homeopathy in Veterinary Patients",
+        "evidence_text": "That said, ethical questions arise when veterinarians prescribe unapproved, untested homeopathic remedies for animals that are clearly ill, with signs of infection, pain or both.",
+        "evidence_text_sha256": "76a3c88b797dab885e3b1c7209ba71016ac986f2e47834b30985597e67290551",
+        "statement": "Bei kranken Tieren mit Schmerzen oder Entzündungszeichen ist eine ungetestete homöopathische Behandlung kritisch zu bewerten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "Pferdegesundheit verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/gesundheit-regeneration-kuehlgamaschen-faq/",
+        "anchor": "FAQ Kühlgamaschen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/category/gesundheit-regeneration-kuehlgamaschen-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Traumeel",
+      "Pferde",
+      "Dosierung",
+      "Tierarzt",
+      "Homöopathie",
+      "Schmerzen",
+      "Verletzungen",
+      "Kühlgamaschen",
+      "Kühlung",
+      "Regeneration"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Es gibt keine belastbare allgemeine Traumeel Dosiertabelle für Pferde; eine solche Tabelle wäre riskant."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false,
+  "source_approval_provenance": "MSD Veterinary Manual official evidence on homeopathy, no product-specific dose authorization."
+}
