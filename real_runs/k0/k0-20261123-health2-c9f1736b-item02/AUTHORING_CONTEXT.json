@@ -44,7 +44,36 @@
   },
   "rule_context": {
     "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
-    "type_meta": {},
+    "type_meta": {
+      "procedure_goal": "Pfriemenschwanz-Eier beim Pferd im Afterbereich erkennen, Beobachtungen dokumentieren und den tierärztlichen Nachweis vorbereiten.",
+      "preparation_items": [
+        "Pferd ruhig und sicher halten lassen",
+        "Helles Licht und Notizen für sichtbare Auffälligkeiten bereithalten",
+        "Tierarztpraxis für geeignete Probennahme und Einordnung kontaktieren"
+      ],
+      "procedure_steps": [
+        "Afterregion des Pferdes ohne Reiben von außen ansehen",
+        "Gelbliche oder bräunliche Eimassen, Juckreiz und Schweifscheuern getrennt dokumentieren",
+        "Beobachtung und mögliche andere Ursachen mit der Tierarztpraxis besprechen",
+        "Klebestreifenprobe und mikroskopische Bestimmung nach tierärztlicher Anleitung durchführen lassen",
+        "Befund und weitere Hygiene- oder Behandlungsschritte fachlich abstimmen"
+      ],
+      "safety_controls": [
+        "Pferd nur sicher und mit vertrauter Hilfsperson kontrollieren",
+        "Reizbare Haut nicht schmerzhaft abreiben und eine Erkrankung nicht eigenmächtig behandeln",
+        "Keine Entwurmungsmittel allein nach Sichtbefund verabreichen"
+      ],
+      "common_errors": [
+        "Schweifscheuern ohne Nachweis automatisch Pfriemenschwänzen zuordnen",
+        "Eine negative Kotprobe als sicheren Ausschluss der Eier am After werten",
+        "Eimassen ohne geeignete Probe und Mikroskopie sicher identifizieren"
+      ],
+      "result_checks": [
+        "Tierärztliche Probennahme oder begründete andere Abklärung ist dokumentiert",
+        "Beobachtungen sind von bestätigten Laborbefunden getrennt",
+        "Nächste Kontroll- und Hygieneschritte sind mit der Tierarztpraxis besprochen"
+      ]
+    },
     "research_claims": {
       "F1": {
         "source_url": "https://www.msdvetmanual.com/digestive-system/gastrointestinal-parasites-of-horses/gastrointestinal-parasites-of-minor-clinical-importance-in-horses",
@@ -176,8 +205,8 @@
     "table_decision": {
       "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
       "decision": "OMIT_NO_ADDED_VALUE",
-      "exception_code": "",
-      "rationale": "Eine Schrittfolge zur Abklärung von Pfriemenschwanz-Eiern lässt sich besser als Anleitung darstellen. Eine Tabelle böte gegenüber den konkreten Schritten keinen eigenständigen Mehrwert."
+      "exception_code": "LINEAR_SEQUENCE",
+      "rationale": "Die konkrete Abklärung erfolgt in aufeinanderfolgenden Schritten mit Sicherheitsregeln. Eine künstliche Vergleichsmatrix würde die Vorbereitung der Klebestreifenprobe und die tierärztliche Einordnung schlechter vermitteln."
     },
     "semantic_rule_results": {
       "table.value_required_if_present": "PASS"
