@@ -1,0 +1,183 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Was darf ein Pferd mit Sehnenschaden fressen?",
+    "target_keyword": "Was füttert man bei Sehnenschaden beim Pferd?",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "843ee37efffda082ec052253b2ec71c7ffc27b485ce1e69cc8d77945e69a9b7e"
+  },
+  "content_profile": {
+    "search_intent": "Fütterungsfragen bei einem Pferd mit Sehnenschaden sachgerecht erläutern, keine Heilversprechen oder pauschale Behandlung"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/musculoskeletal-system/tendon-and-ligament-disorders-in-horses/tendinitis-in-horses",
+          "source_title": "MSD Veterinary Manual – Tendinitis in Horses"
+        },
+        {
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+          "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses"
+        }
+      ],
+      "claims": [
+        "Bei akuten Sehnenverletzungen beim Pferd können Wärme, Schwellung, Schmerzen und Lahmheit auftreten.",
+        "Mit Ultraschall lassen sich Veränderungen und Verletzungen der Sehnenfasern darstellen.",
+        "Kupfer gehört zu den Mineralstoffen, die an Enzymen für das Bindegewebe beteiligt sind.",
+        "Der Energiebedarf eines Pferdes hängt unter anderem von Arbeit, Kondition und Trainingszustand ab.",
+        "Wiederholte Gewichtskontrollen helfen, Veränderungen bei der Fütterung eines Pferdes zu erkennen."
+      ],
+      "fresh_research_reference_date": "2026-11-23"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was füttert man bei Sehnenschaden beim Pferd?",
+      "topic": "Was darf ein Pferd mit Sehnenschaden fressen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was darf ein Pferd mit Sehnenschaden fressen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/musculoskeletal-system/tendon-and-ligament-disorders-in-horses/tendinitis-in-horses",
+        "source_title": "MSD Veterinary Manual – Tendinitis in Horses",
+        "evidence_text": "Acute tendon injuries are characterized by heat, swelling, pain, and varying degrees of lameness depending on the severity and location of the injury.",
+        "evidence_text_sha256": "4f01179c5a297f5d1571608e1e4f52f97c078cfbcd3290a0635c34fec9dae982",
+        "statement": "Bei akuten Sehnenverletzungen beim Pferd können Wärme, Schwellung, Schmerzen und Lahmheit auftreten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/musculoskeletal-system/tendon-and-ligament-disorders-in-horses/tendinitis-in-horses",
+        "source_title": "MSD Veterinary Manual – Tendinitis in Horses",
+        "evidence_text": "Tendon enlargement, focal or generalized hypoechogenicity, and varying degrees of tendon fiber disruption or remodeling can be visualized.",
+        "evidence_text_sha256": "60d5e230752b6c1079b709cc0e8979f158c15d9d7eebdbb7bb61895fc3c81f40",
+        "statement": "Mit Ultraschall lassen sich Veränderungen und Verletzungen der Sehnenfasern darstellen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses",
+        "evidence_text": "Copper is an important mineral for enzymes that affect connective tissue, mobilization of iron stores, mitochondrial integrity, melanin, and detoxification of superoxide",
+        "evidence_text_sha256": "6c7eb91bc72bae5bb16db8996e6a8d76654c0cc3ceb0f4378a1251af19be3cb3",
+        "statement": "Kupfer gehört zu den Mineralstoffen, die an Enzymen für das Bindegewebe beteiligt sind.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses",
+        "evidence_text": "The energy requirements of work are influenced by many factors, including type of work, condition and training of the horse, environmental temperature, and skill of the rider or driver.",
+        "evidence_text_sha256": "487cf74a40e8f0d9e7a365f90e8a7ba356b9215b19e0fc5fb2a6a28a3ecd734b",
+        "statement": "Der Energiebedarf eines Pferdes hängt unter anderem von Arbeit, Kondition und Trainingszustand ab.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses",
+        "evidence_text": "Measuring and tracking a horse's body weight allows changes to be detected objectively before variations become a major problem.",
+        "evidence_text_sha256": "3b12fcce971e0dd7497d35c5e50c6b213fc3d755ee430b7f29f64d6091a787c5",
+        "statement": "Wiederholte Gewichtskontrollen helfen, Veränderungen bei der Fütterung eines Pferdes zu erkennen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "Pferdegesundheit verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/mineralfutter-fuer-pferde-beratung/",
+        "anchor": "Beratung Mineralfutter für Pferde",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/category/mineralfutter-fuer-pferde-beratung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferd",
+      "Sehnenschaden",
+      "Sehnen",
+      "Fütterung",
+      "Ernährung",
+      "Raufutter",
+      "Mineralfutter",
+      "Kupfer",
+      "Bindegewebe"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Unterschiede betreffen individuelle Befunde und Fütterungsfragen, die ohne künstliche Vergleichstabelle verständlicher sind."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false,
+  "source_approval_provenance": "MSD Veterinary Manual source text on tendinitis and horse nutrition, original-source excerpts verified."
+}
