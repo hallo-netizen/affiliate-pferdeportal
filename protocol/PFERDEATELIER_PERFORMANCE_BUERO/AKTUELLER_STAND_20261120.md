@@ -1880,3 +1880,22 @@ Wichtig:
 - Journal-Design 1.50.629-632 betrifft nur acht redaktionelle Kategoriearchive; /journal/ Root fällt aus diesen Guards heraus. Daher aktuell kein Journal-Design-Rückbau.
 - Nächster kontrollierter Schritt: ausschließlich Affiliate-Zentrale 6.72.371 installieren, keine weitere Änderung gleichzeitig; danach genau ein PASSIV-Gesamtlauf. Harte Kontrolle: Produktseiten müssen aus dem 6.72.369-Querybereich zurückfallen; Wall-Time wegen Serverlast nur sekundär bewerten.
 - Freigegebenes Paket: PFERDEATELIER_AFFILIATE_6.72.371_KONSOLIDIERT_ROOTCAUSE_PERFORMANCE.zip, SHA-256 832b7b82f1b190e06250cab922b4e9ab6ee0abb7661097991ae7eca7ce87a456.
+
+
+## 2026-11-23 – Affiliate-Zentrale 6.72.372 gebündelter Hotpath-Rootfix – lokal QA PASS
+
+- Ausgangsbasis exakt installierte/freigegebene 6.72.371; Design 1.50.642 bleibt unangetastet.
+- Ursachenprofil 22.11. 18:43 bestätigt Restlast im Affiliate-Produktpfad: Pferdesättel 8.539,76 ms / 3.526,40 ms CPU / 139.475 Cache-Hits / 310 Queries; category_product_1 Ø 1.984,10 ms, max. 7.585,31 ms. Der 6.72.369-Queryfehler bleibt behoben.
+- 6.72.372 bündelt fünf ausschließlich dort belegte Wiederholungen: endgültige Produkt-Nichttreffer auf normalen Artikeln vor Vollnormalisierung, idealo-Strategie einmal je synchronem Listenaufruf, exakter eBay-Titellängenindex, kein erneutes eBay-Source-Prime bei bereits final gecachter Entscheidung, unmittelbar doppelte Providerprüfung im streng stabilen Control-Pfad nur einmal.
+- Inhaltsbeweis Realbestand: 2.363 Produktkampagnen, Hit/Miss 4.726 Fälle 0 Abweichungen; 7.000 Legacy-Ausnahmen + 3.000 Sonder-Posttypen 0 Fehlablehnungen.
+- idealo Realpool 1.010 / 617 idealo: products/comparison/hybrid 0 Ausgabeabweichungen, Strategie-Reads 617 -> 1 je Aufruf; Zustandswechsel zwischen Slots bleiben sichtbar; 500 Zufallsfälle 0 Abweichungen.
+- eBay Realpool 393: Alt/Neu 315 Ausgaben, identischer Ausgabe-Hash; Paarprüfungen 78.355 -> 34.024 (-56,58 %), similar_text 21 -> 21; 53.444 mathematische Längenfälle + 250 Zufallslisten/12.725 Zeilen 0 Abweichungen.
+- eBay Source: bei bereits final gecachtem post:<id>-Ergebnis bis 786 redundante Meta-Leseaufrufe pro späterem Prime vermeidbar; 16 Zustandsfälle 0 Ergebnisabweichungen.
+- Control: 192 stabile Zustandskombinationen 0 Ausgabeabweichungen; dynamische/unsichere Zustände bleiben vollständig auf historischem Pfad.
+- Gesamt-Funktionsschutz 6.72.371 -> 6.72.372: Dateien 66 -> 66, PHP 23 -> 23, Funktionen 1.564 -> 1.567, entfernt 0, Properties 61 -> 61, Actions 176 -> 176, Filter 30 -> 30, Shortcodes 6 -> 6; alle Produktions-Schreibprimitive identisch.
+- Kritische Auswahl-/Ranking-/Fallback-/Veto-/Health-/Bild-/Tracking-/Rendering-/Artikel-Funktionen körperidentisch; andere Plugins nicht Bestandteil des Pakets.
+- ZIP-Integrität PASS, PHP-Lint 23/23 PASS.
+- Paket: PFERDEATELIER_AFFILIATE_6.72.372_GEBUENDELT_HOTPATH_ROOTFIX.zip
+- SHA-256: 745c8fcb4d047794fed37182dcd1881cb35a36e84f83b7aa906b9755dd3ed1fb
+- Voller Nachweis: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PRUEFNACHWEIS_6.72.372.md
+- Nächster kontrollierter Schritt: ausschließlich 6.72.372 installieren, danach genau ein PASSIV-Gesamtlauf. Kein weiterer gleichzeitiger Plugin-/Designumbau.
