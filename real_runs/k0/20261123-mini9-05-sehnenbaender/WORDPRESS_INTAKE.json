@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Was unterstützt Sehnen und Bänder beim Pferd?",
+      "target_keyword": "Was stärkt Sehnen und Bänder beim Pferd?",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "ced8c57d0cdc63c70a25467f25287ca3f0bb98afc8866d720ab8d58714b6ce40"
+    }
+  ],
+  "batch_sha256": "c5674b1eb79826e3e95baa69f50193913ed0f896f9cf12244efa13d9cc564179"
+}
