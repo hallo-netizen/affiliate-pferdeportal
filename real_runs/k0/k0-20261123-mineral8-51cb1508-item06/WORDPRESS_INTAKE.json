@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Anorganisches Mineralfutter für Pferde sachlich einordnen",
+      "target_keyword": "anorganisches mineralfutter für pferde",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "841ec7f6c540b05b732c4ab1277709b5620bc245ffd8ccc624dd75286de52678"
+    }
+  ],
+  "batch_sha256": "ac4f609f3f70363b57b51542d1f6171320c35c599c0c1ec25383839ccb96f742"
+}
