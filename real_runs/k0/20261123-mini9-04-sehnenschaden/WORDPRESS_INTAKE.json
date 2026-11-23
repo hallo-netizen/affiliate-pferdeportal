@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Was darf ein Pferd mit Sehnenschaden fressen?",
+      "target_keyword": "Was füttert man bei Sehnenschaden beim Pferd?",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "843ee37efffda082ec052253b2ec71c7ffc27b485ce1e69cc8d77945e69a9b7e"
+    }
+  ],
+  "batch_sha256": "6ab5d9e0fb44e3554a80fdf6af841de9f4c9f6fbc8d3219f3fe4304ac7b22688"
+}
