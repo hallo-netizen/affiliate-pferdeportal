@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Mineralfutter für Pferde bei Raiffeisen auswählen",
+      "target_keyword": "raiffeisen mineralfutter für pferde",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "8d888b6c5ea5c6484881d2352b9c5584b60a9ea6444bc18d4d3cc276b89c90d6"
+    }
+  ],
+  "batch_sha256": "a07f854f4ff8423c9e759e544a57ab141e0b08512a8ddba5e632e5fd12b899c5"
+}
