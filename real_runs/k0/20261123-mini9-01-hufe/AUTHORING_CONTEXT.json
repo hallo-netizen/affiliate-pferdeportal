@@ -114,16 +114,27 @@
         "href": "/category/mineralfutter-fuer-pferde-beratung/",
         "anchor": "Beratung Mineralfutter für Pferde",
         "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/mineralfutter-fuer-pferde-faq/",
+        "anchor": "FAQ Mineralfutter für Pferde",
+        "block": "further_information"
       }
     ],
     "link_registry": [
       {
         "href": "/category/mineralfutter-fuer-pferde-beratung/",
         "active": true
+      },
+      {
+        "href": "/category/mineralfutter-fuer-pferde-faq/",
+        "active": true
       }
     ],
     "runtime_link_roles": [
-      "parent_category"
+      "parent_category",
+      "further_information"
     ],
     "wordpress_category": {
       "id": 0,
