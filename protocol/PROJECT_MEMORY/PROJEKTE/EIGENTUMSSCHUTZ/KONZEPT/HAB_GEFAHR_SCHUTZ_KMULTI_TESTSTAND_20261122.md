@@ -1,5 +1,27 @@
 # Hab & Bewahr – Gefahr & Schutz: praktischer K-Multi-Teststand
 
+## 23.11.2026 – Hab-WordPress-Plugin an unveränderten ORIGINAL-K-Multi angebunden / kompletter geschützter Testweg
+
+**Abgrenzung:** KEINE Änderung am Original-K0, K-Multi-Quellcode oder den Beitrags-/Textregeln. Die eigentliche technische Datenverbindung war bereits vorhanden: `WP_K0_UPLOAD_PACKAGE_V1` (mit exakten fünf Artikelfeldern und unveränderlichem WordPress-Herkunftsbeleg) wird vom ursprünglichen K-Multi-Portal-Eingang `kmulti_portal_entry.verify_source` akzeptiert. Der historische Vertrag **wurde nicht umbenannt**, sonst würde K-Multi ihn nicht mehr lesen.
+
+**Änderung nur im Hab-Plugin:** Eine einzige nächste Staging-Fassung `0.4.31.23`, im selben WordPress-Pluginordner. Im vorhandenen Menü (weiterhin technischer Slug `texterstellung-k0`), in der Workflowübersicht, Beschriftung und den drei Export-Downloadnamen steht jetzt **K-Multi** statt K0. Die drei vorhandenen WordPress-Adminaktionen (`txe_export`, `txe_redownload`, `txe_redownload_batch`) und der vorhandene WordPress-Entwurfsimport (`txe_import_drafts`) rufen **weiter dieselben Originalfunktionen** auf. Kein zweiter Importer, keine neue Pluginfunktion oder neue Entscheidung. Ausgangsplugin `0.4.31.22`; **87 Dateien, 85 byteidentisch, nur `texterstellung.php` und README geändert; 82/82 ursprüngliche PHP-Methoden erhalten; 78/78 PHP-Syntaxprüfung PASS**. Sämtliche vorherigen Speicher-, Upload- und Download-Fixes erhalten.
+
+**Technisch tatsächlich ausgeführte lokale Plugin-Simulation (Originalfunktionen, isolierte WordPress-Stubs, keine Live-Verbindung):**
+1. Das originale `TXE_Workshop::k0Package()` erzeugt für die **drei echten bereits vorhandenen Hab-Quellaufträge** inklusive Original-ID, `plan_slot`, fünf Feldern und WordPress-Quittung **exakt die schon in K-Multi hinterlegte Original-Eingabedatei**. Batch-SHA256 `1f3d002295c0dfe9d82e2fb686b8403a4ff0d48ac6ab29d9bfedaeeceea3376c`, Receipt-SHA256 `9e3fdff74b5e98e852b1068f90eb9e7ff44927a4667c7d0e2a0a54b7680bec51`; keine Portal-/Artikeltyp-Neuentscheidung.
+2. Änderung eines bereits gespeicherten Originaltitels wird von der **unveränderten** WordPress-Exportmethodik zurückgewiesen.
+3. Der **unveränderte PSERC-Originalimport** erkennt das vorgesehene K-Multi-Ausgabeformat `PFERDE_ATELIER_WORDPRESS_IMPORT_V1` trotz seines historischen Namens. Im isolierten PHP-WordPress-Mock werden aus drei **rein simulierten, nicht durch K-Multi freigegebenen** Test-HTML-Körpern **3/3 Entwürfe** mit Entwurfs-/Veröffentlichungssperre erzeugt. Bei erneuter identischer Datei entstehen **0 zusätzliche Entwürfe**. Ein manipuliertes `plan_slot` oder veränderter Titel blockiert genau den betroffenen Rückimport. **Kein echter WordPress-Post wurde erzeugt**.
+4. Der vorliegende **bereits erfolgreiche Original-K-Multi-GitHub-Actions-Lauf** [45197472834](https://github.com/hallo-netizen/k0-multiportal/actions/runs/45197472834) bestätigt die Verarbeitung derselben Hab-Quelldatei durch Portal-Weiche, Quellen-/Writer-Owner, unabhängiges LanguageTool und die **korrekt weiterhin geschlossene** signierte Endfreigabe.
+5. **Wahrer Status der Komplettsimulation:** Input, Portal/Typ, Bestand, vorhandene 3 Artikel und Sprachprüfung belegt. Realer freigegebener ENDLAUF IST NOCH NICHT BESTANDEN: Hab hat weiterhin nur **57/110** echte Original-HARD-Ergebnisse pro Artikel und **53 nicht ausgeführte**; unabhängige Hab-Endsignatur fehlt, daher vom bestehenden K-Multi **kein originales WordPress-Importfile**. Der lokale Mock-Rückimport testet ausschließlich Form, unveränderten PSERC-Prozess, Entwurfsstatus, Identität und Duplikatsperre, **nicht** eine echte K-Multi-Signatur.
+
+**Archivierung:** ein ZIP im **bereits bestehenden** Hab-Staging-/Plugin-Kandidatenbüro:
+`/hab-und-bewahr/TEXTERSTELLUNG/PLUGIN_FREIGABEKANDIDATEN/Hab-Textplugin-0.4.31.23-KMULTI-ANBINDUNG-STAGING.zip`.
+SHA256 `48b0dbae82a5637cf055e79455b488edb6962d40383011d048465f413ee8ab3b`.
+Daneben `HAB_KMULTI_ANBINDUNG_GESAMTSIMULATION_20261123.json`. Beide aus der Library wieder heruntergeladen und bytegleich nachgeprüft. Alte `0.4.31.22` als unveränderte Vergleichsbasis erhalten.
+
+**Nächster präziser Schritt:** Hab-Plugin `0.4.31.23` im **Staging** (nicht Live) im selben Pluginordner installieren, vorhandenen 3er-Export herunterladen und ohne Umformatierung in den bestehenden echten K-Multi-Eingang geben. Die folgenden 53 Hab-HARD-Checks und signierte Release-Quittung liegen beim **unveränderten vorhandenen K-Multi** und wurden durch diese reine Anbindung nicht umgangen. Erst bei echtem vollständigem K-Multi-PASS die eine produzierte WordPress-Datei in Hab als Entwurf importieren. K0 darf nicht gestartet werden.
+
+---
+
 ## 23.11.2026 – Gesamtaudit aller acht Hab-Upload-/Downloadaktionen (nur Pluginstabilität, keine Regeländerung)
 
 **VORRANG vor dem älteren 0.4.31.21-Stagingstatus.** Version 0.4.31.22 ist **ein einziges gebündeltes Update des EXISTIERENDEN Hab-Textplugins**, keine neue Pluginarchitektur. K0, K-Multi, Pferdeatelier, Beitrags- und Textregeln **unverändert**.
