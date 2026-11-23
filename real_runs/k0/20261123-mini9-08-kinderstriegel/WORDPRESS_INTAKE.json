@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Striegel für Kinder bei der Pferdepflege",
+      "target_keyword": "striegel pferd kinder",
+      "category": "striegel-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "5a96660a5eb7acea395b67787f8aa0a1db57cf5b6b4180b1864e60df609bfda7"
+    }
+  ],
+  "batch_sha256": "630d5b0f2635fca7709ecdf79ba66713ed7a681aec37c24bb303f7038e1f5088"
+}
