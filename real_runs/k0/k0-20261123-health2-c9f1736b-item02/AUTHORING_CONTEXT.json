@@ -167,8 +167,8 @@
       },
       {
         "role": "further_information",
-        "href": "/gesundheit/gesundheit-fell-und-haut/",
-        "anchor": "Fell & Haut",
+        "href": "/gesundheit/gesundheit-hygiene/parasitenmittel-stall/",
+        "anchor": "Parasitenmittel Stall",
         "block": "further_information"
       }
     ],
@@ -178,7 +178,7 @@
         "active": true
       },
       {
-        "href": "/gesundheit/gesundheit-fell-und-haut/",
+        "href": "/gesundheit/gesundheit-hygiene/parasitenmittel-stall/",
         "active": true
       }
     ],
