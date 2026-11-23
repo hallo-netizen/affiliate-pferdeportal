@@ -1,0 +1,172 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Striegel für Kinder bei der Pferdepflege",
+    "target_keyword": "striegel pferd kinder",
+    "category": "striegel-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "5a96660a5eb7acea395b67787f8aa0a1db57cf5b6b4180b1864e60df609bfda7"
+  },
+  "content_profile": {
+    "search_intent": "Striegel und ihre sichere Verwendung durch Kinder bei der Pferdepflege erläutern"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.equiva.com/pferd/pflegeprodukte/putzboxen-putztaschen",
+          "source_title": "EQUIVA – Pferdeputzbox und Putzzeug"
+        },
+        {
+          "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+          "source_title": "Deutscher Tierschutzbund – Haltung von Pferden"
+        }
+      ],
+      "claims": [
+        "Die Wurzelbürste gehört zu den gröberen Bürsten.",
+        "Für die Pferdebeine ist eine Bürste dem Striegel vorzuziehen.",
+        "Behutsame Fellpflege kann an das Kraulen unter Pferden erinnern.",
+        "Für Augen und Nüstern empfiehlt der Deutsche Tierschutzbund einen sauberen feuchten Schwamm."
+      ],
+      "fresh_research_reference_date": "2026-11-23"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "striegel pferd kinder",
+      "topic": "Striegel für Kinder bei der Pferdepflege",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "striegel-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Sichere Verwendung eines Striegels bei der Pferdepflege durch Kinder erläutern",
+      "decision_criteria": [
+        "Sicherer Umgang mit dem Pferd",
+        "Geeignetes Putzzeug für Kinder",
+        "Sanfte Bereiche der Fellpflege"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.equiva.com/pferd/pflegeprodukte/putzboxen-putztaschen",
+        "source_title": "EQUIVA – Pferdeputzbox und Putzzeug",
+        "evidence_text": "Die Wurzelbürste ist vergleichsweise grob.",
+        "evidence_text_sha256": "a08ea33c6afcd8dcbd34637c224d43842abd262fe769f0c4df988388e3c03873",
+        "statement": "Die Wurzelbürste gehört zu den gröberen Bürsten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.equiva.com/pferd/pflegeprodukte/putzboxen-putztaschen",
+        "source_title": "EQUIVA – Pferdeputzbox und Putzzeug",
+        "evidence_text": "Die Beine des Pferdes solltest du nicht mit dem Striegel bürsten und stattdessen lieber zu dieser Bürste greifen.",
+        "evidence_text_sha256": "c3e9b55f017233fb0f588986cb43b6115accb1565634dbb5a386798694360aac",
+        "statement": "Für die Pferdebeine ist eine Bürste dem Striegel vorzuziehen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "Viele Pferde mögen es, gekrault zu werden, da es der Fellpflege zwischen Artgenossen ähnelt.",
+        "evidence_text_sha256": "c25a12e802b8eac5df8fa6db0e33abbbc0ae5b560c8f805593770455b7312752",
+        "statement": "Behutsame Fellpflege kann an das Kraulen unter Pferden erinnern.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "Die Augen und Nüstern putzen Pferdefreund*innen am besten mit einem sauberen feuchten Schwamm.",
+        "evidence_text_sha256": "163001ee9ea5479e03692f45b15fca923dbe9e08a9cfd818e607d4112ae0d959",
+        "statement": "Für Augen und Nüstern empfiehlt der Deutsche Tierschutzbund einen sauberen feuchten Schwamm.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/striegel-beratung/",
+        "anchor": "Beratung Striegel",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/striegel-faq/",
+        "anchor": "FAQ Striegel",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/striegel-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/striegel-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "striegel-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Striegel",
+      "Kinder",
+      "Pferde",
+      "Pferdepflege",
+      "Fellpflege",
+      "Bürsten",
+      "Umgang"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine starre Tabelle hätte für diese Anwendung keinen eigenständigen Entscheidungsnutzen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false,
+  "source_approval_provenance": "Official EQUIVA product information and Deutscher Tierschutzbund horse care guidance; excerpt evidence as published."
+}
