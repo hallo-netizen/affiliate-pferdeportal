@@ -121,8 +121,8 @@
       },
       {
         "role": "further_information",
-        "href": "/category/pferdebuersten-pflege/",
-        "anchor": "Pflege Pferdebürsten",
+        "href": "/category/striegel-faq/",
+        "anchor": "FAQ Striegel",
         "block": "further_information"
       }
     ],
@@ -132,7 +132,7 @@
         "active": true
       },
       {
-        "href": "/category/pferdebuersten-pflege/",
+        "href": "/category/striegel-faq/",
         "active": true
       }
     ],
@@ -153,7 +153,8 @@
       "Bürsten",
       "Beine",
       "Fellpflege",
-      "Pferdepflege"
+      "Pferdepflege",
+      "Striegel"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
