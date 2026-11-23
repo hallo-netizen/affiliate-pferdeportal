@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Mineralfutter für Pferde in 25 kg Gebinden auswählen",
+      "target_keyword": "mineralfutter pferd 25 kg",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "93b21f148f068e6faf4bc9a079f47dd3b3637c1309aed65e560bddbd8d2b9e76"
+    }
+  ],
+  "batch_sha256": "d465df96fbd082bfa475abc39f94e836903c653bb9b839c1dcd5ed08c1a3a224"
+}
