@@ -1,0 +1,171 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 8,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Eggersmann Golden Mineral 25 kg für Pferde richtig einordnen",
+        "target_keyword": "eggersmann golden mineral 25 kg mineralfutter für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "7e74cba722c5d25644046baf9fe8680cb4a18a11c48993b5664a0f4e031d450c"
+      },
+      {
+        "title": "AGROBS Naturmineral 3 kg für Pferde passend auswählen",
+        "target_keyword": "agrobs naturmineral 3 kg natürliches mineralfutter für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "782ddf8dd0f972be7d2e99b1c96b9c698fe000b6297341c535733723b34560c2"
+      },
+      {
+        "title": "Mineralfutter für Pferde in 25 kg Gebinden auswählen",
+        "target_keyword": "mineralfutter pferd 25 kg",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "93b21f148f068e6faf4bc9a079f47dd3b3637c1309aed65e560bddbd8d2b9e76"
+      },
+      {
+        "title": "Mineralfutter für Pferde ohne Melasse und Getreide auswählen",
+        "target_keyword": "mineralfutter pferd ohne melasse und getreide",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "6ee6ce94c259828c00efb3bcab9a8b36e29e7d8a08d82cbd663be2614e75ab1e"
+      },
+      {
+        "title": "Welche Anzeichen kann zu viel Mineralfutter beim Pferd verursachen?",
+        "target_keyword": "Welche Symptome können bei einem Pferd mit zu viel Mineralfutter auftreten?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "a4dd89f081a8a4ca3919eb91ad37b9288720be292de7b820c982c477c8f550fb"
+      },
+      {
+        "title": "Anorganisches Mineralfutter für Pferde sachlich einordnen",
+        "target_keyword": "anorganisches mineralfutter für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "841ec7f6c540b05b732c4ab1277709b5620bc245ffd8ccc624dd75286de52678"
+      },
+      {
+        "title": "Mineralfutter für Pferde bei Raiffeisen auswählen",
+        "target_keyword": "raiffeisen mineralfutter für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "8d888b6c5ea5c6484881d2352b9c5584b60a9ea6444bc18d4d3cc276b89c90d6"
+      },
+      {
+        "title": "Mineralfutter-Bricks für Pferde passend auswählen",
+        "target_keyword": "mineralfutter pferd bricks",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "0f434b6a763499a8f07b2abb23a3000be9b8ef36a8ad14694391f15a354ee6d6"
+      }
+    ],
+    "batch_sha256": "51cb150842bc07816169ceff70b786f96f8d608f0c2cf7647fe89245bdcd2d28"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Eggersmann Golden Mineral 25 kg für Pferde richtig einordnen",
+        "target_keyword": "eggersmann golden mineral 25 kg mineralfutter für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "7e74cba722c5d25644046baf9fe8680cb4a18a11c48993b5664a0f4e031d450c"
+      },
+      "order_id": "TXE-f7a7e45c79dabd73b121c044f44407ab",
+      "article_id": "article:96503bf88e490a5733050b2c",
+      "search_intent": "Die konkrete Eggersmann-Golden-Mineral-Variante in 25-kg-Packung nach Deklaration und Einsatzbedarf einordnen."
+    },
+    {
+      "metadata_binding": {
+        "title": "AGROBS Naturmineral 3 kg für Pferde passend auswählen",
+        "target_keyword": "agrobs naturmineral 3 kg natürliches mineralfutter für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "782ddf8dd0f972be7d2e99b1c96b9c698fe000b6297341c535733723b34560c2"
+      },
+      "order_id": "TXE-db8ea33a7d83c77ac453bedd3da0df43",
+      "article_id": "article:7b104a7d80a402bd112872f0",
+      "search_intent": "Die konkrete Variante AGROBS Naturmineral in der 3-kg-Packung im Unterschied zum allgemeinen Markenratgeber auswählen."
+    },
+    {
+      "metadata_binding": {
+        "title": "Mineralfutter für Pferde in 25 kg Gebinden auswählen",
+        "target_keyword": "mineralfutter pferd 25 kg",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "93b21f148f068e6faf4bc9a079f47dd3b3637c1309aed65e560bddbd8d2b9e76"
+      },
+      "order_id": "TXE-8e8b5f39a988dcbc0caf54ebbf30052a",
+      "article_id": "article:a3106192da7b22b2c9a97e58",
+      "search_intent": "Die Verpackungsgröße 25 kg unabhängig von der Marke nach Verbrauch und Handhabung beurteilen."
+    },
+    {
+      "metadata_binding": {
+        "title": "Mineralfutter für Pferde ohne Melasse und Getreide auswählen",
+        "target_keyword": "mineralfutter pferd ohne melasse und getreide",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "6ee6ce94c259828c00efb3bcab9a8b36e29e7d8a08d82cbd663be2614e75ab1e"
+      },
+      "order_id": "TXE-209d389205ea783a9444dd6649758d49",
+      "article_id": "article:23039fb7394f929b31720c51",
+      "search_intent": "Mineralfutter ohne Melasse und ohne Getreide anhand der vollständigen Zusammensetzung auswählen."
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Anzeichen kann zu viel Mineralfutter beim Pferd verursachen?",
+        "target_keyword": "Welche Symptome können bei einem Pferd mit zu viel Mineralfutter auftreten?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "a4dd89f081a8a4ca3919eb91ad37b9288720be292de7b820c982c477c8f550fb"
+      },
+      "order_id": "TXE-f25878175e3fd8f3b57560122dfc53c5",
+      "article_id": "article:f679d650360cda569a986d3d",
+      "search_intent": "Mögliche Anzeichen einer Überversorgung mit Mineralfutter beim Pferd sachlich und ohne pauschale Diagnose erklären."
+    },
+    {
+      "metadata_binding": {
+        "title": "Anorganisches Mineralfutter für Pferde sachlich einordnen",
+        "target_keyword": "anorganisches mineralfutter für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "841ec7f6c540b05b732c4ab1277709b5620bc245ffd8ccc624dd75286de52678"
+      },
+      "order_id": "TXE-5648beb4a3e34d3504016abed0b8a19b",
+      "article_id": "article:3684feffddb5a6efbdc50bfe",
+      "search_intent": "Anorganische Mineralverbindungen in Pferdemineralfutter sachlich einordnen und vom bereits vorhandenen rein organischen Schwerpunkt abgrenzen."
+    },
+    {
+      "metadata_binding": {
+        "title": "Mineralfutter für Pferde bei Raiffeisen auswählen",
+        "target_keyword": "raiffeisen mineralfutter für pferde",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "8d888b6c5ea5c6484881d2352b9c5584b60a9ea6444bc18d4d3cc276b89c90d6"
+      },
+      "order_id": "TXE-6adb5509cbc1efe403e3e6f063b40df5",
+      "article_id": "article:1c0cd67275b9aace4e9c46b7",
+      "search_intent": "Mineralfutter für Pferde aus dem Raiffeisen-Angebot auf konkrete Deklaration und Eignung hin auswählen."
+    },
+    {
+      "metadata_binding": {
+        "title": "Mineralfutter-Bricks für Pferde passend auswählen",
+        "target_keyword": "mineralfutter pferd bricks",
+        "category": "mineralfutter-fuer-pferde-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "0f434b6a763499a8f07b2abb23a3000be9b8ef36a8ad14694391f15a354ee6d6"
+      },
+      "order_id": "TXE-9b12b9c94eefd07622bc3676595ac818",
+      "article_id": "article:31a49612284189e0458516ed",
+      "search_intent": "Mineralfutter in Bricks-Form als gesonderte Darreichungsform für Pferde einordnen."
+    }
+  ],
+  "manifest_sha256": "7c25311a8e31976e05bb91a6d5df68d6344d481563777ce670d02d1e939a620c"
+}
