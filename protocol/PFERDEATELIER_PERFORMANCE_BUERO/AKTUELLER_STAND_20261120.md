@@ -1899,3 +1899,22 @@ Wichtig:
 - SHA-256: 745c8fcb4d047794fed37182dcd1881cb35a36e84f83b7aa906b9755dd3ed1fb
 - Voller Nachweis: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PRUEFNACHWEIS_6.72.372.md
 - Nächster kontrollierter Schritt: ausschließlich 6.72.372 installieren, danach genau ein PASSIV-Gesamtlauf. Kein weiterer gleichzeitiger Plugin-/Designumbau.
+
+
+## 2026-11-23 – 6.72.372 LIVE: nur kleine Entlastung; 6.72.373 Provider-Image-DNS-Rootfix
+
+- PASSIV 6.72.372: Pferdesättel 12.714,99 ms Wall / 3.579,54 ms CPU / 135.614 Cache-Hits / 310 Queries.
+- 6.72.371 Vergleich: 8.463,96 / 3.745,47 / 139.475 / 310. Damit nur CPU ca. -4,4 % und Cache-Hits ca. -2,8 %; Query-Sicherheit bleibt erhalten, Hauptlast ungelöst.
+- Neuer belegter Restmechanismus: product_campaign_public_image_ready() ruft nach der bereits provider-spezifischen Bildprüfung für jedes Produktbild wp_http_validate_url(); WordPress löst externe Hosts darin per gethostbyname() auf und prüft die IP.
+- Realbestand: 2.166 aktive provider-validierte Bilder auf genau zwei realen Providerhosts (1.285 idealo cdn.idealo.com, 881 eBay ebayimg.com); 15 stale eBay-Bilder werden vorher weiterhin abgelehnt. Pferdesättel-spezifisch 1.010 aktive relevante Produktkampagnen (617 idealo / 393 eBay).
+- 6.72.373 behält vollständige WordPress-Sicherheitsprüfung einmal je Providerhost und wiederverwendet ausschließlich deren Host-Ergebnis innerhalb desselben stabilen Requests. Jede URL behält Struktur/Credential/Portprüfung; dynamische/unsichere Zustände bleiben vollständig auf historischem Weg.
+- Real Alt/Neu: 2.166 Fälle, 0 Ausgabeabweichungen, vollständige Prüfungen 2.166 -> 2.
+- Dynamic-Fallback: 2.166 Fälle, 0 Abweichungen, 2.166 -> 2.166.
+- 100.000 Randfälle: 0 Ausgabeabweichungen.
+- Exakter PHP-Tokenvergleich 372 -> 373: Funktionen 1.563 -> 1.564, entfernt 0, 1.562 bestehende körperidentisch, geändert nur product_campaign_public_image_ready(), neu nur provider_product_image_http_validate_v672373().
+- Actions 176 -> 176, Filter 30 -> 30, Shortcodes 6 -> 6, Produktions-Schreibwege identisch. Paket enthält ausschließlich Affiliate-Zentrale.
+- ZIP 66 Dateien, PHP 23/23 PASS, 0 Hash-Abweichungen Arbeitsstand vs. finales ZIP.
+- Paket: PFERDEATELIER_AFFILIATE_6.72.373_PROVIDER_IMAGE_DNS_ROOTFIX.zip
+- SHA-256: 1a46c3f98b4df0cc5ac59eabe7962bcecd7d52513b58e7b6a9111aaf2b18aefe
+- Nachweis: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PRUEFNACHWEIS_6.72.373.md
+- Nächster kontrollierter Schritt: ausschließlich 6.72.373 installieren und genau einen PASSIV-Gesamtlauf ausführen.
