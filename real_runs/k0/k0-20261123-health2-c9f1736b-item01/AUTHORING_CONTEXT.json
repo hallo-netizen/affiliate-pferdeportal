@@ -137,16 +137,27 @@
         "href": "/category/pferdegesundheit-verstehen/",
         "anchor": "Pferdegesundheit verstehen",
         "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/gesundheitsvorsorge-grundlagen-faq/",
+        "anchor": "FAQ Gesundheitsvorsorge Grundlagen",
+        "block": "further_information"
       }
     ],
     "link_registry": [
       {
         "href": "/category/pferdegesundheit-verstehen/",
         "active": true
+      },
+      {
+        "href": "/category/gesundheitsvorsorge-grundlagen-faq/",
+        "active": true
       }
     ],
     "runtime_link_roles": [
-      "parent_category"
+      "parent_category",
+      "further_information"
     ],
     "wordpress_category": {
       "id": 0,
@@ -178,4 +189,3 @@
   },
   "publish_allowed": false
 }
-
