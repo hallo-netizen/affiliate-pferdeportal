@@ -85,7 +85,7 @@ class MiniOneFileGate(unittest.TestCase):
         output=Path(self.tmp.name)/'CHAT_OUTPUT.json'
         self.assertEqual(deliver(self.ws,output)['status'],'FREIGEGEBEN')
         titles=read_json(self.ws/'TITLE.json')
-        titles['items'][0]['approved_title']='Pferdehaltung sachlich einordnen'
+        titles['items'][0]['approved_title']='Pferdehaltung sachlich einordnen?'
         write(self.ws/'TITLE.json',titles)
         bad=deliver(self.ws,output)
         self.assertEqual(bad['status'],'GESPERRT')
