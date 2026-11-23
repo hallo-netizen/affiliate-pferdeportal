@@ -1,0 +1,172 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Metallstriegel für Pferde und ihre Verwendung",
+    "target_keyword": "metallstriegel pferd",
+    "category": "striegel-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "494cb1a78317f67764277f64e3b4acbb4bd5dab54d9726a975e6b773d2310a82"
+  },
+  "content_profile": {
+    "search_intent": "Metallstriegel beim Pferd und Grenzen ihrer sicheren Verwendung erläutern"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.equiva.com/pferd/pflegeprodukte/putzboxen-putztaschen",
+          "source_title": "EQUIVA – Pferdeputzbox und Putzzeug"
+        },
+        {
+          "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+          "source_title": "Deutscher Tierschutzbund – Haltung von Pferden"
+        }
+      ],
+      "claims": [
+        "Striegel für Pferde sind unter anderem aus Gummi, Kunststoff und Metall erhältlich.",
+        "Für die Pferdebeine ist eine Bürste dem Striegel vorzuziehen.",
+        "Nach dem Striegeln kommt die Kardätsche zum Einsatz.",
+        "Behutsame Fellpflege kann an das Kraulen unter Pferden erinnern."
+      ],
+      "fresh_research_reference_date": "2026-11-23"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "metallstriegel pferd",
+      "topic": "Metallstriegel für Pferde und ihre Verwendung",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "striegel-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Eigenschaften und Grenzen der sicheren Verwendung von Metallstriegeln bei Pferden erläutern",
+      "decision_criteria": [
+        "Striegel aus Metall und Material",
+        "Sichere Anwendung am Pferd",
+        "Abgrenzung zu Kardätsche und Bürste"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.equiva.com/pferd/pflegeprodukte/putzboxen-putztaschen",
+        "source_title": "EQUIVA – Pferdeputzbox und Putzzeug",
+        "evidence_text": "Einen Striegel gibt es sowohl aus Gummi, Kunststoff und auch aus Metall zu kaufen.",
+        "evidence_text_sha256": "ff151a774d3d21ffc6643a0d0bc11d9ba7a677fca4e9c05e391346763e651ed8",
+        "statement": "Striegel für Pferde sind unter anderem aus Gummi, Kunststoff und Metall erhältlich.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.equiva.com/pferd/pflegeprodukte/putzboxen-putztaschen",
+        "source_title": "EQUIVA – Pferdeputzbox und Putzzeug",
+        "evidence_text": "Die Beine des Pferdes solltest du nicht mit dem Striegel bürsten und stattdessen lieber zu dieser Bürste greifen.",
+        "evidence_text_sha256": "c3e9b55f017233fb0f588986cb43b6115accb1565634dbb5a386798694360aac",
+        "statement": "Für die Pferdebeine ist eine Bürste dem Striegel vorzuziehen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.equiva.com/pferd/pflegeprodukte/putzboxen-putztaschen",
+        "source_title": "EQUIVA – Pferdeputzbox und Putzzeug",
+        "evidence_text": "Nach dem Striegeln kannst du mit der Kardätsche weitermachen.",
+        "evidence_text_sha256": "11ececbdcaf615f44b204a171056e5d1b01d71c0705ab4e6105698e349440b6e",
+        "statement": "Nach dem Striegeln kommt die Kardätsche zum Einsatz.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "Viele Pferde mögen es, gekrault zu werden, da es der Fellpflege zwischen Artgenossen ähnelt.",
+        "evidence_text_sha256": "c25a12e802b8eac5df8fa6db0e33abbbc0ae5b560c8f805593770455b7312752",
+        "statement": "Behutsame Fellpflege kann an das Kraulen unter Pferden erinnern.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/striegel-beratung/",
+        "anchor": "Beratung Striegel",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/striegel-faq/",
+        "anchor": "FAQ Striegel",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/striegel-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/striegel-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "striegel-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Metallstriegel",
+      "Striegel",
+      "Metall",
+      "Pferde",
+      "Pferdepflege",
+      "Fellpflege",
+      "Bürsten"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine starre Tabelle hätte für diese Anwendung keinen eigenständigen Entscheidungsnutzen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false,
+  "source_approval_provenance": "Official EQUIVA product information and Deutscher Tierschutzbund horse care guidance; excerpt evidence as published."
+}
