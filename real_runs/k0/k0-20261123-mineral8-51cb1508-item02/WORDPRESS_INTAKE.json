@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "AGROBS Naturmineral 3 kg für Pferde passend auswählen",
+      "target_keyword": "agrobs naturmineral 3 kg natürliches mineralfutter für pferde",
+      "category": "mineralfutter-fuer-pferde-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "782ddf8dd0f972be7d2e99b1c96b9c698fe000b6297341c535733723b34560c2"
+    }
+  ],
+  "batch_sha256": "064b6621fa8e7c5c103f7cd1b66a405c7524071c0cb6f17cb7c2291b01b33a25"
+}
