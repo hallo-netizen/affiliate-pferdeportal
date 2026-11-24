@@ -1918,3 +1918,23 @@ Wichtig:
 - SHA-256: 1a46c3f98b4df0cc5ac59eabe7962bcecd7d52513b58e7b6a9111aaf2b18aefe
 - Nachweis: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PRUEFNACHWEIS_6.72.373.md
 - Nächster kontrollierter Schritt: ausschließlich 6.72.373 installieren und genau einen PASSIV-Gesamtlauf ausführen.
+
+
+## 2026-11-24 – 6.72.373 LIVE bestätigt; 6.72.374 Provider-Control-Rootfix
+
+- LIVE 6.72.373: Pferdesättel 3.486,00 ms Wall / 1.400,20 ms CPU / 135.789 Cache-Hits / 310 Queries. Gegen 6.72.372 (12.714,99 / 3.579,54 / 135.614 / 310) ist der DNS/Bild-Fix klar wirksam; interne Wiederholungsarbeit bleibt.
+- Realbestand Pferdesättel: 1.010 Kandidaten in derselben relevanten Fallback-Stufe, 617 idealo + 393 eBay, alle mit Partner-ID.
+- 6.72.373 prüft globalen Providerzustand wegen der eigenen Registry-/Access-Filter zweimal je Kandidat: 2.020 Provider-Gates.
+- 6.72.374 erlaubt Wiederverwendung nur bei exakt bekannten eigenen Providerfiltern und stabiler Read-Surface. Unbekannte/dynamische Filter => historischer Einzelpfad.
+- Echter Pool Alt/Neu: 0/1.010 Abweichungen; Provider-Gates 2.020 -> 2; Notstopp 1.010 -> 1; Portal 1.010 -> 1. Partner 2.020, Creative 393, Output 393, Einzelziel 2 bleiben identisch.
+- Mindestzahl direkt abgeleiteter stabiler get_option/home_url-Lesewege: 10.548 -> 10.
+- 500 Zustandsrequests / 17.426 Kandidaten: 0 Abweichungen.
+- Dynamische Registry-/Access-/Partner-/Optionfilter plus wechselnde Providerzustände: 0 Abweichungen; Alt/Neu identische Einzelprüf-Aufrufzahlen.
+- PHP-Tokenvergleich: 1.564 -> 1.570 Funktionen/Methoden; entfernt 0; 1.563 bestehende unverändert; geändert genau campaign_control_base_allows_delivery(); neu 6 Schutzhelfer.
+- Actions 176, Filter 30, Shortcodes 6 und alle Produktions-Schreibprimitive identisch.
+- Dateien 66 -> 66; nur Hauptdatei + Stable Tag geändert; keine andere Plugin-/Theme-/Core-Datei enthalten.
+- ZIP 66/66, 0 Hashabweichungen nach Re-Extract, PHP 23/23 PASS.
+- Paket: PFERDEATELIER_AFFILIATE_6.72.374_PROVIDER_CONTROL_ROOTFIX.zip
+- SHA-256: 377683dd1e65ae586188e51f16e35e3a8f49d3257ea0cbfa516536c824dbe68b
+- Prüfnachweis: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PRUEFNACHWEIS_6.72.374.md
+- Nächster kontrollierter Schritt: ausschließlich 6.72.374 installieren und genau einen PASSIV-Gesamtlauf ausführen.
