@@ -1938,3 +1938,29 @@ Wichtig:
 - SHA-256: 377683dd1e65ae586188e51f16e35e3a8f49d3257ea0cbfa516536c824dbe68b
 - Prüfnachweis: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PRUEFNACHWEIS_6.72.374.md
 - Nächster kontrollierter Schritt: ausschließlich 6.72.374 installieren und genau einen PASSIV-Gesamtlauf ausführen.
+
+
+## 2026-11-24 – 6.72.374 LIVE ausgewertet; 6.72.375 gebündelt freigegeben
+
+- LIVE 6.72.374 bestätigt: Pferdesättel 3.495,84 ms Wall / 1.296,52 ms CPU / 135.828 Cache-Hits / 310 Queries.
+- Gegen 6.72.373 sinkt CPU ca. 7,4 %, Cache-Hits und Queries bleiben praktisch unverändert. 6.72.374 ist sicher, aber der Hauptrest bleibt.
+- Kein Einzel-Fix-Paket: vier belegte Restursachen wurden gemeinsam in 6.72.375 gebündelt.
+- Realbestand Pferdesättel: 1.010 aktive Kandidaten, 617 idealo + 393 eBay.
+- Doppelte ppar_campaign_data-Lesungen 1.091 -> 0.
+- Incident-Optionslesungen 648 -> 8; dynamischer Filter behält 648 -> 648.
+- voller Kandidaten-Metapfad 7.983 -> 1.010; dynamische/unsichere Kontexte behalten den historischen Einzelpfad.
+- eBay Public Checkpoint 393 -> 1; checkpoint-spezifischer Filter behält 393 -> 393.
+- gesamte reproduzierte Meta-/Optionslesungen im Realbestands-Hotpath 10.129 -> 1.033 (ca. -89,8 %).
+- 2.721/2.721 Kampagnennormalisierungen identisch.
+- 30/30 Provider-/Link-/Amazon-Kombinationen kompletter Postprocessing-Output Alt=Neu.
+- 10 finale Slot-Randkombinationen: 0 Abweichungen.
+- 10.000 Meta-Semantikfälle: 0 Abweichungen.
+- external object cache / get_post_metadata / pre_option: historischer Pfad und Alt/Neu-Aufrufzahlen identisch.
+- PHP-Tokenvergleich 1.570 -> 1.581 Funktionen/Methoden; entfernt 0; 1.555 bestehende unverändert; 15 gezielt geändert; 11 Schutzhelfer neu.
+- Actions 176, Filter 30, Shortcodes 6 und Produktions-Schreibwege unverändert.
+- Dateien 66 -> 66, keine fremden Plugin-/Theme-/Core-Dateien; PHP 23/23 PASS; ZIP 66/66, 0 Hashabweichungen.
+- Paket: PFERDEATELIER_AFFILIATE_6.72.375_GEBUENDELT_META_READ_ROOTFIX.zip
+- SHA-256: f0c813dc1b5d0de01e45f15b6a3f0bdf725ff721f6f7e3f71da10754e80c86a4
+- Prüfnachweis: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PRUEFNACHWEIS_6.72.375.md
+- Büro-Ablage aktuell: /pferdeatelier/PERFORMANCE_BUERO/AKTUELLES_PLUGIN/PFERDEATELIER_AFFILIATE_6.72.375_GEBUENDELT_META_READ_ROOTFIX.zip
+- Nächster Schritt: ausschließlich 6.72.375 installieren und genau einen PASSIV-Gesamtlauf ausführen; erst danach Live-Wirkung bewerten.
