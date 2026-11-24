@@ -16,3 +16,5 @@ Stand: 21.11.2026
 5. Byte-, Datei-, Hook- und Schreibprimitive-Vergleiche sind nur Zusatzbelege, niemals alleiniger Freigabebeweis.
 6. Kein vorhandener Funktionsumfang darf zur Performanceverbesserung zurückgebaut werden.
 7. Ein neues Installationspaket wird erst ausgegeben, wenn mehrere belegte sichere Änderungen soweit sinnvoll zusammengeführt und gemeinsam regressionsgeprüft wurden.
+8. Nach jedem belastbaren Zwischen- oder Endstand wird der aktuelle Arbeitsstand unmittelbar im Performance-Büro protokolliert.
+9. Nach jeder neuen freigegebenen Plugin-Version wird das jeweils aktuelle Installationspaket zusätzlich eindeutig als aktuelles Plugin im Performance-Büro abgelegt; ältere Versionen bleiben zur Nachvollziehbarkeit erhalten.
