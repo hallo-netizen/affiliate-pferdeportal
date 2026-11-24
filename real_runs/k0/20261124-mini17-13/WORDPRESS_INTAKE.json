@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie viele Kilometer sollte ein Pferd täglich laufen?",
+      "target_keyword": "Wie viel km sollte ein Pferd am Tag laufen?",
+      "category": "alltags-pferde-haltungsformen",
+      "article_type": "FAQ",
+      "plan_slot": "890be6c2f8c64b507081518d2ff7da2dd8c3688f95a881c0596ee8cb0ca32d93"
+    }
+  ],
+  "batch_sha256": "c4690b5bd0fb560650576c7dd122ba0616cbfe2405f6b2800afed1307d45b9b2"
+}
