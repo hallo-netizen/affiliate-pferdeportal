@@ -147,7 +147,10 @@
       "Augen",
       "Sicht",
       "Beleuchtung",
-      "Farben"
+      "Farben",
+      "Lichtfarbe",
+      "Blendung",
+      "Ausleuchtung"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
