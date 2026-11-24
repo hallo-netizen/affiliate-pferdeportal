@@ -1,0 +1,163 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welche Nachteile kann Grummet für Pferde haben?",
+    "target_keyword": "Warum kein Grummet für Pferde?",
+    "category": "pferdeernaehrung-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "6ce77fe0fc1a0cd2c06a34705ac0f269eb49c19cfdd93ff87cc337dbf90a9243"
+  },
+  "content_profile": {
+    "search_intent": "Gründe, warum Grummet als Pferdefutter kritisch beurteilt wird"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.vetmeduni.ac.at/forschung/aktuelles-aus-der-forschung/was-ist-drinnen-im-heu",
+          "source_title": "Veterinärmedizinische Universität Wien – Was ist drinnen im Heu?"
+        }
+      ],
+      "claims": [
+        "Der zweite Schnitt im Spätsommer wird in der Vetmeduni-Übersicht als Heu für Fohlen genannt.",
+        "Für durchschnittlich genutzte Freizeitpferde nennt die Vetmeduni Heu aus dem ersten Schnitt in der Blüte.",
+        "Die Eignung des Heus muss an den individuellen Leistungsbedarf des Pferdes angepasst werden.",
+        "Kurzes nährstoffbetontes Rinderheu eignet sich laut Vetmeduni nur für Pferde mit mindestens mittlerer bis schwerer Arbeit."
+      ],
+      "fresh_research_reference_date": "2026-11-24"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Warum kein Grummet für Pferde?",
+      "topic": "Welche Nachteile kann Grummet für Pferde haben?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Warum kein Grummet für Pferde?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.vetmeduni.ac.at/forschung/aktuelles-aus-der-forschung/was-ist-drinnen-im-heu",
+        "source_title": "Veterinärmedizinische Universität Wien – Was ist drinnen im Heu?",
+        "evidence_text": "Zweiter Schnitt im Spätsommer",
+        "evidence_text_sha256": "a791993312703bb9959f8a46b77f70234f16ec99888ec5c74132151ca1d72a4a",
+        "statement": "Der zweite Schnitt im Spätsommer wird in der Vetmeduni-Übersicht als Heu für Fohlen genannt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.vetmeduni.ac.at/forschung/aktuelles-aus-der-forschung/was-ist-drinnen-im-heu",
+        "source_title": "Veterinärmedizinische Universität Wien – Was ist drinnen im Heu?",
+        "evidence_text": "In der Blüte geerntet, erster Schnitt im Frühsommer",
+        "evidence_text_sha256": "bc6dd382da6a6f2f5259f2ba59b0f7f403af377368d4c88dfa6378e8796fcb97",
+        "statement": "Für durchschnittlich genutzte Freizeitpferde nennt die Vetmeduni Heu aus dem ersten Schnitt in der Blüte.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.vetmeduni.ac.at/forschung/aktuelles-aus-der-forschung/was-ist-drinnen-im-heu",
+        "source_title": "Veterinärmedizinische Universität Wien – Was ist drinnen im Heu?",
+        "evidence_text": "Hinweis: Pferde sollen individuell, angepasst an ihre Leistung, gefüttert werden.",
+        "evidence_text_sha256": "90de8f858d6bbafed90d480685ca4f59a76d68e98455e977a4e419b2bdf6c111",
+        "statement": "Die Eignung des Heus muss an den individuellen Leistungsbedarf des Pferdes angepasst werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.vetmeduni.ac.at/forschung/aktuelles-aus-der-forschung/was-ist-drinnen-im-heu",
+        "source_title": "Veterinärmedizinische Universität Wien – Was ist drinnen im Heu?",
+        "evidence_text": "Kurzes „Rinderheu“ ist nur für Pferde mit mindestens mittlerer bis schwerer Arbeit geeignet.",
+        "evidence_text_sha256": "c62530cf902e0d21097f4f4c54f7fe7bc99b66bbf5eeea9b44d37a03c80170d6",
+        "statement": "Kurzes nährstoffbetontes Rinderheu eignet sich laut Vetmeduni nur für Pferde mit mindestens mittlerer bis schwerer Arbeit.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "anchor": "",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/fuetterung/",
+        "anchor": "",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/fuetterung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Grummet",
+      "Pferde",
+      "Heu",
+      "zweiter Schnitt",
+      "Raufutter",
+      "Fohlen",
+      "Fütterung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Suchfrage verlangt Bedingungen zur Eignung und möglichen Nachteilen des zweiten Schnitts, eine Tabelle wäre ohne konkrete Analysewerte irreführend."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false,
+  "source_approval_provenance": "Original Vetmeduni Wien research article of 26 November 2025, source excerpts verified on official university page on 24 November 2026."
+}
