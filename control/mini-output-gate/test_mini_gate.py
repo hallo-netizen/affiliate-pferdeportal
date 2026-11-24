@@ -59,6 +59,42 @@ class TestMiniGate(unittest.TestCase):
         write(self.ws/'TITLE.json', mock_stage(self.origin,'TITLE',
              lambda i, item: {'approved_title': natural[i] if i < 8 else ''}))
 
+    def test_invalid_existing_wordpress_reference_repairs_editorial_only(self):
+        self.insert_mock_editorial()
+        self.insert_mock_title()
+        editorial = json.loads((self.ws/'EDITORIAL.json').read_text())
+        editorial['items'][8]['matched_ref'] = 'WORDPRESS:post:123456'
+        write(self.ws/'EDITORIAL.json', editorial)
+        bad = gate(self.ws)
+        self.assertEqual(bad['next_worker'], 'EDITORIAL')
+        self.assertEqual([(x['item_index'], x['code']) for x in bad['fix_only']],
+                         [(8, 'BESTANDSREFERENZ_FORMAT_UNGUELTIG')])
+        self.assertFalse((self.ws/RELEASE).exists())
+        editorial['items'][8]['matched_ref'] = 'WORDPRESS:123456'
+        write(self.ws/'EDITORIAL.json', editorial)
+        self.assertEqual(gate(self.ws)['status'], 'FREIGEGEBEN_FUER_WP_IMPORTE')
+
+    def test_existing_wordpress_reference_must_be_in_original_snapshot(self):
+        self.insert_mock_editorial()
+        self.insert_mock_title()
+        source = json.loads((self.ws/ORIGINAL).read_text())
+        source['existing_wordpress_and_plan_inventory'] = [
+            {'source': 'WORDPRESS', 'id': 123456, 'type': 'post', 'title': 'QA existing article'}
+        ]
+        write(self.ws/ORIGINAL, source)
+        from mini_release_gate import sha
+        (self.ws/'ORIGINAL_SHA256.txt').write_text(sha(self.ws/ORIGINAL)+'\\n')
+        editorial = json.loads((self.ws/'EDITORIAL.json').read_text())
+        editorial['items'][8]['matched_ref'] = 'WORDPRESS:999999'
+        write(self.ws/'EDITORIAL.json', editorial)
+        bad = gate(self.ws)
+        self.assertEqual(bad['next_worker'], 'EDITORIAL')
+        self.assertIn('BESTANDSREFERENZ_NICHT_IM_ORIGINALEXPORT',
+                      [x['code'] for x in bad['fix_only']])
+        editorial['items'][8]['matched_ref'] = 'WORDPRESS:123456'
+        write(self.ws/'EDITORIAL.json', editorial)
+        self.assertEqual(gate(self.ws)['status'], 'FREIGEGEBEN_FUER_WP_IMPORTE')
+
     def test_title_language_rules_user_examples_and_natural_alternatives(self):
         bad = [
             'Mineralfutter richtig einordnen',
