@@ -83,7 +83,7 @@ class TestMiniGate(unittest.TestCase):
         ]
         write(self.ws/ORIGINAL, source)
         from mini_release_gate import sha
-        (self.ws/'ORIGINAL_SHA256.txt').write_text(sha(self.ws/ORIGINAL)+'\\n')
+        (self.ws/'ORIGINAL_SHA256.txt').write_text(sha(self.ws/ORIGINAL)+'\n')
         editorial = json.loads((self.ws/'EDITORIAL.json').read_text())
         editorial['items'][8]['matched_ref'] = 'WORDPRESS:999999'
         write(self.ws/'EDITORIAL.json', editorial)
