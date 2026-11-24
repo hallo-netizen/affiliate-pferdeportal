@@ -211,9 +211,26 @@ def gate(workspace):
             if box == 'FREI' and not val(editorial['intent_summary']):
                 issue('EDITORIAL', i, 'intent_summary', 'SUCHABSICHT_FEHLT')
                 continue
-            if box == 'BELEGT' and not val(editorial['matched_ref']):
-                issue('EDITORIAL', i, 'matched_ref', 'BESTANDSREFERENZ_FEHLT')
-                continue
+            if box == 'BELEGT':
+                matched = editorial['matched_ref']
+                if not val(matched):
+                    issue('EDITORIAL', i, 'matched_ref', 'BESTANDSREFERENZ_FEHLT')
+                    continue
+                # Accept only the exact WordPress ID format recognized by
+                # the existing import. The current article must also be in
+                # the immutable WordPress snapshot when present.
+                if not re.fullmatch(r'WORDPRESS:[1-9][0-9]*', matched):
+                    issue('EDITORIAL', i, 'matched_ref', 'BESTANDSREFERENZ_FORMAT_UNGUELTIG')
+                    continue
+                inventory = source.get('existing_wordpress_and_plan_inventory')
+                if isinstance(inventory, list) and not any(
+                    entry.get('source') == 'WORDPRESS'
+                    and entry.get('type') == 'post'
+                    and str(entry.get('id')) == matched.split(':', 1)[1]
+                    for entry in inventory if isinstance(entry, dict)
+                ):
+                    issue('EDITORIAL', i, 'matched_ref', 'BESTANDSREFERENZ_NICHT_IM_ORIGINALEXPORT')
+                    continue
             if box == 'KLAERUNG' and not val(editorial['reason']):
                 issue('EDITORIAL', i, 'reason', 'KLÄRUNGSGRUND_FEHLT')
                 continue
