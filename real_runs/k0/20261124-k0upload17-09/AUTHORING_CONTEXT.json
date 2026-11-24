@@ -1,0 +1,167 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Was trinken Pferde?",
+    "target_keyword": "Was trinken Pferde?",
+    "category": "pferdeernaehrung-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "114193d8ef27fa544b4a39e376c4f9482ccd07e93deb26f13612d0128ede2319"
+  },
+  "content_profile": {
+    "search_intent": "Welche Getränke Pferde normalerweise trinken"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.tierschutzbund.de/tiere-themen/haustiere/pferde/",
+          "source_title": "Deutscher Tierschutzbund – Pferde richtig halten"
+        },
+        {
+          "source_url": "https://app.pferd-aktuell.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+          "source_title": "FN – Pferde richtig füttern"
+        }
+      ],
+      "claims": [
+        "Pferde brauchen jederzeit frisches Trinkwasser.",
+        "Raufutter bildet die Grundlage der Fütterung; es ist kein Trinkersatz.",
+        "Wasser ist ein lebenswichtiger Nährstoff für Pferde.",
+        "Bei höherem Elektrolytbedarf können fachgerecht eingesetzte Zusätze über das Trinkwasser verabreicht werden."
+      ],
+      "fresh_research_reference_date": "2026-11-24"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was trinken Pferde?",
+      "topic": "Was trinken Pferde?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was trinken Pferde?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.tierschutzbund.de/tiere-themen/haustiere/pferde/",
+        "source_title": "Deutscher Tierschutzbund – Pferde richtig halten",
+        "evidence_text": "Stets Zugang zu frischem Wasser zu haben, ist für Pferde ebenso wichtig.",
+        "evidence_text_sha256": "403c417485d2ea3867f9a04d3ac884a52f29f21b7f4be2f0362671c663ce7e16",
+        "statement": "Pferde brauchen jederzeit frisches Trinkwasser.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.tierschutzbund.de/tiere-themen/haustiere/pferde/",
+        "source_title": "Deutscher Tierschutzbund – Pferde richtig halten",
+        "evidence_text": "Raufutter wie Gras, Heu, Heulage und Grassilage bilden die Basis ihres Speiseplans.",
+        "evidence_text_sha256": "cd32585a06620a2b76d2802de7b2ffd4a958e2c43254677cc0ad083ab153f3cc",
+        "statement": "Raufutter bildet die Grundlage der Fütterung; es ist kein Trinkersatz.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "source_title": "FN – Pferde richtig füttern",
+        "evidence_text": "Eiweiß, Kohlenhydrate, Fett, Wasser, Mineralien, Spurenelemente und Vitamine sind die lebenswichtigen Nährstoffe, die das Pferd braucht.",
+        "evidence_text_sha256": "7b7d0c4005e287b15fa38762deb8ee2150efe496b62d5b48b949251dcccd1930",
+        "statement": "Wasser ist ein lebenswichtiger Nährstoff für Pferde.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "source_title": "FN – Pferde richtig füttern",
+        "evidence_text": "Hier helfen Elektrolyte in Form von Natrium-, Kalium- und Magnesiumchlorid, die im Handel erhältlich sind und über das Trinkwasser als Zusatzfuttermittel gegeben werden können.",
+        "evidence_text_sha256": "2547136da2eac5e5788069044a7f8c59769da8789807b079684c06d9bbdde4f8",
+        "statement": "Bei höherem Elektrolytbedarf können fachgerecht eingesetzte Zusätze über das Trinkwasser verabreicht werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "anchor": "Pferdeernährung verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "Pferdegesundheit verstehen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Wasser",
+      "Trinkwasser",
+      "Trinken",
+      "Tränke",
+      "Getränke",
+      "Pferdehaltung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Frage nach dem geeigneten Getränk ist eindeutig; ein Tabellenvergleich von Getränken wäre irreführend."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false,
+  "source_approval_provenance": "Originaltexte auf den offiziellen Seiten des Deutschen Tierschutzbundes und des Pferdesport-Dachverbands FN am 2026-11-24 geprüft."
+}
