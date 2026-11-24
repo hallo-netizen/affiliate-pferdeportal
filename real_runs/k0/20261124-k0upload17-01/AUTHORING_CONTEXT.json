@@ -1,0 +1,164 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Gibt es kostenlose Apps für den Trainingsplan eines Pferdes?",
+    "target_keyword": "Gibt es eine kostenlose App für den Trainingsplan von Pferden?",
+    "category": "trainingsplan-vorlage-faq",
+    "article_type": "FAQ",
+    "plan_slot": "623134a551fb6c3db9778318faf4d41cc985bcfcc555299a2868a9a268aac549"
+  },
+  "content_profile": {
+    "search_intent": "Kostenlose Apps zum Planen des Pferdetrainings, nicht das eigenständige Erstellen eines Trainingsplans"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://app.pferd-aktuell.de/app/pferdesport-deutschland-app",
+          "source_title": "Pferdesport Deutschland – Die App"
+        },
+        {
+          "source_url": "https://app.pferd-aktuell.de/ausbildung/ausbildung-des-reiters",
+          "source_title": "Pferdesport Deutschland – Ausbildung des Reiters"
+        }
+      ],
+      "claims": [
+        "Die FN-App bietet Informationen zum Pferdesport.",
+        "Die FN-App ist vorrangig auf Information ausgelegt.",
+        "Ein Trainingsplan braucht Kenntnisse über Ausbildung und Pferdeverhalten.",
+        "Ausbildung umfasst fortlaufend zu erlernende Fähigkeiten."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Gibt es eine kostenlose App für den Trainingsplan von Pferden?",
+      "topic": "Gibt es kostenlose Apps für den Trainingsplan eines Pferdes?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "trainingsplan-vorlage-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Gibt es eine kostenlose App für den Trainingsplan von Pferden?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://app.pferd-aktuell.de/app/pferdesport-deutschland-app",
+        "source_title": "Pferdesport Deutschland – Die App",
+        "evidence_text": "Die App liefert dir relevantes Wissen und hilfreiche Informationen rund um das Leben und den Sport mit Pferden.",
+        "evidence_text_sha256": "5ab3612704865c01bb0d7cc382b521b17fae0df0ebdbd9e192ac994d0915e3e1",
+        "statement": "Die FN-App bietet Informationen zum Pferdesport.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://app.pferd-aktuell.de/app/pferdesport-deutschland-app",
+        "source_title": "Pferdesport Deutschland – Die App",
+        "evidence_text": "Mit der Pferdesport Deutschland App bist du jederzeit bestens informiert.",
+        "evidence_text_sha256": "4fa4a10c7e5a3b3ce121d5b6aa7bcc23a57c33203e4dd756f3f5f54fdd6977e5",
+        "statement": "Die FN-App ist vorrangig auf Information ausgelegt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/ausbildung-des-reiters",
+        "source_title": "Pferdesport Deutschland – Ausbildung des Reiters",
+        "evidence_text": "Diese innere Einstellung, verbunden mit den Kenntnissen, Fähigkeiten und Fertigkeiten rund um die Natur des Pferdes und um die klassische Reitlehre, zeichnet einen Reiter aus, der in der Lage ist, Pferde richtig zu reiten und auszubilden.",
+        "evidence_text_sha256": "e722caf233acd3ec465735738690f1709f95059463b3991bd7259d171c506ba2",
+        "statement": "Ein Trainingsplan braucht Kenntnisse über Ausbildung und Pferdeverhalten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/ausbildung-des-reiters",
+        "source_title": "Pferdesport Deutschland – Ausbildung des Reiters",
+        "evidence_text": "Ein Reiter sollte im Laufe seiner Ausbildung einen ausbalancierten und losgelassenen Sitz entwickeln",
+        "evidence_text_sha256": "8c077590c80dd3274ebe90309d9f5f6171e042edc3390aa01386e313aa4e9c22",
+        "statement": "Ausbildung umfasst fortlaufend zu erlernende Fähigkeiten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/trainingsplan-vorlage-faq/",
+        "anchor": "trainingsplan-vorlage-faq",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-vorlagen-und-planung/trainingsplan-vorlage/",
+        "anchor": "Trainingsplan Vorlage",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/trainingsplan-vorlage-faq/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-vorlagen-und-planung/trainingsplan-vorlage/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "trainingsplan-vorlage-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Trainingsplan",
+      "App",
+      "Pferdetraining",
+      "Training",
+      "Übungen",
+      "Planung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die konkrete Leserfrage lässt sich durch sachliche Einordnung und praktische Handlungsschritte beantworten; eine künstliche Vergleichstabelle hätte keinen Mehrwert."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
