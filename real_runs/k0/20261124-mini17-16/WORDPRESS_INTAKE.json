@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Ist feines oder grobes Heu für Pferde besser?",
+      "target_keyword": "Ist feines oder grobes Heu für Pferde besser?",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "1dc5f3a78401d0eccbfc4a0980bcf7d333410d7b1cc0b8b4a984b10afbb2b915"
+    }
+  ],
+  "batch_sha256": "468ebe10c8bf54d76745b27084420fe3e4be6a11a30434f2a2fe8e5aef0ac6f4"
+}
