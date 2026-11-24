@@ -1,0 +1,23 @@
+{
+  "contract": "K0_RESEARCH_RETURN_V1",
+  "status": "REPAIR_REQUIRED",
+  "owner": "SAME_RESEARCH_OWNER",
+  "identity": {
+    "title": "Was kostet Heu für ein Pferd im Monat?",
+    "target_keyword": "Was kostet Heu für ein Pferd im Monat?",
+    "category": "pferdeernaehrung-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "33a83efcc45409b750bc4231424f6b83651ef839d708d65b3267696c78e55165"
+  },
+  "run_instance_id": "run:ea0b58131bf564bd4cdcad8f",
+  "return_to": "AUTHORING_CONTEXT.json",
+  "issues": [
+    {
+      "fact_id": "F1",
+      "reason": "RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL",
+      "source_url": "https://llh.hessen.de/unternehmensfuehrung/markt-preise/futtermittel/erzeuger-heustroh/"
+    }
+  ],
+  "next_action": "RESEARCH_AGAIN_OR_PROVE_ORIGINAL_SOURCE_AND_RESUBMIT_SAME_RUN",
+  "publish_allowed": false
+}
