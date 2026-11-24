@@ -1,0 +1,169 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Gummistriegel für Pferde",
+    "target_keyword": "gummistriegel pferd",
+    "category": "striegel-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "613439e62c3b90f20f26a866b51744ff8c59e088b8f9e28de2f7ee2b2e31b3a2"
+  },
+  "content_profile": {
+    "search_intent": "Kaufberatung zum Gummistriegel für das Pferd mit Eigenschaften und Einsatz"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.sprenger.de/products/gummistriegel",
+          "source_title": "Sprenger – Gummistriegel"
+        }
+      ],
+      "claims": [
+        "Ein weicher Gummistriegel eignet sich zu Beginn der Putzroutine, um kleinere Verschmutzungen aus dem Pferdefell zu lösen.",
+        "Ein Gummistriegel kann mit kreisenden Bewegungen für eine wohltuende Massage eingesetzt werden.",
+        "Die Handhabung des Gummistriegels hängt auch davon ab, wie angenehm er in der Hand liegt.",
+        "Gummi lässt sich nach dem Putzen reinigen und ist ein robustes Material."
+      ],
+      "fresh_research_reference_date": "2026-11-24"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "gummistriegel pferd",
+      "topic": "Gummistriegel für Pferde",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "striegel-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Gummistriegel zur Pferdepflege nach Handhabung, Einsatz und Reinigung auswählen",
+      "decision_criteria": [
+        "Weiches Gummimaterial und Fellpflege",
+        "Kreisende Handbewegungen und angenehme Anwendung",
+        "Leichte Reinigung nach der Nutzung"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.sprenger.de/products/gummistriegel",
+        "source_title": "Sprenger – Gummistriegel",
+        "evidence_text": "Dieser weiche Gummistriegel ist der ideale Allrounder, um zu Beginn der Putzroutine das Fell des Pferdes von kleineren Verschmutzungen zu befreien.",
+        "evidence_text_sha256": "8994c05f1b53751f1d408497ee3aeaff7c937acd8e86a5b7a378c8b392d7c245",
+        "statement": "Ein weicher Gummistriegel eignet sich zu Beginn der Putzroutine, um kleinere Verschmutzungen aus dem Pferdefell zu lösen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.sprenger.de/products/gummistriegel",
+        "source_title": "Sprenger – Gummistriegel",
+        "evidence_text": "Auch für eine wohltuende Massage eignet er sich, wenn er in kreisenden Bewegungen genutzt wird.",
+        "evidence_text_sha256": "99da3f8ab3114a4d4d98dd2e6186d07e2c676e6bc109aa66addd37bfe570c285",
+        "statement": "Ein Gummistriegel kann mit kreisenden Bewegungen für eine wohltuende Massage eingesetzt werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.sprenger.de/products/gummistriegel",
+        "source_title": "Sprenger – Gummistriegel",
+        "evidence_text": "Der Striegel liegt angenehm in der Hand und bewegt sich leichtgängig und geschmeidig durch das Pferdefell.",
+        "evidence_text_sha256": "fea4f534be03e4d566e176f305438bd21079c68e5fef972643f7e93201cd6931",
+        "statement": "Die Handhabung des Gummistriegels hängt auch davon ab, wie angenehm er in der Hand liegt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.sprenger.de/products/gummistriegel",
+        "source_title": "Sprenger – Gummistriegel",
+        "evidence_text": "Das Material Gummi ist langlebig, robust und lässt sich nach der Anwendung ganz einfach reinigen.",
+        "evidence_text_sha256": "126df1902a7069fe57fce0304231058904fe040416b793bcbae3e6953f129bf5",
+        "statement": "Gummi lässt sich nach dem Putzen reinigen und ist ein robustes Material.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/striegel-beratung/",
+        "anchor": "Beratung Striegel",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/striegel-faq/",
+        "anchor": "FAQ Striegel",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/striegel-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/striegel-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "striegel-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Gummistriegel",
+      "Pferde",
+      "Striegel",
+      "Gummi",
+      "Pferdepflege",
+      "Fellpflege",
+      "Schmutz",
+      "Fell"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Kaufkriterien betreffen einen einzigen Gummistriegel; eine Tabelle liefert keinen eigenständigen Vergleichsnutzen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false,
+  "source_approval_provenance": "Sprenger manufacturer original-product description, source text verified in original page on 2026-11-24."
+}
