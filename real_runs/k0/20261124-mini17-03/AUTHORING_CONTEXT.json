@@ -1,0 +1,175 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Federstriegel für Pferde",
+    "target_keyword": "federstriegel pferd",
+    "category": "striegel-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "25197e3dd38a11561da93ff1c0bc55e8053ddb738fd98704b9876646be0ef288"
+  },
+  "content_profile": {
+    "search_intent": "Auswahl und Nutzung eines Federstriegels für Pferde"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.equiva.com/4horses-federstriegel-essential-636583",
+          "source_title": "4HORSES – Federstriegel Essential bei EQUIVA"
+        },
+        {
+          "source_url": "https://www.equiva.com/pferd/pflegeprodukte/putzzeug",
+          "source_title": "EQUIVA – Pferdeputzzeug"
+        }
+      ],
+      "claims": [
+        "Der Griff eines Federstriegels kann gepolstert sein und dadurch angenehm in der Hand liegen.",
+        "Ein Federstriegel eignet sich zum Lösen von grobem und festem Schmutz bei der Fellpflege.",
+        "Eine verstellbare Handschlaufe kann den Sitz und die Handhabung des Federstriegels verbessern.",
+        "Beim Striegeln werden kreisende Bewegungen genutzt, während empfindliche Stellen wie Kopf und Beine lieber gebürstet werden."
+      ],
+      "fresh_research_reference_date": "2026-11-24"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "federstriegel pferd",
+      "topic": "Federstriegel für Pferde",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "striegel-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Federstriegel passend nach Griff, Schmutzentfernung und Körperbereich auswählen",
+      "decision_criteria": [
+        "Greifbarer Federstriegel mit gepolstertem Handstück",
+        "Geeigneter Einsatz bei fester Verschmutzung",
+        "Sicherer Umgang an empfindlichen Stellen"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.equiva.com/4horses-federstriegel-essential-636583",
+        "source_title": "4HORSES – Federstriegel Essential bei EQUIVA",
+        "evidence_text": "Der Federstriegel Essential von 4HORSES überzeugt durch sein gepolstertes Handstück in edler Leder-Optik, das dir eine besonders gute Griffigkeit bietet.",
+        "evidence_text_sha256": "6a891bd4f2a21bcf047378c290d1e1f716a7930dd3bc28b63b2eae28368276b2",
+        "statement": "Der Griff eines Federstriegels kann gepolstert sein und dadurch angenehm in der Hand liegen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.equiva.com/4horses-federstriegel-essential-636583",
+        "source_title": "4HORSES – Federstriegel Essential bei EQUIVA",
+        "evidence_text": "Ideal für die tägliche Pflege entfernt dieser Striegel groben Schmutz mühelos und löst festen Dreck ohne viel Aufwand.",
+        "evidence_text_sha256": "d79df078a55aedd6cc35b2e02036dcea8a928cef44e914fb81ad2c421793a9c8",
+        "statement": "Ein Federstriegel eignet sich zum Lösen von grobem und festem Schmutz bei der Fellpflege.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.equiva.com/4horses-federstriegel-essential-636583",
+        "source_title": "4HORSES – Federstriegel Essential bei EQUIVA",
+        "evidence_text": "Die verstellbare Handschlaufe ermöglicht eine optimale Anpassung, sodass der Striegel angenehm in der Hand liegt und eine einfache Handhabung gewährleistet ist.",
+        "evidence_text_sha256": "9cd08164b7341c7e914c7bce95a4b10c75cdbd166a338d52a941d90f19d5a21a",
+        "statement": "Eine verstellbare Handschlaufe kann den Sitz und die Handhabung des Federstriegels verbessern.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.equiva.com/pferd/pflegeprodukte/putzzeug",
+        "source_title": "EQUIVA – Pferdeputzzeug",
+        "evidence_text": "Man striegelt das gesamte Pferd in kreisenden Bewegungen, am Kopf und an den Beinen sollte man aber zu Bürsten und Kardätschen greifen, da diese Stellen sehr empfindlicher sind.",
+        "evidence_text_sha256": "448e1aeec271a6ee82cfdb23a47ed9b58c18adc3dca8fdc78c3932531ec29079",
+        "statement": "Beim Striegeln werden kreisende Bewegungen genutzt, während empfindliche Stellen wie Kopf und Beine lieber gebürstet werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/striegel-beratung/",
+        "anchor": "",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/striegel-faq/",
+        "anchor": "",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/striegel-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/striegel-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "striegel-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Pferd",
+      "Striegel",
+      "Bürste",
+      "Pferdepflege",
+      "Fellpflege",
+      "Kardätsche",
+      "Federstriegel",
+      "Schmutz",
+      "Fell"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Bei der Auswahl eines Federstriegels werden die einzelnen Eigenschaften sinnvoll im Fließtext erklärt."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false,
+  "source_approval_provenance": "EQUIVA official retail and own-brand original fact excerpts verified against publisher text 2026-11-24."
+}
