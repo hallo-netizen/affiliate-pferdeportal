@@ -111,14 +111,8 @@
         "block": "criteria"
       },
       {
-        "role": "semantic_related",
-        "href": "/fuetterung/",
-        "anchor": "Fütterung",
-        "block": "details"
-      },
-      {
         "role": "further_information",
-        "href": "/fuetterung/fuetterung-heuqualitaet/",
+        "href": "/fuetterung/",
         "anchor": "",
         "block": "further_information"
       }
@@ -129,17 +123,12 @@
         "active": true
       },
       {
-        "href": "/fuetterung/fuetterung-heuqualitaet/",
-        "active": true
-      },
-      {
         "href": "/fuetterung/",
         "active": true
       }
     ],
     "runtime_link_roles": [
       "parent_category",
-      "semantic_related",
       "further_information"
     ],
     "wordpress_category": {
