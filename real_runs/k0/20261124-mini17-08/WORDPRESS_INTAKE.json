@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie hoch sollte ein Zaun für Pferde sein?",
+      "target_keyword": "Wie hoch muss ein Zaun für Pferde sein?",
+      "category": "alltags-pferde-haltungsformen",
+      "article_type": "FAQ",
+      "plan_slot": "4ebcf891501d48c880f4d9bce43c4c4938588f63d4f055839aace1413b955dd3"
+    }
+  ],
+  "batch_sha256": "ce3bc42edd4762d296d46db12829b4630c1c45abe55a1a6ffd6d18f74384b3d1"
+}
