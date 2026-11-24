@@ -1,0 +1,12 @@
+{
+  "contract": "K0_WRITER_REVISION_REQUEST_V1",
+  "status": "RETURN_TO_SAME_WRITER",
+  "job_id": "k0w-a9f2052716e405b5e5eab79d",
+  "writer_job_sha256": "89ed02f39a2a22f631726b9581e6aca66d4fec0ada361714d428825c4768d2e7",
+  "draft_sha256": "971294462848a00294343b7d70dc80ba0e99889da9f22d7dc64ba052e87919f2",
+  "rule_id": "writer.list_before_fazit_bridge",
+  "reason": "WRITER_LIST_BEFORE_FAZIT_BRIDGE_REQUIRED",
+  "minimum_bridge_words": 18,
+  "instruction": "Rewrite the SAME draft: immediately after the final list before Fazit, add a meaningful, source-supported prose paragraph of at least 18 words ending with a complete sentence. Do not repeat the bullets as filler. Keep the original job, facts, links, title, category, article type, keyword and K0 rules. Respect the existing word and section limits, and resubmit this same draft to the original writer workflow.",
+  "publish_allowed": false
+}
