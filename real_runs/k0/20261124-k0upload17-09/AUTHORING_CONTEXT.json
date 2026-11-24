@@ -116,8 +116,8 @@
       },
       {
         "role": "further_information",
-        "href": "/category/pferdegesundheit-verstehen/",
-        "anchor": "Pferdegesundheit verstehen",
+        "href": "/fuetterung/fuetterung-wasser/",
+        "anchor": "Wasser",
         "block": "further_information"
       }
     ],
@@ -127,7 +127,7 @@
         "active": true
       },
       {
-        "href": "/category/pferdegesundheit-verstehen/",
+        "href": "/fuetterung/fuetterung-wasser/",
         "active": true
       }
     ],
