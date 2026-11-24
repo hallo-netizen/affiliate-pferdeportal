@@ -1,0 +1,175 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Was kostet Heu für ein Pferd im Monat?",
+    "target_keyword": "Was kostet Heu für ein Pferd im Monat?",
+    "category": "pferdeernaehrung-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "33a83efcc45409b750bc4231424f6b83651ef839d708d65b3267696c78e55165"
+  },
+  "content_profile": {
+    "search_intent": "Monatliche Heukosten für ein einzelnes Pferd abhängig von Futtermenge, Heupreis, Ballenform und Lieferkosten"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://llh.hessen.de/unternehmensfuehrung/markt-preise/futtermittel/erzeuger-heustroh/",
+          "source_title": "Landesbetrieb Landwirtschaft Hessen – Hessen Heu & Stroh"
+        }
+      ],
+      "claims": [
+        "Die hessischen Heupreise gelten für Standardqualität und Großverbraucher ab Lager, pro Tonne ohne Mehrwertsteuer.",
+        "Der Landesbetrieb nennt für Heu in Rundballen beim ersten Schnitt am 17.11.2026 durchschnittlich 203 Euro pro Tonne.",
+        "Der Landesbetrieb nennt für Heu in kleinen HD-Ballen am 17.11.2026 durchschnittlich 230 Euro pro Tonne.",
+        "Die Heu- und Strohpreise werden in Hessen jeweils zur Monatsmitte notiert."
+      ],
+      "fresh_research_reference_date": "2026-11-24"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was kostet Heu für ein Pferd im Monat?",
+      "topic": "Was kostet Heu für ein Pferd im Monat?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was kostet Heu für ein Pferd im Monat?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://llh.hessen.de/unternehmensfuehrung/markt-preise/futtermittel/erzeuger-heustroh/",
+        "source_title": "Landesbetrieb Landwirtschaft Hessen – Hessen Heu & Stroh",
+        "evidence_text": "Preise für handelssübliche, lagerfähige Standardqualität beim Absatz an Großverbraucher ab Lager in Euro je Tonne ohne MwSt. im Marktgebiet Hessen.",
+        "evidence_text_sha256": "c446b9d302da6a5b28cea1912d0e2ab3e1c366d651c09490874dd9887bca84ca",
+        "statement": "Die hessischen Heupreise gelten für Standardqualität und Großverbraucher ab Lager, pro Tonne ohne Mehrwertsteuer.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://llh.hessen.de/unternehmensfuehrung/markt-preise/futtermittel/erzeuger-heustroh/",
+        "source_title": "Landesbetrieb Landwirtschaft Hessen – Hessen Heu & Stroh",
+        "evidence_text": "Heu, Rundballen, 1. Schnitt  | 195,00  | 220,00  | 203,00",
+        "evidence_text_sha256": "8e2b2e449a911dd89e24618bc925b090a9665d86ae5ce9205985a488276c8307",
+        "statement": "Der Landesbetrieb nennt für Heu in Rundballen beim ersten Schnitt am 17.11.2026 durchschnittlich 203 Euro pro Tonne.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://llh.hessen.de/unternehmensfuehrung/markt-preise/futtermittel/erzeuger-heustroh/",
+        "source_title": "Landesbetrieb Landwirtschaft Hessen – Hessen Heu & Stroh",
+        "evidence_text": "Heu, kleine HD-Ballen, 1. Schnitt  | 220,00  | 240,00  | 230,00",
+        "evidence_text_sha256": "b075c8ef7651717459a6e85572efe81439c3f1f2caec5284bbeb7c731146a272",
+        "statement": "Der Landesbetrieb nennt für Heu in kleinen HD-Ballen am 17.11.2026 durchschnittlich 230 Euro pro Tonne.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://llh.hessen.de/unternehmensfuehrung/markt-preise/futtermittel/erzeuger-heustroh/",
+        "source_title": "Landesbetrieb Landwirtschaft Hessen – Hessen Heu & Stroh",
+        "evidence_text": "Notierung jeweils Mitte des Monats",
+        "evidence_text_sha256": "caf443f2d3094fa5e411cd7fcb3cc734dcfec5f182c8caa60d07e44f65139a19",
+        "statement": "Die Heu- und Strohpreise werden in Hessen jeweils zur Monatsmitte notiert.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "anchor": "",
+        "block": "criteria"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/fuetterung/",
+        "anchor": "",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/fuetterung/fuetterung-heuqualitaet/",
+        "anchor": "",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/fuetterung/",
+        "active": true
+      },
+      {
+        "href": "/fuetterung/fuetterung-heuqualitaet/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Heukosten",
+      "Pferd",
+      "Monat",
+      "Preis",
+      "Euro",
+      "Futtermenge",
+      "Heu",
+      "Kosten"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Monatskosten ergeben sich aus Verbrauch mal Kilopreis plus regionalen Nebenkosten; eine allgemeine Tabelle mit festen Monatswerten würde irreführende Pauschalkosten nahelegen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false,
+  "source_approval_provenance": "Landesbetrieb Landwirtschaft Hessen, Marktinformation Woche 47 2026 dated 17 November 2026, verified on official public authority site."
+}
