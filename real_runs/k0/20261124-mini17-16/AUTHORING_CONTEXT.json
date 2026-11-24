@@ -112,8 +112,8 @@
       },
       {
         "role": "semantic_related",
-        "href": "/category/heupruefer-faq/",
-        "anchor": "FAQ Heuprüfer",
+        "href": "/fuetterung/",
+        "anchor": "Fütterung",
         "block": "details"
       },
       {
@@ -133,7 +133,7 @@
         "active": true
       },
       {
-        "href": "/category/heupruefer-faq/",
+        "href": "/fuetterung/",
         "active": true
       }
     ],
