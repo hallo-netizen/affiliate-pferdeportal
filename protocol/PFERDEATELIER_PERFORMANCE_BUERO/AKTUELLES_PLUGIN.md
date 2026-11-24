@@ -11,8 +11,8 @@ Aktuelle freigegebene Testversion:
 - GitHub-Nachweis: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PRUEFNACHWEIS_6.72.375.md
 
 Status:
-- 6.72.374 live ausgewertet: kleiner CPU-Gewinn, Hauptrest der Cache-Wiederholung nicht beseitigt
-- 6.72.375 bündelt vier separat bewiesene Restursachen
-- lokal vollständig Alt/Neu-, Dynamik-, Funktions-, Hook-, Schreibweg-, Lint- und ZIP-geprüft
-- noch nicht durch neuen PASSIV-Live-Lauf bestätigt
-- nächster Schritt: 6.72.375 installieren, genau einen PASSIV-Gesamtlauf ausführen und danach Stand + aktuelles Plugin erneut protokollieren
+- 6.72.375 ist live installiert und Source-Fingerprint-geprüft.
+- Live Pferdesättel: 2.583,26 ms Wall / 1.214,68 ms CPU / 135.828 Cache-Hits / 310 Queries.
+- Cache-Hits und Queries gegenüber 6.72.374 unverändert; großer Live-Performanceeffekt daher nicht bewiesen.
+- 6.72.375 bleibt wegen bestandenem Funktionsschutz aktuell; kein Rollback und kein neues Einzel-Fix-Paket.
+- nächster Arbeitsblock: mehrere belegte Restursachen im Objektcache-/Inventar-/Rankingpfad sammeln, gemeinsam simulieren und erst dann neues Paket freigeben.
