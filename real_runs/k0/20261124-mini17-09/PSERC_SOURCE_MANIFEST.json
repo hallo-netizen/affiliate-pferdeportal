@@ -1,0 +1,342 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 17,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Gummistriegel für Pferde",
+        "target_keyword": "gummistriegel pferd",
+        "category": "striegel-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "613439e62c3b90f20f26a866b51744ff8c59e088b8f9e28de2f7ee2b2e31b3a2"
+      },
+      {
+        "title": "Striegel und Bürste bei Pferden im Vergleich",
+        "target_keyword": "pferde striegel bürste",
+        "category": "striegel-vergleich",
+        "article_type": "Vergleich",
+        "plan_slot": "6cd87fc691826b5cff651aba982e9e8820f1dcafca7bd09d63167a684987232a"
+      },
+      {
+        "title": "Federstriegel für Pferde",
+        "target_keyword": "federstriegel pferd",
+        "category": "striegel-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "25197e3dd38a11561da93ff1c0bc55e8053ddb738fd98704b9876646be0ef288"
+      },
+      {
+        "title": "Wie muss eine Pferdekoppel eingezäunt werden?",
+        "target_keyword": "Wie muss eine Pferdekoppel eingezäunt werden?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "47b429704f7af22e8f536a562f0710572194658cf3b1caa6979a5e98d1939b75"
+      },
+      {
+        "title": "Ist eine Pferdekoppel genehmigungspflichtig?",
+        "target_keyword": "Ist eine Pferdekoppel genehmigungspflichtig?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "d81e39831229e82a3801916ec1c179822fa593deab8ee24d89c8afe44054539d"
+      },
+      {
+        "title": "Warum kann Stroh für Pferde problematisch sein?",
+        "target_keyword": "Warum kein Stroh für Pferde?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "cfdba6131ff7efbbc979d71227e5b718cc252715ec67b947ffdcfc6dc670b529"
+      },
+      {
+        "title": "Welche Nachteile kann Grummet für Pferde haben?",
+        "target_keyword": "Warum kein Grummet für Pferde?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "6ce77fe0fc1a0cd2c06a34705ac0f269eb49c19cfdd93ff87cc337dbf90a9243"
+      },
+      {
+        "title": "Wie hoch sollte ein Zaun für Pferde sein?",
+        "target_keyword": "Wie hoch muss ein Zaun für Pferde sein?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "4ebcf891501d48c880f4d9bce43c4c4938588f63d4f055839aace1413b955dd3"
+      },
+      {
+        "title": "Was kostet Heu für ein Pferd im Monat?",
+        "target_keyword": "Was kostet Heu für ein Pferd im Monat?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "33a83efcc45409b750bc4231424f6b83651ef839d708d65b3267696c78e55165"
+      },
+      {
+        "title": "Ist langes oder kurzes Heu für Pferde besser?",
+        "target_keyword": "Ist langes oder kurzes Heu für Pferde besser?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "fa5cf275c3dca79034fb20816019e0f45d31e50842a8fb29a98a193af3e51e1d"
+      },
+      {
+        "title": "Was mögen Pferde gar nicht?",
+        "target_keyword": "Was mögen Pferde gar nicht?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "ffda97144bb7c08a9897f3458d8c36a07d875c76c7c11c4ea272bb79628d7227"
+      },
+      {
+        "title": "Ist Reiten der härteste Sport?",
+        "target_keyword": "Ist reiten der härteste Sport?",
+        "category": "reiterleben-community",
+        "article_type": "FAQ",
+        "plan_slot": "8c85a409ca878f4fdc7bd8211e41eee4769a720eb5f1c68e4e724a15f9eca02b"
+      },
+      {
+        "title": "Wie viele Kilometer sollte ein Pferd täglich laufen?",
+        "target_keyword": "Wie viel km sollte ein Pferd am Tag laufen?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "890be6c2f8c64b507081518d2ff7da2dd8c3688f95a881c0596ee8cb0ca32d93"
+      },
+      {
+        "title": "Wie viel Heu braucht ein Pferd mit 500 Kilogramm?",
+        "target_keyword": "Wie viel Kilo Heu braucht ein 500 kg Pferd?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "21a1ad66c0e76899b8dea3add60374a0028384f626ce35b68a4ffa55bb2180f5"
+      },
+      {
+        "title": "Einen Trainingsplan für das eigene Pferd erstellen",
+        "target_keyword": "Wie erstelle ich einen Trainingsplan für mein Pferd?",
+        "category": "trainingsplan-vorlage-uebungen",
+        "article_type": "Anleitung",
+        "plan_slot": "088840b10fef71fc0e7ad82b362fe58beb6e24fd15004c75c170445d0155d423"
+      },
+      {
+        "title": "Ist feines oder grobes Heu für Pferde besser?",
+        "target_keyword": "Ist feines oder grobes Heu für Pferde besser?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "1dc5f3a78401d0eccbfc4a0980bcf7d333410d7b1cc0b8b4a984b10afbb2b915"
+      },
+      {
+        "title": "Wie oft sollten Pferde zum Muskelaufbau longiert werden?",
+        "target_keyword": "Wie oft Longieren zum Muskelaufbau?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "950cfe9ac3d8de8b037290bd93ca52b7516b63f7b5b90ed55fae738c18a99e3e"
+      }
+    ],
+    "batch_sha256": "56616af71a149de7f161dd1ec3e87d2f3d861b13dda94172411000983d5bbef8"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Gummistriegel für Pferde",
+        "target_keyword": "gummistriegel pferd",
+        "category": "striegel-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "613439e62c3b90f20f26a866b51744ff8c59e088b8f9e28de2f7ee2b2e31b3a2"
+      },
+      "order_id": "TXE-7ac90417d7edf1d11c3fb8850ecc15c5",
+      "article_id": "article:464847ea3ff31ef49c1a7e57",
+      "search_intent": "Kaufberatung zum Gummistriegel für das Pferd mit Eigenschaften und Einsatz"
+    },
+    {
+      "metadata_binding": {
+        "title": "Striegel und Bürste bei Pferden im Vergleich",
+        "target_keyword": "pferde striegel bürste",
+        "category": "striegel-vergleich",
+        "article_type": "Vergleich",
+        "plan_slot": "6cd87fc691826b5cff651aba982e9e8820f1dcafca7bd09d63167a684987232a"
+      },
+      "order_id": "TXE-d6c68f1dc7f619c7732bb79e767fb4be",
+      "article_id": "article:64e6a746af8401abf1e166e3",
+      "search_intent": "Sachlicher Vergleich von Pferdestriegel und Pferdebürste und ihren unterschiedlichen Aufgaben"
+    },
+    {
+      "metadata_binding": {
+        "title": "Federstriegel für Pferde",
+        "target_keyword": "federstriegel pferd",
+        "category": "striegel-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "25197e3dd38a11561da93ff1c0bc55e8053ddb738fd98704b9876646be0ef288"
+      },
+      "order_id": "TXE-4a4cb44e7bc0ad28ef1f7da84fc42e3d",
+      "article_id": "article:7d6769e6c22a1137cacf55b7",
+      "search_intent": "Auswahl und Nutzung eines Federstriegels für Pferde"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie muss eine Pferdekoppel eingezäunt werden?",
+        "target_keyword": "Wie muss eine Pferdekoppel eingezäunt werden?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "47b429704f7af22e8f536a562f0710572194658cf3b1caa6979a5e98d1939b75"
+      },
+      "order_id": "TXE-d0c65bba5ccba82dac8dc3e1b7d7e9ba",
+      "article_id": "article:a7e2df8c8c1c9066e149e4e1",
+      "search_intent": "Anforderungen an die Einzäunung einer Pferdekoppel im Alltag"
+    },
+    {
+      "metadata_binding": {
+        "title": "Ist eine Pferdekoppel genehmigungspflichtig?",
+        "target_keyword": "Ist eine Pferdekoppel genehmigungspflichtig?",
+        "category": "recht-finanzen-organisation",
+        "article_type": "FAQ",
+        "plan_slot": "d81e39831229e82a3801916ec1c179822fa593deab8ee24d89c8afe44054539d"
+      },
+      "order_id": "TXE-c292d57920ca49ab013b245c33ac1031",
+      "article_id": "article:94edab5401078461fd172b54",
+      "search_intent": "Klärung der Genehmigungspflicht einer Pferdekoppel, ohne pauschale Rechtsbehauptungen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Warum kann Stroh für Pferde problematisch sein?",
+        "target_keyword": "Warum kein Stroh für Pferde?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "cfdba6131ff7efbbc979d71227e5b718cc252715ec67b947ffdcfc6dc670b529"
+      },
+      "order_id": "TXE-4951b85b0f1d9a0e51735841a1a3037d",
+      "article_id": "article:455463da32ea31235fef1d9d",
+      "search_intent": "Gründe, warum Stroh als Futter für Pferde kritisch beurteilt wird"
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Nachteile kann Grummet für Pferde haben?",
+        "target_keyword": "Warum kein Grummet für Pferde?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "6ce77fe0fc1a0cd2c06a34705ac0f269eb49c19cfdd93ff87cc337dbf90a9243"
+      },
+      "order_id": "TXE-f0b9aa9b5a28352a85c7943448127a90",
+      "article_id": "article:5e8f5310d0ac6ee297ce3d11",
+      "search_intent": "Gründe, warum Grummet als Pferdefutter kritisch beurteilt wird"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie hoch sollte ein Zaun für Pferde sein?",
+        "target_keyword": "Wie hoch muss ein Zaun für Pferde sein?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "4ebcf891501d48c880f4d9bce43c4c4938588f63d4f055839aace1413b955dd3"
+      },
+      "order_id": "TXE-f0acecd1d9d1f96302f739d22dd9df8c",
+      "article_id": "article:f7ae69db0e1f5e879ee3693d",
+      "search_intent": "Geeignete Zaunhöhe für Pferde unter Berücksichtigung der Haltungsumstände"
+    },
+    {
+      "metadata_binding": {
+        "title": "Was kostet Heu für ein Pferd im Monat?",
+        "target_keyword": "Was kostet Heu für ein Pferd im Monat?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "33a83efcc45409b750bc4231424f6b83651ef839d708d65b3267696c78e55165"
+      },
+      "order_id": "TXE-ae9fd9de50abfa6274705d6d147a2070",
+      "article_id": "article:826ee0f969c58b792e20244c",
+      "search_intent": "Monatliche Heukosten für ein einzelnes Pferd"
+    },
+    {
+      "metadata_binding": {
+        "title": "Ist langes oder kurzes Heu für Pferde besser?",
+        "target_keyword": "Ist langes oder kurzes Heu für Pferde besser?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "fa5cf275c3dca79034fb20816019e0f45d31e50842a8fb29a98a193af3e51e1d"
+      },
+      "order_id": "TXE-9424d4f68dfbda43344f02fe639ac35a",
+      "article_id": "article:48d5fedb658eb3709c20d558",
+      "search_intent": "Unterschiede zwischen langem und kurzem Heu für Pferde"
+    },
+    {
+      "metadata_binding": {
+        "title": "Was mögen Pferde gar nicht?",
+        "target_keyword": "Was mögen Pferde gar nicht?",
+        "category": "pferde-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "ffda97144bb7c08a9897f3458d8c36a07d875c76c7c11c4ea272bb79628d7227"
+      },
+      "order_id": "TXE-be6d6a04293195cd74877c84256658a2",
+      "article_id": "article:ed7590d985a558dfb69488ed",
+      "search_intent": "Was Pferde im Umgang und bei der Haltung deutlich ablehnen können"
+    },
+    {
+      "metadata_binding": {
+        "title": "Ist Reiten der härteste Sport?",
+        "target_keyword": "Ist reiten der härteste Sport?",
+        "category": "reiterleben-community",
+        "article_type": "FAQ",
+        "plan_slot": "8c85a409ca878f4fdc7bd8211e41eee4769a720eb5f1c68e4e724a15f9eca02b"
+      },
+      "order_id": "TXE-0b584e5c0c5cadd01717f0bb22c36a2d",
+      "article_id": "article:a14f48b0bd6964d747ca4652",
+      "search_intent": "Vergleich der körperlichen Anforderungen des Reitens mit anderen Sportarten"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie viele Kilometer sollte ein Pferd täglich laufen?",
+        "target_keyword": "Wie viel km sollte ein Pferd am Tag laufen?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "890be6c2f8c64b507081518d2ff7da2dd8c3688f95a881c0596ee8cb0ca32d93"
+      },
+      "order_id": "TXE-92e5f58e8e4ef7dcfe21b3dca2885ad8",
+      "article_id": "article:810c7d0bbf27a9aaa997b4c2",
+      "search_intent": "Täglicher Bewegungsbedarf eines Pferdes gemessen in Kilometern"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie viel Heu braucht ein Pferd mit 500 Kilogramm?",
+        "target_keyword": "Wie viel Kilo Heu braucht ein 500 kg Pferd?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "21a1ad66c0e76899b8dea3add60374a0028384f626ce35b68a4ffa55bb2180f5"
+      },
+      "order_id": "TXE-0e90f3ab1933a6eac1687a883f8c45b1",
+      "article_id": "article:088e62be61e128f5290438ed",
+      "search_intent": "Heumenge für ein Pferd mit 500 Kilogramm Körpergewicht"
+    },
+    {
+      "metadata_binding": {
+        "title": "Einen Trainingsplan für das eigene Pferd erstellen",
+        "target_keyword": "Wie erstelle ich einen Trainingsplan für mein Pferd?",
+        "category": "trainingsplan-vorlage-uebungen",
+        "article_type": "Anleitung",
+        "plan_slot": "088840b10fef71fc0e7ad82b362fe58beb6e24fd15004c75c170445d0155d423"
+      },
+      "order_id": "TXE-e5ef15387839906ba9e7180946b7ba34",
+      "article_id": "article:3cad0a6f7096b6849ddc517d",
+      "search_intent": "Einen Trainingsplan für das eigene Pferd schrittweise aufstellen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Ist feines oder grobes Heu für Pferde besser?",
+        "target_keyword": "Ist feines oder grobes Heu für Pferde besser?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "1dc5f3a78401d0eccbfc4a0980bcf7d333410d7b1cc0b8b4a984b10afbb2b915"
+      },
+      "order_id": "TXE-88ef083f7fea1ba0fc89b62412610fca",
+      "article_id": "article:608c6eab91ec7e55a2375064",
+      "search_intent": "Unterschiede zwischen feinem und grobem Heu für Pferde"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie oft sollten Pferde zum Muskelaufbau longiert werden?",
+        "target_keyword": "Wie oft Longieren zum Muskelaufbau?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "950cfe9ac3d8de8b037290bd93ca52b7516b63f7b5b90ed55fae738c18a99e3e"
+      },
+      "order_id": "TXE-8f29134a3c50227975e3d7482ef6a0bd",
+      "article_id": "article:9af4f7afc76163280d21bb6c",
+      "search_intent": "Häufigkeit des Longierens zum Muskelaufbau bei Pferden"
+    }
+  ],
+  "manifest_sha256": "87a13d985d249ad6eddffebfca5d9e27e7779d1e7caed91da124046fc6729276"
+}
