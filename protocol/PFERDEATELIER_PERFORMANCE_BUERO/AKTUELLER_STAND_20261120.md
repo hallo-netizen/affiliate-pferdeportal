@@ -2023,3 +2023,25 @@ Messung: pferdeatelier-performance-gesamtanalyse-20261124-142623.json
 - Ergebnis: 6.72.376 funktional und für Cache-Reduktion live bestätigt; keine Aussage eines Speedups.
 - Messdatei im Büro: /pferdeatelier/PERFORMANCE_BUERO/MESSUNGEN/pferdeatelier-performance-gesamtanalyse-20261124-142623.json
 - Nächster Prüfblock: verbleibende 121.246 Cache-Hits und der weiterhin große 1.010er Vollblock in mehreren belegten Ursachen zerlegen; kein neues Paket bis mehrere sichere Punkte gemeinsam simuliert sind.
+
+
+## 2026-11-24 – 6.72.377 als gebündelter Testkandidat freigegeben
+
+- Live bleibt bis Installation 6.72.376.
+- Kein Einzel-Fix: 6.72.377 bündelt mehrere bereits im echten 1.010er-Pferdesättel-Pool gemessene Wiederholungsblöcke.
+- Metadaten-Hotpath 8.080 -> 1.010 Aufrufe (-87,5 %), identischer Ergebnis-Hash.
+- Control: Meta 2.020 -> 1.010; Optionen 9.316 -> 11; Portal/Home 3.030 -> 3; 1.010/1.010 Entscheidungen identisch.
+- Incident: 648 -> 8 Optionslesungen, identischer Hash.
+- eBay Public Checkpoint: 393 -> 1 Optionslesung, 393/393 Entscheidungen identisch.
+- Shared Pool: 1.010 Kandidaten Alt=Neu; Meta 3.812 -> 2.721; Optionen 648 -> 0; identische Reihenfolge.
+- Relevante Filter / externer Objektcache erzwingen weiterhin historischen Einzelpfad.
+- Echte Meta-/Provider-/Notstopp-/Checkpoint-Änderungen mitten im Ablauf werden sofort gesehen.
+- Dateien 66 -> 66; entfernt 0; Funktionen 1.585 -> 1.591; entfernt 0; 1.575 bestehende unverändert.
+- Auswahl, Ranking, Provider-Mix, Fallback, Health, Bilder, Tracking und Rendering unverändert.
+- Produktions-Schreibwege unverändert.
+- PHP 23/23 PASS; finales ZIP nach Re-Extract 66/66, 0 Hashabweichungen, PHP erneut 23/23 PASS.
+- Paket: PFERDEATELIER_AFFILIATE_6.72.377_GEBUENDELT_EXACT_READ_ROOTFIX.zip
+- SHA-256: df04630d846b0417dd0ddb1341cd2321a308ca189e0ade4c7e6adb11b2fce844
+- Büro: /pferdeatelier/PERFORMANCE_BUERO/AKTUELLES_PLUGIN/PFERDEATELIER_AFFILIATE_6.72.377_GEBUENDELT_EXACT_READ_ROOTFIX.zip
+- Prüfnachweis: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PRUEFNACHWEIS_6.72.377.md
+- Nächster Schritt: 6.72.377 installieren und genau einen PASSIV-Gesamtlauf ausführen. Live-Speedup erst danach bewerten.
