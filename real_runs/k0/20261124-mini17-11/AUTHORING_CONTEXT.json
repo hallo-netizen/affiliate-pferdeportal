@@ -1,0 +1,164 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Was mögen Pferde gar nicht?",
+    "target_keyword": "Was mögen Pferde gar nicht?",
+    "category": "pferde-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "ffda97144bb7c08a9897f3458d8c36a07d875c76c7c11c4ea272bb79628d7227"
+  },
+  "content_profile": {
+    "search_intent": "Was Pferde im Umgang und bei der Haltung deutlich ablehnen können"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+          "source_title": "Deutscher Tierschutzbund – Haltung von Pferden"
+        }
+      ],
+      "claims": [
+        "Pferde brauchen den Kontakt zu Artgenossen und reagieren auf dauerhafte soziale Isolation.",
+        "Pferde reagieren auf wahrgenommene Gefahren und warnen ihre Artgenossen.",
+        "Angst und Alarm zeigen Pferde unter anderem durch Kopfhaltung, Ohren, Schnauben oder Stampfen.",
+        "Dauerhafte Boxenhaltung ohne Auslauf und Artgenossen entspricht nicht den natürlichen Bedürfnissen von Pferden."
+      ],
+      "fresh_research_reference_date": "2026-11-24"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was mögen Pferde gar nicht?",
+      "topic": "Was mögen Pferde gar nicht?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was mögen Pferde gar nicht?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "Pferde sind Herdentiere und haben ein ausgeprägtes Bedürfnis, ihre Artgenossen ständig sehen, hören, riechen und ihre Nähe spüren zu können.",
+        "evidence_text_sha256": "8bb8c3cacdb499f2ec01e24571979061255c526aa2155765499647e503c6be7d",
+        "statement": "Pferde brauchen den Kontakt zu Artgenossen und reagieren auf dauerhafte soziale Isolation.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "Sobald ein Tier eine Gefahr erkennt oder zu erkennen glaubt, signalisiert es seinen Artgenossen, dass etwas nicht stimmt.",
+        "evidence_text_sha256": "34be610cb7ced875c810f2f87879005d9d2a915d3c0f7238021ffc3d91fe818c",
+        "statement": "Pferde reagieren auf wahrgenommene Gefahren und warnen ihre Artgenossen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "Dazu hebt es den Kopf, richtet Augen und Ohren in die Richtung der Gefahr aus und schnaubt nervös oder stampft auf.",
+        "evidence_text_sha256": "5d58b1a5ffb0e53685a5af23eee0df57505612851d949d9bbdcdf44976ca12e5",
+        "statement": "Angst und Alarm zeigen Pferde unter anderem durch Kopfhaltung, Ohren, Schnauben oder Stampfen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "Weil die Pferde ihre arttypischen Verhaltensweisen nicht ausleben können, ist die ganztägige Boxenhaltung ohne Weidegang oder Auslauf mit anderen Pferden keine tiergerechte Haltungsform.",
+        "evidence_text_sha256": "4fd9a6d43d688942c394e1dcee9c5aaf8393073cc1240a6f286df8e734869de9",
+        "statement": "Dauerhafte Boxenhaltung ohne Auslauf und Artgenossen entspricht nicht den natürlichen Bedürfnissen von Pferden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-verstehen/",
+        "anchor": "",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Pferd",
+      "Angst",
+      "Verhalten",
+      "Herde",
+      "Stress",
+      "Artgenossen",
+      "Auslauf"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Einzelne Bedingungen und der konkrete Pferdebedarf werden als zusammenhängende Erklärung mit Checkliste verständlicher als in einer vereinfachenden Tabelle."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false,
+  "source_approval_provenance": "German Tierschutzbund original official Pferdehaltung brochure, primary source excerpts verified 2026-11-24."
+}
