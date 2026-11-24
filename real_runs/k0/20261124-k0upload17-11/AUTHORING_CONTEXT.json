@@ -1,0 +1,165 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wie viel Wasser braucht ein Pferd durchschnittlich am Tag?",
+    "target_keyword": "Wie viel Wasser braucht ein Pferd durchschnittlich pro Tag?",
+    "category": "pferdeernaehrung-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "d8f289d6884f4c7cb13353423f0a639d0dea81da02b0a6c18e94c4d373228519"
+  },
+  "content_profile": {
+    "search_intent": "Durchschnittlicher täglicher Wasserbedarf eines Pferdes"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/encouraging-your-horse-to-drink",
+          "source_title": "University of Minnesota – Encouraging Your Horse to Drink"
+        },
+        {
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids?ruleredirectid=445",
+          "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses"
+        }
+      ],
+      "claims": [
+        "Ein typisches ausgewachsenes Pferd benötigt täglich viele Liter Wasser.",
+        "Hitze oder Arbeit erhöhen häufig den Wasserbedarf.",
+        "Der Mindestwasserbedarf hängt vom Körpergewicht ab.",
+        "Sauberes Wasser ist für alle Pferde notwendig."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie viel Wasser braucht ein Pferd durchschnittlich pro Tag?",
+      "topic": "Wie viel Wasser braucht ein Pferd durchschnittlich am Tag?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie viel Wasser braucht ein Pferd durchschnittlich pro Tag?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/encouraging-your-horse-to-drink",
+        "source_title": "University of Minnesota – Encouraging Your Horse to Drink",
+        "evidence_text": "A 1,000-pound horse should drink about 8 to 10 gallons of water daily.",
+        "evidence_text_sha256": "e9125212c9ece5693ed22ae46c28bb9c148e4ba0f1b3b48a8dec340750d1cf7f",
+        "statement": "Ein typisches ausgewachsenes Pferd benötigt täglich viele Liter Wasser.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/encouraging-your-horse-to-drink",
+        "source_title": "University of Minnesota – Encouraging Your Horse to Drink",
+        "evidence_text": "In general, horses will need more water when they are exercising or when it’s hot outside.",
+        "evidence_text_sha256": "e9c78b408d1407c9e9ee1b5d1178272cbc2f1c932ec83bc571f6212e5a597c4a",
+        "statement": "Hitze oder Arbeit erhöhen häufig den Wasserbedarf.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids?ruleredirectid=445",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses",
+        "evidence_text": "The average minimal maintenance daily water requirement of a sedentary adult horse in a thermoneutral environment is 5 L/100 kg body weight/day.",
+        "evidence_text_sha256": "5ba37281acc9d24089195f26e6ee2c056b1d16ecb403f18ffb21de6f74559f77",
+        "statement": "Der Mindestwasserbedarf hängt vom Körpergewicht ab.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids?ruleredirectid=445",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses",
+        "evidence_text": "Access to clean, fresh water is essential to all horses.",
+        "evidence_text_sha256": "d926755ea6b4f822d157ba08f74d942f7762df04018610ecac55e8e72a32cd67",
+        "statement": "Sauberes Wasser ist für alle Pferde notwendig.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "anchor": "pferdeernaehrung-verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/fuetterung/fuetterung-wasser/",
+        "anchor": "Wasser",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/fuetterung/fuetterung-wasser/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Wasser",
+      "Wasserbedarf",
+      "Trinken",
+      "Menge",
+      "Liter",
+      "Pferde",
+      "Durst"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die konkrete Leserfrage lässt sich durch sachliche Einordnung und praktische Handlungsschritte beantworten; eine künstliche Vergleichstabelle hätte keinen Mehrwert."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
