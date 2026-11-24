@@ -2005,3 +2005,21 @@ Messung: pferdeatelier-performance-gesamtanalyse-20261124-104853.json
 - Prüfnachweis: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PRUEFNACHWEIS_6.72.376.md
 - Büro: /pferdeatelier/PERFORMANCE_BUERO/AKTUELLES_PLUGIN/PFERDEATELIER_AFFILIATE_6.72.376_GEBUENDELT_CONTEXT_READ_ROOTFIX.zip
 - Nächster Schritt: nur 6.72.376 installieren und genau einen PASSIV-Gesamtlauf ausführen; Livewirkung erst danach bewerten.
+
+
+## 2026-11-24 – 6.72.376 LIVE ausgewertet
+
+Messung: pferdeatelier-performance-gesamtanalyse-20261124-142623.json
+- Affiliate-Zentrale 6.72.376 live aktiv.
+- Hauptdatei-Fingerprint live: 4ecb3b07e74c61f81dabbcd358bc4b60daceefd215367cbbc644697706ee5614; stimmt exakt mit dem freigegebenen 6.72.376-ZIP überein.
+- Pferdesättel: 5.332,37 ms Wall / 1.493,98 ms CPU / 121.246 Cache-Hits / 310 Queries.
+- Vergleich 6.72.375: 2.583,26 / 1.214,68 / 135.828 / 310.
+- Cache-Hits: 135.828 -> 121.246 = -14.582 bzw. ca. -10,7 %; Queries unverändert.
+- Sattel-Elternseite: 81.301 -> 78.476 Cache-Hits = -2.825 bzw. ca. -3,5 %; Queries 288 -> 288.
+- Lokaler Ursachenbeweis passt zur Live-Signatur: Pferdesättel Portal/Home 3.030 -> 3, Sattel 513 -> 3; damit entfernt der Fix auf Pferdesättel 3.027 und auf Sattel 510 wiederholte Portal/Home-Lesungen. Die live verschwundenen Cache-Hits skalieren in derselben Größenordnung mit dieser Differenz.
+- Daher ist die Reduktion der internen Cache-Wiederholung durch 6.72.376 ursächlich belegt.
+- Ein Live-Speedup ist NICHT belegt: Wall +106 % und CPU +23 % auf Pferdesättel; gleichzeitig höhere Serverlast ca. 65/66/65 statt 51/52/57 und gemeinsame Vergleichsrouten im neuen Lauf im Mittel rund +9 % CPU. Der Lauf ist für Gesamtgeschwindigkeit ungünstiger.
+- OPcache-Messung erneut nahe Restart (104 s), alle Frontendrequests eingeloggt.
+- Ergebnis: 6.72.376 funktional und für Cache-Reduktion live bestätigt; keine Aussage eines Speedups.
+- Messdatei im Büro: /pferdeatelier/PERFORMANCE_BUERO/MESSUNGEN/pferdeatelier-performance-gesamtanalyse-20261124-142623.json
+- Nächster Prüfblock: verbleibende 121.246 Cache-Hits und der weiterhin große 1.010er Vollblock in mehreren belegten Ursachen zerlegen; kein neues Paket bis mehrere sichere Punkte gemeinsam simuliert sind.
