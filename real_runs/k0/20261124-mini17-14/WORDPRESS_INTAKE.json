@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie viel Heu braucht ein Pferd mit 500 Kilogramm?",
+      "target_keyword": "Wie viel Kilo Heu braucht ein 500 kg Pferd?",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "21a1ad66c0e76899b8dea3add60374a0028384f626ce35b68a4ffa55bb2180f5"
+    }
+  ],
+  "batch_sha256": "91c4588649bc91355839bf31981898521878a00fc0ab52d89cc63621742e3d06"
+}
