@@ -156,7 +156,7 @@
     ],
     "wordpress_category": {
       "id": 0,
-      "slug": "pferdeernaehrung-verstehen",
+      "slug": "trainingsplan-vorlage-uebungen",
       "taxonomy": "category",
       "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
     },
