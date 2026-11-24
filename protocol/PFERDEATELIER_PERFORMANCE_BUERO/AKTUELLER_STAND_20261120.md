@@ -1964,3 +1964,18 @@ Wichtig:
 - Prüfnachweis: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PRUEFNACHWEIS_6.72.375.md
 - Büro-Ablage aktuell: /pferdeatelier/PERFORMANCE_BUERO/AKTUELLES_PLUGIN/PFERDEATELIER_AFFILIATE_6.72.375_GEBUENDELT_META_READ_ROOTFIX.zip
 - Nächster Schritt: ausschließlich 6.72.375 installieren und genau einen PASSIV-Gesamtlauf ausführen; erst danach Live-Wirkung bewerten.
+
+
+## 2026-11-24 – 6.72.375 LIVE ausgewertet
+
+Messung: pferdeatelier-performance-gesamtanalyse-20261124-104853.json
+- Affiliate-Zentrale 6.72.375 live aktiv; Source-Fingerprints von Hauptdatei/eBay/eBay-Run stimmen exakt mit dem ausgegebenen 6.72.375-Paket überein.
+- Pferdesättel: 2.583,26 ms Wall / 1.214,68 ms CPU / 135.828 Cache-Hits / 310 Queries.
+- Vergleich 6.72.374: 3.495,84 / 1.296,52 / 135.828 / 310.
+- CPU ca. -6,3 %, Wall ca. -26,1 %, aber Server-Load gleichzeitig deutlich niedriger (ca. 82/101/84 -> 51/52/57). Der Wall-Gewinn ist daher NICHT vollständig 6.72.375 zurechenbar.
+- Cache-Hits exakt unverändert: 135.828 -> 135.828; Queries 310 -> 310.
+- Gemeinsame Vergleichsrouten zeigen im Mittel ebenfalls CPU-Schwankungen um mehrere Prozent. Deshalb ist der kleine CPU-Rückgang von Pferdesättel allein kein ausreichender Kausalitätsbeweis.
+- Ergebnis: 6.72.375 bleibt funktional freigegeben, aber der behauptete große Live-Performanceeffekt des Meta-/Options-Rootfix ist NICHT bewiesen.
+- Kein neues Plugin aus diesem Befund erzeugt.
+- Aktueller Prüfpfad: dominierende Objektcache-/Post-/Term-/Inventararbeit im echten Rankingpfad untersuchen; erst mehrere belegte Ursachen bündeln und gemeinsam Alt/Neu simulieren.
+- Messdatei im Büro: /pferdeatelier/PERFORMANCE_BUERO/MESSUNGEN/pferdeatelier-performance-gesamtanalyse-20261124-104853.json
