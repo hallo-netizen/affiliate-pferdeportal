@@ -2093,3 +2093,18 @@ Messung: pferdeatelier-performance-gesamtanalyse-20261124-151323(1).json
 - Büro: /pferdeatelier/PERFORMANCE_BUERO/AKTUELLES_PLUGIN/PFERDEATELIER_AFFILIATE_6.72.378_GEBUENDELT_CAUSAL_ROOTFIX.zip
 - Prüfnachweis: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PRUEFNACHWEIS_6.72.378.md
 - Nächster Schritt: ausschließlich diese korrigierte 6.72.378 installieren und genau einen PASSIV-Gesamtlauf ausführen.
+
+
+## 2026-11-24 – 6.72.378 LIVE bestätigt
+
+Messung: pferdeatelier-performance-gesamtanalyse-20261124-173614.json
+- LIVE-Version 6.72.378 bestätigt; Source-Fingerprints stimmen exakt mit dem freigegebenen korrigierten CAUSAL_ROOTFIX.
+- Pferdesättel: 2.222,09 ms Wall / 1.092,40 ms CPU / 89.461 Cache-Hits / 310 Queries.
+- Gegen 6.72.377: Wall -54,27 %, CPU -31,80 %, Cache +69, Queries unverändert.
+- Inhalts-/Produktausgabeblock loop_start -> wp_footer: 3.628,90 -> 1.492,57 ms (-58,87 %).
+- Host-/Laufbedingungen sind ebenfalls günstiger; daher wird der volle Wall-Gewinn nicht dem Plugin zugerechnet.
+- Vergleichsrouten verbessern sich CPU-seitig im Median um ca. -15,22 %. Pferdesättel liegt bei -31,80 %, also ca. 16,6 Prozentpunkte zusätzlicher Rückgang.
+- Dieser Zusatz liegt nahe am lokal isolierten A+C-Gewinn von -14,82 %. Damit stimmt der Live-Effekt in Richtung und Größenordnung mit dem Kausaltest überein.
+- Kein neues Plugin aus dem Live-Lauf erzeugt.
+- Messdatei im Büro: /pferdeatelier/PERFORMANCE_BUERO/MESSUNGEN/pferdeatelier-performance-gesamtanalyse-20261124-173614.json
+- Nächster Prüfblock: gemeinsamer Kandidatenaufbau (~81 ms / 2.721 Kampagnendaten-Lesungen) plus verbliebenes Produkt-1-Postprocessing (~100 ms) weiter zerlegen und mehrere belegte Ursachen bündeln.
