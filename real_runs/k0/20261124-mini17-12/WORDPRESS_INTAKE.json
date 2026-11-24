@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Ist Reiten der härteste Sport?",
+      "target_keyword": "Ist reiten der härteste Sport?",
+      "category": "reiterleben-community",
+      "article_type": "FAQ",
+      "plan_slot": "8c85a409ca878f4fdc7bd8211e41eee4769a720eb5f1c68e4e724a15f9eca02b"
+    }
+  ],
+  "batch_sha256": "e56a6e59c969a6d3120cacb0f4b7bbb90ae86f26bf6a88507799b537d2a845f5"
+}
