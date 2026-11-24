@@ -1,0 +1,163 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wie muss eine Pferdekoppel eingezäunt werden?",
+    "target_keyword": "Wie muss eine Pferdekoppel eingezäunt werden?",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "FAQ",
+    "plan_slot": "47b429704f7af22e8f536a562f0710572194658cf3b1caa6979a5e98d1939b75"
+  },
+  "content_profile": {
+    "search_intent": "Anforderungen an die Einzäunung einer Pferdekoppel im Alltag"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/tierproduktion/herdenschutz/zaun-pferde.htm",
+          "source_title": "Landwirtschaftskammer NRW – Wolfsabweisende Zäune für Pferdeweiden"
+        }
+      ],
+      "claims": [
+        "Pferdezäune müssen für die gehaltenen Tiere sicher sein.",
+        "Ein Pferdezaun braucht stabile Eckpfosten und Streckenpfosten.",
+        "Die erforderliche Zaunhöhe hängt von der Widerristhöhe der Pferde ab; für den beschriebenen Wolfsgrundschutz gelten zusätzliche Mindestwerte.",
+        "Die Litzen des Weidezauns müssen von Bewuchs freigehalten werden."
+      ],
+      "fresh_research_reference_date": "2026-11-24"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie muss eine Pferdekoppel eingezäunt werden?",
+      "topic": "Wie muss eine Pferdekoppel eingezäunt werden?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie muss eine Pferdekoppel eingezäunt werden?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/tierproduktion/herdenschutz/zaun-pferde.htm",
+        "source_title": "Landwirtschaftskammer NRW – Wolfsabweisende Zäune für Pferdeweiden",
+        "evidence_text": "Bestehende Pferdezäune müssen sich in einem tierschutzgerechten, hütesicheren Zustand befinden",
+        "evidence_text_sha256": "9b440357bec5a0155d426db974dbec890410d8dc4f21a28d43a51075f18cbaa8",
+        "statement": "Pferdezäune müssen für die gehaltenen Tiere sicher sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/tierproduktion/herdenschutz/zaun-pferde.htm",
+        "source_title": "Landwirtschaftskammer NRW – Wolfsabweisende Zäune für Pferdeweiden",
+        "evidence_text": "Die Zaunanlage muss über stabile Eckpfosten zur Spannbarkeit und ausreichend stabile Streckenpfosten verfügen.",
+        "evidence_text_sha256": "024e629ee8712f240d06b1e6a62caed1a5adeafcc1f46feceb460dd46fbf2178",
+        "statement": "Ein Pferdezaun braucht stabile Eckpfosten und Streckenpfosten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/tierproduktion/herdenschutz/zaun-pferde.htm",
+        "source_title": "Landwirtschaftskammer NRW – Wolfsabweisende Zäune für Pferdeweiden",
+        "evidence_text": "Die Höhe des Zaunes richtet sich nach den gehaltenen Pferden (0,75×Widerristhöhe), darf allerdings nicht unter dem in der Förderrichtlinie vorgeschriebenen Grundschutz von 90 cm liegen.",
+        "evidence_text_sha256": "7dd7e3cca82477abfba4714f8fb117a85e573a08c677030a1dc1b7b81dd074cb",
+        "statement": "Die erforderliche Zaunhöhe hängt von der Widerristhöhe der Pferde ab; für den beschriebenen Wolfsgrundschutz gelten zusätzliche Mindestwerte.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.landwirtschaftskammer.de/landwirtschaft/tierproduktion/herdenschutz/zaun-pferde.htm",
+        "source_title": "Landwirtschaftskammer NRW – Wolfsabweisende Zäune für Pferdeweiden",
+        "evidence_text": "Freihalten der Litzen von Bewuchs",
+        "evidence_text_sha256": "837132860b38be0118e5237eb20896cd772fc18fdb9aac996d46f764a7f075c6",
+        "statement": "Die Litzen des Weidezauns müssen von Bewuchs freigehalten werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/festzaeune-fuer-pferde-beratung/",
+        "anchor": "",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      },
+      {
+        "href": "/category/festzaeune-fuer-pferde-beratung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferdekoppel",
+      "Pferde",
+      "Weide",
+      "Zaun",
+      "Einzäunung",
+      "Pfosten",
+      "Litzen"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die konkrete Ausgangsfrage hängt von Gelände, Sicherheitsmerkmalen und Einzelfallbedingungen ab; eine Vergleichstabelle würde falsche Pauschalwerte nahelegen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false,
+  "source_approval_provenance": "Official Landwirtschaftskammer NRW / NRW government publishing source; original source excerpts verified at publisher on 2026-11-24."
+}
