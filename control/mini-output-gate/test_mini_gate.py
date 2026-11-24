@@ -100,6 +100,60 @@ class TestMiniGate(unittest.TestCase):
         self.assertEqual(gate(snapshot_workspace)['status'],
                          'FREIGEGEBEN_FUER_WP_IMPORTE')
 
+    def test_original_question_kept_and_keyword_not_forced_into_question(self):
+        """Existing complete MINI chain: real question unchanged; normal keyword stays declarative."""
+        self.insert_mock_editorial()
+        self.insert_mock_title()
+        titles = json.loads((self.ws/'TITLE.json').read_text())
+        titles['items'][1]['approved_title'] = self.origin['items'][1]['raw_query']
+        titles['items'][2]['approved_title'] = 'Minerallecksteine für Pferde'
+        titles['items'][6]['approved_title'] = self.origin['items'][6]['raw_query']
+        write(self.ws/'TITLE.json', titles)
+        result = gate(self.ws)
+        self.assertEqual(result['status'], 'FREIGEGEBEN_FUER_WP_IMPORTE')
+        self.assertEqual(self.cat['items'][2]['article_type'], 'Beratung')
+        self.assertEqual(titles['items'][2]['approved_title'], 'Minerallecksteine für Pferde')
+        self.assertFalse(titles['items'][2]['approved_title'].endswith('?'))
+        for i in (1, 6):
+            self.assertEqual(titles['items'][i]['approved_title'],
+                             self.origin['items'][i]['raw_query'])
+
+    def test_original_comparison_question_can_stay_question_without_becoming_faq(self):
+        """Synthetic comparison question, same original MINI gate, no changed owner or extra gate."""
+        source = copy.deepcopy(self.origin)
+        source['items'][0]['raw_query'] = 'Sind Salzlecksteine für Pferde besser als Minerallecksteine?'
+        synthetic = self.ws/'qa-comparison-original.json'
+        comparison_ws = self.ws/'qa-comparison-workspace'
+        write(synthetic, source)
+        init(synthetic, comparison_ws)
+        self.insert_mock_editorial()
+        self.insert_mock_title()
+        for name in ('CATEGORY', 'EDITORIAL', 'TITLE'):
+            rows = json.loads((self.ws/(name+'.json')).read_text())
+            rows['items'][0]['raw_query'] = source['items'][0]['raw_query']
+            if name == 'TITLE':
+                rows['items'][0]['approved_title'] = source['items'][0]['raw_query']
+            write(comparison_ws/(name+'.json'), rows)
+        result = gate(comparison_ws)
+        self.assertEqual(result['status'], 'FREIGEGEBEN_FUER_WP_IMPORTE')
+        self.assertEqual(source['items'][0]['raw_query'],
+                         json.loads((comparison_ws/'TITLE.json').read_text())
+                         ['items'][0]['approved_title'])
+        self.assertEqual(json.loads((comparison_ws/'CATEGORY.json').read_text())
+                         ['items'][0]['article_type'], 'Vergleich')
+
+    def test_title_owner_question_policy_is_present_without_new_station(self):
+        """Ensure the original TITLE worker guidance cannot silently regress."""
+        prompt = (ROOT/'STARTPROMPT_MINI-1DATEI.txt').read_text(encoding='utf-8')
+        for part in ('ORIGINALFRAGEN:', 'NORMALE KEYWORDS:',
+                     'Keine Titelvielfalt durch Umschreiben guter Originalfragen',
+                     'Eine echte Frage kann fachlich auch einen Vergleich',
+                     'TITLE aendert niemals die bereits entschiedene Artikelart'):
+            with self.subTest(part=part):
+                self.assertIn(part, prompt)
+        self.assertIn('CATEGORY -> EDITORIAL -> TITLE', prompt)
+        self.assertIn('mini_single_release.py mit --deliver', prompt)
+
     def test_title_language_rules_user_examples_and_natural_alternatives(self):
         bad = [
             'Mineralfutter richtig einordnen',
