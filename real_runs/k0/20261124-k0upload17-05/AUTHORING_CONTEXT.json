@@ -150,7 +150,8 @@
       "Farben",
       "Lichtfarbe",
       "Blendung",
-      "Ausleuchtung"
+      "Ausleuchtung",
+      "Stallbeleuchtung"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
