@@ -141,7 +141,7 @@
     ],
     "wordpress_category": {
       "id": 0,
-      "slug": "pferdeernaehrung-verstehen",
+      "slug": "ausbildung-reitweisen",
       "taxonomy": "category",
       "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
     },
