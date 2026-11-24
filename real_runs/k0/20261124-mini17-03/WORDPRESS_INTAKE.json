@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Federstriegel für Pferde",
+      "target_keyword": "federstriegel pferd",
+      "category": "striegel-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "25197e3dd38a11561da93ff1c0bc55e8053ddb738fd98704b9876646be0ef288"
+    }
+  ],
+  "batch_sha256": "6e5cbf62c8422f7156f33ba66e2528016830c32129c1e0ff590f323c4fb55a1b"
+}
