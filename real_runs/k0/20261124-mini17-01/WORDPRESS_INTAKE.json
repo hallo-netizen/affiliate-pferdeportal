@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Gummistriegel für Pferde",
+      "target_keyword": "gummistriegel pferd",
+      "category": "striegel-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "613439e62c3b90f20f26a866b51744ff8c59e088b8f9e28de2f7ee2b2e31b3a2"
+    }
+  ],
+  "batch_sha256": "8059becdb3c6285f312f48231c8b7580318adcab61bb91328ed18de1a203bad0"
+}
