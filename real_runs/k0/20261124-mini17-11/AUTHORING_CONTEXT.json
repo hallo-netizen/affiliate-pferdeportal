@@ -112,7 +112,7 @@
       },
       {
         "role": "further_information",
-        "href": "/wissen/pferdeverhalten/",
+        "href": "/weide/",
         "anchor": "",
         "block": "further_information"
       }
@@ -123,7 +123,7 @@
         "active": true
       },
       {
-        "href": "/wissen/pferdeverhalten/",
+        "href": "/weide/",
         "active": true
       }
     ],
@@ -145,7 +145,10 @@
       "Herde",
       "Stress",
       "Artgenossen",
-      "Auslauf"
+      "Auslauf",
+      "Weide",
+      "Bewegung",
+      "Pferdegruppe"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
