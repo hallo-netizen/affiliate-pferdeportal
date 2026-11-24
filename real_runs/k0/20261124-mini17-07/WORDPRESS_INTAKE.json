@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche Nachteile kann Grummet für Pferde haben?",
+      "target_keyword": "Warum kein Grummet für Pferde?",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "6ce77fe0fc1a0cd2c06a34705ac0f269eb49c19cfdd93ff87cc337dbf90a9243"
+    }
+  ],
+  "batch_sha256": "f70397f4a436e41feb4b913f748ef818f2163a9699b646c424d2f987a90e26ba"
+}
