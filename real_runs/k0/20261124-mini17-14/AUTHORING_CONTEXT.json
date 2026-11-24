@@ -1,0 +1,163 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wie viel Heu braucht ein Pferd mit 500 Kilogramm?",
+    "target_keyword": "Wie viel Kilo Heu braucht ein 500 kg Pferd?",
+    "category": "pferdeernaehrung-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "21a1ad66c0e76899b8dea3add60374a0028384f626ce35b68a4ffa55bb2180f5"
+  },
+  "content_profile": {
+    "search_intent": "Heumenge für ein Pferd mit 500 Kilogramm Körpergewicht"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+          "source_title": "Deutscher Tierschutzbund – Haltung von Pferden"
+        }
+      ],
+      "claims": [
+        "Bei 500 Kilogramm Körpergewicht ergeben 1,5 Kilogramm Heu je 100 Kilogramm mindestens 7,5 Kilogramm Heu täglich.",
+        "Feuchtes Raufutter muss bei gleicher Nährstoffversorgung in größerer Frischmasse gefüttert werden.",
+        "Gras, Heu und weitere Raufutterarten bilden die Grundlage der Pferdefütterung.",
+        "Heu ist getrocknetes Grünfutter und ein wichtiges Grundfuttermittel für Pferde."
+      ],
+      "fresh_research_reference_date": "2026-11-24"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie viel Kilo Heu braucht ein 500 kg Pferd?",
+      "topic": "Wie viel Heu braucht ein Pferd mit 500 Kilogramm?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie viel Kilo Heu braucht ein 500 kg Pferd?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "Pro Tag benötigt ein Pferd mindestens 1,5 Kilogramm Heu pro 100 Kilogramm Körpergewicht.",
+        "evidence_text_sha256": "141ab74f35567948200aff95f0210faa0f104cff87920993ac0838c4a6aa6632",
+        "statement": "Bei 500 Kilogramm Körpergewicht ergeben 1,5 Kilogramm Heu je 100 Kilogramm mindestens 7,5 Kilogramm Heu täglich.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "Raufuttermittel, die einen höheren Wassergehalt aufweisen, müssen Halter*innen in höheren Mengen verfüttern, um denselben Nährstoffgehalt zu erreichen.",
+        "evidence_text_sha256": "7f942a2e83f96670bc521daafad1fc34efe1ec327030dc80c97447462e0b0472",
+        "statement": "Feuchtes Raufutter muss bei gleicher Nährstoffversorgung in größerer Frischmasse gefüttert werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "Die Raufutter Gras, Heu, Heulage und Grassilage bilden die Basis der Pferdefütterung.",
+        "evidence_text_sha256": "546a00829e0f82aa36f85b8724dc79e9bf688c3c84bda882acf1f3993a467c88",
+        "statement": "Gras, Heu und weitere Raufutterarten bilden die Grundlage der Pferdefütterung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "Heu ist getrocknetes Grünfutter von Wiesen und Weiden und wird am häufigsten als Grundfuttermittel eingesetzt.",
+        "evidence_text_sha256": "3cee93f81ac1f8563f10d1bf4559637c0aa50740d28d8676f3568f2d18e664f9",
+        "statement": "Heu ist getrocknetes Grünfutter und ein wichtiges Grundfuttermittel für Pferde.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "anchor": "",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/fuetterung/fuetterung-heuqualitaet/",
+        "anchor": "",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/fuetterung/fuetterung-heuqualitaet/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferd",
+      "Heu",
+      "Fütterung",
+      "Futtermenge",
+      "Gewicht",
+      "Kilogramm",
+      "Raufutter"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Einzelne Bedingungen und der konkrete Pferdebedarf werden als zusammenhängende Erklärung mit Checkliste verständlicher als in einer vereinfachenden Tabelle."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false,
+  "source_approval_provenance": "German Tierschutzbund original official Pferdehaltung brochure, primary source excerpts verified 2026-11-24."
+}
