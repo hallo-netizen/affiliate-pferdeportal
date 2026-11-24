@@ -1,0 +1,181 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Ist Heu rund um die Uhr für Pferde sinnvoll?",
+    "target_keyword": "Ist 24 Stunden Heu gut für Pferde?",
+    "category": "pferdeernaehrung-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "bb0768fdd4e3c85bc6e18dd14b9ec36ab5723ea76da7f1e43db293794c5a4553"
+  },
+  "content_profile": {
+    "search_intent": "Eignung einer durchgehenden Heubereitstellung über 24 Stunden"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.tierschutzbund.de/tiere-themen/haustiere/pferde/",
+          "source_title": "Deutscher Tierschutzbund – Pferde richtig halten"
+        },
+        {
+          "source_url": "https://app.pferd-aktuell.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+          "source_title": "FN – Pferde richtig füttern"
+        }
+      ],
+      "claims": [
+        "Pferde sind auf viele Stunden Futteraufnahme täglich eingestellt.",
+        "Heu und anderes Raufutter bilden die Grundlage der Pferdeernährung.",
+        "Lange Fresspausen von über vier Stunden belasten die Magenschleimhaut.",
+        "Ausreichend Raufutter sollte verfügbar sein.",
+        "Die Raufuttermenge muss sich auch am Körpergewicht orientieren."
+      ],
+      "fresh_research_reference_date": "2026-11-24"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Ist 24 Stunden Heu gut für Pferde?",
+      "topic": "Ist Heu rund um die Uhr für Pferde sinnvoll?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Ist 24 Stunden Heu gut für Pferde?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.tierschutzbund.de/tiere-themen/haustiere/pferde/",
+        "source_title": "Deutscher Tierschutzbund – Pferde richtig halten",
+        "evidence_text": "Pferde sind Pflanzenfresser und verbringen täglich insgesamt 16 Stunden damit, zu fressen.",
+        "evidence_text_sha256": "c881e00c7cb6b5b29ff81b2e766e6612ab1e83be76c8ec982f0300e0c25e1121",
+        "statement": "Pferde sind auf viele Stunden Futteraufnahme täglich eingestellt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.tierschutzbund.de/tiere-themen/haustiere/pferde/",
+        "source_title": "Deutscher Tierschutzbund – Pferde richtig halten",
+        "evidence_text": "Raufutter wie Gras, Heu, Heulage und Grassilage bilden die Basis ihres Speiseplans.",
+        "evidence_text_sha256": "cd32585a06620a2b76d2802de7b2ffd4a958e2c43254677cc0ad083ab153f3cc",
+        "statement": "Heu und anderes Raufutter bilden die Grundlage der Pferdeernährung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "source_title": "FN – Pferde richtig füttern",
+        "evidence_text": "Ist der Magen länger als vier Stunden ohne Beschäftigung, greift die fortwährend produzierte Magensäure die Schleimhaut an.",
+        "evidence_text_sha256": "b4d6d177753b763ca28dde7ad6bc34362c47e2b0a061d675b21dd394fc97f1ce",
+        "statement": "Lange Fresspausen von über vier Stunden belasten die Magenschleimhaut.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "source_title": "FN – Pferde richtig füttern",
+        "evidence_text": "Stets genügend Raufutter zur Verfügung stellen in Form von Heu und Stroh",
+        "evidence_text_sha256": "510e4bd69942024529e72fd5f9975c6229e76e3b183747212c37e7a4f2b42b2d",
+        "statement": "Ausreichend Raufutter sollte verfügbar sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "source_title": "FN – Pferde richtig füttern",
+        "evidence_text": "1,5 bis 2 Kilogramm Raufutter pro 100 Kilogramm Gewicht des Pferdes sind das Minimum.",
+        "evidence_text_sha256": "af8065a7e8be1142af76a98a8d8402b5a841cf0a4e1a19f9803e674bada1697a",
+        "statement": "Die Raufuttermenge muss sich auch am Körpergewicht orientieren.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "anchor": "Pferdeernährung verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/fuetterung/fuetterung-heuqualitaet/",
+        "anchor": "Heuqualität",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/fuetterung/fuetterung-heuqualitaet/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Heu",
+      "Fresspausen",
+      "Raufutter",
+      "Fütterung",
+      "Magen",
+      "Weidegras",
+      "Heuqualität"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Frage betrifft Fressdauer und Versorgung; eine Tabelle würde den Einzelfall nicht besser erklären."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false,
+  "source_approval_provenance": "Originalstellen beim Deutschen Tierschutzbund und der FN am 2026-11-24 geprüft."
+}
