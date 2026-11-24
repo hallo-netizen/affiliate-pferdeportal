@@ -1,0 +1,165 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wie gewöhne ich meinem Pferd das Steigen ab?",
+    "target_keyword": "Wie kann ich meinem Pferd das Steigen abgewöhnen?",
+    "category": "ausbildung-reitweisen",
+    "article_type": "FAQ",
+    "plan_slot": "8080d99d7176680d257e6d4464196325fd81ffc55a4d7ef89e115f8a3b68eace"
+  },
+  "content_profile": {
+    "search_intent": "Wie sich unerwünschtes Steigen eines Pferdes durch geeignetes Training angehen lässt"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/behavior-problems-in-horses?ruleredirectid=458",
+          "source_title": "MSD Veterinary Manual – Behavior Problems in Horses"
+        },
+        {
+          "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/treatment-of-behavior-problems-in-horses",
+          "source_title": "MSD Veterinary Manual – Treatment of Behavior Problems"
+        }
+      ],
+      "claims": [
+        "Steigen ist unter anderem als Ausdruck von problematischem Verhalten beschrieben.",
+        "Verhalten kann mit schrittweisen Trainingsmethoden verändert werden.",
+        "Beim Training kann erwünschtes Verhalten an die Stelle des unerwünschten treten.",
+        "Erwünschtes Verhalten wird beim Training belohnt."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie kann ich meinem Pferd das Steigen abgewöhnen?",
+      "topic": "Wie gewöhne ich meinem Pferd das Steigen ab?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "ausbildung-reitweisen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie kann ich meinem Pferd das Steigen abgewöhnen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/behavior-problems-in-horses?ruleredirectid=458",
+        "source_title": "MSD Veterinary Manual – Behavior Problems in Horses",
+        "evidence_text": "Signs of aggression include ears flattened backward, retracted lips, rapid tail movements, snaking, pawing, head bowing, fecal pile display, snoring, squealing, levade (rearing with deeply flexed hindquarters), and threats to kick.",
+        "evidence_text_sha256": "2b5b475eb491a06f9ac05e2962b0023f1dd31c56d5d09a71fb0d156a552a6cc6",
+        "statement": "Steigen ist unter anderem als Ausdruck von problematischem Verhalten beschrieben.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/treatment-of-behavior-problems-in-horses",
+        "source_title": "MSD Veterinary Manual – Treatment of Behavior Problems",
+        "evidence_text": "The most commonly used techniques to modify animal behavior include habituation, extinction, desensitization, counterconditioning, response substitution, and shaping.",
+        "evidence_text_sha256": "7bbdb88b134d7c3c0a2c6972a8b7a93c755b71e901ba8b63f221915378ff2136",
+        "statement": "Verhalten kann mit schrittweisen Trainingsmethoden verändert werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/treatment-of-behavior-problems-in-horses",
+        "source_title": "MSD Veterinary Manual – Treatment of Behavior Problems",
+        "evidence_text": "Response substitution involves the replacement of an undesirable response with a desirable one.",
+        "evidence_text_sha256": "3ebedf74db273228772a106158e22a2df28d7eac4dbf0cb772c42a744742ac71",
+        "statement": "Beim Training kann erwünschtes Verhalten an die Stelle des unerwünschten treten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/behavior-of-horses/treatment-of-behavior-problems-in-horses",
+        "source_title": "MSD Veterinary Manual – Treatment of Behavior Problems",
+        "evidence_text": "If the horse responds favorably, the horse is rewarded.",
+        "evidence_text_sha256": "8cadacdba61c31da1221d6f1c0f5e0ab66a7b60845e8c64beb6b88f75e1325d2",
+        "statement": "Erwünschtes Verhalten wird beim Training belohnt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/ausbildung-reitweisen/",
+        "anchor": "ausbildung-reitweisen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/training/training-hilfsmittel/trainingsplaene-problempferde/",
+        "anchor": "Trainingspläne für Problempferde",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/ausbildung-reitweisen/",
+        "active": true
+      },
+      {
+        "href": "/training/training-hilfsmittel/trainingsplaene-problempferde/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "ausbildung-reitweisen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Steigen",
+      "Pferd",
+      "Reiten",
+      "Verhalten",
+      "Training",
+      "Ausbildung",
+      "Sicherheit"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die konkrete Leserfrage lässt sich durch sachliche Einordnung und praktische Handlungsschritte beantworten; eine künstliche Vergleichstabelle hätte keinen Mehrwert."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
