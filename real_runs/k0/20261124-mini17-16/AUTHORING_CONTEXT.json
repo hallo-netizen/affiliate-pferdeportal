@@ -111,6 +111,12 @@
         "block": "criteria"
       },
       {
+        "role": "semantic_related",
+        "href": "/category/heupruefer-faq/",
+        "anchor": "FAQ Heuprüfer",
+        "block": "details"
+      },
+      {
         "role": "further_information",
         "href": "/fuetterung/fuetterung-heuqualitaet/",
         "anchor": "",
@@ -125,10 +131,15 @@
       {
         "href": "/fuetterung/fuetterung-heuqualitaet/",
         "active": true
+      },
+      {
+        "href": "/category/heupruefer-faq/",
+        "active": true
       }
     ],
     "runtime_link_roles": [
       "parent_category",
+      "semantic_related",
       "further_information"
     ],
     "wordpress_category": {
