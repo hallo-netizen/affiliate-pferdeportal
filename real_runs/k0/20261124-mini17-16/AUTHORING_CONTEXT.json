@@ -1,0 +1,163 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Ist feines oder grobes Heu für Pferde besser?",
+    "target_keyword": "Ist feines oder grobes Heu für Pferde besser?",
+    "category": "pferdeernaehrung-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "1dc5f3a78401d0eccbfc4a0980bcf7d333410d7b1cc0b8b4a984b10afbb2b915"
+  },
+  "content_profile": {
+    "search_intent": "Unterschiede zwischen feinem und grobem Heu für Pferde"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.vetmeduni.ac.at/forschung/aktuelles-aus-der-forschung/was-ist-drinnen-im-heu",
+          "source_title": "Veterinärmedizinische Universität Wien – Was ist drinnen im Heu?"
+        }
+      ],
+      "claims": [
+        "Die Heustruktur, der Geruch und die Farbe sind wichtige Kriterien bei der Qualitätsprüfung.",
+        "Für Fohlen beschreibt die Vetmeduni den zweiten Schnitt im Spätsommer als mögliche geeignete Heupartie.",
+        "Die ideale Fohlen-Heuprobe wird von der Vetmeduni als blattreich mit Kräutern und Klee beschrieben.",
+        "Feines oder grobes Heu muss zum individuellen Leistungsbedarf des Pferdes passen."
+      ],
+      "fresh_research_reference_date": "2026-11-24"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Ist feines oder grobes Heu für Pferde besser?",
+      "topic": "Ist feines oder grobes Heu für Pferde besser?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Ist feines oder grobes Heu für Pferde besser?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.vetmeduni.ac.at/forschung/aktuelles-aus-der-forschung/was-ist-drinnen-im-heu",
+        "source_title": "Veterinärmedizinische Universität Wien – Was ist drinnen im Heu?",
+        "evidence_text": "Die Bewertung der Struktur und des Gefüges des Heus sind bei der sogenannten grobsinnlichen Heuuntersuchung ebenso essenziell wie die Beurteilung des Heugeruchs und dessen Farbe.",
+        "evidence_text_sha256": "3734ee23247f91124631d61248830f560f498bfe75396bba09b16296bc4fb3f1",
+        "statement": "Die Heustruktur, der Geruch und die Farbe sind wichtige Kriterien bei der Qualitätsprüfung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.vetmeduni.ac.at/forschung/aktuelles-aus-der-forschung/was-ist-drinnen-im-heu",
+        "source_title": "Veterinärmedizinische Universität Wien – Was ist drinnen im Heu?",
+        "evidence_text": "Zweiter Schnitt im Spätsommer",
+        "evidence_text_sha256": "a791993312703bb9959f8a46b77f70234f16ec99888ec5c74132151ca1d72a4a",
+        "statement": "Für Fohlen beschreibt die Vetmeduni den zweiten Schnitt im Spätsommer als mögliche geeignete Heupartie.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.vetmeduni.ac.at/forschung/aktuelles-aus-der-forschung/was-ist-drinnen-im-heu",
+        "source_title": "Veterinärmedizinische Universität Wien – Was ist drinnen im Heu?",
+        "evidence_text": "Blattreich mit Kräutern und Klee",
+        "evidence_text_sha256": "1dc6609643c28d1139b5fe522bb2f4da1c7a508ddee7b3f34ca23460fc608b66",
+        "statement": "Die ideale Fohlen-Heuprobe wird von der Vetmeduni als blattreich mit Kräutern und Klee beschrieben.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.vetmeduni.ac.at/forschung/aktuelles-aus-der-forschung/was-ist-drinnen-im-heu",
+        "source_title": "Veterinärmedizinische Universität Wien – Was ist drinnen im Heu?",
+        "evidence_text": "Hinweis: Pferde sollen individuell, angepasst an ihre Leistung, gefüttert werden.",
+        "evidence_text_sha256": "90de8f858d6bbafed90d480685ca4f59a76d68e98455e977a4e419b2bdf6c111",
+        "statement": "Feines oder grobes Heu muss zum individuellen Leistungsbedarf des Pferdes passen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "anchor": "",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/fuetterung/",
+        "anchor": "",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/fuetterung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Heu",
+      "feines",
+      "grobes",
+      "Struktur",
+      "Futterqualität",
+      "Raufutter"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Eignung des Heus hängt von konkreter Struktur, Qualität und Leistungsbedarf ab; eine pauschale Vergleichstabelle ohne Laborwerte würde die individuelle Entscheidung nicht verbessern."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false,
+  "source_approval_provenance": "Original official Vetmeduni Wien article, published 26 November 2025; exact source statements verified on 24 November 2026."
+}
