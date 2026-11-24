@@ -1,0 +1,163 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wie viele Kilometer sollte ein Pferd täglich laufen?",
+    "target_keyword": "Wie viel km sollte ein Pferd am Tag laufen?",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "FAQ",
+    "plan_slot": "890be6c2f8c64b507081518d2ff7da2dd8c3688f95a881c0596ee8cb0ca32d93"
+  },
+  "content_profile": {
+    "search_intent": "Täglicher Bewegungsbedarf eines Pferdes gemessen in Kilometern"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+          "source_title": "Deutscher Tierschutzbund – Haltung von Pferden"
+        }
+      ],
+      "claims": [
+        "Wild lebende Pferdeherden bewegen sich in der Natur etwa fünf bis 40 Kilometer am Tag.",
+        "Pferde bewegen sich beim natürlichen Grasen meist langsam und stetig vorwärts.",
+        "Reiten und Longieren decken den Bewegungsbedarf eines Pferdes allein nicht; mehrstündige freie Bewegung gehört dazu.",
+        "Pferde benötigen täglich freie Bewegung, Raufutter und Sozialkontakt."
+      ],
+      "fresh_research_reference_date": "2026-11-24"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie viel km sollte ein Pferd am Tag laufen?",
+      "topic": "Wie viele Kilometer sollte ein Pferd täglich laufen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie viel km sollte ein Pferd am Tag laufen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "In der Natur legen die Herden so täglich zwischen fünf und 40 Kilometer zurück.",
+        "evidence_text_sha256": "27abf6255fb8948699173cc9511d5d4d0fa2c337761a4c3cb08eba1046eeada9",
+        "statement": "Wild lebende Pferdeherden bewegen sich in der Natur etwa fünf bis 40 Kilometer am Tag.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "Typischerweise bewegen sie sich beim Grasen langsam, aber stetig vorwärts, egal ob eine Weide üppig oder nur spärlich bewachsen ist.",
+        "evidence_text_sha256": "68d19d30de6a78c2aa0a2a2157796d75129d285ed4b5ceea355685f76b05ce0e",
+        "statement": "Pferde bewegen sich beim natürlichen Grasen meist langsam und stetig vorwärts.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "Tägliche Arbeit unter dem Reiter oder an der Longe kann ihn allein nicht decken, sie brauchen zusätzlich täglich mehrstündige freie Bewegung zusammen mit anderen Pferden.",
+        "evidence_text_sha256": "3624334eed57a7ca13a8acec729452f8b5793ed54158e7fb3b0324f26d0f7657",
+        "statement": "Reiten und Longieren decken den Bewegungsbedarf eines Pferdes allein nicht; mehrstündige freie Bewegung gehört dazu.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "Um den Tieren ein artgerechtes Leben zu ermöglichen, müssen ihre Besitzer*innen daher berücksichtigen, dass die Tiere viel freie Bewegung brauchen, den Großteil des Tages Raufutter fressen müssen und Sozialkontakt zu Artgenossen für sie elementar ist.",
+        "evidence_text_sha256": "e5bdfb754421c77270e6714fd99ee62d816ceb8d1021be831bac8cf10d9b45fa",
+        "statement": "Pferde benötigen täglich freie Bewegung, Raufutter und Sozialkontakt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/weide/",
+        "anchor": "",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      },
+      {
+        "href": "/weide/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferde",
+      "Bewegung",
+      "Weide",
+      "Kilometer",
+      "Auslauf",
+      "Täglich",
+      "Bewegungsbedarf"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Einzelne Bedingungen und der konkrete Pferdebedarf werden als zusammenhängende Erklärung mit Checkliste verständlicher als in einer vereinfachenden Tabelle."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false,
+  "source_approval_provenance": "German Tierschutzbund original official Pferdehaltung brochure, primary source excerpts verified 2026-11-24."
+}
