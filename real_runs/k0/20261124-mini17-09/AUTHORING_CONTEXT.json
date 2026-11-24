@@ -145,7 +145,8 @@
       "Euro",
       "Futtermenge",
       "Heu",
-      "Kosten"
+      "Kosten",
+      "Fütterung"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
