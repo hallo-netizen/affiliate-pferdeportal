@@ -2108,3 +2108,26 @@ Messung: pferdeatelier-performance-gesamtanalyse-20261124-173614.json
 - Kein neues Plugin aus dem Live-Lauf erzeugt.
 - Messdatei im Büro: /pferdeatelier/PERFORMANCE_BUERO/MESSUNGEN/pferdeatelier-performance-gesamtanalyse-20261124-173614.json
 - Nächster Prüfblock: gemeinsamer Kandidatenaufbau (~81 ms / 2.721 Kampagnendaten-Lesungen) plus verbliebenes Produkt-1-Postprocessing (~100 ms) weiter zerlegen und mehrere belegte Ursachen bündeln.
+
+
+## 2026-11-24 – 6.72.379 gebündelter Testkandidat H+I freigegeben
+
+- LIVE bleibt 6.72.378.
+- Kein Einzel-Fix: 6.72.379 bündelt zwei getrennt kausal belegte Wiederholungen im exakten Zielzuordnungspfad.
+- H: 2.363 Prüfungen / nur 156 eindeutige Zielschlüssel-Sätze; direkter Abschnitt 6,676 -> 1,649 ms (-75,30 %), Ergebnis identisch.
+- I: bereits kanonische Zielschlüssel; direkter Abschnitt 12,769 -> 3,618 ms (-71,66 %), Ergebnis identisch.
+- Whole-Path-Inkrementalbeweis: H zusätzlich zu I -2,36 %; I zusätzlich zu H -5,67 %.
+- H+I 24 Realbestandsläufe: 198,743 -> 183,221 ms (-7,81 %).
+- finales Re-Extract-ZIP 20 Alternierungen: 201,865 -> 187,102 ms (-7,31 %).
+- Verworfene Ansätze: E +4,84 %, F betroffener Abschnitt +3,45 %, G +8,87 %, J +0,13 % / kein stabiler Gewinn.
+- Funktionsbeweis: 2.721/2.721 Normalisierungen, 25/25 reale Seiten-/Providerfälle, 75/75 gerenderte Karten inkl. HTML Alt=Neu.
+- Dynamische Filter-/Object-Cache-Fälle: Ausgabe UND Meta-/Options-Aufrufzahlen Alt=Neu.
+- echte Meta- und Provider-/Strategiemutation im selben Ablauf Alt=Neu.
+- Funktionen 1.593 -> 1.593; entfernt 0; hinzugefügt 0; geändert nur category_product_shared_rank_base() und ranked_campaign_raw_target_keys().
+- Schreibwege, Actions, Filter und Shortcodes unverändert.
+- Paket 66/66, PHP 23/23 PASS, Re-Extract 0 Abweichungen.
+- Paket: PFERDEATELIER_AFFILIATE_6.72.379_GEBUENDELT_EXACT_TARGET_ROOTFIX.zip
+- SHA-256: 264b872aae3238027b38304282ddc6fcca868cb8a0b46629ad85f67b813ecc67
+- Büro: /pferdeatelier/PERFORMANCE_BUERO/AKTUELLES_PLUGIN/PFERDEATELIER_AFFILIATE_6.72.379_GEBUENDELT_EXACT_TARGET_ROOTFIX.zip
+- Prüfnachweis: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PRUEFNACHWEIS_6.72.379.md
+- Nächster Schritt: ausschließlich 6.72.379 installieren und genau einen PASSIV-Gesamtlauf ausführen.
