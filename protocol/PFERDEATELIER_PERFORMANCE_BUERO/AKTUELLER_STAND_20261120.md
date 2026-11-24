@@ -1979,3 +1979,29 @@ Messung: pferdeatelier-performance-gesamtanalyse-20261124-104853.json
 - Kein neues Plugin aus diesem Befund erzeugt.
 - Aktueller Prüfpfad: dominierende Objektcache-/Post-/Term-/Inventararbeit im echten Rankingpfad untersuchen; erst mehrere belegte Ursachen bündeln und gemeinsam Alt/Neu simulieren.
 - Messdatei im Büro: /pferdeatelier/PERFORMANCE_BUERO/MESSUNGEN/pferdeatelier-performance-gesamtanalyse-20261124-104853.json
+
+
+## 2026-11-24 – 6.72.376 gebündelter Testkandidat freigegeben
+
+- Live bleibt bis Installation 6.72.375.
+- Nachweisbarer Restpfad: Sattel und Pferdesättel haben beide 1.010 Rohkandidaten; Sattel verarbeitet in der besten Relevanzstufe 171, Pferdesättel 1.010. Die fachliche Kandidatenprüfung wird NICHT verkürzt.
+- Vier zunächst erwogene nur bedingt wirksame Änderungen (Meta/Control/Incident/eBay-Checkpoint) wurden wegen fehlendem Live-Ursachenbeweis aus dem Paket entfernt.
+- 6.72.376 bündelt nur zwei direkt aktive Wiederholungen:
+  - Portal/Home: Ausrüstung 3.024 -> 3; Sattel 513 -> 3; Pferdesättel 3.030 -> 3.
+  - Idealo-Rohoption: auf allen drei Referenzseiten 11 -> 3.
+- final ausgewählte Produkte Alt=Neu.
+- 2.721 Normalisierungen identisch; Shared Pool 1.010 identisch.
+- 30/30 Provider-/Link-/Amazon-Kombinationen identisch.
+- 10/10 finale Drei-Slot-Auswahlen identisch.
+- Dynamik-/Fallbacktests: externer Objektcache, home_url, Idealo-Optionsfilter, pre_option und echte Option-Mutationen PASS.
+- Dateien 66 -> 66; entfernt 0; geändert nur Hauptdatei + Idealo-Trait + readme.
+- Funktionen/Methoden 1.581 -> 1.585; entfernt 0; 1.576 bestehende unverändert.
+- kritische Auswahl-/Ranking-/Provider-/Fallback-/Health-/Bild-/Tracking-/Renderfunktionen unverändert.
+- Produktions-Schreibwege unverändert.
+- Actions 176 -> 179 ausschließlich wegen drei Invalidierungs-Hooks für echte Option-Änderungen; Filter 30, Shortcodes 6 unverändert.
+- PHP 23/23 PASS; finales ZIP 66/66, 0 Hashabweichungen nach Re-Extract.
+- Paket: PFERDEATELIER_AFFILIATE_6.72.376_GEBUENDELT_CONTEXT_READ_ROOTFIX.zip
+- SHA-256: ec15beafe4944eddcffc8401081c31f7d330546497fab9dd3e3f4661e0245b45
+- Prüfnachweis: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PRUEFNACHWEIS_6.72.376.md
+- Büro: /pferdeatelier/PERFORMANCE_BUERO/AKTUELLES_PLUGIN/PFERDEATELIER_AFFILIATE_6.72.376_GEBUENDELT_CONTEXT_READ_ROOTFIX.zip
+- Nächster Schritt: nur 6.72.376 installieren und genau einen PASSIV-Gesamtlauf ausführen; Livewirkung erst danach bewerten.
