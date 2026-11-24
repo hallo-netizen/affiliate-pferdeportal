@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Warum kann Stroh für Pferde problematisch sein?",
+      "target_keyword": "Warum kein Stroh für Pferde?",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "cfdba6131ff7efbbc979d71227e5b718cc252715ec67b947ffdcfc6dc670b529"
+    }
+  ],
+  "batch_sha256": "5121f01442c07dafe3872c51ce5059293f7948fc34b2675d4c9e79249b6d51c5"
+}
