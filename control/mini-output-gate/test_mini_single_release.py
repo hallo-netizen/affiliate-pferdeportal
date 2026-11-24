@@ -49,7 +49,7 @@ class MiniOneFileGate(unittest.TestCase):
                 {'route':'FACH','category_slug':'test-cat','article_type':'FAQ'}]*3))
         write(self.ws/'EDITORIAL.json',stage(self.src,'EDITORIAL',[
             {'box':'FREI','intent_summary':'synthetic QA','matched_ref':'','reason':''},
-            {'box':'BELEGT','intent_summary':'','matched_ref':'WP-TEST-REFERENCE','reason':''},
+            {'box':'BELEGT','intent_summary':'','matched_ref':'WORDPRESS:123456','reason':''},
             {'box':'KLAERUNG','intent_summary':'','matched_ref':'','reason':'synthetic uncertainty'}]))
         write(self.ws/'TITLE.json',stage(self.src,'TITLE',[
             {'approved_title':'Was brauchen Pferde im Winter?'},
