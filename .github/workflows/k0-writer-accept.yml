@@ -302,7 +302,25 @@ jobs:
           git config user.email 'actions@users.noreply.github.com'
           git add "$RUN_DIR/SEALED_WRITER_PRODUCT.json" "$RUN_DIR/WORDPRESS_SINGLE.json" "$RUN_DIR/WORDPRESS_VERIFY.json"
           git commit -m "K0: seal writer and persist verified WordPress single"
-          git push
+          # Original K0 persistence owner: retry only conflict-free fast-forward rebases.
+          # Never overwrite another run or bypass any canonical checks.
+          for attempt in $(seq 1 24); do
+            if git push; then
+              echo "K0_WORDPRESS_VERIFIED_PERSISTED"
+              break
+            fi
+            if [ "$attempt" -eq 24 ]; then
+              echo "K0_WORDPRESS_PERSIST_RETRIES_EXHAUSTED" >&2
+              exit 2
+            fi
+            git fetch origin "$GITHUB_REF_NAME"
+            if ! git -c rebase.autoStash=false rebase "origin/$GITHUB_REF_NAME"; then
+              git rebase --abort || true
+              echo "K0_WORDPRESS_PERSIST_CONFLICT_BLOCKED" >&2
+              exit 2
+            fi
+            sleep 1
+          done
 
       - name: Upload canonical single delivery
         if: env.K0_REWRITE_REQUIRED != '1'
