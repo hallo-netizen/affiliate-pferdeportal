@@ -112,7 +112,7 @@
       },
       {
         "role": "further_information",
-        "href": "/fuetterung/",
+        "href": "/fuetterung/fuetterung-heuqualitaet/",
         "anchor": "",
         "block": "further_information"
       }
@@ -123,7 +123,7 @@
         "active": true
       },
       {
-        "href": "/fuetterung/",
+        "href": "/fuetterung/fuetterung-heuqualitaet/",
         "active": true
       }
     ],
