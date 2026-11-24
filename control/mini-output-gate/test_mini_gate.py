@@ -81,19 +81,24 @@ class TestMiniGate(unittest.TestCase):
         source['existing_wordpress_and_plan_inventory'] = [
             {'source': 'WORDPRESS', 'id': 123456, 'type': 'post', 'title': 'QA existing article'}
         ]
-        write(self.ws/ORIGINAL, source)
-        from mini_release_gate import sha
-        (self.ws/'ORIGINAL_SHA256.txt').write_text(sha(self.ws/ORIGINAL)+'\n')
-        editorial = json.loads((self.ws/'EDITORIAL.json').read_text())
+        original_snapshot = self.ws/'test_source_with_inventory.json'
+        write(original_snapshot, source)
+        snapshot_workspace = self.ws/'inventory_test_workspace'
+        init(original_snapshot, snapshot_workspace)
+        for stage in ('CATEGORY', 'EDITORIAL', 'TITLE'):
+            write(snapshot_workspace/(stage+'.json'),
+                  json.loads((self.ws/(stage+'.json')).read_text()))
+        editorial = json.loads((snapshot_workspace/'EDITORIAL.json').read_text())
         editorial['items'][8]['matched_ref'] = 'WORDPRESS:999999'
-        write(self.ws/'EDITORIAL.json', editorial)
-        bad = gate(self.ws)
+        write(snapshot_workspace/'EDITORIAL.json', editorial)
+        bad = gate(snapshot_workspace)
         self.assertEqual(bad['next_worker'], 'EDITORIAL')
         self.assertIn('BESTANDSREFERENZ_NICHT_IM_ORIGINALEXPORT',
                       [x['code'] for x in bad['fix_only']])
         editorial['items'][8]['matched_ref'] = 'WORDPRESS:123456'
-        write(self.ws/'EDITORIAL.json', editorial)
-        self.assertEqual(gate(self.ws)['status'], 'FREIGEGEBEN_FUER_WP_IMPORTE')
+        write(snapshot_workspace/'EDITORIAL.json', editorial)
+        self.assertEqual(gate(snapshot_workspace)['status'],
+                         'FREIGEGEBEN_FUER_WP_IMPORTE')
 
     def test_title_language_rules_user_examples_and_natural_alternatives(self):
         bad = [
