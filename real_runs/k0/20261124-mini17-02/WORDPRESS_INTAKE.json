@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Striegel und Bürste bei Pferden im Vergleich",
+      "target_keyword": "pferde striegel bürste",
+      "category": "striegel-vergleich",
+      "article_type": "Vergleich",
+      "plan_slot": "6cd87fc691826b5cff651aba982e9e8820f1dcafca7bd09d63167a684987232a"
+    }
+  ],
+  "batch_sha256": "ec29644255a022806fba19132fc324c7fac8369e5a7874d0fca87a2f9895f5cb"
+}
