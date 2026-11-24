@@ -31,6 +31,8 @@ K0_OFFICIAL_SOURCE_HOSTS = frozenset({
     'usask.ca',                 # University of Saskatchewan / WCVM
     'umn.edu',                  # University of Minnesota Extension, official university service
     'landwirtschaftskammer.de', # Official Landwirtschaftskammer Nordrhein-Westfalen
+    'llh.hessen.de',           # Verified official Landesbetrieb Landwirtschaft Hessen (impressum 2026-11-24)
+    'app.pferd-aktuell.de',   # Verified official Deutsche Reiterliche Vereinigung FN (official footer 2026-11-24)
     'lk-nienburg.de',          # Verified official Landkreis Nienburg government website (impressum 2026-11-21)
     'aelf-al.bayern.de',       # Official Bavarian agriculture and forestry authority AELF (verified 2026-11-21)
     'tierschutz.hessen.de',    # Official state Hesse animal-welfare portal
