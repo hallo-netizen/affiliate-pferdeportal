@@ -137,7 +137,7 @@
     ],
     "wordpress_category": {
       "id": 0,
-      "slug": "pferdeernaehrung-verstehen",
+      "slug": "reiterleben-community",
       "taxonomy": "category",
       "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
     },
