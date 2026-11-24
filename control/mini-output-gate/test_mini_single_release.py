@@ -119,7 +119,7 @@ class MiniOneFileGate(unittest.TestCase):
             init(original,ws)
             write(ws/'EDITORIAL.json',stage(src,'EDITORIAL',[
                 {'box':'FREI','intent_summary':'QA','matched_ref':'','reason':''},
-                {'box':'BELEGT','intent_summary':'','matched_ref':'WP-TEST','reason':''},
+                {'box':'BELEGT','intent_summary':'','matched_ref':'WORDPRESS:123456','reason':''},
                 {'box':'KLAERUNG','intent_summary':'','matched_ref':'','reason':'QA'}]))
             write(ws/'TITLE.json',stage(src,'TITLE',[
                 {'approved_title':'Wie viel Weidefläche brauchen Pferde?'},{'approved_title':''},{'approved_title':''}]))
@@ -249,7 +249,7 @@ class MiniOneFileGate(unittest.TestCase):
                 ({'box': 'FREI', 'intent_summary': 'Synthetic specific intent',
                   'matched_ref': '', 'reason': ''} if i < 10 else
                  {'box': 'BELEGT', 'intent_summary': '',
-                  'matched_ref': 'QA-EXISTING-REFERENCE', 'reason': ''} if i < 13 else
+                  'matched_ref': 'WORDPRESS:123456', 'reason': ''} if i < 13 else
                  {'box': 'KLAERUNG', 'intent_summary': '',
                   'matched_ref': '', 'reason': 'Synthetic ambiguity'})
                 for i in range(15)
