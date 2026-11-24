@@ -28,7 +28,7 @@
         "Ein typisches ausgewachsenes Pferd benötigt täglich viele Liter Wasser.",
         "Hitze oder Arbeit erhöhen häufig den Wasserbedarf.",
         "Der Mindestwasserbedarf hängt vom Körpergewicht ab.",
-        "Sauberes Wasser ist für alle Pferde notwendig."
+        "Pferde sollten jederzeit Zugang zu sauberem Wasser haben."
       ]
     },
     "production_plan_item": {
@@ -85,9 +85,9 @@
       "F4": {
         "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids?ruleredirectid=445",
         "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses",
-        "evidence_text": "Access to clean, fresh water is essential to all horses.",
-        "evidence_text_sha256": "d926755ea6b4f822d157ba08f74d942f7762df04018610ecac55e8e72a32cd67",
-        "statement": "Sauberes Wasser ist für alle Pferde notwendig.",
+        "evidence_text": "Unlimited free access to clean water is recommended.",
+        "evidence_text_sha256": "9b707c0c9fb87e7dcd3464a5dd108967a701a070222aa90f847c699c83724630",
+        "statement": "Pferde sollten jederzeit Zugang zu sauberem Wasser haben.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
