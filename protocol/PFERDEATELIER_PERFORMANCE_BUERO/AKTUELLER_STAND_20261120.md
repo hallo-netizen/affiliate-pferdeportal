@@ -2045,3 +2045,31 @@ Messung: pferdeatelier-performance-gesamtanalyse-20261124-142623.json
 - Büro: /pferdeatelier/PERFORMANCE_BUERO/AKTUELLES_PLUGIN/PFERDEATELIER_AFFILIATE_6.72.377_GEBUENDELT_EXACT_READ_ROOTFIX.zip
 - Prüfnachweis: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PRUEFNACHWEIS_6.72.377.md
 - Nächster Schritt: 6.72.377 installieren und genau einen PASSIV-Gesamtlauf ausführen. Live-Speedup erst danach bewerten.
+
+
+## 2026-11-24 – 6.72.377 LIVE ausgewertet; 6.72.378 gebündelt freigegeben
+
+Messung: pferdeatelier-performance-gesamtanalyse-20261124-151323(1).json
+- 6.72.377 live aktiv.
+- Pferdesättel: 4.859,09 ms Wall / 1.601,79 ms CPU / 89.392 Cache-Hits / 310 Queries.
+- Gegen 6.72.376: Cache-Hits 121.246 -> 89.392 = -31.854 / -26,3 %; Queries 310 -> 310.
+- Der große Restblock liegt im Produkt-/Inhaltsweg zwischen loop_start und Erreichen von wp_footer: 3.628,90 ms.
+- Kein Einzel-Fix: 6.72.378 bündelt vier dort nachgewiesene Wiederholungen gemeinsam: redundante innere eBay-Kohorten-Schlüsselarbeit unter vorhandenem äußeren Postprocess-Plan, wiederholte Home-Host-Lesung der Bildprüfung, wiederholte vollständige Kandidaten-Fingerprints für Slot 2/3 und wiederholte GTIN-Normalisierung.
+- Echter WXR-Bestand, Pferdesättel 1.010 Kandidaten (393 eBay + 617 idealo), 20 Alt/Neu-Durchläufe: Median 216,71 -> 187,71 ms (-13,38 %).
+- Slot 2: 16,91 -> 6,96 ms; Slot 3: 13,23 -> 5,10 ms.
+- get_post_meta 3.731 -> 3.114; get_option 324 -> 15.
+- 2.721/2.721 Kampagnennormalisierungen identisch; kombinierter Hash Alt=Neu.
+- 25/25 reale Seiten-/Providerkombinationen Alt=Neu: Pferdesättel, Satteldecken, Reitplatzpflege, Zeitschalt-Futterautomaten, Stall Organisation; jeweils automatic/hybrid, automatic/products, combined/products, ebay_only/hybrid, idealo_only/comparison.
+- Produktplatz 1/2/3: Post-ID, Kampagnen-ID, Provider, Titel, URL, Bild, CTA, Preis, Währung, Verfügbarkeit und vollständige Kandidatenhashes identisch.
+- Pferdesättel Produkt 1/2/3 bis zum echten render_banner() ausgeführt: HTML Alt=Neu.
+- Dynamiktests get_post_metadata, home_url, pre_option und externer Objektcache: Alt/Neu identische Ausgaben und identische Meta-/Options-Aufrufzahlen; historischer Einzelweg bleibt erhalten.
+- Echte Home-/Postmeta-/idealo-Optionsänderungen im Ablauf werden nach Invalidierung sofort gesehen.
+- Dateien 66 -> 66; entfernt 0; geändert nur Hauptdatei, eBay-Trait, Idealo-Trait, readme.
+- Funktionen/Methoden 1.591 -> 1.594; entfernt 0; 1.582 bestehende unverändert; 3 interne Performance-Helfer neu.
+- Actions 183, Filter 30, Shortcodes 6 und Produktions-Schreibprimitive Alt=Neu.
+- PHP 23/23 PASS; finales ZIP 66/66, fehlend 0, zusätzlich 0, Hashabweichungen 0; Re-Extract PHP 23/23 PASS.
+- Paket: PFERDEATELIER_AFFILIATE_6.72.378_GEBUENDELT_POSTPROCESS_ROOTFIX.zip
+- SHA-256: 9283dd3b4237717db084708f981b2b4ef3b5b7c67568794a66f47c522f265bd7
+- Büro: /pferdeatelier/PERFORMANCE_BUERO/AKTUELLES_PLUGIN/PFERDEATELIER_AFFILIATE_6.72.378_GEBUENDELT_POSTPROCESS_ROOTFIX.zip
+- Prüfnachweis: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PRUEFNACHWEIS_6.72.378.md
+- Nächster Schritt: 6.72.378 installieren und genau einen PASSIV-Gesamtlauf ausführen; Live-Speedup erst danach bewerten.
