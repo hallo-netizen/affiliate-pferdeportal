@@ -1,0 +1,167 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Ist Reiten der härteste Sport?",
+    "target_keyword": "Ist reiten der härteste Sport?",
+    "category": "reiterleben-community",
+    "article_type": "FAQ",
+    "plan_slot": "8c85a409ca878f4fdc7bd8211e41eee4769a720eb5f1c68e4e724a15f9eca02b"
+  },
+  "content_profile": {
+    "search_intent": "Ob Reiten unter allen Sportarten als körperlich härtester Sport gelten kann, und welche Fähigkeiten es wirklich fordert"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://app.pferd-aktuell.de/breitensport",
+          "source_title": "Deutsche Reiterliche Vereinigung FN – Breitensport"
+        },
+        {
+          "source_url": "https://app.pferd-aktuell.de/breitensport/reiten-lernen/reiten-lernen",
+          "source_title": "Deutsche Reiterliche Vereinigung FN – Reiten lernen"
+        }
+      ],
+      "claims": [
+        "Die FN beschreibt Reiten als Sport, der nicht die extrem höchsten Anforderungen an Beweglichkeit, Reaktionsschnelligkeit und Muskelkraft stellt.",
+        "Die FN betont die hohen Ansprüche guter Reitleistungen an Körperkoordination und beständiges Training.",
+        "Die FN bezeichnet Reiten als koordinativ sehr anspruchsvolle Sportart.",
+        "Gute Reitkoordination entwickelt sich durch vielfältiges regelmäßiges Üben und Wiederholen."
+      ],
+      "fresh_research_reference_date": "2026-11-24"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Ist reiten der härteste Sport?",
+      "topic": "Ist Reiten der härteste Sport?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Ist reiten der härteste Sport?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://app.pferd-aktuell.de/breitensport",
+        "source_title": "Deutsche Reiterliche Vereinigung FN – Breitensport",
+        "evidence_text": "Reiten stellt keine extrem hohen Ansprüche an Beweglichkeit, Reaktionsschnelligkeit und Muskelkraft.",
+        "evidence_text_sha256": "ff975d05c5493f5bcb2311b39f6bba23e2a823418d5e5ea4731d601015f8239c",
+        "statement": "Die FN beschreibt Reiten als Sport, der nicht die extrem höchsten Anforderungen an Beweglichkeit, Reaktionsschnelligkeit und Muskelkraft stellt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://app.pferd-aktuell.de/breitensport",
+        "source_title": "Deutsche Reiterliche Vereinigung FN – Breitensport",
+        "evidence_text": "Gutes Reiten erfordert aber eine höchst anspruchsvolle Körper-Koordination und beständiges Training.",
+        "evidence_text_sha256": "466ae668d390d82b326788745c17e5bce395de99f76adf8749eff60b6b8b0e59",
+        "statement": "Die FN betont die hohen Ansprüche guter Reitleistungen an Körperkoordination und beständiges Training.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://app.pferd-aktuell.de/breitensport/reiten-lernen/reiten-lernen",
+        "source_title": "Deutsche Reiterliche Vereinigung FN – Reiten lernen",
+        "evidence_text": "Reiten ist eine koordinativ sehr anspruchsvolle Sportart.",
+        "evidence_text_sha256": "1533548771a6441e54f633e4cfcd6b1a1311c8e58ea4c8c404f8fce9a4c804ee",
+        "statement": "Die FN bezeichnet Reiten als koordinativ sehr anspruchsvolle Sportart.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://app.pferd-aktuell.de/breitensport/reiten-lernen/reiten-lernen",
+        "source_title": "Deutsche Reiterliche Vereinigung FN – Reiten lernen",
+        "evidence_text": "Die Koordination entwickelt sich am besten durch vielfältiges und regelmäßiges Üben und Wiederholen.",
+        "evidence_text_sha256": "d4e3b954c434ac80e80370dba8a2bbf49522ac0c2081a88180ae504b28ec15e9",
+        "statement": "Gute Reitkoordination entwickelt sich durch vielfältiges regelmäßiges Üben und Wiederholen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/reiterleben-community/",
+        "anchor": "",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/training/",
+        "anchor": "",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/reiterleben-community/",
+        "active": true
+      },
+      {
+        "href": "/training/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Reiten",
+      "Reitsport",
+      "Koordination",
+      "Sport",
+      "Training",
+      "Beweglichkeit",
+      "Reiter"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine pauschale Rangliste körperlich härtester Sportarten ist fachlich nicht belegt; die FN erklärt die spezifische Reitkoordination ohne objektive Rangtabelle."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false,
+  "source_approval_provenance": "Offizielle Website der Deutschen Reiterlichen Vereinigung (FN), Originaltexte geprüft 24.11.2026."
+}
