@@ -1,0 +1,165 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welche Nachteile haben Rübenschnitzel für Pferde?",
+    "target_keyword": "Welche Nachteile haben Rübenschnitzel für Pferde?",
+    "category": "pferdeernaehrung-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "7624136e7a06b77b1437acb844fe7a1e99b96a99f02b1f5b09911245e26025e2"
+  },
+  "content_profile": {
+    "search_intent": "Mögliche Nachteile der Fütterung von Rübenschnitzeln"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids?ruleredirectid=445",
+          "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses"
+        },
+        {
+          "source_url": "https://www.msdvetmanual.com/horse-owners/digestive-disorders-of-horses/disorders-of-the-esophagus-in-horses",
+          "source_title": "MSD Veterinary Manual – Disorders of the Esophagus"
+        }
+      ],
+      "claims": [
+        "Rübenschnitzel liefern Energie und Faserstoffe.",
+        "Rübenschnitzel sollten vor der Fütterung eingeweicht werden.",
+        "Trockenes Futter einschließlich Rübenschnitzeln kann beim hastigen Fressen Schlundverstopfungen auslösen.",
+        "Schlundverstopfung kann ernste Komplikationen verursachen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welche Nachteile haben Rübenschnitzel für Pferde?",
+      "topic": "Welche Nachteile haben Rübenschnitzel für Pferde?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Nachteile haben Rübenschnitzel für Pferde?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids?ruleredirectid=445",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses",
+        "evidence_text": "Beet pulp, a by-product of the sugar beet industry, is added to horse rations as a source of both calories and fiber.",
+        "evidence_text_sha256": "9d11b5c6e3f3ee8787c23e3a70e5f5ebd5c4d406b147bca05c647ce4e2514d3a",
+        "statement": "Rübenschnitzel liefern Energie und Faserstoffe.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids?ruleredirectid=445",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses",
+        "evidence_text": "Beet pulp (shreds or pellets) should be soaked in water before feeding to horses.",
+        "evidence_text_sha256": "ca0e954f4a41d83746e9d18f86d112f925eb764412f1f6e35373f988af6649ec",
+        "statement": "Rübenschnitzel sollten vor der Fütterung eingeweicht werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/digestive-disorders-of-horses/disorders-of-the-esophagus-in-horses",
+        "source_title": "MSD Veterinary Manual – Disorders of the Esophagus",
+        "evidence_text": "Obstruction is most common when a horse quickly eats dried grain, beet pulp, or hay.",
+        "evidence_text_sha256": "52321a33d265b5e813da963ba095ec7b177d1215977d8bf394e2186784353c5f",
+        "statement": "Trockenes Futter einschließlich Rübenschnitzeln kann beim hastigen Fressen Schlundverstopfungen auslösen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/digestive-disorders-of-horses/disorders-of-the-esophagus-in-horses",
+        "source_title": "MSD Veterinary Manual – Disorders of the Esophagus",
+        "evidence_text": "The main complication of choke is aspiration pneumonia caused by inhalation of food.",
+        "evidence_text_sha256": "cd0141bbf9f356da1716d1959cd2d7b38064fd8b0b3018d7cede419fbb4fedac",
+        "statement": "Schlundverstopfung kann ernste Komplikationen verursachen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "anchor": "pferdeernaehrung-verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/fuetterung/fuetterung-heuqualitaet/",
+        "anchor": "Heuqualität",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/fuetterung/fuetterung-heuqualitaet/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Rübenschnitzel",
+      "Futter",
+      "Heu",
+      "Raufutter",
+      "Fütterung",
+      "Einweichen",
+      "Risiko"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die konkrete Leserfrage lässt sich durch sachliche Einordnung und praktische Handlungsschritte beantworten; eine künstliche Vergleichstabelle hätte keinen Mehrwert."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
