@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie oft sollten Pferde zum Muskelaufbau longiert werden?",
+      "target_keyword": "Wie oft Longieren zum Muskelaufbau?",
+      "category": "ausbildung-reitweisen",
+      "article_type": "FAQ",
+      "plan_slot": "950cfe9ac3d8de8b037290bd93ca52b7516b63f7b5b90ed55fae738c18a99e3e"
+    }
+  ],
+  "batch_sha256": "659261e0b33cbda92822225d9e660178d7737202e9c21f37ec607fa0f4011eba"
+}
