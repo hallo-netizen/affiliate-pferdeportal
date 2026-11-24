@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Einen Trainingsplan für das eigene Pferd erstellen",
+      "target_keyword": "Wie erstelle ich einen Trainingsplan für mein Pferd?",
+      "category": "trainingsplan-vorlage-uebungen",
+      "article_type": "Anleitung",
+      "plan_slot": "088840b10fef71fc0e7ad82b362fe58beb6e24fd15004c75c170445d0155d423"
+    }
+  ],
+  "batch_sha256": "b3935e79235fbd1850b279d0512e242a88b07c1081ef7a1c90dc52a263b09125"
+}
