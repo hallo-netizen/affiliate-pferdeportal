@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Ist eine Pferdekoppel genehmigungspflichtig?",
+      "target_keyword": "Ist eine Pferdekoppel genehmigungspflichtig?",
+      "category": "recht-finanzen-organisation",
+      "article_type": "FAQ",
+      "plan_slot": "d81e39831229e82a3801916ec1c179822fa593deab8ee24d89c8afe44054539d"
+    }
+  ],
+  "batch_sha256": "6dd507a77db2ab97d8b2cec61392ba82b78d184b768fca2806897445dc9117c6"
+}
