@@ -1,0 +1,164 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welche Anzeichen zeigen Pferde, die zu wenig trinken?",
+    "target_keyword": "Welche Symptome zeigen Pferde, die zu wenig trinken?",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "c40a68d2628a138d333afe96ad8f4586fe55dcf42e6d8e9d5fceaa8217f83122"
+  },
+  "content_profile": {
+    "search_intent": "Anzeichen dafür, dass ein Pferd zu wenig trinkt"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/encouraging-your-horse-to-drink",
+          "source_title": "University of Minnesota – Encouraging Your Horse to Drink"
+        },
+        {
+          "source_url": "https://www.msdvetmanual.com/horse-owners/kidney-and-urinary-tract-disorders-of-horses/noninfectious-diseases-of-the-urinary-system-in-horses",
+          "source_title": "MSD Veterinary Manual – Noninfectious Diseases of the Urinary System"
+        }
+      ],
+      "claims": [
+        "Zu geringe Wasseraufnahme kann Gesundheit und Leistung beeinträchtigen.",
+        "Unzureichendes Trinken kann Beschwerden auslösen.",
+        "Frisches Wasser muss frei zugänglich sein.",
+        "Schwere Austrocknung kann die Nieren schädigen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welche Symptome zeigen Pferde, die zu wenig trinken?",
+      "topic": "Welche Anzeichen zeigen Pferde, die zu wenig trinken?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Symptome zeigen Pferde, die zu wenig trinken?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/encouraging-your-horse-to-drink",
+        "source_title": "University of Minnesota – Encouraging Your Horse to Drink",
+        "evidence_text": "Horses that refuse to drink are at risk of poor performance, poor organ function and colic.",
+        "evidence_text_sha256": "c670deef5d5d8683480880f79100b547d3f95890678ac8367c94483a6b9363ae",
+        "statement": "Zu geringe Wasseraufnahme kann Gesundheit und Leistung beeinträchtigen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/encouraging-your-horse-to-drink",
+        "source_title": "University of Minnesota – Encouraging Your Horse to Drink",
+        "evidence_text": "Horses that don’t drink enough may suffer from:",
+        "evidence_text_sha256": "e15450a11713e44d7dc6e6861346a79c25a9bf869359538994f3a2c23db86e4e",
+        "statement": "Unzureichendes Trinken kann Beschwerden auslösen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/encouraging-your-horse-to-drink",
+        "source_title": "University of Minnesota – Encouraging Your Horse to Drink",
+        "evidence_text": "Always make sure your horse has free access to fresh, clean water.",
+        "evidence_text_sha256": "7c4bb8be6e941082c576b001b857782bea7ee23ed40021e6ea510c3eecbe6f58",
+        "statement": "Frisches Wasser muss frei zugänglich sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/kidney-and-urinary-tract-disorders-of-horses/noninfectious-diseases-of-the-urinary-system-in-horses",
+        "source_title": "MSD Veterinary Manual – Noninfectious Diseases of the Urinary System",
+        "evidence_text": "Other causes of acute kidney disease include severe dehydration, bleeding, infections involving the entire body, and general anesthesia.",
+        "evidence_text_sha256": "b195848a7811dcf4f33d0ee67b7d90e041f13f9b005f65d40d10940cd59d2c09",
+        "statement": "Schwere Austrocknung kann die Nieren schädigen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "pferdegesundheit-verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/fuetterung/fuetterung-wasser/",
+        "anchor": "Wasser",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/fuetterung/fuetterung-wasser/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Wasser",
+      "Trinken",
+      "Dehydrierung",
+      "Durst",
+      "Trinkmenge",
+      "Austrocknung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die konkrete Leserfrage lässt sich durch sachliche Einordnung und praktische Handlungsschritte beantworten; eine künstliche Vergleichstabelle hätte keinen Mehrwert."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
