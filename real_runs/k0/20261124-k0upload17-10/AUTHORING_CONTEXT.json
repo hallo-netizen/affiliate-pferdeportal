@@ -115,8 +115,8 @@
       },
       {
         "role": "further_information",
-        "href": "/fuetterung/fuetterung-heuqualitaet/",
-        "anchor": "Heuqualität",
+        "href": "/wissen/wissen-beratung-und-partner/fuetterungsberatung/",
+        "anchor": "Fütterungsberatung",
         "block": "further_information"
       }
     ],
@@ -126,8 +126,9 @@
         "active": true
       },
       {
-        "href": "/fuetterung/fuetterung-heuqualitaet/",
-        "active": true
+        "href": "/wissen/wissen-beratung-und-partner/fuetterungsberatung/",
+        "active": true,
+        "official_name": "Fütterungsberatung"
       }
     ],
     "runtime_link_roles": [
