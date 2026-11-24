@@ -4,22 +4,22 @@ Stand: 24.11.2026
 
 Live installiert:
 - Affiliate-Zentrale 6.72.376
-- Paket: PFERDEATELIER_AFFILIATE_6.72.376_GEBUENDELT_CONTEXT_READ_ROOTFIX.zip
-- SHA-256: ec15beafe4944eddcffc8401081c31f7d330546497fab9dd3e3f4661e0245b45
-- Live-Hauptdatei-Fingerprint stimmt exakt mit dem freigegebenen Paket überein.
+- letzter Livewert Pferdesättel: 5.332,37 ms Wall / 1.493,98 ms CPU / 121.246 Cache-Hits / 310 Queries
+- Cache-Reduktion gegenüber 6.72.375 ursächlich bestätigt; Gesamt-Speedup wegen Serverlast nicht bewiesen.
 
-Letzter Livewert Pferdesättel:
-- 5.332,37 ms Wall
-- 1.493,98 ms CPU
-- 121.246 Cache-Hits
-- 310 Queries
+Aktueller freigegebener Testkandidat:
+- Affiliate-Zentrale 6.72.377
+- Paket: PFERDEATELIER_AFFILIATE_6.72.377_GEBUENDELT_EXACT_READ_ROOTFIX.zip
+- SHA-256: df04630d846b0417dd0ddb1341cd2321a308ca189e0ade4c7e6adb11b2fce844
+- Büro-Ablage: /pferdeatelier/PERFORMANCE_BUERO/AKTUELLES_PLUGIN/PFERDEATELIER_AFFILIATE_6.72.377_GEBUENDELT_EXACT_READ_ROOTFIX.zip
+- Prüfnachweis: /pferdeatelier/PERFORMANCE_BUERO/AKTUELLES_PLUGIN/PFERDEATELIER_6.72.377_PRUEFNACHWEIS.md
+- GitHub-Nachweis: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PRUEFNACHWEIS_6.72.377.md
 
-Bewertung:
-- Cache-Hits gegenüber 6.72.375: 135.828 -> 121.246 = -14.582 / ca. -10,7 %.
-- Sattel: 81.301 -> 78.476 = -2.825 / ca. -3,5 %.
-- Queries unverändert.
-- Die Cache-Reduktion ist durch die zuvor lokal gemessenen Portal/Home-Wiederholungen ursächlich belegt.
-- Gesamt-Speedup nicht belegt: neuer Lauf hat deutlich höhere Serverlast und höhere CPU auch auf gemeinsamen Vergleichsrouten.
-- 6.72.376 bleibt aktuelles Live-Plugin.
-- Kein neues Einzel-Fix-Paket.
-- nächster Arbeitsblock: mehrere belegte Restursachen der verbleibenden Cache-/Rankingarbeit sammeln, gemeinsam simulieren, dann erst ein neues gebündeltes Testpaket.
+Status:
+- ein gebündelter Kandidat mit mehreren direkt gemessenen Ursachen, kein Einzel-Fix-Paket.
+- Realbestand: Meta-Hotpath 8.080 -> 1.010; Control-Optionen 9.316 -> 11; Portal/Home 3.030 -> 3; Incident 648 -> 8; eBay-Checkpoint 393 -> 1; Shared Pool identisch.
+- relevante dynamische Zustände fallen auf historischen Einzelpfad zurück.
+- 0 bestehende Funktionen entfernt; Kernlogik und Schreibwege unverändert.
+- PHP 23/23 und ZIP 66/66 vollständig geprüft.
+- noch nicht live gemessen.
+- nächster Schritt: 6.72.377 installieren, genau einen PASSIV-Gesamtlauf ausführen.
