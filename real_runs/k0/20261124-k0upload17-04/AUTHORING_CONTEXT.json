@@ -1,0 +1,165 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Bis zu welcher Temperatur dürfen Pferde draußen bleiben?",
+    "target_keyword": "Bis zu welcher Temperatur dürfen Pferde draußen bleiben?",
+    "category": "alltags-pferde-haltungsformen",
+    "article_type": "FAQ",
+    "plan_slot": "23e2f387c204610aad9695b2f0be2a5fae5b2e45db99fb553ec746099f7725e6"
+  },
+  "content_profile": {
+    "search_intent": "Temperaturgrenzen für den Aufenthalt von Pferden im Freien"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horse-in-the-winter",
+          "source_title": "University of Minnesota – Caring for Your Horse in the Winter"
+        },
+        {
+          "source_url": "https://app.pferd-aktuell.de/ausbildung/pferdeverhalten/pferdeverhalten-und-ethologie-des-pferdes",
+          "source_title": "Pferdesport Deutschland – Pferdeverhalten"
+        }
+      ],
+      "claims": [
+        "An Kälte gewöhnte Pferde können bei niedrigen Temperaturen draußen zurechtkommen.",
+        "Wetterschutz ist bei bestimmten Wetterlagen sehr wichtig.",
+        "Bei Wind und Niederschlägen nutzen mehr Pferde den Unterstand.",
+        "Winterfell unterstützt Pferde beim Ausgleich kalter Temperaturen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Bis zu welcher Temperatur dürfen Pferde draußen bleiben?",
+      "topic": "Bis zu welcher Temperatur dürfen Pferde draußen bleiben?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "alltags-pferde-haltungsformen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Bis zu welcher Temperatur dürfen Pferde draußen bleiben?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horse-in-the-winter",
+        "source_title": "University of Minnesota – Caring for Your Horse in the Winter",
+        "evidence_text": "Horses acclimated to cold temperatures often prefer and are better off outdoors.",
+        "evidence_text_sha256": "d6fb584840e81accf20ab138e41e53d41412777b16313d9c150cbc05aadfffa2",
+        "statement": "An Kälte gewöhnte Pferde können bei niedrigen Temperaturen draußen zurechtkommen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horse-in-the-winter",
+        "source_title": "University of Minnesota – Caring for Your Horse in the Winter",
+        "evidence_text": "Shelter access is very important in certain weather conditions.",
+        "evidence_text_sha256": "dc44597b3cc3db6531794945aaa5eaa3b2d480e2444eb456061af44b08d0e696",
+        "statement": "Wetterschutz ist bei bestimmten Wetterlagen sehr wichtig.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horse-in-the-winter",
+        "source_title": "University of Minnesota – Caring for Your Horse in the Winter",
+        "evidence_text": "More horses used shelters in breezy conditions during snow or rain.",
+        "evidence_text_sha256": "0d1db85bedf0839925cd43599b075dc572959eb0bb016555477dde1c6c5038e0",
+        "statement": "Bei Wind und Niederschlägen nutzen mehr Pferde den Unterstand.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/pferdeverhalten/pferdeverhalten-und-ethologie-des-pferdes",
+        "source_title": "Pferdesport Deutschland – Pferdeverhalten",
+        "evidence_text": "So toleriert es große Temperaturschwankungen und fängt den erhöhten Energiebedarf im Winter mit einem dichten Winterfell ab.",
+        "evidence_text_sha256": "885a5c4bc4a362a5b1f364f72ef52a1637a3345fc90340d02f672f1eca3b7fc9",
+        "statement": "Winterfell unterstützt Pferde beim Ausgleich kalter Temperaturen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "anchor": "alltags-pferde-haltungsformen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/ausruestung/ausruestung-decken/pferdedecken-winterdecken/",
+        "anchor": "Winterdecken",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/alltags-pferde-haltungsformen/",
+        "active": true
+      },
+      {
+        "href": "/ausruestung/ausruestung-decken/pferdedecken-winterdecken/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "alltags-pferde-haltungsformen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Winter",
+      "Temperatur",
+      "Fell",
+      "Frost",
+      "Kälte",
+      "Schutz",
+      "Witterung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die konkrete Leserfrage lässt sich durch sachliche Einordnung und praktische Handlungsschritte beantworten; eine künstliche Vergleichstabelle hätte keinen Mehrwert."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
