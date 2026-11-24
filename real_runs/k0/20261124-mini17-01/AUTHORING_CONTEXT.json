@@ -16,15 +16,19 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.sprenger.de/products/gummistriegel",
-          "source_title": "Sprenger – Gummistriegel"
+          "source_url": "https://www.equiva.com/pferd/pflegeprodukte/putzzeug",
+          "source_title": "EQUIVA – Pferdeputzzeug"
+        },
+        {
+          "source_url": "https://www.equiva.com/goldhorse-gummistriegel-mit-schlaufe-1087238",
+          "source_title": "GOLDHORSE – Gummistriegel mit Schlaufe bei EQUIVA"
         }
       ],
       "claims": [
-        "Ein weicher Gummistriegel eignet sich zu Beginn der Putzroutine, um kleinere Verschmutzungen aus dem Pferdefell zu lösen.",
-        "Ein Gummistriegel kann mit kreisenden Bewegungen für eine wohltuende Massage eingesetzt werden.",
-        "Die Handhabung des Gummistriegels hängt auch davon ab, wie angenehm er in der Hand liegt.",
-        "Gummi lässt sich nach dem Putzen reinigen und ist ein robustes Material."
+        "Zu Beginn der Pferdepflege wird ein Striegel zum Reinigen des Fells eingesetzt.",
+        "Kreisende Striegelbewegungen gehören zur Fellpflege; an Kopf und Beinen sind schonende Bürsten vorzuziehen.",
+        "Nach dem Striegeln entfernt die Kardätsche den gelösten Staub aus dem Pferdefell.",
+        "Weiche Noppen eines Gummistriegels können bei kreisender Anwendung Schmutz lösen und zugleich massieren."
       ],
       "fresh_research_reference_date": "2026-11-24"
     },
@@ -52,44 +56,44 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.sprenger.de/products/gummistriegel",
-        "source_title": "Sprenger – Gummistriegel",
-        "evidence_text": "Dieser weiche Gummistriegel ist der ideale Allrounder, um zu Beginn der Putzroutine das Fell des Pferdes von kleineren Verschmutzungen zu befreien.",
-        "evidence_text_sha256": "8994c05f1b53751f1d408497ee3aeaff7c937acd8e86a5b7a378c8b392d7c245",
-        "statement": "Ein weicher Gummistriegel eignet sich zu Beginn der Putzroutine, um kleinere Verschmutzungen aus dem Pferdefell zu lösen.",
+        "source_url": "https://www.equiva.com/pferd/pflegeprodukte/putzzeug",
+        "source_title": "EQUIVA – Pferdeputzzeug",
+        "evidence_text": "Um das Fell zu reinigen beginnt man zunächst mit dem Striegel für Pferde.",
+        "evidence_text_sha256": "0a08f7850d78aaab68f789f11217b1d90fc22204accdba285d745b385773ae8a",
+        "statement": "Zu Beginn der Pferdepflege wird ein Striegel zum Reinigen des Fells eingesetzt.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F2": {
-        "source_url": "https://www.sprenger.de/products/gummistriegel",
-        "source_title": "Sprenger – Gummistriegel",
-        "evidence_text": "Auch für eine wohltuende Massage eignet er sich, wenn er in kreisenden Bewegungen genutzt wird.",
-        "evidence_text_sha256": "99da3f8ab3114a4d4d98dd2e6186d07e2c676e6bc109aa66addd37bfe570c285",
-        "statement": "Ein Gummistriegel kann mit kreisenden Bewegungen für eine wohltuende Massage eingesetzt werden.",
+        "source_url": "https://www.equiva.com/pferd/pflegeprodukte/putzzeug",
+        "source_title": "EQUIVA – Pferdeputzzeug",
+        "evidence_text": "Man striegelt das gesamte Pferd in kreisenden Bewegungen, am Kopf und an den Beinen sollte man aber zu Bürsten und Kardätschen greifen, da diese Stellen sehr empfindlicher sind.",
+        "evidence_text_sha256": "448e1aeec271a6ee82cfdb23a47ed9b58c18adc3dca8fdc78c3932531ec29079",
+        "statement": "Kreisende Striegelbewegungen gehören zur Fellpflege; an Kopf und Beinen sind schonende Bürsten vorzuziehen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F3": {
-        "source_url": "https://www.sprenger.de/products/gummistriegel",
-        "source_title": "Sprenger – Gummistriegel",
-        "evidence_text": "Der Striegel liegt angenehm in der Hand und bewegt sich leichtgängig und geschmeidig durch das Pferdefell.",
-        "evidence_text_sha256": "fea4f534be03e4d566e176f305438bd21079c68e5fef972643f7e93201cd6931",
-        "statement": "Die Handhabung des Gummistriegels hängt auch davon ab, wie angenehm er in der Hand liegt.",
+        "source_url": "https://www.equiva.com/pferd/pflegeprodukte/putzzeug",
+        "source_title": "EQUIVA – Pferdeputzzeug",
+        "evidence_text": "Nachdem man den groben Dreck mit dem Striegel vom Pferd gelöst hat, bürstet man mit der Kardätsche den restlichen Staub aus dem Fell.",
+        "evidence_text_sha256": "c87e750481af9010548852e24f926b505c332930f820f05d8ab97019732843a5",
+        "statement": "Nach dem Striegeln entfernt die Kardätsche den gelösten Staub aus dem Pferdefell.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F4": {
-        "source_url": "https://www.sprenger.de/products/gummistriegel",
-        "source_title": "Sprenger – Gummistriegel",
-        "evidence_text": "Das Material Gummi ist langlebig, robust und lässt sich nach der Anwendung ganz einfach reinigen.",
-        "evidence_text_sha256": "126df1902a7069fe57fce0304231058904fe040416b793bcbae3e6953f129bf5",
-        "statement": "Gummi lässt sich nach dem Putzen reinigen und ist ein robustes Material.",
+        "source_url": "https://www.equiva.com/goldhorse-gummistriegel-mit-schlaufe-1087238",
+        "source_title": "GOLDHORSE – Gummistriegel mit Schlaufe bei EQUIVA",
+        "evidence_text": "Mit kreisenden Bewegungen lässt sich der Schmutz effektiv aus dem Fell deines Pferdes lösen, während die weichen Noppen gleichzeitig eine angenehme Massage bieten.",
+        "evidence_text_sha256": "c0cc02e051297798b7fb877c5949997f50175f29adaca484bb19e95f2f1ccbc8",
+        "statement": "Weiche Noppen eines Gummistriegels können bei kreisender Anwendung Schmutz lösen und zugleich massieren.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
@@ -165,5 +169,5 @@
     "table_multiword_exceptions": []
   },
   "publish_allowed": false,
-  "source_approval_provenance": "Sprenger manufacturer original-product description, source text verified in original page on 2026-11-24."
+  "source_approval_provenance": "EQUIVA official own-brand page and seller's original Pferdeputzzeug explanation verified at the original URLs on 2026-11-24."
 }
