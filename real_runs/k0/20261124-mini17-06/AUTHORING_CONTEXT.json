@@ -1,0 +1,163 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Warum kann Stroh für Pferde problematisch sein?",
+    "target_keyword": "Warum kein Stroh für Pferde?",
+    "category": "pferdeernaehrung-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "cfdba6131ff7efbbc979d71227e5b718cc252715ec67b947ffdcfc6dc670b529"
+  },
+  "content_profile": {
+    "search_intent": "Gründe, warum Stroh als Futter für Pferde kritisch beurteilt wird"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+          "source_title": "Deutscher Tierschutzbund – Haltung von Pferden"
+        }
+      ],
+      "claims": [
+        "Zu viel Stroh in der Fütterung kann bei Pferden das Risiko für eine Verstopfung erhöhen.",
+        "Stroh ist rohfaserreich, liefert aber wenig Eiweiß sowie Vitamine und Mineralstoffe.",
+        "Stroh kann als Einstreu und Beschäftigungsmaterial dienen und zum Sättigungsgefühl beitragen.",
+        "Heu ist ein häufig eingesetztes Grundfuttermittel bei Pferden."
+      ],
+      "fresh_research_reference_date": "2026-11-24"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Warum kein Stroh für Pferde?",
+      "topic": "Warum kann Stroh für Pferde problematisch sein?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Warum kein Stroh für Pferde?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "Pferde sollten täglich maximal 1 Kilogramm Stroh pro 100 Kilogramm Körpergewicht fressen, da ansonsten das Risiko einer Verstopfung besteht.",
+        "evidence_text_sha256": "62a078e8ff2a262136fb16b6e48effb4a0f34fe920ae14bebd144176782266aa",
+        "statement": "Zu viel Stroh in der Fütterung kann bei Pferden das Risiko für eine Verstopfung erhöhen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "Stroh weist einen hohen Rohfaseranteil auf, hat jedoch geringe Eiweiß-, Vitamin- und Mineralstoffgehalte.",
+        "evidence_text_sha256": "8204513ae8b714d95bf438644f23a38927a0074450c3b2efaefd4afae5e8d0ba",
+        "statement": "Stroh ist rohfaserreich, liefert aber wenig Eiweiß sowie Vitamine und Mineralstoffe.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "Stroh dient unter anderem als Einstreu und verformbares Beschäftigungsmaterial, reguliert aber auch das Sättigungsgefühl und fördert zu einem gewissen Grad auch die Dickdarmtätigkeit.",
+        "evidence_text_sha256": "493ea9db91e6c37aab35f4178dfdbca4bc4bf3aa6f5ac71a891088a2287b2ffb",
+        "statement": "Stroh kann als Einstreu und Beschäftigungsmaterial dienen und zum Sättigungsgefühl beitragen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.tierschutzbund.de/ueber-uns/material/broschuere-haltung-von-pferden/",
+        "source_title": "Deutscher Tierschutzbund – Haltung von Pferden",
+        "evidence_text": "Heu ist getrocknetes Grünfutter von Wiesen und Weiden und wird am häufigsten als Grundfuttermittel eingesetzt.",
+        "evidence_text_sha256": "3cee93f81ac1f8563f10d1bf4559637c0aa50740d28d8676f3568f2d18e664f9",
+        "statement": "Heu ist ein häufig eingesetztes Grundfuttermittel bei Pferden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "anchor": "",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/fuetterung/",
+        "anchor": "",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/fuetterung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferd",
+      "Stroh",
+      "Heu",
+      "Pferdefütterung",
+      "Raufutter",
+      "Verdauung",
+      "Rohfaser"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Einzelne Bedingungen und der konkrete Pferdebedarf werden als zusammenhängende Erklärung mit Checkliste verständlicher als in einer vereinfachenden Tabelle."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false,
+  "source_approval_provenance": "German Tierschutzbund original official Pferdehaltung brochure, primary source excerpts verified 2026-11-24."
+}
