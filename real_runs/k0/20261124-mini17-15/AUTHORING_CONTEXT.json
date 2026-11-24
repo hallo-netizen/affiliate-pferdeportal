@@ -1,0 +1,188 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Einen Trainingsplan für das eigene Pferd erstellen",
+    "target_keyword": "Wie erstelle ich einen Trainingsplan für mein Pferd?",
+    "category": "trainingsplan-vorlage-uebungen",
+    "article_type": "Anleitung",
+    "plan_slot": "088840b10fef71fc0e7ad82b362fe58beb6e24fd15004c75c170445d0155d423"
+  },
+  "content_profile": {
+    "search_intent": "Einen individuellen, sicheren Trainingsplan für das eigene Pferd nach Ziel, Belastbarkeit, abwechslungsreichen Übungen und Überprüfung erstellen"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://app.pferd-aktuell.de/ausbildung/ausbildung-des-pferdes/ausbildung-des-pferdes",
+          "source_title": "Deutsche Reiterliche Vereinigung FN – Ausbildung des Pferdes"
+        }
+      ],
+      "claims": [
+        "Die klassische Pferdeausbildung soll abwechslungsreich und vielseitig aufgebaut sein.",
+        "Der Trainingsplan muss körperliche Voraussetzungen und natürliches Verhalten des Pferdes berücksichtigen.",
+        "Die klassische Pferdeausbildung verfolgt das Ziel einer ausgewogenen Gymnastizierung und Kräftigung.",
+        "Die sechs Punkte der FN-Ausbildungsskala sind systematisch statt als starre Folge zu verstehen."
+      ],
+      "fresh_research_reference_date": "2026-11-24"
+    },
+    "production_plan_item": {
+      "article_type": "Anleitung",
+      "target_keyword": "Wie erstelle ich einen Trainingsplan für mein Pferd?",
+      "topic": "Einen Trainingsplan für das eigene Pferd erstellen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Einen individuellen abwechslungsreichen Trainingsplan für das eigene Pferd erstellen und regelmäßig überprüfen.",
+      "preparation_items": [
+        "Körperliche Voraussetzungen und Gesundheitszustand prüfen",
+        "Trainingsziel und vorhandene Ausrüstung notieren"
+      ],
+      "procedure_steps": [
+        "Ausgangslage und Trainingsziel beschreiben",
+        "Abwechslungsreiche und vielseitige Aufgaben auswählen",
+        "Belastung an körperliche Voraussetzungen anpassen",
+        "Gymnastizierung und Kräftigung schrittweise aufbauen",
+        "Fortschritt und Reaktion des Pferdes dokumentieren"
+      ],
+      "safety_controls": [
+        "Keine Überforderung bei Einschränkungen oder Schmerzen",
+        "Bei Gesundheitsfragen Fachleute einschalten"
+      ],
+      "common_errors": [
+        "Starre Schemen ohne Anpassung an das Pferd",
+        "Ständig wiederholte eintönige Einheiten"
+      ],
+      "result_checks": [
+        "Pferd bewegt sich aufmerksam und ohne erkennbare Schmerzen",
+        "Training ist abwechslungsreich und Ziel überprüfbar"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/ausbildung-des-pferdes/ausbildung-des-pferdes",
+        "source_title": "Deutsche Reiterliche Vereinigung FN – Ausbildung des Pferdes",
+        "evidence_text": "bezieht sich auf die Ausbildung eines jeden Pferdes und ist abwechslungsreich und vielseitig angelegt",
+        "evidence_text_sha256": "3c30261f0659334ed9a88b8a7f835e04be64094cfaeed2523757b1c6e4cafa5b",
+        "statement": "Die klassische Pferdeausbildung soll abwechslungsreich und vielseitig aufgebaut sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/ausbildung-des-pferdes/ausbildung-des-pferdes",
+        "source_title": "Deutsche Reiterliche Vereinigung FN – Ausbildung des Pferdes",
+        "evidence_text": "berücksichtigt die körperlichen Voraussetzungen des Pferdes und das natürliche Verhalten",
+        "evidence_text_sha256": "158ef5e3506e4255996c6c720e01c8c6bbb18b9a124f06d123e2853d26f54ead",
+        "statement": "Der Trainingsplan muss körperliche Voraussetzungen und natürliches Verhalten des Pferdes berücksichtigen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/ausbildung-des-pferdes/ausbildung-des-pferdes",
+        "source_title": "Deutsche Reiterliche Vereinigung FN – Ausbildung des Pferdes",
+        "evidence_text": "zielt ab auf eine ausgewogene Gymnastizierung und Kräftigung des Pferdes",
+        "evidence_text_sha256": "3782dd89a41cfc643081788d0e7c1f7d3aba35ad29486091eb354d392d4d3543",
+        "statement": "Die klassische Pferdeausbildung verfolgt das Ziel einer ausgewogenen Gymnastizierung und Kräftigung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/ausbildung-des-pferdes/ausbildung-des-pferdes",
+        "source_title": "Deutsche Reiterliche Vereinigung FN – Ausbildung des Pferdes",
+        "evidence_text": "Die sechs Punkte der Skala sind nicht schematisch, sondern systematisch zu verstehen",
+        "evidence_text_sha256": "c1905132c31feaba797fce9a64e199c4bcc745d1d80b8768c3ce2b76c2d0fc82",
+        "statement": "Die sechs Punkte der FN-Ausbildungsskala sind systematisch statt als starre Folge zu verstehen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/trainingsplan-vorlage-uebungen/",
+        "anchor": "",
+        "block": "preparation"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-vorlagen-und-planung/",
+        "anchor": "",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/trainingsplan-vorlage-uebungen/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-vorlagen-und-planung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Trainingsplan",
+      "Pferd",
+      "Training",
+      "Gymnastizierung",
+      "Kräftigung",
+      "Abwechslung",
+      "Vorlagen",
+      "Planung",
+      "Ausbildung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "LINEAR_SEQUENCE",
+      "rationale": "Ein individueller Trainingsplan folgt konkreten Entscheidungsschritten und Anpassungen am Pferd; eine starre Tabelle würde keine belastbare zusätzliche Vergleichsinformation liefern."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false,
+  "source_approval_provenance": "Offizielle FN-Ausbildungsskala der Deutschen Reiterlichen Vereinigung, Originaltext geprüft am 24.11.2026."
+}
