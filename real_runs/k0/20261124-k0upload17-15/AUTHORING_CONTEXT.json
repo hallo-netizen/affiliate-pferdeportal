@@ -1,0 +1,165 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welche Mineralien brauchen Pferde?",
+    "target_keyword": "Welche Mineralien für Pferde?",
+    "category": "pferdeernaehrung-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "0fecb3e84ee2434cb4f1812bd6709fe4ba13436232763eb9eb0cf103d9de6b76"
+  },
+  "content_profile": {
+    "search_intent": "Welche Mineralien Pferde für ihre Ernährung benötigen"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://app.pferd-aktuell.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+          "source_title": "Pferdesport Deutschland – Pferde richtig füttern"
+        },
+        {
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/feeding-your-horse-a-ration-balancer",
+          "source_title": "University of Minnesota – Providing Your Horse Vitamins and Minerals"
+        }
+      ],
+      "claims": [
+        "Pferde benötigen mehrere Mengenelemente und Mineralstoffe.",
+        "Verluste an Elektrolyten können bei hoher Belastung steigen.",
+        "Getreide liefert nicht automatisch alle nötigen Spurenelemente.",
+        "Mineralfutter muss passend zur Ration dosiert werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welche Mineralien für Pferde?",
+      "topic": "Welche Mineralien brauchen Pferde?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Mineralien für Pferde?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+        "evidence_text": "Die Mengenelemente, die das Pferd braucht, sind: Kalzium (Ca), Phosphor (P), Kalium (K), Magnesium (Mg), Natrium (Na), Chlor (Cl) und Schwefel (S).",
+        "evidence_text_sha256": "a41a5c3539991d8ad7ff915eb87167f3669fe9938fb511aa0a5ec140ad460e45",
+        "statement": "Pferde benötigen mehrere Mengenelemente und Mineralstoffe.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+        "evidence_text": "Natrium-, Kalium- und Chlormängel können bei Pferden auftreten, die viel schwitzen.",
+        "evidence_text_sha256": "1ca098a0e51ea9882c369f02ace45deaa08d66790b633e434d4c54e39350028b",
+        "statement": "Verluste an Elektrolyten können bei hoher Belastung steigen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/feeding-your-horse-a-ration-balancer",
+        "source_title": "University of Minnesota – Providing Your Horse Vitamins and Minerals",
+        "evidence_text": "cereal grains aren’t good sources of the trace minerals and vitamins your horse needs.",
+        "evidence_text_sha256": "5131e586ca3a992e4764d7f167bb421ead8d37a315589aed196c2141a54fc9cd",
+        "statement": "Getreide liefert nicht automatisch alle nötigen Spurenelemente.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/feeding-your-horse-a-ration-balancer",
+        "source_title": "University of Minnesota – Providing Your Horse Vitamins and Minerals",
+        "evidence_text": "Always follow the manufacturer’s feed directions when feeding a ration balancer.",
+        "evidence_text_sha256": "18dbfaaee7833e5335c135442b4e2bfc17a838d7cc53b62fd6f07be1f34431f6",
+        "statement": "Mineralfutter muss passend zur Ration dosiert werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "anchor": "pferdeernaehrung-verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/fuetterung/fuetterung-mineral-und-ergaenzer/",
+        "anchor": "Mineral & Ergänzer",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/fuetterung/fuetterung-mineral-und-ergaenzer/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Mineralien",
+      "Mineralstoffe",
+      "Natrium",
+      "Kalzium",
+      "Magnesium",
+      "Fütterung",
+      "Spurenelemente"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die konkrete Leserfrage lässt sich durch sachliche Einordnung und praktische Handlungsschritte beantworten; eine künstliche Vergleichstabelle hätte keinen Mehrwert."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
