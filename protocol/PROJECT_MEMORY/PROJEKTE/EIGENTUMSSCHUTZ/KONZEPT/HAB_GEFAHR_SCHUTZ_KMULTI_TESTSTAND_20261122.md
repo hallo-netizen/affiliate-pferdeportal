@@ -1,5 +1,22 @@
 # Hab & Bewahr – Gefahr & Schutz: praktischer K-Multi-Teststand
 
+## LETZTER STAND – 24.11.2026: Alle fünf Hab-Beitragsarten KISS-angebunden
+
+**Dieser Abschnitt ersetzt den älteren Stand „4/5, Bericht fehlt“.** Es wurde kein neuer Workflow, kein neuer Schreiber, kein Freigabe-Owner und keine neue Pluginversion angelegt. Der alte K0-Workflow ist unverändert.
+
+- **Einmalige Typentscheidung:** Ausschließlich der vorhandene Original-K-Multi-Eingang `kmulti_portal_entry.verify_source` entscheidet anhand des ursprünglichen WordPress-Artikeltyps. Die bestehende Hab-Regelbuchbrücke `hab_five_field_bridge.bind_hab_batch` übernimmt bei einer verifizierten echten Route ausschließlich die bereits gewählte `article_type_id` und lädt genau das zugehörige Originalregelbuch; **keine neue oder doppelte Typentscheidung nach der Recherche**.
+- **Fünf Typen – fünf unveränderte Originalregelbücher:** `FAQ→HAB_FAQ`, `Beratung→HAB_RATGEBER`, `Vergleich→HAB_VERGLEICH`, `Anleitung→HAB_ANLEITUNG`, `Bericht→HAB_BERICHT`. Falsche historische Zuordnung `Pflege→HAB_ANLEITUNG` entfernt, fremde/ungültige Typen gesperrt. Original-Hab-Regelbücher **5/5 Git-Blob-Hashes unverändert**.
+- **Minimale bestehende K-Multi-Verknüpfungen, kein Core-Umbau:** In `offline_writer_dev/portal_auto/KMULTI_PORTAL_REGISTRY.json` nur die Hab-Typzuordnung berichtigt; in `offline_rules/portal_bindings/hab_und_bewahr/hab_five_field_bridge.py` für die echte Route den schon gewählten Typ benutzt. Lediglich vorhandene Tests und deren Aufruf im vorhandenen Original-Gesamttest aktualisiert. K-Multi-Writing, Recherche, LanguageTool, signierter Endausgang, K0 und die anderen Portale unverändert.
+- **Hab-WordPress-Plugin bleibt 0.4.31.23** im selben bisherigen Archivpfad. Nur `contracts/k0-article-type-capabilities-v1.json` und `includes/class-txe-k0-article-types.php` geändert, historischer Klassen-/Dateiname aus Kompatibilitätsgründen beibehalten. Die Datenhoheit stammt jetzt ausdrücklich von den **fünf vorhandenen Hab-K-Multi-Regelbüchern**, nicht von Pferdeatelier K0. Kein zusätzlicher WordPress-Hook, keine zusätzliche Eingangsdatei, kein Plugin-Slug-/Versionswechsel. **85/87 Archivdateien byteidentisch zur bisherigen 0.4.31.23**, 78/78 PHP-Syntaxdateien fehlerfrei, alle bisherigen PHP-Klassenmethoden identisch. Fünf Hab-Typen unterstützt, `Pflege` abgewiesen. Archiv nach Ablage im Hab-Pluginbüro erneut bytegleich zurückgeladen. **Aktuelle archivierte ZIP-SHA256 `bb4b076b52a6ba29743d0a24d394071b2b0b1e9c0dd5b90c6e20a8f68b4d3943`.**
+- **Echter GitHub-Gesamtlauf BESTANDEN:** [45364216973](https://github.com/hallo-netizen/k0-multiportal/actions/runs/45364216973), 24.11.2026: **278 technische Prüfungen (77+98+15+26+62)** bestanden, einschließlich Tests aller fünf echten Typ-Zuordnungen direkt vom Original-Eingang bis zu den Original-Hab-Regelbüchern und Ablehnung von `Pflege`. Die vorhandene Dreiercharge (Beratung, Vergleich, Beratung) läuft ohne geänderte Original-IDs, WordPress-Herkunftsquittung oder neue Quellenrecherche.
+- **Beabsichtigte Freigabegrenze weiterhin korrekt:** Original-Hab-Regelbuchstatus `writer_ready=false`, echte vorhandene 3er-Entwürfe bestehen bisher **57/110** der Hab-Pflichtregeln pro Artikel, **53/110 nicht ausgeführt**, `publish_allowed=false`. Ein tatsächlich freigegebenes WordPress-Importfile und echter WordPress-Liveimport sind **nicht** nachgewiesen. Diese Sperren dürfen für eine reine Regel-Anbindung nicht abgeschaltet werden.
+- **Ausgabe-/Simulationsbeleg:** `HAB_043123_NUR_REGEL_ANBINDUNG_5_TYPEN_VERIFIZIERT_20261124.json` in derselben vorhandenen Hab-Plugin-Kandidatenablage.
+
+**Fazit:** Fünf von fünf Hab-Regelbuch-Anbindungen sind technisch fertig und mit dem ORIGINAL-K-Multi-Gesamtworkflow bestanden. Die noch offene fachliche 110-HARD-Prüfung und externe Signatur sind separate bestehende Freigabestationen, **kein fehlendes Typ-Binding**. Keine neue Plugin- oder Workflowentwicklung.
+
+---
+
+
 ## KORREKTUR 23.11.2026 – keine neue Pluginversion, Original-K-Multi bleibt unangetastet
 
 **Neuester verifizierter Stand und Korrektur früherer Aussage „Hab-Anbindung vollständig“:** Der **technische Original-Transport** des Hab-Plugins 0.4.31.23 zur K-Multi-Eingabe und zurück zum WP-Entwurfsimport ist für die bestehende 3er-Charge nachweislich kompatibel. Das bedeutet **NICHT**, dass alle fünf Hab-Beitragsarten fachlich richtig verdrahtet oder die 110-HARD-Freigabe abgeschlossen sind.
