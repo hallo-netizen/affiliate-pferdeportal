@@ -1,0 +1,165 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Warum muss mein Pferd ständig Wasser lassen?",
+    "target_keyword": "Warum muss mein Pferd ständig Wasserlassen?",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "7a0de299d04b2245cd15da9152f3c1c0874de3da5edce6d82f6a18291a22dbf2"
+  },
+  "content_profile": {
+    "search_intent": "Mögliche Ursachen für ständigen Harndrang beim Pferd, unabhängig vom Reiten"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/horse-owners/kidney-and-urinary-tract-disorders-of-horses/noninfectious-diseases-of-the-urinary-system-in-horses",
+          "source_title": "MSD Veterinary Manual – Noninfectious Diseases of the Urinary System"
+        },
+        {
+          "source_url": "https://www.msdvetmanual.com/horse-owners/kidney-and-urinary-tract-disorders-of-horses/infectious-diseases-of-the-urinary-system-in-horses?ruleredirectid=458",
+          "source_title": "MSD Veterinary Manual – Infectious Diseases of the Urinary System"
+        }
+      ],
+      "claims": [
+        "Häufiger Harndrang kann mit übermäßigem Durst und Nierenproblemen auftreten.",
+        "Blasensteine können verstärktes Wasserlassen und Blut im Urin verursachen.",
+        "Eine Blasenentzündung kann häufiges Urinieren und Pressen auslösen.",
+        "Für eine sichere Diagnose ist tierärztliche Untersuchung erforderlich."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Warum muss mein Pferd ständig Wasserlassen?",
+      "topic": "Warum muss mein Pferd ständig Wasser lassen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Warum muss mein Pferd ständig Wasserlassen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/kidney-and-urinary-tract-disorders-of-horses/noninfectious-diseases-of-the-urinary-system-in-horses",
+        "source_title": "MSD Veterinary Manual – Noninfectious Diseases of the Urinary System",
+        "evidence_text": "Usually, the earliest signs are unexplained weight loss, excessive thirst, and excessive urination.",
+        "evidence_text_sha256": "9950c2413b7978cea764eb621c839162a406e34851f21bcaed2edb575f60320c",
+        "statement": "Häufiger Harndrang kann mit übermäßigem Durst und Nierenproblemen auftreten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/kidney-and-urinary-tract-disorders-of-horses/noninfectious-diseases-of-the-urinary-system-in-horses",
+        "source_title": "MSD Veterinary Manual – Noninfectious Diseases of the Urinary System",
+        "evidence_text": "Most stones are located in the bladder and cause blood in the urine and increased thirst and urination.",
+        "evidence_text_sha256": "6522797acb9bf2e436ad24c8f7a4167bde98abfdac96e3ab890908b33f5e1027",
+        "statement": "Blasensteine können verstärktes Wasserlassen und Blut im Urin verursachen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/kidney-and-urinary-tract-disorders-of-horses/infectious-diseases-of-the-urinary-system-in-horses?ruleredirectid=458",
+        "source_title": "MSD Veterinary Manual – Infectious Diseases of the Urinary System",
+        "evidence_text": "Signs of cystitis include loss of control over urination, frequent urination, urine dribbling, urine scalding, and straining to urinate.",
+        "evidence_text_sha256": "2b2e19085d2a0afe4893169b57adf04ee3863372351c774d199e183b698d0be6",
+        "statement": "Eine Blasenentzündung kann häufiges Urinieren und Pressen auslösen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/kidney-and-urinary-tract-disorders-of-horses/infectious-diseases-of-the-urinary-system-in-horses?ruleredirectid=458",
+        "source_title": "MSD Veterinary Manual – Infectious Diseases of the Urinary System",
+        "evidence_text": "A urine sample is needed to diagnose bacterial cystitis.",
+        "evidence_text_sha256": "4aa7faba0ad69e3da1462be99163e0fa9b4bf5b6ce8ec13f9ae176426e86bc73",
+        "statement": "Für eine sichere Diagnose ist tierärztliche Untersuchung erforderlich.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "pferdegesundheit-verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/fuetterung/fuetterung-wasser/",
+        "anchor": "Wasser",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/fuetterung/fuetterung-wasser/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Urin",
+      "Wasserlassen",
+      "Nieren",
+      "Blase",
+      "Harn",
+      "Trinken",
+      "Durst"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die konkrete Leserfrage lässt sich durch sachliche Einordnung und praktische Handlungsschritte beantworten; eine künstliche Vergleichstabelle hätte keinen Mehrwert."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
