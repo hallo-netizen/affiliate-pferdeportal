@@ -1,0 +1,23 @@
+{
+  "contract": "K0_RESEARCH_RETURN_V1",
+  "status": "REPAIR_REQUIRED",
+  "owner": "SAME_RESEARCH_OWNER",
+  "identity": {
+    "title": "Gummistriegel für Pferde",
+    "target_keyword": "gummistriegel pferd",
+    "category": "striegel-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "613439e62c3b90f20f26a866b51744ff8c59e088b8f9e28de2f7ee2b2e31b3a2"
+  },
+  "run_instance_id": "run:692c0986540f202f07cae9c5",
+  "return_to": "AUTHORING_CONTEXT.json",
+  "issues": [
+    {
+      "fact_id": "F1",
+      "reason": "RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL",
+      "source_url": "https://www.sprenger.de/products/gummistriegel"
+    }
+  ],
+  "next_action": "RESEARCH_AGAIN_OR_PROVE_ORIGINAL_SOURCE_AND_RESUBMIT_SAME_RUN",
+  "publish_allowed": false
+}
