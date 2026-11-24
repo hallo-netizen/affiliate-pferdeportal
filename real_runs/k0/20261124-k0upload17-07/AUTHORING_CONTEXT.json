@@ -1,0 +1,165 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welches Salz ist für Pferde geeignet?",
+    "target_keyword": "Welches Salz dürfen Pferde fressen?",
+    "category": "pferdeernaehrung-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "54bde34fd2c6607a5269d9aa88414a26b031e06111659fc66320e3e479b8344b"
+  },
+  "content_profile": {
+    "search_intent": "Welche Salzarten für Pferde zum Fressen geeignet sind"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://app.pferd-aktuell.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+          "source_title": "Pferdesport Deutschland – Pferde richtig füttern"
+        },
+        {
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids?ruleredirectid=445",
+          "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses"
+        }
+      ],
+      "claims": [
+        "Ein normal arbeitendes Pferd kommt häufig mit einem einfachen Salzleckstein aus.",
+        "Stark schwitzende Pferde können mehr Elektrolyte benötigen.",
+        "Der Salzbedarf muss auf die gesamte Ration bezogen werden.",
+        "Starke Belastung kann erhebliche Salzverluste durch Schweiß auslösen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welches Salz dürfen Pferde fressen?",
+      "topic": "Welches Salz ist für Pferde geeignet?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdeernaehrung-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welches Salz dürfen Pferde fressen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+        "evidence_text": "Ein Salzleckstein frei zur Verfügung gestellt, reicht für ein normal arbeitendes Pferd in der Regel aus.",
+        "evidence_text_sha256": "5a479151f94868ae869b2343857ae71df27259299d5458546fed766f4c4bf317",
+        "statement": "Ein normal arbeitendes Pferd kommt häufig mit einem einfachen Salzleckstein aus.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/pferdehaltung/pferdefuetterung/fuetterung-pferde-richtig-fuettern",
+        "source_title": "Pferdesport Deutschland – Pferde richtig füttern",
+        "evidence_text": "Natrium-, Kalium- und Chlormängel können bei Pferden auftreten, die viel schwitzen.",
+        "evidence_text_sha256": "1ca098a0e51ea9882c369f02ace45deaa08d66790b633e434d4c54e39350028b",
+        "statement": "Stark schwitzende Pferde können mehr Elektrolyte benötigen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids?ruleredirectid=445",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses",
+        "evidence_text": "The NRC recommends that horse rations contain 1.6–1.8 g salt/kg feed dry matter; however, there are limited data on the precise requirements.",
+        "evidence_text_sha256": "7404292c04a3b5788af62a0eb6687124c4621201eb9100bab9af1dfe5f8fa2ae",
+        "statement": "Der Salzbedarf muss auf die gesamte Ration bezogen werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids?ruleredirectid=445",
+        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses",
+        "evidence_text": "Sweat losses can cause NaCl losses > 30 g (1 oz) in only 1–2 hours of hard work.",
+        "evidence_text_sha256": "d8272b60fc252ba527fc640977bab7d665fb411cf2baaf7484a8a8a2484d266b",
+        "statement": "Starke Belastung kann erhebliche Salzverluste durch Schweiß auslösen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "anchor": "pferdeernaehrung-verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/fuetterung/fuetterung-mineral-und-ergaenzer/salzlecksteine/",
+        "anchor": "Salzlecksteine",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdeernaehrung-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/fuetterung/fuetterung-mineral-und-ergaenzer/salzlecksteine/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdeernaehrung-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Salz",
+      "Natrium",
+      "Chlorid",
+      "Mineral",
+      "Salzleckstein",
+      "Elektrolyte",
+      "Fütterung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die konkrete Leserfrage lässt sich durch sachliche Einordnung und praktische Handlungsschritte beantworten; eine künstliche Vergleichstabelle hätte keinen Mehrwert."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
