@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Ist langes oder kurzes Heu für Pferde besser?",
+      "target_keyword": "Ist langes oder kurzes Heu für Pferde besser?",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "fa5cf275c3dca79034fb20816019e0f45d31e50842a8fb29a98a193af3e51e1d"
+    }
+  ],
+  "batch_sha256": "93a73d1cabbcf7547f8c4842af072f466bfa3fb3ef0381ed08764a9014345302"
+}
