@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche Nachteile haben Rübenschnitzel für Pferde?",
+      "target_keyword": "Welche Nachteile haben Rübenschnitzel für Pferde?",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "7624136e7a06b77b1437acb844fe7a1e99b96a99f02b1f5b09911245e26025e2"
+    }
+  ],
+  "batch_sha256": "06c205c5b7c1a0bdbd71e2e8413b25a103d06f45510ba176885a432decd4f211"
+}

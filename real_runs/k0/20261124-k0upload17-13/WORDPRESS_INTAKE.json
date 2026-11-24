@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche Anzeichen zeigen Pferde, die zu wenig trinken?",
+      "target_keyword": "Welche Symptome zeigen Pferde, die zu wenig trinken?",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "c40a68d2628a138d333afe96ad8f4586fe55dcf42e6d8e9d5fceaa8217f83122"
+    }
+  ],
+  "batch_sha256": "1d2e9945eff19aa97451b2a6be615d65e1a9d576c0a690655a3be91398b5e32e"
+}

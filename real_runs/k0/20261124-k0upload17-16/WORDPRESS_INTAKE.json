@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Warum muss mein Pferd ständig Wasser lassen?",
+      "target_keyword": "Warum muss mein Pferd ständig Wasserlassen?",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "7a0de299d04b2245cd15da9152f3c1c0874de3da5edce6d82f6a18291a22dbf2"
+    }
+  ],
+  "batch_sha256": "d15307b81312aefeb23a58d93bd1c57b5311baeff06ed7d560338a2c9a09fa22"
+}

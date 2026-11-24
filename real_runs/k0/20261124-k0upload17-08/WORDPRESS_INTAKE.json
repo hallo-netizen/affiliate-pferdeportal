@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Warum trinkt mein Pferd so viel Wasser?",
+      "target_keyword": "Warum trinkt mein Pferd so viel Wasser?",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "0d56c3aa90a28ca177a602658d97b5685a60934b5d5b5586155fb6e4208a639a"
+    }
+  ],
+  "batch_sha256": "2087332398d9d3e87e97a0381a611719fa139435bbcc5bf3d8776798531c3479"
+}

@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie lange dürfen Pferde ohne Heu bleiben?",
+      "target_keyword": "Wie lange dürfen Pferde ohne Heu stehen?",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "3bc4d6c945b4f10de840820611e46ef2dee1d9ee984bc9638529c18ae532a8cd"
+    }
+  ],
+  "batch_sha256": "c036b106c46d34482b4ecfc9d59dfb57777401bd5829a09a9bdca17608781340"
+}

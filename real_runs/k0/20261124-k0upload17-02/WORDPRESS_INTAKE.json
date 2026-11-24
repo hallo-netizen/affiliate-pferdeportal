@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Ist Heu rund um die Uhr für Pferde sinnvoll?",
+      "target_keyword": "Ist 24 Stunden Heu gut für Pferde?",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "bb0768fdd4e3c85bc6e18dd14b9ec36ab5723ea76da7f1e43db293794c5a4553"
+    }
+  ],
+  "batch_sha256": "804e29a49bf3d2df4e8b3d43cbfbbec0677a35a39f44d52ccba89bf364c55e4a"
+}

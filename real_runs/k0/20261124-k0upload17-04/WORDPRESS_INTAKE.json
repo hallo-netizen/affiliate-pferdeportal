@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Bis zu welcher Temperatur dürfen Pferde draußen bleiben?",
+      "target_keyword": "Bis zu welcher Temperatur dürfen Pferde draußen bleiben?",
+      "category": "alltags-pferde-haltungsformen",
+      "article_type": "FAQ",
+      "plan_slot": "23e2f387c204610aad9695b2f0be2a5fae5b2e45db99fb553ec746099f7725e6"
+    }
+  ],
+  "batch_sha256": "ca4664c9eba296700c39b4e76b0417dc4a499977319a95ba8043c7bdb23d0a8e"
+}

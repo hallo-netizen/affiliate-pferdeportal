@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Was trinken Pferde?",
+      "target_keyword": "Was trinken Pferde?",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "114193d8ef27fa544b4a39e376c4f9482ccd07e93deb26f13612d0128ede2319"
+    }
+  ],
+  "batch_sha256": "c0621d833af8e48db0a20a8119630564189832ebafc9c91bc9721a19444021c6"
+}

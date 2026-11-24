@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Warum pinkelt mein Pferd beim Reiten so häufig?",
+      "target_keyword": "Warum pinkelt mein Pferd oft beim Reiten?",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "956600c62b9b8b5a121ba461b9fd27bbfa65abd553c2c61a66909143a6e0102b"
+    }
+  ],
+  "batch_sha256": "434f039adcdce6542bb493109d9a231ec230f3c66e0a9f97b2992dc703a930d5"
+}

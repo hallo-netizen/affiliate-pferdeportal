@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Können Pferde Rotlicht sehen?",
+      "target_keyword": "Können Pferde Rotlicht Sehen?",
+      "category": "pferdewissen-grundlagen",
+      "article_type": "FAQ",
+      "plan_slot": "4b06a10e7b8821184facce8a32ac4240b192a3516bb26f6b1c512730ea244936"
+    }
+  ],
+  "batch_sha256": "670012a1b537d7c5a75bbe55d62cd6b9d8b16df22d357920a9ab4034a5a5b589"
+}

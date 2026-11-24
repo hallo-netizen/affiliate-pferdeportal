@@ -1,0 +1,342 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 17,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Gibt es kostenlose Apps für den Trainingsplan eines Pferdes?",
+        "target_keyword": "Gibt es eine kostenlose App für den Trainingsplan von Pferden?",
+        "category": "trainingsplan-vorlage-faq",
+        "article_type": "FAQ",
+        "plan_slot": "623134a551fb6c3db9778318faf4d41cc985bcfcc555299a2868a9a268aac549"
+      },
+      {
+        "title": "Ist Heu rund um die Uhr für Pferde sinnvoll?",
+        "target_keyword": "Ist 24 Stunden Heu gut für Pferde?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "bb0768fdd4e3c85bc6e18dd14b9ec36ab5723ea76da7f1e43db293794c5a4553"
+      },
+      {
+        "title": "Wie lange dürfen Pferde ohne Heu bleiben?",
+        "target_keyword": "Wie lange dürfen Pferde ohne Heu stehen?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "3bc4d6c945b4f10de840820611e46ef2dee1d9ee984bc9638529c18ae532a8cd"
+      },
+      {
+        "title": "Bis zu welcher Temperatur dürfen Pferde draußen bleiben?",
+        "target_keyword": "Bis zu welcher Temperatur dürfen Pferde draußen bleiben?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "23e2f387c204610aad9695b2f0be2a5fae5b2e45db99fb553ec746099f7725e6"
+      },
+      {
+        "title": "Können Pferde Rotlicht sehen?",
+        "target_keyword": "Können Pferde Rotlicht Sehen?",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "FAQ",
+        "plan_slot": "4b06a10e7b8821184facce8a32ac4240b192a3516bb26f6b1c512730ea244936"
+      },
+      {
+        "title": "Warum pinkelt mein Pferd beim Reiten so häufig?",
+        "target_keyword": "Warum pinkelt mein Pferd oft beim Reiten?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "956600c62b9b8b5a121ba461b9fd27bbfa65abd553c2c61a66909143a6e0102b"
+      },
+      {
+        "title": "Welches Salz ist für Pferde geeignet?",
+        "target_keyword": "Welches Salz dürfen Pferde fressen?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "54bde34fd2c6607a5269d9aa88414a26b031e06111659fc66320e3e479b8344b"
+      },
+      {
+        "title": "Warum trinkt mein Pferd so viel Wasser?",
+        "target_keyword": "Warum trinkt mein Pferd so viel Wasser?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "0d56c3aa90a28ca177a602658d97b5685a60934b5d5b5586155fb6e4208a639a"
+      },
+      {
+        "title": "Was trinken Pferde?",
+        "target_keyword": "Was trinken Pferde?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "114193d8ef27fa544b4a39e376c4f9482ccd07e93deb26f13612d0128ede2319"
+      },
+      {
+        "title": "Welche Nachteile haben Rübenschnitzel für Pferde?",
+        "target_keyword": "Welche Nachteile haben Rübenschnitzel für Pferde?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "7624136e7a06b77b1437acb844fe7a1e99b96a99f02b1f5b09911245e26025e2"
+      },
+      {
+        "title": "Wie viel Wasser braucht ein Pferd durchschnittlich am Tag?",
+        "target_keyword": "Wie viel Wasser braucht ein Pferd durchschnittlich pro Tag?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "d8f289d6884f4c7cb13353423f0a639d0dea81da02b0a6c18e94c4d373228519"
+      },
+      {
+        "title": "Wie oft am Tag pinkeln Pferde?",
+        "target_keyword": "Wie oft am Tag pinkeln Pferde?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "3f82e5287d9e181af4d9ae3536acf5aad6d9d6c1c5d74b14eaeb6c4633cb3e37"
+      },
+      {
+        "title": "Welche Anzeichen zeigen Pferde, die zu wenig trinken?",
+        "target_keyword": "Welche Symptome zeigen Pferde, die zu wenig trinken?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "c40a68d2628a138d333afe96ad8f4586fe55dcf42e6d8e9d5fceaa8217f83122"
+      },
+      {
+        "title": "Wie hoch ist der tägliche Salzbedarf eines Pferdes?",
+        "target_keyword": "Wie hoch ist der Salzbedarf eines Pferdes pro Tag?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "c4d7d25bdd48dd21c68070d149b01bb946abb12d5da15893e44c6a0829928689"
+      },
+      {
+        "title": "Welche Mineralien brauchen Pferde?",
+        "target_keyword": "Welche Mineralien für Pferde?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "0fecb3e84ee2434cb4f1812bd6709fe4ba13436232763eb9eb0cf103d9de6b76"
+      },
+      {
+        "title": "Warum muss mein Pferd ständig Wasser lassen?",
+        "target_keyword": "Warum muss mein Pferd ständig Wasserlassen?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "7a0de299d04b2245cd15da9152f3c1c0874de3da5edce6d82f6a18291a22dbf2"
+      },
+      {
+        "title": "Wie gewöhne ich meinem Pferd das Steigen ab?",
+        "target_keyword": "Wie kann ich meinem Pferd das Steigen abgewöhnen?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "8080d99d7176680d257e6d4464196325fd81ffc55a4d7ef89e115f8a3b68eace"
+      }
+    ],
+    "batch_sha256": "19f8fa800824ad54bb6c189d63481ec3293c085a3eec7f526be4532d7db54614"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Gibt es kostenlose Apps für den Trainingsplan eines Pferdes?",
+        "target_keyword": "Gibt es eine kostenlose App für den Trainingsplan von Pferden?",
+        "category": "trainingsplan-vorlage-faq",
+        "article_type": "FAQ",
+        "plan_slot": "623134a551fb6c3db9778318faf4d41cc985bcfcc555299a2868a9a268aac549"
+      },
+      "order_id": "TXE-7cef2a0104545ea336aa516018f3b59b",
+      "article_id": "article:b682a1bc8baf13d5c6e12267",
+      "search_intent": "Kostenlose Apps zum Planen des Pferdetrainings, nicht das eigenständige Erstellen eines Trainingsplans"
+    },
+    {
+      "metadata_binding": {
+        "title": "Ist Heu rund um die Uhr für Pferde sinnvoll?",
+        "target_keyword": "Ist 24 Stunden Heu gut für Pferde?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "bb0768fdd4e3c85bc6e18dd14b9ec36ab5723ea76da7f1e43db293794c5a4553"
+      },
+      "order_id": "TXE-fe98386e953bca03c380b3f724fa5af1",
+      "article_id": "article:3dec2796f3d545c64eb709b7",
+      "search_intent": "Eignung einer durchgehenden Heubereitstellung über 24 Stunden"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie lange dürfen Pferde ohne Heu bleiben?",
+        "target_keyword": "Wie lange dürfen Pferde ohne Heu stehen?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "3bc4d6c945b4f10de840820611e46ef2dee1d9ee984bc9638529c18ae532a8cd"
+      },
+      "order_id": "TXE-02875134e5524a91273f02afa01df955",
+      "article_id": "article:188023fd4fafd239e87ff998",
+      "search_intent": "Maximale Fresspause ohne Heu im Pferdealltag"
+    },
+    {
+      "metadata_binding": {
+        "title": "Bis zu welcher Temperatur dürfen Pferde draußen bleiben?",
+        "target_keyword": "Bis zu welcher Temperatur dürfen Pferde draußen bleiben?",
+        "category": "alltags-pferde-haltungsformen",
+        "article_type": "FAQ",
+        "plan_slot": "23e2f387c204610aad9695b2f0be2a5fae5b2e45db99fb553ec746099f7725e6"
+      },
+      "order_id": "TXE-30885416c2de942cbdf55eacbb681677",
+      "article_id": "article:7f37d229e34029c1a6884a24",
+      "search_intent": "Temperaturgrenzen für den Aufenthalt von Pferden im Freien"
+    },
+    {
+      "metadata_binding": {
+        "title": "Können Pferde Rotlicht sehen?",
+        "target_keyword": "Können Pferde Rotlicht Sehen?",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "FAQ",
+        "plan_slot": "4b06a10e7b8821184facce8a32ac4240b192a3516bb26f6b1c512730ea244936"
+      },
+      "order_id": "TXE-607d1b6375e25b7dc89bb4a165628266",
+      "article_id": "article:62c565e0b74c0da9aebc6d80",
+      "search_intent": "Ob Pferde Rotlicht wahrnehmen können"
+    },
+    {
+      "metadata_binding": {
+        "title": "Warum pinkelt mein Pferd beim Reiten so häufig?",
+        "target_keyword": "Warum pinkelt mein Pferd oft beim Reiten?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "956600c62b9b8b5a121ba461b9fd27bbfa65abd553c2c61a66909143a6e0102b"
+      },
+      "order_id": "TXE-f34e7403c2614bc231fa043ca3fd2590",
+      "article_id": "article:554e3c008b4fd061a779da4a",
+      "search_intent": "Mögliche Gründe für häufiges Urinieren gerade beim Reiten"
+    },
+    {
+      "metadata_binding": {
+        "title": "Welches Salz ist für Pferde geeignet?",
+        "target_keyword": "Welches Salz dürfen Pferde fressen?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "54bde34fd2c6607a5269d9aa88414a26b031e06111659fc66320e3e479b8344b"
+      },
+      "order_id": "TXE-cf52e854b01dbf93470d68f985f19c38",
+      "article_id": "article:5c5aa5a4cbb03fb1df7c6b91",
+      "search_intent": "Welche Salzarten für Pferde zum Fressen geeignet sind"
+    },
+    {
+      "metadata_binding": {
+        "title": "Warum trinkt mein Pferd so viel Wasser?",
+        "target_keyword": "Warum trinkt mein Pferd so viel Wasser?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "0d56c3aa90a28ca177a602658d97b5685a60934b5d5b5586155fb6e4208a639a"
+      },
+      "order_id": "TXE-cf8f1b544e3d39a75a9799d71ff0c56f",
+      "article_id": "article:3466c4b433b7c7d11b04722e",
+      "search_intent": "Mögliche Ursachen übermäßig hoher Wasseraufnahme"
+    },
+    {
+      "metadata_binding": {
+        "title": "Was trinken Pferde?",
+        "target_keyword": "Was trinken Pferde?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "114193d8ef27fa544b4a39e376c4f9482ccd07e93deb26f13612d0128ede2319"
+      },
+      "order_id": "TXE-9ccbda5c4ae33a28b4dce19148643495",
+      "article_id": "article:f474becb714303a5a3395289",
+      "search_intent": "Welche Getränke Pferde normalerweise trinken"
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Nachteile haben Rübenschnitzel für Pferde?",
+        "target_keyword": "Welche Nachteile haben Rübenschnitzel für Pferde?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "7624136e7a06b77b1437acb844fe7a1e99b96a99f02b1f5b09911245e26025e2"
+      },
+      "order_id": "TXE-f4c081d717679e759162aa5d66a0c86a",
+      "article_id": "article:f541cf9878734a4ba8d327b4",
+      "search_intent": "Mögliche Nachteile der Fütterung von Rübenschnitzeln"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie viel Wasser braucht ein Pferd durchschnittlich am Tag?",
+        "target_keyword": "Wie viel Wasser braucht ein Pferd durchschnittlich pro Tag?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "d8f289d6884f4c7cb13353423f0a639d0dea81da02b0a6c18e94c4d373228519"
+      },
+      "order_id": "TXE-2b31d8d937f67d38fdd36f5b9f4c9192",
+      "article_id": "article:e04e0862369b2f464ce37380",
+      "search_intent": "Durchschnittlicher täglicher Wasserbedarf eines Pferdes"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie oft am Tag pinkeln Pferde?",
+        "target_keyword": "Wie oft am Tag pinkeln Pferde?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "3f82e5287d9e181af4d9ae3536acf5aad6d9d6c1c5d74b14eaeb6c4633cb3e37"
+      },
+      "order_id": "TXE-5a02e1baa5726495cb95ae9737d73ca6",
+      "article_id": "article:50fefa7e87040b5bee1bb139",
+      "search_intent": "Übliche Häufigkeit des Urinierens bei Pferden pro Tag"
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Anzeichen zeigen Pferde, die zu wenig trinken?",
+        "target_keyword": "Welche Symptome zeigen Pferde, die zu wenig trinken?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "c40a68d2628a138d333afe96ad8f4586fe55dcf42e6d8e9d5fceaa8217f83122"
+      },
+      "order_id": "TXE-23d16a09a08d50ba8d9d4bc54682e311",
+      "article_id": "article:b8bd0180d05fd5eaa66781cc",
+      "search_intent": "Anzeichen dafür, dass ein Pferd zu wenig trinkt"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie hoch ist der tägliche Salzbedarf eines Pferdes?",
+        "target_keyword": "Wie hoch ist der Salzbedarf eines Pferdes pro Tag?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "c4d7d25bdd48dd21c68070d149b01bb946abb12d5da15893e44c6a0829928689"
+      },
+      "order_id": "TXE-7d9189bea4f2c42099ee2ff2fca20007",
+      "article_id": "article:c075e9ff6a98d10ac20a17d2",
+      "search_intent": "Täglicher Salzbedarf eines Pferdes"
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Mineralien brauchen Pferde?",
+        "target_keyword": "Welche Mineralien für Pferde?",
+        "category": "pferdeernaehrung-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "0fecb3e84ee2434cb4f1812bd6709fe4ba13436232763eb9eb0cf103d9de6b76"
+      },
+      "order_id": "TXE-67e6ad433e06179252272ebbca48adff",
+      "article_id": "article:6fab93da245eced7ae152db7",
+      "search_intent": "Welche Mineralien Pferde für ihre Ernährung benötigen"
+    },
+    {
+      "metadata_binding": {
+        "title": "Warum muss mein Pferd ständig Wasser lassen?",
+        "target_keyword": "Warum muss mein Pferd ständig Wasserlassen?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "7a0de299d04b2245cd15da9152f3c1c0874de3da5edce6d82f6a18291a22dbf2"
+      },
+      "order_id": "TXE-8b8e10d29497ca6a2d4b3b8158b482da",
+      "article_id": "article:79aa03c2926f4f47dc43adf9",
+      "search_intent": "Mögliche Ursachen für ständigen Harndrang beim Pferd, unabhängig vom Reiten"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie gewöhne ich meinem Pferd das Steigen ab?",
+        "target_keyword": "Wie kann ich meinem Pferd das Steigen abgewöhnen?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "8080d99d7176680d257e6d4464196325fd81ffc55a4d7ef89e115f8a3b68eace"
+      },
+      "order_id": "TXE-819641742daba2aa117f2a11c9ab5464",
+      "article_id": "article:81b22b49d220609ba7c79af8",
+      "search_intent": "Wie sich unerwünschtes Steigen eines Pferdes durch geeignetes Training angehen lässt"
+    }
+  ],
+  "manifest_sha256": "3ec95a0b7743d6feed58c283592745e0b3a1387dd60a31d7ba416edc8acde1c4"
+}

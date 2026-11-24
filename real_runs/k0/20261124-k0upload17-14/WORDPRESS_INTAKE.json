@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie hoch ist der tägliche Salzbedarf eines Pferdes?",
+      "target_keyword": "Wie hoch ist der Salzbedarf eines Pferdes pro Tag?",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "c4d7d25bdd48dd21c68070d149b01bb946abb12d5da15893e44c6a0829928689"
+    }
+  ],
+  "batch_sha256": "5e2407a915ff3dd95085370ef10c90603a339bfaac71846da083441552449cb2"
+}

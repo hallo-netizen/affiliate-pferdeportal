@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie oft am Tag pinkeln Pferde?",
+      "target_keyword": "Wie oft am Tag pinkeln Pferde?",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "3f82e5287d9e181af4d9ae3536acf5aad6d9d6c1c5d74b14eaeb6c4633cb3e37"
+    }
+  ],
+  "batch_sha256": "d08eb3f384d8c52d05be68a6533ce0d328980b6d9693db93fca5fe0c7f97c3d3"
+}

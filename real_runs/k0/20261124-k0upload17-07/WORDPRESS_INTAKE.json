@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welches Salz ist für Pferde geeignet?",
+      "target_keyword": "Welches Salz dürfen Pferde fressen?",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "54bde34fd2c6607a5269d9aa88414a26b031e06111659fc66320e3e479b8344b"
+    }
+  ],
+  "batch_sha256": "654ce785373f79bcaba06d2426eab316fbfac49566e143aab69ce85e90502513"
+}

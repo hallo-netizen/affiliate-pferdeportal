@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche Mineralien brauchen Pferde?",
+      "target_keyword": "Welche Mineralien für Pferde?",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "0fecb3e84ee2434cb4f1812bd6709fe4ba13436232763eb9eb0cf103d9de6b76"
+    }
+  ],
+  "batch_sha256": "0fac51635ac35ad2cc678cd5b0a0ff0037b6e633af1822dbba2e0a0f605e69b4"
+}

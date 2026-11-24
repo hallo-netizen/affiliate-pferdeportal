@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie gewöhne ich meinem Pferd das Steigen ab?",
+      "target_keyword": "Wie kann ich meinem Pferd das Steigen abgewöhnen?",
+      "category": "ausbildung-reitweisen",
+      "article_type": "FAQ",
+      "plan_slot": "8080d99d7176680d257e6d4464196325fd81ffc55a4d7ef89e115f8a3b68eace"
+    }
+  ],
+  "batch_sha256": "6945809573185f3a13d38c1595cc0c18d63a10d7be86ac7aa9599b4c145aa49b"
+}

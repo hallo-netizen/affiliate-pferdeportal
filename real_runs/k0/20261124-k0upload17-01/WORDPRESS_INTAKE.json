@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Gibt es kostenlose Apps für den Trainingsplan eines Pferdes?",
+      "target_keyword": "Gibt es eine kostenlose App für den Trainingsplan von Pferden?",
+      "category": "trainingsplan-vorlage-faq",
+      "article_type": "FAQ",
+      "plan_slot": "623134a551fb6c3db9778318faf4d41cc985bcfcc555299a2868a9a268aac549"
+    }
+  ],
+  "batch_sha256": "d8d75b254a5ba026f48c5254888c921f4047a016afd2f2727690d5b80e1e8a20"
+}

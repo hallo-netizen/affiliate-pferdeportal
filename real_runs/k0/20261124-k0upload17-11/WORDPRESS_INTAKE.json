@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie viel Wasser braucht ein Pferd durchschnittlich am Tag?",
+      "target_keyword": "Wie viel Wasser braucht ein Pferd durchschnittlich pro Tag?",
+      "category": "pferdeernaehrung-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "d8f289d6884f4c7cb13353423f0a639d0dea81da02b0a6c18e94c4d373228519"
+    }
+  ],
+  "batch_sha256": "7e685b0108d80cbd1c4161d36375f706a76b89de85e38e8d2ccea5040ef1df7f"
+}
