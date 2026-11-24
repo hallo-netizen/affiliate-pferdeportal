@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Was mögen Pferde gar nicht?",
+      "target_keyword": "Was mögen Pferde gar nicht?",
+      "category": "pferde-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "ffda97144bb7c08a9897f3458d8c36a07d875c76c7c11c4ea272bb79628d7227"
+    }
+  ],
+  "batch_sha256": "c3fc14dc83e6fe882cda51892f71912e420e470ee309df52578c472b324b6070"
+}
