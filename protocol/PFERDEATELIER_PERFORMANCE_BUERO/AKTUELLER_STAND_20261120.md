@@ -2073,3 +2073,23 @@ Messung: pferdeatelier-performance-gesamtanalyse-20261124-151323(1).json
 - Büro: /pferdeatelier/PERFORMANCE_BUERO/AKTUELLES_PLUGIN/PFERDEATELIER_AFFILIATE_6.72.378_GEBUENDELT_POSTPROCESS_ROOTFIX.zip
 - Prüfnachweis: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PRUEFNACHWEIS_6.72.378.md
 - Nächster Schritt: 6.72.378 installieren und genau einen PASSIV-Gesamtlauf ausführen; Live-Speedup erst danach bewerten.
+
+
+## 2026-11-24 – KORREKTUR 6.72.378: Erstkandidat verworfen, nur kausal belegte A+C freigegeben
+
+- Der zuvor dokumentierte 6.72.378-POSTPROCESS_ROOTFIX mit vier Maßnahmen und SHA 9283dd3b4237717db084708f981b2b4ef3b5b7c67568794a66f47c522f265bd7 ist VERWORFEN und darf NICHT installiert werden.
+- Verschärfte Einzel-Kausalitätsprüfung gegen denselben echten 1.010er-Pferdesättel-Bestand.
+- Maßnahme A direkt im betroffenen eBay-Kohortenabschnitt: Median 78,83 -> 62,34 ms (-20,9 %); Meta 1.010 -> 393; 315 -> 315 Ergebnisse; geordneter Output-Hash identisch.
+- Maßnahme C direkt für die wiederholte Schlüsselarbeit von Produktplatz 2+3: 17,08 -> 1,67 ms (-90,2 %).
+- Gesamt A+C, 10 alternierende Realbestandsläufe: 220,75 -> 188,04 ms (-14,82 %); Meta 3.731 -> 3.114; Optionen unverändert 324 -> 324; Produkte 1/2/3 identisch.
+- Verworfen wegen fehlendem/negativem Zeitbeweis: Home-Host-Cache (ca. +1,3 %), GTIN-Cache (17,19 -> 20,25 ms, langsamer), Deferred-Titelsignatur (242,72 -> 259,33 ms, langsamer), Seller-Key-Cache (kein stabiler Gewinn).
+- Funktionsbeweis ist inhaltlich, nicht Bytevergleich: 2.721/2.721 reale Normalisierungen identisch; 25/25 reale Seiten-/Providerkombinationen identisch; 75/75 tatsächlich gerenderte Produktkarten inkl. HTML identisch.
+- Sechs explizit aktivierte dynamische Sonderfälle (Metadata-, sanitize_key-, pre_option-, idealo-pre_option-, home_url-Filter, externer Objektcache): Fachausgabe UND Aufrufzahlen Alt=Neu; historischer Einzelweg bleibt erhalten.
+- Echte Meta-/Provider-/Strategieänderungen während des Ablaufs werden Alt=Neu erkannt.
+- Struktur nur Zusatzbeweis: 66 Dateien, 23 PHP-Dateien, 1.591 -> 1.593 Funktionen/Methoden, entfernt 0; Produktions-Schreibprimitive unverändert.
+- Finale Paketprüfung: PHP 23/23 PASS; Re-Extract 66/66; fehlend 0; zusätzlich 0; Hashabweichungen 0; Re-Extract PHP erneut 23/23 PASS.
+- Einziger freigegebener Kandidat: PFERDEATELIER_AFFILIATE_6.72.378_GEBUENDELT_CAUSAL_ROOTFIX.zip
+- SHA-256: af39e106c595be83210d2c4a164c1274c723d25c2a2599b77f86488e4eda9839
+- Büro: /pferdeatelier/PERFORMANCE_BUERO/AKTUELLES_PLUGIN/PFERDEATELIER_AFFILIATE_6.72.378_GEBUENDELT_CAUSAL_ROOTFIX.zip
+- Prüfnachweis: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PRUEFNACHWEIS_6.72.378.md
+- Nächster Schritt: ausschließlich diese korrigierte 6.72.378 installieren und genau einen PASSIV-Gesamtlauf ausführen.

@@ -1,124 +1,131 @@
-# Pferdeatelier Affiliate-Zentrale 6.72.378 – gebündelter Postprocess-Rootfix
+# Pferdeatelier Affiliate-Zentrale 6.72.378 – korrigierter gebündelter Kausal-Rootfix
 
 Stand: 24.11.2026
 Basis: live gemessene 6.72.377
-Paket: PFERDEATELIER_AFFILIATE_6.72.378_GEBUENDELT_POSTPROCESS_ROOTFIX.zip
-SHA-256: 9283dd3b4237717db084708f981b2b4ef3b5b7c67568794a66f47c522f265bd7
+Paket: PFERDEATELIER_AFFILIATE_6.72.378_GEBUENDELT_CAUSAL_ROOTFIX.zip
+SHA-256: af39e106c595be83210d2c4a164c1274c723d25c2a2599b77f86488e4eda9839
 
-## Live-Ausgangspunkt
-- 6.72.377 Pferdesättel: 4.859,09 ms Wall / 1.601,79 ms CPU / 89.392 Cache-Hits / 310 Queries.
-- Gegen 6.72.376: Cache-Hits 121.246 -> 89.392 (-26,3 %), Queries 310 -> 310.
-- Verbleibender großer Produkt-/Inhaltsblock loop_start -> wp_footer: 3.628,90 ms.
+## Freigabeentscheidung
+Die zuerst erzeugte 6.72.378 wurde nach verschärfter Kausalitätsprüfung VERWORFEN und darf nicht installiert werden.
+Von vier ursprünglichen Maßnahmen blieben nur zwei übrig, weil nur diese den geforderten Einzel-Kausalitätsbeweis bestanden.
 
-## Vier gebündelte Ursachen
-1. Redundante innere eBay-Kohorten-Schlüsselarbeit entfällt, wenn der bereits vollständig abgesicherte äußere Postprocess-Plan autoritativ ist. Die Fachverarbeitung selbst bleibt erhalten.
-2. Der Home-Host der Bildprüfung wird im stabilen Request einmal gelesen statt für jeden Bildkandidaten erneut; echte Optionsänderungen invalidieren ihn.
-3. Vollständige Kandidaten-Fingerprints des privaten Shared-Ranking-Pfads werden einmal gebildet und für Produktplatz 2/3 wiederverwendet; direkte/generische Aufrufer behalten den vollständigen historischen Kandidatenhash.
-4. Finale GTIN-Ergebnisse unveränderter Kampagnen werden request-lokal wiederverwendet; Kampagnensignatur und Postmeta-Mutationsinvalidierung schützen die Semantik.
+## Maßnahme A – redundante innere eBay-Kohorten-Schlüsselarbeit
+Direkt im echten Pferdesättel-Produktpfad gemessen, identischer Kandidatenbestand:
+- historischer innerer Schlüsselweg: Median 78,83 ms
+- äußerer bereits autoritativer Postprocess-Plan: Median 62,34 ms
+- Verbesserung: ca. -20,9 % in genau diesem Produktionsabschnitt
+- Metalesungen in diesem Abschnitt: 1.010 -> 393
+- Ergebnisanzahl: 315 -> 315
+- kompletter Ergebnis-Hash Alt=Neu: e965844054546ec3100094d3b6555c68d89607969d188085d2d00fce7a8b3efd
 
-## Performancebeweis mit echtem Bestand
-WXR: pferdeatelier.WordPress.2026-11-22.xml
-Pferdesättel: 1.010 reale Kandidaten = 393 eBay + 617 idealo.
+Damit ist nicht nur weniger Arbeit gezählt; dieselbe Funktion wurde direkt schneller gemessen und liefert exakt denselben geordneten Output.
 
-20 vollständige Alt/Neu-Durchläufe:
-- 6.72.377 Median 216,71 ms
-- 6.72.378 Median 187,71 ms
-- -13,38 %
+## Maßnahme C – wiederholte vollständige Kandidaten-Fingerprints für Slot 2/3
+Nach dem ersten vollständigen Fingerprint wird ausschließlich der bereits aus dem vollständigen Kandidatenzustand erzeugte interne Token wiederverwendet.
+Direkt die reale Schlüsselarbeit für Produktplatz 2+3 gemessen:
+- historisch: Median 17,08 ms
+- neu: Median 1,67 ms
+- Verbesserung: ca. -90,2 %
+- Metalesungen: 0 -> 0
+- Optionslesungen: 2 -> 2
 
-Slots:
-- Produkt 1: 186,84 -> 174,91 ms
-- Produkt 2: 16,91 -> 6,96 ms
-- Produkt 3: 13,23 -> 5,10 ms
+Der interne Cache-Key ist absichtlich anders aufgebaut; entscheidend ist die Fachausgabe. Diese wird unten vollständig Alt/Neu geprüft.
 
-Leseaufwand:
-- get_post_meta 3.731 -> 3.114 (-16,54 %)
-- get_option 324 -> 15 (-95,37 %)
+## Gesamtwirkung A+C im echten 1.010er-Pool
+10 wechselnd ausgeführte Alt/Neu-Durchläufe:
+- 6.72.377 Median: 220,75 ms
+- korrigierte 6.72.378 Median: 188,04 ms
+- Verbesserung: ca. -14,82 %
+- get_post_meta: 3.731 -> 3.114
+- get_option: 324 -> 324
+- Produkt 1/2/3: identisch
 
-GTIN-Mikrotest, 10.000 identische Aufrufe, Median aus 10 Läufen:
-- 23,12 -> 13,10 ms bei identischem Ergebnis.
+## Bewusst NICHT aufgenommen
+Zusätzliche Maßnahmen wurden getestet und wegen fehlendem Kausalitätsbeweis verworfen:
+- Home-Host-Lesecache: Optionslesungen sinken, aber kein belastbarer Zeitgewinn; im Einzeltest ca. +1,3 % statt schneller.
+- GTIN-Ergebniscache: reales Aufrufmuster 1.325 Aufrufe / 1.010 eindeutige Kampagnen; Median 17,19 -> 20,25 ms, also langsamer. Verworfen.
+- Wiederverwendung bereits berechneter Deferred-Titelsignaturen: Einzeltest 242,72 -> 259,33 ms, also langsamer. Verworfen.
+- zusätzlicher Seller-Key-Cache: ebenfalls kein stabiler Gewinn; verworfen.
 
-## Inhaltlicher Funktionsbeweis
-Kein reiner Bytevergleich.
+Es wurden damit keine Änderungen aufgenommen, nur weil sie theoretisch sinnvoll aussehen.
+
+## Inhaltlicher Funktionsschutz – kein Bytevergleich
 
 ### 2.721 reale Kampagnen
-- 2.721/2.721 vollständige Normalisierungen Alt=Neu.
-- 0 Fehlnormalisierungen.
-- kombinierter Ergebnis-Hash Alt=Neu:
+- 2.721/2.721 Normalisierungen Alt=Neu
+- Null-/Fehlerfälle: 0
+- kombinierter Hash Alt=Neu:
   b3ebc847bbf5bfb8927988a96f4c391384ba731e7b798835e418243e6312ba17
 
 ### 25 reale Seiten-/Providerkombinationen
-Seiten:
+Geprüfte Seiten:
 - Pferdesättel
 - Satteldecken
 - Reitplatzpflege
 - Zeitschalt-Futterautomaten
 - Stall Organisation
 
-Modi je Seite:
-- automatic + hybrid
-- automatic + products
-- combined + products
-- ebay_only + hybrid
-- idealo_only + comparison
+Je Seite fünf Kombinationen aus Provider-Modus und Linkstrategie.
+Ergebnis:
+- 25/25 Shared-Ranking-Basen identisch
+- 25/25 vollständige Produkt-1/2/3-Auswahlen identisch
+- Post-ID, Kampagnen-ID, Provider, Titel, URL, Bild, CTA, Preis, Währung, Verfügbarkeit und vollständiger Kandidatenhash identisch
 
-Ergebnis 25/25 Alt=Neu:
-- Shared-Ranking-Basis
-- Kandidatenanzahl
-- Produktplatz 1/2/3 vollständige Kandidatenhashes
-- Post-ID, Kampagnen-ID, Provider, Titel, URL, Bild, CTA, Preis, Währung, Verfügbarkeit, Providerzahl
+### Tatsächliches Rendering
+Für dieselben 25 Kombinationen wurden alle drei Produktplätze bis render_banner() ausgeführt:
+- 75/75 gerenderte Produktkarten identisch
+- Campaign-Hash identisch
+- Group-Hash identisch
+- Banner-Hash identisch
+- HTML-Hash identisch
 
-### Gerenderte Produktkarten
-Pferdesättel Produkt 1/2/3 bis render_banner():
-- Produkt 1 HTML-Hash 96d6b966e58fa43f56e3e8e90cda1a4e2d961ba77816116a2a46d8f39cb5b77b
-- Produkt 2 HTML-Hash 73695c3aed20046638927d97df3a9ad630248e54ad3359bd91f8a58a4b2efd6e
-- Produkt 3 HTML-Hash 63462077064236244807d4b1d6ecf80adf388f02aef3516d533ba66224af8da9
-- HTML Alt=Neu; Kampagnen-, Gruppen- und Bannerstrukturen ebenfalls identisch.
-
-### Dynamik-/Fallback-Schutz
-Alt=Neu unter:
+### Dynamische Sonderfälle
+Mit explizit aktivierten dynamischen Zuständen wurde Alt gegen Neu geprüft:
 - get_post_metadata-Filter
+- sanitize_key-Filter
+- globaler pre_option-Filter
+- idealo-spezifischer pre_option-Filter
 - home_url-Filter
-- globalem pre_option-Filter
-- externem Objektcache
+- externer Objektcache
 
-In allen vier Fällen:
-- gleiche Shared-Ranking-Basis
-- gleiche drei Produktauswahlen
-- gleiche Slot-Kandidatenhashes
-- exakt gleiche Meta-/Options-Aufrufzahlen
-- historischer Einzelweg bleibt aktiv.
+Ergebnis in allen sechs Fällen:
+- fachliche Ausgabe Alt=Neu
+- Shared Base Alt=Neu
+- Produkt 1/2/3 Alt=Neu
+- Aufrufzahlen Alt=Neu
+- damit historischer Einzelweg nachweislich erhalten
 
-Zusätzlich:
-- direkte In-Memory-Kandidatenänderung ändert weiterhin den vollständigen generischen Plan-Key.
-- echte Home-Optionsänderung wird nach Invalidierung neu gelesen.
-- echte Postmeta-Änderung wird nach Mutation-Hook neu gelesen.
-- idealo-Modusänderung zwischen Slots liefert Alt/Neu dieselbe nachfolgende Auswahl.
+### Echte Änderungen während des Ablaufs
+- Metaänderung wird nach Mutation erkannt: Alt=Neu
+- Provider-/Strategieänderung zwischen Slots: Alt=Neu
+- direkte Kandidatenänderung verändert weiterhin den vollständigen generischen Plan-Key
 
-## Bestandsschutz
-- Dateien 66 -> 66; entfernt 0; hinzugefügt 0.
-- geändert nur Hauptdatei, eBay-Trait, Idealo-Trait, readme.
-- Funktionen/Methoden 1.591 -> 1.594.
-- entfernt 0.
-- 1.582 bestehende Funktionen token-inhaltlich unverändert.
-- 9 bestehende Funktionen nur im gemessenen Lese-/Postprocess-/Invalidierungspfad geändert.
-- 3 interne Performance-Helfer neu.
-- Actions 183 -> 183.
-- Filter 30 -> 30.
-- Shortcodes 6 -> 6.
-- update_option 290 -> 290; delete_option 37 -> 37.
-- update_post_meta 85 -> 85; delete_post_meta 10 -> 10.
-- wp_insert_post 3 -> 3; wp_update_post 12 -> 12.
-- $wpdb->insert 13 -> 13; $wpdb->update 76 -> 76; $wpdb->delete 2 -> 2; $wpdb->query 16 -> 16.
-- Produktions-Schreibwege damit nicht entfernt oder verkürzt.
+## Struktur- und Schreibschutz – nur Zusatzbeweis
+Nach Entfernung aller Testdateien:
+- Dateien 66 -> 66
+- PHP-Dateien 23 -> 23
+- Funktionen/Methoden 1.591 -> 1.593
+- entfernt: 0
+- 1.584 bestehende Funktionen token-inhaltlich unverändert
+- 7 bestehende Funktionen ausschließlich im bewiesenen Postprocess-/Invalidierungspfad geändert
+- 2 interne Helfer neu
+- geändert nur Hauptdatei, eBay-Trait und readme
+- Produktions-Schreibprimitive Alt=Neu: update/delete option, update/delete post meta, wp_insert_post, wp_update_post sowie $wpdb insert/update/delete/query
+
+Dieser Abschnitt allein gilt ausdrücklich NICHT als Funktionsbeweis; der Funktionsbeweis sind die realen Alt/Neu-Ausgaben oben.
 
 ## Paketprüfung
-- PHP 23/23 PASS.
-- ZIP 66/66.
-- fehlend 0, zusätzlich 0.
-- Arbeitsstand vs. Re-Extract: 0 Hashabweichungen.
-- Re-Extract PHP 23/23 PASS.
-- ZIP-Wurzel ausschließlich affiliate-portal-router/.
-- Header/Klassenkonstante/Stable Tag 6.72.378.
+- Arbeitsstand: 66 Dateien / 23 PHP-Dateien
+- PHP-Lint: 23/23 PASS
+- finales ZIP neu entpackt: 66 Dateien / 23 PHP-Dateien
+- fehlend 0
+- zusätzlich 0
+- Hashabweichungen Arbeitsstand vs. Re-Extract: 0
+- Re-Extract PHP-Lint: 23/23 PASS
+- Paketwurzel ausschließlich affiliate-portal-router/
+- Header/Klassenkonstante/Stable Tag 6.72.378
 
-## Grenze
-6.72.378 ist lokal als gebündelter Testkandidat freigegeben. Live-Speedup erst nach Installation und PASSIV-Gesamtlauf bewerten.
+## Freigabegrenze
+Freigegeben ist nur dieses korrigierte Paket mit SHA-256 af39e106c595be83210d2c4a164c1274c723d25c2a2599b77f86488e4eda9839.
+Die zuvor erzeugte 6.72.378 mit vier Maßnahmen ist verworfen.
+Ein Live-Speedup wird erst nach Installation und einem PASSIV-Gesamtlauf behauptet.
