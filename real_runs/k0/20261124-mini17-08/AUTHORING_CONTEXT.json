@@ -109,27 +109,16 @@
         "href": "/category/alltags-pferde-haltungsformen/",
         "anchor": "",
         "block": "criteria"
-      },
-      {
-        "role": "further_information",
-        "href": "/category/festzaeune-fuer-pferde-beratung/",
-        "anchor": "",
-        "block": "further_information"
       }
     ],
     "link_registry": [
       {
         "href": "/category/alltags-pferde-haltungsformen/",
         "active": true
-      },
-      {
-        "href": "/category/festzaeune-fuer-pferde-beratung/",
-        "active": true
       }
     ],
     "runtime_link_roles": [
-      "parent_category",
-      "further_information"
+      "parent_category"
     ],
     "wordpress_category": {
       "id": 0,
