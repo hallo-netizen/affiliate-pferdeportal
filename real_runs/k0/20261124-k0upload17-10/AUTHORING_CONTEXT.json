@@ -16,8 +16,8 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids?ruleredirectid=445",
-          "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses"
+          "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/feeding-practices-in-horses-and-other-equids",
+          "source_title": "MSD Veterinary Manual – Feeding Practices in Horses and Other Equids"
         },
         {
           "source_url": "https://www.msdvetmanual.com/horse-owners/digestive-disorders-of-horses/disorders-of-the-esophagus-in-horses",
@@ -25,8 +25,8 @@
         }
       ],
       "claims": [
-        "Rübenschnitzel zählen zu den faserreichen Raufutterersatz-Futtermitteln.",
-        "Auch bei Rübenschnitzeln sollte eine Futterumstellung langsam erfolgen.",
+        "Rübenschnitzel liefern Energie und Faserstoffe.",
+        "Rübenschnitzel sollten vor der Fütterung eingeweicht werden.",
         "Trockenes Futter einschließlich Rübenschnitzeln kann beim hastigen Fressen Schlundverstopfungen auslösen.",
         "Schlundverstopfung kann ernste Komplikationen verursachen."
       ]
@@ -50,22 +50,22 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids?ruleredirectid=445",
-        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses",
-        "evidence_text": "forage substitute (eg, hay cubes, hay-based pellets, beet pulp), or other high-fiber sources.",
-        "evidence_text_sha256": "7abb1167d8f78281f500d20a75af28e1b70d8d7837b32e8d146bb37ce6c41c31",
-        "statement": "Rübenschnitzel zählen zu den faserreichen Raufutterersatz-Futtermitteln.",
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/feeding-practices-in-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Feeding Practices in Horses and Other Equids",
+        "evidence_text": "Beet pulp, a by-product of the sugar beet industry, is added to horse rations as a source of both calories and fiber.",
+        "evidence_text_sha256": "9d11b5c6e3f3ee8787c23e3a70e5f5ebd5c4d406b147bca05c647ce4e2514d3a",
+        "statement": "Rübenschnitzel liefern Energie und Faserstoffe.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F2": {
-        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/nutritional-requirements-of-horses-and-other-equids?ruleredirectid=445",
-        "source_title": "MSD Veterinary Manual – Nutritional Requirements of Horses",
-        "evidence_text": "any dietary change take place slowly over approximately 10–14 days",
-        "evidence_text_sha256": "02def2b138d775cb25ef342160e3f1e8338a19fc453fd76a257519ad46718b96",
-        "statement": "Auch bei Rübenschnitzeln sollte eine Futterumstellung langsam erfolgen.",
+        "source_url": "https://www.msdvetmanual.com/management-and-nutrition/nutrition-horses/feeding-practices-in-horses-and-other-equids",
+        "source_title": "MSD Veterinary Manual – Feeding Practices in Horses and Other Equids",
+        "evidence_text": "Beet pulp (shreds or pellets) should be soaked in water before feeding to horses.",
+        "evidence_text_sha256": "ca0e954f4a41d83746e9d18f86d112f925eb764412f1f6e35373f988af6649ec",
+        "statement": "Rübenschnitzel sollten vor der Fütterung eingeweicht werden.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
