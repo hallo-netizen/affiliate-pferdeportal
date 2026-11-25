@@ -189,3 +189,17 @@ Vergleich derselben Live-Datenbank aus Diagnose 20261121-082829 gegen 20261125-1
   - Codekommentar und Exportlogik bestaetigen: historische Run-Audits werden nicht rotiert/geloescht.
   - weitere dynamische Schluessel sind begrenzt bzw. pro Konzept/Token und erklaeren 100k Eintraege nicht ohne DB-Nachweis.
 - Ursache noch NICHT endgueltig behauptet. Naechster Beweis: Live-PPAR-Optionen nach Namensmuster zaehlen/summieren.
+
+
+## 2026-11-25 12:31 – PPAR/eBay-Ursache weiter eingegrenzt
+phpMyAdmin-Gruppenabfrage Live:
+- EBAY_SONSTIGE: 103.567 Optionen / 84,76 MB
+- EBAY_AUDIT: 200 Optionen / 22,09 MB
+- PPAR_SONSTIGE: 88 Optionen / 3,52 MB
+- ALTE_VERSIONEN: 37 Optionen / ~0 MB
+- EBAY_BUSINESS_EXTRA: 25 Optionen / ~0 MB
+- AUTOMATION: 5 Optionen / ~0 MB
+Schluss:
+- vorheriger Audit-Verdacht widerlegt: Audit ist nicht Hauptverursacher der 103k Optionen.
+- Hauptblock liegt in sonstigen dynamischen ppar_ebay_* Optionsnamen.
+- noch keine Löschfreigabe; nächster Beweis ist Namensmuster-Aufteilung innerhalb EBAY_SONSTIGE.
