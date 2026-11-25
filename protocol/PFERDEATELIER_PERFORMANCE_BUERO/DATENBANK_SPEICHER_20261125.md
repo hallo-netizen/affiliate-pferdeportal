@@ -91,3 +91,17 @@ Hinweis:
 - Ziel zur Entsperrung: ca. 35–50 MB physisch freigeben; danach OPTIMIZE der großen Tabellen möglich.
 - kleinster sicherer Kandidat: slfo_relevanssi, ca. 35,7 MB reserviert; reine Relevanssi-Suchindextabelle, aus WordPress-Inhalten neu aufbaubar.
 - geplanter KISS-Schritt: TRUNCATE TABLE slfo_relevanssi; Schema bleibt bestehen, nur Suchindex wird geleert. Danach Gesamtbelegung neu messen und Relevanssi nach Entsperrung neu indizieren.
+
+
+## 2026-11-25 – Relevanssi verworfen, Legacy-PPM/POC als nächster Kandidat
+- Relevanssi NICHT löschen/truncaten: aktive Nutzung der Suchfunktion nicht eindeutig ausgeschlossen.
+- neuer KISS-Kandidat: alte Tabellenfamilien slfo_ppm*, slfo_ppm679*, slfo_poc100*.
+- aktueller GitHub-Codebestand vollständig nach exakten Namen durchsucht:
+  ppm679_runs, ppm679_items, ppm679_fact_packs, ppm679_tombstones,
+  ppm_batches, ppm_bootstraps, ppm_certifications, ppm_plans,
+  poc100_authorizations, poc100_events, poc100_evidence_refs.
+- Ergebnis: 0 aktuelle Code-Treffer auf diese Tabellennamen.
+- zusätzliche Suche nach dynamischer Bildung mit $wpdb->prefix + ppm_/ppm679_/poc100_ sowie table('plans'/'certifications'/'runs'/'items'/'fact_packs'): 0 Treffer.
+- aktuelle aktive WordPress-Pluginliste enthält kein eigenständiges PPM/POC-Plugin.
+- letzter Diagnosebestand enthält 7 PPM-Tabellen mit zusammen ca. 14,2 MiB Nutzdaten+Index; aktuelle phpMyAdmin-Seitenleiste zeigt zusätzlich weitere Legacy-PPM/POC-Tabellen.
+- nächster Schritt: aktuelle physische Belegung dieser Legacy-Tabellenfamilien direkt in information_schema summieren; erst danach gebündelte Löschfreigabe.
