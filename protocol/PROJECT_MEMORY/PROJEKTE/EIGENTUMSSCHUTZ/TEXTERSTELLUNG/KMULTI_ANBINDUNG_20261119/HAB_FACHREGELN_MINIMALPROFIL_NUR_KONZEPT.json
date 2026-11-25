@@ -1,0 +1,77 @@
+{
+  "contract": "HAB_KMULTI_FACHREGEL_PROFIL_ENTWURF_V1",
+  "status": "FACHENTWURF_NUR_OFFLINE_NICHT_KMULTI_REGELWERTE_RELEASE",
+  "portal": "hab_und_bewahr",
+  "principles": [
+    "Nur additiver Fachkontext an genau einem bestehenden K-Multi-Schreib-/Prüfeigentümer; keine neue generelle Textprüfung",
+    "Globale K0-Regeln und deren Eigentümer bleiben vollständig unverändert",
+    "Kein Pferdeatelier-Regelwerte-Fallback, keine gemischten Portalregeln",
+    "Artikelart wird einmal im MINI entschieden und darf in K-Multi nicht neu entschieden werden",
+    "Portal automatisch ausschließlich aus geprüftem kategoriebasiertem Registry-Match, nicht als neues Upload-Feld",
+    "WordPress-Beiträge ausschließlich als Entwurf; keine Veröffentlichung"
+  ],
+  "article_types": {
+    "Beratung": "Bedarf, Einsatzgebiet, Auswahlentscheidung, Grenzen und realistische Alternativen; keine pauschalen Sicherheitsversprechen.",
+    "FAQ": "Eine konkrete Frage zuerst direkt beantworten; Unsicherheit, Geltungsbereich und Ausnahmen ergänzen.",
+    "Vergleich": "Mindestens zwei wirklich unterscheidbare Alternativen nach denselben überprüfbaren Kriterien.",
+    "Pflege": "Wiederkehrende Kontrolle, Wartung, sichere Instandhaltung. Keine gefährliche fachliche Reparatur als normale Pflege.",
+    "Anleitung": "Schrittfolge nur für sicher und rechtlich zulässige Eigenarbeit; Vorbereitung, Risiken, Abbruch/Fachbetrieb, Kontrolle nach Abschluss. Autoritatives Original K0_ARTICLE_TYPE_RULE_PACKAGE_V1/Anleitung.json im Original-Zweig bereits READY."
+  },
+  "additional_context_rules": [
+    {
+      "id": "HAB_GEF_01",
+      "scope": "ALLE",
+      "instruction": "Konkretes Schutzobjekt, Gefahr, gewünschte Schutzwirkung und bekannte Grenzen klar unterscheiden. Keine absolute Schutzgarantie."
+    },
+    {
+      "id": "HAB_GEF_02",
+      "scope": "GEFAHR_FACHBETRIEB",
+      "instruction": "Bei Strom, Gas, Feuer, Lithium-Akkus, tragenden Gebäudeteilen und unmittelbarer Gefahr keine gefährlichen Selbstbauanweisungen; sichere allgemeine Vorsorge von Facharbeiten trennen."
+    },
+    {
+      "id": "HAB_RECHT_01",
+      "scope": "RECHT_VERSICHERUNG",
+      "instruction": "Rechtslage, Datenschutz, Policen, Ausschlüsse, Bedingungen, Fristen und Normen mit aktuellen amtlichen, rechtlich verbindlichen oder originalen Vertrags-/Herstellerquellen belegen; Datum/Geltungsbereich/Ausnahmen beachten. Keine Leistungszusage ohne Beleg."
+    },
+    {
+      "id": "HAB_PRIV_01",
+      "scope": "DATENSCHUTZ",
+      "instruction": "Bei Kamera, Ton, Zugang und Erfassung Dritter klare Datenschutz- und Privatsphäregrenzen nennen; keine Anleitung zu unzulässiger Überwachung."
+    },
+    {
+      "id": "HAB_PRAXIS_01",
+      "scope": "EIGENSCHUTZ",
+      "instruction": "Notfallsituation und Prävention unterscheiden. Körperliche Sicherheit geht vor Eigentum, keine Eskalations- oder Fallenempfehlungen."
+    },
+    {
+      "id": "HAB_PRODUKT_01",
+      "scope": "BERATUNG_VERGLEICH",
+      "instruction": "Eignung für privat und kleine Betriebe, Folgekosten, Fehlalarme, Wartung, Ausfall von Strom/Internet sowie Wirksamkeitsgrenzen transparent begründen."
+    },
+    {
+      "id": "HAB_MAG_01",
+      "scope": "MAGAZIN",
+      "instruction": "Nur konkrete existierende WordPress-Kategorie mit verifizierter MAGAZIN-Zuordnung; MAGAZIN nie als Category Slug; aktuelles Geschehen zeitlich einordnen und nicht als zweite Produkt-Kaufberatung duplizieren."
+    }
+  ],
+  "sources_allowed": "Original-K0 Recherchequellenstandard: offizielle Behörden-/Hochschul-/Fachverbands-/Herstellerseiten, echte Wikipedia-Seiten; keine eigenen Portal-, Blog-, Forum- oder Affiliate-Quellen für Fakten. Erweiterungen nur an bestehender zentraler Quellfreigabe, keine eigene Prüfstelle.",
+  "input_contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "fields": [
+    "title",
+    "target_keyword",
+    "category",
+    "article_type",
+    "plan_slot"
+  ],
+  "outer_package": "WP_K0_UPLOAD_PACKAGE_V1",
+  "receipt": "WP_K0_SOURCE_RECEIPT_V1",
+  "import_contract": "PFERDE_ATELIER_WORDPRESS_IMPORT_V1 als unveränderter historischer technischer Kennzeichner, keine Pferde-Fachentscheidung",
+  "hard_blocks": [
+    "Kein Hab-Registry-Eintrag oder unklare Kategorie",
+    "Magazin nur WP-Seite ohne echten category-Term",
+    "Anleitung ohne korrekt aktiviertes Originalmodul",
+    "unverifizierte Writer-/LT-/Regelkette",
+    "ungültiger Planplatz, fehlender Beleg, unerlaubte Publikation"
+  ],
+  "next_gate": "Originale K-Multi-Offline-Schreiberkette mit exakt denselben Original-Rules plus ergänzendem Hab-Fachkontext (nicht als eigene Prüfung) ausführen; danach 1 vollständiger WordPress-Entwurf-Test. Bis dahin Produktion NO_GO."
+}

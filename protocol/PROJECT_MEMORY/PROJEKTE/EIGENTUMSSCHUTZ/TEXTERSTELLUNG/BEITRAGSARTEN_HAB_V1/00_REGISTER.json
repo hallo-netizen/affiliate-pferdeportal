@@ -1,0 +1,131 @@
+{
+  "schema": "HAB_ARTIKELARTEN_REGISTER_V1",
+  "portal": "hab_und_bewahr",
+  "status": "5_HAB_BEITRAGSARTEN_FACHREGELN_FREIGEGEBEN_TECHNISCHE_E2E_ABNAHME_OFFEN",
+  "quelle": "Gespeicherte C23-Analyse von 1323 Kategorien und Magazin-Konzept; fünf fachliche Typen aus HAB_BEITRAGSARTEN_SEO_KRITISCHE_PRUEFUNG_VORSCHLAG_20261119.md",
+  "trigger": {
+    "owner": "MINI_EINMALIGE_REDAKTIONELLE_ENTSCHEIDUNG",
+    "feld": "article_type",
+    "auswahl": "Nach beabsichtigter Leserhandlung, nicht Fragezeichen oder Kategoriename",
+    "mehrdeutig": "Vor K0 zurückstellen; keine automatische Neuzuordnung",
+    "unbekannter_typ": "Sperren statt Ersatztyp",
+    "keine_neue_startsyntax": true,
+    "keine_veraenderung_des_fuenffelder_exports": true
+  },
+  "gemeinsame_regeln": "01_GEMEINSAME_TEXTREGELN.json: alte Entwicklungs-Kopiervorlage, nicht Laufzeitregel",
+  "hab_querschnitt": "02_HAB_QUERSCHNITT_SICHERHEIT.json: ALTES ARCHIV mit zwölf unverbindlichen Einzelmodulideen; jetzt ersetzt durch zwei eigenständig in jeder Beitragsart enthaltene verbindliche Hab-Regeln",
+  "beitragsarten": [
+    {
+      "id": "HAB_FAQ",
+      "name": "FAQ",
+      "datei": "10_FAQ.json",
+      "k0_original": "FAQ",
+      "status": "FACHLICH_FREIGEGEBEN – TECHNISCHE_BINDUNG_NOCH_NICHT_E2E_GEPRUEFT"
+    },
+    {
+      "id": "HAB_RATGEBER",
+      "name": "Ratgeber & Wissen",
+      "datei": "20_RATGEBER_WISSEN.json",
+      "k0_original": "Beratung nur bei echter Auswahlentscheidung",
+      "status": "FACHLICH_FREIGEGEBEN – TECHNISCHE_BINDUNG_NOCH_NICHT_E2E_GEPRUEFT"
+    },
+    {
+      "id": "HAB_VERGLEICH",
+      "name": "Vergleich",
+      "datei": "30_VERGLEICH.json",
+      "k0_original": "Vergleich",
+      "status": "FACHLICH_FREIGEGEBEN – TECHNISCHE_BINDUNG_NOCH_NICHT_E2E_GEPRUEFT"
+    },
+    {
+      "id": "HAB_ANLEITUNG",
+      "name": "Anleitung & Checkliste",
+      "datei": "40_ANLEITUNG_CHECKLISTE.json",
+      "k0_original": "Anleitung für einmalige Arbeit; Pflege für wiederkehrende Tätigkeit",
+      "status": "FACHLICH_FREIGEGEBEN – TECHNISCHE_BINDUNG_NOCH_NICHT_E2E_GEPRUEFT"
+    },
+    {
+      "id": "HAB_BERICHT",
+      "name": "Bericht & Praxisfall",
+      "datei": "50_BERICHT_PRAXISFALL.json",
+      "k0_original": null,
+      "status": "FACHLICH_FREIGEGEBEN – TECHNISCHE_BINDUNG_NOCH_NICHT_E2E_GEPRUEFT"
+    }
+  ],
+  "bestandsschutz": "Originale K0-Typen Beratung, FAQ, Pflege, Vergleich und vorhandenes Anleitung-Regelfach vollständig erhalten. Weder Originaltypen noch deren Regeln umbenennen oder löschen.",
+  "freigabe_gates": [
+    "Unabhängige vollständige Hab-Regeln und ihr Format im neuen K-Multi-Weg technisch testen",
+    "Typenregel-Metadaten und Loader ohne neue Prüfstation abnehmen",
+    "Neuen K-Multi-Writer samt vorhandener Sprachprüfung und WordPress-Entwurfsformat real durchtesten",
+    "Aktuelle Hab-WP-Kategorie- und Magazin-Zuordnung read-only bestätigen",
+    "Erst danach Typ technisch READY und einen echten Entwurf erzeugen"
+  ],
+  "verbindliche_konzeptentscheidung": {
+    "beschlossen_am": "2026-11-19",
+    "modell": "FÜNF_VOLLSTAENDIG_AUTARKE_HAB_BEITRAGSREGELPAKETE",
+    "verbindlich": true,
+    "zur_entwicklung": "Geeignete allgemeine und spezielle Pferdeatelier-Regeln einmal kopieren, einzeln kritisch auf Hab prüfen, anpassen und durch relevante Hab-Fachregeln im jeweiligen vollständigen Paket ergänzen.",
+    "zur_laufzeit": "Jede Hab-Beitragsart muss nach Fertigstellung ALLE für sie geltenden Text- und Hab-Sonderregeln selbst enthalten; keine Pflicht, andere Beitragsartdateien oder Pferdeatelier-Regelwerte nachzuladen.",
+    "identitaet": "Eigene unverwechselbare Hab-Typkennung und eigenständig abrufbarer Regeldateipfad, auch wenn Typname wie FAQ identisch ist.",
+    "gemeinsamer_technikweg": "Gemeinsame K0-/K-Multi-Schreib- und Prüfmaschine möglich; unveränderte gemeinsame Kontrolltechnik ist KEINE gemeinsam referenzierte Textregeldatei.",
+    "versionen": "Nach ausdrücklicher Nutzerfreigabe werden Änderungen an allgemein gültigen Textregeln kontrolliert und inhaltsgleich in den eigenständigen Pferdeatelier- und Hab-Regelständen nachgeführt. Reine Portal-Sonderregeln nur im jeweils betreffenden Regelbuch. Keine automatische stille Vererbung; keine Änderung der bestehenden Original-K0-Regel ohne gesonderten Beschluss.",
+    "zentralregister": "Register nur zum Finden und einmaligen Auswählen der passenden Datei; keine verteilte Laufzeitabhängigkeit und keine doppelte Regelentscheidung.",
+    "noch_zu_tun": "Fachliche Hab-Beitragsarten und KISS-Regeln sind jetzt freigegeben; verbleiben technische K-Multi-Anbindung, optionaler Behördenlink in Writer-Ausgabe, Sprachprüf- und WP-Entwurfstests.",
+    "bestehende_technik_geschuetzt": "Keine Änderung der Original-K0-Hardchecks, Originaltypen, K-Multi, MINI oder Hab 0.4.31.6 durch diesen Konzeptbeschluss."
+  },
+  "autarke_kopien": {
+    "ordner": "AUTARKE_REGELBUECHER_K0_STAND_20261119",
+    "basis_k0": "konzept0-portal-neutral-20261002",
+    "umfang": "Jedes Regelbuch mit 117 unveränderten ursprünglichen Katalogregeln und allen alten Formatwerten sowie exakt 2 Hab-KISS-Grundregeln und genau einer eigenen Beitragsartausrichtung.",
+    "dateien": [
+      "10_FAQ.json",
+      "20_RATGEBER_WISSEN.json",
+      "30_VERGLEICH.json",
+      "40_ANLEITUNG_CHECKLISTE.json",
+      "50_BERICHT_PRAXISFALL.json"
+    ],
+    "qa": "AUTARKE_REGELBUECHER_K0_STAND_20261119/99_KOPIE_QUALITAETSABNAHME_20261119.json",
+    "status": "5 FACHLICH_FREIGEGEBENE_REGELBUECHER; WRITER_E2E_NOCH_NICHT_GEPRUEFT",
+    "originaltextlaenge": "750-900 Wörter unverändert",
+    "erkennbare_grenzen": [
+      "Ratgeber-Wissen ohne Kaufentscheidung noch ohne fertigen Originaltyp",
+      "Kombityp Anleitung und Kontrolle noch ohne kompatible K0-Typabbildung",
+      "Bericht neu und nicht technisch READY"
+    ],
+    "technik": "K-Multi-Offline V9 besitzt weiterhin alten 121-Regelstand. Kein automatischer Produktionsanschluss."
+  },
+  "fachfreigabe": {
+    "datum": "2026-11-19",
+    "gilt_fuer": "Alle fünf vollständig autarken Hab-Beitragsregelbücher",
+    "gemeinsame_hab_regel_ids": [
+      "HAB_SACHLICHE_SICHERHEIT",
+      "HAB_OPTIONALE_AMTLICHE_FUSSNOTENLINKS"
+    ],
+    "externe_links": "Nur freiwillig bei echtem Mehrwert, Fußnote am Ende, offizielle staatliche Stellen/Portale, Start-/Hauptseiten erlaubt, rel=nofollow immer; keine Pflicht",
+    "kein_rueckbau": "Alle ursprünglichen Formalregeln in den fünf originalkopierten Teilbäumen unverändert",
+    "alter_modulentwurf": "12 Hab-Fachmodule ausschließlich Archiv/Entwicklung, nicht in fünf aktiven Hab-Fachregeln"
+  },
+  "technischer_nachweis": {
+    "k_multi_repo": "hallo-netizen/k0-multiportal",
+    "k_multi_branch": "k0-offline-rule-bindings-20261027",
+    "hab_sync_commit": "862023cc92805a16e3af25d66f2148a35fd8b1bd",
+    "regeln_vergleich": "5/5 separate Hab-Regelbücher nachweislich identisch gespiegelt",
+    "technische_freigabe": false,
+    "keine_aenderung_am_altworkflow": true,
+    "k_multi_bridge_commit": "32e4f47a5671a2cc137ae44042d3d848a9ee9394",
+    "hab_plugin_original_version": "0.4.31.6",
+    "original_php_tests": "31/31 PASS (offline)",
+    "bridge_tests": "8/8 PASS (offline, historisches und synthetisches Testmaterial)",
+    "fachbuecher_erreichbar_aus_originalplugin": [
+      "HAB_FAQ",
+      "HAB_RATGEBER",
+      "HAB_VERGLEICH",
+      "HAB_ANLEITUNG"
+    ],
+    "bericht_nicht_erreichbar": "Kein Artikeltyp Bericht im unveränderten Plugin – Sperre, keine Ersatzzuteilung",
+    "writer_e2e": false,
+    "amtliche_linkausgabe_k_multi_commit": "bbfa196d2e15a9627b9b211d841b711464933174",
+    "amtliche_nofollow_links_qa": "9/9 Offline-Tests bestanden, Quell- und Testdateien SHA-identisch geprüft",
+    "amtliche_linkausgabe_writer_e2e": false,
+    "bericht_journal_status": "Plugin enthält Journal-Vorbereitung mit NOT_CONFIGURED; Bericht technisch nicht freigeschaltet"
+  }
+}

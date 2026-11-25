@@ -1,0 +1,22 @@
+# Hab 0.4.31.6 → K-Multi: reale PHP-Schnittstelle ohne Eingriff getestet
+
+**Stand 19.11.2026; Weiterarbeit ohne Benutzeraktion.** Vollständige QA-/Testprotokolle und die tatsächlich ausgeführten PHP-Testskripte liegen im Library-Büro `/hab-und-bewahr/TEXTERSTELLUNG/KMULTI_ANBINDUNG_20261119/` (alle Uploads `succeeded`). ZIP 0.4.31.6 unverändert, SHA256 `29769acb82fc6aef9bee68de87248ed70d2af51fe454d1218af887f5b501a7eb`.
+
+## Reale Original-Hab-PHP-Prüfungen
+- **17/17**: Original `TXE_Workshop::assemble`, `PSERC_Metadata_Boundary`, `TXE_K0_Article_Types`, `checkedMiniCategory` mit echtem historischem Hab-Term 183 und negativen Fällen, leeres Magazin-Journal-Manifest.
+- **14/14**: Original `TXE_Workshop::k0Package` liefert echtes `WP_K0_UPLOAD_PACKAGE_V1` inkl. unberührter Fünffelder-`k0_intake` und originalem `WP_K0_SOURCE_RECEIPT_V1` für fünf synthetische, korrekt gebundene Hab-Aufträge. Original `PSERC_System4_Import::normalizePayload` akzeptiert korrekt geformte fiktive Rückgabe und lehnt fehlerhaften Planplatz/Artikelkennung/Slug ab. Keine Artikel tatsächlich geschrieben und keine inhaltliche K-Multi-Writer-Prüfung.
+- **31/31 bestanden**, null WP-Schreiboperationen, null kostenpflichtige Recherchen. Alle Testergebnisse in `QA_HANDOFF_20261119.json` und zwei konkreten Testskripten/JSON-Belegen archiviert.
+
+## K-Multi-Abgleich und echte K0-Referenz
+- **Historische Hab-Kategorien:** Alle 285 exakten Slugs aus dem C22 WordPress-Term-Readback einzeln mit 1160 echten Pferdeatelier-Slugs aus dem aktiven `affiliate-release-current` sowie Hobby `discgolf-beratung` verglichen. **0 Dopplungen, 0 Kollisionen.** Detailmanifest im GitHub-Büro `KMULTI_ANBINDUNG_20261119/HAB_285_HISTORISCHE_WP_SLUGS_REGISTER_NUR_TEST.json`. Das ist KEIN aktueller kompletter WP-Readback und keine Multi-Produktionsregistrierung.
+- **Original-K0** `konzept0-portal-neutral-20261002`: eigener Originalempfänger `engine/k0_wp_upload.py` und `engine/wp_order_identity_receipt.py` nimmt das von Hab schon vorhandene `WP_K0_UPLOAD_PACKAGE_V1` an, Artikelkennung- und Planplatzformel stimmen mit Hab überein. Der alte Original-K0 meldet `READY_FOR_FRESH_K0_START`, **nicht** K-Multi.
+- **Anleitung nicht neu erfinden:** `ARTIKELTYPEN/Anleitung.json` im Original-K0 ist `READY`, Regelpaket `K0_ARTICLE_TYPE_RULE_PACKAGE_V1`. Multi-Offlinezweig `hallo-netizen/k0-multiportal:k0-offline-rule-bindings-20261027` enthält dagegen nur vier akzeptierte Typen, `hab_und_bewahr=NO_VALUES_BLOCKED`, 177 Offline-Prüfpunkte und keinen freigegebenen End-to-End-Writer.
+- K0 erkennt Portale **automatisch aus dem exakten category-Slug** (kein explizites Portal-Feld im 5-Felder-Auftrag). Für Hab darf kein weit gefasster Präfix oder Pferde-Fallback eingesetzt werden; vollständiger aktueller WP-Kategoriensatz muss die spätere eindeutige Registerbindung autorisieren.
+- Additiver Vorschlag für sieben Hab-Fachregeln **nur als KONZEPT** gespeichert in `KMULTI_ANBINDUNG_20261119/HAB_FACHREGELN_MINIMALPROFIL_NUR_KONZEPT.json`; allgemeine K0-Regeln/Prüfstation nicht geändert.
+
+## Noch nicht durchgeführt – echte Grenze
+- K-Multi-Originalwriter inklusive echter vollständiger Regeln, LanguageTool 6.8 und abschließendem WordPress-Entwurfsformat ist **nicht ausführbar/freigegeben** in der geprüften K-Multi-Entwicklungsablage. Das frühere KISS-1.2-Ergebnis (48/48) war lokal und nicht als voll lauffähiges Release auf GitHub; daher nicht stillschweigend als Produktiv-Runtime behandelt.
+- Das 14-Seiten-Magazin ist als WordPress-SEITEN belegt, nicht als WordPress-Beitragskategorien; im Hab-Plugin sind die Magazin-Termdefinitionen leer. Keine erfundene Bindung.
+- Produktiver WordPress-Live-Readback, echter K-Multi-Schreibdurchlauf, DataForSEO-Echtaufruf, echter WP-Entwurfsimport **nicht** als bestanden behaupten.
+
+**Nächste konkrete Entwicklungsarbeit:** Ausführbare, von K0 getrennte K-Multi-Arbeitskopie anhand vollständiger Original-Rules/Writer/LanguageTool plus bereits vorhandenem Anleitung-Paket in Offline-Test bringen und gegen eine Fünffelder-Charge sowie den originalen Rückimport testen. Erst nach Freigabe in K-Multi das vollständige echte Hab-Slugregister und vorhandene Magazin-WP-Kategorien binden. **Kein neues WordPress-Plugin nötig.**

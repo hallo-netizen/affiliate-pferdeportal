@@ -1,0 +1,67 @@
+{
+  "schema": "HAB_EIGENSTAENDIGE_ARTIKELART_V1",
+  "portal": "hab_und_bewahr",
+  "status": "FACHENTWURF_NICHT_AKTIV_NICHT_K0_READY",
+  "gemeinsame_regeln": "01_GEMEINSAME_TEXTREGELN.json",
+  "hab_querschnitt": "02_HAB_QUERSCHNITT_SICHERHEIT.json",
+  "aktionsregel": "Nur die im MINI einmalig beschlossene Beitragsart laden. Keine zweite Entscheidung, kein Fallback oder automatische Umbenennung. Bestehende K0-Prüfungen niemals duplizieren.",
+  "technik": "Eigenständiges Regelpaket zur späteren K-Multi-Prüfung; NICHT als bereits ausführbare Original-K0-Typdatei ausgeben.",
+  "id": "HAB_VERGLEICH",
+  "article_type": "Vergleich",
+  "datei": "30_VERGLEICH.json",
+  "k0_ausgang": "RULE_VALUES.types.Vergleich",
+  "leserziel": "Zwei oder mehr echte Alternativen fair und nach denselben Kriterien gegenüberstellen.",
+  "nur_dann": "Mindestens zwei konkrete Lösungswege, Maßnahmen oder Produkte sinnvoll nach gleichen Kriterien vergleichbar.",
+  "nicht_dann": [
+    "Eine Produktgruppe allgemein erklären -> Ratgeber",
+    "Nur Ja/Nein oder Definition -> FAQ",
+    "Abarbeitbare Schrittfolge -> Anleitung",
+    "Nur ein Vorfall -> Bericht"
+  ],
+  "aufbau": [
+    "Vergleichsfrage, Einsatzbereich und Anzahl der Optionen kurz nennen",
+    "Gemeinsame relevante Bewertungskriterien begründen (Sicherheit, Eignung, Betrieb, Wartung, Ausfallsicherheit, Kosten)",
+    "Echte Alternativen bei gleicher Datenlage anhand derselben Kriterien prüfen",
+    "Eine lesbare Vergleichstabelle verwenden, wenn ausreichend seriöse Aussagen vorliegen, keine Füllspalten",
+    "Trade-offs, Grenzen und jeweilige passende Nutzerlage abschließend erklären; kein künstlicher Gesamtsieger"
+  ],
+  "k0_uebernahme": [
+    "Mindestens zwei echte Optionen, mindestens zwei unabhängige Vergleichskriterien",
+    "Vor- und Nachteile, Fakten- und Tabellenprüfung",
+    "K0-Typmetadaten comparison_targets und comparison_criteria",
+    "Quellen, verständliches Deutsch und qualifizierte Schlussfolgerung"
+  ],
+  "kritisch_anpassen": [
+    "Preis und Produkteigenschaften mit Stand/Modellvariante statt erfundener Fixwerte",
+    "Bei Schutzwirkung nicht bloß Marketingmerkmale gleichsetzen",
+    "Keine Noten, Sieger oder Testsieger ohne belastbaren Testnachweis",
+    "Tabelle nur mit wirklich aussagekräftigen Kriterien, nicht zum Auffüllen"
+  ],
+  "hab_regeln": [
+    "HAB01",
+    "HAB03 falls Technik",
+    "HAB04 bei Rechtsalternativen",
+    "HAB05 bei Versicherungstarifen",
+    "HAB06 bei Kamera",
+    "HAB07",
+    "HAB08",
+    "HAB10"
+  ],
+  "beispiele": {
+    "geeignet": [
+      "Funk- oder kabelgebundene Alarmanlage für ein Privathaus?",
+      "Bewegungsmelder außen: PIR gegen Radar mit jeweils belegten Grenzen"
+    ],
+    "ungeeignet": [
+      "Wie funktioniert eine Alarmanlage?",
+      "Welche Schritte bei einem Stromausfall?"
+    ]
+  },
+  "prueffragen": [
+    "Sind alle Optionen tatsächlich vergleichbar und korrekt begrenzt?",
+    "Sind Kriterien und Quellen für jede Option gleich fair?",
+    "Sind Folgekosten, Ausfälle, Bedienfehler und Grenzen enthalten, wenn relevant?",
+    "Gibt es einen belegten statt werblichen Schluss?"
+  ],
+  "integrationskonflikt": "Original-Vergleich verlangt Tabelle und bestimmte Mindestanzahl an Zeilen/Spalten. Wenn seriöse Daten fehlen, Thema vor K0 anders bestimmen oder zurückstellen, keine Tabellenwerte erfinden."
+}

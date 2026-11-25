@@ -1,0 +1,77 @@
+{
+  "schema": "HAB_QUERSCHNITT_REGELN_V1",
+  "portal": "hab_und_bewahr",
+  "status": "FACHENTWURF_ZUR_EINBINDUNG_AN_BESTEHENDEN_OWNER",
+  "einschraenkung": "Diese Regeln nach Themenauslöser einmal am vorhandenen Schreib-/Fakten-Owner einarbeiten. Keine neuen unabhängigen Prüfstationen. Keine pauschalen Zusatzabschnitte in allen Artikeln.",
+  "regelmodule": [
+    {
+      "id": "HAB01",
+      "ausloeser": "alle Texte",
+      "regel": "Klar benennen: Schutzobjekt, relevante Gefahr, Maßnahme, Eignungsbereich und Restgefahr. Menschenleben und Gesundheit vor Sachwerten. Keine absolute Sicherheitsgarantie."
+    },
+    {
+      "id": "HAB02",
+      "ausloeser": "Einbruch, Diebstahl, Gewalt, Konflikt, Vandalismus, akute Gefahr",
+      "regel": "Prävention, sichere Reaktion und Maßnahmen nach dem Ereignis trennen. Keine Selbstgefährdung, Verfolgung, Konfrontation, Waffen- oder Fallenempfehlungen; keine operative Anleitung zum Überwinden von Sicherheitssystemen."
+    },
+    {
+      "id": "HAB03",
+      "ausloeser": "Strom, Gas, Feuer, Rauch, Bau-/Statik, Hochwasser, Lithium-Akkus, gefährliche Installation",
+      "regel": "Sichere Laienmaßnahmen von Facharbeiten trennen; Stoppsignale und zuständige Fachleute klar nennen. Gefährliche Arbeit nicht durch detaillierte Heimwerker-Schrittfolge normalisieren."
+    },
+    {
+      "id": "HAB04",
+      "ausloeser": "Recht, Genehmigungen, Normen, Miete, Nachbarschaft, Hausrecht, Haftung",
+      "regel": "Land/Jurisdiktion, Zeitpunkt und Besonderheiten nennen, amtliche oder ursprüngliche Regelquelle nutzen. Keine pauschale Rechtsberatung, Norm als Gesetz oder allgemeine Erlaubnis darstellen."
+    },
+    {
+      "id": "HAB05",
+      "ausloeser": "Versicherung, Schadensdeckung, Vertragsbedingungen, Erstattung, Versicherungspflicht",
+      "regel": "Vertragsart, versicherte Gefahr, Ausschlüsse, Selbstbehalt, Obliegenheiten, Warte- und Meldefristen nur mit aktueller Originalquelle konkret erklären. Keine verbindliche Leistungszusage oder erfundene Tarifmerkmale."
+    },
+    {
+      "id": "HAB06",
+      "ausloeser": "Kamera, Mikrofon, Aufzeichnungen, smarte Sensorik, Zutrittsdaten",
+      "regel": "Privatsphäre, Nachbarn, Besucher, Beschäftigte, Aufnahme-/Speichergrenzen und Datenrisiken ansprechen; keine pauschale Erlaubnis zur Überwachung Dritter."
+    },
+    {
+      "id": "HAB07",
+      "ausloeser": "Produkt-/Maßnahmenwahl und Vergleich",
+      "regel": "Schutzwirkung, Einsatzort, Strom/Internet-Ausfall, Fehlalarm, Wartung, Folgekosten, Fehlbedienung und Grenzen nach konkreter Evidenz; unabhängig von Affiliate-Verfügbarkeit."
+    },
+    {
+      "id": "HAB08",
+      "ausloeser": "alle Texte mit konkreten Adressaten",
+      "regel": "Privathaushalte, Mieter/Eigentümer, Ferienhaus, Garten, Boot, Camping/Wohnmobil und persönlich geführte kleine Betriebe differenzieren, wenn die Unterschiede bedeutsam sind. Keine Großbetriebs-/Industrieperspektive erzwingen."
+    },
+    {
+      "id": "HAB09",
+      "ausloeser": "Statistiken, Polizeimeldungen, Zahlen, Schadensfälle",
+      "regel": "Ort, Zeitraum, Bezugsgröße, Definition und Datenquelle erfassen; Korrelation nicht als Ursache, Einzelfall nicht als typischen Fall darstellen. Keine Sensationssprache."
+    },
+    {
+      "id": "HAB10",
+      "ausloeser": "Preis, Produkt, Affiliate, Empfehlungslink",
+      "regel": "Werbliche Interessen dürfen Fakten, Kriterien, Gewinner oder Quellenwahl nicht bestimmen; sachliche Alternative ohne Kauf und Kostenstand nennen, soweit zur Leserfrage passend."
+    },
+    {
+      "id": "HAB11",
+      "ausloeser": "Notfälle, laufender Schaden, Brand, Gas, Überflutung, Einbruch",
+      "regel": "Sofortige sichere Prioritäten klar von späterer Vorsorge abgrenzen. Keine riskanten Rückkehr-, Reparatur-, Rettungs- oder Beweissicherungsanweisungen."
+    },
+    {
+      "id": "HAB12",
+      "ausloeser": "Bericht, Fallbeispiel, Fotos, Tatort, personenbezogene Daten",
+      "regel": "Echte Fälle nur belegt und möglichst ohne identifizierende private Details. Hypothetische Beispiele klar als solche kennzeichnen, niemals als Reportage, Test oder realen Kundenfall ausgeben."
+    }
+  ],
+  "fachquellen": {
+    "recht": "Aktuelle amtliche Rechtsgrundlage/Regelgeber",
+    "versicherung": "Originalbedingungen des jeweils genannten Tarifs/Versicherers",
+    "schutzwirkung": "Passende Behörden-/Prüfinstitute-/Originalherstellerdaten, Wirksamkeitsbehauptungen nach Art der Evidenz trennen",
+    "statistik": "Originaldatensatz, Definition, Zeitraum und Bezugsgröße",
+    "technik": "Originaldokumentation plus unabhängig verifizierte Wirkungs-/Normbehauptungen, soweit vorhanden"
+  },
+  "aktualitaetsregel": "Änderliche Rechts-, Versicherungs-, Sicherheits- und Produktdaten mit Quelle und Stand belegen. Nur dann Datumsangabe im Artikel, wenn relevant und belegt; keine künstliche Gewissheit.",
+  "ausgabegrenze": "Ein Artikel bekommt nur die ausgelösten Regeln; keine fest vorgegebene Sicherheitswarnbox auf jedem Artikel."
+}

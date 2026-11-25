@@ -1,0 +1,100 @@
+{
+  "contract": "HOBBYDEPOT_ORIGINAL_PHP_FIVE_TYPES_HANDOFF_QA_V1",
+  "date": "2026-11-21",
+  "test_kind": "ACTUAL_UNMODIFIED_ORIGINAL_PHP_IN_ISOLATED_WORDPRESS_STUB_WITH_FIVE_SYNTHETIC_ORDERS",
+  "source_zip": "/Hobby Depot/Plugin-Büro/Texterstellung_Hobbydepot_0.4.24.18_PFERDEATELIER_ORIGINAL_MINI_EINMALIMPORT.zip",
+  "verified_zip_sha256": "03f21ca678f003ab55a2a3a86ccd44c0cceb1ed59b2cb1e6a758b6bb129de19b",
+  "code_entrance": "texterstellung-hobbydepot/texterstellung.php:TXE_Workshop::k0Package",
+  "contract_checker": "texterstellung-hobbydepot/original/pserc/includes/class-pserc-metadata-boundary.php",
+  "runtime": "PHP 8.4.24 CLI",
+  "status": "PASS",
+  "passes": 15,
+  "failures": 0,
+  "tests": [
+    {
+      "name": "one_upload_original_contract",
+      "passed": true
+    },
+    {
+      "name": "receipt_host_exact",
+      "passed": true
+    },
+    {
+      "name": "receipt_origin_original",
+      "passed": true
+    },
+    {
+      "name": "five_original_rows_exact",
+      "passed": true
+    },
+    {
+      "name": "all_five_types_exact",
+      "passed": true
+    },
+    {
+      "name": "no_sixth_type",
+      "passed": true
+    },
+    {
+      "name": "one_original_batch",
+      "passed": true
+    },
+    {
+      "name": "five_original_fields_only",
+      "passed": true
+    },
+    {
+      "name": "wp_original_metadata_boundary_pass",
+      "passed": true
+    },
+    {
+      "name": "all_canonical_article_id_and_slots_bound",
+      "passed": true
+    },
+    {
+      "name": "word_press_receipt_checksum_original",
+      "passed": true
+    },
+    {
+      "name": "no_publish_anywhere",
+      "passed": true
+    },
+    {
+      "name": "original_unsupported_type_blocked",
+      "passed": true
+    },
+    {
+      "name": "tampered_original_order_blocked",
+      "passed": true
+    },
+    {
+      "name": "no_second_portal_field",
+      "passed": true
+    }
+  ],
+  "exact_original_wp_types": [
+    "Beratung",
+    "FAQ",
+    "Pflege",
+    "Vergleich",
+    "Anleitung"
+  ],
+  "original_package_contract": "WP_K0_UPLOAD_PACKAGE_V1",
+  "original_portal_site_host": "www.hobby-depot.de",
+  "original_five_fields": [
+    "title",
+    "target_keyword",
+    "category",
+    "article_type",
+    "plan_slot"
+  ],
+  "original_frozen_metadata_roundtrip": true,
+  "output_sample_only": "SYNTHETIC_TEST_PACKAGE_NEVER_IMPORT",
+  "proof_notes": [
+    "Real untouched original PHP code from the 0.4.24.18 ZIP executed in local isolated mock. Five order metadata inputs were clearly synthetic; cannot prove live WordPress categories or external K-Multi live authoring.",
+    "Original site-host binding, original metadata boundary and original receipt hash validated by the original PHP classes, not a fabricated expected output.",
+    "Negative tests proved unsupported sixth type and modified original data are rejected.",
+    "No standalone WordPress plugin/source, K0 or K-Multi code has been modified."
+  ],
+  "final_scope": "HOBBY_WORDPRESS_HANDOFF_READY_AS_EXISTING_CONTRACT; K-MULTI PRODUCTION BINDING STILL BLOCKED (separate authority)"
+}

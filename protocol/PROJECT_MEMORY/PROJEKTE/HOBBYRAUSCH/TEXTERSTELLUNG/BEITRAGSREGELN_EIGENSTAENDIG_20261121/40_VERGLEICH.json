@@ -1,0 +1,79 @@
+{
+  "contract": "HOBBYDEPOT_EIGENSTAENDIGES_BEITRAGSREGELBUCH_V1",
+  "status": "HOBBY_EDITORIAL_DRAFT_COMPLETE_NOT_ACTIVATED",
+  "portal_id": "hobby_depot",
+  "original_wordpress_type_is_authority": true,
+  "wordpress_article_type": "Vergleich",
+  "hobby_rulebook_id": "HOBBY_VERGLEICH",
+  "intent": "Mindestens zwei reale Alternativen anhand derselben für den Leser wichtigen Kriterien vergleichen.",
+  "not_this_type": "Nur eine Option erläutern (Beratung), kurze einzelne Frage (FAQ), rein nacheinander ausführbare Tätigkeit (Anleitung).",
+  "article_structure": [
+    "Optional 'Auf einen Blick' mit der echten Kernaussage bei komplexeren Vergleichen.",
+    "Vergleichsfrage und Einsatzbereich nennen.",
+    "Vergleichbare reale Alternativen und identische Kriterien festlegen.",
+    "Jede Alternative nach denselben belegbaren Gesichtspunkten behandeln.",
+    "Unterschiede, Nachteile und Grenzen offen darstellen.",
+    "Optional kurzer Merksatz für den wichtigsten Unterschied (gemeinsame Regel H05); ohne zweiten Testsieger.",
+    "Nur bei unmittelbar sinnvoller Handlung eine Start-Checkliste und bei tatsächlich offenen Zusatzfragen ein kurzes FAQ.",
+    "Für wen ist welche Alternative sinnvoll? Mit konkreten Nutzerprofilen und Grenzen, danach Fazit: Empfehlung ausdrücklich abhängig vom Nutzerziel."
+  ],
+  "additional_type_rules": [
+    {
+      "id": "V01_ZWEI_OPTIONEN",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Mindestens zwei klar unterscheidbare reale Alternativen; nicht künstlich Scheinvarianten erzeugen."
+    },
+    {
+      "id": "V02_GLEICHE_MASSSTAEBE",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Dieselben inhaltlich passenden Kriterien pro Option anwenden; fehlende Daten offen benennen."
+    },
+    {
+      "id": "V03_PREISE_STAND",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Preise nie ohne Zeitpunkt, Ausführung und Umfang vergleichen; keine Shoprankings als Qualitätsurteil ausgeben."
+    },
+    {
+      "id": "V04_FAIRE_EINORDNUNG",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Unterschiede als konkrete bedingte Entscheidungshilfe 'Für wen eignet sich welche Option?' abschließen, einschließlich Grenzen; kein unbelegter Gesamt-Testsieger, wenn sich Eignung nach Bedarf unterscheidet."
+    },
+    {
+      "id": "V05_VERGLEICHSTABELLE",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Tabelle nur wenn zwei oder mehr Varianten mit belastbaren vergleichbaren Merkmalen vorliegen; danach kurze Einordnung."
+    },
+    {
+      "id": "V06_KURZER_PRAXISCHECK",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Wenn eine Option unmittelbar eingesetzt werden soll, nur wenige reale Start- bzw. Kauf-vorbereitungs-Punkte als Checkliste angeben; keine beliebige Standardliste an jeden Vergleich anhängen."
+    },
+    {
+      "id": "V07_ECHTE_RESTFRAGEN",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Optional kurze 'Häufige Fragen' nur zu zusätzlichen nicht bereits durch Tabelle/Empfehlung beantworteten Punkten. Keine doppelte Vergleichstabelle in Frageform."
+    }
+  ],
+  "format_guidance": {
+    "words": [
+      850,
+      1100
+    ],
+    "h2": [
+      3,
+      5
+    ],
+    "conclusion": "H2 'Fazit' mit bedingter Entscheidungshilfe.",
+    "tables": "Eine sinnvolle Tabelle empfohlen, aber nicht bei fehlender Vergleichbarkeit erzwingen.",
+    "lists": "Vorteile/Nachteile nur wenn tatsächlich aussagekräftig.",
+    "links": "Keine pauschale Linkquote.",
+    "values_are": "HOBBY_EDITORIAL_TARGETS_NOT_AUTOMATIC_RUNTIME_HARD_LIMITS",
+    "words_basis": "Sichtbarer sinnvoller Fließtext ohne Tabellen, Navigation, Quellenliste und reine Fülltexte",
+    "h2_basis": "Natürliche echte Zwischenüberschriften; kein Zwang zu Leerabschnitten"
+  },
+  "examples_from_hobby_topics": [
+    "Filament- und Harzdruck für Hobbyprojekte vergleichen",
+    "Airbrush-Kompressoren nach Einsatzbedarf vergleichen"
+  ],
+  "shared_hobby_policy_ref": "05_GEMEINSAME_REGELN.json"
+}

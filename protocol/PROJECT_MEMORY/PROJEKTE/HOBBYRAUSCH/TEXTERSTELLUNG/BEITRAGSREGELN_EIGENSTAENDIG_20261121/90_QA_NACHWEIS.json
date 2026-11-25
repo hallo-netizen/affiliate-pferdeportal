@@ -1,0 +1,649 @@
+{
+  "contract": "HOBBYDEPOT_COMMON_AND_FIVE_TYPES_QA_V2",
+  "date": "2026-11-21",
+  "status": "PASS_EDITORIAL_PREPARATION_NOT_RUNTIME_APPROVAL",
+  "static_readback": {
+    "passes": 18,
+    "failures": 0,
+    "checked": [
+      "Fünf WordPress-Beitragsarten exakt",
+      "Eine gemeinsame Hobbydepot-Regelquelle",
+      "Zwölf Grundregeln genau einmal",
+      "Grundregel-IDs eindeutig",
+      "Jede Grundregel hat Zuständigkeit",
+      "Keine Grundregel-Kopien in den fünf Artbüchern",
+      "Alle fünf Artbücher referenzieren dieselbe Grundregelquelle",
+      "Fünf eigenständige Artikelart-IDs",
+      "Fachregelanzahlen [4,5,5,5,6]",
+      "Eigene Fachregel-IDs eindeutig",
+      "Alle fünf Artbücher weiterhin Entwurf",
+      "Bestehende WordPress-Artikelart bleibt alleinige Entscheidung",
+      "Kein sechster eigenmächtiger Magazin-/Inspirationstyp",
+      "Pflege und Anleitung getrennte Fachbücher",
+      "Zwei abweichende alte K-Multi-Referenzen offen dokumentiert",
+      "Keine automatische Aktivierung",
+      "Keine Veröffentlichung",
+      "Längen- und Gliederungszahlen nur unverbindliche Redaktionsziele"
+    ]
+  },
+  "executed_original_wordpress_php": {
+    "real_code": "Texterstellung_Hobbydepot_0.4.24.18_PFERDEATELIER_ORIGINAL_MINI_EINMALIMPORT.zip:texterstellung-hobbydepot/includes/class-txe-k0-article-types.php",
+    "runtime": "PHP 8.4.24 CLI read-only",
+    "supported": [
+      "Beratung",
+      "FAQ",
+      "Pflege",
+      "Vergleich",
+      "Anleitung"
+    ],
+    "rejected": [
+      "Inspiration",
+      "Porträt & Bericht"
+    ],
+    "status": "PASS",
+    "executed_environment": "lokale isolierte Prüfung der unveränderten Originalklassen- und Original-Vertragsdatei; keine WordPress-Live-Installation"
+  },
+  "changes": {
+    "identical_shared_rule_instances_before": 60,
+    "after": 12,
+    "duplicate_instances_eliminated": 48,
+    "common_rule_text_changed": false,
+    "specific_type_rule_text_changed": false,
+    "wordpress_plugin_changed": false,
+    "kmulti_runtime_changed": false,
+    "k0_changed": false
+  },
+  "limitations": [
+    "Keine komplette WordPress→K-Multi→WordPress-Produktionsprobe",
+    "Keine echte 121-Regel- oder Writer-Freigabe",
+    "K-Multi-Verweise Pflege/Anleitung sind unverändert und bislang nicht auf neue eigenständige Hobby-Bücher umgestellt",
+    "Redaktionelle Entwürfe sind nicht produktiv aktiv; kein Plugin installieren"
+  ],
+  "latest_rulebook_normalization": {
+    "status": "PASS",
+    "readback_condition": "Each of 12 formerly duplicated common metadata fields matched exactly across 5 books prior to extraction. Five own rules, outlines and format policy objects preserved verbatim.",
+    "common_metadata_fields_removed_per_type": 12,
+    "duplicate_metadata_copies_eliminated": 48,
+    "common_rule_count_still": 12,
+    "own_type_rule_counts": [
+      4,
+      5,
+      5,
+      5,
+      6
+    ],
+    "word_press_original_five_type_contract_unchanged": true,
+    "kmulti_registry_unchanged": true
+  },
+  "final_original_wp_to_hobby_rules_handoff": {
+    "date": "2026-11-21",
+    "status": "PASS_HANDOFF_PREPARED_READ_ONLY_NOT_RUNTIME_AUTHORIZED",
+    "checks_executed": 18,
+    "checks_passed": 18,
+    "checks_failed": 0,
+    "checked_sources": {
+      "hobby_manifest": "00_MANIFEST.json",
+      "single_shared_rules": "05_GEMEINSAME_REGELN.json",
+      "five_type_books": [
+        "10_BERATUNG.json",
+        "20_FAQ.json",
+        "30_PFLEGE.json",
+        "40_VERGLEICH.json",
+        "50_ANLEITUNG.json"
+      ],
+      "original_wp_3_faq_fixture": "hallo-netizen/k0-multiportal:offline_writer_dev/portal_auto/fixtures/original_wordpress_hobby_3.json",
+      "original_wp_fixture_git_blob": "3ff40ab0dca739283b5b642c2f32b0deb5c77418",
+      "kmulti_registry_git_blob": "811abd6063796369320ecdb8ff953a3467d31ae0",
+      "kmulti_global_bindings_git_blob": "b5bdc176a1a93af430003f91b6760ccd5ade81db"
+    },
+    "proof_scope": "Cross-repository JSON consistency and original-package shape readback. WordPress PHP type-support was tested in previous separate original-PHP report. No new WP-live end-to-end test, not the 121-rule production test.",
+    "original_artifact_not_changed": true,
+    "new_transport_file": false,
+    "new_plugin": false,
+    "matching_types": [
+      "Beratung",
+      "FAQ",
+      "Vergleich"
+    ],
+    "future_type_reference_changes_required_only_if_authorized": [
+      "Pflege",
+      "Anleitung"
+    ],
+    "no_runtime_activation": true,
+    "no_kmulti_code_change": true,
+    "no_k0_change": true,
+    "blocked_production_reason": "Existing K-Multi state NO_VALUES_BLOCKED and original Pflege/Anleitung registry references still combined; prepared Hobby books are not active"
+  },
+  "readback_20261122_live_recheck": {
+    "date": "2026-11-22",
+    "status": "PASS_READONLY_45_OF_45_RELEASE_STILL_BLOCKED",
+    "performed_in": "Connected GitHub readback of two existing repositories; independent JSON cross-check assertions; no WP/K0/K-Multi runtime invoked",
+    "repository_sources": [
+      {
+        "repo": "hallo-netizen/affiliate-pferdeportal",
+        "branch": "work/texterstellung-hobby-hab-arbeitskopien-20261116",
+        "files": "00_MANIFEST, 05_GEMEINSAME_REGELN, five original Hobby article books"
+      },
+      {
+        "repo": "hallo-netizen/k0-multiportal",
+        "branch": "k0-offline-rule-bindings-20261027",
+        "files": "KMULTI_PORTAL_REGISTRY, OFFLINE_RULE_BINDINGS, original 121-rule catalog, original WP 3-FAQ fixture, five bound Hobby books, shared rules, LT68 and source-audit receipts"
+      }
+    ],
+    "checks": {
+      "passed": 45,
+      "total": 45,
+      "failed": 0
+    },
+    "readback": {
+      "original_wordpress_types": [
+        "Beratung",
+        "FAQ",
+        "Pflege",
+        "Vergleich",
+        "Anleitung"
+      ],
+      "shared_rule_count": 12,
+      "own_rule_counts": [
+        6,
+        5,
+        6,
+        7,
+        7
+      ],
+      "own_rule_total": 31,
+      "rule_catalog_registered": 121,
+      "all_five_own_rulebooks_cross_repository_json_equal": true,
+      "shared_rulebook_cross_repository_json_equal": true,
+      "new_portal_type_added": false,
+      "existing_wordpress_five_fields_unchanged": true,
+      "original_three_faq_records_present": true,
+      "lt68_receipt_for_three_articles": {
+        "status": "PASS",
+        "open_findings": 0,
+        "article_count": 3,
+        "release_allowed": false
+      },
+      "kmulti_offline_production_enabled": false,
+      "hobby_values_state": "NO_VALUES_BLOCKED",
+      "old_k0_changed": false,
+      "wordpress_plugin_changed": false
+    },
+    "historical_note": "Earlier 2026-11-21 entries in this same document predate the distinct Pflege/Anleitung K-Multi registry mapping. Do not treat their historic 'two unresolved references' as the latest state. This new readback confirms both are now independently mapped.",
+    "not_proved": [
+      "No new productive K-Multi Python writer execution",
+      "No complete independent signed evidence that all article claims are correct",
+      "No 121/121 original rule-owner execution or full approved quality certificate",
+      "No productive trusted QA signer configuration",
+      "No WordPress-live import or final JSON release"
+    ],
+    "decision": "Do not activate Hobby rule values or produce a WordPress import file until the existing original K-Multi owner chain actually completes and signs its quality checks.",
+    "user_impact": "No plugin update and no new input or paid keyword research required by this documentation check.",
+    "article_sha256_binding": {
+      "method": "SHA256 independently recomputed from actual three UTF-8 HTML texts currently in the existing K-Multi GitHub fixture and compared against existing real LanguageTool 6.8 receipt; SHA256 implementation self-tested on standard abc vector",
+      "original_text_count": 3,
+      "exact_html_hash_matches": 3,
+      "mismatches": 0,
+      "real_LT68_report_status": "PASS",
+      "unresolved_language_findings": 0,
+      "article_release_allowed": false,
+      "actual_independent_fact_owner_approval": false,
+      "actual_121_owner_QA_approval": false,
+      "no_article_text_or_original_metadata_changed": true
+    },
+    "latest_independent_kmulti_github_action": {
+      "date_utc": "2026-11-22T11:12:41Z",
+      "run_url": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45016194014",
+      "head_commit": "af2fe5128e7f028327a9325c9b235a1915ab658f",
+      "workflow": "K-Multi Hobbydepot all five original types - routing and book contract",
+      "workflow_conclusion": "success",
+      "job_conclusion": "success",
+      "executed_unittest_suites": [
+        22,
+        23,
+        18,
+        61,
+        10
+      ],
+      "total_passed": 134,
+      "total_failed": 0,
+      "tests_are": "technical routing, rulebook preflight, safe release blocking, and actual three-FAQ end-to-end rehearsal, not signed production QA",
+      "real_original_wordpress_faq_count": 3,
+      "official_sources_previous_qa": 10,
+      "official_excerpt_matches_previous_qa": 16,
+      "real_lt68_receipts_match_exact_current_article_html_sha256": 3,
+      "full_121_qa_owner_passed": false,
+      "full_114_hard_qa_passed": false,
+      "actual_wordpress_import_created": false,
+      "production_release_allowed": false,
+      "k0_changed": false,
+      "new_hobby_wordpress_plugin_required": false,
+      "warning": "Successful test of blocked output is not real finished-author approval. Later concurrent Hab-specific failure does not make this Hobby workflow a global K-Multi production release."
+    },
+    "official_source_semantic_sample": {
+      "date": "2026-11-22",
+      "kind": "ADDITIONAL_CURRENT_OFFICIAL_SOURCE_SEMANTIC_SAMPLE_NOT_SIGNED_KMULTI_FACT_PASS",
+      "reviewed_original_faq_titles": [
+        "Ist Bogenschießen ein teures Hobby?",
+        "Welche Regeln gelten beim 3D-Bogenschießen?",
+        "Wie finde ich einen 3D-Bogenschießen-Parcours?"
+      ],
+      "check_scope": "Manual editorial comparison of current drafts against accessible official publisher pages and existing frozen K-Multi source review. Does NOT replace original shared-research owner, prove all 30 paragraph statements independently, or add a second runtime QA owner.",
+      "selected_checks": [
+        {
+          "article": 1,
+          "statement": "Entry via loan equipment without inventing German average costs",
+          "source": "https://www.bsc-heidelberg.de/aktiv-beim-bsc/schnuppertraining-einsteigerkurse.html",
+          "result": "SUPPORTS_CONDITIONAL_CLAIM",
+          "caveat": "Local provider offers/fees are not countrywide prices; check updates"
+        },
+        {
+          "article": 1,
+          "statement": "TSV Jahn Freising publishes differentiated beginner course fees; article does not reproduce volatile sums",
+          "source": "https://www.tsv-jahn-freising.de/abteilungen/bogenschiessen/fragen-und-antworten/",
+          "result": "SUPPORTED_AS_LOCAL_EXAMPLE_ONLY",
+          "caveat": "Website lists older 2019 guidance for some equipment costs; no older cost range used as current"
+        },
+        {
+          "article": 1,
+          "statement": "Karlsruhe association offers beginner rental and advises consultation before buying",
+          "source": "https://www.bsc-karlsruhe.de/einsteiger-faq/",
+          "result": "SUPPORTED_AS_LOCAL_EXAMPLE_ONLY"
+        },
+        {
+          "article": 2,
+          "statement": "DSB 3D competition lists Recurve, Compound, Blank, Lang and Instinktivbogen; competition-specific target rules",
+          "source": "https://www.dsb.de/bogensport/sport/wettkampfformate/modus-3d",
+          "result": "SUPPORTED_FOR_DSB_WA3D_ONLY",
+          "caveat": "Not a universal local leisure-park rule"
+        },
+        {
+          "article": 2,
+          "statement": "No shooting while people occupy danger area in direction of target; supervision and on-site directions",
+          "source": "https://dsb.de/fileadmin/dsb/sportordnung/16/",
+          "result": "SUPPORTED_IN_DSB_SAFETY_RULES",
+          "caveat": "Operator-specific instructions and local requirements remain separate"
+        },
+        {
+          "article": 3,
+          "statement": "DSB provides a club finder with town, postal code and sports offer search, not a guaranteed 3D-parcours inventory",
+          "source": "https://www.dsb.de/der-verband/vereinssuche",
+          "result": "SUPPORTED_AS_CONTACT_SEARCH_ONLY"
+        },
+        {
+          "article": 3,
+          "statement": "Karlsruhe requires a chip key for Hagsfeld facilities; this does not establish blanket key rules for its 3D course or all clubs",
+          "source": "https://www.bsc-karlsruhe.de/einsteiger-faq/",
+          "result": "SUPPORTED_WITH_LOCATION_SCOPE"
+        },
+        {
+          "article": 3,
+          "statement": "DFBV 2020 event report names a local organizer; not an open-to-public parcourt directory",
+          "source": "https://www.dfbv.de/2020/10/der-wettergott-muss-ein-bowhunter-sein/",
+          "result": "SUPPORTED_AS_ORGANIZER_CONTACT_ONLY"
+        }
+      ],
+      "assessed_article_editorial_risks": [
+        {
+          "article": 1,
+          "risk": "Stale course/equipment prices generalized",
+          "current_text_behavior": "Avoids numeric national price claims and tells reader to verify current terms",
+          "status": "NO_REWRITE_NEEDED_FROM_SAMPLE"
+        },
+        {
+          "article": 2,
+          "risk": "DSB WA3D tournament rules misrepresented as mandatory for every leisure park",
+          "current_text_behavior": "Explicitly distinguishes leisure facility rules and event regulations",
+          "status": "NO_REWRITE_NEEDED_FROM_SAMPLE"
+        },
+        {
+          "article": 3,
+          "risk": "Club locator mistaken for comprehensive local 3D parks and open times",
+          "current_text_behavior": "Clearly states club finder is merely a contact starting point; access must be verified",
+          "status": "NO_REWRITE_NEEDED_FROM_SAMPLE"
+        }
+      ],
+      "limitations": [
+        "This check does not provide an issued or signed owner receipt for every factual article claim",
+        "Not a full 121 individual original checker execution; 114 hard catalog owner records still required",
+        "No change to the 3 current article texts; previous exact LanguageTool 6.8 HTML bindings remain valid",
+        "Hobbydepot remains NO_VALUES_BLOCKED, K-Multi production_enabled=false, no WordPress import"
+      ],
+      "next_exact_dependency": "Existing SHARED_RESEARCH_OWNER must produce complete article-claim source context receipt for the exact three unchanged HTML hashes; then single existing quality owner must execute supported bound hobby-specific rule checks and trusted final delivery. Do not duplicate article or source decisions."
+    },
+    "added_independent_hobby_trial_test_run": {
+      "source_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45017351554",
+      "date": "2026-11-22",
+      "event": "push",
+      "conclusion": "success",
+      "actual_test_suite_counts": [
+        31,
+        51,
+        20,
+        16
+      ],
+      "total": 118,
+      "pass": 118,
+      "fail": 0,
+      "asserts": "K-Multi original FAQ trial, LT68 boundary, one-file safe delivery and fail-closed real release attempt; no signature, actual production release blocked",
+      "real_release_probe_status": "BLOCKED_NO_WORDPRESS_IMPORT_FILE",
+      "real_release_blocker": "HOBBY_FORMAL_RULEBOOK_NOT_APPROVED",
+      "stale_output_deletion_test": "PASS",
+      "publish_allowed": false,
+      "warning": "This is a separate later safety/regression run, not 118 completed 121 content QA checks; not simply to be added to unique QA coverage."
+    },
+    "original_plugin_saved_task_and_cancel_scope": {
+      "source": "QA_ORIGINAL_WORKFLOW_VERGLEICH_HAB_PFERD_20261120.md and 20261120_HOBBY_042418_PFERDEATELIER_0439_SINGLE_IMPORT_VERIFIZIERT.md",
+      "hobby_original_previous_0_4_24_15": "Original PHP mock tests documented saved MINI UI enabled, resume from saved work, 7 queue transitions, no new paid research when safely resuming",
+      "hobby_original_current_candidate_0_4_24_18": "Documented 1-file original MINI reintegration borrowed from Pferdeatelier 0.4.39 and 92/92 local mock checks; 86/87 plugin files unchanged from 0.4.24.17",
+      "online_wp_installation_and_cancel_button_behavior_verified_now": false,
+      "no_restart_no_duplicate_paid_query_policy": true,
+      "no_new_plugin_requested": true,
+      "note": "Older 0.4.24.15 functions cannot be declared live on 0.4.24.18 without an original ZIP readback and current WP evidence. The prior tests are evidence for a historic version, not a fresh live proof."
+    }
+  },
+  "pferdeatelier_current_readonly_comparison_20261122": {
+    "date": "2026-11-22",
+    "purpose": "READ-ONLY COMPARISON OF LAST REAL PFERDEATELIER K0 WRITER AND HORSE TEXTPLUGIN VS EXISTING HOBBY K-MULTI INTEGRATION",
+    "actual_original_k0": {
+      "repo_branch": "hallo-netizen/affiliate-pferdeportal : konzept0-portal-neutral-20261002",
+      "commit": "00b79716f33d64cbe7fde0dbae0f355eacfeeaab",
+      "last_run_url": "https://github.com/hallo-netizen/affiliate-pferdeportal/actions/runs/45008261702",
+      "actual_writer_run": "PASS",
+      "actual_language_tool_6_8": "PASS_0_FINDINGS",
+      "original_k0_article_hard_rules_passed": 81,
+      "ppm_6_7_9_rules_passed": 104,
+      "single_wordpress_json": "SYSTEM4_WORDPRESS_HANDOFF_V1, PASS, article_count=1, publish_allowed=false",
+      "complete_package_persisted_and_artifact_uploaded": true,
+      "rejected_or_repairable_faults_return_to_same_writer_not_new_writer": true,
+      "action": "DO_NOT_COPY_K0_WORKER_OR_ITS_RULES_INTO_KMULTI"
+    },
+    "horse_plugin": {
+      "archived_plugin_version": "0.4.46",
+      "last_confirmed_live_version": "0.4.45",
+      "zip_name": "Texterstellung-0.4.46-MINI-UND-K0-SPEICHERWEG.zip",
+      "local_zip_sha256": "2358975027ecb5b30bcd923014a4c24c086688f6d220f07c648cc4b0d3991fd2",
+      "zip_crc_ok": true,
+      "php_lint_79_of_79": true,
+      "changed_files_from_0_4_45": [
+        "texterstellung.php",
+        "README-TESTINSTALLATION.txt"
+      ],
+      "primary_delta": "Stream stored large MINI/K0 data into same WordPress option row to lower memory peak, fallback to prior update path if unsupported",
+      "live_mysql_512mb_fix_verified": false,
+      "k0_core_changed_by_plugin": false
+    },
+    "hobby_plugin": {
+      "archived_plugin_version": "0.4.24.18",
+      "zip_name": "Texterstellung_Hobbydepot_0.4.24.18_PFERDEATELIER_ORIGINAL_MINI_EINMALIMPORT.zip",
+      "zip_sha256": "03f21ca678f003ab55a2a3a86ccd44c0cceb1e6a758b6bb129de19b",
+      "zip_crc_ok": true,
+      "php_lint_78_of_78": true,
+      "exact_miniSingleImport_body_matches_horse_0_4_45_and_0_4_46": true,
+      "horse_0_4_46_memory_optimization_present": false,
+      "production_installed_version_reconfirmed": false,
+      "original_post_import_accepts_both_pferde_legacy_and_system4_contract_shapes": true,
+      "comparison_limit": "Do not infer same memory failure at Hobby site without real load evidence",
+      "action": "NO_NEW_PLUGIN_NO_CODE_COPY_NO_CORE_MODIFICATION"
+    },
+    "current_kmulti": {
+      "repo_branch": "hallo-netizen/k0-multiportal : k0-offline-rule-bindings-20261027",
+      "original_five_types": [
+        "Beratung",
+        "FAQ",
+        "Pflege",
+        "Vergleich",
+        "Anleitung"
+      ],
+      "latest_five_type_rehearsal": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45017698651",
+      "suites_pass": [
+        22,
+        23,
+        18,
+        61,
+        10
+      ],
+      "tests_passed": 134,
+      "current_release_blocked": true,
+      "real_3_faq_used": true,
+      "other_4_types_synthetic_orders_only": true,
+      "hypothetical_final_wordpress_json_is_test_only_deleted": true,
+      "actual_121_catalog_entries_NOT_all_executed": true,
+      "latest_branch_after_test_change_scope": "9 commits; files modified Hab-specific plus hobby_trial/kmulti_lt68.py only Hab 49->56 / 50->57 counters, Hobby typebook, registry, input and final delivery unchanged",
+      "code_changed_in_this_check": false
+    },
+    "excluded_false_local_fixture": {
+      "observed": "A file called texterstellung-mini-gespeicherter-auftrag.json was not the original 20 Hobby batch; it has Pferdeanhaenger metadata and different batch_id",
+      "did_not_treat_as_hobby_success_or_plugin_failure": true,
+      "original_20_hobby_source_not_reconfirmed_here": true
+    },
+    "conclusion": "HOBBYDEPOT_KMULTI_INTEGRATION_SIMULATION_CONFIRMED_WITH_OLD_REGRESSION_AND_CURRENT_PLUGIN_BYTE_PARITY__NO_CODE_CHANGE__NO_PRODUCTION_QA_RELEASE",
+    "no_modifications_to": [
+      "original K0",
+      "K-Multi Python runtime and registry",
+      "Hobbydepot or Pferdeatelier plugin",
+      "WordPress live state or content"
+    ],
+    "no_new_automations_or_paid_research": true
+  },
+  "hobby_original_wordpress_import_simulation_20261122": {
+    "date": "2026-11-22",
+    "scope": "EXISTING_HOBBY_PLUGIN_BINDING_AND_ISOLATED_TECHNICAL_SIMULATION_ONLY",
+    "actual_original_wordpress_hobby_faq_order_count": 3,
+    "source_portal": "www.hobby-depot.de",
+    "other_20_topic_file_was_pferdeatelier_not_hobbydepot": true,
+    "original_kmulti_independent_release_tests": {
+      "pass": 24,
+      "total": 24,
+      "real_content_signoff": false
+    },
+    "original_hobby_php_importer_mock_tests": {
+      "pass": 49,
+      "source": "Original 0.4.24.18 TXE_Workshop::importDrafts -> original PSERC_System4_Import::importPayload",
+      "drafts_created": 3,
+      "reimport_new_drafts": 0,
+      "metadata_unchanged": true,
+      "html_unchanged": true,
+      "wrong_category_blocks_before_write": true,
+      "tampered_five_field_order_blocks": true,
+      "publish_allowed": false
+    },
+    "original_hobby_article_types_supported": [
+      "Beratung",
+      "FAQ",
+      "Pflege",
+      "Vergleich",
+      "Anleitung"
+    ],
+    "comparison_to_horse": {
+      "horse_development_zip": "0.4.46",
+      "horse_latest_confirmed_live": "0.4.45",
+      "hobby_zip": "0.4.24.18",
+      "miniSingleImport_unchanged_method": true,
+      "slot_identity_bytes_equal": true,
+      "original_pserc_importer_bytes_equal": false,
+      "difference": "Horse 0.4.46 has newer bounded database scans and import memory/diagnostic support; this was not ported to Hobby since this task is binding only."
+    },
+    "synthetic_signed_test_only_positive": "created solely in temporary local directory then deleted; never a productive WordPress file",
+    "real_production_qa_signed": false,
+    "actual_wordpress_live_import": false,
+    "old_k0_changed": false,
+    "kmulti_code_changed": false,
+    "hobby_plugin_code_changed": false,
+    "horse_plugin_code_changed": false,
+    "decision": "Hobby K-Multi route plus current original WP draft return simulation PASS; no architecture change or plugin release. Original K-Multi content QA remains separately unfrozen."
+  },
+  "hobby_binding_only_retest_20261122_1657_CET": {
+    "date": "2026-11-22",
+    "scope": "READ_ONLY_HOBBYDEPOT_BINDING_RETEST_NO_ARCHITECTURE_CHANGES",
+    "source_git": [
+      {
+        "repo": "hallo-netizen/k0-multiportal",
+        "ref": "k0-offline-rule-bindings-20261027",
+        "head_at_recheck": "77d706ecaefc817537477fa1c8397ba73599a2c6"
+      },
+      {
+        "repo": "hallo-netizen/affiliate-pferdeportal",
+        "ref": "work/texterstellung-hobby-hab-arbeitskopien-20261116"
+      }
+    ],
+    "production_code_changed": false,
+    "git_diff_since_last_successful_hobby_3faq_run": {
+      "baseline_commit": "1885251bc059d2fb290d522d5d4dcaeb7d42ddef",
+      "head_commit": "77d706ecaefc817537477fa1c8397ba73599a2c6",
+      "commits_ahead": 6,
+      "modified_paths": [
+        ".github/workflows/kmulti-hab-fullchain-qa.yml",
+        "offline_writer_dev/QA_HAB_GEFAHR_SCHUTZ_3_ARTIKEL_WIRKLICHER_LT68_TEST_20261122.md",
+        "offline_writer_dev/test_kmulti_hab_authored_drafts.py"
+      ],
+      "hobby_binding_code_modified": false
+    },
+    "reexecuted_local_tests": {
+      "original_archived_hobby_3faq_bridge_and_onefile_release_tests": 55,
+      "original_0_4_24_18_php_parser_cases": 9,
+      "total": 64,
+      "failed": 0,
+      "original_wordpress_hobby_faq_count": 3,
+      "simulated_qa_certificate_only": true,
+      "true_quality_release": false,
+      "actual_wordpress_live_db_called": false,
+      "unchanged_original_plugin_php_file": true,
+      "valid_single_test_import_has_three_original_unchanged_hobby_faq_bodies": true,
+      "malformed_payloads_blocked_before_wordpress_write": true,
+      "existing_onefile_test_release_had_old_nonproduction_qa_fixtures": true
+    },
+    "historical_full_simulation_confirmed": {
+      "github_five_types_test_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45017698651",
+      "github_three_real_faq_safety_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45017741581",
+      "previous_wp_mock_import_pass": 49,
+      "no_new_real_qa_approval": true
+    },
+    "open_only_outside_technical_binding": "Productive original K-Multi signed full article QA and verified WordPress staging/live integration; neither is claimed by a local simulated approval",
+    "conclusion": "Binding technically proven on original three FAQ, all five article types routed in existing CI. No rebuild, no code modifications, no new plugin, no live website change."
+  },
+  "real_new_user_upload_20261123": {
+    "date_local": "2026-11-23",
+    "run_type": "ACTUAL_ORIGINAL_KMULTI_GITHUB_INBOX_PUSH_NOT_SIMULATION",
+    "source_filename": "texterstellung-k0-export-wiederholung-mit-zuordnung.json",
+    "original_upload_git_blob_sha": "3ff40ab0dca739283b5b642c2f32b0deb5c77418",
+    "new_inbox": "kmulti_inbox/20261123-hobby-real-upload-3-faq-0949.json",
+    "commit": "a6295fdb7f2c77492a1fe9a66aac83746f87f34c",
+    "only_changed_git_path": "kmulti_inbox/20261123-hobby-real-upload-3-faq-0949.json",
+    "github_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45142003434",
+    "completed": "2026-11-23T08:52:06Z",
+    "github_run_conclusion": "success",
+    "original_entry_tests": {
+      "passed": 72,
+      "suites": [
+        22,
+        27,
+        12,
+        11
+      ]
+    },
+    "read_live_official_source_pages": 10,
+    "original_portal_detected": "hobby_depot",
+    "original_faq_count": 3,
+    "routed_type_books": [
+      "HOBBY_FAQ",
+      "HOBBY_FAQ",
+      "HOBBY_FAQ"
+    ],
+    "exact_original_metadata_retained": true,
+    "original_research_order_created": true,
+    "actual_workflow_status": "WAITING_FOR_SHARED_RESEARCH_OWNER",
+    "facts_semantically_approved": false,
+    "rulebooks_loaded": false,
+    "writer_allowed": false,
+    "real_full_QA_done": false,
+    "authentic_signed_release": false,
+    "final_wordpress_file_created": false,
+    "workflow_artifact": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45142003434/artifacts/14803000364",
+    "note": "This is a real fresh WordPress upload and real existing GitHub K-Multi ingress, NOT an end-to-end regular writing run. Existing K-Multi entry workflow stops by its current design at shared research order; no automatic full writer/quality/real signed export exists in this connected branch. No unsupported PASS or fake final JSON allowed.",
+    "code_changes": false
+  },
+  "k0_research_to_writer_connection_readonly_20261123": {
+    "type": "READONLY_EXACT_CAUSE_COMPARISON_K0_VS_EXISTING_KMULTI",
+    "date": "2026-11-23",
+    "sources": [
+      "hallo-netizen/affiliate-pferdeportal@konzept0-portal-neutral-20261002:.github/workflows/k0-authoring-context.yml",
+      "hallo-netizen/affiliate-pferdeportal@konzept0-portal-neutral-20261002:engine/k0_writer_station.py",
+      "hallo-netizen/affiliate-pferdeportal@konzept0-portal-neutral-20261002:real_runs/k0/20261119-pferdekauf-9aa09777-03/AUTHORING_CONTEXT.json",
+      "hallo-netizen/k0-multiportal@k0-offline-rule-bindings-20261027:.github/workflows/kmulti-portal-auto-intake.yml",
+      "hallo-netizen/k0-multiportal@k0-offline-rule-bindings-20261027:offline_writer_dev/kmulti_common_research_entry.py",
+      "hallo-netizen/k0-multiportal@k0-offline-rule-bindings-20261027:offline_writer_dev/kmulti_existing_research_handoff.py",
+      "hallo-netizen/k0-multiportal@k0-offline-rule-bindings-20261027:offline_writer_dev/kmulti_authoring_station.py",
+      "hallo-netizen/k0-multiportal@k0-offline-rule-bindings-20261027:offline_writer_dev/portal_auto/kmulti_primary_source_capture.py"
+    ],
+    "k0_working_handoff": {
+      "real_source_context_fields": [
+        "production_context.fact_pack",
+        "rule_context.research_claims",
+        "rule_context.research_claims.*.evidence_text_sha256"
+      ],
+      "source_owner_rechecks_original_quote_in_actual_publisher_page": true,
+      "on_pass": "prepare K0_WRITER_JOB_V1 and persist immutable WRITER_JOB.json as GitHub commit; writer-accept runs on real draft and verifies 81 hard rules and LT68",
+      "on_failure": "K0_RESEARCH_RETURN_V1 to SAME_RESEARCH_OWNER, not new decision or new architecture"
+    },
+    "current_kmulti_actual_behavior": {
+      "github_real_new_user_upload_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45142003434",
+      "original_three_hobby_upload_portal_match": true,
+      "source_pages_retrieved": 10,
+      "source_excerpt_match_does_not_establish_semantic_fact_approval": true,
+      "original_portal_auto_intake_ends_at": "KMULTI_SHARED_RESEARCH_ORDER.json with WAITING_SHARED_RESEARCH",
+      "research_handoff_function_status": "EXISTING_RESEARCH_BOUND_NEEDS_UPSTREAM_QA_AUTHORITY",
+      "authoring_handoff_function_status": "RESEARCH_DOCUMENTS_RECEIVED_WAITING_OWNER_FACT_QA_AND_RULEBOOK_APPROVAL",
+      "existing_hobby_autowriter_run_workflow_found": false,
+      "current_kmulti_hobby_rulebooks_approved": false,
+      "normal_production_onefile_export_available": false
+    },
+    "root_cause": "Not merely a missing 'done' flag. Current GitHub K-Multi entry does not persist an approved research-to-writer packet nor start a productive Hobby writer. The 10 retrievable pages/16 matched excerpts from prior Hobby rehearsal are evidence transport, not the K0-like approved article fact context. Existing K-Multi handoff code deliberately holds writer_allowed=false.",
+    "minimal_connection_only_target": "Reuse exact existing Hobby K-Multi source-owner output, bind each original plan_slot to independently verified facts with one owner proof, then continue on existing Hobby post-research authoring interface with original type book. Any actual onward automation cannot be truthfully asserted without code/workflow changes to its existing adapter; do not copy K0 modules, change K0 rules, forge QA, invent writer, create a parallel architecture or re-query paid research.",
+    "changed_code_in_this_check": false,
+    "live_file_created": false,
+    "handoff_fully_functional_now": false
+  },
+  "k0_copy_runtime_interface_regression_20261123": {
+    "title": "KISS actual dormant-K0 reader against original Hobbydepot 3-FAQ WP input and separate editorial rulebooks",
+    "date": "2026-11-23",
+    "actual_github_actions_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/45151716868",
+    "original_kmulti_branch": "k0-offline-rule-bindings-20261027",
+    "k0_reference_dormant_snapshot": "offline_writer_dev/original_engine_verified",
+    "actual_wordpress_input": "kmulti_inbox/20261123-hobby-real-upload-3-faq-0949.json",
+    "k0_original_wp_unpacked_count": 3,
+    "all_original_five_fields_unchanged": true,
+    "original_k0_writer_hard_rule_count": 81,
+    "original_k0_writer_total_words_bounds": [
+      750,
+      900
+    ],
+    "original_hobby_kmulti_hard_catalog_count": 114,
+    "original_hobby_shared_catalog_count": 121,
+    "hobby_faq_editorial_book_status": "HOBBY_EDITORIAL_DRAFT_COMPLETE_NOT_ACTIVATED",
+    "production_rule_bindings_state": "NO_VALUES_BLOCKED",
+    "specific_difference": "The K0 snapshot has Pferdeatelier hard numeric and conclusion/format rules, while Hobby FAQ draft has its own not-yet-runtime-approved editorial policies including nonhard suggested [500,800] word range and optional Fazit H2. Directly activating the K0 copy would silently replace Hobby editorial semantics and leave 33 HARD checks unaccounted for.",
+    "regression_tests": {
+      "passed": 134,
+      "total": 134,
+      "suites": [
+        22,
+        23,
+        18,
+        61,
+        10
+      ],
+      "github_status": "success"
+    },
+    "production_writer_started": false,
+    "research_approved": false,
+    "signed_qa_pass": false,
+    "real_wordpress_import_generated": false,
+    "changed_only_kmulti_test_workflow": ".github/workflows/kmulti-hobby-five-types.yml",
+    "changed_production_code": false,
+    "production_kmulti_architecture_changed": false,
+    "original_k0_changed": false,
+    "evidence_commit": "ceda482f73510e5471de1c375fe49dc253d374e0",
+    "next_work": "Before any real release, use existing research, author and QA owners to honor the Hobby own rulebook and execute all required KMulti checks. No blind K0 activation; do not forge approval. The original source and rules are intact."
+  }
+}

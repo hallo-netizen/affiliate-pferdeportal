@@ -1,0 +1,310 @@
+{
+  "contract": "HOBBYDEPOT_THREE_REAL_FAQ_ARTICLE_EDITORIAL_CHECKS_V1",
+  "date": "2026-11-21",
+  "status": "PASS_DETERMINISTIC_HOBBY_EDITORIAL_TARGETS_NOT_SIGNED_ARTICLE_APPROVAL",
+  "test_checks": 54,
+  "passed": 54,
+  "failed": 0,
+  "sources": {
+    "hobby_manifest_sha": "f94f47ed3618a4d6f6643614a1374fb71e60aa3d",
+    "word_press_fixture_sha": "3ff40ab0dca739283b5b642c2f32b0deb5c77418",
+    "existing_article_html_sha": "dbaf67d63983c648a3820411e2a0f65026fc464a",
+    "old_unapproved_candidate_sha": "31ece3c7891fec499194e6c77672fc6f926abe98",
+    "current_kmulti_registry_sha": "811abd6063796369320ecdb8ff953a3467d31ae0",
+    "current_blocking_state_sha": "b5bdc176a1a93af430003f91b6760ccd5ade81db"
+  },
+  "articles": [
+    {
+      "index": 1,
+      "title": "Ist Bogenschießen ein teures Hobby?",
+      "id": "article:387ff7fd7e0dac85286fd337",
+      "words": 561,
+      "h2": 3,
+      "paragraphs": 10,
+      "sources": 3,
+      "internal_links": 0,
+      "checks": [
+        {
+          "id": "original_id_match",
+          "pass": true
+        },
+        {
+          "id": "five_fields_unchanged",
+          "pass": true
+        },
+        {
+          "id": "WP_type_FAQ_and_own_book_match",
+          "pass": true
+        },
+        {
+          "id": "natural_question_title",
+          "pass": true
+        },
+        {
+          "id": "opening_repeats_question_and_provides_content",
+          "pass": true
+        },
+        {
+          "id": "own_word_target",
+          "pass": true
+        },
+        {
+          "id": "own_H2_target",
+          "pass": true
+        },
+        {
+          "id": "conclusion_exists",
+          "pass": true
+        },
+        {
+          "id": "ten_review_paragraphs_present",
+          "pass": true
+        },
+        {
+          "id": "source_list_unique_https",
+          "pass": true
+        },
+        {
+          "id": "source_host_scope",
+          "pass": true
+        },
+        {
+          "id": "no_embedded_script_or_iframe",
+          "pass": true
+        },
+        {
+          "id": "only_one_shared_hobby_rules_file",
+          "pass": true
+        },
+        {
+          "id": "no_automatic_publication",
+          "pass": true
+        }
+      ],
+      "passed": 14,
+      "total": 14,
+      "foreign_baseline_conflicts": {
+        "minimum_words": true,
+        "minimum_h2": true,
+        "minimum_paragraphs": true
+      },
+      "scope": "Structural editorial goals only, not signed facts or 121-rule production QA"
+    },
+    {
+      "index": 2,
+      "title": "Welche Regeln gelten beim 3D-Bogenschießen?",
+      "id": "article:3330932ffcc7b7476ce744bf",
+      "words": 545,
+      "h2": 3,
+      "paragraphs": 10,
+      "sources": 5,
+      "internal_links": 0,
+      "checks": [
+        {
+          "id": "original_id_match",
+          "pass": true
+        },
+        {
+          "id": "five_fields_unchanged",
+          "pass": true
+        },
+        {
+          "id": "WP_type_FAQ_and_own_book_match",
+          "pass": true
+        },
+        {
+          "id": "natural_question_title",
+          "pass": true
+        },
+        {
+          "id": "opening_repeats_question_and_provides_content",
+          "pass": true
+        },
+        {
+          "id": "own_word_target",
+          "pass": true
+        },
+        {
+          "id": "own_H2_target",
+          "pass": true
+        },
+        {
+          "id": "conclusion_exists",
+          "pass": true
+        },
+        {
+          "id": "ten_review_paragraphs_present",
+          "pass": true
+        },
+        {
+          "id": "source_list_unique_https",
+          "pass": true
+        },
+        {
+          "id": "source_host_scope",
+          "pass": true
+        },
+        {
+          "id": "no_embedded_script_or_iframe",
+          "pass": true
+        },
+        {
+          "id": "only_one_shared_hobby_rules_file",
+          "pass": true
+        },
+        {
+          "id": "no_automatic_publication",
+          "pass": true
+        }
+      ],
+      "passed": 14,
+      "total": 14,
+      "foreign_baseline_conflicts": {
+        "minimum_words": true,
+        "minimum_h2": true,
+        "minimum_paragraphs": true
+      },
+      "scope": "Structural editorial goals only, not signed facts or 121-rule production QA"
+    },
+    {
+      "index": 3,
+      "title": "Wie finde ich einen 3D-Bogenschießen-Parcours?",
+      "id": "article:ca53fa9bf64655ef03ff1b9e",
+      "words": 593,
+      "h2": 3,
+      "paragraphs": 10,
+      "sources": 5,
+      "internal_links": 0,
+      "checks": [
+        {
+          "id": "original_id_match",
+          "pass": true
+        },
+        {
+          "id": "five_fields_unchanged",
+          "pass": true
+        },
+        {
+          "id": "WP_type_FAQ_and_own_book_match",
+          "pass": true
+        },
+        {
+          "id": "natural_question_title",
+          "pass": true
+        },
+        {
+          "id": "opening_repeats_question_and_provides_content",
+          "pass": true
+        },
+        {
+          "id": "own_word_target",
+          "pass": true
+        },
+        {
+          "id": "own_H2_target",
+          "pass": true
+        },
+        {
+          "id": "conclusion_exists",
+          "pass": true
+        },
+        {
+          "id": "ten_review_paragraphs_present",
+          "pass": true
+        },
+        {
+          "id": "source_list_unique_https",
+          "pass": true
+        },
+        {
+          "id": "source_host_scope",
+          "pass": true
+        },
+        {
+          "id": "no_embedded_script_or_iframe",
+          "pass": true
+        },
+        {
+          "id": "only_one_shared_hobby_rules_file",
+          "pass": true
+        },
+        {
+          "id": "no_automatic_publication",
+          "pass": true
+        }
+      ],
+      "passed": 14,
+      "total": 14,
+      "foreign_baseline_conflicts": {
+        "minimum_words": true,
+        "minimum_h2": true,
+        "minimum_paragraphs": true
+      },
+      "scope": "Structural editorial goals only, not signed facts or 121-rule production QA"
+    }
+  ],
+  "cross_checks": [
+    {
+      "id": "five_existing_wp_types_exact",
+      "pass": true
+    },
+    {
+      "id": "five_independent_typebooks_exact",
+      "pass": true
+    },
+    {
+      "id": "12_single_shared_rules",
+      "pass": true
+    },
+    {
+      "id": "25_type_specific_rules",
+      "pass": true
+    },
+    {
+      "id": "original_host_unchanged",
+      "pass": true
+    },
+    {
+      "id": "original_five_field_rows_exact",
+      "pass": true
+    },
+    {
+      "id": "FAQ_existing_route_matches",
+      "pass": true
+    },
+    {
+      "id": "Pflege_Anleitung_legacy_combined_unmodified",
+      "pass": true
+    },
+    {
+      "id": "old_kmulti_book_not_approved",
+      "pass": true
+    },
+    {
+      "id": "hobby_production_blocked",
+      "pass": true
+    },
+    {
+      "id": "all_article_structural_checks_pass",
+      "pass": true
+    },
+    {
+      "id": "foreign_unapproved_floor_would_reject_all_three",
+      "pass": true
+    }
+  ],
+  "previous_independent_evidence": {
+    "latest_real_LanguageTool_6_8_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/44889447704",
+    "language_status": "3 of 3 pass",
+    "existing_source_audit_run": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/44889232903",
+    "facts": "30 paragraphs reviewed, 10 original sources checked, 16 original excerpts matched, research_complete=false",
+    "full_qa_certificate_present": false
+  },
+  "critical_limits": [
+    "14 tests per article check metadata, text shape, official source host patterns and draft-only policy; they DO NOT establish independent semantic fact correctness.",
+    "Three existing FAQ articles meet the Hobby editorial target lengths/H2 counts. Targets are NOT activated hard rules.",
+    "Three older foreign formal value floors all fail for these three articles; those old values are NOT approved Hobby rules.",
+    "No original K-Multi 121 rule checker execution or authoring authorization; no WordPress live operation."
+  ],
+  "do_not_publish": true
+}

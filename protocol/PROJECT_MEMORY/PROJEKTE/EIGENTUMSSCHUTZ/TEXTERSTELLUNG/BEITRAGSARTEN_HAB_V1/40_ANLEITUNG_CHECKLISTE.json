@@ -1,0 +1,76 @@
+{
+  "schema": "HAB_EIGENSTAENDIGE_ARTIKELART_V1",
+  "portal": "hab_und_bewahr",
+  "status": "FACHENTWURF_NICHT_AKTIV_NICHT_K0_READY",
+  "gemeinsame_regeln": "01_GEMEINSAME_TEXTREGELN.json",
+  "hab_querschnitt": "02_HAB_QUERSCHNITT_SICHERHEIT.json",
+  "aktionsregel": "Nur die im MINI einmalig beschlossene Beitragsart laden. Keine zweite Entscheidung, kein Fallback oder automatische Umbenennung. Bestehende K0-Prüfungen niemals duplizieren.",
+  "technik": "Eigenständiges Regelpaket zur späteren K-Multi-Prüfung; NICHT als bereits ausführbare Original-K0-Typdatei ausgeben.",
+  "id": "HAB_ANLEITUNG",
+  "article_type": "Anleitung & Checkliste",
+  "datei": "40_ANLEITUNG_CHECKLISTE.json",
+  "k0_ausgang": "ARTIKELTYPEN/Anleitung.json READY; für regelmäßige Wartung existiert zusätzlich RULE_VALUES.types.Pflege",
+  "leserziel": "Eine sichere, realistisch selbst ausführbare Aufgabe erledigen oder einen Zustand nachvollziehbar kontrollieren.",
+  "unterformen": [
+    {
+      "name": "Einmalige Anleitung",
+      "kennzeichen": "Konkreter sicherer Vorgang mit Anfang/Ende",
+      "vorhandener_k0_typ": "Anleitung"
+    },
+    {
+      "name": "Regelmäßige Prüfliste",
+      "kennzeichen": "Wiederkehrende Inspektion/Pflege/Wartung ohne gefährliche Reparatur",
+      "vorhandener_k0_typ": "Pflege; nicht automatisch umbenennen"
+    },
+    {
+      "name": "Sofortmaßnahmen-Checkliste",
+      "kennzeichen": "Sichere Prioritäten bei einem Vorfall, keine gefährlichen Arbeiten",
+      "vorhandener_k0_typ": "Noch nicht pauschal gleichsetzen; Fachentscheidung vor technischem Start"
+    }
+  ],
+  "aufbau": [
+    "Ziel und Grenzen: für wen und unter welchen sicheren Bedingungen",
+    "Benötigte Vorbereitung, zulässige Voraussetzungen, Hilfsmittel",
+    "Abbruch-/Warnsignale unmittelbar vor kritischer Stelle und Verweis an Fachbetrieb",
+    "Logisch geordnete, einzeln prüfbare Handlungen oder Kontrollen",
+    "Ergebnisprüfung und häufige Fehler, soweit fachlich sinnvoll",
+    "Vorgehen bei Abweichung nur als sichere nächste Handlung"
+  ],
+  "k0_uebernahme": [
+    "Original-Anleitung: preparation, steps, risks, verification, mistakes und Metadaten",
+    "Original-Pflege: wiederkehrende Kontrollen, Schritte und Risiken",
+    "Reihenfolge und Kontrollpunkte, keine erfundenen Arbeitsschritte"
+  ],
+  "kritisch_anpassen": [
+    "Eine Prüfliste darf eine kurze Checkliste bleiben, wenn kein echter Ablauf nötig ist; keine künstlichen Schrittketten",
+    "Kein Heimwerker-Tutorial zu Strom, Gas, Brandabschottung, Sicherheitsumgehung oder gefährlicher Reparatur",
+    "Warnung muss handlungsnah stehen, nicht nur als allgemeiner Nachsatz",
+    "Tabelle bei sequentiellen Schritten meist ungeeignet; bestehende lineare Ausnahme nutzen"
+  ],
+  "hab_regeln": [
+    "HAB01",
+    "HAB02",
+    "HAB03",
+    "HAB04 falls rechtlich relevant",
+    "HAB06 falls Video/Datenschutz",
+    "HAB08",
+    "HAB11"
+  ],
+  "beispiele": {
+    "geeignet": [
+      "Rauchmelder nach Herstellerangaben sicher testen",
+      "Wohnmobil vor längerer Abwesenheit kontrollieren"
+    ],
+    "ungeeignet": [
+      "Schloss ohne Schlüssel öffnen",
+      "Eigenständige Reparatur der Hauselektrik unter Spannung"
+    ]
+  },
+  "prueffragen": [
+    "Kann eine Privatperson die Tätigkeit ohne unangemessenes Risiko wirklich durchführen?",
+    "Sind Stoppsignale und Grenzen vor den Schritten verständlich?",
+    "Kann das Ergebnis sichtbar geprüft werden?",
+    "Ist wiederkehrende Pflege als solche erfasst, ohne ursprünglichen Pflege-Typ zu verlieren?"
+  ],
+  "integrationskonflikt": "Eine einzige Hab-Oberart kann derzeit in K0 nicht bedenkenlos zugleich Anleitung und Pflege heißen. Erst einmalige fachliche Zuordnung und explizite kompatible technische Bindung nach positiver Regression; Originaltypen beibehalten."
+}

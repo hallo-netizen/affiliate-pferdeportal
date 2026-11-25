@@ -1,0 +1,74 @@
+{
+  "contract": "HOBBYDEPOT_EIGENSTAENDIGES_BEITRAGSREGELBUCH_V1",
+  "status": "HOBBY_EDITORIAL_DRAFT_COMPLETE_NOT_ACTIVATED",
+  "portal_id": "hobby_depot",
+  "original_wordpress_type_is_authority": true,
+  "wordpress_article_type": "Beratung",
+  "hobby_rulebook_id": "HOBBY_RATGEBER_WISSEN",
+  "intent": "Der Leser will entscheiden, ob und wie ein Hobby, eine Ausrüstung oder ein Einstieg zu ihm passt.",
+  "not_this_type": "Keine isolierte Einzelfrage (FAQ), keine Arbeitsfolge (Anleitung), keine fortlaufende Wartung (Pflege), kein gleichkriterieller Zwei-Optionen-Vergleich (Vergleich).",
+  "article_structure": [
+    "Bei längeren Entscheidungen optional 'Auf einen Blick' mit konkretem Nutzen, nicht als Pflichtkasten.",
+    "Direkte Orientierung: Welche Entscheidung steht an?",
+    "Für wen passt welcher Einstieg oder welche Ausrüstung – und für wen eher nicht? Kriterien nach Bedarf, Erfahrung, Platz, Zeit, Budget und Sicherheit nur soweit fachlich wichtig.",
+    "Ausstattung und realistische Kosten mit Umfang und Zeitpunkt, soweit belastbar.",
+    "Typische Fehlentscheidungen und verständliche Auswahlkriterien.",
+    "Bei unmittelbar geplantem Einstieg optional eine kurze Start-Checkliste; Risiken vor Praxis benennen (zentrale Sicherheitsregel H06).",
+    "Nur bei zusätzlichen echten Leserfragen ein kurzes FAQ ohne Wiederholung.",
+    "Fazit: bedingte, nicht werbliche Empfehlung passend zur Leserfrage."
+  ],
+  "additional_type_rules": [
+    {
+      "id": "B01_BEDARF",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Ziel, Rahmen und tatsächliche Leserfrage zuerst klären; nicht automatisch ein Produkt verkaufen."
+    },
+    {
+      "id": "B02_EIGNUNG",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Für wen eignet sich welche Wahl tatsächlich – und für wen eher nicht? Typische Nutzersituationen anhand belegbarer Voraussetzungen (Erfahrung, Zeit, Platz, Budget, Risiken) begründen; keine psychologischen Eignungsversprechen oder allgemeinen Sieger."
+    },
+    {
+      "id": "B03_KOSTEN",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Kostenarten unterscheiden (Anschaffung, Zubehör, Verbrauch, Kurs, Mitgliedschaft), nur belegte Zahlen nennen."
+    },
+    {
+      "id": "B04_KEIN_SIEGER",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Kein allgemeiner 'Testsieger' oder Pflichtkauf ohne vergleichbare verifizierte Daten."
+    },
+    {
+      "id": "B05_STARTCHECK_NACH_WAHL",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Wenn Leser nach einer Entscheidung selbst starten sollen, eine kurze realistische Vorbereitungsliste liefern (nur nötige Voraussetzungen, Ausrüstung und sicherer Einstieg). Nicht pauschal an jede Kaufberatung anhängen."
+    },
+    {
+      "id": "B06_OFFENE_FOLGEFRAGEN",
+      "owner": "ARTICLE_AUTHOR",
+      "rule": "Nur bei echten unbeantworteten Folgefragen einen knappen Abschnitt 'Häufige Fragen' ergänzen. Keine Wiederholung der Entscheidungshilfe und kein FAQ-Füllblock."
+    }
+  ],
+  "format_guidance": {
+    "words": [
+      800,
+      1100
+    ],
+    "h2": [
+      3,
+      5
+    ],
+    "conclusion": "Kurzes H2 'Fazit' als fachlicher Standard; kein neuer Sachverhalt.",
+    "tables": "Nur wenn eine echte Übersicht der Entscheidung dient.",
+    "lists": "Nur für echte Kriterien oder Arbeitsschritte.",
+    "links": "Keine feste Mindestzahl. Höchstens drei als unverbindliche Lesbarkeitsorientierung.",
+    "values_are": "HOBBY_EDITORIAL_TARGETS_NOT_AUTOMATIC_RUNTIME_HARD_LIMITS",
+    "words_basis": "Sichtbarer sinnvoller Fließtext ohne Tabellen, Navigation, Quellenliste und reine Fülltexte",
+    "h2_basis": "Natürliche echte Zwischenüberschriften; kein Zwang zu Leerabschnitten"
+  },
+  "examples_from_hobby_topics": [
+    "Bogenschießen als Hobby: Kosten und Einstieg",
+    "Airbrush lernen: sinnvoller Einstieg"
+  ],
+  "shared_hobby_policy_ref": "05_GEMEINSAME_REGELN.json"
+}

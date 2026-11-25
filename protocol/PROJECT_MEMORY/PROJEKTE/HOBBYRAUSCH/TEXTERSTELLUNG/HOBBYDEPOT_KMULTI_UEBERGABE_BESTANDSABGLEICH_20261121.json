@@ -1,0 +1,94 @@
+{
+  "contract": "HOBBYDEPOT_KMULTI_PORTAL_AND_ARTICLE_TYPE_HANDOFF_INVENTORY_V1",
+  "documented": "2026-11-21",
+  "status": "WP_FILE_TRANSFER_AND_EXISTING_TYPE_ROUTING_FOUND_NOT_NEWLY_IMPLEMENTED",
+  "scope": "Nur Hobbydepot-seitige Bestandsanbindung, K0 und K-Multi nicht verändern",
+  "wordpress_plugin": {
+    "name": "Texterstellung – Hobbydepot",
+    "version": "0.4.24.18",
+    "code_unchanged": true,
+    "live_installation_not_reverified": true,
+    "source": "/Hobby Depot/Plugin-Büro/Texterstellung_Hobbydepot_0.4.24.18_PFERDEATELIER_ORIGINAL_MINI_EINMALIMPORT.zip"
+  },
+  "original_file": {
+    "contract": "WP_K0_UPLOAD_PACKAGE_V1",
+    "source_receipt": "WP_K0_SOURCE_RECEIPT_V1",
+    "portal_identity_original_field": "word_press_order_receipt.site_host",
+    "valid_hosts": [
+      "hobby-depot.de",
+      "www.hobby-depot.de"
+    ],
+    "recognized_portal": "hobby_depot",
+    "five_original_article_fields": [
+      "title",
+      "target_keyword",
+      "category",
+      "article_type",
+      "plan_slot"
+    ],
+    "rule": "Aus vorhandener Hostangabe einmalig ableiten; KEIN weiteres portal_id-Feld einfügen, sonst verletzt dies die bestehende exakte Dateihülle.",
+    "no_sidecar": true,
+    "no_extra_user_upload": true,
+    "no_renaming_of_five_original_fields": true,
+    "article_type_decided_once_by": "WORDPRESS_MINI"
+  },
+  "existing_type_to_rulebook_reference": [
+    {
+      "wordpress_type": "Beratung",
+      "kmulti_reference": "HOBBY_RATGEBER_WISSEN",
+      "status": "TECHNICALLY_MAPPED_RULEBOOK_NOT_APPROVED"
+    },
+    {
+      "wordpress_type": "FAQ",
+      "kmulti_reference": "HOBBY_FAQ",
+      "status": "TECHNICALLY_MAPPED_RULEBOOK_NOT_APPROVED"
+    },
+    {
+      "wordpress_type": "Pflege",
+      "kmulti_reference": "HOBBY_ANLEITUNG_PFLEGE",
+      "status": "TECHNICALLY_MAPPED_SHARED_WITH_ANLEITUNG_RULEBOOK_NOT_APPROVED"
+    },
+    {
+      "wordpress_type": "Vergleich",
+      "kmulti_reference": "HOBBY_VERGLEICH",
+      "status": "TECHNICALLY_MAPPED_RULEBOOK_NOT_APPROVED"
+    },
+    {
+      "wordpress_type": "Anleitung",
+      "kmulti_reference": "HOBBY_ANLEITUNG_PFLEGE",
+      "status": "TECHNICALLY_MAPPED_SHARED_WITH_PFLEGE_RULEBOOK_NOT_APPROVED"
+    }
+  ],
+  "noted_unmapped_candidate": {
+    "name": "Porträt & Bericht",
+    "kmulti_rulebook_reference": "HOBBY_PORTRAET_BERICHT",
+    "in_current_wordpress_5_types": false,
+    "in_existing_kmulti_type_mapping": false,
+    "rule": "Nicht ohne neue vorgelagerte WordPress-MINI-Entscheidung für zukünftige Aufträge erfinden oder bestehende Entscheidungen ändern."
+  },
+  "rulebooks": {
+    "proposal_source": "hallo-netizen/k0-multiportal:offline_rules/portal_bindings/hobby_depot/proposals_20261120/candidate_complete_books",
+    "current_status": "NOT_APPROVED_OFFLINE_ONLY_NO_WRITER",
+    "attach_point": "NACH einer abgeschlossenen gemeinsamen Faktenrecherche, ohne zweite Redaktionstypentscheidung",
+    "no_duplicate_rulebooks_added_to_wordpress": true,
+    "no_unapproved_word_or_link_thresholds_activated": true
+  },
+  "verified_reference": {
+    "hobby_zip_main_file": "texterstellung-hobbydepot/texterstellung.php",
+    "original_package_builder": "TXE_Workshop::k0Package",
+    "kmulti_registry_readonly": "hallo-netizen/k0-multiportal:offline_writer_dev/portal_auto/KMULTI_PORTAL_REGISTRY.json",
+    "previous_real_3_faq_portal_routing": "https://github.com/hallo-netizen/k0-multiportal/actions/runs/44885710937"
+  },
+  "gaps": [
+    "Gemeinsamer Regelbuchverweis für die zwei unterschiedlichen WordPress-Beitragsarten Pflege und Anleitung ist bereits so vorhanden, keine stillschweigende zusätzliche Entscheidung vornehmen.",
+    "Vorgeschlagenes Porträt-/Bericht-Regelbuch ist nicht als eigene bestehende WordPress-Beitragsart registriert.",
+    "Die fünf vorbereiteten Hobby-Regelbücher sind redaktionell nicht freigegeben. Technische Portalübergabe allein darf keine Artikel-Freigabe vortäuschen."
+  ],
+  "action_result": "Kein WordPress-Pluginupdate erforderlich, um das vorhandene Portal und die fünf vorhandenen Typen weiterzugeben. Kein K-Multi-Code geändert.",
+  "modifications": {
+    "wordpress_plugin": false,
+    "existing_mini_orders": false,
+    "k0": false,
+    "kmulti": false
+  }
+}

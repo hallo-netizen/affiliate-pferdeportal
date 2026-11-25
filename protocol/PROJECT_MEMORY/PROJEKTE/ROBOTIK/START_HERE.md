@@ -25,3 +25,6 @@ Nächster fachlicher Auftrag: Idee, Abgrenzung und vollständigen Robotik-Katego
 
 ## Magazin/Journal – drei Büros
 - [MAGAZIN/START_HERE.md](MAGAZIN/START_HERE.md) – Roboterregister, Roboterglossar, Roboterfinder, einheitlicher Faktenstand.
+
+## Neu: eigenständiges Büro Texterstellung (19.11.2026)
+- [TEXTERSTELLUNG/START_HERE.md](TEXTERSTELLUNG/START_HERE.md) – jungfräuliche, **nicht freigegebene** Universal-Originalkopie 0.4.31.1, physische ZIP in Library `/robotik/Texterstellung/`. Keine Installation. Artikelarten/K0-Multi-Anbindung noch zu testen; Original-K0 unangetastet.
