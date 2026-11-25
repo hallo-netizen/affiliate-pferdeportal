@@ -35,3 +35,11 @@ Nächster Arbeitsstand:
 - kein neues Plugin nur wegen dieses PASSIV-Laufs.
 - 6.72.379 bleibt aktuell installiert; kein bewiesener Anlass für Rückbau.
 - weitere Performancearbeit ausschließlich an neu isolierten Restblöcken; erst mehrere einzeln kausal belegte Maßnahmen gemeinsam in einen nächsten Kandidaten.
+
+
+VERBINDLICHE KORREKTUR DES FREIGABESTANDARDS:
+- Der bisherige Standard war zu schwach: Teilpfad-/isolierter Realpfad-Speedup allein reicht NICHT mehr.
+- 6.72.379 hätte nach dem neuen Standard nicht ausgegeben werden dürfen, weil der komplette lokale Seitenpfad nicht als klarer Gesamt-Speedup vor Release nachgewiesen war.
+- Ab jetzt gilt: kein neues Plugin ohne vollständige lokale Alt/Neu-Seitensimulation, wiederholte Gesamtpfadmessung UND inhaltlichen 1:1-Funktionsbeweis.
+- Live dient nur noch zur Bestätigung eines vorher vollständig lokal bewiesenen Gewinns.
+- Verbindliche Regel: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PERFORMANCE_FREIGABEREGEL.md

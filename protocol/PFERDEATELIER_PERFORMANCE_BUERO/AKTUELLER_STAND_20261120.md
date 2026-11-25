@@ -2146,3 +2146,14 @@ Messung: pferdeatelier-performance-gesamtanalyse-20261125-091933.json
 - Kein neues Plugin aus diesem Bericht erzeugt; 6.72.379 bleibt installiert, da kein bewiesener Funktions- oder Performance-Rückschritt durch H+I vorliegt.
 - Messdatei im Büro: /pferdeatelier/PERFORMANCE_BUERO/MESSUNGEN/pferdeatelier-performance-gesamtanalyse-20261125-091933.json
 - Nächster Schritt: Restpfade weiter isolieren und mehrere neue, direkt messbare Ursachen sammeln, bevor ein nächstes Paket gebaut wird.
+
+
+## 2026-11-25 – Freigabestandard verschärft
+
+- Nutzeranforderung verbindlich präzisiert: keine Plugin-Ausgabe mehr auf Basis von Teilpfad- oder Mikrobenchmark-Gewinnen.
+- Fehler bei 6.72.379: lokal waren H+I kausal und der isolierte Realpfad schneller, aber der vollständige lokale Seitenpfad war vor Ausgabe nicht als klarer Gesamtgewinn nachgewiesen. Nach neuem Standard wäre 6.72.379 nicht ausgegeben worden.
+- Ab sofort Pflicht vor jeder Ausgabe: vollständige lokale Alt/Neu-Seitensimulation mit echten Daten, mehrere alternierende Läufe, jede Einzelmaßnahme separat kausal schneller, Bündelung erneut schneller, komplettes Rendering und inhaltlicher Funktionsvergleich.
+- Bytevergleich/Dateigrößenvergleich zählt nur als Zusatzbeweis.
+- Funktionsschutz muss Kandidaten, Reihenfolge, Ranking, Provider, Links/Tracking, Bilder, Preise, Fallbacks, dynamische Änderungen, Filter, Objektcache und tatsächlich gerendertes HTML abdecken.
+- Live-Messung dient nur noch als Bestätigung des vorher vollständig lokal bewiesenen Gesamtgewinns.
+- Kein neues Plugin, solange diese Hürde nicht vollständig bestanden ist.
