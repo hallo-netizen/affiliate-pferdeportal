@@ -53,3 +53,15 @@ Hinweis:
 - InnoDB-Zeilenangaben in Tabellenübersichten können Schätzwerte sein; für Löschentscheidungen zählen konkrete Schlüssel/Datensätze und Byte-Summen.
 - Noch keine großen Fach-/Produktivdaten gelöscht.
 - Ziel bleibt KISS: erst schnell sicheren Platz schaffen, danach Ursachenbegrenzung im erzeugenden System.
+
+
+## 2026-11-25 – Löschkandidaten nach Funktionsprüfung
+- PSERC-Plan-Bootstrapdaten NICHT löschen: Projektquellen zeigen sie als aktive Compiler-/Workflow-Records.
+- PSTE-Semantic-Sandbox NICHT blind löschen: Diagnosen zeigen aktive Nutzung durch den Recherche-/Sandbox-Workflow.
+- txe_frozen_mini_v1_* NICHT löschen: gespeicherte/frozen MINI-Aufträge, Wiederaufnahmefunktion muss erhalten bleiben.
+- txe_legacy_shelf_backup_v1_* als erster großer Löschkandidat freigegeben:
+  - sichtbare Größe ca. 83,45 MB.
+  - 0.4.55-Migrationsprüfung: Altarchiv wird auf kompakten Bestand reduziert (Test 156.486.315 -> 1.179.315 Bytes), der Backupstand bleibt dabei ausdrücklich separat erhalten.
+  - aktive MINI/K0-Semantik wurde nach Kompaktierung unverändert geprüft; Backup ist Rückfall-/Archivstand, nicht der kompakte aktive Bestand.
+- nachhaltige Ursache für diesen Block: Migrationsbackup wird nach erfolgreicher Kompaktierung nicht automatisch entfernt/begrenzt.
+- nächster operativer Schritt: ausschließlich txe_legacy_shelf_backup_v1_* löschen; danach Speicherstand erneut messen.
