@@ -203,3 +203,22 @@ Schluss:
 - vorheriger Audit-Verdacht widerlegt: Audit ist nicht Hauptverursacher der 103k Optionen.
 - Hauptblock liegt in sonstigen dynamischen ppar_ebay_* Optionsnamen.
 - noch keine Löschfreigabe; nächster Beweis ist Namensmuster-Aufteilung innerhalb EBAY_SONSTIGE.
+
+
+## 2026-11-25 12:32 – Hauptursache in echtem Affiliate 6.72.380 bewiesen
+Live-SQL:
+- ppar_ebay_deletion_inbox*: 103.535 Optionen / 84,29 MB.
+- alle anderen ppar_ebay_* Muster zusammen nur ca. 32 Optionen zzgl. Audit.
+
+Echter installierter Stand aus gesichertem ZIP
+PFERDEATELIER_AFFILIATE_6.72.380_GEBUENDELT_PERFORMANCE_ROOTFIX.zip geprüft:
+- Konstante EBAY_DELETION_INBOX_PREFIX = ppar_ebay_deletion_inbox_v1_.
+- öffentliche POST-Route erzeugt pro Nachricht einen dauerhaften Optionsschlüssel aus Hash(raw_body + signature) und speichert raw/signature/received_at/next_attempt_at/attempts/last_error_code.
+- kryptografische Signaturprüfung findet ERST später im Cron-Worker statt.
+- Worker lädt per ebay_deletion_inbox_keys(5000) immer die ältesten max. 5.000 Einträge.
+- pro Aufruf werden maximal 3 Nachrichten bzw. 20 Sekunden verarbeitet.
+- bei Fehler wird der Eintrag mit attempts/next_attempt_at/last_error_code aktualisiert und NICHT gelöscht.
+- nur fehlerfreie/verarbeitete Einträge werden delete_option().
+- damit sind permanente Fehler in den ältesten 5.000 ein Head-of-line-Blocker; neue Einträge dahinter werden nicht erreicht, solange alte Fehler nicht verschwinden.
+- die 103.535 Live-Einträge sind daher direkt derselbe Speicherpfad, der die Options-Tabelle massiv wachsen lässt.
+- noch offen: Verteilung der gespeicherten last_error_code-Werte. Diese wird vor einer Bereinigung read-only gezählt, damit legitime wartende Löschanforderungen nicht blind gelöscht werden.
