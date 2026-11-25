@@ -1,0 +1,172 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Steigbügel für die Dressur auswählen",
+    "target_keyword": "steigbügel dressur",
+    "category": "steigbuegel-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "f39ccb979890a3ee9dbff0e46513ab5b6b00142b10b2eb86ea5f16b0cdf3898a"
+  },
+  "content_profile": {
+    "search_intent": "Auswahl geeigneter Steigbügel für die Dressurreiterei"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://app.pferd-aktuell.de/ausbildung/ausruestung-von-pferd-und-reiter/ausruestung-von-pferd-und-reiter",
+          "source_title": "FN – Ausrüstung Pferd und Reiter"
+        },
+        {
+          "source_url": "https://app.pferd-aktuell.de/ausbildung/ausbildung-des-reiters/sicherheit-beim-reiten",
+          "source_title": "FN – Sicherheit beim Reiten"
+        }
+      ],
+      "claims": [
+        "Steigbügel müssen zum Fuß des Reiters passen.",
+        "Die Riemenlänge muss zu Sattel und Beinlänge passen.",
+        "Breite und Rutschfestigkeit sind wichtige Kriterien für Steigbügel.",
+        "Ein korrektes Verstellen der Steigbügel gehört zur sicheren Reitpraxis."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "steigbügel dressur",
+      "topic": "Steigbügel für die Dressur auswählen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "steigbuegel-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Steigbügel für die Dressur auswählen",
+      "decision_criteria": [
+        "Passform und Abmessungen",
+        "Sichere und zweckmäßige Verwendung",
+        "Praktische Kontrolle am Sattel"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/ausruestung-von-pferd-und-reiter/ausruestung-von-pferd-und-reiter",
+        "source_title": "FN – Ausrüstung Pferd und Reiter",
+        "evidence_text": "Die Steigbügel müssen zum Fuß, also zur Größe des Reiters passen.",
+        "evidence_text_sha256": "af2ec3530890b0c9eae1a3ae28daedec32b6350c3ff0ddfb2ff7cf372ace0933",
+        "statement": "Steigbügel müssen zum Fuß des Reiters passen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/ausruestung-von-pferd-und-reiter/ausruestung-von-pferd-und-reiter",
+        "source_title": "FN – Ausrüstung Pferd und Reiter",
+        "evidence_text": "Die Länge der Bügelriemen ist passend zum Sattel bzw. zur Beinlänge des Reiters zu wählen",
+        "evidence_text_sha256": "730b1dbfacc8f02cde5caf7a41191c92ba8260646f2144677ab47d26da08e91a",
+        "statement": "Die Riemenlänge muss zu Sattel und Beinlänge passen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/ausruestung-von-pferd-und-reiter/ausruestung-von-pferd-und-reiter",
+        "source_title": "FN – Ausrüstung Pferd und Reiter",
+        "evidence_text": "Sie sollten breit und schwer sein und über eine rutschfeste Trittfläche verfügen.",
+        "evidence_text_sha256": "efd65c00f930b294691446628a3053ae6c029b4a98ef4bd2833254c5d245f5ab",
+        "statement": "Breite und Rutschfestigkeit sind wichtige Kriterien für Steigbügel.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/ausbildung-des-reiters/sicherheit-beim-reiten",
+        "source_title": "FN – Sicherheit beim Reiten",
+        "evidence_text": "korrektes Nachgurten und Verstellen der Bügel schulen",
+        "evidence_text_sha256": "859b8c934c7f5ddfb88c7474ef9ab224318872749b07cd6ffea58272f01ef9d7",
+        "statement": "Ein korrektes Verstellen der Steigbügel gehört zur sicheren Reitpraxis.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/steigbuegel-beratung/",
+        "anchor": "steigbuegel-beratung",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/ausruestung/ausruestung-sattel/pferdesaettel/",
+        "anchor": "Fachliche Informationen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/steigbuegel-beratung/",
+        "active": true
+      },
+      {
+        "href": "/ausruestung/ausruestung-sattel/pferdesaettel/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "steigbuegel-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Steigbügel",
+      "Dressur",
+      "Auswahl",
+      "Länge",
+      "Sitz",
+      "Trittfläche",
+      "Riemen",
+      "Fuß",
+      "Sicherheit"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die konkrete Leserfrage ist nur durch fachliche Erklärungen und eine geordnete Prüfung sinnvoll zu beantworten. Eine künstliche Tabelle würde Details verkürzen oder unnötige Füllfelder erzeugen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
