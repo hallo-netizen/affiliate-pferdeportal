@@ -105,3 +105,56 @@ Hinweis:
 - aktuelle aktive WordPress-Pluginliste enthält kein eigenständiges PPM/POC-Plugin.
 - letzter Diagnosebestand enthält 7 PPM-Tabellen mit zusammen ca. 14,2 MiB Nutzdaten+Index; aktuelle phpMyAdmin-Seitenleiste zeigt zusätzlich weitere Legacy-PPM/POC-Tabellen.
 - nächster Schritt: aktuelle physische Belegung dieser Legacy-Tabellenfamilien direkt in information_schema summieren; erst danach gebündelte Löschfreigabe.
+
+
+## 2026-11-25 – GRUNDDIAGNOSE DATENBANK
+
+### Harte Zahlen
+- physisch/reserviert belegt: 2033,3 MB.
+- echter Inhalt nach erster Bereinigung: 1489,3 MB.
+- intern frei/reserviert: 544,0 MB.
+- damit besteht das IONOS-Limitproblem primär aus nicht zurückgegebenem InnoDB-Speicher, nicht aus >2 GB echtem Inhalt.
+
+### Größte Fragmentierungsblöcke
+- slfo_pste_runs: ca. 221 MB intern frei.
+- slfo_pste_candidates: ca. 115 MB intern frei.
+- slfo_options: nach Löschung des TXE-Legacy-Backups ca. 100 MB intern frei.
+- slfo_ppar_creative_library: ca. 23 MB intern frei.
+- diese vier Blöcke erklären zusammen ca. 459 MB bzw. rund 84 % des gesamten internen Leerraums.
+
+### Wachstum Live 21.11. -> 25.11.
+Vergleich derselben Live-Datenbank aus Diagnose 20261121-082829 gegen 20261125-102437:
+- slfo_options: + ca. 104 MB physischer Daten+Index.
+- slfo_relevanssi: + ca. 15 MB.
+- slfo_posts: + ca. 5,1 MB.
+- slfo_postmeta: + ca. 4,0 MB.
+- slfo_pste_candidates: 0 MB Wachstum.
+- slfo_pste_runs: 0 MB Wachstum.
+- slfo_pste_topic_pool: 0 MB Wachstum.
+- slfo_ppar_ebay_items: 0 MB Wachstum.
+=> jüngstes reales Wachstum kommt fast vollständig aus slfo_options; die sehr großen PSTE/eBay-Tabellen sind aktuell groß, aber im Messfenster nicht weiter gewachsen.
+
+### Options-Aufteilung aktuell
+- PPAR / Affiliate: ca. 110,4 MB Option-Werte.
+- PSTE: ca. 99,0 MB.
+- TXE / Texterstellung: ca. 93,0 MB.
+- PSERC: ca. 60,1 MB.
+- damit liegen rund 362,5 MB der großen Options-Werte in eigenen Portal-/Workflow-Systemen.
+
+### Wichtigster Ursachenbefund
+1. Langfristige Ursache A: Systeme mit häufigem Schreiben/Löschen/Umschreiben erzeugen große InnoDB-Tabellen mit starkem internem Leerraum; Speicher wird ohne Rebuild/Optimize nicht an IONOS zurückgegeben.
+2. Langfristige Ursache B: slfo_options wird als Ablage für sehr große Zustands-, Backup-, Sandbox- und Workflowobjekte benutzt. Das ist für dauerhaft große Daten ungeeignet und erzeugt zusätzlich Wachstum/Fragmentierung.
+3. Das aktuelle Limitproblem ist daher eine Kombination aus:
+   - echtem Wachstum insbesondere in slfo_options,
+   - plus rund 544 MB nicht zurückgegebenem Leerraum.
+4. Weitere DELETEs allein senken die IONOS-Belegung nicht zuverlässig; sie erhöhen zunächst nur data_free.
+5. Der nachhaltige Fix muss deshalb beides lösen:
+   - große/temporäre Workflowdaten begrenzen/aus options heraus bzw. automatisch bereinigen,
+   - regelmäßige kontrollierte physische Tabellenkompaktierung bzw. Speicherrückgabe ermöglichen.
+
+### Aktueller Handlungsweg
+- keine Relevanssi-Aktion als Standardlösung.
+- keine PPM/K0-Tabellen löschen.
+- zuerst minimal physisch unter IONOS-Limit kommen, aber nur mit nachweislich entbehrlicher/rekonstruierbarer Struktur.
+- danach sofort die großen Fragmentierungsblöcke optimieren, insbesondere pste_runs, pste_candidates und options.
+- anschließend Ursachenfix in den erzeugenden Plugins: Aufbewahrungslimits/Rotation für Backups, Sandbox-/Run-Historie und große Option-Objekte.
