@@ -81,3 +81,13 @@ Hinweis:
 - Schluss: Datensatz ist logisch entfernt, aber InnoDB hat den Tabellenplatz nur intern freigegeben; physische Tabellenbelegung/Quota wurde noch nicht reduziert.
 - Damit reicht weiteres DELETE allein voraussichtlich nicht, um IONOS-Speicherquota sofort freizugeben.
 - nächster KISS-Schritt: nach der großen Löschung OPTIMIZE erneut testen. Falls IONOS die Schreibsperre weiterhin blockiert, ist physische Freigabe nur über eine DDL-Operation (Rebuild/Truncate/Drop einer nachweislich entbehrlichen Tabelle) möglich; keine produktive Tabelle blind anfassen.
+
+
+## 2026-11-25 11:54 – physische Gesamtbelegung gemessen
+- Belegt inkl. intern freiem Tabellenplatz: 2033,3 MB.
+- echter Tabelleninhalt: 1489,3 MB.
+- intern frei/reserviert: 544,0 MB.
+- Schluss: Quota-Problem ist überwiegend reservierter InnoDB-Platz, nicht 2+ GB echte Nutzdaten.
+- Ziel zur Entsperrung: ca. 35–50 MB physisch freigeben; danach OPTIMIZE der großen Tabellen möglich.
+- kleinster sicherer Kandidat: slfo_relevanssi, ca. 35,7 MB reserviert; reine Relevanssi-Suchindextabelle, aus WordPress-Inhalten neu aufbaubar.
+- geplanter KISS-Schritt: TRUNCATE TABLE slfo_relevanssi; Schema bleibt bestehen, nur Suchindex wird geleert. Danach Gesamtbelegung neu messen und Relevanssi nach Entsperrung neu indizieren.
