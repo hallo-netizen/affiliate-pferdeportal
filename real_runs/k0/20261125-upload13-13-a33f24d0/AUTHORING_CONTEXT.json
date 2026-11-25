@@ -1,0 +1,177 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wie wirkt ein Stoßzügel beim Pferd?",
+    "target_keyword": "Welche Wirkung hat ein Stoßzügel bei Pferden?",
+    "category": "ausbildung-reitweisen",
+    "article_type": "FAQ",
+    "plan_slot": "a33f24d043037fd568b2d24bb4e7bc8002317ad6f2fa1866937311326abbd0ad"
+  },
+  "content_profile": {
+    "search_intent": "Wirkungsweise eines Stoßzügels auf das Pferd"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Hilfsz%C3%BCgel",
+          "source_title": "Hilfszügel – Wikipedia"
+        }
+      ],
+      "claims": [
+        "Ein Stoßzügel verbindet Gebiss und Sattelgurt zwischen den Vorderbeinen.",
+        "Ein Stoßzügel begrenzt das Anheben des Kopfes.",
+        "Ein zu kurzer Stoßzügel kann die Balance beeinträchtigen.",
+        "Ein Stoßzügel ist nicht für das Longieren geeignet.",
+        "Ausbinder begrenzen die seitliche Halsbewegung zusätzlich."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welche Wirkung hat ein Stoßzügel bei Pferden?",
+      "topic": "Wie wirkt ein Stoßzügel beim Pferd?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "ausbildung-reitweisen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Wirkung hat ein Stoßzügel bei Pferden?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Hilfsz%C3%BCgel",
+        "source_title": "Hilfszügel – Wikipedia",
+        "evidence_text": "Ein Stoßzügel ist die direkte Verbindung des Gebisses mit dem Sattelgurt über einen zwischen den Vorderbeinen des Pferdes laufenden Riemen.",
+        "evidence_text_sha256": "30cf655dd2c5bd2ec4426266d0d2ffd922bab741c7a074e5782fab9b76f92c4d",
+        "statement": "Ein Stoßzügel verbindet Gebiss und Sattelgurt zwischen den Vorderbeinen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Hilfsz%C3%BCgel",
+        "source_title": "Hilfszügel – Wikipedia",
+        "evidence_text": "So wird das Heben des Pferdekopfes über ein durch die Länge des Stoßzügels vorgegebenes Maß verhindert.",
+        "evidence_text_sha256": "42d01e632e0a89bb2c8ea430458fa9ece71d0806affddcec52b764c936542c1a",
+        "statement": "Ein Stoßzügel begrenzt das Anheben des Kopfes.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Hilfsz%C3%BCgel",
+        "source_title": "Hilfszügel – Wikipedia",
+        "evidence_text": "Ein deutlich kürzer geschnallter Stoßzügel beeinträchtigt das Pferd in seiner Balance.",
+        "evidence_text_sha256": "a90864f4851718af116e6d2e3bb2e3fb1016054ea2c25c8c40207e635e27d296",
+        "statement": "Ein zu kurzer Stoßzügel kann die Balance beeinträchtigen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://de.wikipedia.org/wiki/Hilfsz%C3%BCgel",
+        "source_title": "Hilfszügel – Wikipedia",
+        "evidence_text": "Stoßzügel sind aufgrund der fehlenden seitlichen Begrenzung zum Longieren nicht geeignet.",
+        "evidence_text_sha256": "70611b8393321fb18f8e6e1ce35817eaf75cd95f010e8034bcd44c2fbf5f8feb",
+        "statement": "Ein Stoßzügel ist nicht für das Longieren geeignet.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://de.wikipedia.org/wiki/Hilfsz%C3%BCgel",
+        "source_title": "Hilfszügel – Wikipedia",
+        "evidence_text": "Im Gegensatz zum Stoßzügel wird durch Ausbinder die Bewegungsfreiheit des Pferdehalses auch seitlich begrenzt.",
+        "evidence_text_sha256": "4dcb4a14a6d924583aaf8b94e87e33789a32d425170337b399023ee593626c53",
+        "statement": "Ausbinder begrenzen die seitliche Halsbewegung zusätzlich.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/ausbildung-reitweisen/",
+        "anchor": "ausbildung-reitweisen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/training/training-longieren/",
+        "anchor": "Fachliche Informationen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/ausbildung-reitweisen/",
+        "active": true
+      },
+      {
+        "href": "/training/training-longieren/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "ausbildung-reitweisen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Stoßzügel",
+      "Wirkung",
+      "Pferd",
+      "Gebiss",
+      "Sattelgurt",
+      "Bewegung",
+      "Balance",
+      "Risiken",
+      "Longieren"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die konkrete Leserfrage ist nur durch fachliche Erklärungen und eine geordnete Prüfung sinnvoll zu beantworten. Eine künstliche Tabelle würde Details verkürzen oder unnötige Füllfelder erzeugen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
