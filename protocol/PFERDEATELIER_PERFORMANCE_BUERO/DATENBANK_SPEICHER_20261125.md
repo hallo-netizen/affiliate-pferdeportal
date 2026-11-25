@@ -288,3 +288,20 @@ PFERDEATELIER_AFFILIATE_6.72.380_GEBUENDELT_PERFORMANCE_ROOTFIX.zip geprüft:
 - options logischer Inhalt Test sogar größer (584,53 MB) als Live (509,36 MB): Gesamtlimitproblem ist nicht pauschal 'options zu groß', sondern Fragmentierung + spezifischer PPAR-Inboxfehler + große Live-PSTE/eBay-Payloads.
 - Relevanssi bleibt aktuell unangetastet; nur ca. 35,67 MB reserviert und nicht Haupthebel.
 - WP-Cron nicht pauschal reaktivieren: verbleibende overdue Jobs einzeln klassifizieren, um die bewusst getrennten Produktläufe nicht wieder zu vermischen.
+
+
+## 2026-11-25 14:11 – MU-Cleanup 1.1.0 Laufzeitfehler gefunden und korrigiert
+- Symptom im Backend: AJAX meldete `Unexpected token '<'`; statt JSON kam HTML/PHP-Fehler.
+- Ursache im MU-Cleanup 1.1.0 bewiesen: direkte Aufrufstelle `$router->ebay_settings()`, obwohl `ebay_settings()` im echten installierten Affiliate 6.72.380 private ist.
+- Folge: PHP-Fatal im AJAX-Request; Frontend bekam HTML statt JSON.
+- Korrektur 1.1.1:
+  - `ebay_settings()` wird wie die anderen privaten Account-Deletion-Methoden ausschließlich per Reflection-Helfer aufgerufen.
+  - JS zeigt bei Nicht-JSON künftig die ersten 240 Zeichen der Serverantwort statt nur SyntaxError.
+- Gegen echtes 6.72.380 geprüft:
+  - private: ebay_settings, ebay_deletion_verify_signature, ebay_deletion_store_receipt, ebay_deletion_update_state
+  - public: ebay_deletion_extract_notification, ebay_deletion_irreversible_delete, ebay_deletion_receipt_seen
+  - direkte private Aufrufe im Cleanup nach Fix: 0
+- PHP-Lint 1.1.1: PASS.
+- SHA256 1.1.1: 90dcf6b835df8a2b261065e88e4c3339b00da631815083db30375f7e1250da77
+- Datei im PERFORMANCE_BUERO/DB_NOTFALL gespeichert.
+- automatische Produkt-/eBay-Läufe unverändert; Cleanup bleibt rein manuell.
