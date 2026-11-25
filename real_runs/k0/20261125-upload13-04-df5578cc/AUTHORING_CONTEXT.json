@@ -1,0 +1,185 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Sollte man beim Longieren Ausbinder verwenden?",
+    "target_keyword": "Sollte man ein Pferd Longieren mit Ausbindern oder ohne?",
+    "category": "ausbildung-reitweisen",
+    "article_type": "FAQ",
+    "plan_slot": "df5578cc9e91478fe9faba59e2068f0368ac74f3457bab47e8385776065e8082"
+  },
+  "content_profile": {
+    "search_intent": "Entscheidung über Einsatz oder Verzicht auf Ausbinder beim Longieren"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Longieren",
+          "source_title": "Longieren – Wikipedia"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Hilfsz%C3%BCgel",
+          "source_title": "Hilfszügel – Wikipedia"
+        },
+        {
+          "source_url": "https://app.pferd-aktuell.de/ausbildung/ausruestung-von-pferd-und-reiter/ausruestung-von-pferd-und-reiter",
+          "source_title": "FN – Ausrüstung Pferd und Reiter"
+        }
+      ],
+      "claims": [
+        "Es gibt mehrere Hilfszügel mit unterschiedlichen Wirkungen.",
+        "Die eingestellte Länge beeinflusst die Wirkung eines Hilfszügels.",
+        "Ausbinder verbinden beide Gebissringe jeweils mit Befestigungspunkten am Sattelgurt.",
+        "Dreieckszügel erlauben eine andere Kopf-Hals-Bewegung als feste Ausbinder.",
+        "Die FN nennt mehrere mögliche Hilfszügelarten."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Sollte man ein Pferd Longieren mit Ausbindern oder ohne?",
+      "topic": "Sollte man beim Longieren Ausbinder verwenden?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "ausbildung-reitweisen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Sollte man ein Pferd Longieren mit Ausbindern oder ohne?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Longieren",
+        "source_title": "Longieren – Wikipedia",
+        "evidence_text": "Als Hilfszügel kommen in Frage: Dreieckszügel oder auch Wiener Zügel, Lauffer-Zügel, Ausbindezügel, Gogue oder Chambon.",
+        "evidence_text_sha256": "6048eea52a2c4b68b16a9adabe3d747997d519c751a30ff7d3ede666e4eb1dd5",
+        "statement": "Es gibt mehrere Hilfszügel mit unterschiedlichen Wirkungen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Hilfsz%C3%BCgel",
+        "source_title": "Hilfszügel – Wikipedia",
+        "evidence_text": "Die beim Verschnallen festgelegte Länge eines solchen Hilfszügels ist von entscheidender Bedeutung für seine Wirkung.",
+        "evidence_text_sha256": "05fa4a647612e6f928637e9e3c44da8c54388dca1909414a59e0475a1a33ef7b",
+        "statement": "Die eingestellte Länge beeinflusst die Wirkung eines Hilfszügels.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Hilfsz%C3%BCgel",
+        "source_title": "Hilfszügel – Wikipedia",
+        "evidence_text": "Ausbinder sind beidseitig am Sattelgurt angebrachte Lederriemen, in der Mitte oft mit einem eingenähten Gummiring versehen, um den Ausbinder elastischer zu machen, und werden mit Karabinerhaken in die Trensenringe eingeklinkt.",
+        "evidence_text_sha256": "45934b82510a3bd8a718e45b0ad69136d9a7244651804ca0e5b69350a9c54c3c",
+        "statement": "Ausbinder verbinden beide Gebissringe jeweils mit Befestigungspunkten am Sattelgurt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://de.wikipedia.org/wiki/Hilfsz%C3%BCgel",
+        "source_title": "Hilfszügel – Wikipedia",
+        "evidence_text": "Im Gegensatz zu Ausbindern ist bei der Verwendung von Dreieckszügeln die Vorwärts-Abwärtsbewegung des Pferdes möglich.",
+        "evidence_text_sha256": "4bb0b2579dcf56b13ca888da8a3e5fb0d237e6c1d7ee8b4d94b382ff4df9fec1",
+        "statement": "Dreieckszügel erlauben eine andere Kopf-Hals-Bewegung als feste Ausbinder.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/ausruestung-von-pferd-und-reiter/ausruestung-von-pferd-und-reiter",
+        "source_title": "FN – Ausrüstung Pferd und Reiter",
+        "evidence_text": "Als Ausbindezügel geeignet sind insbesondere der einfache Ausbinder, der Dreieckszügel und der Laufferzügel.",
+        "evidence_text_sha256": "f4b7a2fdf71a48fe40937e5ddc0b95665d59f66cd7f084949de671e92411f82e",
+        "statement": "Die FN nennt mehrere mögliche Hilfszügelarten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/ausbildung-reitweisen/",
+        "anchor": "ausbildung-reitweisen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/training/training-longieren/",
+        "anchor": "Fachliche Informationen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/ausbildung-reitweisen/",
+        "active": true
+      },
+      {
+        "href": "/training/training-longieren/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "ausbildung-reitweisen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Longieren",
+      "Ausbinder",
+      "Hilfszügel",
+      "Pferd",
+      "Bewegung",
+      "Anlehnung",
+      "Sicherheit",
+      "Einsatz",
+      "Entscheidung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die konkrete Leserfrage ist nur durch fachliche Erklärungen und eine geordnete Prüfung sinnvoll zu beantworten. Eine künstliche Tabelle würde Details verkürzen oder unnötige Füllfelder erzeugen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
