@@ -158,3 +158,21 @@ Vergleich derselben Live-Datenbank aus Diagnose 20261121-082829 gegen 20261125-1
 - zuerst minimal physisch unter IONOS-Limit kommen, aber nur mit nachweislich entbehrlicher/rekonstruierbarer Struktur.
 - danach sofort die großen Fragmentierungsblöcke optimieren, insbesondere pste_runs, pste_candidates und options.
 - anschließend Ursachenfix in den erzeugenden Plugins: Aufbewahrungslimits/Rotation für Backups, Sandbox-/Run-Historie und große Option-Objekte.
+
+
+## 2026-11-25 – DB-Notfall-Diagnoseplugin 1.0.0 erstellt
+- Zweck: eine einzige read-only Grunddiagnose statt weiterer manueller SQL-Einzelschritte.
+- Plugin: PFERDEATELIER_DB_NOTFALL_DIAGNOSE_1.0.0.zip
+- SHA-256: 669e8a64e7d8d3ba19b1b943299d8ac6d936e7a2583543a0d95fec24f6184f5c
+- PHP-Syntax geprüft: PASS.
+- ZIP-Integrität geprüft: PASS.
+- keinerlei DELETE/TRUNCATE/OPTIMIZE/ALTER/INSERT/UPDATE im Plugin.
+- Diagnoseinhalt:
+  - komplette Tabellenbelegung inkl. data_free,
+  - grosse Options-Werte und Gruppen,
+  - Workflow-Tabellenstatus/Zeitbereiche,
+  - auffällige Backup-/Temp-/Alt-Tabellen,
+  - aktive Plugin-/Theme-Codeprüfung auf Tabellenreferenzen,
+  - Kandidatenliste nur zur manuellen Prüfung, keine automatische Löschfreigabe.
+- im Büro gesichert unter PERFORMANCE_BUERO/DB_NOTFALL/.
+- nächster Schritt: installieren -> Werkzeuge -> DB-Notfall -> Diagnose als JSON herunterladen -> auswerten -> genau einen gezielten Bereinigungsschritt freigeben.
