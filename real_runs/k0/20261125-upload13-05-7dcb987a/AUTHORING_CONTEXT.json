@@ -1,0 +1,189 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Ausbinder beim Longieren richtig anbringen",
+    "target_keyword": "Wie bindet man ein Pferd beim Longieren richtig aus?",
+    "category": "ausbildung-reitweisen",
+    "article_type": "Anleitung",
+    "plan_slot": "7dcb987a737f6f383cb0c91ce6fb64c1b995d6ef28612ad1e28e552e04ed830f"
+  },
+  "content_profile": {
+    "search_intent": "Praktisches und korrektes Anbringen und Einstellen von Ausbindern beim Longieren"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Hilfsz%C3%BCgel",
+          "source_title": "Hilfszügel – Wikipedia"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Longieren",
+          "source_title": "Longieren – Wikipedia"
+        },
+        {
+          "source_url": "https://app.pferd-aktuell.de/eticketing/seminar/06-04-2022/richtig-longieren---vom-anlongieren-bis-zur-doppellonge/1136",
+          "source_title": "FN – Richtig Longieren"
+        }
+      ],
+      "claims": [
+        "Ausbinder verbinden beide Gebissringe jeweils mit Befestigungspunkten am Sattelgurt.",
+        "Die eingestellte Länge beeinflusst die Wirkung eines Hilfszügels.",
+        "Ein spezieller Gurt trägt die Befestigungspunkte für Hilfszügel.",
+        "Die FN benennt Ausrüstung, sichere Handhabung und korrekte Befestigung als Lerninhalte."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Anleitung",
+      "target_keyword": "Wie bindet man ein Pferd beim Longieren richtig aus?",
+      "topic": "Ausbinder beim Longieren richtig anbringen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "ausbildung-reitweisen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Ausbinder beim Longieren richtig anbringen",
+      "preparation_items": [
+        "Passendes und unbeschädigtes Material bereitlegen"
+      ],
+      "procedure_steps": [
+        "Ausrüstung und Umgebung kontrollieren",
+        "Pferd ruhig an die Aufgabe heranführen",
+        "Sichere Befestigung und Bewegungsfreiheit kontrollieren"
+      ],
+      "safety_controls": [
+        "Unsichere Situationen sofort beenden"
+      ],
+      "common_errors": [
+        "Hektisches Vorgehen vermeiden"
+      ],
+      "result_checks": [
+        "Pferd reagiert ruhig und zeigt freie, kontrollierte Bewegung"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Hilfsz%C3%BCgel",
+        "source_title": "Hilfszügel – Wikipedia",
+        "evidence_text": "Ausbinder sind beidseitig am Sattelgurt angebrachte Lederriemen, in der Mitte oft mit einem eingenähten Gummiring versehen, um den Ausbinder elastischer zu machen, und werden mit Karabinerhaken in die Trensenringe eingeklinkt.",
+        "evidence_text_sha256": "45934b82510a3bd8a718e45b0ad69136d9a7244651804ca0e5b69350a9c54c3c",
+        "statement": "Ausbinder verbinden beide Gebissringe jeweils mit Befestigungspunkten am Sattelgurt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Hilfsz%C3%BCgel",
+        "source_title": "Hilfszügel – Wikipedia",
+        "evidence_text": "Die beim Verschnallen festgelegte Länge eines solchen Hilfszügels ist von entscheidender Bedeutung für seine Wirkung.",
+        "evidence_text_sha256": "05fa4a647612e6f928637e9e3c44da8c54388dca1909414a59e0475a1a33ef7b",
+        "statement": "Die eingestellte Länge beeinflusst die Wirkung eines Hilfszügels.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Longieren",
+        "source_title": "Longieren – Wikipedia",
+        "evidence_text": "Der Longiergurt ist ein Leder- oder Nylongurt, der hinter dem Widerrist um den Rumpf des Pferdes angebracht wird und das Verschnallen der Hilfszügel ermöglicht.",
+        "evidence_text_sha256": "649a2aaab63ffc74a38203d7fe40ff7fc71bc893e250513dd59ad6bf5c07150d",
+        "statement": "Ein spezieller Gurt trägt die Befestigungspunkte für Hilfszügel.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://app.pferd-aktuell.de/eticketing/seminar/06-04-2022/richtig-longieren---vom-anlongieren-bis-zur-doppellonge/1136",
+        "source_title": "FN – Richtig Longieren",
+        "evidence_text": "Beginnend mit der Ausrüstung von Pferd und Longenführer sowie der richtigen Verschnallung und Handhabung der Longe, erläutert er die Grundlagen der Arbeit mit der einfachen sowie mit der Doppellonge.",
+        "evidence_text_sha256": "659f89abfbf7cb044d40c08a762fb85df829fdde984d67a610d7e2f5f828d64b",
+        "statement": "Die FN benennt Ausrüstung, sichere Handhabung und korrekte Befestigung als Lerninhalte.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/ausbildung-reitweisen/",
+        "anchor": "ausbildung-reitweisen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/training/training-longieren/",
+        "anchor": "Fachliche Informationen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/ausbildung-reitweisen/",
+        "active": true
+      },
+      {
+        "href": "/training/training-longieren/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "ausbildung-reitweisen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Ausbinder",
+      "Anbringen",
+      "Longieren",
+      "Gurt",
+      "Länge",
+      "Verbindung",
+      "Prüfung",
+      "Befestigung",
+      "Sicherheit",
+      "Kontrolle"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "LINEAR_SEQUENCE",
+      "rationale": "Die konkrete Leserfrage ist nur durch fachliche Erklärungen und eine geordnete Prüfung sinnvoll zu beantworten. Eine künstliche Tabelle würde Details verkürzen oder unnötige Füllfelder erzeugen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
