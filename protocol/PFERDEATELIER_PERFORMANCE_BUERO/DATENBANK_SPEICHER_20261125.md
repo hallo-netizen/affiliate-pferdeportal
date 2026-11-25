@@ -248,3 +248,43 @@ PFERDEATELIER_AFFILIATE_6.72.380_GEBUENDELT_PERFORMANCE_ROOTFIX.zip geprüft:
 - ZIP CRC PASS; Re-Extract 66/66 exakt; PHP-Lint 23/23 PASS.
 - Prüfnachweis: PFERDEATELIER_6.72.381_DB_ROOTFIX_PRUEFNACHWEIS.md SHA256 7cc96858030f29fda0a60f83d3cb4317762a41eea83e6715e9796a7ba5fe746a.
 - Kandidat im Büro unter PERFORMANCE_BUERO/DB_NOTFALL gespeichert. Live-current bleibt bis Installation 6.72.380.
+
+
+## 2026-11-25 – 6.72.382 vollständig vom Produkt-/eBay-Lauf isoliert
+- 6.72.381 verworfen, weil Account-Deletion-Inbox an vorhandenen Produkt-Heartbeat gekoppelt war.
+- neue Basis: exaktes 6.72.380 Live-Paket SHA256 00da8aa7bf6ff560563433abeb643eb0352b72ef5a97c1314a6a40c365223348.
+- Live-Beweis: DISABLE_WP_CRON=true; Testumgebung DISABLE_WP_CRON=false.
+- Testvergleich 21.11.: Test Cron 45 Events / 0 overdue; Live 55 Events / 30 overdue.
+- dadurch konnte der bereits vorhandene separate Account-Deletion-WP-Cron-Worker auf Live nicht laufen; 103.535 Inbox-Zeilen blieben attempts=0.
+- 6.72.382 ändert fachlich exakt EINE Methode: handle_ebay_account_deletion_notification().
+- bei DISABLE_WP_CRON=true wird nur der eingehende Marketplace-Account-Deletion-Webhook selbst signaturgeprüft und verarbeitet; kein Produkt-/eBay-Heartbeat und kein Produktworker wird benutzt.
+- alle automatisierten Produkt-/eBay-Dateien bytegleich zu 6.72.380:
+  - trait-ppar-ebay-run.php SHA 79cfb1c280cb5a1457bb0b9f1456be6800a409dd71da5870e0f1fd295ee7579a
+  - trait-ppar-ebay.php SHA a2e621a9680b2a33bc2fa5364d20862c7282805158bc4c29c1e7c5d736d6b660
+  - automation-suite, network-sync, housekeeping, output-objects ebenfalls bytegleich.
+- Hauptdatei nach Neutralisierung der Versionsnummer bytegleich.
+- Hook-/Scheduler-Registrierungen 169 = 169 exakt identisch.
+- keine Referenz des neuen Codes auf Run-State, external tick, eBay product cron/worker, refresh cron, gapfill/public checkpoint/business prune.
+- Funktionsregression final ZIP:
+  - 2721/2721 Kampagnen identisch,
+  - 2955/2955 Policyfälle identisch,
+  - 15/15 Ausgabematrixfälle identisch,
+  - 5/5 vollständige Seitenpfade semantisch identisch,
+  - Produkt-Run-State bei gültigem Lösch-Webhook bytegleich.
+- isolierte Deletion-Teststrecke 6/6 PASS: valid, replay, forged, transient provider failure, wrong topic, run-state isolation.
+- ZIP 6.72.382 SHA256 468e52c1a84c0ea9aaa869d1707b9edccc01ef6b991fae69f0c2ff75b6732657; 23/23 PHP Lint PASS.
+- historische 103.535 Altzeilen werden NICHT über Produktlauf/Heartbeat bereinigt.
+- separates temporäres manuelles Cleanup-Plugin 1.1.0 erstellt: nur admin_menu + authentifizierter wp_ajax Handler; kein Cron, kein REST, kein Scheduler, keine Produkt-Run-State-Referenz.
+- Cleanup SHA256 efc7c484c38d9103e0d5f1f4a7cbd5910c931c5e6ca46d25c891fc9ab57b6581.
+- beide Pakete + Prüfnachweis im PERFORMANCE_BUERO/DB_NOTFALL gespeichert.
+- Live-current bleibt 6.72.380 bis Nutzer 6.72.382 installiert.
+
+### Live/Test weitere Stellschrauben
+- Live 2033,28 MB reserviert vs Test 1484,14 MB.
+- Live interner Leerraum 544 MB vs Test 120 MB: +424 MB Live; größte physische Stellschraube.
+- pste_runs Live 139,05 MB + 221 MB frei vs Test 57,55 MB + 3 MB frei; Live weniger Zeilen, aber ca. 2,5x größere Datenmenge je Zeile.
+- pste_candidates Live 303,56 MB + 115 MB frei vs Test 141,61 MB + 5 MB frei; Live weniger Zeilen, aber ca. 2,9x größere Datenmenge je Zeile.
+- ppar_ebay_items Live 167,36 MB / 8114 Zeilen vs Test 85,05 MB / 6077.
+- options logischer Inhalt Test sogar größer (584,53 MB) als Live (509,36 MB): Gesamtlimitproblem ist nicht pauschal 'options zu groß', sondern Fragmentierung + spezifischer PPAR-Inboxfehler + große Live-PSTE/eBay-Payloads.
+- Relevanssi bleibt aktuell unangetastet; nur ca. 35,67 MB reserviert und nicht Haupthebel.
+- WP-Cron nicht pauschal reaktivieren: verbleibende overdue Jobs einzeln klassifizieren, um die bewusst getrennten Produktläufe nicht wieder zu vermischen.
