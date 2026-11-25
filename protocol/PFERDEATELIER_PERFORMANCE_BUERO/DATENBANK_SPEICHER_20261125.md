@@ -176,3 +176,16 @@ Vergleich derselben Live-Datenbank aus Diagnose 20261121-082829 gegen 20261125-1
   - Kandidatenliste nur zur manuellen Prüfung, keine automatische Löschfreigabe.
 - im Büro gesichert unter PERFORMANCE_BUERO/DB_NOTFALL/.
 - nächster Schritt: installieren -> Werkzeuge -> DB-Notfall -> Diagnose als JSON herunterladen -> auswerten -> genau einen gezielten Bereinigungsschritt freigeben.
+
+
+## 2026-11-25 – Live/Test-Vergleich + PPAR-Schreibpfade
+- Live DB-Notfall: 2033,28 MB reserviert, 1489,28 MB Inhalt, 544 MB intern frei.
+- Test: 1484,14 MB reserviert, 1364,14 MB Inhalt, 120 MB intern frei.
+- Live PPAR-Options: 103.925 Eintraege / 110,382 MB.
+- Test PPAR-Options: 158 Eintraege / 3,687 MB.
+- Live/Test-Abweichung PPAR: +103.767 Optionszeilen / ca. +106,7 MB.
+- Quellcodepruefung der dynamischen PPAR-Options-Schluessel:
+  - eBay-Audit: ppar_ebay_audit_r_<run-hash>_meta + _cN; pro Lauf eigener Namensraum.
+  - Codekommentar und Exportlogik bestaetigen: historische Run-Audits werden nicht rotiert/geloescht.
+  - weitere dynamische Schluessel sind begrenzt bzw. pro Konzept/Token und erklaeren 100k Eintraege nicht ohne DB-Nachweis.
+- Ursache noch NICHT endgueltig behauptet. Naechster Beweis: Live-PPAR-Optionen nach Namensmuster zaehlen/summieren.
