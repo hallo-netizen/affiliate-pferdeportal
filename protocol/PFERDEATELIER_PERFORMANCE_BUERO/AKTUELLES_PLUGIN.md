@@ -4,50 +4,36 @@ Stand: 25.11.2026
 
 LIVE:
 - Affiliate-Zentrale 6.72.379.
-- Source-Fingerprint Hauptdatei live: 0501805a4aaaa03e7c48cd930de0c27b92a21ab343cb8b3a9f5af7bd54da99a8
-- dieser Fingerprint entspricht exakt dem freigegebenen 6.72.379-ZIP.
-- Paket-SHA-256: 264b872aae3238027b38304282ddc6fcca868cb8a0b46629ad85f67b813ecc67
 
-Neuer PASSIV-Lauf:
-- Messung: pferdeatelier-performance-gesamtanalyse-20261125-091933.json
-- Pferdesättel 6.72.379: 2.435,59 ms Wall / 1.127,46 ms CPU / 89.460 Cache-Hits / 316 Queries.
-- vorher 6.72.378: 2.222,09 ms Wall / 1.092,40 ms CPU / 89.461 Cache-Hits / 310 Queries.
-- Differenz: Wall +9,61 %, CPU +3,21 %, Cache praktisch identisch, Queries +6.
-- loop_start -> wp_footer: 1.492,57 -> 1.601,48 ms (+7,30 %).
+FREIGEGEBENER TESTKANDIDAT:
+- Affiliate-Zentrale 6.72.380 – gebündelter Performance-Rootfix
+- Paket: PFERDEATELIER_AFFILIATE_6.72.380_GEBUENDELT_PERFORMANCE_ROOTFIX.zip
+- SHA-256: 00da8aa7bf6ff560563433abeb643eb0352b72ef5a97c1314a6a40c365223348
+- Büro: /pferdeatelier/PERFORMANCE_BUERO/AKTUELLES_PLUGIN/PFERDEATELIER_AFFILIATE_6.72.380_GEBUENDELT_PERFORMANCE_ROOTFIX.zip
+- Prüfnachweis: /pferdeatelier/PERFORMANCE_BUERO/AKTUELLES_PLUGIN/PFERDEATELIER_6.72.380_PRUEFNACHWEIS.md
 
-Bewertung:
-- 6.72.379 zeigt in diesem einzelnen Live-Gesamtlauf KEINEN messbaren Gesamt-Speedup.
-- Ein kausaler Rückschritt durch H+I ist daraus ebenfalls nicht bewiesen.
-- Kontrollrouten ohne Pferdesättel-Hotpath: CPU-Median ca. -0,06 %, also praktisch unveränderte Server-CPU-Basis.
-- Serverlast im 6.72.379-Lauf war nicht höher; OPcache-Neustartnähe ähnlich.
-- Gleichzeitig haben sich andere Plugins/Bestände verändert: Relevanssi 4.28.9->4.28.10, Texterstellung 0.4.51->0.4.55, WPForms Lite 2.0.5.1->2.0.5.2; Pferdesättel hat +6 Queries.
-- der lokal isolierte H+I-Kausalbeweis bleibt bestehen: direkte Teilabschnitte -75,30 % / -71,66 %, finaler Realpfad im Re-Extract-ZIP -7,31 %, Fachausgabe identisch.
-- Live-Gesamtbeweis für H+I ist wegen der kleinen erwarteten Einsparung (~15 ms im lokalen ~200-ms-Pfad) gegenüber der Gesamtrauschbreite dieses Einzelrequests nicht erbracht.
+VERBINDLICHER FREIGABEBEWEIS VOR PLUGIN-AUSGABE:
+- finales ZIP neu entpackt und exakt dieser Quellstand geprüft.
+- kompletter lokaler Drei-Slot-Seitenpfad, 20 alternierende Alt/Neu-Läufe:
+  6.72.379 Median 465,55 ms -> 6.72.380 Median 248,58 ms = -46,61 %.
+- fünf zusätzliche komplette Seitenpfade alle schneller: -41,80 %, -46,51 %, -31,04 %, -17,37 %, -11,10 %.
+- 2.721/2.721 reale Kampagnennormalisierungen Alt=Neu.
+- 25/25 Seiten-/Provider-/Strategiekonfigurationen Alt=Neu.
+- 75/75 gerenderte Produktkarten inkl. vollständigem HTML Alt=Neu.
+- 2.955/2.955 Inhalts-/Sperrlogikfälle Alt=Neu.
+- Notabschaltung, eBay-/idealo-Pause, sanitize_key-, Metadata-, pre_option-Filter, externer Objektcache, Locale-Wechsel, REST und Cron Alt=Neu.
+- Meta-/Options-/Home-Aufrufzahlen im kompletten Haupttest exakt Alt=Neu: 3138 / 42 / 5.
+- kein bestehender Funktionsname entfernt; Funktionen 1603 -> 1605, nur zwei interne Wiederverwendungshelfer neu.
+- Produktions-Schreibprimitive exakt gleiche Vorkommenszahlen.
+- ZIP 66/66 Dateien, PHP 23/23 PASS, Re-Extract 0 Abweichungen, PHP erneut 23/23 PASS.
 
-Funktionsschutz 6.72.379:
-- 2.721/2.721 Kampagnennormalisierungen Alt=Neu.
-- 25/25 reale Seiten-/Providerkombinationen Alt=Neu.
-- 75/75 gerenderte Produktkarten inkl. HTML Alt=Neu.
-- dynamische Filter-/Object-Cache-Fälle und echte Mutationen Alt=Neu.
-- 0 Funktionen entfernt/neu; geändert nur zwei bestehende Funktionen im bewiesenen Zielzuordnungspfad.
+GEBÜNDELTE MASSNAHMEN:
+1. exakte eBay-Textnormalisierung request-lokal wiederverwenden.
+2. exakte eBay-Tokenisierung request-lokal wiederverwenden.
+3. unveränderliche Inhaltsrichtlinien-Marker einmal vorbereiten; keine Sperrregel entfällt.
+4. identische Titel-Token/Wortstämme in der Produktform-Sperrprüfung wiederverwenden; alle 30 Sperrbegriffe bleiben geprüft.
+5. Creative-Type-/Placement-Normalisierung innerhalb desselben Indexlaufs wiederverwenden; bei sanitize_key-Filter historischer Weg.
 
-Nächster Arbeitsstand:
-- kein neues Plugin nur wegen dieses PASSIV-Laufs.
-- 6.72.379 bleibt aktuell installiert; kein bewiesener Anlass für Rückbau.
-- weitere Performancearbeit ausschließlich an neu isolierten Restblöcken; erst mehrere einzeln kausal belegte Maßnahmen gemeinsam in einen nächsten Kandidaten.
-
-
-VERBINDLICHE KORREKTUR DES FREIGABESTANDARDS:
-- Der bisherige Standard war zu schwach: Teilpfad-/isolierter Realpfad-Speedup allein reicht NICHT mehr.
-- 6.72.379 hätte nach dem neuen Standard nicht ausgegeben werden dürfen, weil der komplette lokale Seitenpfad nicht als klarer Gesamt-Speedup vor Release nachgewiesen war.
-- Ab jetzt gilt: kein neues Plugin ohne vollständige lokale Alt/Neu-Seitensimulation, wiederholte Gesamtpfadmessung UND inhaltlichen 1:1-Funktionsbeweis.
-- Live dient nur noch zur Bestätigung eines vorher vollständig lokal bewiesenen Gewinns.
-- Verbindliche Regel: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PERFORMANCE_FREIGABEREGEL.md
-
-## Nutzer-Rückmeldung vom 25.11.2026
-- Affiliate-Zentrale 6.72.379 ist weiterhin die durch den GitHub-Stand bestätigte Live-Version.
-- Nutzerbefund: „bis jetzt gibt es noch keine Probleme“ (positiver Zwischenstand, **kein** Langzeit-/Geschwindigkeitsbeweis).
-- Keine neue Diagnose in dieser Rückmeldung, daher keine zusätzlichen Messwerte und keine allgemeine Funktionsfreigabe behauptet.
-- KISS: keine Plugin-Änderung und keine Neuinstallation; aktuellen Live-Stand unverändert weiterführen.
-- Original-ZIP im vorhandenen Pferdeatelier-Performance-Büro (Library) vorhanden und auf Integrität/Original-Prüfsumme geprüft.
-- GitHub-Archivverweis: `protocol/PFERDEATELIER_PERFORMANCE_BUERO/ARCHIV_6.72.379_ZIP_VERWEIS.md`.
+NÄCHSTER SCHRITT:
+- ausschließlich 6.72.380 installieren.
+- danach genau ein PASSIV-Live-Lauf als Bestätigung des bereits lokal bewiesenen Gesamtgewinns.

@@ -2157,3 +2157,18 @@ Messung: pferdeatelier-performance-gesamtanalyse-20261125-091933.json
 - Funktionsschutz muss Kandidaten, Reihenfolge, Ranking, Provider, Links/Tracking, Bilder, Preise, Fallbacks, dynamische Änderungen, Filter, Objektcache und tatsächlich gerendertes HTML abdecken.
 - Live-Messung dient nur noch als Bestätigung des vorher vollständig lokal bewiesenen Gesamtgewinns.
 - Kein neues Plugin, solange diese Hürde nicht vollständig bestanden ist.
+
+
+## 2026-11-25 – 6.72.380 vor Ausgabe vollständig lokal freigegeben
+
+- Freigabestandard eingehalten: nicht Teilpfad, sondern finales neu entpacktes ZIP als vollständiger Seitenpfad gemessen.
+- 20 alternierende Vollpfad-Läufe: 465,55 -> 248,58 ms = -46,61 %.
+- fünf weitere Seitenpfade alle schneller: -41,80 %, -46,51 %, -31,04 %, -17,37 %, -11,10 %.
+- Inhaltlicher Funktionsbeweis: 2.721/2.721 Kampagnennormalisierungen, 25/25 Provider-/Strategiefälle, 75/75 gerenderte Karten und 2.955/2.955 Sicherheits-/Policyfälle Alt=Neu.
+- dynamische Sicherheitsfälle inkl. Notabschaltung, Providerpause, Filter, externer Cache, Locale, REST und Cron Alt=Neu.
+- kein bestehender Funktionsname entfernt; Schreibwege unverändert.
+- Paket 66/66; PHP 23/23; Re-Extract 0 Abweichungen.
+- Paket: PFERDEATELIER_AFFILIATE_6.72.380_GEBUENDELT_PERFORMANCE_ROOTFIX.zip
+- SHA-256: 00da8aa7bf6ff560563433abeb643eb0352b72ef5a97c1314a6a40c365223348
+- Büro und Prüfnachweis gespeichert.
+- Nächster Schritt: nur 6.72.380 installieren und danach ein PASSIV-Live-Lauf.
