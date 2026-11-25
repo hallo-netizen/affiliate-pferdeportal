@@ -17,8 +17,10 @@
     "Longieren",
     "Gebissring",
     "Zäumung",
-    "Widerrist"
+    "Widerrist",
+    "Verschnallung",
+    "Longierplatz"
   ],
-  "revision_count": 2,
+  "revision_count": 3,
   "publish_allowed": false
 }
