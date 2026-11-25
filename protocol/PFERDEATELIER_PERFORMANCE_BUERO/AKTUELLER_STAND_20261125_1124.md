@@ -130,3 +130,14 @@ Kein neues Performance-Plugin ohne VORHERIGEN Nachweis:
 - /pferdeatelier/PERFORMANCE_BUERO/AKTUELLES_PLUGIN/PFERDEATELIER_6.72.380_PRUEFNACHWEIS.md
 - /pferdeatelier/PERFORMANCE_BUERO/MESSUNGEN/pferdeatelier-performance-gesamtanalyse-20261125-102437.json
 - /pferdeatelier/PERFORMANCE_BUERO/PFERDEATELIER_PERFORMANCE_STAND_2026-11-25_1124.md
+
+
+## 2026-11-25 – Datenbankbereinigung gestartet
+- IONOS-Sperre wegen >2 GB.
+- OPTIMIZE wegen fehlendem INSERT-Recht nicht möglich.
+- DELETE funktioniert.
+- 107 WordPress-Transients gelöscht.
+- Hauptverursacher in slfo_options nach Gruppen: PPAR ~110,4 MB, PSTE ~99,0 MB, TXE ~93,0 MB, PSERC ~60,1 MB.
+- auffälligste Einzelwerte: TXE-Legacy-Backup ~83,45 MB und PSTE-Sandbox ~58,23 MB.
+- fortlaufendes Detailprotokoll: DATENBANK_SPEICHER_20261125.md
+- noch keine großen produktiven Daten gelöscht.
