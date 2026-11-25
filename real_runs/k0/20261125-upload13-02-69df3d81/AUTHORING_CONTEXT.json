@@ -1,0 +1,168 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welche Fehler sollte man beim Longieren vermeiden?",
+    "target_keyword": "Was kann man beim Longieren falsch machen?",
+    "category": "ausbildung-reitweisen",
+    "article_type": "FAQ",
+    "plan_slot": "69df3d8135004ed3f366d9711abc247ccef19dd0657d532129ac35335262aa7e"
+  },
+  "content_profile": {
+    "search_intent": "Konkrete Fehler beim Longieren und deren Vermeidung"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Longieren",
+          "source_title": "Longieren – Wikipedia"
+        },
+        {
+          "source_url": "https://app.pferd-aktuell.de/eticketing/seminar/06-04-2022/richtig-longieren---vom-anlongieren-bis-zur-doppellonge/1136",
+          "source_title": "FN – Richtig Longieren"
+        }
+      ],
+      "claims": [
+        "Beim Longieren bewegt sich das Pferd an einer Leine im Kreis.",
+        "Regelmäßige Richtungswechsel und ausreichend große Zirkel vermindern einseitige Belastungen.",
+        "Stimme und Peitsche können beim Longieren zur Verständigung dienen.",
+        "Die FN benennt Ausrüstung, sichere Handhabung und korrekte Befestigung als Lerninhalte."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was kann man beim Longieren falsch machen?",
+      "topic": "Welche Fehler sollte man beim Longieren vermeiden?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "ausbildung-reitweisen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was kann man beim Longieren falsch machen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Longieren",
+        "source_title": "Longieren – Wikipedia",
+        "evidence_text": "Longieren ist das Laufenlassen eines Pferds auf einer kreisförmigen Bahn, wobei es an einer Leine – der sogenannten Longe – geführt wird.",
+        "evidence_text_sha256": "0c3e6aafb272183a89caf2065852e300bee1b756e8dcae8038f95f92d63171f0",
+        "statement": "Beim Longieren bewegt sich das Pferd an einer Leine im Kreis.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Longieren",
+        "source_title": "Longieren – Wikipedia",
+        "evidence_text": "Wichtig sind regelmäßige Handwechsel, damit das Pferd nicht einseitig belastet wird, sowie ein Zirkel mit mindestens 12 Metern Durchmesser.",
+        "evidence_text_sha256": "96ada367182f72aa16b3fa9184a8fbbfec4119db65f61ca1858c6875c59a7f53",
+        "statement": "Regelmäßige Richtungswechsel und ausreichend große Zirkel vermindern einseitige Belastungen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Longieren",
+        "source_title": "Longieren – Wikipedia",
+        "evidence_text": "Daneben wirkt er mit seiner Stimme und der Longierpeitsche auf das Pferd ein.",
+        "evidence_text_sha256": "2f1f593b3bae23ed8e841014b2c2eb889a09b55f131e3fe85dbe44f4dc6bec68",
+        "statement": "Stimme und Peitsche können beim Longieren zur Verständigung dienen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://app.pferd-aktuell.de/eticketing/seminar/06-04-2022/richtig-longieren---vom-anlongieren-bis-zur-doppellonge/1136",
+        "source_title": "FN – Richtig Longieren",
+        "evidence_text": "Beginnend mit der Ausrüstung von Pferd und Longenführer sowie der richtigen Verschnallung und Handhabung der Longe, erläutert er die Grundlagen der Arbeit mit der einfachen sowie mit der Doppellonge.",
+        "evidence_text_sha256": "659f89abfbf7cb044d40c08a762fb85df829fdde984d67a610d7e2f5f828d64b",
+        "statement": "Die FN benennt Ausrüstung, sichere Handhabung und korrekte Befestigung als Lerninhalte.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/ausbildung-reitweisen/",
+        "anchor": "ausbildung-reitweisen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/training/training-longieren/",
+        "anchor": "Fachliche Informationen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/ausbildung-reitweisen/",
+        "active": true
+      },
+      {
+        "href": "/training/training-longieren/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "ausbildung-reitweisen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Longieren",
+      "Fehler",
+      "Sicherheit",
+      "Longe",
+      "Leine",
+      "Peitsche",
+      "Zirkel",
+      "Richtung",
+      "Handwechsel",
+      "Pferd"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die konkrete Leserfrage ist nur durch fachliche Erklärungen und eine geordnete Prüfung sinnvoll zu beantworten. Eine künstliche Tabelle würde Details verkürzen oder unnötige Füllfelder erzeugen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
