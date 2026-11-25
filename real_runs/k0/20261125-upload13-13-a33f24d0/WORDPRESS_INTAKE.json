@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie wirkt ein Stoßzügel beim Pferd?",
+      "target_keyword": "Welche Wirkung hat ein Stoßzügel bei Pferden?",
+      "category": "ausbildung-reitweisen",
+      "article_type": "FAQ",
+      "plan_slot": "a33f24d043037fd568b2d24bb4e7bc8002317ad6f2fa1866937311326abbd0ad"
+    }
+  ],
+  "batch_sha256": "ff8c746e7d150d021865f5512d4eb966cf469fa251c4df6c802653b8582f9c6e"
+}

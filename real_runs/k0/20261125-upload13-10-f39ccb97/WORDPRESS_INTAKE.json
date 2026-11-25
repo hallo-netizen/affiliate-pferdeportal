@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Steigbügel für die Dressur auswählen",
+      "target_keyword": "steigbügel dressur",
+      "category": "steigbuegel-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "f39ccb979890a3ee9dbff0e46513ab5b6b00142b10b2eb86ea5f16b0cdf3898a"
+    }
+  ],
+  "batch_sha256": "8ee606ba2dedf7e49045b5597e5558f131d1e1e62c359cc9b218e169c19caaba"
+}

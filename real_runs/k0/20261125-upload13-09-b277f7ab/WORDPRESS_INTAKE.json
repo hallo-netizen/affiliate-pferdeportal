@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie oft sollte man ein Pferd pro Woche longieren?",
+      "target_keyword": "Wie oft sollte man die Woche Longieren?",
+      "category": "ausbildung-reitweisen",
+      "article_type": "FAQ",
+      "plan_slot": "b277f7ab69a04ef9bd12196ff9a3e7faca1a2173f8b3dd4215df6481e4309492"
+    }
+  ],
+  "batch_sha256": "25b5bcad6692845d4ee39a68852cacdd834a5348e925091d43a1638abf49afbd"
+}

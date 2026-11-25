@@ -1,0 +1,164 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wo sollte man beim Longieren stehen?",
+    "target_keyword": "Wie stehe ich beim Longieren richtig?",
+    "category": "ausbildung-reitweisen",
+    "article_type": "FAQ",
+    "plan_slot": "bf4d3e37938508c8ac8505bf699d03465caa931fad503acefffacc8bb49324b1"
+  },
+  "content_profile": {
+    "search_intent": "Standort und Körperposition der longierenden Person während der Arbeit auf dem Zirkel"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Longieren",
+          "source_title": "Longieren – Wikipedia"
+        },
+        {
+          "source_url": "https://app.pferd-aktuell.de/ausbildung/ausruestung-von-pferd-und-reiter",
+          "source_title": "Deutsche Reiterliche Vereinigung – Die richtige Ausrüstung für Pferd und Reiter"
+        }
+      ],
+      "claims": [
+        "Die longierende Person befindet sich in der Zirkelmitte, die Longe zeigt zur Laufrichtung.",
+        "Die Longierpeitsche wird meist mit der anderen Hand geführt.",
+        "Ein Longenführer bleibt nicht starr stehen, sondern bewegt sich für die Einwirkung mit.",
+        "Auch beim Longieren empfiehlt die FN Reithandschuhe."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie stehe ich beim Longieren richtig?",
+      "topic": "Wo sollte man beim Longieren stehen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "ausbildung-reitweisen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie stehe ich beim Longieren richtig?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Longieren",
+        "source_title": "Longieren – Wikipedia",
+        "evidence_text": "Der Longenführer steht beim Longieren in der Mitte des Longierzirkels und hält die Longe in der Hand, die in die Laufrichtung des Pferdes weist.",
+        "evidence_text_sha256": "9d7e2cbea03c444a48741cf3a07a9745b0625010ed2233343a441adeb17afe77",
+        "statement": "Die longierende Person befindet sich in der Zirkelmitte, die Longe zeigt zur Laufrichtung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Longieren",
+        "source_title": "Longieren – Wikipedia",
+        "evidence_text": "Mit der anderen Hand wird meist eine Longierpeitsche geführt.",
+        "evidence_text_sha256": "0971ba71c5eb454b51b774b436e1fe08cb2e4d15c84a930bd1c6cfbb9e865cbe",
+        "statement": "Die Longierpeitsche wird meist mit der anderen Hand geführt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://de.wikipedia.org/wiki/Longieren",
+        "source_title": "Longieren – Wikipedia",
+        "evidence_text": "Der Longenführer muss für eine effektive Arbeit sich mit dem Pferd mitbewegen.",
+        "evidence_text_sha256": "b9d688669a28b372ba120751d3ac603ae7979efff5f4bec4c7e4a5f7a101c1ff",
+        "statement": "Ein Longenführer bleibt nicht starr stehen, sondern bewegt sich für die Einwirkung mit.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/ausruestung-von-pferd-und-reiter",
+        "source_title": "Deutsche Reiterliche Vereinigung – Die richtige Ausrüstung für Pferd und Reiter",
+        "evidence_text": "Reithandschuhe sollten außer beim Reiten auch beim Longieren, Verladen und Führen von Pferden getragen werden.",
+        "evidence_text_sha256": "925e10ade32fc808720cfd2eb4e3b7a461a13b35316318366d6e5223151b2e2c",
+        "statement": "Auch beim Longieren empfiehlt die FN Reithandschuhe.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/ausbildung-reitweisen/",
+        "anchor": "Ausbildung und Reitweisen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/training/training-longieren/",
+        "anchor": "Longieren",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/ausbildung-reitweisen/",
+        "active": true
+      },
+      {
+        "href": "/training/training-longieren/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "ausbildung-reitweisen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Longieren",
+      "Standort",
+      "Zirkel",
+      "Körperposition",
+      "Longenführer",
+      "Longe"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Position und sicheren Bewegungsabläufe lassen sich in einer klaren Schrittfolge direkt erläutern; eine Tabelle hätte für diese eine konkrete Frage keinen eigenständigen Nutzen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}

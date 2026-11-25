@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wo sollte man beim Longieren stehen?",
+      "target_keyword": "Wie stehe ich beim Longieren richtig?",
+      "category": "ausbildung-reitweisen",
+      "article_type": "FAQ",
+      "plan_slot": "bf4d3e37938508c8ac8505bf699d03465caa931fad503acefffacc8bb49324b1"
+    }
+  ],
+  "batch_sha256": "38faa41ca1d375ab02b5684fe48b2f9e7eaf5fe37016f228cc53ff51dbdc504c"
+}

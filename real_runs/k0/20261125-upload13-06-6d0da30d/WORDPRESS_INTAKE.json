@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Steigbügel für das Reiten auswählen",
+      "target_keyword": "pferde steigbügel",
+      "category": "steigbuegel-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "6d0da30d13f647e18b421becabefb437bf6c8cefa9089e5a55f9ec484342cf6b"
+    }
+  ],
+  "batch_sha256": "8e33c78318ebcfde7429e3048742f09590b00833288710c45ab56ac76c651e4d"
+}

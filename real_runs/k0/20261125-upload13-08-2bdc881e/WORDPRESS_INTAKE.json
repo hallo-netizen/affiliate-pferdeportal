@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Ab welchem Alter darf ein Jungpferd longiert werden?",
+      "target_keyword": "Ab welchem Alter sollte man ein Jungpferd Longieren lassen?",
+      "category": "ausbildung-reitweisen",
+      "article_type": "FAQ",
+      "plan_slot": "2bdc881e492ef9cc84d7d11331b6cd333421d2e5a450936ea60e31953b67b83a"
+    }
+  ],
+  "batch_sha256": "f2f0e98380011d1eadf69656202152bf84faa0fc82b01bf69f84936e13cc5dbc"
+}

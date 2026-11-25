@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche Fehler sollte man beim Longieren vermeiden?",
+      "target_keyword": "Was kann man beim Longieren falsch machen?",
+      "category": "ausbildung-reitweisen",
+      "article_type": "FAQ",
+      "plan_slot": "69df3d8135004ed3f366d9711abc247ccef19dd0657d532129ac35335262aa7e"
+    }
+  ],
+  "batch_sha256": "2bcfe6a99ff0bb36db588546ec728399acc76ec56e1b4921420c056f0a53067d"
+}

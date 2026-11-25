@@ -1,0 +1,266 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 13,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Wo sollte man beim Longieren stehen?",
+        "target_keyword": "Wie stehe ich beim Longieren richtig?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "bf4d3e37938508c8ac8505bf699d03465caa931fad503acefffacc8bb49324b1"
+      },
+      {
+        "title": "Welche Fehler sollte man beim Longieren vermeiden?",
+        "target_keyword": "Was kann man beim Longieren falsch machen?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "69df3d8135004ed3f366d9711abc247ccef19dd0657d532129ac35335262aa7e"
+      },
+      {
+        "title": "Wie lange sollte man ein Pferd zum Muskelaufbau longieren?",
+        "target_keyword": "Wie lange Longieren für Muskelaufbau?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "90c828bd0a19ca41180718376c5a65399789788bf6a9a7c82a5a7c06e2263a48"
+      },
+      {
+        "title": "Sollte man beim Longieren Ausbinder verwenden?",
+        "target_keyword": "Sollte man ein Pferd Longieren mit Ausbindern oder ohne?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "df5578cc9e91478fe9faba59e2068f0368ac74f3457bab47e8385776065e8082"
+      },
+      {
+        "title": "Ausbinder beim Longieren richtig anbringen",
+        "target_keyword": "Wie bindet man ein Pferd beim Longieren richtig aus?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "Anleitung",
+        "plan_slot": "7dcb987a737f6f383cb0c91ce6fb64c1b995d6ef28612ad1e28e552e04ed830f"
+      },
+      {
+        "title": "Steigbügel für das Reiten auswählen",
+        "target_keyword": "pferde steigbügel",
+        "category": "steigbuegel-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "6d0da30d13f647e18b421becabefb437bf6c8cefa9089e5a55f9ec484342cf6b"
+      },
+      {
+        "title": "Ein Pferd beim Longieren auf den Zirkel schicken",
+        "target_keyword": "Wie schicke ich ein Pferd beim Longieren raus?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "Anleitung",
+        "plan_slot": "44f959db3892442bde4b2eca3087efe2e129317469a30add89a25163908b4813"
+      },
+      {
+        "title": "Ab welchem Alter darf ein Jungpferd longiert werden?",
+        "target_keyword": "Ab welchem Alter sollte man ein Jungpferd Longieren lassen?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "2bdc881e492ef9cc84d7d11331b6cd333421d2e5a450936ea60e31953b67b83a"
+      },
+      {
+        "title": "Wie oft sollte man ein Pferd pro Woche longieren?",
+        "target_keyword": "Wie oft sollte man die Woche Longieren?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "b277f7ab69a04ef9bd12196ff9a3e7faca1a2173f8b3dd4215df6481e4309492"
+      },
+      {
+        "title": "Steigbügel für die Dressur auswählen",
+        "target_keyword": "steigbügel dressur",
+        "category": "steigbuegel-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "f39ccb979890a3ee9dbff0e46513ab5b6b00142b10b2eb86ea5f16b0cdf3898a"
+      },
+      {
+        "title": "Pferdesattel und Steigbügel passend kombinieren",
+        "target_keyword": "pferde sattel mit steigbügel",
+        "category": "pferdesaettel-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "8f82e6d05ad89d84f72e1348803c87fbaa077d8f2df80b60b29726a4071d2c13"
+      },
+      {
+        "title": "Welche Risiken hat Longieren mit Halfter?",
+        "target_keyword": "Warum nicht mit Halfter Longieren?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "341745022fb1ab7b928fbb8929817f12fdfefe7f6d5a4156b82554b689eac7fa"
+      },
+      {
+        "title": "Wie wirkt ein Stoßzügel beim Pferd?",
+        "target_keyword": "Welche Wirkung hat ein Stoßzügel bei Pferden?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "a33f24d043037fd568b2d24bb4e7bc8002317ad6f2fa1866937311326abbd0ad"
+      }
+    ],
+    "batch_sha256": "67feb524e8f3fa4450c9d27d6fab3122d4e9c8980c4340e3a772e8f3f5c0ca9d"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Wo sollte man beim Longieren stehen?",
+        "target_keyword": "Wie stehe ich beim Longieren richtig?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "bf4d3e37938508c8ac8505bf699d03465caa931fad503acefffacc8bb49324b1"
+      },
+      "order_id": "TXE-639964a344d848f774efc8e3ddb993cb",
+      "article_id": "article:01b91d6006bbe01d5489b8d9",
+      "search_intent": "Standort und Körperposition der longierenden Person während der Arbeit auf dem Zirkel"
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Fehler sollte man beim Longieren vermeiden?",
+        "target_keyword": "Was kann man beim Longieren falsch machen?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "69df3d8135004ed3f366d9711abc247ccef19dd0657d532129ac35335262aa7e"
+      },
+      "order_id": "TXE-0da8019956b2d552ff01365931bce728",
+      "article_id": "article:a41a0e7ca5ba024beddaa199",
+      "search_intent": "Konkrete Fehler beim Longieren und deren Vermeidung"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie lange sollte man ein Pferd zum Muskelaufbau longieren?",
+        "target_keyword": "Wie lange Longieren für Muskelaufbau?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "90c828bd0a19ca41180718376c5a65399789788bf6a9a7c82a5a7c06e2263a48"
+      },
+      "order_id": "TXE-7f303267b67479cf01c23d56a53b2804",
+      "article_id": "article:6a676864adc6be6634f31bf9",
+      "search_intent": "Dauer einer einzelnen Longiereinheit für den Muskelaufbau, nicht die Trainingshäufigkeit"
+    },
+    {
+      "metadata_binding": {
+        "title": "Sollte man beim Longieren Ausbinder verwenden?",
+        "target_keyword": "Sollte man ein Pferd Longieren mit Ausbindern oder ohne?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "df5578cc9e91478fe9faba59e2068f0368ac74f3457bab47e8385776065e8082"
+      },
+      "order_id": "TXE-e13ace71e1a585683e3afde4a881c172",
+      "article_id": "article:f810ee8c51ec8e18ea21e7af",
+      "search_intent": "Entscheidung über Einsatz oder Verzicht auf Ausbinder beim Longieren"
+    },
+    {
+      "metadata_binding": {
+        "title": "Ausbinder beim Longieren richtig anbringen",
+        "target_keyword": "Wie bindet man ein Pferd beim Longieren richtig aus?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "Anleitung",
+        "plan_slot": "7dcb987a737f6f383cb0c91ce6fb64c1b995d6ef28612ad1e28e552e04ed830f"
+      },
+      "order_id": "TXE-4017ee0037853b4624292f30c4f6dcf3",
+      "article_id": "article:ec1aef2341239e3f9b532fcd",
+      "search_intent": "Praktisches und korrektes Anbringen und Einstellen von Ausbindern beim Longieren"
+    },
+    {
+      "metadata_binding": {
+        "title": "Steigbügel für das Reiten auswählen",
+        "target_keyword": "pferde steigbügel",
+        "category": "steigbuegel-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "6d0da30d13f647e18b421becabefb437bf6c8cefa9089e5a55f9ec484342cf6b"
+      },
+      "order_id": "TXE-32de141556226f63800c242edb69b4d5",
+      "article_id": "article:ff44cf0c7a6e8fa2c9119dd7",
+      "search_intent": "Auswahl passender Steigbügel für den Reitsport"
+    },
+    {
+      "metadata_binding": {
+        "title": "Ein Pferd beim Longieren auf den Zirkel schicken",
+        "target_keyword": "Wie schicke ich ein Pferd beim Longieren raus?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "Anleitung",
+        "plan_slot": "44f959db3892442bde4b2eca3087efe2e129317469a30add89a25163908b4813"
+      },
+      "order_id": "TXE-489fde4735ba55f545ffdd8dd0e69d1f",
+      "article_id": "article:f27cfebfb3eea689996e8848",
+      "search_intent": "Pferd gezielt und ruhig vom Menschen auf einen Longierzirkel schicken"
+    },
+    {
+      "metadata_binding": {
+        "title": "Ab welchem Alter darf ein Jungpferd longiert werden?",
+        "target_keyword": "Ab welchem Alter sollte man ein Jungpferd Longieren lassen?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "2bdc881e492ef9cc84d7d11331b6cd333421d2e5a450936ea60e31953b67b83a"
+      },
+      "order_id": "TXE-d964923658318e0c1a6e0e923adac4d1",
+      "article_id": "article:d2bd33c67677b873deecb909",
+      "search_intent": "Geeignetes Alter und Voraussetzungen eines Jungpferdes für das Longieren"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie oft sollte man ein Pferd pro Woche longieren?",
+        "target_keyword": "Wie oft sollte man die Woche Longieren?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "b277f7ab69a04ef9bd12196ff9a3e7faca1a2173f8b3dd4215df6481e4309492"
+      },
+      "order_id": "TXE-2f9f8e5d2fe7d989525c99d83b2a50a7",
+      "article_id": "article:92c305b9fe2857066fb76f05",
+      "search_intent": "Allgemeine wöchentliche Häufigkeit des Longierens ohne spezifisches Muskelaufbauziel"
+    },
+    {
+      "metadata_binding": {
+        "title": "Steigbügel für die Dressur auswählen",
+        "target_keyword": "steigbügel dressur",
+        "category": "steigbuegel-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "f39ccb979890a3ee9dbff0e46513ab5b6b00142b10b2eb86ea5f16b0cdf3898a"
+      },
+      "order_id": "TXE-a4a8caca67a0e5ed8fad5d2a413558a2",
+      "article_id": "article:9383f5b5a3512ca6f1b6a71d",
+      "search_intent": "Auswahl geeigneter Steigbügel für die Dressurreiterei"
+    },
+    {
+      "metadata_binding": {
+        "title": "Pferdesattel und Steigbügel passend kombinieren",
+        "target_keyword": "pferde sattel mit steigbügel",
+        "category": "pferdesaettel-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "8f82e6d05ad89d84f72e1348803c87fbaa077d8f2df80b60b29726a4071d2c13"
+      },
+      "order_id": "TXE-a6b032ecb96190dc91abec1ac5ed1871",
+      "article_id": "article:7185aac242ebee2f216bae00",
+      "search_intent": "Zusammenpassende Kombination von Pferdesattel und Steigbügeln"
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Risiken hat Longieren mit Halfter?",
+        "target_keyword": "Warum nicht mit Halfter Longieren?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "341745022fb1ab7b928fbb8929817f12fdfefe7f6d5a4156b82554b689eac7fa"
+      },
+      "order_id": "TXE-6e8ca82ce266448dd3e5415172e9b398",
+      "article_id": "article:c431d16b32cf625f58df1e41",
+      "search_intent": "Gründe und Risiken, weshalb ein Halfter zum Longieren ungeeignet sein kann"
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie wirkt ein Stoßzügel beim Pferd?",
+        "target_keyword": "Welche Wirkung hat ein Stoßzügel bei Pferden?",
+        "category": "ausbildung-reitweisen",
+        "article_type": "FAQ",
+        "plan_slot": "a33f24d043037fd568b2d24bb4e7bc8002317ad6f2fa1866937311326abbd0ad"
+      },
+      "order_id": "TXE-ff03601fbc9a385aa2710fed2cf162af",
+      "article_id": "article:816569600105bd3fe081bb19",
+      "search_intent": "Wirkungsweise eines Stoßzügels auf das Pferd"
+    }
+  ],
+  "manifest_sha256": "412ff84b7aefad0df9ad3a769d6e06658f27b8f4196213641151d0c2803bfb4c"
+}

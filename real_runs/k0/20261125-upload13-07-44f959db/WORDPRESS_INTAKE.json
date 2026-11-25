@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Ein Pferd beim Longieren auf den Zirkel schicken",
+      "target_keyword": "Wie schicke ich ein Pferd beim Longieren raus?",
+      "category": "ausbildung-reitweisen",
+      "article_type": "Anleitung",
+      "plan_slot": "44f959db3892442bde4b2eca3087efe2e129317469a30add89a25163908b4813"
+    }
+  ],
+  "batch_sha256": "c8449d99fb7edfb82f9df4b287f4386a0e505e6ce511090d97b91e1050877d22"
+}

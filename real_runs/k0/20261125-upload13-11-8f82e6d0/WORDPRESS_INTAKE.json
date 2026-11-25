@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Pferdesattel und Steigbügel passend kombinieren",
+      "target_keyword": "pferde sattel mit steigbügel",
+      "category": "pferdesaettel-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "8f82e6d05ad89d84f72e1348803c87fbaa077d8f2df80b60b29726a4071d2c13"
+    }
+  ],
+  "batch_sha256": "21d6e196fb8b6ae6d72b0fdf560349d303516340b760fd810a46dd3baa023e79"
+}

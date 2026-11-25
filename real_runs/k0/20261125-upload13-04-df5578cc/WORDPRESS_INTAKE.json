@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Sollte man beim Longieren Ausbinder verwenden?",
+      "target_keyword": "Sollte man ein Pferd Longieren mit Ausbindern oder ohne?",
+      "category": "ausbildung-reitweisen",
+      "article_type": "FAQ",
+      "plan_slot": "df5578cc9e91478fe9faba59e2068f0368ac74f3457bab47e8385776065e8082"
+    }
+  ],
+  "batch_sha256": "e84bc41c9f6f7f5d4fc6c65b7d5b958235ad3b6b8f3ddd49a71e5a1e1e5ed1fe"
+}

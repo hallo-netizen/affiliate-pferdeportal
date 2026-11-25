@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Ausbinder beim Longieren richtig anbringen",
+      "target_keyword": "Wie bindet man ein Pferd beim Longieren richtig aus?",
+      "category": "ausbildung-reitweisen",
+      "article_type": "Anleitung",
+      "plan_slot": "7dcb987a737f6f383cb0c91ce6fb64c1b995d6ef28612ad1e28e552e04ed830f"
+    }
+  ],
+  "batch_sha256": "ce31b41da1d528494afd6e88863461f3b0e1b08ece50c64fba2edaa9966f33ea"
+}
