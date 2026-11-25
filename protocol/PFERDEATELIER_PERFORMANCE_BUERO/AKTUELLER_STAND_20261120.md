@@ -2172,3 +2172,19 @@ Messung: pferdeatelier-performance-gesamtanalyse-20261125-091933.json
 - SHA-256: 00da8aa7bf6ff560563433abeb643eb0352b72ef5a97c1314a6a40c365223348
 - Büro und Prüfnachweis gespeichert.
 - Nächster Schritt: nur 6.72.380 installieren und danach ein PASSIV-Live-Lauf.
+
+
+## 2026-11-25 – 6.72.380 LIVE: lokaler Freigabebeweis als WordPress-Gesamtbeweis verworfen
+
+- PASSIV-Datei: pferdeatelier-performance-gesamtanalyse-20261125-102437.json
+- Paketidentität live exakt bestätigt.
+- Pferdesättel: 3.102,79 ms Wall / 1.135,25 ms CPU / 310 Queries.
+- gegen 6.72.379: CPU +0,69 %; kein messbarer Live-Speedup.
+- Kontrollrouten CPU-Median ca. -3,36 %, also kein Hinweis, dass 6.72.380 im Hotpath relativ besser wurde.
+- Wall nicht kausal: Server-Load im neuen Lauf 45/72/132 statt vorher 44/48/52.
+- Ursachenprüfung des lokalen Harness: er führte vollständig die drei Affiliate-Slots mit echten WXR-Kampagnendaten aus, aber keinen vollständigen WordPress-Seitenrequest.
+- außerdem fehlte die reale Live-Tabelle slfo_ppar_ebay_items (aktuell 8.114 Zeilen); Source-Zeilen waren im Harness deterministisch erzeugt.
+- daher ist -46,61 % nur ein interner Affiliate-Harnesswert, kein belastbarer WordPress-Gesamtreleasebeweis.
+- ab sofort Performance-Release-Sperre für WXR+Stub-Harness; er bleibt ausschließlich für Fachregression/Hotpath-Vergleich.
+- inhaltlicher Funktionsschutz von 6.72.380 bleibt für die tatsächlich geprüften Fachfälle bestehen.
+- kein neues Plugin und kein Rückbau allein aus diesem Lauf.
