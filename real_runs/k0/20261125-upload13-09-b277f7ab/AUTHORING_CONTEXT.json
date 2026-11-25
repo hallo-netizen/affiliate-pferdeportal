@@ -1,0 +1,171 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wie oft sollte man ein Pferd pro Woche longieren?",
+    "target_keyword": "Wie oft sollte man die Woche Longieren?",
+    "category": "ausbildung-reitweisen",
+    "article_type": "FAQ",
+    "plan_slot": "b277f7ab69a04ef9bd12196ff9a3e7faca1a2173f8b3dd4215df6481e4309492"
+  },
+  "content_profile": {
+    "search_intent": "Allgemeine wöchentliche Häufigkeit des Longierens ohne spezifisches Muskelaufbauziel"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Longieren",
+          "source_title": "Longieren – Wikipedia"
+        },
+        {
+          "source_url": "https://app.pferd-aktuell.de/breitensport/vereine-und-betriebe/schulpferde",
+          "source_title": "FN – Schulpferde im Reitverein"
+        },
+        {
+          "source_url": "https://app.pferd-aktuell.de/eticketing/seminar/06-04-2022/richtig-longieren---vom-anlongieren-bis-zur-doppellonge/1136",
+          "source_title": "FN – Richtig Longieren"
+        }
+      ],
+      "claims": [
+        "Beim ausgebildeten Pferd dient Longieren unter anderem der Gymnastik und Muskelarbeit.",
+        "Regelmäßige Richtungswechsel und ausreichend große Zirkel vermindern einseitige Belastungen.",
+        "Die FN nennt keine pauschale Dauer oder Wochenhäufigkeit für jedes Schulpferd.",
+        "Longieren kann unterschiedliche Ausbildungsziele sinnvoll ergänzen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie oft sollte man die Woche Longieren?",
+      "topic": "Wie oft sollte man ein Pferd pro Woche longieren?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "ausbildung-reitweisen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie oft sollte man die Woche Longieren?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://de.wikipedia.org/wiki/Longieren",
+        "source_title": "Longieren – Wikipedia",
+        "evidence_text": "Beim bereits ausgebildeten Tier wird es zur Gymnastizierung, zur Lockerung der Muskulatur oder auch nach längeren Stehzeiten eingesetzt, um dem Pferd wieder Kondition anzutrainieren, ohne es mit dem Gewicht des Reiters zu belasten.",
+        "evidence_text_sha256": "da15284699715260dec95941a7788e37fbfbfc34823572825a57aea4d0912fd1",
+        "statement": "Beim ausgebildeten Pferd dient Longieren unter anderem der Gymnastik und Muskelarbeit.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://de.wikipedia.org/wiki/Longieren",
+        "source_title": "Longieren – Wikipedia",
+        "evidence_text": "Wichtig sind regelmäßige Handwechsel, damit das Pferd nicht einseitig belastet wird, sowie ein Zirkel mit mindestens 12 Metern Durchmesser.",
+        "evidence_text_sha256": "96ada367182f72aa16b3fa9184a8fbbfec4119db65f61ca1858c6875c59a7f53",
+        "statement": "Regelmäßige Richtungswechsel und ausreichend große Zirkel vermindern einseitige Belastungen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://app.pferd-aktuell.de/breitensport/vereine-und-betriebe/schulpferde",
+        "source_title": "FN – Schulpferde im Reitverein",
+        "evidence_text": "Es ist schwierig, eine Zahl zu nennen, wie lange ein Schulpferd am Tag oder in der Woche geritten werden darf.",
+        "evidence_text_sha256": "5634598ecfe60e335ae98fd6e866353682746748b4c6c1e128838325f5ad4177",
+        "statement": "Die FN nennt keine pauschale Dauer oder Wochenhäufigkeit für jedes Schulpferd.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://app.pferd-aktuell.de/eticketing/seminar/06-04-2022/richtig-longieren---vom-anlongieren-bis-zur-doppellonge/1136",
+        "source_title": "FN – Richtig Longieren",
+        "evidence_text": "Ob bei der Vorbereitung auf das Anreiten, beim Erlernen neuer Lektionen oder zur allgemeinen Verbesserung der Durchlässigkeit – die Arbeit mit der Longe und Doppellonge ist häufig eine gute Ergänzung in der Ausbildung des Pferdes.",
+        "evidence_text_sha256": "d0ba77604557f30ebe89110c9e91f14b8c1699495a48743166a5f3968a19b372",
+        "statement": "Longieren kann unterschiedliche Ausbildungsziele sinnvoll ergänzen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/ausbildung-reitweisen/",
+        "anchor": "ausbildung-reitweisen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/training/training-longieren/",
+        "anchor": "Fachliche Informationen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/ausbildung-reitweisen/",
+        "active": true
+      },
+      {
+        "href": "/training/training-longieren/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "ausbildung-reitweisen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Longieren",
+      "Woche",
+      "Häufigkeit",
+      "Pausen",
+      "Belastung",
+      "Training",
+      "Gesundheit",
+      "Abwechslung",
+      "Zirkel"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die konkrete Leserfrage ist nur durch fachliche Erklärungen und eine geordnete Prüfung sinnvoll zu beantworten. Eine künstliche Tabelle würde Details verkürzen oder unnötige Füllfelder erzeugen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
