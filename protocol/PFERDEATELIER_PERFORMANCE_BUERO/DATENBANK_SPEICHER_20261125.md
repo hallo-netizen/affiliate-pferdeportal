@@ -73,3 +73,11 @@ Hinweis:
 - gelöschter Alt-/Migrationsbackupwert zuvor ca. 83,45 MB.
 - aktive txe_frozen_mini_v1_*-Aufträge, PSTE-Sandbox und PSERC-Workflowdaten ausdrücklich nicht angefasst.
 - nächster Schritt: slfo_options Größe + data_free unmittelbar neu messen; danach entscheiden, ob Löschung bereits Quota reduziert oder zunächst nur internen freien Platz erzeugt hat.
+
+
+## 2026-11-25 11:52 – Wirkung der 83,45-MB-Löschung gemessen
+- slfo_options nach Löschung: Inhalt weiterhin ca. 509,4 MB.
+- data_free stieg von ca. 5 MB auf ca. 100 MB.
+- Schluss: Datensatz ist logisch entfernt, aber InnoDB hat den Tabellenplatz nur intern freigegeben; physische Tabellenbelegung/Quota wurde noch nicht reduziert.
+- Damit reicht weiteres DELETE allein voraussichtlich nicht, um IONOS-Speicherquota sofort freizugeben.
+- nächster KISS-Schritt: nach der großen Löschung OPTIMIZE erneut testen. Falls IONOS die Schreibsperre weiterhin blockiert, ist physische Freigabe nur über eine DDL-Operation (Rebuild/Truncate/Drop einer nachweislich entbehrlichen Tabelle) möglich; keine produktive Tabelle blind anfassen.
