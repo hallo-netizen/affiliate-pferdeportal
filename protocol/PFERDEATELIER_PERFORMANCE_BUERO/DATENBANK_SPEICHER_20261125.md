@@ -65,3 +65,11 @@ Hinweis:
   - aktive MINI/K0-Semantik wurde nach Kompaktierung unverändert geprüft; Backup ist Rückfall-/Archivstand, nicht der kompakte aktive Bestand.
 - nachhaltige Ursache für diesen Block: Migrationsbackup wird nach erfolgreicher Kompaktierung nicht automatisch entfernt/begrenzt.
 - nächster operativer Schritt: ausschließlich txe_legacy_shelf_backup_v1_* löschen; danach Speicherstand erneut messen.
+
+
+## 2026-11-25 11:51 – erster großer Altbestand gelöscht
+- SQL: DELETE FROM slfo_options WHERE option_name LIKE 'txe_legacy_shelf_backup_v1_%';
+- Ergebnis laut phpMyAdmin: 1 Datensatz betroffen.
+- gelöschter Alt-/Migrationsbackupwert zuvor ca. 83,45 MB.
+- aktive txe_frozen_mini_v1_*-Aufträge, PSTE-Sandbox und PSERC-Workflowdaten ausdrücklich nicht angefasst.
+- nächster Schritt: slfo_options Größe + data_free unmittelbar neu messen; danach entscheiden, ob Löschung bereits Quota reduziert oder zunächst nur internen freien Platz erzeugt hat.
