@@ -222,3 +222,29 @@ PFERDEATELIER_AFFILIATE_6.72.380_GEBUENDELT_PERFORMANCE_ROOTFIX.zip geprüft:
 - damit sind permanente Fehler in den ältesten 5.000 ein Head-of-line-Blocker; neue Einträge dahinter werden nicht erreicht, solange alte Fehler nicht verschwinden.
 - die 103.535 Live-Einträge sind daher direkt derselbe Speicherpfad, der die Options-Tabelle massiv wachsen lässt.
 - noch offen: Verteilung der gespeicherten last_error_code-Werte. Diese wird vor einer Bereinigung read-only gezählt, damit legitime wartende Löschanforderungen nicht blind gelöscht werden.
+
+
+## 2026-11-25 – Affiliate 6.72.381 DB-Rootfix vollständig vor Freigabe geprüft
+- Baseline: exakt gesichertes/installiertes 6.72.380 ZIP SHA256 00da8aa7bf6ff560563433abeb643eb0352b72ef5a97c1314a6a40c365223348.
+- Live-Ursache bewiesen: 103.535 ppar_ebay_deletion_inbox_v1_* Optionszeilen / 84,29 MB; alle 103.535 attempts=0, kein Fehlercode.
+- Zielvertrag frisch geprüft: QA69, QA67, QA68, QA71 + bestehender GitHub-Heartbeat.
+- 6.72.381 hält KISS: kein neuer Zeitgeber, Cron, Worker, Tabelle, Queue, REST-Weg oder Produktentscheidungsort. Bestehende Inbox wird vom bestehenden externen Heartbeat mitbenutzt.
+- Paketdelta: 66 Dateien; exakt 4 verändert (Account-Deletion-Trait, eBay-Run-Trait, reine Versionszeilen Hauptdatei, Readme).
+- Methoden: 1604 -> 1606; 0 entfernt; 1599 bestehende Methoden exakt identisch; 5 gezielt geändert; 2 interne Inbox-Helfer neu.
+- Kritische Lösch-/Signatur-/Receipt-/Extract-/Partner-Purge-Funktionen exakt identisch zu 6.72.380.
+- eBay-Run-Trait: nach Entfernung ausschließlich des neu eingefügten Inbox-Heartbeat-Blocks exakt identisch zu 6.72.380.
+- Performance-Erhalt: includes/trait-ppar-ebay.php SHA256 in 6.72.380 und 6.72.381 identisch a2e621a9680b2a33bc2fa5364d20862c7282805158bc4c29c1e7c5d736d6b660; Hauptdatei nach Versionsneutralisierung identisch.
+- Alt/Neu-Regressionsprüfung auf final neu entpacktem ZIP:
+  - 2721/2721 Kampagnen exakt identisch,
+  - 2955/2955 Policy-Fälle exakt identisch,
+  - 25/25 Matrixfälle, 75/75 Karten exakt identisch,
+  - 8/8 Sicherheits-/Filter-Szenarien exakt identisch,
+  - 5/5 Seitenpfade exakt identisch,
+  - Locale exakt identisch.
+- Neue Deletion-Teststrecke direkt auf neu entpacktem ZIP: 8/8 PASS, darunter echte EC/OpenSSL-Signatur, Fake-Signatur, transienter Providerfehler, 5000er-Head-of-line, Replay/Receipt, Heartbeat + unveränderter Run-ID/Cursor.
+- Hotpath Regression intern alternierend 20x: Output/Datenzugriffe exakt identisch; Median 6.72.380 255,458 ms, 6.72.381 261,799 ms (+2,48% lokale Streuung). Kein neuer Performancegewinn behauptet.
+- ZIP: PFERDEATELIER_AFFILIATE_6.72.381_DB_ROOTFIX_SICHER.zip
+- ZIP SHA256: 8c3d946558c82ff185bdc1bdea74280085d65f36a52c19ca81c030a6d8a8cf01
+- ZIP CRC PASS; Re-Extract 66/66 exakt; PHP-Lint 23/23 PASS.
+- Prüfnachweis: PFERDEATELIER_6.72.381_DB_ROOTFIX_PRUEFNACHWEIS.md SHA256 7cc96858030f29fda0a60f83d3cb4317762a41eea83e6715e9796a7ba5fe746a.
+- Kandidat im Büro unter PERFORMANCE_BUERO/DB_NOTFALL gespeichert. Live-current bleibt bis Installation 6.72.380.
