@@ -60,3 +60,8 @@ Alt und Neu müssen inhaltlich gleich sein für:
 - nach der hiermit verschärften Freigaberegel wäre 6.72.379 NICHT mehr als neuer Release ausgegeben worden.
 - 6.72.379 bleibt aktuell installiert, weil kein kausaler Funktions- oder Performance-Rückschritt durch H+I bewiesen ist.
 - nächstes Plugin erst nach vollständigem Bestehen dieser Freigaberegel.
+
+
+## Zusatzverschärfung 25.11.2026 11:24
+Ein Affiliate-Harness, selbst wenn er Ranking, alle Slots und Rendering vollständig ausführt, zählt NICHT als vollständiger WordPress-Seitenperformancebeweis, wenn WordPress-Core, aktive Plugins/Themes oder reale DB-Tabellen fehlen bzw. durch Stubs ersetzt sind.
+Für eine neue Performance-Releasefreigabe ist ein echter WordPress-Gesamtrequest auf realer lokaler DB/Plugin/Theme-Kopie oder ein gleichwertiger kausal isolierter Echtdatenbeweis zwingend.

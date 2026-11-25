@@ -2188,3 +2188,18 @@ Messung: pferdeatelier-performance-gesamtanalyse-20261125-091933.json
 - ab sofort Performance-Release-Sperre für WXR+Stub-Harness; er bleibt ausschließlich für Fachregression/Hotpath-Vergleich.
 - inhaltlicher Funktionsschutz von 6.72.380 bleibt für die tatsächlich geprüften Fachfälle bestehen.
 - kein neues Plugin und kein Rückbau allein aus diesem Lauf.
+
+
+## 2026-11-25 11:24 – vollständiger Performance-Zwischenstand gesichert
+
+- aktuelles Live-Plugin 6.72.380 exakt gesichert, SHA-256 00da8aa7bf6ff560563433abeb643eb0352b72ef5a97c1314a6a40c365223348.
+- Paket erneut in PERFORMANCE_BUERO/AKTUELLES_PLUGIN und PLUGINS/PERFORMANCE gespeichert.
+- Prüfnachweis erneut im aktuellen Pluginbüro gespeichert.
+- letzte Messung 20261125-102437 im Messungsordner vorhanden.
+- Live: Pferdesättel 3.102,79 ms Wall / 1.135,25 ms CPU / 310 Queries; kein messbarer CPU-Gewinn ggü. 6.72.379.
+- lokaler 6.72.380-Performancebeweis als WordPress-Gesamtbeweis verworfen: Harness war vollständiger Affiliate-Ausgabepfad, aber kein kompletter WordPress-Seitenrequest und ohne reale 8.114-Zeilen-eBay-Tabelle.
+- inhaltlicher Funktionsschutz bleibt gültig für 2.721 Kampagnen, 25 Konfigurationen, 75 Renderings, 2.955 Policyfälle und dynamische Sicherheitsfälle.
+- WXR+Stub-Harness für künftige Release-Performancefreigaben gesperrt.
+- ab jetzt kein neues Plugin ohne echten WordPress-/Echtdaten-Gesamtpfadbeweis vor Ausgabe.
+- kein Rückbau von 6.72.380.
+- nächster Arbeitsweg: reale Live-Ausführungsstrecke kausal profilieren bzw. echte lokale WordPress-/DB-Kopie verwenden.
