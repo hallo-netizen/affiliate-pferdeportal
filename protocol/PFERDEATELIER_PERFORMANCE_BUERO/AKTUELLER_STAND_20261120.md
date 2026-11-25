@@ -2131,3 +2131,18 @@ Messung: pferdeatelier-performance-gesamtanalyse-20261124-173614.json
 - Büro: /pferdeatelier/PERFORMANCE_BUERO/AKTUELLES_PLUGIN/PFERDEATELIER_AFFILIATE_6.72.379_GEBUENDELT_EXACT_TARGET_ROOTFIX.zip
 - Prüfnachweis: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PRUEFNACHWEIS_6.72.379.md
 - Nächster Schritt: ausschließlich 6.72.379 installieren und genau einen PASSIV-Gesamtlauf ausführen.
+
+
+## 2026-11-25 – 6.72.379 LIVE ausgewertet
+
+Messung: pferdeatelier-performance-gesamtanalyse-20261125-091933.json
+- LIVE-Version 6.72.379 bestätigt; Hauptdatei-Fingerprint 0501805a4aaaa03e7c48cd930de0c27b92a21ab343cb8b3a9f5af7bd54da99a8 entspricht exakt dem freigegebenen Paket.
+- Pferdesättel: 2.435,59 ms Wall / 1.127,46 ms CPU / 89.460 Cache-Hits / 316 Queries.
+- Gegen 6.72.378: Wall +9,61 %, CPU +3,21 %, Cache praktisch unverändert, Queries +6.
+- loop_start -> wp_footer: 1.492,57 -> 1.601,48 ms (+7,30 %).
+- Kontrollrouten CPU-Median ca. -0,06 %; Serverlast nicht höher, OPcache-Neustartnähe ähnlich.
+- Zwischen den Läufen wurden weitere Plugins geändert (Relevanssi, Texterstellung, WPForms) und der Pferdesättel-Request hat 6 zusätzliche Queries. Deshalb kein kausaler Rückschritt von H+I beweisbar.
+- Der einzelne Live-Gesamtlauf bestätigt den erwarteten kleinen H+I-Gewinn nicht. Der direkte lokale Kausaltest bleibt gültig: finaler Realpfad -7,31 % bei identischer Fachausgabe.
+- Kein neues Plugin aus diesem Bericht erzeugt; 6.72.379 bleibt installiert, da kein bewiesener Funktions- oder Performance-Rückschritt durch H+I vorliegt.
+- Messdatei im Büro: /pferdeatelier/PERFORMANCE_BUERO/MESSUNGEN/pferdeatelier-performance-gesamtanalyse-20261125-091933.json
+- Nächster Schritt: Restpfade weiter isolieren und mehrere neue, direkt messbare Ursachen sammeln, bevor ein nächstes Paket gebaut wird.
