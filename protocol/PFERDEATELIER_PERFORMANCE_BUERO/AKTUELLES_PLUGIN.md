@@ -43,3 +43,11 @@ VERBINDLICHE KORREKTUR DES FREIGABESTANDARDS:
 - Ab jetzt gilt: kein neues Plugin ohne vollständige lokale Alt/Neu-Seitensimulation, wiederholte Gesamtpfadmessung UND inhaltlichen 1:1-Funktionsbeweis.
 - Live dient nur noch zur Bestätigung eines vorher vollständig lokal bewiesenen Gewinns.
 - Verbindliche Regel: protocol/PFERDEATELIER_PERFORMANCE_BUERO/PERFORMANCE_FREIGABEREGEL.md
+
+## Nutzer-Rückmeldung vom 25.11.2026
+- Affiliate-Zentrale 6.72.379 ist weiterhin die durch den GitHub-Stand bestätigte Live-Version.
+- Nutzerbefund: „bis jetzt gibt es noch keine Probleme“ (positiver Zwischenstand, **kein** Langzeit-/Geschwindigkeitsbeweis).
+- Keine neue Diagnose in dieser Rückmeldung, daher keine zusätzlichen Messwerte und keine allgemeine Funktionsfreigabe behauptet.
+- KISS: keine Plugin-Änderung und keine Neuinstallation; aktuellen Live-Stand unverändert weiterführen.
+- Original-ZIP im vorhandenen Pferdeatelier-Performance-Büro (Library) vorhanden und auf Integrität/Original-Prüfsumme geprüft.
+- GitHub-Archivverweis: `protocol/PFERDEATELIER_PERFORMANCE_BUERO/ARCHIV_6.72.379_ZIP_VERWEIS.md`.
