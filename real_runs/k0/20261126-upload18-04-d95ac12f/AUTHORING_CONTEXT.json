@@ -1,0 +1,182 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Ist eine Haftpflicht für Pferde Pflicht?",
+    "target_keyword": "Ist eine Haftpflicht für Pferde Pflicht?",
+    "category": "pferdehaftpflicht-faq",
+    "article_type": "FAQ",
+    "plan_slot": "d95ac12f3942134ff30f9593473350a7a62c81ba820095d27f6f3b47f70b27ef"
+  },
+  "content_profile": {
+    "search_intent": "Ob eine Pferdehalterhaftpflicht rechtlich vorgeschrieben ist und welche Pflichten im konkreten Fall gelten."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.gesetze-im-internet.de/bgb/__833.html",
+          "source_title": "Bundesministerium der Justiz – § 833 BGB"
+        },
+        {
+          "source_url": "https://uelzener.de/pferd/pferde-haftpflichtversicherung/",
+          "source_title": "Uelzener – Pferdehaftpflichtversicherung"
+        },
+        {
+          "source_url": "https://www.gesetze-im-internet.de/bgb/__834.html",
+          "source_title": "Bundesministerium der Justiz – § 834 BGB"
+        }
+      ],
+      "claims": [
+        "Die Tierhalterhaftung regelt Ersatzpflicht für Verletzungen und Sachschäden durch Tiere.",
+        "Die Pferdehalterhaftpflicht ist in Deutschland gesetzlich grundsätzlich nicht vorgeschrieben.",
+        "Trotz der Freiwilligkeit empfiehlt der Anbieter den Haftpflichtschutz.",
+        "Bei einem Pferd können Flurschäden an Feld und Grünflächen entstehen.",
+        "Wer vertraglich die Aufsicht über ein Tier übernimmt, kann ebenfalls unter Haftungsvoraussetzungen verantwortlich sein."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Ist eine Haftpflicht für Pferde Pflicht?",
+      "topic": "Ist eine Haftpflicht für Pferde Pflicht?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdehaftpflicht-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Ist eine Haftpflicht für Pferde Pflicht?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.gesetze-im-internet.de/bgb/__833.html",
+        "source_title": "Bundesministerium der Justiz – § 833 BGB",
+        "evidence_text": "Wird durch ein Tier ein Mensch getötet oder der Körper oder die Gesundheit eines Menschen verletzt oder eine Sache beschädigt, so ist derjenige, welcher das Tier hält, verpflichtet, dem Verletzten den daraus entstehenden Schaden zu ersetzen.",
+        "evidence_text_sha256": "0b325b4fd53f3574584eff3d33a7189baefb8b66836385852c37198d67b84e02",
+        "statement": "Die Tierhalterhaftung regelt Ersatzpflicht für Verletzungen und Sachschäden durch Tiere.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://uelzener.de/pferd/pferde-haftpflichtversicherung/",
+        "source_title": "Uelzener – Pferdehaftpflichtversicherung",
+        "evidence_text": "Eine Pferdehalter-Haftpflichtversicherung ist gesetzlich nicht vorgeschrieben.",
+        "evidence_text_sha256": "208c22e3c050f73e8cd3bc722a14b1ececc8d0a445cc6efa0570d900cea81c16",
+        "statement": "Die Pferdehalterhaftpflicht ist in Deutschland gesetzlich grundsätzlich nicht vorgeschrieben.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://uelzener.de/pferd/pferde-haftpflichtversicherung/",
+        "source_title": "Uelzener – Pferdehaftpflichtversicherung",
+        "evidence_text": "Trotzdem ist es empfehlenswert, eine Pferdehaftpflicht abzuschließen.",
+        "evidence_text_sha256": "9ea1ffd80d6fdec57f7ef29280119687a81b90ff002d48b280bf65550a657cf8",
+        "statement": "Trotz der Freiwilligkeit empfiehlt der Anbieter den Haftpflichtschutz.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://uelzener.de/pferd/pferde-haftpflichtversicherung/",
+        "source_title": "Uelzener – Pferdehaftpflichtversicherung",
+        "evidence_text": "Flurschäden entstehen beispielsweise, wenn das Pferd eine Grünfläche oder ein Feld beschädigt oder Saat und Ernte eines landwirtschaftlich genutzten Ackers zertritt.",
+        "evidence_text_sha256": "f4a3021fb5230565634ae2577265783f1a52c471c9fc4cd8de78bd03d42205e8",
+        "statement": "Bei einem Pferd können Flurschäden an Feld und Grünflächen entstehen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.gesetze-im-internet.de/bgb/__834.html",
+        "source_title": "Bundesministerium der Justiz – § 834 BGB",
+        "evidence_text": "Wer für denjenigen, welcher ein Tier hält, die Führung der Aufsicht über das Tier durch Vertrag übernimmt, ist für den Schaden verantwortlich, den das Tier einem Dritten in der im § 833 bezeichneten Weise zufügt.",
+        "evidence_text_sha256": "ead8c18ce1a38f451de04e325e652e2f16659f676315ddbde9e59ef8a3d57bf1",
+        "statement": "Wer vertraglich die Aufsicht über ein Tier übernimmt, kann ebenfalls unter Haftungsvoraussetzungen verantwortlich sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdehaftpflicht-faq/",
+        "anchor": "FAQ zur Pferdehaftpflicht",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/pferdehaftpflicht/",
+        "anchor": "Pferdehaftpflicht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdehaftpflicht-faq/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/pferdehaftpflicht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdehaftpflicht-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferdehaftpflicht",
+      "Pflicht",
+      "Tierhalter",
+      "Haftung",
+      "Sachschäden",
+      "Versicherung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Frage ist eine rechtliche Ja-Nein-Frage; eine Tabelle erzeugte keinen zusätzlichen rechtlich geprüften Vergleich und würde die klare Antwort nur wiederholen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
