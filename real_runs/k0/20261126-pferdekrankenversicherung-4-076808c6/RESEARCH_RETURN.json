@@ -1,0 +1,23 @@
+{
+  "contract": "K0_RESEARCH_RETURN_V1",
+  "status": "REPAIR_REQUIRED",
+  "owner": "SAME_RESEARCH_OWNER",
+  "identity": {
+    "title": "Welche Pferdekrankenversicherung gibt es in Österreich?",
+    "target_keyword": "pferdekrankenversicherung österreich",
+    "category": "pferdekrankenversicherung-faq",
+    "article_type": "FAQ",
+    "plan_slot": "076808c67af7f8b1a460d4ff87dae1ad2385c7d640be0a644d4408b19b17bd3f"
+  },
+  "run_instance_id": "run:bbd3884cbdd305b55ff252b7",
+  "return_to": "AUTHORING_CONTEXT.json",
+  "issues": [
+    {
+      "fact_id": "F1",
+      "reason": "RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL",
+      "source_url": "https://www.hagel.at/versicherung/tierhaltung/pferdeversicherung/"
+    }
+  ],
+  "next_action": "RESEARCH_AGAIN_OR_PROVE_ORIGINAL_SOURCE_AND_RESUBMIT_SAME_RUN",
+  "publish_allowed": false
+}
