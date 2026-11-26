@@ -40,6 +40,11 @@ K0_OFFICIAL_SOURCE_HOSTS = frozenset({
     'bauportal.nrw',          # Official North Rhine-Westphalia building portal
     'bundesfinanzhof.de',     # Official German Federal Fiscal Court
     'gesetze-im-internet.de', # Official German federal law text portal
+    'agila.de',                # Verified AGILA official animal insurer, dogs and cats only (2026-11-26)
+    'allianz.de',              # Verified Allianz official equine insurance producer (2026-11-26)
+    'uelzener.de',             # Verified Uelzener official equine insurance producer (2026-11-26)
+    'agriatierversicherung.de',# Verified Agria official equine insurance producer (2026-11-26)
+    'test.de',                 # Verified official Stiftung Warentest original publisher (2026-11-26)
 })
 K0_OWN_PORTAL_SOURCE_HOSTS = frozenset({
     'pferde-atelier.de', 'hobbydepot.de', 'hab-und-bewahr.de',
