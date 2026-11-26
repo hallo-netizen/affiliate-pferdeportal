@@ -23,6 +23,18 @@
     {
       "fact_id": "F3",
       "reason": "ORIGINAL_SOURCE_NOT_RETRIEVABLE"
+    },
+    {
+      "fact_id": "F4",
+      "reason": "ORIGINAL_SOURCE_NOT_RETRIEVABLE"
+    },
+    {
+      "fact_id": "F5",
+      "reason": "ORIGINAL_SOURCE_NOT_RETRIEVABLE"
+    },
+    {
+      "fact_id": "F6",
+      "reason": "ORIGINAL_SOURCE_NOT_RETRIEVABLE"
     }
   ],
   "next_action": "RESEARCH_AGAIN_OR_PROVE_ORIGINAL_SOURCE_AND_RESUBMIT_SAME_RUN",
