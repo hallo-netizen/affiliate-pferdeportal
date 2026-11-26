@@ -16,10 +16,6 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-          "source_title": "Allianz – Pferde-OP-Versicherung"
-        },
-        {
           "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
           "source_title": "Uelzener – Pferde-OP-Versicherung"
         },
@@ -33,8 +29,8 @@
         }
       ],
       "claims": [
-        "Die Allianz versichert medizinisch notwendige Pferdeoperationen wegen Unfall, Krankheit oder Fehlentwicklung.",
-        "Nichtoperative Behandlungen wie Therapien chronischer Leiden sind im Allianz-OP-Schutz nicht abgedeckt.",
+        "Uelzener bietet eine Pferde-OP-Versicherung für Leistungen im Zusammenhang mit versicherten Operationen.",
+        "Bei einer Aufstockung des Uelzener-Pferde-OP-Tarifs ist eine erneute Gesundheitsprüfung erforderlich.",
         "Die Uelzener-Pferdekrankenversicherung umfasst den OP-Schutz und darüber hinaus notwendige ambulante und stationäre Behandlungen.",
         "Agria nennt Pferdekrankenversicherung mit Erstattung von Tierarztkosten bei Krankheit oder Verletzung.",
         "Agria verspricht sofortigen Schutz bei Unfällen und Koliken und nach 20 Tagen bei Erkrankungen.",
@@ -69,22 +65,22 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Die OP-Versicherung deckt medizinisch notwendige Operationen infolge von Unfall, Krankheit oder Fehlentwicklung ab.",
-        "evidence_text_sha256": "535799d78572ce2f917ab4a82128a0a45e759a9ecbb5564b17cf791d4d6847ef",
-        "statement": "Die Allianz versichert medizinisch notwendige Pferdeoperationen wegen Unfall, Krankheit oder Fehlentwicklung.",
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "In der OP-Versicherung werden Leistungen erstattet, die mit einer versicherten OP zusammenhängen.",
+        "evidence_text_sha256": "50915182ef604e8fe073ef2c5d9bf04539ecc3b548be3c307cd2eedea2c6dd85",
+        "statement": "Uelzener bietet eine Pferde-OP-Versicherung für Leistungen im Zusammenhang mit versicherten Operationen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Vergleich"
         ]
       },
       "F2": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Im OP-Schutz sind keine Behandlungen ohne eine Operation beispielsweise Therapien für chronische Leiden wie Arthrose abgesichert.",
-        "evidence_text_sha256": "9071038a75b8fd215ee665cb1e24e90cd4d020a7e7c860bdc3a1afbe26c87306",
-        "statement": "Nichtoperative Behandlungen wie Therapien chronischer Leiden sind im Allianz-OP-Schutz nicht abgedeckt.",
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Wenn du deinen Tarif aufstocken möchtest erfolgt eine erneute Gesundheitsprüfung.",
+        "evidence_text_sha256": "94bc6c9aca5aa6ead76e272247cf0b55ec8af2d5a9354bb4103fe0c1431c7df7",
+        "statement": "Bei einer Aufstockung des Uelzener-Pferde-OP-Tarifs ist eine erneute Gesundheitsprüfung erforderlich.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Vergleich"
@@ -198,16 +194,14 @@
     ],
     "comparison_source_bindings": [
       {
-        "source_label": "Allianz",
-        "nearest_option_heading": "Allianz"
-      },
-      {
         "source_label": "Uelzener",
-        "nearest_option_heading": "Uelzener"
+        "nearest_option_heading": "Uelzener",
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/"
       },
       {
         "source_label": "Agria",
-        "nearest_option_heading": "Agria"
+        "nearest_option_heading": "Agria",
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/"
       }
     ],
     "table_decision": {
