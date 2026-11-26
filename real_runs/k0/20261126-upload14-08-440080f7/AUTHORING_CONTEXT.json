@@ -1,0 +1,239 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Günstige Pferde OP Versicherungen im Vergleich",
+    "target_keyword": "günstige pferde-op-versicherung",
+    "category": "pferde-op-versicherung-tarife-und-kosten",
+    "article_type": "Vergleich",
+    "plan_slot": "440080f7c566ed3dff1d6a05f2b4a747331852aa36e5fb277ff46f3fb45f601c"
+  },
+  "content_profile": {
+    "search_intent": "Preisbewusste Auswahl günstiger Pferde OP Versicherungen"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+          "source_title": "Uelzener – Pferde-OP-Versicherung"
+        },
+        {
+          "source_url": "https://www.check24.de/pferde-op-versicherung/",
+          "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich"
+        }
+      ],
+      "claims": [
+        "Auf der offiziellen Uelzener-Seite wird der Pferde-OP-Versicherungstarif ab 46,09 Euro pro Monat beworben.",
+        "CHECK24 erläutert, dass eine Selbstbeteiligung den vom Halter selbst getragenen Kostenanteil bezeichnet.",
+        "CHECK24 unterscheidet bei OP-Tarifen die Erstattungsgrenze pro Versicherungsjahr und pro Operation.",
+        "CHECK24 verweist für vollständige Leistungsausschlüsse auf die Unterlagen der jeweiligen Versicherer.",
+        "CHECK24 zeigt im Vergleich eine Beispielspanne für Pferde-OP-Tarife; sie gilt nicht pauschal für Kranken-Vollversicherung.",
+        "CHECK24 weist darauf hin, dass bei bestimmten Notfällen verkürzte Wartezeiten vorgesehen sein können."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Vergleich",
+      "target_keyword": "günstige pferde-op-versicherung",
+      "topic": "Günstige Pferde OP Versicherungen im Vergleich",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-op-versicherung-tarife-und-kosten",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "comparison_targets": [
+        "Uelzener",
+        "CHECK24-Beispieltarife"
+      ],
+      "comparison_criteria": [
+        "Beitrag",
+        "Selbstbeteiligung",
+        "Erstattungshöhe"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "ab 46,09 €/Monat*",
+        "evidence_text_sha256": "503d5cfc3f3ff736f9e86fd73f53b774067950d135c5a41821f6cebe533815f2",
+        "statement": "Auf der offiziellen Uelzener-Seite wird der Pferde-OP-Versicherungstarif ab 46,09 Euro pro Monat beworben.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.check24.de/pferde-op-versicherung/",
+        "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich",
+        "evidence_text": "Die Selbstbeteiligung definiert, zu welchem Anteil Sie sich an den Behandlungskosten Ihres Pferdes beteiligen.",
+        "evidence_text_sha256": "0b98718205fe4d22b69bfdc1cad53ed905aff132bbd76bf87f87beab6467d3f5",
+        "statement": "CHECK24 erläutert, dass eine Selbstbeteiligung den vom Halter selbst getragenen Kostenanteil bezeichnet.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.check24.de/pferde-op-versicherung/",
+        "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich",
+        "evidence_text": "Bei der Pferde-OP-Versicherung ist es wichtig, den Unterschied zwischen der jährlichen Höchstleistungsgrenze und der Höchstleistungsgrenze pro Operation zu kennen.",
+        "evidence_text_sha256": "6357af73dd932af0175d193c00b597f5d0ca0741623bbc4c0e5e0a29f38057de",
+        "statement": "CHECK24 unterscheidet bei OP-Tarifen die Erstattungsgrenze pro Versicherungsjahr und pro Operation.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.check24.de/pferde-op-versicherung/",
+        "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich",
+        "evidence_text": "Die vollständigen Bedingungen und alle Ausschlüsse sind in den Unterlagen des jeweiligen Versicherers festgehalten.",
+        "evidence_text_sha256": "64be965b7f9a84c7885dc02f0acac32d960efd91b157c8fe55af1cced566c696",
+        "statement": "CHECK24 verweist für vollständige Leistungsausschlüsse auf die Unterlagen der jeweiligen Versicherer.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.check24.de/pferde-op-versicherung/",
+        "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich",
+        "evidence_text": "Eine Pferde-OP-Versicherung über CHECK24 kostet zwischen 21,71 € und 140,70 € monatlich beziehungsweise 260,47 € und 1688,41 € jährlich.",
+        "evidence_text_sha256": "02a7a6339c936832aad9990610c6ab11b67e67d9459d6a572df4718c36458ab4",
+        "statement": "CHECK24 zeigt im Vergleich eine Beispielspanne für Pferde-OP-Tarife; sie gilt nicht pauschal für Kranken-Vollversicherung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F6": {
+        "source_url": "https://www.check24.de/pferde-op-versicherung/",
+        "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich",
+        "evidence_text": "Einige Versicherer machen Ausnahmen bei akuten Notfällen, zum Beispiel bei einer Kolik.",
+        "evidence_text_sha256": "a33881beb7471d2d485d739c04575b733f093ffe925d891eb83ef0f8cf2b62fc",
+        "statement": "CHECK24 weist darauf hin, dass bei bestimmten Notfällen verkürzte Wartezeiten vorgesehen sein können.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-op-versicherung-tarife-und-kosten/",
+        "anchor": "Pferdeversicherung im Vergleich",
+        "block": "options"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-op-versicherung-tarife-und-kosten/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-op-versicherung-tarife-und-kosten",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Versicherung",
+      "Pferde",
+      "Krankenschutz",
+      "OP",
+      "Kosten",
+      "Beitrag",
+      "Behandlung",
+      "Leistungen",
+      "Fragen",
+      "Vertrag",
+      "Erstattung",
+      "Tarif",
+      "Vergleich",
+      "Allianz",
+      "Uelzener",
+      "Barmenia",
+      "HUK",
+      "Agria",
+      "Check24",
+      "Erfahrungen",
+      "Schutz",
+      "Pferdekrankenversicherung",
+      "Pferdeversicherung",
+      "Fristen",
+      "Alter",
+      "Wartezeit",
+      "Bedingungen",
+      "Auswahl",
+      "Versicherungen",
+      "Recht"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Verschiedene Tarife lassen sich anhand von Beitrag, Schutzumfang und Eigenanteil direkt und mit klar zugeordneten offiziellen Quellen vergleichen.",
+      "reader_question": "günstige pferde-op-versicherung",
+      "reader_benefit": "Der Leser sieht Unterschiede bei Beitrag, Erstattung und Eigenanteil auf einen Blick.",
+      "why_not_prose": "Gegenüberstellung mehrerer Tarife und Kriterien ist im Fließtext nicht zuverlässig direkt vergleichbar.",
+      "comparison_axes": [
+        "Beitrag",
+        "Selbstbeteiligung",
+        "Erstattungshöhe"
+      ],
+      "source_fact_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ]
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
