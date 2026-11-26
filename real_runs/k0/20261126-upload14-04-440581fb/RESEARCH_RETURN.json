@@ -1,0 +1,23 @@
+{
+  "contract": "K0_RESEARCH_RETURN_V1",
+  "status": "REPAIR_REQUIRED",
+  "owner": "SAME_RESEARCH_OWNER",
+  "identity": {
+    "title": "Erfahrungen mit der Barmenia Pferde OP Versicherung",
+    "target_keyword": "barmenia pferde-op versicherung erfahrungen",
+    "category": "pferde-op-versicherung-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "440581fba973acdb3199609ddbbdf0fda1fc45ac3db843d934549255a791f494"
+  },
+  "run_instance_id": "run:d3d4ed8d1c83962ad1359a7f",
+  "return_to": "AUTHORING_CONTEXT.json",
+  "issues": [
+    {
+      "fact_id": "F1",
+      "reason": "RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL",
+      "source_url": "https://www.huk.de/haus-haftung-recht/tierversicherung/pferde-op-versicherung.html"
+    }
+  ],
+  "next_action": "RESEARCH_AGAIN_OR_PROVE_ORIGINAL_SOURCE_AND_RESUBMIT_SAME_RUN",
+  "publish_allowed": false
+}
