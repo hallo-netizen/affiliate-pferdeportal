@@ -16,17 +16,17 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-          "source_title": "Allianz – Pressemitteilung Tierkrankenversicherung vom 10. Februar 2026"
+          "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-4964838/",
+          "source_title": "Stiftung Warentest – Pferdekrankenversicherung, Untersuchung 2016"
         }
       ],
       "claims": [
-        "Die Allianz bietet für Pferde vier OP-Schutztarife und vier Vollkrankenversicherungstarife an.",
-        "Die Allianz nennt die Produktlinien Basis, Smart, Komfort und Premium.",
-        "Die Allianz nennt für Behandlungskosten nach Unfall keine Wartezeit.",
-        "Allianz nennt einen möglichen Einstieg ab acht Wochen ohne Altersobergrenze.",
-        "Die Allianz bewirbt bei ihren neuen Tarifen Kostenerstattung bis zu 100 Prozent.",
-        "Nach eigenen Angaben bietet Allianz seit 2011 Pferdekrankenversicherungen an."
+        "Stiftung Warentest untersuchte 2016 Allianz als Anbieter einer Pferde-OP-Versicherung mit begrenzter Erstattung.",
+        "Die historischen Pferde-OP-Tarife unterscheiden sich durch Ausschlüsse einzelner Erkrankungen und Operationen.",
+        "Stiftung Warentest beschrieb 2016, dass bei Allianz die Unterbringungskosten in die Erstattungsgrenze einflossen.",
+        "Für die damals untersuchte Allianz-Pferde-OP-Police nannte Warentest eine jährliche Erstattung bis 10.000 Euro.",
+        "Stiftung Warentest erklärte, dass bei Pferden der einfache Gebührensatz häufig ausreicht.",
+        "Bei höheren Gebühren als dem im historischen Allianz-Tarif gedeckten Satz mussten Kunden laut Warentest selbst bezahlen."
       ]
     },
     "production_plan_item": {
@@ -48,66 +48,66 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-        "source_title": "Allianz – Pressemitteilung Tierkrankenversicherung vom 10. Februar 2026",
-        "evidence_text": "vier OP-Schutztarife und vier Krankenvolltarife",
-        "evidence_text_sha256": "f7d042815ab05d7218f516e4d9267350fb838bdc7f7b7c9079b0867e14b9b92d",
-        "statement": "Die Allianz bietet für Pferde vier OP-Schutztarife und vier Vollkrankenversicherungstarife an.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-4964838/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung, Untersuchung 2016",
+        "evidence_text": "Allianz und R+V die Summen",
+        "evidence_text_sha256": "3e173a4aedf22f571963023f641462e6a454fe5161821c1844d0e85b24f11efe",
+        "statement": "Stiftung Warentest untersuchte 2016 Allianz als Anbieter einer Pferde-OP-Versicherung mit begrenzter Erstattung.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F2": {
-        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-        "source_title": "Allianz – Pressemitteilung Tierkrankenversicherung vom 10. Februar 2026",
-        "evidence_text": "Basis, Smart, Komfort und Premium",
-        "evidence_text_sha256": "6396cf7c47bf32d892e0d8bfffb8871f75d7e4a5c79706f739f199892de2deb4",
-        "statement": "Die Allianz nennt die Produktlinien Basis, Smart, Komfort und Premium.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-4964838/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung, Untersuchung 2016",
+        "evidence_text": "So sind in einigen Tarifen bestimmte Erkrankungen und Operationen gezielt ausgeschlossen.",
+        "evidence_text_sha256": "0152a5afd9b9e8763c660eb73684bc24447f55afb9c5e9b0252f459de7e44d01",
+        "statement": "Die historischen Pferde-OP-Tarife unterscheiden sich durch Ausschlüsse einzelner Erkrankungen und Operationen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F3": {
-        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-        "source_title": "Allianz – Pressemitteilung Tierkrankenversicherung vom 10. Februar 2026",
-        "evidence_text": "Nach einem Unfall werden Behandlungskosten ohne Wartezeit übernommen",
-        "evidence_text_sha256": "613a4450627253a113651412e5bc52bc9361f094c96f4037b3cca8a0f340f236",
-        "statement": "Die Allianz nennt für Behandlungskosten nach Unfall keine Wartezeit.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-4964838/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung, Untersuchung 2016",
+        "evidence_text": "Auch bei der Allianz werden die",
+        "evidence_text_sha256": "3f64e0121471dfb3f11cfe7a53e1614d4ca7a7fb65bb41128d028358bb87266b",
+        "statement": "Stiftung Warentest beschrieb 2016, dass bei Allianz die Unterbringungskosten in die Erstattungsgrenze einflossen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F4": {
-        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-        "source_title": "Allianz – Pressemitteilung Tierkrankenversicherung vom 10. Februar 2026",
-        "evidence_text": "Die Allianz versichert Tiere ab einem Alter von acht Wochen und ohne Altersbeschränkung",
-        "evidence_text_sha256": "5d0613271d41ad7aa36f688559bcb3567b39c997d4d580b62a9db5cc7488b224",
-        "statement": "Allianz nennt einen möglichen Einstieg ab acht Wochen ohne Altersobergrenze.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-4964838/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung, Untersuchung 2016",
+        "evidence_text": "Sie zahlt insgesamt bis 10 000 Euro im Jahr",
+        "evidence_text_sha256": "a1c38095129953425768b5cb5a3c10eca91ad931de9076d7fe31ffb122c95c2a",
+        "statement": "Für die damals untersuchte Allianz-Pferde-OP-Police nannte Warentest eine jährliche Erstattung bis 10.000 Euro.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F5": {
-        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-        "source_title": "Allianz – Pressemitteilung Tierkrankenversicherung vom 10. Februar 2026",
-        "evidence_text": "Erstattung der Kosten bis zu 100%",
-        "evidence_text_sha256": "d06388230c797c0fa9a864cb9d7fadaacb627747e5e82d41adaa8ae958e39ddd",
-        "statement": "Die Allianz bewirbt bei ihren neuen Tarifen Kostenerstattung bis zu 100 Prozent.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-4964838/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung, Untersuchung 2016",
+        "evidence_text": "Meist reicht bei Pferden der einfache Satz.",
+        "evidence_text_sha256": "985225076126ca1106ae81aec52b2c58baf22d0cec9a27798c6794f8d76661d9",
+        "statement": "Stiftung Warentest erklärte, dass bei Pferden der einfache Gebührensatz häufig ausreicht.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F6": {
-        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-        "source_title": "Allianz – Pressemitteilung Tierkrankenversicherung vom 10. Februar 2026",
-        "evidence_text": "Die Allianz ist mit ihren Tierkrankenversicherungen für Hunde und Katzen seit 2008 und für Pferde seit 2011",
-        "evidence_text_sha256": "cd0c87af60652223b2392212c3e7d7fdd0dbe0b90e9b34a8315460f7b9b17ece",
-        "statement": "Nach eigenen Angaben bietet Allianz seit 2011 Pferdekrankenversicherungen an.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-4964838/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung, Untersuchung 2016",
+        "evidence_text": "Kunden zahlen das dann aus eigener Tasche.",
+        "evidence_text_sha256": "1c1aa920012fa76a8ceaf83777e002abdb492f8c4c4a4781b890a933976869b6",
+        "statement": "Bei höheren Gebühren als dem im historischen Allianz-Tarif gedeckten Satz mussten Kunden laut Warentest selbst bezahlen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
