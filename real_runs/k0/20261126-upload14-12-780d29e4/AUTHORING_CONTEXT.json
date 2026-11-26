@@ -16,22 +16,30 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.check24.de/pferde-op-versicherung/",
-          "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich"
+          "source_url": "https://de.wikipedia.org/wiki/Check24",
+          "source_title": "Wikipedia – Check24"
         },
         {
-          "source_url": "https://www.huk.de/haus-haftung-recht/tierversicherung/pferde-op-versicherung.html",
-          "source_title": "HUK-COBURG – Pferde-OP-Versicherung Barmenia"
+          "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+          "source_title": "Allianz – Pferde-OP-Versicherung"
+        },
+        {
+          "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+          "source_title": "Uelzener – Pferde-OP-Versicherung"
+        },
+        {
+          "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
+          "source_title": "Agria – Pferdeversicherung"
         }
       ],
       "claims": [
-        "CHECK24 erläutert, dass eine Selbstbeteiligung den vom Halter selbst getragenen Kostenanteil bezeichnet.",
-        "CHECK24 unterscheidet bei OP-Tarifen die Erstattungsgrenze pro Versicherungsjahr und pro Operation.",
-        "CHECK24 verweist für vollständige Leistungsausschlüsse auf die Unterlagen der jeweiligen Versicherer.",
-        "CHECK24 zeigt im Vergleich eine Beispielspanne für Pferde-OP-Tarife; sie gilt nicht pauschal für Kranken-Vollversicherung.",
-        "CHECK24 ordnet zum Leistungsumfang eines Pferde-OP-Tarifs mehrere Vergleichskriterien.",
-        "CHECK24 weist darauf hin, dass bei bestimmten Notfällen verkürzte Wartezeiten vorgesehen sein können.",
-        "HUK ist beim vermittelten Barmenia-Pferde-OP-Produkt nicht selbst Vertragspartei."
+        "Check24 ist eine seit 1999 bestehende deutsche Unternehmensgruppe.",
+        "Check24 betreibt ein Preisvergleichsportal.",
+        "Check24 ist ein Vergleichsdienst für verschiedene Produktgruppen.",
+        "Versicherungen gehören zu den von Check24 allgemein angebotenen Vergleichsbereichen.",
+        "Allianz stellt klar, dass der Pferde-OP-Schutz medizinisch notwendige Operationen aufgrund von Unfall, Krankheit oder Fehlentwicklung umfasst.",
+        "Auf der offiziellen Uelzener-Seite wird der Pferde-OP-Versicherungstarif ab 46,09 Euro pro Monat beworben.",
+        "Agria nennt Pferdekrankenversicherung mit Erstattung von Tierarztkosten bei Krankheit oder Verletzung."
       ]
     },
     "production_plan_item": {
@@ -53,77 +61,77 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.check24.de/pferde-op-versicherung/",
-        "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich",
-        "evidence_text": "Die Selbstbeteiligung definiert, zu welchem Anteil Sie sich an den Behandlungskosten Ihres Pferdes beteiligen.",
-        "evidence_text_sha256": "0b98718205fe4d22b69bfdc1cad53ed905aff132bbd76bf87f87beab6467d3f5",
-        "statement": "CHECK24 erläutert, dass eine Selbstbeteiligung den vom Halter selbst getragenen Kostenanteil bezeichnet.",
+        "source_url": "https://de.wikipedia.org/wiki/Check24",
+        "source_title": "Wikipedia – Check24",
+        "evidence_text": "Die Check24 GmbH (Eigenschreibweise CHECK24) ist eine 1999 gegründete Unternehmensgruppe mit Sitz in München.",
+        "evidence_text_sha256": "9239bbe3485b4c9f6ab23226768822efc208f802006b65f5a52e1d8d6ddab529",
+        "statement": "Check24 ist eine seit 1999 bestehende deutsche Unternehmensgruppe.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F2": {
-        "source_url": "https://www.check24.de/pferde-op-versicherung/",
-        "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich",
-        "evidence_text": "Bei der Pferde-OP-Versicherung ist es wichtig, den Unterschied zwischen der jährlichen Höchstleistungsgrenze und der Höchstleistungsgrenze pro Operation zu kennen.",
-        "evidence_text_sha256": "6357af73dd932af0175d193c00b597f5d0ca0741623bbc4c0e5e0a29f38057de",
-        "statement": "CHECK24 unterscheidet bei OP-Tarifen die Erstattungsgrenze pro Versicherungsjahr und pro Operation.",
+        "source_url": "https://de.wikipedia.org/wiki/Check24",
+        "source_title": "Wikipedia – Check24",
+        "evidence_text": "Seit 2008 betreibt sie ein umfangreiches Preisvergleichsportal.",
+        "evidence_text_sha256": "1a8346265703e40460da0f71f41ac6401e9f60b588b0e4cb6fd1c14e7eaa72fd",
+        "statement": "Check24 betreibt ein Preisvergleichsportal.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F3": {
-        "source_url": "https://www.check24.de/pferde-op-versicherung/",
-        "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich",
-        "evidence_text": "Die vollständigen Bedingungen und alle Ausschlüsse sind in den Unterlagen des jeweiligen Versicherers festgehalten.",
-        "evidence_text_sha256": "64be965b7f9a84c7885dc02f0acac32d960efd91b157c8fe55af1cced566c696",
-        "statement": "CHECK24 verweist für vollständige Leistungsausschlüsse auf die Unterlagen der jeweiligen Versicherer.",
+        "source_url": "https://de.wikipedia.org/wiki/Check24",
+        "source_title": "Wikipedia – Check24",
+        "evidence_text": "Das Unternehmen bietet Vergleichsdienste in verschiedenen Bereichen an.",
+        "evidence_text_sha256": "645209daf174f9abf5995f850f952b390592ceea8e535b9d0eb47a9bca90b71f",
+        "statement": "Check24 ist ein Vergleichsdienst für verschiedene Produktgruppen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F4": {
-        "source_url": "https://www.check24.de/pferde-op-versicherung/",
-        "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich",
-        "evidence_text": "Eine Pferde-OP-Versicherung über CHECK24 kostet zwischen 21,71 € und 140,70 € monatlich beziehungsweise 260,47 € und 1688,41 € jährlich.",
-        "evidence_text_sha256": "02a7a6339c936832aad9990610c6ab11b67e67d9459d6a572df4718c36458ab4",
-        "statement": "CHECK24 zeigt im Vergleich eine Beispielspanne für Pferde-OP-Tarife; sie gilt nicht pauschal für Kranken-Vollversicherung.",
+        "source_url": "https://de.wikipedia.org/wiki/Check24",
+        "source_title": "Wikipedia – Check24",
+        "evidence_text": "Dazu gehören Versicherungen und Finanzen sowie Energievergleiche für Strom und Gas.",
+        "evidence_text_sha256": "462374e15b22ceabbc57cc796a7b061324883f39e22b403ccb1ec0514f6cf334",
+        "statement": "Versicherungen gehören zu den von Check24 allgemein angebotenen Vergleichsbereichen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F5": {
-        "source_url": "https://www.check24.de/pferde-op-versicherung/",
-        "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich",
-        "evidence_text": "Das Leistungsspektrum oder auch der Versicherungsumfang setzt sich aus allen Kriterien eines Pferde-OP-Tarifs zusammen",
-        "evidence_text_sha256": "2831d780facc7df0a20f5b48ccb5ed5f5db3cd933f812ac746154e802559f9b3",
-        "statement": "CHECK24 ordnet zum Leistungsumfang eines Pferde-OP-Tarifs mehrere Vergleichskriterien.",
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz – Pferde-OP-Versicherung",
+        "evidence_text": "Die OP-Versicherung deckt medizinisch notwendige Operationen infolge von Unfall, Krankheit oder Fehlentwicklung ab.",
+        "evidence_text_sha256": "535799d78572ce2f917ab4a82128a0a45e759a9ecbb5564b17cf791d4d6847ef",
+        "statement": "Allianz stellt klar, dass der Pferde-OP-Schutz medizinisch notwendige Operationen aufgrund von Unfall, Krankheit oder Fehlentwicklung umfasst.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F6": {
-        "source_url": "https://www.check24.de/pferde-op-versicherung/",
-        "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich",
-        "evidence_text": "Einige Versicherer machen Ausnahmen bei akuten Notfällen, zum Beispiel bei einer Kolik.",
-        "evidence_text_sha256": "a33881beb7471d2d485d739c04575b733f093ffe925d891eb83ef0f8cf2b62fc",
-        "statement": "CHECK24 weist darauf hin, dass bei bestimmten Notfällen verkürzte Wartezeiten vorgesehen sein können.",
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "ab 46,09 €/Monat*",
+        "evidence_text_sha256": "503d5cfc3f3ff736f9e86fd73f53b774067950d135c5a41821f6cebe533815f2",
+        "statement": "Auf der offiziellen Uelzener-Seite wird der Pferde-OP-Versicherungstarif ab 46,09 Euro pro Monat beworben.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F7": {
-        "source_url": "https://www.huk.de/haus-haftung-recht/tierversicherung/pferde-op-versicherung.html",
-        "source_title": "HUK-COBURG – Pferde-OP-Versicherung Barmenia",
-        "evidence_text": "Die HUK-COBURG stellt lediglich den Zugang zu diesem Angebot bereit und ist nicht Vertragspartei.",
-        "evidence_text_sha256": "789a4d58949a65d7069d5159bb80abbfe067e4ece618e39919c335e8f97e794e",
-        "statement": "HUK ist beim vermittelten Barmenia-Pferde-OP-Produkt nicht selbst Vertragspartei.",
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
+        "source_title": "Agria – Pferdeversicherung",
+        "evidence_text": "Erstattung der Tierarztkosten bei Krankheit oder Verletzung deines Pferdes.",
+        "evidence_text_sha256": "66d91434f863876ca983d24f26ca4ced6c2bb61b7f43a243a668c0201124485e",
+        "statement": "Agria nennt Pferdekrankenversicherung mit Erstattung von Tierarztkosten bei Krankheit oder Verletzung.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
