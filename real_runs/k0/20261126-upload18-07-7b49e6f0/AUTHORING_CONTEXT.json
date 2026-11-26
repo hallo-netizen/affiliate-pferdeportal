@@ -16,16 +16,16 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-          "source_title": "Allianz – Pferde-OP-Versicherung"
+          "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+          "source_title": "Uelzener – Pferde-OP-Versicherung"
         }
       ],
       "claims": [
-        "Die Allianz bietet eine Pferde-OP-Versicherung mit einem ausgewiesenen Preis ab 15,23 Euro im Monat an.",
-        "Eine Pferde-OP-Versicherung konzentriert sich im Unterschied zur Krankenvollversicherung auf das finanzielle Risiko von Operationen.",
-        "Die Selbstbeteiligung der Allianz-OP-Versicherung für Pferde ist beim Abschluss individuell wählbar.",
-        "Bei der Allianz kann die Pferdeprämie von Rasse und Alter abhängen; ein Kaltblut oder älteres Pferd wird häufig teurer.",
-        "Die Allianz versichert medizinisch notwendige Pferdeoperationen wegen Unfall, Krankheit oder Fehlentwicklung."
+        "Auf der offiziellen Uelzener-Seite wird der Pferde-OP-Versicherungstarif ab 46,09 Euro pro Monat beworben.",
+        "Uelzener gibt für ihren Pferde-OP-Tarif 100 Prozent Erstattung unabhängig vom GOT-Satz an.",
+        "Die Uelzener-Pferde-OP-Versicherung schließt laut Angebot drei Tage Vorbehandlung und 17 Kalendertage Nachbehandlung ein.",
+        "Uelzener bietet zusätzlich optionale Krankenversicherungs- und Reha-Bausteine zum OP-Schutz an.",
+        "Der Versicherer begründet den OP-Schutz mit potenziell erheblichen Tierarztkosten bei Pferdeoperationen."
       ]
     },
     "production_plan_item": {
@@ -52,55 +52,55 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Bei der Allianz gibt es die OP-Versicherung für Pferde ab 15,23 Euro pro Monat.",
-        "evidence_text_sha256": "6dbd8edd3ac8abd6bb8b91be4ea639b4c71c8e44b15669e5bfdd3b84c70def21",
-        "statement": "Die Allianz bietet eine Pferde-OP-Versicherung mit einem ausgewiesenen Preis ab 15,23 Euro im Monat an.",
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "ab 46,09 €/Monat*",
+        "evidence_text_sha256": "503d5cfc3f3ff736f9e86fd73f53b774067950d135c5a41821f6cebe533815f2",
+        "statement": "Auf der offiziellen Uelzener-Seite wird der Pferde-OP-Versicherungstarif ab 46,09 Euro pro Monat beworben.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F2": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Die Kosten für eine Pferde OP-Versicherung sind deutlich niedriger als bei einer Pferdekrankenvollversicherung, da sie sich gezielt auf das finanzielle Risiko teurer Operationen konzentriert.",
-        "evidence_text_sha256": "bab64df0fc11d0d7430f63a631a9715a7b35b4159d311f2827381d411784b13d",
-        "statement": "Eine Pferde-OP-Versicherung konzentriert sich im Unterschied zur Krankenvollversicherung auf das finanzielle Risiko von Operationen.",
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "100% Erstattung unabhängig vom GOT-Satz",
+        "evidence_text_sha256": "1a250de841fe2249c3c86a17649f6ecd76a8f4610e601f77eea7ebe5a1540c40",
+        "statement": "Uelzener gibt für ihren Pferde-OP-Tarif 100 Prozent Erstattung unabhängig vom GOT-Satz an.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F3": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Die Selbstbeteiligung ist flexibel und kann bei Abschluss der OP-Versicherung für Pferde individuell festgelegt werden.",
-        "evidence_text_sha256": "fb09c998c9454a87eb1c63e6883a016e409b1a5dee3e9a57fe99b0f368babd6b",
-        "statement": "Die Selbstbeteiligung der Allianz-OP-Versicherung für Pferde ist beim Abschluss individuell wählbar.",
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "3 Tage Vor- und 17 Kalendertage Nachbehandlung",
+        "evidence_text_sha256": "224346299c82c116c7ea8037c4ce0ff311ed67fdd05c27f9e6b2df3497d90ccc",
+        "statement": "Die Uelzener-Pferde-OP-Versicherung schließt laut Angebot drei Tage Vorbehandlung und 17 Kalendertage Nachbehandlung ein.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F4": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Ein Kaltblut oder ein älteres Pferd verursacht meist höhere Prämien als ein junges Pony.",
-        "evidence_text_sha256": "139fd44082ecb255a8852417cd39a8e5492989b0d856f3070debf61a00cc4999",
-        "statement": "Bei der Allianz kann die Pferdeprämie von Rasse und Alter abhängen; ein Kaltblut oder älteres Pferd wird häufig teurer.",
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Krankenversicherungs- und Reha-Baustein",
+        "evidence_text_sha256": "41224046180c89fcbb1a88e0807368f549a139270cff404dfb335eba2f940787",
+        "statement": "Uelzener bietet zusätzlich optionale Krankenversicherungs- und Reha-Bausteine zum OP-Schutz an.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F5": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Die OP-Versicherung deckt medizinisch notwendige Operationen infolge von Unfall, Krankheit oder Fehlentwicklung ab.",
-        "evidence_text_sha256": "535799d78572ce2f917ab4a82128a0a45e759a9ecbb5564b17cf791d4d6847ef",
-        "statement": "Die Allianz versichert medizinisch notwendige Pferdeoperationen wegen Unfall, Krankheit oder Fehlentwicklung.",
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Wenn das Pferd eine Operation braucht, können die Tierarztkosten schnell enorme Ausmaße annehmen.",
+        "evidence_text_sha256": "21f91cd6531d1608bc98ed83f64b7146a2afa2329620832f003b83a832fb88c0",
+        "statement": "Der Versicherer begründet den OP-Schutz mit potenziell erheblichen Tierarztkosten bei Pferdeoperationen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
@@ -156,12 +156,16 @@
       "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
     },
     "heading_intent_terms": [
-      "Kosten",
       "Pferde",
+      "OP",
       "Versicherung",
-      "Allianz",
-      "Beitrag",
+      "Kosten",
+      "Monat",
+      "Tarif",
+      "Uelzener",
+      "Nachbehandlung",
       "Selbstbeteiligung",
+      "Leistungen",
       "Versicherungen",
       "Recht"
     ],
