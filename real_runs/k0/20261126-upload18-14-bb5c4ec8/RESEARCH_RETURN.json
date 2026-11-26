@@ -1,0 +1,26 @@
+{
+  "contract": "K0_RESEARCH_RETURN_V1",
+  "status": "REPAIR_REQUIRED",
+  "owner": "SAME_RESEARCH_OWNER",
+  "identity": {
+    "title": "Erfahrungen mit Pferde OP Versicherungen",
+    "target_keyword": "pferde op-versicherung erfahrungen",
+    "category": "pferde-op-versicherung-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "bb5c4ec8f142547f1baaf9153ba62d41572e9aedfb111959ea25d886fecd5526"
+  },
+  "run_instance_id": "run:a59ba93a0a8a1a40a7eb6208",
+  "return_to": "AUTHORING_CONTEXT.json",
+  "issues": [
+    {
+      "fact_id": "F1",
+      "reason": "ORIGINAL_SOURCE_NOT_RETRIEVABLE"
+    },
+    {
+      "fact_id": "F2",
+      "reason": "ORIGINAL_SOURCE_NOT_RETRIEVABLE"
+    }
+  ],
+  "next_action": "RESEARCH_AGAIN_OR_PROVE_ORIGINAL_SOURCE_AND_RESUBMIT_SAME_RUN",
+  "publish_allowed": false
+}
