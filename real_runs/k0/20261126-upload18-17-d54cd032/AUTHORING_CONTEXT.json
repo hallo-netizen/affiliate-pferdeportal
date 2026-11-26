@@ -16,16 +16,16 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-          "source_title": "Allianz – Pferde-OP-Versicherung"
+          "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+          "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026"
         }
       ],
       "claims": [
-        "Die Allianz bietet eine Pferde-OP-Versicherung mit einem ausgewiesenen Preis ab 15,23 Euro im Monat an.",
-        "Eine Pferde-OP-Versicherung konzentriert sich im Unterschied zur Krankenvollversicherung auf das finanzielle Risiko von Operationen.",
-        "Die Selbstbeteiligung der Allianz-OP-Versicherung für Pferde ist beim Abschluss individuell wählbar.",
-        "Bei der Allianz kann die Pferdeprämie von Rasse und Alter abhängen; ein Kaltblut oder älteres Pferd wird häufig teurer.",
-        "Allianz-Versicherungsprodukte sind modular aufgebaut und lassen sich an den gewünschten Schutz anpassen."
+        "Die Allianz beschreibt die Beiträge zur Tierkrankenversicherung als am individuellen Tier-Risiko orientiert, ohne hier einen festen Monatspreis zu nennen.",
+        "Bei einem Selbstbehalt von zehn Prozent gibt die Allianz für Pferde eine Kostenobergrenze von 1.500 Euro je Rechnung an.",
+        "Allianz bietet seit Februar 2026 vier OP-Schutztarife für Pferde mit den Linien Basis, Smart, Komfort und Premium.",
+        "Die Allianz nennt für Kolikbehandlungen beim Pferd potenzielle Kosten bis 25.000 Euro.",
+        "Allianz nennt für die neuen Tarife Erstattung bis 100 Prozent und im Notfall bis zum vierfachen GOT-Satz."
       ]
     },
     "production_plan_item": {
@@ -52,55 +52,55 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Bei der Allianz gibt es die OP-Versicherung für Pferde ab 15,23 Euro pro Monat.",
-        "evidence_text_sha256": "6dbd8edd3ac8abd6bb8b91be4ea639b4c71c8e44b15669e5bfdd3b84c70def21",
-        "statement": "Die Allianz bietet eine Pferde-OP-Versicherung mit einem ausgewiesenen Preis ab 15,23 Euro im Monat an.",
+        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
+        "evidence_text": "Unsere Preise sind fair und decken das individuelle Risiko eines jeden Tieres ab.",
+        "evidence_text_sha256": "2fe039760cf8e4873afd895f9a990223a3f5f9a540649b1acb28cf3f4915bd5c",
+        "statement": "Die Allianz beschreibt die Beiträge zur Tierkrankenversicherung als am individuellen Tier-Risiko orientiert, ohne hier einen festen Monatspreis zu nennen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F2": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Die Kosten für eine Pferde OP-Versicherung sind deutlich niedriger als bei einer Pferdekrankenvollversicherung, da sie sich gezielt auf das finanzielle Risiko teurer Operationen konzentriert.",
-        "evidence_text_sha256": "bab64df0fc11d0d7430f63a631a9715a7b35b4159d311f2827381d411784b13d",
-        "statement": "Eine Pferde-OP-Versicherung konzentriert sich im Unterschied zur Krankenvollversicherung auf das finanzielle Risiko von Operationen.",
+        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
+        "evidence_text": "Zum Beispiel zahlen Pferdebesitzerinnen und -besitzer bei einem Selbstbehalt von 10% maximal 1.500 Euro je Rechnung dazu – auch wenn die Rechnung 30.000 Euro beträgt.",
+        "evidence_text_sha256": "90871fb1d07cb987411b4ede1887a1ee52aef2450827fc888fbdb2b79fdf2f32",
+        "statement": "Bei einem Selbstbehalt von zehn Prozent gibt die Allianz für Pferde eine Kostenobergrenze von 1.500 Euro je Rechnung an.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F3": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Die Selbstbeteiligung ist flexibel und kann bei Abschluss der OP-Versicherung für Pferde individuell festgelegt werden.",
-        "evidence_text_sha256": "fb09c998c9454a87eb1c63e6883a016e409b1a5dee3e9a57fe99b0f368babd6b",
-        "statement": "Die Selbstbeteiligung der Allianz-OP-Versicherung für Pferde ist beim Abschluss individuell wählbar.",
+        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
+        "evidence_text": "Ab dem 4.2.2026 gibt es für jede dieser drei Tierfamilien vier OP-Schutztarife und vier Krankenvolltarife jeweils in den vier Produktlinien Basis, Smart, Komfort und Premium.",
+        "evidence_text_sha256": "47de358641e95848c449381c741336a1052a0564bad1834ceeaa24254f759870",
+        "statement": "Allianz bietet seit Februar 2026 vier OP-Schutztarife für Pferde mit den Linien Basis, Smart, Komfort und Premium.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F4": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Ein Kaltblut oder ein älteres Pferd verursacht meist höhere Prämien als ein junges Pony.",
-        "evidence_text_sha256": "139fd44082ecb255a8852417cd39a8e5492989b0d856f3070debf61a00cc4999",
-        "statement": "Bei der Allianz kann die Pferdeprämie von Rasse und Alter abhängen; ein Kaltblut oder älteres Pferd wird häufig teurer.",
+        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
+        "evidence_text": "Zum Beispiel belaufen sich die Kosten für eine Notfall-OP im Falle einer Magendrehung beim Hund auf bis zu 4.000 Euro, die Kolik-Behandlung beim Pferd beläuft sich mittlerweile auf bis zu 25.000 Euro.",
+        "evidence_text_sha256": "0ad8d10f8c03512c9ea83d341e69da32425751ffa206751820d74343f660b70d",
+        "statement": "Die Allianz nennt für Kolikbehandlungen beim Pferd potenzielle Kosten bis 25.000 Euro.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F5": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Die Produkte der Allianz sind modular aufgebaut und können so Ihrem Bedarf angepasst werden.",
-        "evidence_text_sha256": "313ab3f00d96766904273c2fe9ed2d08e8c6d1e8b78a50e4a0eaa071b47c8a3c",
-        "statement": "Allianz-Versicherungsprodukte sind modular aufgebaut und lassen sich an den gewünschten Schutz anpassen.",
+        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
+        "evidence_text": "Sie alle bieten individuellen Schutz und Erstattung der Kosten bis zu 100% und im Notfall bis zum 4-fachen GOT-Satz.",
+        "evidence_text_sha256": "42893df2b7465e2b3806b84e292ca1082859c3e108735efe0eae7af763a5bc77",
+        "statement": "Allianz nennt für die neuen Tarife Erstattung bis 100 Prozent und im Notfall bis zum vierfachen GOT-Satz.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
