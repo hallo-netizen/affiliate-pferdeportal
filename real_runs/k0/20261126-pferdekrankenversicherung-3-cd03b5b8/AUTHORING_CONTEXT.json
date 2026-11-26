@@ -1,0 +1,152 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wann ist eine Pferdekrankenversicherung sinnvoll?",
+    "target_keyword": "pferdekrankenversicherung sinnvoll",
+    "category": "pferdekrankenversicherung-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "cd03b5b842f152c926bba60a7b3fba597c37b615932f63db5df8d7acaecedcdc"
+  },
+  "content_profile": {
+    "search_intent": "Ob sich eine Pferdekrankenversicherung wirtschaftlich lohnt und wann sie sinnvoll ist."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
+          "source_title": "Agria Pferdekrankenversicherung"
+        }
+      ],
+      "claims": [
+        "Auch mit Versicherung verbleibt bei vereinbarter Selbstbeteiligung ein Kostenanteil beim Pferdehalter.",
+        "Nicht jede Behandlung ist versichert; der tatsächliche Nutzen hängt vom Leistungsumfang ab.",
+        "Leistungsgrenzen einzelner Behandlungen müssen bei der Wirtschaftlichkeitsentscheidung berücksichtigt werden.",
+        "Für die Einschätzung der Versicherung sind Erstattungssatz und Selbstbeteiligung im Versicherungsvertrag wichtig."
+      ],
+      "fresh_research_reference_date": "2026-11-26"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "pferdekrankenversicherung sinnvoll",
+      "topic": "Wann ist eine Pferdekrankenversicherung sinnvoll?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdekrankenversicherung-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Ob sich eine Pferdekrankenversicherung wirtschaftlich lohnt und wann sie sinnvoll ist.",
+      "decision_criteria": [
+        "Leistungsumfang und vertragliche Ausschlüsse",
+        "Beiträge und mögliche Selbstbeteiligung",
+        "Alter und Gesundheitszustand des Pferdes"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
+        "source_title": "Agria Pferdekrankenversicherung",
+        "evidence_text": "Die Selbstbeteiligung ist der Anteil, den du im Schadenfall selbst zahlst.",
+        "evidence_text_sha256": "d0b736b1e6c6a963bfacd3789adcc56076989eab0c9cd9e5877ccc5ac933ad88",
+        "statement": "Auch mit Versicherung verbleibt bei vereinbarter Selbstbeteiligung ein Kostenanteil beim Pferdehalter.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
+        "source_title": "Agria Pferdekrankenversicherung",
+        "evidence_text": "Nicht versichert sind z.B. präventive Behandlungen, alternative Heilmethoden",
+        "evidence_text_sha256": "5d7048fa2989f7f350cbafe232b7e08444cf5300553ead3245379ea1ee89046c",
+        "statement": "Nicht jede Behandlung ist versichert; der tatsächliche Nutzen hängt vom Leistungsumfang ab.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
+        "source_title": "Agria Pferdekrankenversicherung",
+        "evidence_text": "Im Premium-Tarif sind bestimmte Zahnbehandlungen bis 500",
+        "evidence_text_sha256": "f9a40c88a7eca7f0168a6cefb282e8fa5674a1776dafab0809e260a816b52636",
+        "statement": "Leistungsgrenzen einzelner Behandlungen müssen bei der Wirtschaftlichkeitsentscheidung berücksichtigt werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
+        "source_title": "Agria Pferdekrankenversicherung",
+        "evidence_text": "Die Höhe der Selbstbeteiligung und der Erstattungssatz stehen im Versicherungsschein.",
+        "evidence_text_sha256": "39182fe8ed5565d84a3c143b8de92bdcaac0f240f2749bb644692a5115f65198",
+        "statement": "Für die Einschätzung der Versicherung sind Erstattungssatz und Selbstbeteiligung im Versicherungsvertrag wichtig.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdekrankenversicherung-beratung/",
+        "anchor": "Pferdekrankenversicherung",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdekrankenversicherung-beratung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdekrankenversicherung-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferdekrankenversicherung",
+      "Pferd",
+      "Leistungen",
+      "Wartezeit",
+      "Versicherungsschutz"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Ziel-Suchfrage lässt sich mit einer klar gegliederten Erklärung genauer und verständlicher beantworten."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
