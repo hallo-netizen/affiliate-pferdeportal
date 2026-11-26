@@ -16,16 +16,16 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-          "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026"
+          "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
+          "source_title": "Allianz Versicherungs-AG – Tierkrankenversicherung für Pferde, Produktsteckbrief Februar 2026"
         }
       ],
       "claims": [
-        "Die Allianz beschreibt die Beiträge zur Tierkrankenversicherung als am individuellen Tier-Risiko orientiert, ohne hier einen festen Monatspreis zu nennen.",
-        "Bei einem Selbstbehalt von zehn Prozent gibt die Allianz für Pferde eine Kostenobergrenze von 1.500 Euro je Rechnung an.",
-        "Allianz bietet seit Februar 2026 vier OP-Schutztarife für Pferde mit den Linien Basis, Smart, Komfort und Premium.",
-        "Die Allianz nennt für Kolikbehandlungen beim Pferd potenzielle Kosten bis 25.000 Euro.",
-        "Allianz nennt für die neuen Tarife Erstattung bis 100 Prozent und im Notfall bis zum vierfachen GOT-Satz."
+        "Allianz nennt für Pferde-OP-Versicherung eine wählbare Selbstbeteiligung einschließlich null und zehn Prozent.",
+        "Allianz führt Kolikoperationen als Beispiele für kostenintensive tierärztliche Eingriffe auf.",
+        "Im offiziellen Allianz-Produktsteckbrief werden Jahreshöchstleistungen als Tarifunterschied dokumentiert.",
+        "Die Allianz beschreibt im Produktsteckbrief sofortigen Versicherungsschutz bei Unfällen.",
+        "Die Allianz bietet eigenen OP-Schutz zur Absicherung medizinisch notwendiger Pferdeoperationen an."
       ]
     },
     "production_plan_item": {
@@ -52,55 +52,55 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
-        "evidence_text": "Unsere Preise sind fair und decken das individuelle Risiko eines jeden Tieres ab.",
-        "evidence_text_sha256": "2fe039760cf8e4873afd895f9a990223a3f5f9a540649b1acb28cf3f4915bd5c",
-        "statement": "Die Allianz beschreibt die Beiträge zur Tierkrankenversicherung als am individuellen Tier-Risiko orientiert, ohne hier einen festen Monatspreis zu nennen.",
+        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
+        "source_title": "Allianz Versicherungs-AG – Tierkrankenversicherung für Pferde, Produktsteckbrief Februar 2026",
+        "evidence_text": "Die Selbstbeteiligung ist frei wählbar: 0%, 10%",
+        "evidence_text_sha256": "8f712ea891866b995cdf655888873abd5aad13f808130c86a8527c9f7f75ae16",
+        "statement": "Allianz nennt für Pferde-OP-Versicherung eine wählbare Selbstbeteiligung einschließlich null und zehn Prozent.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F2": {
-        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
-        "evidence_text": "Zum Beispiel zahlen Pferdebesitzerinnen und -besitzer bei einem Selbstbehalt von 10% maximal 1.500 Euro je Rechnung dazu – auch wenn die Rechnung 30.000 Euro beträgt.",
-        "evidence_text_sha256": "90871fb1d07cb987411b4ede1887a1ee52aef2450827fc888fbdb2b79fdf2f32",
-        "statement": "Bei einem Selbstbehalt von zehn Prozent gibt die Allianz für Pferde eine Kostenobergrenze von 1.500 Euro je Rechnung an.",
+        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
+        "source_title": "Allianz Versicherungs-AG – Tierkrankenversicherung für Pferde, Produktsteckbrief Februar 2026",
+        "evidence_text": "Kolikoperation",
+        "evidence_text_sha256": "afc1c8679db5aafa54ccb5c0c7aee80a4240c07b07d391b00e60012af1b5f9c3",
+        "statement": "Allianz führt Kolikoperationen als Beispiele für kostenintensive tierärztliche Eingriffe auf.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F3": {
-        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
-        "evidence_text": "Ab dem 4.2.2026 gibt es für jede dieser drei Tierfamilien vier OP-Schutztarife und vier Krankenvolltarife jeweils in den vier Produktlinien Basis, Smart, Komfort und Premium.",
-        "evidence_text_sha256": "47de358641e95848c449381c741336a1052a0564bad1834ceeaa24254f759870",
-        "statement": "Allianz bietet seit Februar 2026 vier OP-Schutztarife für Pferde mit den Linien Basis, Smart, Komfort und Premium.",
+        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
+        "source_title": "Allianz Versicherungs-AG – Tierkrankenversicherung für Pferde, Produktsteckbrief Februar 2026",
+        "evidence_text": "Jahreshöchstleistung",
+        "evidence_text_sha256": "aec74c711238d0308123c3b882961dfee4b4727182d239d7e454ee96323092f9",
+        "statement": "Im offiziellen Allianz-Produktsteckbrief werden Jahreshöchstleistungen als Tarifunterschied dokumentiert.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F4": {
-        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
-        "evidence_text": "Zum Beispiel belaufen sich die Kosten für eine Notfall-OP im Falle einer Magendrehung beim Hund auf bis zu 4.000 Euro, die Kolik-Behandlung beim Pferd beläuft sich mittlerweile auf bis zu 25.000 Euro.",
-        "evidence_text_sha256": "0ad8d10f8c03512c9ea83d341e69da32425751ffa206751820d74343f660b70d",
-        "statement": "Die Allianz nennt für Kolikbehandlungen beim Pferd potenzielle Kosten bis 25.000 Euro.",
+        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
+        "source_title": "Allianz Versicherungs-AG – Tierkrankenversicherung für Pferde, Produktsteckbrief Februar 2026",
+        "evidence_text": "Wartezeit: Sofortiger Versicherungsschutz bei Unfällen.",
+        "evidence_text_sha256": "d924839ad0767fe305688abac741910114dab3e1f2309a38b21eef5687c05758",
+        "statement": "Die Allianz beschreibt im Produktsteckbrief sofortigen Versicherungsschutz bei Unfällen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F5": {
-        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
-        "evidence_text": "Sie alle bieten individuellen Schutz und Erstattung der Kosten bis zu 100% und im Notfall bis zum 4-fachen GOT-Satz.",
-        "evidence_text_sha256": "42893df2b7465e2b3806b84e292ca1082859c3e108735efe0eae7af763a5bc77",
-        "statement": "Allianz nennt für die neuen Tarife Erstattung bis 100 Prozent und im Notfall bis zum vierfachen GOT-Satz.",
+        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
+        "source_title": "Allianz Versicherungs-AG – Tierkrankenversicherung für Pferde, Produktsteckbrief Februar 2026",
+        "evidence_text": "Unser OP-Schutz deckt die Kosten für medizinisch",
+        "evidence_text_sha256": "f83b7f5379c0fecc9289d9d80a508457e9dfec057d08d76c4b6ba5ffc6205f13",
+        "statement": "Die Allianz bietet eigenen OP-Schutz zur Absicherung medizinisch notwendiger Pferdeoperationen an.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
