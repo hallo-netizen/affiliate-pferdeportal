@@ -1,0 +1,133 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welche Pferdekrankenversicherung gibt es in Österreich?",
+    "target_keyword": "pferdekrankenversicherung österreich",
+    "category": "pferdekrankenversicherung-faq",
+    "article_type": "FAQ",
+    "plan_slot": "076808c67af7f8b1a460d4ff87dae1ad2385c7d640be0a644d4408b19b17bd3f"
+  },
+  "content_profile": {
+    "search_intent": "Besonderheiten einer Pferdekrankenversicherung in Österreich und worauf beim Vertragsabschluss zu achten ist."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.hagel.at/versicherung/tierhaltung/pferdeversicherung/",
+          "source_title": "Österreichische Hagelversicherung Pferdeversicherung"
+        }
+      ],
+      "claims": [
+        "Die Österreichische Hagelversicherung bietet Lebens- und Krankenversicherung für Pferde an.",
+        "In Österreich gibt es bei der Hagelversicherung einen gesonderten Kolik-OP-Tarif.",
+        "Bei der österreichischen Hagelversicherung gelten Regelungen zur Ankaufsuntersuchung."
+      ],
+      "fresh_research_reference_date": "2026-11-26"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "pferdekrankenversicherung österreich",
+      "topic": "Welche Pferdekrankenversicherung gibt es in Österreich?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdekrankenversicherung-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Pferdekrankenversicherung gibt es in Österreich?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.hagel.at/versicherung/tierhaltung/pferdeversicherung/",
+        "source_title": "Österreichische Hagelversicherung Pferdeversicherung",
+        "evidence_text": "Bei der Pferdeversicherung können Sie zwischen einer Lebens- und Krankenversicherung wählen.",
+        "evidence_text_sha256": "0d781143c5ac2c25c2da60bcba7da80ea4919d911f4e9fb75858b5422f41c9ab",
+        "statement": "Die Österreichische Hagelversicherung bietet Lebens- und Krankenversicherung für Pferde an.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.hagel.at/versicherung/tierhaltung/pferdeversicherung/",
+        "source_title": "Österreichische Hagelversicherung Pferdeversicherung",
+        "evidence_text": "Variante Kolik: Versichert sind ausschließlich Operationen (OP) infolge von Koliken",
+        "evidence_text_sha256": "f813cf3532ffe17eb6c15a501f6c4dc4499d4896be107e55845d0b96bb888d9a",
+        "statement": "In Österreich gibt es bei der Hagelversicherung einen gesonderten Kolik-OP-Tarif.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.hagel.at/versicherung/tierhaltung/pferdeversicherung/",
+        "source_title": "Österreichische Hagelversicherung Pferdeversicherung",
+        "evidence_text": "Bei der Ankaufsuntersuchung gelten die Richtlinien des Vertrags über die Untersuchung eines Pferds",
+        "evidence_text_sha256": "e61e4bbc536a9be042503f9b0fde4236f6865bf88a4344711bf130a25c5875d8",
+        "statement": "Bei der österreichischen Hagelversicherung gelten Regelungen zur Ankaufsuntersuchung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdekrankenversicherung-faq/",
+        "anchor": "Pferdekrankenversicherung",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdekrankenversicherung-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdekrankenversicherung-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferdekrankenversicherung",
+      "Pferd",
+      "Leistungen",
+      "Wartezeit",
+      "Versicherungsschutz"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Ziel-Suchfrage lässt sich mit einer klar gegliederten Erklärung genauer und verständlicher beantworten."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
