@@ -1,0 +1,175 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wie oft muss ein Pferd im Jahr zum Tierarzt?",
+    "target_keyword": "Wie oft muss ein Pferd im Jahr zum Tierarzt?",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "cbb1d9a6e3379065879feb3c507d3eabdd9294ae31321c7a5a05ca0e16a32442"
+  },
+  "content_profile": {
+    "search_intent": "Wie häufig tierärztliche Vorsorge für Pferde sinnvoll ist und was von Alter, Gesundheitszustand und Nutzung abhängt."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/horse-owners/routine-care-of-horses/routine-health-care-of-horses",
+          "source_title": "MSD Veterinary Manual – Routine Health Care of Horses"
+        }
+      ],
+      "claims": [
+        "Für erwachsene Pferde werden mindestens einmal jährlich umfassende tierärztliche Kontrolluntersuchungen empfohlen.",
+        "Pferde über 20 Jahre sollten mindestens zweimal jährlich tierärztlich untersucht werden, bei Bedarf öfter.",
+        "Zur Gesundheit eines Pferdes gehören mehr als Fütterung und Bewegung.",
+        "Für Gesundheit und Vorsorge sind Impfungen, Parasitenkontrolle und Zahnpflege beim Pferd wichtig.",
+        "Bei anhaltenden Krankheitszeichen sollte eine tierärztliche Untersuchung zeitnah vereinbart werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie oft muss ein Pferd im Jahr zum Tierarzt?",
+      "topic": "Wie oft muss ein Pferd im Jahr zum Tierarzt?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie oft muss ein Pferd im Jahr zum Tierarzt?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/routine-care-of-horses/routine-health-care-of-horses",
+        "source_title": "MSD Veterinary Manual – Routine Health Care of Horses",
+        "evidence_text": "Adult horses should visit the vet for a full checkup at least once a year.",
+        "evidence_text_sha256": "1fd3c73367064b271ac92d56791f88fb5b665c990a41f5299aa66215886c5ad5",
+        "statement": "Für erwachsene Pferde werden mindestens einmal jährlich umfassende tierärztliche Kontrolluntersuchungen empfohlen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/routine-care-of-horses/routine-health-care-of-horses",
+        "source_title": "MSD Veterinary Manual – Routine Health Care of Horses",
+        "evidence_text": "Horses more than 20 years old should see the vet twice a year or more often, because they can get sick more easily.",
+        "evidence_text_sha256": "94389619594a9fceb0fb92cd4cc2eacc928eba4e9360583a73deaa6992cb9286",
+        "statement": "Pferde über 20 Jahre sollten mindestens zweimal jährlich tierärztlich untersucht werden, bei Bedarf öfter.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/routine-care-of-horses/routine-health-care-of-horses",
+        "source_title": "MSD Veterinary Manual – Routine Health Care of Horses",
+        "evidence_text": "To keep your horse healthy, it’s important to do more than just feed and exercise it.",
+        "evidence_text_sha256": "1db44a98cfe54e596c8981a33f25600e5494f6227c2cea2b02d2c2f87a5ec8d2",
+        "statement": "Zur Gesundheit eines Pferdes gehören mehr als Fütterung und Bewegung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/routine-care-of-horses/routine-health-care-of-horses",
+        "source_title": "MSD Veterinary Manual – Routine Health Care of Horses",
+        "evidence_text": "You also need to take care of your horse's health in several ways, including regular visits to the vet for vaccinations, controlling parasites, and taking care of its teeth.",
+        "evidence_text_sha256": "a4c820f4f687465a96d445f93a3511f9648c7f5e585d785eeb6987305baae872",
+        "statement": "Für Gesundheit und Vorsorge sind Impfungen, Parasitenkontrolle und Zahnpflege beim Pferd wichtig.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/routine-care-of-horses/routine-health-care-of-horses",
+        "source_title": "MSD Veterinary Manual – Routine Health Care of Horses",
+        "evidence_text": "If your horse shows any of these signs for more than a day or two, it’s a good idea to schedule a veterinary examination.",
+        "evidence_text_sha256": "8b1ad5acd05d61c13d608204c237ade682ca957c3e1260b3cd72e2977e8da405",
+        "statement": "Bei anhaltenden Krankheitszeichen sollte eine tierärztliche Untersuchung zeitnah vereinbart werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "Pferdegesundheit verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/gesundheit/gesundheit-senioren/",
+        "anchor": "Senioren",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/gesundheit/gesundheit-senioren/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Tierarzt",
+      "Pferd",
+      "Vorsorge",
+      "Gesundheit",
+      "Impfungen",
+      "Kontrolluntersuchungen",
+      "Senioren"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die jährliche und altersbedingte Untersuchungshäufigkeit lässt sich unmittelbar erklären; eine Tabelle bietet in dieser Einzelberatung keinen zusätzlichen Mehrwert."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
