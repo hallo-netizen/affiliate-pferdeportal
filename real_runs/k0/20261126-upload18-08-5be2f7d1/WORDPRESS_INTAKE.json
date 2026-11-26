@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Was sagt Stiftung Warentest zur Pferde OP Versicherung?",
+      "target_keyword": "pferde-op versicherung stiftung warentest",
+      "category": "pferde-op-versicherung-faq",
+      "article_type": "FAQ",
+      "plan_slot": "5be2f7d1f7d8349df8f47858c82f75251d1c58cd077f1f9e3f21ae3b5f926937"
+    }
+  ],
+  "batch_sha256": "6d43055e98e22376a35eefeadcf0e4d63986a967cb4e4b5ffbbf067adc279138"
+}

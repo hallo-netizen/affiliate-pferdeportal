@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie vielen Menschenjahren entsprechen 33 Pferdejahre?",
+      "target_keyword": "Wie alt ist ein 33-jähriges Pferd in Menschenjahren?",
+      "category": "pferdewissen-grundlagen",
+      "article_type": "FAQ",
+      "plan_slot": "2e2da74a8deb8ea236830ab889c995f107a14e9dac424622c1ab3dfa9bc57a7d"
+    }
+  ],
+  "batch_sha256": "0618eff13609a45ab33c213e90b0a7591886662624b967247ed1a533030d995c"
+}

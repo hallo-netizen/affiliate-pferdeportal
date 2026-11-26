@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Anbieter von Pferdekrankenversicherungen vergleichen",
+      "target_keyword": "pferdekrankenversicherung anbieter",
+      "category": "pferdekrankenversicherung-vergleich",
+      "article_type": "Vergleich",
+      "plan_slot": "da15560ece2ae26d93481a259132efeebdc301624fc94df30b725ebdbf50d2f3"
+    }
+  ],
+  "batch_sha256": "56079c4a8117fb30e96aa75700953eb274b9cff955df02965fabd9b410390b86"
+}

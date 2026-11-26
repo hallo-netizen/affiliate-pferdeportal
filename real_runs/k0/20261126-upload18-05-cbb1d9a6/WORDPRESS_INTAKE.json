@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie oft muss ein Pferd im Jahr zum Tierarzt?",
+      "target_keyword": "Wie oft muss ein Pferd im Jahr zum Tierarzt?",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "cbb1d9a6e3379065879feb3c507d3eabdd9294ae31321c7a5a05ca0e16a32442"
+    }
+  ],
+  "batch_sha256": "85b1a00a22c2b921412063785c955e099589733d32797ec8b46d86c63f4e095e"
+}

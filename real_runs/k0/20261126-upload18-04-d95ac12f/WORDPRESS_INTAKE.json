@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Ist eine Haftpflicht für Pferde Pflicht?",
+      "target_keyword": "Ist eine Haftpflicht für Pferde Pflicht?",
+      "category": "pferdehaftpflicht-faq",
+      "article_type": "FAQ",
+      "plan_slot": "d95ac12f3942134ff30f9593473350a7a62c81ba820095d27f6f3b47f70b27ef"
+    }
+  ],
+  "batch_sha256": "898a9d81a0e34b5fdfcd8f6181b3314ffb5ba8659675c95bdd82d95e951f3ef1"
+}

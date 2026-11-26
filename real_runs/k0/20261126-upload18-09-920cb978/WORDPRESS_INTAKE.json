@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Allianz und Uelzener Pferde OP Versicherung im Vergleich",
+      "target_keyword": "pferde-op versicherung allianz oder uelzener",
+      "category": "pferde-op-versicherung-beratung",
+      "article_type": "Vergleich",
+      "plan_slot": "920cb9780252a8fca7d415b590956e28f24575d22a6b9cc0433b2b495810e89a"
+    }
+  ],
+  "batch_sha256": "861a186fbbebc95f644779e91bda0abdcd65348ed39de9112e3250252b6bd252"
+}

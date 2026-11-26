@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche Pferderasse ist am schwierigsten?",
+      "target_keyword": "Welche Pferderasse ist am schwierigsten?",
+      "category": "pferderassen-pferdetypen",
+      "article_type": "FAQ",
+      "plan_slot": "292671f463ec0e9a513a203b6fa3da4e8da25170e6aa607f2b4477104ffde1fd"
+    }
+  ],
+  "batch_sha256": "eb9b2125a39c020a7d661c82c5275173261116f1950ff756ee405d5ace5e0166"
+}

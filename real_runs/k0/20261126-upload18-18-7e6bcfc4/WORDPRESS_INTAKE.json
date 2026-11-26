@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Die Agria Pferdekrankenversicherung",
+      "target_keyword": "agria pferdekrankenversicherung",
+      "category": "pferdekrankenversicherung-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "7e6bcfc4a4df85ffb69ec752ea3b97b7a8beabdb3e5c5234bd62bd0937b85198"
+    }
+  ],
+  "batch_sha256": "58b5ce29e5ca8d01a17ac7aab7742f3eb889da58a397b20048eef75222729cb9"
+}

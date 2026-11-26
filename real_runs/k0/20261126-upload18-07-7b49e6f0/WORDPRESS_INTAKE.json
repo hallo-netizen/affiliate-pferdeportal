@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Was kostet eine Pferde OP Versicherung?",
+      "target_keyword": "pferde op versicherung kosten",
+      "category": "pferde-op-versicherung-tarife-und-kosten",
+      "article_type": "Beratung",
+      "plan_slot": "7b49e6f0aa5906e1cf1017de26fcad3413403d384e4893d3dc2be0ecd426c856"
+    }
+  ],
+  "batch_sha256": "3f061c98672d9ad7ac3b708239049ccf8913aa6383f7dce6ef2f1e2a7ea6f00e"
+}

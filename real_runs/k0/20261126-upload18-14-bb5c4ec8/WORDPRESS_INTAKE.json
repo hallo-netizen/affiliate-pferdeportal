@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Erfahrungen mit Pferde OP Versicherungen",
+      "target_keyword": "pferde op-versicherung erfahrungen",
+      "category": "pferde-op-versicherung-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "bb5c4ec8f142547f1baaf9153ba62d41572e9aedfb111959ea25d886fecd5526"
+    }
+  ],
+  "batch_sha256": "9cd360a32034b188f1c47ebbdfe2b671d1a01b562c148177ed342ccbabc7fd11"
+}

@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Erfahrungen mit der Allianz Pferdekrankenversicherung",
+      "target_keyword": "allianz pferdekrankenversicherung erfahrungen",
+      "category": "pferdekrankenversicherung-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "88357673adb77bea6350158019d2871bef1ebac797703f2ce1b3b0017b2844fa"
+    }
+  ],
+  "batch_sha256": "ae2ebb5673544bee1aca65fea2f771caeba61a37b43defb60b18fdcf965a0f43"
+}

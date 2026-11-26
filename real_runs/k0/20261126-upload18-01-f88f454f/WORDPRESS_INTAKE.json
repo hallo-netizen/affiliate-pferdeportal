@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche Pferderasse hat die höchste Lebenserwartung?",
+      "target_keyword": "Welche Pferderasse hat die höchste Lebenserwartung?",
+      "category": "pferderassen-pferdetypen",
+      "article_type": "FAQ",
+      "plan_slot": "f88f454fb936cb37b65a2907af7d623c769668234f0e51896d7bc8a695a497c2"
+    }
+  ],
+  "batch_sha256": "cef5d1f82f29473305ec2d45591855ca06dbcade0aa93d1238a6918010f6fe23"
+}

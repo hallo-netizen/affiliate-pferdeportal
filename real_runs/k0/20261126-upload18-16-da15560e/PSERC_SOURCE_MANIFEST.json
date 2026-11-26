@@ -1,0 +1,361 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 18,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Welche Pferderasse hat die höchste Lebenserwartung?",
+        "target_keyword": "Welche Pferderasse hat die höchste Lebenserwartung?",
+        "category": "pferderassen-pferdetypen",
+        "article_type": "FAQ",
+        "plan_slot": "f88f454fb936cb37b65a2907af7d623c769668234f0e51896d7bc8a695a497c2"
+      },
+      {
+        "title": "Wie vielen Menschenjahren entsprechen 33 Pferdejahre?",
+        "target_keyword": "Wie alt ist ein 33-jähriges Pferd in Menschenjahren?",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "FAQ",
+        "plan_slot": "2e2da74a8deb8ea236830ab889c995f107a14e9dac424622c1ab3dfa9bc57a7d"
+      },
+      {
+        "title": "Welche Pferderasse ist am schwierigsten?",
+        "target_keyword": "Welche Pferderasse ist am schwierigsten?",
+        "category": "pferderassen-pferdetypen",
+        "article_type": "FAQ",
+        "plan_slot": "292671f463ec0e9a513a203b6fa3da4e8da25170e6aa607f2b4477104ffde1fd"
+      },
+      {
+        "title": "Ist eine Haftpflicht für Pferde Pflicht?",
+        "target_keyword": "Ist eine Haftpflicht für Pferde Pflicht?",
+        "category": "pferdehaftpflicht-faq",
+        "article_type": "FAQ",
+        "plan_slot": "d95ac12f3942134ff30f9593473350a7a62c81ba820095d27f6f3b47f70b27ef"
+      },
+      {
+        "title": "Wie oft muss ein Pferd im Jahr zum Tierarzt?",
+        "target_keyword": "Wie oft muss ein Pferd im Jahr zum Tierarzt?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "cbb1d9a6e3379065879feb3c507d3eabdd9294ae31321c7a5a05ca0e16a32442"
+      },
+      {
+        "title": "Erfahrungen mit der AGILA Pferdekrankenversicherung",
+        "target_keyword": "agila pferdekrankenversicherung erfahrungen",
+        "category": "pferdekrankenversicherung-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "9418f887909fe061c3f121072fec1c247ca9098f1ab26986c8bcb2d84d905f11"
+      },
+      {
+        "title": "Was kostet eine Pferde OP Versicherung?",
+        "target_keyword": "pferde op versicherung kosten",
+        "category": "pferde-op-versicherung-tarife-und-kosten",
+        "article_type": "Beratung",
+        "plan_slot": "7b49e6f0aa5906e1cf1017de26fcad3413403d384e4893d3dc2be0ecd426c856"
+      },
+      {
+        "title": "Was sagt Stiftung Warentest zur Pferde OP Versicherung?",
+        "target_keyword": "pferde-op versicherung stiftung warentest",
+        "category": "pferde-op-versicherung-faq",
+        "article_type": "FAQ",
+        "plan_slot": "5be2f7d1f7d8349df8f47858c82f75251d1c58cd077f1f9e3f21ae3b5f926937"
+      },
+      {
+        "title": "Allianz und Uelzener Pferde OP Versicherung im Vergleich",
+        "target_keyword": "pferde-op versicherung allianz oder uelzener",
+        "category": "pferde-op-versicherung-beratung",
+        "article_type": "Vergleich",
+        "plan_slot": "920cb9780252a8fca7d415b590956e28f24575d22a6b9cc0433b2b495810e89a"
+      },
+      {
+        "title": "Wie beantragt man die Uelzener Pferde OP Versicherung?",
+        "target_keyword": "uelzener pferde op versicherung antrag",
+        "category": "pferde-op-versicherung-beratung",
+        "article_type": "Anleitung",
+        "plan_slot": "d38cd138eeb433675ece6af90c2af0102230667d7360aca4b0f403daef23f224"
+      },
+      {
+        "title": "Erfahrungen mit der Allianz Pferdekrankenversicherung",
+        "target_keyword": "allianz pferdekrankenversicherung erfahrungen",
+        "category": "pferdekrankenversicherung-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "88357673adb77bea6350158019d2871bef1ebac797703f2ce1b3b0017b2844fa"
+      },
+      {
+        "title": "Leistungen der Uelzener Pferde OP Versicherung",
+        "target_keyword": "uelzener pferde-op-versicherung leistungen",
+        "category": "pferde-op-versicherung-leistungen",
+        "article_type": "Beratung",
+        "plan_slot": "2f6545d43f861936a73878cb71e32ab102f142a0244c1d7584b479c48bd44f2c"
+      },
+      {
+        "title": "Pferdekrankenversicherung Testsieger und Auswahlkriterien",
+        "target_keyword": "pferdekrankenversicherung testsieger",
+        "category": "pferdekrankenversicherung-vergleich",
+        "article_type": "Vergleich",
+        "plan_slot": "88f94cbd20506d7c6f048db5d1ff49cc7f3ab0839ca32c0ee10ffb90e741522a"
+      },
+      {
+        "title": "Erfahrungen mit Pferde OP Versicherungen",
+        "target_keyword": "pferde op-versicherung erfahrungen",
+        "category": "pferde-op-versicherung-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "bb5c4ec8f142547f1baaf9153ba62d41572e9aedfb111959ea25d886fecd5526"
+      },
+      {
+        "title": "Die Pferdekrankenversicherung der Uelzener",
+        "target_keyword": "uelzener versicherung pferdekrankenversicherung",
+        "category": "pferdekrankenversicherung-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "5c52795de15cfe2962b4d79e8061e62ee6c8df9b9a18d310e01a5775011fdb3a"
+      },
+      {
+        "title": "Anbieter von Pferdekrankenversicherungen vergleichen",
+        "target_keyword": "pferdekrankenversicherung anbieter",
+        "category": "pferdekrankenversicherung-vergleich",
+        "article_type": "Vergleich",
+        "plan_slot": "da15560ece2ae26d93481a259132efeebdc301624fc94df30b725ebdbf50d2f3"
+      },
+      {
+        "title": "Kosten der Allianz Pferde OP Versicherung",
+        "target_keyword": "allianz pferde op versicherung kosten",
+        "category": "pferde-op-versicherung-tarife-und-kosten",
+        "article_type": "Beratung",
+        "plan_slot": "d54cd0326bf19547ca86a8041c80369b3efec7cb0f77554cdcf1468a91aaa9c4"
+      },
+      {
+        "title": "Die Agria Pferdekrankenversicherung",
+        "target_keyword": "agria pferdekrankenversicherung",
+        "category": "pferdekrankenversicherung-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "7e6bcfc4a4df85ffb69ec752ea3b97b7a8beabdb3e5c5234bd62bd0937b85198"
+      }
+    ],
+    "batch_sha256": "f7652659766ad67b759d52c365721cfcb4e76012a6551a5b14cdd44525d735a7"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Welche Pferderasse hat die höchste Lebenserwartung?",
+        "target_keyword": "Welche Pferderasse hat die höchste Lebenserwartung?",
+        "category": "pferderassen-pferdetypen",
+        "article_type": "FAQ",
+        "plan_slot": "f88f454fb936cb37b65a2907af7d623c769668234f0e51896d7bc8a695a497c2"
+      },
+      "order_id": "TXE-d9249a59fc98ccdbf4d861a5bf07d246",
+      "article_id": "article:92e9e25a9dcc914bc4387ebe",
+      "search_intent": "Welche Pferderassen eine vergleichsweise hohe Lebenserwartung erreichen und wie solche Angaben einzuordnen sind."
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie vielen Menschenjahren entsprechen 33 Pferdejahre?",
+        "target_keyword": "Wie alt ist ein 33-jähriges Pferd in Menschenjahren?",
+        "category": "pferdewissen-grundlagen",
+        "article_type": "FAQ",
+        "plan_slot": "2e2da74a8deb8ea236830ab889c995f107a14e9dac424622c1ab3dfa9bc57a7d"
+      },
+      "order_id": "TXE-bfd32fd0f6acdef652d4b50c2a20f28c",
+      "article_id": "article:71cd3a109fcbe44afd13818b",
+      "search_intent": "Wie das Alter eines 33 Jahre alten Pferdes mit dem Menschenalter verglichen werden kann und welche Grenzen solche Umrechnungen haben."
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Pferderasse ist am schwierigsten?",
+        "target_keyword": "Welche Pferderasse ist am schwierigsten?",
+        "category": "pferderassen-pferdetypen",
+        "article_type": "FAQ",
+        "plan_slot": "292671f463ec0e9a513a203b6fa3da4e8da25170e6aa607f2b4477104ffde1fd"
+      },
+      "order_id": "TXE-2546c1bbdbdeb8f1b0082a4b631204a2",
+      "article_id": "article:78161a6332c1a9ac6c325181",
+      "search_intent": "Ob sich bestimmte Pferderassen grundsätzlich als schwierig bezeichnen lassen und welche Eigenschaften und Haltungserfahrungen entscheidend sind."
+    },
+    {
+      "metadata_binding": {
+        "title": "Ist eine Haftpflicht für Pferde Pflicht?",
+        "target_keyword": "Ist eine Haftpflicht für Pferde Pflicht?",
+        "category": "pferdehaftpflicht-faq",
+        "article_type": "FAQ",
+        "plan_slot": "d95ac12f3942134ff30f9593473350a7a62c81ba820095d27f6f3b47f70b27ef"
+      },
+      "order_id": "TXE-b95176cd70701f2a862ac8385630a5e7",
+      "article_id": "article:5191fe6217a5e40c65db0b1f",
+      "search_intent": "Ob eine Pferdehalterhaftpflicht rechtlich vorgeschrieben ist und welche Pflichten im konkreten Fall gelten."
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie oft muss ein Pferd im Jahr zum Tierarzt?",
+        "target_keyword": "Wie oft muss ein Pferd im Jahr zum Tierarzt?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "cbb1d9a6e3379065879feb3c507d3eabdd9294ae31321c7a5a05ca0e16a32442"
+      },
+      "order_id": "TXE-16658c70ec97f949532f03f200d3d811",
+      "article_id": "article:83fa9816e8370d9dcea6553c",
+      "search_intent": "Wie häufig tierärztliche Vorsorge für Pferde sinnvoll ist und was von Alter, Gesundheitszustand und Nutzung abhängt."
+    },
+    {
+      "metadata_binding": {
+        "title": "Erfahrungen mit der AGILA Pferdekrankenversicherung",
+        "target_keyword": "agila pferdekrankenversicherung erfahrungen",
+        "category": "pferdekrankenversicherung-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "9418f887909fe061c3f121072fec1c247ca9098f1ab26986c8bcb2d84d905f11"
+      },
+      "order_id": "TXE-fe47cb1be74e7a846dad8287b408c6b5",
+      "article_id": "article:8bb8326e12133ea2a1a6008f",
+      "search_intent": "Worauf sich die Suche nach Erfahrungen zur AGILA Pferdekrankenversicherung richtet und welche belastbaren Kriterien zu beachten sind."
+    },
+    {
+      "metadata_binding": {
+        "title": "Was kostet eine Pferde OP Versicherung?",
+        "target_keyword": "pferde op versicherung kosten",
+        "category": "pferde-op-versicherung-tarife-und-kosten",
+        "article_type": "Beratung",
+        "plan_slot": "7b49e6f0aa5906e1cf1017de26fcad3413403d384e4893d3dc2be0ecd426c856"
+      },
+      "order_id": "TXE-fa6e18295207f4dd9f44ccecd3fc696c",
+      "article_id": "article:22e71a74476ce82a651c5743",
+      "search_intent": "Welche Kosten bei einer Pferde OP Versicherung entstehen können und welche Tarifmerkmale die Beiträge bestimmen."
+    },
+    {
+      "metadata_binding": {
+        "title": "Was sagt Stiftung Warentest zur Pferde OP Versicherung?",
+        "target_keyword": "pferde-op versicherung stiftung warentest",
+        "category": "pferde-op-versicherung-faq",
+        "article_type": "FAQ",
+        "plan_slot": "5be2f7d1f7d8349df8f47858c82f75251d1c58cd077f1f9e3f21ae3b5f926937"
+      },
+      "order_id": "TXE-74397217cab16d79d459f2b72588394a",
+      "article_id": "article:672b49c78d574c8f6d28e5a8",
+      "search_intent": "Welche Informationen oder Untersuchungen von Stiftung Warentest zu Pferde OP Versicherungen verfügbar sind und wie sie zu verstehen sind."
+    },
+    {
+      "metadata_binding": {
+        "title": "Allianz und Uelzener Pferde OP Versicherung im Vergleich",
+        "target_keyword": "pferde-op versicherung allianz oder uelzener",
+        "category": "pferde-op-versicherung-beratung",
+        "article_type": "Vergleich",
+        "plan_slot": "920cb9780252a8fca7d415b590956e28f24575d22a6b9cc0433b2b495810e89a"
+      },
+      "order_id": "TXE-0e0b74029c783d175463538ef0785ae7",
+      "article_id": "article:a0846ec17142f123f96e2850",
+      "search_intent": "Welche Unterschiede zwischen Pferde OP Versicherungen der Allianz und der Uelzener für eine Auswahl relevant sind."
+    },
+    {
+      "metadata_binding": {
+        "title": "Wie beantragt man die Uelzener Pferde OP Versicherung?",
+        "target_keyword": "uelzener pferde op versicherung antrag",
+        "category": "pferde-op-versicherung-beratung",
+        "article_type": "Anleitung",
+        "plan_slot": "d38cd138eeb433675ece6af90c2af0102230667d7360aca4b0f403daef23f224"
+      },
+      "order_id": "TXE-b34a8e096c538664ad98c8d7f4d1cb71",
+      "article_id": "article:92fc050db31a1359d486a3b8",
+      "search_intent": "Wie der Antrag für eine Pferde OP Versicherung bei der Uelzener abläuft und welche Unterlagen erforderlich sein können."
+    },
+    {
+      "metadata_binding": {
+        "title": "Erfahrungen mit der Allianz Pferdekrankenversicherung",
+        "target_keyword": "allianz pferdekrankenversicherung erfahrungen",
+        "category": "pferdekrankenversicherung-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "88357673adb77bea6350158019d2871bef1ebac797703f2ce1b3b0017b2844fa"
+      },
+      "order_id": "TXE-a695ebd378a3676cc08ea972df3ea385",
+      "article_id": "article:89a61c175a6239d599fbce55",
+      "search_intent": "Welche belastbaren Erfahrungen und Leistungsmerkmale bei der Allianz Pferdekrankenversicherung für Interessenten relevant sind."
+    },
+    {
+      "metadata_binding": {
+        "title": "Leistungen der Uelzener Pferde OP Versicherung",
+        "target_keyword": "uelzener pferde-op-versicherung leistungen",
+        "category": "pferde-op-versicherung-leistungen",
+        "article_type": "Beratung",
+        "plan_slot": "2f6545d43f861936a73878cb71e32ab102f142a0244c1d7584b479c48bd44f2c"
+      },
+      "order_id": "TXE-b049d40961186fe70bc96b6838d46e6d",
+      "article_id": "article:f6dafef52e1eb90282b186c1",
+      "search_intent": "Welche vertraglichen Leistungen der Pferde OP Versicherung der Uelzener maßgeblich sind."
+    },
+    {
+      "metadata_binding": {
+        "title": "Pferdekrankenversicherung Testsieger und Auswahlkriterien",
+        "target_keyword": "pferdekrankenversicherung testsieger",
+        "category": "pferdekrankenversicherung-vergleich",
+        "article_type": "Vergleich",
+        "plan_slot": "88f94cbd20506d7c6f048db5d1ff49cc7f3ab0839ca32c0ee10ffb90e741522a"
+      },
+      "order_id": "TXE-d9b8fd0953502f7acde08c5f9cf8fb50",
+      "article_id": "article:c5379b310a3a2eb145331414",
+      "search_intent": "Nach welchen nachvollziehbaren Kriterien Pferdekrankenversicherungen als Testsieger bewertet werden und ob ein belastbarer Testsieger benannt werden kann."
+    },
+    {
+      "metadata_binding": {
+        "title": "Erfahrungen mit Pferde OP Versicherungen",
+        "target_keyword": "pferde op-versicherung erfahrungen",
+        "category": "pferde-op-versicherung-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "bb5c4ec8f142547f1baaf9153ba62d41572e9aedfb111959ea25d886fecd5526"
+      },
+      "order_id": "TXE-ce5b5d58e1a90281b0b8b77d251f2508",
+      "article_id": "article:04ed3b0f6189cefee54109ae",
+      "search_intent": "Welche Erfahrungen und typischen Leistungsfragen bei Pferde OP Versicherungen vor Vertragsabschluss wichtig sind."
+    },
+    {
+      "metadata_binding": {
+        "title": "Die Pferdekrankenversicherung der Uelzener",
+        "target_keyword": "uelzener versicherung pferdekrankenversicherung",
+        "category": "pferdekrankenversicherung-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "5c52795de15cfe2962b4d79e8061e62ee6c8df9b9a18d310e01a5775011fdb3a"
+      },
+      "order_id": "TXE-0539fce2e54da46a1519e311143a1ae4",
+      "article_id": "article:baec808730cc332f572e9f07",
+      "search_intent": "Welche Leistungen und Bedingungen die Uelzener Pferdekrankenversicherung anbietet."
+    },
+    {
+      "metadata_binding": {
+        "title": "Anbieter von Pferdekrankenversicherungen vergleichen",
+        "target_keyword": "pferdekrankenversicherung anbieter",
+        "category": "pferdekrankenversicherung-vergleich",
+        "article_type": "Vergleich",
+        "plan_slot": "da15560ece2ae26d93481a259132efeebdc301624fc94df30b725ebdbf50d2f3"
+      },
+      "order_id": "TXE-2dd6cb1eb876d6be4a55f7a77015d53a",
+      "article_id": "article:932343c4d79b2a882ca75373",
+      "search_intent": "Welche Anbieter von Pferdekrankenversicherungen es gibt und worin sie sich für die Auswahl unterscheiden."
+    },
+    {
+      "metadata_binding": {
+        "title": "Kosten der Allianz Pferde OP Versicherung",
+        "target_keyword": "allianz pferde op versicherung kosten",
+        "category": "pferde-op-versicherung-tarife-und-kosten",
+        "article_type": "Beratung",
+        "plan_slot": "d54cd0326bf19547ca86a8041c80369b3efec7cb0f77554cdcf1468a91aaa9c4"
+      },
+      "order_id": "TXE-115b1e052abcb16737cf8ae3ab94d67b",
+      "article_id": "article:4db2546129b21cd1259ee2b5",
+      "search_intent": "Welche Kosten für die Pferde OP Versicherung der Allianz zu erwarten sind und wovon sie abhängen."
+    },
+    {
+      "metadata_binding": {
+        "title": "Die Agria Pferdekrankenversicherung",
+        "target_keyword": "agria pferdekrankenversicherung",
+        "category": "pferdekrankenversicherung-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "7e6bcfc4a4df85ffb69ec752ea3b97b7a8beabdb3e5c5234bd62bd0937b85198"
+      },
+      "order_id": "TXE-db43052e32dcc7592744e53d4d793465",
+      "article_id": "article:b4edea9dc2bb97986d55a2c6",
+      "search_intent": "Was die Agria Pferdekrankenversicherung auszeichnet und welche Bedingungen für eine Kaufentscheidung wichtig sind."
+    }
+  ],
+  "manifest_sha256": "9acb71cf3766d8ee7fd6b65a190c2b65f4ae75a1f60a4eb279c3f81680f85725"
+}

@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Erfahrungen mit der AGILA Pferdekrankenversicherung",
+      "target_keyword": "agila pferdekrankenversicherung erfahrungen",
+      "category": "pferdekrankenversicherung-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "9418f887909fe061c3f121072fec1c247ca9098f1ab26986c8bcb2d84d905f11"
+    }
+  ],
+  "batch_sha256": "a992cee2459285f19227e15717ea2fb55d09d490e830286d50349df769fe5fc8"
+}

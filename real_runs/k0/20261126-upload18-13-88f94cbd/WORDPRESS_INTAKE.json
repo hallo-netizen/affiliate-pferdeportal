@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Pferdekrankenversicherung Testsieger und Auswahlkriterien",
+      "target_keyword": "pferdekrankenversicherung testsieger",
+      "category": "pferdekrankenversicherung-vergleich",
+      "article_type": "Vergleich",
+      "plan_slot": "88f94cbd20506d7c6f048db5d1ff49cc7f3ab0839ca32c0ee10ffb90e741522a"
+    }
+  ],
+  "batch_sha256": "f6757b219b658357bcf3d06f0d74cc9da08201207b37518df60572700d067d0e"
+}

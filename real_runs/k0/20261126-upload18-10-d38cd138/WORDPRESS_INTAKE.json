@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wie beantragt man die Uelzener Pferde OP Versicherung?",
+      "target_keyword": "uelzener pferde op versicherung antrag",
+      "category": "pferde-op-versicherung-beratung",
+      "article_type": "Anleitung",
+      "plan_slot": "d38cd138eeb433675ece6af90c2af0102230667d7360aca4b0f403daef23f224"
+    }
+  ],
+  "batch_sha256": "fc46db9df49a5fce45f0ea5912889ba51f0b901673d6069c007d0db76e89e73a"
+}

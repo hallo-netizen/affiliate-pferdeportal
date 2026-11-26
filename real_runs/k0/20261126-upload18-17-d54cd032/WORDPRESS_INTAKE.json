@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Kosten der Allianz Pferde OP Versicherung",
+      "target_keyword": "allianz pferde op versicherung kosten",
+      "category": "pferde-op-versicherung-tarife-und-kosten",
+      "article_type": "Beratung",
+      "plan_slot": "d54cd0326bf19547ca86a8041c80369b3efec7cb0f77554cdcf1468a91aaa9c4"
+    }
+  ],
+  "batch_sha256": "c4a4af02b794a3a29495bddd24258be887e0f0cfe9c33c7a833ec9aaa94cc0b3"
+}
