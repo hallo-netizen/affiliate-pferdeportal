@@ -25,9 +25,9 @@
         }
       ],
       "claims": [
-        "Stiftung Warentest untersuchte 2016 neun Pferde-OP-Versicherungstarife von drei Anbietern.",
-        "Stiftung Warentest stellte in ihrem älteren Pferde-OP-Versicherungstest Leistungsausschlüsse bei bestimmten Krankheiten und Operationen fest.",
-        "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
+        "Im historischen Vergleich von 2016 berichtete Stiftung Warentest, dass Allianz und R+V die Erstattung von Pferdeoperationen begrenzten, anders als die Uelzener.",
+        "Stiftung Warentest berichtete für die damals untersuchte Allianz-OP-Police eine Grenze von 10.000 Euro pro Jahr; dies ist kein aktueller Leistungsnachweis.",
+        "Stiftung Warentest dokumentierte für den historischen Allianz-Basistarif zusätzliche Erstattungsgrenzen nach dem Gebührensatz.",
         "Uelzener nennt für Pferdeoperationen wegen Kolik und Unfall eine Wartezeit von fünf Tagen.",
         "Uelzener nennt für Pferdeoperationen wegen Krankheiten eine Wartezeit von zwei Monaten.",
         "Uelzener versichert auch Pferdeoperationen unter Sedierung oder Lokalanästhesie.",
@@ -61,33 +61,33 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
-        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
-        "evidence_text": "neun Tarife von drei Anbietern haben wir unter die Lupe genommen.",
-        "evidence_text_sha256": "dcd68417c6f07e61141ca347ca369f8db14f1986e68216e798b1235f0334be96",
-        "statement": "Stiftung Warentest untersuchte 2016 neun Pferde-OP-Versicherungstarife von drei Anbietern.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-4964838/",
+        "source_title": "Stiftung Warentest – Historischer Pferde-OP-Versicherungsvergleich 2016",
+        "evidence_text": "Allianz und R+V die Summen, die sie für eine Operation bezahlen.",
+        "evidence_text_sha256": "f123c758d7d204daaa28b93be1c88325935e9422c3a0aa46e52673ff0a100484",
+        "statement": "Im historischen Vergleich von 2016 berichtete Stiftung Warentest, dass Allianz und R+V die Erstattung von Pferdeoperationen begrenzten, anders als die Uelzener.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Vergleich"
         ]
       },
       "F2": {
-        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
-        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
-        "evidence_text": "Oft sind bestimmte Erkrankungen und Operationen ausgeschlossen.",
-        "evidence_text_sha256": "03c8a8e001751d6bef26e4dfecf6f7ae7bd5c6099e1b0029916dd1fcc80bf28b",
-        "statement": "Stiftung Warentest stellte in ihrem älteren Pferde-OP-Versicherungstest Leistungsausschlüsse bei bestimmten Krankheiten und Operationen fest.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-4964838/",
+        "source_title": "Stiftung Warentest – Historischer Pferde-OP-Versicherungsvergleich 2016",
+        "evidence_text": "Sie zahlt insgesamt bis 10",
+        "evidence_text_sha256": "f9747523ba5fb9956728ba413eb661b0db9e030768a0a59b6df6c5c79c509f97",
+        "statement": "Stiftung Warentest berichtete für die damals untersuchte Allianz-OP-Police eine Grenze von 10.000 Euro pro Jahr; dies ist kein aktueller Leistungsnachweis.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Vergleich"
         ]
       },
       "F3": {
-        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
-        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
-        "evidence_text": "Einige Versicherer begrenzen zudem die Summen, die sie für eine Operation bezahlen.",
-        "evidence_text_sha256": "e5cbb83fb99a6e4f90a55ab044c711ea0f84ceec8ffbe9ff6eca6e8ea8240b00",
-        "statement": "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-4964838/",
+        "source_title": "Stiftung Warentest – Historischer Pferde-OP-Versicherungsvergleich 2016",
+        "evidence_text": "Die Allianz deckelt die Kosten",
+        "evidence_text_sha256": "413cac1b3da8ddf815e56ba3b6429ebeaed963c95a4bb62923e08d7649eed38c",
+        "statement": "Stiftung Warentest dokumentierte für den historischen Allianz-Basistarif zusätzliche Erstattungsgrenzen nach dem Gebührensatz.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Vergleich"
@@ -204,7 +204,7 @@
       {
         "source_label": "Allianz",
         "nearest_option_heading": "Allianz",
-        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/"
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-4964838/"
       },
       {
         "source_label": "Uelzener",
@@ -218,12 +218,12 @@
       "exception_code": "",
       "rationale": "Die Anbieter unterscheiden sich in eigenständigen Leistungs- und Wartezeitkriterien. Eine präzise Tabelle erleichtert den direkten Vergleich nach den eigentlichen Nutzerfragen.",
       "reader_question": "pferde-op versicherung allianz oder uelzener",
-      "reader_benefit": "Leistung und Wartezeit der konkreten Anbieter lassen sich ohne wiederholtes Querlesen nach dem gleichen Kriterium abgleichen.",
+      "reader_benefit": "Historische Unterschiede von Allianz und Uelzener aus dem Testjahr 2016 werden vom aktuellen Uelzener-Angebot klar unterschieden; neue Allianz-Tarifbedingungen sind durch die historische Quelle nicht bestätigt.",
       "why_not_prose": "Der direkte Vergleich unterschiedlicher Anbieter und ihrer Bedingungen ist im Fließtext weniger übersichtlich und erschwert die Auswahl.",
       "comparison_axes": [
-        "Tarifangebot und Leistungen",
-        "Wartezeiten bei Unfall und Kolik",
-        "Selbstbeteiligung und Erstattung"
+        "Historische Erstattung 2016",
+        "Heutige Uelzener Bedingungen",
+        "Grenzen eines zeitübergreifenden Vergleichs"
       ],
       "source_fact_ids": [
         "F1",
