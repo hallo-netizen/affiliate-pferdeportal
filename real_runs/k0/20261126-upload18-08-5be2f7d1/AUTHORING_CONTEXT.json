@@ -20,8 +20,8 @@
           "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016"
         },
         {
-          "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-          "source_title": "Allianz – Pferde-OP-Versicherung"
+          "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+          "source_title": "Uelzener – Pferde-OP-Versicherung"
         }
       ],
       "claims": [
@@ -30,7 +30,7 @@
         "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
         "Stiftung Warentest fand 2016 im geprüften Angebot auch einen Pferde-OP-Tarif mit breiter Operationsdeckung.",
         "Der Pferdeversicherungstest von Stiftung Warentest wurde am 19. Januar 2016 veröffentlicht.",
-        "Die Allianz versichert medizinisch notwendige Pferdeoperationen wegen Unfall, Krankheit oder Fehlentwicklung."
+        "Eine Pferde-OP-Versicherung erstattet laut Uelzener Leistungen im Zusammenhang mit versicherten Operationen."
       ]
     },
     "production_plan_item": {
@@ -107,11 +107,11 @@
         ]
       },
       "F6": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Die OP-Versicherung deckt medizinisch notwendige Operationen infolge von Unfall, Krankheit oder Fehlentwicklung ab.",
-        "evidence_text_sha256": "535799d78572ce2f917ab4a82128a0a45e759a9ecbb5564b17cf791d4d6847ef",
-        "statement": "Die Allianz versichert medizinisch notwendige Pferdeoperationen wegen Unfall, Krankheit oder Fehlentwicklung.",
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "In der OP-Versicherung werden Leistungen erstattet, die mit einer versicherten OP zusammenhängen.",
+        "evidence_text_sha256": "50915182ef604e8fe073ef2c5d9bf04539ecc3b548be3c307cd2eedea2c6dd85",
+        "statement": "Eine Pferde-OP-Versicherung erstattet laut Uelzener Leistungen im Zusammenhang mit versicherten Operationen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
