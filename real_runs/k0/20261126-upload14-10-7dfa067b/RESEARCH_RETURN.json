@@ -14,8 +14,11 @@
   "issues": [
     {
       "fact_id": "F6",
-      "reason": "RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL",
-      "source_url": "https://www.check24.de/pferde-op-versicherung/"
+      "reason": "ORIGINAL_SOURCE_NOT_RETRIEVABLE"
+    },
+    {
+      "fact_id": "F7",
+      "reason": "ORIGINAL_SOURCE_NOT_RETRIEVABLE"
     }
   ],
   "next_action": "RESEARCH_AGAIN_OR_PROVE_ORIGINAL_SOURCE_AND_RESUBMIT_SAME_RUN",
