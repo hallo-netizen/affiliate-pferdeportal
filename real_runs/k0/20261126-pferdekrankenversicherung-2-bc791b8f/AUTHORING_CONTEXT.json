@@ -1,0 +1,152 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Pferdekrankenversicherung Leistungen und Schutz im Überblick",
+    "target_keyword": "pferdekrankenversicherung",
+    "category": "pferdekrankenversicherung-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "bc791b8f7214ec9516c7da6c6ce9c80f361f8abbda7f4779cb4f837cec684152"
+  },
+  "content_profile": {
+    "search_intent": "Grundlagen des Krankenversicherungsschutzes für Pferde, Leistungsumfang und wesentliche Vertragsgrenzen."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
+          "source_title": "Agria Pferdekrankenversicherung"
+        }
+      ],
+      "claims": [
+        "Die Selbstbeteiligung ist der von Haltern selbst zu zahlende Anteil.",
+        "Agria erstattet bestimmte Zahnbehandlungen nur im Premiumtarif und innerhalb eines jährlichen Limits.",
+        "Bestimmte Vorsorgeleistungen und alternative Heilverfahren sind bei Agria ausgeschlossen.",
+        "Der Versicherungswechsel ist unter Bedingungen ohne neue Wartezeit möglich."
+      ],
+      "fresh_research_reference_date": "2026-11-26"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "pferdekrankenversicherung",
+      "topic": "Pferdekrankenversicherung Leistungen und Schutz im Überblick",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdekrankenversicherung-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Grundlagen des Krankenversicherungsschutzes für Pferde, Leistungsumfang und wesentliche Vertragsgrenzen.",
+      "decision_criteria": [
+        "Leistungsumfang und vertragliche Ausschlüsse",
+        "Beiträge und mögliche Selbstbeteiligung",
+        "Alter und Gesundheitszustand des Pferdes"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
+        "source_title": "Agria Pferdekrankenversicherung",
+        "evidence_text": "Die Selbstbeteiligung ist der Anteil, den du im Schadenfall selbst zahlst.",
+        "evidence_text_sha256": "d0b736b1e6c6a963bfacd3789adcc56076989eab0c9cd9e5877ccc5ac933ad88",
+        "statement": "Die Selbstbeteiligung ist der von Haltern selbst zu zahlende Anteil.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
+        "source_title": "Agria Pferdekrankenversicherung",
+        "evidence_text": "Im Premium-Tarif sind bestimmte Zahnbehandlungen bis 500",
+        "evidence_text_sha256": "f9a40c88a7eca7f0168a6cefb282e8fa5674a1776dafab0809e260a816b52636",
+        "statement": "Agria erstattet bestimmte Zahnbehandlungen nur im Premiumtarif und innerhalb eines jährlichen Limits.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
+        "source_title": "Agria Pferdekrankenversicherung",
+        "evidence_text": "Nicht versichert sind z.B. präventive Behandlungen, alternative Heilmethoden",
+        "evidence_text_sha256": "5d7048fa2989f7f350cbafe232b7e08444cf5300553ead3245379ea1ee89046c",
+        "statement": "Bestimmte Vorsorgeleistungen und alternative Heilverfahren sind bei Agria ausgeschlossen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
+        "source_title": "Agria Pferdekrankenversicherung",
+        "evidence_text": "In der Regel kannst du problemlos und ohne Wartezeiten zu uns wechseln",
+        "evidence_text_sha256": "f6c36304678d4b4d953c73f813e65bfbec7c47a92038234ed8bfd55158c238e0",
+        "statement": "Der Versicherungswechsel ist unter Bedingungen ohne neue Wartezeit möglich.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdekrankenversicherung-beratung/",
+        "anchor": "Pferdekrankenversicherung",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdekrankenversicherung-beratung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdekrankenversicherung-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferdekrankenversicherung",
+      "Pferd",
+      "Leistungen",
+      "Wartezeit",
+      "Versicherungsschutz"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Ziel-Suchfrage lässt sich mit einer klar gegliederten Erklärung genauer und verständlicher beantworten."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
