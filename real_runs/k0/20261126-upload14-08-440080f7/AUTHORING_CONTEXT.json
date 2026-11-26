@@ -20,10 +20,6 @@
           "source_title": "Uelzener – Pferde-OP-Versicherung"
         },
         {
-          "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-          "source_title": "Allianz – Pferde-OP-Versicherung"
-        },
-        {
           "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
           "source_title": "Agria – Pferdeversicherung"
         }
@@ -31,9 +27,9 @@
       "claims": [
         "Auf der offiziellen Uelzener-Seite wird der Pferde-OP-Versicherungstarif ab 46,09 Euro pro Monat beworben.",
         "Uelzener gibt für ihren Pferde-OP-Tarif 100 Prozent Erstattung unabhängig vom GOT-Satz an.",
-        "Allianz bewirbt einen Pferde-OP-Tarif mit einem Ab-Preis von 15,23 Euro im Monat, abhängig von den Beispielannahmen.",
-        "Allianz stellt klar, dass der Pferde-OP-Schutz medizinisch notwendige Operationen aufgrund von Unfall, Krankheit oder Fehlentwicklung umfasst.",
-        "Allianz grenzt die reine OP-Versicherung von der Vollkrankenversicherung ab: Behandlungen ohne Operation sind im OP-Schutz nicht enthalten.",
+        "Die Uelzener-Pferde-OP-Versicherung schließt laut Angebot drei Tage Vorbehandlung und 17 Kalendertage Nachbehandlung ein.",
+        "Agria verspricht sofortigen Schutz bei Unfällen und Koliken und nach 20 Tagen bei Erkrankungen.",
+        "Agria nennt Pferdekrankenversicherung mit Erstattung von Tierarztkosten bei Krankheit oder Verletzung.",
         "Agria erklärt, dass die Kosten einer Pferdekrankenversicherung von mehreren Faktoren abhängen."
       ]
     },
@@ -53,8 +49,8 @@
     "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
     "type_meta": {
       "comparison_targets": [
-        "Allianz",
-        "Uelzener"
+        "Uelzener",
+        "Agria"
       ],
       "comparison_criteria": [
         "Beitrag",
@@ -86,33 +82,33 @@
         ]
       },
       "F3": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Bei der Allianz gibt es die OP-Versicherung für Pferde ab 15,23 Euro pro Monat.",
-        "evidence_text_sha256": "6dbd8edd3ac8abd6bb8b91be4ea639b4c71c8e44b15669e5bfdd3b84c70def21",
-        "statement": "Allianz bewirbt einen Pferde-OP-Tarif mit einem Ab-Preis von 15,23 Euro im Monat, abhängig von den Beispielannahmen.",
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "3 Tage Vor- und 17 Kalendertage Nachbehandlung",
+        "evidence_text_sha256": "224346299c82c116c7ea8037c4ce0ff311ed67fdd05c27f9e6b2df3497d90ccc",
+        "statement": "Die Uelzener-Pferde-OP-Versicherung schließt laut Angebot drei Tage Vorbehandlung und 17 Kalendertage Nachbehandlung ein.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Vergleich"
         ]
       },
       "F4": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Die OP-Versicherung deckt medizinisch notwendige Operationen infolge von Unfall, Krankheit oder Fehlentwicklung ab.",
-        "evidence_text_sha256": "535799d78572ce2f917ab4a82128a0a45e759a9ecbb5564b17cf791d4d6847ef",
-        "statement": "Allianz stellt klar, dass der Pferde-OP-Schutz medizinisch notwendige Operationen aufgrund von Unfall, Krankheit oder Fehlentwicklung umfasst.",
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
+        "source_title": "Agria – Pferdeversicherung",
+        "evidence_text": "Schützt dich sofort nach Abschluss bei Unfällen und Koliken sowie nach 20 Tagen bei Erkrankungen.",
+        "evidence_text_sha256": "08650130d50d690d3eb5fb0642928bb9964b58f847daa2af5c2036fa0d9c68aa",
+        "statement": "Agria verspricht sofortigen Schutz bei Unfällen und Koliken und nach 20 Tagen bei Erkrankungen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Vergleich"
         ]
       },
       "F5": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Im OP-Schutz sind keine Behandlungen ohne eine Operation beispielsweise Therapien für chronische Leiden wie Arthrose abgesichert.",
-        "evidence_text_sha256": "9071038a75b8fd215ee665cb1e24e90cd4d020a7e7c860bdc3a1afbe26c87306",
-        "statement": "Allianz grenzt die reine OP-Versicherung von der Vollkrankenversicherung ab: Behandlungen ohne Operation sind im OP-Schutz nicht enthalten.",
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
+        "source_title": "Agria – Pferdeversicherung",
+        "evidence_text": "Erstattung der Tierarztkosten bei Krankheit oder Verletzung deines Pferdes.",
+        "evidence_text_sha256": "66d91434f863876ca983d24f26ca4ced6c2bb61b7f43a243a668c0201124485e",
+        "statement": "Agria nennt Pferdekrankenversicherung mit Erstattung von Tierarztkosten bei Krankheit oder Verletzung.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Vergleich"
@@ -212,7 +208,18 @@
       "Versicherungen",
       "Recht"
     ],
-    "comparison_source_bindings": [],
+    "comparison_source_bindings": [
+      {
+        "source_label": "Uelzener",
+        "nearest_option_heading": "Uelzener",
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/"
+      },
+      {
+        "source_label": "Agria",
+        "nearest_option_heading": "Agria",
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/"
+      }
+    ],
     "table_decision": {
       "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
       "decision": "INCLUDE_ADDED_VALUE",
