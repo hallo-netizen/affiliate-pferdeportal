@@ -1,0 +1,221 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Uelzener Pferde OP Versicherung Premium im Überblick",
+    "target_keyword": "uelzener pferde op versicherung premium",
+    "category": "pferde-op-versicherung-tarife-und-kosten",
+    "article_type": "Beratung",
+    "plan_slot": "ca3b4c489b03347497dce8893c0de612312f0b5d754e9999363beeb2cde7ebe3"
+  },
+  "content_profile": {
+    "search_intent": "Leistungs- und Tarifprofil der Premium Variante der Uelzener Pferde OP Versicherung"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+          "source_title": "Uelzener – Pferde-OP-Versicherung"
+        },
+        {
+          "source_url": "https://uelzener.de/filemanager/downloadFile/blogFiles/48cbf6c2-7282-4849-b90e-72c47bce7ec6.pdf/Tierkrankenversicherung_Endartikel.pdf",
+          "source_title": "Finanztest 2/2016 – Privatpatient Pferd (Original-Nachdruck auf Uelzener)"
+        }
+      ],
+      "claims": [
+        "Uelzener versichert auch Pferdeoperationen unter Sedierung oder Lokalanästhesie.",
+        "Der Uelzener-OP-Schutz erstattet Leistungen im Zusammenhang mit einer versicherten Pferdeoperation.",
+        "Uelzener versichert Operationen unter Beachtung vereinbarter Wartezeiten und Ausschlüsse.",
+        "Uelzener schließt die Behandlung von Hufabzessen und Hufgeschwüren aus dem Pferde-OP-Versicherungsschutz aus.",
+        "Uelzener erstattet versicherte Pferde-OP-Kosten laut Anbieter bis zur gewählten Erstattungshöhe unabhängig vom GOT-Satz.",
+        "Der damalige Uelzener-Tarif Premium Plus deckte nach Finanztest viele Operationen ab, mit Ausnahmen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "uelzener pferde op versicherung premium",
+      "topic": "Uelzener Pferde OP Versicherung Premium im Überblick",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-op-versicherung-tarife-und-kosten",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Uelzener Premium-OP-Bezeichnungen gegenüber den dokumentierten Vertragsleistungen und Ausschlüssen einordnen.",
+      "decision_criteria": [
+        "Operationsschutz",
+        "Ausschlüsse",
+        "Tarifbezeichnung"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Auch Operationen unter Sedierung oder Lokalanästhesie sind mitversichert.",
+        "evidence_text_sha256": "827300a36a06d2a3ff8065b99199feed2709be96c89a07a62ba95a388596df4a",
+        "statement": "Uelzener versichert auch Pferdeoperationen unter Sedierung oder Lokalanästhesie.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "In der OP-Versicherung werden Leistungen erstattet, die mit einer versicherten OP zusammenhängen.",
+        "evidence_text_sha256": "50915182ef604e8fe073ef2c5d9bf04539ecc3b548be3c307cd2eedea2c6dd85",
+        "statement": "Der Uelzener-OP-Schutz erstattet Leistungen im Zusammenhang mit einer versicherten Pferdeoperation.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Versichert sind alle Operationen, die nach Ablauf der Wartezeit auftreten.",
+        "evidence_text_sha256": "1ee7afa5d6818b30492991fae51e378d61a46bd029fc3ab2a51f8cdb2a2eaa50",
+        "statement": "Uelzener versichert Operationen unter Beachtung vereinbarter Wartezeiten und Ausschlüsse.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Vom Versicherungsschutz ausgeschlossen sind die Behandlungen von Hufabzessen und Hufgeschwüren.",
+        "evidence_text_sha256": "c2285e6cfd13ffabf039b73405e145c03ca40a08fe9f26559f8df3a48fd5a19d",
+        "statement": "Uelzener schließt die Behandlung von Hufabzessen und Hufgeschwüren aus dem Pferde-OP-Versicherungsschutz aus.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Wir erstatten 100% der versicherten Kosten unabhängig vom GOT-Satz (Gebührenordnung für Tierärzte) bis zur gewählten Erstattungshöhe.",
+        "evidence_text_sha256": "2a5520af9cf513135f63fd70ef71b9c1f634567265e092161affcb17f2b55ff9",
+        "statement": "Uelzener erstattet versicherte Pferde-OP-Kosten laut Anbieter bis zur gewählten Erstattungshöhe unabhängig vom GOT-Satz.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F6": {
+        "source_url": "https://uelzener.de/filemanager/downloadFile/blogFiles/48cbf6c2-7282-4849-b90e-72c47bce7ec6.pdf/Tierkrankenversicherung_Endartikel.pdf",
+        "source_title": "Finanztest 2/2016 – Privatpatient Pferd (Original-Nachdruck auf Uelzener)",
+        "evidence_text": "Im Premium Plus erstattet die Uelzener bis auf wenige Ausnahmen jede Operation.",
+        "evidence_text_sha256": "52218f0a90ef8fe13e9154e784962576e563df6dbea4c83a4eb2bd7184d0b440",
+        "statement": "Der damalige Uelzener-Tarif Premium Plus deckte nach Finanztest viele Operationen ab, mit Ausnahmen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-op-versicherung-tarife-und-kosten/",
+        "anchor": "Pferdeversicherung Beratung",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-op-versicherung-tarife-und-kosten/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-op-versicherung-tarife-und-kosten",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Versicherung",
+      "Pferde",
+      "Krankenschutz",
+      "OP",
+      "Kosten",
+      "Beitrag",
+      "Behandlung",
+      "Leistungen",
+      "Fragen",
+      "Vertrag",
+      "Erstattung",
+      "Tarif",
+      "Vergleich",
+      "Allianz",
+      "Uelzener",
+      "Barmenia",
+      "HUK",
+      "Agria",
+      "Check24",
+      "Erfahrungen",
+      "Schutz",
+      "Pferdekrankenversicherung",
+      "Pferdeversicherung",
+      "Fristen",
+      "Alter",
+      "Wartezeit",
+      "Bedingungen",
+      "Auswahl",
+      "Versicherungen",
+      "Recht"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die konkrete Frage lässt sich anhand offiziell dokumentierter Tarifbedingungen besser im Fließtext beantworten; eine zusätzliche Tabelle böte keinen verlässlichen Mehrwert."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
