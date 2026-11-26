@@ -16,8 +16,8 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-          "source_title": "Allianz – Pferde-OP-Versicherung"
+          "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
+          "source_title": "Allianz – Tierkrankenversicherung für Pferde (Produktsteckbrief)"
         }
       ],
       "claims": [
@@ -48,10 +48,10 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Die Pferdekrankenversicherung kann ab einem Alter von acht Wochen abgeschlossen werden und bleibt während der gesamten Lebensdauer Ihres Pferds bestehen.",
-        "evidence_text_sha256": "3d0a59cebdda8b8d0e2afaa107b9ab641198014e16fe36b60040e31b7e2e2e11",
+        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
+        "source_title": "Allianz – Tierkrankenversicherung für Pferde (Produktsteckbrief)",
+        "evidence_text": "Lebenslanger Schutz: Wir versichern Ihr Pferd ab der achten Lebenswoche und auch ältere Tiere erhalten eine lebenslange Absicherung.",
+        "evidence_text_sha256": "305ddda5f8b37bf82408debdafb8f1a3bbe25503a34c608062e3e3d4e1023ec6",
         "statement": "Allianz nennt für ihre Pferdekrankenversicherung den Abschluss ab acht Wochen und die Fortführung über die Lebenszeit des Pferdes.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
@@ -59,10 +59,10 @@
         ]
       },
       "F2": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Bei Unfällen gibt es keine Wartezeit, der Versicherungsschutz beginnt sofort.",
-        "evidence_text_sha256": "349427fd2558b0469054999982ff732b9337c15be2e00cbef856ff9f5954e500",
+        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
+        "source_title": "Allianz – Tierkrankenversicherung für Pferde (Produktsteckbrief)",
+        "evidence_text": "Sofortiger Versicherungsschutz bei Unfällen.",
+        "evidence_text_sha256": "41aeac4929970869c54e4f4f7a2c8a7e5c18044c81d99e49d46349c03e889d0e",
         "statement": "Allianz nennt für Unfälle einen sofortigen Beginn des OP-Versicherungsschutzes.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
@@ -70,10 +70,10 @@
         ]
       },
       "F3": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Für Krankheiten gilt eine Wartezeit von drei Monaten.",
-        "evidence_text_sha256": "8fcc2ca36441c70a49a19b521c4c51819d28db00f688227fac91de6ba8e9bc79",
+        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
+        "source_title": "Allianz – Tierkrankenversicherung für Pferde (Produktsteckbrief)",
+        "evidence_text": "Wartezeit von drei Monaten.",
+        "evidence_text_sha256": "811baf23f46e6cf6f04c2972d22caf420c2bed5b60cebcd01cea4722ea545bab",
         "statement": "Für krankheitsbedingte Operationen nennt Allianz drei Monate Wartezeit.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
@@ -81,10 +81,10 @@
         ]
       },
       "F4": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Für Kolik gilt eine Wartezeit von 5 Tagen.",
-        "evidence_text_sha256": "10abf03ab6b6f0e228e2741bdb5ad4ce3b082a8b2112e9edc8b0a71382e892b4",
+        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
+        "source_title": "Allianz – Tierkrankenversicherung für Pferde (Produktsteckbrief)",
+        "evidence_text": "Die Wartezeit für Kolik beträgt fünf Tage.",
+        "evidence_text_sha256": "bf0e728101304053bc48ba78eb0abb77ccfa85001d067045e64df60a943f8899",
         "statement": "Allianz nennt für Koliken fünf Tage Wartezeit.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
@@ -92,10 +92,10 @@
         ]
       },
       "F5": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Die OP-Versicherung deckt medizinisch notwendige Operationen infolge von Unfall, Krankheit oder Fehlentwicklung ab.",
-        "evidence_text_sha256": "535799d78572ce2f917ab4a82128a0a45e759a9ecbb5564b17cf791d4d6847ef",
+        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
+        "source_title": "Allianz – Tierkrankenversicherung für Pferde (Produktsteckbrief)",
+        "evidence_text": "Unser OP-Schutz deckt die Kosten für medizinisch notwendige Operationen aufgrund von Unfall, Krankheit oder Fehlentwicklung ab.",
+        "evidence_text_sha256": "97dbac629a9751c6328333f6afca8c76d720997f705b698f91ab0668a2f5cb4c",
         "statement": "Allianz stellt klar, dass der Pferde-OP-Schutz medizinisch notwendige Operationen aufgrund von Unfall, Krankheit oder Fehlentwicklung umfasst.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
@@ -103,10 +103,10 @@
         ]
       },
       "F6": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Im OP-Schutz sind keine Behandlungen ohne eine Operation beispielsweise Therapien für chronische Leiden wie Arthrose abgesichert.",
-        "evidence_text_sha256": "9071038a75b8fd215ee665cb1e24e90cd4d020a7e7c860bdc3a1afbe26c87306",
+        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
+        "source_title": "Allianz – Tierkrankenversicherung für Pferde (Produktsteckbrief)",
+        "evidence_text": "Der Vollschutz deckt neben den Kosten für Operationen auch die Kosten für notwendige Behandlungen ohne Operationen ab.",
+        "evidence_text_sha256": "3a8f2c028f87c62ac399fd481a51493335bed38cf86d3b1ccf7b37b5e222bd87",
         "statement": "Allianz grenzt die reine OP-Versicherung von der Vollkrankenversicherung ab: Behandlungen ohne Operation sind im OP-Schutz nicht enthalten.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
