@@ -20,10 +20,6 @@
           "source_title": "Wikipedia – Check24"
         },
         {
-          "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-          "source_title": "Allianz – Pferde-OP-Versicherung"
-        },
-        {
           "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
           "source_title": "Uelzener – Pferde-OP-Versicherung"
         },
@@ -37,9 +33,9 @@
         "Check24 betreibt ein Preisvergleichsportal.",
         "Check24 ist ein Vergleichsdienst für verschiedene Produktgruppen.",
         "Versicherungen gehören zu den von Check24 allgemein angebotenen Vergleichsbereichen.",
-        "Allianz stellt klar, dass der Pferde-OP-Schutz medizinisch notwendige Operationen aufgrund von Unfall, Krankheit oder Fehlentwicklung umfasst.",
         "Auf der offiziellen Uelzener-Seite wird der Pferde-OP-Versicherungstarif ab 46,09 Euro pro Monat beworben.",
-        "Agria nennt Pferdekrankenversicherung mit Erstattung von Tierarztkosten bei Krankheit oder Verletzung."
+        "Agria nennt Pferdekrankenversicherung mit Erstattung von Tierarztkosten bei Krankheit oder Verletzung.",
+        "Agria erklärt, dass die Kosten einer Pferdekrankenversicherung von mehreren Faktoren abhängen."
       ]
     },
     "production_plan_item": {
@@ -105,17 +101,6 @@
         ]
       },
       "F5": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Die OP-Versicherung deckt medizinisch notwendige Operationen infolge von Unfall, Krankheit oder Fehlentwicklung ab.",
-        "evidence_text_sha256": "535799d78572ce2f917ab4a82128a0a45e759a9ecbb5564b17cf791d4d6847ef",
-        "statement": "Allianz stellt klar, dass der Pferde-OP-Schutz medizinisch notwendige Operationen aufgrund von Unfall, Krankheit oder Fehlentwicklung umfasst.",
-        "claim_status": "FULLY_SUPPORTED",
-        "article_types": [
-          "FAQ"
-        ]
-      },
-      "F6": {
         "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
         "source_title": "Uelzener – Pferde-OP-Versicherung",
         "evidence_text": "ab 46,09 €/Monat*",
@@ -126,12 +111,23 @@
           "FAQ"
         ]
       },
-      "F7": {
+      "F6": {
         "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
         "source_title": "Agria – Pferdeversicherung",
         "evidence_text": "Erstattung der Tierarztkosten bei Krankheit oder Verletzung deines Pferdes.",
         "evidence_text_sha256": "66d91434f863876ca983d24f26ca4ced6c2bb61b7f43a243a668c0201124485e",
         "statement": "Agria nennt Pferdekrankenversicherung mit Erstattung von Tierarztkosten bei Krankheit oder Verletzung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F7": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
+        "source_title": "Agria – Pferdeversicherung",
+        "evidence_text": "Die Kosten einer Pferde-Krankenversicherung hängen von mehreren Faktoren ab:",
+        "evidence_text_sha256": "e4a41acc875cc2d69e75e8496cf2f0be24e7524189c73bb0b8c3f83db976468c",
+        "statement": "Agria erklärt, dass die Kosten einer Pferdekrankenversicherung von mehreren Faktoren abhängen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
