@@ -206,7 +206,7 @@
       "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
       "decision": "OMIT_NO_ADDED_VALUE",
       "exception_code": "",
-      "rationale": "Die konkrete Frage wird präziser anhand belegter Bedingungen im Fließtext beantwortet; eine Tabelle würde hier keinen zusätzlichen belastbaren Mehrwert bieten."
+      "rationale": "Die konkrete Frage wird präziser anhand belegter Bedingungen im Fließtext beantwortet; eine Tabelle würde hier keinen zusätzlichen belastbaren Mehrwert bieten. Die Originalquelle wurde inzwischen als offizielle Erstveröffentlichung des vermittelnden Versicherungsanbieters bestätigt."
     },
     "semantic_rule_results": {
       "table.value_required_if_present": "PASS"
