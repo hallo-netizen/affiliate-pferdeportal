@@ -16,8 +16,8 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.msdvetmanual.com/horse-owners/selecting-and-providing-a-home-for-a-horse/selecting-a-horse",
-          "source_title": "MSD Veterinary Manual – Selecting a Horse"
+          "source_url": "https://app.pferd-aktuell.de/ausbildung/pferdeverhalten/pferdeverhalten-und-ethologie-des-pferdes",
+          "source_title": "Deutsche Reiterliche Vereinigung – Pferdeverhalten und Ethologie des Pferdes"
         },
         {
           "source_url": "https://www.worldhorsewelfare.org/advice/training-how-do-horses-learn",
@@ -25,9 +25,9 @@
         }
       ],
       "claims": [
-        "Pferderassen unterscheiden sich in Persönlichkeit und Zuchtzweck; passend ist die Kombination aus Tier, Reiter und Einsatzzweck.",
-        "Kaltblüter gelten häufig als ruhiger, während Araber und Vollblüter teilweise ein lebhafteres Temperament zeigen.",
-        "Ältere Pferde sind häufig ruhiger, können aber gesundheitliche Beschwerden haben, die das Verhalten beeinflussen.",
+        "Der Fluchtinstinkt ist bei Pferden unterschiedlich stark, muss aber im Umgang und Training berücksichtigt werden.",
+        "Artgerechte Haltung setzt voraus, arttypisches Verhalten und Bedürfnisse der Pferde zu kennen.",
+        "Fluchtverhalten und Temperament unterscheiden sich von Pferd zu Pferd, weshalb individuelles Training wichtig ist.",
         "Beißen kann ein Zeichen von Schmerz oder Unwohlsein sein; Fachleute sollen bei auffälligem Verhalten hinzugezogen werden.",
         "Angst und Stress behindern beim Pferd das Lernen und können die Wirksamkeit des Trainings verschlechtern."
       ]
@@ -51,33 +51,33 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.msdvetmanual.com/horse-owners/selecting-and-providing-a-home-for-a-horse/selecting-a-horse",
-        "source_title": "MSD Veterinary Manual – Selecting a Horse",
-        "evidence_text": "Different horse breeds have their own personalities and are bred for specific activities, so it's important to match the horse to both the rider and the intended use.",
-        "evidence_text_sha256": "77d3244a945462c589d87205b1ebebf530579c0de65d33e73d52d1cf2ff81932",
-        "statement": "Pferderassen unterscheiden sich in Persönlichkeit und Zuchtzweck; passend ist die Kombination aus Tier, Reiter und Einsatzzweck.",
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/pferdeverhalten/pferdeverhalten-und-ethologie-des-pferdes",
+        "source_title": "Deutsche Reiterliche Vereinigung – Pferdeverhalten und Ethologie des Pferdes",
+        "evidence_text": "Dabei ist der Fluchtinstinkt bei Pferden unterschiedlich stark ausgeprägt, aber immer präsent - eine Tatsache, die der Mensch im Umgang und in der Ausbildung stets berücksichtigen muss.",
+        "evidence_text_sha256": "aa449b00969240779ed39f5c97e5cb70cc4525cdb1a57261d9b971e8ee2d3433",
+        "statement": "Der Fluchtinstinkt ist bei Pferden unterschiedlich stark, muss aber im Umgang und Training berücksichtigt werden.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F2": {
-        "source_url": "https://www.msdvetmanual.com/horse-owners/selecting-and-providing-a-home-for-a-horse/selecting-a-horse",
-        "source_title": "MSD Veterinary Manual – Selecting a Horse",
-        "evidence_text": "For example, draft horses are usually calm, while Arabians and Thoroughbreds can be more nervous.",
-        "evidence_text_sha256": "318fb1d09f0d96d9eefb0cb2e14b0b51045f50333f912321d00d36be15771ff4",
-        "statement": "Kaltblüter gelten häufig als ruhiger, während Araber und Vollblüter teilweise ein lebhafteres Temperament zeigen.",
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/pferdeverhalten/pferdeverhalten-und-ethologie-des-pferdes",
+        "source_title": "Deutsche Reiterliche Vereinigung – Pferdeverhalten und Ethologie des Pferdes",
+        "evidence_text": "Um dem Pferd eine artgerechte Haltung zu ermöglichen, muss jeder Pferdehalter die Bedürfnisse des Pferdes und das daraus resultierende arttypische Verhalten kennen.",
+        "evidence_text_sha256": "0beae1815d4a13425539b91de44e4109854f83bad48839965a80d828d59810b6",
+        "statement": "Artgerechte Haltung setzt voraus, arttypisches Verhalten und Bedürfnisse der Pferde zu kennen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F3": {
-        "source_url": "https://www.msdvetmanual.com/horse-owners/selecting-and-providing-a-home-for-a-horse/selecting-a-horse",
-        "source_title": "MSD Veterinary Manual – Selecting a Horse",
-        "evidence_text": "Older horses are often calmer than younger ones, but they can have health issues (like arthritis) that affect their behavior or have bad habits (like biting or being stubborn).",
-        "evidence_text_sha256": "a4d8a302cee58652034a43fd27b48ca936ad753cb6426234ebe681019496b240",
-        "statement": "Ältere Pferde sind häufig ruhiger, können aber gesundheitliche Beschwerden haben, die das Verhalten beeinflussen.",
+        "source_url": "https://app.pferd-aktuell.de/ausbildung/pferdeverhalten/pferdeverhalten-und-ethologie-des-pferdes",
+        "source_title": "Deutsche Reiterliche Vereinigung – Pferdeverhalten und Ethologie des Pferdes",
+        "evidence_text": "Dabei ist der Fluchtinstinkt bei Pferden unterschiedlich stark ausgeprägt, aber immer präsent - eine Tatsache, die der Mensch im Umgang und in der Ausbildung stets berücksichtigen muss.",
+        "evidence_text_sha256": "aa449b00969240779ed39f5c97e5cb70cc4525cdb1a57261d9b971e8ee2d3433",
+        "statement": "Fluchtverhalten und Temperament unterscheiden sich von Pferd zu Pferd, weshalb individuelles Training wichtig ist.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
