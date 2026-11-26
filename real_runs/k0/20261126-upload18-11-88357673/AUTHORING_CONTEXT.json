@@ -16,16 +16,16 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.allianz.com/de/mediencenter/news/artikel/260318-verantwortungsvoller-ki-einsatz-bei-der-allianz.html",
-          "source_title": "Allianz SE – Verantwortungsvoller KI-Einsatz und Tierkrankenversicherungs-Schadenbearbeitung, März 2026"
+          "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+          "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016"
         }
       ],
       "claims": [
-        "Die Allianz erläutert für ihre digitale Schadensbearbeitung, wie Rechnungen von Kunden oder Vermittlern hochgeladen werden.",
-        "Bei unklaren Abrechnungen nennt die Allianz eine Weiterleitung an menschliche Fachkräfte.",
-        "Für das gesamte deutsche Tierkrankenversicherungsportfolio meldet Allianz 49,7 Prozent vollständig automatisierte Schadensbearbeitung im Jahr 2025, nicht speziell für Pferde.",
-        "Allianz berichtet bei einfachen Tierkrankenversicherungsfällen von Auszahlungen innerhalb weniger Stunden.",
-        "Allianz betont, dass auch bei digitalen Versicherungsprozessen menschliche Ansprechpartner erreichbar bleiben."
+        "Stiftung Warentest untersuchte 2016 neun Pferde-OP-Versicherungstarife von drei Anbietern.",
+        "Stiftung Warentest stellte in ihrem älteren Pferde-OP-Versicherungstest Leistungsausschlüsse bei bestimmten Krankheiten und Operationen fest.",
+        "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
+        "Stiftung Warentest fand 2016 im geprüften Angebot auch einen Pferde-OP-Tarif mit breiter Operationsdeckung.",
+        "Der Pferdeversicherungstest von Stiftung Warentest wurde am 19. Januar 2016 veröffentlicht."
       ]
     },
     "production_plan_item": {
@@ -52,55 +52,55 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.allianz.com/de/mediencenter/news/artikel/260318-verantwortungsvoller-ki-einsatz-bei-der-allianz.html",
-        "source_title": "Allianz SE – Verantwortungsvoller KI-Einsatz und Tierkrankenversicherungs-Schadenbearbeitung, März 2026",
-        "evidence_text": "Kundinnen und Kunden (oder ihre Vermittler) laden Dokumente wie Rechnungen hoch.",
-        "evidence_text_sha256": "fdaffa432c8141b7741cabc51398532b44f5ee4809f85f7fc6c41343612eca2f",
-        "statement": "Die Allianz erläutert für ihre digitale Schadensbearbeitung, wie Rechnungen von Kunden oder Vermittlern hochgeladen werden.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "neun Tarife von drei Anbietern haben wir unter die Lupe genommen.",
+        "evidence_text_sha256": "dcd68417c6f07e61141ca347ca369f8db14f1986e68216e798b1235f0334be96",
+        "statement": "Stiftung Warentest untersuchte 2016 neun Pferde-OP-Versicherungstarife von drei Anbietern.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F2": {
-        "source_url": "https://www.allianz.com/de/mediencenter/news/artikel/260318-verantwortungsvoller-ki-einsatz-bei-der-allianz.html",
-        "source_title": "Allianz SE – Verantwortungsvoller KI-Einsatz und Tierkrankenversicherungs-Schadenbearbeitung, März 2026",
-        "evidence_text": "Bei Unsicherheiten werden Fälle an menschliche Expertinnen und Experten weitergeleitet.",
-        "evidence_text_sha256": "3d330ed1fe652179415c570d6d90d6fff685b6bd405852c6d60139c83d9b408e",
-        "statement": "Bei unklaren Abrechnungen nennt die Allianz eine Weiterleitung an menschliche Fachkräfte.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "Oft sind bestimmte Erkrankungen und Operationen ausgeschlossen.",
+        "evidence_text_sha256": "03c8a8e001751d6bef26e4dfecf6f7ae7bd5c6099e1b0029916dd1fcc80bf28b",
+        "statement": "Stiftung Warentest stellte in ihrem älteren Pferde-OP-Versicherungstest Leistungsausschlüsse bei bestimmten Krankheiten und Operationen fest.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F3": {
-        "source_url": "https://www.allianz.com/de/mediencenter/news/artikel/260318-verantwortungsvoller-ki-einsatz-bei-der-allianz.html",
-        "source_title": "Allianz SE – Verantwortungsvoller KI-Einsatz und Tierkrankenversicherungs-Schadenbearbeitung, März 2026",
-        "evidence_text": "Die Allianz in Deutschland hat Jahr 2025 49,7 % der Schadenfälle in der deutschen Tierkrankenversicherung vollständig automatisiert bearbeitet.",
-        "evidence_text_sha256": "5ae1761b6a530435d8c420562065936742707cb2979faec10b7d289806f814f7",
-        "statement": "Für das gesamte deutsche Tierkrankenversicherungsportfolio meldet Allianz 49,7 Prozent vollständig automatisierte Schadensbearbeitung im Jahr 2025, nicht speziell für Pferde.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "Einige Versicherer begrenzen zudem die Summen, die sie für eine Operation bezahlen.",
+        "evidence_text_sha256": "e5cbb83fb99a6e4f90a55ab044c711ea0f84ceec8ffbe9ff6eca6e8ea8240b00",
+        "statement": "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F4": {
-        "source_url": "https://www.allianz.com/de/mediencenter/news/artikel/260318-verantwortungsvoller-ki-einsatz-bei-der-allianz.html",
-        "source_title": "Allianz SE – Verantwortungsvoller KI-Einsatz und Tierkrankenversicherungs-Schadenbearbeitung, März 2026",
-        "evidence_text": "In einfachen Fällen bedeutet das: Kunden erhalten ihr Geld nur wenige Stunden nach der Schadenmeldung.",
-        "evidence_text_sha256": "55b9bfebc2c55a486da4689722b96819c14bf133c1a06b2a47c984fc4cb01fed",
-        "statement": "Allianz berichtet bei einfachen Tierkrankenversicherungsfällen von Auszahlungen innerhalb weniger Stunden.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "Doch es gibt immerhin einen Tarif, der fast alle Operationen abdeckt.",
+        "evidence_text_sha256": "dec96c585c93469dd6c887e17348fe8452f1835c05c46f8ac6179eceaf50069b",
+        "statement": "Stiftung Warentest fand 2016 im geprüften Angebot auch einen Pferde-OP-Tarif mit breiter Operationsdeckung.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F5": {
-        "source_url": "https://www.allianz.com/de/mediencenter/news/artikel/260318-verantwortungsvoller-ki-einsatz-bei-der-allianz.html",
-        "source_title": "Allianz SE – Verantwortungsvoller KI-Einsatz und Tierkrankenversicherungs-Schadenbearbeitung, März 2026",
-        "evidence_text": "Kundinnen und Kunden haben jederzeit Zugang zu einem menschlichen Ansprechpartner",
-        "evidence_text_sha256": "9bb539d60f8230d75b08b3f70a9f4032aab6a039cb63ef415fffa40bf362d204",
-        "statement": "Allianz betont, dass auch bei digitalen Versicherungsprozessen menschliche Ansprechpartner erreichbar bleiben.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "19.01.2016",
+        "evidence_text_sha256": "4385e57870cb4aa53ab5ff5edeb8293d6a86b6cf104dd647b01d5a4903016c08",
+        "statement": "Der Pferdeversicherungstest von Stiftung Warentest wurde am 19. Januar 2016 veröffentlicht.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
