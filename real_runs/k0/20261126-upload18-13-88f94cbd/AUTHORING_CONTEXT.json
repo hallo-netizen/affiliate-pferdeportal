@@ -20,10 +20,6 @@
           "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016"
         },
         {
-          "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-          "source_title": "Allianz – Pferde-OP-Versicherung"
-        },
-        {
           "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
           "source_title": "Uelzener – Pferde-OP-Versicherung"
         },
@@ -37,7 +33,7 @@
         "Stiftung Warentest stellte in ihrem älteren Pferde-OP-Versicherungstest Leistungsausschlüsse bei bestimmten Krankheiten und Operationen fest.",
         "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
         "Stiftung Warentest fand 2016 im geprüften Angebot auch einen Pferde-OP-Tarif mit breiter Operationsdeckung.",
-        "Die Allianz versichert medizinisch notwendige Pferdeoperationen wegen Unfall, Krankheit oder Fehlentwicklung.",
+        "Uelzener nennt die mit einer versicherten Operation zusammenhängenden Leistungen als Bestandteil ihrer Pferde-OP-Versicherung.",
         "Die Uelzener-Pferdekrankenversicherung umfasst den OP-Schutz und darüber hinaus notwendige ambulante und stationäre Behandlungen.",
         "Agria nennt Pferdekrankenversicherung mit Erstattung von Tierarztkosten bei Krankheit oder Verletzung."
       ]
@@ -114,11 +110,11 @@
         ]
       },
       "F5": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Die OP-Versicherung deckt medizinisch notwendige Operationen infolge von Unfall, Krankheit oder Fehlentwicklung ab.",
-        "evidence_text_sha256": "535799d78572ce2f917ab4a82128a0a45e759a9ecbb5564b17cf791d4d6847ef",
-        "statement": "Die Allianz versichert medizinisch notwendige Pferdeoperationen wegen Unfall, Krankheit oder Fehlentwicklung.",
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "In der OP-Versicherung werden Leistungen erstattet, die mit einer versicherten OP zusammenhängen.",
+        "evidence_text_sha256": "50915182ef604e8fe073ef2c5d9bf04539ecc3b548be3c307cd2eedea2c6dd85",
+        "statement": "Uelzener nennt die mit einer versicherten Operation zusammenhängenden Leistungen als Bestandteil ihrer Pferde-OP-Versicherung.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Vergleich"
@@ -211,16 +207,14 @@
     ],
     "comparison_source_bindings": [
       {
-        "source_label": "Allianz",
-        "nearest_option_heading": "Allianz"
-      },
-      {
         "source_label": "Uelzener",
-        "nearest_option_heading": "Uelzener"
+        "nearest_option_heading": "Uelzener",
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/"
       },
       {
         "source_label": "Agria",
-        "nearest_option_heading": "Agria"
+        "nearest_option_heading": "Agria",
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/"
       }
     ],
     "table_decision": {
@@ -239,9 +233,9 @@
       "source_fact_ids": [
         "F1",
         "F2",
-        "F3",
-        "F4",
-        "F5"
+        "F5",
+        "F6",
+        "F7"
       ]
     },
     "semantic_rule_results": {
