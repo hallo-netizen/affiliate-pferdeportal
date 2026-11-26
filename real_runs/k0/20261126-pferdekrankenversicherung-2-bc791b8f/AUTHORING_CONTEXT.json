@@ -117,8 +117,8 @@
       },
       {
         "role": "further_information",
-        "href": "/wissen/wissen-versicherungen-und-recht/",
-        "anchor": "Versicherungen & Recht",
+        "href": "/category/pferde-op-versicherung-beratung/",
+        "anchor": "Beratung Pferde-OP-Versicherung",
         "block": "further_information"
       }
     ],
@@ -128,7 +128,7 @@
         "active": true
       },
       {
-        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "href": "/category/pferde-op-versicherung-beratung/",
         "active": true
       }
     ],
