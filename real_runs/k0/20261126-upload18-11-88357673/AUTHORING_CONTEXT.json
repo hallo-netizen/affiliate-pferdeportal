@@ -16,16 +16,16 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-          "source_title": "Allianz – Pferde-OP-Versicherung"
+          "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+          "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026"
         }
       ],
       "claims": [
-        "Die Allianz versichert medizinisch notwendige Pferdeoperationen wegen Unfall, Krankheit oder Fehlentwicklung.",
-        "Nichtoperative Behandlungen wie Therapien chronischer Leiden sind im Allianz-OP-Schutz nicht abgedeckt.",
-        "Allianz nennt für Pferdeoperationen infolge von Krankheiten eine Wartezeit von drei Monaten.",
-        "Die Selbstbeteiligung der Allianz-OP-Versicherung für Pferde ist beim Abschluss individuell wählbar.",
-        "Allianz-Versicherungsprodukte sind modular aufgebaut und lassen sich an den gewünschten Schutz anpassen."
+        "Allianz hat seit dem 4. Februar 2026 auch für Pferde jeweils vier OP-Schutz- und Krankenvolltarife.",
+        "Allianz gibt an, bei mehr als 40 Prozent der digital eingereichten einfachen Tierkrankenversicherungsrechnungen innerhalb von vier Stunden zu entscheiden und auszuzahlen.",
+        "Laut Allianz ist eine direkte Abrechnung mit Tierklinik oder Tierarztpraxis möglich.",
+        "Allianz nennt wählbare Selbstbehalte von zehn oder zwanzig Prozent mit neuen Deckelungen.",
+        "Allianz gibt an, ab Tariflinie Smart bestimmte Vorsorgemaßnahmen ohne Wartezeit oder Selbstbeteiligung zu bezuschussen."
       ]
     },
     "production_plan_item": {
@@ -52,55 +52,55 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Die OP-Versicherung deckt medizinisch notwendige Operationen infolge von Unfall, Krankheit oder Fehlentwicklung ab.",
-        "evidence_text_sha256": "535799d78572ce2f917ab4a82128a0a45e759a9ecbb5564b17cf791d4d6847ef",
-        "statement": "Die Allianz versichert medizinisch notwendige Pferdeoperationen wegen Unfall, Krankheit oder Fehlentwicklung.",
+        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
+        "evidence_text": "Ab dem 4.2.2026 gibt es für jede dieser drei Tierfamilien vier OP-Schutztarife und vier Krankenvolltarife jeweils in den vier Produktlinien Basis, Smart, Komfort und Premium.",
+        "evidence_text_sha256": "47de358641e95848c449381c741336a1052a0564bad1834ceeaa24254f759870",
+        "statement": "Allianz hat seit dem 4. Februar 2026 auch für Pferde jeweils vier OP-Schutz- und Krankenvolltarife.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F2": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Im OP-Schutz sind keine Behandlungen ohne eine Operation beispielsweise Therapien für chronische Leiden wie Arthrose abgesichert.",
-        "evidence_text_sha256": "9071038a75b8fd215ee665cb1e24e90cd4d020a7e7c860bdc3a1afbe26c87306",
-        "statement": "Nichtoperative Behandlungen wie Therapien chronischer Leiden sind im Allianz-OP-Schutz nicht abgedeckt.",
+        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
+        "evidence_text": "Die Allianz reguliert in der Tierkrankenversicherung einfache Schadenfälle sehr schnell: Dank des Einsatzes von KI können mehr als 40% aller digitalen Rechnungen innerhalb von weniger als vier Stunden bearbeitet und ausgezahlt werden.",
+        "evidence_text_sha256": "72a7c27bedff885d92c2ad47e37e2efa566ff390fa515d713958fe2f692b6127",
+        "statement": "Allianz gibt an, bei mehr als 40 Prozent der digital eingereichten einfachen Tierkrankenversicherungsrechnungen innerhalb von vier Stunden zu entscheiden und auszuzahlen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F3": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Für Krankheiten gilt eine Wartezeit von drei Monaten.",
-        "evidence_text_sha256": "8fcc2ca36441c70a49a19b521c4c51819d28db00f688227fac91de6ba8e9bc79",
-        "statement": "Allianz nennt für Pferdeoperationen infolge von Krankheiten eine Wartezeit von drei Monaten.",
+        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
+        "evidence_text": "Außerdem kann die Allianz auch direkt mit der Tierklinik oder Tierarztpraxis abrechnen, ohne dass man selbst in Vorleistung gehen muss.",
+        "evidence_text_sha256": "25113d5eeb58f69056444343e7a4ca0e4f2dd8d5765c6b5b204dc75f4f7f4351",
+        "statement": "Laut Allianz ist eine direkte Abrechnung mit Tierklinik oder Tierarztpraxis möglich.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F4": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Die Selbstbeteiligung ist flexibel und kann bei Abschluss der OP-Versicherung für Pferde individuell festgelegt werden.",
-        "evidence_text_sha256": "fb09c998c9454a87eb1c63e6883a016e409b1a5dee3e9a57fe99b0f368babd6b",
-        "statement": "Die Selbstbeteiligung der Allianz-OP-Versicherung für Pferde ist beim Abschluss individuell wählbar.",
+        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
+        "evidence_text": "Dank der neuen Deckelungen in den gewählten Selbstbehalten von 10% oder 20% haben die Halterinnen und Halter zusätzliche finanzielle Sicherheit im Schadenfall.",
+        "evidence_text_sha256": "1fc542e96c1134f16ab021c34436e122b0e7fadd22ddf396525d05260615cb80",
+        "statement": "Allianz nennt wählbare Selbstbehalte von zehn oder zwanzig Prozent mit neuen Deckelungen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F5": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Die Produkte der Allianz sind modular aufgebaut und können so Ihrem Bedarf angepasst werden.",
-        "evidence_text_sha256": "313ab3f00d96766904273c2fe9ed2d08e8c6d1e8b78a50e4a0eaa071b47c8a3c",
-        "statement": "Allianz-Versicherungsprodukte sind modular aufgebaut und lassen sich an den gewünschten Schutz anpassen.",
+        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
+        "evidence_text": "Das heißt, dass ab sofort in allen OP- und Vollschutztarifen ab der Linie Smart wichtige Basis-Vorsorgeleistungen wie Impfungen oder Wurmkuren bezuschusst werden, und zwar ohne Wartezeiten oder Selbstbeteiligung.",
+        "evidence_text_sha256": "b4eb7940496ea478d86d374db76d92590a6add49a9d6d831982f4be4367f1987",
+        "statement": "Allianz gibt an, ab Tariflinie Smart bestimmte Vorsorgemaßnahmen ohne Wartezeit oder Selbstbeteiligung zu bezuschussen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
