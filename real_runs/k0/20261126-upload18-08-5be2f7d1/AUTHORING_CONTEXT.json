@@ -16,8 +16,8 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
-          "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016"
+          "source_url": "https://uelzener.de/filemanager/downloadFile/blogFiles/48cbf6c2-7282-4849-b90e-72c47bce7ec6.pdf/Tierkrankenversicherung_Endartikel.pdf",
+          "source_title": "Finanztest 2/2016 – Privatpatient Pferd (Original-Nachdruck auf Uelzener)"
         },
         {
           "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
@@ -25,11 +25,11 @@
         }
       ],
       "claims": [
-        "Stiftung Warentest untersuchte 2016 neun Pferde-OP-Versicherungstarife von drei Anbietern.",
-        "Stiftung Warentest stellte in ihrem älteren Pferde-OP-Versicherungstest Leistungsausschlüsse bei bestimmten Krankheiten und Operationen fest.",
-        "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
-        "Stiftung Warentest fand 2016 im geprüften Angebot auch einen Pferde-OP-Tarif mit breiter Operationsdeckung.",
-        "Der Pferdeversicherungstest von Stiftung Warentest wurde am 19. Januar 2016 veröffentlicht.",
+        "Finanztest verglich in der Ausgabe 2/2016 neun Pferde-OP-Tarife von drei Versicherern.",
+        "Der Test dokumentierte deutliche Unterschiede bei Leistungen der Pferde-OP-Versicherung.",
+        "Finanztest 2016 berichtete über begrenzte Erstattungsbeträge bei Allianz und R+V im damaligen Angebot.",
+        "Der damalige Uelzener-Tarif Premium Plus deckte nach Finanztest viele Operationen ab, mit Ausnahmen.",
+        "Der vorliegende Finanztest-Bericht stammt aus Ausgabe 2/2016; seine Zahlen sind keine aktuellen Angebote.",
         "Eine Pferde-OP-Versicherung erstattet laut Uelzener Leistungen im Zusammenhang mit versicherten Operationen."
       ]
     },
@@ -52,55 +52,55 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
-        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
-        "evidence_text": "neun Tarife von drei Anbietern haben wir unter die Lupe genommen.",
-        "evidence_text_sha256": "dcd68417c6f07e61141ca347ca369f8db14f1986e68216e798b1235f0334be96",
-        "statement": "Stiftung Warentest untersuchte 2016 neun Pferde-OP-Versicherungstarife von drei Anbietern.",
+        "source_url": "https://uelzener.de/filemanager/downloadFile/blogFiles/48cbf6c2-7282-4849-b90e-72c47bce7ec6.pdf/Tierkrankenversicherung_Endartikel.pdf",
+        "source_title": "Finanztest 2/2016 – Privatpatient Pferd (Original-Nachdruck auf Uelzener)",
+        "evidence_text": "Neun Tarife von drei Anbietern",
+        "evidence_text_sha256": "3b58cf16ba8c2a9b23c187f03cbc290a97e94a26ff10bd86b295efe34b2e6c00",
+        "statement": "Finanztest verglich in der Ausgabe 2/2016 neun Pferde-OP-Tarife von drei Versicherern.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F2": {
-        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
-        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
-        "evidence_text": "Oft sind bestimmte Erkrankungen und Operationen ausgeschlossen.",
-        "evidence_text_sha256": "03c8a8e001751d6bef26e4dfecf6f7ae7bd5c6099e1b0029916dd1fcc80bf28b",
-        "statement": "Stiftung Warentest stellte in ihrem älteren Pferde-OP-Versicherungstest Leistungsausschlüsse bei bestimmten Krankheiten und Operationen fest.",
+        "source_url": "https://uelzener.de/filemanager/downloadFile/blogFiles/48cbf6c2-7282-4849-b90e-72c47bce7ec6.pdf/Tierkrankenversicherung_Endartikel.pdf",
+        "source_title": "Finanztest 2/2016 – Privatpatient Pferd (Original-Nachdruck auf Uelzener)",
+        "evidence_text": "Auch die Leistungen variieren erheblich.",
+        "evidence_text_sha256": "73450facd4cbc386efd1089f22791ca203a3d9fb594842ccbece396015c84ab0",
+        "statement": "Der Test dokumentierte deutliche Unterschiede bei Leistungen der Pferde-OP-Versicherung.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F3": {
-        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
-        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
-        "evidence_text": "Einige Versicherer begrenzen zudem die Summen, die sie für eine Operation bezahlen.",
-        "evidence_text_sha256": "e5cbb83fb99a6e4f90a55ab044c711ea0f84ceec8ffbe9ff6eca6e8ea8240b00",
-        "statement": "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
+        "source_url": "https://uelzener.de/filemanager/downloadFile/blogFiles/48cbf6c2-7282-4849-b90e-72c47bce7ec6.pdf/Tierkrankenversicherung_Endartikel.pdf",
+        "source_title": "Finanztest 2/2016 – Privatpatient Pferd (Original-Nachdruck auf Uelzener)",
+        "evidence_text": "Im Gegensatz zur Uelzener begrenzen Allianz und R+V die Summen, die sie für eine Operation bezahlen.",
+        "evidence_text_sha256": "5b9db16158f9cc52cde1135a21315512a8f18df9644d4f81fc95e52be419339f",
+        "statement": "Finanztest 2016 berichtete über begrenzte Erstattungsbeträge bei Allianz und R+V im damaligen Angebot.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F4": {
-        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
-        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
-        "evidence_text": "Doch es gibt immerhin einen Tarif, der fast alle Operationen abdeckt.",
-        "evidence_text_sha256": "dec96c585c93469dd6c887e17348fe8452f1835c05c46f8ac6179eceaf50069b",
-        "statement": "Stiftung Warentest fand 2016 im geprüften Angebot auch einen Pferde-OP-Tarif mit breiter Operationsdeckung.",
+        "source_url": "https://uelzener.de/filemanager/downloadFile/blogFiles/48cbf6c2-7282-4849-b90e-72c47bce7ec6.pdf/Tierkrankenversicherung_Endartikel.pdf",
+        "source_title": "Finanztest 2/2016 – Privatpatient Pferd (Original-Nachdruck auf Uelzener)",
+        "evidence_text": "Im Premium Plus erstattet die Uelzener bis auf wenige Ausnahmen jede Operation.",
+        "evidence_text_sha256": "52218f0a90ef8fe13e9154e784962576e563df6dbea4c83a4eb2bd7184d0b440",
+        "statement": "Der damalige Uelzener-Tarif Premium Plus deckte nach Finanztest viele Operationen ab, mit Ausnahmen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F5": {
-        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
-        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
-        "evidence_text": "19.01.2016",
-        "evidence_text_sha256": "4385e57870cb4aa53ab5ff5edeb8293d6a86b6cf104dd647b01d5a4903016c08",
-        "statement": "Der Pferdeversicherungstest von Stiftung Warentest wurde am 19. Januar 2016 veröffentlicht.",
+        "source_url": "https://uelzener.de/filemanager/downloadFile/blogFiles/48cbf6c2-7282-4849-b90e-72c47bce7ec6.pdf/Tierkrankenversicherung_Endartikel.pdf",
+        "source_title": "Finanztest 2/2016 – Privatpatient Pferd (Original-Nachdruck auf Uelzener)",
+        "evidence_text": "Finanztest 2/2016",
+        "evidence_text_sha256": "6f424395182f96cea70e93b544387d50e09c3ce7cca6beac223006a0920eaef3",
+        "statement": "Der vorliegende Finanztest-Bericht stammt aus Ausgabe 2/2016; seine Zahlen sind keine aktuellen Angebote.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
