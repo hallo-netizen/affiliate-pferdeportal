@@ -185,7 +185,7 @@ def _k0_fetch_original_source_text(url):
     safe_url(url)
     opener = urllib.request.build_opener(SafeRedirect())
     request = urllib.request.Request(url, headers={
-        'User-Agent': 'Pferdeatelier-K0-Originalquellenbeleg/1.0',
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
         'Accept': 'text/html, text/plain, application/pdf, application/xhtml+xml',
         'Accept-Encoding': 'identity',
     })
