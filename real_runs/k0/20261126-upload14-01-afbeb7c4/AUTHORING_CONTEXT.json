@@ -1,0 +1,216 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Uelzener Pferde OP Versicherung kündigen und Fristen beachten",
+    "target_keyword": "uelzener pferde op versicherung kündigen",
+    "category": "pferde-op-versicherung-faq",
+    "article_type": "Anleitung",
+    "plan_slot": "afbeb7c4b5431e13d264b04eb139f241ff06c91a8974345032da7791d09c1e6b"
+  },
+  "content_profile": {
+    "search_intent": "Kündigung einer bestehenden Uelzener Pferde OP Versicherung, Fristen und Ablauf"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://uelzener.de/pferd/",
+          "source_title": "Uelzener – Pferdeversicherungen"
+        },
+        {
+          "source_url": "https://uelzener.de/service/",
+          "source_title": "Uelzener – Service"
+        }
+      ],
+      "claims": [
+        "Die Uelzener verlinkt auf ihrer Pferdeversicherungsseite einen Online-Service zur Vertragskündigung.",
+        "Uelzener nennt bei Tod oder Verkauf des versicherten Pferdes ein sofortiges Kündigungsrecht.",
+        "Für die Kündigung bei Tod oder Verkauf verlangt die Uelzener eine kurze schriftliche Mitteilung.",
+        "Bei Tod oder Verkauf hebt Uelzener den Vertrag laut FAQ mit Eingang der schriftlichen Mitteilung auf.",
+        "Beim Verkauf des Pferdes kann statt der Kündigung unter Bedingungen auch die Übertragung des Uelzener-Vertrags möglich sein.",
+        "Für weitere Fragen zum Versicherungsschutz bietet Uelzener neben der Kündigungsfunktion ein allgemeines Serviceformular an."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Anleitung",
+      "target_keyword": "uelzener pferde op versicherung kündigen",
+      "topic": "Uelzener Pferde OP Versicherung kündigen und Fristen beachten",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-op-versicherung-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Bestehende Uelzener Pferde-OP-Versicherung unter Beachtung der vereinbarten Kündigungsfrist sicher kündigen",
+      "preparation_items": [
+        "Versicherungsschein und zugehörige Vertragsbedingungen bereitlegen",
+        "Versicherungsnummer und gewünschtes Beendigungsdatum notieren"
+      ],
+      "procedure_steps": [
+        "Versicherungsbedingungen zur Kündigung und zum Fristbeginn prüfen",
+        "Uelzener Kündigungsformular auf der offiziellen Serviceseite verwenden",
+        "Kündigung mit Vertragsnummer und gewünschtem Termin schriftlich übermitteln",
+        "Eingangsbestätigung und Beendigungsdatum kontrollieren"
+      ],
+      "safety_controls": [
+        "Eine Kündigung bei Verkauf oder Tod des Pferds von der ordentlichen Kündigung unterscheiden",
+        "Bestehenden Versicherungsschutz erst nach bestätigtem Vertragsende als beendet behandeln"
+      ],
+      "common_errors": [
+        "Eine Kündigung ohne Versicherungsnummer versenden",
+        "Das Datum der Kündigungsbestätigung mit dem Vertragsende verwechseln"
+      ],
+      "result_checks": [
+        "Bestätigung des Eingangs und wirksames Vertragsende prüfen",
+        "Etwaige weitere Beitragsabbuchungen anhand des bestätigten Endtermins kontrollieren"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://uelzener.de/pferd/",
+        "source_title": "Uelzener – Pferdeversicherungen",
+        "evidence_text": "Nutze unseren Online-Service zur Kündigung.",
+        "evidence_text_sha256": "ced39a79baa2b5a56425dd3b759db9a7a34ed4a859f5fe54719965b2b817576e",
+        "statement": "Die Uelzener verlinkt auf ihrer Pferdeversicherungsseite einen Online-Service zur Vertragskündigung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://uelzener.de/pferd/",
+        "source_title": "Uelzener – Pferdeversicherungen",
+        "evidence_text": "Ja, unter den genannten Umständen besteht ein sofortiges Kündigungsrecht.",
+        "evidence_text_sha256": "559312e37f1b90a3e870e666f64136ea47454008f7141a110b8b3059d9ea8642",
+        "statement": "Uelzener nennt bei Tod oder Verkauf des versicherten Pferdes ein sofortiges Kündigungsrecht.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://uelzener.de/pferd/",
+        "source_title": "Uelzener – Pferdeversicherungen",
+        "evidence_text": "Wir benötigen von dir in diesem Fall eine kurze schriftliche Nachricht.",
+        "evidence_text_sha256": "d3d181f6abc59074cc5b585eb889e5a6e09e645d091886d92ae01a5ea05ab595",
+        "statement": "Für die Kündigung bei Tod oder Verkauf verlangt die Uelzener eine kurze schriftliche Mitteilung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://uelzener.de/pferd/",
+        "source_title": "Uelzener – Pferdeversicherungen",
+        "evidence_text": "Deinen Vertrag werden wir mit Eingang dieser schriftlichen Mitteilung aufheben.",
+        "evidence_text_sha256": "84c01c35d52cbe00576f81e7e7ad092a53031c865de2d6c3591bb1c96ecd7593",
+        "statement": "Bei Tod oder Verkauf hebt Uelzener den Vertrag laut FAQ mit Eingang der schriftlichen Mitteilung auf.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://uelzener.de/pferd/",
+        "source_title": "Uelzener – Pferdeversicherungen",
+        "evidence_text": "Ja, das ist unter Umständen möglich. Da der Versicherungsvertrag namentlich auf dein Pferd läuft, lässt er sich bei Verkauf des Pferdes an den neuen Besitzer oder die neue Besitzerin übertragen, sofern es sich bei dem Vertrag um den aktuellen Tarif handelt.",
+        "evidence_text_sha256": "2f5f8d05f3b96b58c49ce9d5361045609bc8f45eec1b651a88f570e38d18a6b5",
+        "statement": "Beim Verkauf des Pferdes kann statt der Kündigung unter Bedingungen auch die Übertragung des Uelzener-Vertrags möglich sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F6": {
+        "source_url": "https://uelzener.de/service/",
+        "source_title": "Uelzener – Service",
+        "evidence_text": "Du hast ein anderes Anliegen? Nutze das Serviceformular für Themen wie Deckungszusagen oder Fragen im Schadenfall und viel mehr.",
+        "evidence_text_sha256": "5df3a788ed171408c010861c2037a5f35fae835f829a20b9053cf1fade4e59c7",
+        "statement": "Für weitere Fragen zum Versicherungsschutz bietet Uelzener neben der Kündigungsfunktion ein allgemeines Serviceformular an.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-op-versicherung-faq/",
+        "anchor": "Pferdeversicherung Anleitungen",
+        "block": "steps"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-op-versicherung-faq/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-op-versicherung-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Uelzener",
+      "Pferde",
+      "OP",
+      "Versicherung",
+      "kündigen",
+      "Kündigung",
+      "Fristen",
+      "Vertrag"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "LINEAR_SEQUENCE",
+      "rationale": "Der konkrete Kündigungsablauf besteht aus nacheinander durchzuführenden Schritten; eine Tabelle würde keinen zusätzlichen fachlichen Nutzen bieten."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
