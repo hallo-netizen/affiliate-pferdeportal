@@ -1,0 +1,181 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Die Pferdekrankenversicherung der Uelzener",
+    "target_keyword": "uelzener versicherung pferdekrankenversicherung",
+    "category": "pferdekrankenversicherung-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "5c52795de15cfe2962b4d79e8061e62ee6c8df9b9a18d310e01a5775011fdb3a"
+  },
+  "content_profile": {
+    "search_intent": "Welche Leistungen und Bedingungen die Uelzener Pferdekrankenversicherung anbietet."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+          "source_title": "Uelzener – Pferdekrankenversicherung"
+        }
+      ],
+      "claims": [
+        "Die Uelzener Pferdekrankenversicherung schützt vor Kosten bei Krankheit oder Verletzung.",
+        "Die Uelzener-Pferdekrankenversicherung umfasst ambulante und stationäre Behandlungen, Operationen und Klinikunterbringung.",
+        "Uelzener nennt für Vorsorge einschließlich Impfungen ein Budget von 500 Euro pro Versicherungsjahr.",
+        "Uelzener übernimmt im versicherten Rahmen Klinikunterbringung einschließlich Futter bis zur gewählten Erstattungshöhe.",
+        "Die Uelzener-Pferdekrankenversicherung bietet notwendige ambulante und stationäre Behandlungen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "uelzener versicherung pferdekrankenversicherung",
+      "topic": "Die Pferdekrankenversicherung der Uelzener",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdekrankenversicherung-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Uelzener Pferdekrankenversicherung anhand ambulanter und stationärer Leistungen beurteilen.",
+      "decision_criteria": [
+        "Behandlungsumfang",
+        "Vorsorgeleistungen",
+        "Klinikkosten"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+        "source_title": "Uelzener – Pferdekrankenversicherung",
+        "evidence_text": "Die Uelzener Pferde-Krankenversicherung bietet einen umfangreichen Schutz vor den finanziellen Folgen, sollte dein Pferd krank werden oder sich verletzen.",
+        "evidence_text_sha256": "58783137daf7eb844eddf57e159a4d3f9ba1d7b93592ba9e55cc6e35d830bda2",
+        "statement": "Die Uelzener Pferdekrankenversicherung schützt vor Kosten bei Krankheit oder Verletzung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+        "source_title": "Uelzener – Pferdekrankenversicherung",
+        "evidence_text": "Sie übernimmt die Kosten für ambulante und stationäre Behandlungen sowie für alle chirurgischen Eingriffe bis hin zur Unterbringung in einer Tierklinik.",
+        "evidence_text_sha256": "021c04aa6eb53330f9b29b148599c250aa4b63cb3781acfbcd20cc21b9300055",
+        "statement": "Die Uelzener-Pferdekrankenversicherung umfasst ambulante und stationäre Behandlungen, Operationen und Klinikunterbringung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+        "source_title": "Uelzener – Pferdekrankenversicherung",
+        "evidence_text": "Vorsorgemaßnahmen (z. B. Impfungen) sind mit 500 EUR pro Versicherungsjahr versichert",
+        "evidence_text_sha256": "bd40b014354abf8d8aa252a60729d400680733051728bd9b3c8e7280a570008a",
+        "statement": "Uelzener nennt für Vorsorge einschließlich Impfungen ein Budget von 500 Euro pro Versicherungsjahr.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+        "source_title": "Uelzener – Pferdekrankenversicherung",
+        "evidence_text": "Unterbringung in der Tierklinik inkl. Futter und Ergänzungsfuttermittel, im Rahmen einer Behandlung oder Operation, bis zur gewählten Erstattungshöhe",
+        "evidence_text_sha256": "ac65693589f08664b70a41d3dad66cf2d5d0999f1fa803acfcab7329a776f207",
+        "statement": "Uelzener übernimmt im versicherten Rahmen Klinikunterbringung einschließlich Futter bis zur gewählten Erstattungshöhe.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+        "source_title": "Uelzener – Pferdekrankenversicherung",
+        "evidence_text": "Abgedeckt sind alle notwendigen Behandlungen, sowohl ambulant als auch stationär.",
+        "evidence_text_sha256": "2cedc2c4fd1bf44c3008b294e7c039b1f3231ccea9c60307bdad4e590be7962c",
+        "statement": "Die Uelzener-Pferdekrankenversicherung bietet notwendige ambulante und stationäre Behandlungen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdekrankenversicherung-beratung/",
+        "anchor": "Pferdeversicherung Beratung",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdekrankenversicherung-beratung/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdekrankenversicherung-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Uelzener",
+      "Krankenversicherung",
+      "Pferde",
+      "Leistungen",
+      "Klinik",
+      "Vorsorge",
+      "Versicherungen",
+      "Recht"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Entscheidung hängt von Bedingungen ab, die im Fließtext und in der Checkliste präziser erklärt werden; eine Tabelle böte keinen zusätzlichen belastbaren Vergleichsnutzen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
