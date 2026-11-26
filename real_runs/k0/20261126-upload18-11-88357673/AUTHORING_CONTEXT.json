@@ -16,16 +16,16 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-          "source_title": "Allianz Versicherungs-AG – Pressemitteilung 10. Februar 2026"
+          "source_url": "https://vertretung.allianz.de/fingerle.markus/",
+          "source_title": "Allianz Versicherungsagentur Markus Fingerle – Pferdeversicherung"
         }
       ],
       "claims": [
-        "Allianz bietet seit Februar 2026 für Pferde sowohl OP-Schutztarife als auch Krankenvolltarife in vier Produktlinien.",
-        "Allianz beschreibt bei einfachen Schadenfällen eine digitale Rechnungserstattung innerhalb weniger Stunden, ohne dies speziell als Quote für Pferde zu belegen.",
-        "Allianz bietet nach eigenen Angaben auch die direkte Abrechnung mit Tierkliniken und Praxen an.",
-        "Allianz nennt wählbare Selbstbehalte von zehn oder zwanzig Prozent mit Kostenbegrenzungen.",
-        "Allianz beschreibt in Tariflinien ab Smart Zuschüsse zu bestimmten Vorsorgemaßnahmen ohne Wartezeit oder Selbstbeteiligung."
+        "Eine offizielle Allianz-Vertretung weist auf den Zusammenhang von Pferdegesundheit und Kosten hin.",
+        "Die Allianz-Vertretung verweist auf die Änderung der tierärztlichen Gebührenordnung im November 2022.",
+        "Gesundheitsprobleme können Pferde auch bei guter Haltung und Pflege betreffen.",
+        "Die Allianz-Vertretung beschreibt einen Zusatzbaustein für Heilbehandlung, Impfungen und Vorsorge.",
+        "Die offizielle Allianz-Vertretung empfiehlt, Pferde-OP- und Krankenversicherungsleistungen zu vergleichen."
       ]
     },
     "production_plan_item": {
@@ -52,55 +52,55 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-        "source_title": "Allianz Versicherungs-AG – Pressemitteilung 10. Februar 2026",
-        "evidence_text": "Ab dem 4.2.2026 gibt es für jede dieser drei Tierfamilien vier OP-Schutztarife und vier Krankenvolltarife jeweils in den vier Produktlinien Basis, Smart, Komfort und Premium.",
-        "evidence_text_sha256": "47de358641e95848c449381c741336a1052a0564bad1834ceeaa24254f759870",
-        "statement": "Allianz bietet seit Februar 2026 für Pferde sowohl OP-Schutztarife als auch Krankenvolltarife in vier Produktlinien.",
+        "source_url": "https://vertretung.allianz.de/fingerle.markus/",
+        "source_title": "Allianz Versicherungsagentur Markus Fingerle – Pferdeversicherung",
+        "evidence_text": "Pferdegesundheit und damit verbunden Kosten",
+        "evidence_text_sha256": "d4b7c73ab13368cfeda419b0ec33a90a56e4708dc7645cfacb9ea0ca9ee5bbe4",
+        "statement": "Eine offizielle Allianz-Vertretung weist auf den Zusammenhang von Pferdegesundheit und Kosten hin.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F2": {
-        "source_url": "https://allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-        "source_title": "Allianz Versicherungs-AG – Pressemitteilung 10. Februar 2026",
-        "evidence_text": "Die Allianz reguliert in der Tierkrankenversicherung einfache Schadenfälle sehr schnell: Dank des Einsatzes von KI können mehr als 40% aller digitalen Rechnungen innerhalb von weniger als vier Stunden bearbeitet und ausgezahlt werden.",
-        "evidence_text_sha256": "72a7c27bedff885d92c2ad47e37e2efa566ff390fa515d713958fe2f692b6127",
-        "statement": "Allianz beschreibt bei einfachen Schadenfällen eine digitale Rechnungserstattung innerhalb weniger Stunden, ohne dies speziell als Quote für Pferde zu belegen.",
+        "source_url": "https://vertretung.allianz.de/fingerle.markus/",
+        "source_title": "Allianz Versicherungsagentur Markus Fingerle – Pferdeversicherung",
+        "evidence_text": "Vor allem nach der GOT-Anpassung im November 2022.",
+        "evidence_text_sha256": "bbb98e3399e50fd37868ba57bbb2025944f781440855e29775f2eceaa8f8a189",
+        "statement": "Die Allianz-Vertretung verweist auf die Änderung der tierärztlichen Gebührenordnung im November 2022.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F3": {
-        "source_url": "https://allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-        "source_title": "Allianz Versicherungs-AG – Pressemitteilung 10. Februar 2026",
-        "evidence_text": "Außerdem kann die Allianz auch direkt mit der Tierklinik oder Tierarztpraxis abrechnen, ohne dass man selbst in Vorleistung gehen muss.",
-        "evidence_text_sha256": "25113d5eeb58f69056444343e7a4ca0e4f2dd8d5765c6b5b204dc75f4f7f4351",
-        "statement": "Allianz bietet nach eigenen Angaben auch die direkte Abrechnung mit Tierkliniken und Praxen an.",
+        "source_url": "https://vertretung.allianz.de/fingerle.markus/",
+        "source_title": "Allianz Versicherungsagentur Markus Fingerle – Pferdeversicherung",
+        "evidence_text": "Auch bei bester Pflege und Haltung sind gesundheitliche Probleme unserer Pferde und Ponys oft nicht vermeidbar",
+        "evidence_text_sha256": "6501af28ce41a6823178a8c115506d8a98a22053cb4d27133676184734947497",
+        "statement": "Gesundheitsprobleme können Pferde auch bei guter Haltung und Pflege betreffen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F4": {
-        "source_url": "https://allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-        "source_title": "Allianz Versicherungs-AG – Pressemitteilung 10. Februar 2026",
-        "evidence_text": "Dank der neuen Deckelungen in den gewählten Selbstbehalten von 10% oder 20% haben die Halterinnen und Halter zusätzliche finanzielle Sicherheit im Schadenfall.",
-        "evidence_text_sha256": "1fc542e96c1134f16ab021c34436e122b0e7fadd22ddf396525d05260615cb80",
-        "statement": "Allianz nennt wählbare Selbstbehalte von zehn oder zwanzig Prozent mit Kostenbegrenzungen.",
+        "source_url": "https://vertretung.allianz.de/fingerle.markus/",
+        "source_title": "Allianz Versicherungsagentur Markus Fingerle – Pferdeversicherung",
+        "evidence_text": "Der Zusatzbaustein Heilbehandlungs- und Vorsorgeschutz kann auch diese Kosten und Impfungen sowie Prophylaxe mit abdecken.",
+        "evidence_text_sha256": "3da48ca4691513fc8a1517aab1ba0eed450b01b17eaaf1e9f8bd7bb4b04109f4",
+        "statement": "Die Allianz-Vertretung beschreibt einen Zusatzbaustein für Heilbehandlung, Impfungen und Vorsorge.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F5": {
-        "source_url": "https://allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-        "source_title": "Allianz Versicherungs-AG – Pressemitteilung 10. Februar 2026",
-        "evidence_text": "Das heißt, dass ab sofort in allen OP- und Vollschutztarifen ab der Linie Smart wichtige Basis-Vorsorgeleistungen wie Impfungen oder Wurmkuren bezuschusst werden, und zwar ohne Wartezeiten oder Selbstbeteiligung.",
-        "evidence_text_sha256": "b4eb7940496ea478d86d374db76d92590a6add49a9d6d831982f4be4367f1987",
-        "statement": "Allianz beschreibt in Tariflinien ab Smart Zuschüsse zu bestimmten Vorsorgemaßnahmen ohne Wartezeit oder Selbstbeteiligung.",
+        "source_url": "https://vertretung.allianz.de/fingerle.markus/",
+        "source_title": "Allianz Versicherungsagentur Markus Fingerle – Pferdeversicherung",
+        "evidence_text": "Wichtig ist dabei die Leistungen der Versicherung, im Speziellen bei der Pferdeopversicherung und Tierkrankenversicherung, zu vergleichen",
+        "evidence_text_sha256": "08e71490067e1ecd5d2c294c8734f4c6a60cd009ab86158df00ec4fc7c297832",
+        "statement": "Die offizielle Allianz-Vertretung empfiehlt, Pferde-OP- und Krankenversicherungsleistungen zu vergleichen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
