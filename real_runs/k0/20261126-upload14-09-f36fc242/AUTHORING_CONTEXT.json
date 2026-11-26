@@ -1,0 +1,224 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Bietet die Allianz eine Pferdekrankenversicherung?",
+    "target_keyword": "pferdekrankenversicherung allianz",
+    "category": "pferdekrankenversicherung-faq",
+    "article_type": "FAQ",
+    "plan_slot": "f36fc242aae6127129149607ab2a9d030198422a1372cea8aa80948a572a1f84"
+  },
+  "content_profile": {
+    "search_intent": "Prüfen, welche Pferdekrankenversicherung die Allianz anbietet"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.allianz.de/gesundheit/pferdekrankenversicherung/",
+          "source_title": "Allianz – Pferdekrankenversicherung"
+        },
+        {
+          "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+          "source_title": "Uelzener – Pferdekrankenversicherung"
+        },
+        {
+          "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+          "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016"
+        },
+        {
+          "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
+          "source_title": "Agria – Pferdeversicherung"
+        }
+      ],
+      "claims": [
+        "Allianz nennt für ihre Pferdekrankenversicherung einen möglichen Abschluss ab acht Wochen und lebenslange Fortführung.",
+        "Allianz beschreibt eine Wechseloption, mit der sich der Schutz einmalig ohne erneute Gesundheitsprüfung verbessern lässt.",
+        "Allianz gibt für ihre Pferdekrankenversicherung Leistungen bei bildgebenden und Laboruntersuchungen an.",
+        "Die Uelzener-Pferdekrankenversicherung umfasst ambulante und stationäre Behandlungen, Operationen und Klinikunterbringung.",
+        "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
+        "Agria erklärt, dass die Kosten einer Pferdekrankenversicherung von mehreren Faktoren abhängen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "pferdekrankenversicherung allianz",
+      "topic": "Bietet die Allianz eine Pferdekrankenversicherung?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdekrankenversicherung-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Bietet die Allianz eine Pferdekrankenversicherung?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.allianz.de/gesundheit/pferdekrankenversicherung/",
+        "source_title": "Allianz – Pferdekrankenversicherung",
+        "evidence_text": "Die Pferdekrankenversicherung kann ab einem Alter von acht Wochen abgeschlossen werden und bleibt während der gesamten Lebensdauer Ihres Pferds bestehen.",
+        "evidence_text_sha256": "3d0a59cebdda8b8d0e2afaa107b9ab641198014e16fe36b60040e31b7e2e2e11",
+        "statement": "Allianz nennt für ihre Pferdekrankenversicherung einen möglichen Abschluss ab acht Wochen und lebenslange Fortführung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.allianz.de/gesundheit/pferdekrankenversicherung/",
+        "source_title": "Allianz – Pferdekrankenversicherung",
+        "evidence_text": "Der Zusatzbaustein \"Wechseloption\" bietet Ihnen bei einem Erstabschluss der Pferdekrankenversicherung die Möglichkeit, den Versicherungsschutz einmalig ohne erneute Gesundheitsprüfung zu verbessern.",
+        "evidence_text_sha256": "b001cdb024985b7a3f38b53c6530550a61adb422ec4f71f38dba41ac927cc78b",
+        "statement": "Allianz beschreibt eine Wechseloption, mit der sich der Schutz einmalig ohne erneute Gesundheitsprüfung verbessern lässt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.allianz.de/gesundheit/pferdekrankenversicherung/",
+        "source_title": "Allianz – Pferdekrankenversicherung",
+        "evidence_text": "Die Pferdekrankenversicherung übernimmt hierfür die Kosten für moderne bildgebende Verfahren wie Röntgen, Ultraschall und MRT (Kernspintomografie) sowie umfassende Laboruntersuchungen.",
+        "evidence_text_sha256": "b058d98c7195fd4600e5bd91bd1627136d2de3feaebefcfe90b6ff7adac38618",
+        "statement": "Allianz gibt für ihre Pferdekrankenversicherung Leistungen bei bildgebenden und Laboruntersuchungen an.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+        "source_title": "Uelzener – Pferdekrankenversicherung",
+        "evidence_text": "Sie übernimmt die Kosten für ambulante und stationäre Behandlungen sowie für alle chirurgischen Eingriffe bis hin zur Unterbringung in einer Tierklinik.",
+        "evidence_text_sha256": "021c04aa6eb53330f9b29b148599c250aa4b63cb3781acfbcd20cc21b9300055",
+        "statement": "Die Uelzener-Pferdekrankenversicherung umfasst ambulante und stationäre Behandlungen, Operationen und Klinikunterbringung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "Einige Versicherer begrenzen zudem die Summen, die sie für eine Operation bezahlen.",
+        "evidence_text_sha256": "e5cbb83fb99a6e4f90a55ab044c711ea0f84ceec8ffbe9ff6eca6e8ea8240b00",
+        "statement": "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
+        "source_title": "Agria – Pferdeversicherung",
+        "evidence_text": "Die Kosten einer Pferde-Krankenversicherung hängen von mehreren Faktoren ab:",
+        "evidence_text_sha256": "e4a41acc875cc2d69e75e8496cf2f0be24e7524189c73bb0b8c3f83db976468c",
+        "statement": "Agria erklärt, dass die Kosten einer Pferdekrankenversicherung von mehreren Faktoren abhängen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdekrankenversicherung-faq/",
+        "anchor": "Pferdeversicherung Beratung",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdekrankenversicherung-faq/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdekrankenversicherung-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Versicherung",
+      "Pferde",
+      "Krankenschutz",
+      "OP",
+      "Kosten",
+      "Beitrag",
+      "Behandlung",
+      "Leistungen",
+      "Fragen",
+      "Vertrag",
+      "Erstattung",
+      "Tarif",
+      "Vergleich",
+      "Allianz",
+      "Uelzener",
+      "Barmenia",
+      "HUK",
+      "Agria",
+      "Check24",
+      "Erfahrungen",
+      "Schutz",
+      "Pferdekrankenversicherung",
+      "Pferdeversicherung",
+      "Fristen",
+      "Alter",
+      "Wartezeit",
+      "Bedingungen",
+      "Auswahl",
+      "Versicherungen",
+      "Recht"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die konkrete Frage wird präziser anhand belegter Bedingungen im Fließtext beantwortet; eine Tabelle würde hier keinen zusätzlichen belastbaren Mehrwert bieten."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
