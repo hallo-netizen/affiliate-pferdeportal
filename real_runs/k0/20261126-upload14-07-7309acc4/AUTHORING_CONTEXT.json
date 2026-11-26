@@ -26,10 +26,6 @@
         {
           "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
           "source_title": "Agria – Pferdeversicherung"
-        },
-        {
-          "source_url": "https://www.allianz.de/gesundheit/pferdekrankenversicherung/",
-          "source_title": "Allianz – Pferdekrankenversicherung"
         }
       ],
       "claims": [
@@ -37,8 +33,7 @@
         "Die Uelzener Pferdekrankenversicherung schützt vor Kosten bei Krankheit oder Verletzung.",
         "Die Uelzener-Pferdekrankenversicherung umfasst ambulante und stationäre Behandlungen, Operationen und Klinikunterbringung.",
         "Uelzener nennt für Vorsorge einschließlich Impfungen ein Budget von 500 Euro pro Versicherungsjahr.",
-        "Agria erklärt, dass die Kosten einer Pferdekrankenversicherung von mehreren Faktoren abhängen.",
-        "Allianz nennt für ihre Pferdekrankenversicherung einen möglichen Abschluss ab acht Wochen und lebenslange Fortführung."
+        "Agria erklärt, dass die Kosten einer Pferdekrankenversicherung von mehreren Faktoren abhängen."
       ]
     },
     "production_plan_item": {
@@ -118,17 +113,6 @@
         "article_types": [
           "Beratung"
         ]
-      },
-      "F6": {
-        "source_url": "https://www.allianz.de/gesundheit/pferdekrankenversicherung/",
-        "source_title": "Allianz – Pferdekrankenversicherung",
-        "evidence_text": "Die Pferdekrankenversicherung kann ab einem Alter von acht Wochen abgeschlossen werden und bleibt während der gesamten Lebensdauer Ihres Pferds bestehen.",
-        "evidence_text_sha256": "3d0a59cebdda8b8d0e2afaa107b9ab641198014e16fe36b60040e31b7e2e2e11",
-        "statement": "Allianz nennt für ihre Pferdekrankenversicherung einen möglichen Abschluss ab acht Wochen und lebenslange Fortführung.",
-        "claim_status": "FULLY_SUPPORTED",
-        "article_types": [
-          "Beratung"
-        ]
       }
     },
     "required_fact_ids": [
@@ -136,16 +120,14 @@
       "F2",
       "F3",
       "F4",
-      "F5",
-      "F6"
+      "F5"
     ],
     "allowed_fact_ids": [
       "F1",
       "F2",
       "F3",
       "F4",
-      "F5",
-      "F6"
+      "F5"
     ],
     "bound_links": [
       {
