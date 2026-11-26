@@ -1,0 +1,182 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Kosten der Allianz Pferde OP Versicherung",
+    "target_keyword": "allianz pferde op versicherung kosten",
+    "category": "pferde-op-versicherung-tarife-und-kosten",
+    "article_type": "Beratung",
+    "plan_slot": "d54cd0326bf19547ca86a8041c80369b3efec7cb0f77554cdcf1468a91aaa9c4"
+  },
+  "content_profile": {
+    "search_intent": "Welche Kosten für die Pferde OP Versicherung der Allianz zu erwarten sind und wovon sie abhängen."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+          "source_title": "Allianz – Pferde-OP-Versicherung"
+        }
+      ],
+      "claims": [
+        "Die Allianz bietet eine Pferde-OP-Versicherung mit einem ausgewiesenen Preis ab 15,23 Euro im Monat an.",
+        "Eine Pferde-OP-Versicherung konzentriert sich im Unterschied zur Krankenvollversicherung auf das finanzielle Risiko von Operationen.",
+        "Die Selbstbeteiligung der Allianz-OP-Versicherung für Pferde ist beim Abschluss individuell wählbar.",
+        "Bei der Allianz kann die Pferdeprämie von Rasse und Alter abhängen; ein Kaltblut oder älteres Pferd wird häufig teurer.",
+        "Allianz-Versicherungsprodukte sind modular aufgebaut und lassen sich an den gewünschten Schutz anpassen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "allianz pferde op versicherung kosten",
+      "topic": "Kosten der Allianz Pferde OP Versicherung",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-op-versicherung-tarife-und-kosten",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Kosten der Allianz Pferde-OP-Versicherung anhand Tarif und Selbstbeteiligung prüfen.",
+      "decision_criteria": [
+        "Monatlicher Einstiegspreis",
+        "Einfluss des Pferdealters",
+        "Selbstbeteiligung"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz – Pferde-OP-Versicherung",
+        "evidence_text": "Bei der Allianz gibt es die OP-Versicherung für Pferde ab 15,23 Euro pro Monat.",
+        "evidence_text_sha256": "6dbd8edd3ac8abd6bb8b91be4ea639b4c71c8e44b15669e5bfdd3b84c70def21",
+        "statement": "Die Allianz bietet eine Pferde-OP-Versicherung mit einem ausgewiesenen Preis ab 15,23 Euro im Monat an.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz – Pferde-OP-Versicherung",
+        "evidence_text": "Die Kosten für eine Pferde OP-Versicherung sind deutlich niedriger als bei einer Pferdekrankenvollversicherung, da sie sich gezielt auf das finanzielle Risiko teurer Operationen konzentriert.",
+        "evidence_text_sha256": "bab64df0fc11d0d7430f63a631a9715a7b35b4159d311f2827381d411784b13d",
+        "statement": "Eine Pferde-OP-Versicherung konzentriert sich im Unterschied zur Krankenvollversicherung auf das finanzielle Risiko von Operationen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz – Pferde-OP-Versicherung",
+        "evidence_text": "Die Selbstbeteiligung ist flexibel und kann bei Abschluss der OP-Versicherung für Pferde individuell festgelegt werden.",
+        "evidence_text_sha256": "fb09c998c9454a87eb1c63e6883a016e409b1a5dee3e9a57fe99b0f368babd6b",
+        "statement": "Die Selbstbeteiligung der Allianz-OP-Versicherung für Pferde ist beim Abschluss individuell wählbar.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz – Pferde-OP-Versicherung",
+        "evidence_text": "Ein Kaltblut oder ein älteres Pferd verursacht meist höhere Prämien als ein junges Pony.",
+        "evidence_text_sha256": "139fd44082ecb255a8852417cd39a8e5492989b0d856f3070debf61a00cc4999",
+        "statement": "Bei der Allianz kann die Pferdeprämie von Rasse und Alter abhängen; ein Kaltblut oder älteres Pferd wird häufig teurer.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz – Pferde-OP-Versicherung",
+        "evidence_text": "Die Produkte der Allianz sind modular aufgebaut und können so Ihrem Bedarf angepasst werden.",
+        "evidence_text_sha256": "313ab3f00d96766904273c2fe9ed2d08e8c6d1e8b78a50e4a0eaa071b47c8a3c",
+        "statement": "Allianz-Versicherungsprodukte sind modular aufgebaut und lassen sich an den gewünschten Schutz anpassen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-op-versicherung-tarife-und-kosten/",
+        "anchor": "Pferdeversicherung Beratung",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-op-versicherung-tarife-und-kosten/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-op-versicherung-tarife-und-kosten",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Allianz",
+      "Kosten",
+      "Pferde",
+      "Versicherung",
+      "Beitrag",
+      "Tarif",
+      "Selbstbeteiligung",
+      "Versicherungen",
+      "Recht"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Entscheidung hängt von Bedingungen ab, die im Fließtext und in der Checkliste präziser erklärt werden; eine Tabelle böte keinen zusätzlichen belastbaren Vergleichsnutzen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
