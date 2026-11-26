@@ -1,0 +1,33 @@
+# Draft only: do not deploy until the whole acceptance is complete.
+name: Pferde Atelier eBay Nachrichten
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: pferdeatelier-ebay-deletion-only
+  cancel-in-progress: false
+jobs:
+  inbox:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Run existing message worker only
+        env:
+          DELETION_KEY: ${{ secrets.PFERDEATELIER_EBAY_DELETION_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$DELETION_KEY" =~ ^[a-f0-9]{64}$ ]] || { echo 'Message key not configured'; exit 1; }
+          URL='https://pferde-atelier.de/wp-json/affiliate-zentrale/v1/ebay/account-deletion-tick'
+          body=$(mktemp)
+          trap 'rm -f "$body"' EXIT
+          for n in 1 2 3 4; do
+            code=$(curl --silent --show-error --max-time 45 --request POST --header "X-PPAR-Deletion-Key: $DELETION_KEY" --header 'Cache-Control: no-store' --output "$body" --write-out '%{http_code}' "$URL")
+            [[ "$code" == 200 ]] || { echo "Message request failed HTTP $code"; exit 1; }
+            status=$(jq -er 'select(.contract == "ebay_deletion_tick_v1") | .status | select(. == "pending" or . == "empty" or . == "busy")' "$body")
+            jq -c '{status,attempted,processed,duration_seconds,peak_memory_bytes}' "$body"
+            [[ "$status" == pending ]] || break
+            [[ "$n" == 4 ]] || sleep 15
+          done
