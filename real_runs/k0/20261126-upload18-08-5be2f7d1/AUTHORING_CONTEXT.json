@@ -1,0 +1,195 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Was sagt Stiftung Warentest zur Pferde OP Versicherung?",
+    "target_keyword": "pferde-op versicherung stiftung warentest",
+    "category": "pferde-op-versicherung-faq",
+    "article_type": "FAQ",
+    "plan_slot": "5be2f7d1f7d8349df8f47858c82f75251d1c58cd077f1f9e3f21ae3b5f926937"
+  },
+  "content_profile": {
+    "search_intent": "Welche Informationen oder Untersuchungen von Stiftung Warentest zu Pferde OP Versicherungen verfügbar sind und wie sie zu verstehen sind."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+          "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016"
+        },
+        {
+          "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+          "source_title": "Allianz – Pferde-OP-Versicherung"
+        }
+      ],
+      "claims": [
+        "Stiftung Warentest untersuchte 2016 neun Pferde-OP-Versicherungstarife von drei Anbietern.",
+        "Stiftung Warentest stellte in ihrem älteren Pferde-OP-Versicherungstest Leistungsausschlüsse bei bestimmten Krankheiten und Operationen fest.",
+        "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
+        "Stiftung Warentest fand 2016 im geprüften Angebot auch einen Pferde-OP-Tarif mit breiter Operationsdeckung.",
+        "Der Pferdeversicherungstest von Stiftung Warentest wurde am 19. Januar 2016 veröffentlicht.",
+        "Die Allianz versichert medizinisch notwendige Pferdeoperationen wegen Unfall, Krankheit oder Fehlentwicklung."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "pferde-op versicherung stiftung warentest",
+      "topic": "Was sagt Stiftung Warentest zur Pferde OP Versicherung?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-op-versicherung-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was sagt Stiftung Warentest zur Pferde OP Versicherung?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "neun Tarife von drei Anbietern haben wir unter die Lupe genommen.",
+        "evidence_text_sha256": "dcd68417c6f07e61141ca347ca369f8db14f1986e68216e798b1235f0334be96",
+        "statement": "Stiftung Warentest untersuchte 2016 neun Pferde-OP-Versicherungstarife von drei Anbietern.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "Oft sind bestimmte Erkrankungen und Operationen ausgeschlossen.",
+        "evidence_text_sha256": "03c8a8e001751d6bef26e4dfecf6f7ae7bd5c6099e1b0029916dd1fcc80bf28b",
+        "statement": "Stiftung Warentest stellte in ihrem älteren Pferde-OP-Versicherungstest Leistungsausschlüsse bei bestimmten Krankheiten und Operationen fest.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "Einige Versicherer begrenzen zudem die Summen, die sie für eine Operation bezahlen.",
+        "evidence_text_sha256": "e5cbb83fb99a6e4f90a55ab044c711ea0f84ceec8ffbe9ff6eca6e8ea8240b00",
+        "statement": "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "Doch es gibt immerhin einen Tarif, der fast alle Operationen abdeckt.",
+        "evidence_text_sha256": "dec96c585c93469dd6c887e17348fe8452f1835c05c46f8ac6179eceaf50069b",
+        "statement": "Stiftung Warentest fand 2016 im geprüften Angebot auch einen Pferde-OP-Tarif mit breiter Operationsdeckung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "19.01.2016",
+        "evidence_text_sha256": "4385e57870cb4aa53ab5ff5edeb8293d6a86b6cf104dd647b01d5a4903016c08",
+        "statement": "Der Pferdeversicherungstest von Stiftung Warentest wurde am 19. Januar 2016 veröffentlicht.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz – Pferde-OP-Versicherung",
+        "evidence_text": "Die OP-Versicherung deckt medizinisch notwendige Operationen infolge von Unfall, Krankheit oder Fehlentwicklung ab.",
+        "evidence_text_sha256": "535799d78572ce2f917ab4a82128a0a45e759a9ecbb5564b17cf791d4d6847ef",
+        "statement": "Die Allianz versichert medizinisch notwendige Pferdeoperationen wegen Unfall, Krankheit oder Fehlentwicklung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-op-versicherung-faq/",
+        "anchor": "Pferdeversicherung Beratung",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-op-versicherung-faq/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-op-versicherung-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Stiftung",
+      "Warentest",
+      "Pferde",
+      "OP",
+      "Versicherung",
+      "Test",
+      "Leistungen",
+      "Versicherungen",
+      "Recht"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Entscheidung hängt von Bedingungen ab, die im Fließtext und in der Checkliste präziser erklärt werden; eine Tabelle böte keinen zusätzlichen belastbaren Vergleichsnutzen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
