@@ -1,0 +1,187 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Erfahrungen mit der AGILA Pferdekrankenversicherung",
+    "target_keyword": "agila pferdekrankenversicherung erfahrungen",
+    "category": "pferdekrankenversicherung-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "9418f887909fe061c3f121072fec1c247ca9098f1ab26986c8bcb2d84d905f11"
+  },
+  "content_profile": {
+    "search_intent": "Worauf sich die Suche nach Erfahrungen zur AGILA Pferdekrankenversicherung richtet und welche belastbaren Kriterien zu beachten sind."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.agila.de/",
+          "source_title": "AGILA – Offizielle Tierversicherungen für Hund und Katze"
+        },
+        {
+          "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
+          "source_title": "Agria – Pferdeversicherung"
+        }
+      ],
+      "claims": [
+        "Auf der offiziellen AGILA-Seite werden als versicherte Tierarten Hunde und Katzen genannt.",
+        "AGILA nennt knapp 400.000 Kunden mit Haustieren, ohne diese Zahl auf Pferdeversicherungen zu beziehen.",
+        "Der AGILA-Kundenservice umfasst digitale Rechnungseinreichung und Vertragsübersicht, jedoch für das dargestellte Hunde- und Katzenportfolio.",
+        "AGILA beschreibt eine langjährige Spezialisierung auf Hunde- und Katzenversicherungen, nicht auf Pferde.",
+        "Agria bietet ausdrücklich Pferdeversicherungen als Schutz vor Tierarztkosten bei Krankheit, Verletzung oder Unfall an."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "agila pferdekrankenversicherung erfahrungen",
+      "topic": "Erfahrungen mit der AGILA Pferdekrankenversicherung",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdekrankenversicherung-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Erfahrungen zu AGILA kritisch auf ihre Relevanz für Pferdekrankenversicherungen prüfen.",
+      "decision_criteria": [
+        "Offiziell versicherte Tierarten",
+        "Belastbarkeit der Kundenberichte",
+        "Pferdeleistungen beim tatsächlichen Anbieter"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.agila.de/",
+        "source_title": "AGILA – Offizielle Tierversicherungen für Hund und Katze",
+        "evidence_text": "Starker Schutz für Hund und Katze",
+        "evidence_text_sha256": "b41b683bf789f39f3e0900390c0c728dbf004c8f402305a9482825f7b1525da7",
+        "statement": "Auf der offiziellen AGILA-Seite werden als versicherte Tierarten Hunde und Katzen genannt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.agila.de/",
+        "source_title": "AGILA – Offizielle Tierversicherungen für Hund und Katze",
+        "evidence_text": "Wir stehen bereits knapp 400.000 Menschen und ihren Tieren zur Seite.",
+        "evidence_text_sha256": "e1ad39a0679a1895c44612236955a7bb982a5b7401c936c2642c27091225195d",
+        "statement": "AGILA nennt knapp 400.000 Kunden mit Haustieren, ohne diese Zahl auf Pferdeversicherungen zu beziehen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.agila.de/",
+        "source_title": "AGILA – Offizielle Tierversicherungen für Hund und Katze",
+        "evidence_text": "Mit der AGILA Kunden-App reichen Sie Rechnungen ganz einfach ein und haben Ihre Vertragsdaten im Blick",
+        "evidence_text_sha256": "94341828333535371e098614e1e11e5c494cc1a431c9cd86335e07c4b8b7cc56",
+        "statement": "Der AGILA-Kundenservice umfasst digitale Rechnungseinreichung und Vertragsübersicht, jedoch für das dargestellte Hunde- und Katzenportfolio.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.agila.de/",
+        "source_title": "AGILA – Offizielle Tierversicherungen für Hund und Katze",
+        "evidence_text": "AGILA ist seit 1994 auf Versicherungen für Hunde und Katzen spezialisiert und konnte bereits zahlreichen Tierhaltenden helfen.",
+        "evidence_text_sha256": "a6ed85cb8cc6d503340c8a85729c56233d461c951ed4ef688d0265e54abef4a0",
+        "statement": "AGILA beschreibt eine langjährige Spezialisierung auf Hunde- und Katzenversicherungen, nicht auf Pferde.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
+        "source_title": "Agria – Pferdeversicherung",
+        "evidence_text": "Mit der richtigen Versicherung erhältst du Unterstützung und Schutz vor unerwarteten Tierarztkosten im Falle von Krankheit, Verletzung oder Unfall.",
+        "evidence_text_sha256": "b38e5026b19ac04d0747f24c583345e6ff33183f95daeee5892ec02213375abd",
+        "statement": "Agria bietet ausdrücklich Pferdeversicherungen als Schutz vor Tierarztkosten bei Krankheit, Verletzung oder Unfall an.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdekrankenversicherung-beratung/",
+        "anchor": "Beratung Pferdekrankenversicherung",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/pferdekrankenversicherung/",
+        "anchor": "Pferdekrankenversicherung",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdekrankenversicherung-beratung/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/pferdekrankenversicherung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdekrankenversicherung-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "AGILA",
+      "Pferdekrankenversicherung",
+      "Versicherung",
+      "Erfahrungen",
+      "Kunden",
+      "Pferd",
+      "Tierarten",
+      "Agria",
+      "Entscheidung",
+      "Beratung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Ein Vergleich von AGILA Pferdetarifen ist nicht möglich, weil AGILA laut eigener Website Hunde und Katzen versichert. Eine Tabelle mit erfundenen Pferdeleistungen wäre irreführend."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
