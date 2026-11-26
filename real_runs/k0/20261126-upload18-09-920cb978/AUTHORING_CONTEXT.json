@@ -16,8 +16,8 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-          "source_title": "Allianz – Pferde-OP-Versicherung"
+          "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+          "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026"
         },
         {
           "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
@@ -25,9 +25,9 @@
         }
       ],
       "claims": [
-        "Die Allianz versichert medizinisch notwendige Pferdeoperationen wegen Unfall, Krankheit oder Fehlentwicklung.",
-        "Allianz nennt für Pferdeoperationen infolge von Krankheiten eine Wartezeit von drei Monaten.",
-        "Allianz nennt für Kolik eine Wartezeit von fünf Tagen.",
+        "Allianz hat seit Februar 2026 vier OP-Schutztarife für Pferde in den Produktlinien Basis, Smart, Komfort und Premium.",
+        "Allianz gibt für ihre überarbeiteten Tierkrankenversicherungen nach Unfällen einen Leistungsbeginn ohne Wartezeit an.",
+        "Allianz nennt bei zehn Prozent Selbstbehalt für Pferde eine Begrenzung auf 1.500 Euro je Rechnung.",
         "Uelzener nennt für Pferdeoperationen wegen Kolik und Unfall eine Wartezeit von fünf Tagen.",
         "Uelzener nennt für Pferdeoperationen wegen Krankheiten eine Wartezeit von zwei Monaten.",
         "Uelzener versichert auch Pferdeoperationen unter Sedierung oder Lokalanästhesie.",
@@ -61,33 +61,33 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Die OP-Versicherung deckt medizinisch notwendige Operationen infolge von Unfall, Krankheit oder Fehlentwicklung ab.",
-        "evidence_text_sha256": "535799d78572ce2f917ab4a82128a0a45e759a9ecbb5564b17cf791d4d6847ef",
-        "statement": "Die Allianz versichert medizinisch notwendige Pferdeoperationen wegen Unfall, Krankheit oder Fehlentwicklung.",
+        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
+        "evidence_text": "Ab dem 4.2.2026 gibt es für jede dieser drei Tierfamilien vier OP-Schutztarife und vier Krankenvolltarife jeweils in den vier Produktlinien Basis, Smart, Komfort und Premium.",
+        "evidence_text_sha256": "47de358641e95848c449381c741336a1052a0564bad1834ceeaa24254f759870",
+        "statement": "Allianz hat seit Februar 2026 vier OP-Schutztarife für Pferde in den Produktlinien Basis, Smart, Komfort und Premium.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Vergleich"
         ]
       },
       "F2": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Für Krankheiten gilt eine Wartezeit von drei Monaten.",
-        "evidence_text_sha256": "8fcc2ca36441c70a49a19b521c4c51819d28db00f688227fac91de6ba8e9bc79",
-        "statement": "Allianz nennt für Pferdeoperationen infolge von Krankheiten eine Wartezeit von drei Monaten.",
+        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
+        "evidence_text": "Nach einem Unfall werden Behandlungskosten ohne Wartezeit übernommen, die Leistung erfolgt schnell und direkt.",
+        "evidence_text_sha256": "8b527506402e10cb9e8bf3cd815f56c0a208a7fe92e52718880994e670b26c24",
+        "statement": "Allianz gibt für ihre überarbeiteten Tierkrankenversicherungen nach Unfällen einen Leistungsbeginn ohne Wartezeit an.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Vergleich"
         ]
       },
       "F3": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Für Kolik gilt eine Wartezeit von 5 Tagen.",
-        "evidence_text_sha256": "10abf03ab6b6f0e228e2741bdb5ad4ce3b082a8b2112e9edc8b0a71382e892b4",
-        "statement": "Allianz nennt für Kolik eine Wartezeit von fünf Tagen.",
+        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
+        "evidence_text": "Zum Beispiel zahlen Pferdebesitzerinnen und -besitzer bei einem Selbstbehalt von 10% maximal 1.500 Euro je Rechnung dazu – auch wenn die Rechnung 30.000 Euro beträgt.",
+        "evidence_text_sha256": "90871fb1d07cb987411b4ede1887a1ee52aef2450827fc888fbdb2b79fdf2f32",
+        "statement": "Allianz nennt bei zehn Prozent Selbstbehalt für Pferde eine Begrenzung auf 1.500 Euro je Rechnung.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Vergleich"
@@ -203,11 +203,13 @@
     "comparison_source_bindings": [
       {
         "source_label": "Allianz",
-        "nearest_option_heading": "Allianz"
+        "nearest_option_heading": "Allianz",
+        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/"
       },
       {
         "source_label": "Uelzener",
-        "nearest_option_heading": "Uelzener"
+        "nearest_option_heading": "Uelzener",
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/"
       }
     ],
     "table_decision": {
@@ -219,9 +221,9 @@
       "reader_benefit": "Leistung und Wartezeit der konkreten Anbieter lassen sich ohne wiederholtes Querlesen nach dem gleichen Kriterium abgleichen.",
       "why_not_prose": "Der direkte Vergleich unterschiedlicher Anbieter und ihrer Bedingungen ist im Fließtext weniger übersichtlich und erschwert die Auswahl.",
       "comparison_axes": [
-        "Wartezeiten bei Krankheit",
-        "Schutz bei Kolik und Unfall",
-        "Operationen und Ausschlüsse"
+        "Tarifangebot und Leistungen",
+        "Wartezeiten bei Unfall und Kolik",
+        "Selbstbeteiligung und Erstattung"
       ],
       "source_fact_ids": [
         "F1",
