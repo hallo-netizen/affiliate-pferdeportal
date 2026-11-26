@@ -112,16 +112,27 @@
         "href": "/category/pferderassen-pferdetypen/",
         "anchor": "Pferderassen und Pferdetypen",
         "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "Pferdegesundheit verstehen",
+        "block": "further_information"
       }
     ],
     "link_registry": [
       {
         "href": "/category/pferderassen-pferdetypen/",
         "active": true
+      },
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
       }
     ],
     "runtime_link_roles": [
-      "parent_category"
+      "parent_category",
+      "further_information"
     ],
     "wordpress_category": {
       "id": 0,
