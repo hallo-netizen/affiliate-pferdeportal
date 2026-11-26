@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Erfahrungen mit der Agria Pferdekrankenversicherung und ihre Aussagekraft",
+      "target_keyword": "agria pferdekrankenversicherung erfahrungen",
+      "category": "pferdekrankenversicherung-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "0382013021fdf35123823c819a7ad115c912e3bac8acf8360af9743ff36363d5"
+    }
+  ],
+  "batch_sha256": "614277571d6ab702439cfc86b711233afbbaa6212beb15ede7b10f685e97bef4"
+}

@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Uelzener Pferde OP Versicherung kündigen und Fristen beachten",
+      "target_keyword": "uelzener pferde op versicherung kündigen",
+      "category": "pferde-op-versicherung-faq",
+      "article_type": "Anleitung",
+      "plan_slot": "afbeb7c4b5431e13d264b04eb139f241ff06c91a8974345032da7791d09c1e6b"
+    }
+  ],
+  "batch_sha256": "d72e67465610527823dbe2ede33a09da4c857aa4d15a5c8d400a3a37d0cc8fdf"
+}

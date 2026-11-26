@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Was kostet eine Pferdekrankenversicherung im Monat?",
+      "target_keyword": "Was kostet eine pferdekrankenversicherung im monat?",
+      "category": "pferdekrankenversicherung-kosten",
+      "article_type": "FAQ",
+      "plan_slot": "0f54cfde56df7b14994f9cab4ad1e62ecf30eeee2d224b0fac197c8db02b5cd4"
+    }
+  ],
+  "batch_sha256": "784502f41d5a607f09d28b4dbbc0849980c1c2bc4f4baacde9f4a7b51d3e647f"
+}

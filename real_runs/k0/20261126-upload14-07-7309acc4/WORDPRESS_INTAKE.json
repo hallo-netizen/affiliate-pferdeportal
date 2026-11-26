@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Pferdekrankenversicherung für ältere Pferde und Altersgrenzen",
+      "target_keyword": "pferdekrankenversicherung für ältere pferde",
+      "category": "pferdekrankenversicherung-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "7309acc4327f53dbefcf7cdcd2fbb89aac297537c07a8c0c92e4c13db94ab700"
+    }
+  ],
+  "batch_sha256": "eb11386fa52333bcb20f2baaf103e56bcde5a0ceda7a8c8ba0c42908798a4cb4"
+}

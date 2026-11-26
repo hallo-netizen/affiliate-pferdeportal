@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Bietet die HUK eine Pferdekrankenversicherung?",
+      "target_keyword": "pferdekrankenversicherung huk",
+      "category": "pferdekrankenversicherung-faq",
+      "article_type": "FAQ",
+      "plan_slot": "d66b05751a01df3763f77806a5cae170c4ca1881ff18b7d680ca75cda53fc2b1"
+    }
+  ],
+  "batch_sha256": "2e0c6d4fd5403fbf96de218c4616c8bf7d5b68bbfd29b22e7f33f580fd25432f"
+}

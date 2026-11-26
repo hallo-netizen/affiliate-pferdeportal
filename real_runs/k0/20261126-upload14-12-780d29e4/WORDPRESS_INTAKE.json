@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Kann man Pferdekrankenversicherungen über Check24 vergleichen?",
+      "target_keyword": "pferdekrankenversicherung check24",
+      "category": "pferdekrankenversicherung-faq",
+      "article_type": "FAQ",
+      "plan_slot": "780d29e444847f6dee7e4b2624c5d498512c7ae8129a86a1f80c21c1747c3f35"
+    }
+  ],
+  "batch_sha256": "a064b797c0afd69c78a9fcc8beff8dbf5d74951d2a5f67aefa221502c16dc992"
+}

@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Pferdekrankenversicherungen im Preisvergleich",
+      "target_keyword": "pferdekrankenversicherung preisvergleich",
+      "category": "pferdekrankenversicherung-vergleich",
+      "article_type": "Vergleich",
+      "plan_slot": "7dfa067b48ba527ebce00ce5938e1b276601f355f4c7ec45d8f2459891200018"
+    }
+  ],
+  "batch_sha256": "6b756f68a83db1c32769561e7a8115f6172ac4c5ddc3b8517950612a5d513d57"
+}

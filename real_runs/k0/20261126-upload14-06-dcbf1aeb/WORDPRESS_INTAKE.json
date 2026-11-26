@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Erfahrungen mit Pferdekrankenversicherungen einordnen",
+      "target_keyword": "pferdekrankenversicherung erfahrungen",
+      "category": "pferdekrankenversicherung-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "dcbf1aeb7851a6c0b85b196db7c9e359ebd6a34bf968ecfabe9d7e8c3d58e914"
+    }
+  ],
+  "batch_sha256": "3804489d469e68042a6f0951c53de7c0eff09f6718ec2221f796a1f3aab36d5e"
+}

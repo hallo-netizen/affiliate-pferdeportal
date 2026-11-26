@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Kann man eine Pferdekrankenversicherung ohne separate OP Versicherung abschließen?",
+      "target_keyword": "pferdekrankenversicherung ohne op versicherung",
+      "category": "pferdekrankenversicherung-leistungen",
+      "article_type": "FAQ",
+      "plan_slot": "30eeb47bd334d0252c6504b660e4fa7c2d41db58646a1f21435509790e74821c"
+    }
+  ],
+  "batch_sha256": "58ec4a4199614c94c31b9c9b01d2bcbfa13678d8106c18bc2dd2c03b04f52364"
+}

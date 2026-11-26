@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Günstige Pferde OP Versicherungen im Vergleich",
+      "target_keyword": "günstige pferde-op-versicherung",
+      "category": "pferde-op-versicherung-tarife-und-kosten",
+      "article_type": "Vergleich",
+      "plan_slot": "440080f7c566ed3dff1d6a05f2b4a747331852aa36e5fb277ff46f3fb45f601c"
+    }
+  ],
+  "batch_sha256": "7833b6fbe12b01b1e9aea617f7617350f7865b4bc5600aebb5b7096d3409e3a2"
+}

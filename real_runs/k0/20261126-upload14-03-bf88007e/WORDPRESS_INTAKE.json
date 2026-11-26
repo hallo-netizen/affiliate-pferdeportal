@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Leistungen der Barmenia Pferde OP Versicherung",
+      "target_keyword": "barmenia pferde-op-versicherung leistungen",
+      "category": "pferde-op-versicherung-leistungen",
+      "article_type": "Beratung",
+      "plan_slot": "bf88007ea0267807ea9651ac4428eb1fb52a0521360e19ee83df13aac5e3a44c"
+    }
+  ],
+  "batch_sha256": "eeac8dba2fb2b082ec578483c45c439345e8a1f3e5d7f9757b1e1b4ef70c8d50"
+}

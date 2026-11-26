@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Erfahrungen mit der Barmenia Pferde OP Versicherung",
+      "target_keyword": "barmenia pferde-op versicherung erfahrungen",
+      "category": "pferde-op-versicherung-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "440581fba973acdb3199609ddbbdf0fda1fc45ac3db843d934549255a791f494"
+    }
+  ],
+  "batch_sha256": "b0e3240c9a4a53ad2f5f9c950ce92e9f60fad379a86b06ae9a0b335667c070a7"
+}

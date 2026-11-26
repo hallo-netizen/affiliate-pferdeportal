@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Uelzener Pferde OP Versicherung Premium im Überblick",
+      "target_keyword": "uelzener pferde op versicherung premium",
+      "category": "pferde-op-versicherung-tarife-und-kosten",
+      "article_type": "Beratung",
+      "plan_slot": "ca3b4c489b03347497dce8893c0de612312f0b5d754e9999363beeb2cde7ebe3"
+    }
+  ],
+  "batch_sha256": "032c56036ab3d1ba30d92aeec2698d1759cf857d2896c9824343fdf68d5c2312"
+}

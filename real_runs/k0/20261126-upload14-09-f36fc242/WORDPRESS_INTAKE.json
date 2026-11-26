@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Bietet die Allianz eine Pferdekrankenversicherung?",
+      "target_keyword": "pferdekrankenversicherung allianz",
+      "category": "pferdekrankenversicherung-faq",
+      "article_type": "FAQ",
+      "plan_slot": "f36fc242aae6127129149607ab2a9d030198422a1372cea8aa80948a572a1f84"
+    }
+  ],
+  "batch_sha256": "ce6d70c7e459459860194d0cfac981a359cadf596920412eeaa6529108042371"
+}
