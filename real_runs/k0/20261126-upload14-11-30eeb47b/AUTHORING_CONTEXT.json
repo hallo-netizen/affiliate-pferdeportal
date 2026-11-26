@@ -1,0 +1,220 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Kann man eine Pferdekrankenversicherung ohne separate OP Versicherung abschließen?",
+    "target_keyword": "pferdekrankenversicherung ohne op versicherung",
+    "category": "pferdekrankenversicherung-leistungen",
+    "article_type": "FAQ",
+    "plan_slot": "30eeb47bd334d0252c6504b660e4fa7c2d41db58646a1f21435509790e74821c"
+  },
+  "content_profile": {
+    "search_intent": "Pferdekrankenversicherung ohne eigenständige zusätzliche OP Versicherung"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+          "source_title": "Uelzener – Pferdekrankenversicherung"
+        },
+        {
+          "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+          "source_title": "Uelzener – Pferde-OP-Versicherung"
+        },
+        {
+          "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+          "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016"
+        }
+      ],
+      "claims": [
+        "Die Uelzener Pferdekrankenversicherung schützt vor Kosten bei Krankheit oder Verletzung.",
+        "Die Uelzener-Pferdekrankenversicherung umfasst ambulante und stationäre Behandlungen, Operationen und Klinikunterbringung.",
+        "Uelzener nennt für Vorsorge einschließlich Impfungen ein Budget von 500 Euro pro Versicherungsjahr.",
+        "Der Uelzener-OP-Schutz erstattet Leistungen im Zusammenhang mit einer versicherten Pferdeoperation.",
+        "Die Uelzener-Pferdekrankenversicherung umfasst den OP-Schutz und darüber hinaus notwendige ambulante und stationäre Behandlungen.",
+        "Stiftung Warentest stellte in ihrem älteren Pferde-OP-Versicherungstest Leistungsausschlüsse bei bestimmten Krankheiten und Operationen fest."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "pferdekrankenversicherung ohne op versicherung",
+      "topic": "Kann man eine Pferdekrankenversicherung ohne separate OP Versicherung abschließen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdekrankenversicherung-leistungen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Kann man eine Pferdekrankenversicherung ohne separate OP Versicherung abschließen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+        "source_title": "Uelzener – Pferdekrankenversicherung",
+        "evidence_text": "Die Uelzener Pferde-Krankenversicherung bietet einen umfangreichen Schutz vor den finanziellen Folgen, sollte dein Pferd krank werden oder sich verletzen.",
+        "evidence_text_sha256": "58783137daf7eb844eddf57e159a4d3f9ba1d7b93592ba9e55cc6e35d830bda2",
+        "statement": "Die Uelzener Pferdekrankenversicherung schützt vor Kosten bei Krankheit oder Verletzung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+        "source_title": "Uelzener – Pferdekrankenversicherung",
+        "evidence_text": "Sie übernimmt die Kosten für ambulante und stationäre Behandlungen sowie für alle chirurgischen Eingriffe bis hin zur Unterbringung in einer Tierklinik.",
+        "evidence_text_sha256": "021c04aa6eb53330f9b29b148599c250aa4b63cb3781acfbcd20cc21b9300055",
+        "statement": "Die Uelzener-Pferdekrankenversicherung umfasst ambulante und stationäre Behandlungen, Operationen und Klinikunterbringung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+        "source_title": "Uelzener – Pferdekrankenversicherung",
+        "evidence_text": "Vorsorgemaßnahmen (z. B. Impfungen) sind mit 500 EUR pro Versicherungsjahr versichert",
+        "evidence_text_sha256": "bd40b014354abf8d8aa252a60729d400680733051728bd9b3c8e7280a570008a",
+        "statement": "Uelzener nennt für Vorsorge einschließlich Impfungen ein Budget von 500 Euro pro Versicherungsjahr.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "In der OP-Versicherung werden Leistungen erstattet, die mit einer versicherten OP zusammenhängen.",
+        "evidence_text_sha256": "50915182ef604e8fe073ef2c5d9bf04539ecc3b548be3c307cd2eedea2c6dd85",
+        "statement": "Der Uelzener-OP-Schutz erstattet Leistungen im Zusammenhang mit einer versicherten Pferdeoperation.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Demgegenüber steht die Krankenversicherung, die sämtliche Leistungen der OP-Versicherung umfasst und zusätzlich alle anderen notwendigen medizinischen Behandlungen (ambulant und stationär) abdeckt.",
+        "evidence_text_sha256": "b31892e67b2f9b878b37cd7a4b143881ef00f0fe83cfafb4fc3abc77fa56d6be",
+        "statement": "Die Uelzener-Pferdekrankenversicherung umfasst den OP-Schutz und darüber hinaus notwendige ambulante und stationäre Behandlungen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "Oft sind bestimmte Erkrankungen und Operationen ausgeschlossen.",
+        "evidence_text_sha256": "03c8a8e001751d6bef26e4dfecf6f7ae7bd5c6099e1b0029916dd1fcc80bf28b",
+        "statement": "Stiftung Warentest stellte in ihrem älteren Pferde-OP-Versicherungstest Leistungsausschlüsse bei bestimmten Krankheiten und Operationen fest.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdekrankenversicherung-leistungen/",
+        "anchor": "Pferdeversicherung Beratung",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdekrankenversicherung-leistungen/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdekrankenversicherung-leistungen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Versicherung",
+      "Pferde",
+      "Krankenschutz",
+      "OP",
+      "Kosten",
+      "Beitrag",
+      "Behandlung",
+      "Leistungen",
+      "Fragen",
+      "Vertrag",
+      "Erstattung",
+      "Tarif",
+      "Vergleich",
+      "Allianz",
+      "Uelzener",
+      "Barmenia",
+      "HUK",
+      "Agria",
+      "Check24",
+      "Erfahrungen",
+      "Schutz",
+      "Pferdekrankenversicherung",
+      "Pferdeversicherung",
+      "Fristen",
+      "Alter",
+      "Wartezeit",
+      "Bedingungen",
+      "Auswahl",
+      "Versicherungen",
+      "Recht"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die konkrete Frage wird präziser anhand belegter Bedingungen im Fließtext beantwortet; eine Tabelle würde hier keinen zusätzlichen belastbaren Mehrwert bieten."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
