@@ -1,0 +1,179 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welche Pferderasse ist am schwierigsten?",
+    "target_keyword": "Welche Pferderasse ist am schwierigsten?",
+    "category": "pferderassen-pferdetypen",
+    "article_type": "FAQ",
+    "plan_slot": "292671f463ec0e9a513a203b6fa3da4e8da25170e6aa607f2b4477104ffde1fd"
+  },
+  "content_profile": {
+    "search_intent": "Ob sich bestimmte Pferderassen grundsätzlich als schwierig bezeichnen lassen und welche Eigenschaften und Haltungserfahrungen entscheidend sind."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.msdvetmanual.com/horse-owners/selecting-and-providing-a-home-for-a-horse/selecting-a-horse",
+          "source_title": "MSD Veterinary Manual – Selecting a Horse"
+        },
+        {
+          "source_url": "https://www.worldhorsewelfare.org/advice/training-how-do-horses-learn",
+          "source_title": "World Horse Welfare – Training: how do horses learn?"
+        }
+      ],
+      "claims": [
+        "Pferderassen unterscheiden sich in Persönlichkeit und Zuchtzweck; passend ist die Kombination aus Tier, Reiter und Einsatzzweck.",
+        "Kaltblüter gelten häufig als ruhiger, während Araber und Vollblüter teilweise ein lebhafteres Temperament zeigen.",
+        "Ältere Pferde sind häufig ruhiger, können aber gesundheitliche Beschwerden haben, die das Verhalten beeinflussen.",
+        "Beißen kann ein Zeichen von Schmerz oder Unwohlsein sein; Fachleute sollen bei auffälligem Verhalten hinzugezogen werden.",
+        "Angst und Stress behindern beim Pferd das Lernen und können die Wirksamkeit des Trainings verschlechtern."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welche Pferderasse ist am schwierigsten?",
+      "topic": "Welche Pferderasse ist am schwierigsten?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferderassen-pferdetypen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Pferderasse ist am schwierigsten?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/selecting-and-providing-a-home-for-a-horse/selecting-a-horse",
+        "source_title": "MSD Veterinary Manual – Selecting a Horse",
+        "evidence_text": "Different horse breeds have their own personalities and are bred for specific activities, so it's important to match the horse to both the rider and the intended use.",
+        "evidence_text_sha256": "77d3244a945462c589d87205b1ebebf530579c0de65d33e73d52d1cf2ff81932",
+        "statement": "Pferderassen unterscheiden sich in Persönlichkeit und Zuchtzweck; passend ist die Kombination aus Tier, Reiter und Einsatzzweck.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/selecting-and-providing-a-home-for-a-horse/selecting-a-horse",
+        "source_title": "MSD Veterinary Manual – Selecting a Horse",
+        "evidence_text": "For example, draft horses are usually calm, while Arabians and Thoroughbreds can be more nervous.",
+        "evidence_text_sha256": "318fb1d09f0d96d9eefb0cb2e14b0b51045f50333f912321d00d36be15771ff4",
+        "statement": "Kaltblüter gelten häufig als ruhiger, während Araber und Vollblüter teilweise ein lebhafteres Temperament zeigen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.msdvetmanual.com/horse-owners/selecting-and-providing-a-home-for-a-horse/selecting-a-horse",
+        "source_title": "MSD Veterinary Manual – Selecting a Horse",
+        "evidence_text": "Older horses are often calmer than younger ones, but they can have health issues (like arthritis) that affect their behavior or have bad habits (like biting or being stubborn).",
+        "evidence_text_sha256": "a4d8a302cee58652034a43fd27b48ca936ad753cb6426234ebe681019496b240",
+        "statement": "Ältere Pferde sind häufig ruhiger, können aber gesundheitliche Beschwerden haben, die das Verhalten beeinflussen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/training-how-do-horses-learn",
+        "source_title": "World Horse Welfare – Training: how do horses learn?",
+        "evidence_text": "Note that biting can be a sign of pain or discomfort; if you are concerned about your horse’s behaviour, consult your vet or a qualified equine behaviour professional.",
+        "evidence_text_sha256": "8da23d5d33be43ec61d9d9d0a41c1f0a62ceae5afdf345dcb5cc1c12cb4d1f84",
+        "statement": "Beißen kann ein Zeichen von Schmerz oder Unwohlsein sein; Fachleute sollen bei auffälligem Verhalten hinzugezogen werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.worldhorsewelfare.org/advice/training-how-do-horses-learn",
+        "source_title": "World Horse Welfare – Training: how do horses learn?",
+        "evidence_text": "In addition, methods that cause fear or stress impede learning, making the training less effective.",
+        "evidence_text_sha256": "d066213a53c2f7199c4c46aefdc950e59e5e865f29cb3b47f89688ced0feee5c",
+        "statement": "Angst und Stress behindern beim Pferd das Lernen und können die Wirksamkeit des Trainings verschlechtern.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferderassen-pferdetypen/",
+        "anchor": "Pferderassen & Pferdetypen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/training/training-hilfsmittel/trainingsplaene-problempferde/",
+        "anchor": "Trainingspläne Problempferde",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferderassen-pferdetypen/",
+        "active": true
+      },
+      {
+        "href": "/training/training-hilfsmittel/trainingsplaene-problempferde/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferderassen-pferdetypen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferderassen",
+      "Temperament",
+      "Verhalten",
+      "Schwierigkeit",
+      "Problempferde",
+      "Training",
+      "Pferd"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine Ranglistentabelle über angeblich schwierige Pferderassen wäre fachlich nicht belegbar; die verantwortungsvolle Beurteilung betrifft individuelles Verhalten und Training."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
