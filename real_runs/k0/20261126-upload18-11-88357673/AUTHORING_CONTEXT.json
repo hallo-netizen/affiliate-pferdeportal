@@ -16,16 +16,16 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://vertretung.allianz.de/fingerle.markus/",
-          "source_title": "Allianz Versicherungsagentur Markus Fingerle – Pferdeversicherung"
+          "source_url": "https://uelzener.de/filemanager/downloadFile/blogFiles/48cbf6c2-7282-4849-b90e-72c47bce7ec6.pdf/Tierkrankenversicherung_Endartikel.pdf",
+          "source_title": "Finanztest 2/2016 – Privatpatient Pferd (Original-Nachdruck bei Uelzener)"
         }
       ],
       "claims": [
-        "Eine offizielle Allianz-Vertretung weist auf den Zusammenhang von Pferdegesundheit und Kosten hin.",
-        "Die Allianz-Vertretung verweist auf die Änderung der tierärztlichen Gebührenordnung im November 2022.",
-        "Gesundheitsprobleme können Pferde auch bei guter Haltung und Pflege betreffen.",
-        "Die Allianz-Vertretung beschreibt einen Zusatzbaustein für Heilbehandlung, Impfungen und Vorsorge.",
-        "Die offizielle Allianz-Vertretung empfiehlt, Pferde-OP- und Krankenversicherungsleistungen zu vergleichen."
+        "Finanztest verglich 2016 Pferde-OP-Tarife, darunter Allianz-Angebote, von drei Anbietern.",
+        "In der historischen Untersuchung der Pferdeversicherungen unterschieden sich die Leistungen deutlich.",
+        "Im untersuchten Allianz-Tarif waren Klinik-Unterbringungskosten Bestandteil der Erstattungsbetrachtung.",
+        "Der damalige Allianz-Basistarif besaß eigene Grenzen und Bedingungen zur Kostenübernahme.",
+        "Die Untersuchung stammt aus Finanztest 2/2016 und belegt keine aktuellen Kundenerfahrungen."
       ]
     },
     "production_plan_item": {
@@ -52,55 +52,55 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://vertretung.allianz.de/fingerle.markus/",
-        "source_title": "Allianz Versicherungsagentur Markus Fingerle – Pferdeversicherung",
-        "evidence_text": "Pferdegesundheit und damit verbunden Kosten",
-        "evidence_text_sha256": "d4b7c73ab13368cfeda419b0ec33a90a56e4708dc7645cfacb9ea0ca9ee5bbe4",
-        "statement": "Eine offizielle Allianz-Vertretung weist auf den Zusammenhang von Pferdegesundheit und Kosten hin.",
+        "source_url": "https://uelzener.de/filemanager/downloadFile/blogFiles/48cbf6c2-7282-4849-b90e-72c47bce7ec6.pdf/Tierkrankenversicherung_Endartikel.pdf",
+        "source_title": "Finanztest 2/2016 – Privatpatient Pferd (Original-Nachdruck bei Uelzener)",
+        "evidence_text": "Neun Tarife von drei Anbietern",
+        "evidence_text_sha256": "3b58cf16ba8c2a9b23c187f03cbc290a97e94a26ff10bd86b295efe34b2e6c00",
+        "statement": "Finanztest verglich 2016 Pferde-OP-Tarife, darunter Allianz-Angebote, von drei Anbietern.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F2": {
-        "source_url": "https://vertretung.allianz.de/fingerle.markus/",
-        "source_title": "Allianz Versicherungsagentur Markus Fingerle – Pferdeversicherung",
-        "evidence_text": "Vor allem nach der GOT-Anpassung im November 2022.",
-        "evidence_text_sha256": "bbb98e3399e50fd37868ba57bbb2025944f781440855e29775f2eceaa8f8a189",
-        "statement": "Die Allianz-Vertretung verweist auf die Änderung der tierärztlichen Gebührenordnung im November 2022.",
+        "source_url": "https://uelzener.de/filemanager/downloadFile/blogFiles/48cbf6c2-7282-4849-b90e-72c47bce7ec6.pdf/Tierkrankenversicherung_Endartikel.pdf",
+        "source_title": "Finanztest 2/2016 – Privatpatient Pferd (Original-Nachdruck bei Uelzener)",
+        "evidence_text": "Auch die Leistungen variieren erheblich.",
+        "evidence_text_sha256": "73450facd4cbc386efd1089f22791ca203a3d9fb594842ccbece396015c84ab0",
+        "statement": "In der historischen Untersuchung der Pferdeversicherungen unterschieden sich die Leistungen deutlich.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F3": {
-        "source_url": "https://vertretung.allianz.de/fingerle.markus/",
-        "source_title": "Allianz Versicherungsagentur Markus Fingerle – Pferdeversicherung",
-        "evidence_text": "Auch bei bester Pflege und Haltung sind gesundheitliche Probleme unserer Pferde und Ponys oft nicht vermeidbar",
-        "evidence_text_sha256": "6501af28ce41a6823178a8c115506d8a98a22053cb4d27133676184734947497",
-        "statement": "Gesundheitsprobleme können Pferde auch bei guter Haltung und Pflege betreffen.",
+        "source_url": "https://uelzener.de/filemanager/downloadFile/blogFiles/48cbf6c2-7282-4849-b90e-72c47bce7ec6.pdf/Tierkrankenversicherung_Endartikel.pdf",
+        "source_title": "Finanztest 2/2016 – Privatpatient Pferd (Original-Nachdruck bei Uelzener)",
+        "evidence_text": "Auch bei der Allianz werden die Unterbringungskosten",
+        "evidence_text_sha256": "a67b670ae75259966b2d9f03a6ae52868d25c255a468c64852743e912adfa74b",
+        "statement": "Im untersuchten Allianz-Tarif waren Klinik-Unterbringungskosten Bestandteil der Erstattungsbetrachtung.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F4": {
-        "source_url": "https://vertretung.allianz.de/fingerle.markus/",
-        "source_title": "Allianz Versicherungsagentur Markus Fingerle – Pferdeversicherung",
-        "evidence_text": "Der Zusatzbaustein Heilbehandlungs- und Vorsorgeschutz kann auch diese Kosten und Impfungen sowie Prophylaxe mit abdecken.",
-        "evidence_text_sha256": "3da48ca4691513fc8a1517aab1ba0eed450b01b17eaaf1e9f8bd7bb4b04109f4",
-        "statement": "Die Allianz-Vertretung beschreibt einen Zusatzbaustein für Heilbehandlung, Impfungen und Vorsorge.",
+        "source_url": "https://uelzener.de/filemanager/downloadFile/blogFiles/48cbf6c2-7282-4849-b90e-72c47bce7ec6.pdf/Tierkrankenversicherung_Endartikel.pdf",
+        "source_title": "Finanztest 2/2016 – Privatpatient Pferd (Original-Nachdruck bei Uelzener)",
+        "evidence_text": "Die Allianz deckt die Kosten im Basistarif",
+        "evidence_text_sha256": "c4577546941d029a66a8baef5e4b9fae625a664c784cc62faed10ad759f8109e",
+        "statement": "Der damalige Allianz-Basistarif besaß eigene Grenzen und Bedingungen zur Kostenübernahme.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F5": {
-        "source_url": "https://vertretung.allianz.de/fingerle.markus/",
-        "source_title": "Allianz Versicherungsagentur Markus Fingerle – Pferdeversicherung",
-        "evidence_text": "Wichtig ist dabei die Leistungen der Versicherung, im Speziellen bei der Pferdeopversicherung und Tierkrankenversicherung, zu vergleichen",
-        "evidence_text_sha256": "08e71490067e1ecd5d2c294c8734f4c6a60cd009ab86158df00ec4fc7c297832",
-        "statement": "Die offizielle Allianz-Vertretung empfiehlt, Pferde-OP- und Krankenversicherungsleistungen zu vergleichen.",
+        "source_url": "https://uelzener.de/filemanager/downloadFile/blogFiles/48cbf6c2-7282-4849-b90e-72c47bce7ec6.pdf/Tierkrankenversicherung_Endartikel.pdf",
+        "source_title": "Finanztest 2/2016 – Privatpatient Pferd (Original-Nachdruck bei Uelzener)",
+        "evidence_text": "Finanztest 2/2016",
+        "evidence_text_sha256": "6f424395182f96cea70e93b544387d50e09c3ce7cca6beac223006a0920eaef3",
+        "statement": "Die Untersuchung stammt aus Finanztest 2/2016 und belegt keine aktuellen Kundenerfahrungen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
