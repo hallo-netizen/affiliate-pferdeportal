@@ -16,17 +16,17 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
-          "source_title": "Allianz – Tierkrankenversicherung für Pferde (Produktsteckbrief)"
+          "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+          "source_title": "Allianz – Pressemitteilung Tierkrankenversicherung vom 10. Februar 2026"
         }
       ],
       "claims": [
-        "Allianz nennt für ihre Pferdekrankenversicherung den Abschluss ab acht Wochen und die Fortführung über die Lebenszeit des Pferdes.",
-        "Allianz nennt für Unfälle einen sofortigen Beginn des OP-Versicherungsschutzes.",
-        "Für krankheitsbedingte Operationen nennt Allianz drei Monate Wartezeit.",
-        "Allianz nennt für Koliken fünf Tage Wartezeit.",
-        "Allianz stellt klar, dass der Pferde-OP-Schutz medizinisch notwendige Operationen aufgrund von Unfall, Krankheit oder Fehlentwicklung umfasst.",
-        "Allianz grenzt die reine OP-Versicherung von der Vollkrankenversicherung ab: Behandlungen ohne Operation sind im OP-Schutz nicht enthalten."
+        "Die Allianz bietet für Pferde vier OP-Schutztarife und vier Vollkrankenversicherungstarife an.",
+        "Die Allianz nennt die Produktlinien Basis, Smart, Komfort und Premium.",
+        "Die Allianz nennt für Behandlungskosten nach Unfall keine Wartezeit.",
+        "Allianz nennt einen möglichen Einstieg ab acht Wochen ohne Altersobergrenze.",
+        "Die Allianz bewirbt bei ihren neuen Tarifen Kostenerstattung bis zu 100 Prozent.",
+        "Nach eigenen Angaben bietet Allianz seit 2011 Pferdekrankenversicherungen an."
       ]
     },
     "production_plan_item": {
@@ -48,66 +48,66 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
-        "source_title": "Allianz – Tierkrankenversicherung für Pferde (Produktsteckbrief)",
-        "evidence_text": "Lebenslanger Schutz: Wir versichern Ihr Pferd ab der achten Lebenswoche und auch ältere Tiere erhalten eine lebenslange Absicherung.",
-        "evidence_text_sha256": "305ddda5f8b37bf82408debdafb8f1a3bbe25503a34c608062e3e3d4e1023ec6",
-        "statement": "Allianz nennt für ihre Pferdekrankenversicherung den Abschluss ab acht Wochen und die Fortführung über die Lebenszeit des Pferdes.",
+        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz – Pressemitteilung Tierkrankenversicherung vom 10. Februar 2026",
+        "evidence_text": "vier OP-Schutztarife und vier Krankenvolltarife",
+        "evidence_text_sha256": "f7d042815ab05d7218f516e4d9267350fb838bdc7f7b7c9079b0867e14b9b92d",
+        "statement": "Die Allianz bietet für Pferde vier OP-Schutztarife und vier Vollkrankenversicherungstarife an.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F2": {
-        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
-        "source_title": "Allianz – Tierkrankenversicherung für Pferde (Produktsteckbrief)",
-        "evidence_text": "Sofortiger Versicherungsschutz bei Unfällen.",
-        "evidence_text_sha256": "41aeac4929970869c54e4f4f7a2c8a7e5c18044c81d99e49d46349c03e889d0e",
-        "statement": "Allianz nennt für Unfälle einen sofortigen Beginn des OP-Versicherungsschutzes.",
+        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz – Pressemitteilung Tierkrankenversicherung vom 10. Februar 2026",
+        "evidence_text": "Basis, Smart, Komfort und Premium",
+        "evidence_text_sha256": "6396cf7c47bf32d892e0d8bfffb8871f75d7e4a5c79706f739f199892de2deb4",
+        "statement": "Die Allianz nennt die Produktlinien Basis, Smart, Komfort und Premium.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F3": {
-        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
-        "source_title": "Allianz – Tierkrankenversicherung für Pferde (Produktsteckbrief)",
-        "evidence_text": "Wartezeit von drei Monaten.",
-        "evidence_text_sha256": "811baf23f46e6cf6f04c2972d22caf420c2bed5b60cebcd01cea4722ea545bab",
-        "statement": "Für krankheitsbedingte Operationen nennt Allianz drei Monate Wartezeit.",
+        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz – Pressemitteilung Tierkrankenversicherung vom 10. Februar 2026",
+        "evidence_text": "Nach einem Unfall werden Behandlungskosten ohne Wartezeit übernommen",
+        "evidence_text_sha256": "613a4450627253a113651412e5bc52bc9361f094c96f4037b3cca8a0f340f236",
+        "statement": "Die Allianz nennt für Behandlungskosten nach Unfall keine Wartezeit.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F4": {
-        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
-        "source_title": "Allianz – Tierkrankenversicherung für Pferde (Produktsteckbrief)",
-        "evidence_text": "Die Wartezeit für Kolik beträgt fünf Tage.",
-        "evidence_text_sha256": "bf0e728101304053bc48ba78eb0abb77ccfa85001d067045e64df60a943f8899",
-        "statement": "Allianz nennt für Koliken fünf Tage Wartezeit.",
+        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz – Pressemitteilung Tierkrankenversicherung vom 10. Februar 2026",
+        "evidence_text": "Die Allianz versichert Tiere ab einem Alter von acht Wochen und ohne Altersbeschränkung",
+        "evidence_text_sha256": "5d0613271d41ad7aa36f688559bcb3567b39c997d4d580b62a9db5cc7488b224",
+        "statement": "Allianz nennt einen möglichen Einstieg ab acht Wochen ohne Altersobergrenze.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F5": {
-        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
-        "source_title": "Allianz – Tierkrankenversicherung für Pferde (Produktsteckbrief)",
-        "evidence_text": "Unser OP-Schutz deckt die Kosten für medizinisch notwendige Operationen aufgrund von Unfall, Krankheit oder Fehlentwicklung ab.",
-        "evidence_text_sha256": "97dbac629a9751c6328333f6afca8c76d720997f705b698f91ab0668a2f5cb4c",
-        "statement": "Allianz stellt klar, dass der Pferde-OP-Schutz medizinisch notwendige Operationen aufgrund von Unfall, Krankheit oder Fehlentwicklung umfasst.",
+        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz – Pressemitteilung Tierkrankenversicherung vom 10. Februar 2026",
+        "evidence_text": "Erstattung der Kosten bis zu 100%",
+        "evidence_text_sha256": "d06388230c797c0fa9a864cb9d7fadaacb627747e5e82d41adaa8ae958e39ddd",
+        "statement": "Die Allianz bewirbt bei ihren neuen Tarifen Kostenerstattung bis zu 100 Prozent.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F6": {
-        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
-        "source_title": "Allianz – Tierkrankenversicherung für Pferde (Produktsteckbrief)",
-        "evidence_text": "Der Vollschutz deckt neben den Kosten für Operationen auch die Kosten für notwendige Behandlungen ohne Operationen ab.",
-        "evidence_text_sha256": "3a8f2c028f87c62ac399fd481a51493335bed38cf86d3b1ccf7b37b5e222bd87",
-        "statement": "Allianz grenzt die reine OP-Versicherung von der Vollkrankenversicherung ab: Behandlungen ohne Operation sind im OP-Schutz nicht enthalten.",
+        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz – Pressemitteilung Tierkrankenversicherung vom 10. Februar 2026",
+        "evidence_text": "Die Allianz ist mit ihren Tierkrankenversicherungen für Hunde und Katzen seit 2008 und für Pferde seit 2011",
+        "evidence_text_sha256": "cd0c87af60652223b2392212c3e7d7fdd0dbe0b90e9b34a8315460f7b9b17ece",
+        "statement": "Nach eigenen Angaben bietet Allianz seit 2011 Pferdekrankenversicherungen an.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
