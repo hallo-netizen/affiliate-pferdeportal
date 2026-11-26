@@ -1,0 +1,28 @@
+{
+  "contract": "K0_RESEARCH_RETURN_V1",
+  "status": "REPAIR_REQUIRED",
+  "owner": "SAME_RESEARCH_OWNER",
+  "identity": {
+    "title": "Kann man Pferdekrankenversicherungen über Check24 vergleichen?",
+    "target_keyword": "pferdekrankenversicherung check24",
+    "category": "pferdekrankenversicherung-faq",
+    "article_type": "FAQ",
+    "plan_slot": "780d29e444847f6dee7e4b2624c5d498512c7ae8129a86a1f80c21c1747c3f35"
+  },
+  "run_instance_id": "run:0b57f5ea56942391837a5c0c",
+  "return_to": "AUTHORING_CONTEXT.json",
+  "issues": [
+    {
+      "fact_id": "F1",
+      "reason": "RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL",
+      "source_url": "https://www.check24.de/pferde-op-versicherung/"
+    },
+    {
+      "fact_id": "F7",
+      "reason": "RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL",
+      "source_url": "https://www.huk.de/haus-haftung-recht/tierversicherung/pferde-op-versicherung.html"
+    }
+  ],
+  "next_action": "RESEARCH_AGAIN_OR_PROVE_ORIGINAL_SOURCE_AND_RESUBMIT_SAME_RUN",
+  "publish_allowed": false
+}
