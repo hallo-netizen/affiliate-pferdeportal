@@ -16,24 +16,16 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.gesetze-im-internet.de/bgb/__833.html",
-          "source_title": "Bundesministerium der Justiz – § 833 BGB"
-        },
-        {
           "source_url": "https://uelzener.de/pferd/pferde-haftpflichtversicherung/",
           "source_title": "Uelzener – Pferdehaftpflichtversicherung"
-        },
-        {
-          "source_url": "https://www.gesetze-im-internet.de/bgb/__834.html",
-          "source_title": "Bundesministerium der Justiz – § 834 BGB"
         }
       ],
       "claims": [
-        "Die Tierhalterhaftung regelt Ersatzpflicht für Verletzungen und Sachschäden durch Tiere.",
+        "Ohne Pferdehaftpflicht trägt der Halter laut Anbieter die finanziellen Folgen versicherbarer Schäden selbst.",
         "Die Pferdehalterhaftpflicht ist in Deutschland gesetzlich grundsätzlich nicht vorgeschrieben.",
         "Trotz der Freiwilligkeit empfiehlt der Anbieter den Haftpflichtschutz.",
         "Bei einem Pferd können Flurschäden an Feld und Grünflächen entstehen.",
-        "Wer vertraglich die Aufsicht über ein Tier übernimmt, kann ebenfalls unter Haftungsvoraussetzungen verantwortlich sein."
+        "Pferde können durch Größe, Gewicht und Kraft erhebliche Schäden verursachen."
       ]
     },
     "production_plan_item": {
@@ -55,11 +47,11 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.gesetze-im-internet.de/bgb/__833.html",
-        "source_title": "Bundesministerium der Justiz – § 833 BGB",
-        "evidence_text": "Wird durch ein Tier ein Mensch getötet oder der Körper oder die Gesundheit eines Menschen verletzt oder eine Sache beschädigt, so ist derjenige, welcher das Tier hält, verpflichtet, dem Verletzten den daraus entstehenden Schaden zu ersetzen.",
-        "evidence_text_sha256": "0b325b4fd53f3574584eff3d33a7189baefb8b66836385852c37198d67b84e02",
-        "statement": "Die Tierhalterhaftung regelt Ersatzpflicht für Verletzungen und Sachschäden durch Tiere.",
+        "source_url": "https://uelzener.de/pferd/pferde-haftpflichtversicherung/",
+        "source_title": "Uelzener – Pferdehaftpflichtversicherung",
+        "evidence_text": "Anderenfalls haftest du als Halter oder Halterin in voller Höhe für alle Schäden, die dein Pferd verursacht.",
+        "evidence_text_sha256": "2e8882912b0547fde138cfb61a41ed44fc7c38b06be0fc45f160fffddc293b99",
+        "statement": "Ohne Pferdehaftpflicht trägt der Halter laut Anbieter die finanziellen Folgen versicherbarer Schäden selbst.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
@@ -99,11 +91,11 @@
         ]
       },
       "F5": {
-        "source_url": "https://www.gesetze-im-internet.de/bgb/__834.html",
-        "source_title": "Bundesministerium der Justiz – § 834 BGB",
-        "evidence_text": "Wer für denjenigen, welcher ein Tier hält, die Führung der Aufsicht über das Tier durch Vertrag übernimmt, ist für den Schaden verantwortlich, den das Tier einem Dritten in der im § 833 bezeichneten Weise zufügt.",
-        "evidence_text_sha256": "ead8c18ce1a38f451de04e325e652e2f16659f676315ddbde9e59ef8a3d57bf1",
-        "statement": "Wer vertraglich die Aufsicht über ein Tier übernimmt, kann ebenfalls unter Haftungsvoraussetzungen verantwortlich sein.",
+        "source_url": "https://uelzener.de/pferd/pferde-haftpflichtversicherung/",
+        "source_title": "Uelzener – Pferdehaftpflichtversicherung",
+        "evidence_text": "Zwar können auch Kleintiere wie Katzen oder Hamster Schäden anrichten, bei Pferden besteht aber allein aufgrund ihrer Größe, ihres Gewichts und ihrer Kraft die Gefahr, dass der Schaden umfassender ausfällt.",
+        "evidence_text_sha256": "d8e65377f6683ed1c947cc1aa4e5e52cdedc4361fbe58a5ae6a062b2b5d52b01",
+        "statement": "Pferde können durch Größe, Gewicht und Kraft erhebliche Schäden verursachen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
